@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hieubanthan/tuvi/chart.schema.json",
+  "title": "Tuvi Chart v0 — tuan_triet_only (NHAP, cho duyet)",
+  "description": "SPEC-004 ghi 'JSON schema dinh kem' nhung file chua ton tai; day la ban nhap v0 soan tu output thuc te, pham vi tuan/triet + can chi. La so an sao day du (14 chinh tinh, 12 cung) la SPEC-005. Nguon chan ly runtime: zod trong ../schema.ts — file nay la tai lieu doc cho nguoi, phai dong bo khi schema.ts doi.",
+  "type": "object",
+  "required": [
+    "engine_version", "pham_vi", "duong_lich_goc", "duong_lich_kinh_tuyen",
+    "mui_gio_dong_ho", "am_lich", "can_chi_nam", "gioi_tinh",
+    "ngay_can_chi", "ty_boundary_policy", "tuan_triet", "co_canh_bao"
+  ],
+  "properties": {
+    "engine_version": { "type": "string" },
+    "pham_vi": { "const": "tuan_triet_only" },
+    "duong_lich_goc": { "type": "string", "format": "date" },
+    "duong_lich_kinh_tuyen": {
+      "type": "string", "format": "date",
+      "description": "Ngay duong sau khi quy doi dong ho lich su ve kinh tuyen 105 do Dong (UTC+7). Co the lech 1 ngay so voi duong_lich_goc cho nguoi sinh mien Nam 1960–1975."
+    },
+    "mui_gio_dong_ho": { "type": "number", "enum": [7, 8, 9] },
+    "am_lich": {
+      "type": "object",
+      "required": ["ngay", "thang", "nam", "nhuan"],
+      "properties": {
+        "ngay": { "type": "integer", "minimum": 1, "maximum": 30 },
+        "thang": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "nam": { "type": "integer" },
+        "nhuan": { "type": "integer", "enum": [0, 1] }
+      }
+    },
+    "can_chi_nam": {
+      "type": "object",
+      "required": ["can", "chi"],
+      "properties": {
+        "can": { "enum": ["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"] },
+        "chi": { "enum": ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"] }
+      },
+      "description": "Theo NAM AM LICH — nguoi sinh truoc Tet mang can chi nam cu."
+    },
+    "gioi_tinh": { "enum": ["nam", "nu"] },
+    "ngay_can_chi": {
+      "type": ["string", "null"],
+      "description": "null khi TY_BOUNDARY_POLICY chua chot — engine tu choi doan."
+    },
+    "ty_boundary_policy": {
+      "type": ["string", "null"],
+      "enum": ["switch_at_2300", "switch_at_0000", null]
+    },
+    "tuan_triet": {
+      "type": "object",
+      "description": "Output nguyen van cua tuan_triet.py (nguoi van hanh tu viet) — xem docstring ban goc.",
+      "required": ["nam_sinh", "tuoi", "truong_phai", "che_do_pham_vi",
+                   "tuan_dong_tai", "triet_dong_tai", "chi_tiet_tung_cung", "canh_bao"]
+    },
+    "co_canh_bao": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["loai", "chi_tiet"],
+        "properties": {
+          "loai": { "enum": ["tz_adjusted", "tz_disputed", "ty_edge", "tet_edge", "hour_confidence"] },
+          "chi_tiet": { "type": "string" }
+        }
+      },
+      "description": "Moi hieu chinh va vung mo deu duoc phoi ra — UI phai hien thi, khong duoc nuot."
+    }
+  }
+}

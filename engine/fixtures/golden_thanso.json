@@ -1,0 +1,420 @@
+{
+  "_nguon": "sinh tu C:/Users/mrduc/thanso-hoc/thanso.py",
+  "_canh_bao": "Khong sua tay. Chay lai _generate_thanso_golden.py.",
+  "do_nhay": {
+    "vn_dau_va_chu_D": {
+      "input": {
+        "id": "vn_dau_va_chu_D",
+        "ten": [
+          "Nguyen Duc Luan",
+          "Nguyễn Đức Luân"
+        ],
+        "d": 2,
+        "m": 12,
+        "y": 1988
+      },
+      "expect": {
+        "su_menh": [
+          5,
+          9
+        ],
+        "linh_hon": [
+          4,
+          6,
+          22
+        ],
+        "nhan_cach": [
+          1,
+          3,
+          5,
+          8
+        ],
+        "duong_doi": [
+          4
+        ]
+      }
+    },
+    "khong_dau": {
+      "input": {
+        "id": "khong_dau",
+        "ten": [
+          "Tran Thi Mai"
+        ],
+        "d": 15,
+        "m": 7,
+        "y": 1995
+      },
+      "expect": {
+        "su_menh": [
+          5
+        ],
+        "linh_hon": [
+          2
+        ],
+        "nhan_cach": [
+          3
+        ],
+        "duong_doi": [
+          1
+        ]
+      }
+    },
+    "co_chu_Y": {
+      "input": {
+        "id": "co_chu_Y",
+        "ten": [
+          "Ly Yen Nhy"
+        ],
+        "d": 29,
+        "m": 2,
+        "y": 2004
+      },
+      "expect": {
+        "su_menh": [
+          2,
+          11
+        ],
+        "linh_hon": [
+          5,
+          8
+        ],
+        "nhan_cach": [
+          3,
+          6
+        ],
+        "duong_doi": [
+          1
+        ]
+      }
+    },
+    "ten_ngan": {
+      "input": {
+        "id": "ten_ngan",
+        "ten": [
+          "An"
+        ],
+        "d": 1,
+        "m": 1,
+        "y": 2000
+      },
+      "expect": {
+        "su_menh": [
+          6
+        ],
+        "linh_hon": [
+          1
+        ],
+        "nhan_cach": [
+          5
+        ],
+        "duong_doi": [
+          4
+        ]
+      }
+    },
+    "master_11": {
+      "input": {
+        "id": "master_11",
+        "ten": [
+          "Pham Van Bay"
+        ],
+        "d": 29,
+        "m": 11,
+        "y": 1975
+      },
+      "expect": {
+        "su_menh": [
+          4
+        ],
+        "linh_hon": [
+          1,
+          3
+        ],
+        "nhan_cach": [
+          1,
+          3
+        ],
+        "duong_doi": [
+          8
+        ]
+      }
+    }
+  },
+  "chi_so_don": {
+    "vn_dau_va_chu_D": {
+      "input": {
+        "ten": "Nguyen Duc Luan",
+        "d": 2,
+        "m": 12,
+        "y": 1988,
+        "d_thanh_d": true,
+        "y_la_nguyen_am": false,
+        "giu_master": true
+      },
+      "expect": {
+        "su_menh": 9,
+        "linh_hon": 6,
+        "nhan_cach": 3,
+        "duong_doi_tong_het": 4,
+        "duong_doi_tung_phan": 4,
+        "bo_dau": "Nguyen Duc Luan"
+      }
+    },
+    "khong_dau": {
+      "input": {
+        "ten": "Tran Thi Mai",
+        "d": 15,
+        "m": 7,
+        "y": 1995,
+        "d_thanh_d": true,
+        "y_la_nguyen_am": false,
+        "giu_master": true
+      },
+      "expect": {
+        "su_menh": 5,
+        "linh_hon": 2,
+        "nhan_cach": 3,
+        "duong_doi_tong_het": 1,
+        "duong_doi_tung_phan": 1,
+        "bo_dau": "Tran Thi Mai"
+      }
+    },
+    "co_chu_Y": {
+      "input": {
+        "ten": "Ly Yen Nhy",
+        "d": 29,
+        "m": 2,
+        "y": 2004,
+        "d_thanh_d": true,
+        "y_la_nguyen_am": false,
+        "giu_master": true
+      },
+      "expect": {
+        "su_menh": 11,
+        "linh_hon": 5,
+        "nhan_cach": 6,
+        "duong_doi_tong_het": 1,
+        "duong_doi_tung_phan": 1,
+        "bo_dau": "Ly Yen Nhy"
+      }
+    },
+    "ten_ngan": {
+      "input": {
+        "ten": "An",
+        "d": 1,
+        "m": 1,
+        "y": 2000,
+        "d_thanh_d": true,
+        "y_la_nguyen_am": false,
+        "giu_master": true
+      },
+      "expect": {
+        "su_menh": 6,
+        "linh_hon": 1,
+        "nhan_cach": 5,
+        "duong_doi_tong_het": 4,
+        "duong_doi_tung_phan": 4,
+        "bo_dau": "An"
+      }
+    },
+    "master_11": {
+      "input": {
+        "ten": "Pham Van Bay",
+        "d": 29,
+        "m": 11,
+        "y": 1975,
+        "d_thanh_d": true,
+        "y_la_nguyen_am": false,
+        "giu_master": true
+      },
+      "expect": {
+        "su_menh": 4,
+        "linh_hon": 3,
+        "nhan_cach": 1,
+        "duong_doi_tong_het": 8,
+        "duong_doi_tung_phan": 8,
+        "bo_dau": "Pham Van Bay"
+      }
+    }
+  },
+  "chu_ky": {
+    "chu_ky_1988": {
+      "input": {
+        "id": "chu_ky_1988",
+        "d": 2,
+        "m": 12,
+        "y": 1988,
+        "tu": 2024,
+        "den": 2027
+      },
+      "expect": {
+        "duong_doi": 4,
+        "dinh_cao": [
+          {
+            "dinh": 1,
+            "so": 5,
+            "tu_tuoi": 0,
+            "den_tuoi": 32
+          },
+          {
+            "dinh": 2,
+            "so": 1,
+            "tu_tuoi": 33,
+            "den_tuoi": 41
+          },
+          {
+            "dinh": 3,
+            "so": 6,
+            "tu_tuoi": 42,
+            "den_tuoi": 50
+          },
+          {
+            "dinh": 4,
+            "so": 2,
+            "tu_tuoi": 51,
+            "den_tuoi": null
+          }
+        ],
+        "thu_thach": {
+          "thu_thach_1": 1,
+          "thu_thach_2": 6,
+          "thu_thach_chinh": 5,
+          "thu_thach_4": 5
+        },
+        "bang_nam_ca_nhan": [
+          {
+            "nam": 2024,
+            "tuoi_that": 36,
+            "tuoi_mu": 37,
+            "moc_duong_lich": 4,
+            "moc_sinh_nhat": {
+              "truoc_sinh_nhat": 3,
+              "tu_sinh_nhat": 4
+            },
+            "hai_moc_lech": true,
+            "nam_ca_nhan": 4
+          },
+          {
+            "nam": 2025,
+            "tuoi_that": 37,
+            "tuoi_mu": 38,
+            "moc_duong_lich": 5,
+            "moc_sinh_nhat": {
+              "truoc_sinh_nhat": 4,
+              "tu_sinh_nhat": 5
+            },
+            "hai_moc_lech": true,
+            "nam_ca_nhan": 5
+          },
+          {
+            "nam": 2026,
+            "tuoi_that": 38,
+            "tuoi_mu": 39,
+            "moc_duong_lich": 6,
+            "moc_sinh_nhat": {
+              "truoc_sinh_nhat": 5,
+              "tu_sinh_nhat": 6
+            },
+            "hai_moc_lech": true,
+            "nam_ca_nhan": 6
+          },
+          {
+            "nam": 2027,
+            "tuoi_that": 39,
+            "tuoi_mu": 40,
+            "moc_duong_lich": 7,
+            "moc_sinh_nhat": {
+              "truoc_sinh_nhat": 6,
+              "tu_sinh_nhat": 7
+            },
+            "hai_moc_lech": true,
+            "nam_ca_nhan": 7
+          }
+        ]
+      }
+    },
+    "chu_ky_2000": {
+      "input": {
+        "id": "chu_ky_2000",
+        "d": 1,
+        "m": 1,
+        "y": 2000,
+        "tu": 2020,
+        "den": 2022
+      },
+      "expect": {
+        "duong_doi": 4,
+        "dinh_cao": [
+          {
+            "dinh": 1,
+            "so": 2,
+            "tu_tuoi": 0,
+            "den_tuoi": 32
+          },
+          {
+            "dinh": 2,
+            "so": 3,
+            "tu_tuoi": 33,
+            "den_tuoi": 41
+          },
+          {
+            "dinh": 3,
+            "so": 5,
+            "tu_tuoi": 42,
+            "den_tuoi": 50
+          },
+          {
+            "dinh": 4,
+            "so": 3,
+            "tu_tuoi": 51,
+            "den_tuoi": null
+          }
+        ],
+        "thu_thach": {
+          "thu_thach_1": 0,
+          "thu_thach_2": 1,
+          "thu_thach_chinh": 1,
+          "thu_thach_4": 1
+        },
+        "bang_nam_ca_nhan": [
+          {
+            "nam": 2020,
+            "tuoi_that": 20,
+            "tuoi_mu": 21,
+            "moc_duong_lich": 6,
+            "moc_sinh_nhat": {
+              "truoc_sinh_nhat": 5,
+              "tu_sinh_nhat": 6
+            },
+            "hai_moc_lech": true,
+            "nam_ca_nhan": 6
+          },
+          {
+            "nam": 2021,
+            "tuoi_that": 21,
+            "tuoi_mu": 22,
+            "moc_duong_lich": 7,
+            "moc_sinh_nhat": {
+              "truoc_sinh_nhat": 6,
+              "tu_sinh_nhat": 7
+            },
+            "hai_moc_lech": true,
+            "nam_ca_nhan": 7
+          },
+          {
+            "nam": 2022,
+            "tuoi_that": 22,
+            "tuoi_mu": 23,
+            "moc_duong_lich": 8,
+            "moc_sinh_nhat": {
+              "truoc_sinh_nhat": 7,
+              "tu_sinh_nhat": 8
+            },
+            "hai_moc_lech": true,
+            "nam_ca_nhan": 8
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,538 @@
+{
+  "_nguon": "sinh tu tuvi-vn/tuan_triet.py + app.calc.lunar",
+  "_canh_bao": "Khong sua tay. Chay lai _generate_tuvi_golden.py.",
+  "cases": {
+    "nen_1988": {
+      "input": {
+        "id": "nen_1988",
+        "duong": [
+          2,
+          12,
+          1988
+        ],
+        "truong_phai": "npl",
+        "che_do": "hep"
+      },
+      "expect": {
+        "am_lich": {
+          "ngay": 24,
+          "thang": 10,
+          "nam": 1988,
+          "nhuan": 0
+        },
+        "can_chi_nam": [
+          "Mậu",
+          "Thìn"
+        ],
+        "tuan_triet": {
+          "nam_sinh": "Mậu Thìn",
+          "tuoi": "dương",
+          "truong_phai": "Nguyễn Phát Lộc",
+          "che_do_pham_vi": "hep",
+          "giai_doan": "không phân kỳ",
+          "ranh_gioi_tuoi_mu": null,
+          "tuan_dong_tai": [
+            "Tuất",
+            "Hợi"
+          ],
+          "triet_dong_tai": [
+            "Tý",
+            "Sửu"
+          ],
+          "chi_tiet_tung_cung": [
+            {
+              "cung": "Tý",
+              "nguon": [
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp"
+            },
+            {
+              "cung": "Sửu",
+              "nguon": [
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp"
+            },
+            {
+              "cung": "Tuất",
+              "nguon": [
+                "Tuần"
+              ],
+              "kieu": "đóng trực tiếp"
+            },
+            {
+              "cung": "Hợi",
+              "nguon": [
+                "Tuần"
+              ],
+              "kieu": "đóng trực tiếp"
+            }
+          ],
+          "tong_so_cung_bi_anh_huong": 4,
+          "ty_le": "4/12",
+          "cung_KHONG_bi_anh_huong": [
+            "Dần",
+            "Mão",
+            "Thìn",
+            "Tỵ",
+            "Ngọ",
+            "Mùi",
+            "Thân",
+            "Dậu"
+          ],
+          "canh_bao": []
+        }
+      }
+    },
+    "truoc_tet_1988": {
+      "input": {
+        "id": "truoc_tet_1988",
+        "duong": [
+          5,
+          2,
+          1988
+        ],
+        "truong_phai": "npl",
+        "che_do": "hep"
+      },
+      "expect": {
+        "am_lich": {
+          "ngay": 18,
+          "thang": 12,
+          "nam": 1987,
+          "nhuan": 0
+        },
+        "can_chi_nam": [
+          "Đinh",
+          "Mão"
+        ],
+        "tuan_triet": {
+          "nam_sinh": "Đinh Mão",
+          "tuoi": "âm",
+          "truong_phai": "Nguyễn Phát Lộc",
+          "che_do_pham_vi": "hep",
+          "giai_doan": "không phân kỳ",
+          "ranh_gioi_tuoi_mu": null,
+          "tuan_dong_tai": [
+            "Tuất",
+            "Hợi"
+          ],
+          "triet_dong_tai": [
+            "Dần",
+            "Mão"
+          ],
+          "chi_tiet_tung_cung": [
+            {
+              "cung": "Dần",
+              "nguon": [
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp"
+            },
+            {
+              "cung": "Mão",
+              "nguon": [
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp"
+            },
+            {
+              "cung": "Tuất",
+              "nguon": [
+                "Tuần"
+              ],
+              "kieu": "đóng trực tiếp"
+            },
+            {
+              "cung": "Hợi",
+              "nguon": [
+                "Tuần"
+              ],
+              "kieu": "đóng trực tiếp"
+            }
+          ],
+          "tong_so_cung_bi_anh_huong": 4,
+          "ty_le": "4/12",
+          "cung_KHONG_bi_anh_huong": [
+            "Tý",
+            "Sửu",
+            "Thìn",
+            "Tỵ",
+            "Ngọ",
+            "Mùi",
+            "Thân",
+            "Dậu"
+          ],
+          "canh_bao": []
+        }
+      }
+    },
+    "saigon_1970": {
+      "input": {
+        "id": "saigon_1970",
+        "duong": [
+          1,
+          12,
+          1970
+        ],
+        "truong_phai": "vvt",
+        "che_do": "tam_hop",
+        "ghi_chu": "ngay da quy doi ve UTC+7 tu 02/12 00:30 dong ho Sai Gon"
+      },
+      "expect": {
+        "am_lich": {
+          "ngay": 3,
+          "thang": 11,
+          "nam": 1970,
+          "nhuan": 0
+        },
+        "can_chi_nam": [
+          "Canh",
+          "Tuất"
+        ],
+        "tuan_triet": {
+          "nam_sinh": "Canh Tuất",
+          "tuoi": "dương",
+          "truong_phai": "Việt Viêm Tử",
+          "che_do_pham_vi": "tam_hop",
+          "giai_doan": "không phân kỳ",
+          "ranh_gioi_tuoi_mu": null,
+          "tuan_dong_tai": [
+            "Dần",
+            "Mão"
+          ],
+          "triet_dong_tai": [
+            "Ngọ",
+            "Mùi"
+          ],
+          "chi_tiet_tung_cung": [
+            {
+              "cung": "Dần",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Mão",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 30
+            },
+            {
+              "cung": "Ngọ",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Mùi",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 30
+            },
+            {
+              "cung": "Tuất",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Hợi",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 30
+            }
+          ],
+          "tong_so_cung_bi_anh_huong": 6,
+          "ty_le": "6/12",
+          "cung_KHONG_bi_anh_huong": [
+            "Tý",
+            "Sửu",
+            "Thìn",
+            "Tỵ",
+            "Thân",
+            "Dậu"
+          ],
+          "canh_bao": [
+            "Con số 70/30 là tỷ lệ tương đối. Cổ thư không định nghĩa '100% cường độ' là gì, nên tỷ lệ này KHÔNG kiểm chứng được — dùng để xếp thứ tự ưu tiên, không như đại lượng đo được."
+          ]
+        }
+      }
+    },
+    "bien_gio_ty": {
+      "input": {
+        "id": "bien_gio_ty",
+        "duong": [
+          15,
+          6,
+          1990
+        ],
+        "truong_phai": "vvt",
+        "che_do": "tam_hop"
+      },
+      "expect": {
+        "am_lich": {
+          "ngay": 23,
+          "thang": 4,
+          "nam": 1990,
+          "nhuan": 0
+        },
+        "can_chi_nam": [
+          "Canh",
+          "Ngọ"
+        ],
+        "tuan_triet": {
+          "nam_sinh": "Canh Ngọ",
+          "tuoi": "dương",
+          "truong_phai": "Việt Viêm Tử",
+          "che_do_pham_vi": "tam_hop",
+          "giai_doan": "không phân kỳ",
+          "ranh_gioi_tuoi_mu": null,
+          "tuan_dong_tai": [
+            "Tuất",
+            "Hợi"
+          ],
+          "triet_dong_tai": [
+            "Ngọ",
+            "Mùi"
+          ],
+          "chi_tiet_tung_cung": [
+            {
+              "cung": "Dần",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Mão",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 30
+            },
+            {
+              "cung": "Ngọ",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Mùi",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 30
+            },
+            {
+              "cung": "Tuất",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Hợi",
+              "nguon": [
+                "Tuần",
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 30
+            }
+          ],
+          "tong_so_cung_bi_anh_huong": 6,
+          "ty_le": "6/12",
+          "cung_KHONG_bi_anh_huong": [
+            "Tý",
+            "Sửu",
+            "Thìn",
+            "Tỵ",
+            "Thân",
+            "Dậu"
+          ],
+          "canh_bao": [
+            "Con số 70/30 là tỷ lệ tương đối. Cổ thư không định nghĩa '100% cường độ' là gì, nên tỷ lệ này KHÔNG kiểm chứng được — dùng để xếp thứ tự ưu tiên, không như đại lượng đo được."
+          ]
+        }
+      }
+    },
+    "xung_dot_cau_hinh": {
+      "input": {
+        "id": "xung_dot_cau_hinh",
+        "duong": [
+          5,
+          2,
+          2000
+        ],
+        "truong_phai": "npl",
+        "che_do": "tam_hop",
+        "ghi_chu": "NPL + che do rong -> PHAI co canh bao xung dot"
+      },
+      "expect": {
+        "am_lich": {
+          "ngay": 1,
+          "thang": 1,
+          "nam": 2000,
+          "nhuan": 0
+        },
+        "can_chi_nam": [
+          "Canh",
+          "Thìn"
+        ],
+        "tuan_triet": {
+          "nam_sinh": "Canh Thìn",
+          "tuoi": "dương",
+          "truong_phai": "Nguyễn Phát Lộc",
+          "che_do_pham_vi": "tam_hop",
+          "giai_doan": "không phân kỳ",
+          "ranh_gioi_tuoi_mu": null,
+          "tuan_dong_tai": [
+            "Thân",
+            "Dậu"
+          ],
+          "triet_dong_tai": [
+            "Ngọ",
+            "Mùi"
+          ],
+          "chi_tiet_tung_cung": [
+            {
+              "cung": "Tý",
+              "nguon": [
+                "Tuần"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Sửu",
+              "nguon": [
+                "Tuần"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 30
+            },
+            {
+              "cung": "Dần",
+              "nguon": [
+                "Triệt"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Mão",
+              "nguon": [
+                "Triệt"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 30
+            },
+            {
+              "cung": "Thìn",
+              "nguon": [
+                "Tuần"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Tỵ",
+              "nguon": [
+                "Tuần"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 30
+            },
+            {
+              "cung": "Ngọ",
+              "nguon": [
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Mùi",
+              "nguon": [
+                "Triệt"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 30
+            },
+            {
+              "cung": "Thân",
+              "nguon": [
+                "Tuần"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Dậu",
+              "nguon": [
+                "Tuần"
+              ],
+              "kieu": "đóng trực tiếp",
+              "cuong_do_phan_tram": 30
+            },
+            {
+              "cung": "Tuất",
+              "nguon": [
+                "Triệt"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 70
+            },
+            {
+              "cung": "Hợi",
+              "nguon": [
+                "Triệt"
+              ],
+              "kieu": "lan qua tam hợp",
+              "cuong_do_phan_tram": 30
+            }
+          ],
+          "tong_so_cung_bi_anh_huong": 12,
+          "ty_le": "12/12",
+          "cung_KHONG_bi_anh_huong": [],
+          "canh_bao": [
+            "XUNG ĐỘT CẤU HÌNH: trường phái Nguyễn Phát Lộc dùng chế độ 'hep', nhưng đang chạy 'tam_hop'. Bác bỏ dứt khoát quan điểm lan sang cung hợp chiếu. Phải giải quyết trước khi luận.",
+            "12/12 cung nằm trong phạm vi Tuần/Triệt — ở mức này quy tắc gần như không còn khả năng phân biệt. Hạ mạnh độ tin cậy mọi kết luận dựa vào Tuần Triệt.",
+            "Con số 70/30 là tỷ lệ tương đối. Cổ thư không định nghĩa '100% cường độ' là gì, nên tỷ lệ này KHÔNG kiểm chứng được — dùng để xếp thứ tự ưu tiên, không như đại lượng đo được."
+          ]
+        }
+      }
+    }
+  }
+}
