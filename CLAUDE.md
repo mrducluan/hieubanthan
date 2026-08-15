@@ -54,7 +54,12 @@ Engine không biết Supabase tồn tại. Web không tự tính bất cứ th�
 | Ngày | Quyết định |
 |---|---|
 | 2026-08-15 | Giờ Tý: `SWITCH_AT_0000`. `chart.schema.json` v0: đã duyệt. |
-| 2026-08-15 | SPEC-005 (an sao đầy đủ): nguồn tri thức đối chiếu = skill `aov-mingyu-api` (aov.cc). **Khuyến nghị kiến trúc đã ghi nhận**: dùng aov.cc làm ORACLE sinh golden (lá số mẫu đối chiếu khi phát triển), an sao chạy CỤC BỘ trong engine — ngày giờ sinh của khách không gửi ra máy chủ ngoài (NĐ 13/2023, không SLA). Chốt kiến trúc cuối khi bắt tay SPEC-005. |
+| 2026-08-15 | SPEC-005 (an sao đầy đủ): nguồn tri thức đối chiếu = skill `aov-mingyu-api` (aov.cc). **Khuyến nghị kiến trúc đã ghi nhận**: dùng aov.cc làm ORACLE sinh golden (lá số mẫu đối chiếu khi phát triển), an sao chạy CỤC BỘ trong engine — ngày giờ sinh của khách không gửi ra máy chủ ngoài (NĐ 13/2023, không SLA). |
+| 2026-08-15 | **aov.cc = lớp bọc quanh `iztro` (MIT, SylarLong)** — đã kiểm chứng iztro cục bộ trùng khít aov.cc (14 chính tinh + tứ hoá, 12/12 cung). aov.cc `/ziwei/calculate` chập chờn (Cloudflare 1102). → An sao dùng **iztro chạy cục bộ**, không phụ thuộc aov.cc runtime. |
+| 2026-08-15 | **Kiến trúc an sao: Python engine gọi iztro qua Node subprocess.** Chấp nhận thêm Node vào tầng engine (lệch CLAUDE.md "Python FastAPI" — đã hỏi và duyệt). Không viết lại logic an sao. |
+| 2026-08-15 | **Giờ Tý cho tử vi: theo iztro (SWITCH_AT_2300, 23:00 sang ngày mới).** Thần số học + bát tự giữ SWITCH_AT_0000. Hai module hai quy ước — bắt buộc gắn cờ cho người dùng sinh 23:00–23:59. |
+
+**Golden SPEC-005:** `engine/fixtures/golden/ziwei_golden.json` (8 lá, sinh cục bộ bằng iztro qua `_generate_ziwei_golden.mjs`). `ziwei_oracle_raw/` giữ 2 lá aov.cc thật làm bằng chứng đối chứng độc lập. Ca `nam_muon_ty` (timeIndex 12) mang `_ty_conflict=true`.
 
 ## Chạy dự án
 

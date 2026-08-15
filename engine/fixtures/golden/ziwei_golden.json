@@ -1,0 +1,1927 @@
+{
+  "_nguon": "iztro (MIT, SylarLong) chay cuc bo - cung engine aov.cc dung",
+  "_doi_chieu": "khop tuyet doi voi la so chup tu aov.cc (full_1990.json)",
+  "_late_zi": "iztro: muon Ty 23:00 tinh sang ngay sau (SWITCH_AT_2300) - LECH voi chinh sach SWITCH_AT_0000 cua ta",
+  "cases": {
+    "nam_1990_suu": {
+      "input": {
+        "id": "nam_1990_suu",
+        "d": "1990-5-15",
+        "ti": 1,
+        "g": "male",
+        "note": "ca nen gio Suu"
+      },
+      "_ty_conflict": false,
+      "expect": {
+        "solar": "1990-5-15",
+        "lunar": "一九九〇年四月廿一",
+        "chineseDate": "庚午 辛巳 庚辰 丁丑",
+        "timeRange": "丑时",
+        "fiveElements": "金四局",
+        "soul": "廉贞",
+        "body": "火星",
+        "soulPalaceBranch": "辰",
+        "bodyPalaceBranch": "午",
+        "palaces": [
+          {
+            "ten_cung": "夫妻",
+            "chi": "寅",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "贪狼"
+            ],
+            "minor": [
+              "火星"
+            ],
+            "adj": [
+              "天厨",
+              "天月",
+              "蜚廉"
+            ]
+          },
+          {
+            "ten_cung": "兄弟",
+            "chi": "卯",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天机",
+              "巨门"
+            ],
+            "minor": [],
+            "adj": [
+              "三台",
+              "咸池",
+              "天喜",
+              "天德",
+              "封诰"
+            ]
+          },
+          {
+            "ten_cung": "命宫",
+            "chi": "辰",
+            "can": "庚",
+            "la_than": false,
+            "la_menh": true,
+            "major": [
+              "天相",
+              "紫微"
+            ],
+            "minor": [
+              "铃星"
+            ],
+            "adj": [
+              "凤阁",
+              "天姚",
+              "寡宿",
+              "年解",
+              "恩光"
+            ]
+          },
+          {
+            "ten_cung": "父母",
+            "chi": "巳",
+            "can": "辛",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天梁"
+            ],
+            "minor": [
+              "文曲"
+            ],
+            "adj": [
+              "破碎"
+            ]
+          },
+          {
+            "ten_cung": "福德",
+            "chi": "午",
+            "can": "壬",
+            "la_than": true,
+            "la_menh": false,
+            "major": [
+              "七杀"
+            ],
+            "minor": [],
+            "adj": [
+              "天福",
+              "截路"
+            ]
+          },
+          {
+            "ten_cung": "田宅",
+            "chi": "未",
+            "can": "癸",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "右弼",
+              "天钺",
+              "左辅",
+              "陀罗"
+            ],
+            "adj": [
+              "台辅",
+              "天空",
+              "空亡"
+            ]
+          },
+          {
+            "ten_cung": "官禄",
+            "chi": "申",
+            "can": "甲",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "廉贞"
+            ],
+            "minor": [
+              "天马",
+              "禄存"
+            ],
+            "adj": [
+              "孤辰",
+              "阴煞"
+            ]
+          },
+          {
+            "ten_cung": "仆役",
+            "chi": "酉",
+            "can": "乙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "擎羊",
+              "文昌"
+            ],
+            "adj": [
+              "天伤",
+              "红鸾"
+            ]
+          },
+          {
+            "ten_cung": "迁移",
+            "chi": "戌",
+            "can": "丙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "破军"
+            ],
+            "minor": [
+              "地空"
+            ],
+            "adj": [
+              "华盖",
+              "天才",
+              "旬空",
+              "解神",
+              "龙池"
+            ]
+          },
+          {
+            "ten_cung": "疾厄",
+            "chi": "亥",
+            "can": "丁",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天同(忌)"
+            ],
+            "minor": [],
+            "adj": [
+              "八座",
+              "天使",
+              "天官",
+              "天巫",
+              "月德"
+            ]
+          },
+          {
+            "ten_cung": "财帛",
+            "chi": "子",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天府",
+              "武曲(权)"
+            ],
+            "minor": [
+              "地劫"
+            ],
+            "adj": [
+              "天刑",
+              "天哭",
+              "天寿",
+              "天虚",
+              "天贵"
+            ]
+          },
+          {
+            "ten_cung": "子女",
+            "chi": "丑",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "太阳(禄)",
+              "太阴(科)"
+            ],
+            "minor": [
+              "天魁"
+            ],
+            "adj": []
+          }
+        ]
+      }
+    },
+    "nu_1992_dau": {
+      "input": {
+        "id": "nu_1992_dau",
+        "d": "1992-8-21",
+        "ti": 4,
+        "g": "female",
+        "note": "ca nen nu"
+      },
+      "_ty_conflict": false,
+      "expect": {
+        "solar": "1992-8-21",
+        "lunar": "一九九二年七月廿三",
+        "chineseDate": "壬申 戊申 己巳 戊辰",
+        "timeRange": "辰时",
+        "fiveElements": "火六局",
+        "soul": "廉贞",
+        "body": "天梁",
+        "soulPalaceBranch": "辰",
+        "bodyPalaceBranch": "子",
+        "palaces": [
+          {
+            "ten_cung": "夫妻",
+            "chi": "寅",
+            "can": "壬",
+            "la_than": false,
+            "la_menh": true,
+            "major": [
+              "贪狼"
+            ],
+            "minor": [
+              "天马",
+              "铃星"
+            ],
+            "adj": [
+              "凤阁",
+              "天巫",
+              "天虚",
+              "年解",
+              "截路",
+              "解神",
+              "阴煞"
+            ]
+          },
+          {
+            "ten_cung": "兄弟",
+            "chi": "卯",
+            "can": "癸",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天机",
+              "巨门"
+            ],
+            "minor": [
+              "地劫",
+              "天魁"
+            ],
+            "adj": [
+              "天刑",
+              "恩光",
+              "空亡"
+            ]
+          },
+          {
+            "ten_cung": "命宫",
+            "chi": "辰",
+            "can": "甲",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天相",
+              "紫微(权)"
+            ],
+            "minor": [
+              "右弼"
+            ],
+            "adj": [
+              "华盖",
+              "蜚廉"
+            ]
+          },
+          {
+            "ten_cung": "父母",
+            "chi": "巳",
+            "can": "乙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天梁(禄)"
+            ],
+            "minor": [
+              "天钺"
+            ],
+            "adj": [
+              "天德",
+              "天贵"
+            ]
+          },
+          {
+            "ten_cung": "福德",
+            "chi": "午",
+            "can": "丙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "七杀"
+            ],
+            "minor": [
+              "文昌",
+              "火星"
+            ],
+            "adj": [
+              "八座",
+              "天福",
+              "封诰"
+            ]
+          },
+          {
+            "ten_cung": "田宅",
+            "chi": "未",
+            "can": "丁",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "地空"
+            ],
+            "adj": [
+              "天姚",
+              "寡宿",
+              "红鸾"
+            ]
+          },
+          {
+            "ten_cung": "官禄",
+            "chi": "申",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "廉贞"
+            ],
+            "minor": [
+              "文曲"
+            ],
+            "adj": [
+              "三台",
+              "天寿"
+            ]
+          },
+          {
+            "ten_cung": "仆役",
+            "chi": "酉",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [],
+            "adj": [
+              "咸池",
+              "天伤",
+              "天厨",
+              "天空",
+              "破碎"
+            ]
+          },
+          {
+            "ten_cung": "迁移",
+            "chi": "戌",
+            "can": "庚",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "破军"
+            ],
+            "minor": [
+              "左辅",
+              "陀罗"
+            ],
+            "adj": [
+              "台辅",
+              "天哭",
+              "天官",
+              "旬空"
+            ]
+          },
+          {
+            "ten_cung": "疾厄",
+            "chi": "亥",
+            "can": "辛",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天同"
+            ],
+            "minor": [
+              "禄存"
+            ],
+            "adj": [
+              "天使",
+              "天月",
+              "孤辰"
+            ]
+          },
+          {
+            "ten_cung": "财帛",
+            "chi": "子",
+            "can": "壬",
+            "la_than": true,
+            "la_menh": false,
+            "major": [
+              "天府",
+              "武曲(忌)"
+            ],
+            "minor": [
+              "擎羊"
+            ],
+            "adj": [
+              "天才",
+              "龙池"
+            ]
+          },
+          {
+            "ten_cung": "子女",
+            "chi": "丑",
+            "can": "癸",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "太阳",
+              "太阴"
+            ],
+            "minor": [],
+            "adj": [
+              "天喜",
+              "月德"
+            ]
+          }
+        ]
+      }
+    },
+    "nam_2000_ngo": {
+      "input": {
+        "id": "nam_2000_ngo",
+        "d": "2000-1-1",
+        "ti": 6,
+        "g": "male",
+        "note": "gio Ngo"
+      },
+      "_ty_conflict": false,
+      "expect": {
+        "solar": "2000-1-1",
+        "lunar": "一九九九年冬月廿五",
+        "chineseDate": "己卯 丙子 戊午 戊午",
+        "timeRange": "午时",
+        "fiveElements": "土五局",
+        "soul": "破军",
+        "body": "天同",
+        "soulPalaceBranch": "午",
+        "bodyPalaceBranch": "午",
+        "palaces": [
+          {
+            "ten_cung": "财帛",
+            "chi": "寅",
+            "can": "丙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天相",
+              "武曲(禄)"
+            ],
+            "minor": [
+              "左辅"
+            ],
+            "adj": [
+              "三台",
+              "天巫",
+              "天福"
+            ]
+          },
+          {
+            "ten_cung": "子女",
+            "chi": "卯",
+            "can": "丁",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天梁(科)",
+              "太阳"
+            ],
+            "minor": [
+              "火星"
+            ],
+            "adj": [
+              "天哭",
+              "恩光"
+            ]
+          },
+          {
+            "ten_cung": "夫妻",
+            "chi": "辰",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "七杀"
+            ],
+            "minor": [
+              "文昌",
+              "铃星"
+            ],
+            "adj": [
+              "天空"
+            ]
+          },
+          {
+            "ten_cung": "兄弟",
+            "chi": "巳",
+            "can": "己",
+            "la_than": false,
+            "la_menh": true,
+            "major": [
+              "天机"
+            ],
+            "minor": [
+              "地劫",
+              "地空",
+              "天马",
+              "陀罗"
+            ],
+            "adj": [
+              "孤辰",
+              "破碎",
+              "蜚廉"
+            ]
+          },
+          {
+            "ten_cung": "命宫",
+            "chi": "午",
+            "can": "庚",
+            "la_than": true,
+            "la_menh": false,
+            "major": [
+              "紫微"
+            ],
+            "minor": [
+              "禄存"
+            ],
+            "adj": [
+              "天喜",
+              "解神",
+              "阴煞"
+            ]
+          },
+          {
+            "ten_cung": "父母",
+            "chi": "未",
+            "can": "辛",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "擎羊"
+            ],
+            "adj": [
+              "凤阁",
+              "华盖",
+              "天刑",
+              "年解",
+              "龙池"
+            ]
+          },
+          {
+            "ten_cung": "福德",
+            "chi": "申",
+            "can": "壬",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "破军"
+            ],
+            "minor": [
+              "天钺"
+            ],
+            "adj": [
+              "天厨",
+              "封诰",
+              "截路",
+              "月德"
+            ]
+          },
+          {
+            "ten_cung": "田宅",
+            "chi": "酉",
+            "can": "癸",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [],
+            "adj": [
+              "天官",
+              "天寿",
+              "天才",
+              "天虚",
+              "天贵",
+              "旬空",
+              "空亡"
+            ]
+          },
+          {
+            "ten_cung": "官禄",
+            "chi": "戌",
+            "can": "甲",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天府",
+              "廉贞"
+            ],
+            "minor": [
+              "文曲"
+            ],
+            "adj": [
+              "天月"
+            ]
+          },
+          {
+            "ten_cung": "仆役",
+            "chi": "亥",
+            "can": "乙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "太阴"
+            ],
+            "minor": [],
+            "adj": [
+              "天伤",
+              "天姚"
+            ]
+          },
+          {
+            "ten_cung": "迁移",
+            "chi": "子",
+            "can": "丙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "贪狼(权)"
+            ],
+            "minor": [
+              "右弼",
+              "天魁"
+            ],
+            "adj": [
+              "八座",
+              "台辅",
+              "咸池",
+              "天德",
+              "红鸾"
+            ]
+          },
+          {
+            "ten_cung": "疾厄",
+            "chi": "丑",
+            "can": "丁",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天同",
+              "巨门"
+            ],
+            "minor": [],
+            "adj": [
+              "天使",
+              "寡宿"
+            ]
+          }
+        ]
+      }
+    },
+    "nam_1988_truoc_tet": {
+      "input": {
+        "id": "nam_1988_truoc_tet",
+        "d": "1988-2-5",
+        "ti": 3,
+        "g": "male",
+        "note": "truoc Tet Mau Thin -> nam Dinh Mao"
+      },
+      "_ty_conflict": false,
+      "expect": {
+        "solar": "1988-2-5",
+        "lunar": "一九八七年腊月十八",
+        "chineseDate": "丁卯 癸丑 庚寅 己卯",
+        "timeRange": "卯时",
+        "fiveElements": "金四局",
+        "soul": "禄存",
+        "body": "天同",
+        "soulPalaceBranch": "戌",
+        "bodyPalaceBranch": "辰",
+        "palaces": [
+          {
+            "ten_cung": "官禄",
+            "chi": "寅",
+            "can": "壬",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "七杀"
+            ],
+            "minor": [
+              "地劫"
+            ],
+            "adj": [
+              "天官",
+              "天月",
+              "截路"
+            ]
+          },
+          {
+            "ten_cung": "仆役",
+            "chi": "卯",
+            "can": "癸",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天同(权)"
+            ],
+            "minor": [
+              "左辅"
+            ],
+            "adj": [
+              "天伤",
+              "天哭",
+              "空亡"
+            ]
+          },
+          {
+            "ten_cung": "迁移",
+            "chi": "辰",
+            "can": "甲",
+            "la_than": true,
+            "la_menh": false,
+            "major": [
+              "武曲"
+            ],
+            "minor": [],
+            "adj": [
+              "天空",
+              "阴煞"
+            ]
+          },
+          {
+            "ten_cung": "疾厄",
+            "chi": "巳",
+            "can": "乙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "太阳"
+            ],
+            "minor": [
+              "天马",
+              "陀罗"
+            ],
+            "adj": [
+              "天使",
+              "天厨",
+              "孤辰",
+              "封诰",
+              "破碎",
+              "蜚廉"
+            ]
+          },
+          {
+            "ten_cung": "财帛",
+            "chi": "午",
+            "can": "丙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "破军"
+            ],
+            "minor": [
+              "禄存"
+            ],
+            "adj": [
+              "八座",
+              "天喜",
+              "解神"
+            ]
+          },
+          {
+            "ten_cung": "子女",
+            "chi": "未",
+            "can": "丁",
+            "la_than": false,
+            "la_menh": true,
+            "major": [
+              "天机(科)"
+            ],
+            "minor": [
+              "擎羊",
+              "文昌",
+              "文曲"
+            ],
+            "adj": [
+              "凤阁",
+              "华盖",
+              "天寿",
+              "年解",
+              "龙池"
+            ]
+          },
+          {
+            "ten_cung": "夫妻",
+            "chi": "申",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天府",
+              "紫微"
+            ],
+            "minor": [
+              "地空"
+            ],
+            "adj": [
+              "三台",
+              "天刑",
+              "月德"
+            ]
+          },
+          {
+            "ten_cung": "兄弟",
+            "chi": "酉",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "太阴(禄)"
+            ],
+            "minor": [
+              "天钺"
+            ],
+            "adj": [
+              "台辅",
+              "天虚"
+            ]
+          },
+          {
+            "ten_cung": "命宫",
+            "chi": "戌",
+            "can": "庚",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "贪狼"
+            ],
+            "minor": [],
+            "adj": []
+          },
+          {
+            "ten_cung": "父母",
+            "chi": "亥",
+            "can": "辛",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "巨门(忌)"
+            ],
+            "minor": [
+              "右弼",
+              "天魁"
+            ],
+            "adj": [
+              "天巫",
+              "天福",
+              "天贵",
+              "恩光",
+              "旬空"
+            ]
+          },
+          {
+            "ten_cung": "福德",
+            "chi": "子",
+            "can": "壬",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天相",
+              "廉贞"
+            ],
+            "minor": [
+              "火星"
+            ],
+            "adj": [
+              "咸池",
+              "天姚",
+              "天德",
+              "红鸾"
+            ]
+          },
+          {
+            "ten_cung": "田宅",
+            "chi": "丑",
+            "can": "癸",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天梁"
+            ],
+            "minor": [
+              "铃星"
+            ],
+            "adj": [
+              "天才",
+              "寡宿"
+            ]
+          }
+        ]
+      }
+    },
+    "nu_1970_thin": {
+      "input": {
+        "id": "nu_1970_thin",
+        "d": "1970-12-2",
+        "ti": 5,
+        "g": "female",
+        "note": "1970 (aov khong nhan mui gio VN)"
+      },
+      "_ty_conflict": false,
+      "expect": {
+        "solar": "1970-12-2",
+        "lunar": "一九七〇年冬月初四",
+        "chineseDate": "庚戌 戊子 丙辰 癸巳",
+        "timeRange": "巳时",
+        "fiveElements": "木三局",
+        "soul": "武曲",
+        "body": "文昌",
+        "soulPalaceBranch": "未",
+        "bodyPalaceBranch": "巳",
+        "palaces": [
+          {
+            "ten_cung": "疾厄",
+            "chi": "寅",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "太阳(禄)",
+              "巨门"
+            ],
+            "minor": [
+              "左辅"
+            ],
+            "adj": [
+              "天使",
+              "天厨",
+              "天巫",
+              "旬空",
+              "龙池"
+            ]
+          },
+          {
+            "ten_cung": "财帛",
+            "chi": "卯",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天相"
+            ],
+            "minor": [],
+            "adj": [
+              "咸池",
+              "天寿",
+              "月德"
+            ]
+          },
+          {
+            "ten_cung": "子女",
+            "chi": "辰",
+            "can": "庚",
+            "la_than": false,
+            "la_menh": true,
+            "major": [
+              "天机",
+              "天梁"
+            ],
+            "minor": [
+              "地劫"
+            ],
+            "adj": [
+              "天虚"
+            ]
+          },
+          {
+            "ten_cung": "夫妻",
+            "chi": "巳",
+            "can": "辛",
+            "la_than": true,
+            "la_menh": false,
+            "major": [
+              "七杀",
+              "紫微"
+            ],
+            "minor": [
+              "文昌"
+            ],
+            "adj": [
+              "三台",
+              "天才",
+              "红鸾"
+            ]
+          },
+          {
+            "ten_cung": "兄弟",
+            "chi": "午",
+            "can": "壬",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "地空",
+              "火星"
+            ],
+            "adj": [
+              "天福",
+              "截路",
+              "解神",
+              "阴煞"
+            ]
+          },
+          {
+            "ten_cung": "命宫",
+            "chi": "未",
+            "can": "癸",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "天钺",
+              "陀罗"
+            ],
+            "adj": [
+              "天刑",
+              "天德",
+              "寡宿",
+              "封诰",
+              "恩光",
+              "空亡"
+            ]
+          },
+          {
+            "ten_cung": "父母",
+            "chi": "申",
+            "can": "甲",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "天马",
+              "禄存",
+              "铃星"
+            ],
+            "adj": [
+              "天哭"
+            ]
+          },
+          {
+            "ten_cung": "福德",
+            "chi": "酉",
+            "can": "乙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "廉贞",
+              "破军"
+            ],
+            "minor": [
+              "擎羊",
+              "文曲"
+            ],
+            "adj": [
+              "八座"
+            ]
+          },
+          {
+            "ten_cung": "田宅",
+            "chi": "戌",
+            "can": "丙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [],
+            "adj": [
+              "华盖",
+              "天月"
+            ]
+          },
+          {
+            "ten_cung": "官禄",
+            "chi": "亥",
+            "can": "丁",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天府"
+            ],
+            "minor": [],
+            "adj": [
+              "台辅",
+              "天喜",
+              "天姚",
+              "天官",
+              "天空",
+              "天贵",
+              "孤辰"
+            ]
+          },
+          {
+            "ten_cung": "仆役",
+            "chi": "子",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天同(忌)",
+              "太阴(科)"
+            ],
+            "minor": [
+              "右弼"
+            ],
+            "adj": [
+              "凤阁",
+              "天伤",
+              "年解",
+              "蜚廉"
+            ]
+          },
+          {
+            "ten_cung": "迁移",
+            "chi": "丑",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "武曲(权)",
+              "贪狼"
+            ],
+            "minor": [
+              "天魁"
+            ],
+            "adj": [
+              "破碎"
+            ]
+          }
+        ]
+      }
+    },
+    "nam_som_ty": {
+      "input": {
+        "id": "nam_som_ty",
+        "d": "1995-6-15",
+        "ti": 0,
+        "g": "male",
+        "note": "som Ty 00:00-01:00"
+      },
+      "_ty_conflict": false,
+      "expect": {
+        "solar": "1995-6-15",
+        "lunar": "一九九五年五月十八",
+        "chineseDate": "乙亥 壬午 丁丑 庚子",
+        "timeRange": "早子时",
+        "fiveElements": "木三局",
+        "soul": "破军",
+        "body": "天机",
+        "soulPalaceBranch": "午",
+        "bodyPalaceBranch": "午",
+        "palaces": [
+          {
+            "ten_cung": "财帛",
+            "chi": "寅",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天同",
+              "天梁(权)"
+            ],
+            "minor": [
+              "陀罗"
+            ],
+            "adj": [
+              "孤辰",
+              "封诰",
+              "恩光"
+            ]
+          },
+          {
+            "ten_cung": "子女",
+            "chi": "卯",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "七杀",
+              "武曲"
+            ],
+            "minor": [
+              "禄存"
+            ],
+            "adj": [
+              "龙池"
+            ]
+          },
+          {
+            "ten_cung": "夫妻",
+            "chi": "辰",
+            "can": "庚",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "太阳"
+            ],
+            "minor": [
+              "擎羊",
+              "文曲"
+            ],
+            "adj": [
+              "天官",
+              "月德",
+              "红鸾"
+            ]
+          },
+          {
+            "ten_cung": "兄弟",
+            "chi": "巳",
+            "can": "辛",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "天马"
+            ],
+            "adj": [
+              "天姚",
+              "天寿",
+              "天巫",
+              "天才",
+              "天虚"
+            ]
+          },
+          {
+            "ten_cung": "命宫",
+            "chi": "午",
+            "can": "壬",
+            "la_than": true,
+            "la_menh": false,
+            "major": [
+              "天机(禄)"
+            ],
+            "minor": [
+              "右弼"
+            ],
+            "adj": [
+              "台辅",
+              "天厨",
+              "截路",
+              "阴煞"
+            ]
+          },
+          {
+            "ten_cung": "父母",
+            "chi": "未",
+            "can": "癸",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "破军",
+              "紫微(科)"
+            ],
+            "minor": [],
+            "adj": [
+              "华盖",
+              "天哭",
+              "天月",
+              "空亡"
+            ]
+          },
+          {
+            "ten_cung": "福德",
+            "chi": "申",
+            "can": "甲",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "天钺",
+              "左辅"
+            ],
+            "adj": [
+              "天德",
+              "天福",
+              "天贵"
+            ]
+          },
+          {
+            "ten_cung": "田宅",
+            "chi": "酉",
+            "can": "乙",
+            "la_than": false,
+            "la_menh": true,
+            "major": [
+              "天府"
+            ],
+            "minor": [
+              "火星"
+            ],
+            "adj": [
+              "旬空",
+              "破碎"
+            ]
+          },
+          {
+            "ten_cung": "官禄",
+            "chi": "戌",
+            "can": "丙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "太阴(忌)"
+            ],
+            "minor": [
+              "文昌",
+              "铃星"
+            ],
+            "adj": [
+              "天喜",
+              "寡宿"
+            ]
+          },
+          {
+            "ten_cung": "仆役",
+            "chi": "亥",
+            "can": "丁",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "廉贞",
+              "贪狼"
+            ],
+            "minor": [
+              "地劫",
+              "地空"
+            ],
+            "adj": [
+              "凤阁",
+              "天伤",
+              "年解"
+            ]
+          },
+          {
+            "ten_cung": "迁移",
+            "chi": "子",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "巨门"
+            ],
+            "minor": [
+              "天魁"
+            ],
+            "adj": [
+              "咸池",
+              "天空",
+              "解神"
+            ]
+          },
+          {
+            "ten_cung": "疾厄",
+            "chi": "丑",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天相"
+            ],
+            "minor": [],
+            "adj": [
+              "三台",
+              "八座",
+              "天使",
+              "天刑",
+              "蜚廉"
+            ]
+          }
+        ]
+      }
+    },
+    "nam_muon_ty": {
+      "input": {
+        "id": "nam_muon_ty",
+        "d": "1995-6-15",
+        "ti": 12,
+        "g": "male",
+        "note": "muon Ty 23:00 - iztro tinh sang ngay sau"
+      },
+      "_ty_conflict": true,
+      "expect": {
+        "solar": "1995-6-15",
+        "lunar": "一九九五年五月十八",
+        "chineseDate": "乙亥 壬午 戊寅 壬子",
+        "timeRange": "晚子时",
+        "fiveElements": "木三局",
+        "soul": "破军",
+        "body": "天机",
+        "soulPalaceBranch": "午",
+        "bodyPalaceBranch": "午",
+        "palaces": [
+          {
+            "ten_cung": "财帛",
+            "chi": "寅",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "廉贞"
+            ],
+            "minor": [
+              "陀罗"
+            ],
+            "adj": [
+              "三台",
+              "孤辰",
+              "封诰"
+            ]
+          },
+          {
+            "ten_cung": "子女",
+            "chi": "卯",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "禄存"
+            ],
+            "adj": [
+              "恩光",
+              "龙池"
+            ]
+          },
+          {
+            "ten_cung": "夫妻",
+            "chi": "辰",
+            "can": "庚",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "破军"
+            ],
+            "minor": [
+              "擎羊",
+              "文曲"
+            ],
+            "adj": [
+              "天官",
+              "月德",
+              "红鸾"
+            ]
+          },
+          {
+            "ten_cung": "兄弟",
+            "chi": "巳",
+            "can": "辛",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天同"
+            ],
+            "minor": [
+              "天马"
+            ],
+            "adj": [
+              "天姚",
+              "天寿",
+              "天巫",
+              "天才",
+              "天虚"
+            ]
+          },
+          {
+            "ten_cung": "命宫",
+            "chi": "午",
+            "can": "壬",
+            "la_than": true,
+            "la_menh": false,
+            "major": [
+              "天府",
+              "武曲"
+            ],
+            "minor": [
+              "右弼"
+            ],
+            "adj": [
+              "台辅",
+              "天厨",
+              "截路",
+              "阴煞"
+            ]
+          },
+          {
+            "ten_cung": "父母",
+            "chi": "未",
+            "can": "癸",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "太阳",
+              "太阴(忌)"
+            ],
+            "minor": [],
+            "adj": [
+              "华盖",
+              "天哭",
+              "天月",
+              "空亡"
+            ]
+          },
+          {
+            "ten_cung": "福德",
+            "chi": "申",
+            "can": "甲",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "贪狼"
+            ],
+            "minor": [
+              "天钺",
+              "左辅"
+            ],
+            "adj": [
+              "天德",
+              "天福"
+            ]
+          },
+          {
+            "ten_cung": "田宅",
+            "chi": "酉",
+            "can": "乙",
+            "la_than": false,
+            "la_menh": true,
+            "major": [
+              "天机(禄)",
+              "巨门"
+            ],
+            "minor": [
+              "火星"
+            ],
+            "adj": [
+              "天贵",
+              "旬空",
+              "破碎"
+            ]
+          },
+          {
+            "ten_cung": "官禄",
+            "chi": "戌",
+            "can": "丙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天相",
+              "紫微(科)"
+            ],
+            "minor": [
+              "文昌",
+              "铃星"
+            ],
+            "adj": [
+              "天喜",
+              "寡宿"
+            ]
+          },
+          {
+            "ten_cung": "仆役",
+            "chi": "亥",
+            "can": "丁",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天梁(权)"
+            ],
+            "minor": [
+              "地劫",
+              "地空"
+            ],
+            "adj": [
+              "凤阁",
+              "天伤",
+              "年解"
+            ]
+          },
+          {
+            "ten_cung": "迁移",
+            "chi": "子",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "七杀"
+            ],
+            "minor": [
+              "天魁"
+            ],
+            "adj": [
+              "八座",
+              "咸池",
+              "天空",
+              "解神"
+            ]
+          },
+          {
+            "ten_cung": "疾厄",
+            "chi": "丑",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [],
+            "adj": [
+              "天使",
+              "天刑",
+              "蜚廉"
+            ]
+          }
+        ]
+      }
+    },
+    "nu_2004_nhuan": {
+      "input": {
+        "id": "nu_2004_nhuan",
+        "d": "2004-3-21",
+        "ti": 7,
+        "g": "female",
+        "note": "2004 co thang 2 nhuan"
+      },
+      "_ty_conflict": false,
+      "expect": {
+        "solar": "2004-3-21",
+        "lunar": "二〇〇四年闰二月初一",
+        "chineseDate": "甲申 丁卯 己亥 辛未",
+        "timeRange": "未时",
+        "fiveElements": "金四局",
+        "soul": "廉贞",
+        "body": "天梁",
+        "soulPalaceBranch": "申",
+        "bodyPalaceBranch": "戌",
+        "palaces": [
+          {
+            "ten_cung": "迁移",
+            "chi": "寅",
+            "can": "丙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "天马",
+              "禄存"
+            ],
+            "adj": [
+              "凤阁",
+              "天姚",
+              "天虚",
+              "年解",
+              "恩光"
+            ]
+          },
+          {
+            "ten_cung": "疾厄",
+            "chi": "卯",
+            "can": "丁",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "廉贞(禄)",
+              "破军(权)"
+            ],
+            "minor": [
+              "擎羊",
+              "文昌"
+            ],
+            "adj": [
+              "天使"
+            ]
+          },
+          {
+            "ten_cung": "财帛",
+            "chi": "辰",
+            "can": "戊",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "地空"
+            ],
+            "adj": [
+              "华盖",
+              "天才",
+              "蜚廉"
+            ]
+          },
+          {
+            "ten_cung": "子女",
+            "chi": "巳",
+            "can": "己",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天府"
+            ],
+            "minor": [
+              "左辅",
+              "铃星"
+            ],
+            "adj": [
+              "三台",
+              "天厨",
+              "天德",
+              "天月"
+            ]
+          },
+          {
+            "ten_cung": "夫妻",
+            "chi": "午",
+            "can": "庚",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天同",
+              "太阴"
+            ],
+            "minor": [
+              "地劫"
+            ],
+            "adj": [
+              "天寿",
+              "旬空"
+            ]
+          },
+          {
+            "ten_cung": "兄弟",
+            "chi": "未",
+            "can": "辛",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "武曲(科)",
+              "贪狼"
+            ],
+            "minor": [
+              "天钺"
+            ],
+            "adj": [
+              "天官",
+              "寡宿",
+              "红鸾"
+            ]
+          },
+          {
+            "ten_cung": "命宫",
+            "chi": "申",
+            "can": "壬",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "太阳(忌)",
+              "巨门"
+            ],
+            "minor": [],
+            "adj": [
+              "天巫",
+              "截路",
+              "解神"
+            ]
+          },
+          {
+            "ten_cung": "父母",
+            "chi": "酉",
+            "can": "癸",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "天相"
+            ],
+            "minor": [
+              "右弼",
+              "火星"
+            ],
+            "adj": [
+              "八座",
+              "咸池",
+              "天福",
+              "天空",
+              "封诰",
+              "破碎",
+              "空亡"
+            ]
+          },
+          {
+            "ten_cung": "福德",
+            "chi": "戌",
+            "can": "甲",
+            "la_than": true,
+            "la_menh": true,
+            "major": [
+              "天机",
+              "天梁"
+            ],
+            "minor": [],
+            "adj": [
+              "天刑",
+              "天哭",
+              "天贵"
+            ]
+          },
+          {
+            "ten_cung": "田宅",
+            "chi": "亥",
+            "can": "乙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [
+              "七杀",
+              "紫微"
+            ],
+            "minor": [
+              "文曲"
+            ],
+            "adj": [
+              "孤辰"
+            ]
+          },
+          {
+            "ten_cung": "官禄",
+            "chi": "子",
+            "can": "丙",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [],
+            "adj": [
+              "阴煞",
+              "龙池"
+            ]
+          },
+          {
+            "ten_cung": "仆役",
+            "chi": "丑",
+            "can": "丁",
+            "la_than": false,
+            "la_menh": false,
+            "major": [],
+            "minor": [
+              "天魁",
+              "陀罗"
+            ],
+            "adj": [
+              "台辅",
+              "天伤",
+              "天喜",
+              "月德"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
