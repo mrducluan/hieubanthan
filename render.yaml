@@ -1,0 +1,16 @@
+# Blueprint Render — deploy engine từ Dockerfile bằng một cú bấm.
+# Trên Render: New → Blueprint → trỏ tới repo GitHub này. Render đọc file này.
+#
+# ENGINE_API_KEY để sync=false → Render hỏi bạn nhập tay khi tạo (không lưu
+# khoá bí mật trong git). Nhập CÙNG một chuỗi với biến ENGINE_API_KEY bên Vercel.
+services:
+  - type: web
+    name: hieubanthan-engine
+    runtime: docker
+    dockerfilePath: ./engine/Dockerfile
+    dockerContext: ./engine
+    plan: free                # đủ cho staging; free spin-down sau 15' không dùng
+    healthCheckPath: /health
+    envVars:
+      - key: ENGINE_API_KEY
+        sync: false           # nhập tay lúc tạo, không commit vào git

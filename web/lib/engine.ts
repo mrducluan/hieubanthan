@@ -3,6 +3,14 @@
 // Chỉ chạy phía server (Server Component / Route Handler) — ENGINE_URL không lộ ra client.
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
+// Khoá service-to-service: chỉ web gửi được request hợp lệ tới engine.
+// Không set (dev local) → không gửi header, engine cũng không đòi. Xem
+// engine/app/main.py middleware require_engine_key.
+const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
+
+function engineHeaders(base: Record<string, string> = {}): Record<string, string> {
+  return ENGINE_API_KEY ? { ...base, "x-engine-key": ENGINE_API_KEY } : base;
+}
 
 export interface DoNhayResult {
   engine_version: string;
@@ -34,7 +42,7 @@ async function post<T>(path: string, body: unknown): Promise<T> {
   try {
     res = await fetch(`${ENGINE_URL}${path}`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: engineHeaders({ "content-type": "application/json" }),
       body: JSON.stringify(body),
       cache: "no-store",
     });
@@ -55,7 +63,7 @@ async function post<T>(path: string, body: unknown): Promise<T> {
 }
 
 export function engineHealth(): Promise<EngineHealth> {
-  return fetch(`${ENGINE_URL}/health`, { cache: "no-store" })
+  return fetch(`${ENGINE_URL}/health`, { cache: "no-store", headers: engineHeaders() })
     .then((r) => r.json() as Promise<EngineHealth>)
     .catch(() => ({ ok: false, engine_version: "?", ty_boundary_set: false }));
 }

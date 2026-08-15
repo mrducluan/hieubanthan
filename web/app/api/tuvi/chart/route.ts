@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { ChartInput, ChartOutput } from "../schema";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
+const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
 export async function POST(req: Request): Promise<NextResponse> {
   let raw: unknown;
@@ -25,7 +26,10 @@ export async function POST(req: Request): Promise<NextResponse> {
   try {
     engineRes = await fetch(`${ENGINE_URL}/v1/tuvi/tuan-triet`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
+      },
       body: JSON.stringify(parsed.data),
       cache: "no-store",
     });

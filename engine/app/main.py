@@ -9,8 +9,10 @@ Mọi response đều mang `engine_version` — bắt buộc để tái lập k�
 from __future__ import annotations
 
 import datetime as _dt
+import os
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
 from app import config
@@ -23,6 +25,26 @@ app = FastAPI(
     version=ENGINE_VERSION,
     description="Tầng CALC — tính toán tất định, không LLM.",
 )
+
+
+# --------------------------------------------------------------------------- #
+# Xác thực service-to-service: chỉ web (biết khoá) mới gọi được engine.
+# TẮT HOÀN TOÀN khi ENGINE_API_KEY không set → dev local và test không đổi.
+# Khi deploy: đặt cùng một khoá bí mật ở engine (env) và ở web (env), engine
+# công khai trên internet nhưng chỉ trả lời request mang đúng khoá.
+# /health được miễn để host kiểm tra sống.
+# --------------------------------------------------------------------------- #
+@app.middleware("http")
+async def require_engine_key(request: Request, call_next):
+    expected = os.environ.get("ENGINE_API_KEY")
+    if expected and request.url.path != "/health":
+        if request.headers.get("x-engine-key") != expected:
+            return JSONResponse(
+                {"detail": "Thiếu hoặc sai X-Engine-Key"}, status_code=401
+            )
+    return await call_next(request)
+
+
 app.include_router(tuvi_router)
 
 
