@@ -8,58 +8,33 @@ export default async function Home() {
 
   return (
     <main>
-      <h1 style={{ fontSize: 32, marginBottom: 8 }}>Hiểu Bản Thân</h1>
-      <p style={{ color: "#44534a", maxWidth: "60ch" }}>
-        Khám phá các hệ thống tự nhận thức trong văn hoá phương Đông — trình bày
-        trung thực cả những chỗ các trường phái không thống nhất với nhau.
-      </p>
+      <header className="page-head">
+        <span className="eyebrow">Tự nhận thức · văn hoá phương Đông</span>
+        <h1>Hiểu Bản Thân</h1>
+        <p className="lede">
+          Khám phá các hệ thống tự nhận thức trong văn hoá phương Đông — trình bày
+          trung thực cả những chỗ các trường phái không thống nhất với nhau, và
+          luôn kèm câu hỏi để bạn tự kiểm.
+        </p>
+      </header>
 
-      <div
-        style={{
-          display: "grid",
-          gap: 12,
-          marginTop: 28,
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-        }}
-      >
-        <Link
-          href="/than-so"
-          style={{
-            display: "block",
-            padding: "18px 20px",
-            background: "#fff",
-            border: "1px solid #d5ddd6",
-            borderRadius: 6,
-            textDecoration: "none",
-            color: "inherit",
-          }}
-        >
-          <strong style={{ fontSize: 17 }}>Thần số học</strong>
-          <p style={{ margin: "6px 0 0", fontSize: 14, color: "#5b6a60" }}>
-            Tính các chỉ số Pythagoras — và đo xem con số của bạn phụ thuộc vào
-            quy ước phiên âm tới mức nào.
+      <div className="home-grid">
+        <Link href="/than-so" className="home-card">
+          <h2>Thần số học</h2>
+          <p>
+            Bốn con số cốt lõi, dải đời đỉnh cao theo tuổi, thử thách và năm cá
+            nhân — mỗi số kèm mặt tối và câu tự kiểm.
           </p>
         </Link>
 
-        <div
-          style={{
-            padding: "18px 20px",
-            background: "#eef1ee",
-            border: "1px dashed #c2ccc4",
-            borderRadius: 6,
-            color: "#7a877e",
-          }}
-        >
-          <strong style={{ fontSize: 17 }}>Nhân tướng · Tử vi · Kinh Dịch</strong>
-          <p style={{ margin: "6px 0 0", fontSize: 14 }}>Đang xây dựng.</p>
+        <div className="home-card" style={{ borderStyle: "dashed", cursor: "default" }}>
+          <h2>Nhân tướng · Tử vi · Kinh Dịch</h2>
+          <p className="soon">Đang xây dựng.</p>
         </div>
       </div>
 
-      <p style={{ marginTop: 28, fontSize: 13, color: "#7a877e" }}>
+      <p className="health">
         Engine: {health.ok ? `v${health.engine_version} — hoạt động` : "chưa kết nối"}
-        {health.ok && !health.ty_boundary_set
-          ? " · chính sách giờ Tý chưa chốt (chỉ ảnh hưởng tử vi/bát tự)"
-          : ""}
       </p>
     </main>
   );

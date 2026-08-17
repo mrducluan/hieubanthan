@@ -1,5 +1,22 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Newsreader, Be_Vietnam_Pro } from "next/font/google";
+import "./globals.css";
+
+// Display: Newsreader — serif học thuật, chữ số đẹp, hợp "sách số / lịch cổ".
+// Body: Be Vietnam Pro — sans thiết kế riêng cho tiếng Việt.
+const display = Newsreader({
+  subsets: ["vietnamese", "latin"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
+});
+const body = Be_Vietnam_Pro({
+  subsets: ["vietnamese", "latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Hiểu Bản Thân",
@@ -9,27 +26,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="vi">
-      <body
-        style={{
-          margin: 0,
-          fontFamily: "system-ui, -apple-system, 'Segoe UI', sans-serif",
-          background: "#f4f6f4",
-          color: "#1d2721",
-          lineHeight: 1.6,
-        }}
-      >
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "32px 20px 80px" }}>
+    <html lang="vi" className={`${display.variable} ${body.variable}`}>
+      <body>
+        <div className="shell">
           {children}
-          <footer
-            style={{
-              marginTop: 56,
-              paddingTop: 20,
-              borderTop: "1px solid #d5ddd6",
-              fontSize: 13,
-              color: "#5b6a60",
-            }}
-          >
+          <footer className="site-disclaimer">
             Nội dung trên trang được biên soạn từ các thư tịch văn hoá cổ điển,
             cung cấp với mục đích tham khảo văn hoá và giải trí. Đây không phải
             dự báo, không phải lời khuyên, và không thay thế ý kiến chuyên môn

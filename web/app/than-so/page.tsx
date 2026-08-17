@@ -1,16 +1,14 @@
 import Link from "next/link";
 import { luanGiai, EngineError, type LuanGiaiResult } from "@/lib/engine";
+import { PinnacleArc } from "./PinnacleArc";
 
 export const dynamic = "force-dynamic";
 
-// Form dùng GET thuần: submit đưa dữ liệu vào searchParams, trang render lại
-// phía server và gọi engine. Không cần client JS, không lộ ENGINE_URL, và URL
-// kết quả tự nhiên chia sẻ được.
 interface Props {
   searchParams: Record<string, string | string[] | undefined>;
 }
 
-const TEN_CHI_SO: Record<string, string> = {
+const TEN_VI_TRI: Record<string, string> = {
   duong_doi: "Đường đời",
   su_menh: "Sứ mệnh",
   linh_hon: "Linh hồn",
@@ -33,238 +31,139 @@ export default async function ThanSoPage({ searchParams }: Props) {
   let loi: string | null = null;
   if (daNhap) {
     try {
-      kq = await luanGiai({
-        ho_ten: ten2 ? [ten1, ten2] : [ten1],
-        ngay,
-        thang,
-        nam,
-      });
+      kq = await luanGiai({ ho_ten: ten2 ? [ten1, ten2] : [ten1], ngay, thang, nam });
     } catch (e) {
       loi = e instanceof EngineError ? e.message : "Có lỗi không xác định.";
     }
   }
 
+  const cs = kq?.chieu_sau;
+  const currentAge = cs?.nam_ca_nhan?.[0]?.tuoi ?? 0;
+
   return (
     <main>
-      <p style={{ fontSize: 13 }}>
-        <Link href="/" style={{ color: "#35695a" }}>← Trang chủ</Link>
-      </p>
-      <h1 style={{ fontSize: 26, marginBottom: 6 }}>Thần số học</h1>
-      <p style={{ color: "#44534a", maxWidth: "60ch", fontSize: 15 }}>
-        Nhập tên theo nhiều cách viết nếu bạn dùng nhiều biến thể (khai sinh,
-        thường gọi). Kết quả sẽ cho thấy chỉ số nào ổn định và chỉ số nào đổi
-        theo quy ước — điều mà hầu hết trang khác giấu đi.
-      </p>
+      <Link href="/" className="backlink">← Trang chủ</Link>
 
-      <form
-        method="get"
-        style={{
-          display: "grid",
-          gap: 10,
-          marginTop: 20,
-          padding: 20,
-          background: "#fff",
-          border: "1px solid #d5ddd6",
-          borderRadius: 6,
-        }}
-      >
-        <label style={{ fontSize: 14 }}>
-          Họ tên (bản chính)
-          <input
-            name="ten1"
-            defaultValue={ten1}
-            required
-            placeholder="Nguyễn Văn An"
-            style={inputStyle}
-          />
+      <header className="page-head">
+        <span className="eyebrow">Thần số học · tham khảo văn hoá</span>
+        <h1>Con số của bạn</h1>
+        <p className="lede">
+          Nhập tên theo nhiều cách viết nếu bạn dùng nhiều biến thể (khai sinh,
+          thường gọi). Mỗi con số luôn kèm mặt tối và một câu để bạn tự kiểm —
+          điều hầu hết trang khác giấu đi.
+        </p>
+      </header>
+
+      <form method="get" className="reading-form">
+        <label className="field">
+          <span>Họ tên (bản chính)</span>
+          <input name="ten1" defaultValue={ten1} required placeholder="Nguyễn Văn An" />
         </label>
-        <label style={{ fontSize: 14 }}>
-          Biến thể khác (không bắt buộc)
-          <input
-            name="ten2"
-            defaultValue={ten2}
-            placeholder="Nguyen Van An"
-            style={inputStyle}
-          />
+        <label className="field">
+          <span>Biến thể khác (không bắt buộc)</span>
+          <input name="ten2" defaultValue={ten2} placeholder="Nguyen Van An" />
         </label>
-        <div style={{ display: "flex", gap: 10 }}>
-          <label style={{ fontSize: 14, flex: 1 }}>
-            Ngày
-            <input name="ngay" type="number" min={1} max={31} required
-              defaultValue={ngay || ""} style={inputStyle} />
+        <div className="field-row">
+          <label className="field">
+            <span>Ngày</span>
+            <input name="ngay" type="number" min={1} max={31} required defaultValue={ngay || ""} />
           </label>
-          <label style={{ fontSize: 14, flex: 1 }}>
-            Tháng
-            <input name="thang" type="number" min={1} max={12} required
-              defaultValue={thang || ""} style={inputStyle} />
+          <label className="field">
+            <span>Tháng</span>
+            <input name="thang" type="number" min={1} max={12} required defaultValue={thang || ""} />
           </label>
-          <label style={{ fontSize: 14, flex: 1 }}>
-            Năm
-            <input name="nam" type="number" min={1900} max={2100} required
-              defaultValue={nam || ""} style={inputStyle} />
+          <label className="field">
+            <span>Năm</span>
+            <input name="nam" type="number" min={1900} max={2100} required defaultValue={nam || ""} />
           </label>
         </div>
-        <button
-          type="submit"
-          style={{
-            padding: "10px 16px",
-            background: "#35695a",
-            color: "#fff",
-            border: "none",
-            borderRadius: 5,
-            fontSize: 15,
-            cursor: "pointer",
-          }}
-        >
-          Xem khoảng kết quả
-        </button>
+        <button type="submit" className="btn-primary">Xem con số</button>
       </form>
 
-      {loi && (
-        <p style={{ marginTop: 18, padding: 14, background: "#f6e5e1",
-                    border: "1px solid #d9a99e", borderRadius: 6, fontSize: 14 }}>
-          {loi}
-        </p>
-      )}
+      {loi && <p className="notice-error">{loi}</p>}
 
       {kq && (
-        <section style={{ marginTop: 24 }}>
-          <h2 style={{ fontSize: 20 }}>Kết quả — {kq.ngay_sinh}</h2>
-          <p style={{ fontSize: 13, color: "#5b6a60", marginTop: 4 }}>
-            {kq.tom_tat_do_tin}
-          </p>
-          <p style={{ fontSize: 13, color: "#44534a", background: "#e0ebe5",
-                      border: "1px solid #b9d2c6", borderRadius: 6,
-                      padding: "10px 14px", marginTop: 10, maxWidth: "62ch" }}>
-            {kq.cach_doc}
-          </p>
+        <section className="result">
+          <div className="result-head">
+            <span className="who">{kq.ten_chinh}</span>
+            <span className="meta">Sinh {kq.ngay_sinh} · {kq.tom_tat_do_tin}</span>
+          </div>
 
-          <div style={{ display: "grid", gap: 14, marginTop: 16 }}>
+          <p className="read-note">{kq.cach_doc}</p>
+
+          <div className="section-label">Bốn con số cốt lõi</div>
+          <div className="cards">
             {kq.cac_vi_tri.map((vt) => (
-              <div
-                key={vt.vi_tri}
-                style={{
-                  background: "#fff",
-                  border: "1px solid #cdd8d0",
-                  borderLeft: "4px solid #35695a",
-                  borderRadius: 6,
-                  overflow: "hidden",
-                }}
-              >
-                <div style={{ padding: "13px 18px", borderBottom: vt.nghia ? "1px solid #eef2ee" : "none" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between",
-                                alignItems: "baseline" }}>
-                    <strong style={{ fontSize: 16 }}>{TEN_CHI_SO[vt.vi_tri] ?? vt.ten}</strong>
-                    <span style={{ fontSize: 26, fontWeight: 700, color: "#22493f" }}>
-                      {vt.gia_tri}
-                    </span>
+              <div className="card" key={vt.vi_tri}>
+                <div className="card-top">
+                  <div className="numeral">{vt.gia_tri}</div>
+                  <div className="card-titles">
+                    <span className="pos">{TEN_VI_TRI[vt.vi_tri] ?? vt.ten}</span>
+                    {vt.nghia && <span className="kw">{vt.nghia.tu_khoa}</span>}
+                    <span className="frame">{vt.khung}</span>
                   </div>
-                  <p style={{ margin: "3px 0 0", fontSize: 12.5, color: "#7a877e" }}>
-                    {vt.khung}
-                  </p>
+                  {vt.nghia?.so_cai && <span className="seal">số cái</span>}
                 </div>
-
                 {vt.nghia && (
-                  <div style={{ padding: "12px 18px" }}>
-                    <div style={{ fontSize: 14.5, fontWeight: 600, color: "#22493f" }}>
-                      {vt.nghia.tu_khoa}{vt.nghia.so_cai ? " (số cái)" : ""}
-                    </div>
-                    <p style={{ margin: "6px 0 0", fontSize: 13.5 }}>
-                      <strong style={{ color: "#9c4433" }}>Mặt tối:</strong> {vt.nghia.mat_toi}
-                    </p>
-                    <p style={{ margin: "5px 0 0", fontSize: 13.5, fontStyle: "italic", color: "#33424f" }}>
-                      Tự kiểm: {vt.nghia.phan_chung}
-                    </p>
-                    <p style={{ margin: "6px 0 0", fontSize: 11.5, color: "#7a877e" }}>
-                      Nguồn: {vt.nghia.trich_nguon}
-                    </p>
+                  <div className="card-body">
+                    <p className="shadow-line"><b>Mặt tối:</b> {vt.nghia.mat_toi}</p>
+                    <p className="probe">Tự kiểm — {vt.nghia.phan_chung}</p>
+                    <p className="src">Nguồn: {vt.nghia.trich_nguon}</p>
                   </div>
                 )}
-
-                {vt.ghi_chu_do_nhay && (
-                  <p style={{ margin: 0, padding: "10px 18px", fontSize: 12.5,
-                              color: "#8a6420", background: "#f9f3e6",
-                              borderTop: "1px solid #ecdcbb" }}>
-                    ⓘ {vt.ghi_chu_do_nhay}
-                  </p>
-                )}
+                {vt.ghi_chu_do_nhay && <p className="sensitivity">ⓘ {vt.ghi_chu_do_nhay}</p>}
               </div>
             ))}
           </div>
 
-          {kq.chieu_sau && (
-            <div style={{ marginTop: 30 }}>
-              <h2 style={{ fontSize: 20 }}>Chiều sâu</h2>
-              <p style={{ fontSize: 12.5, color: "#5b6a60", marginTop: 4, maxWidth: "62ch" }}>
-                {kq.chieu_sau.cach_doc_chieu_sau}
-              </p>
+          {cs && (
+            <div className="depth">
+              <div className="section-label">Chiều sâu</div>
+              <p className="intro">{cs.cach_doc_chieu_sau}</p>
 
-              {/* Đỉnh cao theo giai đoạn tuổi */}
-              <h3 style={{ fontSize: 15, marginTop: 18, color: "#22493f" }}>
-                Đỉnh cao — mạch chủ đạo từng giai đoạn đời
-              </h3>
-              <div style={{ display: "grid", gap: 8, marginTop: 8 }}>
-                {kq.chieu_sau.dinh_cao.map((p) =>
+              <h3>Dải đời — bốn giai đoạn theo tuổi</h3>
+              <PinnacleArc pinnacles={cs.dinh_cao} currentAge={currentAge} />
+              <div className="phase-cards">
+                {cs.dinh_cao.map((p) =>
                   p.nghia ? (
-                    <div key={p.dinh} style={{ background: "#fff", border: "1px solid #cdd8d0",
-                            borderRadius: 6, padding: "11px 15px" }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                        <strong style={{ fontSize: 14 }}>
-                          {p.nghia.chu_de}
-                        </strong>
-                        <span style={{ fontFamily: "monospace", fontSize: 12.5, color: "#7a877e" }}>
+                    <div className="phase" key={p.dinh}>
+                      <div className="phase-top">
+                        <strong>{p.nghia.chu_de}</strong>
+                        <span className="tag">
                           số {p.so} · {p.den_tuoi ? `${p.tu_tuoi}–${p.den_tuoi} tuổi` : `${p.tu_tuoi}+ tuổi`}
                         </span>
                       </div>
-                      <p style={{ margin: "5px 0 0", fontSize: 13 }}>{p.nghia.y_nghia}</p>
-                      <p style={{ margin: "4px 0 0", fontSize: 12.5, color: "#9c4433" }}>
-                        Bóng tối: {p.nghia.bong_toi}
-                      </p>
+                      <p>{p.nghia.y_nghia}</p>
+                      <p className="dark">Bóng tối: {p.nghia.bong_toi}</p>
                     </div>
                   ) : null,
                 )}
               </div>
 
-              {/* Thử thách chính */}
-              {kq.chieu_sau.thu_thach_chinh.nghia && (
+              {cs.thu_thach_chinh.nghia && (
                 <>
-                  <h3 style={{ fontSize: 15, marginTop: 18, color: "#22493f" }}>
-                    Thử thách chính — bài học lặp lại
-                  </h3>
-                  <div style={{ background: "#f6e5e1", border: "1px solid #e0b7ab",
-                          borderRadius: 6, padding: "11px 15px", marginTop: 8 }}>
-                    <strong style={{ fontSize: 14 }}>
-                      Số {kq.chieu_sau.thu_thach_chinh.so} — {kq.chieu_sau.thu_thach_chinh.nghia.mo_ta}
-                    </strong>
-                    <p style={{ margin: "5px 0 0", fontSize: 13 }}>
-                      {kq.chieu_sau.thu_thach_chinh.nghia.y_nghia}
-                    </p>
-                    <p style={{ margin: "4px 0 0", fontSize: 13, color: "#22493f" }}>
-                      Cách vượt: {kq.chieu_sau.thu_thach_chinh.nghia.cach_vuot}
-                    </p>
+                  <h3>Thử thách chính — bài học lặp lại</h3>
+                  <div className="challenge">
+                    <strong>Số {cs.thu_thach_chinh.so} — {cs.thu_thach_chinh.nghia.mo_ta}</strong>
+                    <p>{cs.thu_thach_chinh.nghia.y_nghia}</p>
+                    <p className="how">Cách vượt: {cs.thu_thach_chinh.nghia.cach_vuot}</p>
                   </div>
                 </>
               )}
 
-              {/* Năm cá nhân — dự báo */}
-              <h3 style={{ fontSize: 15, marginTop: 18, color: "#22493f" }}>
-                Năm cá nhân — nhịp từng năm sắp tới
-              </h3>
-              <div style={{ display: "grid", gap: 8, marginTop: 8 }}>
-                {kq.chieu_sau.nam_ca_nhan.map((n) =>
+              <h3>Năm cá nhân — nhịp từng năm sắp tới</h3>
+              <div className="years">
+                {cs.nam_ca_nhan.map((n) =>
                   n.nghia ? (
-                    <div key={n.nam} style={{ background: "#fff", border: "1px solid #cdd8d0",
-                            borderLeft: "4px solid #8a6420", borderRadius: 6, padding: "11px 15px" }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                        <strong style={{ fontSize: 14 }}>{n.nam} — {n.nghia.chu_de}</strong>
-                        <span style={{ fontFamily: "monospace", fontSize: 12.5, color: "#7a877e" }}>
-                          số {n.so} · {n.tuoi} tuổi
-                        </span>
+                    <div className="year" key={n.nam}>
+                      <div className="year-top">
+                        <strong>{n.nam} — {n.nghia.chu_de}</strong>
+                        <span className="tag">số {n.so} · {n.tuoi} tuổi</span>
                       </div>
-                      <p style={{ margin: "5px 0 0", fontSize: 13 }}>{n.nghia.y_nghia}</p>
-                      <p style={{ margin: "4px 0 0", fontSize: 12.5 }}>
-                        <span style={{ color: "#35695a" }}>Nên:</span> {n.nghia.nen}{" · "}
-                        <span style={{ color: "#9c4433" }}>Tránh:</span> {n.nghia.tranh}
+                      <p>{n.nghia.y_nghia}</p>
+                      <p className="do-avoid">
+                        <span className="do">Nên:</span> {n.nghia.nen}{" · "}
+                        <span className="avoid">Tránh:</span> {n.nghia.tranh}
                       </p>
                     </div>
                   ) : null,
@@ -273,11 +172,8 @@ export default async function ThanSoPage({ searchParams }: Props) {
             </div>
           )}
 
-          <p style={{ marginTop: 24, fontSize: 12, color: "#7a877e",
-                      maxWidth: "62ch", lineHeight: 1.5 }}>
-            {kq.trich_nguon_chung}
-          </p>
-          <p style={{ marginTop: 6, fontSize: 11.5, color: "#9aa69d" }}>
+          <p className="source-foot">{kq.trich_nguon_chung}</p>
+          <p className="engine-foot">
             Engine v{kq.engine_version} · Tên đã quét: {kq.ten_bien_the_da_quet.join(", ")}
           </p>
         </section>
@@ -285,14 +181,3 @@ export default async function ThanSoPage({ searchParams }: Props) {
     </main>
   );
 }
-
-const inputStyle: React.CSSProperties = {
-  display: "block",
-  width: "100%",
-  marginTop: 4,
-  padding: "9px 11px",
-  border: "1px solid #c2ccc4",
-  borderRadius: 5,
-  fontSize: 15,
-  boxSizing: "border-box",
-};
