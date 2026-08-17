@@ -136,8 +136,11 @@ chạy thật tại máy (trình duyệt → Next.js → engine → tính toán)
    Jordan, giữ chống Barnum. `luan_chieu_sau()` ghép phép tính engine + nghĩa KB;
    năm cá nhân dự báo 3 năm tới. Web hiện đầy đủ. **Nội dung chiều sâu đang ở
    FILE (chưa Supabase)** — chuyển sau khi cấu trúc ổn định (có thể đổi khi #4).
-5. **#4 Thiết kế lại trang đọc — premium.** Giờ #2 có nội dung → đến lượt #4.
-   CHỦ DỰ ÁN CHỌN: redesign toàn bộ. Dùng `artifact-design`/`artifact-diagramming`.
+5. ✅ ~~#4 Thiết kế lại trang đọc — premium~~ — XONG. Hệ thiết kế "lịch số ngọc
+   bích": `app/globals.css` (tokens sáng/tối), font `next/font` (Newsreader +
+   Be Vietnam Pro), layout mới. Chữ ký: `PinnacleArc.tsx` — dải đời SVG chia 4
+   giai đoạn theo tuổi, đánh dấu tuổi hiện tại. Build + typecheck xanh, live.
+   (Chưa soi được bằng screenshot do môi trường — chờ chủ dự án review mắt thường.)
 6. **Ý tưởng chưa làm:** UI khách nhập câu hỏi → gói Q&A trả phí (dùng lớp LLM #3,
    endpoint `/v1/thanso/van`). Cần key OpenRouter + hệ thống thanh toán (Giai đoạn
    thanh toán, sau).
