@@ -125,10 +125,12 @@ chạy thật tại máy (trình duyệt → Next.js → engine → tính toán)
 2c. ✅ ~~Lớp LLM NARRATIVE (env-gated)~~ — XONG. `app/narrative/llm.py`, endpoint
    `/v1/thanso/van`. Không key = template; có key OpenRouter = văn mượt (cấm
    thêm dữ kiện). Key thêm vào Render env sau: `OPENROUTER_API_KEY`.
-3. **Chuyển KB vào Supabase** — chạy migration `0001_kb_thanso.sql`, nạp
-   `data/thanso_meanings.json` vào bảng, đổi `app/kb/store.py` từ đọc file sang
-   truy vấn Supabase. Cần: thông tin kết nối Supabase (env), quyết định thư viện
-   truy cập DB (thêm dependency — phải hỏi).
+3. ✅ ~~Chuyển KB vào Supabase~~ — XONG và đã kiểm chứng. KB chạy qua Supabase
+   REST (không thêm dep, dùng httpx). Env trên Render: `SUPABASE_URL`,
+   `SUPABASE_ANON_KEY`. Endpoint chẩn đoán `/v1/kb/status` báo nguồn thật
+   (supabase/file) — đã xác nhận `nguon: supabase`. Cache 60s + fallback file.
+   **Tự quản trị:** sửa nội dung ngay trong Supabase Table Editor →
+   `thanso_so_meanings`, web tự cập nhật trong 1 phút. RLS chỉ-đọc công khai.
 4. **#2 Chiều sâu thần số** (đỉnh cao, thử thách, năm cá nhân, chu kỳ) — engine
    ĐÃ CÓ phép tính (`dinh_cao`, `thu_thach`, `nam_ca_nhan`, `chu_ky_9_nam`).
    CHỦ DỰ ÁN CHỌN: viết nội dung RIÊNG cho từng phần (không tái dùng nghĩa số).
