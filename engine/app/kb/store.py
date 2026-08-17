@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Tầng KB (tầng 2) — kho quy tắc luận giải thần số.
+"""Tầng KB (tầng 2) — kho quy tắc luận giải thần số (số cơ bản + chiều sâu).
 
-Hai nguồn, cùng một giao diện:
+Một cache hợp nhất, hai nguồn cùng giao diện:
   - Supabase REST (khi có env SUPABASE_URL + SUPABASE_ANON_KEY): nội dung sống,
-    bạn sửa trong Supabase Table Editor là web đổi theo (sau TTL cache).
-  - File JSON (mặc định / dự phòng): chạy được ngay không cần Supabase, và là
+    sửa trong Table Editor là web đổi theo (sau TTL cache).
+  - File JSON bundled (mặc định / dự phòng): chạy ngay không cần mạng, và là
     lưới an toàn nếu Supabase trục trặc.
 
 Nguyên tắc: KB CHỈ trả về nội dung ĐÃ CÓ nguồn. Không có thì trả None — tầng
@@ -12,7 +12,6 @@ trên phải im lặng, không được bịa.
 """
 from __future__ import annotations
 
-import functools
 import json
 import os
 import time
@@ -21,8 +20,11 @@ from typing import TypedDict
 
 import httpx
 
-_DATA = Path(__file__).parent / "data" / "thanso_meanings.json"
-_CACHE_TTL = 60           # giây — sửa trong Supabase phản ánh trong vòng 1 phút
+_DIR = Path(__file__).parent / "data"
+_MEANINGS_FILE = _DIR / "thanso_meanings.json"
+_DEPTH_FILE = _DIR / "thanso_depth.json"
+
+_CACHE_TTL = 60
 _cache: dict | None = None
 _cache_at: float = 0.0
 
@@ -37,19 +39,62 @@ class SoMeaning(TypedDict):
     school_id: str
 
 
-def _from_file() -> dict:
-    return json.loads(_DATA.read_text(encoding="utf-8"))
+# --------------------------------------------------------------------------- #
+# Nguồn: file
+# --------------------------------------------------------------------------- #
+def _from_files() -> dict:
+    m = json.loads(_MEANINGS_FILE.read_text(encoding="utf-8"))
+    d = json.loads(_DEPTH_FILE.read_text(encoding="utf-8"))
+    return {
+        "sources": m["sources"],
+        "schools": m["schools"],
+        "so_meanings": m["so_meanings"],
+        "vi_tri": m["vi_tri"],
+        "dinh_cao": d["dinh_cao"],
+        "thu_thach": d["thu_thach"],
+        "nam_ca_nhan": d["nam_ca_nhan"],
+    }
 
 
+# --------------------------------------------------------------------------- #
+# Nguồn: Supabase REST
+# --------------------------------------------------------------------------- #
 def _from_supabase(url: str, key: str) -> dict:
-    """Đọc KB qua REST API của Supabase, dựng lại đúng cấu trúc như file JSON."""
     headers = {"apikey": key, "Authorization": f"Bearer {key}"}
     base = url.rstrip("/") + "/rest/v1"
     with httpx.Client(timeout=8, headers=headers) as c:
-        sources = c.get(f"{base}/sources", params={"select": "*"}).json()
-        schools = c.get(f"{base}/schools", params={"select": "*"}).json()
-        meanings = c.get(f"{base}/thanso_so_meanings", params={"select": "*"}).json()
-        vi_tri = c.get(f"{base}/thanso_vi_tri", params={"select": "*"}).json()
+        def get(table: str) -> list:
+            r = c.get(f"{base}/{table}", params={"select": "*"})
+            r.raise_for_status()
+            return r.json()
+
+        # Lõi: nếu hỏng → cả _from_supabase hỏng → fallback file (an toàn).
+        sources = get("sources")
+        schools = get("schools")
+        meanings = get("thanso_so_meanings")
+        vi_tri = get("thanso_vi_tri")
+
+        # Chiều sâu: chịu lỗi RIÊNG. Bảng chưa tạo (chưa chạy seed 0002) → dùng
+        # file cho phần chiều sâu, KHÔNG kéo cả lõi rơi về file.
+        try:
+            dinh_cao = get("thanso_dinh_cao")
+            thu_thach = get("thanso_thu_thach")
+            nam_ca_nhan = get("thanso_nam_ca_nhan")
+        except Exception:
+            _fd = json.loads(_DEPTH_FILE.read_text(encoding="utf-8"))
+            return {
+                "sources": sources, "schools": schools,
+                "so_meanings": {str(m["gia_tri"]): {
+                    "tu_khoa": m["tu_khoa"], "mat_toi": m["mat_toi"],
+                    "phan_chung": m["phan_chung"], "so_cai": m.get("so_cai", False),
+                    "source_id": m["source_id"], "school_id": m["school_id"],
+                } for m in meanings},
+                "vi_tri": {v["id"]: {"ten": v["ten"], "khung": v["khung"]} for v in vi_tri},
+                "dinh_cao": _fd["dinh_cao"], "thu_thach": _fd["thu_thach"],
+                "nam_ca_nhan": _fd["nam_ca_nhan"],
+                "_chieu_sau_tu": "file",
+            }
+
     return {
         "sources": sources,
         "schools": schools,
@@ -61,6 +106,24 @@ def _from_supabase(url: str, key: str) -> dict:
             } for m in meanings
         },
         "vi_tri": {v["id"]: {"ten": v["ten"], "khung": v["khung"]} for v in vi_tri},
+        "dinh_cao": {
+            str(r["gia_tri"]): {
+                "chu_de": r["chu_de"], "y_nghia": r["y_nghia"],
+                "bong_toi": r["bong_toi"], "phan_chung": r["phan_chung"],
+                "so_cai": r.get("so_cai", False),
+            } for r in dinh_cao
+        },
+        "thu_thach": {
+            str(r["gia_tri"]): {
+                "mo_ta": r["mo_ta"], "y_nghia": r["y_nghia"], "cach_vuot": r["cach_vuot"],
+            } for r in thu_thach
+        },
+        "nam_ca_nhan": {
+            str(r["gia_tri"]): {
+                "chu_de": r["chu_de"], "y_nghia": r["y_nghia"],
+                "nen": r["nen"], "tranh": r["tranh"],
+            } for r in nam_ca_nhan
+        },
     }
 
 
@@ -70,70 +133,37 @@ def _load() -> dict:
     key = os.environ.get("SUPABASE_ANON_KEY")
 
     if not url or not key:
-        # Chưa cấu hình Supabase → luôn dùng file (cache vĩnh viễn trong tiến trình).
         if _cache is None:
-            _cache = _from_file()
+            _cache = _from_files()
         return _cache
 
-    # Có Supabase → cache theo TTL, lỗi thì rơi về file.
     if _cache is not None and time.time() - _cache_at < _CACHE_TTL:
         return _cache
     try:
         _cache = _from_supabase(url, key)
         _cache_at = time.time()
     except Exception:
-        _cache = _from_file()   # lưới an toàn: web vẫn chạy nếu Supabase hỏng
+        _cache = _from_files()   # lưới an toàn
         _cache_at = time.time()
     return _cache
 
 
+# --------------------------------------------------------------------------- #
+# Số cơ bản
+# --------------------------------------------------------------------------- #
 def nghia_so(gia_tri: int) -> SoMeaning | None:
-    """Nghĩa của một con số. None nếu KB chưa có (tầng trên phải im lặng)."""
     raw = _load()["so_meanings"].get(str(gia_tri))
     if raw is None:
         return None
     return {
-        "gia_tri": gia_tri,
-        "tu_khoa": raw["tu_khoa"],
-        "mat_toi": raw["mat_toi"],
-        "phan_chung": raw["phan_chung"],
-        "so_cai": raw.get("so_cai", False),
-        "source_id": raw["source_id"],
-        "school_id": raw["school_id"],
+        "gia_tri": gia_tri, "tu_khoa": raw["tu_khoa"], "mat_toi": raw["mat_toi"],
+        "phan_chung": raw["phan_chung"], "so_cai": raw.get("so_cai", False),
+        "source_id": raw["source_id"], "school_id": raw["school_id"],
     }
 
 
 def khung_vi_tri(vi_tri: str) -> dict | None:
     return _load()["vi_tri"].get(vi_tri)
-
-
-# --------------------------------------------------------------------------- #
-# Nội dung CHIỀU SÂU (đỉnh cao, thử thách, năm cá nhân) — đọc từ file bundled.
-# (Nội dung số cơ bản đã ở Supabase; phần chiều sâu dùng file cho tới khi cấu
-# trúc ổn định, rồi mới chuyển Supabase. Bundled = luôn có, không phụ thuộc mạng.)
-# --------------------------------------------------------------------------- #
-_DEPTH = Path(__file__).parent / "data" / "thanso_depth.json"
-
-
-@functools.lru_cache(maxsize=1)
-def _load_depth() -> dict:
-    return json.loads(_DEPTH.read_text(encoding="utf-8"))
-
-
-def nghia_dinh_cao(so: int) -> dict | None:
-    return _load_depth()["dinh_cao"].get(str(so))
-
-
-def nghia_thu_thach(so: int) -> dict | None:
-    return _load_depth()["thu_thach"].get(str(so))
-
-
-def nghia_nam_ca_nhan(so: int) -> dict | None:
-    return _load_depth()["nam_ca_nhan"].get(str(so))
-
-
-def trich_nguon_depth() -> str:
-    return "Dòng Balliett → Jordan"
 
 
 def nguon(source_id: str) -> dict | None:
@@ -143,32 +173,47 @@ def nguon(source_id: str) -> dict | None:
     return None
 
 
-def chan_doan() -> dict:
-    """Xác nhận nguồn KB thật sự đang dùng — để kiểm tra Supabase đã nối chưa.
+# --------------------------------------------------------------------------- #
+# Chiều sâu
+# --------------------------------------------------------------------------- #
+def nghia_dinh_cao(so: int) -> dict | None:
+    return _load()["dinh_cao"].get(str(so))
 
-    THỬ THẬT: nếu có env Supabase, gọi Supabase ngay tại đây và báo trung thực
-    (không dùng cache, không giấu lỗi). Nhờ vậy biết chắc đang đọc từ đâu.
-    """
+
+def nghia_thu_thach(so: int) -> dict | None:
+    return _load()["thu_thach"].get(str(so))
+
+
+def nghia_nam_ca_nhan(so: int) -> dict | None:
+    return _load()["nam_ca_nhan"].get(str(so))
+
+
+def trich_nguon_depth() -> str:
+    return "Dòng Balliett → Jordan"
+
+
+# --------------------------------------------------------------------------- #
+# Chẩn đoán nguồn
+# --------------------------------------------------------------------------- #
+def chan_doan() -> dict:
     url = os.environ.get("SUPABASE_URL")
     key = os.environ.get("SUPABASE_ANON_KEY")
     if not url or not key:
         return {"da_cau_hinh_supabase": False, "nguon": "file",
-                "so_nghia": len(_from_file()["so_meanings"])}
+                "so_nghia": len(_from_files()["so_meanings"])}
     try:
         data = _from_supabase(url, key)
         return {
-            "da_cau_hinh_supabase": True,
-            "nguon": "supabase",
+            "da_cau_hinh_supabase": True, "nguon": "supabase",
             "so_nghia": len(data["so_meanings"]),
-            "so_nguon": len(data["sources"]),
-            "so_vi_tri": len(data["vi_tri"]),
+            "so_dinh_cao": len(data["dinh_cao"]),
+            "so_thu_thach": len(data["thu_thach"]),
+            "so_nam_ca_nhan": len(data["nam_ca_nhan"]),
             "supabase_host": url.split("//")[-1].split(".")[0][:12] + "…",
         }
     except Exception as e:
         return {
-            "da_cau_hinh_supabase": True,
-            "nguon": "file_fallback",
+            "da_cau_hinh_supabase": True, "nguon": "file_fallback",
             "canh_bao": "Có env Supabase nhưng đọc THẤT BẠI → đang rơi về file.",
-            "loi": str(e)[:300],
-            "so_nghia": len(_from_file()["so_meanings"]),
+            "loi": str(e)[:300], "so_nghia": len(_from_files()["so_meanings"]),
         }
