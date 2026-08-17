@@ -1,6 +1,6 @@
 -- Seed KB than so vao Supabase — sinh tu data/thanso_meanings.json
 -- Dan CA FILE nay vao Supabase SQL Editor roi bam Run.
--- (Da bao gom tao bang + RLS chi-doc + nap du lieu co dau tieng Viet.)
+-- (Tao bang + RLS chi-doc + nap du lieu co dau tieng Viet.)
 
 -- === 1. Tao bang ===
 -- KB tầng 2 — kho quy tắc luận giải thần số.
