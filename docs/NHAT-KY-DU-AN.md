@@ -87,6 +87,14 @@ chủ nước ngoài — chạm Nghị định 13/2023).
   8 lá golden + 2 lá aov.cc thật làm bằng chứng.
 - `baf867d` — Chuẩn bị deploy: auth web↔engine (`X-Engine-Key`), Dockerfile +
   `render.yaml`, Basic Auth staging, `.env.example`.
+- **Deploy staging XONG** — web: Vercel (`hieubanthan-nine.vercel.app`), engine:
+  Render (`hieubanthan-engine.onrender.com`). Auto-deploy khi push GitHub. Có
+  Basic Auth (mrduc / xem env Vercel). Engine Render gói Free ngủ sau 15'.
+- `2877f16` — **Giai đoạn B (thần số): tầng KB+RULES+NARRATIVE theo Cách B.**
+  KB có nguồn (`app/kb/`, dòng Balliett-Jordan, mỗi số có mặt tối + phản chứng
+  chống Barnum), tầng luận giải `app/luangiai/thanso.py` (chỉ ghép từ KB, tôn
+  trọng độ nhạy, chế độ template không cần LLM), endpoint `/v1/thanso/luan-giai`,
+  web hiện luận giải đầy đủ. Schema Supabase sẵn ở `supabase/migrations/`.
 
 **Trạng thái kiểm thử:** 88/88 test engine xanh, web typecheck xanh, toàn chuỗi
 chạy thật tại máy (trình duyệt → Next.js → engine → tính toán).
@@ -110,14 +118,21 @@ chạy thật tại máy (trình duyệt → Next.js → engine → tính toán)
 
 ## 8. Còn phải làm (theo thứ tự)
 
-1. **Deploy staging** — theo hướng dẫn ở artifact (mục 10). Bắt đầu: tạo repo
-   GitHub private, đẩy code.
-2. **SPEC-005 wiring** — hàm `calc/ansao.py` gọi iztro qua Node subprocess,
-   endpoint `/v1/tuvi/an-sao`, test đối chiếu `ziwei_golden.json`.
-3. **Giai đoạn B (Supabase)** — kho quy tắc luận giải, tài khoản người dùng,
-   sổ nghiệm lý.
-4. **Giai đoạn C** — trang tự quản trị nội dung + bài SEO.
-5. **Cổng pháp lý Tuần 0** (TRƯỚC khi công khai) — merchant thanh toán, luật sư
+1. ✅ ~~Deploy staging~~ — XONG.
+2. ✅ ~~Giai đoạn B thần số (pipeline luận giải)~~ — XONG, chạy trên KB file.
+3. **Chuyển KB vào Supabase** — chạy migration `0001_kb_thanso.sql`, nạp
+   `data/thanso_meanings.json` vào bảng, đổi `app/kb/store.py` từ đọc file sang
+   truy vấn Supabase. Cần: thông tin kết nối Supabase (env), quyết định thư viện
+   truy cập DB (thêm dependency — phải hỏi).
+4. **Mở rộng kho nội dung thần số** — hiện chỉ có nghĩa số cơ bản; thêm đỉnh cao,
+   thử thách, năm cá nhân, chu kỳ. Đây là công viết nội dung.
+5. **SPEC-005 wiring** — an sao tử vi đầy đủ qua iztro (Node subprocess),
+   endpoint `/v1/tuvi/an-sao`, test đối chiếu `ziwei_golden.json`. Rồi lặp lại
+   pipeline KB+luận giải cho tử vi (kho lớn).
+6. **Lớp LLM (tầng NARRATIVE nâng cao)** — OpenRouter, chỉ diễn đạt lại các
+   trường từ KB, cấm thêm dữ kiện. Hiện đang chạy chế độ template không LLM.
+7. **Giai đoạn C** — trang tự quản trị nội dung + bài SEO.
+8. **Cổng pháp lý Tuần 0** (TRƯỚC khi công khai) — merchant thanh toán, luật sư
    duyệt disclaimer, pháp nhân.
 
 ---
