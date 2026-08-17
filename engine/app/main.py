@@ -17,6 +17,7 @@ from pydantic import BaseModel, Field, field_validator
 
 from app import config
 from app.calc import thanso, timebase
+from app.kb import store as kb_store
 from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import thanso as luangiai_thanso
 from app.narrative import llm as narrative_llm
@@ -62,6 +63,12 @@ def health() -> dict:
         "engine_version": ENGINE_VERSION,
         "ty_boundary_set": config.TY_BOUNDARY_POLICY is not None,
     }
+
+
+@app.get("/v1/kb/status")
+def kb_status() -> dict:
+    """Chẩn đoán tầng KB: đang đọc từ Supabase hay file, có lỗi gì không."""
+    return {"engine_version": ENGINE_VERSION, **kb_store.chan_doan()}
 
 
 # --------------------------------------------------------------------------- #

@@ -111,3 +111,34 @@ def nguon(source_id: str) -> dict | None:
         if s["id"] == source_id:
             return s
     return None
+
+
+def chan_doan() -> dict:
+    """Xác nhận nguồn KB thật sự đang dùng — để kiểm tra Supabase đã nối chưa.
+
+    THỬ THẬT: nếu có env Supabase, gọi Supabase ngay tại đây và báo trung thực
+    (không dùng cache, không giấu lỗi). Nhờ vậy biết chắc đang đọc từ đâu.
+    """
+    url = os.environ.get("SUPABASE_URL")
+    key = os.environ.get("SUPABASE_ANON_KEY")
+    if not url or not key:
+        return {"da_cau_hinh_supabase": False, "nguon": "file",
+                "so_nghia": len(_from_file()["so_meanings"])}
+    try:
+        data = _from_supabase(url, key)
+        return {
+            "da_cau_hinh_supabase": True,
+            "nguon": "supabase",
+            "so_nghia": len(data["so_meanings"]),
+            "so_nguon": len(data["sources"]),
+            "so_vi_tri": len(data["vi_tri"]),
+            "supabase_host": url.split("//")[-1].split(".")[0][:12] + "…",
+        }
+    except Exception as e:
+        return {
+            "da_cau_hinh_supabase": True,
+            "nguon": "file_fallback",
+            "canh_bao": "Có env Supabase nhưng đọc THẤT BẠI → đang rơi về file.",
+            "loi": str(e)[:300],
+            "so_nghia": len(_from_file()["so_meanings"]),
+        }
