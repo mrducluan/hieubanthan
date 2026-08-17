@@ -131,13 +131,16 @@ chạy thật tại máy (trình duyệt → Next.js → engine → tính toán)
    (supabase/file) — đã xác nhận `nguon: supabase`. Cache 60s + fallback file.
    **Tự quản trị:** sửa nội dung ngay trong Supabase Table Editor →
    `thanso_so_meanings`, web tự cập nhật trong 1 phút. RLS chỉ-đọc công khai.
-4. **#2 Chiều sâu thần số** (đỉnh cao, thử thách, năm cá nhân, chu kỳ) — engine
-   ĐÃ CÓ phép tính (`dinh_cao`, `thu_thach`, `nam_ca_nhan`, `chu_ky_9_nam`).
-   CHỦ DỰ ÁN CHỌN: viết nội dung RIÊNG cho từng phần (không tái dùng nghĩa số).
-   → Đang chờ nội dung. Kèm ý tưởng: UI cho khách nhập câu hỏi → thu thêm phí
-   (gói Q&A dùng lớp LLM #3).
-5. **#4 Thiết kế lại trang đọc — premium.** CHỦ DỰ ÁN CHỌN: redesign toàn bộ.
-   LƯU Ý TRÌNH TỰ: làm SAU khi #2 có nội dung, để không phải thiết kế hai lần.
+4. ✅ ~~#2 Chiều sâu thần số~~ — XONG. Nội dung `app/kb/data/thanso_depth.json`
+   (đỉnh cao 1–9,11,22 · thử thách 0–8 · năm cá nhân 1–9), viết theo Balliett-
+   Jordan, giữ chống Barnum. `luan_chieu_sau()` ghép phép tính engine + nghĩa KB;
+   năm cá nhân dự báo 3 năm tới. Web hiện đầy đủ. **Nội dung chiều sâu đang ở
+   FILE (chưa Supabase)** — chuyển sau khi cấu trúc ổn định (có thể đổi khi #4).
+5. **#4 Thiết kế lại trang đọc — premium.** Giờ #2 có nội dung → đến lượt #4.
+   CHỦ DỰ ÁN CHỌN: redesign toàn bộ. Dùng `artifact-design`/`artifact-diagramming`.
+6. **Ý tưởng chưa làm:** UI khách nhập câu hỏi → gói Q&A trả phí (dùng lớp LLM #3,
+   endpoint `/v1/thanso/van`). Cần key OpenRouter + hệ thống thanh toán (Giai đoạn
+   thanh toán, sau).
 5. **SPEC-005 wiring** — an sao tử vi đầy đủ qua iztro (Node subprocess),
    endpoint `/v1/tuvi/an-sao`, test đối chiếu `ziwei_golden.json`. Rồi lặp lại
    pipeline KB+luận giải cho tử vi (kho lớn).
