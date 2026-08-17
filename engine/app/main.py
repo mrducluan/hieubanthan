@@ -18,6 +18,7 @@ from pydantic import BaseModel, Field, field_validator
 from app import config
 from app.calc import thanso, timebase
 from app.config import ENGINE_VERSION, HourConfidence, Region
+from app.luangiai import thanso as luangiai_thanso
 from app.tuvi_api import router as tuvi_router
 
 app = FastAPI(
@@ -107,6 +108,17 @@ def api_do_nhay(inp: ThanSoInput) -> dict:
         "so_ket_qua_khac_nhau": {k: len(v) for k, v in dn.items()},
         "canh_bao": canh_bao,
     }
+
+
+@app.post("/v1/thanso/luan-giai")
+def api_luan_giai(inp: ThanSoInput) -> dict:
+    """Luận giải thần số đầy đủ — con số + nghĩa CÓ NGUỒN + mặt tối + phản chứng.
+
+    Đây là tầng KB+RULES+NARRATIVE: chỉ ghép nội dung từ kho quy tắc, tôn trọng
+    độ nhạy (chỉ số chưa xác định thì nói thẳng, không luận bừa).
+    """
+    inp.kiem_tra_ngay()
+    return luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam)
 
 
 class ChuKyInput(BaseModel):

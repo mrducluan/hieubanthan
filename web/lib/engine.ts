@@ -76,3 +76,39 @@ export function doNhay(input: {
 }): Promise<DoNhayResult> {
   return post<DoNhayResult>("/v1/thanso/do-nhay", input);
 }
+
+export interface NghiaSo {
+  gia_tri: number;
+  tu_khoa: string;
+  mat_toi: string;
+  phan_chung: string;
+  so_cai: boolean;
+  trich_nguon: string;
+}
+export interface ViTriLuanGiai {
+  vi_tri: string;
+  ten: string;
+  khung: string;
+  on_dinh: boolean;
+  gia_tri_co_the: number[];
+  nghia: NghiaSo[];
+  canh_bao?: string;
+}
+export interface LuanGiaiResult {
+  engine_version: string;
+  ngay_sinh: string;
+  ten_bien_the_da_quet: string[];
+  cac_vi_tri: ViTriLuanGiai[];
+  tom_tat_do_tin: string;
+  cach_doc: string;
+  trich_nguon_chung: string;
+}
+
+export function luanGiai(input: {
+  ho_ten: string[];
+  ngay: number;
+  thang: number;
+  nam: number;
+}): Promise<LuanGiaiResult> {
+  return post<LuanGiaiResult>("/v1/thanso/luan-giai", input);
+}

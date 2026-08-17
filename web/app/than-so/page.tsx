@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { doNhay, EngineError, type DoNhayResult } from "@/lib/engine";
+import { luanGiai, EngineError, type LuanGiaiResult } from "@/lib/engine";
 
 export const dynamic = "force-dynamic";
 
@@ -29,11 +29,11 @@ export default async function ThanSoPage({ searchParams }: Props) {
   const nam = Number(str(searchParams.nam));
   const daNhap = ten1 !== "" && ngay > 0 && thang > 0 && nam > 0;
 
-  let kq: DoNhayResult | null = null;
+  let kq: LuanGiaiResult | null = null;
   let loi: string | null = null;
   if (daNhap) {
     try {
-      kq = await doNhay({
+      kq = await luanGiai({
         ho_ten: ten2 ? [ten1, ten2] : [ten1],
         ngay,
         thang,
@@ -130,39 +130,74 @@ export default async function ThanSoPage({ searchParams }: Props) {
       {kq && (
         <section style={{ marginTop: 24 }}>
           <h2 style={{ fontSize: 20 }}>Kết quả — {kq.ngay_sinh}</h2>
-          <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
-            {Object.entries(kq.khoang_ket_qua_co_the).map(([chiSo, giaTri]) => {
-              const onDinh = giaTri.length === 1;
-              return (
-                <div
-                  key={chiSo}
-                  style={{
-                    padding: "14px 18px",
-                    background: "#fff",
-                    border: `1px solid ${onDinh ? "#9dbfb0" : "#d9c48f"}`,
-                    borderLeft: `4px solid ${onDinh ? "#35695a" : "#8a6420"}`,
-                    borderRadius: 6,
-                  }}
-                >
+          <p style={{ fontSize: 13, color: "#5b6a60", marginTop: 4 }}>
+            {kq.tom_tat_do_tin}
+          </p>
+          <p style={{ fontSize: 13, color: "#44534a", background: "#e0ebe5",
+                      border: "1px solid #b9d2c6", borderRadius: 6,
+                      padding: "10px 14px", marginTop: 10, maxWidth: "62ch" }}>
+            {kq.cach_doc}
+          </p>
+
+          <div style={{ display: "grid", gap: 14, marginTop: 16 }}>
+            {kq.cac_vi_tri.map((vt) => (
+              <div
+                key={vt.vi_tri}
+                style={{
+                  background: "#fff",
+                  border: `1px solid ${vt.on_dinh ? "#9dbfb0" : "#d9c48f"}`,
+                  borderLeft: `4px solid ${vt.on_dinh ? "#35695a" : "#8a6420"}`,
+                  borderRadius: 6,
+                  overflow: "hidden",
+                }}
+              >
+                <div style={{ padding: "13px 18px",
+                              borderBottom: vt.nghia.length ? "1px solid #eef2ee" : "none" }}>
                   <div style={{ display: "flex", justifyContent: "space-between",
                                 alignItems: "baseline" }}>
-                    <strong>{TEN_CHI_SO[chiSo] ?? chiSo}</strong>
+                    <strong style={{ fontSize: 16 }}>{TEN_CHI_SO[vt.vi_tri] ?? vt.ten}</strong>
                     <span style={{ fontSize: 22, fontWeight: 700 }}>
-                      {giaTri.join(" · ")}
+                      {vt.gia_tri_co_the.join(" · ")}
                     </span>
                   </div>
-                  <p style={{ margin: "4px 0 0", fontSize: 13, color: "#5b6a60" }}>
-                    {onDinh
-                      ? "Ổn định — mọi quy ước phiên âm đều cho cùng kết quả."
-                      : `${giaTri.length} giá trị khả dĩ tuỳ quy ước phiên âm và cộng gộp. Cần chốt quy ước trước khi đọc luận chi tiết.`}
+                  <p style={{ margin: "3px 0 0", fontSize: 12.5, color: "#7a877e" }}>
+                    {vt.khung}
                   </p>
+                  {vt.canh_bao && (
+                    <p style={{ margin: "8px 0 0", fontSize: 13, color: "#8a6420" }}>
+                      ⚠ {vt.canh_bao}
+                    </p>
+                  )}
                 </div>
-              );
-            })}
+
+                {vt.nghia.map((n) => (
+                  <div key={n.gia_tri} style={{ padding: "12px 18px",
+                          borderTop: "1px solid #f2f5f2" }}>
+                    <div style={{ fontSize: 14.5, fontWeight: 600, color: "#22493f" }}>
+                      Số {n.gia_tri}{n.so_cai ? " (số cái)" : ""} — {n.tu_khoa}
+                    </div>
+                    <p style={{ margin: "6px 0 0", fontSize: 13.5 }}>
+                      <strong style={{ color: "#9c4433" }}>Mặt tối:</strong> {n.mat_toi}
+                    </p>
+                    <p style={{ margin: "5px 0 0", fontSize: 13.5, fontStyle: "italic",
+                                color: "#33424f" }}>
+                      Tự kiểm: {n.phan_chung}
+                    </p>
+                    <p style={{ margin: "6px 0 0", fontSize: 11.5, color: "#7a877e" }}>
+                      Nguồn: {n.trich_nguon}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
-          <p style={{ marginTop: 14, fontSize: 12, color: "#7a877e" }}>
-            Engine v{kq.engine_version} · Tên đã quét:{" "}
-            {kq.ten_bien_the_da_quet.join(", ")}
+
+          <p style={{ marginTop: 16, fontSize: 12, color: "#7a877e",
+                      maxWidth: "62ch", lineHeight: 1.5 }}>
+            {kq.trich_nguon_chung}
+          </p>
+          <p style={{ marginTop: 6, fontSize: 11.5, color: "#9aa69d" }}>
+            Engine v{kq.engine_version} · Tên đã quét: {kq.ten_bien_the_da_quet.join(", ")}
           </p>
         </section>
       )}

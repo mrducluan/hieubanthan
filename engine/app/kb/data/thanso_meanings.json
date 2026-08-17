@@ -1,0 +1,35 @@
+{
+  "_nguon": "Cau truc hoa tu source-skills/thanso-hoc/references/y-nghia-so.md (chu du an tu viet). KHONG bia them.",
+  "_triet_ly": "Cach B: moi luan giai truy ve nguon. Moi so BAT BUOC co mat_toi + phan_chung (chong Barnum). Neu KB khong co thi im lang.",
+  "sources": [
+    {
+      "id": "balliett_jordan",
+      "ten": "Dong Balliett -> Jordan",
+      "mo_ta": "Than so hoc Pythagoras hien dai, My 1905-1965 (L. Dow Balliett, Juno Jordan).",
+      "luu_y": "Cac mo ta khac nhau tuy tac gia — khong co ban chuan. Dung nhu de tai tham khao, khong nhu su that."
+    }
+  ],
+  "schools": [
+    { "id": "pythagoras_vn", "ten": "Pythagoras (ban Viet, bien soan boi chu du an)" }
+  ],
+  "so_meanings": {
+    "1":  { "tu_khoa": "Khoi dau, doc lap, dan dat",              "mat_toi": "Ap dat, kho hop tac, so bi lu mo",                          "phan_chung": "Co bao nhieu lan ban chu dong nhuong quyen quyet dinh ma khong thay kho chiu?", "source_id": "balliett_jordan", "school_id": "pythagoras_vn" },
+    "2":  { "tu_khoa": "Hop tac, nhay cam, hoa giai",             "mat_toi": "Ne xung dot den muc de viec mung mu",                       "phan_chung": "Lan gan nhat ban noi 'khong' thang, khong giai thich dai dong?",              "source_id": "balliett_jordan", "school_id": "pythagoras_vn" },
+    "3":  { "tu_khoa": "Dien dat, sang tao, giao tiep",           "mat_toi": "Tan man, bo giua, noi nhieu hon lam",                       "phan_chung": "Ban co du an nao theo toi cung du da het hung?",                              "source_id": "balliett_jordan", "school_id": "pythagoras_vn" },
+    "4":  { "tu_khoa": "Nen tang, ky luat, xay dung",            "mat_toi": "Cung nhac, so doi, cay ma khong hoi de lam gi",             "phan_chung": "Lan gan nhat ban pha bo mot he thong minh da dung?",                          "source_id": "balliett_jordan", "school_id": "pythagoras_vn" },
+    "5":  { "tu_khoa": "Tu do, bien dong, trai nghiem",          "mat_toi": "Boc, thieu ben, doi huong khi vua kho",                     "phan_chung": "Ban da o dau du lau de thay hau qua dai han cua viec minh lam?",              "source_id": "balliett_jordan", "school_id": "pythagoras_vn" },
+    "6":  { "tu_khoa": "Trach nhiem, cham soc, gia dinh",        "mat_toi": "Kiem soat duoi vo quan tam, tu hy sinh roi oan",            "phan_chung": "Ban co de nguoi khac tu xu ly viec cua ho ma khong can vao?",                "source_id": "balliett_jordan", "school_id": "pythagoras_vn" },
+    "7":  { "tu_khoa": "Phan tich, chieu sau, doc lap tu tuong", "mat_toi": "Xa cach, hoai nghi thanh luoi tin, phan tich thay hanh dong","phan_chung": "Lan gan nhat ban quyet ma chua du du lieu, va on voi dieu do?",             "source_id": "balliett_jordan", "school_id": "pythagoras_vn" },
+    "8":  { "tu_khoa": "Quyen luc, to chuc, vat chat",           "mat_toi": "Do nguoi bang ket qua, kho nghi, lan gia tri voi gia ca",   "phan_chung": "Ban co viec gi lam ma khong tinh toi loi ich?",                              "source_id": "balliett_jordan", "school_id": "pythagoras_vn" },
+    "9":  { "tu_khoa": "Bao dung, ly tuong, cho di",             "mat_toi": "Cuu nguoi de tranh nhin minh, ky vong roi that vong",       "phan_chung": "Ban co nhan giup do ma khong thay mac no?",                                   "source_id": "balliett_jordan", "school_id": "pythagoras_vn" },
+    "11": { "tu_khoa": "Truc giac, cam nhan, truyen cam hung",   "mat_toi": "Lo lang nen, ly tuong qua da, de kiet",                     "phan_chung": "Truc giac cua ban da sai lan nao, va ban co ghi lai khong?",                  "source_id": "balliett_jordan", "school_id": "pythagoras_vn", "so_cai": true },
+    "22": { "tu_khoa": "Kien tao lon, bien tam nhin thanh he thong", "mat_toi": "Ganh qua suc, hoan vi 'chua du lon'",                    "phan_chung": "Ban da hoan thanh cai gi nho, gan day?",                                      "source_id": "balliett_jordan", "school_id": "pythagoras_vn", "so_cai": true },
+    "33": { "tu_khoa": "Dan dat bang phung su",                  "mat_toi": "Hoa tan ban than vao vai tro",                              "phan_chung": "Ban muon gi cho rieng minh, khong lien quan toi ai?",                         "source_id": "balliett_jordan", "school_id": "pythagoras_vn", "so_cai": true }
+  },
+  "vi_tri": {
+    "duong_doi": { "ten": "Duong doi", "khung": "manh chu dao cua ca doi — huong di va bai hoc trung tam" },
+    "su_menh":   { "ten": "Su menh",   "khung": "muc tieu can vun dap, cai ban huong toi" },
+    "linh_hon":  { "ten": "Linh hon",  "khung": "dong luc ben trong, dieu ban thuc su mong muon" },
+    "nhan_cach": { "ten": "Nhan cach", "khung": "ve ngoai nguoi khac cam nhan truoc khi hieu ban" }
+  }
+}
