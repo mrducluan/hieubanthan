@@ -141,6 +141,22 @@ def api_luan_giai_van(inp: ThanSoInput) -> dict:
     return narrative_llm.dien_dat(reading)
 
 
+class HoiInput(ThanSoInput):
+    cau_hoi: str = Field(min_length=3, max_length=400)
+
+
+@app.post("/v1/thanso/hoi")
+def api_hoi(inp: HoiInput) -> dict:
+    """Q&A — trả lời câu hỏi của người dùng, gắn vào con số của họ.
+
+    Giữ định vị 'tham khảo văn hoá': phản chiếu con số vào câu hỏi, KHÔNG dự
+    đoán. Không có key LLM → báo tính năng chưa bật, không bịa.
+    """
+    inp.kiem_tra_ngay()
+    reading = luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam)
+    return narrative_llm.tra_loi_cau_hoi(reading, inp.cau_hoi.strip())
+
+
 class ChuKyInput(BaseModel):
     ngay: int = Field(ge=1, le=31)
     thang: int = Field(ge=1, le=12)

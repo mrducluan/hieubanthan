@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { luanGiai, EngineError, type LuanGiaiResult } from "@/lib/engine";
 import { PinnacleArc } from "./PinnacleArc";
+import { QandA } from "./QandA";
 
 export const dynamic = "force-dynamic";
 
@@ -171,6 +172,8 @@ export default async function ThanSoPage({ searchParams }: Props) {
               </div>
             </div>
           )}
+
+          <QandA hoTen={ten2 ? [ten1, ten2] : [ten1]} ngay={ngay} thang={thang} nam={nam} />
 
           <p className="source-foot">{kq.trich_nguon_chung}</p>
           <p className="engine-foot">

@@ -53,6 +53,60 @@ def dung_prompt(reading: dict) -> list[dict]:
     ]
 
 
+_SYSTEM_HOI = """Bạn giúp người dùng SOI câu hỏi của họ qua lăng kính thần số \
+học CỦA CHÍNH HỌ. Bạn KHÔNG phải thầy bói.
+
+Dữ liệu con số của người dùng được cung cấp dưới dạng JSON. Nhiệm vụ: trả lời \
+câu hỏi bằng cách KẾT NỐI câu hỏi với các con số và ý nghĩa đã cho.
+
+RÀNG BUỘC TUYỆT ĐỐI — vi phạm là làm hỏng cả sản phẩm:
+- KHÔNG dự đoán tương lai. KHÔNG nói "bạn sẽ", "chắc chắn", "sắp tới bạn gặp". \
+Chỉ phản chiếu: "theo con số X của bạn, cổ thư mô tả kiểu người…", "cấu trúc \
+này thường gắn với…".
+- CHỈ dùng dữ kiện trong JSON đã cho. KHÔNG thêm con số, sự kiện, tên người, \
+ngày tháng, hay bất cứ chi tiết nào không có trong dữ liệu.
+- Luôn giữ tính hai mặt: nhắc cả mặt tối liên quan, không chỉ lời hay.
+- Nếu câu hỏi vượt ngoài điều con số nói được (vd hỏi số lô đề, sức khoẻ cụ \
+thể, ngày cưới chính xác), nói thẳng: thần số học không trả lời được điều đó, \
+và không bịa.
+- Kết bằng một câu tự kiểm hoặc nhắc: đây là góc nhìn tham khảo văn hoá để bạn \
+tự soi, không phải câu trả lời chắc chắn về đời bạn.
+- Trả lời tiếng Việt, ấm áp, ngắn gọn (3–6 câu), không sáo rỗng."""
+
+
+def tra_loi_cau_hoi(reading: dict, cau_hoi: str) -> dict:
+    """Trả lời một câu hỏi của người dùng, GẮN vào con số của họ, giọng tham chiếu.
+
+    Không key → báo tính năng chưa bật (không bịa câu trả lời).
+    """
+    key = _có_key()
+    if not key:
+        return {"da_bat_llm": False,
+                "thong_bao": "Tính năng hỏi sâu cần bật lớp AI (chưa cấu hình).",
+                "cau_tra_loi": None}
+
+    model = os.environ.get("OPENROUTER_MODEL", DEFAULT_MODEL)
+    messages = [
+        {"role": "system", "content": _SYSTEM_HOI},
+        {"role": "user", "content":
+            f"Câu hỏi của người dùng: {cau_hoi}\n\n"
+            f"Con số của họ (JSON, chỉ dùng dữ liệu này):\n"
+            + json.dumps(reading, ensure_ascii=False)},
+    ]
+    try:
+        with httpx.Client(timeout=45) as c:
+            r = c.post(OPENROUTER_URL,
+                       headers={"Authorization": f"Bearer {key}",
+                                "Content-Type": "application/json"},
+                       json={"model": model, "messages": messages, "temperature": 0.6})
+            r.raise_for_status()
+            ans = r.json()["choices"][0]["message"]["content"]
+        return {"da_bat_llm": True, "model": model, "cau_tra_loi": ans}
+    except Exception as e:
+        return {"da_bat_llm": True, "cau_tra_loi": None,
+                "loi": "Xin lỗi, chưa trả lời được lúc này. " + str(e)[:120]}
+
+
 def dien_dat(reading: dict) -> dict:
     """Trả về bản luận kèm văn xuôi nếu có LLM, ngược lại giữ template."""
     key = _có_key()

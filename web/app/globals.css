@@ -217,6 +217,39 @@ a { color: var(--jade); text-decoration-thickness: 1px; text-underline-offset: 2
 .year .do-avoid .do { color: var(--jade); }
 .year .do-avoid .avoid { color: var(--clay); }
 
+/* ---------- Q&A hỏi sâu ---------- */
+.qa { margin-top: 34px; }
+.qa-intro { font-size: .88rem; color: var(--ink-soft); max-width: var(--measure); margin-top: -4px; }
+.qa-suggest { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+.qa-group { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+.qa-group-name {
+  font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-faint); font-weight: 600; width: 100%; margin-bottom: 1px;
+}
+.qa-chip {
+  font-family: inherit; font-size: .86rem; color: var(--jade-deep);
+  background: var(--jade-wash); border: 1px solid var(--line);
+  border-radius: 100px; padding: 7px 13px; cursor: pointer; transition: border-color .15s ease;
+}
+.qa-chip:hover:not(:disabled) { border-color: var(--jade); }
+.qa-chip:disabled { opacity: .55; cursor: default; }
+.qa-form { display: flex; gap: 8px; margin-top: 16px; }
+.qa-form input {
+  flex: 1; padding: 11px 14px; font-size: 1rem; font-family: inherit;
+  color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line); border-radius: var(--radius);
+}
+.qa-form input:focus-visible { outline: 2px solid var(--jade); outline-offset: 1px; border-color: var(--jade); }
+.qa-form .btn-primary { white-space: nowrap; }
+.qa-answer {
+  margin-top: 16px; padding: 16px 18px; background: var(--raised);
+  border: 1px solid var(--line); border-left: 3px solid var(--jade);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.qa-answer p { font-size: .98rem; line-height: 1.68; white-space: pre-wrap; }
+.qa-note { margin-top: 14px; font-size: .88rem; color: var(--gold);
+  background: var(--gold-wash); border-radius: var(--radius); padding: 11px 15px; }
+
 .source-foot { margin-top: 26px; font-size: .78rem; color: var(--ink-faint);
   max-width: var(--measure); line-height: 1.55; }
 .engine-foot { margin-top: 6px; font-size: .72rem; color: var(--ink-faint); opacity: .8; }
