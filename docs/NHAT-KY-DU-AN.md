@@ -141,9 +141,15 @@ chạy thật tại máy (trình duyệt → Next.js → engine → tính toán)
    Be Vietnam Pro), layout mới. Chữ ký: `PinnacleArc.tsx` — dải đời SVG chia 4
    giai đoạn theo tuổi, đánh dấu tuổi hiện tại. Build + typecheck xanh, live.
    (Chưa soi được bằng screenshot do môi trường — chờ chủ dự án review mắt thường.)
-6. **Ý tưởng chưa làm:** UI khách nhập câu hỏi → gói Q&A trả phí (dùng lớp LLM #3,
-   endpoint `/v1/thanso/van`). Cần key OpenRouter + hệ thống thanh toán (Giai đoạn
-   thanh toán, sau).
+6. ✅ ~~Chiều sâu lên Supabase~~ — schema `0002`, store hợp nhất (đọc chiều sâu
+   chịu lỗi riêng). Seed `supabase/seed_thanso_depth.sql` — chủ dự án chạy trong
+   SQL Editor để tự quản trị cả phần chiều sâu.
+7. ✅ ~~Q&A hỏi sâu~~ — endpoint `/v1/thanso/hoi` + prompt giữ định vị (cấm dự
+   đoán, chỉ dùng dữ liệu con số, giữ mặt tối). Web `QandA.tsx`: chip gợi ý câu
+   hỏi theo nhóm + ô nhập tự do. **Cần key `OPENROUTER_API_KEY` trên Render để bật.**
+8. **CHƯA làm — paywall Q&A:** "trả phí" cần hệ thanh toán + tài khoản (chưa có).
+   Hiện Q&A chạy tự do trên staging để thử. Paywall = giai đoạn thanh toán (kèm
+   cổng pháp lý Tuần 0). Định vị Q&A: THAM KHẢO, không dự đoán (giữ pháp lý).
 5. **SPEC-005 wiring** — an sao tử vi đầy đủ qua iztro (Node subprocess),
    endpoint `/v1/tuvi/an-sao`, test đối chiếu `ziwei_golden.json`. Rồi lặp lại
    pipeline KB+luận giải cho tử vi (kho lớn).
