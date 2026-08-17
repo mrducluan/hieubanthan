@@ -95,12 +95,37 @@ export interface ViTriLuanGiai {
   gia_tri_khac: number[];
   ghi_chu_do_nhay?: string;
 }
+export interface DinhCao {
+  dinh: number;
+  so: number;
+  tu_tuoi: number;
+  den_tuoi: number | null;
+  nghia: { chu_de: string; y_nghia: string; bong_toi: string;
+           phan_chung?: string; so_cai?: boolean } | null;
+}
+export interface NamCaNhan {
+  nam: number;
+  tuoi: number;
+  so: number;
+  nghia: { chu_de: string; y_nghia: string; nen: string; tranh: string } | null;
+}
+export interface ChieuSau {
+  dinh_cao: DinhCao[];
+  thu_thach_chinh: {
+    so: number;
+    nghia: { mo_ta: string; y_nghia: string; cach_vuot: string } | null;
+  };
+  nam_ca_nhan: NamCaNhan[];
+  trich_nguon: string;
+  cach_doc_chieu_sau: string;
+}
 export interface LuanGiaiResult {
   engine_version: string;
   ngay_sinh: string;
   ten_chinh: string;
   ten_bien_the_da_quet: string[];
   cac_vi_tri: ViTriLuanGiai[];
+  chieu_sau: ChieuSau;
   tom_tat_do_tin: string;
   cach_doc: string;
   trich_nguon_chung: string;

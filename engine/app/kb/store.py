@@ -12,6 +12,7 @@ trên phải im lặng, không được bịa.
 """
 from __future__ import annotations
 
+import functools
 import json
 import os
 import time
@@ -104,6 +105,35 @@ def nghia_so(gia_tri: int) -> SoMeaning | None:
 
 def khung_vi_tri(vi_tri: str) -> dict | None:
     return _load()["vi_tri"].get(vi_tri)
+
+
+# --------------------------------------------------------------------------- #
+# Nội dung CHIỀU SÂU (đỉnh cao, thử thách, năm cá nhân) — đọc từ file bundled.
+# (Nội dung số cơ bản đã ở Supabase; phần chiều sâu dùng file cho tới khi cấu
+# trúc ổn định, rồi mới chuyển Supabase. Bundled = luôn có, không phụ thuộc mạng.)
+# --------------------------------------------------------------------------- #
+_DEPTH = Path(__file__).parent / "data" / "thanso_depth.json"
+
+
+@functools.lru_cache(maxsize=1)
+def _load_depth() -> dict:
+    return json.loads(_DEPTH.read_text(encoding="utf-8"))
+
+
+def nghia_dinh_cao(so: int) -> dict | None:
+    return _load_depth()["dinh_cao"].get(str(so))
+
+
+def nghia_thu_thach(so: int) -> dict | None:
+    return _load_depth()["thu_thach"].get(str(so))
+
+
+def nghia_nam_ca_nhan(so: int) -> dict | None:
+    return _load_depth()["nam_ca_nhan"].get(str(so))
+
+
+def trich_nguon_depth() -> str:
+    return "Dòng Balliett → Jordan"
 
 
 def nguon(source_id: str) -> dict | None:

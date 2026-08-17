@@ -192,7 +192,88 @@ export default async function ThanSoPage({ searchParams }: Props) {
             ))}
           </div>
 
-          <p style={{ marginTop: 16, fontSize: 12, color: "#7a877e",
+          {kq.chieu_sau && (
+            <div style={{ marginTop: 30 }}>
+              <h2 style={{ fontSize: 20 }}>Chiều sâu</h2>
+              <p style={{ fontSize: 12.5, color: "#5b6a60", marginTop: 4, maxWidth: "62ch" }}>
+                {kq.chieu_sau.cach_doc_chieu_sau}
+              </p>
+
+              {/* Đỉnh cao theo giai đoạn tuổi */}
+              <h3 style={{ fontSize: 15, marginTop: 18, color: "#22493f" }}>
+                Đỉnh cao — mạch chủ đạo từng giai đoạn đời
+              </h3>
+              <div style={{ display: "grid", gap: 8, marginTop: 8 }}>
+                {kq.chieu_sau.dinh_cao.map((p) =>
+                  p.nghia ? (
+                    <div key={p.dinh} style={{ background: "#fff", border: "1px solid #cdd8d0",
+                            borderRadius: 6, padding: "11px 15px" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                        <strong style={{ fontSize: 14 }}>
+                          {p.nghia.chu_de}
+                        </strong>
+                        <span style={{ fontFamily: "monospace", fontSize: 12.5, color: "#7a877e" }}>
+                          số {p.so} · {p.den_tuoi ? `${p.tu_tuoi}–${p.den_tuoi} tuổi` : `${p.tu_tuoi}+ tuổi`}
+                        </span>
+                      </div>
+                      <p style={{ margin: "5px 0 0", fontSize: 13 }}>{p.nghia.y_nghia}</p>
+                      <p style={{ margin: "4px 0 0", fontSize: 12.5, color: "#9c4433" }}>
+                        Bóng tối: {p.nghia.bong_toi}
+                      </p>
+                    </div>
+                  ) : null,
+                )}
+              </div>
+
+              {/* Thử thách chính */}
+              {kq.chieu_sau.thu_thach_chinh.nghia && (
+                <>
+                  <h3 style={{ fontSize: 15, marginTop: 18, color: "#22493f" }}>
+                    Thử thách chính — bài học lặp lại
+                  </h3>
+                  <div style={{ background: "#f6e5e1", border: "1px solid #e0b7ab",
+                          borderRadius: 6, padding: "11px 15px", marginTop: 8 }}>
+                    <strong style={{ fontSize: 14 }}>
+                      Số {kq.chieu_sau.thu_thach_chinh.so} — {kq.chieu_sau.thu_thach_chinh.nghia.mo_ta}
+                    </strong>
+                    <p style={{ margin: "5px 0 0", fontSize: 13 }}>
+                      {kq.chieu_sau.thu_thach_chinh.nghia.y_nghia}
+                    </p>
+                    <p style={{ margin: "4px 0 0", fontSize: 13, color: "#22493f" }}>
+                      Cách vượt: {kq.chieu_sau.thu_thach_chinh.nghia.cach_vuot}
+                    </p>
+                  </div>
+                </>
+              )}
+
+              {/* Năm cá nhân — dự báo */}
+              <h3 style={{ fontSize: 15, marginTop: 18, color: "#22493f" }}>
+                Năm cá nhân — nhịp từng năm sắp tới
+              </h3>
+              <div style={{ display: "grid", gap: 8, marginTop: 8 }}>
+                {kq.chieu_sau.nam_ca_nhan.map((n) =>
+                  n.nghia ? (
+                    <div key={n.nam} style={{ background: "#fff", border: "1px solid #cdd8d0",
+                            borderLeft: "4px solid #8a6420", borderRadius: 6, padding: "11px 15px" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                        <strong style={{ fontSize: 14 }}>{n.nam} — {n.nghia.chu_de}</strong>
+                        <span style={{ fontFamily: "monospace", fontSize: 12.5, color: "#7a877e" }}>
+                          số {n.so} · {n.tuoi} tuổi
+                        </span>
+                      </div>
+                      <p style={{ margin: "5px 0 0", fontSize: 13 }}>{n.nghia.y_nghia}</p>
+                      <p style={{ margin: "4px 0 0", fontSize: 12.5 }}>
+                        <span style={{ color: "#35695a" }}>Nên:</span> {n.nghia.nen}{" · "}
+                        <span style={{ color: "#9c4433" }}>Tránh:</span> {n.nghia.tranh}
+                      </p>
+                    </div>
+                  ) : null,
+                )}
+              </div>
+            </div>
+          )}
+
+          <p style={{ marginTop: 24, fontSize: 12, color: "#7a877e",
                       maxWidth: "62ch", lineHeight: 1.5 }}>
             {kq.trich_nguon_chung}
           </p>

@@ -15,11 +15,60 @@ cần OpenRouter. LLM chỉ là lớp tô điểm thêm về sau, và kể cả 
 """
 from __future__ import annotations
 
+import datetime
+
 from app.calc import thanso
 from app.config import ENGINE_VERSION
 from app.kb import store
 
 VI_TRI_THU_TU = ["duong_doi", "su_menh", "linh_hon", "nhan_cach"]
+SO_NAM_DU_BAO = 3   # năm cá nhân: hiện tại + 2 năm tới
+
+
+def luan_chieu_sau(ngay: int, thang: int, nam_sinh: int,
+                   nam_moc: int | None = None) -> dict:
+    """Chiều sâu: đỉnh cao (theo tuổi), thử thách chính, năm cá nhân sắp tới.
+
+    Phép tính từ engine (tất định); nghĩa từ KB chiều sâu (có nguồn). Nếu KB
+    chưa có nghĩa cho một giá trị → để None, tầng hiển thị im lặng, không bịa.
+    """
+    nam_moc = nam_moc or datetime.date.today().year
+    dd = thanso.duong_doi(ngay, thang, nam_sinh)
+
+    dinh_cao = [
+        {**p, "nghia": store.nghia_dinh_cao(p["so"])}
+        for p in thanso.dinh_cao(ngay, thang, nam_sinh, dd)
+    ]
+
+    tt = thanso.thu_thach(ngay, thang, nam_sinh)
+    thu_thach_chinh = {
+        "so": tt["thu_thach_chinh"],
+        "nghia": store.nghia_thu_thach(tt["thu_thach_chinh"]),
+    }
+
+    bang = thanso.chu_ky_9_nam(ngay, thang, nam_sinh, nam_moc,
+                               nam_moc + SO_NAM_DU_BAO - 1)
+    nam_ca_nhan = [
+        {
+            "nam": r["nam"],
+            "tuoi": r["tuoi_that"],
+            "so": r["moc_duong_lich"],
+            "nghia": store.nghia_nam_ca_nhan(r["moc_duong_lich"]),
+        }
+        for r in bang
+    ]
+
+    return {
+        "dinh_cao": dinh_cao,
+        "thu_thach_chinh": thu_thach_chinh,
+        "nam_ca_nhan": nam_ca_nhan,
+        "trich_nguon": store.trich_nguon_depth(),
+        "cach_doc_chieu_sau": (
+            "Đỉnh cao là mạch năng lượng chủ đạo của từng GIAI ĐOẠN đời (theo tuổi). "
+            "Thử thách là bài học khó lặp lại. Năm cá nhân là nhịp của từng năm dương "
+            "lịch. Tất cả là mẫu hình để ĐỐI CHIẾU với đời thực, không phải mệnh lệnh."
+        ),
+    }
 
 
 def _nghia_cua(gia_tri: int) -> dict | None:
@@ -94,6 +143,7 @@ def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int) -> dict:
         "ten_chinh": ten_chinh,
         "ten_bien_the_da_quet": ho_ten,
         "cac_vi_tri": cac_vi_tri,
+        "chieu_sau": luan_chieu_sau(ngay, thang, nam),
         "tom_tat_do_tin": (
             f"Kết quả theo quy ước chính thức (quy tắc Y khoá). "
             f"{so_on_dinh}/4 chỉ số ổn định qua mọi cách viết tên; "

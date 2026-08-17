@@ -1,0 +1,44 @@
+{
+  "_nguon": "Truyền thống Pythagoras / Balliett→Jordan. Renderings tiếng Việt — tham khảo văn hoá, không verbatim từ một sách cụ thể, không phải dự báo.",
+  "_triet_ly": "Giữ kỷ luật chống Barnum: mỗi mục nêu cả mặt sáng và bóng tối / việc nên tránh. Đỉnh cao và năm cá nhân kèm câu tự kiểm. Thử thách 0 = ô trống, nói thẳng không mang thông tin.",
+  "source_id": "balliett_jordan",
+  "school_id": "pythagoras_vn",
+
+  "dinh_cao": {
+    "1":  { "chu_de": "Giai đoạn tự lập và khẳng định mình", "y_nghia": "Bài học trung tâm là đứng trên đôi chân mình, tự quyết, mở đường. Cơ hội đến khi bạn dám dẫn dắt thay vì chờ.", "bong_toi": "Cô độc, áp đặt, hoặc ngược lại — trốn tránh việc phải tự chịu trách nhiệm.", "phan_chung": "Trong giai đoạn này, bạn thật sự tự quyết, hay vẫn dựa vào người khác quyết hộ?" },
+    "2":  { "chu_de": "Giai đoạn hợp tác và kiên nhẫn", "y_nghia": "Việc đến qua quan hệ, qua chờ đợi đúng lúc. Bài học là phối hợp, lắng nghe, xây lòng tin — không phải ép tiến độ.", "bong_toi": "Phụ thuộc, mờ nhạt, né va chạm đến mức đánh mất tiếng nói riêng.", "phan_chung": "Bạn có giữ được chính kiến khi phải hoà hợp với người khác không?" },
+    "3":  { "chu_de": "Giai đoạn sáng tạo và thể hiện", "y_nghia": "Năng lượng của diễn đạt, giao tiếp, niềm vui. Thời điểm tốt để nói ra, làm ra, kết nối.", "bong_toi": "Tản mạn, hời hợt, nói nhiều hơn làm, phân tán sức vào quá nhiều thứ.", "phan_chung": "Bạn có theo tới cùng một việc sáng tạo, hay bỏ khi vừa hết hứng?" },
+    "4":  { "chu_de": "Giai đoạn xây nền và kỷ luật", "y_nghia": "Thời của làm việc bền bỉ, dựng hệ thống, tích luỹ. Thành quả đến từ kiên trì, không từ may mắn.", "bong_toi": "Gò bó, cứng nhắc, cày mà quên hỏi để làm gì.", "phan_chung": "Bạn xây nền cho mục tiêu của mình, hay chỉ bận rộn cho có?" },
+    "5":  { "chu_de": "Giai đoạn thay đổi và tự do", "y_nghia": "Biến động, cơ hội mới, mở rộng trải nghiệm. Bài học là thích ứng linh hoạt mà vẫn giữ hướng.", "bong_toi": "Bất ổn, buông thả, đổi hướng liên tục khiến không gì đủ sâu.", "phan_chung": "Bạn đã ở với lựa chọn nào đủ lâu để thấy nó ra sao chưa?" },
+    "6":  { "chu_de": "Giai đoạn trách nhiệm và chăm sóc", "y_nghia": "Trọng tâm là gia đình, cam kết, chăm lo cho người khác. Việc và tình thường gắn với bổn phận.", "bong_toi": "Ôm đồm, kiểm soát dưới vỏ quan tâm, tự hy sinh rồi oán.", "phan_chung": "Bạn để người mình chăm tự quyết việc của họ, hay can thiệp quá?" },
+    "7":  { "chu_de": "Giai đoạn nội tâm và chiều sâu", "y_nghia": "Thời của học hỏi, chiêm nghiệm, đi vào bên trong. Chất lượng hơn số lượng; hiểu hơn là chạy.", "bong_toi": "Cô lập, hoài nghi thành lười tin, phân tích thay vì sống.", "phan_chung": "Bạn dùng thời gian một mình để hiểu mình, hay để trốn người khác?" },
+    "8":  { "chu_de": "Giai đoạn sự nghiệp và vật chất", "y_nghia": "Năng lượng của quyền lực, tổ chức, tài chính. Thời điểm gặt hái nếu đã gieo đúng — và học dùng nguồn lực có trách nhiệm.", "bong_toi": "Đo mọi thứ bằng kết quả, lẫn giá trị với giá cả, khó dừng.", "phan_chung": "Bạn có việc gì làm trong giai đoạn này mà không tính tới lợi ích?" },
+    "9":  { "chu_de": "Giai đoạn cho đi và hoàn tất", "y_nghia": "Khép lại một chương, buông những gì đã xong, cho đi rộng lượng. Bài học là kết thúc tử tế để mở đầu mới.", "bong_toi": "Cứu người để tránh nhìn mình, kỳ vọng rồi thất vọng, níu cái đã hết.", "phan_chung": "Bạn có buông được điều đã xong mà không thấy tiếc nuối dai dẳng?" },
+    "11": { "chu_de": "Giai đoạn trực giác và cảm hứng", "y_nghia": "Nhạy cảm cao, trực giác mạnh, có thể truyền cảm hứng cho người khác. Thử thách là giữ vững tinh thần giữa áp lực.", "bong_toi": "Lo lắng nền, lý tưởng quá đà, dễ kiệt sức vì căng thẳng.", "phan_chung": "Trực giác của bạn giai đoạn này đã đúng mấy lần — bạn có ghi lại để biết?", "so_cai": true },
+    "22": { "chu_de": "Giai đoạn kiến tạo lớn", "y_nghia": "Khả năng biến tầm nhìn thành hệ thống thật, để lại dấu ấn lâu dài. Cần nền tảng thực tế đỡ cho tham vọng.", "bong_toi": "Gánh quá sức, hoãn mãi vì thấy 'chưa đủ lớn', áp lực tự đặt.", "phan_chung": "Bạn đã hoàn thành cái gì nhỏ và cụ thể gần đây chưa?", "so_cai": true }
+  },
+
+  "thu_thach": {
+    "0": { "mo_ta": "Ô trống — không mang thông tin cụ thể", "y_nghia": "Thử thách 0 KHÔNG có nghĩa 'không có thử thách', mà là 'thử thách của mọi số'. Trong hệ này 0 là ô trống, diễn giải kiểu gì cũng được — nên nói thẳng: mục này không chỉ ra một bài học riêng.", "cach_vuot": "Không ép một ý nghĩa vào đây. Đọc các thử thách khác thay vì cố luận số 0." },
+    "1": { "mo_ta": "Học tự tin mà không áp đặt", "y_nghia": "Bài học là dám đứng riêng, tự quyết, mà không lấn át người khác — và vượt nỗi sợ bị lu mờ.", "cach_vuot": "Chủ động một việc nhỏ mỗi tuần, và tập nhường quyền quyết khi không cần thiết." },
+    "2": { "mo_ta": "Học nhạy cảm mà không mất mình", "y_nghia": "Khó khăn nằm ở việc quá để ý cảm xúc người khác, né xung đột đến mức đánh mất tiếng nói riêng.", "cach_vuot": "Tập nói 'không' thẳng, ngắn, không giải thích dài dòng." },
+    "3": { "mo_ta": "Học thể hiện thật lòng", "y_nghia": "Thử thách là tự nghi ngờ khả năng sáng tạo, hoặc tản mạn nói nhiều mà không làm.", "cach_vuot": "Chọn MỘT việc sáng tạo, làm tới xong, kể cả khi đã hết hứng." },
+    "4": { "mo_ta": "Học kỷ luật linh hoạt", "y_nghia": "Khó khăn ở sự cứng nhắc, ngại thay đổi, hoặc ngại bắt tay vào việc bền bỉ.", "cach_vuot": "Chia việc lớn thành bước nhỏ có hạn; cho phép mình sửa kế hoạch khi cần." },
+    "5": { "mo_ta": "Học tự do có trách nhiệm", "y_nghia": "Thử thách là bốc đồng, thiếu bền, đổi hướng khi vừa gặp khó.", "cach_vuot": "Cam kết một việc trong khoảng thời gian đủ dài để thấy hậu quả dài hạn." },
+    "6": { "mo_ta": "Học yêu thương không kiểm soát", "y_nghia": "Khó khăn ở việc ôm đồm trách nhiệm, kiểm soát người thân dưới danh nghĩa quan tâm.", "cach_vuot": "Để người khác tự xử việc của họ; phân biệt giúp đỡ với can thiệp." },
+    "7": { "mo_ta": "Học tin và mở lòng", "y_nghia": "Thử thách là hoài nghi, cô lập, dùng phân tích để tránh cảm xúc và con người.", "cach_vuot": "Chia sẻ một điều thật với một người tin cậy, thay vì tự phân tích một mình." },
+    "8": { "mo_ta": "Học cân bằng vật chất và tinh thần", "y_nghia": "Khó khăn ở ám ảnh quyền lực, tiền bạc, đo giá trị con người bằng kết quả.", "cach_vuot": "Làm một việc có ý nghĩa mà không tính lợi ích; tập dừng đúng lúc." }
+  },
+
+  "nam_ca_nhan": {
+    "1": { "chu_de": "Năm khởi đầu", "y_nghia": "Gieo hạt, quyết định mới, đặt nền cho chu kỳ 9 năm. Năng lượng độc lập, chủ động.", "nen": "Bắt đầu việc mới, đặt mục tiêu dài hạn.", "tranh": "Chần chừ, chờ người khác quyết." },
+    "2": { "chu_de": "Năm vun đắp", "y_nghia": "Kiên nhẫn, xây quan hệ, chờ thời. Việc thường tiến chậm và đến qua người khác.", "nen": "Hợp tác, nuôi dưỡng những gì đã gieo năm 1.", "tranh": "Ép tiến độ, nôn nóng thấy kết quả." },
+    "3": { "chu_de": "Năm thể hiện", "y_nghia": "Sáng tạo, giao tiếp, xã giao, niềm vui. Cơ hội mở rộng qua kết nối và biểu đạt.", "nen": "Nói ra, làm ra, mở rộng mạng lưới.", "tranh": "Tản mạn, phân tán sức vào quá nhiều thứ." },
+    "4": { "chu_de": "Năm làm việc", "y_nghia": "Xây nền, kỷ luật, tích luỹ bền bỉ. Không phải năm hoa mỹ mà là năm cày.", "nen": "Củng cố, dựng hệ thống, làm việc đều.", "tranh": "Bỏ dở nền tảng để chạy theo cái mới." },
+    "5": { "chu_de": "Năm thay đổi", "y_nghia": "Biến động, tự do, cơ hội bất ngờ. Nhịp nhanh, nhiều lựa chọn mở ra.", "nen": "Linh hoạt, đón cơ hội, thử cái mới.", "tranh": "Buông thả, mất tập trung, quyết vội." },
+    "6": { "chu_de": "Năm trách nhiệm", "y_nghia": "Gia đình, cam kết, chăm lo. Trọng tâm dời về tổ ấm và bổn phận.", "nen": "Cam kết, chăm sóc, ổn định quan hệ.", "tranh": "Ôm đồm đến kiệt, kiểm soát người thân." },
+    "7": { "chu_de": "Năm nội tâm", "y_nghia": "Học hỏi, chiêm nghiệm, nghỉ ngơi bên trong. Năm của chất lượng hơn số lượng.", "nen": "Học sâu, nghỉ ngơi, nhìn lại.", "tranh": "Ép mình xã giao, hoặc cô lập hoàn toàn." },
+    "8": { "chu_de": "Năm gặt hái", "y_nghia": "Sự nghiệp, tài chính, quyền lực. Nếu đã gieo đúng, đây là năm thu hoạch — kèm áp lực.", "nen": "Đẩy mạnh sự nghiệp, quản lý nguồn lực.", "tranh": "Để tiền/quyền lấn át giá trị, làm quá sức." },
+    "9": { "chu_de": "Năm hoàn tất", "y_nghia": "Khép chu kỳ, buông bỏ, dọn dẹp để chuẩn bị khởi đầu mới. Năm của kết thúc tử tế.", "nen": "Hoàn tất việc dở, buông cái đã xong, cho đi.", "tranh": "Khởi sự lớn mới, níu giữ cái đã hết." }
+  }
+}
