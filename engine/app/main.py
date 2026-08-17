@@ -19,6 +19,7 @@ from app import config
 from app.calc import thanso, timebase
 from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import thanso as luangiai_thanso
+from app.narrative import llm as narrative_llm
 from app.tuvi_api import router as tuvi_router
 
 app = FastAPI(
@@ -119,6 +120,18 @@ def api_luan_giai(inp: ThanSoInput) -> dict:
     """
     inp.kiem_tra_ngay()
     return luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam)
+
+
+@app.post("/v1/thanso/van")
+def api_luan_giai_van(inp: ThanSoInput) -> dict:
+    """Bản luận CHI TIẾT — văn xuôi qua LLM (nếu có key), ngược lại template.
+
+    Dành cho gói xem sâu. LLM chỉ diễn đạt lại bản luận có cấu trúc, cấm thêm
+    dữ kiện (xem app/narrative/llm.py). Lỗi LLM tự rơi về template, không sập.
+    """
+    inp.kiem_tra_ngay()
+    reading = luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam)
+    return narrative_llm.dien_dat(reading)
 
 
 class ChuKyInput(BaseModel):
