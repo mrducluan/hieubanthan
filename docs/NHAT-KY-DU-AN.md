@@ -120,12 +120,22 @@ chạy thật tại máy (trình duyệt → Next.js → engine → tính toán)
 
 1. ✅ ~~Deploy staging~~ — XONG.
 2. ✅ ~~Giai đoạn B thần số (pipeline luận giải)~~ — XONG, chạy trên KB file.
+2b. ✅ ~~Khoá quy tắc Y (deterministic)~~ — XONG. `chi_so_xac_dinh` (Y theo ngữ
+   cảnh âm tiết, giữ số cái). Nguyễn Đức Luân 24/10/1988 → DD33/SM9/LH6/NC3.
+2c. ✅ ~~Lớp LLM NARRATIVE (env-gated)~~ — XONG. `app/narrative/llm.py`, endpoint
+   `/v1/thanso/van`. Không key = template; có key OpenRouter = văn mượt (cấm
+   thêm dữ kiện). Key thêm vào Render env sau: `OPENROUTER_API_KEY`.
 3. **Chuyển KB vào Supabase** — chạy migration `0001_kb_thanso.sql`, nạp
    `data/thanso_meanings.json` vào bảng, đổi `app/kb/store.py` từ đọc file sang
    truy vấn Supabase. Cần: thông tin kết nối Supabase (env), quyết định thư viện
    truy cập DB (thêm dependency — phải hỏi).
-4. **Mở rộng kho nội dung thần số** — hiện chỉ có nghĩa số cơ bản; thêm đỉnh cao,
-   thử thách, năm cá nhân, chu kỳ. Đây là công viết nội dung.
+4. **#2 Chiều sâu thần số** (đỉnh cao, thử thách, năm cá nhân, chu kỳ) — engine
+   ĐÃ CÓ phép tính (`dinh_cao`, `thu_thach`, `nam_ca_nhan`, `chu_ky_9_nam`).
+   CHỦ DỰ ÁN CHỌN: viết nội dung RIÊNG cho từng phần (không tái dùng nghĩa số).
+   → Đang chờ nội dung. Kèm ý tưởng: UI cho khách nhập câu hỏi → thu thêm phí
+   (gói Q&A dùng lớp LLM #3).
+5. **#4 Thiết kế lại trang đọc — premium.** CHỦ DỰ ÁN CHỌN: redesign toàn bộ.
+   LƯU Ý TRÌNH TỰ: làm SAU khi #2 có nội dung, để không phải thiết kế hai lần.
 5. **SPEC-005 wiring** — an sao tử vi đầy đủ qua iztro (Node subprocess),
    endpoint `/v1/tuvi/an-sao`, test đối chiếu `ziwei_golden.json`. Rồi lặp lại
    pipeline KB+luận giải cho tử vi (kho lớn).
