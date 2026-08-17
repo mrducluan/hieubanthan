@@ -22,65 +22,82 @@ from app.kb import store
 VI_TRI_THU_TU = ["duong_doi", "su_menh", "linh_hon", "nhan_cach"]
 
 
-def _luan_mot_vi_tri(vi_tri: str, gia_tri_co_the: list[int]) -> dict:
-    """Luận một vị trí chỉ số, tôn trọng độ nhạy."""
-    khung = store.khung_vi_tri(vi_tri)
-    on_dinh = len(gia_tri_co_the) == 1
+def _nghia_cua(gia_tri: int) -> dict | None:
+    """Lấy nghĩa một số từ KB, kèm trích nguồn. None nếu KB chưa có."""
+    m = store.nghia_so(gia_tri)
+    if m is None:
+        return None
+    src = store.nguon(m["source_id"])
+    return {
+        "gia_tri": gia_tri,
+        "tu_khoa": m["tu_khoa"],
+        "mat_toi": m["mat_toi"],          # bắt buộc (chống Barnum)
+        "phan_chung": m["phan_chung"],    # bắt buộc
+        "so_cai": m["so_cai"],
+        "trich_nguon": src["ten"] if src else m["source_id"],
+    }
 
-    nghia_list = []
-    for gt in gia_tri_co_the:
-        m = store.nghia_so(gt)
-        if m is None:
-            continue  # KB chưa có → im lặng, không bịa
-        src = store.nguon(m["source_id"])
-        nghia_list.append({
-            "gia_tri": gt,
-            "tu_khoa": m["tu_khoa"],
-            "mat_toi": m["mat_toi"],          # bắt buộc
-            "phan_chung": m["phan_chung"],    # bắt buộc
-            "so_cai": m["so_cai"],
-            "trich_nguon": src["ten"] if src else m["source_id"],
-        })
+
+def _luan_mot_vi_tri(vi_tri: str, gia_tri_chinh: int,
+                     gia_tri_khac: list[int]) -> dict:
+    """Luận một vị trí: kết quả CHÍNH theo quy tắc Y khoá, kèm ghi chú độ nhạy."""
+    khung = store.khung_vi_tri(vi_tri)
+    on_dinh = not gia_tri_khac  # không có giá trị khác dưới quy ước khác
 
     ket = {
         "vi_tri": vi_tri,
         "ten": khung["ten"] if khung else vi_tri,
         "khung": khung["khung"] if khung else "",
+        "gia_tri": gia_tri_chinh,
+        "nghia": _nghia_cua(gia_tri_chinh),
         "on_dinh": on_dinh,
-        "gia_tri_co_the": gia_tri_co_the,
-        "nghia": nghia_list,
+        "gia_tri_khac": gia_tri_khac,
     }
     if not on_dinh:
-        ket["canh_bao"] = (
-            f"Chỉ số này CHƯA xác định: ra {len(gia_tri_co_the)} giá trị "
-            f"({', '.join(map(str, gia_tri_co_the))}) tuỳ quy ước phiên âm. "
-            "Chưa thể luận chắc — cần chốt quy ước tên trước. Dưới đây là nghĩa "
-            "của từng khả năng, không phải kết luận."
+        ket["ghi_chu_do_nhay"] = (
+            f"Theo quy ước chính thức, chỉ số này là {gia_tri_chinh}. Nhưng dưới "
+            f"quy ước phiên âm khác, nó có thể là {', '.join(map(str, gia_tri_khac))}. "
+            "Nêu ra để bạn biết con số này nhạy với cách viết tên — không phải để lung lay."
         )
-    if not nghia_list:
-        ket["canh_bao"] = "Kho quy tắc chưa có nghĩa cho giá trị này."
+    if ket["nghia"] is None:
+        ket["ghi_chu_do_nhay"] = "Kho quy tắc chưa có nghĩa cho giá trị này."
     return ket
 
 
 def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int) -> dict:
-    """Luận giải thần số đầy đủ, có nguồn, chống Barnum, tôn trọng độ nhạy."""
-    dn = thanso.do_nhay(ho_ten, ngay, thang, nam)
+    """Luận giải thần số — kết quả xác định (quy tắc Y khoá) + có nguồn + chống Barnum.
+
+    `ho_ten[0]` là tên chính (dùng cho kết quả chính thức). Các biến thể còn lại
+    chỉ dùng để tính độ nhạy (ghi chú), không đổi kết quả chính.
+    """
+    ten_chinh = ho_ten[0]
+    chinh = thanso.chi_so_xac_dinh(ten_chinh, ngay, thang, nam)
+
+    # Độ nhạy THẬT: áp CHÍNH quy tắc khoá lên từng biến thể tên, xem có lệch không.
+    # (Không dùng do_nhay vì nó gộp cả các quy ước mà quy tắc khoá đã quyết.)
+    theo_bien_the = [
+        thanso.chi_so_xac_dinh(t, ngay, thang, nam) for t in ho_ten
+    ]
 
     cac_vi_tri = []
     for vt in VI_TRI_THU_TU:
-        gia_tri = dn.get("duong_doi" if vt == "duong_doi" else vt, [])
-        cac_vi_tri.append(_luan_mot_vi_tri(vt, gia_tri))
+        gia_tri_chinh = chinh[vt]
+        gia_tri_khac = sorted(
+            {c[vt] for c in theo_bien_the if c[vt] != gia_tri_chinh}
+        )
+        cac_vi_tri.append(_luan_mot_vi_tri(vt, gia_tri_chinh, gia_tri_khac))
 
     so_on_dinh = sum(1 for v in cac_vi_tri if v["on_dinh"])
     return {
         "engine_version": ENGINE_VERSION,
         "ngay_sinh": f"{ngay:02d}/{thang:02d}/{nam}",
+        "ten_chinh": ten_chinh,
         "ten_bien_the_da_quet": ho_ten,
         "cac_vi_tri": cac_vi_tri,
         "tom_tat_do_tin": (
-            f"{so_on_dinh}/4 chỉ số ổn định qua mọi quy ước. "
-            f"{4 - so_on_dinh} chỉ số phụ thuộc quy ước tên — cần chốt quy ước "
-            "để luận chắc."
+            f"Kết quả theo quy ước chính thức (quy tắc Y khoá). "
+            f"{so_on_dinh}/4 chỉ số ổn định qua mọi cách viết tên; "
+            f"{4 - so_on_dinh} chỉ số nhạy với cách viết (xem ghi chú)."
         ),
         "cach_doc": (
             "Mỗi con số đi kèm MẶT TỐI và một CÂU PHẢN CHỨNG — câu hỏi để bạn "

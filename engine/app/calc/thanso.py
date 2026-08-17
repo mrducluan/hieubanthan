@@ -61,6 +61,60 @@ def chi_so_ten(
     return rut_gon(sum(gia_tri(c) for c in chon), giu_master)
 
 
+# --------------------------------------------------------------------------- #
+# QUY TẮC Y ĐÃ KHOÁ (deterministic) — spec chủ dự án 2026-08-15.
+# Khác `chi_so_ten` (quét cả hai khả năng Y): ở đây Y được phân loại THEO NGỮ
+# CẢNH ÂM TIẾT, cho ra MỘT kết quả xác định. Đây là quy ước chính thức của sản
+# phẩm; `do_nhay` vẫn tồn tại như ghi chú trung thực về độ nhạy.
+# --------------------------------------------------------------------------- #
+def y_la_nguyen_am_tai(am_tiet_hoa: str, i: int) -> bool:
+    """Y ở vị trí i trong âm tiết (đã bỏ dấu, viết HOA) có phải nguyên âm không?
+
+    Quy tắc: Y là nguyên âm CHỈ khi không có nguyên âm nào (AEIOU hoặc Y khác)
+    liền kề ngay trước/sau trong cùng âm tiết. Nếu kề một nguyên âm hoặc một Y
+    khác → Y là phụ âm.
+    """
+    def la_nguyen_am_hoac_y(ch: str | None) -> bool:
+        return ch is not None and (ch in NGUYEN_AM or ch == "Y")
+
+    truoc = am_tiet_hoa[i - 1] if i > 0 else None
+    sau = am_tiet_hoa[i + 1] if i + 1 < len(am_tiet_hoa) else None
+    return not (la_nguyen_am_hoac_y(truoc) or la_nguyen_am_hoac_y(sau))
+
+
+def gia_tri_xac_dinh(ten: str, che_do: CheDo, giu_master: bool = True) -> int:
+    """Chỉ số tên theo quy tắc Y đã khoá.
+
+    Âm tiết = token phân tách bởi khoảng trắng (tên tiếng Việt mỗi tiếng một
+    từ). Y được phân loại độc lập trong từng âm tiết. Không loại 'u' trong qu/gu
+    — tính theo mặt chữ (rule #4).
+    """
+    tong = 0
+    for am_tiet in bo_dau(ten, True).split():
+        hoa = am_tiet.upper()
+        for i, ch in enumerate(hoa):
+            if not (ch.isalpha() and ch.isascii()):
+                continue
+            la_na = ch in NGUYEN_AM or (ch == "Y" and y_la_nguyen_am_tai(hoa, i))
+            if che_do == "su_menh":
+                tong += gia_tri(ch)
+            elif che_do == "linh_hon" and la_na:
+                tong += gia_tri(ch)
+            elif che_do == "nhan_cach" and not la_na:
+                tong += gia_tri(ch)
+    return rut_gon(tong, giu_master)
+
+
+def chi_so_xac_dinh(ten: str, d: int, m: int, y: int) -> dict[str, int]:
+    """Bốn chỉ số thần số theo quy ước chính thức (Y khoá, giữ số cái)."""
+    return {
+        "su_menh": gia_tri_xac_dinh(ten, "su_menh"),
+        "linh_hon": gia_tri_xac_dinh(ten, "linh_hon"),
+        "nhan_cach": gia_tri_xac_dinh(ten, "nhan_cach"),
+        "duong_doi": duong_doi(d, m, y, "tong_het", giu_master=True),
+    }
+
+
 def duong_doi(
     d: int, m: int, y: int,
     quy_uoc: QuyUocDuongDoi = "tong_het",

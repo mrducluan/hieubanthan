@@ -89,14 +89,16 @@ export interface ViTriLuanGiai {
   vi_tri: string;
   ten: string;
   khung: string;
+  gia_tri: number;
+  nghia: NghiaSo | null;
   on_dinh: boolean;
-  gia_tri_co_the: number[];
-  nghia: NghiaSo[];
-  canh_bao?: string;
+  gia_tri_khac: number[];
+  ghi_chu_do_nhay?: string;
 }
 export interface LuanGiaiResult {
   engine_version: string;
   ngay_sinh: string;
+  ten_chinh: string;
   ten_bien_the_da_quet: string[];
   cac_vi_tri: ViTriLuanGiai[];
   tom_tat_do_tin: string;

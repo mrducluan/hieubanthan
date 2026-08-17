@@ -145,49 +145,49 @@ export default async function ThanSoPage({ searchParams }: Props) {
                 key={vt.vi_tri}
                 style={{
                   background: "#fff",
-                  border: `1px solid ${vt.on_dinh ? "#9dbfb0" : "#d9c48f"}`,
-                  borderLeft: `4px solid ${vt.on_dinh ? "#35695a" : "#8a6420"}`,
+                  border: "1px solid #cdd8d0",
+                  borderLeft: "4px solid #35695a",
                   borderRadius: 6,
                   overflow: "hidden",
                 }}
               >
-                <div style={{ padding: "13px 18px",
-                              borderBottom: vt.nghia.length ? "1px solid #eef2ee" : "none" }}>
+                <div style={{ padding: "13px 18px", borderBottom: vt.nghia ? "1px solid #eef2ee" : "none" }}>
                   <div style={{ display: "flex", justifyContent: "space-between",
                                 alignItems: "baseline" }}>
                     <strong style={{ fontSize: 16 }}>{TEN_CHI_SO[vt.vi_tri] ?? vt.ten}</strong>
-                    <span style={{ fontSize: 22, fontWeight: 700 }}>
-                      {vt.gia_tri_co_the.join(" · ")}
+                    <span style={{ fontSize: 26, fontWeight: 700, color: "#22493f" }}>
+                      {vt.gia_tri}
                     </span>
                   </div>
                   <p style={{ margin: "3px 0 0", fontSize: 12.5, color: "#7a877e" }}>
                     {vt.khung}
                   </p>
-                  {vt.canh_bao && (
-                    <p style={{ margin: "8px 0 0", fontSize: 13, color: "#8a6420" }}>
-                      ⚠ {vt.canh_bao}
-                    </p>
-                  )}
                 </div>
 
-                {vt.nghia.map((n) => (
-                  <div key={n.gia_tri} style={{ padding: "12px 18px",
-                          borderTop: "1px solid #f2f5f2" }}>
+                {vt.nghia && (
+                  <div style={{ padding: "12px 18px" }}>
                     <div style={{ fontSize: 14.5, fontWeight: 600, color: "#22493f" }}>
-                      Số {n.gia_tri}{n.so_cai ? " (số cái)" : ""} — {n.tu_khoa}
+                      {vt.nghia.tu_khoa}{vt.nghia.so_cai ? " (số cái)" : ""}
                     </div>
                     <p style={{ margin: "6px 0 0", fontSize: 13.5 }}>
-                      <strong style={{ color: "#9c4433" }}>Mặt tối:</strong> {n.mat_toi}
+                      <strong style={{ color: "#9c4433" }}>Mặt tối:</strong> {vt.nghia.mat_toi}
                     </p>
-                    <p style={{ margin: "5px 0 0", fontSize: 13.5, fontStyle: "italic",
-                                color: "#33424f" }}>
-                      Tự kiểm: {n.phan_chung}
+                    <p style={{ margin: "5px 0 0", fontSize: 13.5, fontStyle: "italic", color: "#33424f" }}>
+                      Tự kiểm: {vt.nghia.phan_chung}
                     </p>
                     <p style={{ margin: "6px 0 0", fontSize: 11.5, color: "#7a877e" }}>
-                      Nguồn: {n.trich_nguon}
+                      Nguồn: {vt.nghia.trich_nguon}
                     </p>
                   </div>
-                ))}
+                )}
+
+                {vt.ghi_chu_do_nhay && (
+                  <p style={{ margin: 0, padding: "10px 18px", fontSize: 12.5,
+                              color: "#8a6420", background: "#f9f3e6",
+                              borderTop: "1px solid #ecdcbb" }}>
+                    ⓘ {vt.ghi_chu_do_nhay}
+                  </p>
+                )}
               </div>
             ))}
           </div>
