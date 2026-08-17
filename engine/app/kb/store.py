@@ -1,21 +1,29 @@
 # -*- coding: utf-8 -*-
 """Tầng KB (tầng 2) — kho quy tắc luận giải thần số.
 
-Hiện đọc từ file JSON (không phụ thuộc ngoài, không cần Supabase). Giao diện
-được thiết kế để sau này thay ruột bằng truy vấn Supabase mà tầng RULES/NARRATIVE
-phía trên không phải đổi.
+Hai nguồn, cùng một giao diện:
+  - Supabase REST (khi có env SUPABASE_URL + SUPABASE_ANON_KEY): nội dung sống,
+    bạn sửa trong Supabase Table Editor là web đổi theo (sau TTL cache).
+  - File JSON (mặc định / dự phòng): chạy được ngay không cần Supabase, và là
+    lưới an toàn nếu Supabase trục trặc.
 
 Nguyên tắc: KB CHỈ trả về nội dung ĐÃ CÓ nguồn. Không có thì trả None — tầng
 trên phải im lặng, không được bịa.
 """
 from __future__ import annotations
 
-import functools
 import json
+import os
+import time
 from pathlib import Path
 from typing import TypedDict
 
+import httpx
+
 _DATA = Path(__file__).parent / "data" / "thanso_meanings.json"
+_CACHE_TTL = 60           # giây — sửa trong Supabase phản ánh trong vòng 1 phút
+_cache: dict | None = None
+_cache_at: float = 0.0
 
 
 class SoMeaning(TypedDict):
@@ -28,9 +36,54 @@ class SoMeaning(TypedDict):
     school_id: str
 
 
-@functools.lru_cache(maxsize=1)
-def _load() -> dict:
+def _from_file() -> dict:
     return json.loads(_DATA.read_text(encoding="utf-8"))
+
+
+def _from_supabase(url: str, key: str) -> dict:
+    """Đọc KB qua REST API của Supabase, dựng lại đúng cấu trúc như file JSON."""
+    headers = {"apikey": key, "Authorization": f"Bearer {key}"}
+    base = url.rstrip("/") + "/rest/v1"
+    with httpx.Client(timeout=8, headers=headers) as c:
+        sources = c.get(f"{base}/sources", params={"select": "*"}).json()
+        schools = c.get(f"{base}/schools", params={"select": "*"}).json()
+        meanings = c.get(f"{base}/thanso_so_meanings", params={"select": "*"}).json()
+        vi_tri = c.get(f"{base}/thanso_vi_tri", params={"select": "*"}).json()
+    return {
+        "sources": sources,
+        "schools": schools,
+        "so_meanings": {
+            str(m["gia_tri"]): {
+                "tu_khoa": m["tu_khoa"], "mat_toi": m["mat_toi"],
+                "phan_chung": m["phan_chung"], "so_cai": m.get("so_cai", False),
+                "source_id": m["source_id"], "school_id": m["school_id"],
+            } for m in meanings
+        },
+        "vi_tri": {v["id"]: {"ten": v["ten"], "khung": v["khung"]} for v in vi_tri},
+    }
+
+
+def _load() -> dict:
+    global _cache, _cache_at
+    url = os.environ.get("SUPABASE_URL")
+    key = os.environ.get("SUPABASE_ANON_KEY")
+
+    if not url or not key:
+        # Chưa cấu hình Supabase → luôn dùng file (cache vĩnh viễn trong tiến trình).
+        if _cache is None:
+            _cache = _from_file()
+        return _cache
+
+    # Có Supabase → cache theo TTL, lỗi thì rơi về file.
+    if _cache is not None and time.time() - _cache_at < _CACHE_TTL:
+        return _cache
+    try:
+        _cache = _from_supabase(url, key)
+        _cache_at = time.time()
+    except Exception:
+        _cache = _from_file()   # lưới an toàn: web vẫn chạy nếu Supabase hỏng
+        _cache_at = time.time()
+    return _cache
 
 
 def nghia_so(gia_tri: int) -> SoMeaning | None:
@@ -50,7 +103,6 @@ def nghia_so(gia_tri: int) -> SoMeaning | None:
 
 
 def khung_vi_tri(vi_tri: str) -> dict | None:
-    """Khung của một vị trí chỉ số (duong_doi/su_menh/linh_hon/nhan_cach)."""
     return _load()["vi_tri"].get(vi_tri)
 
 
