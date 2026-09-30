@@ -4,3 +4,5 @@ __pycache__/
 node_modules/
 .next/
 .env*.local
+web/test-results/
+web/playwright-report/

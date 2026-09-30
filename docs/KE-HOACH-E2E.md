@@ -81,9 +81,15 @@ Mục tiêu từ nhật ký: 50.000–150.000 từ, hiện ~10.700. Chia theo ng
 - AI có thể soạn **bản nháp có cấu trúc** (JSON theo schema, mỗi đoạn gắn nguồn + mặt tối + phản chứng), nhưng **người có nghề phải duyệt** trước khi lên production — nhật ký đã dự trù 30–60tr cho việc này.
 - Trường phái tử vi gốc: Nguyễn Phát Lộc (đã duyệt). Bản dịch Kinh Dịch nền: còn mở, xác minh bản quyền trước.
 
-### WS-5 🟢 E2E test trình duyệt (dependency đã duyệt)
-- Playwright (Chromium có sẵn trong cloud container) chạy luồng: nhập ngày sinh → thần số → lá số → quẻ → Q&A (mock LLM).
-- ⚠️ Thêm `@playwright/test` là **dependency mới** → theo CLAUDE.md phải hỏi anh trước.
+### WS-5 ✅ E2E test trình duyệt — XONG 2026-09-30 (phần thần số + API tử vi)
+- `@playwright/test` **1.56.1** (ghim, khớp Chromium 1194 có sẵn ở `/opt/pw-browsers`) — devDependency đã duyệt.
+- `web/playwright.config.ts`: `webServer` tự bật engine (uvicorn :8000) + web (`next dev` :3000); ép rỗng
+  `ENGINE_API_KEY`/`OPENROUTER_API_KEY`/`SUPABASE_*`/`STAGING_*` → template + KB file, tất định, không gọi LLM.
+- `web/e2e/than-so.spec.ts`: ca chốt Nguyễn Đức Luân 24/10/1988 → DD33 (số cái)/SM9/LH6/NC3, kèm mặt tối/tự kiểm/nguồn,
+  chiều sâu (dải đời, thử thách, năm cá nhân); Q&A chỉ kiểm 8 chip gợi ý, **không bấm** (không gọi LLM).
+- `web/e2e/tuvi-api.spec.ts`: `POST /api/tuvi/chart` (200 + đúng âm lịch/can chi/Tuần Triệt; 422 khi sai định dạng).
+- Chạy: `cd web && npm run e2e`. CI: job riêng `.github/workflows/e2e.yml`.
+- Còn lại khi có UI: thêm bước lá số (WS-2) và quẻ (UI Kinh Dịch) vào luồng.
 
 ### WS-6 🟡 Tầng RULES cho tử vi
 - Ghép luận theo priority **đại hạn > lưu niên > tiểu hạn**, config Nguyễn Phát Lộc — sau khi WS-2 xong và WS-4 có KB tử vi.
