@@ -12,6 +12,7 @@ import { DaiDoi } from "@/components/than-so/DaiDoi";
 import { BieuDoNgaySinh, ChiSoPhu } from "@/components/than-so/BieuDoNgaySinh";
 import { TheBaLop } from "@/components/than-so/TheBaLop";
 import { useBaiDoc } from "@/lib/bai-doc";
+import { BaoLoi } from "@/components/khung/BaoLoi";
 import { hoTenList, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 
 // Gợi ý ở dạng TỰ SOI, không dự đoán tương lai.
@@ -43,18 +44,18 @@ async function hoiThanSo(h: HoSo, cau: string): Promise<KetQuaHoi> {
 export function ThanSo() {
   const hoSo = useHoSo();
   const router = useRouter();
-  const { kq, loi } = useBaiDoc(hoSo);
+  const { kq, loi, thuLai } = useBaiDoc(hoSo);
 
   if (hoSo === undefined) return <KhungTai />;
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
-        <TieuDeMuc nho="Thần số học" lon="Nhập tên và ngày sinh để bắt đầu" />
+        <TieuDeMuc cap={1} nho="Thần số học" lon="Nhập tên và ngày sinh để bắt đầu" />
         <Card><NhapHoSo onXong={() => router.push("/ban-than?moi=1")} /></Card>
       </div>
     );
   }
-  if (loi) return <Card className="text-cinnabar">{loi}</Card>;
+  if (loi) return <BaoLoi loi={loi} thuLai={thuLai} />;
   if (!kq) return <KhungTai dong={4} />;
 
   const cs = kq.chieu_sau;
@@ -144,7 +145,7 @@ export function ThanSo() {
         />
       </section>
 
-      <p className="text-xs text-fg-faint">{kq.trich_nguon_chung} · Engine v{kq.engine_version} · Tên đã quét: {kq.ten_bien_the_da_quet.join(", ")}</p>
+      <p className="text-xs text-fg-faint">{kq.trich_nguon_chung} · Bản tính v{kq.engine_version} · Tên đã quét: {kq.ten_bien_the_da_quet.join(", ")}</p>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { usePost } from "@/lib/goi-api";
+import { BaoLoi } from "@/components/khung/BaoLoi";
 import { hoiMang } from "@/lib/hoi-mang";
 import { ngaySinhIso, useHoSo } from "@/lib/hoso";
 
@@ -19,7 +20,7 @@ const GOI_Y = [
 export function PhongThuy() {
   const hoSo = useHoSo();
   const sinh = hoSo?.gioi_tinh ? { birth_date: ngaySinhIso(hoSo), gender: hoSo.gioi_tinh } : null;
-  const { data: mq, loi } = usePost<MenhQuai>("/api/phongthuy/menh-quai", sinh);
+  const { data: mq, loi, thuLai } = usePost<MenhQuai>("/api/phongthuy/menh-quai", sinh);
 
   if (hoSo === undefined) return <KhungTai />;
   return (
@@ -29,7 +30,7 @@ export function PhongThuy() {
         <section aria-label="Mệnh quái" className="min-w-0 space-y-3">
           {!sinh && <XinThemDuLieu hoSo={hoSo} can="gioi_tinh" nut="Thêm giới tính" ly_do="Mệnh quái tính theo năm sinh và giới tính. Câu hỏi bố trí chung thì không cần." />}
           {sinh && !mq && !loi && <KhungTai dong={2} />}
-          {loi && <p className="rounded-xl bg-cinnabar/10 p-4 text-sm text-cinnabar">{loi}</p>}
+          {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
           {mq && (
             <div className="glass rounded-2xl p-5" data-testid="menh-quai">
               <p className="text-center text-sm text-fg-muted">Mệnh quái của bạn: <b className="text-gold">{mq.quai}</b> · {mq.nhom}</p>

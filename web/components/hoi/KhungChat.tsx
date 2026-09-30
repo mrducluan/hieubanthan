@@ -134,7 +134,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
           <Textarea rows={1} value={cau} maxLength={400} aria-label={nhanO} placeholder={goiYO}
             onChange={(e) => setCau(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void hoi(cau); } }}
-            className="max-h-40 min-h-12" />
+            className="max-h-40 min-h-[4.5rem] [field-sizing:content] sm:min-h-12" />
           <Button type="submit" size="icon" disabled={dang || cau.trim().length < 3} aria-label="Gửi câu hỏi">
             <Send aria-hidden />
           </Button>

@@ -35,7 +35,7 @@ export function HopDoi() {
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
-        <TieuDeMuc nho="Hợp đôi" lon="Trước hết, con số của bạn" mo_ta="Nhập tên và ngày sinh của bạn, rồi mới đến người ấy." />
+        <TieuDeMuc cap={1} nho="Hợp đôi" lon="Trước hết, con số của bạn" mo_ta="Nhập tên và ngày sinh của bạn, rồi mới đến người ấy." />
         <Card><NhapHoSo nutGui="Tiếp tục" onXong={() => router.refresh()} /></Card>
       </div>
     );
@@ -47,7 +47,7 @@ export function HopDoi() {
     e.preventDefault();
     if (!hoSo) return;
     const d = Number(ngay), m = Number(thang), y = Number(nam);
-    if (!(nam.length === 4 && ngayHopLe(d, m, y)) || y < 1900 || y > 2100) { setLoi("Ngày sinh người ấy chưa đúng."); return; }
+    if (!(nam.length === 4 && ngayHopLe(d, m, y)) || y < 1900 || Date.UTC(y, m - 1, d) > Date.now()) { setLoi("Ngày sinh người ấy chưa đúng."); return; }
     setLoi(null); setDang(true);
     try {
       setKq(await postJson<KetQuaHopDoiT>("/api/thanso/hop-doi", {

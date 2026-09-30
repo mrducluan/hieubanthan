@@ -5,8 +5,14 @@ import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { TuTru, type LaSoBatTu } from "@/components/huyen-hoc/TuTru";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { usePost } from "@/lib/goi-api";
+import { BaoLoi } from "@/components/khung/BaoLoi";
 import { hoiMang } from "@/lib/hoi-mang";
 import { laSoTuHoSo, useHoSo } from "@/lib/hoso";
+
+// Cờ từ engine viết cho người phát triển — đổi sang lời dễ hiểu cho người đọc.
+const LOI_NHAN_CO: Record<string, string> = {
+  da_ty: "Bạn sinh 23:00–23:59 (giờ Tý muộn): bát tự ở đây giữ trụ ngày hôm đó, trụ giờ lấy giờ Tý của ngày sau. Có trường phái đổi ngày từ 23:00 nên có thể ra trụ ngày khác; tử vi ở đây tính sang ngày mới.",
+};
 
 const GOI_Y = [
   { nhom: "Lá số", cau: ["Dụng thần của tôi là gì?", "Tôi thân vượng hay thân nhược?", "Ngũ hành của tôi thiếu gì?"] },
@@ -17,7 +23,7 @@ const GOI_Y = [
 export function BatTu() {
   const hoSo = useHoSo();
   const laSo = laSoTuHoSo(hoSo);
-  const { data: ls, loi } = usePost<LaSoBatTu>("/api/battu/la-so", laSo);
+  const { data: ls, loi, thuLai } = usePost<LaSoBatTu>("/api/battu/la-so", laSo);
 
   if (hoSo === undefined) return <KhungTai />;
   return (
@@ -27,11 +33,11 @@ export function BatTu() {
         <section aria-label="Tứ trụ" className="min-w-0 space-y-3">
           {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Tứ trụ cần giờ sinh và giới tính. Giờ sinh càng chính xác càng tốt nếu bạn sinh gần ngày chuyển tiết." />}
           {laSo && !ls && !loi && <KhungTai dong={4} />}
-          {loi && <p className="rounded-xl bg-cinnabar/10 p-4 text-sm text-cinnabar">{loi}</p>}
+          {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
           {ls && (
             <div className="glass rounded-2xl p-5" data-testid="tu-tru">
               <TuTru ls={ls} namNay={new Date().getFullYear()} />
-              {ls.co_canh_bao.map((c) => <p key={c.loai} className="mt-3 text-xs text-moon">{c.chi_tiet}</p>)}
+              {ls.co_canh_bao.map((c) => <p key={c.loai} className="mt-3 text-xs text-moon">{LOI_NHAN_CO[c.loai] ?? c.chi_tiet}</p>)}
             </div>
           )}
         </section>

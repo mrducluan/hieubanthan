@@ -61,3 +61,31 @@ test("chưa có hồ sơ: trang Bản thân mời nhập", async ({ page }) => {
   await page.goto("/ban-than");
   await expect(page.getByText("Bắt đầu bằng tên và ngày sinh")).toBeVisible();
 });
+
+test("form hồ sơ chặn ngày sinh tương lai và họ tên không có chữ", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Họ và tên đầy đủ").fill("123 456");
+  await page.getByLabel("Ngày", { exact: true }).fill("1");
+  await page.getByLabel("Tháng", { exact: true }).fill("1");
+  await page.getByLabel("Năm", { exact: true }).fill("1990");
+  await page.getByRole("button", { name: "Xem con số của tôi" }).click();
+  await expect(page.getByText("Nhập họ tên đầy đủ")).toBeVisible();
+  await page.getByLabel("Họ và tên đầy đủ").fill("Trần An");
+  await page.getByLabel("Năm", { exact: true }).fill("2099");
+  await page.getByRole("button", { name: "Xem con số của tôi" }).click();
+  await expect(page.getByText("Ngày sinh chưa đúng")).toBeVisible();
+  await expect(page).not.toHaveURL(/ban-than/);
+});
+
+test("engine lỗi: báo rõ + thử lại được; trang lạ ra 404 tiếng Việt", async ({ page }) => {
+  await napHoSo(page, LUAN);
+  let hong = true;
+  await page.route("**/api/thanso/luan-giai", (r) => (hong ? r.fulfill({ status: 502, contentType: "application/json", body: '{"error":"Chưa tính được lúc này."}' }) : r.fallback()));
+  await page.goto("/than-so");
+  await expect(page.getByRole("alert").filter({ hasText: "Chưa tính được" })).toBeVisible();
+  hong = false;
+  await page.getByRole("button", { name: "Thử lại" }).click();
+  await expect(page.getByTestId("ten-chinh")).toBeVisible();
+  await page.goto("/khong-co-trang-nay");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("không có trên bản đồ sao");
+});

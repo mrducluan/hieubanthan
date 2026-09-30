@@ -51,7 +51,7 @@ export function BanThan() {
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
-        <TieuDeMuc nho="Hồ sơ bản thân" lon="Bắt đầu bằng tên và ngày sinh"
+        <TieuDeMuc cap={1} nho="Hồ sơ bản thân" lon="Bắt đầu bằng tên và ngày sinh"
           mo_ta="Nhập một lần — dùng cho thần số, hợp đôi và cả bốn mảng huyền học." />
         <Card><NhapHoSo onXong={() => router.push("/ban-than?moi=1")} /></Card>
       </div>
@@ -126,7 +126,7 @@ export function BanThan() {
 
       <GopY />
 
-      <p className="text-center text-xs text-fg-faint">{kq.trich_nguon_chung} · Engine v{kq.engine_version}</p>
+      <p className="text-center text-xs text-fg-faint">{kq.trich_nguon_chung} · Bản tính v{kq.engine_version}</p>
 
       <Sheet open={suaMo} onOpenChange={setSuaMo}>
         <SheetContent title="Sửa hồ sơ" description="Thay đổi được lưu trên máy của bạn.">

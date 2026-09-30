@@ -32,8 +32,8 @@ export function TuTru({ ls, namNay }: { ls: LaSoBatTu; namNay: number }) {
           <div key={i} role="row" className={cn("rounded-xl border p-2 text-center", i === 2 ? "border-gold/70 bg-gold/[0.07]" : "border-line/70 bg-bg/40")}>
             <p className="eyebrow">{TEN_TRU[i]}</p>
             <p className="mt-1 text-[0.65rem] text-moon sm:text-xs">{ls.thap_than_can[i]}</p>
-            <p className="font-serif text-2xl sm:text-3xl">{t.can}</p>
-            <p className="font-serif text-2xl text-gold sm:text-3xl">{t.chi}</p>
+            <p className="font-serif text-xl min-[400px]:text-2xl sm:text-3xl">{t.can}</p>
+            <p className="font-serif text-xl text-gold min-[400px]:text-2xl sm:text-3xl">{t.chi}</p>
             <p className="mt-1 text-[0.65rem] text-fg-faint sm:text-xs">{ls.tang_can[i]?.join(" · ")}</p>
           </div>
         ))}

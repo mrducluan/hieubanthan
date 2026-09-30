@@ -37,8 +37,8 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
 
   function gui(e: React.FormEvent) {
     e.preventDefault();
-    if (ten.trim().length < 2) return setLoi("Nhập họ tên đầy đủ (như trên giấy khai sinh).");
-    if (!(d && m && nam.length === 4) || !ngayHopLe(d, m, y) || y < 1900 || y > 2100)
+    if (ten.trim().length < 2 || !/\p{L}/u.test(ten)) return setLoi("Nhập họ tên đầy đủ (như trên giấy khai sinh).");
+    if (!(d && m && nam.length === 4) || !ngayHopLe(d, m, y) || y < 1900 || Date.UTC(y, m - 1, d) > Date.now())
       return setLoi("Ngày sinh chưa đúng — kiểm tra lại ngày, tháng, năm (dương lịch).");
     if (can === "day_du" && (!gio || !gioiTinh)) return setLoi("Mảng này cần giờ sinh và giới tính.");
     if (can === "gioi_tinh" && !gioiTinh) return setLoi("Mảng này cần giới tính.");

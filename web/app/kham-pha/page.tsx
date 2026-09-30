@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Khám phá" };
 
 const MANG = [
   { href: "/than-so", ten: "Thần số học", mo: "Bốn con số cốt lõi, dải đời, năm cá nhân, biểu đồ ngày sinh.", can: "Tên + ngày sinh", Icon: Sparkles },
-  { href: "/tu-vi", ten: "Tử vi", mo: "Lá số 12 cung an bằng iztro, đại hạn – lưu niên – tiểu hạn.", can: "+ giờ sinh, giới tính", Icon: Orbit },
+  { href: "/tu-vi", ten: "Tử vi", mo: "Lá số 12 cung, đại hạn – lưu niên – tiểu hạn.", can: "+ giờ sinh, giới tính", Icon: Orbit },
   { href: "/bat-tu", ten: "Bát tự", mo: "Tứ trụ theo tiết khí, ngũ hành, dụng thần hai cách, đại vận.", can: "+ giờ sinh, giới tính", Icon: Layers },
   { href: "/phong-thuy", ten: "Phong thuỷ", mo: "Mệnh quái, tám hướng du niên, cửa – chủ – bếp, sao năm.", can: "+ giới tính", Icon: Compass },
   { href: "/kinh-dich", ten: "Kinh Dịch", mo: "Một quẻ cho một việc — Nghĩa Lý, Lục Hào, Mai Hoa.", can: "Chỉ cần câu hỏi", Icon: Hexagon },

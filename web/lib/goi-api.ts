@@ -14,6 +14,7 @@ export function usePost<T>(url: string, body: unknown | null) {
   const khoa = body == null ? null : JSON.stringify(body);
   const [data, setData] = useState<T | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
+  const [lan, setLan] = useState(0);
   useEffect(() => {
     if (khoa == null) { setData(null); return; }
     let huy = false;
@@ -22,6 +23,6 @@ export function usePost<T>(url: string, body: unknown | null) {
       .then((d) => { if (!huy) setData(d); })
       .catch((e: unknown) => { if (!huy) setLoi(e instanceof Error ? e.message : "Lỗi"); });
     return () => { huy = true; };
-  }, [url, khoa]);
-  return { data, loi };
+  }, [url, khoa, lan]);
+  return { data, loi, thuLai: () => setLan((n) => n + 1) };
 }
