@@ -1,6 +1,7 @@
 // POST /api/thanso/hoi — proxy hỏi sâu tới engine (giữ ENGINE key server-side).
 // Engine v2 trả lời được cả khi chưa bật LLM (template từ kho tri thức).
 import { NextResponse } from "next/server";
+import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
 import { loiEngine } from "@/lib/proxy";
 
@@ -42,7 +43,8 @@ export async function POST(req: Request): Promise<NextResponse> {
       return NextResponse.json({ error: l.error }, { status: l.status });
     }
     return NextResponse.json(body);
-  } catch {
+  } catch (e) {
+    baoLoi(e, { noi: "api", duong: new URL(req.url).pathname });
     return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });
   }
 }

@@ -1,6 +1,7 @@
 // POST /api/phongthuy/hoi — proxy hỏi đáp Phong thuỷ tới engine (giữ ENGINE key server-side).
 // Web không tự tính mệnh quái hay du niên: engine tính (Bát trạch).
 import { NextResponse } from "next/server";
+import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
 import { loiEngine } from "@/lib/proxy";
 
@@ -38,7 +39,8 @@ export async function POST(req: Request): Promise<NextResponse> {
       return NextResponse.json({ error: l.error }, { status: l.status });
     }
     return NextResponse.json(body);
-  } catch {
+  } catch (e) {
+    baoLoi(e, { noi: "api", duong: new URL(req.url).pathname });
     return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });
   }
 }

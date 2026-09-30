@@ -1,6 +1,7 @@
 // POST /api/tuvi/hoi — proxy hỏi đáp Tử vi tới engine (giữ ENGINE key server-side).
 // Web không tự an sao, không tự tính hạn: lá số và vận hạn do engine (iztro) tính.
 import { NextResponse } from "next/server";
+import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
 import { loiEngine } from "@/lib/proxy";
 import { LaSoVao } from "@/lib/la-so-vao";
@@ -37,7 +38,8 @@ export async function POST(req: Request): Promise<NextResponse> {
       return NextResponse.json({ error: l.error }, { status: l.status });
     }
     return NextResponse.json(body);
-  } catch {
+  } catch (e) {
+    baoLoi(e, { noi: "api", duong: new URL(req.url).pathname });
     return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });
   }
 }

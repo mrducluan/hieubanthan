@@ -1,6 +1,7 @@
 // Proxy mỏng web → engine cho route handler: giữ ENGINE key phía server, không tự tính gì.
 import { NextResponse } from "next/server";
 import type { ZodTypeAny } from "zod";
+import { baoLoi } from "@/lib/giam-sat";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
@@ -12,6 +13,8 @@ const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 const CHUNG = new Set(["Not Found", "Method Not Allowed", "Internal Server Error", "Unauthorized", "Forbidden"]);
 
 export function loiEngine(status: number, body: unknown): { error: string; status: number } {
+  // Lệch phiên bản (404) và lỗi máy (5xx) là việc của người vận hành → báo Sentry; lỗi nhập liệu (4xx) thì không.
+  if (status === 404 || status >= 500 || status === 401 || status === 403) baoLoi(new Error(`engine ${status}`), { engine_status: status });
   const detail = body && typeof body === "object" && "detail" in body ? (body as { detail: unknown }).detail : null;
   if (status === 404 && (detail === "Not Found" || detail === null)) {
     return { error: "Máy tính toán chưa có tính năng này (đang chạy phiên bản cũ). Vui lòng thử lại sau ít phút.", status: 503 };
@@ -43,7 +46,8 @@ export async function goiEngine(req: Request, schema: ZodTypeAny, path: string):
       return NextResponse.json({ error: l.error }, { status: l.status });
     }
     return NextResponse.json(body);
-  } catch {
+  } catch (e) {
+    baoLoi(e, { noi: "goi_engine", duong: path });
     return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau." }, { status: 502 });
   }
 }

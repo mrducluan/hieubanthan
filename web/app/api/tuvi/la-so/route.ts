@@ -1,6 +1,7 @@
 // POST /api/tuvi/la-so — SPEC-005: lá số an sao đầy đủ (iztro chạy cục bộ trong engine).
 // Proxy mỏng như /api/tuvi/chart: zod hai chiều, KHÔNG tự tính gì. Đầu vào giống chart.
 import { NextResponse } from "next/server";
+import { baoLoi } from "@/lib/giam-sat";
 import { loiEngine } from "@/lib/proxy";
 import { ChartInput, LaSoOutput } from "../schema";
 
@@ -27,7 +28,8 @@ export async function POST(req: Request): Promise<NextResponse> {
       body: JSON.stringify(parsed.data),
       cache: "no-store",
     });
-  } catch {
+  } catch (e) {
+    baoLoi(e, { noi: "api", duong: new URL(req.url).pathname });
     return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });
   }
 

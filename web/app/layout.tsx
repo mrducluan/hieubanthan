@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { GhiGioiThieu } from "@/components/khung/GhiGioiThieu";
+import { GiamSat } from "@/components/khung/GiamSat";
 import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE } from "@/lib/seo";
 import "./globals.css";
 
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </footer>
         <TabDuoi />
         <GhiGioiThieu />
+        <GiamSat />
       </body>
     </html>
   );

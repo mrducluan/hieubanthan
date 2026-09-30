@@ -16,7 +16,7 @@ from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
-from app import config
+from app import config, giam_sat
 from app.calc import thanso, timebase
 from app.kb import store as kb_store
 from app.kb import trang as kb_trang
@@ -30,6 +30,8 @@ from app.kinhdich_api import router as kinhdich_router
 from app.lich_api import router as lich_router
 from app.phongthuy_api import router as phongthuy_router
 from app.tuvi_api import router as tuvi_router
+
+giam_sat.khoi_tao()   # Sentry — chỉ bật khi có SENTRY_DSN, không gửi dữ liệu cá nhân
 
 app = FastAPI(
     title="HieuBanThan Engine",
