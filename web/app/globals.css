@@ -280,3 +280,26 @@ a { color: var(--jade); text-decoration-thickness: 1px; text-underline-offset: 2
   .field-row { flex-wrap: wrap; }
   .numeral { font-size: 2.2rem; }
 }
+
+/* ---------- biểu đồ ngày sinh ---------- */
+.bd-wrap { display: grid; grid-template-columns: minmax(0, 220px) 1fr; gap: 18px; margin-top: 14px; }
+.bd-grid { display: grid; gap: 4px; align-self: start; }
+.bd-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.bd-cell {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 1.15rem; color: var(--jade-deep);
+  background: var(--jade-wash); border-radius: 6px; word-break: break-all; text-align: center;
+  padding: 4px;
+}
+.bd-empty { background: transparent; border: 1px dashed var(--line); }
+.bd-ghost { color: var(--ink-faint); opacity: .35; font-size: .9rem; }
+.bd-arrows { display: grid; gap: 8px; align-content: start; }
+.bd-note { font-size: .84rem; color: var(--ink-soft); }
+@media (max-width: 520px) { .bd-wrap { grid-template-columns: 1fr; } .bd-grid { max-width: 220px; } }
+
+/* ---------- Q&A người thứ hai ---------- */
+.qa-kia { margin-top: 12px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: var(--radius); }
+.qa-kia summary { cursor: pointer; font-size: .88rem; color: var(--ink-soft); }
+.qa-kia .field-row { margin-top: 10px; }
+.qa-answer p + p { margin-top: 10px; }
+.qa-mode { margin-top: 8px; font-size: .72rem; color: var(--ink-faint); }

@@ -17,6 +17,9 @@ const GOI_Y: { nhom: string; cau: string[] }[] = [
     "Tôi cần gì trong một mối quan hệ?",
     "Điều gì hay cản trở tôi trong tình cảm?",
   ] },
+  { nhom: "Hai người", cau: [
+    "Tôi và người yêu có hợp nhau không?",
+  ] },
   { nhom: "Cuộc sống", cau: [
     "Bài học lớn của đời tôi là gì?",
     "Giai đoạn này tôi nên tập trung điều gì?",
@@ -30,11 +33,23 @@ interface Props {
   nam: number;
 }
 
+interface HoiResponse {
+  cau_tra_loi?: string;
+  che_do?: string;
+  can_them?: string[];
+  error?: string;
+}
+
 export function QandA({ hoTen, ngay, thang, nam }: Props) {
   const [cauHoi, setCauHoi] = useState("");
   const [dangHoi, setDangHoi] = useState(false);
   const [traLoi, setTraLoi] = useState<string | null>(null);
+  const [cheDo, setCheDo] = useState<string | null>(null);
   const [thongBao, setThongBao] = useState<string | null>(null);
+  const [moKia, setMoKia] = useState(false);
+  const [kia, setKia] = useState({ ten: "", ngay: "", thang: "", nam: "" });
+
+  const kiaHopLe = kia.ngay !== "" && kia.thang !== "" && kia.nam.length === 4;
 
   async function hoi(q: string) {
     const cau = q.trim();
@@ -46,15 +61,21 @@ export function QandA({ hoTen, ngay, thang, nam }: Props) {
       const r = await fetch("/api/thanso/hoi", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ ho_ten: hoTen, ngay, thang, nam, cau_hoi: cau }),
+        body: JSON.stringify({
+          ho_ten: hoTen, ngay, thang, nam, cau_hoi: cau,
+          ...(kiaHopLe ? { nguoi_kia: {
+            ...(kia.ten.trim() ? { ho_ten: [kia.ten.trim()] } : {}),
+            ngay: Number(kia.ngay), thang: Number(kia.thang), nam: Number(kia.nam),
+          } } : {}),
+        }),
       });
-      const d = await r.json();
-      if (d.da_bat_llm === false) {
-        setThongBao("Tính năng hỏi sâu sắp có — đang được bật.");
-      } else if (d.cau_tra_loi) {
+      const d = (await r.json()) as HoiResponse;
+      if (d.can_them?.includes("nguoi_kia")) setMoKia(true);
+      if (d.cau_tra_loi) {
         setTraLoi(d.cau_tra_loi);
+        setCheDo(d.che_do ?? null);
       } else {
-        setThongBao(d.loi ?? "Chưa trả lời được lúc này, thử lại sau.");
+        setThongBao(d.error ?? "Chưa trả lời được lúc này, thử lại sau.");
       }
     } catch {
       setThongBao("Không kết nối được. Thử lại sau.");
@@ -86,6 +107,25 @@ export function QandA({ hoTen, ngay, thang, nam }: Props) {
         ))}
       </div>
 
+      <details className="qa-kia" open={moKia} onToggle={(e) => setMoKia((e.target as HTMLDetailsElement).open)}>
+        <summary>Hỏi về người khác hoặc xem hợp đôi? Nhập ngày sinh người thứ hai</summary>
+        <div className="field-row">
+          <label className="field"><span>Họ tên (không bắt buộc)</span>
+            <input value={kia.ten} onChange={(e) => setKia({ ...kia, ten: e.target.value })} /></label>
+        </div>
+        <div className="field-row">
+          <label className="field"><span>Ngày</span>
+            <input type="number" min={1} max={31} value={kia.ngay} aria-label="Ngày sinh người thứ hai"
+              onChange={(e) => setKia({ ...kia, ngay: e.target.value })} /></label>
+          <label className="field"><span>Tháng</span>
+            <input type="number" min={1} max={12} value={kia.thang} aria-label="Tháng sinh người thứ hai"
+              onChange={(e) => setKia({ ...kia, thang: e.target.value })} /></label>
+          <label className="field"><span>Năm</span>
+            <input type="number" min={1900} max={2100} value={kia.nam} aria-label="Năm sinh người thứ hai"
+              onChange={(e) => setKia({ ...kia, nam: e.target.value })} /></label>
+        </div>
+      </details>
+
       <form className="qa-form" onSubmit={(e) => { e.preventDefault(); hoi(cauHoi); }}>
         <input
           value={cauHoi}
@@ -100,8 +140,12 @@ export function QandA({ hoTen, ngay, thang, nam }: Props) {
       </form>
 
       {traLoi && (
-        <div className="qa-answer">
-          <p>{traLoi}</p>
+        <div className="qa-answer" data-testid="qa-answer">
+          {traLoi.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
+          <p className="qa-mode">
+            {cheDo === "llm" ? "Diễn đạt bởi AI từ kho tri thức có nguồn."
+              : "Ghép trực tiếp từ kho tri thức có nguồn."}
+          </p>
         </div>
       )}
       {thongBao && <p className="qa-note">{thongBao}</p>}

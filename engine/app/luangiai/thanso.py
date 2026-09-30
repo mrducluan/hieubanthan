@@ -17,9 +17,9 @@ from __future__ import annotations
 
 import datetime
 
-from app.calc import thanso
+from app.calc import thanso, thanso_mo_rong as mr
 from app.config import ENGINE_VERSION
-from app.kb import store
+from app.kb import store, thanso_v2 as kb2
 
 VI_TRI_THU_TU = ["duong_doi", "su_menh", "linh_hon", "nhan_cach"]
 SO_NAM_DU_BAO = 3   # năm cá nhân: hiện tại + 2 năm tới
@@ -68,6 +68,36 @@ def luan_chieu_sau(ngay: int, thang: int, nam_sinh: int,
             "Thử thách là bài học khó lặp lại. Năm cá nhân là nhịp của từng năm dương "
             "lịch. Tất cả là mẫu hình để ĐỐI CHIẾU với đời thực, không phải mệnh lệnh."
         ),
+    }
+
+
+def luan_mo_rong(ten: str, ngay: int, thang: int, nam: int,
+                 ngay_xem: datetime.date | None = None) -> dict:
+    """Chỉ số v2 kèm nghĩa từ KB v2: biểu đồ ngày sinh, mũi tên, chỉ số phụ, nghiệp,
+    tháng cá nhân. Thiếu nghĩa trong KB → None (tầng hiển thị im lặng)."""
+    hn = ngay_xem or datetime.date.today()
+    cs = mr.chi_so_mo_rong(ten, ngay, thang, nam, hn.year, hn.month, hn.day)
+    bd = cs["bieu_do"]
+    return {
+        "bieu_do": {
+            "luoi": bd["luoi"],
+            "so_thieu": bd["so_thieu"],
+            "mui_ten": ([{"ma": m["ma"], "trong": False, **(kb2.nghia_mui_ten(m["ma"], False) or {})}
+                         for m in bd["mui_ten_du"]] +
+                        [{"ma": m["ma"], "trong": True, **(kb2.nghia_mui_ten(m["ma"], True) or {})}
+                         for m in bd["mui_ten_trong"]]),
+        },
+        "so_ngay_sinh": {"so": cs["so_ngay_sinh"], "nghia": kb2.nghia_phu("ngay_sinh", ngay)},
+        "so_thai_do": {"so": cs["so_thai_do"], "nghia": kb2.nghia_phu("thai_do", cs["so_thai_do"])},
+        "so_truong_thanh": {"so": cs["so_truong_thanh"],
+                            "nghia": kb2.nghia_phu("truong_thanh", cs["so_truong_thanh"])},
+        "thang_ca_nhan": {"thang": hn.month, "nam": hn.year, "so": cs["thang_ca_nhan"],
+                          "nghia": kb2.nghia_phu("thang_ca_nhan", cs["thang_ca_nhan"])},
+        "no_nghiep": [{**n, "nghia": kb2.nghia_phu("no_nghiep", n["so"])} for n in cs["no_nghiep"]],
+        "bai_hoc_nghiep": [{"so": s, "nghia": kb2.nghia_phu("bai_hoc_nghiep", s)}
+                           for s in cs["bai_hoc_nghiep"]],
+        "trich_nguon": kb2.meta_phu()["nguon"],
+        "trang_thai": kb2.meta_phu()["trang_thai"],
     }
 
 
@@ -144,6 +174,7 @@ def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int) -> dict:
         "ten_bien_the_da_quet": ho_ten,
         "cac_vi_tri": cac_vi_tri,
         "chieu_sau": luan_chieu_sau(ngay, thang, nam),
+        "mo_rong": luan_mo_rong(ten_chinh, ngay, thang, nam),
         "tom_tat_do_tin": (
             f"Kết quả theo quy ước chính thức (quy tắc Y khoá). "
             f"{so_on_dinh}/4 chỉ số ổn định qua mọi cách viết tên; "
