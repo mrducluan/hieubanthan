@@ -47,7 +47,13 @@ Ký hiệu: 🟢 làm song song được ngay · 🟡 cần anh quyết một đ
 - Chạy test drift Tuần/Triệt (`test_tuan_triet_drift.py`) và golden.
 - Không thêm dependency nào. **Nên làm đầu tiên** để các luồng song song không làm vỡ nhau.
 
-### WS-2 🟢 SPEC-005 wiring: an sao tử vi đầy đủ qua iztro
+### WS-2 ✅ SPEC-005 wiring: an sao tử vi đầy đủ qua iztro — XONG phần engine + API 2026-09-30
+- **Đã làm:** `engine/ziwei/` (iztro **ghim 2.6.0** + lockfile, `an_sao.mjs`), `app/calc/tuvi_an_sao.py` (subprocess, tất định,
+  cache), `POST /v1/tuvi/an-sao` (cùng tiền xử lý âm lịch/múi giờ/cờ với tuần-triệt, cờ `ty_conflict` cho 23:xx, cờ
+  `nam_phai`), web `POST /api/tuvi/la-so` (zod hai chiều; **không** đổi `/api/tuvi/chart` v0 đã duyệt). 8/8 lá golden khớp
+  tuyệt đối. Dockerfile hai tầng (node:22-trixie-slim → python:3.12-slim) đã build + chạy thử. CI cài iztro trước pytest/E2E.
+- **Phát hiện phụ:** lỗi đổi lịch âm (Tết 1990 lệch 1 tháng) → PR sửa riêng, WS-2 dựng trên bản sửa.
+- **Còn lại:** UI hiển thị lá số; đối chiếu bộ phụ tinh Nam phái (rủi ro dưới); WS-6 RULES tử vi.
 - Endpoint `/v1/tuvi/an-sao`: Python gọi Node subprocess chạy iztro (đã duyệt 2026-08-15).
 - Test **viết trước**, so từng cung với `engine/fixtures/golden/ziwei_golden.json` (8 lá).
 - Cờ `_ty_conflict` cho người sinh 23:00–23:59 (tử vi SWITCH_AT_2300 vs thần số SWITCH_AT_0000).

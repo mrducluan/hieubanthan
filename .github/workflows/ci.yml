@@ -27,7 +27,14 @@ jobs:
           cache: pip
           cache-dependency-path: engine/requirements.txt
       - run: pip install -r engine/requirements.txt
-      - name: pytest (gồm golden + drift Tuần/Triệt)
+      # iztro (an sao tử vi, SPEC-005) — engine gọi qua Node; ghim trong lockfile.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: engine/ziwei/package-lock.json
+      - run: npm ci --prefix engine/ziwei
+      - name: pytest (gồm golden + drift Tuần/Triệt + golden an sao iztro)
         working-directory: engine
         run: python -m pytest -q
 
