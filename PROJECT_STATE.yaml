@@ -1,0 +1,35 @@
+# Trạng thái dự án — theo mẫu Development Control Plane (Technical Blueprint v1.1 §86).
+# Cập nhật cuối mỗi PR. Tiến độ = giả thuyết có thêm bằng chứng, không phải số commit.
+blueprint_version: "1.1"
+current_phase: 1
+current_hypothesis: >-
+  H1 Free Reading thu hút người dùng + H2 Metaphysics ID tạo gắn bó
+  (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
+current_build: "UI-0…UI-6 — làm lại UI (docs/THIET-KE-UI.md)"
+current_gate: "Gate 0 (kỹ thuật đạt; chưa có 20–50 người thử) → Gate 1"
+current_metrics: []   # có sau UI-6 (PostHog)
+current_risks:
+  - "Chưa có bằng chứng người dùng thật (Gate 0 phần định tính chưa làm)"
+  - "Phase 2 làm trước Gate 1 — phải tách funnel theo feature_version"
+  - "4 KB Huyền học + KB thần số v2 vẫn là nháp AI (trang_thai=nhap_ai)"
+  - "Lưu ngày sinh trong tài khoản — NĐ 13/2023, cần chính sách riêng tư trước khi mở công khai"
+completed_work:
+  - "Engine thần số deterministic + golden + Q&A v2 + vòng tự cải thiện (PR #1–#7)"
+  - "Huyền học HH-1…HH-5: Kinh Dịch, Tử vi, Bát tự, Phong thuỷ (PR #8, #9)"
+  - "UI-0: nghiên cứu UX + thiết kế"
+active_work:
+  - "UI-1 nền tảng UI"
+blocked_work:
+  - "UI-4 cần chủ dự án bật Supabase Auth (email, Google, SMS) + env"
+  - "UI-6 cần NEXT_PUBLIC_POSTHOG_KEY"
+next_candidate_tasks:
+  - "UI-1 Nền tảng: Tailwind + shadcn/Radix + motion, app shell, hồ sơ trên máy, landing"
+  - "UI-2 Thần số: nghi thức hé lộ 3 lớp + Metaphysics ID"
+  - "Tuyển 20–50 người thử (Gate 0 định tính)"
+prohibited_until_gate:
+  - "Credits / Payment"
+  - "Life Advisor (Ask My Life liên mảng)"
+  - "Community"
+  - "Marketplace"
+  - "Native Mobile"
+last_updated: "2026-09-30"
