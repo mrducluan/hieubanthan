@@ -1,6 +1,7 @@
 // POST /api/chia-se/tao — tạo mã chia sẻ/lời mời có KÝ. Server tự gọi engine tính số (client không
 // tự khai số được); link chỉ mang tên hiển thị + các con số, không mang ngày sinh (lib/ma-moi.ts).
 import { NextResponse } from "next/server";
+import { loiEngine } from "@/lib/proxy";
 import { z } from "zod";
 import { kyMa } from "@/lib/ma-moi";
 import type { LuanGiaiResult } from "@/lib/engine";
@@ -27,7 +28,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       body: JSON.stringify(nguoi),
       cache: "no-store",
     });
-    if (!r.ok) return NextResponse.json({ error: "Chưa tính được lúc này." }, { status: r.status });
+    if (!r.ok) { const l = loiEngine(r.status, await r.json().catch(() => null)); return NextResponse.json({ error: l.error }, { status: l.status }); }
     const kq = (await r.json()) as LuanGiaiResult;
     const so = kq.cac_vi_tri.map((v) => v.gia_tri);
     const k = kq.cac_vi_tri.find((v) => v.vi_tri === "duong_doi")?.nghia?.tu_khoa;
