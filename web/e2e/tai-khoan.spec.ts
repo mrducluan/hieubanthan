@@ -17,3 +17,10 @@ test("đăng nhập khi chưa bật tài khoản: báo gọn, không lỗi", asy
   await page.goto("/dang-nhap");
   await expect(page.getByRole("heading", { name: "Tài khoản đang được chuẩn bị" })).toBeVisible();
 });
+
+test("mã giới thiệu ?gt= được nhớ trên máy (để thưởng Sao khi tạo tài khoản); mã rác bị bỏ", async ({ page }) => {
+  await page.goto("/?gt=ab12cd34");
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("hbt.gt") ?? "null")?.ma)).toBe("ab12cd34");
+  await page.goto("/kien-thuc?gt=<script>");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.gt") ?? "null")?.ma)).toBe("ab12cd34");
+});

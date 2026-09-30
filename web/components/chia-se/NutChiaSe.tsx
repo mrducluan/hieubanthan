@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useNguoiDung } from "@/lib/tai-khoan";
+import { useMaCuaToi } from "@/lib/sao";
 import { Check, Copy, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,6 +28,8 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const nguoiDung = useNguoiDung();
+  const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
 
   async function tao() {
     setDang(true); setLoi(null);
@@ -33,7 +37,9 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
       const { ma } = await postJson<{ ma: string }>("/api/chia-se/tao", {
         ten_hien_thi: ten.trim() || tenGoi(hoSo), ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam,
       });
-      const url = new URL(duongDan(ma), window.location.origin).toString();
+      const u = new URL(duongDan(ma), window.location.origin);
+      if (maCuaToi) u.searchParams.set("gt", maCuaToi);   // người được mời tạo tài khoản → cả hai nhận Sao
+      const url = u.toString();
       setLink(url);
       ghi("share_created", { kind: loai, ma_moi: maMoiTuToken(ma) });
       onDaTao?.(ma);

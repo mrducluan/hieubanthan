@@ -5,7 +5,7 @@ current_phase: 1
 current_hypothesis: >-
   H1 Free Reading thu hút người dùng + H2 Metaphysics ID tạo gắn bó
   (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
-current_build: "UI-0…UI-6 — làm lại UI (docs/THIET-KE-UI.md)"
+current_build: "TV-A hồ sơ Tử vi · SEO-B SEO/GEO · CR-C Sao + thưởng mời (chưa thanh toán)"
 current_gate: "Gate 0 (kỹ thuật đạt; chưa có 20–50 người thử) → Gate 1"
 current_metrics: []   # có khi bật NEXT_PUBLIC_POSTHOG_KEY
 current_risks:
@@ -13,23 +13,32 @@ current_risks:
   - "Phase 2 làm trước Gate 1 — phải tách funnel theo feature_version"
   - "4 KB Huyền học + KB thần số v2 vẫn là nháp AI (trang_thai=nhap_ai)"
   - "Lưu ngày sinh trong tài khoản — NĐ 13/2023, cần chính sách riêng tư trước khi mở công khai"
+  - "Credit (Sao) làm trước Gate 1 theo quyết định chủ dự án — chỉ điểm nội bộ, chưa thu tiền; mở thanh toán cần luật sư (docs/DE-XUAT-KINH-TE-CONG-DONG.md)"
+  - "SEO: index cả nháp AI (quyết định chủ dự án) — rủi ro chính sách nội dung AI hàng loạt của Google; trang nháp luôn gắn nhãn"
+  - "Staging đang bật Basic Auth → máy tìm kiếm/bot AI chưa vào được cho tới khi mở công khai"
 completed_work:
   - "Engine thần số deterministic + golden + Q&A v2 + vòng tự cải thiện (PR #1–#7)"
   - "Huyền học HH-1…HH-5: Kinh Dịch, Tử vi, Bát tự, Phong thuỷ (PR #8, #9)"
   - "UI-0: nghiên cứu UX + thiết kế"
   - "UI-1…UI-3: design system Đêm sao, hồ sơ trên máy, Thần số 3 lớp + Metaphysics ID, 4 mảng Huyền học có hình trực quan + khung chat"
   - "UI-4 tài khoản (email/Google/SMS, bảng ho_so 0006 RLS), UI-5 hợp đôi + link mời có ký + thẻ OG, UI-6 đo funnel PostHog + góp ý"
+  - "TV-A: nơi sinh (63 tỉnh/nước ngoài giờ địa phương), nhập âm lịch (miền Nam 1960–75 UTC+8), cảnh báo giờ mặt trời; migration 0007"
+  - "SEO-B: 90 trang kiến thức server-render (12 số, 64 quẻ, 14 sao) + JSON-LD, sitemap, robots mở bot AI, llms.txt/llms-full.txt"
+  - "CR-C: sổ cái Sao + mã mời + thưởng hai phía một tầng (migration 0008, hàm SECURITY DEFINER)"
 active_work:
-  - "Chờ chủ dự án: review PR UI, cấu hình env (LOI_MOI_SECRET, PostHog, Supabase Auth), duyệt + chạy 0006"
+  - "Chờ chủ dự án: review PR, duyệt + chạy 0006 → 0007 → 0008, cấu hình env, bỏ Basic Auth khi mở công khai"
 blocked_work:
   - "Tài khoản chạy thật cần: bật Supabase Auth (Email, Google OAuth, Phone/SMS provider) + env + chạy 0006"
   - "Đo lường chạy thật cần NEXT_PUBLIC_POSTHOG_KEY"
   - "Link chia sẻ trên production cần LOI_MOI_SECRET"
+  - "Ví Sao chạy thật cần Supabase Auth + chạy 0008"
 next_candidate_tasks:
   - "Tuyển 20–50 người thử (Gate 0 định tính) trên bản UI mới — đo funnel Phase 1 bằng PostHog"
   - "Đọc số Gate 1 (landing→start→complete→profile, góp ý) trước khi mở rộng tính năng"
+  - "Duyệt nháp KB (quẻ, sao) để đổi nhãn nháp → đã duyệt; mở rộng trang kiến thức (cung, thập thần, năm cá nhân theo năm)"
+  - "PT-V0: bộ đánh giá ảnh phong thuỷ (docs/LO-TRINH-PHONG-THUY-HINH-ANH.md)"
 prohibited_until_gate:
-  - "Credits / Payment"
+  - "Payment (mua Sao) — Sao nội bộ đã có"
   - "Life Advisor (Ask My Life liên mảng)"
   - "Community"
   - "Marketplace"
