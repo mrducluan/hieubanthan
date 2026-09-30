@@ -1,6 +1,7 @@
 // POST /api/tuvi/la-so — SPEC-005: lá số an sao đầy đủ (iztro chạy cục bộ trong engine).
 // Proxy mỏng như /api/tuvi/chart: zod hai chiều, KHÔNG tự tính gì. Đầu vào giống chart.
 import { NextResponse } from "next/server";
+import { loiEngine } from "@/lib/proxy";
 import { ChartInput, LaSoOutput } from "../schema";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
@@ -27,16 +28,13 @@ export async function POST(req: Request): Promise<NextResponse> {
       cache: "no-store",
     });
   } catch {
-    return NextResponse.json({ error: "Không kết nối được engine (port 8000)" }, { status: 502 });
+    return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });
   }
 
   const body: unknown = await engineRes.json().catch(() => null);
   if (!engineRes.ok) {
-    const detail =
-      body !== null && typeof body === "object" && "detail" in body
-        ? String((body as { detail: unknown }).detail)
-        : engineRes.statusText;
-    return NextResponse.json({ error: detail }, { status: engineRes.status });
+    const l = loiEngine(engineRes.status, body);
+    return NextResponse.json({ error: l.error }, { status: l.status });
   }
 
   const out = LaSoOutput.safeParse(body);

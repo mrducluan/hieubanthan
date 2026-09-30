@@ -1,6 +1,7 @@
 // POST /api/tuvi/chart — SPEC-004a.
 // Web là proxy mỏng: validate bằng zod hai chiều, gọi engine, KHÔNG tự tính gì.
 import { NextResponse } from "next/server";
+import { loiEngine } from "@/lib/proxy";
 import { ChartInput, ChartOutput } from "../schema";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
@@ -35,18 +36,15 @@ export async function POST(req: Request): Promise<NextResponse> {
     });
   } catch {
     return NextResponse.json(
-      { error: "Không kết nối được engine (port 8000)" },
+      { error: "Không kết nối được máy tính toán. Thử lại sau ít phút." },
       { status: 502 },
     );
   }
 
   const body: unknown = await engineRes.json().catch(() => null);
   if (!engineRes.ok) {
-    const detail =
-      body !== null && typeof body === "object" && "detail" in body
-        ? String((body as { detail: unknown }).detail)
-        : engineRes.statusText;
-    return NextResponse.json({ error: detail }, { status: engineRes.status });
+    const l = loiEngine(engineRes.status, body);
+    return NextResponse.json({ error: l.error }, { status: l.status });
   }
 
   // Validate output: engine đổi shape mà web chưa cập nhật → lỗi to, rõ, ngay

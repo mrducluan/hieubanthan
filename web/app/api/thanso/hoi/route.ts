@@ -2,6 +2,7 @@
 // Engine v2 trả lời được cả khi chưa bật LLM (template từ kho tri thức).
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { loiEngine } from "@/lib/proxy";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
@@ -37,10 +38,11 @@ export async function POST(req: Request): Promise<NextResponse> {
     });
     const body = await r.json().catch(() => null);
     if (!r.ok) {
-      return NextResponse.json({ error: "Engine lỗi" }, { status: r.status });
+      const l = loiEngine(r.status, body);
+      return NextResponse.json({ error: l.error }, { status: l.status });
     }
     return NextResponse.json(body);
   } catch {
-    return NextResponse.json({ error: "Không kết nối được engine" }, { status: 502 });
+    return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });
   }
 }

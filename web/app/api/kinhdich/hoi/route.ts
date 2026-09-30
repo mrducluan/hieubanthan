@@ -2,6 +2,7 @@
 // Web không tự gieo, không tự chọn quẻ: quẻ do engine gieo, Mai Hoa theo giờ, hoặc gieo tay.
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { loiEngine } from "@/lib/proxy";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
@@ -30,12 +31,11 @@ export async function POST(req: Request): Promise<NextResponse> {
     });
     const body: unknown = await r.json().catch(() => null);
     if (!r.ok) {
-      const detail = body && typeof body === "object" && "detail" in body
-        ? String((body as { detail: unknown }).detail) : "Engine lỗi";
-      return NextResponse.json({ error: detail }, { status: r.status });
+      const l = loiEngine(r.status, body);
+      return NextResponse.json({ error: l.error }, { status: l.status });
     }
     return NextResponse.json(body);
   } catch {
-    return NextResponse.json({ error: "Không kết nối được engine" }, { status: 502 });
+    return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });
   }
 }

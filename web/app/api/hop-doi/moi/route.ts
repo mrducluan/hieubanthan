@@ -1,6 +1,7 @@
 // POST /api/hop-doi/moi — người được mời xem hợp đôi: số người mời lấy TỪ MÃ ĐÃ KÝ (không tin client),
 // số người được mời lấy từ bài đọc của chính họ. Engine so cặp từ số (/v1/thanso/cap-so).
 import { NextResponse } from "next/server";
+import { loiEngine } from "@/lib/proxy";
 import { z } from "zod";
 import { docMa } from "@/lib/ma-moi";
 
@@ -29,7 +30,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       cache: "no-store",
     });
     const body: unknown = await r.json().catch(() => null);
-    if (!r.ok) return NextResponse.json({ error: "Chưa tính được lúc này." }, { status: r.status });
+    if (!r.ok) { const l = loiEngine(r.status, await r.json().catch(() => null)); return NextResponse.json({ error: l.error }, { status: l.status }); }
     return NextResponse.json(body);
   } catch {
     return NextResponse.json({ error: "Không kết nối được máy tính toán." }, { status: 502 });
