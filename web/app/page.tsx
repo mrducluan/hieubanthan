@@ -27,8 +27,16 @@ export default async function Home() {
           </p>
         </Link>
 
+        <Link href="/kinh-dich" className="home-card">
+          <h2>Kinh Dịch</h2>
+          <p>
+            Hỏi một quẻ cho một việc: Nghĩa Lý, Lục Hào hoặc Mai Hoa — lời đọc có nguồn,
+            kèm mặt tối và câu tự soi.
+          </p>
+        </Link>
+
         <div className="home-card" style={{ borderStyle: "dashed", cursor: "default" }}>
-          <h2>Nhân tướng · Tử vi · Kinh Dịch</h2>
+          <h2>Nhân tướng · Tử vi · Bát tự · Phong thuỷ</h2>
           <p className="soon">Đang xây dựng.</p>
         </div>
       </div>

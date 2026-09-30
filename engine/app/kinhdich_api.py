@@ -19,6 +19,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import kinhdich
+from app.hoidap import kinhdich as hoidap_kd
 from app.config import ENGINE_VERSION
 
 router = APIRouter(prefix="/v1/kinhdich", tags=["kinhdich"])
@@ -79,3 +80,29 @@ def api_khoi_que(inp: KhoiQueInput) -> dict:
         **que,
         "co_canh_bao": flags,
     }
+
+
+class HoiKDInput(BaseModel):
+    """Hỏi đáp Kinh Dịch. Không có trường chọn quẻ theo số (extra=forbid)."""
+    model_config = ConfigDict(extra="forbid")
+
+    cau_hoi: str = Field(min_length=3, max_length=500)
+    che_do: Literal["tu_dong", "nghia_ly", "day_du"] = "tu_dong"
+    cach_ra_que: Literal["may_gieo", "gieo_tay", "mai_hoa"] = "may_gieo"
+    phuong_phap: Literal["thi", "tien", "thi-vatly"] = "thi"
+    gia_tri_hao: list[int] | None = Field(default=None, min_length=6, max_length=6)
+    thoi_diem: _dt.datetime | None = Field(default=None, description="Giờ Việt Nam; mặc định: bây giờ")
+
+
+@router.post("/hoi")
+def api_hoi(inp: HoiKDInput) -> dict:
+    """HH-1: phân loại → chọn phái (+ dụng thần) → ra quẻ → gói bằng chứng KB → trả lời."""
+    if inp.cach_ra_que == "gieo_tay" and inp.gia_tri_hao is None:
+        raise HTTPException(422, detail="Gieo tay: cần 6 giá trị hào (6/7/8/9, hào 1 → 6).")
+    try:
+        kq = hoidap_kd.tra_loi(inp.cau_hoi.strip(), inp.che_do, gia_tri_hao=inp.gia_tri_hao,
+                               thoi_diem=inp.thoi_diem.replace(tzinfo=None) if inp.thoi_diem else None,
+                               phuong_phap=inp.phuong_phap, cach_ra_que=inp.cach_ra_que)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e))
+    return {"engine_version": ENGINE_VERSION, **kq}

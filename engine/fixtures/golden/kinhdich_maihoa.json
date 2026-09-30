@@ -1,0 +1,11 @@
+{
+  "_nguon": "Hai ví dụ kinh điển trong 《梅花易數》 (Mai Hoa Dịch Số, Thiệu Ung): 觀梅占 (Quan mai chiêm) và 牡丹占 (Mẫu đơn chiêm). Tính tay theo phép niên–nguyệt–nhật–thời khởi quẻ: thượng = (năm+tháng+ngày) mod 8, hạ = (+giờ) mod 8, hào động = (+giờ) mod 6; số dư 0 lấy 8 / 6. Tiên thiên: Càn1 Đoài2 Ly3 Chấn4 Tốn5 Khảm6 Cấn7 Khôn8. Chi: Tý1 … Hợi12.",
+  "cac_ca": [
+    {"ten": "quan_mai_chiem", "chi_nam": "Thìn", "thang_am": 12, "ngay_am": 17, "chi_gio": "Thân",
+     "thuong": "Đoài", "ha": "Ly", "hao_dong": 1, "que_ban": 49, "que_bien": 31,
+     "the": "Đoài", "dung": "Ly", "the_dung": "dung_khac_the"},
+    {"ten": "mau_don_chiem", "chi_nam": "Tỵ", "thang_am": 3, "ngay_am": 16, "chi_gio": "Mão",
+     "thuong": "Càn", "ha": "Tốn", "hao_dong": 5, "que_ban": 44, "que_bien": 50,
+     "the": "Tốn", "dung": "Càn", "the_dung": "dung_khac_the"}
+  ]
+}
