@@ -13,7 +13,7 @@
 | Test engine | **120 passed, 2 skipped** (`pytest -q`) |
 | Web | `npm run typecheck` xanh, `npm run build` xanh (routes `/`, `/than-so`, `/api/thanso/hoi`, `/api/tuvi/chart`) |
 | Endpoint engine | `/health`, `/v1/kb/status`, `/v1/thanso/{do-nhay,luan-giai,van,hoi,chu-ky}`, `/v1/timebase/resolve`, `/v1/tuvi/tuan-triet` |
-| iztro | Bản mới nhất trên npm: **2.6.1, MIT**. Chưa có dòng code nào trong `engine/app` gọi iztro — mới chỉ có golden. |
+| iztro | Bản mới nhất trên npm: **2.6.1, MIT**. Engine ghim **2.6.0** (WS-2) — `/v1/tuvi/an-sao`. |
 | CI | **Chưa có** (`.github/` không tồn tại). Test chỉ chạy tay. |
 | Kinh Dịch | Mới có `source-skills/kinh-dich/gieoque.py` (207 dòng), **chưa port vào engine**. |
 | Nhân tướng | Chưa bắt đầu (kanxiang MIT mới nằm trong kế hoạch). |
@@ -47,7 +47,12 @@ Ký hiệu: 🟢 làm song song được ngay · 🟡 cần anh quyết một đ
 - Chạy test drift Tuần/Triệt (`test_tuan_triet_drift.py`) và golden.
 - Không thêm dependency nào. **Nên làm đầu tiên** để các luồng song song không làm vỡ nhau.
 
-### WS-2 🟢 SPEC-005 wiring: an sao tử vi đầy đủ qua iztro
+### WS-2 ✅ SPEC-005 wiring: an sao tử vi đầy đủ qua iztro — XONG phần engine 2026-09-30
+- **Đã làm (nhánh `claude/ws2-iztro`):** `POST /v1/tuvi/an-sao`, `app/calc/ziwei.py` +
+  `app/calc/ziwei_node/` (iztro **ghim 2.6.0** + lockfile), test `tests/test_tuvi_an_sao.py`
+  so từng cung 8 lá golden (calc + API), `_ty_conflict`, Dockerfile đa tầng có Node (đã build
+  + chạy thử). Chi tiết, chỗ lệch Nam phái và lỗi `lunar.py` phát hiện được: nhật ký mục 8.
+- **Còn lại:** phần web (dòng "Web: thay `/api/tuvi/chart`…" bên dưới) — PR riêng.
 - Endpoint `/v1/tuvi/an-sao`: Python gọi Node subprocess chạy iztro (đã duyệt 2026-08-15).
 - Test **viết trước**, so từng cung với `engine/fixtures/golden/ziwei_golden.json` (8 lá).
 - Cờ `_ty_conflict` cho người sinh 23:00–23:59 (tử vi SWITCH_AT_2300 vs thần số SWITCH_AT_0000).

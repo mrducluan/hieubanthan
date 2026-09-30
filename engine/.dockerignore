@@ -4,3 +4,5 @@ __pycache__/
 tests/
 fixtures/ziwei_oracle_raw/
 .pytest_cache/
+# node_modules cài lại bằng npm ci trong Dockerfile (đúng lockfile), không chép từ máy dev
+app/calc/ziwei_node/node_modules/

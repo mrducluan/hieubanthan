@@ -156,9 +156,56 @@ chạy thật tại máy (trình duyệt → Next.js → engine → tính toán)
    hợp. Lục Hào thiếu dụng thần → 422. Chưa có luận giải/KB lời quẻ. Phát hiện: ví dụ nhật
    ký ở SKILL.md mục 9 (quẻ 26 động [3,6] → 41) lệch; đúng là → 19, ra 41 khi chỉ động hào 3.
    Kế hoạch tổng: `docs/KE-HOACH-E2E.md`.
-5. **SPEC-005 wiring** — an sao tử vi đầy đủ qua iztro (Node subprocess),
-   endpoint `/v1/tuvi/an-sao`, test đối chiếu `ziwei_golden.json`. Rồi lặp lại
-   pipeline KB+luận giải cho tử vi (kho lớn).
+5. ✅ ~~SPEC-005 wiring (WS-2)~~ — XONG 2026-09-30 (engine; web chưa đụng).
+   `POST /v1/tuvi/an-sao`: giờ đồng hồ → timebase (múi giờ lịch sử) → timeIndex
+   iztro → `app/calc/ziwei.py` gọi Node subprocess `app/calc/ziwei_node/an_sao.mjs`
+   (JSON stdin/stdout, timeout 10s, env tối thiểu, mỗi lần một tiến trình).
+   Trả 12 cung: tên cung, can chi, cờ Mệnh/Thân/Lai Nhân, chính tinh + độ sáng +
+   tứ hoá, phụ tinh, tạp tinh, 4 vòng 12 thần, đại hạn, tuổi tiểu hạn — tên zh-CN
+   (khoá đối chiếu) + vi-VN (bản dịch có sẵn của iztro). Máy thiếu Node → 503;
+   test skip rõ ràng. Auth `X-Engine-Key` qua middleware chung.
+   - **iztro ghim 2.6.0** (`package.json` ghim cứng + `package-lock.json`, hằng
+     `config.IZTRO_VERSION`; engine từ chối chạy nếu bản cài khác). Bản đã sinh
+     golden **không được ghi lại**; đã chạy lại generator với 2.5.8, 2.6.0, 2.6.1
+     → cả ba khớp golden 100%. Chọn 2.6.0 vì là bản mới nhất trên npm lúc commit
+     golden (2.6.0 phát hành 2026-08-15 03:14 UTC; golden commit 09:02 UTC cùng ngày).
+   - **Giờ Tý:** `config.TUVI_TY_BOUNDARY = SWITCH_AT_2300` (mô tả hành vi iztro),
+     thần số giữ `SWITCH_AT_0000`. Sinh 23:00–23:59 (theo giờ kinh tuyến UTC+7,
+     sau quy đổi múi giờ) → `_ty_conflict=true` + cờ `ty_conflict`.
+   - **Golden có trường đặt tên sai:** `la_menh` trong `ziwei_golden.json` thực ra
+     là `isOriginalPalace` của iztro = cung **Lai Nhân** (来因宫), chỉ trùng cung
+     Mệnh ở 1/8 lá. Không sửa golden; engine trả `la_lai_nhan` (so với trường đó)
+     và `la_menh` đúng nghĩa (cung 命宫, kiểm bằng `soulPalaceBranch`).
+   - Cờ `lich_am_lech`: đối chiếu lịch âm HND của engine với lịch âm của iztro.
+   - Docker: đa tầng `node:22-bookworm-slim` (`npm ci` theo lock) → chép binary
+     `node` + `node_modules` sang `python:3.12-slim`; smoke test an sao ngay lúc
+     build. Đã build + chạy container thật trong cloud session (401 khi thiếu
+     khoá, Tý muộn trả `_ty_conflict=true`).
+   - Còn lại của WS-2: web thay `/api/tuvi/chart` sang lá số đầy đủ, validate
+     `chart.schema.json` v0 (PR riêng — PR này không đụng web).
+
+   **Lệch iztro so với Nam phái (`source-skills/tuvi-vn/SKILL.md` mục 1) — ghi
+   nhận, KHÔNG sửa logic iztro.** Đối chiếu sơ bộ trên 8 lá golden, cần người có
+   nghề xác nhận trước khi dùng cho RULES/KB:
+   | Điểm | iztro 2.6.0 trả gì | Nam phái cần gì |
+   |---|---|---|
+   | Phái | 紫微斗数全书 (Trung Quốc) | Nam phái (Nguyễn Phát Lộc) — response ghi rõ `truong_phai_an_sao` |
+   | Bộ sao | 14 chính + 14 phụ tinh + 38 tạp tinh ≈ 66 sao | ~110–118 sao; thiếu hẳn nhiều sao Việt (Lưu Hà, Thiên Y, Quốc Ấn, Đường Phù, Thiên/Địa Giải, Thiên La/Địa Võng…). Thiên Trù có |
+   | Tuần/Triệt | Là tạp tinh đơn `旬空`/`截路` trong một cung | Trụ cột luận, án ngữ cặp cung → dùng `/v1/tuvi/tuan-triet` (vendor Nam phái) |
+   | Vòng Thái Tuế | 岁前12神: Tuế Kiện, Hối Khí, Tang Môn, Quán Tác, Quan Phù, Tiểu Hao, Đại Hao, Long Đức, Bạch Hổ, Thiên Đức, Điếu Khách, Bệnh Phù | Thái Tuế, Thiếu Dương, Tang Môn, Thiếu Âm, Quan Phù, Tử Phù, Tuế Phá, Long Đức, Bạch Hổ, Phúc Đức, Điếu Khách, Trực Phù — 6/12 tên khác |
+   | Tứ hoá | Chỉ tứ hoá sinh niên (đúng hướng Nam phái); response không phi hoá | Như iztro — không dùng phi tinh |
+   | Lịch âm | lunar-lite (lịch Trung Quốc, UTC+8) | Lịch Việt UTC+7 — lệch thật ở một số tháng (vd. Tết 1968, 1985) → cờ `lich_am_lech` |
+
+   **⚠️ Phát hiện lỗi ngoài phạm vi WS-2 — `app/calc/lunar.py` (chưa sửa):** bản
+   port Python lệch thuật toán Hồ Ngọc Đức ở 2 chỗ: (1) `get_sun_longitude` dùng
+   `int()` (cắt về 0) thay cho `INT` = `floor` của bản gốc → với ngày trước ~2000
+   kinh độ âm, ra `-2` thay vì `10`, làm sai tháng 11/tháng nhuận; (2)
+   `get_new_moon_day` đảo dấu 3 hạng tử (`+0.0161·sin 2M'`, `+0.0004·sin(2F+M)`,
+   `−0.0006·sin(2F+M')`). Đo 1950–2030: engine lệch HND đúng ở **3.106 ngày**
+   (vd. 27/01/1952 — Tết Nhâm Thìn — ra 1/12/1951; 20/02/2023 ra 1/1 nhuận thay
+   vì 1/2). Bằng chứng bản sửa đúng: HND đã sửa chạy ở UTC+8 khớp lịch iztro
+   29.585/29.586 ngày. Sửa = đổi can chi năm/tháng âm của lá số cũ → phải tăng
+   `ENGINE_VERSION`, soát lại golden `test_lunar`/`tuvi_tuan_triet` → làm ở PR riêng.
 6. **Lớp LLM (tầng NARRATIVE nâng cao)** — OpenRouter, chỉ diễn đạt lại các
    trường từ KB, cấm thêm dữ kiện. Hiện đang chạy chế độ template không LLM.
 7. **Giai đoạn C** — trang tự quản trị nội dung + bài SEO.

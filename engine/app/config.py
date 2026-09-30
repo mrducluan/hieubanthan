@@ -47,6 +47,22 @@ class TyBoundary(str, Enum):
 TY_BOUNDARY_POLICY: TyBoundary | None = TyBoundary.SWITCH_AT_0000
 
 
+# Tử vi (an sao iztro) dùng quy ước RIÊNG — ĐÃ CHỐT 2026-08-15: theo iztro,
+# 23:00 sang ngày mới (Tý muộn = timeIndex 12, trụ ngày hôm sau). Thần số học
+# + bát tự vẫn theo TY_BOUNDARY_POLICY ở trên. Hai module hai quy ước → người
+# sinh 23:00–23:59 BẮT BUỘC được gắn cờ `_ty_conflict`.
+# Hằng này mô tả hành vi của iztro, không điều khiển nó — đổi ở đây vô nghĩa
+# nếu không đổi engine an sao.
+TUVI_TY_BOUNDARY: TyBoundary = TyBoundary.SWITCH_AT_2300
+
+# iztro GHIM đúng bản đã sinh golden SPEC-005 (ziwei_golden.json, 2026-08-15).
+# Bản chính xác không ghi lại lúc sinh; 2.5.8, 2.6.0, 2.6.1 đều khớp golden
+# 100% (kiểm 2026-09-30). Chọn 2.6.0 = bản mới nhất trên npm tại thời điểm
+# commit golden (2.6.0 phát hành 2026-08-15 03:14 UTC, golden commit 09:02 UTC).
+# Đổi = sửa ziwei_node/package.json + lock, sinh lại golden, tăng ENGINE_VERSION.
+IZTRO_VERSION = "2.6.0"
+
+
 def require_ty_boundary() -> TyBoundary:
     """Fail-fast. Engine từ chối phục vụ khi chính sách chưa được chốt."""
     if TY_BOUNDARY_POLICY is None:
