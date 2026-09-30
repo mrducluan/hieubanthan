@@ -53,8 +53,43 @@ KD_LOAI = {"quyet_dinh": "quyet_dinh", "loi_khuyen": "quyet_dinh", "du_doan": "d
            "thoi_diem": "du_doan", "giai_thich": "ky_thuat", "mo_ta": "doc_nhanh"}
 
 
+# chu_de (nhãn) → loại câu hỏi mà module Tử vi phải nhận ra (None = chấp nhận mọi loại có căn cứ)
+TV_LOAI = {"hop_hon": {"hop_hon"}, "la_so_con": {"la_so_con"}, "la_so_nguoi_khac": {"nguoi_khac"},
+           "tuvi_ky_thuat": {"ky_thuat"}, "dai_han_luu_nien": {"han"}, "han_chi_tiet": {"han"},
+           "sao_cung": {"sao_cung"}, "tu_hoa_cung": {"tu_hoa_cung", "sao_cung"}}
+TV_CUNG = {"phu_the": {"Phu Thê"}, "tai_bach_dien_trach": {"Tài Bạch", "Điền Trạch"},
+           "tat_ach_tinh_than": {"Tật Ách"}, "quan_loc": {"Quan Lộc", "Nô Bộc", "Thiên Di", "Mệnh"}}
+SINH_MAU = {"ngay": None, "ti": 6, "gioi_tinh": "nam"}
+
+
+def cham_tuvi(r: dict) -> tuple[str, str]:
+    import datetime as dt  # noqa: PLC0415
+    sys.path.insert(0, str(GOC))
+    from app.hoidap import tuvi as tv  # noqa: PLC0415
+    sinh = {**SINH_MAU, "ngay": dt.date(1990, 5, 17)}
+    kq = tv.tra_loi(r["cau_hoi"], r["che_do"], sinh=sinh, ngay_xem=dt.date(2026, 9, 30))
+    pl = kq["phan_loai"]
+    if r["xu_ly"] in ("an_toan", "tu_choi_nhe"):
+        return ("day_du", "") if pl["xu_ly"] == r["xu_ly"] else ("khong", f"sai đường {r['xu_ly']}")
+    if pl["xu_ly"] in ("an_toan", "tu_choi_nhe"):
+        return "khong", f"chặn nhầm ({pl['xu_ly']})"
+    if r["xu_ly"] == "can_them_du_lieu":
+        return ("day_du", "") if kq["can_them"] else ("mot_phan", "lẽ ra phải hỏi thêm dữ liệu")
+    if kq["do_phu"] != "day_du" or kq["loi_kiem_tra"] or kq["can_them"]:
+        return "khong", "không có căn cứ KB"
+    muon = TV_LOAI.get(r["chu_de"])
+    if muon and pl["loai"] not in muon:
+        return "mot_phan", f"lệch loại {r['chu_de']}→{pl['loai']}"
+    cung = TV_CUNG.get(r["chu_de"])
+    if cung and pl["loai"] == "la_so" and not cung & set(pl["cung"]):
+        return "mot_phan", f"lệch cung {r['chu_de']}→{pl['cung']}"
+    return "day_du", ""
+
+
 def cham_v2(r: dict) -> tuple[str, str] | None:
     """Chạy thật module đã có hỏi đáp. None = module chưa có (rơi về chấm khai báo)."""
+    if r["mo_dun"] == "tuvi":
+        return cham_tuvi(r)
     if r["mo_dun"] != "kinhdich":
         return None
     import datetime as dt  # noqa: PLC0415
@@ -92,7 +127,7 @@ def main() -> None:
         print(f"  {k:9s} {muc[k]:5d}  {100 * muc[k] / n:5.1f}%")
     for md, c in sorted(theo.items()):
         print(f"  {md:10s} {dict(c)}")
-    for why, c in ly_do.most_common(8):
+    for why, c in ly_do.most_common(int(next((a.split("=")[1] for a in sys.argv if a.startswith("--top=")), 8))):
         print(f"    {c:5d}  {why}")
 
 

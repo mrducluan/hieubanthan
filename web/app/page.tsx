@@ -35,8 +35,16 @@ export default async function Home() {
           </p>
         </Link>
 
+        <Link href="/tu-vi" className="home-card">
+          <h2>Tử vi</h2>
+          <p>
+            Hỏi về lá số: cung, sao, tứ hoá và vận hạn ba lớp — an sao cục bộ, lời đọc có nguồn,
+            không phán bệnh hay tai nạn.
+          </p>
+        </Link>
+
         <div className="home-card" style={{ borderStyle: "dashed", cursor: "default" }}>
-          <h2>Nhân tướng · Tử vi · Bát tự · Phong thuỷ</h2>
+          <h2>Nhân tướng · Bát tự · Phong thuỷ</h2>
           <p className="soon">Đang xây dựng.</p>
         </div>
       </div>

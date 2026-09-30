@@ -1,6 +1,7 @@
 // An sao tử vi qua iztro (MIT, SylarLong) — CHẠY CỤC BỘ, không gọi mạng.
 // Engine Python gọi file này qua subprocess (app/calc/tuvi_an_sao.py):
-//   stdin : {"ngay":"YYYY-M-D","time_index":0..12,"gioi_tinh":"nam"|"nu","ngon_ngu":"vi-VN"|"zh-CN"}
+//   stdin : {"ngay":"YYYY-M-D","time_index":0..12,"gioi_tinh":"nam"|"nu","ngon_ngu":"vi-VN"|"zh-CN",
+//            "ngay_xem":"YYYY-M-D" (tuỳ chọn → thêm khoá horoscope: đại hạn/tiểu hạn/lưu niên)}
 //   stdout: JSON lá số thô của iztro (chỉ các trường dữ liệu, không hàm).
 // Không viết lại logic an sao (quyết định 2026-08-15). iztro ghim trong package.json.
 import { readFileSync } from 'node:fs';
@@ -33,4 +34,11 @@ const ra = {
     ages: p.ages,
   })),
 };
+if (vao.ngay_xem) {
+  const h = a.horoscope(vao.ngay_xem);
+  const hc = (o) => ({ index: o.index, heavenlyStem: o.heavenlyStem, earthlyBranch: o.earthlyBranch,
+                       mutagen: o.mutagen || [] });
+  ra.horoscope = { decadal: hc(h.decadal), age: { ...hc(h.age), nominalAge: h.age.nominalAge },
+                   yearly: hc(h.yearly) };
+}
 process.stdout.write(JSON.stringify(ra));

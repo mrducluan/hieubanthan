@@ -86,7 +86,7 @@ Chế độ luận (quyết định 2026-09-30, "cả hai/cả ba"):
 |---|---|---|
 | HH-0 | Kho câu hỏi 4 mảng, đo mốc, tài liệu này | ✅ kho 2.031 câu, mốc 0% |
 | HH-1 | Lõi hỏi đáp dùng chung + **Kinh Dịch** (KB 64 quẻ, Mai Hoa, thể–dụng, chọn phái) | Kinh Dịch ≥ 85% có căn cứ |
-| HH-2 | **Tử vi** Q&A (KB sao × cung, tứ hoá, lưu niên, 2 chế độ) | Tử vi ≥ 85% |
+| HH-2 | **Tử vi** Q&A (KB sao × cung, tứ hoá, lưu niên, 2 chế độ) | ✅ kho 687/687; holdout viết sau router 20/24 trước sửa → 24/24 |
 | HH-3 | **Bát tự** (tiết khí, tứ trụ, thập thần, đại vận — golden oracle), Lục Hào vượng suy | golden 100%, Bát tự ≥ 80% |
 | HH-4 | **Phong thuỷ** (mệnh quái, bát trạch, cửa–chủ–bếp) | golden 100%, Phong thuỷ ≥ 80% |
 | HH-5 | Skill `huyenhoc-kb` + vòng tự cải thiện đa module, đối chiếu ctext khi mở mạng | vòng chạy được, báo cáo |
@@ -94,3 +94,21 @@ Chế độ luận (quyết định 2026-09-30, "cả hai/cả ba"):
 ## 5. Ranh giới giữ nguyên ở mọi chế độ
 Khủng hoảng → hỗ trợ (115/113/111) · không dự đoán ngày chết, không chẩn đoán bệnh, không xổ số,
 không dùng để tuyển/sa thải · không phán "khắc" người thứ ba · phong thuỷ không bán vật phẩm "hoá giải".
+
+## 6. Nhật ký thực hiện
+
+### HH-2 — Tử vi (2026-09-30)
+- CALC: `tuvi_an_sao.van_han()` — đại hạn / tiểu hạn / lưu niên qua `astro.horoscope()` của iztro
+  2.6.0 (cùng bản ghim). Golden `fixtures/golden/ziwei_van_han.json` (4 lá × 4 ngày xem) + hai
+  phép thử độc lập với iztro: tuổi mụ = năm âm xem − năm âm sinh + 1 (Hồ Ngọc Đức), chi lưu niên
+  = chi năm âm của ngày xem (gồm ca trước Tết).
+- KB `app/kb/data/tuvi_kb.json` (nháp AI, `can_doi_chieu`): 12 cung (xem được / **không trả lời
+  được**), 14 chính tinh, 14×12 sao-cung, độ sáng, tứ hoá × 12 cung, 26 phụ tinh, chủ đề hạn,
+  17 mục giải thích, mẫu người khác / hợp hôn / con.
+- RULES `app/hoidap/tuvi.py`: loại `sao_cung` · `tu_hoa_cung` · `phu_tinh` · `ky_thuat` (không cần
+  lá số) · `la_so` (chọn cung theo chủ đề, vô chính diệu mượn cung đối) · `han` (3 lớp tách bạch,
+  đại hạn kế tiếp, năm cụ thể) · `hop_hon` / `la_so_con` / `nguoi_khac` → xin dữ liệu + đồng ý.
+  `chi_tiet` thêm xu hướng thuận/nghịch theo lục cát / lục sát / Kỵ; câu "tai nạn/kiện" ở
+  `chi_tiet` được trả lời kèm lưu ý không đoán biến cố, ở `tham_khao` bị từ chối nhẹ.
+- API `POST /v1/tuvi/hoi` (extra=forbid, `la_so` tuỳ chọn) · web `/tu-vi` + `/api/tuvi/hoi` · E2E 2 ca.
+- Giới hạn: lá số theo khung iztro (Trung Quốc) — cờ `nam_phai`; hợp hôn hai lá chưa làm (chỉ xin dữ liệu).

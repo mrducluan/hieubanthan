@@ -54,13 +54,14 @@ def phien_ban_iztro() -> str:
 
 
 @lru_cache(maxsize=512)
-def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str) -> str:
+def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "") -> str:
     phien_ban_iztro()   # kiểm tra đã cài
     try:
         kq = subprocess.run([_node(), str(SCRIPT)], cwd=THU_MUC, capture_output=True, text=True,
                             timeout=TIMEOUT_GIAY, check=False,
                             input=json.dumps({"ngay": ngay, "time_index": ti,
-                                              "gioi_tinh": gioi_tinh, "ngon_ngu": ngon_ngu}))
+                                              "gioi_tinh": gioi_tinh, "ngon_ngu": ngon_ngu,
+                                              **({"ngay_xem": ngay_xem} if ngay_xem else {})}))
     except FileNotFoundError as e:
         raise AnSaoLoi("Không tìm thấy Node.js (đặt NODE_BIN nếu không ở PATH).") from e
     except subprocess.TimeoutExpired as e:
@@ -78,3 +79,36 @@ def an_sao_tho(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngon_ngu: str = "vi
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
     s = _chay(f"{ngay_duong.year}-{ngay_duong.month}-{ngay_duong.day}", ti, gioi_tinh, ngon_ngu)
     return json.loads(s)
+
+
+def _d(x: dt.date) -> str:
+    return f"{x.year}-{x.month}-{x.day}"
+
+
+def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date) -> dict:
+    """Đại hạn / tiểu hạn / lưu niên tại `ngay_xem` (iztro astro.horoscope, tên tiếng Việt).
+
+    `chi_so` là vị trí cung trong mảng 12 cung của lá số (0 = cung Dần); `cung_goc` là tên
+    cung của lá số gốc tại vị trí đó. Tuổi là tuổi mụ (đổi vào Tết âm lịch).
+    """
+    if not 0 <= ti <= 12:
+        raise ValueError("time_index phải trong 0..12")
+    if gioi_tinh not in ("nam", "nu"):
+        raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
+    la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, "vi-VN", _d(ngay_xem)))
+    h, cung = la["horoscope"], la["palaces"]
+
+    def _lop(o: dict, tu_hoa: bool = True) -> dict:
+        m = {"chi_so": o["index"], "can": o["heavenlyStem"], "chi": o["earthlyBranch"]}
+        if tu_hoa:
+            m["tu_hoa"] = o["mutagen"]
+        return m
+
+    dh = cung[h["decadal"]["index"]]["decadal"]["range"]
+    return {
+        "tuoi_mu": h["age"]["nominalAge"],
+        "dai_han": {**_lop(h["decadal"]), "tu_tuoi": dh[0], "den_tuoi": dh[1],
+                    "cung_goc": cung[h["decadal"]["index"]]["name"]},
+        "tieu_han": {**_lop(h["age"], False), "cung_goc": cung[h["age"]["index"]]["name"]},
+        "luu_nien": {**_lop(h["yearly"]), "cung_goc": cung[h["yearly"]["index"]]["name"]},
+    }

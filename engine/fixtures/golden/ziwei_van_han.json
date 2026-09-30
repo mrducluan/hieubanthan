@@ -1,0 +1,709 @@
+{
+ "_nguon": "iztro 2.6.0 astro.horoscope (vi-VN)",
+ "cases": {
+  "nam_1990_ngo@2026-9-30": {
+   "input": {
+    "id": "nam_1990_ngo",
+    "d": "1990-5-17",
+    "ti": 6,
+    "g": "male",
+    "ngay_xem": "2026-9-30"
+   },
+   "expect": {
+    "tuoi_mu": 37,
+    "dai_han": {
+     "chi_so": 0,
+     "can": "Mậu",
+     "chi": "Dần",
+     "tu_hoa": [
+      "Tham Lang",
+      "Thái Âm",
+      "Hữu Bật",
+      "Thiên Cơ"
+     ],
+     "tu_tuoi": 35,
+     "den_tuoi": 44,
+     "cung_goc": "Điền Trạch"
+    },
+    "tieu_han": {
+     "chi_so": 2,
+     "can": "Canh",
+     "chi": "Thìn",
+     "cung_goc": "Nô Bộc"
+    },
+    "luu_nien": {
+     "chi_so": 4,
+     "can": "Bính",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Văn Xương",
+      "Liêm Trinh"
+     ],
+     "cung_goc": "Tật Ách"
+    }
+   }
+  },
+  "nam_1990_ngo@2027-1-20": {
+   "input": {
+    "id": "nam_1990_ngo",
+    "d": "1990-5-17",
+    "ti": 6,
+    "g": "male",
+    "ngay_xem": "2027-1-20"
+   },
+   "expect": {
+    "tuoi_mu": 37,
+    "dai_han": {
+     "chi_so": 0,
+     "can": "Mậu",
+     "chi": "Dần",
+     "tu_hoa": [
+      "Tham Lang",
+      "Thái Âm",
+      "Hữu Bật",
+      "Thiên Cơ"
+     ],
+     "tu_tuoi": 35,
+     "den_tuoi": 44,
+     "cung_goc": "Điền Trạch"
+    },
+    "tieu_han": {
+     "chi_so": 2,
+     "can": "Canh",
+     "chi": "Thìn",
+     "cung_goc": "Nô Bộc"
+    },
+    "luu_nien": {
+     "chi_so": 4,
+     "can": "Bính",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Văn Xương",
+      "Liêm Trinh"
+     ],
+     "cung_goc": "Tật Ách"
+    }
+   }
+  },
+  "nam_1990_ngo@2027-3-1": {
+   "input": {
+    "id": "nam_1990_ngo",
+    "d": "1990-5-17",
+    "ti": 6,
+    "g": "male",
+    "ngay_xem": "2027-3-1"
+   },
+   "expect": {
+    "tuoi_mu": 38,
+    "dai_han": {
+     "chi_so": 0,
+     "can": "Mậu",
+     "chi": "Dần",
+     "tu_hoa": [
+      "Tham Lang",
+      "Thái Âm",
+      "Hữu Bật",
+      "Thiên Cơ"
+     ],
+     "tu_tuoi": 35,
+     "den_tuoi": 44,
+     "cung_goc": "Điền Trạch"
+    },
+    "tieu_han": {
+     "chi_so": 3,
+     "can": "Tân",
+     "chi": "Tỵ",
+     "cung_goc": "Thiên Di"
+    },
+    "luu_nien": {
+     "chi_so": 5,
+     "can": "Đinh",
+     "chi": "Mùi",
+     "tu_hoa": [
+      "Thái Âm",
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Cự Môn"
+     ],
+     "cung_goc": "Tài Bạch"
+    }
+   }
+  },
+  "nam_1990_ngo@2035-6-15": {
+   "input": {
+    "id": "nam_1990_ngo",
+    "d": "1990-5-17",
+    "ti": 6,
+    "g": "male",
+    "ngay_xem": "2035-6-15"
+   },
+   "expect": {
+    "tuoi_mu": 46,
+    "dai_han": {
+     "chi_so": 1,
+     "can": "Kỷ",
+     "chi": "Mão",
+     "tu_hoa": [
+      "Vũ Khúc",
+      "Tham Lang",
+      "Thiên Lương",
+      "Văn Khúc"
+     ],
+     "tu_tuoi": 45,
+     "den_tuoi": 54,
+     "cung_goc": "Quan Lộc"
+    },
+    "tieu_han": {
+     "chi_so": 11,
+     "can": "Kỷ",
+     "chi": "Sửu",
+     "cung_goc": "Phúc Đức"
+    },
+    "luu_nien": {
+     "chi_so": 1,
+     "can": "Ất",
+     "chi": "Mão",
+     "tu_hoa": [
+      "Thiên Cơ",
+      "Thiên Lương",
+      "Tử Vi",
+      "Thái Âm"
+     ],
+     "cung_goc": "Quan Lộc"
+    }
+   }
+  },
+  "nu_1992_dau@2026-9-30": {
+   "input": {
+    "id": "nu_1992_dau",
+    "d": "1992-8-21",
+    "ti": 4,
+    "g": "female",
+    "ngay_xem": "2026-9-30"
+   },
+   "expect": {
+    "tuoi_mu": 35,
+    "dai_han": {
+     "chi_so": 0,
+     "can": "Nhâm",
+     "chi": "Dần",
+     "tu_hoa": [
+      "Thiên Lương",
+      "Tử Vi",
+      "Tả Phù",
+      "Vũ Khúc"
+     ],
+     "tu_tuoi": 26,
+     "den_tuoi": 35,
+     "cung_goc": "Phu Thê"
+    },
+    "tieu_han": {
+     "chi_so": 10,
+     "can": "Nhâm",
+     "chi": "Tý",
+     "cung_goc": "Tài Bạch"
+    },
+    "luu_nien": {
+     "chi_so": 4,
+     "can": "Bính",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Văn Xương",
+      "Liêm Trinh"
+     ],
+     "cung_goc": "Phúc Đức"
+    }
+   }
+  },
+  "nu_1992_dau@2027-1-20": {
+   "input": {
+    "id": "nu_1992_dau",
+    "d": "1992-8-21",
+    "ti": 4,
+    "g": "female",
+    "ngay_xem": "2027-1-20"
+   },
+   "expect": {
+    "tuoi_mu": 35,
+    "dai_han": {
+     "chi_so": 0,
+     "can": "Nhâm",
+     "chi": "Dần",
+     "tu_hoa": [
+      "Thiên Lương",
+      "Tử Vi",
+      "Tả Phù",
+      "Vũ Khúc"
+     ],
+     "tu_tuoi": 26,
+     "den_tuoi": 35,
+     "cung_goc": "Phu Thê"
+    },
+    "tieu_han": {
+     "chi_so": 10,
+     "can": "Nhâm",
+     "chi": "Tý",
+     "cung_goc": "Tài Bạch"
+    },
+    "luu_nien": {
+     "chi_so": 4,
+     "can": "Bính",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Văn Xương",
+      "Liêm Trinh"
+     ],
+     "cung_goc": "Phúc Đức"
+    }
+   }
+  },
+  "nu_1992_dau@2027-3-1": {
+   "input": {
+    "id": "nu_1992_dau",
+    "d": "1992-8-21",
+    "ti": 4,
+    "g": "female",
+    "ngay_xem": "2027-3-1"
+   },
+   "expect": {
+    "tuoi_mu": 36,
+    "dai_han": {
+     "chi_so": 11,
+     "can": "Quý",
+     "chi": "Sửu",
+     "tu_hoa": [
+      "Phá Quân",
+      "Cự Môn",
+      "Thái Âm",
+      "Tham Lang"
+     ],
+     "tu_tuoi": 36,
+     "den_tuoi": 45,
+     "cung_goc": "Tử Nữ"
+    },
+    "tieu_han": {
+     "chi_so": 9,
+     "can": "Tân",
+     "chi": "Hợi",
+     "cung_goc": "Tật Ách"
+    },
+    "luu_nien": {
+     "chi_so": 5,
+     "can": "Đinh",
+     "chi": "Mùi",
+     "tu_hoa": [
+      "Thái Âm",
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Cự Môn"
+     ],
+     "cung_goc": "Điền Trạch"
+    }
+   }
+  },
+  "nu_1992_dau@2035-6-15": {
+   "input": {
+    "id": "nu_1992_dau",
+    "d": "1992-8-21",
+    "ti": 4,
+    "g": "female",
+    "ngay_xem": "2035-6-15"
+   },
+   "expect": {
+    "tuoi_mu": 44,
+    "dai_han": {
+     "chi_so": 11,
+     "can": "Quý",
+     "chi": "Sửu",
+     "tu_hoa": [
+      "Phá Quân",
+      "Cự Môn",
+      "Thái Âm",
+      "Tham Lang"
+     ],
+     "tu_tuoi": 36,
+     "den_tuoi": 45,
+     "cung_goc": "Tử Nữ"
+    },
+    "tieu_han": {
+     "chi_so": 1,
+     "can": "Quý",
+     "chi": "Mão",
+     "cung_goc": "Huynh Đệ"
+    },
+    "luu_nien": {
+     "chi_so": 1,
+     "can": "Ất",
+     "chi": "Mão",
+     "tu_hoa": [
+      "Thiên Cơ",
+      "Thiên Lương",
+      "Tử Vi",
+      "Thái Âm"
+     ],
+     "cung_goc": "Huynh Đệ"
+    }
+   }
+  },
+  "nam_1988_truoc_tet@2026-9-30": {
+   "input": {
+    "id": "nam_1988_truoc_tet",
+    "d": "1988-2-5",
+    "ti": 3,
+    "g": "male",
+    "ngay_xem": "2026-9-30"
+   },
+   "expect": {
+    "tuoi_mu": 40,
+    "dai_han": {
+     "chi_so": 5,
+     "can": "Đinh",
+     "chi": "Mùi",
+     "tu_hoa": [
+      "Thái Âm",
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Cự Môn"
+     ],
+     "tu_tuoi": 34,
+     "den_tuoi": 43,
+     "cung_goc": "Tử Nữ"
+    },
+    "tieu_han": {
+     "chi_so": 2,
+     "can": "Giáp",
+     "chi": "Thìn",
+     "cung_goc": "Thiên Di"
+    },
+    "luu_nien": {
+     "chi_so": 4,
+     "can": "Bính",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Văn Xương",
+      "Liêm Trinh"
+     ],
+     "cung_goc": "Tài Bạch"
+    }
+   }
+  },
+  "nam_1988_truoc_tet@2027-1-20": {
+   "input": {
+    "id": "nam_1988_truoc_tet",
+    "d": "1988-2-5",
+    "ti": 3,
+    "g": "male",
+    "ngay_xem": "2027-1-20"
+   },
+   "expect": {
+    "tuoi_mu": 40,
+    "dai_han": {
+     "chi_so": 5,
+     "can": "Đinh",
+     "chi": "Mùi",
+     "tu_hoa": [
+      "Thái Âm",
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Cự Môn"
+     ],
+     "tu_tuoi": 34,
+     "den_tuoi": 43,
+     "cung_goc": "Tử Nữ"
+    },
+    "tieu_han": {
+     "chi_so": 2,
+     "can": "Giáp",
+     "chi": "Thìn",
+     "cung_goc": "Thiên Di"
+    },
+    "luu_nien": {
+     "chi_so": 4,
+     "can": "Bính",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Văn Xương",
+      "Liêm Trinh"
+     ],
+     "cung_goc": "Tài Bạch"
+    }
+   }
+  },
+  "nam_1988_truoc_tet@2027-3-1": {
+   "input": {
+    "id": "nam_1988_truoc_tet",
+    "d": "1988-2-5",
+    "ti": 3,
+    "g": "male",
+    "ngay_xem": "2027-3-1"
+   },
+   "expect": {
+    "tuoi_mu": 41,
+    "dai_han": {
+     "chi_so": 5,
+     "can": "Đinh",
+     "chi": "Mùi",
+     "tu_hoa": [
+      "Thái Âm",
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Cự Môn"
+     ],
+     "tu_tuoi": 34,
+     "den_tuoi": 43,
+     "cung_goc": "Tử Nữ"
+    },
+    "tieu_han": {
+     "chi_so": 3,
+     "can": "Ất",
+     "chi": "Tỵ",
+     "cung_goc": "Tật Ách"
+    },
+    "luu_nien": {
+     "chi_so": 5,
+     "can": "Đinh",
+     "chi": "Mùi",
+     "tu_hoa": [
+      "Thái Âm",
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Cự Môn"
+     ],
+     "cung_goc": "Tử Nữ"
+    }
+   }
+  },
+  "nam_1988_truoc_tet@2035-6-15": {
+   "input": {
+    "id": "nam_1988_truoc_tet",
+    "d": "1988-2-5",
+    "ti": 3,
+    "g": "male",
+    "ngay_xem": "2035-6-15"
+   },
+   "expect": {
+    "tuoi_mu": 49,
+    "dai_han": {
+     "chi_so": 4,
+     "can": "Bính",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Văn Xương",
+      "Liêm Trinh"
+     ],
+     "tu_tuoi": 44,
+     "den_tuoi": 53,
+     "cung_goc": "Tài Bạch"
+    },
+    "tieu_han": {
+     "chi_so": 11,
+     "can": "Quý",
+     "chi": "Sửu",
+     "cung_goc": "Điền Trạch"
+    },
+    "luu_nien": {
+     "chi_so": 1,
+     "can": "Ất",
+     "chi": "Mão",
+     "tu_hoa": [
+      "Thiên Cơ",
+      "Thiên Lương",
+      "Tử Vi",
+      "Thái Âm"
+     ],
+     "cung_goc": "Nô Bộc"
+    }
+   }
+  },
+  "nu_2004_nhuan@2026-9-30": {
+   "input": {
+    "id": "nu_2004_nhuan",
+    "d": "2004-3-21",
+    "ti": 7,
+    "g": "female",
+    "ngay_xem": "2026-9-30"
+   },
+   "expect": {
+    "tuoi_mu": 23,
+    "dai_han": {
+     "chi_so": 5,
+     "can": "Tân",
+     "chi": "Mùi",
+     "tu_hoa": [
+      "Cự Môn",
+      "Thái Dương",
+      "Văn Khúc",
+      "Văn Xương"
+     ],
+     "tu_tuoi": 14,
+     "den_tuoi": 23,
+     "cung_goc": "Huynh Đệ"
+    },
+    "tieu_han": {
+     "chi_so": 10,
+     "can": "Bính",
+     "chi": "Tý",
+     "cung_goc": "Quan Lộc"
+    },
+    "luu_nien": {
+     "chi_so": 4,
+     "can": "Bính",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Văn Xương",
+      "Liêm Trinh"
+     ],
+     "cung_goc": "Phu Thê"
+    }
+   }
+  },
+  "nu_2004_nhuan@2027-1-20": {
+   "input": {
+    "id": "nu_2004_nhuan",
+    "d": "2004-3-21",
+    "ti": 7,
+    "g": "female",
+    "ngay_xem": "2027-1-20"
+   },
+   "expect": {
+    "tuoi_mu": 23,
+    "dai_han": {
+     "chi_so": 5,
+     "can": "Tân",
+     "chi": "Mùi",
+     "tu_hoa": [
+      "Cự Môn",
+      "Thái Dương",
+      "Văn Khúc",
+      "Văn Xương"
+     ],
+     "tu_tuoi": 14,
+     "den_tuoi": 23,
+     "cung_goc": "Huynh Đệ"
+    },
+    "tieu_han": {
+     "chi_so": 10,
+     "can": "Bính",
+     "chi": "Tý",
+     "cung_goc": "Quan Lộc"
+    },
+    "luu_nien": {
+     "chi_so": 4,
+     "can": "Bính",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Văn Xương",
+      "Liêm Trinh"
+     ],
+     "cung_goc": "Phu Thê"
+    }
+   }
+  },
+  "nu_2004_nhuan@2027-3-1": {
+   "input": {
+    "id": "nu_2004_nhuan",
+    "d": "2004-3-21",
+    "ti": 7,
+    "g": "female",
+    "ngay_xem": "2027-3-1"
+   },
+   "expect": {
+    "tuoi_mu": 24,
+    "dai_han": {
+     "chi_so": 4,
+     "can": "Canh",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thái Dương",
+      "Vũ Khúc",
+      "Thái Âm",
+      "Thiên Đồng"
+     ],
+     "tu_tuoi": 24,
+     "den_tuoi": 33,
+     "cung_goc": "Phu Thê"
+    },
+    "tieu_han": {
+     "chi_so": 9,
+     "can": "Ất",
+     "chi": "Hợi",
+     "cung_goc": "Điền Trạch"
+    },
+    "luu_nien": {
+     "chi_so": 5,
+     "can": "Đinh",
+     "chi": "Mùi",
+     "tu_hoa": [
+      "Thái Âm",
+      "Thiên Đồng",
+      "Thiên Cơ",
+      "Cự Môn"
+     ],
+     "cung_goc": "Huynh Đệ"
+    }
+   }
+  },
+  "nu_2004_nhuan@2035-6-15": {
+   "input": {
+    "id": "nu_2004_nhuan",
+    "d": "2004-3-21",
+    "ti": 7,
+    "g": "female",
+    "ngay_xem": "2035-6-15"
+   },
+   "expect": {
+    "tuoi_mu": 32,
+    "dai_han": {
+     "chi_so": 4,
+     "can": "Canh",
+     "chi": "Ngọ",
+     "tu_hoa": [
+      "Thái Dương",
+      "Vũ Khúc",
+      "Thái Âm",
+      "Thiên Đồng"
+     ],
+     "tu_tuoi": 24,
+     "den_tuoi": 33,
+     "cung_goc": "Phu Thê"
+    },
+    "tieu_han": {
+     "chi_so": 1,
+     "can": "Đinh",
+     "chi": "Mão",
+     "cung_goc": "Tật Ách"
+    },
+    "luu_nien": {
+     "chi_so": 1,
+     "can": "Ất",
+     "chi": "Mão",
+     "tu_hoa": [
+      "Thiên Cơ",
+      "Thiên Lương",
+      "Tử Vi",
+      "Thái Âm"
+     ],
+     "cung_goc": "Tật Ách"
+    }
+   }
+  }
+ }
+}

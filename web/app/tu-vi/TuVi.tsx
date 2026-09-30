@@ -1,0 +1,85 @@
+"use client";
+
+import { useState } from "react";
+
+interface Res {
+  cau_tra_loi?: string;
+  phan_loai?: { loai: string; cung: string[] };
+  can_them?: string[];
+  co_canh_bao?: { loai: string; chi_tiet: string }[];
+  error?: string;
+}
+
+export function TuVi() {
+  const [cau, setCau] = useState("");
+  const [cheDo, setCheDo] = useState("tham_khao");
+  const [ngay, setNgay] = useState("");
+  const [gio, setGio] = useState("");
+  const [gioiTinh, setGioiTinh] = useState("nam");
+  const [vung, setVung] = useState("north");
+  const [dang, setDang] = useState(false);
+  const [res, setRes] = useState<Res | null>(null);
+
+  async function hoi(e: React.FormEvent) {
+    e.preventDefault();
+    if (cau.trim().length < 3 || dang) return;
+    if ((ngay && !gio) || (!ngay && gio)) { setRes({ error: "Nhập đủ cả ngày và giờ sinh (hoặc bỏ trống cả hai)." }); return; }
+    setDang(true);
+    try {
+      const laSo = ngay ? { birth_date: ngay, birth_time: gio, gender: gioiTinh,
+        ...(ngay < "1975-06-13" ? { vung } : {}) } : undefined;
+      const r = await fetch("/api/tuvi/hoi", {
+        method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ cau_hoi: cau, che_do: cheDo, ...(laSo ? { la_so: laSo } : {}) }),
+      });
+      setRes((await r.json()) as Res);
+    } catch { setRes({ error: "Không kết nối được. Thử lại sau." }); }
+    finally { setDang(false); }
+  }
+
+  return (
+    <section>
+      <form className="reading-form" onSubmit={hoi}>
+        <label className="field"><span>Câu hỏi</span>
+          <input value={cau} onChange={(e) => setCau(e.target.value)} maxLength={500}
+            placeholder="Cung Quan Lộc của tôi nói gì về sự nghiệp?" aria-label="Câu hỏi Tử vi" /></label>
+        <div className="field-row">
+          <label className="field"><span>Ngày sinh (dương lịch)</span>
+            <input type="date" value={ngay} onChange={(e) => setNgay(e.target.value)} aria-label="Ngày sinh" /></label>
+          <label className="field"><span>Giờ sinh</span>
+            <input type="time" value={gio} onChange={(e) => setGio(e.target.value)} aria-label="Giờ sinh" /></label>
+          <label className="field"><span>Giới tính</span>
+            <select value={gioiTinh} onChange={(e) => setGioiTinh(e.target.value)} aria-label="Giới tính">
+              <option value="nam">Nam</option><option value="nu">Nữ</option>
+            </select></label>
+        </div>
+        <div className="field-row">
+          {ngay && ngay < "1975-06-13" && (
+            <label className="field"><span>Nơi sinh (trước 13/6/1975)</span>
+              <select value={vung} onChange={(e) => setVung(e.target.value)} aria-label="Nơi sinh">
+                <option value="north">Miền Bắc</option><option value="south">Miền Nam</option>
+              </select></label>
+          )}
+          <label className="field"><span>Chế độ</span>
+            <select value={cheDo} onChange={(e) => setCheDo(e.target.value)} aria-label="Chế độ">
+              <option value="tham_khao">Tham khảo (hạn = chủ đề giai đoạn)</option>
+              <option value="chi_tiet">Chi tiết (có xu hướng thuận/nghịch)</option>
+            </select></label>
+        </div>
+        <p className="qa-note">Câu hỏi chung (ví dụ “Tham Lang ở cung Quan Lộc?”) không cần ngày sinh.</p>
+        <button type="submit" className="btn-primary" disabled={dang}>{dang ? "Đang xem…" : "Hỏi"}</button>
+      </form>
+
+      {res?.error && <p className="notice-error">{res.error}</p>}
+      {res?.cau_tra_loi && (
+        <div className="result" data-testid="tv-ket-qua">
+          {res.phan_loai?.cung?.length ? <p className="src">Cung xem: {res.phan_loai.cung.join(", ")}</p> : null}
+          <div className="qa-answer">
+            {res.cau_tra_loi.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
+          </div>
+          {res.co_canh_bao?.map((c) => <p key={c.loai} className="sensitivity">ⓘ {c.chi_tiet}</p>)}
+        </div>
+      )}
+    </section>
+  );
+}

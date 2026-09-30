@@ -14,10 +14,11 @@ import datetime as _dt
 from typing import Literal
 
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
 from app.calc import lunar, timebase, tuan_triet_vendor, tuvi_an_sao
+from app.hoidap import tuvi as hoidap_tv
 from app.config import ENGINE_VERSION, HourConfidence, Region
 
 router = APIRouter(prefix="/v1/tuvi", tags=["tuvi"])
@@ -214,3 +215,37 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
         } for p in la["palaces"]],
         "co_canh_bao": flags,
     }
+
+
+class HoiTVInput(BaseModel):
+    """Hỏi đáp Tử vi (HH-2). `la_so` tuỳ chọn: câu hỏi chung (sao × cung, thuật ngữ) không cần."""
+    model_config = ConfigDict(extra="forbid")
+
+    cau_hoi: str = Field(min_length=3, max_length=500)
+    che_do: Literal["tham_khao", "chi_tiet"] = "tham_khao"
+    la_so: TuanTrietInput | None = None
+    ngay_xem: _dt.date | None = Field(default=None, description="Ngày xem hạn; mặc định hôm nay (giờ VN)")
+
+
+@router.post("/hoi")
+def api_hoi(inp: HoiTVInput) -> dict:
+    """Phân loại → (lá số + vận hạn qua iztro) → gói bằng chứng KB → trả lời template."""
+    sinh, flags = None, []
+    if inp.la_so is not None:
+        dv = _DauVao(inp.la_so)
+        cal = dv.tb.calendar_dt
+        ti = tuvi_an_sao.time_index(cal.hour, cal.minute)
+        sinh = {"ngay": cal.date(), "ti": ti, "gioi_tinh": inp.la_so.gender}
+        flags = list(dv.flags)
+        if ti == 12:
+            flags.append({"loai": "ty_conflict", "chi_tiet": (
+                "Sinh 23:00–23:59: tử vi (theo iztro) tính là giờ Tý của NGÀY HÔM SAU — "
+                "lá số có thể khác trang dùng quy ước khác.")})
+    try:
+        kq = hoidap_tv.tra_loi(inp.cau_hoi.strip(), inp.che_do, sinh=sinh, ngay_xem=inp.ngay_xem)
+    except tuvi_an_sao.AnSaoLoi as e:
+        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e))
+    kq["co_canh_bao"] = flags + kq["co_canh_bao"]
+    return {"engine_version": ENGINE_VERSION, **kq}
