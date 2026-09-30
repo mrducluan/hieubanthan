@@ -57,7 +57,8 @@ def test_luc_hao_chi_ra_dung_than():
     out = kd.tra_loi("Món nợ này có đòi được không?", "tu_dong", gia_tri_hao=QUE_LY)
     m = [x for x in out["bang_chung"]["muc"] if x["loai"] == "dung_than"]
     assert m and m[0]["dung_than"] == "Thê Tài"
-    assert any(f["loai"] == "chua_tinh_vuong_suy" for f in out["co_canh_bao"])
+    assert any(f["loai"] == "vuong_suy_rut_gon" for f in out["co_canh_bao"])
+    assert all("vuong_suy" in v for v in m[0]["vi_tri"]) and m[0]["thoi_gian"]["chi_thang"]
 
 
 def test_mai_hoa_theo_gio():

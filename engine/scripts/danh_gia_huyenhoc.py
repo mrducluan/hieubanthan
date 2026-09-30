@@ -86,10 +86,38 @@ def cham_tuvi(r: dict) -> tuple[str, str]:
     return "day_du", ""
 
 
+BT_LOAI = {"bt_ky_thuat": {"ky_thuat"}, "thap_than": {"thap_than_chung"}, "nhat_chu_can": {"nhat_chu_chung"},
+           "nhat_chu_mua": {"nhat_chu_chung"}, "bt_hop": {"hop"}, "bt_con": {"con"},
+           "dai_van_luu_nien": {"van"}}
+
+
+def cham_battu(r: dict) -> tuple[str, str]:
+    import datetime as dt  # noqa: PLC0415
+    sys.path.insert(0, str(GOC))
+    from app.hoidap import battu as bh  # noqa: PLC0415
+    kq = bh.tra_loi(r["cau_hoi"], sinh={"lich": dt.datetime(1990, 5, 17, 12, 30), "gioi_tinh": "nam"},
+                    ngay_xem=dt.date(2026, 9, 30))
+    pl = kq["phan_loai"]
+    if r["xu_ly"] in ("an_toan", "tu_choi_nhe"):
+        return ("day_du", "") if pl["xu_ly"] == r["xu_ly"] else ("khong", f"sai đường {r['xu_ly']}")
+    if pl["xu_ly"] in ("an_toan", "tu_choi_nhe"):
+        return "khong", f"chặn nhầm ({pl['xu_ly']})"
+    if r["xu_ly"] == "can_them_du_lieu":
+        return ("day_du", "") if kq["can_them"] else ("mot_phan", "lẽ ra phải hỏi thêm dữ liệu")
+    if kq["do_phu"] != "day_du" or kq["loi_kiem_tra"] or kq["can_them"]:
+        return "khong", "không có căn cứ KB"
+    muon = BT_LOAI.get(r["chu_de"])
+    if muon and pl["loai"] not in muon:
+        return "mot_phan", f"lệch loại {r['chu_de']}→{pl['loai']}"
+    return "day_du", ""
+
+
 def cham_v2(r: dict) -> tuple[str, str] | None:
     """Chạy thật module đã có hỏi đáp. None = module chưa có (rơi về chấm khai báo)."""
     if r["mo_dun"] == "tuvi":
         return cham_tuvi(r)
+    if r["mo_dun"] == "battu":
+        return cham_battu(r)
     if r["mo_dun"] != "kinhdich":
         return None
     import datetime as dt  # noqa: PLC0415

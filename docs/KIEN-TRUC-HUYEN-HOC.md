@@ -87,7 +87,7 @@ Chế độ luận (quyết định 2026-09-30, "cả hai/cả ba"):
 | HH-0 | Kho câu hỏi 4 mảng, đo mốc, tài liệu này | ✅ kho 2.031 câu, mốc 0% |
 | HH-1 | Lõi hỏi đáp dùng chung + **Kinh Dịch** (KB 64 quẻ, Mai Hoa, thể–dụng, chọn phái) | Kinh Dịch ≥ 85% có căn cứ |
 | HH-2 | **Tử vi** Q&A (KB sao × cung, tứ hoá, lưu niên, 2 chế độ) | ✅ kho 687/687; holdout viết sau router 20/24 trước sửa → 24/24 |
-| HH-3 | **Bát tự** (tiết khí, tứ trụ, thập thần, đại vận — golden oracle), Lục Hào vượng suy | golden 100%, Bát tự ≥ 80% |
+| HH-3 | **Bát tự** (tiết khí, tứ trụ, thập thần, đại vận — golden oracle), Lục Hào vượng suy | ✅ golden 42/42 + 667 tiết khí; kho 254/254; holdout 16/16 |
 | HH-4 | **Phong thuỷ** (mệnh quái, bát trạch, cửa–chủ–bếp) | golden 100%, Phong thuỷ ≥ 80% |
 | HH-5 | Skill `huyenhoc-kb` + vòng tự cải thiện đa module, đối chiếu ctext khi mở mạng | vòng chạy được, báo cáo |
 
@@ -112,3 +112,24 @@ không dùng để tuyển/sa thải · không phán "khắc" người thứ ba 
   `chi_tiet` được trả lời kèm lưu ý không đoán biến cố, ở `tham_khao` bị từ chối nhẹ.
 - API `POST /v1/tuvi/hoi` (extra=forbid, `la_so` tuỳ chọn) · web `/tu-vi` + `/api/tuvi/hoi` · E2E 2 ca.
 - Giới hạn: lá số theo khung iztro (Trung Quốc) — cờ `nam_phai`; hợp hôn hai lá chưa làm (chỉ xin dữ liệu).
+
+### HH-3 — Bát tự + Lục Hào vượng suy (2026-09-30)
+- CALC `app/calc/tietkhi.py`: kinh độ Mặt Trời bằng VSOP87D rút gọn (Meeus ch. 32, phụ lục III) + FK5,
+  chương động, quang sai; ΔT Espenak–Meeus; Newton. Sai số so với oracle lunar-typescript: **tối đa 0,63
+  phút** trên 4.623 thời điểm 1900–2100 (bản Meeus rút gọn ch. 25 lệch tới 14 phút — đã bỏ).
+- CALC `app/calc/battu.py`: trụ năm theo Lập xuân, trụ tháng theo 12 tiết, trụ ngày theo JDN, giờ Tý
+  SWITCH_AT_0000 (23:xx giữ ngày, trụ giờ lấy Tý của ngày sau — dạ Tý, cờ `da_ty`), tàng can (Tỵ =
+  Bính·Canh·Mậu theo oracle), thập thần, ngũ hành theo **thang điểm công bố** (`THANG_DIEM`), thân
+  vượng/nhược, dụng thần **hai cách không tự chọn** (phù ức + điều hậu / cách cục nguyệt lệnh), đại vận
+  (thuận nghịch, khởi vận 4320 phút = 1 năm), lưu niên + xung hợp chi ngày. Cờ `tiet_edge` khi sinh
+  cách tiết ≤ 2 giờ.
+- Golden `fixtures/golden/battu.json` (oracle lunar-typescript 1.8.6, sect 2 — chỉ dùng khi sinh golden,
+  không chạy runtime): 42 ca tứ trụ + tàng can + thập thần + đại vận, 667 thời điểm tiết khí.
+- CALC `app/calc/vuong_suy.py`: Lục Hào nguyệt lệnh (vượng/tướng/hưu/tù/tử theo tiết), nhật thần,
+  tuần không → Kinh Dịch Lục Hào nay kèm vượng suy dụng thần (cờ `vuong_suy_rut_gon`; chưa xét ám động,
+  nhật phá, hồi đầu, ứng kỳ).
+- KB `battu_kb.json` (nháp AI): 10 nhật chủ × 4 mùa, 10 thập thần (nghĩa, khi nhiều/thiếu, nam/nữ),
+  4 trụ, 5 hành (màu/hướng/nghề ghi rõ **ứng dụng dân gian**), 10 cách cục, 11 mục giải thích.
+- RULES `app/hoidap/battu.py` · API `/v1/battu/la-so`, `/v1/battu/hoi` · web `/bat-tu` · E2E 2 ca.
+- Kho câu hỏi: 2 câu "bát tự của tôi và người yêu có hợp nhau" đổi nhãn `tra_loi` → `can_them_du_lieu`
+  cho khớp các câu hợp khác (cần lá số người kia).

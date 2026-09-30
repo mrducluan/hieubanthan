@@ -43,8 +43,16 @@ export default async function Home() {
           </p>
         </Link>
 
+        <Link href="/bat-tu" className="home-card">
+          <h2>Bát tự</h2>
+          <p>
+            Tứ trụ theo tiết khí, thập thần, ngũ hành, đại vận — dụng thần trình bày cả hai trường phái,
+            không tự chọn.
+          </p>
+        </Link>
+
         <div className="home-card" style={{ borderStyle: "dashed", cursor: "default" }}>
-          <h2>Nhân tướng · Bát tự · Phong thuỷ</h2>
+          <h2>Nhân tướng · Phong thuỷ</h2>
           <p className="soon">Đang xây dựng.</p>
         </div>
       </div>

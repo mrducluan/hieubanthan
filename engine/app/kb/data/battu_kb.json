@@ -1,0 +1,441 @@
+{
+ "_nguon": "Nháp AI tổng hợp kiến thức phổ thông Uyên Hải Tử Bình, Tử Bình Chân Thuyên, Trích Thiên Tuỷ; chưa đối chiếu nguyên văn.",
+ "source": {
+  "uyen_hai_tu_binh": "淵海子平",
+  "tu_binh_chan_thuyen": "子平真詮",
+  "trich_thien_tuy": "滴天髓"
+ },
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "nhat_chu": {
+  "Giáp": {
+   "ngu_hanh": "Mộc",
+   "hinh_tuong": "cây đại thụ",
+   "tinh_chat": "thẳng thắn, có chí hướng, thích vươn lên và che chở",
+   "diem_manh": "kiên định, có tinh thần dẫn dắt",
+   "mat_toi": "cứng, khó uốn, dễ gãy khi bị ép",
+   "cau_tu_soi": "Bạn có đang cố đứng thẳng ở chỗ cần biết uốn mình?",
+   "mua": {
+    "xuan": "Mùa xuân Mộc đương lệnh: Giáp mạnh, cần Kim tỉa và Hoả toả để thành dụng.",
+    "ha": "Mùa hạ Hoả vượng tiết khí Mộc: Giáp dễ khô, cần Thuỷ nhuận.",
+    "thu": "Mùa thu Kim vượng khắc Mộc: Giáp bị chế, cần Thuỷ/Ấn hoá Kim sinh Mộc.",
+    "dong": "Mùa đông Thuỷ lạnh: Giáp được sinh nhưng rét, cần Hoả sưởi ấm."
+   }
+  },
+  "Ất": {
+   "ngu_hanh": "Mộc",
+   "hinh_tuong": "hoa cỏ, dây leo",
+   "tinh_chat": "mềm mại, khéo léo, giỏi thích nghi và nương tựa",
+   "diem_manh": "linh hoạt, tinh tế, bền bỉ",
+   "mat_toi": "dễ phụ thuộc, hay tính toán cho an toàn",
+   "cau_tu_soi": "Bạn đang dựa vào ai — và điều đó có còn cần thiết?",
+   "mua": {
+    "xuan": "Mùa xuân Ất đắc lệnh, tươi tốt; cần Hoả để khai hoa.",
+    "ha": "Mùa hạ Ất dễ héo, cần Thuỷ tưới.",
+    "thu": "Mùa thu Ất yếu trước Kim, cần Thuỷ và Tỷ Kiếp trợ.",
+    "dong": "Mùa đông Ất lạnh cóng, cần Bính Hoả sưởi."
+   }
+  },
+  "Bính": {
+   "ngu_hanh": "Hỏa",
+   "hinh_tuong": "mặt trời",
+   "tinh_chat": "nhiệt tình, rộng rãi, thích toả sáng và công khai",
+   "diem_manh": "truyền năng lượng, hào phóng",
+   "mat_toi": "phô trương, nóng vội, khó giữ bí mật",
+   "cau_tu_soi": "Bạn toả sáng cho ai — và có chừa phần ấm cho mình?",
+   "mua": {
+    "xuan": "Mùa xuân Mộc sinh Hoả: Bính được trợ, sáng rõ.",
+    "ha": "Mùa hạ Bính cực vượng, cần Thuỷ (Nhâm) điều hoà.",
+    "thu": "Mùa thu Bính yếu dần, cần Mộc sinh.",
+    "dong": "Mùa đông Bính yếu nhất, cần Mộc và Tỷ Kiếp."
+   }
+  },
+  "Đinh": {
+   "ngu_hanh": "Hỏa",
+   "hinh_tuong": "ngọn nến, ngọn đèn",
+   "tinh_chat": "ấm áp, tinh tế, chu đáo, sáng ở nơi tối",
+   "diem_manh": "tập trung, soi đường cho người khác",
+   "mat_toi": "dễ lo âu, hay dao động theo cảm xúc",
+   "cau_tu_soi": "Ngọn lửa của bạn đang được tiếp dầu bằng gì?",
+   "mua": {
+    "xuan": "Mùa xuân Đinh được Mộc nuôi, ổn định.",
+    "ha": "Mùa hạ Đinh vượng, cần Thuỷ tiết chế.",
+    "thu": "Mùa thu Đinh yếu, cần Giáp Mộc làm củi.",
+    "dong": "Mùa đông Đinh leo lét, cần Mộc và che gió."
+   }
+  },
+  "Mậu": {
+   "ngu_hanh": "Thổ",
+   "hinh_tuong": "núi lớn, đê đập",
+   "tinh_chat": "vững chãi, đáng tin, trầm tĩnh, bao dung",
+   "diem_manh": "ổn định, gánh vác, giữ lời",
+   "mat_toi": "chậm, bảo thủ, khó thay đổi",
+   "cau_tu_soi": "Điều gì bạn đang giữ chỉ vì quen?",
+   "mua": {
+    "xuan": "Mùa xuân Mộc khắc Thổ: Mậu bị chế, cần Hoả hoá Mộc sinh Thổ.",
+    "ha": "Mùa hạ Hoả sinh Thổ: Mậu mạnh nhưng khô, cần Thuỷ nhuận.",
+    "thu": "Mùa thu Mậu tiết khí cho Kim, cần Hoả trợ.",
+    "dong": "Mùa đông Mậu lạnh, cần Hoả sưởi."
+   }
+  },
+  "Kỷ": {
+   "ngu_hanh": "Thổ",
+   "hinh_tuong": "đất ruộng vườn",
+   "tinh_chat": "chăm chỉ, khiêm tốn, nuôi dưỡng, thực tế",
+   "diem_manh": "chu toàn, bao dung, khéo vun đắp",
+   "mat_toi": "hay lo, dễ ôm việc, thiếu dứt khoát",
+   "cau_tu_soi": "Bạn nuôi dưỡng người khác — ai nuôi dưỡng bạn?",
+   "mua": {
+    "xuan": "Mùa xuân Kỷ bị Mộc khắc, cần Hoả sinh.",
+    "ha": "Mùa hạ Kỷ khô nóng, cần Thuỷ.",
+    "thu": "Mùa thu Kỷ tiết khí, cần Hoả và Tỷ Kiếp.",
+    "dong": "Mùa đông Kỷ ẩm lạnh, cần Bính Hoả."
+   }
+  },
+  "Canh": {
+   "ngu_hanh": "Kim",
+   "hinh_tuong": "kim loại thô, đao kiếm",
+   "tinh_chat": "cương quyết, trọng nghĩa, thẳng, thích hành động",
+   "diem_manh": "quả cảm, dứt khoát, chịu áp lực",
+   "mat_toi": "cứng rắn, dễ gây tổn thương bằng lời",
+   "cau_tu_soi": "Sự thẳng thắn của bạn có đang làm đau người mình thương?",
+   "mua": {
+    "xuan": "Mùa xuân Canh yếu, cần Thổ sinh.",
+    "ha": "Mùa hạ Canh bị Hoả luyện: vừa đủ thì thành khí, quá thì tổn — cần Thổ và Thuỷ.",
+    "thu": "Mùa thu Canh đương lệnh, rất mạnh, cần Đinh Hoả rèn.",
+    "dong": "Mùa đông Canh lạnh, cần Hoả."
+   }
+  },
+  "Tân": {
+   "ngu_hanh": "Kim",
+   "hinh_tuong": "vàng bạc, trang sức",
+   "tinh_chat": "tinh tế, trọng hình thức, nhạy cảm, cầu toàn",
+   "diem_manh": "thẩm mỹ, chuẩn mực, tự trọng",
+   "mat_toi": "dễ tổn thương, kén chọn, sĩ diện",
+   "cau_tu_soi": "Tiêu chuẩn nào của bạn đang khiến bạn mệt?",
+   "mua": {
+    "xuan": "Mùa xuân Tân yếu, cần Thổ và Thuỷ rửa sạch.",
+    "ha": "Mùa hạ Tân sợ Hoả nung, cần Nhâm Thuỷ.",
+    "thu": "Mùa thu Tân đắc lệnh, sáng giá, cần Nhâm Thuỷ tẩy rửa.",
+    "dong": "Mùa đông Tân lạnh, cần Bính Hoả."
+   }
+  },
+  "Nhâm": {
+   "ngu_hanh": "Thủy",
+   "hinh_tuong": "sông lớn, biển cả",
+   "tinh_chat": "thông minh, phóng khoáng, thích tự do và chuyển động",
+   "diem_manh": "tầm nhìn rộng, linh hoạt, bao dung",
+   "mat_toi": "khó kiểm soát, dễ buông thả, thiếu bền",
+   "cau_tu_soi": "Bạn đang chảy về đâu — hay chỉ đang tràn?",
+   "mua": {
+    "xuan": "Mùa xuân Nhâm tiết khí cho Mộc, cần Kim sinh.",
+    "ha": "Mùa hạ Nhâm yếu, cần Kim và Tỷ Kiếp.",
+    "thu": "Mùa thu Kim sinh Thuỷ: Nhâm mạnh, cần Mậu Thổ làm đê.",
+    "dong": "Mùa đông Nhâm vượng cực, cần Mậu Thổ ngăn và Hoả ấm."
+   }
+  },
+  "Quý": {
+   "ngu_hanh": "Thủy",
+   "hinh_tuong": "mưa móc, sương",
+   "tinh_chat": "sâu sắc, trực giác tốt, kín đáo, mềm mỏng",
+   "diem_manh": "nhạy bén, kiên nhẫn, thấm sâu",
+   "mat_toi": "hay nghĩ ngợi, dễ bi quan, khép kín",
+   "cau_tu_soi": "Điều gì bạn cảm nhận được mà chưa dám nói ra?",
+   "mua": {
+    "xuan": "Mùa xuân Quý tiết khí, cần Kim sinh.",
+    "ha": "Mùa hạ Quý khô cạn, cần Kim và Tỷ Kiếp.",
+    "thu": "Mùa thu Quý được Kim sinh, trong trẻo.",
+    "dong": "Mùa đông Quý vượng, cần Hoả sưởi."
+   }
+  }
+ },
+ "thap_than": {
+  "Tỷ Kiên": {
+   "nhom": "Tỷ Kiếp",
+   "y_nghia": "Người ngang hàng cùng tính chất: anh em, bạn bè, đối thủ cùng chí.",
+   "tinh_cach": "độc lập, tự tin, trọng công bằng",
+   "khi_nhieu": "cố chấp, khó hợp tác, hay tranh phần",
+   "khi_thieu": "thiếu người đồng hành, dễ đơn độc",
+   "nam": "anh em, bạn bè",
+   "nu": "anh em, bạn bè",
+   "cau_tu_soi": "Bạn đang cạnh tranh với ai — và có cần thiết không?"
+  },
+  "Kiếp Tài": {
+   "nhom": "Tỷ Kiếp",
+   "y_nghia": "Người ngang hàng khác tính: bạn bè, cộng sự, người chia phần.",
+   "tinh_cach": "hào sảng, dám liều, giỏi vận động",
+   "khi_nhieu": "dễ hao tiền vì bạn bè, liều lĩnh",
+   "khi_thieu": "thiếu quyết liệt",
+   "nam": "anh em, bạn bè",
+   "nu": "anh em, bạn bè",
+   "cau_tu_soi": "Tiền của bạn có hay ra đi vì nể nang không?"
+  },
+  "Thực Thần": {
+   "nhom": "Thực Thương",
+   "y_nghia": "Sự biểu đạt ôn hoà: tài năng, hưởng thụ, sáng tạo.",
+   "tinh_cach": "hiền hoà, tinh tế, thích thưởng thức",
+   "khi_nhieu": "lười, ham vui, thiếu áp lực",
+   "khi_thieu": "khó thể hiện bản thân",
+   "nam": "tài năng, cấp dưới",
+   "nu": "con cái, tài năng",
+   "cau_tu_soi": "Tài năng nào bạn đang để ngủ quên?"
+  },
+  "Thương Quan": {
+   "nhom": "Thực Thương",
+   "y_nghia": "Sự biểu đạt sắc bén: sáng tạo, phá cách, lời nói.",
+   "tinh_cach": "thông minh, sắc sảo, không chịu gò bó",
+   "khi_nhieu": "kiêu, hay chống đối, dễ phạm thượng",
+   "khi_thieu": "thiếu sáng tạo",
+   "nam": "tài năng, cấp dưới",
+   "nu": "con cái, tài năng",
+   "cau_tu_soi": "Lần gần nhất bạn nói thẳng quá mức là khi nào?"
+  },
+  "Thiên Tài": {
+   "nhom": "Tài",
+   "y_nghia": "Tiền biến động, cơ hội, của nổi.",
+   "tinh_cach": "hào phóng, nhạy cơ hội, giỏi giao tế",
+   "khi_nhieu": "vung tay, đầu cơ, đa tình",
+   "khi_thieu": "khó thấy cơ hội",
+   "nam": "tiền, cha, người yêu/vợ",
+   "nu": "tiền, cha",
+   "cau_tu_soi": "Cơ hội nào bạn đuổi theo vì lợi, cơ hội nào vì thích?"
+  },
+  "Chính Tài": {
+   "nhom": "Tài",
+   "y_nghia": "Tiền ổn định, công sức, sự tích luỹ.",
+   "tinh_cach": "cần kiệm, thực tế, giữ chữ tín",
+   "khi_nhieu": "keo kiệt, quá thực dụng",
+   "khi_thieu": "khó giữ tiền",
+   "nam": "vợ, tiền lương",
+   "nu": "tiền lương",
+   "cau_tu_soi": "Bạn tiết kiệm để an toàn hay để sống?"
+  },
+  "Thất Sát": {
+   "nhom": "Quan Sát",
+   "y_nghia": "Áp lực, thử thách, quyền lực cứng.",
+   "tinh_cach": "quả cảm, quyết đoán, chịu áp lực",
+   "khi_nhieu": "nóng nảy, hay bị áp lực đè, dễ va chạm",
+   "khi_thieu": "thiếu động lực vượt khó",
+   "nam": "con trai, áp lực công việc",
+   "nu": "người yêu/chồng, áp lực",
+   "cau_tu_soi": "Áp lực nào đang giúp bạn lớn lên, áp lực nào chỉ làm bạn mòn?"
+  },
+  "Chính Quan": {
+   "nhom": "Quan Sát",
+   "y_nghia": "Kỷ luật, danh dự, trật tự, chức vụ.",
+   "tinh_cach": "chính trực, có trách nhiệm, trọng quy tắc",
+   "khi_nhieu": "gò bó, sợ sai, cứng nhắc",
+   "khi_thieu": "thiếu kỷ luật",
+   "nam": "con gái, chức vụ",
+   "nu": "chồng, chức vụ",
+   "cau_tu_soi": "Quy tắc nào bạn giữ vì tin, quy tắc nào vì sợ?"
+  },
+  "Thiên Ấn": {
+   "nhom": "Ấn",
+   "y_nghia": "Học vấn khác thường, trực giác, sự che chở không chính thống.",
+   "tinh_cach": "sâu sắc, độc đáo, thích nghiên cứu",
+   "khi_nhieu": "cô độc, đa nghi, lạc lõng",
+   "khi_thieu": "thiếu chiều sâu nội tâm",
+   "nam": "mẹ kế, thầy",
+   "nu": "mẹ kế, thầy",
+   "cau_tu_soi": "Bạn học để hiểu hay để tránh phải hành động?"
+  },
+  "Chính Ấn": {
+   "nhom": "Ấn",
+   "y_nghia": "Sự che chở, học vấn chính quy, mẹ, danh dự.",
+   "tinh_cach": "nhân hậu, ham học, điềm tĩnh",
+   "khi_nhieu": "ỷ lại, chậm, thiếu thực tế",
+   "khi_thieu": "thiếu người nâng đỡ",
+   "nam": "mẹ, học vấn",
+   "nu": "mẹ, học vấn",
+   "cau_tu_soi": "Ai đang che chở bạn — và bạn có đang che chở ai?"
+  }
+ },
+ "tru": {
+  "năm": "Trụ năm: gốc gác, tổ tiên, thời thơ ấu (khoảng 1–16 tuổi) và môi trường xã hội rộng.",
+  "tháng": "Trụ tháng (nguyệt lệnh): cha mẹ, anh chị em, môi trường trưởng thành, sự nghiệp — trụ nặng nhất khi xét vượng suy.",
+  "ngày": "Trụ ngày: chính bạn (can ngày = nhật chủ); chi ngày là cung phối ngẫu — nói về cách bạn gắn bó trong hôn nhân.",
+  "giờ": "Trụ giờ: con cái, người đi sau, hậu vận và thành quả về sau."
+ },
+ "ngu_hanh": {
+  "Mộc": {
+   "tinh_chat": "sinh trưởng, nhân ái, kế hoạch",
+   "khi_thieu": "thiếu Mộc: khó khởi đầu, thiếu mềm dẻo",
+   "khi_thua": "thừa Mộc: cố chấp, ôm đồm",
+   "ung_dung": "xanh lá; hướng Đông; nhóm nghề giáo dục, xuất bản, cây trồng, thời trang"
+  },
+  "Hỏa": {
+   "tinh_chat": "nhiệt huyết, lễ nghĩa, biểu đạt",
+   "khi_thieu": "thiếu Hoả: thiếu động lực, khó thể hiện",
+   "khi_thua": "thừa Hoả: nóng vội, dễ kiệt sức",
+   "ung_dung": "đỏ, cam; hướng Nam; nhóm nghề truyền thông, năng lượng, ẩm thực, nghệ thuật trình diễn"
+  },
+  "Thổ": {
+   "tinh_chat": "ổn định, tín nghĩa, bao dung",
+   "khi_thieu": "thiếu Thổ: thiếu điểm tựa, hay dao động",
+   "khi_thua": "thừa Thổ: trì trệ, bảo thủ",
+   "ung_dung": "vàng, nâu; trung tâm/Đông Bắc/Tây Nam; nhóm nghề bất động sản, xây dựng, nông nghiệp, quản trị"
+  },
+  "Kim": {
+   "tinh_chat": "quyết đoán, nghĩa khí, kỷ luật",
+   "khi_thieu": "thiếu Kim: thiếu dứt khoát, khó đặt ranh giới",
+   "khi_thua": "thừa Kim: cứng rắn, lạnh lùng",
+   "ung_dung": "trắng, bạc; hướng Tây; nhóm nghề tài chính, kỹ thuật, cơ khí, pháp chế"
+  },
+  "Thủy": {
+   "tinh_chat": "trí tuệ, linh hoạt, giao tiếp",
+   "khi_thieu": "thiếu Thuỷ: khó thích nghi, thiếu mềm mỏng",
+   "khi_thua": "thừa Thuỷ: tản mạn, bất định",
+   "ung_dung": "đen, xanh dương; hướng Bắc; nhóm nghề thương mại, vận tải, du lịch, tư vấn, công nghệ thông tin"
+  }
+ },
+ "cach_cuc": {
+  "Chính Quan cách": "Nguyệt lệnh là Chính Quan: người trọng khuôn phép, hợp môi trường có tổ chức. Chân Thuyên: quý ở Quan thanh, kỵ Thương Quan phá Quan.",
+  "Thất Sát cách": "Nguyệt lệnh là Thất Sát: người chịu áp lực, dám xông pha. Chân Thuyên: cần Thực Thần chế Sát hoặc Ấn hoá Sát.",
+  "Chính Tài cách": "Nguyệt lệnh là Chính Tài: thực tế, giỏi quản lý tiền. Chân Thuyên: Tài cần thân đủ mạnh để gánh.",
+  "Thiên Tài cách": "Nguyệt lệnh là Thiên Tài: nhạy cơ hội, hợp kinh doanh. Chân Thuyên: kỵ Tỷ Kiếp đoạt Tài.",
+  "Chính Ấn cách": "Nguyệt lệnh là Chính Ấn: ham học, được che chở. Chân Thuyên: Ấn cần Quan sinh, kỵ Tài phá Ấn.",
+  "Thiên Ấn cách": "Nguyệt lệnh là Thiên Ấn: tư duy độc đáo. Chân Thuyên: kỵ Kiêu đoạt Thực.",
+  "Thực Thần cách": "Nguyệt lệnh là Thực Thần: tài hoa, ôn hoà. Chân Thuyên: Thực Thần sinh Tài là đẹp, kỵ Kiêu Ấn.",
+  "Thương Quan cách": "Nguyệt lệnh là Thương Quan: sáng tạo, phá cách. Chân Thuyên: Thương Quan cần Ấn chế hoặc sinh Tài.",
+  "Kiến Lộc cách": "Nguyệt lệnh là Tỷ Kiên (Kiến Lộc): tự lực. Chân Thuyên: không lấy làm cách chính, xét Tài Quan để dùng.",
+  "Nguyệt Kiếp (Dương Nhận) cách": "Nguyệt lệnh là Kiếp Tài: mạnh mẽ, dễ tranh đoạt. Chân Thuyên: cần Quan Sát chế Nhận."
+ },
+ "giai_thich": {
+  "bat_tu_vs_tuvi": {
+   "tieu_de": "Bát tự khác Tử vi thế nào?",
+   "noi_dung": "Bát tự (Tứ trụ) dùng tám chữ can chi của năm, tháng, ngày, giờ sinh và xét ngũ hành quanh can ngày; tháng tính theo tiết khí. Tử vi an sao vào 12 cung theo lịch âm. Hai hệ độc lập, không nên trộn trong một lượt luận.",
+   "tu_khoa": [
+    "khac tu vi",
+    "bat tu va tu vi",
+    "tu tru va tu vi"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  },
+  "tiet_khi": {
+   "tieu_de": "Vì sao tháng trong bát tự theo tiết khí?",
+   "noi_dung": "Bát tự dùng lịch tiết khí (dương lịch mặt trời): năm đổi tại Lập xuân, tháng đổi tại 12 tiết (Lập xuân, Kinh trập, Thanh minh…), không theo mùng 1 âm lịch. Người sinh sát ngày tiết cần giờ sinh chính xác.",
+   "tu_khoa": [
+    "tiet khi",
+    "lich am hay tiet",
+    "theo mung 1",
+    "lap xuan"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  },
+  "gio_ty": {
+   "tieu_de": "Sinh giờ Tý muộn",
+   "noi_dung": "Ở đây bát tự giữ trụ ngày của hôm đó cho người sinh 23:00–23:59 (chính sách đã chốt), trụ giờ lấy Tý của ngày sau (dạ Tý). Trường phái đổi ngày lúc 23:00 sẽ ra trụ ngày khác — nên xem cả hai.",
+   "tu_khoa": [
+    "gio ty",
+    "ty muon",
+    "da ty"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  },
+  "thap_than": {
+   "tieu_de": "Thập thần là gì?",
+   "noi_dung": "Mười quan hệ giữa nhật chủ và các can khác, theo ngũ hành sinh khắc và âm dương: Tỷ Kiên, Kiếp Tài (ngang), Thực Thần, Thương Quan (mình sinh), Thiên Tài, Chính Tài (mình khắc), Thất Sát, Chính Quan (khắc mình), Thiên Ấn, Chính Ấn (sinh mình).",
+   "tu_khoa": [
+    "thap than la gi",
+    "thap than la"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  },
+  "dung_than": {
+   "tieu_de": "Dụng thần theo hai cách",
+   "noi_dung": "Tử Bình Chân Thuyên lấy nguyệt lệnh định cách cục rồi tìm thần giúp cách thành; Trích Thiên Tuỷ xét khí thế toàn cục — phù ức (thân nhược thì sinh trợ, thân vượng thì khắc tiết) và điều hậu (khí hậu nóng lạnh). Hai cách có thể cho kết quả khác nhau; hệ thống trình bày cả hai, không tự chọn.",
+   "tu_khoa": [
+    "chan thuyen",
+    "trich thien tuy",
+    "dung than la gi",
+    "hy than",
+    "ky than"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  },
+  "than_vuong": {
+   "tieu_de": "Thân vượng, thân nhược xác định thế nào?",
+   "noi_dung": "Xét nhật chủ được bao nhiêu trợ lực (cùng hành và hành sinh nó), nhất là từ nguyệt lệnh. Hệ thống dùng một thang điểm công bố: thiên can 1 điểm, địa chi chia theo tàng can, chi tháng nhân 2; tỉ lệ ≥ 0,55 vượng, ≤ 0,45 nhược. Đây là một cách tính, các thầy có thể khác.",
+   "tu_khoa": [
+    "than vuong than nhuoc xac dinh",
+    "xac dinh than",
+    "tinh than vuong"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  },
+  "tang_can": {
+   "tieu_de": "Tàng can là gì?",
+   "noi_dung": "Các thiên can ẩn trong mỗi địa chi (bản khí, trung khí, dư khí). Ví dụ Dần tàng Giáp, Bính, Mậu. Tàng can quyết định thập thần ẩn và độ mạnh của ngũ hành.",
+   "tu_khoa": [
+    "tang can la gi"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  },
+  "dai_van": {
+   "tieu_de": "Đại vận thuận nghịch",
+   "noi_dung": "Nam sinh năm can dương và nữ sinh năm can âm đi thuận; ngược lại đi nghịch. Tuổi khởi vận tính từ khoảng cách giờ sinh tới tiết gần nhất (3 ngày ≈ 1 năm). Mỗi đại vận 10 năm, lấy can chi liền sau/liền trước trụ tháng.",
+   "tu_khoa": [
+    "thuan nghich",
+    "khoi van",
+    "dai van tinh",
+    "dai van la gi"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  },
+  "cach_cuc": {
+   "tieu_de": "Cách cục là gì?",
+   "noi_dung": "Khuôn mẫu chính của lá số, theo Tử Bình Chân Thuyên lấy từ thập thần của nguyệt lệnh (ưu tiên can tàng trong chi tháng lộ ra thiên can): Quan, Sát, Tài, Ấn, Thực, Thương, Kiến Lộc, Nguyệt Kiếp.",
+   "tu_khoa": [
+    "cach cuc la gi",
+    "cach cuc la"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  },
+  "xung_hop": {
+   "tieu_de": "Xung, hợp của địa chi",
+   "noi_dung": "Lục xung: Tý–Ngọ, Sửu–Mùi, Dần–Thân, Mão–Dậu, Thìn–Tuất, Tỵ–Hợi. Lục hợp: Tý–Sửu, Dần–Hợi, Mão–Tuất, Thìn–Dậu, Tỵ–Thân, Ngọ–Mùi. Năm xung chi ngày thường được đọc là năm có thay đổi ở đời sống riêng — không phải điềm xấu cố định.",
+   "tu_khoa": [
+    "xung khac",
+    "luc xung",
+    "luc hop",
+    "xung nhau"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  },
+  "chinh_xac": {
+   "tieu_de": "Bát tự có chính xác không?",
+   "noi_dung": "Bát tự là hệ thống diễn giải văn hoá, chưa được kiểm chứng như công cụ dự báo. Nên dùng như khung tự soi và đối chiếu với các mốc đã qua (nghiệm lý).",
+   "tu_khoa": [
+    "co chinh xac",
+    "co dung khong",
+    "co nen tin"
+   ],
+   "source_id": "tu_binh_chan_thuyen",
+   "school_id": "tu_binh"
+  }
+ },
+ "mau": {
+  "can_la_so": "Để xem bát tự cần ngày sinh, giờ sinh và giới tính (sinh trước 13/06/1975 cần thêm nơi sinh miền Bắc/Nam). Giờ sinh quan trọng: trụ giờ và cả trụ tháng (nếu sinh sát tiết khí) phụ thuộc vào nó.",
+  "nguoi_khac": "Câu này hỏi về bát tự của người khác. Cần ngày giờ sinh của họ và sự đồng ý của họ. Nếu muốn, hãy hỏi về cách chính bạn ứng xử trong quan hệ đó.",
+  "hop": "So hai bát tự cần đủ ngày giờ sinh của cả hai (và người kia đồng ý). Hệ thống chỉ mô tả ngũ hành hai bên bổ trợ hay va nhau thế nào — không phán 'hợp/khắc' và không dựa mỗi vào can ngày.",
+  "con": "Xem bát tự của con cần ngày giờ sinh của bé. Hệ thống không chọn giờ sinh hay đặt tên theo ngũ hành — những việc đó nên dựa trên sức khoẻ của mẹ và bé, và mong muốn của gia đình."
+ },
+ "luu_y": {
+  "ung_dung": "Màu sắc, hướng, nhóm nghề theo ngũ hành là cách ứng dụng dân gian phổ biến, không có trong cổ thư như một quy tắc bắt buộc — dùng để tham khảo, đừng để nó quyết định thay bạn.",
+  "suc_khoe": "Ngũ hành chỉ gợi ý nhịp sống; mọi vấn đề sức khoẻ cần hỏi bác sĩ.",
+  "van": "Đại vận và lưu niên được đọc như chủ đề giai đoạn, không phải biến cố định sẵn.",
+  "dung_than": "Hai cách lấy dụng thần có thể khác nhau; hệ thống không tự chọn — hãy đối chiếu với trải nghiệm thật của bạn.",
+  "thang_diem": "Thân vượng/nhược dùng thang điểm công bố của hệ thống; thầy khác có thể đánh giá khác."
+ }
+}
