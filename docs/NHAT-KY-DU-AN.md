@@ -2,7 +2,7 @@
 
 > Bản ghi người-đọc-được của toàn bộ quá trình xây dựng, để khôi phục ngữ cảnh
 > sau khi cài lại máy — hoặc để một AI/người khác đọc là hiểu ngay đang ở đâu.
-> Cập nhật lần cuối: 2026-08-15.
+> Cập nhật lần cuối: 2026-09-30.
 
 ---
 
@@ -150,6 +150,12 @@ chạy thật tại máy (trình duyệt → Next.js → engine → tính toán)
 8. **CHƯA làm — paywall Q&A:** "trả phí" cần hệ thanh toán + tài khoản (chưa có).
    Hiện Q&A chạy tự do trên staging để thử. Paywall = giai đoạn thanh toán (kèm
    cổng pháp lý Tuần 0). Định vị Q&A: THAM KHẢO, không dự đoán (giữ pháp lý).
+9. ✅ ~~Kinh Dịch vào engine~~ — XONG 2026-09-30. `/v1/kinhdich/khoi-que`: cấu trúc quẻ
+   (bản/biến/hỗ/thác/tống, bát cung, thế ứng, nạp giáp, lục thân, quy tắc biến chiếm Chu
+   Hy). Vendor nguyên văn từ `source-skills/kinh-dich/gieoque.py` + test chống trôi 4096 tổ
+   hợp. Lục Hào thiếu dụng thần → 422. Chưa có luận giải/KB lời quẻ. Phát hiện: ví dụ nhật
+   ký ở SKILL.md mục 9 (quẻ 26 động [3,6] → 41) lệch; đúng là → 19, ra 41 khi chỉ động hào 3.
+   Kế hoạch tổng: `docs/KE-HOACH-E2E.md`.
 5. **SPEC-005 wiring** — an sao tử vi đầy đủ qua iztro (Node subprocess),
    endpoint `/v1/tuvi/an-sao`, test đối chiếu `ziwei_golden.json`. Rồi lặp lại
    pipeline KB+luận giải cho tử vi (kho lớn).

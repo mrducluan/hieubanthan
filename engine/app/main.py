@@ -21,6 +21,7 @@ from app.kb import store as kb_store
 from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import thanso as luangiai_thanso
 from app.narrative import llm as narrative_llm
+from app.kinhdich_api import router as kinhdich_router
 from app.tuvi_api import router as tuvi_router
 
 app = FastAPI(
@@ -49,6 +50,7 @@ async def require_engine_key(request: Request, call_next):
 
 
 app.include_router(tuvi_router)
+app.include_router(kinhdich_router)
 
 
 # --------------------------------------------------------------------------- #

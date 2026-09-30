@@ -55,10 +55,17 @@ Ký hiệu: 🟢 làm song song được ngay · 🟡 cần anh quyết một đ
 - Web: thay `/api/tuvi/chart` sang lá số đầy đủ, validate bằng `chart.schema.json` v0.
 - ⚠️ **Rủi ro dữ liệu (từ skill `tuvi-vn` mục 1):** iztro là Tử Vi Đẩu Số Trung Quốc, không phải Nam phái. Tuần/Triệt đã có bản vendor riêng; bộ ~110 phụ tinh Việt (Lưu Hà, Thiên Trù, Thiên Y…) và vòng Thái Tuế phải **đối chiếu và gắn cờ chỗ lệch**, không tự "sửa" iztro.
 
-### WS-3 🟢 Kinh Dịch vào tầng CALC
+### WS-3 ✅ Kinh Dịch vào tầng CALC — XONG 2026-09-30
 - Port `source-skills/kinh-dich/gieoque.py` → `engine/app/calc/kinhdich.py`, deterministic khi có seed (gieo ngẫu nhiên nằm ở web/API, hàm tính nhận kết quả gieo làm đầu vào).
 - Golden `engine/fixtures/golden_kinhdich.json`: 64 quẻ, hào động, quẻ biến, hỗ quái — test trước.
 - Endpoint `/v1/kinhdich/khoi-que`. Chốt **một trường phái mỗi lượt** (luật của skill).
+- **Đã làm:** `app/calc/kinhdich_vendor.py` (bản sao nguyên văn gieoque.py) + `app/calc/kinhdich.py`
+  (hàm thuần) + `app/kinhdich_api.py`. Golden `fixtures/golden/kinhdich.json` (64 quẻ + 10 ca biến
+  chiêm). Test chống trôi quét đủ 4096 tổ hợp so với bản gốc. Bất biến độc lập: cặp King Wen
+  tống/thác, bát cung 8×8, thế–ứng cách 3, phân phối thệ pháp 3/5/7/1.
+- **Nguồn: chỉ bản gốc của chủ dự án.** KHÔNG dùng `horosa-skill` (AGPL-3.0, clean-room — mục 4 nhật ký).
+- Bước sau: thể–dụng Mai Hoa, vượng suy nguyệt kiến/nhật thần/tuần không cho Lục Hào (bản gốc
+  chưa có — cần anh viết/duyệt quy tắc trước), KB lời quẻ, trang web gieo quẻ.
 
 ### WS-4 🟡 Nâng cấp dữ liệu KB (khoản đầu tư chính của dự án)
 Mục tiêu từ nhật ký: 50.000–150.000 từ, hiện ~10.700. Chia theo nguồn **hợp pháp**:
@@ -72,9 +79,9 @@ Mục tiêu từ nhật ký: 50.000–150.000 từ, hiện ~10.700. Chia theo ng
 
 - Mọi bảng mới: có `source_id` + `school_id`, migration + `.down.sql` (luật CLAUDE.md), **chờ anh duyệt schema**.
 - AI có thể soạn **bản nháp có cấu trúc** (JSON theo schema, mỗi đoạn gắn nguồn + mặt tối + phản chứng), nhưng **người có nghề phải duyệt** trước khi lên production — nhật ký đã dự trù 30–60tr cho việc này.
-- 🟡 Anh cần chốt: trường phái tử vi làm gốc (Thiên Lương? Nguyễn Phát Lộc như CLAUDE.md ghi cho tầng RULES?) và bản dịch Kinh Dịch nền.
+- Trường phái tử vi gốc: Nguyễn Phát Lộc (đã duyệt). Bản dịch Kinh Dịch nền: còn mở, xác minh bản quyền trước.
 
-### WS-5 🟡 E2E test trình duyệt
+### WS-5 🟢 E2E test trình duyệt (dependency đã duyệt)
 - Playwright (Chromium có sẵn trong cloud container) chạy luồng: nhập ngày sinh → thần số → lá số → quẻ → Q&A (mock LLM).
 - ⚠️ Thêm `@playwright/test` là **dependency mới** → theo CLAUDE.md phải hỏi anh trước.
 
@@ -112,13 +119,15 @@ Mỗi luồng: nhánh riêng → PR → CI xanh → anh merge. Cập nhật `NHA
 
 ---
 
-## 4. Anh cần quyết (chặn các luồng 🟡)
+## 4. Quyết định (anh duyệt 2026-09-30)
 
-1. Cho phép thêm `@playwright/test` (devDependency web) cho WS-5?
-2. Trường phái tử vi gốc cho KB/RULES, và bản dịch Kinh Dịch nền?
-3. Ghim iztro ở bản đã sinh golden hay nâng lên 2.6.1 (phải sinh lại golden + tăng `ENGINE_VERSION`)?
-4. Cổng thanh toán nào, và lúc nào bắt đầu thủ tục pháp nhân/luật sư?
-5. Ngân sách: giữ Render Free cho staging hay nâng ngay?
+| # | Câu hỏi | Kết quả |
+|---|---|---|
+| 1 | Thêm `@playwright/test` (devDependency web) cho WS-5 | ✅ **Duyệt** |
+| 2 | Trường phái tử vi cho KB/RULES | ✅ Nguyễn Phát Lộc (khớp CLAUDE.md). Bản dịch Kinh Dịch nền: **còn mở** — phải xác minh bản quyền từng bản trước khi nạp |
+| 3 | Phiên bản iztro | ✅ **Ghim bản đã sinh golden**; nâng 2.6.1 là việc riêng (sinh lại golden + tăng `ENGINE_VERSION`) |
+| 4 | Cổng thanh toán | ✅ Làm ở WS-7, chọn cổng khi xong pháp nhân (chưa chốt nhà cung cấp) |
+| 5 | Render | ✅ Giữ Free cho staging; **nâng gói trả phí trước khi public** (việc anh làm trên dashboard Render) |
 
 ---
 
