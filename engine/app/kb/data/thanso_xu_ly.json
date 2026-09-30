@@ -1,0 +1,29 @@
+{
+ "_nguon": "Mẫu cố định cho các đường xử lý đặc biệt và lời lưu ý theo lĩnh vực. Không qua LLM.",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "pythagoras_vn",
+ "trang_thai": "nhap_ai",
+ "mau": {
+  "an_toan": "Mình rất tiếc vì bạn đang phải trải qua điều này. Lúc này điều quan trọng nhất là bạn an toàn, và con số không phải là câu trả lời cho nỗi đau này. Nếu bạn đang nghĩ đến việc làm hại bản thân hoặc đang gặp nguy hiểm, hãy gọi ngay 115 (cấp cứu) hoặc 113 (công an); nếu liên quan đến trẻ em, gọi 111. Hãy nói chuyện với một người bạn tin tưởng ngay hôm nay — người thân, bạn bè, hoặc chuyên gia tâm lý. Bạn không phải một mình gánh chuyện này.",
+  "may_rui": "Thần số học không cho ra con số để đánh đề, xổ số hay cá cược, và trang này không đưa ra con số như vậy. Nếu bạn muốn, mình có thể cùng xem con số của bạn nói gì về cách bạn ra quyết định khi đứng trước rủi ro.",
+  "du_doan_cu_the": "Thần số học không trả lời được những câu hỏi dạng sự kiện cụ thể như ngày giờ, sống chết, thắng thua hay việc người khác chắc chắn sẽ làm gì — ai khẳng định được điều đó là đang bịa. Mình có thể giúp bạn nhìn lại cách bạn đang đối diện với chuyện này qua con số của chính bạn.",
+  "suc_khoe_the_chat": "Thần số học không chẩn đoán hay dự báo bệnh, và không thay được bác sĩ. Với câu hỏi về sức khoẻ thể chất, hãy hỏi cơ sở y tế. Nếu bạn muốn, mình có thể xem con số nói gì về cách bạn phản ứng với căng thẳng và chăm sóc bản thân.",
+  "tuyen_dung": "Trang này không dùng thần số học để đánh giá, tuyển chọn hay loại người trong công việc: không có bằng chứng con số dự báo năng lực, và loại người vì ngày sinh là phân biệt đối xử. Hãy dùng mô tả công việc rõ ràng, bài thử thực tế và phỏng vấn có cấu trúc.",
+  "can_nguoi_kia": "Để trả lời câu này mình cần ngày sinh (và nếu có, họ tên) của người kia. Bạn nhập vào ô 'Người thứ hai' nhé. Lưu ý: nên hỏi ý người ấy trước khi xem giúp họ.",
+  "khong_ro": "Mình chưa chắc bạn đang hỏi về khía cạnh nào. Bạn thử nói rõ hơn — về tính cách, tình cảm, công việc, gia đình hay thời điểm?"
+ },
+ "luu_y": {
+  "tai_chinh": "Đây là góc nhìn văn hoá về thói quen với tiền, không phải lời khuyên đầu tư. Quyết định tài chính cần dựa trên số liệu thật và người có chuyên môn.",
+  "suc_khoe": "Đây là góc nhìn văn hoá để bạn tự soi, không thay cho bác sĩ hay chuyên gia tâm lý. Nếu căng thẳng kéo dài, hãy tìm người có chuyên môn.",
+  "quyet_dinh": "Con số không quyết thay bạn. Hãy dùng nó như một câu hỏi gợi mở, rồi quyết dựa trên thông tin thực tế của chính bạn.",
+  "thoi_diem": "Năm/tháng/ngày cá nhân là nhịp biểu tượng giống nhau cho mọi người cùng ngày tháng sinh, không phải lời tiên tri về sự kiện.",
+  "tam_linh": "Các khái niệm như nợ nghiệp là cách truyền thống gọi tên một bài học lặp lại, không phải hình phạt hay định mệnh.",
+  "ten_goi": "Đổi tên không đổi được con người; nếu định đổi tên thật trên giấy tờ, hãy cân nhắc lý do thực tế trước.",
+  "con_cai": "Con số của trẻ chỉ là góc tham khảo; trẻ thay đổi rất nhiều theo tuổi và môi trường, đừng để con số thành chiếc khuôn."
+ }
+}

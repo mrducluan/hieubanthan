@@ -1,0 +1,9 @@
+{
+  "name": "hieubanthan-ziwei",
+  "private": true,
+  "type": "module",
+  "description": "An sao tử vi qua iztro (MIT) chạy cục bộ — engine Python gọi qua subprocess. Ghim bản đã sinh golden.",
+  "dependencies": {
+    "iztro": "2.6.0"
+  }
+}

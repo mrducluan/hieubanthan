@@ -10,17 +10,25 @@ from __future__ import annotations
 
 import datetime as _dt
 import os
+from typing import Literal
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
 from app import config
 from app.calc import thanso, timebase
 from app.kb import store as kb_store
+from app.kb import trang as kb_trang
 from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import thanso as luangiai_thanso
-from app.narrative import llm as narrative_llm
+from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
+from app import nhat_ky
+from app.narrative import hoi_van, llm as narrative_llm
+from app.battu_api import router as battu_router
+from app.kinhdich_api import router as kinhdich_router
+from app.lich_api import router as lich_router
+from app.phongthuy_api import router as phongthuy_router
 from app.tuvi_api import router as tuvi_router
 
 app = FastAPI(
@@ -49,6 +57,10 @@ async def require_engine_key(request: Request, call_next):
 
 
 app.include_router(tuvi_router)
+app.include_router(kinhdich_router)
+app.include_router(battu_router)
+app.include_router(phongthuy_router)
+app.include_router(lich_router)
 
 
 # --------------------------------------------------------------------------- #
@@ -63,6 +75,20 @@ def health() -> dict:
         "engine_version": ENGINE_VERSION,
         "ty_boundary_set": config.TY_BOUNDARY_POLICY is not None,
     }
+
+
+@app.get("/v1/kb/trang")
+def api_kb_trang() -> dict:
+    """Mục lục trang kiến thức công khai (SEO-B) — chỉ trang `index=True` được đưa vào sitemap."""
+    return {"engine_version": ENGINE_VERSION, "trang": kb_trang.danh_sach()}
+
+
+@app.get("/v1/kb/trang/{loai}/{slug}")
+def api_kb_trang_mot(loai: str, slug: str) -> dict:
+    t = kb_trang.lay(loai, slug) if loai in kb_trang.LOAI else None
+    if t is None:
+        raise HTTPException(status_code=404, detail="Không có trang này")
+    return t
 
 
 @app.get("/v1/kb/status")
@@ -141,20 +167,78 @@ def api_luan_giai_van(inp: ThanSoInput) -> dict:
     return narrative_llm.dien_dat(reading)
 
 
+class NguoiKia(BaseModel):
+    """Người thứ hai (người yêu, con, sếp…). Tên không bắt buộc."""
+    ho_ten: list[str] | None = Field(default=None, max_length=5)
+    ngay: int = Field(ge=1, le=31)
+    thang: int = Field(ge=1, le=12)
+    nam: int = Field(ge=1900, le=2100)
+
+
 class HoiInput(ThanSoInput):
     cau_hoi: str = Field(min_length=3, max_length=400)
+    nguoi_kia: NguoiKia | None = None
+    ngay_xem: _dt.date | None = Field(default=None, description="Mặc định: hôm nay")
 
 
 @app.post("/v1/thanso/hoi")
-def api_hoi(inp: HoiInput) -> dict:
-    """Q&A — trả lời câu hỏi của người dùng, gắn vào con số của họ.
+def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
+    """Q&A v2 — phân loại câu hỏi (RULES) → gói bằng chứng từ KB → diễn đạt.
 
-    Giữ định vị 'tham khảo văn hoá': phản chiếu con số vào câu hỏi, KHÔNG dự
-    đoán. Không có key LLM → báo tính năng chưa bật, không bịa.
+    Chạy được KHÔNG cần LLM (template). Có key OpenRouter thì LLM chỉ diễn đạt
+    lại gói bằng chứng, qua bộ kiểm tra; vi phạm → rơi về template.
+    Xem docs/KIEN-TRUC-THANSO-V2.md.
     """
     inp.kiem_tra_ngay()
-    reading = luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam)
-    return narrative_llm.tra_loi_cau_hoi(reading, inp.cau_hoi.strip())
+    kia = None
+    if inp.nguoi_kia:
+        try:
+            _dt.date(inp.nguoi_kia.nam, inp.nguoi_kia.thang, inp.nguoi_kia.ngay)
+        except ValueError:
+            raise HTTPException(422, detail="Ngày sinh người thứ hai không tồn tại")
+        kia = inp.nguoi_kia.model_dump()
+    nguoi = {"ho_ten": inp.ho_ten, "ngay": inp.ngay, "thang": inp.thang, "nam": inp.nam}
+    kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem)
+    background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
+    return {"engine_version": ENGINE_VERSION, **kq}
+
+
+class HopDoiInput(BaseModel):
+    """Hai người — tên không bắt buộc (không có tên → chỉ so đường đời)."""
+    a: NguoiKia
+    b: NguoiKia
+
+
+@app.post("/v1/thanso/hop-doi")
+def api_hop_doi(inp: HopDoiInput) -> dict:
+    """Hợp đôi có cấu trúc: cặp số theo vị trí + điểm hoà / điểm va / việc cùng làm. Không chấm điểm."""
+    for n in (inp.a, inp.b):
+        try:
+            _dt.date(n.nam, n.thang, n.ngay)
+        except ValueError:
+            raise HTTPException(422, detail="Ngày sinh không tồn tại")
+    return luan_hop_doi(inp.a.model_dump(), inp.b.model_dump())
+
+
+SoHopLe = Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33]
+
+
+class BoSo(BaseModel):
+    duong_doi: SoHopLe
+    su_menh: SoHopLe | None = None
+    linh_hon: SoHopLe | None = None
+    nhan_cach: SoHopLe | None = None
+
+
+class CapSoInput(BaseModel):
+    a: BoSo
+    b: BoSo
+
+
+@app.post("/v1/thanso/cap-so")
+def api_cap_so(inp: CapSoInput) -> dict:
+    """Hợp đôi từ các con số đã tính (lời mời chỉ mang số, không mang ngày sinh người mời)."""
+    return luan_hop_doi_tu_chi_so(inp.a.model_dump(exclude_none=True), inp.b.model_dump(exclude_none=True))
 
 
 class ChuKyInput(BaseModel):

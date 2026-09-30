@@ -17,7 +17,7 @@ from enum import Enum
 
 # Tăng khi bất kỳ hằng chính sách hoặc hàm tính nào thay đổi.
 # Ghi vào mọi bản ghi readings để tái lập được kết quả cũ.
-ENGINE_VERSION = "0.1.0"
+ENGINE_VERSION = "0.1.2"
 
 
 # ---------------------------------------------------------------------------
@@ -147,6 +147,17 @@ def clock_offset(d: date, region: Region) -> tuple[float, bool]:
     if region is Region.NORTH and DISPUTED_NORTH_WINDOW[0] <= d < DISPUTED_NORTH_WINDOW[1]:
         disputed = True
     return chosen.offset, disputed
+
+
+# Sinh ở NƯỚC NGOÀI (chủ dự án chốt 2026-09-30): lập lá số theo GIỜ ĐỊA PHƯƠNG
+# nơi sinh — giữ nguyên ngày giờ đồng hồ, KHÔNG quy đổi về kinh tuyến 105°Đ;
+# đang giờ mùa hè (DST) thì trừ 1 giờ để về giờ chuẩn địa phương.
+# Đổi chính sách này = đổi lá số mọi người sinh ở nước ngoài → tăng ENGINE_VERSION.
+ABROAD_LOCAL_TIME = True
+
+# Giờ mặt trời thực theo kinh độ nơi sinh (chủ dự án chốt 2026-09-30): KHÔNG
+# hiệu chỉnh lá số, chỉ cảnh báo khi giờ mặt trời rơi sang canh giờ khác.
+SOLAR_TIME_ADJUST = False
 
 
 # ---------------------------------------------------------------------------

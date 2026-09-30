@@ -1,0 +1,877 @@
+{
+ "_nguon": "Nháp AI tổng hợp khung Nam phái (skill tuvi-vn) + kiến thức phổ thông Tử Vi Đẩu Số Toàn Thư; chưa đối chiếu nguyên văn.",
+ "source": {
+  "tu_vi_dau_so_toan_thu": "Tử Vi Đẩu Số Toàn Thư (Trần Đoàn, tương truyền)",
+  "tuvi_vn": "Khung Nam phái — skill tuvi-vn (Nguyễn Phát Lộc)"
+ },
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "cung": {
+  "Mệnh": {
+   "y_nghia": "Cung gốc của lá số: khí chất, cách phản ứng tự nhiên, điểm mạnh và điểm dễ vấp của chính bạn.",
+   "xem_duoc": "tính cách, cách ra quyết định, năng lượng chủ đạo",
+   "khong_tra_loi": "không cho biết bạn giàu nghèo bao nhiêu hay sống được bao lâu",
+   "cau_tu_soi": "Khi áp lực, phản ứng đầu tiên của bạn thường là gì — và nó giúp hay cản bạn?",
+   "linh_vuc": "ban_than"
+  },
+  "Huynh Đệ": {
+   "y_nghia": "Quan hệ ngang hàng: anh chị em, bạn thân, người cộng sự cùng vai.",
+   "xem_duoc": "cách bạn hợp tác và chia sẻ với người ngang hàng",
+   "khong_tra_loi": "không nói được anh chị em của bạn gặp chuyện gì",
+   "cau_tu_soi": "Bạn thường là người cho đi hay người nhận trong quan hệ anh em, bạn bè?",
+   "linh_vuc": "gia_dinh"
+  },
+  "Phu Thê": {
+   "y_nghia": "Kỳ vọng và cách bạn hành xử trong quan hệ đôi lứa, hôn nhân.",
+   "xem_duoc": "bạn tìm gì ở người bạn đời, bạn dễ va chạm ở điểm nào",
+   "khong_tra_loi": "không nói được người kia tốt hay xấu, không phán 'khắc' hay số lần kết hôn",
+   "cau_tu_soi": "Điều bạn mong người kia làm cho mình, bạn đã nói rõ với họ chưa?",
+   "linh_vuc": "tinh_yeu"
+  },
+  "Tử Nữ": {
+   "y_nghia": "Quan hệ với con cái, thế hệ sau, học trò; cũng là sự sáng tạo của bạn.",
+   "xem_duoc": "cách bạn làm cha mẹ, cách bạn nuôi dưỡng điều mình tạo ra",
+   "khong_tra_loi": "không cho biết số con, giới tính con hay sức khoẻ của con",
+   "cau_tu_soi": "Bạn muốn truyền cho thế hệ sau điều gì — bằng lời hay bằng cách sống?",
+   "linh_vuc": "gia_dinh"
+  },
+  "Tài Bạch": {
+   "y_nghia": "Cách bạn kiếm, giữ và tiêu tiền; thái độ với vật chất.",
+   "xem_duoc": "kiểu thu nhập hợp khí chất, thói quen chi tiêu dễ hao",
+   "khong_tra_loi": "không cho con số thu nhập, không chọn giúp khoản đầu tư",
+   "cau_tu_soi": "Tiền của bạn thường ra đi vì nhu cầu thật hay vì cảm xúc?",
+   "linh_vuc": "tai_chinh"
+  },
+  "Tật Ách": {
+   "y_nghia": "Cách thân tâm bạn phản ứng với áp lực, nơi bạn dễ tích căng thẳng.",
+   "xem_duoc": "nhịp nghỉ ngơi, thói quen tự chăm sóc nên chú ý",
+   "khong_tra_loi": "không chẩn đoán bệnh, không phán tai nạn — sức khoẻ cần bác sĩ",
+   "cau_tu_soi": "Cơ thể bạn thường báo mệt bằng dấu hiệu nào mà bạn hay bỏ qua?",
+   "linh_vuc": "suc_khoe"
+  },
+  "Thiên Di": {
+   "y_nghia": "Bạn khi ra ngoài xã hội, đi xa, gặp người lạ; hình ảnh người khác thấy ở bạn.",
+   "xem_duoc": "cách bạn thích nghi môi trường mới, cơ hội khi dịch chuyển",
+   "khong_tra_loi": "không nói được chuyến đi cụ thể nào an toàn hay nguy hiểm",
+   "cau_tu_soi": "Ở nơi lạ, bạn cởi mở hơn hay dè dặt hơn so với ở nhà?",
+   "linh_vuc": "su_nghiep"
+  },
+  "Nô Bộc": {
+   "y_nghia": "Bạn bè xã giao, đồng nghiệp, cấp dưới, khách hàng — mạng lưới quanh bạn.",
+   "xem_duoc": "kiểu người bạn dễ thu hút, cách bạn giữ ranh giới",
+   "khong_tra_loi": "không kết luận ai đó phản bội hay trung thành",
+   "cau_tu_soi": "Bạn chọn bạn bè theo sự thoải mái hay theo giá trị chung?",
+   "linh_vuc": "su_nghiep"
+  },
+  "Quan Lộc": {
+   "y_nghia": "Cách bạn làm việc, kiểu môi trường và vai trò hợp với bạn, cách bạn theo đuổi thành tựu.",
+   "xem_duoc": "phong cách làm việc, nhóm nghề hợp khí chất",
+   "khong_tra_loi": "không chỉ định một nghề duy nhất, không hứa thăng chức",
+   "cau_tu_soi": "Công việc nào khiến bạn quên giờ giấc — và nó có gì chung với việc bạn đang làm?",
+   "linh_vuc": "su_nghiep"
+  },
+  "Điền Trạch": {
+   "y_nghia": "Nhà cửa, nơi chốn, tài sản cố định và không khí gia đình nơi bạn sống.",
+   "xem_duoc": "nhu cầu về một nơi an cư, cách bạn tích luỹ tài sản",
+   "khong_tra_loi": "không chọn giúp năm mua nhà hay căn nhà cụ thể",
+   "cau_tu_soi": "Với bạn, 'nhà' là một nơi chốn hay là những người ở trong đó?",
+   "linh_vuc": "tai_chinh"
+  },
+  "Phúc Đức": {
+   "y_nghia": "Nền tinh thần, đời sống nội tâm, niềm vui sâu, dòng họ và phúc ấm; tử vi Việt coi trọng cung này.",
+   "xem_duoc": "điều nuôi dưỡng tinh thần bạn, cách bạn tìm bình an",
+   "khong_tra_loi": "không đo được 'phúc dày mỏng' bằng con số",
+   "cau_tu_soi": "Việc gì làm bạn thấy nhẹ lòng dù không ai khen?",
+   "linh_vuc": "ban_than"
+  },
+  "Phụ Mẫu": {
+   "y_nghia": "Quan hệ với cha mẹ, người đi trước, cấp trên; cũng là giấy tờ, học vấn nền.",
+   "xem_duoc": "cách bạn đón nhận sự dạy dỗ, quan hệ với người có thẩm quyền",
+   "khong_tra_loi": "không nói được sức khoẻ hay tuổi thọ của cha mẹ",
+   "cau_tu_soi": "Điều gì từ cha mẹ bạn muốn giữ, điều gì bạn muốn làm khác đi?",
+   "linh_vuc": "gia_dinh"
+  }
+ },
+ "chinh_tinh": {
+  "Tử Vi": {
+   "ten_han": "紫微",
+   "ngu_hanh": "Thổ",
+   "nhom": "Tử Phủ Vũ Tướng",
+   "tinh_chat": "Đế tinh: tự trọng, muốn dẫn dắt, thích trật tự và được tôn trọng.",
+   "diem_manh": "đứng ra gánh vác, tổ chức, giữ chuẩn mực",
+   "mat_toi": "dễ cô đơn trên cao, sĩ diện, khó nhận lời góp ý",
+   "bieu_hien": "thường chủ động nhận phần quyết định khi nhóm lúng túng",
+   "cau_tu_soi": "Bạn có để người khác thấy lúc mình cần giúp không?"
+  },
+  "Thiên Cơ": {
+   "ten_han": "天機",
+   "ngu_hanh": "Mộc",
+   "nhom": "Cơ Nguyệt Đồng Lương",
+   "tinh_chat": "Mưu tinh: nhanh trí, thích suy tính, hay thay đổi phương án.",
+   "diem_manh": "lập kế hoạch, phân tích, cố vấn",
+   "mat_toi": "nghĩ nhiều làm ít, lo xa, dễ dao động",
+   "bieu_hien": "thường có sẵn phương án B, C trước khi bắt đầu",
+   "cau_tu_soi": "Kế hoạch nào bạn đã nghĩ kỹ nhưng chưa bắt tay làm?"
+  },
+  "Thái Dương": {
+   "ten_han": "太陽",
+   "ngu_hanh": "Hoả",
+   "nhom": "Cự Nhật",
+   "tinh_chat": "Quý tinh: rộng rãi, hướng ngoại, thích cho đi và toả sáng.",
+   "diem_manh": "truyền cảm hứng, hào phóng, công khai minh bạch",
+   "mat_toi": "lo cho người khác quá mức mình, dễ kiệt sức, háo danh",
+   "bieu_hien": "thường nhận việc giúp người khác trước việc của mình",
+   "cau_tu_soi": "Bạn có đang cho đi nhiều hơn sức mình giữ được không?"
+  },
+  "Vũ Khúc": {
+   "ten_han": "武曲",
+   "ngu_hanh": "Kim",
+   "nhom": "Tử Phủ Vũ Tướng",
+   "tinh_chat": "Tài tinh: quyết đoán, thực tế, giỏi quản lý tiền và nguồn lực.",
+   "diem_manh": "kỷ luật, làm đến nơi, sòng phẳng",
+   "mat_toi": "cứng nhắc, khô khan trong tình cảm, cô độc",
+   "bieu_hien": "thường tính chi phí và hiệu quả trước khi nói đến cảm xúc",
+   "cau_tu_soi": "Người thân của bạn có thấy bạn quan tâm, hay chỉ thấy bạn lo toan?"
+  },
+  "Thiên Đồng": {
+   "ten_han": "天同",
+   "ngu_hanh": "Thuỷ",
+   "nhom": "Cơ Nguyệt Đồng Lương",
+   "tinh_chat": "Phúc tinh: ôn hoà, dễ chịu, thích hưởng thụ và hoà khí.",
+   "diem_manh": "làm dịu căng thẳng, dễ thích nghi, lạc quan",
+   "mat_toi": "ngại khó, trì hoãn, thiếu quyết liệt",
+   "bieu_hien": "thường là người làm không khí trong nhóm dễ thở hơn",
+   "cau_tu_soi": "Việc khó nào bạn đang để 'mai tính'?"
+  },
+  "Liêm Trinh": {
+   "ten_han": "廉貞",
+   "ngu_hanh": "Hoả",
+   "nhom": "Tử Phủ Vũ Tướng",
+   "tinh_chat": "Tù tinh: nguyên tắc, cảm xúc mạnh, có sức hút và tham vọng.",
+   "diem_manh": "chính trực khi đã tin, bền bỉ, có khả năng tổ chức",
+   "mat_toi": "nóng nảy, cố chấp, dễ vướng vào thị phi",
+   "bieu_hien": "thường phản ứng mạnh khi thấy điều trái nguyên tắc",
+   "cau_tu_soi": "Nguyên tắc nào của bạn đang giúp bạn, nguyên tắc nào đang trói bạn?"
+  },
+  "Thiên Phủ": {
+   "ten_han": "天府",
+   "ngu_hanh": "Thổ",
+   "nhom": "Tử Phủ Vũ Tướng",
+   "tinh_chat": "Kho tinh: ổn định, thận trọng, giỏi giữ và tích luỹ.",
+   "diem_manh": "bao dung, đáng tin, quản lý tốt",
+   "mat_toi": "bảo thủ, ngại mạo hiểm, thích an toàn quá mức",
+   "bieu_hien": "thường giữ một khoản dự phòng trước khi làm gì mới",
+   "cau_tu_soi": "Sự an toàn nào bạn đang giữ mà đã hết cần thiết?"
+  },
+  "Thái Âm": {
+   "ten_han": "太陰",
+   "ngu_hanh": "Thuỷ",
+   "nhom": "Cơ Nguyệt Đồng Lương",
+   "tinh_chat": "Phú tinh: tinh tế, nhạy cảm, hướng nội, thích tích luỹ âm thầm.",
+   "diem_manh": "chu đáo, có óc thẩm mỹ, kiên nhẫn",
+   "mat_toi": "đa cảm, hay giữ trong lòng, dễ buồn vô cớ",
+   "bieu_hien": "thường nhận ra thay đổi nhỏ trong tâm trạng người khác",
+   "cau_tu_soi": "Điều bạn đang giữ trong lòng có cần được nói ra không?"
+  },
+  "Tham Lang": {
+   "ten_han": "貪狼",
+   "ngu_hanh": "Thuỷ/Mộc",
+   "nhom": "Sát Phá Tham",
+   "tinh_chat": "Đào hoa tinh: ham sống, đa tài, giỏi giao tế, nhiều ham muốn.",
+   "diem_manh": "linh hoạt, thu hút, học nhanh nhiều thứ",
+   "mat_toi": "cả thèm chóng chán, dễ sa đà hưởng thụ",
+   "bieu_hien": "thường có nhiều sở thích cùng lúc",
+   "cau_tu_soi": "Trong những thứ bạn muốn, cái nào bạn thật sự cần?"
+  },
+  "Cự Môn": {
+   "ten_han": "巨門",
+   "ngu_hanh": "Thuỷ",
+   "nhom": "Cự Nhật",
+   "tinh_chat": "Ám tinh: sắc sảo, giỏi ăn nói, hay nghi vấn và phân tích đến tận cùng.",
+   "diem_manh": "lập luận, phản biện, nghề dùng lời nói",
+   "mat_toi": "đa nghi, dễ gây thị phi vì lời nói, khó tin người",
+   "bieu_hien": "thường hỏi 'tại sao' nhiều hơn người khác",
+   "cau_tu_soi": "Lời nói gần đây nhất khiến bạn hối hận là gì?"
+  },
+  "Thiên Tướng": {
+   "ten_han": "天相",
+   "ngu_hanh": "Thuỷ",
+   "nhom": "Tử Phủ Vũ Tướng",
+   "tinh_chat": "Ấn tinh: công bằng, trọng lễ nghĩa, giỏi phò tá và điều phối.",
+   "diem_manh": "đáng tin cậy, biết giữ thể diện cho người khác",
+   "mat_toi": "dễ bị người khác ảnh hưởng, thiếu chủ kiến khi đứng một mình",
+   "bieu_hien": "thường đứng ra dàn xếp khi hai bên bất đồng",
+   "cau_tu_soi": "Bạn đang sống theo tiêu chuẩn của mình hay của người khác?"
+  },
+  "Thiên Lương": {
+   "ten_han": "天梁",
+   "ngu_hanh": "Thổ",
+   "nhom": "Cơ Nguyệt Đồng Lương",
+   "tinh_chat": "Ấm tinh: che chở, thích làm người hướng dẫn, trọng đạo lý.",
+   "diem_manh": "bảo bọc, cố vấn, bình tĩnh trước biến cố",
+   "mat_toi": "hay lên lớp, cô độc, thích làm 'người cứu'",
+   "bieu_hien": "thường được người khác tìm đến xin lời khuyên",
+   "cau_tu_soi": "Bạn có để người khác tự học bài học của họ không?"
+  },
+  "Thất Sát": {
+   "ten_han": "七殺",
+   "ngu_hanh": "Kim",
+   "nhom": "Sát Phá Tham",
+   "tinh_chat": "Tướng tinh: dũng cảm, độc lập, dám xông pha và thay đổi.",
+   "diem_manh": "quyết đoán, chịu áp lực tốt, mở đường",
+   "mat_toi": "nóng vội, liều, khó hợp tác lâu dài",
+   "bieu_hien": "thường chọn hành động ngay thay vì chờ đủ thông tin",
+   "cau_tu_soi": "Lần gần nhất bạn hành động quá nhanh, bạn học được gì?"
+  },
+  "Phá Quân": {
+   "ten_han": "破軍",
+   "ngu_hanh": "Thuỷ",
+   "nhom": "Sát Phá Tham",
+   "tinh_chat": "Hao tinh: phá cũ lập mới, thích cách tân, không chịu khuôn khổ.",
+   "diem_manh": "dám thay đổi, đổi mới, khởi nghiệp",
+   "mat_toi": "hao tổn, bốc đồng, bỏ dở giữa chừng",
+   "bieu_hien": "thường muốn làm lại từ đầu khi thấy việc cũ không ổn",
+   "cau_tu_soi": "Điều gì bạn muốn phá bỏ — và muốn xây gì thay vào?"
+  }
+ },
+ "sao_cung": {
+  "Tử Vi": {
+   "Mệnh": "Tự trọng cao, muốn làm chủ cuộc đời mình; hợp vai trò dẫn dắt nhưng cần học lắng nghe.",
+   "Huynh Đệ": "Anh chị em hoặc bạn thân thường có cá tính mạnh; quan hệ tốt khi hai bên tôn trọng vị trí của nhau.",
+   "Phu Thê": "Kỳ vọng người bạn đời có địa vị, bản lĩnh; dễ va chạm khi cả hai cùng muốn quyết.",
+   "Tử Nữ": "Kỳ vọng cao vào con cái; cần tránh áp đặt khuôn mẫu của mình lên con.",
+   "Tài Bạch": "Tiền đến qua vị trí và uy tín hơn là may rủi; chi tiêu cho thể diện là điểm dễ hao.",
+   "Tật Ách": "Căng thẳng thường tích ở việc gánh trách nhiệm một mình; nên chia việc và nghỉ đúng lúc.",
+   "Thiên Di": "Ra ngoài dễ được nể trọng, có quý nhân; môi trường mới thường mở vai trò lớn hơn.",
+   "Nô Bộc": "Mạng lưới có người có vị thế; cần phân biệt người giúp thật với người dựa dẫm.",
+   "Quan Lộc": "Hợp vị trí quản lý, điều hành, nơi có cấu trúc rõ ràng; khó chịu khi bị cấp dưới hoá.",
+   "Điền Trạch": "Coi trọng nhà cửa như biểu tượng vị thế; thường muốn một nơi ở đàng hoàng, ổn định.",
+   "Phúc Đức": "Nội tâm cần sự tôn trọng và ý nghĩa; bình an đến khi làm việc có giá trị lâu dài.",
+   "Phụ Mẫu": "Quan hệ với cha mẹ, cấp trên thiên về khuôn phép; học được nhiều từ người có uy tín."
+  },
+  "Thiên Cơ": {
+   "Mệnh": "Nhanh trí, nhiều ý tưởng, thích suy tính; điểm cần rèn là đi đến quyết định và giữ nó.",
+   "Huynh Đệ": "Anh em, bạn bè hay trao đổi ý tưởng; quan hệ gắn qua trò chuyện hơn là việc chung dài hạn.",
+   "Phu Thê": "Kỳ vọng người bạn đời thông minh, hiểu ý; dễ trục trặc vì nghĩ nhiều, đoán ý nhau.",
+   "Tử Nữ": "Quan tâm đến việc dạy con tư duy; con cái có thể nhạy bén, hay hỏi.",
+   "Tài Bạch": "Tiền đến từ chất xám, tư vấn, kế hoạch; thu nhập dễ thay đổi theo từng giai đoạn.",
+   "Tật Ách": "Căng thẳng dễ đến từ suy nghĩ quá nhiều; giấc ngủ và nhịp nghỉ là điểm cần giữ.",
+   "Thiên Di": "Thích dịch chuyển, học từ môi trường mới; hay đổi chỗ làm hoặc nơi ở.",
+   "Nô Bộc": "Bạn bè đa dạng, thông minh nhưng thay đổi nhiều; ít quan hệ gắn bó rất lâu.",
+   "Quan Lộc": "Hợp nghề kế hoạch, phân tích, kỹ thuật, tư vấn; cần môi trường có đổi mới.",
+   "Điền Trạch": "Nhà cửa có thể thay đổi vài lần; thích nơi ở tiện dụng, có tính toán.",
+   "Phúc Đức": "Tinh thần hay động, khó tĩnh; bình an đến từ việc học và hiểu ra điều mới.",
+   "Phụ Mẫu": "Cha mẹ, cấp trên thường là người khéo léo; bạn học được cách suy tính từ họ."
+  },
+  "Thái Dương": {
+   "Mệnh": "Hướng ngoại, rộng lượng, thích được ghi nhận; dễ ôm việc của người khác.",
+   "Huynh Đệ": "Thường là người lo cho anh em, bạn bè; cần tránh gánh thay mọi thứ.",
+   "Phu Thê": "Kỳ vọng người bạn đời đàng hoàng, có danh dự; dễ bận việc ngoài mà ít thời gian cho nhà.",
+   "Tử Nữ": "Muốn làm tấm gương cho con; con cái thường cởi mở, thích thể hiện.",
+   "Tài Bạch": "Tiền đến qua danh tiếng và công việc công khai; hào phóng nên cần kỷ luật giữ tiền.",
+   "Tật Ách": "Dễ kiệt sức vì làm quá; nên để ý mắt, huyết áp theo lời khuyên của bác sĩ và nghỉ ngơi đều.",
+   "Thiên Di": "Ra ngoài được nhiều người biết đến; hợp môi trường rộng, có giao lưu.",
+   "Nô Bộc": "Mạng lưới rộng, hay giúp người; cần chọn lọc để không bị lợi dụng lòng tốt.",
+   "Quan Lộc": "Hợp nghề giáo dục, truyền thông, công vụ, việc có tính cống hiến.",
+   "Điền Trạch": "Nhà cửa sáng sủa, thích mở cửa đón khách; tài sản gắn với công sức làm việc.",
+   "Phúc Đức": "Nội tâm cần được cống hiến; bình an khi thấy mình có ích.",
+   "Phụ Mẫu": "Quan hệ với cha, người đi trước có ảnh hưởng lớn; học được tinh thần trách nhiệm."
+  },
+  "Vũ Khúc": {
+   "Mệnh": "Quyết đoán, thực tế, giỏi quản lý tiền; cần mềm mỏng hơn trong quan hệ.",
+   "Huynh Đệ": "Quan hệ anh em sòng phẳng, rõ ràng; dễ xa cách nếu dính đến tiền bạc.",
+   "Phu Thê": "Kỳ vọng người bạn đời thực tế, có năng lực; tình cảm dễ khô nếu chỉ nói chuyện tiền.",
+   "Tử Nữ": "Dạy con theo kỷ luật; cần thêm sự ấm áp và lắng nghe.",
+   "Tài Bạch": "Tài tinh ở vị trí hợp: giỏi kiếm và giữ tiền, hợp tài chính, kinh doanh có kỷ luật.",
+   "Tật Ách": "Căng thẳng thường nén trong người; nên tìm cách giải toả thay vì chịu đựng.",
+   "Thiên Di": "Ra ngoài làm ăn được, hợp môi trường cạnh tranh, có số liệu rõ ràng.",
+   "Nô Bộc": "Đồng nghiệp, cấp dưới làm việc theo quy tắc; quan hệ dựa trên hiệu quả.",
+   "Quan Lộc": "Hợp tài chính, ngân hàng, kỹ thuật, quản trị, nơi cần quyết đoán.",
+   "Điền Trạch": "Tích luỹ tài sản cố định có kế hoạch; coi nhà là tài sản hơn là tổ ấm.",
+   "Phúc Đức": "Nội tâm ít bộc lộ; bình an đến khi mọi thứ trong tầm kiểm soát.",
+   "Phụ Mẫu": "Cha mẹ, cấp trên nghiêm khắc; bạn học được tính kỷ luật từ họ."
+  },
+  "Thiên Đồng": {
+   "Mệnh": "Ôn hoà, dễ gần, thích sống thoải mái; cần rèn sự quyết liệt khi việc khó.",
+   "Huynh Đệ": "Anh em, bạn bè hoà thuận, dễ chịu; quan hệ nhẹ nhàng, ít tranh chấp.",
+   "Phu Thê": "Kỳ vọng một quan hệ êm đềm, chiều chuộng; dễ né tránh khi có xung đột.",
+   "Tử Nữ": "Gần gũi con cái, dễ chơi cùng con; cần thêm nguyên tắc.",
+   "Tài Bạch": "Tiền đến đều nhưng không dồn dập; thích hưởng thụ nên dễ tiêu cho niềm vui.",
+   "Tật Ách": "Dễ mệt vì thiếu vận động hoặc ăn uống tuỳ hứng; nhịp sinh hoạt đều là cách giữ sức.",
+   "Thiên Di": "Ra ngoài dễ được quý mến; thích đi chơi, trải nghiệm nhẹ nhàng.",
+   "Nô Bộc": "Bạn bè đông, vui vẻ; ít người thật sự cùng làm việc lớn.",
+   "Quan Lộc": "Hợp việc dịch vụ, chăm sóc, môi trường ổn định, ít cạnh tranh gắt.",
+   "Điền Trạch": "Thích nhà thoải mái, tiện nghi; không quá đặt nặng tài sản lớn.",
+   "Phúc Đức": "Nội tâm lạc quan, biết tìm niềm vui nhỏ; đây là nguồn phúc quan trọng.",
+   "Phụ Mẫu": "Quan hệ cha mẹ êm ấm, được chiều; cần tự lập sớm hơn."
+  },
+  "Liêm Trinh": {
+   "Mệnh": "Nguyên tắc, cảm xúc mạnh, có sức hút; cần kiểm soát nóng nảy.",
+   "Huynh Đệ": "Quan hệ anh em có lúc căng vì ai cũng giữ ý mình; cần thẳng thắn mà mềm.",
+   "Phu Thê": "Tình cảm mãnh liệt, kỳ vọng sự chung thuỷ tuyệt đối; dễ ghen hoặc căng thẳng.",
+   "Tử Nữ": "Dạy con nghiêm, đặt chuẩn đạo đức cao; cần tránh cứng nhắc.",
+   "Tài Bạch": "Tiền đến qua năng lực tổ chức; cần tránh những khoản 'nhanh' thiếu minh bạch.",
+   "Tật Ách": "Căng thẳng dễ bộc phát thành nóng giận; nên có cách xả áp lực lành mạnh.",
+   "Thiên Di": "Ra ngoài có sức hút nhưng dễ vướng thị phi; giữ nguyên tắc minh bạch.",
+   "Nô Bộc": "Mạng lưới phức tạp, cần phân định rõ người và việc.",
+   "Quan Lộc": "Hợp quản lý, pháp chế, kỹ thuật, nơi cần kỷ luật và nguyên tắc.",
+   "Điền Trạch": "Nhà cửa, tài sản cần giấy tờ rõ ràng; nên thận trọng khi đứng tên chung.",
+   "Phúc Đức": "Nội tâm nhiều giằng co giữa ham muốn và nguyên tắc; bình an khi sống đúng giá trị.",
+   "Phụ Mẫu": "Quan hệ cha mẹ, cấp trên có lúc căng; học được bài học về nguyên tắc."
+  },
+  "Thiên Phủ": {
+   "Mệnh": "Ổn định, bao dung, giỏi giữ gìn; cần dám thử cái mới đúng lúc.",
+   "Huynh Đệ": "Anh em, bạn bè có thể nhờ cậy; quan hệ bền và thực tế.",
+   "Phu Thê": "Kỳ vọng một gia đình ổn định, người bạn đời chu đáo; dễ nhàm nếu thiếu đổi mới.",
+   "Tử Nữ": "Chăm lo vật chất cho con chu đáo; nên dành thêm thời gian trò chuyện.",
+   "Tài Bạch": "Kho tinh ở vị trí hợp: giỏi tích luỹ, quản lý tài sản, chi tiêu thận trọng.",
+   "Tật Ách": "Dễ tích căng thẳng vì lo giữ mọi thứ an toàn; ăn uống điều độ là điểm cần để ý.",
+   "Thiên Di": "Ra ngoài được tin cậy, hợp vai trò quản lý nguồn lực.",
+   "Nô Bộc": "Mạng lưới ổn định, có người đáng tin; ít quan hệ bề nổi.",
+   "Quan Lộc": "Hợp hành chính, tài chính, quản lý tài sản, nơi cần sự ổn định.",
+   "Điền Trạch": "Coi trọng nhà cửa, đất đai; tích luỹ bất động sản dần dần.",
+   "Phúc Đức": "Nội tâm an ổn khi có nền tảng vững; phúc dày ở sự đủ đầy.",
+   "Phụ Mẫu": "Cha mẹ, cấp trên chu đáo, che chở; bạn thừa hưởng tính cẩn trọng."
+  },
+  "Thái Âm": {
+   "Mệnh": "Tinh tế, nhạy cảm, hướng nội; cần nói ra thay vì giữ trong lòng.",
+   "Huynh Đệ": "Quan hệ anh em, bạn bè gắn bằng tình cảm; hay chăm sóc âm thầm.",
+   "Phu Thê": "Kỳ vọng người bạn đời dịu dàng, hiểu ý; dễ buồn khi không được thấu hiểu.",
+   "Tử Nữ": "Gần con, chăm sóc tỉ mỉ; con cái thường nhạy cảm.",
+   "Tài Bạch": "Tiền tích luỹ âm thầm, giỏi tiết kiệm; hợp thu nhập đều đặn, tài sản dài hạn.",
+   "Tật Ách": "Cảm xúc ảnh hưởng mạnh đến sức khoẻ; giấc ngủ và tâm trạng cần chăm sóc.",
+   "Thiên Di": "Ra ngoài dè dặt ban đầu nhưng được quý vì chu đáo.",
+   "Nô Bộc": "Bạn bè ít nhưng sâu; nhiều người tìm đến để tâm sự.",
+   "Quan Lộc": "Hợp nghề thẩm mỹ, chăm sóc, tài chính, bất động sản, công việc tỉ mỉ.",
+   "Điền Trạch": "Rất coi trọng tổ ấm; thích nhà yên tĩnh, ấm cúng, có xu hướng tích luỹ nhà đất.",
+   "Phúc Đức": "Nội tâm sâu, giàu cảm xúc; bình an đến từ nghệ thuật, thiên nhiên.",
+   "Phụ Mẫu": "Quan hệ với mẹ có ảnh hưởng lớn; học được sự chu đáo."
+  },
+  "Tham Lang": {
+   "Mệnh": "Ham sống, đa tài, giỏi giao tiếp; cần chọn lọc ham muốn để không phân tán.",
+   "Huynh Đệ": "Anh em, bạn bè vui vẻ, hay rủ nhau hưởng thụ; cần giữ ranh giới tiền bạc.",
+   "Phu Thê": "Tình cảm nồng nhiệt, nhiều duyên; cần cam kết rõ ràng để tránh hiểu lầm.",
+   "Tử Nữ": "Con cái hoạt bát, nhiều sở thích; cha mẹ cần làm gương về tiết chế.",
+   "Tài Bạch": "Tiền đến từ giao tế, kinh doanh, giải trí; dễ tiêu vào hưởng thụ.",
+   "Tật Ách": "Dễ quá đà ăn uống, thức khuya; điều độ là chìa khoá.",
+   "Thiên Di": "Ra ngoài giao thiệp giỏi, nhiều cơ hội; cần cảnh giác cám dỗ.",
+   "Nô Bộc": "Mạng lưới rộng, nhiều mối quan hệ xã giao; chọn bạn để giữ sức.",
+   "Quan Lộc": "Hợp kinh doanh, bán hàng, giải trí, nghệ thuật, ngoại giao.",
+   "Điền Trạch": "Nhà cửa có thể thay đổi; thích không gian đẹp, tiện nghi.",
+   "Phúc Đức": "Nội tâm nhiều khát khao; bình an khi tìm được điều mình thật sự yêu.",
+   "Phụ Mẫu": "Quan hệ cha mẹ cởi mở nhưng có lúc thiếu gần gũi sâu."
+  },
+  "Cự Môn": {
+   "Mệnh": "Sắc sảo, giỏi ăn nói, hay phân tích; cần cẩn trọng lời nói để tránh thị phi.",
+   "Huynh Đệ": "Quan hệ anh em dễ có bất đồng lời qua tiếng lại; cần nói rõ ràng từ đầu.",
+   "Phu Thê": "Dễ hiểu lầm vì lời nói trong quan hệ đôi lứa; đối thoại thẳng thắn là cách giữ.",
+   "Tử Nữ": "Dạy con bằng lý lẽ; con có thể hay cãi, cần kiên nhẫn.",
+   "Tài Bạch": "Tiền đến từ nghề dùng lời nói, chuyên môn; cần giấy tờ rõ ràng trong làm ăn.",
+   "Tật Ách": "Căng thẳng thường từ suy nghĩ tiêu cực, lo âu; nên chia sẻ với người tin cậy.",
+   "Thiên Di": "Ra ngoài phải cạnh tranh bằng lý lẽ; hợp môi trường tranh luận, đàm phán.",
+   "Nô Bộc": "Đồng nghiệp dễ có điều tiếng; giữ minh bạch để tránh hiểu lầm.",
+   "Quan Lộc": "Hợp luật, giáo dục, tư vấn, truyền thông, bán hàng, nghiên cứu.",
+   "Điền Trạch": "Nhà cửa, tài sản dễ có tranh chấp giấy tờ; nên làm rõ pháp lý.",
+   "Phúc Đức": "Nội tâm hay nghi vấn, khó an; bình an đến khi tìm được câu trả lời thoả đáng.",
+   "Phụ Mẫu": "Quan hệ với cha mẹ, cấp trên cần nhiều đối thoại để hiểu nhau."
+  },
+  "Thiên Tướng": {
+   "Mệnh": "Công bằng, trọng lễ nghĩa, giỏi phò tá; cần rèn chủ kiến riêng.",
+   "Huynh Đệ": "Anh em, bạn bè giúp đỡ nhau đúng lúc; quan hệ có trước có sau.",
+   "Phu Thê": "Kỳ vọng một quan hệ tương kính, công bằng; dễ nhường nhịn quá mức.",
+   "Tử Nữ": "Dạy con theo nề nếp; quan hệ cha mẹ – con cái có trật tự.",
+   "Tài Bạch": "Tiền đến từ công việc ổn định, vị trí đáng tin; hợp thu nhập đều.",
+   "Tật Ách": "Căng thẳng khi phải làm hài lòng mọi người; cần học nói 'không'.",
+   "Thiên Di": "Ra ngoài được tin tưởng, hay có người nhờ vả.",
+   "Nô Bộc": "Đồng nghiệp, cấp dưới tốt khi có quy tắc rõ; bạn là người giữ cân bằng.",
+   "Quan Lộc": "Hợp hành chính, nhân sự, pháp lý, điều phối, trợ lý cấp cao.",
+   "Điền Trạch": "Nhà cửa chỉn chu, gọn gàng; thích sự ngăn nắp.",
+   "Phúc Đức": "Nội tâm trọng công bằng; bình an khi mọi người đối xử tử tế với nhau.",
+   "Phụ Mẫu": "Quan hệ cha mẹ, cấp trên thuận; bạn được giao phó việc quan trọng."
+  },
+  "Thiên Lương": {
+   "Mệnh": "Che chở, trọng đạo lý, bình tĩnh; cần tránh thói lên lớp.",
+   "Huynh Đệ": "Hay là người che chở anh em, bạn bè; quan hệ dựa trên nghĩa.",
+   "Phu Thê": "Kỳ vọng người bạn đời chín chắn; có thể thích người lớn tuổi hơn hoặc che chở người kia.",
+   "Tử Nữ": "Muốn dạy con đạo lý; con cái được bảo bọc, cần để con tự trải nghiệm.",
+   "Tài Bạch": "Tiền đến ổn định, không ham lợi nhanh; hợp nghề phục vụ, bảo hiểm.",
+   "Tật Ách": "Bình tĩnh trước khó khăn là điểm mạnh; vẫn cần khám định kỳ theo lời bác sĩ.",
+   "Thiên Di": "Ra ngoài hay gặp người giúp đỡ hoặc tự mình là người giúp người khác.",
+   "Nô Bộc": "Mạng lưới coi bạn như người hướng dẫn; cần giữ ranh giới.",
+   "Quan Lộc": "Hợp y tế, giáo dục, bảo hiểm, công tác xã hội, cố vấn.",
+   "Điền Trạch": "Nhà cửa thường có thừa hưởng hoặc gắn với gia đình.",
+   "Phúc Đức": "Nội tâm vững, hướng về đạo lý, tâm linh; đây là nguồn phúc.",
+   "Phụ Mẫu": "Quan hệ với cha mẹ, người lớn tốt; thường được che chở."
+  },
+  "Thất Sát": {
+   "Mệnh": "Dũng cảm, độc lập, dám mở đường; cần kiên nhẫn và hợp tác.",
+   "Huynh Đệ": "Anh em, bạn bè cá tính mạnh, dễ va chạm; tôn trọng khoảng cách là cách giữ.",
+   "Phu Thê": "Tình cảm mạnh, quyết liệt; hai người cần không gian riêng để tránh đối đầu.",
+   "Tử Nữ": "Con cái cá tính, độc lập; cần dạy bằng sự tôn trọng hơn là ép buộc.",
+   "Tài Bạch": "Tiền đến bằng xông pha, cạnh tranh; thu nhập lên xuống theo giai đoạn.",
+   "Tật Ách": "Áp lực dồn nén dễ khiến kiệt sức; cần nghỉ ngơi xen kẽ sau mỗi đợt dồn sức.",
+   "Thiên Di": "Ra ngoài dám mạo hiểm, hợp môi trường thử thách.",
+   "Nô Bộc": "Đồng nghiệp mạnh mẽ; cần rõ vai trò để tránh tranh quyền.",
+   "Quan Lộc": "Hợp quân đội, kỹ thuật, khởi nghiệp, việc cần quyết đoán và chịu áp lực.",
+   "Điền Trạch": "Nhà cửa có thể nhiều thay đổi; tài sản tích luỹ qua nỗ lực lớn.",
+   "Phúc Đức": "Nội tâm ít yên; bình an đến khi có mục tiêu đáng theo đuổi.",
+   "Phụ Mẫu": "Quan hệ với cha mẹ, cấp trên có lúc căng; bạn thích tự quyết."
+  },
+  "Phá Quân": {
+   "Mệnh": "Thích đổi mới, phá khuôn khổ; cần học cách hoàn thành trước khi làm lại.",
+   "Huynh Đệ": "Quan hệ anh em có thay đổi, lúc gần lúc xa.",
+   "Phu Thê": "Tình cảm có biến động, kỳ vọng làm mới liên tục; cam kết cần được nuôi dưỡng.",
+   "Tử Nữ": "Con cái độc lập, thích khác biệt; cha mẹ cần linh hoạt.",
+   "Tài Bạch": "Tiền vào ra mạnh; nên có quỹ dự phòng và tránh đầu tư bốc đồng.",
+   "Tật Ách": "Dễ hao sức vì sống cường độ cao; cần nhịp nghỉ ổn định.",
+   "Thiên Di": "Ra ngoài dám thay đổi, hợp môi trường mới, cách tân.",
+   "Nô Bộc": "Mạng lưới thay đổi theo từng giai đoạn đời.",
+   "Quan Lộc": "Hợp khởi nghiệp, cải tổ, công nghệ, việc phá cũ lập mới.",
+   "Điền Trạch": "Nhà cửa có thể sửa sang, chuyển đổi nhiều lần.",
+   "Phúc Đức": "Nội tâm không yên với cái cũ; bình an khi được sáng tạo.",
+   "Phụ Mẫu": "Quan hệ với cha mẹ, cấp trên có khác biệt quan điểm; nên tôn trọng nhau."
+  }
+ },
+ "do_sang": {
+  "Miếu": "Sao ở vị trí mạnh nhất: tính chất tốt phát huy rõ, mặt tối được kiềm chế.",
+  "Vượng": "Sao ở vị trí mạnh: phát huy tốt.",
+  "Đắc": "Sao ở vị trí khá: phát huy được.",
+  "Lợi": "Sao ở vị trí tương đối thuận.",
+  "Bình": "Sao ở vị trí trung bình: tốt xấu tuỳ các sao đi kèm.",
+  "Bất": "Sao ở vị trí yếu: tính chất tốt khó phát huy.",
+  "Hãm": "Sao ở vị trí hãm: mặt tối dễ lộ, cần các sao tốt đi kèm để cân bằng."
+ },
+ "tu_hoa": {
+  "Lộc": {
+   "y_nghia": "Hoá Lộc: sự thuận lợi, nguồn lợi và niềm vui chảy vào lĩnh vực của cung.",
+   "luu_y": "Thuận quá dễ chủ quan."
+  },
+  "Quyền": {
+   "y_nghia": "Hoá Quyền: sức mạnh, quyền chủ động, muốn kiểm soát ở lĩnh vực của cung.",
+   "luu_y": "Dễ thành áp đặt."
+  },
+  "Khoa": {
+   "y_nghia": "Hoá Khoa: danh tiếng, học vấn, sự giải toả nhẹ nhàng ở lĩnh vực của cung.",
+   "luu_y": "Tốt về tiếng nhiều hơn về lợi."
+  },
+  "Kỵ": {
+   "y_nghia": "Hoá Kỵ: điểm vướng, nơi bạn để tâm nhiều và dễ trắc trở ở lĩnh vực của cung.",
+   "luu_y": "Kỵ chỉ nơi cần học bài học, không phải điềm xui."
+  }
+ },
+ "tu_hoa_cung": {
+  "Lộc": {
+   "Mệnh": "Bản thân được thuận lợi, dễ được yêu mến.",
+   "Huynh Đệ": "Anh em, bạn bè mang lại lợi ích, hỗ trợ.",
+   "Phu Thê": "Quan hệ đôi lứa có nhiều niềm vui, người bạn đời mang lại thuận lợi.",
+   "Tử Nữ": "Con cái, sáng tạo mang lại niềm vui.",
+   "Tài Bạch": "Nguồn thu thuận, dễ có thêm khoản lợi.",
+   "Tật Ách": "Sức khoẻ ổn khi biết điều độ; tránh hưởng thụ quá mức.",
+   "Thiên Di": "Ra ngoài gặp cơ hội, đi xa có lợi.",
+   "Nô Bộc": "Mạng lưới, khách hàng mang lại lợi.",
+   "Quan Lộc": "Công việc thuận, dễ được ghi nhận.",
+   "Điền Trạch": "Nhà cửa, tài sản có thêm.",
+   "Phúc Đức": "Tinh thần thoải mái, biết hưởng phúc.",
+   "Phụ Mẫu": "Được cha mẹ, cấp trên hỗ trợ."
+  },
+  "Quyền": {
+   "Mệnh": "Bản thân chủ động, muốn nắm quyền quyết.",
+   "Huynh Đệ": "Anh em, bạn bè có tiếng nói mạnh.",
+   "Phu Thê": "Trong quan hệ đôi lứa, một bên muốn nắm quyền — cần cân bằng.",
+   "Tử Nữ": "Kỳ vọng và kiểm soát con cái nhiều.",
+   "Tài Bạch": "Chủ động kiếm tiền, giỏi làm ra tiền.",
+   "Tật Ách": "Chịu áp lực tốt nhưng hay gồng.",
+   "Thiên Di": "Ra ngoài có vị thế, được trao quyền.",
+   "Nô Bộc": "Có vai trò lãnh đạo nhóm, cấp dưới.",
+   "Quan Lộc": "Sự nghiệp có quyền lực, trách nhiệm lớn.",
+   "Điền Trạch": "Chủ động trong tài sản, nhà cửa.",
+   "Phúc Đức": "Tinh thần mạnh, muốn tự quyết.",
+   "Phụ Mẫu": "Cha mẹ, cấp trên nghiêm, có uy."
+  },
+  "Khoa": {
+   "Mệnh": "Có danh tiếng, học vấn, phong thái nho nhã.",
+   "Huynh Đệ": "Anh em, bạn bè có học, hay giúp đỡ tinh thần.",
+   "Phu Thê": "Quan hệ đôi lứa êm đềm, tôn trọng.",
+   "Tử Nữ": "Con cái ham học, có tiếng tốt.",
+   "Tài Bạch": "Tiền đến qua uy tín, chuyên môn.",
+   "Tật Ách": "Gặp khó dễ có người giúp, sức khoẻ được chăm sóc tốt.",
+   "Thiên Di": "Ra ngoài có tiếng tốt.",
+   "Nô Bộc": "Bạn bè có học thức.",
+   "Quan Lộc": "Sự nghiệp có danh, hợp chuyên môn.",
+   "Điền Trạch": "Nhà cửa, giấy tờ rõ ràng.",
+   "Phúc Đức": "Tinh thần thanh thản.",
+   "Phụ Mẫu": "Cha mẹ có học, hỗ trợ việc học."
+  },
+  "Kỵ": {
+   "Mệnh": "Bản thân hay tự làm khó mình, để tâm quá nhiều.",
+   "Huynh Đệ": "Dễ vướng bận chuyện anh em, bạn bè.",
+   "Phu Thê": "Quan hệ đôi lứa dễ vướng mắc, hiểu lầm; cần đối thoại nhiều hơn.",
+   "Tử Nữ": "Lo lắng nhiều về con cái.",
+   "Tài Bạch": "Tiền vào ra vướng, cần kỷ luật chi tiêu.",
+   "Tật Ách": "Để ý căng thẳng, nên khám định kỳ theo lời bác sĩ.",
+   "Thiên Di": "Ra ngoài dễ gặp trở ngại nhỏ, cần chuẩn bị kỹ.",
+   "Nô Bộc": "Dễ có hiểu lầm với đồng nghiệp, bạn bè.",
+   "Quan Lộc": "Công việc có áp lực, cần kiên trì.",
+   "Điền Trạch": "Nhà cửa, giấy tờ cần kiểm tra kỹ.",
+   "Phúc Đức": "Tinh thần hay lo, cần buông bớt.",
+   "Phụ Mẫu": "Có khoảng cách với cha mẹ, cấp trên; cần kiên nhẫn."
+  }
+ },
+ "phu_tinh": {
+  "Tả Phù": {
+   "nhom": "Lục cát tinh",
+   "y_nghia": "Sao trợ lực: có người giúp đỡ, khả năng hợp tác."
+  },
+  "Hữu Bật": {
+   "nhom": "Lục cát tinh",
+   "y_nghia": "Sao trợ lực: có người giúp đỡ, được hỗ trợ từ nhiều phía."
+  },
+  "Văn Xương": {
+   "nhom": "Lục cát tinh",
+   "y_nghia": "Sao văn: học vấn, chữ nghĩa, khả năng thi cử và giấy tờ."
+  },
+  "Văn Khúc": {
+   "nhom": "Lục cát tinh",
+   "y_nghia": "Sao văn: tài năng nghệ thuật, ăn nói khéo."
+  },
+  "Thiên Khôi": {
+   "nhom": "Lục cát tinh",
+   "y_nghia": "Quý nhân (dương): được người có vị thế nâng đỡ."
+  },
+  "Thiên Việt": {
+   "nhom": "Lục cát tinh",
+   "y_nghia": "Quý nhân (âm): được giúp đỡ âm thầm."
+  },
+  "Lộc Tồn": {
+   "nhom": "Lộc",
+   "y_nghia": "Sao lộc: tích luỹ, tiết kiệm, ổn định tài chính; hơi thận trọng."
+  },
+  "Thiên Mã": {
+   "nhom": "Động",
+   "y_nghia": "Sao di chuyển: thay đổi, đi xa, năng động."
+  },
+  "Kình Dương": {
+   "nhom": "Lục sát tinh",
+   "y_nghia": "Sát tinh: quyết liệt, cạnh tranh; dễ va chạm nếu nóng vội."
+  },
+  "Đà La": {
+   "nhom": "Lục sát tinh",
+   "y_nghia": "Sát tinh: chậm trễ, dây dưa; cần kiên nhẫn."
+  },
+  "Hỏa Tinh": {
+   "nhom": "Lục sát tinh",
+   "y_nghia": "Sát tinh: nóng nảy, bộc phát nhanh."
+  },
+  "Linh Tinh": {
+   "nhom": "Lục sát tinh",
+   "y_nghia": "Sát tinh: âm ỉ, bất an ngầm."
+  },
+  "Địa Không": {
+   "nhom": "Lục sát tinh",
+   "y_nghia": "Sát tinh: hụt hẫng, ý tưởng khác thường; dễ hao nếu mạo hiểm."
+  },
+  "Địa Kiếp": {
+   "nhom": "Lục sát tinh",
+   "y_nghia": "Sát tinh: biến động, mất mát bất ngờ; cần phòng bị."
+  },
+  "Hàm Trì": {
+   "nhom": "Nhóm đào hoa",
+   "y_nghia": "Sao đào hoa (Hàm Trì, người Việt hay gọi Đào Hoa): duyên dáng, dễ thu hút."
+  },
+  "Hồng Loan": {
+   "nhom": "Nhóm đào hoa",
+   "y_nghia": "Sao đào hoa: duyên tình cảm, hỷ sự."
+  },
+  "Thiên Hỷ": {
+   "nhom": "Nhóm đào hoa",
+   "y_nghia": "Sao hỷ: niềm vui, tin vui."
+  },
+  "Thiên Diêu": {
+   "nhom": "Nhóm đào hoa",
+   "y_nghia": "Sao đào hoa: lãng mạn, dễ sa đà cảm xúc."
+  },
+  "Thiên Hình": {
+   "nhom": "Phụ tinh",
+   "y_nghia": "Sao kỷ luật: nghiêm khắc, pháp lý, dao kéo."
+  },
+  "Hoa Cái": {
+   "nhom": "Phụ tinh",
+   "y_nghia": "Sao nghệ thuật, tôn giáo: có khiếu thẩm mỹ, thích cô tịch."
+  },
+  "Cô Thần": {
+   "nhom": "Phụ tinh",
+   "y_nghia": "Sao cô độc: thích một mình, tự lập."
+  },
+  "Quả Tú": {
+   "nhom": "Phụ tinh",
+   "y_nghia": "Sao cô độc: khép kín trong tình cảm."
+  },
+  "Thiên Khốc": {
+   "nhom": "Phụ tinh",
+   "y_nghia": "Sao buồn: đa sầu, hay lo nghĩ."
+  },
+  "Thiên Hư": {
+   "nhom": "Phụ tinh",
+   "y_nghia": "Sao buồn: hụt hẫng, trống trải."
+  },
+  "Tuần Không": {
+   "nhom": "Tuần/Triệt",
+   "y_nghia": "Tuần: làm chậm, treo lại; theo Nguyễn Phát Lộc chỉ xét cung đóng."
+  },
+  "Triệt Lộ": {
+   "nhom": "Tuần/Triệt",
+   "y_nghia": "Triệt: cắt đứt, chặn lại; mạnh ở tiền vận."
+  }
+ },
+ "nhom_cach": {
+  "Tử Phủ Vũ Tướng": "Nhóm Tử Phủ Vũ Tướng: thiên về tổ chức, quản lý, ổn định, hợp môi trường có cấu trúc.",
+  "Sát Phá Tham": "Nhóm Sát Phá Tham: thiên về thay đổi, xông pha, khởi tạo; đời nhiều biến động.",
+  "Cơ Nguyệt Đồng Lương": "Nhóm Cơ Nguyệt Đồng Lương: thiên về chuyên môn, phục vụ, ổn định, làm việc trong hệ thống.",
+  "Cự Nhật": "Nhóm Cự Nhật: thiên về lời nói, truyền đạt, công khai."
+ },
+ "chu_de_han": {
+  "Mệnh": "Giai đoạn chủ đề Mệnh: chú ý chính bản thân, định hình lại cách sống và mục tiêu.",
+  "Huynh Đệ": "Giai đoạn chủ đề Huynh Đệ: quan hệ anh em, bạn bè, cộng sự được đặt lên bàn.",
+  "Phu Thê": "Giai đoạn chủ đề Phu Thê: quan hệ đôi lứa, hôn nhân, hợp tác thân thiết là tâm điểm.",
+  "Tử Nữ": "Giai đoạn chủ đề Tử Nữ: con cái, thế hệ sau, sáng tạo, đầu tư cho điều mình tạo ra.",
+  "Tài Bạch": "Giai đoạn chủ đề Tài Bạch: tiền bạc, thu nhập, cách quản lý tài chính.",
+  "Tật Ách": "Giai đoạn chủ đề Tật Ách: sức khoẻ, nhịp sống, cách chịu áp lực cần được chăm sóc.",
+  "Thiên Di": "Giai đoạn chủ đề Thiên Di: dịch chuyển, môi trường mới, quan hệ bên ngoài.",
+  "Nô Bộc": "Giai đoạn chủ đề Nô Bộc: mạng lưới, đồng nghiệp, cấp dưới, bạn bè xã hội.",
+  "Quan Lộc": "Giai đoạn chủ đề Quan Lộc: công việc, sự nghiệp, vai trò xã hội.",
+  "Điền Trạch": "Giai đoạn chủ đề Điền Trạch: nhà cửa, nơi ở, tài sản, không khí gia đình.",
+  "Phúc Đức": "Giai đoạn chủ đề Phúc Đức: đời sống tinh thần, dòng họ, sự bình an nội tâm.",
+  "Phụ Mẫu": "Giai đoạn chủ đề Phụ Mẫu: cha mẹ, cấp trên, giấy tờ, học hành."
+ },
+ "giai_thich": {
+  "tuan_triet": {
+   "tieu_de": "Tuần và Triệt là gì?",
+   "noi_dung": "Tuần (Tuần Không) và Triệt (Triệt Lộ) là hai 'vùng chặn' trong lá số, an theo can chi năm sinh. Triệt như cắt đứt — mạnh ở tiền vận rồi yếu dần; Tuần như treo lại — chậm và bền, mạnh dần về hậu vận. Theo Nguyễn Phát Lộc chỉ xét cung Tuần/Triệt đóng (phạm vi hẹp).",
+   "tu_khoa": [
+    "tuan va triet",
+    "tuan triet",
+    "triet la gi",
+    "tuan la gi",
+    "bi triet",
+    "bi tuan"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "tu_hoa": {
+   "tieu_de": "Tứ hoá là gì?",
+   "noi_dung": "Tứ hoá là bốn biến hoá Lộc, Quyền, Khoa, Kỵ gắn vào bốn sao theo can năm sinh (tứ hoá sinh niên). Tử vi Việt dùng tứ hoá sinh niên; không dùng kỹ thuật phi tinh theo can từng cung.",
+   "tu_khoa": [
+    "tu hoa la gi",
+    "tu hoa co y nghia",
+    "hoa loc la gi",
+    "hoa ky la gi",
+    "hoa quyen la gi",
+    "hoa khoa la gi"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "mieu_ham": {
+   "tieu_de": "Miếu, vượng, đắc, hãm",
+   "noi_dung": "Độ sáng của sao theo vị trí cung: Miếu mạnh nhất, rồi Vượng, Đắc, Lợi, Bình, Bất, Hãm yếu nhất. Sao hãm dễ lộ mặt tối, sao miếu phát huy mặt tốt.",
+   "tu_khoa": [
+    "mieu vuong",
+    "mieu, vuong",
+    "dac, ham",
+    "sao ham",
+    "do sang"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "dai_han": {
+   "tieu_de": "Đại hạn, tiểu hạn, lưu niên",
+   "noi_dung": "Đại hạn là giai đoạn 10 năm, bắt đầu theo cục; tiểu hạn và lưu niên là từng năm. Ưu tiên khi mâu thuẫn (đã chốt): đại hạn > lưu niên > tiểu hạn. Tuổi tính theo tuổi mụ (âm lịch).",
+   "tu_khoa": [
+    "dai han tinh",
+    "dai han la gi",
+    "tieu han la gi",
+    "luu nien la gi",
+    "tuoi am hay tuoi thuc",
+    "tuoi mu"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "am_duong_lich": {
+   "tieu_de": "Tử vi dùng lịch nào?",
+   "noi_dung": "Tử vi an sao theo ngày tháng năm ÂM lịch và giờ sinh. Bạn có thể nhập ngày dương, hệ thống tự đổi (thuật toán Hồ Ngọc Đức, múi giờ Việt Nam).",
+   "tu_khoa": [
+    "lich am hay duong",
+    "am lich hay duong",
+    "dung lich am"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "gio_ty": {
+   "tieu_de": "Vì sao sinh giờ Tý lá số khác nhau?",
+   "noi_dung": "Giờ Tý (23:00–00:59) vắt qua nửa đêm. Có nơi coi 23:00 đã sang ngày mới (cách của iztro, dùng cho tử vi ở đây), có nơi coi vẫn là ngày cũ. Người sinh 23:00–23:59 nên xem cả hai lá số.",
+   "tu_khoa": [
+    "gio ty",
+    "sinh gio ty"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "khong_ro_gio": {
+   "tieu_de": "Không rõ giờ sinh thì sao?",
+   "noi_dung": "Không bịa giờ. Thu hẹp khoảng (sáng sớm, trưa, khuya…), lập lá số cho từng giờ khả dĩ, tin phần giống nhau ở mọi lá số và đối chiếu phần khác nhau với các mốc đã xảy ra trong đời.",
+   "tu_khoa": [
+    "khong ro gio",
+    "khong nho gio",
+    "khong biet gio",
+    "gio sinh khong ro"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "mien_nam_1975": {
+   "tieu_de": "Sinh ở miền Nam trước 1975",
+   "noi_dung": "Trước 13/06/1975 miền Nam có giai đoạn dùng múi giờ UTC+8, nên giờ đồng hồ phải quy đổi về UTC+7 trước khi an sao. Hệ thống yêu cầu khai vùng nơi sinh và tự quy đổi.",
+   "tu_khoa": [
+    "mien nam truoc",
+    "truoc 1975",
+    "mui gio"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "chinh_xac": {
+   "tieu_de": "Tử vi có chính xác không?",
+   "noi_dung": "Tử vi là hệ thống diễn giải văn hoá, chưa được kiểm chứng như một công cụ dự báo. Giá trị nằm ở việc làm khung tự soi và đặt câu hỏi cho chính mình; nên nghiệm lý (đối chiếu các mốc đã qua) trước khi tin.",
+   "tu_khoa": [
+    "co chinh xac",
+    "co dung khong",
+    "co that khong",
+    "co nen tin"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "cung_gio_khac_doi": {
+   "tieu_de": "Cùng ngày giờ sinh sao đời khác nhau?",
+   "noi_dung": "Lá số chỉ là một lớp mô tả khuynh hướng. Gia đình, giáo dục, lựa chọn, môi trường và may rủi thật quyết định nhiều hơn — vì vậy hai người cùng lá số vẫn sống khác nhau.",
+   "tu_khoa": [
+    "cung ngay gio",
+    "cung gio sinh",
+    "sinh doi"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "nam_bac_phai": {
+   "tieu_de": "Nam phái và Bắc phái",
+   "noi_dung": "Tử vi Việt (Nam phái) coi trọng Tuần/Triệt, vòng Thái Tuế, cung Phúc Đức và dùng tứ hoá sinh niên; Tử Vi Đẩu Số Trung Quốc có các phái Tam Hợp, Phi Tinh (bay tứ hoá theo can cung). Lá số ở đây an bằng iztro (khung Trung Quốc), đối chiếu Tuần/Triệt theo Nam phái.",
+   "tu_khoa": [
+    "nam phai",
+    "bac phai",
+    "trung chau",
+    "phi tinh"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "chinh_tinh_14": {
+   "tieu_de": "14 chính tinh",
+   "noi_dung": "Tử Vi, Thiên Cơ, Thái Dương, Vũ Khúc, Thiên Đồng, Liêm Trinh, Thiên Phủ, Thái Âm, Tham Lang, Cự Môn, Thiên Tướng, Thiên Lương, Thất Sát, Phá Quân — chia bốn nhóm: Tử Phủ Vũ Tướng, Sát Phá Tham, Cơ Nguyệt Đồng Lương, Cự Nhật.",
+   "tu_khoa": [
+    "14 chinh tinh",
+    "chinh tinh la",
+    "cac chinh tinh"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "vo_chinh_dieu": {
+   "tieu_de": "Mệnh vô chính diệu",
+   "noi_dung": "Cung không có chính tinh. Khi đó mượn chính tinh cung đối diện (xung chiếu) để luận, tính chất nhẹ hơn và phụ thuộc nhiều vào phụ tinh. Không phải là xấu — chỉ là linh hoạt, dễ chịu ảnh hưởng môi trường.",
+   "tu_khoa": [
+    "vo chinh dieu"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "menh_than": {
+   "tieu_de": "Mệnh và Thân",
+   "noi_dung": "Mệnh là bản chất gốc; Thân là phần phát lộ rõ dần từ trung niên. Thân cư cung nào thì đời sống về sau đặt trọng tâm vào lĩnh vực đó.",
+   "tu_khoa": [
+    "menh than",
+    "cung than",
+    "than cu",
+    "menh chu",
+    "than chu"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "tam_phuong": {
+   "tieu_de": "Tam phương tứ chính",
+   "noi_dung": "Luận một cung phải xem cả ba cung tam hợp và cung đối diện: với Mệnh là Mệnh – Tài Bạch – Quan Lộc và Thiên Di. Không đọc một cung đơn lẻ.",
+   "tu_khoa": [
+    "tam phuong",
+    "tu chinh",
+    "tam hop"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "cuc": {
+   "tieu_de": "Ngũ hành cục",
+   "noi_dung": "Cục (Thuỷ nhị, Mộc tam, Kim tứ, Thổ ngũ, Hoả lục) quyết định tuổi khởi đại hạn đầu tiên.",
+   "tu_khoa": [
+    "cuc la gi",
+    "ngu hanh cuc",
+    "thuy nhi cuc",
+    "tho ngu cuc",
+    "moc tam cuc",
+    "kim tu cuc",
+    "hoa luc cuc"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "tam_tai": {
+   "tieu_de": "Tam tai, hạn Thái Tuế",
+   "noi_dung": "Tam tai và phạm Thái Tuế là quan niệm dân gian theo tuổi, không thuộc phần an sao của lá số. Hệ thống chỉ nêu cung lưu niên và chủ đề năm, không phán tai hoạ.",
+   "tu_khoa": [
+    "tam tai",
+    "pham thai tue",
+    "han thai tue",
+    "nam tuoi"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  },
+  "luu_nguyet": {
+   "tieu_de": "Xem theo tháng",
+   "noi_dung": "Lưu nguyệt (từng tháng) là nơi tử vi mỏng căn cứ nhất; hệ thống không xem theo tháng, chỉ nêu chủ đề năm và giai đoạn.",
+   "tu_khoa": [
+    "thang nao",
+    "luu nguyet",
+    "theo thang"
+   ],
+   "source_id": "tuvi_vn",
+   "school_id": "nam_phai"
+  }
+ },
+ "mau": {
+  "can_la_so": "Để trả lời câu này cần lá số của bạn: nhập ngày sinh, giờ sinh và giới tính (sinh trước 13/06/1975 cần thêm nơi sinh miền Bắc/Nam). Hệ thống an sao cục bộ, không gửi ngày sinh ra ngoài.",
+  "nguoi_khac": "Câu này hỏi về lá số của người khác. Cần ngày giờ sinh của họ — và nên có sự đồng ý của họ trước khi xem. Nếu bạn muốn, hãy hỏi về cách chính bạn ứng xử trong quan hệ đó dựa trên lá số của bạn.",
+  "hop_hon": "So hai lá số cần đủ ngày giờ sinh của cả hai người (và người kia đồng ý). Hệ thống chỉ mô tả động lực quan hệ — không phán 'hợp' hay 'khắc', không chấm điểm, và không dựa vào mỗi tuổi con giáp.",
+  "con": "Xem lá số của con cần ngày giờ sinh của bé. Hệ thống chỉ mô tả khí chất để cha mẹ hiểu con — không chọn giờ sinh, không phán số con hay sức khoẻ của con."
+ },
+ "luu_y": {
+  "tham_khao": "Chế độ tham khảo: hạn được đọc như chủ đề của giai đoạn, không phải biến cố định sẵn.",
+  "chi_tiet": "Chế độ chi tiết: có nêu xu hướng thuận/nghịch của năm theo sao tốt xấu, nhưng không phán tai nạn, bệnh tật, kiện tụng hay con số tiền — ba lớp hạn đọc theo thứ tự đại hạn > lưu niên > tiểu hạn.",
+  "iztro": "Lá số an bằng iztro (khung Tử Vi Đẩu Số); chính tinh và tứ hoá trùng các nguồn đối chiếu, bộ phụ tinh Nam phái chưa đối chiếu đủ.",
+  "tat_ach": "Cung Tật Ách chỉ nói về cách bạn chịu áp lực; mọi vấn đề sức khoẻ cần hỏi bác sĩ.",
+  "han_su_kien": "Tử vi không đoán được biến cố cụ thể (tai nạn, kiện tụng, mất tiền, năm cưới, năm có con). Phần dưới chỉ nêu chủ đề và xu hướng của năm để bạn chuẩn bị."
+ }
+}

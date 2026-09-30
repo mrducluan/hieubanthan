@@ -1,0 +1,9368 @@
+{
+ "_nguon": "sinh tu source-skills/kinh-dich/gieoque.py (ban goc chu du an)",
+ "_canh_bao": "Khong sua tay. Chay lai _generate_kinhdich_golden.py.",
+ "que_64": {
+  "1": {
+   "gia_tri_hao": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 1,
+     "ten": "Càn",
+     "ha_quai": "Càn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 1,
+    "quai_thac": 2,
+    "quai_tong": 1,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "2": {
+   "gia_tri_hao": [
+    8,
+    8,
+    8,
+    8,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 2,
+     "ten": "Khôn",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 2,
+    "quai_thac": 1,
+    "quai_tong": 2,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "3": {
+   "gia_tri_hao": [
+    7,
+    8,
+    8,
+    8,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 3,
+     "ten": "Truân",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 23,
+    "quai_thac": 50,
+    "quai_tong": 4,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "4": {
+   "gia_tri_hao": [
+    8,
+    7,
+    8,
+    8,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 4,
+     "ten": "Mông",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 24,
+    "quai_thac": 49,
+    "quai_tong": 3,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "5": {
+   "gia_tri_hao": [
+    7,
+    7,
+    7,
+    8,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 5,
+     "ten": "Nhu",
+     "ha_quai": "Càn",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 4,
+      "ung": 1,
+      "loai": "Du hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 38,
+    "quai_thac": 35,
+    "quai_tong": 6,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "6": {
+   "gia_tri_hao": [
+    8,
+    7,
+    8,
+    7,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 6,
+     "ten": "Tụng",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 4,
+      "ung": 1,
+      "loai": "Du hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 37,
+    "quai_thac": 36,
+    "quai_tong": 5,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "7": {
+   "gia_tri_hao": [
+    8,
+    7,
+    8,
+    8,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 7,
+     "ten": "Sư",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 3,
+      "ung": 6,
+      "loai": "Quy hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 24,
+    "quai_thac": 13,
+    "quai_tong": 8,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "8": {
+   "gia_tri_hao": [
+    8,
+    8,
+    8,
+    8,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 8,
+     "ten": "Tỷ",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 3,
+      "ung": 6,
+      "loai": "Quy hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 23,
+    "quai_thac": 14,
+    "quai_tong": 7,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "9": {
+   "gia_tri_hao": [
+    7,
+    7,
+    7,
+    8,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 9,
+     "ten": "Tiểu Súc",
+     "ha_quai": "Càn",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 38,
+    "quai_thac": 16,
+    "quai_tong": 10,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "10": {
+   "gia_tri_hao": [
+    7,
+    7,
+    8,
+    7,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 10,
+     "ten": "Lý",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 37,
+    "quai_thac": 15,
+    "quai_tong": 9,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "11": {
+   "gia_tri_hao": [
+    7,
+    7,
+    7,
+    8,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 11,
+     "ten": "Thái",
+     "ha_quai": "Càn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 54,
+    "quai_thac": 12,
+    "quai_tong": 12,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "12": {
+   "gia_tri_hao": [
+    8,
+    8,
+    8,
+    7,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 12,
+     "ten": "Bĩ",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 53,
+    "quai_thac": 11,
+    "quai_tong": 11,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "13": {
+   "gia_tri_hao": [
+    7,
+    8,
+    7,
+    7,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 13,
+     "ten": "Đồng Nhân",
+     "ha_quai": "Ly",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 3,
+      "ung": 6,
+      "loai": "Quy hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 44,
+    "quai_thac": 7,
+    "quai_tong": 14,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "14": {
+   "gia_tri_hao": [
+    7,
+    7,
+    7,
+    7,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 14,
+     "ten": "Đại Hữu",
+     "ha_quai": "Càn",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 3,
+      "ung": 6,
+      "loai": "Quy hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 43,
+    "quai_thac": 8,
+    "quai_tong": 13,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "15": {
+   "gia_tri_hao": [
+    8,
+    8,
+    7,
+    8,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 15,
+     "ten": "Khiêm",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 40,
+    "quai_thac": 10,
+    "quai_tong": 16,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "16": {
+   "gia_tri_hao": [
+    8,
+    8,
+    8,
+    7,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 16,
+     "ten": "Dự",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 39,
+    "quai_thac": 9,
+    "quai_tong": 15,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "17": {
+   "gia_tri_hao": [
+    7,
+    8,
+    8,
+    7,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 17,
+     "ten": "Tùy",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 3,
+      "ung": 6,
+      "loai": "Quy hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 53,
+    "quai_thac": 18,
+    "quai_tong": 18,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "18": {
+   "gia_tri_hao": [
+    8,
+    7,
+    7,
+    8,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 18,
+     "ten": "Cổ",
+     "ha_quai": "Tốn",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 3,
+      "ung": 6,
+      "loai": "Quy hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 54,
+    "quai_thac": 17,
+    "quai_tong": 17,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "19": {
+   "gia_tri_hao": [
+    7,
+    7,
+    8,
+    8,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 19,
+     "ten": "Lâm",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 24,
+    "quai_thac": 33,
+    "quai_tong": 20,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "20": {
+   "gia_tri_hao": [
+    8,
+    8,
+    8,
+    8,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 20,
+     "ten": "Quan",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 23,
+    "quai_thac": 34,
+    "quai_tong": 19,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "21": {
+   "gia_tri_hao": [
+    7,
+    8,
+    8,
+    7,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 21,
+     "ten": "Phệ Hạp",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 39,
+    "quai_thac": 48,
+    "quai_tong": 22,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "22": {
+   "gia_tri_hao": [
+    7,
+    8,
+    7,
+    8,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 22,
+     "ten": "Bí",
+     "ha_quai": "Ly",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 40,
+    "quai_thac": 47,
+    "quai_tong": 21,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "23": {
+   "gia_tri_hao": [
+    8,
+    8,
+    8,
+    8,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 23,
+     "ten": "Bác",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 2,
+    "quai_thac": 43,
+    "quai_tong": 24,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "24": {
+   "gia_tri_hao": [
+    7,
+    8,
+    8,
+    8,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 24,
+     "ten": "Phục",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 2,
+    "quai_thac": 44,
+    "quai_tong": 23,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "25": {
+   "gia_tri_hao": [
+    7,
+    8,
+    8,
+    7,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 25,
+     "ten": "Vô Vọng",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 53,
+    "quai_thac": 46,
+    "quai_tong": 26,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "26": {
+   "gia_tri_hao": [
+    7,
+    7,
+    7,
+    8,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 26,
+     "ten": "Đại Súc",
+     "ha_quai": "Càn",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 54,
+    "quai_thac": 45,
+    "quai_tong": 25,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "27": {
+   "gia_tri_hao": [
+    7,
+    8,
+    8,
+    8,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 27,
+     "ten": "Di",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 4,
+      "ung": 1,
+      "loai": "Du hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 2,
+    "quai_thac": 28,
+    "quai_tong": 27,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "28": {
+   "gia_tri_hao": [
+    8,
+    7,
+    7,
+    7,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 28,
+     "ten": "Đại Quá",
+     "ha_quai": "Tốn",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 4,
+      "ung": 1,
+      "loai": "Du hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 1,
+    "quai_thac": 27,
+    "quai_tong": 28,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "29": {
+   "gia_tri_hao": [
+    8,
+    7,
+    8,
+    8,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 29,
+     "ten": "Khảm",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 27,
+    "quai_thac": 30,
+    "quai_tong": 29,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "30": {
+   "gia_tri_hao": [
+    7,
+    8,
+    7,
+    7,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 30,
+     "ten": "Ly",
+     "ha_quai": "Ly",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 28,
+    "quai_thac": 29,
+    "quai_tong": 30,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "31": {
+   "gia_tri_hao": [
+    8,
+    8,
+    7,
+    7,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 31,
+     "ten": "Hàm",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 44,
+    "quai_thac": 41,
+    "quai_tong": 32,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "32": {
+   "gia_tri_hao": [
+    8,
+    7,
+    7,
+    7,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 32,
+     "ten": "Hằng",
+     "ha_quai": "Tốn",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 43,
+    "quai_thac": 42,
+    "quai_tong": 31,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "33": {
+   "gia_tri_hao": [
+    8,
+    8,
+    7,
+    7,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 33,
+     "ten": "Độn",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 44,
+    "quai_thac": 19,
+    "quai_tong": 34,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "34": {
+   "gia_tri_hao": [
+    7,
+    7,
+    7,
+    7,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 34,
+     "ten": "Đại Tráng",
+     "ha_quai": "Càn",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 43,
+    "quai_thac": 20,
+    "quai_tong": 33,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "35": {
+   "gia_tri_hao": [
+    8,
+    8,
+    8,
+    7,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 35,
+     "ten": "Tấn",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 4,
+      "ung": 1,
+      "loai": "Du hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 39,
+    "quai_thac": 5,
+    "quai_tong": 36,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "36": {
+   "gia_tri_hao": [
+    7,
+    8,
+    7,
+    8,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 36,
+     "ten": "Minh Di",
+     "ha_quai": "Ly",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 4,
+      "ung": 1,
+      "loai": "Du hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 40,
+    "quai_thac": 6,
+    "quai_tong": 35,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "37": {
+   "gia_tri_hao": [
+    7,
+    8,
+    7,
+    8,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 37,
+     "ten": "Gia Nhân",
+     "ha_quai": "Ly",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 64,
+    "quai_thac": 40,
+    "quai_tong": 38,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "38": {
+   "gia_tri_hao": [
+    7,
+    7,
+    8,
+    7,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 38,
+     "ten": "Khuê",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 63,
+    "quai_thac": 39,
+    "quai_tong": 37,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "39": {
+   "gia_tri_hao": [
+    8,
+    8,
+    7,
+    8,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 39,
+     "ten": "Kiển",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 64,
+    "quai_thac": 38,
+    "quai_tong": 40,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "40": {
+   "gia_tri_hao": [
+    8,
+    7,
+    8,
+    7,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 40,
+     "ten": "Giải",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 63,
+    "quai_thac": 37,
+    "quai_tong": 39,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "41": {
+   "gia_tri_hao": [
+    7,
+    7,
+    8,
+    8,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 41,
+     "ten": "Tổn",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 24,
+    "quai_thac": 31,
+    "quai_tong": 42,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "42": {
+   "gia_tri_hao": [
+    7,
+    8,
+    8,
+    8,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 42,
+     "ten": "Ích",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 23,
+    "quai_thac": 32,
+    "quai_tong": 41,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "43": {
+   "gia_tri_hao": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 43,
+     "ten": "Quải",
+     "ha_quai": "Càn",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 1,
+    "quai_thac": 23,
+    "quai_tong": 44,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "44": {
+   "gia_tri_hao": [
+    8,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 44,
+     "ten": "Cấu",
+     "ha_quai": "Tốn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 1,
+    "quai_thac": 24,
+    "quai_tong": 43,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "45": {
+   "gia_tri_hao": [
+    8,
+    8,
+    8,
+    7,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 45,
+     "ten": "Tụy",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 53,
+    "quai_thac": 26,
+    "quai_tong": 46,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "46": {
+   "gia_tri_hao": [
+    8,
+    7,
+    7,
+    8,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 46,
+     "ten": "Thăng",
+     "ha_quai": "Tốn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 54,
+    "quai_thac": 25,
+    "quai_tong": 45,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "47": {
+   "gia_tri_hao": [
+    8,
+    7,
+    8,
+    7,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 47,
+     "ten": "Khốn",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 37,
+    "quai_thac": 22,
+    "quai_tong": 48,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "48": {
+   "gia_tri_hao": [
+    8,
+    7,
+    7,
+    8,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 48,
+     "ten": "Tỉnh",
+     "ha_quai": "Tốn",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      1,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 38,
+    "quai_thac": 21,
+    "quai_tong": 47,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "49": {
+   "gia_tri_hao": [
+    7,
+    8,
+    7,
+    7,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 49,
+     "ten": "Cách",
+     "ha_quai": "Ly",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 44,
+    "quai_thac": 4,
+    "quai_tong": 50,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "50": {
+   "gia_tri_hao": [
+    8,
+    7,
+    7,
+    7,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 50,
+     "ten": "Đỉnh",
+     "ha_quai": "Tốn",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 43,
+    "quai_thac": 3,
+    "quai_tong": 49,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "51": {
+   "gia_tri_hao": [
+    7,
+    8,
+    8,
+    7,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 51,
+     "ten": "Chấn",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 39,
+    "quai_thac": 57,
+    "quai_tong": 52,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "52": {
+   "gia_tri_hao": [
+    8,
+    8,
+    7,
+    8,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 52,
+     "ten": "Cấn",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 40,
+    "quai_thac": 58,
+    "quai_tong": 51,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "53": {
+   "gia_tri_hao": [
+    8,
+    8,
+    7,
+    8,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 53,
+     "ten": "Tiệm",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 3,
+      "ung": 6,
+      "loai": "Quy hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 64,
+    "quai_thac": 54,
+    "quai_tong": 54,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "54": {
+   "gia_tri_hao": [
+    7,
+    7,
+    8,
+    7,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 54,
+     "ten": "Quy Muội",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 3,
+      "ung": 6,
+      "loai": "Quy hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 63,
+    "quai_thac": 53,
+    "quai_tong": 53,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "55": {
+   "gia_tri_hao": [
+    7,
+    8,
+    7,
+    7,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 55,
+     "ten": "Phong",
+     "ha_quai": "Ly",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 28,
+    "quai_thac": 59,
+    "quai_tong": 56,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "56": {
+   "gia_tri_hao": [
+    8,
+    8,
+    7,
+    7,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 56,
+     "ten": "Lữ",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 28,
+    "quai_thac": 60,
+    "quai_tong": 55,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "57": {
+   "gia_tri_hao": [
+    8,
+    7,
+    7,
+    8,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 57,
+     "ten": "Tốn",
+     "ha_quai": "Tốn",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      1,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 38,
+    "quai_thac": 51,
+    "quai_tong": 58,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "58": {
+   "gia_tri_hao": [
+    7,
+    7,
+    8,
+    7,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 58,
+     "ten": "Đoài",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 37,
+    "quai_thac": 52,
+    "quai_tong": 57,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "59": {
+   "gia_tri_hao": [
+    8,
+    7,
+    8,
+    8,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 59,
+     "ten": "Hoán",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 27,
+    "quai_thac": 55,
+    "quai_tong": 60,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "60": {
+   "gia_tri_hao": [
+    7,
+    7,
+    8,
+    8,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 60,
+     "ten": "Tiết",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 27,
+    "quai_thac": 56,
+    "quai_tong": 59,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "61": {
+   "gia_tri_hao": [
+    7,
+    7,
+    8,
+    8,
+    7,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 61,
+     "ten": "Trung Phu",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 4,
+      "ung": 1,
+      "loai": "Du hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 27,
+    "quai_thac": 62,
+    "quai_tong": 61,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "62": {
+   "gia_tri_hao": [
+    8,
+    8,
+    7,
+    7,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 62,
+     "ten": "Tiểu Quá",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 4,
+      "ung": 1,
+      "loai": "Du hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 28,
+    "quai_thac": 61,
+    "quai_tong": 62,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "63": {
+   "gia_tri_hao": [
+    7,
+    8,
+    7,
+    8,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 63,
+     "ten": "Ký Tế",
+     "ha_quai": "Ly",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 64,
+    "quai_thac": 64,
+    "quai_tong": 64,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "64": {
+   "gia_tri_hao": [
+    8,
+    7,
+    8,
+    7,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 64,
+     "ten": "Vị Tế",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": 63,
+    "quai_thac": 63,
+    "quai_tong": 63,
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  }
+ },
+ "bien_chiem": {
+  "tinh_0_dong": {
+   "gia_tri_hao": [
+    7,
+    8,
+    7,
+    8,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 63,
+     "ten": "Ký Tế",
+     "ha_quai": "Ly",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [],
+    "quai_bien": null,
+    "quai_ho": {
+     "so_king_wen": 64,
+     "ten": "Vị Tế",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_thac": {
+     "so_king_wen": 64,
+     "ten": "Vị Tế",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_tong": {
+     "so_king_wen": 64,
+     "ten": "Vị Tế",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quy_tac_doc": "0 hào động — đọc QUÁI TỪ quẻ bản. Không có quẻ biến."
+   }
+  },
+  "dong_1_hao": {
+   "gia_tri_hao": [
+    7,
+    7,
+    9,
+    8,
+    8,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 11,
+     "ten": "Thái",
+     "ha_quai": "Càn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [
+     3
+    ],
+    "quai_bien": {
+     "so_king_wen": 19,
+     "ten": "Lâm",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_ho": {
+     "so_king_wen": 54,
+     "ten": "Quy Muội",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 3,
+      "ung": 6,
+      "loai": "Quy hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_thac": {
+     "so_king_wen": 12,
+     "ten": "Bĩ",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_tong": {
+     "so_king_wen": 12,
+     "ten": "Bĩ",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quy_tac_doc": "1 hào động — đọc HÀO TỪ hào 3 của quẻ bản."
+   }
+  },
+  "dong_2_hao": {
+   "gia_tri_hao": [
+    6,
+    7,
+    8,
+    9,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 47,
+     "ten": "Khốn",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [
+     1,
+     4
+    ],
+    "quai_bien": {
+     "so_king_wen": 60,
+     "ten": "Tiết",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_ho": {
+     "so_king_wen": 37,
+     "ten": "Gia Nhân",
+     "ha_quai": "Ly",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_thac": {
+     "so_king_wen": 22,
+     "ten": "Bí",
+     "ha_quai": "Ly",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_tong": {
+     "so_king_wen": 48,
+     "ten": "Tỉnh",
+     "ha_quai": "Tốn",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      1,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quy_tac_doc": "2 hào động — đọc hào từ hào 1 và 4 của quẻ bản, LẤY HÀO TRÊN (4) làm chủ."
+   }
+  },
+  "dong_3_hao": {
+   "gia_tri_hao": [
+    9,
+    6,
+    9,
+    8,
+    8,
+    7
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 22,
+     "ten": "Bí",
+     "ha_quai": "Ly",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [
+     1,
+     2,
+     3
+    ],
+    "quai_bien": {
+     "so_king_wen": 4,
+     "ten": "Mông",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_ho": {
+     "so_king_wen": 40,
+     "ten": "Giải",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_thac": {
+     "so_king_wen": 47,
+     "ten": "Khốn",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_tong": {
+     "so_king_wen": 21,
+     "ten": "Phệ Hạp",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quy_tac_doc": "3 hào động — đọc QUÁI TỪ cả quẻ bản và quẻ biến; quẻ bản là 'trinh' (tình thế hiện tại), quẻ biến là 'hối' (hệ quả)."
+   }
+  },
+  "dong_4_hao": {
+   "gia_tri_hao": [
+    9,
+    9,
+    6,
+    6,
+    7,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 60,
+     "ten": "Tiết",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "quai_bien": {
+     "so_king_wen": 31,
+     "ten": "Hàm",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_ho": {
+     "so_king_wen": 27,
+     "ten": "Di",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 4,
+      "ung": 1,
+      "loai": "Du hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_thac": {
+     "so_king_wen": 56,
+     "ten": "Lữ",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 1,
+      "ung": 4,
+      "loai": "1 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_tong": {
+     "so_king_wen": 59,
+     "ten": "Hoán",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 5,
+      "ung": 2,
+      "loai": "5 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quy_tac_doc": "4 hào động — đọc hào từ 2 hào TĨNH (5, 6) của QUẺ BIẾN, lấy hào dưới (5) làm chủ."
+   }
+  },
+  "dong_5_hao": {
+   "gia_tri_hao": [
+    6,
+    9,
+    6,
+    9,
+    6,
+    8
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 40,
+     "ten": "Giải",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Chấn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "quai_bien": {
+     "so_king_wen": 63,
+     "ten": "Ký Tế",
+     "ha_quai": "Ly",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_ho": {
+     "so_king_wen": 63,
+     "ten": "Ký Tế",
+     "ha_quai": "Ly",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_thac": {
+     "so_king_wen": 37,
+     "ten": "Gia Nhân",
+     "ha_quai": "Ly",
+     "thuong_quai": "Tốn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_tong": {
+     "so_king_wen": 39,
+     "ten": "Kiển",
+     "ha_quai": "Cấn",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      1,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quy_tac_doc": "5 hào động — đọc hào từ hào tĩnh (6) của QUẺ BIẾN."
+   }
+  },
+  "dong_6_hao_thuong": {
+   "gia_tri_hao": [
+    9,
+    6,
+    9,
+    6,
+    9,
+    6
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 63,
+     "ten": "Ký Tế",
+     "ha_quai": "Ly",
+     "thuong_quai": "Khảm",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khảm",
+      "cung_ngu_hanh": "Thủy",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "hao_dong": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "quai_bien": {
+     "so_king_wen": 64,
+     "ten": "Vị Tế",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_ho": {
+     "so_king_wen": 64,
+     "ten": "Vị Tế",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_thac": {
+     "so_king_wen": 64,
+     "ten": "Vị Tế",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_tong": {
+     "so_king_wen": 64,
+     "ten": "Vị Tế",
+     "ha_quai": "Khảm",
+     "thuong_quai": "Ly",
+     "bits_hao1_den_hao6": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Ly",
+      "cung_ngu_hanh": "Hỏa",
+      "the": 3,
+      "ung": 6,
+      "loai": "3 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quy_tac_doc": "6 hào động — đọc QUÁI TỪ quẻ biến."
+   }
+  },
+  "dung_cuu_can": {
+   "gia_tri_hao": [
+    9,
+    9,
+    9,
+    9,
+    9,
+    9
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 1,
+     "ten": "Càn",
+     "ha_quai": "Càn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "hao_dong": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "quai_bien": {
+     "so_king_wen": 2,
+     "ten": "Khôn",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "quai_ho": {
+     "so_king_wen": 1,
+     "ten": "Càn",
+     "ha_quai": "Càn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "quai_thac": {
+     "so_king_wen": 2,
+     "ten": "Khôn",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "quai_tong": {
+     "so_king_wen": 1,
+     "ten": "Càn",
+     "ha_quai": "Càn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "quy_tac_doc": "6 hào động, quẻ Càn — dùng 'Dụng Cửu'."
+   }
+  },
+  "dung_luc_khon": {
+   "gia_tri_hao": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 2,
+     "ten": "Khôn",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "hao_dong": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "quai_bien": {
+     "so_king_wen": 1,
+     "ten": "Càn",
+     "ha_quai": "Càn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "quai_ho": {
+     "so_king_wen": 2,
+     "ten": "Khôn",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "quai_thac": {
+     "so_king_wen": 1,
+     "ten": "Càn",
+     "ha_quai": "Càn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Càn",
+      "cung_ngu_hanh": "Kim",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "quai_tong": {
+     "so_king_wen": 2,
+     "ten": "Khôn",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 6,
+      "ung": 3,
+      "loai": "Bát thuần"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      }
+     ]
+    },
+    "quy_tac_doc": "6 hào động, quẻ Khôn — dùng 'Dụng Lục'."
+   }
+  },
+  "dong_2_hao_26_3_6": {
+   "gia_tri_hao": [
+    7,
+    7,
+    9,
+    8,
+    8,
+    9
+   ],
+   "expect": {
+    "quai_ban": {
+     "so_king_wen": 26,
+     "ten": "Đại Súc",
+     "ha_quai": "Càn",
+     "thuong_quai": "Cấn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Cấn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Dương",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      }
+     ]
+    },
+    "hao_dong": [
+     3,
+     6
+    ],
+    "quai_bien": {
+     "so_king_wen": 19,
+     "ten": "Lâm",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Khôn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Khôn",
+      "cung_ngu_hanh": "Thổ",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Thê Tài",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_ho": {
+     "so_king_wen": 54,
+     "ten": "Quy Muội",
+     "ha_quai": "Đoài",
+     "thuong_quai": "Chấn",
+     "bits_hao1_den_hao6": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 3,
+      "ung": 6,
+      "loai": "Quy hồn"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Dương",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Sửu",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Âm",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      }
+     ]
+    },
+    "quai_thac": {
+     "so_king_wen": 45,
+     "ten": "Tụy",
+     "ha_quai": "Khôn",
+     "thuong_quai": "Đoài",
+     "bits_hao1_den_hao6": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+     ],
+     "bat_cung": {
+      "cung": "Đoài",
+      "cung_ngu_hanh": "Kim",
+      "the": 2,
+      "ung": 5,
+      "loai": "2 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Tỵ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Quan Quỷ",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Mão",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Hợi",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Tử Tôn",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Dậu",
+       "ngu_hanh": "Kim",
+       "luc_than": "Huynh Đệ",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Âm",
+       "dia_chi": "Mùi",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quai_tong": {
+     "so_king_wen": 25,
+     "ten": "Vô Vọng",
+     "ha_quai": "Chấn",
+     "thuong_quai": "Càn",
+     "bits_hao1_den_hao6": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     "bat_cung": {
+      "cung": "Tốn",
+      "cung_ngu_hanh": "Mộc",
+      "the": 4,
+      "ung": 1,
+      "loai": "4 thế"
+     },
+     "hao": [
+      {
+       "vi_tri": 1,
+       "am_duong": "Dương",
+       "dia_chi": "Tý",
+       "ngu_hanh": "Thủy",
+       "luc_than": "Phụ Mẫu",
+       "the_ung": "Ứng"
+      },
+      {
+       "vi_tri": 2,
+       "am_duong": "Âm",
+       "dia_chi": "Dần",
+       "ngu_hanh": "Mộc",
+       "luc_than": "Huynh Đệ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 3,
+       "am_duong": "Âm",
+       "dia_chi": "Thìn",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 4,
+       "am_duong": "Dương",
+       "dia_chi": "Ngọ",
+       "ngu_hanh": "Hỏa",
+       "luc_than": "Tử Tôn",
+       "the_ung": "Thế"
+      },
+      {
+       "vi_tri": 5,
+       "am_duong": "Dương",
+       "dia_chi": "Thân",
+       "ngu_hanh": "Kim",
+       "luc_than": "Quan Quỷ",
+       "the_ung": ""
+      },
+      {
+       "vi_tri": 6,
+       "am_duong": "Dương",
+       "dia_chi": "Tuất",
+       "ngu_hanh": "Thổ",
+       "luc_than": "Thê Tài",
+       "the_ung": ""
+      }
+     ]
+    },
+    "quy_tac_doc": "2 hào động — đọc hào từ hào 3 và 6 của quẻ bản, LẤY HÀO TRÊN (6) làm chủ."
+   }
+  }
+ }
+}

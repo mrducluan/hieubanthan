@@ -1,0 +1,160 @@
+{
+ "_nguon": "Biểu đồ ngày sinh: ý nghĩa ô, mũi tên đủ/trống. Tên mũi tên khác nhau tuỳ sách.",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "pythagoras_vn",
+ "trang_thai": "nhap_ai",
+ "o_so": {
+  "1": {
+   "y_nghia": "Thể hiện bản thân, nói ra điều mình nghĩ.",
+   "thieu": "Dễ khó nói ra cảm xúc, người khác phải đoán ý.",
+   "mot": "Diễn đạt vừa phải, đôi khi khó nói điều sâu kín.",
+   "hai": "Diễn đạt cân bằng, nói được cả lý lẽ lẫn cảm xúc.",
+   "ba_tro_len": "Nói nhiều, dễ lấn át hoặc thu mình khi không được nghe; cần tập nghe."
+  },
+  "2": {
+   "y_nghia": "Trực giác, độ nhạy với cảm xúc người khác.",
+   "thieu": "Dễ vô tình không để ý cảm xúc người xung quanh.",
+   "mot": "Nhạy cảm vừa phải, đọc được không khí.",
+   "hai": "Trực giác tốt, dễ đoán người khác nghĩ gì.",
+   "ba_tro_len": "Rất nhạy, dễ tổn thương, dễ bị cảm xúc người khác cuốn theo."
+  },
+  "3": {
+   "y_nghia": "Tư duy, trí nhớ, óc tưởng tượng.",
+   "thieu": "Dễ quên việc ngắn hạn; cần ghi chép.",
+   "mot": "Tư duy tốt, thích học hỏi.",
+   "hai": "Tư duy nhanh, giàu ý tưởng, đôi khi xa thực tế.",
+   "ba_tro_len": "Sống nhiều trong đầu, dễ lo nghĩ quá mức."
+  },
+  "4": {
+   "y_nghia": "Thực tế, trật tự, làm việc bằng tay.",
+   "thieu": "Dễ thiếu kiên nhẫn với việc chi tiết, tổ chức.",
+   "mot": "Có óc thực tế, làm việc gọn.",
+   "hai": "Rất thực tế, giỏi tổ chức, có thể cứng nhắc.",
+   "ba_tro_len": "Nặng về vật chất và quy tắc, khó linh hoạt."
+  },
+  "5": {
+   "y_nghia": "Cảm xúc, tự do, sức bật (ô trung tâm).",
+   "thieu": "Dễ thiếu động lực, khó thể hiện tình cảm; cần tìm điều làm mình hào hứng.",
+   "mot": "Cân bằng cảm xúc, có động lực.",
+   "hai": "Nhiều năng lượng, quyết liệt, đôi khi bốc đồng.",
+   "ba_tro_len": "Cảm xúc mạnh, dễ nóng, cần kênh xả năng lượng."
+  },
+  "6": {
+   "y_nghia": "Sáng tạo, trách nhiệm với gia đình, tổ ấm.",
+   "thieu": "Dễ ít gắn bó nhà cửa hoặc chưa tìm được nơi thuộc về.",
+   "mot": "Yêu gia đình, có óc sáng tạo.",
+   "hai": "Lo cho gia đình nhiều, dễ lo lắng.",
+   "ba_tro_len": "Dễ lo âu, kiểm soát người thân vì lo."
+  },
+  "7": {
+   "y_nghia": "Học qua trải nghiệm, kể cả mất mát.",
+   "thieu": "Dễ lặp lại bài học cũ vì chưa rút ra được.",
+   "mot": "Học được từ trải nghiệm của mình.",
+   "hai": "Trải nghiệm nhiều thăng trầm, trưởng thành qua đó.",
+   "ba_tro_len": "Đời nhiều bài học khó; cần chăm sóc tinh thần kỹ."
+  },
+  "8": {
+   "y_nghia": "Độc lập, sự tinh tế trong xử lý việc.",
+   "thieu": "Dễ thiếu kiên nhẫn với chi tiết, cần người hỗ trợ.",
+   "mot": "Chu đáo, có trách nhiệm với việc mình làm.",
+   "hai": "Tinh tế, độc lập, hay tự làm lấy.",
+   "ba_tro_len": "Dễ cầu toàn, khó chịu khi mọi thứ không theo ý."
+  },
+  "9": {
+   "y_nghia": "Lý tưởng, tham vọng, trách nhiệm với cộng đồng.",
+   "thieu": "(Hiếm — người sinh 19xx luôn có số 9.) Có thể thiếu động lực hướng ngoại.",
+   "mot": "Có lý tưởng, muốn làm điều có ích.",
+   "hai": "Tham vọng rõ, dễ đặt tiêu chuẩn cao cho người khác.",
+   "ba_tro_len": "Lý tưởng rất cao, dễ phê phán, khó hài lòng."
+  }
+ },
+ "mui_ten_du": {
+  "1-2-3": {
+   "ten": "Mũi tên Kế hoạch",
+   "y_nghia": "Có xu hướng lập kế hoạch, sắp xếp trước khi làm.",
+   "mat_toi": "Dễ ghét bất ngờ, khó chịu khi người khác làm không theo kế hoạch."
+  },
+  "4-5-6": {
+   "ten": "Mũi tên Ý chí",
+   "y_nghia": "Được mô tả là có ý chí mạnh, đã quyết là làm.",
+   "mat_toi": "Dễ cứng đầu, khó nghe khuyên."
+  },
+  "7-8-9": {
+   "ten": "Mũi tên Hành động",
+   "y_nghia": "Thích bắt tay vào làm, học bằng làm.",
+   "mat_toi": "Dễ bồn chồn khi phải chờ, làm trước nghĩ sau."
+  },
+  "3-6-9": {
+   "ten": "Mũi tên Trí tuệ",
+   "y_nghia": "Tư duy tốt, trí nhớ tốt, thích học.",
+   "mat_toi": "Dễ coi thường người chậm hiểu, sống nhiều trong đầu."
+  },
+  "2-5-8": {
+   "ten": "Mũi tên Cảm xúc",
+   "y_nghia": "Cảm xúc cân bằng, hiểu người, dễ tạo thiện cảm.",
+   "mat_toi": "Dễ ôm cảm xúc của người khác."
+  },
+  "1-4-7": {
+   "ten": "Mũi tên Thực tế",
+   "y_nghia": "Khéo tay, thực tế, giỏi việc cụ thể.",
+   "mat_toi": "Dễ coi trọng vật chất, ngại điều trừu tượng."
+  },
+  "1-5-9": {
+   "ten": "Mũi tên Quyết tâm",
+   "y_nghia": "Được mô tả là kiên định, theo đuổi mục tiêu tới cùng.",
+   "mat_toi": "Dễ bướng, bỏ qua tín hiệu nên dừng."
+  },
+  "3-5-7": {
+   "ten": "Mũi tên Tâm linh",
+   "y_nghia": "Nhạy bén, có chiều sâu nội tâm, hay tìm ý nghĩa.",
+   "mat_toi": "Dễ mơ hồ, xa rời thực tế."
+  }
+ },
+ "mui_ten_trong": {
+  "1-2-3": {
+   "ten": "Mũi tên trống Kế hoạch",
+   "y_nghia": "Dễ làm theo cảm hứng, ít lập kế hoạch.",
+   "goi_y": "Thử lập kế hoạch cho một tuần và xem điều gì thay đổi."
+  },
+  "4-5-6": {
+   "ten": "Mũi tên trống Ý chí (Uất giận)",
+   "y_nghia": "Dễ thất vọng khi mọi việc không như ý, bực bội dồn nén.",
+   "goi_y": "Tìm cách xả cảm xúc lành mạnh; đặt kỳ vọng nhỏ hơn cho từng bước."
+  },
+  "7-8-9": {
+   "ten": "Mũi tên trống Hành động (Thụ động)",
+   "y_nghia": "Dễ chần chừ bắt đầu, chờ điều kiện hoàn hảo.",
+   "goi_y": "Bắt đầu bằng việc nhỏ nhất có thể làm ngay trong 5 phút."
+  },
+  "3-6-9": {
+   "ten": "Mũi tên trống Trí tuệ (Trí nhớ ngắn hạn)",
+   "y_nghia": "Dễ quên việc vặt, cần hệ thống ghi nhớ.",
+   "goi_y": "Dùng danh sách, lịch nhắc; học bằng lặp lại có khoảng cách."
+  },
+  "2-5-8": {
+   "ten": "Mũi tên trống Cảm xúc (Nhạy cảm)",
+   "y_nghia": "Dễ nhạy cảm, tổn thương, khó bày tỏ cảm xúc.",
+   "goi_y": "Tập gọi tên cảm xúc; chia sẻ với một người tin cậy."
+  },
+  "1-4-7": {
+   "ten": "Mũi tên trống Thực tế",
+   "y_nghia": "Dễ lúng túng với việc tay chân, thực tế.",
+   "goi_y": "Học một kỹ năng thực tế nhỏ mỗi quý (nấu ăn, sửa chữa)."
+  },
+  "1-5-9": {
+   "ten": "Mũi tên trống Quyết tâm (Trì hoãn)",
+   "y_nghia": "Dễ trì hoãn, khó bắt đầu và khó theo đuổi đến cùng.",
+   "goi_y": "Chia việc nhỏ, đặt hạn chót có người khác biết."
+  },
+  "3-5-7": {
+   "ten": "Mũi tên trống Tâm linh (Hoài nghi)",
+   "y_nghia": "Dễ hoài nghi, cần bằng chứng mới tin.",
+   "goi_y": "Giữ sự hoài nghi lành mạnh, nhưng thử tin vào một điều nhỏ và quan sát."
+  }
+ }
+}

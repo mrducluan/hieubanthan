@@ -10,6 +10,7 @@ Tầng CALC: thuần tuý, tất định, không LLM, không DB.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 from datetime import date, datetime, timedelta
 
 from app import config
@@ -63,3 +64,23 @@ def sat_bien_gio_ty(calendar_dt: datetime) -> bool:
     """Sinh trong 23:00–00:59 → lá số nhạy với sai số vài phút, luôn gắn cờ."""
     start, end = TY_EDGE_WINDOW
     return calendar_dt.hour >= start or calendar_dt.hour < end
+
+
+def phuong_trinh_thoi_gian(d: date) -> float:
+    """Phương trình thời gian (phút): giờ mặt trời thực − giờ mặt trời trung bình.
+
+    Công thức xấp xỉ chuẩn (sai ≤ ~1 phút) — đủ cho CẢNH BÁO, không dùng để an sao.
+    """
+    b = math.radians(360.0 / 365.0 * (d.timetuple().tm_yday - 81))
+    return 9.87 * math.sin(2 * b) - 7.53 * math.cos(b) - 1.5 * math.sin(b)
+
+
+def gio_mat_troi_thuc(calendar_dt: datetime, kinh_do: float) -> datetime:
+    """Giờ mặt trời thực tại kinh độ `kinh_do` từ giờ kinh tuyến lịch (UTC+7, 105°Đ)."""
+    lech = (kinh_do - config.CALENDAR_MERIDIAN_TZ * 15.0) * 4.0 + phuong_trinh_thoi_gian(calendar_dt.date())
+    return calendar_dt + timedelta(minutes=lech)
+
+
+def chi_gio(dt: datetime) -> int:
+    """Chỉ số canh giờ 0..11 (0 = Tý 23:00–00:59, 1 = Sửu, …)."""
+    return ((dt.hour + 1) // 2) % 12
