@@ -1,4 +1,5 @@
 // POST /api/thanso/hoi — proxy hỏi sâu tới engine (giữ ENGINE key server-side).
+// Engine v2 trả lời được cả khi chưa bật LLM (template từ kho tri thức).
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -11,6 +12,12 @@ const Input = z.object({
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1900).max(2100),
   cau_hoi: z.string().min(3).max(400),
+  nguoi_kia: z.object({
+    ho_ten: z.array(z.string().min(1)).min(1).max(5).optional(),
+    ngay: z.number().int().min(1).max(31),
+    thang: z.number().int().min(1).max(12),
+    nam: z.number().int().min(1900).max(2100),
+  }).optional(),
 });
 
 export async function POST(req: Request): Promise<NextResponse> {

@@ -1,0 +1,162 @@
+{
+ "_nguon": "Chỉ số phụ và nhịp thời gian.",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "pythagoras_vn",
+ "trang_thai": "nhap_ai",
+ "ngay_sinh": {
+  "1": "Người sinh ngày 1 thường được mô tả là tự lập, thích đi đầu.",
+  "2": "Ngày 2: nhạy cảm, khéo hợp tác, cần được ghi nhận.",
+  "3": "Ngày 3: giàu biểu cảm, có khiếu nói, viết hoặc nghệ thuật.",
+  "4": "Ngày 4: chăm chỉ, ngăn nắp, đáng tin.",
+  "5": "Ngày 5: linh hoạt, thích trải nghiệm, dễ thích nghi.",
+  "6": "Ngày 6: chu đáo, có trách nhiệm, yêu cái đẹp và gia đình.",
+  "7": "Ngày 7: thích tìm hiểu sâu, cần thời gian riêng.",
+  "8": "Ngày 8: có óc tổ chức và kinh doanh, thích kết quả rõ ràng.",
+  "9": "Ngày 9: bao dung, lý tưởng, dễ đồng cảm.",
+  "10": "Ngày 10: độc lập như số 1 nhưng linh hoạt hơn, dễ bắt đầu lại.",
+  "11": "Ngày 11: trực giác nhạy, có khả năng truyền cảm hứng, dễ căng thẳng.",
+  "12": "Ngày 12: sáng tạo, có duyên, thích được thể hiện.",
+  "13": "Ngày 13: chăm chỉ, cần kiên trì; được xem là ngày có bài học về kỷ luật.",
+  "14": "Ngày 14: thích tự do và thay đổi; được xem là ngày có bài học về chừng mực.",
+  "15": "Ngày 15: ấm áp, hướng gia đình, có sức hút.",
+  "16": "Ngày 16: nội tâm sâu, nhạy bén; được xem là ngày có bài học về cái tôi.",
+  "17": "Ngày 17: tham vọng, có óc kinh doanh và tính độc lập.",
+  "18": "Ngày 18: lý tưởng, nhân ái, có năng lực lãnh đạo.",
+  "19": "Ngày 19: độc lập mạnh; được xem là ngày có bài học về biết nhờ người khác.",
+  "20": "Ngày 20: tinh tế, hợp tác tốt, nhạy cảm.",
+  "21": "Ngày 21: vui vẻ, giao tiếp tốt, thích xã giao.",
+  "22": "Ngày 22: thực tế, có tầm nhìn xây dựng lớn.",
+  "23": "Ngày 23: linh hoạt, giao tiếp tốt, thích điều mới.",
+  "24": "Ngày 24: tận tâm, hướng gia đình, cần sự ổn định.",
+  "25": "Ngày 25: sâu sắc, trực giác tốt, thích phân tích.",
+  "26": "Ngày 26: có óc quản lý, thích tổ chức và kết quả.",
+  "27": "Ngày 27: bao dung, có óc lãnh đạo mềm.",
+  "28": "Ngày 28: độc lập, tự tin, thích dẫn dắt.",
+  "29": "Ngày 29: trực giác nhạy như số 11, cảm xúc mạnh.",
+  "30": "Ngày 30: sáng tạo, giao tiếp tốt, lạc quan.",
+  "31": "Ngày 31: thực tế, chăm chỉ, có óc tổ chức."
+ },
+ "thai_do": {
+  "1": "Thái độ số 1: người khác dễ thấy bạn tự tin, chủ động — đôi khi áp đảo.",
+  "2": "Thái độ số 2: người khác thấy bạn dịu dàng, dễ gần — đôi khi e dè.",
+  "3": "Thái độ số 3: vui vẻ, cởi mở, dễ bắt chuyện — đôi khi thiếu nghiêm túc.",
+  "4": "Thái độ số 4: nghiêm túc, đáng tin — đôi khi khó gần.",
+  "5": "Thái độ số 5: năng động, cuốn hút — đôi khi thiếu kiên định.",
+  "6": "Thái độ số 6: ấm áp, có trách nhiệm — đôi khi hay lo, hay nhắc.",
+  "7": "Thái độ số 7: điềm tĩnh, kín đáo — đôi khi lạnh lùng.",
+  "8": "Thái độ số 8: mạnh mẽ, có uy — đôi khi cứng rắn.",
+  "9": "Thái độ số 9: bao dung, rộng rãi — đôi khi xa vời.",
+  "11": "Thái độ số 11: nhạy cảm, truyền cảm hứng — đôi khi căng thẳng.",
+  "22": "Thái độ số 22: vững vàng, có tầm nhìn — đôi khi nặng nề."
+ },
+ "truong_thanh": {
+  "1": "Trưởng thành số 1: về sau đời thường hướng về độc lập, tự quyết nhiều hơn.",
+  "2": "Trưởng thành số 2: về sau coi trọng quan hệ, hợp tác, sự êm ấm.",
+  "3": "Trưởng thành số 3: về sau cởi mở hơn, sáng tạo, thích thể hiện.",
+  "4": "Trưởng thành số 4: về sau hướng tới ổn định, xây nền tảng vững.",
+  "5": "Trưởng thành số 5: về sau cần tự do, trải nghiệm, thay đổi.",
+  "6": "Trưởng thành số 6: về sau hướng về gia đình, trách nhiệm, chăm sóc.",
+  "7": "Trưởng thành số 7: về sau hướng nội, tìm chiều sâu và hiểu biết.",
+  "8": "Trưởng thành số 8: về sau hướng tới thành tựu, vị thế, tài chính.",
+  "9": "Trưởng thành số 9: về sau hướng tới cống hiến, cho đi, ý nghĩa.",
+  "11": "Trưởng thành số 11: về sau hướng tới truyền cảm hứng, đời sống tinh thần.",
+  "22": "Trưởng thành số 22: về sau hướng tới xây điều lớn, bền cho nhiều người.",
+  "33": "Trưởng thành số 33: về sau hướng tới nâng đỡ, chữa lành, phụng sự."
+ },
+ "thang_ca_nhan": {
+  "1": {
+   "chu_de": "Tháng khởi động",
+   "nen": "Hợp bắt đầu việc nhỏ, đặt mục tiêu tháng.",
+   "tranh": "Chần chừ quá lâu."
+  },
+  "2": {
+   "chu_de": "Tháng kiên nhẫn",
+   "nen": "Hợp hợp tác, lắng nghe, chăm quan hệ.",
+   "tranh": "Ép tiến độ, đối đầu."
+  },
+  "3": {
+   "chu_de": "Tháng biểu đạt",
+   "nen": "Hợp giao lưu, sáng tạo, trình bày ý tưởng.",
+   "tranh": "Tiêu xài và hứa hẹn quá tay."
+  },
+  "4": {
+   "chu_de": "Tháng xây nền",
+   "nen": "Hợp làm việc chi tiết, sắp xếp, hoàn thiện giấy tờ.",
+   "tranh": "Đi đường tắt."
+  },
+  "5": {
+   "chu_de": "Tháng thay đổi",
+   "nen": "Hợp thử điều mới, di chuyển, mở rộng.",
+   "tranh": "Quyết định bốc đồng."
+  },
+  "6": {
+   "chu_de": "Tháng gia đình",
+   "nen": "Hợp chăm người thân, nhà cửa, trách nhiệm.",
+   "tranh": "Ôm việc người khác."
+  },
+  "7": {
+   "chu_de": "Tháng lắng",
+   "nen": "Hợp nghỉ ngơi, học, suy ngẫm.",
+   "tranh": "Ép mình giao tiếp quá nhiều."
+  },
+  "8": {
+   "chu_de": "Tháng thành quả",
+   "nen": "Hợp xử lý tài chính, công việc, đàm phán.",
+   "tranh": "Bỏ quên sức khoẻ."
+  },
+  "9": {
+   "chu_de": "Tháng khép lại",
+   "nen": "Hợp dọn dẹp, kết thúc việc dở, cho đi.",
+   "tranh": "Bắt đầu cam kết lớn."
+  }
+ },
+ "ngay_ca_nhan": {
+  "1": "Ngày cá nhân 1: hợp bắt đầu, gửi đi, chủ động.",
+  "2": "Ngày cá nhân 2: hợp lắng nghe, phối hợp, nhẹ nhàng.",
+  "3": "Ngày cá nhân 3: hợp gặp gỡ, trình bày, sáng tạo.",
+  "4": "Ngày cá nhân 4: hợp làm việc chi tiết, dọn việc tồn.",
+  "5": "Ngày cá nhân 5: hợp thay đổi, đi lại, thử cái mới.",
+  "6": "Ngày cá nhân 6: hợp dành cho gia đình, chăm sóc.",
+  "7": "Ngày cá nhân 7: hợp nghỉ, đọc, suy nghĩ.",
+  "8": "Ngày cá nhân 8: hợp bàn việc, tiền bạc, quyết định thực tế.",
+  "9": "Ngày cá nhân 9: hợp hoàn tất, buông, cho đi."
+ },
+ "no_nghiep": {
+  "13": {
+   "ten": "Nợ nghiệp 13 (13/4)",
+   "y_nghia": "Trong truyền thống thần số, 13 gắn với bài học về kỷ luật và kiên trì: dễ muốn đường tắt, nản khi việc lâu.",
+   "goi_y": "Chọn một việc dài hơi và làm đều mỗi ngày; đây là bài học về thói quen, không phải điều bị áp đặt."
+  },
+  "14": {
+   "ten": "Nợ nghiệp 14 (14/5)",
+   "y_nghia": "14 gắn với bài học về chừng mực và tự do có trách nhiệm: dễ sa đà, thiếu điều độ.",
+   "goi_y": "Đặt giới hạn rõ cho những thứ dễ sa đà (chi tiêu, ăn uống, màn hình)."
+  },
+  "16": {
+   "ten": "Nợ nghiệp 16 (16/7)",
+   "y_nghia": "16 gắn với bài học về cái tôi: dễ gặp đổ vỡ khi quá tự mãn, rồi phải dựng lại.",
+   "goi_y": "Chủ động xin phản hồi thẳng từ người tin cậy mỗi quý."
+  },
+  "19": {
+   "ten": "Nợ nghiệp 19 (19/1)",
+   "y_nghia": "19 gắn với bài học về độc lập và nhờ giúp: dễ ôm hết một mình, khó nhận hỗ trợ.",
+   "goi_y": "Tập nhờ giúp một việc nhỏ mỗi tuần."
+  }
+ },
+ "bai_hoc_nghiep": {
+  "1": "Tên thiếu số 1: bài học về tự tin, dám đứng ra nói điều mình muốn.",
+  "2": "Tên thiếu số 2: bài học về kiên nhẫn, hợp tác, để ý cảm xúc người khác.",
+  "3": "Tên thiếu số 3: bài học về thể hiện bản thân, bớt tự chỉ trích.",
+  "4": "Tên thiếu số 4: bài học về kỷ luật, làm việc có hệ thống.",
+  "5": "Tên thiếu số 5: bài học về thích nghi, dám thay đổi, dám trải nghiệm.",
+  "6": "Tên thiếu số 6: bài học về trách nhiệm trong gia đình và các mối quan hệ.",
+  "7": "Tên thiếu số 7: bài học về đào sâu, tin vào hiểu biết của chính mình.",
+  "8": "Tên thiếu số 8: bài học về quản lý tiền bạc và quyền hạn.",
+  "9": "Tên thiếu số 9: bài học về bao dung, nhìn rộng hơn lợi ích của mình."
+ }
+}

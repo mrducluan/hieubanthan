@@ -54,11 +54,35 @@ test("nhập họ tên + ngày sinh → bốn chỉ số, luận giải và gợ
   await expect(result.locator(".challenge")).toBeVisible();
   await expect(result.locator(".year").first()).toBeVisible();
 
-  // Q&A: chỉ kiểm tra UI gợi ý — KHÔNG bấm chip (không gọi LLM).
+  // Biểu đồ ngày sinh (v2): 24101988 thiếu 3,5,7 → mũi tên trống 3-5-7.
+  const bd = result.getByTestId("bieu-do");
+  await expect(bd).toBeVisible();
+  await expect(bd.getByText("Mũi tên trống Tâm linh (Hoài nghi)")).toBeVisible();
+  await expect(bd.getByText("Số vắng trong ngày sinh: 3, 5, 6, 7")).toBeVisible();
+
+  // Q&A: có gợi ý + ô nhập; engine chạy template (không LLM) nên bấm chip là có câu trả lời.
   await expect(result.getByText("Hỏi sâu hơn")).toBeVisible();
-  await expect(result.locator(".qa-chip")).toHaveCount(8);
-  await expect(result.getByRole("button", { name: "Điểm mạnh cốt lõi của tôi là gì?" })).toBeEnabled();
+  await expect(result.locator(".qa-chip")).toHaveCount(9);
   await expect(result.getByRole("textbox", { name: "Câu hỏi của bạn" })).toBeVisible();
+  await result.getByRole("button", { name: "Điểm mạnh cốt lõi của tôi là gì?" }).click();
+  const ans = result.getByTestId("qa-answer");
+  await expect(ans).toContainText("Mặt tối cần để ý");
+  await expect(ans).toContainText("Ghép trực tiếp từ kho tri thức có nguồn.");
 
   await expect(result.locator(".engine-foot")).toContainText("Nguyễn Đức Luân");
+});
+
+test("hỏi hợp đôi: thiếu người thứ hai → nhập ngày sinh → có cặp số", async ({ page }) => {
+  await page.goto("/than-so?ten1=Nguy%E1%BB%85n%20%C4%90%E1%BB%A9c%20Lu%C3%A2n&ngay=24&thang=10&nam=1988");
+  const result = page.locator("section.result");
+  const chip = result.getByRole("button", { name: "Tôi và người yêu có hợp nhau không?" });
+  await chip.click();
+  const ans = result.getByTestId("qa-answer");
+  await expect(ans).toContainText("Người thứ hai");
+
+  await result.getByLabel("Ngày sinh người thứ hai").fill("13");
+  await result.getByLabel("Tháng sinh người thứ hai").fill("5");
+  await result.getByLabel("Năm sinh người thứ hai").fill("1990");
+  await chip.click();
+  await expect(ans).toContainText("Cặp số chủ đạo 33 và 1");
 });

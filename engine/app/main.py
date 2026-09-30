@@ -11,7 +11,7 @@ from __future__ import annotations
 import datetime as _dt
 import os
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
@@ -20,7 +20,8 @@ from app.calc import thanso, timebase
 from app.kb import store as kb_store
 from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import thanso as luangiai_thanso
-from app.narrative import llm as narrative_llm
+from app import nhat_ky
+from app.narrative import hoi_van, llm as narrative_llm
 from app.kinhdich_api import router as kinhdich_router
 from app.tuvi_api import router as tuvi_router
 
@@ -143,20 +144,40 @@ def api_luan_giai_van(inp: ThanSoInput) -> dict:
     return narrative_llm.dien_dat(reading)
 
 
+class NguoiKia(BaseModel):
+    """Người thứ hai (người yêu, con, sếp…). Tên không bắt buộc."""
+    ho_ten: list[str] | None = Field(default=None, max_length=5)
+    ngay: int = Field(ge=1, le=31)
+    thang: int = Field(ge=1, le=12)
+    nam: int = Field(ge=1900, le=2100)
+
+
 class HoiInput(ThanSoInput):
     cau_hoi: str = Field(min_length=3, max_length=400)
+    nguoi_kia: NguoiKia | None = None
+    ngay_xem: _dt.date | None = Field(default=None, description="Mặc định: hôm nay")
 
 
 @app.post("/v1/thanso/hoi")
-def api_hoi(inp: HoiInput) -> dict:
-    """Q&A — trả lời câu hỏi của người dùng, gắn vào con số của họ.
+def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
+    """Q&A v2 — phân loại câu hỏi (RULES) → gói bằng chứng từ KB → diễn đạt.
 
-    Giữ định vị 'tham khảo văn hoá': phản chiếu con số vào câu hỏi, KHÔNG dự
-    đoán. Không có key LLM → báo tính năng chưa bật, không bịa.
+    Chạy được KHÔNG cần LLM (template). Có key OpenRouter thì LLM chỉ diễn đạt
+    lại gói bằng chứng, qua bộ kiểm tra; vi phạm → rơi về template.
+    Xem docs/KIEN-TRUC-THANSO-V2.md.
     """
     inp.kiem_tra_ngay()
-    reading = luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam)
-    return narrative_llm.tra_loi_cau_hoi(reading, inp.cau_hoi.strip())
+    kia = None
+    if inp.nguoi_kia:
+        try:
+            _dt.date(inp.nguoi_kia.nam, inp.nguoi_kia.thang, inp.nguoi_kia.ngay)
+        except ValueError:
+            raise HTTPException(422, detail="Ngày sinh người thứ hai không tồn tại")
+        kia = inp.nguoi_kia.model_dump()
+    nguoi = {"ho_ten": inp.ho_ten, "ngay": inp.ngay, "thang": inp.thang, "nam": inp.nam}
+    kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem)
+    background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
+    return {"engine_version": ENGINE_VERSION, **kq}
 
 
 class ChuKyInput(BaseModel):

@@ -97,3 +97,15 @@ def test_co_trich_nguon_chung_va_cach_doc() -> None:
     kq = lg.luan_giai(["An"], 1, 1, 2000)
     assert "Balliett" in kq["trich_nguon_chung"]
     assert "phản chứng" in kq["cach_doc"].lower()
+
+
+def test_mo_rong_co_bieu_do_va_chi_so_phu():
+    import datetime as _d
+    from app.luangiai import thanso as _lg
+    mr_ = _lg.luan_mo_rong("Nguyễn Đức Luân", 24, 10, 1988, _d.date(2026, 9, 30))
+    assert mr_["bieu_do"]["luoi"] == [[0, 0, 1], [1, 0, 2], [2, 1, 0]]
+    assert [m["ma"] for m in mr_["bieu_do"]["mui_ten"]] == ["3-5-7"]
+    assert mr_["bieu_do"]["mui_ten"][0]["ten"].startswith("Mũi tên trống")
+    assert mr_["so_thai_do"]["so"] == 7 and mr_["so_thai_do"]["nghia"]
+    assert mr_["thang_ca_nhan"]["so"] == 8
+    assert [b["so"] for b in mr_["bai_hoc_nghiep"]] == [2, 6, 8, 9]

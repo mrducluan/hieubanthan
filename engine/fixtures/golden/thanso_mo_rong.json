@@ -1,0 +1,59 @@
+{
+  "_nguon": "Tính TAY từng ca (không sinh bằng code) để làm đáp án độc lập cho app/calc/thanso_mo_rong.py. Quy ước ghi trong docs/KIEN-TRUC-THANSO-V2.md mục 3.1.",
+  "cac_ca": [
+    {
+      "ten_ca": "ca_chot_luan",
+      "ho_ten": "Nguyễn Đức Luân", "ngay": 24, "thang": 10, "nam": 1988,
+      "so_ngay_sinh": 6, "so_thai_do": 7, "duong_doi": 33, "su_menh": 9, "so_truong_thanh": 6,
+      "bieu_do": {"dem": {"1": 2, "2": 1, "4": 1, "8": 2, "9": 1}, "so_thieu": [3, 5, 6, 7],
+                  "mui_ten_du": [], "mui_ten_trong": ["3-5-7"]},
+      "no_nghiep": [],
+      "bai_hoc_nghiep": [2, 6, 8, 9],
+      "thang_ca_nhan": [{"nam": 2026, "thang": 9, "so": 8}],
+      "ngay_ca_nhan": [{"nam": 2026, "thang": 9, "ngay": 30, "so": 2}]
+    },
+    {
+      "ten_ca": "ngay_13_no_nghiep",
+      "ho_ten": "Trần Thị Mai", "ngay": 13, "thang": 5, "nam": 1990,
+      "so_ngay_sinh": 4, "so_thai_do": 9, "duong_doi": 1, "su_menh": 5, "so_truong_thanh": 6,
+      "bieu_do": {"dem": {"1": 2, "3": 1, "5": 1, "9": 2}, "so_thieu": [2, 4, 6, 7, 8],
+                  "mui_ten_du": ["1-5-9"], "mui_ten_trong": []},
+      "no_nghiep": [{"vi_tri": "ngay_sinh", "so": 13}],
+      "bai_hoc_nghiep": [3, 6, 7],
+      "thang_ca_nhan": [{"nam": 2026, "thang": 1, "so": 2}],
+      "ngay_ca_nhan": [{"nam": 2026, "thang": 1, "ngay": 15, "so": 8}]
+    },
+    {
+      "ten_ca": "ngay_29_so_cai",
+      "ho_ten": "Lê Văn Hùng", "ngay": 29, "thang": 11, "nam": 1976,
+      "so_ngay_sinh": 11, "so_thai_do": 4, "duong_doi": 9,
+      "bieu_do": {"dem": {"1": 3, "2": 1, "6": 1, "7": 1, "9": 2}, "so_thieu": [3, 4, 5, 8],
+                  "mui_ten_du": [], "mui_ten_trong": []},
+      "no_nghiep_ngay_va_duong_doi": []
+    },
+    {
+      "ten_ca": "2002_nhieu_mui_ten_trong",
+      "ngay": 2, "thang": 2, "nam": 2002,
+      "so_ngay_sinh": 2, "so_thai_do": 4, "duong_doi": 8,
+      "bieu_do": {"dem": {"2": 4}, "so_thieu": [1, 3, 4, 5, 6, 7, 8, 9],
+                  "mui_ten_du": [],
+                  "mui_ten_trong": ["1-4-7", "3-6-9", "4-5-6", "7-8-9", "1-5-9", "3-5-7"]}
+    },
+    {
+      "ten_ca": "duong_doi_19",
+      "ngay": 4, "thang": 5, "nam": 2008, "duong_doi": 1,
+      "no_nghiep_ngay_va_duong_doi": [{"vi_tri": "duong_doi", "so": 19}]
+    },
+    {
+      "ten_ca": "duong_doi_14",
+      "ngay": 3, "thang": 5, "nam": 2004, "duong_doi": 5,
+      "no_nghiep_ngay_va_duong_doi": [{"vi_tri": "duong_doi", "so": 14}]
+    }
+  ],
+  "hop_doi": [
+    {"a": 33, "b": 1, "cap": "1-6"},
+    {"a": 11, "b": 22, "cap": "2-4"},
+    {"a": 8, "b": 3, "cap": "3-8"},
+    {"a": 7, "b": 7, "cap": "7-7"}
+  ]
+}

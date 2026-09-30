@@ -119,6 +119,27 @@ export interface ChieuSau {
   trich_nguon: string;
   cach_doc_chieu_sau: string;
 }
+export interface MuiTen {
+  ma: string;
+  trong: boolean;
+  ten?: string;
+  y_nghia?: string;
+  mat_toi?: string;
+  goi_y?: string;
+}
+export interface ThangCaNhanNghia { chu_de: string; nen: string; tranh: string }
+export interface NoNghiepNghia { ten: string; y_nghia: string; goi_y: string }
+export interface MoRong {
+  bieu_do: { luoi: number[][]; so_thieu: number[]; mui_ten: MuiTen[] };
+  so_ngay_sinh: { so: number; nghia: string | null };
+  so_thai_do: { so: number; nghia: string | null };
+  so_truong_thanh: { so: number; nghia: string | null };
+  thang_ca_nhan: { thang: number; nam: number; so: number; nghia: ThangCaNhanNghia | null };
+  no_nghiep: { vi_tri: string; so: number; nghia: NoNghiepNghia | null }[];
+  bai_hoc_nghiep: { so: number; nghia: string | null }[];
+  trich_nguon: string;
+  trang_thai: string;
+}
 export interface LuanGiaiResult {
   engine_version: string;
   ngay_sinh: string;
@@ -126,6 +147,7 @@ export interface LuanGiaiResult {
   ten_bien_the_da_quet: string[];
   cac_vi_tri: ViTriLuanGiai[];
   chieu_sau: ChieuSau;
+  mo_rong?: MoRong;
   tom_tat_do_tin: string;
   cach_doc: string;
   trich_nguon_chung: string;
