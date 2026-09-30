@@ -88,7 +88,7 @@ Chế độ luận (quyết định 2026-09-30, "cả hai/cả ba"):
 | HH-1 | Lõi hỏi đáp dùng chung + **Kinh Dịch** (KB 64 quẻ, Mai Hoa, thể–dụng, chọn phái) | Kinh Dịch ≥ 85% có căn cứ |
 | HH-2 | **Tử vi** Q&A (KB sao × cung, tứ hoá, lưu niên, 2 chế độ) | ✅ kho 687/687; holdout viết sau router 20/24 trước sửa → 24/24 |
 | HH-3 | **Bát tự** (tiết khí, tứ trụ, thập thần, đại vận — golden oracle), Lục Hào vượng suy | ✅ golden 42/42 + 667 tiết khí; kho 254/254; holdout 16/16 |
-| HH-4 | **Phong thuỷ** (mệnh quái, bát trạch, cửa–chủ–bếp) | golden 100%, Phong thuỷ ≥ 80% |
+| HH-4 | **Phong thuỷ** (mệnh quái, bát trạch, cửa–chủ–bếp) | ✅ bảng 8×8 tay 100%; kho 360/360; holdout 10/12 → 12/12 |
 | HH-5 | Skill `huyenhoc-kb` + vòng tự cải thiện đa module, đối chiếu ctext khi mở mạng | vòng chạy được, báo cáo |
 
 ## 5. Ranh giới giữ nguyên ở mọi chế độ
@@ -133,3 +133,17 @@ không dùng để tuyển/sa thải · không phán "khắc" người thứ ba 
 - RULES `app/hoidap/battu.py` · API `/v1/battu/la-so`, `/v1/battu/hoi` · web `/bat-tu` · E2E 2 ca.
 - Kho câu hỏi: 2 câu "bát tự của tôi và người yêu có hợp nhau" đổi nhãn `tra_loi` → `can_them_du_lieu`
   cho khớp các câu hợp khác (cần lá số người kia).
+
+### HH-4 — Phong thuỷ (2026-09-30)
+- CALC `app/calc/phongthuy.py`: mệnh quái (mốc **Lập xuân** theo tiết khí; chỉ có năm → cờ
+  `chua_ro_ngay`), du niên bằng phép lật hào (khớp 100% bảng 8×8 chép tay — đối chiếu độc lập),
+  trạch theo phương toạ, cửa–chủ–bếp, sao năm (Ngũ Hoàng phi tinh, Thái Tuế, Tuế Phá, Tam Sát —
+  kiểm bằng các năm 2018–2026 đã biết), tuổi làm nhà Kim Lâu / Hoang Ốc / Tam Tai (**dân gian**).
+- KB `phongthuy_kb.json` (nháp AI): 8 du niên, 8 quái, 28 tình huống bố trí/loan đầu (mỗi mục ghi
+  `nguon` = cổ thư hay **dân gian**, kèm lý do và gợi ý thực tế), âm trạch (Táng Thư), 11 giải thích.
+- RULES `app/hoidap/phongthuy.py`: mệnh quái × hướng, du niên, cửa–bếp, loan đầu/bố trí, âm trạch,
+  năm, vợ chồng (xin dữ liệu hai người), hướng cá nhân (ngày sinh từ form hoặc "sinh năm …, nam/nữ"
+  trong câu). Từ chối vật phẩm "chiêu tài", bùa ngải.
+- API `/v1/phongthuy/menh-quai`, `/v1/phongthuy/hoi` · web `/phong-thuy` · E2E 2 ca.
+- Kho câu hỏi: 1 câu ("Vợ chồng tôi sinh 1990 và 1992…", 3 biến thể) đổi nhãn → `can_them_du_lieu`
+  (không rõ năm nào của ai, thiếu giới tính).

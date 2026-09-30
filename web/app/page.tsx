@@ -51,8 +51,16 @@ export default async function Home() {
           </p>
         </Link>
 
+        <Link href="/phong-thuy" className="home-card">
+          <h2>Phong thuỷ</h2>
+          <p>
+            Bát trạch: hướng hợp tuổi, cửa–chủ–bếp, sao năm; loan đầu và bố trí — ghi rõ chỗ nào là
+            quan niệm dân gian, không bán vật phẩm.
+          </p>
+        </Link>
+
         <div className="home-card" style={{ borderStyle: "dashed", cursor: "default" }}>
-          <h2>Nhân tướng · Phong thuỷ</h2>
+          <h2>Nhân tướng</h2>
           <p className="soon">Đang xây dựng.</p>
         </div>
       </div>
