@@ -2,16 +2,12 @@
 // Web không tự tính can chi, tiết khí hay đại vận: engine tính.
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { LaSoVao } from "@/lib/la-so-vao";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
-const LaSo = z.object({
-  birth_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  birth_time: z.string().regex(/^\d{2}:\d{2}$/),
-  gender: z.enum(["nam", "nu"]),
-  vung: z.enum(["north", "south"]).optional(),
-}).strict();
+const LaSo = LaSoVao;
 
 const Input = z.object({
   cau_hoi: z.string().min(3).max(500),

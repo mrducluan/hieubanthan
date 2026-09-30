@@ -13,6 +13,8 @@ export const ChartInput = z.object({
   am_nhuan: z.boolean().default(false),
   // Bắt buộc khi sinh trước 13/06/1975 — engine sẽ từ chối nếu thiếu.
   vung: z.enum(["north", "south"]).optional(),
+  noi_sinh: z.string().regex(/^[a-z0-9_-]{2,40}$/).optional(),
+  gio_mua_he: z.boolean().optional(),
   truong_phai: z.enum(["npl", "vvt"]).optional(),
   che_do: z.enum(["hep", "tam_hop", "tptc"]).optional(),
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).default("exact"),
@@ -31,7 +33,7 @@ export const ChartOutput = z.object({
   pham_vi: z.literal("tuan_triet_only"),
   duong_lich_goc: z.string(),
   duong_lich_kinh_tuyen: z.string(),
-  mui_gio_dong_ho: z.number(),
+  mui_gio_dong_ho: z.number().nullable(),
   am_lich: z.object({
     ngay: z.number(), thang: z.number(), nam: z.number(), nhuan: z.number(),
   }),
@@ -91,7 +93,7 @@ export const LaSoOutput = z.object({
   iztro: z.string(),
   duong_lich_goc: z.string(),
   duong_lich_kinh_tuyen: z.string(),
-  mui_gio_dong_ho: z.number(),
+  mui_gio_dong_ho: z.number().nullable(),
   gio_chi_so: z.number().int().min(0).max(12),
   gio: z.string(),
   khoang_gio: z.string(),

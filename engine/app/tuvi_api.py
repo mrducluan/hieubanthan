@@ -17,7 +17,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
-from app.calc import lunar, timebase, tuan_triet_vendor, tuvi_an_sao
+from app.calc import dia_ly, lunar, timebase, tuan_triet_vendor, tuvi_an_sao
 from app.hoidap import tuvi as hoidap_tv
 from app import nhat_ky
 from app.config import ENGINE_VERSION, HourConfidence, Region
@@ -25,7 +25,8 @@ from app.config import ENGINE_VERSION, HourConfidence, Region
 router = APIRouter(prefix="/v1/tuvi", tags=["tuvi"])
 
 _NGAY_THONG_NHAT_MUI_GIO = _dt.date(1975, 6, 13)
-_TET_EDGE_DAYS = 2   # sinh cách mùng 1 Tết ≤ 2 ngày → gắn cờ nhạy cảm
+_TET_EDGE_DAYS = 2
+_CHI = ("Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi")   # sinh cách mùng 1 Tết ≤ 2 ngày → gắn cờ nhạy cảm
 
 
 class TuanTrietInput(BaseModel):
@@ -34,7 +35,10 @@ class TuanTrietInput(BaseModel):
     gender: Literal["nam", "nu"]
     calendar_type: Literal["duong", "am"] = "duong"
     am_nhuan: bool = False                       # chỉ dùng khi calendar_type=am
-    vung: Region | None = None                   # bắt buộc nếu sinh trước 13/06/1975
+    vung: Region | None = None                   # bắt buộc nếu sinh trước 13/06/1975 và không khai noi_sinh
+    noi_sinh: str | None = Field(default=None, max_length=40,
+                                 description="Mã tỉnh (GET /v1/dia-ly/tinh) hoặc 'nuoc_ngoai'")
+    gio_mua_he: bool = False                     # chỉ khi sinh ở nước ngoài: giờ đồng hồ đang là giờ mùa hè
     truong_phai: Literal["npl", "vvt"] | None = None
     che_do: Literal["hep", "tam_hop", "tptc"] | None = None
     do_tin_gio: HourConfidence = HourConfidence.EXACT
@@ -48,29 +52,59 @@ class _DauVao:
         if gio > 23 or phut > 59:
             raise HTTPException(422, detail="Giờ sinh không hợp lệ")
 
-        # ---- 0. Âm lịch đầu vào? Đổi về dương trước đã --------------------
+        # ---- 0. Nơi sinh → vùng múi giờ / nước ngoài ------------------------
+        nuoc_ngoai = inp.noi_sinh == dia_ly.NUOC_NGOAI or inp.vung is Region.ABROAD
+        tinh = None
+        if inp.noi_sinh and not nuoc_ngoai:
+            tinh = dia_ly.tra(inp.noi_sinh)
+            if tinh is None:
+                raise HTTPException(422, detail="Nơi sinh không có trong danh sách tỉnh/thành")
+        if inp.gio_mua_he and not nuoc_ngoai:
+            raise HTTPException(422, detail="Giờ mùa hè chỉ áp dụng khi sinh ở nước ngoài")
+        vung_khai = None if nuoc_ngoai else inp.vung
+        if tinh and tinh["vung"]:
+            if vung_khai and vung_khai.value != tinh["vung"]:
+                raise HTTPException(422, detail="Vùng khai báo mâu thuẫn với nơi sinh")
+            vung_khai = Region(tinh["vung"])
+
+        # ---- 1. Âm lịch đầu vào? Đổi về dương trước đã --------------------
+        # Miền Nam 1960 → 13/06/1975 dùng lịch âm tính theo UTC+8 (Tết Mậu Thân
+        # 30/01/1968, miền Bắc 29/01) — ngày âm ghi trong giấy tờ thời đó theo lịch ấy.
         duong_goc = inp.birth_date
+        self.lich_mien_nam = False
         if inp.calendar_type == "am":
-            try:
-                d, m, y = lunar.lunar_to_solar(
-                    inp.birth_date.day, inp.birth_date.month, inp.birth_date.year,
-                    1 if inp.am_nhuan else 0, config.CALENDAR_MERIDIAN_TZ,
-                )
-            except ValueError as e:
-                raise HTTPException(422, detail=str(e))
-            duong_goc = _dt.date(y, m, d)
+            def _doi(tz: float) -> _dt.date:
+                try:
+                    d, m, y = lunar.lunar_to_solar(
+                        inp.birth_date.day, inp.birth_date.month, inp.birth_date.year,
+                        1 if inp.am_nhuan else 0, tz,
+                    )
+                except ValueError as e:
+                    raise HTTPException(422, detail=str(e))
+                return _dt.date(y, m, d)
+            duong_goc = _doi(config.CALENDAR_MERIDIAN_TZ)
+            if vung_khai is Region.SOUTH:
+                tz_nam, _ = config.clock_offset(duong_goc, Region.SOUTH)
+                if tz_nam != config.CALENDAR_MERIDIAN_TZ:
+                    duong_goc, self.lich_mien_nam = _doi(tz_nam), True
 
-        # ---- 1. Múi giờ lịch sử ------------------------------------------
-        if duong_goc < _NGAY_THONG_NHAT_MUI_GIO and inp.vung is None:
-            raise HTTPException(422, detail=(
-                "Sinh trước 13/06/1975: bắt buộc khai 'vung' (north/south theo NƠI "
-                "SINH) vì hai miền dùng múi giờ khác nhau — kết quả có thể lệch cả "
-                "ngày can chi."))
-        vung = inp.vung or Region.NORTH   # sau 1975 hai vùng cùng UTC+7, chọn gì cũng vậy
-
+        # ---- 2. Múi giờ lịch sử (hoặc giờ địa phương nếu sinh ở nước ngoài) -
         clock_dt = _dt.datetime(duong_goc.year, duong_goc.month, duong_goc.day, gio, phut)
-        tb = timebase.to_calendar_time(clock_dt, vung)
+        if nuoc_ngoai:
+            # config.ABROAD_LOCAL_TIME: giữ giờ địa phương, chỉ bỏ giờ mùa hè.
+            if inp.gio_mua_he:
+                clock_dt -= _dt.timedelta(hours=1)
+            tb = timebase.CalendarTime(calendar_dt=clock_dt, clock_offset=None, tz_disputed=False)
+        else:
+            if duong_goc < _NGAY_THONG_NHAT_MUI_GIO and vung_khai is None:
+                raise HTTPException(422, detail=(
+                    "Sinh trước 13/06/1975: bắt buộc khai 'vung' (north/south theo NƠI "
+                    "SINH) vì hai miền dùng múi giờ khác nhau — kết quả có thể lệch cả "
+                    "ngày can chi."))
+            vung = vung_khai or Region.NORTH   # sau 1975 hai vùng cùng UTC+7, chọn gì cũng vậy
+            tb = timebase.to_calendar_time(clock_dt, vung)
         ngay_kinh_tuyen = tb.calendar_dt.date()
+        self.nuoc_ngoai, self.tinh = nuoc_ngoai, tinh
 
         # ---- 2. Lịch âm + can chi năm ------------------------------------
         ld, lm, ly, leap = lunar.solar_to_lunar(
@@ -86,7 +120,26 @@ class _DauVao:
         tb, ngay_kinh_tuyen, ly = self.tb, self.ngay_kinh_tuyen, self.am[2]
         # ---- Cờ cảnh báo — phơi ra hết, không giấu -----------------------
         flags: list[dict] = []
-        if tb.clock_offset != config.CALENDAR_MERIDIAN_TZ:
+        if self.nuoc_ngoai:
+            flags.append({"loai": "sinh_nuoc_ngoai", "chi_tiet": (
+                "Sinh ở nước ngoài: lá số lập theo giờ địa phương nơi sinh, không quy "
+                "đổi về giờ Việt Nam.")})
+            if inp.gio_mua_he:
+                flags.append({"loai": "gio_mua_he", "chi_tiet": (
+                    f"Đã trừ 1 giờ mùa hè: giờ chuẩn địa phương {tb.calendar_dt.strftime('%H:%M')}.")})
+        if self.lich_mien_nam:
+            flags.append({"loai": "lich_am_mien_nam", "chi_tiet": (
+                "Ngày âm đổi theo lịch miền Nam thời 1960–1975 (tính theo UTC+8): "
+                f"ứng với dương lịch {self.duong_goc.strftime('%d/%m/%Y')}.")})
+        if self.tinh:
+            mt = timebase.gio_mat_troi_thuc(tb.calendar_dt, self.tinh["kinh_do"])
+            if timebase.chi_gio(mt) != timebase.chi_gio(tb.calendar_dt):
+                flags.append({"loai": "gio_mat_troi", "chi_tiet": (
+                    f"Theo giờ mặt trời thực ở {self.tinh['ten']} ({mt.strftime('%H:%M')}), bạn "
+                    f"thuộc giờ {_CHI[timebase.chi_gio(mt)]} thay vì giờ "
+                    f"{_CHI[timebase.chi_gio(tb.calendar_dt)]}. Lá số vẫn lập theo giờ đồng hồ "
+                    "như phần lớn sách Việt; nếu thấy không khớp, hãy xem thêm lá số giờ kia.")})
+        if tb.clock_offset is not None and tb.clock_offset != config.CALENDAR_MERIDIAN_TZ:
             flags.append({"loai": "tz_adjusted", "chi_tiet": (
                 f"Đồng hồ nơi sinh chạy UTC+{tb.clock_offset:g}; đã quy đổi về kinh "
                 f"tuyến lịch UTC+7: {tb.calendar_dt.strftime('%H:%M ngày %d/%m/%Y')}.")})

@@ -17,6 +17,15 @@ export const HoSo = z.object({
   gio: z.string().regex(/^\d{2}:\d{2}$/).optional(),
   gioi_tinh: z.enum(["nam", "nu"]).optional(),
   vung: z.enum(["north", "south"]).optional(),
+  /** Mã tỉnh nơi sinh (engine /v1/dia-ly/tinh) hoặc "nuoc_ngoai". Cần cho Tử vi, Bát tự. */
+  noi_sinh: z.string().regex(/^[a-z0-9_-]{2,40}$/).optional(),
+  /** Chỉ khi sinh ở nước ngoài: đồng hồ nơi sinh lúc đó đang là giờ mùa hè. */
+  gio_mua_he: z.boolean().optional(),
+  do_tin_gio: z.enum(["exact", "approx"]).optional(),
+  /** Người dùng nhập theo lịch nào; ngày/tháng/năm ở trên LUÔN là dương lịch (engine đổi). */
+  lich_nhap: z.enum(["duong", "am"]).optional(),
+  /** Ngày âm tương ứng (engine trả về) — để người dùng đối chiếu giấy tờ. */
+  am: z.object({ ngay: z.number().int(), thang: z.number().int(), nam: z.number().int(), nhuan: z.boolean() }).optional(),
   tao_luc: z.string(),
 });
 export type HoSo = z.infer<typeof HoSo>;
@@ -113,11 +122,25 @@ export function ngayHopLe(ngay: number, thang: number, nam: number): boolean {
   return d.getUTCFullYear() === nam && d.getUTCMonth() === thang - 1 && d.getUTCDate() === ngay;
 }
 
-/** Đầu vào lá số (Tử vi / Bát tự) từ hồ sơ — null nếu thiếu giờ sinh hoặc giới tính. */
-export function laSoTuHoSo(h: HoSo | null | undefined): { birth_date: string; birth_time: string; gender: "nam" | "nu"; vung?: "north" | "south" } | null {
-  if (!h?.gio || !h.gioi_tinh) return null;
-  const iso = ngaySinhIso(h);
-  const truoc1975 = iso < "1975-06-13";
-  if (truoc1975 && !h.vung) return null;
-  return { birth_date: iso, birth_time: h.gio, gender: h.gioi_tinh, ...(truoc1975 && h.vung ? { vung: h.vung } : {}) };
+export const NUOC_NGOAI = "nuoc_ngoai";
+
+/** Đầu vào lá số (Tử vi / Bát tự) từ hồ sơ — null nếu thiếu giờ sinh, giới tính hoặc nơi sinh. */
+export function laSoTuHoSo(h: HoSo | null | undefined): {
+  birth_date: string; birth_time: string; gender: "nam" | "nu"; noi_sinh: string;
+  vung?: "north" | "south"; gio_mua_he?: boolean; do_tin_gio?: "exact" | "approx";
+} | null {
+  if (!h?.gio || !h.gioi_tinh || !h.noi_sinh) return null;
+  const nuocNgoai = h.noi_sinh === NUOC_NGOAI;
+  return {
+    birth_date: ngaySinhIso(h), birth_time: h.gio, gender: h.gioi_tinh, noi_sinh: h.noi_sinh,
+    // Vùng chỉ còn cần cho tỉnh vắt ngang vĩ tuyến 17 (Quảng Trị) sinh trước 1975 — engine tự suy từ tỉnh.
+    ...(!nuocNgoai && h.vung && ngaySinhIso(h) < "1975-06-13" ? { vung: h.vung } : {}),
+    ...(nuocNgoai && h.gio_mua_he ? { gio_mua_he: true } : {}),
+    ...(h.do_tin_gio ? { do_tin_gio: h.do_tin_gio } : {}),
+  };
+}
+
+/** "14/9 (nhuận) Mậu Thìn" — chỉ định dạng dữ liệu engine đã trả. */
+export function moTaAm(am: NonNullable<HoSo["am"]>, canChi?: string): string {
+  return `${am.ngay}/${am.thang}${am.nhuan ? " nhuận" : ""}/${am.nam}${canChi ? ` (${canChi})` : ""}`;
 }

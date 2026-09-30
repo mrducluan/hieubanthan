@@ -89,3 +89,25 @@ test("engine lỗi: báo rõ + thử lại được; trang lạ ra 404 tiếng V
   await page.goto("/khong-co-trang-nay");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("không có trên bản đồ sao");
 });
+
+test("nhập ngày ÂM lịch: xem trước dương lịch, bài đọc tính theo ngày dương", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Họ và tên đầy đủ").fill("Nguyễn Đức Luân");
+  await page.getByRole("radio", { name: "Âm lịch" }).click();
+  await page.getByLabel("Ngày", { exact: true }).fill("14");
+  await page.getByLabel("Tháng", { exact: true }).fill("9");
+  await page.getByLabel("Năm", { exact: true }).fill("1988");
+  await expect(page.getByTestId("doi-lich")).toContainText("Dương lịch: 24/10/1988 · năm Mậu Thìn");
+  await page.getByRole("button", { name: "Xem con số của tôi" }).click();
+  await expect(page.getByTestId("so-duong-doi")).toHaveText("33");
+  const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1") ?? "{}"));
+  expect([h.ngay, h.thang, h.nam, h.lich_nhap, h.am?.ngay, h.am?.thang]).toEqual([24, 10, 1988, "am", 14, 9]);
+});
+
+test("nhập dương lịch: hiện ngày âm để đối chiếu giấy tờ", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Ngày", { exact: true }).fill("24");
+  await page.getByLabel("Tháng", { exact: true }).fill("10");
+  await page.getByLabel("Năm", { exact: true }).fill("1988");
+  await expect(page.getByTestId("doi-lich")).toContainText("Âm lịch: 14/9/1988 (Mậu Thìn)");
+});

@@ -25,7 +25,7 @@ export function DauMang({ Icon, ten, mo_ta, children }: { Icon: LucideIcon; ten:
   );
 }
 
-export function XinThemDuLieu({ hoSo, ly_do, can = "day_du", nut = "Thêm giờ sinh & giới tính" }: { hoSo: HoSo | null; ly_do: string; can?: "day_du" | "gioi_tinh"; nut?: string }) {
+export function XinThemDuLieu({ hoSo, ly_do, can = "day_du", nut = "Thêm giờ sinh, giới tính, nơi sinh" }: { hoSo: HoSo | null; ly_do: string; can?: "day_du" | "gioi_tinh"; nut?: string }) {
   const [mo, setMo] = useState(false);
   return (
     <div className="glass flex flex-col items-start gap-4 rounded-2xl p-5 sm:flex-row sm:items-center">

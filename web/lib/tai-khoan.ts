@@ -22,7 +22,13 @@ export function useNguoiDung(): User | null | undefined {
 interface HangHoSo {
   ho_ten: string; ten_khac: string | null; ngay_sinh: string; gio_sinh: string | null;
   gioi_tinh: "nam" | "nu" | null; vung: "north" | "south" | null; cap_nhat_luc: string;
+  // 0007 — có thể chưa chạy migration: đọc/ghi lùi về bộ cột 0006.
+  noi_sinh?: string | null; gio_mua_he?: boolean; do_tin_gio?: "exact" | "approx" | null; lich_nhap?: "duong" | "am";
+  am_ngay?: number | null; am_thang?: number | null; am_nam?: number | null; am_nhuan?: boolean;
 }
+
+const COT_0006 = "ho_ten,ten_khac,ngay_sinh,gio_sinh,gioi_tinh,vung,cap_nhat_luc";
+const COT_0007 = `${COT_0006},noi_sinh,gio_mua_he,do_tin_gio,lich_nhap,am_ngay,am_thang,am_nam,am_nhuan`;
 
 function batBuoc() {
   const sb = supabase();
@@ -31,8 +37,9 @@ function batBuoc() {
 }
 
 export async function hoSoTaiKhoan(userId: string): Promise<(Omit<HoSo, "v" | "tao_luc"> & { cap_nhat_luc: string }) | null> {
-  const { data, error } = await batBuoc().from("ho_so").select("ho_ten,ten_khac,ngay_sinh,gio_sinh,gioi_tinh,vung,cap_nhat_luc")
-    .eq("user_id", userId).maybeSingle<HangHoSo>();
+  const doc = (cot: string) => batBuoc().from("ho_so").select(cot).eq("user_id", userId).maybeSingle<HangHoSo>();
+  let { data, error } = await doc(COT_0007);
+  if (error) ({ data, error } = await doc(COT_0006));
   if (error) throw new Error("Không đọc được hồ sơ trong tài khoản.");
   if (!data) return null;
   const [nam, thang, ngay] = data.ngay_sinh.split("-").map(Number) as [number, number, number];
@@ -42,15 +49,27 @@ export async function hoSoTaiKhoan(userId: string): Promise<(Omit<HoSo, "v" | "t
     ...(data.gio_sinh ? { gio: data.gio_sinh.slice(0, 5) } : {}),
     ...(data.gioi_tinh ? { gioi_tinh: data.gioi_tinh } : {}),
     ...(data.vung ? { vung: data.vung } : {}),
+    ...(data.noi_sinh ? { noi_sinh: data.noi_sinh } : {}),
+    ...(data.gio_mua_he ? { gio_mua_he: true } : {}),
+    ...(data.do_tin_gio ? { do_tin_gio: data.do_tin_gio } : {}),
+    ...(data.lich_nhap ? { lich_nhap: data.lich_nhap } : {}),
+    ...(data.am_ngay && data.am_thang && data.am_nam
+      ? { am: { ngay: data.am_ngay, thang: data.am_thang, nam: data.am_nam, nhuan: Boolean(data.am_nhuan) } } : {}),
     cap_nhat_luc: data.cap_nhat_luc,
   };
 }
 
 export async function luuVaoTaiKhoan(userId: string, h: HoSo): Promise<void> {
-  const { error } = await batBuoc().from("ho_so").upsert({
+  const co_ban = {
     user_id: userId, ho_ten: h.ho_ten, ten_khac: h.ten_khac ?? null, ngay_sinh: ngaySinhIso(h),
     gio_sinh: h.gio ?? null, gioi_tinh: h.gioi_tinh ?? null, vung: h.vung ?? null, dong_y_luc: new Date().toISOString(),
+  };
+  let { error } = await batBuoc().from("ho_so").upsert({
+    ...co_ban, noi_sinh: h.noi_sinh ?? null, gio_mua_he: Boolean(h.gio_mua_he), do_tin_gio: h.do_tin_gio ?? null,
+    lich_nhap: h.lich_nhap ?? "duong", am_ngay: h.am?.ngay ?? null, am_thang: h.am?.thang ?? null,
+    am_nam: h.am?.nam ?? null, am_nhuan: Boolean(h.am?.nhuan),
   });
+  if (error) ({ error } = await batBuoc().from("ho_so").upsert(co_ban));   // chưa chạy 0007
   if (error) throw new Error("Chưa lưu được vào tài khoản.");
 }
 

@@ -20,7 +20,8 @@ const moTa = (h: Pick<HoSo, "ho_ten" | "ngay" | "thang" | "nam" | "gio">) =>
 function giongNhau(a: HoSo, b: NonNullable<HoSoTK>): boolean {
   return a.ho_ten === b.ho_ten && a.ngay === b.ngay && a.thang === b.thang && a.nam === b.nam &&
     (a.gio ?? null) === (b.gio ?? null) && (a.gioi_tinh ?? null) === (b.gioi_tinh ?? null) &&
-    (a.ten_khac ?? null) === (b.ten_khac ?? null) && (a.vung ?? null) === (b.vung ?? null);
+    (a.ten_khac ?? null) === (b.ten_khac ?? null) && (a.vung ?? null) === (b.vung ?? null) &&
+    (a.noi_sinh ?? null) === (b.noi_sinh ?? null) && Boolean(a.gio_mua_he) === Boolean(b.gio_mua_he);
 }
 
 export function TaiKhoan() {
@@ -115,7 +116,7 @@ export function TaiKhoan() {
                   <div className="space-y-3">
                     <label className="flex items-start gap-3 text-sm">
                       <input type="checkbox" checked={dongY} onChange={(e) => setDongY(e.target.checked)} className="mt-1 size-4 accent-[rgb(var(--gold))]" />
-                      <span>Tôi đồng ý lưu <b>họ tên, ngày giờ sinh, giới tính</b> vào tài khoản để dùng trên máy khác. Tôi có thể xoá bất cứ lúc nào. Nội dung bài đọc và câu hỏi không được lưu.</span>
+                      <span>Tôi đồng ý lưu <b>họ tên, ngày giờ sinh, giới tính, nơi sinh</b> vào tài khoản để dùng trên máy khác. Tôi có thể xoá bất cứ lúc nào. Nội dung bài đọc và câu hỏi không được lưu.</span>
                     </label>
                     <Button disabled={!dongY || dang} onClick={() => lam(async () => {
                       await luuVaoTaiKhoan(user.id, hoSo); ghi("profile_created", { kind: "tai_khoan" }); await tai();
