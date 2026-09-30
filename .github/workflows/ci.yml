@@ -1,0 +1,53 @@
+# CI nền (WS-1): engine pytest + web typecheck/build trên mọi push/PR.
+# Tên job `engine` / `web` giữ cố định — WS-5 sẽ thêm job `e2e` phụ thuộc vào chúng.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  engine:
+    name: engine
+    runs-on: ubuntu-latest
+    env:
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12" # khớp engine/Dockerfile
+          cache: pip
+          cache-dependency-path: engine/requirements.txt
+      - run: pip install -r engine/requirements.txt
+      - name: pytest (gồm golden + drift Tuần/Triệt)
+        working-directory: engine
+        run: python -m pytest -q
+
+  web:
+    name: web
+    runs-on: ubuntu-latest
+    env:
+      # Giá trị giả vô hại — build không gọi engine, không cần secret thật.
+      ENGINE_URL: http://localhost:8000
+      NEXT_TELEMETRY_DISABLED: "1"
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
