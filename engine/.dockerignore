@@ -4,3 +4,4 @@ __pycache__/
 tests/
 fixtures/ziwei_oracle_raw/
 .pytest_cache/
+ziwei/node_modules/

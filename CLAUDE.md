@@ -59,6 +59,7 @@ Engine không biết Supabase tồn tại. Web không tự tính bất cứ th�
 | 2026-08-15 | **Kiến trúc an sao: Python engine gọi iztro qua Node subprocess.** Chấp nhận thêm Node vào tầng engine (lệch CLAUDE.md "Python FastAPI" — đã hỏi và duyệt). Không viết lại logic an sao. |
 | 2026-09-30 | Duyệt thêm devDependency `@playwright/test` (E2E web). iztro **ghim bản đã sinh golden**. Kinh Dịch vào engine từ `source-skills/kinh-dich/gieoque.py` — **không** dùng horosa (AGPL). |
 | 2026-08-15 | **Giờ Tý cho tử vi: theo iztro (SWITCH_AT_2300, 23:00 sang ngày mới).** Thần số học + bát tự giữ SWITCH_AT_0000. Hai module hai quy ước — bắt buộc gắn cờ cho người dùng sinh 23:00–23:59. |
+| 2026-09-30 | **iztro ghim 2.6.0** (`engine/ziwei/package-lock.json`): 2.5.8/2.6.0/2.6.1 cho kết quả trùng khít 8 lá golden; 2.6.0 là bản mới nhất lúc commit golden. Lá số đầy đủ ở route MỚI `/v1/tuvi/an-sao` + `/api/tuvi/la-so`; `/api/tuvi/chart` v0 giữ nguyên. Sửa lỗi port Hồ Ngọc Đức (INT=floor, dấu NewMoon) → `ENGINE_VERSION` 0.1.1. |
 
 **Golden SPEC-005:** `engine/fixtures/golden/ziwei_golden.json` (8 lá, sinh cục bộ bằng iztro qua `_generate_ziwei_golden.mjs`). `ziwei_oracle_raw/` giữ 2 lá aov.cc thật làm bằng chứng đối chứng độc lập. Ca `nam_muon_ty` (timeIndex 12) mang `_ty_conflict=true`.
 

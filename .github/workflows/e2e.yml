@@ -28,6 +28,8 @@ jobs:
           node-version: "22"
           cache: npm
           cache-dependency-path: web/package-lock.json
+      - name: Cài iztro cho engine (an sao tử vi)
+        run: npm ci --prefix engine/ziwei
       - name: Cài web
         working-directory: web
         run: npm ci
