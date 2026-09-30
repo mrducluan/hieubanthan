@@ -1,0 +1,1462 @@
+{
+ "_nguon": "KB Kinh Dịch v1: 64 quẻ (Nghĩa Lý), bát quái, thể dụng (Mai Hoa), dụng thần (Lục Hào), giải thích, mẫu.",
+ "source": {
+  "chu_dich": "Chu Dịch (Tây Chu; Thập Dực Chiến Quốc–Hán) — ctext.org/book-of-changes",
+  "mai_hoa_dich_so": "Mai Hoa Dịch Số — Thiệu Ung (Bắc Tống)",
+  "tang_san_boc_dich": "Tăng San Bốc Dịch — Dã Hạc Lão Nhân (Thanh)"
+ },
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "luu_y": {
+  "nghia_ly": "Quẻ ở đây dùng như một tấm gương để bạn soi lại lựa chọn, không phải lời phán. Quyết định cuối cùng dựa trên thông tin thật của bạn.",
+  "du_doan": "Lục Hào đọc xu hướng thành bại theo cấu trúc quẻ; đây là tham khảo văn hoá, không phải kết quả chắc chắn. Hãy chốt trước điều gì xảy ra thì lời đoán này sai.",
+  "mai_hoa": "Mai Hoa đọc nhanh thế của việc trước mắt qua thể–dụng; chỉ nên dùng cho việc ngắn hạn, cụ thể.",
+  "hao_tu": "Nguyên văn hào từ sẽ được bổ sung khi đối chiếu bản gốc (ctext); hiện dùng ý chính của quẻ.",
+  "vuong_suy": "Vượng suy theo nguyệt kiến, nhật thần và tuần không chưa được tính — kết luận thành bại vì vậy còn thô."
+ },
+ "que": {
+  "1": {
+   "ten": "Càn",
+   "ten_han": "乾",
+   "y_chinh": "Sức sáng tạo mạnh mẽ, vận hành không ngừng; quái từ nói hanh thông nếu giữ chính bền (nguyên hanh lợi trinh). Đại Tượng: người quân tử tự cường không nghỉ.",
+   "loi_khuyen": "Chủ động và kiên trì, nhưng biết thời: lúc còn 'rồng ẩn' thì chưa dùng, lúc lên cao quá thì biết dừng.",
+   "mat_toi": "Kiêu cương, tưởng mình luôn đúng — 'rồng lên quá cao ắt có hối'.",
+   "cau_tu_soi": "Bạn đang tiến vì đã đến lúc, hay vì không chịu được việc đứng yên?",
+   "linh_vuc": {
+    "cong_viec": "Thời để nhận trách nhiệm lớn, dẫn dắt; cần nền năng lực thật, đừng vượt bậc.",
+    "tinh_cam": "Chủ động bày tỏ, nhưng tôn trọng nhịp của người kia.",
+    "gia_dinh": "Người trụ cột cần làm gương hơn ra lệnh.",
+    "tien_bac": "Cơ hội mở rộng; tránh dồn hết vốn vì tự tin.",
+    "hoc_hanh": "Học bền, đặt mục tiêu dài; tránh ôm quá nhiều."
+   },
+   "trich_dan": "Chu Dịch, quẻ 1 Càn 乾 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "2": {
+   "ten": "Khôn",
+   "ten_han": "坤",
+   "y_chinh": "Đức nhu thuận, bao dung, nâng đỡ như đất chở muôn vật; đi sau thì được, tranh đi trước thì lạc.",
+   "loi_khuyen": "Hợp tác, hỗ trợ, bền bỉ; để người phù hợp dẫn đường và làm tốt phần của mình.",
+   "mat_toi": "Nhu thành nhu nhược, im lặng chịu đựng đến mức mất mình.",
+   "cau_tu_soi": "Bạn đang theo vì tin hướng đi đó, hay vì sợ phải tự quyết?",
+   "linh_vuc": {
+    "cong_viec": "Vai trò hỗ trợ, vận hành, chăm khách; thành quả đến từ bền bỉ.",
+    "tinh_cam": "Bao dung, lắng nghe; giữ giới hạn của mình.",
+    "gia_dinh": "Giữ nếp nhà, nuôi dưỡng; đừng gánh hết một mình.",
+    "tien_bac": "Tích luỹ đều, an toàn; không phải lúc mạo hiểm.",
+    "hoc_hanh": "Học nền tảng, kiên trì; theo thầy giỏi."
+   },
+   "trich_dan": "Chu Dịch, quẻ 2 Khôn 坤 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "3": {
+   "ten": "Truân",
+   "ten_han": "屯",
+   "y_chinh": "Gian nan buổi đầu như mầm non đội đất; có triển vọng nhưng chưa nên đi xa, nên dựng người giúp (lợi kiến hầu).",
+   "loi_khuyen": "Kiên nhẫn sắp xếp từ gốc, tìm đồng minh, đừng vội tiến một mình.",
+   "mat_toi": "Nản vì khởi đầu rối, hoặc liều tiến khi chưa có nền.",
+   "cau_tu_soi": "Rối ren hiện tại là do việc khó, hay do bạn chưa sắp thứ tự ưu tiên?",
+   "linh_vuc": {
+    "cong_viec": "Giai đoạn khởi nghiệp, việc mới: dựng hệ thống, tìm người đỡ.",
+    "tinh_cam": "Mối quan hệ mới còn bỡ ngỡ; đừng ép tiến nhanh.",
+    "gia_dinh": "Nhà mới, con nhỏ, nhiều xáo trộn; chia việc rõ.",
+    "tien_bac": "Chi phí ban đầu nhiều; giữ dòng tiền.",
+    "hoc_hanh": "Mới vào môn học khó; hỏi người đi trước."
+   },
+   "trich_dan": "Chu Dịch, quẻ 3 Truân 屯 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "4": {
+   "ten": "Mông",
+   "ten_han": "蒙",
+   "y_chinh": "Non trẻ, chưa sáng tỏ; quái từ: không phải ta cầu trò nhỏ mà trò nhỏ cầu ta; hỏi lần đầu thì đáp, hỏi đi hỏi lại là nhờn.",
+   "loi_khuyen": "Nhận mình chưa biết, tìm thầy đúng, học có kỷ luật; đừng hỏi lại cùng câu mong đáp khác.",
+   "mat_toi": "Tự cho là hiểu; hoặc hỏi mãi để tìm câu trả lời mình muốn nghe.",
+   "cau_tu_soi": "Bạn đang hỏi để hiểu, hay để được xác nhận điều đã muốn?",
+   "linh_vuc": {
+    "cong_viec": "Vị trí mới cần học việc; khiêm tốn hỏi người có nghề.",
+    "tinh_cam": "Còn non kinh nghiệm; tìm hiểu trước khi cam kết.",
+    "gia_dinh": "Dạy con cần kiên nhẫn và nhất quán.",
+    "tien_bac": "Chưa hiểu thì chưa đầu tư.",
+    "hoc_hanh": "Rất hợp học; chọn thầy và học có hệ thống."
+   },
+   "trich_dan": "Chu Dịch, quẻ 4 Mông 蒙 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "5": {
+   "ten": "Nhu",
+   "ten_han": "需",
+   "y_chinh": "Chờ đợi có niềm tin (hữu phu); mây lên trời chưa mưa; Đại Tượng: ăn uống yến lạc — nuôi sức trong lúc chờ.",
+   "loi_khuyen": "Chờ đúng thời, chuẩn bị và giữ sức; đừng lao qua sông khi nước còn dữ.",
+   "mat_toi": "Chờ thụ động, hoặc nóng ruột phá thời cơ.",
+   "cau_tu_soi": "Bạn đang chờ điều gì cụ thể, và đã chuẩn bị gì trong lúc chờ?",
+   "linh_vuc": {
+    "cong_viec": "Hồ sơ, kết quả chưa đến; chuẩn bị phương án.",
+    "tinh_cam": "Chưa đến lúc; nuôi quan hệ tự nhiên.",
+    "gia_dinh": "Việc nhà cần thời gian; đừng ép.",
+    "tien_bac": "Không vội giải ngân; giữ tiền mặt.",
+    "hoc_hanh": "Ôn đều, chờ kỳ thi đến tự tin."
+   },
+   "trich_dan": "Chu Dịch, quẻ 5 Nhu 需 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "6": {
+   "ten": "Tụng",
+   "ten_han": "訟",
+   "y_chinh": "Tranh tụng; có lý mà bị nghẹn; giữa chừng dừng thì tốt, theo đến cùng thì xấu; lợi gặp người phân xử (đại nhân), không lợi vượt sông lớn.",
+   "loi_khuyen": "Tìm hoà giải, dừng tranh chấp sớm; soạn thoả thuận rõ từ đầu.",
+   "mat_toi": "Hiếu thắng, kéo dài tranh cãi vì sĩ diện.",
+   "cau_tu_soi": "Thắng cuộc tranh này đổi lấy gì — và bạn có sẵn lòng trả giá đó?",
+   "linh_vuc": {
+    "cong_viec": "Mâu thuẫn hợp đồng, đồng nghiệp; nhờ bên thứ ba khách quan.",
+    "tinh_cam": "Cãi nhau vì ai đúng; hãy hỏi cả hai cần gì.",
+    "gia_dinh": "Tranh chấp trong nhà; tránh đưa ra ngoài.",
+    "tien_bac": "Tranh chấp tiền bạc; ưu tiên hoà giải hơn kiện.",
+    "hoc_hanh": "Bất đồng với thầy/bạn; trao đổi trên dữ kiện."
+   },
+   "trich_dan": "Chu Dịch, quẻ 6 Tụng 訟 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "7": {
+   "ten": "Sư",
+   "ten_han": "師",
+   "y_chinh": "Quân đội, tổ chức đông người; cần người cầm quân chính đáng, kinh nghiệm (trượng nhân) mới tốt.",
+   "loi_khuyen": "Tổ chức kỷ luật, mục tiêu chính đáng, giao quyền cho người đủ uy tín.",
+   "mat_toi": "Dùng sức mạnh tập thể cho mục đích riêng; chỉ huy lộn xộn.",
+   "cau_tu_soi": "Nhóm của bạn đang theo một người dẫn rõ ràng, hay nhiều người cùng ra lệnh?",
+   "linh_vuc": {
+    "cong_viec": "Dẫn dắt đội nhóm, dự án lớn; phân vai, kỷ luật.",
+    "tinh_cam": "Cần thống nhất 'luật chơi' chung.",
+    "gia_dinh": "Gia đình cần người điều phối rõ.",
+    "tien_bac": "Kế hoạch tài chính có kỷ luật.",
+    "hoc_hanh": "Học theo nhóm có trưởng nhóm."
+   },
+   "trich_dan": "Chu Dịch, quẻ 7 Sư 師 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "8": {
+   "ten": "Tỷ",
+   "ten_han": "比",
+   "y_chinh": "Gần gũi, liên kết; nên tự xét lòng thành trước khi theo; kẻ đến muộn thì xấu.",
+   "loi_khuyen": "Chọn đúng người để gắn bó, chủ động kết nối chân thành.",
+   "mat_toi": "Kết bè vì lợi, hoặc do dự để lỡ cơ hội gắn kết.",
+   "cau_tu_soi": "Bạn gắn với nhóm này vì giá trị chung, hay vì sợ đứng ngoài?",
+   "linh_vuc": {
+    "cong_viec": "Hợp tác, liên minh; chọn đối tác cùng giá trị.",
+    "tinh_cam": "Thời gắn bó; chủ động nhưng chân thành.",
+    "gia_dinh": "Họ hàng gắn kết; thăm hỏi.",
+    "tien_bac": "Làm ăn chung cần tin cậy trước.",
+    "hoc_hanh": "Nhóm học hợp."
+   },
+   "trich_dan": "Chu Dịch, quẻ 8 Tỷ 比 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "9": {
+   "ten": "Tiểu Súc",
+   "ten_han": "小畜",
+   "y_chinh": "Tích nhỏ; mây dày mà chưa mưa; sức kiềm chế nhỏ tạm giữ được sức lớn.",
+   "loi_khuyen": "Tích luỹ từng chút, trau dồi cái nhỏ (văn đức); chưa phải lúc thành việc lớn.",
+   "mat_toi": "Sốt ruột vì chưa thấy kết quả, bỏ ngang.",
+   "cau_tu_soi": "Việc nhỏ nào bạn làm đều mỗi ngày sẽ thành lợi thế sau này?",
+   "linh_vuc": {
+    "cong_viec": "Cải tiến nhỏ, tích kinh nghiệm.",
+    "tinh_cam": "Vun đắp từng chút; chưa phải lúc bước lớn.",
+    "gia_dinh": "Sửa những thói quen nhỏ trong nhà.",
+    "tien_bac": "Tiết kiệm nhỏ đều đặn.",
+    "hoc_hanh": "Học từng phần nhỏ."
+   },
+   "trich_dan": "Chu Dịch, quẻ 9 Tiểu Súc 小畜 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "10": {
+   "ten": "Lý",
+   "ten_han": "履",
+   "y_chinh": "Đạp lên đuôi hổ mà hổ không cắn — cẩn trọng, giữ lễ khi ở gần người mạnh hơn.",
+   "loi_khuyen": "Đi đúng mực, rõ vị trí, lịch sự mà vững vàng.",
+   "mat_toi": "Liều lĩnh vượt quyền, hoặc khúm núm mất mình.",
+   "cau_tu_soi": "Bạn đang cư xử đúng vai của mình trong tình huống này chưa?",
+   "linh_vuc": {
+    "cong_viec": "Làm việc với cấp trên khó tính; giữ chuẩn mực.",
+    "tinh_cam": "Tôn trọng ranh giới của nhau.",
+    "gia_dinh": "Giữ lễ với bề trên trong nhà.",
+    "tien_bac": "Đầu tư thận trọng từng bước.",
+    "hoc_hanh": "Học theo quy chuẩn."
+   },
+   "trich_dan": "Chu Dịch, quẻ 10 Lý 履 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "11": {
+   "ten": "Thái",
+   "ten_han": "泰",
+   "y_chinh": "Thông suốt: trời đất giao hoà, trên dưới hiểu nhau; nhỏ đi lớn đến.",
+   "loi_khuyen": "Tận dụng thời thuận để xây nền, đồng thời phòng lúc chuyển 'bĩ'.",
+   "mat_toi": "Tự mãn khi mọi việc suôn sẻ.",
+   "cau_tu_soi": "Điều gì bạn nên chuẩn bị ngay lúc thuận lợi này cho lúc khó sau?",
+   "linh_vuc": {
+    "cong_viec": "Hợp tác trôi chảy; mở rộng có kiểm soát.",
+    "tinh_cam": "Hoà hợp; vun đắp khi đang tốt.",
+    "gia_dinh": "Gia đạo êm; dành thời gian cho nhau.",
+    "tien_bac": "Thời thuận; lập quỹ dự phòng.",
+    "hoc_hanh": "Học hiệu quả; đặt mục tiêu cao hơn."
+   },
+   "trich_dan": "Chu Dịch, quẻ 11 Thái 泰 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "12": {
+   "ten": "Bĩ",
+   "ten_han": "否",
+   "y_chinh": "Bế tắc: trời đất không giao, trên dưới không thông; người quân tử kiệm đức tránh nạn, không mưu danh lợi.",
+   "loi_khuyen": "Thu mình giữ nguyên tắc, không cố ép; chuẩn bị cho lúc thông.",
+   "mat_toi": "Cố đẩy việc trong thời bế tắc, hoặc thoả hiệp nguyên tắc để được việc.",
+   "cau_tu_soi": "Điều gì bạn có thể giữ vững lúc này dù không tiến được?",
+   "linh_vuc": {
+    "cong_viec": "Môi trường không thông; giữ chất lượng, tránh xung đột.",
+    "tinh_cam": "Hai người khó hiểu nhau; giảm kỳ vọng, giữ tôn trọng.",
+    "gia_dinh": "Không khí nhà nặng; bớt tranh luận.",
+    "tien_bac": "Thắt chặt chi tiêu.",
+    "hoc_hanh": "Tự học âm thầm."
+   },
+   "trich_dan": "Chu Dịch, quẻ 12 Bĩ 否 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "13": {
+   "ten": "Đồng Nhân",
+   "ten_han": "同人",
+   "y_chinh": "Hoà đồng với người nơi đồng rộng — công tâm, cởi mở thì hanh thông; bè phái thì hẹp.",
+   "loi_khuyen": "Tìm điểm chung, hợp tác công khai, không kết bè.",
+   "mat_toi": "Chỉ thân với người giống mình, loại người khác.",
+   "cau_tu_soi": "Bạn đang mở lòng với ai khác biệt với mình?",
+   "linh_vuc": {
+    "cong_viec": "Hợp tác liên nhóm, cộng đồng.",
+    "tinh_cam": "Tìm giá trị chung.",
+    "gia_dinh": "Đoàn kết họ hàng.",
+    "tien_bac": "Góp vốn minh bạch.",
+    "hoc_hanh": "Học nhóm mở."
+   },
+   "trich_dan": "Chu Dịch, quẻ 13 Đồng Nhân 同人 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "14": {
+   "ten": "Đại Hữu",
+   "ten_han": "大有",
+   "y_chinh": "Có lớn: sở hữu nhiều, sáng suốt ở trên; Đại Tượng: ngăn ác, dương thiện.",
+   "loi_khuyen": "Dùng sự dư dả để làm điều tốt, giữ khiêm.",
+   "mat_toi": "Khoe khoang, phung phí.",
+   "cau_tu_soi": "Bạn đang dùng những gì mình có để phục vụ điều gì?",
+   "linh_vuc": {
+    "cong_viec": "Thành quả tốt; chia sẻ công lao.",
+    "tinh_cam": "Hạnh phúc đủ đầy; đừng xem là mặc định.",
+    "gia_dinh": "Gia đình sung túc; giữ nếp giản dị.",
+    "tien_bac": "Có của; đầu tư có trách nhiệm.",
+    "hoc_hanh": "Kết quả tốt; tiếp tục khiêm tốn."
+   },
+   "trich_dan": "Chu Dịch, quẻ 14 Đại Hữu 大有 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "15": {
+   "ten": "Khiêm",
+   "ten_han": "謙",
+   "y_chinh": "Khiêm tốn thì hanh thông, người quân tử có kết quả tốt; bớt chỗ nhiều bù chỗ ít.",
+   "loi_khuyen": "Khiêm mà không tự hạ giá trị; làm nhiều nói ít.",
+   "mat_toi": "Khiêm giả để được khen, hoặc tự ti.",
+   "cau_tu_soi": "Sự khiêm tốn của bạn đến từ thật lòng, hay từ sợ bị chú ý?",
+   "linh_vuc": {
+    "cong_viec": "Thăng tiến nhờ uy tín thầm lặng.",
+    "tinh_cam": "Nhún nhường vừa đủ.",
+    "gia_dinh": "Hoà thuận nhờ nhường nhịn đúng lúc.",
+    "tien_bac": "Tiêu vừa phải.",
+    "hoc_hanh": "Học hỏi mọi người."
+   },
+   "trich_dan": "Chu Dịch, quẻ 15 Khiêm 謙 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "16": {
+   "ten": "Dự",
+   "ten_han": "豫",
+   "y_chinh": "Vui vẻ, hứng khởi, sẵn sàng; lợi dựng người lãnh đạo, ra quân.",
+   "loi_khuyen": "Tạo hứng khởi chung, chuẩn bị trước; tránh sa đà.",
+   "mat_toi": "Mải vui, lơ là chuẩn bị.",
+   "cau_tu_soi": "Niềm hứng khởi này có được chuẩn bị đi kèm chưa?",
+   "linh_vuc": {
+    "cong_viec": "Khởi động dự án có tinh thần tập thể.",
+    "tinh_cam": "Niềm vui chung; đừng chỉ vui bề mặt.",
+    "gia_dinh": "Tổ chức sự kiện gia đình.",
+    "tien_bac": "Tránh chi tiêu theo hứng.",
+    "hoc_hanh": "Học bằng hứng thú."
+   },
+   "trich_dan": "Chu Dịch, quẻ 16 Dự 豫 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "17": {
+   "ten": "Tùy",
+   "ten_han": "隨",
+   "y_chinh": "Theo: tuỳ thời, theo điều đúng; giữ chính thì không lỗi.",
+   "loi_khuyen": "Linh hoạt thích nghi, nhưng chỉ theo điều chính đáng.",
+   "mat_toi": "Theo số đông mù quáng.",
+   "cau_tu_soi": "Bạn đang theo vì tin, hay vì tiện?",
+   "linh_vuc": {
+    "cong_viec": "Thích nghi với thay đổi tổ chức.",
+    "tinh_cam": "Theo nhịp người kia mà vẫn giữ mình.",
+    "gia_dinh": "Nghe ý người thân.",
+    "tien_bac": "Theo xu hướng có kiểm chứng.",
+    "hoc_hanh": "Theo lộ trình của người giỏi."
+   },
+   "trich_dan": "Chu Dịch, quẻ 17 Tùy 隨 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "18": {
+   "ten": "Cổ",
+   "ten_han": "蠱",
+   "y_chinh": "Việc đã hư hỏng cần sửa (sửa việc của cha mẹ để lại); cân nhắc ba ngày trước, ba ngày sau.",
+   "loi_khuyen": "Nhận diện gốc hư hỏng, sửa có kế hoạch, không đổ lỗi.",
+   "mat_toi": "Che đậy vấn đề cũ hoặc sửa vội.",
+   "cau_tu_soi": "Điều gì bạn đang né sửa vì nó 'vốn dĩ đã vậy'?",
+   "linh_vuc": {
+    "cong_viec": "Tái cấu trúc, xử lý tồn đọng.",
+    "tinh_cam": "Hàn gắn vết thương cũ.",
+    "gia_dinh": "Giải quyết chuyện gia đình để lâu.",
+    "tien_bac": "Xử lý nợ cũ.",
+    "hoc_hanh": "Lấp lỗ hổng kiến thức nền."
+   },
+   "trich_dan": "Chu Dịch, quẻ 18 Cổ 蠱 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "19": {
+   "ten": "Lâm",
+   "ten_han": "臨",
+   "y_chinh": "Tiến đến, lớn mạnh, giám sát; tốt lành, nhưng 'đến tháng tám có hung' — thịnh không mãi.",
+   "loi_khuyen": "Tận dụng đà tăng trưởng, gần gũi người dưới, nhớ thời có hạn.",
+   "mat_toi": "Chủ quan khi đang lên.",
+   "cau_tu_soi": "Nếu đà tốt này dừng sau vài tháng, bạn đã chuẩn bị gì?",
+   "linh_vuc": {
+    "cong_viec": "Được giao quản lý; lắng nghe cấp dưới.",
+    "tinh_cam": "Quan hệ tiến triển; giữ chân thành.",
+    "gia_dinh": "Quan tâm con cái sát sao.",
+    "tien_bac": "Thu nhập tăng; để dành phần.",
+    "hoc_hanh": "Tiến bộ nhanh; duy trì."
+   },
+   "trich_dan": "Chu Dịch, quẻ 19 Lâm 臨 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "20": {
+   "ten": "Quan",
+   "ten_han": "觀",
+   "y_chinh": "Quan sát; người trên làm gương cho người dưới xem.",
+   "loi_khuyen": "Dừng lại quan sát toàn cảnh và soi lại mình trước khi hành động.",
+   "mat_toi": "Chỉ đứng xem, hoặc xem người mà không xem mình.",
+   "cau_tu_soi": "Nếu người khác nhìn vào bạn lúc này, họ học được gì?",
+   "linh_vuc": {
+    "cong_viec": "Đánh giá, khảo sát thị trường.",
+    "tinh_cam": "Quan sát kỹ trước khi cam kết.",
+    "gia_dinh": "Làm gương cho con.",
+    "tien_bac": "Nghiên cứu trước khi xuống tiền.",
+    "hoc_hanh": "Học bằng quan sát."
+   },
+   "trich_dan": "Chu Dịch, quẻ 20 Quan 觀 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "21": {
+   "ten": "Phệ Hạp",
+   "ten_han": "噬嗑",
+   "y_chinh": "Cắn cho khớp: có vật cản giữa miệng phải cắn vỡ; lợi dùng hình ngục — làm rõ luật lệ.",
+   "loi_khuyen": "Xử lý dứt khoát chướng ngại, công bằng, rõ quy tắc.",
+   "mat_toi": "Nặng tay quá mức, hoặc né không xử.",
+   "cau_tu_soi": "Chướng ngại cụ thể nào cần được gọi tên và xử lý ngay?",
+   "linh_vuc": {
+    "cong_viec": "Kỷ luật, xử lý vi phạm, gỡ nút thắt.",
+    "tinh_cam": "Nói thẳng vấn đề đang chắn giữa hai người.",
+    "gia_dinh": "Đặt quy tắc nhà rõ.",
+    "tien_bac": "Đòi nợ, chấm dứt khoản rò rỉ.",
+    "hoc_hanh": "Giải quyết phần khó nhất trước."
+   },
+   "trich_dan": "Chu Dịch, quẻ 21 Phệ Hạp 噬嗑 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "22": {
+   "ten": "Bí",
+   "ten_han": "賁",
+   "y_chinh": "Trang sức, làm đẹp; hanh thông nhỏ, lợi việc nhỏ.",
+   "loi_khuyen": "Chăm chút hình thức vừa đủ để nâng nội dung.",
+   "mat_toi": "Hình thức lấn át thực chất.",
+   "cau_tu_soi": "Vẻ ngoài bạn đang đầu tư có phản ánh đúng thực chất không?",
+   "linh_vuc": {
+    "cong_viec": "Thương hiệu, trình bày; đừng chỉ đánh bóng.",
+    "tinh_cam": "Chăm chút nhau nhưng thật lòng.",
+    "gia_dinh": "Trang trí nhà có chừng mực.",
+    "tien_bac": "Chi tiêu làm đẹp vừa phải.",
+    "hoc_hanh": "Trình bày đẹp nhưng nắm chắc nội dung."
+   },
+   "trich_dan": "Chu Dịch, quẻ 22 Bí 賁 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "23": {
+   "ten": "Bác",
+   "ten_han": "剝",
+   "y_chinh": "Bóc mòn: âm lấn dương, nền đang bị bào; không lợi có chỗ đi.",
+   "loi_khuyen": "Dừng mở rộng, giữ nền tảng, chờ thời chuyển.",
+   "mat_toi": "Cố hành động khi nền đã yếu.",
+   "cau_tu_soi": "Điều gì đang âm thầm bào mòn bạn mà bạn chưa chặn?",
+   "linh_vuc": {
+    "cong_viec": "Tổ chức suy thoái; bảo toàn năng lực.",
+    "tinh_cam": "Quan hệ phai dần; nói chuyện thật.",
+    "gia_dinh": "Nếp nhà lỏng; củng cố gốc.",
+    "tien_bac": "Cắt lỗ, giữ vốn.",
+    "hoc_hanh": "Củng cố căn bản."
+   },
+   "trich_dan": "Chu Dịch, quẻ 23 Bác 剝 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "24": {
+   "ten": "Phục",
+   "ten_han": "復",
+   "y_chinh": "Trở lại: một dương sinh dưới năm âm; qua lại không lỗi, bảy ngày trở lại.",
+   "loi_khuyen": "Bắt đầu lại từ bước nhỏ, sửa sai sớm, quay về điều đúng.",
+   "mat_toi": "Lặp lại lỗi cũ mà gọi là 'làm lại'.",
+   "cau_tu_soi": "Bạn đang quay lại điều gì — và lần này khác lần trước ở đâu?",
+   "linh_vuc": {
+    "cong_viec": "Hồi phục sau thất bại; làm lại có bài học.",
+    "tinh_cam": "Hàn gắn; bắt đầu lại chậm.",
+    "gia_dinh": "Về thăm, nối lại quan hệ.",
+    "tien_bac": "Phục hồi tài chính từng bước.",
+    "hoc_hanh": "Ôn lại gốc."
+   },
+   "trich_dan": "Chu Dịch, quẻ 24 Phục 復 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "25": {
+   "ten": "Vô Vọng",
+   "ten_han": "無妄",
+   "y_chinh": "Không càn bậy: thuận lẽ trời, thành thật thì hanh; trái chính thì có tai.",
+   "loi_khuyen": "Hành động ngay thẳng, không toan tính, chấp nhận điều bất ngờ.",
+   "mat_toi": "Mưu mẹo, mong được ngoài sức.",
+   "cau_tu_soi": "Bạn có đang mong một kết quả mà mình không thật sự gieo?",
+   "linh_vuc": {
+    "cong_viec": "Làm đúng việc, đừng đi đường tắt.",
+    "tinh_cam": "Chân thành, không tính toán.",
+    "gia_dinh": "Thật thà với người nhà.",
+    "tien_bac": "Tránh mong làm giàu nhanh.",
+    "hoc_hanh": "Học thật, không gian lận."
+   },
+   "trich_dan": "Chu Dịch, quẻ 25 Vô Vọng 無妄 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "26": {
+   "ten": "Đại Súc",
+   "ten_han": "大畜",
+   "y_chinh": "Tích lớn: dưỡng hiền, học nhiều lời hay việc tốt của người xưa; không ăn ở nhà thì tốt (ra phụng sự).",
+   "loi_khuyen": "Tích luỹ sâu, kiềm chế sức mạnh để dùng đúng lúc.",
+   "mat_toi": "Tích mãi không dùng.",
+   "cau_tu_soi": "Bạn đã tích luỹ đủ để bước ra phục vụ việc lớn hơn chưa?",
+   "linh_vuc": {
+    "cong_viec": "Đào tạo, chuẩn bị cho vị trí lớn.",
+    "tinh_cam": "Nuôi quan hệ lâu dài.",
+    "gia_dinh": "Tích luỹ cho gia đình.",
+    "tien_bac": "Để dành cho mục tiêu lớn.",
+    "hoc_hanh": "Học sâu, đọc nhiều."
+   },
+   "trich_dan": "Chu Dịch, quẻ 26 Đại Súc 大畜 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "27": {
+   "ten": "Di",
+   "ten_han": "頤",
+   "y_chinh": "Nuôi dưỡng: xem mình nuôi gì và tự nuôi mình thế nào; cẩn trọng lời nói, tiết độ ăn uống.",
+   "loi_khuyen": "Chú ý điều nuôi dưỡng thân và tâm, lời nói ra.",
+   "mat_toi": "Nuôi tham dục, hoặc sống nhờ người.",
+   "cau_tu_soi": "Bạn đang nuôi dưỡng điều gì trong mình mỗi ngày?",
+   "linh_vuc": {
+    "cong_viec": "Việc chăm sóc, nuôi dưỡng người khác.",
+    "tinh_cam": "Nuôi dưỡng nhau bằng lời tử tế.",
+    "gia_dinh": "Bữa cơm gia đình.",
+    "tien_bac": "Chi cho điều nuôi dưỡng lâu dài.",
+    "hoc_hanh": "Chọn nguồn học lành mạnh."
+   },
+   "trich_dan": "Chu Dịch, quẻ 27 Di 頤 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "28": {
+   "ten": "Đại Quá",
+   "ten_han": "大過",
+   "y_chinh": "Quá lớn: cột nhà cong giữa — sức nặng vượt chịu đựng; lợi có chỗ đi, cần hành động.",
+   "loi_khuyen": "Nhận tình trạng quá tải, dám thay đổi lớn nhưng có tính toán.",
+   "mat_toi": "Gồng gánh đến gãy.",
+   "cau_tu_soi": "Điều gì trong đời bạn đang chịu tải quá mức, và cần bỏ bớt gì?",
+   "linh_vuc": {
+    "cong_viec": "Quá tải; tái phân bổ việc.",
+    "tinh_cam": "Mối quan hệ căng; cần thay đổi lớn.",
+    "gia_dinh": "Gánh nặng gia đình; chia sẻ.",
+    "tien_bac": "Nợ vượt khả năng; tái cơ cấu.",
+    "hoc_hanh": "Ôm quá nhiều môn; cắt bớt."
+   },
+   "trich_dan": "Chu Dịch, quẻ 28 Đại Quá 大過 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "29": {
+   "ten": "Khảm",
+   "ten_han": "坎",
+   "y_chinh": "Hiểm hãm trùng trùng; giữ lòng thành (hữu phu) thì tâm thông, như nước chảy không mất tín.",
+   "loi_khuyen": "Đi qua hiểm bằng kiên định và thành thật, từng bước.",
+   "mat_toi": "Hoảng loạn, hoặc quen với nguy hiểm.",
+   "cau_tu_soi": "Điều gì giúp bạn giữ vững trong lúc khó này?",
+   "linh_vuc": {
+    "cong_viec": "Khó khăn nối tiếp; giữ nguyên tắc.",
+    "tinh_cam": "Thử thách lòng tin.",
+    "gia_dinh": "Gia đình gặp khó; ở bên nhau.",
+    "tien_bac": "Rủi ro; giữ an toàn.",
+    "hoc_hanh": "Kỳ khó; kiên trì."
+   },
+   "trich_dan": "Chu Dịch, quẻ 29 Khảm 坎 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "30": {
+   "ten": "Ly",
+   "ten_han": "離",
+   "y_chinh": "Sáng, bám vào: lửa cần nương vật để sáng; nuôi bò cái (đức thuận) thì tốt.",
+   "loi_khuyen": "Bám vào điều đúng, sáng suốt, nuôi sự mềm mỏng bên trong.",
+   "mat_toi": "Phụ thuộc sai chỗ, cháy nhanh tắt nhanh.",
+   "cau_tu_soi": "Bạn đang dựa vào điều gì — nó có bền không?",
+   "linh_vuc": {
+    "cong_viec": "Làm việc cần sự rõ ràng, truyền thông.",
+    "tinh_cam": "Gắn bó nhưng không lệ thuộc.",
+    "gia_dinh": "Giữ ấm gia đình.",
+    "tien_bac": "Minh bạch tài chính.",
+    "hoc_hanh": "Học để hiểu rõ."
+   },
+   "trich_dan": "Chu Dịch, quẻ 30 Ly 離 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "31": {
+   "ten": "Hàm",
+   "ten_han": "咸",
+   "y_chinh": "Cảm ứng: tình cảm nam nữ, lấy người con gái thì tốt; lấy lòng trống (hư tâm) để tiếp người.",
+   "loi_khuyen": "Mở lòng, đón nhận chân thành, đừng áp đặt.",
+   "mat_toi": "Rung động nhất thời, cảm xúc bề mặt.",
+   "cau_tu_soi": "Bạn đang thật sự lắng nghe, hay chỉ chờ tới lượt mình nói?",
+   "linh_vuc": {
+    "cong_viec": "Kết nối khách hàng bằng thấu hiểu.",
+    "tinh_cam": "Thời cảm mến; chân thành.",
+    "gia_dinh": "Thấu hiểu người thân.",
+    "tien_bac": "Đầu tư theo cảm xúc cần kiểm chứng.",
+    "hoc_hanh": "Học bằng cảm hứng."
+   },
+   "trich_dan": "Chu Dịch, quẻ 31 Hàm 咸 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "32": {
+   "ten": "Hằng",
+   "ten_han": "恆",
+   "y_chinh": "Bền lâu: hanh thông, không lỗi, lợi giữ chính; người quân tử đứng vững không đổi phương.",
+   "loi_khuyen": "Kiên định với điều đúng, duy trì thói quen tốt.",
+   "mat_toi": "Cứng nhắc, bền trong điều sai.",
+   "cau_tu_soi": "Thói quen nào bạn đang duy trì chỉ vì quen, không vì đúng?",
+   "linh_vuc": {
+    "cong_viec": "Gắn bó lâu dài, xây uy tín.",
+    "tinh_cam": "Hôn nhân bền nhờ cam kết.",
+    "gia_dinh": "Nếp nhà ổn định.",
+    "tien_bac": "Đầu tư dài hạn đều đặn.",
+    "hoc_hanh": "Học đều mỗi ngày."
+   },
+   "trich_dan": "Chu Dịch, quẻ 32 Hằng 恆 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "33": {
+   "ten": "Độn",
+   "ten_han": "遯",
+   "y_chinh": "Lui ẩn: tiểu nhân lớn dần, người quân tử biết rút lui đúng lúc; việc nhỏ lợi giữ chính.",
+   "loi_khuyen": "Lui có chủ đích để giữ sức và nguyên tắc, không phải bỏ chạy.",
+   "mat_toi": "Bám trụ trong thế bất lợi, hoặc rút lui vì sợ.",
+   "cau_tu_soi": "Bạn đang lui để bảo toàn, hay để né điều cần đối mặt?",
+   "linh_vuc": {
+    "cong_viec": "Rút khỏi dự án/môi trường độc hại có kế hoạch.",
+    "tinh_cam": "Lùi lại cho nhau khoảng thở.",
+    "gia_dinh": "Tránh va chạm trực diện.",
+    "tien_bac": "Rút vốn khỏi chỗ rủi ro.",
+    "hoc_hanh": "Tạm lùi để củng cố."
+   },
+   "trich_dan": "Chu Dịch, quẻ 33 Độn 遯 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "34": {
+   "ten": "Đại Tráng",
+   "ten_han": "大壯",
+   "y_chinh": "Mạnh lớn: dương đang thịnh; lợi giữ chính; quân tử không theo điều trái lễ.",
+   "loi_khuyen": "Dùng sức mạnh có kiềm chế, đúng lễ.",
+   "mat_toi": "Hung hăng, húc càn như dê húc rào.",
+   "cau_tu_soi": "Sức mạnh hiện có của bạn đang phục vụ điều đúng chứ?",
+   "linh_vuc": {
+    "cong_viec": "Đang có đà; tránh lấn át người khác.",
+    "tinh_cam": "Mạnh mẽ mà dịu dàng.",
+    "gia_dinh": "Đừng dùng quyền áp đặt.",
+    "tien_bac": "Đà tăng; không đòn bẩy quá mức.",
+    "hoc_hanh": "Học hăng say, giữ nhịp."
+   },
+   "trich_dan": "Chu Dịch, quẻ 34 Đại Tráng 大壯 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "35": {
+   "ten": "Tấn",
+   "ten_han": "晉",
+   "y_chinh": "Tiến lên như mặt trời mọc trên đất; được trọng dụng; tự làm sáng đức mình.",
+   "loi_khuyen": "Tiến lên bằng năng lực thật và đức sáng.",
+   "mat_toi": "Tiến bằng mọi giá, ganh đua.",
+   "cau_tu_soi": "Thăng tiến này có làm bạn tốt hơn hay chỉ cao hơn?",
+   "linh_vuc": {
+    "cong_viec": "Thăng chức, được ghi nhận.",
+    "tinh_cam": "Quan hệ tiến triển tích cực.",
+    "gia_dinh": "Gia đình thuận.",
+    "tien_bac": "Thu nhập tăng.",
+    "hoc_hanh": "Tiến bộ rõ."
+   },
+   "trich_dan": "Chu Dịch, quẻ 35 Tấn 晉 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "36": {
+   "ten": "Minh Di",
+   "ten_han": "明夷",
+   "y_chinh": "Ánh sáng bị thương: thời u ám; lợi giữ chính trong gian nan, giấu cái sáng mà vẫn sáng bên trong.",
+   "loi_khuyen": "Giữ nguyên tắc âm thầm, tự bảo vệ, chờ thời.",
+   "mat_toi": "Phô bày khi bị chèn ép, hoặc buông nguyên tắc.",
+   "cau_tu_soi": "Điều gì bên trong bạn cần được giữ sáng dù hoàn cảnh tối?",
+   "linh_vuc": {
+    "cong_viec": "Môi trường bất lợi; làm tốt, tránh đối đầu.",
+    "tinh_cam": "Tổn thương; chăm sóc mình trước.",
+    "gia_dinh": "Chịu đựng khó khăn chung.",
+    "tien_bac": "Thu hẹp, giữ vốn.",
+    "hoc_hanh": "Học âm thầm."
+   },
+   "trich_dan": "Chu Dịch, quẻ 36 Minh Di 明夷 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "37": {
+   "ten": "Gia Nhân",
+   "ten_han": "家人",
+   "y_chinh": "Người nhà: lợi cho nữ giữ chính; gia đạo có vai trò rõ, lời nói có thực chất, hành động có nếp.",
+   "loi_khuyen": "Củng cố nếp nhà, vai trò rõ, nói đi đôi làm.",
+   "mat_toi": "Gia trưởng hoặc buông lỏng.",
+   "cau_tu_soi": "Trong nhà bạn, lời hứa nào chưa đi đôi với việc làm?",
+   "linh_vuc": {
+    "cong_viec": "Văn hoá đội nhóm như gia đình.",
+    "tinh_cam": "Xây nếp sống chung.",
+    "gia_dinh": "Rất hợp việc gia đình.",
+    "tien_bac": "Quản lý chi tiêu gia đình.",
+    "hoc_hanh": "Học có nề nếp."
+   },
+   "trich_dan": "Chu Dịch, quẻ 37 Gia Nhân 家人 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "38": {
+   "ten": "Khuê",
+   "ten_han": "睽",
+   "y_chinh": "Chia lìa, trái nghịch: hai người cùng nhà mà chí khác; việc nhỏ tốt.",
+   "loi_khuyen": "Chấp nhận khác biệt, tìm điểm chung nhỏ, hợp tác từ việc nhỏ.",
+   "mat_toi": "Cố ép người khác giống mình, hoặc cắt đứt.",
+   "cau_tu_soi": "Điểm chung nhỏ nào vẫn tồn tại giữa bạn và người đang bất đồng?",
+   "linh_vuc": {
+    "cong_viec": "Bất đồng quan điểm; tìm việc nhỏ cùng làm.",
+    "tinh_cam": "Khác biệt; hiểu thay vì sửa.",
+    "gia_dinh": "Mâu thuẫn thế hệ.",
+    "tien_bac": "Góp vốn bất đồng; tách bạch.",
+    "hoc_hanh": "Học từ góc nhìn khác."
+   },
+   "trich_dan": "Chu Dịch, quẻ 38 Khuê 睽 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "39": {
+   "ten": "Kiển",
+   "ten_han": "蹇",
+   "y_chinh": "Khó khăn như chân què trước núi hiểm; lợi Tây Nam, không lợi Đông Bắc; lợi gặp đại nhân; quay lại tự xét.",
+   "loi_khuyen": "Dừng lại xét mình, tìm người giúp, đi đường vòng an toàn.",
+   "mat_toi": "Lao thẳng vào hiểm.",
+   "cau_tu_soi": "Có phải trở ngại này đang chỉ ra điều bạn cần sửa ở chính mình?",
+   "linh_vuc": {
+    "cong_viec": "Dự án bế tắc; xin tư vấn.",
+    "tinh_cam": "Quan hệ trắc trở; chậm lại.",
+    "gia_dinh": "Gia đình khó; cùng ngồi lại.",
+    "tien_bac": "Khó khăn tài chính; tìm hỗ trợ.",
+    "hoc_hanh": "Gặp phần khó; hỏi thầy."
+   },
+   "trich_dan": "Chu Dịch, quẻ 39 Kiển 蹇 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "40": {
+   "ten": "Giải",
+   "ten_han": "解",
+   "y_chinh": "Giải toả: nạn đã qua, lợi Tây Nam; không còn việc thì trở về, có việc thì làm sớm; tha lỗi, giảm tội.",
+   "loi_khuyen": "Giải quyết dứt điểm và nhanh, tha thứ, trở lại bình thường.",
+   "mat_toi": "Kéo dài dư âm, ôm oán.",
+   "cau_tu_soi": "Điều gì đã qua mà bạn vẫn còn ôm?",
+   "linh_vuc": {
+    "cong_viec": "Gỡ nút thắt; khôi phục vận hành.",
+    "tinh_cam": "Tha thứ, làm lành.",
+    "gia_dinh": "Hoà giải trong nhà.",
+    "tien_bac": "Trả dứt nợ nhỏ.",
+    "hoc_hanh": "Qua được phần khó."
+   },
+   "trich_dan": "Chu Dịch, quẻ 40 Giải 解 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "41": {
+   "ten": "Tổn",
+   "ten_han": "損",
+   "y_chinh": "Bớt: bớt dưới thêm trên; có lòng thành thì dù hai bát lễ đơn sơ cũng dâng được.",
+   "loi_khuyen": "Tiết chế, bớt cái thừa, cho đi có chủ đích.",
+   "mat_toi": "Hy sinh quá mức hoặc keo kiệt.",
+   "cau_tu_soi": "Bạn cần bớt điều gì để có chỗ cho điều quan trọng?",
+   "linh_vuc": {
+    "cong_viec": "Cắt giảm chi phí, việc thừa.",
+    "tinh_cam": "Bớt đòi hỏi.",
+    "gia_dinh": "Giảm mâu thuẫn bằng nhường nhịn.",
+    "tien_bac": "Thắt chặt, bớt tiêu.",
+    "hoc_hanh": "Bớt học tràn lan."
+   },
+   "trich_dan": "Chu Dịch, quẻ 41 Tổn 損 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "42": {
+   "ten": "Ích",
+   "ten_han": "益",
+   "y_chinh": "Thêm: bớt trên thêm dưới; lợi có chỗ đi, lợi vượt sông lớn; thấy điều thiện thì theo, có lỗi thì sửa.",
+   "loi_khuyen": "Nắm thời cơ tăng trưởng, giúp người khác cùng lên.",
+   "mat_toi": "Tham lợi quá, quên chia sẻ.",
+   "cau_tu_soi": "Điều tốt nào bạn thấy mà chưa làm theo?",
+   "linh_vuc": {
+    "cong_viec": "Mở rộng, được hỗ trợ.",
+    "tinh_cam": "Vun đắp cho nhau.",
+    "gia_dinh": "Giúp đỡ người thân.",
+    "tien_bac": "Thời thêm; đầu tư sinh lợi.",
+    "hoc_hanh": "Học tiến nhanh."
+   },
+   "trich_dan": "Chu Dịch, quẻ 42 Ích 益 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "43": {
+   "ten": "Quải",
+   "ten_han": "夬",
+   "y_chinh": "Quyết: loại bỏ tiểu nhân; công bố ở triều đình, thành thật báo nguy; không lợi dùng binh.",
+   "loi_khuyen": "Quyết đoán, minh bạch, không dùng bạo lực.",
+   "mat_toi": "Nóng vội, quyết mà thiếu chuẩn bị.",
+   "cau_tu_soi": "Quyết định nào bạn đã rõ nhưng còn trì hoãn công bố?",
+   "linh_vuc": {
+    "cong_viec": "Ra quyết định dứt khoát, công khai.",
+    "tinh_cam": "Nói rõ điều cần chấm dứt.",
+    "gia_dinh": "Đặt dứt khoát giới hạn.",
+    "tien_bac": "Cắt khoản lỗ.",
+    "hoc_hanh": "Bỏ thói quen xấu."
+   },
+   "trich_dan": "Chu Dịch, quẻ 43 Quải 夬 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "44": {
+   "ten": "Cấu",
+   "ten_han": "姤",
+   "y_chinh": "Gặp gỡ: một âm gặp năm dương; chớ cưới người con gái ấy (ảnh hưởng nhỏ mà lớn dần).",
+   "loi_khuyen": "Cảnh giác với ảnh hưởng nhỏ đang len vào; gặp mà giữ mình.",
+   "mat_toi": "Để cám dỗ nhỏ lớn dần.",
+   "cau_tu_soi": "Có ảnh hưởng nhỏ nào bạn đang để lọt vào mà biết là không nên?",
+   "linh_vuc": {
+    "cong_viec": "Cơ hội bất ngờ; kiểm tra kỹ.",
+    "tinh_cam": "Gặp gỡ bất ngờ; chậm lại trước khi cam kết.",
+    "gia_dinh": "Cảnh giác chuyện nhỏ thành lớn.",
+    "tien_bac": "Cơ hội hấp dẫn; thẩm định.",
+    "hoc_hanh": "Tránh xao nhãng mới."
+   },
+   "trich_dan": "Chu Dịch, quẻ 44 Cấu 姤 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "45": {
+   "ten": "Tụy",
+   "ten_han": "萃",
+   "y_chinh": "Tụ họp: vua đến tông miếu, lợi gặp đại nhân; dùng lễ lớn thì tốt; chuẩn bị binh khí phòng bất ngờ.",
+   "loi_khuyen": "Tập hợp người quanh mục tiêu chung, có người dẫn, phòng biến.",
+   "mat_toi": "Tụ đông mà không tổ chức.",
+   "cau_tu_soi": "Điều gì kết nối những người quanh bạn?",
+   "linh_vuc": {
+    "cong_viec": "Hội họp, huy động nguồn lực.",
+    "tinh_cam": "Ra mắt, gặp gỡ gia đình hai bên.",
+    "gia_dinh": "Họp mặt họ hàng.",
+    "tien_bac": "Gom vốn có kỷ luật.",
+    "hoc_hanh": "Học nhóm có mục tiêu."
+   },
+   "trich_dan": "Chu Dịch, quẻ 45 Tụy 萃 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "46": {
+   "ten": "Thăng",
+   "ten_han": "升",
+   "y_chinh": "Đi lên: như cây mọc từ đất, tích nhỏ thành lớn; gặp đại nhân, đừng lo; Nam chinh tốt.",
+   "loi_khuyen": "Tiến đều từng bậc, nhờ người có uy tín.",
+   "mat_toi": "Nóng vội nhảy bậc.",
+   "cau_tu_soi": "Bậc tiếp theo nhỏ nhất bạn có thể bước là gì?",
+   "linh_vuc": {
+    "cong_viec": "Thăng tiến từ từ.",
+    "tinh_cam": "Quan hệ lớn dần.",
+    "gia_dinh": "Gia đình phát triển.",
+    "tien_bac": "Tăng trưởng đều.",
+    "hoc_hanh": "Học lên dần."
+   },
+   "trich_dan": "Chu Dịch, quẻ 46 Thăng 升 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "47": {
+   "ten": "Khốn",
+   "ten_han": "困",
+   "y_chinh": "Khốn cùng: nước cạn trong đầm; nói không ai tin; người lớn giữ chính thì vẫn tốt.",
+   "loi_khuyen": "Giữ chí, bớt nói, làm cho thấy; bảo toàn năng lượng.",
+   "mat_toi": "Than vãn, cố thuyết phục.",
+   "cau_tu_soi": "Trong lúc khốn, điều gì bạn vẫn giữ được?",
+   "linh_vuc": {
+    "cong_viec": "Bế tắc tài nguyên; ưu tiên việc cốt lõi.",
+    "tinh_cam": "Hiểu lầm; hành động hơn lời.",
+    "gia_dinh": "Khó khăn chung; giữ đoàn kết.",
+    "tien_bac": "Cạn kiệt; tiết kiệm tối đa.",
+    "hoc_hanh": "Học trong hoàn cảnh khó."
+   },
+   "trich_dan": "Chu Dịch, quẻ 47 Khốn 困 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "48": {
+   "ten": "Tỉnh",
+   "ten_han": "井",
+   "y_chinh": "Cái giếng: làng đổi mà giếng không đổi; nguồn nuôi chung; dây gàu chưa tới mà vỡ gàu thì xấu.",
+   "loi_khuyen": "Chăm gốc nguồn lực chung, bảo trì, làm đến nơi.",
+   "mat_toi": "Bỏ dở khi gần xong; để nguồn bị ô nhiễm.",
+   "cau_tu_soi": "Nguồn nuôi dưỡng bạn lâu dài là gì, bạn có đang chăm nó?",
+   "linh_vuc": {
+    "cong_viec": "Hạ tầng, quy trình cốt lõi.",
+    "tinh_cam": "Giữ giá trị gốc của mối quan hệ.",
+    "gia_dinh": "Giữ truyền thống tốt.",
+    "tien_bac": "Nguồn thu ổn định.",
+    "hoc_hanh": "Nền tảng kiến thức."
+   },
+   "trich_dan": "Chu Dịch, quẻ 48 Tỉnh 井 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "49": {
+   "ten": "Cách",
+   "ten_han": "革",
+   "y_chinh": "Cải cách: đến ngày thì được tin; hanh thông, lợi giữ chính, hối tiếc mất đi.",
+   "loi_khuyen": "Đổi mới khi thời đã chín và có sự tin tưởng; chuẩn bị kỹ.",
+   "mat_toi": "Đổi vì đổi, vội vàng.",
+   "cau_tu_soi": "Thay đổi bạn muốn đã đủ chín và đủ người tin chưa?",
+   "linh_vuc": {
+    "cong_viec": "Cải tổ, đổi việc có chuẩn bị.",
+    "tinh_cam": "Thay đổi cách sống chung.",
+    "gia_dinh": "Đổi nếp cũ không hợp.",
+    "tien_bac": "Đổi chiến lược tài chính.",
+    "hoc_hanh": "Đổi phương pháp học."
+   },
+   "trich_dan": "Chu Dịch, quẻ 49 Cách 革 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "50": {
+   "ten": "Đỉnh",
+   "ten_han": "鼎",
+   "y_chinh": "Cái vạc: nấu nướng dâng hiền; cái mới được ổn định; rất tốt, hanh thông.",
+   "loi_khuyen": "Ổn định cái mới, nuôi dưỡng người tài, giữ vị trí đúng.",
+   "mat_toi": "Vạc gãy chân — đảm nhận quá sức.",
+   "cau_tu_soi": "Bạn đang nuôi dưỡng tài năng nào (của mình hay người khác)?",
+   "linh_vuc": {
+    "cong_viec": "Xây tổ chức, trọng dụng người tài.",
+    "tinh_cam": "Vun đắp giá trị chung.",
+    "gia_dinh": "Ổn định nếp nhà mới.",
+    "tien_bac": "Tài sản ổn định.",
+    "hoc_hanh": "Học từ thầy giỏi."
+   },
+   "trich_dan": "Chu Dịch, quẻ 50 Đỉnh 鼎 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "51": {
+   "ten": "Chấn",
+   "ten_han": "震",
+   "y_chinh": "Sấm động: sợ hãi rồi cười nói; sấm vang trăm dặm mà không đánh rơi thìa rượu tế.",
+   "loi_khuyen": "Giữ bình tĩnh trong biến động, tự xét và sửa mình.",
+   "mat_toi": "Hoảng loạn, hoặc chủ quan.",
+   "cau_tu_soi": "Cú sốc này đang nhắc bạn xem lại điều gì?",
+   "linh_vuc": {
+    "cong_viec": "Biến động bất ngờ; giữ bình tĩnh.",
+    "tinh_cam": "Sóng gió; cùng nhau vượt.",
+    "gia_dinh": "Chuyện bất ngờ trong nhà.",
+    "tien_bac": "Thị trường biến động; đừng hoảng.",
+    "hoc_hanh": "Kỳ thi bất ngờ; bình tĩnh."
+   },
+   "trich_dan": "Chu Dịch, quẻ 51 Chấn 震 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "52": {
+   "ten": "Cấn",
+   "ten_han": "艮",
+   "y_chinh": "Dừng: dừng ở lưng, không thấy thân mình; đi trong sân không thấy người; không lỗi.",
+   "loi_khuyen": "Dừng đúng lúc, tĩnh tâm, suy nghĩ không vượt vị trí.",
+   "mat_toi": "Dừng thành bế tắc.",
+   "cau_tu_soi": "Điều gì bạn cần dừng lại hôm nay?",
+   "linh_vuc": {
+    "cong_viec": "Tạm dừng, đánh giá.",
+    "tinh_cam": "Khoảng lặng cần thiết.",
+    "gia_dinh": "Bớt can thiệp.",
+    "tien_bac": "Ngừng chi tiêu mới.",
+    "hoc_hanh": "Nghỉ để tiếp thu."
+   },
+   "trich_dan": "Chu Dịch, quẻ 52 Cấn 艮 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "53": {
+   "ten": "Tiệm",
+   "ten_han": "漸",
+   "y_chinh": "Tiến dần như chim hồng bay từng chặng; con gái về nhà chồng thì tốt.",
+   "loi_khuyen": "Tiến theo trình tự, không đốt cháy giai đoạn.",
+   "mat_toi": "Nôn nóng.",
+   "cau_tu_soi": "Bạn đang bỏ qua bước nào trong trình tự?",
+   "linh_vuc": {
+    "cong_viec": "Thăng tiến theo lộ trình.",
+    "tinh_cam": "Tình cảm tiến chậm mà chắc.",
+    "gia_dinh": "Chuẩn bị cưới hỏi theo lễ.",
+    "tien_bac": "Tích luỹ dần.",
+    "hoc_hanh": "Học từng cấp."
+   },
+   "trich_dan": "Chu Dịch, quẻ 53 Tiệm 漸 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "54": {
+   "ten": "Quy Muội",
+   "ten_han": "歸妹",
+   "y_chinh": "Em gái về nhà chồng ở vị trí không chính; tiến thì xấu, không có gì lợi.",
+   "loi_khuyen": "Nhận rõ vị trí và giới hạn của mình, không tự đặt mình vào thế lép.",
+   "mat_toi": "Chấp nhận vai không chính vì vội.",
+   "cau_tu_soi": "Bạn có đang chấp nhận một vị trí không xứng vì sợ lỡ?",
+   "linh_vuc": {
+    "cong_viec": "Vị trí không rõ; làm rõ vai trò trước.",
+    "tinh_cam": "Quan hệ lệch vai; cần cân bằng.",
+    "gia_dinh": "Vị trí trong gia đình mới.",
+    "tien_bac": "Không vội cam kết.",
+    "hoc_hanh": "Chọn đúng cấp độ."
+   },
+   "trich_dan": "Chu Dịch, quẻ 54 Quy Muội 歸妹 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "55": {
+   "ten": "Phong",
+   "ten_han": "豐",
+   "y_chinh": "Thịnh lớn: vua đạt tới; đừng lo, nên như mặt trời giữa trưa — nhưng giữa trưa rồi sẽ xế.",
+   "loi_khuyen": "Tận hưởng và chia sẻ thời thịnh, chuẩn bị cho lúc suy.",
+   "mat_toi": "Tự mãn ở đỉnh.",
+   "cau_tu_soi": "Khi đang ở đỉnh, bạn chuẩn bị gì cho lúc xuống?",
+   "linh_vuc": {
+    "cong_viec": "Đỉnh thành công; lập kế hoạch dài.",
+    "tinh_cam": "Hạnh phúc trọn; giữ gìn.",
+    "gia_dinh": "Gia đình sung túc.",
+    "tien_bac": "Dồi dào; dự phòng.",
+    "hoc_hanh": "Đạt kết quả cao."
+   },
+   "trich_dan": "Chu Dịch, quẻ 55 Phong 豐 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "56": {
+   "ten": "Lữ",
+   "ten_han": "旅",
+   "y_chinh": "Lữ khách: hanh thông nhỏ; đi đường giữ chính thì tốt.",
+   "loi_khuyen": "Ở nơi lạ cẩn trọng, khiêm nhường, gọn nhẹ.",
+   "mat_toi": "Tự cao nơi đất khách, hoặc bơ vơ.",
+   "cau_tu_soi": "Ở nơi 'tạm' này, bạn cần giữ điều gì của mình?",
+   "linh_vuc": {
+    "cong_viec": "Công tác, làm xa, việc tạm.",
+    "tinh_cam": "Yêu xa, quan hệ tạm.",
+    "gia_dinh": "Xa nhà; giữ liên lạc.",
+    "tien_bac": "Chi tiêu gọn khi xa.",
+    "hoc_hanh": "Du học, học nơi mới."
+   },
+   "trich_dan": "Chu Dịch, quẻ 56 Lữ 旅 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "57": {
+   "ten": "Tốn",
+   "ten_han": "巽",
+   "y_chinh": "Gió: thuận nhập, hanh thông nhỏ; lợi gặp đại nhân; lặp lại mệnh lệnh để thấm.",
+   "loi_khuyen": "Tác động nhẹ, bền, lặp lại; thấu hiểu trước khi hành động.",
+   "mat_toi": "Do dự, ba phải.",
+   "cau_tu_soi": "Bạn có đang lặp lại thông điệp đủ kiên nhẫn chưa?",
+   "linh_vuc": {
+    "cong_viec": "Thuyết phục, đàm phán mềm.",
+    "tinh_cam": "Nhẹ nhàng thấm dần.",
+    "gia_dinh": "Góp ý nhẹ mà đều.",
+    "tien_bac": "Đầu tư đều đặn nhỏ.",
+    "hoc_hanh": "Học lặp lại."
+   },
+   "trich_dan": "Chu Dịch, quẻ 57 Tốn 巽 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "58": {
+   "ten": "Đoài",
+   "ten_han": "兌",
+   "y_chinh": "Vui, đầm: hanh thông, lợi giữ chính; bạn bè cùng giảng tập.",
+   "loi_khuyen": "Niềm vui chia sẻ, trao đổi, học cùng bạn.",
+   "mat_toi": "Vui bề mặt, nịnh bợ.",
+   "cau_tu_soi": "Niềm vui của bạn đến từ đâu — và có bền không?",
+   "linh_vuc": {
+    "cong_viec": "Giao tiếp, bán hàng, đội nhóm vui.",
+    "tinh_cam": "Niềm vui chung.",
+    "gia_dinh": "Không khí nhà vui.",
+    "tien_bac": "Tránh tiêu vì vui.",
+    "hoc_hanh": "Học cùng bạn."
+   },
+   "trich_dan": "Chu Dịch, quẻ 58 Đoài 兌 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "59": {
+   "ten": "Hoán",
+   "ten_han": "渙",
+   "y_chinh": "Tan tác: vua đến tông miếu; lợi vượt sông lớn — tập hợp lại bằng niềm tin chung.",
+   "loi_khuyen": "Làm tan sự cứng nhắc, gom người quanh giá trị chung.",
+   "mat_toi": "Để mọi thứ trôi tuột.",
+   "cau_tu_soi": "Điều gì có thể gom mọi người lại lúc này?",
+   "linh_vuc": {
+    "cong_viec": "Đội tan rã; gắn lại bằng mục tiêu.",
+    "tinh_cam": "Xa cách; tìm lại điểm chung.",
+    "gia_dinh": "Gia đình tản mát; họp mặt.",
+    "tien_bac": "Vốn phân tán; gom lại.",
+    "hoc_hanh": "Tập trung lại."
+   },
+   "trich_dan": "Chu Dịch, quẻ 59 Hoán 渙 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "60": {
+   "ten": "Tiết",
+   "ten_han": "節",
+   "y_chinh": "Tiết chế: hanh thông; tiết khổ (quá khắt khe) thì không giữ được lâu.",
+   "loi_khuyen": "Đặt giới hạn hợp lý, vừa phải.",
+   "mat_toi": "Quá khắt khe hoặc không giới hạn.",
+   "cau_tu_soi": "Giới hạn nào của bạn đang quá lỏng — hay quá chặt?",
+   "linh_vuc": {
+    "cong_viec": "Kỷ luật ngân sách, thời gian.",
+    "tinh_cam": "Giới hạn lành mạnh.",
+    "gia_dinh": "Quy tắc vừa phải.",
+    "tien_bac": "Tiết kiệm hợp lý.",
+    "hoc_hanh": "Lịch học vừa sức."
+   },
+   "trich_dan": "Chu Dịch, quẻ 60 Tiết 節 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "61": {
+   "ten": "Trung Phu",
+   "ten_han": "中孚",
+   "y_chinh": "Lòng thành bên trong: tín đến cả heo cá; lợi vượt sông lớn.",
+   "loi_khuyen": "Giữ chữ tín, lấy thành tâm cảm hoá.",
+   "mat_toi": "Tin mù quáng.",
+   "cau_tu_soi": "Lời hứa nào bạn cần giữ để lòng tin trọn vẹn?",
+   "linh_vuc": {
+    "cong_viec": "Uy tín là tài sản.",
+    "tinh_cam": "Tin nhau thật lòng.",
+    "gia_dinh": "Chân thành trong nhà.",
+    "tien_bac": "Làm ăn giữ chữ tín.",
+    "hoc_hanh": "Học với niềm tin."
+   },
+   "trich_dan": "Chu Dịch, quẻ 61 Trung Phu 中孚 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "62": {
+   "ten": "Tiểu Quá",
+   "ten_han": "小過",
+   "y_chinh": "Quá nhỏ: việc nhỏ được, việc lớn không; chim bay để lại tiếng, không nên lên cao mà nên xuống.",
+   "loi_khuyen": "Làm việc nhỏ chu đáo, khiêm tốn, không mạo hiểm lớn.",
+   "mat_toi": "Tham việc lớn quá sức.",
+   "cau_tu_soi": "Việc nhỏ nào bạn nên làm thật tốt thay vì mơ việc lớn?",
+   "linh_vuc": {
+    "cong_viec": "Hoàn thiện chi tiết.",
+    "tinh_cam": "Quan tâm việc nhỏ.",
+    "gia_dinh": "Chăm chuyện nhỏ trong nhà.",
+    "tien_bac": "Chỉ khoản nhỏ.",
+    "hoc_hanh": "Chi tiết nhỏ."
+   },
+   "trich_dan": "Chu Dịch, quẻ 62 Tiểu Quá 小過 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "63": {
+   "ten": "Ký Tế",
+   "ten_han": "既濟",
+   "y_chinh": "Đã xong: hanh thông nhỏ, lợi giữ chính; đầu tốt cuối loạn.",
+   "loi_khuyen": "Giữ gìn thành quả, phòng biến sau khi đã xong.",
+   "mat_toi": "Buông lơi sau thành công.",
+   "cau_tu_soi": "Điều gì có thể làm hỏng thành quả bạn vừa có?",
+   "linh_vuc": {
+    "cong_viec": "Hoàn thành dự án; duy trì.",
+    "tinh_cam": "Ổn định; đừng lơ là.",
+    "gia_dinh": "Việc lớn đã xong; giữ nếp.",
+    "tien_bac": "Chốt lời; phòng rủi ro.",
+    "hoc_hanh": "Đạt mục tiêu; ôn lại."
+   },
+   "trich_dan": "Chu Dịch, quẻ 63 Ký Tế 既濟 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  },
+  "64": {
+   "ten": "Vị Tế",
+   "ten_han": "未濟",
+   "y_chinh": "Chưa xong: con cáo nhỏ sắp qua sông thì ướt đuôi; không có gì lợi nếu vội.",
+   "loi_khuyen": "Thận trọng ở chặng cuối, việc còn tiếp; phân biệt rõ trước khi làm.",
+   "mat_toi": "Tưởng xong khi chưa xong.",
+   "cau_tu_soi": "Bước cuối nào bạn đang coi nhẹ?",
+   "linh_vuc": {
+    "cong_viec": "Dự án chưa xong; đừng chủ quan.",
+    "tinh_cam": "Quan hệ đang định hình.",
+    "gia_dinh": "Việc nhà còn dở.",
+    "tien_bac": "Thương vụ chưa chốt.",
+    "hoc_hanh": "Sắp thi; ôn kỹ."
+   },
+   "trich_dan": "Chu Dịch, quẻ 64 Vị Tế 未濟 (quái từ, Thoán, Đại Tượng)",
+   "source_id": "chu_dich",
+   "school_id": "nghia_ly"
+  }
+ },
+ "bat_quai": {
+  "Càn": {
+   "tuong": "Trời",
+   "ngu_hanh": "Kim",
+   "gia_dinh": "Cha",
+   "tinh": "Cương kiện, sáng tạo",
+   "phuong_hau_thien": "Tây Bắc"
+  },
+  "Khôn": {
+   "tuong": "Đất",
+   "ngu_hanh": "Thổ",
+   "gia_dinh": "Mẹ",
+   "tinh": "Nhu thuận, bao dung",
+   "phuong_hau_thien": "Tây Nam"
+  },
+  "Chấn": {
+   "tuong": "Sấm",
+   "ngu_hanh": "Mộc",
+   "gia_dinh": "Trưởng nam",
+   "tinh": "Động, khởi phát",
+   "phuong_hau_thien": "Đông"
+  },
+  "Tốn": {
+   "tuong": "Gió/Cây",
+   "ngu_hanh": "Mộc",
+   "gia_dinh": "Trưởng nữ",
+   "tinh": "Thuận nhập, thấm dần",
+   "phuong_hau_thien": "Đông Nam"
+  },
+  "Khảm": {
+   "tuong": "Nước",
+   "ngu_hanh": "Thủy",
+   "gia_dinh": "Trung nam",
+   "tinh": "Hiểm, sâu",
+   "phuong_hau_thien": "Bắc"
+  },
+  "Ly": {
+   "tuong": "Lửa",
+   "ngu_hanh": "Hỏa",
+   "gia_dinh": "Trung nữ",
+   "tinh": "Sáng, bám vào",
+   "phuong_hau_thien": "Nam"
+  },
+  "Cấn": {
+   "tuong": "Núi",
+   "ngu_hanh": "Thổ",
+   "gia_dinh": "Thiếu nam",
+   "tinh": "Dừng, tĩnh",
+   "phuong_hau_thien": "Đông Bắc"
+  },
+  "Đoài": {
+   "tuong": "Đầm",
+   "ngu_hanh": "Kim",
+   "gia_dinh": "Thiếu nữ",
+   "tinh": "Vui, nói",
+   "phuong_hau_thien": "Tây"
+  }
+ },
+ "the_dung": {
+  "dung_sinh_the": {
+   "ten": "Dụng sinh Thể",
+   "y_nghia": "Theo Mai Hoa, là thế thuận nhất: hoàn cảnh (dụng) nâng đỡ người hỏi (thể) — việc dễ thành, có người giúp.",
+   "luu_y": "Thuận không có nghĩa là không cần làm; hãy xem ai/điều gì đang nâng đỡ bạn.",
+   "source_id": "mai_hoa_dich_so",
+   "school_id": "mai_hoa"
+  },
+  "the_khac_dung": {
+   "ten": "Thể khắc Dụng",
+   "y_nghia": "Người hỏi chế ngự được hoàn cảnh — việc thành nhưng phải bỏ công.",
+   "luu_y": "Thắng thế nhưng tốn sức; tính trước chi phí.",
+   "source_id": "mai_hoa_dich_so",
+   "school_id": "mai_hoa"
+  },
+  "ty_hoa": {
+   "ten": "Thể Dụng tỷ hoà",
+   "y_nghia": "Cùng hành — hài hoà, việc thuận theo nhịp tự nhiên.",
+   "luu_y": "Thuận nhưng dễ trì trệ; cần chủ động.",
+   "source_id": "mai_hoa_dich_so",
+   "school_id": "mai_hoa"
+  },
+  "the_sinh_dung": {
+   "ten": "Thể sinh Dụng",
+   "y_nghia": "Người hỏi phải bỏ ra nhiều (tiết khí) — hao tổn, việc khó như ý.",
+   "luu_y": "Xem bạn đang cho đi quá mức ở đâu.",
+   "source_id": "mai_hoa_dich_so",
+   "school_id": "mai_hoa"
+  },
+  "dung_khac_the": {
+   "ten": "Dụng khắc Thể",
+   "y_nghia": "Hoàn cảnh áp chế người hỏi — thế bất lợi nhất theo Mai Hoa, cần thận trọng hoặc tạm dừng.",
+   "luu_y": "Bất lợi không phải định mệnh; hãy hỏi điều gì trong hoàn cảnh đang chống lại bạn và có tránh được không.",
+   "source_id": "mai_hoa_dich_so",
+   "school_id": "mai_hoa"
+  }
+ },
+ "dung_than": {
+  "Quan Quỷ": {
+   "viec": [
+    "công việc",
+    "thăng chức",
+    "công danh",
+    "kiện tụng",
+    "chồng (nữ hỏi)",
+    "bệnh tật (mặt gây hại)"
+   ],
+   "ghi_chu": "Theo Tăng San Bốc Dịch: quan chức, công danh, chồng lấy Quan Quỷ.",
+   "source_id": "tang_san_boc_dich",
+   "school_id": "luc_hao"
+  },
+  "Thê Tài": {
+   "viec": [
+    "tiền bạc",
+    "làm ăn",
+    "lương thưởng",
+    "vợ (nam hỏi)",
+    "hàng hoá"
+   ],
+   "ghi_chu": "Tài vật, vợ lấy Thê Tài.",
+   "source_id": "tang_san_boc_dich",
+   "school_id": "luc_hao"
+  },
+  "Phụ Mẫu": {
+   "viec": [
+    "cha mẹ",
+    "giấy tờ",
+    "hợp đồng",
+    "nhà cửa",
+    "thi cử (văn chương)",
+    "tin tức"
+   ],
+   "ghi_chu": "Văn thư, nhà cửa, bề trên lấy Phụ Mẫu.",
+   "source_id": "tang_san_boc_dich",
+   "school_id": "luc_hao"
+  },
+  "Tử Tôn": {
+   "viec": [
+    "con cái",
+    "học trò",
+    "thuốc men",
+    "bình an",
+    "giải nạn"
+   ],
+   "ghi_chu": "Con cháu, phúc thần, thuốc lấy Tử Tôn.",
+   "source_id": "tang_san_boc_dich",
+   "school_id": "luc_hao"
+  },
+  "Huynh Đệ": {
+   "viec": [
+    "anh chị em",
+    "bạn bè",
+    "đối thủ",
+    "người cạnh tranh"
+   ],
+   "ghi_chu": "Ngang hàng, cạnh tranh lấy Huynh Đệ.",
+   "source_id": "tang_san_boc_dich",
+   "school_id": "luc_hao"
+  }
+ },
+ "giai_thich": {
+  "hao_dong": {
+   "tieu_de": "Hào động là gì?",
+   "noi_dung": "Hào có giá trị 6 (âm già) hoặc 9 (dương già) — đang chuyển sang mặt đối lập. Hào động tạo ra quẻ biến và là điểm nhấn của lần xem.",
+   "tu_khoa": [
+    "hao dong la gi"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "que_bien": {
+   "tieu_de": "Quẻ biến",
+   "noi_dung": "Quẻ có được sau khi các hào động đổi âm dương. Quẻ bản là hiện tại, quẻ biến là xu hướng chuyển tới.",
+   "tu_khoa": [
+    "que bien la gi",
+    "que bien doc"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "que_ho": {
+   "tieu_de": "Quẻ hỗ",
+   "noi_dung": "Lấy hào 2–3–4 làm hạ quái và 3–4–5 làm thượng quái — cho thấy diễn biến bên trong của sự việc.",
+   "tu_khoa": [
+    "que ho la gi"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "luc_hao_mai_hoa": {
+   "tieu_de": "Lục Hào khác Mai Hoa",
+   "noi_dung": "Lục Hào (Kinh Phòng, Tăng San Bốc Dịch) gán địa chi, lục thân cho từng hào, xét dụng thần và vượng suy để đoán thành bại, thời điểm. Mai Hoa (Thiệu Ung) khởi quẻ theo thời gian/tượng và xét thể–dụng sinh khắc, đọc nhanh việc trước mắt.",
+   "tu_khoa": [
+    "luc hao khac mai hoa"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "dung_than": {
+   "tieu_de": "Dụng thần là gì?",
+   "noi_dung": "Trong Lục Hào, dụng thần là hào đại diện cho điều được hỏi (tiền: Thê Tài; công danh: Quan Quỷ; giấy tờ: Phụ Mẫu; con cái: Tử Tôn; anh em bạn bè: Huynh Đệ). Phải chốt TRƯỚC khi gieo.",
+   "tu_khoa": [
+    "dung than la gi"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "the_ung": {
+   "tieu_de": "Thế và Ứng",
+   "noi_dung": "Hào Thế đại diện người hỏi, hào Ứng đại diện đối phương/sự việc. Vị trí thế ứng do quẻ thuộc cung nào quyết định.",
+   "tu_khoa": [
+    "the va ung",
+    "the ung la gi"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "khong_gieo_lai": {
+   "tieu_de": "Vì sao không gieo lại cùng câu hỏi?",
+   "noi_dung": "Mông quái từ: hỏi lần đầu thì đáp, hỏi đi hỏi lại là nhờn. Gieo lại đến khi ra quẻ vừa ý là tự chọn đáp án — lần xem mất giá trị phản tư.",
+   "tu_khoa": [
+    "gieo lai",
+    "khong duoc gieo lai"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "dong_xu_co_thi": {
+   "tieu_de": "Đồng xu và cỏ thi",
+   "noi_dung": "Cỏ thi (thệ pháp) cho xác suất hào già khác đồng xu: âm già 1/16, dương già 3/16 (thệ) so với 1/8 mỗi loại (tiền). Hệ thống dùng ngẫu nhiên mật mã học cho cả hai.",
+   "tu_khoa": [
+    "dong xu va co thi",
+    "co thi dong xu"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "boi_hay_triet": {
+   "tieu_de": "Kinh Dịch có phải để bói?",
+   "noi_dung": "Chu Dịch cổ kinh vốn là sổ tay bói thời Tây Chu; Thập Dực đọc lại theo hướng triết lý. Ở đây quẻ dùng như một tín hiệu để soi lại quyết định, không phải lời tiên tri.",
+   "tu_khoa": [
+    "co phai de boi",
+    "kinh dich co phai"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "thap_duc": {
+   "tieu_de": "Thập Dực",
+   "noi_dung": "Mười thiên truyện chú giải (Thoán thượng/hạ, Tượng thượng/hạ, Hệ Từ thượng/hạ, Văn Ngôn, Thuyết Quái, Tự Quái, Tạp Quái), hình thành Chiến Quốc – Hán, đọc Chu Dịch theo hướng luân lý.",
+   "tu_khoa": [
+    "thap duc"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "tuan_khong": {
+   "tieu_de": "Tuần không, nguyệt phá",
+   "noi_dung": "Trong Lục Hào: hào gặp địa chi 'không vong' của tuần ngày gieo là tuần không; hào bị địa chi tháng xung là nguyệt phá — đều là dấu hiệu yếu. (Hệ thống sẽ tính ở giai đoạn có tiết khí.)",
+   "tu_khoa": [
+    "tuan khong",
+    "nguyet pha"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "hoi_que": {
+   "tieu_de": "Hỏi quẻ thế nào cho đúng?",
+   "noi_dung": "Một việc một câu, cụ thể, trong khung thời gian rõ; chốt trước điều gì sẽ chứng tỏ lời đoán sai; không hỏi cùng một việc nhiều lần.",
+   "tu_khoa": [
+    "hoi que the nao",
+    "nen hoi que"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  },
+  "sau_hao_dong": {
+   "tieu_de": "Sáu hào cùng động",
+   "noi_dung": "Theo Chu Hy (Dịch Học Khải Mông): Càn/Khôn đọc lời 'dụng cửu/dụng lục'; quẻ khác đọc quái từ của quẻ biến.",
+   "tu_khoa": [
+    "6 hao dong",
+    "sau hao dong"
+   ],
+   "source_id": "chu_dich",
+   "school_id": "tong_hop"
+  }
+ },
+ "mau": {
+  "can_que": "Để trả lời bằng Kinh Dịch cần một quẻ. Bạn bấm 'Gieo quẻ' (máy gieo ngẫu nhiên), nhập 6 hào tự gieo, hoặc chọn 'Mai Hoa theo giờ hiện tại'. Hệ thống không tự chọn quẻ theo câu hỏi.",
+  "gieo_lai": "Câu hỏi này có vẻ đã được gieo gần đây. Theo lời quẻ Mông, hỏi lại cùng việc làm lần xem mất giá trị — nên suy ngẫm quẻ trước.",
+  "an_toan": "Mình rất tiếc vì bạn đang phải trải qua điều này. Lúc này điều quan trọng nhất là bạn an toàn — không quẻ, lá số hay hướng nhà nào quyết định được giá trị đời bạn. Nếu bạn đang nghĩ đến việc làm hại bản thân hoặc đang gặp nguy hiểm, hãy gọi ngay 115 (cấp cứu) hoặc 113 (công an); nếu liên quan đến trẻ em, gọi 111. Hãy nói chuyện với một người bạn tin tưởng ngay hôm nay — người thân, bạn bè, hoặc chuyên gia tâm lý.",
+  "tu_choi": "Câu hỏi này nằm ngoài những gì cổ học có thể trả lời có trách nhiệm (con số may rủi, ngày giờ sống chết, chẩn đoán bệnh, đánh giá người để tuyển dụng, hay tác động lên người khác), nên hệ thống không luận. Nếu bạn muốn, hãy hỏi về cách chính bạn nên ứng xử với tình huống này."
+ }
+}
