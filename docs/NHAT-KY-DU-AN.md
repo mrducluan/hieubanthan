@@ -2,7 +2,7 @@
 
 > Bản ghi người-đọc-được của toàn bộ quá trình xây dựng, để khôi phục ngữ cảnh
 > sau khi cài lại máy — hoặc để một AI/người khác đọc là hiểu ngay đang ở đâu.
-> Cập nhật lần cuối: 2026-09-30.
+> Cập nhật lần cuối: 2026-09-30 (thần số v2).
 
 ---
 
@@ -156,6 +156,13 @@ chạy thật tại máy (trình duyệt → Next.js → engine → tính toán)
    hợp. Lục Hào thiếu dụng thần → 422. Chưa có luận giải/KB lời quẻ. Phát hiện: ví dụ nhật
    ký ở SKILL.md mục 9 (quẻ 26 động [3,6] → 41) lệch; đúng là → 19, ra 41 khi chỉ động hào 3.
    Kế hoạch tổng: `docs/KE-HOACH-E2E.md`.
+10. ✅ ~~CI + E2E~~ — XONG 2026-09-30. `ci.yml` (engine pytest, web typecheck/build) +
+   `e2e.yml` (Playwright, engine + web thật, không secret).
+11. ✅ ~~Thần số v2~~ — XONG phần kỹ thuật 2026-09-30. Kho 2.023 câu hỏi có nhãn; Q&A trả lời
+   có căn cứ 90,2% không cần LLM (v1: 0%). Biểu đồ ngày sinh + mũi tên + chỉ số phụ trên web.
+   Chủ dự án chốt: mở câu hỏi người khác/hợp đôi, hiện bản nháp AI, nhật ký lưu câu trả lời
+   (không user_id). Báo cáo: `docs/DANH-GIA-THANSO.md`. **Việc của chủ dự án:** chạy migration
+   0003/0004 + `seed_thanso_v2.sql`, bật `NHAT_KY_HOI=1` trên Render.
 5. **SPEC-005 wiring** — an sao tử vi đầy đủ qua iztro (Node subprocess),
    endpoint `/v1/tuvi/an-sao`, test đối chiếu `ziwei_golden.json`. Rồi lặp lại
    pipeline KB+luận giải cho tử vi (kho lớn).

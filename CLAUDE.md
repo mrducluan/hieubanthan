@@ -36,6 +36,7 @@ engine/          Tầng 1 CALC — Python thuần + FastAPI, không LLM, không 
   tests/           Viết TRƯỚC hàm, theo quy tắc code
 web/             Next.js 14 App Router, TS strict — chỉ gọi engine, không tự tính
 supabase/        Migration, mỗi file .sql có file .down.sql đi kèm
+.claude/skills/  thanso-kb (chuẩn nội dung KB), thanso-tu-cai-thien (vòng đo → sửa → đo lại)
 ```
 
 ## Ranh giới giữa các tầng

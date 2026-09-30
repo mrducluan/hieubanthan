@@ -66,7 +66,7 @@ TU_CHOI = {
     "tuyen_dung": [r"tuyen ung vien", r"ung vien", r"sa thai nhan vien", r"nhan vien so chu dao",
                    r"nen tuyen", r"sa thai nhan vien nao"],
     "suc_khoe_the_chat": [r"benh gi", r"mac benh", r"ung thu", r"dau da day", r"vo sinh",
-                          r"sinh con duoc khong", r"co nen mo", r"song tho", r"an gi cho hop",
+                          r"sinh con duoc khong", r"co nen mo vao", r"phau thuat", r"song tho", r"an gi cho hop",
                           r"suc khoe cua toi the nao", r"khoi benh"],
     "du_doan_cu_the": [r"nam nao toi chet", r"bao gio toi chet", r"khi nao toi chet", r"tai nan",
                        r"thang kien", r"cho toi biet chac", r"chac chan", r"ngay cu the",

@@ -42,7 +42,7 @@ Một người dùng thật, trên domain thật, làm được trọn chuỗi:
 
 Ký hiệu: 🟢 làm song song được ngay · 🟡 cần anh quyết một điểm trước · 🔴 cần việc ngoài đời thực (pháp lý, tiền, người viết).
 
-### WS-1 🟢 CI: GitHub Actions (nền cho mọi luồng khác)
+### WS-1 ✅ CI: GitHub Actions — XONG 2026-09-30 (PR #1: `ci.yml` job engine + web)
 - `pytest` engine + `typecheck` + `build` web trên mỗi push/PR.
 - Chạy test drift Tuần/Triệt (`test_tuan_triet_drift.py`) và golden.
 - Không thêm dependency nào. **Nên làm đầu tiên** để các luồng song song không làm vỡ nhau.
@@ -90,6 +90,12 @@ Mục tiêu từ nhật ký: 50.000–150.000 từ, hiện ~10.700. Chia theo ng
 - `web/e2e/tuvi-api.spec.ts`: `POST /api/tuvi/chart` (200 + đúng âm lịch/can chi/Tuần Triệt; 422 khi sai định dạng).
 - Chạy: `cd web && npm run e2e`. CI: job riêng `.github/workflows/e2e.yml`.
 - Còn lại khi có UI: thêm bước lá số (WS-2) và quẻ (UI Kinh Dịch) vào luồng.
+
+### WS-10 ✅ Thần số v2 — trả lời "hàng nghìn câu hỏi" — XONG phần kỹ thuật 2026-09-30
+- Kho 2.023 câu hỏi có nhãn → đo v1: 0% câu trả lời có căn cứ. v2: **90,2%** (không cần LLM), 0% không căn cứ, khủng hoảng 100%.
+- CALC chỉ số mở rộng, KB v2 (~17.000 chữ, bản nháp AI), RULES định tuyến câu hỏi, NARRATIVE template + kiểm tra LLM, nhật ký ẩn danh, skill `thanso-kb` + `thanso-tu-cai-thien`.
+- Chi tiết + giới hạn: `docs/DANH-GIA-THANSO.md`; thiết kế: `docs/KIEN-TRUC-THANSO-V2.md`.
+- Còn lại (việc của anh): chạy migration 0003/0004 + seed, bật `NHAT_KY_HOI=1`, thuê người duyệt KB v2.
 
 ### WS-6 🟡 Tầng RULES cho tử vi
 - Ghép luận theo priority **đại hạn > lưu niên > tiểu hạn**, config Nguyễn Phát Lộc — sau khi WS-2 xong và WS-4 có KB tử vi.

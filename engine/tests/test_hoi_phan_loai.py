@@ -41,7 +41,7 @@ def test_tu_choi_nhe_recall(ket_qua):
 def test_tu_choi_khong_bat_nham(ket_qua):
     nham = [r["cau_hoi"] for r, p in ket_qua
             if r["xu_ly"] not in ("tu_choi_nhe", "an_toan") and p["xu_ly"] == "tu_choi_nhe"]
-    assert len(nham) <= 10, nham
+    assert len(nham) <= 2, nham
 
 
 def test_linh_vuc_do_chinh_xac(ket_qua):
