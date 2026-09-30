@@ -15,6 +15,7 @@ current_risks:
   - "Lưu ngày sinh trong tài khoản — NĐ 13/2023, cần chính sách riêng tư trước khi mở công khai"
   - "Credit (Sao) làm trước Gate 1 theo quyết định chủ dự án — chỉ điểm nội bộ, chưa thu tiền; mở thanh toán cần luật sư (docs/DE-XUAT-KINH-TE-CONG-DONG.md)"
   - "SEO: index cả nháp AI (quyết định chủ dự án) — rủi ro chính sách nội dung AI hàng loạt của Google; trang nháp luôn gắn nhãn"
+  - "Thử nghiệm nội bộ 2 tháng (chủ dự án chốt) trước khi mở công khai / bán Sao"
   - "Staging đang bật Basic Auth → máy tìm kiếm/bot AI chưa vào được cho tới khi mở công khai"
 completed_work:
   - "Engine thần số deterministic + golden + Q&A v2 + vòng tự cải thiện (PR #1–#7)"
@@ -26,6 +27,7 @@ completed_work:
   - "SEO-B: 90 trang kiến thức server-render (12 số, 64 quẻ, 14 sao) + JSON-LD, sitemap, robots mở bot AI, llms.txt/llms-full.txt"
   - "CR-C: sổ cái Sao + mã mời + thưởng hai phía một tầng (migration 0008, hàm SECURITY DEFINER)"
 active_work:
+  - "Hạ tầng GĐ1: chủ dự án tạo engine Render Singapore/Starter, đổi ENGINE_URL, bật Sentry + báo sập (docs/TRIEN-KHAI.md)"
   - "Chờ chủ dự án: review PR, duyệt + chạy 0006 → 0007 → 0008, cấu hình env, bỏ Basic Auth khi mở công khai"
 blocked_work:
   - "Tài khoản chạy thật cần: bật Supabase Auth (Email, Google OAuth, Phone/SMS provider) + env + chạy 0006"

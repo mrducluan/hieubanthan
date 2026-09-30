@@ -5,12 +5,17 @@
 # khoá bí mật trong git). Nhập CÙNG một chuỗi với biến ENGINE_API_KEY bên Vercel.
 services:
   - type: web
-    name: hieubanthan-engine
+    name: hieubanthan-engine-sg   # dịch vụ mới ở Singapore (dịch vụ cũ Oregon xoá sau khi chuyển)
     runtime: docker
     dockerfilePath: ./engine/Dockerfile
     dockerContext: ./engine
-    plan: free                # đủ cho staging; free spin-down sau 15' không dùng
+    # Hạ tầng GĐ1 (docs/KIEN-TRUC-VAN-HANH.md): Singapore — cạnh Vercel sin1 + Supabase SG; gói Starter không ngủ.
+    # Vùng KHÔNG đổi được trên dịch vụ đã tạo → tạo dịch vụ mới theo docs/TRIEN-KHAI.md rồi trỏ ENGINE_URL sang.
+    region: singapore
+    plan: starter
     healthCheckPath: /health
     envVars:
       - key: ENGINE_API_KEY
         sync: false           # nhập tay lúc tạo, không commit vào git
+      - key: SENTRY_DSN
+        sync: false           # tuỳ chọn — để trống = tắt giám sát lỗi

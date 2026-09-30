@@ -1,6 +1,7 @@
 // POST /api/kinhdich/hoi — proxy hỏi đáp Kinh Dịch tới engine (giữ ENGINE key server-side).
 // Web không tự gieo, không tự chọn quẻ: quẻ do engine gieo, Mai Hoa theo giờ, hoặc gieo tay.
 import { NextResponse } from "next/server";
+import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
 import { loiEngine } from "@/lib/proxy";
 
@@ -35,7 +36,8 @@ export async function POST(req: Request): Promise<NextResponse> {
       return NextResponse.json({ error: l.error }, { status: l.status });
     }
     return NextResponse.json(body);
-  } catch {
+  } catch (e) {
+    baoLoi(e, { noi: "api", duong: new URL(req.url).pathname });
     return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });
   }
 }
