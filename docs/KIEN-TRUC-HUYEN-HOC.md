@@ -89,7 +89,7 @@ Chế độ luận (quyết định 2026-09-30, "cả hai/cả ba"):
 | HH-2 | **Tử vi** Q&A (KB sao × cung, tứ hoá, lưu niên, 2 chế độ) | ✅ kho 687/687; holdout viết sau router 20/24 trước sửa → 24/24 |
 | HH-3 | **Bát tự** (tiết khí, tứ trụ, thập thần, đại vận — golden oracle), Lục Hào vượng suy | ✅ golden 42/42 + 667 tiết khí; kho 254/254; holdout 16/16 |
 | HH-4 | **Phong thuỷ** (mệnh quái, bát trạch, cửa–chủ–bếp) | ✅ bảng 8×8 tay 100%; kho 360/360; holdout 10/12 → 12/12 |
-| HH-5 | Skill `huyenhoc-kb` + vòng tự cải thiện đa module, đối chiếu ctext khi mở mạng | vòng chạy được, báo cáo |
+| HH-5 | Skill `huyenhoc-kb` + vòng tự cải thiện đa module, đối chiếu ctext khi mở mạng | ✅ vòng chạy được, cổng chặn lùi; ctext: cấm cào → danh sách đối chiếu tay |
 
 ## 5. Ranh giới giữ nguyên ở mọi chế độ
 Khủng hoảng → hỗ trợ (115/113/111) · không dự đoán ngày chết, không chẩn đoán bệnh, không xổ số,
@@ -147,3 +147,32 @@ không dùng để tuyển/sa thải · không phán "khắc" người thứ ba 
 - API `/v1/phongthuy/menh-quai`, `/v1/phongthuy/hoi` · web `/phong-thuy` · E2E 2 ca.
 - Kho câu hỏi: 1 câu ("Vợ chồng tôi sinh 1990 và 1992…", 3 biến thể) đổi nhãn → `can_them_du_lieu`
   (không rõ năm nào của ai, thiếu giới tính).
+
+### HH-5 — Skill KB + vòng tự cải thiện đa module (2026-09-30)
+- Skill `.claude/skills/huyenhoc-kb` (chuẩn nội dung 4 file KB, luật cấm, hai trường phái, dân gian,
+  bản quyền, duyệt nháp) và `.claude/skills/huyenhoc-tu-cai-thien` (hợp đồng + các bước + mốc).
+- `scripts/vong_cai_thien_huyenhoc.py`: `do` (4 module, ghi `lich_su_do_huyenhoc.jsonl`, exit 1 nếu lùi),
+  `bao-cao`, `kiem-kb` (đã bắt 2 cụm cấm trong KB Kinh Dịch HH-1 → sửa lời), `doi-chieu`
+  (→ `docs/DOI-CHIEU-HUYEN-HOC.md`, danh sách cho người duyệt).
+- Cổng `tests/test_huyenhoc_kho.py`: sàn 97%/module, khủng hoảng + từ chối 100%, chặn nhầm 0, KB sạch,
+  template không vi phạm bộ kiểm tra đầu ra (≈ 2,5 giây).
+- Nhật ký: bảng mới `huyenhoc_hoi_nhat_ky` (migration **0005 + down, chờ chủ dự án duyệt/chạy**); engine
+  lọc năm/giờ/ngày/SĐT/email/họ tên và **không gửi câu trả lời khi có dữ liệu sinh** (lá số, tứ trụ,
+  mệnh quái suy ngược được ngày giờ sinh). Bật chung cờ `NHAT_KY_HOI=1`.
+- ctext.org: mạng đã thông nhưng trang trả Cloudflare Turnstile và điều khoản **cấm scraping** (có thể
+  cố ý trả dữ liệu hỏng cho máy cào) → không cào. Đường đúng: gói đăng ký + API chính thức (api.ctext.org
+  còn bị mạng cloud chặn) hoặc người duyệt tra tay theo `docs/DOI-CHIEU-HUYEN-HOC.md`.
+
+## 7. Tổng kết HH-0 → HH-5
+
+| Module | CALC (kiểm chứng) | KB (nháp AI) | Kho câu hỏi | Holdout lần đầu |
+|---|---|---|---|---|
+| Tử vi | iztro 2.6.0 + vận hạn (golden + 2 phép thử độc lập) | 12 cung · 14 sao · 168 sao-cung · 48 tứ hoá-cung | 687/687 | 20/24 |
+| Kinh Dịch | Mai Hoa, thể–dụng, Lục Hào + vượng suy | 64 quẻ × 5 lĩnh vực | 730/730 | — |
+| Bát tự | tiết khí VSOP87 (≤ 0,63 phút), golden 42/42 | 10 nhật chủ × 4 mùa · 10 thập thần · 10 cách | 254/254 | 16/16 |
+| Phong thuỷ | Bát trạch (bảng tay 8×8), sao năm | 8 du niên · 28 bố trí · âm trạch | 360/360 | 10/12 |
+
+Chưa làm (việc tiếp theo, theo thứ tự giá trị): duyệt/đối chiếu nguyên văn 4 KB (người có nghề) ·
+hợp hôn hai lá số (tử vi) / hai tứ trụ (bát tự) khi có đồng ý · Huyền không phi tinh theo vận ·
+Lục Hào ám động / nhật phá / ứng kỳ · hào từ 384 hào (cần nguồn công cộng, không GPL) · bật LLM diễn đạt
+cho 4 module trên web (hiện chỉ template).

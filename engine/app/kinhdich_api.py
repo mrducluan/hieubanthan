@@ -15,11 +15,12 @@ from __future__ import annotations
 import datetime as _dt
 from typing import Literal
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import kinhdich
 from app.hoidap import kinhdich as hoidap_kd
+from app import nhat_ky
 from app.config import ENGINE_VERSION
 
 router = APIRouter(prefix="/v1/kinhdich", tags=["kinhdich"])
@@ -95,7 +96,7 @@ class HoiKDInput(BaseModel):
 
 
 @router.post("/hoi")
-def api_hoi(inp: HoiKDInput) -> dict:
+def api_hoi(inp: HoiKDInput, background: BackgroundTasks) -> dict:
     """HH-1: phân loại → chọn phái (+ dụng thần) → ra quẻ → gói bằng chứng KB → trả lời."""
     if inp.cach_ra_que == "gieo_tay" and inp.gia_tri_hao is None:
         raise HTTPException(422, detail="Gieo tay: cần 6 giá trị hào (6/7/8/9, hào 1 → 6).")
@@ -105,4 +106,5 @@ def api_hoi(inp: HoiKDInput) -> dict:
                                phuong_phap=inp.phuong_phap, cach_ra_que=inp.cach_ra_que)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
+    background.add_task(nhat_ky.ghi_huyenhoc, "kinhdich", inp.cau_hoi, kq, False)
     return {"engine_version": ENGINE_VERSION, **kq}

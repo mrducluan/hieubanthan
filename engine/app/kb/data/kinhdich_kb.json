@@ -327,7 +327,7 @@
    "y_chinh": "Việc đã hư hỏng cần sửa (sửa việc của cha mẹ để lại); cân nhắc ba ngày trước, ba ngày sau.",
    "loi_khuyen": "Nhận diện gốc hư hỏng, sửa có kế hoạch, không đổ lỗi.",
    "mat_toi": "Che đậy vấn đề cũ hoặc sửa vội.",
-   "cau_tu_soi": "Điều gì bạn đang né sửa vì nó 'vốn dĩ đã vậy'?",
+   "cau_tu_soi": "Điều gì bạn đang né sửa vì cho rằng 'xưa nay vẫn thế'?",
    "linh_vuc": {
     "cong_viec": "Tái cấu trúc, xử lý tồn đọng.",
     "tinh_cam": "Hàn gắn vết thương cũ.",
@@ -1258,7 +1258,7 @@
   "dung_khac_the": {
    "ten": "Dụng khắc Thể",
    "y_nghia": "Hoàn cảnh áp chế người hỏi — thế bất lợi nhất theo Mai Hoa, cần thận trọng hoặc tạm dừng.",
-   "luu_y": "Bất lợi không phải định mệnh; hãy hỏi điều gì trong hoàn cảnh đang chống lại bạn và có tránh được không.",
+   "luu_y": "Bất lợi không phải điều đã an bài; hãy hỏi điều gì trong hoàn cảnh đang chống lại bạn và có tránh được không.",
    "source_id": "mai_hoa_dich_so",
    "school_id": "mai_hoa"
   }

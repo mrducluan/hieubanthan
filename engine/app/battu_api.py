@@ -8,10 +8,11 @@ from __future__ import annotations
 
 import datetime as _dt
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import battu
+from app import nhat_ky
 from app.config import ENGINE_VERSION
 from app.hoidap import battu as hoidap_bt
 from app.tuvi_api import TuanTrietInput, _DauVao
@@ -43,7 +44,7 @@ class HoiBTInput(BaseModel):
 
 
 @router.post("/hoi")
-def api_hoi(inp: HoiBTInput) -> dict:
+def api_hoi(inp: HoiBTInput, background: BackgroundTasks) -> dict:
     sinh, flags = (None, [])
     if inp.la_so is not None:
         sinh, flags = _sinh(inp.la_so)
@@ -52,4 +53,5 @@ def api_hoi(inp: HoiBTInput) -> dict:
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
+    background.add_task(nhat_ky.ghi_huyenhoc, "battu", inp.cau_hoi, kq, inp.la_so is not None)
     return {"engine_version": ENGINE_VERSION, **kq}

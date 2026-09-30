@@ -13,12 +13,13 @@ from __future__ import annotations
 import datetime as _dt
 from typing import Literal
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
 from app.calc import lunar, timebase, tuan_triet_vendor, tuvi_an_sao
 from app.hoidap import tuvi as hoidap_tv
+from app import nhat_ky
 from app.config import ENGINE_VERSION, HourConfidence, Region
 
 router = APIRouter(prefix="/v1/tuvi", tags=["tuvi"])
@@ -228,7 +229,7 @@ class HoiTVInput(BaseModel):
 
 
 @router.post("/hoi")
-def api_hoi(inp: HoiTVInput) -> dict:
+def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
     """Phân loại → (lá số + vận hạn qua iztro) → gói bằng chứng KB → trả lời template."""
     sinh, flags = None, []
     if inp.la_so is not None:
@@ -248,4 +249,5 @@ def api_hoi(inp: HoiTVInput) -> dict:
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
+    background.add_task(nhat_ky.ghi_huyenhoc, "tuvi", inp.cau_hoi, kq, inp.la_so is not None)
     return {"engine_version": ENGINE_VERSION, **kq}
