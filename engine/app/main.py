@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import datetime as _dt
 import os
+from typing import Literal
 
 from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
@@ -20,6 +21,7 @@ from app.calc import thanso, timebase
 from app.kb import store as kb_store
 from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import thanso as luangiai_thanso
+from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
 from app import nhat_ky
 from app.narrative import hoi_van, llm as narrative_llm
 from app.battu_api import router as battu_router
@@ -182,6 +184,44 @@ def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
     kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem)
     background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
     return {"engine_version": ENGINE_VERSION, **kq}
+
+
+class HopDoiInput(BaseModel):
+    """Hai người — tên không bắt buộc (không có tên → chỉ so đường đời)."""
+    a: NguoiKia
+    b: NguoiKia
+
+
+@app.post("/v1/thanso/hop-doi")
+def api_hop_doi(inp: HopDoiInput) -> dict:
+    """Hợp đôi có cấu trúc: cặp số theo vị trí + điểm hoà / điểm va / việc cùng làm. Không chấm điểm."""
+    for n in (inp.a, inp.b):
+        try:
+            _dt.date(n.nam, n.thang, n.ngay)
+        except ValueError:
+            raise HTTPException(422, detail="Ngày sinh không tồn tại")
+    return luan_hop_doi(inp.a.model_dump(), inp.b.model_dump())
+
+
+SoHopLe = Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33]
+
+
+class BoSo(BaseModel):
+    duong_doi: SoHopLe
+    su_menh: SoHopLe | None = None
+    linh_hon: SoHopLe | None = None
+    nhan_cach: SoHopLe | None = None
+
+
+class CapSoInput(BaseModel):
+    a: BoSo
+    b: BoSo
+
+
+@app.post("/v1/thanso/cap-so")
+def api_cap_so(inp: CapSoInput) -> dict:
+    """Hợp đôi từ các con số đã tính (lời mời chỉ mang số, không mang ngày sinh người mời)."""
+    return luan_hop_doi_tu_chi_so(inp.a.model_dump(exclude_none=True), inp.b.model_dump(exclude_none=True))
 
 
 class ChuKyInput(BaseModel):

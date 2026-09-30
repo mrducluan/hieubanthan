@@ -214,15 +214,21 @@ hỏi gợi ý.
     - **RLS:** chỉ chủ sở hữu đọc/ghi.
   - Nút "Xoá hồ sơ" và "Xoá tài khoản" chạy ngay, không giữ bản sao.
   - **Vẫn cấm:** lưu nội dung luận giải gắn user_id; nhật ký hỏi vẫn ẩn danh (0004/0005 giữ nguyên).
-- **Lời mời hợp đôi** (UI-5):
-  - Migration `0007_loi_moi` + `.down.sql`: bảng `loi_moi(ma text pk, ten_hien_thi, so_duong_doi smallint, tao_luc, het_han, so_lan_mo int)`.
-  - Chỉ lưu **tên hiển thị + số đường đời** người mời đã đồng ý công khai; không có ngày sinh,
-    không có user_id.
-  - Gán nguồn giới thiệu chỉ bằng `ma` trên sự kiện đo lường.
-  - Ghi qua route handler bằng service key (server-side), RLS chặn client ghi trực tiếp.
+- **Lời mời hợp đôi và thẻ chia sẻ** (UI-5, đã làm):
+  - **Không dùng bảng** (đổi so với dự kiến `0007_loi_moi`). Link tự mang dữ liệu teaser trong một
+    **mã có ký HMAC-SHA256** (`web/lib/ma-moi.ts`): tên hiển thị người dùng tự chọn, các con số, từ
+    khoá số đường đời, ngày tạo. Hết hạn sau 90 ngày.
+  - Không ngày sinh, không user_id; không lưu gì phía server.
+  - Số trong mã do **server** tính qua engine (`/api/chia-se/tao`), client không tự khai được.
+  - Người được mời: số người mời lấy từ mã đã ký, số của chính họ lấy từ bài đọc của họ. Engine so
+    cặp bằng `/v1/thanso/cap-so`.
+  - Gán nguồn giới thiệu: đo lường dùng `ma_moi` = 10 ký tự đầu của chữ ký (không định danh người).
+  - Env: `LOI_MOI_SECRET` (bắt buộc khi deploy), `NEXT_PUBLIC_SITE_URL`.
 - **Engine:**
-  - Thêm `/v1/thanso/hop-doi` (deterministic, test trước) trả về số hai người, `cap` và nghĩa
-    `thanso_cap_so`.
+  - Đã thêm `/v1/thanso/hop-doi` (từ ngày sinh) và `/v1/thanso/cap-so` (từ con số), test trước.
+    Kết quả gồm cặp số theo vị trí và nghĩa `thanso_cap_so` (hoà / va / cùng làm). **Không chấm
+    điểm** hợp/khắc.
+  - Đã thêm `vet_tinh` (lớp ĐÃ TÍNH) và `huong_cat` (la bàn Phong thuỷ).
   - Các `/hoi` hiện có giữ nguyên hợp đồng.
 
 ## 9. Đo lường (UI-6, PostHog — chủ dự án duyệt)
@@ -246,7 +252,7 @@ hỏi gợi ý.
 | UI-2 | Thần số: nhập → nghi thức → hé lộ 3 lớp → Metaphysics ID → ChatPanel | E2E luồng chính, Lighthouse a11y ≥ 95 trên điện thoại |
 | UI-3 | 4 mảng Huyền học dùng hồ sơ + BirthSheet + ChatPanel + hình trực quan | E2E 4 mảng |
 | UI-4 | Tài khoản Supabase + migration 0006 + đồng bộ + xoá | RLS test, E2E khi không có Supabase (ẩn nút) |
-| UI-5 | Engine `/hop-doi` (test trước) + trang hợp đôi + thẻ chia sẻ (`next/og`) + link mời + migration 0007 | Golden hợp đôi, E2E luồng mời |
+| UI-5 | Engine `/hop-doi`, `/cap-so` (test trước) + trang hợp đôi + thẻ chia sẻ (`next/og`) + link mời có ký (không bảng) | Test engine, E2E luồng mời |
 | UI-6 | PostHog + góp ý + bảng funnel | Sự kiện kiểm bằng test, không lộ PII |
 
 **Chủ dự án cần chuẩn bị trước UI-4, UI-5, UI-6:**
