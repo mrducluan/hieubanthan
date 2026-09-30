@@ -41,7 +41,9 @@ class SinhInput(BaseModel):
 def api_menh_quai(inp: SinhInput) -> dict:
     s = inp.sinh()
     mq = pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"])
-    return {"engine_version": ENGINE_VERSION, **mq, "bang_huong": pt.bang_huong(mq["quai"])}
+    bang = pt.bang_huong(mq["quai"])
+    return {"engine_version": ENGINE_VERSION, **mq, "bang_huong": bang,
+            "huong_cat": [h for h, d in bang.items() if d in pt.CAT]}
 
 
 class HoiPTInput(BaseModel):

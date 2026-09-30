@@ -158,13 +158,15 @@ def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int) -> dict:
         thanso.chi_so_xac_dinh(t, ngay, thang, nam) for t in ho_ten
     ]
 
+    vet = thanso.vet_tinh(ten_chinh, ngay, thang, nam)
     cac_vi_tri = []
     for vt in VI_TRI_THU_TU:
         gia_tri_chinh = chinh[vt]
         gia_tri_khac = sorted(
             {c[vt] for c in theo_bien_the if c[vt] != gia_tri_chinh}
         )
-        cac_vi_tri.append(_luan_mot_vi_tri(vt, gia_tri_chinh, gia_tri_khac))
+        cac_vi_tri.append({**_luan_mot_vi_tri(vt, gia_tri_chinh, gia_tri_khac),
+                           "cach_tinh": vet[vt]})
 
     so_on_dinh = sum(1 for v in cac_vi_tri if v["on_dinh"])
     return {

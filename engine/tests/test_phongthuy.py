@@ -104,3 +104,14 @@ def test_hoang_oc(tuoi, cung):
                                              ("Ngọ", 2026, False), ("Tý", 2034, True), ("Mão", 2025, True)])
 def test_tam_tai(chi_sinh, nam, co):
     assert pt.tam_tai(chi_sinh, nam)["pham"] is co
+
+
+def test_api_menh_quai_danh_dau_huong_cat():
+    # UI la bàn tô cát/hung theo dữ liệu engine, web không tự phân loại.
+    from fastapi.testclient import TestClient
+    from app.main import app
+
+    r = TestClient(app).post("/v1/phongthuy/menh-quai", json={"birth_date": "1990-05-17", "gender": "nam"})
+    d = r.json()
+    assert r.status_code == 200 and d["quai"] == "Khảm"
+    assert sorted(d["huong_cat"]) == sorted(["Bắc", "Đông", "Đông Nam", "Nam"])

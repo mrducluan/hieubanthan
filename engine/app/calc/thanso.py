@@ -115,6 +115,44 @@ def chi_so_xac_dinh(ten: str, d: int, m: int, y: int) -> dict[str, int]:
     }
 
 
+def _chuoi_rut_gon(tong: int, giu_master: bool = True) -> list[int]:
+    buoc = [tong]
+    while buoc[-1] > 9 and not (giu_master and buoc[-1] in MASTER):
+        buoc.append(sum(int(c) for c in str(buoc[-1])))
+    return buoc
+
+
+def _vet(so_hang: list[dict]) -> dict:
+    tong = sum(x["so"] for x in so_hang)
+    rg = _chuoi_rut_gon(tong)
+    cong = " + ".join(str(x["so"]) for x in so_hang) or "0"
+    duoi = " → ".join(str(n) for n in rg)
+    if len(rg) == 1 and rg[0] in MASTER:
+        duoi += " (số cái, giữ nguyên)"
+    return {"so_hang": so_hang, "tong": tong, "rut_gon": rg, "ket_qua": rg[-1],
+            "dien_giai": f"{cong} = {duoi}"}
+
+
+def vet_tinh(ten: str, d: int, m: int, y: int) -> dict[str, dict]:
+    """Vết tính từng bước của 4 chỉ số (lớp ĐÃ TÍNH trên UI) — cùng quy tắc với chi_so_xac_dinh.
+
+    Mỗi chỉ số: so_hang (ký tự/chữ số → giá trị), tong, rut_gon (chuỗi rút gọn, giữ số cái),
+    ket_qua, dien_giai (chuỗi hiển thị). Test khoá: ket_qua == chi_so_xac_dinh.
+    """
+    ten_vet: dict[str, list[dict]] = {"su_menh": [], "linh_hon": [], "nhan_cach": []}
+    for am_tiet in bo_dau(ten, True).split():
+        hoa = am_tiet.upper()
+        for i, ch in enumerate(hoa):
+            if not (ch.isalpha() and ch.isascii()):
+                continue
+            la_na = ch in NGUYEN_AM or (ch == "Y" and y_la_nguyen_am_tai(hoa, i))
+            muc = {"ky_tu": ch, "so": gia_tri(ch)}
+            ten_vet["su_menh"].append(muc)
+            ten_vet["linh_hon" if la_na else "nhan_cach"].append(muc)
+    dd = [{"ky_tu": c, "so": int(c)} for c in f"{d}{m}{y}"]
+    return {"duong_doi": _vet(dd), **{k: _vet(v) for k, v in ten_vet.items()}}
+
+
 def duong_doi(
     d: int, m: int, y: int,
     quy_uoc: QuyUocDuongDoi = "tong_het",

@@ -17,8 +17,9 @@ completed_work:
   - "Engine thần số deterministic + golden + Q&A v2 + vòng tự cải thiện (PR #1–#7)"
   - "Huyền học HH-1…HH-5: Kinh Dịch, Tử vi, Bát tự, Phong thuỷ (PR #8, #9)"
   - "UI-0: nghiên cứu UX + thiết kế"
+  - "UI-1…UI-3: design system Đêm sao, hồ sơ trên máy, Thần số 3 lớp + Metaphysics ID, 4 mảng Huyền học có hình trực quan + khung chat"
 active_work:
-  - "UI-1 nền tảng UI"
+  - "UI-4 tài khoản, UI-5 hợp đôi + chia sẻ, UI-6 đo lường"
 blocked_work:
   - "UI-4 cần chủ dự án bật Supabase Auth (email, Google, SMS) + env"
   - "UI-6 cần NEXT_PUBLIC_POSTHOG_KEY"

@@ -33,6 +33,7 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${WEB_PORT}`,
     trace: "retain-on-failure",
+    contextOptions: { reducedMotion: "reduce" },
   },
   projects: [
     {
