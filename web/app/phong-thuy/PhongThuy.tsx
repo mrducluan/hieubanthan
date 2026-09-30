@@ -1,64 +1,54 @@
 "use client";
+import { Compass } from "lucide-react";
+import { KhungChat } from "@/components/hoi/KhungChat";
+import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
+import { LaBan } from "@/components/huyen-hoc/LaBan";
+import { KhungTai } from "@/components/khung/TieuDe";
+import { usePost } from "@/lib/goi-api";
+import { BaoLoi } from "@/components/khung/BaoLoi";
+import { hoiMang } from "@/lib/hoi-mang";
+import { ngaySinhIso, useHoSo } from "@/lib/hoso";
 
-import { useState } from "react";
+interface MenhQuai { quai: string; nhom: string; bang_huong: Record<string, string>; huong_cat: string[]; co_canh_bao: { loai: string; chi_tiet: string }[] }
 
-interface Res {
-  cau_tra_loi?: string;
-  phan_loai?: { loai: string; chu_de: string | null };
-  can_them?: string[];
-  co_canh_bao?: { loai: string; chi_tiet: string }[];
-  error?: string;
-}
+const GOI_Y = [
+  { nhom: "Hướng", cau: ["Nhà hướng Nam có hợp với tôi không?", "Hướng bếp nào hợp với tôi?", "Tôi nên kê bàn làm việc hướng nào?"] },
+  { nhom: "Năm nay", cau: ["Năm nay tôi làm nhà được không?", "Năm nay sao Ngũ Hoàng ở hướng nào?"] },
+  { nhom: "Bố trí", cau: ["Gương đối diện giường có sao không?", "Cửa chính đối cửa sau có sao không?"] },
+];
 
 export function PhongThuy() {
-  const [cau, setCau] = useState("");
-  const [ngay, setNgay] = useState("");
-  const [gioiTinh, setGioiTinh] = useState("nam");
-  const [dang, setDang] = useState(false);
-  const [res, setRes] = useState<Res | null>(null);
+  const hoSo = useHoSo();
+  const sinh = hoSo?.gioi_tinh ? { birth_date: ngaySinhIso(hoSo), gender: hoSo.gioi_tinh } : null;
+  const { data: mq, loi, thuLai } = usePost<MenhQuai>("/api/phongthuy/menh-quai", sinh);
 
-  async function hoi(e: React.FormEvent) {
-    e.preventDefault();
-    if (cau.trim().length < 3 || dang) return;
-    setDang(true);
-    try {
-      const sinh = ngay ? { birth_date: ngay, gender: gioiTinh } : undefined;
-      const r = await fetch("/api/phongthuy/hoi", {
-        method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ cau_hoi: cau, ...(sinh ? { sinh } : {}) }),
-      });
-      setRes((await r.json()) as Res);
-    } catch { setRes({ error: "Không kết nối được. Thử lại sau." }); }
-    finally { setDang(false); }
-  }
-
+  if (hoSo === undefined) return <KhungTai />;
   return (
-    <section>
-      <form className="reading-form" onSubmit={hoi}>
-        <label className="field"><span>Câu hỏi</span>
-          <input value={cau} onChange={(e) => setCau(e.target.value)} maxLength={500}
-            placeholder="Nhà hướng Nam có hợp với tôi không?" aria-label="Câu hỏi Phong thuỷ" /></label>
-        <div className="field-row">
-          <label className="field"><span>Ngày sinh (dương lịch)</span>
-            <input type="date" value={ngay} onChange={(e) => setNgay(e.target.value)} aria-label="Ngày sinh" /></label>
-          <label className="field"><span>Giới tính</span>
-            <select value={gioiTinh} onChange={(e) => setGioiTinh(e.target.value)} aria-label="Giới tính">
-              <option value="nam">Nam</option><option value="nu">Nữ</option>
-            </select></label>
-        </div>
-        <p className="qa-note">Câu hỏi chung (ví dụ “Gương đối diện giường có sao không?”) không cần ngày sinh. Hướng hợp tuổi cần ngày sinh và giới tính.</p>
-        <button type="submit" className="btn-primary" disabled={dang}>{dang ? "Đang xem…" : "Hỏi"}</button>
-      </form>
-
-      {res?.error && <p className="notice-error">{res.error}</p>}
-      {res?.cau_tra_loi && (
-        <div className="result" data-testid="pt-ket-qua">
-          <div className="qa-answer">
-            {res.cau_tra_loi.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
-          </div>
-          {res.co_canh_bao?.map((c) => <p key={c.loai} className="sensitivity">ⓘ {c.chi_tiet}</p>)}
-        </div>
-      )}
-    </section>
+    <div>
+      <DauMang Icon={Compass} ten="Phong thuỷ" mo_ta="Bát trạch: mệnh quái theo năm sinh (mốc Lập xuân) và giới tính, tám hướng du niên, cửa – chủ – bếp, sao năm. Mục nào là quan niệm dân gian đều ghi rõ; không giới thiệu vật phẩm “hoá giải”." />
+      <div className="grid items-start gap-6 lg:grid-cols-[1fr_1fr]">
+        <section aria-label="Mệnh quái" className="min-w-0 space-y-3">
+          {!sinh && <XinThemDuLieu hoSo={hoSo} can="gioi_tinh" nut="Thêm giới tính" ly_do="Mệnh quái tính theo năm sinh và giới tính. Câu hỏi bố trí chung thì không cần." />}
+          {sinh && !mq && !loi && <KhungTai dong={2} />}
+          {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
+          {mq && (
+            <div className="glass rounded-2xl p-5" data-testid="menh-quai">
+              <p className="text-center text-sm text-fg-muted">Mệnh quái của bạn: <b className="text-gold">{mq.quai}</b> · {mq.nhom}</p>
+              <LaBan quai={mq.quai} nhom={mq.nhom} bang={mq.bang_huong} huongCat={mq.huong_cat} />
+              {mq.co_canh_bao.map((c) => <p key={c.loai} className="mt-3 text-xs text-moon">{c.chi_tiet}</p>)}
+            </div>
+          )}
+        </section>
+        <section aria-label="Hỏi Phong thuỷ" className="min-w-0 lg:sticky lg:top-24">
+          <KhungChat
+            moDun="phongthuy"
+            loiChao="Hỏi về hướng nhà, bếp, bàn làm việc, năm làm nhà — hoặc một tình huống bố trí cụ thể."
+            goiY={GOI_Y}
+            nhanO="Câu hỏi Phong thuỷ"
+            gui={(cau) => hoiMang("/api/phongthuy/hoi", { cau_hoi: cau, ...(sinh ? { sinh } : {}) })}
+          />
+        </section>
+      </div>
+    </div>
   );
 }

@@ -1,20 +1,21 @@
-// Bát tự (HH-3): trình duyệt → web → engine.
+// Bát tự (HH-3): hồ sơ → tứ trụ + ngũ hành + dụng thần hai cách → hỏi.
 import { test, expect } from "@playwright/test";
+import { hoi, napHoSo } from "./_hoso";
 
-test("có ngày giờ sinh: tứ trụ + dụng thần hai cách", async ({ page }) => {
+test("tứ trụ từ hồ sơ + dụng thần hai cách", async ({ page }) => {
+  await napHoSo(page);
   await page.goto("/bat-tu");
-  await page.getByLabel("Câu hỏi Bát tự").fill("Dụng thần của tôi là gì?");
-  await page.getByLabel("Ngày sinh").fill("1990-05-17");
-  await page.getByLabel("Giờ sinh").fill("12:30");
-  await page.getByRole("button", { name: "Hỏi" }).click();
-  const kq = page.getByTestId("bt-ket-qua");
-  await expect(kq).toContainText("Canh Ngọ · Tân Tỵ · Nhâm Ngọ · Bính Ngọ");
-  await expect(kq).toContainText("không tự chọn");
+  const tt = page.getByTestId("tu-tru");
+  await expect(tt).toContainText("Nhâm");
+  await expect(tt).toContainText("Dụng thần · Phù ức");
+  await expect(tt).toContainText("Dụng thần · Điều hậu");
+  const ans = await hoi(page, "Dụng thần của tôi là gì?");
+  await expect(ans).toContainText("Canh Ngọ · Tân Tỵ · Nhâm Ngọ · Bính Ngọ");
+  await expect(ans).toContainText("không tự chọn");
 });
 
-test("câu hỏi chung về nhật chủ không cần ngày sinh", async ({ page }) => {
+test("câu hỏi chung về nhật chủ không cần hồ sơ", async ({ page }) => {
   await page.goto("/bat-tu");
-  await page.getByLabel("Câu hỏi Bát tự").fill("Nhật chủ Giáp là người thế nào?");
-  await page.getByRole("button", { name: "Hỏi" }).click();
-  await expect(page.getByTestId("bt-ket-qua")).toContainText("cây đại thụ");
+  const ans = await hoi(page, "Nhật chủ Giáp là người thế nào?");
+  await expect(ans).toContainText("cây đại thụ");
 });

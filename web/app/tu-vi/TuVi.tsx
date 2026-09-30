@@ -1,85 +1,75 @@
 "use client";
-
 import { useState } from "react";
+import { Orbit } from "lucide-react";
+import type { LaSoOutputT } from "@/app/api/tuvi/schema";
+import { KhungChat } from "@/components/hoi/KhungChat";
+import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
+import { LaSoTuVi } from "@/components/huyen-hoc/LaSoTuVi";
+import { KhungTai } from "@/components/khung/TieuDe";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { usePost } from "@/lib/goi-api";
+import { BaoLoi } from "@/components/khung/BaoLoi";
+import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
+import { laSoTuHoSo, useHoSo } from "@/lib/hoso";
 
-interface Res {
-  cau_tra_loi?: string;
-  phan_loai?: { loai: string; cung: string[] };
-  can_them?: string[];
-  co_canh_bao?: { loai: string; chi_tiet: string }[];
-  error?: string;
-}
+// Cờ từ engine viết cho người phát triển — đổi sang lời dễ hiểu cho người đọc.
+const LOI_NHAN_CO: Record<string, string> = {
+  ty_conflict: "Bạn sinh 23:00–23:59: tử vi tính sang giờ Tý của ngày hôm sau, còn thần số và bát tự vẫn tính ngày hôm đó — đây là quy ước của từng môn, không phải lỗi.",
+  nam_phai: "Chính tinh và tứ hoá đã đối chiếu độc lập; một số phụ tinh theo lối Việt và Tuần/Triệt đang được bổ sung.",
+};
+
+const GOI_Y = [
+  { nhom: "Lá số", cau: ["Cung Mệnh của tôi nói gì về tính cách?", "Cung Quan Lộc của tôi nói gì về sự nghiệp?", "Cung Phu Thê của tôi thế nào?"] },
+  { nhom: "Hạn", cau: ["Đại hạn hiện tại của tôi là chủ đề gì?", "Năm nay lưu niên của tôi thế nào?"] },
+  { nhom: "Kiến thức", cau: ["Tứ hoá là gì?", "Tham Lang ở cung Quan Lộc có ý nghĩa gì?"] },
+];
 
 export function TuVi() {
-  const [cau, setCau] = useState("");
-  const [cheDo, setCheDo] = useState("tham_khao");
-  const [ngay, setNgay] = useState("");
-  const [gio, setGio] = useState("");
-  const [gioiTinh, setGioiTinh] = useState("nam");
-  const [vung, setVung] = useState("north");
-  const [dang, setDang] = useState(false);
-  const [res, setRes] = useState<Res | null>(null);
+  const hoSo = useHoSo();
+  const laSo = laSoTuHoSo(hoSo);
+  const { data: ls, loi, thuLai } = usePost<LaSoOutputT>("/api/tuvi/la-so", laSo);
+  const [cheDo, setCheDo] = useState<"tham_khao" | "chi_tiet">("tham_khao");
+  const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
 
-  async function hoi(e: React.FormEvent) {
-    e.preventDefault();
-    if (cau.trim().length < 3 || dang) return;
-    if ((ngay && !gio) || (!ngay && gio)) { setRes({ error: "Nhập đủ cả ngày và giờ sinh (hoặc bỏ trống cả hai)." }); return; }
-    setDang(true);
-    try {
-      const laSo = ngay ? { birth_date: ngay, birth_time: gio, gender: gioiTinh,
-        ...(ngay < "1975-06-13" ? { vung } : {}) } : undefined;
-      const r = await fetch("/api/tuvi/hoi", {
-        method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ cau_hoi: cau, che_do: cheDo, ...(laSo ? { la_so: laSo } : {}) }),
-      });
-      setRes((await r.json()) as Res);
-    } catch { setRes({ error: "Không kết nối được. Thử lại sau." }); }
-    finally { setDang(false); }
-  }
-
+  if (hoSo === undefined) return <KhungTai />;
   return (
-    <section>
-      <form className="reading-form" onSubmit={hoi}>
-        <label className="field"><span>Câu hỏi</span>
-          <input value={cau} onChange={(e) => setCau(e.target.value)} maxLength={500}
-            placeholder="Cung Quan Lộc của tôi nói gì về sự nghiệp?" aria-label="Câu hỏi Tử vi" /></label>
-        <div className="field-row">
-          <label className="field"><span>Ngày sinh (dương lịch)</span>
-            <input type="date" value={ngay} onChange={(e) => setNgay(e.target.value)} aria-label="Ngày sinh" /></label>
-          <label className="field"><span>Giờ sinh</span>
-            <input type="time" value={gio} onChange={(e) => setGio(e.target.value)} aria-label="Giờ sinh" /></label>
-          <label className="field"><span>Giới tính</span>
-            <select value={gioiTinh} onChange={(e) => setGioiTinh(e.target.value)} aria-label="Giới tính">
-              <option value="nam">Nam</option><option value="nu">Nữ</option>
-            </select></label>
-        </div>
-        <div className="field-row">
-          {ngay && ngay < "1975-06-13" && (
-            <label className="field"><span>Nơi sinh (trước 13/6/1975)</span>
-              <select value={vung} onChange={(e) => setVung(e.target.value)} aria-label="Nơi sinh">
-                <option value="north">Miền Bắc</option><option value="south">Miền Nam</option>
-              </select></label>
+    <div>
+      <DauMang Icon={Orbit} ten="Tử vi" mo_ta="Lá số an ngay trên hệ thống của Hiểu Bản Thân — ngày giờ sinh không gửi cho bên thứ ba. Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn. Không phán bệnh, tai nạn hay sống chết." />
+      <div className="grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
+        <section aria-label="Lá số" className="min-w-0 space-y-3">
+          {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Để an lá số cần giờ sinh và giới tính (sinh trước 13/6/1975 cần thêm nơi sinh). Bạn vẫn hỏi được câu kiến thức chung ở khung bên cạnh." />}
+          {laSo && !ls && !loi && <KhungTai dong={4} />}
+          {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
+          {ls && (
+            <>
+              <LaSoTuVi ls={ls} onChonCung={(ten) => setCauNgoai({ cau: `Cung ${ten} của tôi nói gì?`, lan: Date.now() })} />
+              <p className="text-xs text-fg-faint">Bấm vào một cung để hỏi về cung đó. {ls.co_canh_bao.map((c) => LOI_NHAN_CO[c.loai] ?? c.chi_tiet).join(" ")}</p>
+            </>
           )}
-          <label className="field"><span>Chế độ</span>
-            <select value={cheDo} onChange={(e) => setCheDo(e.target.value)} aria-label="Chế độ">
-              <option value="tham_khao">Tham khảo (hạn = chủ đề giai đoạn)</option>
-              <option value="chi_tiet">Chi tiết (có xu hướng thuận/nghịch)</option>
-            </select></label>
-        </div>
-        <p className="qa-note">Câu hỏi chung (ví dụ “Tham Lang ở cung Quan Lộc?”) không cần ngày sinh.</p>
-        <button type="submit" className="btn-primary" disabled={dang}>{dang ? "Đang xem…" : "Hỏi"}</button>
-      </form>
-
-      {res?.error && <p className="notice-error">{res.error}</p>}
-      {res?.cau_tra_loi && (
-        <div className="result" data-testid="tv-ket-qua">
-          {res.phan_loai?.cung?.length ? <p className="src">Cung xem: {res.phan_loai.cung.join(", ")}</p> : null}
-          <div className="qa-answer">
-            {res.cau_tra_loi.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
-          </div>
-          {res.co_canh_bao?.map((c) => <p key={c.loai} className="sensitivity">ⓘ {c.chi_tiet}</p>)}
-        </div>
-      )}
-    </section>
+        </section>
+        <section aria-label="Hỏi Tử vi" className="min-w-0 lg:sticky lg:top-24">
+          <KhungChat
+            moDun="tuvi"
+            loiChao={laSo ? "Hỏi về một cung, một sao, hoặc hạn hiện tại của bạn." : "Hỏi kiến thức chung về cung, sao, tứ hoá — hoặc bổ sung giờ sinh để hỏi về lá số của bạn."}
+            goiY={GOI_Y}
+            cauNgoai={cauNgoai}
+            nhanO="Câu hỏi Tử vi"
+            dieuKhien={
+              <Tabs value={cheDo} onValueChange={(v) => setCheDo(v as "tham_khao" | "chi_tiet")}>
+                <TabsList aria-label="Chế độ đọc">
+                  <TabsTrigger value="tham_khao">Tham khảo</TabsTrigger>
+                  <TabsTrigger value="chi_tiet">Chi tiết</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            }
+            gui={(cau) => hoiMang<HoiMangRes & { phan_loai?: { cung?: string[] } }>(
+              "/api/tuvi/hoi",
+              { cau_hoi: cau, che_do: cheDo, ...(laSo ? { la_so: laSo } : {}) },
+              (d) => d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null,
+            )}
+          />
+        </section>
+      </div>
+    </div>
   );
 }

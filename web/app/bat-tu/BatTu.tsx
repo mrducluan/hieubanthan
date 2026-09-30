@@ -1,78 +1,56 @@
 "use client";
+import { Layers } from "lucide-react";
+import { KhungChat } from "@/components/hoi/KhungChat";
+import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
+import { TuTru, type LaSoBatTu } from "@/components/huyen-hoc/TuTru";
+import { KhungTai } from "@/components/khung/TieuDe";
+import { usePost } from "@/lib/goi-api";
+import { BaoLoi } from "@/components/khung/BaoLoi";
+import { hoiMang } from "@/lib/hoi-mang";
+import { laSoTuHoSo, useHoSo } from "@/lib/hoso";
 
-import { useState } from "react";
+// Cờ từ engine viết cho người phát triển — đổi sang lời dễ hiểu cho người đọc.
+const LOI_NHAN_CO: Record<string, string> = {
+  da_ty: "Bạn sinh 23:00–23:59 (giờ Tý muộn): bát tự ở đây giữ trụ ngày hôm đó, trụ giờ lấy giờ Tý của ngày sau. Có trường phái đổi ngày từ 23:00 nên có thể ra trụ ngày khác; tử vi ở đây tính sang ngày mới.",
+};
 
-interface Res {
-  cau_tra_loi?: string;
-  phan_loai?: { loai: string; chu_de: string | null };
-  can_them?: string[];
-  co_canh_bao?: { loai: string; chi_tiet: string }[];
-  error?: string;
-}
+const GOI_Y = [
+  { nhom: "Lá số", cau: ["Dụng thần của tôi là gì?", "Tôi thân vượng hay thân nhược?", "Ngũ hành của tôi thiếu gì?"] },
+  { nhom: "Vận", cau: ["Đại vận hiện tại của tôi là gì?", "Năm nay với tôi thế nào?"] },
+  { nhom: "Kiến thức", cau: ["Nhật chủ Giáp là người thế nào?", "Thập thần là gì?"] },
+];
 
 export function BatTu() {
-  const [cau, setCau] = useState("");
-  const [ngay, setNgay] = useState("");
-  const [gio, setGio] = useState("");
-  const [gioiTinh, setGioiTinh] = useState("nam");
-  const [vung, setVung] = useState("north");
-  const [dang, setDang] = useState(false);
-  const [res, setRes] = useState<Res | null>(null);
+  const hoSo = useHoSo();
+  const laSo = laSoTuHoSo(hoSo);
+  const { data: ls, loi, thuLai } = usePost<LaSoBatTu>("/api/battu/la-so", laSo);
 
-  async function hoi(e: React.FormEvent) {
-    e.preventDefault();
-    if (cau.trim().length < 3 || dang) return;
-    if ((ngay && !gio) || (!ngay && gio)) { setRes({ error: "Nhập đủ cả ngày và giờ sinh (hoặc bỏ trống cả hai)." }); return; }
-    setDang(true);
-    try {
-      const laSo = ngay ? { birth_date: ngay, birth_time: gio, gender: gioiTinh,
-        ...(ngay < "1975-06-13" ? { vung } : {}) } : undefined;
-      const r = await fetch("/api/battu/hoi", {
-        method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ cau_hoi: cau, ...(laSo ? { la_so: laSo } : {}) }),
-      });
-      setRes((await r.json()) as Res);
-    } catch { setRes({ error: "Không kết nối được. Thử lại sau." }); }
-    finally { setDang(false); }
-  }
-
+  if (hoSo === undefined) return <KhungTai />;
   return (
-    <section>
-      <form className="reading-form" onSubmit={hoi}>
-        <label className="field"><span>Câu hỏi</span>
-          <input value={cau} onChange={(e) => setCau(e.target.value)} maxLength={500}
-            placeholder="Tôi thân vượng hay thân nhược?" aria-label="Câu hỏi Bát tự" /></label>
-        <div className="field-row">
-          <label className="field"><span>Ngày sinh (dương lịch)</span>
-            <input type="date" value={ngay} onChange={(e) => setNgay(e.target.value)} aria-label="Ngày sinh" /></label>
-          <label className="field"><span>Giờ sinh</span>
-            <input type="time" value={gio} onChange={(e) => setGio(e.target.value)} aria-label="Giờ sinh" /></label>
-          <label className="field"><span>Giới tính</span>
-            <select value={gioiTinh} onChange={(e) => setGioiTinh(e.target.value)} aria-label="Giới tính">
-              <option value="nam">Nam</option><option value="nu">Nữ</option>
-            </select></label>
-        </div>
-        <div className="field-row">
-          {ngay && ngay < "1975-06-13" && (
-            <label className="field"><span>Nơi sinh (trước 13/6/1975)</span>
-              <select value={vung} onChange={(e) => setVung(e.target.value)} aria-label="Nơi sinh">
-                <option value="north">Miền Bắc</option><option value="south">Miền Nam</option>
-              </select></label>
+    <div>
+      <DauMang Icon={Layers} ten="Bát tự" mo_ta="Tứ trụ năm – tháng – ngày – giờ theo tiết khí, ngũ hành chấm theo thang điểm công bố, dụng thần luôn trình bày hai cách để bạn tự cân nhắc." />
+      <div className="grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
+        <section aria-label="Tứ trụ" className="min-w-0 space-y-3">
+          {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Tứ trụ cần giờ sinh và giới tính. Giờ sinh càng chính xác càng tốt nếu bạn sinh gần ngày chuyển tiết." />}
+          {laSo && !ls && !loi && <KhungTai dong={4} />}
+          {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
+          {ls && (
+            <div className="glass rounded-2xl p-5" data-testid="tu-tru">
+              <TuTru ls={ls} namNay={new Date().getFullYear()} />
+              {ls.co_canh_bao.map((c) => <p key={c.loai} className="mt-3 text-xs text-moon">{LOI_NHAN_CO[c.loai] ?? c.chi_tiet}</p>)}
+            </div>
           )}
-        </div>
-        <p className="qa-note">Câu hỏi chung (ví dụ “Nhật chủ Giáp là người thế nào?”) không cần ngày sinh. Giờ sinh cần chính xác nếu sinh sát ngày tiết khí.</p>
-        <button type="submit" className="btn-primary" disabled={dang}>{dang ? "Đang xem…" : "Hỏi"}</button>
-      </form>
-
-      {res?.error && <p className="notice-error">{res.error}</p>}
-      {res?.cau_tra_loi && (
-        <div className="result" data-testid="bt-ket-qua">
-          <div className="qa-answer">
-            {res.cau_tra_loi.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
-          </div>
-          {res.co_canh_bao?.map((c) => <p key={c.loai} className="sensitivity">ⓘ {c.chi_tiet}</p>)}
-        </div>
-      )}
-    </section>
+        </section>
+        <section aria-label="Hỏi Bát tự" className="min-w-0 lg:sticky lg:top-24">
+          <KhungChat
+            moDun="battu"
+            loiChao={laSo ? "Hỏi về dụng thần, ngũ hành, đại vận hay một năm cụ thể." : "Hỏi kiến thức chung về nhật chủ, thập thần — hoặc bổ sung giờ sinh để hỏi về tứ trụ của bạn."}
+            goiY={GOI_Y}
+            nhanO="Câu hỏi Bát tự"
+            gui={(cau) => hoiMang("/api/battu/hoi", { cau_hoi: cau, ...(laSo ? { la_so: laSo } : {}) })}
+          />
+        </section>
+      </div>
+    </div>
   );
 }
