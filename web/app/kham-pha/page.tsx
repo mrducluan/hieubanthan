@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Compass, Hexagon, Layers, Orbit, Sparkles } from "lucide-react";
 
-export const metadata: Metadata = { title: "Khám phá" };
+export const metadata: Metadata = {
+  title: "Khám phá",
+  description: "Năm lăng kính nhìn lại bản thân: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch — dùng chung một hồ sơ.",
+  alternates: { canonical: "/kham-pha" },
+  openGraph: { title: "Khám phá", description: "Năm lăng kính nhìn lại bản thân: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch — dùng chung một hồ sơ.", url: "/kham-pha" },
+};
 
 const MANG = [
   { href: "/than-so", ten: "Thần số học", mo: "Bốn con số cốt lõi, dải đời, năm cá nhân, biểu đồ ngày sinh.", can: "Tên + ngày sinh", Icon: Sparkles },
@@ -35,6 +40,10 @@ export default function KhamPha() {
           </Link>
         ))}
       </div>
+      <Link href="/kien-thuc" className="mt-6 flex items-center justify-between rounded-2xl border border-line/70 p-5 text-fg-muted transition-colors hover:border-gold/50 hover:text-fg">
+        <span><b className="text-fg">Thư viện kiến thức</b> — ý nghĩa 12 con số, 64 quẻ, 14 chính tinh</span>
+        <ArrowRight className="size-4" aria-hidden />
+      </Link>
     </div>
   );
 }

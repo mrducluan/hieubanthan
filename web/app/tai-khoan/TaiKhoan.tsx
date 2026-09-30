@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
+import { ViSao } from "@/components/tai-khoan/ViSao";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 import { dangXuat, hoSoTaiKhoan, luuVaoTaiKhoan, useNguoiDung, xoaHoSoTaiKhoan, xoaTaiKhoan } from "@/lib/tai-khoan";
@@ -20,7 +21,8 @@ const moTa = (h: Pick<HoSo, "ho_ten" | "ngay" | "thang" | "nam" | "gio">) =>
 function giongNhau(a: HoSo, b: NonNullable<HoSoTK>): boolean {
   return a.ho_ten === b.ho_ten && a.ngay === b.ngay && a.thang === b.thang && a.nam === b.nam &&
     (a.gio ?? null) === (b.gio ?? null) && (a.gioi_tinh ?? null) === (b.gioi_tinh ?? null) &&
-    (a.ten_khac ?? null) === (b.ten_khac ?? null) && (a.vung ?? null) === (b.vung ?? null);
+    (a.ten_khac ?? null) === (b.ten_khac ?? null) && (a.vung ?? null) === (b.vung ?? null) &&
+    (a.noi_sinh ?? null) === (b.noi_sinh ?? null) && Boolean(a.gio_mua_he) === Boolean(b.gio_mua_he);
 }
 
 export function TaiKhoan() {
@@ -115,7 +117,7 @@ export function TaiKhoan() {
                   <div className="space-y-3">
                     <label className="flex items-start gap-3 text-sm">
                       <input type="checkbox" checked={dongY} onChange={(e) => setDongY(e.target.checked)} className="mt-1 size-4 accent-[rgb(var(--gold))]" />
-                      <span>Tôi đồng ý lưu <b>họ tên, ngày giờ sinh, giới tính</b> vào tài khoản để dùng trên máy khác. Tôi có thể xoá bất cứ lúc nào. Nội dung bài đọc và câu hỏi không được lưu.</span>
+                      <span>Tôi đồng ý lưu <b>họ tên, ngày giờ sinh, giới tính, nơi sinh</b> vào tài khoản để dùng trên máy khác. Tôi có thể xoá bất cứ lúc nào. Nội dung bài đọc và câu hỏi không được lưu.</span>
                     </label>
                     <Button disabled={!dongY || dang} onClick={() => lam(async () => {
                       await luuVaoTaiKhoan(user.id, hoSo); ghi("profile_created", { kind: "tai_khoan" }); await tai();
@@ -136,6 +138,13 @@ export function TaiKhoan() {
         {bao && <p role="status" className={`mt-3 text-sm ${bao.loai === "ok" ? "text-jade" : "text-cinnabar"}`}>{bao.noi}</p>}
       </section>
 
+      {user && tk !== undefined && (
+        <section aria-labelledby="sao">
+          <TieuDeMuc id="sao" nho="Sao" lon="Mời bạn, cùng nhận Sao" />
+          <ViSao daLuuHoSo={Boolean(tk)} />
+        </section>
+      )}
+
       <section aria-labelledby="rieng-tu">
         <TieuDeMuc id="rieng-tu" nho="Quyền riêng tư" lon="Chúng tôi giữ gì, không giữ gì" />
         <ul className="space-y-2 text-sm text-fg-muted">
@@ -143,7 +152,7 @@ export function TaiKhoan() {
             "Mặc định mọi thứ nằm trên máy của bạn. Ngày sinh chỉ gửi đi lúc tính toán, không lưu lại.",
             "Chỉ khi bạn bấm “Lưu vào tài khoản” và đồng ý, hồ sơ mới được lưu — chỉ bạn đọc được.",
             "Không lưu nội dung bài đọc hay câu hỏi gắn với bạn. Nhật ký cải thiện hệ thống là ẩn danh, đã lọc năm/ngày/số điện thoại.",
-            "Link chia sẻ chỉ mang tên hiển thị và các con số — không có ngày sinh.",
+            "Link chia sẻ chỉ mang tên hiển thị và các con số — không có ngày sinh. Link mời có thêm mã mời ngẫu nhiên (không lộ tài khoản) để cộng Sao.",
             "Xoá hồ sơ hay xoá tài khoản có hiệu lực ngay, không giữ bản sao.",
           ].map((t) => <li key={t} className="flex gap-2"><ShieldCheck className="mt-0.5 size-4 shrink-0 text-jade" aria-hidden />{t}</li>)}
         </ul>

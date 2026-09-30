@@ -1,0 +1,154 @@
+// Trang kiến thức — Server Component: HTML đầy đủ ngay lần tải đầu (Google, Bing, và bot AI đọc được không cần JS).
+// Cấu trúc GEO: tiêu đề = câu hỏi người ta tìm · đoạn "trả lời nhanh" đứng đầu · mục có tiêu đề · hỏi đáp · nguồn ·
+// ngày cập nhật · nhãn trạng thái (nháp AI / đã duyệt) · liên kết nội bộ. Schema: Article + FAQPage + BreadcrumbList.
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowRight, BookOpen, CalendarDays, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { CHU_DE, duongTrang, trang } from "@/lib/kien-thuc";
+import { goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, urlDayDu } from "@/lib/seo";
+
+export const revalidate = 21600;
+
+type Props = { params: { chu_de: string; slug: string } };
+
+async function tai({ chu_de, slug }: Props["params"]) {
+  const cd = CHU_DE[chu_de];
+  if (!cd) return null;
+  const t = await trang(cd.loai, slug);
+  return t ? { cd, t } : null;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const kq = await tai(params);
+  if (!kq) return { title: "Không tìm thấy", robots: { index: false } };
+  const { t } = kq;
+  const duong = duongTrang(t.loai, t.slug);
+  return {
+    title: t.tieu_de,
+    description: t.mo_ta,
+    alternates: { canonical: duong },
+    robots: { index: t.index, follow: true },
+    openGraph: {
+      type: "article", title: t.tieu_de, description: t.mo_ta, url: duong, locale: "vi_VN", siteName: TEN_SITE,
+      modifiedTime: t.cap_nhat, images: [`/og?tieu_de=${encodeURIComponent(t.tieu_de)}`],
+    },
+    twitter: { card: "summary_large_image", title: t.tieu_de, description: t.mo_ta },
+  };
+}
+
+export default async function Page({ params }: Props) {
+  const kq = await tai(params);
+  if (!kq) notFound();
+  const { cd, t } = kq;
+  const duong = duongTrang(t.loai, t.slug);
+  const nhap = t.trang_thai !== "da_duyet";
+
+  const ld = goiLd(
+    {
+      "@type": "Article",
+      "@id": `${urlDayDu(duong)}#bai`,
+      headline: t.tieu_de,
+      description: t.mo_ta,
+      inLanguage: "vi-VN",
+      datePublished: t.cap_nhat,
+      dateModified: t.cap_nhat,
+      mainEntityOfPage: urlDayDu(duong),
+      image: urlDayDu(`/og?tieu_de=${encodeURIComponent(t.tieu_de)}`),
+      author: { "@type": "Organization", name: TEN_SITE, url: siteUrl() },
+      publisher: { "@id": `${siteUrl()}/#to-chuc` },
+      isAccessibleForFree: true,
+      isPartOf: { "@id": `${siteUrl()}/#website` },
+      about: cd.ten,
+      citation: t.nguon,
+      creativeWorkStatus: nhap ? "Draft" : "Published",
+      abstract: t.tra_loi_nhanh,
+    },
+    ldHoiDap(t.hoi_dap),
+    ldDuongDan([
+      { ten: "Trang chủ", duong: "/" },
+      { ten: "Kiến thức", duong: "/kien-thuc" },
+      { ten: cd.ten, duong: `/kien-thuc/${params.chu_de}` },
+      { ten: t.tieu_de, duong },
+    ]),
+  );
+
+  return (
+    <article className="mx-auto max-w-3xl">
+      <JsonLd data={ld} />
+      <nav aria-label="Đường dẫn" className="text-xs text-fg-faint">
+        <ol className="flex flex-wrap gap-1.5">
+          <li><Link href="/kien-thuc" className="hover:text-fg">Kiến thức</Link> ›</li>
+          <li><Link href={`/kien-thuc/${params.chu_de}`} className="hover:text-fg">{cd.ten}</Link> ›</li>
+        </ol>
+      </nav>
+
+      <header className="mt-4">
+        <h1 className="text-3xl leading-tight sm:text-5xl">{t.tieu_de}</h1>
+        <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-fg-faint">
+          <span className="inline-flex items-center gap-1"><CalendarDays className="size-3.5" aria-hidden />
+            Cập nhật <time dateTime={t.cap_nhat}>{t.cap_nhat.split("-").reverse().join("/")}</time></span>
+          {nhap
+            ? <span className="rounded-full border border-moon/40 px-2.5 py-0.5 text-moon">Bản nháp — đang được chuyên gia duyệt</span>
+            : <span className="inline-flex items-center gap-1 rounded-full border border-jade/40 px-2.5 py-0.5 text-jade"><ShieldCheck className="size-3.5" aria-hidden /> Đã duyệt</span>}
+        </div>
+      </header>
+
+      <section aria-label="Trả lời nhanh" className="mt-6 rounded-2xl border border-gold/30 bg-gold/5 p-5">
+        <p className="eyebrow">Trả lời nhanh</p>
+        <p className="mt-2 text-lg leading-relaxed text-fg">{t.tra_loi_nhanh}</p>
+      </section>
+
+      <div className="mt-8 space-y-8">
+        {t.muc.map((m) => (
+          <section key={m.tieu_de}>
+            <h2 className="text-2xl">{m.tieu_de}</h2>
+            {m.doan && <p className="mt-2 leading-relaxed text-fg-muted">{m.doan}</p>}
+            {m.danh_sach && (
+              <ul className="mt-3 space-y-2">
+                {m.danh_sach.map((d) => <li key={d} className="flex gap-2 leading-relaxed text-fg-muted"><span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-gold/70" aria-hidden />{d}</li>)}
+              </ul>
+            )}
+          </section>
+        ))}
+      </div>
+
+      <section className="mt-10" aria-labelledby="hoi-dap">
+        <h2 id="hoi-dap" className="text-2xl">Câu hỏi thường gặp</h2>
+        <dl className="mt-4 space-y-4">
+          {t.hoi_dap.map((h) => (
+            <div key={h.hoi} className="rounded-xl border border-line/70 p-4">
+              <dt className="font-medium text-fg">{h.hoi}</dt>
+              <dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <aside className="glass mt-10 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center">
+        <BookOpen className="size-6 shrink-0 text-gold" aria-hidden />
+        <p className="flex-1 text-fg-muted">Đọc chung chung chỉ là điểm bắt đầu. Xem con số, lá số của <b className="text-fg">chính bạn</b> — có từng bước tính để tự kiểm.</p>
+        <Button asChild><Link href={cd.mang}>Xem của tôi <ArrowRight aria-hidden /></Link></Button>
+      </aside>
+
+      {t.lien_quan.length > 0 && (
+        <nav className="mt-10" aria-labelledby="lien-quan">
+          <h2 id="lien-quan" className="text-xl">Đọc tiếp</h2>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {t.lien_quan.map((l) => (
+              <li key={l.slug}><Link href={duongTrang(l.loai, l.slug)} className="inline-flex rounded-full border border-line px-3 py-1.5 text-sm text-fg-muted hover:border-gold/50 hover:text-fg">{l.tieu_de}</Link></li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
+        <p className="font-medium text-fg-muted">Nguồn</p>
+        <ul className="mt-1 list-disc space-y-1 pl-5">{t.nguon.map((n) => <li key={n}>{n}</li>)}</ul>
+        <p className="mt-3">Tham khảo văn hoá và tự suy ngẫm — không phải dự báo, không thay thế tư vấn y tế, pháp lý, tài chính.</p>
+      </footer>
+    </article>
+  );
+}

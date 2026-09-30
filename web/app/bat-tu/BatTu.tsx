@@ -31,7 +31,7 @@ export function BatTu() {
       <DauMang Icon={Layers} ten="Bát tự" mo_ta="Tứ trụ năm – tháng – ngày – giờ theo tiết khí, ngũ hành chấm theo thang điểm công bố, dụng thần luôn trình bày hai cách để bạn tự cân nhắc." />
       <div className="grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
         <section aria-label="Tứ trụ" className="min-w-0 space-y-3">
-          {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Tứ trụ cần giờ sinh và giới tính. Giờ sinh càng chính xác càng tốt nếu bạn sinh gần ngày chuyển tiết." />}
+          {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Tứ trụ cần giờ sinh, giới tính và nơi sinh. Giờ sinh càng chính xác càng tốt nếu bạn sinh gần ngày chuyển tiết." />}
           {laSo && !ls && !loi && <KhungTai dong={4} />}
           {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
           {ls && (

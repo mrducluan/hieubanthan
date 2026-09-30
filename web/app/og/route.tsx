@@ -22,6 +22,8 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const nd = docMa(url.searchParams.get("ma") ?? "");
   const moi = url.searchParams.get("kieu") === "moi";
+  // Trang kiến thức: ảnh chia sẻ mang tiêu đề bài (chữ công khai, không có dữ liệu cá nhân).
+  const tieuDe = (url.searchParams.get("tieu_de") ?? "").slice(0, 110);
   const [sans, serif] = await Promise.all([font("BeVietnamPro-SemiBold.ttf"), font("Newsreader.ttf")]);
   const fonts = [
     ...(sans ? [{ name: "Sans", data: sans, weight: 600 as const }] : []),
@@ -36,7 +38,7 @@ export async function GET(req: Request) {
         background: "radial-gradient(circle at 80% 0%, #2a2350 0%, #0a0a17 55%)", color: "#ecebf7", fontFamily: "Sans",
       }}>
         <div style={{ display: "flex", fontSize: 26, letterSpacing: 6, color: "#8a88ac", textTransform: "uppercase" }}>
-          {moi ? "Lời mời hợp đôi" : "Hồ sơ bản thân"}
+          {moi ? "Lời mời hợp đôi" : !nd && tieuDe ? "Thư viện kiến thức" : "Hồ sơ bản thân"}
         </div>
         {nd ? (
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -57,7 +59,9 @@ export async function GET(req: Request) {
             )}
           </div>
         ) : (
-          <div style={{ display: "flex", fontSize: 60, marginTop: 20, fontFamily: "Serif" }}>Con số nói gì về bạn?</div>
+          <div style={{ display: "flex", fontSize: tieuDe.length > 60 ? 50 : 60, marginTop: 20, fontFamily: "Serif", textAlign: "center", maxWidth: 1000, lineHeight: 1.2 }}>
+            {tieuDe || "Con số nói gì về bạn?"}
+          </div>
         )}
         <div style={{ display: "flex", position: "absolute", bottom: 34, fontSize: 24, color: "#b3b1cf" }}>Hiểu Bản Thân · xem con số của bạn</div>
       </div>

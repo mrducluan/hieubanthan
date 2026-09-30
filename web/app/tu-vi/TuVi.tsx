@@ -37,7 +37,7 @@ export function TuVi() {
       <DauMang Icon={Orbit} ten="Tử vi" mo_ta="Lá số an ngay trên hệ thống của Hiểu Bản Thân — ngày giờ sinh không gửi cho bên thứ ba. Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn. Không phán bệnh, tai nạn hay sống chết." />
       <div className="grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
         <section aria-label="Lá số" className="min-w-0 space-y-3">
-          {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Để an lá số cần giờ sinh và giới tính (sinh trước 13/6/1975 cần thêm nơi sinh). Bạn vẫn hỏi được câu kiến thức chung ở khung bên cạnh." />}
+          {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Để an lá số cần giờ sinh, giới tính và nơi sinh (nơi sinh quyết định múi giờ lúc bạn chào đời). Bạn vẫn hỏi được câu kiến thức chung ở khung bên cạnh." />}
           {laSo && !ls && !loi && <KhungTai dong={4} />}
           {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
           {ls && (
