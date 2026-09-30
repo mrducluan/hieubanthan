@@ -15,7 +15,7 @@ import datetime as dt
 import re
 import unicodedata
 
-from app.calc import kinhdich, kinhdich_maihoa as mh
+from app.calc import kinhdich, kinhdich_maihoa as mh, vuong_suy as vs
 from app.calc.kinhdich_vendor import CHI_NH, KHAC, SINH
 from app.hoidap import chung
 from app.kb import kinhdich_kb as kb
@@ -129,7 +129,7 @@ def _quan_he_nh(a: str, b: str) -> str:
     return f"{b} khắc {a}"
 
 
-def _muc_dung_than(que: dict, ten: str) -> dict:
+def _muc_dung_than(que: dict, ten: str, tg: dict | None = None) -> dict:
     hao = que["quai_ban"]["hao"]
     the = next(h for h in hao if h["the_ung"] == "Thế")
     if ten == "Ứng":
@@ -141,13 +141,15 @@ def _muc_dung_than(que: dict, ten: str) -> dict:
         ghi = n["ghi_chu"] if n else ""
     vi_tri = [{"hao": h["vi_tri"], "dia_chi": h["dia_chi"], "ngu_hanh": h["ngu_hanh"],
                "dong": h["vi_tri"] in que["hao_dong"], "the_ung": h["the_ung"] or None,
-               "voi_the": _quan_he_nh(h["ngu_hanh"], the["ngu_hanh"])} for h in dt_]
-    return {"loai": "dung_than", "dung_than": ten, "ghi_chu": ghi, "vi_tri": vi_tri,
+               "voi_the": _quan_he_nh(h["ngu_hanh"], the["ngu_hanh"]),
+               **({"vuong_suy": vs.danh_gia(h["dia_chi"], h["ngu_hanh"], tg)} if tg else {})}
+              for h in dt_]
+    return {"loai": "dung_than", "dung_than": ten, "ghi_chu": ghi, "vi_tri": vi_tri, "thoi_gian": tg,
             "hao_the": the["vi_tri"], "phuc": not dt_, "source_id": "tang_san_boc_dich",
             "school_id": "luc_hao", **kb.meta()}
 
 
-def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None) -> dict:
+def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | None = None) -> dict:
     goi = {"phan_loai": {k: pl[k] for k in ("loai", "truong_phai", "dung_than", "che_do", "xu_ly",
                                           "linh_vuc")},
            "muc": [], "can_them": [], "mau": None, "luu_y": None}
@@ -191,7 +193,7 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None) -> dict:
         if n:
             muc.append({"loai": "the_dung", **td, **n, "dau_vao": mai_hoa["dau_vao"]})
     if pl["truong_phai"] == "luc_hao" and pl["dung_than"]:
-        muc.append(_muc_dung_than(que, pl["dung_than"]))
+        muc.append(_muc_dung_than(que, pl["dung_than"], tg))
     if que["hao_dong"]:
         muc.append({"loai": "ghi_chu", "noi_dung": kb.luu_y("hao_tu")})
     goi["luu_y"] = kb.luu_y({"luc_hao": "du_doan", "mai_hoa": "mai_hoa"}.get(pl["truong_phai"],
@@ -220,9 +222,16 @@ def _doan(m: dict) -> tuple[str, str | None]:
         if m["phuc"]:
             return (f"Lục Hào — dụng thần {m['dung_than']} không hiện trong quẻ bản (phục thần): "
                     "việc được hỏi chưa lộ rõ. " + m["ghi_chu"], None)
+        def _vs(v: dict) -> str:
+            x = v.get("vuong_suy")
+            if not x:
+                return ""
+            return (f"; tháng {m['thoi_gian']['chi_thang']}: {x['nguyet_lenh']}, ngày "
+                    f"{m['thoi_gian']['can_ngay']} {m['thoi_gian']['chi_ngay']}: {x['nhat_than']}"
+                    f"{', gặp tuần không' if x['tuan_khong'] else ''} → {x['tong']}")
         ds = "; ".join(f"hào {v['hao']} ({v['dia_chi']} {v['ngu_hanh']}"
                        f"{', đang động' if v['dong'] else ''}{', ở Thế' if v['the_ung'] == 'Thế' else ''}"
-                       f"{', ở Ứng' if v['the_ung'] == 'Ứng' else ''}) — với hào Thế: {v['voi_the']}"
+                       f"{', ở Ứng' if v['the_ung'] == 'Ứng' else ''}) — với hào Thế: {v['voi_the']}{_vs(v)}"
                        for v in m["vi_tri"])
         return f"Lục Hào — dụng thần {m['dung_than']}: {ds}. {m['ghi_chu']}", None
     if l == "giai_thich":
@@ -279,7 +288,10 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
                 if len(que["hao_dong"]) == 1:
                     mai_hoa = {"the_dung": mh.the_dung(thuong, ha, que["hao_dong"][0]),
                                "dau_vao": {"nguon": nguon}}
-    goi = goi_bang_chung(pl, que, mai_hoa)
+    tg = None
+    if pl["truong_phai"] == "luc_hao" and que is not None:
+        tg = vs.thoi_gian(thoi_diem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).replace(tzinfo=None))
+    goi = goi_bang_chung(pl, que, mai_hoa, tg)
     van = van_template(goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
@@ -291,7 +303,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
             che_do_van, loi = "template_fallback", [f"llm lỗi: {str(e)[:120]}"]
     co = []
     if pl["truong_phai"] == "luc_hao":
-        co.append({"loai": "chua_tinh_vuong_suy", "chi_tiet": kb.luu_y("vuong_suy")})
+        co.append({"loai": "vuong_suy_rut_gon", "chi_tiet": kb.luu_y("vuong_suy")})
     if pl["truong_phai"] and pl["loai"] != "doc_que_da_co":
         co.append({"loai": "khong_gieo_lai", "chi_tiet": kb.mau("gieo_lai")})
     dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])

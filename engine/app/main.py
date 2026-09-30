@@ -22,7 +22,9 @@ from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import thanso as luangiai_thanso
 from app import nhat_ky
 from app.narrative import hoi_van, llm as narrative_llm
+from app.battu_api import router as battu_router
 from app.kinhdich_api import router as kinhdich_router
+from app.phongthuy_api import router as phongthuy_router
 from app.tuvi_api import router as tuvi_router
 
 app = FastAPI(
@@ -52,6 +54,8 @@ async def require_engine_key(request: Request, call_next):
 
 app.include_router(tuvi_router)
 app.include_router(kinhdich_router)
+app.include_router(battu_router)
+app.include_router(phongthuy_router)
 
 
 # --------------------------------------------------------------------------- #

@@ -86,11 +86,93 @@ Chế độ luận (quyết định 2026-09-30, "cả hai/cả ba"):
 |---|---|---|
 | HH-0 | Kho câu hỏi 4 mảng, đo mốc, tài liệu này | ✅ kho 2.031 câu, mốc 0% |
 | HH-1 | Lõi hỏi đáp dùng chung + **Kinh Dịch** (KB 64 quẻ, Mai Hoa, thể–dụng, chọn phái) | Kinh Dịch ≥ 85% có căn cứ |
-| HH-2 | **Tử vi** Q&A (KB sao × cung, tứ hoá, lưu niên, 2 chế độ) | Tử vi ≥ 85% |
-| HH-3 | **Bát tự** (tiết khí, tứ trụ, thập thần, đại vận — golden oracle), Lục Hào vượng suy | golden 100%, Bát tự ≥ 80% |
-| HH-4 | **Phong thuỷ** (mệnh quái, bát trạch, cửa–chủ–bếp) | golden 100%, Phong thuỷ ≥ 80% |
-| HH-5 | Skill `huyenhoc-kb` + vòng tự cải thiện đa module, đối chiếu ctext khi mở mạng | vòng chạy được, báo cáo |
+| HH-2 | **Tử vi** Q&A (KB sao × cung, tứ hoá, lưu niên, 2 chế độ) | ✅ kho 687/687; holdout viết sau router 20/24 trước sửa → 24/24 |
+| HH-3 | **Bát tự** (tiết khí, tứ trụ, thập thần, đại vận — golden oracle), Lục Hào vượng suy | ✅ golden 42/42 + 667 tiết khí; kho 254/254; holdout 16/16 |
+| HH-4 | **Phong thuỷ** (mệnh quái, bát trạch, cửa–chủ–bếp) | ✅ bảng 8×8 tay 100%; kho 360/360; holdout 10/12 → 12/12 |
+| HH-5 | Skill `huyenhoc-kb` + vòng tự cải thiện đa module, đối chiếu ctext khi mở mạng | ✅ vòng chạy được, cổng chặn lùi; ctext: cấm cào → danh sách đối chiếu tay |
 
 ## 5. Ranh giới giữ nguyên ở mọi chế độ
 Khủng hoảng → hỗ trợ (115/113/111) · không dự đoán ngày chết, không chẩn đoán bệnh, không xổ số,
 không dùng để tuyển/sa thải · không phán "khắc" người thứ ba · phong thuỷ không bán vật phẩm "hoá giải".
+
+## 6. Nhật ký thực hiện
+
+### HH-2 — Tử vi (2026-09-30)
+- CALC: `tuvi_an_sao.van_han()` — đại hạn / tiểu hạn / lưu niên qua `astro.horoscope()` của iztro
+  2.6.0 (cùng bản ghim). Golden `fixtures/golden/ziwei_van_han.json` (4 lá × 4 ngày xem) + hai
+  phép thử độc lập với iztro: tuổi mụ = năm âm xem − năm âm sinh + 1 (Hồ Ngọc Đức), chi lưu niên
+  = chi năm âm của ngày xem (gồm ca trước Tết).
+- KB `app/kb/data/tuvi_kb.json` (nháp AI, `can_doi_chieu`): 12 cung (xem được / **không trả lời
+  được**), 14 chính tinh, 14×12 sao-cung, độ sáng, tứ hoá × 12 cung, 26 phụ tinh, chủ đề hạn,
+  17 mục giải thích, mẫu người khác / hợp hôn / con.
+- RULES `app/hoidap/tuvi.py`: loại `sao_cung` · `tu_hoa_cung` · `phu_tinh` · `ky_thuat` (không cần
+  lá số) · `la_so` (chọn cung theo chủ đề, vô chính diệu mượn cung đối) · `han` (3 lớp tách bạch,
+  đại hạn kế tiếp, năm cụ thể) · `hop_hon` / `la_so_con` / `nguoi_khac` → xin dữ liệu + đồng ý.
+  `chi_tiet` thêm xu hướng thuận/nghịch theo lục cát / lục sát / Kỵ; câu "tai nạn/kiện" ở
+  `chi_tiet` được trả lời kèm lưu ý không đoán biến cố, ở `tham_khao` bị từ chối nhẹ.
+- API `POST /v1/tuvi/hoi` (extra=forbid, `la_so` tuỳ chọn) · web `/tu-vi` + `/api/tuvi/hoi` · E2E 2 ca.
+- Giới hạn: lá số theo khung iztro (Trung Quốc) — cờ `nam_phai`; hợp hôn hai lá chưa làm (chỉ xin dữ liệu).
+
+### HH-3 — Bát tự + Lục Hào vượng suy (2026-09-30)
+- CALC `app/calc/tietkhi.py`: kinh độ Mặt Trời bằng VSOP87D rút gọn (Meeus ch. 32, phụ lục III) + FK5,
+  chương động, quang sai; ΔT Espenak–Meeus; Newton. Sai số so với oracle lunar-typescript: **tối đa 0,63
+  phút** trên 4.623 thời điểm 1900–2100 (bản Meeus rút gọn ch. 25 lệch tới 14 phút — đã bỏ).
+- CALC `app/calc/battu.py`: trụ năm theo Lập xuân, trụ tháng theo 12 tiết, trụ ngày theo JDN, giờ Tý
+  SWITCH_AT_0000 (23:xx giữ ngày, trụ giờ lấy Tý của ngày sau — dạ Tý, cờ `da_ty`), tàng can (Tỵ =
+  Bính·Canh·Mậu theo oracle), thập thần, ngũ hành theo **thang điểm công bố** (`THANG_DIEM`), thân
+  vượng/nhược, dụng thần **hai cách không tự chọn** (phù ức + điều hậu / cách cục nguyệt lệnh), đại vận
+  (thuận nghịch, khởi vận 4320 phút = 1 năm), lưu niên + xung hợp chi ngày. Cờ `tiet_edge` khi sinh
+  cách tiết ≤ 2 giờ.
+- Golden `fixtures/golden/battu.json` (oracle lunar-typescript 1.8.6, sect 2 — chỉ dùng khi sinh golden,
+  không chạy runtime): 42 ca tứ trụ + tàng can + thập thần + đại vận, 667 thời điểm tiết khí.
+- CALC `app/calc/vuong_suy.py`: Lục Hào nguyệt lệnh (vượng/tướng/hưu/tù/tử theo tiết), nhật thần,
+  tuần không → Kinh Dịch Lục Hào nay kèm vượng suy dụng thần (cờ `vuong_suy_rut_gon`; chưa xét ám động,
+  nhật phá, hồi đầu, ứng kỳ).
+- KB `battu_kb.json` (nháp AI): 10 nhật chủ × 4 mùa, 10 thập thần (nghĩa, khi nhiều/thiếu, nam/nữ),
+  4 trụ, 5 hành (màu/hướng/nghề ghi rõ **ứng dụng dân gian**), 10 cách cục, 11 mục giải thích.
+- RULES `app/hoidap/battu.py` · API `/v1/battu/la-so`, `/v1/battu/hoi` · web `/bat-tu` · E2E 2 ca.
+- Kho câu hỏi: 2 câu "bát tự của tôi và người yêu có hợp nhau" đổi nhãn `tra_loi` → `can_them_du_lieu`
+  cho khớp các câu hợp khác (cần lá số người kia).
+
+### HH-4 — Phong thuỷ (2026-09-30)
+- CALC `app/calc/phongthuy.py`: mệnh quái (mốc **Lập xuân** theo tiết khí; chỉ có năm → cờ
+  `chua_ro_ngay`), du niên bằng phép lật hào (khớp 100% bảng 8×8 chép tay — đối chiếu độc lập),
+  trạch theo phương toạ, cửa–chủ–bếp, sao năm (Ngũ Hoàng phi tinh, Thái Tuế, Tuế Phá, Tam Sát —
+  kiểm bằng các năm 2018–2026 đã biết), tuổi làm nhà Kim Lâu / Hoang Ốc / Tam Tai (**dân gian**).
+- KB `phongthuy_kb.json` (nháp AI): 8 du niên, 8 quái, 28 tình huống bố trí/loan đầu (mỗi mục ghi
+  `nguon` = cổ thư hay **dân gian**, kèm lý do và gợi ý thực tế), âm trạch (Táng Thư), 11 giải thích.
+- RULES `app/hoidap/phongthuy.py`: mệnh quái × hướng, du niên, cửa–bếp, loan đầu/bố trí, âm trạch,
+  năm, vợ chồng (xin dữ liệu hai người), hướng cá nhân (ngày sinh từ form hoặc "sinh năm …, nam/nữ"
+  trong câu). Từ chối vật phẩm "chiêu tài", bùa ngải.
+- API `/v1/phongthuy/menh-quai`, `/v1/phongthuy/hoi` · web `/phong-thuy` · E2E 2 ca.
+- Kho câu hỏi: 1 câu ("Vợ chồng tôi sinh 1990 và 1992…", 3 biến thể) đổi nhãn → `can_them_du_lieu`
+  (không rõ năm nào của ai, thiếu giới tính).
+
+### HH-5 — Skill KB + vòng tự cải thiện đa module (2026-09-30)
+- Skill `.claude/skills/huyenhoc-kb` (chuẩn nội dung 4 file KB, luật cấm, hai trường phái, dân gian,
+  bản quyền, duyệt nháp) và `.claude/skills/huyenhoc-tu-cai-thien` (hợp đồng + các bước + mốc).
+- `scripts/vong_cai_thien_huyenhoc.py`: `do` (4 module, ghi `lich_su_do_huyenhoc.jsonl`, exit 1 nếu lùi),
+  `bao-cao`, `kiem-kb` (đã bắt 2 cụm cấm trong KB Kinh Dịch HH-1 → sửa lời), `doi-chieu`
+  (→ `docs/DOI-CHIEU-HUYEN-HOC.md`, danh sách cho người duyệt).
+- Cổng `tests/test_huyenhoc_kho.py`: sàn 97%/module, khủng hoảng + từ chối 100%, chặn nhầm 0, KB sạch,
+  template không vi phạm bộ kiểm tra đầu ra (≈ 2,5 giây).
+- Nhật ký: bảng mới `huyenhoc_hoi_nhat_ky` (migration **0005 + down, chờ chủ dự án duyệt/chạy**); engine
+  lọc năm/giờ/ngày/SĐT/email/họ tên và **không gửi câu trả lời khi có dữ liệu sinh** (lá số, tứ trụ,
+  mệnh quái suy ngược được ngày giờ sinh). Bật chung cờ `NHAT_KY_HOI=1`.
+- ctext.org: mạng đã thông nhưng trang trả Cloudflare Turnstile và điều khoản **cấm scraping** (có thể
+  cố ý trả dữ liệu hỏng cho máy cào) → không cào. Đường đúng: gói đăng ký + API chính thức (api.ctext.org
+  còn bị mạng cloud chặn) hoặc người duyệt tra tay theo `docs/DOI-CHIEU-HUYEN-HOC.md`.
+
+## 7. Tổng kết HH-0 → HH-5
+
+| Module | CALC (kiểm chứng) | KB (nháp AI) | Kho câu hỏi | Holdout lần đầu |
+|---|---|---|---|---|
+| Tử vi | iztro 2.6.0 + vận hạn (golden + 2 phép thử độc lập) | 12 cung · 14 sao · 168 sao-cung · 48 tứ hoá-cung | 687/687 | 20/24 |
+| Kinh Dịch | Mai Hoa, thể–dụng, Lục Hào + vượng suy | 64 quẻ × 5 lĩnh vực | 730/730 | — |
+| Bát tự | tiết khí VSOP87 (≤ 0,63 phút), golden 42/42 | 10 nhật chủ × 4 mùa · 10 thập thần · 10 cách | 254/254 | 16/16 |
+| Phong thuỷ | Bát trạch (bảng tay 8×8), sao năm | 8 du niên · 28 bố trí · âm trạch | 360/360 | 10/12 |
+
+Chưa làm (việc tiếp theo, theo thứ tự giá trị): duyệt/đối chiếu nguyên văn 4 KB (người có nghề) ·
+hợp hôn hai lá số (tử vi) / hai tứ trụ (bát tự) khi có đồng ý · Huyền không phi tinh theo vận ·
+Lục Hào ám động / nhật phá / ứng kỳ · hào từ 384 hào (cần nguồn công cộng, không GPL) · bật LLM diễn đạt
+cho 4 module trên web (hiện chỉ template).

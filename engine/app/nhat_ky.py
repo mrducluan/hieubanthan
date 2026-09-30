@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Nhật ký hỏi đáp thần số — nguyên liệu cho vòng tự cải thiện.
+"""Nhật ký hỏi đáp (thần số + Huyền học) — nguyên liệu cho vòng tự cải thiện.
 
 Quyết định chủ dự án 2026-09-30: lưu câu hỏi ĐÃ LỌC + phân loại + độ phủ + câu
 trả lời. KHÔNG lưu user_id, họ tên, ngày sinh của ai. Câu hỏi được lọc ngày
@@ -55,14 +55,59 @@ def ban_ghi(cau_hoi: str, kq: dict) -> dict:
     }
 
 
-def ghi(cau_hoi: str, kq: dict) -> None:
-    if not bat():
-        return
+def _gui(bang: str, du_lieu: dict) -> None:
     url, key = os.environ["SUPABASE_URL"].rstrip("/"), os.environ["SUPABASE_ANON_KEY"]
     try:
-        httpx.post(f"{url}/rest/v1/thanso_hoi_nhat_ky", timeout=5,
+        httpx.post(f"{url}/rest/v1/{bang}", timeout=5,
                    headers={"apikey": key, "Authorization": f"Bearer {key}",
                             "Content-Type": "application/json", "Prefer": "return=minimal"},
-                   json=ban_ghi(cau_hoi, kq))
+                   json=du_lieu)
     except Exception:  # noqa: BLE001 — nhật ký không được làm hỏng Q&A
         pass
+
+
+def ghi(cau_hoi: str, kq: dict) -> None:
+    if bat():
+        _gui("thanso_hoi_nhat_ky", ban_ghi(cau_hoi, kq))
+
+
+# --------------------------------------------------------------------------- #
+# Huyền học (bảng huyenhoc_hoi_nhat_ky, migration 0005)
+# --------------------------------------------------------------------------- #
+_NAM = re.compile(r"(?<!\d)(18|19|20)\d\d(?!\d)")
+_GIO = re.compile(r"(?<!\d)\d{1,2}\s*(?:h|giờ|:)\s*\d{0,2}(?!\d)")
+
+
+def loc_cau_hoi_huyenhoc(s: str) -> str:
+    """Như loc_cau_hoi, thêm lọc năm (sinh năm 1990) và giờ (9 giờ, 23:30)."""
+    return _GIO.sub("[giờ]", _NAM.sub("[năm]", loc_cau_hoi(s)))
+
+
+# Khối bằng chứng suy ra từ ngày giờ sinh (kể cả năm sinh nêu trong câu hỏi).
+KHOI_TU_SINH = {"menh_quai", "tuoi_lam_nha", "tu_tru", "khoi_van", "dai_van", "luu_nien", "cac_dai_van",
+                "tuoi", "han", "than_cu", "ngu_hanh", "dung_than", "tru", "tang_can", "vo_chong"}
+
+
+def ban_ghi_huyenhoc(mo_dun: str, cau_hoi: str, kq: dict, co_du_lieu_sinh: bool) -> dict:
+    goi, pl = kq["bang_chung"], kq["phan_loai"]
+    co_du_lieu_sinh = co_du_lieu_sinh or any(m["loai"] in KHOI_TU_SINH for m in goi["muc"])
+    return {
+        "mo_dun": mo_dun,
+        "cau_hoi_da_loc": loc_cau_hoi_huyenhoc(cau_hoi)[:400],
+        "loai": pl.get("loai") or "khac",
+        "xu_ly": pl.get("xu_ly") or "tra_loi",
+        "che_do": pl.get("che_do"),
+        "do_phu": kq["do_phu"],
+        "co_du_lieu_sinh": co_du_lieu_sinh,
+        "khoi": sorted({m["loai"] for m in goi["muc"]}),
+        "can_them": kq["can_them"],
+        "loi_kiem_tra": kq["loi_kiem_tra"],
+        # Lá số / tứ trụ / mệnh quái suy ngược được ngày giờ sinh → không lưu câu trả lời.
+        "cau_tra_loi": None if co_du_lieu_sinh else kq["cau_tra_loi"][:4000],
+        "engine_version": ENGINE_VERSION,
+    }
+
+
+def ghi_huyenhoc(mo_dun: str, cau_hoi: str, kq: dict, co_du_lieu_sinh: bool) -> None:
+    if bat():
+        _gui("huyenhoc_hoi_nhat_ky", ban_ghi_huyenhoc(mo_dun, cau_hoi, kq, co_du_lieu_sinh))

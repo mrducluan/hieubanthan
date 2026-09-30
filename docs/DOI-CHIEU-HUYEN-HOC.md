@@ -1,0 +1,178 @@
+# Danh sách đối chiếu nguyên văn (nháp AI → da_duyet)
+
+ctext.org chặn máy đọc tự động và cấm scraping; dùng API chính thức (gói đăng ký) hoặc tra tay.
+
+## tuvi — trạng thái `nhap_ai`, cần đối chiếu: True
+Nguồn: {"tu_vi_dau_so_toan_thu": "Tử Vi Đẩu Số Toàn Thư (Trần Đoàn, tương truyền)", "tuvi_vn": "Khung Nam phái — skill tuvi-vn (Nguyễn Phát Lộc)"}
+- [ ] chinh_tinh.Tử Vi
+- [ ] chinh_tinh.Thiên Cơ
+- [ ] chinh_tinh.Thái Dương
+- [ ] chinh_tinh.Vũ Khúc
+- [ ] chinh_tinh.Thiên Đồng
+- [ ] chinh_tinh.Liêm Trinh
+- [ ] chinh_tinh.Thiên Phủ
+- [ ] chinh_tinh.Thái Âm
+- [ ] chinh_tinh.Tham Lang
+- [ ] chinh_tinh.Cự Môn
+- [ ] chinh_tinh.Thiên Tướng
+- [ ] chinh_tinh.Thiên Lương
+- [ ] chinh_tinh.Thất Sát
+- [ ] chinh_tinh.Phá Quân
+- [ ] cung.Mệnh
+- [ ] cung.Huynh Đệ
+- [ ] cung.Phu Thê
+- [ ] cung.Tử Nữ
+- [ ] cung.Tài Bạch
+- [ ] cung.Tật Ách
+- [ ] cung.Thiên Di
+- [ ] cung.Nô Bộc
+- [ ] cung.Quan Lộc
+- [ ] cung.Điền Trạch
+- [ ] cung.Phúc Đức
+- [ ] cung.Phụ Mẫu
+- [ ] tu_hoa.Lộc
+- [ ] tu_hoa.Quyền
+- [ ] tu_hoa.Khoa
+- [ ] tu_hoa.Kỵ
+
+## kinhdich — trạng thái `nhap_ai`, cần đối chiếu: True
+Nguồn: {"chu_dich": "Chu Dịch (Tây Chu; Thập Dực Chiến Quốc–Hán) — ctext.org/book-of-changes", "mai_hoa_dich_so": "Mai Hoa Dịch Số — Thiệu Ung (Bắc Tống)", "tang_san_boc_dich": "Tăng San Bốc Dịch — Dã Hạc Lão Nhân (Thanh)"}
+- [ ] Quẻ 1 Càn 乾: Chu Dịch, quẻ 1 Càn 乾 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 2 Khôn 坤: Chu Dịch, quẻ 2 Khôn 坤 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 3 Truân 屯: Chu Dịch, quẻ 3 Truân 屯 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 4 Mông 蒙: Chu Dịch, quẻ 4 Mông 蒙 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 5 Nhu 需: Chu Dịch, quẻ 5 Nhu 需 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 6 Tụng 訟: Chu Dịch, quẻ 6 Tụng 訟 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 7 Sư 師: Chu Dịch, quẻ 7 Sư 師 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 8 Tỷ 比: Chu Dịch, quẻ 8 Tỷ 比 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 9 Tiểu Súc 小畜: Chu Dịch, quẻ 9 Tiểu Súc 小畜 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 10 Lý 履: Chu Dịch, quẻ 10 Lý 履 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 11 Thái 泰: Chu Dịch, quẻ 11 Thái 泰 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 12 Bĩ 否: Chu Dịch, quẻ 12 Bĩ 否 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 13 Đồng Nhân 同人: Chu Dịch, quẻ 13 Đồng Nhân 同人 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 14 Đại Hữu 大有: Chu Dịch, quẻ 14 Đại Hữu 大有 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 15 Khiêm 謙: Chu Dịch, quẻ 15 Khiêm 謙 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 16 Dự 豫: Chu Dịch, quẻ 16 Dự 豫 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 17 Tùy 隨: Chu Dịch, quẻ 17 Tùy 隨 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 18 Cổ 蠱: Chu Dịch, quẻ 18 Cổ 蠱 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 19 Lâm 臨: Chu Dịch, quẻ 19 Lâm 臨 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 20 Quan 觀: Chu Dịch, quẻ 20 Quan 觀 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 21 Phệ Hạp 噬嗑: Chu Dịch, quẻ 21 Phệ Hạp 噬嗑 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 22 Bí 賁: Chu Dịch, quẻ 22 Bí 賁 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 23 Bác 剝: Chu Dịch, quẻ 23 Bác 剝 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 24 Phục 復: Chu Dịch, quẻ 24 Phục 復 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 25 Vô Vọng 無妄: Chu Dịch, quẻ 25 Vô Vọng 無妄 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 26 Đại Súc 大畜: Chu Dịch, quẻ 26 Đại Súc 大畜 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 27 Di 頤: Chu Dịch, quẻ 27 Di 頤 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 28 Đại Quá 大過: Chu Dịch, quẻ 28 Đại Quá 大過 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 29 Khảm 坎: Chu Dịch, quẻ 29 Khảm 坎 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 30 Ly 離: Chu Dịch, quẻ 30 Ly 離 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 31 Hàm 咸: Chu Dịch, quẻ 31 Hàm 咸 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 32 Hằng 恆: Chu Dịch, quẻ 32 Hằng 恆 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 33 Độn 遯: Chu Dịch, quẻ 33 Độn 遯 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 34 Đại Tráng 大壯: Chu Dịch, quẻ 34 Đại Tráng 大壯 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 35 Tấn 晉: Chu Dịch, quẻ 35 Tấn 晉 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 36 Minh Di 明夷: Chu Dịch, quẻ 36 Minh Di 明夷 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 37 Gia Nhân 家人: Chu Dịch, quẻ 37 Gia Nhân 家人 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 38 Khuê 睽: Chu Dịch, quẻ 38 Khuê 睽 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 39 Kiển 蹇: Chu Dịch, quẻ 39 Kiển 蹇 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 40 Giải 解: Chu Dịch, quẻ 40 Giải 解 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 41 Tổn 損: Chu Dịch, quẻ 41 Tổn 損 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 42 Ích 益: Chu Dịch, quẻ 42 Ích 益 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 43 Quải 夬: Chu Dịch, quẻ 43 Quải 夬 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 44 Cấu 姤: Chu Dịch, quẻ 44 Cấu 姤 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 45 Tụy 萃: Chu Dịch, quẻ 45 Tụy 萃 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 46 Thăng 升: Chu Dịch, quẻ 46 Thăng 升 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 47 Khốn 困: Chu Dịch, quẻ 47 Khốn 困 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 48 Tỉnh 井: Chu Dịch, quẻ 48 Tỉnh 井 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 49 Cách 革: Chu Dịch, quẻ 49 Cách 革 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 50 Đỉnh 鼎: Chu Dịch, quẻ 50 Đỉnh 鼎 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 51 Chấn 震: Chu Dịch, quẻ 51 Chấn 震 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 52 Cấn 艮: Chu Dịch, quẻ 52 Cấn 艮 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 53 Tiệm 漸: Chu Dịch, quẻ 53 Tiệm 漸 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 54 Quy Muội 歸妹: Chu Dịch, quẻ 54 Quy Muội 歸妹 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 55 Phong 豐: Chu Dịch, quẻ 55 Phong 豐 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 56 Lữ 旅: Chu Dịch, quẻ 56 Lữ 旅 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 57 Tốn 巽: Chu Dịch, quẻ 57 Tốn 巽 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 58 Đoài 兌: Chu Dịch, quẻ 58 Đoài 兌 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 59 Hoán 渙: Chu Dịch, quẻ 59 Hoán 渙 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 60 Tiết 節: Chu Dịch, quẻ 60 Tiết 節 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 61 Trung Phu 中孚: Chu Dịch, quẻ 61 Trung Phu 中孚 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 62 Tiểu Quá 小過: Chu Dịch, quẻ 62 Tiểu Quá 小過 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 63 Ký Tế 既濟: Chu Dịch, quẻ 63 Ký Tế 既濟 (quái từ, Thoán, Đại Tượng)
+- [ ] Quẻ 64 Vị Tế 未濟: Chu Dịch, quẻ 64 Vị Tế 未濟 (quái từ, Thoán, Đại Tượng)
+
+## battu — trạng thái `nhap_ai`, cần đối chiếu: True
+Nguồn: {"uyen_hai_tu_binh": "淵海子平", "tu_binh_chan_thuyen": "子平真詮", "trich_thien_tuy": "滴天髓"}
+- [ ] nhat_chu.Giáp
+- [ ] nhat_chu.Ất
+- [ ] nhat_chu.Bính
+- [ ] nhat_chu.Đinh
+- [ ] nhat_chu.Mậu
+- [ ] nhat_chu.Kỷ
+- [ ] nhat_chu.Canh
+- [ ] nhat_chu.Tân
+- [ ] nhat_chu.Nhâm
+- [ ] nhat_chu.Quý
+- [ ] thap_than.Tỷ Kiên
+- [ ] thap_than.Kiếp Tài
+- [ ] thap_than.Thực Thần
+- [ ] thap_than.Thương Quan
+- [ ] thap_than.Thiên Tài
+- [ ] thap_than.Chính Tài
+- [ ] thap_than.Thất Sát
+- [ ] thap_than.Chính Quan
+- [ ] thap_than.Thiên Ấn
+- [ ] thap_than.Chính Ấn
+- [ ] cach_cuc.Chính Quan cách
+- [ ] cach_cuc.Thất Sát cách
+- [ ] cach_cuc.Chính Tài cách
+- [ ] cach_cuc.Thiên Tài cách
+- [ ] cach_cuc.Chính Ấn cách
+- [ ] cach_cuc.Thiên Ấn cách
+- [ ] cach_cuc.Thực Thần cách
+- [ ] cach_cuc.Thương Quan cách
+- [ ] cach_cuc.Kiến Lộc cách
+- [ ] cach_cuc.Nguyệt Kiếp (Dương Nhận) cách
+
+## phongthuy — trạng thái `nhap_ai`, cần đối chiếu: True
+Nguồn: {"duong_trach_tam_yeu": "陽宅三要", "tang_thu": "葬書", "ham_long_kinh": "撼龍經"}
+- [ ] du_nien.Sinh Khí
+- [ ] du_nien.Thiên Y
+- [ ] du_nien.Diên Niên
+- [ ] du_nien.Phục Vị
+- [ ] du_nien.Hoạ Hại
+- [ ] du_nien.Lục Sát
+- [ ] du_nien.Ngũ Quỷ
+- [ ] du_nien.Tuyệt Mệnh
+- [ ] bo_tri.duong_dam
+- [ ] bo_tri.nga_ba
+- [ ] bo_tri.cot_dien
+- [ ] bo_tri.song_truoc
+- [ ] bo_tri.nghia_trang
+- [ ] bo_tri.no_hau
+- [ ] bo_tri.minh_duong
+- [ ] bo_tri.tu_linh
+- [ ] bo_tri.bep_doi_cua
+- [ ] bo_tri.wc_giua_nha
+- [ ] bo_tri.cau_thang_cua
+- [ ] bo_tri.phong_ngu_tren_bep
+- [ ] bo_tri.guong_giuong
+- [ ] bo_tri.ban_tho
+- [ ] bo_tri.cua_doi_nhau
+- [ ] bo_tri.nha_chu_l
+- [ ] bo_tri.xa_ngang
+- [ ] bo_tri.quay_lung_cua
+- [ ] bo_tri.bep_wc
+- [ ] bo_tri.phong_lam_viec
+- [ ] bo_tri.phong_tre
+- [ ] bo_tri.nguoi_gia
+- [ ] bo_tri.vo_chong_ngu
+- [ ] bo_tri.cai_nhau
+- [ ] bo_tri.cua_hang
+- [ ] bo_tri.can_ho
+- [ ] bo_tri.hoa_giai
+- [ ] am_trach.long_mach
+- [ ] am_trach.dat_mo
+- [ ] am_trach.anh_huong
+

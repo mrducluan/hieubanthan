@@ -35,8 +35,32 @@ export default async function Home() {
           </p>
         </Link>
 
+        <Link href="/tu-vi" className="home-card">
+          <h2>Tử vi</h2>
+          <p>
+            Hỏi về lá số: cung, sao, tứ hoá và vận hạn ba lớp — an sao cục bộ, lời đọc có nguồn,
+            không phán bệnh hay tai nạn.
+          </p>
+        </Link>
+
+        <Link href="/bat-tu" className="home-card">
+          <h2>Bát tự</h2>
+          <p>
+            Tứ trụ theo tiết khí, thập thần, ngũ hành, đại vận — dụng thần trình bày cả hai trường phái,
+            không tự chọn.
+          </p>
+        </Link>
+
+        <Link href="/phong-thuy" className="home-card">
+          <h2>Phong thuỷ</h2>
+          <p>
+            Bát trạch: hướng hợp tuổi, cửa–chủ–bếp, sao năm; loan đầu và bố trí — ghi rõ chỗ nào là
+            quan niệm dân gian, không bán vật phẩm.
+          </p>
+        </Link>
+
         <div className="home-card" style={{ borderStyle: "dashed", cursor: "default" }}>
-          <h2>Nhân tướng · Tử vi · Bát tự · Phong thuỷ</h2>
+          <h2>Nhân tướng</h2>
           <p className="soon">Đang xây dựng.</p>
         </div>
       </div>

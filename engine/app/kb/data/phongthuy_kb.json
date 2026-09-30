@@ -1,0 +1,563 @@
+{
+ "_nguon": "Nháp AI tổng hợp Dương Trạch Tam Yếu, Táng Thư, Hám Long Kinh (kiến thức phổ thông) + quan niệm dân gian ghi rõ; chưa đối chiếu nguyên văn.",
+ "source": {
+  "duong_trach_tam_yeu": "陽宅三要",
+  "tang_thu": "葬書",
+  "ham_long_kinh": "撼龍經"
+ },
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "du_nien": {
+  "Sinh Khí": {
+   "loai": "cát",
+   "y_nghia": "Hướng tốt nhất: sinh sôi, phát triển, danh tiếng.",
+   "dung_cho": "cửa chính, bàn làm việc, hướng ngồi khi cần năng lượng"
+  },
+  "Thiên Y": {
+   "loai": "cát",
+   "y_nghia": "Hướng tốt: sức khoẻ, được giúp đỡ, bình ổn.",
+   "dung_cho": "phòng ngủ người lớn tuổi, hướng bếp (miệng bếp)"
+  },
+  "Diên Niên": {
+   "loai": "cát",
+   "y_nghia": "Hướng tốt: hoà hợp, bền lâu, quan hệ vợ chồng.",
+   "dung_cho": "phòng ngủ vợ chồng, đầu giường"
+  },
+  "Phục Vị": {
+   "loai": "cát",
+   "y_nghia": "Hướng yên: ổn định, tự tại, học hành, suy ngẫm.",
+   "dung_cho": "bàn học, bàn thờ, phòng làm việc tĩnh"
+  },
+  "Hoạ Hại": {
+   "loai": "hung",
+   "y_nghia": "Hướng xấu nhẹ: thị phi, trục trặc nhỏ.",
+   "dung_cho": "kho, nhà vệ sinh"
+  },
+  "Lục Sát": {
+   "loai": "hung",
+   "y_nghia": "Hướng xấu: rối ren, bất hoà, tình cảm lộn xộn.",
+   "dung_cho": "kho, nhà vệ sinh, cầu thang"
+  },
+  "Ngũ Quỷ": {
+   "loai": "hung",
+   "y_nghia": "Hướng xấu: hao tổn, bất ngờ không hay, tranh chấp.",
+   "dung_cho": "nhà vệ sinh, kho; tránh đặt cửa chính"
+  },
+  "Tuyệt Mệnh": {
+   "loai": "hung",
+   "y_nghia": "Hướng xấu nhất: cạn kiệt, trắc trở lớn.",
+   "dung_cho": "nơi ít dùng; tránh cửa chính, đầu giường"
+  }
+ },
+ "quai": {
+  "Khảm": {
+   "ngu_hanh": "Thuỷ",
+   "phuong": "Bắc",
+   "nguoi": "trung nam",
+   "tinh_chat": "sâu sắc, uyển chuyển"
+  },
+  "Khôn": {
+   "ngu_hanh": "Thổ",
+   "phuong": "Tây Nam",
+   "nguoi": "mẹ",
+   "tinh_chat": "bao dung, nuôi dưỡng"
+  },
+  "Chấn": {
+   "ngu_hanh": "Mộc",
+   "phuong": "Đông",
+   "nguoi": "trưởng nam",
+   "tinh_chat": "năng động, khởi đầu"
+  },
+  "Tốn": {
+   "ngu_hanh": "Mộc",
+   "phuong": "Đông Nam",
+   "nguoi": "trưởng nữ",
+   "tinh_chat": "mềm mỏng, lan toả"
+  },
+  "Càn": {
+   "ngu_hanh": "Kim",
+   "phuong": "Tây Bắc",
+   "nguoi": "cha",
+   "tinh_chat": "mạnh mẽ, lãnh đạo"
+  },
+  "Đoài": {
+   "ngu_hanh": "Kim",
+   "phuong": "Tây",
+   "nguoi": "thiếu nữ",
+   "tinh_chat": "vui vẻ, giao tiếp"
+  },
+  "Cấn": {
+   "ngu_hanh": "Thổ",
+   "phuong": "Đông Bắc",
+   "nguoi": "thiếu nam",
+   "tinh_chat": "vững vàng, tích luỹ"
+  },
+  "Ly": {
+   "ngu_hanh": "Hoả",
+   "phuong": "Nam",
+   "nguoi": "trung nữ",
+   "tinh_chat": "sáng suốt, nhiệt huyết"
+  }
+ },
+ "bo_tri": {
+  "duong_dam": {
+   "tieu_de": "Đường đâm thẳng vào nhà",
+   "noi_dung": "Loan đầu gọi là 'lộ xung': khí và dòng xe dồn thẳng vào cửa. Thực tế: ồn, bụi, nguy cơ xe lao vào.",
+   "goi_y": "Lùi cửa, làm cổng/tường thấp hoặc cây xanh chắn phía trước.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "duong dam",
+    "cuoi duong",
+    "dam thang"
+   ]
+  },
+  "nga_ba": {
+   "tieu_de": "Nhà ở ngã ba, ngã tư",
+   "noi_dung": "Khí động mạnh, nhiều hướng xung. Thực tế: ồn, nhiều người qua lại — hợp kinh doanh hơn để ở.",
+   "goi_y": "Để ở: ưu tiên cửa lệch khỏi trục đường, cách âm; kinh doanh: tận dụng mặt tiền.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "nga ba",
+    "nga tu"
+   ]
+  },
+  "cot_dien": {
+   "tieu_de": "Cột điện, cây lớn trước cửa",
+   "noi_dung": "Vật cản sắc nhọn trước cửa (xung sát). Thực tế: cản lối, lo ngại an toàn điện.",
+   "goi_y": "Giữ khoảng cách, đặt cửa lệch; kiểm tra an toàn điện với đơn vị quản lý.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "cot dien",
+    "cay lon truoc",
+    "doi dien cot"
+   ]
+  },
+  "song_truoc": {
+   "tieu_de": "Sông, hồ trước nhà",
+   "noi_dung": "Táng Thư: 'khí gặp nước thì dừng' — nước ôm trước mặt (thuỷ bão) là tốt; nước chảy thẳng đi hoặc cắt ngang gấp là kém.",
+   "goi_y": "Xem nước ôm vòng hay chảy thẳng; lưu ý an toàn mùa mưa lũ, độ ẩm.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "song chay",
+    "ho truoc",
+    "song truoc",
+    "nuoc truoc",
+    "ho nuoc",
+    "ao truoc"
+   ]
+  },
+  "nghia_trang": {
+   "tieu_de": "Nhà gần nghĩa trang, bệnh viện",
+   "noi_dung": "Quan niệm âm khí nặng. Thực tế: tâm lý không thoải mái với nhiều người.",
+   "goi_y": "Nếu thấy bất an, tăng cây xanh, ánh sáng; quyết định theo cảm nhận của cả nhà.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "nghia trang",
+    "gan benh vien",
+    "nha tang le"
+   ]
+  },
+  "no_hau": {
+   "tieu_de": "Đất nở hậu hay thóp hậu",
+   "noi_dung": "Quan niệm: đất nở hậu (sau rộng hơn trước) giữ được khí, thóp hậu khí dễ thoát.",
+   "goi_y": "Đất thóp hậu vẫn có thể bố trí tốt; quan trọng là công năng và ánh sáng.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "no hau",
+    "thop hau"
+   ]
+  },
+  "minh_duong": {
+   "tieu_de": "Minh đường",
+   "noi_dung": "Khoảng trống trước nhà nơi khí tụ (Táng Thư, Hám Long Kinh). Minh đường rộng, sáng, sạch là tốt.",
+   "goi_y": "Giữ sân/hiên trước cửa thoáng, sạch, không chất đồ.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "minh duong"
+   ]
+  },
+  "tu_linh": {
+   "tieu_de": "Tả Thanh Long, hữu Bạch Hổ",
+   "noi_dung": "Mô hình tứ linh: sau có Huyền Vũ (tựa), trước có Chu Tước (thoáng), trái (Thanh Long) nên cao hơn phải (Bạch Hổ). Với nhà phố: nhà bên trái cao hơn hoặc bằng là thuận.",
+   "goi_y": "Không đổi được nhà hàng xóm — ưu tiên phía sau có chỗ tựa (tường đặc), trước thoáng.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "thanh long",
+    "bach ho",
+    "huyen vu",
+    "chu tuoc",
+    "tu linh"
+   ]
+  },
+  "bep_doi_cua": {
+   "tieu_de": "Bếp đối diện cửa chính",
+   "noi_dung": "Dương Trạch Tam Yếu xem cửa và bếp là hai trong ba yếu tố chính; bếp nhìn thẳng ra cửa bị gió lùa, lộ bếp.",
+   "goi_y": "Đổi hướng bếp hoặc có vách ngăn; thực tế giúp giữ lửa ổn định và riêng tư.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "bep doi dien cua",
+    "bep dat doi dien"
+   ]
+  },
+  "wc_giua_nha": {
+   "tieu_de": "Nhà vệ sinh ở giữa nhà",
+   "noi_dung": "Quan niệm: trung cung là 'tim' nhà, đặt WC ở đó không tốt. Thực tế: mùi, ẩm, khó thông gió.",
+   "goi_y": "Thông gió cưỡng bức, giữ khô sạch; nếu xây mới nên dời ra góc.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "ve sinh o giua",
+    "wc o giua",
+    "toilet giua"
+   ]
+  },
+  "cau_thang_cua": {
+   "tieu_de": "Cầu thang đối diện cửa chính",
+   "noi_dung": "Quan niệm: khí vào cửa chạy thẳng lên/xuống, không tụ. Thực tế: lối đi chật, thiếu riêng tư.",
+   "goi_y": "Đặt vách, bình phong hoặc xoay chân cầu thang nếu được.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "cau thang doi dien"
+   ]
+  },
+  "phong_ngu_tren_bep": {
+   "tieu_de": "Phòng ngủ trên bếp",
+   "noi_dung": "Quan niệm: hoả khí bốc lên gây bất an. Thực tế: nóng, mùi, tiếng ồn.",
+   "goi_y": "Cách nhiệt sàn, kê giường tránh ngay trên vị trí bếp.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "phong ngu tren bep",
+    "ngu tren bep"
+   ]
+  },
+  "guong_giuong": {
+   "tieu_de": "Gương đối diện giường",
+   "noi_dung": "Quan niệm dân gian: gương phản chiếu gây bất an giấc ngủ. Thực tế: ánh sáng phản xạ, giật mình khi thức dậy.",
+   "goi_y": "Dời gương sang bên hoặc che lại khi ngủ.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "guong doi dien",
+    "guong chieu"
+   ]
+  },
+  "ban_tho": {
+   "tieu_de": "Vị trí bàn thờ",
+   "noi_dung": "Nên đặt nơi trang nghiêm, có tựa (lưng tựa tường đặc), không đối diện WC hay dưới xà; nhiều nơi chọn hướng tốt theo mệnh quái gia chủ.",
+   "goi_y": "Yên tĩnh, sạch sẽ, cao hơn tầm mắt là đủ trang trọng.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "ban tho"
+   ]
+  },
+  "cua_doi_nhau": {
+   "tieu_de": "Cửa phòng đối nhau",
+   "noi_dung": "Quan niệm: hai cửa đối thẳng gây 'đấu khẩu'. Thực tế: thiếu riêng tư, gió lùa.",
+   "goi_y": "Dùng rèm, lệch cánh mở, giữ cửa khép.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "cua phong doi",
+    "cua doi nhau",
+    "cua sau doi dien cua truoc"
+   ]
+  },
+  "nha_chu_l": {
+   "tieu_de": "Nhà chữ L, nhà thiếu góc",
+   "noi_dung": "Bát trạch: thiếu góc là thiếu một cung của trạch (ví dụ thiếu Tây Bắc = thiếu Càn). Thực tế: công năng không vuông vức.",
+   "goi_y": "Bố trí lại công năng, dùng sân vườn lấp phần khuyết; không cần mua vật phẩm hoá giải.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "chu l",
+    "thieu goc",
+    "khuyet goc"
+   ]
+  },
+  "xa_ngang": {
+   "tieu_de": "Giường, bàn dưới xà ngang",
+   "noi_dung": "Quan niệm: xà đè gây áp lực. Thực tế: cảm giác bị đè, bụi.",
+   "goi_y": "Dời giường/bàn khỏi ngay dưới xà hoặc làm trần giả.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "xa ngang",
+    "duoi xa"
+   ]
+  },
+  "quay_lung_cua": {
+   "tieu_de": "Ngồi quay lưng ra cửa",
+   "noi_dung": "Nguyên tắc 'có tựa': ngồi lưng dựa tường, nhìn được cửa (vị trí chỉ huy). Thực tế: yên tâm, không bị giật mình.",
+   "goi_y": "Xoay bàn để nhìn được cửa, lưng dựa tường đặc.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "quay lung",
+    "lung ra cua"
+   ]
+  },
+  "bep_wc": {
+   "tieu_de": "Bếp cạnh nhà vệ sinh",
+   "noi_dung": "Quan niệm thuỷ hoả xung và uế khí. Thực tế: vệ sinh an toàn thực phẩm.",
+   "goi_y": "Không chung vách nếu xây mới; giữ cửa WC đóng, thông gió tốt.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "bep va nha ve sinh",
+    "bep canh",
+    "bep sat"
+   ]
+  },
+  "phong_lam_viec": {
+   "tieu_de": "Phòng / bàn làm việc",
+   "noi_dung": "Nguyên tắc 'có tựa, nhìn cửa': lưng dựa tường đặc, mặt nhìn được lối vào; Bát trạch hay chọn hướng Sinh Khí hoặc Phục Vị của người ngồi.",
+   "goi_y": "Đặt nơi yên tĩnh, đủ sáng tự nhiên từ bên cạnh, tránh ngồi ngay dưới xà hoặc sát cửa WC.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "phong lam viec",
+    "ban lam viec",
+    "goc lam viec"
+   ]
+  },
+  "phong_tre": {
+   "tieu_de": "Phòng trẻ em, góc học tập",
+   "noi_dung": "Bát trạch hay chọn hướng Phục Vị hoặc Sinh Khí của trẻ cho bàn học.",
+   "goi_y": "Đủ sáng tự nhiên, yên tĩnh, bàn học nhìn ra cửa, ít đồ gây xao nhãng.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "phong tre",
+    "tre con",
+    "be hoc",
+    "con trai toi",
+    "con gai toi"
+   ]
+  },
+  "nguoi_gia": {
+   "tieu_de": "Phòng người lớn tuổi",
+   "noi_dung": "Bát trạch hay chọn hướng Thiên Y của người đó.",
+   "goi_y": "Tầng trệt, gần WC, đủ sáng, lối đi an toàn chống trượt.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "nguoi gia",
+    "ong ba",
+    "bo me gia"
+   ]
+  },
+  "vo_chong_ngu": {
+   "tieu_de": "Phòng ngủ vợ chồng",
+   "noi_dung": "Bát trạch hay chọn hướng Diên Niên cho đầu giường vợ chồng.",
+   "goi_y": "Phòng gọn, ánh sáng dịu, giường có tựa, ít thiết bị điện tử; hai người cùng thống nhất cách bố trí.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "phong ngu vo chong",
+    "tinh duyen",
+    "em am",
+    "vo chong nen bo tri"
+   ]
+  },
+  "cai_nhau": {
+   "tieu_de": "Nhà hay cãi nhau",
+   "noi_dung": "Phong thuỷ không thay được giao tiếp. Có thể giảm căng thẳng bằng không gian thoáng, đủ sáng, bớt đồ đạc.",
+   "goi_y": "Dành một góc chung thoải mái cho cả nhà; nếu mâu thuẫn kéo dài, cân nhắc tư vấn gia đình.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "hay cai nhau",
+    "cai nhau"
+   ]
+  },
+  "cua_hang": {
+   "tieu_de": "Cửa hàng, văn phòng",
+   "noi_dung": "Dương trạch áp dụng cho nơi kinh doanh: cửa (khẩu khí) thoáng, sáng, dễ nhận biết; quầy thu ngân vững, có tựa, nhìn được cửa.",
+   "goi_y": "Ưu tiên vị trí dễ thấy, lối vào không bị chắn; hướng ngồi của chủ theo hướng tốt nếu được.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "cua hang",
+    "van phong",
+    "quay thu ngan",
+    "ban giam doc",
+    "buon ban",
+    "kinh doanh"
+   ]
+  },
+  "can_ho": {
+   "tieu_de": "Căn hộ chung cư",
+   "noi_dung": "Nhiều người lấy cửa chính căn hộ làm hướng nhà; người khác lấy mặt ban công/cửa sổ lớn (nơi đón sáng). Hai cách có thể cho kết quả khác nhau.",
+   "goi_y": "Nêu rõ bạn dùng cách nào; ưu tiên ánh sáng, thông gió, tầng không quá ẩm.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "can ho",
+    "chung cu",
+    "ban cong",
+    "tang cao"
+   ]
+  },
+  "hoa_giai": {
+   "tieu_de": "Hoá giải hướng xấu",
+   "noi_dung": "Bát trạch gợi ý: đổi hướng cửa phụ, hướng ngồi, hướng đầu giường, miệng bếp sang hướng tốt của gia chủ ('toạ hung hướng cát').",
+   "goi_y": "Điều chỉnh bố trí trước; không cần mua vật phẩm đắt tiền. Hệ thống không giới thiệu vật phẩm.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "hoa giai",
+    "huong xau"
+   ]
+  }
+ },
+ "am_trach": {
+  "long_mach": {
+   "tieu_de": "Táng Thư về long mạch",
+   "noi_dung": "Táng Thư (Quách Phác): 'khí thừa phong tắc tán, giới thuỷ tắc chỉ' — khí gặp gió thì tan, gặp nước thì dừng; chọn nơi tàng phong tụ thuỷ.",
+   "tu_khoa": [
+    "long mach",
+    "tang thu"
+   ]
+  },
+  "dat_mo": {
+   "tieu_de": "Chọn đất đặt mộ",
+   "noi_dung": "Cổ thư xét thế đất (có tựa, có che chắn gió, có nước ôm), đất khô ráo, không sụt lún. Thực tế: tuân thủ quy hoạch nghĩa trang và thủ tục địa phương.",
+   "tu_khoa": [
+    "dat mo",
+    "chon dat",
+    "xay mo"
+   ]
+  },
+  "anh_huong": {
+   "tieu_de": "Mộ phần và con cháu",
+   "noi_dung": "Quan niệm 'đồng khí cảm ứng' trong Táng Thư cho rằng mộ ảnh hưởng con cháu; đây là niềm tin văn hoá, không kiểm chứng được. Hệ thống không quy vận may rủi của ai cho mộ phần.",
+   "tu_khoa": [
+    "mo phan",
+    "anh huong den con chau",
+    "hai cot",
+    "boc mo"
+   ]
+  }
+ },
+ "giai_thich": {
+  "bat_trach": {
+   "tieu_de": "Bát trạch là gì?",
+   "noi_dung": "Phép chia nhà và người thành 8 quái (Đông tứ: Khảm, Ly, Chấn, Tốn; Tây tứ: Càn, Khôn, Cấn, Đoài), mỗi người có 4 hướng tốt (Sinh Khí, Thiên Y, Diên Niên, Phục Vị) và 4 hướng xấu. Nền tảng: Dương Trạch Tam Yếu.",
+   "tu_khoa": [
+    "bat trach la gi"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "loan_dau_ly_khi": {
+   "tieu_de": "Loan đầu và lý khí",
+   "noi_dung": "Loan đầu xét hình thế thật (núi, nước, đường, nhà xung quanh); lý khí xét phương vị, thời gian (Bát trạch, Huyền không). Cổ nhân coi loan đầu là gốc: 'loan đầu vi thể, lý khí vi dụng'.",
+   "tu_khoa": [
+    "loan dau va ly khi",
+    "ly khi la"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "huyen_khong": {
+   "tieu_de": "Huyền không phi tinh",
+   "noi_dung": "Trường phái xét 9 sao bay theo vận 20 năm và theo năm; ở đây hệ thống chỉ tính sao năm (Ngũ Hoàng) để tham khảo, chưa làm tinh bàn nhà theo vận.",
+   "tu_khoa": [
+    "huyen khong",
+    "phi tinh",
+    "cuu tinh"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "cung_phi_menh": {
+   "tieu_de": "Cung phi khác mệnh ngũ hành",
+   "noi_dung": "Cung phi (mệnh quái) dùng cho Bát trạch, tính theo năm sinh và giới tính; mệnh ngũ hành nạp âm (ví dụ 'Lộ Bàng Thổ') là hệ khác, không dùng để chọn hướng theo Bát trạch.",
+   "tu_khoa": [
+    "cung phi va menh",
+    "cung phi khac",
+    "menh ngu hanh"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "tam_yeu": {
+   "tieu_de": "Dương Trạch Tam Yếu",
+   "noi_dung": "Sách của Triệu Cửu Phong (đời Thanh): ba yếu tố chính của nhà ở là Cửa (môn), Chủ (phòng chính) và Bếp (táo); xét du niên giữa chúng.",
+   "tu_khoa": [
+    "tam yeu",
+    "cua chu bep",
+    "cua phong ngu bep"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "khoa_hoc": {
+   "tieu_de": "Phong thuỷ có khoa học không?",
+   "noi_dung": "Phần loan đầu nhiều chỗ trùng với kiến trúc (ánh sáng, gió, ẩm, an toàn). Phần lý khí (hướng hợp tuổi, sao năm) là hệ thống văn hoá, chưa được kiểm chứng khoa học.",
+   "tu_khoa": [
+    "co khoa hoc",
+    "co that khong",
+    "co chinh xac khong"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "la_ban": {
+   "tieu_de": "Đo hướng bằng điện thoại",
+   "noi_dung": "La bàn điện thoại dễ lệch do kim loại, nam châm, thép trong tường; nên đứng ngoài cửa, xa xe và cột sắt, đo nhiều lần; lưu ý độ lệch từ.",
+   "tu_khoa": [
+    "la ban",
+    "dien thoai",
+    "do huong"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "vo_chong_khac_menh": {
+   "tieu_de": "Vợ chồng khác Đông/Tây tứ mệnh",
+   "noi_dung": "Cách phổ biến: hướng cửa/nhà theo người trụ cột (thường là người đứng tên, gánh kinh tế), còn phòng ngủ, đầu giường, bàn làm việc chọn theo từng người. Không có cách làm hợp tuyệt đối cho cả hai.",
+   "tu_khoa": [
+    "theo ai",
+    "khac menh",
+    "ca hai vo chong",
+    "hai vo chong",
+    "vo chong khac",
+    "tuoi bo hay tuoi con"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "ngu_hoang": {
+   "tieu_de": "Ngũ Hoàng và năm sửa nhà",
+   "noi_dung": "Theo Huyền không, phương có sao Ngũ Hoàng (5) trong năm nên tránh động thổ, đục phá lớn; phương Thái Tuế và Tam Sát cũng được kiêng. Đây là quy ước truyền thống để tham khảo.",
+   "tu_khoa": [
+    "ngu hoang",
+    "tranh dong",
+    "dong tho",
+    "sua nha"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "tuoi_lam_nha": {
+   "tieu_de": "Tuổi làm nhà (Kim Lâu, Hoang Ốc, Tam Tai)",
+   "noi_dung": "Quan niệm dân gian Việt Nam: tránh làm nhà khi phạm Kim Lâu (tuổi mụ chia 9 dư 1, 3, 6, 8), Hoang Ốc xấu (Tam Địa Sát, Ngũ Thọ Tử, Lục Hoang Ốc) hoặc Tam Tai. Không có trong cổ thư phong thuỷ; nhiều gia đình 'mượn tuổi' người khác.",
+   "tu_khoa": [
+    "kim lau",
+    "hoang oc",
+    "tuoi lam nha",
+    "muon tuoi",
+    "lam nha duoc"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "quai_huong": {
+   "tieu_de": "Hướng và quái",
+   "noi_dung": "Tám phương ứng tám quái: Bắc–Khảm, Đông Bắc–Cấn, Đông–Chấn, Đông Nam–Tốn, Nam–Ly, Tây Nam–Khôn, Tây–Đoài, Tây Bắc–Càn. Trạch quái lấy theo phương TOẠ (đối diện hướng).",
+   "tu_khoa": [
+    "thuoc quai nao",
+    "quai nao"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  }
+ },
+ "mau": {
+  "can_nam_sinh": "Để xem hướng hợp với bạn cần năm sinh và giới tính (tốt nhất là ngày sinh đầy đủ, vì mệnh quái đổi năm tại Lập xuân khoảng 4/2 dương lịch).",
+  "hop": "Để xem cho hai vợ chồng cần năm sinh và giới tính của cả hai. Khi hai người khác nhóm Đông/Tây, hệ thống nêu cách chia hướng theo từng người thay vì chọn hộ.",
+  "tu_choi_vat_pham": "Hệ thống không giới thiệu vật phẩm 'hoá giải', 'chiêu tài' hay bùa ngải."
+ },
+ "luu_y": {
+  "bat_trach": "Bát trạch là một trường phái lý khí; phong thuỷ ở đây là tham khảo văn hoá. Ánh sáng, thông gió, an toàn và nhu cầu của người ở quan trọng hơn hướng.",
+  "dan_gian": "Mục này là quan niệm dân gian phổ biến, không có trong cổ thư như một quy tắc — ghi kèm lý do thực tế để bạn tự cân nhắc.",
+  "nam": "Sao năm và tuổi làm nhà là quy ước truyền thống; không nên hoãn việc cần thiết (sửa chữa an toàn) chỉ vì chúng.",
+  "am_trach": "Âm trạch là niềm tin văn hoá; hệ thống không quy may rủi của ai cho mộ phần."
+ }
+}
