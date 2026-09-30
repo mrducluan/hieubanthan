@@ -1,0 +1,842 @@
+{
+ "_nguon": "Nội dung theo số × lĩnh vực. Mỗi mục: xu hướng · mặt tối (bắt buộc) · gợi ý · câu tự soi (bắt buộc).",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "pythagoras_vn",
+ "trang_thai": "nhap_ai",
+ "linh_vuc": {
+  "ban_than": "Bản thân",
+  "tinh_yeu": "Tình yêu",
+  "gia_dinh": "Gia đình",
+  "con_cai": "Làm cha mẹ",
+  "tre_em": "Tính cách trẻ",
+  "su_nghiep": "Sự nghiệp",
+  "tai_chinh": "Tiền bạc",
+  "hoc_tap": "Học tập",
+  "suc_khoe": "Sức khoẻ tinh thần",
+  "ban_be_xa_hoi": "Bạn bè & xã hội",
+  "cuoc_song": "Đời sống"
+ },
+ "noi_dung": {
+  "1": {
+   "ban_than": {
+    "xu_huong": "Người mang số 1 thường được mô tả là tự quyết, thích mở đường và khó chịu khi phải chờ người khác cho phép.",
+    "mat_toi": "Dễ biến độc lập thành cô lập; nghe góp ý như bị thách thức.",
+    "goi_y": "Thử giao trọn một việc nhỏ cho người khác và không can thiệp đến khi xong.",
+    "cau_tu_soi": "Lần gần nhất bạn đổi ý vì một lời góp ý của người khác là khi nào?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình cảm, số 1 thường chủ động, thích dẫn nhịp và cần được tôn trọng khoảng riêng.",
+    "mat_toi": "Dễ quyết thay cho cả hai, coi nhu cầu của người kia là thứ cần 'xử lý'.",
+    "goi_y": "Hỏi người ấy 'em/anh muốn thế nào?' trước khi đưa ra phương án của mình.",
+    "cau_tu_soi": "Trong mối quan hệ gần nhất, ai là người hay nhượng bộ hơn?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Trong gia đình, số 1 hay nhận vai người mở lối: đi xa sớm, tự lập sớm, hoặc là người quyết việc lớn.",
+    "mat_toi": "Dễ va chạm với người lớn tuổi vì không chịu làm theo nếp cũ.",
+    "goi_y": "Chọn một việc nhà bạn để người khác làm theo cách của họ, dù bạn thấy chưa tối ưu.",
+    "cau_tu_soi": "Bạn có đang dùng sự độc lập để né những cuộc trò chuyện khó trong nhà?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 1 thường dạy con tự lập sớm và đặt kỳ vọng rõ ràng.",
+    "mat_toi": "Dễ áp đặt lộ trình, ít chừa chỗ cho con thử và sai theo cách của con.",
+    "goi_y": "Để con tự chọn một việc trong tuần (môn năng khiếu, cách sắp phòng) và giữ lời không can.",
+    "cau_tu_soi": "Lần gần nhất con làm khác ý bạn mà kết quả vẫn ổn là khi nào?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ mang số 1 thường thích tự làm, hay nói 'con tự làm', dễ bực khi bị làm hộ.",
+    "mat_toi": "Có thể bướng, khó chấp nhận thua, dễ cáu khi không được làm chủ.",
+    "goi_y": "Cho trẻ những lựa chọn có giới hạn ('áo xanh hay áo đỏ') thay vì ra lệnh.",
+    "cau_tu_soi": "Trẻ có thật sự bướng, hay chỉ đang cần được tự quyết một phần?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 1 thường hợp vai trò khởi xướng: mở dự án mới, dẫn nhóm nhỏ, làm việc có quyền tự quyết.",
+    "mat_toi": "Dễ chán việc lặp lại; khó làm dưới người quản lý chi li.",
+    "goi_y": "Khi chọn việc, hỏi rõ mức tự chủ bạn có — với số 1, điều đó quan trọng không kém lương.",
+    "cau_tu_soi": "Bạn bỏ việc gần nhất vì công việc, hay vì không được tự quyết?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 1 thường thích tự kiếm, tự quản, ngại phụ thuộc tài chính vào ai.",
+    "mat_toi": "Dễ quyết chi lớn theo cảm hứng khởi đầu mà không tính đường lùi.",
+    "goi_y": "Đặt quy tắc 48 giờ cho mọi khoản chi lớn hơn một mức bạn tự chọn.",
+    "cau_tu_soi": "Khoản đầu tư gần nhất của bạn có ai phản biện trước khi bạn xuống tiền không?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 1 thường học tốt khi được tự chọn hướng và tự đặt mục tiêu.",
+    "mat_toi": "Dễ bỏ môn không thích, ngại hỏi vì sợ lộ chỗ chưa biết.",
+    "goi_y": "Chia môn khó thành mục tiêu nhỏ do chính bạn đặt, tự chấm điểm mỗi tuần.",
+    "cau_tu_soi": "Bạn né hỏi thầy cô/bạn bè vì không hiểu, hay vì không muốn bị xem là không hiểu?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 1 thường dồn năng lượng vào mục tiêu và quên nghỉ cho tới khi kiệt.",
+    "mat_toi": "Căng thẳng dễ thành cáu gắt, muốn tự gánh hết.",
+    "goi_y": "Coi giờ nghỉ là một mục tiêu có lịch, không phải phần thưởng khi xong việc.",
+    "cau_tu_soi": "Tuần này bạn đã nghỉ thật sự (không điện thoại, không việc) bao nhiêu giờ?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Trong nhóm bạn, số 1 thường là người rủ, người chốt kế hoạch.",
+    "mat_toi": "Dễ khiến người khác thấy bị lấn át, ít được góp ý thật.",
+    "goi_y": "Trong lần hẹn tới, để người khác chọn địa điểm và thời gian.",
+    "cau_tu_soi": "Bạn có người bạn nào dám nói 'không' với bạn mà vẫn thân?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 1 thường thích tự sắp đặt không gian và nhịp sống của mình, không chịu cảnh ở ghép lâu.",
+    "mat_toi": "Dễ đổi chỗ ở hoặc kế hoạch lớn chỉ vì muốn 'bắt đầu lại'.",
+    "goi_y": "Trước khi chuyển đổi lớn, viết ra điều bạn đang chạy khỏi và điều bạn đang chạy tới.",
+    "cau_tu_soi": "Lần 'làm lại từ đầu' gần nhất của bạn đã giải quyết được điều gì?"
+   }
+  },
+  "2": {
+   "ban_than": {
+    "xu_huong": "Số 2 thường được mô tả là tinh ý, đọc được không khí, ưu tiên sự hoà thuận.",
+    "mat_toi": "Dễ nuốt ý kiến của mình để giữ êm, rồi tích tụ tủi thân.",
+    "goi_y": "Tập nói một câu 'tôi nghĩ khác' mỗi tuần, ở việc nhỏ.",
+    "cau_tu_soi": "Lần gần nhất bạn nói 'không' thẳng, không giải thích dài dòng?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 2 thường tận tuỵ, nhớ chi tiết nhỏ, cần cảm giác được gắn bó.",
+    "mat_toi": "Dễ đánh mất mình trong mối quan hệ, sợ bị bỏ rơi nên chiều quá mức.",
+    "goi_y": "Giữ một thói quen riêng (bạn bè, sở thích) không phụ thuộc người yêu.",
+    "cau_tu_soi": "Nếu người ấy rời đi, bạn còn những gì là của riêng mình?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 2 hay là người hoà giải, người 'giữ lửa' trong nhà.",
+    "mat_toi": "Dễ ôm cảm xúc của cả nhà, đứng giữa hai phía rồi kiệt sức.",
+    "goi_y": "Khi hai người thân mâu thuẫn, khuyến khích họ nói trực tiếp với nhau thay vì qua bạn.",
+    "cau_tu_soi": "Bạn đang làm cầu nối cho ai, và họ có thật sự cần bạn làm vậy?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 2 thường dịu dàng, nhạy với cảm xúc của con.",
+    "mat_toi": "Dễ khó đặt giới hạn, sợ con buồn nên nhượng bộ.",
+    "goi_y": "Chọn một quy tắc gia đình và giữ nó nhất quán dù con khóc.",
+    "cau_tu_soi": "Bạn nhượng bộ con vì con cần, hay vì bạn không chịu được con buồn?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 2 thường nhạy cảm, để ý nét mặt người lớn, thích chơi cùng hơn chơi một mình.",
+    "mat_toi": "Dễ tủi thân, khó nói ra điều mình muốn.",
+    "goi_y": "Hỏi trẻ bằng câu có lựa chọn cảm xúc ('con thấy buồn hay giận?') để trẻ tập gọi tên.",
+    "cau_tu_soi": "Trẻ im lặng vì ổn, hay vì chưa biết nói ra?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 2 thường làm tốt vai trò phối hợp, hỗ trợ, chăm sóc khách hàng, làm cầu nối giữa các nhóm.",
+    "mat_toi": "Dễ làm nhiều nhưng không đòi ghi nhận; né vai trò cần va chạm.",
+    "goi_y": "Ghi lại đóng góp của mình mỗi tuần để có dữ liệu khi đánh giá.",
+    "cau_tu_soi": "Sếp có biết cụ thể bạn đã làm gì trong quý này không?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 2 thường cẩn thận, thích tích luỹ dần, ưu tiên an toàn.",
+    "mat_toi": "Dễ cho người thân vay vì ngại từ chối.",
+    "goi_y": "Đặt sẵn một hạn mức cho vay/giúp đỡ mỗi năm, vượt thì trả lời 'để mình xem lại'.",
+    "cau_tu_soi": "Khoản tiền bạn cho mượn gần nhất, bạn đồng ý vì muốn hay vì ngại?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 2 thường học tốt khi có bạn học, có người hướng dẫn tận tình.",
+    "mat_toi": "Dễ mất tự tin khi bị so sánh, sợ phát biểu sai.",
+    "goi_y": "Tìm một bạn học cùng cố định; giải thích bài cho nhau.",
+    "cau_tu_soi": "Bạn hiểu bài thật, hay chỉ gật đầu cho khỏi phiền người giảng?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 2 thường hấp thụ căng thẳng của người xung quanh.",
+    "mat_toi": "Dễ mệt vì cảm xúc hơn vì việc.",
+    "goi_y": "Sau những cuộc gặp nặng nề, dành 15 phút một mình trước khi làm việc khác.",
+    "cau_tu_soi": "Nỗi mệt hôm nay là của bạn, hay bạn đang mang hộ ai?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 2 thường là người bạn biết lắng nghe, được tin để kể chuyện.",
+    "mat_toi": "Dễ bị lợi dụng lòng tốt; khó rời bỏ tình bạn một chiều.",
+    "goi_y": "Để ý tỉ lệ cho–nhận trong từng mối quan hệ, nói ra khi lệch quá lâu.",
+    "cau_tu_soi": "Ai là người lắng nghe bạn như cách bạn lắng nghe họ?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 2 thường cần không gian ấm, ổn định, gần người thân.",
+    "mat_toi": "Dễ ngại thay đổi môi trường dù nơi cũ không còn hợp.",
+    "goi_y": "Thử thay đổi nhỏ trước (góc làm việc, lịch cuối tuần) trước khi nghĩ đến thay đổi lớn.",
+    "cau_tu_soi": "Bạn ở lại vì thích nơi này, hay vì sợ nơi khác?"
+   }
+  },
+  "3": {
+   "ban_than": {
+    "xu_huong": "Số 3 thường được mô tả là giàu ý tưởng, nói chuyện có duyên, cần được thể hiện.",
+    "mat_toi": "Dễ tản mạn, bắt đầu nhiều hơn hoàn thành; dùng vui vẻ để né chuyện sâu.",
+    "goi_y": "Chọn một dự án và theo tới cùng trước khi mở cái mới.",
+    "cau_tu_soi": "Bạn có dự án nào theo tới cùng dù đã hết hứng?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 3 thường lãng mạn, vui, thích được khen và được chú ý.",
+    "mat_toi": "Dễ chán khi hết giai đoạn mới mẻ; né nói chuyện nghiêm túc.",
+    "goi_y": "Tạo 'điều mới' bên trong mối quan hệ (trải nghiệm chung) thay vì tìm ở người mới.",
+    "cau_tu_soi": "Bạn chán người ấy, hay chán giai đoạn quen thuộc của mọi mối quan hệ?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 3 hay là người mang tiếng cười, làm không khí gia đình nhẹ đi.",
+    "mat_toi": "Dễ đùa cho qua những chuyện cần nói thẳng.",
+    "goi_y": "Khi nhà có chuyện, thử nói một câu nghiêm túc trước khi pha trò.",
+    "cau_tu_soi": "Có chuyện gì trong nhà bạn vẫn đang cười cho qua?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 3 thường chơi cùng con giỏi, khuyến khích con sáng tạo.",
+    "mat_toi": "Dễ thiếu nề nếp, hứa với con nhiều mà quên làm.",
+    "goi_y": "Chỉ hứa điều bạn ghi được vào lịch.",
+    "cau_tu_soi": "Con bạn có nhớ lời hứa nào của bạn chưa được thực hiện?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 3 thường hoạt ngôn, thích vẽ, hát, kể chuyện, thích được khen trước người khác.",
+    "mat_toi": "Dễ mất tập trung, bỏ dở bài tập.",
+    "goi_y": "Chia việc thành phần ngắn, khen quá trình hơn khen kết quả.",
+    "cau_tu_soi": "Trẻ lơ là vì lười, hay vì việc quá dài so với sức tập trung của trẻ?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 3 thường hợp việc cần diễn đạt: viết, nói, thiết kế, truyền thông, bán hàng, giảng dạy.",
+    "mat_toi": "Dễ bỏ ngang khi phần việc chuyển sang giai đoạn chi tiết, nhàm.",
+    "goi_y": "Ghép cặp với người giỏi hoàn thiện; bạn lo ý tưởng, họ lo về đích.",
+    "cau_tu_soi": "Trong năm qua, bao nhiêu ý tưởng của bạn đã thành sản phẩm thật?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 3 thường rộng rãi, tiêu cho trải nghiệm và người khác.",
+    "mat_toi": "Dễ chi theo cảm hứng, khó theo dõi chi tiêu.",
+    "goi_y": "Tự động chuyển một phần thu nhập vào tài khoản tiết kiệm ngay ngày nhận lương.",
+    "cau_tu_soi": "Tháng trước bạn tiêu bao nhiêu cho những thứ không nhớ đã mua?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 3 thường học nhanh qua trao đổi, trình bày, học bằng hình ảnh.",
+    "mat_toi": "Dễ học lướt, giỏi nói hơn giỏi làm bài viết chi tiết.",
+    "goi_y": "Sau mỗi bài, tự giảng lại cho người khác trong 5 phút.",
+    "cau_tu_soi": "Bạn hiểu sâu hay chỉ đủ để nói hay về nó?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 3 thường nạp năng lượng qua giao lưu và sáng tạo.",
+    "mat_toi": "Dễ giấu buồn sau vẻ vui; thức khuya vì hứng.",
+    "goi_y": "Có một người để kể thật lòng, không cần diễn vui.",
+    "cau_tu_soi": "Lần gần nhất bạn để ai thấy mình buồn là khi nào?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 3 thường có nhiều bạn, là tâm điểm trong nhóm.",
+    "mat_toi": "Dễ rộng mà nông; nói trước quên sau.",
+    "goi_y": "Chọn hai, ba người để đầu tư tình bạn sâu.",
+    "cau_tu_soi": "Nếu gặp chuyện lúc nửa đêm, bạn gọi được ai?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 3 thường thích không gian có màu sắc, có chỗ cho sở thích sáng tạo.",
+    "mat_toi": "Dễ sống bừa bộn, nhiều dự án dang dở chiếm chỗ.",
+    "goi_y": "Mỗi tháng dọn một góc và kết thúc (hoặc bỏ hẳn) một dự án dang dở.",
+    "cau_tu_soi": "Đồ dang dở trong nhà bạn đang chờ bạn, hay chờ bạn dám bỏ?"
+   }
+  },
+  "4": {
+   "ban_than": {
+    "xu_huong": "Số 4 thường được mô tả là chắc chắn, có nguyên tắc, thích làm theo kế hoạch.",
+    "mat_toi": "Dễ cứng nhắc, lo lắng khi mọi thứ thay đổi đột ngột.",
+    "goi_y": "Mỗi tháng thử một thay đổi nhỏ có chủ ý trong thói quen.",
+    "cau_tu_soi": "Lần gần nhất bạn phá bỏ một hệ thống mình đã dựng là khi nào?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 4 thường chung thuỷ, thể hiện tình cảm bằng việc làm hơn lời nói.",
+    "mat_toi": "Dễ khô khan, coi lãng mạn là thừa; khó mở lòng nhanh.",
+    "goi_y": "Nói thành lời một điều bạn trân trọng ở người ấy mỗi tuần.",
+    "cau_tu_soi": "Người ấy có biết bạn thương họ, hay chỉ thấy bạn làm việc?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 4 thường là trụ cột lo phần thực tế: nhà cửa, giấy tờ, kế hoạch.",
+    "mat_toi": "Dễ nghiêm khắc, đặt nhiều quy tắc làm người thân thấy ngột ngạt.",
+    "goi_y": "Hỏi người nhà quy tắc nào họ thấy không cần nữa.",
+    "cau_tu_soi": "Quy tắc nào trong nhà tồn tại vì thói quen hơn vì lý do?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 4 thường tạo nề nếp tốt, lịch sinh hoạt rõ ràng.",
+    "mat_toi": "Dễ khắt khe, ít chỗ cho sự ngẫu hứng và sai lầm của con.",
+    "goi_y": "Dành một buổi mỗi tuần không có lịch, để con dẫn dắt hoạt động.",
+    "cau_tu_soi": "Con bạn có dám kể với bạn khi làm sai không?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 4 thường thích sự ổn định, làm việc tỉ mỉ, thích lắp ráp, sắp xếp.",
+    "mat_toi": "Dễ bực khi kế hoạch đổi, chậm thích nghi với môi trường mới.",
+    "goi_y": "Báo trước thay đổi, giải thích lý do bằng lời đơn giản.",
+    "cau_tu_soi": "Trẻ chậm, hay chỉ cần thêm thời gian để yên tâm?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 4 thường làm tốt việc cần hệ thống: kỹ thuật, kế toán, vận hành, quản lý dự án, xây dựng.",
+    "mat_toi": "Dễ làm việc chăm mà không hỏi việc đó dẫn tới đâu; ngại đổi hướng.",
+    "goi_y": "Mỗi quý tự hỏi: công việc này còn phục vụ mục tiêu dài hạn của mình không?",
+    "cau_tu_soi": "Bạn đang làm tốt việc đúng, hay làm đúng việc tốt?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 4 thường tiết kiệm, có kế hoạch, thích tài sản hữu hình.",
+    "mat_toi": "Dễ quá dè dặt, lỡ cơ hội vì sợ rủi ro; khó tiêu cho bản thân.",
+    "goi_y": "Dành một khoản nhỏ cố định cho niềm vui cá nhân, không cần lý do.",
+    "cau_tu_soi": "Bạn tiết kiệm để làm gì — và bao giờ thì 'đủ'?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 4 thường học chắc, theo lộ trình, ôn bài đều đặn.",
+    "mat_toi": "Dễ học vẹt đúng khuôn, lúng túng với dạng bài mới.",
+    "goi_y": "Mỗi tuần làm một bài theo cách khác sách giáo khoa.",
+    "cau_tu_soi": "Bạn giải được vì hiểu, hay vì đã gặp dạng này?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 4 thường có thói quen đều đặn, chịu được áp lực dài.",
+    "mat_toi": "Dễ ôm việc, cố quá sức vì trách nhiệm; căng cơ, căng thẳng tích tụ.",
+    "goi_y": "Lên lịch vận động như một việc bắt buộc trong kế hoạch tuần.",
+    "cau_tu_soi": "Cơ thể bạn đã nhắc bạn nghỉ bao nhiêu lần trước khi bạn nghe?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 4 thường ít bạn nhưng bền, đáng tin, giữ lời.",
+    "mat_toi": "Dễ bị thấy khó gần, nghiêm quá.",
+    "goi_y": "Chủ động rủ một người bạn làm việc gì đó không có mục đích.",
+    "cau_tu_soi": "Bạn bè biết bạn đáng tin, nhưng có biết bạn vui thế nào không?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 4 thường thích nhà ngăn nắp, ổn định, ở lâu một chỗ.",
+    "mat_toi": "Dễ ngại đi xa, ngại thử điều mới trong đời sống.",
+    "goi_y": "Mỗi năm đi một nơi chưa từng đến.",
+    "cau_tu_soi": "Lần cuối bạn làm điều gì lần đầu tiên là khi nào?"
+   }
+  },
+  "5": {
+   "ban_than": {
+    "xu_huong": "Số 5 thường được mô tả là thích tự do, ưa trải nghiệm, thích nghi nhanh.",
+    "mat_toi": "Dễ bốc đồng, bỏ đi khi vừa gặp khó; sợ bị ràng buộc.",
+    "goi_y": "Trước khi rời một việc, ở lại thêm một chu kỳ (một tháng, một dự án) rồi mới quyết.",
+    "cau_tu_soi": "Bạn đã ở đâu đủ lâu để thấy hậu quả dài hạn của việc mình làm?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 5 thường cuốn hút, thích phiêu lưu, cần không khí mới mẻ.",
+    "mat_toi": "Dễ ngại cam kết, chán khi mối quan hệ vào nhịp đều.",
+    "goi_y": "Nói rõ với người ấy bạn cần bao nhiêu không gian, thay vì biến mất.",
+    "cau_tu_soi": "Bạn cần tự do khỏi người ấy, hay khỏi nỗi sợ bị giữ chân?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 5 hay là người đi xa, người mang chuyện mới về nhà.",
+    "mat_toi": "Dễ vắng mặt lúc gia đình cần; thấy bổn phận là gánh nặng.",
+    "goi_y": "Chọn một việc gia đình cố định bạn luôn có mặt (bữa cơm tuần, ngày giỗ).",
+    "cau_tu_soi": "Người nhà có thể trông cậy bạn vào việc gì?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 5 thường cho con trải nghiệm phong phú, cởi mở.",
+    "mat_toi": "Dễ thiếu nhất quán, lúc sát lúc buông.",
+    "goi_y": "Giữ vài nếp cố định (giờ ngủ, giờ ăn) để con có điểm tựa.",
+    "cau_tu_soi": "Con bạn biết chắc điều gì sẽ luôn giống nhau mỗi ngày?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 5 thường hiếu động, tò mò, thích khám phá, dễ chán.",
+    "mat_toi": "Khó ngồi yên, hay đổi sở thích.",
+    "goi_y": "Cho trẻ vận động trước giờ học; thay đổi hình thức học thường xuyên.",
+    "cau_tu_soi": "Trẻ không chịu học, hay chưa được học theo cách vận động?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 5 thường hợp việc đa dạng, di chuyển, giao tiếp: bán hàng, du lịch, truyền thông, khởi nghiệp.",
+    "mat_toi": "Dễ nhảy việc liên tục, hồ sơ nhiều khởi đầu ít thành tựu.",
+    "goi_y": "Tìm vai trò có biến hoá bên trong (dự án mới) thay vì đổi công ty.",
+    "cau_tu_soi": "Lần nhảy việc gần nhất bạn chạy tới điều gì, hay chỉ chạy khỏi điều gì?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 5 thường kiếm nhanh tiêu nhanh, thích cơ hội mới.",
+    "mat_toi": "Dễ mạo hiểm theo trào lưu, đầu tư vì hứng.",
+    "goi_y": "Chỉ dùng một phần nhỏ, định trước, cho các khoản 'thử vận'.",
+    "cau_tu_soi": "Khoản mạo hiểm gần nhất, bạn đã hiểu nó trước khi vào tiền chưa?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 5 thường học qua trải nghiệm, thực hành, đi và làm.",
+    "mat_toi": "Dễ bỏ giữa khoá học, học nhiều thứ nhưng nông.",
+    "goi_y": "Gắn việc học với một dự án thực tế có hạn chót.",
+    "cau_tu_soi": "Kỹ năng nào bạn đã học đủ sâu để người khác trả tiền cho nó?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 5 thường cần vận động, cần thay đổi để thấy sống động.",
+    "mat_toi": "Dễ sinh hoạt thất thường; tìm kích thích để thoát chán.",
+    "goi_y": "Chọn môn vận động có nhiều biến thể (leo núi, nhảy, bơi) để giữ được đều.",
+    "cau_tu_soi": "Bạn tìm niềm vui, hay tìm thứ để khỏi phải ngồi yên với mình?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 5 thường quen biết rộng, dễ bắt chuyện, hợp nhiều kiểu người.",
+    "mat_toi": "Dễ biến mất rồi xuất hiện, bạn bè khó dựa.",
+    "goi_y": "Giữ liên lạc đều với vài người thân nhất dù đang ở đâu.",
+    "cau_tu_soi": "Ai sẽ nhận ra nếu bạn biến mất một tháng?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 5 thường thích đi, thích đổi chỗ, sống được ở nhiều nơi.",
+    "mat_toi": "Dễ không có gốc rễ, chuyển đi khi thấy bí.",
+    "goi_y": "Trước khi chuyển, liệt kê điều ở nơi mới giải quyết được mà nơi cũ không.",
+    "cau_tu_soi": "Nơi mới sẽ khác, nhưng bạn mang theo gì cũ?"
+   }
+  },
+  "6": {
+   "ban_than": {
+    "xu_huong": "Số 6 thường được mô tả là giàu trách nhiệm, hay chăm lo, coi trọng gia đình và cái đẹp.",
+    "mat_toi": "Dễ kiểm soát dưới vỏ quan tâm, hy sinh rồi oán.",
+    "goi_y": "Hỏi 'bạn có cần mình giúp không?' trước khi giúp.",
+    "cau_tu_soi": "Bạn có để người khác tự xử lý việc của họ mà không can vào?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 6 thường chu đáo, muốn xây tổ ấm, sẵn sàng cho đi nhiều.",
+    "mat_toi": "Dễ bao bọc thành kiểm soát; kỳ vọng người kia đáp lại đúng cách mình cho.",
+    "goi_y": "Hỏi người ấy họ cảm thấy được yêu qua điều gì, thay vì đoán.",
+    "cau_tu_soi": "Bạn cho đi vì người ấy cần, hay vì bạn cần được cần?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 6 thường là người chăm cả nhà, gánh việc cha mẹ, anh em.",
+    "mat_toi": "Dễ ôm hết, rồi kiệt và trách người khác vô tâm.",
+    "goi_y": "Chia rõ việc nhà, chấp nhận người khác làm chưa được như bạn.",
+    "cau_tu_soi": "Việc nào bạn đang làm hộ người thân mà họ tự làm được?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 6 thường tận tuỵ, chăm con chu đáo.",
+    "mat_toi": "Dễ bảo bọc quá mức, khó để con tự trải nghiệm hậu quả nhỏ.",
+    "goi_y": "Để con tự chịu một hậu quả nhỏ (quên đồ, trễ giờ) mà không cứu.",
+    "cau_tu_soi": "Con bạn đã tự giải quyết được vấn đề gì mà không cần bạn?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 6 thường tình cảm, thích chăm em, chăm thú, muốn làm người lớn vui.",
+    "mat_toi": "Dễ nhận lỗi về mình, lo lắng khi bố mẹ buồn.",
+    "goi_y": "Nói với trẻ rằng chuyện người lớn không phải trách nhiệm của trẻ.",
+    "cau_tu_soi": "Trẻ ngoan vì vui, hay vì sợ làm người lớn buồn?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 6 thường hợp việc chăm sóc, giáo dục, y tế, tư vấn, dịch vụ, thiết kế không gian.",
+    "mat_toi": "Dễ nhận quá nhiều việc của người khác, khó đòi quyền lợi.",
+    "goi_y": "Đặt giới hạn giờ làm và phạm vi việc rõ ràng với sếp và khách.",
+    "cau_tu_soi": "Bạn làm thêm việc vì được giao, hay vì không nỡ từ chối?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 6 thường chi cho gia đình, cho người thân trước bản thân.",
+    "mat_toi": "Dễ gánh tài chính của cả nhà, bỏ quên quỹ riêng.",
+    "goi_y": "Lập quỹ riêng cho mình trước khi chi cho người khác.",
+    "cau_tu_soi": "Nếu bạn ngừng gánh, ai trong nhà sẽ tự đứng được?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 6 thường học tốt môn gắn với con người, nghệ thuật, ứng dụng giúp người.",
+    "mat_toi": "Dễ bỏ việc học của mình để lo cho người khác.",
+    "goi_y": "Giữ giờ học như một cam kết với chính mình, không nhường.",
+    "cau_tu_soi": "Lần gần nhất bạn hoãn việc của mình vì người khác là khi nào?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 6 thường khoẻ khi thấy người thân ổn, dễ bệnh khi lo cho người khác.",
+    "mat_toi": "Dễ bỏ bê bản thân, căng thẳng vì trách nhiệm.",
+    "goi_y": "Ghi vào lịch một việc chăm sóc bản thân như chăm người khác.",
+    "cau_tu_soi": "Ai chăm sóc bạn khi bạn mệt?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 6 thường là người bạn chu đáo, nhớ sinh nhật, hay hỏi han.",
+    "mat_toi": "Dễ thành 'mẹ' của nhóm, mệt vì lo cho mọi người.",
+    "goi_y": "Cho phép mình là người được chăm trong một lần gặp.",
+    "cau_tu_soi": "Bạn có người bạn nào hỏi han bạn trước không?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 6 thường chăm chút nhà cửa, thích không gian đẹp, ấm cúng.",
+    "mat_toi": "Dễ cầu toàn về nhà cửa, khó chịu khi người khác làm khác.",
+    "goi_y": "Chọn một góc nhà để người thân tự bày theo ý họ.",
+    "cau_tu_soi": "Ngôi nhà đẹp để ai thấy, hay để ai sống?"
+   }
+  },
+  "7": {
+   "ban_than": {
+    "xu_huong": "Số 7 thường được mô tả là sâu sắc, thích phân tích, cần thời gian một mình.",
+    "mat_toi": "Dễ xa cách, hoài nghi, phân tích thay vì hành động.",
+    "goi_y": "Đặt hạn chót cho việc suy nghĩ; quá hạn thì chọn phương án tốt nhất đang có.",
+    "cau_tu_soi": "Lần gần nhất bạn quyết mà chưa đủ dữ liệu, và ổn với điều đó?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 7 thường kén chọn, cần kết nối trí tuệ, cần khoảng lặng.",
+    "mat_toi": "Dễ khép kín, khiến người kia thấy bị đẩy ra; khó nói cảm xúc.",
+    "goi_y": "Khi cần ở một mình, nói trước 'mình cần yên một lúc, không phải giận'.",
+    "cau_tu_soi": "Người ấy có hiểu sự im lặng của bạn không, hay đang đoán?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 7 hay là người 'khác' trong nhà, sống nội tâm, ít chia sẻ.",
+    "mat_toi": "Dễ bị thấy lạnh nhạt, xa cách với người thân.",
+    "goi_y": "Chia sẻ một điều bạn đang nghĩ với một người trong nhà mỗi tuần.",
+    "cau_tu_soi": "Gia đình biết gì về thế giới bên trong của bạn?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 7 thường khuyến khích con đặt câu hỏi, đọc sách, suy nghĩ độc lập.",
+    "mat_toi": "Dễ ít thể hiện tình cảm, thiên về lý lẽ.",
+    "goi_y": "Ôm con, nói 'bố/mẹ thương con' không cần lý do.",
+    "cau_tu_soi": "Con bạn cảm được bạn thương, hay chỉ nghe bạn giảng?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 7 thường trầm, thích tìm hiểu, hỏi 'tại sao', thích chơi một mình.",
+    "mat_toi": "Dễ bị cho là khó gần, ít bạn.",
+    "goi_y": "Tôn trọng giờ riêng của trẻ; giới thiệu bạn cùng sở thích thay vì ép chơi đông.",
+    "cau_tu_soi": "Trẻ cô đơn, hay chỉ đang thích yên tĩnh?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 7 thường hợp việc chuyên sâu: nghiên cứu, phân tích dữ liệu, kỹ thuật, luật, viết, chuyên gia.",
+    "mat_toi": "Dễ cầu toàn, ngại trình bày, để người khác nhận công.",
+    "goi_y": "Tập trình bày kết quả sớm, dù chưa hoàn hảo.",
+    "cau_tu_soi": "Ý tưởng hay nhất của bạn năm nay đã có ai nghe chưa?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 7 thường cân nhắc kỹ, thích tìm hiểu trước khi quyết.",
+    "mat_toi": "Dễ phân tích mãi không hành động; hoài nghi mọi lời khuyên.",
+    "goi_y": "Chọn một nguyên tắc đơn giản (vd tiết kiệm tự động) và làm ngay.",
+    "cau_tu_soi": "Bạn đã nghiên cứu đủ, hay đang dùng nghiên cứu để trì hoãn?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 7 thường học sâu, tự học giỏi, thích hiểu bản chất.",
+    "mat_toi": "Dễ sa vào chi tiết, học mãi không thi, ngại học nhóm.",
+    "goi_y": "Đặt mốc kiểm tra ngoài (thi, chứng chỉ, sản phẩm) cho việc tự học.",
+    "cau_tu_soi": "Bạn học để biết hay để dùng?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 7 thường cần yên tĩnh để hồi phục, dễ căng đầu óc.",
+    "mat_toi": "Dễ mất ngủ vì nghĩ nhiều, cô lập khi buồn.",
+    "goi_y": "Có hoạt động tay chân đều đặn để đầu óc nghỉ.",
+    "cau_tu_soi": "Khi buồn bạn tìm đến ai, hay chỉ tìm đến suy nghĩ của mình?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 7 thường ít bạn, chọn lọc, thích trò chuyện sâu.",
+    "mat_toi": "Dễ bị thấy kiêu, khó tiếp cận.",
+    "goi_y": "Chủ động hỏi han trước một người bạn mỗi tháng.",
+    "cau_tu_soi": "Có ai biết bạn đang trải qua điều gì lúc này?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 7 thường thích nơi yên tĩnh, gần thiên nhiên, có góc riêng.",
+    "mat_toi": "Dễ thu mình, sống tách khỏi cộng đồng.",
+    "goi_y": "Giữ một hoạt động cộng đồng nhỏ, đều đặn.",
+    "cau_tu_soi": "Sự yên tĩnh đang nuôi bạn, hay đang che bạn?"
+   }
+  },
+  "8": {
+   "ban_than": {
+    "xu_huong": "Số 8 thường được mô tả là tham vọng, thực tế, có khả năng tổ chức và quản lý nguồn lực.",
+    "mat_toi": "Dễ đo giá trị bản thân bằng thành tích, tiền, quyền; khó thừa nhận yếu.",
+    "goi_y": "Mỗi tuần làm một việc không vì kết quả.",
+    "cau_tu_soi": "Nếu mất danh hiệu và thu nhập, bạn còn thấy mình giá trị ở điểm nào?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 8 thường bảo vệ, lo toan vật chất, muốn người ấy được đầy đủ.",
+    "mat_toi": "Dễ coi lo tiền là đủ yêu; khó mềm mỏng, hay 'quản lý' người yêu.",
+    "goi_y": "Dành thời gian có mặt trọn vẹn, không điện thoại, không bàn việc.",
+    "cau_tu_soi": "Người ấy cần tiền của bạn, hay cần bạn?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 8 thường là người lo kinh tế, ra quyết định lớn trong nhà.",
+    "mat_toi": "Dễ gia trưởng, dùng tiền để có tiếng nói.",
+    "goi_y": "Để người thân tự quyết những việc trong phần của họ.",
+    "cau_tu_soi": "Người nhà nghe bạn vì đồng ý, hay vì bạn là người trả tiền?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 8 thường dạy con tính kỷ luật, tự lập tài chính, đặt mục tiêu.",
+    "mat_toi": "Dễ đặt kỳ vọng thành tích quá cao, đo con bằng điểm số.",
+    "goi_y": "Khen nỗ lực và cách con làm, không chỉ kết quả.",
+    "cau_tu_soi": "Con bạn nghĩ bạn thương nó vì nó là nó, hay vì nó giỏi?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 8 thường thích làm chủ, thích thắng, hiểu giá trị đồ vật sớm.",
+    "mat_toi": "Dễ hiếu thắng, khó chấp nhận thua, hay ra lệnh cho bạn.",
+    "goi_y": "Cho trẻ quản lý một khoản tiền nhỏ; chơi trò có thắng thua để tập thua đẹp.",
+    "cau_tu_soi": "Trẻ hiếu thắng, hay đang học cách đo giá trị từ người lớn?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 8 thường hợp vai trò quản lý, kinh doanh, tài chính, điều hành, bất động sản.",
+    "mat_toi": "Dễ cuốn vào công việc, hy sinh sức khoẻ và gia đình cho mục tiêu.",
+    "goi_y": "Đặt mục tiêu phi tài chính song song (sức khoẻ, quan hệ) và đo như KPI.",
+    "cau_tu_soi": "Thành công bạn đang đuổi theo là của bạn, hay của kỳ vọng người khác?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 8 thường giỏi nhìn cơ hội, dám đầu tư, xây tài sản.",
+    "mat_toi": "Dễ liều lớn, vay đòn bẩy; mọi thứ quy ra tiền.",
+    "goi_y": "Luôn có kịch bản thua và quỹ dự phòng trước mỗi quyết định lớn.",
+    "cau_tu_soi": "Nếu thương vụ này thất bại, bạn chịu được mức nào?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 8 thường học vì mục tiêu rõ ràng, học cái dùng được ngay.",
+    "mat_toi": "Dễ coi thường môn 'không ra tiền'.",
+    "goi_y": "Học thêm một thứ chỉ vì tò mò.",
+    "cau_tu_soi": "Có điều gì bạn thích học mà không đem lại lợi ích nào?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 8 thường có sức bền, chịu áp lực lớn.",
+    "mat_toi": "Dễ gồng, bỏ qua dấu hiệu cơ thể cho tới khi đổ bệnh.",
+    "goi_y": "Khám sức khoẻ định kỳ và nghỉ phép thật, đặt lịch trước.",
+    "cau_tu_soi": "Lần cuối bạn nghỉ phép mà không mở email là khi nào?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 8 thường có mạng lưới quan hệ rộng, được nể trọng.",
+    "mat_toi": "Dễ biến bạn bè thành quan hệ công việc; bạn thật ít.",
+    "goi_y": "Giữ vài tình bạn không dính dáng làm ăn.",
+    "cau_tu_soi": "Bạn có người bạn nào chẳng giúp gì cho sự nghiệp của bạn không?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 8 thường thích nhà rộng, chất lượng, có vị thế.",
+    "mat_toi": "Dễ sống để thể hiện, chạy theo tiêu chuẩn của người khác.",
+    "goi_y": "Chọn một thứ trong đời sống chỉ vì bạn thích, không vì nó 'xứng'.",
+    "cau_tu_soi": "Nếu không ai nhìn, bạn sẽ sống ở đâu, thế nào?"
+   }
+  },
+  "9": {
+   "ban_than": {
+    "xu_huong": "Số 9 thường được mô tả là bao dung, lý tưởng, nghĩ cho cộng đồng.",
+    "mat_toi": "Dễ ôm việc thiên hạ, buông cái của mình; khó kết thúc chuyện cũ.",
+    "goi_y": "Chọn một việc lớn để cống hiến, nói không với những việc còn lại.",
+    "cau_tu_soi": "Bạn giúp người khác vì họ cần, hay để khỏi nhìn vào việc của chính mình?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 9 thường rộng lượng, lãng mạn, yêu theo kiểu lý tưởng.",
+    "mat_toi": "Dễ yêu hình ảnh hơn con người thật; khó dứt mối quan hệ đã hết.",
+    "goi_y": "Liệt kê những điều thật (không phải mong đợi) bạn biết về người ấy.",
+    "cau_tu_soi": "Bạn yêu người ấy, hay yêu người mà bạn hy vọng họ sẽ trở thành?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 9 thường là người rộng lòng, hay lo cho họ hàng, người ngoài.",
+    "mat_toi": "Dễ lo người ngoài hơn người trong nhà.",
+    "goi_y": "Dành thời gian cho người thân gần nhất trước các việc thiện nguyện.",
+    "cau_tu_soi": "Người trong nhà có thấy bạn dành cho họ như dành cho người ngoài?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 9 thường dạy con lòng tốt, sự bao dung, mở rộng thế giới quan.",
+    "mat_toi": "Dễ kỳ vọng con 'tốt' theo lý tưởng của mình.",
+    "goi_y": "Để con được giận, được ích kỷ một chút theo tuổi.",
+    "cau_tu_soi": "Bạn muốn con tốt, hay muốn con giống hình mẫu của bạn?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 9 thường giàu cảm xúc, thương người, hay cho đồ chơi.",
+    "mat_toi": "Dễ buồn lâu, nhạy với chuyện bất công.",
+    "goi_y": "Giúp trẻ làm một việc tốt cụ thể khi trẻ buồn vì chuyện bất công.",
+    "cau_tu_soi": "Trẻ đang buồn cho mình, hay buồn thay người khác?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 9 thường hợp việc có ý nghĩa xã hội: giáo dục, y tế, nghệ thuật, phi lợi nhuận, ngoại giao.",
+    "mat_toi": "Dễ làm vì lý tưởng mà quên thu nhập; khó rời tổ chức dù không còn hợp.",
+    "goi_y": "Tính rõ mức thu nhập tối thiểu bạn cần trước khi nhận việc 'ý nghĩa'.",
+    "cau_tu_soi": "Sự cống hiến của bạn có đang được đền đáp đủ để bạn đi đường dài?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 9 thường hào phóng, dễ cho, ít bám víu.",
+    "mat_toi": "Dễ cho đi quá sức, thiếu tích luỹ cho mình.",
+    "goi_y": "Tách quỹ cho đi và quỹ của mình, không lấy quỹ này bù quỹ kia.",
+    "cau_tu_soi": "Bạn có đang giúp người khác bằng tiền mà chính bạn cần?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 9 thường học rộng, thích văn hoá, ngôn ngữ, nhân văn.",
+    "mat_toi": "Dễ học dàn trải, thiếu một chuyên môn sâu.",
+    "goi_y": "Chọn một lĩnh vực chính để đi sâu, phần còn lại để mở rộng.",
+    "cau_tu_soi": "Nếu phải chọn một lĩnh vực trong mười năm tới, đó là gì?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 9 thường nhạy với nỗi đau của người khác.",
+    "mat_toi": "Dễ kiệt vì đồng cảm, mang buồn hộ người khác.",
+    "goi_y": "Hạn chế tin tức tiêu cực; có nghi thức 'khép lại ngày'.",
+    "cau_tu_soi": "Nỗi buồn hôm nay bắt nguồn từ đời bạn, hay từ màn hình?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 9 thường có bạn ở nhiều tầng lớp, dễ được tin cậy.",
+    "mat_toi": "Dễ giữ những tình bạn đã cạn vì ngại kết thúc.",
+    "goi_y": "Cho phép mình để một mối quan hệ nhạt đi tự nhiên.",
+    "cau_tu_soi": "Tình bạn nào bạn đang giữ vì nghĩa hơn vì vui?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 9 thường thích đi đây đó, trải nghiệm văn hoá, sống gắn cộng đồng.",
+    "mat_toi": "Dễ giữ đồ cũ, kỷ niệm cũ, khó dọn dẹp.",
+    "goi_y": "Mỗi mùa cho đi một túi đồ không dùng.",
+    "cau_tu_soi": "Món đồ nào bạn giữ vì kỷ niệm mà thật ra đã xong vai trò?"
+   }
+  },
+  "11": {
+   "ban_than": {
+    "xu_huong": "Số 11 thường được mô tả như số 2 tăng cường: trực giác nhạy, lý tưởng cao, dễ truyền cảm hứng.",
+    "mat_toi": "Dễ căng thẳng thần kinh, tự đặt kỳ vọng quá lớn, dao động giữa tự tin và tự nghi.",
+    "goi_y": "Kiểm tra trực giác bằng việc nhỏ có kết quả đo được trước khi tin vào nó cho việc lớn.",
+    "cau_tu_soi": "Trực giác của bạn đúng bao nhiêu lần — bạn có ghi lại cả những lần sai không?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 11 thường tìm kết nối tâm hồn, rất nhạy với cảm xúc người kia.",
+    "mat_toi": "Dễ lý tưởng hoá rồi vỡ mộng; bất an khi không được thấu hiểu.",
+    "goi_y": "Nói ra điều bạn cảm thấy thay vì chờ người ấy tự đoán.",
+    "cau_tu_soi": "Bạn đòi người ấy hiểu bạn, hay đã giúp họ hiểu bạn?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 11 thường là người cảm nhận không khí gia đình rõ nhất.",
+    "mat_toi": "Dễ bị cuốn vào cảm xúc của người thân, khó tách mình.",
+    "goi_y": "Tập phân biệt 'điều mình cảm' và 'điều người khác cảm'.",
+    "cau_tu_soi": "Cảm xúc nào bạn đang mang là của gia đình, không phải của bạn?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 11 thường thấu cảm, hiểu con không cần nói nhiều.",
+    "mat_toi": "Dễ lo âu thái quá về con; truyền căng thẳng cho con.",
+    "goi_y": "Chăm sóc sự bình tĩnh của mình trước khi xử lý chuyện của con.",
+    "cau_tu_soi": "Con bạn lo lắng, hay đang phản chiếu nỗi lo của bạn?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 11 thường rất nhạy cảm, giàu tưởng tượng, dễ xúc động.",
+    "mat_toi": "Dễ sợ hãi, khó ngủ khi có căng thẳng quanh mình.",
+    "goi_y": "Tạo nếp sinh hoạt êm, ít tiếng ồn; lắng nghe nỗi sợ của trẻ không gạt đi.",
+    "cau_tu_soi": "Nỗi sợ của trẻ đến từ tưởng tượng, hay từ không khí trong nhà?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 11 thường hợp việc truyền cảm hứng: giảng dạy, tư vấn, nghệ thuật, chữa lành, truyền thông.",
+    "mat_toi": "Dễ nhiều tầm nhìn mà thiếu kế hoạch; kiệt sức vì làm việc cảm xúc.",
+    "goi_y": "Đi cùng người giỏi triển khai; tự đặt giới hạn số buổi tư vấn/tuần.",
+    "cau_tu_soi": "Tầm nhìn của bạn đã có bước tiếp theo cụ thể nào chưa?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 11 thường xem nhẹ vật chất, ưu tiên ý nghĩa.",
+    "mat_toi": "Dễ bỏ bê chuyện tiền bạc cho tới khi thành vấn đề.",
+    "goi_y": "Đặt lịch xem tài chính mỗi tháng như một việc bắt buộc.",
+    "cau_tu_soi": "Bạn né chuyện tiền vì không cần, hay vì nó làm bạn lo?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 11 thường học bằng cảm nhận, giỏi các môn nhân văn, nghệ thuật.",
+    "mat_toi": "Dễ mất tập trung khi cảm xúc xáo trộn.",
+    "goi_y": "Viết ra điều đang làm bạn bận lòng trước giờ học.",
+    "cau_tu_soi": "Điều gì đang chiếm đầu bạn khi bạn cố học?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 11 thường có hệ thần kinh nhạy, dễ căng thẳng.",
+    "mat_toi": "Dễ mất ngủ, lo âu, quá tải giác quan.",
+    "goi_y": "Hít thở chậm, giảm cà phê, có không gian yên tĩnh mỗi ngày.",
+    "cau_tu_soi": "Tuần này bạn có bao nhiêu phút thật sự yên tĩnh?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 11 thường thu hút người tìm lời khuyên, được xem là 'người hiểu chuyện'.",
+    "mat_toi": "Dễ bị rút năng lượng bởi người hay than.",
+    "goi_y": "Giới hạn thời gian nghe tâm sự; giới thiệu chuyên gia khi vượt khả năng.",
+    "cau_tu_soi": "Sau khi gặp bạn bè, bạn thấy đầy hơn hay cạn hơn?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 11 thường cần không gian yên, ánh sáng dịu, ít hỗn loạn.",
+    "mat_toi": "Dễ bị môi trường ồn ào làm kiệt sức.",
+    "goi_y": "Chọn nơi ở và làm việc với tiêu chí yên tĩnh đặt lên cao.",
+    "cau_tu_soi": "Không gian bạn đang sống làm bạn dịu lại hay căng lên?"
+   }
+  },
+  "22": {
+   "ban_than": {
+    "xu_huong": "Số 22 thường được mô tả như số 4 tăng cường: có tầm nhìn lớn và khả năng hiện thực hoá bằng hệ thống.",
+    "mat_toi": "Dễ áp lực phải làm việc lớn; thất vọng về bản thân khi đời chỉ 'bình thường'.",
+    "goi_y": "Chia tầm nhìn thành các bước 90 ngày có thể đo được.",
+    "cau_tu_soi": "Bạn đang xây điều lớn, hay đang chờ đủ điều kiện để bắt đầu xây?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 22 thường nghiêm túc, xây quan hệ như xây nền móng lâu dài.",
+    "mat_toi": "Dễ đặt công việc/sứ mệnh lên trên người yêu.",
+    "goi_y": "Đặt lịch cố định cho hai người như một cam kết không dời.",
+    "cau_tu_soi": "Người ấy có chỗ trong kế hoạch lớn của bạn không?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 22 thường là trụ cột, người lo nền tảng lâu dài cho gia đình.",
+    "mat_toi": "Dễ nghiêm khắc, coi gia đình như một dự án cần quản lý.",
+    "goi_y": "Để gia đình có những lúc không có mục tiêu gì cả.",
+    "cau_tu_soi": "Gia đình bạn cần một người quản lý, hay một người ở cạnh?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 22 thường xây cho con nền tảng vững: học hành, kỷ luật, tương lai.",
+    "mat_toi": "Dễ đặt kỳ vọng quá lớn, vạch sẵn đường cho con.",
+    "goi_y": "Hỏi con muốn gì trước khi lập kế hoạch cho con.",
+    "cau_tu_soi": "Kế hoạch cho con là của con, hay của bạn?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 22 thường chín chắn sớm, thích xây dựng, có tổ chức.",
+    "mat_toi": "Dễ tự tạo áp lực, sợ thất bại.",
+    "goi_y": "Khen trẻ khi thử và sai, không chỉ khi thành công.",
+    "cau_tu_soi": "Trẻ có dám làm hỏng một thứ mà không sợ không?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 22 thường hợp việc xây hệ thống lớn: kiến trúc, kỹ thuật, điều hành tổ chức, chính sách, khởi nghiệp quy mô.",
+    "mat_toi": "Dễ ôm đồm, khó giao việc; cầu toàn làm chậm tiến độ.",
+    "goi_y": "Xây đội ngũ và quy trình để việc lớn không phụ thuộc vào một mình bạn.",
+    "cau_tu_soi": "Nếu bạn nghỉ một tháng, việc của bạn có chạy không?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 22 thường có tầm nhìn tài chính dài hạn, giỏi xây tài sản bền.",
+    "mat_toi": "Dễ dồn hết vào một dự án lớn.",
+    "goi_y": "Phân tán rủi ro; tách tài chính cá nhân khỏi dự án.",
+    "cau_tu_soi": "Nếu dự án lớn nhất của bạn dừng lại, gia đình bạn có ổn không?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 22 thường học có hệ thống, hướng tới ứng dụng lớn.",
+    "mat_toi": "Dễ ôm quá nhiều mục tiêu học cùng lúc.",
+    "goi_y": "Mỗi học kỳ chọn một mục tiêu học chính.",
+    "cau_tu_soi": "Bạn đang học cho mục tiêu nào trong năm năm tới?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 22 thường chịu được áp lực lớn trong thời gian dài.",
+    "mat_toi": "Dễ kiệt sức vì gánh trách nhiệm quá lớn.",
+    "goi_y": "Lên kế hoạch nghỉ ngơi như lên kế hoạch dự án.",
+    "cau_tu_soi": "Kế hoạch của bạn có mục nào tên là 'nghỉ' không?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 22 thường được tin cậy, hay là người kết nối các nguồn lực.",
+    "mat_toi": "Dễ nhìn người qua giá trị công việc.",
+    "goi_y": "Dành thời gian cho bạn bè không có mục đích hợp tác.",
+    "cau_tu_soi": "Bạn gặp bạn bè để vui, hay để bàn việc?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 22 thường thích xây, sửa nhà, lập kế hoạch dài hạn cho nơi ở.",
+    "mat_toi": "Dễ bận xây đời sống tương lai mà quên sống hiện tại.",
+    "goi_y": "Tận hưởng một việc nhỏ mỗi ngày mà không nghĩ tới kế hoạch.",
+    "cau_tu_soi": "Hôm nay bạn đã sống, hay chỉ chuẩn bị để sống?"
+   }
+  },
+  "33": {
+   "ban_than": {
+    "xu_huong": "Số 33 thường được mô tả như số 6 tăng cường: tình thương lớn, muốn nâng đỡ, chữa lành người khác.",
+    "mat_toi": "Dễ gánh nỗi đau của cả thế giới, hy sinh tới mức quên chính mình; dễ tự cho mình là 'người được chọn'.",
+    "goi_y": "Giúp người khác trong giới hạn sức mình; chăm mình như chăm một người bạn đang cần giúp.",
+    "cau_tu_soi": "Bạn giúp người khác được bao lâu nữa nếu không ai giúp bạn?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "Trong tình yêu, số 33 thường yêu hết lòng, muốn nâng đỡ, cảm hoá người mình yêu.",
+    "mat_toi": "Dễ yêu để 'cứu' người khác; chịu đựng quá mức.",
+    "goi_y": "Phân biệt yêu thương với việc sửa chữa một người.",
+    "cau_tu_soi": "Bạn đang yêu người ấy, hay đang cố cứu họ?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Số 33 thường là chỗ dựa tinh thần, người mà cả nhà tìm đến.",
+    "mat_toi": "Dễ thành người chịu trách nhiệm cho hạnh phúc của cả nhà.",
+    "goi_y": "Nói rõ điều bạn làm được và điều không.",
+    "cau_tu_soi": "Hạnh phúc của ai trong nhà bạn đang gánh như thể nó là việc của bạn?"
+   },
+   "con_cai": {
+    "xu_huong": "Là cha mẹ, số 33 thường yêu thương vô điều kiện, kiên nhẫn.",
+    "mat_toi": "Dễ hy sinh quá mức rồi mong con đền đáp; khó để con lớn.",
+    "goi_y": "Để con thấy bạn cũng có nhu cầu riêng.",
+    "cau_tu_soi": "Con bạn có biết bố/mẹ cũng cần được chăm sóc?"
+   },
+   "tre_em": {
+    "xu_huong": "Trẻ số 33 thường giàu tình cảm, hay an ủi người khác, nhạy với nỗi buồn.",
+    "mat_toi": "Dễ gánh cảm xúc của người lớn.",
+    "goi_y": "Cho trẻ được là trẻ con: vô tư, vui chơi, không phải lo cho ai.",
+    "cau_tu_soi": "Trẻ đang an ủi người lớn nhiều hơn người lớn an ủi trẻ?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Số 33 thường hợp việc chăm sóc và nâng đỡ quy mô lớn: giáo dục, y tế, công tác xã hội, nghệ thuật chữa lành.",
+    "mat_toi": "Dễ làm không công, kiệt sức vì lòng tốt.",
+    "goi_y": "Định giá công sức của mình; nhận thù lao không có nghĩa là bớt tốt.",
+    "cau_tu_soi": "Bạn có ngại nói về tiền khi làm việc giúp người không?"
+   },
+   "tai_chinh": {
+    "xu_huong": "Với tiền, số 33 thường dùng tiền để giúp người thân và cộng đồng.",
+    "mat_toi": "Dễ cho đi tới mức thiếu thốn.",
+    "goi_y": "Giữ quỹ an toàn cho mình trước khi giúp.",
+    "cau_tu_soi": "Nếu bạn khó khăn, ai sẽ giúp bạn như bạn đã giúp họ?"
+   },
+   "hoc_tap": {
+    "xu_huong": "Số 33 thường học giỏi khi thấy kiến thức giúp được người.",
+    "mat_toi": "Dễ bỏ việc học để lo cho người khác.",
+    "goi_y": "Coi việc học của mình là cách giúp được nhiều người hơn về sau.",
+    "cau_tu_soi": "Hôm nay bạn đã học cho mình, hay lo cho người khác thay vì học?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Số 33 thường bền bỉ khi phục vụ, dễ quên bản thân.",
+    "mat_toi": "Dễ kiệt sức vì chăm người khác; căng thẳng âm thầm.",
+    "goi_y": "Nhờ giúp đỡ trước khi quá tải.",
+    "cau_tu_soi": "Lần cuối bạn nhờ ai giúp là khi nào?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "Số 33 thường là người bạn bao dung, ai cũng muốn tìm đến.",
+    "mat_toi": "Dễ bị lợi dụng, khó từ chối.",
+    "goi_y": "Tập nói 'lần này mình không giúp được'.",
+    "cau_tu_soi": "Có mối quan hệ nào chỉ tồn tại vì bạn luôn cho đi?"
+   },
+   "cuoc_song": {
+    "xu_huong": "Số 33 thường muốn nhà là nơi đón mọi người, ấm áp, rộng cửa.",
+    "mat_toi": "Dễ để nhà thành chốn của người khác, mất góc riêng.",
+    "goi_y": "Giữ một không gian chỉ của riêng bạn.",
+    "cau_tu_soi": "Trong nhà bạn, đâu là chỗ chỉ để bạn nghỉ?"
+   }
+  }
+ }
+}

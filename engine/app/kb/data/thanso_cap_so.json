@@ -1,0 +1,238 @@
+{
+ "_nguon": "45 cặp số 1–9 (số cái quy về gốc). Mỗi cặp: điểm hoà · điểm va · việc cùng làm.",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "pythagoras_vn",
+ "trang_thai": "nhap_ai",
+ "cap": {
+  "1-1": {
+   "hoa": "Cùng chủ động, cùng thích làm, dễ bắt nhịp khi chung mục tiêu.",
+   "va": "Hai người cùng muốn cầm lái — dễ tranh quyền quyết định.",
+   "cung_lam": "Chia rõ lĩnh vực mỗi người được quyết cuối cùng."
+  },
+  "1-2": {
+   "hoa": "Một người mở đường, một người giữ hoà khí — dễ bổ sung cho nhau.",
+   "va": "Số 1 dễ quyết thay, số 2 dễ nhịn rồi tủi.",
+   "cung_lam": "Số 1 hỏi ý trước; số 2 nói ra điều mình muốn thay vì chờ được đoán."
+  },
+  "1-3": {
+   "hoa": "Năng lượng cao, nhiều ý tưởng, vui khi cùng làm việc mới.",
+   "va": "Số 1 muốn tiến nhanh theo một hướng, số 3 dễ rẽ nhánh.",
+   "cung_lam": "Chốt một mục tiêu chung mỗi quý và cùng giữ nó."
+  },
+  "1-4": {
+   "hoa": "Một người khởi xướng, một người xây nền — bộ đôi làm được việc.",
+   "va": "Số 1 thấy số 4 chậm, số 4 thấy số 1 liều.",
+   "cung_lam": "Thống nhất 'thử nhỏ trước, làm lớn sau' cho mọi kế hoạch mới."
+  },
+  "1-5": {
+   "hoa": "Cùng thích tự do, dám thử, ít ràng buộc nhau.",
+   "va": "Cả hai khó cam kết lâu dài, dễ mỗi người một hướng.",
+   "cung_lam": "Có những nghi thức chung cố định giữa hai lối sống tự do."
+  },
+  "1-6": {
+   "hoa": "Số 1 mang hướng đi, số 6 mang sự chăm lo — gia đình có người lo ngoài, người lo trong.",
+   "va": "Số 1 thấy bị quản, số 6 thấy mình không được ghi nhận.",
+   "cung_lam": "Số 1 nói lời cảm ơn cụ thể; số 6 để số 1 tự quyết phần của họ."
+  },
+  "1-7": {
+   "hoa": "Cả hai độc lập, tôn trọng khoảng riêng.",
+   "va": "Ít chia sẻ cảm xúc; dễ sống song song thay vì cùng nhau.",
+   "cung_lam": "Một buổi mỗi tuần kể cho nhau điều mình đang nghĩ thật."
+  },
+  "1-8": {
+   "hoa": "Cùng tham vọng, cùng hướng kết quả — mạnh khi chung mục tiêu.",
+   "va": "Hai cái tôi lớn, tranh quyền lực, cạnh tranh ngầm.",
+   "cung_lam": "Chọn chung một 'đối thủ' bên ngoài thay vì đấu nhau; tách vai rõ."
+  },
+  "1-9": {
+   "hoa": "Số 1 hành động, số 9 truyền cảm hứng — dễ làm việc có ý nghĩa cùng nhau.",
+   "va": "Số 1 thấy số 9 mơ hồ, số 9 thấy số 1 ích kỷ.",
+   "cung_lam": "Cùng làm một dự án vừa có kết quả đo được vừa có ý nghĩa."
+  },
+  "2-2": {
+   "hoa": "Rất hiểu nhau, dịu dàng, ít va chạm lớn.",
+   "va": "Cả hai né xung đột, chuyện nhỏ tích tụ thành khoảng cách.",
+   "cung_lam": "Hẹn định kỳ nói thẳng một điều chưa hài lòng."
+  },
+  "2-3": {
+   "hoa": "Số 2 lắng nghe, số 3 kể chuyện — không khí vui, ấm.",
+   "va": "Số 3 vô tư, số 2 dễ tổn thương vì câu đùa.",
+   "cung_lam": "Số 3 hỏi 'câu đó có làm em/anh buồn không?'; số 2 nói ra ngay."
+  },
+  "2-4": {
+   "hoa": "Ổn định, chung thuỷ, đều đặn — hợp xây tổ ấm.",
+   "va": "Dễ nhàm, ít bất ngờ; số 4 khô khan với nhu cầu tình cảm của số 2.",
+   "cung_lam": "Lên lịch những điều bất ngờ nho nhỏ."
+  },
+  "2-5": {
+   "hoa": "Số 5 mang không khí mới, số 2 mang sự ấm áp.",
+   "va": "Số 2 cần gắn bó, số 5 cần tự do — dễ hiểu lầm là hết thương.",
+   "cung_lam": "Nói rõ nhu cầu khoảng riêng và nhu cầu kết nối bằng con số cụ thể (bao nhiêu tối/tuần)."
+  },
+  "2-6": {
+   "hoa": "Cả hai chu đáo, hướng gia đình — rất ấm.",
+   "va": "Cả hai cho nhiều, ít đòi; oán thầm khi không được đáp lại.",
+   "cung_lam": "Mỗi người nói một nhu cầu của mình mỗi tuần."
+  },
+  "2-7": {
+   "hoa": "Yên tĩnh, sâu sắc, tôn trọng nhau.",
+   "va": "Số 2 cần gần, số 7 cần xa — dễ thấy bị bỏ rơi.",
+   "cung_lam": "Số 7 báo trước khi cần ở một mình; số 2 có hoạt động riêng lúc đó."
+  },
+  "2-8": {
+   "hoa": "Số 8 lo đường lớn, số 2 lo sự gắn kết — bổ sung tốt.",
+   "va": "Số 8 dễ át, số 2 dễ im.",
+   "cung_lam": "Quyết định lớn luôn cần cả hai đồng ý."
+  },
+  "2-9": {
+   "hoa": "Cùng giàu lòng thương, dễ đồng cảm.",
+   "va": "Cả hai dễ hy sinh, dễ mơ hồ về tiền bạc và trách nhiệm.",
+   "cung_lam": "Lập kế hoạch tài chính chung rõ ràng."
+  },
+  "3-3": {
+   "hoa": "Vui, sáng tạo, nhiều chuyện để nói.",
+   "va": "Cả hai tản mạn, thiếu người lo việc thực tế.",
+   "cung_lam": "Chia việc thực tế theo lịch, có danh sách chung."
+  },
+  "3-4": {
+   "hoa": "Số 3 mang niềm vui, số 4 mang sự chắc chắn.",
+   "va": "Số 4 thấy số 3 thiếu trách nhiệm, số 3 thấy số 4 cứng.",
+   "cung_lam": "Số 3 giữ lời hứa nhỏ; số 4 chừa chỗ cho ngẫu hứng."
+  },
+  "3-5": {
+   "hoa": "Năng động, vui, thích trải nghiệm — ít buồn chán.",
+   "va": "Thiếu ổn định, dễ chi tiêu và bỏ dở cùng nhau.",
+   "cung_lam": "Đặt mục tiêu chung dài hạn và một người giữ ngân sách."
+  },
+  "3-6": {
+   "hoa": "Số 3 làm nhà vui, số 6 làm nhà ấm.",
+   "va": "Số 6 dễ chăm và nhắc quá mức, số 3 thấy bị gò.",
+   "cung_lam": "Số 6 bớt nhắc; số 3 chủ động làm phần việc nhà."
+  },
+  "3-7": {
+   "hoa": "Số 3 kéo số 7 ra ngoài, số 7 giúp số 3 sâu hơn.",
+   "va": "Số 3 thấy số 7 lạnh, số 7 thấy số 3 hời hợt.",
+   "cung_lam": "Xen kẽ hoạt động đông vui và hoạt động yên tĩnh."
+  },
+  "3-8": {
+   "hoa": "Số 3 giỏi truyền đạt, số 8 giỏi tổ chức — hợp làm ăn.",
+   "va": "Số 8 thấy số 3 thiếu nghiêm túc; số 3 thấy số 8 thực dụng.",
+   "cung_lam": "Chia vai: số 3 lo đối ngoại, số 8 lo vận hành."
+  },
+  "3-9": {
+   "hoa": "Lãng mạn, giàu cảm xúc, cùng yêu cái đẹp.",
+   "va": "Cả hai ít thực tế, dễ bỏ qua việc cần làm.",
+   "cung_lam": "Mỗi tháng rà soát việc thực tế (tiền, giấy tờ) cùng nhau."
+  },
+  "4-4": {
+   "hoa": "Rất ổn định, có kế hoạch, đáng tin với nhau.",
+   "va": "Cứng nhắc, ít thay đổi, dễ nhàm.",
+   "cung_lam": "Mỗi năm cùng thử một điều mới."
+  },
+  "4-5": {
+   "hoa": "Số 4 cho nền, số 5 cho gió — học được nhiều từ nhau.",
+   "va": "Số 4 thấy số 5 thiếu ổn định, số 5 thấy số 4 gò bó.",
+   "cung_lam": "Thống nhất phần 'cố định' và phần 'linh hoạt' trong đời sống chung."
+  },
+  "4-6": {
+   "hoa": "Cùng trách nhiệm, hướng gia đình, xây tổ ấm vững.",
+   "va": "Nhiều bổn phận, ít vui chơi.",
+   "cung_lam": "Có ngày chỉ để vui, không làm việc nhà."
+  },
+  "4-7": {
+   "hoa": "Cùng nghiêm túc, cẩn trọng, tôn trọng lý lẽ.",
+   "va": "Khô khan, ít biểu lộ tình cảm.",
+   "cung_lam": "Tập nói lời cảm xúc thành câu, không chỉ hành động."
+  },
+  "4-8": {
+   "hoa": "Bộ đôi thực tế, giỏi xây tài sản và sự nghiệp.",
+   "va": "Cuốn vào công việc, quên tình cảm.",
+   "cung_lam": "Tách thời gian riêng tư khỏi thời gian bàn chuyện tiền."
+  },
+  "4-9": {
+   "hoa": "Số 4 hiện thực hoá lý tưởng của số 9.",
+   "va": "Số 9 thấy số 4 thiếu tầm nhìn; số 4 thấy số 9 viển vông.",
+   "cung_lam": "Số 9 nêu mục đích, số 4 lập kế hoạch — cả hai cùng duyệt."
+  },
+  "5-5": {
+   "hoa": "Tự do, sôi nổi, nhiều trải nghiệm chung.",
+   "va": "Thiếu ổn định, khó cam kết, khó giữ nề nếp.",
+   "cung_lam": "Có vài cam kết cố định dù sống linh hoạt."
+  },
+  "5-6": {
+   "hoa": "Số 5 mang sự mới mẻ, số 6 mang mái ấm.",
+   "va": "Số 6 muốn giữ, số 5 muốn đi.",
+   "cung_lam": "Số 5 báo trước kế hoạch; số 6 tôn trọng khoảng tự do đã thoả thuận."
+  },
+  "5-7": {
+   "hoa": "Cùng tò mò, thích khám phá (số 5 ra ngoài, số 7 vào trong).",
+   "va": "Nhịp sống khác nhau, khó chung thời gian.",
+   "cung_lam": "Chọn trải nghiệm vừa phiêu lưu vừa có chiều sâu (du lịch văn hoá, học chung)."
+  },
+  "5-8": {
+   "hoa": "Năng động, dám làm, hợp làm ăn.",
+   "va": "Cả hai liều, dễ quyết nhanh sai lớn.",
+   "cung_lam": "Mọi quyết định tiền lớn cần một ngày chờ và một người thứ ba góp ý."
+  },
+  "5-9": {
+   "hoa": "Cùng mở rộng, thích đi xa, rộng lượng.",
+   "va": "Thiếu gốc rễ, ít tích luỹ.",
+   "cung_lam": "Có mục tiêu tích luỹ chung và một nơi 'về' cố định."
+  },
+  "6-6": {
+   "hoa": "Rất chu đáo, hướng gia đình, ấm cúng.",
+   "va": "Cả hai muốn chăm, dễ kiểm soát nhau, mệt vì trách nhiệm.",
+   "cung_lam": "Luân phiên người được chăm, người đi chăm."
+  },
+  "6-7": {
+   "hoa": "Số 6 mang sự ấm, số 7 mang chiều sâu.",
+   "va": "Số 6 thấy bị đẩy ra, số 7 thấy bị xâm phạm.",
+   "cung_lam": "Thoả thuận về khoảng riêng và cách hỏi han."
+  },
+  "6-8": {
+   "hoa": "Số 8 lo vật chất, số 6 lo tinh thần — gia đình vững.",
+   "va": "Số 8 vắng mặt, số 6 thấy cô đơn trong trách nhiệm.",
+   "cung_lam": "Số 8 có mặt ở những dịp quan trọng như một cam kết công việc."
+  },
+  "6-9": {
+   "hoa": "Cùng giàu lòng thương, thích giúp người.",
+   "va": "Lo cho người ngoài nhiều, quên nhau.",
+   "cung_lam": "Dành thời gian cho riêng hai người trước việc chung."
+  },
+  "7-7": {
+   "hoa": "Hiểu nhau không cần nói nhiều, tôn trọng không gian riêng.",
+   "va": "Quá khép kín, xa cách dần.",
+   "cung_lam": "Cùng một sở thích trí tuệ để có chuyện chung."
+  },
+  "7-8": {
+   "hoa": "Số 7 phân tích, số 8 quyết — hợp làm việc lớn.",
+   "va": "Số 8 thấy số 7 chậm, số 7 thấy số 8 vội.",
+   "cung_lam": "Số 7 đưa phân tích có hạn chót; số 8 chờ đủ hạn."
+  },
+  "7-9": {
+   "hoa": "Cùng hướng về ý nghĩa, tinh thần, tri thức.",
+   "va": "Cả hai xa thực tế.",
+   "cung_lam": "Cùng lập kế hoạch thực tế cho những điều cả hai tin."
+  },
+  "8-8": {
+   "hoa": "Cùng tham vọng, xây được nhiều.",
+   "va": "Tranh quyền, cạnh tranh, cuốn vào tiền bạc.",
+   "cung_lam": "Tách vai trò rõ; đặt mục tiêu chung phi tài chính."
+  },
+  "8-9": {
+   "hoa": "Số 8 có nguồn lực, số 9 có lý tưởng — có thể làm việc lớn có ích.",
+   "va": "Số 9 thấy số 8 thực dụng; số 8 thấy số 9 hoang phí.",
+   "cung_lam": "Cùng quyết một phần thu nhập cho việc ý nghĩa, phần còn lại tích luỹ."
+  },
+  "9-9": {
+   "hoa": "Rộng lượng, lý tưởng, hiểu nhau về giá trị sống.",
+   "va": "Cả hai dễ bỏ bê việc thực tế và bản thân.",
+   "cung_lam": "Có người giữ vai trò lo việc thực tế theo từng tháng."
+  }
+ }
+}

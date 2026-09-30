@@ -37,10 +37,54 @@ HIEN_TAI = {
 }
 
 
-def kha_nang_v2() -> dict:
-    """Khả năng của hệ v2 — đọc thẳng từ code/KB để không khai man."""
-    from app.luangiai import hoi as hoi_v2   # noqa: PLC0415  (chỉ có sau v2)
-    return hoi_v2.kha_nang()
+def bao_cao_v2() -> dict:
+    """Hệ v2 chấm bằng CHẠY THẬT từng câu qua pipeline (không khai báo tay).
+
+      day_du    có căn cứ KB (hoặc đúng đường xử lý đặc biệt), đúng lĩnh vực,
+                câu trả lời qua được bộ kiểm tra đầu ra
+      mot_phan  có căn cứ nhưng phân loại lệch lĩnh vực so với nhãn
+      khong     không có mục KB nào / sai đường xử lý bắt buộc / lỗi kiểm tra
+    """
+    import datetime as dt  # noqa: PLC0415
+    import sys  # noqa: PLC0415
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from app.narrative import hoi_van  # noqa: PLC0415
+
+    nguoi = {"ho_ten": ["Nguyễn Đức Luân"], "ngay": 24, "thang": 10, "nam": 1988}
+    kia = {"ho_ten": ["Trần Thị Mai"], "ngay": 13, "thang": 5, "nam": 1990}
+    rows = [json.loads(l) for l in KHO.open(encoding="utf-8")]
+    muc = collections.Counter()
+    theo_lv: dict[str, collections.Counter] = collections.defaultdict(collections.Counter)
+    ly_do = collections.Counter()
+    khoi = collections.Counter()
+    for r in rows:
+        kq = hoi_van.tra_loi(r["cau_hoi"], nguoi, kia, dt.date(2026, 9, 30), dung_llm=False)
+        pl = kq["phan_loai"]
+        for m in kq["bang_chung"]["muc"]:
+            khoi[m["loai"]] += 1
+        dac_biet = r["xu_ly"] in ("an_toan", "tu_choi_nhe")
+        if dac_biet and pl["xu_ly"] != r["xu_ly"]:
+            m_, why = "khong", f"sai đường xử lý bắt buộc {r['xu_ly']}"
+        elif kq["do_phu"] != "day_du":
+            m_, why = "khong", f"không có mục KB ({r['linh_vuc']})"
+        elif kq["loi_kiem_tra"]:
+            m_, why = "khong", "câu trả lời không qua bộ kiểm tra"
+        elif pl["linh_vuc"] != r["linh_vuc"]:
+            m_, why = "mot_phan", f"lệch lĩnh vực {r['linh_vuc']}→{pl['linh_vuc']}"
+        else:
+            m_, why = "day_du", ""
+        muc[m_] += 1
+        theo_lv[r["linh_vuc"]][m_] += 1
+        if why:
+            ly_do[why] += 1
+    n = len(rows)
+    return {
+        "tong": n,
+        "muc": {k: {"so": v, "ty_le": round(100 * v / n, 1)} for k, v in muc.items()},
+        "theo_linh_vuc": {lv: dict(c) for lv, c in sorted(theo_lv.items())},
+        "ly_do_hang_dau": ly_do.most_common(15),
+        "khoi_kb_duoc_dung": dict(khoi.most_common()),
+    }
 
 
 def cham(r: dict, kn: dict, co_llm: bool) -> tuple[str, str]:
@@ -91,8 +135,10 @@ def main() -> None:
     ap.add_argument("--kha-nang", default="hien_tai", choices=["hien_tai", "v2"])
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
-    kn = HIEN_TAI if a.kha_nang == "hien_tai" else kha_nang_v2()
-    out = {"co_llm": bao_cao(kn, True), "khong_llm": bao_cao(kn, False)}
+    if a.kha_nang == "v2":
+        out = {"v2_khong_llm": bao_cao_v2()}
+    else:
+        out = {"co_llm": bao_cao(HIEN_TAI, True), "khong_llm": bao_cao(HIEN_TAI, False)}
     if a.json:
         print(json.dumps(out, ensure_ascii=False, indent=1))
         return

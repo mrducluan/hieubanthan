@@ -1,0 +1,244 @@
+{
+ "_nguon": "Giải thích kỹ thuật cho câu hỏi về chính thần số học. tu_khoa: cụm không dấu để bộ định tuyến khớp.",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "pythagoras_vn",
+ "trang_thai": "nhap_ai",
+ "muc": {
+  "cach_tinh_duong_doi": {
+   "tieu_de": "Cách tính số chủ đạo (đường đời)",
+   "noi_dung": "Cộng tất cả chữ số của ngày, tháng, năm sinh dương lịch rồi rút gọn tới khi còn một chữ số. Riêng 11, 22, 33 là số cái, được giữ nguyên. Ví dụ 24/10/1988: 2+4+1+0+1+9+8+8 = 33 → giữ 33.",
+   "tu_khoa": [
+    "so chu dao tinh",
+    "duong doi tinh",
+    "tinh so chu dao",
+    "so chu dao la gi"
+   ]
+  },
+  "chu_dao_la_duong_doi": {
+   "tieu_de": "Số chủ đạo và đường đời",
+   "noi_dung": "Hai tên gọi cùng một chỉ số. Sách tiếng Việt phổ biến gọi là 'số chủ đạo', sách dịch từ tiếng Anh (Life Path) gọi là 'đường đời'.",
+   "tu_khoa": [
+    "so chu dao va duong doi"
+   ]
+  },
+  "am_duong_lich": {
+   "tieu_de": "Âm lịch hay dương lịch?",
+   "noi_dung": "Thần số học Pythagoras dùng ngày dương lịch (lịch Gregory). Dùng ngày âm sẽ ra con số khác và không thuộc hệ này. Nếu giấy tờ ghi ngày âm, hãy đổi sang dương trước khi tính.",
+   "tu_khoa": [
+    "ngay am hay",
+    "am hay duong",
+    "tinh theo ngay am",
+    "tinh theo am lich"
+   ]
+  },
+  "gio_ty": {
+   "tieu_de": "Sinh lúc 23 giờ tính ngày nào?",
+   "noi_dung": "Với thần số học, sản phẩm này tính sinh 23:00–23:59 vẫn thuộc ngày hôm đó (không sang ngày mới). Tử vi thì theo quy ước khác (23:00 đã sang ngày mới), nên người sinh giờ này có thể thấy hai hệ lệch ngày nhau.",
+   "tu_khoa": [
+    "sinh luc 23",
+    "23 gio thi",
+    "23h thi",
+    "gio ty tinh"
+   ]
+  },
+  "khac_trang": {
+   "tieu_de": "Vì sao trang khác ra số khác?",
+   "noi_dung": "Mỗi trang chọn quy ước khác nhau: giữ hay không giữ số 33, chữ Y là nguyên âm hay phụ âm, chữ Đ tính ra sao, cộng gộp hay cộng từng phần ngày/tháng/năm. Với tên tiếng Việt, đổi quy ước có thể đổi con số. Trang này dùng một quy ước cố định và ghi chú khi con số nhạy với cách viết tên.",
+   "tu_khoa": [
+    "trang khac",
+    "web khac",
+    "ra so khac",
+    "ung dung khac"
+   ]
+  },
+  "so_cai": {
+   "tieu_de": "Số cái (11, 22, 33) là gì?",
+   "noi_dung": "Là các số không rút gọn tiếp khi tính. Truyền thống coi chúng là phiên bản 'cường độ cao' của 2, 4, 6. Nhiều trang Việt chỉ giữ 11 và 22, rút 33 về 6; trang này giữ cả 33. Số cái không phải là 'người được chọn' — tỷ lệ người mang số chủ đạo 11 là khoảng 9–10% dân số.",
+   "tu_khoa": [
+    "so cai la gi",
+    "33 co duoc",
+    "rut ve 6",
+    "22/4",
+    "so cai 11 22 33"
+   ]
+  },
+  "ba_chi_so_ten": {
+   "tieu_de": "Sứ mệnh, linh hồn, nhân cách khác nhau thế nào?",
+   "noi_dung": "Cả ba tính từ họ tên. Sứ mệnh: cộng mọi chữ cái. Linh hồn: chỉ nguyên âm — điều bạn khao khát bên trong. Nhân cách: chỉ phụ âm — ấn tượng bạn tạo cho người khác.",
+   "tu_khoa": [
+    "su menh linh hon nhan cach"
+   ]
+  },
+  "nam_ca_nhan": {
+   "tieu_de": "Năm cá nhân tính thế nào?",
+   "noi_dung": "Rút gọn ngày sinh + tháng sinh + năm đang xem, được một số từ 1 đến 9. Chu kỳ lặp lại mỗi 9 năm. Trang này tính theo mốc 1/1; có trường phái đổi năm vào ngày sinh nhật, hai cách lệch nhau ở quãng đầu năm.",
+   "tu_khoa": [
+    "nam ca nhan tinh",
+    "tinh nam ca nhan",
+    "tu 1/1 hay",
+    "nam ca nhan doi tu khi nao",
+    "tinh tu 1/1"
+   ]
+  },
+  "thang_ngay_ca_nhan": {
+   "tieu_de": "Tháng và ngày cá nhân",
+   "noi_dung": "Tháng cá nhân = năm cá nhân + tháng đang xem, rút về 1–9. Ngày cá nhân = tháng cá nhân + ngày đang xem, rút về 1–9.",
+   "tu_khoa": [
+    "cach tinh thang ca nhan",
+    "cach tinh ngay ca nhan",
+    "thang ca nhan tinh",
+    "ngay ca nhan tinh"
+   ]
+  },
+  "dinh_cao_thu_thach": {
+   "tieu_de": "Đỉnh cao và thử thách",
+   "noi_dung": "Đỉnh cao chia đời thành 4 giai đoạn theo tuổi, mỗi giai đoạn một con số chủ đề; đỉnh 1 kết thúc ở tuổi 36 trừ số chủ đạo. Thử thách là bài học khó lặp lại, tính từ hiệu các phần ngày/tháng/năm sinh. Nhiều trang gọi là 'kim tự tháp thần số'.",
+   "tu_khoa": [
+    "dinh cao va thu thach la gi",
+    "dinh cao la gi",
+    "thu thach la gi"
+   ]
+  },
+  "bieu_do": {
+   "tieu_de": "Biểu đồ ngày sinh",
+   "noi_dung": "Lưới 3×3 xếp các chữ số trong ngày sinh (bỏ số 0): hàng trên 3-6-9, giữa 2-5-8, dưới 1-4-7. Ô có số cho biết thế mạnh được nhấn, ô trống là điều cần học thêm.",
+   "tu_khoa": [
+    "bieu do ngay sinh la gi"
+   ]
+  },
+  "mui_ten": {
+   "tieu_de": "Mũi tên trong biểu đồ",
+   "noi_dung": "Ba ô thẳng hàng cùng có số tạo thành 'mũi tên' (ví dụ 1-5-9 là mũi tên Quyết tâm); ba ô cùng trống tạo 'mũi tên trống' (1-5-9 trống là mũi tên Trì hoãn). Có 8 đường: 3 hàng, 3 cột, 2 chéo.",
+   "tu_khoa": [
+    "mui ten trong than so hoc la gi",
+    "bao nhieu mui ten",
+    "mui ten la gi"
+   ]
+  },
+  "chi_so_phu": {
+   "tieu_de": "Số thái độ, trưởng thành, ngày sinh",
+   "noi_dung": "Số thái độ = ngày + tháng sinh, là ấn tượng đầu tiên bạn tạo ra. Số trưởng thành = số chủ đạo + sứ mệnh, là hướng đời nghiêng về sau tuổi 35–40. Số ngày sinh = ngày trong tháng rút gọn, là một tài năng phụ.",
+   "tu_khoa": [
+    "so thai do la gi",
+    "so truong thanh la gi",
+    "so ngay sinh khac so chu dao"
+   ]
+  },
+  "chu_y": {
+   "tieu_de": "Chữ Y là nguyên âm hay phụ âm?",
+   "noi_dung": "Trang này dùng quy tắc cố định: Y là nguyên âm khi đứng riêng không liền kề nguyên âm khác trong cùng âm tiết (vd 'Ly', 'Vy'); kề nguyên âm khác thì là phụ âm (vd 'Nguyễn', 'Huy'). Chỉ ảnh hưởng số linh hồn và nhân cách.",
+   "tu_khoa": [
+    "chu y la nguyen am"
+   ]
+  },
+  "dau_tieng_viet": {
+   "tieu_de": "Dấu, chữ Đ và tên khai sinh",
+   "noi_dung": "Bỏ dấu thanh và dấu mũ (ư→u, ơ→o, â→a), chữ Đ tính như D. Nên dùng tên khai sinh đầy đủ; tên thường gọi hay biệt danh có thể ra số khác — trang ghi chú khi điều đó xảy ra.",
+   "tu_khoa": [
+    "co dau va khong dau",
+    "ten khai sinh hay ten thuong goi",
+    "chu d thi tinh",
+    "u o a tinh the nao",
+    "khi bo dau"
+   ]
+  },
+  "no_nghiep": {
+   "tieu_de": "Nợ nghiệp tính thế nào?",
+   "noi_dung": "Nếu trong quá trình rút gọn ngày sinh, số chủ đạo hoặc các số tên xuất hiện 13, 14, 16 hay 19 thì gọi là 'nợ nghiệp'. Đây là cách truyền thống gọi tên một bài học lặp lại, không phải hình phạt hay quả báo.",
+   "tu_khoa": [
+    "no nghiep tinh the nao"
+   ]
+  },
+  "bai_hoc_nghiep": {
+   "tieu_de": "Bài học nghiệp tính thế nào?",
+   "noi_dung": "Là các chữ số từ 1 đến 9 không xuất hiện trong giá trị chữ cái của họ tên. Mỗi số vắng mặt gợi một kỹ năng cần rèn thêm.",
+   "tu_khoa": [
+    "bai hoc nghiep tinh the nao"
+   ]
+  },
+  "so_0_29_2": {
+   "tieu_de": "Số 0 và người sinh 29/2",
+   "noi_dung": "Số 0 không tính trong biểu đồ ngày sinh (không có ô cho 0) nhưng vẫn góp vào phép cộng. Người sinh 29/2 tính bình thường với ngày 29 tháng 2; năm cá nhân vẫn dùng ngày 29 tháng 2.",
+   "tu_khoa": [
+    "so 0 trong ngay sinh",
+    "29/2 thi"
+   ]
+  },
+  "khong_doi": {
+   "tieu_de": "Số chủ đạo có đổi theo thời gian không?",
+   "noi_dung": "Không. Số chủ đạo cố định từ ngày sinh. Thứ thay đổi theo thời gian là năm/tháng/ngày cá nhân và giai đoạn đỉnh cao.",
+   "tu_khoa": [
+    "co thay doi theo thoi gian"
+   ]
+  },
+  "do_tin": {
+   "tieu_de": "Thần số học có chính xác, có khoa học không?",
+   "noi_dung": "Thần số học là hệ biểu tượng văn hoá, không phải khoa học: chưa có nghiên cứu nào cho thấy con số dự đoán được tính cách hay sự kiện. Hệ đang dùng do các tác giả Mỹ (Balliett, Jordan…) dựng đầu thế kỷ 20, gắn tên Pythagoras phần nhiều mang tính biểu tượng. Dùng tốt nhất như một cái cớ để tự soi, không như sự thật về bạn.",
+   "tu_khoa": [
+    "co chinh xac khong",
+    "co khoa hoc khong",
+    "pythagoras",
+    "tin hoan toan",
+    "co phai me tin",
+    "me tin khong"
+   ]
+  },
+  "barnum": {
+   "tieu_de": "Vì sao ai đọc cũng thấy đúng?",
+   "noi_dung": "Đó là hiệu ứng Barnum: mô tả đủ rộng thì ai cũng thấy mình trong đó. Vì vậy mỗi con số ở đây luôn kèm mặt tối và một câu tự kiểm — nếu bạn không trả lời được 'điều gì chứng tỏ tôi KHÔNG phải số này', thì con số chưa nói gì về bạn.",
+   "tu_khoa": [
+    "barnum",
+    "ai doc mo ta",
+    "thay dung het"
+   ]
+  },
+  "ty_le": {
+   "tieu_de": "Bao nhiêu người cùng số với tôi?",
+   "noi_dung": "Mỗi số chủ đạo phổ biến chiếm khoảng 9–11% dân số (hàng trăm triệu người); số 2 và 22 hiếm hơn vì quy ước giữ số cái. Chuỗi năm cá nhân trùng khít với mọi người cùng ngày và tháng sinh (khoảng 1/366 dân số).",
+   "tu_khoa": [
+    "bao nhieu nguoi cung"
+   ]
+  },
+  "kiem_chung": {
+   "tieu_de": "Tự kiểm chứng thế nào?",
+   "noi_dung": "Viết ra trước những điều con số 'nói' về một năm cụ thể trong quá khứ, rồi mới đối chiếu với nhật ký đời mình. Làm thêm với một bảng số của ngày sinh khác làm đối chứng: nếu bảng đối chứng cũng 'khớp' ngang bảng thật thì con số không mang thông tin riêng về bạn.",
+   "tu_khoa": [
+    "tu kiem chung",
+    "kiem chung than so"
+   ]
+  },
+  "khac_tu_vi": {
+   "tieu_de": "Thần số học khác tử vi thế nào?",
+   "noi_dung": "Tử vi lập lá số từ ngày giờ sinh âm lịch với hàng trăm sao, có truyền thống hàng thế kỷ ở Á Đông. Thần số học dùng ngày dương lịch và tên, chỉ khoảng 12 phạm trù số, hình thành ở Mỹ đầu thế kỷ 20.",
+   "tu_khoa": [
+    "khac tu vi"
+   ]
+  },
+  "moi_sach_khac": {
+   "tieu_de": "Sao mỗi sách viết một kiểu?",
+   "noi_dung": "Vì thần số học không có văn bản gốc chuẩn. Mỗi tác giả mô tả con số theo cách của mình. Nội dung ở đây là bản biên soạn tham khảo, có ghi nguồn.",
+   "tu_khoa": [
+    "moi sach viet"
+   ]
+  },
+  "cung_ngay_khac_nguoi": {
+   "tieu_de": "Cùng ngày sinh sao khác nhau hoàn toàn?",
+   "noi_dung": "Vì con số chỉ là một lăng kính rất thô: cùng ngày sinh là cùng số chủ đạo, nhưng gia đình, văn hoá, lựa chọn và trải nghiệm tạo nên con người nhiều hơn bất kỳ con số nào.",
+   "tu_khoa": [
+    "cung ngay sinh ma"
+   ]
+  },
+  "tuyen_dung": {
+   "tieu_de": "Có dùng thần số học để tuyển dụng được không?",
+   "noi_dung": "Không nên. Không có bằng chứng con số dự báo năng lực, và loại ứng viên vì ngày sinh là phân biệt đối xử. Hãy dùng mô tả công việc rõ, bài thử thực tế và phỏng vấn có cấu trúc.",
+   "tu_khoa": [
+    "dung de tuyen dung"
+   ]
+  }
+ }
+}
