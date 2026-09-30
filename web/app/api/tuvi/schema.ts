@@ -57,3 +57,55 @@ export const ChartOutput = z.object({
   co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })),
 });
 export type ChartOutputT = z.infer<typeof ChartOutput>;
+
+// --------------------------------------------------------------------------- //
+// SPEC-005 — lá số an sao đầy đủ (iztro cục bộ). Route riêng /api/tuvi/la-so để
+// KHÔNG đổi hợp đồng /api/tuvi/chart (v0 tuan_triet_only đã duyệt).
+// --------------------------------------------------------------------------- //
+const Sao = z.object({
+  ten: z.string(),
+  do_sang: z.string().nullable(),
+  tu_hoa: z.string().nullable(),
+});
+
+const Cung = z.object({
+  ten: z.string(),
+  can: z.string(),
+  chi: z.string(),
+  la_menh: z.boolean(),
+  la_than: z.boolean(),
+  chinh_tinh: z.array(Sao),
+  phu_tinh: z.array(Sao),
+  tap_dieu: z.array(z.string()),
+  truong_sinh: z.string(),
+  bac_si: z.string(),
+  tuong_tien: z.string(),
+  tue_tien: z.string(),
+  dai_han: z.object({ tu_tuoi: z.number(), den_tuoi: z.number() }),
+  tieu_han_tuoi: z.array(z.number()),
+});
+
+export const LaSoOutput = z.object({
+  engine_version: z.string(),
+  pham_vi: z.literal("an_sao_day_du"),
+  iztro: z.string(),
+  duong_lich_goc: z.string(),
+  duong_lich_kinh_tuyen: z.string(),
+  mui_gio_dong_ho: z.number(),
+  gio_chi_so: z.number().int().min(0).max(12),
+  gio: z.string(),
+  khoang_gio: z.string(),
+  am_lich: z.object({ ngay: z.number(), thang: z.number(), nam: z.number(), nhuan: z.number() }),
+  am_lich_iztro: z.string(),
+  tu_tru: z.string(),
+  can_chi_nam: z.object({ can: z.string(), chi: z.string() }),
+  gioi_tinh: z.enum(["nam", "nu"]),
+  ngu_hanh_cuc: z.string(),
+  menh_chu: z.string(),
+  than_chu: z.string(),
+  chi_cung_menh: z.string(),
+  chi_cung_than: z.string(),
+  cung: z.array(Cung).length(12),
+  co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })),
+});
+export type LaSoOutputT = z.infer<typeof LaSoOutput>;
