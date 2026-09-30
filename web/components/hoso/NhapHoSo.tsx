@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { luuHoSo, ngayHopLe, type HoSo } from "@/lib/hoso";
+import { ghi, layMaMoi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -52,6 +53,12 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
       ...(truoc1975 && (vung === "north" || vung === "south") ? { vung } : {}),
       ...(macDinh?.tao_luc ? { tao_luc: macDinh.tao_luc } : {}),
     });
+    if (!macDinh) {
+      ghi("reading_started");
+      ghi("profile_created", { kind: "may" });
+      const ma = layMaMoi();
+      if (ma) ghi("referral_signup", { ma_moi: ma });
+    }
     onXong(h);
   }
 

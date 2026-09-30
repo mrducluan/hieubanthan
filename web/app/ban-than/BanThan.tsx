@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, BookOpen, Compass, HeartHandshake, MessageCircle, Pencil, Share2 } from "lucide-react";
@@ -16,6 +16,8 @@ import { ChuThichLop } from "@/components/than-so/LopNoiDung";
 import { NhipHienTai } from "@/components/than-so/NhipHienTai";
 import { useBaiDoc } from "@/lib/bai-doc";
 import { tenGoi, useHoSo } from "@/lib/hoso";
+import { ghi } from "@/lib/do-luong";
+import { GopY } from "@/components/khung/GopY";
 
 export function BanThan() {
   const hoSo = useHoSo();
@@ -24,6 +26,21 @@ export function BanThan() {
   const [daXongNghiThuc, setDaXong] = useState(params.get("moi") !== "1");
   const [suaMo, setSuaMo] = useState(false);
   const { kq, loi, thuLai } = useBaiDoc(hoSo);
+  const cuoiBai = useRef<HTMLElement>(null);
+
+  // reading_completed: khi người đọc cuộn tới "Nhịp hiện tại" (sau 4 thẻ cốt lõi) — một lần mỗi lượt xem.
+  useEffect(() => {
+    const el = cuoiBai.current;
+    if (!el || !kq || !daXongNghiThuc) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e?.isIntersecting) {
+        ghi("reading_completed", { so_duong_doi: kq.cac_vi_tri[0]?.gia_tri });
+        io.disconnect();
+      }
+    }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [kq, daXongNghiThuc]);
   const xongNghiThuc = useCallback(() => {
     setDaXong(true);
     router.replace("/ban-than", { scroll: false });
@@ -85,7 +102,7 @@ export function BanThan() {
         </div>
       </section>
 
-      <section aria-labelledby="muc-nhip">
+      <section aria-labelledby="muc-nhip" ref={cuoiBai}>
         <TieuDeMuc id="muc-nhip" nho="Nhịp hiện tại" lon="Giai đoạn này của bạn"
           mo_ta="Chủ đề của năm và tháng cá nhân — không phải dự báo sự kiện, mà là gợi ý để bạn đặt trọng tâm." />
         <NhipHienTai kq={kq} />
@@ -106,6 +123,8 @@ export function BanThan() {
           </Link>
         ))}
       </section>
+
+      <GopY />
 
       <p className="text-center text-xs text-fg-faint">{kq.trich_nguon_chung} · Engine v{kq.engine_version}</p>
 

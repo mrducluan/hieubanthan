@@ -73,6 +73,7 @@ export function KinhDich() {
       <DauMang Icon={Hexagon} ten="Kinh Dịch" mo_ta="Hỏi một quẻ cho MỘT việc cụ thể bạn đang cân nhắc. Quẻ do máy gieo ngẫu nhiên, Mai Hoa theo giờ, hoặc bạn tự gieo — AI không chọn quẻ. Lời đọc có nguồn, kèm mặt tối và câu tự soi." />
       <div className="mx-auto max-w-3xl">
         <KhungChat
+            moDun="kinhdich"
           loiChao="Tĩnh tâm một chút, rồi viết câu hỏi về một việc cụ thể — càng rõ việc, quẻ càng dễ soi."
           goiY={GOI_Y}
           nhanO="Câu hỏi Kinh Dịch"

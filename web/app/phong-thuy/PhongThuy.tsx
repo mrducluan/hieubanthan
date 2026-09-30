@@ -40,6 +40,7 @@ export function PhongThuy() {
         </section>
         <section aria-label="Hỏi Phong thuỷ" className="min-w-0 lg:sticky lg:top-24">
           <KhungChat
+            moDun="phongthuy"
             loiChao="Hỏi về hướng nhà, bếp, bàn làm việc, năm làm nhà — hoặc một tình huống bố trí cụ thể."
             goiY={GOI_Y}
             nhanO="Câu hỏi Phong thuỷ"

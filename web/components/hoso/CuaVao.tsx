@@ -1,15 +1,18 @@
 "use client";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NhapHoSo } from "./NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
+import { ghi } from "@/lib/do-luong";
 
 // Ô nhập ở trang chủ: chưa có hồ sơ → form 2 trường; đã có → lối về trung tâm "Bản thân".
 export function CuaVao() {
   const hoSo = useHoSo();
   const router = useRouter();
+  useEffect(() => { ghi("landing_viewed"); }, []);
   if (hoSo === undefined) return <div className="h-[22rem] animate-pulse rounded-2xl bg-surface/50" />;
   if (hoSo) {
     return (

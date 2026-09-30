@@ -39,6 +39,12 @@ test("link mời: A tạo → B mở, nhập ngày sinh → thấy kết quả; 
   await b.getByRole("button", { name: "Xem hai người" }).click();
   await expect(b.getByTestId("ket-qua-hop-doi").getByTestId("cap-duong_doi")).toContainText("Điểm hoà.");
   await expect(b.getByRole("button", { name: "Tạo link mời của tôi" })).toBeVisible();
+  // Gán nguồn giới thiệu (UI-6): share_clicked → referral_signup → compatibility_created cùng ma_moi.
+  const sk = await b.evaluate(() => (window as unknown as { __hbt_su_kien: { su_kien: string; ma_moi?: string }[] }).__hbt_su_kien);
+  const maMoi = link.split(".").pop()?.slice(0, 10);
+  for (const k of ["share_clicked", "referral_signup", "compatibility_created"]) {
+    expect(sk.find((e) => e.su_kien === k)?.ma_moi).toBe(maMoi);
+  }
 
   // Mã bị sửa → không hợp lệ.
   await b.goto(link.replace(/.$/, (c) => (c === "A" ? "B" : "A")));

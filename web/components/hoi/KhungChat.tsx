@@ -5,6 +5,7 @@ import { Info, Send, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { ghi } from "@/lib/do-luong";
 
 export interface KetQuaHoi {
   van?: string;
@@ -30,12 +31,14 @@ interface Props {
   goiYO?: string;
   /** Câu hỏi đẩy từ ngoài vào (vd bấm một cung trên lá số); đổi `lan` để hỏi lại. */
   cauNgoai?: { cau: string; lan: number } | null;
+  /** Tên mảng cho đo lường (không gửi nội dung câu hỏi). */
+  moDun: string;
   className?: string;
 }
 
 // Mỗi mảng một khung chat (chủ dự án chốt): lịch sử trong phiên, gợi ý câu hỏi, không lưu phía server
 // ngoài nhật ký ẩn danh đã lọc (0004/0005).
-export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi của bạn", goiYO = "Gõ điều bạn đang băn khoăn…", cauNgoai, className }: Props) {
+export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi của bạn", goiYO = "Gõ điều bạn đang băn khoăn…", cauNgoai, moDun, className }: Props) {
   const [tin, setTin] = useState<Tin[]>([]);
   const [cau, setCau] = useState("");
   const [dang, setDang] = useState(false);
@@ -57,9 +60,11 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
     setCau("");
     setTin((t) => [...t, { id: ++soId.current, ai: "ban", van: c }]);
     setDang(true);
+    ghi("advisor_question_started", { mo_dun: moDun });
     try {
       const kq = await gui(c);
       setTin((t) => [...t, { id: ++soId.current, ai: "he", ...kq }]);
+      ghi("advisor_question_completed", { mo_dun: moDun, ket_qua: kq.loi ? "loi" : "ok" });
     } catch {
       setTin((t) => [...t, { id: ++soId.current, ai: "he", loi: "Không kết nối được. Thử lại sau." }]);
     } finally {

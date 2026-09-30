@@ -11,6 +11,7 @@ import { NutChiaSe } from "@/components/chia-se/NutChiaSe";
 import { useBaiDoc } from "@/lib/bai-doc";
 import { postJson } from "@/lib/goi-api";
 import { tenGoi, useHoSo } from "@/lib/hoso";
+import { ghi, maMoiTuToken, nhoMaMoi } from "@/lib/do-luong";
 
 interface Props { ma: string; tenMoi: string; soMoi: number; tuKhoa: string | null }
 
@@ -21,10 +22,16 @@ export function NhanLoiMoi({ ma, tenMoi, soMoi, tuKhoa }: Props) {
   const [loi, setLoi] = useState<string | null>(null);
 
   useEffect(() => {
+    const m = maMoiTuToken(ma);
+    nhoMaMoi(m);
+    ghi("share_clicked", { kind: "invite", ma_moi: m });
+  }, [ma]);
+
+  useEffect(() => {
     if (!baiDoc) return;
     const so = Object.fromEntries(baiDoc.cac_vi_tri.map((v) => [v.vi_tri, v.gia_tri]));
     postJson<KetQuaHopDoiT>("/api/hop-doi/moi", { ma, b: so })
-      .then(setKq)
+      .then((d) => { setKq(d); ghi("compatibility_created", { kind: "loi_moi", ma_moi: maMoiTuToken(ma) }); })
       .catch((e: unknown) => setLoi(e instanceof Error ? e.message : "Chưa tính được lúc này."));
   }, [baiDoc, ma]);
 
@@ -66,7 +73,7 @@ export function NhanLoiMoi({ ma, tenMoi, soMoi, tuKhoa }: Props) {
             <Card>
               <p className="font-serif text-lg">Mời thêm một người</p>
               <p className="mb-4 mt-1 text-sm text-fg-muted">Bạn thân, người yêu, đồng nghiệp — họ tự nhập ngày sinh của họ.</p>
-              <NutChiaSe hoSo={hoSo} duongDan={(m) => `/hop-doi/${m}`} nutTao="Tạo link mời của tôi"
+              <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(m) => `/hop-doi/${m}`} nutTao="Tạo link mời của tôi"
                 loiNhan={`${tenGoi(hoSo)} mời bạn xem hai người hợp nhau thế nào qua con số.`} />
             </Card>
           </div>

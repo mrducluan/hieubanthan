@@ -42,6 +42,7 @@ export function TuVi() {
         </section>
         <section aria-label="Hỏi Tử vi" className="min-w-0 lg:sticky lg:top-24">
           <KhungChat
+            moDun="tuvi"
             loiChao={laSo ? "Hỏi về một cung, một sao, hoặc hạn hiện tại của bạn." : "Hỏi kiến thức chung về cung, sao, tứ hoá — hoặc bổ sung giờ sinh để hỏi về lá số của bạn."}
             goiY={GOI_Y}
             cauNgoai={cauNgoai}

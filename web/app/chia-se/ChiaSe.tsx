@@ -34,7 +34,7 @@ export function ChiaSe() {
       <div className="grid items-start gap-6 md:grid-cols-2">
         <TheDanhTinh kq={kq} tenHienThi={hoSo.ho_ten} />
         <Card>
-          <NutChiaSe hoSo={hoSo} duongDan={(m) => `/the/${m}`} nutTao="Tạo link thẻ" onDaTao={setMa}
+          <NutChiaSe loai="card" hoSo={hoSo} duongDan={(m) => `/the/${m}`} nutTao="Tạo link thẻ" onDaTao={setMa}
             loiNhan={`Con số đường đời của ${tenGoi(hoSo)} là ${kq.cac_vi_tri[0]?.gia_tri}. Còn bạn?`} />
           {ma && (
             <Button asChild variant="outline" className="mt-3 w-full">

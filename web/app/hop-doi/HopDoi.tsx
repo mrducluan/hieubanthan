@@ -13,6 +13,7 @@ import { NutChiaSe } from "@/components/chia-se/NutChiaSe";
 import { postJson } from "@/lib/goi-api";
 import { hoTenList, ngayHopLe, tenGoi, useHoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
+import { ghi } from "@/lib/do-luong";
 
 const QUAN_HE = ["Người yêu", "Bạn bè", "Đồng nghiệp", "Gia đình"] as const;
 
@@ -53,6 +54,7 @@ export function HopDoi() {
         a: { ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam },
         b: { ...(ten.trim() ? { ho_ten: [ten.trim()] } : {}), ngay: d, thang: m, nam: y },
       }));
+      ghi("compatibility_created", { kind: "truc_tiep" });
     } catch (e2) {
       setLoi(e2 instanceof Error ? e2.message : "Chưa tính được lúc này.");
     } finally {
@@ -114,7 +116,7 @@ export function HopDoi() {
             <p className="mb-4 mt-2 text-sm text-fg-muted">
               Gửi lời mời — người ấy tự nhập ngày sinh của họ, và cả hai cùng thấy kết quả. Tôn trọng dữ liệu của người khác.
             </p>
-            <NutChiaSe hoSo={hoSo} duongDan={(ma) => `/hop-doi/${ma}`} nutTao="Tạo link mời"
+            <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(ma) => `/hop-doi/${ma}`} nutTao="Tạo link mời"
               loiNhan={`${tenGoi(hoSo)} mời bạn xem hai người hợp nhau thế nào qua con số.`} />
           </Card>
         </div>
@@ -127,7 +129,7 @@ export function HopDoi() {
             <Card>
               <p className="font-serif text-lg">Mời người ấy xem cùng</p>
               <p className="mb-4 mt-1 text-sm text-fg-muted">Người ấy sẽ tự nhập ngày sinh của họ để mở kết quả đầy đủ.</p>
-              <NutChiaSe hoSo={hoSo} duongDan={(ma) => `/hop-doi/${ma}`} nutTao="Tạo link mời"
+              <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(ma) => `/hop-doi/${ma}`} nutTao="Tạo link mời"
                 loiNhan={`${tenGoi(hoSo)} mời bạn xem hai người hợp nhau thế nào qua con số.`} />
             </Card>
             <Card className="flex flex-col justify-between">

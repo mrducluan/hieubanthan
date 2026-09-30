@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { docMa } from "@/lib/ma-moi";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/khung/Logo";
+import { GhiMoThe } from "@/components/khung/GhiMoThe";
 
 interface Props { params: { ma: string } }
 const TEN = ["Đường đời", "Sứ mệnh", "Linh hồn", "Nhân cách"];
@@ -33,6 +34,7 @@ export default function Page({ params }: Props) {
   }
   return (
     <div className="mx-auto max-w-md py-6 text-center">
+      <GhiMoThe ma={params.ma} />
       <div className="rounded-2xl p-[1px]" style={{ background: "linear-gradient(140deg, rgb(var(--gold) / 0.7), rgb(var(--moon) / 0.35) 45%, rgb(var(--jade) / 0.5))" }}>
         <div className="rounded-2xl bg-surface px-6 py-8">
           <Logo className="mx-auto size-8" />

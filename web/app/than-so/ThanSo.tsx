@@ -137,6 +137,7 @@ export function ThanSo() {
         <TieuDeMuc id="muc-hoi" nho="Hỏi sâu hơn" lon={`${tenGoi(hoSo)}, bạn đang băn khoăn điều gì?`}
           mo_ta="Câu trả lời soi câu hỏi của bạn qua chính những con số ở trên — góc nhìn tham khảo để tự ngẫm, không phải lời tiên đoán." />
         <KhungChat
+            moDun="thanso"
           loiChao="Chọn một câu gợi ý bên dưới, hoặc tự đặt câu hỏi về bản thân, nghề nghiệp, tình cảm."
           goiY={GOI_Y}
           gui={(c) => hoiThanSo(hoSo, c)}

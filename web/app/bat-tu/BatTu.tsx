@@ -37,6 +37,7 @@ export function BatTu() {
         </section>
         <section aria-label="Hỏi Bát tự" className="min-w-0 lg:sticky lg:top-24">
           <KhungChat
+            moDun="battu"
             loiChao={laSo ? "Hỏi về dụng thần, ngũ hành, đại vận hay một năm cụ thể." : "Hỏi kiến thức chung về nhật chủ, thập thần — hoặc bổ sung giờ sinh để hỏi về tứ trụ của bạn."}
             goiY={GOI_Y}
             nhanO="Câu hỏi Bát tự"

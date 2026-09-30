@@ -6,18 +6,21 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { hoTenList, tenGoi, type HoSo } from "@/lib/hoso";
 import { postJson } from "@/lib/goi-api";
+import { ghi, maMoiTuToken } from "@/lib/do-luong";
 
 interface Props {
   hoSo: HoSo;
   /** Đường dẫn từ mã: vd (ma) => `/hop-doi/${ma}`. */
   duongDan: (ma: string) => string;
   nutTao: string;
+  /** Loại chia sẻ cho đo lường. */
+  loai: "invite" | "card";
   loiNhan: string;
   onDaTao?: (ma: string) => void;
 }
 
 // Tạo link có ký (chỉ tên hiển thị + con số), rồi chia sẻ bằng Web Share API hoặc sao chép.
-export function NutChiaSe({ hoSo, duongDan, nutTao, loiNhan, onDaTao }: Props) {
+export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Props) {
   const [ten, setTen] = useState(tenGoi(hoSo));
   const [link, setLink] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
@@ -32,6 +35,7 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loiNhan, onDaTao }: Props) {
       });
       const url = new URL(duongDan(ma), window.location.origin).toString();
       setLink(url);
+      ghi("share_created", { kind: loai, ma_moi: maMoiTuToken(ma) });
       onDaTao?.(ma);
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Chưa tạo được link.");
