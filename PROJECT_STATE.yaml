@@ -7,7 +7,7 @@ current_hypothesis: >-
   (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
 current_build: "UI-0…UI-6 — làm lại UI (docs/THIET-KE-UI.md)"
 current_gate: "Gate 0 (kỹ thuật đạt; chưa có 20–50 người thử) → Gate 1"
-current_metrics: []   # có sau UI-6 (PostHog)
+current_metrics: []   # có khi bật NEXT_PUBLIC_POSTHOG_KEY
 current_risks:
   - "Chưa có bằng chứng người dùng thật (Gate 0 phần định tính chưa làm)"
   - "Phase 2 làm trước Gate 1 — phải tách funnel theo feature_version"
@@ -18,15 +18,16 @@ completed_work:
   - "Huyền học HH-1…HH-5: Kinh Dịch, Tử vi, Bát tự, Phong thuỷ (PR #8, #9)"
   - "UI-0: nghiên cứu UX + thiết kế"
   - "UI-1…UI-3: design system Đêm sao, hồ sơ trên máy, Thần số 3 lớp + Metaphysics ID, 4 mảng Huyền học có hình trực quan + khung chat"
+  - "UI-4 tài khoản (email/Google/SMS, bảng ho_so 0006 RLS), UI-5 hợp đôi + link mời có ký + thẻ OG, UI-6 đo funnel PostHog + góp ý"
 active_work:
-  - "UI-4 tài khoản, UI-5 hợp đôi + chia sẻ, UI-6 đo lường"
+  - "Chờ chủ dự án: review PR UI, cấu hình env (LOI_MOI_SECRET, PostHog, Supabase Auth), duyệt + chạy 0006"
 blocked_work:
-  - "UI-4 cần chủ dự án bật Supabase Auth (email, Google, SMS) + env"
-  - "UI-6 cần NEXT_PUBLIC_POSTHOG_KEY"
+  - "Tài khoản chạy thật cần: bật Supabase Auth (Email, Google OAuth, Phone/SMS provider) + env + chạy 0006"
+  - "Đo lường chạy thật cần NEXT_PUBLIC_POSTHOG_KEY"
+  - "Link chia sẻ trên production cần LOI_MOI_SECRET"
 next_candidate_tasks:
-  - "UI-1 Nền tảng: Tailwind + shadcn/Radix + motion, app shell, hồ sơ trên máy, landing"
-  - "UI-2 Thần số: nghi thức hé lộ 3 lớp + Metaphysics ID"
-  - "Tuyển 20–50 người thử (Gate 0 định tính)"
+  - "Tuyển 20–50 người thử (Gate 0 định tính) trên bản UI mới — đo funnel Phase 1 bằng PostHog"
+  - "Đọc số Gate 1 (landing→start→complete→profile, góp ý) trước khi mở rộng tính năng"
 prohibited_until_gate:
   - "Credits / Payment"
   - "Life Advisor (Ask My Life liên mảng)"

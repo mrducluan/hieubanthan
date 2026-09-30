@@ -14,6 +14,11 @@ const KHOA_TAT = {
   SUPABASE_ANON_KEY: "",
   STAGING_USER: "",
   STAGING_PASS: "",
+  NEXT_PUBLIC_SUPABASE_URL: "",
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: "",
+  SUPABASE_SERVICE_ROLE_KEY: "",
+  NEXT_PUBLIC_POSTHOG_KEY: "",
+  LOI_MOI_SECRET: "",
 };
 
 // Cloud container có sẵn Chromium ở /opt/pw-browsers (PLAYWRIGHT_BROWSERS_PATH).
