@@ -53,11 +53,13 @@ def get_new_moon_day(k: int, time_zone: float) -> int:
     mpr = 306.0253 + 385.81691806 * k + 0.0107306 * T2 + 0.00001236 * T3
     f = 21.2964 + 390.67050646 * k - 0.0016528 * T2 - 0.00000239 * T3
     c1 = (0.1734 - 0.000393 * T) * math.sin(m * dr) + 0.0021 * math.sin(2 * dr * m)
-    c1 -= 0.4068 * math.sin(mpr * dr) + 0.0161 * math.sin(dr * 2 * mpr)
+    # Giữ đúng dấu bản gốc: C1 = C1 - 0.4068*sin(..) + 0.0161*sin(..). Viết `c1 -= a + b`
+    # là đảo dấu b (lỗi đã gặp, xem tests/test_lunar_hoi_quy.py).
+    c1 += -0.4068 * math.sin(mpr * dr) + 0.0161 * math.sin(dr * 2 * mpr)
     c1 -= 0.0004 * math.sin(dr * 3 * mpr)
     c1 += 0.0104 * math.sin(dr * 2 * f) - 0.0051 * math.sin(dr * (m + mpr))
-    c1 -= 0.0074 * math.sin(dr * (m - mpr)) + 0.0004 * math.sin(dr * (2 * f + m))
-    c1 -= 0.0004 * math.sin(dr * (2 * f - m)) - 0.0006 * math.sin(dr * (2 * f + mpr))
+    c1 += -0.0074 * math.sin(dr * (m - mpr)) + 0.0004 * math.sin(dr * (2 * f + m))
+    c1 += -0.0004 * math.sin(dr * (2 * f - m)) - 0.0006 * math.sin(dr * (2 * f + mpr))
     c1 += 0.0010 * math.sin(dr * (2 * f - mpr)) + 0.0005 * math.sin(dr * (2 * mpr + m))
     if T < -11:
         deltat = (0.001 + 0.000839 * T + 0.0002261 * T2
@@ -65,7 +67,7 @@ def get_new_moon_day(k: int, time_zone: float) -> int:
     else:
         deltat = -0.000278 + 0.000265 * T + 0.000262 * T2
     jd_new = jd1 + c1 - deltat
-    return int(jd_new + 0.5 + time_zone / 24)
+    return math.floor(jd_new + 0.5 + time_zone / 24)
 
 
 def get_sun_longitude(jdn: int, time_zone: float) -> int:
@@ -79,14 +81,15 @@ def get_sun_longitude(jdn: int, time_zone: float) -> int:
     dl += ((0.019993 - 0.000101 * T) * math.sin(dr * 2 * m)
            + 0.000290 * math.sin(dr * 3 * m))
     lon = (l0 + dl) * dr
-    lon -= math.pi * 2 * int(lon / (math.pi * 2))
-    return int(lon / math.pi * 6)
+    # INT() của HND là Math.floor. int() cắt về 0 → cung âm khi T < 0 (trước 2000).
+    lon -= math.pi * 2 * math.floor(lon / (math.pi * 2))
+    return math.floor(lon / math.pi * 6)
 
 
 def get_lunar_month_11(yy: int, time_zone: float) -> int:
     """Ngày sóc bắt đầu tháng 11 âm của năm yy — tháng chứa Đông chí."""
     off = jd_from_date(31, 12, yy) - 2415021
-    k = int(off / _SYNODIC)
+    k = math.floor(off / _SYNODIC)
     nm = get_new_moon_day(k, time_zone)
     if get_sun_longitude(nm, time_zone) >= 9:
         nm = get_new_moon_day(k - 1, time_zone)
@@ -95,7 +98,7 @@ def get_lunar_month_11(yy: int, time_zone: float) -> int:
 
 def get_leap_month_offset(a11: int, time_zone: float) -> int:
     """Vị trí tháng nhuận sau tháng 11 âm (chỉ gọi khi năm âm có 13 tháng)."""
-    k = int((a11 - _JD_EPOCH_NM) / _SYNODIC + 0.5)
+    k = math.floor((a11 - _JD_EPOCH_NM) / _SYNODIC + 0.5)
     last = 0
     i = 1
     arc = get_sun_longitude(get_new_moon_day(k + i, time_zone), time_zone)
@@ -112,7 +115,7 @@ def solar_to_lunar(dd: int, mm: int, yy: int,
                    time_zone: float) -> tuple[int, int, int, int]:
     """Dương → âm. Trả về (ngày, tháng, năm_âm, nhuận 0/1)."""
     day_number = jd_from_date(dd, mm, yy)
-    k = int((day_number - _JD_EPOCH_NM) / _SYNODIC)
+    k = math.floor((day_number - _JD_EPOCH_NM) / _SYNODIC)
     month_start = get_new_moon_day(k + 1, time_zone)
     if month_start > day_number:
         month_start = get_new_moon_day(k, time_zone)
@@ -125,7 +128,7 @@ def solar_to_lunar(dd: int, mm: int, yy: int,
         lunar_year = yy + 1
         b11 = get_lunar_month_11(yy + 1, time_zone)
     lunar_day = day_number - month_start + 1
-    diff = int((month_start - a11) / 29)
+    diff = math.floor((month_start - a11) / 29)
     lunar_leap = 0
     lunar_month = diff + 11
     if b11 - a11 > 365:
@@ -150,7 +153,7 @@ def lunar_to_solar(lunar_day: int, lunar_month: int, lunar_year: int,
     else:
         a11 = get_lunar_month_11(lunar_year, time_zone)
         b11 = get_lunar_month_11(lunar_year + 1, time_zone)
-    k = int(0.5 + (a11 - _JD_EPOCH_NM) / _SYNODIC)
+    k = math.floor(0.5 + (a11 - _JD_EPOCH_NM) / _SYNODIC)
     off = lunar_month - 11
     if off < 0:
         off += 12

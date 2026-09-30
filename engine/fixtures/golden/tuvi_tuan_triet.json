@@ -292,7 +292,7 @@
       "expect": {
         "am_lich": {
           "ngay": 23,
-          "thang": 4,
+          "thang": 5,
           "nam": 1990,
           "nhuan": 0
         },
@@ -534,5 +534,6 @@
         }
       }
     }
-  }
+  },
+  "_sua_2026_09_30": "bien_gio_ty: am_lich 23/4 -> 23/5/1990. Golden cu sinh bang app/calc/lunar.py co loi (INT/floor + dau NewMoon, xem tests/test_lunar_hoi_quy.py). Doi chieu lunar-lite: 15/6/1990 = 23/5 Canh Ngo. Can chi nam va Tuan/Triet khong doi."
 }
