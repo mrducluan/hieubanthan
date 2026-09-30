@@ -19,6 +19,7 @@ from pydantic import BaseModel, Field, field_validator
 from app import config
 from app.calc import thanso, timebase
 from app.kb import store as kb_store
+from app.kb import trang as kb_trang
 from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import thanso as luangiai_thanso
 from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
@@ -74,6 +75,20 @@ def health() -> dict:
         "engine_version": ENGINE_VERSION,
         "ty_boundary_set": config.TY_BOUNDARY_POLICY is not None,
     }
+
+
+@app.get("/v1/kb/trang")
+def api_kb_trang() -> dict:
+    """Mục lục trang kiến thức công khai (SEO-B) — chỉ trang `index=True` được đưa vào sitemap."""
+    return {"engine_version": ENGINE_VERSION, "trang": kb_trang.danh_sach()}
+
+
+@app.get("/v1/kb/trang/{loai}/{slug}")
+def api_kb_trang_mot(loai: str, slug: str) -> dict:
+    t = kb_trang.lay(loai, slug) if loai in kb_trang.LOAI else None
+    if t is None:
+        raise HTTPException(status_code=404, detail="Không có trang này")
+    return t
 
 
 @app.get("/v1/kb/status")

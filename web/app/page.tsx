@@ -1,8 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Compass, Hexagon, Layers, Orbit, Sparkles, Sun } from "lucide-react";
 import { CuaVao } from "@/components/hoso/CuaVao";
 import { ChuThichLop } from "@/components/than-so/LopNoiDung";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const MANG = [
   { href: "/tu-vi", ten: "Tử vi", mo: "Lá số 12 cung, đại hạn, lưu niên", Icon: Orbit },
