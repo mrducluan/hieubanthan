@@ -48,19 +48,46 @@ def cham(r: dict, kn: dict) -> tuple[str, str]:
     return "day_du", ""
 
 
+# y_dinh (nhãn) → loại câu hỏi mà module Kinh Dịch phải nhận ra
+KD_LOAI = {"quyet_dinh": "quyet_dinh", "loi_khuyen": "quyet_dinh", "du_doan": "du_doan",
+           "thoi_diem": "du_doan", "giai_thich": "ky_thuat", "mo_ta": "doc_nhanh"}
+
+
+def cham_v2(r: dict) -> tuple[str, str] | None:
+    """Chạy thật module đã có hỏi đáp. None = module chưa có (rơi về chấm khai báo)."""
+    if r["mo_dun"] != "kinhdich":
+        return None
+    import datetime as dt  # noqa: PLC0415
+    sys.path.insert(0, str(GOC))
+    from app.hoidap import kinhdich as kd  # noqa: PLC0415
+    kq = kd.tra_loi(r["cau_hoi"], "tu_dong", gia_tri_hao=[7, 7, 8, 7, 7, 9],
+                    thoi_diem=dt.datetime(2026, 9, 30, 10, 15))
+    pl = kq["phan_loai"]
+    if r["xu_ly"] in ("an_toan", "tu_choi_nhe"):
+        return ("day_du", "") if pl["xu_ly"] == r["xu_ly"] else ("khong", f"sai đường {r['xu_ly']}")
+    if kq["do_phu"] != "day_du" or kq["loi_kiem_tra"]:
+        return "khong", "không có căn cứ KB"
+    muon = KD_LOAI.get(r["y_dinh"])
+    if muon and pl["loai"] not in (muon, "doc_que_da_co") and not (muon == "doc_nhanh" and r["can"] != ["kd_mai_hoa", "kd_the_dung"]):
+        return "mot_phan", f"lệch loại {muon}→{pl['loai']}"
+    return "day_du", ""
+
+
 def main() -> None:
+    v2 = "--v2" in sys.argv
     rows = [json.loads(l) for l in KHO.open(encoding="utf-8")]
     muc = collections.Counter()
     theo = collections.defaultdict(collections.Counter)
     ly_do = collections.Counter()
     for r in rows:
-        m, why = cham(r, HIEN_TAI)
+        kq2 = cham_v2(r) if v2 else None
+        m, why = kq2 if kq2 else cham(r, HIEN_TAI)
         muc[m] += 1
         theo[r["mo_dun"]][m] += 1
         if why:
             ly_do[why] += 1
     n = len(rows)
-    print(f"== Mốc Huyền học: {n} câu")
+    print(f"== {'v2 (chạy thật)' if v2 else 'Mốc'} Huyền học: {n} câu")
     for k in ("day_du", "mot_phan", "khong"):
         print(f"  {k:9s} {muc[k]:5d}  {100 * muc[k] / n:5.1f}%")
     for md, c in sorted(theo.items()):

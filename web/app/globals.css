@@ -303,3 +303,16 @@ a { color: var(--jade); text-decoration-thickness: 1px; text-underline-offset: 2
 .qa-kia .field-row { margin-top: 10px; }
 .qa-answer p + p { margin-top: 10px; }
 .qa-mode { margin-top: 8px; font-size: .72rem; color: var(--ink-faint); }
+
+/* ---------- Kinh Dịch ---------- */
+.reading-form select { padding: 10px 12px; font: inherit; color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line); border-radius: var(--radius); }
+.kd-hai-que { display: flex; gap: 28px; flex-wrap: wrap; margin: 18px 0 8px; }
+.kd-que { display: grid; gap: 7px; min-width: 200px; }
+.kd-hao { display: flex; align-items: center; gap: 10px; }
+.kd-vach { display: inline-block; height: 10px; background: var(--jade-deep); border-radius: 2px; }
+.kd-hao.duong .kd-vach { width: 96px; }
+.kd-hao.am .kd-vach { width: 43px; }
+.kd-hao.am .kd-vach + .kd-vach { margin-left: -1px; }
+.kd-nhan { font-size: .74rem; color: var(--ink-faint); }
+.kd-ten { font-family: var(--font-serif); font-size: 1.15rem; margin-top: 4px; }
