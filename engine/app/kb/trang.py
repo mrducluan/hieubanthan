@@ -107,7 +107,17 @@ def _ds_que() -> list[tuple[str, str]]:
 def _trang_que(k: str, slug: str) -> dict:
     kb = _doc("kinhdich_kb.json")
     q = kb["que"][k]
-    muc = [
+    kv = _doc("kinhdich_hao.json")["que"].get(k)
+    muc = []
+    if kv:
+        muc.append({"tieu_de": "Quái từ và Đại tượng",
+                    "danh_sach": [f"Quái từ 「{kv['que_tu']['han']}」 — {kv['que_tu']['dich']}",
+                                  f"Đại tượng 「{kv['dai_tuong']['han']}」 — {kv['dai_tuong']['dich']}"]})
+        muc.append({"tieu_de": "Sáu hào (hào từ)",
+                    "danh_sach": [f"{h['ten']} 「{h['han']}」 — {h['dich']} Ý: {h['y']}" for h in kv["hao"]]
+                    + ([f"{'Dụng Cửu' if k == '1' else 'Dụng Lục'} 「{kv['dung']['han']}」 — {kv['dung']['dich']}"]
+                       if kv.get("dung") else [])})
+    muc += [
         {"tieu_de": "Lời khuyên", "doan": q["loi_khuyen"]},
         {"tieu_de": "Mặt tối", "doan": q["mat_toi"]},
         {"tieu_de": "Theo từng lĩnh vực", "danh_sach": [f"{_LINH_VUC_QUE.get(lv, lv)}: {v}" for lv, v in q["linh_vuc"].items()]},
@@ -117,7 +127,7 @@ def _trang_que(k: str, slug: str) -> dict:
     hoi_dap = [
         {"hoi": f"Quẻ {q['ten']} trong Kinh Dịch nghĩa là gì?", "dap": q["y_chinh"]},
         {"hoi": f"Gieo được quẻ {q['ten']} nên làm gì?", "dap": q["loi_khuyen"]},
-    ] + [{"hoi": f"Quẻ {q['ten']} nói gì về {ten.lower()}?", "dap": q["linh_vuc"][lv]}
+    ] + ([{"hoi": f"Quái từ quẻ {q['ten']} nói gì?", "dap": f"「{kv['que_tu']['han']}」 — {kv['que_tu']['dich']}"}] if kv else []) + [{"hoi": f"Quẻ {q['ten']} nói gì về {ten.lower()}?", "dap": q["linh_vuc"][lv]}
          for lv, ten in _LINH_VUC_QUE.items() if lv in q["linh_vuc"]][:2]
     ds = _ds_que()
     i = [s for _, s in ds].index(slug)

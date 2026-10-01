@@ -183,6 +183,10 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | 
         muc.append(m)
     muc.append({"loai": "quy_tac_doc", "noi_dung": que["quy_tac_doc"], "hao_dong": que["hao_dong"],
                 "source_id": "dich_hoc_khai_mong", "school_id": "chu_hy"})
+    for x in chon_loi_doc(ban["so_king_wen"], bien["so_king_wen"] if bien else None, que["hao_dong"]):
+        lk = _muc_loi_kinh(x)
+        if lk:
+            muc.append(lk)
     if bien:
         m = _muc_que(bien["so_king_wen"], "bien", pl["linh_vuc"])
         if m:
@@ -202,6 +206,50 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | 
 
 
 # --------------------------------------------------------------------------- #
+def chon_loi_doc(ban: int, bien: int | None, dong: list[int]) -> list[dict]:
+    """Lời kinh cần đọc theo số hào động (Chu Hy, Dịch Học Khải Mông). `chu` = lời làm chủ.
+
+    0 → quái từ quẻ bản · 1 → hào động · 2 → hai hào động, hào trên làm chủ · 3 → quái từ bản (chủ)
+    và biến · 4 → hai hào tĩnh của quẻ biến, hào dưới làm chủ · 5 → hào tĩnh của quẻ biến ·
+    6 → Càn dùng Dụng Cửu, Khôn dùng Dụng Lục, quẻ khác đọc quái từ quẻ biến.
+    """
+    n = len(dong)
+    m = lambda loai, que, vt=None, chu=False: {"loai": loai, "que": que, "vi_tri": vt, "chu": chu}  # noqa: E731
+    tinh = [i for i in range(1, 7) if i not in dong]
+    if n == 0 or bien is None:
+        return [m("que_tu", ban, chu=True)]
+    if n == 1:
+        return [m("hao", ban, dong[0], True)]
+    if n == 2:
+        return [m("hao", ban, dong[0]), m("hao", ban, dong[1], True)]
+    if n == 3:
+        return [m("que_tu", ban, chu=True), m("que_tu", bien)]
+    if n == 4:
+        return [m("hao", bien, tinh[0], True), m("hao", bien, tinh[1])]
+    if n == 5:
+        return [m("hao", bien, tinh[0], True)]
+    if ban in (1, 2):
+        return [m("dung", ban, chu=True)]
+    return [m("que_tu", bien, chu=True)]
+
+
+def _muc_loi_kinh(x: dict) -> dict | None:
+    q = kb.que_van(x["que"])
+    if not q:
+        return None
+    ten = kb.que(x["que"])["ten"] if kb.que(x["que"]) else str(x["que"])
+    if x["loai"] == "hao":
+        h = q["hao"][x["vi_tri"] - 1]
+        noi = {"tieu_de": f"Hào {h['ten']} ({h['ten_han']}) quẻ {ten}", "han": h["han"], "dich": h["dich"], "y": h["y"]}
+    elif x["loai"] == "dung":
+        noi = {"tieu_de": f"{'Dụng Cửu' if x['que'] == 1 else 'Dụng Lục'} quẻ {ten}", **q["dung"]}
+    else:
+        noi = {"tieu_de": f"Quái từ quẻ {ten}", "han": q["que_tu"]["han"], "dich": q["que_tu"]["dich"],
+               "y": f"Đại tượng: {q['dai_tuong']['dich']}"}
+    return {"loai": "loi_kinh", "chu": x["chu"], **noi, "source_id": q["source_id"],
+            "school_id": q["school_id"], "trang_thai": q["trang_thai"]}
+
+
 VAI = {"ban": "Quẻ bản", "bien": "Quẻ biến (xu hướng chuyển tới)", "nhac": "Quẻ"}
 
 
@@ -215,6 +263,9 @@ def _doan(m: dict) -> tuple[str, str | None]:
         return s, m["cau_tu_soi"]
     if l == "quy_tac_doc":
         return f"Cách đọc (quy tắc Chu Hy): {m['noi_dung']}", None
+    if l == "loi_kinh":
+        return (f"{'【Lời chủ】 ' if m['chu'] else ''}{m['tieu_de']}: 「{m['han']}」 — {m['dich']} "
+                f"Ý: {m['y']}"), None
     if l == "the_dung":
         return (f"Mai Hoa — Thể là {m['the']} ({m['the_ngu_hanh']}), Dụng là {m['dung']} "
                 f"({m['dung_ngu_hanh']}): {m['ten']}. {m['y_nghia']} {m['luu_y']}", None)
