@@ -36,3 +36,10 @@ test("đổi năm xem → lưu niên đổi theo, giao diện giấy cổ", asyn
   const nam = await page.getByRole("group", { name: "Năm xem" }).locator("b").innerText();
   await expect(page.getByTestId("luu-nien-bat-tu")).toContainText(`Lưu niên ${nam}`);
 });
+
+test("luận giải toàn bộ Bát tự", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/bat-tu");
+  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toContainText("Nhật chủ và tính cách");
+});

@@ -71,3 +71,18 @@ def api_hoi(inp: HoiBTInput, background: BackgroundTasks) -> dict:
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
     background.add_task(nhat_ky.ghi_huyenhoc, "battu", inp.cau_hoi, kq, inp.la_so is not None)
     return {"engine_version": ENGINE_VERSION, **kq}
+
+
+class LuanGiaiBTInput(BaseModel):
+    """LG — luận giải toàn bộ Bát tự theo chương (không lưu)."""
+    model_config = ConfigDict(extra="forbid")
+
+    la_so: TuanTrietInput
+    ngay_xem: _dt.date | None = None
+
+
+@router.post("/luan-giai")
+def api_luan_giai(inp: LuanGiaiBTInput) -> dict:
+    from app.luangiai import toan_bo
+    sinh, flags = _sinh(inp.la_so)
+    return {"engine_version": ENGINE_VERSION, **toan_bo.battu(sinh, ngay_xem=inp.ngay_xem), "co_canh_bao": flags}
