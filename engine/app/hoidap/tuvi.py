@@ -14,7 +14,7 @@ from __future__ import annotations
 import datetime as dt
 import re
 
-from app.calc import tuvi_an_sao as az
+from app.calc import tuvi_an_sao as az, tuvi_cach_cuc
 from app.hoidap import chung
 from app.kb import tuvi_kb as kb
 from app.luangiai import hoi as _h
@@ -168,7 +168,8 @@ def tom_tat(la: dict) -> dict:
                      "can": p["heavenlyStem"], "la_than": p["isBodyPalace"], "chinh_tinh": chinh,
                      "phu_tinh": phu, "dai_han": p["decadal"]["range"]})
     return {"cuc": la["fiveElementsClass"], "menh_chu": la["soul"], "than_chu": la["body"],
-            "cung": cung, "tu_hoa": sorted(tu_hoa, key=lambda x: THU_TU_HOA.index(x["hoa"]))}
+            "cung": cung, "tu_hoa": sorted(tu_hoa, key=lambda x: THU_TU_HOA.index(x["hoa"])),
+            "cach_cuc": tuvi_cach_cuc.nhan_dien(la)}
 
 
 def _cung_ten(ls: dict, ten: str) -> dict:
@@ -250,6 +251,11 @@ def _doc_menh(ls: dict, muc: list) -> None:
         nc = kb.nhom_cach(ct["nhom"])
         if nc:
             muc.append({"loai": "nhom_cach", "nhom": ct["nhom"], "noi_dung": nc, **kb.meta()})
+    # Cách cục quanh Mệnh (KB-2): tối đa 3 cách đầu theo thứ tự ưu tiên, kèm lục sát hội về.
+    for c in [c for c in ls.get("cach_cuc", []) if c["ma"] != "than_menh_dong_cung"][:3]:
+        k = kb.cach_cuc(c["ma"])
+        if k:
+            muc.append({"loai": "cach_cuc", **k, "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"]})
     than = next(c for c in ls["cung"] if c["la_than"])
     muc.append({"loai": "than_cu", "cung": than["ten"], "menh_chu": ls["menh_chu"],
                 "than_chu": ls["than_chu"], "cuc": ls["cuc"], **kb.meta()})
@@ -401,6 +407,12 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
                 m["cau_tu_soi"])
     if l == "nhom_cach":
         return m["noi_dung"], None
+    if l == "cach_cuc":
+        s = (f"Cách cục {m['ten']} ({m['ten_han']}) — {m['dieu_kien']} {m['y']} "
+             f"Mặt tối: {m['mat_toi']} Gợi ý: {m['loi_khuyen']}")
+        if m["sat_hoi"]:
+            s += f" Lưu ý: tam phương có {', '.join(m['sat_hoi'])} hội về — {kb.luu_y_pha_cach()}"
+        return s, None
     if l == "than_cu":
         return (f"Thân cư cung {m['cung']} — trọng tâm đời sống về sau nghiêng về lĩnh vực này. "
                 f"Mệnh chủ {m['menh_chu']}, Thân chủ {m['than_chu']}, {m['cuc']}.", None)
