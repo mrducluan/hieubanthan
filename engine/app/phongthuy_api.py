@@ -63,3 +63,50 @@ def api_hoi(inp: HoiPTInput, background: BackgroundTasks) -> dict:
         raise HTTPException(422, detail=str(e))
     background.add_task(nhat_ky.ghi_huyenhoc, "phongthuy", inp.cau_hoi, kq, inp.sinh is not None)
     return {"engine_version": ENGINE_VERSION, **kq}
+
+
+class HuyenKhongInput(BaseModel):
+    """PT-HK — hạ quái bàn Huyền Không: năm xây/nhập trạch + toạ sơn (tên 24 sơn hoặc độ la bàn)."""
+    model_config = ConfigDict(extra="forbid")
+
+    nam_xay: int = Field(ge=1864, le=2150)
+    toa: str | None = Field(default=None, max_length=10, description="Toạ sơn, vd 'Tý', 'Nhâm'")
+    do: float | None = Field(default=None, ge=0, lt=360, description="Độ la bàn của TOẠ (lưng nhà), 0 = chính Bắc")
+    nam_xem: int | None = Field(default=None, ge=1900, le=2150)
+
+    @model_validator(mode="after")
+    def _can_toa(self) -> "HuyenKhongInput":
+        if (self.toa is None) == (self.do is None):
+            raise ValueError("cần đúng một trong hai: toa hoặc do")
+        return self
+
+
+@router.post("/huyen-khong")
+def api_huyen_khong(inp: HuyenKhongInput) -> dict:
+    from app.calc import huyen_khong as hk
+    from app.kb import phongthuy_kb
+
+    canh_bao = []
+    toa = inp.toa
+    if inp.do is not None:
+        s = hk.son_tu_do(inp.do)
+        toa = s["son"]
+        if s["canh_bao"] == "khong_vong":
+            canh_bao.append({"loai": "khong_vong", "chi_tiet": f"Toạ {s['do']}° nằm đúng ranh giới hai sơn (không vong) — nên đo lại; bàn có thể sai hoàn toàn."})
+        elif s["canh_bao"] == "kiem_huong":
+            canh_bao.append({"loai": "kiem_huong", "chi_tiet": f"Toạ lệch {abs(s['lech'])}° so với chính {toa} — gần ranh giới (kiêm hướng); trường phái dùng thế quái sẽ lập bàn khác, hệ thống chưa tính thế quái."})
+    try:
+        b = hk.trach_ban(inp.nam_xay, toa)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e))
+    kb = phongthuy_kb.huyen_khong()
+    nam_xem = inp.nam_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).year
+    return {
+        "engine_version": ENGINE_VERSION, **b,
+        "cuc_y": kb["cuc"][b["cuc"]],
+        "to_hop": [{**t, **kb["to_hop"][t["ma"]]} for t in b["to_hop"]],
+        "sao_y": kb["sao"],
+        "luu_nien": hk.luu_nien(nam_xem),
+        "luu_y": kb["luu_y"], "nguon": kb["_nguon"], "trang_thai": kb["trang_thai"],
+        "canh_bao": canh_bao,
+    }

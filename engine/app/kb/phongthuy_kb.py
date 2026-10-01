@@ -72,3 +72,12 @@ def mau(ma: str) -> str | None:
 
 def luu_y(ma: str) -> str | None:
     return _d()["luu_y"].get(ma)
+
+
+# --------------------------------------------------------------------------- PT-HK: Huyền Không
+_F_HK = Path(__file__).parent / "data" / "phongthuy_huyen_khong.json"
+
+
+@lru_cache(maxsize=1)
+def huyen_khong() -> dict:
+    return json.loads(_F_HK.read_text(encoding="utf-8"))

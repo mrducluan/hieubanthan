@@ -1,6 +1,7 @@
 "use client";
 import { Compass } from "lucide-react";
 import { KhungChat } from "@/components/hoi/KhungChat";
+import { HuyenKhong } from "@/components/huyen-hoc/HuyenKhong";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -38,6 +39,8 @@ export function PhongThuy() {
             </div>
           )}
       </section>
+      <div className="mx-auto mt-8 max-w-3xl"><HuyenKhong /></div>
+
       <section aria-label="Hỏi Phong thuỷ" className="mt-10">
         <h2 className="mb-4 text-2xl sm:text-3xl">Hỏi đáp cùng AI</h2>
           <KhungChat
