@@ -14,6 +14,7 @@ test("tứ trụ từ hồ sơ + dụng thần hai cách", async ({ page }) => {
   await expect(bang).toContainText("Lộ Bàng Thổ");           // nạp âm Canh Ngọ
   await expect(bang).toContainText("Thiên Ất Quý Nhân");
   await expect(tt).toContainText("Tự hình");                 // Ngọ–Ngọ
+  await expect(page.getByTestId("dieu-hau-ctbg")).toContainText("Tỷ Kiên");   // KB-3: Nhâm sinh tháng Tỵ → Nhâm đứng đầu
   await expect(page.getByTestId("luu-nien-bat-tu")).toContainText("12 lưu nguyệt");
   const ans = await hoi(page, "Dụng thần của tôi là gì?");
   await expect(ans).toContainText("Canh Ngọ · Tân Tỵ · Nhâm Ngọ · Bính Ngọ");
@@ -35,4 +36,11 @@ test("đổi năm xem → lưu niên đổi theo, giao diện giấy cổ", asyn
   await page.getByRole("group", { name: "Năm xem" }).getByRole("button", { name: "Năm sau" }).click();
   const nam = await page.getByRole("group", { name: "Năm xem" }).locator("b").innerText();
   await expect(page.getByTestId("luu-nien-bat-tu")).toContainText(`Lưu niên ${nam}`);
+});
+
+test("luận giải toàn bộ Bát tự", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/bat-tu");
+  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toContainText("Nhật chủ và tính cách");
 });

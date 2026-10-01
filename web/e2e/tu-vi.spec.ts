@@ -56,3 +56,23 @@ test("đổi giao diện giấy cổ, đổi năm xem → lớp lưu niên theo 
   await page.reload();
   await expect(page.locator("svg.la-so-giay")).toBeVisible();   // nhớ giao diện trên máy
 });
+
+test("độ sáng sao: mặc định Nam phái, chuyển được sang phái Trung", async ({ page }) => {
+  await napHoSo(page, { ...HO_SO_MAU, ngay: 19, thang: 3, nam: 1997, gio: "00:30" });
+  await page.goto("/tu-vi");
+  const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
+  const menh = laSo.getByRole("button", { name: /^Cung Mệnh/ });
+  await expect(menh).toHaveAccessibleName(/Tử Vi Bình/);              // lối Việt: Tử Vi tại Mão bình hoà
+  await page.getByRole("tab", { name: "Phái Trung" }).click();
+  await expect(menh).toHaveAccessibleName(/Tử Vi Vượng/);             // bảng iztro
+});
+
+test("luận giải toàn bộ theo chương (miễn phí thử nghiệm)", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  const bc = page.getByTestId("luan-giai-toan-bo");
+  await expect(bc).toContainText("Tổng quan bản mệnh");
+  await expect(bc).toContainText("Vận hạn hiện tại");
+  await expect(bc.getByRole("navigation", { name: "Mục lục" })).toBeVisible();
+});

@@ -8,7 +8,8 @@ import { KhungChat } from "@/components/hoi/KhungChat";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
-import { LaSoTuVi } from "@/components/huyen-hoc/LaSoTuVi";
+import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
+import { LaSoTuVi, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { Button } from "@/components/ui/button";
@@ -43,6 +44,7 @@ export function TuVi() {
   const { data: vh } = usePost<VanHanOutputT>("/api/tuvi/van-han", laSo ? { la_so: laSo, nam_xem: namXem } : null);
   const [lop, setLop] = useState({ dai_han: false, luu_nien: true });
   const [giaoDien, doiGiaoDien] = useGiaoDien("tuvi");
+  const [phaiDoSang, setPhaiDoSang] = useState<PhaiDoSang>("nam");
   const [chon, setChon] = useState<string | null>(null);
   const [cheDo, setCheDo] = useState<"tham_khao" | "chi_tiet">("tham_khao");
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
@@ -90,6 +92,12 @@ export function TuVi() {
                   {k === "dai_han" ? "Lớp đại hạn" : "Lớp lưu niên"}
                 </button>
               ))}
+              <Tabs value={phaiDoSang} onValueChange={(v) => setPhaiDoSang(v as PhaiDoSang)}>
+                <TabsList aria-label="Bảng độ sáng sao">
+                  <TabsTrigger value="nam" title="Bảng miếu/vượng/đắc/hãm theo sách Tử vi Việt">Độ sáng Nam phái</TabsTrigger>
+                  <TabsTrigger value="trung" title="Bảng của thư viện an sao (phái Trung Hoa)">Phái Trung</TabsTrigger>
+                </TabsList>
+              </Tabs>
               <Button variant="ghost" size="sm" className="ml-auto" disabled={dangTai} onClick={async () => {
                 if (!svgRef.current) return;
                 setDangTai(true);
@@ -102,7 +110,7 @@ export function TuVi() {
             <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0" data-testid="la-so-tu-vi">
               <div className="min-w-[760px] overflow-hidden rounded-[1.25rem] shadow-card">
                 <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={hoSo?.ho_ten} gioSinh={hoSo?.gio}
-                  chon={chiChon} onChon={(c) => { setChon(c); ghi("chart_interacted", { mo_dun: "tuvi", kind: "chon_cung" }); }} />
+                  chon={chiChon} phaiDoSang={phaiDoSang} onChon={(c) => { setChon(c); ghi("chart_interacted", { mo_dun: "tuvi", kind: "chon_cung" }); }} />
               </div>
             </div>
             <p className="flex items-center gap-1.5 text-xs text-fg-faint sm:hidden"><List className="size-3.5" aria-hidden />Vuốt ngang để xem trọn lá số · chạm một cung để xem chi tiết bên dưới.</p>
@@ -116,6 +124,12 @@ export function TuVi() {
           </>
         )}
       </section>
+
+      {laSo && ls && (
+        <section aria-label="Luận giải toàn bộ" className="mt-10">
+          <LuanGiaiToanBo duongDan="/api/tuvi/luan-giai" laSo={laSo} ten="lá số Tử vi" />
+        </section>
+      )}
 
       <section ref={chatRef} aria-label="Hỏi Tử vi" className="mt-10 scroll-mt-24">
         <h2 className="mb-4 text-2xl sm:text-3xl">Hỏi đáp cùng AI</h2>
@@ -155,7 +169,7 @@ function ChuGiai() {
           <span className="text-fg">Màu sao theo ngũ hành:</span>
           {hanh.map(([t, m]) => <span key={t} className="inline-flex items-center gap-1.5"><span className={cn("size-2.5 rounded-full", m)} />{t}</span>)}
         </p>
-        <p><span className="text-fg">Độ sáng:</span> (M) miếu · (V) vượng · (Đ) đắc · (L) lợi · (B) bình/bất · (H) hãm.</p>
+        <p><span className="text-fg">Độ sáng:</span> (M) miếu · (V) vượng · (Đ) đắc · (L) lợi · (B) bình/bất · (H) hãm. Mặc định theo bảng Nam phái (sách Tử vi Việt) cho 14 chính tinh; chuyển "Phái Trung" để xem bảng Trung Hoa (có cả phụ tinh).</p>
         <p><span className="text-fg">Hai cột phụ tinh:</span> trái là cát tinh và Hoá Lộc/Quyền/Khoa; phải là sát tinh, Hoá Kỵ và sao khác.</p>
         <p><span className="text-fg">Tam phương tứ chính:</span> cung đang chọn nối tam giác với hai cung tam hợp; đường đứt là cung xung chiếu.</p>
         <p><span className="text-fg">Đáy cung:</span> vòng Trường sinh; khi bật lớp vận hạn, ĐH./L. là tên cung đại hạn/lưu niên, chữ nghiêng tím là sao lưu.</p>

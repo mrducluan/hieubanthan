@@ -17,7 +17,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
-from app.calc import can_chi, dia_ly, lunar, tuvi_cach_cuc, timebase, tuan_triet_vendor, tuvi_an_sao
+from app.calc import can_chi, dia_ly, lunar, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao
 from app.hoidap import tuvi as hoidap_tv
 from app import nhat_ky
 from app.kb import tuvi_kb
@@ -285,7 +285,8 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             # isOriginalPalace của iztro là Lai nhân cung (來因宮), KHÔNG phải cung Mệnh.
             "la_menh": p["name"] == "Mệnh", "la_than": p["isBodyPalace"],
             "la_lai_nhan": p["isOriginalPalace"],
-            "chinh_tinh": [_sao(x) for x in p["majorStars"]],
+            "chinh_tinh": [{**_sao(x), "do_sang_nam_phai": tuvi_do_sang_vn.do_sang(x["name"], p["earthlyBranch"])}
+                           for x in p["majorStars"]],
             "phu_tinh": [_phu(x) for x in p["minorStars"]],
             "tap_dieu": [x["name"] for x in p["adjectiveStars"]],
             "truong_sinh": p["changsheng12"], "bac_si": p["boshi12"],
@@ -363,3 +364,24 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
     background.add_task(nhat_ky.ghi_huyenhoc, "tuvi", inp.cau_hoi, kq, inp.la_so is not None)
     return {"engine_version": ENGINE_VERSION, **kq}
+
+
+class LuanGiaiInput(BaseModel):
+    """LG — luận giải toàn bộ theo chương (không lưu)."""
+    model_config = ConfigDict(extra="forbid")
+
+    la_so: TuanTrietInput
+    ngay_xem: _dt.date | None = None
+
+
+@router.post("/luan-giai")
+def api_luan_giai(inp: LuanGiaiInput) -> dict:
+    from app.luangiai import toan_bo
+    dv = _DauVao(inp.la_so)
+    cal = dv.tb.calendar_dt
+    sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender}
+    try:
+        bc = toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem)
+    except tuvi_an_sao.AnSaoLoi as e:
+        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+    return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": list(dv.flags)}
