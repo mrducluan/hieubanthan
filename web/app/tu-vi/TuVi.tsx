@@ -8,6 +8,7 @@ import { KhungChat } from "@/components/hoi/KhungChat";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
+import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { LaSoTuVi } from "@/components/huyen-hoc/LaSoTuVi";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -116,6 +117,12 @@ export function TuVi() {
           </>
         )}
       </section>
+
+      {laSo && ls && (
+        <section aria-label="Luận giải toàn bộ" className="mt-10">
+          <LuanGiaiToanBo duongDan="/api/tuvi/luan-giai" laSo={laSo} ten="lá số Tử vi" />
+        </section>
+      )}
 
       <section ref={chatRef} aria-label="Hỏi Tử vi" className="mt-10 scroll-mt-24">
         <h2 className="mb-4 text-2xl sm:text-3xl">Hỏi đáp cùng AI</h2>

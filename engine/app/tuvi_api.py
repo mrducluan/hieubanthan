@@ -363,3 +363,24 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
     background.add_task(nhat_ky.ghi_huyenhoc, "tuvi", inp.cau_hoi, kq, inp.la_so is not None)
     return {"engine_version": ENGINE_VERSION, **kq}
+
+
+class LuanGiaiInput(BaseModel):
+    """LG — luận giải toàn bộ theo chương (không lưu)."""
+    model_config = ConfigDict(extra="forbid")
+
+    la_so: TuanTrietInput
+    ngay_xem: _dt.date | None = None
+
+
+@router.post("/luan-giai")
+def api_luan_giai(inp: LuanGiaiInput) -> dict:
+    from app.luangiai import toan_bo
+    dv = _DauVao(inp.la_so)
+    cal = dv.tb.calendar_dt
+    sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender}
+    try:
+        bc = toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem)
+    except tuvi_an_sao.AnSaoLoi as e:
+        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+    return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": list(dv.flags)}

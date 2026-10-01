@@ -56,3 +56,13 @@ test("đổi giao diện giấy cổ, đổi năm xem → lớp lưu niên theo 
   await page.reload();
   await expect(page.locator("svg.la-so-giay")).toBeVisible();   // nhớ giao diện trên máy
 });
+
+test("luận giải toàn bộ theo chương (miễn phí thử nghiệm)", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  const bc = page.getByTestId("luan-giai-toan-bo");
+  await expect(bc).toContainText("Tổng quan bản mệnh");
+  await expect(bc).toContainText("Vận hạn hiện tại");
+  await expect(bc.getByRole("navigation", { name: "Mục lục" })).toBeVisible();
+});
