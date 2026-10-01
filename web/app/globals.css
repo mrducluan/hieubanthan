@@ -70,6 +70,28 @@
   .prose-vn p + p { margin-top: 0.75rem; }
 }
 
+/* Lá số (VZ-2): hai giao diện. "dem" theo tông web; "giay" = giấy cổ sáng như lá số in.
+   Ngũ hành: Kim xám bạc · Mộc lục · Thủy lam · Hỏa son · Thổ vàng đất. */
+.la-so-dem {
+  --ls-nen: rgb(14 14 32); --ls-o: rgb(20 20 46); --ls-o-sang: rgb(30 28 62); --ls-giua: rgb(17 17 40);
+  --ls-menh-nen: rgb(48 40 34); --ls-vien: rgb(52 52 92); --ls-chu: rgb(236 235 247); --ls-mo: rgb(150 148 186);
+  --ls-kim: rgb(214 211 230); --ls-moc: rgb(111 211 160); --ls-thuy: rgb(126 172 255); --ls-hoa: rgb(242 128 104);
+  --ls-tho: rgb(233 196 106); --ls-cat: rgb(233 196 106); --ls-sat: rgb(242 128 104); --ls-dao: rgb(244 154 193);
+  --ls-ky: rgb(206 204 228); --ls-luu: rgb(185 167 255); --ls-nhan: rgb(233 196 106); --ls-nhan-mo: rgb(233 196 106 / 0.45);
+  --ls-nhan-nen: rgb(233 196 106 / 0.05); --ls-hoa-van: rgb(185 167 255 / 0.22); --ls-han: rgb(233 196 106 / 0.22);
+  --ls-tt-nen: rgb(236 235 247); --ls-tt-chu: rgb(14 14 32);
+}
+.la-so-giay {
+  --ls-nen: rgb(239 228 204); --ls-o: rgb(250 244 230); --ls-o-sang: rgb(255 249 233); --ls-giua: rgb(248 240 222);
+  --ls-menh-nen: rgb(253 236 200); --ls-vien: rgb(196 174 132); --ls-chu: rgb(43 33 24); --ls-mo: rgb(122 104 82);
+  --ls-kim: rgb(92 92 102); --ls-moc: rgb(28 120 60); --ls-thuy: rgb(29 78 137); --ls-hoa: rgb(190 52 38);
+  --ls-tho: rgb(170 112 20); --ls-cat: rgb(166 98 18); --ls-sat: rgb(176 36 30); --ls-dao: rgb(190 24 93);
+  --ls-ky: rgb(30 24 20); --ls-luu: rgb(98 72 178); --ls-nhan: rgb(160 44 28); --ls-nhan-mo: rgb(160 44 28 / 0.45);
+  --ls-nhan-nen: rgb(160 44 28 / 0.04); --ls-hoa-van: rgb(160 120 60 / 0.25); --ls-han: rgb(120 80 40 / 0.35);
+  --ls-tt-nen: rgb(30 24 20); --ls-tt-chu: rgb(250 244 230);
+}
+.la-so g[role="button"]:focus-visible > rect:first-child { stroke: var(--ls-nhan); stroke-width: 3; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

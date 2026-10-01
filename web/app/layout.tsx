@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Newsreader, Be_Vietnam_Pro } from "next/font/google";
+import { Newsreader, Be_Vietnam_Pro, Noto_Serif_TC } from "next/font/google";
 import Link from "next/link";
 import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -22,6 +22,9 @@ const body = Be_Vietnam_Pro({
   variable: "--font-body",
   display: "swap",
 });
+
+// Chữ Hán trang trí trên lá số (紫微斗數, 八字…) — chỉ tải khi trang có dùng, không preload.
+const han = Noto_Serif_TC({ weight: ["600"], subsets: ["latin"], variable: "--font-han", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
@@ -46,7 +49,7 @@ export const viewport: Viewport = { themeColor: "#0a0a17", width: "device-width"
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="vi" className={`${display.variable} ${body.variable}`}>
+    <html lang="vi" className={`${display.variable} ${body.variable} ${han.variable}`}>
       <body>
         <JsonLd data={goiLd(ldToChuc(), ldWebsite(), ldUngDung())} />
         <div className="star-field" aria-hidden />

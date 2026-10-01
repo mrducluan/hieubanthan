@@ -1,0 +1,305 @@
+{
+ "_oracle": "lunar-typescript 1.8.6",
+ "nap_am": [
+  {
+   "chi_so": 0,
+   "can_chi": "甲子",
+   "nap_am": "海中金"
+  },
+  {
+   "chi_so": 1,
+   "can_chi": "乙丑",
+   "nap_am": "海中金"
+  },
+  {
+   "chi_so": 2,
+   "can_chi": "丙寅",
+   "nap_am": "炉中火"
+  },
+  {
+   "chi_so": 3,
+   "can_chi": "丁卯",
+   "nap_am": "炉中火"
+  },
+  {
+   "chi_so": 4,
+   "can_chi": "戊辰",
+   "nap_am": "大林木"
+  },
+  {
+   "chi_so": 5,
+   "can_chi": "己巳",
+   "nap_am": "大林木"
+  },
+  {
+   "chi_so": 6,
+   "can_chi": "庚午",
+   "nap_am": "路旁土"
+  },
+  {
+   "chi_so": 7,
+   "can_chi": "辛未",
+   "nap_am": "路旁土"
+  },
+  {
+   "chi_so": 8,
+   "can_chi": "壬申",
+   "nap_am": "剑锋金"
+  },
+  {
+   "chi_so": 9,
+   "can_chi": "癸酉",
+   "nap_am": "剑锋金"
+  },
+  {
+   "chi_so": 10,
+   "can_chi": "甲戌",
+   "nap_am": "山头火"
+  },
+  {
+   "chi_so": 11,
+   "can_chi": "乙亥",
+   "nap_am": "山头火"
+  },
+  {
+   "chi_so": 12,
+   "can_chi": "丙子",
+   "nap_am": "涧下水"
+  },
+  {
+   "chi_so": 13,
+   "can_chi": "丁丑",
+   "nap_am": "涧下水"
+  },
+  {
+   "chi_so": 14,
+   "can_chi": "戊寅",
+   "nap_am": "城头土"
+  },
+  {
+   "chi_so": 15,
+   "can_chi": "己卯",
+   "nap_am": "城头土"
+  },
+  {
+   "chi_so": 16,
+   "can_chi": "庚辰",
+   "nap_am": "白蜡金"
+  },
+  {
+   "chi_so": 17,
+   "can_chi": "辛巳",
+   "nap_am": "白蜡金"
+  },
+  {
+   "chi_so": 18,
+   "can_chi": "壬午",
+   "nap_am": "杨柳木"
+  },
+  {
+   "chi_so": 19,
+   "can_chi": "癸未",
+   "nap_am": "杨柳木"
+  },
+  {
+   "chi_so": 20,
+   "can_chi": "甲申",
+   "nap_am": "泉中水"
+  },
+  {
+   "chi_so": 21,
+   "can_chi": "乙酉",
+   "nap_am": "泉中水"
+  },
+  {
+   "chi_so": 22,
+   "can_chi": "丙戌",
+   "nap_am": "屋上土"
+  },
+  {
+   "chi_so": 23,
+   "can_chi": "丁亥",
+   "nap_am": "屋上土"
+  },
+  {
+   "chi_so": 24,
+   "can_chi": "戊子",
+   "nap_am": "霹雳火"
+  },
+  {
+   "chi_so": 25,
+   "can_chi": "己丑",
+   "nap_am": "霹雳火"
+  },
+  {
+   "chi_so": 26,
+   "can_chi": "庚寅",
+   "nap_am": "松柏木"
+  },
+  {
+   "chi_so": 27,
+   "can_chi": "辛卯",
+   "nap_am": "松柏木"
+  },
+  {
+   "chi_so": 28,
+   "can_chi": "壬辰",
+   "nap_am": "长流水"
+  },
+  {
+   "chi_so": 29,
+   "can_chi": "癸巳",
+   "nap_am": "长流水"
+  },
+  {
+   "chi_so": 30,
+   "can_chi": "甲午",
+   "nap_am": "沙中金"
+  },
+  {
+   "chi_so": 31,
+   "can_chi": "乙未",
+   "nap_am": "沙中金"
+  },
+  {
+   "chi_so": 32,
+   "can_chi": "丙申",
+   "nap_am": "山下火"
+  },
+  {
+   "chi_so": 33,
+   "can_chi": "丁酉",
+   "nap_am": "山下火"
+  },
+  {
+   "chi_so": 34,
+   "can_chi": "戊戌",
+   "nap_am": "平地木"
+  },
+  {
+   "chi_so": 35,
+   "can_chi": "己亥",
+   "nap_am": "平地木"
+  },
+  {
+   "chi_so": 36,
+   "can_chi": "庚子",
+   "nap_am": "壁上土"
+  },
+  {
+   "chi_so": 37,
+   "can_chi": "辛丑",
+   "nap_am": "壁上土"
+  },
+  {
+   "chi_so": 38,
+   "can_chi": "壬寅",
+   "nap_am": "金箔金"
+  },
+  {
+   "chi_so": 39,
+   "can_chi": "癸卯",
+   "nap_am": "金箔金"
+  },
+  {
+   "chi_so": 40,
+   "can_chi": "甲辰",
+   "nap_am": "覆灯火"
+  },
+  {
+   "chi_so": 41,
+   "can_chi": "乙巳",
+   "nap_am": "覆灯火"
+  },
+  {
+   "chi_so": 42,
+   "can_chi": "丙午",
+   "nap_am": "天河水"
+  },
+  {
+   "chi_so": 43,
+   "can_chi": "丁未",
+   "nap_am": "天河水"
+  },
+  {
+   "chi_so": 44,
+   "can_chi": "戊申",
+   "nap_am": "大驿土"
+  },
+  {
+   "chi_so": 45,
+   "can_chi": "己酉",
+   "nap_am": "大驿土"
+  },
+  {
+   "chi_so": 46,
+   "can_chi": "庚戌",
+   "nap_am": "钗钏金"
+  },
+  {
+   "chi_so": 47,
+   "can_chi": "辛亥",
+   "nap_am": "钗钏金"
+  },
+  {
+   "chi_so": 48,
+   "can_chi": "壬子",
+   "nap_am": "桑柘木"
+  },
+  {
+   "chi_so": 49,
+   "can_chi": "癸丑",
+   "nap_am": "桑柘木"
+  },
+  {
+   "chi_so": 50,
+   "can_chi": "甲寅",
+   "nap_am": "大溪水"
+  },
+  {
+   "chi_so": 51,
+   "can_chi": "乙卯",
+   "nap_am": "大溪水"
+  },
+  {
+   "chi_so": 52,
+   "can_chi": "丙辰",
+   "nap_am": "沙中土"
+  },
+  {
+   "chi_so": 53,
+   "can_chi": "丁巳",
+   "nap_am": "沙中土"
+  },
+  {
+   "chi_so": 54,
+   "can_chi": "戊午",
+   "nap_am": "天上火"
+  },
+  {
+   "chi_so": 55,
+   "can_chi": "己未",
+   "nap_am": "天上火"
+  },
+  {
+   "chi_so": 56,
+   "can_chi": "庚申",
+   "nap_am": "石榴木"
+  },
+  {
+   "chi_so": 57,
+   "can_chi": "辛酉",
+   "nap_am": "石榴木"
+  },
+  {
+   "chi_so": 58,
+   "can_chi": "壬戌",
+   "nap_am": "大海水"
+  },
+  {
+   "chi_so": 59,
+   "can_chi": "癸亥",
+   "nap_am": "大海水"
+  }
+ ]
+}

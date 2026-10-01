@@ -70,14 +70,17 @@ const Sao = z.object({
   tu_hoa: z.string().nullable(),
 });
 
+const PhuTinh = Sao.extend({ loai: z.string().optional() });
+
 const Cung = z.object({
   ten: z.string(),
   can: z.string(),
   chi: z.string(),
   la_menh: z.boolean(),
   la_than: z.boolean(),
+  la_lai_nhan: z.boolean().optional(),
   chinh_tinh: z.array(Sao),
-  phu_tinh: z.array(Sao),
+  phu_tinh: z.array(PhuTinh),
   tap_dieu: z.array(z.string()),
   truong_sinh: z.string(),
   bac_si: z.string(),
@@ -107,7 +110,38 @@ export const LaSoOutput = z.object({
   than_chu: z.string(),
   chi_cung_menh: z.string(),
   chi_cung_than: z.string(),
+  // VZ-1 (engine ≥ bản này): phần giữa lá số + Tuần/Triệt lối Việt. Optional để web chịu được engine cũ.
+  menh_nap_am: z.object({ ten: z.string(), hanh: z.string(), han: z.string() }).optional(),
+  am_duong: z.object({ nam_sinh: z.string(), nhan: z.string(), ly: z.enum(["thuận", "nghịch"]) }).optional(),
+  menh_cuc: z.string().optional(),
+  tuan_triet: z.object({ tuan: z.array(z.string()), triet: z.array(z.string()) }).optional(),
   cung: z.array(Cung).length(12),
   co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })),
 });
 export type LaSoOutputT = z.infer<typeof LaSoOutput>;
+
+// VZ-1 — lớp vận hạn phủ lên lá số (/v1/tuvi/van-han). chi_so = vị trí trong mảng `cung` (0 = Dần).
+export const VanHanInput = z.object({
+  la_so: ChartInput,
+  nam_xem: z.number().int().min(1900).max(2100).optional(),
+});
+const LopHan = z.object({
+  chi_so: z.number().int().min(0).max(11),
+  can: z.string(),
+  chi: z.string(),
+  tu_hoa: z.array(z.string()),
+  ten_cung: z.array(z.string()),
+  sao: z.array(z.array(z.string())),
+  cung_goc: z.string(),
+});
+export const VanHanOutput = z.object({
+  engine_version: z.string(),
+  ngay_xem: z.string(),
+  nam_xem: z.number(),
+  can_chi_nam_xem: z.string(),
+  tuoi_mu: z.number(),
+  dai_han: LopHan.extend({ tu_tuoi: z.number(), den_tuoi: z.number() }),
+  tieu_han: z.object({ chi_so: z.number(), can: z.string(), chi: z.string(), cung_goc: z.string() }),
+  luu_nien: LopHan,
+});
+export type VanHanOutputT = z.infer<typeof VanHanOutput>;
