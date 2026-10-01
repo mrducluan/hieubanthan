@@ -9,6 +9,12 @@ test("tứ trụ từ hồ sơ + dụng thần hai cách", async ({ page }) => {
   await expect(tt).toContainText("Nhâm");
   await expect(tt).toContainText("Dụng thần · Phù ức");
   await expect(tt).toContainText("Dụng thần · Điều hậu");
+  // VZ-3: bảng tứ trụ đầy đủ + vòng địa chi + lưu niên
+  const bang = page.getByRole("table", { name: "Bảng tứ trụ" });
+  await expect(bang).toContainText("Lộ Bàng Thổ");           // nạp âm Canh Ngọ
+  await expect(bang).toContainText("Thiên Ất Quý Nhân");
+  await expect(tt).toContainText("Tự hình");                 // Ngọ–Ngọ
+  await expect(page.getByTestId("luu-nien-bat-tu")).toContainText("12 lưu nguyệt");
   const ans = await hoi(page, "Dụng thần của tôi là gì?");
   await expect(ans).toContainText("Canh Ngọ · Tân Tỵ · Nhâm Ngọ · Bính Ngọ");
   await expect(ans).toContainText("không tự chọn");
@@ -18,4 +24,15 @@ test("câu hỏi chung về nhật chủ không cần hồ sơ", async ({ page }
   await page.goto("/bat-tu");
   const ans = await hoi(page, "Nhật chủ Giáp là người thế nào?");
   await expect(ans).toContainText("cây đại thụ");
+});
+
+test("đổi năm xem → lưu niên đổi theo, giao diện giấy cổ", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/bat-tu");
+  await expect(page.getByTestId("luu-nien-bat-tu")).toBeVisible();
+  await page.getByRole("tab", { name: "Giấy cổ" }).click();
+  await expect(page.locator(".la-so-giay")).toBeVisible();
+  await page.getByRole("group", { name: "Năm xem" }).getByRole("button", { name: "Năm sau" }).click();
+  const nam = await page.getByRole("group", { name: "Năm xem" }).locator("b").innerText();
+  await expect(page.getByTestId("luu-nien-bat-tu")).toContainText(`Lưu niên ${nam}`);
 });

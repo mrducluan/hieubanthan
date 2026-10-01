@@ -26,8 +26,7 @@ export function PhongThuy() {
   return (
     <div>
       <DauMang Icon={Compass} ten="Phong thuỷ" mo_ta="Bát trạch: mệnh quái theo năm sinh (mốc Lập xuân) và giới tính, tám hướng du niên, cửa – chủ – bếp, sao năm. Mục nào là quan niệm dân gian đều ghi rõ; không giới thiệu vật phẩm “hoá giải”." />
-      <div className="grid items-start gap-6 lg:grid-cols-[1fr_1fr]">
-        <section aria-label="Mệnh quái" className="min-w-0 space-y-3">
+      <section aria-label="Mệnh quái" className="mx-auto max-w-3xl space-y-3">
           {!sinh && <XinThemDuLieu hoSo={hoSo} can="gioi_tinh" nut="Thêm giới tính" ly_do="Mệnh quái tính theo năm sinh và giới tính. Câu hỏi bố trí chung thì không cần." />}
           {sinh && !mq && !loi && <KhungTai dong={2} />}
           {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
@@ -38,8 +37,9 @@ export function PhongThuy() {
               {mq.co_canh_bao.map((c) => <p key={c.loai} className="mt-3 text-xs text-moon">{c.chi_tiet}</p>)}
             </div>
           )}
-        </section>
-        <section aria-label="Hỏi Phong thuỷ" className="min-w-0 lg:sticky lg:top-24">
+      </section>
+      <section aria-label="Hỏi Phong thuỷ" className="mt-10">
+        <h2 className="mb-4 text-2xl sm:text-3xl">Hỏi đáp cùng AI</h2>
           <KhungChat
             moDun="phongthuy"
             loiChao="Hỏi về hướng nhà, bếp, bàn làm việc, năm làm nhà — hoặc một tình huống bố trí cụ thể."
@@ -47,8 +47,7 @@ export function PhongThuy() {
             nhanO="Câu hỏi Phong thuỷ"
             gui={(cau) => hoiMang("/api/phongthuy/hoi", { cau_hoi: cau, ...(sinh ? { sinh } : {}) })}
           />
-        </section>
-      </div>
+      </section>
     </div>
   );
 }

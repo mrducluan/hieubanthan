@@ -8,9 +8,9 @@ import type { LaSoOutputT, VanHanOutputT } from "@/app/api/tuvi/schema";
 import {
   AN_TAP_DIEU, DO_SANG_TAT, HANH_SAO, NEO, VI_TRI, nhomSao, tachTuTru, tamPhuong, type NhomSao,
 } from "@/lib/tuvi-hien-thi";
+import type { GiaoDien } from "@/lib/giao-dien-la-so";
 
 type CungT = LaSoOutputT["cung"][number];
-export type GiaoDien = "dem" | "giay";
 
 const W = 250;          // bề rộng một ô (đơn vị viewBox)
 const H = 275;          // chiều cao một ô
