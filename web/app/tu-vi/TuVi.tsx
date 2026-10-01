@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Download, List, Moon, Orbit, ScrollText } from "lucide-react";
 import type { LaSoOutputT, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
+import { CachCuc } from "@/components/huyen-hoc/CachCuc";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { LaSoTuVi } from "@/components/huyen-hoc/LaSoTuVi";
@@ -107,6 +108,7 @@ export function TuVi() {
             <p className="flex items-center gap-1.5 text-xs text-fg-faint sm:hidden"><List className="size-3.5" aria-hidden />Vuốt ngang để xem trọn lá số · chạm một cung để xem chi tiết bên dưới.</p>
 
             <ChuGiai />
+            {ls.cach_cuc && <CachCuc ds={ls.cach_cuc} luuY={ls.cach_cuc_luu_y} onHoi={hoi} />}
             <ChiTietCung ls={ls} chi={chiChon} vanHan={lop.dai_han || lop.luu_nien ? vh : null} onHoi={hoi} />
             {ls.co_canh_bao.length > 0 && (
               <p className="text-xs text-fg-faint">{ls.co_canh_bao.map((c) => LOI_NHAN_CO[c.loai] ?? c.chi_tiet).join(" ")}</p>

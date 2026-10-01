@@ -93,3 +93,25 @@ def mau(ma: str) -> str | None:
 
 def luu_y(ma: str) -> str | None:
     return _d()["luu_y"].get(ma)
+
+
+# --------------------------------------------------------------------------- KB-2: cách cục
+_F_CC = Path(__file__).parent / "data" / "tuvi_cach_cuc.json"
+
+
+@lru_cache(maxsize=1)
+def _cc() -> dict:
+    return json.loads(_F_CC.read_text(encoding="utf-8"))
+
+
+def cach_cuc(ma: str) -> dict | None:
+    d = _cc()
+    m = d["cach"].get(ma)
+    if m is None:
+        return None
+    return {"ma": ma, **m, "trang_thai": d["trang_thai"], "can_doi_chieu": d["can_doi_chieu"],
+            "source_id": d["source_id"], "school_id": d["school_id"]}
+
+
+def luu_y_pha_cach() -> str:
+    return _cc()["luu_y_pha_cach"]
