@@ -68,6 +68,8 @@ const Sao = z.object({
   ten: z.string(),
   do_sang: z.string().nullable(),
   tu_hoa: z.string().nullable(),
+  /** TV-NP: độ sáng lối Việt (chỉ chính tinh); `do_sang` là bảng phái Trung của iztro. */
+  do_sang_nam_phai: z.string().nullable().optional(),
 });
 
 const PhuTinh = Sao.extend({ loai: z.string().optional() });

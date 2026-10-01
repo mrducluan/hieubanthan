@@ -29,20 +29,29 @@ const SINH_XAU = new Set(["Suy", "Bệnh", "Tử", "Mộ", "Tuyệt"]);
 
 interface DongSao { ten: string; mau: string; dam?: boolean; nghieng?: boolean }
 
-function dongSaoCot(c: CungT): { trai: DongSao[]; phai: DongSao[] } {
+export type PhaiDoSang = "nam" | "trung";
+type SaoT = CungT["chinh_tinh"][number];
+/** Độ sáng hiển thị: Nam phái dùng bảng lối Việt (chỉ có cho chính tinh); phái Trung dùng iztro. */
+export function doSang(s: SaoT, phai: PhaiDoSang, laChinh: boolean): string | null {
+  if (phai === "nam") return laChinh ? s.do_sang_nam_phai ?? s.do_sang : null;
+  return s.do_sang;
+}
+
+function dongSaoCot(c: CungT, phai: PhaiDoSang): { trai: DongSao[]; phai: DongSao[] } {
   const trai: DongSao[] = [];
-  const phai: DongSao[] = [];
+  const phaiCot: DongSao[] = [];
   // Tứ hoá sinh niên (của chính tinh lẫn phụ tinh) đứng đầu cột: Lộc/Quyền/Khoa trái, Kỵ phải.
   for (const s of [...c.chinh_tinh, ...c.phu_tinh]) {
     if (!s.tu_hoa) continue;
     const d = { ten: `Hoá ${s.tu_hoa}`, mau: MAU_HOA[s.tu_hoa] ?? "var(--ls-chu)", dam: true };
-    (s.tu_hoa === "Kỵ" ? phai : trai).push(d);
+    (s.tu_hoa === "Kỵ" ? phaiCot : trai).push(d);
   }
   for (const s of c.phu_tinh) {
     const g = nhomSao(s.ten, s.loai);
-    const ten = s.do_sang && DO_SANG_TAT[s.do_sang] ? `${s.ten} (${DO_SANG_TAT[s.do_sang]})` : s.ten;
+    const ds = doSang(s, phai, false);
+    const ten = ds && DO_SANG_TAT[ds] ? `${s.ten} (${DO_SANG_TAT[ds]})` : s.ten;
     const d = { ten, mau: s.ten in HANH_SAO ? MAU_HANH[HANH_SAO[s.ten]!]! : MAU_NHOM[g], dam: true };
-    (g === "sat" ? phai : trai).push(d);
+    (g === "sat" ? phaiCot : trai).push(d);
   }
   const daCo = new Set(c.phu_tinh.map((s) => s.ten));
   const phu = [c.bac_si, c.tue_tien, ...c.tap_dieu.filter((t) => !AN_TAP_DIEU.has(t))];
@@ -51,9 +60,9 @@ function dongSaoCot(c: CungT): { trai: DongSao[]; phai: DongSao[] } {
     daCo.add(t);
     const g = nhomSao(t);
     const d = { ten: t, mau: MAU_NHOM[g] };
-    (g === "sat" || g === "trung" ? phai : trai).push(d);
+    (g === "sat" || g === "trung" ? phaiCot : trai).push(d);
   }
-  return { trai, phai };
+  return { trai, phai: phaiCot };
 }
 
 function catDong(ds: DongSao[], toiDa: number): DongSao[] {
@@ -70,10 +79,11 @@ interface Props {
   gioSinh?: string | null;
   chon: string;
   onChon: (chi: string) => void;
+  phaiDoSang?: PhaiDoSang;
 }
 
 export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
-  { ls, vanHan, lop = { dai_han: false, luu_nien: false }, giaoDien, ten, gioSinh, chon, onChon }, ref,
+  { ls, vanHan, lop = { dai_han: false, luu_nien: false }, giaoDien, ten, gioSinh, chon, onChon, phaiDoSang = "nam" }, ref,
 ) {
   const [di, setDi] = useState<string | null>(null);
   const giam = useReducedMotion();
@@ -131,7 +141,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
         const laChon = c.chi === dangXem;
         const laTamPhuong = tp.tam_hop.includes(c.chi);
         const laXung = tp.xung === c.chi;
-        const { trai, phai } = dongSaoCot(c);
+        const { trai, phai } = dongSaoCot(c, phaiDoSang);
         const yChinh = 62;
         const soChinh = Math.max(1, c.chinh_tinh.length);
         const yCot = yChinh + soChinh * 25 + 4;
@@ -144,7 +154,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
         const laLn = lop.luu_nien && vanHan?.luu_nien.chi_so === i;
         const laTh = lop.luu_nien && vanHan?.tieu_han.chi_so === i;
         const nhan = [c.ten.toUpperCase(), c.la_than ? "THÂN" : null].filter(Boolean).join(" · ");
-        const chinh = c.chinh_tinh.map((s) => `${s.ten}${s.do_sang ? ` ${s.do_sang}` : ""}${s.tu_hoa ? ` hoá ${s.tu_hoa}` : ""}`).join(", ");
+        const chinh = c.chinh_tinh.map((s) => `${s.ten}${doSang(s, phaiDoSang, true) ? ` ${doSang(s, phaiDoSang, true)}` : ""}${s.tu_hoa ? ` hoá ${s.tu_hoa}` : ""}`).join(", ");
         return (
           <g key={c.chi} transform={`translate(${x},${y})`} role="button" tabIndex={0}
             aria-pressed={c.chi === chon}
@@ -178,7 +188,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
               <text key={s.ten} x={W / 2} y={yChinh + k * 25} textAnchor="middle" fontSize={19} fontWeight={650}
                 fill={MAU_HANH[HANH_SAO[s.ten] ?? "Thổ"]}>
                 {s.ten}
-                {s.do_sang && DO_SANG_TAT[s.do_sang] ? <tspan fontSize={14} fontWeight={500} fill="var(--ls-mo)"> ({DO_SANG_TAT[s.do_sang]})</tspan> : null}
+                {(() => { const d = doSang(s, phaiDoSang, true); return d && DO_SANG_TAT[d] ? <tspan fontSize={14} fontWeight={500} fill="var(--ls-mo)"> ({DO_SANG_TAT[d]})</tspan> : null; })()}
               </text>
             )) : <text x={W / 2} y={yChinh} textAnchor="middle" fontSize={14} fontStyle="italic" fill="var(--ls-mo)">vô chính diệu</text>}
             {/* Hai cột phụ tinh */}
