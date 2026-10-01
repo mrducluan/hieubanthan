@@ -24,6 +24,7 @@ def test_tuvi_du_chuong_va_khong_trung():
     assert len(tat_ca) == len(set(tat_ca))                         # không đoạn nào lặp
     assert hoi_van.KET not in tat_ca and bc["ket"] == hoi_van.KET  # lời kết chỉ một lần
     assert all(c["doan"] for c in bc["chuong"])
+    assert any("Cách cục" in d for d in bc["chuong"][0]["doan"])   # KB-2 (#18) đi qua đường hỏi về Mệnh
 
 
 def test_battu_du_chuong():

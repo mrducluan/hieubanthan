@@ -358,10 +358,28 @@ export function DungThan({ ls }: { ls: LaSoBatTu }) {
       <p className="mt-2 text-sm text-[var(--ls-mo)]">{d.giai_thich}</p>
     </div>
   );
+  const ct = ls.mo_rong?.dieu_hau_ctbg;
   return (
     <div className="grid gap-3 sm:grid-cols-2">
       {the("Dụng thần · Phù ức", ls.dung_than.phu_uc)}
       {the("Dụng thần · Điều hậu", ls.dung_than.dieu_hau)}
+      {ct && (
+        <div className="rounded-2xl border border-[var(--ls-vien)] bg-[var(--ls-o)] p-4 sm:col-span-2" data-testid="dieu-hau-ctbg">
+          <p className="eyebrow">Điều hậu · Cùng Thông Bảo Giám <span style={{ fontFamily: "var(--font-han), serif" }}>窮通寶鑑</span></p>
+          <ol className="mt-2 flex flex-wrap gap-2">
+            {ct.chi_tiet.map((x, i) => (
+              <li key={x.can} className="flex items-center gap-2 rounded-full border px-3 py-1" style={{ borderColor: mau(x.hanh) }}>
+                <span className="text-xs text-[var(--ls-mo)]">{i + 1}</span>
+                <span className="font-serif text-lg" style={{ color: mau(x.hanh) }}>{x.can}</span>
+                <span className="text-xs">{x.thap_than}</span>
+                <span className="text-[0.68rem] text-[var(--ls-mo)]">{x.thau ? "đã lộ" : x.tang ? "tàng trong chi" : "chưa có"}</span>
+              </li>
+            ))}
+          </ol>
+          {ct.mua_y && <p className="mt-2 text-sm text-[var(--ls-mo)]">{ct.mua_y}</p>}
+          <p className="mt-1 text-xs text-[var(--ls-mo)]">Thứ tự là mức ưu tiên theo sách; can "đã lộ" ở thiên can thì dùng được ngay, "tàng" thì chờ vận/năm dẫn ra. Bảng tóm lược đang chờ đối chiếu nguyên văn.</p>
+        </div>
+      )}
       <p className="text-xs text-[var(--ls-mo)] sm:col-span-2">
         Hai cách xác định dụng thần có thể khác nhau — hệ thống trình bày cả hai, không tự chọn thay bạn.
         {ls.dung_than.cach_cuc ? ` Cách cục theo nguyệt lệnh: ${ls.dung_than.cach_cuc.ten}.` : ""}

@@ -209,6 +209,21 @@ def vai_tro_hanh(nh: str) -> dict[str, str]:
     return {nh: "Tỷ Kiếp", sinh_ta: "Ấn", _SINH[nh]: "Thực Thương", _KHAC[nh]: "Tài", khac_ta: "Quan Sát"}
 
 
+_MUA = {**dict.fromkeys(("Dần", "Mão", "Thìn"), "xuan"), **dict.fromkeys(("Tỵ", "Ngọ", "Mùi"), "ha"),
+        **dict.fromkeys(("Thân", "Dậu", "Tuất"), "thu"), **dict.fromkeys(("Hợi", "Tý", "Sửu"), "dong")}
+
+
+def dieu_hau_ctbg(ls: dict, can_dung: list[str]) -> dict:
+    """Ghép vai trò cho danh sách can dụng thần điều hậu (tra từ KB Cùng Thông Bảo Giám ở tầng ngoài):
+    hành, thập thần với nhật chủ, đã lộ (thấu) ở thiên can năm/tháng/giờ hay chỉ tàng trong chi."""
+    nc = ls["nhat_chu"]["can"]
+    lo = {ls["tru"][i]["can"] for i in (0, 1, 3)}
+    tang = {c for x in ls["tang_can"] for c in x}
+    return {"chi_tiet": [{"can": c, "hanh": CAN_NH[CAN.index(c)], "thap_than": thap_than(nc, c),
+                          "thau": c in lo, "tang": c in tang} for c in can_dung],
+            "mua": _MUA[ls["tru"][1]["chi"]]}
+
+
 def mo_rong(ls: dict) -> dict:
     tru = ls["tru"]
     nc = ls["nhat_chu"]["can"]

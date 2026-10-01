@@ -17,9 +17,10 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
-from app.calc import can_chi, dia_ly, lunar, timebase, tuan_triet_vendor, tuvi_an_sao
+from app.calc import can_chi, dia_ly, lunar, tuvi_cach_cuc, timebase, tuan_triet_vendor, tuvi_an_sao
 from app.hoidap import tuvi as hoidap_tv
 from app import nhat_ky
+from app.kb import tuvi_kb
 from app.config import ENGINE_VERSION, HourConfidence, Region
 
 router = APIRouter(prefix="/v1/tuvi", tags=["tuvi"])
@@ -292,6 +293,9 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             "dai_han": {"tu_tuoi": p["decadal"]["range"][0], "den_tuoi": p["decadal"]["range"][1]},
             "tieu_han_tuoi": p["ages"],
         } for p in la["palaces"]],
+        "cach_cuc": [{**(tuvi_kb.cach_cuc(c["ma"]) or {}), "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"]}
+                     for c in tuvi_cach_cuc.nhan_dien(la)],
+        "cach_cuc_luu_y": tuvi_kb.luu_y_pha_cach(),
         "co_canh_bao": flags,
     }
 
