@@ -37,7 +37,8 @@ const ra = {
 if (vao.ngay_xem) {
   const h = a.horoscope(vao.ngay_xem);
   const hc = (o) => ({ index: o.index, heavenlyStem: o.heavenlyStem, earthlyBranch: o.earthlyBranch,
-                       mutagen: o.mutagen || [] });
+                       mutagen: o.mutagen || [], palaceNames: o.palaceNames || [],
+                       stars: (o.stars || []).map((ds) => ds.map((x) => ({ name: x.name, type: x.type }))) });
   ra.horoscope = { decadal: hc(h.decadal), age: { ...hc(h.age), nominalAge: h.age.nominalAge },
                    yearly: hc(h.yearly) };
 }

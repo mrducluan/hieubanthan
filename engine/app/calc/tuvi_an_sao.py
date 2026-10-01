@@ -85,7 +85,8 @@ def _d(x: dt.date) -> str:
     return f"{x.year}-{x.month}-{x.day}"
 
 
-def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date) -> dict:
+def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
+            chi_tiet: bool = False) -> dict:
     """Đại hạn / tiểu hạn / lưu niên tại `ngay_xem` (iztro astro.horoscope, tên tiếng Việt).
 
     `chi_so` là vị trí cung trong mảng 12 cung của lá số (0 = cung Dần); `cung_goc` là tên
@@ -102,6 +103,10 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date) -> 
         m = {"chi_so": o["index"], "can": o["heavenlyStem"], "chi": o["earthlyBranch"]}
         if tu_hoa:
             m["tu_hoa"] = o["mutagen"]
+        if tu_hoa and chi_tiet:
+            # Tên cung lưu + sao lưu đặt theo vị trí 12 cung của lá số gốc (để vẽ lớp phủ).
+            m["ten_cung"] = o.get("palaceNames", [])
+            m["sao"] = [[x["name"] for x in ds] for ds in o.get("stars", [])]
         return m
 
     dh = cung[h["decadal"]["index"]]["decadal"]["range"]

@@ -2,12 +2,17 @@
 import { test, expect } from "@playwright/test";
 import { HO_SO_MAU, hoi, napHoSo } from "./_hoso";
 
-test("có hồ sơ đủ giờ sinh: vẽ lá số, bấm cung để hỏi", async ({ page }) => {
+test("có hồ sơ đủ giờ sinh: vẽ lá số, chọn cung → chi tiết → hỏi", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/tu-vi");
-  const laSo = page.getByRole("list", { name: "Lá số Tử vi 12 cung" });
+  const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
   await expect(laSo).toContainText("Thổ Ngũ Cục");
-  await laSo.getByRole("listitem", { name: /^Cung Quan Lộc/ }).click();
+  // Mặc định chọn cung Mệnh (không phải Lai nhân cung).
+  await expect(laSo.getByRole("button", { pressed: true })).toHaveAccessibleName(/^Cung Mệnh/);
+  await expect(laSo).toContainText("Tuần");
+  await laSo.getByRole("button", { name: /^Cung Quan Lộc/ }).click();
+  await expect(page.getByRole("heading", { name: /Cung Quan Lộc/ })).toBeVisible();
+  await page.getByRole("button", { name: "Hỏi về cung này" }).click();
   const ans = page.getByTestId("cau-tra-loi").last();
   await expect(ans).toContainText("Cung xem: Quan Lộc");
   await expect(ans).toContainText("Trong lá số của bạn");
@@ -30,8 +35,23 @@ test("hồ sơ cũ thiếu nơi sinh: hỏi bổ sung đúng lúc → sinh ở n
   await noi.selectOption("nuoc_ngoai");
   await page.getByLabel(/giờ mùa hè/).check();
   await page.getByRole("button", { name: "Lưu và xem" }).click();
-  const laSo = page.getByRole("list", { name: "Lá số Tử vi 12 cung" });
+  const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
   await expect(laSo).toBeVisible();
   await expect(page.getByText(/giờ địa phương nơi sinh/)).toBeVisible();
   await expect(page.getByText(/Đã trừ 1 giờ mùa hè: giờ chuẩn địa phương 11:30/)).toBeVisible();
+});
+
+test("đổi giao diện giấy cổ, đổi năm xem → lớp lưu niên theo năm", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
+  await expect(laSo).toContainText("LƯU NIÊN");
+  await page.getByRole("tab", { name: "Giấy cổ" }).click();
+  await expect(page.locator("svg.la-so-giay")).toBeVisible();
+  const nam = await page.getByRole("group", { name: "Năm xem hạn" }).locator("b").innerText();
+  await page.getByRole("button", { name: "Năm sau" }).click();
+  await expect(page.getByRole("group", { name: "Năm xem hạn" })).toContainText(String(Number(nam) + 1));
+  await expect(laSo).toContainText(`Năm xem`);
+  await page.reload();
+  await expect(page.locator("svg.la-so-giay")).toBeVisible();   // nhớ giao diện trên máy
 });

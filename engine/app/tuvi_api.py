@@ -17,7 +17,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
-from app.calc import dia_ly, lunar, timebase, tuan_triet_vendor, tuvi_an_sao
+from app.calc import can_chi, dia_ly, lunar, timebase, tuan_triet_vendor, tuvi_an_sao
 from app.hoidap import tuvi as hoidap_tv
 from app import nhat_ky
 from app.config import ENGINE_VERSION, HourConfidence, Region
@@ -209,6 +209,27 @@ def _sao(s: dict) -> dict:
     return {"ten": s["name"], "do_sang": s["brightness"] or None, "tu_hoa": s["mutagen"] or None}
 
 
+def _phu(s: dict) -> dict:
+    # loai = phân nhóm của iztro: soft (cát), tough (sát), lucun, tianma, flower, helper, adjective
+    return {**_sao(s), "loai": s["type"]}
+
+
+def _bo_sung(dv: "_DauVao", la: dict, gioi_tinh: str) -> dict:
+    """VZ-1: thông tin phần giữa lá số + Tuần/Triệt Nam phái (đóng giữa hai cung)."""
+    na = can_chi.nap_am(dv.can, dv.chi)
+    i = tuan_triet_vendor.chi_so_hoa_giap(dv.can, dv.chi)
+    tuan, triet = tuan_triet_vendor.TUAN[i // 10], tuan_triet_vendor.TRIET[i % 10]
+    nam = "Dương" if can_chi.la_duong_can(dv.can) else "Âm"
+    return {
+        "menh_nap_am": na,
+        "am_duong": {"nam_sinh": nam, "nhan": f"{nam} {'Nam' if gioi_tinh == 'nam' else 'Nữ'}",
+                     "ly": can_chi.am_duong_ly(dv.can, la["earthlyBranchOfSoulPalace"])},
+        "menh_cuc": can_chi.menh_cuc(na["hanh"], can_chi.hanh_cuc(la["fiveElementsClass"])),
+        "tuan_triet": {"tuan": [tuan_triet_vendor.CHI[c] for c in tuan],
+                       "triet": [tuan_triet_vendor.CHI[c] for c in triet]},
+    }
+
+
 @router.post("/an-sao")
 def api_an_sao(inp: TuanTrietInput) -> dict:
     """SPEC-005 — lá số an sao đầy đủ qua iztro chạy cục bộ (Tử Vi Đẩu Số).
@@ -233,7 +254,8 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             "lệch ngày — đây là quy ước, không phải lỗi.")})
     flags.append({"loai": "nam_phai", "chi_tiet": (
         "An sao theo iztro (Tử Vi Đẩu Số). Chính tinh, tứ hoá khớp aov.cc; bộ phụ "
-        "tinh Nam phái (Việt) chưa được đối chiếu đầy đủ — Tuần/Triệt xem ở /v1/tuvi/tuan-triet.")})
+        "tinh Nam phái (Việt) chưa được đối chiếu đầy đủ. Tuần/Triệt theo lối Việt (đóng giữa "
+        "hai cung) ở khoá tuan_triet.")})
 
     ld, lm, ly, leap = dv.am
     return {
@@ -256,11 +278,14 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
         "than_chu": la["body"],
         "chi_cung_menh": la["earthlyBranchOfSoulPalace"],
         "chi_cung_than": la["earthlyBranchOfBodyPalace"],
+        **_bo_sung(dv, la, inp.gender),
         "cung": [{
             "ten": p["name"], "can": p["heavenlyStem"], "chi": p["earthlyBranch"],
-            "la_menh": p["isOriginalPalace"], "la_than": p["isBodyPalace"],
+            # isOriginalPalace của iztro là Lai nhân cung (來因宮), KHÔNG phải cung Mệnh.
+            "la_menh": p["name"] == "Mệnh", "la_than": p["isBodyPalace"],
+            "la_lai_nhan": p["isOriginalPalace"],
             "chinh_tinh": [_sao(x) for x in p["majorStars"]],
-            "phu_tinh": [_sao(x) for x in p["minorStars"]],
+            "phu_tinh": [_phu(x) for x in p["minorStars"]],
             "tap_dieu": [x["name"] for x in p["adjectiveStars"]],
             "truong_sinh": p["changsheng12"], "bac_si": p["boshi12"],
             "tuong_tien": p["jiangqian12"], "tue_tien": p["suiqian12"],
@@ -269,6 +294,36 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
         } for p in la["palaces"]],
         "co_canh_bao": flags,
     }
+
+
+class VanHanInput(BaseModel):
+    """VZ-1 — lớp vận hạn phủ lên lá số: đại hạn + lưu niên (tên cung lưu, sao lưu, tứ hoá) + tiểu hạn."""
+    model_config = ConfigDict(extra="forbid")
+
+    la_so: TuanTrietInput
+    nam_xem: int | None = Field(default=None, ge=1900, le=2100,
+                                description="Năm xem (lấy giữa năm 1/7 để chắc nằm trong năm âm đó)")
+    ngay_xem: _dt.date | None = None
+
+
+@router.post("/van-han")
+def api_van_han(inp: VanHanInput) -> dict:
+    dv = _DauVao(inp.la_so)
+    cal = dv.tb.calendar_dt
+    ti = tuvi_an_sao.time_index(cal.hour, cal.minute)
+    if inp.ngay_xem:
+        ngay = inp.ngay_xem
+    elif inp.nam_xem:
+        ngay = _dt.date(inp.nam_xem, 7, 1)
+    else:
+        ngay = _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
+    try:
+        vh = tuvi_an_sao.van_han(cal.date(), ti, inp.la_so.gender, ngay, chi_tiet=True)
+    except tuvi_an_sao.AnSaoLoi as e:
+        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+    can, chi = lunar.can_chi_nam(lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, 7.0)[2])
+    return {"engine_version": ENGINE_VERSION, "ngay_xem": ngay.isoformat(), "nam_xem": ngay.year,
+            "can_chi_nam_xem": f"{can} {chi}", **vh}
 
 
 class HoiTVInput(BaseModel):

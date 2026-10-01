@@ -75,6 +75,8 @@ def test_api_an_sao_co_ban():
     assert len(d["cung"]) == 12
     menh = [c for c in d["cung"] if c["la_menh"]]
     assert len(menh) == 1
+    assert menh[0]["ten"] == "Mệnh" and menh[0]["chi"] == d["chi_cung_menh"]
+    assert sum(c["la_lai_nhan"] for c in d["cung"]) == 1
     chinh = {s["ten"] for c in d["cung"] for s in c["chinh_tinh"]}
     assert len(chinh) == 14                 # đủ 14 chính tinh
     assert any(f["loai"] == "nam_phai" for f in d["co_canh_bao"])
