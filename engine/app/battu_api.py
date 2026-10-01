@@ -11,7 +11,7 @@ import datetime as _dt
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.calc import battu
+from app.calc import battu, battu_mo_rong
 from app import nhat_ky
 from app.config import ENGINE_VERSION
 from app.hoidap import battu as hoidap_bt
@@ -31,7 +31,23 @@ def api_la_so(inp: TuanTrietInput) -> dict:
     sinh, flags = _sinh(inp)
     ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"])
     ls["co_canh_bao"] = flags + ls["co_canh_bao"]
-    return {"engine_version": ENGINE_VERSION, "pham_vi": "bat_tu", "gio_lich": sinh["lich"].isoformat(), **ls}
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "bat_tu", "gio_lich": sinh["lich"].isoformat(), **ls,
+            "mo_rong": battu_mo_rong.mo_rong(ls)}
+
+
+class LuuNienBTInput(BaseModel):
+    """VZ-3 — lưu niên + 12 lưu nguyệt đặt cạnh tứ trụ."""
+    model_config = ConfigDict(extra="forbid")
+
+    la_so: TuanTrietInput
+    nam_xem: int = Field(ge=1900, le=2100)
+
+
+@router.post("/luu-nien")
+def api_luu_nien(inp: LuuNienBTInput) -> dict:
+    sinh, _ = _sinh(inp.la_so)
+    ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"])
+    return {"engine_version": ENGINE_VERSION, **battu_mo_rong.luu_nien(ls, inp.nam_xem)}
 
 
 class HoiBTInput(BaseModel):

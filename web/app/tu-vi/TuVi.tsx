@@ -1,18 +1,19 @@
 "use client";
 // VZ-2 — trang Tử vi: lá số lớn (2 giao diện, lớp vận hạn theo năm xem) → chi tiết cung đang chọn
 // → hỏi đáp AI ở DƯỚI, chiếm hết chiều ngang (chủ dự án chốt 2026-10-01).
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Download, List, Moon, Orbit, ScrollText } from "lucide-react";
 import type { LaSoOutputT, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
-import { LaSoTuVi, type GiaoDien } from "@/components/huyen-hoc/LaSoTuVi";
+import { LaSoTuVi } from "@/components/huyen-hoc/LaSoTuVi";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ghi } from "@/lib/do-luong";
+import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
 import { laSoTuHoSo, useHoSo } from "@/lib/hoso";
@@ -31,7 +32,6 @@ const GOI_Y = [
   { nhom: "Kiến thức", cau: ["Tứ hoá là gì?", "Tham Lang ở cung Quan Lộc có ý nghĩa gì?"] },
 ];
 
-const KHOA_GIAO_DIEN = "hbt.laso.giaodien";
 const namNayVN = () => Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho_Chi_Minh", year: "numeric" }).format(new Date()));
 
 export function TuVi() {
@@ -41,7 +41,7 @@ export function TuVi() {
   const [namXem, setNamXem] = useState(namNayVN);
   const { data: vh } = usePost<VanHanOutputT>("/api/tuvi/van-han", laSo ? { la_so: laSo, nam_xem: namXem } : null);
   const [lop, setLop] = useState({ dai_han: false, luu_nien: true });
-  const [giaoDien, setGiaoDien] = useState<GiaoDien>("dem");
+  const [giaoDien, doiGiaoDien] = useGiaoDien("tuvi");
   const [chon, setChon] = useState<string | null>(null);
   const [cheDo, setCheDo] = useState<"tham_khao" | "chi_tiet">("tham_khao");
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
@@ -49,14 +49,6 @@ export function TuVi() {
   const svgRef = useRef<SVGSVGElement>(null);
   const chatRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    try { const g = localStorage.getItem(KHOA_GIAO_DIEN); if (g === "dem" || g === "giay") setGiaoDien(g); } catch { /* bỏ qua */ }
-  }, []);
-  const doiGiaoDien = (g: GiaoDien) => {
-    setGiaoDien(g);
-    try { localStorage.setItem(KHOA_GIAO_DIEN, g); } catch { /* bỏ qua */ }
-    ghi("chart_interacted", { mo_dun: "tuvi", kind: `giao_dien_${g}` });
-  };
   const chiMenh = ls?.cung.find((c) => c.la_menh)?.chi ?? ls?.chi_cung_menh ?? "Dần";
   const chiChon = chon ?? chiMenh;
   const hoi = (cau: string) => {
