@@ -15,6 +15,7 @@ from app.calc import battu, battu_mo_rong
 from app import nhat_ky
 from app.config import ENGINE_VERSION
 from app.hoidap import battu as hoidap_bt
+from app.kb import battu_kb
 from app.tuvi_api import TuanTrietInput, _DauVao
 
 router = APIRouter(prefix="/v1/battu", tags=["battu"])
@@ -32,7 +33,17 @@ def api_la_so(inp: TuanTrietInput) -> dict:
     ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"])
     ls["co_canh_bao"] = flags + ls["co_canh_bao"]
     return {"engine_version": ENGINE_VERSION, "pham_vi": "bat_tu", "gio_lich": sinh["lich"].isoformat(), **ls,
-            "mo_rong": battu_mo_rong.mo_rong(ls)}
+            "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls)}}
+
+
+def dieu_hau(ls: dict) -> dict | None:
+    """KB-3: tra bảng Cùng Thông Bảo Giám (KB) → CALC ghép vai trò → kèm lời mùa của nhật chủ (KB)."""
+    b = battu_kb.dieu_hau(ls["nhat_chu"]["can"], ls["tru"][1]["chi"])
+    if not b:
+        return None
+    d = battu_mo_rong.dieu_hau_ctbg(ls, b["can"])
+    mua = (battu_kb.nhat_chu(ls["nhat_chu"]["can"]) or {}).get("mua", {}).get(d["mua"])
+    return {**d, "mua_y": mua, "nguon": b["nguon"], "trang_thai": b["trang_thai"], "can_doi_chieu": b["can_doi_chieu"]}
 
 
 class LuuNienBTInput(BaseModel):

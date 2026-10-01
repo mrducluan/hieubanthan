@@ -68,3 +68,21 @@ def mau(ma: str) -> str | None:
 
 def luu_y(ma: str) -> str | None:
     return _d()["luu_y"].get(ma)
+
+
+# --------------------------------------------------------------------------- KB-3: điều hậu
+_F_DH = Path(__file__).parent / "data" / "battu_dieu_hau.json"
+
+
+@lru_cache(maxsize=1)
+def _dh() -> dict:
+    return json.loads(_F_DH.read_text(encoding="utf-8"))
+
+
+def dieu_hau(can: str, chi_thang: str) -> dict | None:
+    d = _dh()
+    ds = d["bang"].get(can, {}).get(chi_thang)
+    if ds is None:
+        return None
+    return {"can": list(ds), "nguon": d["_nguon"], "trang_thai": d["trang_thai"],
+            "can_doi_chieu": d["can_doi_chieu"], "source_id": d["source_id"], "school_id": d["school_id"]}
