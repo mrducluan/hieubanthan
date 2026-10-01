@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, Layers, Moon, ScrollText } from "lucide-reac
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
+import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -111,6 +112,12 @@ export function BatTu() {
           </>
         )}
       </section>
+
+      {laSo && ls && (
+        <section aria-label="Luận giải toàn bộ" className="mt-10">
+          <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={laSo} ten="Bát tự" />
+        </section>
+      )}
 
       <section ref={chatRef} aria-label="Hỏi Bát tự" className="mt-10 scroll-mt-24">
         <h2 className="mb-4 text-2xl sm:text-3xl">Hỏi đáp cùng AI</h2>

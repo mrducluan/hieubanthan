@@ -10,6 +10,7 @@ test("có hồ sơ đủ giờ sinh: vẽ lá số, chọn cung → chi tiết �
   // Mặc định chọn cung Mệnh (không phải Lai nhân cung).
   await expect(laSo.getByRole("button", { pressed: true })).toHaveAccessibleName(/^Cung Mệnh/);
   await expect(laSo).toContainText("Tuần");
+  await expect(page.getByTestId("cach-cuc")).toBeVisible();          // KB-2: cách cục quanh Mệnh
   await laSo.getByRole("button", { name: /^Cung Quan Lộc/ }).click();
   await expect(page.getByRole("heading", { name: /Cung Quan Lộc/ })).toBeVisible();
   await page.getByRole("button", { name: "Hỏi về cung này" }).click();
@@ -64,4 +65,14 @@ test("độ sáng sao: mặc định Nam phái, chuyển được sang phái Tru
   await expect(menh).toHaveAccessibleName(/Tử Vi Bình/);              // lối Việt: Tử Vi tại Mão bình hoà
   await page.getByRole("tab", { name: "Phái Trung" }).click();
   await expect(menh).toHaveAccessibleName(/Tử Vi Vượng/);             // bảng iztro
+});
+
+test("luận giải toàn bộ theo chương (miễn phí thử nghiệm)", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  const bc = page.getByTestId("luan-giai-toan-bo");
+  await expect(bc).toContainText("Tổng quan bản mệnh");
+  await expect(bc).toContainText("Vận hạn hiện tại");
+  await expect(bc.getByRole("navigation", { name: "Mục lục" })).toBeVisible();
 });

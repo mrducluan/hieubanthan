@@ -117,6 +117,13 @@ export const LaSoOutput = z.object({
   am_duong: z.object({ nam_sinh: z.string(), nhan: z.string(), ly: z.enum(["thuận", "nghịch"]) }).optional(),
   menh_cuc: z.string().optional(),
   tuan_triet: z.object({ tuan: z.array(z.string()), triet: z.array(z.string()) }).optional(),
+  // KB-2: cách cục quanh Mệnh (engine nhận diện, KB diễn giải — nháp AI).
+  cach_cuc: z.array(z.object({
+    ma: z.string(), ten: z.string(), ten_han: z.string(), nhom: z.enum(["cát", "hung", "trung"]),
+    dieu_kien: z.string(), y: z.string(), mat_toi: z.string(), loi_khuyen: z.string(),
+    cung_lien_quan: z.array(z.string()), sat_hoi: z.array(z.string()),
+  })).optional(),
+  cach_cuc_luu_y: z.string().optional(),
   cung: z.array(Cung).length(12),
   co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })),
 });

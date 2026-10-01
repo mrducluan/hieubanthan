@@ -26,8 +26,10 @@ Chủ dự án chốt: lá số có **nút chuyển 2 giao diện** (Đêm sao /
    chuẩn, vòng 12 địa chi, ngũ giác ngũ hành sinh–khắc, thanh vượng/nhược, dải đại vận + lưu niên. ✅
 4. **VZ-4** bố cục: hỏi đáp dưới lá số ở cả 5 mảng ✅. Tab Luận cung · Chuyên đề làm cùng **LG** (cần nội dung KB).
 5. **TV-NP** bảng độ sáng Nam phái (cần nguồn đối chiếu — xem câu hỏi mở).
-6. **KB-1** 384 hào + Thoán + Đại tượng (Chu Dịch, ctext) kèm dịch nghĩa.
-7. **KB-2** Tử vi: 14 chính tinh × 12 cung × miếu/hãm, ~100 phụ tinh, ~40 cách cục (engine nhận diện), tứ hoá phi.
+6. **KB-1** 384 hào + Thoán + Đại tượng kèm dịch nghĩa, quy tắc đọc hào động Chu Hy. ✅ (#17; ctext cấm tải
+   tự động → nguyên văn lấy từ bản số hoá MIT)
+7. **KB-2** Tử vi: 37 cách cục engine nhận diện (Mệnh + tam phương tứ chính, ghi lục sát hội về) + KB nghĩa ✅.
+   Còn lại: sao × cung × miếu/hãm, phụ tinh mở rộng, tứ hoá phi (chờ chốt bảng độ sáng Nam phái).
 8. **KB-3** Bát tự: 10 nhật chủ × 12 tháng (Cùng Thông Bảo Giám), cách cục Tử Bình Chân Thuyên.
 9. **LG** Luận giải toàn bộ: RULES ghép chương → NARRATIVE diễn đạt, mỗi ý dẫn nguồn.
 10. **PT-HK** Huyền Không phi tinh (CALC mới, golden trước).

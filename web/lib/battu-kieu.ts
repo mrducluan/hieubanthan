@@ -35,6 +35,11 @@ export interface LaSoBatTu {
     bang_hanh: { can: Record<string, string>; chi: Record<string, string> };
     vai_tro_hanh: Record<string, string>;
     dai_van_thap_than: string[];
+    /** KB-3 — bảng điều hậu Cùng Thông Bảo Giám (thứ tự = ưu tiên). */
+    dieu_hau_ctbg?: {
+      chi_tiet: { can: string; hanh: string; thap_than: string; thau: boolean; tang: boolean }[];
+      mua: string; mua_y?: string | null; nguon: string; can_doi_chieu?: boolean;
+    } | null;
   };
 }
 
