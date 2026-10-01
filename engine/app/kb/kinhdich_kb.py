@@ -56,3 +56,31 @@ def mau(ma: str) -> str | None:
 
 def luu_y(ma: str) -> str | None:
     return _d()["luu_y"].get(ma)
+
+
+# --------------------------------------------------------------------------- KB-1: lời kinh
+_F_HAO = Path(__file__).parent / "data" / "kinhdich_hao.json"
+
+
+@lru_cache(maxsize=1)
+def _h() -> dict:
+    return json.loads(_F_HAO.read_text(encoding="utf-8"))
+
+
+def _meta_hao() -> dict:
+    d = _h()
+    return {"trang_thai": d["trang_thai"], "can_doi_chieu": d["can_doi_chieu"],
+            "source_id": d["source_id"], "school_id": d["school_id"]}
+
+
+def que_van(so: int) -> dict | None:
+    """Quái từ, Đại tượng, Thoán (nguyên văn + dịch), 6 hào, Dụng Cửu/Dụng Lục (Càn/Khôn)."""
+    q = _h()["que"].get(str(so))
+    return {**q, **_meta_hao()} if q else None
+
+
+def hao(so: int, vi_tri: int) -> dict | None:
+    q = _h()["que"].get(str(so))
+    if not q or not 1 <= vi_tri <= 6:
+        return None
+    return {**q["hao"][vi_tri - 1], **_meta_hao()}
