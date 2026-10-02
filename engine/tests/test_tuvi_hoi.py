@@ -77,7 +77,7 @@ def test_chi_tiet_su_kien_tra_loi_kem_luu_y_khong_phan_bien_co():
 def test_la_so_menh_co_sao_do_sang_mat_toi_tu_soi():
     out = tv.tra_loi("Tính cách của tôi theo tử vi thế nào?", "tham_khao", SINH, XEM)
     van = out["cau_tra_loi"]
-    assert "Cự Môn ở cung Mệnh" in van and "Vượng" in van
+    assert "Cự Môn ở cung Mệnh (Đắc" in van              # Nam phái: Cự Môn tại Hợi = Đắc (iztro: Vượng)
     assert "Mặt tối" in van and "tự soi" in van and "Thân cư" in van
     assert out["do_phu"] == "day_du" and hoi_van.kiem_tra_dau_ra(van, out["bang_chung"]) == []
     assert any(f["loai"] == "nam_phai" for f in out["co_canh_bao"])

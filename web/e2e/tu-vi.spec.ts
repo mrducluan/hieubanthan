@@ -107,3 +107,11 @@ test("luận giải có AI diễn đạt: hiện bản AI, chuyển được san
   await bc.getByRole("button", { name: "Xem bản dữ liệu gốc" }).click();
   await expect(bc).toContainText("Đoạn gốc tổng quan.");
 });
+
+test("KB-TV2b: hỏi tính cách → độ sáng Nam phái + nghĩa riêng khi sao sáng", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  const ans = await hoi(page, "Tính cách của tôi theo tử vi thế nào?");
+  await expect(ans).toContainText("Cự Môn ở cung Mệnh (Đắc");     // Nam phái: Cự Môn tại Hợi
+  await expect(ans).toContainText("lời nói có sức nặng");
+});
