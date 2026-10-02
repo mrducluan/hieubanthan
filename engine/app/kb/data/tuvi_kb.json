@@ -901,5 +901,35 @@
   "iztro": "Lá số an bằng iztro (khung Tử Vi Đẩu Số); chính tinh và tứ hoá trùng các nguồn đối chiếu, bộ phụ tinh Nam phái chưa đối chiếu đủ.",
   "tat_ach": "Cung Tật Ách chỉ nói về cách bạn chịu áp lực; mọi vấn đề sức khoẻ cần hỏi bác sĩ.",
   "han_su_kien": "Tử vi không đoán được biến cố cụ thể (tai nạn, kiện tụng, mất tiền, năm cưới, năm có con). Phần dưới chỉ nêu chủ đề và xu hướng của năm để bạn chuẩn bị."
+ },
+ "doc_tung_buoc": {
+  "menh_than": {
+   "tieu_de": "Bước 1 · Cung Mệnh, cung Thân và Cục",
+   "cach_doc": "Cung Mệnh là 'chân dung' tính cách và cách mình đi vào đời; cung Thân (Thân cư) cho biết về sau mình dồn sức vào lĩnh vực nào. Cục (Thuỷ, Mộc, Kim, Thổ, Hoả) quyết định tuổi bắt đầu đại hạn đầu tiên. Đọc lá số luôn bắt đầu từ đây."
+  },
+  "chinh_tinh": {
+   "tieu_de": "Bước 2 · Chính tinh ở Mệnh và độ sáng",
+   "cach_doc": "Chính tinh là 14 sao lớn, như 'nhân vật chính' của mỗi cung. Cùng một sao nhưng đứng chỗ sáng (miếu, vượng, đắc) thì mặt tốt nổi lên; đứng chỗ hãm thì mặt tối dễ lộ. Cung không có chính tinh gọi là vô chính diệu, phải mượn sao cung đối diện để luận."
+  },
+  "tam_phuong": {
+   "tieu_de": "Bước 3 · Tam phương tứ chính",
+   "cach_doc": "Không cung nào đứng một mình: Mệnh luôn được xem cùng ba cung chiếu về — Quan Lộc (công việc), Tài Bạch (tiền bạc), Thiên Di (ra ngoài, xã hội). Bốn cung này gọi là tam phương tứ chính, như bốn bức tường của một căn phòng."
+  },
+  "cach_cuc": {
+   "tieu_de": "Bước 4 · Cách cục",
+   "cach_doc": "Cách cục là những 'mẫu hình' sao mà sách xưa đặt tên — khi một nhóm sao rơi vào đúng vị trí quanh Mệnh. Cách chỉ là khung tham chiếu; gặp sát tinh hội về thì sách gọi là giảm cách. Không cách nào quyết định số phận."
+  },
+  "tu_hoa": {
+   "tieu_de": "Bước 5 · Tứ hoá năm sinh",
+   "cach_doc": "Can năm sinh làm bốn sao 'đổi màu': Hoá Lộc (thuận, có lợi), Hoá Quyền (năng lực, nắm việc), Hoá Khoa (danh tiếng, học hành), Hoá Kỵ (vướng mắc, điều cần học). Xem bốn hoá rơi vào cung nào để biết năng lượng đời người dồn về đâu."
+  },
+  "dai_han": {
+   "tieu_de": "Bước 6 · Đại hạn — chặng mười năm",
+   "cach_doc": "Đời người chia thành các chặng mười năm, mỗi chặng 'mượn' một cung làm chủ đề. Đại hạn là lớp vận quan trọng nhất (ưu tiên trên lưu niên và tiểu hạn): nó cho biết mười năm ấy xoay quanh chuyện gì, không phán tốt xấu một năm cụ thể."
+  },
+  "luu_nien": {
+   "tieu_de": "Bước 7 · Lưu niên và tiểu hạn — một năm cụ thể",
+   "cach_doc": "Lưu niên là chủ đề của riêng một năm, tiểu hạn là lớp nhỏ nhất. Luôn đọc năm trong bối cảnh đại hạn đang chạy — năm chỉ là 'thời tiết', đại hạn mới là 'mùa'."
+  }
  }
 }

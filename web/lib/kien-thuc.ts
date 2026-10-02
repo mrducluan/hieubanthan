@@ -63,3 +63,20 @@ export async function tuDien(): Promise<{ muc: MucTuDien[]; nguon: string; trang
   if (!d) noStore();
   return d;
 }
+
+// MAU6 — lá số minh hoạ đọc từng bước (engine GET /v1/tuvi/la-so-mau[/slug]); nhân vật hư cấu.
+export interface MucLaSoMau { slug: string; ten: string; tieu_de: string; mo_ta: string; hu_cau: boolean }
+export interface BuocDoc { ma: string; tieu_de: string; cach_doc: string; doan: string[]; thuat_ngu: ThuatNguKb[] }
+export interface ThuatNguKb { ma: string; ten: string; han: string | null; mo_dun: string; de_hieu: string; vi_du: string | null; khop: string[] }
+export interface LaSoMau extends MucLaSoMau {
+  gioi_tinh: "nam" | "nu"; ngay: string; gio: string; noi_sinh: string; ngay_xem: string; trang_thai: string;
+  la_so: unknown; buoc: BuocDoc[];
+}
+export async function dsLaSoMau(): Promise<MucLaSoMau[]> {
+  const d = await lay<{ ds: MucLaSoMau[] }>("/v1/tuvi/la-so-mau");
+  if (!d) noStore();
+  return d?.ds ?? [];
+}
+export function laSoMau(slug: string): Promise<LaSoMau | null> {
+  return lay<LaSoMau>(`/v1/tuvi/la-so-mau/${encodeURIComponent(slug)}`);
+}

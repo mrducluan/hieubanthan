@@ -427,3 +427,22 @@ def api_luan_giai(inp: LuanGiaiInput) -> dict:
     except tuvi_an_sao.AnSaoLoi as e:
         raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
     return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": list(dv.flags)}
+
+
+# ------------------------------------------------------------------ MAU6: lá số minh hoạ đọc từng bước
+@router.get("/la-so-mau")
+def api_la_so_mau() -> dict:
+    from app.luangiai import la_so_mau
+    return {"engine_version": ENGINE_VERSION, "ds": la_so_mau.danh_sach()}
+
+
+@router.get("/la-so-mau/{slug}")
+def api_la_so_mau_chi_tiet(slug: str) -> dict:
+    from app.luangiai import la_so_mau
+    try:
+        d = la_so_mau.doc(slug)
+    except KeyError:
+        raise HTTPException(404, detail="Không có lá số mẫu này")
+    except tuvi_an_sao.AnSaoLoi as e:
+        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+    return {"engine_version": ENGINE_VERSION, **d}

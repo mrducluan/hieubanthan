@@ -421,7 +421,12 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         s = (f"Cách cục {m['ten']} ({m['ten_han']}) — {m['dieu_kien']} {m['y']} "
              f"Mặt tối: {m['mat_toi']} Gợi ý: {m['loi_khuyen']}")
         if m["sat_hoi"]:
-            s += f" Lưu ý: tam phương có {', '.join(m['sat_hoi'])} hội về — {kb.luu_y_pha_cach()}"
+            if "__pha_cach__" in da_co_sao:              # ghi chú dài chỉ nói một lần mỗi câu trả lời
+                s += f" (Tam phương có {', '.join(m['sat_hoi'])} hội về — giảm cách, như lưu ý ở trên.)"
+            else:
+                s += f" Lưu ý: tam phương có {', '.join(m['sat_hoi'])} hội về — {kb.luu_y_pha_cach()}"
+                if isinstance(da_co_sao, set):
+                    da_co_sao.add("__pha_cach__")
         return s, None
     if l == "than_cu":
         return (f"Thân cư cung {m['cung']} — trọng tâm đời sống về sau nghiêng về lĩnh vực này. "
