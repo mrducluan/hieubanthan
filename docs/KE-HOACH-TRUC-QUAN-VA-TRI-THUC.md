@@ -40,8 +40,10 @@ Chủ dự án chốt: lá số có **nút chuyển 2 giao diện** (Đêm sao /
 11. **AL** Đổi lịch âm↔dương: chặn ngày 30 tháng thiếu, nhắc tháng nhuận, can chi ngày/tháng ✅.
 
 ### Còn lại
+- Bát tự: nút tải ảnh ✅ (#28, không thêm thư viện).
 - **KB-2b** Tử vi sao × cung × miếu/hãm, phụ tinh mở rộng — chờ chủ dự án gửi lá số mẫu để chốt bảng độ sáng Nam phái.
-- **VZ-4b** tab Luận cung · Chuyên đề.
+- **VZ-4b** tab Luận cung · Chuyên đề: không làm thêm tab — "luận cung" đã có ở thẻ chi tiết cung (chạm cung trên lá số),
+  "chuyên đề" đã có ở Luận giải toàn bộ (chương sự nghiệp, tiền bạc, tình cảm…). Thêm tab chỉ lặp nội dung.
 - Trừ Sao cho Luận giải sau 2 tháng thử nghiệm (tầng web).
 
 ## Câu hỏi mở
