@@ -120,3 +120,8 @@ def cach_cuc(ma: str) -> dict | None:
 
 def luu_y_pha_cach() -> str:
     return _cc()["luu_y_pha_cach"]
+
+
+def doc_tung_buoc(ma: str) -> dict | None:
+    """MAU6: tiêu đề + lời giải thích (đời thường) cho từng bước đọc lá số."""
+    return _d()["doc_tung_buoc"].get(ma)
