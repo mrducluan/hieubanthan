@@ -121,6 +121,7 @@ export const LaSoOutput = z.object({
   cach_cuc: z.array(z.object({
     ma: z.string(), ten: z.string(), ten_han: z.string(), nhom: z.enum(["cát", "hung", "trung"]),
     dieu_kien: z.string(), y: z.string(), mat_toi: z.string(), loi_khuyen: z.string(),
+    co_ca: z.string().optional(),   // KB-TV2: phiên âm Hán Việt bài phú cổ (cổ thư công cộng)
     cung_lien_quan: z.array(z.string()), sat_hoi: z.array(z.string()),
   })).optional(),
   cach_cuc_luu_y: z.string().optional(),

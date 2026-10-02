@@ -37,6 +37,12 @@ export function CachCuc({ ds, luuY, onHoi }: { ds: CC[]; luuY?: string; onHoi: (
                 <div className="mt-3 space-y-2 text-sm">
                   <p className="text-fg-faint">{c.dieu_kien}</p>
                   <p>{c.y}</p>
+                  {c.co_ca && (
+                    <blockquote className="whitespace-pre-line border-l-2 border-gold/40 pl-3 font-serif italic text-fg-muted" data-testid="co-ca">
+                      {c.co_ca}
+                      <span className="mt-1 block text-xs not-italic text-fg-faint">— Phú cổ (phiên âm Hán Việt)</span>
+                    </blockquote>
+                  )}
                   <p><span className="text-fg-faint">Mặt tối: </span>{c.mat_toi}</p>
                   <p><span className="text-fg-faint">Gợi ý: </span>{c.loi_khuyen}</p>
                   {c.sat_hoi.length > 0 && <p className="text-xs text-cinnabar">Tam phương có {c.sat_hoi.join(", ")} hội về — sách xưa coi là giảm cách.</p>}
