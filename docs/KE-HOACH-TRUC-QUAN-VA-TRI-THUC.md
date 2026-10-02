@@ -32,7 +32,8 @@ Chủ dự án chốt: lá số có **nút chuyển 2 giao diện** (Đêm sao /
    Còn lại: sao × cung × miếu/hãm, phụ tinh mở rộng, tứ hoá phi (chờ chốt bảng độ sáng Nam phái).
 8. **KB-3** Bát tự: 10 nhật chủ × 12 tháng (Cùng Thông Bảo Giám), cách cục Tử Bình Chân Thuyên.
 9. **LG** Luận giải toàn bộ: RULES ghép chương → NARRATIVE diễn đạt, mỗi ý dẫn nguồn.
-10. **PT-HK** Huyền Không phi tinh (CALC mới, golden trước).
+10. **PT-HK** Huyền Không phi tinh ✅ — hạ quái bàn, 4 cục, 16 tổ hợp, lưu niên; golden 216 trạch bàn từ
+    @soul-atelier/xuankong (MIT). Chưa có thế quái (kiêm hướng > 3°) → gắn cờ.
 
 ## Câu hỏi mở
 

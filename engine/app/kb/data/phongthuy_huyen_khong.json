@@ -1,0 +1,43 @@
+{
+ "_nguon": "Huyền Không phi tinh — Thẩm Thị Huyền Không Học (Thẩm Trúc Nhưng, cuối Thanh; cổ thư công cộng), lý cửu tinh theo Thanh Nang Áo Ngữ. Diễn giải nháp AI, chờ đối chiếu. Mục nào là quan niệm truyền thống đều ghi rõ; không giới thiệu vật phẩm hoá giải.",
+ "source_id": "tham_thi_huyen_khong",
+ "school_id": "huyen_khong",
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "luu_y": "Phi tinh chỉ là một lớp thông tin về khí theo thời gian; nhà ở còn tuỳ hình thế thật (đường, nước, ánh sáng, thông gió, công năng). Hướng sát ranh giới hai sơn cần đo lại bằng la bàn — sai vài độ là đổi cả bàn.",
+ "cuc": {
+  "vuong_son_vuong_huong": {"y": "Sao vượng của sơn bàn về toạ, sao vượng của hướng bàn về hướng — cục đẹp nhất: phía sau nên vững, đầy (núi, nhà cao, tường), phía trước nên thoáng, có lối vào hoặc nước.", "goi_y": "Giữ phía sau kín và vững; cửa chính, phòng khách nên mở phía hướng, thoáng sáng."},
+  "thuong_son_ha_thuy": {"y": "Sao vượng sơn chạy ra hướng, sao vượng hướng chạy về toạ — sách xưa coi là cục kém nếu hình thế thường (trước thoáng sau đặc).", "goi_y": "Cách bù truyền thống: phía trước có vật cao vững, phía sau có khoảng thoáng/nước; hoặc chọn phòng, cửa theo cung có sao vượng."},
+  "song_tinh_dao_huong": {"y": "Cả sao vượng sơn lẫn hướng cùng về phía hướng: lợi tài lộc nếu phía trước vừa thoáng vừa có điểm tựa; nhân đinh, sức khoẻ cần chú ý phía sau.", "goi_y": "Trước nhà vừa có khoảng sân/lối đi vừa có hàng cây hoặc nhà đối diện vững xa; phía sau giữ ổn định."},
+  "song_tinh_dao_toa": {"y": "Cả hai sao vượng cùng về phía toạ: lợi nhân đinh, ổn định; tài lộc cần khai thông phía sau.", "goi_y": "Phía sau nên có khoảng thoáng, sân sau hoặc cửa phụ; phía trước giữ gọn."}
+ },
+ "to_hop": {
+  "phu_mau_tam_ban": {"ten": "Phụ mẫu tam ban quái", "nhom": "cát", "y": "Cả chín cung (vận–sơn–hướng) đều thành bộ 1-4-7 / 2-5-8 / 3-6-9: khí ba nguyên thông nhau, sách xưa coi là cát lớn."},
+  "lien_chau_tam_ban": {"ten": "Liên châu tam ban quái", "nhom": "cát", "y": "Cả chín cung đều có ba số liền nhau: khí liên tục, hung vị bớt hung."},
+  "son_tinh_hop_thap": {"ten": "Sơn tinh hợp thập", "nhom": "cát", "y": "Toàn bàn sơn tinh cộng vận tinh bằng 10: thông khí, lợi nhân đinh, sức khoẻ."},
+  "huong_tinh_hop_thap": {"ten": "Hướng tinh hợp thập", "nhom": "cát", "y": "Toàn bàn hướng tinh cộng vận tinh bằng 10: thông khí, lợi tài lộc, công việc."},
+  "toan_ban_phuc_ngam_son": {"ten": "Toàn bàn phục ngâm (sơn tinh)", "nhom": "hung", "y": "Sơn bàn trùng nguyên đán bàn cả chín cung: khí trì trệ, sách xưa nói chủ lo âu, ảnh hưởng nhân đinh."},
+  "toan_ban_phuc_ngam_huong": {"ten": "Toàn bàn phục ngâm (hướng tinh)", "nhom": "hung", "y": "Hướng bàn trùng nguyên đán bàn cả chín cung: khí trì trệ về tài lộc, công việc."},
+  "toan_ban_phan_ngam_son": {"ten": "Toàn bàn phản ngâm (sơn tinh)", "nhom": "hung", "y": "Sơn tinh hợp 10 với nguyên đán bàn khắp chín cung: sách xưa nói chủ biến động đột ngột về người."},
+  "toan_ban_phan_ngam_huong": {"ten": "Toàn bàn phản ngâm (hướng tinh)", "nhom": "hung", "y": "Hướng tinh hợp 10 với nguyên đán bàn khắp chín cung: biến động về tài lộc."},
+  "don_cung_phuc_ngam_son": {"ten": "Đơn cung phục ngâm (sơn tinh)", "nhom": "trung", "y": "Một vài cung có sơn tinh trùng số gốc của cung; nếu bên ngoài không có hình sát kích động thì ảnh hưởng nhỏ."},
+  "don_cung_phuc_ngam_huong": {"ten": "Đơn cung phục ngâm (hướng tinh)", "nhom": "trung", "y": "Một vài cung có hướng tinh trùng số gốc; ảnh hưởng nhỏ nếu không bị kích động."},
+  "don_cung_phan_ngam_son": {"ten": "Đơn cung phản ngâm (sơn tinh)", "nhom": "trung", "y": "Một vài cung có sơn tinh hợp 10 với số gốc; ảnh hưởng nhỏ nếu không bị kích động."},
+  "don_cung_phan_ngam_huong": {"ten": "Đơn cung phản ngâm (hướng tinh)", "nhom": "trung", "y": "Một vài cung có hướng tinh hợp 10 với số gốc; ảnh hưởng nhỏ nếu không bị kích động."},
+  "son_tinh_nhap_tu": {"ten": "Sơn tinh nhập tù", "nhom": "hung", "y": "Sao vượng của sơn bàn rơi vào trung cung — khí vượng bị giam; truyền thống cho rằng trung cung sáng sủa, thông thoáng thì phá được."},
+  "huong_tinh_nhap_tu": {"ten": "Hướng tinh nhập tù", "nhom": "hung", "y": "Sao vượng của hướng bàn rơi vào trung cung — tài khí bị giam; giữ trung cung thoáng, có hoạt động."},
+  "that_tinh_chan_da_kiep": {"ten": "Thất tinh chân đả kiếp", "nhom": "cát", "y": "Song tinh đáo hướng, ba cung Càn – Chấn – Ly có hướng tinh thành bộ tam ban: 'cướp' được khí vận sau, lực mạnh — nên khai thông cửa, lối đi ở ba cung này."},
+  "that_tinh_gia_da_kiep": {"ten": "Thất tinh giả đả kiếp", "nhom": "cát", "y": "Song tinh đáo hướng, ba cung Khảm – Tốn – Đoài thành bộ tam ban: lực kém chân đả kiếp nhưng vẫn dẫn được vượng khí."}
+ },
+ "sao": {
+  "1": {"hanh": "Thủy", "y_vuong": "văn chương, danh tiếng, đào hoa tốt", "y_suy": "phiêu bạt, hao tổn do tình cảm"},
+  "2": {"hanh": "Thổ", "y_vuong": "điền sản, tích luỹ", "y_suy": "bệnh khí (bệnh phù) — truyền thống khuyên giữ cung này yên tĩnh"},
+  "3": {"hanh": "Mộc", "y_vuong": "khởi nghiệp, phát triển", "y_suy": "thị phi, tranh cãi (xi vưu)"},
+  "4": {"hanh": "Mộc", "y_vuong": "học hành, văn bằng, quan hệ", "y_suy": "phong lưu, sa ngã"},
+  "5": {"hanh": "Thổ", "y_vuong": "uy quyền (chỉ khi đương vận 5)", "y_suy": "ngũ hoàng sát — truyền thống khuyên không động thổ, không đặt cửa chính ở cung này"},
+  "6": {"hanh": "Kim", "y_vuong": "quyền lực, lãnh đạo, quý nhân", "y_suy": "cô độc, cứng nhắc"},
+  "7": {"hanh": "Kim", "y_vuong": "khẩu tài, kinh doanh nhỏ", "y_suy": "khẩu thiệt, trộm cắp"},
+  "8": {"hanh": "Thổ", "y_vuong": "tài lộc ổn định, bất động sản (vượng vận 8)", "y_suy": "thoái khí ở vận 9 — vẫn khá, nhưng giảm dần"},
+  "9": {"hanh": "Hỏa", "y_vuong": "đương vận 9 (2024–2043): danh tiếng, hỷ sự, công nghệ, truyền thông", "y_suy": "nóng vội, hoả khí"}
+ }
+}

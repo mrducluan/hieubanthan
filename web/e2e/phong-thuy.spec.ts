@@ -17,3 +17,14 @@ test("bố trí dân gian ghi rõ nguồn", async ({ page }) => {
   const ans = await hoi(page, "Gương đối diện giường có sao không?");
   await expect(ans).toContainText("quan niệm dân gian");
 });
+
+test("Huyền Không: năm 2008, toạ Tý → Song tinh đáo hướng, Thất tinh chân đả kiếp", async ({ page }) => {
+  await page.goto("/phong-thuy");
+  await page.getByLabel("Năm xây hoặc nhập trạch").fill("2008");
+  await page.getByLabel("Toạ sơn (lưng nhà)").selectOption("Tý");
+  await page.getByRole("button", { name: "Lập bàn" }).click();
+  const ban = page.getByTestId("ban-huyen-khong");
+  await expect(ban).toContainText("Song tinh đáo hướng");
+  await expect(ban).toContainText("Thất tinh chân đả kiếp");
+  await expect(ban.getByRole("cell", { name: /^Ly Nam: sơn tinh 8, hướng tinh 8, vận tinh 3/ })).toBeVisible();
+});
