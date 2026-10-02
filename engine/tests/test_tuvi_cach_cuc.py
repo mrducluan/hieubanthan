@@ -77,9 +77,11 @@ def test_sat_hoi_ghi_kem():
 
 
 def test_la_so_that_doi_chung_1997():
-    la = tuvi_an_sao.an_sao_tho(dt.date(1997, 3, 19), 0, "nam")
-    m = ma(la)
-    assert {"dao_hoa_pham_chu", "hoa_tham", "than_menh_dong_cung"} <= m   # Mệnh Mão: Tử Tham + Hỏa Tinh, Thân cư Mệnh
+    # Lối Việt (mặc định, TV-PHAI): Mệnh Mão có Tử Tham + LINH Tinh (lasotuvi đồng ý) → Linh Tham.
+    m = ma(tuvi_an_sao.an_sao_tho(dt.date(1997, 3, 19), 0, "nam"))
+    assert {"dao_hoa_pham_chu", "linh_tham", "than_menh_dong_cung"} <= m and "hoa_tham" not in m
+    # Trung Châu (iztro nguyên bản): Hoả Tinh ở Mão → Hoả Tham.
+    assert "hoa_tham" in ma(tuvi_an_sao.an_sao_tho(dt.date(1997, 3, 19), 0, "nam", hoa_linh="trung"))
 
 
 def test_moi_cach_co_nghia_trong_kb():
@@ -103,8 +105,8 @@ def test_api_an_sao_co_cach_cuc():
     d = r.json()
     ma_ = {c["ma"] for c in d["cach_cuc"]}
     assert "dao_hoa_pham_chu" in ma_
-    c = next(c for c in d["cach_cuc"] if c["ma"] == "hoa_tham")
-    assert c["ten"] == "Hoả Tham" and c["y"] and "Hỏa Tinh" in c["sat_hoi"]
+    c = next(c for c in d["cach_cuc"] if c["ma"] == "linh_tham")
+    assert c["y"] and "Linh Tinh" in c["sat_hoi"]
     assert d["cach_cuc_luu_y"]
 
 
