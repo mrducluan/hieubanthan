@@ -52,3 +52,18 @@ def test_sao_ham_dung_khi_ham():
     m = tv._m_sao_cung("Thiên Cơ", "Mệnh", "Hãm", "la_so")
     assert m["sac_thai"] == kb.chinh_tinh("Thiên Cơ")["khi_ham"]
     assert tv._m_sao_cung("Thiên Cơ", "Mệnh", "Bình", "la_so").get("sac_thai") is None
+
+
+def test_api_an_sao_chinh_tinh_kem_giai_nghia():
+    """Thẻ chi tiết cung cần lời giải nghĩa: tính chất sao + sắc thái theo độ sáng Nam phái."""
+    from fastapi.testclient import TestClient
+    from app.main import app
+    d = TestClient(app).post("/v1/tuvi/an-sao", json={"birth_date": "1990-05-17", "birth_time": "12:30",
+                                                       "gender": "nam", "noi_sinh": "ha-noi"}).json()
+    for c in d["cung"]:
+        for s in c["chinh_tinh"]:
+            g = s["giai_nghia"]
+            ct = kb.chinh_tinh(s["ten"])
+            assert g["tinh_chat"] == ct["tinh_chat"]
+            nhom = kb.nhom_do_sang(s["do_sang_nam_phai"])
+            assert g.get("sac_thai") == (ct["khi_sang" if nhom == "sang" else "khi_ham"] if nhom else None)

@@ -57,13 +57,18 @@ export function ChiTietCung({ ls, chi, vanHan, onHoi }: {
         <div>
           <p className="eyebrow mb-2">Chính tinh</p>
           {c.chinh_tinh.length ? (
-            <ul className="space-y-1.5">
+            <ul className="space-y-3">
               {c.chinh_tinh.map((s) => (
                 <li key={s.ten} className="flex flex-wrap items-baseline gap-2">
                   <span className={cn("font-serif text-xl", MAU_HANH[HANH_SAO[s.ten] ?? "Thổ"])}>{s.ten}</span>
                   {s.do_sang_nam_phai && <span className="text-sm text-fg-faint">{DO_SANG_DAY[s.do_sang_nam_phai] ?? s.do_sang_nam_phai} <span className="text-xs">(Nam phái)</span></span>}
                   {s.do_sang && s.do_sang !== s.do_sang_nam_phai && <span className="text-xs text-fg-faint">· {DO_SANG_DAY[s.do_sang] ?? s.do_sang} (phái Trung)</span>}
                   <span className="text-xs text-fg-faint">hành {HANH_SAO[s.ten]}</span>
+                  {s.giai_nghia && (
+                    <span className="block w-full text-sm leading-relaxed text-fg-muted" data-testid="giai-nghia-sao">
+                      {s.giai_nghia.tinh_chat}{s.giai_nghia.sac_thai && <> {s.giai_nghia.sac_thai}</>}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

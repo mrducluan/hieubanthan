@@ -114,7 +114,8 @@ def _trang_que(k: str, slug: str) -> dict:
             muc.append({"tieu_de": "Nói nôm na", "doan": kv["nom_na"]})
         muc.append({"tieu_de": "Quái từ và Đại tượng",
                     "danh_sach": [f"Quái từ 「{kv['que_tu']['han']}」 — {kv['que_tu']['dich']}",
-                                  f"Đại tượng 「{kv['dai_tuong']['han']}」 — {kv['dai_tuong']['dich']}"]})
+                                  f"Đại tượng 「{kv['dai_tuong']['han']}」 — {kv['dai_tuong']['dich']}"]
+                    + ([f"Thoán truyện 「{kv['thoan']['han']}」 — {kv['thoan']['dich']}"] if kv["thoan"].get("dich") else [])})
         muc.append({"tieu_de": "Sáu hào (hào từ)",
                     "danh_sach": [f"{h['ten']} 「{h['han']}」 — {h['dich']} Ý: {h['y']}"
                                   + (f" Nôm na: {h['nom_na']}" if h.get("nom_na") else "") for h in kv["hao"]]
