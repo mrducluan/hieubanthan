@@ -5,6 +5,9 @@ import { goiEngine } from "@/lib/proxy";
 
 const Input = z.object({ la_so: LaSoVao }).strict();
 
+// AI diễn đạt từng chương chạy song song phía engine (mỗi chương ≤ 40 giây).
+export const maxDuration = 60;
+
 export function POST(req: Request) {
   return goiEngine(req, Input, "/v1/tuvi/luan-giai");
 }

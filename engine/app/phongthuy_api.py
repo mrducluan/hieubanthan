@@ -73,6 +73,7 @@ class HuyenKhongInput(BaseModel):
     toa: str | None = Field(default=None, max_length=10, description="Toạ sơn, vd 'Tý', 'Nhâm'")
     do: float | None = Field(default=None, ge=0, lt=360, description="Độ la bàn của TOẠ (lưng nhà), 0 = chính Bắc")
     nam_xem: int | None = Field(default=None, ge=1900, le=2150)
+    the_quai: bool | None = Field(default=None, description="Ép thế quái/hạ quái; mặc định: tự theo độ (lệch > 3°)")
 
     @model_validator(mode="after")
     def _can_toa(self) -> "HuyenKhongInput":
@@ -98,11 +99,19 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
         if s["canh_bao"] == "khong_vong":
             canh_bao.append({"loai": "khong_vong", "chi_tiet": f"Toạ {s['do']}° nằm đúng ranh giới hai sơn (không vong) — nên đo lại; bàn có thể sai hoàn toàn."})
         elif s["canh_bao"] == "kiem_huong":
-            canh_bao.append({"loai": "kiem_huong", "chi_tiet": f"Toạ lệch {abs(s['lech'])}° so với chính {toa} — gần ranh giới (kiêm hướng); trường phái dùng thế quái sẽ lập bàn khác, hệ thống chưa tính thế quái."})
+            canh_bao.append({"loai": "kiem_huong", "chi_tiet": f"Toạ lệch {abs(s['lech'])}° so với chính {toa} (kiêm hướng, quá 3°) — lập THẾ QUÁI theo khẩu quyết Thẩm thị; kèm cục của hạ quái để so sánh."})
+    the_quai = inp.the_quai if inp.the_quai is not None else any(c["loai"] == "kiem_huong" for c in canh_bao)
     try:
-        b = hk.trach_ban(inp.nam_xay, toa)
+        b = hk.trach_ban(inp.nam_xay, toa, the_quai=the_quai)
+        ha = hk.trach_ban(inp.nam_xay, toa) if the_quai else None
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
+    if ha:
+        b["ha_quai"] = {"cuc": ha["cuc"], "cuc_ten": ha["cuc_ten"],
+                        "cung": [{k: x[k] for k in ("cung", "son", "huong")} for x in ha["cung"]]}
+        # Không gói mã nguồn mở nào (MIT) lập bàn thế quái để đối chiếu — ghi rõ cho người dùng.
+        b["the_quai_trang_thai"] = "chua_doi_chieu_oracle"
+        b["the_quai_y"] = phongthuy_kb.huyen_khong()["the_quai"]
     kb = phongthuy_kb.huyen_khong()
     nam_xem = inp.nam_xem or hk.nam_theo_lap_xuan(_bay_gio_utc())
     return {

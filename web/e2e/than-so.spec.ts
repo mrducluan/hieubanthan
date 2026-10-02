@@ -109,5 +109,21 @@ test("nhập dương lịch: hiện ngày âm để đối chiếu giấy tờ",
   await page.getByLabel("Ngày", { exact: true }).fill("24");
   await page.getByLabel("Tháng", { exact: true }).fill("10");
   await page.getByLabel("Năm", { exact: true }).fill("1988");
-  await expect(page.getByTestId("doi-lich")).toContainText("Âm lịch: 14/9/1988 (Mậu Thìn)");
+  await expect(page.getByTestId("doi-lich")).toContainText("Âm lịch: 14/9/1988 (Mậu Thìn) · ngày");
+});
+
+test("nhập ÂM lịch: ngày 30 của tháng thiếu bị chặn; năm có tháng nhuận được nhắc", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("radio", { name: "Âm lịch" }).click();
+  await page.getByLabel("Ngày", { exact: true }).fill("30");
+  await page.getByLabel("Tháng", { exact: true }).fill("01");
+  await page.getByLabel("Năm", { exact: true }).fill("2024");
+  await expect(page.getByTestId("doi-lich")).toContainText("chỉ có 29 ngày");
+  await page.getByLabel("Ngày", { exact: true }).fill("15");
+  await page.getByLabel("Tháng", { exact: true }).fill("06");
+  await page.getByLabel("Năm", { exact: true }).fill("2025");
+  await expect(page.getByTestId("nhac-nhuan")).toContainText("hai tháng 6");
+  await page.getByLabel("Tháng nhuận").check();
+  await expect(page.getByTestId("nhac-nhuan")).toHaveCount(0);
+  await expect(page.getByTestId("doi-lich")).toContainText("Dương lịch:");
 });

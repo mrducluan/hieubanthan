@@ -26,6 +26,10 @@ interface Ban {
   sao_y: Record<string, { hanh: string; y_vuong: string; y_suy: string }>;
   luu_nien: { nam: number; tam: number; sao_tam: string; cung: Record<string, number> };
   luu_y: string; canh_bao: { loai: string; chi_tiet: string }[];
+  phep: "ha_quai" | "the_quai";
+  the_tinh?: Record<"son" | "huong", { goc: number; the: number; thuan: boolean }>;
+  ha_quai?: { cuc: string; cuc_ten: string };
+  the_quai_y?: { y: string; luu_y: string; nguon: string };
 }
 
 const MAU_TT: Record<string, string> = {
@@ -37,6 +41,7 @@ export function HuyenKhong() {
   const [cach, setCach] = useState<"son" | "do">("son");
   const [toa, setToa] = useState("Tý");
   const [doLa, setDoLa] = useState("");
+  const [kiem, setKiem] = useState(false);
   const [ban, setBan] = useState<Ban | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
@@ -47,7 +52,7 @@ export function HuyenKhong() {
     if (cach === "do" && !(doLa.trim() !== "" && d >= 0 && d < 360)) { setLoi("Độ la bàn cần là số từ 0 đến dưới 360 (0 = chính Bắc)."); return; }
     setDang(true); setLoi(null);
     try {
-      const body = { nam_xay: Number(namXay), ...(cach === "son" ? { toa } : { do: d }) };
+      const body = { nam_xay: Number(namXay), ...(cach === "son" ? { toa, ...(kiem ? { the_quai: true } : {}) } : { do: d }) };
       setBan(await postJson<Ban>("/api/phongthuy/huyen-khong", body));
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong" });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa lập được bàn."); }
@@ -82,7 +87,14 @@ export function HuyenKhong() {
                 return <option key={s} value={s}>Toạ {s} ({p}) — hướng {h} ({ph})</option>;
               })}
             </Select>
-          ) : (
+          ) : null}
+          {cach === "son" && (
+            <label className="flex items-center gap-1.5 text-xs text-fg-muted">
+              <input type="checkbox" checked={kiem} onChange={(e) => setKiem(e.target.checked)} />
+              Nhà kiêm hướng (lệch tâm sơn quá 3°) — lập thế quái
+            </label>
+          )}
+          {cach === "do" && (
             <Input inputMode="decimal" value={doLa} onChange={(e) => setDoLa(e.target.value)} placeholder="Độ của LƯNG nhà, 0–359.9 (0 = chính Bắc)" aria-label="Độ la bàn của toạ" />
           )}
         </div>
@@ -97,6 +109,17 @@ export function HuyenKhong() {
             cục <b className="text-gold">{ban.cuc_ten}</b> · lưu niên {ban.luu_nien.nam} (tính từ Lập xuân): {ban.luu_nien.sao_tam} nhập trung
           </p>
           {ban.canh_bao.map((c) => <p key={c.loai} className="rounded-xl bg-cinnabar/10 px-4 py-2 text-sm text-cinnabar">{c.chi_tiet}</p>)}
+          {ban.phep === "the_quai" && ban.the_tinh && (
+            <div className="rounded-xl border border-moon/50 bg-moon/[0.06] p-4 text-sm" data-testid="the-quai">
+              <p className="eyebrow">Thế quái 替卦 · chưa có nguồn đối chiếu độc lập</p>
+              <p className="mt-2">
+                Sơn tinh nhập trung {ban.the_tinh.son.goc} → <b>{ban.the_tinh.son.the}</b> ({ban.the_tinh.son.thuan ? "thuận" : "nghịch"}) ·
+                hướng tinh {ban.the_tinh.huong.goc} → <b>{ban.the_tinh.huong.the}</b> ({ban.the_tinh.huong.thuan ? "thuận" : "nghịch"}).
+                {ban.ha_quai && <> Nếu lập hạ quái: <b>{ban.ha_quai.cuc_ten}</b>.</>}
+              </p>
+              {ban.the_quai_y && <p className="mt-2 text-fg-muted">{ban.the_quai_y.y} {ban.the_quai_y.luu_y}</p>}
+            </div>
+          )}
 
           <div className="mx-auto grid max-w-md grid-cols-3 gap-1.5" role="table" aria-label="Hạ quái bàn Huyền Không, Nam ở trên">
             {[0, 1, 2].map((hang) => (

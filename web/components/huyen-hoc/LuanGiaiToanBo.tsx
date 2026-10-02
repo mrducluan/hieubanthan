@@ -11,8 +11,9 @@ import { postJson } from "@/lib/goi-api";
 
 interface BaoCao {
   mo_dun: string;
-  chuong: { ma: string; tieu_de: string; doan: string[] }[];
+  chuong: { ma: string; tieu_de: string; doan: string[]; van_ai?: string; che_do?: string }[];
   ket: string;
+  dien_dat?: "ai" | "tron" | "mau";
   trang_thai: string;
   phi: { sao: number; ly_do: string };
 }
@@ -21,6 +22,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
   const [bc, setBc] = useState<BaoCao | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
+  const [goc, setGoc] = useState(false);
   const tai = async () => {
     setDang(true); setLoi(null);
     try {
@@ -50,9 +52,22 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="eyebrow">Luận giải toàn bộ · bản nháp đang được chuyên gia duyệt dần</p>
+          {bc.dien_dat && bc.dien_dat !== "mau" && (
+            <p className="mt-1 text-xs text-fg-faint" data-testid="dien-dat-ai">
+              AI diễn đạt lại từ dữ liệu đã tính · mỗi chương đã kiểm: không thêm sao, cung, con số hay lời phán ngoài dữ liệu
+              {bc.dien_dat === "tron" && " (chương nào không đạt kiểm tra giữ bản gốc)"}.
+            </p>
+          )}
           <h2 className="mt-1 text-3xl">Luận giải {ten}</h2>
         </div>
-        <Button variant="ghost" size="sm" onClick={() => window.print()} className="print:hidden"><Printer aria-hidden /> In / lưu PDF</Button>
+        <div className="flex gap-2 print:hidden">
+          {bc.chuong.some((c) => c.van_ai) && (
+            <Button variant="ghost" size="sm" aria-pressed={goc} onClick={() => setGoc((v) => !v)}>
+              {goc ? "Xem bản AI diễn đạt" : "Xem bản dữ liệu gốc"}
+            </Button>
+          )}
+          <Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> In / lưu PDF</Button>
+        </div>
       </header>
       <nav aria-label="Mục lục" className="mt-4 print:hidden">
         <ol className="flex flex-wrap gap-2 text-sm">
@@ -66,7 +81,9 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
           <section key={c.ma} id={`lg-${c.ma}`} className="scroll-mt-24">
             <h3 className="font-serif text-2xl"><span className="text-gold">{i + 1}.</span> {c.tieu_de}</h3>
             <div className="prose-vn mt-3 space-y-3 text-[0.97rem] leading-relaxed text-fg-muted">
-              {c.doan.map((d, k) => <p key={k} className={d.startsWith("Câu hỏi để tự soi") ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""}>{d}</p>)}
+              {c.van_ai && !goc
+                ? c.van_ai.split(/\n\s*\n/).map((d, k) => <p key={k}>{d}</p>)
+                : c.doan.map((d, k) => <p key={k} className={d.startsWith("Câu hỏi để tự soi") ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""}>{d}</p>)}
             </div>
           </section>
         ))}

@@ -170,7 +170,44 @@ def lunar_to_solar(lunar_day: int, lunar_month: int, lunar_year: int,
     elif lunar_leap != 0:
         raise ValueError(f"Năm âm {lunar_year} không có tháng nhuận")
     month_start = get_new_moon_day(k + off, time_zone)
+    # Bản gốc Hồ Ngọc Đức không kiểm ngày: "30" của tháng thiếu (29 ngày) âm thầm trôi sang mùng 1
+    # tháng sau → người dùng lưu sai hồ sơ. Chặn ở đây để mọi nơi gọi đều an toàn.
+    so_ngay = get_new_moon_day(k + off + 1, time_zone) - month_start
+    if not 1 <= lunar_day <= so_ngay:
+        nhan = f"Tháng {lunar_month}{' nhuận' if lunar_leap else ''} âm năm {lunar_year}"
+        raise ValueError(f"{nhan} chỉ có {so_ngay} ngày" if lunar_day > so_ngay else "Ngày âm phải từ 1")
     return jd_to_date(month_start + lunar_day - 1)
+
+
+def so_ngay_thang(lunar_month: int, lunar_year: int, lunar_leap: int, time_zone: float) -> int:
+    """Số ngày (29 hoặc 30) của một tháng âm."""
+    d0 = jd_from_date(*lunar_to_solar(1, lunar_month, lunar_year, lunar_leap, time_zone))
+    d1 = get_new_moon_day(math.floor(0.5 + (d0 - _JD_EPOCH_NM) / _SYNODIC) + 1, time_zone)
+    return d1 - d0
+
+
+def thang_nhuan(lunar_year: int, time_zone: float) -> int | None:
+    """Tháng nhuận của năm âm `lunar_year` (1–12), hoặc None nếu năm không nhuận."""
+    t11 = [get_lunar_month_11(y, time_zone) for y in (lunar_year - 1, lunar_year, lunar_year + 1)]
+    # Chu kỳ [tháng 11 năm trước → tháng 11 năm nay) chứa tháng 1–10 của năm; chu kỳ sau chứa 11–12.
+    for a11, b11, hop_le in ((t11[0], t11[1], range(1, 11)), (t11[1], t11[2], (11, 12))):
+        if b11 - a11 > 365:
+            m = (get_leap_month_offset(a11, time_zone) - 2) % 12
+            if m in hop_le:
+                return m
+    return None
+
+
+def can_chi_ngay(d: "date") -> tuple[str, str]:
+    """Can chi của một ngày dương (ngày theo lịch, không xét giờ Tý)."""
+    jd = jd_from_date(d.day, d.month, d.year)
+    return CAN[(jd + 9) % 10], CHI[(jd + 1) % 12]
+
+
+def can_chi_thang(thang_am: int, nam_am: int) -> tuple[str, str]:
+    """Can chi tháng âm (tháng Giêng = Dần; tháng nhuận dùng can chi của tháng thường cùng số)."""
+    can_nam = (nam_am - 4) % 10
+    return CAN[(can_nam * 2 + 1 + thang_am) % 10], CHI[(thang_am + 1) % 12]
 
 
 def can_chi_nam(nam_am: int) -> tuple[str, str]:

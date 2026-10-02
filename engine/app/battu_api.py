@@ -101,5 +101,7 @@ class LuanGiaiBTInput(BaseModel):
 @router.post("/luan-giai")
 def api_luan_giai(inp: LuanGiaiBTInput) -> dict:
     from app.luangiai import toan_bo
+    from app.narrative import luan_giai_van
     sinh, flags = _sinh(inp.la_so)
-    return {"engine_version": ENGINE_VERSION, **toan_bo.battu(sinh, ngay_xem=inp.ngay_xem), "co_canh_bao": flags}
+    bc = luan_giai_van.dien_dat(toan_bo.battu(sinh, ngay_xem=inp.ngay_xem))
+    return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": flags}
