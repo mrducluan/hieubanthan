@@ -109,21 +109,35 @@ def _dat_hoa_linh_viet(la: dict, ngay: dt.date, ti: int, gioi_tinh: str, tz_lich
                 p["minorStars"].append(s)
 
 
+LICH = ("viet", "trung")
+TZ_TRUNG = 8.0          # lịch Trung Quốc: kinh tuyến 120°E
+
+
+def lich_khac(ngay: dt.date, tz_lich: float = config.CALENDAR_MERIDIAN_TZ) -> bool:
+    """Ngày dương này có ngày âm (ngày/tháng/năm/nhuận) khác nhau giữa lịch đang dùng và lịch Trung Quốc."""
+    return lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, tz_lich) != \
+        lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, TZ_TRUNG)
+
+
 _CHI_HAN = dict(zip(tuvi_hoa_linh_vn.CHI, "子丑寅卯辰巳午未申酉戌亥"))
 
 
 def an_sao_tho(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngon_ngu: str = "vi-VN",
                tz_lich: float = config.CALENDAR_MERIDIAN_TZ, hoa_linh: str = "viet",
-               thang_nhuan: str = "thang_sau") -> dict:
+               thang_nhuan: str = "thang_sau", lich: str = "viet") -> dict:
     """Lá số thô từ iztro. `ngay_duong` là ngày dương theo kinh tuyến lịch UTC+7; ngày âm dùng lịch VIỆT NAM
-    theo `tz_lich` (7, hoặc 8 cho miền Nam 1960–1975) chứ không để iztro đổi theo lịch Trung Quốc."""
+    theo `tz_lich` (7, hoặc 8 cho miền Nam 1960–1975) chứ không để iztro đổi theo lịch Trung Quốc.
+    `lich="trung"` (TV-LICH, người dùng chọn xem phái Trung): để iztro tự đổi theo lịch Trung Quốc (UTC+8)."""
     if not 0 <= ti <= 12:
         raise ValueError("time_index phải trong 0..12")
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
-    if hoa_linh not in HOA_LINH or thang_nhuan not in THANG_NHUAN:
-        raise ValueError("hoa_linh / thang_nhuan không hợp lệ")
-    la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, ngon_ngu, am=_am(ngay_duong, tz_lich),
+    if hoa_linh not in HOA_LINH or thang_nhuan not in THANG_NHUAN or lich not in LICH:
+        raise ValueError("hoa_linh / thang_nhuan / lich không hợp lệ")
+    if lich == "trung":
+        tz_lich = TZ_TRUNG
+    la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, ngon_ngu,
+                          am=_am(ngay_duong, tz_lich) if lich == "viet" else "",
                           fix_leap=thang_nhuan == "thang_sau"))
     if hoa_linh == "viet":
         _dat_hoa_linh_viet(la, ngay_duong, ti, gioi_tinh, tz_lich)
@@ -136,7 +150,7 @@ def _d(x: dt.date) -> str:
 
 def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
             chi_tiet: bool = False, tz_lich: float = config.CALENDAR_MERIDIAN_TZ,
-            thang_nhuan: str = "thang_sau") -> dict:
+            thang_nhuan: str = "thang_sau", lich: str = "viet") -> dict:
     """Đại hạn / tiểu hạn / lưu niên tại `ngay_xem` (iztro astro.horoscope, tên tiếng Việt).
 
     `chi_so` là vị trí cung trong mảng 12 cung của lá số (0 = cung Dần); `cung_goc` là tên
@@ -146,8 +160,10 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
         raise ValueError("time_index phải trong 0..12")
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
+    viet = lich != "trung"
     la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, "vi-VN", _d(ngay_xem),
-                          am=_am(ngay_duong, tz_lich), am_xem=_am(ngay_xem, config.CALENDAR_MERIDIAN_TZ),
+                          am=_am(ngay_duong, tz_lich) if viet else "",
+                          am_xem=_am(ngay_xem, config.CALENDAR_MERIDIAN_TZ) if viet else "",
                           fix_leap=thang_nhuan == "thang_sau"))
     h, cung = la["horoscope"], la["palaces"]
 

@@ -27,6 +27,9 @@ interface KetQuaDoi {
   can_chi_thang: string;
   thang_nhuan_nam: number | null;
   lich_mien_nam_utc8: boolean;
+  /** TV-LICH: âm lịch theo lịch Trung Quốc (UTC+8) — sổ tử vi/phần mềm Trung Quốc đổi theo lịch này. */
+  am_trung_quoc?: { ngay: number; thang: number; nam: number; nhuan: boolean };
+  lech_lich_trung?: boolean;
 }
 
 // Nhập MỘT LẦN, dùng mọi mảng (docs/THIET-KE-UI.md §4.3). Chỉ tên + ngày sinh bắt buộc; phần còn lại
@@ -164,13 +167,21 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
           </label>
         )}
         <p className="min-h-5 text-xs" aria-live="polite" data-testid="doi-lich">
-          {doi && lich === "duong" && <span className="text-fg-muted">Âm lịch: <b className="text-fg">{moTaAm(doi.am, doi.can_chi_nam)}</b> · ngày {doi.can_chi_ngay}, tháng {doi.can_chi_thang}{doi.lich_mien_nam_utc8 && " · theo lịch miền Nam thời đó"}</span>}
+          {doi && lich === "duong" && <span className="text-fg-muted">Âm lịch: <b className="text-fg">{moTaAm(doi.am, doi.can_chi_nam)}</b> · ngày {doi.can_chi_ngay}, tháng {doi.can_chi_thang}{doi.lich_mien_nam_utc8 ? " · theo lịch miền Nam thời đó" : " · theo lịch Việt Nam"}</span>}
           {doi && lich === "am" && <span className="text-fg-muted">Dương lịch: <b className="text-fg">{doi.duong.ngay}/{doi.duong.thang}/{doi.duong.nam}</b> · năm {doi.can_chi_nam} · ngày {doi.can_chi_ngay}{doi.lich_mien_nam_utc8 && " · theo lịch miền Nam thời đó"}</span>}
           {loiDoi && lich === "am" && <span className="text-cinnabar">{loiDoi.replace(/^Ngày không tồn tại: /, "")}</span>}
         </p>
         {doi && lich === "am" && !nhuan && doi.thang_nhuan_nam === m && (
           <p className="rounded-lg bg-gold/10 px-3 py-2 text-xs text-fg" data-testid="nhac-nhuan">
             Năm {doi.am.nam} có <b>hai tháng {m}</b> (tháng {m} thường và tháng {m} nhuận). Nếu giấy tờ ghi “tháng {m} nhuận”, hãy đánh dấu ô Tháng nhuận.
+          </p>
+        )}
+        {doi?.lech_lich_trung && doi.am_trung_quoc && (
+          <p className="rounded-lg bg-moon/10 px-3 py-2 text-xs text-fg" data-testid="nhac-lich-trung">
+            Ngày này âm lịch Việt Nam là <b>{moTaAm(doi.am, doi.can_chi_nam)}</b>, còn theo lịch Trung Quốc là{" "}
+            <b>{doi.am_trung_quoc.ngay}/{doi.am_trung_quoc.thang}{doi.am_trung_quoc.nhuan ? " nhuận" : ""}/{doi.am_trung_quoc.nam}</b>.
+            Sổ tử vi hay phần mềm theo lịch Trung Quốc sẽ ra lá số, lời luận khác. Hệ thống mặc định dùng lịch Việt Nam;
+            ở trang Tử vi bạn chọn được xem theo lịch nào (mục “Trường phái”).
           </p>
         )}
         {gio >= "23:00" && (

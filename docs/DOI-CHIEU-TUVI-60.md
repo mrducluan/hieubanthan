@@ -52,6 +52,18 @@ Cách sửa (`engine/ziwei/an_sao.mjs`) **không viết lại phần an sao**:
   - Mặc định tính sang tháng sau.
   - Người sinh nửa sau tháng nhuận thấy công tắc "Như tháng chính"; cách này khớp `lasotuvi`.
 - **Tứ hoá can Canh/Nhâm, Khôi/Việt: giữ iztro**, ghi chú khác bản.
+- **Âm lịch: hiện cả hai** (TV-LICH, chủ dự án yêu cầu 2026-10-02).
+  - Mặc định lịch Việt Nam (Hồ Ngọc Đức, UTC+7; miền Nam 1960–1975 UTC+8).
+  - Công tắc "Lịch Trung Quốc": để iztro tự đổi lịch (UTC+8) — khớp iztro gốc 12/12 lá ngày lệch.
+  - Ngày sinh rơi vào đợt hai lịch lệch → API trả `phai.lich_khac=true` + cờ `lich_viet_trung`; hồ sơ (form nhập
+    ngày) nhắc ngày âm theo lịch Trung Quốc. Ngày hai lịch trùng → báo đổi lịch không làm lá số thay đổi.
+  - Hỏi đáp, luận giải toàn bộ, vận hạn đều theo lịch đang chọn.
+- **Tên vòng Thái Tuế: theo phái đang xem.** Nam phái: Thái Tuế, Thiếu Dương, Tang Môn, Thiếu Âm, Quan Phù, Tử
+  Phù, Tuế Phá, Long Đức, Bạch Hổ, Phúc Đức, Điếu Khách, Trực Phù (khớp `lasotuvi` 72/72); phái Trung giữ tên iztro
+  (Tuế Kiện, Hối Khí, …, Bệnh Phù). Vị trí trùng nhau — chỉ khác tên. Phát hiện gốc: PR #3 (WS-2).
+
+**Nguyên tắc chung:** mỗi lựa chọn theo một nguồn tri thức; tuỳ lá số, đổi phái có thể ra kết quả gần như giống
+hệt hoặc khác hẳn. Trang Tử vi gom mọi công tắc vào khung "Trường phái" có lời giải thích từng dòng.
 
 ## Khác trường phái (bảng đối chiếu)
 
@@ -63,6 +75,11 @@ Cách sửa (`engine/ziwei/an_sao.mjs`) **không viết lại phần an sao**:
 | **Tứ hoá can Nhâm, Khoa** | Tả Phù | Khác (bản Việt) | 4 |
 | **Thiên Khôi / Thiên Việt** | Theo bảng Trung Châu | Khác ở can Đinh, Nhâm, Canh, Mậu | 22 |
 | Thiên Quý, Phá Toái, Giải Thần | Theo iztro | Quy tắc khác | 49 / 44 / 58 |
+| **Âm lịch** | Lịch Trung Quốc (UTC+8) | Lịch Việt Nam (UTC+7) | 12/12 lá ngày lệch (1.376 ngày 1930–2025) |
+| **Tên vòng Thái Tuế** | Tuế Kiện, Hối Khí, Quán Tác, Tiểu Hao, Đại Hao, Thiên Đức, Bệnh Phù | Thái Tuế, Thiếu Dương, Thiếu Âm, Tử Phù, Tuế Phá, Phúc Đức, Trực Phù | chỉ khác tên (72/72) |
+
+Ghi nhận thêm từ PR #3 (chưa xử lý, chờ chốt): iztro an khoảng 66 sao so với ~110 sao trong sách Nam phái (thiếu
+Lưu Hà, Thiên Y, Quốc Ấn, Đường Phù, Thiên/Địa Giải, Thiên La/Địa Võng…). Tuần/Triệt dùng engine Nam phái riêng.
 
 **Đã cảnh báo:** người sinh nửa sau tháng nhuận nhận cờ `thang_nhuan`, nêu rõ quy tắc đang dùng và rằng phái khác có thể ra Mệnh, Cục, sao khác.
 

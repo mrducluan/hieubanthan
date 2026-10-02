@@ -146,7 +146,8 @@ def test_api_tuy_chon_phai():
     base = {"birth_date": "2001-06-10", "birth_time": "15:30", "gender": "nu", "noi_sinh": "ha-noi"}
     a = cl.post("/v1/tuvi/an-sao", json=base).json()
     b = cl.post("/v1/tuvi/an-sao", json={**base, "thang_nhuan": "thang_chinh", "hoa_linh": "trung"}).json()
-    assert a["phai"] == {"hoa_linh": "viet", "thang_nhuan": "thang_sau", "co_the_doi_thang_nhuan": True}
+    assert a["phai"] == {"hoa_linh": "viet", "thang_nhuan": "thang_sau", "lich": "viet",
+                         "co_the_doi_thang_nhuan": True, "lich_khac": False}
     assert b["phai"]["thang_nhuan"] == "thang_chinh" and b["phai"]["hoa_linh"] == "trung"
     assert next(x["chi"] for x in a["cung"] if x["la_menh"]) != next(x["chi"] for x in b["cung"] if x["la_menh"])
     c = cl.post("/v1/tuvi/an-sao", json={**base, "birth_date": "1990-05-17"}).json()
