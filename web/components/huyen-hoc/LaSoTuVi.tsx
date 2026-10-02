@@ -31,9 +31,9 @@ interface DongSao { ten: string; mau: string; dam?: boolean; nghieng?: boolean }
 
 export type PhaiDoSang = "nam" | "trung";
 type SaoT = CungT["chinh_tinh"][number];
-/** Độ sáng hiển thị: Nam phái dùng bảng lối Việt (chỉ có cho chính tinh); phái Trung dùng iztro. */
+/** Độ sáng hiển thị: Nam phái dùng bảng lối Việt (chính tinh + phụ tinh có luận); phái Trung dùng iztro. */
 export function doSang(s: SaoT, phai: PhaiDoSang, laChinh: boolean): string | null {
-  if (phai === "nam") return laChinh ? s.do_sang_nam_phai ?? s.do_sang : null;
+  if (phai === "nam") return laChinh ? s.do_sang_nam_phai ?? s.do_sang : s.do_sang_nam_phai ?? null;
   return s.do_sang;
 }
 
@@ -59,7 +59,8 @@ function dongSaoCot(c: CungT, phai: PhaiDoSang): { trai: DongSao[]; phai: DongSa
     if (daCo.has(t)) continue;   // iztro có sao trùng tên giữa vòng Thái tuế và tạp diệu (vd Thiên Đức)
     daCo.add(t);
     const g = nhomSao(t);
-    const d = { ten: t, mau: MAU_NHOM[g] };
+    const ds = phai === "nam" ? c.do_sang_phu?.[t] : undefined;
+    const d = { ten: ds && DO_SANG_TAT[ds] ? `${t} (${DO_SANG_TAT[ds]})` : t, mau: MAU_NHOM[g] };
     (g === "sat" || g === "trung" ? phaiCot : trai).push(d);
   }
   return { trai, phai: phaiCot };
