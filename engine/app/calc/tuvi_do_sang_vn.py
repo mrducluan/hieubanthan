@@ -42,3 +42,39 @@ BANG: dict[str, dict[str, str]] = {
 def do_sang(sao: str, chi: str) -> str | None:
     b = BANG.get(sao)
     return b[chi] if b else None
+
+
+# --------------------------------------------------------------------------- #
+# TV-NP2 — độ sáng phụ tinh lối Việt. Dữ liệu chuyển từ `lasotuvi` 0.1.2 (MIT, © doanguyen,
+# github.com/doanguyen/lasotuvi — DiaBan.maTranDacTinh); golden fixtures/golden/do_sang_lasotuvi.json.
+# Cùng bảng đó khớp 156/156 ô chính tinh của BANG ở trên (đối chứng độc lập). Ô không nêu = sao không
+# luận miếu/hãm ở cung đó (None), KHÁC với "Bình".
+# --------------------------------------------------------------------------- #
+def _bang_phu(**nhom: str) -> dict[str, str]:
+    m = {"M": _M, "V": _V, "D": _D, "H": _H, "B": _B}
+    return {c: m[muc] for muc, ds_ in nhom.items() for c in ds_.split()}
+
+
+BANG_PHU: dict[str, dict[str, str]] = {
+    "Đà La": _bang_phu(H="Tý Dần Mão Tỵ Ngọ Thân Dậu Hợi", D="Sửu Thìn Mùi Tuất"),
+    "Kình Dương": _bang_phu(H="Tý Dần Mão Tỵ Ngọ Thân Dậu Hợi", D="Sửu Thìn Mùi Tuất"),
+    "Linh Tinh": _bang_phu(H="Tý Sửu Mùi Thân Dậu Tuất Hợi", D="Dần Mão Thìn Tỵ Ngọ"),
+    "Hỏa Tinh": _bang_phu(H="Tý Sửu Mùi Thân Dậu Tuất Hợi", D="Dần Mão Thìn Tỵ Ngọ"),
+    "Văn Xương": _bang_phu(H="Tý Dần Thìn Ngọ Thân Dậu", D="Sửu Mão Tỵ Mùi Tuất Hợi"),
+    "Văn Khúc": _bang_phu(H="Tý Dần Thìn Ngọ Thân Dậu", D="Sửu Mão Tỵ Mùi Tuất Hợi"),
+    "Địa Không": _bang_phu(H="Tý Sửu Mão Thìn Ngọ Mùi Dậu Tuất", D="Dần Tỵ Thân Hợi"),
+    "Địa Kiếp": _bang_phu(H="Tý Sửu Mão Thìn Ngọ Mùi Dậu Tuất", D="Dần Tỵ Thân Hợi"),
+    "Hóa Kỵ": _bang_phu(D="Sửu Thìn Mùi Tuất"),
+    "Đại Hao": _bang_phu(D="Dần Mão Thân Dậu"),
+    "Tiểu Hao": _bang_phu(D="Dần Mão Thân Dậu"),
+    "Thiên Khốc": _bang_phu(D="Tý Sửu Mão Ngọ Mùi Dậu"),
+    "Thiên Hư": _bang_phu(D="Tý Sửu Mão Ngọ Mùi Dậu"),
+    "Thiên Mã": _bang_phu(D="Dần Tỵ"),
+    "Thiên Hình": _bang_phu(D="Dần Mão Thân Dậu"),
+    "Thiên Diêu": _bang_phu(D="Dần Mão Dậu Tuất"),
+}
+
+
+def do_sang_phu(sao: str, chi: str) -> str | None:
+    """Độ sáng lối Việt của phụ tinh / tạp diệu tại `chi`; None nếu sách không luận sao đó ở cung đó."""
+    return BANG_PHU.get(sao, {}).get(chi)
