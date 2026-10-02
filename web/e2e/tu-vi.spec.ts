@@ -107,3 +107,23 @@ test("luận giải có AI diễn đạt: hiện bản AI, chuyển được san
   await bc.getByRole("button", { name: "Xem bản dữ liệu gốc" }).click();
   await expect(bc).toContainText("Đoạn gốc tổng quan.");
 });
+
+test("trường phái: Hoả/Linh lối Việt ↔ Trung Châu đổi cách cục (1997: Linh Tham ↔ Hoả Tham)", async ({ page }) => {
+  await napHoSo(page, { ...HO_SO_MAU, ngay: 19, thang: 3, nam: 1997, gio: "00:30" });
+  await page.goto("/tu-vi");
+  const cc = page.getByTestId("cach-cuc");
+  await expect(cc).toContainText("Linh Tham");
+  await page.getByRole("tab", { name: "Trung Châu" }).click();
+  await expect(cc).toContainText("Hoả Tham");
+});
+
+test("sinh nửa sau tháng nhuận: chọn cách tính tháng → cung Mệnh đổi", async ({ page }) => {
+  await napHoSo(page, { ...HO_SO_MAU, ngay: 10, thang: 6, nam: 2001, gio: "15:30", gioi_tinh: "nu" });
+  await page.goto("/tu-vi");
+  const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
+  const menh = laSo.getByRole("button", { name: /^Cung Mệnh/ });
+  const truoc = await menh.getAttribute("aria-label");
+  await expect(page.getByTestId("chon-thang-nhuan")).toBeVisible();
+  await page.getByRole("tab", { name: "Như tháng chính" }).click();
+  await expect(menh).not.toHaveAttribute("aria-label", truoc!);
+});

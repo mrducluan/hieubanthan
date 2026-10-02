@@ -19,7 +19,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from app import config
-from app.calc import lunar
+from app.calc import lunar, tuvi_hoa_linh_vn
 
 THU_MUC = Path(__file__).resolve().parents[2] / "ziwei"
 SCRIPT = THU_MUC / "an_sao.mjs"
@@ -65,7 +65,7 @@ def _am(x: dt.date, tz_lich: float) -> str:
 
 @lru_cache(maxsize=512)
 def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "",
-          am: str = "", am_xem: str = "") -> str:
+          am: str = "", am_xem: str = "", fix_leap: bool = True) -> str:
     phien_ban_iztro()   # kiểm tra đã cài
     try:
         kq = subprocess.run([_node(), str(SCRIPT)], cwd=THU_MUC, capture_output=True, text=True,
@@ -74,7 +74,8 @@ def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "",
                                               "gioi_tinh": gioi_tinh, "ngon_ngu": ngon_ngu,
                                               **({"ngay_xem": ngay_xem} if ngay_xem else {}),
                                               **({"am": json.loads(am)} if am else {}),
-                                              **({"am_xem": json.loads(am_xem)} if am_xem else {})}))
+                                              **({"am_xem": json.loads(am_xem)} if am_xem else {}),
+                                              "fix_leap": fix_leap}))
     except FileNotFoundError as e:
         raise AnSaoLoi("Không tìm thấy Node.js (đặt NODE_BIN nếu không ở PATH).") from e
     except subprocess.TimeoutExpired as e:
@@ -84,16 +85,49 @@ def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "",
     return kq.stdout
 
 
+THANG_NHUAN = ("thang_sau", "thang_chinh")   # nửa sau tháng nhuận: tính sang tháng sau (iztro) / như tháng chính
+HOA_LINH = ("viet", "trung")                 # lối Việt (Nam phái) / Trung Châu (iztro)
+
+
+_TEN_HOA_LINH = {"Hỏa Tinh": "Hỏa Tinh", "火星": "Hỏa Tinh", "Linh Tinh": "Linh Tinh", "铃星": "Linh Tinh"}
+
+
+def _dat_hoa_linh_viet(la: dict, ngay: dt.date, ti: int, gioi_tinh: str, tz_lich: float) -> None:
+    """Chuyển Hoả Tinh, Linh Tinh của iztro sang vị trí lối Việt (tuvi_hoa_linh_vn)."""
+    if ti == 12:                                   # Tý muộn: iztro tính sang ngày hôm sau
+        ngay = ngay + dt.timedelta(days=1)
+    can, chi = lunar.can_chi_nam(lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, tz_lich)[2])
+    dich = dict(zip(("Hỏa Tinh", "Linh Tinh"), tuvi_hoa_linh_vn.vi_tri(can, chi, 0 if ti == 12 else ti, gioi_tinh)))
+    sao = {}
+    for p in la["palaces"]:
+        for s in [x for x in p["minorStars"] if x["name"] in _TEN_HOA_LINH]:
+            p["minorStars"].remove(s)
+            sao[_TEN_HOA_LINH[s["name"]]] = {**s, "brightness": ""}   # độ sáng phái Trung không còn đúng cung mới
+    for p in la["palaces"]:
+        for ten, s in sao.items():
+            if p["earthlyBranch"] == dich[ten] or p["earthlyBranch"] == _CHI_HAN.get(dich[ten]):
+                p["minorStars"].append(s)
+
+
+_CHI_HAN = dict(zip(tuvi_hoa_linh_vn.CHI, "子丑寅卯辰巳午未申酉戌亥"))
+
+
 def an_sao_tho(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngon_ngu: str = "vi-VN",
-               tz_lich: float = config.CALENDAR_MERIDIAN_TZ) -> dict:
+               tz_lich: float = config.CALENDAR_MERIDIAN_TZ, hoa_linh: str = "viet",
+               thang_nhuan: str = "thang_sau") -> dict:
     """Lá số thô từ iztro. `ngay_duong` là ngày dương theo kinh tuyến lịch UTC+7; ngày âm dùng lịch VIỆT NAM
     theo `tz_lich` (7, hoặc 8 cho miền Nam 1960–1975) chứ không để iztro đổi theo lịch Trung Quốc."""
     if not 0 <= ti <= 12:
         raise ValueError("time_index phải trong 0..12")
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
-    s = _chay(_d(ngay_duong), ti, gioi_tinh, ngon_ngu, am=_am(ngay_duong, tz_lich))
-    return json.loads(s)
+    if hoa_linh not in HOA_LINH or thang_nhuan not in THANG_NHUAN:
+        raise ValueError("hoa_linh / thang_nhuan không hợp lệ")
+    la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, ngon_ngu, am=_am(ngay_duong, tz_lich),
+                          fix_leap=thang_nhuan == "thang_sau"))
+    if hoa_linh == "viet":
+        _dat_hoa_linh_viet(la, ngay_duong, ti, gioi_tinh, tz_lich)
+    return la
 
 
 def _d(x: dt.date) -> str:
@@ -101,7 +135,8 @@ def _d(x: dt.date) -> str:
 
 
 def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
-            chi_tiet: bool = False, tz_lich: float = config.CALENDAR_MERIDIAN_TZ) -> dict:
+            chi_tiet: bool = False, tz_lich: float = config.CALENDAR_MERIDIAN_TZ,
+            thang_nhuan: str = "thang_sau") -> dict:
     """Đại hạn / tiểu hạn / lưu niên tại `ngay_xem` (iztro astro.horoscope, tên tiếng Việt).
 
     `chi_so` là vị trí cung trong mảng 12 cung của lá số (0 = cung Dần); `cung_goc` là tên
@@ -112,7 +147,8 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
     la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, "vi-VN", _d(ngay_xem),
-                          am=_am(ngay_duong, tz_lich), am_xem=_am(ngay_xem, config.CALENDAR_MERIDIAN_TZ)))
+                          am=_am(ngay_duong, tz_lich), am_xem=_am(ngay_xem, config.CALENDAR_MERIDIAN_TZ),
+                          fix_leap=thang_nhuan == "thang_sau"))
     h, cung = la["horoscope"], la["palaces"]
 
     def _lop(o: dict, tu_hoa: bool = True) -> dict:

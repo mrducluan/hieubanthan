@@ -42,7 +42,18 @@ Cách sửa (`engine/ziwei/an_sao.mjs`) **không viết lại phần an sao**:
 | Tả Phù, Hữu Bật, Tam Thai, Bát Tọa, Thiên Hình, Thiên Diêu, Thiên Tài, Thiên Thọ, Thiên Thương, Thiên Sứ | 59/60 (lá tháng nhuận) |
 | 12 lá rơi vào ngày lịch Việt khác lịch Trung Quốc | 12/12 (lá rơi nửa sau tháng nhuận chỉ kiểm sao an theo năm) |
 
-## Khác trường phái (chưa đổi — chờ chủ dự án chốt)
+## Quyết định của chủ dự án (2026-10-02)
+
+- **Hoả Tinh / Linh Tinh: hiện cả hai.**
+  - Mặc định theo lối Việt (`calc/tuvi_hoa_linh_vn.py`, khớp 72/72 lá với `lasotuvi`).
+  - Có công tắc "Trung Châu" để xem cách của iztro.
+  - Cách cục đổi theo lựa chọn. Ví dụ lá 1997: lối Việt ra Linh Tham, Trung Châu ra Hoả Tham.
+- **Nửa sau tháng nhuận: hiện cả hai lá.**
+  - Mặc định tính sang tháng sau.
+  - Người sinh nửa sau tháng nhuận thấy công tắc "Như tháng chính"; cách này khớp `lasotuvi`.
+- **Tứ hoá can Canh/Nhâm, Khôi/Việt: giữ iztro**, ghi chú khác bản.
+
+## Khác trường phái (bảng đối chiếu)
 
 | Điểm | iztro (Trung Châu, đang dùng) | lasotuvi (lối Việt) | Số lá khác / 60 |
 |---|---|---|---|
