@@ -1,21 +1,24 @@
 "use client";
 // LG — "Luận giải toàn bộ": báo cáo theo chương do engine ghép từ kho tri thức (cùng bộ lọc an toàn
-// như hỏi đáp). Miễn phí trong 2 tháng thử nghiệm (chủ dự án chốt 2026-10-01). Không lưu ở máy chủ.
-import { useState } from "react";
+// như hỏi đáp). Miễn phí thử nghiệm; khi bật công tắc thu Sao (SAO-LG) thì 10 Sao/báo cáo, trừ ở máy chủ.
+// Không lưu ở máy chủ.
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { BookOpenText, Printer, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
+import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 
 interface BaoCao {
   mo_dun: string;
-  chuong: { ma: string; tieu_de: string; doan: string[]; van_ai?: string; che_do?: string }[];
+  chuong: { ma: string; tieu_de: string; doan: string[]; van_ai?: string; che_do?: string; thuat_ngu?: ThuatNgu[] }[];
   ket: string;
   dien_dat?: "ai" | "tron" | "mau";
   trang_thai: string;
-  phi: { sao: number; ly_do: string };
+  phi: { sao: number; ly_do: string; so_du?: number | null };
 }
 
 export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo: unknown; ten: string }) {
@@ -23,6 +26,12 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [goc, setGoc] = useState(false);
+  const [phi, setPhi] = useState<{ thu: boolean; gia: number } | null>(null);
+  useEffect(() => {
+    let huy = false;
+    fetch("/api/luan-giai/phi").then((r) => r.json()).then((d) => { if (!huy) setPhi(d); }).catch(() => { /* coi như miễn phí */ });
+    return () => { huy = true; };
+  }, []);
   const tai = async () => {
     setDang(true); setLoi(null);
     try {
@@ -39,11 +48,21 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
         <BookOpenText className="size-7 shrink-0 text-gold" aria-hidden />
         <div className="flex-1">
           <p className="font-serif text-xl">Luận giải toàn bộ {ten}</p>
-          <p className="text-sm text-fg-muted">Báo cáo theo chương, ghép từ kho tri thức có nguồn. Miễn phí trong giai đoạn thử nghiệm · không lưu trên máy chủ.</p>
+          <p className="text-sm text-fg-muted" data-testid="gia-luan-giai">
+            Báo cáo theo chương, ghép từ kho tri thức có nguồn ·{" "}
+            {phi?.thu ? <><b className="text-gold">{phi.gia} Sao</b>/báo cáo, xem lại trong ngày không mất thêm</> : "miễn phí trong giai đoạn thử nghiệm"} · không lưu trên máy chủ.
+          </p>
         </div>
-        <Button onClick={tai} disabled={dang}><Sparkles aria-hidden /> {dang ? "Đang soạn…" : "Xem luận giải"}</Button>
+        <Button onClick={tai} disabled={dang}><Sparkles aria-hidden /> {dang ? "Đang soạn…" : phi?.thu ? `Xem luận giải · ${phi.gia} Sao` : "Xem luận giải"}</Button>
         {dang && <div className="w-full"><KhungTai dong={3} /></div>}
-        {loi && <div className="w-full"><BaoLoi loi={loi} thuLai={tai} /></div>}
+        {loi && (
+          <div className="w-full space-y-2">
+            <BaoLoi loi={loi} thuLai={tai} />
+            {phi?.thu && (
+              <p className="text-sm"><Link href="/tai-khoan" className="text-gold underline">Đăng nhập · nhận thêm Sao ở trang Tài khoản</Link></p>
+            )}
+          </div>
+        )}
       </div>
     );
   }
@@ -82,9 +101,11 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
             <h3 className="font-serif text-2xl"><span className="text-gold">{i + 1}.</span> {c.tieu_de}</h3>
             <div className="prose-vn mt-3 space-y-3 text-[0.97rem] leading-relaxed text-fg-muted">
               {c.van_ai && !goc
-                ? c.van_ai.split(/\n\s*\n/).map((d, k) => <p key={k}>{d}</p>)
-                : c.doan.map((d, k) => <p key={k} className={d.startsWith("Câu hỏi để tự soi") ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""}>{d}</p>)}
+                ? doanCoThuatNgu(c.van_ai.replace(/\n\s*\n/g, "\n\n"), c.thuat_ngu)
+                : doanCoThuatNgu(c.doan.join("\n\n"), c.thuat_ngu,
+                  (d) => (d.startsWith("Câu hỏi để tự soi") ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""))}
             </div>
+            <div className="mt-3 print:hidden"><KhungGiaiNghia ds={c.thuat_ngu} /></div>
           </section>
         ))}
       </div>

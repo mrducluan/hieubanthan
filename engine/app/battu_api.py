@@ -12,6 +12,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import battu, battu_mo_rong
+from app.kb import tu_dien
 from app import nhat_ky
 from app.config import ENGINE_VERSION
 from app.hoidap import battu as hoidap_bt
@@ -87,7 +88,7 @@ def api_hoi(inp: HoiBTInput, background: BackgroundTasks) -> dict:
         raise HTTPException(422, detail=str(e))
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
     background.add_task(nhat_ky.ghi_huyenhoc, "battu", inp.cau_hoi, kq, inp.la_so is not None)
-    return {"engine_version": ENGINE_VERSION, **kq}
+    return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "battu")}
 
 
 class LuanGiaiBTInput(BaseModel):
@@ -103,5 +104,5 @@ def api_luan_giai(inp: LuanGiaiBTInput) -> dict:
     from app.luangiai import toan_bo
     from app.narrative import luan_giai_van
     sinh, flags = _sinh(inp.la_so)
-    bc = luan_giai_van.dien_dat(toan_bo.battu(sinh, ngay_xem=inp.ngay_xem))
+    bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(toan_bo.battu(sinh, ngay_xem=inp.ngay_xem)))
     return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": flags}

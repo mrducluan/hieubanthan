@@ -1,0 +1,58 @@
+// SAO-LG — "Luận giải toàn bộ" trừ Sao (chủ dự án chốt 2026-10-02: 10 Sao/báo cáo, CHƯA thu — công tắc tắt).
+// Trừ Sao ở MÁY CHỦ, bằng phiên đăng nhập của chính người dùng (hàm SQL dung_sao, migration 0008) — client không
+// bỏ qua được. Engine tính trước, trừ Sao sau, đủ Sao mới trả báo cáo. Khoá giao dịch = mảng + lá số + ngày (giờ
+// Việt Nam): xem lại cùng báo cáo trong ngày không bị trừ lần hai. Không lưu báo cáo.
+import { createHash } from "node:crypto";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import { createServerClient } from "@supabase/ssr";
+import type { ZodTypeAny } from "zod";
+import { goiEngineDaKiem } from "@/lib/proxy";
+
+export const GIA_LUAN_GIAI_SAO = 10;
+
+/** Công tắc: chỉ thu khi LUAN_GIAI_THU_SAO=1 VÀ đã cấu hình Supabase. */
+export function dangThuSao(): boolean {
+  return process.env.LUAN_GIAI_THU_SAO === "1"
+    && Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+}
+
+const MIEN_PHI = { sao: 0, ly_do: "mien_phi_thu_nghiem" } as const;
+
+export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: string, moDun: string): Promise<NextResponse> {
+  const parsed = schema.safeParse(await req.json().catch(() => null));
+  if (!parsed.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
+
+  if (!dangThuSao()) {
+    const kq = await goiEngineDaKiem(parsed.data, path);
+    return kq.ok ? NextResponse.json({ ...(kq.body as object), phi: MIEN_PHI }) : kq.res;
+  }
+
+  const kho = cookies();
+  const sb = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+    cookies: { getAll: () => kho.getAll(), setAll: () => { /* route chỉ đọc phiên */ } },
+  });
+  const { data: { user } } = await sb.auth.getUser();
+  if (!user) {
+    return NextResponse.json({ error: `Luận giải toàn bộ cần ${GIA_LUAN_GIAI_SAO} Sao — hãy đăng nhập để dùng Sao.`, can: "dang_nhap" }, { status: 401 });
+  }
+
+  const kq = await goiEngineDaKiem(parsed.data, path);
+  if (!kq.ok) return kq.res;                                  // engine lỗi → chưa trừ Sao
+
+  const ngay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
+  const khoa = createHash("sha256").update(`${moDun}|${JSON.stringify(parsed.data)}|${ngay}`).digest("hex").slice(0, 40);
+  const { data, error } = await sb.rpc("dung_sao", {
+    p_so: GIA_LUAN_GIAI_SAO, p_khoa: `lg:${khoa}`, p_ghi_chu: `Luận giải toàn bộ ${moDun === "tuvi" ? "Tử vi" : "Bát tự"}`,
+  });
+  if (error) return NextResponse.json({ error: "Chưa trừ được Sao, thử lại sau ít phút." }, { status: 502 });
+  const r = data as { ket_qua: string; so_du?: number };
+  if (r.ket_qua === "khong_du") {
+    return NextResponse.json({
+      error: `Cần ${GIA_LUAN_GIAI_SAO} Sao, bạn còn ${r.so_du ?? 0} Sao. Nhận thêm Sao ở trang Tài khoản (chào mừng, mời bạn bè).`,
+      can: "them_sao", so_du: r.so_du ?? 0,
+    }, { status: 402 });
+  }
+  if (r.ket_qua !== "da_dung") return NextResponse.json({ error: "Chưa trừ được Sao, thử lại sau." }, { status: 400 });
+  return NextResponse.json({ ...(kq.body as object), phi: { sao: GIA_LUAN_GIAI_SAO, ly_do: "da_tru_sao", so_du: r.so_du ?? null } });
+}

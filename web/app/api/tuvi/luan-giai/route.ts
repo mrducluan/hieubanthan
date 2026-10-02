@@ -1,7 +1,7 @@
-// POST /api/tuvi/luan-giai — LG: luận giải toàn bộ theo chương (engine ghép, không lưu). Miễn phí thử nghiệm.
+// POST /api/tuvi/luan-giai — LG: luận giải toàn bộ theo chương (engine ghép, không lưu). Trừ Sao khi bật công tắc (lib/luan-giai-sao).
 import { z } from "zod";
 import { LaSoVao } from "@/lib/la-so-vao";
-import { goiEngine } from "@/lib/proxy";
+import { luanGiaiCoSao } from "@/lib/luan-giai-sao";
 
 const Input = z.object({ la_so: LaSoVao }).strict();
 
@@ -9,5 +9,5 @@ const Input = z.object({ la_so: LaSoVao }).strict();
 export const maxDuration = 60;
 
 export function POST(req: Request) {
-  return goiEngine(req, Input, "/v1/tuvi/luan-giai");
+  return luanGiaiCoSao(req, Input, "/v1/tuvi/luan-giai", "tuvi");
 }

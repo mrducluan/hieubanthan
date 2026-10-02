@@ -11,6 +11,8 @@ test("gieo tay: quẻ Lý biến Đoài, vẽ hai quẻ, lời đọc Nghĩa Lý
   await expect(ans).toContainText("Quẻ biến (xu hướng chuyển tới): Đoài");
   await expect(ans.getByTestId("que")).toContainText("Phái đọc: Nghĩa Lý");
   await expect(ans).toContainText("Mặt tối cần tránh");
+  await expect(ans).toContainText("Nói nôm na: như làm việc với sếp khó tính");   // KD-NN: lời đời thường kèm quẻ Lý
+  await expect(ans).toContainText("Nói nôm na: Như cuối năm nhìn lại hành trình");  // …và kèm hào động (Thượng Cửu)
 });
 
 test("máy gieo: luôn có quẻ và câu trả lời Lục Hào", async ({ page }) => {

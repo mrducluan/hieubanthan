@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
+import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import { KhungChat, type KetQuaHoi } from "@/components/hoi/KhungChat";
 import { DaiDoi } from "@/components/than-so/DaiDoi";
 import { BieuDoNgaySinh, ChiSoPhu } from "@/components/than-so/BieuDoNgaySinh";
@@ -29,10 +30,11 @@ async function hoiThanSo(h: HoSo, cau: string): Promise<KetQuaHoi> {
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, cau_hoi: cau }),
   });
-  const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string };
+  const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string; thuat_ngu?: ThuatNgu[] };
   const canNguoiKia = d.can_them?.includes("nguoi_kia");
   return {
     van: d.cau_tra_loi,
+    thuatNgu: d.thuat_ngu,
     loi: d.cau_tra_loi ? undefined : d.error ?? "Chưa trả lời được lúc này, thử lại sau.",
     phu: canNguoiKia ? (
       <Button asChild variant="secondary" size="sm"><Link href="/hop-doi"><HeartHandshake aria-hidden /> Nhập ngày sinh người ấy ở mục Hợp đôi</Link></Button>

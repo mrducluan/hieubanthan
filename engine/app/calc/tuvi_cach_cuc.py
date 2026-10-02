@@ -22,7 +22,15 @@ DANH_SACH = [
     "xuong_khuc_giap_menh", "khoi_viet_hoi_menh", "hoa_tham", "linh_tham", "dao_hoa_pham_chu",
     "kinh_da_giap_menh", "hoa_linh_giap_menh", "khong_kiep_giap_menh", "ma_dau_doi_kiem", "hoa_ky_thu_menh",
     "menh_vo_chinh_dieu", "than_menh_dong_cung",
+    # KB-TV2 — đối chiếu danh mục TuViMCP (MIT); điều kiện siết theo cổ thư (xem từng nhánh dưới).
+    "quan_than_khanh_hoi", "duong_luong_xuong_loc", "liem_trinh_van_vu", "dan_tri_que_tri", "nhat_chieu_loi_mon",
+    "nhat_nguyet_tinh_minh", "nguyet_sinh_thuong_hai", "nhat_nguyet_chieu_bich", "co_luong_gia_hoi",
+    "van_luong_chan_ky", "phu_cung_van_tinh", "tuong_tinh_dac_dia", "hoa_tinh_phan_quy", "quyen_loc_hoi_menh",
+    "loc_hop_uyen_uong", "loc_ma_boi_an", "minh_loc_am_loc", "khoa_minh_loc_am", "khoa_quyen_loc_giap",
+    "song_loc_giap_menh", "tai_loc_giap_ma", "quy_tinh_giap_menh", "quyen_sat_hoa_loc", "cu_phung_tu_sat",
+    "menh_ly_phung_khong",
 ]
+TU_SAT = ("Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh")
 
 
 class _La:
@@ -57,6 +65,16 @@ class _La:
 
     def tim(self, ten_sao: str) -> int | None:
         return next((i for i in range(12) if ten_sao in self.sao(i)), None)
+
+
+def _co_loc(l: _La, i: int) -> bool:
+    """Cung có Lộc Tồn hoặc sao mang Hoá Lộc."""
+    return "Lộc Tồn" in l.sao(i) or "Lộc" in l.hoa(i)
+
+
+def _luc_hop(i: int) -> int:
+    """Cung lục hợp (Tý–Sửu, Dần–Hợi, Mão–Tuất, Thìn–Dậu, Tỵ–Thân, Ngọ–Mùi); i = 0 là cung Dần."""
+    return (-3 - i) % 12
 
 
 def _giap(l: _La, a: str, b: str) -> bool:
@@ -154,6 +172,69 @@ def nhan_dien(la: dict) -> list[dict]:
         dat("menh_vo_chinh_dieu", m, (m + 6) % 12)
     if l.p[m].get("isBodyPalace"):
         dat("than_menh_dong_cung")
+
+    # ---- KB-TV2 ------------------------------------------------------------------------------------
+    htp = l.hoa_tp()
+    trai, phai = (m - 1) % 12, (m + 1) % 12
+    if "Tử Vi" in cmh and len({"Tả Phù", "Hữu Bật", "Thiên Khôi", "Thiên Việt", "Văn Xương", "Văn Khúc",
+                               "Lộc Tồn"} & stp) >= 3:                      # Tử Vi thủ Mệnh, ≥ 3 cát tinh hội
+        dat("quan_than_khanh_hoi", *tp)
+    if {"Thái Dương", "Thiên Lương", "Văn Xương"} <= stp and ("Lộc Tồn" in stp or "Lộc" in htp):
+        dat("duong_luong_xuong_loc", *tp)
+    if "Liêm Trinh" in cmh and cm in ("Dần", "Thân") and {"Vũ Khúc", "Văn Xương"} <= stp:
+        dat("liem_trinh_van_vu", *tp)
+    if ("Thái Dương" in cmh and cm in ("Thìn", "Tỵ", "Ngọ")) or ("Thái Âm" in cmh and cm in ("Dậu", "Tuất", "Hợi")):
+        dat("dan_tri_que_tri")
+    if "Thái Dương" in cmh and cm == "Mão":
+        dat("nhat_chieu_loi_mon")
+    nd, na = l.tim("Thái Dương"), l.tim("Thái Âm")
+    if nd in tp and na in tp and l.p[nd]["earthlyBranch"] == "Tỵ" and l.p[na]["earthlyBranch"] == "Dậu":
+        dat("nhat_nguyet_tinh_minh", m, nd, na)
+    if {"Thái Âm", "Thiên Đồng"} <= cmh and cm == "Tý":
+        dat("nguyet_sinh_thuong_hai")
+    dt_ = next(i for i in range(12) if l.ten(i) == "Điền Trạch")
+    if {"Thái Dương", "Thái Âm"} <= l.chinh(dt_) and l.p[dt_]["earthlyBranch"] in ("Sửu", "Mùi"):
+        dat("nhat_nguyet_chieu_bich", dt_)
+    if {"Thiên Cơ", "Thiên Lương"} <= cmh or (cm in ("Dần", "Thân", "Thìn", "Tuất")
+                                              and {"Thiên Cơ", "Thiên Lương"} <= set().union(*(l.chinh(i) for i in tp))):
+        dat("co_luong_gia_hoi", *tp)
+    if ("Thiên Lương" in cmh and "Văn Xương" in stp) or ("Văn Xương" in sm and "Thiên Lương" in set().union(*(l.chinh(i) for i in tp))):
+        dat("van_luong_chan_ky", *tp)
+    if "Văn Xương" in sm and "Tả Phù" in stp:
+        dat("phu_cung_van_tinh", *tp)
+    if "Vũ Khúc" in cmh and cm in ("Sửu", "Mùi", "Dần", "Thân") and (htp & {"Lộc", "Quyền", "Khoa"} or "Lộc Tồn" in stp):
+        dat("tuong_tinh_dac_dia", *tp)
+    hm = l.hoa(m)
+    if ("Thiên Đồng" in cmh and cm == "Tuất" and hm.get("Quyền") == "Thiên Đồng") or \
+            ("Cự Môn" in cmh and cm in ("Thìn", "Tuất") and hm.get("Lộc") == "Cự Môn"):
+        dat("hoa_tinh_phan_quy")
+    if {"Lộc", "Quyền"} <= htp and "Khoa" not in htp:                   # đủ ba hoá đã là Tam Kỳ
+        dat("quyen_loc_hoi_menh", *tp)
+    if "Lộc Tồn" in sm and "Lộc" in hm:
+        dat("loc_hop_uyen_uong")
+    if ("Lộc Tồn" in stp or "Lộc" in htp) and {"Thiên Mã", "Thiên Tướng"} <= stp:
+        dat("loc_ma_boi_an", *tp)
+    lh = _luc_hop(m)
+    if ("Lộc" in hm and "Lộc Tồn" in l.sao(lh)) or ("Lộc Tồn" in sm and "Lộc" in l.hoa(lh)):
+        dat("minh_loc_am_loc", m, lh)
+    if "Khoa" in hm and _co_loc(l, lh):
+        dat("khoa_minh_loc_am", m, lh)
+    ht, hp = set(l.hoa(trai)) & {"Lộc", "Quyền", "Khoa"}, set(l.hoa(phai)) & {"Lộc", "Quyền", "Khoa"}
+    if ht and hp and len(ht | hp) >= 2:
+        dat("khoa_quyen_loc_giap", *giap)
+    if ("Lộc Tồn" in l.sao(trai) and "Lộc" in l.hoa(phai)) or ("Lộc Tồn" in l.sao(phai) and "Lộc" in l.hoa(trai)):
+        dat("song_loc_giap_menh", *giap)
+    if "Thiên Mã" in sm and (("Vũ Khúc" in l.chinh(trai) and "Lộc" in l.hoa(phai))
+                             or ("Vũ Khúc" in l.chinh(phai) and "Lộc" in l.hoa(trai))):
+        dat("tai_loc_giap_ma", *giap)
+    if _giap(l, "Thái Dương", "Thái Âm") or _giap(l, "Thiên Khôi", "Thiên Việt"):
+        dat("quy_tinh_giap_menh", *giap)
+    if "Thất Sát" in cmh and set(TU_SAT) & stp and ("Lộc Tồn" in stp or htp & {"Lộc", "Quyền"}):
+        dat("quyen_sat_hoa_loc", *tp)
+    if "Cự Môn" in cmh and set(TU_SAT) & sm:
+        dat("cu_phung_tu_sat")
+    if {"Địa Không", "Địa Kiếp"} & sm and not ({"Tử Vi", "Thiên Phủ"} & cmh) and "Lộc" not in hm:
+        dat("menh_ly_phung_khong")
 
     sat = [s for s in LUC_SAT if s in stp]
     return [{"ma": k, "cung": [l.ten(i) for i in dict.fromkeys(co[k])], "sat_hoi": sat}

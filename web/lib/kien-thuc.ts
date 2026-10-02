@@ -54,3 +54,12 @@ export function trang(loai: LoaiTrang, slug: string): Promise<TrangKienThuc | nu
 }
 
 export const duongTrang = (loai: LoaiTrang, slug: string) => `/kien-thuc/${CHU_DE_THEO_LOAI[loai]}/${slug}`;
+
+// GN — từ điển thuật ngữ dễ hiểu (engine GET /v1/tu-dien).
+export interface MucTuDien { ma: string; ten: string; bien_the: string[]; han: string | null; mo_dun: string;
+  nhom: string | null; de_hieu: string; vi_du: string | null }
+export async function tuDien(): Promise<{ muc: MucTuDien[]; nguon: string; trang_thai: string } | null> {
+  const d = await lay<{ muc: MucTuDien[]; nguon: string; trang_thai: string }>("/v1/tu-dien");
+  if (!d) noStore();
+  return d;
+}

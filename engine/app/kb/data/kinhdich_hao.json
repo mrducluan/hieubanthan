@@ -1,5 +1,5 @@
 {
- "_nguon": "Chu Dịch — Quái từ, Hào từ, Đại tượng, Thoán truyện (nguyên văn cổ thư công cộng; bản số hoá opencode-tianji 0.6.0, MIT). Dịch nghĩa + ý luận: nháp AI theo lối Nghĩa Lý, chờ đối chiếu.",
+ "_nguon": "Chu Dịch — Quái từ, Hào từ, Đại tượng, Thoán truyện (nguyên văn cổ thư công cộng; bản số hoá opencode-tianji 0.6.0, MIT). Dịch nghĩa + ý luận: nháp AI theo lối Nghĩa Lý, chờ đối chiếu. \"Nói nôm na\" (nom_na): nháp AI — hình ảnh đời thường giúp người mới hiểu, không thay nguyên văn.",
  "source_id": "chu_dich",
  "school_id": "nghia_ly",
  "trang_thai": "nhap_ai",
@@ -14,6 +14,7 @@
     "han": "天行健，君子以自強不息。",
     "dich": "Trời vận hành mạnh mẽ; người quân tử noi theo mà tự cường không nghỉ."
    },
+   "nom_na": "Hình ảnh: trời chồng lên trời — sức mạnh nối tiếp không ngừng. Nôm na: giống một người có nội lực, đang muốn làm việc lớn; được, nhưng mỗi giai đoạn có cách đi riêng, đừng lúc nào cũng lao lên.",
    "thoan": {
     "han": "大哉乾元，萬物資始，乃統天。雲行雨施，品物流形。大明始終，六位時成，時乘六龍以御天。乾道變化，各正性命，保合大和，乃利貞。首出庶物，萬國咸寧。"
    },
@@ -24,7 +25,8 @@
      "ten_han": "初九",
      "han": "潛龍，勿用。",
      "dich": "Rồng còn ẩn dưới nước, chớ dùng.",
-     "y": "Tài chưa đến lúc phát — tích luỹ, đừng vội ra mặt."
+     "y": "Tài chưa đến lúc phát — tích luỹ, đừng vội ra mặt.",
+     "nom_na": "Như sinh viên mới ra trường giỏi đến mấy cũng nên học việc lặng lẽ một thời gian, chưa phải lúc trình diễn."
     },
     {
      "vi_tri": 2,
@@ -32,7 +34,8 @@
      "ten_han": "九二",
      "han": "見龍在田，利見大人。",
      "dich": "Rồng hiện ra trên đồng, lợi gặp bậc đại nhân.",
-     "y": "Năng lực bắt đầu được thấy; tìm người có tầm để học và được nâng đỡ."
+     "y": "Năng lực bắt đầu được thấy; tìm người có tầm để học và được nâng đỡ.",
+     "nom_na": "Như nhân viên mới bắt đầu được sếp để ý: lúc này nên tìm một người thầy, người đỡ đầu tử tế."
     },
     {
      "vi_tri": 3,
@@ -40,7 +43,8 @@
      "ten_han": "九三",
      "han": "君子終日乾乾，夕惕若，厲，无咎。",
      "dich": "Người quân tử suốt ngày hăng hái, đến tối vẫn thận trọng; nguy nhưng không lỗi.",
-     "y": "Đang ở chỗ chênh vênh: làm hết sức nhưng luôn tự xét, thì qua được."
+     "y": "Đang ở chỗ chênh vênh: làm hết sức nhưng luôn tự xét, thì qua được.",
+     "nom_na": "Như người vừa được giao việc lớn: ngày làm hết sức, tối về vẫn tự rà soát — mệt nhưng an toàn."
     },
     {
      "vi_tri": 4,
@@ -48,7 +52,8 @@
      "ten_han": "九四",
      "han": "或躍在淵，无咎。",
      "dich": "Hoặc nhảy lên, hoặc còn ở vực; không lỗi.",
-     "y": "Đứng trước bước ngoặt: thử sức được, lùi cũng được — chọn theo thời, không theo sĩ diện."
+     "y": "Đứng trước bước ngoặt: thử sức được, lùi cũng được — chọn theo thời, không theo sĩ diện.",
+     "nom_na": "Như đứng trước quyết định nhảy việc hay khởi nghiệp: thử được, ở lại cũng không sai — miễn đừng chọn vì sĩ diện."
     },
     {
      "vi_tri": 5,
@@ -56,7 +61,8 @@
      "ten_han": "九五",
      "han": "飛龍在天，利見大人。",
      "dich": "Rồng bay trên trời, lợi gặp bậc đại nhân.",
-     "y": "Thời đắc ý, ở đúng vị trí; dùng tầm ảnh hưởng để quy tụ người giỏi."
+     "y": "Thời đắc ý, ở đúng vị trí; dùng tầm ảnh hưởng để quy tụ người giỏi.",
+     "nom_na": "Như lúc mình đang ở đỉnh phong độ, đúng vị trí: hãy kéo thêm người giỏi về cùng làm."
     },
     {
      "vi_tri": 6,
@@ -64,13 +70,15 @@
      "ten_han": "上九",
      "han": "亢龍有悔。",
      "dich": "Rồng lên quá cao, có hối hận.",
-     "y": "Đỉnh cao rồi thì biết dừng; cố vượt thêm là bắt đầu tụt."
+     "y": "Đỉnh cao rồi thì biết dừng; cố vượt thêm là bắt đầu tụt.",
+     "nom_na": "Như người đã thành công lớn mà vẫn cố vươn thêm cho bằng được: đó là lúc bắt đầu trượt dốc."
     }
    ],
    "dung": {
     "han": "用九：見群龍无首，吉。",
     "dich": "Dùng số chín: thấy bầy rồng không con nào đứng đầu, tốt.",
-    "y": "Mạnh mà không tranh làm đầu — sức mạnh biết khiêm thì lành."
+    "y": "Mạnh mà không tranh làm đầu — sức mạnh biết khiêm thì lành.",
+    "nom_na": "Như một đội toàn người giỏi mà không ai tranh làm trùm — đội ấy mạnh và êm nhất."
    }
   },
   "2": {
@@ -82,6 +90,7 @@
     "han": "地勢坤，君子以厚德載物。",
     "dich": "Thế đất là Khôn; người quân tử lấy đức dày mà chở muôn vật."
    },
+   "nom_na": "Hình ảnh: đất chồng lên đất — rộng, mềm, chở đỡ muôn vật. Nôm na: thời này hợp vai người hỗ trợ, đi sau, làm nền; bền bỉ và bao dung sẽ được việc hơn là giành đi đầu.",
    "thoan": {
     "han": "至哉坤元，萬物資生，乃順承天。坤厚載物，德合无疆。含弘光大，品物咸亨。牝馬地類，行地无疆，柔順利貞。君子攸行，先迷失道，後順得常。西南得朋，乃與類行；東北喪朋，乃終有慶。安貞之吉，應地无疆。"
    },
@@ -92,7 +101,8 @@
      "ten_han": "初六",
      "han": "履霜，堅冰至。",
      "dich": "Giẫm lên sương, biết băng cứng sắp đến.",
-     "y": "Dấu hiệu nhỏ báo việc lớn — xử lý từ lúc mới manh nha."
+     "y": "Dấu hiệu nhỏ báo việc lớn — xử lý từ lúc mới manh nha.",
+     "nom_na": "Như thấy vài vết nứt nhỏ trên tường: sửa ngay từ bây giờ, kẻo mùa mưa tới thì sập cả mảng."
     },
     {
      "vi_tri": 2,
@@ -100,7 +110,8 @@
      "ten_han": "六二",
      "han": "直，方，大，不習无不利。",
      "dich": "Thẳng, vuông, lớn; không cần tập mà không gì không lợi.",
-     "y": "Giữ bản chất ngay thẳng, đúng mực thì tự nhiên thuận."
+     "y": "Giữ bản chất ngay thẳng, đúng mực thì tự nhiên thuận.",
+     "nom_na": "Như một người sống thẳng thắn, đúng mực: không cần mánh khoé gì mà việc vẫn tự xuôi."
     },
     {
      "vi_tri": 3,
@@ -108,7 +119,8 @@
      "ten_han": "六三",
      "han": "含章可貞。或從王事，无成有終。",
      "dich": "Ngậm vẻ đẹp bên trong, có thể giữ chính bền. Hoặc theo việc vua, không tự thành công nhưng có kết quả.",
-     "y": "Giỏi mà không khoe; làm phần mình cho tròn, công trạng để chung."
+     "y": "Giỏi mà không khoe; làm phần mình cho tròn, công trạng để chung.",
+     "nom_na": "Như người làm giỏi nhưng không khoe, để công chung cho cả nhóm — rồi ai cũng nhớ đến mình."
     },
     {
      "vi_tri": 4,
@@ -116,7 +128,8 @@
      "ten_han": "六四",
      "han": "括囊；无咎，无譽。",
      "dich": "Thắt miệng túi; không lỗi, không khen.",
-     "y": "Lúc nhạy cảm: kín lời, giữ mình — không được tiếng nhưng tránh được hoạ."
+     "y": "Lúc nhạy cảm: kín lời, giữ mình — không được tiếng nhưng tránh được hoạ.",
+     "nom_na": "Như lúc trong công ty có chuyện nhạy cảm: kín miệng, không bình luận — không được khen nhưng không vạ lây."
     },
     {
      "vi_tri": 5,
@@ -124,7 +137,8 @@
      "ten_han": "六五",
      "han": "黃裳，元吉。",
      "dich": "Xiêm vàng, rất tốt.",
-     "y": "Ở vị trí cao mà giữ trung, khiêm hoà — đức nội tại làm nên phúc."
+     "y": "Ở vị trí cao mà giữ trung, khiêm hoà — đức nội tại làm nên phúc.",
+     "nom_na": "Như người làm sếp mà vẫn nhã nhặn, giữ mực thước: người ta quý vì cái đức bên trong chứ không vì chức."
     },
     {
      "vi_tri": 6,
@@ -132,13 +146,15 @@
      "ten_han": "上六",
      "han": "龍戰于野，其血玄黃。",
      "dich": "Rồng đánh nhau ngoài đồng, máu đen vàng.",
-     "y": "Mềm mỏng quá đà thành đối đầu; tranh đến cùng thì cả hai cùng tổn."
+     "y": "Mềm mỏng quá đà thành đối đầu; tranh đến cùng thì cả hai cùng tổn.",
+     "nom_na": "Như người nhường nhịn mãi rồi bùng lên cãi tay đôi đến cùng: hai bên đều sứt mẻ."
     }
    ],
    "dung": {
     "han": "用六：利永貞。",
     "dich": "Dùng số sáu: lợi ở chỗ giữ chính bền lâu dài.",
-    "y": "Nhu thuận cần sự bền bỉ lâu dài mới có kết quả."
+    "y": "Nhu thuận cần sự bền bỉ lâu dài mới có kết quả.",
+    "nom_na": "Như người kiên nhẫn giữ đúng đường lâu dài — chậm mà chắc."
    }
   },
   "3": {
@@ -150,6 +166,7 @@
     "han": "雲，雷，屯；君子以經綸。",
     "dich": "Mây và sấm là Truân; người quân tử lấy đó mà kinh luân sắp đặt."
    },
+   "nom_na": "Hình ảnh: mây và sấm vần vũ mà chưa mưa — lúc mọi thứ mới manh nha, còn rối. Nôm na: như mở quán mới, khởi nghiệp mới: nhiều trục trặc ban đầu là bình thường; cần người giúp và sắp xếp từng việc, đừng ôm đồm.",
    "thoan": {
     "han": "屯，剛柔始交而難生，動乎險中，大亨貞。雷雨之動滿盈，天造草昧，宜建侯而不寧。"
    },
@@ -160,7 +177,8 @@
      "ten_han": "初九",
      "han": "磐桓；利居貞，利建侯。",
      "dich": "Chần chừ quanh quẩn; lợi ở yên giữ chính, lợi dựng người giúp.",
-     "y": "Khởi đầu vướng — đứng vững chỗ mình, gom người hợp sức trước."
+     "y": "Khởi đầu vướng — đứng vững chỗ mình, gom người hợp sức trước.",
+     "nom_na": "Như mới khởi nghiệp mà mọi thứ cứ vướng: đứng vững chỗ mình đã, tìm đồng sáng lập, cố vấn trước."
     },
     {
      "vi_tri": 2,
@@ -168,7 +186,8 @@
      "ten_han": "六二",
      "han": "屯如邅如，乘馬班如。匪寇婚媾，女子貞不字，十年乃字。",
      "dich": "Khó khăn quanh co, cưỡi ngựa mà dùng dằng. Chẳng phải giặc, là cầu hôn; người con gái giữ chính chưa chịu gả, mười năm mới gả.",
-     "y": "Có lời mời nhưng chưa đúng lúc; kiên nhẫn chờ duyên chín, đừng nhận vội."
+     "y": "Có lời mời nhưng chưa đúng lúc; kiên nhẫn chờ duyên chín, đừng nhận vội.",
+     "nom_na": "Như có người ngỏ lời hợp tác hay tỏ tình mà mình thấy chưa đúng lúc: cứ từ từ, chờ duyên chín."
     },
     {
      "vi_tri": 3,
@@ -176,7 +195,8 @@
      "ten_han": "六三",
      "han": "即鹿无虞，惟入于林中，君子幾不如舍，往吝。",
      "dich": "Đuổi hươu không có người dẫn đường, chỉ lạc vào rừng; người quân tử biết cơ mà thôi, cứ đi thì hối tiếc.",
-     "y": "Lao vào việc không có người hiểu đường — biết dừng mới khôn."
+     "y": "Lao vào việc không có người hiểu đường — biết dừng mới khôn.",
+     "nom_na": "Như lao vào một lĩnh vực mới không có ai dẫn đường: càng đi càng lạc — biết dừng là khôn."
     },
     {
      "vi_tri": 4,
@@ -184,7 +204,8 @@
      "ten_han": "六四",
      "han": "乘馬班如，求婚媾，往吉，无不利。",
      "dich": "Cưỡi ngựa dùng dằng, đi cầu hôn; đi thì tốt, không gì không lợi.",
-     "y": "Tự mình chưa đủ sức thì chủ động tìm người hợp tác — đi là thuận."
+     "y": "Tự mình chưa đủ sức thì chủ động tìm người hợp tác — đi là thuận.",
+     "nom_na": "Như mình chưa đủ sức làm một mình: chủ động đi gõ cửa người hợp tác, đi là thuận."
     },
     {
      "vi_tri": 5,
@@ -192,7 +213,8 @@
      "ten_han": "九五",
      "han": "屯其膏，小貞吉，大貞凶。",
      "dich": "Khó ban phát ơn trạch; việc nhỏ giữ chính thì tốt, việc lớn cố giữ thì xấu.",
-     "y": "Nguồn lực còn hạn: làm từng việc nhỏ chắc chắn, đừng ôm việc lớn."
+     "y": "Nguồn lực còn hạn: làm từng việc nhỏ chắc chắn, đừng ôm việc lớn.",
+     "nom_na": "Như vốn còn ít: làm từng đơn hàng nhỏ cho chắc, đừng vội nhận dự án to."
     },
     {
      "vi_tri": 6,
@@ -200,7 +222,8 @@
      "ten_han": "上六",
      "han": "乘馬班如，泣血漣如。",
      "dich": "Cưỡi ngựa dùng dằng, khóc ra máu lệ ròng ròng.",
-     "y": "Bế tắc đến cùng mà không đổi cách thì chỉ còn đau khổ — cần thay hướng."
+     "y": "Bế tắc đến cùng mà không đổi cách thì chỉ còn đau khổ — cần thay hướng.",
+     "nom_na": "Như cứ đâm đầu theo cách cũ dù đã bế tắc: chỉ thêm khổ — phải đổi hướng."
     }
    ]
   },
@@ -213,6 +236,7 @@
     "han": "山下出泉，蒙；君子以果行育德。",
     "dich": "Dưới núi có suối chảy ra là Mông; người quân tử quả quyết trong hành động để nuôi dưỡng đức."
    },
+   "nom_na": "Hình ảnh: dưới chân núi có dòng suối mới chảy ra — trí khôn còn non, đang được khai mở. Nôm na: như người học trò, người mới vào nghề: điều quan trọng là thành tâm học, hỏi một lần cho thật, đừng hỏi đi hỏi lại để tìm câu mình thích nghe.",
    "thoan": {
     "han": "蒙，山下有險，險而止，蒙。蒙亨，以亨行時中也。匪我求童蒙，童蒙求我，志應也。初噬告，以剛中也。再三瀆，瀆則不告，瀆蒙也。蒙以養正，聖功也。"
    },
@@ -223,7 +247,8 @@
      "ten_han": "初六",
      "han": "發蒙，利用刑人，用說桎梏，以往吝。",
      "dich": "Mở mang sự mờ tối, lợi dùng phép răn người, để tháo gông cùm; cứ thế mà đi thì hối tiếc.",
-     "y": "Học cần kỷ luật ban đầu, nhưng răn quá mức thì phản tác dụng."
+     "y": "Học cần kỷ luật ban đầu, nhưng răn quá mức thì phản tác dụng.",
+     "nom_na": "Như dạy con: đầu tiên cần nề nếp, nhưng la mắng quá tay thì con lại sinh lì."
     },
     {
      "vi_tri": 2,
@@ -231,7 +256,8 @@
      "ten_han": "九二",
      "han": "包蒙吉；納婦吉；子克家。",
      "dich": "Bao dung kẻ còn mờ tối thì tốt; cưới vợ tốt; con gánh vác được nhà.",
-     "y": "Rộng lượng với người chưa biết — chính sự bao dung giúp mình trưởng thành."
+     "y": "Rộng lượng với người chưa biết — chính sự bao dung giúp mình trưởng thành.",
+     "nom_na": "Như người hướng dẫn kiên nhẫn với người mới: chính mình cũng lớn lên nhờ sự bao dung đó."
     },
     {
      "vi_tri": 3,
@@ -239,7 +265,8 @@
      "ten_han": "六三",
      "han": "勿用取女；見金夫，不有躬，无攸利。",
      "dich": "Chớ lấy người con gái ấy; thấy người giàu thì không giữ được mình, không có gì lợi.",
-     "y": "Gắn bó với người/việc chỉ vì lợi trước mắt thì mất mình."
+     "y": "Gắn bó với người/việc chỉ vì lợi trước mắt thì mất mình.",
+     "nom_na": "Như yêu ai chỉ vì người ta giàu, làm việc gì chỉ vì lương cao: dễ đánh mất chính mình."
     },
     {
      "vi_tri": 4,
@@ -247,7 +274,8 @@
      "ten_han": "六四",
      "han": "困蒙，吝。",
      "dich": "Bị vây trong mờ tối, đáng tiếc.",
-     "y": "Tự cô lập khỏi người hiểu biết thì càng tối — hãy tìm thầy, tìm bạn."
+     "y": "Tự cô lập khỏi người hiểu biết thì càng tối — hãy tìm thầy, tìm bạn.",
+     "nom_na": "Như người tự giam mình, không chịu hỏi ai: càng ngày càng mù mờ — hãy tìm thầy, tìm bạn."
     },
     {
      "vi_tri": 5,
@@ -255,7 +283,8 @@
      "ten_han": "六五",
      "han": "童蒙，吉。",
      "dich": "Trẻ thơ còn mờ tối, tốt.",
-     "y": "Tâm thế khiêm tốn học hỏi như trẻ nhỏ là điều tốt."
+     "y": "Tâm thế khiêm tốn học hỏi như trẻ nhỏ là điều tốt.",
+     "nom_na": "Như một đứa trẻ ham học, hỏi gì cũng hỏi với lòng khiêm tốn: thái độ ấy là điều tốt."
     },
     {
      "vi_tri": 6,
@@ -263,7 +292,8 @@
      "ten_han": "上九",
      "han": "擊蒙；不利為寇，利禦寇。",
      "dich": "Đánh vào sự mờ tối; không lợi làm giặc, lợi chống giặc.",
-     "y": "Sửa sai cần mạnh tay nhưng để phòng hại, không phải để trừng phạt."
+     "y": "Sửa sai cần mạnh tay nhưng để phòng hại, không phải để trừng phạt.",
+     "nom_na": "Như sửa lỗi cho cấp dưới: cứng rắn được, nhưng để họ tiến bộ chứ không phải để trút giận."
     }
    ]
   },
@@ -276,6 +306,7 @@
     "han": "雲上於天，需；君子以飲食宴樂。",
     "dich": "Mây lên trời là Nhu; người quân tử ăn uống yến vui (nuôi sức chờ thời)."
    },
+   "nom_na": "Hình ảnh: mây đã lên trời, mưa sắp đến nhưng chưa tới — phải chờ. Nôm na: như chờ kết quả phỏng vấn, chờ hồ sơ được duyệt: lo cũng không nhanh hơn; ăn ngủ đều, giữ sức, khi thời đến thì đi.",
    "thoan": {
     "han": "需，須也；險在前也。剛健而不陷，其義不困窮矣。需有孚，光亨，貞吉。位乎天位，以正中也。利涉大川，往有功也。"
    },
@@ -286,7 +317,8 @@
      "ten_han": "初九",
      "han": "需于郊。利用恆，无咎。",
      "dich": "Chờ ở ngoài đồng xa. Lợi ở sự bền, không lỗi.",
-     "y": "Nguy còn xa: cứ sống đều đặn, kiên nhẫn, đừng nóng."
+     "y": "Nguy còn xa: cứ sống đều đặn, kiên nhẫn, đừng nóng.",
+     "nom_na": "Như chuyện khó còn ở xa: cứ sinh hoạt bình thường, đừng lo trước cho mệt."
     },
     {
      "vi_tri": 2,
@@ -294,7 +326,8 @@
      "ten_han": "九二",
      "han": "需于沙。小有言，終吉。",
      "dich": "Chờ ở bãi cát. Hơi có lời ra tiếng vào, cuối cùng tốt.",
-     "y": "Đến gần khó khăn, có chút điều tiếng — bình tĩnh thì qua."
+     "y": "Đến gần khó khăn, có chút điều tiếng — bình tĩnh thì qua.",
+     "nom_na": "Như bắt đầu nghe vài lời ra tiếng vào: bình tĩnh, không cần thanh minh nhiều, rồi sẽ qua."
     },
     {
      "vi_tri": 3,
@@ -302,7 +335,8 @@
      "ten_han": "九三",
      "han": "需于泥，致寇至。",
      "dich": "Chờ ở chỗ bùn lầy, rước giặc đến.",
-     "y": "Vội áp sát rủi ro tự mình gây thêm hoạ — lùi lại một bước."
+     "y": "Vội áp sát rủi ro tự mình gây thêm hoạ — lùi lại một bước.",
+     "nom_na": "Như sốt ruột lao vào giữa chỗ rắc rối: tự rước thêm phiền — lùi lại một bước."
     },
     {
      "vi_tri": 4,
@@ -310,7 +344,8 @@
      "ten_han": "六四",
      "han": "需于血，出自穴。",
      "dich": "Chờ trong máu, ra khỏi hang.",
-     "y": "Đang trong nguy hiểm: thuận theo, nhẫn nại để thoát ra."
+     "y": "Đang trong nguy hiểm: thuận theo, nhẫn nại để thoát ra.",
+     "nom_na": "Như đang kẹt giữa chuyện căng thẳng: đừng chống cứng, nhẫn nại tìm đường ra."
     },
     {
      "vi_tri": 5,
@@ -318,7 +353,8 @@
      "ten_han": "九五",
      "han": "需于酒食，貞吉。",
      "dich": "Chờ trong rượu thịt, giữ chính thì tốt.",
-     "y": "Trong lúc chờ mà vẫn an nhiên, chăm lo nội lực — đó là chờ đúng cách."
+     "y": "Trong lúc chờ mà vẫn an nhiên, chăm lo nội lực — đó là chờ đúng cách.",
+     "nom_na": "Như lúc chờ đợi mà vẫn ăn uống, nghỉ ngơi đàng hoàng, chăm lo bản thân: đó là chờ đúng cách."
     },
     {
      "vi_tri": 6,
@@ -326,7 +362,8 @@
      "ten_han": "上六",
      "han": "入于穴，有不速之客三人來，敬之終吉。",
      "dich": "Vào trong hang, có ba người khách không mời mà đến; kính trọng họ thì cuối cùng tốt.",
-     "y": "Biến cố bất ngờ — đón tiếp bằng thái độ cung kính, có khi lại là quý nhân."
+     "y": "Biến cố bất ngờ — đón tiếp bằng thái độ cung kính, có khi lại là quý nhân.",
+     "nom_na": "Như có mấy vị khách không mời mà đến: tiếp đãi tử tế, biết đâu lại là người giúp mình."
     }
    ]
   },
@@ -339,6 +376,7 @@
     "han": "天與水違行，訟；君子以作事謀始。",
     "dich": "Trời và nước đi trái chiều là Tụng; người quân tử làm việc thì mưu tính từ lúc đầu."
    },
+   "nom_na": "Hình ảnh: trời đi lên, nước chảy xuống — hai bên đi ngược chiều nhau, sinh tranh cãi. Nôm na: như vụ tranh chấp hợp đồng, cãi nhau trong nhà: mình có lý cũng nên dừng ở chừng mực, tìm người công tâm phân xử, đừng theo kiện đến cùng.",
    "thoan": {
     "han": "訟，上剛下險，險而健訟。訟有孚窒，惕中吉，剛來而得中也。終凶；訟不可成也。利見大人；尚中正也。不利涉大川；入于淵也。"
    },
@@ -349,7 +387,8 @@
      "ten_han": "初六",
      "han": "不永所事，小有言，終吉。",
      "dich": "Không kéo dài việc tranh chấp, hơi có lời qua tiếng lại, cuối cùng tốt.",
-     "y": "Va chạm nhỏ thì dừng sớm, đừng nuôi cãi vã."
+     "y": "Va chạm nhỏ thì dừng sớm, đừng nuôi cãi vã.",
+     "nom_na": "Như cãi nhau vài câu với đồng nghiệp: dừng sớm, đừng nuôi giận — rồi êm."
     },
     {
      "vi_tri": 2,
@@ -357,7 +396,8 @@
      "ten_han": "九二",
      "han": "不克訟，歸而逋，其邑人三百戶，无眚。",
      "dich": "Kiện không thắng, về mà lánh đi, ấp của mình ba trăm hộ không bị hoạ.",
-     "y": "Biết mình không đủ thế thì rút lui, bảo toàn người của mình."
+     "y": "Biết mình không đủ thế thì rút lui, bảo toàn người của mình.",
+     "nom_na": "Như biết mình thế yếu trong vụ tranh chấp: rút lui, giữ cho người nhà mình yên ổn."
     },
     {
      "vi_tri": 3,
@@ -365,7 +405,8 @@
      "ten_han": "六三",
      "han": "食舊德，貞厲，終吉，或從王事，无成。",
      "dich": "Ăn nhờ đức cũ, giữ chính thì nguy nhưng cuối cùng tốt; hoặc theo việc vua, không tự thành.",
-     "y": "Giữ phần sẵn có, đừng tranh thêm; làm phần mình không kể công."
+     "y": "Giữ phần sẵn có, đừng tranh thêm; làm phần mình không kể công.",
+     "nom_na": "Như giữ phần lương sẵn có, không tranh thêm thưởng với ai: tuy chật vật nhưng yên."
     },
     {
      "vi_tri": 4,
@@ -373,7 +414,8 @@
      "ten_han": "九四",
      "han": "不克訟，復即命渝，安貞吉。",
      "dich": "Kiện không thắng, quay về theo lẽ phải, đổi ý, yên giữ chính thì tốt.",
-     "y": "Quay đầu chấp nhận lẽ phải là thắng chính mình."
+     "y": "Quay đầu chấp nhận lẽ phải là thắng chính mình.",
+     "nom_na": "Như kiện không được thì quay lại nhìn lẽ phải: chịu nhận sai cũng là thắng chính mình."
     },
     {
      "vi_tri": 5,
@@ -381,7 +423,8 @@
      "ten_han": "九五",
      "han": "訟元吉。",
      "dich": "Xử kiện, rất tốt.",
-     "y": "Có người công tâm phân xử — đưa việc ra lẽ phải sẽ tốt."
+     "y": "Có người công tâm phân xử — đưa việc ra lẽ phải sẽ tốt.",
+     "nom_na": "Như có trọng tài, hoà giải viên công tâm: đưa chuyện ra nói phải trái là tốt."
     },
     {
      "vi_tri": 6,
@@ -389,7 +432,8 @@
      "ten_han": "上九",
      "han": "或錫之鞶帶，終朝三褫之。",
      "dich": "Hoặc được ban đai lớn, một buổi sáng bị tước ba lần.",
-     "y": "Thắng nhờ tranh đoạt thì không giữ được lâu."
+     "y": "Thắng nhờ tranh đoạt thì không giữ được lâu.",
+     "nom_na": "Như giành được phần hơn nhờ cãi lý, chèn ép: được hôm nay, mai mất."
     }
    ]
   },
@@ -402,6 +446,7 @@
     "han": "地中有水，師；君子以容民畜眾。",
     "dich": "Trong đất có nước là Sư; người quân tử bao dung dân, nuôi dưỡng chúng."
    },
+   "nom_na": "Hình ảnh: nước ngầm trong lòng đất — sức mạnh của số đông được tổ chức. Nôm na: như dẫn một đội nhóm, một dự án nhiều người: cần mục tiêu chính đáng, kỷ luật rõ và người cầm trịch có kinh nghiệm.",
    "thoan": {
     "han": "師，眾也，貞正也，能以眾正，可以王矣。剛中而應，行險而順，以此毒天下，而民從之，吉又何咎矣。"
    },
@@ -412,7 +457,8 @@
      "ten_han": "初六",
      "han": "師出以律，否臧凶。",
      "dich": "Quân ra phải có kỷ luật; không tốt thì xấu.",
-     "y": "Bắt đầu việc tập thể bằng nguyên tắc rõ ràng."
+     "y": "Bắt đầu việc tập thể bằng nguyên tắc rõ ràng.",
+     "nom_na": "Như dự án vừa khởi động: phải có quy định, phân việc rõ từ đầu, không thì loạn."
     },
     {
      "vi_tri": 2,
@@ -420,7 +466,8 @@
      "ten_han": "九二",
      "han": "在師中吉，无咎，王三錫命。",
      "dich": "Ở giữa quân thì tốt, không lỗi; vua ba lần ban mệnh.",
-     "y": "Người dẫn dắt được tin cậy, ở đúng vị trí — được trao quyền."
+     "y": "Người dẫn dắt được tin cậy, ở đúng vị trí — được trao quyền.",
+     "nom_na": "Như trưởng nhóm được tin cậy, sát anh em: cấp trên giao thêm quyền."
     },
     {
      "vi_tri": 3,
@@ -428,7 +475,8 @@
      "ten_han": "六三",
      "han": "師或輿尸，凶。",
      "dich": "Quân có khi chở xác về, xấu.",
-     "y": "Giao quyền sai người hoặc nhiều người cùng chỉ huy thì thất bại."
+     "y": "Giao quyền sai người hoặc nhiều người cùng chỉ huy thì thất bại.",
+     "nom_na": "Như một việc mà ba bốn người cùng chỉ đạo: chắc chắn hỏng."
     },
     {
      "vi_tri": 4,
@@ -436,7 +484,8 @@
      "ten_han": "六四",
      "han": "師左次，无咎。",
      "dich": "Quân lui về đóng bên trái, không lỗi.",
-     "y": "Biết lùi giữ quân khi thế không lợi là sáng suốt."
+     "y": "Biết lùi giữ quân khi thế không lợi là sáng suốt.",
+     "nom_na": "Như thấy thị trường xấu thì tạm thu quân, giữ vốn: không phải hèn, là khôn."
     },
     {
      "vi_tri": 5,
@@ -444,7 +493,8 @@
      "ten_han": "六五",
      "han": "田有禽，利執言，无咎。長子帥師，弟子輿尸，貞凶。",
      "dich": "Ruộng có thú, lợi bắt giữ, không lỗi. Con trưởng cầm quân; con thứ chở xác về, cố giữ thì xấu.",
-     "y": "Hành động khi có lý do chính đáng và giao cho người đủ tầm."
+     "y": "Hành động khi có lý do chính đáng và giao cho người đủ tầm.",
+     "nom_na": "Như có vấn đề thật cần xử lý: giao đúng người có năng lực, đừng giao cho người chỉ được cái quen."
     },
     {
      "vi_tri": 6,
@@ -452,7 +502,8 @@
      "ten_han": "上六",
      "han": "大君有命，開國承家，小人勿用。",
      "dich": "Vua có mệnh, mở nước nối nhà; kẻ tiểu nhân chớ dùng.",
-     "y": "Thành công rồi, thưởng công nhưng không giao quyền lớn cho kẻ kém đức."
+     "y": "Thành công rồi, thưởng công nhưng không giao quyền lớn cho kẻ kém đức.",
+     "nom_na": "Như xong dự án, khen thưởng ai cũng được, nhưng đừng trao quyền lớn cho người kém đức."
     }
    ]
   },
@@ -465,6 +516,7 @@
     "han": "地上有水，比；先王以建萬國，親諸侯。",
     "dich": "Trên đất có nước là Tỷ; tiên vương lấy đó lập muôn nước, thân với chư hầu."
    },
+   "nom_na": "Hình ảnh: nước trên mặt đất, thấm vào nhau — gần gũi, gắn kết. Nôm na: như chọn đội, chọn bạn, chọn nơi để gắn bó: hãy chân thành và chọn sớm; chần chừ đến khi ai cũng có chỗ rồi thì lỡ.",
    "thoan": {
     "han": "比，吉也，比，輔也，下順從也。原筮元永貞，无咎，以剛中也。不寧方來，上下應也。後夫凶，其道窮也。"
    },
@@ -475,7 +527,8 @@
      "ten_han": "初六",
      "han": "有孚，比之，无咎。有孚盈缶，終來有它吉。",
      "dich": "Có lòng tin mà gần gũi thì không lỗi; lòng tin đầy như vò, rốt cuộc có điều tốt khác đến.",
-     "y": "Kết nối bằng chân thành ngay từ đầu, phúc đến cả ngoài mong đợi."
+     "y": "Kết nối bằng chân thành ngay từ đầu, phúc đến cả ngoài mong đợi.",
+     "nom_na": "Như làm quen ai đó bằng sự thật lòng ngay từ đầu: rồi có khi được giúp cả những điều không ngờ."
     },
     {
      "vi_tri": 2,
@@ -483,7 +536,8 @@
      "ten_han": "六二",
      "han": "比之自內，貞吉。",
      "dich": "Gần gũi từ bên trong, giữ chính thì tốt.",
-     "y": "Gắn bó xuất phát từ lòng mình, không vì cầu lợi."
+     "y": "Gắn bó xuất phát từ lòng mình, không vì cầu lợi.",
+     "nom_na": "Như gắn bó với một người, một nơi vì thật lòng quý chứ không vì lợi: bền."
     },
     {
      "vi_tri": 3,
@@ -491,7 +545,8 @@
      "ten_han": "六三",
      "han": "比之匪人。",
      "dich": "Gần gũi với kẻ không phải người tốt.",
-     "y": "Chọn sai người để thân — cần xét lại các mối quan hệ."
+     "y": "Chọn sai người để thân — cần xét lại các mối quan hệ.",
+     "nom_na": "Như kết thân nhầm người: nên xem lại những mối quan hệ quanh mình."
     },
     {
      "vi_tri": 4,
@@ -499,7 +554,8 @@
      "ten_han": "六四",
      "han": "外比之，貞吉。",
      "dich": "Gần gũi với người bên ngoài, giữ chính thì tốt.",
-     "y": "Hướng tới người có đức ở vị trí cao hơn mà theo."
+     "y": "Hướng tới người có đức ở vị trí cao hơn mà theo.",
+     "nom_na": "Như tìm theo một người thầy, người sếp có đức: theo người tốt là tốt."
     },
     {
      "vi_tri": 5,
@@ -507,7 +563,8 @@
      "ten_han": "九五",
      "han": "顯比，王用三驅，失前禽。邑人不誡，吉。",
      "dich": "Gần gũi sáng tỏ; vua săn vây ba mặt, để thú phía trước chạy thoát; người trong ấp không phải răn, tốt.",
-     "y": "Thu phục bằng sự rộng lượng, ai đến thì đón, ai đi không ép."
+     "y": "Thu phục bằng sự rộng lượng, ai đến thì đón, ai đi không ép.",
+     "nom_na": "Như người lãnh đạo rộng lượng: ai muốn ở thì đón, ai muốn đi không giữ — người ta lại càng phục."
     },
     {
      "vi_tri": 6,
@@ -515,7 +572,8 @@
      "ten_han": "上六",
      "han": "比之无首，凶。",
      "dich": "Gần gũi mà không có đầu mối, xấu.",
-     "y": "Muốn liên kết khi đã muộn, không có gốc chung — khó thành."
+     "y": "Muốn liên kết khi đã muộn, không có gốc chung — khó thành.",
+     "nom_na": "Như muốn vào nhóm khi mọi chuyện đã xong, chẳng có điểm chung: khó mà gắn bó."
     }
    ]
   },
@@ -528,6 +586,7 @@
     "han": "風行天上，小畜；君子以懿文德。",
     "dich": "Gió đi trên trời là Tiểu Súc; người quân tử trau dồi văn đức."
    },
+   "nom_na": "Hình ảnh: gió thổi trên trời, mây dày mà chưa mưa — sức nhỏ đang kìm cái lớn. Nôm na: như việc gần thành mà còn vướng chút: chưa phải lúc làm lớn, hãy trau dồi, tích góp từng chút.",
    "thoan": {
     "han": "小畜，柔得位，而上下應之，曰小畜。健而巽，剛中而志行，乃亨。密雲不雨，尚往也。自我西郊，施未行也。"
    },
@@ -538,7 +597,8 @@
      "ten_han": "初九",
      "han": "復自道，何其咎，吉。",
      "dich": "Trở về đường của mình, có lỗi gì đâu, tốt.",
-     "y": "Thấy lệch thì quay về con đường đúng của mình ngay."
+     "y": "Thấy lệch thì quay về con đường đúng của mình ngay.",
+     "nom_na": "Như thấy mình đang đi lệch: quay lại đường cũ ngay, không có gì phải ngại."
     },
     {
      "vi_tri": 2,
@@ -546,7 +606,8 @@
      "ten_han": "九二",
      "han": "牽復，吉。",
      "dich": "Được dắt cùng trở về, tốt.",
-     "y": "Cùng người đồng chí hướng quay về chính đạo — có bạn thì dễ hơn."
+     "y": "Cùng người đồng chí hướng quay về chính đạo — có bạn thì dễ hơn.",
+     "nom_na": "Như có bạn cùng chí hướng kéo mình về đúng việc: có bạn đi cùng thì dễ hơn."
     },
     {
      "vi_tri": 3,
@@ -554,7 +615,8 @@
      "ten_han": "九三",
      "han": "輿說輻，夫妻反目。",
      "dich": "Xe tuột nan hoa, vợ chồng trợn mắt nhìn nhau.",
-     "y": "Cố tiến khi bị kìm giữ thì xích mích trong nhà, trong nhóm."
+     "y": "Cố tiến khi bị kìm giữ thì xích mích trong nhà, trong nhóm.",
+     "nom_na": "Như cố làm cho bằng được khi đang bị cản: trong nhà, trong nhóm sinh cãi nhau."
     },
     {
      "vi_tri": 4,
@@ -562,7 +624,8 @@
      "ten_han": "六四",
      "han": "有孚，血去惕出，无咎。",
      "dich": "Có lòng tin, máu (nguy) qua đi, lo sợ thoát ra, không lỗi.",
-     "y": "Dùng sự chân thành để hoá giải căng thẳng với người mạnh hơn."
+     "y": "Dùng sự chân thành để hoá giải căng thẳng với người mạnh hơn.",
+     "nom_na": "Như phải làm việc với người mạnh hơn mình: dùng sự chân thành để giảm căng thẳng."
     },
     {
      "vi_tri": 5,
@@ -570,7 +633,8 @@
      "ten_han": "九五",
      "han": "有孚攣如，富以其鄰。",
      "dich": "Có lòng tin ràng buộc nhau, giàu cùng với láng giềng.",
-     "y": "Chia sẻ lợi ích với người cùng chí hướng thì cùng vững."
+     "y": "Chia sẻ lợi ích với người cùng chí hướng thì cùng vững.",
+     "nom_na": "Như mấy người cùng góp vốn, cùng chia lời: giàu cùng nhau thì vững."
     },
     {
      "vi_tri": 6,
@@ -578,7 +642,8 @@
      "ten_han": "上九",
      "han": "既雨既處，尚德載，婦貞厲。月幾望，君子征凶。",
      "dich": "Mưa đã xuống, đã yên; còn quý đức chất chứa; vợ cố giữ thì nguy. Trăng gần rằm, quân tử đi thì xấu.",
-     "y": "Việc đã thành thì dừng lại vun đức; cố đẩy thêm sẽ hỏng."
+     "y": "Việc đã thành thì dừng lại vun đức; cố đẩy thêm sẽ hỏng.",
+     "nom_na": "Như việc đã xong, mưa đã xuống: dừng lại nghỉ, đừng ép thêm kẻo hỏng."
     }
    ]
   },
@@ -591,6 +656,7 @@
     "han": "上天下澤，履；君子以辨上下，安民志。",
     "dich": "Trên trời dưới đầm là Lý; người quân tử phân biệt trên dưới, làm yên chí dân."
    },
+   "nom_na": "Hình ảnh: trời ở trên, đầm ở dưới — người yếu bước theo sau người mạnh, như đi sau lưng hổ. Nôm na: như làm việc với sếp khó tính, đối tác lớn: lễ độ, đúng phép, cẩn trọng từng bước thì không bị \"cắn\".",
    "thoan": {
     "han": "履，柔履剛也。說而應乎乾，是以履虎尾，不咥人，亨。剛中正，履帝位而不疚，光明也。"
    },
@@ -601,7 +667,8 @@
      "ten_han": "初九",
      "han": "素履，往无咎。",
      "dich": "Bước đi mộc mạc, đi thì không lỗi.",
-     "y": "Giữ sự giản dị, đúng bản chất khi khởi sự."
+     "y": "Giữ sự giản dị, đúng bản chất khi khởi sự.",
+     "nom_na": "Như người mới đi làm: cứ giản dị, đúng mình, làm tốt việc của mình là ổn."
     },
     {
      "vi_tri": 2,
@@ -609,7 +676,8 @@
      "ten_han": "九二",
      "han": "履道坦坦，幽人貞吉。",
      "dich": "Đường đi bằng phẳng, người ẩn dật giữ chính thì tốt.",
-     "y": "Đi đường thẳng, ít tham vọng, tâm yên là tốt."
+     "y": "Đi đường thẳng, ít tham vọng, tâm yên là tốt.",
+     "nom_na": "Như sống đường thẳng, không tham chen lấn: lòng yên mà việc cũng yên."
     },
     {
      "vi_tri": 3,
@@ -617,7 +685,8 @@
      "ten_han": "六三",
      "han": "眇能視，跛能履，履虎尾，咥人，凶。武人為于大君。",
      "dich": "Chột mà cho là nhìn được, què mà cho là đi được, dẫm đuôi hổ, bị cắn, xấu. Võ nhân làm như bậc vua.",
-     "y": "Tự đánh giá quá sức mình mà liều — nguy hiểm thật sự."
+     "y": "Tự đánh giá quá sức mình mà liều — nguy hiểm thật sự.",
+     "nom_na": "Như người tay nghề còn non mà nhận làm việc của chuyên gia: dễ gặp hoạ thật."
     },
     {
      "vi_tri": 4,
@@ -625,7 +694,8 @@
      "ten_han": "九四",
      "han": "履虎尾，愬愬，終吉。",
      "dich": "Dẫm đuôi hổ, run sợ cẩn trọng, cuối cùng tốt.",
-     "y": "Làm việc rủi ro nhưng luôn thận trọng thì qua được."
+     "y": "Làm việc rủi ro nhưng luôn thận trọng thì qua được.",
+     "nom_na": "Như làm việc rủi ro cao nhưng luôn thận trọng, kiểm tra kỹ: cuối cùng qua được."
     },
     {
      "vi_tri": 5,
@@ -633,7 +703,8 @@
      "ten_han": "九五",
      "han": "夬履，貞厲。",
      "dich": "Bước đi quả quyết, cố giữ thì nguy.",
-     "y": "Quyết đoán là cần, nhưng cứng nhắc mãi sẽ nguy."
+     "y": "Quyết đoán là cần, nhưng cứng nhắc mãi sẽ nguy.",
+     "nom_na": "Như người quyết đoán: tốt, nhưng cứ cứng nhắc mãi thì có ngày gãy."
     },
     {
      "vi_tri": 6,
@@ -641,7 +712,8 @@
      "ten_han": "上九",
      "han": "視履考祥，其旋元吉。",
      "dich": "Nhìn lại bước đã đi, xét điềm lành; quay về được thì rất tốt.",
-     "y": "Nhìn lại cả hành trình để tự rút ra bài học — đó là phúc."
+     "y": "Nhìn lại cả hành trình để tự rút ra bài học — đó là phúc.",
+     "nom_na": "Như cuối năm nhìn lại hành trình đã đi, rút ra bài học: đó là phúc."
     }
    ]
   },
@@ -654,6 +726,7 @@
     "han": "天地交泰，后以財成天地之道，輔相天地之宜，以左右民。",
     "dich": "Trời đất giao nhau là Thái; bậc vua lấy đó mà tài thành đạo trời đất, giúp lẽ nên của trời đất để nâng đỡ dân."
    },
+   "nom_na": "Hình ảnh: đất ở trên, trời ở dưới — hai khí giao nhau, mọi thứ thông suốt. Nôm na: như thời làm ăn thuận, gia đình êm: tận dụng để cùng nhau tiến, và nhớ chuẩn bị cho lúc đổi chiều.",
    "thoan": {
     "han": "泰，小往大來，吉亨。則是天地交，而萬物通也；上下交，而其志同也。內陽而外陰，內健而外順，內君子而外小人，君子道長，小人道消也。"
    },
@@ -664,7 +737,8 @@
      "ten_han": "初九",
      "han": "拔茅茹，以其彙，征吉。",
      "dich": "Nhổ cỏ tranh kéo theo cả chùm rễ, cùng loài; đi thì tốt.",
-     "y": "Thời thuận: rủ người cùng chí hướng cùng tiến."
+     "y": "Thời thuận: rủ người cùng chí hướng cùng tiến.",
+     "nom_na": "Như thời làm ăn thuận: rủ thêm người tốt cùng làm, kéo nhau cùng lên."
     },
     {
      "vi_tri": 2,
@@ -672,7 +746,8 @@
      "ten_han": "九二",
      "han": "包荒，用馮河，不遐遺，朋亡，得尚于中行。",
      "dich": "Bao dung cả chốn hoang, dám lội qua sông, không bỏ sót người xa, không kéo bè phái, được khen vì đi đúng đạo giữa.",
-     "y": "Lãnh đạo bằng sự rộng lượng và công bằng."
+     "y": "Lãnh đạo bằng sự rộng lượng và công bằng.",
+     "nom_na": "Như người quản lý rộng lượng, công bằng, không kéo bè kéo cánh: được lòng cả người xa."
     },
     {
      "vi_tri": 3,
@@ -680,7 +755,8 @@
      "ten_han": "九三",
      "han": "无平不陂，无往不復，艱貞无咎。勿恤其孚，于食有福。",
      "dich": "Không có bằng nào mãi không nghiêng, không có đi nào mãi không trở lại; khó khăn giữ chính thì không lỗi. Đừng lo, giữ lòng tin thì có phúc lộc.",
-     "y": "Thịnh rồi sẽ có lúc suy — giữ vững giữa lúc thuận để chuẩn bị."
+     "y": "Thịnh rồi sẽ có lúc suy — giữ vững giữa lúc thuận để chuẩn bị.",
+     "nom_na": "Như đang lúc thuận lợi mà vẫn để dành, phòng xa: vì không có gì thuận mãi."
     },
     {
      "vi_tri": 4,
@@ -688,7 +764,8 @@
      "ten_han": "六四",
      "han": "翩翩，不富，以其鄰，不戒以孚。",
      "dich": "Bay chập chờn, không giàu mà cùng láng giềng, không răn mà vẫn tin nhau.",
-     "y": "Người trên biết hạ mình gần người dưới bằng lòng tin."
+     "y": "Người trên biết hạ mình gần người dưới bằng lòng tin.",
+     "nom_na": "Như sếp không ngại xuống ngồi với nhân viên: tin nhau mà không cần răn."
     },
     {
      "vi_tri": 5,
@@ -696,7 +773,8 @@
      "ten_han": "六五",
      "han": "帝乙歸妹，以祉元吉。",
      "dich": "Vua Đế Ất gả em gái, nhờ đó có phúc, rất tốt.",
-     "y": "Người ở vị trí cao biết hạ mình kết giao thì cả hai được phúc."
+     "y": "Người ở vị trí cao biết hạ mình kết giao thì cả hai được phúc.",
+     "nom_na": "Như người có địa vị biết hạ mình kết giao: cả hai bên đều được phúc."
     },
     {
      "vi_tri": 6,
@@ -704,7 +782,8 @@
      "ten_han": "上六",
      "han": "城復于隍，勿用師。自邑告命，貞吝。",
      "dich": "Thành đổ xuống hào; chớ dùng quân. Từ ấp mình ra lệnh, cố giữ thì đáng tiếc.",
-     "y": "Thái cực sinh bĩ — đừng dùng sức cưỡng lại, lo giữ phần gốc."
+     "y": "Thái cực sinh bĩ — đừng dùng sức cưỡng lại, lo giữ phần gốc.",
+     "nom_na": "Như thời thịnh đã qua, mọi thứ bắt đầu sụp: đừng cố chống bằng sức, lo giữ cái gốc."
     }
    ]
   },
@@ -717,6 +796,7 @@
     "han": "天地不交，否；君子以儉德辟難，不可榮以祿。",
     "dich": "Trời đất không giao nhau là Bĩ; người quân tử thu đức kiệm ước để tránh nạn, không thể lấy lộc mà làm vinh."
    },
+   "nom_na": "Hình ảnh: trời ở trên, đất ở dưới mà không giao nhau — trên dưới bế tắc. Nôm na: như thời kinh tế khó, công ty trì trệ, quan hệ lạnh nhạt: bớt phô trương, sống tiết kiệm, giữ mình chờ thời.",
    "thoan": {
     "han": "否之匪人，不利君子貞。大往小來，則是天地不交，而萬物不通也；上下不交，而天下无邦也。內陰而外陽，內柔而外剛，內小人而外君子。小人道長，君子道消也。"
    },
@@ -727,7 +807,8 @@
      "ten_han": "初六",
      "han": "拔茅茹，以其彙，貞吉亨。",
      "dich": "Nhổ cỏ tranh kéo theo cả chùm, cùng loài; giữ chính thì tốt, hanh thông.",
-     "y": "Thời bế tắc: cùng người ngay giữ mình, đừng ra mặt."
+     "y": "Thời bế tắc: cùng người ngay giữ mình, đừng ra mặt.",
+     "nom_na": "Như thời khó: rủ người ngay thẳng cùng giữ mình, chưa nên ra mặt làm gì lớn."
     },
     {
      "vi_tri": 2,
@@ -735,7 +816,8 @@
      "ten_han": "六二",
      "han": "包承。小人吉，大人否，亨。",
      "dich": "Bao dung chiều theo. Tiểu nhân thì tốt, đại nhân thì bế tắc mà hanh thông.",
-     "y": "Người có đức chấp nhận chịu bĩ mà không a dua."
+     "y": "Người có đức chấp nhận chịu bĩ mà không a dua.",
+     "nom_na": "Như người tử tế chịu thiệt chứ không theo đám nịnh bợ: tạm bế tắc nhưng giữ được mình."
     },
     {
      "vi_tri": 3,
@@ -743,7 +825,8 @@
      "ten_han": "六三",
      "han": "包羞。",
      "dich": "Ôm sự xấu hổ.",
-     "y": "Ngồi chỗ không xứng mà lòng biết hổ — dấu hiệu cần đổi."
+     "y": "Ngồi chỗ không xứng mà lòng biết hổ — dấu hiệu cần đổi.",
+     "nom_na": "Như ngồi ở chỗ không xứng đáng mà thấy ngượng: đó là dấu hiệu nên đổi."
     },
     {
      "vi_tri": 4,
@@ -751,7 +834,8 @@
      "ten_han": "九四",
      "han": "有命，无咎，疇離祉。",
      "dich": "Có mệnh trời, không lỗi; bạn bè nương nhau được phúc.",
-     "y": "Thời bắt đầu chuyển; hành động hợp lẽ thì người cùng chí được nhờ."
+     "y": "Thời bắt đầu chuyển; hành động hợp lẽ thì người cùng chí được nhờ.",
+     "nom_na": "Như mọi thứ bắt đầu chuyển: làm việc đúng lẽ thì bạn bè cùng được nhờ."
     },
     {
      "vi_tri": 5,
@@ -759,7 +843,8 @@
      "ten_han": "九五",
      "han": "休否，大人吉。其亡其亡，繫于苞桑。",
      "dich": "Dừng sự bế tắc, đại nhân tốt. Sắp mất rồi, sắp mất rồi — buộc vào gốc dâu bền chắc.",
-     "y": "Lúc thoát bĩ càng phải tự nhắc nguy cơ, buộc chặt vào gốc vững."
+     "y": "Lúc thoát bĩ càng phải tự nhắc nguy cơ, buộc chặt vào gốc vững.",
+     "nom_na": "Như vừa thoát khó khăn: càng phải tự nhắc mình đừng chủ quan, bám chắc vào nền tảng."
     },
     {
      "vi_tri": 6,
@@ -767,7 +852,8 @@
      "ten_han": "上九",
      "han": "傾否，先否後喜。",
      "dich": "Lật đổ bế tắc, trước bế tắc sau vui.",
-     "y": "Bế tắc đến cùng thì đổi — sau khó là vui."
+     "y": "Bế tắc đến cùng thì đổi — sau khó là vui.",
+     "nom_na": "Như khó khăn đã đến tận cùng thì tự nó lật: khổ trước, vui sau."
     }
    ]
   },
@@ -780,6 +866,7 @@
     "han": "天與火，同人；君子以類族辨物。",
     "dich": "Trời với lửa là Đồng Nhân; người quân tử phân loại theo họ, biện rõ sự vật."
    },
+   "nom_na": "Hình ảnh: lửa bốc lên trời — cùng sáng, cùng hướng lên. Nôm na: như tập hợp mọi người vì một mục tiêu chung, công khai, không bè phái: cùng lòng thì làm được việc lớn.",
    "thoan": {
     "han": "同人，柔得位得中，而應乎乾，曰同人。同人曰，同人于野，亨。利涉大川，乾行也。文明以健，中正而應，君子正也。唯君子為能通天下之志。"
    },
@@ -790,7 +877,8 @@
      "ten_han": "初九",
      "han": "同人于門，无咎。",
      "dich": "Cùng người ngay ở cửa, không lỗi.",
-     "y": "Đoàn kết công khai, không bè cánh riêng."
+     "y": "Đoàn kết công khai, không bè cánh riêng.",
+     "nom_na": "Như rủ mọi người cùng làm một cách công khai, minh bạch: không ai trách được."
     },
     {
      "vi_tri": 2,
@@ -798,7 +886,8 @@
      "ten_han": "六二",
      "han": "同人于宗，吝。",
      "dich": "Cùng người trong họ, đáng tiếc.",
-     "y": "Chỉ thân với người phe mình là hẹp hòi."
+     "y": "Chỉ thân với người phe mình là hẹp hòi.",
+     "nom_na": "Như chỉ chơi với người cùng quê, cùng phe: hẹp hòi, đáng tiếc."
     },
     {
      "vi_tri": 3,
@@ -806,7 +895,8 @@
      "ten_han": "九三",
      "han": "伏戎于莽，升其高陵，三歲不興。",
      "dich": "Phục binh trong bụi rậm, lên gò cao, ba năm không dấy lên được.",
-     "y": "Ngầm đối địch mà không đủ chính nghĩa — chờ mãi không làm gì được."
+     "y": "Ngầm đối địch mà không đủ chính nghĩa — chờ mãi không làm gì được.",
+     "nom_na": "Như ngấm ngầm chống ai đó mà mình không có lý: chờ mãi cũng chẳng làm được gì."
     },
     {
      "vi_tri": 4,
@@ -814,7 +904,8 @@
      "ten_han": "九四",
      "han": "乘其墉，弗克攻，吉。",
      "dich": "Leo lên tường thành mà không tấn công được, tốt.",
-     "y": "Biết mình không có lý thì dừng, quay về là tốt."
+     "y": "Biết mình không có lý thì dừng, quay về là tốt.",
+     "nom_na": "Như đã leo lên định tấn công rồi nhận ra mình sai: dừng lại là tốt."
     },
     {
      "vi_tri": 5,
@@ -822,7 +913,8 @@
      "ten_han": "九五",
      "han": "同人，先號咷而後笑。大師克相遇。",
      "dich": "Cùng người: trước kêu khóc, sau cười. Đại quân thắng mới gặp nhau.",
-     "y": "Người đồng lòng bị chia cách, qua thử thách sẽ đoàn tụ."
+     "y": "Người đồng lòng bị chia cách, qua thử thách sẽ đoàn tụ.",
+     "nom_na": "Như hai người thân thiết bị chia cách: khóc trước, cười sau, qua thử thách sẽ gặp lại."
     },
     {
      "vi_tri": 6,
@@ -830,7 +922,8 @@
      "ten_han": "上九",
      "han": "同人于郊，无悔。",
      "dich": "Cùng người ở ngoài cõi xa, không hối.",
-     "y": "Chưa được cùng chí hướng rộng nhưng cũng không ân hận."
+     "y": "Chưa được cùng chí hướng rộng nhưng cũng không ân hận.",
+     "nom_na": "Như mình ở xa, chưa tìm được nhiều người cùng chí: cũng chẳng có gì phải hối."
     }
    ]
   },
@@ -843,6 +936,7 @@
     "han": "火在天上，大有；君子以遏惡揚善，順天休命。",
     "dich": "Lửa ở trên trời là Đại Hữu; người quân tử ngăn điều ác, nêu điều thiện, thuận mệnh tốt lành của trời."
    },
+   "nom_na": "Hình ảnh: mặt trời trên cao chiếu khắp — có nhiều, sở hữu lớn. Nôm na: như lúc tiền bạc, uy tín, thành quả đang dồi dào: dùng cho việc tốt, sống khiêm thì giữ được lâu.",
    "thoan": {
     "han": "大有，柔得尊位，大中而上下應之，曰大有。其德剛健而文明，應乎天而時行，是以元亨。"
    },
@@ -853,7 +947,8 @@
      "ten_han": "初九",
      "han": "无交害，匪咎，艱則无咎。",
      "dich": "Không giao với điều hại, chẳng phải lỗi; biết khó thì không lỗi.",
-     "y": "Mới có chút thành công — vẫn sống như thời khó, tránh xa cám dỗ."
+     "y": "Mới có chút thành công — vẫn sống như thời khó, tránh xa cám dỗ.",
+     "nom_na": "Như mới có chút tiền, chút thành công: cứ sống như hồi còn khó, tránh xa ăn chơi."
     },
     {
      "vi_tri": 2,
@@ -861,7 +956,8 @@
      "ten_han": "九二",
      "han": "大車以載，有攸往，无咎。",
      "dich": "Xe lớn để chở, có chỗ đi, không lỗi.",
-     "y": "Có năng lực gánh trách nhiệm lớn — cứ nhận."
+     "y": "Có năng lực gánh trách nhiệm lớn — cứ nhận.",
+     "nom_na": "Như có năng lực gánh việc lớn: cứ nhận, mình chở được."
     },
     {
      "vi_tri": 3,
@@ -869,7 +965,8 @@
      "ten_han": "九三",
      "han": "公用亨于天子，小人弗克。",
      "dich": "Bậc công hầu dâng lễ lên thiên tử; tiểu nhân không làm được.",
-     "y": "Của cải nên dùng phụng sự chung, không tư lợi."
+     "y": "Của cải nên dùng phụng sự chung, không tư lợi.",
+     "nom_na": "Như người có của mà biết đóng góp cho việc chung: kẻ hẹp lượng thì không làm nổi."
     },
     {
      "vi_tri": 4,
@@ -877,7 +974,8 @@
      "ten_han": "九四",
      "han": "匪其彭，无咎。",
      "dich": "Không khoe sự thịnh của mình, không lỗi.",
-     "y": "Giàu có, thành công mà kín đáo thì an."
+     "y": "Giàu có, thành công mà kín đáo thì an.",
+     "nom_na": "Như người giàu mà không khoe: yên ổn."
     },
     {
      "vi_tri": 5,
@@ -885,7 +983,8 @@
      "ten_han": "六五",
      "han": "厥孚交如，威如；吉。",
      "dich": "Lòng tin giao hoà, có uy nghi; tốt.",
-     "y": "Lãnh đạo bằng chân thành nhưng giữ uy, người tự quy phục."
+     "y": "Lãnh đạo bằng chân thành nhưng giữ uy, người tự quy phục.",
+     "nom_na": "Như người lãnh đạo vừa chân thành vừa có uy: người ta tự nguyện theo."
     },
     {
      "vi_tri": 6,
@@ -893,7 +992,8 @@
      "ten_han": "上九",
      "han": "自天祐之，吉无不利。",
      "dich": "Từ trời giúp đỡ, tốt, không gì không lợi.",
-     "y": "Thuận lẽ trời, giữ khiêm thì được trợ giúp toàn diện."
+     "y": "Thuận lẽ trời, giữ khiêm thì được trợ giúp toàn diện.",
+     "nom_na": "Như sống thuận lẽ, khiêm tốn: được trời giúp, việc gì cũng thuận."
     }
    ]
   },
@@ -906,6 +1006,7 @@
     "han": "地中有山，謙；君子以裒多益寡，稱物平施。",
     "dich": "Trong đất có núi là Khiêm; người quân tử bớt chỗ nhiều, thêm chỗ ít, cân nhắc sự vật mà ban phát cho đều."
    },
+   "nom_na": "Hình ảnh: núi cao mà nằm dưới đất — cái cao tự hạ mình xuống thấp. Nôm na: như người giỏi mà khiêm tốn: ít ai ganh, nhiều người giúp, việc dài lâu mới trọn vẹn.",
    "thoan": {
     "han": "謙，亨，天道下濟而光明，地道卑而上行。天道虧盈而益謙，地道變盈而流謙，鬼神害盈而福謙，人道惡盈而好謙。謙尊而光，卑而不可踰，君子之終也。"
    },
@@ -916,7 +1017,8 @@
      "ten_han": "初六",
      "han": "謙謙君子，用涉大川，吉。",
      "dich": "Khiêm rồi lại khiêm là người quân tử, dùng mà vượt sông lớn, tốt.",
-     "y": "Khiêm tốn tận đáy lòng giúp vượt qua việc khó."
+     "y": "Khiêm tốn tận đáy lòng giúp vượt qua việc khó.",
+     "nom_na": "Như người thật lòng khiêm tốn: nhờ thế mà vượt qua được cả việc khó."
     },
     {
      "vi_tri": 2,
@@ -924,7 +1026,8 @@
      "ten_han": "六二",
      "han": "鳴謙，貞吉。",
      "dich": "Tiếng khiêm vang ra, giữ chính thì tốt.",
-     "y": "Đức khiêm được người biết đến — giữ thật lòng, đừng diễn."
+     "y": "Đức khiêm được người biết đến — giữ thật lòng, đừng diễn.",
+     "nom_na": "Như được tiếng là người khiêm: giữ cho thật, đừng diễn."
     },
     {
      "vi_tri": 3,
@@ -932,7 +1035,8 @@
      "ten_han": "九三",
      "han": "勞謙，君子有終，吉。",
      "dich": "Có công lao mà khiêm, người quân tử có kết quả trọn, tốt.",
-     "y": "Có công mà không kể công là điều quý nhất."
+     "y": "Có công mà không kể công là điều quý nhất.",
+     "nom_na": "Như có công lớn mà không kể công: người ta càng quý."
     },
     {
      "vi_tri": 4,
@@ -940,7 +1044,8 @@
      "ten_han": "六四",
      "han": "无不利，撝謙。",
      "dich": "Không gì không lợi, phát huy sự khiêm.",
-     "y": "Ở giữa người trên kẻ dưới — khiêm hành động chứ không chỉ lời."
+     "y": "Ở giữa người trên kẻ dưới — khiêm hành động chứ không chỉ lời.",
+     "nom_na": "Như đứng giữa sếp và nhân viên: khiêm bằng việc làm, không chỉ bằng lời."
     },
     {
      "vi_tri": 5,
@@ -948,7 +1053,8 @@
      "ten_han": "六五",
      "han": "不富，以其鄰，利用侵伐，无不利。",
      "dich": "Không giàu mà cùng láng giềng, lợi dùng chinh phạt, không gì không lợi.",
-     "y": "Khiêm không phải nhu nhược — cần thì kiên quyết vì lẽ phải."
+     "y": "Khiêm không phải nhu nhược — cần thì kiên quyết vì lẽ phải.",
+     "nom_na": "Như người hiền mà cần cứng thì vẫn cứng: khiêm không có nghĩa là nhu nhược."
     },
     {
      "vi_tri": 6,
@@ -956,7 +1062,8 @@
      "ten_han": "上六",
      "han": "鳴謙，利用行師，征邑國。",
      "dich": "Tiếng khiêm vang ra, lợi dùng quân, đánh ấp nước mình.",
-     "y": "Khiêm mà chưa toại, hãy quay vào sửa chính mình."
+     "y": "Khiêm mà chưa toại, hãy quay vào sửa chính mình.",
+     "nom_na": "Như khiêm mà chưa được việc: quay vào sửa chính mình trước."
     }
    ]
   },
@@ -969,6 +1076,7 @@
     "han": "雷出地奮，豫。先王以作樂崇德，殷薦之上帝，以配祖考。",
     "dich": "Sấm ra khỏi đất, phấn chấn là Dự; tiên vương làm nhạc, tôn đức, dâng lên thượng đế, phối với tổ tiên."
    },
+   "nom_na": "Hình ảnh: sấm nổ ra khỏi đất — muôn vật phấn chấn. Nôm na: như không khí hào hứng trước một sự kiện, một mùa làm ăn: tận dụng niềm vui để chuẩn bị chu đáo, đừng say sưa quên việc.",
    "thoan": {
     "han": "豫，剛應而志行，順以動，豫。豫，順以動，故天地如之，而況建侯行師乎？天地以順動，故日月不過，而四時不忒；聖人以順動，則刑罰清而民服。豫之時義大矣哉！"
    },
@@ -979,7 +1087,8 @@
      "ten_han": "初六",
      "han": "鳴豫，凶。",
      "dich": "Kêu vang niềm vui, xấu.",
-     "y": "Khoe khoang thành công, cậy thế người khác thì hỏng."
+     "y": "Khoe khoang thành công, cậy thế người khác thì hỏng.",
+     "nom_na": "Như vừa được chút thành tích đã khoe khắp nơi: dễ hỏng."
     },
     {
      "vi_tri": 2,
@@ -987,7 +1096,8 @@
      "ten_han": "六二",
      "han": "介于石，不終日，貞吉。",
      "dich": "Vững như đá, không đợi hết ngày, giữ chính thì tốt.",
-     "y": "Tỉnh táo giữa lúc người khác say vui, thấy cơ là đi ngay."
+     "y": "Tỉnh táo giữa lúc người khác say vui, thấy cơ là đi ngay.",
+     "nom_na": "Như giữa bữa tiệc ai cũng say mà mình vẫn tỉnh: thấy việc cần làm là làm ngay."
     },
     {
      "vi_tri": 3,
@@ -995,7 +1105,8 @@
      "ten_han": "六三",
      "han": "盱豫，悔。遲有悔。",
      "dich": "Ngước nhìn mà vui (nịnh), hối; chậm trễ cũng hối.",
-     "y": "Trông chờ người trên để hưởng vui thì ân hận — tự đứng dậy."
+     "y": "Trông chờ người trên để hưởng vui thì ân hận — tự đứng dậy.",
+     "nom_na": "Như chỉ ngóng sếp khen, ngóng người khác cho vui: rồi ân hận — tự đứng dậy mà làm."
     },
     {
      "vi_tri": 4,
@@ -1003,7 +1114,8 @@
      "ten_han": "九四",
      "han": "由豫，大有得。勿疑。朋盍簪。",
      "dich": "Niềm vui do mình mà có, được lớn. Chớ ngờ, bạn bè tụ về.",
-     "y": "Là nguồn cảm hứng cho người khác — chân thành thì người tụ lại."
+     "y": "Là nguồn cảm hứng cho người khác — chân thành thì người tụ lại.",
+     "nom_na": "Như người truyền cảm hứng cho cả nhóm: thật lòng thì mọi người tự tụ về."
     },
     {
      "vi_tri": 5,
@@ -1011,7 +1123,8 @@
      "ten_han": "六五",
      "han": "貞疾，恆不死。",
      "dich": "Giữ chính mà như mang bệnh lâu, nhưng không chết.",
-     "y": "Ở thế bị kìm, luôn có áp lực đè nặng; nhờ áp lực ấy mà không buông thả."
+     "y": "Ở thế bị kìm, luôn có áp lực đè nặng; nhờ áp lực ấy mà không buông thả.",
+     "nom_na": "Như đang bị áp lực đè nặng lâu ngày: khó chịu, nhưng nhờ thế mà không buông thả."
     },
     {
      "vi_tri": 6,
@@ -1019,7 +1132,8 @@
      "ten_han": "上六",
      "han": "冥豫，成有渝，无咎。",
      "dich": "Vui trong mê muội, đã thành mà biết đổi, không lỗi.",
-     "y": "Đắm chìm trong hưởng thụ — tỉnh ra và đổi kịp thì vẫn không lỗi."
+     "y": "Đắm chìm trong hưởng thụ — tỉnh ra và đổi kịp thì vẫn không lỗi.",
+     "nom_na": "Như mải mê hưởng thụ, ăn chơi: tỉnh ra và đổi kịp thì vẫn chưa muộn."
     }
    ]
   },
@@ -1032,6 +1146,7 @@
     "han": "澤中有雷，隨；君子以嚮晦入宴息。",
     "dich": "Trong đầm có sấm là Tuỳ; người quân tử trời tối thì vào nghỉ ngơi."
    },
+   "nom_na": "Hình ảnh: sấm nằm trong đầm, chiều tối thì nghỉ — biết thuận theo thời. Nôm na: như biết theo đúng người, đúng xu thế, đúng nhịp; theo mà vẫn giữ nguyên tắc của mình thì thuận.",
    "thoan": {
     "han": "隨，剛來而下柔，動而說，隨。大亨貞，无咎，而天下隨時，隨時之義大矣哉！"
    },
@@ -1042,7 +1157,8 @@
      "ten_han": "初九",
      "han": "官有渝，貞吉。出門交有功。",
      "dich": "Chức vị có thay đổi, giữ chính thì tốt. Ra khỏi cửa mà giao thiệp thì có công.",
-     "y": "Hoàn cảnh đổi — mở lòng đi ra, giao thiệp rộng mà giữ nguyên tắc."
+     "y": "Hoàn cảnh đổi — mở lòng đi ra, giao thiệp rộng mà giữ nguyên tắc.",
+     "nom_na": "Như vừa đổi việc, đổi chỗ ở: mở lòng ra giao thiệp, quen người mới, nhưng giữ nguyên tắc."
     },
     {
      "vi_tri": 2,
@@ -1050,7 +1166,8 @@
      "ten_han": "六二",
      "han": "系小子，失丈夫。",
      "dich": "Buộc vào kẻ nhỏ, mất người lớn.",
-     "y": "Theo cái gần trước mắt mà bỏ mất điều quan trọng."
+     "y": "Theo cái gần trước mắt mà bỏ mất điều quan trọng.",
+     "nom_na": "Như mải chơi với nhóm bạn vui trước mắt mà lỡ mất người thầy, cơ hội quan trọng."
     },
     {
      "vi_tri": 3,
@@ -1058,7 +1175,8 @@
      "ten_han": "六三",
      "han": "系丈夫，失小子。隨有求得，利居貞。",
      "dich": "Buộc vào người lớn, mất kẻ nhỏ. Theo thì cầu được; lợi ở yên giữ chính.",
-     "y": "Chọn theo điều đáng theo, chấp nhận buông cái nhỏ."
+     "y": "Chọn theo điều đáng theo, chấp nhận buông cái nhỏ.",
+     "nom_na": "Như dám bỏ việc vặt để theo một mục tiêu lớn đáng theo: mất ít, được nhiều."
     },
     {
      "vi_tri": 4,
@@ -1066,7 +1184,8 @@
      "ten_han": "九四",
      "han": "隨有獲，貞凶。有孚在道，以明，何咎。",
      "dich": "Theo mà có thu được, cố giữ thì xấu. Có lòng tin trên đường, sáng suốt thì lỗi gì.",
-     "y": "Được người theo nhiều dễ bị nghi lấn át — giữ minh bạch."
+     "y": "Được người theo nhiều dễ bị nghi lấn át — giữ minh bạch.",
+     "nom_na": "Như mình được nhiều người theo, khiến sếp e ngại: làm việc công khai, minh bạch để khỏi bị nghi."
     },
     {
      "vi_tri": 5,
@@ -1074,7 +1193,8 @@
      "ten_han": "九五",
      "han": "孚于嘉，吉。",
      "dich": "Tin vào điều tốt đẹp, tốt.",
-     "y": "Đặt niềm tin vào cái thiện, cái đúng là chắc chắn lành."
+     "y": "Đặt niềm tin vào cái thiện, cái đúng là chắc chắn lành.",
+     "nom_na": "Như đặt niềm tin vào điều tốt, người tốt: chắc chắn không phí."
     },
     {
      "vi_tri": 6,
@@ -1082,7 +1202,8 @@
      "ten_han": "上六",
      "han": "拘系之，乃從維之。王用亨于西山。",
      "dich": "Buộc giữ lấy, lại theo mà ràng chặt. Vua dùng làm lễ ở núi Tây.",
-     "y": "Gắn bó trọn vẹn với điều mình tin, như lời thề."
+     "y": "Gắn bó trọn vẹn với điều mình tin, như lời thề.",
+     "nom_na": "Như gắn bó trọn đời với điều mình tin, như một lời thề."
     }
    ]
   },
@@ -1095,6 +1216,7 @@
     "han": "山下有風，蠱；君子以振民育德。",
     "dich": "Dưới núi có gió là Cổ; người quân tử chấn hưng dân, nuôi dưỡng đức."
    },
+   "nom_na": "Hình ảnh: gió thổi dưới chân núi, đồ để lâu sinh sâu mọt — việc cũ đã hỏng, cần sửa. Nôm na: như dọn lại một công ty, một nếp nhà đã xuống cấp: dám sửa từ gốc, có kế hoạch trước và sau, thì hồi sinh được.",
    "thoan": {
     "han": "蠱，剛上而柔下，巽而止，蠱。蠱，元亨，而天下治也。利涉大川，往有事也。先甲三日，後甲三日，終則有始，天行也。"
    },
@@ -1105,7 +1227,8 @@
      "ten_han": "初六",
      "han": "幹父之蠱，有子，考无咎，厲終吉。",
      "dich": "Sửa lại việc hư của cha, có con như thế thì cha không lỗi; nguy nhưng cuối cùng tốt.",
-     "y": "Dám sửa sai lầm cũ từ gốc — khó nhưng đáng."
+     "y": "Dám sửa sai lầm cũ từ gốc — khó nhưng đáng.",
+     "nom_na": "Như con cái dám sửa cách làm ăn sai của bố mẹ để lại: vất vả nhưng đáng."
     },
     {
      "vi_tri": 2,
@@ -1113,7 +1236,8 @@
      "ten_han": "九二",
      "han": "幹母之蠱，不可貞。",
      "dich": "Sửa việc hư của mẹ, không thể quá cứng.",
-     "y": "Sửa lỗi người thân, cần mềm mỏng khéo léo."
+     "y": "Sửa lỗi người thân, cần mềm mỏng khéo léo.",
+     "nom_na": "Như góp ý cho mẹ, cho người thân: cần nhẹ nhàng, khéo léo, đừng nói thẳng thừng."
     },
     {
      "vi_tri": 3,
@@ -1121,7 +1245,8 @@
      "ten_han": "九三",
      "han": "幹父之蠱，小有悔，无大咎。",
      "dich": "Sửa việc hư của cha, hơi có hối, không lỗi lớn.",
-     "y": "Sửa hơi quá tay, có chút ân hận nhưng đúng hướng."
+     "y": "Sửa hơi quá tay, có chút ân hận nhưng đúng hướng.",
+     "nom_na": "Như sửa sai hơi mạnh tay khiến người khác phật lòng: có chút áy náy nhưng làm đúng."
     },
     {
      "vi_tri": 4,
@@ -1129,7 +1254,8 @@
      "ten_han": "六四",
      "han": "裕父之蠱，往見吝。",
      "dich": "Dung túng việc hư của cha, đi thì thấy đáng tiếc.",
-     "y": "Nhắm mắt cho qua sai lầm cũ thì càng hỏng."
+     "y": "Nhắm mắt cho qua sai lầm cũ thì càng hỏng.",
+     "nom_na": "Như biết là sai mà cứ để đấy cho êm: càng để càng hỏng."
     },
     {
      "vi_tri": 5,
@@ -1137,7 +1263,8 @@
      "ten_han": "六五",
      "han": "幹父之蠱，用譽。",
      "dich": "Sửa việc hư của cha, được khen.",
-     "y": "Sửa sai bằng cách dùng người giỏi — được tiếng tốt."
+     "y": "Sửa sai bằng cách dùng người giỏi — được tiếng tốt.",
+     "nom_na": "Như sửa cái cũ bằng cách mời người giỏi về làm: được tiếng tốt."
     },
     {
      "vi_tri": 6,
@@ -1145,7 +1272,8 @@
      "ten_han": "上九",
      "han": "不事王侯，高尚其事。",
      "dich": "Không phụng sự vương hầu, giữ cao thượng việc của mình.",
-     "y": "Đứng ngoài vòng danh lợi để giữ lý tưởng riêng."
+     "y": "Đứng ngoài vòng danh lợi để giữ lý tưởng riêng.",
+     "nom_na": "Như người chọn đứng ngoài chuyện danh lợi để giữ lý tưởng riêng."
     }
    ]
   },
@@ -1158,6 +1286,7 @@
     "han": "澤上有地，臨；君子以教思无窮，容保民无疆。",
     "dich": "Trên đầm có đất là Lâm; người quân tử dạy dỗ, lo nghĩ không cùng, bao dung giữ dân không bờ bến."
    },
+   "nom_na": "Hình ảnh: đất ở trên đầm, bờ đất bao lấy nước — người trên đến gần, chăm lo người dưới. Nôm na: như mùa làm ăn đang lên, ảnh hưởng mình đang lớn: tận dụng mà nhớ thời thuận không kéo dài mãi.",
    "thoan": {
     "han": "臨，剛浸而長。說而順，剛中而應，大亨以正，天之道也。至于八月有凶，消不久也。"
    },
@@ -1168,7 +1297,8 @@
      "ten_han": "初九",
      "han": "咸臨，貞吉。",
      "dich": "Cảm hoá mà đến gần, giữ chính thì tốt.",
-     "y": "Đến với người bằng sự cảm thông, giữ ngay thẳng."
+     "y": "Đến với người bằng sự cảm thông, giữ ngay thẳng.",
+     "nom_na": "Như làm quen ai đó bằng sự thông cảm thật lòng: tốt."
     },
     {
      "vi_tri": 2,
@@ -1176,7 +1306,8 @@
      "ten_han": "九二",
      "han": "咸臨，吉无不利。",
      "dich": "Cảm hoá mà đến gần, tốt, không gì không lợi.",
-     "y": "Thời thuận cho việc thu hút người bằng thiện chí."
+     "y": "Thời thuận cho việc thu hút người bằng thiện chí.",
+     "nom_na": "Như thời thuận để kết nối, mời người về làm cùng bằng thiện chí."
     },
     {
      "vi_tri": 3,
@@ -1184,7 +1315,8 @@
      "ten_han": "六三",
      "han": "甘臨，无攸利。既憂之，无咎。",
      "dich": "Đến gần bằng lời ngọt, không có gì lợi; đã biết lo thì không lỗi.",
-     "y": "Dùng lời ngon ngọt để thu phục thì hỏng — tự nhận ra và sửa."
+     "y": "Dùng lời ngon ngọt để thu phục thì hỏng — tự nhận ra và sửa.",
+     "nom_na": "Như dùng lời ngon ngọt để dụ người theo: không ăn thua — biết ra thì sửa kịp."
     },
     {
      "vi_tri": 4,
@@ -1192,7 +1324,8 @@
      "ten_han": "六四",
      "han": "至臨，无咎。",
      "dich": "Đến gần tận nơi, không lỗi.",
-     "y": "Xuống tận nơi, gần gũi thật lòng."
+     "y": "Xuống tận nơi, gần gũi thật lòng.",
+     "nom_na": "Như sếp xuống tận nơi làm cùng nhân viên: người ta quý."
     },
     {
      "vi_tri": 5,
@@ -1200,7 +1333,8 @@
      "ten_han": "六五",
      "han": "知臨，大君之宜，吉。",
      "dich": "Đến gần bằng trí tuệ, việc đáng làm của bậc vua, tốt.",
-     "y": "Biết dùng người giỏi và để họ làm — đó là cách lãnh đạo khôn."
+     "y": "Biết dùng người giỏi và để họ làm — đó là cách lãnh đạo khôn.",
+     "nom_na": "Như người quản lý khôn: chọn đúng người giỏi rồi để họ tự làm."
     },
     {
      "vi_tri": 6,
@@ -1208,7 +1342,8 @@
      "ten_han": "上六",
      "han": "敦臨，吉无咎。",
      "dich": "Đến gần bằng sự đôn hậu, tốt, không lỗi.",
-     "y": "Rộng lượng, hậu đãi người khác là gốc phúc."
+     "y": "Rộng lượng, hậu đãi người khác là gốc phúc.",
+     "nom_na": "Như người rộng rãi, hậu đãi mọi người: đó là gốc của phúc."
     }
    ]
   },
@@ -1221,6 +1356,7 @@
     "han": "風行地上，觀；先王以省方，觀民設教。",
     "dich": "Gió đi trên mặt đất là Quán; tiên vương đi xem xét các phương, quan sát dân mà đặt việc dạy."
    },
+   "nom_na": "Hình ảnh: gió thổi khắp mặt đất — đi khắp nơi để nhìn, và để người khác nhìn vào mình. Nôm na: như lúc nên đứng lùi lại quan sát cho rõ, đồng thời biết mình đang được người khác soi vào làm gương.",
    "thoan": {
     "han": "大觀在上，順而巽，中正以觀天下。觀，盥而不薦，有孚顒若，下觀而化也。觀天之神道，而四時不忒，聖人以神道設教，而天下服矣。"
    },
@@ -1231,7 +1367,8 @@
      "ten_han": "初六",
      "han": "童觀，小人无咎，君子吝。",
      "dich": "Nhìn như trẻ con; tiểu nhân thì không lỗi, quân tử thì đáng tiếc.",
-     "y": "Nhìn việc hời hợt — người gánh trách nhiệm không nên như vậy."
+     "y": "Nhìn việc hời hợt — người gánh trách nhiệm không nên như vậy.",
+     "nom_na": "Như người giữ trọng trách mà nhìn việc hời hợt như trẻ con: không ổn."
     },
     {
      "vi_tri": 2,
@@ -1239,7 +1376,8 @@
      "ten_han": "六二",
      "han": "闚觀，利女貞。",
      "dich": "Nhìn trộm qua khe, lợi cho sự bền chính của người nữ.",
-     "y": "Góc nhìn hẹp, chỉ hợp việc nhỏ trong nhà."
+     "y": "Góc nhìn hẹp, chỉ hợp việc nhỏ trong nhà.",
+     "nom_na": "Như nhìn đời qua khe cửa: chỉ đủ để lo chuyện nhỏ trong nhà."
     },
     {
      "vi_tri": 3,
@@ -1247,7 +1385,8 @@
      "ten_han": "六三",
      "han": "觀我生，進退。",
      "dich": "Xét chính đời mình mà tiến hay lui.",
-     "y": "Tự soi việc mình làm để quyết tiến hay lùi."
+     "y": "Tự soi việc mình làm để quyết tiến hay lùi.",
+     "nom_na": "Như tự xem lại việc mình làm được gì rồi mới quyết tiến hay lùi."
     },
     {
      "vi_tri": 4,
@@ -1255,7 +1394,8 @@
      "ten_han": "六四",
      "han": "觀國之光，利用賓于王。",
      "dich": "Xem ánh sáng của nước, lợi làm khách của vua.",
-     "y": "Hiểu rõ cục diện lớn — lúc tốt để đến với người có tầm."
+     "y": "Hiểu rõ cục diện lớn — lúc tốt để đến với người có tầm.",
+     "nom_na": "Như hiểu rõ cục diện, biết ai có tầm: lúc tốt để đến làm việc với họ."
     },
     {
      "vi_tri": 5,
@@ -1263,7 +1403,8 @@
      "ten_han": "九五",
      "han": "觀我生，君子无咎。",
      "dich": "Xét đời mình, quân tử không lỗi.",
-     "y": "Ở vị trí cao, thường xuyên tự soi hành vi mình."
+     "y": "Ở vị trí cao, thường xuyên tự soi hành vi mình.",
+     "nom_na": "Như người ở vị trí cao thường tự soi xem mình làm gương ra sao."
     },
     {
      "vi_tri": 6,
@@ -1271,7 +1412,8 @@
      "ten_han": "上九",
      "han": "觀其生，君子无咎。",
      "dich": "Xét đời người ấy, quân tử không lỗi.",
-     "y": "Dù đứng ngoài, vẫn nên làm gương để người khác soi vào."
+     "y": "Dù đứng ngoài, vẫn nên làm gương để người khác soi vào.",
+     "nom_na": "Như người đã nghỉ, đứng ngoài, vẫn sống đàng hoàng cho người sau nhìn vào."
     }
    ]
   },
@@ -1284,6 +1426,7 @@
     "han": "雷電噬嗑；先王以明罰敕法。",
     "dich": "Sấm chớp là Phệ Hạp; tiên vương làm rõ hình phạt, răn bảo pháp luật."
    },
+   "nom_na": "Hình ảnh: sấm và chớp cùng đến — có vật cản giữa hai hàm, phải cắn đứt nó. Nôm na: như có một trở ngại, một người gây rối, một quy định bị vi phạm: cần xử lý dứt khoát, rõ ràng, công bằng thì mọi thứ mới khép lại được.",
    "thoan": {
     "han": "頤中有物，曰噬嗑，噬嗑而亨。剛柔分，動而明，雷電合而章。柔得中而上行，雖不當位，利用獄也。"
    },
@@ -1294,7 +1437,8 @@
      "ten_han": "初九",
      "han": "屨校滅趾，无咎。",
      "dich": "Mang cùm chân, mất ngón chân, không lỗi.",
-     "y": "Sai nhỏ bị phạt nhẹ sớm là may — sửa ngay."
+     "y": "Sai nhỏ bị phạt nhẹ sớm là may — sửa ngay.",
+     "nom_na": "Như lỗi nhỏ bị nhắc nhở, phạt nhẹ sớm: là may, sửa ngay thì xong."
     },
     {
      "vi_tri": 2,
@@ -1302,7 +1446,8 @@
      "ten_han": "六二",
      "han": "噬膚滅鼻，无咎。",
      "dich": "Cắn miếng thịt mềm mất cả mũi, không lỗi.",
-     "y": "Xử việc dễ mà hơi quá tay, nhưng chưa sai hướng."
+     "y": "Xử việc dễ mà hơi quá tay, nhưng chưa sai hướng.",
+     "nom_na": "Như xử lý một việc dễ mà hơi quá tay: chưa đến nỗi sai."
     },
     {
      "vi_tri": 3,
@@ -1310,7 +1455,8 @@
      "ten_han": "六三",
      "han": "噬臘肉，遇毒；小吝，无咎。",
      "dich": "Cắn thịt khô, gặp độc; hơi đáng tiếc, không lỗi.",
-     "y": "Việc cũ khó gỡ, gặp phản kháng — vẫn phải làm."
+     "y": "Việc cũ khó gỡ, gặp phản kháng — vẫn phải làm.",
+     "nom_na": "Như đụng vào vấn đề cũ dai dẳng, bị phản ứng: hơi khó chịu nhưng vẫn phải làm."
     },
     {
      "vi_tri": 4,
@@ -1318,7 +1464,8 @@
      "ten_han": "九四",
      "han": "噬乾胏，得金矢，利艱貞，吉。",
      "dich": "Cắn thịt khô có xương, được mũi tên đồng; lợi giữ chính trong gian khó, tốt.",
-     "y": "Việc cứng đầu cần cương trực và kiên trì."
+     "y": "Việc cứng đầu cần cương trực và kiên trì.",
+     "nom_na": "Như xử lý một vụ rất cứng đầu: cần thẳng và bền mới xong."
     },
     {
      "vi_tri": 5,
@@ -1326,7 +1473,8 @@
      "ten_han": "六五",
      "han": "噬乾肉，得黃金，貞厲，无咎。",
      "dich": "Cắn thịt khô, được vàng; giữ chính thì nguy, không lỗi.",
-     "y": "Có quyền xử việc — công bằng, thận trọng thì được."
+     "y": "Có quyền xử việc — công bằng, thận trọng thì được.",
+     "nom_na": "Như người có quyền quyết định: công bằng và thận trọng thì được việc."
     },
     {
      "vi_tri": 6,
@@ -1334,7 +1482,8 @@
      "ten_han": "上九",
      "han": "何校滅耳，凶。",
      "dich": "Mang gông che mất tai, xấu.",
-     "y": "Không nghe lời răn, sai chồng sai thì hoạ lớn."
+     "y": "Không nghe lời răn, sai chồng sai thì hoạ lớn.",
+     "nom_na": "Như người bị nhắc mãi không nghe, sai chồng sai: hậu quả lớn."
     }
    ]
   },
@@ -1347,6 +1496,7 @@
     "han": "山下有火，賁；君子以明庶政，无敢折獄。",
     "dich": "Dưới núi có lửa là Bí; người quân tử làm sáng các việc chính sự thường, không dám dựa vào vẻ ngoài mà xử án."
    },
+   "nom_na": "Hình ảnh: lửa dưới chân núi soi sáng cây cỏ — vẻ đẹp bên ngoài. Nôm na: như chuyện trang trí, hình thức, thương hiệu: làm đẹp là có ích cho việc nhỏ, nhưng đừng để vẻ ngoài lấn mất cái thật bên trong.",
    "thoan": {
     "han": "賁，亨；柔來而文剛，故亨。分剛上而文柔，故小利有攸往。天文也；文明以止，人文也。觀乎天文，以察時變；觀乎人文，以化成天下。"
    },
@@ -1357,7 +1507,8 @@
      "ten_han": "初九",
      "han": "賁其趾，舍車而徒。",
      "dich": "Trang sức ngón chân, bỏ xe mà đi bộ.",
-     "y": "Chọn sự giản dị chân chính hơn hư vinh."
+     "y": "Chọn sự giản dị chân chính hơn hư vinh.",
+     "nom_na": "Như chọn đi bộ thay vì đi xe sang cho oai: giản dị mà đứng thẳng."
     },
     {
      "vi_tri": 2,
@@ -1365,7 +1516,8 @@
      "ten_han": "六二",
      "han": "賁其須。",
      "dich": "Trang sức chòm râu.",
-     "y": "Vẻ đẹp chỉ là phụ, đi theo cái chính."
+     "y": "Vẻ đẹp chỉ là phụ, đi theo cái chính.",
+     "nom_na": "Như bộ râu chỉ đẹp khi đi kèm gương mặt: vẻ ngoài chỉ là phụ."
     },
     {
      "vi_tri": 3,
@@ -1373,7 +1525,8 @@
      "ten_han": "九三",
      "han": "賁如濡如，永貞吉。",
      "dich": "Trang sức như thấm ướt, giữ chính lâu dài thì tốt.",
-     "y": "Đang được đẹp lòng — nhưng đừng chìm trong vẻ ngoài."
+     "y": "Đang được đẹp lòng — nhưng đừng chìm trong vẻ ngoài.",
+     "nom_na": "Như đang được khen, được ngắm nhìn: dễ chịu, nhưng đừng mải mê."
     },
     {
      "vi_tri": 4,
@@ -1381,7 +1534,8 @@
      "ten_han": "六四",
      "han": "賁如皤如，白馬翰如，匪寇婚媾。",
      "dich": "Trang sức như trắng tinh, ngựa trắng như bay; chẳng phải giặc, là cầu hôn.",
-     "y": "Chọn sự mộc mạc thật lòng — điều tưởng đáng ngờ hoá ra tốt."
+     "y": "Chọn sự mộc mạc thật lòng — điều tưởng đáng ngờ hoá ra tốt.",
+     "nom_na": "Như chọn sự mộc mạc thật lòng: tưởng đáng ngờ, hoá ra là duyên tốt."
     },
     {
      "vi_tri": 5,
@@ -1389,7 +1543,8 @@
      "ten_han": "六五",
      "han": "賁于丘園，束帛戔戔，吝，終吉。",
      "dich": "Trang sức nơi vườn đồi, bó lụa ít ỏi; đáng tiếc nhưng cuối cùng tốt.",
-     "y": "Đơn sơ mà thật, ban đầu bị chê, sau được trọng."
+     "y": "Đơn sơ mà thật, ban đầu bị chê, sau được trọng.",
+     "nom_na": "Như tiệc cưới, quà biếu đơn sơ bị chê: nhưng thật lòng, sau được trọng."
     },
     {
      "vi_tri": 6,
@@ -1397,7 +1552,8 @@
      "ten_han": "上九",
      "han": "白賁，无咎。",
      "dich": "Trang sức bằng màu trắng, không lỗi.",
-     "y": "Đẹp nhất là trở về bản chất mộc mạc."
+     "y": "Đẹp nhất là trở về bản chất mộc mạc.",
+     "nom_na": "Như người đã qua hết thời son phấn: đẹp nhất là được là chính mình."
     }
    ]
   },
@@ -1410,6 +1566,7 @@
     "han": "山附地上，剝；上以厚下，安宅。",
     "dich": "Núi bám trên đất là Bác; người trên lấy sự hậu đãi kẻ dưới để yên nhà."
    },
+   "nom_na": "Hình ảnh: núi bị bào mòn dần xuống đất — cái tốt bị gặm nhấm từ dưới lên. Nôm na: như thời suy, nền tảng bị xói mòn: chưa phải lúc làm mới, hãy giữ mình, chăm lo nền móng và người bên dưới.",
    "thoan": {
     "han": "剝，剝也，柔變剛也。不利有攸往，小人長也。順而止之，觀象也。君子尚消息盈虛，天行也。"
    },
@@ -1420,7 +1577,8 @@
      "ten_han": "初六",
      "han": "剝床以足，蔑貞凶。",
      "dich": "Bóc giường từ chân, bỏ mất chính, xấu.",
-     "y": "Nền móng bắt đầu bị xói — nhận diện sớm."
+     "y": "Nền móng bắt đầu bị xói — nhận diện sớm.",
+     "nom_na": "Như chân giường bắt đầu mọt: nhận ra sớm khi nền tảng có vấn đề."
     },
     {
      "vi_tri": 2,
@@ -1428,7 +1586,8 @@
      "ten_han": "六二",
      "han": "剝床以辨，蔑貞凶。",
      "dich": "Bóc giường đến thành, bỏ mất chính, xấu.",
-     "y": "Sự suy đến gần thân — chưa có người giúp, phải giữ mình."
+     "y": "Sự suy đến gần thân — chưa có người giúp, phải giữ mình.",
+     "nom_na": "Như cái hỏng đã lan gần tới mình mà chưa ai giúp: giữ mình cẩn thận."
     },
     {
      "vi_tri": 3,
@@ -1436,7 +1595,8 @@
      "ten_han": "六三",
      "han": "剝之，无咎。",
      "dich": "Bóc đi mà không lỗi.",
-     "y": "Tách khỏi nhóm sai trái dù phải đi một mình."
+     "y": "Tách khỏi nhóm sai trái dù phải đi một mình.",
+     "nom_na": "Như rời một nhóm làm sai, dù phải đi một mình: không có lỗi."
     },
     {
      "vi_tri": 4,
@@ -1444,7 +1604,8 @@
      "ten_han": "六四",
      "han": "剝床以膚，凶。",
      "dich": "Bóc giường đến da thịt, xấu.",
-     "y": "Tổn thất đã chạm tới bản thân — dừng mọi mạo hiểm."
+     "y": "Tổn thất đã chạm tới bản thân — dừng mọi mạo hiểm.",
+     "nom_na": "Như thiệt hại đã chạm vào bản thân: dừng mọi việc liều lĩnh."
     },
     {
      "vi_tri": 5,
@@ -1452,7 +1613,8 @@
      "ten_han": "六五",
      "han": "貫魚，以宮人寵，无不利。",
      "dich": "Xâu cá, dắt cung nhân được sủng, không gì không lợi.",
-     "y": "Biết dẫn dắt đám đông theo trật tự thì hoá nguy thành an."
+     "y": "Biết dẫn dắt đám đông theo trật tự thì hoá nguy thành an.",
+     "nom_na": "Như người biết sắp xếp mọi người vào hàng lối: biến nguy thành yên."
     },
     {
      "vi_tri": 6,
@@ -1460,7 +1622,8 @@
      "ten_han": "上九",
      "han": "碩果不食，君子得輿，小人剝廬。",
      "dich": "Quả lớn không ăn; quân tử được xe, tiểu nhân bị bóc nhà.",
-     "y": "Giữ lại hạt giống tốt cuối cùng — người có đức được nâng đỡ để làm lại."
+     "y": "Giữ lại hạt giống tốt cuối cùng — người có đức được nâng đỡ để làm lại.",
+     "nom_na": "Như giữ lại được trái chín cuối cùng làm giống: người tử tế sẽ được giúp để làm lại."
     }
    ]
   },
@@ -1473,6 +1636,7 @@
     "han": "雷在地中，復；先王以至日閉關，商旅不行，后不省方。",
     "dich": "Sấm ở trong đất là Phục; tiên vương ngày đông chí đóng cửa ải, thương lữ không đi, vua không đi xem xét các phương."
    },
+   "nom_na": "Hình ảnh: sấm còn nằm trong lòng đất — mùa đông chí, dương khí bắt đầu trở lại. Nôm na: như sau giai đoạn tệ, mọi thứ bắt đầu hồi lại: đi từng bước nhỏ, nghỉ đủ, quay về điều đúng là tốt.",
    "thoan": {
     "han": "復亨；剛反，動而以順行，是以出入无疾，朋來无咎。反復其道，七日來復，天行也。利有攸往，剛長也。復其見天地之心乎？"
    },
@@ -1483,7 +1647,8 @@
      "ten_han": "初九",
      "han": "不遠復，无祗悔，元吉。",
      "dich": "Đi chưa xa đã trở lại, không đến nỗi hối, rất tốt.",
-     "y": "Biết sai và quay lại sớm là điều quý nhất."
+     "y": "Biết sai và quay lại sớm là điều quý nhất.",
+     "nom_na": "Như mới đi sai một chút đã quay lại: tốt nhất."
     },
     {
      "vi_tri": 2,
@@ -1491,7 +1656,8 @@
      "ten_han": "六二",
      "han": "休復，吉。",
      "dich": "Trở lại một cách tốt đẹp, tốt.",
-     "y": "Học theo người tốt mà trở về chính đạo."
+     "y": "Học theo người tốt mà trở về chính đạo.",
+     "nom_na": "Như học theo một người tốt mà sửa mình: tốt."
     },
     {
      "vi_tri": 3,
@@ -1499,7 +1665,8 @@
      "ten_han": "六三",
      "han": "頻復，厲无咎。",
      "dich": "Nhiều lần trở lại, nguy nhưng không lỗi.",
-     "y": "Sai rồi sửa, sửa rồi sai — vẫn hơn là không sửa."
+     "y": "Sai rồi sửa, sửa rồi sai — vẫn hơn là không sửa.",
+     "nom_na": "Như bỏ thức khuya, bỏ một thói xấu, bỏ rồi lại tái, tái rồi lại bỏ: vẫn hơn là không bỏ."
     },
     {
      "vi_tri": 4,
@@ -1507,7 +1674,8 @@
      "ten_han": "六四",
      "han": "中行獨復。",
      "dich": "Đi giữa đám đông mà một mình trở lại.",
-     "y": "Dám quay về điều đúng dù người xung quanh không làm."
+     "y": "Dám quay về điều đúng dù người xung quanh không làm.",
+     "nom_na": "Như giữa đám đông làm sai, mình là người duy nhất quay về điều đúng."
     },
     {
      "vi_tri": 5,
@@ -1515,7 +1683,8 @@
      "ten_han": "六五",
      "han": "敦復，无悔。",
      "dich": "Trở lại một cách đôn hậu, không hối.",
-     "y": "Tự xét mình một cách thành thật — không ân hận."
+     "y": "Tự xét mình một cách thành thật — không ân hận.",
+     "nom_na": "Như thành thật tự xét mình: không ân hận."
     },
     {
      "vi_tri": 6,
@@ -1523,7 +1692,8 @@
      "ten_han": "上六",
      "han": "迷復，凶，有災眚。用行師，終有大敗，以其國君，凶；至于十年，不克征。",
      "dich": "Mê muội không trở lại, xấu, có tai hoạ. Dùng quân thì cuối cùng đại bại, vạ đến vua; đến mười năm không đi đánh được.",
-     "y": "Lạc đường mà không chịu quay lại thì hậu quả kéo dài rất lâu."
+     "y": "Lạc đường mà không chịu quay lại thì hậu quả kéo dài rất lâu.",
+     "nom_na": "Như lạc đường mà nhất định không chịu quay lại: hậu quả kéo dài rất lâu."
     }
    ]
   },
@@ -1536,6 +1706,7 @@
     "han": "天下雷行，物與无妄；先王以茂對時，育萬物。",
     "dich": "Dưới trời sấm vang, muôn vật đều không càn bậy; tiên vương thuận thời mà nuôi dưỡng muôn vật."
    },
+   "nom_na": "Hình ảnh: sấm vang dưới trời, muôn vật tự nhiên mà sống — không giả dối, không toan tính. Nôm na: như sống thật, làm thật, không mưu mẹo: thì thuận; còn làm trái lẽ thì dễ chuốc phiền.",
    "thoan": {
     "han": "无妄，剛自外來，而為主於內。動而健，剛中而應，大亨以正，天之命也。其匪正有眚，不利有攸往。无妄之往，何之矣？天命不佑，行矣哉？"
    },
@@ -1546,7 +1717,8 @@
      "ten_han": "初九",
      "han": "无妄，往吉。",
      "dich": "Không càn bậy, đi thì tốt.",
-     "y": "Hành động theo đúng bản tâm, không toan tính — sẽ thuận."
+     "y": "Hành động theo đúng bản tâm, không toan tính — sẽ thuận.",
+     "nom_na": "Như làm việc theo đúng tấm lòng, không tính toán: sẽ thuận."
     },
     {
      "vi_tri": 2,
@@ -1554,7 +1726,8 @@
      "ten_han": "六二",
      "han": "不耕獲，不菑畬，則利有攸往。",
      "dich": "Không cày mà gặt, không vỡ đất mà có ruộng, thì lợi có chỗ đi.",
-     "y": "Làm vì việc đáng làm, không chăm chăm vào thành quả."
+     "y": "Làm vì việc đáng làm, không chăm chăm vào thành quả.",
+     "nom_na": "Như làm vì việc đáng làm, không mải đếm lợi: rồi kết quả tự đến."
     },
     {
      "vi_tri": 3,
@@ -1562,7 +1735,8 @@
      "ten_han": "六三",
      "han": "无妄之災，或繫之牛，行人之得，邑人之災。",
      "dich": "Tai vạ không do mình càn bậy: có người buộc con trâu, người đi đường dắt được, người trong ấp chịu vạ.",
-     "y": "Có khi chịu thiệt dù không làm sai — bình tĩnh đón nhận."
+     "y": "Có khi chịu thiệt dù không làm sai — bình tĩnh đón nhận.",
+     "nom_na": "Như người qua đường dắt mất con trâu mà người trong xóm bị nghi: có khi thiệt dù mình chẳng làm gì sai — bình tĩnh."
     },
     {
      "vi_tri": 4,
@@ -1570,7 +1744,8 @@
      "ten_han": "九四",
      "han": "可貞，无咎。",
      "dich": "Có thể giữ chính, không lỗi.",
-     "y": "Giữ vững điều đúng của mình là đủ."
+     "y": "Giữ vững điều đúng của mình là đủ.",
+     "nom_na": "Như giữ vững điều đúng của mình là đủ, không cần làm gì thêm."
     },
     {
      "vi_tri": 5,
@@ -1578,7 +1753,8 @@
      "ten_han": "九五",
      "han": "无妄之疾，勿藥有喜。",
      "dich": "Bệnh không do mình càn bậy, chớ dùng thuốc mà có mừng.",
-     "y": "Rắc rối không do mình gây ra thường tự qua, đừng vội can thiệp quá mức (ý biểu tượng, không phải lời khuyên y tế)."
+     "y": "Rắc rối không do mình gây ra thường tự qua, đừng vội can thiệp quá mức (ý biểu tượng, không phải lời khuyên y tế).",
+     "nom_na": "Như rắc rối không phải do mình gây ra: thường tự qua, đừng vội làm rối thêm."
     },
     {
      "vi_tri": 6,
@@ -1586,7 +1762,8 @@
      "ten_han": "上九",
      "han": "无妄，行有眚，无攸利。",
      "dich": "Không càn bậy mà cứ đi thì có tai vạ, không gì lợi.",
-     "y": "Dù ý tốt, làm sai thời điểm vẫn hỏng — lúc này nên dừng."
+     "y": "Dù ý tốt, làm sai thời điểm vẫn hỏng — lúc này nên dừng.",
+     "nom_na": "Như ý tốt nhưng làm sai lúc: chỉ hỏng — lúc này nên dừng."
     }
    ]
   },
@@ -1599,6 +1776,7 @@
     "han": "天在山中，大畜；君子以多識前言往行，以畜其德。",
     "dich": "Trời ở trong núi là Đại Súc; người quân tử học nhiều lời nói việc làm của người xưa để chứa đức mình."
    },
+   "nom_na": "Hình ảnh: trời nằm trong lòng núi — chứa được cái rất lớn. Nôm na: như giai đoạn tích luỹ lớn: học, để dành, rèn sức, kìm mình lại; đủ rồi thì đi xa được.",
    "thoan": {
     "han": "大畜，剛健篤實輝光，日新其德，剛上而尚賢。能止健，大正也。不家食吉，養賢也。利涉大川，應乎天也。"
    },
@@ -1609,7 +1787,8 @@
      "ten_han": "初九",
      "han": "有厲利已。",
      "dich": "Có nguy, lợi ở chỗ dừng.",
-     "y": "Bị cản — dừng lại tích luỹ là khôn."
+     "y": "Bị cản — dừng lại tích luỹ là khôn.",
+     "nom_na": "Như đang bị cản: dừng lại tích luỹ là khôn."
     },
     {
      "vi_tri": 2,
@@ -1617,7 +1796,8 @@
      "ten_han": "九二",
      "han": "輿說輹。",
      "dich": "Xe tuột trục.",
-     "y": "Tự tháo bánh xe, chủ động không tiến lúc này."
+     "y": "Tự tháo bánh xe, chủ động không tiến lúc này.",
+     "nom_na": "Như tự tháo bánh xe ra, chủ động không đi lúc này."
     },
     {
      "vi_tri": 3,
@@ -1625,7 +1805,8 @@
      "ten_han": "九三",
      "han": "良馬逐，利艱貞。曰閑輿衛，利有攸往。",
      "dich": "Ngựa tốt rong ruổi, lợi giữ chính trong gian khó. Ngày ngày tập xe và phòng vệ, lợi có chỗ đi.",
-     "y": "Đã đủ sức để tiến — vẫn luyện tập, đề phòng mỗi ngày."
+     "y": "Đã đủ sức để tiến — vẫn luyện tập, đề phòng mỗi ngày.",
+     "nom_na": "Như ngựa tốt đã sẵn sàng: cứ đi, nhưng mỗi ngày vẫn tập luyện, đề phòng."
     },
     {
      "vi_tri": 4,
@@ -1633,7 +1814,8 @@
      "ten_han": "六四",
      "han": "童牛之牿，元吉。",
      "dich": "Gỗ chặn sừng bê non, rất tốt.",
-     "y": "Ngăn cái xấu từ khi còn nhỏ là dễ và tốt nhất."
+     "y": "Ngăn cái xấu từ khi còn nhỏ là dễ và tốt nhất.",
+     "nom_na": "Như dạy con từ bé, sửa thói quen xấu từ đầu: dễ và tốt nhất."
     },
     {
      "vi_tri": 5,
@@ -1641,7 +1823,8 @@
      "ten_han": "六五",
      "han": "豶豕之牙，吉。",
      "dich": "Răng con lợn đã thiến, tốt.",
-     "y": "Xử lý gốc rễ khéo léo thay vì đối đầu trực diện."
+     "y": "Xử lý gốc rễ khéo léo thay vì đối đầu trực diện.",
+     "nom_na": "Như xử lý gốc của vấn đề một cách khéo léo, thay vì đối đầu."
     },
     {
      "vi_tri": 6,
@@ -1649,7 +1832,8 @@
      "ten_han": "上九",
      "han": "何天之衢，亨。",
      "dich": "Ôi đường lớn của trời, hanh thông.",
-     "y": "Tích luỹ đủ rồi — con đường mở rộng."
+     "y": "Tích luỹ đủ rồi — con đường mở rộng.",
+     "nom_na": "Như đã tích đủ: đường trước mặt rộng mở."
     }
    ]
   },
@@ -1662,6 +1846,7 @@
     "han": "山下有雷，頤；君子以慎言語，節飲食。",
     "dich": "Dưới núi có sấm là Di; người quân tử cẩn thận lời nói, tiết độ ăn uống."
    },
+   "nom_na": "Hình ảnh: sấm dưới chân núi, như cái miệng đang nhai — chuyện nuôi dưỡng. Nôm na: như chuyện ăn uống, lời ăn tiếng nói và cách mình nuôi thân, nuôi người: xem mình nuôi cái gì, thì biết mình là ai.",
    "thoan": {
     "han": "頤貞吉，養正則吉也。觀頤，觀其所養也；自求口實，觀其自養也。天地養萬物，聖人養賢，以及萬民；頤之時大矣哉！"
    },
@@ -1672,7 +1857,8 @@
      "ten_han": "初九",
      "han": "舍爾靈龜，觀我朵頤，凶。",
      "dich": "Bỏ con rùa thiêng của ngươi, nhìn ta mà trễ hàm thèm thuồng, xấu.",
-     "y": "Bỏ năng lực sẵn có của mình để thèm muốn cái của người."
+     "y": "Bỏ năng lực sẵn có của mình để thèm muốn cái của người.",
+     "nom_na": "Như bỏ nghề sẵn có của mình để thèm thuồng việc nhà người ta."
     },
     {
      "vi_tri": 2,
@@ -1680,7 +1866,8 @@
      "ten_han": "六二",
      "han": "顛頤，拂經，于丘頤，征凶。",
      "dich": "Ngược lại xin người dưới nuôi, trái lẽ thường, xin ở gò cao, đi thì xấu.",
-     "y": "Dựa dẫm sai chỗ, xin người không đáng xin."
+     "y": "Dựa dẫm sai chỗ, xin người không đáng xin.",
+     "nom_na": "Như xin xỏ dựa dẫm nhầm chỗ, nhầm người."
     },
     {
      "vi_tri": 3,
@@ -1688,7 +1875,8 @@
      "ten_han": "六三",
      "han": "拂頤，貞凶，十年勿用，无攸利。",
      "dich": "Trái đạo nuôi dưỡng, giữ thế thì xấu, mười năm chớ dùng, không gì lợi.",
-     "y": "Nuôi mình bằng cách sai (tham hưởng) thì hại lâu dài."
+     "y": "Nuôi mình bằng cách sai (tham hưởng) thì hại lâu dài.",
+     "nom_na": "Như nuôi thân bằng cách hưởng thụ sai, tiền dễ: hại lâu dài."
     },
     {
      "vi_tri": 4,
@@ -1696,7 +1884,8 @@
      "ten_han": "六四",
      "han": "顛頤，吉，虎視眈眈，其欲逐逐，无咎。",
      "dich": "Ngược lại xin nuôi, tốt; hổ nhìn chằm chằm, ham muốn liên tiếp, không lỗi.",
-     "y": "Cầu người giỏi giúp để nuôi việc chung — chuyên chú như hổ rình mồi."
+     "y": "Cầu người giỏi giúp để nuôi việc chung — chuyên chú như hổ rình mồi.",
+     "nom_na": "Như tìm người giỏi về giúp việc chung: chăm chú như hổ rình mồi, tốt."
     },
     {
      "vi_tri": 5,
@@ -1704,7 +1893,8 @@
      "ten_han": "六五",
      "han": "拂經，居貞吉，不可涉大川。",
      "dich": "Trái lẽ thường, ở yên giữ chính thì tốt, không thể vượt sông lớn.",
-     "y": "Biết mình chưa đủ sức, nương người giỏi và giữ yên."
+     "y": "Biết mình chưa đủ sức, nương người giỏi và giữ yên.",
+     "nom_na": "Như biết mình chưa đủ sức: nương người giỏi, giữ yên, chưa làm lớn."
     },
     {
      "vi_tri": 6,
@@ -1712,7 +1902,8 @@
      "ten_han": "上九",
      "han": "由頤，厲吉，利涉大川。",
      "dich": "Do đó mà được nuôi, nguy mà tốt, lợi vượt sông lớn.",
-     "y": "Là chỗ dựa cho nhiều người — trách nhiệm lớn nhưng làm được việc lớn."
+     "y": "Là chỗ dựa cho nhiều người — trách nhiệm lớn nhưng làm được việc lớn.",
+     "nom_na": "Như mình là trụ cột của cả nhà, cả nhóm: nặng gánh nhưng làm được việc lớn."
     }
    ]
   },
@@ -1725,6 +1916,7 @@
     "han": "澤滅木，大過；君子以獨立不懼，遯世无悶。",
     "dich": "Đầm ngập cây là Đại Quá; người quân tử đứng một mình không sợ, lánh đời không buồn."
    },
+   "nom_na": "Hình ảnh: nước đầm dâng ngập cả cây — cái cột nhà gánh quá sức, oằn xuống. Nôm na: như áp lực vượt quá mức bình thường: cần hành động khác thường, cẩn trọng tối đa, và đừng gồng một mình.",
    "thoan": {
     "han": "大過，大者過也。棟橈，本末弱也。剛過而中，巽而說行，利有攸往，乃亨。大過之時大矣哉！"
    },
@@ -1735,7 +1927,8 @@
      "ten_han": "初六",
      "han": "藉用白茅，无咎。",
      "dich": "Lót bằng cỏ tranh trắng, không lỗi.",
-     "y": "Việc lớn quá sức — cẩn trọng tối đa từ bước đầu."
+     "y": "Việc lớn quá sức — cẩn trọng tối đa từ bước đầu.",
+     "nom_na": "Như việc lớn quá sức: cẩn thận tối đa từ bước đầu, lót kỹ mọi thứ."
     },
     {
      "vi_tri": 2,
@@ -1743,7 +1936,8 @@
      "ten_han": "九二",
      "han": "枯楊生稊，老夫得其女妻，无不利。",
      "dich": "Cây dương khô nảy chồi, ông già được vợ trẻ, không gì không lợi.",
-     "y": "Trong lúc cực đoan, sự kết hợp mới mang lại sinh khí."
+     "y": "Trong lúc cực đoan, sự kết hợp mới mang lại sinh khí.",
+     "nom_na": "Như cây khô nảy chồi: trong lúc cùng cực, một sự kết hợp mới đem lại sức sống."
     },
     {
      "vi_tri": 3,
@@ -1751,7 +1945,8 @@
      "ten_han": "九三",
      "han": "棟橈，凶。",
      "dich": "Cột nóc oằn, xấu.",
-     "y": "Gồng gánh một mình, cứng nhắc — dễ gãy."
+     "y": "Gồng gánh một mình, cứng nhắc — dễ gãy.",
+     "nom_na": "Như một mình gồng gánh, không chịu ai giúp: dễ gãy."
     },
     {
      "vi_tri": 4,
@@ -1759,7 +1954,8 @@
      "ten_han": "九四",
      "han": "棟隆，吉；有它吝。",
      "dich": "Cột nóc vồng lên, tốt; có điều khác thì đáng tiếc.",
-     "y": "Có người đỡ, vững — nhưng đừng để lợi riêng chen vào."
+     "y": "Có người đỡ, vững — nhưng đừng để lợi riêng chen vào.",
+     "nom_na": "Như có người đỡ nên vững: nhưng đừng để lợi riêng chen vào."
     },
     {
      "vi_tri": 5,
@@ -1767,7 +1963,8 @@
      "ten_han": "九五",
      "han": "枯楊生華，老婦得士夫，无咎无譽。",
      "dich": "Cây dương khô nở hoa, bà già được chồng trẻ, không lỗi không khen.",
-     "y": "Hưng thịnh nhất thời, không bền — đừng ỷ vào."
+     "y": "Hưng thịnh nhất thời, không bền — đừng ỷ vào.",
+     "nom_na": "Như cây khô nở hoa: rộ lên một lúc rồi thôi — đừng ỷ vào."
     },
     {
      "vi_tri": 6,
@@ -1775,7 +1972,8 @@
      "ten_han": "上六",
      "han": "過涉滅頂，凶，无咎。",
      "dich": "Lội quá sâu ngập đầu, xấu, không lỗi.",
-     "y": "Vì nghĩa mà dấn thân quá sức — đau nhưng không đáng trách."
+     "y": "Vì nghĩa mà dấn thân quá sức — đau nhưng không đáng trách.",
+     "nom_na": "Như vì nghĩa mà lội quá sâu: đau, nhưng không ai trách được."
     }
    ]
   },
@@ -1788,6 +1986,7 @@
     "han": "水洊至，習坎；君子以常德行，習教事。",
     "dich": "Nước chảy tới liên tiếp là Tập Khảm; người quân tử giữ đức hạnh thường hằng, tập luyện việc dạy dỗ."
    },
+   "nom_na": "Hình ảnh: nước chảy tiếp nước, hố tiếp hố — hiểm nguy chồng chất. Nôm na: như đang trong giai đoạn khó khăn nối tiếp: giữ lòng tin và sự thật thà như dòng nước cứ chảy, từng bước nhỏ mà qua.",
    "thoan": {
     "han": "習坎，重險也。水流而不盈，行險而不失其信。維心亨，乃以剛中也。行有尚，往有功也。天險不可升也，地險山川丘陵也，王公設險以守其國，坎之時用大矣哉！"
    },
@@ -1798,7 +1997,8 @@
      "ten_han": "初六",
      "han": "習坎，入于坎窞，凶。",
      "dich": "Hiểm chồng hiểm, rơi vào đáy hố, xấu.",
-     "y": "Quen dần với nguy hiểm mà mất cảnh giác — rơi sâu hơn."
+     "y": "Quen dần với nguy hiểm mà mất cảnh giác — rơi sâu hơn.",
+     "nom_na": "Như quen dần với nguy hiểm mà lơ là: rơi sâu hơn."
     },
     {
      "vi_tri": 2,
@@ -1806,7 +2006,8 @@
      "ten_han": "九二",
      "han": "坎有險，求小得。",
      "dich": "Trong hiểm có nguy, cầu điều nhỏ thì được.",
-     "y": "Đừng mong thoát ngay; từng bước nhỏ là được."
+     "y": "Đừng mong thoát ngay; từng bước nhỏ là được.",
+     "nom_na": "Như đang khó: đừng mong thoát ngay, được từng việc nhỏ là tốt."
     },
     {
      "vi_tri": 3,
@@ -1814,7 +2015,8 @@
      "ten_han": "六三",
      "han": "來之坎坎，險且枕，入于坎窞，勿用。",
      "dich": "Đến hay đi đều hiểm, nguy hiểm lại sâu, rơi vào đáy hố, chớ dùng.",
-     "y": "Tiến lùi đều kẹt — đứng yên chờ, đừng hành động."
+     "y": "Tiến lùi đều kẹt — đứng yên chờ, đừng hành động.",
+     "nom_na": "Như tiến cũng kẹt, lùi cũng kẹt: đứng yên chờ, đừng làm gì thêm."
     },
     {
      "vi_tri": 4,
@@ -1822,7 +2024,8 @@
      "ten_han": "六四",
      "han": "樽酒簋貳，用缶，納約自牖，終无咎。",
      "dich": "Một vò rượu, hai bát cơm, dùng đồ sành; đưa lời ước hẹn qua cửa sổ, cuối cùng không lỗi.",
-     "y": "Lúc khó dùng sự chân thành giản dị, đi đường vòng khéo léo."
+     "y": "Lúc khó dùng sự chân thành giản dị, đi đường vòng khéo léo.",
+     "nom_na": "Như lúc khó, mời nhau bữa cơm đạm bạc, nói lời thật lòng, đi đường vòng khéo léo: qua được."
     },
     {
      "vi_tri": 5,
@@ -1830,7 +2033,8 @@
      "ten_han": "九五",
      "han": "坎不盈，祗既平，无咎。",
      "dich": "Nước hố chưa đầy, sắp đến chỗ phẳng, không lỗi.",
-     "y": "Sắp qua cơn hiểm — đừng tham làm thêm, giữ bình."
+     "y": "Sắp qua cơn hiểm — đừng tham làm thêm, giữ bình.",
+     "nom_na": "Như sắp qua cơn khó: đừng tham làm thêm, giữ bình tĩnh."
     },
     {
      "vi_tri": 6,
@@ -1838,7 +2042,8 @@
      "ten_han": "上六",
      "han": "係用徽纆，寘于叢棘，三歲不得，凶。",
      "dich": "Trói bằng dây thừng, bỏ vào bụi gai, ba năm không thoát, xấu.",
-     "y": "Mắc kẹt do sai lầm kéo dài — phải tự xét lại gốc rễ."
+     "y": "Mắc kẹt do sai lầm kéo dài — phải tự xét lại gốc rễ.",
+     "nom_na": "Như bị trói vì sai lầm kéo dài: phải tự xét lại từ gốc."
     }
    ]
   },
@@ -1851,6 +2056,7 @@
     "han": "明兩作離，大人以繼明照于四方。",
     "dich": "Sáng hai lần dấy lên là Ly; bậc đại nhân nối tiếp ánh sáng mà soi khắp bốn phương."
    },
+   "nom_na": "Hình ảnh: lửa nối lửa, mặt trời nối mặt trời — sáng và bám vào nhau. Nôm na: như ngọn lửa phải bám vào củi mới cháy: muốn sáng lâu thì phải dựa vào cái đúng, giữ mềm mỏng, đừng bốc lên quá nhanh.",
    "thoan": {
     "han": "離，麗也；日月麗乎天，百穀草木麗乎土，重明以麗乎正，乃化成天下。柔麗乎中正，故亨；是以畜牝牛吉也。"
    },
@@ -1861,7 +2067,8 @@
      "ten_han": "初九",
      "han": "履錯然，敬之无咎。",
      "dich": "Bước chân lộn xộn, kính cẩn thì không lỗi.",
-     "y": "Khởi đầu bộn bề — giữ thái độ thận trọng, nghiêm túc."
+     "y": "Khởi đầu bộn bề — giữ thái độ thận trọng, nghiêm túc.",
+     "nom_na": "Như ngày đầu bộn bề, nhiều việc: giữ thái độ nghiêm túc, cẩn thận."
     },
     {
      "vi_tri": 2,
@@ -1869,7 +2076,8 @@
      "ten_han": "六二",
      "han": "黃離，元吉。",
      "dich": "Ánh sáng màu vàng, rất tốt.",
-     "y": "Sáng suốt mà giữ trung đạo — tốt đẹp nhất."
+     "y": "Sáng suốt mà giữ trung đạo — tốt đẹp nhất.",
+     "nom_na": "Như người sáng suốt mà ôn hoà, giữ mực: tốt nhất."
     },
     {
      "vi_tri": 3,
@@ -1877,7 +2085,8 @@
      "ten_han": "九三",
      "han": "日昃之離，不鼓缶而歌，則大耋之嗟，凶。",
      "dich": "Ánh sáng mặt trời xế bóng, không gõ chum mà hát thì người già than thở, xấu.",
-     "y": "Một giai đoạn sắp qua — đón nhận an nhiên thay vì luyến tiếc."
+     "y": "Một giai đoạn sắp qua — đón nhận an nhiên thay vì luyến tiếc.",
+     "nom_na": "Như mặt trời xế chiều, một giai đoạn sắp khép: đón nhận nhẹ nhàng thay vì than tiếc."
     },
     {
      "vi_tri": 4,
@@ -1885,7 +2094,8 @@
      "ten_han": "九四",
      "han": "突如其來如，焚如，死如，棄如。",
      "dich": "Đột ngột mà đến, bừng cháy, tắt lịm, bị bỏ rơi.",
-     "y": "Bùng lên quá nhanh, quá mạnh thì cũng tàn nhanh (ý biểu tượng)."
+     "y": "Bùng lên quá nhanh, quá mạnh thì cũng tàn nhanh (ý biểu tượng).",
+     "nom_na": "Như người nổi lên quá nhanh, quá ồn ào: cũng tắt nhanh."
     },
     {
      "vi_tri": 5,
@@ -1893,7 +2103,8 @@
      "ten_han": "六五",
      "han": "出涕沱若，戚嗟若，吉。",
      "dich": "Nước mắt ròng ròng, buồn thương than thở, tốt.",
-     "y": "Biết lo âu, tự xét trong thời thế khó — chính điều đó giữ được tốt lành."
+     "y": "Biết lo âu, tự xét trong thời thế khó — chính điều đó giữ được tốt lành.",
+     "nom_na": "Như người biết lo, biết tự xét giữa lúc khó: chính điều đó giữ được bình an."
     },
     {
      "vi_tri": 6,
@@ -1901,7 +2112,8 @@
      "ten_han": "上九",
      "han": "王用出征，有嘉折首，獲匪其醜，无咎。",
      "dich": "Vua dùng ra quân, có công chém đầu đảng, bắt kẻ không phải đồng loại, không lỗi.",
-     "y": "Xử lý dứt khoát cái gốc vấn đề, khoan dung với người bị lôi kéo."
+     "y": "Xử lý dứt khoát cái gốc vấn đề, khoan dung với người bị lôi kéo.",
+     "nom_na": "Như xử lý dứt khoát kẻ cầm đầu gây rối, còn người bị lôi kéo thì khoan dung."
     }
    ]
   },
@@ -1914,6 +2126,7 @@
     "han": "山上有澤，咸，君子以虛受人。",
     "dich": "Trên núi có đầm là Hàm; người quân tử để lòng trống mà tiếp nhận người."
    },
+   "nom_na": "Hình ảnh: đầm trên núi, núi đỡ đầm, nước thấm xuống núi — hai bên cảm nhau. Nôm na: như rung động, thu hút giữa hai người hay hai bên: cảm bằng sự chân thành và lòng rộng mở, không toan tính.",
    "thoan": {
     "han": "咸，感也。柔上而剛下，二氣感應以相與，止而說，男下女，是以亨利貞，取女吉也。天地感而萬物化生，聖人感人心而天下和平，觀其所感，而天地萬物之情可見矣。"
    },
@@ -1924,7 +2137,8 @@
      "ten_han": "初六",
      "han": "咸其拇。",
      "dich": "Cảm ở ngón chân cái.",
-     "y": "Cảm xúc mới nhen — chưa đủ để hành động."
+     "y": "Cảm xúc mới nhen — chưa đủ để hành động.",
+     "nom_na": "Như rung động mới chớm: chưa đủ để làm gì."
     },
     {
      "vi_tri": 2,
@@ -1932,7 +2146,8 @@
      "ten_han": "六二",
      "han": "咸其腓，凶，居吉。",
      "dich": "Cảm ở bắp chân, xấu; ở yên thì tốt.",
-     "y": "Bị cuốn theo cảm xúc mà vội đi thì hỏng — chờ."
+     "y": "Bị cuốn theo cảm xúc mà vội đi thì hỏng — chờ.",
+     "nom_na": "Như bị cảm xúc kéo đi vội vàng: dễ hỏng — chờ thêm."
     },
     {
      "vi_tri": 3,
@@ -1940,7 +2155,8 @@
      "ten_han": "九三",
      "han": "咸其股，執其隨，往吝。",
      "dich": "Cảm ở đùi, cố giữ theo người, đi thì đáng tiếc.",
-     "y": "Chạy theo người khác mà không có chủ kiến."
+     "y": "Chạy theo người khác mà không có chủ kiến.",
+     "nom_na": "Như cứ chạy theo người khác, không có chính kiến: đáng tiếc."
     },
     {
      "vi_tri": 4,
@@ -1948,7 +2164,8 @@
      "ten_han": "九四",
      "han": "貞吉，悔亡，憧憧往來，朋從爾思。",
      "dich": "Giữ chính thì tốt, hối mất; lòng dạ không yên qua lại, bạn bè theo ý ngươi.",
-     "y": "Cảm bằng lòng chân thành, đừng toan tính — nghĩ nhiều quá thì chỉ người thân cận theo."
+     "y": "Cảm bằng lòng chân thành, đừng toan tính — nghĩ nhiều quá thì chỉ người thân cận theo.",
+     "nom_na": "Như thích ai mà cứ tính toán, nghĩ nhiều: chỉ được vài người thân theo — hãy thật lòng."
     },
     {
      "vi_tri": 5,
@@ -1956,7 +2173,8 @@
      "ten_han": "九五",
      "han": "咸其脢，无悔。",
      "dich": "Cảm ở thịt lưng, không hối.",
-     "y": "Cảm mà không lay động — vững nhưng hơi khép kín."
+     "y": "Cảm mà không lay động — vững nhưng hơi khép kín.",
+     "nom_na": "Như người khó rung động: vững vàng nhưng hơi khép kín."
     },
     {
      "vi_tri": 6,
@@ -1964,7 +2182,8 @@
      "ten_han": "上六",
      "han": "咸其輔頰舌。",
      "dich": "Cảm ở má, hàm, lưỡi.",
-     "y": "Chỉ cảm hoá bằng lời nói suông thì không sâu."
+     "y": "Chỉ cảm hoá bằng lời nói suông thì không sâu.",
+     "nom_na": "Như chỉ dùng lời ngon ngọt để thu hút: không sâu."
     }
    ]
   },
@@ -1977,6 +2196,7 @@
     "han": "雷風，恆；君子以立不易方。",
     "dich": "Sấm gió là Hằng; người quân tử đứng vững không đổi phương hướng."
    },
+   "nom_na": "Hình ảnh: sấm và gió luôn đi cùng nhau — bền lâu. Nôm na: như hôn nhân, nghề nghiệp, thói quen dài hạn: bền không phải là đứng yên, mà là giữ phương hướng trong khi vẫn thích nghi.",
    "thoan": {
     "han": "恆，久也。剛上而柔下，雷風相與，巽而動，剛柔皆應，恆。恆亨无咎，利貞；久於其道也，天地之道，恆久而不已也。利有攸往，終則有始也。日月得天，而能久照，四時變化，而能久成，聖人久於其道，而天下化成；觀其所恆，而天地萬物之情可見矣！"
    },
@@ -1987,7 +2207,8 @@
      "ten_han": "初六",
      "han": "浚恆，貞凶，无攸利。",
      "dich": "Đòi hỏi sự bền lâu quá sâu ngay từ đầu, giữ thế thì xấu, không gì lợi.",
-     "y": "Mới bắt đầu đã đòi cam kết quá sâu — hỏng."
+     "y": "Mới bắt đầu đã đòi cam kết quá sâu — hỏng.",
+     "nom_na": "Như mới quen đã đòi hứa hẹn trọn đời: hỏng."
     },
     {
      "vi_tri": 2,
@@ -1995,7 +2216,8 @@
      "ten_han": "九二",
      "han": "悔亡。",
      "dich": "Hối mất.",
-     "y": "Giữ được trung đạo bền bỉ thì không còn ân hận."
+     "y": "Giữ được trung đạo bền bỉ thì không còn ân hận.",
+     "nom_na": "Như giữ được sự vừa phải, đều đặn: không còn gì để ân hận."
     },
     {
      "vi_tri": 3,
@@ -2003,7 +2225,8 @@
      "ten_han": "九三",
      "han": "不恆其德，或承之羞，貞吝。",
      "dich": "Không giữ bền đức của mình, có khi nhận lấy nhục; cố giữ thì đáng tiếc.",
-     "y": "Thất thường về nguyên tắc thì mất uy tín."
+     "y": "Thất thường về nguyên tắc thì mất uy tín.",
+     "nom_na": "Như người hôm nay nói một kiểu, mai làm một kiểu: mất uy tín."
     },
     {
      "vi_tri": 4,
@@ -2011,7 +2234,8 @@
      "ten_han": "九四",
      "han": "田无禽。",
      "dich": "Ruộng săn không có thú.",
-     "y": "Bền bỉ sai chỗ thì chẳng thu được gì."
+     "y": "Bền bỉ sai chỗ thì chẳng thu được gì.",
+     "nom_na": "Như chăm chỉ đi câu ở cái hồ không có cá: bền bỉ sai chỗ thì chẳng được gì."
     },
     {
      "vi_tri": 5,
@@ -2019,7 +2243,8 @@
      "ten_han": "六五",
      "han": "恆其德，貞，婦人吉，夫子凶。",
      "dich": "Giữ bền đức của mình, chính bền; người vợ thì tốt, người chồng thì xấu.",
-     "y": "Bền chí là tốt, nhưng cứng theo khuôn cũ không hợp với người phải quyết đoán."
+     "y": "Bền chí là tốt, nhưng cứng theo khuôn cũ không hợp với người phải quyết đoán.",
+     "nom_na": "Như bền chí là tốt, nhưng người phải quyết việc thì không thể cứ theo khuôn cũ."
     },
     {
      "vi_tri": 6,
@@ -2027,7 +2252,8 @@
      "ten_han": "上六",
      "han": "振恆，凶。",
      "dich": "Dao động không bền, xấu.",
-     "y": "Thay đổi liên tục, không đứng yên chỗ nào thì hỏng."
+     "y": "Thay đổi liên tục, không đứng yên chỗ nào thì hỏng.",
+     "nom_na": "Như thay đổi liên tục, không đứng yên chỗ nào: hỏng."
     }
    ]
   },
@@ -2040,6 +2266,7 @@
     "han": "天下有山，遯；君子以遠小人，不惡而嚴。",
     "dich": "Dưới trời có núi là Độn; người quân tử xa kẻ tiểu nhân, không ghét bỏ mà nghiêm trang."
    },
+   "nom_na": "Hình ảnh: núi ở dưới trời, trời lùi xa dần — thời nên lui. Nôm na: như khi môi trường xấu đi, kẻ tiểu nhân lấn lướt: rút lui đúng lúc, giữ khoảng cách mà không gây thù — lui để giữ mình chứ không phải thua.",
    "thoan": {
     "han": "遯亨，遯而亨也。剛當位而應，與時行也。小利貞，浸而長也。遯之時義大矣哉！"
    },
@@ -2050,7 +2277,8 @@
      "ten_han": "初六",
      "han": "遯尾，厲，勿用有攸往。",
      "dich": "Lui ở sau cùng, nguy; chớ có chỗ đi.",
-     "y": "Rút lui muộn nhất thì nguy — lúc này đứng yên, đừng mạo hiểm."
+     "y": "Rút lui muộn nhất thì nguy — lúc này đứng yên, đừng mạo hiểm.",
+     "nom_na": "Như người rời đi sau cùng khi công ty đã chìm: nguy — lúc này đứng yên, đừng liều."
     },
     {
      "vi_tri": 2,
@@ -2058,7 +2286,8 @@
      "ten_han": "六二",
      "han": "執之用黃牛之革，莫之勝說。",
      "dich": "Buộc chặt bằng da bò vàng, không ai gỡ được.",
-     "y": "Giữ vững lòng mình khi người khác lui — gắn bó bằng trung chính."
+     "y": "Giữ vững lòng mình khi người khác lui — gắn bó bằng trung chính.",
+     "nom_na": "Như mọi người bỏ đi hết mà mình vẫn ở lại vì tình nghĩa, gắn chặt không ai gỡ được."
     },
     {
      "vi_tri": 3,
@@ -2066,7 +2295,8 @@
      "ten_han": "九三",
      "han": "係遯，有疾厲，畜臣妾吉。",
      "dich": "Lui mà bị ràng buộc, có hại nguy; nuôi người dưới thì tốt.",
-     "y": "Muốn rút mà vướng — lo cho người phụ thuộc trước đã."
+     "y": "Muốn rút mà vướng — lo cho người phụ thuộc trước đã.",
+     "nom_na": "Như muốn nghỉ việc mà còn vướng nhân viên, gia đình: lo cho họ ổn trước đã."
     },
     {
      "vi_tri": 4,
@@ -2074,7 +2304,8 @@
      "ten_han": "九四",
      "han": "好遯，君子吉，小人否。",
      "dich": "Lui một cách tốt đẹp; quân tử tốt, tiểu nhân thì không.",
-     "y": "Dứt khoát rời đi dù còn luyến tiếc — người có lý trí làm được."
+     "y": "Dứt khoát rời đi dù còn luyến tiếc — người có lý trí làm được.",
+     "nom_na": "Như dứt khoát rời một nơi mình còn luyến tiếc: người tỉnh táo làm được."
     },
     {
      "vi_tri": 5,
@@ -2082,7 +2313,8 @@
      "ten_han": "九五",
      "han": "嘉遯，貞吉。",
      "dich": "Lui một cách khéo đẹp, giữ chính thì tốt.",
-     "y": "Rút lui đúng lúc, đúng cách, giữ được tình nghĩa."
+     "y": "Rút lui đúng lúc, đúng cách, giữ được tình nghĩa.",
+     "nom_na": "Như xin nghỉ đúng lúc, bàn giao đàng hoàng, giữ được tình cảm với mọi người."
     },
     {
      "vi_tri": 6,
@@ -2090,7 +2322,8 @@
      "ten_han": "上九",
      "han": "肥遯，无不利。",
      "dich": "Lui ung dung, không gì không lợi.",
-     "y": "Rời đi thanh thản, không vướng bận — tự do hoàn toàn."
+     "y": "Rời đi thanh thản, không vướng bận — tự do hoàn toàn.",
+     "nom_na": "Như người đã về hưu thanh thản, không vướng bận gì: tự do."
     }
    ]
   },
@@ -2103,6 +2336,7 @@
     "han": "雷在天上，大壯；君子以非禮勿履。",
     "dich": "Sấm ở trên trời là Đại Tráng; người quân tử không phải lễ thì không làm."
    },
+   "nom_na": "Hình ảnh: sấm vang trên trời — sức mạnh lớn đang lên. Nôm na: như lúc mình đang mạnh, đang có thế: chính lúc này dễ cậy sức làm càn nhất; mạnh mà đúng mực mới là mạnh thật.",
    "thoan": {
     "han": "大壯，大者壯也。剛以動，故壯。大壯利貞；大者正也。正大而天地之情可見矣！"
    },
@@ -2113,7 +2347,8 @@
      "ten_han": "初九",
      "han": "壯于趾，征凶，有孚。",
      "dich": "Mạnh ở ngón chân, đi thì xấu, chắc chắn như vậy.",
-     "y": "Hăng hái quá sớm, nền chưa vững — tiến là hỏng."
+     "y": "Hăng hái quá sớm, nền chưa vững — tiến là hỏng.",
+     "nom_na": "Như hăng hái quá sớm khi nền chưa vững: tiến là hỏng."
     },
     {
      "vi_tri": 2,
@@ -2121,7 +2356,8 @@
      "ten_han": "九二",
      "han": "貞吉。",
      "dich": "Giữ chính thì tốt.",
-     "y": "Mạnh mà giữ trung đạo thì tốt."
+     "y": "Mạnh mà giữ trung đạo thì tốt.",
+     "nom_na": "Như mạnh mà vẫn vừa phải, giữ chừng mực: tốt."
     },
     {
      "vi_tri": 3,
@@ -2129,7 +2365,8 @@
      "ten_han": "九三",
      "han": "小人用壯，君子用罔，貞厲。羝羊觸藩，羸其角。",
      "dich": "Tiểu nhân dùng sức mạnh, quân tử không dùng; giữ thế thì nguy. Dê đực húc rào, mắc sừng.",
-     "y": "Cậy sức xông vào thì tự vướng — dùng trí thay vì sức."
+     "y": "Cậy sức xông vào thì tự vướng — dùng trí thay vì sức.",
+     "nom_na": "Như con dê húc rào bị mắc sừng: cậy sức xông vào thì tự vướng — dùng trí."
     },
     {
      "vi_tri": 4,
@@ -2137,7 +2374,8 @@
      "ten_han": "九四",
      "han": "貞吉悔亡，藩決不羸，壯于大輿之輹。",
      "dich": "Giữ chính thì tốt, hối mất; rào vỡ không mắc, mạnh ở trục xe lớn.",
-     "y": "Kiên trì đúng đạo thì chướng ngại tự mở."
+     "y": "Kiên trì đúng đạo thì chướng ngại tự mở.",
+     "nom_na": "Như kiên trì làm đúng: rào cản tự mở."
     },
     {
      "vi_tri": 5,
@@ -2145,7 +2383,8 @@
      "ten_han": "六五",
      "han": "喪羊于易，无悔。",
      "dich": "Mất dê ở chỗ dễ dãi, không hối.",
-     "y": "Buông bớt sự hiếu thắng một cách nhẹ nhàng — không tiếc."
+     "y": "Buông bớt sự hiếu thắng một cách nhẹ nhàng — không tiếc.",
+     "nom_na": "Như bỏ bớt tính hiếu thắng một cách nhẹ nhàng: không tiếc."
     },
     {
      "vi_tri": 6,
@@ -2153,7 +2392,8 @@
      "ten_han": "上六",
      "han": "羝羊觸藩，不能退，不能遂，无攸利，艱則吉。",
      "dich": "Dê đực húc rào, không lùi được, không tiến được, không gì lợi; biết gian khó thì tốt.",
-     "y": "Đã bế tắc vì quá cứng — nhận ra khó khăn mà nhẫn nại thì thoát."
+     "y": "Đã bế tắc vì quá cứng — nhận ra khó khăn mà nhẫn nại thì thoát.",
+     "nom_na": "Như đã húc vào tường, tiến không được lùi không xong: nhận ra mình khó, nhẫn nại thì thoát."
     }
    ]
   },
@@ -2166,6 +2406,7 @@
     "han": "明出地上，晉；君子以自昭明德。",
     "dich": "Ánh sáng hiện trên mặt đất là Tấn; người quân tử tự làm sáng đức sáng của mình."
    },
+   "nom_na": "Hình ảnh: mặt trời mọc lên trên mặt đất — sáng dần, tiến dần. Nôm na: như thời được thăng tiến, được tin dùng: tiến bằng năng lực và đức sáng của mình, không bằng thủ đoạn.",
    "thoan": {
     "han": "晉，進也。明出地上，順而麗乎大明，柔進而上行。是以康侯用錫馬蕃庶，晝日三接也。"
    },
@@ -2176,7 +2417,8 @@
      "ten_han": "初六",
      "han": "晉如，摧如，貞吉。罔孚，裕无咎。",
      "dich": "Tiến lên mà bị gạt lại, giữ chính thì tốt. Chưa được tin, khoan thai thì không lỗi.",
-     "y": "Mới tiến chưa được công nhận — thong thả, giữ nguyên tắc."
+     "y": "Mới tiến chưa được công nhận — thong thả, giữ nguyên tắc.",
+     "nom_na": "Như mới đề xuất mà chưa được nghe: thong thả, giữ nguyên tắc, rồi sẽ được."
     },
     {
      "vi_tri": 2,
@@ -2184,7 +2426,8 @@
      "ten_han": "六二",
      "han": "晉如，愁如，貞吉。受茲介福，于其王母。",
      "dich": "Tiến lên mà lo âu, giữ chính thì tốt; nhận phúc lớn từ bà nội.",
-     "y": "Tiến trong lo lắng nhưng có người bề trên che chở."
+     "y": "Tiến trong lo lắng nhưng có người bề trên che chở.",
+     "nom_na": "Như được thăng chức mà lo lắng: có người bề trên che chở."
     },
     {
      "vi_tri": 3,
@@ -2192,7 +2435,8 @@
      "ten_han": "六三",
      "han": "眾允，悔亡。",
      "dich": "Mọi người đều tin, hối mất.",
-     "y": "Được tập thể tin tưởng — cứ cùng tiến."
+     "y": "Được tập thể tin tưởng — cứ cùng tiến.",
+     "nom_na": "Như được cả nhóm tin: cứ cùng nhau đi lên."
     },
     {
      "vi_tri": 4,
@@ -2200,7 +2444,8 @@
      "ten_han": "九四",
      "han": "晉如碩鼠，貞厲。",
      "dich": "Tiến như con chuột lớn, giữ thế thì nguy.",
-     "y": "Tiến bằng thủ đoạn, chiếm chỗ không xứng thì nguy."
+     "y": "Tiến bằng thủ đoạn, chiếm chỗ không xứng thì nguy.",
+     "nom_na": "Như leo lên bằng mánh khoé, như chuột lớn: giữ ghế ấy sẽ nguy."
     },
     {
      "vi_tri": 5,
@@ -2208,7 +2453,8 @@
      "ten_han": "六五",
      "han": "悔亡，失得勿恤，往吉，无不利。",
      "dich": "Hối mất, được mất chớ lo, đi thì tốt, không gì không lợi.",
-     "y": "Đừng nặng chuyện được mất — làm đúng thì tốt."
+     "y": "Đừng nặng chuyện được mất — làm đúng thì tốt.",
+     "nom_na": "Như đừng nặng chuyện được mất nữa: làm đúng thì tốt."
     },
     {
      "vi_tri": 6,
@@ -2216,7 +2462,8 @@
      "ten_han": "上九",
      "han": "晉其角，維用伐邑，厲吉无咎，貞吝。",
      "dich": "Tiến đến chỗ sừng, chỉ dùng để đánh ấp mình; nguy mà tốt, không lỗi; cố giữ thì đáng tiếc.",
-     "y": "Đã lên tới đỉnh — dùng sức đó để chỉnh đốn nội bộ chứ đừng tiến thêm."
+     "y": "Đã lên tới đỉnh — dùng sức đó để chỉnh đốn nội bộ chứ đừng tiến thêm.",
+     "nom_na": "Như đã lên đến đỉnh: dùng sức đó để sửa sang nội bộ, đừng đòi thêm."
     }
    ]
   },
@@ -2229,6 +2476,7 @@
     "han": "明入地中，明夷；君子以蒞眾，用晦而明。",
     "dich": "Ánh sáng lặn vào trong đất là Minh Di; người quân tử đến với dân, dùng sự che giấu mà vẫn sáng."
    },
+   "nom_na": "Hình ảnh: mặt trời lặn vào lòng đất — ánh sáng bị che, bị tổn thương. Nôm na: như làm việc dưới một người sếp tệ, một môi trường bất công: giữ cái sáng bên trong, bề ngoài khiêm nhường, kín đáo để tự bảo vệ.",
    "thoan": {
     "han": "明入地中，明夷。內文明而外柔順，以蒙大難，文王以之。利艱貞，晦其明也，內難而能正其志，箕子以之。"
    },
@@ -2239,7 +2487,8 @@
      "ten_han": "初九",
      "han": "明夷于飛，垂其翼。君子于行，三日不食，有攸往，主人有言。",
      "dich": "Ánh sáng bị thương khi đang bay, sụp cánh xuống. Quân tử ra đi, ba ngày không ăn; có chỗ đi, chủ nhà có lời nói ra.",
-     "y": "Thấy dấu hiệu thời xấu — rời đi sớm dù chịu thiếu thốn, chịu điều tiếng."
+     "y": "Thấy dấu hiệu thời xấu — rời đi sớm dù chịu thiếu thốn, chịu điều tiếng.",
+     "nom_na": "Như thấy công ty bắt đầu bất ổn: rời đi sớm, chịu thiếu thốn và điều tiếng một thời gian."
     },
     {
      "vi_tri": 2,
@@ -2247,7 +2496,8 @@
      "ten_han": "六二",
      "han": "明夷，夷于左股，用拯馬壯，吉。",
      "dich": "Ánh sáng bị thương, thương ở đùi trái; dùng ngựa khoẻ để cứu, tốt.",
-     "y": "Bị tổn thương nhưng chưa chí mạng — nhanh chóng tìm sự trợ giúp."
+     "y": "Bị tổn thương nhưng chưa chí mạng — nhanh chóng tìm sự trợ giúp.",
+     "nom_na": "Như bị chèn ép nhưng chưa đến mức nặng: nhanh chóng tìm người giúp."
     },
     {
      "vi_tri": 3,
@@ -2255,7 +2505,8 @@
      "ten_han": "九三",
      "han": "明夷于南狩，得其大首，不可疾貞。",
      "dich": "Ánh sáng bị thương khi đi săn phương nam, bắt được kẻ đầu sỏ; không thể vội giữ chính.",
-     "y": "Có cơ hội trừ gốc tai hoạ, nhưng làm từ từ, đừng nóng."
+     "y": "Có cơ hội trừ gốc tai hoạ, nhưng làm từ từ, đừng nóng.",
+     "nom_na": "Như có cơ hội loại bỏ gốc rễ của chuyện xấu: làm từ từ, đừng nóng."
     },
     {
      "vi_tri": 4,
@@ -2263,7 +2514,8 @@
      "ten_han": "六四",
      "han": "入于左腹，獲明夷之心，出于門庭。",
      "dich": "Vào bụng bên trái, biết được tâm của sự tổn thương ánh sáng, ra khỏi cửa sân.",
-     "y": "Hiểu rõ bản chất tình thế từ bên trong — rồi rời đi."
+     "y": "Hiểu rõ bản chất tình thế từ bên trong — rồi rời đi.",
+     "nom_na": "Như hiểu rõ bên trong một tổ chức có vấn đề: rồi lặng lẽ rời đi."
     },
     {
      "vi_tri": 5,
@@ -2271,7 +2523,8 @@
      "ten_han": "六五",
      "han": "箕子之明夷，利貞。",
      "dich": "Sự tổn thương ánh sáng của Cơ Tử, lợi giữ chính.",
-     "y": "Giữ đức sáng bên trong, bề ngoài nhẫn nhịn như Cơ Tử."
+     "y": "Giữ đức sáng bên trong, bề ngoài nhẫn nhịn như Cơ Tử.",
+     "nom_na": "Như người tốt buộc phải ở trong môi trường xấu: giữ lòng sáng, bề ngoài nhẫn nhịn."
     },
     {
      "vi_tri": 6,
@@ -2279,7 +2532,8 @@
      "ten_han": "上六",
      "han": "不明晦，初登于天，後入于地。",
      "dich": "Không sáng mà tối, mới đầu lên trời, sau vào lòng đất.",
-     "y": "Quyền lực dựa trên tối tăm thì lên cao rồi sụp đổ."
+     "y": "Quyền lực dựa trên tối tăm thì lên cao rồi sụp đổ.",
+     "nom_na": "Như người leo cao nhờ những việc mờ ám: lên rồi sẽ sụp."
     }
    ]
   },
@@ -2292,6 +2546,7 @@
     "han": "風自火出，家人；君子以言有物，而行有恆。",
     "dich": "Gió từ lửa mà ra là Gia Nhân; người quân tử nói có thực chất, làm có thường hằng."
    },
+   "nom_na": "Hình ảnh: gió bốc ra từ lửa — hơi ấm toả ra từ trong bếp nhà. Nôm na: như chuyện trong nhà: lời nói phải có thực, việc làm phải đều đặn; nhà êm thì việc ngoài mới yên.",
    "thoan": {
     "han": "家人，女正位乎內，男正位乎外，男女正，天地之大義也。家人有嚴君焉，父母之謂也。父父，子子，兄兄，弟弟，夫夫，婦婦，而家道正；正家而天下定矣。"
    },
@@ -2302,7 +2557,8 @@
      "ten_han": "初九",
      "han": "閑有家，悔亡。",
      "dich": "Phòng giữ từ khi có nhà, hối mất.",
-     "y": "Đặt nề nếp ngay từ đầu thì sau không ân hận."
+     "y": "Đặt nề nếp ngay từ đầu thì sau không ân hận.",
+     "nom_na": "Như đặt nếp nhà ngay từ lúc mới cưới, mới dọn về: sau này đỡ ân hận."
     },
     {
      "vi_tri": 2,
@@ -2310,7 +2566,8 @@
      "ten_han": "六二",
      "han": "无攸遂，在中饋，貞吉。",
      "dich": "Không chuyên quyết việc gì, lo việc bếp núc ở trong, giữ chính thì tốt.",
-     "y": "Làm tròn vai trò nội trợ, chăm sóc là quý."
+     "y": "Làm tròn vai trò nội trợ, chăm sóc là quý.",
+     "nom_na": "Như người lo chu toàn bữa cơm, việc nhà: đó là điều quý."
     },
     {
      "vi_tri": 3,
@@ -2318,7 +2575,8 @@
      "ten_han": "九三",
      "han": "家人嗃嗃，悔厲吉；婦子嘻嘻，終吝。",
      "dich": "Người nhà nghiêm khắc gắt gỏng, hối nguy mà tốt; vợ con cười đùa hi hi, cuối cùng đáng tiếc.",
-     "y": "Nghiêm quá còn hơn buông thả — nhưng nên có chừng mực."
+     "y": "Nghiêm quá còn hơn buông thả — nhưng nên có chừng mực.",
+     "nom_na": "Như bố mẹ hơi nghiêm khắc: còn hơn để con cái buông thả — nhưng nên có chừng mực."
     },
     {
      "vi_tri": 4,
@@ -2326,7 +2584,8 @@
      "ten_han": "六四",
      "han": "富家，大吉。",
      "dich": "Làm giàu cho nhà, rất tốt.",
-     "y": "Biết vun vén, quản lý của cải gia đình."
+     "y": "Biết vun vén, quản lý của cải gia đình.",
+     "nom_na": "Như người biết vun vén, giữ tiền cho gia đình: rất tốt."
     },
     {
      "vi_tri": 5,
@@ -2334,7 +2593,8 @@
      "ten_han": "九五",
      "han": "王假有家，勿恤，往吉。",
      "dich": "Vua đến với nhà mình, chớ lo, đi thì tốt.",
-     "y": "Người chủ gia đình lấy tình thương và gương mẫu cảm hoá."
+     "y": "Người chủ gia đình lấy tình thương và gương mẫu cảm hoá.",
+     "nom_na": "Như người đứng đầu gia đình lấy tình thương và làm gương để cảm hoá: chẳng phải lo."
     },
     {
      "vi_tri": 6,
@@ -2342,7 +2602,8 @@
      "ten_han": "上九",
      "han": "有孚威如，終吉。",
      "dich": "Có lòng tin và uy nghiêm, cuối cùng tốt.",
-     "y": "Gia đình bền nhờ chữ tín và sự nghiêm túc của người đứng đầu."
+     "y": "Gia đình bền nhờ chữ tín và sự nghiêm túc của người đứng đầu.",
+     "nom_na": "Như gia đình vững nhờ chữ tín và sự đàng hoàng của người cầm trịch."
     }
    ]
   },
@@ -2355,6 +2616,7 @@
     "han": "上火下澤，睽；君子以同而異。",
     "dich": "Trên lửa dưới đầm là Khuê; người quân tử giống mà vẫn khác."
    },
+   "nom_na": "Hình ảnh: lửa bốc lên, nước đầm chảy xuống — hai thứ đi hai ngả. Nôm na: như khi hai người, hai bên bất đồng: chưa làm được việc lớn chung, nhưng việc nhỏ vẫn hợp tác được; giống nhau ở điều lớn, khác nhau ở điều nhỏ.",
    "thoan": {
     "han": "睽，火動而上，澤動而下；二女同居，其志不同行；說而麗乎明，柔進而上行，得中而應乎剛；是以小事吉。天地睽，而其事同也；男女睽，而其志通也；萬物睽，而其事類也；睽之時用大矣哉！"
    },
@@ -2365,7 +2627,8 @@
      "ten_han": "初九",
      "han": "悔亡，喪馬勿逐，自復；見惡人无咎。",
      "dich": "Hối mất; mất ngựa chớ đuổi, tự trở về; gặp người xấu không lỗi.",
-     "y": "Bất đồng — đừng níu kéo, cũng đừng cắt đứt với người khác ý."
+     "y": "Bất đồng — đừng níu kéo, cũng đừng cắt đứt với người khác ý.",
+     "nom_na": "Như bất đồng với ai: đừng níu kéo, cũng đừng cắt đứt — ngựa lạc tự về."
     },
     {
      "vi_tri": 2,
@@ -2373,7 +2636,8 @@
      "ten_han": "九二",
      "han": "遇主于巷，无咎。",
      "dich": "Gặp chủ ở ngõ hẹp, không lỗi.",
-     "y": "Hoá giải bất hoà bằng gặp gỡ không chính thức, khéo léo."
+     "y": "Hoá giải bất hoà bằng gặp gỡ không chính thức, khéo léo.",
+     "nom_na": "Như hoà giải bằng một cuộc gặp tình cờ, một ly cà phê ngoài giờ: khéo mà hiệu quả."
     },
     {
      "vi_tri": 3,
@@ -2381,7 +2645,8 @@
      "ten_han": "六三",
      "han": "見輿曳，其牛掣，其人天且劓，无初有終。",
      "dich": "Thấy xe bị kéo lại, trâu bị giữ, người bị thích chữ cắt mũi; không có lúc đầu nhưng có lúc cuối.",
-     "y": "Khởi đầu nhiều trắc trở, nhưng giữ lòng thì sau thông."
+     "y": "Khởi đầu nhiều trắc trở, nhưng giữ lòng thì sau thông.",
+     "nom_na": "Như mọi thứ ban đầu cứ trục trặc: giữ lòng thì về sau thông."
     },
     {
      "vi_tri": 4,
@@ -2389,7 +2654,8 @@
      "ten_han": "九四",
      "han": "睽孤，遇元夫，交孚，厲无咎。",
      "dich": "Trái nhau mà cô độc, gặp người tốt, tin nhau, nguy nhưng không lỗi.",
-     "y": "Đơn độc giữa bất đồng — gặp người cùng chí là được giải."
+     "y": "Đơn độc giữa bất đồng — gặp người cùng chí là được giải.",
+     "nom_na": "Như cô độc giữa những người khác ý: gặp được một người hiểu mình là được giải."
     },
     {
      "vi_tri": 5,
@@ -2397,7 +2663,8 @@
      "ten_han": "六五",
      "han": "悔亡，厥宗噬膚，往何咎。",
      "dich": "Hối mất; người cùng họ cắn qua lớp da mỏng, đi thì lỗi gì.",
-     "y": "Rào cản với người thân chỉ mỏng như da — cứ đến với nhau."
+     "y": "Rào cản với người thân chỉ mỏng như da — cứ đến với nhau.",
+     "nom_na": "Như khúc mắc với người thân chỉ mỏng như tờ giấy: cứ chủ động tìm đến nhau."
     },
     {
      "vi_tri": 6,
@@ -2405,7 +2672,8 @@
      "ten_han": "上九",
      "han": "睽孤，見豕負塗，載鬼一車，先張之弧，後說之弧，匪寇婚媾，往遇雨則吉。",
      "dich": "Trái nhau mà cô độc, thấy lợn mang bùn, một xe đầy ma, trước giương cung sau buông cung; chẳng phải giặc, là cầu hôn; đi gặp mưa thì tốt.",
-     "y": "Nghi kỵ làm mình tưởng tượng ra kẻ thù — tan ngờ vực thì thấy đó là người thân."
+     "y": "Nghi kỵ làm mình tưởng tượng ra kẻ thù — tan ngờ vực thì thấy đó là người thân.",
+     "nom_na": "Như nghi ngờ khiến mình tưởng người ta là kẻ thù: hết nghi rồi mới thấy là người nhà."
     }
    ]
   },
@@ -2418,6 +2686,7 @@
     "han": "山上有水，蹇；君子以反身修德。",
     "dich": "Trên núi có nước là Kiển; người quân tử quay về xét mình mà sửa đức."
    },
+   "nom_na": "Hình ảnh: nước trên núi cao, đường đi trắc trở — chân bước khó. Nôm na: như gặp trở ngại lớn trên đường: đừng cố húc; quay vào sửa mình, tìm người giúp, đi đường dễ hơn.",
    "thoan": {
     "han": "蹇，難也，險在前也。見險而能止，知矣哉！蹇利西南，往得中也；不利東北，其道窮也。利見大人，往有功也。當位貞吉，以正邦也。蹇之時用大矣哉！"
    },
@@ -2428,7 +2697,8 @@
      "ten_han": "初六",
      "han": "往蹇，來譽。",
      "dich": "Đi thì gian nan, trở lại thì được khen.",
-     "y": "Gặp khó — lùi lại, chờ thời thì được tiếng tốt."
+     "y": "Gặp khó — lùi lại, chờ thời thì được tiếng tốt.",
+     "nom_na": "Như gặp khó thì tạm dừng, chờ thời: được người khen là biết điều."
     },
     {
      "vi_tri": 2,
@@ -2436,7 +2706,8 @@
      "ten_han": "六二",
      "han": "王臣蹇蹇，匪躬之故。",
      "dich": "Bề tôi của vua gặp gian nan chồng chất, không phải vì lợi riêng.",
-     "y": "Gánh khó khăn vì trách nhiệm chung — không ai trách được."
+     "y": "Gánh khó khăn vì trách nhiệm chung — không ai trách được.",
+     "nom_na": "Như người gánh khó khăn vì trách nhiệm chung, không vì mình: không ai trách được."
     },
     {
      "vi_tri": 3,
@@ -2444,7 +2715,8 @@
      "ten_han": "九三",
      "han": "往蹇來反。",
      "dich": "Đi thì gian nan, trở lại thì về chỗ cũ.",
-     "y": "Quay về với người thân, căn cứ của mình."
+     "y": "Quay về với người thân, căn cứ của mình.",
+     "nom_na": "Như đường ngoài khó quá thì về với gia đình, với chỗ dựa của mình."
     },
     {
      "vi_tri": 4,
@@ -2452,7 +2724,8 @@
      "ten_han": "六四",
      "han": "往蹇來連。",
      "dich": "Đi thì gian nan, trở lại thì liên kết.",
-     "y": "Chưa đủ sức một mình — liên kết lại rồi mới đi."
+     "y": "Chưa đủ sức một mình — liên kết lại rồi mới đi.",
+     "nom_na": "Như chưa đủ sức đi một mình: tập hợp người lại rồi mới đi."
     },
     {
      "vi_tri": 5,
@@ -2460,7 +2733,8 @@
      "ten_han": "九五",
      "han": "大蹇朋來。",
      "dich": "Gian nan lớn, bạn đến.",
-     "y": "Khó khăn tột độ nhưng giữ chính thì người giúp đến."
+     "y": "Khó khăn tột độ nhưng giữ chính thì người giúp đến.",
+     "nom_na": "Như khó đến tột cùng mà vẫn đàng hoàng: bạn bè sẽ đến giúp."
     },
     {
      "vi_tri": 6,
@@ -2468,7 +2742,8 @@
      "ten_han": "上六",
      "han": "往蹇來碩，吉；利見大人。",
      "dich": "Đi thì gian nan, trở lại thì được lớn, tốt; lợi gặp đại nhân.",
-     "y": "Đừng bỏ mặc người khác mà đi — quay lại giúp thì được việc lớn."
+     "y": "Đừng bỏ mặc người khác mà đi — quay lại giúp thì được việc lớn.",
+     "nom_na": "Như đừng bỏ người khác mà đi một mình: quay lại giúp nhau thì được việc lớn."
     }
    ]
   },
@@ -2481,6 +2756,7 @@
     "han": "雷雨作，解；君子以赦過宥罪。",
     "dich": "Sấm mưa nổi lên là Giải; người quân tử tha lỗi, khoan dung tội."
    },
+   "nom_na": "Hình ảnh: sấm nổ, mưa xuống, không khí oi bức được giải toả. Nôm na: như khi rắc rối vừa được tháo gỡ: dọn dẹp nhanh gọn, tha thứ được thì tha, rồi trở lại nhịp bình thường.",
    "thoan": {
     "han": "解，險以動，動而免乎險，解。解利西南，往得眾也。其來復吉，乃得中也。有攸往夙吉，往有功也。天地解，而雷雨作，雷雨作，而百果草木皆甲坼，解之時大矣哉！"
    },
@@ -2491,7 +2767,8 @@
      "ten_han": "初六",
      "han": "无咎。",
      "dich": "Không lỗi.",
-     "y": "Khó khăn vừa qua — nghỉ ngơi, giữ yên."
+     "y": "Khó khăn vừa qua — nghỉ ngơi, giữ yên.",
+     "nom_na": "Như vừa qua cơn khó: nghỉ ngơi, giữ yên là được."
     },
     {
      "vi_tri": 2,
@@ -2499,7 +2776,8 @@
      "ten_han": "九二",
      "han": "田獲三狐，得黃矢，貞吉。",
      "dich": "Đi săn được ba con cáo, được mũi tên vàng, giữ chính thì tốt.",
-     "y": "Loại bỏ những kẻ xấu xung quanh bằng sự ngay thẳng."
+     "y": "Loại bỏ những kẻ xấu xung quanh bằng sự ngay thẳng.",
+     "nom_na": "Như dẹp được mấy kẻ gian xảo quanh mình bằng sự ngay thẳng."
     },
     {
      "vi_tri": 3,
@@ -2507,7 +2785,8 @@
      "ten_han": "六三",
      "han": "負且乘，致寇至，貞吝。",
      "dich": "Vừa đội vừa cưỡi, rước giặc đến; cố giữ thì đáng tiếc.",
-     "y": "Ngồi vào chỗ không xứng, khoe của — tự gây hoạ."
+     "y": "Ngồi vào chỗ không xứng, khoe của — tự gây hoạ.",
+     "nom_na": "Như mới có chút tiền đã khoe khoang, ngồi chỗ không xứng: tự rước hoạ."
     },
     {
      "vi_tri": 4,
@@ -2515,7 +2794,8 @@
      "ten_han": "九四",
      "han": "解而拇，朋至斯孚。",
      "dich": "Gỡ ngón chân cái của ngươi ra, bạn đến thì tin.",
-     "y": "Cắt đứt quan hệ không lành mạnh thì người tốt mới đến."
+     "y": "Cắt đứt quan hệ không lành mạnh thì người tốt mới đến.",
+     "nom_na": "Như cắt bỏ một mối quan hệ độc hại: người tốt mới tìm đến."
     },
     {
      "vi_tri": 5,
@@ -2523,7 +2803,8 @@
      "ten_han": "六五",
      "han": "君子維有解，吉；有孚于小人。",
      "dich": "Người quân tử biết cởi gỡ, tốt; có lòng tin với kẻ tiểu nhân.",
-     "y": "Tự cởi bỏ ràng buộc xấu — tiểu nhân tự lui."
+     "y": "Tự cởi bỏ ràng buộc xấu — tiểu nhân tự lui.",
+     "nom_na": "Như tự gỡ khỏi thói xấu, quan hệ xấu: kẻ tiểu nhân tự lui."
     },
     {
      "vi_tri": 6,
@@ -2531,7 +2812,8 @@
      "ten_han": "上六",
      "han": "公用射隼于高墉之上，獲之，无不利。",
      "dich": "Vị công bắn chim cắt trên tường cao, bắt được, không gì không lợi.",
-     "y": "Thời cơ chín — dứt điểm trở ngại cuối cùng."
+     "y": "Thời cơ chín — dứt điểm trở ngại cuối cùng.",
+     "nom_na": "Như đã đến lúc dứt điểm trở ngại cuối cùng: làm là được."
     }
    ]
   },
@@ -2544,6 +2826,7 @@
     "han": "山下有澤，損；君子以懲忿窒欲。",
     "dich": "Dưới núi có đầm là Tổn; người quân tử răn sự giận, lấp sự ham muốn."
    },
+   "nom_na": "Hình ảnh: đầm dưới chân núi, bớt đất ở dưới để vun cho núi cao. Nôm na: như thắt lưng buộc bụng, cắt bớt chi tiêu, bớt giận, bớt ham: bớt đúng chỗ thì lại được; lễ mọn mà thành tâm còn hơn mâm cao cỗ đầy.",
    "thoan": {
     "han": "損，損下益上，其道上行。損而有孚，元吉，无咎，可貞，利有攸往。曷之用？二簋可用享；二簋應有時。損剛益柔有時，損益盈虛，與時偕行。"
    },
@@ -2554,7 +2837,8 @@
      "ten_han": "初九",
      "han": "巳事遄往，无咎，酌損之。",
      "dich": "Xong việc mình thì đi ngay, không lỗi; cân nhắc mà bớt.",
-     "y": "Giúp người nhưng đừng bỏ bê việc mình; bớt vừa đủ."
+     "y": "Giúp người nhưng đừng bỏ bê việc mình; bớt vừa đủ.",
+     "nom_na": "Như giúp người xong thì quay về lo việc mình: giúp vừa sức thôi."
     },
     {
      "vi_tri": 2,
@@ -2562,7 +2846,8 @@
      "ten_han": "九二",
      "han": "利貞，征凶，弗損，益之。",
      "dich": "Lợi giữ chính, đi thì xấu; không bớt mình mà vẫn làm lợi cho người.",
-     "y": "Giữ nguyên tắc mới thật sự giúp người — đừng tự hạ mình."
+     "y": "Giữ nguyên tắc mới thật sự giúp người — đừng tự hạ mình.",
+     "nom_na": "Như giúp người mà vẫn giữ nguyên tắc, không hạ mình: mới là giúp thật."
     },
     {
      "vi_tri": 3,
@@ -2570,7 +2855,8 @@
      "ten_han": "六三",
      "han": "三人行，則損一人；一人行，則得其友。",
      "dich": "Ba người cùng đi thì bớt một người; một người đi thì được bạn.",
-     "y": "Tập trung vào mối quan hệ thật sự hợp; dư thì nên bớt."
+     "y": "Tập trung vào mối quan hệ thật sự hợp; dư thì nên bớt.",
+     "nom_na": "Như ba người làm chung thì dễ bất hoà, một người thì cần bạn: giữ lại mối quan hệ thật hợp."
     },
     {
      "vi_tri": 4,
@@ -2578,7 +2864,8 @@
      "ten_han": "六四",
      "han": "損其疾，使遄有喜，无咎。",
      "dich": "Bớt cái tật của mình, khiến mau có mừng, không lỗi.",
-     "y": "Sửa nhanh khuyết điểm của chính mình — người giúp sẽ đến."
+     "y": "Sửa nhanh khuyết điểm của chính mình — người giúp sẽ đến.",
+     "nom_na": "Như sửa nhanh một tật xấu của mình: chuyện vui đến sớm."
     },
     {
      "vi_tri": 5,
@@ -2586,7 +2873,8 @@
      "ten_han": "六五",
      "han": "或益之，十朋之龜弗克違，元吉。",
      "dich": "Có người làm lợi cho, mười cặp mai rùa cũng không trái được, rất tốt.",
-     "y": "Khiêm nhường thì phúc tự tìm đến, không gì cưỡng được."
+     "y": "Khiêm nhường thì phúc tự tìm đến, không gì cưỡng được.",
+     "nom_na": "Như khiêm nhường thì được giúp: điều tốt đến không gì cản được."
     },
     {
      "vi_tri": 6,
@@ -2594,7 +2882,8 @@
      "ten_han": "上九",
      "han": "弗損益之，无咎，貞吉，有攸往，得臣无家。",
      "dich": "Không bớt mà làm lợi, không lỗi, giữ chính thì tốt, có chỗ đi, được người theo không kể nhà.",
-     "y": "Giúp người mà không tổn hại ai — được lòng rộng khắp."
+     "y": "Giúp người mà không tổn hại ai — được lòng rộng khắp.",
+     "nom_na": "Như giúp người mà chẳng làm thiệt ai: ai cũng quý."
     }
    ]
   },
@@ -2607,6 +2896,7 @@
     "han": "風雷，益；君子以見善則遷，有過則改。",
     "dich": "Gió và sấm là Ích; người quân tử thấy điều thiện thì theo, có lỗi thì sửa."
    },
+   "nom_na": "Hình ảnh: gió và sấm hỗ trợ nhau — thêm sức, thêm lợi. Nôm na: như thời được giúp đỡ, có thêm nguồn lực: dùng để làm việc lớn, và nhân dịp này sửa lỗi, học điều hay.",
    "thoan": {
     "han": "益，損上益下，民說无疆，自上下下，其道大光。利有攸往，中正有慶。利涉大川，木道乃行。益動而巽，日進无疆。天施地生，其益无方。凡益之道，與時偕行。"
    },
@@ -2617,7 +2907,8 @@
      "ten_han": "初九",
      "han": "利用為大作，元吉，无咎。",
      "dich": "Lợi dùng để làm việc lớn, rất tốt, không lỗi.",
-     "y": "Được giúp đỡ — mạnh dạn làm việc lớn, nhưng phải làm cho tốt."
+     "y": "Được giúp đỡ — mạnh dạn làm việc lớn, nhưng phải làm cho tốt.",
+     "nom_na": "Như được hỗ trợ vốn: mạnh dạn làm việc lớn, nhưng phải làm cho ra hồn."
     },
     {
      "vi_tri": 2,
@@ -2625,7 +2916,8 @@
      "ten_han": "六二",
      "han": "或益之，十朋之龜弗克違，永貞吉。王用享于帝，吉。",
      "dich": "Có người làm lợi cho, mười cặp mai rùa không trái được, giữ chính lâu thì tốt. Vua dùng mà tế thượng đế, tốt.",
-     "y": "Phúc tự đến vì lòng mình rộng mở — giữ bền."
+     "y": "Phúc tự đến vì lòng mình rộng mở — giữ bền.",
+     "nom_na": "Như phúc tự tìm đến vì lòng mình rộng mở: giữ cho bền."
     },
     {
      "vi_tri": 3,
@@ -2633,7 +2925,8 @@
      "ten_han": "六三",
      "han": "益之用凶事，无咎。有孚中行，告公用圭。",
      "dich": "Làm lợi bằng việc hung (gian nan), không lỗi. Có lòng tin, đi đường giữa, cầm ngọc khuê báo với bậc công.",
-     "y": "Khó khăn lại là dịp được giúp — chỉ cần chân thành, minh bạch."
+     "y": "Khó khăn lại là dịp được giúp — chỉ cần chân thành, minh bạch.",
+     "nom_na": "Như gặp khó lại hoá ra được giúp: chỉ cần thật thà, minh bạch."
     },
     {
      "vi_tri": 4,
@@ -2641,7 +2934,8 @@
      "ten_han": "六四",
      "han": "中行，告公從。利用為依遷國。",
      "dich": "Đi đường giữa, báo với công thì được theo. Lợi dùng làm chỗ dựa để dời đô.",
-     "y": "Làm cầu nối đáng tin giữa trên và dưới cho thay đổi lớn."
+     "y": "Làm cầu nối đáng tin giữa trên và dưới cho thay đổi lớn.",
+     "nom_na": "Như làm cầu nối đáng tin giữa sếp và nhân viên khi công ty thay đổi lớn."
     },
     {
      "vi_tri": 5,
@@ -2649,7 +2943,8 @@
      "ten_han": "九五",
      "han": "有孚惠心，勿問元吉。有孚惠我德。",
      "dich": "Có lòng tin, có tâm làm ơn, chớ hỏi, rất tốt. Người ta tin mà cảm cái đức của ta.",
-     "y": "Thật lòng làm lợi cho người, không cần hỏi đáp đền."
+     "y": "Thật lòng làm lợi cho người, không cần hỏi đáp đền.",
+     "nom_na": "Như giúp người thật lòng, không cần người ta trả ơn: người ta tự quý mình."
     },
     {
      "vi_tri": 6,
@@ -2657,7 +2952,8 @@
      "ten_han": "上九",
      "han": "莫益之，或擊之，立心勿恆，凶。",
      "dich": "Không ai làm lợi cho, có người đánh; lập tâm không bền, xấu.",
-     "y": "Chỉ lo vơ lợi cho mình thì bị người chống lại."
+     "y": "Chỉ lo vơ lợi cho mình thì bị người chống lại.",
+     "nom_na": "Như chỉ lo vơ về cho mình: bị người khác chống lại."
     }
    ]
   },
@@ -2670,6 +2966,7 @@
     "han": "澤上于天，夬；君子以施祿及下，居德則忌。",
     "dich": "Đầm lên trên trời là Quải; người quân tử ban lộc cho người dưới, tránh ỷ vào đức mình."
    },
+   "nom_na": "Hình ảnh: nước đầm dâng lên tận trời, sắp vỡ bờ — đến lúc phải quyết. Nôm na: như khi phải dứt khoát loại bỏ một điều sai (một thói xấu, một người gây hại): nói rõ, công khai, đúng lý, không dùng bạo lực.",
    "thoan": {
     "han": "夬，決也，剛決柔也。健而說，決而和，揚于王庭，柔乘五剛也。孚號有厲，其危乃光也。告自邑，不利即戎，所尚乃窮也。利有攸往，剛長乃終也。"
    },
@@ -2680,7 +2977,8 @@
      "ten_han": "初九",
      "han": "壯于前趾，往不勝為咎。",
      "dich": "Mạnh ở ngón chân phía trước, đi mà không thắng thì thành lỗi.",
-     "y": "Quyết mà thiếu chuẩn bị thì thua."
+     "y": "Quyết mà thiếu chuẩn bị thì thua.",
+     "nom_na": "Như quyết mà chưa chuẩn bị gì: thua."
     },
     {
      "vi_tri": 2,
@@ -2688,7 +2986,8 @@
      "ten_han": "九二",
      "han": "惕號，莫夜有戎，勿恤。",
      "dich": "Lo sợ kêu gọi, đêm khuya có giặc, đừng lo.",
-     "y": "Cảnh giác từ trước thì biến cố không đáng sợ."
+     "y": "Cảnh giác từ trước thì biến cố không đáng sợ.",
+     "nom_na": "Như đã cảnh giác từ trước: chuyện bất ngờ đêm khuya cũng không đáng sợ."
     },
     {
      "vi_tri": 3,
@@ -2696,7 +2995,8 @@
      "ten_han": "九三",
      "han": "壯于頄，有凶。君子夬夬，獨行，遇雨，若濡，有慍，无咎。",
      "dich": "Mạnh lộ ra ở gò má, có xấu. Quân tử quyết đoán, đi một mình gặp mưa, như bị ướt, có giận, không lỗi.",
-     "y": "Đừng để lộ ý chí đối đầu; có lúc phải âm thầm chịu hiểu lầm."
+     "y": "Đừng để lộ ý chí đối đầu; có lúc phải âm thầm chịu hiểu lầm.",
+     "nom_na": "Như để lộ mặt muốn đối đầu: không hay; có lúc phải lặng lẽ chịu hiểu lầm."
     },
     {
      "vi_tri": 4,
@@ -2704,7 +3004,8 @@
      "ten_han": "九四",
      "han": "臀无膚，其行次且。牽羊悔亡，聞言不信。",
      "dich": "Mông không có da, đi tập tễnh; dắt dê thì hối mất, nghe lời mà không tin.",
-     "y": "Tiến lùi khó — nghe lời khuyên đi theo người khác thì đỡ, nhưng khó nghe."
+     "y": "Tiến lùi khó — nghe lời khuyên đi theo người khác thì đỡ, nhưng khó nghe.",
+     "nom_na": "Như tiến không được, lùi không xong: nghe lời khuyên thì đỡ, nhưng khó nghe."
     },
     {
      "vi_tri": 5,
@@ -2712,7 +3013,8 @@
      "ten_han": "九五",
      "han": "莧陸夬夬，中行无咎。",
      "dich": "Rau sam (dễ mọc) quyết dứt, đi đường giữa thì không lỗi.",
-     "y": "Dứt bỏ cái xấu đã quen thân cần kiên quyết mà vẫn giữ trung."
+     "y": "Dứt bỏ cái xấu đã quen thân cần kiên quyết mà vẫn giữ trung.",
+     "nom_na": "Như dứt một thói quen xấu đã quá quen: phải kiên quyết mà vẫn bình tĩnh."
     },
     {
      "vi_tri": 6,
@@ -2720,7 +3022,8 @@
      "ten_han": "上六",
      "han": "无號，終有凶。",
      "dich": "Không kêu gọi được, cuối cùng có xấu.",
-     "y": "Cái xấu cuối cùng không ai cứu — kết thúc tất yếu."
+     "y": "Cái xấu cuối cùng không ai cứu — kết thúc tất yếu.",
+     "nom_na": "Như cái xấu đến cuối cùng không ai cứu được nữa."
     }
    ]
   },
@@ -2733,6 +3036,7 @@
     "han": "天下有風，姤；后以施命誥四方。",
     "dich": "Dưới trời có gió là Cấu; vua ban mệnh lệnh, báo khắp bốn phương."
    },
+   "nom_na": "Hình ảnh: gió thổi dưới trời, đi khắp nơi, gặp mọi thứ — cuộc gặp bất ngờ. Nôm na: như gặp một người, một lời mời hấp dẫn bất ngờ: chưa biết rõ thì đừng vội gắn bó; cái xấu nhỏ mà lọt vào thì sẽ lớn.",
    "thoan": {
     "han": "姤，遇也，柔遇剛也。勿用取女，不可與長也。天地相遇，品物咸章也。剛遇中正，天下大行也。姤之時義大矣哉！"
    },
@@ -2743,7 +3047,8 @@
      "ten_han": "初六",
      "han": "繫于金柅，貞吉，有攸往，見凶，羸豕孚蹢躅。",
      "dich": "Buộc vào trục hãm bằng kim loại, giữ chính thì tốt; có chỗ đi thì thấy xấu; con lợn gầy luôn chực xông xáo.",
-     "y": "Cái xấu mới manh nha — chặn ngay, đừng để nó lớn."
+     "y": "Cái xấu mới manh nha — chặn ngay, đừng để nó lớn.",
+     "nom_na": "Như thói xấu mới chớm: chặn ngay từ đầu, đừng để nó lớn."
     },
     {
      "vi_tri": 2,
@@ -2751,7 +3056,8 @@
      "ten_han": "九二",
      "han": "包有魚，无咎，不利賓。",
      "dich": "Trong bọc có cá, không lỗi, không lợi cho khách.",
-     "y": "Kiểm soát được vấn đề thì giữ lấy, đừng để lan ra."
+     "y": "Kiểm soát được vấn đề thì giữ lấy, đừng để lan ra.",
+     "nom_na": "Như phát hiện vấn đề và kiểm soát được: giữ lấy, đừng để lan ra."
     },
     {
      "vi_tri": 3,
@@ -2759,7 +3065,8 @@
      "ten_han": "九三",
      "han": "臀无膚，其行次且，厲，无大咎。",
      "dich": "Mông không có da, đi tập tễnh, nguy, không lỗi lớn.",
-     "y": "Lưỡng lự là đúng — tránh dính vào điều không nên."
+     "y": "Lưỡng lự là đúng — tránh dính vào điều không nên.",
+     "nom_na": "Như lưỡng lự trước một mối dính líu không nên: lưỡng lự là đúng."
     },
     {
      "vi_tri": 4,
@@ -2767,7 +3074,8 @@
      "ten_han": "九四",
      "han": "包无魚，起凶。",
      "dich": "Trong bọc không có cá, dấy lên thì xấu.",
-     "y": "Mất sự gắn kết với người dưới — hành động lúc này thì hỏng."
+     "y": "Mất sự gắn kết với người dưới — hành động lúc này thì hỏng.",
+     "nom_na": "Như mất sự gắn kết với người dưới, với khách hàng: lúc này làm gì cũng hỏng."
     },
     {
      "vi_tri": 5,
@@ -2775,7 +3083,8 @@
      "ten_han": "九五",
      "han": "以杞包瓜，含章，有隕自天。",
      "dich": "Lấy lá kỷ bọc quả dưa, ngậm vẻ đẹp, có rơi xuống từ trời.",
-     "y": "Giữ đức bên trong, khéo bao dung — cơ hội tự đến."
+     "y": "Giữ đức bên trong, khéo bao dung — cơ hội tự đến.",
+     "nom_na": "Như giữ phẩm chất bên trong, khéo bao dung: cơ hội tự rơi xuống."
     },
     {
      "vi_tri": 6,
@@ -2783,7 +3092,8 @@
      "ten_han": "上九",
      "han": "姤其角，吝，无咎。",
      "dich": "Gặp nhau ở chỗ sừng, đáng tiếc, không lỗi.",
-     "y": "Cao ngạo cô lập — không ai gặp, đáng tiếc nhưng không hại."
+     "y": "Cao ngạo cô lập — không ai gặp, đáng tiếc nhưng không hại.",
+     "nom_na": "Như người kiêu, sống tách biệt: không ai đến gần — đáng tiếc nhưng không hại."
     }
    ]
   },
@@ -2796,6 +3106,7 @@
     "han": "澤上於地，萃；君子以除戎器，戒不虞。",
     "dich": "Đầm lên trên đất là Tuỵ; người quân tử sửa sang khí giới, phòng điều bất ngờ."
    },
+   "nom_na": "Hình ảnh: nước đầm tụ trên mặt đất — người, của tụ về một chỗ. Nôm na: như họp mặt, hội nhóm, đoàn kết làm việc chung: cần người đứng đầu có đức, có lòng thành, và nhớ phòng chuyện bất ngờ khi đông người.",
    "thoan": {
     "han": "萃，聚也；順以說，剛中而應，故聚也。王假有廟，致孝享也。利見大人亨，聚以正也。用大牲吉，利有攸往，順天命也。觀其所聚，而天地萬物之情可見矣。"
    },
@@ -2806,7 +3117,8 @@
      "ten_han": "初六",
      "han": "有孚不終，乃亂乃萃，若號一握為笑，勿恤，往无咎。",
      "dich": "Có lòng tin mà không trọn, khi loạn khi tụ; nếu kêu lên, một cái nắm tay mà thành cười, đừng lo, đi thì không lỗi.",
-     "y": "Lòng còn dao động — bày tỏ thành thật thì được đón nhận."
+     "y": "Lòng còn dao động — bày tỏ thành thật thì được đón nhận.",
+     "nom_na": "Như lòng còn lưỡng lự chưa muốn vào nhóm: nói thật lòng ra thì được đón nhận."
     },
     {
      "vi_tri": 2,
@@ -2814,7 +3126,8 @@
      "ten_han": "六二",
      "han": "引吉，无咎，孚乃利用禴。",
      "dich": "Được dẫn dắt thì tốt, không lỗi; có lòng tin thì lễ mọn cũng được.",
-     "y": "Có người dẫn vào — thành ý quan trọng hơn hình thức."
+     "y": "Có người dẫn vào — thành ý quan trọng hơn hình thức.",
+     "nom_na": "Như có người giới thiệu vào nhóm: thành ý quan trọng hơn quà cáp."
     },
     {
      "vi_tri": 3,
@@ -2822,7 +3135,8 @@
      "ten_han": "六三",
      "han": "萃如，嗟如，无攸利，往无咎，小吝。",
      "dich": "Tụ mà than thở, không có gì lợi; đi thì không lỗi, hơi đáng tiếc.",
-     "y": "Không hợp nhóm hiện tại — chủ động tìm nơi khác."
+     "y": "Không hợp nhóm hiện tại — chủ động tìm nơi khác.",
+     "nom_na": "Như vào nhóm mà chỉ thấy than thở: chủ động tìm nơi khác hợp hơn."
     },
     {
      "vi_tri": 4,
@@ -2830,7 +3144,8 @@
      "ten_han": "九四",
      "han": "大吉，无咎。",
      "dich": "Rất tốt, không lỗi.",
-     "y": "Có vị trí để tụ người — miễn là làm vì việc chung."
+     "y": "Có vị trí để tụ người — miễn là làm vì việc chung.",
+     "nom_na": "Như mình có vị trí để tập hợp mọi người: tốt, miễn là vì việc chung."
     },
     {
      "vi_tri": 5,
@@ -2838,7 +3153,8 @@
      "ten_han": "九五",
      "han": "萃有位，无咎。匪孚，元永貞，悔亡。",
      "dich": "Tụ họp có ngôi vị, không lỗi. Người chưa tin thì giữ đức lớn bền lâu, hối mất.",
-     "y": "Có địa vị chưa đủ — cần đức bền thì người mới thật tin."
+     "y": "Có địa vị chưa đủ — cần đức bền thì người mới thật tin.",
+     "nom_na": "Như có chức mà người ta chưa phục: cần đức bền lâu thì người mới tin."
     },
     {
      "vi_tri": 6,
@@ -2846,7 +3162,8 @@
      "ten_han": "上六",
      "han": "齎咨涕洟，无咎。",
      "dich": "Than thở rơi lệ, không lỗi.",
-     "y": "Muốn tụ mà không được, biết lo âu thì không có lỗi."
+     "y": "Muốn tụ mà không được, biết lo âu thì không có lỗi.",
+     "nom_na": "Như muốn đoàn tụ mà không được, buồn khóc: biết lo nghĩ thì không có lỗi."
     }
    ]
   },
@@ -2859,6 +3176,7 @@
     "han": "地中生木，升；君子以順德，積小以高大。",
     "dich": "Trong đất mọc cây là Thăng; người quân tử thuận đức, chứa nhỏ thành cao lớn."
    },
+   "nom_na": "Hình ảnh: cây mọc từ trong đất, lớn dần lên — đi lên từ từ. Nôm na: như sự thăng tiến bền vững: góp nhỏ thành lớn, đi lên từng bậc, được người trên giúp.",
    "thoan": {
     "han": "柔以時升，巽而順，剛中而應，是以大亨。用見大人，勿恤；有慶也。南征吉，志行也。"
    },
@@ -2869,7 +3187,8 @@
      "ten_han": "初六",
      "han": "允升，大吉。",
      "dich": "Được tin mà lên, rất tốt.",
-     "y": "Người trên tin cậy — cứ tiến lên."
+     "y": "Người trên tin cậy — cứ tiến lên.",
+     "nom_na": "Như được sếp tin mà cất nhắc: cứ tiến lên."
     },
     {
      "vi_tri": 2,
@@ -2877,7 +3196,8 @@
      "ten_han": "九二",
      "han": "孚乃利用禴，无咎。",
      "dich": "Có lòng tin thì lễ mọn cũng được, không lỗi.",
-     "y": "Thành thật trên hết, không cần phô trương."
+     "y": "Thành thật trên hết, không cần phô trương.",
+     "nom_na": "Như thành thật là đủ, không cần quà cáp phô trương."
     },
     {
      "vi_tri": 3,
@@ -2885,7 +3205,8 @@
      "ten_han": "九三",
      "han": "升虛邑。",
      "dich": "Lên ấp trống.",
-     "y": "Tiến lên dễ như vào chỗ không người — nhưng chớ chủ quan."
+     "y": "Tiến lên dễ như vào chỗ không người — nhưng chớ chủ quan.",
+     "nom_na": "Như mọi thứ dễ dàng như đi vào chỗ không người: nhưng đừng chủ quan."
     },
     {
      "vi_tri": 4,
@@ -2893,7 +3214,8 @@
      "ten_han": "六四",
      "han": "王用亨于岐山，吉无咎。",
      "dich": "Vua dùng tế ở núi Kỳ, tốt, không lỗi.",
-     "y": "Đem năng lực phụng sự người trên, việc chung."
+     "y": "Đem năng lực phụng sự người trên, việc chung.",
+     "nom_na": "Như dùng năng lực của mình phục vụ việc chung: tốt."
     },
     {
      "vi_tri": 5,
@@ -2901,7 +3223,8 @@
      "ten_han": "六五",
      "han": "貞吉，升階。",
      "dich": "Giữ chính thì tốt, lên từng bậc.",
-     "y": "Thăng tiến từng bước vững chắc."
+     "y": "Thăng tiến từng bước vững chắc.",
+     "nom_na": "Như lên chức từng bậc vững chắc: tốt."
     },
     {
      "vi_tri": 6,
@@ -2909,7 +3232,8 @@
      "ten_han": "上六",
      "han": "冥升，利于不息之貞。",
      "dich": "Lên trong mờ tối, lợi ở sự bền chính không ngừng.",
-     "y": "Lên mù quáng thì nguy — chuyển sang tự tu dưỡng không ngừng."
+     "y": "Lên mù quáng thì nguy — chuyển sang tự tu dưỡng không ngừng.",
+     "nom_na": "Như cứ lao lên mà không biết để làm gì: nên chuyển sang tự rèn mình."
     }
    ]
   },
@@ -2922,6 +3246,7 @@
     "han": "澤无水，困；君子以致命遂志。",
     "dich": "Đầm không có nước là Khốn; người quân tử dù liều thân cũng đạt chí mình."
    },
+   "nom_na": "Hình ảnh: đầm cạn hết nước — khốn đốn, kiệt quệ. Nôm na: như lúc túng quẫn, nói gì cũng không ai tin: giữ mình đàng hoàng, ít nói, giữ chí — người có bản lĩnh vẫn đi qua được.",
    "thoan": {
     "han": "困，剛掩也。險以說，困而不失其所，亨；其唯君子乎？貞大人吉，以剛中也。有言不信，尚口乃窮也。"
    },
@@ -2932,7 +3257,8 @@
      "ten_han": "初六",
      "han": "臀困于株木，入于幽谷，三歲不覿。",
      "dich": "Mông bị khốn ở gốc cây, vào hang tối, ba năm không thấy.",
-     "y": "Càng khốn càng tự cô lập — hãy bước ra tìm ánh sáng."
+     "y": "Càng khốn càng tự cô lập — hãy bước ra tìm ánh sáng.",
+     "nom_na": "Như càng khó càng trốn vào phòng, không gặp ai: hãy bước ra."
     },
     {
      "vi_tri": 2,
@@ -2940,7 +3266,8 @@
      "ten_han": "九二",
      "han": "困于酒食，朱紱方來，利用享祀，征凶，无咎。",
      "dich": "Khốn trong rượu thịt, dải đỏ sắp đến; lợi dùng tế lễ, đi thì xấu, không lỗi.",
-     "y": "Khốn vì đủ đầy mà vô vị — giữ thành tâm, chờ người đến mời."
+     "y": "Khốn vì đủ đầy mà vô vị — giữ thành tâm, chờ người đến mời.",
+     "nom_na": "Như có đủ ăn đủ mặc mà thấy trống rỗng: giữ thành tâm, chờ người đến mời."
     },
     {
      "vi_tri": 3,
@@ -2948,7 +3275,8 @@
      "ten_han": "六三",
      "han": "困于石，據于蒺蔾，入于其宮，不見其妻，凶。",
      "dich": "Khốn ở đá, dựa vào gai góc, vào nhà không thấy vợ, xấu.",
-     "y": "Đối đầu với chỗ không thể thắng, dựa vào chỗ không thể dựa."
+     "y": "Đối đầu với chỗ không thể thắng, dựa vào chỗ không thể dựa.",
+     "nom_na": "Như đâm vào tường đá, tựa vào bụi gai: chọn sai chỗ đối đầu, sai chỗ dựa."
     },
     {
      "vi_tri": 4,
@@ -2956,7 +3284,8 @@
      "ten_han": "九四",
      "han": "來徐徐，困于金車，吝，有終。",
      "dich": "Đến chầm chậm, khốn ở xe vàng; đáng tiếc nhưng có kết quả.",
-     "y": "Muốn giúp mà vướng người quyền thế — chậm mà rồi vẫn đến."
+     "y": "Muốn giúp mà vướng người quyền thế — chậm mà rồi vẫn đến.",
+     "nom_na": "Như muốn giúp người mà vướng người có quyền: chậm, nhưng rồi vẫn đến."
     },
     {
      "vi_tri": 5,
@@ -2964,7 +3293,8 @@
      "ten_han": "九五",
      "han": "劓刖，困于赤紱，乃徐有說，利用祭祀。",
      "dich": "Bị cắt mũi chặt chân, khốn ở dải đỏ, rồi từ từ có vui, lợi dùng tế lễ.",
-     "y": "Bị cả trên lẫn dưới kìm hãm — kiên nhẫn, thành tâm thì dần thoát."
+     "y": "Bị cả trên lẫn dưới kìm hãm — kiên nhẫn, thành tâm thì dần thoát.",
+     "nom_na": "Như bị kìm cả trên lẫn dưới: kiên nhẫn, thật lòng thì dần thoát."
     },
     {
      "vi_tri": 6,
@@ -2972,7 +3302,8 @@
      "ten_han": "上六",
      "han": "困于葛藟，于臲卼，曰動悔。有悔，征吉。",
      "dich": "Khốn ở dây sắn, chênh vênh, nói rằng động thì hối. Có hối, đi thì tốt.",
-     "y": "Khốn đến cùng rồi — dám hành động, chấp nhận sai mà sửa thì thoát."
+     "y": "Khốn đến cùng rồi — dám hành động, chấp nhận sai mà sửa thì thoát.",
+     "nom_na": "Như đã khốn đến cùng: dám hành động, sai thì sửa, sẽ thoát."
     }
    ]
   },
@@ -2985,6 +3316,7 @@
     "han": "木上有水，井；君子以勞民勸相。",
     "dich": "Trên gỗ có nước là Tỉnh; người quân tử khuyến khích dân làm việc, giúp đỡ nhau."
    },
+   "nom_na": "Hình ảnh: gàu gỗ thả xuống múc nước lên — cái giếng làng. Nôm na: như cái giếng ai cũng dùng, làng dời đi giếng vẫn còn: giá trị thật bền bỉ nuôi được nhiều người, nhưng phải giữ cho giếng sạch, dây gàu đủ dài.",
    "thoan": {
     "han": "巽乎水而上水，井；井養而不窮也。改邑不改井，乃以剛中也。汔至亦未繘井，未有功也。羸其瓶，是以凶也。"
    },
@@ -2995,7 +3327,8 @@
      "ten_han": "初六",
      "han": "井泥不食，舊井无禽。",
      "dich": "Giếng bùn không ăn được, giếng cũ không có chim.",
-     "y": "Bỏ bê bản thân thì không còn giá trị với ai."
+     "y": "Bỏ bê bản thân thì không còn giá trị với ai.",
+     "nom_na": "Như bỏ bê bản thân đến mức như giếng đầy bùn: chẳng ai cần đến."
     },
     {
      "vi_tri": 2,
@@ -3003,7 +3336,8 @@
      "ten_han": "九二",
      "han": "井谷射鮒，瓮敝漏。",
      "dich": "Giếng rò nước bắn cá diếc, vò vỡ rò.",
-     "y": "Có tài mà không được dùng đúng — tài phung phí."
+     "y": "Có tài mà không được dùng đúng — tài phung phí.",
+     "nom_na": "Như người có tài mà không được dùng đúng chỗ: phí."
     },
     {
      "vi_tri": 3,
@@ -3011,7 +3345,8 @@
      "ten_han": "九三",
      "han": "井渫不食，為我心惻，可用汲，王明，並受其福。",
      "dich": "Giếng đã sạch mà không ai ăn, khiến lòng ta xót; có thể múc, vua sáng thì cùng được phúc.",
-     "y": "Có năng lực mà chưa được dùng — người sáng suốt sẽ nhận ra."
+     "y": "Có năng lực mà chưa được dùng — người sáng suốt sẽ nhận ra.",
+     "nom_na": "Như giếng đã sạch mà chưa ai múc: có năng lực chưa được biết — người sáng suốt sẽ nhận ra."
     },
     {
      "vi_tri": 4,
@@ -3019,7 +3354,8 @@
      "ten_han": "六四",
      "han": "井甃，无咎。",
      "dich": "Giếng xây gạch, không lỗi.",
-     "y": "Lúc tu sửa bản thân, củng cố nền — chưa phục vụ được cũng không sao."
+     "y": "Lúc tu sửa bản thân, củng cố nền — chưa phục vụ được cũng không sao.",
+     "nom_na": "Như đang sửa sang lại giếng: lúc rèn luyện bản thân, chưa phục vụ ai cũng không sao."
     },
     {
      "vi_tri": 5,
@@ -3027,7 +3363,8 @@
      "ten_han": "九五",
      "han": "井冽，寒泉食。",
      "dich": "Giếng trong, suối mát được ăn.",
-     "y": "Phẩm chất tốt được mọi người dùng — giá trị thật."
+     "y": "Phẩm chất tốt được mọi người dùng — giá trị thật.",
+     "nom_na": "Như giếng trong mát, ai cũng múc: phẩm chất tốt được mọi người dùng."
     },
     {
      "vi_tri": 6,
@@ -3035,7 +3372,8 @@
      "ten_han": "上六",
      "han": "井收勿幕，有孚元吉。",
      "dich": "Giếng múc lên mà không đậy, có lòng tin, rất tốt.",
-     "y": "Rộng rãi chia sẻ cho mọi người — phúc lớn."
+     "y": "Rộng rãi chia sẻ cho mọi người — phúc lớn.",
+     "nom_na": "Như giếng không đậy, ai cũng múc được: chia sẻ rộng rãi là phúc lớn."
     }
    ]
   },
@@ -3048,6 +3386,7 @@
     "han": "澤中有火，革；君子以治歷明時。",
     "dich": "Trong đầm có lửa là Cách; người quân tử sửa lịch, làm rõ thời tiết."
    },
+   "nom_na": "Hình ảnh: lửa trong đầm, nước và lửa diệt nhau mà sinh cái mới — như con thú thay lông. Nôm na: như cải tổ, đổi việc, đổi cách sống: đổi khi thời đã chín, bàn kỹ, được người tin thì mới thành; đổi xong thì dừng lại củng cố.",
    "thoan": {
     "han": "革，水火相息，二女同居，其志不相得，曰革。巳日乃孚；革而信也。文明以說，大亨以正，革而當，其悔乃亡。天地革而四時成，湯武革命，順乎天而應乎人，革之時大矣哉！"
    },
@@ -3058,7 +3397,8 @@
      "ten_han": "初九",
      "han": "鞏用黃牛之革。",
      "dich": "Buộc chặt bằng da bò vàng.",
-     "y": "Chưa đến lúc đổi — giữ vững, đừng manh động."
+     "y": "Chưa đến lúc đổi — giữ vững, đừng manh động.",
+     "nom_na": "Như muốn đổi mà chưa đến lúc: giữ yên đã, đừng manh động."
     },
     {
      "vi_tri": 2,
@@ -3066,7 +3406,8 @@
      "ten_han": "六二",
      "han": "巳日乃革之，征吉，无咎。",
      "dich": "Đến ngày đã định mới đổi, đi thì tốt, không lỗi.",
-     "y": "Thời cơ chín, chuẩn bị đủ — tiến hành thay đổi."
+     "y": "Thời cơ chín, chuẩn bị đủ — tiến hành thay đổi.",
+     "nom_na": "Như mọi thứ đã sẵn sàng, đúng thời điểm: tiến hành thay đổi."
     },
     {
      "vi_tri": 3,
@@ -3074,7 +3415,8 @@
      "ten_han": "九三",
      "han": "征凶，貞厲，革言三就，有孚。",
      "dich": "Đi thì xấu, giữ thế thì nguy; lời bàn đổi mới ba lần thành tựu thì có tin.",
-     "y": "Đổi mới cần bàn kỹ nhiều lần, được đồng thuận mới làm."
+     "y": "Đổi mới cần bàn kỹ nhiều lần, được đồng thuận mới làm.",
+     "nom_na": "Như muốn cải tổ: bàn kỹ ba lượt, mọi người đồng thuận rồi mới làm."
     },
     {
      "vi_tri": 4,
@@ -3082,7 +3424,8 @@
      "ten_han": "九四",
      "han": "悔亡，有孚改命，吉。",
      "dich": "Hối mất, có lòng tin mà đổi mệnh, tốt.",
-     "y": "Thay đổi được lòng người tin — tiến hành dứt khoát."
+     "y": "Thay đổi được lòng người tin — tiến hành dứt khoát.",
+     "nom_na": "Như thay đổi được lòng người tin: làm dứt khoát."
     },
     {
      "vi_tri": 5,
@@ -3090,7 +3433,8 @@
      "ten_han": "九五",
      "han": "大人虎變，未占有孚。",
      "dich": "Đại nhân biến đổi như hổ, chưa bói đã có tin.",
-     "y": "Người có tầm đổi mới rõ ràng, sáng sủa — ai cũng tin theo."
+     "y": "Người có tầm đổi mới rõ ràng, sáng sủa — ai cũng tin theo.",
+     "nom_na": "Như người lãnh đạo đổi mới rõ ràng, minh bạch: ai cũng theo, không cần thuyết phục."
     },
     {
      "vi_tri": 6,
@@ -3098,7 +3442,8 @@
      "ten_han": "上六",
      "han": "君子豹變，小人革面，征凶，居貞吉。",
      "dich": "Quân tử biến đổi như báo, tiểu nhân đổi mặt; đi thì xấu, ở yên giữ chính thì tốt.",
-     "y": "Thay đổi đã xong — dừng lại củng cố, đừng đổi tiếp."
+     "y": "Thay đổi đã xong — dừng lại củng cố, đừng đổi tiếp.",
+     "nom_na": "Như đã đổi xong: dừng lại củng cố, đừng đổi tiếp."
     }
    ]
   },
@@ -3111,6 +3456,7 @@
     "han": "木上有火，鼎；君子以正位凝命。",
     "dich": "Trên gỗ có lửa là Đỉnh; người quân tử ngay ngắn ngôi vị, làm vững mệnh lệnh."
    },
+   "nom_na": "Hình ảnh: lửa cháy dưới gỗ, nấu chín đồ trong vạc — vạc là bếp chung, là biểu tượng của sự vững vàng. Nôm na: như sau khi đổi mới thì xây dựng nền nếp mới, nuôi dưỡng người tài; chỗ đứng vững nhờ thực lực và dùng đúng người.",
    "thoan": {
     "han": "鼎，象也。以木巽火，亨飪也。聖人亨以享上帝，而大亨以養聖賢。巽而耳目聰明，柔進而上行，得中而應乎剛，是以元亨。"
    },
@@ -3121,7 +3467,8 @@
      "ten_han": "初六",
      "han": "鼎顛趾，利出否，得妾以其子，无咎。",
      "dich": "Vạc lật chân, lợi đổ ra cái xấu cũ; được thiếp nhờ con, không lỗi.",
-     "y": "Dọn sạch cái cũ hỏng để làm mới — cái tưởng thấp kém lại có ích."
+     "y": "Dọn sạch cái cũ hỏng để làm mới — cái tưởng thấp kém lại có ích.",
+     "nom_na": "Như dọn sạch đồ cũ hỏng trước khi nấu nồi mới: cái tưởng thấp kém hoá ra có ích."
     },
     {
      "vi_tri": 2,
@@ -3129,7 +3476,8 @@
      "ten_han": "九二",
      "han": "鼎有實，我仇有疾，不我能即，吉。",
      "dich": "Vạc có thực chất, kẻ thù ta có bệnh, không đến gần ta được, tốt.",
-     "y": "Có thực lực thật — kẻ ganh ghét không làm gì được."
+     "y": "Có thực lực thật — kẻ ganh ghét không làm gì được.",
+     "nom_na": "Như có thực lực thật: người ganh ghét chẳng làm gì được mình."
     },
     {
      "vi_tri": 3,
@@ -3137,7 +3485,8 @@
      "ten_han": "九三",
      "han": "鼎耳革，其行塞，雉膏不食，方雨虧悔，終吉。",
      "dich": "Tai vạc đổi khác, việc đi bị tắc, mỡ chim trĩ không được ăn; sắp mưa thì bớt hối, cuối cùng tốt.",
-     "y": "Có tài mà chưa được dùng do không ăn khớp — rồi sẽ thông."
+     "y": "Có tài mà chưa được dùng do không ăn khớp — rồi sẽ thông.",
+     "nom_na": "Như có tài mà chưa ăn khớp với nơi làm việc: rồi sẽ thông."
     },
     {
      "vi_tri": 4,
@@ -3145,7 +3494,8 @@
      "ten_han": "九四",
      "han": "鼎折足，覆公餗，其形渥，凶。",
      "dich": "Vạc gãy chân, đổ thức ăn của công, thân bị ướt nhem, xấu.",
-     "y": "Nhận việc quá sức hoặc giao sai người — hỏng việc lớn."
+     "y": "Nhận việc quá sức hoặc giao sai người — hỏng việc lớn.",
+     "nom_na": "Như nhận việc quá sức, giao việc sai người: đổ cả nồi."
     },
     {
      "vi_tri": 5,
@@ -3153,7 +3503,8 @@
      "ten_han": "六五",
      "han": "鼎黃耳，金鉉，利貞。",
      "dich": "Vạc tai vàng, quai bằng kim loại, lợi giữ chính.",
-     "y": "Ở vị trí trung tâm, biết dùng người giỏi — vững vàng."
+     "y": "Ở vị trí trung tâm, biết dùng người giỏi — vững vàng.",
+     "nom_na": "Như người ở vị trí trung tâm biết dùng người giỏi: vững vàng."
     },
     {
      "vi_tri": 6,
@@ -3161,7 +3512,8 @@
      "ten_han": "上九",
      "han": "鼎玉鉉，大吉，无不利。",
      "dich": "Vạc có quai ngọc, rất tốt, không gì không lợi.",
-     "y": "Cương nhu hài hoà, hoàn thiện — cực tốt."
+     "y": "Cương nhu hài hoà, hoàn thiện — cực tốt.",
+     "nom_na": "Như vừa cứng vừa mềm, hài hoà: rất tốt."
     }
    ]
   },
@@ -3174,6 +3526,7 @@
     "han": "洊雷，震；君子以恐懼脩省。",
     "dich": "Sấm dồn dập là Chấn; người quân tử lo sợ mà tu sửa, tự xét mình."
    },
+   "nom_na": "Hình ảnh: sấm nối sấm — chấn động, giật mình. Nôm na: như nhận một tin sốc, một biến cố bất ngờ: sợ là bình thường; người vững thì sợ xong biết tự xét, không đánh rơi việc chính, rồi lại cười nói được.",
    "thoan": {
     "han": "震，亨。震來虩虩，恐致福也。笑言啞啞，後有則也。震驚百里，驚遠而懼邇也。出可以守宗廟社稷，以為祭主也。"
    },
@@ -3184,7 +3537,8 @@
      "ten_han": "初九",
      "han": "震來虩虩，後笑言啞啞，吉。",
      "dich": "Sấm đến làm sợ hãi, sau cười nói vui vẻ, tốt.",
-     "y": "Biến cố khiến giật mình — chính nỗi sợ ấy giúp mình cẩn trọng rồi yên vui."
+     "y": "Biến cố khiến giật mình — chính nỗi sợ ấy giúp mình cẩn trọng rồi yên vui.",
+     "nom_na": "Như giật mình vì một tin sốc: chính nỗi sợ khiến mình cẩn trọng hơn, rồi lại yên vui."
     },
     {
      "vi_tri": 2,
@@ -3192,7 +3546,8 @@
      "ten_han": "六二",
      "han": "震來厲，億喪貝，躋于九陵，勿逐，七日得。",
      "dich": "Sấm đến nguy, ước mất của, leo lên chín gò, chớ đuổi, bảy ngày được lại.",
-     "y": "Mất mát do biến động — đừng đuổi theo, tự khắc trở lại."
+     "y": "Mất mát do biến động — đừng đuổi theo, tự khắc trở lại.",
+     "nom_na": "Như bị mất mát vì biến động: đừng cố đuổi theo, rồi sẽ có lại."
     },
     {
      "vi_tri": 3,
@@ -3200,7 +3555,8 @@
      "ten_han": "六三",
      "han": "震蘇蘇，震行无眚。",
      "dich": "Sấm làm hoảng hốt, nhân sấm mà đi thì không tai vạ.",
-     "y": "Mượn cú sốc để tự thay đổi thì vô hại."
+     "y": "Mượn cú sốc để tự thay đổi thì vô hại.",
+     "nom_na": "Như mượn cú sốc để tự thay đổi bản thân: không sao cả."
     },
     {
      "vi_tri": 4,
@@ -3208,7 +3564,8 @@
      "ten_han": "九四",
      "han": "震遂泥。",
      "dich": "Sấm chìm trong bùn.",
-     "y": "Bị cú sốc làm tê liệt, mất ý chí — cần vực lại."
+     "y": "Bị cú sốc làm tê liệt, mất ý chí — cần vực lại.",
+     "nom_na": "Như bị cú sốc làm tê liệt, mất ý chí: cần vực mình dậy."
     },
     {
      "vi_tri": 5,
@@ -3216,7 +3573,8 @@
      "ten_han": "六五",
      "han": "震往來厲，億无喪，有事。",
      "dich": "Sấm đi lại nguy, ước không mất gì, còn có việc làm.",
-     "y": "Biến động liên tục — giữ trung đạo thì không mất gì."
+     "y": "Biến động liên tục — giữ trung đạo thì không mất gì.",
+     "nom_na": "Như biến động liên tiếp: giữ bình tĩnh, giữ mực thì không mất gì."
     },
     {
      "vi_tri": 6,
@@ -3224,7 +3582,8 @@
      "ten_han": "上六",
      "han": "震索索，視矍矍，征凶。震不于其躬，于其鄰，无咎。婚媾有言。",
      "dich": "Sấm làm run rẩy, nhìn ngơ ngác, đi thì xấu. Sấm chưa đến thân mình mà đến láng giềng, không lỗi; hôn nhân có lời ra tiếng vào.",
-     "y": "Thấy biến ở người khác mà tự đề phòng — dù bị chê, vẫn đúng."
+     "y": "Thấy biến ở người khác mà tự đề phòng — dù bị chê, vẫn đúng.",
+     "nom_na": "Như thấy nhà hàng xóm gặp chuyện mà mình đề phòng trước: bị chê lo xa nhưng vẫn đúng."
     }
    ]
   },
@@ -3237,6 +3596,7 @@
     "han": "兼山，艮；君子以思不出其位。",
     "dich": "Hai núi chồng nhau là Cấn; người quân tử suy nghĩ không vượt khỏi vị trí của mình."
    },
+   "nom_na": "Hình ảnh: núi chồng lên núi — đứng yên. Nôm na: như lúc cần dừng lại, tĩnh tâm, ngưng nghĩ ngợi lan man: biết dừng đúng lúc, đúng chỗ, mỗi việc ở đúng phận mình.",
    "thoan": {
     "han": "艮，止也。時止則止，時行則行，動靜不失其時，其道光明。艮其止，止其所也。上下敵應，不相與也。是以不獲其身，行其庭不見其人，无咎也。"
    },
@@ -3247,7 +3607,8 @@
      "ten_han": "初六",
      "han": "艮其趾，无咎，利永貞。",
      "dich": "Dừng ở ngón chân, không lỗi, lợi giữ chính lâu dài.",
-     "y": "Dừng ngay từ bước đầu sai thì không lỗi."
+     "y": "Dừng ngay từ bước đầu sai thì không lỗi.",
+     "nom_na": "Như dừng lại ngay từ bước đầu khi thấy sai: không có lỗi."
     },
     {
      "vi_tri": 2,
@@ -3255,7 +3616,8 @@
      "ten_han": "六二",
      "han": "艮其腓，不拯其隨，其心不快。",
      "dich": "Dừng ở bắp chân, không cứu được cái mình theo, lòng không vui.",
-     "y": "Muốn dừng người khác lại mà không được — đành buồn."
+     "y": "Muốn dừng người khác lại mà không được — đành buồn.",
+     "nom_na": "Như muốn can người khác dừng lại mà không được: đành buồn."
     },
     {
      "vi_tri": 3,
@@ -3263,7 +3625,8 @@
      "ten_han": "九三",
      "han": "艮其限，列其夤，厲薰心。",
      "dich": "Dừng ở ngang lưng, đứt cơ sống lưng, nguy, lòng như bị hun đốt.",
-     "y": "Ép mình dừng cứng nhắc, nén cảm xúc — căng thẳng, nguy."
+     "y": "Ép mình dừng cứng nhắc, nén cảm xúc — căng thẳng, nguy.",
+     "nom_na": "Như ép mình kìm nén quá mức: căng thẳng, bức bối."
     },
     {
      "vi_tri": 4,
@@ -3271,7 +3634,8 @@
      "ten_han": "六四",
      "han": "艮其身，无咎。",
      "dich": "Dừng ở thân mình, không lỗi.",
-     "y": "Kiềm chế bản thân đúng mức."
+     "y": "Kiềm chế bản thân đúng mức.",
+     "nom_na": "Như biết kiềm chế bản thân vừa phải: tốt."
     },
     {
      "vi_tri": 5,
@@ -3279,7 +3643,8 @@
      "ten_han": "六五",
      "han": "艮其輔，言有序，悔亡。",
      "dich": "Dừng ở hàm, lời nói có thứ tự, hối mất.",
-     "y": "Giữ lời — nói ít, nói có trật tự thì không hối."
+     "y": "Giữ lời — nói ít, nói có trật tự thì không hối.",
+     "nom_na": "Như biết giữ miệng, nói ít, nói có đầu có đuôi: không phải hối."
     },
     {
      "vi_tri": 6,
@@ -3287,7 +3652,8 @@
      "ten_han": "上九",
      "han": "敦艮，吉。",
      "dich": "Dừng một cách đôn hậu, tốt.",
-     "y": "Biết dừng đúng lúc, an nhiên — trọn vẹn."
+     "y": "Biết dừng đúng lúc, an nhiên — trọn vẹn.",
+     "nom_na": "Như người biết dừng đúng lúc, nhẹ nhõm, an nhiên."
     }
    ]
   },
@@ -3300,6 +3666,7 @@
     "han": "山上有木，漸；君子以居賢德，善俗。",
     "dich": "Trên núi có cây là Tiệm; người quân tử giữ đức hiền, làm tốt phong tục."
    },
+   "nom_na": "Hình ảnh: cây mọc trên núi, lớn lên từng chút — như cô dâu về nhà chồng theo đủ lễ. Nôm na: như mối quan hệ, sự nghiệp đi từng bước đúng trình tự: chậm mà chắc, đốt cháy giai đoạn thì hỏng.",
    "thoan": {
     "han": "漸之進也，女歸吉也。進得位，往有功也。進以正，可以正邦也。其位剛，得中也。止而巽，動不窮也。"
    },
@@ -3310,7 +3677,8 @@
      "ten_han": "初六",
      "han": "鴻漸于干，小子厲，有言，无咎。",
      "dich": "Chim hồng tiến dần đến bờ nước, kẻ nhỏ gặp nguy, có lời ra tiếng vào, không lỗi.",
-     "y": "Mới bắt đầu, còn yếu, bị chê — cứ từ từ tiến."
+     "y": "Mới bắt đầu, còn yếu, bị chê — cứ từ từ tiến.",
+     "nom_na": "Như người mới vào nghề còn yếu, bị chê: cứ từ từ mà tiến."
     },
     {
      "vi_tri": 2,
@@ -3318,7 +3686,8 @@
      "ten_han": "六二",
      "han": "鴻漸于磐，飲食衎衎，吉。",
      "dich": "Chim hồng tiến dần đến tảng đá, ăn uống vui vẻ, tốt.",
-     "y": "Đã có chỗ đứng vững — tận hưởng nhưng đừng ăn không."
+     "y": "Đã có chỗ đứng vững — tận hưởng nhưng đừng ăn không.",
+     "nom_na": "Như đã có chỗ đứng vững: tận hưởng, nhưng nhớ đóng góp."
     },
     {
      "vi_tri": 3,
@@ -3326,7 +3695,8 @@
      "ten_han": "九三",
      "han": "鴻漸于陸，夫征不復，婦孕不育，凶；利禦寇。",
      "dich": "Chim hồng tiến dần đến đất bằng; chồng đi không về, vợ có thai không nuôi được, xấu; lợi chống giặc.",
-     "y": "Tiến vội vượt quá, bỏ gốc — hỏng; nên lo phòng thủ (ý biểu tượng)."
+     "y": "Tiến vội vượt quá, bỏ gốc — hỏng; nên lo phòng thủ (ý biểu tượng).",
+     "nom_na": "Như tiến vội quá xa, bỏ mất nền tảng: hỏng — nên lo phòng thủ."
     },
     {
      "vi_tri": 4,
@@ -3334,7 +3704,8 @@
      "ten_han": "六四",
      "han": "鴻漸于木，或得其桷，无咎。",
      "dich": "Chim hồng tiến dần đến cây, có khi được cành bằng, không lỗi.",
-     "y": "Ở chỗ chưa hợp — tìm được chỗ đậu tạm, an toàn."
+     "y": "Ở chỗ chưa hợp — tìm được chỗ đậu tạm, an toàn.",
+     "nom_na": "Như ở chỗ chưa hợp mình: tìm được chỗ tạm yên là tốt."
     },
     {
      "vi_tri": 5,
@@ -3342,7 +3713,8 @@
      "ten_han": "九五",
      "han": "鴻漸于陵，婦三歲不孕，終莫之勝，吉。",
      "dich": "Chim hồng tiến dần đến gò cao; vợ ba năm không có thai, cuối cùng không gì thắng được, tốt.",
-     "y": "Bị chia cách, chờ lâu — nhưng điều đúng cuối cùng sẽ đến (ý biểu tượng)."
+     "y": "Bị chia cách, chờ lâu — nhưng điều đúng cuối cùng sẽ đến (ý biểu tượng).",
+     "nom_na": "Như hai người bị xa cách, chờ đợi lâu: điều đúng cuối cùng sẽ đến."
     },
     {
      "vi_tri": 6,
@@ -3350,7 +3722,8 @@
      "ten_han": "上九",
      "han": "鴻漸于陸，其羽可用為儀，吉。",
      "dich": "Chim hồng tiến dần đến đường mây, lông nó có thể dùng làm nghi lễ, tốt.",
-     "y": "Đạt tới cao, trở thành hình mẫu cho người khác."
+     "y": "Đạt tới cao, trở thành hình mẫu cho người khác.",
+     "nom_na": "Như người đi đến đỉnh cao, thành tấm gương cho người khác."
     }
    ]
   },
@@ -3363,6 +3736,7 @@
     "han": "澤上有雷，歸妹；君子以永終知敝。",
     "dich": "Trên đầm có sấm là Quy Muội; người quân tử biết lâu dài về sau mà biết được chỗ hỏng."
    },
+   "nom_na": "Hình ảnh: sấm động trên mặt đầm — người em gái theo về nhà chồng ở vị trí phụ. Nôm na: như một mối quan hệ, một vị trí mình bước vào không phải theo cách chính danh: giữ đúng phận, nghĩ đến lâu dài, thấy trước chỗ hỏng.",
    "thoan": {
     "han": "歸妹，天地之大義也。天地不交，而萬物不興，歸妹人之終始也。說以動，所歸妹也。征凶，位不當也。无攸利，柔乘剛也。"
    },
@@ -3373,7 +3747,8 @@
      "ten_han": "初九",
      "han": "歸妹以娣，跛能履，征吉。",
      "dich": "Gả em gái làm vợ lẽ, què mà đi được, đi thì tốt.",
-     "y": "Ở vị trí phụ, giữ đúng phận mình vẫn làm được việc."
+     "y": "Ở vị trí phụ, giữ đúng phận mình vẫn làm được việc.",
+     "nom_na": "Như ở vị trí phụ mà giữ đúng phận mình: vẫn làm được việc."
     },
     {
      "vi_tri": 2,
@@ -3381,7 +3756,8 @@
      "ten_han": "九二",
      "han": "眇能視，利幽人之貞。",
      "dich": "Chột mà nhìn được, lợi cho sự bền chính của người ẩn dật.",
-     "y": "Hoàn cảnh không như ý, giữ lòng trung trinh."
+     "y": "Hoàn cảnh không như ý, giữ lòng trung trinh.",
+     "nom_na": "Như hoàn cảnh không như ý mà vẫn giữ lòng chung thuỷ, ngay thẳng."
     },
     {
      "vi_tri": 3,
@@ -3389,7 +3765,8 @@
      "ten_han": "六三",
      "han": "歸妹以須，反歸以娣。",
      "dich": "Gả em gái mà phải chờ đợi, trở về làm vợ lẽ.",
-     "y": "Mong cầu quá phận mà phải hạ mình — vì không chính."
+     "y": "Mong cầu quá phận mà phải hạ mình — vì không chính.",
+     "nom_na": "Như mong cầu cao hơn phận mình mà rốt cuộc phải hạ mình."
     },
     {
      "vi_tri": 4,
@@ -3397,7 +3774,8 @@
      "ten_han": "九四",
      "han": "歸妹愆期，遲歸有時。",
      "dich": "Gả em gái lỡ hẹn, gả muộn có thời.",
-     "y": "Chờ đúng người, đúng lúc dù trễ — đáng giá."
+     "y": "Chờ đúng người, đúng lúc dù trễ — đáng giá.",
+     "nom_na": "Như chờ đúng người, đúng lúc, dù muộn: đáng."
     },
     {
      "vi_tri": 5,
@@ -3405,7 +3783,8 @@
      "ten_han": "六五",
      "han": "帝乙歸妹，其君之袂，不如其娣之袂良，月幾望，吉。",
      "dich": "Vua Đế Ất gả em gái, áo của phu nhân không đẹp bằng áo của em gái đi theo; trăng gần rằm, tốt.",
-     "y": "Cao quý mà giản dị, không phô trương — tốt."
+     "y": "Cao quý mà giản dị, không phô trương — tốt.",
+     "nom_na": "Như người cao quý mà ăn mặc giản dị hơn cả người theo hầu: tốt."
     },
     {
      "vi_tri": 6,
@@ -3413,7 +3792,8 @@
      "ten_han": "上六",
      "han": "女承筐无實，士刲羊无血，无攸利。",
      "dich": "Người nữ mang giỏ không có gì, người trai giết dê không có máu, không gì lợi.",
-     "y": "Quan hệ chỉ có hình thức, không thực chất — vô ích."
+     "y": "Quan hệ chỉ có hình thức, không thực chất — vô ích.",
+     "nom_na": "Như mối quan hệ chỉ có hình thức, không có thực: chẳng được gì."
     }
    ]
   },
@@ -3426,6 +3806,7 @@
     "han": "雷電皆至，豐；君子以折獄致刑。",
     "dich": "Sấm chớp đều đến là Phong; người quân tử xét đoán việc kiện, thi hành hình phạt."
    },
+   "nom_na": "Hình ảnh: sấm và chớp cùng đến — thịnh vượng, rực rỡ như mặt trời giữa trưa. Nôm na: như lúc thành công đỉnh cao: tận hưởng, nhưng mặt trời đứng bóng rồi sẽ xế; giữ sáng suốt, đừng kiêu.",
    "thoan": {
     "han": "豐，大也。明以動，故丰。王假之，尚大也。勿憂宜日中，宜照天下也。日中則昃，月盈則食，天地盈虛，與時消息，而況人於人乎？況於鬼神乎？"
    },
@@ -3436,7 +3817,8 @@
      "ten_han": "初九",
      "han": "遇其配主，雖旬无咎，往有尚。",
      "dich": "Gặp người chủ xứng đôi, tuy ngang bằng không lỗi, đi thì được quý trọng.",
-     "y": "Gặp người hợp sức ngang tầm — cùng tiến."
+     "y": "Gặp người hợp sức ngang tầm — cùng tiến.",
+     "nom_na": "Như gặp được người cộng sự ngang tầm: cùng nhau tiến."
     },
     {
      "vi_tri": 2,
@@ -3444,7 +3826,8 @@
      "ten_han": "六二",
      "han": "豐其蔀，日中見斗，往得疑疾，有孚發若，吉。",
      "dich": "Che chắn rậm rạp, giữa trưa thấy sao Đẩu; đi thì bị nghi ngờ, có lòng tin mà bày tỏ thì tốt.",
-     "y": "Bị che lấp, nghi kỵ — dùng chân thành mà cảm hoá."
+     "y": "Bị che lấp, nghi kỵ — dùng chân thành mà cảm hoá.",
+     "nom_na": "Như bị che khuất, bị nghi ngờ: dùng sự chân thành mà cảm hoá."
     },
     {
      "vi_tri": 3,
@@ -3452,7 +3835,8 @@
      "ten_han": "九三",
      "han": "豐其沛，日中見沬，折其右肱，无咎。",
      "dich": "Màn che dày, giữa trưa thấy sao nhỏ; gãy cánh tay phải, không lỗi.",
-     "y": "Bị cản hoàn toàn, không làm được — không phải lỗi mình."
+     "y": "Bị cản hoàn toàn, không làm được — không phải lỗi mình.",
+     "nom_na": "Như bị cản hoàn toàn, không làm được gì: không phải lỗi mình."
     },
     {
      "vi_tri": 4,
@@ -3460,7 +3844,8 @@
      "ten_han": "九四",
      "han": "豐其蔀，日中見斗，遇其夷主，吉。",
      "dich": "Che chắn rậm rạp, giữa trưa thấy sao Đẩu, gặp người chủ ngang hàng, tốt.",
-     "y": "Trong u tối gặp người cùng chí — thoát được."
+     "y": "Trong u tối gặp người cùng chí — thoát được.",
+     "nom_na": "Như giữa lúc tối tăm gặp người cùng chí: thoát được."
     },
     {
      "vi_tri": 5,
@@ -3468,7 +3853,8 @@
      "ten_han": "六五",
      "han": "來章，有慶譽，吉。",
      "dich": "Đem người tài đến, có phúc và tiếng khen, tốt.",
-     "y": "Biết chiêu mộ người giỏi — thành công lớn."
+     "y": "Biết chiêu mộ người giỏi — thành công lớn.",
+     "nom_na": "Như biết mời người giỏi về: thành công lớn, được tiếng tốt."
     },
     {
      "vi_tri": 6,
@@ -3476,7 +3862,8 @@
      "ten_han": "上六",
      "han": "豐其屋，蔀其家，闚其戶，闃其无人，三歲不覿，凶。",
      "dich": "Làm nhà thật lớn, che kín nhà mình, nhìn qua cửa vắng lặng không người, ba năm không thấy ai, xấu.",
-     "y": "Thịnh đến tột thì kiêu, tự cô lập — trống rỗng."
+     "y": "Thịnh đến tột thì kiêu, tự cô lập — trống rỗng.",
+     "nom_na": "Như xây nhà thật to rồi đóng cửa ở một mình: giàu đến mức kiêu, tự cô lập."
     }
    ]
   },
@@ -3489,6 +3876,7 @@
     "han": "山上有火，旅；君子以明慎用刑，而不留獄。",
     "dich": "Trên núi có lửa là Lữ; người quân tử sáng suốt thận trọng dùng hình phạt, không để án tồn đọng."
    },
+   "nom_na": "Hình ảnh: lửa cháy trên núi, cháy rồi đi — người khách xa nhà. Nôm na: như đi công tác, du học, làm ăn nơi đất khách: khiêm tốn, cẩn thận, giữ mình đàng hoàng thì yên; kiêu ngạo nơi xứ người thì mất hết.",
    "thoan": {
     "han": "旅，小亨，柔得中乎外，而順乎剛，止而麗乎明，是以小亨，旅貞吉也。旅之時義大矣哉！"
    },
@@ -3499,7 +3887,8 @@
      "ten_han": "初六",
      "han": "旅瑣瑣，斯其所取災。",
      "dich": "Khách đi đường vụn vặt, đó là tự chuốc tai vạ.",
-     "y": "Xa nhà mà tính toán vặt vãnh, hẹp hòi — tự rước hoạ."
+     "y": "Xa nhà mà tính toán vặt vãnh, hẹp hòi — tự rước hoạ.",
+     "nom_na": "Như đi xa nhà mà tính toán vụn vặt, hẹp hòi: tự chuốc phiền."
     },
     {
      "vi_tri": 2,
@@ -3507,7 +3896,8 @@
      "ten_han": "六二",
      "han": "旅即次，懷其資，得童僕貞。",
      "dich": "Khách đến chỗ trọ, mang theo tiền của, được đồng bộc trung thành.",
-     "y": "Có chỗ dựa, đủ tiền và người giúp — yên ổn."
+     "y": "Có chỗ dựa, đủ tiền và người giúp — yên ổn.",
+     "nom_na": "Như đến nơi mới có chỗ ở, đủ tiền và người giúp: yên ổn."
     },
     {
      "vi_tri": 3,
@@ -3515,7 +3905,8 @@
      "ten_han": "九三",
      "han": "旅焚其次，喪其童僕，貞厲。",
      "dich": "Khách đốt chỗ trọ, mất đồng bộc, giữ thế thì nguy.",
-     "y": "Kiêu ngạo nơi đất khách thì mất chỗ ở, mất người giúp."
+     "y": "Kiêu ngạo nơi đất khách thì mất chỗ ở, mất người giúp.",
+     "nom_na": "Như kiêu ngạo nơi đất khách: mất chỗ ở, mất người giúp."
     },
     {
      "vi_tri": 4,
@@ -3523,7 +3914,8 @@
      "ten_han": "九四",
      "han": "旅于處，得其資斧，我心不快。",
      "dich": "Khách ở tạm, được tiền và rìu, lòng ta không vui.",
-     "y": "Có chút thành tựu nhưng chưa đúng nơi, lòng chưa yên."
+     "y": "Có chút thành tựu nhưng chưa đúng nơi, lòng chưa yên.",
+     "nom_na": "Như kiếm được chút tiền nơi xứ người mà lòng chưa yên."
     },
     {
      "vi_tri": 5,
@@ -3531,7 +3923,8 @@
      "ten_han": "六五",
      "han": "射雉一矢亡，終以譽命。",
      "dich": "Bắn chim trĩ, mất một mũi tên, cuối cùng được tiếng khen và mệnh tước.",
-     "y": "Bỏ ra chút ít mà được trọng dụng."
+     "y": "Bỏ ra chút ít mà được trọng dụng.",
+     "nom_na": "Như bỏ ra chút công sức, chút chi phí mà được người ta trọng dụng."
     },
     {
      "vi_tri": 6,
@@ -3539,7 +3932,8 @@
      "ten_han": "上九",
      "han": "鳥焚其巢，旅人先笑後號咷。喪牛于易，凶。",
      "dich": "Chim đốt tổ, khách trước cười sau khóc; mất bò ở chỗ dễ dãi, xấu.",
-     "y": "Ở đất khách mà ngạo mạn thì mất hết."
+     "y": "Ở đất khách mà ngạo mạn thì mất hết.",
+     "nom_na": "Như con chim tự đốt tổ: ở xứ người mà ngạo mạn thì cười trước khóc sau."
     }
    ]
   },
@@ -3552,6 +3946,7 @@
     "han": "隨風，巽；君子以申命行事。",
     "dich": "Gió nối tiếp nhau là Tốn; người quân tử nhắc lại mệnh lệnh mà làm việc."
    },
+   "nom_na": "Hình ảnh: gió nối gió, len vào khắp nơi — mềm mỏng mà thấm sâu. Nôm na: như cách thuyết phục nhẹ nhàng, nhắc đi nhắc lại, thấm dần: mềm mà phải có chính kiến, đừng nhún đến mất mình.",
    "thoan": {
     "han": "重巽以申命，剛巽乎中正而志行。柔皆順乎剛，是以小亨，利有攸往，利見大人。"
    },
@@ -3562,7 +3957,8 @@
      "ten_han": "初六",
      "han": "進退，利武人之貞。",
      "dich": "Tiến lui (do dự), lợi cho sự bền chính của võ nhân.",
-     "y": "Do dự quá mức — cần quyết đoán như người lính."
+     "y": "Do dự quá mức — cần quyết đoán như người lính.",
+     "nom_na": "Như cứ do dự mãi: cần quyết đoán như người lính."
     },
     {
      "vi_tri": 2,
@@ -3570,7 +3966,8 @@
      "ten_han": "九二",
      "han": "巽在床下，用史巫紛若，吉，无咎。",
      "dich": "Thuận nhún ở dưới giường, dùng nhiều thầy sử thầy cúng, tốt, không lỗi.",
-     "y": "Khiêm nhường mà thành tâm, nhờ người hiểu biết giúp thông."
+     "y": "Khiêm nhường mà thành tâm, nhờ người hiểu biết giúp thông.",
+     "nom_na": "Như khiêm nhường, thành tâm nhờ người hiểu biết giúp: thông."
     },
     {
      "vi_tri": 3,
@@ -3578,7 +3975,8 @@
      "ten_han": "九三",
      "han": "頻巽，吝。",
      "dich": "Nhún thuận nhiều lần (gượng ép), đáng tiếc.",
-     "y": "Nhún nhường giả tạo, thất thường thì bị khinh."
+     "y": "Nhún nhường giả tạo, thất thường thì bị khinh.",
+     "nom_na": "Như nhún nhường giả tạo, lúc thế này lúc thế kia: bị coi thường."
     },
     {
      "vi_tri": 4,
@@ -3586,7 +3984,8 @@
      "ten_han": "六四",
      "han": "悔亡，田獲三品。",
      "dich": "Hối mất, đi săn được ba loại.",
-     "y": "Thuận thời mà làm thì thu hoạch đủ."
+     "y": "Thuận thời mà làm thì thu hoạch đủ.",
+     "nom_na": "Như làm đúng thời: thu hoạch đủ đầy."
     },
     {
      "vi_tri": 5,
@@ -3594,7 +3993,8 @@
      "ten_han": "九五",
      "han": "貞吉悔亡，无不利。无初有終，先庚三日，後庚三日，吉。",
      "dich": "Giữ chính thì tốt, hối mất, không gì không lợi. Không có lúc đầu mà có lúc cuối; trước ngày Canh ba ngày, sau ngày Canh ba ngày, tốt.",
-     "y": "Sửa đổi cần cân nhắc trước sau kỹ lưỡng — khởi đầu khó, kết thúc tốt."
+     "y": "Sửa đổi cần cân nhắc trước sau kỹ lưỡng — khởi đầu khó, kết thúc tốt.",
+     "nom_na": "Như sửa đổi một quy định: cân nhắc kỹ trước và sau — khởi đầu khó, kết thúc tốt."
     },
     {
      "vi_tri": 6,
@@ -3602,7 +4002,8 @@
      "ten_han": "上九",
      "han": "巽在床下，喪其資斧，貞凶。",
      "dich": "Thuận nhún ở dưới giường, mất tiền và rìu, giữ thế thì xấu.",
-     "y": "Nhún quá thành mất bản lĩnh, mất cả phương tiện tự vệ."
+     "y": "Nhún quá thành mất bản lĩnh, mất cả phương tiện tự vệ.",
+     "nom_na": "Như nhún quá đến mất bản lĩnh, mất cả chỗ dựa."
     }
    ]
   },
@@ -3615,6 +4016,7 @@
     "han": "麗澤，兌；君子以朋友講習。",
     "dich": "Hai đầm liền nhau là Đoài; người quân tử cùng bạn bè giảng giải học tập."
    },
+   "nom_na": "Hình ảnh: hai cái đầm liền nhau, nước thấm qua lại — vui vẻ, trò chuyện. Nôm na: như niềm vui khi cùng bạn bè học hỏi, chuyện trò: vui từ sự chân thành thì bền; vui vì chiều lòng nhau, vì lời ngọt thì dễ hỏng.",
    "thoan": {
     "han": "兌，說也。剛中而柔外，說以利貞，是以順乎天，而應乎人。說以先民，民忘其勞；說以犯難，民忘其死；說之大，民勸矣哉！"
    },
@@ -3625,7 +4027,8 @@
      "ten_han": "初九",
      "han": "和兌，吉。",
      "dich": "Vui hoà, tốt.",
-     "y": "Niềm vui trong sáng, không cầu lợi — tốt."
+     "y": "Niềm vui trong sáng, không cầu lợi — tốt.",
+     "nom_na": "Như niềm vui trong sáng, không cầu lợi: tốt."
     },
     {
      "vi_tri": 2,
@@ -3633,7 +4036,8 @@
      "ten_han": "九二",
      "han": "孚兌，吉，悔亡。",
      "dich": "Vui bằng lòng tin, tốt, hối mất.",
-     "y": "Niềm vui dựa trên chân thành."
+     "y": "Niềm vui dựa trên chân thành.",
+     "nom_na": "Như vui với nhau vì tin nhau thật lòng: tốt."
     },
     {
      "vi_tri": 3,
@@ -3641,7 +4045,8 @@
      "ten_han": "六三",
      "han": "來兌，凶。",
      "dich": "Đến tìm niềm vui, xấu.",
-     "y": "Chạy theo khoái lạc, chiều lòng người để được vui — hỏng."
+     "y": "Chạy theo khoái lạc, chiều lòng người để được vui — hỏng.",
+     "nom_na": "Như chạy theo cuộc vui, chiều lòng người để được vui: hỏng."
     },
     {
      "vi_tri": 4,
@@ -3649,7 +4054,8 @@
      "ten_han": "九四",
      "han": "商兌，未寧，介疾有喜。",
      "dich": "Đắn đo niềm vui chưa yên; ngăn được điều hại thì có mừng.",
-     "y": "Phân vân giữa vui chính và vui tà — chọn đúng thì có phúc."
+     "y": "Phân vân giữa vui chính và vui tà — chọn đúng thì có phúc.",
+     "nom_na": "Như phân vân giữa cuộc vui lành mạnh và cuộc vui có hại: chọn đúng thì có phúc."
     },
     {
      "vi_tri": 5,
@@ -3657,7 +4063,8 @@
      "ten_han": "九五",
      "han": "孚于剝，有厲。",
      "dich": "Tin vào kẻ bóc lột, có nguy.",
-     "y": "Tin vào lời ngọt của kẻ xấu thì bị hại."
+     "y": "Tin vào lời ngọt của kẻ xấu thì bị hại.",
+     "nom_na": "Như tin lời ngon ngọt của kẻ lợi dụng mình: nguy."
     },
     {
      "vi_tri": 6,
@@ -3665,7 +4072,8 @@
      "ten_han": "上六",
      "han": "引兌。",
      "dich": "Dẫn dắt niềm vui.",
-     "y": "Bị lôi kéo bởi niềm vui bên ngoài — cẩn thận."
+     "y": "Bị lôi kéo bởi niềm vui bên ngoài — cẩn thận.",
+     "nom_na": "Như bị người khác lôi kéo vào cuộc vui: cẩn thận."
     }
    ]
   },
@@ -3678,6 +4086,7 @@
     "han": "風行水上，渙；先王以享于帝立廟。",
     "dich": "Gió đi trên mặt nước là Hoán; tiên vương tế thượng đế, lập miếu."
    },
+   "nom_na": "Hình ảnh: gió thổi trên mặt nước, làm sóng tan ra — tan rã, lan toả. Nôm na: như khi tập thể rời rạc, lòng người phân tán: cần một điều chung để tụ lại; đồng thời gạt bỏ cái tôi, bè phái nhỏ.",
    "thoan": {
     "han": "渙，亨。剛來而不窮，柔得位乎外而上同。王假有廟，王乃在中也。利涉大川，乘木有功也。"
    },
@@ -3688,7 +4097,8 @@
      "ten_han": "初六",
      "han": "用拯馬壯，吉。",
      "dich": "Dùng ngựa khoẻ để cứu, tốt.",
-     "y": "Tan rã mới bắt đầu — kịp thời cứu vãn với sự giúp sức."
+     "y": "Tan rã mới bắt đầu — kịp thời cứu vãn với sự giúp sức.",
+     "nom_na": "Như nhóm vừa có dấu hiệu rạn: kịp thời cứu, có người giúp thì tốt."
     },
     {
      "vi_tri": 2,
@@ -3696,7 +4106,8 @@
      "ten_han": "九二",
      "han": "渙奔其机，悔亡。",
      "dich": "Lúc tan rã chạy đến chỗ dựa, hối mất.",
-     "y": "Tìm chỗ dựa vững chắc giữa lúc rối ren."
+     "y": "Tìm chỗ dựa vững chắc giữa lúc rối ren.",
+     "nom_na": "Như giữa lúc rối ren, tìm về chỗ dựa vững: hết lo."
     },
     {
      "vi_tri": 3,
@@ -3704,7 +4115,8 @@
      "ten_han": "六三",
      "han": "渙其躬，无悔。",
      "dich": "Làm tan cái tôi của mình, không hối.",
-     "y": "Gạt bỏ cái tôi để phục vụ việc chung."
+     "y": "Gạt bỏ cái tôi để phục vụ việc chung.",
+     "nom_na": "Như bỏ bớt cái tôi để lo việc chung: không hối."
     },
     {
      "vi_tri": 4,
@@ -3712,7 +4124,8 @@
      "ten_han": "六四",
      "han": "渙其群，元吉。渙有丘，匪夷所思。",
      "dich": "Làm tan bè phái, rất tốt. Tan mà tụ thành gò, không phải điều người thường nghĩ được.",
-     "y": "Phá bè phái nhỏ để tụ thành khối lớn hơn."
+     "y": "Phá bè phái nhỏ để tụ thành khối lớn hơn.",
+     "nom_na": "Như dẹp các phe nhóm nhỏ để thành một khối lớn: rất tốt."
     },
     {
      "vi_tri": 5,
@@ -3720,7 +4133,8 @@
      "ten_han": "九五",
      "han": "渙汗其大號，渙王居，无咎。",
      "dich": "Ban mệnh lớn như mồ hôi toát ra, phân tán của nhà vua, không lỗi.",
-     "y": "Người đứng đầu ra quyết định lớn, chia sẻ của cải để cứu nguy."
+     "y": "Người đứng đầu ra quyết định lớn, chia sẻ của cải để cứu nguy.",
+     "nom_na": "Như người đứng đầu ra quyết định lớn, chia bớt của để cứu nguy."
     },
     {
      "vi_tri": 6,
@@ -3728,7 +4142,8 @@
      "ten_han": "上九",
      "han": "渙其血，去逖出，无咎。",
      "dich": "Làm tan máu (tai hoạ), đi xa thoát ra, không lỗi.",
-     "y": "Tránh xa nguồn tai hoạ là khôn."
+     "y": "Tránh xa nguồn tai hoạ là khôn.",
+     "nom_na": "Như tránh xa nguồn gây hoạ: khôn."
     }
    ]
   },
@@ -3741,6 +4156,7 @@
     "han": "澤上有水，節；君子以制數度，議德行。",
     "dich": "Trên đầm có nước là Tiết; người quân tử đặt chế độ mức độ, bàn về đức hạnh."
    },
+   "nom_na": "Hình ảnh: nước trong đầm có bờ giữ lại — có giới hạn, có chừng mực. Nôm na: như quản lý chi tiêu, giờ giấc, ăn uống: có chừng mực thì thông; khắt khe khổ sở quá thì không giữ được lâu.",
    "thoan": {
     "han": "節，亨，剛柔分，而剛得中。苦節不可貞，其道窮也。說以行險，當位以節，中正以通。天地節而四時成，節以制度，不傷財，不害民。"
    },
@@ -3751,7 +4167,8 @@
      "ten_han": "初九",
      "han": "不出戶庭，无咎。",
      "dich": "Không ra khỏi sân trong, không lỗi.",
-     "y": "Lúc chưa nên — giữ kín, ở yên là đúng."
+     "y": "Lúc chưa nên — giữ kín, ở yên là đúng.",
+     "nom_na": "Như chưa phải lúc: ở nhà, giữ kín là đúng."
     },
     {
      "vi_tri": 2,
@@ -3759,7 +4176,8 @@
      "ten_han": "九二",
      "han": "不出門庭，凶。",
      "dich": "Không ra khỏi cổng ngoài, xấu.",
-     "y": "Đến lúc phải đi mà vẫn ngồi yên — lỡ thời."
+     "y": "Đến lúc phải đi mà vẫn ngồi yên — lỡ thời.",
+     "nom_na": "Như đến lúc phải ra tay mà vẫn ngồi yên: lỡ dịp."
     },
     {
      "vi_tri": 3,
@@ -3767,7 +4185,8 @@
      "ten_han": "六三",
      "han": "不節若，則嗟若，无咎。",
      "dich": "Không biết tiết chế thì phải than thở, không lỗi.",
-     "y": "Buông thả thì hối — tự nhận lỗi để sửa."
+     "y": "Buông thả thì hối — tự nhận lỗi để sửa.",
+     "nom_na": "Như tiêu xài quá tay rồi than: nhận lỗi để sửa."
     },
     {
      "vi_tri": 4,
@@ -3775,7 +4194,8 @@
      "ten_han": "六四",
      "han": "安節，亨。",
      "dich": "Tiết chế một cách yên ổn, hanh thông.",
-     "y": "Tiết chế tự nhiên, thoải mái — bền lâu."
+     "y": "Tiết chế tự nhiên, thoải mái — bền lâu.",
+     "nom_na": "Như tiết kiệm một cách thoải mái, tự nhiên: bền lâu."
     },
     {
      "vi_tri": 5,
@@ -3783,7 +4203,8 @@
      "ten_han": "九五",
      "han": "甘節，吉；往有尚。",
      "dich": "Tiết chế ngọt ngào, tốt; đi thì được quý trọng.",
-     "y": "Tự mình làm gương tiết chế mà vẫn vui — người khác noi theo."
+     "y": "Tự mình làm gương tiết chế mà vẫn vui — người khác noi theo.",
+     "nom_na": "Như tự mình làm gương sống điều độ mà vẫn vui vẻ: người khác noi theo."
     },
     {
      "vi_tri": 6,
@@ -3791,7 +4212,8 @@
      "ten_han": "上六",
      "han": "苦節，貞凶，悔亡。",
      "dich": "Tiết chế khắc khổ, giữ thế thì xấu, hối mất.",
-     "y": "Khắt khe quá thì không bền — nhưng có khi cần để giữ nguyên tắc."
+     "y": "Khắt khe quá thì không bền — nhưng có khi cần để giữ nguyên tắc.",
+     "nom_na": "Như ép mình quá khắt khe: khó bền, nhưng có lúc cần để giữ nguyên tắc."
     }
    ]
   },
@@ -3804,6 +4226,7 @@
     "han": "澤上有風，中孚；君子以議獄緩死。",
     "dich": "Trên đầm có gió là Trung Phu; người quân tử bàn xét việc ngục, hoãn án chết."
    },
+   "nom_na": "Hình ảnh: gió thổi trên đầm, mặt nước lay động theo — lòng thành cảm được cả vật. Nôm na: như sức mạnh của sự chân thành: thật lòng thì ngay cả người khó tính cũng cảm được; làm được việc lớn nhờ chữ tín.",
    "thoan": {
     "han": "中孚，柔在內而剛得中。說而巽，孚，乃化邦也。豚魚吉，信及豚魚也。利涉大川，乘木舟虛也。中孚以利貞，乃應乎天也。"
    },
@@ -3814,7 +4237,8 @@
      "ten_han": "初九",
      "han": "虞吉，有它不燕。",
      "dich": "Lo liệu yên ổn thì tốt, có ý khác thì không yên.",
-     "y": "Giữ niềm tin chuyên nhất — hai lòng thì bất an."
+     "y": "Giữ niềm tin chuyên nhất — hai lòng thì bất an.",
+     "nom_na": "Như giữ niềm tin một lòng: yên; hai lòng thì bất an."
     },
     {
      "vi_tri": 2,
@@ -3822,7 +4246,8 @@
      "ten_han": "九二",
      "han": "鳴鶴在陰，其子和之，我有好爵，吾與爾靡之。",
      "dich": "Chim hạc kêu trong bóng râm, con nó hoạ theo; ta có chén rượu ngon, cùng ngươi chia sẻ.",
-     "y": "Chân thành tự nhiên cảm hoá — người đồng điệu sẽ đáp lại."
+     "y": "Chân thành tự nhiên cảm hoá — người đồng điệu sẽ đáp lại.",
+     "nom_na": "Như hạc mẹ kêu, hạc con đáp: thật lòng thì người đồng điệu sẽ đáp lại."
     },
     {
      "vi_tri": 3,
@@ -3830,7 +4255,8 @@
      "ten_han": "六三",
      "han": "得敵，或鼓或罷，或泣或歌。",
      "dich": "Gặp đối thủ, khi đánh trống khi ngừng, khi khóc khi hát.",
-     "y": "Lòng dựa vào người khác thì cảm xúc thất thường."
+     "y": "Lòng dựa vào người khác thì cảm xúc thất thường.",
+     "nom_na": "Như tâm trạng phụ thuộc người khác: lúc khóc lúc cười thất thường."
     },
     {
      "vi_tri": 4,
@@ -3838,7 +4264,8 @@
      "ten_han": "六四",
      "han": "月幾望，馬匹亡，无咎。",
      "dich": "Trăng gần rằm, ngựa mất bạn đôi, không lỗi.",
-     "y": "Đến lúc gần thành — dứt bỏ phe cánh để giữ lòng trung."
+     "y": "Đến lúc gần thành — dứt bỏ phe cánh để giữ lòng trung.",
+     "nom_na": "Như sắp thành việc thì bỏ phe cánh để giữ lòng trong sạch."
     },
     {
      "vi_tri": 5,
@@ -3846,7 +4273,8 @@
      "ten_han": "九五",
      "han": "有孚攣如，无咎。",
      "dich": "Có lòng tin ràng buộc, không lỗi.",
-     "y": "Niềm tin gắn kết mọi người — người đứng đầu chân thành."
+     "y": "Niềm tin gắn kết mọi người — người đứng đầu chân thành.",
+     "nom_na": "Như người đứng đầu chân thành: mọi người gắn kết bằng niềm tin."
     },
     {
      "vi_tri": 6,
@@ -3854,7 +4282,8 @@
      "ten_han": "上九",
      "han": "翰音登于天，貞凶。",
      "dich": "Tiếng gà bay vút lên trời, giữ thế thì xấu.",
-     "y": "Lời nói vượt xa thực chất — tiếng to mà rỗng."
+     "y": "Lời nói vượt xa thực chất — tiếng to mà rỗng.",
+     "nom_na": "Như con gà đòi bay lên trời: nói to hơn khả năng thật, tiếng to mà rỗng."
     }
    ]
   },
@@ -3867,6 +4296,7 @@
     "han": "山上有雷，小過；君子以行過乎恭，喪過乎哀，用過乎儉。",
     "dich": "Trên núi có sấm là Tiểu Quá; người quân tử làm việc thì cung kính hơi quá, tang thì thương hơi quá, dùng thì kiệm hơi quá."
    },
+   "nom_na": "Hình ảnh: sấm trên núi, tiếng nhỏ mà vang — vượt quá một chút. Nôm na: như thời chỉ nên làm việc nhỏ, chi tiết, cẩn thận hơi quá còn hơn liều; con chim nên bay thấp, đừng bay cao.",
    "thoan": {
     "han": "小過，小者過而亨也。過以利貞，與時行也。柔得中，是以小事吉也。剛失位而不中，是以不可大事也。有飛鳥之象焉，有飛鳥遺之音，不宜上宜下，大吉；上逆而下順也。"
    },
@@ -3877,7 +4307,8 @@
      "ten_han": "初六",
      "han": "飛鳥以凶。",
      "dich": "Chim bay lên, vì thế mà xấu.",
-     "y": "Muốn bay cao khi chưa đủ sức — nguy."
+     "y": "Muốn bay cao khi chưa đủ sức — nguy.",
+     "nom_na": "Như muốn bay cao khi chưa đủ sức: nguy."
     },
     {
      "vi_tri": 2,
@@ -3885,7 +4316,8 @@
      "ten_han": "六二",
      "han": "過其祖，遇其妣；不及其君，遇其臣；无咎。",
      "dich": "Vượt ông thì gặp bà; không tới vua thì gặp bề tôi; không lỗi.",
-     "y": "Không vượt phận, chấp nhận ở vị trí vừa phải — đúng."
+     "y": "Không vượt phận, chấp nhận ở vị trí vừa phải — đúng.",
+     "nom_na": "Như chấp nhận vị trí vừa phải, không vượt cấp: đúng."
     },
     {
      "vi_tri": 3,
@@ -3893,7 +4325,8 @@
      "ten_han": "九三",
      "han": "弗過防之，從或戕之，凶。",
      "dich": "Không vượt quá mà đề phòng, theo đó có người hại, xấu.",
-     "y": "Chủ quan, không phòng bị — bị hại."
+     "y": "Chủ quan, không phòng bị — bị hại.",
+     "nom_na": "Như chủ quan không phòng bị: bị hại."
     },
     {
      "vi_tri": 4,
@@ -3901,7 +4334,8 @@
      "ten_han": "九四",
      "han": "无咎，弗過遇之。往厲必戒，勿用永貞。",
      "dich": "Không lỗi, không vượt mà gặp. Đi thì nguy, phải răn, đừng giữ mãi.",
-     "y": "Biết tự kiềm chế; đi thì phải thận trọng, linh hoạt."
+     "y": "Biết tự kiềm chế; đi thì phải thận trọng, linh hoạt.",
+     "nom_na": "Như biết tự kiềm chế; nếu đi thì phải thận trọng, linh hoạt."
     },
     {
      "vi_tri": 5,
@@ -3909,7 +4343,8 @@
      "ten_han": "六五",
      "han": "密雲不雨，自我西郊，公弋取彼在穴。",
      "dich": "Mây dày mà không mưa, từ cõi tây của ta; vị công bắn được con ở trong hang.",
-     "y": "Chưa đủ thời để thành việc lớn — dùng người tài ẩn dật."
+     "y": "Chưa đủ thời để thành việc lớn — dùng người tài ẩn dật.",
+     "nom_na": "Như chưa đủ thời làm việc lớn: hãy mời người tài đang ở ẩn về giúp."
     },
     {
      "vi_tri": 6,
@@ -3917,7 +4352,8 @@
      "ten_han": "上六",
      "han": "弗遇過之，飛鳥離之，凶，是謂災眚。",
      "dich": "Không gặp mà vượt quá, chim bay xa mất, xấu, gọi là tai hoạ.",
-     "y": "Vượt quá giới hạn rõ ràng — tự chuốc hoạ."
+     "y": "Vượt quá giới hạn rõ ràng — tự chuốc hoạ.",
+     "nom_na": "Như vượt quá giới hạn rõ ràng: tự chuốc hoạ."
     }
    ]
   },
@@ -3930,6 +4366,7 @@
     "han": "水在火上，既濟；君子以思患而預防之。",
     "dich": "Nước ở trên lửa là Ký Tế; người quân tử nghĩ đến tai hoạ mà phòng trước."
    },
+   "nom_na": "Hình ảnh: nước ở trên lửa, nồi đã sôi — việc đã xong, mọi thứ đúng chỗ. Nôm na: như vừa hoàn thành một việc lớn: ban đầu tốt, nhưng xong rồi là lúc dễ lơ là nhất — phòng trước chuyện hư hỏng.",
    "thoan": {
     "han": "既濟，亨，小者亨也。利貞，剛柔正而位當也。初吉，柔得中也。終止則亂，其道窮也。"
    },
@@ -3940,7 +4377,8 @@
      "ten_han": "初九",
      "han": "曳其輪，濡其尾，无咎。",
      "dich": "Kéo bánh xe lại, ướt đuôi, không lỗi.",
-     "y": "Vừa thành — hãm lại, đừng lao tiếp."
+     "y": "Vừa thành — hãm lại, đừng lao tiếp.",
+     "nom_na": "Như vừa xong việc: hãm phanh lại, đừng lao tiếp."
     },
     {
      "vi_tri": 2,
@@ -3948,7 +4386,8 @@
      "ten_han": "六二",
      "han": "婦喪其茀，勿逐，七日得。",
      "dich": "Người vợ mất tấm che xe, chớ đuổi, bảy ngày sẽ được.",
-     "y": "Chưa được trọng dụng — đừng chạy theo, thời sẽ đến."
+     "y": "Chưa được trọng dụng — đừng chạy theo, thời sẽ đến.",
+     "nom_na": "Như chưa được trọng dụng: đừng chạy theo, rồi thời sẽ đến."
     },
     {
      "vi_tri": 3,
@@ -3956,7 +4395,8 @@
      "ten_han": "九三",
      "han": "高宗伐鬼方，三年克之，小人勿用。",
      "dich": "Vua Cao Tông đánh nước Quỷ Phương, ba năm mới thắng; tiểu nhân chớ dùng.",
-     "y": "Việc lớn tốn nhiều công sức — không giao cho người kém."
+     "y": "Việc lớn tốn nhiều công sức — không giao cho người kém.",
+     "nom_na": "Như việc lớn tốn nhiều công sức: đừng giao cho người kém."
     },
     {
      "vi_tri": 4,
@@ -3964,7 +4404,8 @@
      "ten_han": "六四",
      "han": "繻有衣袽，終日戒。",
      "dich": "Áo đẹp có giẻ rách, suốt ngày răn giữ.",
-     "y": "Đề phòng chỗ rò rỉ, hư hỏng nhỏ."
+     "y": "Đề phòng chỗ rò rỉ, hư hỏng nhỏ.",
+     "nom_na": "Như áo đẹp mà có chỗ rách: luôn để ý những chỗ rò rỉ nhỏ."
     },
     {
      "vi_tri": 5,
@@ -3972,7 +4413,8 @@
      "ten_han": "九五",
      "han": "東鄰殺牛，不如西鄰之禴祭，實受其福。",
      "dich": "Láng giềng phía đông giết bò, không bằng lễ mọn của láng giềng phía tây mà thật hưởng phúc.",
-     "y": "Thành tâm quan trọng hơn hình thức phô trương."
+     "y": "Thành tâm quan trọng hơn hình thức phô trương.",
+     "nom_na": "Như mâm lễ đơn sơ mà thật lòng còn hơn cỗ to phô trương."
     },
     {
      "vi_tri": 6,
@@ -3980,7 +4422,8 @@
      "ten_han": "上六",
      "han": "濡其首，厲。",
      "dich": "Ướt cả đầu, nguy.",
-     "y": "Thành công khiến lơ là, dấn quá sâu — nguy."
+     "y": "Thành công khiến lơ là, dấn quá sâu — nguy.",
+     "nom_na": "Như thành công rồi lơ là, lội quá sâu: nguy."
     }
    ]
   },
@@ -3993,6 +4436,7 @@
     "han": "火在水上，未濟；君子以慎辨物居方。",
     "dich": "Lửa ở trên nước là Vị Tế; người quân tử thận trọng phân biệt sự vật, đặt mỗi thứ vào đúng chỗ."
    },
+   "nom_na": "Hình ảnh: lửa ở trên nước, mỗi thứ một ngả — chưa xong, như con cáo nhỏ sắp qua sông. Nôm na: như việc đang dang dở, gần xong mà chưa xong: phân biệt rõ từng thứ, đặt vào đúng chỗ, cẩn thận đến bước cuối cùng.",
    "thoan": {
     "han": "未濟，亨；柔得中也。小狐汔濟，未出中也。濡其尾，无攸利；不續終也。雖不當位，剛柔應也。"
    },
@@ -4003,7 +4447,8 @@
      "ten_han": "初六",
      "han": "濡其尾，吝。",
      "dich": "Ướt đuôi, đáng tiếc.",
-     "y": "Chưa biết sức mình mà liều — vấp ngay."
+     "y": "Chưa biết sức mình mà liều — vấp ngay.",
+     "nom_na": "Như chưa biết sức mình mà liều: vấp ngay."
     },
     {
      "vi_tri": 2,
@@ -4011,7 +4456,8 @@
      "ten_han": "九二",
      "han": "曳其輪，貞吉。",
      "dich": "Kéo bánh xe lại, giữ chính thì tốt.",
-     "y": "Kiềm chế, chờ thời là đúng."
+     "y": "Kiềm chế, chờ thời là đúng.",
+     "nom_na": "Như kìm lại, chờ thời: đúng."
     },
     {
      "vi_tri": 3,
@@ -4019,7 +4465,8 @@
      "ten_han": "六三",
      "han": "未濟，征凶，利涉大川。",
      "dich": "Chưa xong, đi thì xấu, lợi vượt sông lớn.",
-     "y": "Sức chưa đủ thì đừng tự đi — cần người hỗ trợ."
+     "y": "Sức chưa đủ thì đừng tự đi — cần người hỗ trợ.",
+     "nom_na": "Như sức chưa đủ thì đừng tự đi: cần người hỗ trợ."
     },
     {
      "vi_tri": 4,
@@ -4027,7 +4474,8 @@
      "ten_han": "九四",
      "han": "貞吉，悔亡，震用伐鬼方，三年有賞于大國。",
      "dich": "Giữ chính thì tốt, hối mất; dấy động đánh Quỷ Phương, ba năm được thưởng ở nước lớn.",
-     "y": "Nỗ lực bền bỉ lâu dài sẽ được ghi nhận."
+     "y": "Nỗ lực bền bỉ lâu dài sẽ được ghi nhận.",
+     "nom_na": "Như nỗ lực bền bỉ ba năm: rồi sẽ được ghi nhận."
     },
     {
      "vi_tri": 5,
@@ -4035,7 +4483,8 @@
      "ten_han": "六五",
      "han": "貞吉，无悔，君子之光，有孚，吉。",
      "dich": "Giữ chính thì tốt, không hối; ánh sáng của quân tử, có lòng tin, tốt.",
-     "y": "Đức sáng và chữ tín đem đến thành công."
+     "y": "Đức sáng và chữ tín đem đến thành công.",
+     "nom_na": "Như người sáng suốt, giữ chữ tín: thành công."
     },
     {
      "vi_tri": 6,
@@ -4043,7 +4492,8 @@
      "ten_han": "上九",
      "han": "有孚于飲酒，无咎，濡其首，有孚失是。",
      "dich": "Có lòng tin mà uống rượu, không lỗi; ướt cả đầu, có tin mà mất điều đúng.",
-     "y": "Tự tin chờ đợi là tốt, nhưng buông thả quá thì đánh mất mình."
+     "y": "Tự tin chờ đợi là tốt, nhưng buông thả quá thì đánh mất mình.",
+     "nom_na": "Như tự tin chờ đợi là tốt, nhưng buông thả quá thì đánh mất mình."
     }
    ]
   }

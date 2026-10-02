@@ -25,11 +25,8 @@ export function loiEngine(status: number, body: unknown): { error: string; statu
   return { error: "Máy tính toán đang gặp lỗi, thử lại sau ít phút.", status: status >= 500 ? status : 502 };
 }
 
-export async function goiEngine(req: Request, schema: ZodTypeAny, path: string): Promise<NextResponse> {
-  const parsed = schema.safeParse(await req.json().catch(() => null));
-  if (!parsed.success) {
-    return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
-  }
+/** Gọi engine với dữ liệu ĐÃ kiểm (dùng chung cho goiEngine và các route cần xử lý thêm, vd trừ Sao). */
+export async function goiEngineDaKiem(data: unknown, path: string): Promise<{ ok: true; body: unknown } | { ok: false; res: NextResponse }> {
   try {
     const r = await fetch(`${ENGINE_URL}${path}`, {
       method: "POST",
@@ -37,17 +34,26 @@ export async function goiEngine(req: Request, schema: ZodTypeAny, path: string):
         "content-type": "application/json",
         ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
       },
-      body: JSON.stringify(parsed.data),
+      body: JSON.stringify(data),
       cache: "no-store",
     });
     const body: unknown = await r.json().catch(() => null);
     if (!r.ok) {
       const l = loiEngine(r.status, body);
-      return NextResponse.json({ error: l.error }, { status: l.status });
+      return { ok: false, res: NextResponse.json({ error: l.error }, { status: l.status }) };
     }
-    return NextResponse.json(body);
+    return { ok: true, body };
   } catch (e) {
     baoLoi(e, { noi: "goi_engine", duong: path });
-    return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau." }, { status: 502 });
+    return { ok: false, res: NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau." }, { status: 502 }) };
   }
+}
+
+export async function goiEngine(req: Request, schema: ZodTypeAny, path: string): Promise<NextResponse> {
+  const parsed = schema.safeParse(await req.json().catch(() => null));
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
+  }
+  const kq = await goiEngineDaKiem(parsed.data, path);
+  return kq.ok ? NextResponse.json(kq.body) : kq.res;
 }

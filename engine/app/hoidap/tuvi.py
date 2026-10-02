@@ -14,6 +14,7 @@ from __future__ import annotations
 import datetime as dt
 import re
 
+from app import config
 from app.calc import tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
 from app.hoidap import chung
 from app.kb import tuvi_kb as kb
@@ -510,17 +511,24 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     can_la_so = pl["loai"] in ("la_so", "han")
     if sinh and can_la_so:
-        ls = tom_tat(az.an_sao_tho(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], "vi-VN"))
+        ls = tom_tat(az.an_sao_tho(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], "vi-VN",
+                                     tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
+                                     hoa_linh=sinh.get("hoa_linh", "viet"),
+                                     thang_nhuan=sinh.get("thang_nhuan", "thang_sau")))
         if pl["loai"] == "han":
             xem = ngay_xem
             if pl["nam_xem"]:
                 xem = dt.date(pl["nam_xem"], 7, 1)
             elif pl["han_sau"]:
                 xem = _cong_nam(ngay_xem, 1)
-            vh = {**az.van_han(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], xem), "ngay_xem": xem.isoformat()}
+            vh = {**az.van_han(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], xem,
+                                tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
+                                thang_nhuan=sinh.get("thang_nhuan", "thang_sau")), "ngay_xem": xem.isoformat()}
             if pl["han_toi"]:
                 buoc = vh["dai_han"]["den_tuoi"] - vh["tuoi_mu"] + 1
-                vh_toi = az.van_han(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], _cong_nam(xem, buoc))
+                vh_toi = az.van_han(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], _cong_nam(xem, buoc),
+                                    tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
+                                    thang_nhuan=sinh.get("thang_nhuan", "thang_sau"))
     goi = goi_bang_chung(pl, ls, vh, vh_toi)
     van = van_template(goi)
     che_do_van, loi = "template", []

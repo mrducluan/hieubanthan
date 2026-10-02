@@ -114,6 +114,9 @@ def _muc_que(so: int, vai: str, lv: str | None) -> dict | None:
          "school_id": q["school_id"], "trang_thai": q["trang_thai"]}
     if lv:
         m["linh_vuc"], m["y_linh_vuc"] = LV_TEN[lv], q["linh_vuc"][lv]
+    v = kb.que_van(so)
+    if v and v.get("nom_na"):                    # KD-NN: hình ảnh đời thường cho người mới
+        m["nom_na"] = v["nom_na"]
     return m
 
 
@@ -240,12 +243,13 @@ def _muc_loi_kinh(x: dict) -> dict | None:
     ten = kb.que(x["que"])["ten"] if kb.que(x["que"]) else str(x["que"])
     if x["loai"] == "hao":
         h = q["hao"][x["vi_tri"] - 1]
-        noi = {"tieu_de": f"Hào {h['ten']} ({h['ten_han']}) quẻ {ten}", "han": h["han"], "dich": h["dich"], "y": h["y"]}
+        noi = {"tieu_de": f"Hào {h['ten']} ({h['ten_han']}) quẻ {ten}", "han": h["han"], "dich": h["dich"], "y": h["y"],
+               "nom_na": h.get("nom_na")}
     elif x["loai"] == "dung":
         noi = {"tieu_de": f"{'Dụng Cửu' if x['que'] == 1 else 'Dụng Lục'} quẻ {ten}", **q["dung"]}
     else:
         noi = {"tieu_de": f"Quái từ quẻ {ten}", "han": q["que_tu"]["han"], "dich": q["que_tu"]["dich"],
-               "y": f"Đại tượng: {q['dai_tuong']['dich']}"}
+               "y": f"Đại tượng: {q['dai_tuong']['dich']}", "nom_na": None}
     return {"loai": "loi_kinh", "chu": x["chu"], **noi, "source_id": q["source_id"],
             "school_id": q["school_id"], "trang_thai": q["trang_thai"]}
 
@@ -260,12 +264,14 @@ def _doan(m: dict) -> tuple[str, str | None]:
              f"Lời khuyên theo Nghĩa Lý: {m['loi_khuyen']} Mặt tối cần tránh: {m['mat_toi']}")
         if m.get("y_linh_vuc"):
             s += f" Riêng về {m['linh_vuc'].lower()}: {m['y_linh_vuc']}"
+        if m.get("nom_na"):
+            s += f"\n{m['nom_na'].replace('Nôm na: ', 'Nói nôm na: ')}"
         return s, m["cau_tu_soi"]
     if l == "quy_tac_doc":
         return f"Cách đọc (quy tắc Chu Hy): {m['noi_dung']}", None
     if l == "loi_kinh":
         return (f"{'【Lời chủ】 ' if m['chu'] else ''}{m['tieu_de']}: 「{m['han']}」 — {m['dich']} "
-                f"Ý: {m['y']}"), None
+                f"Ý: {m['y']}" + (f"\nNói nôm na: {m['nom_na']}" if m.get("nom_na") else "")), None
     if l == "the_dung":
         return (f"Mai Hoa — Thể là {m['the']} ({m['the_ngu_hanh']}), Dụng là {m['dung']} "
                 f"({m['dung_ngu_hanh']}): {m['ten']}. {m['y_nghia']} {m['luu_y']}", None)

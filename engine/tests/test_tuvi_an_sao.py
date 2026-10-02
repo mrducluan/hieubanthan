@@ -44,7 +44,8 @@ def _dang_golden(la: dict) -> dict:
 def test_khop_golden(ma):
     c = G[ma]["input"]
     y, m, d = (int(x) for x in c["d"].split("-"))
-    la = az.an_sao_tho(dt.date(y, m, d), c["ti"], "nam" if c["g"] == "male" else "nu", "zh-CN")
+    # Golden là iztro nguyên bản (phái Trung Châu) → tắt lớp Hoả/Linh lối Việt khi so.
+    la = az.an_sao_tho(dt.date(y, m, d), c["ti"], "nam" if c["g"] == "male" else "nu", "zh-CN", hoa_linh="trung")
     assert _dang_golden(la) == G[ma]["expect"]
 
 
