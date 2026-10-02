@@ -87,3 +87,23 @@ test("tải ảnh lá số: ra file PNG", async ({ page }) => {
   const { statSync } = await import("node:fs");
   expect(statSync(duong!).size).toBeGreaterThan(20_000);
 });
+
+test("luận giải có AI diễn đạt: hiện bản AI, chuyển được sang bản dữ liệu gốc", async ({ page }) => {
+  await napHoSo(page);
+  await page.route("**/api/tuvi/luan-giai", (r) => r.fulfill({ json: {
+    mo_dun: "tuvi", ket: "Kết.", trang_thai: "nhap_ai", phi: { sao: 0, ly_do: "mien_phi_thu_nghiem" }, dien_dat: "tron",
+    chuong: [
+      { ma: "tong_quan", tieu_de: "Tổng quan bản mệnh", doan: ["Đoạn gốc tổng quan."], van_ai: "Bài AI viết lại.\n\nĐoạn thứ hai.", che_do: "llm" },
+      { ma: "su_nghiep", tieu_de: "Sự nghiệp", doan: ["Đoạn gốc sự nghiệp."], che_do: "template_fallback" },
+    ],
+  } }));
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  const bc = page.getByTestId("luan-giai-toan-bo");
+  await expect(bc.getByTestId("dien-dat-ai")).toContainText("giữ bản gốc");
+  await expect(bc).toContainText("Bài AI viết lại.");
+  await expect(bc).not.toContainText("Đoạn gốc tổng quan.");
+  await expect(bc).toContainText("Đoạn gốc sự nghiệp.");          // chương không đạt kiểm tra giữ bản gốc
+  await bc.getByRole("button", { name: "Xem bản dữ liệu gốc" }).click();
+  await expect(bc).toContainText("Đoạn gốc tổng quan.");
+});
