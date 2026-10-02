@@ -7,6 +7,7 @@ const Input = z.object({
   toa: z.string().max(10).optional(),
   do: z.number().min(0).lt(360).optional(),
   nam_xem: z.number().int().min(1900).max(2150).optional(),
+  the_quai: z.boolean().optional(),
 }).strict().refine((x) => (x.toa === undefined) !== (x.do === undefined), "Cần toạ sơn hoặc độ la bàn");
 
 export function POST(req: Request) {
