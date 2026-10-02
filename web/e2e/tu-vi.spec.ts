@@ -137,3 +137,11 @@ test("giá luận giải: công tắc thu Sao mặc định tắt → miễn ph�
   await page.getByRole("button", { name: "Xem luận giải" }).click();
   await expect(page.getByTestId("luan-giai-toan-bo")).toContainText("Tổng quan bản mệnh");
 });
+
+test("KB-TV2: cách cục bổ sung có phiên âm phú cổ", async ({ page }) => {
+  await napHoSo(page, { ...HO_SO_MAU, ngay: 15, thang: 1, nam: 1960, gio: "06:00" });
+  await page.goto("/tu-vi");
+  const cc = page.getByTestId("cach-cuc");
+  await cc.getByRole("button", { name: /Cơ Lương Gia Hội/ }).click();
+  await expect(cc.getByTestId("co-ca")).toContainText("Cơ Lương nhập miếu tối kham ngôn");
+});
