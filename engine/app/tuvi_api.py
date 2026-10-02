@@ -17,6 +17,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
+from app.kb import tu_dien
 from app.calc import can_chi, dia_ly, lunar, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao
 from app.hoidap import tuvi as hoidap_tv
 from app import nhat_ky
@@ -363,7 +364,7 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
         raise HTTPException(422, detail=str(e))
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
     background.add_task(nhat_ky.ghi_huyenhoc, "tuvi", inp.cau_hoi, kq, inp.la_so is not None)
-    return {"engine_version": ENGINE_VERSION, **kq}
+    return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "tuvi")}
 
 
 class LuanGiaiInput(BaseModel):
@@ -382,7 +383,7 @@ def api_luan_giai(inp: LuanGiaiInput) -> dict:
     cal = dv.tb.calendar_dt
     sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender}
     try:
-        bc = luan_giai_van.dien_dat(toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem))
+        bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem)))
     except tuvi_an_sao.AnSaoLoi as e:
         raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
     return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": list(dv.flags)}

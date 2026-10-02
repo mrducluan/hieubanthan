@@ -1,0 +1,2761 @@
+{
+ "_nguon": "Từ điển thuật ngữ dễ hiểu (GN) — giải nghĩa đời thường cho người không chuyên; tóm theo các cổ thư đã dùng trong kho (Tử Vi Đẩu Số Toàn Thư, Chu Dịch, Tử Bình Chân Thuyên, Cùng Thông Bảo Giám, Thẩm Thị Huyền Không Học…) và thuật ngữ thần số học phổ biến. Nháp AI, duyệt dần.",
+ "source_id": "tu_dien_hbt",
+ "school_id": "chung",
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "muc": [
+  {
+   "ma": "la_so_tu_vi",
+   "ten": "Lá số Tử vi",
+   "bien_the": [
+    "lá số"
+   ],
+   "han": "紫微命盤",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Bản đồ 12 ô (12 cung) vẽ theo giờ, ngày, tháng, năm sinh âm lịch. Mỗi ô là một mảng đời sống, trong đó có các 'sao' — ký hiệu cổ để mô tả xu hướng của mảng đó.",
+   "vi_du": "Giống bản đồ 12 phòng của một ngôi nhà, mỗi phòng có đồ đạc (sao) khác nhau.",
+   "tu_dong": false
+  },
+  {
+   "ma": "cung",
+   "ten": "Cung",
+   "bien_the": [
+    "cung số"
+   ],
+   "han": "宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Một trong 12 ô của lá số, mỗi ô ứng với một mảng đời: bản thân, anh em, vợ chồng, con cái, tiền bạc, sức khoẻ, đi xa, bạn bè, công việc, nhà cửa, tinh thần, cha mẹ.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "cung_menh",
+   "ten": "Cung Mệnh",
+   "bien_the": [
+    "Mệnh"
+   ],
+   "han": "命宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô quan trọng nhất, nói về bản thân: tính cách gốc, cách bạn phản ứng với đời. Đọc lá số luôn bắt đầu từ đây.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "cung_than",
+   "ten": "Cung Thân",
+   "bien_the": [
+    "Thân cư",
+    "Thân"
+   ],
+   "han": "身宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô cho biết nửa sau cuộc đời bạn dồn sức vào mảng nào. 'Thân cư Quan Lộc' nghĩa là về sau bạn đặt nặng sự nghiệp.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "huynh_de",
+   "ten": "Huynh Đệ",
+   "bien_the": [
+    "cung Huynh Đệ"
+   ],
+   "han": "兄弟宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về anh chị em ruột và người cùng trang lứa thân thiết.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "phu_the",
+   "ten": "Phu Thê",
+   "bien_the": [
+    "cung Phu Thê"
+   ],
+   "han": "夫妻宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về chuyện tình cảm, hôn nhân và kiểu người bạn dễ gắn bó.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tu_nu",
+   "ten": "Tử Nữ",
+   "bien_the": [
+    "cung Tử Nữ",
+    "Tử Tức"
+   ],
+   "han": "子女宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về con cái, học trò và người nhỏ tuổi mình chăm lo.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tai_bach",
+   "ten": "Tài Bạch",
+   "bien_the": [
+    "cung Tài Bạch"
+   ],
+   "han": "財帛宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về cách bạn kiếm tiền, giữ tiền và tiêu tiền.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tat_ach",
+   "ten": "Tật Ách",
+   "bien_the": [
+    "cung Tật Ách"
+   ],
+   "han": "疾厄宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về thể chất và những điểm cơ thể cần để ý. Không dùng để chẩn đoán bệnh — có vấn đề sức khoẻ hãy hỏi bác sĩ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_di",
+   "ten": "Thiên Di",
+   "bien_the": [
+    "cung Thiên Di"
+   ],
+   "han": "遷移宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về lúc ra ngoài xã hội, đi xa, làm việc ở môi trường lạ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "no_boc",
+   "ten": "Nô Bộc",
+   "bien_the": [
+    "cung Nô Bộc",
+    "Giao Hữu"
+   ],
+   "han": "僕役宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về bạn bè, đồng nghiệp, cấp dưới — những người ngang hoặc dưới mình.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "quan_loc",
+   "ten": "Quan Lộc",
+   "bien_the": [
+    "cung Quan Lộc"
+   ],
+   "han": "官祿宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về công việc, nghề nghiệp, cách bạn làm việc và thăng tiến.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dien_trach",
+   "ten": "Điền Trạch",
+   "bien_the": [
+    "cung Điền Trạch"
+   ],
+   "han": "田宅宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về nhà cửa, đất đai, không khí trong gia đình.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "phuc_duc",
+   "ten": "Phúc Đức",
+   "bien_the": [
+    "cung Phúc Đức"
+   ],
+   "han": "福德宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về đời sống tinh thần, niềm vui bên trong và phúc từ dòng họ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "phu_mau",
+   "ten": "Phụ Mẫu",
+   "bien_the": [
+    "cung Phụ Mẫu"
+   ],
+   "han": "父母宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Ô nói về cha mẹ, người dìu dắt và quan hệ với cấp trên.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tam_phuong_tu_chinh",
+   "ten": "Tam phương tứ chính",
+   "bien_the": [
+    "tam phương",
+    "tam hợp chiếu"
+   ],
+   "han": "三方四正",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Khi xem một cung, phải nhìn thêm 3 cung khác 'chiếu' vào nó: hai cung tạo tam giác (tam hợp) và cung đối diện. Bốn cung này cùng quyết định một mảng đời.",
+   "vi_du": "Xem Mệnh thì nhìn cả Tài Bạch, Quan Lộc (tam hợp) và Thiên Di (đối diện).",
+   "tu_dong": true
+  },
+  {
+   "ma": "chinh_tinh",
+   "ten": "Chính tinh",
+   "bien_the": [
+    "chính diệu",
+    "14 chính tinh"
+   ],
+   "han": "主星",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "14 sao chính, quyết định 'tính cách' của mỗi cung. Các sao khác chỉ thêm màu sắc.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "phu_tinh",
+   "ten": "Phụ tinh",
+   "bien_the": [
+    "sao phụ"
+   ],
+   "han": "輔星",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Các sao phụ đứng cạnh chính tinh, làm tốt thêm (cát tinh) hoặc gây trở ngại (sát tinh).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "vo_chinh_dieu",
+   "ten": "Vô chính diệu",
+   "bien_the": [
+    "Mệnh vô chính diệu"
+   ],
+   "han": "命無正曜",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Cung không có chính tinh nào. Khi đó mượn sao của cung đối diện để đọc; người Mệnh vô chính diệu thường linh hoạt, chịu ảnh hưởng môi trường.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "cuc",
+   "ten": "Cục",
+   "bien_the": [
+    "Ngũ hành cục",
+    "Thủy nhị cục",
+    "Mộc tam cục",
+    "Kim tứ cục",
+    "Thổ ngũ cục",
+    "Hỏa lục cục"
+   ],
+   "han": "五行局",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Một con số (2–6) gắn với ngũ hành, tính từ cung Mệnh. Nó quyết định vị trí sao Tử Vi và tuổi bắt đầu đại hạn đầu tiên.",
+   "vi_du": "Thổ ngũ cục: đại hạn đầu bắt đầu từ 5 tuổi.",
+   "tu_dong": true
+  },
+  {
+   "ma": "menh_chu",
+   "ten": "Mệnh chủ",
+   "bien_the": [],
+   "han": "命主",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Sao 'đại diện' cho bản mệnh theo chi năm sinh — một điểm tham khảo phụ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "than_chu",
+   "ten": "Thân chủ",
+   "bien_the": [],
+   "han": "身主",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Sao 'đại diện' cho cung Thân theo năm sinh — một điểm tham khảo phụ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "nap_am",
+   "ten": "Nạp âm",
+   "bien_the": [
+    "Bản mệnh",
+    "mệnh nạp âm"
+   ],
+   "han": "納音",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Hành 'thơ' gắn với cặp can chi năm sinh, như 'Lộ Bàng Thổ' (đất ven đường). Dân gian hay gọi là 'mệnh' khi nói 'tuổi này mệnh Kim'.",
+   "vi_du": "Canh Ngọ (1990) là Lộ Bàng Thổ.",
+   "tu_dong": true
+  },
+  {
+   "ma": "am_duong_nam_nu",
+   "ten": "Âm dương nam nữ",
+   "bien_the": [
+    "Dương nam",
+    "Âm nữ",
+    "Âm nam",
+    "Dương nữ"
+   ],
+   "han": "陰陽男女",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Năm sinh có can dương hay âm, ghép với giới tính, quyết định chiều đi của đại hạn và một số sao (thuận hay nghịch).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "lai_nhan_cung",
+   "ten": "Lai nhân cung",
+   "bien_the": [],
+   "han": "來因宮",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Cung mang can giống can năm sinh — một kỹ thuật phụ của phái Phi tinh, hệ thống chỉ ghi chú, không dùng để luận chính.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "do_sang_sao",
+   "ten": "Độ sáng sao",
+   "bien_the": [
+    "miếu vượng đắc hãm"
+   ],
+   "han": "廟旺利陷",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Mỗi sao 'mạnh' hay 'yếu' tuỳ cung nó đứng — như cây hợp đất hay không hợp đất. Có các mức Miếu, Vượng, Đắc, Bình, Hãm.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "mieu",
+   "ten": "Miếu",
+   "bien_the": [
+    "miếu địa"
+   ],
+   "han": "廟",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Mức sáng nhất: sao ở đúng 'nhà' của nó, phát huy mặt tốt rõ nhất.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "vuong",
+   "ten": "Vượng",
+   "bien_the": [
+    "vượng địa"
+   ],
+   "han": "旺",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Sao khá mạnh, mặt tốt dễ thấy.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "dac",
+   "ten": "Đắc",
+   "bien_the": [
+    "đắc địa"
+   ],
+   "han": "得地",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Sao ở chỗ hợp, phát huy ở mức khá.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "binh",
+   "ten": "Bình",
+   "bien_the": [
+    "bình hoà"
+   ],
+   "han": "平",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Sao ở mức trung bình, tốt xấu tuỳ sao đi kèm.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "ham",
+   "ten": "Hãm",
+   "bien_the": [
+    "hãm địa"
+   ],
+   "han": "陷",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Sao ở chỗ không hợp, mặt khó dễ lộ ra hơn — không có nghĩa là 'xấu', mà là cần nỗ lực và tự biết mình hơn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "nam_phai",
+   "ten": "Nam phái",
+   "bien_the": [
+    "lối Việt"
+   ],
+   "han": "南派",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Cách luận Tử vi của sách Việt Nam (Thái Thứ Lang, Nguyễn Phát Lộc…), khác phái Trung Hoa ở vài bảng tra như độ sáng sao, cách an Hoả Linh.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "trung_chau",
+   "ten": "Trung Châu",
+   "bien_the": [
+    "phái Trung Châu",
+    "phái Trung"
+   ],
+   "han": "中州派",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Một trường phái Tử vi của Trung Hoa; thư viện an sao hệ thống dùng theo phái này. Hệ thống ghi rõ chỗ khác với sách Việt và cho bạn chọn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tu_hoa",
+   "ten": "Tứ hoá",
+   "bien_the": [
+    "tứ hóa"
+   ],
+   "han": "四化",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Bốn 'biến hoá' gắn vào 4 sao theo can năm sinh: Hoá Lộc, Hoá Quyền, Hoá Khoa, Hoá Kỵ — như 4 cái nhãn làm sao đó nổi bật theo một hướng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hoa_loc",
+   "ten": "Hoá Lộc",
+   "bien_the": [
+    "Hóa Lộc",
+    "Lộc"
+   ],
+   "han": "化祿",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Nhãn 'được lợi, trôi chảy': mảng có Hoá Lộc thường thuận, dễ có thu hoạch.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hoa_quyen",
+   "ten": "Hoá Quyền",
+   "bien_the": [
+    "Hóa Quyền",
+    "Quyền"
+   ],
+   "han": "化權",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Nhãn 'nắm quyền, chủ động': mảng đó bạn muốn tự quyết, có sức ảnh hưởng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hoa_khoa",
+   "ten": "Hoá Khoa",
+   "bien_the": [
+    "Hóa Khoa",
+    "Khoa"
+   ],
+   "han": "化科",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Nhãn 'danh tiếng, học hành': mảng đó dễ được ghi nhận, có quý nhân nâng đỡ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hoa_ky",
+   "ten": "Hoá Kỵ",
+   "bien_the": [
+    "Hóa Kỵ",
+    "Kỵ"
+   ],
+   "han": "化忌",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Nhãn 'vướng mắc, bận lòng': mảng đó dễ lo nghĩ, cần cẩn thận — cũng là chỗ bạn để tâm nhiều nhất.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tuan",
+   "ten": "Tuần",
+   "bien_the": [
+    "Tuần Không",
+    "Tuần trung"
+   ],
+   "han": "旬空",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Dấu 'khoảng trống' đặt giữa hai cung theo năm sinh: làm sao trong đó yếu đi lúc đầu, về sau mới rõ. Sao xấu gặp Tuần lại bớt xấu.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "triet",
+   "ten": "Triệt",
+   "bien_the": [
+    "Triệt Lộ",
+    "Triệt không"
+   ],
+   "han": "截空",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Dấu 'chặn đường' giữa hai cung theo can năm sinh: cản trở mạnh ở giai đoạn đầu đời (thường trước 30 tuổi).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "cach_cuc",
+   "ten": "Cách cục",
+   "bien_the": [],
+   "han": "格局",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Một 'tổ hợp sao' có tên riêng mà sách cổ đã mô tả, như Tử Phủ Vũ Tướng hay Sát Phá Tham. Cách cục chỉ là khung tham khảo — thành hay bại còn tuỳ sao xấu đi kèm.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "pha_cach",
+   "ten": "Phá cách",
+   "bien_the": [],
+   "han": "破格",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Khi một cách cục tốt gặp sao xấu (Kình, Đà, Hoả, Linh, Không, Kiếp, Kỵ) làm giảm ý nghĩa tốt của nó.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "luc_sat",
+   "ten": "Lục sát",
+   "bien_the": [
+    "sát tinh",
+    "tứ sát"
+   ],
+   "han": "六煞",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Sáu sao gây trở ngại: Kình Dương, Đà La, Hoả Tinh, Linh Tinh, Địa Không, Địa Kiếp. Chúng làm đời thêm thử thách, nhưng cũng tạo sức bật.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "luc_cat",
+   "ten": "Lục cát",
+   "bien_the": [
+    "cát tinh"
+   ],
+   "han": "六吉",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Sáu sao hỗ trợ: Tả Phù, Hữu Bật, Văn Xương, Văn Khúc, Thiên Khôi, Thiên Việt — như có người giúp, có chữ nghĩa, có quý nhân.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dai_han",
+   "ten": "Đại hạn",
+   "bien_the": [
+    "đại vận"
+   ],
+   "han": "大限",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Giai đoạn 10 năm của đời, mỗi giai đoạn ứng với một cung. Đọc hạn luôn xét đại hạn trước.",
+   "vi_du": "Đại hạn 25–34 ở cung Quan Lộc: mười năm này việc làm là trọng tâm.",
+   "tu_dong": true
+  },
+  {
+   "ma": "tieu_han",
+   "ten": "Tiểu hạn",
+   "bien_the": [],
+   "han": "小限",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Hạn từng năm theo tuổi, đi qua 12 cung — một lớp phụ dưới đại hạn và lưu niên.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "luu_nien",
+   "ten": "Lưu niên",
+   "bien_the": [
+    "năm xem",
+    "Thái Tuế"
+   ],
+   "han": "流年",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Hạn của riêng một năm dương/âm lịch (theo chi năm), đặt lên trên lá số gốc để xem năm đó nổi bật mảng nào.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tuoi_mu",
+   "ten": "Tuổi mụ",
+   "bien_the": [
+    "tuổi âm"
+   ],
+   "han": "虛歲",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Cách tính tuổi Việt: lúc sinh đã là 1 tuổi, qua Tết thêm 1. Hạn Tử vi tính theo tuổi mụ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "gio_ty_muon",
+   "ten": "Giờ Tý muộn",
+   "bien_the": [
+    "Tý muộn",
+    "dạ Tý"
+   ],
+   "han": "夜子時",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Sinh 23:00–23:59. Tử vi coi đã sang ngày hôm sau; Thần số và Bát tự vẫn giữ ngày đó — nên hệ thống luôn ghi chú cho người sinh giờ này.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thang_nhuan",
+   "ten": "Tháng nhuận",
+   "bien_the": [
+    "nhuận"
+   ],
+   "han": "閏月",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Tháng âm lịch được 'chèn thêm' để lịch khớp với mùa. Người sinh nửa sau tháng nhuận có hai cách lập lá số — hệ thống cho bạn xem cả hai.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tu_vi",
+   "ten": "Tử Vi",
+   "bien_the": [],
+   "han": "紫微",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'vua': tự trọng, thích dẫn dắt, có khí chất. Mặt cần để ý: dễ tự cao, ngại nghe ý trái.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_co",
+   "ten": "Thiên Cơ",
+   "bien_the": [],
+   "han": "天機",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'quân sư': nhanh trí, khéo tính toán, thích thay đổi. Cần để ý: hay lo nghĩ, khó dừng lại một việc.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thai_duong",
+   "ten": "Thái Dương",
+   "bien_the": [],
+   "han": "太陽",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'mặt trời': cho đi, nhiệt tình, thích được công nhận. Cần để ý: ôm việc người khác, dễ hao sức.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "vu_khuc",
+   "ten": "Vũ Khúc",
+   "bien_the": [],
+   "han": "武曲",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'tài chính': thực tế, quyết đoán, giỏi việc tiền. Cần để ý: cứng nhắc, ít bày tỏ cảm xúc.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_dong",
+   "ten": "Thiên Đồng",
+   "bien_the": [],
+   "han": "天同",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'phúc hậu': hiền hoà, dễ chịu, thích an nhàn. Cần để ý: thiếu quyết liệt, dễ trì hoãn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "liem_trinh",
+   "ten": "Liêm Trinh",
+   "bien_the": [],
+   "han": "廉貞",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'nguyên tắc': có lập trường, mạnh mẽ, đam mê. Cần để ý: cực đoan, dễ va chạm.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_phu",
+   "ten": "Thiên Phủ",
+   "bien_the": [],
+   "han": "天府",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'kho': ổn định, biết giữ của, chu đáo. Cần để ý: thận trọng quá mức, ngại mạo hiểm.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thai_am",
+   "ten": "Thái Âm",
+   "bien_the": [],
+   "han": "太陰",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'mặt trăng': tinh tế, giàu cảm xúc, chăm lo gia đình. Cần để ý: hay ôm nỗi niềm riêng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tham_lang",
+   "ten": "Tham Lang",
+   "bien_the": [],
+   "han": "貪狼",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'đa tài, ham muốn': giao thiệp giỏi, nhiều sở thích. Cần để ý: dễ phân tán, ham vui.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "cu_mon",
+   "ten": "Cự Môn",
+   "bien_the": [],
+   "han": "巨門",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'lời nói': giỏi phân tích, tranh luận. Cần để ý: dễ thị phi, nói thẳng làm mất lòng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_tuong",
+   "ten": "Thiên Tướng",
+   "bien_the": [],
+   "han": "天相",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'ấn tín': đáng tin, công bằng, hay giúp người. Cần để ý: dễ bị kéo vào chuyện người khác.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_luong",
+   "ten": "Thiên Lương",
+   "bien_the": [],
+   "han": "天梁",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'che chở': nghĩa hiệp, như người anh cả, hợp nghề dạy, chăm sóc. Cần để ý: hay giảng giải, cố chấp.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "that_sat",
+   "ten": "Thất Sát",
+   "bien_the": [],
+   "han": "七殺",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'tướng tiên phong': can đảm, dám làm việc khó. Cần để ý: nóng vội, dễ liều.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "pha_quan",
+   "ten": "Phá Quân",
+   "bien_the": [],
+   "han": "破軍",
+   "mo_dun": "tuvi",
+   "nhom": "chinh_tinh",
+   "de_hieu": "Sao 'phá cũ dựng mới': thích đổi mới, không ngại đập đi làm lại. Cần để ý: thất thường, hao tổn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "ta_phu",
+   "ten": "Tả Phù",
+   "bien_the": [],
+   "han": "左輔",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'người phụ tá bên trái': có người giúp đỡ, làm việc nhóm tốt.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "huu_bat",
+   "ten": "Hữu Bật",
+   "bien_the": [],
+   "han": "右弼",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'người phụ tá bên phải': có trợ lực, giỏi phối hợp.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "van_xuong",
+   "ten": "Văn Xương",
+   "bien_the": [],
+   "han": "文昌",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'chữ nghĩa': học giỏi, viết lách, giấy tờ thuận.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "van_khuc",
+   "ten": "Văn Khúc",
+   "bien_the": [],
+   "han": "文曲",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'tài văn nghệ': ăn nói, nghệ thuật, khéo léo.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_khoi",
+   "ten": "Thiên Khôi",
+   "bien_the": [],
+   "han": "天魁",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'quý nhân ban ngày': gặp người tốt giúp đỡ một cách công khai.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_viet",
+   "ten": "Thiên Việt",
+   "bien_the": [],
+   "han": "天鉞",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'quý nhân ban đêm': được giúp một cách âm thầm, kín đáo.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "loc_ton",
+   "ten": "Lộc Tồn",
+   "bien_the": [],
+   "han": "祿存",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'của để dành': giữ tiền tốt, tích luỹ chậm mà chắc.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_ma",
+   "ten": "Thiên Mã",
+   "bien_the": [],
+   "han": "天馬",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'ngựa trời': di chuyển, thay đổi, năng động; gặp Lộc thì dễ kiếm tiền nhờ đi lại.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "kinh_duong",
+   "ten": "Kình Dương",
+   "bien_the": [],
+   "han": "擎羊",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sát tinh 'cái giáo': quyết liệt, cạnh tranh, dễ va chạm trực diện.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "da_la",
+   "ten": "Đà La",
+   "bien_the": [],
+   "han": "陀羅",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sát tinh 'vướng víu': chậm trễ, dây dưa, việc hay kéo dài.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hoa_tinh",
+   "ten": "Hỏa Tinh",
+   "bien_the": [],
+   "han": "火星",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sát tinh 'lửa bùng': nóng nảy, bột phát, nhanh đến nhanh đi.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "linh_tinh",
+   "ten": "Linh Tinh",
+   "bien_the": [],
+   "han": "鈴星",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sát tinh 'lửa âm ỉ': bực bội trong lòng, áp lực ngầm.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dia_khong",
+   "ten": "Địa Không",
+   "bien_the": [],
+   "han": "地空",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sát tinh 'trống rỗng': ý tưởng lạ, nhưng dễ hụt hẫng, hao hụt.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dia_kiep",
+   "ten": "Địa Kiếp",
+   "bien_the": [],
+   "han": "地劫",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sát tinh 'mất mát': biến động bất ngờ, cần dự phòng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hong_loan",
+   "ten": "Hồng Loan",
+   "bien_the": [],
+   "han": "紅鸞",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'duyên đỏ': tình cảm, cưới hỏi, sự duyên dáng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_hy",
+   "ten": "Thiên Hỷ",
+   "bien_the": [],
+   "han": "天喜",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'niềm vui': chuyện mừng, tiệc tùng, tin vui.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dao_hoa",
+   "ten": "Đào Hoa",
+   "bien_the": [
+    "Hàm Trì"
+   ],
+   "han": "桃花",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'hoa đào': sức hút, duyên với người khác giới.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_hinh",
+   "ten": "Thiên Hình",
+   "bien_the": [],
+   "han": "天刑",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'kỷ luật, pháp lý': nghiêm khắc, hợp nghề luật, quân đội, y khoa; cũng chỉ chuyện thị phi.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_dieu",
+   "ten": "Thiên Diêu",
+   "bien_the": [
+    "Thiên Riêu"
+   ],
+   "han": "天姚",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'phong lưu': lãng mạn, nghệ sĩ, dễ vướng chuyện tình.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_khoc",
+   "ten": "Thiên Khốc",
+   "bien_the": [],
+   "han": "天哭",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'nước mắt': buồn phiền, nhưng cũng là sự sâu sắc.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_hu",
+   "ten": "Thiên Hư",
+   "bien_the": [],
+   "han": "天虛",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'hư hao': lo lắng, cảm giác trống trải.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dai_hao",
+   "ten": "Đại Hao",
+   "bien_the": [],
+   "han": "大耗",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'hao tốn lớn': chi tiêu nhiều, mất mát vật chất.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tieu_hao",
+   "ten": "Tiểu Hao",
+   "bien_the": [],
+   "han": "小耗",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'hao tốn nhỏ': chi vặt, rơi rớt.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tam_thai",
+   "ten": "Tam Thai",
+   "bien_the": [],
+   "han": "三台",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'bậc thềm': địa vị, thăng tiến từng bậc.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "bat_toa",
+   "ten": "Bát Tọa",
+   "bien_the": [],
+   "han": "八座",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'ghế ngồi': chức vị, sự ổn định.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "an_quang",
+   "ten": "Ân Quang",
+   "bien_the": [],
+   "han": "恩光",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'ơn huệ': được ban ơn, khen thưởng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_quy",
+   "ten": "Thiên Quý",
+   "bien_the": [],
+   "han": "天貴",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'quý': được trọng vọng, có ân nhân.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "long_tri",
+   "ten": "Long Trì",
+   "bien_the": [],
+   "han": "龍池",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'ao rồng': tài hoa, có lộc về văn chương nghệ thuật.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "phung_cac",
+   "ten": "Phụng Các",
+   "bien_the": [],
+   "han": "鳳閣",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'gác phượng': phong cách, sang trọng, có danh.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "co_than",
+   "ten": "Cô Thần",
+   "bien_the": [],
+   "han": "孤辰",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'cô đơn' (cho nam): thích tự lập, ít chia sẻ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "qua_tu",
+   "ten": "Quả Tú",
+   "bien_the": [],
+   "han": "寡宿",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Sao 'cô quạnh' (cho nữ): sống nội tâm, độc lập.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "truong_sinh",
+   "ten": "Trường Sinh",
+   "bien_the": [
+    "vòng Trường Sinh",
+    "Tràng Sinh"
+   ],
+   "han": "長生",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Vòng 12 giai đoạn như đời một cây: Trường Sinh, Mộc Dục, Quan Đới, Lâm Quan, Đế Vượng, Suy, Bệnh, Tử, Mộ, Tuyệt, Thai, Dưỡng — cho biết sức sống của mỗi cung.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thai_tue",
+   "ten": "Thái Tuế",
+   "bien_the": [
+    "vòng Thái Tuế"
+   ],
+   "han": "太歲",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Vòng 12 sao theo chi năm sinh, nói về thái độ sống và quan hệ xã hội.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "bac_sy",
+   "ten": "Bác Sỹ",
+   "bien_the": [
+    "vòng Bác Sĩ",
+    "Bác Sĩ"
+   ],
+   "han": "博士",
+   "mo_dun": "tuvi",
+   "nhom": "phu_tinh",
+   "de_hieu": "Vòng 12 sao bắt đầu từ Lộc Tồn, nói về tài lộc và công danh nhỏ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tu_phu_vu_tuong",
+   "ten": "Tử Phủ Vũ Tướng",
+   "bien_the": [],
+   "han": "紫府武相",
+   "mo_dun": "tuvi",
+   "nhom": "cach_cuc",
+   "de_hieu": "Nhóm 4 sao 'quản lý, ổn định' hội về Mệnh: hợp tổ chức, tài chính, quản trị.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "sat_pha_tham",
+   "ten": "Sát Phá Tham",
+   "bien_the": [],
+   "han": "殺破狼",
+   "mo_dun": "tuvi",
+   "nhom": "cach_cuc",
+   "de_hieu": "Nhóm 3 sao 'biến động, dám làm' hội về Mệnh: đời nhiều thay đổi, hợp khởi nghiệp, cạnh tranh.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "co_nguyet_dong_luong",
+   "ten": "Cơ Nguyệt Đồng Lương",
+   "bien_the": [],
+   "han": "機月同梁",
+   "mo_dun": "tuvi",
+   "nhom": "cach_cuc",
+   "de_hieu": "Nhóm 4 sao 'mềm, chuyên môn' hội về Mệnh: hợp công việc ổn định, văn phòng, chuyên gia, phục vụ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "cu_nhat",
+   "ten": "Cự Nhật",
+   "bien_the": [
+    "Cự Nhật đồng cung"
+   ],
+   "han": "巨日",
+   "mo_dun": "tuvi",
+   "nhom": "cach_cuc",
+   "de_hieu": "Cự Môn và Thái Dương đứng cùng/đối nhau: lời nói có sức nặng, hợp giảng dạy, truyền thông, ngoại giao.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "bat_tu",
+   "ten": "Bát tự",
+   "bien_the": [
+    "Tứ trụ",
+    "tứ trụ"
+   ],
+   "han": "八字",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Tám chữ ghi giờ, ngày, tháng, năm sinh: mỗi mốc là một cặp Thiên can + Địa chi, gọi là một 'trụ'. Bốn trụ = tám chữ.",
+   "vi_du": "Canh Ngọ · Tân Tỵ · Nhâm Ngọ · Bính Ngọ",
+   "tu_dong": true
+  },
+  {
+   "ma": "tru",
+   "ten": "Trụ",
+   "bien_the": [
+    "trụ năm",
+    "trụ tháng",
+    "trụ ngày",
+    "trụ giờ"
+   ],
+   "han": "柱",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Một cột gồm 1 can + 1 chi. Trụ năm gắn với gốc gác, trụ tháng với môi trường lớn lên, trụ ngày với bản thân và vợ/chồng, trụ giờ với con cái và hậu vận.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "thien_can",
+   "ten": "Thiên can",
+   "bien_the": [
+    "can"
+   ],
+   "han": "天干",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "10 ký hiệu Giáp, Ất, Bính, Đinh, Mậu, Kỷ, Canh, Tân, Nhâm, Quý — mỗi cái mang một hành (Mộc, Hoả, Thổ, Kim, Thuỷ) và âm hay dương.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "dia_chi",
+   "ten": "Địa chi",
+   "bien_the": [
+    "chi"
+   ],
+   "han": "地支",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "12 ký hiệu Tý, Sửu, Dần… Hợi (12 con giáp) — dùng cho năm, tháng, ngày, giờ.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "nhat_chu",
+   "ten": "Nhật chủ",
+   "bien_the": [
+    "Nhật can"
+   ],
+   "han": "日主",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Can của trụ ngày — đại diện cho chính bạn. Mọi thứ khác trong Bát tự được xét trong quan hệ với chữ này.",
+   "vi_du": "Sinh ngày Nhâm Ngọ → nhật chủ Nhâm (nước lớn).",
+   "tu_dong": true
+  },
+  {
+   "ma": "ngu_hanh",
+   "ten": "Ngũ hành",
+   "bien_the": [
+    "năm hành",
+    "Kim Mộc Thủy Hỏa Thổ"
+   ],
+   "han": "五行",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Năm loại 'khí': Kim (kim loại), Mộc (cây), Thuỷ (nước), Hoả (lửa), Thổ (đất). Chúng sinh nhau và khắc nhau theo vòng.",
+   "vi_du": "Mộc sinh Hoả (gỗ nhóm lửa); Thuỷ khắc Hoả (nước dập lửa).",
+   "tu_dong": true
+  },
+  {
+   "ma": "tuong_sinh",
+   "ten": "Tương sinh",
+   "bien_the": [
+    "sinh"
+   ],
+   "han": "相生",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Hành này nuôi hành kia: Mộc → Hoả → Thổ → Kim → Thuỷ → Mộc.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "tuong_khac",
+   "ten": "Tương khắc",
+   "bien_the": [
+    "khắc"
+   ],
+   "han": "相剋",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Hành này chế ngự hành kia: Mộc khắc Thổ, Thổ khắc Thuỷ, Thuỷ khắc Hoả, Hoả khắc Kim, Kim khắc Mộc.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "tang_can",
+   "ten": "Tàng can",
+   "bien_the": [],
+   "han": "藏干",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Những can 'giấu' bên trong mỗi địa chi. Ví dụ chi Tỵ giấu Bính, Canh, Mậu. Chúng là sức mạnh ngầm của lá số.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thau",
+   "ten": "Thấu",
+   "bien_the": [
+    "lộ",
+    "thấu can"
+   ],
+   "han": "透干",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Khi một can giấu trong chi cũng xuất hiện ở hàng can bên trên — nghĩa là sức mạnh đó 'lộ ra', dễ dùng được.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "nguyet_lenh",
+   "ten": "Nguyệt lệnh",
+   "bien_the": [
+    "chi tháng"
+   ],
+   "han": "月令",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Địa chi của tháng sinh — 'mùa' bạn sinh ra, quyết định hành nào đang mạnh. Đây là chữ quan trọng nhất để định cách cục.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thap_than",
+   "ten": "Thập thần",
+   "bien_the": [
+    "mười thần"
+   ],
+   "han": "十神",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Mười 'vai trò' của các can khác đối với nhật chủ (bạn): như người anh em, đứa con tinh thần, tiền bạc, cấp trên, người che chở…",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "ty_kien",
+   "ten": "Tỷ Kiên",
+   "bien_the": [],
+   "han": "比肩",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Ngang vai, cùng hành cùng âm dương với bạn: bạn bè, anh em, tinh thần tự lập.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "kiep_tai",
+   "ten": "Kiếp Tài",
+   "bien_the": [],
+   "han": "劫財",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Cùng hành khác âm dương: người cạnh tranh, cũng là sức mạnh dám tranh giành.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thuc_than",
+   "ten": "Thực Thần",
+   "bien_the": [],
+   "han": "食神",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Thứ bạn sinh ra một cách thoải mái: tài năng, hưởng thụ, sự sáng tạo ôn hoà.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thuong_quan",
+   "ten": "Thương Quan",
+   "bien_the": [],
+   "han": "傷官",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Thứ bạn sinh ra một cách sắc bén: sáng tạo phá cách, ăn nói, dám chống khuôn khổ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "chinh_tai",
+   "ten": "Chính Tài",
+   "bien_the": [],
+   "han": "正財",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Tiền bạc ổn định, lao động chân chính; với nam còn chỉ vợ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_tai",
+   "ten": "Thiên Tài",
+   "bien_the": [],
+   "han": "偏財",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Tiền bất ngờ, cơ hội, kinh doanh; người cha.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "chinh_quan",
+   "ten": "Chính Quan",
+   "bien_the": [],
+   "han": "正官",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Khuôn phép, cấp trên, danh dự; với nữ còn chỉ chồng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "that_sat_battu",
+   "ten": "Thất Sát",
+   "bien_the": [
+    "Thiên Quan",
+    "Sát"
+   ],
+   "han": "七殺",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Áp lực, thử thách, quyền uy cứng rắn — vừa là sức ép vừa là động lực.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "chinh_an",
+   "ten": "Chính Ấn",
+   "bien_the": [
+    "Ấn"
+   ],
+   "han": "正印",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Sự che chở, học vấn, mẹ, người nâng đỡ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_an",
+   "ten": "Thiên Ấn",
+   "bien_the": [
+    "Kiêu",
+    "Kiêu Thần"
+   ],
+   "han": "偏印",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Kiến thức riêng, lối nghĩ độc đáo, sự che chở không theo lối thường.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "than_vuong",
+   "ten": "Thân vượng",
+   "bien_the": [
+    "thân mạnh"
+   ],
+   "han": "身旺",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Nhật chủ (bạn) có nhiều hành cùng loại hoặc hành nuôi mình — năng lượng dồi dào, cần nơi để 'xả' ra.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "than_nhuoc",
+   "ten": "Thân nhược",
+   "bien_the": [
+    "thân yếu"
+   ],
+   "han": "身弱",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Nhật chủ ít được hỗ trợ — cần được nuôi dưỡng, bồi đắp.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dung_than",
+   "ten": "Dụng thần",
+   "bien_the": [],
+   "han": "用神",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Hành 'bạn cần' để cân bằng lá số. Hệ thống trình bày hai cách tìm (phù ức, điều hậu) và không tự chọn thay bạn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "phu_uc",
+   "ten": "Phù ức",
+   "bien_the": [],
+   "han": "扶抑",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Cách tìm dụng thần theo nguyên tắc 'yếu thì bồi, mạnh thì tiết' cho nhật chủ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dieu_hau",
+   "ten": "Điều hậu",
+   "bien_the": [],
+   "han": "調候",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Cách tìm dụng thần theo khí hậu mùa sinh: sinh mùa nóng cần nước, mùa lạnh cần lửa.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hy_than",
+   "ten": "Hỷ thần",
+   "bien_the": [
+    "hỷ"
+   ],
+   "han": "喜神",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Hành hoặc yếu tố có lợi, giúp lá số tốt lên.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "ky_than",
+   "ten": "Kỵ thần",
+   "bien_the": [
+    "kỵ"
+   ],
+   "han": "忌神",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Hành hoặc yếu tố bất lợi, làm lá số mất cân bằng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dai_van",
+   "ten": "Đại vận",
+   "bien_the": [],
+   "han": "大運",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Giai đoạn 10 năm của Bát tự, mỗi giai đoạn mang một cặp can chi mới tác động lên lá số.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "khong_vong",
+   "ten": "Không vong",
+   "bien_the": [
+    "Tuần không"
+   ],
+   "han": "空亡",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Hai chi 'trống' theo trụ ngày — chỗ đó như bị bỏ ngỏ, việc liên quan dễ hư không.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "than_sat",
+   "ten": "Thần sát",
+   "bien_the": [],
+   "han": "神煞",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Các 'sao phụ' của Bát tự như Thiên Ất Quý Nhân, Đào Hoa, Dịch Mã — tín hiệu phụ, không phải phần luận chính.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_at_quy_nhan",
+   "ten": "Thiên Ất Quý Nhân",
+   "bien_the": [
+    "Quý Nhân"
+   ],
+   "han": "天乙貴人",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Thần sát tốt nhất: có người giúp đỡ lúc khó.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dich_ma",
+   "ten": "Dịch Mã",
+   "bien_the": [],
+   "han": "驛馬",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Thần sát của di chuyển, thay đổi chỗ ở, công tác xa.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "duong_nhan",
+   "ten": "Dương Nhận",
+   "bien_the": [],
+   "han": "羊刃",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Sức mạnh cực độ của nhật chủ dương — quyết đoán nhưng dễ quá tay.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "kien_loc",
+   "ten": "Kiến Lộc",
+   "bien_the": [
+    "Lộc"
+   ],
+   "han": "建祿",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Tháng sinh là nơi nhật chủ 'có lộc' — tự lực, đứng vững trên sức mình.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "luc_hop",
+   "ten": "Lục hợp",
+   "bien_the": [
+    "hợp"
+   ],
+   "han": "六合",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Hai địa chi 'bắt tay' với nhau, như Tý–Sửu, Dần–Hợi: gắn kết, hoà hợp.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "luc_xung",
+   "ten": "Lục xung",
+   "bien_the": [
+    "xung"
+   ],
+   "han": "六沖",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Hai địa chi đối đầu, như Tý–Ngọ: va chạm, thay đổi, xáo trộn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tam_hop",
+   "ten": "Tam hợp",
+   "bien_the": [],
+   "han": "三合",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Ba chi hợp thành một cục hành mạnh, như Thân–Tý–Thìn thành Thuỷ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hinh",
+   "ten": "Hình",
+   "bien_the": [
+    "tương hình",
+    "tự hình"
+   ],
+   "han": "刑",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Quan hệ 'làm tổn thương' giữa các chi — dễ phiền muộn, thị phi.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tiet_khi",
+   "ten": "Tiết khí",
+   "bien_the": [
+    "tiết"
+   ],
+   "han": "節氣",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "24 mốc khí hậu trong năm theo vị trí mặt trời (Lập xuân, Kinh trập…). Bát tự đổi tháng theo tiết khí, không theo mùng 1 âm lịch.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "lap_xuan",
+   "ten": "Lập xuân",
+   "bien_the": [],
+   "han": "立春",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Tiết đầu năm (khoảng 4/2 dương lịch). Bát tự và Phong thuỷ đổi năm tại Lập xuân chứ không tại Tết.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "cung_thong_bao_giam",
+   "ten": "Cùng Thông Bảo Giám",
+   "bien_the": [],
+   "han": "窮通寶鑑",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Sách cổ đời Thanh bàn cách điều hoà khí hậu cho từng nhật chủ sinh từng tháng (dụng thần điều hậu).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tu_binh_chan_thuyen",
+   "ten": "Tử Bình Chân Thuyên",
+   "bien_the": [],
+   "han": "子平真詮",
+   "mo_dun": "battu",
+   "nhom": null,
+   "de_hieu": "Sách cổ đời Thanh (Thẩm Hiếu Chiêm) về định cách cục Bát tự theo tháng sinh.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "que",
+   "ten": "Quẻ",
+   "bien_the": [
+    "quẻ Dịch",
+    "64 quẻ"
+   ],
+   "han": "卦",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Một hình gồm 6 vạch xếp chồng, mỗi vạch liền (dương) hoặc đứt (âm). Có 64 quẻ, mỗi quẻ mô tả một 'tình thế' của sự việc.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "hao",
+   "ten": "Hào",
+   "bien_the": [
+    "vạch"
+   ],
+   "han": "爻",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Một trong 6 vạch của quẻ, đếm từ dưới lên: hào 1 là lúc khởi đầu, hào 6 là lúc cuối/đỉnh.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "hao_duong",
+   "ten": "Hào dương",
+   "bien_the": [
+    "vạch liền"
+   ],
+   "han": "陽爻",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Vạch liền —, tượng trưng cho mạnh, chủ động, sáng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hao_am",
+   "ten": "Hào âm",
+   "bien_the": [
+    "vạch đứt"
+   ],
+   "han": "陰爻",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Vạch đứt - -, tượng trưng cho mềm, tiếp nhận, tĩnh.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hao_dong",
+   "ten": "Hào động",
+   "bien_the": [
+    "động hào"
+   ],
+   "han": "動爻",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Vạch đang 'chuyển' sang ngược lại (liền thành đứt hoặc ngược lại) — điểm then chốt của việc bạn hỏi.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "que_ban",
+   "ten": "Quẻ bản",
+   "bien_the": [
+    "quẻ chủ",
+    "bản quái"
+   ],
+   "han": "本卦",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Quẻ gieo được — tình thế hiện tại.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "que_bien",
+   "ten": "Quẻ biến",
+   "bien_the": [
+    "biến quái",
+    "quẻ chi"
+   ],
+   "han": "變卦",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Quẻ có được khi các hào động đổi chiều — xu hướng sự việc chuyển tới.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "que_ho",
+   "ten": "Quẻ hỗ",
+   "bien_the": [
+    "hỗ quái"
+   ],
+   "han": "互卦",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Quẻ ghép từ các hào giữa — diễn biến bên trong, phần 'ẩn'.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "bat_quai",
+   "ten": "Bát quái",
+   "bien_the": [
+    "quẻ đơn",
+    "quẻ 3 vạch"
+   ],
+   "han": "八卦",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "8 quẻ 3 vạch: Càn (trời), Khôn (đất), Chấn (sấm), Tốn (gió), Khảm (nước), Ly (lửa), Cấn (núi), Đoài (đầm). Hai quẻ đơn chồng lên nhau thành 1 trong 64 quẻ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thuong_quai",
+   "ten": "Thượng quái",
+   "bien_the": [
+    "quẻ trên",
+    "ngoại quái"
+   ],
+   "han": "上卦",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Ba hào trên của quẻ — môi trường bên ngoài, người khác.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "ha_quai",
+   "ten": "Hạ quái",
+   "bien_the": [
+    "quẻ dưới",
+    "nội quái"
+   ],
+   "han": "下卦",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Ba hào dưới — bên trong, bản thân bạn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "quai_tu",
+   "ten": "Quái từ",
+   "bien_the": [
+    "Thoán từ",
+    "lời quẻ"
+   ],
+   "han": "卦辭",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Lời cổ nói về cả quẻ, như 'Nguyên hanh lợi trinh' của quẻ Càn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hao_tu",
+   "ten": "Hào từ",
+   "bien_the": [
+    "lời hào"
+   ],
+   "han": "爻辭",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Lời cổ nói về riêng từng hào — đọc khi hào đó động.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thoan_truyen",
+   "ten": "Thoán truyện",
+   "bien_the": [],
+   "han": "彖傳",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Phần giải thích quái từ trong Thập Dực (các bài bình của Khổng môn).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dai_tuong",
+   "ten": "Đại Tượng",
+   "bien_the": [
+    "Tượng truyện"
+   ],
+   "han": "大象",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Lời bình 'hình ảnh' của quẻ kèm lời khuyên cho người quân tử, như 'Trời đi mạnh mẽ, quân tử tự cường không nghỉ'.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "nguyen_hanh_loi_trinh",
+   "ten": "Nguyên hanh lợi trinh",
+   "bien_the": [],
+   "han": "元亨利貞",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Bốn đức của quẻ Càn: khởi đầu lớn, thông suốt, có lợi, giữ chính bền — nôm na: việc tốt nếu làm đúng và kiên trì.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hoi",
+   "ten": "Hối",
+   "bien_the": [
+    "hối hận"
+   ],
+   "han": "悔",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Có điều đáng tiếc nhưng còn sửa được nếu biết dừng và điều chỉnh.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "lan",
+   "ten": "Lận",
+   "bien_the": [],
+   "han": "吝",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Khó khăn, bế tắc nhỏ hoặc điều đáng xấu hổ — do cố chấp hay chần chừ.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "cat",
+   "ten": "Cát",
+   "bien_the": [],
+   "han": "吉",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Tốt, thuận lợi — việc đang đi đúng hướng nếu giữ cách làm hiện tại.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "hung",
+   "ten": "Hung",
+   "bien_the": [],
+   "han": "凶",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Xấu, có nguy cơ — lời nhắc cần thận trọng, đổi cách làm hoặc chờ thời.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "vo_cuu",
+   "ten": "Vô cữu",
+   "bien_the": [
+    "không lỗi"
+   ],
+   "han": "無咎",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Không có lỗi — làm như vậy thì không sao, không bị trách.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "nghia_ly",
+   "ten": "Nghĩa Lý",
+   "bien_the": [
+    "phái Nghĩa Lý"
+   ],
+   "han": "義理",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Cách đọc quẻ theo ý nghĩa đạo lý, lời khuyên cách xử thế (Vương Bật, Trình Di, Chu Hy).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "luc_hao",
+   "ten": "Lục Hào",
+   "bien_the": [
+    "Hoả châu lâm",
+    "Tăng San Bốc Dịch"
+   ],
+   "han": "六爻",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Cách đọc quẻ bằng can chi gắn vào 6 hào, xét sinh khắc để đoán việc cụ thể (sách Tăng San Bốc Dịch).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "mai_hoa_dich_so",
+   "ten": "Mai Hoa Dịch Số",
+   "bien_the": [
+    "Mai Hoa"
+   ],
+   "han": "梅花易數",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Cách lập quẻ từ con số, thời gian hay sự vật bắt gặp, tương truyền của Thiệu Ung đời Tống.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "the",
+   "ten": "Thế",
+   "bien_the": [
+    "hào Thế"
+   ],
+   "han": "世",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Trong Lục Hào: hào đại diện cho chính người hỏi quẻ.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "ung",
+   "ten": "Ứng",
+   "bien_the": [
+    "hào Ứng"
+   ],
+   "han": "應",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Trong Lục Hào: hào đại diện cho đối phương hoặc sự việc phía bên kia.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "luc_than",
+   "ten": "Lục thân",
+   "bien_the": [
+    "Phụ Mẫu",
+    "Huynh Đệ",
+    "Tử Tôn",
+    "Thê Tài",
+    "Quan Quỷ"
+   ],
+   "han": "六親",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Năm vai trò gắn vào hào trong Lục Hào: Phụ Mẫu (giấy tờ, che chở), Huynh Đệ (cạnh tranh), Tử Tôn (vui vẻ, giải trừ), Thê Tài (tiền), Quan Quỷ (công việc, áp lực).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dung_than_luc_hao",
+   "ten": "Dụng thần",
+   "bien_the": [],
+   "han": "用神",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Hào đại diện cho điều bạn hỏi — hỏi tiền xem Thê Tài, hỏi việc làm xem Quan Quỷ, hỏi giấy tờ xem Phụ Mẫu.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "nguyet_kien",
+   "ten": "Nguyệt kiến",
+   "bien_the": [],
+   "han": "月建",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Địa chi của tháng gieo quẻ — dùng xét hào nào mạnh, hào nào yếu.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "nhat_than",
+   "ten": "Nhật thần",
+   "bien_the": [],
+   "han": "日辰",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Địa chi của ngày gieo quẻ — cũng dùng để xét sức mạnh các hào.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "gieo_que",
+   "ten": "Gieo quẻ",
+   "bien_the": [
+    "xin quẻ"
+   ],
+   "han": "起卦",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Cách lập quẻ: tung 3 đồng xu 6 lần (mỗi lần ra một hào), hoặc theo số/thời gian. Hệ thống dùng máy gieo ngẫu nhiên hoặc bạn tự gieo rồi nhập.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "menh_quai",
+   "ten": "Mệnh quái",
+   "bien_the": [
+    "cung phi",
+    "quái số"
+   ],
+   "han": "命卦",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Quẻ cá nhân tính từ năm sinh và giới tính trong Bát trạch, chia bạn vào nhóm Đông tứ mệnh hoặc Tây tứ mệnh.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dong_tu_menh",
+   "ten": "Đông tứ mệnh",
+   "bien_the": [
+    "Đông tứ trạch"
+   ],
+   "han": "東四命",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Nhóm mệnh quái Khảm, Ly, Chấn, Tốn — hợp các hướng Bắc, Nam, Đông, Đông Nam.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tay_tu_menh",
+   "ten": "Tây tứ mệnh",
+   "bien_the": [
+    "Tây tứ trạch"
+   ],
+   "han": "西四命",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Nhóm mệnh quái Càn, Khôn, Cấn, Đoài — hợp Tây Bắc, Tây Nam, Đông Bắc, Tây.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "bat_trach",
+   "ten": "Bát trạch",
+   "bien_the": [],
+   "han": "八宅",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Trường phái phong thuỷ chia 8 hướng thành 4 tốt, 4 xấu theo mệnh quái của người ở.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "du_nien",
+   "ten": "Du niên",
+   "bien_the": [
+    "bát du niên"
+   ],
+   "han": "遊年",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Tám 'tính chất' của mỗi hướng với từng mệnh quái: 4 tốt (Sinh Khí, Thiên Y, Diên Niên, Phục Vị) và 4 xấu (Tuyệt Mệnh, Ngũ Quỷ, Lục Sát, Hoạ Hại).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "sinh_khi",
+   "ten": "Sinh Khí",
+   "bien_the": [],
+   "han": "生氣",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hướng tốt nhất: sức sống, phát triển, tài lộc.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thien_y",
+   "ten": "Thiên Y",
+   "bien_the": [],
+   "han": "天醫",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hướng tốt cho sức khoẻ, có người giúp.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dien_nien",
+   "ten": "Diên Niên",
+   "bien_the": [],
+   "han": "延年",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hướng tốt cho các mối quan hệ, hôn nhân bền.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "phuc_vi",
+   "ten": "Phục Vị",
+   "bien_the": [],
+   "han": "伏位",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hướng bình an, ổn định, hợp học hành, tĩnh tâm.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tuyet_menh",
+   "ten": "Tuyệt Mệnh",
+   "bien_the": [],
+   "han": "絕命",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hướng xấu nhất theo Bát trạch: dễ hao tổn, nên tránh đặt cửa chính, giường, bếp hướng về.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "ngu_quy",
+   "ten": "Ngũ Quỷ",
+   "bien_the": [],
+   "han": "五鬼",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hướng xấu: dễ thị phi, rắc rối, mất đồ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "luc_sat_phongthuy",
+   "ten": "Lục Sát",
+   "bien_the": [],
+   "han": "六煞",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hướng xấu: chuyện tình cảm, kiện tụng, rắc rối nhỏ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "hoa_hai",
+   "ten": "Hoạ Hại",
+   "bien_the": [],
+   "han": "禍害",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hướng xấu nhẹ: chuyện phiền, mệt mỏi.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "toa",
+   "ten": "Toạ",
+   "bien_the": [
+    "toạ sơn",
+    "lưng nhà"
+   ],
+   "han": "坐",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Phía 'lưng' của ngôi nhà — đối diện với hướng mặt tiền.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "huong",
+   "ten": "Hướng",
+   "bien_the": [
+    "hướng nhà",
+    "hướng sơn"
+   ],
+   "han": "向",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Phía mặt tiền ngôi nhà nhìn ra.",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "24_son",
+   "ten": "24 sơn",
+   "bien_the": [
+    "hai mươi bốn sơn",
+    "sơn"
+   ],
+   "han": "二十四山",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "La bàn chia 360° thành 24 phần, mỗi phần 15°, đặt tên theo can, chi và quẻ (Nhâm, Tý, Quý, Sửu…).",
+   "vi_du": null,
+   "tu_dong": false
+  },
+  {
+   "ma": "huyen_khong",
+   "ten": "Huyền Không",
+   "bien_the": [
+    "Huyền Không phi tinh",
+    "phi tinh"
+   ],
+   "han": "玄空飛星",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Trường phái phong thuỷ xét 'sao bay' theo thời gian: mỗi 20 năm (một vận) các con số 1–9 di chuyển qua 9 ô của ngôi nhà.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "van",
+   "ten": "Vận",
+   "bien_the": [
+    "tam nguyên cửu vận",
+    "Vận 9"
+   ],
+   "han": "運",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Chu kỳ 20 năm trong Huyền Không. Hiện là Vận 9 (2024–2043), sao số 9 đang 'vượng'.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "cuu_tinh",
+   "ten": "Cửu tinh",
+   "bien_the": [
+    "9 sao",
+    "Nhất Bạch",
+    "Nhị Hắc",
+    "Tam Bích",
+    "Tứ Lục",
+    "Ngũ Hoàng",
+    "Lục Bạch",
+    "Thất Xích",
+    "Bát Bạch",
+    "Cửu Tử"
+   ],
+   "han": "九星",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Chín 'sao' số 1–9 của Huyền Không, mỗi sao có màu và tính chất riêng (vd 1 Nhất Bạch, 5 Ngũ Hoàng, 9 Cửu Tử).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "van_tinh",
+   "ten": "Vận tinh",
+   "bien_the": [],
+   "han": "運星",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Con số của vận đặt ở mỗi ô — 'nền' của thời kỳ đó.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "son_tinh",
+   "ten": "Sơn tinh",
+   "bien_the": [],
+   "han": "山星",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Con số bên trái mỗi ô: nói về con người, sức khoẻ, quan hệ — hợp đặt chỗ tĩnh, có 'núi' (tường, đồ cao).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "huong_tinh",
+   "ten": "Hướng tinh",
+   "bien_the": [],
+   "han": "向星",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Con số bên phải mỗi ô: nói về tiền bạc, cơ hội — hợp đặt chỗ thoáng, có 'nước' (cửa, lối đi).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "ha_quai_ban",
+   "ten": "Hạ quái bàn",
+   "bien_the": [
+    "hạ quái"
+   ],
+   "han": "下卦盤",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Cách lập bàn Huyền Không thông thường, khi nhà đúng tâm một sơn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "the_quai",
+   "ten": "Thế quái",
+   "bien_the": [
+    "thế tinh",
+    "kiêm hướng"
+   ],
+   "han": "替卦",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Cách lập bàn khi nhà lệch tâm sơn quá 3° (kiêm hướng): thay con số vào giữa bằng 'thế tinh' theo khẩu quyết.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "vuong_son_vuong_huong",
+   "ten": "Vượng sơn vượng hướng",
+   "bien_the": [],
+   "han": "旺山旺向",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Cục tốt nhất: sao vượng ở cả lưng nhà (người) và mặt tiền (tiền).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thuong_son_ha_thuy",
+   "ten": "Thượng sơn hạ thuỷ",
+   "bien_the": [],
+   "han": "上山下水",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Cục đảo: sao người chạy ra mặt tiền, sao tiền chạy ra sau lưng — cần bố trí bù.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "song_tinh_dao_huong",
+   "ten": "Song tinh đáo hướng",
+   "bien_the": [],
+   "han": "雙星到向",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hai sao vượng cùng ở mặt tiền: tiền tốt, cần chú ý chuyện người.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "song_tinh_dao_toa",
+   "ten": "Song tinh đáo toạ",
+   "bien_the": [],
+   "han": "雙星到坐",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hai sao vượng cùng ở lưng nhà: người tốt, cần mở thoáng phía sau để kích tiền.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "phuc_ngam",
+   "ten": "Phục ngâm",
+   "bien_the": [],
+   "han": "伏吟",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Con số trùng với số gốc của ô — như 'giậm chân tại chỗ', trì trệ.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "phan_ngam",
+   "ten": "Phản ngâm",
+   "bien_the": [],
+   "han": "反吟",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Con số cộng với số gốc thành 10 — như 'đảo chiều', xáo trộn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "luu_nien_phi_tinh",
+   "ten": "Lưu niên phi tinh",
+   "bien_the": [
+    "sao năm"
+   ],
+   "han": "流年飛星",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Con số của năm bay vào các ô — năm 2026 số 1 Nhất Bạch vào giữa. Đổi năm tại Lập xuân.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "khong_vong_phong_thuy",
+   "ten": "Không vong",
+   "bien_the": [
+    "đại không vong",
+    "tiểu không vong"
+   ],
+   "han": "空亡",
+   "mo_dun": "phongthuy",
+   "nhom": null,
+   "de_hieu": "Hướng nằm đúng ranh giới hai sơn — năng lượng lẫn lộn, nên đo lại.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "so_duong_doi",
+   "ten": "Số đường đời",
+   "bien_the": [
+    "đường đời",
+    "Life Path"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Con số quan trọng nhất, cộng từ ngày tháng năm sinh — nói về con đường và bài học chính của bạn.",
+   "vi_du": "17/05/1990 → 1+7+5+1+9+9+0 = 32 → 3+2 = 5.",
+   "tu_dong": true
+  },
+  {
+   "ma": "so_su_menh",
+   "ten": "Số sứ mệnh",
+   "bien_the": [
+    "sứ mệnh",
+    "Expression"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Con số từ toàn bộ chữ cái họ tên — tài năng và cách bạn thể hiện ra ngoài.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "so_linh_hon",
+   "ten": "Số linh hồn",
+   "bien_the": [
+    "linh hồn",
+    "Soul Urge"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Con số từ các nguyên âm trong tên — điều bạn thật sự khao khát bên trong.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "so_nhan_cach",
+   "ten": "Số nhân cách",
+   "bien_the": [
+    "nhân cách",
+    "Personality"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Con số từ các phụ âm trong tên — ấn tượng đầu tiên người khác thấy ở bạn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "so_chu_dao",
+   "ten": "Số chủ đạo",
+   "bien_the": [
+    "số Master",
+    "11",
+    "22",
+    "33"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Các số 11, 22, 33 không rút gọn tiếp — mang năng lượng mạnh và áp lực lớn hơn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "nam_ca_nhan",
+   "ten": "Năm cá nhân",
+   "bien_the": [],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Con số chu kỳ 9 năm theo ngày sinh và năm hiện tại — chủ đề của năm đó với riêng bạn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thang_ca_nhan",
+   "ten": "Tháng cá nhân",
+   "bien_the": [],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Chủ đề nhỏ của từng tháng trong năm cá nhân.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "dinh_cao",
+   "ten": "Đỉnh cao",
+   "bien_the": [
+    "đỉnh",
+    "Pinnacle"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Bốn giai đoạn lớn của đời, mỗi giai đoạn có một con số chủ đề và khoảng tuổi riêng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "thu_thach",
+   "ten": "Thử thách",
+   "bien_the": [
+    "Challenge"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Những con số chỉ bài học khó bạn hay gặp lại trong từng giai đoạn.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "no_nghiep",
+   "ten": "Nợ nghiệp",
+   "bien_the": [
+    "số nợ nghiệp",
+    "13",
+    "14",
+    "16",
+    "19"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Các số 13, 14, 16, 19 xuất hiện khi cộng — gợi một bài học cần sửa từ thói quen cũ (theo quan niệm thần số học).",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "bieu_do_ngay_sinh",
+   "ten": "Biểu đồ ngày sinh",
+   "bien_the": [
+    "lưới ngày sinh"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Lưới 3×3 xếp các chữ số trong ngày sinh vào ô 1–9, để thấy số nào nhiều, số nào thiếu.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "mui_ten",
+   "ten": "Mũi tên",
+   "bien_the": [
+    "mũi tên sức mạnh",
+    "mũi tên trống"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": null,
+   "de_hieu": "Một hàng 3 ô thẳng trên biểu đồ ngày sinh đều có số (mũi tên sức mạnh) hoặc đều trống (mũi tên trống) — chỉ một nét tính cách nổi bật.",
+   "vi_du": null,
+   "tu_dong": true
+  }
+ ]
+}

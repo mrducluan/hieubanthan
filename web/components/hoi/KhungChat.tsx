@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
+import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 
 export interface KetQuaHoi {
   van?: string;
@@ -14,6 +15,8 @@ export interface KetQuaHoi {
   ghiChu?: string;
   canhBao?: string[];
   loi?: string;
+  /** GN — thuật ngữ trong câu trả lời (engine tra từ điển) để gạch chân + giải nghĩa. */
+  thuatNgu?: ThuatNgu[];
 }
 
 interface Tin extends KetQuaHoi {
@@ -94,11 +97,10 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
                   {t.phu}
                   {t.van && (
                     <div className="prose-vn rounded-2xl rounded-tl-md border border-line/70 bg-bg/40 px-4 py-3 text-[0.95rem] leading-relaxed">
-                      {t.van.split("\n\n").map((p, i) => (
-                        <p key={i} className="whitespace-pre-line">{p}</p>
-                      ))}
+                      {doanCoThuatNgu(t.van, t.thuatNgu)}
                     </div>
                   )}
+                  <KhungGiaiNghia ds={t.thuatNgu} />
                   {t.canhBao?.map((c) => (
                     <p key={c} className="flex gap-2 rounded-xl bg-moon/10 px-3 py-2 text-xs text-moon"><Info className="mt-0.5 size-3.5 shrink-0" aria-hidden /> {c}</p>
                   ))}

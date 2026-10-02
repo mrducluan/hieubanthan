@@ -8,10 +8,11 @@ import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
+import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 
 interface BaoCao {
   mo_dun: string;
-  chuong: { ma: string; tieu_de: string; doan: string[]; van_ai?: string; che_do?: string }[];
+  chuong: { ma: string; tieu_de: string; doan: string[]; van_ai?: string; che_do?: string; thuat_ngu?: ThuatNgu[] }[];
   ket: string;
   dien_dat?: "ai" | "tron" | "mau";
   trang_thai: string;
@@ -82,9 +83,11 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
             <h3 className="font-serif text-2xl"><span className="text-gold">{i + 1}.</span> {c.tieu_de}</h3>
             <div className="prose-vn mt-3 space-y-3 text-[0.97rem] leading-relaxed text-fg-muted">
               {c.van_ai && !goc
-                ? c.van_ai.split(/\n\s*\n/).map((d, k) => <p key={k}>{d}</p>)
-                : c.doan.map((d, k) => <p key={k} className={d.startsWith("Câu hỏi để tự soi") ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""}>{d}</p>)}
+                ? doanCoThuatNgu(c.van_ai.replace(/\n\s*\n/g, "\n\n"), c.thuat_ngu)
+                : doanCoThuatNgu(c.doan.join("\n\n"), c.thuat_ngu,
+                  (d) => (d.startsWith("Câu hỏi để tự soi") ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""))}
             </div>
+            <div className="mt-3 print:hidden"><KhungGiaiNghia ds={c.thuat_ngu} /></div>
           </section>
         ))}
       </div>
