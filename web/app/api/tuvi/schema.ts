@@ -71,7 +71,7 @@ const Sao = z.object({
   ten: z.string(),
   do_sang: z.string().nullable(),
   tu_hoa: z.string().nullable(),
-  /** TV-NP: độ sáng lối Việt (chỉ chính tinh); `do_sang` là bảng phái Trung của iztro. */
+  /** TV-NP: độ sáng lối Việt (chính tinh; phụ tinh từ TV-NP2 — null nếu sách không luận); `do_sang` là bảng phái Trung của iztro. */
   do_sang_nam_phai: z.string().nullable().optional(),
 });
 
@@ -93,6 +93,8 @@ const Cung = z.object({
   tue_tien: z.string(),
   dai_han: z.object({ tu_tuoi: z.number(), den_tuoi: z.number() }),
   tieu_han_tuoi: z.array(z.number()),
+  /** TV-NP2 — độ sáng lối Việt của phụ tinh, tạp diệu, Đại/Tiểu Hao, Hoá Kỵ trong cung (chỉ sao có luận). */
+  do_sang_phu: z.record(z.string()).optional(),
 });
 
 export const LaSoOutput = z.object({

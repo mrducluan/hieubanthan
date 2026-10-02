@@ -25,7 +25,8 @@ export function BangTuTru({ ls }: { ls: LaSoBatTu }) {
   return (
     <div role="table" aria-label="Bảng tứ trụ" className="space-y-0 text-[var(--ls-chu)]">
       <div role="row" className={cn(dong, "pb-2")}>
-        <span role="columnheader" className="sr-only">Mục</span>
+        {/* Ô trống thật giữ chỗ cột nhãn — sr-only trực tiếp bị đẩy ra khỏi lưới làm tiêu đề lệch một cột. */}
+        <span role="columnheader"><span className="sr-only">Mục</span></span>
         {TEN_TRU.map((t, i) => (
           <div key={t} role="columnheader" className="text-center">
             <p className={cn("font-semibold", i === 2 ? "text-[var(--ls-nhan)]" : "")}>Trụ {t.toLowerCase()}</p>

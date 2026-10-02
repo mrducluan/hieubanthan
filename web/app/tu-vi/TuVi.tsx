@@ -53,6 +53,7 @@ export function TuVi() {
   const [cheDo, setCheDo] = useState<"tham_khao" | "chi_tiet">("tham_khao");
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
   const [dangTai, setDangTai] = useState(false);
+  const [loiAnh, setLoiAnh] = useState<string | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const chiTietRef = useRef<HTMLDivElement>(null);
   const [toanCanh, setToanCanh] = useState(false);
@@ -113,11 +114,14 @@ export function TuVi() {
               <Button variant="ghost" size="sm" className="ml-auto" disabled={dangTai} onClick={async () => {
                 if (!svgRef.current) return;
                 setDangTai(true);
+                setLoiAnh(null);
                 try { await taiAnhSvg(svgRef.current, `la-so-tu-vi-${ls.can_chi_nam.can}-${ls.can_chi_nam.chi}.png`); ghi("chart_interacted", { mo_dun: "tuvi", kind: "tai_anh" }); }
+                catch (e) { setLoiAnh(e instanceof Error ? e.message : "Chưa xuất được ảnh."); }
                 finally { setDangTai(false); }
               }}><Download aria-hidden /> Tải ảnh</Button>
             </div>
 
+            {loiAnh && <p role="alert" className="text-sm text-cinnabar">{loiAnh}</p>}
             {(ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh") && (
               <div className="flex flex-wrap items-center gap-3 rounded-xl border border-moon/40 bg-moon/[0.06] px-4 py-3 text-sm" data-testid="chon-thang-nhuan">
                 <span className="flex-1">Bạn sinh <b>nửa sau tháng nhuận</b> — hai trường phái lập lá số khác nhau. Xem theo:</span>

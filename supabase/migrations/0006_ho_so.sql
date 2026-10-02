@@ -20,12 +20,16 @@ create table if not exists ho_so (
 
 alter table ho_so enable row level security;
 
+drop policy if exists "ho_so chu doc" on ho_so;
 create policy "ho_so chu doc" on ho_so
     for select to authenticated using ((select auth.uid()) = user_id);
+drop policy if exists "ho_so chu tao" on ho_so;
 create policy "ho_so chu tao" on ho_so
     for insert to authenticated with check ((select auth.uid()) = user_id);
+drop policy if exists "ho_so chu sua" on ho_so;
 create policy "ho_so chu sua" on ho_so
     for update to authenticated using ((select auth.uid()) = user_id) with check ((select auth.uid()) = user_id);
+drop policy if exists "ho_so chu xoa" on ho_so;
 create policy "ho_so chu xoa" on ho_so
     for delete to authenticated using ((select auth.uid()) = user_id);
 
@@ -37,6 +41,7 @@ begin
 end;
 $$;
 
+drop trigger if exists ho_so_cap_nhat_luc on ho_so;
 create trigger ho_so_cap_nhat_luc before update on ho_so
     for each row execute function ho_so_cap_nhat_luc();
 
