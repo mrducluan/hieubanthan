@@ -81,6 +81,10 @@ class HuyenKhongInput(BaseModel):
         return self
 
 
+def _bay_gio_utc() -> _dt.datetime:
+    return _dt.datetime.now(_dt.timezone.utc).replace(tzinfo=None)
+
+
 @router.post("/huyen-khong")
 def api_huyen_khong(inp: HuyenKhongInput) -> dict:
     from app.calc import huyen_khong as hk
@@ -100,7 +104,7 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     kb = phongthuy_kb.huyen_khong()
-    nam_xem = inp.nam_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).year
+    nam_xem = inp.nam_xem or hk.nam_theo_lap_xuan(_bay_gio_utc())
     return {
         "engine_version": ENGINE_VERSION, **b,
         "cuc_y": kb["cuc"][b["cuc"]],

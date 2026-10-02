@@ -76,3 +76,14 @@ test("luận giải toàn bộ theo chương (miễn phí thử nghiệm)", asyn
   await expect(bc).toContainText("Vận hạn hiện tại");
   await expect(bc.getByRole("navigation", { name: "Mục lục" })).toBeVisible();
 });
+
+test("tải ảnh lá số: ra file PNG", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
+  const [tai] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Tải ảnh" }).click()]);
+  expect(tai.suggestedFilename()).toMatch(/^la-so-tu-vi-.+\.png$/);
+  const duong = await tai.path();
+  const { statSync } = await import("node:fs");
+  expect(statSync(duong!).size).toBeGreaterThan(20_000);
+});

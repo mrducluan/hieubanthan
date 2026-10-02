@@ -85,3 +85,22 @@ def test_api_dau_vao_sai():
     c = TestClient(app)
     assert c.post("/v1/phongthuy/huyen-khong", json={"nam_xay": 2008}).status_code == 422
     assert c.post("/v1/phongthuy/huyen-khong", json={"nam_xay": 2008, "toa": "Abc"}).status_code == 422
+
+
+@pytest.mark.parametrize("t,nam", [
+    ((2026, 1, 15, 3, 0), 2025),      # trước Lập xuân 2026 (~4/2) → vẫn năm 2025: Nhị Hắc nhập trung
+    ((2026, 2, 3, 20, 0), 2025),      # Lập xuân 2026 = 3/2 20:02 UTC (4/2 03:02 giờ VN)
+    ((2026, 2, 3, 20, 5), 2026),
+    ((2026, 12, 31, 12, 0), 2026),
+])
+def test_nam_theo_lap_xuan(t, nam):
+    import datetime as dt
+    assert hk.nam_theo_lap_xuan(dt.datetime(*t)) == nam
+
+
+def test_api_nam_xem_mac_dinh_theo_lap_xuan(monkeypatch):
+    import datetime as dt
+    from app import phongthuy_api
+    monkeypatch.setattr(phongthuy_api, "_bay_gio_utc", lambda: dt.datetime(2026, 1, 20))
+    d = TestClient(app).post("/v1/phongthuy/huyen-khong", json={"nam_xay": 2008, "toa": "Tý"}).json()
+    assert d["luu_nien"]["nam"] == 2025 and d["luu_nien"]["tam"] == 2

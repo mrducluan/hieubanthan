@@ -42,9 +42,12 @@ export function HuyenKhong() {
   const [dang, setDang] = useState(false);
 
   const lap = async () => {
+    const nam = Number(namXay), d = Number(doLa.replace(",", "."));
+    if (!(nam >= 1864 && nam <= 2150)) { setLoi("Năm xây hoặc nhập trạch cần nằm trong khoảng 1864–2150."); return; }
+    if (cach === "do" && !(doLa.trim() !== "" && d >= 0 && d < 360)) { setLoi("Độ la bàn cần là số từ 0 đến dưới 360 (0 = chính Bắc)."); return; }
     setDang(true); setLoi(null);
     try {
-      const body = { nam_xay: Number(namXay), ...(cach === "son" ? { toa } : { do: Number(doLa) }) };
+      const body = { nam_xay: Number(namXay), ...(cach === "son" ? { toa } : { do: d }) };
       setBan(await postJson<Ban>("/api/phongthuy/huyen-khong", body));
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong" });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa lập được bàn."); }
@@ -91,12 +94,14 @@ export function HuyenKhong() {
         <div className="space-y-5" data-testid="ban-huyen-khong">
           <p className="text-sm text-fg-muted">
             Vận <b className="text-gold">{ban.van}</b> · Toạ <b className="text-fg">{ban.toa.son}</b> ({ban.toa.phuong}) — hướng <b className="text-fg">{ban.huong.son}</b> ({ban.huong.phuong}) ·
-            cục <b className="text-gold">{ban.cuc_ten}</b> · lưu niên {ban.luu_nien.nam}: {ban.luu_nien.sao_tam} nhập trung
+            cục <b className="text-gold">{ban.cuc_ten}</b> · lưu niên {ban.luu_nien.nam} (tính từ Lập xuân): {ban.luu_nien.sao_tam} nhập trung
           </p>
           {ban.canh_bao.map((c) => <p key={c.loai} className="rounded-xl bg-cinnabar/10 px-4 py-2 text-sm text-cinnabar">{c.chi_tiet}</p>)}
 
           <div className="mx-auto grid max-w-md grid-cols-3 gap-1.5" role="table" aria-label="Hạ quái bàn Huyền Không, Nam ở trên">
-            {[...ban.cung].sort((a, b) => a.luoi[0] * 3 + a.luoi[1] - (b.luoi[0] * 3 + b.luoi[1])).map((c) => {
+            {[0, 1, 2].map((hang) => (
+              <div key={hang} role="row" className="contents">
+            {ban.cung.filter((c) => c.luoi[0] === hang).sort((a, b) => a.luoi[1] - b.luoi[1]).map((c) => {
               const laToa = c.cung === ban.toa.quai, laHuong = c.cung === ban.huong.quai;
               return (
                 <div key={c.cung} role="cell" aria-label={`${c.cung} ${c.phuong}: sơn tinh ${c.son}, hướng tinh ${c.huong}, vận tinh ${c.van}, lưu niên ${ban.luu_nien.cung[c.cung]}`}
@@ -111,6 +116,8 @@ export function HuyenKhong() {
                 </div>
               );
             })}
+              </div>
+            ))}
           </div>
           <p className="text-center text-xs text-fg-faint">Trái: sơn tinh (người, sức khoẻ) · phải: hướng tinh (tài lộc) · giữa dưới: vận tinh · góc đỏ: sao lưu niên.
             Màu: <span className="text-gold">vượng</span> · <span className="text-jade">sinh</span> · <span className="text-moon">thoái</span> · <span className="text-fg-muted">suy</span> · <span className="text-fg-faint">tử</span>.</p>

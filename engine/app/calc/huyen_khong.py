@@ -6,14 +6,18 @@ Tính thuần, tất định. Quy tắc phi tinh và nhận diện tổ hợp ch
 Chưa xử lý thế quái (kiêm hướng > 3°): khi hướng sát ranh giới sơn → gắn cờ, không tự đổi bàn.
 
 Quy ước:
-- Vận tam nguyên cửu vận, mỗi vận 20 năm, Vận 1 bắt đầu 1864 (Vận 9: 2024–2043). Năm theo dương lịch
-  (sát Lập xuân thì người dùng tự chọn năm theo tiết).
+- Vận tam nguyên cửu vận, mỗi vận 20 năm, Vận 1 bắt đầu 1864 (Vận 9: 2024–2043). Năm xây theo dương lịch
+  (sát Lập xuân thì người dùng tự chọn năm theo tiết). Năm xem lưu niên mặc định đổi tại Lập xuân.
 - Lạc thư phi thuận: Trung → Càn → Đoài → Cấn → Ly → Khảm → Khôn → Chấn → Tốn; phi nghịch: cùng lộ
   trình, số giảm dần.
 - Sao nhập trung của sơn/hướng bàn: thuận/nghịch theo âm dương của sơn cùng "nguyên" trong quẻ gốc của
   số đó; số 5 mượn âm dương của chính toạ sơn / hướng sơn.
 """
 from __future__ import annotations
+
+import datetime as dt
+
+from app.calc import tietkhi
 
 # 8 quẻ: (số Lạc thư, phương) và 3 sơn theo thứ tự địa nguyên – thiên nguyên – nhân nguyên, kèm âm dương.
 QUAI = {
@@ -133,6 +137,11 @@ def trang_thai(sao: int, van: int) -> str:
     """Vượng (đương vận) · sinh (hai vận tới) · thoái (vận vừa qua) · suy (hai vận trước) · tử (còn lại)."""
     d = (sao - van) % 9
     return {0: "vượng", 1: "sinh", 2: "sinh", 8: "thoái", 7: "suy"}.get(d, "tử")
+
+
+def nam_theo_lap_xuan(t_utc: dt.datetime) -> int:
+    """Năm phi tinh lưu niên tại thời điểm `t_utc` (UTC, naive): đổi năm tại Lập xuân, không tại 1/1."""
+    return t_utc.year if t_utc >= tietkhi.thoi_diem(t_utc.year, 315) else t_utc.year - 1
 
 
 def luu_nien(nam: int) -> dict:
