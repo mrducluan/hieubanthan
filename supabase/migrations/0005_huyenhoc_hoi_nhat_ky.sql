@@ -25,6 +25,7 @@ create table if not exists huyenhoc_hoi_nhat_ky (
 );
 
 alter table huyenhoc_hoi_nhat_ky enable row level security;
+drop policy if exists "anon insert huyenhoc_hoi_nhat_ky" on huyenhoc_hoi_nhat_ky;
 create policy "anon insert huyenhoc_hoi_nhat_ky" on huyenhoc_hoi_nhat_ky
     for insert to anon with check (true);
 
