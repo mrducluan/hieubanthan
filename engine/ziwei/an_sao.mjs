@@ -53,8 +53,9 @@ gz.getHeavenlyStemAndEarthlyBranchBySolarDate = (s, t, o) => {
   if (v && o && o.year === 'normal') r.yearly = [CAN[(v.nam - 4) % 10], CHI[(v.nam - 4) % 12]];
   return r;
 };
+// fix_leap: nửa sau tháng nhuận tính sang tháng sau (mặc định iztro) hay như tháng chính.
 const a = astro.bySolar(vao.ngay, vao.time_index, vao.gioi_tinh === 'nu' ? 'female' : 'male',
-                        true, vao.ngon_ngu || 'vi-VN');
+                        vao.fix_leap !== false, vao.ngon_ngu || 'vi-VN');
 
 const sao = (s) => ({ name: s.name, type: s.type, brightness: s.brightness || '', mutagen: s.mutagen || '' });
 const ra = {

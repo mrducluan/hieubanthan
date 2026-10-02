@@ -38,7 +38,11 @@ const namNayVN = () => Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho
 
 export function TuVi() {
   const hoSo = useHoSo();
-  const laSo = laSoTuHoSo(hoSo);
+  // TV-PHAI (chủ dự án chốt 2026-10-02): "hiện cả hai" — Hoả/Linh lối Việt | Trung Châu; nửa sau tháng nhuận.
+  const [hoaLinh, setHoaLinh] = useState<"viet" | "trung">("viet");
+  const [thangNhuan, setThangNhuan] = useState<"thang_sau" | "thang_chinh">("thang_sau");
+  const goc = laSoTuHoSo(hoSo);
+  const laSo = goc ? { ...goc, ...(hoaLinh === "trung" ? { hoa_linh: hoaLinh } : {}), ...(thangNhuan === "thang_chinh" ? { thang_nhuan: thangNhuan } : {}) } : null;
   const { data: ls, loi, thuLai } = usePost<LaSoOutputT>("/api/tuvi/la-so", laSo);
   const [namXem, setNamXem] = useState(namNayVN);
   const { data: vh } = usePost<VanHanOutputT>("/api/tuvi/van-han", laSo ? { la_so: laSo, nam_xem: namXem } : null);
@@ -100,6 +104,12 @@ export function TuVi() {
                   <TabsTrigger value="trung" title="Bảng của thư viện an sao (phái Trung Hoa)">Phái Trung</TabsTrigger>
                 </TabsList>
               </Tabs>
+              <Tabs value={hoaLinh} onValueChange={(v) => setHoaLinh(v as "viet" | "trung")}>
+                <TabsList aria-label="Cách an Hoả Tinh, Linh Tinh">
+                  <TabsTrigger value="viet" title="Sách Tử vi Việt: chiều an đổi theo âm dương nam nữ">Hoả Linh lối Việt</TabsTrigger>
+                  <TabsTrigger value="trung" title="Phái Trung Châu (thư viện iztro)">Trung Châu</TabsTrigger>
+                </TabsList>
+              </Tabs>
               <Button variant="ghost" size="sm" className="ml-auto" disabled={dangTai} onClick={async () => {
                 if (!svgRef.current) return;
                 setDangTai(true);
@@ -108,6 +118,17 @@ export function TuVi() {
               }}><Download aria-hidden /> Tải ảnh</Button>
             </div>
 
+            {(ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh") && (
+              <div className="flex flex-wrap items-center gap-3 rounded-xl border border-moon/40 bg-moon/[0.06] px-4 py-3 text-sm" data-testid="chon-thang-nhuan">
+                <span className="flex-1">Bạn sinh <b>nửa sau tháng nhuận</b> — hai trường phái lập lá số khác nhau. Xem theo:</span>
+                <Tabs value={thangNhuan} onValueChange={(v) => setThangNhuan(v as "thang_sau" | "thang_chinh")}>
+                  <TabsList aria-label="Cách tính tháng nhuận">
+                    <TabsTrigger value="thang_sau">Tính sang tháng sau</TabsTrigger>
+                    <TabsTrigger value="thang_chinh">Như tháng chính</TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </div>
+            )}
             {/* Lá số: trên điện thoại mặc định cuộn ngang để giữ chữ đủ lớn; "Toàn cảnh" thu vừa màn hình */}
             <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0" data-testid="la-so-tu-vi">
               <div className={cn("overflow-hidden rounded-[1.25rem] shadow-card", !toanCanh && "min-w-[760px]")}>

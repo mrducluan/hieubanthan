@@ -105,3 +105,49 @@ def test_api_1985_dung_lich_viet():
         "birth_date": c["ngay"], "birth_time": gio, "gender": c["gioi_tinh"], "noi_sinh": "ha-noi"}).json()
     menh = next(x["chi"] for x in d["cung"] if x["la_menh"])
     assert menh == c["menh"]
+
+
+# ---- TV-PHAI (chủ dự án chốt 2026-10-02): Hoả/Linh "hiện cả hai" (mặc định lối Việt), tháng nhuận nửa sau
+# "hiện cả hai lá" (mặc định tính tháng sau). Test viết TRƯỚC.
+def _vi_tri(la: dict, ten: str) -> set:
+    return {p["earthlyBranch"] for p in la["palaces"] for s in p["minorStars"] if s["name"] == ten}
+
+
+@pytest.mark.parametrize("c", _D["cases"] + _D["lich_lech"], ids=lambda c: f"{c['ngay']}-{c['ti']}-{c['gioi_tinh']}")
+def test_hoa_linh_loi_viet_khop_lasotuvi(c):
+    la = az.an_sao_tho(dt.date.fromisoformat(c["ngay"]), c["ti"], c["gioi_tinh"])          # mặc định lối Việt
+    assert _vi_tri(la, "Hỏa Tinh") == set(c["sao"]["56"]["chi"])
+    assert _vi_tri(la, "Linh Tinh") == set(c["sao"]["55"]["chi"])
+
+
+def test_hoa_linh_trung_chau_giu_nguyen_iztro():
+    khac = 0
+    for c in _D["cases"][:20]:
+        d = dt.date.fromisoformat(c["ngay"])
+        viet = az.an_sao_tho(d, c["ti"], c["gioi_tinh"])
+        trung = az.an_sao_tho(d, c["ti"], c["gioi_tinh"], hoa_linh="trung")
+        assert len(_vi_tri(trung, "Hỏa Tinh")) == 1 and len(_vi_tri(trung, "Linh Tinh")) == 1
+        khac += _vi_tri(viet, "Hỏa Tinh") != _vi_tri(trung, "Hỏa Tinh")
+    assert khac > 0
+
+
+def test_thang_nhuan_tinh_nhu_thang_chinh_khop_lasotuvi():
+    c = next(x for x in _D["cases"] if x["ngay"] == "2001-06-10")
+    la = az.an_sao_tho(dt.date(2001, 6, 10), c["ti"], c["gioi_tinh"], thang_nhuan="thang_chinh")
+    menh = next(p["earthlyBranch"] for p in la["palaces"] if p["name"] == "Mệnh")
+    tv = next(p["earthlyBranch"] for p in la["palaces"] for s in p["majorStars"] if s["name"] == "Tử Vi")
+    assert menh == c["menh"] and tv in c["sao"]["1"]["chi"]
+
+
+def test_api_tuy_chon_phai():
+    from fastapi.testclient import TestClient
+    from app.main import app
+    cl = TestClient(app)
+    base = {"birth_date": "2001-06-10", "birth_time": "15:30", "gender": "nu", "noi_sinh": "ha-noi"}
+    a = cl.post("/v1/tuvi/an-sao", json=base).json()
+    b = cl.post("/v1/tuvi/an-sao", json={**base, "thang_nhuan": "thang_chinh", "hoa_linh": "trung"}).json()
+    assert a["phai"] == {"hoa_linh": "viet", "thang_nhuan": "thang_sau", "co_the_doi_thang_nhuan": True}
+    assert b["phai"]["thang_nhuan"] == "thang_chinh" and b["phai"]["hoa_linh"] == "trung"
+    assert next(x["chi"] for x in a["cung"] if x["la_menh"]) != next(x["chi"] for x in b["cung"] if x["la_menh"])
+    c = cl.post("/v1/tuvi/an-sao", json={**base, "birth_date": "1990-05-17"}).json()
+    assert c["phai"]["co_the_doi_thang_nhuan"] is False
