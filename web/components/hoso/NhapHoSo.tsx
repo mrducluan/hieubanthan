@@ -23,6 +23,9 @@ interface KetQuaDoi {
   duong: { ngay: number; thang: number; nam: number };
   am: { ngay: number; thang: number; nam: number; nhuan: boolean };
   can_chi_nam: string;
+  can_chi_ngay: string;
+  can_chi_thang: string;
+  thang_nhuan_nam: number | null;
   lich_mien_nam_utc8: boolean;
 }
 
@@ -161,10 +164,20 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
           </label>
         )}
         <p className="min-h-5 text-xs" aria-live="polite" data-testid="doi-lich">
-          {doi && lich === "duong" && <span className="text-fg-muted">Âm lịch: <b className="text-fg">{moTaAm(doi.am, doi.can_chi_nam)}</b></span>}
-          {doi && lich === "am" && <span className="text-fg-muted">Dương lịch: <b className="text-fg">{doi.duong.ngay}/{doi.duong.thang}/{doi.duong.nam}</b> · năm {doi.can_chi_nam}{doi.lich_mien_nam_utc8 && " · theo lịch miền Nam thời đó"}</span>}
-          {loiDoi && lich === "am" && <span className="text-cinnabar">{loiDoi}</span>}
+          {doi && lich === "duong" && <span className="text-fg-muted">Âm lịch: <b className="text-fg">{moTaAm(doi.am, doi.can_chi_nam)}</b> · ngày {doi.can_chi_ngay}, tháng {doi.can_chi_thang}{doi.lich_mien_nam_utc8 && " · theo lịch miền Nam thời đó"}</span>}
+          {doi && lich === "am" && <span className="text-fg-muted">Dương lịch: <b className="text-fg">{doi.duong.ngay}/{doi.duong.thang}/{doi.duong.nam}</b> · năm {doi.can_chi_nam} · ngày {doi.can_chi_ngay}{doi.lich_mien_nam_utc8 && " · theo lịch miền Nam thời đó"}</span>}
+          {loiDoi && lich === "am" && <span className="text-cinnabar">{loiDoi.replace(/^Ngày không tồn tại: /, "")}</span>}
         </p>
+        {doi && lich === "am" && !nhuan && doi.thang_nhuan_nam === m && (
+          <p className="rounded-lg bg-gold/10 px-3 py-2 text-xs text-fg" data-testid="nhac-nhuan">
+            Năm {doi.am.nam} có <b>hai tháng {m}</b> (tháng {m} thường và tháng {m} nhuận). Nếu giấy tờ ghi “tháng {m} nhuận”, hãy đánh dấu ô Tháng nhuận.
+          </p>
+        )}
+        {gio >= "23:00" && (
+          <p className="text-xs text-fg-faint" data-testid="nhac-gio-ty">
+            Sinh 23:00–23:59 (đầu giờ Tý): Tử vi tính sang ngày âm hôm sau; Thần số và Bát tự giữ ngày này.
+          </p>
+        )}
       </fieldset>
 
       <div className="rounded-xl border border-line/70">

@@ -127,3 +127,55 @@ def test_can_chi_truoc_tet_lay_nam_cu() -> None:
     năm can chi là Đinh Mão 1987, KHÔNG phải Mậu Thìn 1988."""
     _, _, nam_am, _ = lunar.solar_to_lunar(5, 2, 1988, TZ)
     assert lunar.can_chi_nam(nam_am) == ("Đinh", "Mão")
+
+
+# ---- AL: kiểm tra ngày âm không tồn tại + tháng nhuận + can chi (test viết trước) ----------
+import pytest as _pt
+
+
+def test_ngay_30_cua_thang_thieu_bi_tu_choi():
+    # Tháng Giêng Giáp Thìn 2024 chỉ có 29 ngày (mùng 1 tháng 2 = 10/03/2024).
+    assert lunar.lunar_to_solar(29, 1, 2024, 0, 7) == (9, 3, 2024)
+    with _pt.raises(ValueError, match="29 ngày"):
+        lunar.lunar_to_solar(30, 1, 2024, 0, 7)
+
+
+@_pt.mark.parametrize("ngay", [0, 31])
+def test_ngay_am_ngoai_khoang(ngay):
+    with _pt.raises(ValueError):
+        lunar.lunar_to_solar(ngay, 1, 2024, 0, 7)
+
+
+@_pt.mark.parametrize("nam,thang", [(2023, 2), (2020, 4), (2017, 6), (2025, 6), (2024, None), (1987, 7)])
+def test_thang_nhuan(nam, thang):
+    assert lunar.thang_nhuan(nam, 7) == thang
+
+
+def test_thang_nhuan_1987_lech_lich_trung_quoc():
+    # Lịch Việt (UTC+7) nhuận tháng 7, lịch Trung Quốc (UTC+8) nhuận tháng 6 — khác biệt có thật.
+    assert lunar.thang_nhuan(1987, 8) == 6
+
+
+def test_thang_nhuan_khop_vet_can_1900_2100():
+    import datetime as dt
+    d, gap = dt.date(1900, 1, 31), {}
+    while d.year < 2100:
+        ng, th, na, nh = lunar.solar_to_lunar(d.day, d.month, d.year, 7)
+        if nh and ng == 1:
+            gap[na] = th
+        d += dt.timedelta(days=29 if ng == 1 else 1)
+    for y in range(1901, 2099):
+        assert lunar.thang_nhuan(y, 7) == gap.get(y), y
+
+
+def test_so_ngay_thang():
+    assert lunar.so_ngay_thang(1, 2024, 0, 7) == 29
+    assert lunar.so_ngay_thang(12, 2023, 0, 7) == 30        # Chạp Quý Mão: 11/01–09/02/2024
+
+
+def test_can_chi_ngay_thang():
+    # Mốc: 01/01/2000 là ngày Mậu Ngọ; tháng Giêng năm Giáp Thìn 2024 là tháng Bính Dần.
+    import datetime as dt
+    assert lunar.can_chi_ngay(dt.date(2000, 1, 1)) == ("Mậu", "Ngọ")
+    assert lunar.can_chi_thang(1, 2024) == ("Bính", "Dần")
+    assert lunar.can_chi_thang(12, 2023) == ("Ất", "Sửu")     # tháng Chạp Quý Mão

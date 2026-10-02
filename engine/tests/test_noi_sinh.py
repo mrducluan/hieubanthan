@@ -166,3 +166,25 @@ def test_an_sao_nhap_am_mien_nam_1968():
     assert "lich_am_mien_nam" in loai_co(a)
     b = an_sao(birth_date="1968-01-01", birth_time="10:00", calendar_type="am", noi_sinh="ha-noi")
     assert b["duong_lich_goc"] == "1968-01-29"
+
+
+# ---- AL: ngày âm không tồn tại + thông tin đối chiếu (test viết trước) -------------------
+def test_doi_lich_ngay_30_thang_thieu_bao_ro():
+    r = client.post("/v1/lich/doi", json={"chieu": "am_sang_duong", "ngay": 30, "thang": 1, "nam": 2024})
+    assert r.status_code == 422
+    assert "chỉ có 29 ngày" in r.json()["detail"]
+
+
+def test_doi_lich_tra_can_chi_va_thang_nhuan():
+    d = client.post("/v1/lich/doi", json={"chieu": "duong_sang_am", "ngay": 1, "thang": 1, "nam": 2000}).json()
+    assert d["can_chi_ngay"] == "Mậu Ngọ"
+    assert d["am"]["nam"] == 1999 and d["can_chi_thang"] == "Bính Tý"     # 25/11 Kỷ Mão
+    assert d["thang_nhuan_nam"] is None
+    d = client.post("/v1/lich/doi", json={"chieu": "am_sang_duong", "ngay": 15, "thang": 6, "nam": 2025}).json()
+    assert d["thang_nhuan_nam"] == 6 and d["so_ngay_thang"] in (29, 30)
+
+
+def test_an_sao_ngay_am_khong_ton_tai_422():
+    r = client.post("/v1/tuvi/an-sao", json={"birth_date": "2024-01-30", "birth_time": "10:00", "gender": "nam",
+                                              "calendar_type": "am", "noi_sinh": "ha-noi"})
+    assert r.status_code == 422, r.text

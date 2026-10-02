@@ -69,5 +69,10 @@ def api_doi_lich(inp: DoiLichInput) -> dict:
         "duong": {"ngay": duong.day, "thang": duong.month, "nam": duong.year},
         "am": {"ngay": am[0], "thang": am[1], "nam": am[2], "nhuan": am[3]},
         "can_chi_nam": f"{can} {chi}",
+        # Để người dùng đối chiếu sổ tử vi/lịch vạn niên (ngày theo lịch, chưa xét giờ Tý).
+        "can_chi_ngay": " ".join(lunar.can_chi_ngay(duong)),
+        "can_chi_thang": " ".join(lunar.can_chi_thang(am[1], am[2])),
+        "thang_nhuan_nam": lunar.thang_nhuan(am[2], tz),
+        "so_ngay_thang": lunar.so_ngay_thang(am[1], am[2], int(am[3]), tz),
         "lich_mien_nam_utc8": tz != config.CALENDAR_MERIDIAN_TZ,
     }
