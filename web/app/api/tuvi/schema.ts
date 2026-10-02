@@ -18,6 +18,9 @@ export const ChartInput = z.object({
   truong_phai: z.enum(["npl", "vvt"]).optional(),
   che_do: z.enum(["hep", "tam_hop", "tptc"]).optional(),
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).default("exact"),
+  /** TV-PHAI — Hoả/Linh lối Việt | Trung Châu; nửa sau tháng nhuận tính tháng sau | như tháng chính. */
+  hoa_linh: z.enum(["viet", "trung"]).optional(),
+  thang_nhuan: z.enum(["thang_sau", "thang_chinh"]).optional(),
 });
 export type ChartInputT = z.infer<typeof ChartInput>;
 
@@ -68,7 +71,7 @@ const Sao = z.object({
   ten: z.string(),
   do_sang: z.string().nullable(),
   tu_hoa: z.string().nullable(),
-  /** TV-NP: độ sáng lối Việt (chỉ chính tinh); `do_sang` là bảng phái Trung của iztro. */
+  /** TV-NP: độ sáng lối Việt (chính tinh; phụ tinh từ TV-NP2 — null nếu sách không luận); `do_sang` là bảng phái Trung của iztro. */
   do_sang_nam_phai: z.string().nullable().optional(),
 });
 
@@ -90,6 +93,8 @@ const Cung = z.object({
   tue_tien: z.string(),
   dai_han: z.object({ tu_tuoi: z.number(), den_tuoi: z.number() }),
   tieu_han_tuoi: z.array(z.number()),
+  /** TV-NP2 — độ sáng lối Việt của phụ tinh, tạp diệu, Đại/Tiểu Hao, Hoá Kỵ trong cung (chỉ sao có luận). */
+  do_sang_phu: z.record(z.string()).optional(),
 });
 
 export const LaSoOutput = z.object({
@@ -127,6 +132,8 @@ export const LaSoOutput = z.object({
   cach_cuc_luu_y: z.string().optional(),
   cung: z.array(Cung).length(12),
   co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })),
+  /** TV-PHAI — trường phái đang dùng cho lá số này. */
+  phai: z.object({ hoa_linh: z.string(), thang_nhuan: z.string(), co_the_doi_thang_nhuan: z.boolean() }).optional(),
 });
 export type LaSoOutputT = z.infer<typeof LaSoOutput>;
 

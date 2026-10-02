@@ -10,4 +10,7 @@ export const LaSoVao = z.object({
   noi_sinh: z.string().regex(/^[a-z0-9_-]{2,40}$/).optional(),
   gio_mua_he: z.boolean().optional(),
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).optional(),
+  /** TV-PHAI — chỉ Tử vi: vị trí Hoả/Linh (lối Việt / Trung Châu), nửa sau tháng nhuận (tháng sau / như tháng chính). */
+  hoa_linh: z.enum(["viet", "trung"]).optional(),
+  thang_nhuan: z.enum(["thang_sau", "thang_chinh"]).optional(),
 }).strict();
