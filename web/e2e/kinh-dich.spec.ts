@@ -22,3 +22,12 @@ test("máy gieo: luôn có quẻ và câu trả lời Lục Hào", async ({ page
   await expect(ans.getByTestId("que")).toContainText("Phái đọc: Lục Hào");
   await expect(ans).toContainText("dụng thần Phụ Mẫu");
 });
+
+test("không hào động: lời chủ là quái từ, kèm Thoán truyện dịch nghĩa", async ({ page }) => {
+  await page.goto("/kinh-dich");
+  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await page.getByLabel("Sáu hào tự gieo").fill("7 7 7 7 7 7");
+  const ans = await hoi(page, "Tôi có nên nhận lời làm quản lý không?");
+  await expect(ans).toContainText("Quẻ bản: Càn");
+  await expect(ans).toContainText("Thoán truyện giảng: Lớn thay đức đầu mối của Càn!");
+});

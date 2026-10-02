@@ -249,7 +249,8 @@ def _muc_loi_kinh(x: dict) -> dict | None:
         noi = {"tieu_de": f"{'Dụng Cửu' if x['que'] == 1 else 'Dụng Lục'} quẻ {ten}", **q["dung"]}
     else:
         noi = {"tieu_de": f"Quái từ quẻ {ten}", "han": q["que_tu"]["han"], "dich": q["que_tu"]["dich"],
-               "y": f"Đại tượng: {q['dai_tuong']['dich']}", "nom_na": None}
+               "y": f"Đại tượng: {q['dai_tuong']['dich']}", "nom_na": None,
+               "thoan": q["thoan"].get("dich") if x["chu"] else None}
     return {"loai": "loi_kinh", "chu": x["chu"], **noi, "source_id": q["source_id"],
             "school_id": q["school_id"], "trang_thai": q["trang_thai"]}
 
@@ -271,7 +272,8 @@ def _doan(m: dict) -> tuple[str, str | None]:
         return f"Cách đọc (quy tắc Chu Hy): {m['noi_dung']}", None
     if l == "loi_kinh":
         return (f"{'【Lời chủ】 ' if m['chu'] else ''}{m['tieu_de']}: 「{m['han']}」 — {m['dich']} "
-                f"Ý: {m['y']}" + (f"\nNói nôm na: {m['nom_na']}" if m.get("nom_na") else "")), None
+                f"Ý: {m['y']}" + (f"\nThoán truyện giảng: {m['thoan']}" if m.get("thoan") else "")
+                + (f"\nNói nôm na: {m['nom_na']}" if m.get("nom_na") else "")), None
     if l == "the_dung":
         return (f"Mai Hoa — Thể là {m['the']} ({m['the_ngu_hanh']}), Dụng là {m['dung']} "
                 f"({m['dung_ngu_hanh']}): {m['ten']}. {m['y_nghia']} {m['luu_y']}", None)
