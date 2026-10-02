@@ -18,6 +18,9 @@ import subprocess
 from functools import lru_cache
 from pathlib import Path
 
+from app import config
+from app.calc import lunar
+
 THU_MUC = Path(__file__).resolve().parents[2] / "ziwei"
 SCRIPT = THU_MUC / "an_sao.mjs"
 TIMEOUT_GIAY = 20
@@ -53,15 +56,25 @@ def phien_ban_iztro() -> str:
     return json.loads(p.read_text(encoding="utf-8"))["version"]
 
 
+def _am(x: dt.date, tz_lich: float) -> str:
+    """Âm lịch VIỆT NAM (Hồ Ngọc Đức) của ngày dương `x` theo múi giờ lịch `tz_lich`, dạng JSON cho an_sao.mjs."""
+    ng, th, na, nh = lunar.solar_to_lunar(x.day, x.month, x.year, tz_lich)
+    return json.dumps({"nam": na, "thang": th, "ngay": ng, "nhuan": bool(nh),
+                       "so_ngay": lunar.so_ngay_thang(th, na, nh, tz_lich)})
+
+
 @lru_cache(maxsize=512)
-def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "") -> str:
+def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "",
+          am: str = "", am_xem: str = "") -> str:
     phien_ban_iztro()   # kiểm tra đã cài
     try:
         kq = subprocess.run([_node(), str(SCRIPT)], cwd=THU_MUC, capture_output=True, text=True,
                             timeout=TIMEOUT_GIAY, check=False,
                             input=json.dumps({"ngay": ngay, "time_index": ti,
                                               "gioi_tinh": gioi_tinh, "ngon_ngu": ngon_ngu,
-                                              **({"ngay_xem": ngay_xem} if ngay_xem else {})}))
+                                              **({"ngay_xem": ngay_xem} if ngay_xem else {}),
+                                              **({"am": json.loads(am)} if am else {}),
+                                              **({"am_xem": json.loads(am_xem)} if am_xem else {})}))
     except FileNotFoundError as e:
         raise AnSaoLoi("Không tìm thấy Node.js (đặt NODE_BIN nếu không ở PATH).") from e
     except subprocess.TimeoutExpired as e:
@@ -71,13 +84,15 @@ def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "")
     return kq.stdout
 
 
-def an_sao_tho(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngon_ngu: str = "vi-VN") -> dict:
-    """Lá số thô từ iztro. `ngay_duong` là ngày dương theo kinh tuyến lịch UTC+7."""
+def an_sao_tho(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngon_ngu: str = "vi-VN",
+               tz_lich: float = config.CALENDAR_MERIDIAN_TZ) -> dict:
+    """Lá số thô từ iztro. `ngay_duong` là ngày dương theo kinh tuyến lịch UTC+7; ngày âm dùng lịch VIỆT NAM
+    theo `tz_lich` (7, hoặc 8 cho miền Nam 1960–1975) chứ không để iztro đổi theo lịch Trung Quốc."""
     if not 0 <= ti <= 12:
         raise ValueError("time_index phải trong 0..12")
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
-    s = _chay(f"{ngay_duong.year}-{ngay_duong.month}-{ngay_duong.day}", ti, gioi_tinh, ngon_ngu)
+    s = _chay(_d(ngay_duong), ti, gioi_tinh, ngon_ngu, am=_am(ngay_duong, tz_lich))
     return json.loads(s)
 
 
@@ -86,7 +101,7 @@ def _d(x: dt.date) -> str:
 
 
 def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
-            chi_tiet: bool = False) -> dict:
+            chi_tiet: bool = False, tz_lich: float = config.CALENDAR_MERIDIAN_TZ) -> dict:
     """Đại hạn / tiểu hạn / lưu niên tại `ngay_xem` (iztro astro.horoscope, tên tiếng Việt).
 
     `chi_so` là vị trí cung trong mảng 12 cung của lá số (0 = cung Dần); `cung_goc` là tên
@@ -96,7 +111,8 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
         raise ValueError("time_index phải trong 0..12")
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
-    la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, "vi-VN", _d(ngay_xem)))
+    la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, "vi-VN", _d(ngay_xem),
+                          am=_am(ngay_duong, tz_lich), am_xem=_am(ngay_xem, config.CALENDAR_MERIDIAN_TZ)))
     h, cung = la["horoscope"], la["palaces"]
 
     def _lop(o: dict, tu_hoa: bool = True) -> dict:
