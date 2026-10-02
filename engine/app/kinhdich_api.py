@@ -19,6 +19,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import kinhdich
+from app.kb import tu_dien
 from app.hoidap import kinhdich as hoidap_kd
 from app import nhat_ky
 from app.config import ENGINE_VERSION
@@ -107,4 +108,4 @@ def api_hoi(inp: HoiKDInput, background: BackgroundTasks) -> dict:
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     background.add_task(nhat_ky.ghi_huyenhoc, "kinhdich", inp.cau_hoi, kq, False)
-    return {"engine_version": ENGINE_VERSION, **kq}
+    return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "kinhdich")}

@@ -89,6 +89,13 @@ def _mot_chuong(c: dict, mo_dun: str) -> dict:
     return {**c, "che_do": "llm", "van_ai": van}
 
 
+def gan_thuat_ngu(bc: dict) -> dict:
+    """GN: mỗi chương kèm thuật ngữ (tra từ điển KB) có trong đoạn gốc + bản AI — để web giải nghĩa."""
+    from app.kb import tu_dien
+    return {**bc, "chuong": [{**c, "thuat_ngu": tu_dien.nhan_dien("\n".join([*c["doan"], c.get("van_ai", "")]), bc["mo_dun"])}
+                             for c in bc["chuong"]]}
+
+
 def dien_dat(bc: dict, dung_llm: bool = True) -> dict:
     """Thêm `van_ai` cho từng chương khi có khoá LLM; `dien_dat` = "ai" | "tron" | "mau"."""
     if not (dung_llm and os.environ.get("OPENROUTER_API_KEY")):

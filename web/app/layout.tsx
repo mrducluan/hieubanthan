@@ -64,6 +64,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <nav aria-label="Liên kết cuối trang" className="border-t border-line/60 pt-6 text-sm">
             <ul className="flex flex-wrap gap-x-5 gap-y-2 text-fg-muted">
               <li><Link href="/kien-thuc" className="hover:text-fg">Thư viện kiến thức</Link></li>
+              <li><Link href="/tu-dien" className="hover:text-fg">Từ điển thuật ngữ</Link></li>
               <li><Link href="/kien-thuc/than-so" className="hover:text-fg">Ý nghĩa các con số</Link></li>
               <li><Link href="/kien-thuc/kinh-dich" className="hover:text-fg">64 quẻ Kinh Dịch</Link></li>
               <li><Link href="/kien-thuc/tu-vi" className="hover:text-fg">14 chính tinh Tử vi</Link></li>
