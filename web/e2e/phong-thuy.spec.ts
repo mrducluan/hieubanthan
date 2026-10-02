@@ -42,4 +42,18 @@ test("Huyền Không: nhập độ la bàn sát ranh giới → cảnh báo kiê
   await expect(ban).toContainText("kiêm hướng");
   await expect(ban).toContainText("tính từ Lập xuân");
   await expect(ban.getByRole("row")).toHaveCount(3);
+  await expect(ban.getByTestId("the-quai")).toContainText("chưa có nguồn đối chiếu độc lập");
+});
+
+test("Huyền Không: đánh dấu kiêm hướng → thế quái (Vận 8 toạ Tý: sơn tinh 4 → 6, hướng tinh 3 → 2)", async ({ page }) => {
+  await page.goto("/phong-thuy");
+  await page.getByLabel("Năm xây hoặc nhập trạch").fill("2008");
+  await page.getByLabel("Toạ sơn (lưng nhà)").selectOption("Tý");
+  await page.getByLabel(/kiêm hướng/).check();
+  await page.getByRole("button", { name: "Lập bàn" }).click();
+  const tq = page.getByTestId("the-quai");
+  await expect(tq).toContainText("4 → 6 (thuận)");
+  await expect(tq).toContainText("3 → 2 (nghịch)");
+  await expect(tq).toContainText("Nếu lập hạ quái: Song tinh đáo hướng");
+  await expect(page.getByTestId("ban-huyen-khong").getByRole("cell", { name: /^Ly Nam: sơn tinh 1, hướng tinh 7/ })).toBeVisible();
 });

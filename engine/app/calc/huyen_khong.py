@@ -3,7 +3,9 @@
 
 Tính thuần, tất định. Quy tắc phi tinh và nhận diện tổ hợp chuyển thể từ @soul-atelier/xuankong 0.3.0
 (MIT, © 2026 Soul Atelier) — đồng thời là ORACLE sinh golden 216 trạch bàn (fixtures/golden/huyen_khong.json).
-Chưa xử lý thế quái (kiêm hướng > 3°): khi hướng sát ranh giới sơn → gắn cờ, không tự đổi bàn.
+Thế quái (kiêm hướng, lệch tâm sơn > 3°): khẩu quyết thế tinh của Thẩm thị (Thẩm Thị Huyền Không Học,
+quyển 2 — cổ thư công cộng). CHƯA có oracle độc lập cho thế quái (không gói MIT nào lập bàn thế quái) →
+kết quả gắn `chua_doi_chieu_oracle`.
 
 Quy ước:
 - Vận tam nguyên cửu vận, mỗi vận 20 năm, Vận 1 bắt đầu 1864 (Vận 9: 2024–2043). Năm xây theo dương lịch
@@ -43,6 +45,12 @@ SON_24 = ["Tý", "Quý", "Sửu", "Cấn", "Dần", "Giáp", "Mão", "Ất", "Th
           "Ngọ", "Đinh", "Mùi", "Khôn", "Thân", "Canh", "Dậu", "Tân", "Tuất", "Càn", "Hợi", "Nhâm"]
 SAO = {1: "Nhất Bạch", 2: "Nhị Hắc", 3: "Tam Bích", 4: "Tứ Lục", 5: "Ngũ Hoàng", 6: "Lục Bạch",
        7: "Thất Xích", 8: "Bát Bạch", 9: "Cửu Tử"}
+# Thế quái ca: "Tý Quý tịnh Giáp Thân, Tham Lang nhất lộ hành; Nhâm Mão Ất Mùi Khôn, ngũ vị vi Cự Môn;
+# Càn Hợi Thìn Tốn Tỵ, liên Tuất Vũ Khúc danh; Dậu Tân Sửu Cấn Bính, thiên tinh thuyết Phá Quân;
+# Dần Ngọ Canh Đinh thượng, Hữu Bật tứ tinh lâm."
+THE_TINH = {**dict.fromkeys(["Tý", "Quý", "Giáp", "Thân"], 1), **dict.fromkeys(["Nhâm", "Mão", "Ất", "Mùi", "Khôn"], 2),
+            **dict.fromkeys(["Càn", "Hợi", "Thìn", "Tốn", "Tỵ", "Tuất"], 6),
+            **dict.fromkeys(["Dậu", "Tân", "Sửu", "Cấn", "Bính"], 7), **dict.fromkeys(["Dần", "Ngọ", "Canh", "Đinh"], 9)}
 CUC_TEN = {"vuong_son_vuong_huong": "Vượng sơn vượng hướng", "thuong_son_ha_thuy": "Thượng sơn hạ thuỷ",
            "song_tinh_dao_huong": "Song tinh đáo hướng", "song_tinh_dao_toa": "Song tinh đáo toạ"}
 
@@ -68,20 +76,33 @@ def van_cua_nam(nam: int) -> int:
 
 
 def son_tu_do(do: float) -> dict:
-    """Độ la bàn (0 = chính Bắc) → sơn; cờ `kiem_huong` khi cách ranh giới sơn < 3°, `khong_vong` khi
-    đúng ranh giới hai sơn (±0.5°)."""
+    """Độ la bàn (0 = chính Bắc) → sơn; cờ `kiem_huong` khi lệch tâm sơn > 3° (dùng thế quái), `khong_vong`
+    khi sát ranh giới hai sơn (±0.5°)."""
     d = do % 360
     i = int(((d + 7.5) % 360) // 15)
     tam = (i * 15) % 360
     lech = (d - tam + 180) % 360 - 180
     cach_bien = 7.5 - abs(lech)
-    cb = "khong_vong" if cach_bien <= 0.5 else "kiem_huong" if cach_bien < 3 else None
+    cb = "khong_vong" if cach_bien <= 0.5 else "kiem_huong" if abs(lech) > 3 else None
     return {"son": SON_24[i], "do": round(d, 2), "lech": round(lech, 2), "canh_bao": cb}
 
 
+def _son_goc(tam: int, nguon: dict) -> tuple[str, str]:
+    """Sơn cùng nguyên với `nguon` trong quẻ gốc của số `tam` (số 5 mượn chính sơn `nguon`): (tên, âm dương)."""
+    return (nguon["son"], nguon["am_duong"]) if tam == 5 else QUAI[SO_QUAI[tam]][2][nguon["nguyen"]]
+
+
 def _chieu(tam: int, nguon: dict) -> bool:
-    ad = nguon["am_duong"] if tam == 5 else QUAI[SO_QUAI[tam]][2][nguon["nguyen"]][1]
-    return ad == "+"
+    return _son_goc(tam, nguon)[1] == "+"
+
+
+def _nhap_trung(tam: int, nguon: dict, the_quai: bool) -> tuple[int, bool, dict | None]:
+    """Sao nhập trung + chiều bay. Thế quái: thay bằng thế tinh của sơn gốc; thuận nghịch VẪN theo âm dương
+    của sơn gốc (Thẩm thị)."""
+    son, ad = _son_goc(tam, nguon)
+    if not the_quai:
+        return tam, ad == "+", None
+    return THE_TINH[son], ad == "+", {"goc": tam, "the": THE_TINH[son], "thuan": ad == "+"}
 
 
 _TB = [(1, 4, 7), (2, 5, 8), (3, 6, 9)]
@@ -149,16 +170,18 @@ def luu_nien(nam: int) -> dict:
     return {"nam": nam, "tam": tam, "sao_tam": SAO[tam], "cung": phi(tam, True)}
 
 
-def trach_ban(nam_xay: int, toa: str) -> dict:
-    """Hạ quái bàn cho nhà xây/nhập trạch năm `nam_xay`, toạ sơn `toa` (một trong 24 sơn)."""
+def trach_ban(nam_xay: int, toa: str, the_quai: bool = False) -> dict:
+    """Hạ quái bàn (mặc định) hoặc thế quái bàn (`the_quai=True`, khi kiêm hướng) cho nhà xây/nhập trạch
+    năm `nam_xay`, toạ sơn `toa` (một trong 24 sơn)."""
     van = van_cua_nam(nam_xay)
     t = _son(toa)
     hq = DOI[t["quai"]]
     h_ten, h_ad = QUAI[hq][2][t["nguyen"]]
     h = {"son": h_ten, "quai": hq, "phuong": QUAI[hq][1], "nguyen": t["nguyen"], "am_duong": h_ad}
     vb = phi(van, True)
-    sb = phi(vb[t["quai"]], _chieu(vb[t["quai"]], t))
-    hb = phi(vb[hq], _chieu(vb[hq], h))
+    tam_s, thuan_s, the_s = _nhap_trung(vb[t["quai"]], t, the_quai)
+    tam_h, thuan_h, the_h = _nhap_trung(vb[hq], h, the_quai)
+    sb, hb = phi(tam_s, thuan_s), phi(tam_h, thuan_h)
     son_toa, son_huong, huong_toa, huong_huong = sb[t["quai"]] == van, sb[hq] == van, hb[t["quai"]] == van, hb[hq] == van
     if son_toa and huong_huong:
         cuc = "vuong_son_vuong_huong"
@@ -171,6 +194,8 @@ def trach_ban(nam_xay: int, toa: str) -> dict:
     cung = {c: (vb[c], sb[c], hb[c]) for c in LO_TRINH}
     return {
         "nam_xay": nam_xay, "van": van, "toa": t, "huong": h, "cuc": cuc, "cuc_ten": CUC_TEN[cuc],
+        "phep": "the_quai" if the_quai else "ha_quai",
+        **({"the_tinh": {"son": the_s, "huong": the_h}} if the_quai else {}),
         "cung": [{"cung": c, "phuong": "Trung tâm" if c == "Trung cung" else QUAI[c][1], "luoi": LUOI[c],
                   "goc": GOC[c], "van": vb[c], "son": sb[c], "huong": hb[c]} for c in LO_TRINH],
         "to_hop": _to_hop(van, cuc, hq, cung),

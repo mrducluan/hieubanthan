@@ -104,3 +104,54 @@ def test_api_nam_xem_mac_dinh_theo_lap_xuan(monkeypatch):
     monkeypatch.setattr(phongthuy_api, "_bay_gio_utc", lambda: dt.datetime(2026, 1, 20))
     d = TestClient(app).post("/v1/phongthuy/huyen-khong", json={"nam_xay": 2008, "toa": "Tý"}).json()
     assert d["luu_nien"]["nam"] == 2025 and d["luu_nien"]["tam"] == 2
+
+
+# ---- PT-HK2: thế quái (kiêm hướng) — khẩu quyết Thẩm thị (test viết trước) -----------------
+# Chưa có oracle độc lập (không gói MIT nào lập bàn thế quái) → test theo khẩu quyết + bàn tính tay.
+THE_TINH = {"Tý": 1, "Quý": 1, "Giáp": 1, "Thân": 1, "Nhâm": 2, "Mão": 2, "Ất": 2, "Mùi": 2, "Khôn": 2,
+            "Càn": 6, "Hợi": 6, "Thìn": 6, "Tốn": 6, "Tỵ": 6, "Tuất": 6, "Dậu": 7, "Tân": 7, "Sửu": 7, "Cấn": 7,
+            "Bính": 7, "Dần": 9, "Ngọ": 9, "Canh": 9, "Đinh": 9}
+
+
+def test_bang_the_tinh_du_24_son():
+    assert hk.THE_TINH == THE_TINH and sorted(hk.THE_TINH) == sorted(hk.SON_24)
+
+
+def test_the_quai_van_8_toa_ty_tinh_tay():
+    # Vận 8 toạ Tý: vận tinh tại Khảm = 4, tại Ly = 3.
+    # Sơn: 4 → sơn thiên nguyên của Tốn = Tốn → thế 6, thuận theo Tốn (+).
+    # Hướng: 3 → sơn thiên nguyên của Chấn = Mão → thế 2, nghịch theo Mão (−).
+    b = hk.trach_ban(2008, "Tý", the_quai=True)
+    assert b["phep"] == "the_quai"
+    assert b["the_tinh"] == {"son": {"goc": 4, "the": 6, "thuan": True}, "huong": {"goc": 3, "the": 2, "thuan": False}}
+    cung = {x["cung"]: (x["son"], x["huong"]) for x in b["cung"]}
+    assert cung == {"Trung cung": (6, 2), "Càn": (7, 1), "Đoài": (8, 9), "Cấn": (9, 8), "Ly": (1, 7),
+                    "Khảm": (2, 6), "Khôn": (3, 5), "Chấn": (4, 4), "Tốn": (5, 3)}
+
+
+@pytest.mark.parametrize("c", G[:216:7], ids=lambda c: f"v{c['van']}-{c['toa']}")
+def test_the_quai_trung_ha_quai_khi_the_tinh_khong_doi(c):
+    toa = HAN_SON[c["toa"]]
+    ha, the = hk.trach_ban(c["nam"], toa), hk.trach_ban(c["nam"], toa, the_quai=True)
+    if the["the_tinh"]["son"]["goc"] == the["the_tinh"]["son"]["the"] and \
+       the["the_tinh"]["huong"]["goc"] == the["the_tinh"]["huong"]["the"]:
+        assert [(x["son"], x["huong"]) for x in ha["cung"]] == [(x["son"], x["huong"]) for x in the["cung"]]
+    assert [x["van"] for x in ha["cung"]] == [x["van"] for x in the["cung"]]   # vận bàn không đổi
+
+
+def test_sao_6_khong_bao_gio_bi_thay():
+    for son in hk.SON_24:
+        for nam in range(1864, 2044, 20):
+            b = hk.trach_ban(nam, son, the_quai=True)
+            for k in ("son", "huong"):
+                if b["the_tinh"][k]["goc"] == 6:
+                    assert b["the_tinh"][k]["the"] == 6
+
+
+def test_api_do_kiem_huong_lap_the_quai():
+    c = TestClient(app)
+    d = c.post("/v1/phongthuy/huyen-khong", json={"nam_xay": 2008, "do": 4.0}).json()       # Tý lệch 4° → kiêm
+    assert d["phep"] == "the_quai" and d["the_tinh"]["son"]["the"] == 6
+    assert d["ha_quai"]["cuc"] and d["the_quai_trang_thai"] == "chua_doi_chieu_oracle"
+    d = c.post("/v1/phongthuy/huyen-khong", json={"nam_xay": 2008, "do": 2.0}).json()       # lệch 2° → hạ quái
+    assert d["phep"] == "ha_quai" and "the_tinh" not in d
