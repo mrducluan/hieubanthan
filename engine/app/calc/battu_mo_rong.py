@@ -10,7 +10,7 @@ xét ba trụ còn lại) — tránh tự đánh dấu.
 from __future__ import annotations
 
 from app.calc import can_chi
-from app.calc.battu import CAN_NH, CHI_NH, TANG_CAN, thap_than
+from app.calc.battu import CAN_NH, CHI_NH, DUONG_NHAN as _DUONG_NHAN, LOC as _LOC, TANG_CAN, cach_cuc_tbct, thap_than  # noqa: F401
 
 CAN = can_chi.CAN
 CHI = can_chi.CHI
@@ -64,8 +64,6 @@ _THAI_CUC = {"Giáp": ("Tý", "Ngọ"), "Ất": ("Tý", "Ngọ"), "Bính": ("Mã
              "Mậu": ("Thìn", "Tuất", "Sửu", "Mùi"), "Kỷ": ("Thìn", "Tuất", "Sửu", "Mùi"),
              "Canh": ("Dần", "Hợi"), "Tân": ("Dần", "Hợi"), "Nhâm": ("Tỵ", "Thân"), "Quý": ("Tỵ", "Thân")}
 _VAN_XUONG = dict(zip(CAN, ["Tỵ", "Ngọ", "Thân", "Dậu", "Thân", "Dậu", "Hợi", "Tý", "Dần", "Mão"]))
-_LOC = dict(zip(CAN, ["Dần", "Mão", "Tỵ", "Ngọ", "Tỵ", "Ngọ", "Thân", "Dậu", "Hợi", "Tý"]))
-_DUONG_NHAN = {"Giáp": "Mão", "Bính": "Ngọ", "Mậu": "Ngọ", "Canh": "Dậu", "Nhâm": "Tý"}
 _KIM_DU = dict(zip(CAN, ["Thìn", "Tỵ", "Mùi", "Thân", "Mùi", "Thân", "Tuất", "Hợi", "Sửu", "Dần"]))
 _HONG_DIEM = dict(zip(CAN, ["Ngọ", "Thân", "Dần", "Mùi", "Thìn", "Thìn", "Tuất", "Dậu", "Tý", "Thân"]))
 # Theo chi tháng: Thiên Đức (can hoặc chi), Nguyệt Đức (can)
@@ -258,4 +256,3 @@ def luu_nien(ls: dict, nam: int) -> dict:
             "nap_am": can_chi.nap_am(can_n, chi_n), "truong_sinh": truong_sinh(nc, chi_n),
             "dai_van": dv and {**dv, "thap_than": thap_than(nc, dv["can"])},
             "quan_he": qh, "luu_nguyet": thang}
-

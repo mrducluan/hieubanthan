@@ -40,6 +40,12 @@ export interface LaSoBatTu {
       chi_tiet: { can: string; hanh: string; thap_than: string; thau: boolean; tang: boolean }[];
       mua: string; mua_y?: string | null; nguon: string; can_doi_chieu?: boolean;
     } | null;
+    /** KB-3b — cách cục Tử Bình Chân Thuyên (định cách theo nguyệt lệnh) + hỷ/kỵ. */
+    cach_cuc_tbct?: {
+      ma: string; ten: string; can_lap_cach: string; thap_than: string; nguon_khi: "ban_khi" | "trung_khi" | "du_khi";
+      thau: boolean; chi_thang: string; can_thau_khac: { can: string; thap_than: string }[];
+      y?: string; hy?: string; ky?: string; nguon?: string;
+    };
   };
 }
 

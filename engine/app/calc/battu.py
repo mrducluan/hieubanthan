@@ -157,7 +157,41 @@ def _than(nh: str, diem: dict, chi_thang: str) -> dict:
             "thang_diem": THANG_DIEM["mo_ta"]}
 
 
-CACH_TT = {"Tỷ Kiên": "Kiến Lộc cách", "Kiếp Tài": "Nguyệt Kiếp (Dương Nhận) cách"}
+# --------------------------------------------------------------------------- #
+# KB-3b — Cách cục Tử Bình Chân Thuyên (định cách theo nguyệt lệnh)
+# --------------------------------------------------------------------------- #
+_TT_CACH = {"Chính Quan": "chinh_quan", "Thất Sát": "that_sat", "Chính Tài": "chinh_tai", "Thiên Tài": "thien_tai",
+            "Chính Ấn": "chinh_an", "Thiên Ấn": "thien_an", "Thực Thần": "thuc_than", "Thương Quan": "thuong_quan"}
+_NGUON_KHI = ["ban_khi", "trung_khi", "du_khi"]
+LOC = dict(zip(CAN, ["Dần", "Mão", "Tỵ", "Ngọ", "Tỵ", "Ngọ", "Thân", "Dậu", "Hợi", "Tý"]))
+DUONG_NHAN = {"Giáp": "Mão", "Bính": "Ngọ", "Mậu": "Ngọ", "Canh": "Dậu", "Nhâm": "Tý"}
+TEN_CACH = {"chinh_quan": "Chính Quan cách", "that_sat": "Thất Sát cách", "chinh_tai": "Chính Tài cách",
+            "thien_tai": "Thiên Tài cách", "chinh_an": "Chính Ấn cách", "thien_an": "Thiên Ấn cách",
+            "thuc_than": "Thực Thần cách", "thuong_quan": "Thương Quan cách", "kien_loc": "Kiến Lộc cách",
+            "duong_nhan": "Dương Nhận cách", "nguyet_kiep": "Nguyệt Kiếp cách"}
+
+
+def cach_cuc_tbct(ls: dict) -> dict:
+    """Cách cục theo Tử Bình Chân Thuyên: tàng can của chi tháng thấu ra can năm/tháng/giờ thì lấy can thấu
+    (bản khí → trung khí → dư khí, bỏ Tỷ Kiếp); không thấu thì lấy bản khí. Bản khí là Tỷ Kiếp → Kiến Lộc /
+    Dương Nhận / Nguyệt Kiếp, kèm các can thấu khác để xét dụng."""
+    nc = ls["nhat_chu"]["can"]
+    chi_thang = ls["tru"][1]["chi"]
+    tang = TANG_CAN[chi_thang]
+    lo = [ls["tru"][i]["can"] for i in (0, 1, 3)]
+    tt_ban = thap_than(nc, tang[0])
+    if tt_ban in ("Tỷ Kiên", "Kiếp Tài"):
+        ma = ("kien_loc" if LOC[nc] == chi_thang else
+              "duong_nhan" if DUONG_NHAN.get(nc) == chi_thang else "nguyet_kiep")
+        khac = [{"can": c, "thap_than": thap_than(nc, c)} for c in lo if thap_than(nc, c) not in ("Tỷ Kiên", "Kiếp Tài")]
+        return {"ma": ma, "can_lap_cach": tang[0], "thap_than": tt_ban, "nguon_khi": "ban_khi",
+                "thau": tang[0] in lo, "chi_thang": chi_thang, "can_thau_khac": khac}
+    ung = [(i, c) for i, c in enumerate(tang) if c in lo and thap_than(nc, c) not in ("Tỷ Kiên", "Kiếp Tài")]
+    i, c = ung[0] if ung else (0, tang[0])
+    tt = thap_than(nc, c)
+    return {"ma": _TT_CACH[tt], "can_lap_cach": c, "thap_than": tt, "nguon_khi": _NGUON_KHI[i],
+            "thau": bool(ung), "chi_thang": chi_thang,
+            "can_thau_khac": [{"can": x, "thap_than": thap_than(nc, x)} for x in lo if x != c]}
 
 
 def _dung_than(kq: dict) -> dict:
@@ -170,16 +204,12 @@ def _dung_than(kq: dict) -> dict:
         phu = []
     chi_thang = kq["tru"][1]["chi"]
     dieu = ["Thủy"] if chi_thang in ("Tỵ", "Ngọ", "Mùi") else ["Hỏa"] if chi_thang in ("Hợi", "Tý", "Sửu") else []
-    lo = [kq["tru"][i]["can"] for i in (0, 1, 3)]
-    tang_thang = TANG_CAN[chi_thang]
-    chon_can = next((c for c in tang_thang if c in lo), tang_thang[0])
-    tt = thap_than(kq["nhat_chu"]["can"], chon_can)
+    cc = cach_cuc_tbct(kq)
     return {
         "phu_uc": {"hanh": phu, "nguon": "trich_thien_tuy", "giai_thich": f"thân {th}"},
         "dieu_hau": {"hanh": dieu, "nguon": "trich_thien_tuy",
                      "giai_thich": f"sinh tháng {chi_thang}" + (" — cần điều hoà khí hậu" if dieu else " — khí hậu ôn hoà")},
-        "cach_cuc": {"ten": CACH_TT.get(tt, f"{tt} cách"), "thap_than": tt, "can": chon_can,
-                     "thau": chon_can in lo, "nguon": "tu_binh_chan_thuyen"},
+        "cach_cuc": {"ten": TEN_CACH[cc["ma"]], "can": cc["can_lap_cach"], **cc, "nguon": "tu_binh_chan_thuyen"},
         "chon": None,
     }
 

@@ -54,6 +54,14 @@ def cach_cuc(ten: str) -> str | None:
     return _d()["cach_cuc"].get(ten)
 
 
+def cach_cuc_tbct(ma: str) -> dict | None:
+    """KB-3b: nghĩa + hỷ/kỵ của cách theo Tử Bình Chân Thuyên, kèm nguồn."""
+    k = _d()["cach_cuc_tbct"]
+    c = k["cach"].get(ma)
+    return {**c, "nguon": k["_nguon"], "nguyen_tac": k["nguyen_tac"], "trang_thai": k["trang_thai"],
+            "can_doi_chieu": k["can_doi_chieu"]} if c else None
+
+
 def giai_thich_tat_ca() -> dict:
     return _d()["giai_thich"]
 
