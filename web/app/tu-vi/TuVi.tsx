@@ -49,6 +49,7 @@ export function TuVi() {
   const [cheDo, setCheDo] = useState<"tham_khao" | "chi_tiet">("tham_khao");
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
   const [dangTai, setDangTai] = useState(false);
+  const [loiAnh, setLoiAnh] = useState<string | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const chiTietRef = useRef<HTMLDivElement>(null);
   const [toanCanh, setToanCanh] = useState(false);
@@ -103,11 +104,14 @@ export function TuVi() {
               <Button variant="ghost" size="sm" className="ml-auto" disabled={dangTai} onClick={async () => {
                 if (!svgRef.current) return;
                 setDangTai(true);
+                setLoiAnh(null);
                 try { await taiAnhSvg(svgRef.current, `la-so-tu-vi-${ls.can_chi_nam.can}-${ls.can_chi_nam.chi}.png`); ghi("chart_interacted", { mo_dun: "tuvi", kind: "tai_anh" }); }
+                catch (e) { setLoiAnh(e instanceof Error ? e.message : "Chưa xuất được ảnh."); }
                 finally { setDangTai(false); }
               }}><Download aria-hidden /> Tải ảnh</Button>
             </div>
 
+            {loiAnh && <p role="alert" className="text-sm text-cinnabar">{loiAnh}</p>}
             {/* Lá số: trên điện thoại mặc định cuộn ngang để giữ chữ đủ lớn; "Toàn cảnh" thu vừa màn hình */}
             <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0" data-testid="la-so-tu-vi">
               <div className={cn("overflow-hidden rounded-[1.25rem] shadow-card", !toanCanh && "min-w-[760px]")}>

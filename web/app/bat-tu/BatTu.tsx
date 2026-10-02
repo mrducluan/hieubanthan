@@ -2,19 +2,22 @@
 // VZ-3 — trang Bát tự: bảng tứ trụ → vòng địa chi + ngũ giác ngũ hành → dụng thần → đại vận/lưu niên
 // → hỏi đáp AI ở DƯỚI (chủ dự án chốt 2026-10-01). Hai giao diện dùng chung với lá số Tử vi.
 import { useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Layers, Moon, ScrollText } from "lucide-react";
+import { ChevronLeft, ChevronRight, Download, Layers, Moon, ScrollText } from "lucide-react";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ghi } from "@/lib/do-luong";
 import type { LaSoBatTu, LuuNienBatTu } from "@/lib/battu-kieu";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang } from "@/lib/hoi-mang";
 import { laSoTuHoSo, useHoSo } from "@/lib/hoso";
+import { taiAnhHtml } from "@/lib/tai-anh-html";
 import { cn } from "@/lib/utils";
 
 // Cờ từ engine viết cho người phát triển — đổi sang lời dễ hiểu cho người đọc.
@@ -38,6 +41,9 @@ export function BatTu() {
   const { data: ln } = usePost<LuuNienBatTu>("/api/battu/luu-nien", laSo ? { la_so: laSo, nam_xem: namXem } : null);
   const [giaoDien, doiGiaoDien] = useGiaoDien("battu");
   const chatRef = useRef<HTMLElement>(null);
+  const tuTruRef = useRef<HTMLDivElement>(null);
+  const [dangTai, setDangTai] = useState(false);
+  const [loiAnh, setLoiAnh] = useState<string | null>(null);
 
   if (hoSo === undefined) return <KhungTai />;
   const lnDung = ln && ln.nam === namXem ? ln : null;
@@ -65,10 +71,20 @@ export function BatTu() {
                 </span>
                 <button type="button" className="grid size-8 place-items-center rounded-full text-fg-muted hover:bg-surface-2 hover:text-fg" aria-label="Năm sau" onClick={() => setNamXem((n) => Math.min(2100, n + 1))}><ChevronRight className="size-4" /></button>
               </div>
+              <Button variant="ghost" size="sm" className="ml-auto" disabled={dangTai} onClick={async () => {
+                if (!tuTruRef.current) return;
+                setDangTai(true); setLoiAnh(null);
+                try {
+                  await taiAnhHtml(tuTruRef.current, `bat-tu-${ls.tru.map((t) => `${t.can}-${t.chi}`).join("_")}.png`);
+                  ghi("chart_interacted", { mo_dun: "battu", kind: "tai_anh" });
+                } catch (e) { setLoiAnh(e instanceof Error ? e.message : "Chưa xuất được ảnh."); }
+                finally { setDangTai(false); }
+              }}><Download aria-hidden /> Tải ảnh</Button>
             </div>
+            {loiAnh && <p role="alert" className="text-sm text-cinnabar">{loiAnh}</p>}
 
             <div className={cn(`la-so-${giaoDien}`, "space-y-6 rounded-[1.25rem] p-4 shadow-card sm:p-6")}
-              style={{ background: "var(--ls-nen)", color: "var(--ls-chu)" }} data-testid="tu-tru">
+              style={{ background: "var(--ls-nen)", color: "var(--ls-chu)" }} data-testid="tu-tru" ref={tuTruRef}>
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <div>
                   <p className="text-xs uppercase tracking-[0.3em] text-[var(--ls-mo)]">Tứ trụ · 四柱八字</p>
