@@ -101,6 +101,8 @@
    "diem_manh": "đứng ra gánh vác, tổ chức, giữ chuẩn mực",
    "mat_toi": "dễ cô đơn trên cao, sĩ diện, khó nhận lời góp ý",
    "bieu_hien": "thường chủ động nhận phần quyết định khi nhóm lúng túng",
+   "khi_sang": "Sáng: uy nghi tự nhiên, được người nể phục; biết dùng người, gánh việc lớn mà vẫn giữ chừng mực — chất 'vua' ra đúng chỗ.",
+   "khi_ham": "Kém sáng: muốn làm chủ mà thiếu thế, dễ sĩ diện, nói lớn hơn sức; cần người phò tá tốt (Tả Hữu, Khôi Việt) mới vững.",
    "cau_tu_soi": "Bạn có để người khác thấy lúc mình cần giúp không?"
   },
   "Thiên Cơ": {
@@ -111,6 +113,8 @@
    "diem_manh": "lập kế hoạch, phân tích, cố vấn",
    "mat_toi": "nghĩ nhiều làm ít, lo xa, dễ dao động",
    "bieu_hien": "thường có sẵn phương án B, C trước khi bắt đầu",
+   "khi_sang": "Sáng: nhanh trí, mưu tính đúng lúc, giỏi lập kế hoạch và ứng biến; được tin làm người tham mưu.",
+   "khi_ham": "Hãm: suy nghĩ vòng vo, lo xa, đổi ý thất thường; nhiều mưu vặt mà ít việc thành — cần chốt một hướng và làm tới.",
    "cau_tu_soi": "Kế hoạch nào bạn đã nghĩ kỹ nhưng chưa bắt tay làm?"
   },
   "Thái Dương": {
@@ -121,6 +125,8 @@
    "diem_manh": "truyền cảm hứng, hào phóng, công khai minh bạch",
    "mat_toi": "lo cho người khác quá mức mình, dễ kiệt sức, háo danh",
    "bieu_hien": "thường nhận việc giúp người khác trước việc của mình",
+   "khi_sang": "Sáng: mặt trời ban ngày — rộng rãi, nhiệt tình, có tiếng tốt, làm việc lộ diện được người biết đến; hay giúp người.",
+   "khi_ham": "Hãm: mặt trời về đêm — lo cho người mà ít được ghi nhận, vất vả, dễ hao sức; nên làm việc thầm lặng, chuyên môn hơn là tranh tiếng.",
    "cau_tu_soi": "Bạn có đang cho đi nhiều hơn sức mình giữ được không?"
   },
   "Vũ Khúc": {
@@ -131,6 +137,8 @@
    "diem_manh": "kỷ luật, làm đến nơi, sòng phẳng",
    "mat_toi": "cứng nhắc, khô khan trong tình cảm, cô độc",
    "bieu_hien": "thường tính chi phí và hiệu quả trước khi nói đến cảm xúc",
+   "khi_sang": "Sáng: tài tinh đắc địa — quyết đoán, giỏi quản lý tiền bạc, làm ăn thực tế, có thể tự gây dựng của cải.",
+   "khi_ham": "Hãm: cứng nhắc, cô độc, tiền đến rồi đi; dễ va chạm vì nói thẳng — cần mềm hơn trong quan hệ và kỷ luật trong chi tiêu.",
    "cau_tu_soi": "Người thân của bạn có thấy bạn quan tâm, hay chỉ thấy bạn lo toan?"
   },
   "Thiên Đồng": {
@@ -141,6 +149,8 @@
    "diem_manh": "làm dịu căng thẳng, dễ thích nghi, lạc quan",
    "mat_toi": "ngại khó, trì hoãn, thiếu quyết liệt",
    "bieu_hien": "thường là người làm không khí trong nhóm dễ thở hơn",
+   "khi_sang": "Sáng: phúc tinh hiền hoà, lạc quan, dễ hoà đồng; biết hưởng phúc, gặp khó thường có người giúp.",
+   "khi_ham": "Hãm: thích an nhàn mà ngại cố gắng, dễ trôi theo hoàn cảnh; tuổi trẻ nhiều xoay chuyển — cần tự đặt mục tiêu cho mình.",
    "cau_tu_soi": "Việc khó nào bạn đang để 'mai tính'?"
   },
   "Liêm Trinh": {
@@ -151,6 +161,8 @@
    "diem_manh": "chính trực khi đã tin, bền bỉ, có khả năng tổ chức",
    "mat_toi": "nóng nảy, cố chấp, dễ vướng vào thị phi",
    "bieu_hien": "thường phản ứng mạnh khi thấy điều trái nguyên tắc",
+   "khi_sang": "Sáng: nghiêm túc, có nguyên tắc, làm việc chính xác, có tài trong việc cần kỷ luật (hành chính, kỹ thuật, pháp chế).",
+   "khi_ham": "Hãm: tính nóng, hay tự ái, dễ dính thị phi hoặc va chạm; cần tránh đường tắt và giữ tâm bình.",
    "cau_tu_soi": "Nguyên tắc nào của bạn đang giúp bạn, nguyên tắc nào đang trói bạn?"
   },
   "Thiên Phủ": {
@@ -161,6 +173,8 @@
    "diem_manh": "bao dung, đáng tin, quản lý tốt",
    "mat_toi": "bảo thủ, ngại mạo hiểm, thích an toàn quá mức",
    "bieu_hien": "thường giữ một khoản dự phòng trước khi làm gì mới",
+   "khi_sang": "Sáng: kho đầy — điềm tĩnh, biết giữ gìn, giỏi tích luỹ và quản lý; được tin giao việc giữ của, giữ người.",
+   "khi_ham": "Kém sáng: kho vơi — dè dặt quá, dễ lo thiếu, bảo thủ; cần mạnh dạn hơn khi có cơ hội.",
    "cau_tu_soi": "Sự an toàn nào bạn đang giữ mà đã hết cần thiết?"
   },
   "Thái Âm": {
@@ -171,6 +185,8 @@
    "diem_manh": "chu đáo, có óc thẩm mỹ, kiên nhẫn",
    "mat_toi": "đa cảm, hay giữ trong lòng, dễ buồn vô cớ",
    "bieu_hien": "thường nhận ra thay đổi nhỏ trong tâm trạng người khác",
+   "khi_sang": "Sáng: trăng tròn đêm thu — dịu dàng, tinh tế, giàu cảm xúc và thẩm mỹ; có duyên tích luỹ nhà đất, tiền bạc lặng lẽ.",
+   "khi_ham": "Hãm: trăng ban ngày — cảm xúc thất thường, hay buồn, đa nghi; dễ thiệt về tình cảm hoặc tiền bạc nếu cả tin.",
    "cau_tu_soi": "Điều bạn đang giữ trong lòng có cần được nói ra không?"
   },
   "Tham Lang": {
@@ -181,6 +197,8 @@
    "diem_manh": "linh hoạt, thu hút, học nhanh nhiều thứ",
    "mat_toi": "cả thèm chóng chán, dễ sa đà hưởng thụ",
    "bieu_hien": "thường có nhiều sở thích cùng lúc",
+   "khi_sang": "Sáng: đa tài, giao thiệp rộng, ham học hỏi và biết hưởng thụ có chừng; khéo xoay xở, làm ăn có duyên.",
+   "khi_ham": "Hãm: ham muốn khó dừng, dễ sa vào vui chơi, cờ bạc, quan hệ phức tạp; cần đặt giới hạn rõ cho mình.",
    "cau_tu_soi": "Trong những thứ bạn muốn, cái nào bạn thật sự cần?"
   },
   "Cự Môn": {
@@ -191,6 +209,8 @@
    "diem_manh": "lập luận, phản biện, nghề dùng lời nói",
    "mat_toi": "đa nghi, dễ gây thị phi vì lời nói, khó tin người",
    "bieu_hien": "thường hỏi 'tại sao' nhiều hơn người khác",
+   "khi_sang": "Sáng: lời nói có sức nặng — giỏi lý luận, phân tích, hợp nghề dùng lời (giảng dạy, luật, tư vấn, truyền thông).",
+   "khi_ham": "Hãm: miệng lưỡi thị phi, dễ bị hiểu lầm hoặc nói làm mất lòng; hay nghi ngờ — nên nói ít, kiểm chứng nhiều.",
    "cau_tu_soi": "Lời nói gần đây nhất khiến bạn hối hận là gì?"
   },
   "Thiên Tướng": {
@@ -201,6 +221,8 @@
    "diem_manh": "đáng tin cậy, biết giữ thể diện cho người khác",
    "mat_toi": "dễ bị người khác ảnh hưởng, thiếu chủ kiến khi đứng một mình",
    "bieu_hien": "thường đứng ra dàn xếp khi hai bên bất đồng",
+   "khi_sang": "Sáng: chính trực, biết giữ lời, hay bênh vực lẽ phải; đáng tin trong vai trò quản lý, điều phối.",
+   "khi_ham": "Hãm: dễ bị người khác lôi kéo, vì người mà vạ lây; thích làm đẹp bề ngoài — cần chọn đúng người để giúp.",
    "cau_tu_soi": "Bạn đang sống theo tiêu chuẩn của mình hay của người khác?"
   },
   "Thiên Lương": {
@@ -211,6 +233,8 @@
    "diem_manh": "bảo bọc, cố vấn, bình tĩnh trước biến cố",
    "mat_toi": "hay lên lớp, cô độc, thích làm 'người cứu'",
    "bieu_hien": "thường được người khác tìm đến xin lời khuyên",
+   "khi_sang": "Sáng: sao 'ông thầy', che chở — đứng đắn, có lòng, hay giúp người; gặp nạn thường qua (giải ách), có uy tín.",
+   "khi_ham": "Hãm: thích dạy đời, hay can thiệp chuyện người; dễ cô độc hoặc lang bạt — nên giúp khi được nhờ.",
    "cau_tu_soi": "Bạn có để người khác tự học bài học của họ không?"
   },
   "Thất Sát": {
@@ -221,6 +245,8 @@
    "diem_manh": "quyết đoán, chịu áp lực tốt, mở đường",
    "mat_toi": "nóng vội, liều, khó hợp tác lâu dài",
    "bieu_hien": "thường chọn hành động ngay thay vì chờ đủ thông tin",
+   "khi_sang": "Sáng: tướng ra trận — gan dạ, quyết liệt, dám làm việc khó; đời có lúc thăng tiến nhanh nhờ bản lĩnh.",
+   "khi_ham": "Hãm: nóng vội, liều lĩnh, đời nhiều thăng trầm; dễ vấp vì vội — cần rèn kiên nhẫn, làm chắc từng bước.",
    "cau_tu_soi": "Lần gần nhất bạn hành động quá nhanh, bạn học được gì?"
   },
   "Phá Quân": {
@@ -231,6 +257,8 @@
    "diem_manh": "dám thay đổi, đổi mới, khởi nghiệp",
    "mat_toi": "hao tổn, bốc đồng, bỏ dở giữa chừng",
    "bieu_hien": "thường muốn làm lại từ đầu khi thấy việc cũ không ổn",
+   "khi_sang": "Sáng: người mở đường — dám phá cái cũ để làm cái mới, có sức bật mạnh, hợp khởi nghiệp, cải tổ.",
+   "khi_ham": "Hãm: phá nhiều hơn xây, hay bỏ dở, tiền bạc hao; dễ bất ổn chỗ ở, công việc — cần một nền tảng giữ mình lại.",
    "cau_tu_soi": "Điều gì bạn muốn phá bỏ — và muốn xây gì thay vào?"
   }
  },

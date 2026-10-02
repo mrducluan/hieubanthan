@@ -145,3 +145,11 @@ test("KB-TV2: cách cục bổ sung có phiên âm phú cổ", async ({ page }) 
   await cc.getByRole("button", { name: /Cơ Lương Gia Hội/ }).click();
   await expect(cc.getByTestId("co-ca")).toContainText("Cơ Lương nhập miếu tối kham ngôn");
 });
+
+test("KB-TV2b: hỏi tính cách → độ sáng Nam phái + nghĩa riêng khi sao sáng", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  const ans = await hoi(page, "Tính cách của tôi theo tử vi thế nào?");
+  await expect(ans).toContainText("Cự Môn ở cung Mệnh (Đắc");     // Nam phái: Cự Môn tại Hợi
+  await expect(ans).toContainText("lời nói có sức nặng");
+});

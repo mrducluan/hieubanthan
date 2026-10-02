@@ -55,6 +55,11 @@ def do_sang(muc: str) -> str | None:
     return _d()["do_sang"].get(muc)
 
 
+def nhom_do_sang(muc: str | None) -> str | None:
+    """Miếu/Vượng/Đắc → "sang"; Bất/Hãm → "ham"; Bình/Lợi/không rõ → None (tuỳ sao đi kèm)."""
+    return {"Miếu": "sang", "Vượng": "sang", "Đắc": "sang", "Bất": "ham", "Hãm": "ham"}.get(muc or "")
+
+
 def tu_hoa(hoa: str) -> dict | None:
     return _lay("tu_hoa", hoa)
 

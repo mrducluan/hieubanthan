@@ -15,7 +15,7 @@ import datetime as dt
 import re
 
 from app import config
-from app.calc import tuvi_an_sao as az, tuvi_cach_cuc
+from app.calc import tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
 from app.hoidap import chung
 from app.kb import tuvi_kb as kb
 from app.luangiai import hoi as _h
@@ -159,7 +159,11 @@ def tom_tat(la: dict) -> dict:
     ten_phu = set(kb.ten_phu_tinh())
     cung, tu_hoa = [], []
     for p in la["palaces"]:
-        chinh = [{"ten": s["name"], "do_sang": DO_SANG_CHUAN.get(s["brightness"], s["brightness"]) or None,
+        # Độ sáng chính tinh: mặc định bảng Nam phái (chốt 2026-10-01); giữ bảng phái Trung (iztro) để đối chiếu.
+        chinh = [{"ten": s["name"],
+                  "do_sang": tuvi_do_sang_vn.do_sang(s["name"], p["earthlyBranch"])
+                  or DO_SANG_CHUAN.get(s["brightness"], s["brightness"]) or None,
+                  "do_sang_trung": DO_SANG_CHUAN.get(s["brightness"], s["brightness"]) or None,
                   "tu_hoa": s["mutagen"] or None} for s in p["majorStars"]]
         phu = [s["name"] for s in p["minorStars"] + p["adjectiveStars"] if s["name"] in ten_phu]
         for s in p["majorStars"] + p["minorStars"]:
@@ -196,6 +200,9 @@ def _m_sao_cung(sao: str, cung_: str, do_sang: str | None = None, vai: str = "kb
          **kb.meta()}
     if do_sang:
         m["do_sang"], m["do_sang_y"] = do_sang, kb.do_sang(do_sang)
+        nhom = kb.nhom_do_sang(do_sang)
+        if nhom:                                 # KB-TV2b: nghĩa riêng của sao khi sáng / khi hãm
+            m["sac_thai"] = ct["khi_sang" if nhom == "sang" else "khi_ham"]
     return m
 
 
@@ -399,6 +406,8 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         if m.get("do_sang"):
             s += f" ({m['do_sang']} — {m['do_sang_y']})"
         s += f": {m['noi_dung']}"
+        if m.get("sac_thai"):
+            s += f" {m['sac_thai']}"
         if m["sao"] not in da_co_sao:
             s += f" Nét chung của {m['sao']}: {m['tinh_chat']} Mặt tối cần để ý: {m['mat_toi']}."
         return s, m["cau_tu_soi"]
