@@ -42,7 +42,6 @@ Chủ dự án chốt: lá số có **nút chuyển 2 giao diện** (Đêm sao /
 ### Còn lại
 - **KB-2b** Tử vi sao × cung × miếu/hãm, phụ tinh mở rộng — chờ chủ dự án gửi lá số mẫu để chốt bảng độ sáng Nam phái.
 - **VZ-4b** tab Luận cung · Chuyên đề.
-- Bát tự: nút tải ảnh như Tử vi.
 - Trừ Sao cho Luận giải sau 2 tháng thử nghiệm (tầng web).
 
 ## Câu hỏi mở

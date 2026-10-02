@@ -34,21 +34,32 @@ export async function taiAnhSvg(svg: SVGSVGElement, tenFile: string, tiLe = 2): 
     if (!ctx) throw new Error("Trình duyệt không hỗ trợ canvas");
     ctx.scale(tiLe, tiLe);
     ctx.drawImage(anh, 0, 0);
-    const png = await new Promise<Blob | null>((ok) => canvas.toBlob(ok, "image/png"));
-    if (!png) throw new Error("Không xuất được PNG");
-    // Gắn thẻ <a> vào trang (Safari/Firefox bỏ qua click trên thẻ rời) và bỏ dấu tên file (một số hệ
-    // điều hành/trình duyệt thay tên có dấu bằng "download").
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(png);
-    a.download = khongDau(tenFile);
-    a.style.display = "none";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    await taiCanvas(canvas, tenFile);
   } finally {
     URL.revokeObjectURL(url);
   }
+}
+
+/** Canvas → PNG → tải về. */
+export async function taiCanvas(canvas: HTMLCanvasElement, tenFile: string): Promise<void> {
+  let png: Blob | null;
+  try {
+    png = await new Promise<Blob | null>((ok) => canvas.toBlob(ok, "image/png"));
+  } catch {
+    // Safari coi canvas vẽ từ <foreignObject> là "bẩn" và chặn xuất.
+    throw new Error("Trình duyệt này chưa cho xuất ảnh — hãy chụp màn hình hoặc dùng In / lưu PDF.");
+  }
+  if (!png) throw new Error("Không xuất được PNG");
+  // Gắn thẻ <a> vào trang (Safari/Firefox bỏ qua click trên thẻ rời) và bỏ dấu tên file (một số hệ
+  // điều hành/trình duyệt thay tên có dấu bằng "download").
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(png);
+  a.download = khongDau(tenFile);
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
 }
 
 function khongDau(s: string): string {
