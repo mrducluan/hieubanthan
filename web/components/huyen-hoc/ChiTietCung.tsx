@@ -25,12 +25,16 @@ export function ChiTietCung({ ls, chi, vanHan, onHoi }: {
   const tp = tamPhuong(chi);
   const tenTai = (x: string) => ls.cung.find((k) => k.chi === x)?.ten ?? x;
   const nhom: Record<NhomSao, string[]> = { cat: [], sat: [], dao_hoa: [], trung: [] };
-  for (const s of c.phu_tinh) nhom[nhomSao(s.ten, s.loai)].push(s.do_sang ? `${s.ten} (${DO_SANG_DAY[s.do_sang] ?? s.do_sang})` : s.ten);
+  for (const s of c.phu_tinh) {
+    const ds = s.do_sang_nam_phai ?? s.do_sang;      // ưu tiên lối Việt (TV-NP2)
+    nhom[nhomSao(s.ten, s.loai)].push(ds ? `${s.ten} (${DO_SANG_DAY[ds] ?? ds})` : s.ten);
+  }
   const daCo = new Set(c.phu_tinh.map((s) => s.ten));
   for (const t of [c.bac_si, c.tue_tien, c.tuong_tien, ...c.tap_dieu.filter((t) => !AN_TAP_DIEU.has(t))]) {
     if (daCo.has(t)) continue;
     daCo.add(t);
-    nhom[nhomSao(t)].push(t);
+    const ds = c.do_sang_phu?.[t];
+    nhom[nhomSao(t)].push(ds ? `${t} (${DO_SANG_DAY[ds] ?? ds})` : t);
   }
   const tt = [ls.tuan_triet?.tuan.includes(chi) && "Tuần", ls.tuan_triet?.triet.includes(chi) && "Triệt"].filter(Boolean);
   const hoaCung = [...c.chinh_tinh, ...c.phu_tinh].filter((s) => s.tu_hoa);

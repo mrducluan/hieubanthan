@@ -42,10 +42,13 @@ alter table ma_gioi_thieu enable row level security;
 alter table so_cai_sao enable row level security;
 alter table gioi_thieu enable row level security;
 
+drop policy if exists "ma_gioi_thieu chu doc" on ma_gioi_thieu;
 create policy "ma_gioi_thieu chu doc" on ma_gioi_thieu
     for select to authenticated using ((select auth.uid()) = user_id);
+drop policy if exists "so_cai_sao chu doc" on so_cai_sao;
 create policy "so_cai_sao chu doc" on so_cai_sao
     for select to authenticated using ((select auth.uid()) = user_id);
+drop policy if exists "gioi_thieu hai ben doc" on gioi_thieu;
 create policy "gioi_thieu hai ben doc" on gioi_thieu
     for select to authenticated using ((select auth.uid()) in (nguoi_moi_id, duoc_moi_id));
 

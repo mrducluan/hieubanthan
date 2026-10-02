@@ -224,6 +224,16 @@ def _phu(s: dict) -> dict:
     return {**_sao(s), "loai": s["type"]}
 
 
+def _do_sang_phu(p: dict) -> dict[str, str]:
+    """TV-NP2: độ sáng lối Việt của phụ tinh, tạp diệu, Đại/Tiểu Hao (vòng Bác sĩ) và Hoá Kỵ trong cung
+    — chỉ những sao sách có luận đắc/hãm ở cung đó."""
+    chi = p["earthlyBranch"]
+    ten = [x["name"] for x in p["minorStars"] + p["adjectiveStars"]] + [p["boshi12"]]
+    if any(x["mutagen"] == "Kỵ" for x in p["majorStars"] + p["minorStars"]):
+        ten.append("Hóa Kỵ")
+    return {t: m for t in ten if (m := tuvi_do_sang_vn.do_sang_phu(t, chi))}
+
+
 def _bo_sung(dv: "_DauVao", la: dict, gioi_tinh: str) -> dict:
     """VZ-1: thông tin phần giữa lá số + Tuần/Triệt Nam phái (đóng giữa hai cung)."""
     na = can_chi.nap_am(dv.can, dv.chi)
@@ -296,12 +306,14 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             "la_lai_nhan": p["isOriginalPalace"],
             "chinh_tinh": [{**_sao(x), "do_sang_nam_phai": tuvi_do_sang_vn.do_sang(x["name"], p["earthlyBranch"])}
                            for x in p["majorStars"]],
-            "phu_tinh": [_phu(x) for x in p["minorStars"]],
+            "phu_tinh": [{**_phu(x), "do_sang_nam_phai": tuvi_do_sang_vn.do_sang_phu(x["name"], p["earthlyBranch"])}
+                         for x in p["minorStars"]],
             "tap_dieu": [x["name"] for x in p["adjectiveStars"]],
             "truong_sinh": p["changsheng12"], "bac_si": p["boshi12"],
             "tuong_tien": p["jiangqian12"], "tue_tien": p["suiqian12"],
             "dai_han": {"tu_tuoi": p["decadal"]["range"][0], "den_tuoi": p["decadal"]["range"][1]},
             "tieu_han_tuoi": p["ages"],
+            "do_sang_phu": _do_sang_phu(p),
         } for p in la["palaces"]],
         "cach_cuc": [{**(tuvi_kb.cach_cuc(c["ma"]) or {}), "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"]}
                      for c in tuvi_cach_cuc.nhan_dien(la)],

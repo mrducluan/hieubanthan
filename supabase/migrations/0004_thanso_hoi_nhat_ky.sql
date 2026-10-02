@@ -23,6 +23,7 @@ create table if not exists thanso_hoi_nhat_ky (
 );
 
 alter table thanso_hoi_nhat_ky enable row level security;
+drop policy if exists "anon insert thanso_hoi_nhat_ky" on thanso_hoi_nhat_ky;
 create policy "anon insert thanso_hoi_nhat_ky" on thanso_hoi_nhat_ky
     for insert to anon with check (true);
 

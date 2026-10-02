@@ -12,6 +12,9 @@ test("tứ trụ từ hồ sơ + dụng thần hai cách", async ({ page }) => {
   // VZ-3: bảng tứ trụ đầy đủ + vòng địa chi + lưu niên
   const bang = page.getByRole("table", { name: "Bảng tứ trụ" });
   await expect(bang).toContainText("Lộ Bàng Thổ");           // nạp âm Canh Ngọ
+  // Tiêu đề cột thẳng hàng với dữ liệu (lỗi cũ: ô "Mục" sr-only rơi khỏi lưới → lệch một cột)
+  const giua = async (l: import("@playwright/test").Locator) => { const b = (await l.boundingBox())!; return b.x + b.width / 2; };
+  expect(Math.abs(await giua(bang.getByRole("columnheader", { name: /Trụ năm/ })) - await giua(bang.getByText("Canh", { exact: true }).first()))).toBeLessThan(12);
   await expect(bang).toContainText("Thiên Ất Quý Nhân");
   await expect(tt).toContainText("Tự hình");                 // Ngọ–Ngọ
   await expect(page.getByTestId("dieu-hau-ctbg")).toContainText("Tỷ Kiên");
@@ -50,4 +53,16 @@ test("luận giải toàn bộ Bát tự", async ({ page }) => {
   for (const chuong of ["Nhật chủ và tính cách", "Ngũ hành, thân vượng nhược, dụng thần", "Sự nghiệp, tiền bạc qua thập thần", "Đại vận và năm nay"]) {
     await expect(bc).toContainText(chuong);
   }
+});
+
+test("tải ảnh tứ trụ: ra file PNG", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/bat-tu");
+  await expect(page.getByTestId("tu-tru")).toBeVisible();
+  const [tai] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Tải ảnh" }).click()]);
+  expect(tai.suggestedFilename()).toBe("bat-tu-Canh-Ngo_Tan-Ty_Nham-Ngo_Binh-Ngo.png");
+  const duong = await tai.path();
+  const { statSync, copyFileSync } = await import("node:fs");
+  expect(statSync(duong!).size).toBeGreaterThan(50_000);
+  if (process.env.LUU_ANH) copyFileSync(duong!, process.env.LUU_ANH);
 });
