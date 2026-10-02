@@ -52,10 +52,13 @@ create table if not exists thanso_kb_khoi (
 );
 
 alter table thanso_linh_vuc_nghia enable row level security;
+drop policy if exists "public read thanso_linh_vuc_nghia" on thanso_linh_vuc_nghia;
 create policy "public read thanso_linh_vuc_nghia" on thanso_linh_vuc_nghia for select using (true);
 alter table thanso_cap_so enable row level security;
+drop policy if exists "public read thanso_cap_so" on thanso_cap_so;
 create policy "public read thanso_cap_so" on thanso_cap_so for select using (true);
 alter table thanso_kb_khoi enable row level security;
+drop policy if exists "public read thanso_kb_khoi" on thanso_kb_khoi;
 create policy "public read thanso_kb_khoi" on thanso_kb_khoi for select using (true);
 
 comment on table thanso_linh_vuc_nghia is
