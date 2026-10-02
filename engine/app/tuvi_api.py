@@ -108,9 +108,13 @@ class _DauVao:
         self.nuoc_ngoai, self.tinh = nuoc_ngoai, tinh
 
         # ---- 2. Lịch âm + can chi năm ------------------------------------
+        # Âm lịch VIỆT NAM (không phải lịch Trung Quốc của iztro — LS60). Miền Nam 1960–1975 dùng lịch
+        # tính theo UTC+8 như giấy tờ thời đó.
+        self.tz_lich = config.CALENDAR_MERIDIAN_TZ
+        if not nuoc_ngoai and vung_khai is Region.SOUTH:
+            self.tz_lich = config.clock_offset(ngay_kinh_tuyen, Region.SOUTH)[0]
         ld, lm, ly, leap = lunar.solar_to_lunar(
-            ngay_kinh_tuyen.day, ngay_kinh_tuyen.month, ngay_kinh_tuyen.year,
-            config.CALENDAR_MERIDIAN_TZ,
+            ngay_kinh_tuyen.day, ngay_kinh_tuyen.month, ngay_kinh_tuyen.year, self.tz_lich,
         )
         self.duong_goc, self.tb, self.ngay_kinh_tuyen = duong_goc, tb, ngay_kinh_tuyen
         self.am = (ld, lm, ly, leap)
@@ -128,6 +132,11 @@ class _DauVao:
             if inp.gio_mua_he:
                 flags.append({"loai": "gio_mua_he", "chi_tiet": (
                     f"Đã trừ 1 giờ mùa hè: giờ chuẩn địa phương {tb.calendar_dt.strftime('%H:%M')}.")})
+        if self.am[3] and self.am[0] > 15:
+            flags.append({"loai": "thang_nhuan", "chi_tiet": (
+                f"Sinh nửa sau tháng {self.am[1]} nhuận (ngày {self.am[0]}): lá số theo quy tắc phổ biến "
+                f"\"nửa sau tháng nhuận tính sang tháng sau\" (tức tháng {self.am[1] % 12 + 1}). Có trường phái "
+                f"tính cả tháng nhuận như tháng {self.am[1]} — Mệnh, Cục và các sao có thể khác.")})
         if self.lich_mien_nam:
             flags.append({"loai": "lich_am_mien_nam", "chi_tiet": (
                 "Ngày âm đổi theo lịch miền Nam thời 1960–1975 (tính theo UTC+8): "
@@ -253,7 +262,7 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
     cal = dv.tb.calendar_dt
     ti = tuvi_an_sao.time_index(cal.hour, cal.minute)
     try:
-        la = tuvi_an_sao.an_sao_tho(cal.date(), ti, inp.gender, "vi-VN")
+        la = tuvi_an_sao.an_sao_tho(cal.date(), ti, inp.gender, "vi-VN", tz_lich=dv.tz_lich)
     except tuvi_an_sao.AnSaoLoi as e:
         raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
 
@@ -335,7 +344,7 @@ def api_van_han(inp: VanHanInput) -> dict:
     else:
         ngay = _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
     try:
-        vh = tuvi_an_sao.van_han(cal.date(), ti, inp.la_so.gender, ngay, chi_tiet=True)
+        vh = tuvi_an_sao.van_han(cal.date(), ti, inp.la_so.gender, ngay, chi_tiet=True, tz_lich=dv.tz_lich)
     except tuvi_an_sao.AnSaoLoi as e:
         raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
     can, chi = lunar.can_chi_nam(lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, 7.0)[2])
@@ -361,7 +370,7 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
         dv = _DauVao(inp.la_so)
         cal = dv.tb.calendar_dt
         ti = tuvi_an_sao.time_index(cal.hour, cal.minute)
-        sinh = {"ngay": cal.date(), "ti": ti, "gioi_tinh": inp.la_so.gender}
+        sinh = {"ngay": cal.date(), "ti": ti, "gioi_tinh": inp.la_so.gender, "tz_lich": dv.tz_lich}
         flags = list(dv.flags)
         if ti == 12:
             flags.append({"loai": "ty_conflict", "chi_tiet": (
@@ -392,7 +401,7 @@ def api_luan_giai(inp: LuanGiaiInput) -> dict:
     from app.narrative import luan_giai_van
     dv = _DauVao(inp.la_so)
     cal = dv.tb.calendar_dt
-    sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender}
+    sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender, "tz_lich": dv.tz_lich}
     try:
         bc = luan_giai_van.dien_dat(toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem))
     except tuvi_an_sao.AnSaoLoi as e:
