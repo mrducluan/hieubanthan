@@ -17,6 +17,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
 from app import config, giam_sat
+from app.kb import tu_dien
 from app.calc import thanso, timebase
 from app.kb import store as kb_store
 from app.kb import trang as kb_trang
@@ -183,6 +184,14 @@ class HoiInput(ThanSoInput):
     ngay_xem: _dt.date | None = Field(default=None, description="Mặc định: hôm nay")
 
 
+@app.get("/v1/tu-dien")
+def api_tu_dien(mo_dun: str | None = None) -> dict:
+    """GN — từ điển thuật ngữ dễ hiểu (KB) cho trang /tu-dien và khung giải nghĩa."""
+    m = tu_dien.meta()
+    return {"engine_version": ENGINE_VERSION, "nguon": m["_nguon"], "trang_thai": m["trang_thai"],
+            "muc": tu_dien.tat_ca(mo_dun)}
+
+
 @app.post("/v1/thanso/hoi")
 def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
     """Q&A v2 — phân loại câu hỏi (RULES) → gói bằng chứng từ KB → diễn đạt.
@@ -202,7 +211,7 @@ def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
     nguoi = {"ho_ten": inp.ho_ten, "ngay": inp.ngay, "thang": inp.thang, "nam": inp.nam}
     kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem)
     background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
-    return {"engine_version": ENGINE_VERSION, **kq}
+    return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "thanso")}
 
 
 class HopDoiInput(BaseModel):

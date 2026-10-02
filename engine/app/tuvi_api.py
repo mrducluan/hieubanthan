@@ -17,6 +17,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
+from app.kb import tu_dien
 from app.calc import can_chi, dia_ly, lunar, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao
 from app.hoidap import tuvi as hoidap_tv
 from app import nhat_ky
@@ -43,6 +44,9 @@ class TuanTrietInput(BaseModel):
     truong_phai: Literal["npl", "vvt"] | None = None
     che_do: Literal["hep", "tam_hop", "tptc"] | None = None
     do_tin_gio: HourConfidence = HourConfidence.EXACT
+    # TV-PHAI (chủ dự án chốt 2026-10-02): "hiện cả hai" — mặc định lối Việt / tính tháng sau.
+    hoa_linh: Literal["viet", "trung"] = "viet"
+    thang_nhuan: Literal["thang_sau", "thang_chinh"] = "thang_sau"
 
 
 class _DauVao:
@@ -108,12 +112,19 @@ class _DauVao:
         self.nuoc_ngoai, self.tinh = nuoc_ngoai, tinh
 
         # ---- 2. Lịch âm + can chi năm ------------------------------------
+        # Âm lịch VIỆT NAM (không phải lịch Trung Quốc của iztro — LS60). Miền Nam 1960–1975 dùng lịch
+        # tính theo UTC+8 như giấy tờ thời đó.
+        self.tz_lich = config.CALENDAR_MERIDIAN_TZ
+        if not nuoc_ngoai and vung_khai is Region.SOUTH:
+            self.tz_lich = config.clock_offset(ngay_kinh_tuyen, Region.SOUTH)[0]
         ld, lm, ly, leap = lunar.solar_to_lunar(
-            ngay_kinh_tuyen.day, ngay_kinh_tuyen.month, ngay_kinh_tuyen.year,
-            config.CALENDAR_MERIDIAN_TZ,
+            ngay_kinh_tuyen.day, ngay_kinh_tuyen.month, ngay_kinh_tuyen.year, self.tz_lich,
         )
         self.duong_goc, self.tb, self.ngay_kinh_tuyen = duong_goc, tb, ngay_kinh_tuyen
         self.am = (ld, lm, ly, leap)
+        self.phai = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan,
+                     "co_the_doi_thang_nhuan": bool(leap) and ld > 15}
+        self.tuy_chon = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan}
         self.can, self.chi = lunar.can_chi_nam(ly)
         self.flags = self._co(inp)
 
@@ -128,6 +139,11 @@ class _DauVao:
             if inp.gio_mua_he:
                 flags.append({"loai": "gio_mua_he", "chi_tiet": (
                     f"Đã trừ 1 giờ mùa hè: giờ chuẩn địa phương {tb.calendar_dt.strftime('%H:%M')}.")})
+        if self.am[3] and self.am[0] > 15:
+            flags.append({"loai": "thang_nhuan", "chi_tiet": (
+                f"Sinh nửa sau tháng {self.am[1]} nhuận (ngày {self.am[0]}): lá số theo quy tắc phổ biến "
+                f"\"nửa sau tháng nhuận tính sang tháng sau\" (tức tháng {self.am[1] % 12 + 1}). Có trường phái "
+                f"tính cả tháng nhuận như tháng {self.am[1]} — Mệnh, Cục và các sao có thể khác.")})
         if self.lich_mien_nam:
             flags.append({"loai": "lich_am_mien_nam", "chi_tiet": (
                 "Ngày âm đổi theo lịch miền Nam thời 1960–1975 (tính theo UTC+8): "
@@ -215,6 +231,16 @@ def _phu(s: dict) -> dict:
     return {**_sao(s), "loai": s["type"]}
 
 
+def _do_sang_phu(p: dict) -> dict[str, str]:
+    """TV-NP2: độ sáng lối Việt của phụ tinh, tạp diệu, Đại/Tiểu Hao (vòng Bác sĩ) và Hoá Kỵ trong cung
+    — chỉ những sao sách có luận đắc/hãm ở cung đó."""
+    chi = p["earthlyBranch"]
+    ten = [x["name"] for x in p["minorStars"] + p["adjectiveStars"]] + [p["boshi12"]]
+    if any(x["mutagen"] == "Kỵ" for x in p["majorStars"] + p["minorStars"]):
+        ten.append("Hóa Kỵ")
+    return {t: m for t in ten if (m := tuvi_do_sang_vn.do_sang_phu(t, chi))}
+
+
 def _bo_sung(dv: "_DauVao", la: dict, gioi_tinh: str) -> dict:
     """VZ-1: thông tin phần giữa lá số + Tuần/Triệt Nam phái (đóng giữa hai cung)."""
     na = can_chi.nap_am(dv.can, dv.chi)
@@ -243,7 +269,7 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
     cal = dv.tb.calendar_dt
     ti = tuvi_an_sao.time_index(cal.hour, cal.minute)
     try:
-        la = tuvi_an_sao.an_sao_tho(cal.date(), ti, inp.gender, "vi-VN")
+        la = tuvi_an_sao.an_sao_tho(cal.date(), ti, inp.gender, "vi-VN", tz_lich=dv.tz_lich, **dv.tuy_chon)
     except tuvi_an_sao.AnSaoLoi as e:
         raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
 
@@ -287,16 +313,19 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             "la_lai_nhan": p["isOriginalPalace"],
             "chinh_tinh": [{**_sao(x), "do_sang_nam_phai": tuvi_do_sang_vn.do_sang(x["name"], p["earthlyBranch"])}
                            for x in p["majorStars"]],
-            "phu_tinh": [_phu(x) for x in p["minorStars"]],
+            "phu_tinh": [{**_phu(x), "do_sang_nam_phai": tuvi_do_sang_vn.do_sang_phu(x["name"], p["earthlyBranch"])}
+                         for x in p["minorStars"]],
             "tap_dieu": [x["name"] for x in p["adjectiveStars"]],
             "truong_sinh": p["changsheng12"], "bac_si": p["boshi12"],
             "tuong_tien": p["jiangqian12"], "tue_tien": p["suiqian12"],
             "dai_han": {"tu_tuoi": p["decadal"]["range"][0], "den_tuoi": p["decadal"]["range"][1]},
             "tieu_han_tuoi": p["ages"],
+            "do_sang_phu": _do_sang_phu(p),
         } for p in la["palaces"]],
         "cach_cuc": [{**(tuvi_kb.cach_cuc(c["ma"]) or {}), "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"]}
                      for c in tuvi_cach_cuc.nhan_dien(la)],
         "cach_cuc_luu_y": tuvi_kb.luu_y_pha_cach(),
+        "phai": dv.phai,
         "co_canh_bao": flags,
     }
 
@@ -323,7 +352,8 @@ def api_van_han(inp: VanHanInput) -> dict:
     else:
         ngay = _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
     try:
-        vh = tuvi_an_sao.van_han(cal.date(), ti, inp.la_so.gender, ngay, chi_tiet=True)
+        vh = tuvi_an_sao.van_han(cal.date(), ti, inp.la_so.gender, ngay, chi_tiet=True, tz_lich=dv.tz_lich,
+                                 thang_nhuan=dv.tuy_chon["thang_nhuan"])
     except tuvi_an_sao.AnSaoLoi as e:
         raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
     can, chi = lunar.can_chi_nam(lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, 7.0)[2])
@@ -349,7 +379,7 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
         dv = _DauVao(inp.la_so)
         cal = dv.tb.calendar_dt
         ti = tuvi_an_sao.time_index(cal.hour, cal.minute)
-        sinh = {"ngay": cal.date(), "ti": ti, "gioi_tinh": inp.la_so.gender}
+        sinh = {"ngay": cal.date(), "ti": ti, "gioi_tinh": inp.la_so.gender, "tz_lich": dv.tz_lich, **dv.tuy_chon}
         flags = list(dv.flags)
         if ti == 12:
             flags.append({"loai": "ty_conflict", "chi_tiet": (
@@ -363,7 +393,7 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
         raise HTTPException(422, detail=str(e))
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
     background.add_task(nhat_ky.ghi_huyenhoc, "tuvi", inp.cau_hoi, kq, inp.la_so is not None)
-    return {"engine_version": ENGINE_VERSION, **kq}
+    return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "tuvi")}
 
 
 class LuanGiaiInput(BaseModel):
@@ -380,9 +410,9 @@ def api_luan_giai(inp: LuanGiaiInput) -> dict:
     from app.narrative import luan_giai_van
     dv = _DauVao(inp.la_so)
     cal = dv.tb.calendar_dt
-    sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender}
+    sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender, "tz_lich": dv.tz_lich, **dv.tuy_chon}
     try:
-        bc = luan_giai_van.dien_dat(toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem))
+        bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem)))
     except tuvi_an_sao.AnSaoLoi as e:
         raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
     return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": list(dv.flags)}

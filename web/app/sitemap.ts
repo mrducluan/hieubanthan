@@ -6,7 +6,7 @@ import { urlDayDu } from "@/lib/seo";
 export const revalidate = 21600;
 
 const TINH: [string, number][] = [
-  ["/", 1], ["/kien-thuc", 0.9], ["/kham-pha", 0.8], ["/than-so", 0.8], ["/hop-doi", 0.8],
+  ["/", 1], ["/kien-thuc", 0.9], ["/tu-dien", 0.8], ["/kham-pha", 0.8], ["/than-so", 0.8], ["/hop-doi", 0.8],
   ["/tu-vi", 0.7], ["/bat-tu", 0.7], ["/kinh-dich", 0.7], ["/phong-thuy", 0.7],
 ];
 
