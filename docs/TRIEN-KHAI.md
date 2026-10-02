@@ -76,3 +76,19 @@ chia sẻ, thư viện, sitemap, llms.txt) và in ✓/✗ kèm lời báo lỗi.
 
 `0001 → … → 0005 → 0006 (ho_so) → 0007 (nơi sinh, âm lịch) → 0008 (Sao)`. Mỗi file có `.down.sql`.
 Engine và web đều chạy được khi migration mới chưa chạy (tính năng tương ứng ẩn đi / ghi nhật ký bỏ qua).
+
+## Bật thu Sao cho "Luận giải toàn bộ" (SAO-LG — mặc định TẮT)
+
+Giá chốt: **10 Sao/báo cáo**, chủ dự án quyết định ngày bật.
+
+1. **Chuẩn bị Supabase:** đã chạy migration 0006, 0007, 0008. Kiểm thử bằng `supabase/kiem_thu/chay.sh`.
+2. **Bật công tắc:** trên Vercel (Production), đặt `LUAN_GIAI_THU_SAO=1`, rồi Redeploy.
+3. **Kiểm tra:**
+   - `GET /api/luan-giai/phi` phải trả `{"thu": true, "gia": 10}`.
+   - Nút trên trang Tử vi / Bát tự đổi thành "Xem luận giải · 10 Sao".
+4. **Cách hoạt động** (trừ Sao ở máy chủ, `web/lib/luan-giai-sao.ts`):
+   - Bắt buộc đăng nhập.
+   - Engine tính báo cáo xong mới trừ Sao, nên engine lỗi thì không mất Sao.
+   - Thiếu Sao: trả lỗi 402 kèm số dư.
+   - Khoá giao dịch = mảng + lá số + ngày giờ Việt Nam: xem lại cùng báo cáo trong ngày không bị trừ lần hai.
+5. **Tắt lại:** xoá biến hoặc đặt rỗng, rồi Redeploy.

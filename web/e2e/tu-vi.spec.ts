@@ -127,3 +127,13 @@ test("sinh nửa sau tháng nhuận: chọn cách tính tháng → cung Mệnh �
   await page.getByRole("tab", { name: "Như tháng chính" }).click();
   await expect(menh).not.toHaveAttribute("aria-label", truoc!);
 });
+
+test("giá luận giải: công tắc thu Sao mặc định tắt → miễn phí, không đòi đăng nhập", async ({ page, request }) => {
+  const r = await request.get("/api/luan-giai/phi");
+  expect(await r.json()).toEqual({ thu: false, gia: 10 });
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await expect(page.getByTestId("gia-luan-giai")).toContainText("miễn phí");
+  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toContainText("Tổng quan bản mệnh");
+});
