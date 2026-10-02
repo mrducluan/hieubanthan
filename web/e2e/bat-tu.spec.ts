@@ -42,5 +42,8 @@ test("luận giải toàn bộ Bát tự", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/bat-tu");
   await page.getByRole("button", { name: "Xem luận giải" }).click();
-  await expect(page.getByTestId("luan-giai-toan-bo")).toContainText("Nhật chủ và tính cách");
+  const bc = page.getByTestId("luan-giai-toan-bo");
+  for (const chuong of ["Nhật chủ và tính cách", "Ngũ hành, thân vượng nhược, dụng thần", "Sự nghiệp, tiền bạc qua thập thần", "Đại vận và năm nay"]) {
+    await expect(bc).toContainText(chuong);
+  }
 });

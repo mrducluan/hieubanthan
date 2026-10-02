@@ -2,7 +2,7 @@
 // VZ-2 — trang Tử vi: lá số lớn (2 giao diện, lớp vận hạn theo năm xem) → chi tiết cung đang chọn
 // → hỏi đáp AI ở DƯỚI, chiếm hết chiều ngang (chủ dự án chốt 2026-10-01).
 import { useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Download, List, Moon, Orbit, ScrollText } from "lucide-react";
+import { ChevronLeft, ChevronRight, Download, List, Maximize2, Minimize2, Moon, Orbit, ScrollText } from "lucide-react";
 import type { LaSoOutputT, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
@@ -50,6 +50,8 @@ export function TuVi() {
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
   const [dangTai, setDangTai] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
+  const chiTietRef = useRef<HTMLDivElement>(null);
+  const [toanCanh, setToanCanh] = useState(false);
   const chatRef = useRef<HTMLElement>(null);
 
   const chiMenh = ls?.cung.find((c) => c.la_menh)?.chi ?? ls?.chi_cung_menh ?? "Dần";
@@ -106,18 +108,30 @@ export function TuVi() {
               }}><Download aria-hidden /> Tải ảnh</Button>
             </div>
 
-            {/* Lá số: trên điện thoại cuộn ngang để giữ chữ đủ lớn */}
+            {/* Lá số: trên điện thoại mặc định cuộn ngang để giữ chữ đủ lớn; "Toàn cảnh" thu vừa màn hình */}
             <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0" data-testid="la-so-tu-vi">
-              <div className="min-w-[760px] overflow-hidden rounded-[1.25rem] shadow-card">
+              <div className={cn("overflow-hidden rounded-[1.25rem] shadow-card", !toanCanh && "min-w-[760px]")}>
                 <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={hoSo?.ho_ten} gioSinh={hoSo?.gio}
-                  chon={chiChon} phaiDoSang={phaiDoSang} onChon={(c) => { setChon(c); ghi("chart_interacted", { mo_dun: "tuvi", kind: "chon_cung" }); }} />
+                  chon={chiChon} phaiDoSang={phaiDoSang} onChon={(c) => {
+                    setChon(c); ghi("chart_interacted", { mo_dun: "tuvi", kind: "chon_cung" });
+                    // Điện thoại: chi tiết cung nằm dưới lá số, ngoài tầm mắt → cuộn tới.
+                    if (window.matchMedia("(max-width: 639px)").matches) requestAnimationFrame(() => chiTietRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+                  }} />
               </div>
             </div>
-            <p className="flex items-center gap-1.5 text-xs text-fg-faint sm:hidden"><List className="size-3.5" aria-hidden />Vuốt ngang để xem trọn lá số · chạm một cung để xem chi tiết bên dưới.</p>
+            <div className="flex items-center gap-2 sm:hidden">
+              <p className="flex flex-1 items-center gap-1.5 text-xs text-fg-faint"><List className="size-3.5 shrink-0" aria-hidden />
+                {toanCanh ? "Đang thu vừa màn hình · chạm một cung để xem chi tiết." : "Vuốt ngang để xem trọn lá số · chạm một cung để xem chi tiết."}</p>
+              <Button variant="secondary" size="sm" aria-pressed={toanCanh} onClick={() => setToanCanh((v) => !v)}>
+                {toanCanh ? <><Maximize2 aria-hidden /> Phóng to</> : <><Minimize2 aria-hidden /> Toàn cảnh</>}
+              </Button>
+            </div>
 
+            <div ref={chiTietRef} className="scroll-mt-20">
+              <ChiTietCung ls={ls} chi={chiChon} vanHan={lop.dai_han || lop.luu_nien ? vh : null} onHoi={hoi} />
+            </div>
             <ChuGiai />
             {ls.cach_cuc && <CachCuc ds={ls.cach_cuc} luuY={ls.cach_cuc_luu_y} onHoi={hoi} />}
-            <ChiTietCung ls={ls} chi={chiChon} vanHan={lop.dai_han || lop.luu_nien ? vh : null} onHoi={hoi} />
             {ls.co_canh_bao.length > 0 && (
               <p className="text-xs text-fg-faint">{ls.co_canh_bao.map((c) => LOI_NHAN_CO[c.loai] ?? c.chi_tiet).join(" ")}</p>
             )}
