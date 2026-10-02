@@ -36,12 +36,22 @@ export async function taiAnhSvg(svg: SVGSVGElement, tenFile: string, tiLe = 2): 
     ctx.drawImage(anh, 0, 0);
     const png = await new Promise<Blob | null>((ok) => canvas.toBlob(ok, "image/png"));
     if (!png) throw new Error("Không xuất được PNG");
+    // Gắn thẻ <a> vào trang (Safari/Firefox bỏ qua click trên thẻ rời) và bỏ dấu tên file (một số hệ
+    // điều hành/trình duyệt thay tên có dấu bằng "download").
     const a = document.createElement("a");
     a.href = URL.createObjectURL(png);
-    a.download = tenFile;
+    a.download = khongDau(tenFile);
+    a.style.display = "none";
+    document.body.appendChild(a);
     a.click();
+    a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   } finally {
     URL.revokeObjectURL(url);
   }
+}
+
+function khongDau(s: string): string {
+  return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D")
+    .replace(/[^A-Za-z0-9._-]+/g, "-");
 }

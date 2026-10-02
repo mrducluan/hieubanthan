@@ -28,3 +28,18 @@ test("Huyền Không: năm 2008, toạ Tý → Song tinh đáo hướng, Thất 
   await expect(ban).toContainText("Thất tinh chân đả kiếp");
   await expect(ban.getByRole("cell", { name: /^Ly Nam: sơn tinh 8, hướng tinh 8, vận tinh 3/ })).toBeVisible();
 });
+
+test("Huyền Không: nhập độ la bàn sát ranh giới → cảnh báo kiêm hướng; năm sai → báo rõ, không gửi", async ({ page }) => {
+  await page.goto("/phong-thuy");
+  await page.getByLabel("Năm xây hoặc nhập trạch").fill("1800");
+  await page.getByRole("button", { name: "Lập bàn" }).click();
+  await expect(page.getByRole("alert").filter({ hasText: "1864–2150" })).toBeVisible();
+  await page.getByLabel("Năm xây hoặc nhập trạch").fill("2008");
+  await page.getByLabel("Nhập độ la bàn").check();
+  await page.getByLabel("Độ la bàn của toạ").fill("350");
+  await page.getByRole("button", { name: "Lập bàn" }).click();
+  const ban = page.getByTestId("ban-huyen-khong");
+  await expect(ban).toContainText("kiêm hướng");
+  await expect(ban).toContainText("tính từ Lập xuân");
+  await expect(ban.getByRole("row")).toHaveCount(3);
+});
