@@ -139,7 +139,8 @@ def _m_dung_than(ls: dict) -> dict:
     b = kb.dieu_hau(ls["nhat_chu"]["can"], ls["tru"][1]["chi"])
     ctbg = battu_mo_rong.dieu_hau_ctbg(ls, b["can"]) if b else None
     return {"loai": "dung_than", "phu_uc": d["phu_uc"], "dieu_hau": d["dieu_hau"], "cach_cuc": d["cach_cuc"],
-            "y_cach": kb.cach_cuc(d["cach_cuc"]["ten"]), "chon": None, "ctbg": ctbg,
+            "y_cach": kb.cach_cuc(d["cach_cuc"]["ten"]), "tbct": kb.cach_cuc_tbct(d["cach_cuc"]["ma"]),
+            "chon": None, "ctbg": ctbg,
             "nhat_chu": ls["nhat_chu"]["can"], "thang": ls["tru"][1]["chi"], **kb.meta()}
 
 
@@ -295,6 +296,11 @@ def _doan(m: dict) -> tuple[str, str | None]:
              f" (can {cc['can']}{', lộ ra thiên can' if cc['thau'] else ''}).")
         if m.get("y_cach"):
             s += f" {m['y_cach']}"
+        if m.get("tbct"):
+            s += f" Hỷ: {m['tbct']['hy']} Kỵ: {m['tbct']['ky']}"
+        if cc.get("ma") in ("kien_loc", "duong_nhan", "nguyet_kiep"):
+            khac = ", ".join(f"{x['can']} ({x['thap_than']})" for x in cc.get("can_thau_khac", []))
+            s += f" Can lộ khác để xét dụng: {khac}." if khac else " Chưa có Tài, Quan, Sát hay Thực lộ ra để dùng."
         if m.get("ctbg"):
             ds = ", ".join(f"{x['can']} ({x['thap_than']}, {'đã lộ' if x['thau'] else 'tàng trong chi' if x['tang'] else 'chưa có'})"
                            for x in m["ctbg"]["chi_tiet"])

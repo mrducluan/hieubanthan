@@ -17,7 +17,7 @@ from enum import Enum
 
 # Tăng khi bất kỳ hằng chính sách hoặc hàm tính nào thay đổi.
 # Ghi vào mọi bản ghi readings để tái lập được kết quả cũ.
-ENGINE_VERSION = "0.1.2"
+ENGINE_VERSION = "0.1.3"
 
 
 # ---------------------------------------------------------------------------

@@ -359,6 +359,7 @@ export function DungThan({ ls }: { ls: LaSoBatTu }) {
     </div>
   );
   const ct = ls.mo_rong?.dieu_hau_ctbg;
+  const cc = ls.mo_rong?.cach_cuc_tbct;
   return (
     <div className="grid gap-3 sm:grid-cols-2">
       {the("Dụng thần · Phù ức", ls.dung_than.phu_uc)}
@@ -380,9 +381,32 @@ export function DungThan({ ls }: { ls: LaSoBatTu }) {
           <p className="mt-1 text-xs text-[var(--ls-mo)]">Thứ tự là mức ưu tiên theo sách; can "đã lộ" ở thiên can thì dùng được ngay, "tàng" thì chờ vận/năm dẫn ra. Bảng tóm lược đang chờ đối chiếu nguyên văn.</p>
         </div>
       )}
+      {cc && (
+        <div className="rounded-2xl border border-[var(--ls-vien)] bg-[var(--ls-o)] p-4 sm:col-span-2" data-testid="cach-cuc-tbct">
+          <p className="eyebrow">Cách cục · Tử Bình Chân Thuyên <span style={{ fontFamily: "var(--font-han), serif" }}>子平真詮</span></p>
+          <p className="mt-2 font-serif text-xl">{cc.ten}</p>
+          <p className="text-sm text-[var(--ls-mo)]">
+            Chi tháng {cc.chi_thang} · can lập cách <b style={{ color: mau(ls.mo_rong?.bang_hanh.can[cc.can_lap_cach]) }}>{cc.can_lap_cach}</b> ({cc.thap_than},{" "}
+            {{ ban_khi: "bản khí", trung_khi: "trung khí", du_khi: "dư khí" }[cc.nguon_khi]}{cc.thau ? ", đã lộ ra thiên can" : ", không lộ — lấy bản khí"})
+          </p>
+          {cc.y && <p className="mt-2 text-sm">{cc.y}</p>}
+          {(cc.hy || cc.ky) && (
+            <dl className="mt-2 grid gap-2 text-sm sm:grid-cols-2">
+              <div className="rounded-xl bg-[var(--ls-o-sang)] p-3"><dt className="text-xs text-[var(--ls-mo)]">Hỷ (thành cách nhờ)</dt><dd>{cc.hy}</dd></div>
+              <div className="rounded-xl bg-[var(--ls-o-sang)] p-3"><dt className="text-xs text-[var(--ls-mo)]">Kỵ (phá cách do)</dt><dd>{cc.ky}</dd></div>
+            </dl>
+          )}
+          {["kien_loc", "duong_nhan", "nguyet_kiep"].includes(cc.ma) && (
+            <p className="mt-2 text-sm text-[var(--ls-mo)]">
+              Lộc/Kiếp không lấy làm dụng — xét can lộ khác: {cc.can_thau_khac.map((x) => `${x.can} (${x.thap_than})`).join(", ") || "chưa có"}.
+            </p>
+          )}
+          <p className="mt-1 text-xs text-[var(--ls-mo)]">Thành hay bại còn tuỳ tương thần, hình xung — đây là điểm xuất phát, bản tóm ý chờ đối chiếu nguyên văn.</p>
+        </div>
+      )}
       <p className="text-xs text-[var(--ls-mo)] sm:col-span-2">
         Hai cách xác định dụng thần có thể khác nhau — hệ thống trình bày cả hai, không tự chọn thay bạn.
-        {ls.dung_than.cach_cuc ? ` Cách cục theo nguyệt lệnh: ${ls.dung_than.cach_cuc.ten}.` : ""}
+        {!cc && ls.dung_than.cach_cuc ? ` Cách cục theo nguyệt lệnh: ${ls.dung_than.cach_cuc.ten}.` : ""}
       </p>
     </div>
   );

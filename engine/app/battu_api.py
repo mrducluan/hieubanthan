@@ -33,7 +33,13 @@ def api_la_so(inp: TuanTrietInput) -> dict:
     ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"])
     ls["co_canh_bao"] = flags + ls["co_canh_bao"]
     return {"engine_version": ENGINE_VERSION, "pham_vi": "bat_tu", "gio_lich": sinh["lich"].isoformat(), **ls,
-            "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls)}}
+            "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls), "cach_cuc_tbct": cach_tbct(ls)}}
+
+
+def cach_tbct(ls: dict) -> dict:
+    """KB-3b: CALC định cách (battu.cach_cuc_tbct) + KB nghĩa, hỷ, kỵ."""
+    c = ls["dung_than"]["cach_cuc"]
+    return {**c, **(battu_kb.cach_cuc_tbct(c["ma"]) or {})}
 
 
 def dieu_hau(ls: dict) -> dict | None:

@@ -30,10 +30,20 @@ Chủ dự án chốt: lá số có **nút chuyển 2 giao diện** (Đêm sao /
    tự động → nguyên văn lấy từ bản số hoá MIT)
 7. **KB-2** Tử vi: 37 cách cục engine nhận diện (Mệnh + tam phương tứ chính, ghi lục sát hội về) + KB nghĩa ✅.
    Còn lại: sao × cung × miếu/hãm, phụ tinh mở rộng, tứ hoá phi (chờ chốt bảng độ sáng Nam phái).
-8. **KB-3** Bát tự: 10 nhật chủ × 12 tháng (Cùng Thông Bảo Giám), cách cục Tử Bình Chân Thuyên.
-9. **LG** Luận giải toàn bộ: RULES ghép chương → NARRATIVE diễn đạt, mỗi ý dẫn nguồn.
+8. **KB-3** Bát tự: 10 nhật chủ × 12 tháng (Cùng Thông Bảo Giám) ✅ (#19); cách cục Tử Bình Chân Thuyên ✅
+   (KB-3b: định cách theo nguyệt lệnh + Lộc/Nhận/Kiếp + hỷ/kỵ 11 cách; sửa định cách cũ lệch 12% lá số →
+   `ENGINE_VERSION` 0.1.3).
+9. **LG** Luận giải toàn bộ: RULES ghép chương ✅ (#20) → NARRATIVE AI diễn đạt từng chương có kiểm tra ✅ (LG2).
 10. **PT-HK** Huyền Không phi tinh ✅ — hạ quái bàn, 4 cục, 16 tổ hợp, lưu niên; golden 216 trạch bàn từ
-    @soul-atelier/xuankong (MIT). Chưa có thế quái (kiêm hướng > 3°) → gắn cờ.
+    @soul-atelier/xuankong (MIT). Thế quái (kiêm hướng > 3°) ✅ (PT-HK2) theo khẩu quyết Thẩm thị — chưa có
+    oracle độc lập, chờ ví dụ sách.
+11. **AL** Đổi lịch âm↔dương: chặn ngày 30 tháng thiếu, nhắc tháng nhuận, can chi ngày/tháng ✅.
+
+### Còn lại
+- **KB-2b** Tử vi sao × cung × miếu/hãm, phụ tinh mở rộng — chờ chủ dự án gửi lá số mẫu để chốt bảng độ sáng Nam phái.
+- **VZ-4b** tab Luận cung · Chuyên đề.
+- Bát tự: nút tải ảnh như Tử vi.
+- Trừ Sao cho Luận giải sau 2 tháng thử nghiệm (tầng web).
 
 ## Câu hỏi mở
 
