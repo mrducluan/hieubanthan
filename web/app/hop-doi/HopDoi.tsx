@@ -15,7 +15,15 @@ import { hoTenList, ngayHopLe, tenGoi, useHoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
 
-const QUAN_HE = ["Người yêu", "Bạn bè", "Đồng nghiệp", "Gia đình"] as const;
+// Loại quan hệ — engine luận theo từng vai (người yêu / bạn bè / đồng nghiệp / sếp / gia đình).
+const QUAN_HE = [
+  { ma: "nguoi_yeu", ten: "Người yêu" },
+  { ma: "ban_be", ten: "Bạn bè" },
+  { ma: "dong_nghiep", ten: "Đồng nghiệp" },
+  { ma: "sep", ten: "Sếp" },
+  { ma: "gia_dinh", ten: "Gia đình" },
+] as const;
+type MaQuanHe = (typeof QUAN_HE)[number]["ma"];
 
 export function HopDoi() {
   const hoSo = useHoSo();
@@ -24,7 +32,8 @@ export function HopDoi() {
   const [ngay, setNgay] = useState("");
   const [thang, setThang] = useState("");
   const [nam, setNam] = useState("");
-  const [quanHe, setQuanHe] = useState<(typeof QUAN_HE)[number]>("Người yêu");
+  const [quanHe, setQuanHe] = useState<MaQuanHe>("nguoi_yeu");
+  const tenQuanHe = QUAN_HE.find((q) => q.ma === quanHe)?.ten ?? "Người ấy";
   const [kq, setKq] = useState<KetQuaHopDoiT | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
@@ -53,8 +62,9 @@ export function HopDoi() {
       setKq(await postJson<KetQuaHopDoiT>("/api/thanso/hop-doi", {
         a: { ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam },
         b: { ...(ten.trim() ? { ho_ten: [ten.trim()] } : {}), ngay: d, thang: m, nam: y },
+        quan_he: quanHe,
       }));
-      ghi("compatibility_created", { kind: "truc_tiep" });
+      ghi("compatibility_created", { kind: "truc_tiep", quan_he: quanHe });
     } catch (e2) {
       setLoi(e2 instanceof Error ? e2.message : "Chưa tính được lúc này.");
     } finally {
@@ -68,7 +78,8 @@ export function HopDoi() {
         <p className="eyebrow">Hợp đôi</p>
         <h1 className="mt-2 text-4xl sm:text-5xl">Hai người, hai con số</h1>
         <p className="mt-3 max-w-2xl text-fg-muted">
-          Không có điểm “hợp” hay “khắc”. Mỗi cặp số chỉ ra chỗ hai người dễ hoà, chỗ dễ va, và một việc nên cùng làm.
+          Không có điểm “hợp” hay “khắc”. Chọn người ấy là ai với bạn — người yêu, bạn bè, đồng nghiệp, sếp hay người thân —
+          để xem mỗi người hiện ra thế nào trong vai đó, chỗ dễ hoà, chỗ dễ va, và một việc nên cùng làm.
         </p>
       </header>
 
@@ -80,10 +91,11 @@ export function HopDoi() {
                 <legend className="text-sm font-medium text-fg-muted">Người ấy là</legend>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {QUAN_HE.map((q) => (
-                    <button key={q} type="button" onClick={() => setQuanHe(q)} aria-pressed={quanHe === q}
+                    <button key={q.ma} type="button" onClick={() => setQuanHe(q.ma)} aria-pressed={quanHe === q.ma}
+                      data-testid={`quan-he-${q.ma}`}
                       className={cn("rounded-full border px-4 py-1.5 text-sm transition-colors",
-                        quanHe === q ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:text-fg")}>
-                      {q}
+                        quanHe === q.ma ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:text-fg")}>
+                      {q.ten}
                     </button>
                   ))}
                 </div>
@@ -124,7 +136,7 @@ export function HopDoi() {
 
       {kq && (
         <>
-          <KetQuaHopDoi kq={kq} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : quanHe} />
+          <KetQuaHopDoi kq={kq} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : tenQuanHe} />
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             <Card>
               <p className="font-serif text-lg">Mời người ấy xem cùng</p>

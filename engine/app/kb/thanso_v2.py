@@ -20,6 +20,8 @@ FILES = {
     "chi_so_phu": "thanso_chi_so_phu.json",
     "giai_thich": "thanso_giai_thich.json",
     "xu_ly": "thanso_xu_ly.json",
+    "chan_dung": "thanso_chan_dung.json",
+    "quan_he": "thanso_quan_he.json",
 }
 
 
@@ -87,3 +89,32 @@ def mau(ma: str) -> str | None:
 
 def luu_y(ma: str) -> str | None:
     return _doc("xu_ly")["luu_y"].get(ma)
+
+
+def chan_dung(so: int) -> dict | None:
+    """Chân dung 4 mặt theo số Đường đời (có cả số cái 11/22/33)."""
+    m = _doc("chan_dung")["so"].get(str(so))
+    return {**m, **_meta("chan_dung")} if m else None
+
+
+def ten_mat_chan_dung() -> dict[str, str]:
+    return _doc("chan_dung")["mat"]
+
+
+def quan_he(ma: str) -> dict | None:
+    m = _doc("quan_he")["quan_he"].get(ma)
+    return {"ma": ma, **m} if m else None
+
+
+def ds_quan_he() -> list[str]:
+    return list(_doc("quan_he")["quan_he"])
+
+
+def nguoi_trong_vai(so: int, ma_qh: str) -> dict | None:
+    """Người mang số `so` trong vai `ma_qh`. Số cái quy về gốc (11→2, 22→4, 33→6)."""
+    goc = {11: 2, 22: 4, 33: 6}.get(so, so)
+    return _doc("quan_he")["theo_so"].get(str(goc), {}).get(ma_qh)
+
+
+def meta_quan_he() -> dict:
+    return _meta("quan_he")

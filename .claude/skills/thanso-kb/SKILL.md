@@ -15,7 +15,9 @@ sản phẩm nói sai. Vì vậy mọi thay đổi KB đi qua đúng quy trình 
 |---|---|---|
 | `thanso_meanings.json`, `thanso_depth.json` | v1: nghĩa chung 12 số, đỉnh cao, thử thách, năm cá nhân | `app/kb/store.py` (có Supabase) |
 | `thanso_linh_vuc.json` | 12 số × 11 lĩnh vực: `xu_huong` · `mat_toi` · `goi_y` · `cau_tu_soi` | `app/kb/thanso_v2.py` |
-| `thanso_cap_so.json` | 45 cặp 1–9: `hoa` · `va` · `cung_lam` | như trên |
+| `thanso_cap_so.json` | 45 cặp 1–9: `hoa` · `va` · `cung_lam` (viết TRUNG TÍNH — dùng cho mọi loại quan hệ) | như trên |
+| `thanso_quan_he.json` | 5 quan hệ (người yêu/bạn bè/đồng nghiệp/sếp/gia đình) + 9 số × 5 vai: `vai` · `can` · `tranh` · `cach_noi` (số cái quy về gốc) | như trên + `app/luangiai/hop_doi.py` |
+| `thanso_chan_dung.json` | 12 số × 4 mặt (tổng quan/tình cảm/công việc/biến cố) — chân dung theo Đường đời | như trên + `luan_chan_dung`, hỏi đáp (`CD_LV`) |
 | `thanso_bieu_do.json` | ô số 1–9 (thiếu/1/2/3+ lần), 8 mũi tên đủ, 8 mũi tên trống | như trên |
 | `thanso_chi_so_phu.json` | số ngày sinh 1–31, thái độ, trưởng thành, tháng/ngày cá nhân, nợ nghiệp, bài học nghiệp | như trên |
 | `thanso_giai_thich.json` | giải thích kỹ thuật + `tu_khoa` (không dấu) để bộ định tuyến khớp | như trên + `app/luangiai/hoi.py` |

@@ -387,6 +387,18 @@ def _them_linh_vuc(muc: list, cs: dict, lv: str, vai: str, chi_vi_tri: list[str]
             muc.append(m)
 
 
+# TS-SAU: câu hỏi về bản thân / tình cảm / công việc → thêm một mục từ kho chân dung (theo số chủ đạo).
+CD_LV = {"ban_than": "tong_quan", "tinh_yeu": "tinh_cam", "su_nghiep": "cong_viec", "tai_chinh": "cong_viec"}
+
+
+def _muc_cd(so: int, mat: str, vai: str) -> dict | None:
+    cd = kb.chan_dung(so)
+    if not cd:
+        return None
+    return {"loai": "chan_dung", "mat": mat, "so": so, "vai": vai, **cd[mat],
+            **{k: cd[k] for k in ("source_id", "school_id", "trang_thai")}}
+
+
 def _meta_depth() -> dict:
     return {"source_id": "balliett_jordan", "school_id": "pythagoras_vn", "trang_thai": "da_duyet",
             "nguon": store.trich_nguon_depth()}
@@ -601,6 +613,10 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
         cs = cs_ban
     if cs:
         _them_linh_vuc(muc, cs, kb_lv, vai, vi_tri_nhac or None)
+        if kb_lv in CD_LV and cs.get("duong_doi") and pl["y_dinh"] != "thoi_diem":
+            m_cd = _muc_cd(cs["duong_doi"], CD_LV[kb_lv], vai)
+            if m_cd:
+                muc.insert(min(1, len(muc)), m_cd)
 
     if cs and "duong_doi" in cs and "bieu_do" in cs:
         if pl["y_dinh"] == "thoi_diem" or lv == "thoi_van" or \

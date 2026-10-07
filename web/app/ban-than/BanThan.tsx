@@ -14,6 +14,7 @@ import { TheDanhTinh } from "@/components/than-so/TheDanhTinh";
 import { TheBaLop } from "@/components/than-so/TheBaLop";
 import { ChuThichLop } from "@/components/than-so/LopNoiDung";
 import { NhipHienTai } from "@/components/than-so/NhipHienTai";
+import { ChanDung } from "@/components/than-so/ChanDung";
 import { useBaiDoc } from "@/lib/bai-doc";
 import { tenGoi, useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
@@ -101,6 +102,14 @@ export function BanThan() {
           {kq.cac_vi_tri.map((vt) => <TheBaLop key={vt.vi_tri} vt={vt} />)}
         </div>
       </section>
+
+      {kq.chan_dung && (
+        <section aria-labelledby="muc-chan-dung">
+          <TieuDeMuc id="muc-chan-dung" nho="Chân dung" lon="Con người bạn, bốn mặt"
+            mo_ta="Tổng quan, tình cảm, công việc và những bước ngoặt — trục là số Đường đời, thêm lớp riêng từ các con số khác của bạn." />
+          <ChanDung cd={kq.chan_dung} />
+        </section>
+      )}
 
       <section aria-labelledby="muc-nhip" ref={cuoiBai}>
         <TieuDeMuc id="muc-nhip" nho="Nhịp hiện tại" lon="Giai đoạn này của bạn"

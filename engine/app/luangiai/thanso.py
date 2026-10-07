@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import datetime
 
-from app.calc import thanso, thanso_mo_rong as mr
+from app.calc import thanso, thanso_dong_doi, thanso_mo_rong as mr
 from app.config import ENGINE_VERSION
 from app.kb import store, thanso_v2 as kb2
 
@@ -62,12 +62,32 @@ def luan_chieu_sau(ngay: int, thang: int, nam_sinh: int,
         "dinh_cao": dinh_cao,
         "thu_thach_chinh": thu_thach_chinh,
         "nam_ca_nhan": nam_ca_nhan,
+        "dong_doi": luan_dong_doi(ngay, thang, nam_sinh, nam_moc),
         "trich_nguon": store.trich_nguon_depth(),
         "cach_doc_chieu_sau": (
             "Đỉnh cao là mạch năng lượng chủ đạo của từng GIAI ĐOẠN đời (theo tuổi). "
             "Thử thách là bài học khó lặp lại. Năm cá nhân là nhịp của từng năm dương "
             "lịch. Tất cả là mẫu hình để ĐỐI CHIẾU với đời thực, không phải mệnh lệnh."
         ),
+    }
+
+
+NHAN_MOC = {"chuyen_dinh": "Sang giai đoạn đời mới — đỉnh số {so}",
+            "khoi_chu_ky": "Mở chu kỳ 9 năm mới (năm cá nhân 1)",
+            "khep_chu_ky": "Khép chu kỳ 9 năm (năm cá nhân 9)"}
+
+
+def luan_dong_doi(ngay: int, thang: int, nam_sinh: int, nam_xem: int) -> dict:
+    """Trục đời: 4 giai đoạn (đỉnh + thử thách, có nghĩa) và các năm bước ngoặt theo nhịp số."""
+    dd = thanso_dong_doi.dong_doi(ngay, thang, nam_sinh, nam_xem)
+    return {
+        **dd,
+        "giai_doan": [{**g, "nghia": store.nghia_dinh_cao(g["so"]),
+                       "nghia_thu_thach": store.nghia_thu_thach(g["thu_thach"])} for g in dd["giai_doan"]],
+        "buoc_ngoat": [{**b, "nhan": NHAN_MOC[b["loai"]].format(so=b["so"])} for b in dd["buoc_ngoat"]],
+        "cach_doc": ("Bước ngoặt ở đây là nhịp của con số — năm chuyển giai đoạn, năm mở và khép chu kỳ 9 năm. "
+                     "Nhiều người thấy những năm này trùng với đổi việc, chuyển nhà, gắn bó hay chia tay; "
+                     "hãy đối chiếu với chính đời bạn, đừng coi là lời báo trước."),
     }
 
 
@@ -98,6 +118,52 @@ def luan_mo_rong(ten: str, ngay: int, thang: int, nam: int,
                            for s in cs["bai_hoc_nghiep"]],
         "trich_nguon": kb2.meta_phu()["nguon"],
         "trang_thai": kb2.meta_phu()["trang_thai"],
+    }
+
+
+MAT_CHAN_DUNG = ("tong_quan", "tinh_cam", "cong_viec", "bien_co")
+
+
+def _lop(nhan: str, so: int, khoi: str, truong: tuple[str, ...], so_truc: int) -> dict | None:
+    m = kb2.nghia_linh_vuc(so, khoi)
+    if not m:
+        return None
+    noi = " ".join(m[t] for t in truong if m.get(t))
+    if so == so_truc:
+        noi = "Trùng số Đường đời — nét này càng đậm. " + noi
+    return {"nhan": nhan, "so": so, "noi_dung": noi}
+
+
+def luan_chan_dung(chinh: dict[str, int], ngay: int, thang: int, nam: int) -> dict | None:
+    """Chân dung 4 mặt: trục là Đường đời (KB chân dung), mỗi mặt thêm một lớp từ chỉ số khác
+    (Linh hồn cho bên trong + tình cảm, Nhân cách cho vẻ ngoài, Sứ mệnh cho công việc,
+    Thử thách chính cho biến cố) — để hai người cùng Đường đời vẫn ra chân dung khác nhau."""
+    so = chinh["duong_doi"]
+    cd = kb2.chan_dung(so)
+    if cd is None:
+        return None
+    lh, nc, sm = chinh["linh_hon"], chinh["nhan_cach"], chinh["su_menh"]
+    tt = thanso.thu_thach(ngay, thang, nam)["thu_thach_chinh"]
+    ntt = store.nghia_thu_thach(tt)
+    nnc = store.nghia_so(nc)
+    lop = {
+        "tong_quan": [_lop(f"Bên trong — Linh hồn {lh}", lh, "ban_than", ("xu_huong",), so),
+                      {"nhan": f"Người ngoài thấy trước — Nhân cách {nc}", "so": nc,
+                       "noi_dung": f"{nnc['tu_khoa']}. Mặt dễ bị hiểu lầm: {nnc['mat_toi'].lower()}."} if nnc else None],
+        "tinh_cam": [_lop(f"Điều trái tim muốn — Linh hồn {lh}", lh, "tinh_yeu", ("xu_huong", "mat_toi"), so)],
+        "cong_viec": [_lop(f"Hướng vun đắp — Sứ mệnh {sm}", sm, "su_nghiep", ("xu_huong", "goi_y"), so),
+                      _lop(f"Với tiền bạc — Sứ mệnh {sm}", sm, "tai_chinh", ("xu_huong",), so)],
+        "bien_co": [{"nhan": f"Bài học lặp lại — Thử thách chính {tt}", "so": tt,
+                     "noi_dung": f"{ntt['mo_ta']}. {ntt['y_nghia']} Cách vượt: {ntt['cach_vuot']}"} if ntt else None],
+    }
+    ten = kb2.ten_mat_chan_dung()
+    return {
+        "so_truc": so,
+        "mat": [{"ma": m, "ten": ten[m], **cd[m], "lop_them": [x for x in lop[m] if x]} for m in MAT_CHAN_DUNG],
+        "cach_doc": ("Trục chân dung là số Đường đời; mỗi mặt có thêm một lớp từ con số khác của riêng bạn. "
+                     "Đây là các xu hướng thường được mô tả — đọc để tự đối chiếu, chỗ nào không đúng với bạn thì bỏ qua."),
+        "nguon": kb2._meta("chan_dung")["nguon"],
+        "trang_thai": cd["trang_thai"],
     }
 
 
@@ -177,6 +243,7 @@ def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int) -> dict:
         "cac_vi_tri": cac_vi_tri,
         "chieu_sau": luan_chieu_sau(ngay, thang, nam),
         "mo_rong": luan_mo_rong(ten_chinh, ngay, thang, nam),
+        "chan_dung": luan_chan_dung(chinh, ngay, thang, nam),
         "tom_tat_do_tin": (
             f"Kết quả theo quy ước chính thức (quy tắc Y khoá). "
             f"{so_on_dinh}/4 chỉ số ổn định qua mọi cách viết tên; "

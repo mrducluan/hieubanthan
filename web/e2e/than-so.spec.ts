@@ -127,3 +127,30 @@ test("nhập ÂM lịch: ngày 30 của tháng thiếu bị chặn; năm có th�
   await expect(page.getByTestId("nhac-nhuan")).toHaveCount(0);
   await expect(page.getByTestId("doi-lich")).toContainText("Dương lịch:");
 });
+
+test("TS-SAU: chân dung 4 mặt có lớp riêng; dòng đời + đối chiếu năm biến cố", async ({ page }) => {
+  await napHoSo(page, LUAN);
+  await page.goto("/ban-than");
+  const cd = page.getByTestId("chan-dung");
+  await expect(cd).toContainText("Điểm mạnh");
+  await expect(cd.getByTestId("lop-them")).toContainText("Linh hồn 6");
+  await cd.getByTestId("mat-cong_viec").click();
+  await expect(cd.getByTestId("nghe")).toContainText("Giáo dục");
+  await expect(cd.getByTestId("lop-them")).toContainText("Sứ mệnh 9");
+  await cd.getByTestId("mat-bien_co").click();
+  await cd.getByRole("link", { name: /bước ngoặt trên dòng đời/ }).click();
+
+  await expect(page).toHaveURL(/\/than-so#dong-doi/);
+  const dd = page.getByTestId("dong-doi");
+  await expect(dd.getByRole("img", { name: /Dòng đời/ }).first()).toBeVisible();
+  await expect(dd.getByTestId("moc-sap-toi")).toContainText("2027");   // năm cá nhân 9 → khép chu kỳ
+  const dc = page.getByTestId("doi-chieu-nam");
+  await dc.getByLabel("Năm có biến cố").fill("2019");
+  await dc.getByRole("button", { name: "Thêm năm" }).click();
+  await dc.getByRole("button", { name: "Đặt lên dòng đời" }).click();
+  const kq = page.getByTestId("ket-qua-doi-chieu");
+  await expect(kq).toContainText("2019");
+  await expect(kq).toContainText("Mở chu kỳ 9 năm mới");
+  await expect(kq).toContainText("Sang giai đoạn đời mới — đỉnh số 5");
+  await expect(kq).toContainText("Thường được đối chiếu với");
+});

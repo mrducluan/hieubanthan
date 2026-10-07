@@ -9,7 +9,11 @@ const Nguoi = z.object({
   nam: z.number().int().min(1900).max(2100),
 }).strict();
 
-const Input = z.object({ a: Nguoi, b: Nguoi }).strict();
+const Input = z.object({
+  a: Nguoi,
+  b: Nguoi,
+  quan_he: z.enum(["nguoi_yeu", "ban_be", "dong_nghiep", "sep", "gia_dinh"]).optional(),
+}).strict();
 
 export function POST(req: Request) {
   return goiEngine(req, Input, "/v1/thanso/hop-doi");

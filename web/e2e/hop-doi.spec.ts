@@ -19,6 +19,31 @@ test("A so với người ấy: cặp đường đời + 3 cặp theo tên, khô
   await expect(kq).toContainText("Không có điểm số hợp hay khắc");
 });
 
+test("TS-SAU: hợp đôi theo loại quan hệ — sếp khác người yêu, có nhịp năm hai người", async ({ page }) => {
+  await napHoSo(page, LUAN);
+  await page.goto("/hop-doi");
+  await page.getByTestId("quan-he-sep").click();
+  await page.getByLabel("Ngày sinh người ấy").fill("13");
+  await page.getByLabel("Tháng sinh người ấy").fill("5");
+  await page.getByLabel("Năm sinh người ấy").fill("1990");
+  await page.getByRole("button", { name: "Xem hai người" }).click();
+  const kq = page.getByTestId("ket-qua-hop-doi");
+  await expect(kq.getByTestId("ten-quan-he")).toHaveText("Sếp");
+  await expect(kq).toContainText("Làm việc với sếp của bạn");
+  await expect(kq.getByTestId("the-vai").first()).toContainText("trong vai sếp");
+  await expect(kq.getByTestId("the-vai").first()).toContainText("Cách nói chuyện hợp");
+  await expect(kq.getByTestId("nhip-nam")).toBeVisible();
+
+  await page.getByRole("button", { name: "So với người khác" }).click();
+  await page.getByTestId("quan-he-ban_be").click();
+  await page.getByLabel("Ngày sinh người ấy").fill("13");
+  await page.getByLabel("Tháng sinh người ấy").fill("5");
+  await page.getByLabel("Năm sinh người ấy").fill("1990");
+  await page.getByRole("button", { name: "Xem hai người" }).click();
+  await expect(page.getByTestId("ten-quan-he")).toHaveText("Bạn bè");
+  await expect(page.getByTestId("the-vai").first()).toContainText("trong vai bạn");
+});
+
 test("link mời: A tạo → B mở, nhập ngày sinh → thấy kết quả; mã sai bị chặn", async ({ page, browser }) => {
   await napHoSo(page, LUAN);
   await page.goto("/hop-doi");

@@ -1,0 +1,391 @@
+{
+  "_nguon": "Chân dung theo số Đường đời (trục chính) — 4 mặt: tổng quan, tình cảm, công việc, biến cố/bước ngoặt. Khung mục tham khảo cấu trúc 'dossier' của anko-ki-maya (MIT, Mahesh Koria) — KHÔNG chép nội dung (bản gốc theo mulank Ấn Độ, khác trường phái); toàn bộ văn tiếng Việt do AI biên soạn theo truyền thống Pythagoras (Balliett–Jordan và sách thần số phổ biến). Viết ở dạng 'thường được mô tả', luôn kèm điểm mù — không dự báo sự kiện.",
+  "source": {
+    "id": "nhap_ai_2026",
+    "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến; khung mục tham khảo anko-ki-maya (MIT)",
+    "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+  },
+  "source_id": "nhap_ai_2026",
+  "school_id": "pythagoras_vn",
+  "trang_thai": "nhap_ai",
+  "mat": {
+    "tong_quan": "Tổng quan",
+    "tinh_cam": "Tình cảm",
+    "cong_viec": "Công việc & tiền bạc",
+    "bien_co": "Biến cố & bước ngoặt"
+  },
+  "so": {
+    "1": {
+      "tong_quan": {
+        "chan_dung": "Người mang số 1 thường được mô tả là người mở đường: đứng trước một khoảng trống, họ thấy chỗ để bắt đầu chứ không thấy rủi ro. Họ học bằng cách tự làm, tự vấp, và tự đứng dậy — ít khi chờ ai cho phép.",
+        "dong_luc": "Được tự quyết và được thấy dấu ấn của chính mình trong việc mình làm.",
+        "diem_manh": ["Quyết nhanh, dám chịu trách nhiệm cho quyết định", "Khởi động được việc mà người khác còn bàn", "Bền bỉ khi đã chọn mục tiêu"],
+        "diem_mu": ["Nghe góp ý như bị thách thức, nên phản ứng trước khi nghe hết", "Coi việc nhờ giúp là yếu, nên ôm việc tới kiệt sức", "Dễ để người bên cạnh 'nhỏ lại' mà không nhận ra"],
+        "khi_cang_thang": "Siết kiểm soát: tự làm hết, ra quyết định một mình, nói ngắn và cứng hơn thường lệ.",
+        "huong_lon": "Từ 'tôi làm được một mình' sang 'tôi dẫn được người khác cùng làm' — sức mạnh thật là để người khác cũng lớn lên."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu bằng hành động: che chở, lo liệu, đưa ra phương án. Thích chủ động từ lúc tìm hiểu đến lúc quyết định gắn bó.",
+        "can_duoc": "Được tôn trọng quyết định, được ghi nhận công sức, và có khoảng riêng mà không bị coi là lạnh nhạt.",
+        "diem_mu": "Dễ quyết thay cho cả hai; coi cảm xúc của người kia là 'vấn đề cần giải quyết' thay vì điều cần lắng nghe.",
+        "hop_kieu_nguoi": "Người có chính kiến riêng, đủ vững để nói 'không' với họ mà vẫn ở lại.",
+        "dau_hieu_lech": "Khi người kia ngày càng ít nói ý mình, chỉ còn 'tuỳ anh/tuỳ em' — đó là dấu hiệu số 1 đang lấn át.",
+        "hon_nhan": "Thường nhận vai trụ cột, lo phần lớn quyết định lớn; cần tập bàn trước khi quyết, nhất là chuyện tiền và nơi ở."
+      },
+      "cong_viec": {
+        "the_manh": "Khởi xướng, dẫn đầu, làm việc độc lập, chịu được áp lực quyết định.",
+        "moi_truong": "Nơi được giao quyền, đo bằng kết quả, ít thủ tục chờ duyệt.",
+        "vai_tro": "Người khởi động dự án, trưởng nhóm, người tự kinh doanh.",
+        "nghe": ["Khởi nghiệp, kinh doanh riêng", "Quản lý dự án", "Bán hàng, phát triển thị trường", "Kỹ sư, kiến trúc sư thiết kế giải pháp mới", "Thể thao, huấn luyện"],
+        "cai_bay": "Khởi động nhiều, giao lại ít; khó làm dưới quyền người mình không phục.",
+        "tien_bac": "Dám đầu tư cho ý tưởng của mình; dễ chi mạnh tay vì tin vào phán đoán — cần một người hoặc một quy tắc để phản biện trước khi xuống tiền lớn."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Những bước ngoặt hay được kể lại thường là lúc phải tự đứng một mình: rời nhà sớm, mất chỗ dựa, bị đẩy vào vai người quyết định khi chưa sẵn sàng.",
+        "bai_hoc": "Độc lập không có nghĩa là cô lập.",
+        "cach_di_qua": "Khi đời đặt bạn vào thế phải tự quyết, hãy quyết — nhưng kể cho ít nhất một người tin cậy nghe trước khi làm."
+      }
+    },
+    "2": {
+      "tong_quan": {
+        "chan_dung": "Số 2 thường được mô tả là người cảm được không khí trước khi ai nói ra. Họ là chất keo của nhóm: hoà giải, kết nối, giữ cho mọi người còn ngồi được với nhau.",
+        "dong_luc": "Được ở trong những mối quan hệ êm ấm, có qua có lại và được người khác cần đến.",
+        "diem_manh": ["Lắng nghe sâu, đọc được cảm xúc người khác", "Khéo hợp tác, làm việc nhóm bền", "Kiên nhẫn, chịu được nhịp chậm"],
+        "diem_mu": ["Né xung đột đến mức để chuyện nhỏ thành chuyện lớn", "Nói 'có' khi muốn nói 'không'", "Lấy phản ứng người khác làm thước đo giá trị bản thân"],
+        "khi_cang_thang": "Thu mình, im lặng, tự trách; dễ ôm tổn thương mà không nói ra.",
+        "huong_lon": "Từ 'giữ hoà khí bằng mọi giá' sang 'nói thật một cách tử tế' — hoà hợp thật cần cả tiếng nói của mình."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu bằng sự chú tâm: nhớ chi tiết nhỏ, chăm lo cảm xúc, ở bên lặng lẽ.",
+        "can_duoc": "Được chắc chắn rằng mình được yêu — qua lời nói, sự có mặt, sự nhất quán.",
+        "diem_mu": "Dễ hoà tan vào người kia, quên mình muốn gì; giận mà không nói, rồi tổn thương âm ỉ.",
+        "hop_kieu_nguoi": "Người ấm áp, nói rõ ràng, chủ động hỏi han mà không cần được đoán ý.",
+        "dau_hieu_lech": "Khi số 2 bắt đầu 'thôi kệ' và không còn kể chuyện của mình — khoảng cách đang lớn dần.",
+        "hon_nhan": "Coi trọng sự gắn bó và êm ấm gia đình; cần tập đặt ranh giới với gia đình hai bên."
+      },
+      "cong_viec": {
+        "the_manh": "Phối hợp, hỗ trợ, đàm phán mềm, chăm sóc khách hàng, làm việc tỉ mỉ.",
+        "moi_truong": "Nhóm hoà thuận, có người dẫn dắt rõ ràng, được ghi nhận đóng góp thầm lặng.",
+        "vai_tro": "Cánh tay phải, người điều phối, người kết nối các bên.",
+        "nghe": ["Nhân sự, tư vấn tâm lý", "Ngoại giao, đàm phán", "Trợ lý điều hành", "Chăm sóc khách hàng", "Âm nhạc, nghệ thuật cần sự tinh tế"],
+        "cai_bay": "Làm nhiều nhưng không lên tiếng nhận phần mình; bị giao việc 'không tên' quá sức.",
+        "tien_bac": "Thận trọng, thích sự an toàn; dễ cho mượn vì nể — cần một con số giới hạn rõ trước khi giúp ai."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Bước ngoặt hay đến qua quan hệ: một cuộc chia tay, một lần bị phụ lòng, hoặc một người xuất hiện đúng lúc làm thay đổi hướng đi.",
+        "bai_hoc": "Nhạy cảm là món quà khi đi kèm ranh giới.",
+        "cach_di_qua": "Khi mối quan hệ chao đảo, hãy hỏi 'mình cần gì?' trước khi hỏi 'người kia nghĩ gì?'."
+      }
+    },
+    "3": {
+      "tong_quan": {
+        "chan_dung": "Số 3 thường được mô tả là người mang niềm vui và ngôn từ: kể chuyện cuốn, nghĩ ra ý tưởng nhanh, làm không khí sáng lên. Bên dưới vẻ vô tư thường là một tâm hồn nhạy và dễ tự hoài nghi.",
+        "dong_luc": "Được thể hiện bản thân và được người khác đón nhận điều mình tạo ra.",
+        "diem_manh": ["Diễn đạt, thuyết phục, truyền cảm hứng", "Sáng tạo, nhiều ý tưởng", "Lạc quan, dễ kết nối"],
+        "diem_mu": ["Bắt đầu nhiều, hoàn thành ít khi hết hứng", "Dùng câu đùa để né chuyện nghiêm túc", "Phân tán năng lượng vào quá nhiều thứ"],
+        "khi_cang_thang": "Nói nhiều hơn, vui gượng, hoặc ngược lại im hẳn và tự chỉ trích.",
+        "huong_lon": "Từ 'nhiều ý tưởng' sang 'một tác phẩm hoàn chỉnh' — kỷ luật là thứ biến tài năng thành giá trị."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu bằng niềm vui, lời nói, những bất ngờ nhỏ; thích mối quan hệ có tiếng cười.",
+        "can_duoc": "Được khen, được nghe, được là chính mình mà không bị chê 'trẻ con'.",
+        "diem_mu": "Né những cuộc nói chuyện khó bằng cách đổi chủ đề; dễ chán khi quan hệ vào giai đoạn đều đều.",
+        "hop_kieu_nguoi": "Người biết thưởng thức sự hài hước của họ nhưng đủ vững để kéo về chuyện thật khi cần.",
+        "dau_hieu_lech": "Khi số 3 chỉ còn đùa mà không còn kể chuyện thật lòng — họ đang tránh một điều gì đó.",
+        "hon_nhan": "Mang không khí vui vào nhà; cần thống nhất trách nhiệm cụ thể để việc nhà, tiền bạc không trôi."
+      },
+      "cong_viec": {
+        "the_manh": "Giao tiếp, viết, trình bày, sáng tạo nội dung, làm việc với con người.",
+        "moi_truong": "Năng động, có chỗ cho ý tưởng mới, không quá nặng quy trình.",
+        "vai_tro": "Người truyền thông, người lên ý tưởng, gương mặt đại diện.",
+        "nghe": ["Truyền thông, marketing, sáng tạo nội dung", "Viết, báo chí, biên kịch", "Giảng dạy, đào tạo", "Nghệ thuật biểu diễn, thiết kế", "Bán hàng tư vấn"],
+        "cai_bay": "Ôm nhiều dự án dở dang; dễ chán việc lặp lại dù việc đó cần cho thành công.",
+        "tien_bac": "Chi tiêu theo cảm hứng, hào phóng với bạn bè; cần hệ thống tự động (tiết kiệm trước, tiêu sau)."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Bước ngoặt thường đến khi buộc phải chọn một hướng duy nhất, hoặc sau một lần tài năng bị đánh giá thấp khiến họ phải tự chứng minh.",
+        "bai_hoc": "Tài năng cần một nơi để đổ vào đến cùng.",
+        "cach_di_qua": "Chọn một việc, đặt hạn chót công khai, và hoàn thành nó trước khi mở việc mới."
+      }
+    },
+    "4": {
+      "tong_quan": {
+        "chan_dung": "Số 4 thường được mô tả là người xây nền: kỷ luật, đáng tin, làm từng bước chắc chắn. Họ không ồn ào, nhưng khi họ nói 'được' thì việc sẽ xong.",
+        "dong_luc": "Sự ổn định, trật tự và cảm giác mình đang xây một thứ bền lâu.",
+        "diem_manh": ["Chăm chỉ, kiên trì, giữ lời", "Có hệ thống, làm việc chi tiết", "Thực tế, biết lường rủi ro"],
+        "diem_mu": ["Cứng nhắc khi kế hoạch thay đổi", "Khó chấp nhận cách làm khác cách mình", "Làm việc quá sức vì nghĩ nghỉ ngơi là lười"],
+        "khi_cang_thang": "Bám chặt quy tắc, khó tính, càu nhàu; làm thêm việc thay vì nói ra mình mệt.",
+        "huong_lon": "Từ 'đúng quy trình' sang 'linh hoạt mà vẫn vững' — nền tốt là nền chịu được thay đổi."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu bằng sự có mặt bền bỉ: giữ lời hứa, lo chuyện thực tế, xây kế hoạch chung.",
+        "can_duoc": "Sự chung thuỷ, nhất quán và cảm giác an toàn — không thích bất ngờ lớn.",
+        "diem_mu": "Thể hiện tình cảm khô khan; nghĩ 'làm cho' là đủ mà quên 'nói cho'.",
+        "hop_kieu_nguoi": "Người trân trọng sự ổn định nhưng mang thêm chút ấm áp và nhẹ nhõm.",
+        "dau_hieu_lech": "Khi quan hệ chỉ còn lịch trình và bổn phận, không còn thời gian vui chung.",
+        "hon_nhan": "Trụ cột vững về tài chính và nề nếp; cần chủ động dành thời gian lãng mạn như một 'việc phải làm'."
+      },
+      "cong_viec": {
+        "the_manh": "Tổ chức, vận hành, làm việc chính xác, quản lý quy trình và con số.",
+        "moi_truong": "Có cấu trúc rõ, mục tiêu đo được, được tin giao trách nhiệm lâu dài.",
+        "vai_tro": "Người vận hành, người giữ chất lượng, quản lý tầng giữa.",
+        "nghe": ["Kế toán, kiểm toán, tài chính", "Kỹ thuật, xây dựng", "Quản lý vận hành, chuỗi cung ứng", "Lập trình, phân tích dữ liệu", "Luật, hành chính"],
+        "cai_bay": "Làm tốt việc được giao nhưng ngại nhận việc mới chưa rõ cách làm; dễ bị bỏ lại khi ngành thay đổi.",
+        "tien_bac": "Tiết kiệm, tích luỹ đều; cần cho phép mình chi cho trải nghiệm và học cái mới."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Bước ngoặt hay là những lúc nền tảng bị lung lay: mất việc ổn định, thay đổi chính sách, kế hoạch dài hạn phải làm lại từ đầu.",
+        "bai_hoc": "An toàn thật đến từ khả năng thích nghi, không từ việc mọi thứ đứng yên.",
+        "cach_di_qua": "Khi kế hoạch đổ, hãy chia việc làm lại thành các bước nhỏ nhất có thể làm trong tuần này."
+      }
+    },
+    "5": {
+      "tong_quan": {
+        "chan_dung": "Số 5 thường được mô tả là người của tự do và trải nghiệm: tò mò, thích đi, thích thử, thích nhịp sống có biến động. Họ học bằng cách sống nhiều cuộc đời trong một đời.",
+        "dong_luc": "Tự do lựa chọn và cảm giác đời mình đang chuyển động.",
+        "diem_manh": ["Thích nghi nhanh với hoàn cảnh mới", "Giao tiếp linh hoạt, thuyết phục", "Dám thử, dám thay đổi"],
+        "diem_mu": ["Khó cam kết lâu dài", "Bốc đồng khi chán", "Dễ sa đà vào những thứ đem lại cảm giác mạnh"],
+        "khi_cang_thang": "Muốn bỏ đi, đổi việc, đổi chỗ — chạy khỏi cảm giác bị giam.",
+        "huong_lon": "Từ 'tự do khỏi mọi ràng buộc' sang 'tự do chọn điều đáng gắn bó' — cam kết đúng chỗ cũng là một kiểu tự do."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu bằng trải nghiệm chung: đi đây đi đó, thử điều mới, những cuộc nói chuyện thú vị.",
+        "can_duoc": "Không gian riêng, sự tin tưởng, và một mối quan hệ không đơn điệu.",
+        "diem_mu": "Dễ chán khi mọi thứ ổn định; nhầm sự an toàn với sự nhàm chán.",
+        "hop_kieu_nguoi": "Người độc lập, có đời sống riêng phong phú, không giữ chặt.",
+        "dau_hieu_lech": "Khi số 5 bắt đầu tìm cảm giác mới ở ngoài mối quan hệ — cần nói ra nhu cầu đổi mới trước khi muộn.",
+        "hon_nhan": "Cần một hôn nhân có 'cửa sổ': mỗi người có khoảng riêng và hai người có những chuyến đi chung định kỳ."
+      },
+      "cong_viec": {
+        "the_manh": "Bán hàng, truyền thông, đàm phán, xử lý tình huống, làm việc đa nhiệm.",
+        "moi_truong": "Thay đổi liên tục, đi lại nhiều, được gặp người mới, tự chủ thời gian.",
+        "vai_tro": "Người mở thị trường, người xử lý khủng hoảng, người kết nối đa ngành.",
+        "nghe": ["Du lịch, khách sạn, hàng không", "Bán hàng, phát triển kinh doanh", "Báo chí, truyền thông", "Sự kiện, giải trí", "Tự do (freelance), kinh doanh online"],
+        "cai_bay": "Nhảy việc khi vừa hết cảm giác mới, nên khó tích luỹ chiều sâu và vị trí.",
+        "tien_bac": "Kiếm nhanh, tiêu nhanh; dễ bị hấp dẫn bởi cơ hội 'làm giàu nhanh' — cần một khoản không đụng tới."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Đời số 5 thường nhiều bước ngoặt: chuyển nơi sống, đổi nghề, những quyết định bất ngờ — có khi tự chọn, có khi hoàn cảnh đẩy tới.",
+        "bai_hoc": "Thay đổi chỉ có giá trị khi mình học được điều gì từ nó.",
+        "cach_di_qua": "Trước mỗi thay đổi lớn, viết ra: 'mình đang chạy tới điều gì, hay chạy khỏi điều gì?'."
+      }
+    },
+    "6": {
+      "tong_quan": {
+        "chan_dung": "Số 6 thường được mô tả là người của trách nhiệm và chăm sóc: gia đình, bạn bè, cộng đồng tìm đến họ khi cần. Họ có con mắt thẩm mỹ và khao khát làm mọi thứ xung quanh trở nên hài hoà.",
+        "dong_luc": "Được yêu thương, được cần đến và thấy những người mình lo đều ổn.",
+        "diem_manh": ["Tận tâm, có trách nhiệm", "Ấm áp, biết chăm sóc", "Có gu thẩm mỹ, biết tạo không gian dễ chịu"],
+        "diem_mu": ["Lo thay, quyết thay cho người khác", "Hy sinh rồi mong được đền đáp", "Cầu toàn, khó chấp nhận sự không hoàn hảo"],
+        "khi_cang_thang": "Lo âu, kiểm soát, nhắc nhở nhiều; dễ thấy mình là người duy nhất gánh mọi thứ.",
+        "huong_lon": "Từ 'chăm cho mọi người' sang 'chăm cả chính mình' — người kiệt sức không chăm được ai lâu."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu bằng sự chăm lo: nấu ăn, nhắc nhở, lo chuyện nhà, hướng về tương lai chung.",
+        "can_duoc": "Được ghi nhận, được trân trọng những điều mình làm, và một mái nhà ấm.",
+        "diem_mu": "Dễ biến tình yêu thành bổn phận và sự quản lý; khó chấp nhận người kia khác ý mình.",
+        "hop_kieu_nguoi": "Người biết nói lời cảm ơn, có trách nhiệm và cùng chia việc nhà.",
+        "dau_hieu_lech": "Khi số 6 bắt đầu kể công hoặc thấy mình 'bị coi như người giúp việc' — cần nói ra trước khi oán giận.",
+        "hon_nhan": "Thường coi gia đình là trung tâm đời mình; cần giữ một phần đời riêng ngoài vai vợ/chồng, cha/mẹ."
+      },
+      "cong_viec": {
+        "the_manh": "Chăm sóc, giáo dục, tư vấn, thẩm mỹ, xây dựng cộng đồng.",
+        "moi_truong": "Có giá trị nhân văn, quan hệ con người tốt, được thấy mình giúp ích.",
+        "vai_tro": "Người cố vấn, người giữ văn hoá nhóm, người lo cho đội.",
+        "nghe": ["Giáo dục, mầm non", "Y tế, chăm sóc sức khoẻ, điều dưỡng", "Tư vấn, công tác xã hội", "Thiết kế nội thất, thời trang, làm đẹp", "Ẩm thực, nhà hàng"],
+        "cai_bay": "Gánh việc của người khác, khó từ chối; làm nhiều nhưng ngại đòi quyền lợi.",
+        "tien_bac": "Chi nhiều cho gia đình và người thân; cần quỹ riêng cho bản thân và tuổi già."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Bước ngoặt hay gắn với gia đình: lập gia đình, có con, chăm cha mẹ, hoặc một lần phải chọn giữa trách nhiệm và ước mơ riêng.",
+        "bai_hoc": "Yêu thương không có nghĩa là gánh hết.",
+        "cach_di_qua": "Khi gánh nặng gia đình dồn lên, hãy chia việc thành tên từng người — và tự đưa tên mình vào danh sách được chăm."
+      }
+    },
+    "7": {
+      "tong_quan": {
+        "chan_dung": "Số 7 thường được mô tả là người tìm chân lý: thích đào sâu, hỏi 'tại sao', cần thời gian một mình để nghĩ. Họ có vẻ xa cách nhưng bên trong là một thế giới phong phú.",
+        "dong_luc": "Hiểu tận gốc mọi thứ và tìm ra ý nghĩa thật phía sau bề mặt.",
+        "diem_manh": ["Phân tích sắc, tư duy độc lập", "Trực giác tốt, nhìn ra điều người khác bỏ sót", "Tập trung sâu, chuyên môn cao"],
+        "diem_mu": ["Khép kín, khó chia sẻ cảm xúc", "Hoài nghi, khó tin người", "Dễ nghĩ quá nhiều mà làm quá ít"],
+        "khi_cang_thang": "Rút vào trong, im lặng kéo dài, trở nên châm biếm hoặc lạnh lùng.",
+        "huong_lon": "Từ 'hiểu một mình' sang 'chia sẻ điều mình hiểu' — trí tuệ có giá trị khi có người nhận."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu chậm và sâu; thể hiện qua những cuộc trò chuyện thật lòng hơn là lời ngọt.",
+        "can_duoc": "Sự tôn trọng khoảng lặng, một người hiểu mà không cần giải thích nhiều.",
+        "diem_mu": "Khó mở lòng, để người kia đoán; dễ rút lui khi bị đòi hỏi cảm xúc nhiều.",
+        "hop_kieu_nguoi": "Người sâu sắc, tôn trọng sự riêng tư và đủ kiên nhẫn chờ họ mở lòng.",
+        "dau_hieu_lech": "Khi số 7 ngày càng sống song song — có mặt nhưng không chia sẻ.",
+        "hon_nhan": "Cần một hôn nhân có không gian riêng; nên hẹn những buổi nói chuyện định kỳ để không thành hai người xa lạ."
+      },
+      "cong_viec": {
+        "the_manh": "Nghiên cứu, phân tích, chuyên môn sâu, giải quyết vấn đề phức tạp.",
+        "moi_truong": "Yên tĩnh, coi trọng chất lượng, cho thời gian suy nghĩ, ít họp hành vô ích.",
+        "vai_tro": "Chuyên gia, người nghiên cứu, cố vấn chiến lược.",
+        "nghe": ["Nghiên cứu khoa học, học thuật", "Công nghệ, phân tích dữ liệu", "Y dược, kỹ thuật chuyên sâu", "Tâm lý học, triết học", "Viết chuyên đề, biên tập"],
+        "cai_bay": "Giỏi nhưng không ai biết vì ngại tự giới thiệu; dễ cầu toàn đến chậm tiến độ.",
+        "tien_bac": "Thận trọng, đầu tư khi đã hiểu kỹ; đôi khi xem nhẹ tiền bạc vì thấy nó không quan trọng bằng tri thức."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Bước ngoặt thường đến từ bên trong: một khủng hoảng niềm tin, một lần mất đi điều tưởng chắc chắn, buộc họ tìm lại ý nghĩa sống.",
+        "bai_hoc": "Có những câu hỏi không có lời giải, chỉ có cách sống cùng.",
+        "cach_di_qua": "Khi mọi thứ đổ vỡ, cho mình thời gian lặng — nhưng đặt hạn để quay lại kết nối với người khác."
+      }
+    },
+    "8": {
+      "tong_quan": {
+        "chan_dung": "Số 8 thường được mô tả là người của thành tựu và quyền lực thực tế: nhìn ra cơ hội, biết tổ chức nguồn lực, muốn kết quả đo đếm được. Họ có uy, và đời thường thử thách họ bằng chính tiền bạc và quyền hạn.",
+        "dong_luc": "Thành công cụ thể, sự công nhận và khả năng tự chủ tài chính.",
+        "diem_manh": ["Tầm nhìn kinh doanh, nắm bắt cơ hội", "Quản lý nguồn lực, ra quyết định lớn", "Bản lĩnh, chịu áp lực tốt"],
+        "diem_mu": ["Đo giá trị bằng thành tích, kể cả giá trị bản thân", "Cứng rắn quá mức, ít bộc lộ yếu đuối", "Dễ cuốn vào công việc, bỏ quên quan hệ"],
+        "khi_cang_thang": "Kiểm soát chặt, nóng nảy, làm việc nhiều hơn nữa để lấy lại cảm giác nắm quyền.",
+        "huong_lon": "Từ 'quyền lực để có' sang 'quyền lực để cho' — thành công bền khi nâng được người khác."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu bằng sự bảo bọc và cung cấp: lo đời sống vật chất, xây tương lai chắc chắn.",
+        "can_duoc": "Được tôn trọng, được tin vào năng lực, có người đồng hành cùng tham vọng.",
+        "diem_mu": "Dễ coi tiền và quà là đủ thay lời yêu thương; khó nói 'anh/em cần em/anh'.",
+        "hop_kieu_nguoi": "Người tự tin, có sự nghiệp riêng, không bị lấn át bởi cá tính mạnh.",
+        "dau_hieu_lech": "Khi mọi cuộc nói chuyện chỉ còn công việc và tiền — hoặc khi có tranh giành ai quyết.",
+        "hon_nhan": "Thường xây được nền vật chất vững; cần thoả thuận rõ chuyện tài chính chung – riêng ngay từ đầu."
+      },
+      "cong_viec": {
+        "the_manh": "Kinh doanh, quản trị, tài chính, đàm phán lớn, xây dựng tổ chức.",
+        "moi_truong": "Có cơ hội thăng tiến, thưởng theo kết quả, quy mô đủ lớn để phát huy.",
+        "vai_tro": "Người điều hành, chủ doanh nghiệp, người ra quyết định đầu tư.",
+        "nghe": ["Quản trị doanh nghiệp", "Tài chính, ngân hàng, đầu tư", "Bất động sản", "Luật kinh doanh", "Quản lý cấp cao"],
+        "cai_bay": "Mạo hiểm quá tay khi tự tin; đặt kết quả trên con người khiến đội kiệt sức.",
+        "tien_bac": "Có khả năng kiếm và quản lý tiền lớn; đời số 8 hay có những lần lên xuống tài chính — cần quỹ dự phòng và người phản biện."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Bước ngoặt hay xoay quanh tiền, địa vị và quyền hạn: thăng tiến lớn, thất bại kinh doanh, tranh chấp, hoặc lần đứng lên từ con số không.",
+        "bai_hoc": "Giá trị con người không nằm trong bảng cân đối tài sản.",
+        "cach_di_qua": "Khi thất bại, tách 'việc thất bại' khỏi 'tôi thất bại' — rồi đếm lại những gì vẫn còn: kỹ năng, quan hệ, sức khoẻ."
+      }
+    },
+    "9": {
+      "tong_quan": {
+        "chan_dung": "Số 9 thường được mô tả là người có tầm nhìn rộng và lòng bao dung: quan tâm tới điều lớn hơn bản thân, dễ đồng cảm, nhiều lý tưởng. Đời họ hay có những lần buông bỏ để bước sang trang mới.",
+        "dong_luc": "Làm điều có ý nghĩa cho người khác và cho thế giới.",
+        "diem_manh": ["Bao dung, đồng cảm sâu", "Tầm nhìn rộng, nghĩ cho số đông", "Có khiếu nghệ thuật và truyền cảm hứng"],
+        "diem_mu": ["Lý tưởng hoá người khác rồi thất vọng", "Cho đi đến mức quên bản thân", "Khó buông quá khứ dù miệng nói đã buông"],
+        "khi_cang_thang": "Xa cách, buồn bã, thấy mình không được hiểu; đôi khi rút lui khỏi mọi thứ.",
+        "huong_lon": "Từ 'cứu thế giới' sang 'phục vụ trong giới hạn của mình' — lòng tốt cũng cần biết đủ."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu rộng lượng, lãng mạn, sẵn sàng tha thứ và hy sinh.",
+        "can_duoc": "Được hiểu những lý tưởng của mình và được yêu cả phần mong manh.",
+        "diem_mu": "Dễ yêu hình ảnh mình tưởng tượng hơn con người thật; ôm nỗi buồn không nói.",
+        "hop_kieu_nguoi": "Người có chiều sâu, có giá trị sống rõ ràng và biết kéo họ về đời thực một cách dịu dàng.",
+        "dau_hieu_lech": "Khi số 9 bắt đầu 'cho đi' với cả thế giới mà quên người bên cạnh, hoặc âm thầm chuẩn bị rời đi.",
+        "hon_nhan": "Một người bạn đời rộng lượng; cần chú ý những việc đời thường (tiền, nhà cửa) mà họ hay coi là nhỏ."
+      },
+      "cong_viec": {
+        "the_manh": "Truyền cảm hứng, giảng dạy, nghệ thuật, hoạt động xã hội, nhìn bức tranh lớn.",
+        "moi_truong": "Có sứ mệnh rõ, tác động tới nhiều người, được làm điều mình tin.",
+        "vai_tro": "Người truyền lửa, người cố vấn, người đại diện cho giá trị chung.",
+        "nghe": ["Giáo dục, đào tạo", "Tổ chức phi lợi nhuận, công tác xã hội", "Nghệ thuật, văn chương, điện ảnh", "Y tế, chữa lành", "Ngoại giao, quan hệ quốc tế"],
+        "cai_bay": "Làm việc vì lý tưởng mà quên điều kiện sống; dễ kiệt sức hoặc vỡ mộng.",
+        "tien_bac": "Không đặt nặng tiền, dễ cho đi; cần học rằng có tiền là có thêm khả năng giúp người."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Đời số 9 nhiều cuộc khép lại: kết thúc một mối quan hệ, rời một nơi, khép một giai đoạn — mỗi lần là một lần học buông.",
+        "bai_hoc": "Kết thúc là một phần của vòng đời, không phải thất bại.",
+        "cach_di_qua": "Khi một chương khép lại, làm một nghi thức nhỏ để chào tạm biệt — rồi mới nhìn sang chương mới."
+      }
+    },
+    "11": {
+      "tong_quan": {
+        "chan_dung": "Số 11 là số cái, thường được mô tả như số 2 tăng cường: trực giác rất nhạy, có khả năng truyền cảm hứng, nhưng cũng mang căng thẳng thần kinh cao. Họ thấy những điều người khác chưa thấy, và đời buộc họ học cách sống với độ nhạy đó.",
+        "dong_luc": "Mang lại ánh sáng, ý nghĩa hoặc niềm tin cho người khác.",
+        "diem_manh": ["Trực giác, cảm nhận sâu sắc", "Truyền cảm hứng, có sức hút tinh thần", "Óc sáng tạo và tầm nhìn"],
+        "diem_mu": ["Lo âu, căng thẳng, dễ quá tải cảm xúc", "Kỳ vọng rất cao vào bản thân rồi tự dằn vặt", "Khó đưa ý tưởng xuống đời thực"],
+        "khi_cang_thang": "Bồn chồn, mất ngủ, dễ xúc động mạnh; có lúc nghi ngờ hoàn toàn chính mình.",
+        "huong_lon": "Từ 'cảm nhận mọi thứ' sang 'chọn điều để cảm nhận' — độ nhạy cần được chăm như một nhạc cụ quý."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu sâu, gắn kết bằng tâm hồn; mong một mối quan hệ có ý nghĩa vượt trên đời thường.",
+        "can_duoc": "Được hiểu mà không bị coi là 'nhạy cảm quá', được an toàn cảm xúc.",
+        "diem_mu": "Lý tưởng hoá người yêu; dễ tổn thương bởi chi tiết nhỏ và đọc ý quá mức.",
+        "hop_kieu_nguoi": "Người điềm tĩnh, vững vàng, giúp họ 'tiếp đất' mà không dập tắt lý tưởng.",
+        "dau_hieu_lech": "Khi số 11 im lặng kéo dài hoặc cảm xúc lên xuống thất thường — họ đang quá tải.",
+        "hon_nhan": "Cần nhịp sống gia đình đều đặn để cân bằng thần kinh; nên có thói quen chung giúp thư giãn."
+      },
+      "cong_viec": {
+        "the_manh": "Truyền cảm hứng, tư vấn, sáng tạo, làm việc cần trực giác và tầm nhìn.",
+        "moi_truong": "Giàu ý nghĩa, ít xung đột gay gắt, tôn trọng sự sáng tạo.",
+        "vai_tro": "Người định hướng tinh thần, người sáng tạo, người chữa lành.",
+        "nghe": ["Tư vấn, trị liệu tâm lý", "Nghệ thuật, âm nhạc, thiết kế", "Giảng dạy, diễn giả", "Truyền thông có sứ mệnh", "Nghiên cứu sáng tạo"],
+        "cai_bay": "Nhiều tầm nhìn nhưng khó triển khai; dễ kiệt sức trong môi trường cạnh tranh gắt.",
+        "tien_bac": "Không giỏi chi tiết tiền bạc; cần một người hoặc công cụ quản lý đều đặn."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Bước ngoặt thường là những lần 'thức tỉnh': một trải nghiệm làm đổi hẳn cách nhìn đời, thường đi sau một giai đoạn căng thẳng lớn.",
+        "bai_hoc": "Độ nhạy là món quà khi có nền vững để đứng.",
+        "cach_di_qua": "Trong giai đoạn chao đảo, giữ những thói quen thân thể đơn giản (ngủ, đi bộ, ăn đúng bữa) như mỏ neo."
+      }
+    },
+    "22": {
+      "tong_quan": {
+        "chan_dung": "Số 22 là số cái, thường được gọi là 'người kiến tạo lớn' — như số 4 mang tầm nhìn của số 11: muốn biến ý tưởng lớn thành công trình thật. Áp lực với chính mình thường rất cao.",
+        "dong_luc": "Xây được điều có giá trị lâu dài cho nhiều người.",
+        "diem_manh": ["Tầm nhìn lớn đi cùng óc thực tế", "Tổ chức, quản lý dự án quy mô", "Kiên định, chịu được áp lực dài hạn"],
+        "diem_mu": ["Áp lực phải làm 'điều lớn' khiến khó bắt đầu", "Kiểm soát, ôm đồm", "Hy sinh đời sống cá nhân cho công việc"],
+        "khi_cang_thang": "Tê liệt vì kỳ vọng quá cao, hoặc làm việc như cỗ máy, xa cách mọi người.",
+        "huong_lon": "Từ 'phải xây điều vĩ đại' sang 'xây từng viên gạch tốt' — công trình lớn là tổng của những ngày bình thường."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu bằng sự xây dựng: lo nền tảng, kế hoạch dài hạn, che chở bền bỉ.",
+        "can_duoc": "Một người đồng hành hiểu tầm vóc mục tiêu của họ và chia sẻ gánh nặng.",
+        "diem_mu": "Đặt công việc lên trước; thể hiện tình cảm ít, nghĩ người kia 'tự hiểu'.",
+        "hop_kieu_nguoi": "Người kiên nhẫn, có đời sống riêng, biết kéo họ về những khoảnh khắc nhỏ.",
+        "dau_hieu_lech": "Khi những dịp quan trọng của gia đình luôn bị 'để sau' vì việc.",
+        "hon_nhan": "Một trụ cột lớn; cần học nghỉ ngơi và có mặt trọn vẹn trong những khoảnh khắc gia đình."
+      },
+      "cong_viec": {
+        "the_manh": "Quản lý dự án lớn, kiến trúc hệ thống, xây dựng tổ chức, hoạch định chiến lược.",
+        "moi_truong": "Có tầm ảnh hưởng rộng, dự án dài hơi, được trao nguồn lực.",
+        "vai_tro": "Kiến trúc sư hệ thống, người sáng lập, nhà hoạch định.",
+        "nghe": ["Kiến trúc, quy hoạch, xây dựng", "Quản trị tổ chức lớn", "Kỹ thuật hệ thống", "Chính sách công", "Doanh nghiệp xã hội"],
+        "cai_bay": "Kế hoạch quá lớn so với nguồn lực hiện có; khó tin giao việc.",
+        "tien_bac": "Có khả năng tạo giá trị lớn; nên đi chậm mà chắc, tránh dồn hết vốn vào một dự án."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Bước ngoặt hay là lúc được trao (hoặc tự nhận) một trách nhiệm lớn vượt tuổi, hoặc một công trình dở dang buộc phải làm lại.",
+        "bai_hoc": "Tầm nhìn lớn cần sự kiên nhẫn lớn.",
+        "cach_di_qua": "Chia mục tiêu lớn thành mốc 90 ngày; ăn mừng từng mốc nhỏ để không kiệt sức."
+      }
+    },
+    "33": {
+      "tong_quan": {
+        "chan_dung": "Số 33 là số cái hiếm, thường được mô tả như số 6 tăng cường: lòng thương lớn, muốn nâng đỡ và chữa lành người khác. Họ dẫn dắt bằng phục vụ — người ta đi theo vì được họ quan tâm thật lòng.",
+        "dong_luc": "Thấy người khác lớn lên, lành lại nhờ sự nâng đỡ của mình.",
+        "diem_manh": ["Tình thương lớn, kiên nhẫn", "Khả năng nâng đỡ, dạy dỗ, chữa lành", "Trách nhiệm cao với cộng đồng"],
+        "diem_mu": ["Gánh nỗi đau của người khác như của mình", "Hy sinh tới mức quên chăm bản thân", "Đặt kỳ vọng đạo đức quá cao cho mình và người khác"],
+        "khi_cang_thang": "Kiệt sức âm thầm, thấy mình chịu trách nhiệm cho hạnh phúc của tất cả mọi người.",
+        "huong_lon": "Từ 'cứu mọi người' sang 'giúp người tự đứng lên' — phục vụ khôn ngoan là phục vụ có giới hạn."
+      },
+      "tinh_cam": {
+        "cach_yeu": "Yêu hết lòng, bao dung, muốn nâng đỡ người mình yêu.",
+        "can_duoc": "Được chăm sóc lại, được thấy mình không phải lúc nào cũng phải mạnh.",
+        "diem_mu": "Dễ yêu để 'cứu' người khác; chịu đựng quá mức thay vì đặt giới hạn.",
+        "hop_kieu_nguoi": "Người trưởng thành, tự lo được cho mình, biết chăm lại họ.",
+        "dau_hieu_lech": "Khi số 33 chỉ cho mà không còn nhận, và bắt đầu thấy mệt mỏi với chính tình thương của mình.",
+        "hon_nhan": "Là chỗ dựa tinh thần của cả nhà; cần chia đều trách nhiệm và nhận sự giúp đỡ."
+      },
+      "cong_viec": {
+        "the_manh": "Giáo dục, chăm sóc, tư vấn, dẫn dắt cộng đồng, nghệ thuật chữa lành.",
+        "moi_truong": "Có giá trị nhân văn, nơi sự tận tâm được trân trọng và trả công xứng đáng.",
+        "vai_tro": "Người thầy, người dẫn dắt cộng đồng, người chữa lành.",
+        "nghe": ["Giáo dục, đào tạo", "Y tế, điều dưỡng, trị liệu", "Công tác xã hội, phi lợi nhuận", "Tư vấn tâm lý, huấn luyện", "Nghệ thuật chữa lành"],
+        "cai_bay": "Làm không công, kiệt sức vì lòng tốt; ngại nói chuyện tiền.",
+        "tien_bac": "Hay dùng tiền giúp người khác; cần quỹ an toàn cho mình trước khi giúp."
+      },
+      "bien_co": {
+        "kieu_bien_co": "Bước ngoặt thường là những lần phải gánh vác người khác: người thân đau ốm, gia đình khó khăn, hoặc một lần kiệt sức buộc phải học cách nhận giúp đỡ.",
+        "bai_hoc": "Muốn chăm người khác lâu dài, phải chăm mình trước.",
+        "cach_di_qua": "Khi gánh nặng dồn lên, viết ra việc nào thật sự là của mình — và trả lại những việc không phải của mình."
+      }
+    }
+  }
+}
