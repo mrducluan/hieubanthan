@@ -35,14 +35,24 @@ NGUOI_KHAC = [r"cho (chong|vo|me|bo|ban gai|ban trai|nguoi yeu|sep) toi",
               r"(chong|vo|me|bo|nguoi yeu|sep) toi (sinh|tuoi|co)"]
 VAN = [r"dai van", r"luu nien", r"nam nay", r"nam sau", r"muoi nam", r"10 nam", r"nam nao", r"van nao",
        r"khoi van", r"nam 20\d\d"]
+# QA-RV: tên thần sát (khớp không dấu) — câu "có Đào Hoa không", "quý nhân ở đâu"…
+THAN_SAT_KW = {t: chung.chuan_hoa(t) for t in battu_mo_rong._Y}
+THAN_SAT_KW["Thiên Ất Quý Nhân"] = r"quy nhan|thien at"
 CHU_DE = [
+    ("than_sat", [r"than sat", r"sao (tot|xau) (gi|nao)", r"co sao gi", r"dao hoa", r"quy nhan", r"thien at",
+                  r"dich ma", r"hoa cai", r"van xuong", r"dao hoa", r"hong diem", r"co than", r"qua tu",
+                  r"khoi cuong", r"duong nhan", r"loc than", r"kim du", r"thien duc", r"nguyet duc",
+                  r"tuong tinh", r"kiep sat", r"vong than"]),
+    ("xung_hop", [r"xung hop", r"hop xung", r"hinh xung", r"xung pha", r"luc hop", r"tam hop", r"luc xung",
+                  r"tu hinh", r"tuong hinh", r"luc hai", r"ngu hop", r"co xung", r"bi xung", r"tru (nao )?xung"]),
+    ("cach_cuc", [r"cach cuc", r"cach gi", r"thuoc cach", r"cach (nao|tot|xau)"]),
     ("tru", [r"tru (nam|thang|ngay|gio)"]),
     ("hon_nhan", [r"hon nhan", r"vo chong", r"phu tinh", r"the tinh", r"nguoi yeu", r"ban doi", r"tinh duyen"]),
     ("nghe_tien", [r"nghe", r"nganh", r"kinh doanh", r"lam cong", r"quan ly", r"tai tinh", r"quan tinh",
                    r"tien", r"giau", r"tich luy", r"dau tu", r"chinh tai hay thien tai"]),
     ("ngu_hanh", [r"thieu hanh", r"ngu hanh", r"vuong suy", r"than vuong", r"than nhuoc", r"dung than",
                   r"hy than", r"ky than", r"mau gi", r"huong gi", r"bo sung", r"can bang", r"khi hau",
-                  r"cach cuc", r"hanh gi", r"lan at", r"nhat chu toi yeu"]),
+                  r"hanh gi", r"lan at", r"nhat chu toi yeu"]),
     ("loi_song", [r"loi song", r"sinh hoat", r"suc khoe", r"song the nao"]),
     ("gia_dinh", [r"cha me", r"to tien", r"anh em", r"con cai", r"gan bo me", r"gia dinh"]),
     ("thap_than", [r"thap than", r"tang can"]),
@@ -206,6 +216,20 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
 
     cd = pl["chu_de"]
     tt_dem = _dem_tt(ls)
+    if cd == "than_sat":
+        ts = battu_mo_rong.than_sat(ls["tru"])
+        hoi = [ten for ten, mau in THAN_SAT_KW.items() if re.search(mau, pl["cau_chuan_hoa"])]
+        muc.append({"loai": "than_sat", "ds": ts, "hoi": hoi, "tru_ten": list(TRU_TEN.values()), **kb.meta()})
+        goi["luu_y"] = ("Thần sát là lớp phụ trong Tử Bình — sách Trích Thiên Tuỷ coi nhẹ thần sát so với ngũ hành "
+                        "và thập thần; đọc như sắc thái, không như điềm báo.")
+        return chung.ket(goi)
+    if cd == "xung_hop":
+        muc.append({"loai": "xung_hop", "ds": battu_mo_rong.quan_he(ls["tru"]), **kb.meta()})
+        return chung.ket(goi)
+    if cd == "cach_cuc":
+        muc.append(_m_dung_than(ls))
+        goi["luu_y"] = kb.luu_y("ung_dung")
+        return chung.ket(goi)
     if cd in ("tinh_cach", "ngu_hanh", "loi_song"):
         muc.append(_m_nhat_chu(ls, dm))
     if cd in ("ngu_hanh", "loi_song", "tinh_cach"):
@@ -213,6 +237,10 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
     if cd == "ngu_hanh":
         muc.append(_m_dung_than(ls))
         goi["luu_y"] = kb.luu_y("ung_dung")
+    if cd == "ngu_hanh" and re.search(r"dung than|hy than|ky than", pl["cau_chuan_hoa"]):
+        dt_ = next(m for m in muc if m["loai"] == "dung_than")      # hỏi thẳng dụng thần → trả lời trước
+        muc.remove(dt_)
+        muc.insert(1, dt_)
     if cd == "loi_song":
         goi["luu_y"] = kb.luu_y("suc_khoe")
     if cd == "tinh_cach":
@@ -259,6 +287,25 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
 # ------------------------------------------------------------------ NARRATIVE (template)
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
+    if l == "than_sat":
+        tt = m["tru_ten"]
+        co = {x["ten"] for x in m["ds"]}
+        dau = ""
+        if m["hoi"]:
+            khong = [h for h in m["hoi"] if h not in co]
+            if khong:
+                dau = f"Tứ trụ của bạn không có {', '.join(khong)}. "
+        if not m["ds"]:
+            return dau + "Tứ trụ không mang thần sát nào trong bảng hệ thống đang xét.", None
+        ds = "; ".join(f"{x['ten']} ({x['loai']}, ở trụ {', '.join(tt[i] for i in x['tru'])}): {x['y']}"
+                       for x in m["ds"])
+        return dau + f"Thần sát trên tứ trụ — {ds}.", None
+    if l == "xung_hop":
+        if not m["ds"]:
+            return "Các trụ không có hợp, xung, hình, hại hay phá đáng kể với nhau.", None
+        return ("Quan hệ giữa các trụ: " + "; ".join(x["mo_ta"] for x in m["ds"]) +
+                ". Hợp là gắn kết hay níu giữ, xung là va chạm hay thay đổi, hình là tự gây áp lực — "
+                "trụ ngày–giờ liên quan bản thân và con cái, năm–tháng liên quan gốc gác, cha mẹ.", None)
     if l == "tu_tru":
         nc = m["nhat_chu"]
         return (f"Tứ trụ (năm · tháng · ngày · giờ): {m['tru']}. Nhật chủ {nc['can']} "
