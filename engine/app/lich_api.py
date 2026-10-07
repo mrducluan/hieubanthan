@@ -65,9 +65,15 @@ def api_doi_lich(inp: DoiLichInput) -> dict:
     except ValueError as e:
         raise HTTPException(422, detail=f"Ngày không tồn tại: {e}")
     can, chi = lunar.can_chi_nam(am[2])
+    # TV-LICH: lịch Trung Quốc (UTC+8) — sổ tử vi/phần mềm Trung Quốc đổi theo lịch này; lệch thì lá số khác.
+    t = lunar.solar_to_lunar(duong.day, duong.month, duong.year, 8.0)
+    am_tq = {"ngay": t[0], "thang": t[1], "nam": t[2], "nhuan": bool(t[3])}
+    am_d = {"ngay": am[0], "thang": am[1], "nam": am[2], "nhuan": bool(am[3])}
     return {
         "duong": {"ngay": duong.day, "thang": duong.month, "nam": duong.year},
-        "am": {"ngay": am[0], "thang": am[1], "nam": am[2], "nhuan": am[3]},
+        "am": am_d,
+        "am_trung_quoc": am_tq,
+        "lech_lich_trung": am_tq != am_d,
         "can_chi_nam": f"{can} {chi}",
         # Để người dùng đối chiếu sổ tử vi/lịch vạn niên (ngày theo lịch, chưa xét giờ Tý).
         "can_chi_ngay": " ".join(lunar.can_chi_ngay(duong)),
