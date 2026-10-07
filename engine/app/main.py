@@ -214,10 +214,14 @@ def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "thanso")}
 
 
+QuanHe = Literal["nguoi_yeu", "ban_be", "dong_nghiep", "sep", "gia_dinh"]
+
+
 class HopDoiInput(BaseModel):
-    """Hai người — tên không bắt buộc (không có tên → chỉ so đường đời)."""
+    """Hai người — tên không bắt buộc (không có tên → chỉ so đường đời). `quan_he`: người ấy là ai với bạn."""
     a: NguoiKia
     b: NguoiKia
+    quan_he: QuanHe = "nguoi_yeu"
 
 
 @app.post("/v1/thanso/hop-doi")
@@ -228,7 +232,7 @@ def api_hop_doi(inp: HopDoiInput) -> dict:
             _dt.date(n.nam, n.thang, n.ngay)
         except ValueError:
             raise HTTPException(422, detail="Ngày sinh không tồn tại")
-    return luan_hop_doi(inp.a.model_dump(), inp.b.model_dump())
+    return luan_hop_doi(inp.a.model_dump(), inp.b.model_dump(), inp.quan_he)
 
 
 SoHopLe = Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33]
@@ -244,12 +248,50 @@ class BoSo(BaseModel):
 class CapSoInput(BaseModel):
     a: BoSo
     b: BoSo
+    quan_he: QuanHe = "nguoi_yeu"
 
 
 @app.post("/v1/thanso/cap-so")
 def api_cap_so(inp: CapSoInput) -> dict:
     """Hợp đôi từ các con số đã tính (lời mời chỉ mang số, không mang ngày sinh người mời)."""
-    return luan_hop_doi_tu_chi_so(inp.a.model_dump(exclude_none=True), inp.b.model_dump(exclude_none=True))
+    return luan_hop_doi_tu_chi_so(inp.a.model_dump(exclude_none=True), inp.b.model_dump(exclude_none=True),
+                                  inp.quan_he)
+
+
+class DoiChieuNamInput(BaseModel):
+    """Ngày sinh + tối đa 12 năm có biến cố người dùng muốn đối chiếu. Không lưu."""
+    ngay: int = Field(ge=1, le=31)
+    thang: int = Field(ge=1, le=12)
+    nam: int = Field(ge=1900, le=2100)
+    cac_nam: list[int] = Field(min_length=1, max_length=12)
+
+
+@app.post("/v1/thanso/doi-chieu-nam")
+def api_doi_chieu_nam(inp: DoiChieuNamInput) -> dict:
+    """Đặt những năm có biến cố lên trục đời: năm cá nhân, giai đoạn (đỉnh), thử thách, mốc bước ngoặt."""
+    from app.calc import thanso_dong_doi
+    from app.luangiai.thanso import NHAN_MOC
+    try:
+        _dt.date(inp.nam, inp.thang, inp.ngay)
+    except ValueError:
+        raise HTTPException(422, detail="Ngày sinh không tồn tại")
+    ra = []
+    for n in inp.cac_nam:
+        if n < inp.nam or n > inp.nam + 120:
+            raise HTTPException(422, detail=f"Năm {n} nằm ngoài đời người này")
+        r = thanso_dong_doi.doi_chieu_nam(inp.ngay, inp.thang, inp.nam, n)
+        ra.append({**r,
+                   "nghia_nam": kb_store.nghia_nam_ca_nhan(r["nam_ca_nhan"]),
+                   "nghia_dinh": kb_store.nghia_dinh_cao(r["so_dinh"]),
+                   "nghia_thu_thach": kb_store.nghia_thu_thach(r["thu_thach"]),
+                   "nhan_moc": [NHAN_MOC[m].format(so=r["so_dinh"]) for m in r["moc"]]})
+    return {
+        "engine_version": ENGINE_VERSION,
+        "cac_nam": ra,
+        "cach_doc": ("Mỗi năm được đặt lên nhịp số của bạn. Nếu nhiều biến cố rơi đúng năm mở/khép chu kỳ hay năm "
+                     "chuyển giai đoạn, đó là một mẫu hình để bạn tự ngẫm — nếu không trùng, con số chưa nói gì về "
+                     "những biến cố đó. Năm theo mốc dương lịch; mốc sinh nhật được ghi kèm."),
+    }
 
 
 class ChuKyInput(BaseModel):

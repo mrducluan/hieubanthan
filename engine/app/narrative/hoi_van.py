@@ -42,6 +42,18 @@ def _doan(m: dict) -> tuple[str, str | None]:
         dau = f"{m['ten_linh_vuc']} — {vt} {m['so']} của {ai}"
         return (f"{dau}: {m['xu_huong']} Mặt tối cần để ý: {m['mat_toi']} "
                 f"Gợi ý: {m['goi_y']}", m["cau_tu_soi"])
+    if l == "chan_dung":
+        ai = TEN_VAI.get(m["vai"], "bạn")
+        dau = f"Chân dung theo số chủ đạo {m['so']} của {ai}"
+        if m["mat"] == "cong_viec":
+            return (f"{dau} — công việc: thế mạnh là {m['the_manh'][0].lower() + m['the_manh'][1:]} "
+                    f"Môi trường hợp: {m['moi_truong']} Hướng nghề hay được gợi ý: {' · '.join(m['nghe'])}. "
+                    f"Cái bẫy cần tránh: {m['cai_bay']} Với tiền bạc: {m['tien_bac']}", None)
+        if m["mat"] == "tinh_cam":
+            return (f"{dau} — tình cảm: {m['cach_yeu']} Điều cần được: {m['can_duoc']} "
+                    f"Hợp với: {m['hop_kieu_nguoi']} Dấu hiệu lệch nhịp: {m['dau_hieu_lech']}", None)
+        return (f"{dau}: {m['chan_dung']} Điểm mạnh: {'; '.join(m['diem_manh'])}. "
+                f"Điểm mù: {'; '.join(m['diem_mu'])}. Khi căng thẳng: {m['khi_cang_thang']}", None)
     if l == "cap_so":
         return (f"Cặp {m['ten_vi_tri']} {m['so_a']} và {m['so_b']} (tra theo cặp {m['cap']}): "
                 f"điểm hoà — {m['hoa']} Điểm dễ va — {m['va']} Hai người có thể: {m['cung_lam']}", None)

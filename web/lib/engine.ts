@@ -49,8 +49,59 @@ export interface ChieuSau {
     nghia: { mo_ta: string; y_nghia: string; cach_vuot: string } | null;
   };
   nam_ca_nhan: NamCaNhan[];
+  dong_doi?: DongDoi;
   trich_nguon: string;
   cach_doc_chieu_sau: string;
+}
+export interface NghiaThuThach { mo_ta: string; y_nghia: string; cach_vuot: string }
+/** Dòng đời & bước ngoặt (TS-SAU) — engine tính trục, web chỉ vẽ. */
+export interface GiaiDoan extends Omit<DinhCao, "nghia"> {
+  thu_thach: number;
+  tu_nam: number;
+  den_nam: number | null;
+  nghia: DinhCao["nghia"];
+  nghia_thu_thach: NghiaThuThach | null;
+}
+export type LoaiMoc = "chuyen_dinh" | "khoi_chu_ky" | "khep_chu_ky";
+export interface BuocNgoat { nam: number; tuoi: number; loai: LoaiMoc; so: number; trung_moc: boolean; nhan: string }
+export interface DongDoi {
+  giai_doan: GiaiDoan[];
+  chu_ky: { bat_dau: number; ket_thuc: number; tuoi_bat_dau: number }[];
+  buoc_ngoat: BuocNgoat[];
+  hien_tai: { nam: number; tuoi: number; dinh: number; nam_ca_nhan: number };
+  cach_doc: string;
+}
+export interface DoiChieuNam {
+  nam: number; tuoi: number; nam_ca_nhan: number;
+  nam_ca_nhan_sinh_nhat: { truoc_sinh_nhat: number; tu_sinh_nhat: number };
+  dinh: number; so_dinh: number; thu_thach: number; moc: LoaiMoc[]; nhan_moc: string[];
+  nghia_nam: { chu_de: string; y_nghia: string; nen: string; tranh: string; hay_gap?: string } | null;
+  nghia_dinh: { chu_de: string; y_nghia: string } | null;
+  nghia_thu_thach: NghiaThuThach | null;
+}
+/** Chân dung 4 mặt (TS-SAU). */
+export interface LopThem { nhan: string; so: number; noi_dung: string }
+interface MatGoc { ma: string; ten: string; lop_them: LopThem[] }
+export interface MatTongQuan extends MatGoc {
+  ma: "tong_quan"; chan_dung: string; dong_luc: string; diem_manh: string[]; diem_mu: string[];
+  khi_cang_thang: string; huong_lon: string;
+}
+export interface MatTinhCam extends MatGoc {
+  ma: "tinh_cam"; cach_yeu: string; can_duoc: string; diem_mu: string; hop_kieu_nguoi: string;
+  dau_hieu_lech: string; hon_nhan: string;
+}
+export interface MatCongViec extends MatGoc {
+  ma: "cong_viec"; the_manh: string; moi_truong: string; vai_tro: string; nghe: string[];
+  cai_bay: string; tien_bac: string;
+}
+export interface MatBienCo extends MatGoc { ma: "bien_co"; kieu_bien_co: string; bai_hoc: string; cach_di_qua: string }
+export type MatChanDung = MatTongQuan | MatTinhCam | MatCongViec | MatBienCo;
+export interface ChanDung {
+  so_truc: number;
+  mat: MatChanDung[];
+  cach_doc: string;
+  nguon: string;
+  trang_thai: string;
 }
 export interface MuiTen {
   ma: string;
@@ -81,6 +132,7 @@ export interface LuanGiaiResult {
   cac_vi_tri: ViTriLuanGiai[];
   chieu_sau: ChieuSau;
   mo_rong?: MoRong;
+  chan_dung?: ChanDung | null;
   tom_tat_do_tin: string;
   cach_doc: string;
   trich_nguon_chung: string;

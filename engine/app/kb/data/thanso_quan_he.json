@@ -1,0 +1,108 @@
+{
+  "_nguon": "Hợp đôi theo LOẠI quan hệ: người ấy (theo số Đường đời, số cái quy về gốc 11→2, 22→4, 33→6) hiện ra thế nào trong từng vai, cần gì từ bạn, nên tránh gì, nên nói chuyện thế nào. Bổ sung cho thanso_cap_so.json (động lực chung của cặp số). AI biên soạn theo truyền thống Pythagoras; không chấm điểm hợp/khắc.",
+  "source": {
+    "id": "nhap_ai_2026",
+    "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến",
+    "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+  },
+  "source_id": "nhap_ai_2026",
+  "school_id": "pythagoras_vn",
+  "trang_thai": "nhap_ai",
+  "quan_he": {
+    "nguoi_yeu": {
+      "ten": "Người yêu",
+      "tieu_de": "Hai người, một nhịp yêu",
+      "trong_tam": "Trong tình yêu, điều quan trọng là mỗi người cảm thấy được yêu theo đúng cách mình cần — và hai người nói được với nhau cả điều khó nói.",
+      "cau_hoi_chung": "Tuần này, mỗi người kể cho nhau một điều làm mình thấy được yêu nhất."
+    },
+    "ban_be": {
+      "ten": "Bạn bè",
+      "tieu_de": "Hai người bạn, hai cách giữ tình bạn",
+      "trong_tam": "Tình bạn bền khi mỗi người được là chính mình, nhịp gặp gỡ hợp cả hai và có lúc thẳng thắn với nhau.",
+      "cau_hoi_chung": "Lần gần nhất hai bạn nói thật với nhau một điều khó nghe là khi nào?"
+    },
+    "dong_nghiep": {
+      "ten": "Đồng nghiệp",
+      "tieu_de": "Hai cách làm việc, một mục tiêu",
+      "trong_tam": "Với đồng nghiệp, điều quan trọng là phân vai rõ, hiểu cách người kia làm việc và giao tiếp đúng nhịp của họ — không phải thân nhau.",
+      "cau_hoi_chung": "Trong dự án chung, ai quyết phần nào — hai người đã nói rõ chưa?"
+    },
+    "sep": {
+      "ten": "Sếp",
+      "tieu_de": "Làm việc với sếp của bạn",
+      "trong_tam": "Với cấp trên, điều quan trọng là hiểu họ coi trọng điều gì, báo cáo theo cách họ dễ tiếp nhận và giữ được tiếng nói của mình.",
+      "cau_hoi_chung": "Bạn đã hỏi sếp thẳng 'thế nào là làm tốt' trong vị trí của mình chưa?"
+    },
+    "gia_dinh": {
+      "ten": "Gia đình",
+      "tieu_de": "Người thân, hai thế giới trong một mái nhà",
+      "trong_tam": "Trong gia đình, hai người không chọn nhau — điều quan trọng là tôn trọng khác biệt, chia trách nhiệm công bằng và nói ra điều mình cần.",
+      "cau_hoi_chung": "Có điều gì bạn mong người thân này hiểu về mình mà chưa từng nói ra?"
+    }
+  },
+  "theo_so": {
+    "1": {
+      "nguoi_yeu": {"vai": "Chủ động, thích dẫn nhịp mối quan hệ, thể hiện yêu bằng hành động che chở.", "can": "Được tôn trọng quyết định và có khoảng tự do riêng.", "tranh": "Ra lệnh hay so sánh họ với người khác; chạm vào lòng tự trọng trước mặt người ngoài.", "cach_noi": "Nói thẳng, ngắn, đưa ra lựa chọn thay vì yêu cầu."},
+      "ban_be": {"vai": "Người rủ rê, khởi xướng kế hoạch, bênh bạn khi cần.", "can": "Bạn đồng hành dám theo và dám cãi.", "tranh": "Để họ quyết mọi thứ rồi phàn nàn sau lưng.", "cach_noi": "Góp ý thẳng nhưng riêng tư, không trước đám đông."},
+      "dong_nghiep": {"vai": "Làm nhanh, thích tự chủ phần việc, hay đề xuất cách mới.", "can": "Phạm vi trách nhiệm rõ và quyền quyết trong phạm vi đó.", "tranh": "Giám sát từng bước hay giành công.", "cach_noi": "Bàn về mục tiêu và kết quả, ít bàn chi tiết thủ tục."},
+      "sep": {"vai": "Sếp quyết đoán, kỳ vọng tốc độ, thích người chủ động.", "can": "Nhân viên tự giải quyết việc, chỉ báo khi cần quyết.", "tranh": "Mang vấn đề đến mà không có phương án; cãi tay đôi trước tập thể.", "cach_noi": "Báo cáo ngắn: kết quả → vướng gì → đề xuất 2 phương án."},
+      "gia_dinh": {"vai": "Người đứng mũi chịu sào, hay quyết thay cả nhà.", "can": "Được ghi nhận vai trò và được tin tưởng.", "tranh": "Thách thức uy quyền trực diện lúc căng thẳng.", "cach_noi": "Hỏi ý kiến họ trước, rồi nói nhu cầu của mình rõ ràng."}
+    },
+    "2": {
+      "nguoi_yeu": {"vai": "Dịu dàng, chu đáo, nhớ những chi tiết nhỏ.", "can": "Sự chắc chắn được yêu qua lời nói và sự có mặt đều đặn.", "tranh": "Im lặng lạnh lùng hay đùa cợt về cảm xúc của họ.", "cach_noi": "Nhẹ nhàng, hỏi han, chủ động hỏi 'em/anh đang nghĩ gì?'."},
+      "ban_be": {"vai": "Người lắng nghe, người giữ bí mật, người hoà giải trong nhóm.", "can": "Sự quan tâm qua lại, không chỉ khi bạn cần.", "tranh": "Chỉ tìm đến khi có chuyện buồn.", "cach_noi": "Hỏi thăm chuyện của họ, không chỉ kể chuyện mình."},
+      "dong_nghiep": {"vai": "Phối hợp tốt, hỗ trợ thầm lặng, tỉ mỉ.", "can": "Môi trường hoà nhã và được ghi nhận đóng góp.", "tranh": "Phê bình gay gắt hay giao việc không nói rõ.", "cach_noi": "Ghi nhận trước, góp ý sau, nói riêng."},
+      "sep": {"vai": "Sếp mềm mỏng, quan tâm đến không khí nhóm, ngại xung đột.", "can": "Nhân viên hợp tác, báo tin xấu sớm nhưng khéo.", "tranh": "Đối đầu công khai; tạo phe nhóm.", "cach_noi": "Trao đổi riêng, đặt vấn đề như 'chúng ta cùng tìm cách'."},
+      "gia_dinh": {"vai": "Người giữ hoà khí, hay nhường nhịn để nhà yên.", "can": "Được hỏi ý kiến, không bị coi nhường nhịn là hiển nhiên.", "tranh": "Lớn tiếng hay bắt họ chọn phe.", "cach_noi": "Hỏi 'mẹ/bố/anh/chị thấy sao?' và chờ họ nói hết."}
+    },
+    "3": {
+      "nguoi_yeu": {"vai": "Vui, lãng mạn, nhiều bất ngờ, giỏi làm người kia cười.", "can": "Được khen, được nghe và mối quan hệ không đơn điệu.", "tranh": "Chê họ trẻ con hay lạnh nhạt với ý tưởng của họ.", "cach_noi": "Hứng thú với chuyện họ kể; nói chuyện nghiêm túc vào lúc thoải mái."},
+      "ban_be": {"vai": "Linh hồn của buổi gặp, người kể chuyện, người kết nối mọi người.", "can": "Khán giả tán thưởng và bạn cùng vui.", "tranh": "Chỉ xem họ là 'người làm vui' mà không hỏi chuyện thật.", "cach_noi": "Bắt chuyện bằng câu chuyện; hỏi sâu khi họ đang thư thả."},
+      "dong_nghiep": {"vai": "Nhiều ý tưởng, giao tiếp tốt, làm không khí nhóm vui.", "can": "Đất cho sáng tạo và được trình bày ý tưởng.", "tranh": "Giao việc lặp lại quá lâu; dập ý tưởng ngay khi mới nói.", "cach_noi": "Nghe hết ý tưởng, rồi cùng chốt việc cụ thể và hạn chót."},
+      "sep": {"vai": "Sếp truyền cảm hứng, nhiều ý tưởng, đôi khi đổi hướng nhanh.", "can": "Nhân viên biết biến ý tưởng thành việc cụ thể.", "tranh": "Phản bác ý tưởng thẳng thừng trong cuộc họp.", "cach_noi": "Ghi lại ý tưởng, gửi lại tóm tắt việc cần làm để chốt hướng."},
+      "gia_dinh": {"vai": "Người làm không khí gia đình vui vẻ, hay kể chuyện.", "can": "Được lắng nghe và tán thưởng.", "tranh": "Bỏ qua chuyện họ kể hay chê họ thiếu nghiêm túc.", "cach_noi": "Dùng sự hài hước để mở đầu chuyện khó."}
+    },
+    "4": {
+      "nguoi_yeu": {"vai": "Chung thuỷ, đáng tin, thể hiện yêu bằng việc làm cụ thể.", "can": "Sự ổn định, nhất quán và kế hoạch rõ ràng.", "tranh": "Thất hứa, thay đổi đột ngột, coi việc làm của họ là hiển nhiên.", "cach_noi": "Cụ thể, rõ ràng; cảm ơn những việc nhỏ họ làm."},
+      "ban_be": {"vai": "Người bạn đáng tin, có mặt khi cần giúp việc thực tế.", "can": "Đúng hẹn và sự thật thà.", "tranh": "Huỷ hẹn sát giờ, hứa suông.", "cach_noi": "Hẹn cụ thể ngày giờ; nói thật kể cả khi khó nghe."},
+      "dong_nghiep": {"vai": "Cẩn thận, đúng quy trình, giữ chất lượng.", "can": "Hướng dẫn rõ, thời hạn hợp lý, quy trình nhất quán.", "tranh": "Đổi yêu cầu liên tục, làm ẩu.", "cach_noi": "Đưa số liệu, kế hoạch từng bước; báo trước mọi thay đổi."},
+      "sep": {"vai": "Sếp kỹ tính, coi trọng quy trình, chất lượng và đúng hạn.", "can": "Nhân viên tin cậy, cẩn thận, báo cáo có số liệu.", "tranh": "Đi đường tắt, trễ hạn không báo.", "cach_noi": "Báo cáo có cấu trúc, đủ chi tiết; xin ý kiến trước khi đổi cách làm."},
+      "gia_dinh": {"vai": "Trụ cột thực tế, lo nề nếp, tài chính, việc nhà.", "can": "Sự ngăn nắp và trách nhiệm chung.", "tranh": "Coi nhẹ quy tắc nhà, bừa bộn, tiêu xài không kế hoạch.", "cach_noi": "Bàn kế hoạch cụ thể, tránh nói chung chung."}
+    },
+    "5": {
+      "nguoi_yeu": {"vai": "Cuốn hút, thích phiêu lưu, mang lại cảm giác mới mẻ.", "can": "Tự do, tin tưởng và những trải nghiệm chung.", "tranh": "Kiểm soát, ghen tuông, giữ quá chặt.", "cach_noi": "Rủ cùng làm điều mới; bàn chuyện cam kết bằng lựa chọn, không ràng buộc."},
+      "ban_be": {"vai": "Người rủ đi chơi, đi xa, thử cái mới.", "can": "Bạn sẵn sàng 'đi luôn' và không trách khi họ biến mất một thời gian.", "tranh": "Bắt họ theo lịch cố định quá chặt.", "cach_noi": "Ngắn gọn, vui, linh hoạt."},
+      "dong_nghiep": {"vai": "Linh hoạt, giỏi xử lý tình huống, thích việc đa dạng.", "can": "Sự đa dạng và quyền tự chủ cách làm.", "tranh": "Giao việc đơn điệu, quản lý từng chút.", "cach_noi": "Nói mục tiêu, để họ tự chọn cách; chốt bằng văn bản để không trôi."},
+      "sep": {"vai": "Sếp năng động, thay đổi nhanh, thích người thích nghi tốt.", "can": "Nhân viên linh hoạt, không ngại việc mới.", "tranh": "Than phiền về thay đổi; cứng nhắc theo kế hoạch cũ.", "cach_noi": "Đưa phương án nhanh; nhắc lại thống nhất bằng tin nhắn ngắn."},
+      "gia_dinh": {"vai": "Người hay đi, hay đổi, mang chuyện mới về nhà.", "can": "Không bị trói buộc bởi kỳ vọng truyền thống.", "tranh": "Áp đặt, trách móc vì họ khác nếp nhà.", "cach_noi": "Tò mò về trải nghiệm của họ trước khi góp ý."}
+    },
+    "6": {
+      "nguoi_yeu": {"vai": "Chăm lo, ấm áp, hướng về gia đình và tương lai chung.", "can": "Được trân trọng những việc mình làm và sự cam kết.", "tranh": "Coi sự chăm sóc của họ là đương nhiên; vô trách nhiệm.", "cach_noi": "Cảm ơn cụ thể; nói ra mình muốn tự lo phần nào."},
+      "ban_be": {"vai": "Người bạn chu đáo, hay giúp, hay khuyên.", "can": "Được ghi nhận và được hỏi thăm lại.", "tranh": "Lợi dụng lòng tốt; gạt phăng lời khuyên.", "cach_noi": "Cảm ơn lời khuyên rồi nói rõ quyết định của mình."},
+      "dong_nghiep": {"vai": "Tận tâm, lo cho cả nhóm, giữ không khí ấm.", "can": "Môi trường tôn trọng, đối xử công bằng.", "tranh": "Đẩy việc của mình sang cho họ vì biết họ khó từ chối.", "cach_noi": "Nhẹ nhàng, ghi nhận; tự nhận phần việc của mình."},
+      "sep": {"vai": "Sếp quan tâm đến nhân viên như người nhà, có trách nhiệm cao.", "can": "Nhân viên tận tâm, có tinh thần đội nhóm.", "tranh": "Thờ ơ với tập thể; làm việc chỉ vì mình.", "cach_noi": "Chia sẻ cả khó khăn cá nhân khi ảnh hưởng tới công việc; đề xuất giải pháp chung."},
+      "gia_dinh": {"vai": "Người chăm lo cả nhà, nhớ mọi dịp, giữ nếp.", "can": "Được giúp đỡ và được cảm ơn.", "tranh": "Để họ gánh hết rồi chê họ hay càm ràm.", "cach_noi": "Nhận việc cụ thể; nói 'để con/em lo phần này'."}
+    },
+    "7": {
+      "nguoi_yeu": {"vai": "Sâu sắc, kín đáo, yêu chậm và chân thành.", "can": "Khoảng lặng riêng và những cuộc trò chuyện có chiều sâu.", "tranh": "Ép họ bộc lộ cảm xúc ngay; xâm phạm riêng tư.", "cach_noi": "Hỏi những câu mở, chờ họ nghĩ; trò chuyện về ý tưởng và ý nghĩa."},
+      "ban_be": {"vai": "Bạn ít nhưng chất, cho lời khuyên sắc sảo.", "can": "Sự tôn trọng khi họ cần ở một mình.", "tranh": "Trách họ biến mất; lôi họ vào đám đông ồn ào.", "cach_noi": "Gặp riêng, nói chuyện sâu; nhắn khi cần, không đòi trả lời ngay."},
+      "dong_nghiep": {"vai": "Chuyên môn sâu, phân tích tốt, thích làm độc lập.", "can": "Thời gian tập trung không bị cắt ngang.", "tranh": "Họp nhiều vô ích; hối thúc khi chưa đủ dữ kiện.", "cach_noi": "Gửi vấn đề bằng văn bản trước, để họ có thời gian nghĩ."},
+      "sep": {"vai": "Sếp chuyên môn, ít nói, kỳ vọng chất lượng và lập luận chặt.", "can": "Nhân viên có hiểu biết, làm việc kỹ và có căn cứ.", "tranh": "Nói chung chung, thiếu dữ liệu; nịnh bợ.", "cach_noi": "Trình bày lập luận rõ, có dữ liệu; chấp nhận câu hỏi vặn."},
+      "gia_dinh": {"vai": "Người thân trầm tính, cần không gian riêng trong nhà.", "can": "Được để yên khi cần và được hiểu là không lạnh nhạt.", "tranh": "Coi im lặng của họ là giận dỗi hay vô tâm.", "cach_noi": "Hỏi ngắn, gợi chuyện bằng chủ đề họ quan tâm."}
+    },
+    "8": {
+      "nguoi_yeu": {"vai": "Mạnh mẽ, bảo bọc, lo cho tương lai vật chất.", "can": "Được tôn trọng năng lực và có người cùng chí hướng.", "tranh": "Chê bai thất bại của họ; tranh quyền công khai.", "cach_noi": "Thẳng thắn, rõ ràng; nói về mục tiêu chung."},
+      "ban_be": {"vai": "Người bạn có ảnh hưởng, hào phóng, hay giúp kết nối cơ hội.", "can": "Sự tôn trọng và tình bạn không vụ lợi.", "tranh": "Chỉ tìm đến vì cần giúp việc hay tiền.", "cach_noi": "Thẳng, có trọng tâm; ghi nhận thành công của họ."},
+      "dong_nghiep": {"vai": "Hướng kết quả, quyết đoán, có tham vọng.", "can": "Đồng nghiệp hiệu quả, không lãng phí thời gian.", "tranh": "Chậm trễ không lý do; cạnh tranh ngầm.", "cach_noi": "Đi thẳng vào con số và kết quả."},
+      "sep": {"vai": "Sếp quyền lực, đòi hỏi cao, nhìn vào kết quả.", "can": "Nhân viên mang lại kết quả đo được.", "tranh": "Viện cớ; thách thức quyền hạn trước mặt người khác.", "cach_noi": "Bắt đầu bằng kết quả và con số; đề xuất có tính toán lợi ích."},
+      "gia_dinh": {"vai": "Người lo kinh tế, có tiếng nói lớn trong nhà.", "can": "Được tôn trọng và được tin cậy.", "tranh": "Tranh luận về tiền trước mặt người ngoài.", "cach_noi": "Bàn chuyện tiền nong rõ ràng, có kế hoạch."}
+    },
+    "9": {
+      "nguoi_yeu": {"vai": "Lãng mạn, bao dung, sống nhiều lý tưởng.", "can": "Được hiểu lý tưởng của mình và yêu cả phần mong manh.", "tranh": "Chế giễu ước mơ của họ; ích kỷ, nhỏ nhen.", "cach_noi": "Nói về ý nghĩa, giá trị; nhẹ nhàng kéo về việc cụ thể."},
+      "ban_be": {"vai": "Người bạn rộng lượng, giúp không tính toán.", "can": "Sự chân thành và những điều có ý nghĩa cùng làm.", "tranh": "Lợi dụng lòng tốt của họ.", "cach_noi": "Chia sẻ chân thật; rủ cùng làm việc tốt."},
+      "dong_nghiep": {"vai": "Nhìn bức tranh lớn, truyền cảm hứng, quan tâm tác động xã hội.", "can": "Thấy công việc có ý nghĩa.", "tranh": "Chỉ nói lợi nhuận mà bỏ qua giá trị.", "cach_noi": "Nói 'việc này giúp được ai'; rồi chốt việc cụ thể."},
+      "sep": {"vai": "Sếp có tầm nhìn, nhân văn, đôi khi xa thực tế.", "can": "Nhân viên chia sẻ giá trị chung và giúp hiện thực hoá.", "tranh": "Coi thường sứ mệnh; chỉ chạy theo chỉ tiêu.", "cach_noi": "Kết nối đề xuất với tầm nhìn chung; đưa kế hoạch thực tế."},
+      "gia_dinh": {"vai": "Người bao dung, hay lo cho cả họ hàng, cộng đồng.", "can": "Được cảm thông và được chia sẻ gánh nặng.", "tranh": "Trách họ lo chuyện người ngoài hơn người nhà một cách gay gắt.", "cach_noi": "Nói nhẹ nhàng rằng gia đình cũng cần họ."}
+    }
+  }
+}

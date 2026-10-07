@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { HeartHandshake } from "lucide-react";
@@ -10,6 +11,7 @@ import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import { KhungChat, type KetQuaHoi } from "@/components/hoi/KhungChat";
 import { DaiDoi } from "@/components/than-so/DaiDoi";
+import { DongDoi } from "@/components/than-so/DongDoi";
 import { BieuDoNgaySinh, ChiSoPhu } from "@/components/than-so/BieuDoNgaySinh";
 import { TheBaLop } from "@/components/than-so/TheBaLop";
 import { useBaiDoc } from "@/lib/bai-doc";
@@ -47,6 +49,17 @@ export function ThanSo() {
   const hoSo = useHoSo();
   const router = useRouter();
   const { kq, loi, thuLai } = useBaiDoc(hoSo);
+  const [tab, setTab] = useState("dai-doi");
+  // Link "/than-so#dong-doi" (từ chân dung) mở thẳng tab Dòng đời.
+  useEffect(() => {
+    const doc = () => { if (location.hash === "#dong-doi") setTab("dong-doi"); };
+    doc();
+    window.addEventListener("hashchange", doc);
+    return () => window.removeEventListener("hashchange", doc);
+  }, []);
+  useEffect(() => {
+    if (kq && tab === "dong-doi" && location.hash === "#dong-doi") document.getElementById("chieu-sau")?.scrollIntoView({ block: "start" });
+  }, [kq, tab]);
 
   if (hoSo === undefined) return <KhungTai />;
   if (hoSo === null) {
@@ -77,12 +90,13 @@ export function ThanSo() {
         </div>
       </section>
 
-      <section aria-labelledby="chieu-sau">
+      <section aria-labelledby="chieu-sau" id="dong-doi" className="scroll-mt-24">
         <TieuDeMuc id="chieu-sau" nho="Chiều sâu" lon="Đời bạn theo nhịp" mo_ta={cs.cach_doc_chieu_sau} />
-        <Tabs defaultValue="dai-doi">
+        <Tabs value={tab} onValueChange={setTab}>
           <div className="-mx-4 overflow-x-auto px-4 [scrollbar-width:none]">
             <TabsList>
               <TabsTrigger value="dai-doi">Dải đời</TabsTrigger>
+              {cs.dong_doi && <TabsTrigger value="dong-doi">Bước ngoặt</TabsTrigger>}
               <TabsTrigger value="nam">Năm cá nhân</TabsTrigger>
               {kq.mo_rong && <TabsTrigger value="bieu-do">Biểu đồ ngày sinh</TabsTrigger>}
               {kq.mo_rong && <TabsTrigger value="phu">Chỉ số phụ</TabsTrigger>}
@@ -112,6 +126,12 @@ export function ThanSo() {
               </article>
             )}
           </TabsContent>
+
+          {cs.dong_doi && (
+            <TabsContent value="dong-doi">
+              <DongDoi dd={cs.dong_doi} ngaySinh={{ ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam }} />
+            </TabsContent>
+          )}
 
           <TabsContent value="nam">
             <ol className="relative space-y-3 border-l border-line pl-5">

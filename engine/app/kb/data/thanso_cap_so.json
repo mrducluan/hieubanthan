@@ -35,7 +35,7 @@
    "cung_lam": "Có những nghi thức chung cố định giữa hai lối sống tự do."
   },
   "1-6": {
-   "hoa": "Số 1 mang hướng đi, số 6 mang sự chăm lo — gia đình có người lo ngoài, người lo trong.",
+   "hoa": "Số 1 mang hướng đi, số 6 mang sự chăm lo — có người lo hướng đi, có người lo con người.",
    "va": "Số 1 thấy bị quản, số 6 thấy mình không được ghi nhận.",
    "cung_lam": "Số 1 nói lời cảm ơn cụ thể; số 6 để số 1 tự quyết phần của họ."
   },
@@ -62,11 +62,11 @@
   "2-3": {
    "hoa": "Số 2 lắng nghe, số 3 kể chuyện — không khí vui, ấm.",
    "va": "Số 3 vô tư, số 2 dễ tổn thương vì câu đùa.",
-   "cung_lam": "Số 3 hỏi 'câu đó có làm em/anh buồn không?'; số 2 nói ra ngay."
+   "cung_lam": "Số 3 hỏi 'câu đó có làm bạn buồn không?'; số 2 nói ra ngay."
   },
   "2-4": {
-   "hoa": "Ổn định, chung thuỷ, đều đặn — hợp xây tổ ấm.",
-   "va": "Dễ nhàm, ít bất ngờ; số 4 khô khan với nhu cầu tình cảm của số 2.",
+   "hoa": "Ổn định, trung thành, đều đặn — hợp cùng xây điều lâu dài.",
+   "va": "Dễ nhàm, ít bất ngờ; số 4 khô khan với nhu cầu được quan tâm của số 2.",
    "cung_lam": "Lên lịch những điều bất ngờ nho nhỏ."
   },
   "2-5": {
@@ -75,7 +75,7 @@
    "cung_lam": "Nói rõ nhu cầu khoảng riêng và nhu cầu kết nối bằng con số cụ thể (bao nhiêu tối/tuần)."
   },
   "2-6": {
-   "hoa": "Cả hai chu đáo, hướng gia đình — rất ấm.",
+   "hoa": "Cả hai chu đáo, biết lo cho nhau — rất ấm.",
    "va": "Cả hai cho nhiều, ít đòi; oán thầm khi không được đáp lại.",
    "cung_lam": "Mỗi người nói một nhu cầu của mình mỗi tuần."
   },
@@ -110,9 +110,9 @@
    "cung_lam": "Đặt mục tiêu chung dài hạn và một người giữ ngân sách."
   },
   "3-6": {
-   "hoa": "Số 3 làm nhà vui, số 6 làm nhà ấm.",
+   "hoa": "Số 3 làm không khí vui, số 6 làm không khí ấm.",
    "va": "Số 6 dễ chăm và nhắc quá mức, số 3 thấy bị gò.",
-   "cung_lam": "Số 6 bớt nhắc; số 3 chủ động làm phần việc nhà."
+   "cung_lam": "Số 6 bớt nhắc; số 3 chủ động nhận phần việc chung."
   },
   "3-7": {
    "hoa": "Số 3 kéo số 7 ra ngoài, số 7 giúp số 3 sâu hơn.",
@@ -125,7 +125,7 @@
    "cung_lam": "Chia vai: số 3 lo đối ngoại, số 8 lo vận hành."
   },
   "3-9": {
-   "hoa": "Lãng mạn, giàu cảm xúc, cùng yêu cái đẹp.",
+   "hoa": "Giàu cảm xúc, cùng yêu cái đẹp và những điều có ý nghĩa.",
    "va": "Cả hai ít thực tế, dễ bỏ qua việc cần làm.",
    "cung_lam": "Mỗi tháng rà soát việc thực tế (tiền, giấy tờ) cùng nhau."
   },
@@ -140,9 +140,9 @@
    "cung_lam": "Thống nhất phần 'cố định' và phần 'linh hoạt' trong đời sống chung."
   },
   "4-6": {
-   "hoa": "Cùng trách nhiệm, hướng gia đình, xây tổ ấm vững.",
+   "hoa": "Cùng trách nhiệm, cùng lo cho người xung quanh, xây nền vững.",
    "va": "Nhiều bổn phận, ít vui chơi.",
-   "cung_lam": "Có ngày chỉ để vui, không làm việc nhà."
+   "cung_lam": "Có những buổi chỉ để vui, không bàn việc phải làm."
   },
   "4-7": {
    "hoa": "Cùng nghiêm túc, cẩn trọng, tôn trọng lý lẽ.",
