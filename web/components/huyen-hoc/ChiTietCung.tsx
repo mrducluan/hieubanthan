@@ -5,6 +5,7 @@ import { MessageCircleQuestion } from "lucide-react";
 import type { LaSoOutputT, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { tenThaiTue, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import { AN_TAP_DIEU, DO_SANG_DAY, HANH_SAO, nhomSao, tamPhuong, type NhomSao } from "@/lib/tuvi-hien-thi";
 
 const MAU_HANH: Record<string, string> = {
@@ -16,8 +17,8 @@ const MAU_HOA: Record<string, string> = {
 const TEN_NHOM: Record<NhomSao, string> = { cat: "Cát tinh", sat: "Sát tinh", dao_hoa: "Đào hoa", trung: "Sao khác" };
 const MAU_NHOM: Record<NhomSao, string> = { cat: "text-gold", sat: "text-cinnabar", dao_hoa: "text-[rgb(244_154_193)]", trung: "text-fg-muted" };
 
-export function ChiTietCung({ ls, chi, vanHan, onHoi }: {
-  ls: LaSoOutputT; chi: string; vanHan?: VanHanOutputT | null; onHoi: (cau: string) => void;
+export function ChiTietCung({ ls, chi, vanHan, onHoi, phai = "nam" }: {
+  ls: LaSoOutputT; chi: string; vanHan?: VanHanOutputT | null; onHoi: (cau: string) => void; phai?: PhaiDoSang;
 }) {
   const i = ls.cung.findIndex((c) => c.chi === chi);
   const c = ls.cung[i];
@@ -34,7 +35,8 @@ export function ChiTietCung({ ls, chi, vanHan, onHoi }: {
     if (daCo.has(t)) continue;
     daCo.add(t);
     const ds = c.do_sang_phu?.[t];
-    nhom[nhomSao(t)].push(ds ? `${t} (${DO_SANG_DAY[ds] ?? ds})` : t);
+    const hien = t === c.tue_tien ? tenThaiTue(c, phai) : t;
+    nhom[nhomSao(t)].push(ds ? `${hien} (${DO_SANG_DAY[ds] ?? ds})` : hien);
   }
   const tt = [ls.tuan_triet?.tuan.includes(chi) && "Tuần", ls.tuan_triet?.triet.includes(chi) && "Triệt"].filter(Boolean);
   const hoaCung = [...c.chinh_tinh, ...c.phu_tinh].filter((s) => s.tu_hoa);

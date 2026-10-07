@@ -18,7 +18,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
 from app.kb import tu_dien
-from app.calc import can_chi, dia_ly, lunar, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao
+from app.calc import can_chi, dia_ly, lunar, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao, tuvi_thai_tue_vn
 from app.hoidap import tuvi as hoidap_tv
 from app import nhat_ky
 from app.kb import tuvi_kb
@@ -47,6 +47,8 @@ class TuanTrietInput(BaseModel):
     # TV-PHAI (chủ dự án chốt 2026-10-02): "hiện cả hai" — mặc định lối Việt / tính tháng sau.
     hoa_linh: Literal["viet", "trung"] = "viet"
     thang_nhuan: Literal["thang_sau", "thang_chinh"] = "thang_sau"
+    # TV-LICH (chủ dự án yêu cầu 2026-10-02): âm lịch Việt Nam (mặc định) ↔ lịch Trung Quốc (cách iztro tự đổi).
+    lich: Literal["viet", "trung"] = "viet"
 
 
 class _DauVao:
@@ -117,14 +119,18 @@ class _DauVao:
         self.tz_lich = config.CALENDAR_MERIDIAN_TZ
         if not nuoc_ngoai and vung_khai is Region.SOUTH:
             self.tz_lich = config.clock_offset(ngay_kinh_tuyen, Region.SOUTH)[0]
+        tz_am = tuvi_an_sao.TZ_TRUNG if inp.lich == "trung" else self.tz_lich
         ld, lm, ly, leap = lunar.solar_to_lunar(
-            ngay_kinh_tuyen.day, ngay_kinh_tuyen.month, ngay_kinh_tuyen.year, self.tz_lich,
+            ngay_kinh_tuyen.day, ngay_kinh_tuyen.month, ngay_kinh_tuyen.year, tz_am,
         )
+        self.lich_khac = tuvi_an_sao.lich_khac(ngay_kinh_tuyen, self.tz_lich)
         self.duong_goc, self.tb, self.ngay_kinh_tuyen = duong_goc, tb, ngay_kinh_tuyen
         self.am = (ld, lm, ly, leap)
-        self.phai = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan,
-                     "co_the_doi_thang_nhuan": bool(leap) and ld > 15}
-        self.tuy_chon = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan}
+        self.phai = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan, "lich": inp.lich,
+                     "co_the_doi_thang_nhuan": bool(leap) and ld > 15,
+                     # ngày sinh này có ngày âm khác nhau giữa lịch Việt và lịch Trung Quốc → lá số có thể khác
+                     "lich_khac": self.lich_khac}
+        self.tuy_chon = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan, "lich": inp.lich}
         self.can, self.chi = lunar.can_chi_nam(ly)
         self.flags = self._co(inp)
 
@@ -144,6 +150,12 @@ class _DauVao:
                 f"Sinh nửa sau tháng {self.am[1]} nhuận (ngày {self.am[0]}): lá số theo quy tắc phổ biến "
                 f"\"nửa sau tháng nhuận tính sang tháng sau\" (tức tháng {self.am[1] % 12 + 1}). Có trường phái "
                 f"tính cả tháng nhuận như tháng {self.am[1]} — Mệnh, Cục và các sao có thể khác.")})
+        if self.lich_khac:
+            flags.append({"loai": "lich_viet_trung", "chi_tiet": (
+                "Ngày sinh này rơi vào đợt âm lịch Việt Nam (UTC+7) và lịch Trung Quốc (UTC+8) lệch nhau: "
+                + ("lá số đang xem theo lịch Trung Quốc theo lựa chọn của bạn" if inp.lich == "trung"
+                   else "lá số đang xem theo lịch Việt Nam") + " — đổi lịch sẽ ra tháng/ngày âm khác, nên Mệnh, "
+                "Cục và lời luận có thể khác.")})
         if self.lich_mien_nam:
             flags.append({"loai": "lich_am_mien_nam", "chi_tiet": (
                 "Ngày âm đổi theo lịch miền Nam thời 1960–1975 (tính theo UTC+8): "
@@ -329,6 +341,7 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             "tap_dieu": [x["name"] for x in p["adjectiveStars"]],
             "truong_sinh": p["changsheng12"], "bac_si": p["boshi12"],
             "tuong_tien": p["jiangqian12"], "tue_tien": p["suiqian12"],
+            "thai_tue_nam_phai": tuvi_thai_tue_vn.ten_nam_phai(p["suiqian12"]),
             "dai_han": {"tu_tuoi": p["decadal"]["range"][0], "den_tuoi": p["decadal"]["range"][1]},
             "tieu_han_tuoi": p["ages"],
             "do_sang_phu": _do_sang_phu(p),
@@ -364,7 +377,7 @@ def api_van_han(inp: VanHanInput) -> dict:
         ngay = _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
     try:
         vh = tuvi_an_sao.van_han(cal.date(), ti, inp.la_so.gender, ngay, chi_tiet=True, tz_lich=dv.tz_lich,
-                                 thang_nhuan=dv.tuy_chon["thang_nhuan"])
+                                 thang_nhuan=dv.tuy_chon["thang_nhuan"], lich=dv.tuy_chon["lich"])
     except tuvi_an_sao.AnSaoLoi as e:
         raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
     can, chi = lunar.can_chi_nam(lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, 7.0)[2])

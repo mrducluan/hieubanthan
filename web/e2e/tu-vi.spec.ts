@@ -154,3 +154,24 @@ test("KB-TV2b: hỏi tính cách → độ sáng Nam phái + nghĩa riêng khi s
   await expect(ans).toContainText("Cự Môn ở cung Mệnh (Đắc");     // Nam phái: Cự Môn tại Hợi
   await expect(ans).toContainText("lời nói có sức nặng");
 });
+
+test("TV-LICH: khung Trường phái — đổi lịch Việt ↔ Trung ra lá khác, tên vòng Thái Tuế theo phái", async ({ page }) => {
+  await napHoSo(page, { ...HO_SO_MAU, ngay: 30, thang: 1, nam: 1985, gio: "10:00" });
+  await page.goto("/tu-vi");
+  const tp = page.getByTestId("truong-phai");
+  await expect(tp).toContainText("lệch nhau");
+  const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
+  await expect(laSo).toContainText("Thái Tuế");                          // tên sách Việt
+  const menh = laSo.getByRole("button", { name: /^Cung Mệnh/ });
+  const truoc = await menh.getAttribute("aria-label");
+  await tp.getByRole("tab", { name: "Lịch Trung Quốc" }).click();
+  await expect(menh).not.toHaveAttribute("aria-label", truoc!);
+  await tp.getByRole("tab", { name: "Phái Trung" }).click();
+  await expect(laSo).toContainText("Tuế Kiện");                          // tên iztro (phái Trung)
+});
+
+test("TV-LICH: ngày hai lịch trùng → báo đổi lịch không làm lá số thay đổi", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await expect(page.getByTestId("truong-phai")).toContainText("hai lịch trùng nhau");
+});

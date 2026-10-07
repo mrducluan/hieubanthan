@@ -13,4 +13,5 @@ export const LaSoVao = z.object({
   /** TV-PHAI — chỉ Tử vi: vị trí Hoả/Linh (lối Việt / Trung Châu), nửa sau tháng nhuận (tháng sau / như tháng chính). */
   hoa_linh: z.enum(["viet", "trung"]).optional(),
   thang_nhuan: z.enum(["thang_sau", "thang_chinh"]).optional(),
+  lich: z.enum(["viet", "trung"]).optional(),
 }).strict();

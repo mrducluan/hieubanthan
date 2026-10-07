@@ -32,6 +32,11 @@ interface DongSao { ten: string; mau: string; dam?: boolean; nghieng?: boolean }
 export type PhaiDoSang = "nam" | "trung";
 type SaoT = CungT["chinh_tinh"][number];
 /** Độ sáng hiển thị: Nam phái dùng bảng lối Việt (chính tinh + phụ tinh có luận); phái Trung dùng iztro. */
+/** Vòng Thái Tuế: Nam phái dùng tên sách Việt (Thái Tuế, Thiếu Dương…), phái Trung giữ tên iztro. */
+export function tenThaiTue(c: { tue_tien: string; thai_tue_nam_phai?: string | null }, phai: PhaiDoSang): string {
+  return phai === "nam" ? (c.thai_tue_nam_phai ?? c.tue_tien) : c.tue_tien;
+}
+
 export function doSang(s: SaoT, phai: PhaiDoSang, laChinh: boolean): string | null {
   if (phai === "nam") return laChinh ? s.do_sang_nam_phai ?? s.do_sang : s.do_sang_nam_phai ?? null;
   return s.do_sang;
@@ -60,7 +65,8 @@ function dongSaoCot(c: CungT, phai: PhaiDoSang): { trai: DongSao[]; phai: DongSa
     daCo.add(t);
     const g = nhomSao(t);
     const ds = phai === "nam" ? c.do_sang_phu?.[t] : undefined;
-    const d = { ten: ds && DO_SANG_TAT[ds] ? `${t} (${DO_SANG_TAT[ds]})` : t, mau: MAU_NHOM[g] };
+    const hien = t === c.tue_tien ? tenThaiTue(c, phai) : t;     // TV-LICH: tên vòng Thái Tuế theo phái
+    const d = { ten: ds && DO_SANG_TAT[ds] ? `${hien} (${DO_SANG_TAT[ds]})` : hien, mau: MAU_NHOM[g] };
     (g === "sat" || g === "trung" ? phaiCot : trai).push(d);
   }
   return { trai, phai: phaiCot };

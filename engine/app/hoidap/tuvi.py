@@ -519,7 +519,8 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
         ls = tom_tat(az.an_sao_tho(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], "vi-VN",
                                      tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
                                      hoa_linh=sinh.get("hoa_linh", "viet"),
-                                     thang_nhuan=sinh.get("thang_nhuan", "thang_sau")))
+                                     thang_nhuan=sinh.get("thang_nhuan", "thang_sau"),
+                                     lich=sinh.get("lich", "viet")))
         if pl["loai"] == "han":
             xem = ngay_xem
             if pl["nam_xem"]:
@@ -528,12 +529,14 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
                 xem = _cong_nam(ngay_xem, 1)
             vh = {**az.van_han(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], xem,
                                 tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
-                                thang_nhuan=sinh.get("thang_nhuan", "thang_sau")), "ngay_xem": xem.isoformat()}
+                                thang_nhuan=sinh.get("thang_nhuan", "thang_sau"),
+                                lich=sinh.get("lich", "viet")), "ngay_xem": xem.isoformat()}
             if pl["han_toi"]:
                 buoc = vh["dai_han"]["den_tuoi"] - vh["tuoi_mu"] + 1
                 vh_toi = az.van_han(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], _cong_nam(xem, buoc),
                                     tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
-                                    thang_nhuan=sinh.get("thang_nhuan", "thang_sau"))
+                                    thang_nhuan=sinh.get("thang_nhuan", "thang_sau"),
+                                    lich=sinh.get("lich", "viet"))
     goi = goi_bang_chung(pl, ls, vh, vh_toi)
     van = van_template(goi)
     che_do_van, loi = "template", []

@@ -154,3 +154,17 @@ test("TS-SAU: chân dung 4 mặt có lớp riêng; dòng đời + đối chiếu
   await expect(kq).toContainText("Sang giai đoạn đời mới — đỉnh số 5");
   await expect(kq).toContainText("Thường được đối chiếu với");
 });
+
+test("TV-LICH: ngày lịch Việt ≠ lịch Trung Quốc → hồ sơ nhắc lá số tử vi có thể khác", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Ngày", { exact: true }).fill("30");
+  await page.getByLabel("Tháng", { exact: true }).fill("1");
+  await page.getByLabel("Năm", { exact: true }).fill("1985");
+  await expect(page.getByTestId("doi-lich")).toContainText("theo lịch Việt Nam");
+  await expect(page.getByTestId("nhac-lich-trung")).toContainText("theo lịch Trung Quốc là");
+  await page.getByLabel("Ngày", { exact: true }).fill("17");
+  await page.getByLabel("Tháng", { exact: true }).fill("5");
+  await page.getByLabel("Năm", { exact: true }).fill("1990");
+  await expect(page.getByTestId("doi-lich")).toContainText("Âm lịch:");
+  await expect(page.getByTestId("nhac-lich-trung")).toHaveCount(0);
+});
