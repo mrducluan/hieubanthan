@@ -1,7 +1,7 @@
 "use client";
 // PT-HK — Huyền Không phi tinh: nhập năm xây + toạ sơn (hoặc độ la bàn) → hạ quái bàn 3×3 (Nam ở trên).
 // Mỗi cung: sơn tinh (trái) · hướng tinh (phải) · vận tinh (giữa dưới) · lưu niên (góc). Engine tính hết.
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
@@ -36,11 +36,17 @@ const MAU_TT: Record<string, string> = {
   "vượng": "text-gold", "sinh": "text-jade", "thoái": "text-moon", "suy": "text-fg-muted", "tử": "text-fg-faint",
 };
 
-export function HuyenKhong() {
+export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
   const [namXay, setNamXay] = useState("2024");
   const [cach, setCach] = useState<"son" | "do">("son");
   const [toa, setToa] = useState("Tý");
   const [doLa, setDoLa] = useState("");
+  // PT-V1: độ toạ đo bằng la bàn điện thoại → điền sẵn vào ô "Nhập độ la bàn".
+  useEffect(() => {
+    if (doToaGoiY == null) return;
+    setCach("do");
+    setDoLa(String(doToaGoiY));
+  }, [doToaGoiY]);
   const [kiem, setKiem] = useState(false);
   const [ban, setBan] = useState<Ban | null>(null);
   const [loi, setLoi] = useState<string | null>(null);

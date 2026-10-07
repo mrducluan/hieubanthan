@@ -57,3 +57,29 @@ test("Huyền Không: đánh dấu kiêm hướng → thế quái (Vận 8 toạ
   await expect(tq).toContainText("Nếu lập hạ quái: Song tinh đáo hướng");
   await expect(page.getByTestId("ban-huyen-khong").getByRole("cell", { name: /^Ly Nam: sơn tinh 1, hướng tinh 7/ })).toBeVisible();
 });
+
+test("PT-V1: đo hướng nhà — nhập tay và la bàn điện thoại (giả lập cảm biến) → hướng, sơn, trạch, du niên", async ({ page }) => {
+  await napHoSo(page);   // hồ sơ mẫu: nam 17/05/1990 → mệnh Khảm
+  await page.goto("/phong-thuy");
+  const o = page.getByTestId("do-huong");
+  await o.getByLabel("Độ hướng nhà").fill("135");
+  await o.getByRole("button", { name: "Xem" }).click();
+  const kq = page.getByTestId("ket-qua-do-huong");
+  await expect(kq).toContainText("Đông Nam");
+  await expect(kq).toContainText("sơn Tốn");
+  await expect(kq).toContainText("Càn");
+  await expect(kq).toContainText("Sinh Khí");
+
+  // Giả lập la bàn Android: alpha tuyệt đối 180 → hướng 180° (Nam)
+  await o.getByRole("button", { name: "Đo bằng la bàn điện thoại" }).click();
+  await page.evaluate(() => {
+    const ten = "ondeviceorientationabsolute" in window ? "deviceorientationabsolute" : "deviceorientation";
+    window.dispatchEvent(new DeviceOrientationEvent(ten, { alpha: 180, beta: 0, gamma: 0, absolute: true }));
+  });
+  await expect(o.getByText("180°")).toBeVisible();
+  await o.getByRole("button", { name: "Chốt hướng này" }).click();
+  await expect(kq).toContainText("Nam");
+  await expect(kq).toContainText("sơn Ngọ");
+  await kq.getByRole("button", { name: /lập bàn Huyền Không/ }).click();
+  await expect(page.getByLabel("Độ la bàn của toạ")).toHaveValue("0");
+});
