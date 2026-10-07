@@ -56,16 +56,54 @@ def _khong_dau(s: str) -> str:
     return "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn").lower()
 
 
+TUONG = {"Càn": "Thiên", "Đoài": "Trạch", "Ly": "Hỏa", "Chấn": "Lôi", "Tốn": "Phong", "Khảm": "Thủy",
+         "Cấn": "Sơn", "Khôn": "Địa"}
+
+
+def _ten_day_du() -> list[tuple[int, str]]:
+    """Tên đầy đủ 64 quẻ (thượng tượng + hạ tượng + tên ngắn; quẻ thuần: 'Thuần X' / 'Bát Thuần X')."""
+    from app.calc import kinhdich_vendor as v  # noqa: PLC0415
+    ds: list[tuple[int, str]] = []
+    for ha, hang in v.KW.items():
+        for thuong, so in hang.items():
+            ngan = v.TEN[so]
+            if ha == thuong:
+                ds += [(so, f"Bát Thuần {ngan}"), (so, f"Thuần {ngan}"), (so, f"{TUONG[ha]} Vi {TUONG[ha]}")]
+            else:
+                ds.append((so, f"{TUONG[thuong]} {TUONG[ha]} {ngan}"))
+    return ds
+
+
 def _que_nhac(cau: str) -> int | None:
-    """Tên quẻ trong câu ('quẻ Càn', 'được quẻ Thuỷ Lôi Truân' → theo tên ngắn). Có dấu ưu tiên."""
+    """Quẻ được nhắc trong câu: tên đầy đủ ('Thuỷ Hoả Ký Tế', không cần chữ 'quẻ'), 'quẻ <tên ngắn>',
+    hoặc 'quẻ (số) N' (1–64). Có dấu ưu tiên."""
     thap = cau.lower()
+    kd = _khong_dau(cau)
+    for so, t in sorted(_ten_day_du(), key=lambda kv: -len(kv[1])):
+        if re.search(r"(?<!\w)" + re.escape(_khong_dau(t)) + r"(?!\w)", kd):
+            return so
     ten = sorted(kb.ten_que().items(), key=lambda kv: -len(kv[1]))
     for so, t in ten:
         if re.search(r"quẻ\s+" + re.escape(t.lower()) + r"(?!\w)", thap):
             return so
-    kd = _khong_dau(cau)
     ung = [so for so, t in ten if re.search(r"que\s+" + re.escape(_khong_dau(t)) + r"(?!\w)", kd)]
-    return ung[0] if ung else None
+    if ung:
+        return ung[0]
+    m = re.search(r"que\s+(?:so|thu)\s+(\d{1,2})(?!\d)", kd)
+    return int(m.group(1)) if m and 1 <= int(m.group(1)) <= 64 else None
+
+
+HAO_TEN = {"so": 1, "nhi": 2, "tam": 3, "tu": 4, "ngu": 5, "thuong": 6}
+
+
+def _hao_nhac(cau: str) -> int | None:
+    """'hào 5', 'hào thứ 5', 'hào ngũ', 'cửu ngũ', 'lục nhị'… → vị trí hào 1..6."""
+    kd = _khong_dau(cau)
+    m = re.search(r"hao\s+(?:thu\s+)?([1-6])(?!\d)", kd)
+    if m:
+        return int(m.group(1))
+    m = re.search(r"(?:hao|cuu|luc)\s+(so|nhi|tam|tu|ngu|thuong)(?!\w)", kd)
+    return HAO_TEN[m.group(1)] if m else None
 
 
 def _giai_thich_khop(t: str) -> list[str]:
@@ -74,17 +112,22 @@ def _giai_thich_khop(t: str) -> list[str]:
 
 def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
     t = chung.chuan_hoa(cau_hoi)
-    kq = {"cau_chuan_hoa": t, "che_do": che_do, "que_nhac": _que_nhac(cau_hoi),
+    kq = {"cau_chuan_hoa": t, "che_do": che_do, "que_nhac": _que_nhac(cau_hoi), "hao_nhac": _hao_nhac(cau_hoi),
           "giai_thich": _giai_thich_khop(t), "linh_vuc": chung.linh_vuc_doi_song(t),
           "truong_phai": None, "dung_than": None, "xu_ly": "tra_loi", "loai": None}
     db = chung.dac_biet(t)
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq
-    if kq["que_nhac"] and re.search(r"gieo duoc|duoc que|ra que", t):
+    # Đã nêu tên quẻ + hỏi chuyện cần quyết → đọc chính quẻ đó (người hỏi đã có quẻ), không gieo quẻ khác.
+    if kq["que_nhac"] and (re.search(r"gieo duoc|duoc que|ra que", t) or chung.co(t, QUYET_DINH + DU_DOAN)):
         kq.update(loai="doc_que_da_co", truong_phai="nghia_ly")
         return kq
-    if kq["giai_thich"] or (kq["que_nhac"] and chung.co(t, KY_THUAT)):
+    # Hỏi về một quẻ đã nêu tên/số (nghĩa, hào, "là quẻ gì") mà không nhờ quyết định → TRA quẻ đó,
+    # không gieo quẻ mới.
+    tra = kq["que_nhac"] and (chung.co(t, KY_THUAT) or kq["hao_nhac"] or not chung.co(t, QUYET_DINH + DU_DOAN)
+                              or re.search(r"noi gi|que gi|y nghia", t))
+    if kq["giai_thich"] or tra:
         kq["loai"] = "ky_thuat"
         return kq
     if chung.co(t, DOC_NHANH):
@@ -172,6 +215,11 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | 
             m = _muc_que(pl["que_nhac"], "nhac", pl["linh_vuc"])
             if m:
                 muc.append(m)
+            vi = pl.get("hao_nhac")
+            lk = _muc_loi_kinh({"que": pl["que_nhac"], "loai": "hao" if vi else "que_tu", "vi_tri": vi,
+                                "chu": True})
+            if lk:
+                muc.append(lk)
         if pl["loai"] == "doc_que_da_co":
             goi["luu_y"] = kb.luu_y("nghia_ly")
         return chung.ket(goi)

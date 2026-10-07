@@ -27,7 +27,7 @@ KET = ("Đây là góc nhìn tham khảo văn hoá để bạn tự soi, không 
        "về đời bạn.")
 CAM = ["chắc chắn sẽ", "bạn sẽ", "định mệnh", "số phận đã", "không thể tránh", "bẩm sinh",
        "vốn dĩ", "100%", "tiền định"]
-TEN_VAI = {"ban": "bạn", "nguoi_kia": "người ấy", "con": "bé"}
+TEN_VAI = {"ban": "bạn", "nguoi_kia": "người ấy", "con": "bé", "so_a": "người thứ nhất", "so_b": "người thứ hai"}
 
 
 # --------------------------------------------------------------------------- #
@@ -54,6 +54,10 @@ def _doan(m: dict) -> tuple[str, str | None]:
                     f"Hợp với: {m['hop_kieu_nguoi']} Dấu hiệu lệch nhịp: {m['dau_hieu_lech']}", None)
         return (f"{dau}: {m['chan_dung']} Điểm mạnh: {'; '.join(m['diem_manh'])}. "
                 f"Điểm mù: {'; '.join(m['diem_mu'])}. Khi căng thẳng: {m['khi_cang_thang']}", None)
+    if l == "trong_vai":
+        ai = TEN_VAI.get(m["vai"], "người ấy")
+        return (f"Với {m['ten_quan_he'].lower()}, {ai} (số chủ đạo {m['so']}) thường: {m['vai_mo_ta']} "
+                f"Cần: {m['can']} Nên tránh: {m['tranh']} Cách nói chuyện hợp: {m['cach_noi']}", None)
     if l == "cap_so":
         return (f"Cặp {m['ten_vi_tri']} {m['so_a']} và {m['so_b']} (tra theo cặp {m['cap']}): "
                 f"điểm hoà — {m['hoa']} Điểm dễ va — {m['va']} Hai người có thể: {m['cung_lam']}", None)
@@ -66,6 +70,9 @@ def _doan(m: dict) -> tuple[str, str | None]:
             f"Tháng cá nhân {m['so']}"
         return f"{th} ({m['chu_de']}): {m['nen']} Tránh: {m['tranh']}", None
     if l == "ngay_ca_nhan":
+        if m.get("ngay"):
+            y, mo, d = m["ngay"].split("-")
+            return f"Ngày {int(d)}/{int(mo)}/{y} — {m['y_nghia']}", None
         return m["y_nghia"], None
     if l == "dinh_cao":
         den = f"{m['tu_tuoi']}–{m['den_tuoi']} tuổi" if m["den_tuoi"] else f"từ {m['tu_tuoi']} tuổi"

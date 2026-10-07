@@ -1357,9 +1357,14 @@
   },
   "luc_hao_mai_hoa": {
    "tieu_de": "Lục Hào khác Mai Hoa",
-   "noi_dung": "Lục Hào (Kinh Phòng, Tăng San Bốc Dịch) gán địa chi, lục thân cho từng hào, xét dụng thần và vượng suy để đoán thành bại, thời điểm. Mai Hoa (Thiệu Ung) khởi quẻ theo thời gian/tượng và xét thể–dụng sinh khắc, đọc nhanh việc trước mắt.",
+   "noi_dung": "Lục Hào (Kinh Phòng, Tăng San Bốc Dịch) gán địa chi, lục thân cho từng hào, xét dụng thần và vượng suy để đoán thành bại, thời điểm. Mai Hoa (Thiệu Ung) khởi quẻ theo thời gian/tượng và xét thể–dụng sinh khắc, đọc nhanh việc trước mắt. Khác nhau ở CÁCH RA QUẺ: gieo đồng xu hay cỏ thi tạo 6 hào ngẫu nhiên (có hào già/động); Mai Hoa lấy số từ năm–tháng–ngày–giờ hoặc từ sự vật bắt gặp để lập thượng quái, hạ quái và một hào động, không cần gieo.",
    "tu_khoa": [
-    "luc hao khac mai hoa"
+    "luc hao khac mai hoa",
+    "mai hoa khac",
+    "mai hoa dich so khac",
+    "khac mai hoa",
+    "mai hoa la gi",
+    "mai hoa dich so la gi"
    ],
    "source_id": "chu_dich",
    "school_id": "tong_hop"

@@ -229,14 +229,26 @@
     "ngu tren bep"
    ]
   },
+  "guong_cua_chinh": {
+   "tieu_de": "Gương chiếu thẳng cửa chính",
+   "noi_dung": "Quan niệm dân gian: gương đặt đối diện cửa chính 'đẩy' vượng khí và tài lộc vừa vào nhà ra ngoài; một số người lại treo gương bát quái ngoài cửa để 'trấn' — đó là tín ngưỡng, không thuộc lý khí. Thực tế: người vào nhà gặp ngay hình mình phản chiếu dễ giật mình, ánh sáng hắt chói, và lối vào trông hẹp hơn.",
+   "goi_y": "Đặt gương ở tường bên cạnh lối vào (soi được khi ra khỏi nhà) thay vì đối thẳng cửa.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "guong (doi dien|chieu|chieu thang|chieu vao|ngay) cua",
+    "guong o (loi|cua) vao",
+    "guong bat quai"
+   ]
+  },
   "guong_giuong": {
    "tieu_de": "Gương đối diện giường",
    "noi_dung": "Quan niệm dân gian: gương phản chiếu gây bất an giấc ngủ. Thực tế: ánh sáng phản xạ, giật mình khi thức dậy.",
    "goi_y": "Dời gương sang bên hoặc che lại khi ngủ.",
    "nguon": "dan_gian",
    "tu_khoa": [
-    "guong doi dien",
-    "guong chieu"
+    "guong (doi dien|chieu|chieu vao|chieu thang) giuong",
+    "guong trong phong ngu",
+    "guong (doi dien|chieu)(?! cua)"
    ]
   },
   "ban_tho": {

@@ -313,7 +313,10 @@ def phan_loai(cau_hoi: str) -> dict:
                               r"hai vo chong|so hai vo chong|chung toi yeu nhau|vo chong cung so", t)
                  or re.search(r"(hop|khac) (voi |nhau|hay khac|khong)|co hop|xem do hop|duyen no|"
                               r"di den cuoi|hop tinh|song voi nhau|hieu nhau hon|choi voi nhau", t)
-                 and re.search(r"(?<!\w)" + LIEN_QUAN_NGUOI + r"(?!\w)|toi va|va (anh|co|ban|nguoi)", t))
+                 and re.search(r"(?<!\w)" + LIEN_QUAN_NGUOI + r"(?!\w)|toi va|va (anh|co|ban|nguoi)", t)
+                 # "hợp làm sếp", "hợp với nghề gì": hỏi độ hợp NGHỀ của chính mình, không phải hai người
+                 and not re.search(r"hop (lam|voi nghe|nghe|voi cong viec|voi viec|voi nganh|voi moi truong|"
+                                   r"voi vi tri|voi vai tro)", t))
     con = _co(t, CON)
     if hai_nguoi and not (con and not re.search(r"toi va con|con toi va|hai dua", t)
                           and not re.search(r"hop (voi |nhau)|hop khong", t)):
@@ -420,16 +423,32 @@ def _them_thoi_diem(muc: list, cs: dict, t: str, ngay_xem: _dt.date, nguoi: dict
         if n:
             muc.append({"loai": "nam_ca_nhan", "nam": None if so_nhac else nam, "so": so, **n,
                         **_meta_depth()})
+    # "tháng sau / tháng tới" và "ngày 15 tháng sau", "ngày 3/11" → mốc xem đúng ngày được hỏi
+    thang_xem = _dt.date(ngay_xem.year + (ngay_xem.month == 12), ngay_xem.month % 12 + 1, 1) \
+        if re.search(r"thang (sau|toi)", t) else ngay_xem
+    ngay_hoi = None
+    mn = re.search(r"ngay (\d{1,2})(?:(?: thang |/)(\d{1,2}|sau|toi|nay))?(?!\d)", t)
+    if mn and not re.search(r"ngay ca nhan", t):
+        th = mn.group(2)
+        goc = thang_xem if th in ("sau", "toi") else ngay_xem
+        thang = int(th) if th and th.isdigit() else goc.month
+        nam_h = goc.year + (1 if th and th.isdigit() and int(th) < ngay_xem.month else 0)
+        try:
+            ngay_hoi = _dt.date(nam_h, thang, int(mn.group(1)))
+        except ValueError:
+            ngay_hoi = None
+    if ngay_hoi:
+        thang_xem = ngay_hoi
     if re.search(r"thang|tuan", t):
         mm = re.search(r"thang ca nhan (so )?([1-9])", t)
-        so = int(mm.group(2)) if mm else mr.thang_ca_nhan(d, m, ngay_xem.year, ngay_xem.month)
+        so = int(mm.group(2)) if mm else mr.thang_ca_nhan(d, m, thang_xem.year, thang_xem.month)
         n = kb.nghia_phu("thang_ca_nhan", so)
         if n:
-            muc.append({"loai": "thang_ca_nhan", "thang": None if mm else ngay_xem.month, "so": so,
+            muc.append({"loai": "thang_ca_nhan", "thang": None if mm else thang_xem.month, "so": so,
                         **n, **kb.meta_phu()})
-    if re.search(r"hom nay|ngay mai|ngay nao|ngay ca nhan|tuan nay", t):
+    if ngay_hoi or re.search(r"hom nay|ngay mai|ngay nao|ngay ca nhan|tuan nay", t):
         mm = re.search(r"ngay ca nhan (so )?([1-9])", t)
-        ngay = ngay_xem + _dt.timedelta(days=1) if "ngay mai" in t else ngay_xem
+        ngay = ngay_hoi or (ngay_xem + _dt.timedelta(days=1) if "ngay mai" in t else ngay_xem)
         so = int(mm.group(2)) if mm else mr.ngay_ca_nhan(d, m, ngay.year, ngay.month, ngay.day)
         n = kb.nghia_phu("ngay_ca_nhan", so)
         if n:
@@ -576,11 +595,24 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
                     else "ban_be_xa_hoi" if re.search(r"ban than|ban be|hai nguoi ban", t)
                     else "gia_dinh" if re.search(r"(?<!\w)(me|bo|anh em|con gai|con trai)(?!\w)", t)
                     else "tinh_yeu")
-        for vai, cs in (("ban", a), ("nguoi_kia", b)):
+        gia_dinh_so = bool(pl["cap_nhac"])          # hai con số tự nêu, không phải số của người hỏi
+        cap_vai = (("so_a", a), ("so_b", b)) if gia_dinh_so else (("ban", a), ("nguoi_kia", b))
+        for vai, cs in cap_vai:
             if "duong_doi" in cs:
                 m = _muc_lv(cs["duong_doi"], ngu_canh, "duong_doi", vai)
                 if m:
                     muc.append(m)
+        # TS-SAU: góc "trong vai" theo loại quan hệ (người yêu / bạn / đồng nghiệp / sếp / gia đình)
+        qh = ("sep" if re.search(r"(?<!\w)sep(?!\w)|cap tren", t) else
+              {"su_nghiep": "dong_nghiep", "ban_be_xa_hoi": "ban_be", "gia_dinh": "gia_dinh"}.get(ngu_canh, "nguoi_yeu"))
+        # Lời "trong vai" viết cho người ĐỐI DIỆN đọc → chỉ áp cho người kia; hai số giả định thì cả hai.
+        for vai, cs in cap_vai if gia_dinh_so else cap_vai[1:]:
+            if "duong_doi" in cs:
+                v = kb.nguoi_trong_vai(cs["duong_doi"], qh)
+                if v:
+                    muc.append({"loai": "trong_vai", "vai": vai, "so": cs["duong_doi"], "quan_he": qh,
+                                "ten_quan_he": kb.quan_he(qh)["ten"], "vai_mo_ta": v["vai"],
+                                **{k: v[k] for k in ("can", "tranh", "cach_noi")}, **kb.meta_quan_he()})
         return _ket(goi)
 
     # --- Người khác / con
@@ -656,8 +688,8 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
     # Câu hỏi có trọng tâm kỹ thuật → khối đó lên đầu, chỉ giữ 1 đoạn tính cách chung.
     trong_tam = (re.search(r"bieu do|mui ten|so thieu|thieu so|khong co so|nhieu so|so lap", t)
                  or re.search(r"no nghiep|bai hoc nghiep", t) or lv == "thoi_van")
-    if trong_tam and any(m["loai"] != "linh_vuc" for m in muc):
-        khac = [m for m in muc if m["loai"] != "linh_vuc"]
+    if trong_tam and any(m["loai"] not in ("linh_vuc", "chan_dung") for m in muc):
+        khac = [m for m in muc if m["loai"] not in ("linh_vuc", "chan_dung")]
         lv_muc = [m for m in muc if m["loai"] == "linh_vuc"]
         muc[:] = khac + lv_muc[:1]
 

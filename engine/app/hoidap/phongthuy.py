@@ -81,6 +81,11 @@ def phan_loai(cau_hoi: str) -> dict:
     if chung.co(t, [r"vat pham", r"chieu tai", r"trung so", r"yem bua", r"bua"]):
         kq.update(xu_ly="tu_choi_nhe", loai="dac_biet")
         return kq
+    m_van = re.search(r"van ([1-9])(?!\d)", t)
+    kq["van"] = int(m_van.group(1)) if m_van else None
+    if kq["huong"] and (kq["van"] or chung.co(t, [r"huyen khong", r"phi tinh", r"tinh ban", r"trach van"])):
+        kq["loai"] = "huyen_khong"
+        return kq
     if kq["quai"] and kq["huong"]:
         kq["loai"] = "menh_quai_chung"
     elif kq["du_nien"] and not kq["ca_nhan"] and chung.co(t, [r"nghia la", r"la gi", r"y nghia"]):
@@ -91,6 +96,8 @@ def phan_loai(cau_hoi: str) -> dict:
         kq.update(loai="am_trach", xu_ly="tra_loi_kem_luu_y")
     elif chung.co(t, NAM_VIEC) and (chung.co(t, NAM_KW) or chung.co(t, [r"tuoi toi", r"xem tuoi"])):
         kq.update(loai="nam", xu_ly="tra_loi_kem_luu_y")
+    elif chung.co(t, [r"(?<!vo )(vo|chong) (toi|minh) (sinh|tuoi|nam)"]) and nam and not chung.co(t, [r"vo chong"]):
+        kq["loai"], kq["kia_ro"] = "hop", True   # nêu rõ năm sinh vợ/chồng → tính luôn mệnh quái hai người
     elif chung.co(t, HOP) and (kq["ca_nhan"] or chung.co(t, [r"ca hai", r"hai vo chong"])) \
             and chung.co(t, [r"huong", r"hop", r"menh"]) \
             and ("vo_chong_khac_menh" not in kq["giai_thich"] or chung.co(t, [r"xem huong", r"cua toi", r"tuoi toi"])) \
@@ -185,8 +192,39 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int) -> dict:
             goi["mau"] = kb.mau("can_nam_sinh")
         goi["luu_y"] = kb.luu_y("nam")
         return chung.ket(goi)
+    if loai == "huyen_khong":
+        from app.calc import huyen_khong as hk  # noqa: PLC0415
+        van = pl["van"] or hk.van_cua_nam(nam_xem)
+        nam_xay = 1864 + (van - 1) * 20 + 1                     # một năm bất kỳ trong vận
+        hq = next(q for q, v in hk.QUAI.items() if v[1] == pl["huong"][0])
+        toa_q = hk.DOI[hq]
+        ds = []
+        for (h_son, _), (t_son, _) in zip(hk.QUAI[hq][2], hk.QUAI[toa_q][2]):
+            b = hk.trach_ban(nam_xay, t_son)
+            ds.append({"huong_son": h_son, "toa_son": t_son, "cuc": b["cuc"], "cuc_ten": b["cuc_ten"],
+                       "y": kb.huyen_khong()["cuc"][b["cuc"]]["y"],
+                       })
+        muc.append({"loai": "huyen_khong", "huong": pl["huong"][0], "van": van,
+                    "tu_nam": 1864 + (van - 1) * 20, "den_nam": 1864 + van * 20 - 1, "ds": ds,
+                    **{k: kb.huyen_khong()[k] for k in ("source_id", "school_id", "trang_thai")}})
+        goi["luu_y"] = kb.huyen_khong()["luu_y"]
+        return chung.ket(goi)
     if loai == "hop":
         muc.append({"loai": "giai_thich", "ma": "vo_chong_khac_menh", **kb.giai_thich("vo_chong_khac_menh")})
+        nam_kia = pl["nam_sinh_cau"]
+        if sinh and nam_kia and pl.get("kia_ro"):    # "vợ tôi sinh 1992…" → tính luôn mệnh quái người kia
+            ban = pt.menh_quai(sinh["nam"], sinh["gioi_tinh"], sinh.get("ngay"))
+            gioi_kia = pl["gioi_tinh_cau"] or ("nu" if chung.co(pl["cau_chuan_hoa"], [r"vo toi", r"vo minh"])
+                                               else "nam" if chung.co(pl["cau_chuan_hoa"], [r"chong toi", r"chong minh"])
+                                               else ("nu" if sinh["gioi_tinh"] == "nam" else "nam"))
+            kia = pt.menh_quai(nam_kia, gioi_kia)
+            muc[:] = [m for m in muc if m.get("ma") != "vo_chong_khac_menh"]   # thay lời chung bằng kết quả tính
+            muc.append(_m_menh(ban))
+            muc.append({**_m_menh(kia), "vai": f"người kia (sinh {nam_kia})"})
+            muc.append({"loai": "so_nhom", "cung_nhom": ban["nhom"][:6] == kia["nhom"][:6],
+                        "ban": ban["nhom"], "kia": kia["nhom"]})
+            goi["luu_y"] = kb.luu_y("bat_trach")
+            return chung.ket(goi)
         goi["can_them"] = ["nam_sinh_hai_nguoi"]
         goi["mau"] = kb.mau("hop")
         return chung.ket(goi)
@@ -216,7 +254,23 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int) -> dict:
     if pl["huong"] and chung.co(pl["cau_chuan_hoa"], [r"nha huong", r"can huong", r"cua chinh huong"]):
         tr = pt.trach(pl["huong"][0])
         muc.append({"loai": "trach", **tr, "hop_nhom": (tr["nhom"][:6] == mq["nhom"][:6]), **kb.meta()})
-    if not pl["huong"]:
+    bang = pt.bang_huong(mq["quai"])
+    xau = [h for h, d in bang.items() if d not in pt.CAT]
+    theo = {d: h for h, d in bang.items()}
+    t = pl["cau_chuan_hoa"]
+    if not pl["huong"] and chung.co(t, [r"bep"]):
+        muc.append({"loai": "goi_y_vi_tri", "doi_tuong": "bếp", "noi_dung": (
+            f"Bát trạch dùng nguyên tắc 'toạ hung hướng cát' cho bếp: đặt bếp (lưng bếp) ở phương xấu của bạn "
+            f"({', '.join(xau)}) để 'đè' hung khí, còn hướng bếp — hướng miệng bếp/người đứng nấu nhìn về — "
+            f"quay về phương tốt, ưu tiên Thiên Y ({theo['Thiên Y']}) hoặc Diên Niên ({theo['Diên Niên']}). "
+            "Thực tế bếp còn cần thông gió, xa nguồn nước bồn rửa một khoảng và không nằm ngay lối cửa chính.")})
+    elif not pl["huong"] and chung.co(t, [r"giuong", r"dau giuong", r"quay dau", r"phong ngu", r"ngu quay"]):
+        muc.append({"loai": "goi_y_vi_tri", "doi_tuong": "giường", "noi_dung": (
+            f"Đầu giường (hướng đỉnh đầu khi nằm) theo Bát trạch nên quay về phương tốt của người nằm: Thiên Y "
+            f"({theo['Thiên Y']}) cho giấc ngủ, sức khoẻ; Diên Niên ({theo['Diên Niên']}) cho vợ chồng hoà thuận; "
+            f"Phục Vị ({theo['Phục Vị']}) cho sự ổn định. Tránh {', '.join(xau)}. "
+            "Thực tế: đầu giường nên tựa tường đặc, không ngay dưới xà, không đối thẳng cửa.")})
+    elif not pl["huong"]:
         muc.append(_m_du_nien("Sinh Khí", None, ""))
     goi["luu_y"] = kb.luu_y("bat_trach")
     return chung.ket(goi)
@@ -226,7 +280,8 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int) -> dict:
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
     if l == "menh_quai":
-        return (f"Mệnh quái (cung phi) của bạn: {m['quai']} ({m['nhom']}, tính theo năm {m['nam_tinh']}; "
+        ai = m.get("vai") or "bạn"
+        return (f"Mệnh quái (cung phi) của {ai}: {m['quai']} ({m['nhom']}, tính theo năm {m['nam_tinh']}; "
                 f"hành {m['ngu_hanh']}, tính chất {m['tinh_chat']}). Hướng tốt: {', '.join(m['tot'])}. "
                 f"Hướng xấu: {', '.join(m['xau'])}.", None)
     if l == "du_nien":
@@ -257,6 +312,20 @@ def _doan(m: dict) -> tuple[str, str | None]:
         return (f"Tuổi làm nhà năm {m['nam_xem']} (quan niệm dân gian, tuổi mụ {m['tuoi_mu']}): "
                 f"{'phạm ' + kl['loai'] if kl['pham'] else 'không phạm Kim Lâu'}; Hoang Ốc: {ho['cung']} "
                 f"({'tốt' if ho['tot'] else 'xấu'}); {'phạm Tam Tai' if tt['pham'] else 'không phạm Tam Tai'}.", None)
+    if l == "goi_y_vi_tri":
+        return f"Vị trí {m['doi_tuong']}: {m['noi_dung']}", None
+    if l == "so_nhom":
+        return (f"Hai người {'cùng nhóm' if m['cung_nhom'] else 'khác nhóm'} ({m['ban']} – {m['kia']}). "
+                + ("Có thể chọn hướng nhà hợp cả hai." if m["cung_nhom"] else
+                   "Cách phổ biến: hướng cửa/nhà theo người trụ cột, phòng ngủ và bàn làm việc chọn theo từng người."),
+                None)
+    if l == "huyen_khong":
+        ds = "; ".join(f"hướng {x['huong_son']} (toạ {x['toa_son']}): {x['cuc_ten']}" for x in m["ds"])
+        y = {x["cuc_ten"]: x["y"] for x in m["ds"]}
+        return (f"Huyền Không — nhà hướng {m['huong']} nhập trạch/xây trong vận {m['van']} "
+                f"({m['tu_nam']}–{m['den_nam']}). Hướng {m['huong']} gồm 3 sơn, mỗi sơn ra một cục: {ds}. "
+                + " ".join(f"{k}: {v}" for k, v in y.items())
+                + " Muốn biết đúng sơn và đủ 9 cung, đo độ la bàn rồi lập trạch bàn ở mục Phong thuỷ.", None)
     if l == "giai_thich":
         return f"{m['tieu_de']}: {m['noi_dung']}", None
     return "", None
