@@ -5,7 +5,7 @@ current_phase: 1
 current_hypothesis: >-
   H1 Free Reading thu hút người dùng + H2 Metaphysics ID tạo gắn bó
   (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
-current_build: "TV-A hồ sơ Tử vi · SEO-B SEO/GEO · CR-C Sao + thưởng mời (chưa thanh toán)"
+current_build: "SEO-C trang kiến thức cung/thập thần/nhật chủ (sau QA-RV rà soát hỏi đáp, TS-SAU thần số chiều sâu, TV-LICH trường phái)"
 current_gate: "Gate 0 (kỹ thuật đạt; chưa có 20–50 người thử) → Gate 1"
 current_metrics: []   # có khi bật NEXT_PUBLIC_POSTHOG_KEY
 current_risks:
@@ -26,6 +26,13 @@ completed_work:
   - "TV-A: nơi sinh (63 tỉnh/nước ngoài giờ địa phương), nhập âm lịch (miền Nam 1960–75 UTC+8), cảnh báo giờ mặt trời; migration 0007"
   - "SEO-B: 90 trang kiến thức server-render (12 số, 64 quẻ, 14 sao) + JSON-LD, sitemap, robots mở bot AI, llms.txt/llms-full.txt"
   - "CR-C: sổ cái Sao + mã mời + thưởng hai phía một tầng (migration 0008, hàm SECURITY DEFINER)"
+  - "VZ-1…VZ-4 lá số Tử vi/Bát tự SVG; KB 384 hào + Thoán, 62 cách cục Tử vi, cách cục Tử Bình Chân Thuyên, Huyền Không + thế quái (PR #10–#30)"
+  - "Luận giải toàn bộ (RULES + LLM có kiểm chứng), công tắc trừ 10 Sao (mặc định tắt)"
+  - "Độ sáng Nam phái đối chứng lasotuvi 156/156; âm lịch Việt cho Tử vi; 60 lá đối chiếu; trường phái Việt/Trung có khung chọn (PR #38–#40)"
+  - "Từ điển 221 thuật ngữ, nôm na 64 quẻ + 384 hào, 6 lá số minh hoạ đọc từng bước"
+  - "TS-SAU: chân dung 4 mặt, dòng đời & bước ngoặt + đối chiếu năm biến cố, hợp đôi theo 5 loại quan hệ (PR #41)"
+  - "QA-RV: rà soát hỏi đáp 5 mảng bằng bộ câu chuyên gia — sửa ~20 lỗi hiểu sai câu, test hồi quy nội dung (PR #42)"
+  - "SEO-C: +32 trang kiến thức (12 cung Tử vi, 10 thập thần, 10 nhật chủ) — thư viện 122 trang"
 active_work:
   - "Hạ tầng GĐ1: chủ dự án tạo engine Render Singapore/Starter, đổi ENGINE_URL, bật Sentry + báo sập (docs/TRIEN-KHAI.md)"
   - "Chờ chủ dự án: review PR, duyệt + chạy 0006 → 0007 → 0008, cấu hình env, bỏ Basic Auth khi mở công khai"
@@ -35,14 +42,18 @@ blocked_work:
   - "Link chia sẻ trên production cần LOI_MOI_SECRET"
   - "Ví Sao chạy thật cần Supabase Auth + chạy 0008"
 next_candidate_tasks:
-  - "Tuyển 20–50 người thử (Gate 0 định tính) trên bản UI mới — đo funnel Phase 1 bằng PostHog"
+  - "Tuyển 20–50 người thử (Gate 0 định tính) trên bản UI mới — đo funnel Phase 1 bằng PostHog (VIỆC SỐ 1, cần chủ dự án)"
   - "Đọc số Gate 1 (landing→start→complete→profile, góp ý) trước khi mở rộng tính năng"
-  - "Duyệt nháp KB (quẻ, sao) để đổi nhãn nháp → đã duyệt; mở rộng trang kiến thức (cung, thập thần, năm cá nhân theo năm)"
-  - "PT-V0: bộ đánh giá ảnh phong thuỷ (docs/LO-TRINH-PHONG-THUY-HINH-ANH.md)"
+  - "Duyệt nháp KB (quẻ, sao, chân dung thần số, quan hệ) để đổi nhãn nháp → đã duyệt (chủ dự án / người có nghề)"
+  - "PT-V1: la bàn hướng nhà trên điện thoại (đọc cảm biến ở web, engine đổi độ → 24 sơn, cho sửa tay)"
+  - "Tử vi lưu nguyệt — chờ chủ dự án chốt phái tính tháng hạn"
+  - "Migration đưa 2 KB mới (chân dung, quan hệ) lên Supabase — chờ duyệt"
+  - "Chạy bộ 55 câu chuyên gia với LLM thật trước khi mở công khai"
+  - "PT-V0: bộ đánh giá ảnh phong thuỷ (cần 50–100 bộ ảnh nhà thật có phép dùng)"
 prohibited_until_gate:
   - "Payment (mua Sao) — Sao nội bộ đã có"
   - "Life Advisor (Ask My Life liên mảng)"
   - "Community"
   - "Marketplace"
   - "Native Mobile"
-last_updated: "2026-09-30"
+last_updated: "2026-10-07"

@@ -8,9 +8,9 @@ import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
 
-const MO_TA = "Thư viện kiến thức thần số học, Kinh Dịch và Tử vi: ý nghĩa từng con số, 64 quẻ, 14 chính tinh — có nguồn, có mặt tối, có câu hỏi tự soi.";
+const MO_TA = "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi và Bát tự: ý nghĩa từng con số, 64 quẻ, 14 chính tinh, 12 cung, 10 thập thần, 10 nhật chủ — có nguồn, có mặt tối, có câu hỏi tự soi.";
 export const metadata: Metadata = {
-  title: "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi",
+  title: "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi, Bát tự",
   description: MO_TA,
   alternates: { canonical: "/kien-thuc" },
   openGraph: { title: "Thư viện kiến thức", description: MO_TA, url: "/kien-thuc", images: ["/og?tieu_de=Th%C6%B0%20vi%E1%BB%87n%20ki%E1%BA%BFn%20th%E1%BB%A9c"] },

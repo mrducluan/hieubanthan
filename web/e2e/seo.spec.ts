@@ -30,6 +30,9 @@ test("robots, sitemap, llms.txt cho máy tìm kiếm và AI", async ({ request }
   const sm = await (await request.get("/sitemap.xml")).text();
   expect(sm).toContain("/kien-thuc/than-so/so-33");
   expect(sm).toContain("/kien-thuc/tu-vi/sao-tham-lang");
+  expect(sm).toContain("/kien-thuc/cung-tu-vi/cung-phu-the");
+  expect(sm).toContain("/kien-thuc/thap-than/chinh-quan");
+  expect(sm).toContain("/kien-thuc/nhat-chu/nhat-chu-giap");
   expect(sm).not.toContain("/tai-khoan");
   const llms = await (await request.get("/llms.txt")).text();
   expect(llms.startsWith("# Hiểu Bản Thân")).toBe(true);
@@ -43,4 +46,14 @@ test("trang không tồn tại → 404; từ thẻ số trong bài đọc có li
   await page.addInitScript(() => localStorage.setItem("hbt.hoso.v1", JSON.stringify({ v: 1, ho_ten: "Nguyễn Đức Luân", ngay: 24, thang: 10, nam: 1988, tao_luc: "x" })));
   await page.goto("/ban-than");
   await expect(page.getByTestId("the-duong_doi").getByRole("link", { name: "Đọc thêm về số 33" })).toHaveAttribute("href", "/kien-thuc/than-so/so-33");
+});
+
+test("SEO-C: trang cung Tử vi, thập thần, nhật chủ render phía server", async ({ request }) => {
+  for (const [duong, h1] of [["/kien-thuc/cung-tu-vi/cung-phu-the", "Cung Phu Thê"], ["/kien-thuc/thap-than/chinh-quan", "Chính Quan"],
+                             ["/kien-thuc/nhat-chu/nhat-chu-giap", "Nhật chủ Giáp"], ["/kien-thuc/cung-tu-vi", "12 cung Tử vi"]] as const) {
+    const r = await request.get(duong);
+    expect(r.status()).toBe(200);
+    const html = await r.text();
+    expect(html).toMatch(new RegExp(`<h1[^>]*>[^<]*${h1}`));
+  }
 });

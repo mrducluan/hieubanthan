@@ -18,12 +18,12 @@ from pathlib import Path
 _DATA = Path(__file__).parent / "data"
 
 # Đổi khi nội dung KB của các trang này thay đổi (hiển thị "Cập nhật" + sitemap lastmod).
-CAP_NHAT = "2026-09-30"
+CAP_NHAT = "2026-10-07"
 
 # Quyết định chủ dự án: index cả nội dung nháp AI (vẫn hiển thị nhãn nháp).
 INDEX_NHAP_AI = True
 
-LOAI = ("so", "que", "sao")
+LOAI = ("so", "que", "sao", "cung", "thap_than", "nhat_chu")
 _SO = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33")
 _SO_GOC = {"11": "2", "22": "4", "33": "6"}
 _LINH_VUC_QUE = {"cong_viec": "Công việc", "tinh_cam": "Tình cảm", "gia_dinh": "Gia đình",
@@ -181,6 +181,109 @@ def _trang_sao(ten: str, slug: str) -> dict:
     }
 
 
+# ---- SEO-C: 12 cung Tử vi ---------------------------------------------------------
+def _ds_cung() -> list[tuple[str, str]]:
+    return [(ten, f"cung-{_slug(ten)}") for ten in _doc("tuvi_kb.json")["cung"]]
+
+
+def _trang_cung(ten: str, slug: str) -> dict:
+    kb = _doc("tuvi_kb.json")
+    c = kb["cung"][ten]
+    tra_loi = f"Cung {ten} trong Tử vi: {c['y_nghia']} Cung này cho thấy {c['xem_duoc']}; nó {c['khong_tra_loi']}."
+    muc = [{"tieu_de": "Cung này cho thấy gì", "doan": _cau(c["xem_duoc"][:1].upper() + c["xem_duoc"][1:])},
+           {"tieu_de": "Cung này không trả lời được gì", "doan": _cau(c["khong_tra_loi"][:1].upper() + c["khong_tra_loi"][1:])},
+           {"tieu_de": f"14 chính tinh ở cung {ten}",
+            "danh_sach": [f"{sao}: {o[ten]}" for sao, o in kb["sao_cung"].items() if ten in o]},
+           {"tieu_de": f"Tứ hoá rơi vào cung {ten}",
+            "danh_sach": [f"Hoá {h}: {o[ten]}" for h, o in kb["tu_hoa_cung"].items() if ten in o]}]
+    if ten in kb.get("chu_de_han", {}):
+        muc.append({"tieu_de": f"Khi đại hạn, lưu niên đi qua cung {ten}", "doan": kb["chu_de_han"][ten]})
+    muc.append({"tieu_de": "Câu hỏi tự soi", "doan": c["cau_tu_soi"]})
+    hoi_dap = [{"hoi": f"Cung {ten} trong Tử vi nói về điều gì?", "dap": _cau(c["y_nghia"])},
+               {"hoi": f"Cung {ten} có đoán được chuyện cụ thể không?",
+                "dap": _cau(f"Không — cung {ten} {c['khong_tra_loi']}; nó cho thấy {c['xem_duoc']}")}]
+    ds = _ds_cung()
+    i = [x for _, x in ds].index(slug)
+    return {
+        "loai": "cung", "slug": slug,
+        "tieu_de": f"Cung {ten} trong Tử vi — ý nghĩa và 14 chính tinh",
+        "mo_ta": _cat(f"Cung {ten} Tử vi: {c['y_nghia']} 14 chính tinh và tứ hoá ở cung {ten}, kèm câu hỏi tự soi."),
+        "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
+        "nguon": list(kb["source"].values()),
+        "trang_thai": kb.get("trang_thai", "nhap_ai"),
+        "lien_quan": [{"loai": "cung", "slug": ds[j % len(ds)][1]} for j in (i - 1, i + 1)],
+    }
+
+
+# ---- SEO-C: 10 thập thần · 10 nhật chủ Bát tự --------------------------------------
+def _ds_thap_than() -> list[tuple[str, str]]:
+    return [(ten, _slug(ten)) for ten in _doc("battu_kb.json")["thap_than"]]
+
+
+def _trang_thap_than(ten: str, slug: str) -> dict:
+    kb = _doc("battu_kb.json")
+    t = kb["thap_than"][ten]
+    tra_loi = f"{ten} (nhóm {t['nhom']}) trong Bát tự: {t['y_nghia']} Tính cách thường gặp: {t['tinh_cach']}."
+    muc = [{"tieu_de": "Tính cách", "doan": _cau(t["tinh_cach"][:1].upper() + t["tinh_cach"][1:])},
+           {"tieu_de": f"Khi {ten} quá nhiều", "doan": _cau(t["khi_nhieu"][:1].upper() + t["khi_nhieu"][1:])},
+           {"tieu_de": f"Khi thiếu {ten}", "doan": _cau(t["khi_thieu"][:1].upper() + t["khi_thieu"][1:])},
+           {"tieu_de": "Với nam, với nữ", "danh_sach": [f"Với nam: {t['nam']}.", f"Với nữ: {t['nu']}."]},
+           {"tieu_de": "Câu hỏi tự soi", "doan": t["cau_tu_soi"]}]
+    hoi_dap = [{"hoi": f"{ten} trong Bát tự là gì?", "dap": tra_loi},
+               {"hoi": f"Lá số nhiều {ten} thì sao?", "dap": _cau(t["khi_nhieu"][:1].upper() + t["khi_nhieu"][1:])}]
+    ds = _ds_thap_than()
+    i = [x for _, x in ds].index(slug)
+    return {
+        "loai": "thap_than", "slug": slug,
+        "tieu_de": f"{ten} trong Bát tự (thập thần) — ý nghĩa, khi nhiều, khi thiếu",
+        "mo_ta": _cat(f"{ten} — thập thần nhóm {t['nhom']}: {t['y_nghia']} Tính cách, khi quá nhiều, khi thiếu và câu hỏi tự soi."),
+        "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
+        "nguon": list(kb["source"].values()),
+        "trang_thai": kb.get("trang_thai", "nhap_ai"),
+        "lien_quan": [{"loai": "thap_than", "slug": ds[j % len(ds)][1]} for j in (i - 1, i + 1)],
+    }
+
+
+_MUA = {"xuan": "Sinh mùa xuân", "ha": "Sinh mùa hạ", "thu": "Sinh mùa thu", "dong": "Sinh mùa đông"}
+
+
+def _ds_nhat_chu() -> list[tuple[str, str]]:
+    return [(can, f"nhat-chu-{_slug(can)}") for can in _doc("battu_kb.json")["nhat_chu"]]
+
+
+def _trang_nhat_chu(can: str, slug: str) -> dict:
+    kb = _doc("battu_kb.json")
+    n = kb["nhat_chu"][can]
+    nh = kb["ngu_hanh"].get(n["ngu_hanh"], {})
+    tra_loi = (f"Nhật chủ {can} (hành {n['ngu_hanh']}) mang hình tượng {n['hinh_tuong']}: {n['tinh_chat']}. "
+               f"Điểm mạnh: {n['diem_manh']}. Mặt tối: {n['mat_toi']}.")
+    muc = [{"tieu_de": "Điểm mạnh", "doan": _cau(n["diem_manh"][:1].upper() + n["diem_manh"][1:])},
+           {"tieu_de": "Mặt tối", "doan": _cau(n["mat_toi"][:1].upper() + n["mat_toi"][1:])},
+           {"tieu_de": "Theo mùa sinh", "danh_sach": [f"{_MUA[k]}: {v}" for k, v in n["mua"].items() if k in _MUA]}]
+    if nh:
+        muc.append({"tieu_de": f"Hành {n['ngu_hanh']}", "danh_sach": [
+            f"Tính chất: {nh['tinh_chat']}.", _cau(nh["khi_thieu"][:1].upper() + nh["khi_thieu"][1:]),
+            _cau(nh["khi_thua"][:1].upper() + nh["khi_thua"][1:]), f"Ứng dụng dân gian: {nh['ung_dung']}."]})
+    muc.append({"tieu_de": "Câu hỏi tự soi", "doan": n["cau_tu_soi"]})
+    hoi_dap = [{"hoi": f"Nhật chủ {can} là người thế nào?", "dap": tra_loi},
+               {"hoi": f"Nhật chủ {can} sinh mùa đông thì sao?", "dap": n["mua"].get("dong", "")}]
+    ds = _ds_nhat_chu()
+    i = [x for _, x in ds].index(slug)
+    return {
+        "loai": "nhat_chu", "slug": slug,
+        "tieu_de": f"Nhật chủ {can} ({n['ngu_hanh']}) trong Bát tự — tính cách và mùa sinh",
+        "mo_ta": _cat(f"Nhật chủ {can}, hình tượng {n['hinh_tuong']}: {n['tinh_chat']}. Điểm mạnh, mặt tối, ảnh hưởng mùa sinh."),
+        "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": [h for h in hoi_dap if h["dap"]],
+        "nguon": list(kb["source"].values()),
+        "trang_thai": kb.get("trang_thai", "nhap_ai"),
+        "lien_quan": [{"loai": "nhat_chu", "slug": ds[j % len(ds)][1]} for j in (i - 1, i + 1)],
+    }
+
+
+_TRANG = {"cung": (_ds_cung, _trang_cung), "thap_than": (_ds_thap_than, _trang_thap_than),
+          "nhat_chu": (_ds_nhat_chu, _trang_nhat_chu)}
+
+
 # ---- API công khai của module -------------------------------------------------
 def _ten_ngan(loai: str, slug: str) -> str:
     if loai == "so":
@@ -188,6 +291,9 @@ def _ten_ngan(loai: str, slug: str) -> str:
     if loai == "que":
         k = slug.split("-")[1]
         return f"Quẻ {_doc('kinhdich_kb.json')['que'][k]['ten']}"
+    if loai in _TRANG:
+        ten = dict((s, t) for t, s in _TRANG[loai][0]())[slug]
+        return {"cung": f"Cung {ten}", "thap_than": ten, "nhat_chu": f"Nhật chủ {ten}"}[loai]
     return f"Sao {dict((s, t) for t, s in _ds_sao())[slug]}"
 
 
@@ -210,6 +316,11 @@ def lay(loai: str, slug: str) -> dict | None:
         for ten, s in _ds_sao():
             if s == slug:
                 return _hoan_tat(_trang_sao(ten, s))
+    if loai in _TRANG:
+        ds, dung = _TRANG[loai]
+        for ten, s in ds():
+            if s == slug:
+                return _hoan_tat(dung(ten, s))
     return None
 
 
@@ -217,7 +328,8 @@ def danh_sach() -> list[dict]:
     """Mục lục gọn cho sitemap / trang chủ đề (không kèm nội dung)."""
     ra = []
     for loai, slugs in (("so", [f"so-{s}" for s in _SO]), ("que", [s for _, s in _ds_que()]),
-                        ("sao", [s for _, s in _ds_sao()])):
+                        ("sao", [s for _, s in _ds_sao()]),
+                        *((l, [s for _, s in ds()]) for l, (ds, _) in _TRANG.items())):
         for slug in slugs:
             t = lay(loai, slug)
             assert t is not None
