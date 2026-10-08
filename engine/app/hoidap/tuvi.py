@@ -78,7 +78,8 @@ NGUOI_KHAC = [r"cho (chong|vo|me|bo|ong|ba|anh|chi|em|ban gai|ban trai|ban|nguoi
               r"xem (tu vi|la so) cho (?!toi)", r"tuoi \w+ \w+, tinh cach"]
 HAN = [r"dai han", r"tieu han", r"luu nien", r"nam nay", r"nam sau", r"nam toi", r"nam 20\d\d",
        r"muoi nam", r"10 nam", r"nam nao", r"khi nao", r"bao gio", r"thang nao", r"han gi",
-       r"tam tai", r"thai tue", r"nam tuoi", r"van han", r"hao tai", r"hanh han"]
+       r"tam tai", r"thai tue", r"nam tuoi", r"van han", r"hao tai", r"hanh han",
+       r"thang (\d{1,2}|gieng|chap) am( lich)?"]                                   # HH-CT3
 SU_KIEN = [r"tai nan", r"kien tung", r"mat tien", r"hao tai", r"lay chong", r"lay vo", r"co con",
            r"phat tai", r"han nang", r"thang chuc", r"ket hon"]
 NAM_SAU = [r"nam sau", r"nam toi"]
