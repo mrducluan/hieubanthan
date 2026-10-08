@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { CHU_DE, mucLuc } from "@/lib/kien-thuc";
+import { CHU_DE, HINH_CHU_DE, mucLuc } from "@/lib/kien-thuc";
+import { HinhMang } from "@/components/minh-hoa/TrangTri";
 import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
@@ -33,6 +34,7 @@ export default async function Page() {
           const n = ds.filter((t) => t.loai === cd.loai).length;
           return (
             <Link key={k} href={`/kien-thuc/${k}`} className="glass group flex flex-col rounded-2xl p-6 transition-colors hover:border-gold/50">
+              <HinhMang kieu={HINH_CHU_DE[k] ?? "than-so"} className="mb-3 transition-transform group-hover:scale-105" />
               <h2 className="text-2xl">{cd.ten}</h2>
               <p className="mt-2 flex-1 text-sm text-fg-muted">{cd.mo_ta}</p>
               <span className="mt-4 flex items-center gap-1 text-sm text-gold">{n ? `${n} bài` : "Xem"} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden /></span>

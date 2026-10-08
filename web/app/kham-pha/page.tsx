@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Compass, Hexagon, Layers, Orbit, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { goiLd, ldDuongDan, metaTrang } from "@/lib/seo";
 
@@ -11,11 +12,11 @@ export const metadata: Metadata = metaTrang({
 });
 
 const MANG = [
-  { href: "/than-so", ten: "Thần số học", mo: "Bốn con số cốt lõi, dải đời, năm cá nhân, biểu đồ ngày sinh.", can: "Tên + ngày sinh", Icon: Sparkles },
-  { href: "/tu-vi", ten: "Tử vi", mo: "Lá số 12 cung, đại hạn – lưu niên – tiểu hạn.", can: "+ giờ sinh, giới tính", Icon: Orbit },
-  { href: "/bat-tu", ten: "Bát tự", mo: "Tứ trụ theo tiết khí, ngũ hành, dụng thần hai cách, đại vận.", can: "+ giờ sinh, giới tính", Icon: Layers },
-  { href: "/phong-thuy", ten: "Phong thuỷ", mo: "Mệnh quái, tám hướng du niên, cửa – chủ – bếp, sao năm.", can: "+ giới tính", Icon: Compass },
-  { href: "/kinh-dich", ten: "Kinh Dịch", mo: "Một quẻ cho một việc — Nghĩa Lý, Lục Hào, Mai Hoa.", can: "Chỉ cần câu hỏi", Icon: Hexagon },
+  { href: "/than-so", ten: "Thần số học", mo: "Bốn con số cốt lõi, dải đời, năm cá nhân, biểu đồ ngày sinh.", can: "Tên + ngày sinh", kieu: "than-so" as KieuMang },
+  { href: "/tu-vi", ten: "Tử vi", mo: "Lá số 12 cung, đại hạn – lưu niên – tiểu hạn.", can: "+ giờ sinh, giới tính", kieu: "tu-vi" as KieuMang },
+  { href: "/bat-tu", ten: "Bát tự", mo: "Tứ trụ theo tiết khí, ngũ hành, dụng thần hai cách, đại vận.", can: "+ giờ sinh, giới tính", kieu: "bat-tu" as KieuMang },
+  { href: "/phong-thuy", ten: "Phong thuỷ", mo: "Mệnh quái, tám hướng du niên, cửa – chủ – bếp, sao năm.", can: "+ giới tính", kieu: "phong-thuy" as KieuMang },
+  { href: "/kinh-dich", ten: "Kinh Dịch", mo: "Một quẻ cho một việc — Nghĩa Lý, Lục Hào, Mai Hoa.", can: "Chỉ cần câu hỏi", kieu: "kinh-dich" as KieuMang },
 ];
 
 export default function KhamPha() {
@@ -29,11 +30,11 @@ export default function KhamPha() {
         thêm giờ sinh hay giới tính khi mảng đó thật sự cần.
       </p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {MANG.map(({ href, ten, mo, can, Icon }, i) => (
+        {MANG.map(({ href, ten, mo, can, kieu }, i) => (
           <Link key={href} href={href}
             className={`glass group flex flex-col rounded-2xl p-6 transition-colors hover:border-gold/50 ${i === 0 ? "sm:col-span-2" : ""}`}>
             <div className="flex items-center justify-between">
-              <span className="grid size-12 place-items-center rounded-2xl bg-gold/15 text-gold"><Icon className="size-6" aria-hidden /></span>
+              <HinhMang kieu={kieu} className="h-14 shrink-0" />
               <span className="rounded-full border border-line px-3 py-1 text-xs text-fg-faint">{can}</span>
             </div>
             <h2 className="mt-5 text-2xl">{ten}</h2>
