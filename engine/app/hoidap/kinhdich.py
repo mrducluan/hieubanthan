@@ -30,7 +30,8 @@ DOC_NHANH = [r"mai hoa", r"xem nhanh", r"doc nhanh", r"hom nay di", r"the va dun
 DU_DOAN = [r"co dau", r"co do", r"dau khong", r"do khong", r"thanh cong khong", r"co duoc", r"duoc khong",
            r"thang hay thua", r"co thang", r"ky duoc", r"doi duoc", r"xin duoc", r"ban duoc",
            r"co ben", r"quay lai khong", r"co thich", r"di den hon nhan", r"co loi", r"bao gio",
-           r"khi nao", r"co gap", r"co len chuc", r"co tro ve"]
+           r"khi nao", r"co gap", r"co len chuc", r"co tro ve",
+           r"co thanh khong", r"thanh hay khong", r"tim lai duoc"]                      # HH-CT2
 QUYET_DINH = [r"co nen", r"nen .* hay", r"nen lam gi", r"nen ung xu", r"nen xu ly", r"nen phan ung",
               r"xin mot que", r"dinh huong", r"nen the nao", r"nen chon", r"nen tra", r"nen noi",
               r"nen hieu the nao"]
@@ -42,7 +43,8 @@ DUNG_THAN = [
     ("Phụ Mẫu", [r"bo toi", r"me toi", r"cha me", r"bo me", r"ong ba"]),
     ("Tử Tôn", [r"con toi", r"con cai", r"dua con", r"binh an", r"thuoc"]),
     ("Thê Tài", [r"tien", r"no nay", r"mon no", r"doi no", r"loi khong", r"co loi", r"lam an",
-                 r"ban duoc", r"luong", r"thuong", r"vo toi", r"co ay", r"ban gai", r"hang hoa"]),
+                 r"ban duoc", r"luong", r"thuong", r"vo toi", r"co ay", r"ban gai", r"hang hoa",
+                 r"mat (vi|do|tien|xe|dien thoai|trom)", r"tai san"]),        # HH-CT2: mất của → Thê Tài
     ("Phụ Mẫu", [r"hop dong", r"giay to", r"visa", r"ho so", r"nha", r"tin tuc", r"thu tu"]),
     ("Quan Quỷ", [r"phong van", r"thang chuc", r"len chuc", r"cong viec", r"viec moi", r"tim duoc viec",
                   r"cong danh", r"thi", r"dau", r"do khong", r"kien", r"chong toi", r"anh ay",

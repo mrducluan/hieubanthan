@@ -59,17 +59,20 @@ CHU_DE_CUNG = [   # (cung, mẫu) — câu hỏi cá nhân không nêu tên cung
     ("Thiên Di", [r"di xa", r"xuat ngoai", r"nuoc ngoai", r"dinh cu", r"xa que", r"moi truong", r"du hoc"]),
     ("Phúc Đức", [r"phuc", r"dong ho", r"tam linh", r"binh an", r"to tien"]),
 ]
-SAO_KW = {"Tử Vi": [r"sao tu vi", r"tu vi (thu|o|tai|toa|nam|cu|dong)", r"(co|nguoi co|gap) tu vi"],
+SAO_KW = {"Tử Vi": [r"sao tu vi", r"tu vi (thu|o|tai|toa|nam|cu|dong)", r"(co|nguoi co|gap) tu vi", r"tu phu"],
           **{s: [chung.chuan_hoa(s)] for s in
              ["Thiên Cơ", "Thái Dương", "Vũ Khúc", "Thiên Đồng", "Liêm Trinh", "Thiên Phủ", "Thái Âm",
               "Tham Lang", "Cự Môn", "Thiên Tướng", "Thiên Lương", "Thất Sát", "Phá Quân"]}}
+SAO_KW["Thiên Phủ"] = SAO_KW["Thiên Phủ"] + [r"tu phu"]       # HH-CT2: "Tử Phủ" = Tử Vi + Thiên Phủ
 PHU_KW = {"Hàm Trì": [r"dao hoa", r"ham tri"], "Hỏa Tinh": [r"hoa tinh"]}
 
 CA_NHAN = [r"toi", r"cua minh", r"minh co", r"minh la", r"la so cua", r"em co", r"cua em", r"toi co"]
 HOP_HON = [r"hop tuoi", r"hop hon", r"hop nhau", r"xung khac", r"ky nhau", r"xem tuoi lam an",
-           r"tuoi \w+ lay (chong|vo) tuoi", r"hai la so", r"hop voi (anh|chi|co|chong|vo|nguoi)"]
+           r"tuoi \w+ lay (chong|vo) tuoi", r"hai la so", r"hop voi (anh|chi|co|chong|vo|nguoi)",
+           r"tuoi \w+.{0,30}tuoi \w+.{0,30}(xung|hop|khac|ky)"]           # HH-CT2: "chồng tuổi Thân, tôi tuổi Hợi, có xung"
 CON = [r"(cho|cua) con toi", r"la so cho con", r"be nha toi", r"sinh con nam nao", r"sinh con gio",
-       r"con toi sinh", r"sinh con thang", r"nen sinh con"]
+       r"con toi sinh", r"sinh con thang", r"nen sinh con",
+       r"con (gai|trai) (toi|minh|em)", r"(be|con) (moi|vua) sinh"]          # HH-CT2
 NGUOI_KHAC = [r"cho (chong|vo|me|bo|ong|ba|anh|chi|em|ban gai|ban trai|ban|nguoi yeu|sep) toi",
               r"(sep|chong|vo|me|bo|nguoi yeu|ban trai|ban gai|dong nghiep) toi (tuoi|sinh|co so|la nguoi)",
               r"xem (tu vi|la so) cho (?!toi)", r"tuoi \w+ \w+, tinh cach"]
@@ -157,6 +160,16 @@ def _giai_thich_khop(t: str) -> list[str]:
     return [ma for ma, m in kb.giai_thich_tat_ca().items() if chung.co(t, m["tu_khoa"])]
 
 
+def _cach_nhac(t: str) -> list[str]:
+    """HH-CT2: cách cục được GỌI TÊN trong câu (vd "Sát Phá Tham", "Tử Phủ đồng cung") → mã trong KB cách cục."""
+    ra = []
+    for ma, m in kb._cc()["cach"].items():
+        ten = chung.chuan_hoa(re.sub(r"\(.*?\)", "", m["ten"])).strip()
+        if len(ten) >= 8 and re.search(rf"(?<!\w){re.escape(ten)}(?!\w)", t):
+            ra.append(ma)
+    return ra[:2]
+
+
 def _nam_nhac(t: str) -> int | None:
     m = re.search(r"nam (20\d\d)", t)
     return int(m.group(1)) if m else None
@@ -190,13 +203,16 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao") -> dict:
         kq["loai"] = "nguoi_khac"
     elif kq["giai_thich"] and not kq["ca_nhan"]:
         kq["loai"] = "ky_thuat"
+    elif not kq["ca_nhan"] and (cc := _cach_nhac(t_chinh)):
+        kq["loai"], kq["cach_nhac"] = "cach_cuc_chung", cc
     elif chung.co(t_chinh, HOI_CACH):
         kq["loai"] = "cach_cuc_la_so"
     elif chung.co(t_chinh, HOI_SAT) and not chung.co(t_chinh, HAN):
         kq["loai"] = "sat_tinh_la_so"
     elif chung.co(t_chinh, VI_TRI) and _sao_nhac(t_chinh) and not chung.co(t_chinh, HAN):
         kq["loai"], kq["sao_tim"] = "vi_tri_sao", _sao_nhac(t_chinh)[:3]
-    elif chung.co(t_chinh, HAN) and kq["ca_nhan"] or chung.co(t_chinh, [r"dai han", r"luu nien", r"tieu han"]):
+    elif (chung.co(t_chinh, HAN) or kq["hoi_thang"]) and kq["ca_nhan"] \
+            or chung.co(t_chinh, [r"dai han", r"luu nien", r"tieu han"]):
         kq["loai"] = "han"
     elif not kq["ca_nhan"] and (kq["sao"] or kq["hoa"]) and (kq["cung"] or kq["sao"]):
         kq["loai"] = "tu_hoa_cung" if kq["hoa"] and kq["cung"] else "sao_cung"
@@ -388,6 +404,12 @@ def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | No
         goi["mau"] = kb.mau({"hop_hon": "hop_hon", "la_so_con": "con", "nguoi_khac": "nguoi_khac"}[loai])
         return chung.ket(goi)
     if loai == "ky_thuat":
+        return chung.ket(goi)
+    if loai == "cach_cuc_chung":
+        for ma in pl.get("cach_nhac", []):
+            k = kb.cach_cuc(ma)
+            if k:
+                muc.append({"loai": "cach_cuc", **k, "cung_lien_quan": None, "sat_hoi": []})
         return chung.ket(goi)
     if loai == "sao_cung":
         cung_ = pl["cung"] or ["Mệnh"]

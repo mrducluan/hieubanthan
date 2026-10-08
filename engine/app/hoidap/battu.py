@@ -30,7 +30,8 @@ NHOM_KW = {"Tài": [r"tai tinh"], "Quan Sát": [r"quan tinh", r"phu tinh"], "Ấ
 CA_NHAN = [r"toi", r"cua minh", r"minh co", r"em co", r"cua em", r"la so cua"]
 HOP = [r"hop bat tu", r"hop nhau", r"xung nhau", r"xem hop", r"nhat chu \w+ va nhat chu", r"hai vo chong",
        r"hop voi (anh|chi|chong|vo|nguoi)"]
-CON = [r"(cho|cua) con toi", r"con toi (sinh|thieu|thua)", r"sinh con gio", r"dat ten", r"be nha toi"]
+CON = [r"(cho|cua) con toi", r"con toi (sinh|thieu|thua)", r"sinh con gio", r"dat ten", r"be nha toi",
+       r"con (gai|trai) (toi|minh|em)"]                                       # HH-CT2
 NGUOI_KHAC = [r"cho (chong|vo|me|bo|ban gai|ban trai|nguoi yeu|sep) toi",
               r"(chong|vo|me|bo|nguoi yeu|sep) toi (sinh|tuoi|co)"]
 VAN = [r"dai van", r"luu nien", r"nam nay", r"nam sau", r"muoi nam", r"10 nam", r"nam nao", r"van nao",
@@ -45,14 +46,16 @@ CHU_DE = [
                   r"tuong tinh", r"kiep sat", r"vong than"]),
     ("xung_hop", [r"xung hop", r"hop xung", r"hinh xung", r"xung pha", r"luc hop", r"tam hop", r"luc xung",
                   r"tu hinh", r"tuong hinh", r"luc hai", r"ngu hop", r"co xung", r"bi xung", r"tru (nao )?xung"]),
-    ("cach_cuc", [r"cach cuc", r"cach gi", r"thuoc cach", r"cach (nao|tot|xau)"]),
+    # HH-CT2: "tính cách gì" không phải hỏi cách cục
+    ("cach_cuc", [r"cach cuc", r"(?<!tinh )cach gi", r"thuoc cach", r"(?<!tinh )cach (nao|tot|xau)"]),
     ("tru", [r"tru (nam|thang|ngay|gio)"]),
     ("hon_nhan", [r"hon nhan", r"vo chong", r"phu tinh", r"the tinh", r"nguoi yeu", r"ban doi", r"tinh duyen"]),
     ("nghe_tien", [r"nghe", r"nganh", r"kinh doanh", r"lam cong", r"quan ly", r"tai tinh", r"quan tinh",
-                   r"tien", r"giau", r"tich luy", r"dau tu", r"chinh tai hay thien tai"]),
+                   r"tien", r"giau", r"tich luy", r"dau tu", r"chinh tai hay thien tai", r"tai loc", r"tai van"]),
     ("ngu_hanh", [r"thieu hanh", r"ngu hanh", r"vuong suy", r"than vuong", r"than nhuoc", r"dung than",
                   r"hy than", r"ky than", r"mau gi", r"huong gi", r"bo sung", r"can bang", r"khi hau",
-                  r"hanh gi", r"lan at", r"nhat chu toi yeu"]),
+                  r"hanh gi", r"lan at", r"nhat chu toi yeu",
+                  r"thieu (kim|moc|thuy|hoa|tho)\b", r"(deo|mang|dung) (gi|da gi|vat gi)"]),
     ("loi_song", [r"loi song", r"sinh hoat", r"suc khoe", r"song the nao"]),
     ("gia_dinh", [r"cha me", r"to tien", r"anh em", r"con cai", r"gan bo me", r"gia dinh"]),
     ("thap_than", [r"thap than", r"tang can"]),
