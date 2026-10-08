@@ -35,7 +35,12 @@ TUVI = [
     ("Lá số của tôi có cách cục gì đặc biệt không?", ["Cách cục"], ["Cự Môn (巨門"]),
     ("Tôi có bị sát tinh chiếu mệnh không?", ["tam phương tứ chính của Mệnh", "Địa Không", "Thiên Đồng hoá Kỵ"], []),
     ("Năm sau có nên mua đất không?", ["Việc bạn hỏi thuộc cung Điền Trạch"], []),
-    ("Tháng 3 âm năm sau thế nào?", ["chưa luận lưu nguyệt"], []),
+    ("Tháng 3 âm năm sau thế nào?", ["Lưu nguyệt tháng 3 âm năm Đinh Mùi", "tháng Giáp Thìn",
+                                      "Theo phái Đẩu Quân từ Thái Tuế, Mệnh của tháng rơi vào cung Phụ Mẫu (Tý)",
+                                      "Hoá Lộc của tháng (Liêm Trinh) ở cung Phụ Mẫu — đúng cung tháng",
+                                      "Các phái khác"], ["chưa luận lưu nguyệt"]),
+    ("Tháng 5 dương lịch năm 2026 tôi thế nào?", ["thuộc tháng 3 âm", "rơi vào cung Mệnh (Hợi)",
+                                                   "Hoá Kỵ của tháng (Vũ Khúc)"], []),
     ("Tử Vi ở cung Mệnh nghĩa là gì?", ["Tử Vi ở cung Mệnh:"], ["nằm ở cung"]),
 ]
 
@@ -48,6 +53,12 @@ def test_tuvi_tra_dung_du_lieu_la_so(q, co, khong):
         assert c in r["cau_tra_loi"], (q, c)
     for c in khong:
         assert c not in r["cau_tra_loi"], (q, c)
+
+
+def test_tuvi_luu_nguyet_theo_phai_nguoi_dung_chon():
+    r = tv.tra_loi("Tháng 3 âm năm sau thế nào?", "chi_tiet", sinh={**SINH_TV, "luu_nguyet": "luu_nien"}, ngay_xem=NX)
+    assert "Theo phái Tháng Giêng tại cung lưu niên, Mệnh của tháng rơi vào cung Phu Thê (Dậu)" in r["cau_tra_loi"]
+    assert "Đẩu Quân từ Thái Tuế → Phụ Mẫu" in r["cau_tra_loi"]
 
 
 def test_tuvi_tuan_triet_dong_hai_cung_trong_tom_tat():

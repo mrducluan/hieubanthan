@@ -5,7 +5,7 @@ current_phase: 1
 current_hypothesis: >-
   H1 Free Reading thu hút người dùng + H2 Metaphysics ID tạo gắn bó
   (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
-current_build: "KB-0009 migration chân dung + quan hệ; tên miền hieuban.com (sau PT-V1 la bàn, SEO-C trang kiến thức cung/thập thần/nhật chủ (sau QA-RV rà soát hỏi đáp, TS-SAU thần số chiều sâu, TV-LICH trường phái)"
+current_build: "TV-LN lưu nguyệt theo phái; KB-0009 migration chân dung + quan hệ; tên miền hieuban.com (sau PT-V1 la bàn, SEO-C trang kiến thức cung/thập thần/nhật chủ (sau QA-RV rà soát hỏi đáp, TS-SAU thần số chiều sâu, TV-LICH trường phái)"
 current_gate: "Gate 0 (kỹ thuật đạt; chưa có 20–50 người thử) → Gate 1"
 current_metrics: []   # có khi bật NEXT_PUBLIC_POSTHOG_KEY
 current_risks:
@@ -35,6 +35,7 @@ completed_work:
   - "QA-RV: rà soát hỏi đáp 5 mảng bằng bộ câu chuyên gia — sửa ~20 lỗi hiểu sai câu, test hồi quy nội dung (PR #42)"
   - "SEO-C: +32 trang kiến thức (12 cung Tử vi, 10 thập thần, 10 nhật chủ) — thư viện 122 trang (PR #43)"
   - "PT-V1: đo hướng nhà bằng la bàn điện thoại + nhập độ tay, nối sang Huyền Không (PR #44)"
+  - "TV-LN: lưu nguyệt Tử vi 5 phái người dùng chọn (mặc định Đẩu Quân, khớp iztro 680/680), hỏi đáp theo tháng"
   - "PL-1: Chính sách quyền riêng tư, Điều khoản, Miễn trừ, Giới thiệu & nguồn, Liên hệ + footer 4 cột (thông tin vận hành qua env)"
   - "KB-0009: migration đưa KB chân dung + quan hệ lên Supabase (chỉ dữ liệu, bảng thanso_kb_khoi), SQL kiểm tra migration đã chạy"
 active_work:
@@ -51,7 +52,6 @@ next_candidate_tasks:
   - "Duyệt nháp KB (quẻ, sao, chân dung thần số, quan hệ) để đổi nhãn nháp → đã duyệt (chủ dự án / người có nghề)"
   - "Chủ dự án điền thông tin vận hành (THONG_TIN_*) + luật sư rà trang pháp lý trước khi bỏ Basic Auth"
   - "PT-V1: thử la bàn trên iPhone + Android thật (lệch ≤ 15°)"
-  - "Tử vi lưu nguyệt — chờ chủ dự án chốt phái tính tháng hạn"
   - "Chạy bộ 55 câu chuyên gia với LLM thật trước khi mở công khai"
   - "PT-V0: bộ đánh giá ảnh phong thuỷ (cần 50–100 bộ ảnh nhà thật có phép dùng)"
 prohibited_until_gate:

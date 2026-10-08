@@ -232,8 +232,8 @@ Việc pháp lý đi kèm. Đây là đề xuất, cần luật sư xác nhận:
   - so với la bàn thật, lệch không quá 15° là đạt.
 - [ ] **Duyệt nội dung nháp AI:** quẻ, sao, chân dung thần số, hợp đôi theo quan hệ. Cần người có nghề đọc dần;
   duyệt xong file nào thì đổi `trang_thai` sang `da_duyet`.
-- [ ] **Chốt phái tính tháng hạn Tử vi (lưu nguyệt).** Có xem tháng theo Đẩu quân, hoặc theo tiểu hạn… Anh chốt
-  phái thì em làm phần xem từng tháng.
+- [x] **Phái tính tháng hạn Tử vi (lưu nguyệt):** anh chốt cho người dùng tự chọn phái → đã làm 5 phái
+  (`docs/LUU-NGUYET-TUVI.md`).
 - [ ] **Chạy bộ 55 câu hỏi chuyên gia với AI thật** (cần `OPENROUTER_API_KEY`) trước khi mở công khai rộng.
 - [ ] **Phong thuỷ xem qua ảnh nhà (PT-V0):** cần 50–100 bộ ảnh nhà thật, có sự đồng ý của chủ nhà.
 - [x] **Trang Chính sách quyền riêng tư + Điều khoản + Miễn trừ + Giới thiệu + Liên hệ + footer** — đã làm (PL-1);

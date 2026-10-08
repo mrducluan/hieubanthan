@@ -175,3 +175,32 @@ test("TV-LICH: ngày hai lịch trùng → báo đổi lịch không làm lá s�
   await page.goto("/tu-vi");
   await expect(page.getByTestId("truong-phai")).toContainText("hai lịch trùng nhau");
 });
+
+test("TV-LN: lưu nguyệt theo phái — tháng Giêng 2026 ở Phu Thê (Đẩu Quân), đổi phái → cung khác, hỏi về tháng", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  // Đưa năm xem về 2026 (test không phụ thuộc ngày chạy).
+  const nam = page.getByRole("group", { name: "Năm xem hạn" });
+  await expect(nam).toContainText(/Năm \d{4}/);
+  for (let k = 0; k < 30; k++) {
+    const n = Number((await nam.textContent())?.match(/Năm (\d{4})/)?.[1]);
+    if (n === 2026) break;
+    await nam.getByRole("button", { name: n > 2026 ? "Năm trước" : "Năm sau" }).click();
+  }
+  const ln = page.getByTestId("luu-nguyet");
+  await expect(ln).toContainText("Lưu nguyệt năm Bính Ngọ");
+  await expect(ln.getByRole("list", { name: "Các tháng âm lịch" }).getByRole("listitem")).toHaveCount(12);
+  await ln.getByRole("button", { name: /^Tháng 1\b/ }).click();
+  const ct = page.getByTestId("luu-nguyet-chi-tiet");
+  await expect(ct).toContainText("Mệnh của tháng ở cung Phu Thê (Dậu)");
+  await expect(ct).toContainText("Hoá Khoa Thái Âm · Phu Thê · đúng cung tháng");
+  await expect(page.getByTestId("so-sanh-phai")).toContainText("Theo địa chi của tháng");
+  // Đổi phái: tháng Giêng tại cung lưu niên (Ngọ = Tật Ách). Lá số gốc giữ nguyên.
+  await page.getByTestId("truong-phai").getByRole("combobox", { name: "Phái tính lưu nguyệt" }).selectOption("luu_nien");
+  await expect(ln).toContainText("Tháng Giêng tại cung lưu niên");
+  await ln.getByRole("button", { name: /^Tháng 1\b/ }).click();
+  await expect(ct).toContainText("Mệnh của tháng ở cung Tật Ách (Ngọ)");
+  await ct.getByRole("button", { name: "Hỏi về tháng này" }).click();
+  const ans = page.getByTestId("cau-tra-loi").last();
+  await expect(ans).toContainText("Theo phái Tháng Giêng tại cung lưu niên, Mệnh của tháng rơi vào cung Tật Ách (Ngọ)");
+});
