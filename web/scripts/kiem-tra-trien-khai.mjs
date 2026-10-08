@@ -3,14 +3,10 @@
 // Bắt lỗi mà E2E không bắt được: web và engine deploy LỆCH NHÁNH (vd web bản mới, engine Render còn ở `main`
 // cũ → hợp đôi báo "Not Found").
 //
-//   node scripts/kiem-tra-trien-khai.mjs https://hieubanthan-nine.vercel.app
-//   STAGING_USER=… STAGING_PASS=… node scripts/kiem-tra-trien-khai.mjs <url>   # nếu bật Basic Auth
+//   node scripts/kiem-tra-trien-khai.mjs https://hieuban.com
 //
 // Thoát mã 1 nếu có bất kỳ mục nào hỏng.
 const goc = (process.argv[2] ?? "http://localhost:3000").replace(/\/$/, "");
-const auth = process.env.STAGING_USER && process.env.STAGING_PASS
-  ? { authorization: "Basic " + Buffer.from(`${process.env.STAGING_USER}:${process.env.STAGING_PASS}`).toString("base64") }
-  : {};
 
 const LA_SO = { birth_date: "1990-05-17", birth_time: "12:30", gender: "nam", noi_sinh: "ha-noi" };
 const MUC = [
@@ -35,7 +31,7 @@ for (const [ten, method, duong, body] of MUC) {
   const t0 = Date.now();
   try {
     const r = await fetch(goc + duong, {
-      method, headers: { ...auth, ...(body ? { "content-type": "application/json" } : {}) },
+      method, headers: { ...(body ? { "content-type": "application/json" } : {}) },
       body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(90_000),
     });
     const txt = await r.text();

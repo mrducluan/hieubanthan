@@ -33,7 +33,7 @@ Lý do và phương án: `docs/KIEN-TRUC-VAN-HANH.md`. Làm theo thứ tự; bư
 1. Vercel → dự án → Settings → Environment Variables → sửa `ENGINE_URL` =
    `https://hieubanthan-engine-sg.onrender.com` (Production + Preview).
 2. `web/vercel.json` đã đặt vùng hàm `sin1` (Singapore) — không cần bấm gì thêm.
-3. Deployments → Redeploy bản mới nhất. Chạy `node scripts/kiem-tra-trien-khai.mjs https://hieubanthan-nine.vercel.app`
+3. Deployments → Redeploy bản mới nhất. Chạy `node scripts/kiem-tra-trien-khai.mjs https://hieuban.com`
    → 14/14 ✓.
 4. Dùng thử 1–2 ngày ổn định → Render → dịch vụ cũ `hieubanthan-engine` (Oregon) → Settings → **Delete**.
 
@@ -56,9 +56,7 @@ Mỗi tuần: Supabase → Database → Backups (nếu có) hoặc Project Setti
 
 ```bash
 cd web
-node scripts/kiem-tra-trien-khai.mjs https://hieubanthan-nine.vercel.app
-# bật Basic Auth staging thì thêm:
-STAGING_USER=… STAGING_PASS=… node scripts/kiem-tra-trien-khai.mjs https://hieubanthan-nine.vercel.app
+node scripts/kiem-tra-trien-khai.mjs https://hieuban.com
 ```
 
 Script gọi thật 14 tính năng (bài đọc, hỏi đáp, hợp đôi, đổi lịch, tử vi, bát tự, phong thuỷ, kinh dịch, link

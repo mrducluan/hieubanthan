@@ -1,5 +1,5 @@
 // E2E (WS-5): Playwright tự khởi động engine (FastAPI) + web (next dev) rồi
-// chạy luồng thật trên Chromium. Không LLM, không Supabase, không Basic Auth:
+// chạy luồng thật trên Chromium. Không LLM, không Supabase:
 // các biến khoá bị ép rỗng để engine chạy template + KB file, tất định.
 import { defineConfig, devices } from "@playwright/test";
 
@@ -12,8 +12,6 @@ const KHOA_TAT = {
   OPENROUTER_API_KEY: "",
   SUPABASE_URL: "",
   SUPABASE_ANON_KEY: "",
-  STAGING_USER: "",
-  STAGING_PASS: "",
   NEXT_PUBLIC_SUPABASE_URL: "",
   NEXT_PUBLIC_SUPABASE_ANON_KEY: "",
   SUPABASE_SERVICE_ROLE_KEY: "",

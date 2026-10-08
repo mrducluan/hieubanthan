@@ -20,8 +20,8 @@ Next.js 14 App Router + TypeScript strict / Supabase (Postgres, Auth, Storage - 
 - Secrets qua env, không hardcode. Mọi migration có rollback.
 
 ## Nhắc việc chủ dự án
-Đầu mỗi phiên: đọc `docs/VIEC-CUA-ANH.md`, nhắc ngắn các mục chưa `[x]` (tên miền, migration + env, mở cho người
-thử, Gate 0…). Chủ dự án báo xong mục nào → đánh `[x]` trong file đó.
+Đầu mỗi phiên: đọc `docs/VIEC-CUA-ANH.md`, nhắc ngắn các mục chưa `[x]` (biến env bắt buộc, Search Console, pháp lý,
+hạ tầng…). Chủ dự án báo xong mục nào → đánh `[x]` trong file đó.
 
 ## Cấm tuyệt đối
 - Không refactor ngoài phạm vi task được giao
@@ -84,6 +84,7 @@ Engine không biết Supabase tồn tại. Web không tự tính bất cứ th�
 | 2026-10-07 | **Thần số chiều sâu + hợp đôi theo quan hệ** (chủ dự án yêu cầu): rà nguồn mở — `anko-ki-maya` (MIT) chỉ dùng làm KHUNG mục (bản gốc theo mulank Ấn Độ, không chép văn); `gr8monk3ys/numerology` là **GPL** và `Ultimate-SoulCodex` **không giấy phép** → không dùng. Thêm KB `thanso_chan_dung.json` (12 số × 4 mặt: tổng quan/tình cảm/công việc/biến cố) + lớp riêng từ Linh hồn/Nhân cách/Sứ mệnh/Thử thách; CALC `thanso_dong_doi` (giai đoạn + thử thách P1↔T1…P4↔T4, chu kỳ 9 năm, năm bước ngoặt) + route đối chiếu năm biến cố (không lưu); hợp đôi nhận `quan_he` (người yêu · bạn bè · đồng nghiệp · sếp · gia đình, mặc định người yêu) với KB `thanso_quan_he.json` + nhịp năm hai người; cặp số viết lại trung tính. Đều nháp AI. Kết quả số cũ không đổi → không tăng `ENGINE_VERSION`. |
 | 2026-10-08 | **Lưu nguyệt Tử vi — người dùng chọn phái** (chủ dự án chốt): 5 phái (`calc/tuvi_luu_nguyet.PHAI`): Đẩu Quân từ Thái Tuế (**mặc định**, khớp iztro 680/680) · Đẩu Quân từ Tiểu hạn · tháng Giêng tại Tiểu hạn · tại cung lưu niên · theo địa chi tháng. Tứ hoá theo can tháng (bảng iztro); tháng nhuận theo `thang_nhuan`. Mỗi tháng kèm cung theo cả 5 phái để so; ưu tiên đại hạn > lưu niên > tiểu hạn > lưu nguyệt. Chưa an sao lưu tháng, không lưu nhật. Không đổi kết quả cũ → không tăng `ENGINE_VERSION`. `docs/LUU-NGUYET-TUVI.md`. |
 | 2026-10-08 | **Phong thuỷ từ bố cục nhà (PT-V0)**: schema `engine/app/schemas/bo_cuc.schema.json` (BoCuc 0.1: hướng nhà, vị trí 6 loại phòng theo 9 phương nhìn từ tâm nhà, hướng vật dụng, 18 dấu hiệu quan sát được = mã `bo_tri` KB). RULES `luangiai/phongthuy_bo_cuc.py` luận theo mệnh gia chủ (không có thì theo trạch), mỗi kết luận trỏ mục KB. Dấu hiệu nguồn ảnh/video **chưa xác nhận thì không luận** (trả `can_xac_nhan`). Hôm nay nhập qua form "Khảo sát nhà"; ảnh (PT-V2) chờ 50–100 bộ ảnh có phiếu đồng ý — **ảnh không vào git**. |
+| 2026-10-08 | **Mở công khai hieuban.com** (chủ dự án chốt): gỡ hẳn Basic Auth staging (`web/middleware.ts`), **bỏ Gate 0** người thử riêng — đo người dùng thật bằng PostHog + Search Console. **Chưa bật tài khoản** (không đặt khoá Supabase trên web → nút đăng nhập tự ẩn, hồ sơ lưu trên máy; ví Sao/link mời có thưởng chờ bật). `siteUrl()` bản build production mặc định `https://hieuban.com`. Chưa có rate limit → **cấm bật `OPENROUTER_API_KEY` cho người dùng trước khi có giới hạn lượt**. Danh sách việc: `docs/VIEC-CUA-ANH.md` (mục G, H, E). |
 
 **Golden SPEC-005:** `engine/fixtures/golden/ziwei_golden.json` (8 lá, sinh cục bộ bằng iztro qua `_generate_ziwei_golden.mjs`). `ziwei_oracle_raw/` giữ 2 lá aov.cc thật làm bằng chứng đối chứng độc lập. Ca `nam_muon_ty` (timeIndex 12) mang `_ty_conflict=true`.
 
