@@ -88,3 +88,25 @@ export async function dsLaSoMau(): Promise<MucLaSoMau[]> {
 export function laSoMau(slug: string): Promise<LaSoMau | null> {
   return lay<LaSoMau>(`/v1/tuvi/la-so-mau/${encodeURIComponent(slug)}`);
 }
+
+// SEO-F — trang "tuổi X hợp hướng nào" (engine GET /v1/phongthuy/tuoi[/slug]); 92 trang năm 1960–2005 × nam/nữ.
+export interface MucTuoiHuong { slug: string; nam: number; gioi_tinh: "nam" | "nu"; tieu_de: string; quai: string; nhom: string; can_chi: string }
+export interface HuongDuNien { huong: string; du_nien: string; y_nghia: string; dung_cho: string }
+export interface TuoiHuong extends Omit<MucTuoiHuong, "quai" | "nhom"> {
+  mo_ta: string; nap_am: { ten: string; hanh: string; han: string };
+  menh_quai: { quai: string; nhom: string; so: number; ngu_hanh?: string; tinh_chat?: string };
+  huong_tot: HuongDuNien[]; huong_xau: HuongDuNien[]; bang_huong: Record<string, string>;
+  goi_y: { ma: string; tieu_de: string; noi_dung: string; nguon: string; huong: string[]; du_nien: string[] }[];
+  moc_dau_nam: { lap_xuan: string; tet_viet: string; tet_trung: string; tet_lech: boolean };
+  sinh_truoc_moc: { nam_tinh: number; quai: string; nhom: string; slug: string | null };
+  tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; nguon: string; luu_y: string[]; trang_thai: string;
+}
+export const duongTuoi = (slug: string) => `/phong-thuy/${slug}`;
+export async function dsTuoiHuong(): Promise<MucTuoiHuong[]> {
+  const d = await lay<{ trang: MucTuoiHuong[] }>("/v1/phongthuy/tuoi");
+  if (!d) noStore();
+  return d?.trang ?? [];
+}
+export function tuoiHuong(slug: string): Promise<TuoiHuong | null> {
+  return /^tuoi-\d{4}-(nam|nu)$/.test(slug) ? lay<TuoiHuong>(`/v1/phongthuy/tuoi/${slug}`) : Promise.resolve(null);
+}

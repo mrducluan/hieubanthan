@@ -17,6 +17,7 @@ from app import nhat_ky
 from app.config import ENGINE_VERSION
 from app.hoidap import phongthuy as hoidap_pt
 from app.luangiai import phongthuy_bo_cuc as bo_cuc
+from app.luangiai import phongthuy_tuoi as pt_tuoi
 
 router = APIRouter(prefix="/v1/phongthuy", tags=["phongthuy"])
 
@@ -190,3 +191,19 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
         "luu_y": kb["luu_y"], "nguon": kb["_nguon"], "trang_thai": kb["trang_thai"],
         "canh_bao": canh_bao,
     }
+
+
+# --------------------------------------------------------------------------- #
+# SEO-F — trang "tuổi X hợp hướng nào" (92 trang: năm 1960–2005 × nam/nữ)
+# --------------------------------------------------------------------------- #
+@router.get("/tuoi")
+def api_tuoi_danh_sach() -> dict:
+    return {"engine_version": ENGINE_VERSION, "trang": pt_tuoi.danh_sach()}
+
+
+@router.get("/tuoi/{slug}")
+def api_tuoi(slug: str) -> dict:
+    k = pt_tuoi.tu_slug(slug)
+    if k is None:
+        raise HTTPException(404, detail="Không có trang tuổi này")
+    return {"engine_version": ENGINE_VERSION, **pt_tuoi.tuoi(*k)}
