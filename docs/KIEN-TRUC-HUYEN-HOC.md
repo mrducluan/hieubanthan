@@ -163,6 +163,25 @@ không dùng để tuyển/sa thải · không phán "khắc" người thứ ba 
   cố ý trả dữ liệu hỏng cho máy cào) → không cào. Đường đúng: gói đăng ký + API chính thức (api.ctext.org
   còn bị mạng cloud chặn) hoặc người duyệt tra tay theo `docs/DOI-CHIEU-HUYEN-HOC.md`.
 
+### HH-CT vòng 2 (2026-10-08) — holdout mới 64 câu
+
+Kho 2.031 câu đã bão hoà (100% cả 4 mảng) → viết **64 câu holdout mới TRƯỚC khi đọc router**
+(`tests/test_huyenhoc_holdout_v2.py`). Lần chạy đầu **46/64 (72%)**: Tử vi 18/23 · Bát tự 11/15 · Phong thuỷ 10/16 ·
+Kinh Dịch 8/10. Sau sửa: **64/64**, kho vẫn 100% (một lần lùi 3 câu "dạy con theo lá số của bé" do mẫu quá rộng → đã gỡ mẫu).
+
+- Tử vi: viết tắt "Tử Phủ" = Tử Vi + Thiên Phủ; hỏi tháng (lưu nguyệt) của chính mình → hạn; "tuổi X … tuổi Y … xung/hợp" →
+  hợp hôn; "con gái/con trai tôi", "bé mới sinh" → lá số con; **nhánh mới `cach_cuc_chung`**: câu gọi tên một cách cục
+  (vd Sát Phá Tham, Tử Phủ đồng cung) mà không hỏi lá số riêng → giải thích từ KB 62 cách cục (trước: đòi lá số).
+- Bát tự: "tính cách gì" bị bắt nhầm thành cách cục (chữ "cách") → chặn; "tài lộc" → nghề–tiền; "thiếu Kim/Mộc… đeo gì" → ngũ hành;
+  "con trai/con gái tôi" → con.
+- Phong thuỷ: "phi tinh năm 2027 sao nào…" là sao **năm** (không phải tinh bàn nhà theo vận); du niên hỏi "xấu thế nào";
+  KB thêm `dong_tay_tu_menh` (giải thích nhóm Đông/Tây tứ mệnh), `cau_thang_giua_nha` (dân gian), từ khoá cho
+  `wc_giua_nha` và `vo_chong_khac_menh`.
+- Kinh Dịch: "có thành không", "tìm lại được không" → dự đoán; mất ví/đồ/tiền → dụng thần Thê Tài (trước: Ứng).
+- **Nhãn holdout đổi sau lần chạy đầu** (người viết nhãn đoán sai danh mục, không phải chỉnh cho khớp máy): 2 câu gọi tên cách
+  cục → `cach_cuc_chung`; "Tây tứ mệnh hợp hướng nào", "chồng Đông tứ – vợ Tây tứ" → `ky_thuat` (câu hỏi chung, trả lời bằng
+  giải thích); "bếp đối diện cửa chính" → `bo_tri` (KB có mục riêng `bep_doi_cua`).
+
 ## 7. Tổng kết HH-0 → HH-5
 
 | Module | CALC (kiểm chứng) | KB (nháp AI) | Kho câu hỏi | Holdout lần đầu |

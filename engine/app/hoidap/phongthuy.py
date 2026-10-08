@@ -83,12 +83,18 @@ def phan_loai(cau_hoi: str) -> dict:
         return kq
     m_van = re.search(r"van ([1-9])(?!\d)", t)
     kq["van"] = int(m_van.group(1)) if m_van else None
+    # HH-CT2: "phi tinh năm 2027 sao nào đến hướng Nam" = sao LƯU NIÊN (năm), không phải tinh bàn nhà theo vận
+    if not kq["van"] and chung.co(t, NAM_KW) and chung.co(t, [r"phi tinh", r"sao (nao|gi)", r"cuu tinh"]) \
+            and not chung.co(t, [r"huyen khong", r"tinh ban", r"trach van"]):
+        kq.update(loai="nam", xu_ly="tra_loi_kem_luu_y")
+        return kq
     if kq["huong"] and (kq["van"] or chung.co(t, [r"huyen khong", r"phi tinh", r"tinh ban", r"trach van"])):
         kq["loai"] = "huyen_khong"
         return kq
     if kq["quai"] and kq["huong"]:
         kq["loai"] = "menh_quai_chung"
-    elif kq["du_nien"] and not kq["ca_nhan"] and chung.co(t, [r"nghia la", r"la gi", r"y nghia"]):
+    elif kq["du_nien"] and not kq["ca_nhan"] and chung.co(t, [r"nghia la", r"la gi", r"y nghia", r"la huong (gi|nao)",
+                                                               r"(xau|tot) (the nao|ra sao|khong|gi)", r"anh huong gi"]):
         kq["loai"] = "du_nien_chung"
     elif chung.co(t, [r"bep"]) and chung.co(t, [r"cua"]) and len(kq["huong"]) >= 2:
         kq["loai"] = "cua_bep"

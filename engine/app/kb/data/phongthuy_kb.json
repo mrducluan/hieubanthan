@@ -207,7 +207,9 @@
    "tu_khoa": [
     "ve sinh o giua",
     "wc o giua",
-    "toilet giua"
+    "toilet giua",
+    "ve sinh (o |nam )?(trung tam|giua)",
+    "(wc|toilet) (o |nam )?trung tam"
    ]
   },
   "cau_thang_cua": {
@@ -405,6 +407,16 @@
     "hoa giai",
     "huong xau"
    ]
+  },
+  "cau_thang_giua_nha": {
+   "tieu_de": "Cầu thang ở giữa nhà",
+   "noi_dung": "Quan niệm: cầu thang đặt ngay trung cung (giữa nhà) như xuyên qua 'tim' nhà, khí bị đảo lên xuống, người trong nhà khó yên. Thực tế: cầu thang chính giữa chia cắt không gian, che sáng và cản luồng gió đi xuyên nhà.",
+   "goi_y": "Thêm giếng trời hoặc đèn để giữa nhà đủ sáng; bậc đầu không chĩa thẳng ra cửa chính; nếu xây mới nên đặt cầu thang lệch về một bên tường.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "cau thang (o |ngay |nam )?(giua|trung tam)",
+    "cau thang giua nha"
+   ]
   }
  },
  "am_trach": {
@@ -520,7 +532,8 @@
     "ca hai vo chong",
     "hai vo chong",
     "vo chong khac",
-    "tuoi bo hay tuoi con"
+    "tuoi bo hay tuoi con",
+    "(chong|vo) (dong|tay) tu menh"
    ],
    "source_id": "duong_trach_tam_yeu",
    "school_id": "bat_trach"
@@ -556,6 +569,17 @@
    "tu_khoa": [
     "thuoc quai nao",
     "quai nao"
+   ],
+   "source_id": "duong_trach_tam_yeu",
+   "school_id": "bat_trach"
+  },
+  "dong_tay_tu_menh": {
+   "tieu_de": "Đông tứ mệnh, Tây tứ mệnh hợp hướng nào?",
+   "noi_dung": "Theo Bát trạch, Đông tứ mệnh (mệnh quái Khảm, Ly, Chấn, Tốn) hợp bốn hướng Bắc, Nam, Đông, Đông Nam; Tây tứ mệnh (Càn, Khôn, Cấn, Đoài) hợp bốn hướng Tây, Tây Bắc, Tây Nam, Đông Bắc. Trong nhóm, mỗi quái có thứ tự riêng Sinh Khí → Thiên Y → Diên Niên → Phục Vị, nên cần năm sinh và giới tính để biết hướng nào tốt nhất cho từng người.",
+   "tu_khoa": [
+    "(dong|tay) tu menh (hop|la|gom|nen|thi|co)",
+    "nhom (dong|tay) tu",
+    "(dong|tay) tu trach"
    ],
    "source_id": "duong_trach_tam_yeu",
    "school_id": "bat_trach"
