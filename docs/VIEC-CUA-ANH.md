@@ -144,8 +144,8 @@ Các biến bắt buộc của B4 đã gom vào mục G.
 
 Rủi ro em ghi lại để anh biết (anh đã chấp nhận khi chốt):
 - Trang pháp lý chưa có tên đơn vị vận hành + email liên hệ (mục E) → nên điền **trong tuần đầu**.
-- Chưa giới hạn số lượt gọi (rate limit). Hiện an toàn vì AI chưa bật (`OPENROUTER_API_KEY` chưa đặt) nên không tốn
-  tiền theo lượt; **trước khi bật AI cho người dùng** cần em làm thêm giới hạn lượt.
+- Giới hạn lượt AI đã có (RL-1): mỗi người 40 lượt/giờ, tổng 400 lượt/giờ, 3000 lượt/ngày; hết lượt thì trả bản mẫu.
+  Với model tầm trung, 3000 lượt/ngày tốn khoảng vài USD/ngày là cùng. AI vẫn tắt cho tới khi anh đặt `OPENROUTER_API_KEY`.
 - Render gói Free ngủ sau 15 phút → người vào đầu tiên chờ 30–60 giây. Nên lên gói Starter Singapore (mục D).
 
 ## E. Thông tin pháp lý cho footer + trang Chính sách (PL-1)
@@ -214,7 +214,8 @@ Ví Sao, link mời có thưởng chỉ chạy khi đã bật tài khoản.
 
 | Biến | Giá trị | Khi nào |
 |---|---|---|
-| `OPENROUTER_API_KEY` | Khoá openrouter.ai | **Sau** khi chạy bộ 55 câu (mục D) và em làm giới hạn lượt |
+| `OPENROUTER_API_KEY` | Khoá openrouter.ai | **Sau** khi chạy bộ 55 câu (mục D). Giới hạn lượt đã có (RL-1) |
+| `LLM_LUOT_NGUOI_GIO`, `LLM_LUOT_TONG_GIO`, `LLM_LUOT_TONG_NGAY` | Mặc định 40 / 400 / 3000 | Hạn mức lượt AI: mỗi người mỗi giờ / tổng mỗi giờ / tổng mỗi ngày. Hết lượt thì người dùng vẫn nhận câu trả lời bản mẫu. Chỉ đặt khi muốn đổi |
 | `NHAT_KY_HOI` + `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `1` + khoá Supabase | Muốn ghi câu hỏi đã lọc (không user_id/tên/ngày sinh) cho vòng tự cải thiện |
 | `SENTRY_DSN` | Tuỳ chọn | Báo lỗi engine |
 
