@@ -234,7 +234,9 @@ Việc pháp lý đi kèm. Đây là đề xuất, cần luật sư xác nhận:
   duyệt xong file nào thì đổi `trang_thai` sang `da_duyet`.
 - [x] **Phái tính tháng hạn Tử vi (lưu nguyệt):** anh chốt cho người dùng tự chọn phái → đã làm 5 phái
   (`docs/LUU-NGUYET-TUVI.md`).
-- [ ] **Chạy bộ 55 câu hỏi chuyên gia với AI thật** (cần `OPENROUTER_API_KEY`) trước khi mở công khai rộng.
+- [ ] **Chạy bộ 55 câu chuyên gia với AI thật**: thêm secret `OPENROUTER_API_KEY` vào GitHub
+  (Settings → Secrets → Actions), rồi vào Actions → **llm-55** → Run workflow, chạy 2 model. Gửi em link kết quả.
+  Hướng dẫn chi tiết: `docs/CHAY-55-CAU-AI-THAT.md`.
 - [ ] **Phong thuỷ xem qua ảnh nhà (PT-V0):** cần 50–100 bộ ảnh nhà thật, có sự đồng ý của chủ nhà.
 - [x] **Trang Chính sách quyền riêng tư + Điều khoản + Miễn trừ + Giới thiệu + Liên hệ + footer** — đã làm (PL-1);
   còn điền thông tin ở mục E.

@@ -205,7 +205,7 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int) -> dict:
                        "y": kb.huyen_khong()["cuc"][b["cuc"]]["y"],
                        })
         muc.append({"loai": "huyen_khong", "huong": pl["huong"][0], "van": van,
-                    "tu_nam": 1864 + (van - 1) * 20, "den_nam": 1864 + van * 20 - 1, "ds": ds,
+                    "tu_nam": 1864 + (van - 1) * 20, "den_nam": 1864 + van * 20 - 1, "ds": ds, "so_son": len(ds),
                     **{k: kb.huyen_khong()[k] for k in ("source_id", "school_id", "trang_thai")}})
         goi["luu_y"] = kb.huyen_khong()["luu_y"]
         return chung.ket(goi)
@@ -323,7 +323,7 @@ def _doan(m: dict) -> tuple[str, str | None]:
         ds = "; ".join(f"hướng {x['huong_son']} (toạ {x['toa_son']}): {x['cuc_ten']}" for x in m["ds"])
         y = {x["cuc_ten"]: x["y"] for x in m["ds"]}
         return (f"Huyền Không — nhà hướng {m['huong']} nhập trạch/xây trong vận {m['van']} "
-                f"({m['tu_nam']}–{m['den_nam']}). Hướng {m['huong']} gồm 3 sơn, mỗi sơn ra một cục: {ds}. "
+                f"({m['tu_nam']}–{m['den_nam']}). Hướng {m['huong']} gồm {m['so_son']} sơn, mỗi sơn ra một cục: {ds}. "
                 + " ".join(f"{k}: {v}" for k, v in y.items())
                 + " Muốn biết đúng sơn và đủ 9 cung, đo độ la bàn rồi lập trạch bàn ở mục Phong thuỷ.", None)
     if l == "giai_thich":
