@@ -48,7 +48,8 @@ def test_linh_vuc_do_chinh_xac(ket_qua):
     dung = sum(1 for r, p in ket_qua if p["linh_vuc"] == r["linh_vuc"])
     sai = collections.Counter((r["linh_vuc"], p["linh_vuc"]) for r, p in ket_qua
                               if p["linh_vuc"] != r["linh_vuc"])
-    assert dung / len(ket_qua) >= 0.85, sai.most_common(15)
+    # Nâng sàn theo kết quả vòng 2026-10-08 (95,01%) — chỉ được nâng, không hạ.
+    assert dung / len(ket_qua) >= 0.94, sai.most_common(15)
 
 
 def test_doi_tuong_do_chinh_xac(ket_qua):
@@ -81,3 +82,22 @@ def test_so_nhac_toi():
 def test_ky_thuat_tro_toi_muc_giai_thich():
     p = hoi.phan_loai("Tại sao các trang web khác ra số khác với ở đây?")
     assert p["linh_vuc"] == "ky_thuat" and "khac_trang" in p["giai_thich"]
+
+
+# Vòng cải thiện 2026-10-08 (90,41% → 95,01%): giới thiệu chỉ là bối cảnh, trùng từ khoá, chọn ngày tốt.
+@pytest.mark.parametrize("cau, linh_vuc", [
+    ("Mình bán hàng online, năm nay của tôi thế nào?", "thoi_van"),            # giới thiệu không kéo sang sự nghiệp
+    ("Em là mẹ bỉm hai con, tôi thiếu gì để thành công hơn?", "ban_than"),
+    ("Tôi là con cả, có phải gánh vác hết không?", "gia_dinh"),                 # đuôi ngắn → vẫn lấy theo giới thiệu
+    ("Tôi có năng khiếu nghệ thuật không?", "ban_than"),                        # "nghệ thuật" ≠ "nghề"
+    ("Làm sao để tôi thăng tiến nhanh hơn?", "su_nghiep"),                      # "thăng tiến" ≠ "tiền"
+    ("Tôi nên đọc sách gì cho hợp với con số?", "ban_than"),                    # "với con số" ≠ "với con"
+    ("Tôi nên học cách buông bỏ điều gì?", "ban_than"),
+    ("Tôi có mũi tên quyết tâm không?", "ban_than"),                            # "mũi tên" ≠ "tên"
+    ("Ngày nào trong tháng hợp để ký hợp đồng?", "thoi_van"),
+    ("Ngày mai có phải ngày tốt để tỏ tình không?", "thoi_van"),
+    ("Làm sao để hoà hợp với mẹ chồng?", "gia_dinh"),
+    ("Sếp tôi số chủ đạo 8, làm sao để làm việc với sếp?", "nguoi_khac"),
+])
+def test_vong_2026_10_08(cau, linh_vuc):
+    assert hoi.phan_loai(cau)["linh_vuc"] == linh_vuc
