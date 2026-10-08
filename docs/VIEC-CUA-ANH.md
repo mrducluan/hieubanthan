@@ -9,7 +9,7 @@
 
 1. [ ] **Tên miền `hieuban.com`** → mục A (khoảng 30 phút, chờ DNS 5 phút đến vài giờ)
 2. [ ] **Migration + biến môi trường** → mục B (khoảng 30 phút) — chính là "bước 2"
-3. [ ] **Quyết định mở cho người dùng thử** → mục C
+3. [ ] **Điền thông tin pháp lý** (mục E) → **quyết định mở cho người dùng thử** (mục C)
 4. [ ] Các việc còn lại → mục D
 
 ---
@@ -178,11 +178,45 @@ Hiện web đang đặt **mật khẩu staging** (`STAGING_USER`/`STAGING_PASS` 
 | **Giữ mật khẩu** | Gửi kèm tên + mật khẩu cho 20–50 người thử | Kín, Google chưa thấy | Trình duyệt trong Zalo/Facebook hay không hiện ô mật khẩu; ảnh xem trước của link chia sẻ không hiện |
 | **Bỏ mật khẩu** | Xoá 2 biến trên Vercel → Redeploy | Mở link là dùng được, chia sẻ đẹp, Google bắt đầu index 122 trang kiến thức | Ai cũng vào được |
 
-**Em khuyên:** bỏ mật khẩu khi đã xong A + B. Nhưng **trước đó** cần trang **Chính sách quyền riêng tư** (NĐ 13/2023),
-vì tài khoản có lưu ngày giờ sinh. Repo hiện **chưa có trang này**. Anh nhắn "làm trang chính sách" là em soạn bản
-nháp; anh (hoặc luật sư) duyệt trước khi bỏ mật khẩu.
+**Em khuyên:** bỏ mật khẩu khi đã xong A + B + **E**. Các trang Chính sách quyền riêng tư, Điều khoản, Miễn trừ trách
+nhiệm, Giới thiệu, Liên hệ và footer đầy đủ đã có (PL-1). Còn thiếu thông tin đơn vị vận hành (mục E) và bước luật sư duyệt.
 
 ---
+
+## E. Thông tin pháp lý cho footer + trang Chính sách (PL-1)
+
+Khung đã làm xong. Thông tin thật do anh điền trên **Vercel → Environment Variables** (Production) rồi **Redeploy**.
+Biến nào để trống thì footer ẩn dòng đó, còn trang pháp lý ghi "đang cập nhật". Code không chứa thông tin thật nào.
+
+| Biến | Ví dụ | Ghi chú |
+|---|---|---|
+| `THONG_TIN_CHU_SO_HUU` | `Hộ kinh doanh Hiểu Bản Thân` hoặc tên anh | Bên chịu trách nhiệm về dữ liệu |
+| `THONG_TIN_MA_SO` | MST / số GCN đăng ký kinh doanh | Bắt buộc khi bán Sao (website thương mại điện tử) |
+| `THONG_TIN_NOI_CAP` | `Sở KH&ĐT TP. Hà Nội, cấp ngày …` | Tuỳ chọn |
+| `THONG_TIN_DIA_CHI` | Địa chỉ liên hệ | |
+| `THONG_TIN_EMAIL` | `lienhe@hieuban.com` | Nên tạo email theo tên miền (mục A4) |
+| `THONG_TIN_EMAIL_DU_LIEU` | `dulieu@hieuban.com` | Nhận yêu cầu xem/sửa/xoá dữ liệu; trống thì dùng email liên hệ |
+| `THONG_TIN_DIEN_THOAI` | `09xx xxx xxx` | Điện thoại / Zalo |
+| `THONG_TIN_BO_CONG_THUONG_URL` | link online.gov.vn | Chỉ điền **sau khi** đã thông báo Bộ Công Thương |
+| `MXH_FACEBOOK`, `MXH_ZALO`, `MXH_TIKTOK`, `MXH_YOUTUBE` | `https://…` | Trống thì không hiện |
+
+Việc pháp lý đi kèm. Đây là đề xuất, cần luật sư xác nhận:
+
+- [ ] **Chọn danh nghĩa vận hành:** cá nhân, hộ kinh doanh hay công ty. Trước khi thu tiền (mua Sao) cần có đăng ký
+  kinh doanh và thông báo website thương mại điện tử với Bộ Công Thương (online.gov.vn).
+- [ ] **Luật sư rà 3 trang** `/chinh-sach-rieng-tu`, `/dieu-khoan`, `/mien-tru-trach-nhiem` trước khi bỏ mật khẩu
+  staging. Căn cứ: Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15 (hiệu lực 01/01/2026) và Nghị định 356/2025/NĐ-CP.
+- [ ] **Chuyển dữ liệu ra nước ngoài:** OpenRouter, PostHog và Sentry đặt ở Mỹ/EU. Hỏi luật sư xem dự án có thuộc diện
+  miễn lập hồ sơ đánh giá tác động (doanh nghiệp nhỏ/khởi nghiệp, có điều kiện) hay phải lập và nộp Bộ Công an (A05).
+- [ ] **Giữ đúng thời hạn lưu đã ghi trong chính sách:**
+  - PostHog: Project settings → Data retention → 12 tháng (nếu gói cho phép; nếu không, sửa con số trong trang).
+  - Sentry: mặc định ≤ 90 ngày.
+  - Nhật ký câu hỏi tối đa 24 tháng: chạy định kỳ trong Supabase SQL Editor (hoặc đặt lịch bằng pg_cron):
+    ```sql
+    delete from thanso_hoi_nhat_ky   where created_at < now() - interval '24 months';
+    delete from huyenhoc_hoi_nhat_ky where created_at < now() - interval '24 months';
+    ```
+- [x] Ô đồng ý lưu hồ sơ vào tài khoản **không tích sẵn** (đúng NĐ 356: cấm đồng ý mặc định), có link tới chính sách.
 
 ## D. Các việc còn lại (nhắc ở phiên sau)
 
@@ -198,12 +232,13 @@ nháp; anh (hoặc luật sư) duyệt trước khi bỏ mật khẩu.
   - so với la bàn thật, lệch không quá 15° là đạt.
 - [ ] **Duyệt nội dung nháp AI:** quẻ, sao, chân dung thần số, hợp đôi theo quan hệ. Cần người có nghề đọc dần;
   duyệt xong file nào thì đổi `trang_thai` sang `da_duyet`.
-- [ ] **Chốt phái tính tháng hạn Tử vi (lưu nguyệt).** Có xem tháng theo Đẩu quân, hoặc theo tiểu hạn… Anh chốt
-  phái thì em làm phần xem từng tháng.
+- [x] **Phái tính tháng hạn Tử vi (lưu nguyệt):** anh chốt cho người dùng tự chọn phái → đã làm 5 phái
+  (`docs/LUU-NGUYET-TUVI.md`).
 - [ ] **Chạy bộ 55 câu chuyên gia với AI thật**: thêm secret `OPENROUTER_API_KEY` vào GitHub
   (Settings → Secrets → Actions), rồi vào Actions → **llm-55** → Run workflow, chạy 2 model. Gửi em link kết quả.
   Hướng dẫn chi tiết: `docs/CHAY-55-CAU-AI-THAT.md`.
 - [ ] **Phong thuỷ xem qua ảnh nhà (PT-V0):** cần 50–100 bộ ảnh nhà thật, có sự đồng ý của chủ nhà.
-- [ ] **Trang Chính sách quyền riêng tư** (xem mục C).
+- [x] **Trang Chính sách quyền riêng tư + Điều khoản + Miễn trừ + Giới thiệu + Liên hệ + footer** — đã làm (PL-1);
+  còn điền thông tin ở mục E.
 
 Vẫn **chặn cho tới khi qua cổng đánh giá**: thanh toán (mua Sao), cộng đồng, marketplace, app di động.

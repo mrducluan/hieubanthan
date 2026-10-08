@@ -4,13 +4,14 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Download, List, Maximize2, Minimize2, Moon, Orbit, ScrollText } from "lucide-react";
-import type { LaSoOutputT, VanHanOutputT } from "@/app/api/tuvi/schema";
+import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { TruongPhai } from "@/components/huyen-hoc/TruongPhai";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
+import { LuuNguyet } from "@/components/huyen-hoc/LuuNguyet";
 import { LaSoTuVi, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -32,7 +33,7 @@ const LOI_NHAN_CO: Record<string, string> = {
 
 const GOI_Y = [
   { nhom: "Lá số", cau: ["Cung Mệnh của tôi nói gì về tính cách?", "Cung Quan Lộc của tôi nói gì về sự nghiệp?", "Cung Phu Thê của tôi thế nào?"] },
-  { nhom: "Hạn", cau: ["Đại hạn hiện tại của tôi là chủ đề gì?", "Năm nay lưu niên của tôi thế nào?"] },
+  { nhom: "Hạn", cau: ["Đại hạn hiện tại của tôi là chủ đề gì?", "Năm nay lưu niên của tôi thế nào?", "Tháng sau của tôi thế nào?"] },
   { nhom: "Kiến thức", cau: ["Tứ hoá là gì?", "Tham Lang ở cung Quan Lộc có ý nghĩa gì?"] },
 ];
 
@@ -45,11 +46,16 @@ export function TuVi() {
   const [thangNhuan, setThangNhuan] = useState<"thang_sau" | "thang_chinh">("thang_sau");
   // TV-LICH (chủ dự án yêu cầu 2026-10-02): âm lịch Việt Nam (mặc định) ↔ lịch Trung Quốc.
   const [lich, setLich] = useState<"viet" | "trung">("viet");
+  // TV-LN (chủ dự án yêu cầu 2026-10-08): phái tính lưu nguyệt — chỉ đổi cung tháng, không đổi lá số gốc.
+  const [luuNguyet, setLuuNguyet] = useState<PhaiLuuNguyet>("dau_quan_thai_tue");
   const goc = laSoTuHoSo(hoSo);
-  const laSo = goc ? { ...goc, ...(hoaLinh === "trung" ? { hoa_linh: hoaLinh } : {}), ...(thangNhuan === "thang_chinh" ? { thang_nhuan: thangNhuan } : {}), ...(lich === "trung" ? { lich } : {}) } : null;
-  const { data: ls, loi, thuLai } = usePost<LaSoOutputT>("/api/tuvi/la-so", laSo);
+  const laSoGoc = goc ? { ...goc, ...(hoaLinh === "trung" ? { hoa_linh: hoaLinh } : {}), ...(thangNhuan === "thang_chinh" ? { thang_nhuan: thangNhuan } : {}), ...(lich === "trung" ? { lich } : {}) } : null;
+  const laSo = laSoGoc ? { ...laSoGoc, ...(luuNguyet !== "dau_quan_thai_tue" ? { luu_nguyet: luuNguyet } : {}) } : null;
+  // Lá số gốc không phụ thuộc phái lưu nguyệt → không an lại khi chỉ đổi phái tháng.
+  const { data: ls, loi, thuLai } = usePost<LaSoOutputT>("/api/tuvi/la-so", laSoGoc);
   const [namXem, setNamXem] = useState(namNayVN);
-  const { data: vh } = usePost<VanHanOutputT>("/api/tuvi/van-han", laSo ? { la_so: laSo, nam_xem: namXem } : null);
+  const { data: vh } = usePost<VanHanOutputT>("/api/tuvi/van-han", laSoGoc ? { la_so: laSoGoc, nam_xem: namXem } : null);
+  const { data: lnm } = usePost<LuuNguyetOutputT>("/api/tuvi/luu-nguyet", laSo ? { la_so: laSo, nam_am: namXem } : null);
   const [lop, setLop] = useState({ dai_han: false, luu_nien: true });
   const [giaoDien, doiGiaoDien] = useGiaoDien("tuvi");
   const [phaiDoSang, setPhaiDoSang] = useState<PhaiDoSang>("nam");
@@ -122,7 +128,8 @@ export function TuVi() {
               phaiDoSang={phaiDoSang} setPhaiDoSang={setPhaiDoSang}
               hoaLinh={hoaLinh} setHoaLinh={setHoaLinh}
               thangNhuan={thangNhuan} setThangNhuan={setThangNhuan}
-              coNhuan={!!ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh"} />
+              coNhuan={!!ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh"}
+              luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }} />
             {/* Lá số: trên điện thoại mặc định cuộn ngang để giữ chữ đủ lớn; "Toàn cảnh" thu vừa màn hình */}
             <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0" data-testid="la-so-tu-vi">
               <div className={cn("overflow-hidden rounded-[1.25rem] shadow-card", !toanCanh && "min-w-[760px]")}>
@@ -145,6 +152,12 @@ export function TuVi() {
             <div ref={chiTietRef} className="scroll-mt-20">
               <ChiTietCung ls={ls} chi={chiChon} phai={phaiDoSang} vanHan={lop.dai_han || lop.luu_nien ? vh : null} onHoi={hoi} />
             </div>
+            {lnm && lnm.nam_am === namXem ? (
+              <LuuNguyet d={lnm} onHoi={hoi} onChonCung={(c) => {
+                setChon(c);
+                requestAnimationFrame(() => chiTietRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+              }} />
+            ) : <KhungTai dong={3} />}
             <ChuGiai />
             {ls.cach_cuc && <CachCuc ds={ls.cach_cuc} luuY={ls.cach_cuc_luu_y} onHoi={hoi} />}
             {ls.co_canh_bao.length > 0 && (

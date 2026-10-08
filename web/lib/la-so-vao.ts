@@ -14,4 +14,6 @@ export const LaSoVao = z.object({
   hoa_linh: z.enum(["viet", "trung"]).optional(),
   thang_nhuan: z.enum(["thang_sau", "thang_chinh"]).optional(),
   lich: z.enum(["viet", "trung"]).optional(),
+  /** TV-LN — phái tính lưu nguyệt (tháng hạn), chỉ Tử vi. */
+  luu_nguyet: z.enum(["dau_quan_thai_tue", "dau_quan_tieu_han", "tieu_han", "luu_nien", "dia_chi_thang"]).optional(),
 }).strict();
