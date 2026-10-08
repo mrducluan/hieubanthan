@@ -47,6 +47,40 @@ def api_menh_quai(inp: SinhInput) -> dict:
             "huong_cat": [h for h, d in bang.items() if d in pt.CAT]}
 
 
+class DoHuongInput(BaseModel):
+    """PT-V1 — độ HƯỚNG nhà đo bằng la bàn (điện thoại hoặc la bàn thật); kèm năm sinh thì xét du niên."""
+    model_config = ConfigDict(extra="forbid")
+
+    do_huong: float = Field(ge=0, lt=360, description="Độ của hướng nhà (mặt nhìn ra), 0 = chính Bắc")
+    sinh: SinhInput | None = None
+
+
+CANH_BAO_DO = {
+    "khong_vong": "Độ đo nằm đúng ranh giới hai sơn (không vong) — đo lại ở vài điểm trước cửa; sai vài độ là đổi sơn.",
+    "kiem_huong": "Hướng lệch tâm sơn quá 3° (kiêm hướng) — Huyền Không sẽ lập thế quái; nên đo lại cho chắc.",
+    "ranh_gioi_8_huong": "Độ đo sát ranh giới giữa hai hướng — Bát trạch có thể đổi sang trạch khác; đo lại ở vài điểm.",
+}
+
+
+@router.post("/do-huong")
+def api_do_huong(inp: DoHuongInput) -> dict:
+    """Đổi độ la bàn → hướng/sơn/toạ/trạch (+ du niên hướng đó với người xem). La bàn điện thoại chịu
+    nhiễu từ (thép, loa, máy tính) — luôn cho sửa tay và khuyên đo lại vài lần."""
+    r = pt.do_huong(inp.do_huong)
+    ra = {"engine_version": ENGINE_VERSION, **r,
+          "canh_bao_y": CANH_BAO_DO.get(r["canh_bao"]) if r["canh_bao"] else None,
+          "luu_y": ("Độ đo bằng điện thoại là độ từ (bắc từ), lệch bắc thật khoảng 1° ở Việt Nam — không đáng kể "
+                    "với 8 hướng, nhưng đáng kể khi sát ranh sơn. Đứng ở cửa chính, quay lưng vào nhà, giữ điện "
+                    "thoại nằm ngang, tránh xa xe, cột thép, loa.")}
+    if inp.sinh:
+        s = inp.sinh.sinh()
+        mq = pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"])
+        ra["menh_quai"] = {k: mq[k] for k in ("quai", "nhom")}
+        ra["du_nien"] = pt.du_nien(mq["quai"], r["huong"])
+        ra["hop_nhom"] = r["trach"]["nhom"][:6] == mq["nhom"][:6]
+    return ra
+
+
 class HoiPTInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 

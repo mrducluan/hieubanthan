@@ -84,6 +84,29 @@ def trach(huong_nha: str) -> dict:
             "nhom": "Đông tứ trạch" if q in DONG_TU else "Tây tứ trạch"}
 
 
+def huong_tu_do(do: float) -> str:
+    """Độ la bàn (0 = chính Bắc, theo chiều kim đồng hồ) → một trong 8 hướng (mỗi hướng 45°)."""
+    return HUONG[int(((do % 360) + 22.5) % 360 // 45)]
+
+
+def do_huong(do: float) -> dict:
+    """PT-V1 — độ của HƯỚNG nhà (mặt nhà nhìn ra, đo bằng la bàn) → hướng, sơn hướng, toạ, sơn toạ, trạch.
+
+    Cảnh báo: `khong_vong` (sát ranh hai sơn ±0,5°) · `kiem_huong` (lệch tâm sơn > 3°) ·
+    `ranh_gioi_8_huong` (cách ranh hai hướng ≤ 1°, Bát trạch có thể đổi trạch)."""
+    from app.calc import huyen_khong as hk  # noqa: PLC0415
+    d = do % 360
+    toa = (d + 180) % 360
+    sh, st = hk.son_tu_do(d), hk.son_tu_do(toa)
+    huong = huong_tu_do(d)
+    cach_ranh = 22.5 - abs((d + 22.5) % 45 - 22.5)
+    # Ranh 8 hướng luôn trùng ranh sơn → ưu tiên báo ranh 8 hướng (đổi cả trạch Bát trạch).
+    canh_bao = "ranh_gioi_8_huong" if cach_ranh <= 1 else st["canh_bao"]
+    return {"do_huong": round(d, 2), "huong": huong, "son_huong": sh["son"], "do_toa": round(toa, 2),
+            "toa": DOI[huong], "son_toa": st["son"], "lech_tam_son": st["lech"], "canh_bao": canh_bao,
+            "trach": trach(huong)}
+
+
 def cua_chu_bep(cua: str, chu: str | None, bep: str | None) -> dict:
     """Du niên giữa các cặp phương vị (cửa–chủ, cửa–bếp, chủ–bếp) — Dương Trạch Tam Yếu."""
     vi = [("cửa", cua), ("chủ", chu), ("bếp", bep)]
