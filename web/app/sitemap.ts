@@ -8,6 +8,7 @@ export const revalidate = 21600;
 const TINH: [string, number][] = [
   ["/", 1], ["/kien-thuc", 0.9], ["/tu-dien", 0.8], ["/la-so-mau", 0.8], ["/kham-pha", 0.8], ["/than-so", 0.8], ["/hop-doi", 0.8],
   ["/tu-vi", 0.7], ["/bat-tu", 0.7], ["/kinh-dich", 0.7], ["/phong-thuy", 0.7],
+  ["/gioi-thieu", 0.5], ["/lien-he", 0.4], ["/chinh-sach-rieng-tu", 0.3], ["/dieu-khoan", 0.3], ["/mien-tru-trach-nhiem", 0.3],
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

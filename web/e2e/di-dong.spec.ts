@@ -4,7 +4,7 @@ import { napHoSo } from "./_hoso";
 
 test.use({ viewport: { width: 375, height: 812 }, hasTouch: true, isMobile: true });
 
-for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/phong-thuy", "/kinh-dich", "/kham-pha"]) {
+for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/phong-thuy", "/kinh-dich", "/kham-pha", "/chinh-sach-rieng-tu", "/gioi-thieu"]) {
   test(`không tràn ngang: ${duong}`, async ({ page }) => {
     await napHoSo(page);
     await page.goto(duong);
