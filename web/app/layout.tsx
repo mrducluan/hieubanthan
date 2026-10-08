@@ -13,11 +13,20 @@ import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE } 
 import "./globals.css";
 
 // Display: Newsreader — serif, chữ số đẹp cho con số lớn. Body: Be Vietnam Pro — thiết kế cho tiếng Việt.
+// PERF-1: tách nghiêng ra bản riêng KHÔNG preload — bản nghiêng (64 KB) chỉ dùng ở vài câu trích, trước đây
+// được preload trên mọi trang. Bản thường vẫn preload. Dùng qua lớp .italic trong vùng font-serif (globals.css).
 const display = Newsreader({
   subsets: ["vietnamese", "latin"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   variable: "--font-display",
   display: "swap",
+});
+const displayNghieng = Newsreader({
+  subsets: ["vietnamese", "latin"],
+  style: ["italic"],
+  variable: "--font-display-italic",
+  display: "swap",
+  preload: false,
 });
 const body = Be_Vietnam_Pro({
   subsets: ["vietnamese", "latin"],
@@ -59,7 +68,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   // CSP-2: nonce của lượt tải (middleware) — đọc header cũng khiến mọi trang render động, bắt buộc để nonce khớp từng lượt.
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
-    <html lang="vi" className={`${display.variable} ${body.variable} ${han.variable}`}>
+    <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
       <body>
         <JsonLd data={goiLd(ldToChuc(), ldWebsite(), ldUngDung())} />
         <div className="star-field" aria-hidden />
