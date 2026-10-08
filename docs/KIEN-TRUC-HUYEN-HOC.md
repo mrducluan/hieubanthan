@@ -182,6 +182,21 @@ Kinh Dịch 8/10. Sau sửa: **64/64**, kho vẫn 100% (một lần lùi 3 câu 
   cục → `cach_cuc_chung`; "Tây tứ mệnh hợp hướng nào", "chồng Đông tứ – vợ Tây tứ" → `ky_thuat` (câu hỏi chung, trả lời bằng
   giải thích); "bếp đối diện cửa chính" → `bo_tri` (KB có mục riêng `bep_doi_cua`).
 
+### HH-CT vòng 3 (2026-10-08) — holdout 51 câu + thần số
+
+Holdout v3 (`tests/test_huyenhoc_holdout_v3.py`) viết trước khi đọc router, trọng tâm lối hỏi chưa phủ: "X cư/thủ/toạ Y"
+(khớp cụm trang SEO-H), tháng âm lịch, cây/bể cá/cửa đối cửa, tên 9 sao phi tinh. Lần chạy đầu **40/51 (78%)**:
+Tử vi 19/21 · Bát tự 9/11 · Phong thuỷ 4/11 · Kinh Dịch 8/8. Sau sửa **51/51**, v2 vẫn 64/64, kho 2.031 câu vẫn 100%.
+
+- Tử vi: "tháng 7 âm lịch này" → hạn; "cục trong tử vi" → giải thích `cuc`.
+- Bát tự: "xem giúp vợ tôi" → người khác; "thân vượng thân nhược là gì" → giải thích `than_vuong`.
+- Phong thuỷ: KB thêm `cay_truoc_cua`, `be_ca` (dân gian, kèm lý do thực tế, không gợi ý vật phẩm); "cửa chính đối diện
+  cửa sau" → `cua_doi_nhau`; "Nhị Hắc/Ngũ Hoàng… bay vào hướng nào" → sao năm; "mệnh quái là gì" → giải thích;
+  "nhà hướng Tây có xấu không" → hướng theo mệnh quái gia chủ (hỏi năm sinh).
+- Nhãn đổi sau lần chạy đầu: "tuổi Ất Sửu kê bàn làm việc hướng nào" → `bo_tri` (KB có `phong_lam_viec`);
+  "nhà hướng Tây có xấu không" → `huong_ca_nhan`.
+- Thần số (cùng vòng): đúng lĩnh vực **95,01% → 96,59%**, 32 câu sửa, 0 câu lùi (chi tiết trong PR).
+
 ## 7. Tổng kết HH-0 → HH-5
 
 | Module | CALC (kiểm chứng) | KB (nháp AI) | Kho câu hỏi | Holdout lần đầu |

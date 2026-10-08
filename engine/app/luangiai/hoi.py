@@ -111,7 +111,8 @@ LINH_VUC_KW: dict[str, list[str]] = {
                  r"doc than", r"hen ho", r"friendzone", r"cam ket", r"ra mat", r"yeu xa",
                  r"vo chong", r"chong toi", r"vo toi", r"nguoi vo", r"nguoi chong", r"moi quan he",
                  r"thao tung", r"song chung", r"lua hon nhan", r"dong gioi", r"rung dong", r"don phuong",
-                 r"thu hut dung nguoi", r"nguoi phu hop", r"het e", r"hom hinh", r"lanh nhat",
+                 r"thu hut dung nguoi", r"nguoi phu hop", r"(khong dong y|phan doi|ngan can) nguoi yeu",
+                 r"nguoi yeu khac quan diem", r"het e", r"hom hinh", r"lanh nhat",
                  r"ngon ngu tinh yeu", r"bi phan boi", r"quay lai", r"lang man", r"nguoi da co gia dinh"],
     "gia_dinh": [r"bo me", r"gia dinh", r"me chong", r"nha chong", r"nha vo", r"bo chong", r"anh chi em",
                  r"anh em", r"con ca", r"nhuong nhin em", r"o rieng", r"gia dao", r"bo toi", r"me toi",
@@ -119,11 +120,11 @@ LINH_VUC_KW: dict[str, list[str]] = {
                  r"song chung voi bo me", r"bo me gia", r"tha thu cho bo me", r"vai tro cua toi trong",
                  r"cho dua cua ca nha", r"em ay"],
     "con_cai": [r"con toi", r"con cai", r"nuoi day", r"day con", r"cham con", r"sinh con", r"dat ten con",
-                r"ten con", r"be", r"con gai", r"con trai", r"sinh them con", r"con tuoi teen", r"la mang con", r"lam bo me", r"kieu bo me",
+                r"ten con", r"(?<!ban )be", r"con gai", r"con trai", r"sinh them con", r"con tuoi teen", r"la mang con", r"lam bo me", r"kieu bo me",
                 r"lam bo me", r"(?<!cham soc )bo me the nao", r"nguoi bo tot", r"truong quoc te", r"cho con",
                 r"lo lang cho con", r"kien nhan hon voi con", r"ap dat con", r"voi con(?! so)", r"con so ten o nha",
                 r"ten dem", r"dat ten", r"chon ngay mo de con"],
-    "su_nghiep": [r"nghe(?! thuat)", r"cong viec", r"viec lam", r"nghi viec", r"doi viec", r"chuyen nganh",
+    "su_nghiep": [r"nghe(?! thuat)", r"lam tai chinh", r"cong viec", r"viec lam", r"nghi viec", r"doi viec", r"chuyen nganh",
                   r"thang tien", r"sep", r"dong nghiep", r"kinh doanh", r"khoi nghiep", r"mo quan",
                   r"mo cong ty", r"lam an", r"su nghiep", r"lam thue", r"freelancer", r"startup",
                   r"cong ty", r"tang luong", r"sa thai", r"ban hang", r"lam giao vien", r"nganh it", r"chuyen nganh", r"nganh gi", r"su nghiep", r"nghe nghiep", r"dong nghiep", r"doi viec",
@@ -136,19 +137,19 @@ LINH_VUC_KW: dict[str, list[str]] = {
                   r"lam ky su", r"gop von", r"phong van", r"xin viec", r"hop dong", r"that nghiep", r"nop don nghi"],
     "tai_chinh": [r"(?<!thang )tien", r"giau", r"tien bac", r"tai chinh", r"dau tu", r"chung khoan", r"mua nha", r"mua dat",
                   r"tien ao", r"no nan", r"dang no", r"no nhieu", r"tra het", r"vay tien", r"cho vay", r"tiet kiem", r"tieu tien", r"chi tieu", r"mua sam", r"tai loc",
-                  r"cho vay", r"thu nhap"],
+                  r"cho vay", r"thu nhap", r"cho (nguoi khac|nguoi ta|ban be) vay"],
     "hoc_tap": [r"hoc tap", r"hoc hanh", r"viec hoc", r"hoc bai", r"cach hoc", r"hoc mai", r"em hoc", r"nen hoc(?! cach)", r"hoc nhom", r"hoc buoi", r"hoc truoc", r"thi cu", r"em thi", r"thi dai hoc", r"thi co do", r"ky thi", r"khi thi", r"chon nganh", r"nganh gi khi", r"hoc nganh", r"nganh cong nghe", r"hop hoc", r"dai hoc", r"khoi a", r"khoi d", r"du hoc", r"thac si",
                 r"ngoai ngu", r"hoc nghe", r"on thi", r"tap trung hoc", r"ielts", r"tieng anh",
                 r"tieng trung", r"diem so", r"hoc them", r"su pham", r"bo hoc", r"thi lai", r"xao nhang"],
     "suc_khoe": [r"cang thang", r"stress", r"mat ngu", r"kiet suc", r"can bang cuoc song", r"thu gian",
                  r"tram buon", r"tram cam", r"an uong", r"lo au", r"chuyen gia tam ly", r"ngu ngon",
-                 r"cau gat", r"the thao", r"thoi quen", r"suc khoe", r"tinh than"],
+                 r"cau gat", r"the thao", r"thoi quen(?! xau)", r"suc khoe", r"tinh than"],
     "tam_linh": [r"no nghiep", r"bai hoc nghiep", r"kiep truoc", r"luan hoi", r"can tu",
                  r"di tu", r"giac quan thu sau", r"nguoi duoc chon", r"so hiem", r"qua bao",
                  r"bai hoc cuoc doi", r"bai hoc lon nhat"],
     "ten_goi": [r"(?<!mui )ten", r"doi ten", r"nghe danh", r"ten shop", r"ten cong ty", r"so dien thoai",
-                r"bien so", r"biet danh", r"doi ho", r"ten tieng anh", r"so nha", r"tang may"],
-    "ban_be_xa_hoi": [r"ban be", r"ban than", r"tinh ban", r"giao tiep", r"moi quan he xa hoi",
+                r"bien so", r"biet danh", r"doi ho", r"ten tieng anh"],
+    "ban_be_xa_hoi": [r"ban be", r"(?<!cho )ban than", r"tinh ban", r"giao tiep", r"moi quan he xa hoi",
                       r"mang xa hoi", r"yeu quy", r"thuyet phuc", r"thuong hieu ca nhan", r"cong dong",
                       r"xa lanh", r"it ban", r"ghen ti", r"ban cu", r"mo rong cac moi quan he",
                       r"phat long", r"nguoi ban tot", r"choi voi"],
@@ -167,7 +168,7 @@ LINH_VUC_KW: dict[str, list[str]] = {
                  r"mat dong luc", r"ly tri", r"de tin nguoi", r"mem long", r"bi hieu lam", r"khac biet",
                  r"so sanh", r"ton thuong", r"co don", r"yeu ban than", r"noi khong", r"tu lua",
                  r"sinh ra de", r"di dung huong", r"khao khat", r"hoi tiec", r"nghi cho nguoi khac",
-                 r"kiem soat", r"tinh tu do", r"sanh"],
+                 r"kiem soat", r"tinh tu do", r"(?<!so )sanh", r"hay phan ung", r"phan ung the nao"],
 }
 # Lĩnh vực "thời vận": chỉ khi câu hỏi không nêu chủ đề nào khác.
 THOI_DIEM = [r"nam nay", r"nam sau", r"nam ngoai", r"nam 20\d\d", r"thang nay", r"thang sau",
@@ -178,7 +179,7 @@ THOI_DIEM = [r"nam nay", r"nam sau", r"nam ngoai", r"nam 20\d\d", r"thang nay", 
 
 # Hỏi CHỌN ngày/tháng tốt cho một việc ("ngày nào hợp để ký hợp đồng", "ngày mai có phải ngày tốt để tỏ tình")
 # → thời vận: trả lời theo ngày/tháng/năm cá nhân; việc (hợp đồng, tỏ tình…) chỉ là bối cảnh.
-CHON_THOI_DIEM = [r"(ngay|thang) nao( trong (thang|nam)( nay)?)? (hop|tot)", r"co phai (la )?(ngay|thang|nam) tot",
+CHON_THOI_DIEM = [r"giai doan nao( trong doi)?( toi)? nen", r"(ngay|thang) nao( trong (thang|nam)( nay)?)? (hop|tot)", r"co phai (la )?(ngay|thang|nam) tot",
                   r"thang nao trong nam"]
 
 KY_THUAT_CHUNG = [r"tinh the nao", r"cach tinh", r"la gi$", r"tinh theo", r"co chinh xac",
@@ -323,7 +324,7 @@ def phan_loai(cau_hoi: str) -> dict:
                  and re.search(r"(?<!\w)" + LIEN_QUAN_NGUOI + r"(?!\w)|toi va|va (anh|co|ban|nguoi)", t)
                  # "hợp làm sếp", "hợp với nghề gì": hỏi độ hợp NGHỀ của chính mình, không phải hai người
                  and not re.search(r"hop (lam|voi nghe|nghe|voi cong viec|voi viec|voi nganh|voi moi truong|"
-                                   r"voi vi tri|voi vai tro)", t))
+                                   r"voi vi tri|voi vai tro|voi kieu)", t))
     # "Làm sao để hoà hợp với mẹ chồng" là xin cách sống chung (gia đình), không phải so cặp số.
     if hai_nguoi and cap is None and len(ngay) < 2 and re.search(r"lam sao de hoa hop voi", t):
         hai_nguoi = False

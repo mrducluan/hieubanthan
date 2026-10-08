@@ -270,7 +270,8 @@
    "tu_khoa": [
     "cua phong doi",
     "cua doi nhau",
-    "cua sau doi dien cua truoc"
+    "cua sau doi dien cua truoc",
+    "cua (chinh|truoc) doi dien cua sau"
    ]
   },
   "nha_chu_l": {
@@ -417,6 +418,31 @@
     "cau thang (o |ngay |nam )?(giua|trung tam)",
     "cau thang giua nha"
    ]
+  },
+  "cay_truoc_cua": {
+   "tieu_de": "Cây trước cửa nhà",
+   "noi_dung": "Quan niệm dân gian: cây to mọc chắn thẳng giữa cửa chính 'chặn khí' vào nhà; cây xanh vừa phải hai bên cửa thì được xem là tốt. Thực tế: cây lớn sát cửa che sáng, rễ có thể làm nứt nền, lá rụng gây ẩm và ruồi muỗi; cây nhỏ, gọn giúp mát và dễ chịu.",
+   "goi_y": "Không trồng cây lớn thẳng giữa lối vào; chọn cây cao vừa phải, dễ chăm (chậu cây hai bên cửa, cây bụi thấp); cắt tỉa để cửa thông thoáng, đủ sáng. Chọn loại cây theo khí hậu và công chăm sóc, không theo lời hứa 'chiêu tài'.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "trong cay",
+    "cay (gi|nao) truoc (cua|nha)",
+    "cay truoc (cua|nha)",
+    "cay to truoc",
+    "cay chan cua"
+   ]
+  },
+  "be_ca": {
+   "tieu_de": "Bể cá trong nhà",
+   "noi_dung": "Quan niệm dân gian: nước tượng trưng cho tài lộc, bể cá sạch đặt phòng khách được coi là tốt; không nên đặt trong phòng ngủ hay đối diện bếp. Thực tế: bể cá cần lọc, thay nước, đèn — bể bẩn gây mùi và ẩm; phòng ngủ có tiếng máy bơm làm khó ngủ.",
+   "goi_y": "Nếu thích nuôi cá: đặt ở phòng khách nơi dễ chăm, xa ổ điện và nắng gắt; giữ nước sạch. Không cần mua bể cá chỉ vì phong thuỷ — hệ thống không giới thiệu vật phẩm.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "be ca",
+    "ho ca",
+    "nuoi ca",
+    "ca canh"
+   ]
   }
  },
  "am_trach": {
@@ -485,7 +511,8 @@
    "tu_khoa": [
     "cung phi va menh",
     "cung phi khac",
-    "menh ngu hanh"
+    "menh ngu hanh",
+    "(menh quai|cung phi) la gi"
    ],
    "source_id": "duong_trach_tam_yeu",
    "school_id": "bat_trach"

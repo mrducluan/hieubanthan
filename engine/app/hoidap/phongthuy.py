@@ -28,7 +28,8 @@ CA_NHAN = [r"toi", r"cua minh", r"minh co", r"em co", r"tuoi toi", r"hop voi toi
 HUONG_CA_NHAN = [r"hop huong", r"huong nha", r"huong gi", r"huong nao", r"cung phi", r"menh quai",
                  r"dong tu menh", r"tay tu menh", r"ke giuong", r"dau giuong", r"ban lam viec", r"huong bep",
                  r"cua chinh", r"huong tot", r"huong xau", r"sinh khi", r"tuyet menh", r"ngu quy", r"chon can",
-                 r"huong ban", r"quay dau", r"phong ngu", r"hop khong"]
+                 r"huong ban", r"quay dau", r"phong ngu", r"hop khong",
+                 r"nha huong (dong|tay|nam|bac)( (nam|bac))?\b.{0,20}\b(tot|xau|hop)\b"]       # HH-CT3: "nhà hướng Tây có xấu không"
 NAM_KW = [r"nam nay", r"nam sau", r"nam 20\d\d"]
 NAM_VIEC = [r"sua nha", r"lam nha", r"dong tho", r"xay nha", r"ngu hoang", r"tranh dong", r"kim lau",
             r"hoang oc", r"tam tai", r"thai tue", r"xem tuoi"]
@@ -84,7 +85,8 @@ def phan_loai(cau_hoi: str) -> dict:
     m_van = re.search(r"van ([1-9])(?!\d)", t)
     kq["van"] = int(m_van.group(1)) if m_van else None
     # HH-CT2: "phi tinh năm 2027 sao nào đến hướng Nam" = sao LƯU NIÊN (năm), không phải tinh bàn nhà theo vận
-    if not kq["van"] and chung.co(t, NAM_KW) and chung.co(t, [r"phi tinh", r"sao (nao|gi)", r"cuu tinh"]) \
+    if not kq["van"] and chung.co(t, NAM_KW) and chung.co(t, [r"phi tinh", r"sao (nao|gi)", r"cuu tinh",
+                                                    r"nhat bach|nhi hac|tam bich|tu luc|ngu hoang|luc bach|that xich|bat bach|cuu tu"]) \
             and not chung.co(t, [r"huyen khong", r"tinh ban", r"trach van"]):
         kq.update(loai="nam", xu_ly="tra_loi_kem_luu_y")
         return kq

@@ -32,7 +32,7 @@ HOP = [r"hop bat tu", r"hop nhau", r"xung nhau", r"xem hop", r"nhat chu \w+ va n
        r"hop voi (anh|chi|chong|vo|nguoi)"]
 CON = [r"(cho|cua) con toi", r"con toi (sinh|thieu|thua)", r"sinh con gio", r"dat ten", r"be nha toi",
        r"con (gai|trai) (toi|minh|em)"]                                       # HH-CT2
-NGUOI_KHAC = [r"cho (chong|vo|me|bo|ban gai|ban trai|nguoi yeu|sep) toi",
+NGUOI_KHAC = [r"(cho|giup) (chong|vo|me|bo|ban gai|ban trai|nguoi yeu|sep) toi",
               r"(chong|vo|me|bo|nguoi yeu|sep) toi (sinh|tuoi|co)"]
 VAN = [r"dai van", r"luu nien", r"nam nay", r"nam sau", r"muoi nam", r"10 nam", r"nam nao", r"van nao",
        r"khoi van", r"nam 20\d\d"]
