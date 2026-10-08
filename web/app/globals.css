@@ -35,6 +35,8 @@
     background-attachment: fixed;
   }
   h1, h2, h3 { @apply font-serif font-medium tracking-tight; text-wrap: balance; }
+  /* PERF-1: chữ nghiêng serif dùng bản Newsreader nghiêng riêng (không preload, chỉ tải khi trang có). */
+  .font-serif.italic, :where(h1, h2, h3, .font-serif) .italic { font-family: var(--font-display-italic), var(--font-display), Georgia, serif; }
   :focus-visible { outline: 2px solid rgb(var(--gold)); outline-offset: 2px; border-radius: 6px; }
   ::selection { background: rgb(var(--gold) / 0.3); }
 }

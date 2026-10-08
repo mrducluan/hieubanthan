@@ -47,7 +47,32 @@ export default async function Trang() {
       {muc.length === 0 ? (
         <p className="mt-8 text-fg-muted">Từ điển đang tải, vui lòng quay lại sau ít phút.</p>
       ) : (
-        <TimTuDien muc={muc} tenMang={TEN_MANG} />
+        <div className="mt-8 space-y-8">
+          <TimTuDien tenMang={TEN_MANG} tong={muc.length} />
+          {Object.entries(TEN_MANG).map(([md, ten]) => {
+            const ds = muc.filter((m) => m.mo_dun === md);
+            if (!ds.length) return null;
+            return (
+              <section key={md} data-td-nhom aria-labelledby={`td-${md}`}>
+                <h2 id={`td-${md}`} className="mb-3 text-2xl">{ten}</h2>
+                <dl className="grid gap-3 sm:grid-cols-2">
+                  {ds.map((m) => (
+                    <div key={m.ma} id={m.ma} data-td-muc data-mang={md}
+                      className="glass scroll-mt-24 rounded-xl p-4 target:ring-2 target:ring-gold">
+                      <dt className="font-serif text-lg">
+                        {/* Chữ Hán dùng phông hệ thống: 221 mục × phông Noto Serif TC tải ~1,2 MB (PERF-1). */}
+                        {m.ten}{m.han && <span className="ml-2 text-base text-fg-faint" style={{ fontFamily: "serif" }}>{m.han}</span>}
+                      </dt>
+                      <dd className="mt-1 text-sm leading-relaxed text-fg-muted">{m.de_hieu}</dd>
+                      {m.vi_du && <dd className="mt-1 text-sm text-fg-faint">Ví dụ: {m.vi_du}</dd>}
+                      {m.bien_the.length > 0 && <dd className="mt-1 text-xs text-fg-faint">Còn gọi: {m.bien_the.join(", ")}</dd>}
+                    </div>
+                  ))}
+                </dl>
+              </section>
+            );
+          })}
+        </div>
       )}
     </div>
   );

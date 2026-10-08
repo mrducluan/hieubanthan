@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { ghiMaGioiThieuTuUrl } from "@/lib/sao";
+import { ghiMaGioiThieuTuUrl } from "@/lib/ma-gioi-thieu";
 
 /** Nhớ mã giới thiệu (?gt=) từ bất kỳ trang nào người được mời mở. Không hiển thị gì. */
 export function GhiGioiThieu() {
