@@ -90,7 +90,7 @@ Mục tiêu từ nhật ký: 50.000–150.000 từ, hiện ~10.700. Chia theo ng
 ### WS-5 ✅ E2E test trình duyệt — XONG 2026-09-30 (phần thần số + API tử vi)
 - `@playwright/test` **1.56.1** (ghim, khớp Chromium 1194 có sẵn ở `/opt/pw-browsers`) — devDependency đã duyệt.
 - `web/playwright.config.ts`: `webServer` tự bật engine (uvicorn :8000) + web (`next dev` :3000); ép rỗng
-  `ENGINE_API_KEY`/`OPENROUTER_API_KEY`/`SUPABASE_*`/`STAGING_*` → template + KB file, tất định, không gọi LLM.
+  `ENGINE_API_KEY`/`OPENROUTER_API_KEY`/`SUPABASE_*` → template + KB file, tất định, không gọi LLM.
 - `web/e2e/than-so.spec.ts`: ca chốt Nguyễn Đức Luân 24/10/1988 → DD33 (số cái)/SM9/LH6/NC3, kèm mặt tối/tự kiểm/nguồn,
   chiều sâu (dải đời, thử thách, năm cá nhân); Q&A chỉ kiểm 8 chip gợi ý, **không bấm** (không gọi LLM).
 - `web/e2e/tuvi-api.spec.ts`: `POST /api/tuvi/chart` (200 + đúng âm lịch/can chi/Tuần Triệt; 422 khi sai định dạng).
@@ -118,7 +118,7 @@ Mục tiêu từ nhật ký: 50.000–150.000 từ, hiện ~10.700. Chia theo ng
 
 ### WS-9 🟢 Hạ tầng production
 - Render Free ngủ sau 15' → cold start làm hỏng trải nghiệm E2E: lên gói trả phí hoặc chuyển host khi public.
-- Domain thật, bỏ Basic Auth khi qua cổng pháp lý, log lỗi, giám sát `/health`.
+- Domain thật, đã bỏ Basic Auth (mở công khai 2026-10-08), log lỗi, giám sát `/health`.
 
 ---
 

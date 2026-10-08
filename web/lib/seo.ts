@@ -3,8 +3,13 @@ export const TEN_SITE = "Hiểu Bản Thân";
 export const MO_TA_SITE =
   "Khám phá bản thân qua thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ) — tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Tham khảo văn hoá, không phải dự báo.";
 
+// Bản chạy thật mặc định hieuban.com (kể cả khi quên đặt NEXT_PUBLIC_SITE_URL) để canonical/sitemap/OG
+// không bao giờ trỏ về localhost; dev/E2E (next dev) vẫn là localhost.
+export const SITE_CHINH = "https://hieuban.com";
+
 export function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  const mac = process.env.NODE_ENV === "production" ? SITE_CHINH : "http://localhost:3000";
+  return (process.env.NEXT_PUBLIC_SITE_URL || mac).replace(/\/$/, "");
 }
 
 export function urlDayDu(duong: string): string {
