@@ -68,6 +68,11 @@
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .prose-vn p + p { margin-top: 0.75rem; }
+  /* PL-1 — trang pháp lý: danh sách, chữ đậm, mã */
+  .noi-dung-phap-ly ul { @apply list-disc space-y-1.5 pl-5 marker:text-gold/70; }
+  .noi-dung-phap-ly ul ul { @apply mt-1.5 list-[circle]; }
+  .noi-dung-phap-ly b { @apply font-semibold text-fg; }
+  .noi-dung-phap-ly code { @apply rounded bg-surface-2 px-1.5 py-0.5 text-[0.8em] text-fg; }
 }
 
 /* Lá số (VZ-2): hai giao diện. "dem" theo tông web; "giay" = giấy cổ sáng như lá số in.

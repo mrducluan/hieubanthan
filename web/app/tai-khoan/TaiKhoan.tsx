@@ -117,7 +117,8 @@ export function TaiKhoan() {
                   <div className="space-y-3">
                     <label className="flex items-start gap-3 text-sm">
                       <input type="checkbox" checked={dongY} onChange={(e) => setDongY(e.target.checked)} className="mt-1 size-4 accent-[rgb(var(--gold))]" />
-                      <span>Tôi đồng ý lưu <b>họ tên, ngày giờ sinh, giới tính, nơi sinh</b> vào tài khoản để dùng trên máy khác. Tôi có thể xoá bất cứ lúc nào. Nội dung bài đọc và câu hỏi không được lưu.</span>
+                      <span>Tôi đồng ý lưu <b>họ tên, ngày giờ sinh, giới tính, nơi sinh</b> vào tài khoản để dùng trên máy khác. Tôi có thể xoá bất cứ lúc nào. Nội dung bài đọc và câu hỏi không được lưu.{" "}
+                        <Link href="/chinh-sach-rieng-tu#du-lieu" className="text-gold underline">Chính sách quyền riêng tư</Link></span>
                     </label>
                     <Button disabled={!dongY || dang} onClick={() => lam(async () => {
                       await luuVaoTaiKhoan(user.id, hoSo); ghi("profile_created", { kind: "tai_khoan" }); await tai();

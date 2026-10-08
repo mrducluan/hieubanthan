@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Newsreader, Be_Vietnam_Pro, Noto_Serif_TC } from "next/font/google";
-import Link from "next/link";
+import { ChanTrang } from "@/components/khung/ChanTrang";
 import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { GhiGioiThieu } from "@/components/khung/GhiGioiThieu";
@@ -60,25 +60,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main id="noi-dung" className="container pb-28 pt-6 md:pb-16 md:pt-10">
           {children}
         </main>
-        <footer className="container pb-28 md:pb-10">
-          <nav aria-label="Liên kết cuối trang" className="border-t border-line/60 pt-6 text-sm">
-            <ul className="flex flex-wrap gap-x-5 gap-y-2 text-fg-muted">
-              <li><Link href="/kien-thuc" className="hover:text-fg">Thư viện kiến thức</Link></li>
-              <li><Link href="/tu-dien" className="hover:text-fg">Từ điển thuật ngữ</Link></li>
-              <li><Link href="/la-so-mau" className="hover:text-fg">Lá số mẫu</Link></li>
-              <li><Link href="/kien-thuc/than-so" className="hover:text-fg">Ý nghĩa các con số</Link></li>
-              <li><Link href="/kien-thuc/kinh-dich" className="hover:text-fg">64 quẻ Kinh Dịch</Link></li>
-              <li><Link href="/kien-thuc/tu-vi" className="hover:text-fg">14 chính tinh Tử vi</Link></li>
-              <li><Link href="/kham-pha" className="hover:text-fg">Khám phá</Link></li>
-              <li><Link href="/hop-doi" className="hover:text-fg">Hợp đôi</Link></li>
-            </ul>
-          </nav>
-          <p className="mt-5 max-w-2xl text-xs leading-relaxed text-fg-faint">
-            Nội dung được biên soạn từ các thư tịch văn hoá cổ điển, cung cấp để tham khảo văn hoá và tự
-            suy ngẫm. Đây không phải dự báo, không phải lời khuyên, và không thay thế ý kiến chuyên môn về
-            y tế, pháp lý, tài chính hoặc nghề nghiệp.
-          </p>
-        </footer>
+        <ChanTrang />
         <TabDuoi />
         <GhiGioiThieu />
         <GiamSat />
