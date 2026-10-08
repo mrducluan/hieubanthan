@@ -64,8 +64,8 @@ câu trả lời khớp dữ liệu, không chỉ kiểm có trả lời.
 
 ## Còn thiếu, chưa làm (đề xuất)
 
-1. **Tử vi lưu nguyệt (từng tháng).** Các phái tính tháng hạn khác nhau (Đẩu quân, tháng theo tiểu hạn…). Cần anh
-   chốt phái trước khi làm.
+1. ~~**Tử vi lưu nguyệt (từng tháng).**~~ Đã làm 2026-10-08: người dùng chọn 1 trong 5 phái
+   (`docs/LUU-NGUYET-TUVI.md`).
 2. **Tử vi khoảng 66 sao (iztro) so với ~110 sao sách Nam phái.** Hỏi về sao chưa an thì engine nói thẳng "chưa an
    sao này".
 3. **Phong thuỷ "vợ chồng sinh X và Y" (hai năm trong một câu).** Vẫn hỏi lại để rõ ai là chồng, ai là vợ. Chỉ tính

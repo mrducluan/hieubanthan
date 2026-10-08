@@ -15,10 +15,11 @@ import datetime as dt
 import re
 
 from app import config
-from app.calc import tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
+from app.calc import lunar, tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
+from app.calc import tuvi_luu_nguyet as ln
 from app.hoidap import chung
 from app.kb import tuvi_kb as kb
-from app.luangiai import hoi as _h
+from app.luangiai import hoi as _h, tuvi_luu_nguyet as lnl
 from app.narrative import hoi_van
 
 CHE_DO = ("tham_khao", "chi_tiet")
@@ -91,7 +92,33 @@ HOI_SAT = [r"sat tinh", r"hung tinh", r"sao xau", r"luc sat", r"sat chieu", r"bi
 LUC_SAT = ["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"]
 TAM_PHUONG = ["Mệnh", "Tài Bạch", "Quan Lộc", "Thiên Di"]
 THANG = [r"thang \d{1,2}(?!\d)", r"thang (gieng|chap|gieng)", r"luu nguyet", r"thang nay", r"thang sau",
-         r"thang toi"]
+         r"thang toi", r"nguyet han", r"han thang", r"dau quan", r"tung thang", r"thang nao"]
+
+
+def thang_hoi(t: str, ngay_xem: dt.date, nam_xem: int | None, nam_sau: bool) -> dict:
+    """TV-LN — tháng âm + năm âm câu hỏi nhắc tới. `thang` None = hỏi chung cả năm.
+    "tháng 3" hiểu là tháng ÂM (tử vi tính theo âm lịch); "tháng 3 dương" đổi ngày 15 của tháng dương đó ra âm."""
+    ld, lm, ly, _ = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, config.CALENDAR_MERIDIAN_TZ)
+    nam = nam_xem if nam_xem else ly + (1 if nam_sau else 0)
+    thang, ghi_chu = None, None
+    m = re.search(r"thang (\d{1,2})(?!\d)( (am|duong)( lich)?)?", t)
+    if m and 1 <= int(m.group(1)) <= 12:
+        thang = int(m.group(1))
+        if m.group(3) == "duong":
+            nd = dt.date(nam_xem or ngay_xem.year + (1 if nam_sau else 0), thang, 15)
+            _, thang, nam, _ = lunar.solar_to_lunar(nd.day, nd.month, nd.year, config.CALENDAR_MERIDIAN_TZ)
+            ghi_chu = f"Tháng {m.group(1)} dương lịch phần lớn thuộc tháng {thang} âm."
+        elif m.group(3) != "am":
+            ghi_chu = f"Tử vi tính theo âm lịch: đây là tháng {thang} ÂM."
+    elif re.search(r"thang gieng", t):
+        thang = 1
+    elif re.search(r"thang chap", t):
+        thang = 12
+    elif re.search(r"thang nay", t):
+        thang, nam = lm, ly
+    elif re.search(r"thang (sau|toi)", t):
+        thang, nam = (lm % 12) + 1, ly + (1 if lm == 12 else 0)
+    return {"thang": thang, "nam_am": nam, "ghi_chu": ghi_chu}
 
 
 def _sao_nhac(t: str) -> list[str]:
@@ -340,7 +367,8 @@ def _lop_han(ls: dict, lop: str, vh: dict, che_do: str) -> dict:
     return m
 
 
-def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | None = None) -> dict:
+def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | None = None,
+                   lnm: dict | None = None) -> dict:
     goi = {"phan_loai": {k: pl[k] for k in ("loai", "che_do", "xu_ly", "cung")},
            "muc": [], "can_them": [], "mau": None, "luu_y": None}
     muc = goi["muc"]
@@ -431,10 +459,25 @@ def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | No
                     muc.append(m)
         return chung.ket(goi)
     if loai == "han":
-        if pl.get("hoi_thang"):
+        if lnm:
+            th = pl.get("thang_hoi") or {}
+            if th.get("ghi_chu"):
+                muc.append({"loai": "ghi_chu", "noi_dung": th["ghi_chu"]})
+            t = lnl.thang_cua(lnm, th["thang"]) if th.get("thang") else None
+            nam = {k: lnm[k] for k in ("nam_am", "can_chi_nam", "phai", "phai_ten", "phai_cach_tinh")}
+            if t:
+                i = lnm["thang"].index(t)
+                muc.append({"loai": "luu_nguyet", **nam, **t, "tu": t["tu"].isoformat(), "den": t["den"].isoformat(),
+                            "phai_khac": {v["ten"]: v["theo_thang"][i] for k, v in lnm["so_sanh_phai"].items()
+                                          if k != lnm["phai"]}, **kb.meta()})
+            else:
+                muc.append({"loai": "luu_nguyet_nam", **nam, "ds": [
+                    {"thang": x["thang"], "nhuan": x["nhuan"], "phan": x["phan"], "cung_goc": x["cung_goc"],
+                     "ket": x["xu_huong"]["ket"]} for x in lnm["thang"]], **kb.meta()})
+            muc.append({"loai": "ghi_chu", "noi_dung": lnm["uu_tien"] + " Bối cảnh năm và vận ở dưới."})
+        elif pl.get("hoi_thang"):
             muc.append({"loai": "ghi_chu", "noi_dung": (
-                "Hệ thống chưa luận lưu nguyệt (từng tháng) — các phái tính tháng hạn khác nhau nhiều. "
-                "Dưới đây là bức tranh cả năm chứa tháng bạn hỏi.")})
+                "Muốn xem từng tháng (lưu nguyệt), hãy mở lá số của bạn. Dưới đây là bức tranh cả năm.")})
         if pl["su_kien"]:
             muc.append({"loai": "ghi_chu", "noi_dung": kb.luu_y("han_su_kien")})
         if vh is None:
@@ -521,6 +564,11 @@ def _mau_chung(ma: str) -> str:
 LOP_TEN = {"dai_han": "Đại hạn", "luu_nien": "Lưu niên", "tieu_han": "Tiểu hạn"}
 
 
+def _ngay(d: dt.date | str) -> str:
+    d = dt.date.fromisoformat(d) if isinstance(d, str) else d
+    return f"{d.day}/{d.month}/{d.year}"
+
+
 def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
     l = m["loai"]
     if l == "cung":
@@ -591,6 +639,43 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
                 s += f" (sao tốt: {', '.join(xh['cat']) or 'không'}; sao khó: {', '.join(xh['sat']) or 'không'})"
             s += "."
         return s, None
+    if l == "luu_nguyet":
+        ten_t = f"tháng {m['thang']}{' nhuận' if m['nhuan'] else ''} âm năm {m['can_chi_nam']}"
+        if m["phan"] != "ca_thang":
+            ten_t += f" ({'nửa đầu' if m['phan'] == 'nua_dau' else 'nửa sau'})"
+        s = (f"Lưu nguyệt {ten_t} — từ {_ngay(m['tu'])} đến {_ngay(m['den'])} dương lịch, tháng {m['can_chi']}. "
+             f"Theo phái {m['phai_ten']}, Mệnh của tháng rơi vào cung {m['cung_goc']} ({m['chi']}). {m['chu_de']}")
+        if m["chinh_tinh"]:
+            s += " Chính tinh tại cung: " + ", ".join(
+                f"{x['ten']}" + (f" ({x['do_sang']})" if x["do_sang"] else "") for x in m["chinh_tinh"]) + "."
+        else:
+            s += " Cung tháng vô chính diệu — đọc thêm sao ở cung đối diện."
+        if m["tuan_triet"]:
+            s += f" Có {' và '.join(m['tuan_triet'])} đóng tại cung."
+        for x in m["tu_hoa_thang"]:
+            if x["hoa"] in ("Lộc", "Kỵ") and x["cung_goc"]:
+                s += f" Hoá {x['hoa']} của tháng ({x['sao']}) ở cung {x['cung_goc']}"
+                s += " — đúng cung tháng." if x["vao_cung_thang"] else (
+                    " — trong tam phương của cung tháng." if x["vao_tam_phuong"] else ".")
+        for lop in m["trung"]:
+            s += f" Cung tháng trùng cung {LOP_TEN[lop].lower()} — chủ đề của {LOP_TEN[lop].lower()} nổi rõ trong tháng."
+        for lop in m["chieu"]:
+            s += f" Cung {LOP_TEN[lop].lower()} nằm trong tam phương của cung tháng."
+        xh = m["xu_huong"]
+        s += f" Xu hướng tháng: {xh['ket']}"
+        if xh["cat"] or xh["sat"]:
+            s += f" (sao tốt: {', '.join(xh['cat']) or 'không'}; sao khó: {', '.join(xh['sat']) or 'không'})"
+        s += "."
+        khac = sorted({v for v in m["phai_khac"].values() if v != m["cung_goc"]})
+        s += (" Các phái khác đặt tháng này ở: " + "; ".join(f"{k} → {v}" for k, v in m["phai_khac"].items()) + "."
+              if khac else " Cả năm phái tính tháng hạn đều ra cùng cung này.")
+        return s, None
+    if l == "luu_nguyet_nam":
+        ds = "; ".join(f"tháng {x['thang']}{' nhuận' if x['nhuan'] else ''}"
+                       f"{' (nửa sau)' if x['phan'] == 'nua_sau' else ''}: {x['cung_goc']} ({x['ket']})"
+                       for x in m["ds"])
+        return (f"Lưu nguyệt năm {m['can_chi_nam']} theo phái {m['phai_ten']}: {ds}. "
+                "Hỏi một tháng cụ thể để xem sao, tứ hoá và cách các phái khác tính tháng đó.", None)
     if l == "cung_trong_han":
         ct = ", ".join(m["chinh_tinh"]) or "vô chính diệu"
         return (f"Việc bạn hỏi thuộc cung {m['cung']} ({m['chu_de']}); trong lá số gốc cung này có: {ct}. "
@@ -659,7 +744,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
     if che_do not in CHE_DO:
         raise ValueError(f"che_do phải là một trong {CHE_DO}")
     pl = phan_loai(cau_hoi, che_do)
-    ls = vh = vh_toi = None
+    ls = vh = vh_toi = lnm = None
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     can_la_so = pl["loai"] in ("la_so", "han", "vi_tri_sao", "cach_cuc_la_so", "sat_tinh_la_so")
     if sinh and can_la_so:
@@ -684,7 +769,10 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
                                     tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
                                     thang_nhuan=sinh.get("thang_nhuan", "thang_sau"),
                                     lich=sinh.get("lich", "viet"))
-    goi = goi_bang_chung(pl, ls, vh, vh_toi)
+        if pl["loai"] == "han" and pl["hoi_thang"]:
+            pl["thang_hoi"] = thang_hoi(pl["cau_chuan_hoa"], ngay_xem, pl["nam_xem"], pl["han_sau"])
+            lnm = lnl.lap_nam(sinh, pl["thang_hoi"]["nam_am"], sinh.get("luu_nguyet", ln.MAC_DINH), ls=ls)
+    goi = goi_bang_chung(pl, ls, vh, vh_toi, lnm)
     van = van_template(goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:

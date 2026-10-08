@@ -1,0 +1,58 @@
+# LLM-55 — chạy bộ 55 câu chuyên gia qua AI diễn đạt THẬT (OpenRouter) và chấm tự động.
+# Chạy tay: GitHub → Actions → "llm-55" → Run workflow. Cần secret OPENROUTER_API_KEY (Settings → Secrets → Actions).
+# Không chạy tự động (tốn tiền API). Kết quả: tóm tắt ở trang chạy + tệp BAO-CAO.md trong mục Artifacts.
+name: llm-55
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Model diễn đạt (id trên openrouter.ai/models)"
+        required: true
+      giam_khao:
+        description: "Model giám khảo chấm 1–5 (để trống = không dùng)"
+        required: false
+        default: ""
+      gioi_han:
+        description: "Chỉ chạy N câu đầu (0 = cả 55)"
+        required: false
+        default: "0"
+
+permissions:
+  contents: read
+
+jobs:
+  chay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: engine/requirements.txt
+      - run: pip install -r engine/requirements.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: engine/ziwei/package-lock.json
+      - run: npm ci --prefix engine/ziwei
+      - name: Chạy 55 câu với AI thật
+        working-directory: engine
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          MODEL: ${{ inputs.model }}
+          GIAM_KHAO: ${{ inputs.giam_khao }}
+          GIOI_HAN: ${{ inputs.gioi_han }}
+        run: |
+          python scripts/chay_llm_chuyen_gia.py --model "$MODEL" --giam-khao "$GIAM_KHAO" --gioi-han "$GIOI_HAN" --ra bao-cao-llm-55
+          sed -n '1,/## Câu cần xem lại/p' bao-cao-llm-55/BAO-CAO.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bao-cao-llm-55
+          path: engine/bao-cao-llm-55/
