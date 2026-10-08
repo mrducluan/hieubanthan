@@ -1,0 +1,189 @@
+{
+ "$defs": {
+  "DauHieuVao": {
+   "additionalProperties": false,
+   "properties": {
+    "co": {
+     "title": "Co",
+     "type": "boolean"
+    },
+    "do_tin": {
+     "anyOf": [
+      {
+       "maximum": 1,
+       "minimum": 0,
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "Độ tin (model thị giác); người dùng khai = None",
+     "title": "Do Tin"
+    },
+    "nguon": {
+     "default": "nguoi_dung",
+     "enum": [
+      "nguoi_dung",
+      "anh",
+      "video"
+     ],
+     "title": "Nguon",
+     "type": "string"
+    },
+    "xac_nhan": {
+     "default": false,
+     "title": "Xac Nhan",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "co"
+   ],
+   "title": "DauHieuVao",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "description": "Bố cục nhà đã chuẩn hoá — đầu vào chung cho form khảo sát (hôm nay) và ảnh/video (PT-V2, PT-V4).",
+ "properties": {
+  "phien_ban": {
+   "const": "0.1",
+   "default": "0.1",
+   "title": "Phien Ban",
+   "type": "string"
+  },
+  "loai_nha": {
+   "anyOf": [
+    {
+     "enum": [
+      "nha_pho",
+      "can_ho",
+      "biet_thu",
+      "nha_cap4",
+      "khac"
+     ],
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Loai Nha"
+  },
+  "huong_nha_do": {
+   "anyOf": [
+    {
+     "exclusiveMaximum": 360,
+     "minimum": 0,
+     "type": "number"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "description": "Độ la bàn HƯỚNG nhà (mặt nhìn ra)",
+   "title": "Huong Nha Do"
+  },
+  "huong_nha": {
+   "anyOf": [
+    {
+     "enum": [
+      "Bắc",
+      "Đông Bắc",
+      "Đông",
+      "Đông Nam",
+      "Nam",
+      "Tây Nam",
+      "Tây",
+      "Tây Bắc"
+     ],
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Huong Nha"
+  },
+  "vi_tri": {
+   "additionalProperties": {
+    "enum": [
+     "Bắc",
+     "Đông Bắc",
+     "Đông",
+     "Đông Nam",
+     "Nam",
+     "Tây Nam",
+     "Tây",
+     "Tây Bắc",
+     "Trung cung"
+    ],
+    "type": "string"
+   },
+   "description": "Phương của phòng nhìn từ tâm nhà",
+   "propertyNames": {
+    "enum": [
+     "cua_chinh",
+     "phong_ngu_chinh",
+     "bep",
+     "ve_sinh",
+     "ban_tho",
+     "phong_lam_viec"
+    ]
+   },
+   "title": "Vi Tri",
+   "type": "object"
+  },
+  "huong_do": {
+   "additionalProperties": {
+    "type": "number"
+   },
+   "description": "Độ la bàn hướng vật dụng (0–360)",
+   "propertyNames": {
+    "enum": [
+     "mieng_bep",
+     "dau_giuong",
+     "ban_lam_viec"
+    ]
+   },
+   "title": "Huong Do",
+   "type": "object"
+  },
+  "dau_hieu": {
+   "additionalProperties": {
+    "$ref": "#/$defs/DauHieuVao"
+   },
+   "propertyNames": {
+    "enum": [
+     "duong_dam",
+     "nga_ba",
+     "cot_dien",
+     "song_truoc",
+     "nghia_trang",
+     "minh_duong",
+     "no_hau",
+     "nha_chu_l",
+     "bep_doi_cua",
+     "cau_thang_cua",
+     "guong_cua_chinh",
+     "guong_giuong",
+     "cua_doi_nhau",
+     "xa_ngang",
+     "phong_ngu_tren_bep",
+     "bep_wc",
+     "quay_lung_cua",
+     "wc_giua_nha"
+    ]
+   },
+   "title": "Dau Hieu",
+   "type": "object"
+  }
+ },
+ "title": "BoCuc",
+ "type": "object"
+}

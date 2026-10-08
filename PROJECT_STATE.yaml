@@ -35,6 +35,7 @@ completed_work:
   - "QA-RV: rà soát hỏi đáp 5 mảng bằng bộ câu chuyên gia — sửa ~20 lỗi hiểu sai câu, test hồi quy nội dung (PR #42)"
   - "SEO-C: +32 trang kiến thức (12 cung Tử vi, 10 thập thần, 10 nhật chủ) — thư viện 122 trang (PR #43)"
   - "PT-V1: đo hướng nhà bằng la bàn điện thoại + nhập độ tay, nối sang Huyền Không (PR #44)"
+  - "PT-V0: form Khảo sát nhà + schema bố cục + luật luận từ bố cục (Bát trạch + kho tình huống) + công cụ gán nhãn/chấm ảnh"
   - "KB-0009: migration đưa KB chân dung + quan hệ lên Supabase (chỉ dữ liệu, bảng thanso_kb_khoi), SQL kiểm tra migration đã chạy"
 active_work:
   - "Hạ tầng GĐ1: chủ dự án tạo engine Render Singapore/Starter, đổi ENGINE_URL, bật Sentry + báo sập (docs/TRIEN-KHAI.md)"
@@ -52,7 +53,7 @@ next_candidate_tasks:
   - "PT-V1: thử la bàn trên iPhone + Android thật (lệch ≤ 15°)"
   - "Tử vi lưu nguyệt — chờ chủ dự án chốt phái tính tháng hạn"
   - "Chạy bộ 55 câu chuyên gia với LLM thật trước khi mở công khai"
-  - "PT-V0: bộ đánh giá ảnh phong thuỷ (cần 50–100 bộ ảnh nhà thật có phép dùng)"
+  - "PT-V2: ảnh → bố cục bằng model thị giác (chờ 50–100 bộ ảnh có phiếu đồng ý + nhãn; công cụ chấm đã sẵn)"
 prohibited_until_gate:
   - "Payment (mua Sao) — Sao nội bộ đã có"
   - "Life Advisor (Ask My Life liên mảng)"

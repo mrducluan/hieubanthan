@@ -571,5 +571,111 @@
   "dan_gian": "Mục này là quan niệm dân gian phổ biến, không có trong cổ thư như một quy tắc — ghi kèm lý do thực tế để bạn tự cân nhắc.",
   "nam": "Sao năm và tuổi làm nhà là quy ước truyền thống; không nên hoãn việc cần thiết (sửa chữa an toàn) chỉ vì chúng.",
   "am_trach": "Âm trạch là niềm tin văn hoá; hệ thống không quy may rủi của ai cho mộ phần."
+ },
+ "bo_cuc": {
+  "_nguon": "PT-V0 (2026-10-08): vị trí phòng theo du niên Bát trạch (Dương Trạch Tam Yếu: môn – chủ – táo) và quan niệm phổ thông; nháp AI, chưa đối chiếu nguyên văn.",
+  "vi_tri_phong": {
+   "cua_chinh": {
+    "tieu_de": "Cửa chính (môn)",
+    "nen": "cat",
+    "uu_tien": [
+     "Sinh Khí",
+     "Diên Niên",
+     "Thiên Y"
+    ],
+    "noi_dung": "Dương Trạch Tam Yếu coi cửa là một trong ba yếu tố chính của nhà: cửa nên mở ở phương tốt, Sinh Khí được ưa nhất.",
+    "thuc_te": "Cửa là nơi đón người và ánh sáng; quan trọng không kém là lối vào thoáng, không bị chắn.",
+    "nguon": "co_thu"
+   },
+   "phong_ngu_chinh": {
+    "tieu_de": "Phòng ngủ người trụ cột (chủ)",
+    "nen": "cat",
+    "uu_tien": [
+     "Thiên Y",
+     "Diên Niên",
+     "Sinh Khí"
+    ],
+    "noi_dung": "Phòng của người trụ cột (chủ) nên ở phương tốt của chính người đó: Thiên Y cho sức khoẻ, Diên Niên cho vợ chồng, Sinh Khí cho sinh lực.",
+    "thuc_te": "Phòng ngủ cần yên tĩnh, tối vừa đủ, thông gió; xa bếp và nhà vệ sinh.",
+    "nguon": "co_thu"
+   },
+   "bep": {
+    "tieu_de": "Bếp (táo)",
+    "nen": "hung",
+    "uu_tien": [],
+    "noi_dung": "Nguyên tắc 'toạ hung hướng cát': thân bếp đặt ở phương xấu để 'đè' hung khí, miệng bếp quay về phương tốt.",
+    "thuc_te": "Bếp cần thông gió, xa lối cửa chính, không sát nhà vệ sinh.",
+    "nguon": "co_thu"
+   },
+   "ve_sinh": {
+    "tieu_de": "Nhà vệ sinh",
+    "nen": "hung",
+    "uu_tien": [],
+    "noi_dung": "Quan niệm phổ thông theo Bát trạch: nhà vệ sinh đặt ở phương xấu, tránh trung cung và tránh phương Sinh Khí, Phục Vị.",
+    "thuc_te": "Quan trọng nhất là khô, thoáng, đóng cửa; không mở thẳng vào bếp hay phòng ăn.",
+    "nguon": "dan_gian"
+   },
+   "ban_tho": {
+    "tieu_de": "Bàn thờ",
+    "nen": "cat",
+    "uu_tien": [
+     "Sinh Khí",
+     "Diên Niên",
+     "Thiên Y",
+     "Phục Vị"
+    ],
+    "noi_dung": "Nhiều nơi đặt bàn thờ ở phương tốt theo mệnh gia chủ, lưng tựa tường đặc, không đối nhà vệ sinh hay dưới xà.",
+    "thuc_te": "Nơi trang nghiêm, yên tĩnh, sạch sẽ là đủ — không có một vị trí 'bắt buộc'.",
+    "nguon": "dan_gian"
+   },
+   "phong_lam_viec": {
+    "tieu_de": "Phòng / góc làm việc",
+    "nen": "cat",
+    "uu_tien": [
+     "Sinh Khí",
+     "Phục Vị"
+    ],
+    "noi_dung": "Bát trạch hay chọn phương Sinh Khí (công danh) hoặc Phục Vị (ổn định, tập trung) của người ngồi làm việc.",
+    "thuc_te": "Đủ sáng tự nhiên từ bên cạnh, lưng tựa tường, nhìn được lối vào.",
+    "nguon": "dan_gian"
+   }
+  },
+  "huong_vat": {
+   "mieng_bep": {
+    "tieu_de": "Hướng miệng bếp",
+    "uu_tien": [
+     "Thiên Y",
+     "Diên Niên",
+     "Sinh Khí"
+    ],
+    "noi_dung": "Miệng bếp (hướng người đứng nấu nhìn về) nên quay về phương tốt — 'hướng cát' trong 'toạ hung hướng cát'.",
+    "nguon": "co_thu"
+   },
+   "dau_giuong": {
+    "tieu_de": "Hướng đầu giường",
+    "uu_tien": [
+     "Thiên Y",
+     "Diên Niên",
+     "Phục Vị"
+    ],
+    "noi_dung": "Đầu giường (hướng đỉnh đầu khi nằm) nên quay về phương tốt của người nằm.",
+    "nguon": "dan_gian"
+   },
+   "ban_lam_viec": {
+    "tieu_de": "Hướng ngồi làm việc",
+    "uu_tien": [
+     "Sinh Khí",
+     "Phục Vị"
+    ],
+    "noi_dung": "Hướng mặt khi ngồi làm việc nên quay về phương tốt, ưu tiên Sinh Khí hoặc Phục Vị.",
+    "nguon": "dan_gian"
+   }
+  },
+  "tu_soi": [
+   "Trong nhà, chỗ nào bạn thấy khó chịu nhất (tối, bí, ồn, bừa)? Nó có trùng với điểm được nêu ở trên không?",
+   "Nếu chỉ sửa được một chỗ trong tháng này, chỗ nào giúp nếp sinh hoạt của cả nhà dễ chịu hơn?",
+   "Điều bạn mong ở ngôi nhà là gì — nghỉ ngơi, sum họp hay làm việc? Bố trí hiện tại phục vụ điều đó đến đâu?"
+  ],
+  "luu_y": "Phong thuỷ ở đây là góc nhìn văn hoá để bố trí nhà hợp lý hơn: ưu tiên sửa bố trí (xoay giường, dời bàn, thông gió) — hệ thống không giới thiệu vật phẩm hoá giải và không phán cát hung về sức khoẻ, tiền bạc."
  }
 }

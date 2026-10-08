@@ -1,0 +1,9 @@
+# Ảnh nhà KHÔNG vào git (quyền riêng tư; CLAUDE.md: không lưu ảnh người dùng). Ảnh để ở Drive của chủ dự án.
+*.jpg
+*.jpeg
+*.png
+*.heic
+*.webp
+*.mp4
+*.mov
+*/anh/

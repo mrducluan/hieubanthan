@@ -83,3 +83,26 @@ test("PT-V1: đo hướng nhà — nhập tay và la bàn điện thoại (giả
   await kq.getByRole("button", { name: /lập bàn Huyền Không/ }).click();
   await expect(page.getByLabel("Độ la bàn của toạ")).toHaveValue("0");
 });
+
+test("PT-V0: khảo sát nhà — đặt phòng trên sơ đồ 9 phương, đánh dấu dấu hiệu → luận Bát trạch + kho tình huống", async ({ page }) => {
+  await napHoSo(page);                                   // nam 1990 → mệnh Khảm
+  await page.goto("/phong-thuy");
+  const ks = page.getByTestId("khao-sat-nha");
+  await ks.getByRole("textbox", { name: "Độ hướng nhà khảo sát" }).fill("180");
+  await ks.getByRole("radio", { name: /^Bếp/ }).click();
+  await ks.getByRole("button", { name: "Đặt Bếp ở phía Tây", exact: true }).click();
+  await ks.getByRole("radio", { name: /^Bàn thờ/ }).click();
+  await ks.getByRole("button", { name: "Đặt Bàn thờ ở phía Tây Bắc", exact: true }).click();
+  await ks.getByRole("radio", { name: /^Nhà vệ sinh/ }).click();
+  await ks.getByRole("button", { name: "Đặt Nhà vệ sinh ở phía Trung cung", exact: true }).click();
+  await ks.getByLabel("Có gương đối diện giường ngủ không?").check();
+  await ks.getByRole("button", { name: "Xem luận bố cục" }).click();
+  const kq = page.getByTestId("ket-qua-bo-cuc");
+  await expect(kq).toContainText("Khảm trạch");
+  await expect(kq).toContainText("Gia chủ mệnh Khảm");
+  await expect(kq.getByRole("row", { name: /Bếp Tây Hoạ Hại/ })).toContainText("hợp");
+  await expect(kq.getByRole("row", { name: /Bàn thờ Tây Bắc Lục Sát/ })).toContainText("chưa hợp");
+  await expect(kq).toContainText("Gương đối diện giường");
+  await expect(kq).toContainText("Nhà vệ sinh ở giữa nhà");            // suy từ vị trí trung cung
+  await expect(kq).toContainText("không giới thiệu vật phẩm");
+});

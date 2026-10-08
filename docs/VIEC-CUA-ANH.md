@@ -201,7 +201,15 @@ nháp; anh (hoặc luật sư) duyệt trước khi bỏ mật khẩu.
 - [ ] **Chốt phái tính tháng hạn Tử vi (lưu nguyệt).** Có xem tháng theo Đẩu quân, hoặc theo tiểu hạn… Anh chốt
   phái thì em làm phần xem từng tháng.
 - [ ] **Chạy bộ 55 câu hỏi chuyên gia với AI thật** (cần `OPENROUTER_API_KEY`) trước khi mở công khai rộng.
-- [ ] **Phong thuỷ xem qua ảnh nhà (PT-V0):** cần 50–100 bộ ảnh nhà thật, có sự đồng ý của chủ nhà.
+- [ ] **Phong thuỷ xem qua ảnh nhà:** phần không cần ảnh đã xong (form Khảo sát nhà, schema, luật, công cụ chấm).
+  Anh hỗ trợ giúp em 3 việc:
+  1. Thu **50–100 bộ ảnh nhà thật**: mỗi nhà 5–15 ảnh (mặt tiền, cửa chính nhìn vào, phòng khách, bếp, phòng ngủ, WC,
+     cầu thang). Mỗi bộ có **phiếu đồng ý** theo `docs/MAU-DONG-Y-ANH-NHA.md`. Ảnh để ở Google Drive riêng, không gửi
+     qua chat công khai.
+  2. Với mỗi nhà, ghi lại: **độ hướng nhà** (đo bằng mục "Đo hướng nhà" trên web), phòng nào ở phương nào, và đánh
+     dấu 18 câu hỏi dấu hiệu, chính là các câu trong form Khảo sát nhà. Em chuyển thành nhãn JSON.
+     Hướng dẫn: `engine/fixtures/phongthuy_anh/README.md`.
+  3. Chọn model thị giác trên OpenRouter để em chạy thử PT-V2 (dùng chung khoá OpenRouter với mục AI diễn đạt).
 - [ ] **Trang Chính sách quyền riêng tư** (xem mục C).
 
 Vẫn **chặn cho tới khi qua cổng đánh giá**: thanh toán (mua Sao), cộng đồng, marketplace, app di động.

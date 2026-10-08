@@ -81,3 +81,8 @@ _F_HK = Path(__file__).parent / "data" / "phongthuy_huyen_khong.json"
 @lru_cache(maxsize=1)
 def huyen_khong() -> dict:
     return json.loads(_F_HK.read_text(encoding="utf-8"))
+
+
+def bo_cuc() -> dict:
+    """PT-V0 — vị trí phòng / hướng vật dụng theo du niên + câu tự soi + lưu ý cho luận từ bố cục nhà."""
+    return _d()["bo_cuc"]

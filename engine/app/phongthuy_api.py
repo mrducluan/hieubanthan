@@ -16,6 +16,7 @@ from app.kb import tu_dien
 from app import nhat_ky
 from app.config import ENGINE_VERSION
 from app.hoidap import phongthuy as hoidap_pt
+from app.luangiai import phongthuy_bo_cuc as bo_cuc
 
 router = APIRouter(prefix="/v1/phongthuy", tags=["phongthuy"])
 
@@ -79,6 +80,31 @@ def api_do_huong(inp: DoHuongInput) -> dict:
         ra["du_nien"] = pt.du_nien(mq["quai"], r["huong"])
         ra["hop_nhom"] = r["trach"]["nhom"][:6] == mq["nhom"][:6]
     return ra
+
+
+class BoCucInput(BaseModel):
+    """PT-V0 — luận từ bố cục nhà (form khảo sát hôm nay; ảnh/video từ PT-V2). Không lưu gì."""
+    model_config = ConfigDict(extra="forbid")
+
+    bo_cuc: bo_cuc.BoCuc
+    sinh: SinhInput | None = None
+
+
+@router.post("/bo-cuc")
+def api_bo_cuc(inp: BoCucInput) -> dict:
+    try:
+        r = bo_cuc.luan(inp.bo_cuc.model_dump(exclude_none=True), inp.sinh.sinh() if inp.sinh else None)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)[:300])
+    return {"engine_version": ENGINE_VERSION, **r}
+
+
+@router.get("/bo-cuc/danh-muc")
+def api_bo_cuc_danh_muc() -> dict:
+    """Danh mục cho form khảo sát: phòng, phương, dấu hiệu quan sát được (câu hỏi), vật dụng đo hướng."""
+    return {"phong": bo_cuc.TEN_PHONG, "cung": list(bo_cuc.Cung9.__args__),
+            "dau_hieu": [{"ma": k, **v} for k, v in bo_cuc.DAU_HIEU.items()],
+            "vat_huong": {k: v["tieu_de"] for k, v in bo_cuc.kb.bo_cuc()["huong_vat"].items()}}
 
 
 class HoiPTInput(BaseModel):

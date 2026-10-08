@@ -49,9 +49,11 @@ function MatLaBan({ doHuong }: { doHuong: number | null }) {
   );
 }
 
-export function DoHuongDienThoai({ sinh, onDungToa }: {
+export function DoHuongDienThoai({ sinh, onDungToa, onChot }: {
   sinh: { birth_date: string; gender: "nam" | "nu" } | null;
   onDungToa?: (doToa: number) => void;
+  /** PT-V0: báo kết quả engine vừa đổi (độ hướng nhà) cho khung Khảo sát nhà. */
+  onChot?: (kq: KetQuaDoHuong) => void;
 }) {
   const [doSong, setDoSong] = useState<number | null>(null);
   const [dangDo, setDangDo] = useState(false);
@@ -95,6 +97,7 @@ export function DoHuongDienThoai({ sinh, onDungToa }: {
     try {
       const r = await postJson<KetQuaDoHuong>("/api/phongthuy/do-huong", { do_huong: doHuong, ...(sinh ? { sinh } : {}) });
       setKq(r);
+      onChot?.(r);
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: dangDo ? "la_ban_dien_thoai" : "nhap_do_huong" });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đổi được độ này."); }
     finally { setDang(false); }
