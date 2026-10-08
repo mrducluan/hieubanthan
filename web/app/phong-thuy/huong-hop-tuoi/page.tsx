@@ -1,4 +1,4 @@
-// SEO-F — mục lục 200 trang "tuổi X hợp hướng nào" (1930–2029 × nam/nữ), nhóm theo thập niên.
+// SEO-F — mục lục 92 trang "tuổi X hợp hướng nào" (1960–2005 × nam/nữ), nhóm theo thập niên.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -8,8 +8,8 @@ import { goiLd, ldDuongDan, metaTrang, urlDayDu } from "@/lib/seo";
 export const revalidate = 21600;
 
 export const metadata: Metadata = metaTrang({
-  tieuDe: "Hướng hợp tuổi: tuổi nào hợp hướng nào (1930–2029)",
-  moTa: "Tra hướng nhà, hướng bếp, hướng giường hợp tuổi theo Bát trạch cho nam và nữ sinh từ 1930 đến 2029: mệnh quái, 4 hướng tốt, 4 hướng nên tránh.",
+  tieuDe: "Hướng hợp tuổi: tuổi nào hợp hướng nào (1960–2005)",
+  moTa: "Tra hướng nhà, hướng bếp, hướng giường hợp tuổi theo Bát trạch cho nam và nữ sinh từ 1960 đến 2005: mệnh quái, 4 hướng tốt, 4 hướng nên tránh.",
   duong: "/phong-thuy/huong-hop-tuoi",
   md: "/phong-thuy/huong-hop-tuoi.md",
 });

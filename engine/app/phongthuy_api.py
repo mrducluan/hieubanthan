@@ -194,7 +194,7 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
 
 
 # --------------------------------------------------------------------------- #
-# SEO-F — trang "tuổi X hợp hướng nào" (200 trang: năm 1930–2029 × nam/nữ)
+# SEO-F — trang "tuổi X hợp hướng nào" (92 trang: năm 1960–2005 × nam/nữ)
 # --------------------------------------------------------------------------- #
 @router.get("/tuoi")
 def api_tuoi_danh_sach() -> dict:

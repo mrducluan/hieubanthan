@@ -1,4 +1,4 @@
-// SEO-F — "Tuổi X (nam/nữ) hợp hướng nào?": 200 trang server-render từ engine (mệnh quái Bát trạch, du niên, KB).
+// SEO-F — "Tuổi X (nam/nữ) hợp hướng nào?": 92 trang server-render từ engine (mệnh quái Bát trạch, du niên, KB).
 // Cấu trúc GEO: câu hỏi làm tiêu đề · trả lời nhanh · la bàn + bảng 8 hướng · gợi ý bố trí · mốc đầu năm · hỏi đáp.
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -136,8 +136,8 @@ export default async function Page({ params }: Props) {
         <ul className="mt-3 flex flex-wrap gap-2 text-sm">
           {[
             [`tuoi-${t.nam}-${khac}`, `${GIOI[khac]} ${t.nam}`],
-            ...(t.nam > 1930 ? [[`tuoi-${t.nam - 1}-${t.gioi_tinh}`, `${GIOI[t.gioi_tinh]} ${t.nam - 1}`]] : []),
-            ...(t.nam < 2029 ? [[`tuoi-${t.nam + 1}-${t.gioi_tinh}`, `${GIOI[t.gioi_tinh]} ${t.nam + 1}`]] : []),
+            ...(t.nam > 1960 ? [[`tuoi-${t.nam - 1}-${t.gioi_tinh}`, `${GIOI[t.gioi_tinh]} ${t.nam - 1}`]] : []),
+            ...(t.nam < 2005 ? [[`tuoi-${t.nam + 1}-${t.gioi_tinh}`, `${GIOI[t.gioi_tinh]} ${t.nam + 1}`]] : []),
             ["huong-hop-tuoi", "Tất cả năm sinh"],
           ].map(([s, chu]) => (
             <li key={s}><Link href={duongTuoi(s!)} className="inline-flex rounded-full border border-line px-3 py-1.5 text-fg-muted hover:border-gold/50 hover:text-fg">{chu}</Link></li>

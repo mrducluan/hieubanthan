@@ -92,6 +92,6 @@ export function mdTuoi(t: TuoiHuong): string {
 }
 
 export function mdDsTuoi(ds: MucTuoiHuong[]): string {
-  return ["# Hướng hợp tuổi (1930–2029, nam và nữ)", "", `URL: ${urlDayDu("/phong-thuy/huong-hop-tuoi")}`, "",
+  return ["# Hướng hợp tuổi (1960–2005, nam và nữ)", "", `URL: ${urlDayDu("/phong-thuy/huong-hop-tuoi")}`, "",
     ...ds.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTuoi(t.slug))}.md): mệnh ${t.quai}, ${t.nhom}`), ""].join("\n");
 }

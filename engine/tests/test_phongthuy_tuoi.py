@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""SEO-F — trang "tuổi X hợp hướng nào": engine dựng dữ liệu cho 200 trang (năm 1930–2029 × nam/nữ).
+"""SEO-F — trang "tuổi X hợp hướng nào": engine dựng dữ liệu cho 92 trang (năm 1960–2005 × nam/nữ).
 Viết TRƯỚC hàm. Mọi con số do CALC tính (mệnh quái, bảng du niên, can chi, nạp âm, ngày Lập xuân/Tết); lời
 giải thích lấy từ KB phong thuỷ — web chỉ hiển thị.
 
@@ -57,7 +57,7 @@ def test_hoi_dap_va_tieu_de():
 
 def test_pham_vi_va_danh_sach():
     ds = pt_tuoi.danh_sach()
-    assert len(ds) == 200 and ds[0]["slug"] == "tuoi-1930-nam" and ds[-1]["slug"] == "tuoi-2029-nu"
+    assert len(ds) == 92 and ds[0]["slug"] == "tuoi-1960-nam" and ds[-1]["slug"] == "tuoi-2005-nu"
     assert pt_tuoi.tu_slug("tuoi-1990-nu") == (1990, "nu")
     for sai in ("tuoi-1929-nam", "tuoi-2030-nu", "tuoi-1990-x", "abc"):
         assert pt_tuoi.tu_slug(sai) is None
@@ -71,5 +71,8 @@ def test_api():
     assert r.status_code == 200 and r.json()["menh_quai"]["quai"] == "Khảm"
     assert r.json()["trang_thai"] and r.json()["nguon"]
     assert c.get("/v1/phongthuy/tuoi/tuoi-1800-nam").status_code == 404
+    # Chủ dự án chốt 1960–2005 (người tìm hướng nhà/xây nhà; bỏ hai đầu ít người tìm)
+    assert c.get("/v1/phongthuy/tuoi/tuoi-1959-nam").status_code == 404
+    assert c.get("/v1/phongthuy/tuoi/tuoi-2006-nu").status_code == 404
     ds = c.get("/v1/phongthuy/tuoi").json()["trang"]
-    assert len(ds) == 200 and {"slug", "tieu_de", "nam", "gioi_tinh", "quai"} <= set(ds[0])
+    assert len(ds) == 92 and {"slug", "tieu_de", "nam", "gioi_tinh", "quai"} <= set(ds[0])

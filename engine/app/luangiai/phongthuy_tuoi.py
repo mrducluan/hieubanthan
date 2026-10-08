@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""SEO-F — dữ liệu trang "tuổi X hợp hướng nào" (năm 1930–2029 × nam/nữ = 200 trang). Tầng RULES: ghép CALC
+"""SEO-F — dữ liệu trang "tuổi X hợp hướng nào" (năm 1960–2005 × nam/nữ = 92 trang). Tầng RULES: ghép CALC
 (mệnh quái Bát trạch, bảng du niên, can chi, nạp âm, ngày Lập xuân/Tết) với lời KB phong thuỷ. Không gọi LLM;
 web chỉ hiển thị. Mặc định mốc đầu năm = Lập xuân (như công cụ Phong thuỷ); trang nêu rõ trường hợp sinh trước mốc.
 """
@@ -13,7 +13,7 @@ from app.calc import phongthuy as pt
 from app.calc import tietkhi as tk
 from app.kb import phongthuy_kb as kb
 
-NAM_DAU, NAM_CUOI = 1930, 2029
+NAM_DAU, NAM_CUOI = 1960, 2005
 TEN_GIOI = {"nam": "nam", "nu": "nữ"}
 THU_TU_CAT = ("Sinh Khí", "Thiên Y", "Diên Niên", "Phục Vị")
 THU_TU_HUNG = ("Tuyệt Mệnh", "Ngũ Quỷ", "Lục Sát", "Hoạ Hại")

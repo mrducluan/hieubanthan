@@ -89,7 +89,7 @@ export function laSoMau(slug: string): Promise<LaSoMau | null> {
   return lay<LaSoMau>(`/v1/tuvi/la-so-mau/${encodeURIComponent(slug)}`);
 }
 
-// SEO-F — trang "tuổi X hợp hướng nào" (engine GET /v1/phongthuy/tuoi[/slug]); 200 trang năm 1930–2029 × nam/nữ.
+// SEO-F — trang "tuổi X hợp hướng nào" (engine GET /v1/phongthuy/tuoi[/slug]); 92 trang năm 1960–2005 × nam/nữ.
 export interface MucTuoiHuong { slug: string; nam: number; gioi_tinh: "nam" | "nu"; tieu_de: string; quai: string; nhom: string; can_chi: string }
 export interface HuongDuNien { huong: string; du_nien: string; y_nghia: string; dung_cho: string }
 export interface TuoiHuong extends Omit<MucTuoiHuong, "quai" | "nhom"> {
