@@ -25,14 +25,22 @@ export function loiEngine(status: number, body: unknown): { error: string; statu
   return { error: "Máy tính toán đang gặp lỗi, thử lại sau ít phút.", status: status >= 500 ? status : 502 };
 }
 
+/** RL-1: IP người dùng → engine (băm ngay, chỉ dùng giới hạn lượt AI, không lưu). Trên Vercel `x-real-ip` /
+ *  `x-forwarded-for` do Vercel đặt, người dùng không tự giả được. */
+export function dauNguoiGoi(req: Request): Record<string, string> {
+  const ip = req.headers.get("x-real-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return ip ? { "x-nguoi-goi": ip.slice(0, 64) } : {};
+}
+
 /** Gọi engine với dữ liệu ĐÃ kiểm (dùng chung cho goiEngine và các route cần xử lý thêm, vd trừ Sao). */
-export async function goiEngineDaKiem(data: unknown, path: string): Promise<{ ok: true; body: unknown } | { ok: false; res: NextResponse }> {
+export async function goiEngineDaKiem(data: unknown, path: string, them: Record<string, string> = {}): Promise<{ ok: true; body: unknown } | { ok: false; res: NextResponse }> {
   try {
     const r = await fetch(`${ENGINE_URL}${path}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
         ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
+        ...them,
       },
       body: JSON.stringify(data),
       cache: "no-store",
@@ -54,6 +62,6 @@ export async function goiEngine(req: Request, schema: ZodTypeAny, path: string):
   if (!parsed.success) {
     return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
   }
-  const kq = await goiEngineDaKiem(parsed.data, path);
+  const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
   return kq.ok ? NextResponse.json(kq.body) : kq.res;
 }

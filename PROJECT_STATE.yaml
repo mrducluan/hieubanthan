@@ -10,7 +10,7 @@ current_gate: "Gate 0 bỏ qua theo quyết định chủ dự án (2026-10-08) 
 current_metrics: []   # có khi bật NEXT_PUBLIC_POSTHOG_KEY
 current_risks:
   - "Bỏ Gate 0: chưa có phỏng vấn định tính — chỉ dựa PostHog + góp ý trên web"
-  - "Mở công khai chưa có rate limit — an toàn chừng nào chưa bật OPENROUTER_API_KEY; bắt buộc làm giới hạn lượt trước khi bật AI"
+  - "Hạn mức lượt AI (RL-1) chỉ trong bộ nhớ một tiến trình — tăng số tiến trình/instance thì cần Upstash (GĐ2)"
   - "Phase 2 làm trước Gate 1 — phải tách funnel theo feature_version"
   - "4 KB Huyền học + KB thần số v2 vẫn là nháp AI (trang_thai=nhap_ai)"
   - "Lưu ngày sinh trong tài khoản — NĐ 13/2023, cần chính sách riêng tư trước khi mở công khai"
@@ -38,6 +38,7 @@ completed_work:
   - "TV-LN: lưu nguyệt Tử vi 5 phái người dùng chọn (mặc định Đẩu Quân, khớp iztro 680/680), hỏi đáp theo tháng"
   - "PL-1: Chính sách quyền riêng tư, Điều khoản, Miễn trừ, Giới thiệu & nguồn, Liên hệ + footer 4 cột (thông tin vận hành qua env)"
   - "PT-V0: form Khảo sát nhà + schema bố cục + luật luận từ bố cục (Bát trạch + kho tình huống) + công cụ gán nhãn/chấm ảnh"
+  - "RL-1: hạn mức lượt AI theo người gọi + tổng giờ/ngày, hết lượt rơi về template"
   - "MO-CK: gỡ Basic Auth, siteUrl production mặc định hieuban.com, danh sách việc mở công khai (mục G/H)"
   - "KB-0009: migration đưa KB chân dung + quan hệ lên Supabase (chỉ dữ liệu, bảng thanso_kb_khoi), SQL kiểm tra migration đã chạy"
 active_work:
@@ -52,7 +53,6 @@ next_candidate_tasks:
   - "Đọc số Gate 1 (landing→start→complete→profile, góp ý) trước khi mở rộng tính năng"
   - "Duyệt nháp KB (quẻ, sao, chân dung thần số, quan hệ) để đổi nhãn nháp → đã duyệt (chủ dự án / người có nghề)"
   - "Chủ dự án điền thông tin vận hành (THONG_TIN_*) + luật sư rà trang pháp lý (web đã công khai)"
-  - "Rate limit theo IP cho route gọi engine/LLM trước khi bật OPENROUTER_API_KEY"
   - "PT-V1: thử la bàn trên iPhone + Android thật (lệch ≤ 15°)"
   - "Chạy bộ 55 câu chuyên gia với LLM thật trước khi mở công khai"
   - "PT-V2: ảnh → bố cục bằng model thị giác (chờ 50–100 bộ ảnh có phiếu đồng ý + nhãn; công cụ chấm đã sẵn)"

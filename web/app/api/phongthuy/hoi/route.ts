@@ -3,7 +3,7 @@
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
-import { loiEngine } from "@/lib/proxy";
+import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
@@ -29,6 +29,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       headers: {
         "content-type": "application/json",
         ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
+        ...dauNguoiGoi(req),
       },
       body: JSON.stringify(parsed.data),
       cache: "no-store",
