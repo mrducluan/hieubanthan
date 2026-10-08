@@ -105,7 +105,7 @@ KHONG_PHAI_NGUOI_KHAC = [r"hop (voi |nhau|hay khac|khong)", r"co hop", r"hop tin
                          r"lam sao de", r"toi nen", r"phai lam sao", r"toi co nen", r"toi va"]
 
 LINH_VUC_KW: dict[str, list[str]] = {
-    "tinh_yeu": [r"nguoi yeu", r"ny", r"yeu nhau", r"yeu kieu", r"toi yeu", r"em yeu", r"duoc yeu", r"yeu nguoi", r"dang yeu", r"yeu ai", r"yeu mu quang", r"yeu nhu the nao", r"tinh yeu", r"tinh cam", r"tinh duyen", r"crush",
+    "tinh_yeu": [r"nguoi yeu", r"ny", r"yeu nhau", r"yeu kieu", r"toi yeu", r"em yeu", r"duoc yeu", r"yeu nguoi", r"dang yeu", r"yeu ai", r"yeu mu quang", r"yeu nhu the nao", r"tinh yeu", r"(?<!song )tinh cam", r"tinh duyen", r"crush",
                  r"lay chong", r"lay vo", r"nen cuoi", r"cuoi nhau", r"nam nao toi nen cuoi", r"ket hon", r"lam vo chong", r"ken chon", r"moi tinh", r"thich nguoi", r"hop voi nguoi", r"viec nha", r"hon nhan", r"chia tay",
                  r"nguoi cu", r"ghen", r"toxic", r"ly hon", r"tai hon", r"ngoai tinh", r"het e", r"bi e", r"e lau", r"to tinh",
                  r"doc than", r"hen ho", r"friendzone", r"cam ket", r"ra mat", r"yeu xa",
@@ -120,10 +120,10 @@ LINH_VUC_KW: dict[str, list[str]] = {
                  r"cho dua cua ca nha", r"em ay"],
     "con_cai": [r"con toi", r"con cai", r"nuoi day", r"day con", r"cham con", r"sinh con", r"dat ten con",
                 r"ten con", r"be", r"con gai", r"con trai", r"sinh them con", r"con tuoi teen", r"la mang con", r"lam bo me", r"kieu bo me",
-                r"lam bo me", r"bo me the nao", r"nguoi bo tot", r"truong quoc te", r"cho con",
-                r"lo lang cho con", r"kien nhan hon voi con", r"ap dat con", r"voi con", r"con so ten o nha",
-                r"ten dem", r"dat ten"],
-    "su_nghiep": [r"nghe", r"cong viec", r"viec lam", r"nghi viec", r"doi viec", r"chuyen nganh",
+                r"lam bo me", r"(?<!cham soc )bo me the nao", r"nguoi bo tot", r"truong quoc te", r"cho con",
+                r"lo lang cho con", r"kien nhan hon voi con", r"ap dat con", r"voi con(?! so)", r"con so ten o nha",
+                r"ten dem", r"dat ten", r"chon ngay mo de con"],
+    "su_nghiep": [r"nghe(?! thuat)", r"cong viec", r"viec lam", r"nghi viec", r"doi viec", r"chuyen nganh",
                   r"thang tien", r"sep", r"dong nghiep", r"kinh doanh", r"khoi nghiep", r"mo quan",
                   r"mo cong ty", r"lam an", r"su nghiep", r"lam thue", r"freelancer", r"startup",
                   r"cong ty", r"tang luong", r"sa thai", r"ban hang", r"lam giao vien", r"nganh it", r"chuyen nganh", r"nganh gi", r"su nghiep", r"nghe nghiep", r"dong nghiep", r"doi viec",
@@ -133,20 +133,20 @@ LINH_VUC_KW: dict[str, list[str]] = {
                   r"burnout", r"nhuong quyen", r"quan ca phe", r"shop", r"thua lo", r"lam tu xa",
                   r"di lam", r"ghi nhan", r"lam o", r"nghe y", r"tu van", r"chua lanh",
                   r"kinh doanh online", r"lam viec nhom", r"lam viec mot minh", r"moi truong lam viec",
-                  r"lam ky su", r"gop von", r"phong van", r"xin viec", r"hop dong", r"that nghiep"],
-    "tai_chinh": [r"tien", r"giau", r"tien bac", r"tai chinh", r"dau tu", r"chung khoan", r"mua nha", r"mua dat",
+                  r"lam ky su", r"gop von", r"phong van", r"xin viec", r"hop dong", r"that nghiep", r"nop don nghi"],
+    "tai_chinh": [r"(?<!thang )tien", r"giau", r"tien bac", r"tai chinh", r"dau tu", r"chung khoan", r"mua nha", r"mua dat",
                   r"tien ao", r"no nan", r"dang no", r"no nhieu", r"tra het", r"vay tien", r"cho vay", r"tiet kiem", r"tieu tien", r"chi tieu", r"mua sam", r"tai loc",
                   r"cho vay", r"thu nhap"],
-    "hoc_tap": [r"hoc tap", r"hoc hanh", r"viec hoc", r"hoc bai", r"cach hoc", r"hoc mai", r"em hoc", r"nen hoc", r"hoc nhom", r"hoc buoi", r"hoc truoc", r"thi cu", r"em thi", r"thi dai hoc", r"thi co do", r"ky thi", r"khi thi", r"chon nganh", r"nganh gi khi", r"hoc nganh", r"nganh cong nghe", r"hop hoc", r"dai hoc", r"khoi a", r"khoi d", r"du hoc", r"thac si",
+    "hoc_tap": [r"hoc tap", r"hoc hanh", r"viec hoc", r"hoc bai", r"cach hoc", r"hoc mai", r"em hoc", r"nen hoc(?! cach)", r"hoc nhom", r"hoc buoi", r"hoc truoc", r"thi cu", r"em thi", r"thi dai hoc", r"thi co do", r"ky thi", r"khi thi", r"chon nganh", r"nganh gi khi", r"hoc nganh", r"nganh cong nghe", r"hop hoc", r"dai hoc", r"khoi a", r"khoi d", r"du hoc", r"thac si",
                 r"ngoai ngu", r"hoc nghe", r"on thi", r"tap trung hoc", r"ielts", r"tieng anh",
-                r"tieng trung", r"diem so", r"hoc them", r"su pham", r"bo hoc", r"thi lai"],
+                r"tieng trung", r"diem so", r"hoc them", r"su pham", r"bo hoc", r"thi lai", r"xao nhang"],
     "suc_khoe": [r"cang thang", r"stress", r"mat ngu", r"kiet suc", r"can bang cuoc song", r"thu gian",
                  r"tram buon", r"tram cam", r"an uong", r"lo au", r"chuyen gia tam ly", r"ngu ngon",
                  r"cau gat", r"the thao", r"thoi quen", r"suc khoe", r"tinh than"],
     "tam_linh": [r"no nghiep", r"bai hoc nghiep", r"kiep truoc", r"luan hoi", r"can tu",
                  r"di tu", r"giac quan thu sau", r"nguoi duoc chon", r"so hiem", r"qua bao",
                  r"bai hoc cuoc doi", r"bai hoc lon nhat"],
-    "ten_goi": [r"ten", r"doi ten", r"nghe danh", r"ten shop", r"ten cong ty", r"so dien thoai",
+    "ten_goi": [r"(?<!mui )ten", r"doi ten", r"nghe danh", r"ten shop", r"ten cong ty", r"so dien thoai",
                 r"bien so", r"biet danh", r"doi ho", r"ten tieng anh", r"so nha", r"tang may"],
     "ban_be_xa_hoi": [r"ban be", r"ban than", r"tinh ban", r"giao tiep", r"moi quan he xa hoi",
                       r"mang xa hoi", r"yeu quy", r"thuyet phuc", r"thuong hieu ca nhan", r"cong dong",
@@ -175,6 +175,11 @@ THOI_DIEM = [r"nam nay", r"nam sau", r"nam ngoai", r"nam 20\d\d", r"thang nay", 
              r"thang ca nhan", r"ngay ca nhan", r"dinh cao", r"giai doan", r"tuoi nao", r"chu ky",
              r"ba nam toi", r"nam nao", r"thang nao", r"ngay nao", r"thoi diem", r"kim tu thap",
              r"thu thach", r"tuoi \d\d", r"ve gia", r"tuoi tre", r"thoi van"]
+
+# Hỏi CHỌN ngày/tháng tốt cho một việc ("ngày nào hợp để ký hợp đồng", "ngày mai có phải ngày tốt để tỏ tình")
+# → thời vận: trả lời theo ngày/tháng/năm cá nhân; việc (hợp đồng, tỏ tình…) chỉ là bối cảnh.
+CHON_THOI_DIEM = [r"(ngay|thang) nao( trong (thang|nam)( nay)?)? (hop|tot)", r"co phai (la )?(ngay|thang|nam) tot",
+                  r"thang nao trong nam"]
 
 KY_THUAT_CHUNG = [r"tinh the nao", r"cach tinh", r"la gi$", r"tinh theo", r"co chinh xac",
                   r"co khoa hoc", r"co phai la mot"]
@@ -301,6 +306,7 @@ def phan_loai(cau_hoi: str) -> dict:
         return xong("ky_thuat", "ban_than", "tra_loi", "giai_thich")
 
     thoi_diem = _co(t_chinh, THOI_DIEM)
+    chon_thoi_diem = _co(t_chinh, CHON_THOI_DIEM)
     y_dinh = ("thoi_diem" if thoi_diem else
               "quyet_dinh" if _co(t, [r"co nen", r"nen .* hay", r"nen chon", r"nen hoc", r"nen lam gi"]) else
               "loi_khuyen" if _co(t, [r"lam sao", r"phai lam sao", r"nen lam gi", r"lam gi de"]) else
@@ -311,12 +317,16 @@ def phan_loai(cau_hoi: str) -> dict:
                  or re.search(r"toi va (ban trai|ban gai|nguoi yeu|chong|vo|anh ay|co ay|ny|crush|nguoi ay|"
                               r"doi tac|ban than|dong nghiep|me|bo|con)[^?]*(co nen|xem|hop|cuoi|di den)|"
                               r"hai vo chong|so hai vo chong|chung toi yeu nhau|vo chong cung so", t)
-                 or re.search(r"(hop|khac) (voi |nhau|hay khac|khong)|co hop|xem do hop|duyen no|"
+                 or re.search(r"hai nguoi cung so|hop lam an chung", t)
+                 or re.search(r"(hop|khac) (voi |nhau|hay khac|khong)|co hop|xem do hop|duyen no|xung khac|"
                               r"di den cuoi|hop tinh|song voi nhau|hieu nhau hon|choi voi nhau", t)
                  and re.search(r"(?<!\w)" + LIEN_QUAN_NGUOI + r"(?!\w)|toi va|va (anh|co|ban|nguoi)", t)
                  # "hợp làm sếp", "hợp với nghề gì": hỏi độ hợp NGHỀ của chính mình, không phải hai người
                  and not re.search(r"hop (lam|voi nghe|nghe|voi cong viec|voi viec|voi nganh|voi moi truong|"
                                    r"voi vi tri|voi vai tro)", t))
+    # "Làm sao để hoà hợp với mẹ chồng" là xin cách sống chung (gia đình), không phải so cặp số.
+    if hai_nguoi and cap is None and len(ngay) < 2 and re.search(r"lam sao de hoa hop voi", t):
+        hai_nguoi = False
     con = _co(t, CON)
     if hai_nguoi and not (con and not re.search(r"toi va con|con toi va|hai dua", t)
                           and not re.search(r"hop (voi |nhau)|hop khong", t)):
@@ -328,12 +338,22 @@ def phan_loai(cau_hoi: str) -> dict:
                                                                     r"nam nao", r"ngay nao"]) else "tra_loi",
                     y_dinh)
 
+    # "Sếp tôi số chủ đạo 8…", "Mẹ tôi số 6…": hỏi về NGƯỜI KHÁC có con số cụ thể.
+    if so_nhac and re.search(r"(sep|me|bo|anh trai|chi gai|em trai|em gai|ban than|dong nghiep) (toi|minh) so", t):
+        return xong("nguoi_khac", "nguoi_khac", "tra_loi", "mo_ta")
     if (_co(t, NGUOI_KHAC) or (ngay and not re.search(r"toi sinh|em sinh|minh sinh", t))) \
             and not _co(t, KHONG_PHAI_NGUOI_KHAC):
         return xong("nguoi_khac", "nguoi_khac", "tra_loi", "mo_ta")
 
+    if chon_thoi_diem:
+        return xong("thoi_van", "ban_than", "tra_loi_kem_luu_y", "thoi_diem")
+
     diem = {lv: _dem(t_chinh, kw) for lv, kw in LINH_VUC_KW.items()}
-    if max(diem.values()) == 0 and gioi_thieu:
+    # Phần giới thiệu ("Mình bán hàng online, …", "Em là mẹ bỉm hai con, …") chỉ là bối cảnh: lĩnh vực lấy theo
+    # CÂU HỎI CHÍNH. Trước đây câu chính không có từ khoá thì lấy từ khoá ở phần giới thiệu → "năm nay của tôi thế
+    # nào" bị đẩy sang sự nghiệp. Chỉ còn lấy theo giới thiệu khi câu chính là đuôi ngắn, không tự mang nghĩa
+    # ("Tôi là con cả, có phải gánh vác hết không?") và không hỏi thời điểm.
+    if max(diem.values()) == 0 and gioi_thieu and not thoi_diem and len(t_chinh.split()) <= 6:
         diem = {lv: _dem(t, kw) for lv, kw in LINH_VUC_KW.items()}
     # Ưu tiên chủ đề hẹp hơn "bản thân" khi hoà điểm
     thu_tu = ["tam_linh", "ten_goi", "tai_chinh", "suc_khoe", "hoc_tap", "con_cai", "gia_dinh",

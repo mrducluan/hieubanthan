@@ -14,7 +14,8 @@ test("funnel Phase 1: landing → bắt đầu → hồ sơ → đọc xong → 
   await page.getByLabel("Tháng", { exact: true }).fill("10");
   await page.getByLabel("Năm", { exact: true }).fill("1988");
   await page.getByRole("button", { name: "Xem con số của tôi" }).click();
-  await expect(page.getByTestId("so-duong-doi")).toHaveText("33");
+  // Lần đầu mở /ban-than, máy chủ dev phải biên dịch trang (có lúc > 15 giây khi vừa khởi động) → chờ lâu hơn ở bước này.
+  await expect(page.getByTestId("so-duong-doi")).toHaveText("33", { timeout: 60_000 });
   await page.getByRole("heading", { name: "Giai đoạn này của bạn" }).scrollIntoViewIfNeeded();
   await page.getByTestId("gop-y").getByRole("button", { name: "Có, khá trúng" }).click();
   await expect(page.getByText("Cảm ơn bạn")).toBeVisible();

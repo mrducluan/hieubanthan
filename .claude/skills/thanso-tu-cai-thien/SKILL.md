@@ -52,6 +52,10 @@ Mục tiêu: mỗi vòng làm **đúng hơn trên câu hỏi thật**, không ba
 | Recall câu khủng hoảng | 100% (0 bắt nhầm) |
 | Recall câu cần từ chối | 100% |
 
+Vòng 2026-10-08 (engine 0.1.4): đúng lĩnh vực **95,01%**, đối tượng 98,67%, khủng hoảng/từ chối 100%, 0 bắt nhầm.
+Bài học: phần giới thiệu ("Mình bán hàng online, …") chỉ là bối cảnh — lĩnh vực theo câu hỏi chính; từ khoá ngắn
+phải chặn cụm trùng ("nghệ thuật"/"nghề", "thăng tiến"/"tiền", "mũi tên"/"tên", "với con số"/"với con").
+
 ## Lịch chạy gợi ý
 
 Mỗi tuần một vòng khi đã bật nhật ký (`NHAT_KY_HOI=1` trên Render + bảng 0004). Trước khi
