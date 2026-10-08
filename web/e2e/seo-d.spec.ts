@@ -68,3 +68,25 @@ test("cookie: chưa đồng ý thì không tải Google; Đồng ý → tải GT
   await expect(hop).toBeHidden();
   expect(await page.evaluate(() => localStorage.getItem("hbt.dong-y-cookie.v1"))).toBe("tu_choi");
 });
+
+test("trang công cụ: HTML máy chủ có <h1>, phần giới thiệu + hỏi đáp, schema WebPage/FAQ/Breadcrumb, ảnh OG", async ({ request }) => {
+  for (const [duong, ten] of [["/tu-vi", "Tử vi"], ["/bat-tu", "Bát tự"], ["/phong-thuy", "Phong thuỷ"], ["/kinh-dich", "Kinh Dịch"],
+    ["/than-so", "Thần số học"], ["/hop-doi", "Hợp đôi"]] as const) {
+    const html = await (await request.get(duong)).text();
+    expect((html.match(/<h1[\s>]/g) ?? []).length, duong).toBe(1);
+    expect(html, duong).toContain(`Về công cụ ${ten}`);
+    for (const loai of ['"@type":"WebPage"', '"@type":"FAQPage"', '"@type":"BreadcrumbList"']) expect(html, duong).toContain(loai);
+    expect(html, duong).toMatch(/<meta property="og:image" content="[^"]*\/og\?tieu_de=/);
+  }
+});
+
+test("IndexNow, biểu tượng iOS, header bảo mật", async ({ request }) => {
+  expect(await (await request.get("/indexnow.txt")).text()).toMatch(/^[a-f0-9]{32}$/);
+  const icon = await request.get("/apple-icon");
+  expect(icon.status()).toBe(200);
+  expect(icon.headers()["content-type"]).toContain("image/png");
+  const h = (await request.get("/")).headers();
+  expect(h["x-content-type-options"]).toBe("nosniff");
+  expect(h["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+  expect(h["permissions-policy"]).toContain("magnetometer=(self)");
+});

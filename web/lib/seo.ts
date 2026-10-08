@@ -91,3 +91,28 @@ export function ldHoiDap(hd: { hoi: string; dap: string }[]) {
 export function goiLd(...nut: object[]) {
   return { "@context": "https://schema.org", "@graph": nut };
 }
+
+/** Google cắt tiêu đề ~60 ký tự: tiêu đề dài thì bỏ hậu tố " · Hiểu Bản Thân" (dùng title.absolute). */
+export function tieuDeSeo(t: string): string | { absolute: string } {
+  return t.length > 52 ? { absolute: t } : t;
+}
+
+/** Mô tả meta ≤ 160 ký tự, cắt ở ranh giới từ. */
+export function catMoTa(s: string, toiDa = 160): string {
+  if (s.length <= toiDa) return s;
+  const cat = s.slice(0, toiDa - 1);
+  return `${cat.slice(0, cat.lastIndexOf(" ")).replace(/[,;:—–-]\s*$/, "")}…`;
+}
+
+/** Metadata chuẩn cho trang tĩnh: title, description, canonical, Open Graph + Twitter có ảnh. */
+export function metaTrang({ tieuDe, moTa, duong, md }: { tieuDe: string; moTa: string; duong: string; md?: string }) {
+  const d = catMoTa(moTa);
+  const anh = `/og?tieu_de=${encodeURIComponent(tieuDe)}`;
+  return {
+    title: tieuDeSeo(tieuDe),
+    description: d,
+    alternates: { canonical: duong, ...(md ? { types: { "text/markdown": md } } : {}) },
+    openGraph: { type: "website" as const, title: tieuDe, description: d, url: duong, locale: "vi_VN", siteName: TEN_SITE, images: [anh] },
+    twitter: { card: "summary_large_image" as const, title: tieuDe, description: d, images: [anh] },
+  };
+}

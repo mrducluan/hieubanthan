@@ -61,7 +61,8 @@ export function ThanSo() {
     if (kq && tab === "dong-doi" && location.hash === "#dong-doi") document.getElementById("chieu-sau")?.scrollIntoView({ block: "start" });
   }, [kq, tab]);
 
-  if (hoSo === undefined) return <KhungTai />;
+  // Lúc chờ hồ sơ vẫn có <h1> trong HTML phía máy chủ (SEO); có hồ sơ thì tiêu đề là tên người dùng.
+  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeMuc cap={1} nho="Thần số học" lon="Thần số học theo họ tên và ngày sinh" /><KhungTai /></div>;
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">

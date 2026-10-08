@@ -40,7 +40,8 @@ export function HopDoi() {
   const thangRef = useRef<HTMLInputElement>(null);
   const namRef = useRef<HTMLInputElement>(null);
 
-  if (hoSo === undefined) return <KhungTai />;
+  // Lúc chờ hồ sơ vẫn có <h1> trong HTML phía máy chủ (SEO).
+  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeMuc cap={1} nho="Hợp đôi" lon="Hợp đôi theo thần số học" /><KhungTai /></div>;
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Compass, Hexagon, Layers, Orbit, Sparkles } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { goiLd, ldDuongDan, metaTrang } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Khám phá",
-  description: "Năm lăng kính nhìn lại bản thân: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch — dùng chung một hồ sơ.",
-  alternates: { canonical: "/kham-pha" },
-  openGraph: { title: "Khám phá", description: "Năm lăng kính nhìn lại bản thân: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch — dùng chung một hồ sơ.", url: "/kham-pha" },
-};
+export const metadata: Metadata = metaTrang({
+  tieuDe: "Khám phá: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch",
+  moTa: "Năm lăng kính nhìn lại bản thân: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch — dùng chung một hồ sơ, cách tính minh bạch, diễn giải có nguồn.",
+  duong: "/kham-pha",
+});
 
 const MANG = [
   { href: "/than-so", ten: "Thần số học", mo: "Bốn con số cốt lõi, dải đời, năm cá nhân, biểu đồ ngày sinh.", can: "Tên + ngày sinh", Icon: Sparkles },
@@ -20,6 +21,7 @@ const MANG = [
 export default function KhamPha() {
   return (
     <div>
+      <JsonLd data={goiLd(ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Khám phá", duong: "/kham-pha" }]))} />
       <p className="eyebrow">Khám phá</p>
       <h1 className="mt-2 text-4xl sm:text-5xl">Năm hệ thống, một hồ sơ</h1>
       <p className="mt-3 max-w-2xl text-fg-muted">

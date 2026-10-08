@@ -20,7 +20,7 @@
 2. [x] Chạy migration 0001–0009 (B1, B2)
 3. [x] Ba biến môi trường bắt buộc (mục G) — anh báo xong 2026-10-08
 4. [x] Merge PR "mở công khai" (#50) + giới hạn lượt AI (#51)
-5. [ ] **Google Search Console + Google Tag Manager / Analytics** → mục H (15–20 phút) — em đã làm sẵn phần code
+5. [ ] **Google Analytics 4 trong GTM** → mục H2 (Search Console anh đã cài 2026-10-08; GTM đã gắn vào web)
 6. [ ] **Pháp lý còn lại** → mục E (tên đơn vị + email đã có trong code; còn MST, địa chỉ, luật sư)
 7. [ ] Các việc còn lại → mục D (em đã ghi rõ việc nào em làm, việc nào cần anh)
 
@@ -53,7 +53,9 @@ Phải ra 14/14 ✓. Mở `hieuban.com` trên điện thoại (cả trong Zalo/F
 khác (Nha Khoa Tâm Đức), không có `hieuban.com`. Em **không đụng** vào tài khoản đó. Phần code em đã làm xong
 (PR SEO-D), anh chỉ cần bấm trong tài khoản Google của anh và dán mã vào Vercel.
 
-### H1. Search Console (để Google tìm thấy web) — chọn MỘT trong hai cách xác minh
+### H1. Search Console — ✅ anh đã cài (2026-10-08)
+
+Còn kiểm 3 việc nhỏ dưới mục "Sau khi xác minh" (sitemap, yêu cầu index, Bing). Hướng dẫn xác minh giữ lại để tra.
 
 **Cách 1 — DNS (khuyên dùng, xác minh cả `www` lẫn mọi đường dẫn):**
 1. search.google.com/search-console → **Add property** → ô **Domain** → nhập `hieuban.com` → Continue.
@@ -67,12 +69,24 @@ khác (Nha Khoa Tâm Đức), không có `hieuban.com`. Em **không đụng** v�
 2. Vercel → Environment Variables → `GOOGLE_SITE_VERIFICATION` = chuỗi đó → **Redeploy** → quay lại Google bấm Verify.
 
 **Sau khi xác minh:**
-- [ ] Mục **Sitemaps** → nhập `sitemap.xml` → Submit.
+- [ ] Mục **Sitemaps** → nhập `sitemap.xml` → Submit (đã làm thì bỏ qua; sitemap có 150 URL).
 - [ ] Mục **URL Inspection** → dán `https://hieuban.com/` → **Request indexing** (làm thêm cho `/kien-thuc`, `/tu-dien`).
+- [x] **IndexNow** (Bing, Yandex, Seznam, Naver): tự báo toàn bộ URL sau mỗi lần merge vào `main` (workflow `indexnow`,
+  khoá công khai ở `/indexnow.txt`) — không cần làm gì.
 - [ ] Bing Webmaster Tools (bing.com/webmasters) → **Import from Google Search Console** — Bing cũng cấp dữ liệu cho
   Copilot và ChatGPT tìm kiếm. (Muốn xác minh Bing bằng thẻ meta: env `BING_SITE_VERIFICATION`.)
 - [ ] Nếu muốn em tự gửi sitemap, đọc báo cáo từ khoá hằng tuần: kết nối tài khoản Google có `hieuban.com` vào
   claude.ai (Settings → Connectors) rồi nhắn em.
+
+### H1b. Rà SEO kỹ thuật — em đã làm (2026-10-08)
+
+Công cụ `web/scripts/kiem-tra-seo.mjs` đọc sitemap rồi mở từng trang, kiểm tra: title, description, canonical, đúng một
+thẻ H1, không noindex nhầm, Open Graph và Twitter, JSON-LD hợp lệ, breadcrumb, alt ảnh, link nội bộ hỏng, file .md, llms.txt.
+Lần đầu chạy ra 5 lỗi và 52 cảnh báo, em đã sửa hết, giờ là **0 lỗi, 0 cảnh báo trên 150 trang**. Muốn tự chạy lại trên web thật:
+
+```bash
+cd web && node scripts/kiem-tra-seo.mjs https://hieuban.com
+```
 
 ### H2. Google Analytics 4 + Google Tag Manager
 

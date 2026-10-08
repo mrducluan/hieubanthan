@@ -76,10 +76,12 @@ export function TuVi() {
     chatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  if (hoSo === undefined) return <KhungTai />;
+  // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
+  const dau = <DauMang Icon={Orbit} ten="Tử vi" mo_ta="Lá số an ngay trên hệ thống của Hiểu Bản Thân — ngày giờ sinh không gửi cho bên thứ ba. Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn. Không phán bệnh, tai nạn hay sống chết." />;
+  if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   return (
     <div>
-      <DauMang Icon={Orbit} ten="Tử vi" mo_ta="Lá số an ngay trên hệ thống của Hiểu Bản Thân — ngày giờ sinh không gửi cho bên thứ ba. Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn. Không phán bệnh, tai nạn hay sống chết." />
+      {dau}
 
       <section aria-label="Lá số" className="space-y-4">
         {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Để an lá số cần giờ sinh, giới tính và nơi sinh (nơi sinh quyết định múi giờ lúc bạn chào đời). Bạn vẫn hỏi được câu kiến thức chung ở khung bên dưới." />}
