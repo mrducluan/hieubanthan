@@ -6,10 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/khung/Logo";
 import { GhiMoThe } from "@/components/khung/GhiMoThe";
 
-interface Props { params: { ma: string } }
+interface Props { params: Promise<{ ma: string }> }
 const TEN = ["Đường đời", "Sứ mệnh", "Linh hồn", "Nhân cách"];
 
-export function generateMetadata({ params }: Props): Metadata {
+export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
+  const params = await thamSo;
   const nd = docMa(params.ma);
   if (!nd) return { title: "Thẻ hồ sơ" };
   const title = `Con số đường đời của ${nd.t} là ${nd.so[0]}`;
@@ -22,7 +23,8 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 // Thẻ công khai (người nhận link thấy) → lối vào luồng Phase 1 cho người mới.
-export default function Page({ params }: Props) {
+export default async function Page({ params: thamSo }: Props) {
+  const params = await thamSo;
   const nd = docMa(params.ma);
   if (!nd) {
     return (

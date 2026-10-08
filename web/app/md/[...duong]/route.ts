@@ -8,7 +8,8 @@ export const revalidate = 21600;
 
 const KHONG_CO = () => new Response("Không có bản Markdown cho trang này.\n", { status: 404, headers: { "content-type": "text/plain; charset=utf-8" } });
 
-export async function GET(_req: Request, { params }: { params: { duong: string[] } }) {
+export async function GET(_req: Request, { params: thamSo }: { params: Promise<{ duong: string[] }> }) {
+  const params = await thamSo;
   const p = params.duong.map(decodeURIComponent);
   if (p.length === 1 && p[0] === "index") return traMd(await taoLlmsTxt(), "/");
   if (p.length === 1 && p[0] === "tu-dien") {

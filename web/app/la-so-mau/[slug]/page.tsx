@@ -12,9 +12,10 @@ import { DocLaSoMau } from "./DocLaSoMau";
 
 export const revalidate = 21600;
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
+  const params = await thamSo;
   const m = await laSoMau(params.slug);
   if (!m) return { title: "Không tìm thấy", robots: { index: false } };
   const duong = `/la-so-mau/${m.slug}`;
@@ -28,7 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params: thamSo }: Props) {
+  const params = await thamSo;
   const m = await laSoMau(params.slug);
   if (!m) notFound();
   const duong = `/la-so-mau/${m.slug}`;

@@ -38,6 +38,7 @@ completed_work:
   - "TV-LN: lưu nguyệt Tử vi 5 phái người dùng chọn (mặc định Đẩu Quân, khớp iztro 680/680), hỏi đáp theo tháng"
   - "PL-1: Chính sách quyền riêng tư, Điều khoản, Miễn trừ, Giới thiệu & nguồn, Liên hệ + footer 4 cột (thông tin vận hành qua env)"
   - "PT-V0: form Khảo sát nhà + schema bố cục + luật luận từ bố cục (Bát trạch + kho tình huống) + công cụ gán nhãn/chấm ảnh"
+  - "NX15 + CSP-2: Next 15.5 + React 19; CSP đầy đủ theo nonce (strict-dynamic, connect-src giới hạn), e2e/csp.spec.ts"
   - "SEC-1: rà bảo mật web/engine/DB — 11 lỗi đã sửa (gian lận Sao, chuyển hướng mở, hạn mức yêu cầu, lộ lỗi, Next 14.2.35…), docs/BAO-MAT.md"
   - "SEO-F: 92 trang \"tuổi X nam/nữ hợp hướng nào\" (1960–2005) dựng từ engine Bát trạch + KB, mục lục /phong-thuy/huong-hop-tuoi, bản .md, sitemap 243 URL, 0 lỗi SEO"
   - "TP-LICH: chọn âm lịch Việt/Trung + trường phái ở mọi mảng (Bát tự giờ Tý, Phong thuỷ mốc đầu năm, Mai Hoa, nhập âm lịch)"

@@ -28,7 +28,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     return kq.ok ? NextResponse.json({ ...(kq.body as object), phi: MIEN_PHI }) : kq.res;
   }
 
-  const kho = cookies();
+  const kho = await cookies();
   const sb = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
     cookies: { getAll: () => kho.getAll(), setAll: () => { /* route chỉ đọc phiên */ } },
   });

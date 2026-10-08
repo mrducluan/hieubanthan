@@ -44,7 +44,8 @@ export default defineConfig({
   retries: 0,
   timeout: 60_000,
   expect: { timeout: 15_000 },
-  reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
+  // CI: reporter "github" ghi test hỏng thành annotation của check run (đọc được qua API khi không tải được artifact).
+  reporter: process.env.CI ? [["list"], ["github"], ["html", { open: "never" }]] : "list",
   use: {
     baseURL: `http://localhost:${WEB_PORT}`,
     trace: "retain-on-failure",
@@ -69,7 +70,11 @@ export default defineConfig({
     {
       command: `npm run dev -- --port ${WEB_PORT}`,
       url: `http://localhost:${WEB_PORT}`,
-      env: { ...KHOA_TAT, ENGINE_URL: `http://localhost:${ENGINE_PORT}` },
+      // ENGINE_URL dùng 127.0.0.1 (không "localhost"): Node 20 thử ::1 rồi 127.0.0.1 với hạn 250 ms mỗi địa chỉ
+      // (autoSelectFamily) → khi runner CI đang bận biên dịch, fetch tới engine có thể hỏng "fetch failed" giả.
+      // Next 15 dev tự khởi động lại máy chủ khi heap > 80% giới hạn (next/dist/server/lib/start-server.js) → trên
+      // runner CI, sau ~9 phút biên dịch hàng trăm route, request đang chạy bị ECONNRESET. Nâng giới hạn heap cho dev.
+      env: { ...KHOA_TAT, ENGINE_URL: `http://127.0.0.1:${ENGINE_PORT}`, NODE_OPTIONS: "--max-old-space-size=6144" },
       reuseExistingServer: !process.env.CI,
       timeout: 120_000,
     },

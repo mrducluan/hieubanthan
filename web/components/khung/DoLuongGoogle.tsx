@@ -21,7 +21,7 @@ function xoaCookieGa() {
 const KHOI_DONG = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;
 gtag('consent','default',{analytics_storage:'granted',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});`;
 
-export function DoLuongGoogle() {
+export function DoLuongGoogle({ nonce }: { nonce?: string }) {
   const [lc, setLc] = useState<LuaChon | null>(null);
   useEffect(() => {
     if (!coGoogle()) return;
@@ -41,16 +41,16 @@ export function DoLuongGoogle() {
   if (lc !== "dong_y") return null;
   if (GTM_ID) {
     return (
-      <Script id="gtm" strategy="afterInteractive">{`${KHOI_DONG}
+      <Script id="gtm" strategy="afterInteractive" nonce={nonce}>{`${KHOI_DONG}
 dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-(function(d){var s=d.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id='+${JSON.stringify(GTM_ID)};d.head.appendChild(s);})(document);`}</Script>
+(function(d){var s=d.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id='+${JSON.stringify(GTM_ID)};var n=d.currentScript&&d.currentScript.nonce;if(n)s.setAttribute('nonce',n);d.head.appendChild(s);})(document);`}</Script>
     );
   }
   return (
     <>
-      <Script id="ga-khoi-dong" strategy="afterInteractive">{`${KHOI_DONG}
+      <Script id="ga-khoi-dong" strategy="afterInteractive" nonce={nonce}>{`${KHOI_DONG}
 gtag('js',new Date());gtag('config',${JSON.stringify(GA_ID)});`}</Script>
-      <Script id="ga" strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_ID)}`} />
+      <Script id="ga" strategy="afterInteractive" nonce={nonce} src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_ID)}`} />
     </>
   );
 }

@@ -12,16 +12,17 @@ import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, url
 
 export const revalidate = 21600;
 
-type Props = { params: { chu_de: string; slug: string } };
+type Props = { params: Promise<{ chu_de: string; slug: string }> };
 
-async function tai({ chu_de, slug }: Props["params"]) {
+async function tai({ chu_de, slug }: Awaited<Props["params"]>) {
   const cd = CHU_DE[chu_de];
   if (!cd) return null;
   const t = await trang(cd.loai, slug);
   return t ? { cd, t } : null;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
+  const params = await thamSo;
   const kq = await tai(params);
   if (!kq) return { title: "Không tìm thấy", robots: { index: false } };
   const { t } = kq;
@@ -39,7 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params: thamSo }: Props) {
+  const params = await thamSo;
   const kq = await tai(params);
   if (!kq) notFound();
   const { cd, t } = kq;
