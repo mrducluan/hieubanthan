@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { CHU_DE, duongTrang, mucLuc } from "@/lib/kien-thuc";
+import { CHU_DE, HINH_CHU_DE, duongTrang, mucLuc } from "@/lib/kien-thuc";
+import { HinhMang } from "@/components/minh-hoa/TrangTri";
 import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
@@ -33,6 +34,7 @@ export default async function Page({ params: thamSo }: Props) {
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Kiến thức", duong: "/kien-thuc" }, { ten: cd.ten, duong }]),
       )} />
       <nav aria-label="Đường dẫn" className="text-xs text-fg-faint"><Link href="/kien-thuc" className="hover:text-fg">Kiến thức</Link> ›</nav>
+      <HinhMang kieu={HINH_CHU_DE[params.chu_de] ?? "than-so"} className="mt-4 h-20" />
       <h1 className="mt-3 text-4xl sm:text-5xl">{cd.ten}</h1>
       <p className="mt-3 max-w-2xl text-fg-muted">{cd.mo_ta}</p>
       {ds.length === 0 && <p className="mt-8 text-fg-muted">Thư viện đang được tải lại, bạn quay lại sau ít phút nhé.</p>}

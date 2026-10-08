@@ -2,6 +2,8 @@
 // Chỉ dùng ở Server Component / route handler. Web chỉ hiển thị — không tự viết nghĩa. Lỗi engine → trả null/[] (trang vẫn render, cache tự làm mới).
 
 import { unstable_noStore as noStore } from "next/cache";
+import type { MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
+import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 
 export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu";
 
@@ -19,6 +21,10 @@ export const CHU_DE: Record<string, { loai: LoaiTrang; ten: string; mo_ta: strin
   "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", mang: "/bat-tu",
     mo_ta: "10 nhật chủ (can ngày sinh) trong Bát tự: hình tượng, tính chất, điểm mạnh, mặt tối và ảnh hưởng của mùa sinh." },
 };
+/** MH-1: hình trang trí cho từng chủ đề. */
+export const HINH_CHU_DE: Record<string, KieuMang> = {
+  "than-so": "than-so", "kinh-dich": "kinh-dich", "tu-vi": "tu-vi", "cung-tu-vi": "tu-vi", "thap-than": "bat-tu", "nhat-chu": "bat-tu",
+};
 export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = {
   so: "than-so", que: "kinh-dich", sao: "tu-vi", cung: "cung-tu-vi", thap_than: "thap-than", nhat_chu: "nhat-chu",
 };
@@ -28,6 +34,8 @@ export interface TrangKienThuc {
   loai: LoaiTrang; slug: string; tieu_de: string; mo_ta: string; tra_loi_nhanh: string;
   muc: MucTrang[]; hoi_dap: { hoi: string; dap: string }[]; nguon: string[];
   trang_thai: string; index: boolean; cap_nhat: string;
+  /** MH-1: dữ liệu hình minh hoạ do engine trả (web chỉ vẽ). */
+  minh_hoa?: MinhHoaDuLieu;
   lien_quan: { loai: LoaiTrang; slug: string; tieu_de: string }[];
 }
 export type MucLuc = Pick<TrangKienThuc, "loai" | "slug" | "tieu_de" | "mo_ta" | "trang_thai" | "index" | "cap_nhat">;

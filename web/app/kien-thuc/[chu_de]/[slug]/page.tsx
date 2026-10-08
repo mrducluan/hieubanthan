@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight, BookOpen, CalendarDays, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { MinhHoa } from "@/components/minh-hoa/MinhHoa";
 import { CHU_DE, duongTrang, trang } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 
@@ -97,6 +98,8 @@ export default async function Page({ params: thamSo }: Props) {
             : <span className="inline-flex items-center gap-1 rounded-full border border-jade/40 px-2.5 py-0.5 text-jade"><ShieldCheck className="size-3.5" aria-hidden /> Đã duyệt</span>}
         </div>
       </header>
+
+      <MinhHoa mh={t.minh_hoa} />
 
       <section aria-label="Trả lời nhanh" className="mt-6 rounded-2xl border border-gold/30 bg-gold/5 p-5">
         <p className="eyebrow">Trả lời nhanh</p>

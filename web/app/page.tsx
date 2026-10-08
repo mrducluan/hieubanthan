@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Compass, Hexagon, Layers, Orbit, Sparkles, Sun } from "lucide-react";
+import { ArrowRight, Sparkles, Sun } from "lucide-react";
+import { HinhBauTroi, HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { CuaVao } from "@/components/hoso/CuaVao";
 import { ChuThichLop } from "@/components/than-so/LopNoiDung";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
@@ -17,11 +18,11 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: TIEU_DE_CHU, description: MO_TA_CHU, images: ["/og"] },
 };
 
-const MANG = [
-  { href: "/tu-vi", ten: "Tử vi", mo: "Lá số 12 cung, đại hạn, lưu niên", Icon: Orbit },
-  { href: "/kinh-dich", ten: "Kinh Dịch", mo: "Gieo một quẻ cho một việc đang cân nhắc", Icon: Hexagon },
-  { href: "/bat-tu", ten: "Bát tự", mo: "Tứ trụ, ngũ hành, đại vận", Icon: Layers },
-  { href: "/phong-thuy", ten: "Phong thuỷ", mo: "Mệnh quái, hướng nhà hợp tuổi", Icon: Compass },
+const MANG: { href: string; ten: string; mo: string; kieu: KieuMang }[] = [
+  { href: "/tu-vi", ten: "Tử vi", mo: "Lá số 12 cung, đại hạn, lưu niên", kieu: "tu-vi" },
+  { href: "/kinh-dich", ten: "Kinh Dịch", mo: "Gieo một quẻ cho một việc đang cân nhắc", kieu: "kinh-dich" },
+  { href: "/bat-tu", ten: "Bát tự", mo: "Tứ trụ, ngũ hành, đại vận", kieu: "bat-tu" },
+  { href: "/phong-thuy", ten: "Phong thuỷ", mo: "Mệnh quái, hướng nhà hợp tuổi", kieu: "phong-thuy" },
 ];
 
 export default function TrangChu() {
@@ -42,6 +43,7 @@ export default function TrangChu() {
             <li className="flex gap-2"><span className="text-gold">✦</span> Mỗi con số kèm câu hỏi để bạn tự kiểm, không phán thay bạn</li>
             <li className="flex gap-2"><span className="text-moon">✦</span> Một hồ sơ dùng cho cả hợp đôi, Tử vi, Kinh Dịch, Bát tự, Phong thuỷ</li>
           </ul>
+          <HinhBauTroi className="mx-auto mt-8 max-w-[22rem] md:mx-0" />
         </div>
         <CuaVao />
       </section>
@@ -56,9 +58,9 @@ export default function TrangChu() {
         <TieuDeMuc id="kham-pha" nho="Khám phá sâu hơn" lon="Bốn mảng huyền học, một hồ sơ"
           mo_ta="Sau thần số, bạn có thể đi tiếp vào các hệ thống phương Đông — dùng luôn hồ sơ đã nhập, chỉ hỏi thêm giờ sinh khi cần." />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {MANG.map(({ href, ten, mo, Icon }) => (
+          {MANG.map(({ href, ten, mo, kieu }) => (
             <Link key={href} href={href} className="glass group rounded-2xl p-5 transition-colors hover:border-gold/50">
-              <Icon className="size-6 text-gold" aria-hidden />
+              <HinhMang kieu={kieu} className="transition-transform group-hover:scale-105" />
               <p className="mt-4 font-serif text-xl">{ten}</p>
               <p className="mt-1 text-sm text-fg-muted">{mo}</p>
               <ArrowRight className="mt-4 size-4 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden />

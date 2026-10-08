@@ -53,6 +53,31 @@ def _cau(s: str) -> str:
     return s if s.endswith((".", "?", "!", "…")) else s + "."
 
 
+# ---- MH-1: dữ liệu hình minh hoạ (web chỉ vẽ theo đây, không tự suy ra) ----------
+def _mh_que(k: str) -> dict:
+    from app.calc import kinhdich_vendor as kv
+    ha, thuong = next((h, t) for h, row in kv.KW.items() for t, so in row.items() if so == int(k))
+    return {"kieu": "que", "so": int(k), "hao": list(kv.TRI_BITS[ha]) + list(kv.TRI_BITS[thuong])}
+
+
+def _mh_thap_than(ten: str) -> dict:
+    from app.calc import battu as bt
+    from app.calc.kinhdich_vendor import KHAC, SINH
+    from app.calc.lunar import CAN
+    can = next(c for c in CAN if bt.thap_than("Giáp", c) == ten)      # quan hệ không phụ thuộc nhật chủ chọn làm mốc
+    ta, no = bt.CAN_NH[0], bt.CAN_NH[CAN.index(can)]
+    quan_he = ("dong_hanh" if ta == no else "ta_sinh" if SINH[ta] == no else "ta_khac" if KHAC[ta] == no
+               else "khac_ta" if KHAC[no] == ta else "sinh_ta")
+    return {"kieu": "thap_than", "ten": ten, "quan_he": quan_he, "cung_am_duong": CAN.index(can) % 2 == 0}
+
+
+def _mh_nhat_chu(can: str) -> dict:
+    from app.calc import battu as bt
+    from app.calc.lunar import CAN
+    i = CAN.index(can)
+    return {"kieu": "nhat_chu", "can": can, "hanh": bt.CAN_NH[i], "duong": i % 2 == 0}
+
+
 # ---- Số ------------------------------------------------------------------------
 def _trang_so(so: str) -> dict:
     kb, sau = _doc("thanso_meanings.json"), _doc("thanso_depth.json")
@@ -96,6 +121,7 @@ def _trang_so(so: str) -> dict:
         "nguon": [f"{s['ten']} — {s['mo_ta']}" for s in kb["sources"]] + [sau["_nguon"]],
         "trang_thai": "da_duyet",
         "lien_quan": [{"loai": "so", "slug": s} for s in dict.fromkeys(lien)],
+        "minh_hoa": {"kieu": "so", "so": int(so), "so_cai": so in _SO_GOC, "so_goc": int(_SO_GOC.get(so, so))},
     }
 
 
@@ -143,6 +169,7 @@ def _trang_que(k: str, slug: str) -> dict:
         "nguon": list(kb["source"].values()),
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "que", "slug": ds[j][1]} for j in (i - 1, i + 1) if 0 <= j < len(ds)],
+        "minh_hoa": _mh_que(k),
     }
 
 
@@ -178,6 +205,7 @@ def _trang_sao(ten: str, slug: str) -> dict:
         "nguon": list(kb["source"].values()),
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "sao", "slug": ds[j][1]} for j in (i - 1, i + 1) if 0 <= j < len(ds)],
+        "minh_hoa": {"kieu": "sao", "ten": ten, "ten_han": s["ten_han"], "ngu_hanh": s["ngu_hanh"]},
     }
 
 
@@ -212,6 +240,7 @@ def _trang_cung(ten: str, slug: str) -> dict:
         "nguon": list(kb["source"].values()),
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "cung", "slug": ds[j % len(ds)][1]} for j in (i - 1, i + 1)],
+        "minh_hoa": {"kieu": "cung", "chi_so": list(kb["cung"]).index(ten), "vong": list(kb["cung"])},
     }
 
 
@@ -241,6 +270,7 @@ def _trang_thap_than(ten: str, slug: str) -> dict:
         "nguon": list(kb["source"].values()),
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "thap_than", "slug": ds[j % len(ds)][1]} for j in (i - 1, i + 1)],
+        "minh_hoa": _mh_thap_than(ten),
     }
 
 
@@ -277,6 +307,7 @@ def _trang_nhat_chu(can: str, slug: str) -> dict:
         "nguon": list(kb["source"].values()),
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "nhat_chu", "slug": ds[j % len(ds)][1]} for j in (i - 1, i + 1)],
+        "minh_hoa": _mh_nhat_chu(can),
     }
 
 
