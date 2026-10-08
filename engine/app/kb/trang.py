@@ -23,7 +23,8 @@ CAP_NHAT = "2026-10-07"
 # Quyết định chủ dự án: index cả nội dung nháp AI (vẫn hiển thị nhãn nháp).
 INDEX_NHAP_AI = True
 
-LOAI = ("so", "que", "sao", "cung", "thap_than", "nhat_chu", "cap_so", "nghe", "tinh_yeu", "nam_ca_nhan", "no_nghiep")
+LOAI = ("so", "que", "sao", "cung", "thap_than", "nhat_chu", "cap_so", "nghe", "tinh_yeu", "nam_ca_nhan", "no_nghiep",
+        "sao_cung")
 _SO = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33")
 _SO_GOC = {"11": "2", "22": "4", "33": "6"}
 _LINH_VUC_QUE = {"cong_viec": "Công việc", "tinh_cam": "Tình cảm", "gia_dinh": "Gia đình",
@@ -206,6 +207,9 @@ def _trang_sao(ten: str, slug: str) -> dict:
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "sao", "slug": ds[j][1]} for j in (i - 1, i + 1) if 0 <= j < len(ds)],
         "minh_hoa": {"kieu": "sao", "ten": ten, "ten_han": s["ten_han"], "ngu_hanh": s["ngu_hanh"]},
+        # SEO-H: 12 trang "sao ở từng cung"
+        "trang_con": {"tieu_de": f"{ten} ở từng cung",
+                      "ds": [{"loai": "sao_cung", "slug": f"{_slug(ten)}-cung-{_slug(c)}"} for c in o_cung]},
     }
 
 
@@ -241,6 +245,10 @@ def _trang_cung(ten: str, slug: str) -> dict:
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "cung", "slug": ds[j % len(ds)][1]} for j in (i - 1, i + 1)],
         "minh_hoa": {"kieu": "cung", "chi_so": list(kb["cung"]).index(ten), "vong": list(kb["cung"])},
+        # SEO-H: 14 trang "chính tinh ở cung này"
+        "trang_con": {"tieu_de": f"14 chính tinh ở cung {ten}",
+                      "ds": [{"loai": "sao_cung", "slug": f"{_slug(sao)}-cung-{_slug(ten)}"}
+                             for sao, o in kb["sao_cung"].items() if ten in o]},
     }
 
 
@@ -315,6 +323,9 @@ _TRANG = {"cung": (_ds_cung, _trang_cung), "thap_than": (_ds_thap_than, _trang_t
           "nhat_chu": (_ds_nhat_chu, _trang_nhat_chu)}
 from app.kb import trang_thanso as _tts  # noqa: E402 — SEO-G: cụm trang thần số theo nhu cầu tìm kiếm
 _TRANG.update(_tts.TRANG)
+from app.kb import trang_tuvi as _ttv  # noqa: E402 — SEO-H: 168 trang sao × cung Tử vi
+_TRANG.update(_ttv.TRANG)
+_TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN}
 
 
 # ---- API công khai của module -------------------------------------------------
@@ -326,15 +337,15 @@ def _ten_ngan(loai: str, slug: str) -> str:
         return f"Quẻ {_doc('kinhdich_kb.json')['que'][k]['ten']}"
     if loai in _TRANG:
         ten = dict((s, t) for t, s in _TRANG[loai][0]())[slug]
-        if loai in _tts.TEN_NGAN:
-            return _tts.TEN_NGAN[loai](ten)
+        if loai in _TEN_NGAN:
+            return _TEN_NGAN[loai](ten)
         return {"cung": f"Cung {ten}", "thap_than": ten, "nhat_chu": f"Nhật chủ {ten}"}[loai]
     return f"Sao {dict((s, t) for t, s in _ds_sao())[slug]}"
 
 
 def _hoan_tat(t: dict) -> dict:
     t["index"] = t["trang_thai"] == "da_duyet" or INDEX_NHAP_AI
-    for l in t["lien_quan"]:
+    for l in t["lien_quan"] + (t.get("trang_con") or {}).get("ds", []):
         l["tieu_de"] = _ten_ngan(l["loai"], l["slug"])
     t["cap_nhat"] = CAP_NHAT
     return t

@@ -120,6 +120,17 @@ export default async function Page({ params: thamSo }: Props) {
         ))}
       </div>
 
+      {t.trang_con && t.trang_con.ds.length > 0 && (
+        <nav className="mt-10" aria-labelledby="trang-con">
+          <h2 id="trang-con" className="text-2xl">{t.trang_con.tieu_de}</h2>
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+            {t.trang_con.ds.map((l) => (
+              <li key={l.slug}><Link href={duongTrang(l.loai, l.slug)} className="glass flex items-center justify-between rounded-xl px-4 py-3 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg">{l.tieu_de}<ArrowRight className="size-4 shrink-0 text-gold/70" aria-hidden /></Link></li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
       <section className="mt-10" aria-labelledby="hoi-dap">
         <h2 id="hoi-dap" className="text-2xl">Câu hỏi thường gặp</h2>
         <dl className="mt-4 space-y-4">
