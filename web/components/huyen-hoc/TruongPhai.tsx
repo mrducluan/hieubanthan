@@ -6,6 +6,16 @@ import { Layers } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import type { PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
+import type { PhaiLuuNguyet } from "@/app/api/tuvi/schema";
+
+/** TV-LN — tên ngắn 5 phái lưu nguyệt (cách tính đầy đủ do engine trả về, hiện ở khung Lưu nguyệt). */
+export const TEN_PHAI_LUU_NGUYET: Record<PhaiLuuNguyet, string> = {
+  dau_quan_thai_tue: "Đẩu Quân từ Thái Tuế (phổ biến)",
+  dau_quan_tieu_han: "Đẩu Quân từ Tiểu hạn",
+  tieu_han: "Tháng Giêng tại Tiểu hạn",
+  luu_nien: "Tháng Giêng tại cung lưu niên",
+  dia_chi_thang: "Theo địa chi của tháng",
+};
 
 type Viet = "viet" | "trung";
 type TN = "thang_sau" | "thang_chinh";
@@ -25,6 +35,7 @@ export function TruongPhai(p: {
   phaiDoSang: PhaiDoSang; setPhaiDoSang: (v: PhaiDoSang) => void;
   hoaLinh: Viet; setHoaLinh: (v: Viet) => void;
   thangNhuan: TN; setThangNhuan: (v: TN) => void; coNhuan: boolean;
+  luuNguyet: PhaiLuuNguyet; setLuuNguyet: (v: PhaiLuuNguyet) => void;
 }) {
   return (
     <section aria-labelledby="tieu-de-truong-phai" className="rounded-2xl border border-line/70 bg-surface/40 px-4 py-3 sm:px-5" data-testid="truong-phai">
@@ -63,6 +74,12 @@ export function TruongPhai(p: {
               <TabsTrigger value="trung" title="Phái Trung Châu (thư viện iztro)">Trung Châu</TabsTrigger>
             </TabsList>
           </Tabs>
+        </Dong>
+        <Dong ten="Hạn tháng (lưu nguyệt)" goiY="Các phái khác nhau ở cung khởi tháng Giêng — cùng một tháng có thể rơi vào cung khác. Lá số gốc không đổi; chỉ đổi cung của từng tháng ở khung Lưu nguyệt và câu trả lời về tháng.">
+          <select aria-label="Phái tính lưu nguyệt" value={p.luuNguyet} onChange={(e) => p.setLuuNguyet(e.target.value as PhaiLuuNguyet)}
+            className="h-9 rounded-full border border-line bg-surface/60 px-3 text-sm text-fg focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">
+            {(Object.keys(TEN_PHAI_LUU_NGUYET) as PhaiLuuNguyet[]).map((k) => <option key={k} value={k}>{TEN_PHAI_LUU_NGUYET[k]}</option>)}
+          </select>
         </Dong>
         {p.coNhuan && (
           <div data-testid="chon-thang-nhuan">

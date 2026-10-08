@@ -5,6 +5,10 @@
 // (14 chính tinh, 12 cung) là SPEC-005 — chờ quyết định nguồn tri thức.
 import { z } from "zod";
 
+/** TV-LN — 5 phái tính cung tháng Giêng của lưu nguyệt (engine: calc/tuvi_luu_nguyet.PHAI). */
+export const PHAI_LUU_NGUYET = ["dau_quan_thai_tue", "dau_quan_tieu_han", "tieu_han", "luu_nien", "dia_chi_thang"] as const;
+export type PhaiLuuNguyet = (typeof PHAI_LUU_NGUYET)[number];
+
 export const ChartInput = z.object({
   birth_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Định dạng YYYY-MM-DD"),
   birth_time: z.string().regex(/^\d{2}:\d{2}$/, "Định dạng HH:MM"),
@@ -23,6 +27,8 @@ export const ChartInput = z.object({
   thang_nhuan: z.enum(["thang_sau", "thang_chinh"]).optional(),
   /** TV-LICH — âm lịch Việt Nam (mặc định) | lịch Trung Quốc. */
   lich: z.enum(["viet", "trung"]).optional(),
+  /** TV-LN — phái tính lưu nguyệt (tháng hạn). */
+  luu_nguyet: z.enum(PHAI_LUU_NGUYET).optional(),
 });
 export type ChartInputT = z.infer<typeof ChartInput>;
 
@@ -140,7 +146,7 @@ export const LaSoOutput = z.object({
   co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })),
   /** TV-PHAI — trường phái đang dùng cho lá số này. */
   phai: z.object({ hoa_linh: z.string(), thang_nhuan: z.string(), co_the_doi_thang_nhuan: z.boolean(),
-    lich: z.string().optional(), lich_khac: z.boolean().optional() }).optional(),
+    lich: z.string().optional(), lich_khac: z.boolean().optional(), luu_nguyet: z.string().optional() }).optional(),
 });
 export type LaSoOutputT = z.infer<typeof LaSoOutput>;
 
@@ -169,3 +175,37 @@ export const VanHanOutput = z.object({
   luu_nien: LopHan,
 });
 export type VanHanOutputT = z.infer<typeof VanHanOutput>;
+
+// TV-LN — lưu nguyệt cả năm âm (/v1/tuvi/luu-nguyet). Engine tính hết; web chỉ hiển thị.
+export const LuuNguyetInput = z.object({
+  la_so: ChartInput,
+  nam_am: z.number().int().min(1900).max(2100).optional(),
+});
+const TenCung = z.object({ chi: z.string(), cung_goc: z.string() });
+const ThangLuu = z.object({
+  thang: z.number(), nhuan: z.boolean(), phan: z.enum(["ca_thang", "nua_dau", "nua_sau"]), thang_tinh: z.number(),
+  ngay_am: z.array(z.number()), tu: z.string(), den: z.string(), can_chi: z.string(),
+  chi: z.string(), cung_goc: z.string(), chu_de: z.string().nullable(),
+  chinh_tinh: z.array(z.object({ ten: z.string(), do_sang: z.string().nullable(), tu_hoa_goc: z.string().nullable() })),
+  phu_tinh: z.object({ cat: z.array(z.string()), sat: z.array(z.string()) }),
+  tuan_triet: z.array(z.string()),
+  tam_phuong: z.array(z.string()),
+  tu_hoa_thang: z.array(z.object({ hoa: z.string(), sao: z.string(), cung_goc: z.string().nullable(),
+    vao_cung_thang: z.boolean(), vao_tam_phuong: z.boolean() })),
+  trung: z.array(z.enum(["dai_han", "luu_nien", "tieu_han"])),
+  chieu: z.array(z.enum(["dai_han", "luu_nien", "tieu_han"])),
+  xu_huong: z.object({ cat: z.array(z.string()), sat: z.array(z.string()), ket: z.string() }),
+});
+export const LuuNguyetOutput = z.object({
+  engine_version: z.string(),
+  nam_am: z.number(), can_chi_nam: z.string(),
+  phai: z.enum(PHAI_LUU_NGUYET), phai_ten: z.string(), phai_cach_tinh: z.string(), phai_nguon: z.string(),
+  thang_sinh: z.number(), gio_sinh: z.string(), thang_nhuan: z.string(), tuoi_mu: z.number(),
+  han_nam: z.object({ dai_han: TenCung, luu_nien: TenCung, tieu_han: TenCung }),
+  thang: z.array(ThangLuu),
+  so_sanh_phai: z.record(z.object({ ten: z.string(), thang_gieng: TenCung, theo_thang: z.array(z.string()) })),
+  cac_phai: z.record(z.object({ ten: z.string(), cach_tinh: z.string(), nguon: z.string() })),
+  uu_tien: z.string(),
+  luu_y: z.string(),
+});
+export type LuuNguyetOutputT = z.infer<typeof LuuNguyetOutput>;

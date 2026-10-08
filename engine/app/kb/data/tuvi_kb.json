@@ -879,11 +879,14 @@
   },
   "luu_nguyet": {
    "tieu_de": "Xem theo tháng",
-   "noi_dung": "Lưu nguyệt (từng tháng) là nơi tử vi mỏng căn cứ nhất; hệ thống không xem theo tháng, chỉ nêu chủ đề năm và giai đoạn.",
+   "noi_dung": "Lưu nguyệt (hạn từng tháng) xét cung nào làm \"Mệnh của tháng\". Các phái khác nhau ở cung khởi tháng Giêng: phổ biến nhất là Đẩu Quân (từ cung Thái Tuế năm xem đếm nghịch tới tháng sinh, thuận tới giờ sinh); có phái khởi từ Tiểu hạn, từ cung lưu niên, hoặc theo địa chi của tháng. Bạn chọn phái trong khung \"Trường phái\". Lưu nguyệt là lớp mỏng căn cứ nhất của tử vi: tháng chỉ tô thêm màu cho năm và cho đại hạn, không đoán được biến cố.",
    "tu_khoa": [
     "thang nao",
     "luu nguyet",
-    "theo thang"
+    "theo thang",
+    "nguyet han",
+    "dau quan",
+    "han thang"
    ],
    "source_id": "tuvi_vn",
    "school_id": "nam_phai"
@@ -900,7 +903,8 @@
   "chi_tiet": "Chế độ chi tiết: có nêu xu hướng thuận/nghịch của năm theo sao tốt xấu, nhưng không phán tai nạn, bệnh tật, kiện tụng hay con số tiền — ba lớp hạn đọc theo thứ tự đại hạn > lưu niên > tiểu hạn.",
   "iztro": "Lá số an bằng iztro (khung Tử Vi Đẩu Số); chính tinh và tứ hoá trùng các nguồn đối chiếu, bộ phụ tinh Nam phái chưa đối chiếu đủ.",
   "tat_ach": "Cung Tật Ách chỉ nói về cách bạn chịu áp lực; mọi vấn đề sức khoẻ cần hỏi bác sĩ.",
-  "han_su_kien": "Tử vi không đoán được biến cố cụ thể (tai nạn, kiện tụng, mất tiền, năm cưới, năm có con). Phần dưới chỉ nêu chủ đề và xu hướng của năm để bạn chuẩn bị."
+  "han_su_kien": "Tử vi không đoán được biến cố cụ thể (tai nạn, kiện tụng, mất tiền, năm cưới, năm có con). Phần dưới chỉ nêu chủ đề và xu hướng của năm để bạn chuẩn bị.",
+  "luu_nguyet": "Lưu nguyệt đọc như chủ đề nổi lên trong tháng, xếp sau đại hạn, lưu niên và tiểu hạn. Đổi phái có thể đổi cung tháng — xem bảng so sánh các phái trước khi dựa vào một tháng cụ thể."
  },
  "doc_tung_buoc": {
   "menh_than": {

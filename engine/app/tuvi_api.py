@@ -19,7 +19,9 @@ from pydantic import BaseModel, ConfigDict, Field
 from app import config
 from app.kb import tu_dien
 from app.calc import can_chi, dia_ly, lunar, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao, tuvi_thai_tue_vn
+from app.calc import tuvi_luu_nguyet as calc_luu_nguyet
 from app.hoidap import tuvi as hoidap_tv
+from app.luangiai import tuvi_luu_nguyet as luan_luu_nguyet
 from app import nhat_ky
 from app.kb import tuvi_kb
 from app.config import ENGINE_VERSION, HourConfidence, Region
@@ -49,6 +51,9 @@ class TuanTrietInput(BaseModel):
     thang_nhuan: Literal["thang_sau", "thang_chinh"] = "thang_sau"
     # TV-LICH (chủ dự án yêu cầu 2026-10-02): âm lịch Việt Nam (mặc định) ↔ lịch Trung Quốc (cách iztro tự đổi).
     lich: Literal["viet", "trung"] = "viet"
+    # TV-LN (chủ dự án yêu cầu 2026-10-08): phái tính lưu nguyệt (tháng hạn), người dùng chọn.
+    luu_nguyet: Literal["dau_quan_thai_tue", "dau_quan_tieu_han", "tieu_han", "luu_nien",
+                        "dia_chi_thang"] = "dau_quan_thai_tue"
 
 
 class _DauVao:
@@ -127,6 +132,7 @@ class _DauVao:
         self.duong_goc, self.tb, self.ngay_kinh_tuyen = duong_goc, tb, ngay_kinh_tuyen
         self.am = (ld, lm, ly, leap)
         self.phai = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan, "lich": inp.lich,
+                     "luu_nguyet": inp.luu_nguyet,
                      "co_the_doi_thang_nhuan": bool(leap) and ld > 15,
                      # ngày sinh này có ngày âm khác nhau giữa lịch Việt và lịch Trung Quốc → lá số có thể khác
                      "lich_khac": self.lich_khac}
@@ -385,6 +391,33 @@ def api_van_han(inp: VanHanInput) -> dict:
             "can_chi_nam_xem": f"{can} {chi}", **vh}
 
 
+class LuuNguyetInput(BaseModel):
+    """TV-LN — lưu nguyệt cả năm âm theo phái `la_so.luu_nguyet` (kèm cung tháng của mọi phái để so)."""
+    model_config = ConfigDict(extra="forbid")
+
+    la_so: TuanTrietInput
+    nam_am: int | None = Field(default=None, ge=1900, le=2100, description="Năm âm lịch; mặc định năm âm hiện tại")
+
+
+@router.post("/luu-nguyet")
+def api_luu_nguyet(inp: LuuNguyetInput) -> dict:
+    dv = _DauVao(inp.la_so)
+    cal = dv.tb.calendar_dt
+    nam = inp.nam_am
+    if nam is None:
+        hom_nay = _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
+        nam = lunar.solar_to_lunar(hom_nay.day, hom_nay.month, hom_nay.year, config.CALENDAR_MERIDIAN_TZ)[2]
+    sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender,
+            "tz_lich": dv.tz_lich, **dv.tuy_chon}
+    try:
+        kq = luan_luu_nguyet.lap_nam(sinh, nam, inp.la_so.luu_nguyet)
+    except tuvi_an_sao.AnSaoLoi as e:
+        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+    return {"engine_version": ENGINE_VERSION, **kq,
+            "cac_phai": {k: {"ten": v["ten"], "cach_tinh": v["cach_tinh"], "nguon": v["nguon"]}
+                         for k, v in calc_luu_nguyet.PHAI.items()}}
+
+
 class HoiTVInput(BaseModel):
     """Hỏi đáp Tử vi (HH-2). `la_so` tuỳ chọn: câu hỏi chung (sao × cung, thuật ngữ) không cần."""
     model_config = ConfigDict(extra="forbid")
@@ -403,7 +436,8 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
         dv = _DauVao(inp.la_so)
         cal = dv.tb.calendar_dt
         ti = tuvi_an_sao.time_index(cal.hour, cal.minute)
-        sinh = {"ngay": cal.date(), "ti": ti, "gioi_tinh": inp.la_so.gender, "tz_lich": dv.tz_lich, **dv.tuy_chon}
+        sinh = {"ngay": cal.date(), "ti": ti, "gioi_tinh": inp.la_so.gender, "tz_lich": dv.tz_lich, **dv.tuy_chon,
+                "luu_nguyet": inp.la_so.luu_nguyet}
         flags = list(dv.flags)
         if ti == 12:
             flags.append({"loai": "ty_conflict", "chi_tiet": (
