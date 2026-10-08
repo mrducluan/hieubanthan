@@ -31,7 +31,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       cache: "no-store",
     });
     const body: unknown = await r.json().catch(() => null);
-    if (!r.ok) { const l = loiEngine(r.status, await r.json().catch(() => null)); return NextResponse.json({ error: l.error }, { status: l.status }); }
+    if (!r.ok) { const l = loiEngine(r.status, body); return NextResponse.json({ error: l.error }, { status: l.status }); }
     return NextResponse.json(body);
   } catch (e) {
     baoLoi(e, { noi: "api", duong: new URL(req.url).pathname });

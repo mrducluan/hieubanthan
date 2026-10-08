@@ -7,7 +7,12 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const code = url.searchParams.get("code");
   const tiep = url.searchParams.get("tiep") ?? "/tai-khoan";
-  const dich = new URL(tiep.startsWith("/") && !tiep.startsWith("//") ? tiep : "/tai-khoan", url.origin);
+  // SEC-1: chống chuyển hướng mở — "/\\evil.com" trình duyệt hiểu thành "//evil.com". Chỉ nhận đích CÙNG origin.
+  let dich = new URL("/tai-khoan", url.origin);
+  try {
+    const d = new URL(tiep, url.origin);
+    if (d.origin === url.origin && tiep.startsWith("/")) dich = d;
+  } catch { /* giữ mặc định */ }
   const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL, key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!code || !sbUrl || !key) return NextResponse.redirect(new URL("/dang-nhap?loi=1", url.origin));
 

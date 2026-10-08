@@ -9,14 +9,15 @@ Mọi response đều mang `engine_version` — bắt buộc để tái lập k�
 from __future__ import annotations
 
 import datetime as _dt
+import hmac
 import os
-from typing import Literal
+from typing import Annotated, Literal
 
 from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
-from app import config, giam_sat
+from app import config, giam_sat, gioi_han
 from app.kb import tu_dien
 from app.calc import thanso, timebase
 from app.kb import store as kb_store
@@ -34,10 +35,16 @@ from app.tuvi_api import router as tuvi_router
 
 giam_sat.khoi_tao()   # Sentry — chỉ bật khi có SENTRY_DSN, không gửi dữ liệu cá nhân
 
+# SEC-1: trang tài liệu API (/docs, /redoc, /openapi.json) chỉ mở khi chạy máy — production (Render) tắt, không phô
+# bản đồ endpoint cho người dò.
+_TAI_LIEU = not os.environ.get("RENDER")
 app = FastAPI(
     title="HieuBanThan Engine",
     version=ENGINE_VERSION,
     description="Tầng CALC — tính toán tất định, không LLM.",
+    docs_url="/docs" if _TAI_LIEU else None,
+    redoc_url="/redoc" if _TAI_LIEU else None,
+    openapi_url="/openapi.json" if _TAI_LIEU else None,
 )
 
 
@@ -52,12 +59,17 @@ app = FastAPI(
 async def require_engine_key(request: Request, call_next):
     expected = os.environ.get("ENGINE_API_KEY")
     if expected and request.url.path != "/health":
-        if request.headers.get("x-engine-key") != expected:
+        # SEC-1: so sánh hằng thời gian (không lộ khoá qua thời gian phản hồi).
+        if not hmac.compare_digest(request.headers.get("x-engine-key", "").encode(), expected.encode()):
             return JSONResponse(
                 {"detail": "Thiếu hoặc sai X-Engine-Key"}, status_code=401
             )
-    # RL-1: web chuyển IP người dùng qua `x-nguoi-goi` → băm ngay, chỉ dùng cho hạn mức lượt AI.
-    tok = ngan_sach.NGUOI_GOI.set(ngan_sach.bam(request.headers.get("x-nguoi-goi")))
+    # RL-1: web chuyển IP người dùng qua `x-nguoi-goi` → băm ngay (hạn mức lượt AI + hạn mức yêu cầu SEC-1).
+    ai = ngan_sach.bam(request.headers.get("x-nguoi-goi"))
+    if request.url.path.startswith("/v1/") and not gioi_han.xin(ai):
+        return JSONResponse({"detail": "Bạn thao tác quá nhanh — vui lòng chờ một phút rồi thử lại."},
+                            status_code=429, headers={"Retry-After": "60"})
+    tok = ngan_sach.NGUOI_GOI.set(ai)
     try:
         return await call_next(request)
     finally:
@@ -82,6 +94,8 @@ def health() -> dict:
         "ok": True,
         "engine_version": ENGINE_VERSION,
         "ty_boundary_set": config.TY_BOUNDARY_POLICY is not None,
+        # SEC-1: production phải là True (engine chỉ trả lời web có khoá). False = ai cũng gọi thẳng được.
+        "khoa_engine": bool(os.environ.get("ENGINE_API_KEY")),
     }
 
 
@@ -121,6 +135,8 @@ class ThanSoInput(BaseModel):
         cleaned = [t.strip() for t in v if t.strip()]
         if not cleaned:
             raise ValueError("Cần ít nhất một tên không rỗng")
+        if any(len(t) > 80 for t in cleaned):          # SEC-1: chặn chuỗi khổng lồ
+            raise ValueError("Tên tối đa 80 ký tự")
         return cleaned
 
     def kiem_tra_ngay(self) -> None:
@@ -177,7 +193,7 @@ def api_luan_giai_van(inp: ThanSoInput) -> dict:
 
 class NguoiKia(BaseModel):
     """Người thứ hai (người yêu, con, sếp…). Tên không bắt buộc."""
-    ho_ten: list[str] | None = Field(default=None, max_length=5)
+    ho_ten: list[Annotated[str, Field(max_length=80)]] | None = Field(default=None, max_length=5)
     ngay: int = Field(ge=1, le=31)
     thang: int = Field(ge=1, le=12)
     nam: int = Field(ge=1900, le=2100)
