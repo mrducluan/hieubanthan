@@ -18,11 +18,11 @@
 
 1. [x] Tên miền `hieuban.com` trỏ về Vercel (A1, A2)
 2. [x] Chạy migration 0001–0009 (B1, B2)
-3. [ ] **Ba biến môi trường bắt buộc để mở công khai** → mục G (5 phút) — **làm ngay**
-4. [ ] **Merge PR "mở công khai"** → web hết hỏi mật khẩu
-5. [ ] **Khai báo Google Search Console** → mục H (10 phút) — để Google index 122 trang kiến thức
-6. [ ] **Điền thông tin pháp lý** → mục E — nên làm sớm vì web đã công khai
-7. [ ] Các việc còn lại → mục D
+3. [x] Ba biến môi trường bắt buộc (mục G) — anh báo xong 2026-10-08
+4. [x] Merge PR "mở công khai" (#50) + giới hạn lượt AI (#51)
+5. [ ] **Google Search Console + Google Tag Manager / Analytics** → mục H (15–20 phút) — em đã làm sẵn phần code
+6. [ ] **Pháp lý còn lại** → mục E (tên đơn vị + email đã có trong code; còn MST, địa chỉ, luật sư)
+7. [ ] Các việc còn lại → mục D (em đã ghi rõ việc nào em làm, việc nào cần anh)
 
 ---
 
@@ -47,15 +47,52 @@ cd web && node scripts/kiem-tra-trien-khai.mjs https://hieuban.com
 
 Phải ra 14/14 ✓. Mở `hieuban.com` trên điện thoại (cả trong Zalo/Facebook) — vào thẳng, không hỏi mật khẩu.
 
-## H. Google Search Console (để Google tìm thấy web)
+## H. Google Search Console + Google Tag Manager + Google Analytics
 
-1. search.google.com/search-console → **Add property** → chọn **Domain** → nhập `hieuban.com`.
-2. Google đưa một bản ghi **TXT** (`google-site-verification=…`). Thêm vào DNS GoDaddy (như bước A2: tab DNS → Add →
-   Type TXT, Name `@`, Value dán chuỗi đó). Quay lại Google bấm **Verify** (có thể chờ vài phút đến vài giờ).
-3. Mục **Sitemaps** → nhập `sitemap.xml` → Submit.
-4. Tuỳ chọn: Bing Webmaster Tools → **Import from Google Search Console** (1 cú bấm), để Bing/Copilot cũng thấy.
+**Vì sao em không tự làm được:** công cụ Google đang kết nối với phiên làm việc này là tài khoản của một doanh nghiệp
+khác (Nha Khoa Tâm Đức), không có `hieuban.com`. Em **không đụng** vào tài khoản đó. Phần code em đã làm xong
+(PR SEO-D), anh chỉ cần bấm trong tài khoản Google của anh và dán mã vào Vercel.
 
-Sau 1–2 tuần, Search Console cho biết trang nào đã được index và người ta tìm từ khoá gì để vào web.
+### H1. Search Console (để Google tìm thấy web) — chọn MỘT trong hai cách xác minh
+
+**Cách 1 — DNS (khuyên dùng, xác minh cả `www` lẫn mọi đường dẫn):**
+1. search.google.com/search-console → **Add property** → ô **Domain** → nhập `hieuban.com` → Continue.
+2. Google đưa chuỗi `google-site-verification=…`. GoDaddy → `hieuban.com` → **DNS** → **Add New Record** → Type **TXT**,
+   Name `@`, Value dán nguyên chuỗi → Save.
+3. Quay lại Google bấm **Verify** (DNS có thể mất vài phút đến vài giờ; báo lỗi thì đợi rồi bấm lại).
+
+**Cách 2 — thẻ meta (nhanh, không đụng DNS):**
+1. Add property → ô **URL prefix** → `https://hieuban.com` → mục **HTML tag** → chép phần `content="…"` (chỉ chuỗi
+   trong ngoặc kép).
+2. Vercel → Environment Variables → `GOOGLE_SITE_VERIFICATION` = chuỗi đó → **Redeploy** → quay lại Google bấm Verify.
+
+**Sau khi xác minh:**
+- [ ] Mục **Sitemaps** → nhập `sitemap.xml` → Submit.
+- [ ] Mục **URL Inspection** → dán `https://hieuban.com/` → **Request indexing** (làm thêm cho `/kien-thuc`, `/tu-dien`).
+- [ ] Bing Webmaster Tools (bing.com/webmasters) → **Import from Google Search Console** — Bing cũng cấp dữ liệu cho
+  Copilot và ChatGPT tìm kiếm. (Muốn xác minh Bing bằng thẻ meta: env `BING_SITE_VERIFICATION`.)
+- [ ] Nếu muốn em tự gửi sitemap, đọc báo cáo từ khoá hằng tuần: kết nối tài khoản Google có `hieuban.com` vào
+  claude.ai (Settings → Connectors) rồi nhắn em.
+
+### H2. Google Analytics 4 + Google Tag Manager
+
+Code đã sẵn: **chỉ tải mã Google sau khi người dùng bấm "Đồng ý"** ở hộp hỏi cookie (luật 91/2025 cấm đồng ý mặc
+định). Người dùng bấm "Từ chối" thì web vẫn dùng bình thường. Chính sách quyền riêng tư đã ghi thêm Google Analytics.
+
+- [x] **GTM đã gắn vào web**: container `GTM-KNZL39CS` (anh gửi 2026-10-08) là mặc định trong code — không cần đặt
+  biến trên Vercel. Em **không** dán nguyên đoạn mã GTM vào `<head>` vì đoạn đó chạy ngay khi mở trang (trái luật 91/2025
+  khi chưa hỏi đồng ý): web chỉ nạp đúng đoạn mã đó **sau khi người dùng bấm "Đồng ý"**. Phần `<noscript>` (iframe cho
+  trình duyệt tắt JavaScript) bỏ qua, vì không hỏi được đồng ý khi không có JavaScript.
+1. [ ] **GA4:** analytics.google.com → Admin → **Create property** "Hiểu Bản Thân", múi giờ Việt Nam, tiền VND →
+   **Web stream** `https://hieuban.com` → chép **Measurement ID** dạng `G-XXXXXXX`.
+   - Admin → Data retention → **14 months** (khớp chính sách quyền riêng tư).
+   - Admin → Data collection → **tắt** Google signals (không cần, giảm dữ liệu cá nhân).
+2. [ ] **Trong GTM `GTM-KNZL39CS`:** Tags → New → **Google Tag** → Tag ID = `G-XXXXXXX` → Trigger **Initialization – All
+   Pages** → Save → **Submit → Publish**. (Không có bước này thì GTM nạp nhưng chưa gửi gì sang GA4.)
+3. [ ] **Kiểm tra:** mở `hieuban.com` ở cửa sổ ẩn danh → thấy hộp hỏi cookie → bấm Đồng ý → GA4 → Reports → **Realtime**
+   thấy 1 người đang xem. Hoặc dùng nút **Preview** trong GTM (Tag Assistant), nhớ bấm Đồng ý trên trang trước.
+4. Đổi container khác: đặt env `NEXT_PUBLIC_GTM_ID` trên Vercel. Tắt hẳn: đặt `NEXT_PUBLIC_GTM_ID=off`.
+5. [ ] Search Console → Settings → **Associations** → liên kết với GA4 property vừa tạo (xem từ khoá ngay trong GA4).
 
 ---
 
@@ -165,6 +202,13 @@ Biến nào để trống thì footer ẩn dòng đó, còn trang pháp lý ghi 
 | `THONG_TIN_BO_CONG_THUONG_URL` | link online.gov.vn | Chỉ điền **sau khi** đã thông báo Bộ Công Thương |
 | `MXH_FACEBOOK`, `MXH_ZALO`, `MXH_TIKTOK`, `MXH_YOUTUBE` | `https://…` | Trống thì không hiện |
 
+- [x] Tên đơn vị **Hieu Ban Co Ltd** và email **contact@hieuban.com** (anh chốt 2026-10-08): em đặt làm mặc định trong
+  code, footer + trang pháp lý + schema đã hiện. Muốn đổi thì đặt env cùng tên trên Vercel (env thắng mặc định).
+- [ ] **Tạo hộp thư `contact@hieuban.com`** (chưa có thì thư người dùng gửi sẽ bị trả về): Google Workspace, Zoho Mail
+  (gói miễn phí) hoặc chuyển tiếp miễn phí của ImprovMX về Gmail anh. Mỗi dịch vụ đưa bản ghi **MX** (+ TXT SPF) → thêm
+  vào DNS GoDaddy.
+- [ ] Còn trống: `THONG_TIN_MA_SO` (mã số doanh nghiệp), `THONG_TIN_DIA_CHI` — trang pháp lý đang ghi "đang cập nhật".
+
 Ưu tiên điền trước: `THONG_TIN_CHU_SO_HUU` và `THONG_TIN_EMAIL` — web đã công khai nên người dùng cần biết ai vận hành và
 liên hệ ở đâu để xem/sửa/xoá dữ liệu (Luật 91/2025).
 
@@ -219,25 +263,42 @@ Ví Sao, link mời có thưởng chỉ chạy khi đã bật tài khoản.
 | `NHAT_KY_HOI` + `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `1` + khoá Supabase | Muốn ghi câu hỏi đã lọc (không user_id/tên/ngày sinh) cho vòng tự cải thiện |
 | `SENTRY_DSN` | Tuỳ chọn | Báo lỗi engine |
 
-## D. Các việc còn lại (nhắc ở phiên sau)
+## D. Các việc còn lại — em làm gì, anh cần làm gì
 
-- [x] ~~Gate 0 – 20–50 người thử~~ → anh chốt bỏ, mở công khai luôn. Thay bằng: sau 1–2 tuần có PostHog, gửi em
+- [x] ~~Gate 0 – 20–50 người thử~~ → anh chốt bỏ, mở công khai luôn. Thay bằng: sau 1–2 tuần có PostHog + GA4, gửi em
   ảnh/số funnel (vào trang → bắt đầu → xem xong → lưu hồ sơ) và góp ý để em đọc và đề xuất sửa.
-- [ ] **Hạ tầng GĐ1** (nếu chưa làm), xem `docs/TRIEN-KHAI.md`:
-  - [ ] engine Render Singapore gói Starter;
-  - [ ] Sentry;
-  - [ ] báo sập (UptimeRobot);
-  - [ ] sao lưu Supabase hằng tuần.
-- [ ] **Thử la bàn đo hướng nhà trên điện thoại thật** (trang Phong thuỷ → "Đo hướng nhà"):
-  - một iPhone và một Android;
-  - so với la bàn thật, lệch không quá 15° là đạt.
+- [x] **Phái tính tháng hạn Tử vi (lưu nguyệt):** đã làm 5 phái (`docs/LUU-NGUYET-TUVI.md`).
+- [x] **Trang pháp lý + footer** (PL-1) · **giới hạn lượt AI** (RL-1) · **SEO kỹ thuật + bản .md cho bot AI** (SEO-D).
+
+### D1. Chạy bộ 55 câu với AI thật — anh 3 phút, phần còn lại em làm
+1. [ ] openrouter.ai → đăng nhập → **Credits** nạp 5 USD → **Keys** → Create key → chép.
+2. [ ] GitHub → repo `hieubanthan` → **Settings → Secrets and variables → Actions → New repository secret**: tên
+   `OPENROUTER_API_KEY`, giá trị là khoá.
+3. [ ] Nhắn em "đã thêm khoá". **Em tự bấm chạy workflow llm-55** với 2 model, đọc báo cáo, sửa phần lỗi, rồi đề xuất
+   bật AI cho mảng nào đạt ngưỡng. Khi đó anh chỉ cần thêm cùng khoá vào **Render → Environment** (`OPENROUTER_API_KEY`).
+
+### D2. Hạ tầng — anh làm trên tài khoản của anh (em không có quyền vào Render/Sentry)
+- [ ] **Báo sập + giữ engine không ngủ (miễn phí, 5 phút, làm trước):** uptimerobot.com → Add New Monitor → HTTP(s):
+  1. `https://hieuban.com` — mỗi 5 phút;
+  2. địa chỉ engine + `/health` (vd `https://hieubanthan-engine-sg.onrender.com/health`) — mỗi 5 phút.
+
+  Gõ email anh vào mục Alert. Bonus: engine Render gói Free ngủ sau 15 phút không ai gọi — UptimeRobot gọi 5 phút/lần
+  nên engine luôn thức, người vào đầu tiên không phải chờ 30–60 giây.
+- [ ] **Render gói Starter Singapore (7 USD/tháng)** khi người dùng thật tăng (Free chỉ 512 MB RAM, dễ chậm khi
+  nhiều người cùng xem lá số): Render → New → **Blueprint** → chọn repo (đọc sẵn `render.yaml`) → nhập
+  `ENGINE_API_KEY` giống Vercel → Create. Xong đổi `ENGINE_URL` trên Vercel sang địa chỉ mới → Redeploy. Chi tiết:
+  `docs/TRIEN-KHAI.md`.
+- [ ] **Sentry (miễn phí, tuỳ chọn):** sentry.io → tạo 2 project (Next.js, FastAPI) → chép DSN → Vercel
+  `NEXT_PUBLIC_SENTRY_DSN`, Render `SENTRY_DSN`. Code đã tắt gửi body/cookie/IP.
+- [ ] ~~Sao lưu Supabase hằng tuần~~ → **chưa cần** vì chưa bật tài khoản (Supabase hiện chỉ giữ kho tri thức, có bản
+  gốc trong git). Bật tài khoản thì lên Supabase Pro (có sao lưu tự động).
+
+### D3. Việc cần người thật
+- [ ] **Thử la bàn đo hướng nhà trên điện thoại thật** (trang Phong thuỷ → "Đo hướng nhà"): một iPhone + một Android,
+  đứng ở cửa nhìn ra ngoài, so với app la bàn của máy hoặc la bàn thật; lệch ≤ 15° là đạt. Nhắn em: máy gì, lệch bao
+  nhiêu độ. Lệch nhiều thì em chỉnh.
 - [ ] **Duyệt nội dung nháp AI:** quẻ, sao, chân dung thần số, hợp đôi theo quan hệ. Cần người có nghề đọc dần;
-  duyệt xong file nào thì đổi `trang_thai` sang `da_duyet`.
-- [x] **Phái tính tháng hạn Tử vi (lưu nguyệt):** anh chốt cho người dùng tự chọn phái → đã làm 5 phái
-  (`docs/LUU-NGUYET-TUVI.md`).
-- [ ] **Chạy bộ 55 câu chuyên gia với AI thật**: thêm secret `OPENROUTER_API_KEY` vào GitHub
-  (Settings → Secrets → Actions), rồi vào Actions → **llm-55** → Run workflow, chạy 2 model. Gửi em link kết quả.
-  Hướng dẫn chi tiết: `docs/CHAY-55-CAU-AI-THAT.md`.
+  duyệt xong file nào thì đổi `trang_thai` sang `da_duyet` (hoặc nhắn em danh sách, em đổi).
 - [ ] **Phong thuỷ xem qua ảnh nhà:** phần không cần ảnh đã xong (form Khảo sát nhà, schema, luật, công cụ chấm).
   Anh hỗ trợ giúp em 3 việc:
   1. Thu **50–100 bộ ảnh nhà thật**: mỗi nhà 5–15 ảnh (mặt tiền, cửa chính nhìn vào, phòng khách, bếp, phòng ngủ, WC,
@@ -246,8 +307,6 @@ Ví Sao, link mời có thưởng chỉ chạy khi đã bật tài khoản.
   2. Với mỗi nhà, ghi lại: **độ hướng nhà** (đo bằng mục "Đo hướng nhà" trên web), phòng nào ở phương nào, và đánh
      dấu 18 câu hỏi dấu hiệu, chính là các câu trong form Khảo sát nhà. Em chuyển thành nhãn JSON.
      Hướng dẫn: `engine/fixtures/phongthuy_anh/README.md`.
-  3. Chọn model thị giác trên OpenRouter để em chạy thử PT-V2 (dùng chung khoá OpenRouter với mục AI diễn đạt).
-- [x] **Trang Chính sách quyền riêng tư + Điều khoản + Miễn trừ + Giới thiệu + Liên hệ + footer** — đã làm (PL-1);
-  còn điền thông tin ở mục E.
+  3. Chọn model thị giác trên OpenRouter để em chạy thử PT-V2 (dùng chung khoá OpenRouter ở D1).
 
 Vẫn **chặn cho tới khi qua cổng đánh giá**: thanh toán (mua Sao), cộng đồng, marketplace, app di động.

@@ -12,7 +12,7 @@ const MO_TA = "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi
 export const metadata: Metadata = {
   title: "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi, Bát tự",
   description: MO_TA,
-  alternates: { canonical: "/kien-thuc" },
+  alternates: { canonical: "/kien-thuc", types: { "text/markdown": "/kien-thuc.md" } },
   openGraph: { title: "Thư viện kiến thức", description: MO_TA, url: "/kien-thuc", images: ["/og?tieu_de=Th%C6%B0%20vi%E1%BB%87n%20ki%E1%BA%BFn%20th%E1%BB%A9c"] },
 };
 

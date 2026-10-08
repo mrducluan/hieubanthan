@@ -1,4 +1,6 @@
 // Hằng + dựng JSON-LD dùng chung (schema.org). Chỉ định dạng dữ liệu — không tính gì.
+import { vanHanh } from "@/lib/van-hanh";
+
 export const TEN_SITE = "Hiểu Bản Thân";
 export const MO_TA_SITE =
   "Khám phá bản thân qua thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ) — tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Tham khảo văn hoá, không phải dự báo.";
@@ -17,13 +19,23 @@ export function urlDayDu(duong: string): string {
 }
 
 export function ldToChuc() {
+  const vh = vanHanh();
   return {
     "@type": "Organization",
     "@id": `${siteUrl()}/#to-chuc`,
     name: TEN_SITE,
+    ...(vh.chuSoHuu ? { legalName: vh.chuSoHuu } : {}),
     url: siteUrl(),
-    logo: urlDayDu("/icon.svg"),
+    logo: { "@type": "ImageObject", url: urlDayDu("/icon.svg") },
     description: MO_TA_SITE,
+    ...(vh.email ? {
+      email: vh.email,
+      contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: vh.email, availableLanguage: ["vi"] },
+    } : {}),
+    ...(vh.diaChi ? { address: vh.diaChi } : {}),
+    ...(vh.mangXaHoi.length ? { sameAs: vh.mangXaHoi.map((m) => m.url) } : {}),
+    knowsAbout: ["Thần số học Pythagoras", "Tử vi Đẩu Số", "Bát tự Tứ trụ", "Kinh Dịch", "Phong thuỷ Bát trạch", "Huyền Không phi tinh"],
+    areaServed: "VN",
   };
 }
 

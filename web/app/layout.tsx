@@ -6,6 +6,8 @@ import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { GhiGioiThieu } from "@/components/khung/GhiGioiThieu";
 import { GiamSat } from "@/components/khung/GiamSat";
+import { DoLuongGoogle } from "@/components/khung/DoLuongGoogle";
+import { HoiDongYCookie } from "@/components/khung/HoiDongYCookie";
 import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE } from "@/lib/seo";
 import "./globals.css";
 
@@ -43,6 +45,11 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title: "Hiểu Bản Thân — con số nói gì về bạn", description: MO_TA_SITE, images: ["/og"] },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
+  // Xác minh chủ sở hữu (Search Console / Bing Webmaster) bằng thẻ meta — đặt env trên Vercel, không cần sửa DNS.
+  verification: {
+    ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+    ...(process.env.BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } } : {}),
+  },
 };
 
 export const viewport: Viewport = { themeColor: "#0a0a17", width: "device-width", initialScale: 1 };
@@ -64,6 +71,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <TabDuoi />
         <GhiGioiThieu />
         <GiamSat />
+        <HoiDongYCookie />
+        <DoLuongGoogle />
       </body>
     </html>
   );

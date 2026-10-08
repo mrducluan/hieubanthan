@@ -24,6 +24,11 @@ const KHOA_TAT = {
   THONG_TIN_EMAIL_DU_LIEU: "",
   THONG_TIN_DIEN_THOAI: "",
   THONG_TIN_BO_CONG_THUONG_URL: "",
+  GOOGLE_SITE_VERIFICATION: "",
+  BING_SITE_VERIFICATION: "",
+  // GTM giả để thử hộp hỏi cookie (e2e/seo-d.spec.ts chặn mọi request tới Google). Mọi test khác đã "từ chối" sẵn.
+  NEXT_PUBLIC_GTM_ID: "GTM-E2ETEST",
+  NEXT_PUBLIC_GA_ID: "",
 };
 
 // Cloud container có sẵn Chromium ở /opt/pw-browsers (PLAYWRIGHT_BROWSERS_PATH).
@@ -44,6 +49,8 @@ export default defineConfig({
     baseURL: `http://localhost:${WEB_PORT}`,
     trace: "retain-on-failure",
     contextOptions: { reducedMotion: "reduce" },
+    // Hộp hỏi cookie đã trả lời "từ chối" → không che nút ở các test khác; test riêng tự xoá để thử hộp hỏi.
+    storageState: { cookies: [], origins: [{ origin: `http://localhost:${WEB_PORT}`, localStorage: [{ name: "hbt.dong-y-cookie.v1", value: "tu_choi" }] }] },
   },
   projects: [
     {

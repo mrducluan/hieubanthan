@@ -16,8 +16,10 @@ test("chân trang: 4 cột liên kết, cam kết dữ liệu, đường dây kh
   await expect(ct).toContainText("Hồ sơ mặc định chỉ lưu trên máy bạn");
   await expect(ct).toContainText("115");
   await expect(ct).toContainText(`© ${new Date().getFullYear()} Hiểu Bản Thân`);
-  // Chưa cấu hình thông tin vận hành (E2E ép env rỗng) → ẩn dòng, không hiện chữ "đang cập nhật" ở footer.
-  await expect(ct.getByTestId("thong-tin-van-hanh")).toHaveCount(0);
+  // Env rỗng → dùng thông tin chủ dự án đã công bố (tên đơn vị + email); mục chưa có thì ẩn, không hiện "đang cập nhật".
+  await expect(ct.getByTestId("thong-tin-van-hanh")).toContainText("Hieu Ban Co Ltd");
+  await expect(ct.getByTestId("thong-tin-van-hanh")).toContainText("contact@hieuban.com");
+  await expect(ct.getByTestId("thong-tin-van-hanh")).not.toContainText("đang cập nhật");
   await expect(ct).not.toContainText("ĐÃ THÔNG BÁO BỘ CÔNG THƯƠNG");
   for (const [duong, tieuDe] of TRANG) {
     await ct.locator(`a[href="${duong}"]`).first().click();
@@ -37,7 +39,9 @@ test("chính sách quyền riêng tư: căn cứ luật mới, bảng dữ liệ
   await expect(main.getByRole("navigation", { name: "Mục lục" })).toBeVisible();
   await main.getByRole("link", { name: /Quyền của bạn/ }).click();
   await expect(page).toHaveURL(/#quyen$/);
-  await expect(main).toContainText("đang cập nhật");          // chưa điền env → nói rõ, không bịa thông tin
+  await expect(main).toContainText("Hieu Ban Co Ltd");
+  await expect(main).toContainText("contact@hieuban.com");
+  await expect(main).toContainText("đang cập nhật");          // mã số / địa chỉ chưa có → nói rõ, không bịa
 });
 
 test("sitemap có trang pháp lý", async ({ request }) => {

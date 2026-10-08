@@ -1,5 +1,6 @@
-// PL-1 — thông tin đơn vị vận hành hiển thị ở footer + trang pháp lý. Đọc env ở MÁY CHỦ (server component),
-// không hardcode thông tin thật trong code. Thiếu biến nào thì footer ẩn dòng đó; trang pháp lý ghi "đang cập nhật".
+// PL-1 — thông tin đơn vị vận hành hiển thị ở footer + trang pháp lý. Đọc env ở MÁY CHỦ (server component).
+// Tên đơn vị + email liên hệ: chủ dự án công bố 2026-10-08 → làm mặc định (env vẫn ghi đè). Các mục khác chưa có thì
+// footer ẩn dòng đó; trang pháp lý ghi "đang cập nhật".
 // Danh sách biến + ý nghĩa: web/.env.example, docs/VIEC-CUA-ANH.md mục E.
 
 export interface VanHanh {
@@ -20,13 +21,16 @@ export interface VanHanh {
 
 const v = (k: string) => (process.env[k] ?? "").trim() || null;
 
+/** Thông tin chủ dự án đã công bố (2026-10-08). */
+export const DON_VI_MAC_DINH = { ten: "Hieu Ban Co Ltd", email: "contact@hieuban.com" } as const;
+
 export function vanHanh(): VanHanh {
-  const email = v("THONG_TIN_EMAIL");
+  const email = v("THONG_TIN_EMAIL") ?? DON_VI_MAC_DINH.email;
   const mxh: [string, string][] = [
     ["Facebook", "MXH_FACEBOOK"], ["Zalo", "MXH_ZALO"], ["TikTok", "MXH_TIKTOK"], ["YouTube", "MXH_YOUTUBE"],
   ];
   return {
-    chuSoHuu: v("THONG_TIN_CHU_SO_HUU"),
+    chuSoHuu: v("THONG_TIN_CHU_SO_HUU") ?? DON_VI_MAC_DINH.ten,
     maSo: v("THONG_TIN_MA_SO"),
     noiCap: v("THONG_TIN_NOI_CAP"),
     diaChi: v("THONG_TIN_DIA_CHI"),

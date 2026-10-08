@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t.tieu_de,
     description: t.mo_ta,
-    alternates: { canonical: duong },
+    alternates: { canonical: duong, types: { "text/markdown": `${duong}.md` } },
     robots: { index: t.index, follow: true },
     openGraph: {
       type: "article", title: t.tieu_de, description: t.mo_ta, url: duong, locale: "vi_VN", siteName: TEN_SITE,

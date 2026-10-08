@@ -5,7 +5,7 @@ import { CuaVao } from "@/components/hoso/CuaVao";
 import { ChuThichLop } from "@/components/than-so/LopNoiDung";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+export const metadata: Metadata = { alternates: { canonical: "/", types: { "text/markdown": "/index.md" } } };
 
 const MANG = [
   { href: "/tu-vi", ten: "Tử vi", mo: "Lá số 12 cung, đại hạn, lưu niên", Icon: Orbit },
