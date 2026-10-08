@@ -20,6 +20,8 @@ import os
 
 import httpx
 
+from app.narrative import ngan_sach as _ngan_sach
+
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 DEFAULT_MODEL = "anthropic/claude-3.5-sonnet"
 
@@ -94,6 +96,7 @@ def tra_loi_cau_hoi(reading: dict, cau_hoi: str) -> dict:
             + json.dumps(reading, ensure_ascii=False)},
     ]
     try:
+        _ngan_sach.kiem_luot()
         with httpx.Client(timeout=45) as c:
             r = c.post(OPENROUTER_URL,
                        headers={"Authorization": f"Bearer {key}",
@@ -115,6 +118,7 @@ def dien_dat(reading: dict) -> dict:
 
     model = os.environ.get("OPENROUTER_MODEL", DEFAULT_MODEL)
     try:
+        _ngan_sach.kiem_luot()
         with httpx.Client(timeout=40) as c:
             r = c.post(
                 OPENROUTER_URL,

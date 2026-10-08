@@ -8,6 +8,7 @@ Bản gốc (`doan`) luôn đi kèm để người dùng đối chiếu. Không 
 """
 from __future__ import annotations
 
+import contextvars
 import json
 import os
 import re
@@ -18,6 +19,7 @@ import httpx
 from app.kb import tuvi_kb
 from app.narrative import hoi_van
 from app.narrative import llm as _llm
+from app.narrative import ngan_sach as _ngan_sach
 
 THAP_THAN = ["Tỷ Kiên", "Kiếp Tài", "Thực Thần", "Thương Quan", "Thiên Tài", "Chính Tài", "Thất Sát",
              "Chính Quan", "Thiên Ấn", "Chính Ấn"]
@@ -63,6 +65,7 @@ def kiem_tra_chuong(van: str, nguon: str) -> list[str]:
 
 
 def _goi_llm(tieu_de: str, doan: list[str], mo_dun: str) -> str:
+    _ngan_sach.kiem_luot()   # RL-1: mỗi chương một lượt
     key = os.environ.get("OPENROUTER_API_KEY")
     model = os.environ.get("OPENROUTER_MODEL", _llm.DEFAULT_MODEL)
     ten = {"tuvi": "Tử vi", "battu": "Bát tự"}.get(mo_dun, mo_dun)
@@ -101,7 +104,9 @@ def dien_dat(bc: dict, dung_llm: bool = True) -> dict:
     if not (dung_llm and os.environ.get("OPENROUTER_API_KEY")):
         return {**bc, "dien_dat": "mau"}
     with ThreadPoolExecutor(max_workers=8) as ex:
-        chuong = list(ex.map(lambda c: _mot_chuong(c, bc["mo_dun"]), bc["chuong"]))
+        # Luồng phụ không tự mang ngữ cảnh (người gọi cho hạn mức RL-1) → chép ngữ cảnh của request sang.
+        ctx = [contextvars.copy_context() for _ in bc["chuong"]]
+        chuong = list(ex.map(lambda p: p[0].run(_mot_chuong, p[1], bc["mo_dun"]), zip(ctx, bc["chuong"])))
     so_ai = sum(c["che_do"] == "llm" for c in chuong)
     return {**bc, "chuong": chuong,
             "dien_dat": "ai" if so_ai == len(chuong) else "tron" if so_ai else "mau"}

@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import type { ZodTypeAny } from "zod";
-import { goiEngineDaKiem } from "@/lib/proxy";
+import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 
 export const GIA_LUAN_GIAI_SAO = 10;
 
@@ -24,7 +24,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   if (!parsed.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
 
   if (!dangThuSao()) {
-    const kq = await goiEngineDaKiem(parsed.data, path);
+    const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
     return kq.ok ? NextResponse.json({ ...(kq.body as object), phi: MIEN_PHI }) : kq.res;
   }
 
@@ -37,7 +37,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     return NextResponse.json({ error: `Luận giải toàn bộ cần ${GIA_LUAN_GIAI_SAO} Sao — hãy đăng nhập để dùng Sao.`, can: "dang_nhap" }, { status: 401 });
   }
 
-  const kq = await goiEngineDaKiem(parsed.data, path);
+  const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
   if (!kq.ok) return kq.res;                                  // engine lỗi → chưa trừ Sao
 
   const ngay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());

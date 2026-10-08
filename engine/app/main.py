@@ -25,7 +25,7 @@ from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import thanso as luangiai_thanso
 from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
 from app import nhat_ky
-from app.narrative import hoi_van, llm as narrative_llm
+from app.narrative import hoi_van, llm as narrative_llm, ngan_sach
 from app.battu_api import router as battu_router
 from app.kinhdich_api import router as kinhdich_router
 from app.lich_api import router as lich_router
@@ -56,7 +56,12 @@ async def require_engine_key(request: Request, call_next):
             return JSONResponse(
                 {"detail": "Thiếu hoặc sai X-Engine-Key"}, status_code=401
             )
-    return await call_next(request)
+    # RL-1: web chuyển IP người dùng qua `x-nguoi-goi` → băm ngay, chỉ dùng cho hạn mức lượt AI.
+    tok = ngan_sach.NGUOI_GOI.set(ngan_sach.bam(request.headers.get("x-nguoi-goi")))
+    try:
+        return await call_next(request)
+    finally:
+        ngan_sach.NGUOI_GOI.reset(tok)
 
 
 app.include_router(tuvi_router)

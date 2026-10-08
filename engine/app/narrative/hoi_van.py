@@ -22,6 +22,7 @@ import httpx
 
 from app.luangiai import hoi
 from app.narrative import llm as _llm
+from app.narrative import ngan_sach as _ngan_sach
 
 KET = ("Đây là góc nhìn tham khảo văn hoá để bạn tự soi, không phải lời tiên đoán "
        "về đời bạn.")
@@ -152,6 +153,7 @@ RÀNG BUỘC TUYỆT ĐỐI:
 
 
 def _goi_llm(goi: dict, cau_hoi: str) -> str:
+    _ngan_sach.kiem_luot()   # RL-1: hết lượt → HetLuot, nơi gọi rơi về template
     key = os.environ.get("OPENROUTER_API_KEY")
     model = os.environ.get("OPENROUTER_MODEL", _llm.DEFAULT_MODEL)
     gon = {"cau_hoi": cau_hoi, "muc": goi["muc"], "luu_y": goi.get("luu_y")}
