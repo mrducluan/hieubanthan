@@ -70,7 +70,9 @@ export default defineConfig({
     {
       command: `npm run dev -- --port ${WEB_PORT}`,
       url: `http://localhost:${WEB_PORT}`,
-      env: { ...KHOA_TAT, ENGINE_URL: `http://localhost:${ENGINE_PORT}` },
+      // Next 15 dev tự khởi động lại máy chủ khi heap > 80% giới hạn (next/dist/server/lib/start-server.js) → trên
+      // runner CI, sau ~9 phút biên dịch hàng trăm route, request đang chạy bị ECONNRESET. Nâng giới hạn heap cho dev.
+      env: { ...KHOA_TAT, ENGINE_URL: `http://localhost:${ENGINE_PORT}`, NODE_OPTIONS: "--max-old-space-size=6144" },
       reuseExistingServer: !process.env.CI,
       timeout: 120_000,
     },
