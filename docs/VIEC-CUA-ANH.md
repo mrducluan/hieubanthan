@@ -20,6 +20,9 @@
 2. [x] Chạy migration 0001–0009 (B1, B2)
 3. [x] Ba biến môi trường bắt buộc (mục G) — anh báo xong 2026-10-08
 4. [x] Merge PR "mở công khai" (#50) + giới hạn lượt AI (#51)
+4b. [ ] **Bảo mật (SEC-1, 1 phút):** sau khi PR SEC-1 deploy, mở `https://hieubanthan-engine-sg.onrender.com/health` →
+   phải thấy `"khoa_engine": true`. Nếu `false` → Render → Environment → thêm `ENGINE_API_KEY` (giống Vercel) → Save.
+   Báo cáo đầy đủ + việc còn mở: `docs/BAO-MAT.md`.
 5. [ ] **Google Analytics 4 trong GTM** → mục H2 (Search Console anh đã cài 2026-10-08; GTM đã gắn vào web)
 6. [ ] **Pháp lý còn lại** → mục E (tên đơn vị + email đã có trong code; còn MST, địa chỉ, luật sư)
 7. [ ] Các việc còn lại → mục D (em đã ghi rõ việc nào em làm, việc nào cần anh)

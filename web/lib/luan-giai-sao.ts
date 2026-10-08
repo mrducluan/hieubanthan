@@ -2,7 +2,7 @@
 // Trừ Sao ở MÁY CHỦ, bằng phiên đăng nhập của chính người dùng (hàm SQL dung_sao, migration 0008) — client không
 // bỏ qua được. Engine tính trước, trừ Sao sau, đủ Sao mới trả báo cáo. Khoá giao dịch = mảng + lá số + ngày (giờ
 // Việt Nam): xem lại cùng báo cáo trong ngày không bị trừ lần hai. Không lưu báo cáo.
-import { createHash } from "node:crypto";
+import { createHmac } from "node:crypto";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
@@ -40,8 +40,12 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
   if (!kq.ok) return kq.res;                                  // engine lỗi → chưa trừ Sao
 
+  // SEC-1: khoá giao dịch ký HMAC bằng bí mật máy chủ. Trước đây là SHA-256 của dữ liệu công khai → người dùng tự
+  // tính được khoá, gọi thẳng RPC dung_sao(1 Sao, khoá đó) rồi lấy báo cáo 10 Sao chỉ với 1 Sao.
+  const bi_mat = process.env.SAO_KHOA_SECRET || process.env.LOI_MOI_SECRET;
+  if (!bi_mat || bi_mat.length < 16) return NextResponse.json({ error: "Chưa cấu hình thu Sao, thử lại sau." }, { status: 503 });
   const ngay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
-  const khoa = createHash("sha256").update(`${moDun}|${JSON.stringify(parsed.data)}|${ngay}`).digest("hex").slice(0, 40);
+  const khoa = createHmac("sha256", bi_mat).update(`${moDun}|${GIA_LUAN_GIAI_SAO}|${JSON.stringify(parsed.data)}|${ngay}`).digest("hex").slice(0, 40);
   const { data, error } = await sb.rpc("dung_sao", {
     p_so: GIA_LUAN_GIAI_SAO, p_khoa: `lg:${khoa}`, p_ghi_chu: `Luận giải toàn bộ ${moDun === "tuvi" ? "Tử vi" : "Bát tự"}`,
   });

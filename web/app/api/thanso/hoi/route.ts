@@ -9,13 +9,13 @@ const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
 const Input = z.object({
-  ho_ten: z.array(z.string().min(1)).min(1).max(5),
+  ho_ten: z.array(z.string().min(1).max(80)).min(1).max(5),
   ngay: z.number().int().min(1).max(31),
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1900).max(2100),
   cau_hoi: z.string().min(3).max(400),
   nguoi_kia: z.object({
-    ho_ten: z.array(z.string().min(1)).min(1).max(5).optional(),
+    ho_ten: z.array(z.string().min(1).max(80)).min(1).max(5).optional(),
     ngay: z.number().int().min(1).max(31),
     thang: z.number().int().min(1).max(12),
     nam: z.number().int().min(1900).max(2100),

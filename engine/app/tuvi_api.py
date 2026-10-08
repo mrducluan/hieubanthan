@@ -28,6 +28,16 @@ from app.config import ENGINE_VERSION, HourConfidence, Region
 
 router = APIRouter(prefix="/v1/tuvi", tags=["tuvi"])
 
+
+def _loi_an_sao(e: Exception) -> HTTPException:
+    """SEC-1: lỗi iztro/Node → báo Sentry (nếu bật) + câu chung cho người dùng, không lộ đường dẫn/stderr máy chủ."""
+    try:
+        import sentry_sdk
+        sentry_sdk.capture_exception(e)
+    except Exception:  # noqa: BLE001 — Sentry không cài/không bật thì thôi
+        pass
+    return HTTPException(503, detail="Máy an sao Tử vi đang bận, vui lòng thử lại sau ít phút.")
+
 _NGAY_THONG_NHAT_MUI_GIO = _dt.date(1975, 6, 13)
 _TET_EDGE_DAYS = 2
 _CHI = ("Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi")   # sinh cách mùng 1 Tết ≤ 2 ngày → gắn cờ nhạy cảm
@@ -302,7 +312,7 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
     try:
         la = tuvi_an_sao.an_sao_tho(cal.date(), ti, inp.gender, "vi-VN", tz_lich=dv.tz_lich, **dv.tuy_chon)
     except tuvi_an_sao.AnSaoLoi as e:
-        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+        raise _loi_an_sao(e)
 
     flags = list(dv.flags)
     if ti == 12:
@@ -388,7 +398,7 @@ def api_van_han(inp: VanHanInput) -> dict:
         vh = tuvi_an_sao.van_han(cal.date(), ti, inp.la_so.gender, ngay, chi_tiet=True, tz_lich=dv.tz_lich,
                                  thang_nhuan=dv.tuy_chon["thang_nhuan"], lich=dv.tuy_chon["lich"])
     except tuvi_an_sao.AnSaoLoi as e:
-        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+        raise _loi_an_sao(e)
     can, chi = lunar.can_chi_nam(lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, 7.0)[2])
     return {"engine_version": ENGINE_VERSION, "ngay_xem": ngay.isoformat(), "nam_xem": ngay.year,
             "can_chi_nam_xem": f"{can} {chi}", **vh}
@@ -415,7 +425,7 @@ def api_luu_nguyet(inp: LuuNguyetInput) -> dict:
     try:
         kq = luan_luu_nguyet.lap_nam(sinh, nam, inp.la_so.luu_nguyet)
     except tuvi_an_sao.AnSaoLoi as e:
-        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+        raise _loi_an_sao(e)
     return {"engine_version": ENGINE_VERSION, **kq,
             "cac_phai": {k: {"ten": v["ten"], "cach_tinh": v["cach_tinh"], "nguon": v["nguon"]}
                          for k, v in calc_luu_nguyet.PHAI.items()}}
@@ -449,7 +459,7 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
     try:
         kq = hoidap_tv.tra_loi(inp.cau_hoi.strip(), inp.che_do, sinh=sinh, ngay_xem=inp.ngay_xem)
     except tuvi_an_sao.AnSaoLoi as e:
-        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+        raise _loi_an_sao(e)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
@@ -475,7 +485,7 @@ def api_luan_giai(inp: LuanGiaiInput) -> dict:
     try:
         bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem)))
     except tuvi_an_sao.AnSaoLoi as e:
-        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+        raise _loi_an_sao(e)
     return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": list(dv.flags)}
 
 
@@ -494,5 +504,5 @@ def api_la_so_mau_chi_tiet(slug: str) -> dict:
     except KeyError:
         raise HTTPException(404, detail="Không có lá số mẫu này")
     except tuvi_an_sao.AnSaoLoi as e:
-        raise HTTPException(503, detail=f"Engine an sao chưa sẵn sàng: {e}")
+        raise _loi_an_sao(e)
     return {"engine_version": ENGINE_VERSION, **d}

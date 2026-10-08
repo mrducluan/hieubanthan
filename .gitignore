@@ -4,6 +4,10 @@ __pycache__/
 node_modules/
 .next/
 .env*.local
+# SEC-1: không bao giờ commit file biến môi trường thật (chỉ giữ mẫu .env.example)
+.env
+.env.*
+!.env.example
 web/test-results/
 web/playwright-report/
 engine/fixtures/cau_hoi/ung_vien/
