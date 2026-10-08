@@ -9,6 +9,7 @@ export type MinhHoaDuLieu =
   | { kieu: "cap_so"; a: number; b: number }
   | { kieu: "sao"; ten: string; ten_han: string; ngu_hanh: string }
   | { kieu: "cung"; chi_so: number; vong: string[] }
+  | { kieu: "sao_cung"; ten: string; ten_han: string; ngu_hanh: string; chi_so: number; vong: string[] }
   | { kieu: "thap_than"; ten: string; quan_he: "dong_hanh" | "ta_sinh" | "ta_khac" | "khac_ta" | "sinh_ta"; cung_am_duong: boolean }
   | { kieu: "nhat_chu"; can: string; hanh: string; duong: boolean };
 
@@ -111,10 +112,10 @@ function HinhSaoTuVi({ ten, ten_han, ngu_hanh }: { ten: string; ten_han: string;
 }
 
 // ---------------------------------------------------------------- cung: vòng 12 cung, tô cung đang đọc
-function HinhCung({ chi_so, vong }: { chi_so: number; vong: string[] }) {
+function HinhCung({ chi_so, vong, giua, nhan }: { chi_so: number; vong: string[]; giua?: ReactNode; nhan?: string }) {
   const cx = 160, cy = 120, r = 90;
   return (
-    <Khung nhan={`Cung ${vong[chi_so]} — vị trí trong vòng 12 cung Tử vi`}>
+    <Khung nhan={nhan ?? `Cung ${vong[chi_so]} — vị trí trong vòng 12 cung Tử vi`}>
       <circle cx={cx} cy={cy} r={r} className="fill-none stroke-gold/25" strokeWidth={1} />
       <circle cx={cx} cy={cy} r={r - 34} className="fill-none stroke-gold/15" strokeWidth={1} />
       {vong.map((ten, i) => {
@@ -132,8 +133,23 @@ function HinhCung({ chi_so, vong }: { chi_so: number; vong: string[] }) {
           </g>
         );
       })}
-      <text x={cx} y={cy + 6} textAnchor="middle" className="fill-fg font-serif" fontSize={17}>{vong[chi_so]}</text>
+      {giua ?? <text x={cx} y={cy + 6} textAnchor="middle" className="fill-fg font-serif" fontSize={17}>{vong[chi_so]}</text>}
     </Khung>
+  );
+}
+
+// ---------------------------------------------------------------- SEO-H: sao ở cung — vòng 12 cung + sao ở giữa
+function HinhSaoCung({ ten, ten_han, ngu_hanh, chi_so, vong }: { ten: string; ten_han: string; ngu_hanh: string; chi_so: number; vong: string[] }) {
+  const cx = 160, cy = 120;
+  const mau = mauHanh(ngu_hanh);
+  return (
+    <HinhCung chi_so={chi_so} vong={vong} nhan={`Sao ${ten} (${ten_han}) ở cung ${vong[chi_so]} — vòng 12 cung Tử vi`} giua={
+      <>
+        <circle cx={cx} cy={cy} r={34} strokeWidth={1.2} className={`${mau.nen} ${mau.vien}`} />
+        <text x={cx} y={cy + 2} textAnchor="middle" className="fill-fg" fontSize={19} style={{ fontFamily: "var(--font-han), serif" }}>{ten_han}</text>
+        <text x={cx} y={cy + 18} textAnchor="middle" className="fill-fg-muted" fontSize={8.5}>{ten}</text>
+      </>
+    } />
   );
 }
 
@@ -199,6 +215,7 @@ export function MinhHoa({ mh }: { mh?: MinhHoaDuLieu | null }) {
     case "cap_so": return <HinhCapSo {...mh} />;
     case "sao": return <HinhSaoTuVi {...mh} />;
     case "cung": return <HinhCung {...mh} />;
+    case "sao_cung": return <HinhSaoCung {...mh} />;
     case "thap_than": return <HinhThapThan {...mh} />;
     case "nhat_chu": return <HinhNhatChu {...mh} />;
     default: return null;
