@@ -2,6 +2,8 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { NGAY_HIEU_LUC } from "@/lib/van-hanh";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { goiLd, ldDuongDan } from "@/lib/seo";
 
 export interface Muc { id: string; tieuDe: string; noiDung: ReactNode }
 
@@ -18,6 +20,7 @@ export function TrangPhapLy({ nhan, tieuDe, moDau, muc, duongDan, hieuLuc = true
 }) {
   return (
     <article className="mx-auto max-w-3xl">
+      <JsonLd data={goiLd(ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: tieuDe, duong: duongDan }]))} />
       <p className="eyebrow">{nhan}</p>
       <h1 className="mt-2 text-3xl sm:text-4xl">{tieuDe}</h1>
       {hieuLuc && <p className="mt-2 text-sm text-fg-faint">Hiệu lực từ {NGAY_HIEU_LUC}</p>}

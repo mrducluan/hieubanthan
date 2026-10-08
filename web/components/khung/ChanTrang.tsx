@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { BadgeCheck, Mail, MapPin, Phone, Server, ShieldCheck, Sparkles } from "lucide-react";
 import { vanHanh } from "@/lib/van-hanh";
+import { NutTuyChonCookie } from "@/components/khung/HoiDongYCookie";
 import { Logo } from "./Logo";
 
 const COT = [
@@ -103,7 +104,7 @@ export function ChanTrang() {
               <BadgeCheck className="size-4 text-[rgb(96_165_250)]" aria-hidden /> ĐÃ THÔNG BÁO BỘ CÔNG THƯƠNG
             </a>
           )}
-          <p>© {nam} Hiểu Bản Thân. Bảo lưu mọi quyền.</p>
+          <p>© {nam} Hiểu Bản Thân. Bảo lưu mọi quyền. <NutTuyChonCookie /></p>
         </div>
       </div>
     </footer>

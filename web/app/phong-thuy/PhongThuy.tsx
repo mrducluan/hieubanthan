@@ -28,10 +28,12 @@ export function PhongThuy() {
   const [doToa, setDoToa] = useState<number | null>(null);
   const [doHuong, setDoHuong] = useState<number | null>(null);
 
-  if (hoSo === undefined) return <KhungTai />;
+  // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
+  const dau = <DauMang Icon={Compass} ten="Phong thuỷ" mo_ta="Bát trạch: mệnh quái theo năm sinh (mốc Lập xuân) và giới tính, tám hướng du niên, cửa – chủ – bếp, sao năm. Mục nào là quan niệm dân gian đều ghi rõ; không giới thiệu vật phẩm “hoá giải”." />;
+  if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   return (
     <div>
-      <DauMang Icon={Compass} ten="Phong thuỷ" mo_ta="Bát trạch: mệnh quái theo năm sinh (mốc Lập xuân) và giới tính, tám hướng du niên, cửa – chủ – bếp, sao năm. Mục nào là quan niệm dân gian đều ghi rõ; không giới thiệu vật phẩm “hoá giải”." />
+      {dau}
       <section aria-label="Mệnh quái" className="mx-auto max-w-3xl space-y-3">
           {!sinh && <XinThemDuLieu hoSo={hoSo} can="gioi_tinh" nut="Thêm giới tính" ly_do="Mệnh quái tính theo năm sinh và giới tính. Câu hỏi bố trí chung thì không cần." />}
           {sinh && !mq && !loi && <KhungTai dong={2} />}

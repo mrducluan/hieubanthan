@@ -7,7 +7,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { laSoMau } from "@/lib/kien-thuc";
-import { goiLd, ldDuongDan, siteUrl, TEN_SITE, urlDayDu } from "@/lib/seo";
+import { catMoTa, goiLd, ldDuongDan, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import { DocLaSoMau } from "./DocLaSoMau";
 
 export const revalidate = 21600;
@@ -19,11 +19,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!m) return { title: "Không tìm thấy", robots: { index: false } };
   const duong = `/la-so-mau/${m.slug}`;
   return {
-    title: `Lá số mẫu: ${m.tieu_de}`,
-    description: `${m.mo_ta} Đọc từng bước, có giải nghĩa thuật ngữ.`,
+    title: tieuDeSeo(`Lá số mẫu: ${m.tieu_de}`),
+    description: catMoTa(`${m.mo_ta} Đọc từng bước, có giải nghĩa thuật ngữ.`),
     alternates: { canonical: duong },
-    openGraph: { type: "article", title: m.tieu_de, description: m.mo_ta, url: duong, locale: "vi_VN", siteName: TEN_SITE,
+    openGraph: { type: "article", title: m.tieu_de, description: catMoTa(m.mo_ta), url: duong, locale: "vi_VN", siteName: TEN_SITE,
       images: [`/og?tieu_de=${encodeURIComponent(m.tieu_de)}`] },
+    twitter: { card: "summary_large_image", title: m.tieu_de, description: catMoTa(m.mo_ta) },
   };
 }
 

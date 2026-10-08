@@ -3,19 +3,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { dsLaSoMau } from "@/lib/kien-thuc";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { goiLd, ldDuongDan, metaTrang } from "@/lib/seo";
 
 export const revalidate = 21600;
 
-export const metadata: Metadata = {
-  title: "Lá số Tử vi mẫu — đọc từng bước cho người mới",
-  description: "6 lá số Tử vi minh hoạ (nhân vật hư cấu) được đọc từng bước: Mệnh–Thân, chính tinh và độ sáng, tam phương tứ chính, cách cục, tứ hoá, đại hạn, lưu niên — kèm giải nghĩa thuật ngữ.",
-  alternates: { canonical: "/la-so-mau" },
-};
+export const metadata: Metadata = metaTrang({
+  tieuDe: "Lá số Tử vi mẫu — đọc từng bước cho người mới",
+  moTa: "6 lá số Tử vi minh hoạ được đọc từng bước: Mệnh–Thân, chính tinh, độ sáng, tam phương tứ chính, cách cục, tứ hoá, đại hạn, lưu niên — kèm giải nghĩa thuật ngữ.",
+  duong: "/la-so-mau",
+});
 
 export default async function Page() {
   const ds = await dsLaSoMau();
   return (
     <div className="mx-auto max-w-4xl">
+      <JsonLd data={goiLd(ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Lá số mẫu", duong: "/la-so-mau" }]))} />
       <p className="eyebrow">Học đọc lá số</p>
       <h1 className="mt-2 text-3xl leading-tight sm:text-5xl">Lá số Tử vi mẫu — đọc từng bước</h1>
       <p className="mt-4 max-w-2xl text-fg-muted">

@@ -7,7 +7,7 @@ current_hypothesis: >-
   (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
 current_build: "MO-CK mở công khai hieuban.com (bỏ Basic Auth, bỏ Gate 0, chưa bật tài khoản); TV-LN lưu nguyệt theo phái; KB-0009 migration chân dung + quan hệ; tên miền hieuban.com (sau PT-V1 la bàn, SEO-C trang kiến thức cung/thập thần/nhật chủ (sau QA-RV rà soát hỏi đáp, TS-SAU thần số chiều sâu, TV-LICH trường phái)"
 current_gate: "Gate 0 bỏ qua theo quyết định chủ dự án (2026-10-08) — mở công khai, đo Gate 1 trên người dùng thật"
-current_metrics: []   # có khi bật NEXT_PUBLIC_POSTHOG_KEY
+current_metrics: []   # PostHog đã bật (mục G); GA4 qua GTM khi chủ dự án gắn thẻ GA4 trong GTM
 current_risks:
   - "Bỏ Gate 0: chưa có phỏng vấn định tính — chỉ dựa PostHog + góp ý trên web"
   - "Hạn mức lượt AI (RL-1) chỉ trong bộ nhớ một tiến trình — tăng số tiến trình/instance thì cần Upstash (GĐ2)"
@@ -38,6 +38,8 @@ completed_work:
   - "TV-LN: lưu nguyệt Tử vi 5 phái người dùng chọn (mặc định Đẩu Quân, khớp iztro 680/680), hỏi đáp theo tháng"
   - "PL-1: Chính sách quyền riêng tư, Điều khoản, Miễn trừ, Giới thiệu & nguồn, Liên hệ + footer 4 cột (thông tin vận hành qua env)"
   - "PT-V0: form Khảo sát nhà + schema bố cục + luật luận từ bố cục (Bát trạch + kho tình huống) + công cụ gán nhãn/chấm ảnh"
+  - "SEO-E: rà SEO kỹ thuật toàn sitemap → 0 lỗi/0 cảnh báo; H1 + giới thiệu + FAQ trang công cụ; IndexNow; header bảo mật; apple-icon"
+  - "SEO-D: bản .md cho bot AI, schema đơn vị vận hành, manifest, xác minh Search Console/Bing, GTM sau đồng ý cookie"
   - "RL-1: hạn mức lượt AI theo người gọi + tổng giờ/ngày, hết lượt rơi về template"
   - "MO-CK: gỡ Basic Auth, siteUrl production mặc định hieuban.com, danh sách việc mở công khai (mục G/H)"
   - "KB-0009: migration đưa KB chân dung + quan hệ lên Supabase (chỉ dữ liệu, bảng thanso_kb_khoi), SQL kiểm tra migration đã chạy"

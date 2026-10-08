@@ -45,11 +45,13 @@ export function BatTu() {
   const [dangTai, setDangTai] = useState(false);
   const [loiAnh, setLoiAnh] = useState<string | null>(null);
 
-  if (hoSo === undefined) return <KhungTai />;
+  // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
+  const dau = <DauMang Icon={Layers} ten="Bát tự" mo_ta="Tứ trụ năm – tháng – ngày – giờ theo tiết khí, ngũ hành chấm theo thang điểm công bố, dụng thần luôn trình bày hai cách để bạn tự cân nhắc." />;
+  if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   const lnDung = ln && ln.nam === namXem ? ln : null;
   return (
     <div>
-      <DauMang Icon={Layers} ten="Bát tự" mo_ta="Tứ trụ năm – tháng – ngày – giờ theo tiết khí, ngũ hành chấm theo thang điểm công bố, dụng thần luôn trình bày hai cách để bạn tự cân nhắc." />
+      {dau}
 
       <section aria-label="Tứ trụ" className="space-y-4">
         {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Tứ trụ cần giờ sinh, giới tính và nơi sinh. Giờ sinh càng chính xác càng tốt nếu bạn sinh gần ngày chuyển tiết." />}

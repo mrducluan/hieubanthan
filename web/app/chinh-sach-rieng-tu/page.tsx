@@ -57,8 +57,11 @@ export default function ChinhSachRiengTu() {
             [<b key="e">Ví Sao, mã mời</b>, "Khi bạn có tài khoản, mời bạn bè, dùng Sao", "Supabase (Singapore)", "Đến khi bạn xoá tài khoản"],
             [<b key="f">Câu hỏi đã lọc</b>, "Khi bạn hỏi đáp (nếu bật nhật ký cải thiện chất lượng)", "Supabase (Singapore)", "Tối đa 24 tháng"],
             [<b key="g">Số liệu sử dụng ẩn danh</b>, "Khi bạn dùng web (nếu bật đo lường)", "PostHog", "Tối đa 12 tháng"],
+            [<b key="g2">Số liệu truy cập (Google Analytics)</b>, "Chỉ khi bạn bấm \"Đồng ý\" ở hộp hỏi cookie", "Google (qua Google Tag Manager)", "Tối đa 14 tháng"],
             [<b key="h">Báo lỗi kỹ thuật</b>, "Khi trang hoặc máy chủ gặp lỗi (nếu bật)", "Sentry", "Tối đa 90 ngày"],
           ]} />
+          <p><b>Địa chỉ IP</b> chỉ được băm (không đảo ngược được) và giữ trong bộ nhớ máy chủ tối đa 24 giờ để giới hạn số lượt
+            dùng AI mỗi người, không ghi vào đâu.</p>
           <p><b>Câu hỏi đã lọc</b>: ngày tháng, số điện thoại, email và cụm giống họ tên được xoá trước khi ghi. Câu hỏi
             không gắn với tài khoản hay hồ sơ nào.</p>
           <p><b>Số liệu sử dụng</b> chỉ ghi các bước như mở trang, bắt đầu hay xem xong bài đọc. Hệ thống không ghi ngày
@@ -92,6 +95,7 @@ export default function ChinhSachRiengTu() {
             ["Supabase", "Tài khoản, hồ sơ đã lưu, ví Sao, câu hỏi đã lọc", "Như mục 3", "Singapore"],
             ["OpenRouter", "AI diễn đạt câu trả lời (khi bật)", "Câu hỏi bạn gõ + kết quả đã tính; không có họ tên, ngày giờ sinh", "Hoa Kỳ"],
             ["PostHog", "Đo lường ẩn danh (khi bật)", "Sự kiện sử dụng, mã ẩn danh", "Hoa Kỳ hoặc EU"],
+            ["Google (Tag Manager, Analytics)", "Đo lượt truy cập — chỉ khi bạn đồng ý", "Trang đã xem, loại thiết bị, mã cookie _ga; không họ tên, ngày giờ sinh", "Hoa Kỳ"],
             ["Sentry", "Báo lỗi (khi bật)", "Thông tin lỗi kỹ thuật", "Hoa Kỳ hoặc EU"],
           ]} />
           <p>Một số dữ liệu trên được xử lý ngoài Việt Nam. Chúng tôi chỉ dùng nhà cung cấp có cam kết bảo mật bằng
@@ -135,6 +139,10 @@ export default function ChinhSachRiengTu() {
             <li><code>hbt.gt</code>, <code>hbt.ma_moi</code>: mã mời bạn bè.</li>
             <li><code>kd-da-hoi</code>: câu hỏi Kinh Dịch bạn đã gieo, giữ 30 ngày để nhắc khi bạn hỏi lại cùng việc. Mục này chỉ nằm trên máy bạn.</li>
             <li>Cookie phiên đăng nhập (chỉ khi bạn đăng nhập). Mã ẩn danh của PostHog (chỉ khi bật đo lường).</li>
+            <li><code>hbt.dong-y-cookie.v1</code>: lựa chọn của bạn ở hộp hỏi cookie.</li>
+            <li>Cookie <code>_ga</code>, <code>_ga_*</code> của Google Analytics: <b>chỉ đặt khi bạn bấm &quot;Đồng ý&quot;</b>. Chưa
+              đồng ý thì không tải mã Google nào. Đổi ý bằng link &quot;Tuỳ chọn cookie&quot; ở chân trang; khi từ chối,
+              cookie _ga bị xoá.</li>
           </ul>
           <p>Xoá dữ liệu trang trong cài đặt trình duyệt là xoá hết các mục trên.</p>
         </>

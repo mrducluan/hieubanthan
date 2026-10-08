@@ -13,7 +13,7 @@ type Props = { params: { chu_de: string } };
 export function generateMetadata({ params }: Props): Metadata {
   const cd = CHU_DE[params.chu_de];
   if (!cd) return { title: "Không tìm thấy", robots: { index: false } };
-  return { title: cd.ten, description: cd.mo_ta, alternates: { canonical: `/kien-thuc/${params.chu_de}` },
+  return { title: cd.ten, description: cd.mo_ta, alternates: { canonical: `/kien-thuc/${params.chu_de}`, types: { "text/markdown": `/kien-thuc/${params.chu_de}.md` } },
     openGraph: { title: cd.ten, description: cd.mo_ta, url: `/kien-thuc/${params.chu_de}`, images: [`/og?tieu_de=${encodeURIComponent(cd.ten)}`] } };
 }
 

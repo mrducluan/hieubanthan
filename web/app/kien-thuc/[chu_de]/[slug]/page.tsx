@@ -8,7 +8,7 @@ import { ArrowRight, BookOpen, CalendarDays, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CHU_DE, duongTrang, trang } from "@/lib/kien-thuc";
-import { goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, urlDayDu } from "@/lib/seo";
+import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
 
@@ -27,9 +27,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { t } = kq;
   const duong = duongTrang(t.loai, t.slug);
   return {
-    title: t.tieu_de,
-    description: t.mo_ta,
-    alternates: { canonical: duong },
+    title: tieuDeSeo(t.tieu_de),
+    description: catMoTa(t.mo_ta),
+    alternates: { canonical: duong, types: { "text/markdown": `${duong}.md` } },
     robots: { index: t.index, follow: true },
     openGraph: {
       type: "article", title: t.tieu_de, description: t.mo_ta, url: duong, locale: "vi_VN", siteName: TEN_SITE,

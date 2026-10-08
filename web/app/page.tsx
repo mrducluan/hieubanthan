@@ -4,8 +4,18 @@ import { ArrowRight, Compass, Hexagon, Layers, Orbit, Sparkles, Sun } from "luci
 import { CuaVao } from "@/components/hoso/CuaVao";
 import { ChuThichLop } from "@/components/than-so/LopNoiDung";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
+import { TEN_SITE } from "@/lib/seo";
 
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+// Mô tả trang chủ ≤ 160 ký tự (mô tả site dài hơn vẫn dùng cho schema/llms.txt).
+const TIEU_DE_CHU = "Hiểu Bản Thân — con số nói gì về bạn";
+const MO_TA_CHU = "Thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ): tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.";
+export const metadata: Metadata = {
+  description: MO_TA_CHU,
+  alternates: { canonical: "/", types: { "text/markdown": "/index.md" } },
+  // openGraph/twitter của trang thay hẳn bản ở layout (không gộp) → khai đủ trường.
+  openGraph: { type: "website", locale: "vi_VN", siteName: TEN_SITE, url: "/", title: TIEU_DE_CHU, description: MO_TA_CHU, images: ["/og"] },
+  twitter: { card: "summary_large_image", title: TIEU_DE_CHU, description: MO_TA_CHU, images: ["/og"] },
+};
 
 const MANG = [
   { href: "/tu-vi", ten: "Tử vi", mo: "Lá số 12 cung, đại hạn, lưu niên", Icon: Orbit },
