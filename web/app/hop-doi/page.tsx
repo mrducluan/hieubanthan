@@ -16,7 +16,8 @@ const ND: NoiDungCongCu = {
     { hoi: "Ngày sinh người kia có bị lưu lại không?", dap: "Không. Ngày sinh chỉ dùng để tính rồi bỏ. Vui lòng chỉ nhập khi người đó biết và đồng ý." },
     { hoi: "Xem hợp đôi đồng nghiệp hay sếp khác gì người yêu?", dap: "Cùng một cặp số nhưng cách đọc khác: mỗi loại quan hệ có phần diễn giải riêng về cách phối hợp, giao tiếp, ranh giới." },
   ],
-  lienKet: [{ href: "/than-so", ten: "Thần số học của bạn" }, { href: "/kien-thuc/than-so", ten: "Ý nghĩa 12 con số" }],
+  lienKet: [{ href: "/than-so", ten: "Thần số học của bạn" }, { href: "/kien-thuc/hop-so", ten: "Số chủ đạo nào hợp nhau" },
+    { href: "/kien-thuc/tinh-yeu", ten: "Số chủ đạo trong tình yêu" }, { href: "/kien-thuc/than-so", ten: "Ý nghĩa 12 con số" }],
 };
 
 export const metadata: Metadata = metaTrang({ tieuDe: "Hợp đôi thần số học: hai người hoà và va ở đâu", moTa: ND.moTa, duong: ND.duong });

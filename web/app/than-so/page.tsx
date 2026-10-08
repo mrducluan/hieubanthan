@@ -18,7 +18,9 @@ const ND: NoiDungCongCu = {
     { hoi: "Ngày sinh âm lịch thì sao?", dap: "Bạn nhập âm lịch, hệ thống đổi sang dương lịch theo âm lịch Việt Nam (thuật toán Hồ Ngọc Đức) rồi mới tính." },
     { hoi: "Thần số học có dự đoán tương lai không?", dap: "Không. Con số chỉ gợi một khung để nhìn lại bản thân; mọi diễn giải đều kèm mặt tối và câu hỏi tự soi, không phán số phận." },
   ],
-  lienKet: [{ href: "/kien-thuc/than-so", ten: "Ý nghĩa 12 con số" }, { href: "/hop-doi", ten: "Hợp đôi" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
+  lienKet: [{ href: "/kien-thuc/than-so", ten: "Ý nghĩa 12 con số" }, { href: "/kien-thuc/nghe-nghiep", ten: "Số chủ đạo hợp nghề gì" },
+    { href: "/kien-thuc/nam-ca-nhan", ten: "Năm cá nhân 1–9" }, { href: "/kien-thuc/no-nghiep", ten: "Nợ nghiệp" },
+    { href: "/hop-doi", ten: "Hợp đôi" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
 };
 
 export const metadata: Metadata = metaTrang({ tieuDe: "Thần số học Pythagoras: tính số chủ đạo theo họ tên và ngày sinh", moTa: ND.moTa, duong: ND.duong });

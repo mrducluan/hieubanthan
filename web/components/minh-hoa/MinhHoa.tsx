@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 export type MinhHoaDuLieu =
   | { kieu: "so"; so: number; so_cai: boolean; so_goc: number }
   | { kieu: "que"; so: number; hao: number[] }
+  | { kieu: "cap_so"; a: number; b: number }
   | { kieu: "sao"; ten: string; ten_han: string; ngu_hanh: string }
   | { kieu: "cung"; chi_so: number; vong: string[] }
   | { kieu: "thap_than"; ten: string; quan_he: "dong_hanh" | "ta_sinh" | "ta_khac" | "khac_ta" | "sinh_ta"; cung_am_duong: boolean }
@@ -54,6 +55,19 @@ function HinhSo({ so, so_cai, so_goc }: { so: number; so_cai: boolean; so_goc: n
       {n === 2 && <line x1={dinh[0]![0]} y1={dinh[0]![1]} x2={dinh[1]![0]} y2={dinh[1]![1]} className="stroke-gold/60" strokeWidth={1.2} />}
       {dinh.map(([x, y], i) => <circle key={i} cx={x} cy={y} r={3.2} className="fill-gold" />)}
       <text x={cx} y={cy + 22} textAnchor="middle" className="fill-fg font-serif" fontSize={so >= 10 ? 58 : 66}>{so}</text>
+    </Khung>
+  );
+}
+
+// ---------------------------------------------------------------- cặp số: hai vòng giao nhau (phần chung = chỗ dễ hoà)
+function HinhCapSo({ a, b }: { a: number; b: number }) {
+  return (
+    <Khung nhan={`Số chủ đạo ${a} và ${b} — hai vòng giao nhau: phần chung là chỗ dễ hoà`}>
+      <circle cx={125} cy={118} r={70} className="fill-gold/10 stroke-gold/70" strokeWidth={1.4} />
+      <circle cx={195} cy={118} r={70} className="fill-moon/10 stroke-moon/70" strokeWidth={1.4} />
+      <text x={100} y={136} textAnchor="middle" className="fill-gold font-serif" fontSize={52}>{a}</text>
+      <text x={220} y={136} textAnchor="middle" className="fill-moon font-serif" fontSize={52}>{b}</text>
+      <text x={160} y={122} textAnchor="middle" className="fill-fg-muted" fontSize={20}>✦</text>
     </Khung>
   );
 }
@@ -179,6 +193,7 @@ export function MinhHoa({ mh }: { mh?: MinhHoaDuLieu | null }) {
   switch (mh.kieu) {
     case "so": return <HinhSo {...mh} />;
     case "que": return <HinhQue {...mh} />;
+    case "cap_so": return <HinhCapSo {...mh} />;
     case "sao": return <HinhSaoTuVi {...mh} />;
     case "cung": return <HinhCung {...mh} />;
     case "thap_than": return <HinhThapThan {...mh} />;

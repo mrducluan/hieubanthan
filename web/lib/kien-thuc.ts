@@ -5,11 +5,23 @@ import { unstable_noStore as noStore } from "next/cache";
 import type { MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 
-export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu";
+export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu"
+  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep";
 
 export const CHU_DE: Record<string, { loai: LoaiTrang; ten: string; mo_ta: string; mang: string }> = {
   "than-so": { loai: "so", ten: "Ý nghĩa các con số", mang: "/than-so",
     mo_ta: "12 con số của thần số học Pythagoras (1–9 và số cái 11, 22, 33): từ khoá, mặt tối, năm cá nhân, đỉnh cao, thử thách." },
+  // SEO-G: cụm thần số theo câu người Việt hay tìm
+  "hop-so": { loai: "cap_so", ten: "Số chủ đạo nào hợp nhau", mang: "/hop-doi",
+    mo_ta: "45 cặp số chủ đạo 1–9: hai người dễ hoà ở đâu, dễ va ở đâu, cùng làm gì để êm. Không chấm điểm hợp – khắc." },
+  "nghe-nghiep": { loai: "nghe", ten: "Số chủ đạo hợp nghề gì", mang: "/than-so",
+    mo_ta: "12 số chủ đạo và sự nghiệp: nghề thường hợp, thế mạnh, môi trường, cái bẫy nghề nghiệp và chuyện tiền bạc." },
+  "tinh-yeu": { loai: "tinh_yeu", ten: "Số chủ đạo trong tình yêu", mang: "/hop-doi",
+    mo_ta: "12 số chủ đạo trong tình yêu: cách yêu, cần được gì, điểm mù, hợp kiểu người nào, dấu hiệu lệch nhịp." },
+  "nam-ca-nhan": { loai: "nam_ca_nhan", ten: "Năm cá nhân 1–9", mang: "/than-so",
+    mo_ta: "Năm cá nhân số 1 đến 9: chủ đề của năm, nên làm, nên tránh, chuyện hay gặp và cách tự tính năm cá nhân." },
+  "no-nghiep": { loai: "no_nghiep", ten: "Nợ nghiệp 13, 14, 16, 19", mang: "/than-so",
+    mo_ta: "Bốn số nợ nghiệp trong thần số học: ý nghĩa, khi nào được xem là có, và cách hiểu như bài học cần luyện." },
   "kinh-dich": { loai: "que", ten: "64 quẻ Kinh Dịch", mang: "/kinh-dich",
     mo_ta: "Ý nghĩa 64 quẻ Kinh Dịch theo Nghĩa Lý: lời khuyên, mặt tối, theo từng lĩnh vực, trích Chu Dịch." },
   "tu-vi": { loai: "sao", ten: "14 chính tinh Tử vi", mang: "/tu-vi",
@@ -24,9 +36,11 @@ export const CHU_DE: Record<string, { loai: LoaiTrang; ten: string; mo_ta: strin
 /** MH-1: hình trang trí cho từng chủ đề. */
 export const HINH_CHU_DE: Record<string, KieuMang> = {
   "than-so": "than-so", "kinh-dich": "kinh-dich", "tu-vi": "tu-vi", "cung-tu-vi": "tu-vi", "thap-than": "bat-tu", "nhat-chu": "bat-tu",
+  "hop-so": "than-so", "nghe-nghiep": "than-so", "tinh-yeu": "than-so", "nam-ca-nhan": "than-so", "no-nghiep": "than-so",
 };
 export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = {
   so: "than-so", que: "kinh-dich", sao: "tu-vi", cung: "cung-tu-vi", thap_than: "thap-than", nhat_chu: "nhat-chu",
+  cap_so: "hop-so", nghe: "nghe-nghiep", tinh_yeu: "tinh-yeu", nam_ca_nhan: "nam-ca-nhan", no_nghiep: "no-nghiep",
 };
 
 export interface MucTrang { tieu_de: string; doan?: string; danh_sach?: string[] }

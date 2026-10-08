@@ -15,6 +15,7 @@ const COT = [
   { ten: "Kiến thức", ds: [
     ["/kien-thuc", "Thư viện kiến thức"], ["/kien-thuc/than-so", "Ý nghĩa các con số"], ["/kien-thuc/kinh-dich", "64 quẻ Kinh Dịch"],
     ["/kien-thuc/tu-vi", "14 chính tinh Tử vi"], ["/tu-dien", "Từ điển thuật ngữ"], ["/la-so-mau", "Lá số mẫu"], ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"],
+    ["/kien-thuc/hop-so", "Số chủ đạo hợp nhau"],
   ] },
   { ten: "Về chúng tôi", ds: [
     ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
