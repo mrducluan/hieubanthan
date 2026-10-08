@@ -1,34 +1,50 @@
 "use client";
-// Lọc nhanh trên danh sách đã render (chỉ ẩn/hiện, không tính gì). Mọi mục vẫn có trong HTML cho máy tìm kiếm.
-import { useEffect, useMemo, useState } from "react";
+// Lọc nhanh trên danh sách đã render ở máy chủ (page.tsx): chỉ bật/tắt thuộc tính hidden, không tính gì.
+// PERF-1: danh sách 221 mục không còn là props của component client → bớt một bản sao dữ liệu trong gói RSC.
+import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
-import type { MucTuDien } from "@/lib/kien-thuc";
 
 const boDau = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
 
-export function TimTuDien({ muc, tenMang }: { muc: MucTuDien[]; tenMang: Record<string, string> }) {
+export function TimTuDien({ tenMang, tong }: { tenMang: Record<string, string>; tong: number }) {
   const [tim, setTim] = useState("");
   const [mang, setMang] = useState<string>("tat_ca");
+  const [soHien, setSoHien] = useState(tong);
   const q = boDau(tim.trim());
-  const hien = useMemo(() => new Set(muc.filter((m) =>
-    (mang === "tat_ca" || m.mo_dun === mang)
-    && (!q || boDau([m.ten, ...m.bien_the, m.de_hieu].join(" ")).includes(q))).map((m) => m.ma)), [muc, q, mang]);
-  // Đi tới #ma (từ thẻ giải nghĩa) mà mục đang bị bộ lọc ẩn → bỏ lọc rồi cuộn tới.
-  const [neo, setNeo] = useState("");
+  // Chữ không dấu của từng mục — đọc từ HTML một lần khi người dùng bắt đầu lọc (không nhân đôi nội dung trong HTML).
+  const chu = useRef<WeakMap<HTMLElement, string>>(new WeakMap());
+
   useEffect(() => {
-    const doc = () => setNeo(decodeURIComponent(window.location.hash.slice(1)));
+    let dem = 0;
+    document.querySelectorAll<HTMLElement>("[data-td-muc]").forEach((el) => {
+      let t = chu.current.get(el);
+      if (q && t === undefined) { t = boDau(el.textContent ?? ""); chu.current.set(el, t); }
+      const hien = (mang === "tat_ca" || el.dataset.mang === mang) && (!q || (t ?? "").includes(q));
+      el.hidden = !hien;
+      if (hien) dem++;
+    });
+    document.querySelectorAll<HTMLElement>("[data-td-nhom]").forEach((s) => {
+      s.hidden = !s.querySelector("[data-td-muc]:not([hidden])");
+    });
+    setSoHien(dem);
+  }, [q, mang]);
+
+  // Đi tới #ma (từ thẻ giải nghĩa) mà mục đang bị bộ lọc ẩn → bỏ lọc rồi cuộn tới.
+  useEffect(() => {
+    const doc = () => {
+      const neo = decodeURIComponent(window.location.hash.slice(1));
+      const el = neo ? document.getElementById(neo) : null;
+      if (!el?.hasAttribute("data-td-muc")) return;
+      setTim(""); setMang("tat_ca");
+      requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
+    };
     doc();
     window.addEventListener("hashchange", doc);
     return () => window.removeEventListener("hashchange", doc);
   }, []);
-  useEffect(() => {
-    if (!neo || !muc.some((m) => m.ma === neo)) return;
-    if (!hien.has(neo)) { setTim(""); setMang("tat_ca"); return; }
-    document.getElementById(neo)?.scrollIntoView({ block: "start" });
-    setNeo("");
-  }, [neo, hien, muc]);
+
   return (
-    <div className="mt-8 space-y-8">
+    <div className="flex flex-col gap-3">
       <div className="flex flex-wrap gap-3">
         <Input value={tim} onChange={(e) => setTim(e.target.value)} placeholder="Tìm thuật ngữ, vd: hoá kỵ, dụng thần, hào động…"
           aria-label="Tìm thuật ngữ" className="max-w-sm" />
@@ -41,28 +57,7 @@ export function TimTuDien({ muc, tenMang }: { muc: MucTuDien[]; tenMang: Record<
           ))}
         </div>
       </div>
-      <p className="text-sm text-fg-faint" aria-live="polite">{hien.size} thuật ngữ</p>
-      {Object.entries(tenMang).map(([md, ten]) => {
-        const ds = muc.filter((m) => m.mo_dun === md);
-        if (!ds.some((m) => hien.has(m.ma))) return null;
-        return (
-          <section key={md} aria-labelledby={`td-${md}`}>
-            <h2 id={`td-${md}`} className="mb-3 text-2xl">{ten}</h2>
-            <dl className="grid gap-3 sm:grid-cols-2">
-              {ds.map((m) => (
-                <div key={m.ma} id={m.ma} hidden={!hien.has(m.ma)} className="glass scroll-mt-24 rounded-xl p-4 target:ring-2 target:ring-gold">
-                  <dt className="font-serif text-lg">
-                    {m.ten}{m.han && <span className="ml-2 text-base text-fg-faint" style={{ fontFamily: "var(--font-han), serif" }}>{m.han}</span>}
-                  </dt>
-                  <dd className="mt-1 text-sm leading-relaxed text-fg-muted">{m.de_hieu}</dd>
-                  {m.vi_du && <dd className="mt-1 text-sm text-fg-faint">Ví dụ: {m.vi_du}</dd>}
-                  {m.bien_the.length > 0 && <dd className="mt-1 text-xs text-fg-faint">Còn gọi: {m.bien_the.join(", ")}</dd>}
-                </div>
-              ))}
-            </dl>
-          </section>
-        );
-      })}
+      <p className="text-sm text-fg-faint" aria-live="polite">{soHien} thuật ngữ</p>
     </div>
   );
 }

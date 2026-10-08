@@ -38,7 +38,7 @@ export function DangNhap() {
       </Card>
     );
   }
-  const sb = supabase()!;
+  const sb = async () => (await supabase())!;
   const veLai = () => `${window.location.origin}/auth/callback?tiep=/tai-khoan`;
 
   async function gui(e: React.FormEvent) {
@@ -47,12 +47,12 @@ export function DangNhap() {
     try {
       if (kenh === "email") {
         if (!/^\S+@\S+\.\S+$/.test(email)) throw new Error("Email chưa đúng.");
-        const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: veLai() } });
+        const { error } = await (await sb()).auth.signInWithOtp({ email, options: { emailRedirectTo: veLai() } });
         if (error) throw error;
       } else {
         const p = chuanHoaSdt(sdt);
         if (!p) throw new Error("Số điện thoại chưa đúng (vd 0912 345 678).");
-        const { error } = await sb.auth.signInWithOtp({ phone: p });
+        const { error } = await (await sb()).auth.signInWithOtp({ phone: p });
         if (error) throw error;
       }
       setDaGui(true);
@@ -67,8 +67,8 @@ export function DangNhap() {
     e.preventDefault();
     setLoi(null); setDang(true);
     const { error } = kenh === "email"
-      ? await sb.auth.verifyOtp({ email, token: ma.trim(), type: "email" })
-      : await sb.auth.verifyOtp({ phone: chuanHoaSdt(sdt) ?? "", token: ma.trim(), type: "sms" });
+      ? await (await sb()).auth.verifyOtp({ email, token: ma.trim(), type: "email" })
+      : await (await sb()).auth.verifyOtp({ phone: chuanHoaSdt(sdt) ?? "", token: ma.trim(), type: "sms" });
     setDang(false);
     if (error) setLoi("Mã chưa đúng hoặc đã hết hạn.");
     else router.push("/tai-khoan");
@@ -82,7 +82,7 @@ export function DangNhap() {
 
       <Card className="mt-6 space-y-5">
         <Button variant="secondary" className="w-full" onClick={() =>
-          sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: veLai() } })}>
+          void sb().then((c) => c.auth.signInWithOAuth({ provider: "google", options: { redirectTo: veLai() } }))}>
           <svg viewBox="0 0 24 24" className="size-4" aria-hidden><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.3-1.6 3.8-5.5 3.8-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 3.2 14.6 2.2 12 2.2 6.6 2.2 2.2 6.6 2.2 12s4.4 9.8 9.8 9.8c5.7 0 9.4-4 9.4-9.6 0-.6-.1-1.1-.2-1.6H12z"/></svg>
           Tiếp tục với Google
         </Button>
