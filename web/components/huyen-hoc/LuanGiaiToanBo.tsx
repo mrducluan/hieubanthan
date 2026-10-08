@@ -50,7 +50,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
           <p className="font-serif text-xl">Luận giải toàn bộ {ten}</p>
           <p className="text-sm text-fg-muted" data-testid="gia-luan-giai">
             Báo cáo theo chương, ghép từ kho tri thức có nguồn ·{" "}
-            {phi?.thu ? <><b className="text-gold">{phi.gia} Sao</b>/báo cáo, xem lại trong ngày không mất thêm</> : "miễn phí trong giai đoạn thử nghiệm"} · không lưu trên máy chủ.
+            {phi?.thu ? <><b className="text-gold">{phi.gia} Sao</b>/báo cáo, xem lại trong ngày không mất thêm</> : "miễn phí giai đoạn ra mắt"} · không lưu trên máy chủ.
           </p>
         </div>
         <Button onClick={tai} disabled={dang}><Sparkles aria-hidden /> {dang ? "Đang soạn…" : phi?.thu ? `Xem luận giải · ${phi.gia} Sao` : "Xem luận giải"}</Button>
