@@ -237,7 +237,15 @@ Việc pháp lý đi kèm. Đây là đề xuất, cần luật sư xác nhận:
 - [ ] **Chạy bộ 55 câu chuyên gia với AI thật**: thêm secret `OPENROUTER_API_KEY` vào GitHub
   (Settings → Secrets → Actions), rồi vào Actions → **llm-55** → Run workflow, chạy 2 model. Gửi em link kết quả.
   Hướng dẫn chi tiết: `docs/CHAY-55-CAU-AI-THAT.md`.
-- [ ] **Phong thuỷ xem qua ảnh nhà (PT-V0):** cần 50–100 bộ ảnh nhà thật, có sự đồng ý của chủ nhà.
+- [ ] **Phong thuỷ xem qua ảnh nhà:** phần không cần ảnh đã xong (form Khảo sát nhà, schema, luật, công cụ chấm).
+  Anh hỗ trợ giúp em 3 việc:
+  1. Thu **50–100 bộ ảnh nhà thật**: mỗi nhà 5–15 ảnh (mặt tiền, cửa chính nhìn vào, phòng khách, bếp, phòng ngủ, WC,
+     cầu thang). Mỗi bộ có **phiếu đồng ý** theo `docs/MAU-DONG-Y-ANH-NHA.md`. Ảnh để ở Google Drive riêng, không gửi
+     qua chat công khai.
+  2. Với mỗi nhà, ghi lại: **độ hướng nhà** (đo bằng mục "Đo hướng nhà" trên web), phòng nào ở phương nào, và đánh
+     dấu 18 câu hỏi dấu hiệu, chính là các câu trong form Khảo sát nhà. Em chuyển thành nhãn JSON.
+     Hướng dẫn: `engine/fixtures/phongthuy_anh/README.md`.
+  3. Chọn model thị giác trên OpenRouter để em chạy thử PT-V2 (dùng chung khoá OpenRouter với mục AI diễn đạt).
 - [x] **Trang Chính sách quyền riêng tư + Điều khoản + Miễn trừ + Giới thiệu + Liên hệ + footer** — đã làm (PL-1);
   còn điền thông tin ở mục E.
 

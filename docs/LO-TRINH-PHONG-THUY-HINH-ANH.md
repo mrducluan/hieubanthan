@@ -1,6 +1,10 @@
 # Lộ trình: Phong thuỷ xem qua ảnh / video (PT-V)
 
-> Trạng thái: **LỘ TRÌNH chờ duyệt** (2026-09-30). Chưa code. Bổ sung sau HH-4 (Phong thuỷ Bát trạch hiện có).
+> Trạng thái (2026-10-08):
+> - **PT-V1 xong** (PR #44).
+> - **PT-V0 xong phần không cần ảnh**: schema `bo_cuc.schema.json`, form "Khảo sát nhà", luật luận từ bố cục
+>   (= PT-V3 cho đường nhập tay), bộ công cụ gán nhãn và chấm điểm.
+> - **Chờ chủ dự án**: 50–100 bộ ảnh nhà thật có phiếu đồng ý (`docs/MAU-DONG-Y-ANH-NHA.md`), sau đó làm PT-V2.
 
 ## 1. Mục tiêu
 

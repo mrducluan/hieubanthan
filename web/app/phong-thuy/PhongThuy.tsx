@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Compass } from "lucide-react";
 import { DoHuongDienThoai } from "@/components/huyen-hoc/DoHuongDienThoai";
+import { KhaoSatNha } from "@/components/huyen-hoc/KhaoSatNha";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { HuyenKhong } from "@/components/huyen-hoc/HuyenKhong";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
@@ -25,6 +26,7 @@ export function PhongThuy() {
   const sinh = hoSo?.gioi_tinh ? { birth_date: ngaySinhIso(hoSo), gender: hoSo.gioi_tinh } : null;
   const { data: mq, loi, thuLai } = usePost<MenhQuai>("/api/phongthuy/menh-quai", sinh);
   const [doToa, setDoToa] = useState<number | null>(null);
+  const [doHuong, setDoHuong] = useState<number | null>(null);
 
   if (hoSo === undefined) return <KhungTai />;
   return (
@@ -43,11 +45,12 @@ export function PhongThuy() {
           )}
       </section>
       <div className="mx-auto mt-8 max-w-3xl">
-        <DoHuongDienThoai sinh={sinh} onDungToa={(d) => {
+        <DoHuongDienThoai sinh={sinh} onChot={(k) => setDoHuong(k.do_huong)} onDungToa={(d) => {
           setDoToa(d);
           document.getElementById("huyen-khong")?.scrollIntoView({ behavior: "smooth", block: "start" });
         }} />
       </div>
+      <div className="mx-auto mt-8 max-w-5xl"><KhaoSatNha sinh={sinh} doHuongGoiY={doHuong} /></div>
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="huyen-khong"><HuyenKhong doToaGoiY={doToa} /></div>
 
       <section aria-label="Hỏi Phong thuỷ" className="mt-10">

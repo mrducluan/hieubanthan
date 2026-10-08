@@ -1,0 +1,13 @@
+{
+ "phien_ban": "0.1",
+ "loai_nha": "nha_pho",
+ "huong_nha_do": 180,
+ "vi_tri": {"cua_chinh": "Nam", "phong_ngu_chinh": "Đông", "bep": "Tây", "ve_sinh": "Tây Bắc"},
+ "dau_hieu": {
+  "guong_giuong": {"co": true},
+  "xa_ngang": {"co": false},
+  "cau_thang_cua": {"co": true},
+  "bep_doi_cua": {"co": false},
+  "minh_duong": {"co": true}
+ }
+}
