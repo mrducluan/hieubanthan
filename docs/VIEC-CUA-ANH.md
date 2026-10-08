@@ -200,7 +200,9 @@ nháp; anh (hoặc luật sư) duyệt trước khi bỏ mật khẩu.
   duyệt xong file nào thì đổi `trang_thai` sang `da_duyet`.
 - [ ] **Chốt phái tính tháng hạn Tử vi (lưu nguyệt).** Có xem tháng theo Đẩu quân, hoặc theo tiểu hạn… Anh chốt
   phái thì em làm phần xem từng tháng.
-- [ ] **Chạy bộ 55 câu hỏi chuyên gia với AI thật** (cần `OPENROUTER_API_KEY`) trước khi mở công khai rộng.
+- [ ] **Chạy bộ 55 câu chuyên gia với AI thật**: thêm secret `OPENROUTER_API_KEY` vào GitHub
+  (Settings → Secrets → Actions), rồi vào Actions → **llm-55** → Run workflow, chạy 2 model. Gửi em link kết quả.
+  Hướng dẫn chi tiết: `docs/CHAY-55-CAU-AI-THAT.md`.
 - [ ] **Phong thuỷ xem qua ảnh nhà (PT-V0):** cần 50–100 bộ ảnh nhà thật, có sự đồng ý của chủ nhà.
 - [ ] **Trang Chính sách quyền riêng tư** (xem mục C).
 
