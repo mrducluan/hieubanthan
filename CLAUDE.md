@@ -19,6 +19,10 @@ Next.js 14 App Router + TypeScript strict / Supabase (Postgres, Auth, Storage - 
   `TY_BOUNDARY_POLICY` trong `engine/app/config.py`. Đổi = tăng ENGINE_VERSION.
 - Secrets qua env, không hardcode. Mọi migration có rollback.
 
+## Nhắc việc chủ dự án
+Đầu mỗi phiên: đọc `docs/VIEC-CUA-ANH.md`, nhắc ngắn các mục chưa `[x]` (tên miền, migration + env, mở cho người
+thử, Gate 0…). Chủ dự án báo xong mục nào → đánh `[x]` trong file đó.
+
 ## Cấm tuyệt đối
 - Không refactor ngoài phạm vi task được giao
 - Không thêm dependency mới khi chưa hỏi
