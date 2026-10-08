@@ -20,8 +20,8 @@ KB = Path(__file__).parents[1] / "app" / "kb" / "data"
 
 def test_danh_sach_du_ba_loai():
     ds = trang.danh_sach()
-    dem = {l: sum(1 for t in ds if t["loai"] == l) for l in ("so", "que", "sao")}
-    assert dem == {"so": 12, "que": 64, "sao": 14}
+    dem = {l: sum(1 for t in ds if t["loai"] == l) for l in trang.LOAI}
+    assert dem == {"so": 12, "que": 64, "sao": 14, "cung": 12, "thap_than": 10, "nhat_chu": 10}
     assert len({(t["loai"], t["slug"]) for t in ds}) == len(ds)
 
 
@@ -71,8 +71,52 @@ def test_lien_quan_tro_toi_trang_ton_tai():
 
 def test_api():
     r = client.get("/v1/kb/trang")
-    assert r.status_code == 200 and len(r.json()["trang"]) == 90
+    assert r.status_code == 200 and len(r.json()["trang"]) == 122
     r = client.get("/v1/kb/trang/so/so-22")
     assert r.status_code == 200 and r.json()["slug"] == "so-22"
     assert client.get("/v1/kb/trang/so/so-10").status_code == 404
     assert client.get("/v1/kb/trang/xyz/so-1").status_code == 404
+
+
+# ---- SEO-C: 12 cung Tử vi · 10 thập thần · 10 nhật chủ Bát tự ------------------------------
+def test_trang_cung_ghep_kb_va_lien_sao():
+    t = trang.lay("cung", "cung-phu-the")
+    c = json.loads((KB / "tuvi_kb.json").read_text("utf-8"))["cung"]["Phu Thê"]
+    van = json.dumps(t, ensure_ascii=False)
+    for truong in ("y_nghia", "xem_duoc", "khong_tra_loi", "cau_tu_soi"):
+        assert c[truong] in van
+    assert "Phu Thê" in t["tieu_de"]
+    # mục "14 chính tinh ở cung này" lấy nguyên câu sao_cung của KB
+    sc = json.loads((KB / "tuvi_kb.json").read_text("utf-8"))["sao_cung"]["Thái Âm"]["Phu Thê"]
+    assert sc in van
+    assert 50 <= len(t["mo_ta"]) <= 160 and t["trang_thai"] == "nhap_ai"
+
+
+def test_trang_thap_than_va_nhat_chu():
+    t = trang.lay("thap_than", "chinh-quan")
+    tt = json.loads((KB / "battu_kb.json").read_text("utf-8"))["thap_than"]["Chính Quan"]
+    van = json.dumps(t, ensure_ascii=False)
+    for truong in ("y_nghia", "tinh_cach", "khi_nhieu", "khi_thieu", "cau_tu_soi"):
+        assert tt[truong].lower() in van.lower()       # chỉ viết hoa chữ đầu câu, không đổi nội dung
+    n = trang.lay("nhat_chu", "nhat-chu-giap")
+    nc = json.loads((KB / "battu_kb.json").read_text("utf-8"))["nhat_chu"]["Giáp"]
+    van = json.dumps(n, ensure_ascii=False)
+    assert nc["hinh_tuong"] in van and all(v in van for v in nc["mua"].values())
+    assert "Giáp" in n["tieu_de"]
+    for x in (t, n):
+        assert x["hoi_dap"] and all(h["hoi"].endswith("?") for h in x["hoi_dap"])
+        assert 50 <= len(x["mo_ta"]) <= 160
+
+
+def test_lien_quan_loai_moi_ton_tai():
+    co = {(t["loai"], t["slug"]) for t in trang.danh_sach()}
+    for loai, slug in [("cung", "cung-menh"), ("thap_than", "ty-kien"), ("nhat_chu", "nhat-chu-quy")]:
+        for l in trang.lay(loai, slug)["lien_quan"]:
+            assert (l["loai"], l["slug"]) in co
+
+
+def test_api_loai_moi():
+    assert client.get("/v1/kb/trang/cung/cung-tat-ach").status_code == 200
+    assert client.get("/v1/kb/trang/thap_than/that-sat").status_code == 200
+    assert client.get("/v1/kb/trang/nhat_chu/nhat-chu-nham").status_code == 200
+    assert client.get("/v1/kb/trang/cung/cung-xyz").status_code == 404

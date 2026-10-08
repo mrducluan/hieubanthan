@@ -3,7 +3,7 @@
 
 import { unstable_noStore as noStore } from "next/cache";
 
-export type LoaiTrang = "so" | "que" | "sao";
+export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu";
 
 export const CHU_DE: Record<string, { loai: LoaiTrang; ten: string; mo_ta: string; mang: string }> = {
   "than-so": { loai: "so", ten: "Ý nghĩa các con số", mang: "/than-so",
@@ -12,8 +12,16 @@ export const CHU_DE: Record<string, { loai: LoaiTrang; ten: string; mo_ta: strin
     mo_ta: "Ý nghĩa 64 quẻ Kinh Dịch theo Nghĩa Lý: lời khuyên, mặt tối, theo từng lĩnh vực, trích Chu Dịch." },
   "tu-vi": { loai: "sao", ten: "14 chính tinh Tử vi", mang: "/tu-vi",
     mo_ta: "14 chính tinh trong Tử vi Đẩu Số: ngũ hành, tính chất, điểm mạnh, mặt tối, ý nghĩa ở 12 cung." },
+  "cung-tu-vi": { loai: "cung", ten: "12 cung Tử vi", mang: "/tu-vi",
+    mo_ta: "12 cung trong lá số Tử vi: mỗi cung nói về điều gì, không trả lời được gì, 14 chính tinh và tứ hoá ở từng cung." },
+  "thap-than": { loai: "thap_than", ten: "10 thập thần Bát tự", mang: "/bat-tu",
+    mo_ta: "10 thập thần trong Bát tự (Tỷ Kiên đến Chính Ấn): ý nghĩa, tính cách, khi quá nhiều, khi thiếu, với nam và nữ." },
+  "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", mang: "/bat-tu",
+    mo_ta: "10 nhật chủ (can ngày sinh) trong Bát tự: hình tượng, tính chất, điểm mạnh, mặt tối và ảnh hưởng của mùa sinh." },
 };
-export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = { so: "than-so", que: "kinh-dich", sao: "tu-vi" };
+export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = {
+  so: "than-so", que: "kinh-dich", sao: "tu-vi", cung: "cung-tu-vi", thap_than: "thap-than", nhat_chu: "nhat-chu",
+};
 
 export interface MucTrang { tieu_de: string; doan?: string; danh_sach?: string[] }
 export interface TrangKienThuc {
