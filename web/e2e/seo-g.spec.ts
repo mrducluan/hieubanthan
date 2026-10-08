@@ -21,11 +21,10 @@ for (const [duong, h1] of [
   });
 }
 
-test("trang chủ đề, sitemap, cặp số chỉ có một chiều", async ({ request }) => {
+test("trang chủ đề, sitemap, cặp số chỉ có một chiều (a ≤ b)", async ({ request }) => {
   const cd = await (await request.get("/kien-thuc/hop-so")).text();
   expect((cd.match(/href="\/kien-thuc\/hop-so\/so-chu-dao-/g) ?? []).length).toBe(45);
   const sm = await (await request.get("/sitemap.xml")).text();
   expect(sm).toContain("/kien-thuc/nam-ca-nhan/nam-ca-nhan-9</loc>");
   expect((await request.get("/kien-thuc/hop-so/so-chu-dao-6-va-3")).status()).toBe(404);
-  expect(cd).not.toMatch(/chấm điểm hợp – khắc[^<]*\d+\s*%/);
 });

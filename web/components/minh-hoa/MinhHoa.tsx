@@ -13,11 +13,14 @@ export type MinhHoaDuLieu =
   | { kieu: "nhat_chu"; can: string; hanh: string; duong: boolean };
 
 // Màu ngũ hành theo token giao diện (KB ghi cả "Hoả/Hỏa", "Thuỷ/Thủy").
-const MAU_HANH: Record<string, string> = {
-  "Kim": "fill-fg stroke-fg", "Mộc": "fill-jade stroke-jade", "Thủy": "fill-moon stroke-moon", "Thuỷ": "fill-moon stroke-moon",
-  "Hỏa": "fill-cinnabar stroke-cinnabar", "Hoả": "fill-cinnabar stroke-cinnabar", "Thổ": "fill-gold stroke-gold",
+// Lớp Tailwind viết đủ (không ghép chuỗi) để trình biên dịch CSS thấy được.
+const MAU_HANH: Record<string, { nen: string; vien: string }> = {
+  "Kim": { nen: "fill-fg/15", vien: "stroke-fg" }, "Mộc": { nen: "fill-jade/20", vien: "stroke-jade" },
+  "Thủy": { nen: "fill-moon/20", vien: "stroke-moon" }, "Thuỷ": { nen: "fill-moon/20", vien: "stroke-moon" },
+  "Hỏa": { nen: "fill-cinnabar/20", vien: "stroke-cinnabar" }, "Hoả": { nen: "fill-cinnabar/20", vien: "stroke-cinnabar" },
+  "Thổ": { nen: "fill-gold/20", vien: "stroke-gold" },
 };
-const mauHanh = (h: string) => MAU_HANH[h.split("/")[0]!.trim()] ?? "fill-gold stroke-gold";
+const mauHanh = (h: string) => MAU_HANH[h.split("/")[0]!.trim()] ?? { nen: "fill-gold/20", vien: "stroke-gold" };
 
 function Khung({ nhan, children, rong = 320, cao = 240 }: { nhan: string; children: ReactNode; rong?: number; cao?: number }) {
   return (
@@ -99,8 +102,7 @@ function HinhSaoTuVi({ ten, ten_han, ngu_hanh }: { ten: string; ten_han: string;
   const mau = mauHanh(ngu_hanh);
   return (
     <Khung nhan={`Sao ${ten} (${ten_han}), hành ${ngu_hanh}`}>
-      <path d={d} className={`${mau} opacity-20`} strokeWidth={1} />
-      <path d={d} className={`fill-none ${mau.split(" ")[1]}`} strokeWidth={1.2} />
+      <path d={d} className={`${mau.nen} ${mau.vien}`} strokeWidth={1.2} />
       <circle cx={cx} cy={cy} r={30} className="fill-bg stroke-gold/50" strokeWidth={1} />
       <text x={cx} y={cy + 9} textAnchor="middle" className="fill-fg" fontSize={24} style={{ fontFamily: "var(--font-han), serif" }}>{ten_han}</text>
       <text x={cx} y={222} textAnchor="middle" className="fill-fg-muted" fontSize={12}>{`${ten} · ${ngu_hanh}`}</text>
@@ -124,7 +126,7 @@ function HinhCung({ chi_so, vong }: { chi_so: number; vong: string[] }) {
         return (
           <g key={ten}>
             <line x1={x1} y1={y1} x2={x2} y2={y2} className="stroke-gold/20" strokeWidth={1} />
-            {chon && <circle cx={x} cy={y} r={15} className="fill-gold/20 stroke-gold" strokeWidth={1.2} />}
+            {chon && <rect x={x - 24} y={y - 10} width={48} height={18} rx={9} className="fill-gold/20 stroke-gold" strokeWidth={1.2} />}
             <text x={x} y={y + 3} textAnchor="middle" fontSize={chon ? 8.5 : 7.5}
               className={chon ? "fill-gold font-semibold" : "fill-fg-faint"}>{ten}</text>
           </g>
@@ -138,7 +140,7 @@ function HinhCung({ chi_so, vong }: { chi_so: number; vong: string[] }) {
 // ---------------------------------------------------------------- ngũ hành: vòng tương sinh + sao tương khắc
 const HANH = ["Mộc", "Hỏa", "Thổ", "Kim", "Thủy"];   // thứ tự tương sinh
 
-function VongNguHanh({ sang, nhan_rieng, nhan_giua }: { sang: number; nhan_rieng?: string[]; nhan_giua: ReactNode }) {
+function VongNguHanh({ sang, nhan_rieng, nhan_giua, theo_hanh = true }: { sang: number; nhan_rieng?: string[]; nhan_giua: ReactNode; theo_hanh?: boolean }) {
   const cx = 160, cy = 120, r = 78;
   const p = HANH.map((_, i) => diem(cx, cy, r, -Math.PI / 2 + (2 * Math.PI * i) / 5));
   return (
@@ -149,7 +151,8 @@ function VongNguHanh({ sang, nhan_rieng, nhan_giua }: { sang: number; nhan_rieng
         const chon = i === sang;
         return (
           <g key={i}>
-            <circle cx={x} cy={y} r={chon ? 22 : 18} className={chon ? `${mauHanh(HANH[i]!)} fill-opacity-25` : "fill-surface stroke-line"} strokeWidth={chon ? 1.6 : 1} />
+            <circle cx={x} cy={y} r={chon ? 24 : 18} strokeWidth={chon ? 1.6 : 1}
+              className={!chon ? "fill-surface stroke-line" : theo_hanh ? `${mauHanh(HANH[i]!).nen} ${mauHanh(HANH[i]!).vien}` : "fill-gold/20 stroke-gold"} />
             <text x={x} y={y + 4} textAnchor="middle" fontSize={chon ? 11 : 10} className={chon ? "fill-fg font-semibold" : "fill-fg-muted"}>
               {nhan_rieng?.[i] ?? HANH[i]}
             </text>
@@ -167,7 +170,7 @@ const QH_NHAN = ["Ta (đồng hành)", "Ta sinh", "Ta khắc", "Khắc ta", "Sin
 function HinhThapThan({ ten, quan_he, cung_am_duong }: { ten: string; quan_he: string; cung_am_duong: boolean }) {
   return (
     <Khung nhan={`${ten}: ${QH_NHAN[QH_THU_TU[quan_he] ?? 0]!.toLowerCase()}, ${cung_am_duong ? "cùng" : "khác"} âm dương với nhật chủ`}>
-      <VongNguHanh sang={QH_THU_TU[quan_he] ?? 0} nhan_rieng={["Ta", "Ta sinh", "Ta khắc", "Khắc ta", "Sinh ta"]}
+      <VongNguHanh sang={QH_THU_TU[quan_he] ?? 0} theo_hanh={false} nhan_rieng={["Ta", "Ta sinh", "Ta khắc", "Khắc ta", "Sinh ta"]}
         nhan_giua={<>
           <text x={160} y={118} textAnchor="middle" className="fill-gold font-serif" fontSize={15}>{ten}</text>
           <text x={160} y={134} textAnchor="middle" className="fill-fg-faint" fontSize={9}>{cung_am_duong ? "cùng âm dương" : "khác âm dương"}</text>

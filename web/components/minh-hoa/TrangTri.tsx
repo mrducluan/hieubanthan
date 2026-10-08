@@ -34,8 +34,9 @@ export function HinhBauTroi({ className }: { className?: string }) {
       </g>
       <path d={d} className="fill-none stroke-gold/35" strokeWidth={1} />
       <circle cx={cx} cy={cy} r={70} fill="url(#hq-trang)" />
-      {/* trăng khuyết */}
-      <path d={`M${cx + 6},${cy - 40} a40,40 0 1,0 0,80 a32,32 0 1,1 0,-80 Z`} className="fill-gold/90" />
+      {/* trăng khuyết: đĩa vàng bị một đĩa màu nền che lệch */}
+      <circle cx={cx} cy={cy} r={34} className="fill-gold/90" />
+      <circle cx={cx + 14} cy={cy - 9} r={30} className="fill-bg" />
       {so.map(({ n, p: [x, y] }) => (
         <g key={n}>
           <circle cx={x} cy={y} r={17} className="fill-bg stroke-gold/60" strokeWidth={1.2} />

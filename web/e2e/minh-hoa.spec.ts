@@ -21,7 +21,7 @@ for (const [duong, title] of [
     expect(r.status()).toBe(200);
     const html = await r.text();
     expect(html).toContain('data-testid="minh-hoa"');
-    expect(html).toMatch(new RegExp(`<title>${title}`));
+    expect(html).toContain(`<title>${title}`);
   });
 }
 
