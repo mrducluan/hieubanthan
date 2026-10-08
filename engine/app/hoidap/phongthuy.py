@@ -134,7 +134,7 @@ def _m_menh(mq: dict) -> dict:
 
 def _mq(pl: dict, sinh: dict | None) -> dict | None:
     if sinh:
-        return pt.menh_quai(sinh["nam"], sinh["gioi_tinh"], sinh.get("ngay"))
+        return pt.menh_quai(sinh["nam"], sinh["gioi_tinh"], sinh.get("ngay"), sinh.get("moc_nam", "lap_xuan"))
     if pl["nam_sinh_cau"] and pl["gioi_tinh_cau"]:
         return pt.menh_quai(pl["nam_sinh_cau"], pl["gioi_tinh_cau"])
     return None
@@ -213,7 +213,7 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int) -> dict:
         muc.append({"loai": "giai_thich", "ma": "vo_chong_khac_menh", **kb.giai_thich("vo_chong_khac_menh")})
         nam_kia = pl["nam_sinh_cau"]
         if sinh and nam_kia and pl.get("kia_ro"):    # "vợ tôi sinh 1992…" → tính luôn mệnh quái người kia
-            ban = pt.menh_quai(sinh["nam"], sinh["gioi_tinh"], sinh.get("ngay"))
+            ban = pt.menh_quai(sinh["nam"], sinh["gioi_tinh"], sinh.get("ngay"), sinh.get("moc_nam", "lap_xuan"))
             gioi_kia = pl["gioi_tinh_cau"] or ("nu" if chung.co(pl["cau_chuan_hoa"], [r"vo toi", r"vo minh"])
                                                else "nam" if chung.co(pl["cau_chuan_hoa"], [r"chong toi", r"chong minh"])
                                                else ("nu" if sinh["gioi_tinh"] == "nam" else "nam"))

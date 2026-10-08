@@ -9,6 +9,8 @@ const Input = z.object({
   nam: z.number().int().min(1900).max(2100),
   nhuan: z.boolean().optional(),
   noi_sinh: z.string().regex(/^[a-z0-9_-]{2,40}$/).optional(),
+  /** TP-LICH — ngày âm nhập theo âm lịch Việt Nam (mặc định) hay Trung Quốc. */
+  lich: z.enum(["viet", "trung"]).optional(),
 }).strict();
 
 export function POST(req: Request) {

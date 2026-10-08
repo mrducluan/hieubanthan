@@ -10,6 +10,8 @@ import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
 interface Res extends HoiMangRes {
   que?: { quai_ban: Quai; quai_bien: Quai | null; hao_dong: number[]; nguon_ngau_nhien?: string } | null;
   phan_loai?: { truong_phai: string | null };
+  /** TP-LICH: Mai Hoa lấy năm/tháng/ngày âm theo âm lịch người dùng chọn. */
+  mai_hoa?: { dau_vao?: { ngay_am?: number; thang_am?: number; nam_am?: number; chi_gio?: string; lich?: "viet" | "trung" } } | null;
 }
 
 const PHAI: Record<string, string> = { nghia_ly: "Nghĩa Lý", luc_hao: "Lục Hào", mai_hoa: "Mai Hoa" };
@@ -41,6 +43,7 @@ export function KinhDich() {
   const [cheDo, setCheDo] = useState("tu_dong");
   const [cach, setCach] = useState("may_gieo");
   const [tay, setTay] = useState("");
+  const [lichMH, setLichMH] = useState<"viet" | "trung">("viet");
 
   async function gui(cau: string) {
     const vals = tay.split(/[^6-9]+/).filter(Boolean).map(Number);
@@ -48,7 +51,8 @@ export function KinhDich() {
     const nhac = daHoiGanDay(cau);
     const kq = await hoiMang<Res>(
       "/api/kinhdich/hoi",
-      { cau_hoi: cau, che_do: cheDo, cach_ra_que: cach, ...(cach === "gieo_tay" ? { gia_tri_hao: vals } : {}) },
+      { cau_hoi: cau, che_do: cheDo, cach_ra_que: cach, ...(cach === "gieo_tay" ? { gia_tri_hao: vals } : {}),
+        ...(cach === "mai_hoa" && lichMH === "trung" ? { lich: lichMH } : {}) },
       (d) => d.que ? (
         <div className="glass rounded-2xl p-4" data-testid="que">
           <div className="flex flex-wrap gap-8">
@@ -58,6 +62,11 @@ export function KinhDich() {
           {d.phan_loai?.truong_phai && (
             <p className="mt-3 text-xs text-fg-faint">Phái đọc: {PHAI[d.phan_loai.truong_phai] ?? d.phan_loai.truong_phai}
               {d.que.nguon_ngau_nhien ? ` · nguồn quẻ: ${d.que.nguon_ngau_nhien}` : ""}</p>
+          )}
+          {d.mai_hoa?.dau_vao?.ngay_am && (
+            <p className="mt-1 text-xs text-fg-faint" data-testid="mai-hoa-lich">
+              Mai Hoa lấy theo âm lịch {d.mai_hoa.dau_vao.lich === "trung" ? "Trung Quốc" : "Việt Nam"}: ngày {d.mai_hoa.dau_vao.ngay_am} tháng {d.mai_hoa.dau_vao.thang_am} năm {d.mai_hoa.dau_vao.nam_am}, giờ {d.mai_hoa.dau_vao.chi_gio}.
+            </p>
           )}
         </div>
       ) : null,
@@ -90,6 +99,12 @@ export function KinhDich() {
                 <option value="mai_hoa">Mai Hoa theo giờ hiện tại</option>
                 <option value="gieo_tay">Tôi tự gieo</option>
               </Select>
+              {cach === "mai_hoa" && (
+                <Select aria-label="Âm lịch cho Mai Hoa" value={lichMH} onChange={(e) => setLichMH(e.target.value as "viet" | "trung")} className="h-10 text-sm sm:col-span-2">
+                  <option value="viet">Mai Hoa theo âm lịch Việt Nam</option>
+                  <option value="trung">Mai Hoa theo âm lịch Trung Quốc</option>
+                </Select>
+              )}
               {cach === "gieo_tay" && (
                 <Input aria-label="Sáu hào tự gieo" value={tay} onChange={(e) => setTay(e.target.value)}
                   placeholder="6 hào (6/7/8/9), hào 1 → 6: 7 7 8 7 7 9" className="h-10 text-sm sm:col-span-2" />

@@ -94,6 +94,8 @@ class HoiKDInput(BaseModel):
     phuong_phap: Literal["thi", "tien", "thi-vatly"] = "thi"
     gia_tri_hao: list[int] | None = Field(default=None, min_length=6, max_length=6)
     thoi_diem: _dt.datetime | None = Field(default=None, description="Giờ Việt Nam; mặc định: bây giờ")
+    # TP-LICH: âm lịch dùng cho Mai Hoa (năm/tháng/ngày âm của lúc hỏi).
+    lich: Literal["viet", "trung"] = "viet"
 
 
 @router.post("/hoi")
@@ -104,7 +106,7 @@ def api_hoi(inp: HoiKDInput, background: BackgroundTasks) -> dict:
     try:
         kq = hoidap_kd.tra_loi(inp.cau_hoi.strip(), inp.che_do, gia_tri_hao=inp.gia_tri_hao,
                                thoi_diem=inp.thoi_diem.replace(tzinfo=None) if inp.thoi_diem else None,
-                               phuong_phap=inp.phuong_phap, cach_ra_que=inp.cach_ra_que)
+                               phuong_phap=inp.phuong_phap, cach_ra_que=inp.cach_ra_que, lich=inp.lich)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     background.add_task(nhat_ky.ghi_huyenhoc, "kinhdich", inp.cau_hoi, kq, False)

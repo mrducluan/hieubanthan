@@ -15,8 +15,9 @@ from __future__ import annotations
 
 import datetime as dt
 
+from app import config
 from app.calc import tietkhi as tk
-from app.calc.lunar import CHI
+from app.calc.lunar import CHI, solar_to_lunar
 
 # quái: (số Lạc thư, phương, 3 hào dưới→trên, 1 = dương)
 QUAI = {"Khảm": (1, "Bắc", (0, 1, 0)), "Khôn": (2, "Tây Nam", (0, 0, 0)), "Chấn": (3, "Đông", (1, 0, 0)),
@@ -34,12 +35,23 @@ _LAT = [("Sinh Khí", 2), ("Ngũ Quỷ", 1), ("Diên Niên", 0), ("Lục Sát", 
         ("Thiên Y", 1), ("Tuyệt Mệnh", 0)]
 
 
-def menh_quai(nam: int, gioi_tinh: str, ngay_sinh: dt.date | None = None) -> dict:
-    """Mệnh quái. Có `ngay_sinh` thì xét mốc Lập xuân (giờ VN); không có → gắn cờ nếu cần."""
+MOC_NAM = ("lap_xuan", "tet_viet", "tet_trung")
+
+
+def menh_quai(nam: int, gioi_tinh: str, ngay_sinh: dt.date | None = None, moc_nam: str = "lap_xuan") -> dict:
+    """Mệnh quái. Có `ngay_sinh` thì xét mốc đầu năm; không có → gắn cờ nếu cần.
+
+    TP-LICH — `moc_nam` (người dùng chọn): "lap_xuan" (mặc định, Bát trạch theo tiết khí, giờ VN) ·
+    "tet_viet" / "tet_trung" (năm âm lịch, Tết theo âm lịch Việt Nam / Trung Quốc — cách dân gian hay dùng)."""
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
+    if moc_nam not in MOC_NAM:
+        raise ValueError(f"moc_nam phải là một trong {MOC_NAM}")
     nam_tinh, co = nam, []
-    if ngay_sinh is not None:
+    if ngay_sinh is not None and moc_nam != "lap_xuan":
+        tz = config.TZ_LICH_AM["viet" if moc_nam == "tet_viet" else "trung"]
+        nam_tinh = solar_to_lunar(ngay_sinh.day, ngay_sinh.month, ngay_sinh.year, tz)[2]
+    elif ngay_sinh is not None:
         lx = (tk.thoi_diem(ngay_sinh.year, 315) + dt.timedelta(hours=7)).date()
         if ngay_sinh < lx:
             nam_tinh = ngay_sinh.year - 1
@@ -47,14 +59,16 @@ def menh_quai(nam: int, gioi_tinh: str, ngay_sinh: dt.date | None = None) -> dic
             co.append({"loai": "lap_xuan", "chi_tiet": "Sinh đúng ngày Lập xuân — mệnh quái phụ thuộc giờ sinh."})
     else:
         co.append({"loai": "chua_ro_ngay", "chi_tiet": (
-            "Chỉ có năm sinh: nếu bạn sinh trước Lập xuân (khoảng 4/2 dương lịch) thì mệnh quái tính theo năm trước.")})
+            "Chỉ có năm sinh: nếu bạn sinh trước Lập xuân (khoảng 4/2 dương lịch) thì mệnh quái tính theo năm trước."
+            if moc_nam == "lap_xuan" else
+            "Chỉ có năm sinh: nếu bạn sinh trước Tết âm lịch năm đó thì mệnh quái tính theo năm trước.")})
     r = nam_tinh % 9
     so = (11 - r) % 9 if gioi_tinh == "nam" else (r + 4) % 9
     so = so or 9
     if so == 5:
         so = 2 if gioi_tinh == "nam" else 8
     q = SO_QUAI[so]
-    return {"quai": q, "so": so, "nhom": nhom(q), "nam_tinh": nam_tinh, "co_canh_bao": co}
+    return {"quai": q, "so": so, "nhom": nhom(q), "nam_tinh": nam_tinh, "moc_nam": moc_nam, "co_canh_bao": co}
 
 
 def nhom(quai: str) -> str:

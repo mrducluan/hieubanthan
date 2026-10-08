@@ -30,6 +30,8 @@ interface KetQuaDoi {
   /** TV-LICH: âm lịch theo lịch Trung Quốc (UTC+8) — sổ tử vi/phần mềm Trung Quốc đổi theo lịch này. */
   am_trung_quoc?: { ngay: number; thang: number; nam: number; nhuan: boolean };
   lech_lich_trung?: boolean;
+  /** TP-LICH: cách đọc âm lịch Việt Nam của ngày dương đó (luôn có, kể cả khi nhập theo lịch Trung Quốc). */
+  am_viet?: { ngay: number; thang: number; nam: number; nhuan: boolean };
 }
 
 // Nhập MỘT LẦN, dùng mọi mảng (docs/THIET-KE-UI.md §4.3). Chỉ tên + ngày sinh bắt buộc; phần còn lại
@@ -42,6 +44,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
   const [thang, setThang] = useState(macDinh ? String(nhapAm ? macDinh.am!.thang : macDinh.thang) : "");
   const [nam, setNam] = useState(macDinh ? String(nhapAm ? macDinh.am!.nam : macDinh.nam) : "");
   const [nhuan, setNhuan] = useState(Boolean(nhapAm && macDinh.am!.nhuan));
+  const [lichAm, setLichAm] = useState<"viet" | "trung">(macDinh?.lich_am ?? "viet");
   const [moThem, setMoThem] = useState(Boolean(can) || Boolean(macDinh?.gio || macDinh?.ten_khac));
   const [tenKhac, setTenKhac] = useState(macDinh?.ten_khac ?? "");
   const [gio, setGio] = useState(macDinh?.gio ?? "");
@@ -63,7 +66,8 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
   const coTheDoi = duSo && (lich === "am" ? d <= 30 : ngayHopLe(d, m, y));
   const yeuCauDoi = coTheDoi
     ? { chieu: lich === "am" ? "am_sang_duong" : "duong_sang_am", ngay: d, thang: m, nam: y,
-        ...(lich === "am" && nhuan ? { nhuan: true } : {}), ...(noiSinh ? { noi_sinh: noiSinh } : {}) }
+        ...(lich === "am" && nhuan ? { nhuan: true } : {}), ...(lich === "am" && lichAm === "trung" ? { lich: "trung" } : {}),
+        ...(noiSinh ? { noi_sinh: noiSinh } : {}) }
     : null;
   const khoaDoi = yeuCauDoi ? JSON.stringify(yeuCauDoi) : null;
 
@@ -110,6 +114,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
       ho_ten: ten.trim(),
       ngay: dg.ngay, thang: dg.thang, nam: dg.nam,
       lich_nhap: lich,
+      ...(lich === "am" && lichAm === "trung" ? { lich_am: "trung" as const } : {}),
       ...(kq ? { am: kq.am } : {}),
       ...(tenKhac.trim() ? { ten_khac: tenKhac.trim() } : {}),
       ...(gio ? { gio, do_tin_gio: doTin === "approx" ? "approx" as const : "exact" as const } : {}),
@@ -161,6 +166,18 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
             onChange={(e) => setNam(chiSo(e.target.value, 4))} />
         </div>
         {lich === "am" && (
+          <div role="radiogroup" aria-label="Ngày âm theo lịch nào" className="flex flex-wrap items-center gap-2 text-xs text-fg-muted">
+            <span>Ngày âm theo:</span>
+            {([["viet", "Âm lịch Việt Nam"], ["trung", "Âm lịch Trung Quốc"]] as const).map(([v, chu]) => (
+              <button key={v} type="button" role="radio" aria-checked={lichAm === v} onClick={() => setLichAm(v)}
+                className={cn("rounded-full border px-3 py-1 transition-colors", lichAm === v ? "border-gold text-gold" : "border-line hover:text-fg")}>
+                {chu}
+              </button>
+            ))}
+            <span className="text-fg-faint">— sổ tử vi, lịch in theo Trung Quốc thì chọn “Trung Quốc”.</span>
+          </div>
+        )}
+        {lich === "am" && (
           <label className="flex items-center gap-2 text-sm text-fg-muted">
             <input type="checkbox" checked={nhuan} onChange={(e) => setNhuan(e.target.checked)} className="size-4 accent-[rgb(var(--gold))]" />
             Tháng nhuận
@@ -168,7 +185,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
         )}
         <p className="min-h-5 text-xs" aria-live="polite" data-testid="doi-lich">
           {doi && lich === "duong" && <span className="text-fg-muted">Âm lịch: <b className="text-fg">{moTaAm(doi.am, doi.can_chi_nam)}</b> · ngày {doi.can_chi_ngay}, tháng {doi.can_chi_thang}{doi.lich_mien_nam_utc8 ? " · theo lịch miền Nam thời đó" : " · theo lịch Việt Nam"}</span>}
-          {doi && lich === "am" && <span className="text-fg-muted">Dương lịch: <b className="text-fg">{doi.duong.ngay}/{doi.duong.thang}/{doi.duong.nam}</b> · năm {doi.can_chi_nam} · ngày {doi.can_chi_ngay}{doi.lich_mien_nam_utc8 && " · theo lịch miền Nam thời đó"}</span>}
+          {doi && lich === "am" && <span className="text-fg-muted">Dương lịch: <b className="text-fg">{doi.duong.ngay}/{doi.duong.thang}/{doi.duong.nam}</b> · năm {doi.can_chi_nam} · ngày {doi.can_chi_ngay}{doi.lich_mien_nam_utc8 && " · theo lịch miền Nam thời đó"}{lichAm === "trung" && " · đổi theo âm lịch Trung Quốc"}</span>}
           {loiDoi && lich === "am" && <span className="text-cinnabar">{loiDoi.replace(/^Ngày không tồn tại: /, "")}</span>}
         </p>
         {doi && lich === "am" && !nhuan && doi.thang_nhuan_nam === m && (
@@ -178,7 +195,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
         )}
         {doi?.lech_lich_trung && doi.am_trung_quoc && (
           <p className="rounded-lg bg-moon/10 px-3 py-2 text-xs text-fg" data-testid="nhac-lich-trung">
-            Ngày này âm lịch Việt Nam là <b>{moTaAm(doi.am, doi.can_chi_nam)}</b>, còn theo lịch Trung Quốc là{" "}
+            Ngày này âm lịch Việt Nam là <b>{moTaAm(doi.am_viet ?? doi.am, doi.can_chi_nam)}</b>, còn theo lịch Trung Quốc là{" "}
             <b>{doi.am_trung_quoc.ngay}/{doi.am_trung_quoc.thang}{doi.am_trung_quoc.nhuan ? " nhuận" : ""}/{doi.am_trung_quoc.nam}</b>.
             Sổ tử vi hay phần mềm theo lịch Trung Quốc sẽ ra lá số, lời luận khác. Hệ thống mặc định dùng lịch Việt Nam;
             ở trang Tử vi bạn chọn được xem theo lịch nào (mục “Trường phái”).

@@ -2,7 +2,7 @@
 // VZ-2 — trang Tử vi: lá số lớn (2 giao diện, lớp vận hạn theo năm xem) → chi tiết cung đang chọn
 // → hỏi đáp AI ở DƯỚI, chiếm hết chiều ngang (chủ dự án chốt 2026-10-01).
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Download, List, Maximize2, Minimize2, Moon, Orbit, ScrollText } from "lucide-react";
 import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
@@ -46,6 +46,9 @@ export function TuVi() {
   const [thangNhuan, setThangNhuan] = useState<"thang_sau" | "thang_chinh">("thang_sau");
   // TV-LICH (chủ dự án yêu cầu 2026-10-02): âm lịch Việt Nam (mặc định) ↔ lịch Trung Quốc.
   const [lich, setLich] = useState<"viet" | "trung">("viet");
+  // TP-LICH: hồ sơ nhập ngày âm theo lịch Trung Quốc → mở lá số theo lịch đó (người dùng vẫn đổi được).
+  const lichHoSo = hoSo?.lich_am;
+  useEffect(() => { if (lichHoSo === "trung") setLich("trung"); }, [lichHoSo]);
   // TV-LN (chủ dự án yêu cầu 2026-10-08): phái tính lưu nguyệt — chỉ đổi cung tháng, không đổi lá số gốc.
   const [luuNguyet, setLuuNguyet] = useState<PhaiLuuNguyet>("dau_quan_thai_tue");
   const goc = laSoTuHoSo(hoSo);

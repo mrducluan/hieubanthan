@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, Download, Layers, Moon, ScrollText } from "l
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
+import { DongGhiChu, DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -35,7 +36,10 @@ const namNayVN = () => Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho
 
 export function BatTu() {
   const hoSo = useHoSo();
-  const laSo = laSoTuHoSo(hoSo);
+  const [gioTy, setGioTy] = useState<"da_ty" | "sang_ngay">("da_ty");
+  const goc = laSoTuHoSo(hoSo);
+  // TP-LICH: lựa chọn giờ Tý đi theo mọi lời gọi (tứ trụ, lưu niên, hỏi đáp, luận giải) — engine tính lại.
+  const laSo = goc ? { ...goc, ...(gioTy === "sang_ngay" ? { gio_ty: gioTy } : {}) } : null;
   const { data: ls, loi, thuLai } = usePost<LaSoBatTu>("/api/battu/la-so", laSo);
   const [namXem, setNamXem] = useState(namNayVN);
   const { data: ln } = usePost<LuuNienBatTu>("/api/battu/luu-nien", laSo ? { la_so: laSo, nam_xem: namXem } : null);
@@ -56,6 +60,20 @@ export function BatTu() {
       <section aria-label="Tứ trụ" className="space-y-4">
         {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Tứ trụ cần giờ sinh, giới tính và nơi sinh. Giờ sinh càng chính xác càng tốt nếu bạn sinh gần ngày chuyển tiết." />}
         {laSo && !ls && !loi && <KhungTai dong={6} />}
+        {laSo && (
+          <KhungPhai testId="truong-phai-bat-tu" moTa={<>Mặc định theo tiết khí và giữ trụ ngày hôm đó khi sinh 23:00–23:59 (dạ Tý). Đổi lựa chọn, engine lập lại tứ trụ; hỏi đáp và luận giải bên dưới đi theo đúng lựa chọn.</>}>
+            <DongPhai ten="Giờ Tý (23:00–23:59)" nhan="Cách tính giờ Tý" giaTri={gioTy} doi={setGioTy}
+              luaChon={[["da_ty", "Dạ Tý (giữ ngày)"], ["sang_ngay", "Đổi ngày lúc 23:00"]]}
+              noiBat={(goc?.birth_time ?? "") >= "23:00"}
+              goiY={(goc?.birth_time ?? "") >= "23:00"
+                ? "Bạn sinh trong giờ Tý đầu: hai phái ra TRỤ NGÀY khác nhau (nhật chủ đổi), trụ giờ như nhau."
+                : "Bạn không sinh 23:00–23:59 nên hai phái cho cùng một tứ trụ."} />
+            <DongGhiChu ten="Âm lịch">
+              Bát tự tính theo tiết khí (vị trí Mặt Trời), không theo ngày âm — chọn lịch Việt hay Trung Quốc không làm đổi tứ trụ.
+              Năm đổi tại Lập xuân, tháng đổi tại tiết.
+            </DongGhiChu>
+          </KhungPhai>
+        )}
         {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
         {ls && (
           <>

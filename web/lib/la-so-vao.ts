@@ -16,4 +16,6 @@ export const LaSoVao = z.object({
   lich: z.enum(["viet", "trung"]).optional(),
   /** TV-LN — phái tính lưu nguyệt (tháng hạn), chỉ Tử vi. */
   luu_nguyet: z.enum(["dau_quan_thai_tue", "dau_quan_tieu_han", "tieu_han", "luu_nien", "dia_chi_thang"]).optional(),
+  /** TP-LICH — chỉ Bát tự: sinh 23:xx giữ trụ ngày hôm đó (dạ Tý) hay đổi ngày lúc 23:00. */
+  gio_ty: z.enum(["da_ty", "sang_ngay"]).optional(),
 }).strict();

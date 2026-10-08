@@ -80,10 +80,19 @@ def _cong_thoi_gian(d: dt.datetime, nam: int, thang: int, ngay: int, gio: int) -
     return x + dt.timedelta(days=ngay, hours=gio)
 
 
-def la_so(lich: dt.datetime, gioi_tinh: str) -> dict:
-    """`lich`: giờ sinh theo kinh tuyến lịch UTC+7 (đã quy đổi múi giờ lịch sử)."""
+GIO_TY = ("da_ty", "sang_ngay")
+
+
+def la_so(lich: dt.datetime, gioi_tinh: str, gio_ty: str = "da_ty") -> dict:
+    """`lich`: giờ sinh theo kinh tuyến lịch UTC+7 (đã quy đổi múi giờ lịch sử).
+
+    TP-LICH — `gio_ty` cho người sinh 23:00–23:59 (người dùng chọn): "da_ty" (mặc định, chính sách đã chốt: giữ trụ
+    ngày hôm đó, trụ giờ = Tý của ngày sau) hoặc "sang_ngay" (phái đổi ngày lúc 23:00: trụ ngày = ngày hôm sau).
+    Trụ giờ hai phái như nhau; chỉ trụ ngày (nhật chủ) và mọi thứ suy ra từ nhật chủ đổi theo."""
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
+    if gio_ty not in GIO_TY:
+        raise ValueError(f"gio_ty phải là một trong {GIO_TY}")
     t_utc = lich - dt.timedelta(hours=config.CALENDAR_MERIDIAN_TZ)
     # --- trụ năm (Lập xuân) + trụ tháng (tiết)
     nam = lich.year if t_utc >= tk.thoi_diem(lich.year, 315) else lich.year - 1
@@ -93,10 +102,13 @@ def la_so(lich: dt.datetime, gioi_tinh: str) -> dict:
     chi_thang, can_thang = (2 + k) % 12, (can_nam * 2 + 2 + k) % 10
     # --- trụ ngày + trụ giờ
     ngay = timebase.ngay_can_chi(lich)
+    sang_ngay = gio_ty == "sang_ngay" and lich.hour == 23
+    if sang_ngay:
+        ngay += dt.timedelta(days=1)
     i_ngay = (ngay.toordinal() + 1721425 + 49) % 60
     can_ngay, chi_ngay = i_ngay % 10, i_ngay % 12
     chi_gio = ((lich.hour + 1) // 2) % 12
-    can_goc_gio = (can_ngay + 1) % 10 if lich.hour == 23 else can_ngay      # dạ Tý: Tý của ngày sau
+    can_goc_gio = (can_ngay + 1) % 10 if lich.hour == 23 and not sang_ngay else can_ngay  # dạ Tý: Tý của ngày sau
     can_gio = ((can_goc_gio % 5) * 2 + chi_gio) % 10
 
     tru = [_gz(_chi_so_60(can_nam, chi_nam)), _gz(_chi_so_60(can_thang, chi_thang)),
@@ -111,6 +123,7 @@ def la_so(lich: dt.datetime, gioi_tinh: str) -> dict:
                           thap_than(dm, tru[3]["can"])],
         "thap_than_chi": [[thap_than(dm, c) for c in x] for x in tang],
         "nam_bat_tu": nam,
+        "gio_ty": gio_ty,
     }
     kq["ngu_hanh"] = _ngu_hanh(tru, tang)
     kq["than"] = _than(kq["nhat_chu"]["ngu_hanh"], kq["ngu_hanh"]["diem"], tru[1]["chi"])
@@ -122,7 +135,11 @@ def la_so(lich: dt.datetime, gioi_tinh: str) -> dict:
         co.append({"loai": "tiet_edge", "chi_tiet": (
             f"Sinh cách tiết khí khoảng {gan:.1f} giờ — trụ tháng (và có thể trụ năm) đổi ngay tại "
             "mốc này; sai giờ sinh vài chục phút là sai trụ.")})
-    if lich.hour == 23:
+    if sang_ngay:
+        co.append({"loai": "gio_ty", "chi_tiet": (
+            "Sinh 23:00–23:59: đang xem theo phái ĐỔI NGÀY lúc 23:00 (lựa chọn của bạn) — trụ ngày là ngày hôm sau. "
+            "Mặc định của hệ thống giữ trụ ngày hôm đó (dạ Tý); hai phái chỉ khác trụ ngày, trụ giờ như nhau.")})
+    elif lich.hour == 23:
         co.append({"loai": "da_ty", "chi_tiet": (
             "Sinh 23:00–23:59 (dạ Tý): bát tự ở đây giữ trụ ngày HÔM ĐÓ (chính sách SWITCH_AT_0000), "
             "trụ giờ lấy Tý của ngày sau. Trường phái đổi ngày lúc 23:00 sẽ ra trụ ngày khác; "

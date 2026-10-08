@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import datetime as dt
 
+from app import config
 from app.calc import lunar
 from app.calc.kinhdich_vendor import TRI_BITS, TRI_NGU_HANH
 
@@ -65,14 +66,15 @@ def chi_gio(gio: int) -> str:
     return CHI[((gio + 1) // 2) % 12]
 
 
-def khoi_que_tu_thoi_diem(thoi_diem: dt.datetime) -> dict:
-    """Thời điểm theo giờ Việt Nam (UTC+7) → quẻ Mai Hoa. 23:xx vẫn thuộc ngày đó."""
+def khoi_que_tu_thoi_diem(thoi_diem: dt.datetime, lich: str = "viet") -> dict:
+    """Thời điểm theo giờ Việt Nam (UTC+7) → quẻ Mai Hoa. 23:xx vẫn thuộc ngày đó.
+    `lich`: âm lịch dùng để lấy năm/tháng/ngày âm — "viet" (mặc định) hoặc "trung" (TP-LICH)."""
     d, m, y = thoi_diem.day, thoi_diem.month, thoi_diem.year
-    ngay_am, thang_am, nam_am, _nhuan = lunar.solar_to_lunar(d, m, y, 7.0)
+    ngay_am, thang_am, nam_am, _nhuan = lunar.solar_to_lunar(d, m, y, config.TZ_LICH_AM[lich])
     chi_nam = lunar.can_chi_nam(nam_am)[1]
     cg = chi_gio(thoi_diem.hour)
     kq = khoi_que_thoi_gian(chi_nam, thang_am, ngay_am, cg)
-    kq["dau_vao"] = {"chi_nam": chi_nam, "thang_am": thang_am, "ngay_am": ngay_am, "chi_gio": cg,
+    kq["dau_vao"] = {"chi_nam": chi_nam, "thang_am": thang_am, "ngay_am": ngay_am, "chi_gio": cg, "lich": lich,
                      "nam_am": nam_am, "thoi_diem": thoi_diem.isoformat(timespec="minutes")}
     kq["the_dung"] = the_dung(kq["thuong"], kq["ha"], kq["hao_dong"])
     return kq

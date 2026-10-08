@@ -27,6 +27,8 @@ class SinhInput(BaseModel):
     birth_date: _dt.date | None = None
     birth_year: int | None = Field(default=None, ge=1860, le=2150)
     gender: Literal["nam", "nu"]
+    # TP-LICH: mốc đầu năm tính mệnh quái — Lập xuân (mặc định) / Tết theo âm lịch Việt Nam / Trung Quốc.
+    moc_nam: Literal["lap_xuan", "tet_viet", "tet_trung"] = "lap_xuan"
 
     @model_validator(mode="after")
     def _can_nam(self) -> "SinhInput":
@@ -36,16 +38,20 @@ class SinhInput(BaseModel):
 
     def sinh(self) -> dict:
         return {"nam": self.birth_date.year if self.birth_date else self.birth_year,
-                "gioi_tinh": self.gender, "ngay": self.birth_date}
+                "gioi_tinh": self.gender, "ngay": self.birth_date, "moc_nam": self.moc_nam}
 
 
 @router.post("/menh-quai")
 def api_menh_quai(inp: SinhInput) -> dict:
     s = inp.sinh()
-    mq = pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"])
+    mq = pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"], s["moc_nam"])
     bang = pt.bang_huong(mq["quai"])
+    # Engine tự tính cả ba mốc để người dùng thấy đổi mốc có làm khác mệnh quái không.
+    ss = {m: {k: v for k, v in pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"], m).items() if k in ("quai", "nhom", "nam_tinh")}
+          for m in pt.MOC_NAM}
     return {"engine_version": ENGINE_VERSION, **mq, "bang_huong": bang,
-            "huong_cat": [h for h, d in bang.items() if d in pt.CAT]}
+            "huong_cat": [h for h, d in bang.items() if d in pt.CAT],
+            "so_sanh_moc": ss, "moc_khac": len({x["quai"] for x in ss.values()}) > 1}
 
 
 class DoHuongInput(BaseModel):
@@ -75,7 +81,7 @@ def api_do_huong(inp: DoHuongInput) -> dict:
                     "thoại nằm ngang, tránh xa xe, cột thép, loa.")}
     if inp.sinh:
         s = inp.sinh.sinh()
-        mq = pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"])
+        mq = pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"], s["moc_nam"])
         ra["menh_quai"] = {k: mq[k] for k in ("quai", "nhom")}
         ra["du_nien"] = pt.du_nien(mq["quai"], r["huong"])
         ra["hop_nhom"] = r["trach"]["nhom"][:6] == mq["nhom"][:6]

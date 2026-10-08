@@ -38,6 +38,7 @@ completed_work:
   - "TV-LN: lưu nguyệt Tử vi 5 phái người dùng chọn (mặc định Đẩu Quân, khớp iztro 680/680), hỏi đáp theo tháng"
   - "PL-1: Chính sách quyền riêng tư, Điều khoản, Miễn trừ, Giới thiệu & nguồn, Liên hệ + footer 4 cột (thông tin vận hành qua env)"
   - "PT-V0: form Khảo sát nhà + schema bố cục + luật luận từ bố cục (Bát trạch + kho tình huống) + công cụ gán nhãn/chấm ảnh"
+  - "TP-LICH: chọn âm lịch Việt/Trung + trường phái ở mọi mảng (Bát tự giờ Tý, Phong thuỷ mốc đầu năm, Mai Hoa, nhập âm lịch)"
   - "SEO-E: rà SEO kỹ thuật toàn sitemap → 0 lỗi/0 cảnh báo; H1 + giới thiệu + FAQ trang công cụ; IndexNow; header bảo mật; apple-icon"
   - "SEO-D: bản .md cho bot AI, schema đơn vị vận hành, manifest, xác minh Search Console/Bing, GTM sau đồng ý cookie"
   - "RL-1: hạn mức lượt AI theo người gọi + tổng giờ/ngày, hết lượt rơi về template"
