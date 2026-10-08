@@ -88,15 +88,18 @@
   --ls-nhan-nen: rgb(233 196 106 / 0.05); --ls-hoa-van: rgb(185 167 255 / 0.22); --ls-han: rgb(233 196 106 / 0.22);
   --ls-tt-nen: rgb(236 235 247); --ls-tt-chu: rgb(14 14 32);
 }
+/* A11Y-1: màu chữ Giấy cổ đạt tương phản ≥ 4.5:1 (WCAG AA) trên mọi nền ô — kiểm lại khi đổi màu. */
 .la-so-giay {
   --ls-nen: rgb(239 228 204); --ls-o: rgb(250 244 230); --ls-o-sang: rgb(255 249 233); --ls-giua: rgb(248 240 222);
-  --ls-menh-nen: rgb(253 236 200); --ls-vien: rgb(196 174 132); --ls-chu: rgb(43 33 24); --ls-mo: rgb(122 104 82);
-  --ls-kim: rgb(92 92 102); --ls-moc: rgb(28 120 60); --ls-thuy: rgb(29 78 137); --ls-hoa: rgb(190 52 38);
-  --ls-tho: rgb(170 112 20); --ls-cat: rgb(166 98 18); --ls-sat: rgb(176 36 30); --ls-dao: rgb(190 24 93);
+  --ls-menh-nen: rgb(253 236 200); --ls-vien: rgb(196 174 132); --ls-chu: rgb(43 33 24); --ls-mo: rgb(115 98 77);
+  --ls-kim: rgb(92 92 102); --ls-moc: rgb(27 116 58); --ls-thuy: rgb(29 78 137); --ls-hoa: rgb(186 50 37);
+  --ls-tho: rgb(139 91 16); --ls-cat: rgb(147 87 16); --ls-sat: rgb(176 36 30); --ls-dao: rgb(190 24 93);
   --ls-ky: rgb(30 24 20); --ls-luu: rgb(98 72 178); --ls-nhan: rgb(160 44 28); --ls-nhan-mo: rgb(160 44 28 / 0.45);
   --ls-nhan-nen: rgb(160 44 28 / 0.04); --ls-hoa-van: rgb(160 120 60 / 0.25); --ls-han: rgb(120 80 40 / 0.35);
   --ls-tt-nen: rgb(30 24 20); --ls-tt-chu: rgb(250 244 230);
 }
+/* Nhãn nhỏ (eyebrow) trong vùng Giấy cổ: màu xám của giao diện tối chỉ đạt ~3:1 trên giấy → dùng màu chữ của giấy. */
+.la-so-giay .eyebrow { color: var(--ls-mo); }
 .la-so g[role="button"]:focus-visible > rect:first-child { stroke: var(--ls-nhan); stroke-width: 3; }
 
 @media (prefers-reduced-motion: reduce) {
