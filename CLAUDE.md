@@ -1,7 +1,7 @@
 # CLAUDE.md — HieuBanThan
 
 ## Stack (KHÔNG được đổi khi chưa hỏi)
-Next.js 14 App Router + TypeScript strict / Supabase (Postgres, Auth, Storage - region SG)
+Next.js 15 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth, Storage - region SG)
 / Python FastAPI cho engine tính toán / LLM chỉ qua lớp narrative, model qua OpenRouter
 
 ## Kiến trúc 4 tầng (bất biến)
@@ -38,7 +38,7 @@ engine/          Tầng 1 CALC — Python thuần + FastAPI, không LLM, không 
   app/calc/        Hàm tính thuần: timebase, lunar (Hồ Ngọc Đức), thanso
   fixtures/        Golden dataset — nguồn chân lý cho test
   tests/           Viết TRƯỚC hàm, theo quy tắc code
-web/             Next.js 14 App Router, TS strict, Tailwind + shadcn/ui — chỉ gọi engine, không tự tính
+web/             Next.js 15 App Router, TS strict, Tailwind + shadcn/ui — chỉ gọi engine, không tự tính
 supabase/        Migration, mỗi file .sql có file .down.sql đi kèm
 .claude/skills/  thanso-kb, thanso-tu-cai-thien (thần số) · huyenhoc-kb, huyenhoc-tu-cai-thien (4 mảng Huyền học)
 ```
@@ -91,6 +91,7 @@ Engine không biết Supabase tồn tại. Web không tự tính bất cứ th�
 | 2026-10-08 | **SEO-F trang tuổi hợp hướng** (chủ dự án yêu cầu): 92 trang `/phong-thuy/tuoi-{năm}-{nam|nu}` (1960–2005 — chủ dự án chốt: nhóm đang mua/xây nhà và con cái tìm cho bố mẹ; bỏ hai đầu ít người tìm, tránh trang hàng loạt mỏng) + mục lục `/phong-thuy/huong-hop-tuoi`. Nội dung **do engine dựng** (`luangiai/phongthuy_tuoi.py`, route `/v1/phongthuy/tuoi[/slug]`): can chi, nạp âm, mệnh quái, 4 hướng tốt/xấu, gợi ý bố trí từ KB, FAQ — web chỉ hiển thị. Năm tính theo **Lập xuân** (như công cụ), luôn nêu mốc Lập xuân + Tết Việt và quái của năm trước cho người sinh đầu năm. Mỗi trang có .md, schema Article/FAQPage/Breadcrumb; nháp KB gắn nhãn. Không đổi phép tính → không tăng `ENGINE_VERSION`. |
 | 2026-10-08 | **TP-LICH — chọn âm lịch Việt/Trung + trường phái ở mọi mảng** (chủ dự án yêu cầu): `config.TZ_LICH_AM` = {viet: UTC+7, trung: UTC+8}. Đổi lịch hồ sơ `lich` (+ `am_viet` luôn trả về); Kinh Dịch Mai Hoa `lich`; Phong thuỷ mệnh quái `moc_nam` = `lap_xuan` (mặc định) / `tet_viet` / `tet_trung`, API trả `so_sanh_moc` + `moc_khac`; Bát tự `gio_ty` = `da_ty` (mặc định) / `sang_ngay` (trụ ngày hôm sau, trụ giờ như nhau). Tử vi đã có từ TV-LICH. Web: khung "Trường phái" (`KhungPhai.tsx`) ở Bát tự, Phong thuỷ; chọn lịch ở Mai Hoa và form nhập âm lịch; lựa chọn đi theo MỌI lời gọi (lá số, hỏi đáp, luận giải, đo hướng, khảo sát nhà). Mặc định không đổi → không tăng `ENGINE_VERSION`. |
 | 2026-10-08 | **SEC-1 rà bảo mật** (chủ dự án yêu cầu): báo cáo `docs/BAO-MAT.md`. Engine: so khoá `hmac.compare_digest`; hạn mức **mọi** yêu cầu `/v1` 120/phút mỗi người gọi (`app/gioi_han.py`, env `ENGINE_LUOT_PHUT`, 429); `/health` báo `khoa_engine`; tắt `/docs` khi chạy Render; lỗi iztro không lộ stderr. Web: khoá trừ Sao ký **HMAC bằng bí mật máy chủ** (`SAO_KHOA_SECRET` hoặc `LOI_MOI_SECRET`); `/auth/callback` chỉ chuyển hướng cùng origin; CSP nền (`frame-ancestors`, `base-uri`, `object-src`, `form-action`) + COOP; Next **14.2.35** (bản vá dòng 14 — lên 15/16 chờ duyệt). `.gitignore` chặn `.env`. |
+| 2026-10-08 | **NX15 + CSP-2** (chủ dự án duyệt): **Next 15.5.27 + React 19** (params/cookies bất đồng bộ; instrumentation bật sẵn). **CSP đầy đủ theo nonce** tạo mỗi lượt trong `middleware.ts` (`lib/csp.ts`): `script-src 'nonce-…' 'strict-dynamic'` (script lạ/XSS bị chặn, GTM/gtag nạp được vì do script có nonce nạp), `connect-src` chỉ gồm chính site + PostHog + Google Analytics + Sentry + Supabase (chặn gửi dữ liệu ra máy chủ lạ). Layout đọc `x-nonce` → **mọi trang render động** (bắt buộc để nonce khớp); dữ liệu engine vẫn cache ở tầng fetch (6 giờ). Thêm dịch vụ bên ngoài mới (script/kết nối) = phải thêm tên miền vào `lib/csp.ts`, kiểm bằng `e2e/csp.spec.ts`. |
 
 **Golden SPEC-005:** `engine/fixtures/golden/ziwei_golden.json` (8 lá, sinh cục bộ bằng iztro qua `_generate_ziwei_golden.mjs`). `ziwei_oracle_raw/` giữ 2 lá aov.cc thật làm bằng chứng đối chứng độc lập. Ca `nam_muon_ty` (timeIndex 12) mang `_ty_conflict=true`.
 
