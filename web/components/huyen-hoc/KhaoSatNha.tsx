@@ -2,6 +2,7 @@
 // PT-V0 — "Khảo sát nhà": người dùng tự khai bố cục (phòng nằm ở phương nào nhìn từ tâm nhà, dấu hiệu quan sát được,
 // hướng vật dụng). Web chỉ gom lựa chọn thành JSON bố cục; engine luận Bát trạch + kho tình huống (có nguồn).
 // Cùng JSON này sau này sẽ do ảnh/video điền sẵn (PT-V2) — người dùng chỉ việc xác nhận.
+import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { useEffect, useState } from "react";
 import { Check, ClipboardList, Home, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -42,7 +43,7 @@ const NHOM_DH: Record<string, string> = { ngoai_canh: "Bên ngoài nhà", hinh_n
 const NGUON: Record<string, string> = { co_thu: "cổ thư", dan_gian: "dân gian" };
 
 export function KhaoSatNha({ sinh, doHuongGoiY }: {
-  sinh: { birth_date: string; gender: "nam" | "nu" } | null;
+  sinh: { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
   doHuongGoiY: number | null;
 }) {
   const [dm, setDm] = useState<DanhMuc | null>(null);

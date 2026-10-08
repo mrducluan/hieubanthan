@@ -14,7 +14,7 @@ const ND: NoiDungCongCu = {
   ],
   hoiDap: [
     { hoi: "Bát tự khác Tử vi thế nào?", dap: "Bát tự lấy tám chữ can chi của năm, tháng, ngày, giờ sinh và xét ngũ hành; Tử vi an sao vào 12 cung. Hai hệ thống bổ sung góc nhìn cho nhau." },
-    { hoi: "Sinh lúc 23 giờ thì tính ngày nào?", dap: "Bát tự ở đây giữ trụ ngày của hôm đó và lấy giờ Tý của ngày hôm sau (dạ Tý); trang có gắn cờ để bạn biết." },
+    { hoi: "Sinh lúc 23 giờ thì tính ngày nào?", dap: "Mặc định giữ trụ ngày của hôm đó và lấy giờ Tý của ngày hôm sau (dạ Tý). Ở khung Trường phái bạn chọn được phái đổi ngày lúc 23:00 — khi đó trụ ngày là ngày hôm sau; trang luôn gắn cờ để bạn biết." },
     { hoi: "Dụng thần là gì?", dap: "Hành giúp lá số cân bằng hơn. Vì các trường phái xác định khác nhau, trang trình bày hai cách thay vì chọn một." },
   ],
   lienKet: [{ href: "/kien-thuc/thap-than", ten: "10 thập thần" }, { href: "/kien-thuc/nhat-chu", ten: "10 nhật chủ" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],

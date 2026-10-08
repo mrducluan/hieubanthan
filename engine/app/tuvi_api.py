@@ -54,6 +54,9 @@ class TuanTrietInput(BaseModel):
     # TV-LN (chủ dự án yêu cầu 2026-10-08): phái tính lưu nguyệt (tháng hạn), người dùng chọn.
     luu_nguyet: Literal["dau_quan_thai_tue", "dau_quan_tieu_han", "tieu_han", "luu_nien",
                         "dia_chi_thang"] = "dau_quan_thai_tue"
+    # TP-LICH (chủ dự án yêu cầu 2026-10-08): Bát tự — sinh 23:xx giữ trụ ngày hôm đó (dạ Tý, mặc định) hay đổi
+    # ngày lúc 23:00. Chỉ Bát tự đọc trường này (Tử vi theo iztro luôn sang ngày mới lúc 23:00).
+    gio_ty: Literal["da_ty", "sang_ngay"] = "da_ty"
 
 
 class _DauVao:

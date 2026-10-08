@@ -13,7 +13,7 @@ const ND: NoiDungCongCu = {
     "Mục nào là quan niệm dân gian đều ghi rõ. Trang không giới thiệu hay bán vật phẩm “hoá giải”.",
   ],
   hoiDap: [
-    { hoi: "Tuổi tôi hợp hướng nào?", dap: "Nhập năm sinh và giới tính, trang tính mệnh quái và liệt kê bốn hướng cát (Sinh Khí, Thiên Y, Diên Niên, Phục Vị) cùng bốn hướng hung." },
+    { hoi: "Tuổi tôi hợp hướng nào?", dap: "Nhập năm sinh và giới tính, trang tính mệnh quái và liệt kê bốn hướng cát (Sinh Khí, Thiên Y, Diên Niên, Phục Vị) cùng bốn hướng hung. Sinh đầu năm dương lịch thì mốc đầu năm quan trọng: mặc định Lập xuân, bạn chọn được Tết âm lịch (lịch Việt hoặc Trung Quốc) và xem đổi mốc có làm khác mệnh quái không." },
     { hoi: "Đo hướng nhà thế nào cho đúng?", dap: "Đứng ở cửa chính nhìn thẳng ra ngoài, để điện thoại nằm ngang, tránh xa kim loại; trang dùng la bàn của máy và cho nhập độ tay nếu cần." },
     { hoi: "Có cần mua vật phẩm phong thuỷ không?", dap: "Không. Trang chỉ nêu cách bố trí và quan niệm, không giới thiệu vật phẩm." },
   ],

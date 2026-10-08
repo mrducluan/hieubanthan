@@ -67,6 +67,10 @@ def require_ty_boundary() -> TyBoundary:
 # là lỗi phổ biến nhất khi lập lá số cho người sinh trước 1975.
 CALENDAR_MERIDIAN_TZ = 7.0
 
+# TP-LICH (chủ dự án yêu cầu 2026-10-08): người dùng chọn âm lịch Việt Nam (mặc định) hoặc Trung Quốc ở mọi mảng.
+# Hai lịch cùng thuật toán, khác kinh tuyến tính sóc/trung khí: Việt Nam UTC+7, Trung Quốc UTC+8.
+TZ_LICH_AM = {"viet": CALENDAR_MERIDIAN_TZ, "trung": 8.0}
+
 
 # ---------------------------------------------------------------------------
 # 3. MÚI GIỜ ĐỒNG HỒ THEO LỊCH SỬ

@@ -14,7 +14,7 @@ const ND: NoiDungCongCu = {
   ],
   hoiDap: [
     { hoi: "Nên hỏi Kinh Dịch thế nào?", dap: "Hỏi một việc cụ thể, rõ ràng, liên quan đến lựa chọn của chính bạn (ví dụ: có nên nhận lời mời làm việc này không), tránh câu hỏi có/không về số phận." },
-    { hoi: "Ba cách gieo khác nhau thế nào?", dap: "Máy gieo mô phỏng ba đồng xu; Mai Hoa lấy quẻ theo thời điểm hỏi; tự gieo là bạn tung xu thật rồi nhập. Cách đọc lời quẻ giống nhau." },
+    { hoi: "Ba cách gieo khác nhau thế nào?", dap: "Máy gieo mô phỏng ba đồng xu; Mai Hoa lấy quẻ theo năm, tháng, ngày âm và giờ lúc hỏi (chọn được âm lịch Việt Nam hoặc Trung Quốc); tự gieo là bạn tung xu thật rồi nhập. Cách đọc lời quẻ giống nhau." },
     { hoi: "Không có hào động thì đọc thế nào?", dap: "Lời chủ là quái từ của quẻ, kèm Thoán truyện dịch nghĩa." },
   ],
   lienKet: [{ href: "/kien-thuc/kinh-dich", ten: "64 quẻ Kinh Dịch" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],

@@ -84,7 +84,7 @@ def luan(bo_cuc: dict, sinh: dict | None) -> dict:
     k = kb.bo_cuc()
     huong_nha = pt.huong_tu_do(b.huong_nha_do) if b.huong_nha_do is not None else b.huong_nha
     trach = pt.trach(huong_nha) if huong_nha else None
-    mq = pt.menh_quai(sinh["nam"], sinh["gioi_tinh"], sinh.get("ngay")) if sinh else None
+    mq = pt.menh_quai(sinh["nam"], sinh["gioi_tinh"], sinh.get("ngay"), sinh.get("moc_nam", "lap_xuan")) if sinh else None
     bang_m = pt.bang_huong(mq["quai"]) if mq else None
     bang_t = pt.bang_huong(trach["quai"]) if trach else None
 

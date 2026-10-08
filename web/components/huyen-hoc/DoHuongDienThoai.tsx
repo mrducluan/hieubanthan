@@ -1,4 +1,5 @@
 "use client";
+import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Compass, Navigation, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -50,7 +51,7 @@ function MatLaBan({ doHuong }: { doHuong: number | null }) {
 }
 
 export function DoHuongDienThoai({ sinh, onDungToa, onChot }: {
-  sinh: { birth_date: string; gender: "nam" | "nu" } | null;
+  sinh: { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
   onDungToa?: (doToa: number) => void;
   /** PT-V0: báo kết quả engine vừa đổi (độ hướng nhà) cho khung Khảo sát nhà. */
   onChot?: (kq: KetQuaDoHuong) => void;

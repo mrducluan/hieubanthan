@@ -368,7 +368,7 @@ def van_template(goi: dict) -> str:
 
 def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None = None,
             thoi_diem: dt.datetime | None = None, gieo: bool = True, phuong_phap: str = "thi",
-            cach_ra_que: str | None = None, dung_llm: bool = False) -> dict:
+            cach_ra_que: str | None = None, dung_llm: bool = False, lich: str = "viet") -> dict:
     if che_do not in CHE_DO:
         raise ValueError(f"che_do phải là một trong {CHE_DO}")
     pl = phan_loai(cau_hoi, che_do)
@@ -381,7 +381,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
             vals, nguon = list(gia_tri_hao), "gieo tay (người dùng nhập)"
         elif pl["truong_phai"] == "mai_hoa":
             mai_hoa = mh.khoi_que_tu_thoi_diem(thoi_diem or dt.datetime.now(
-                dt.timezone(dt.timedelta(hours=7))).replace(tzinfo=None))
+                dt.timezone(dt.timedelta(hours=7))).replace(tzinfo=None), lich=lich)
             vals, nguon = mai_hoa["gia_tri_hao"], "Mai Hoa theo thời điểm"
         elif gieo:
             vals, nguon = kinhdich.gieo(phuong_phap), f"engine gieo ({phuong_phap}, CSPRNG)"
@@ -417,4 +417,4 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
     return {"phan_loai": goi["phan_loai"], "que": que, "mai_hoa": mai_hoa, "bang_chung": goi,
             "cau_tra_loi": van, "che_do_van": che_do_van, "loi_kiem_tra": loi,
             "can_them": goi["can_them"], "co_canh_bao": co,
-            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong"}
+            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "lich": lich}

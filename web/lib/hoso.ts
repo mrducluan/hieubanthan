@@ -24,6 +24,8 @@ export const HoSo = z.object({
   do_tin_gio: z.enum(["exact", "approx"]).optional(),
   /** Người dùng nhập theo lịch nào; ngày/tháng/năm ở trên LUÔN là dương lịch (engine đổi). */
   lich_nhap: z.enum(["duong", "am"]).optional(),
+  /** TP-LICH: ngày âm nhập theo âm lịch Việt Nam (mặc định) hay Trung Quốc (sổ tử vi / lịch Trung Quốc). */
+  lich_am: z.enum(["viet", "trung"]).optional(),
   /** Ngày âm tương ứng (engine trả về) — để người dùng đối chiếu giấy tờ. */
   am: z.object({ ngay: z.number().int(), thang: z.number().int(), nam: z.number().int(), nhuan: z.boolean() }).optional(),
   tao_luc: z.string(),

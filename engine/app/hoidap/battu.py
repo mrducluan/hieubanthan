@@ -412,7 +412,7 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     nam_xem = pl["nam_xem"] or (ngay_xem.year + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0))
     ls = None
     if sinh and pl["loai"] in ("la_so", "van", "hop"):
-        ls = bt.la_so(sinh["lich"], sinh["gioi_tinh"])
+        ls = bt.la_so(sinh["lich"], sinh["gioi_tinh"], sinh.get("gio_ty", "da_ty"))
     goi = goi_bang_chung(pl, ls, sinh["gioi_tinh"] if sinh else None, nam_xem)
     van = van_template(goi)
     che_do_van, loi = "template", []
