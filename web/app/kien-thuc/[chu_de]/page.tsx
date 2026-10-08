@@ -8,16 +8,18 @@ import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
 
-type Props = { params: { chu_de: string } };
+type Props = { params: Promise<{ chu_de: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
+export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
+  const params = await thamSo;
   const cd = CHU_DE[params.chu_de];
   if (!cd) return { title: "Không tìm thấy", robots: { index: false } };
   return { title: cd.ten, description: cd.mo_ta, alternates: { canonical: `/kien-thuc/${params.chu_de}`, types: { "text/markdown": `/kien-thuc/${params.chu_de}.md` } },
     openGraph: { title: cd.ten, description: cd.mo_ta, url: `/kien-thuc/${params.chu_de}`, images: [`/og?tieu_de=${encodeURIComponent(cd.ten)}`] } };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params: thamSo }: Props) {
+  const params = await thamSo;
   const cd = CHU_DE[params.chu_de];
   if (!cd) notFound();
   const ds = (await mucLuc()).filter((t) => t.loai === cd.loai);

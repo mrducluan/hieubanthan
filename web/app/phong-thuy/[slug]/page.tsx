@@ -12,11 +12,12 @@ import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, url
 
 export const revalidate = 21600;
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
 const GIOI = { nam: "Nam", nu: "Nữ" } as const;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
+  const params = await thamSo;
   const t = await tuoiHuong(params.slug);
   if (!t) return { title: "Không tìm thấy", robots: { index: false } };
   const duong = duongTuoi(t.slug);
@@ -40,7 +41,8 @@ function The({ ten, h }: { ten: string; h: TuoiHuong["huong_tot"][number] }) {
   );
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params: thamSo }: Props) {
+  const params = await thamSo;
   const t = await tuoiHuong(params.slug);
   if (!t) notFound();
   const duong = duongTuoi(t.slug);

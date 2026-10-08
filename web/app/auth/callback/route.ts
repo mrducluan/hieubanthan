@@ -16,7 +16,7 @@ export async function GET(req: Request) {
   const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL, key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!code || !sbUrl || !key) return NextResponse.redirect(new URL("/dang-nhap?loi=1", url.origin));
 
-  const kho = cookies();
+  const kho = await cookies();
   const sb = createServerClient(sbUrl, key, {
     cookies: {
       getAll: () => kho.getAll(),

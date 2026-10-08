@@ -4,9 +4,10 @@ import { docMa } from "@/lib/ma-moi";
 import { Button } from "@/components/ui/button";
 import { NhanLoiMoi } from "./NhanLoiMoi";
 
-interface Props { params: { ma: string } }
+interface Props { params: Promise<{ ma: string }> }
 
-export function generateMetadata({ params }: Props): Metadata {
+export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
+  const params = await thamSo;
   const nd = docMa(params.ma);
   if (!nd) return { title: "Lời mời hợp đôi" };
   const title = `${nd.t} mời bạn xem hợp đôi`;
@@ -19,7 +20,8 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 // Trang người được mời (docs/THIET-KE-UI.md §6.2): teaser từ mã đã ký → nhập ngày sinh → kết quả đầy đủ.
-export default function Page({ params }: Props) {
+export default async function Page({ params: thamSo }: Props) {
+  const params = await thamSo;
   const nd = docMa(params.ma);
   if (!nd) {
     return (

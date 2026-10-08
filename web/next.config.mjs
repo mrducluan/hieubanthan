@@ -21,11 +21,7 @@ const nextConfig = {
   async rewrites() {
     return { beforeFiles: [{ source: "/:duong((?:[^/]+/)*[^/.]+)\\.md", destination: "/md/:duong" }] };
   },
-  experimental: {
-    // instrumentation.ts (Sentry phía server, chỉ khi có SENTRY_DSN).
-    instrumentationHook: true,
-    // Ảnh thẻ chia sẻ (/og) đọc font OFL từ assets/fonts — đưa vào gói deploy.
-    outputFileTracingIncludes: { "/og": ["./assets/fonts/**"] },
-  },
+  // Ảnh thẻ chia sẻ (/og) đọc font OFL từ assets/fonts — đưa vào gói deploy. (Next 15: instrumentation.ts bật sẵn.)
+  outputFileTracingIncludes: { "/og": ["./assets/fonts/**"] },
 };
 export default nextConfig;
