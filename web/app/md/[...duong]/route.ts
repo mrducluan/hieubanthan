@@ -1,7 +1,7 @@
 // Bản Markdown cho bot AI: /<đường dẫn>.md được rewrite sang /md/<đường dẫn> (next.config.mjs).
 // /index.md · /kien-thuc.md · /kien-thuc/<chủ đề>.md · /kien-thuc/<chủ đề>/<trang>.md · /tu-dien.md
-import { CHU_DE, mucLuc, trang, tuDien } from "@/lib/kien-thuc";
-import { mdChuDe, mdThuVien, mdTrang, mdTuDien, TEN_MANG, traMd } from "@/lib/markdown";
+import { CHU_DE, dsTuoiHuong, mucLuc, trang, tuDien, tuoiHuong } from "@/lib/kien-thuc";
+import { mdChuDe, mdDsTuoi, mdThuVien, mdTrang, mdTuDien, mdTuoi, TEN_MANG, traMd } from "@/lib/markdown";
 import { taoLlmsTxt } from "@/lib/llms";
 
 export const revalidate = 21600;
@@ -14,6 +14,11 @@ export async function GET(_req: Request, { params }: { params: { duong: string[]
   if (p.length === 1 && p[0] === "tu-dien") {
     const d = await tuDien();
     return d ? traMd(mdTuDien(d.muc, TEN_MANG), "/tu-dien") : KHONG_CO();
+  }
+  if (p[0] === "phong-thuy" && p.length === 2) {
+    if (p[1] === "huong-hop-tuoi") return traMd(mdDsTuoi(await dsTuoiHuong()), "/phong-thuy/huong-hop-tuoi");
+    const t = await tuoiHuong(p[1]!);
+    return t ? traMd(mdTuoi(t), `/phong-thuy/${p[1]}`) : KHONG_CO();
   }
   const [goc, khoa, slug] = p;
   if (goc !== "kien-thuc" || p.length > 3) return KHONG_CO();

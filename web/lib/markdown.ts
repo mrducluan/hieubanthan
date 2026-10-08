@@ -1,6 +1,6 @@
 // AIO/GEO — bản Markdown của trang công khai cho bot AI / LLM đọc (chuẩn llmstxt.org: cùng URL + ".md").
 // Chỉ định dạng lại dữ liệu KB engine đã trả — không viết thêm nghĩa. Dùng ở route handler (server).
-import { CHU_DE, duongTrang, type MucLuc, type MucTuDien, type TrangKienThuc } from "@/lib/kien-thuc";
+import { CHU_DE, duongTrang, duongTuoi, type MucLuc, type MucTuDien, type MucTuoiHuong, type TrangKienThuc, type TuoiHuong } from "@/lib/kien-thuc";
 import { MO_TA_SITE, TEN_SITE, urlDayDu } from "@/lib/seo";
 
 const nhan = (trangThai: string) => (trangThai === "da_duyet" ? "đã duyệt" : "bản nháp AI, đang được chuyên gia duyệt");
@@ -74,4 +74,24 @@ export function traMd(noiDung: string, duongHtml: string): Response {
       "cache-control": "public, max-age=0, s-maxage=21600, stale-while-revalidate=86400",
     },
   });
+}
+
+// SEO-F — trang tuổi hợp hướng
+export function mdTuoi(t: TuoiHuong): string {
+  const d = [`# ${t.tieu_de}`, "", `> ${t.mo_ta}`, "", `URL: ${urlDayDu(duongTuoi(t.slug))}`,
+    `Năm ${t.can_chi} · nạp âm ${t.nap_am.ten} · mệnh quái ${t.menh_quai.quai} (${t.menh_quai.nhom})`, "",
+    "## Trả lời nhanh", "", t.tra_loi_nhanh, "", "## 4 hướng tốt (từ tốt nhất)", "",
+    ...t.huong_tot.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "", "## 4 hướng nên tránh", "",
+    ...t.huong_xau.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "", "## Cửa, bếp, giường, bàn làm việc", "",
+    ...t.goi_y.map((g) => `- ${g.tieu_de}: ${g.huong.join(" → ")}. ${g.noi_dung}`), "", "## Mốc đầu năm", "",
+    `- Lập xuân: ${t.moc_dau_nam.lap_xuan}; Tết (lịch Việt): ${t.moc_dau_nam.tet_viet}; Tết (lịch Trung Quốc): ${t.moc_dau_nam.tet_trung}.`,
+    `- Sinh trước mốc: tính năm ${t.sinh_truoc_moc.nam_tinh}, mệnh ${t.sinh_truoc_moc.quai}.`, "",
+    "## Câu hỏi thường gặp", "", ...t.hoi_dap.flatMap((h) => [`**${h.hoi}**`, "", h.dap, ""]),
+    `Nguồn: ${t.nguon}.`, ""];
+  return d.join("\n");
+}
+
+export function mdDsTuoi(ds: MucTuoiHuong[]): string {
+  return ["# Hướng hợp tuổi (1930–2029, nam và nữ)", "", `URL: ${urlDayDu("/phong-thuy/huong-hop-tuoi")}`, "",
+    ...ds.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTuoi(t.slug))}.md): mệnh ${t.quai}, ${t.nhom}`), ""].join("\n");
 }

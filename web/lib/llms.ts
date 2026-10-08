@@ -30,6 +30,7 @@ export async function taoLlmsTxt(): Promise<string> {
     "## Tham khảo",
     `- [Thư viện kiến thức](${urlDayDu("/kien-thuc.md")})`,
     `- [Từ điển thuật ngữ](${urlDayDu("/tu-dien.md")})`,
+    `- [Hướng hợp tuổi 1930–2029, nam và nữ (200 trang)](${urlDayDu("/phong-thuy/huong-hop-tuoi.md")})`,
     `- [Lá số minh hoạ đọc từng bước](${urlDayDu("/la-so-mau")})`,
     `- [Giới thiệu & phương pháp, nguồn](${urlDayDu("/gioi-thieu")})`,
     `- [Toàn văn thư viện (một tệp)](${urlDayDu("/llms-full.txt")})`,

@@ -17,7 +17,7 @@ const ND: NoiDungCongCu = {
     { hoi: "Đo hướng nhà thế nào cho đúng?", dap: "Đứng ở cửa chính nhìn thẳng ra ngoài, để điện thoại nằm ngang, tránh xa kim loại; trang dùng la bàn của máy và cho nhập độ tay nếu cần." },
     { hoi: "Có cần mua vật phẩm phong thuỷ không?", dap: "Không. Trang chỉ nêu cách bố trí và quan niệm, không giới thiệu vật phẩm." },
   ],
-  lienKet: [{ href: "/tu-dien", ten: "Từ điển thuật ngữ phong thuỷ" }, { href: "/kham-pha", ten: "Các hệ thống khác" }],
+  lienKet: [{ href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào (1930–2029)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ phong thuỷ" }, { href: "/kham-pha", ten: "Các hệ thống khác" }],
 };
 
 export const metadata: Metadata = metaTrang({ tieuDe: "Phong thuỷ Bát trạch: mệnh quái, hướng nhà hợp tuổi, bố cục nhà", moTa: ND.moTa, duong: ND.duong });
