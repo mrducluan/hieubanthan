@@ -5,7 +5,7 @@ current_phase: 1
 current_hypothesis: >-
   H1 Free Reading thu hút người dùng + H2 Metaphysics ID tạo gắn bó
   (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
-current_build: "SEO-C trang kiến thức cung/thập thần/nhật chủ (sau QA-RV rà soát hỏi đáp, TS-SAU thần số chiều sâu, TV-LICH trường phái)"
+current_build: "KB-0009 migration chân dung + quan hệ; tên miền hieuban.com (sau PT-V1 la bàn, SEO-C trang kiến thức cung/thập thần/nhật chủ (sau QA-RV rà soát hỏi đáp, TS-SAU thần số chiều sâu, TV-LICH trường phái)"
 current_gate: "Gate 0 (kỹ thuật đạt; chưa có 20–50 người thử) → Gate 1"
 current_metrics: []   # có khi bật NEXT_PUBLIC_POSTHOG_KEY
 current_risks:
@@ -16,6 +16,7 @@ current_risks:
   - "Credit (Sao) làm trước Gate 1 theo quyết định chủ dự án — chỉ điểm nội bộ, chưa thu tiền; mở thanh toán cần luật sư (docs/DE-XUAT-KINH-TE-CONG-DONG.md)"
   - "SEO: index cả nháp AI (quyết định chủ dự án) — rủi ro chính sách nội dung AI hàng loạt của Google; trang nháp luôn gắn nhãn"
   - "Thử nghiệm nội bộ 2 tháng (chủ dự án chốt) trước khi mở công khai / bán Sao"
+  - "Chưa có trang Chính sách quyền riêng tư — bắt buộc trước khi mở công khai (tài khoản lưu ngày giờ sinh)"
   - "Staging đang bật Basic Auth → máy tìm kiếm/bot AI chưa vào được cho tới khi mở công khai"
 completed_work:
   - "Engine thần số deterministic + golden + Q&A v2 + vòng tự cải thiện (PR #1–#7)"
@@ -32,10 +33,12 @@ completed_work:
   - "Từ điển 221 thuật ngữ, nôm na 64 quẻ + 384 hào, 6 lá số minh hoạ đọc từng bước"
   - "TS-SAU: chân dung 4 mặt, dòng đời & bước ngoặt + đối chiếu năm biến cố, hợp đôi theo 5 loại quan hệ (PR #41)"
   - "QA-RV: rà soát hỏi đáp 5 mảng bằng bộ câu chuyên gia — sửa ~20 lỗi hiểu sai câu, test hồi quy nội dung (PR #42)"
-  - "SEO-C: +32 trang kiến thức (12 cung Tử vi, 10 thập thần, 10 nhật chủ) — thư viện 122 trang"
+  - "SEO-C: +32 trang kiến thức (12 cung Tử vi, 10 thập thần, 10 nhật chủ) — thư viện 122 trang (PR #43)"
+  - "PT-V1: đo hướng nhà bằng la bàn điện thoại + nhập độ tay, nối sang Huyền Không (PR #44)"
+  - "KB-0009: migration đưa KB chân dung + quan hệ lên Supabase (chỉ dữ liệu, bảng thanso_kb_khoi), SQL kiểm tra migration đã chạy"
 active_work:
   - "Hạ tầng GĐ1: chủ dự án tạo engine Render Singapore/Starter, đổi ENGINE_URL, bật Sentry + báo sập (docs/TRIEN-KHAI.md)"
-  - "Chờ chủ dự án: review PR, duyệt + chạy 0006 → 0007 → 0008, cấu hình env, bỏ Basic Auth khi mở công khai"
+  - "Chờ chủ dự án (danh sách nhắc: docs/VIEC-CUA-ANH.md): gắn tên miền hieuban.com, chạy 0006 → 0009, cấu hình env, quyết bỏ Basic Auth"
 blocked_work:
   - "Tài khoản chạy thật cần: bật Supabase Auth (Email, Google OAuth, Phone/SMS provider) + env + chạy 0006"
   - "Đo lường chạy thật cần NEXT_PUBLIC_POSTHOG_KEY"
@@ -45,9 +48,9 @@ next_candidate_tasks:
   - "Tuyển 20–50 người thử (Gate 0 định tính) trên bản UI mới — đo funnel Phase 1 bằng PostHog (VIỆC SỐ 1, cần chủ dự án)"
   - "Đọc số Gate 1 (landing→start→complete→profile, góp ý) trước khi mở rộng tính năng"
   - "Duyệt nháp KB (quẻ, sao, chân dung thần số, quan hệ) để đổi nhãn nháp → đã duyệt (chủ dự án / người có nghề)"
-  - "PT-V1: la bàn hướng nhà trên điện thoại (đọc cảm biến ở web, engine đổi độ → 24 sơn, cho sửa tay)"
+  - "Trang Chính sách quyền riêng tư (NĐ 13/2023) — cần trước khi bỏ Basic Auth"
+  - "PT-V1: thử la bàn trên iPhone + Android thật (lệch ≤ 15°)"
   - "Tử vi lưu nguyệt — chờ chủ dự án chốt phái tính tháng hạn"
-  - "Migration đưa 2 KB mới (chân dung, quan hệ) lên Supabase — chờ duyệt"
   - "Chạy bộ 55 câu chuyên gia với LLM thật trước khi mở công khai"
   - "PT-V0: bộ đánh giá ảnh phong thuỷ (cần 50–100 bộ ảnh nhà thật có phép dùng)"
 prohibited_until_gate:
@@ -56,4 +59,4 @@ prohibited_until_gate:
   - "Community"
   - "Marketplace"
   - "Native Mobile"
-last_updated: "2026-10-07"
+last_updated: "2026-10-08"

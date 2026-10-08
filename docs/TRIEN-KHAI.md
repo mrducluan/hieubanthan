@@ -74,7 +74,9 @@ chia sẻ, thư viện, sitemap, llms.txt) và in ✓/✗ kèm lời báo lỗi.
 
 ## Thứ tự migration Supabase
 
-`0001 → … → 0005 → 0006 (ho_so) → 0007 (nơi sinh, âm lịch) → 0008 (Sao)`. Mỗi file có `.down.sql`.
+`0001 → … → 0005 → 0006 (ho_so) → 0007 (nơi sinh, âm lịch) → 0008 (Sao) → 0009 (KB chân dung + quan hệ, chỉ dữ liệu)`.
+Mỗi file có `.down.sql`. Kiểm tra đã chạy tới đâu: dán `supabase/kiem_thu/da_chay_chua.sql` vào SQL Editor.
+Tên miền `hieuban.com` + danh sách việc của chủ dự án: `docs/VIEC-CUA-ANH.md`.
 Engine và web đều chạy được khi migration mới chưa chạy (tính năng tương ứng ẩn đi / ghi nhật ký bỏ qua).
 
 ## Bật thu Sao cho "Luận giải toàn bộ" (SAO-LG — mặc định TẮT)
