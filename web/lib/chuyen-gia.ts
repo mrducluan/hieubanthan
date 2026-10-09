@@ -10,6 +10,8 @@ export interface ChuyenGia {
   vaiTro: string;
   /** Một câu ngắn hiện dưới tên (byline, thẻ). */
   tomTat: string;
+  /** GN-1: thâm niên hiển thị ở chữ ký "Góc nhìn chuyên gia", ví dụ "hơn 15 năm". */
+  thamNien: string;
   linhVuc: string[];
   gioiThieu: string[];
   /** Hồ sơ mạng xã hội / trang cá nhân do chuyên gia cung cấp (schema sameAs). */
@@ -22,6 +24,7 @@ export const CHUYEN_GIA: Record<string, ChuyenGia> = {
     ten: "Đức Luân",
     vaiTro: "Người sáng lập · Chủ biên nội dung",
     tomTat: "Hơn 15 năm nghiên cứu thần số học, Tử vi, Bát tự, Phong thuỷ và Kinh Dịch.",
+    thamNien: "hơn 15 năm",
     linhVuc: ["Thần số học", "Tử vi", "Bát tự", "Phong thuỷ", "Kinh Dịch"],
     gioiThieu: [
       "Đức Luân là người sáng lập Hiểu Bản Thân, với hơn 15 năm nghiên cứu thần số học, Tử vi, Bát tự, Phong thuỷ và Kinh Dịch.",

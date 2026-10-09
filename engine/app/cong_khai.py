@@ -30,7 +30,7 @@ QUY_TAC: list[tuple[re.Pattern[str], str]] = [(re.compile(m), t) for m, t in [
     (r"Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần\. ?", ""),
     (r"Truyền thống Pythagoras / Balliett→Jordan\. Renderings tiếng Việt — tham khảo văn hoá, không verbatim từ một "
      r"sách cụ thể, không phải dự báo\.",
-     "Thần số học Pythagoras — Hiểu Bản Thân biên soạn bản tiếng Việt. Tham khảo văn hoá, không phải dự báo."),
+     "Thần số học Pythagoras — Hiểu Bản Thân biên soạn bản tiếng Việt. Nội dung tham khảo văn hoá, không phải lời dự báo."),
     (r"Dòng Balliett → Jordan — Thần số học Pythagoras hiện đại, Mỹ 1905–1965 \(L\. Dow Balliett, Juno Jordan\)\.",
      "Thần số học Pythagoras hiện đại."),
     (r"Nội dung theo dòng Balliett→Jordan \(thần số học Pythagoras hiện đại, Mỹ 1905–1965\)\.",
@@ -43,13 +43,17 @@ QUY_TAC: list[tuple[re.Pattern[str], str]] = [(re.compile(m), t) for m, t in [
     (r"Lá số an bằng iztro \(khung Tử Vi Đẩu Số\); chính tinh và tứ hoá trùng các nguồn đối chiếu, bộ phụ tinh Nam "
      r"phái chưa đối chiếu đủ\.", _TUVI_KHUNG),
     (r"Bảng tứ hoá theo thiên can: theo iztro \(giữ cho Canh/Nhâm, quyết định 2026-10-02\)\.",
-     "Bảng tứ hoá theo thiên can: theo bảng phổ biến của Tử Vi Đẩu Số (can Canh, Nhâm có sách ghi khác)."),
+     "Tứ hoá theo can năm sinh: theo bảng phổ biến của Tử Vi Đẩu Số; riêng can Canh và can Nhâm, các sách ghi khác nhau."),
     (r"Khung Nam phái — skill tuvi-vn \(Nguyễn Phát Lộc\)", "Tử vi Nam phái (lối Việt) — theo Nguyễn Phát Lộc"),
-    (r", đối chiếu lasotuvi \(MIT\) 60 lá số mẫu", ", đối chiếu với 60 lá số mẫu"),
+    (r"Vị trí chính tinh và độ sáng: tính theo khẩu quyết an sao, đối chiếu lasotuvi \(MIT\) 60 lá số mẫu\.",
+     "Vị trí chính tinh và độ miếu, vượng, đắc, bình, hãm: an theo khẩu quyết Tử Vi Đẩu Số, đã đối chiếu 60 lá số mẫu."),
+    (r", đối chiếu lasotuvi \(MIT\) 60 lá số mẫu", "; đã đối chiếu 60 lá số mẫu"),
     (r"; phần mềm iztro \(MIT\) — phổ biến nhất", " — cách phổ biến nhất"),
     (r"tử vi \(theo iztro\)", "tử vi"),
     (r" \(cách của iztro, dùng cho tử vi ở đây\)", " (cách dùng cho tử vi ở đây)"),
     # Lịch, nguồn số hoá, nhãn nháp trong ghi chú nguồn
+    (r"Nạp âm 60 hoa giáp, can chi năm theo âm lịch Hồ Ngọc Đức \(Việt Nam\); Lập xuân theo tiết khí \(giờ Việt Nam\)\.",
+     "Nạp âm Lục thập hoa giáp; can chi năm theo âm lịch Việt Nam; mốc Lập xuân tính theo tiết khí, giờ Việt Nam."),
     (r"âm lịch Hồ Ngọc Đức \(Việt Nam\)", "âm lịch Việt Nam"),
     (r" \(thuật toán Hồ Ngọc Đức\)", ""),
     (r" — ctext\.org/[\w\-/]*", ""),

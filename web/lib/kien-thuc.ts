@@ -61,6 +61,8 @@ export interface TrangKienThuc {
   trang_thai: string; index: boolean; cap_nhat: string;
   /** EEAT-1: mã chuyên gia (tra hồ sơ ở lib/chuyen-gia.ts). tac_gia chỉ có khi chuyên gia tự viết; tham_dinh chỉ khi đã duyệt. */
   chu_bien: string; tac_gia: string | null; tham_dinh: { nguoi: string; ngay: string } | null;
+  /** GN-1: lời chính chuyên gia viết (2–4 câu kinh nghiệm), chỉ có trên trang người đó đã thẩm định / tự viết. */
+  goc_nhin: { noi_dung: string; nguoi: string; ngay: string } | null;
   bien_soan: "chuyen_gia" | "ai_ho_tro";
   /** MH-1: dữ liệu hình minh hoạ do engine trả (web chỉ vẽ). */
   minh_hoa?: MinhHoaDuLieu;

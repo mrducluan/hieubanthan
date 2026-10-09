@@ -5,7 +5,7 @@ Tầng KB: chỉ GHI NHẬN việc người thật đã làm, không sinh nội 
 - chủ biên (`CHU_BIEN`): chịu trách nhiệm biên tập toàn site → mọi trang;
 - tác giả: chỉ trang có nội dung do chính chuyên gia viết (ý nghĩa số — `_TAC_GIA_THEO_LOAI`);
 - thẩm định: chỉ trang chuyên gia ĐÃ đọc và duyệt, ghi trong `data/tham_dinh.json` → trang chuyển "da_duyet".
-Trang chưa thẩm định giữ nhãn biên soạn có AI hỗ trợ (minh bạch theo hướng dẫn "Who/How/Why" của Google).
+Trang chưa thẩm định: web ghi "Ban biên tập + Chủ biên" (BM-1). Trang đã thẩm định có thể kèm "Góc nhìn chuyên gia" (GN-1).
 
 Hồ sơ hiển thị (tiểu sử, lĩnh vực) nằm ở web `lib/chuyen-gia.ts`; engine chỉ biết mã (slug) chuyên gia.
 Đánh dấu: `python scripts/tham_dinh.py danh-dau <loai> <slug>` (xem `--help`).
@@ -13,8 +13,11 @@ Hồ sơ hiển thị (tiểu sử, lĩnh vực) nằm ở web `lib/chuyen-gia.t
 from __future__ import annotations
 
 import json
+import re
 from functools import lru_cache
 from pathlib import Path
+
+from app.narrative import hoi_van
 
 _FILE = Path(__file__).parent / "data" / "tham_dinh.json"
 
@@ -35,6 +38,34 @@ def _doc_so() -> dict:
     return _doc_file()
 
 
+# GN-1 — "Góc nhìn chuyên gia": 2–4 câu kinh nghiệm thật, do CHÍNH chuyên gia viết, chỉ đi kèm trang người đó đã thẩm
+# định (hoặc tự viết). Hệ thống chỉ sửa chính tả, không thêm ý. Luật nội dung như KB: không phán, không bệnh tật/sống
+# chết, không bán vật phẩm/giải hạn, không dẫn liên hệ ra ngoài. `ghi_chu` là ghi chú NỘI BỘ (đã sửa gì) — không lộ.
+GOC_NHIN_TOI_THIEU, GOC_NHIN_TOI_DA = 60, 800
+_CAM_GOC_NHIN = [*hoi_van.CAM, "lời nguyền", "khắc chết", "chết yểu", "phá sản", "ly hôn chắc", "hoá giải",
+                 "giải hạn", "vật phẩm", "bùa", "cúng sao", "dâng sao", "chữa bệnh", "trúng số", "lô đề"]
+_LIEN_HE = re.compile(r"https?://|www\.|\b\d[\d .]{8,}\d\b|@\w+\.\w+|zalo", re.I)
+# Chuẩn hoá bỏ dấu kiểu cũ/mới (hóa ↔ hoá) trước khi so cụm cấm.
+_DAU = str.maketrans({"ó": "o", "ò": "o", "ỏ": "o", "õ": "o", "ọ": "o", "á": "a", "à": "a", "ả": "a", "ã": "a",
+                      "ạ": "a", "ú": "u", "ù": "u", "ủ": "u", "ũ": "u", "ụ": "u", "ý": "y", "ỳ": "y", "ỷ": "y",
+                      "ỹ": "y", "ỵ": "y", "é": "e", "è": "e", "ẻ": "e", "ẽ": "e", "ẹ": "e"})
+
+
+def kiem_goc_nhin(van: str) -> list[str]:
+    """Lỗi của một đoạn Góc nhìn chuyên gia (rỗng = hợp lệ)."""
+    loi = []
+    n = len(van.strip())
+    if not GOC_NHIN_TOI_THIEU <= n <= GOC_NHIN_TOI_DA:
+        loi.append(f"độ dài {n} ký tự (cần {GOC_NHIN_TOI_THIEU}–{GOC_NHIN_TOI_DA}, khoảng 2–4 câu)")
+    thuong = van.lower().translate(_DAU)
+    for c in _CAM_GOC_NHIN:
+        if c.lower().translate(_DAU) in thuong:
+            loi.append(f"có cụm \"{c}\" (giọng phán / ngoài ranh giới nội dung)")
+    if _LIEN_HE.search(van):
+        loi.append("có liên kết, số điện thoại hoặc thông tin liên hệ")
+    return loi
+
+
 def gan(t: dict) -> dict:
     """Gắn chu_bien / tac_gia / tham_dinh / bien_soan vào một trang (gọi từ trang._hoan_tat)."""
     tg = _TAC_GIA_THEO_LOAI.get(t["loai"])
@@ -42,6 +73,8 @@ def gan(t: dict) -> dict:
     t["chu_bien"] = CHU_BIEN
     t["tac_gia"] = tg
     t["tham_dinh"] = {"nguoi": td["nguoi"], "ngay": td["ngay"]} if td else None
+    t["goc_nhin"] = ({"noi_dung": td["goc_nhin"], "nguoi": td["nguoi"], "ngay": td["ngay"]}
+                     if td and td.get("goc_nhin") else None)
     t["bien_soan"] = "chuyen_gia" if tg else "ai_ho_tro"
     if td:
         t["trang_thai"] = "da_duyet"
@@ -56,9 +89,13 @@ def _kiem(so: dict, loai: str, slug: str, nguoi: str) -> None:
         raise ValueError(f"Không có trang {loai}/{slug}")
 
 
-def danh_dau(so: dict, loai: str, slug: str, nguoi: str, ngay: str, ghi_chu: str = "") -> None:
+def danh_dau(so: dict, loai: str, slug: str, nguoi: str, ngay: str, ghi_chu: str = "", goc_nhin: str = "") -> None:
     _kiem(so, loai, slug, nguoi)
-    so["trang"][f"{loai}/{slug}"] = {"nguoi": nguoi, "ngay": ngay, **({"ghi_chu": ghi_chu} if ghi_chu else {})}
+    goc_nhin = " ".join(goc_nhin.split())
+    if goc_nhin and (loi := kiem_goc_nhin(goc_nhin)):
+        raise ValueError("Góc nhìn chuyên gia chưa đạt: " + "; ".join(loi))
+    so["trang"][f"{loai}/{slug}"] = {"nguoi": nguoi, "ngay": ngay, **({"ghi_chu": ghi_chu} if ghi_chu else {}),
+                                     **({"goc_nhin": goc_nhin} if goc_nhin else {})}
 
 
 def bo(so: dict, loai: str, slug: str) -> None:
@@ -76,6 +113,31 @@ def hang_doi() -> list[dict]:
     from app.kb import trang
     ds = [t for t in trang.danh_sach() if t["trang_thai"] != "da_duyet"]
     return sorted(ds, key=lambda t: _UU_TIEN.index(t["loai"]) if t["loai"] in _UU_TIEN else len(_UU_TIEN))
+
+
+def hang_doi_gsc(duong_csv) -> list[dict]:
+    """Hàng đợi theo số liệu thật: file CSV tab "Trang" xuất từ Search Console (tiếng Việt hay Anh đều được — đọc theo
+    vị trí cột: URL, lượt nhấp, lượt hiển thị, CTR, vị trí). Chỉ trang chưa thẩm định, xếp theo lượt hiển thị bị bỏ lỡ
+    (hiển thị − nhấp): trang Google đã cho lên nhưng ít người bấm là chỗ thẩm định + viết lại "Trả lời nhanh" lợi nhất."""
+    import csv
+    from app.kb import trang
+    theo_slug = {}
+    for t in trang.danh_sach():
+        theo_slug.setdefault(t["slug"], []).append(t)
+    ra = []
+    with open(duong_csv, encoding="utf-8-sig", newline="") as f:
+        dong = list(csv.reader(f))
+    for d in dong[1:]:
+        if len(d) < 5 or "/kien-thuc/" not in d[0]:
+            continue
+        slug = d[0].rstrip("/").split("/")[-1].removesuffix(".md")
+        khop = theo_slug.get(slug, [])
+        if len(khop) != 1 or khop[0]["trang_thai"] == "da_duyet":
+            continue
+        so = lambda x: float(x.replace("%", "").replace(",", ".") or 0)
+        nhap, hien = int(so(d[1])), int(so(d[2]))
+        ra.append({**khop[0], "nhap": nhap, "hien_thi": hien, "vi_tri": so(d[4]), "bo_lo": hien - nhap})
+    return sorted(ra, key=lambda x: -x["bo_lo"])
 
 
 def ho_so(slug: str) -> dict | None:

@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { MinhHoa } from "@/components/minh-hoa/MinhHoa";
 import { DongTacGia } from "@/components/kien-thuc/DongTacGia";
+import { GocNhinChuyenGia } from "@/components/kien-thuc/GocNhinChuyenGia";
 import { CHUYEN_GIA, idChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
 import { CHU_DE, duongTrang, trang, type TrangKienThuc } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
@@ -124,6 +125,8 @@ export default async function Page({ params: thamSo }: Props) {
         <p className="eyebrow">Trả lời nhanh</p>
         <p className="mt-2 text-lg leading-relaxed text-fg">{t.tra_loi_nhanh}</p>
       </section>
+
+      {t.goc_nhin && <GocNhinChuyenGia goc_nhin={t.goc_nhin} loai={t.loai} />}
 
       <div className="mt-8 space-y-8">
         {t.muc.map((m) => (

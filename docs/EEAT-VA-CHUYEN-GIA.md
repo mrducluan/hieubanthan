@@ -45,9 +45,15 @@
 ## 3. Quy trình thẩm định cho anh
 
 **Cách nhanh nhất:** anh đọc bài trên web → nhắn em "duyệt bài <link>" (kèm chỗ cần sửa nếu có). Em sửa KB theo ý anh,
-chạy `python scripts/tham_dinh.py danh-dau <link> --ngay <hôm nay>`, mở PR. Bài sửa nhiều thì em ghi chú vào sổ.
+chạy `python scripts/tham_dinh.py danh-dau <link> --ngay <hôm nay> [--goc-nhin "…"]`, mở PR. Bài sửa nhiều thì em ghi
+chú nội bộ vào sổ (`--ghi-chu`, không hiện trên web).
 
-**Thứ tự gợi ý** (`python scripts/tham_dinh.py hang-doi`): trang trụ cột trước vì nhiều trang khác trỏ vào —
+**Góc nhìn chuyên gia (GN-1):** anh gửi kèm 2–4 câu kinh nghiệm thật → hiện thành khung có chữ ký ngay sau "Trả lời
+nhanh". Chỉ sửa chính tả, không thêm ý; luật nội dung kiểm tự động (`python scripts/tham_dinh.py kiem-goc-nhin "…"`):
+60–800 ký tự, không cụm phán định, không bệnh tật/sống chết, không vật phẩm/giải hạn, không link/số điện thoại.
+Câu mẫu do người khác viết **không** được gắn tên anh.
+
+**Thứ tự gợi ý** (`python scripts/tham_dinh.py hang-doi`, hoặc theo số thật: `hang-doi --gsc Trang.csv`): trang trụ cột trước vì nhiều trang khác trỏ vào —
 14 sao · 12 cung · 64 quẻ · 10 nhật chủ · 10 thập thần (**110 bài**), rồi hợp số, nghề, tình yêu, năm cá nhân, nợ
 nghiệp (82), rồi cụm dài: tứ hoá × cung (48), mệnh theo năm (76), sao × cung (168).
 

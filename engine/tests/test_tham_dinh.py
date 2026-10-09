@@ -108,3 +108,66 @@ def test_file_tham_dinh_dinh_dang_chuan():
     raw = p.read_text("utf-8")
     assert raw.endswith("\n")
     assert json.loads(raw)["chuyen_gia"] == ["duc-luan"]
+
+
+# --- GN-1: "Góc nhìn chuyên gia" — lời của chính chuyên gia, chỉ trên trang người đó đã thẩm định ---
+GOC_NHIN = ("Người có quẻ này hay hỏi tôi có nên bỏ cuộc không. Tôi thường khuyên giữ việc chính, "
+            "nói ít làm nhiều, vì lời quẻ vẫn mở đường hanh thông cho người giữ được chính đạo.")
+
+
+def test_goc_nhin_gan_vao_trang_da_tham_dinh(so_dang_ky):
+    td.danh_dau(so_dang_ky, "que", "que-47-khon", "duc-luan", "2026-10-12", goc_nhin=GOC_NHIN)
+    t = trang.lay("que", "que-47-khon")
+    assert t["goc_nhin"] == {"noi_dung": GOC_NHIN, "nguoi": "duc-luan", "ngay": "2026-10-12"}
+    assert t["trang_thai"] == "da_duyet"
+    assert trang.lay("que", "que-1-can")["goc_nhin"] is None
+
+
+def test_goc_nhin_tren_trang_tac_gia(so_dang_ky):
+    td.danh_dau(so_dang_ky, "so", "so-7", "duc-luan", "2026-10-12", goc_nhin=GOC_NHIN)
+    t = trang.lay("so", "so-7")
+    assert t["tac_gia"] == "duc-luan" and t["goc_nhin"]["nguoi"] == "duc-luan"
+
+
+@pytest.mark.parametrize("cau", [
+    "Ngắn quá.",                                                     # dưới độ dài tối thiểu
+    "Người có sao này bạn sẽ gặp may trong năm tới, cứ yên tâm mà làm, mọi việc đều thuận lợi cả.",
+    "Đây là định mệnh, ai có quẻ này cũng phải chịu như vậy, không có cách nào khác để thay đổi được.",
+    "Muốn hoá giải thì liên hệ tôi qua số 0912345678 để mua vật phẩm phong thuỷ phù hợp với tuổi của mình.",
+    "Xem thêm tại https://example.com để biết chi tiết cách luận lá số theo trường phái của tôi nhé.",
+    "x" * 801,                                                       # quá dài
+])
+def test_goc_nhin_vi_pham_bi_chan(so_dang_ky, cau):
+    with pytest.raises(ValueError):
+        td.danh_dau(so_dang_ky, "que", "que-47-khon", "duc-luan", "2026-10-12", goc_nhin=cau)
+    assert "que/que-47-khon" not in so_dang_ky["trang"]
+
+
+def test_goc_nhin_qua_api(so_dang_ky):
+    td.danh_dau(so_dang_ky, "que", "que-47-khon", "duc-luan", "2026-10-12", goc_nhin=GOC_NHIN)
+    d = client.get("/v1/kb/trang/que/que-47-khon").json()
+    assert d["goc_nhin"]["noi_dung"] == GOC_NHIN
+    assert client.get("/v1/kb/trang/que/que-1-can").json()["goc_nhin"] is None
+
+
+def test_ghi_chu_noi_bo_khong_lo_ra_api(so_dang_ky):
+    td.danh_dau(so_dang_ky, "que", "que-47-khon", "duc-luan", "2026-10-12", ghi_chu="sửa câu 3 mục Lời khuyên")
+    assert "sửa câu 3" not in client.get("/v1/kb/trang/que/que-47-khon").text
+
+
+# --- GN-1: hàng đợi theo Search Console (file CSV "Trang" anh tải từ GSC) ---
+CSV_GSC = """Trang hàng đầu,Lượt nhấp,Số lần hiển thị,CTR,Vị trí
+https://hieuban.com/kien-thuc/kinh-dich/que-47-khon,2,1200,0.17%,9.1
+https://hieuban.com/kien-thuc/tu-vi/sao-tu-vi,40,1000,4%,3.2
+https://hieuban.com/kien-thuc/than-so/so-7,30,700,4.3%,4
+https://hieuban.com/lien-he,1,50,2%,20
+"""
+
+
+def test_hang_doi_theo_gsc(so_dang_ky, tmp_path):
+    p = tmp_path / "gsc.csv"
+    p.write_text(CSV_GSC, "utf-8")
+    hd = td.hang_doi_gsc(p)
+    # Bài đã duyệt (so-7) và trang ngoài kho (lien-he) bị bỏ; nhiều hiển thị mà ít nhấp đứng đầu.
+    assert [x["slug"] for x in hd] == ["que-47-khon", "sao-tu-vi"]
+    assert hd[0]["hien_thi"] == 1200 and hd[0]["nhap"] == 2 and hd[0]["vi_tri"] == 9.1
