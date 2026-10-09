@@ -506,5 +506,248 @@
         "ky": "Tài lộ mà không có Quan bảo vệ, dễ bị đoạt."
       }
     }
-  }
+  },
+  "nap_am": {
+    "Hải Trung Kim": {
+      "han": "海中金",
+      "hanh": "Kim",
+      "hinh_tuong": "vàng trong biển — quý mà ẩn, phải có dịp mới lộ ra",
+      "tinh_chat": "giữ giá trị bên trong, kín đáo, bền bỉ chờ thời",
+      "mat_toi": "dễ thu mình, chậm thể hiện nên bị đánh giá thấp",
+      "cau_tu_soi": "Điều bạn giỏi nhưng chưa cho ai thấy là gì?"
+    },
+    "Lô Trung Hỏa": {
+      "han": "炉中火",
+      "hanh": "Hỏa",
+      "hinh_tuong": "lửa trong lò — lửa có việc dùng, nung nấu được đồ vật",
+      "tinh_chat": "nhiệt tình, chịu rèn luyện, thích làm ra sản phẩm cụ thể",
+      "mat_toi": "nóng trong lòng, dễ tự đốt sức khi ôm việc quá lâu",
+      "cau_tu_soi": "Bạn đang nung nấu việc gì đủ lâu để thành hình chưa?"
+    },
+    "Đại Lâm Mộc": {
+      "han": "大林木",
+      "hanh": "Mộc",
+      "hinh_tuong": "cây rừng lớn — che chở, sống thành tập thể",
+      "tinh_chat": "rộng lượng, thích tầm nhìn lớn, hợp làm chỗ dựa cho người khác",
+      "mat_toi": "ôm đồm, khó cắt tỉa việc không cần thiết",
+      "cau_tu_soi": "Việc nào bạn nên tỉa bớt để phần chính lớn lên?"
+    },
+    "Lộ Bàng Thổ": {
+      "han": "路旁土",
+      "hanh": "Thổ",
+      "hinh_tuong": "đất ven đường — nâng đỡ người qua lại, cần nước mới nuôi được cây",
+      "tinh_chat": "chịu khó, thực tế, sẵn lòng giúp người",
+      "mat_toi": "dễ bị coi là hiển nhiên, ít được ghi nhận",
+      "cau_tu_soi": "Bạn có nói ra khi mình cần được ghi nhận không?"
+    },
+    "Kiếm Phong Kim": {
+      "han": "剑锋金",
+      "hanh": "Kim",
+      "hinh_tuong": "mũi kiếm — kim loại đã tôi luyện, sắc bén",
+      "tinh_chat": "quyết đoán, rõ ràng, giỏi xử lý việc khó",
+      "mat_toi": "lời nói dễ sắc, làm người khác tổn thương",
+      "cau_tu_soi": "Lần gần nhất bạn nói thẳng, người nghe cảm thấy thế nào?"
+    },
+    "Sơn Đầu Hỏa": {
+      "han": "山头火",
+      "hanh": "Hỏa",
+      "hinh_tuong": "lửa trên núi — sáng xa nhưng gặp gió dễ lan",
+      "tinh_chat": "nổi bật, có sức lan toả, dám đi đầu",
+      "mat_toi": "bốc nhanh tắt nhanh, khó giữ nhịp đều",
+      "cau_tu_soi": "Điều bạn hào hứng lúc đầu, bạn có giữ được tới cuối không?"
+    },
+    "Giản Hạ Thủy": {
+      "han": "涧下水",
+      "hanh": "Thủy",
+      "hinh_tuong": "nước khe suối — trong, chảy len lỏi qua đá",
+      "tinh_chat": "tinh tế, mềm dẻo, tìm được lối đi giữa khó khăn",
+      "mat_toi": "nhỏ giọt, dễ phân tán sức vào nhiều hướng",
+      "cau_tu_soi": "Bạn đang dồn sức chảy về hướng nào?"
+    },
+    "Thành Đầu Thổ": {
+      "han": "城头土",
+      "hanh": "Thổ",
+      "hinh_tuong": "đất tường thành — vững chắc, bảo vệ người bên trong",
+      "tinh_chat": "đáng tin, có trách nhiệm, giữ nề nếp",
+      "mat_toi": "cứng nhắc, khó mở cửa cho cái mới",
+      "cau_tu_soi": "Lần gần nhất bạn thử một cách làm mới là khi nào?"
+    },
+    "Bạch Lạp Kim": {
+      "han": "白蜡金",
+      "hanh": "Kim",
+      "hinh_tuong": "vàng trong nến sáp — kim loại còn non, cần lửa luyện",
+      "tinh_chat": "thanh lịch, tiềm năng lớn khi được rèn",
+      "mat_toi": "ngại va chạm nên chậm trưởng thành",
+      "cau_tu_soi": "Thử thách nào bạn đang né mà có thể rèn bạn?"
+    },
+    "Dương Liễu Mộc": {
+      "han": "杨柳木",
+      "hanh": "Mộc",
+      "hinh_tuong": "cây dương liễu — mềm mại, uốn theo gió mà không gãy",
+      "tinh_chat": "dịu dàng, thích nghi tốt, dễ được mến",
+      "mat_toi": "dễ xuôi theo người khác, thiếu chính kiến",
+      "cau_tu_soi": "Có quyết định nào bạn đang để người khác chọn thay không?"
+    },
+    "Tuyền Trung Thủy": {
+      "han": "泉中水",
+      "hanh": "Thủy",
+      "hinh_tuong": "nước giữa giếng — trong, sâu, nuôi người dài lâu",
+      "tinh_chat": "điềm tĩnh, sâu sắc, bền bỉ",
+      "mat_toi": "khép kín, ít chia sẻ suy nghĩ",
+      "cau_tu_soi": "Ai là người bạn có thể kể điều mình đang nghĩ?"
+    },
+    "Ốc Thượng Thổ": {
+      "han": "屋上土",
+      "hanh": "Thổ",
+      "hinh_tuong": "đất trên mái nhà — ngói che mưa nắng cho cả nhà",
+      "tinh_chat": "chăm lo gia đình, chu toàn, giữ mái ấm",
+      "mat_toi": "lo cho người khác mà quên phần mình",
+      "cau_tu_soi": "Bạn dành thời gian nào trong tuần cho chính mình?"
+    },
+    "Tích Lịch Hỏa": {
+      "han": "霹雳火",
+      "hanh": "Hỏa",
+      "hinh_tuong": "lửa sấm sét — mạnh, bất ngờ, mang tính khai mở",
+      "tinh_chat": "năng lượng lớn, dám bứt phá",
+      "mat_toi": "bộc phát, khó kiểm soát cảm xúc lúc căng",
+      "cau_tu_soi": "Khi tức giận, bạn thường làm gì đầu tiên?"
+    },
+    "Tùng Bách Mộc": {
+      "han": "松柏木",
+      "hanh": "Mộc",
+      "hinh_tuong": "cây tùng cây bách — đứng vững qua mùa đông",
+      "tinh_chat": "kiên cường, giữ nguyên tắc, chịu được áp lực",
+      "mat_toi": "cố chấp, khó nhận mình sai",
+      "cau_tu_soi": "Gần đây bạn đã đổi ý vì một lý lẽ hợp lý chưa?"
+    },
+    "Trường Lưu Thủy": {
+      "han": "长流水",
+      "hanh": "Thủy",
+      "hinh_tuong": "nước sông dài — chảy mãi không ngừng",
+      "tinh_chat": "bền chí, nhìn xa, thích hành trình dài",
+      "mat_toi": "đi mãi mà quên dừng để nhìn lại",
+      "cau_tu_soi": "Bạn có hay dừng lại xem mình đã đi tới đâu không?"
+    },
+    "Sa Trung Kim": {
+      "han": "沙中金",
+      "hanh": "Kim",
+      "hinh_tuong": "vàng trong cát — phải đãi mới thấy",
+      "tinh_chat": "có giá trị thật, giỏi chọn lọc",
+      "mat_toi": "dễ tự ti khi chưa được phát hiện",
+      "cau_tu_soi": "Điểm mạnh nào của bạn cần một người khác chỉ ra?"
+    },
+    "Sơn Hạ Hỏa": {
+      "han": "山下火",
+      "hanh": "Hỏa",
+      "hinh_tuong": "lửa dưới chân núi — ánh lửa chiều, ấm và gần",
+      "tinh_chat": "ấm áp, gần gũi, giữ được nhiệt lâu",
+      "mat_toi": "ngại đứng lên chỗ cao, tự giới hạn mình",
+      "cau_tu_soi": "Bạn đang tự đặt giới hạn nào cho mình?"
+    },
+    "Bình Địa Mộc": {
+      "han": "平地木",
+      "hanh": "Mộc",
+      "hinh_tuong": "cây đồng bằng — mọc nơi đất bằng, gần người",
+      "tinh_chat": "thân thiện, thực tế, dễ hợp tác",
+      "mat_toi": "dễ hài lòng, ngại vươn xa",
+      "cau_tu_soi": "Mục tiêu nào bạn muốn vươn tới trong năm nay?"
+    },
+    "Bích Thượng Thổ": {
+      "han": "壁上土",
+      "hanh": "Thổ",
+      "hinh_tuong": "đất trên tường — đất đã thành vách, có hình có khuôn",
+      "tinh_chat": "có nguyên tắc, ngăn nắp, giữ ranh giới rõ",
+      "mat_toi": "khó linh hoạt khi hoàn cảnh đổi",
+      "cau_tu_soi": "Ranh giới nào của bạn nên giữ, ranh giới nào nên nới?"
+    },
+    "Kim Bạch Kim": {
+      "han": "金箔金",
+      "hanh": "Kim",
+      "hinh_tuong": "vàng lá — mỏng, đẹp, dùng để trang trí",
+      "tinh_chat": "tinh tế, có gu, chú ý hình thức",
+      "mat_toi": "để ý bề ngoài hơn nền tảng",
+      "cau_tu_soi": "Bạn đầu tư cho nền tảng của mình thế nào?"
+    },
+    "Phú Đăng Hỏa": {
+      "han": "覆灯火",
+      "hanh": "Hỏa",
+      "hinh_tuong": "lửa đèn dầu — soi sáng trong đêm",
+      "tinh_chat": "chăm chỉ, soi đường cho người khác, giỏi việc đêm khuya",
+      "mat_toi": "dễ cạn sức vì cho đi nhiều",
+      "cau_tu_soi": "Bạn nạp lại năng lượng bằng cách nào?"
+    },
+    "Thiên Hà Thủy": {
+      "han": "天河水",
+      "hanh": "Thủy",
+      "hinh_tuong": "nước sông Ngân — mưa từ trời, rộng lượng",
+      "tinh_chat": "bao dung, có lý tưởng, giàu tưởng tượng",
+      "mat_toi": "xa thực tế, kế hoạch khó chạm đất",
+      "cau_tu_soi": "Bước nhỏ nhất bạn làm được ngay hôm nay là gì?"
+    },
+    "Đại Dịch Thổ": {
+      "han": "大驿土",
+      "hanh": "Thổ",
+      "hinh_tuong": "đất đường lớn — nối nhiều nơi với nhau",
+      "tinh_chat": "giỏi kết nối, cởi mở, thích đi lại",
+      "mat_toi": "dễ dàn trải, thiếu chỗ đứng chắc",
+      "cau_tu_soi": "Đâu là chỗ bạn muốn bám rễ lâu dài?"
+    },
+    "Thoa Xuyến Kim": {
+      "han": "钗钏金",
+      "hanh": "Kim",
+      "hinh_tuong": "vàng trâm thoa — đồ trang sức quý",
+      "tinh_chat": "duyên dáng, biết làm đẹp cho mình và người",
+      "mat_toi": "dễ phụ thuộc vào lời khen",
+      "cau_tu_soi": "Bạn có tự đánh giá được việc mình làm mà không cần ai khen không?"
+    },
+    "Tang Đố Mộc": {
+      "han": "桑柘木",
+      "hanh": "Mộc",
+      "hinh_tuong": "cây dâu — lá nuôi tằm, có ích cho người",
+      "tinh_chat": "hữu ích, chịu khó, làm việc âm thầm",
+      "mat_toi": "bị khai thác sức mà không lên tiếng",
+      "cau_tu_soi": "Bạn đã từ chối một yêu cầu quá sức lần nào chưa?"
+    },
+    "Đại Khê Thủy": {
+      "han": "大溪水",
+      "hanh": "Thủy",
+      "hinh_tuong": "nước khe lớn — dòng chảy mạnh từ núi xuống",
+      "tinh_chat": "sôi nổi, quyết liệt, tiến nhanh",
+      "mat_toi": "nóng vội, cuốn theo mà quên tính kỹ",
+      "cau_tu_soi": "Quyết định gần nhất bạn có ngủ một đêm trước khi chốt không?"
+    },
+    "Sa Trung Thổ": {
+      "han": "沙中土",
+      "hanh": "Thổ",
+      "hinh_tuong": "đất pha cát — tơi xốp, dễ thay hình",
+      "tinh_chat": "linh hoạt, dễ thích nghi môi trường mới",
+      "mat_toi": "khó giữ hình, dễ thay đổi theo người khác",
+      "cau_tu_soi": "Giá trị nào bạn muốn giữ nguyên dù ở đâu?"
+    },
+    "Thiên Thượng Hỏa": {
+      "han": "天上火",
+      "hanh": "Hỏa",
+      "hinh_tuong": "lửa trên trời — ánh mặt trời, soi khắp nơi",
+      "tinh_chat": "rạng rỡ, có sức truyền cảm hứng, hào phóng",
+      "mat_toi": "muốn soi khắp nơi nên khó tập trung",
+      "cau_tu_soi": "Một việc bạn muốn làm thật sâu thay vì làm rộng là gì?"
+    },
+    "Thạch Lựu Mộc": {
+      "han": "石榴木",
+      "hanh": "Mộc",
+      "hinh_tuong": "cây thạch lựu — cứng, nhiều hạt, ra quả về sau",
+      "tinh_chat": "bền bỉ, thành quả đến muộn mà chắc",
+      "mat_toi": "sốt ruột khi chưa thấy kết quả",
+      "cau_tu_soi": "Điều bạn đang gieo cần thêm bao lâu để ra quả?"
+    },
+    "Đại Hải Thủy": {
+      "han": "大海水",
+      "hanh": "Thủy",
+      "hinh_tuong": "nước biển lớn — rộng, chứa được nhiều",
+      "tinh_chat": "bao dung, tầm nhìn rộng, chịu được sóng gió",
+      "mat_toi": "khó đoán, cảm xúc lên xuống như sóng",
+      "cau_tu_soi": "Người thân có biết lúc nào bạn đang cần được hỏi han không?"
+    }
+  },
+  "nap_am_luu_y": "Nạp âm là hệ 60 hoa giáp ghép ngũ âm; mỗi cặp hai năm chung một tên. Đây là hình tượng dân gian để tự soi, không dùng để kết luận tốt xấu hay chọn bạn đời. Bát trạch (hướng nhà) dùng cung phi, không dùng nạp âm."
 }

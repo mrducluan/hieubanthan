@@ -11,6 +11,7 @@ export type MinhHoaDuLieu =
   | { kieu: "cung"; chi_so: number; vong: string[] }
   | { kieu: "sao_cung"; ten: string; ten_han: string; ngu_hanh: string; chi_so: number; vong: string[] }
   | { kieu: "hoa_cung"; hoa: string; chi_so: number; vong: string[] }
+  | { kieu: "menh"; hanh: string; nap_am: string; han: string; can_chi: string }
   | { kieu: "thap_than"; ten: string; quan_he: "dong_hanh" | "ta_sinh" | "ta_khac" | "khac_ta" | "sinh_ta"; cung_am_duong: boolean }
   | { kieu: "nhat_chu"; can: string; hanh: string; duong: boolean };
 
@@ -225,6 +226,19 @@ function HinhNhatChu({ can, hanh, duong }: { can: string; hanh: string; duong: b
   );
 }
 
+// ---------------------------------------------------------------- SEO-J: mệnh nạp âm — hành sáng trong vòng ngũ hành
+function HinhMenh({ hanh, nap_am, han, can_chi }: { hanh: string; nap_am: string; han: string; can_chi: string }) {
+  const i = HANH.indexOf(hanh === "Hoả" ? "Hỏa" : hanh === "Thuỷ" ? "Thủy" : hanh);
+  return (
+    <Khung nhan={`Tuổi ${can_chi}, mệnh ${nap_am} (${han}) — hành ${hanh} trong vòng ngũ hành`}>
+      <VongNguHanh sang={i < 0 ? 0 : i} nhan_giua={<>
+        <text x={160} y={118} textAnchor="middle" className="fill-gold" fontSize={18} style={{ fontFamily: "var(--font-han), serif" }}>{han}</text>
+        <text x={160} y={134} textAnchor="middle" className="fill-fg-faint" fontSize={8.5}>{can_chi}</text>
+      </>} />
+    </Khung>
+  );
+}
+
 export function MinhHoa({ mh }: { mh?: MinhHoaDuLieu | null }) {
   if (!mh) return null;
   switch (mh.kieu) {
@@ -235,6 +249,7 @@ export function MinhHoa({ mh }: { mh?: MinhHoaDuLieu | null }) {
     case "cung": return <HinhCung {...mh} />;
     case "sao_cung": return <HinhSaoCung {...mh} />;
     case "hoa_cung": return <HinhHoaCung {...mh} />;
+    case "menh": return <HinhMenh {...mh} />;
     case "thap_than": return <HinhThapThan {...mh} />;
     case "nhat_chu": return <HinhNhatChu {...mh} />;
     default: return null;

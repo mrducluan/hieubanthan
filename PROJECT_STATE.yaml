@@ -20,6 +20,7 @@ current_risks:
   - "Đã mở công khai trước khi xong thử nghiệm nội bộ 2 tháng (chủ dự án chốt 2026-10-08); bán Sao vẫn chặn"
   - "Trang pháp lý đã có (Luật BVDLCN 91/2025 + NĐ 356/2025) nhưng chưa luật sư duyệt, chưa điền thông tin đơn vị vận hành"
 completed_work:
+  - "SEO-J: 76 trang \"sinh năm X mệnh gì\" (1950–2025) + KB 30 nạp âm; link hai chiều với trang tuổi hợp hướng; sitemap 625 URL"
   - "SEO-I: 48 trang \"Hoá X ở cung Y\" (10 năm can → sao mang hoá, link trang sao ở cung, tam phương); sitemap 548 URL"
   - "A11Y-1: rà trợ năng 19 trang × (máy tính, điện thoại) × (có/không hồ sơ) + lá số 2 giao diện — sửa 5 màu chữ Giấy cổ + nhãn nhỏ trên giấy đạt WCAG AA; scripts/kiem-tra-tro-nang.mjs + e2e/tro-nang.spec.ts"
   - "SEO-H: 168 trang \"sao X ở cung Y\" (độ sáng theo 12 chi, đồng cung/xung chiếu tính từ calc/tuvi_vi_tri đối chứng 60/60 lasotuvi, tam hợp, tứ hoá theo năm can); trang sao/cung trỏ trang con; sitemap 499 URL"

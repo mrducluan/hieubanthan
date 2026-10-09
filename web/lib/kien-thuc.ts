@@ -6,7 +6,7 @@ import type { MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 
 export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu"
-  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung";
+  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam";
 
 export const CHU_DE: Record<string, { loai: LoaiTrang; ten: string; mo_ta: string; mang: string }> = {
   "than-so": { loai: "so", ten: "Ý nghĩa các con số", mang: "/than-so",
@@ -34,6 +34,9 @@ export const CHU_DE: Record<string, { loai: LoaiTrang; ten: string; mo_ta: strin
   // SEO-I: "Hoá X ở cung Y" — 4 tứ hoá × 12 cung
   "tu-hoa": { loai: "hoa_cung", ten: "Tứ hoá ở 12 cung Tử vi", mang: "/tu-vi",
     mo_ta: "48 trường hợp Hoá Lộc, Quyền, Khoa, Kỵ rơi vào 12 cung: ý nghĩa, năm sinh nào có, sao nào mang hoá, tam phương tứ chính." },
+  // SEO-J: "sinh năm X mệnh gì" — 1950–2025
+  "menh-tuoi": { loai: "menh_nam", ten: "Sinh năm nào mệnh gì", mang: "/bat-tu",
+    mo_ta: "Tra mệnh theo năm sinh 1950–2025: tuổi can chi, mệnh nạp âm và ý nghĩa, màu hợp theo ngũ hành, tuổi hợp – xung, cung phi nam nữ, mốc Tết và Lập xuân." },
   "thap-than": { loai: "thap_than", ten: "10 thập thần Bát tự", mang: "/bat-tu",
     mo_ta: "10 thập thần trong Bát tự (Tỷ Kiên đến Chính Ấn): ý nghĩa, tính cách, khi quá nhiều, khi thiếu, với nam và nữ." },
   "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", mang: "/bat-tu",
@@ -43,12 +46,12 @@ export const CHU_DE: Record<string, { loai: LoaiTrang; ten: string; mo_ta: strin
 export const HINH_CHU_DE: Record<string, KieuMang> = {
   "than-so": "than-so", "kinh-dich": "kinh-dich", "tu-vi": "tu-vi", "cung-tu-vi": "tu-vi", "thap-than": "bat-tu", "nhat-chu": "bat-tu",
   "hop-so": "than-so", "nghe-nghiep": "than-so", "tinh-yeu": "than-so", "nam-ca-nhan": "than-so", "no-nghiep": "than-so",
-  "sao-cung": "tu-vi", "tu-hoa": "tu-vi",
+  "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu",
 };
 export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = {
   so: "than-so", que: "kinh-dich", sao: "tu-vi", cung: "cung-tu-vi", thap_than: "thap-than", nhat_chu: "nhat-chu",
   cap_so: "hop-so", nghe: "nghe-nghiep", tinh_yeu: "tinh-yeu", nam_ca_nhan: "nam-ca-nhan", no_nghiep: "no-nghiep",
-  sao_cung: "sao-cung", hoa_cung: "tu-hoa",
+  sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi",
 };
 
 export interface MucTrang { tieu_de: string; doan?: string; danh_sach?: string[] }
@@ -63,6 +66,8 @@ export interface TrangKienThuc {
   trang_con?: { tieu_de: string; ds: { loai: LoaiTrang; slug: string; tieu_de: string }[] };
   /** SEO-I: trang cung trỏ tới 4 trang "Hoá X ở cung này". */
   trang_con_hoa?: { tieu_de: string; ds: { loai: LoaiTrang; slug: string; tieu_de: string }[] };
+  /** SEO-J: link sang trang ngoài thư viện kiến thức (vd /phong-thuy/tuoi-1990-nam). Engine dựng đường dẫn. */
+  lien_ket_ngoai?: { duong: string; ten: string }[];
 }
 export type MucLuc = Pick<TrangKienThuc, "loai" | "slug" | "tieu_de" | "mo_ta" | "trang_thai" | "index" | "cap_nhat">;
 
@@ -128,6 +133,8 @@ export interface MucTuoiHuong { slug: string; nam: number; gioi_tinh: "nam" | "n
 export interface HuongDuNien { huong: string; du_nien: string; y_nghia: string; dung_cho: string }
 export interface TuoiHuong extends Omit<MucTuoiHuong, "quai" | "nhom"> {
   mo_ta: string; nap_am: { ten: string; hanh: string; han: string };
+  /** SEO-J: đường dẫn trang "sinh năm X mệnh gì" (engine dựng). */
+  trang_menh?: string;
   menh_quai: { quai: string; nhom: string; so: number; ngu_hanh?: string; tinh_chat?: string };
   huong_tot: HuongDuNien[]; huong_xau: HuongDuNien[]; bang_huong: Record<string, string>;
   goi_y: { ma: string; tieu_de: string; noi_dung: string; nguon: string; huong: string[]; du_nien: string[] }[];
