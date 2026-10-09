@@ -39,7 +39,10 @@ export function DangNhap() {
     );
   }
   const sb = async () => (await supabase())!;
-  const veLai = () => `${window.location.origin}/auth/callback?tiep=/tai-khoan`;
+  // ?tiep= (vd /quan-tri): chỉ nhận đường dẫn nội bộ — "//evil.com", "/\\evil.com" bị bỏ (callback cũng kiểm lại).
+  const tiepXin = params.get("tiep");
+  const tiep = tiepXin && /^\/(?![/\\])/.test(tiepXin) ? tiepXin : "/tai-khoan";
+  const veLai = () => `${window.location.origin}/auth/callback?tiep=${encodeURIComponent(tiep)}`;
 
   async function gui(e: React.FormEvent) {
     e.preventDefault();
@@ -71,7 +74,7 @@ export function DangNhap() {
       : await (await sb()).auth.verifyOtp({ phone: chuanHoaSdt(sdt) ?? "", token: ma.trim(), type: "sms" });
     setDang(false);
     if (error) setLoi("Mã chưa đúng hoặc đã hết hạn.");
-    else router.push("/tai-khoan");
+    else router.push(tiep);
   }
 
   return (

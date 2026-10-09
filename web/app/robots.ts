@@ -6,7 +6,7 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/seo";
 
-const CHAN = ["/api/", "/md/", "/tai-khoan", "/dang-nhap", "/auth/", "/chia-se", "/hop-doi/", "/the/"];
+const CHAN = ["/api/", "/md/", "/quan-tri", "/tai-khoan", "/dang-nhap", "/auth/", "/chia-se", "/hop-doi/", "/the/"];
 /** Bot AI trả lời / tìm kiếm (dẫn link về trang gốc) — mở. */
 export const BOT_AI_TRA_LOI = [
   "OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User",
