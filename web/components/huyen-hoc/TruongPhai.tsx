@@ -71,7 +71,7 @@ export function TruongPhai(p: {
           <Tabs value={p.hoaLinh} onValueChange={(v) => p.setHoaLinh(v as Viet)}>
             <TabsList aria-label="Cách an Hoả Tinh, Linh Tinh">
               <TabsTrigger value="viet" title="Sách Tử vi Việt: chiều an đổi theo âm dương nam nữ">Hoả Linh lối Việt</TabsTrigger>
-              <TabsTrigger value="trung" title="Phái Trung Châu (thư viện iztro)">Trung Châu</TabsTrigger>
+              <TabsTrigger value="trung" title="Phái Trung Châu">Trung Châu</TabsTrigger>
             </TabsList>
           </Tabs>
         </Dong>

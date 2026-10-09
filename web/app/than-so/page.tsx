@@ -15,7 +15,7 @@ const ND: NoiDungCongCu = {
   hoiDap: [
     { hoi: "Số đường đời tính thế nào?", dap: "Cộng tất cả chữ số của ngày, tháng, năm sinh rồi rút gọn về một chữ số; nếu gặp 11, 22 hoặc 33 thì giữ nguyên (số cái). Trang kết quả hiện từng bước cộng để bạn tự kiểm." },
     { hoi: "Có cần họ tên đầy đủ không?", dap: "Có, để tính số sứ mệnh, linh hồn và nhân cách theo bảng chữ cái Pythagoras. Nên dùng họ tên khai sinh, có dấu hay không dấu đều được." },
-    { hoi: "Ngày sinh âm lịch thì sao?", dap: "Bạn nhập âm lịch, hệ thống đổi sang dương lịch theo âm lịch Việt Nam (thuật toán Hồ Ngọc Đức) rồi mới tính." },
+    { hoi: "Ngày sinh âm lịch thì sao?", dap: "Bạn nhập âm lịch, hệ thống đổi sang dương lịch theo âm lịch Việt Nam rồi mới tính." },
     { hoi: "Thần số học có dự đoán tương lai không?", dap: "Không. Con số chỉ gợi một khung để nhìn lại bản thân; mọi diễn giải đều kèm mặt tối và câu hỏi tự soi, không phán số phận." },
   ],
   lienKet: [{ href: "/kien-thuc/than-so", ten: "Ý nghĩa 12 con số" }, { href: "/kien-thuc/nghe-nghiep", ten: "Số chủ đạo hợp nghề gì" },

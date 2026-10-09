@@ -70,10 +70,10 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
     <article className="glass rounded-2xl p-5 sm:p-8 print:bg-white print:text-black" data-testid="luan-giai-toan-bo">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="eyebrow">Luận giải toàn bộ · biên soạn có AI hỗ trợ, chờ chuyên gia thẩm định</p>
+          <p className="eyebrow">Luận giải toàn bộ</p>
           {bc.dien_dat && bc.dien_dat !== "mau" && (
             <p className="mt-1 text-xs text-fg-faint" data-testid="dien-dat-ai">
-              AI diễn đạt lại từ dữ liệu đã tính · mỗi chương đã kiểm: không thêm sao, cung, con số hay lời phán ngoài dữ liệu
+              Diễn đạt tự động từ dữ liệu đã tính · mỗi chương đã kiểm: không thêm sao, cung, con số hay lời phán ngoài dữ liệu
               {bc.dien_dat === "tron" && " (chương nào không đạt kiểm tra giữ bản gốc)"}.
             </p>
           )}
@@ -82,7 +82,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
         <div className="flex gap-2 print:hidden">
           {bc.chuong.some((c) => c.van_ai) && (
             <Button variant="ghost" size="sm" aria-pressed={goc} onClick={() => setGoc((v) => !v)}>
-              {goc ? "Xem bản AI diễn đạt" : "Xem bản dữ liệu gốc"}
+              {goc ? "Xem bản diễn đạt" : "Xem bản dữ liệu gốc"}
             </Button>
           )}
           <Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> In / lưu PDF</Button>

@@ -35,7 +35,8 @@ test("chính sách quyền riêng tư: căn cứ luật mới, bảng dữ liệ
   await expect(main).toContainText("Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15");
   await expect(main).toContainText("Nghị định 356/2025/NĐ-CP");
   await expect(main).toContainText("không nhận họ tên hay ngày giờ sinh");
-  await expect(main).toContainText("hbt.hoso.v1");
+  await expect(main).not.toContainText("hbt.hoso.v1");                // BM-1: không lộ tên khoá lưu trữ nội bộ
+  await expect(main).toContainText("Cookie và lưu trữ trên trình duyệt");
   await expect(main.getByRole("navigation", { name: "Mục lục" })).toBeVisible();
   await main.getByRole("link", { name: /Quyền của bạn/ }).click();
   await expect(page).toHaveURL(/#quyen$/);

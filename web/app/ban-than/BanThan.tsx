@@ -135,7 +135,7 @@ export function BanThan() {
 
       <GopY />
 
-      <p className="text-center text-xs text-fg-faint">{kq.trich_nguon_chung} · Bản tính v{kq.engine_version}</p>
+      <p className="text-center text-xs text-fg-faint">{kq.trich_nguon_chung}</p>
 
       <Sheet open={suaMo} onOpenChange={setSuaMo}>
         <SheetContent title="Sửa hồ sơ" description="Thay đổi được lưu trên máy của bạn.">

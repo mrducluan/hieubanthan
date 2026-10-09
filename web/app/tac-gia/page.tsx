@@ -20,7 +20,7 @@ export default function Page() {
       <p className="eyebrow">Về nội dung</p>
       <h1 className="mt-1 text-4xl sm:text-5xl">Đội ngũ chuyên gia</h1>
       <p className="mt-3 leading-relaxed text-fg-muted">Mỗi bài kiến thức ghi rõ ai chịu trách nhiệm, ai viết và ai đã thẩm định.
-        Phần tính toán do máy làm theo khẩu quyết công bố; phần diễn giải do chuyên gia biên tập và duyệt dần.</p>
+        Phần tính toán do hệ thống tính toán riêng thực hiện; phần diễn giải do Ban biên tập biên soạn, chuyên gia thẩm định.</p>
       <ul className="mt-8 space-y-3">
         {ds.map((cg) => (
           <li key={cg.slug}>

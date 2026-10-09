@@ -43,12 +43,12 @@ export default function MienTru() {
       ),
     },
     {
-      id: "noi-dung-ai", tieuDe: "Nội dung do AI hỗ trợ",
+      id: "noi-dung", tieuDe: "Nội dung được làm ra thế nào",
       noiDung: (
         <ul>
-          <li><b>Không dùng AI</b> để tính con số, an sao, lập tứ trụ, gieo quẻ hay đổi hướng. Mọi phép tính chạy theo thuật toán công bố và có bộ dữ liệu đối chiếu.</li>
-          <li>Phần diễn giải được <b>biên soạn có AI hỗ trợ</b> từ nguồn cổ thư và sách tham khảo. Mục nào chưa được chủ biên thẩm định đều ghi "đang chờ chuyên gia thẩm định"; mục đã duyệt ghi tên người thẩm định và ngày.</li>
-          <li>Khi bật AI diễn đạt, AI chỉ được viết lại dữ liệu đã có. Một lớp kiểm tra tự động chặn câu trả lời có con số lạ hoặc giọng phán quyết, và trả về bản gốc nếu bị chặn.</li>
+          <li><b>Tính toán</b> (con số, an sao, tứ trụ, gieo quẻ, đổi hướng) do hệ thống tính toán riêng của Hiểu Bản Thân thực hiện: cùng thông tin luôn cho cùng kết quả, đã đối chiếu với các lá số mẫu.</li>
+          <li><b>Diễn giải</b> do Ban biên tập Hiểu Bản Thân biên soạn từ cổ thư và sách tham khảo, chủ biên Đức Luân chịu trách nhiệm. Bài đã được chuyên gia thẩm định ghi tên người thẩm định và ngày.</li>
+          <li><b>Hỏi đáp và luận giải</b> có thể dùng công cụ diễn đạt tự động (AI) để viết lại kết quả đã tính cho dễ đọc. Công cụ này chỉ được viết lại dữ liệu đã có; một lớp kiểm tra tự động chặn câu trả lời có con số lạ hoặc giọng phán quyết, và trả về bản gốc nếu bị chặn.</li>
         </ul>
       ),
     },

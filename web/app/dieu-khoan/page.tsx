@@ -1,5 +1,5 @@
 // PL-1 — Điều khoản sử dụng. Khớp quyết định đã chốt: Sao là credit nội bộ (không đổi tiền, không chuyển nhượng,
-// thưởng mời một tầng), nội dung nháp AI có nhãn, không phán bệnh/sống chết/xổ số.
+// thưởng mời một tầng), nội dung do ban biên tập biên soạn (BM-1: không gắn nhãn AI trên bài), không phán bệnh/sống chết/xổ số.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
@@ -27,8 +27,8 @@ export default function DieuKhoan() {
           <p>Hiểu Bản Thân giới thiệu thần số học, Tử vi, Bát tự, Kinh Dịch và Phong thuỷ như <b>di sản văn hoá để
             tham khảo và tự suy ngẫm</b>, không phải khoa học dự báo.</p>
           <ul>
-            <li>Phần <b>tính toán</b> (con số, lá số, quẻ, hướng) do máy tính theo thuật toán công bố, cùng đầu vào cho cùng kết quả.</li>
-            <li>Phần <b>diễn giải</b> lấy từ kho tri thức biên soạn từ thư tịch cổ và sách tham khảo. Phần này <b>biên soạn có AI hỗ trợ</b>, mỗi mục ghi rõ đã hay chưa được chuyên gia thẩm định.</li>
+            <li>Phần <b>tính toán</b> (con số, lá số, quẻ, hướng) do hệ thống tính toán riêng thực hiện, cùng đầu vào cho cùng kết quả.</li>
+            <li>Phần <b>diễn giải</b> lấy từ kho tri thức do Ban biên tập Hiểu Bản Thân biên soạn từ thư tịch cổ và sách tham khảo. Hỏi đáp có thể dùng công cụ diễn đạt tự động; xem <Link href="/mien-tru-trach-nhiem#noi-dung" className="text-gold underline">Miễn trừ trách nhiệm</Link>.</li>
             <li>Kết quả <b>không phải</b> lời khuyên y tế, tâm lý, pháp lý, tài chính, đầu tư hay tuyển dụng. Đừng dùng nó để thay thế ý kiến của người có chuyên môn.</li>
           </ul>
         </>
@@ -75,10 +75,12 @@ export default function DieuKhoan() {
           <p>Giao diện, mã nguồn, cách trình bày và phần biên soạn nội dung thuộc đơn vị vận hành.</p>
           <p>Văn bản cổ thư (Kinh Dịch, Tử Vi Đẩu Số Toàn Thư…) thuộc phạm vi công cộng. Sách hiện đại chỉ được
             tóm ý và ghi nguồn, không chép nguyên văn.</p>
-          <p>Hệ thống dùng các thư viện mã nguồn mở theo giấy phép của chúng (xem{" "}
-            <Link href="/gioi-thieu#nguon" className="text-gold underline">Giới thiệu – Nguồn</Link>).</p>
-          <p>Bạn được chia sẻ kết quả cá nhân của mình, kèm dẫn nguồn. Không sao chép hàng loạt nội dung thư viện kiến
-            thức để đăng lại khi chưa được phép.</p>
+          <p>Hệ thống tính toán, cách tổ chức kho tri thức, quy tắc luận giải và dữ liệu đối chiếu là bí mật kinh doanh của
+            đơn vị vận hành.</p>
+          <p>Bạn được chia sẻ kết quả cá nhân của mình, kèm dẫn nguồn. Khi chưa có sự đồng ý bằng văn bản, bạn không được:
+            sao chép hàng loạt nội dung thư viện kiến thức để đăng lại; dùng công cụ tự động để thu thập dữ liệu hoặc gọi
+            hàng loạt các chức năng tính toán; tìm cách dò ngược cách hệ thống tính toán; dùng nội dung hay kết quả để xây
+            dựng dịch vụ cạnh tranh.</p>
         </>
       ),
     },

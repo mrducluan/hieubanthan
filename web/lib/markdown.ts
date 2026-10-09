@@ -4,27 +4,27 @@ import { CHU_DE, duongTrang, duongTuoi, type MucLuc, type MucTuDien, type MucTuo
 import { CHUYEN_GIA, duongChuyenGia } from "@/lib/chuyen-gia";
 import { MO_TA_SITE, TEN_SITE, urlDayDu } from "@/lib/seo";
 
-const nhan = (trangThai: string) => (trangThai === "da_duyet" ? "đã thẩm định" : "biên soạn có AI hỗ trợ, đang chờ chuyên gia thẩm định");
 
 /** EEAT-1: dòng tác giả / chủ biên / thẩm định cho bản .md (cùng dữ liệu engine như trang HTML). */
 function dongTacGia(t: TrangKienThuc): string {
   const ten = (s: string) => (CHUYEN_GIA[s] ? `[${CHUYEN_GIA[s].ten}](${urlDayDu(duongChuyenGia(s))})` : s);
   if (t.tac_gia) return `Tác giả: ${ten(t.tac_gia)}`;
-  return `Chủ biên: ${ten(t.chu_bien)}${t.tham_dinh ? ` · Thẩm định: ${ten(t.tham_dinh.nguoi)} (${t.tham_dinh.ngay})` : ""}`;
+  if (t.tham_dinh) return `Biên soạn & thẩm định: ${ten(t.tham_dinh.nguoi)} (${t.tham_dinh.ngay}) · Chủ biên: ${ten(t.chu_bien)}`;
+  return `Ban biên tập ${TEN_SITE} · Chủ biên: ${ten(t.chu_bien)}`;
 }
 
 export const NGUYEN_TAC = [
   "- Mọi con số, lá số, quẻ do máy tính toán tất định (kiểm lại được từng bước); phần diễn giải ghi nguồn.",
   "- Mỗi ý nghĩa đi kèm mặt tối và câu hỏi tự soi — không phán số phận, không dự đoán sống chết, bệnh tật, xổ số.",
   "- Nội dung là tham khảo văn hoá, không thay thế tư vấn y tế, tâm lý, pháp lý, tài chính.",
-  "- Trang ghi \"chờ thẩm định\" được biên soạn có AI hỗ trợ, chưa được chuyên gia duyệt; trang đã duyệt ghi tên người thẩm định và ngày.",
+  "- Mọi trang do Ban biên tập Hiểu Bản Thân biên soạn, chủ biên Đức Luân chịu trách nhiệm; trang chuyên gia đã thẩm định ghi tên người thẩm định và ngày.",
 ];
 
-/** Một trang kiến thức. `cap` = cấp tiêu đề gốc (1 khi đứng riêng, 2 khi gộp trong llms-full.txt). */
+/** Một trang kiến thức. `cap` = cấp tiêu đề gốc (1 khi đứng riêng; 2 khi gộp vào tệp khác). */
 export function mdTrang(t: TrangKienThuc, cap = 1): string {
   const h = (n: number) => "#".repeat(cap + n);
   const d = [`${h(0)} ${t.tieu_de}`, "", `> ${t.mo_ta}`, "",
-    `URL: ${urlDayDu(duongTrang(t.loai, t.slug))}`, dongTacGia(t), `Trạng thái: ${nhan(t.trang_thai)} · Cập nhật: ${t.cap_nhat}`, "",
+    `URL: ${urlDayDu(duongTrang(t.loai, t.slug))}`, dongTacGia(t), `Cập nhật: ${t.cap_nhat}`, "",
     `${h(1)} Trả lời nhanh`, "", t.tra_loi_nhanh, ""];
   for (const m of t.muc) {
     d.push(`${h(1)} ${m.tieu_de}`, "");
@@ -48,7 +48,7 @@ export function mdChuDe(khoa: string, ds: MucLuc[]): string | null {
   if (!cd) return null;
   const muc = ds.filter((t) => t.loai === cd.loai);
   return [`# ${cd.ten}`, "", `> ${cd.mo_ta}`, "", `URL: ${urlDayDu(`/kien-thuc/${khoa}`)}`, "",
-    ...muc.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}.md): ${t.mo_ta}${t.trang_thai === "da_duyet" ? "" : " (chờ thẩm định)"}`),
+    ...muc.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}.md): ${t.mo_ta}${t.trang_thai === "da_duyet" ? " (đã thẩm định)" : ""}`),
     ""].join("\n");
 }
 
@@ -62,7 +62,7 @@ export function mdThuVien(ds: MucLuc[]): string {
 
 export function mdTuDien(muc: MucTuDien[], tenMang: Record<string, string>): string {
   const d = ["# Từ điển thuật ngữ huyền học — giải nghĩa dễ hiểu", "", `URL: ${urlDayDu("/tu-dien")}`,
-    `Trạng thái: ${nhan("nhap_ai")}`, ""];
+    `Biên soạn: Ban biên tập ${TEN_SITE} từ cổ thư và tài liệu tham khảo`, ""];
   for (const [ma, ten] of Object.entries(tenMang)) {
     const nhom = muc.filter((m) => m.mo_dun === ma);
     if (!nhom.length) continue;

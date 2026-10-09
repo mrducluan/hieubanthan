@@ -1,7 +1,9 @@
 // EEAT-1 — dòng "ai viết / ai chịu trách nhiệm / ai thẩm định" dưới tiêu đề bài kiến thức.
 // Chỉ hiển thị theo dữ liệu engine trả (tac_gia, tham_dinh) — không tự suy ra trạng thái.
+// BM-1 (chủ dự án 2026-10-09): bỏ chữ "AI" khỏi bài viết. Bài chưa thẩm định ghi "Ban biên tập" + chủ biên — KHÔNG ghi
+// chuyên gia là tác giả bài họ chưa đọc; bài chuyên gia đã đọc, sửa, duyệt mới ghi "Biên soạn & thẩm định".
 import Link from "next/link";
-import { ShieldCheck, Sparkles } from "lucide-react";
+import { BookOpen, ShieldCheck } from "lucide-react";
 import { CHUYEN_GIA, duongChuyenGia, ngayVN } from "@/lib/chuyen-gia";
 import type { TrangKienThuc } from "@/lib/kien-thuc";
 
@@ -25,22 +27,21 @@ export function DongTacGia({ chu_bien, tac_gia, tham_dinh }: Props) {
       <div className="min-w-0 text-sm leading-relaxed text-fg-muted">
         {tac_gia ? (
           <p>Tác giả: <TenChuyenGia slug={tac_gia} /></p>
+        ) : tham_dinh ? (
+          <p>Biên soạn &amp; thẩm định: <TenChuyenGia slug={tham_dinh.nguoi} /></p>
         ) : (
-          <p>Chủ biên: <TenChuyenGia slug={chu_bien} /></p>
+          <p>Ban biên tập Hiểu Bản Thân · Chủ biên: <TenChuyenGia slug={chu_bien} /></p>
         )}
         {cg && <p className="text-xs text-fg-faint">{cg.vaiTro} · {cg.tomTat}</p>}
         <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
           {tac_gia ? (
             <span className="inline-flex items-center gap-1 text-jade"><ShieldCheck className="size-3.5" aria-hidden /> Chuyên gia tự biên soạn</span>
           ) : tham_dinh ? (
-            <>
-              <span className="inline-flex items-center gap-1 text-jade"><ShieldCheck className="size-3.5" aria-hidden />
-                <span><TenChuyenGia slug={tham_dinh.nguoi} /> đã thẩm định · <time dateTime={tham_dinh.ngay}>{ngayVN(tham_dinh.ngay)}</time></span></span>
-              <span className="text-fg-faint">· biên soạn có AI hỗ trợ</span>
-            </>
+            <span className="inline-flex items-center gap-1 text-jade"><ShieldCheck className="size-3.5" aria-hidden />
+              Đã thẩm định · <time dateTime={tham_dinh.ngay}>{ngayVN(tham_dinh.ngay)}</time></span>
           ) : (
-            <span className="inline-flex items-center gap-1 text-moon"><Sparkles className="size-3.5" aria-hidden />
-              Biên soạn có AI hỗ trợ từ cổ thư và tài liệu tham khảo · đang chờ chuyên gia thẩm định</span>
+            <span className="inline-flex items-center gap-1 text-fg-faint"><BookOpen className="size-3.5" aria-hidden />
+              Biên soạn từ cổ thư và tài liệu tham khảo, ghi rõ nguồn và trường phái</span>
           )}
           <Link href="/gioi-thieu#quy-trinh" className="text-fg-faint underline underline-offset-2 hover:text-fg">Quy trình biên soạn</Link>
         </p>

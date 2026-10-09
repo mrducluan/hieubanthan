@@ -18,6 +18,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
 from app import config, giam_sat, gioi_han
+from app.cong_khai import PhanHoiCongKhai
 from app.kb import tu_dien
 from app.calc import thanso, timebase
 from app.kb import store as kb_store
@@ -46,6 +47,7 @@ app = FastAPI(
     docs_url="/docs" if _TAI_LIEU else None,
     redoc_url="/redoc" if _TAI_LIEU else None,
     openapi_url="/openapi.json" if _TAI_LIEU else None,
+    default_response_class=PhanHoiCongKhai,   # BM-1: lọc chữ nội bộ khỏi mọi JSON trả ra
 )
 
 

@@ -13,10 +13,10 @@ test("trang số: HTML server có h1, trả lời nhanh, JSON-LD Article + FAQPa
   for (const t of ["Article", "FAQPage", "BreadcrumbList", "Organization", "WebSite"]) expect(loai).toContain(t);
 });
 
-test("trang chưa thẩm định vẫn index nhưng ghi rõ biên soạn có AI hỗ trợ, chờ thẩm định", async ({ page }) => {
+test("trang chưa thẩm định vẫn index, ghi Ban biên tập + Chủ biên", async ({ page }) => {
   await page.goto("/kien-thuc/kinh-dich/que-1-can");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Càn");
-  await expect(page.getByText("Chờ chuyên gia thẩm định", { exact: true })).toBeVisible();
+  await expect(page.locator("[data-dong-tac-gia]")).toContainText("Ban biên tập Hiểu Bản Thân");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /^index/);
   await page.getByRole("link", { name: "Quẻ Khôn" }).click();
   await expect(page).toHaveURL(/que-2-khon/);
@@ -24,7 +24,10 @@ test("trang chưa thẩm định vẫn index nhưng ghi rõ biên soạn có AI 
 
 test("robots, sitemap, llms.txt cho máy tìm kiếm và AI", async ({ request }) => {
   const robots = await (await request.get("/robots.txt")).text();
-  expect(robots).toContain("User-Agent: GPTBot");
+  // BM-2: bot AI trả lời/tìm kiếm được vào; bot huấn luyện bị chặn toàn site
+  expect(robots).toMatch(/User-Agent: OAI-SearchBot[\s\S]*?Allow: \//);
+  expect(robots).toMatch(/User-Agent: GPTBot[\s\S]*?Disallow: \/\n/);
+  expect(robots).not.toContain("llms-full");
   expect(robots).toContain("Disallow: /tai-khoan");
   expect(robots).toContain("Sitemap: http://localhost:3000/sitemap.xml");
   const sm = await (await request.get("/sitemap.xml")).text();
@@ -37,8 +40,11 @@ test("robots, sitemap, llms.txt cho máy tìm kiếm và AI", async ({ request }
   const llms = await (await request.get("/llms.txt")).text();
   expect(llms.startsWith("# Hiểu Bản Thân")).toBe(true);
   expect(llms).toContain("/kien-thuc/kinh-dich/que-64-");
-  const full = await (await request.get("/llms-full.txt")).text();
-  expect(full).toContain("## Số 11 trong thần số học");
+  // BM-2: llms.txt chỉ gợi ý + dẫn link trang HTML; không còn bản toàn văn
+  expect(llms).not.toContain(".md)");
+  expect(llms).toContain("Công cụ miễn phí");
+  expect(llms.length).toBeLessThan(80_000);
+  expect((await request.get("/llms-full.txt")).status()).toBe(404);
 });
 
 test("trang không tồn tại → 404; từ thẻ số trong bài đọc có link sang thư viện", async ({ page, request }) => {

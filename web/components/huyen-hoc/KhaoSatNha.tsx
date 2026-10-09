@@ -234,7 +234,7 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
       </div>
 
       <div>
-        <p className="eyebrow">Diễn giải <span className="normal-case tracking-normal text-fg-faint">{kq.trang_thai === "nhap_ai" ? "· chờ thẩm định" : ""}</span></p>
+        <p className="eyebrow">Diễn giải</p>
         <ul className="mt-2 space-y-2">
           {d.vi_tri.filter((x) => x.hop === false).map((x) => (
             <li key={x.phong} className="rounded-xl border border-cinnabar/30 bg-cinnabar/5 px-4 py-2.5 text-sm">

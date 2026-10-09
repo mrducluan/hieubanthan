@@ -58,7 +58,8 @@ export default async function Page({ params }: Props) {
   const the = so ? [
     { so: so.so_trang.chu_bien, nhan: "bài do anh làm chủ biên" },
     { so: so.so_trang.tac_gia, nhan: "bài anh tự biên soạn" },
-    { so: so.so_trang.tham_dinh, nhan: "bài anh đã thẩm định" },
+    // BM-1: chỉ hiện số bài đã thẩm định khi đã có (con số 0 trên hồ sơ công khai không giúp người đọc).
+    ...(so.so_trang.tham_dinh > 0 ? [{ so: so.so_trang.tham_dinh, nhan: "bài anh đã thẩm định" }] : []),
   ] : [];
 
   return (
@@ -98,9 +99,6 @@ export default async function Page({ params }: Props) {
               </div>
             ))}
           </dl>
-          {so && so.so_trang.cho_tham_dinh > 0 && (
-            <p className="mt-3 text-sm text-fg-faint">Còn {so.so_trang.cho_tham_dinh} bài biên soạn có AI hỗ trợ đang chờ anh thẩm định — các bài này ghi rõ trạng thái ngay dưới tiêu đề.</p>
-          )}
         </section>
       )}
 
@@ -130,9 +128,9 @@ export default async function Page({ params }: Props) {
       <section className="mt-10" aria-labelledby="quy-trinh">
         <h2 id="quy-trinh" className="flex items-center gap-2 text-2xl"><BookOpenCheck className="size-5 text-gold" aria-hidden /> Cách một bài được làm ra</h2>
         <ol className="mt-4 list-decimal space-y-2 pl-5 leading-relaxed text-fg-muted">
-          <li><b className="text-fg">Tính toán bằng máy, không dùng AI:</b> con số, lá số, tứ trụ, quẻ, hướng — có bộ dữ liệu mẫu đối chiếu.</li>
-          <li><b className="text-fg">Biên soạn có AI hỗ trợ:</b> phần diễn giải được soạn từ cổ thư (nguyên văn công cộng) và tài liệu tham khảo, ghi nguồn và trường phái, theo bộ quy tắc biên tập của chủ biên (không phán định mệnh, luôn có mặt tối và câu tự soi).</li>
-          <li><b className="text-fg">Chuyên gia thẩm định:</b> {cg.ten} đọc, sửa và duyệt từng bài. Bài đã duyệt ghi tên người thẩm định và ngày; bài chưa duyệt ghi rõ "đang chờ chuyên gia thẩm định".</li>
+          <li><b className="text-fg">Tính toán chính xác:</b> con số, lá số, tứ trụ, quẻ, hướng do hệ thống tính toán riêng thực hiện, đã đối chiếu với các lá số mẫu.</li>
+          <li><b className="text-fg">Ban biên tập biên soạn:</b> phần diễn giải được soạn từ cổ thư (nguyên văn công cộng) và tài liệu tham khảo, ghi nguồn và trường phái, theo bộ quy tắc biên tập của chủ biên (không phán định mệnh, luôn có mặt tối và câu tự soi).</li>
+          <li><b className="text-fg">Chuyên gia thẩm định:</b> {cg.ten} đọc, sửa và duyệt từng bài. Bài đã duyệt ghi tên người thẩm định và ngày.</li>
         </ol>
       </section>
 
