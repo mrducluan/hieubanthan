@@ -9,6 +9,7 @@ current_build: "SEO-H 168 trang sao × cung Tử vi + PERF-1 tốc độ trang (
 current_gate: "Gate 0 bỏ qua theo quyết định chủ dự án (2026-10-08) — mở công khai, đo Gate 1 trên người dùng thật"
 current_metrics: []   # PostHog đã bật (mục G); GA4 qua GTM khi chủ dự án gắn thẻ GA4 trong GTM
 current_risks:
+  - "GTM + GA4 bật mặc định, chưa hỏi đồng ý cookie (chủ dự án chốt 2026-10-09, tự lo pháp lý) — bật NEXT_PUBLIC_HOI_DONG_Y_COOKIE=1 khi vượt ~100k người dùng/tháng"
   - "Bỏ Gate 0: chưa có phỏng vấn định tính — chỉ dựa PostHog + góp ý trên web"
   - "Hạn mức lượt AI (RL-1) chỉ trong bộ nhớ một tiến trình — tăng số tiến trình/instance thì cần Upstash (GĐ2)"
   - "Phase 2 làm trước Gate 1 — phải tách funnel theo feature_version"

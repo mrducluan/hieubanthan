@@ -1,4 +1,4 @@
-// SEO-D — bản Markdown cho bot AI, llms.txt trỏ .md, schema đơn vị vận hành, manifest, hộp hỏi cookie trước GA/GTM.
+// SEO-D — bản Markdown cho bot AI, llms.txt trỏ .md, schema đơn vị vận hành, manifest, hộp hỏi cookie điều khiển Consent Mode của GTM.
 import { test, expect } from "@playwright/test";
 
 test("bản .md: trang kiến thức, chủ đề, thư viện, từ điển, trang chủ — có canonical về HTML", async ({ request }) => {
@@ -47,26 +47,33 @@ test("schema: Organization có tên pháp lý + email; từ điển là DefinedT
   expect(ld2).toContain('"@type":"DefinedTerm"');
 });
 
-test("cookie: chưa đồng ý thì không tải Google; Đồng ý → tải GTM; đổi ý ở chân trang → Từ chối", async ({ page }) => {
+test("cookie: GTM nạp ngay, đo lường bật mặc định (chưa hỏi khi traffic thấp); Tuỳ chọn cookie → Từ chối = denied; Đồng ý = granted", async ({ page }) => {
   const goiGoogle: string[] = [];
   await page.route(/googletagmanager\.com|google-analytics\.com/, (r) => { goiGoogle.push(r.request().url()); return r.abort(); });
   await page.goto("/");
   await page.evaluate(() => localStorage.removeItem("hbt.dong-y-cookie.v1"));
   await page.reload();
   const hop = page.getByTestId("hoi-dong-y-cookie");
-  await expect(hop).toBeVisible();
-  await expect(page.locator('script[src*="googletagmanager"]')).toHaveCount(0);
-  expect(goiGoogle).toEqual([]);
-  await hop.getByRole("button", { name: "Đồng ý" }).click();
-  await expect(hop).toBeHidden();
+  // chủ dự án chốt 2026-10-09: GTM nạp ngay; chưa tới ~100k người dùng/tháng thì không hỏi khi mở trang
   await expect.poll(() => goiGoogle.some((u) => u.includes("gtm.js?id=GTM-E2ETEST"))).toBe(true);
-  expect(await page.evaluate(() => (window as unknown as { dataLayer: unknown[] }).dataLayer.length)).toBeGreaterThan(0);
-  expect(await page.evaluate(() => localStorage.getItem("hbt.dong-y-cookie.v1"))).toBe("dong_y");
+  await expect(hop).toBeHidden();
+  const dongY = () => page.evaluate(() => JSON.stringify(((window as unknown as { dataLayer?: unknown[] }).dataLayer ?? [])
+    .filter((x) => x && typeof x === "object" && "0" in (x as object))
+    .map((x) => Array.from(x as ArrayLike<unknown>)).filter((a) => a[0] === "consent")));
+  await expect.poll(dongY).toContain('"default",{"analytics_storage":"granted"');
+  // người dùng vẫn tắt được ở chân trang
   await page.getByTestId("chan-trang").getByRole("button", { name: "Tuỳ chọn cookie" }).click();
   await expect(hop).toBeVisible();
   await hop.getByRole("button", { name: "Từ chối" }).click();
   await expect(hop).toBeHidden();
+  await expect.poll(dongY).toContain('"update",{"analytics_storage":"denied"}');
   expect(await page.evaluate(() => localStorage.getItem("hbt.dong-y-cookie.v1"))).toBe("tu_choi");
+  // từ chối thì lần mở sau vẫn denied ngay từ đầu
+  await page.reload();
+  await expect.poll(dongY).toContain('"default",{"analytics_storage":"denied"');
+  await page.getByTestId("chan-trang").getByRole("button", { name: "Tuỳ chọn cookie" }).click();
+  await hop.getByRole("button", { name: "Đồng ý" }).click();
+  await expect.poll(dongY).toContain('"update",{"analytics_storage":"granted"}');
 });
 
 test("trang công cụ: HTML máy chủ có <h1>, phần giới thiệu + hỏi đáp, schema WebPage/FAQ/Breadcrumb, ảnh OG", async ({ request }) => {
