@@ -29,7 +29,7 @@ kho mã (bí mật, thư viện). Cách làm: đọc toàn bộ route API, lớp
   `revoke` khỏi `anon`; xoá tài khoản xác minh token của chính người gọi.
 - iztro chạy bằng `subprocess` danh sách tham số + stdin JSON (không qua shell) → không chèn lệnh được.
 - PostHog: tắt autocapture, tắt ghi phiên, che toàn bộ chữ → ô ngày sinh không bao giờ bị gửi đi.
-- GTM/GA chỉ nạp sau khi người dùng bấm Đồng ý.
+- GTM nạp mọi trang (chủ dự án chốt 2026-10-09) nhưng mang nonce CSP; CSP chỉ mở cho tên miền hệ Google (+ `CSP_THEM_MIEN` nếu đặt). Người dùng tắt đo lường được ở "Tuỳ chọn cookie".
 
 ## Còn mở — cần anh quyết hoặc làm
 

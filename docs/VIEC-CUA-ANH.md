@@ -95,21 +95,21 @@ cd web && node scripts/kiem-tra-seo.mjs https://hieuban.com
 
 ### H2. Google Analytics 4 + Google Tag Manager
 
-Code đã sẵn: **chỉ tải mã Google sau khi người dùng bấm "Đồng ý"** ở hộp hỏi cookie (luật 91/2025 cấm đồng ý mặc
-định). Người dùng bấm "Từ chối" thì web vẫn dùng bình thường. Chính sách quyền riêng tư đã ghi thêm Google Analytics.
+Code đã sẵn (anh chốt 2026-10-09): **GTM nạp trên mọi trang, đo lường bật mặc định**, chưa hỏi đồng ý cookie khi
+traffic còn thấp; người dùng vẫn tắt được ở "Tuỳ chọn cookie" (chân trang). Vượt ~100k người dùng/tháng → mục 4c.
+Chính sách quyền riêng tư đã ghi đúng cách chạy này.
 
 - [x] **GTM đã gắn vào web**: container `GTM-KNZL39CS` (anh gửi 2026-10-08) là mặc định trong code — không cần đặt
-  biến trên Vercel. Em **không** dán nguyên đoạn mã GTM vào `<head>` vì đoạn đó chạy ngay khi mở trang (trái luật 91/2025
-  khi chưa hỏi đồng ý): web chỉ nạp đúng đoạn mã đó **sau khi người dùng bấm "Đồng ý"**. Phần `<noscript>` (iframe cho
-  trình duyệt tắt JavaScript) bỏ qua, vì không hỏi được đồng ý khi không có JavaScript.
+  biến trên Vercel. Từ 2026-10-09: nạp ngay khi mở trang (mang nonce CSP nên không bị chặn) + `<noscript>` iframe.
+  Thẻ bên thứ ba khác (vd Meta Pixel) cài qua GTM → thêm tên miền vào env `CSP_THEM_MIEN` trên Vercel.
 1. [ ] **GA4:** analytics.google.com → Admin → **Create property** "Hiểu Bản Thân", múi giờ Việt Nam, tiền VND →
    **Web stream** `https://hieuban.com` → chép **Measurement ID** dạng `G-XXXXXXX`.
    - Admin → Data retention → **14 months** (khớp chính sách quyền riêng tư).
    - Admin → Data collection → **tắt** Google signals (không cần, giảm dữ liệu cá nhân).
 2. [ ] **Trong GTM `GTM-KNZL39CS`:** Tags → New → **Google Tag** → Tag ID = `G-XXXXXXX` → Trigger **Initialization – All
    Pages** → Save → **Submit → Publish**. (Không có bước này thì GTM nạp nhưng chưa gửi gì sang GA4.)
-3. [ ] **Kiểm tra:** mở `hieuban.com` ở cửa sổ ẩn danh → thấy hộp hỏi cookie → bấm Đồng ý → GA4 → Reports → **Realtime**
-   thấy 1 người đang xem. Hoặc dùng nút **Preview** trong GTM (Tag Assistant), nhớ bấm Đồng ý trên trang trước.
+3. [ ] **Kiểm tra:** mở `hieuban.com` ở cửa sổ ẩn danh → GA4 → Reports → **Realtime**
+   thấy 1 người đang xem. Hoặc dùng nút **Preview** trong GTM (Tag Assistant).
 4. Đổi container khác: đặt env `NEXT_PUBLIC_GTM_ID` trên Vercel. Tắt hẳn: đặt `NEXT_PUBLIC_GTM_ID=off`.
 5. [ ] Search Console → Settings → **Associations** → liên kết với GA4 property vừa tạo (xem từ khoá ngay trong GA4).
 
