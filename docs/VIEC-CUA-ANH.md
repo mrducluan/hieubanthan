@@ -35,7 +35,7 @@
 6. [ ] **Pháp lý còn lại** → mục E (tên đơn vị + email đã có trong code; còn MST, địa chỉ, luật sư)
 7. [ ] Các việc còn lại → mục D (em đã ghi rõ việc nào em làm, việc nào cần anh)
 8. [ ] **Lộ trình đến Gate 2** → mục L (đọc số funnel, chạy 55 câu, bật AI, pháp lý trước khi thu tiền)
-9. [ ] **Trang quản trị `/quan-tri` (QT-0)** → mục Q (chạy migration 0010, tự cấp quyền chủ sở hữu, quét mã QR)
+9. [ ] **Trang quản trị `/quan-tri`** → mục Q (Q1–Q4 xong 2026-10-09; còn **Q5 token GitHub** cho Kho tri thức)
 
 ---
 
@@ -289,10 +289,10 @@ Việc pháp lý đi kèm. Đây là đề xuất, cần luật sư xác nhận:
 
 Thiết kế: `docs/KIEN-TRUC-QUAN-TRI.md`. Cần **bật tài khoản trước** (mục F: Google + 3 biến Supabase trên Vercel).
 
-- [ ] **Q1. Chạy migration:** Supabase → SQL Editor → New query → dán toàn bộ `supabase/migrations/0010_quan_tri.sql`
+- [x] **Q1. Chạy migration:** Supabase → SQL Editor → New query → dán toàn bộ `supabase/migrations/0010_quan_tri.sql`
   → Run. (Gỡ: chạy `0010_quan_tri.down.sql`.)
-- [ ] **Q2. Bật MFA TOTP:** Supabase → Authentication → **Multi-Factor** → TOTP = *Enabled* (thường bật sẵn) → Save.
-- [ ] **Q3. Tự cấp quyền chủ sở hữu:** vào `https://hieuban.com/dang-nhap`, đăng nhập bằng Google **một lần** (để có
+- [x] **Q2. Bật MFA TOTP:** Supabase → Authentication → **Multi-Factor** → TOTP = *Enabled* (thường bật sẵn) → Save.
+- [x] **Q3. Tự cấp quyền chủ sở hữu:** vào `https://hieuban.com/dang-nhap`, đăng nhập bằng Google **một lần** (để có
   tài khoản), rồi SQL Editor chạy (thay email):
 
   ```sql
@@ -301,10 +301,25 @@ Thiết kế: `docs/KIEN-TRUC-QUAN-TRI.md`. Cần **bật tài khoản trước*
   ```
 
   Phải báo `INSERT 0 1`. Báo `INSERT 0 0` nghĩa là sai email hoặc chưa đăng nhập lần nào.
-- [ ] **Q4. Vào trang quản trị:** cài **Google Authenticator** trên điện thoại → mở `https://hieuban.com/quan-tri` →
+- [x] **Q4. Vào trang quản trị:** cài **Google Authenticator** trên điện thoại → mở `https://hieuban.com/quan-tri` →
   bấm **Tạo mã QR** → quét → nhập mã 6 số. Lần sau chỉ cần nhập mã 6 số.
   ⚠️ Mất điện thoại = không vào được `/quan-tri`. Khi đó vào Supabase → Authentication → Users → chọn tài khoản →
   xoá factor MFA, rồi đăng ký lại.
+
+- [ ] **Q5. Kết nối GitHub cho "Kho tri thức" (QT-1)** — để sửa nội dung ngay trong `/quan-tri/tri-thuc`:
+  1. GitHub → ảnh đại diện → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens**
+     → **Generate new token**.
+  2. Token name `hieuban-quan-tri` · Expiration **1 năm** (hết hạn thì tạo lại) · Repository access: **Only select
+     repositories** → chọn `hieubanthan`.
+  3. Permissions → Repository permissions: **Contents = Read and write**, **Pull requests = Read and write** (còn lại
+     để No access) → **Generate token** → copy (chỉ hiện một lần).
+  4. Vercel → Settings → Environment Variables → **Production**: `QUAN_TRI_GITHUB_TOKEN` = token vừa copy → Save →
+     **Redeploy**.
+  5. Mở `hieuban.com/quan-tri/tri-thuc` → thấy 20 file. Sửa thử một chữ → **Xuất bản…** → **Xuất bản (mở PR)** → mở PR
+     trên GitHub, chờ CI xanh → **Merge**. Web/engine cập nhật sau khi Vercel + Render triển khai (vài phút).
+
+  ⚠️ Token này ghi được code của repo — chỉ đặt trên Vercel, không dán vào chat/email. Lộ thì vào GitHub xoá token
+  (Revoke) rồi tạo cái mới.
 
 Thêm người quản trị khác (tạm thời bằng SQL, giao diện ở QT-2): người đó đăng nhập một lần, rồi chạy câu trên với
 email của họ và vai trò `bien_tap` / `tham_dinh` / `ho_tro` / `xem`.

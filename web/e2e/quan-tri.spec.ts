@@ -22,3 +22,17 @@ test("robots.txt chặn /quan-tri; trang khác không bị gắn noindex của q
   const res = await page.goto("/gioi-thieu");
   expect(res?.headers()["x-robots-tag"]).toBeUndefined();
 });
+
+test("QT-1: /quan-tri/tri-thuc và API xuất bản khi chưa bật tài khoản — không đọc, không ghi được gì", async ({ page, request }) => {
+  await page.goto("/quan-tri/tri-thuc");
+  await expect(page.getByTestId("qt-bao-cong")).toHaveAttribute("data-trang", "chua_bat");
+  await expect(page.getByTestId("qt-tri-thuc")).toHaveCount(0);
+  await page.goto("/quan-tri/tri-thuc/tuvi_kb");
+  await expect(page.getByTestId("qt-bien-tap")).toHaveCount(0);
+
+  const body = { tep: "tuvi_kb.json", sha: "0".repeat(40), sua: [{ duong: ["a"], cu: "x", moi: "y" }] };
+  expect((await request.post("/api/quan-tri/tri-thuc", { data: body })).status()).toBe(403);            // thiếu Origin
+  const r = await request.post("/api/quan-tri/tri-thuc", { data: body, headers: { origin: "http://localhost:3000" } });
+  expect(r.status()).toBe(401);
+  expect(r.headers()["x-robots-tag"]).toBe("noindex, nofollow");
+});

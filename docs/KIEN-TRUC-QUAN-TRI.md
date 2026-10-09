@@ -38,8 +38,8 @@ Thêm vào đó:
 
 | Giai đoạn | Nội dung | Trạng thái |
 |---|---|---|
-| **QT-0** | Migration 0010 (`vai_tro_quan_tri`, `nhat_ky_quan_tri`, `cau_hinh`). Cổng 3 lớp. Bảng điều khiển chỉ đọc: engine, tài khoản & Sao (số tổng), cấu hình env, kho tri thức (số trang, đã duyệt, thẩm định), nhật ký, liên kết bảng điều khiển ngoài | Xong code, chờ chạy migration |
-| **QT-1** | Xưởng kho tri thức: duyệt theo 5 mảng; form tự sinh từ JSON Schema từng file (bắt buộc có nguồn); trạng thái Nháp AI → Chờ duyệt → Đã duyệt nối với `tham_dinh.json`; xem khác biệt, xem trước, quay lại bản cũ; **Xuất bản = PR** | Cần migration bảng nháp/phiên bản + GitHub token fine-grained (chỉ quyền mở PR vào repo này) |
+| **QT-0** | Migration 0010 (`vai_tro_quan_tri`, `nhat_ky_quan_tri`, `cau_hinh`). Cổng 3 lớp. Bảng điều khiển chỉ đọc: engine, tài khoản & Sao (số tổng), cấu hình env, kho tri thức (số trang, đã duyệt, thẩm định), nhật ký, liên kết bảng điều khiển ngoài | ✅ Chạy thật 2026-10-09 |
+| **QT-1** | Xưởng kho tri thức `/quan-tri/tri-thuc`: đọc 20 file từ GitHub (main); duyệt cây, tìm chữ không dấu, sửa **giá trị chuỗi đã có** (không thêm/xoá mục, không đổi kiểu); xem khác biệt; **Xuất bản = nhánh `quan-tri/…` + commit + PR** (mô tả PR có bảng trước/sau, chỉ ghi vai trò + mã rút gọn, không email). Sửa **đúng vị trí chuỗi trong văn bản gốc** (`lib/kb-sua.ts`) → định dạng file giữ nguyên từng byte, PR chỉ có dòng thật sự đổi. Chặn: khác Origin, chưa aal2, vai trò Hỗ trợ/Chỉ xem, file `tham_dinh.json` (sửa bằng `scripts/tham_dinh.py`), file trên main đã đổi (sha), giá trị cũ không khớp. Ghi `nhat_ky_quan_tri` (`kb.de_xuat`) | ✅ Code xong, cần token `QUAN_TRI_GITHUB_TOKEN` (VIEC-CUA-ANH Q5). Bỏ bảng nháp/phiên bản trên Supabase: PR **là** bản nháp, git **là** lịch sử phiên bản → không cần migration |
 | **QT-2** | Cài đặt site (công tắc chuyển từ env vào `cau_hinh`); SEO và chuyển hướng; người dùng và cấp vai trò; Sao (chỉ bút toán có lý do, không sửa số dư); nhật ký hỏi đáp | Cần duyệt danh sách công tắc |
 | **QT-3** | Trợ lý AI: soạn nháp mục thiếu theo skill `thanso-kb`/`huyenhoc-kb`; kiểm định (bịa, lệch cổ thư, vùng cấm, SEO); tìm lỗ hổng từ nhật ký hỏi đáp + Search Console; máy chủ MCP để Claude thao tác CMS. **Mọi thao tác ghi của AI = bản nháp hoặc PR, người duyệt** | Cần hạn mức chi phí AI riêng |
 | **QT-4** | Tìm kiếm ngữ nghĩa (pgvector); kéo số liệu Search Console/GA4 qua API | Cần bật extension pgvector |
@@ -58,3 +58,5 @@ Thêm vào đó:
 - `web/middleware.ts`: làm mới phiên và gắn noindex cho `/quan-tri`
 - `web/app/quan-tri/`: bảng điều khiển và `xac-thuc/` (đăng ký hoặc nhập mã TOTP)
 - `web/e2e/quan-tri.spec.ts`
+- QT-1: `web/lib/kb-sua.ts` (sửa đúng vị trí, kiểm lại cấu trúc) · `web/lib/github-quan-tri.ts` · `web/app/quan-tri/tri-thuc/`
+  · `web/app/api/quan-tri/tri-thuc/route.ts` · `web/e2e/kb-sua.spec.ts` (chạy trên mọi file KB thật)

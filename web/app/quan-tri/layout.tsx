@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { DieuHuongQT } from "@/components/quan-tri/DieuHuongQT";
 
 // QT-0: không bao giờ index (middleware còn gắn X-Robots-Tag + no-store cho cả /quan-tri).
 export const metadata: Metadata = {
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return <div className="mx-auto max-w-6xl">{children}</div>;
+  return <div className="mx-auto max-w-6xl"><DieuHuongQT />{children}</div>;
 }
