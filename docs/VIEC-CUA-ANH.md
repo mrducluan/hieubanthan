@@ -31,6 +31,7 @@
 6. [ ] **Pháp lý còn lại** → mục E (tên đơn vị + email đã có trong code; còn MST, địa chỉ, luật sư)
 7. [ ] Các việc còn lại → mục D (em đã ghi rõ việc nào em làm, việc nào cần anh)
 8. [ ] **Lộ trình đến Gate 2** → mục L (đọc số funnel, chạy 55 câu, bật AI, pháp lý trước khi thu tiền)
+9. [ ] **Trang quản trị `/quan-tri` (QT-0)** → mục Q (chạy migration 0010, tự cấp quyền chủ sở hữu, quét mã QR)
 
 ---
 
@@ -277,6 +278,32 @@ Việc pháp lý đi kèm. Đây là đề xuất, cần luật sư xác nhận:
     delete from huyenhoc_hoi_nhat_ky where created_at < now() - interval '24 months';
     ```
 - [x] Ô đồng ý lưu hồ sơ vào tài khoản **không tích sẵn** (đúng NĐ 356: cấm đồng ý mặc định), có link tới chính sách.
+
+## Q. Trang quản trị `/quan-tri` (QT-0, 2026-10-09)
+
+Thiết kế: `docs/KIEN-TRUC-QUAN-TRI.md`. Cần **bật tài khoản trước** (mục F: Google + 3 biến Supabase trên Vercel).
+
+- [ ] **Q1. Chạy migration:** Supabase → SQL Editor → New query → dán toàn bộ `supabase/migrations/0010_quan_tri.sql`
+  → Run. (Gỡ: chạy `0010_quan_tri.down.sql`.)
+- [ ] **Q2. Bật MFA TOTP:** Supabase → Authentication → **Multi-Factor** → TOTP = *Enabled* (thường bật sẵn) → Save.
+- [ ] **Q3. Tự cấp quyền chủ sở hữu:** vào `https://hieuban.com/dang-nhap`, đăng nhập bằng Google **một lần** (để có
+  tài khoản), rồi SQL Editor chạy (thay email):
+
+  ```sql
+  insert into vai_tro_quan_tri (user_id, vai_tro)
+  select id, 'chu_so_huu' from auth.users where email = 'email-cua-anh@gmail.com';
+  ```
+
+  Phải báo `INSERT 0 1`. Báo `INSERT 0 0` nghĩa là sai email hoặc chưa đăng nhập lần nào.
+- [ ] **Q4. Vào trang quản trị:** cài **Google Authenticator** trên điện thoại → mở `https://hieuban.com/quan-tri` →
+  bấm **Tạo mã QR** → quét → nhập mã 6 số. Lần sau chỉ cần nhập mã 6 số.
+  ⚠️ Mất điện thoại = không vào được `/quan-tri`. Khi đó vào Supabase → Authentication → Users → chọn tài khoản →
+  xoá factor MFA, rồi đăng ký lại.
+
+Thêm người quản trị khác (tạm thời bằng SQL, giao diện ở QT-2): người đó đăng nhập một lần, rồi chạy câu trên với
+email của họ và vai trò `bien_tap` / `tham_dinh` / `ho_tro` / `xem`.
+
+---
 
 ## F. Khi nào muốn bật lại đăng nhập tài khoản (CHƯA cần — giữ để tra)
 
