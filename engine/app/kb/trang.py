@@ -24,7 +24,7 @@ CAP_NHAT = "2026-10-07"
 INDEX_NHAP_AI = True
 
 LOAI = ("so", "que", "sao", "cung", "thap_than", "nhat_chu", "cap_so", "nghe", "tinh_yeu", "nam_ca_nhan", "no_nghiep",
-        "sao_cung")
+        "sao_cung", "hoa_cung")
 _SO = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33")
 _SO_GOC = {"11": "2", "22": "4", "33": "6"}
 _LINH_VUC_QUE = {"cong_viec": "Công việc", "tinh_cam": "Tình cảm", "gia_dinh": "Gia đình",
@@ -245,6 +245,10 @@ def _trang_cung(ten: str, slug: str) -> dict:
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "cung", "slug": ds[j % len(ds)][1]} for j in (i - 1, i + 1)],
         "minh_hoa": {"kieu": "cung", "chi_so": list(kb["cung"]).index(ten), "vong": list(kb["cung"])},
+        # SEO-I: 4 trang "Hoá X ở cung này"
+        "trang_con_hoa": {"tieu_de": f"Tứ hoá ở cung {ten}",
+                          "ds": [{"loai": "hoa_cung", "slug": f"hoa-{_slug(h)}-cung-{_slug(ten)}"} for h in kb["tu_hoa_cung"]
+                                 if ten in kb["tu_hoa_cung"][h]]},
         # SEO-H: 14 trang "chính tinh ở cung này"
         "trang_con": {"tieu_de": f"14 chính tinh ở cung {ten}",
                       "ds": [{"loai": "sao_cung", "slug": f"{_slug(sao)}-cung-{_slug(ten)}"}
@@ -345,7 +349,7 @@ def _ten_ngan(loai: str, slug: str) -> str:
 
 def _hoan_tat(t: dict) -> dict:
     t["index"] = t["trang_thai"] == "da_duyet" or INDEX_NHAP_AI
-    for l in t["lien_quan"] + (t.get("trang_con") or {}).get("ds", []):
+    for l in t["lien_quan"] + (t.get("trang_con") or {}).get("ds", []) + (t.get("trang_con_hoa") or {}).get("ds", []):
         l["tieu_de"] = _ten_ngan(l["loai"], l["slug"])
     t["cap_nhat"] = CAP_NHAT
     return t

@@ -159,5 +159,66 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
     }
 
 
-TRANG = {"sao_cung": (ds_sao_cung, trang_sao_cung)}
-TEN_NGAN = {"sao_cung": lambda k: f"{k[0]} ở cung {k[1]}"}
+# ---- SEO-I: 48 trang "Hoá X ở cung Y" -----------------------------------------------------------------------
+def _slug_hoa(h: str) -> str:
+    return f"hoa-{_t()._slug(h)}"
+
+
+def ds_hoa_cung() -> list[tuple[tuple[str, str], str]]:
+    t, kb = _t(), _kb()
+    return [((h, cung), f"{_slug_hoa(h)}-cung-{t._slug(cung)}")
+            for h in _HOA for cung in kb["cung"] if cung in kb["tu_hoa_cung"].get(h, {})]
+
+
+def trang_hoa_cung(k: tuple[str, str], slug: str) -> dict:
+    t, kb = _t(), _kb()
+    h, cung = k
+    th, c = kb["tu_hoa"][h], kb["cung"][cung]
+    nd = kb["tu_hoa_cung"][h][cung]
+    doi, th1, th2 = _cung_lien(cung)
+    i_h = _HOA.index(h)
+    theo_can = [(can, ds[i_h]) for can, ds in TU_HOA.items()]          # mỗi thiên can đúng một sao mang hoá này
+    tra_loi = (f"Hoá {h} ở cung {cung}: {t._cau(nd)} {t._cau(th['y_nghia'])} "
+               f"Hoá {h} đi theo một sao cụ thể, do thiên can năm sinh quyết định — xem bảng bên dưới.")
+    muc = [
+        {"tieu_de": f"Hoá {h} là gì", "doan": f"{th['y_nghia']} Lưu ý: {th['luu_y']}"},
+        {"tieu_de": f"Cung {cung} nói về điều gì", "doan": f"{c['y_nghia']} {t._cau(_hoa_dau(c['xem_duoc']))}"},
+        {"tieu_de": f"Năm sinh nào có Hoá {h}",
+         "doan": (f"Tứ hoá theo thiên can năm sinh: mỗi can có đúng một sao hoá {h}. Hoá {h} chỉ rơi vào cung {cung} khi "
+                  f"sao đó nằm ở cung {cung} trên lá số của bạn (bảng tứ hoá dùng trên lá số Hiểu Bản Thân)."),
+         "danh_sach": [f"Năm {can}: {sao} hoá {h}." for can, sao in theo_can]},
+        {"tieu_de": f"Tam phương tứ chính của cung {cung}",
+         "doan": f"Hoá {h} ở cung {cung} cần đọc cùng cung xung chiếu và hai cung tam hợp.",
+         "danh_sach": [f"Xung chiếu — cung {doi}: {kb['cung'][doi]['y_nghia']}",
+                       f"Tam hợp — cung {th1}: {kb['cung'][th1]['y_nghia']}",
+                       f"Tam hợp — cung {th2}: {kb['cung'][th2]['y_nghia']}"]},
+        {"tieu_de": "Câu hỏi tự soi", "doan": c["cau_tu_soi"]},
+    ]
+    hoi_dap = [
+        {"hoi": f"Hoá {h} ở cung {cung} nghĩa là gì?", "dap": t._cau(nd)},
+        {"hoi": f"Năm sinh nào có Hoá {h}?",
+         "dap": _hoa_dau("; ".join(f"năm {can}: {sao}" for can, sao in theo_can)) + "."},
+        {"hoi": f"Hoá {h} ở cung {cung} tốt hay xấu?",
+         "dap": f"{th['y_nghia']} {t._cau(th['luu_y'])} Đọc kèm sao mang hoá và độ sáng của sao đó."},
+    ]
+    chinh = list(kb["chinh_tinh"])
+    sao_con = list(dict.fromkeys(sao for _, sao in theo_can if sao in chinh))
+    v = _vong()
+    return {
+        "loai": "hoa_cung", "slug": slug,
+        "tieu_de": f"Hoá {h} ở cung {cung}: ý nghĩa, năm sinh nào có",
+        "mo_ta": t._cat(f"Hoá {h} ở cung {cung} trong Tử vi: {nd} Năm sinh nào có Hoá {h}, sao nào mang, tam phương tứ chính."),
+        "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
+        "nguon": list(kb["source"].values()) + ["Bảng tứ hoá theo thiên can: theo iztro (giữ cho Canh/Nhâm, quyết định 2026-10-02)."],
+        "trang_thai": kb.get("trang_thai", "nhap_ai"),
+        "lien_quan": [{"loai": "cung", "slug": f"cung-{t._slug(cung)}"},
+                      {"loai": "hoa_cung", "slug": f"{_slug_hoa(h)}-cung-{t._slug(doi)}"},
+                      *({"loai": "hoa_cung", "slug": f"{_slug_hoa(x)}-cung-{t._slug(cung)}"} for x in _HOA if x != h)],
+        "trang_con": {"tieu_de": f"Sao mang Hoá {h} ở cung {cung}",
+                      "ds": [{"loai": "sao_cung", "slug": f"{t._slug(sao)}-cung-{t._slug(cung)}"} for sao in sao_con]},
+        "minh_hoa": {"kieu": "hoa_cung", "hoa": h, "chi_so": v.index(cung), "vong": v},
+    }
+
+
+TRANG = {"sao_cung": (ds_sao_cung, trang_sao_cung), "hoa_cung": (ds_hoa_cung, trang_hoa_cung)}
+TEN_NGAN = {"sao_cung": lambda k: f"{k[0]} ở cung {k[1]}", "hoa_cung": lambda k: f"Hoá {k[0]} ở cung {k[1]}"}

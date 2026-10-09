@@ -24,7 +24,8 @@ def test_danh_sach_du_ba_loai():
     assert dem == {"so": 12, "que": 64, "sao": 14, "cung": 12, "thap_than": 10, "nhat_chu": 10,
                    # SEO-G: cụm thần số theo nhu cầu tìm kiếm
                    "cap_so": 45, "nghe": 12, "tinh_yeu": 12, "nam_ca_nhan": 9, "no_nghiep": 4,
-                   "sao_cung": 168}   # SEO-H: 14 chính tinh × 12 cung
+                   "sao_cung": 168,   # SEO-H: 14 chính tinh × 12 cung
+                   "hoa_cung": 48}    # SEO-I: 4 tứ hoá × 12 cung
     assert len({(t["loai"], t["slug"]) for t in ds}) == len(ds)
 
 
@@ -74,7 +75,7 @@ def test_lien_quan_tro_toi_trang_ton_tai():
 
 def test_api():
     r = client.get("/v1/kb/trang")
-    assert r.status_code == 200 and len(r.json()["trang"]) == 372
+    assert r.status_code == 200 and len(r.json()["trang"]) == 420
     r = client.get("/v1/kb/trang/so/so-22")
     assert r.status_code == 200 and r.json()["slug"] == "so-22"
     assert client.get("/v1/kb/trang/so/so-10").status_code == 404
