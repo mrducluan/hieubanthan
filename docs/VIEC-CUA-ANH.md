@@ -23,6 +23,8 @@
 4b. [ ] **Bảo mật (SEC-1, 1 phút):** sau khi PR SEC-1 deploy, mở `https://hieubanthan-engine-sg.onrender.com/health` →
    phải thấy `"khoa_engine": true`. Nếu `false` → Render → Environment → thêm `ENGINE_API_KEY` (giống Vercel) → Save.
    Báo cáo đầy đủ + việc còn mở: `docs/BAO-MAT.md`.
+4c. [ ] **Khi web vượt ~100.000 người dùng/tháng** (xem GA4): Vercel → Environment Variables → thêm
+   `NEXT_PUBLIC_HOI_DONG_Y_COOKIE=1` → Redeploy — hộp hỏi đồng ý cookie hiện lại khi mở trang (quyết định 2026-10-09).
 5. [x] **Search Console + GA4 trong GTM** (mục H) — anh báo xong 2026-10-09
 5b. [ ] **Render engine** (mục D2): kiểm vùng Singapore + gói Starter, bấm *Save, rebuild, and deploy* sau khi sửa biến
    (anh đang đặt `NHAT_KY_HOI`, `SUPABASE_*`, `LLM_LUOT_*` — 2026-10-09)
@@ -77,7 +79,7 @@ Còn kiểm 3 việc nhỏ dưới mục "Sau khi xác minh" (sitemap, yêu cầ
 **Sau khi xác minh:**
 - [x] Mục **Sitemaps** → nhập `sitemap.xml` → Submit (gửi 2026-10-09; lúc gửi Search Console báo *Couldn't fetch* —
   xoá dòng gửi nhầm `http://hieuban.com/`, kiểm lại sau 1–2 ngày phải thành **Success**; nếu vẫn lỗi: URL Inspection →
-  dán `https://hieuban.com/sitemap.xml` → **Test live URL** → gửi em ảnh). Gửi lại sau mỗi đợt trang mới.
+  dán `https://hieuban.com/sitemap.xml` → **Test live URL** → gửi em ảnh). Gửi lại sau mỗi đợt trang mới (sitemap hiện có 625 URL).
 - [x] Mục **URL Inspection** → dán `https://hieuban.com/` → **Request indexing** (làm thêm cho `/kien-thuc`, `/tu-dien`).
 - [x] **IndexNow** (Bing, Yandex, Seznam, Naver): tự báo toàn bộ URL sau mỗi lần merge vào `main` (workflow `indexnow`,
   khoá công khai ở `/indexnow.txt`) — không cần làm gì.
@@ -98,21 +100,21 @@ cd web && node scripts/kiem-tra-seo.mjs https://hieuban.com
 
 ### H2. Google Analytics 4 + Google Tag Manager
 
-Code đã sẵn: **chỉ tải mã Google sau khi người dùng bấm "Đồng ý"** ở hộp hỏi cookie (luật 91/2025 cấm đồng ý mặc
-định). Người dùng bấm "Từ chối" thì web vẫn dùng bình thường. Chính sách quyền riêng tư đã ghi thêm Google Analytics.
+Code đã sẵn (anh chốt 2026-10-09): **GTM nạp trên mọi trang, đo lường bật mặc định**, chưa hỏi đồng ý cookie khi
+traffic còn thấp; người dùng vẫn tắt được ở "Tuỳ chọn cookie" (chân trang). Vượt ~100k người dùng/tháng → mục 4c.
+Chính sách quyền riêng tư đã ghi đúng cách chạy này.
 
 - [x] **GTM đã gắn vào web**: container `GTM-KNZL39CS` (anh gửi 2026-10-08) là mặc định trong code — không cần đặt
-  biến trên Vercel. Em **không** dán nguyên đoạn mã GTM vào `<head>` vì đoạn đó chạy ngay khi mở trang (trái luật 91/2025
-  khi chưa hỏi đồng ý): web chỉ nạp đúng đoạn mã đó **sau khi người dùng bấm "Đồng ý"**. Phần `<noscript>` (iframe cho
-  trình duyệt tắt JavaScript) bỏ qua, vì không hỏi được đồng ý khi không có JavaScript.
+  biến trên Vercel. Từ 2026-10-09: nạp ngay khi mở trang (mang nonce CSP nên không bị chặn) + `<noscript>` iframe.
+  Thẻ bên thứ ba khác (vd Meta Pixel) cài qua GTM → thêm tên miền vào env `CSP_THEM_MIEN` trên Vercel.
 1. [x] **GA4:** analytics.google.com → Admin → **Create property** "Hiểu Bản Thân", múi giờ Việt Nam, tiền VND →
    **Web stream** `https://hieuban.com` → chép **Measurement ID** dạng `G-XXXXXXX`.
    - Admin → Data retention → **14 months** (khớp chính sách quyền riêng tư).
    - Admin → Data collection → **tắt** Google signals (không cần, giảm dữ liệu cá nhân).
 2. [x] **Trong GTM `GTM-KNZL39CS`:** Tags → New → **Google Tag** → Tag ID = `G-XXXXXXX` → Trigger **Initialization – All
    Pages** → Save → **Submit → Publish**. (Không có bước này thì GTM nạp nhưng chưa gửi gì sang GA4.)
-3. [x] **Kiểm tra:** mở `hieuban.com` ở cửa sổ ẩn danh → thấy hộp hỏi cookie → bấm Đồng ý → GA4 → Reports → **Realtime**
-   thấy 1 người đang xem. Hoặc dùng nút **Preview** trong GTM (Tag Assistant), nhớ bấm Đồng ý trên trang trước.
+3. [x] **Kiểm tra:** mở `hieuban.com` ở cửa sổ ẩn danh → GA4 → Reports → **Realtime**
+   thấy 1 người đang xem. Hoặc dùng nút **Preview** trong GTM (Tag Assistant).
 4. Đổi container khác: đặt env `NEXT_PUBLIC_GTM_ID` trên Vercel. Tắt hẳn: đặt `NEXT_PUBLIC_GTM_ID=off`.
 5. [x] Search Console → Settings → **Associations** → liên kết với GA4 property vừa tạo (xem từ khoá ngay trong GA4).
 

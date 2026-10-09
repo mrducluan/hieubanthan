@@ -10,6 +10,8 @@ export type MinhHoaDuLieu =
   | { kieu: "sao"; ten: string; ten_han: string; ngu_hanh: string }
   | { kieu: "cung"; chi_so: number; vong: string[] }
   | { kieu: "sao_cung"; ten: string; ten_han: string; ngu_hanh: string; chi_so: number; vong: string[] }
+  | { kieu: "hoa_cung"; hoa: string; chi_so: number; vong: string[] }
+  | { kieu: "menh"; hanh: string; nap_am: string; han: string; can_chi: string }
   | { kieu: "thap_than"; ten: string; quan_he: "dong_hanh" | "ta_sinh" | "ta_khac" | "khac_ta" | "sinh_ta"; cung_am_duong: boolean }
   | { kieu: "nhat_chu"; can: string; hanh: string; duong: boolean };
 
@@ -153,6 +155,23 @@ function HinhSaoCung({ ten, ten_han, ngu_hanh, chi_so, vong }: { ten: string; te
   );
 }
 
+// ---------------------------------------------------------------- SEO-I: tứ hoá ở cung — vòng 12 cung + chữ hoá ở giữa
+const HOA_HAN: Record<string, string> = { "Lộc": "祿", "Quyền": "權", "Khoa": "科", "Kỵ": "忌" };
+const HOA_MAU: Record<string, string> = { "Lộc": "fill-jade/20 stroke-jade", "Quyền": "fill-gold/20 stroke-gold",
+  "Khoa": "fill-moon/20 stroke-moon", "Kỵ": "fill-cinnabar/20 stroke-cinnabar" };
+function HinhHoaCung({ hoa, chi_so, vong }: { hoa: string; chi_so: number; vong: string[] }) {
+  const cx = 160, cy = 120;
+  return (
+    <HinhCung chi_so={chi_so} vong={vong} nhan={`Hoá ${hoa} (化${HOA_HAN[hoa] ?? ""}) ở cung ${vong[chi_so]} — vòng 12 cung Tử vi`} giua={
+      <>
+        <circle cx={cx} cy={cy} r={34} strokeWidth={1.2} className={HOA_MAU[hoa] ?? "fill-gold/20 stroke-gold"} />
+        <text x={cx} y={cy + 4} textAnchor="middle" className="fill-fg" fontSize={22} style={{ fontFamily: "var(--font-han), serif" }}>{`化${HOA_HAN[hoa] ?? ""}`}</text>
+        <text x={cx} y={cy + 20} textAnchor="middle" className="fill-fg-muted" fontSize={8.5}>{`Hoá ${hoa}`}</text>
+      </>
+    } />
+  );
+}
+
 // ---------------------------------------------------------------- ngũ hành: vòng tương sinh + sao tương khắc
 const HANH = ["Mộc", "Hỏa", "Thổ", "Kim", "Thủy"];   // thứ tự tương sinh
 
@@ -207,6 +226,19 @@ function HinhNhatChu({ can, hanh, duong }: { can: string; hanh: string; duong: b
   );
 }
 
+// ---------------------------------------------------------------- SEO-J: mệnh nạp âm — hành sáng trong vòng ngũ hành
+function HinhMenh({ hanh, nap_am, han, can_chi }: { hanh: string; nap_am: string; han: string; can_chi: string }) {
+  const i = HANH.indexOf(hanh === "Hoả" ? "Hỏa" : hanh === "Thuỷ" ? "Thủy" : hanh);
+  return (
+    <Khung nhan={`Tuổi ${can_chi}, mệnh ${nap_am} (${han}) — hành ${hanh} trong vòng ngũ hành`}>
+      <VongNguHanh sang={i < 0 ? 0 : i} nhan_giua={<>
+        <text x={160} y={118} textAnchor="middle" className="fill-gold" fontSize={18} style={{ fontFamily: "var(--font-han), serif" }}>{han}</text>
+        <text x={160} y={134} textAnchor="middle" className="fill-fg-faint" fontSize={8.5}>{can_chi}</text>
+      </>} />
+    </Khung>
+  );
+}
+
 export function MinhHoa({ mh }: { mh?: MinhHoaDuLieu | null }) {
   if (!mh) return null;
   switch (mh.kieu) {
@@ -216,6 +248,8 @@ export function MinhHoa({ mh }: { mh?: MinhHoaDuLieu | null }) {
     case "sao": return <HinhSaoTuVi {...mh} />;
     case "cung": return <HinhCung {...mh} />;
     case "sao_cung": return <HinhSaoCung {...mh} />;
+    case "hoa_cung": return <HinhHoaCung {...mh} />;
+    case "menh": return <HinhMenh {...mh} />;
     case "thap_than": return <HinhThapThan {...mh} />;
     case "nhat_chu": return <HinhNhatChu {...mh} />;
     default: return null;

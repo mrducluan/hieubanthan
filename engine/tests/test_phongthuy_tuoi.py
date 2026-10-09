@@ -76,3 +76,11 @@ def test_api():
     assert c.get("/v1/phongthuy/tuoi/tuoi-2006-nu").status_code == 404
     ds = c.get("/v1/phongthuy/tuoi").json()["trang"]
     assert len(ds) == 92 and {"slug", "tieu_de", "nam", "gioi_tinh", "quai"} <= set(ds[0])
+
+
+def test_tro_toi_trang_menh_gi():
+    # SEO-J: mọi trang tuổi (1960–2005) trỏ sang trang "sinh năm X mệnh gì" có thật
+    from app.kb import trang
+    t = pt_tuoi.tuoi(1990, "nam")
+    assert t["trang_menh"] == "/kien-thuc/menh-tuoi/sinh-nam-1990-menh-gi"
+    assert trang.lay("menh_nam", t["trang_menh"].rsplit("/", 1)[1]) is not None

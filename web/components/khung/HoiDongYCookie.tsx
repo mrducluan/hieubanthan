@@ -4,13 +4,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Cookie } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { coGoogle, docLuaChon, ghiLuaChon, hoiLai, SU_KIEN, type LuaChon } from "@/lib/dong-y";
+import { coGoogle, docLuaChon, ghiLuaChon, hoiLai, HOI_DONG_Y, SU_KIEN, type LuaChon } from "@/lib/dong-y";
 
 export function HoiDongYCookie() {
   const [hien, setHien] = useState(false);
   useEffect(() => {
     if (!coGoogle()) return;
-    setHien(docLuaChon() === null);
+    setHien(HOI_DONG_Y && docLuaChon() === null);   // tắt hỏi khi mở trang: chỉ hiện khi bấm "Tuỳ chọn cookie"
     const nghe = (e: Event) => setHien((e as CustomEvent<LuaChon | null>).detail === null);
     window.addEventListener(SU_KIEN, nghe);
     return () => window.removeEventListener(SU_KIEN, nghe);

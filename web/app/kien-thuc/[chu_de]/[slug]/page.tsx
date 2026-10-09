@@ -8,7 +8,7 @@ import { ArrowRight, BookOpen, CalendarDays, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { MinhHoa } from "@/components/minh-hoa/MinhHoa";
-import { CHU_DE, duongTrang, trang } from "@/lib/kien-thuc";
+import { CHU_DE, duongTrang, trang, type TrangKienThuc } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
@@ -120,16 +120,20 @@ export default async function Page({ params: thamSo }: Props) {
         ))}
       </div>
 
-      {t.trang_con && t.trang_con.ds.length > 0 && (
-        <nav className="mt-10" aria-labelledby="trang-con">
-          <h2 id="trang-con" className="text-2xl">{t.trang_con.tieu_de}</h2>
-          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-            {t.trang_con.ds.map((l) => (
-              <li key={l.slug}><Link href={duongTrang(l.loai, l.slug)} className="glass flex items-center justify-between rounded-xl px-4 py-3 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg">{l.tieu_de}<ArrowRight className="size-4 shrink-0 text-gold/70" aria-hidden /></Link></li>
-            ))}
-          </ul>
-        </nav>
-      )}
+      {[["trang-con", t.trang_con], ["trang-con-hoa", t.trang_con_hoa]].map(([id, nhom]) => {
+        const n = nhom as TrangKienThuc["trang_con"];
+        if (!n || n.ds.length === 0) return null;
+        return (
+          <nav key={id as string} className="mt-10" aria-labelledby={id as string}>
+            <h2 id={id as string} className="text-2xl">{n.tieu_de}</h2>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {n.ds.map((l) => (
+                <li key={l.slug}><Link href={duongTrang(l.loai, l.slug)} className="glass flex items-center justify-between rounded-xl px-4 py-3 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg">{l.tieu_de}<ArrowRight className="size-4 shrink-0 text-gold/70" aria-hidden /></Link></li>
+              ))}
+            </ul>
+          </nav>
+        );
+      })}
 
       <section className="mt-10" aria-labelledby="hoi-dap">
         <h2 id="hoi-dap" className="text-2xl">Câu hỏi thường gặp</h2>
@@ -149,12 +153,15 @@ export default async function Page({ params: thamSo }: Props) {
         <Button asChild><Link href={cd.mang}>Xem của tôi <ArrowRight aria-hidden /></Link></Button>
       </aside>
 
-      {t.lien_quan.length > 0 && (
+      {(t.lien_quan.length > 0 || (t.lien_ket_ngoai?.length ?? 0) > 0) && (
         <nav className="mt-10" aria-labelledby="lien-quan">
           <h2 id="lien-quan" className="text-xl">Đọc tiếp</h2>
           <ul className="mt-3 flex flex-wrap gap-2">
             {t.lien_quan.map((l) => (
               <li key={l.slug}><Link href={duongTrang(l.loai, l.slug)} className="inline-flex rounded-full border border-line px-3 py-1.5 text-sm text-fg-muted hover:border-gold/50 hover:text-fg">{l.tieu_de}</Link></li>
+            ))}
+            {t.lien_ket_ngoai?.map((l) => (
+              <li key={l.duong}><Link href={l.duong} className="inline-flex rounded-full border border-gold/40 px-3 py-1.5 text-sm text-fg-muted hover:border-gold hover:text-fg">{l.ten}</Link></li>
             ))}
           </ul>
         </nav>
