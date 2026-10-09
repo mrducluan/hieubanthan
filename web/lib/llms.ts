@@ -33,13 +33,14 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Hướng hợp tuổi 1960–2005, nam và nữ (92 trang)](${urlDayDu("/phong-thuy/huong-hop-tuoi.md")})`,
     `- [Lá số minh hoạ đọc từng bước](${urlDayDu("/la-so-mau")})`,
     `- [Giới thiệu & phương pháp, nguồn](${urlDayDu("/gioi-thieu")})`,
+    `- [Chủ biên Đức Luân — hồ sơ và bài đã thẩm định](${urlDayDu("/tac-gia/duc-luan")})`,
     `- [Toàn văn thư viện (một tệp)](${urlDayDu("/llms-full.txt")})`,
     "",
   ];
   for (const [k, cd] of Object.entries(CHU_DE)) {
     dong.push(`## ${cd.ten}`, "", cd.mo_ta, "");
     for (const t of ds.filter((x) => x.loai === cd.loai)) {
-      dong.push(`- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}.md): ${t.mo_ta}${t.trang_thai === "da_duyet" ? "" : " (bản nháp)"}`);
+      dong.push(`- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}.md): ${t.mo_ta}${t.trang_thai === "da_duyet" ? "" : " (chờ thẩm định)"}`);
     }
     dong.push(`- [Tất cả](${urlDayDu(`/kien-thuc/${k}`)}.md)`, "");
   }

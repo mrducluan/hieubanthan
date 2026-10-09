@@ -148,7 +148,7 @@ export default async function Page({ params: thamSo }: Props) {
       </nav>
 
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
-        <p>Nguồn: {t.nguon}. {t.trang_thai === "da_duyet" ? "" : "Lời giải thích là bản nháp đang được chuyên gia duyệt. "}</p>
+        <p>Nguồn: {t.nguon}. {t.trang_thai === "da_duyet" ? "" : "Lời giải thích biên soạn có AI hỗ trợ, đang chờ chuyên gia thẩm định. "}</p>
         {t.luu_y.filter(Boolean).map((l) => <p key={l} className="mt-2">{l}</p>)}
       </footer>
     </article>

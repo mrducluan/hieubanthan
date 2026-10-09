@@ -70,7 +70,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
     <article className="glass rounded-2xl p-5 sm:p-8 print:bg-white print:text-black" data-testid="luan-giai-toan-bo">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="eyebrow">Luận giải toàn bộ · bản nháp đang được chuyên gia duyệt dần</p>
+          <p className="eyebrow">Luận giải toàn bộ · biên soạn có AI hỗ trợ, chờ chuyên gia thẩm định</p>
           {bc.dien_dat && bc.dien_dat !== "mau" && (
             <p className="mt-1 text-xs text-fg-faint" data-testid="dien-dat-ai">
               AI diễn đạt lại từ dữ liệu đã tính · mỗi chương đã kiểm: không thêm sao, cung, con số hay lời phán ngoài dữ liệu

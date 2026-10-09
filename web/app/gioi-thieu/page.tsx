@@ -30,10 +30,23 @@ export default function GioiThieu() {
       noiDung: (
         <Bang dau={["Tầng", "Làm gì", "Có dùng AI?"]} dong={[
           [<b key="1">1. Tính toán</b>, "Con số, an sao, tứ trụ theo tiết khí, gieo quẻ, đổi độ ra hướng. Cùng đầu vào luôn ra cùng kết quả, có bộ dữ liệu đối chiếu.", "Không"],
-          [<b key="2">2. Kho tri thức</b>, "Nghĩa của số, sao, quẻ, cung… Mỗi mục ghi nguồn và trường phái.", "Nháp do AI soạn, có nhãn, duyệt dần"],
+          [<b key="2">2. Kho tri thức</b>, "Nghĩa của số, sao, quẻ, cung… Mỗi mục ghi nguồn và trường phái.", "Biên soạn có AI hỗ trợ; chủ biên thẩm định từng bài"],
           [<b key="3">3. Quy tắc luận</b>, "Ghép các lớp theo thứ tự ưu tiên (ví dụ đại hạn > lưu niên > tiểu hạn > lưu nguyệt).", "Không"],
           [<b key="4">4. Diễn đạt</b>, "Viết thành câu dễ đọc từ dữ liệu tầng 1–3.", "Có thể. Cấm thêm dữ kiện, có kiểm tra tự động"],
         ]} />
+      ),
+    },
+    {
+      id: "quy-trinh", tieuDe: "Ai viết, ai thẩm định",
+      noiDung: (
+        <>
+          <p>Chủ biên nội dung là <Link href="/tac-gia/duc-luan" className="text-gold underline">Đức Luân</Link> — người sáng
+            lập, hơn 15 năm nghiên cứu thần số học, Tử vi, Bát tự, Phong thuỷ và Kinh Dịch. Anh tự biên soạn phần ý nghĩa
+            12 con số thần số học, đặt quy tắc biên tập và chọn trường phái mặc định cho toàn site.</p>
+          <p>Phần diễn giải còn lại được <b>biên soạn có AI hỗ trợ</b> từ cổ thư và tài liệu tham khảo, theo quy tắc đó, rồi
+            được chủ biên đọc, sửa và <b>thẩm định từng bài</b>. Mỗi bài ghi rõ một trong ba trạng thái: chuyên gia tự biên
+            soạn · đã thẩm định (kèm tên và ngày) · đang chờ chuyên gia thẩm định.</p>
+        </>
       ),
     },
     {

@@ -13,10 +13,10 @@ test("trang số: HTML server có h1, trả lời nhanh, JSON-LD Article + FAQPa
   for (const t of ["Article", "FAQPage", "BreadcrumbList", "Organization", "WebSite"]) expect(loai).toContain(t);
 });
 
-test("trang nháp AI vẫn index nhưng gắn nhãn nháp", async ({ page }) => {
+test("trang chưa thẩm định vẫn index nhưng ghi rõ biên soạn có AI hỗ trợ, chờ thẩm định", async ({ page }) => {
   await page.goto("/kien-thuc/kinh-dich/que-1-can");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Càn");
-  await expect(page.getByText("Bản nháp — đang được chuyên gia duyệt")).toBeVisible();
+  await expect(page.getByText("Chờ chuyên gia thẩm định", { exact: true })).toBeVisible();
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /^index/);
   await page.getByRole("link", { name: "Quẻ Khôn" }).click();
   await expect(page).toHaveURL(/que-2-khon/);

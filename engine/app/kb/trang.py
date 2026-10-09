@@ -15,6 +15,8 @@ import unicodedata
 from functools import lru_cache
 from pathlib import Path
 
+from app.kb import tham_dinh as _td
+
 _DATA = Path(__file__).parent / "data"
 
 # Đổi khi nội dung KB của các trang này thay đổi (hiển thị "Cập nhật" + sitemap lastmod).
@@ -350,10 +352,11 @@ def _ten_ngan(loai: str, slug: str) -> str:
 
 
 def _hoan_tat(t: dict) -> dict:
+    _td.gan(t)                      # EEAT-1: chủ biên / tác giả / thẩm định (thẩm định → "da_duyet")
     t["index"] = t["trang_thai"] == "da_duyet" or INDEX_NHAP_AI
     for l in t["lien_quan"] + (t.get("trang_con") or {}).get("ds", []) + (t.get("trang_con_hoa") or {}).get("ds", []):
         l["tieu_de"] = _ten_ngan(l["loai"], l["slug"])
-    t["cap_nhat"] = CAP_NHAT
+    t["cap_nhat"] = max(CAP_NHAT, (t["tham_dinh"] or {}).get("ngay", ""))
     return t
 
 
@@ -385,5 +388,6 @@ def danh_sach() -> list[dict]:
         for slug in slugs:
             t = lay(loai, slug)
             assert t is not None
-            ra.append({k: t[k] for k in ("loai", "slug", "tieu_de", "mo_ta", "trang_thai", "index", "cap_nhat")})
+            ra.append({k: t[k] for k in ("loai", "slug", "tieu_de", "mo_ta", "trang_thai", "index", "cap_nhat",
+                                       "chu_bien", "tac_gia", "tham_dinh", "bien_soan")})
     return ra

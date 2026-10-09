@@ -204,6 +204,23 @@ Rủi ro em ghi lại để anh biết (anh đã chấp nhận khi chốt):
   Với model tầm trung, 3000 lượt/ngày tốn khoảng vài USD/ngày là cùng. AI vẫn tắt cho tới khi anh đặt `OPENROUTER_API_KEY`.
 - Render gói Free ngủ sau 15 phút → người vào đầu tiên chờ 30–60 giây. Nên lên gói Starter Singapore (mục D).
 
+## M. Chủ biên Đức Luân — hồ sơ và thẩm định bài (EEAT-1, 2026-10-09)
+
+Vì sao và cách làm: `docs/EEAT-VA-CHUYEN-GIA.md`. Tóm tắt: anh đứng tên **Chủ biên** trên mọi bài, **Tác giả** trên
+12 bài ý nghĩa số anh tự viết, **Thẩm định** trên bài anh đã đọc và duyệt. Bài chưa duyệt ghi "biên soạn có AI hỗ trợ,
+đang chờ chuyên gia thẩm định" — không ghi tên anh là người viết.
+
+- [ ] **M1. Tiểu sử thật** cho `/tac-gia/duc-luan` (hiện chỉ ghi điều anh đã nói: người sáng lập, hơn 15 năm nghiên cứu
+  5 mảng). Gửi em những gì anh muốn công bố: học từ ai/đâu, sách đã đọc kỹ, kinh nghiệm luận giải, bài báo, khoá dạy…
+  **Chỉ ghi điều có thật** — em không tự thêm.
+- [ ] **M2. Ảnh chân dung** (tuỳ chọn; hiện dùng chữ "ĐL"). Ảnh anh gửi được phép đăng công khai.
+- [ ] **M3. Link mạng xã hội / kênh của anh** (Facebook, YouTube, TikTok…) → schema `sameAs`, giúp Google nhận ra anh.
+- [ ] **M4. Thẩm định 110 bài trụ cột** (14 sao, 12 cung, 64 quẻ, 10 nhật chủ, 10 thập thần) — đọc bài trên web, nhắn
+  em "duyệt <link>" (kèm chỗ cần sửa). Gợi ý 10 bài/ngày. Danh sách theo thứ tự: em chạy
+  `python scripts/tham_dinh.py hang-doi` gửi anh.
+- [ ] **M5. Chuyên gia mảng (GĐ1)**: sau 2 tháng, chọn 3–5 người cộng tác (mỗi mảng một người) — xem lộ trình mục 4
+  của tài liệu trên.
+
 ## E. Thông tin pháp lý cho footer + trang Chính sách (PL-1)
 
 Khung đã làm xong. Thông tin thật do anh điền trên **Vercel → Environment Variables** (Production) rồi **Redeploy**.

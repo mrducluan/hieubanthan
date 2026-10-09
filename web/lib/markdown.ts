@@ -1,22 +1,30 @@
 // AIO/GEO — bản Markdown của trang công khai cho bot AI / LLM đọc (chuẩn llmstxt.org: cùng URL + ".md").
 // Chỉ định dạng lại dữ liệu KB engine đã trả — không viết thêm nghĩa. Dùng ở route handler (server).
 import { CHU_DE, duongTrang, duongTuoi, type MucLuc, type MucTuDien, type MucTuoiHuong, type TrangKienThuc, type TuoiHuong } from "@/lib/kien-thuc";
+import { CHUYEN_GIA, duongChuyenGia } from "@/lib/chuyen-gia";
 import { MO_TA_SITE, TEN_SITE, urlDayDu } from "@/lib/seo";
 
-const nhan = (trangThai: string) => (trangThai === "da_duyet" ? "đã duyệt" : "bản nháp AI, đang được chuyên gia duyệt");
+const nhan = (trangThai: string) => (trangThai === "da_duyet" ? "đã thẩm định" : "biên soạn có AI hỗ trợ, đang chờ chuyên gia thẩm định");
+
+/** EEAT-1: dòng tác giả / chủ biên / thẩm định cho bản .md (cùng dữ liệu engine như trang HTML). */
+function dongTacGia(t: TrangKienThuc): string {
+  const ten = (s: string) => (CHUYEN_GIA[s] ? `[${CHUYEN_GIA[s].ten}](${urlDayDu(duongChuyenGia(s))})` : s);
+  if (t.tac_gia) return `Tác giả: ${ten(t.tac_gia)}`;
+  return `Chủ biên: ${ten(t.chu_bien)}${t.tham_dinh ? ` · Thẩm định: ${ten(t.tham_dinh.nguoi)} (${t.tham_dinh.ngay})` : ""}`;
+}
 
 export const NGUYEN_TAC = [
   "- Mọi con số, lá số, quẻ do máy tính toán tất định (kiểm lại được từng bước); phần diễn giải ghi nguồn.",
   "- Mỗi ý nghĩa đi kèm mặt tối và câu hỏi tự soi — không phán số phận, không dự đoán sống chết, bệnh tật, xổ số.",
   "- Nội dung là tham khảo văn hoá, không thay thế tư vấn y tế, tâm lý, pháp lý, tài chính.",
-  "- Trang ghi \"bản nháp\" là nháp AI chưa đối chiếu nguyên văn cổ thư.",
+  "- Trang ghi \"chờ thẩm định\" được biên soạn có AI hỗ trợ, chưa được chuyên gia duyệt; trang đã duyệt ghi tên người thẩm định và ngày.",
 ];
 
 /** Một trang kiến thức. `cap` = cấp tiêu đề gốc (1 khi đứng riêng, 2 khi gộp trong llms-full.txt). */
 export function mdTrang(t: TrangKienThuc, cap = 1): string {
   const h = (n: number) => "#".repeat(cap + n);
   const d = [`${h(0)} ${t.tieu_de}`, "", `> ${t.mo_ta}`, "",
-    `URL: ${urlDayDu(duongTrang(t.loai, t.slug))}`, `Trạng thái: ${nhan(t.trang_thai)} · Cập nhật: ${t.cap_nhat}`, "",
+    `URL: ${urlDayDu(duongTrang(t.loai, t.slug))}`, dongTacGia(t), `Trạng thái: ${nhan(t.trang_thai)} · Cập nhật: ${t.cap_nhat}`, "",
     `${h(1)} Trả lời nhanh`, "", t.tra_loi_nhanh, ""];
   for (const m of t.muc) {
     d.push(`${h(1)} ${m.tieu_de}`, "");
@@ -40,7 +48,7 @@ export function mdChuDe(khoa: string, ds: MucLuc[]): string | null {
   if (!cd) return null;
   const muc = ds.filter((t) => t.loai === cd.loai);
   return [`# ${cd.ten}`, "", `> ${cd.mo_ta}`, "", `URL: ${urlDayDu(`/kien-thuc/${khoa}`)}`, "",
-    ...muc.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}.md): ${t.mo_ta}${t.trang_thai === "da_duyet" ? "" : " (bản nháp)"}`),
+    ...muc.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}.md): ${t.mo_ta}${t.trang_thai === "da_duyet" ? "" : " (chờ thẩm định)"}`),
     ""].join("\n");
 }
 
@@ -54,7 +62,7 @@ export function mdThuVien(ds: MucLuc[]): string {
 
 export function mdTuDien(muc: MucTuDien[], tenMang: Record<string, string>): string {
   const d = ["# Từ điển thuật ngữ huyền học — giải nghĩa dễ hiểu", "", `URL: ${urlDayDu("/tu-dien")}`,
-    "Trạng thái: bản nháp AI, đang được chuyên gia duyệt dần", ""];
+    `Trạng thái: ${nhan("nhap_ai")}`, ""];
   for (const [ma, ten] of Object.entries(tenMang)) {
     const nhom = muc.filter((m) => m.mo_dun === ma);
     if (!nhom.length) continue;

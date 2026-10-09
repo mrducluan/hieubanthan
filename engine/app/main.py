@@ -22,6 +22,7 @@ from app.kb import tu_dien
 from app.calc import thanso, timebase
 from app.kb import store as kb_store
 from app.kb import trang as kb_trang
+from app.kb import tham_dinh as kb_tham_dinh
 from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import thanso as luangiai_thanso
 from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
@@ -111,6 +112,15 @@ def api_kb_trang_mot(loai: str, slug: str) -> dict:
     if t is None:
         raise HTTPException(status_code=404, detail="Không có trang này")
     return t
+
+
+@app.get("/v1/kb/chuyen-gia/{slug}")
+def api_chuyen_gia(slug: str) -> dict:
+    """EEAT-1 — số trang chuyên gia làm chủ biên / tác giả / đã thẩm định (cho trang /tac-gia/{slug})."""
+    hs = kb_tham_dinh.ho_so(slug)
+    if hs is None:
+        raise HTTPException(status_code=404, detail="Không có chuyên gia này")
+    return {"engine_version": ENGINE_VERSION, **hs}
 
 
 @app.get("/v1/kb/status")

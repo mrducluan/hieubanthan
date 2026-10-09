@@ -1,0 +1,7 @@
+{
+ "_mo_ta": "EEAT-1: sổ thẩm định trang kiến thức. Chỉ ghi trang chuyên gia ĐÃ đọc và duyệt. Khoá = loai/slug. Sửa bằng scripts/tham_dinh.py, không sửa tay.",
+ "chuyen_gia": [
+  "duc-luan"
+ ],
+ "trang": {}
+}

@@ -72,7 +72,7 @@ export function ChiSoPhu({ mo }: { mo: MoRong }) {
         </article>
       ))}
       <p className="text-xs text-fg-faint md:col-span-2">
-        Nguồn: {mo.trich_nguon}{mo.trang_thai === "nhap_ai" ? " · bản nháp, đang được duyệt dần" : ""}
+        Nguồn: {mo.trich_nguon}{mo.trang_thai === "nhap_ai" ? " · biên soạn có AI hỗ trợ, chờ thẩm định" : ""}
       </p>
     </div>
   );

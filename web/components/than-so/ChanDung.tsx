@@ -145,7 +145,7 @@ export function ChanDung({ cd }: { cd: ChanDungT }) {
           </motion.div>
         </AnimatePresence>
       </div>
-      <p className="text-xs text-fg-faint">{cd.cach_doc} Nguồn: {cd.nguon}{cd.trang_thai === "nhap_ai" ? " · bản nháp, đang được duyệt dần" : ""}</p>
+      <p className="text-xs text-fg-faint">{cd.cach_doc} Nguồn: {cd.nguon}{cd.trang_thai === "nhap_ai" ? " · biên soạn có AI hỗ trợ, chờ thẩm định" : ""}</p>
     </div>
   );
 }
