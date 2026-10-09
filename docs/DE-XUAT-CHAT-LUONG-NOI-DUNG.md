@@ -4,6 +4,7 @@
 
 | Đã làm (PR BM-1) | Còn lại — cần anh quyết |
 |---|---|
+| **BM-2 (đã làm theo duyệt 2026-10-09):** bỏ `/llms-full.txt`; robots chặn bot huấn luyện, mở bot trả lời/tìm kiếm; `llms.txt` thành bản gợi ý (trỏ trang HTML, câu hỏi cá nhân → công cụ, cụm lớn chỉ mục lục + ví dụ) | Đã xong |
 | Trang Giới thiệu, Quyền riêng tư, Miễn trừ, Điều khoản, Đội ngũ không còn tên thư viện, bộ đối chiếu, nhà cung cấp hạ tầng, tên khoá lưu trữ, phiên bản engine | **`/llms-full.txt` đang gom TOÀN BỘ kho tri thức vào một file** — ai cũng tải một lần là có cả kho. Đề xuất: bỏ file này, giữ `llms.txt` (mục lục) + `.md` từng trang. |
 | Dòng "Nguồn" mỗi bài chỉ còn tên sách và trường phái (engine lọc mọi JSON qua `app/cong_khai.py`) | **Bot AI**: đang mở cho cả bot *huấn luyện* (GPTBot, Google-Extended, CCBot, Bytespider, meta-externalagent…). Đề xuất: chặn bot huấn luyện, giữ bot *trả lời/tìm kiếm* (OAI-SearchBot, ChatGPT-User, Claude-SearchBot, PerplexityBot…) — vẫn được AI trích dẫn, nhưng nội dung không bị nạp vào mô hình. |
 | Điều khoản: cấm cào dữ liệu, dò ngược hệ thống tính, làm dịch vụ cạnh tranh | Tên trường kỹ thuật trong JSON mà trình duyệt nhận (ví dụ phiên bản thư viện an sao) — người rành vẫn đoán được. Đổi tên được, nhưng phải sửa schema web (việc vừa, không gấp). |
@@ -43,3 +44,9 @@ Lưu ý: nội dung bài kiến thức **bắt buộc công khai** để lên Go
    (cần tra tay hoặc gói ctext có phí). Tạo độ "sách vở" mà trang đối thủ thường thiếu.
 
 Đề xuất làm ngay: (1) + (2) trong tuần này, (3) bắt đầu trước 01/11.
+
+## D. Đo lượt khách từ AI (việc của anh, 5 phút)
+
+Trong GA4 → Admin → Channel groups → tạo kênh **"AI"** với nguồn khớp
+`chatgpt\.com|chat\.openai\.com|perplexity\.ai|claude\.ai|gemini\.google\.com|copilot\.microsoft\.com` để biết bao
+nhiêu người bấm từ câu trả lời AI về web, và vào trang nào — từ đó em chỉnh `llms.txt` (mục "Trả lời nhanh") theo số thật.

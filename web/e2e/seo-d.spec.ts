@@ -24,11 +24,11 @@ test("bản .md: trang kiến thức, chủ đề, thư viện, từ điển, tr
   expect((await request.get("/dieu-khoan.md")).status()).toBe(404);
 });
 
-test("HTML khai bản .md (link alternate); llms.txt trỏ .md + đơn vị vận hành; manifest", async ({ page, request }) => {
+test("HTML khai bản .md (link alternate); llms.txt trỏ trang HTML + đơn vị vận hành; manifest", async ({ page, request }) => {
   await page.goto("/kien-thuc/than-so/so-7");
   await expect(page.locator('link[rel="alternate"][type="text/markdown"]')).toHaveAttribute("href", /\/kien-thuc\/than-so\/so-7\.md$/);
   const llms = await (await request.get("/llms.txt")).text();
-  expect(llms).toContain("/kien-thuc/than-so/so-7.md)");
+  expect(llms).toContain("/kien-thuc/than-so/so-7)");
   expect(llms).toContain("Hieu Ban Co Ltd");
   expect(llms).toContain("contact@hieuban.com");
   const mf = await (await request.get("/manifest.webmanifest")).json();

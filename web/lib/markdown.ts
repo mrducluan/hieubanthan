@@ -20,7 +20,7 @@ export const NGUYEN_TAC = [
   "- Mọi trang do Ban biên tập Hiểu Bản Thân biên soạn, chủ biên Đức Luân chịu trách nhiệm; trang chuyên gia đã thẩm định ghi tên người thẩm định và ngày.",
 ];
 
-/** Một trang kiến thức. `cap` = cấp tiêu đề gốc (1 khi đứng riêng, 2 khi gộp trong llms-full.txt). */
+/** Một trang kiến thức. `cap` = cấp tiêu đề gốc (1 khi đứng riêng; 2 khi gộp vào tệp khác). */
 export function mdTrang(t: TrangKienThuc, cap = 1): string {
   const h = (n: number) => "#".repeat(cap + n);
   const d = [`${h(0)} ${t.tieu_de}`, "", `> ${t.mo_ta}`, "",

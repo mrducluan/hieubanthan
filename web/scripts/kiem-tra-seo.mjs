@@ -86,7 +86,7 @@ for (const l of conLai) {
   if (r.status >= 400) loi.push(`link hỏng ${l}: HTTP ${r.status}`);
   else if (r.status >= 300) canh.push(`link nội bộ qua chuyển hướng ${l} → ${r.headers.get("location")}`);
 }
-for (const u of ["/robots.txt", "/llms.txt", "/llms-full.txt", "/manifest.webmanifest", "/index.md"]) {
+for (const u of ["/robots.txt", "/llms.txt", "/manifest.webmanifest", "/index.md"]) {
   const r = await lay(`${goc}${u}`);
   if (r.status !== 200) loi.push(`${u}: HTTP ${r.status}`);
 }

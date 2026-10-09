@@ -1,20 +1,30 @@
-// robots.txt — mở cho máy tìm kiếm và bot AI (GEO: muốn được trích dẫn trong câu trả lời AI).
+// robots.txt — mở cho máy tìm kiếm và bot AI TÌM KIẾM / TRẢ LỜI (GEO: được trích dẫn, người dùng bấm về hieuban.com).
+// BM-2 (chủ dự án 2026-10-09): CHẶN bot thu thập để HUẤN LUYỆN mô hình — nội dung không bị nạp vào mô hình AI.
 // Chặn trang cá nhân/khoá theo người (tài khoản, lời mời, thẻ riêng) và API.
+// Lưu ý: Google-Extended chỉ là cờ huấn luyện/grounding Gemini — Googlebot (Search, AI Overviews) vẫn được vào.
+// Applebot-Extended tương tự (Applebot vẫn index cho Siri/Spotlight).
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/seo";
 
 const CHAN = ["/api/", "/md/", "/tai-khoan", "/dang-nhap", "/auth/", "/chia-se", "/hop-doi/", "/the/"];
-const BOT_AI = [
-  "GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "Claude-SearchBot", "anthropic-ai",
-  "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended", "CCBot", "Bytespider", "meta-externalagent",
-  "DuckAssistBot", "cohere-ai", "MistralAI-User",
+/** Bot AI trả lời / tìm kiếm (dẫn link về trang gốc) — mở. */
+export const BOT_AI_TRA_LOI = [
+  "OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User",
+  "DuckAssistBot", "MistralAI-User", "meta-externalfetcher",
+];
+/** Bot thu thập để huấn luyện mô hình — chặn toàn site. */
+export const BOT_AI_HUAN_LUYEN = [
+  "GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "Applebot-Extended", "CCBot", "Bytespider",
+  "meta-externalagent", "cohere-ai", "cohere-training-data-crawler", "Diffbot", "Omgilibot", "Timpibot",
+  "ImagesiftBot", "PanguBot", "Amazonbot",
 ];
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow: CHAN },
-      { userAgent: BOT_AI, allow: ["/", "/llms.txt", "/llms-full.txt"], disallow: CHAN },
+      { userAgent: BOT_AI_TRA_LOI, allow: ["/", "/llms.txt"], disallow: CHAN },
+      { userAgent: BOT_AI_HUAN_LUYEN, disallow: "/" },
     ],
     sitemap: `${siteUrl()}/sitemap.xml`,
     host: siteUrl(),
