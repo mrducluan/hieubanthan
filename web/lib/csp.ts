@@ -15,20 +15,26 @@ function goc(url: string | undefined): string | null {
 export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production"): string {
   const supabase = goc(process.env.NEXT_PUBLIC_SUPABASE_URL);
   const posthog = goc(process.env.NEXT_PUBLIC_POSTHOG_HOST) ?? "https://us.i.posthog.com";
+  // GTM chạy trên mọi trang (chủ dự án chốt 2026-10-09): mở đủ tên miền của hệ Google mà thẻ GTM hay gọi —
+  // Analytics, Ads/chuyển đổi, DoubleClick, Tag Assistant (chế độ Xem trước của GTM).
   const google = ["https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com",
-    "https://www.google.com"];
-  const ketNoi = ["'self'", posthog, "https://*.posthog.com", ...google,
+    "https://www.google.com", "https://*.google.com", "https://*.doubleclick.net", "https://*.googleadservices.com",
+    "https://*.googlesyndication.com", "https://*.gstatic.com", "https://tagassistant.google.com"];
+  // Thêm dịch vụ khác qua GTM (vd Meta Pixel: https://connect.facebook.net,https://www.facebook.com) mà không sửa code:
+  // env CSP_THEM_MIEN = danh sách origin cách nhau bằng dấu phẩy → được thêm vào img/connect/frame-src.
+  const them = (process.env.CSP_THEM_MIEN ?? "").split(",").map((x) => goc(x.trim())).filter((x): x is string => Boolean(x));
+  const ketNoi = ["'self'", posthog, "https://*.posthog.com", ...google, ...them,
     "https://*.ingest.sentry.io", "https://*.ingest.us.sentry.io", "https://*.ingest.de.sentry.io",
     ...(supabase ? [supabase, supabase.replace(/^https:/, "wss:")] : []),
     ...(dev ? ["ws:", "http://localhost:*"] : [])];
   return [
     "default-src 'self'",
     `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https: 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}`,
-    "style-src 'self' 'unsafe-inline'",
-    `img-src 'self' data: blob: ${google.join(" ")} https://*.g.doubleclick.net`,
-    "font-src 'self' data:",
+    `style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://fonts.googleapis.com`,
+    `img-src 'self' data: blob: ${[...google, ...them].join(" ")}`,
+    "font-src 'self' data: https://fonts.gstatic.com",
     `connect-src ${ketNoi.join(" ")}`,
-    "frame-src 'self' https://www.googletagmanager.com",
+    `frame-src 'self' https://www.googletagmanager.com https://tagassistant.google.com https://*.doubleclick.net ${them.join(" ")}`.trim(),
     "worker-src 'self' blob:",
     "manifest-src 'self'",
     "media-src 'self'",
