@@ -74,7 +74,7 @@ Còn kiểm 3 việc nhỏ dưới mục "Sau khi xác minh" (sitemap, yêu cầ
 2. Vercel → Environment Variables → `GOOGLE_SITE_VERIFICATION` = chuỗi đó → **Redeploy** → quay lại Google bấm Verify.
 
 **Sau khi xác minh:**
-- [ ] Mục **Sitemaps** → nhập `sitemap.xml` → Submit (đã làm thì bỏ qua — gửi lại sau mỗi đợt trang mới; sitemap hiện có 548 URL).
+- [ ] Mục **Sitemaps** → nhập `sitemap.xml` → Submit (đã làm thì bỏ qua — gửi lại sau mỗi đợt trang mới; sitemap hiện có 625 URL).
 - [ ] Mục **URL Inspection** → dán `https://hieuban.com/` → **Request indexing** (làm thêm cho `/kien-thuc`, `/tu-dien`).
 - [x] **IndexNow** (Bing, Yandex, Seznam, Naver): tự báo toàn bộ URL sau mỗi lần merge vào `main` (workflow `indexnow`,
   khoá công khai ở `/indexnow.txt`) — không cần làm gì.

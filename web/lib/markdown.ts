@@ -28,8 +28,9 @@ export function mdTrang(t: TrangKienThuc, cap = 1): string {
   }
   if (t.hoi_dap.length) d.push(`${h(1)} Câu hỏi thường gặp`, "", ...t.hoi_dap.flatMap((x) => [`**${x.hoi}**`, "", x.dap, ""]));
   d.push(`${h(1)} Nguồn`, "", ...t.nguon.map((x) => `- ${x}`), "");
-  if (t.lien_quan?.length) {
-    d.push(`${h(1)} Liên quan`, "", ...t.lien_quan.map((x) => `- [${x.tieu_de}](${urlDayDu(duongTrang(x.loai, x.slug))}.md)`), "");
+  if (t.lien_quan?.length || t.lien_ket_ngoai?.length) {
+    d.push(`${h(1)} Liên quan`, "", ...(t.lien_quan ?? []).map((x) => `- [${x.tieu_de}](${urlDayDu(duongTrang(x.loai, x.slug))}.md)`),
+      ...(t.lien_ket_ngoai ?? []).map((x) => `- [${x.ten}](${urlDayDu(x.duong)})`), "");
   }
   return d.join("\n");
 }

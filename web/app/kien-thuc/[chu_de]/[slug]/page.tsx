@@ -153,12 +153,15 @@ export default async function Page({ params: thamSo }: Props) {
         <Button asChild><Link href={cd.mang}>Xem của tôi <ArrowRight aria-hidden /></Link></Button>
       </aside>
 
-      {t.lien_quan.length > 0 && (
+      {(t.lien_quan.length > 0 || (t.lien_ket_ngoai?.length ?? 0) > 0) && (
         <nav className="mt-10" aria-labelledby="lien-quan">
           <h2 id="lien-quan" className="text-xl">Đọc tiếp</h2>
           <ul className="mt-3 flex flex-wrap gap-2">
             {t.lien_quan.map((l) => (
               <li key={l.slug}><Link href={duongTrang(l.loai, l.slug)} className="inline-flex rounded-full border border-line px-3 py-1.5 text-sm text-fg-muted hover:border-gold/50 hover:text-fg">{l.tieu_de}</Link></li>
+            ))}
+            {t.lien_ket_ngoai?.map((l) => (
+              <li key={l.duong}><Link href={l.duong} className="inline-flex rounded-full border border-gold/40 px-3 py-1.5 text-sm text-fg-muted hover:border-gold hover:text-fg">{l.ten}</Link></li>
             ))}
           </ul>
         </nav>
