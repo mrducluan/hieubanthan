@@ -7,6 +7,7 @@ import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { GhiGioiThieu } from "@/components/khung/GhiGioiThieu";
 import { GiamSat } from "@/components/khung/GiamSat";
+import { GtmNoScript, GtmScript } from "@/components/khung/GoogleTagManager";
 import { DoLuongGoogle } from "@/components/khung/DoLuongGoogle";
 import { HoiDongYCookie } from "@/components/khung/HoiDongYCookie";
 import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE } from "@/lib/seo";
@@ -69,7 +70,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
+      <head>
+        <GtmScript />
+      </head>
       <body>
+        <GtmNoScript />
         <JsonLd data={goiLd(ldToChuc(), ldWebsite(), ldUngDung())} />
         <div className="star-field" aria-hidden />
         <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">
