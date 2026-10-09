@@ -29,7 +29,7 @@ const COT = [
 
 const CAM_KET = [
   { Icon: ShieldCheck, chu: "Hồ sơ mặc định chỉ lưu trên máy bạn" },
-  { Icon: Server, chu: "Lá số tính trên hệ thống của chúng tôi; AI không nhận họ tên, ngày sinh" },
+  { Icon: Server, chu: "Lá số tính trên hệ thống riêng; họ tên, ngày sinh không chuyển cho bên thứ ba" },
   { Icon: Sparkles, chu: "Không bán dữ liệu, không quảng cáo nhắm mục tiêu" },
 ];
 
@@ -84,8 +84,8 @@ export function ChanTrang() {
         <div className="space-y-2">
           <p>
             Nội dung biên soạn từ thư tịch văn hoá cổ điển, để tham khảo và tự suy ngẫm, không phải dự báo. Nội dung không thay
-            thế ý kiến chuyên môn về y tế, tâm lý, pháp lý, tài chính. Phần diễn giải biên soạn có AI hỗ trợ, do chủ biên
-            Đức Luân thẩm định dần — mỗi bài ghi rõ đã hay chưa thẩm định.
+            thế ý kiến chuyên môn về y tế, tâm lý, pháp lý, tài chính. Nội dung do Ban biên tập Hiểu Bản Thân biên soạn từ
+            cổ thư và tài liệu tham khảo, chủ biên Đức Luân chịu trách nhiệm.
           </p>
           <p>Đang khủng hoảng hoặc gặp nguy hiểm? Gọi <b className="text-fg-muted">115</b> (cấp cứu) · <b className="text-fg-muted">113</b> (công an) · <b className="text-fg-muted">111</b> (bảo vệ trẻ em).</p>
           {(vh.chuSoHuu || vh.diaChi || vh.email || vh.dienThoai) && (

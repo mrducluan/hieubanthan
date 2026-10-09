@@ -1,6 +1,6 @@
 // Trang kiến thức — Server Component: HTML đầy đủ ngay lần tải đầu (Google, Bing, và bot AI đọc được không cần JS).
 // Cấu trúc GEO: tiêu đề = câu hỏi người ta tìm · đoạn "trả lời nhanh" đứng đầu · mục có tiêu đề · hỏi đáp · nguồn ·
-// ngày cập nhật · nhãn trạng thái (chờ thẩm định / đã thẩm định) · liên kết nội bộ. Schema: Article + FAQPage + BreadcrumbList.
+// ngày cập nhật · nhãn đã thẩm định (BM-1: bài chưa duyệt không gắn nhãn) · liên kết nội bộ. Schema: Article + FAQPage + BreadcrumbList.
 // EEAT-1: dòng tác giả / chủ biên / thẩm định + Person; trang đã thẩm định có WebPage.reviewedBy + lastReviewed.
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -51,6 +51,7 @@ export default async function Page({ params: thamSo }: Props) {
   const { cd, t } = kq;
   const duong = duongTrang(t.loai, t.slug);
   const nhap = t.trang_thai !== "da_duyet";
+  const tacGia = [t.tac_gia, t.tham_dinh?.nguoi].find((x) => x && CHUYEN_GIA[x]);
 
   const ld = goiLd(
     {
@@ -63,17 +64,17 @@ export default async function Page({ params: thamSo }: Props) {
       dateModified: t.cap_nhat,
       mainEntityOfPage: { "@id": `${urlDayDu(duong)}#trang` },
       image: urlDayDu(`/og?tieu_de=${encodeURIComponent(t.tieu_de)}`),
-      // Tác giả chỉ là người khi chính chuyên gia viết; bài biên soạn có AI hỗ trợ ghi tác giả là tổ chức.
-      author: t.tac_gia && CHUYEN_GIA[t.tac_gia]
-        ? { "@id": idChuyenGia(t.tac_gia) }
-        : { "@type": "Organization", name: TEN_SITE, url: siteUrl() },
+      // Tác giả là người khi chuyên gia tự viết hoặc đã đọc, sửa, duyệt bài; bài chưa thẩm định ghi tác giả là ban biên tập.
+      author: tacGia
+        ? { "@id": idChuyenGia(tacGia) }
+        : { "@type": "Organization", name: `Ban biên tập ${TEN_SITE}`, url: siteUrl() },
       ...(CHUYEN_GIA[t.chu_bien] ? { editor: { "@id": idChuyenGia(t.chu_bien) } } : {}),
       publisher: { "@id": `${siteUrl()}/#to-chuc` },
       isAccessibleForFree: true,
       isPartOf: { "@id": `${siteUrl()}/#website` },
       about: cd.ten,
       citation: t.nguon,
-      creativeWorkStatus: nhap ? "Draft" : "Published",
+      ...(nhap ? {} : { creativeWorkStatus: "Published" }),
       abstract: t.tra_loi_nhanh,
     },
     {
@@ -112,9 +113,7 @@ export default async function Page({ params: thamSo }: Props) {
         <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-fg-faint">
           <span className="inline-flex items-center gap-1"><CalendarDays className="size-3.5" aria-hidden />
             Cập nhật <time dateTime={t.cap_nhat}>{t.cap_nhat.split("-").reverse().join("/")}</time></span>
-          {nhap
-            ? <span className="rounded-full border border-moon/40 px-2.5 py-0.5 text-moon">Chờ chuyên gia thẩm định</span>
-            : <span className="inline-flex items-center gap-1 rounded-full border border-jade/40 px-2.5 py-0.5 text-jade"><ShieldCheck className="size-3.5" aria-hidden /> {t.tac_gia ? "Chuyên gia biên soạn" : "Đã thẩm định"}</span>}
+          {!nhap && <span className="inline-flex items-center gap-1 rounded-full border border-jade/40 px-2.5 py-0.5 text-jade"><ShieldCheck className="size-3.5" aria-hidden /> {t.tac_gia ? "Chuyên gia biên soạn" : "Đã thẩm định"}</span>}
         </div>
         <DongTacGia chu_bien={t.chu_bien} tac_gia={t.tac_gia} tham_dinh={t.tham_dinh} />
       </header>

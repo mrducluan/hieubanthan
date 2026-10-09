@@ -1,5 +1,7 @@
-// PL-1 — Giới thiệu & phương pháp: sứ mệnh, cách hệ thống tính (4 tầng), nguồn tri thức và mã nguồn mở đã dùng
-// (đúng giấy phép, theo bảng "Quyết định đã chốt" trong CLAUDE.md). Tăng độ tin cậy cho người dùng và máy tìm kiếm.
+// PL-1 — Giới thiệu & phương pháp: sứ mệnh, cách làm, ai biên soạn/thẩm định, nguồn tri thức (sách), cam kết.
+// BM-1 (chủ dự án 2026-10-09): KHÔNG nêu kiến trúc, thư viện, bộ đối chiếu, nhà cung cấp — bí mật kinh doanh. Danh mục
+// thành phần mã nguồn mở + giấy phép giữ nội bộ ở docs/NGUON-MO.md (giấy phép MIT không bắt buộc công bố khi chỉ chạy
+// trên máy chủ, nhưng vẫn giữ ghi công trong repo).
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Bang, TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
@@ -7,7 +9,7 @@ import { vanHanh } from "@/lib/van-hanh";
 
 export const metadata: Metadata = {
   title: "Giới thiệu & phương pháp",
-  description: "Hiểu Bản Thân là gì, tính toán ra sao, kho tri thức lấy từ đâu và dùng những mã nguồn mở nào.",
+  description: "Hiểu Bản Thân là gì, làm việc ra sao, ai biên soạn và thẩm định, kho tri thức dựa trên những cổ thư nào.",
   alternates: { canonical: "/gioi-thieu" },
 };
 
@@ -26,44 +28,44 @@ export default function GioiThieu() {
       ),
     },
     {
-      id: "phuong-phap", tieuDe: "Hệ thống tính như thế nào",
+      id: "phuong-phap", tieuDe: "Cách chúng tôi làm",
       noiDung: (
-        <Bang dau={["Tầng", "Làm gì", "Có dùng AI?"]} dong={[
-          [<b key="1">1. Tính toán</b>, "Con số, an sao, tứ trụ theo tiết khí, gieo quẻ, đổi độ ra hướng. Cùng đầu vào luôn ra cùng kết quả, có bộ dữ liệu đối chiếu.", "Không"],
-          [<b key="2">2. Kho tri thức</b>, "Nghĩa của số, sao, quẻ, cung… Mỗi mục ghi nguồn và trường phái.", "Biên soạn có AI hỗ trợ; chủ biên thẩm định từng bài"],
-          [<b key="3">3. Quy tắc luận</b>, "Ghép các lớp theo thứ tự ưu tiên (ví dụ đại hạn > lưu niên > tiểu hạn > lưu nguyệt).", "Không"],
-          [<b key="4">4. Diễn đạt</b>, "Viết thành câu dễ đọc từ dữ liệu tầng 1–3.", "Có thể. Cấm thêm dữ kiện, có kiểm tra tự động"],
-        ]} />
+        <ul>
+          <li><b>Tính toán chính xác, nhất quán.</b> Con số, lá số Tử vi, tứ trụ Bát tự, quẻ Kinh Dịch và hướng nhà do hệ
+            thống tính toán riêng của Hiểu Bản Thân thực hiện. Cùng thông tin luôn cho cùng kết quả, và đã được đối chiếu
+            với hàng trăm lá số mẫu trước khi đưa lên.</li>
+          <li><b>Theo âm lịch Việt Nam.</b> Ngày giờ sinh được đổi theo âm lịch và múi giờ Việt Nam (kể cả các giai đoạn
+            lịch sử đổi múi giờ), mặc định theo lối luận phổ biến ở Việt Nam, có công tắc để so với phái khác.</li>
+          <li><b>Diễn giải có nguồn.</b> Phần luận giải lấy từ kho tri thức do ban biên tập biên soạn, mỗi mục ghi nguồn
+            và trường phái. Kho tri thức chỉ diễn giải kết quả đã tính, không thêm lời phán.</li>
+        </ul>
       ),
     },
     {
-      id: "quy-trinh", tieuDe: "Ai viết, ai thẩm định",
+      id: "quy-trinh", tieuDe: "Ai biên soạn, ai thẩm định",
       noiDung: (
         <>
           <p>Chủ biên nội dung là <Link href="/tac-gia/duc-luan" className="text-gold underline">Đức Luân</Link> — người sáng
             lập, hơn 15 năm nghiên cứu thần số học, Tử vi, Bát tự, Phong thuỷ và Kinh Dịch. Anh tự biên soạn phần ý nghĩa
             12 con số thần số học, đặt quy tắc biên tập và chọn trường phái mặc định cho toàn site.</p>
-          <p>Phần diễn giải còn lại được <b>biên soạn có AI hỗ trợ</b> từ cổ thư và tài liệu tham khảo, theo quy tắc đó, rồi
-            được chủ biên đọc, sửa và <b>thẩm định từng bài</b>. Mỗi bài ghi rõ một trong ba trạng thái: chuyên gia tự biên
-            soạn · đã thẩm định (kèm tên và ngày) · đang chờ chuyên gia thẩm định.</p>
+          <p>Ban biên tập Hiểu Bản Thân biên soạn phần diễn giải từ cổ thư và tài liệu tham khảo theo quy tắc đó. Chủ biên
+            đọc, sửa và <b>thẩm định từng bài</b>; bài đã thẩm định ghi tên người thẩm định và ngày.</p>
         </>
       ),
     },
     {
-      id: "nguon", tieuDe: "Nguồn tri thức và mã nguồn mở",
+      id: "nguon", tieuDe: "Nguồn tri thức",
       noiDung: (
         <>
-          <Bang dau={["Thành phần", "Dùng vào", "Giấy phép / ghi chú"]} dong={[
-            ["iztro (SylarLong)", "An sao Tử vi, chạy ngay trên máy chủ của chúng tôi", "MIT"],
-            ["Thuật toán âm lịch Hồ Ngọc Đức", "Đổi âm – dương lịch theo múi giờ Việt Nam (gồm miền Nam 1960–1975)", "Thuật toán công bố"],
-            ["lasotuvi (doanguyen)", "Đối chiếu độ sáng sao, Hoả Linh, vòng Thái Tuế lối Việt", "MIT, chỉ dùng để đối chiếu"],
-            ["lunar-typescript", "Sinh bộ dữ liệu đối chiếu tiết khí, can chi", "Chỉ dùng để đối chiếu, không chạy thật"],
-            ["VSOP87 rút gọn", "Tính tiết khí cho Bát tự (sai số ≤ 1 phút)", "Mô hình thiên văn công bố"],
-            ["TuViMCP", "Danh mục cách cục Tử vi để đối chiếu", "MIT"],
-            ["Cổ thư (ctext.org)", "Nguyên văn Kinh Dịch, Tử Vi Đẩu Số Toàn Thư, Tử Bình Chân Thuyên…", "Phạm vi công cộng"],
-            ["Sách hiện đại", "Chỉ tóm ý, ghi nguồn", "Không chép nguyên văn"],
+          <Bang dau={["Môn", "Sách và trường phái tham khảo"]} dong={[
+            ["Kinh Dịch", "Chu Dịch (Kinh và Thập Dực), Mai Hoa Dịch Số (Thiệu Ung), Tăng San Bốc Dịch (Dã Hạc Lão Nhân)"],
+            ["Tử vi", "Tử Vi Đẩu Số Toàn Thư, Đẩu Số Cốt Tuỷ Phú; Tử vi Nam phái lối Việt"],
+            ["Bát tự", "Uyên Hải Tử Bình, Tử Bình Chân Thuyên, Trích Thiên Tuỷ, Tam Mệnh Thông Hội"],
+            ["Phong thuỷ", "Dương Trạch Tam Yếu (Bát trạch), Thẩm Thị Huyền Không Học, Táng Thư, Hám Long Kinh"],
+            ["Thần số học", "Thần số học Pythagoras hiện đại và các sách thần số phổ biến"],
           ]} />
-          <p>Chúng tôi <b>không</b> chép mã hay dữ liệu từ dự án mang giấy phép GPL/AGPL, hoặc từ dự án không có giấy phép.</p>
+          <p>Cổ thư chúng tôi dùng nguyên văn thuộc phạm vi công cộng. Sách hiện đại chỉ tóm ý và ghi nguồn, không chép
+            nguyên văn.</p>
         </>
       ),
     },

@@ -24,6 +24,11 @@
    - **Thẩm định** (bài anh đã đọc, sửa, duyệt): ghi tên + ngày. Mỗi bài anh duyệt là một tín hiệu E-E-A-T thật.
    Thẩm định càng nhiều, web càng mạnh — và nhãn "chờ thẩm định" tự biến mất ở bài đã duyệt.
 
+> **Cập nhật BM-1 (2026-10-09, chủ dự án yêu cầu):** bỏ chữ "AI" khỏi bài viết. Bài chưa thẩm định ghi
+> "Ban biên tập Hiểu Bản Thân · Chủ biên: Đức Luân", không còn nhãn "chờ thẩm định"; bài đã thẩm định ghi
+> "Biên soạn & thẩm định: Đức Luân" (schema `author` = Person). Nguyên tắc giữ nguyên: không ghi chuyên gia là tác giả
+> bài họ chưa đọc. Chi tiết + đề xuất nội dung: `docs/DE-XUAT-CHAT-LUONG-NOI-DUNG.md`. Bảng dưới là trạng thái EEAT-1 gốc.
+
 ## 2. Đã làm (EEAT-1)
 
 | Hạng mục | Chi tiết |

@@ -40,7 +40,7 @@ export async function taoLlmsTxt(): Promise<string> {
   for (const [k, cd] of Object.entries(CHU_DE)) {
     dong.push(`## ${cd.ten}`, "", cd.mo_ta, "");
     for (const t of ds.filter((x) => x.loai === cd.loai)) {
-      dong.push(`- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}.md): ${t.mo_ta}${t.trang_thai === "da_duyet" ? "" : " (chờ thẩm định)"}`);
+      dong.push(`- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}.md): ${t.mo_ta}${t.trang_thai === "da_duyet" ? " (đã thẩm định)" : ""}`);
     }
     dong.push(`- [Tất cả](${urlDayDu(`/kien-thuc/${k}`)}.md)`, "");
   }

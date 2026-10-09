@@ -41,7 +41,7 @@ async function hoiThanSo(h: HoSo, cau: string): Promise<KetQuaHoi> {
     phu: canNguoiKia ? (
       <Button asChild variant="secondary" size="sm"><Link href="/hop-doi"><HeartHandshake aria-hidden /> Nhập ngày sinh người ấy ở mục Hợp đôi</Link></Button>
     ) : undefined,
-    ghiChu: d.cau_tra_loi ? (d.che_do === "llm" ? "Diễn đạt bởi AI từ kho tri thức có nguồn." : "Ghép trực tiếp từ kho tri thức có nguồn.") : undefined,
+    ghiChu: d.cau_tra_loi ? (d.che_do === "llm" ? "Diễn đạt tự động từ kho tri thức có nguồn." : "Ghép trực tiếp từ kho tri thức có nguồn.") : undefined,
   };
 }
 
@@ -168,7 +168,7 @@ export function ThanSo() {
         />
       </section>
 
-      <p className="text-xs text-fg-faint">{kq.trich_nguon_chung} · Bản tính v{kq.engine_version} · Tên đã quét: {kq.ten_bien_the_da_quet.join(", ")}</p>
+      <p className="text-xs text-fg-faint">{kq.trich_nguon_chung} · Tên đã quét: {kq.ten_bien_the_da_quet.join(", ")}</p>
     </div>
   );
 }

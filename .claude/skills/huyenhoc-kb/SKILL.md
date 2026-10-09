@@ -59,3 +59,6 @@ Mục `giai_thich` bắt buộc `tu_khoa` (không dấu, dùng cho bộ định 
   chuyên gia là **tác giả** của nội dung AI soạn — chỉ chủ biên / thẩm định (`docs/EEAT-VA-CHUYEN-GIA.md`).
 - Duyệt xong một file → đổi `trang_thai` thành `da_duyet`, ghi tên người duyệt vào `source`, giữ
   `can_doi_chieu` = false. Duyệt một phần → tách mục đã duyệt ra khoá riêng hoặc ghi chú trong PR.
+- **BM-1 — nguồn công khai:** chuỗi nguồn/ghi chú trong KB có thể ghi nguồn gốc nội bộ (thư viện, bộ đối chiếu, "nháp
+  AI"), nhưng KHÔNG được lộ ra web: engine lọc qua `app/cong_khai.py`. Thêm nguồn mới có tên nội bộ → thêm quy tắc ở
+  đó; `tests/test_cong_khai.py` quét mọi trang kiến thức và báo lọt.

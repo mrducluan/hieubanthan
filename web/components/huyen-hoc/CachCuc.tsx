@@ -48,7 +48,7 @@ export function CachCuc({ ds, luuY, onHoi }: { ds: CC[]; luuY?: string; onHoi: (
                   {c.sat_hoi.length > 0 && <p className="text-xs text-cinnabar">Tam phương có {c.sat_hoi.join(", ")} hội về — sách xưa coi là giảm cách.</p>}
                   <button type="button" onClick={() => onHoi(`Cách cục ${c.ten} trong lá số của tôi nghĩa là gì?`)}
                     className="inline-flex items-center gap-1.5 text-xs text-gold hover:underline">
-                    <MessageCircleQuestion className="size-3.5" aria-hidden />Hỏi AI về cách này
+                    <MessageCircleQuestion className="size-3.5" aria-hidden />Hỏi thêm về cách này
                   </button>
                 </div>
               )}

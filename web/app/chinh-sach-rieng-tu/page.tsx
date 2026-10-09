@@ -1,6 +1,8 @@
 // PL-1 — Chính sách quyền riêng tư & bảo vệ dữ liệu cá nhân. Viết theo ĐÚNG những gì hệ thống đang làm
 // (rà mã 2026-10-08: web/lib/hoso.ts, lib/do-luong.ts, engine/app/nhat_ky.py, narrative/hoi_van.py, migrations 0006–0008).
 // Sửa cách xử lý dữ liệu ở đâu → sửa trang này + NGAY_HIEU_LUC trong lib/van-hanh.ts.
+// BM-1 (chủ dự án 2026-10-09): ghi NHÓM nhà cung cấp, không ghi tên dịch vụ hạ tầng / tên khoá lưu trữ nội bộ; danh sách
+// cụ thể cung cấp khi người dùng hỏi (giữ trong docs/BAO-MAT.md). Google Analytics giữ tên vì liên quan hộp hỏi cookie.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Bang, TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
@@ -26,7 +28,7 @@ export default function ChinhSachRiengTu() {
           <li><b>Mặc định, hồ sơ của bạn chỉ nằm trên máy bạn.</b> Máy chủ chỉ dùng ngày giờ sinh để tính rồi bỏ, không lưu lại.</li>
           <li>Chỉ khi bạn <b>chủ động bấm lưu vào tài khoản</b>, hồ sơ mới được lưu trên máy chủ. Chỉ bạn đọc được, và bạn xoá được bất cứ lúc nào.</li>
           <li>Chúng tôi <b>không lưu nội dung luận giải gắn với tài khoản</b>, không lưu ảnh của bạn, <b>không bán dữ liệu</b>, không dùng dữ liệu để quảng cáo nhắm mục tiêu.</li>
-          <li>Phần AI diễn đạt chỉ nhận câu hỏi và các kết quả đã tính, <b>không nhận họ tên hay ngày giờ sinh</b>.</li>
+          <li>Dịch vụ diễn đạt tự động (AI) của bên thứ ba chỉ nhận câu hỏi và các kết quả đã tính, <b>không nhận họ tên hay ngày giờ sinh</b>.</li>
         </ul>
       ),
     },
@@ -50,18 +52,18 @@ export default function ChinhSachRiengTu() {
       noiDung: (
         <>
           <Bang dau={["Dữ liệu", "Khi nào", "Lưu ở đâu", "Bao lâu"]} dong={[
-            [<b key="a">Hồ sơ trên máy</b>, "Bạn nhập họ tên, ngày giờ sinh, giới tính, nơi sinh", "Chỉ trong trình duyệt của bạn (localStorage)", "Đến khi bạn xoá hồ sơ hoặc xoá dữ liệu trình duyệt"],
+            [<b key="a">Hồ sơ trên máy</b>, "Bạn nhập họ tên, ngày giờ sinh, giới tính, nơi sinh", "Chỉ trong trình duyệt của bạn", "Đến khi bạn xoá hồ sơ hoặc xoá dữ liệu trình duyệt"],
             [<b key="b">Dữ liệu gửi để tính</b>, "Mỗi lần xem bài đọc, lá số, hợp đôi", "Máy chủ tính toán xử lý trong bộ nhớ", "Không lưu — bỏ ngay sau khi trả kết quả"],
-            [<b key="c">Tài khoản</b>, "Bạn đăng nhập bằng email, Google hoặc số điện thoại", "Supabase (Singapore)", "Đến khi bạn xoá tài khoản"],
-            [<b key="d">Hồ sơ lưu vào tài khoản</b>, "Chỉ khi bạn bấm lưu", "Supabase (Singapore), chỉ chủ tài khoản đọc được", "Đến khi bạn xoá hồ sơ hoặc tài khoản"],
-            [<b key="e">Ví Sao, mã mời</b>, "Khi bạn có tài khoản, mời bạn bè, dùng Sao", "Supabase (Singapore)", "Đến khi bạn xoá tài khoản"],
-            [<b key="f">Câu hỏi đã lọc</b>, "Khi bạn hỏi đáp (nếu bật nhật ký cải thiện chất lượng)", "Supabase (Singapore)", "Tối đa 24 tháng"],
-            [<b key="g">Số liệu sử dụng ẩn danh</b>, "Khi bạn dùng web (nếu bật đo lường)", "PostHog", "Tối đa 12 tháng"],
+            [<b key="c">Tài khoản</b>, "Bạn đăng nhập bằng email, Google hoặc số điện thoại", "Máy chủ dữ liệu tại Singapore", "Đến khi bạn xoá tài khoản"],
+            [<b key="d">Hồ sơ lưu vào tài khoản</b>, "Chỉ khi bạn bấm lưu", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được", "Đến khi bạn xoá hồ sơ hoặc tài khoản"],
+            [<b key="e">Ví Sao, mã mời</b>, "Khi bạn có tài khoản, mời bạn bè, dùng Sao", "Máy chủ dữ liệu tại Singapore", "Đến khi bạn xoá tài khoản"],
+            [<b key="f">Câu hỏi đã lọc</b>, "Khi bạn hỏi đáp (nếu bật nhật ký cải thiện chất lượng)", "Máy chủ dữ liệu tại Singapore", "Tối đa 24 tháng"],
+            [<b key="g">Số liệu sử dụng ẩn danh</b>, "Khi bạn dùng web (nếu bật đo lường)", "Công cụ đo lường ẩn danh", "Tối đa 12 tháng"],
             [<b key="g2">Số liệu truy cập (Google Analytics)</b>, "Khi bạn mở trang (Google Tag Manager). Tắt được ở \"Tuỳ chọn cookie\" chân trang", "Google (qua Google Tag Manager)", "Tối đa 14 tháng"],
-            [<b key="h">Báo lỗi kỹ thuật</b>, "Khi trang hoặc máy chủ gặp lỗi (nếu bật)", "Sentry", "Tối đa 90 ngày"],
+            [<b key="h">Báo lỗi kỹ thuật</b>, "Khi trang hoặc máy chủ gặp lỗi (nếu bật)", "Dịch vụ theo dõi lỗi", "Tối đa 90 ngày"],
           ]} />
           <p><b>Địa chỉ IP</b> chỉ được băm (không đảo ngược được) và giữ trong bộ nhớ máy chủ tối đa 24 giờ để giới hạn số lượt
-            dùng AI mỗi người, không ghi vào đâu.</p>
+            hỏi đáp mỗi người, không ghi vào đâu.</p>
           <p><b>Câu hỏi đã lọc</b>: ngày tháng, số điện thoại, email và cụm giống họ tên được xoá trước khi ghi. Câu hỏi
             không gắn với tài khoản hay hồ sơ nào.</p>
           <p><b>Số liệu sử dụng</b> chỉ ghi các bước như mở trang, bắt đầu hay xem xong bài đọc. Hệ thống không ghi ngày
@@ -89,18 +91,18 @@ export default function ChinhSachRiengTu() {
       id: "ben-thu-ba", tieuDe: "Bên xử lý thay chúng tôi và chuyển dữ liệu ra nước ngoài",
       noiDung: (
         <>
-          <Bang dau={["Dịch vụ", "Việc làm", "Dữ liệu nhận", "Vị trí"]} dong={[
-            ["Vercel", "Chạy trang web", "Yêu cầu bạn gửi để tính (không lưu)", "Hàm chạy tại Singapore"],
-            ["Render", "Chạy máy tính toán", "Ngày giờ sinh để tính (không lưu)", "Singapore"],
-            ["Supabase", "Tài khoản, hồ sơ đã lưu, ví Sao, câu hỏi đã lọc", "Như mục 3", "Singapore"],
-            ["OpenRouter", "AI diễn đạt câu trả lời (khi bật)", "Câu hỏi bạn gõ + kết quả đã tính; không có họ tên, ngày giờ sinh", "Hoa Kỳ"],
-            ["PostHog", "Đo lường ẩn danh (khi bật)", "Sự kiện sử dụng, mã ẩn danh", "Hoa Kỳ hoặc EU"],
+          <Bang dau={["Nhóm nhà cung cấp", "Việc làm", "Dữ liệu nhận", "Vị trí"]} dong={[
+            ["Hạ tầng máy chủ (web và tính toán)", "Chạy trang web và hệ thống tính toán", "Yêu cầu bạn gửi để tính, gồm ngày giờ sinh (không lưu)", "Singapore"],
+            ["Cơ sở dữ liệu và đăng nhập", "Tài khoản, hồ sơ đã lưu, ví Sao, câu hỏi đã lọc", "Như mục 3", "Singapore"],
+            ["Dịch vụ diễn đạt tự động (AI)", "Diễn đạt câu trả lời hỏi đáp cho dễ đọc (khi bật)", "Câu hỏi bạn gõ + kết quả đã tính; không có họ tên, ngày giờ sinh", "Hoa Kỳ"],
+            ["Đo lường ẩn danh", "Đếm các bước sử dụng (khi bật)", "Sự kiện sử dụng, mã ẩn danh", "Hoa Kỳ hoặc EU"],
             ["Google (Tag Manager, Analytics)", "Đo lượt truy cập — bật mặc định, tắt được ở \"Tuỳ chọn cookie\"", "Trang đã xem, loại thiết bị, mã cookie _ga; không họ tên, ngày giờ sinh", "Hoa Kỳ"],
-            ["Sentry", "Báo lỗi (khi bật)", "Thông tin lỗi kỹ thuật", "Hoa Kỳ hoặc EU"],
+            ["Theo dõi lỗi kỹ thuật", "Báo lỗi (khi bật)", "Thông tin lỗi kỹ thuật", "Hoa Kỳ hoặc EU"],
           ]} />
           <p>Một số dữ liệu trên được xử lý ngoài Việt Nam. Chúng tôi chỉ dùng nhà cung cấp có cam kết bảo mật bằng
-            văn bản, và gửi đi ít dữ liệu nhất có thể. Câu hỏi gõ vào ô hỏi đáp được gửi nguyên văn cho AI diễn đạt,
-            vì vậy <b>đừng gõ số điện thoại, địa chỉ hay thông tin định danh</b> vào câu hỏi.</p>
+            văn bản, và gửi đi ít dữ liệu nhất có thể. Bạn có thể yêu cầu danh sách tên nhà cung cấp cụ thể qua {lienHe}.
+            Câu hỏi gõ vào ô hỏi đáp có thể được gửi nguyên văn cho dịch vụ diễn đạt, vì vậy <b>đừng gõ số điện thoại, địa
+            chỉ hay thông tin định danh</b> vào câu hỏi.</p>
         </>
       ),
     },
@@ -130,21 +132,19 @@ export default function ChinhSachRiengTu() {
         phát hiện tài khoản của trẻ em không có sự đồng ý đó, chúng tôi sẽ xoá.</p>,
     },
     {
-      id: "trinh-duyet", tieuDe: "Lưu trữ trên trình duyệt (cookie, localStorage)",
+      id: "trinh-duyet", tieuDe: "Cookie và lưu trữ trên trình duyệt",
       noiDung: (
         <>
-          <p>Chúng tôi không dùng cookie quảng cáo. Trình duyệt của bạn giữ một số mục để web chạy được:</p>
-          <ul>
-            <li><code>hbt.hoso.v1</code>: hồ sơ trên máy. <code>hbt.laso.giaodien</code>: giao diện lá số bạn chọn.</li>
-            <li><code>hbt.gt</code>, <code>hbt.ma_moi</code>: mã mời bạn bè.</li>
-            <li><code>kd-da-hoi</code>: câu hỏi Kinh Dịch bạn đã gieo, giữ 30 ngày để nhắc khi bạn hỏi lại cùng việc. Mục này chỉ nằm trên máy bạn.</li>
-            <li>Cookie phiên đăng nhập (chỉ khi bạn đăng nhập). Mã ẩn danh của PostHog (chỉ khi bật đo lường).</li>
-            <li><code>hbt.dong-y-cookie.v1</code>: lựa chọn của bạn ở hộp hỏi cookie.</li>
-            <li>Cookie <code>_ga</code>, <code>_ga_*</code> của Google Analytics: <b>bật mặc định</b> để đo lượt truy cập. Bạn
-              tắt bằng link &quot;Tuỳ chọn cookie&quot; ở chân trang → &quot;Từ chối&quot;: khi đó Google chỉ nhận tín hiệu ẩn
-              danh, không cookie (Consent Mode của Google). Đổi ý bằng link &quot;Tuỳ chọn cookie&quot; ở chân trang; khi từ chối,
-              cookie _ga bị xoá.</li>
-          </ul>
+          <p>Chúng tôi không dùng cookie quảng cáo. Trình duyệt của bạn giữ một số mục để web chạy được, chia theo nhóm:</p>
+          <Bang dau={["Nhóm", "Dùng để", "Giữ bao lâu"]} dong={[
+            [<b key="a">Cần thiết</b>, "Hồ sơ trên máy, giao diện bạn chọn, lựa chọn ở hộp hỏi cookie, phiên đăng nhập (khi bạn đăng nhập)", "Đến khi bạn xoá hoặc đăng xuất"],
+            [<b key="b">Tiện ích</b>, "Nhớ mã mời bạn bè; nhớ câu hỏi Kinh Dịch đã gieo để nhắc khi bạn hỏi lại cùng việc", "Mã mời: đến khi dùng; câu hỏi Kinh Dịch: 30 ngày"],
+            [<b key="c">Đo lường ẩn danh</b>, "Mã ngẫu nhiên để đếm lượt dùng, không gắn với bạn (chỉ khi bật đo lường)", "Tối đa 12 tháng"],
+            [<b key="d">Thống kê truy cập (Google Analytics)</b>, "Cookie _ga để đo lượt truy cập. Bật mặc định, tắt được", "Tối đa 14 tháng"],
+          ]} />
+          <p>Tắt thống kê truy cập: bấm &quot;Tuỳ chọn cookie&quot; ở chân trang → &quot;Từ chối&quot;. Khi đó cookie _ga bị xoá và
+            Google chỉ nhận tín hiệu ẩn danh, không cookie. Bạn đổi ý lúc nào cũng được bằng chính link đó.</p>
+          <p>Tất cả các mục chỉ nằm trên máy bạn, không chứa luận giải.</p>
           <p>Xoá dữ liệu trang trong cài đặt trình duyệt là xoá hết các mục trên.</p>
         </>
       ),
