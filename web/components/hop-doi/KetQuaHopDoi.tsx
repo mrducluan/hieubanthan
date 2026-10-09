@@ -151,7 +151,7 @@ export function KetQuaHopDoi({ kq, tenA, tenB }: { kq: KetQuaHopDoiT; tenA: stri
       )}
       {kq.nguon.nguon && (
         <p className="text-center text-xs text-fg-faint">
-          Nguồn: {kq.nguon.nguon}{kq.nguon.trang_thai === "nhap_ai" ? " · bản nháp, đang được duyệt dần" : ""}
+          Nguồn: {kq.nguon.nguon}{kq.nguon.trang_thai === "nhap_ai" ? " · biên soạn có AI hỗ trợ, chờ thẩm định" : ""}
         </p>
       )}
     </div>

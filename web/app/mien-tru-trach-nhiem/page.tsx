@@ -47,7 +47,7 @@ export default function MienTru() {
       noiDung: (
         <ul>
           <li><b>Không dùng AI</b> để tính con số, an sao, lập tứ trụ, gieo quẻ hay đổi hướng. Mọi phép tính chạy theo thuật toán công bố và có bộ dữ liệu đối chiếu.</li>
-          <li>Nhiều mục diễn giải là <b>bản nháp do AI soạn</b> từ nguồn cổ thư và sách tham khảo. Các mục này luôn có nhãn "nháp" cho tới khi người có chuyên môn duyệt.</li>
+          <li>Phần diễn giải được <b>biên soạn có AI hỗ trợ</b> từ nguồn cổ thư và sách tham khảo. Mục nào chưa được chủ biên thẩm định đều ghi "đang chờ chuyên gia thẩm định"; mục đã duyệt ghi tên người thẩm định và ngày.</li>
           <li>Khi bật AI diễn đạt, AI chỉ được viết lại dữ liệu đã có. Một lớp kiểm tra tự động chặn câu trả lời có con số lạ hoặc giọng phán quyết, và trả về bản gốc nếu bị chặn.</li>
         </ul>
       ),

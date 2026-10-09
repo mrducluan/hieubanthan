@@ -19,6 +19,10 @@ const nextConfig = {
   async rewrites() {
     return { beforeFiles: [{ source: "/:duong((?:[^/]+/)*[^/.]+)\\.md", destination: "/md/:duong" }] };
   },
+  // Next 15 mặc định "stream" metadata: <title>/<meta> nằm cuối <body> (JS mới dời lên <head>). Googlebot và bot AI
+  // (GPTBot, ClaudeBot, PerplexityBot…) không nằm trong danh sách mặc định → bot không chạy JS đọc nhầm <title> của
+  // hình SVG. Mọi bot / crawler / trình xem trước link nhận metadata ngay trong <head> (kiểm bằng scripts/kiem-tra-seo.mjs).
+  htmlLimitedBots: /bot|crawl|spider|slurp|preview|facebookexternalhit|facebookcatalog|embedly|whatsapp|zalo|google-inspectiontool|google-extended|googleother|mediapartners-google|adsbot-google|storebot-google|anthropic|claude|perplexity|cohere|bytespider|meta-externalagent|ia_archiver|vkshare|yeti/i,
   // Ảnh thẻ chia sẻ (/og) đọc font OFL từ assets/fonts — đưa vào gói deploy. (Next 15: instrumentation.ts bật sẵn.)
   outputFileTracingIncludes: { "/og": ["./assets/fonts/**"] },
 };

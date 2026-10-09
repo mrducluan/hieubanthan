@@ -28,7 +28,7 @@ export default function DieuKhoan() {
             tham khảo và tự suy ngẫm</b>, không phải khoa học dự báo.</p>
           <ul>
             <li>Phần <b>tính toán</b> (con số, lá số, quẻ, hướng) do máy tính theo thuật toán công bố, cùng đầu vào cho cùng kết quả.</li>
-            <li>Phần <b>diễn giải</b> lấy từ kho tri thức biên soạn từ thư tịch cổ và sách tham khảo. Nhiều mục là <b>bản nháp do AI soạn</b>, luôn có nhãn và đang được duyệt dần.</li>
+            <li>Phần <b>diễn giải</b> lấy từ kho tri thức biên soạn từ thư tịch cổ và sách tham khảo. Phần này <b>biên soạn có AI hỗ trợ</b>, mỗi mục ghi rõ đã hay chưa được chuyên gia thẩm định.</li>
             <li>Kết quả <b>không phải</b> lời khuyên y tế, tâm lý, pháp lý, tài chính, đầu tư hay tuyển dụng. Đừng dùng nó để thay thế ý kiến của người có chuyên môn.</li>
           </ul>
         </>

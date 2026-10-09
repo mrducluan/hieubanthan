@@ -18,7 +18,7 @@ const COT = [
     ["/kien-thuc/hop-so", "Số chủ đạo hợp nhau"],
   ] },
   { ten: "Về chúng tôi", ds: [
-    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
+    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
     ["/lien-he#chu-de", "Góp ý, báo lỗi"], ["/tai-khoan", "Tài khoản"],
   ] },
   { ten: "Pháp lý", ds: [
@@ -84,7 +84,8 @@ export function ChanTrang() {
         <div className="space-y-2">
           <p>
             Nội dung biên soạn từ thư tịch văn hoá cổ điển, để tham khảo và tự suy ngẫm, không phải dự báo. Nội dung không thay
-            thế ý kiến chuyên môn về y tế, tâm lý, pháp lý, tài chính. Một số diễn giải là bản nháp do AI soạn, luôn có nhãn.
+            thế ý kiến chuyên môn về y tế, tâm lý, pháp lý, tài chính. Phần diễn giải biên soạn có AI hỗ trợ, do chủ biên
+            Đức Luân thẩm định dần — mỗi bài ghi rõ đã hay chưa thẩm định.
           </p>
           <p>Đang khủng hoảng hoặc gặp nguy hiểm? Gọi <b className="text-fg-muted">115</b> (cấp cứu) · <b className="text-fg-muted">113</b> (công an) · <b className="text-fg-muted">111</b> (bảo vệ trẻ em).</p>
           {(vh.chuSoHuu || vh.diaChi || vh.email || vh.dienThoai) && (

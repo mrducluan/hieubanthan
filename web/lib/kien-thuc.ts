@@ -59,6 +59,9 @@ export interface TrangKienThuc {
   loai: LoaiTrang; slug: string; tieu_de: string; mo_ta: string; tra_loi_nhanh: string;
   muc: MucTrang[]; hoi_dap: { hoi: string; dap: string }[]; nguon: string[];
   trang_thai: string; index: boolean; cap_nhat: string;
+  /** EEAT-1: mã chuyên gia (tra hồ sơ ở lib/chuyen-gia.ts). tac_gia chỉ có khi chuyên gia tự viết; tham_dinh chỉ khi đã duyệt. */
+  chu_bien: string; tac_gia: string | null; tham_dinh: { nguoi: string; ngay: string } | null;
+  bien_soan: "chuyen_gia" | "ai_ho_tro";
   /** MH-1: dữ liệu hình minh hoạ do engine trả (web chỉ vẽ). */
   minh_hoa?: MinhHoaDuLieu;
   lien_quan: { loai: LoaiTrang; slug: string; tieu_de: string }[];
@@ -69,7 +72,8 @@ export interface TrangKienThuc {
   /** SEO-J: link sang trang ngoài thư viện kiến thức (vd /phong-thuy/tuoi-1990-nam). Engine dựng đường dẫn. */
   lien_ket_ngoai?: { duong: string; ten: string }[];
 }
-export type MucLuc = Pick<TrangKienThuc, "loai" | "slug" | "tieu_de" | "mo_ta" | "trang_thai" | "index" | "cap_nhat">;
+export type MucLuc = Pick<TrangKienThuc, "loai" | "slug" | "tieu_de" | "mo_ta" | "trang_thai" | "index" | "cap_nhat"
+  | "chu_bien" | "tac_gia" | "tham_dinh" | "bien_soan">;
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
@@ -150,4 +154,16 @@ export async function dsTuoiHuong(): Promise<MucTuoiHuong[]> {
 }
 export function tuoiHuong(slug: string): Promise<TuoiHuong | null> {
   return /^tuoi-\d{4}-(nam|nu)$/.test(slug) ? lay<TuoiHuong>(`/v1/phongthuy/tuoi/${slug}`) : Promise.resolve(null);
+}
+
+// ---- EEAT-1: số trang theo chuyên gia (engine đếm từ sổ thẩm định) ----------------
+export interface SoTrangChuyenGia {
+  slug: string;
+  so_trang: { chu_bien: number; tac_gia: number; tham_dinh: number; cho_tham_dinh: number };
+  tac_gia: { loai: LoaiTrang; slug: string; tieu_de: string }[];
+  tham_dinh_gan_day: { loai: LoaiTrang; slug: string; tieu_de: string; tham_dinh: { nguoi: string; ngay: string } }[];
+}
+
+export function soTrangChuyenGia(slug: string): Promise<SoTrangChuyenGia | null> {
+  return lay<SoTrangChuyenGia>(`/v1/kb/chuyen-gia/${encodeURIComponent(slug)}`);
 }

@@ -188,7 +188,8 @@ def trang_nam_ca_nhan(so: str, slug: str) -> dict:
         "mo_ta": t._cat(f"Năm cá nhân số {so} ({n['chu_de'].lower()}): ý nghĩa, nên làm, nên tránh, chuyện hay gặp và cách tự tính năm cá nhân."),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
         "nguon": [t._doc("thanso_depth.json")["_nguon"]],
-        "trang_thai": "da_duyet",
+        # thanso_depth.json do AI soạn (commit 7887b88), không phải chủ dự án viết → chờ thẩm định (EEAT-1).
+        "trang_thai": t._doc("thanso_depth.json").get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "nam_ca_nhan", "slug": f"nam-ca-nhan-{ds[j % len(ds)]}"} for j in (i - 1, i + 1)]
         + [{"loai": "so", "slug": f"so-{so}"}],
         "minh_hoa": _mh_so(so),

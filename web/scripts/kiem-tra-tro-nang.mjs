@@ -14,7 +14,7 @@ const mobile = process.argv.includes("--mobile");
 const coHoSo = process.argv.includes("--ho-so");
 const TRANG = ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/hop-doi", "/kham-pha", "/ban-than",
   "/kien-thuc", "/kien-thuc/tu-vi/sao-tu-vi", "/kien-thuc/sao-cung/thai-am-cung-phu-the", "/tu-dien",
-  "/phong-thuy/tuoi-1990-nam", "/la-so-mau", "/chinh-sach-rieng-tu", "/lien-he", "/dang-nhap", "/tai-khoan"];
+  "/phong-thuy/tuoi-1990-nam", "/la-so-mau", "/tac-gia/duc-luan", "/kien-thuc/than-so/so-7", "/kien-thuc/kinh-dich/que-1-can", "/chinh-sach-rieng-tu", "/lien-he", "/dang-nhap", "/tai-khoan"];
 
 const b = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_PATH });
 const ctx = await b.newContext(mobile ? { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: 1280, height: 900 } });

@@ -1,6 +1,7 @@
 // Trang kiến thức — Server Component: HTML đầy đủ ngay lần tải đầu (Google, Bing, và bot AI đọc được không cần JS).
 // Cấu trúc GEO: tiêu đề = câu hỏi người ta tìm · đoạn "trả lời nhanh" đứng đầu · mục có tiêu đề · hỏi đáp · nguồn ·
-// ngày cập nhật · nhãn trạng thái (nháp AI / đã duyệt) · liên kết nội bộ. Schema: Article + FAQPage + BreadcrumbList.
+// ngày cập nhật · nhãn trạng thái (chờ thẩm định / đã thẩm định) · liên kết nội bộ. Schema: Article + FAQPage + BreadcrumbList.
+// EEAT-1: dòng tác giả / chủ biên / thẩm định + Person; trang đã thẩm định có WebPage.reviewedBy + lastReviewed.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,6 +9,8 @@ import { ArrowRight, BookOpen, CalendarDays, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { MinhHoa } from "@/components/minh-hoa/MinhHoa";
+import { DongTacGia } from "@/components/kien-thuc/DongTacGia";
+import { CHUYEN_GIA, idChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
 import { CHU_DE, duongTrang, trang, type TrangKienThuc } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 
@@ -58,9 +61,13 @@ export default async function Page({ params: thamSo }: Props) {
       inLanguage: "vi-VN",
       datePublished: t.cap_nhat,
       dateModified: t.cap_nhat,
-      mainEntityOfPage: urlDayDu(duong),
+      mainEntityOfPage: { "@id": `${urlDayDu(duong)}#trang` },
       image: urlDayDu(`/og?tieu_de=${encodeURIComponent(t.tieu_de)}`),
-      author: { "@type": "Organization", name: TEN_SITE, url: siteUrl() },
+      // Tác giả chỉ là người khi chính chuyên gia viết; bài biên soạn có AI hỗ trợ ghi tác giả là tổ chức.
+      author: t.tac_gia && CHUYEN_GIA[t.tac_gia]
+        ? { "@id": idChuyenGia(t.tac_gia) }
+        : { "@type": "Organization", name: TEN_SITE, url: siteUrl() },
+      ...(CHUYEN_GIA[t.chu_bien] ? { editor: { "@id": idChuyenGia(t.chu_bien) } } : {}),
       publisher: { "@id": `${siteUrl()}/#to-chuc` },
       isAccessibleForFree: true,
       isPartOf: { "@id": `${siteUrl()}/#website` },
@@ -69,6 +76,18 @@ export default async function Page({ params: thamSo }: Props) {
       creativeWorkStatus: nhap ? "Draft" : "Published",
       abstract: t.tra_loi_nhanh,
     },
+    {
+      "@type": "WebPage",
+      "@id": `${urlDayDu(duong)}#trang`,
+      url: urlDayDu(duong),
+      name: t.tieu_de,
+      inLanguage: "vi-VN",
+      isPartOf: { "@id": `${siteUrl()}/#website` },
+      ...(t.tham_dinh && CHUYEN_GIA[t.tham_dinh.nguoi]
+        ? { reviewedBy: { "@id": idChuyenGia(t.tham_dinh.nguoi) }, lastReviewed: t.tham_dinh.ngay } : {}),
+    },
+    ...[...new Set([t.chu_bien, t.tac_gia, t.tham_dinh?.nguoi])].map((x) => (x ? CHUYEN_GIA[x] : undefined))
+      .filter((cg) => cg !== undefined).map(ldNguoi),
     ldHoiDap(t.hoi_dap),
     ldDuongDan([
       { ten: "Trang chủ", duong: "/" },
@@ -94,9 +113,10 @@ export default async function Page({ params: thamSo }: Props) {
           <span className="inline-flex items-center gap-1"><CalendarDays className="size-3.5" aria-hidden />
             Cập nhật <time dateTime={t.cap_nhat}>{t.cap_nhat.split("-").reverse().join("/")}</time></span>
           {nhap
-            ? <span className="rounded-full border border-moon/40 px-2.5 py-0.5 text-moon">Bản nháp — đang được chuyên gia duyệt</span>
-            : <span className="inline-flex items-center gap-1 rounded-full border border-jade/40 px-2.5 py-0.5 text-jade"><ShieldCheck className="size-3.5" aria-hidden /> Đã duyệt</span>}
+            ? <span className="rounded-full border border-moon/40 px-2.5 py-0.5 text-moon">Chờ chuyên gia thẩm định</span>
+            : <span className="inline-flex items-center gap-1 rounded-full border border-jade/40 px-2.5 py-0.5 text-jade"><ShieldCheck className="size-3.5" aria-hidden /> {t.tac_gia ? "Chuyên gia biên soạn" : "Đã thẩm định"}</span>}
         </div>
+        <DongTacGia chu_bien={t.chu_bien} tac_gia={t.tac_gia} tham_dinh={t.tham_dinh} />
       </header>
 
       <MinhHoa mh={t.minh_hoa} />

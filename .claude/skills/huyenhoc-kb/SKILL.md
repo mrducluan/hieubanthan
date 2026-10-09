@@ -54,5 +54,8 @@ Mục `giai_thich` bắt buộc `tu_khoa` (không dấu, dùng cho bộ định 
 - **ctext.org cấm cào tự động** (Cloudflare Turnstile + điều khoản; có thể cố ý trả dữ liệu hỏng cho
   scraper). Không bypass. Đường đúng: chủ dự án mua gói đăng ký → dùng JSON API chính thức (api.ctext.org
   — hiện môi trường cloud còn chặn host này) hoặc người duyệt tra tay trên trình duyệt.
+- **Duyệt từng trang kiến thức** (EEAT-1): chuyên gia đọc trang trên web → `python scripts/tham_dinh.py danh-dau <url>`
+  (sổ `app/kb/data/tham_dinh.json`). Trang hiện "đã thẩm định · ngày", schema `reviewedBy`. Không bao giờ ghi tên
+  chuyên gia là **tác giả** của nội dung AI soạn — chỉ chủ biên / thẩm định (`docs/EEAT-VA-CHUYEN-GIA.md`).
 - Duyệt xong một file → đổi `trang_thai` thành `da_duyet`, ghi tên người duyệt vào `source`, giữ
   `can_doi_chieu` = false. Duyệt một phần → tách mục đã duyệt ra khoá riêng hoặc ghi chú trong PR.

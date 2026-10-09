@@ -34,6 +34,8 @@ export function ldToChuc() {
     } : {}),
     ...(vh.diaChi ? { address: vh.diaChi } : {}),
     ...(vh.mangXaHoi.length ? { sameAs: vh.mangXaHoi.map((m) => m.url) } : {}),
+    // EEAT-1: người sáng lập / chủ biên (Person đầy đủ ở /tac-gia/duc-luan).
+    founder: { "@type": "Person", "@id": `${siteUrl()}/tac-gia/duc-luan#nguoi`, name: "Đức Luân", url: urlDayDu("/tac-gia/duc-luan") },
     knowsAbout: ["Thần số học Pythagoras", "Tử vi Đẩu Số", "Bát tự Tứ trụ", "Kinh Dịch", "Phong thuỷ Bát trạch", "Huyền Không phi tinh"],
     areaServed: "VN",
   };

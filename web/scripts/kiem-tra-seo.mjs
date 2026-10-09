@@ -18,9 +18,11 @@ const meta = (html, thuocTinh, ten) => {
   return m ? giaiMa(m[0].match(/content="([^"]*)"/)?.[1] ?? "") : null;
 };
 
+const UA_BOT = "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GPTBot/1.2; +https://openai.com/gptbot)";
 async function lay(url, opt = {}) {
   for (let i = 0; i < 3; i++) {
-    try { return await fetch(url, { redirect: "manual", signal: AbortSignal.timeout(60_000), ...opt }); } catch (e) { if (i === 2) throw e; }
+    // Đọc như bot AI không chạy JS (GPTBot): metadata phải nằm sẵn trong <head> (next.config htmlLimitedBots).
+    try { return await fetch(url, { redirect: "manual", signal: AbortSignal.timeout(60_000), headers: { "user-agent": UA_BOT }, ...opt }); } catch (e) { if (i === 2) throw e; }
   }
 }
 
@@ -40,6 +42,7 @@ for (const url of urls) {
   const duong = url.replace(goc, "") || "/";
   const t = giaiMa(html.match(/<title>([^<]*)<\/title>/)?.[1] ?? "");
   if (!t) ghi(loi, url, "thiếu <title>");
+  else if (!/<title>/.test(html.split("</head>")[0] ?? "")) ghi(loi, url, "<title> không nằm trong <head> (bot không chạy JS đọc sai)");
   else {
     if (t.length > 70) ghi(canh, url, `title dài ${t.length} ký tự (>70): "${t}"`);
     if (t.length < 15) ghi(canh, url, `title ngắn: "${t}"`);

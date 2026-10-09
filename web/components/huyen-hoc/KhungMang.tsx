@@ -18,7 +18,7 @@ export function DauMang({ Icon, ten, mo_ta, children }: { Icon: LucideIcon; ten:
       <h1 className="mt-4 text-4xl sm:text-5xl">{ten}</h1>
       <p className="mt-3 max-w-2xl text-fg-muted">{mo_ta}</p>
       <p className="mt-3 inline-flex rounded-full border border-line px-3 py-1 text-xs text-fg-faint">
-        Diễn giải là bản nháp đang được chuyên gia duyệt dần · tham khảo văn hoá
+        Diễn giải biên soạn có AI hỗ trợ, đang chờ chuyên gia thẩm định · tham khảo văn hoá
       </p>
       {children}
     </header>

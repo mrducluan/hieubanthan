@@ -42,7 +42,7 @@ export default async function Trang() {
           Mỗi thuật ngữ trong lá số và lời luận giải đều có lời giải nghĩa bằng ngôn ngữ đời thường. Trong câu trả lời, chữ
           gạch chân chấm là thuật ngữ — bấm vào để xem nhanh.
         </p>
-        <p className="text-xs text-fg-faint">Bản nháp đang được chuyên gia duyệt dần · {d?.nguon}</p>
+        <p className="text-xs text-fg-faint">Biên soạn có AI hỗ trợ, đang chờ chuyên gia thẩm định · {d?.nguon}</p>
       </header>
       {muc.length === 0 ? (
         <p className="mt-8 text-fg-muted">Từ điển đang tải, vui lòng quay lại sau ít phút.</p>

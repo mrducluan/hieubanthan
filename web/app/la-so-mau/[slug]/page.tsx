@@ -57,7 +57,7 @@ export default async function Page({ params: thamSo }: Props) {
         <h1 className="mt-1 text-3xl leading-tight sm:text-5xl">{m.tieu_de}</h1>
         <p className="mt-3 max-w-3xl text-lg text-fg-muted">{m.mo_ta}</p>
         <p className="mt-2 text-xs text-fg-faint">
-          Nhân vật hư cấu, dùng để minh hoạ. Lời đọc ghép từ kho tri thức (bản nháp đang được chuyên gia duyệt), độ sáng sao theo Nam phái.
+          Nhân vật hư cấu, dùng để minh hoạ. Lời đọc ghép từ kho tri thức (biên soạn có AI hỗ trợ, đang chờ chuyên gia thẩm định), độ sáng sao theo Nam phái.
         </p>
       </header>
 
