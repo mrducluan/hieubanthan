@@ -10,6 +10,7 @@ Trang chưa thẩm định giữ `bien_soan = "ai_ho_tro"` và trang_thai "nhap_
 from __future__ import annotations
 
 import json
+import sys
 
 import pytest
 from fastapi.testclient import TestClient
@@ -171,3 +172,31 @@ def test_hang_doi_theo_gsc(so_dang_ky, tmp_path):
     # Bài đã duyệt (so-7) và trang ngoài kho (lien-he) bị bỏ; nhiều hiển thị mà ít nhấp đứng đầu.
     assert [x["slug"] for x in hd] == ["que-47-khon", "sao-tu-vi"]
     assert hd[0]["hien_thi"] == 1200 and hd[0]["nhap"] == 2 and hd[0]["vi_tri"] == 9.1
+
+
+# --- DX-1: chủ biên duyệt xuất bản toàn kho (không phải thẩm định từng bài) ---
+def test_duyet_xuat_ban_moi_trang_nhung_khong_doi_trang_thai():
+    so = td._doc_so()
+    assert so["duyet_xuat_ban"]["nguoi"] in so["chuyen_gia"]
+    for t in trang.danh_sach()[:50]:
+        p = trang.lay(t["loai"], t["slug"])
+        assert p["duyet_xuat_ban"] == {"nguoi": "duc-luan", "ngay": so["duyet_xuat_ban"]["ngay"]}
+    p = trang.lay("que", "que-1-can")
+    assert p["tham_dinh"] is None and p["trang_thai"] != "da_duyet"   # duyệt xuất bản ≠ thẩm định
+
+
+def test_ap_duyet_tu_phong_duyet(so_dang_ky, tmp_path, monkeypatch, capsys):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ap_duyet", td._FILE.parents[3] / "scripts" / "ap_duyet.py")
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    monkeypatch.setattr(td, "ghi", lambda so: None)
+    (tmp_path / "a.json").write_text(json.dumps({"k": "que/que-47-khon", "kq": "dat", "luc": "2026-10-12T03:00:00Z",
+                                                 "goc_nhin": GOC_NHIN}, ensure_ascii=False), "utf-8")
+    (tmp_path / "b.json").write_text(json.dumps({"k": "sao/sao-tu-vi", "kq": "can_sua", "ghi_chu": "sửa câu 2",
+                                                 "luc": "2026-10-12T03:00:00Z"}, ensure_ascii=False), "utf-8")
+    monkeypatch.setattr(sys, "argv", ["ap_duyet.py", str(tmp_path)])
+    m.main()
+    assert so_dang_ky["trang"]["que/que-47-khon"]["ngay"] == "2026-10-12"
+    assert so_dang_ky["trang"]["que/que-47-khon"]["goc_nhin"] == GOC_NHIN
+    assert "sao/sao-tu-vi" not in so_dang_ky["trang"]
+    assert "CẦN SỬA  sao/sao-tu-vi: sửa câu 2" in capsys.readouterr().out

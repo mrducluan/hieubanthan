@@ -225,9 +225,11 @@ Vì sao và cách làm: `docs/EEAT-VA-CHUYEN-GIA.md`. Tóm tắt: anh đứng t�
   **Chỉ ghi điều có thật** — em không tự thêm.
 - [ ] **M2. Ảnh chân dung** (tuỳ chọn; hiện dùng chữ "ĐL"). Ảnh anh gửi được phép đăng công khai.
 - [ ] **M3. Link mạng xã hội / kênh của anh** (Facebook, YouTube, TikTok…) → schema `sameAs`, giúp Google nhận ra anh.
-- [ ] **M4. Thẩm định 110 bài trụ cột** (14 sao, 12 cung, 64 quẻ, 10 nhật chủ, 10 thập thần) — đọc bài trên web, nhắn
-  em "duyệt <link>" (kèm chỗ cần sửa). Gợi ý 10 bài/ngày. Danh sách theo thứ tự: em chạy
-  `python scripts/tham_dinh.py hang-doi` gửi anh.
+- [ ] **M4. Duyệt kho tri thức theo cụm tại Phòng duyệt** — https://claude.ai/artifact/5ok13DRcbdxDGF7iMQ1TP4 (trang riêng,
+  chỉ anh mở và ghi được; dùng tốt trên điện thoại). 496 bài chia 14 cụm: chọn cụm → mở bài → bấm **Đạt** (đúng với hiểu
+  biết và trường phái của anh) hoặc **Cần sửa** + ghi chú; ô Góc nhìn chuyên gia tuỳ chọn. Bài Đạt → web ghi "Biên soạn &
+  thẩm định: Đức Luân"; bài Cần sửa → em sửa, anh duyệt lại. Xong mỗi buổi nhắn em "cập nhật duyệt". Gợi ý thứ tự: 14
+  chính tinh → 12 cung → 10 nhật chủ → 10 thập thần → 64 quẻ → các cụm dài.
 - [ ] **M6. Góc nhìn chuyên gia** (GN-1): khi duyệt bài, gửi kèm 2–4 câu kinh nghiệm thật của anh theo mẫu
   `duyệt <link>` + `góc nhìn: …`. Em chỉ sửa chính tả, không thêm ý. Viết như đang nói với khách: một hiểu lầm hay gặp,
   một điều sách ít nói, hoặc câu anh hay trả lời. Không phán, không bệnh tật/tiền bạc cụ thể, không vật phẩm/giải hạn,
