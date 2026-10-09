@@ -25,5 +25,11 @@ const nextConfig = {
   htmlLimitedBots: /bot|crawl|spider|slurp|preview|facebookexternalhit|facebookcatalog|embedly|whatsapp|zalo|google-inspectiontool|google-extended|googleother|mediapartners-google|adsbot-google|storebot-google|anthropic|claude|perplexity|cohere|bytespider|meta-externalagent|ia_archiver|vkshare|yeti/i,
   // Ảnh thẻ chia sẻ (/og) đọc font OFL từ assets/fonts — đưa vào gói deploy. (Next 15: instrumentation.ts bật sẵn.)
   outputFileTracingIncludes: { "/og": ["./assets/fonts/**"] },
+  // Blog: ảnh bìa bài NotFair đi qua tối ưu ảnh của Next (/_next/image).
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "notfair.co", pathname: "/api/seo/**" },
+    ],
+  },
 };
 export default nextConfig;
