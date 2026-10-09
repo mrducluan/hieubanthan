@@ -7,7 +7,7 @@ import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { GhiGioiThieu } from "@/components/khung/GhiGioiThieu";
 import { GiamSat } from "@/components/khung/GiamSat";
-import { GtmNoScript, GtmScript } from "@/components/khung/GoogleTagManager";
+import { GtmNoScript } from "@/components/khung/GoogleTagManager";
 import { DoLuongGoogle } from "@/components/khung/DoLuongGoogle";
 import { HoiDongYCookie } from "@/components/khung/HoiDongYCookie";
 import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE } from "@/lib/seo";
@@ -70,9 +70,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
-      <head>
-        <GtmScript />
-      </head>
       <body>
         <GtmNoScript />
         <JsonLd data={goiLd(ldToChuc(), ldWebsite(), ldUngDung())} />

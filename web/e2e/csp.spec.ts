@@ -1,7 +1,7 @@
 // CSP-2 — Content-Security-Policy đầy đủ: script chỉ chạy khi mang nonce của lượt tải trang (hoặc do script có nonce
 // nạp — 'strict-dynamic'). Script lạ chèn vào trang (XSS) hay từ tên miền lạ đều bị chặn; dữ liệu chỉ gửi được tới
 // các máy chủ trong connect-src. Kiểm: header có nonce mới mỗi lượt, script của Next mang nonce, các trang chính chạy
-// không có vi phạm CSP nào, GTM (sau Đồng ý) vẫn chạy, và một script chèn không nonce thì bị chặn thật.
+// không có vi phạm CSP nào, GTM (nạp mọi trang) vẫn chạy, và một script chèn không nonce thì bị chặn thật.
 import { test, expect, type Page } from "@playwright/test";
 
 function ghiViPham(page: Page): string[] {
@@ -38,16 +38,21 @@ for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong
   });
 }
 
-test("Đồng ý cookie → đoạn khởi động GTM (inline, có nonce) chạy được, không vi phạm CSP", async ({ page }) => {
+test("GTM nạp ngay khi mở trang (không chờ đồng ý): đoạn khởi động có nonce + gtm.js chạy được, không vi phạm CSP", async ({ page }) => {
   const vp = ghiViPham(page);
   await page.route(/googletagmanager\.com/, (r) => r.fulfill({ status: 200, contentType: "text/javascript", body: "window.__gtm_da_tai=1;" }));
   await page.goto("/");
   await page.evaluate(() => localStorage.removeItem("hbt.dong-y-cookie.v1"));
   await page.reload();
-  await page.getByTestId("hoi-dong-y-cookie").getByRole("button", { name: "Đồng ý" }).click();
-  await expect.poll(() => page.evaluate(() => Array.isArray((window as unknown as { dataLayer?: unknown[] }).dataLayer))).toBe(true);
   await expect.poll(() => page.evaluate(() => (window as unknown as { __gtm_da_tai?: number }).__gtm_da_tai)).toBe(1);
   expect(vp).toEqual([]);
+});
+
+test("CSP mở cho hệ Google mà thẻ GTM hay gọi (Analytics, Ads, DoubleClick, Tag Assistant)", async ({ request }) => {
+  const csp = (await request.get("/")).headers()["content-security-policy"] ?? "";
+  for (const mien of ["https://*.google-analytics.com", "https://*.googletagmanager.com", "https://*.doubleclick.net",
+    "https://*.googleadservices.com", "https://tagassistant.google.com"]) expect(csp).toContain(mien);
+  expect(csp).toMatch(/frame-src [^;]*tagassistant\.google\.com/);
 });
 
 test("script chèn không có nonce (giả lập XSS) bị trình duyệt chặn", async ({ page }) => {
