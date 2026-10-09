@@ -31,7 +31,8 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
     "default-src 'self'",
     `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https: 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}`,
     `style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://fonts.googleapis.com`,
-    `img-src 'self' data: blob: ${[...google, ...them].join(" ")}`,
+    // notfair.co: ảnh nằm trong thân bài blog NotFair (ảnh bìa đi qua /_next/image = 'self').
+    `img-src 'self' data: blob: https://notfair.co ${[...google, ...them].join(" ")}`,
     "font-src 'self' data: https://fonts.gstatic.com",
     `connect-src ${ketNoi.join(" ")}`,
     `frame-src 'self' https://www.googletagmanager.com https://tagassistant.google.com https://*.doubleclick.net ${them.join(" ")}`.trim(),
