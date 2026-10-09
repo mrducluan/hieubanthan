@@ -1,0 +1,23 @@
+// Tên dễ đọc của từng file kho tri thức (engine/app/kb/data) cho trang quản trị. File mới chưa có tên → hiện tên file.
+export const TEN_TEP_KB: Record<string, string> = {
+  "thanso_meanings.json": "Thần số · Ý nghĩa 12 con số",
+  "thanso_depth.json": "Thần số · Đỉnh cao, thử thách, năm cá nhân",
+  "thanso_linh_vuc.json": "Thần số · Nghĩa theo lĩnh vực",
+  "thanso_chan_dung.json": "Thần số · Chân dung 4 mặt",
+  "thanso_cap_so.json": "Thần số · Cặp số hợp đôi",
+  "thanso_quan_he.json": "Thần số · Hợp đôi theo quan hệ",
+  "thanso_bieu_do.json": "Thần số · Biểu đồ ngày sinh, mũi tên",
+  "thanso_chi_so_phu.json": "Thần số · Chỉ số phụ, nợ nghiệp",
+  "thanso_giai_thich.json": "Thần số · Giải thích cách tính",
+  "thanso_xu_ly.json": "Thần số · Mẫu trả lời cố định",
+  "tuvi_kb.json": "Tử vi · Sao, cung, tứ hoá",
+  "tuvi_cach_cuc.json": "Tử vi · Cách cục",
+  "kinhdich_kb.json": "Kinh Dịch · 64 quẻ",
+  "kinhdich_hao.json": "Kinh Dịch · 384 hào",
+  "battu_kb.json": "Bát tự · Thập thần, nhật chủ, nạp âm",
+  "battu_dieu_hau.json": "Bát tự · Điều hậu",
+  "phongthuy_kb.json": "Phong thuỷ · Bát trạch, bố trí",
+  "phongthuy_huyen_khong.json": "Phong thuỷ · Huyền Không",
+  "tu_dien.json": "Từ điển thuật ngữ",
+  "tham_dinh.json": "Sổ thẩm định chuyên gia",
+};

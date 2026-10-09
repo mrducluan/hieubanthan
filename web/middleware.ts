@@ -3,7 +3,7 @@
 // SEO: bản chạy thật chỉ có MỘT địa chỉ. Ai vào tên miền *.vercel.app của production → chuyển hẳn (308) sang
 // hieuban.com, giữ nguyên đường dẫn — tránh Google index hai bản trùng nhau. Preview deploy (VERCEL_ENV=preview)
 // và chạy máy không bị ảnh hưởng.
-// QT-0: riêng /quan-tri — làm mới phiên Supabase (Server Component không ghi được cookie) + header noindex.
+// QT-0: riêng /quan-tri (+ /api/quan-tri) — làm mới phiên Supabase (Server Component không ghi được cookie) + header noindex.
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { SITE_CHINH } from "@/lib/seo";
@@ -37,7 +37,8 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     const dich = new URL(req.nextUrl.pathname + req.nextUrl.search, process.env.NEXT_PUBLIC_SITE_URL || SITE_CHINH);
     return NextResponse.redirect(dich, 308);
   }
-  const quanTri = req.nextUrl.pathname === "/quan-tri" || req.nextUrl.pathname.startsWith("/quan-tri/");
+  const { pathname } = req.nextUrl;
+  const quanTri = pathname === "/quan-tri" || pathname.startsWith("/quan-tri/") || pathname.startsWith("/api/quan-tri/");
   const cookieMoi = quanTri ? await lamMoiPhien(req) : [];
   const nonce = taoNonce();
   const csp = taoCsp(nonce);

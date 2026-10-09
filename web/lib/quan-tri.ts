@@ -11,6 +11,9 @@ export const TEN_VAI_TRO: Record<VaiTro, string> = {
   chu_so_huu: "Chủ sở hữu", bien_tap: "Biên tập", tham_dinh: "Chuyên gia thẩm định", ho_tro: "Hỗ trợ", xem: "Chỉ xem",
 };
 
+/** Được đề xuất sửa kho tri thức (mở PR). Hỗ trợ / Chỉ xem: chỉ đọc. Merge vẫn là việc của chủ dự án trên GitHub. */
+export const SUA_KB: readonly VaiTro[] = ["chu_so_huu", "bien_tap", "tham_dinh"];
+
 export type PhienQuanTri =
   | { trang: "chua_bat" }                                   // chưa đặt khoá Supabase trên web
   | { trang: "chua_dang_nhap" }
@@ -31,7 +34,9 @@ export async function phienQuanTri(): Promise<PhienQuanTri> {
   if (!vai) return { trang: "khong_quyen", email };
   const vaiTro = vai as VaiTro;
 
-  const { data: aal } = await sb.auth.mfa.getAuthenticatorAssuranceLevel();
+  // Phiên hỏng (cookie sửa tay, token méo) → thư viện ném lỗi: coi như chưa đăng nhập, không để thành lỗi 500.
+  const aal = await sb.auth.mfa.getAuthenticatorAssuranceLevel().then((r) => r.data, () => null);
+  if (!aal) return { trang: "chua_dang_nhap" };
   // Đã đăng ký TOTP chưa: lấy từ user của getUser() (bản mới từ máy chủ) — nextLevel đọc user trong cookie, có thể cũ.
   const factorId = (user.factors ?? []).find((f) => f.factor_type === "totp" && f.status === "verified")?.id ?? null;
   if (aal?.currentLevel !== "aal2") return { trang: "can_mfa", user, vaiTro, factorId };
