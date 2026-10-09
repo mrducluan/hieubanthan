@@ -5,7 +5,7 @@ current_phase: 1
 current_hypothesis: >-
   H1 Free Reading thu hút người dùng + H2 Metaphysics ID tạo gắn bó
   (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
-current_build: "SEO-H 168 trang sao × cung Tử vi + PERF-1 tốc độ trang (sau MH-1/SEO-G minh hoạ + 82 trang thần số, NX15/CSP-2, HH-CT, SEC-1)"
+current_build: "GTM nạp mọi trang (đo lường bật mặc định) + SEO-I 48 trang tứ hoá × cung (sau SEO-H, PERF-1, HH-CT3, A11Y-1)"
 current_gate: "Gate 0 bỏ qua theo quyết định chủ dự án (2026-10-08) — mở công khai, đo Gate 1 trên người dùng thật"
 current_metrics: []   # PostHog đã bật (mục G); GA4 qua GTM khi chủ dự án gắn thẻ GA4 trong GTM
 current_risks:
