@@ -23,7 +23,7 @@ test("bài chuyên gia tự viết: Tác giả Đức Luân, schema author là P
 test("bài chưa thẩm định: Ban biên tập + Chủ biên, không ghi tác giả hay đã thẩm định, không chữ AI", async ({ page, request }) => {
   await page.goto("/kien-thuc/tu-vi/sao-tu-vi");
   const dong = page.locator("[data-dong-tac-gia]");
-  await expect(dong).toContainText("Ban biên tập Hiểu Bản Thân · Chủ biên: Đức Luân");
+  await expect(dong).toContainText("Ban biên tập Hiểu Bản Thân biên soạn · Chủ biên Đức Luân duyệt xuất bản");
   await expect(dong).not.toContainText("AI");
   await expect(dong).not.toContainText("Tác giả");
   await expect(dong).not.toContainText("đã thẩm định");
@@ -34,7 +34,8 @@ test("bài chưa thẩm định: Ban biên tập + Chủ biên, không ghi tác 
   expect(ld.find((n) => n["@type"] === "WebPage")).not.toHaveProperty("reviewedBy");
   // Bản .md cho bot AI ghi cùng trạng thái
   const md = await (await request.get("/kien-thuc/tu-vi/sao-tu-vi.md")).text();
-  expect(md).toContain("Ban biên tập Hiểu Bản Thân · Chủ biên: [Đức Luân]");
+  expect(md).toContain("Ban biên tập Hiểu Bản Thân biên soạn · Chủ biên [Đức Luân]");
+  expect(md).toContain("duyệt xuất bản");
   expect(md).not.toMatch(/\bAI\b|thẩm định:/);
 });
 

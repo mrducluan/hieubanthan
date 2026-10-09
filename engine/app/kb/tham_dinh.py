@@ -71,6 +71,9 @@ def gan(t: dict) -> dict:
     tg = _TAC_GIA_THEO_LOAI.get(t["loai"])
     td = _doc_so()["trang"].get(f"{t['loai']}/{t['slug']}")
     t["chu_bien"] = CHU_BIEN
+    dx = _doc_so().get("duyet_xuat_ban")
+    # DX-1: chủ biên duyệt xuất bản toàn kho (quyết định biên tập) — khác thẩm định từng bài.
+    t["duyet_xuat_ban"] = {"nguoi": dx["nguoi"], "ngay": dx["ngay"]} if dx else None
     t["tac_gia"] = tg
     t["tham_dinh"] = {"nguoi": td["nguoi"], "ngay": td["ngay"]} if td else None
     t["goc_nhin"] = ({"noi_dung": td["goc_nhin"], "nguoi": td["nguoi"], "ngay": td["ngay"]}

@@ -2,12 +2,14 @@
 // Chỉ hiển thị theo dữ liệu engine trả (tac_gia, tham_dinh) — không tự suy ra trạng thái.
 // BM-1 (chủ dự án 2026-10-09): bỏ chữ "AI" khỏi bài viết. Bài chưa thẩm định ghi "Ban biên tập" + chủ biên — KHÔNG ghi
 // chuyên gia là tác giả bài họ chưa đọc; bài chuyên gia đã đọc, sửa, duyệt mới ghi "Biên soạn & thẩm định".
+// DX-1: "Chủ biên … duyệt xuất bản" = quyết định biên tập cho toàn kho (như tổng biên tập duyệt đăng), không phải
+// thẩm định từng bài → không gắn reviewedBy, không đổi nhãn "Đã thẩm định".
 import Link from "next/link";
 import { BookOpen, ShieldCheck } from "lucide-react";
 import { CHUYEN_GIA, duongChuyenGia, ngayVN } from "@/lib/chuyen-gia";
 import type { TrangKienThuc } from "@/lib/kien-thuc";
 
-type Props = Pick<TrangKienThuc, "chu_bien" | "tac_gia" | "tham_dinh">;
+type Props = Pick<TrangKienThuc, "chu_bien" | "tac_gia" | "tham_dinh" | "duyet_xuat_ban">;
 
 function TenChuyenGia({ slug }: { slug: string }) {
   const cg = CHUYEN_GIA[slug];
@@ -15,7 +17,7 @@ function TenChuyenGia({ slug }: { slug: string }) {
   return <Link href={duongChuyenGia(slug)} rel="author" className="font-medium text-fg underline decoration-gold/40 underline-offset-2 hover:decoration-gold">{cg.ten}</Link>;
 }
 
-export function DongTacGia({ chu_bien, tac_gia, tham_dinh }: Props) {
+export function DongTacGia({ chu_bien, tac_gia, tham_dinh, duyet_xuat_ban }: Props) {
   const nguoi = tac_gia ?? tham_dinh?.nguoi ?? chu_bien;
   const cg = CHUYEN_GIA[nguoi];
   return (
@@ -29,6 +31,8 @@ export function DongTacGia({ chu_bien, tac_gia, tham_dinh }: Props) {
           <p>Tác giả: <TenChuyenGia slug={tac_gia} /></p>
         ) : tham_dinh ? (
           <p>Biên soạn &amp; thẩm định: <TenChuyenGia slug={tham_dinh.nguoi} /></p>
+        ) : duyet_xuat_ban ? (
+          <p>Ban biên tập Hiểu Bản Thân biên soạn · Chủ biên <TenChuyenGia slug={duyet_xuat_ban.nguoi} /> duyệt xuất bản</p>
         ) : (
           <p>Ban biên tập Hiểu Bản Thân · Chủ biên: <TenChuyenGia slug={chu_bien} /></p>
         )}
