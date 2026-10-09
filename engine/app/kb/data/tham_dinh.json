@@ -3,5 +3,10 @@
  "chuyen_gia": [
   "duc-luan"
  ],
+ "duyet_xuat_ban": {
+  "nguoi": "duc-luan",
+  "ngay": "2026-10-09",
+  "_mo_ta": "Chủ biên duyệt cho xuất bản toàn bộ kho tri thức (quyết định biên tập, KHÔNG phải thẩm định từng bài). Thẩm định từng bài ghi ở 'trang'."
+ },
  "trang": {}
 }

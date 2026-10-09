@@ -10,6 +10,7 @@ function dongTacGia(t: TrangKienThuc): string {
   const ten = (s: string) => (CHUYEN_GIA[s] ? `[${CHUYEN_GIA[s].ten}](${urlDayDu(duongChuyenGia(s))})` : s);
   if (t.tac_gia) return `Tác giả: ${ten(t.tac_gia)}`;
   if (t.tham_dinh) return `Biên soạn & thẩm định: ${ten(t.tham_dinh.nguoi)} (${t.tham_dinh.ngay}) · Chủ biên: ${ten(t.chu_bien)}`;
+  if (t.duyet_xuat_ban) return `Ban biên tập ${TEN_SITE} biên soạn · Chủ biên ${ten(t.duyet_xuat_ban.nguoi)} duyệt xuất bản`;
   return `Ban biên tập ${TEN_SITE} · Chủ biên: ${ten(t.chu_bien)}`;
 }
 
