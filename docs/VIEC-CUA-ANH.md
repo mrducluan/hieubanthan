@@ -223,6 +223,14 @@ Vì sao và cách làm: `docs/EEAT-VA-CHUYEN-GIA.md`. Tóm tắt: anh đứng t�
 - [ ] **M4. Thẩm định 110 bài trụ cột** (14 sao, 12 cung, 64 quẻ, 10 nhật chủ, 10 thập thần) — đọc bài trên web, nhắn
   em "duyệt <link>" (kèm chỗ cần sửa). Gợi ý 10 bài/ngày. Danh sách theo thứ tự: em chạy
   `python scripts/tham_dinh.py hang-doi` gửi anh.
+- [ ] **M6. Góc nhìn chuyên gia** (GN-1): khi duyệt bài, gửi kèm 2–4 câu kinh nghiệm thật của anh theo mẫu
+  `duyệt <link>` + `góc nhìn: …`. Em chỉ sửa chính tả, không thêm ý. Viết như đang nói với khách: một hiểu lầm hay gặp,
+  một điều sách ít nói, hoặc câu anh hay trả lời. Không phán, không bệnh tật/tiền bạc cụ thể, không vật phẩm/giải hạn,
+  không số điện thoại hay link. Ưu tiên 30 bài nhiều người xem nhất.
+- [ ] **M7. Số liệu Search Console cho hàng đợi thẩm định**: chọn một trong hai —
+  (a) **kết nối hieuban.com** vào công cụ Search Console mà em đang dùng (hiện công cụ đó chỉ thấy trang Nha khoa Tâm
+  Đức, em không động vào) → em tự kéo hằng tuần; hoặc (b) mỗi tuần vào Search Console → Hiệu suất → tab **Trang** →
+  Xuất → CSV, gửi em file `Trang.csv`. Em xếp hàng đợi: bài Google đã cho hiển thị nhiều mà ít người bấm lên trước.
 - [ ] **M5. Chuyên gia mảng (GĐ1)**: sau 2 tháng, chọn 3–5 người cộng tác (mỗi mảng một người) — xem lộ trình mục 4
   của tài liệu trên.
 

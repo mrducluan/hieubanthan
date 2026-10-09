@@ -5,8 +5,11 @@ Chỉ đánh dấu trang chuyên gia ĐÃ đọc và duyệt (sửa xong nội d
 "Đức Luân thẩm định · ngày", schema reviewedBy, bỏ nhãn "chờ thẩm định".
 
   python scripts/tham_dinh.py danh-dau <url hoặc slug> [...]  [--nguoi duc-luan] [--ngay 2026-10-10] [--ghi-chu "…"]
+                                    [--goc-nhin "2–4 câu của chuyên gia"]   # GN-1: hiện thành khung "Góc nhìn chuyên gia"
+  python scripts/tham_dinh.py kiem-goc-nhin "đoạn văn"        # thử luật nội dung trước khi gắn
   python scripts/tham_dinh.py bo <url hoặc slug> [...]
   python scripts/tham_dinh.py hang-doi [--n 30]               # trang chưa duyệt theo thứ tự ưu tiên
+  python scripts/tham_dinh.py hang-doi --gsc Trang.csv        # theo số liệu Search Console (Hiệu suất → Trang → Xuất CSV)
   python scripts/tham_dinh.py thong-ke
 
 Ví dụ: python scripts/tham_dinh.py danh-dau https://hieuban.com/kien-thuc/tu-vi/sao-tu-vi que-1-can
@@ -40,11 +43,15 @@ def main() -> None:
     d.add_argument("trang", nargs="+")
     d.add_argument("--nguoi", default=td.CHU_BIEN)
     d.add_argument("--ngay", default=dt.date.today().isoformat())
-    d.add_argument("--ghi-chu", default="")
+    d.add_argument("--ghi-chu", default="", help="ghi chú NỘI BỘ (đã sửa gì) — không hiện trên web")
+    d.add_argument("--goc-nhin", default="", help="lời chuyên gia, hiện công khai; chỉ sửa chính tả, không thêm ý")
+    k = sub.add_parser("kiem-goc-nhin")
+    k.add_argument("van")
     b = sub.add_parser("bo")
     b.add_argument("trang", nargs="+")
     h = sub.add_parser("hang-doi")
     h.add_argument("--n", type=int, default=30)
+    h.add_argument("--gsc", help="file CSV tab Trang xuất từ Search Console")
     sub.add_parser("thong-ke")
     a = ap.parse_args()
 
@@ -53,14 +60,21 @@ def main() -> None:
         for c in a.trang:
             loai, slug = _tim(c)
             if a.lenh == "danh-dau":
-                td.danh_dau(so, loai, slug, a.nguoi, a.ngay, a.ghi_chu)
+                td.danh_dau(so, loai, slug, a.nguoi, a.ngay, a.ghi_chu, a.goc_nhin)
             else:
                 td.bo(so, loai, slug)
             print(f"{a.lenh}: {loai}/{slug}")
         td.ghi(so)
+    elif a.lenh == "kiem-goc-nhin":
+        loi = td.kiem_goc_nhin(" ".join(a.van.split()))
+        print("OK" if not loi else "\n".join(f"- {x}" for x in loi))
     elif a.lenh == "hang-doi":
-        for t in td.hang_doi()[: a.n]:
-            print(f"{t['loai']:<12} {t['slug']:<40} {t['tieu_de']}")
+        if a.gsc:
+            for t in td.hang_doi_gsc(a.gsc)[: a.n]:
+                print(f"{t['hien_thi']:>7} hiển thị {t['nhap']:>5} nhấp  vị trí {t['vi_tri']:>5.1f}  {t['loai']:<12} {t['slug']}")
+        else:
+            for t in td.hang_doi()[: a.n]:
+                print(f"{t['loai']:<12} {t['slug']:<40} {t['tieu_de']}")
     else:
         ds = trang.danh_sach()
         dem = collections.Counter((t["loai"], t["trang_thai"]) for t in ds)

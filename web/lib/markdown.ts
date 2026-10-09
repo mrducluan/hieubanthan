@@ -25,7 +25,9 @@ export function mdTrang(t: TrangKienThuc, cap = 1): string {
   const h = (n: number) => "#".repeat(cap + n);
   const d = [`${h(0)} ${t.tieu_de}`, "", `> ${t.mo_ta}`, "",
     `URL: ${urlDayDu(duongTrang(t.loai, t.slug))}`, dongTacGia(t), `Cập nhật: ${t.cap_nhat}`, "",
-    `${h(1)} Trả lời nhanh`, "", t.tra_loi_nhanh, ""];
+    `${h(1)} Trả lời nhanh`, "", t.tra_loi_nhanh, "",
+    ...(t.goc_nhin ? [`${h(1)} Góc nhìn chuyên gia`, "", `> ${t.goc_nhin.noi_dung}`, "",
+      `— ${CHUYEN_GIA[t.goc_nhin.nguoi]?.ten ?? t.goc_nhin.nguoi}, ${t.goc_nhin.ngay}`, ""] : [])];
   for (const m of t.muc) {
     d.push(`${h(1)} ${m.tieu_de}`, "");
     if (m.doan) d.push(m.doan, "");

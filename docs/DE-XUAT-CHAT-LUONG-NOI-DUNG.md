@@ -25,7 +25,7 @@ Lưu ý: nội dung bài kiến thức **bắt buộc công khai** để lên Go
 
 ## C. Ý tưởng nâng chất lượng nội dung (xếp theo hiệu quả / công sức)
 
-1. **"Ghi chú của chuyên gia" trên mỗi bài anh thẩm định** — 2–4 câu từ kinh nghiệm thật ("Trong các lá số tôi từng
+1. **"Góc nhìn chuyên gia" trên mỗi bài anh thẩm định** (GN-1 — đã làm khung, chờ lời anh) — 2–4 câu từ kinh nghiệm thật ("Trong các lá số tôi từng
    xem, người có … thường …", hiểu lầm hay gặp). Đây là chữ **E – Experience** mà máy không viết thay được, và là thứ
    khiến bài khác hẳn trang đối thủ. Kỹ thuật: thêm trường `ghi_chu` vào sổ thẩm định, hiện thành khung riêng có chữ ký.
 2. **Thẩm định theo dữ liệu Search Console** thay vì theo thứ tự cố định: bài nào đang có nhiều lượt hiển thị mà ít
