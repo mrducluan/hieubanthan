@@ -3,7 +3,7 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-10-08.
+> Cập nhật lần cuối: 2026-10-09.
 
 ## Anh đã chốt (2026-10-08)
 
@@ -25,13 +25,16 @@
    Báo cáo đầy đủ + việc còn mở: `docs/BAO-MAT.md`.
 4c. [ ] **Khi web vượt ~100.000 người dùng/tháng** (xem GA4): Vercel → Environment Variables → thêm
    `NEXT_PUBLIC_HOI_DONG_Y_COOKIE=1` → Redeploy — hộp hỏi đồng ý cookie hiện lại khi mở trang (quyết định 2026-10-09).
-5. [ ] **Google Analytics 4 trong GTM** → mục H2 (Search Console anh đã cài 2026-10-08; GTM đã gắn vào web)
+5. [x] **Search Console + GA4 trong GTM** (mục H) — anh báo xong 2026-10-09
+5b. [ ] **Render engine** (mục D2): kiểm vùng Singapore + gói Starter, bấm *Save, rebuild, and deploy* sau khi sửa biến
+   (anh đang đặt `NHAT_KY_HOI`, `SUPABASE_*`, `LLM_LUOT_*` — 2026-10-09)
 6. [ ] **Pháp lý còn lại** → mục E (tên đơn vị + email đã có trong code; còn MST, địa chỉ, luật sư)
 7. [ ] Các việc còn lại → mục D (em đã ghi rõ việc nào em làm, việc nào cần anh)
+8. [ ] **Lộ trình đến Gate 2** → mục L (đọc số funnel, chạy 55 câu, bật AI, pháp lý trước khi thu tiền)
 
 ---
 
-## G. Ba biến bắt buộc trước khi mở công khai (Vercel → Settings → Environment Variables → Production → Redeploy)
+## G. Ba biến bắt buộc trước khi mở công khai — ✅ xong 2026-10-08 (Vercel → Settings → Environment Variables → Production → Redeploy)
 
 | Biến | Giá trị | Thiếu thì sao |
 |---|---|---|
@@ -52,7 +55,7 @@ cd web && node scripts/kiem-tra-trien-khai.mjs https://hieuban.com
 
 Phải ra 14/14 ✓. Mở `hieuban.com` trên điện thoại (cả trong Zalo/Facebook) — vào thẳng, không hỏi mật khẩu.
 
-## H. Google Search Console + Google Tag Manager + Google Analytics
+## H. Google Search Console + Google Tag Manager + Google Analytics — ✅ anh báo xong 2026-10-09
 
 **Vì sao em không tự làm được:** công cụ Google đang kết nối với phiên làm việc này là tài khoản của một doanh nghiệp
 khác (Nha Khoa Tâm Đức), không có `hieuban.com`. Em **không đụng** vào tài khoản đó. Phần code em đã làm xong
@@ -74,11 +77,13 @@ Còn kiểm 3 việc nhỏ dưới mục "Sau khi xác minh" (sitemap, yêu cầ
 2. Vercel → Environment Variables → `GOOGLE_SITE_VERIFICATION` = chuỗi đó → **Redeploy** → quay lại Google bấm Verify.
 
 **Sau khi xác minh:**
-- [ ] Mục **Sitemaps** → nhập `sitemap.xml` → Submit (đã làm thì bỏ qua — gửi lại sau mỗi đợt trang mới; sitemap hiện có 625 URL).
-- [ ] Mục **URL Inspection** → dán `https://hieuban.com/` → **Request indexing** (làm thêm cho `/kien-thuc`, `/tu-dien`).
+- [x] Mục **Sitemaps** → nhập `sitemap.xml` → Submit (gửi 2026-10-09; lúc gửi Search Console báo *Couldn't fetch* —
+  xoá dòng gửi nhầm `http://hieuban.com/`, kiểm lại sau 1–2 ngày phải thành **Success**; nếu vẫn lỗi: URL Inspection →
+  dán `https://hieuban.com/sitemap.xml` → **Test live URL** → gửi em ảnh). Gửi lại sau mỗi đợt trang mới (sitemap hiện có 625 URL).
+- [x] Mục **URL Inspection** → dán `https://hieuban.com/` → **Request indexing** (làm thêm cho `/kien-thuc`, `/tu-dien`).
 - [x] **IndexNow** (Bing, Yandex, Seznam, Naver): tự báo toàn bộ URL sau mỗi lần merge vào `main` (workflow `indexnow`,
   khoá công khai ở `/indexnow.txt`) — không cần làm gì.
-- [ ] Bing Webmaster Tools (bing.com/webmasters) → **Import from Google Search Console** — Bing cũng cấp dữ liệu cho
+- [x] Bing Webmaster Tools (bing.com/webmasters) → **Import from Google Search Console** — Bing cũng cấp dữ liệu cho
   Copilot và ChatGPT tìm kiếm. (Muốn xác minh Bing bằng thẻ meta: env `BING_SITE_VERIFICATION`.)
 - [ ] Nếu muốn em tự gửi sitemap, đọc báo cáo từ khoá hằng tuần: kết nối tài khoản Google có `hieuban.com` vào
   claude.ai (Settings → Connectors) rồi nhắn em.
@@ -102,20 +107,20 @@ Chính sách quyền riêng tư đã ghi đúng cách chạy này.
 - [x] **GTM đã gắn vào web**: container `GTM-KNZL39CS` (anh gửi 2026-10-08) là mặc định trong code — không cần đặt
   biến trên Vercel. Từ 2026-10-09: nạp ngay khi mở trang (mang nonce CSP nên không bị chặn) + `<noscript>` iframe.
   Thẻ bên thứ ba khác (vd Meta Pixel) cài qua GTM → thêm tên miền vào env `CSP_THEM_MIEN` trên Vercel.
-1. [ ] **GA4:** analytics.google.com → Admin → **Create property** "Hiểu Bản Thân", múi giờ Việt Nam, tiền VND →
+1. [x] **GA4:** analytics.google.com → Admin → **Create property** "Hiểu Bản Thân", múi giờ Việt Nam, tiền VND →
    **Web stream** `https://hieuban.com` → chép **Measurement ID** dạng `G-XXXXXXX`.
    - Admin → Data retention → **14 months** (khớp chính sách quyền riêng tư).
    - Admin → Data collection → **tắt** Google signals (không cần, giảm dữ liệu cá nhân).
-2. [ ] **Trong GTM `GTM-KNZL39CS`:** Tags → New → **Google Tag** → Tag ID = `G-XXXXXXX` → Trigger **Initialization – All
+2. [x] **Trong GTM `GTM-KNZL39CS`:** Tags → New → **Google Tag** → Tag ID = `G-XXXXXXX` → Trigger **Initialization – All
    Pages** → Save → **Submit → Publish**. (Không có bước này thì GTM nạp nhưng chưa gửi gì sang GA4.)
-3. [ ] **Kiểm tra:** mở `hieuban.com` ở cửa sổ ẩn danh → GA4 → Reports → **Realtime**
+3. [x] **Kiểm tra:** mở `hieuban.com` ở cửa sổ ẩn danh → GA4 → Reports → **Realtime**
    thấy 1 người đang xem. Hoặc dùng nút **Preview** trong GTM (Tag Assistant).
 4. Đổi container khác: đặt env `NEXT_PUBLIC_GTM_ID` trên Vercel. Tắt hẳn: đặt `NEXT_PUBLIC_GTM_ID=off`.
-5. [ ] Search Console → Settings → **Associations** → liên kết với GA4 property vừa tạo (xem từ khoá ngay trong GA4).
+5. [x] Search Console → Settings → **Associations** → liên kết với GA4 property vừa tạo (xem từ khoá ngay trong GA4).
 
 ---
 
-## A. Gắn tên miền hieuban.com (GoDaddy → Vercel) — A1, A2 đã xong
+## A. Gắn tên miền hieuban.com (GoDaddy → Vercel) — ✅ xong
 
 Web chạy trên Vercel. GoDaddy chỉ giữ tên miền, nên anh chỉ cần trỏ DNS của GoDaddy về Vercel. **Không** chuyển
 tên miền khỏi GoDaddy, **không** mua hosting của GoDaddy.
@@ -146,7 +151,7 @@ tên miền khỏi GoDaddy, **không** mua hosting của GoDaddy.
 6. Quay lại Vercel → Domains: sau 5 phút đến vài giờ, dòng `hieuban.com` chuyển sang **Valid Configuration**.
    Vercel tự cấp chứng chỉ SSL (https), anh không cần mua SSL.
 
-## B. "Bước 2" — migration và biến môi trường — B1, B2 đã xong
+## B. "Bước 2" — migration và biến môi trường — ✅ B1, B2 xong
 
 **Giải thích ngắn:**
 
@@ -346,3 +351,39 @@ Ví Sao, link mời có thưởng chỉ chạy khi đã bật tài khoản.
   3. Chọn model thị giác trên OpenRouter để em chạy thử PT-V2 (dùng chung khoá OpenRouter ở D1).
 
 Vẫn **chặn cho tới khi qua cổng đánh giá**: thanh toán (mua Sao), cộng đồng, marketplace, app di động.
+
+## L. Lộ trình đến Gate 2 (lập 2026-10-09)
+
+Gate theo `docs/THIET-KE-UI.md` §2 và §9 (giả định G1–G4), hạ tầng theo `docs/KIEN-TRUC-VAN-HANH.md` §4.
+**Ngưỡng có dấu (đề xuất) là em đề xuất — anh chốt.** Đọc số khi đủ **≥ 300 người bắt đầu bài đọc**
+(`reading_started`), ít hơn thì số dao động quá mạnh.
+
+| Cổng | Câu hỏi | Đo bằng (PostHog) | Ngưỡng |
+|---|---|---|---|
+| **Gate 1** — bài đọc có giá trị | Người ta có đọc hết và thấy hữu ích? | `reading_completed / reading_started` (G1) · tỉ lệ "có giúp" trong `feedback_submitted` (G4) · `profile_created / reading_completed` | ≥ 50% đọc hết (đề xuất) · ≥ 60% "có giúp" (đề xuất) · ≥ 20% lưu hồ sơ (đề xuất) |
+| **Gate 2** — tự lan truyền | Người đọc có mang người khác đến? | `share_created / reading_completed` (G2) · K = `referral_signup / share_created` (G3) | ≥ 8% chia sẻ · K > 0,15 |
+
+Qua Gate 2 → mới mở **giai đoạn 2 hạ tầng + thu tiền** (Vercel Pro, Supabase Pro, cổng AI, thanh toán Sao).
+
+**Bước 1 — tuần này (anh):**
+- [ ] Render: kiểm dịch vụ engine đang ở **Singapore + Starter** (mục D2); `/health` có `"khoa_engine": true` (mục 4b).
+- [ ] UptimeRobot 2 monitor (mục D2) — 5 phút.
+- [ ] Hộp thư `contact@hieuban.com` (mục E) — địa chỉ này đang in trên footer và trang pháp lý.
+- [ ] Sitemap chuyển **Success** trong Search Console (mục H1).
+
+**Bước 2 — tuần 1–2 (anh 3 phút + em làm):** chạy bộ 55 câu với AI thật (mục D1) → em sửa lỗi → bật
+`OPENROUTER_API_KEY` trên Render cho mảng đạt ngưỡng. Hỏi đáp có AI là phần giữ chân chính sau bài đọc.
+
+**Bước 3 — tuần 1–4 (lấy người đến, anh):** đăng bài/clip giới thiệu thần số (Facebook, TikTok, nhóm Zalo) dẫn về
+trang chủ — mỗi tuần vài bài; Search Console + IndexNow lo phần tìm kiếm. Mục tiêu: đủ 300 `reading_started`.
+
+**Bước 4 — khi đủ số (em):** anh gửi em ảnh funnel PostHog (Insights → Funnel: `landing_viewed` → `reading_started` →
+`reading_completed` → `profile_created` → `share_created`) + số góp ý. Em đọc, chỉ ra bước rơi nhiều nhất, đề xuất sửa
+UI/nội dung, làm PR; đo lại 1–2 tuần. Lặp tới khi qua Gate 1.
+
+**Bước 5 — Gate 2:** đo chia sẻ + K-factor (link mời hợp đôi đã chạy, không cần tài khoản). Nếu dưới ngưỡng: em đề
+xuất sửa thẻ chia sẻ / lời mời. Thưởng Sao khi mời bạn **cần bật tài khoản** (mục F) — chỉ bật khi anh muốn thử đòn bẩy này.
+
+**Trước khi thu tiền (song song, anh + luật sư):** mục E — danh nghĩa vận hành, MST, thông báo Bộ Công Thương,
+luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoài. Thiếu phần này thì **không** bật bán Sao dù đã qua Gate 2.
+
