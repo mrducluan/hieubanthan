@@ -1,9 +1,11 @@
-# CI nền (WS-1): engine pytest + web typecheck/build trên mọi push/PR.
+# CI nền (WS-1): engine pytest + web typecheck/build trên PR + push vào main.
+# (Trước chạy cả push nhánh lẫn PR → mỗi lần đẩy chạy 2 lần, tốn đôi phút GitHub Actions của repo private.)
 # Tên job `engine` / `web` giữ cố định — WS-5 sẽ thêm job `e2e` phụ thuộc vào chúng.
 name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
 
 permissions:
