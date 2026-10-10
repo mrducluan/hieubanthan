@@ -63,13 +63,21 @@ test("link mời: A tạo → B mở, nhập ngày sinh → thấy kết quả; 
   await b.getByLabel("Năm", { exact: true }).fill("1990");
   await b.getByRole("button", { name: "Xem hai người" }).click();
   await expect(b.getByTestId("ket-qua-hop-doi").getByTestId("cap-duong_doi")).toContainText("Điểm hoà.");
-  await expect(b.getByRole("button", { name: "Tạo link mời của tôi" })).toBeVisible();
+  // HN-2: B gửi lại link cho A → A mở là thấy cùng kết quả hai người (vòng khép kín).
+  await expect(b.getByTestId("gui-lai-loi-moi")).toContainText("Gửi kết quả lại cho Luân");
+  await b.getByRole("button", { name: "Tạo link gửi Luân" }).click();
+  const linkB = await b.getByTestId("gui-lai-loi-moi").getByLabel("Link chia sẻ").inputValue();
+  expect(linkB).toMatch(/\/hop-doi\/[\w-]+\.[\w-]+$/);
   // Gán nguồn giới thiệu (UI-6): share_clicked → referral_signup → compatibility_created cùng ma_moi.
   const sk = await b.evaluate(() => (window as unknown as { __hbt_su_kien: { su_kien: string; ma_moi?: string }[] }).__hbt_su_kien);
   const maMoi = link.split(".").pop()?.slice(0, 10);
   for (const k of ["share_clicked", "referral_signup", "compatibility_created"]) {
     expect(sk.find((e) => e.su_kien === k)?.ma_moi).toBe(maMoi);
   }
+
+  await page.goto(linkB);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("mời bạn xem hai người");
+  await expect(page.getByTestId("ket-qua-hop-doi").getByTestId("cap-duong_doi")).toContainText("Điểm hoà.");
 
   // Mã bị sửa → không hợp lệ.
   await b.goto(link.replace(/.$/, (c) => (c === "A" ? "B" : "A")));
