@@ -12,7 +12,9 @@ export async function generateMetadata({ params }: { params: Promise<{ tep: stri
   return { title: `Sửa ${(await params).tep}` };
 }
 
-export default async function Page({ params }: { params: Promise<{ tep: string }> }) {
+export default async function Page({ params, searchParams }: {
+  params: Promise<{ tep: string }>; searchParams: Promise<{ tim?: string }>;
+}) {
   const ten = `${(await params).tep}.json`;
   if (!TEN_TEP.test(ten)) notFound();
   const p = await congQuanTri();
@@ -27,6 +29,6 @@ export default async function Page({ params }: { params: Promise<{ tep: string }
   return (
     <BienTap ten={ten} nhan={TEN_TEP_KB[ten] ?? ten} text={tep.text} sha={tep.sha}
       duocSua={SUA_KB.includes(p.vaiTro) && !CHI_XEM.has(ten)}
-      urlGithub={`${urlRepo()}/blob/${NHANH_GOC}/${THU_MUC_KB}/${ten}`} />
+      urlGithub={`${urlRepo()}/blob/${NHANH_GOC}/${THU_MUC_KB}/${ten}`} timBanDau={((await searchParams).tim ?? "").slice(0, 100)} />
   );
 }

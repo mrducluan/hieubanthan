@@ -56,7 +56,8 @@ export async function POST(req: Request) {
     });
     return NextResponse.json({ pr });
   } catch (e) {
-    if (e instanceof LoiGithub) return NextResponse.json({ error: e.message }, { status: e.status >= 500 ? 502 : e.status });
+    // Token GitHub sai/thiếu quyền (401/403 từ GitHub) ≠ phiên quản trị hết hạn → 502, kèm lời báo về token.
+    if (e instanceof LoiGithub) return NextResponse.json({ error: e.message }, { status: e.status >= 500 || e.status === 401 || e.status === 403 ? 502 : e.status });
     return NextResponse.json({ error: "Chưa mở được PR, thử lại sau." }, { status: 500 });
   }
 }

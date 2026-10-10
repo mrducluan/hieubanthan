@@ -2,12 +2,15 @@
 // thong_ke_quan_tri, migration 0010) — trang này không đọc được hồ sơ, ngày giờ sinh của ai. Env chỉ báo đã đặt
 // hay chưa, không bao giờ hiện giá trị khoá.
 import type { Metadata } from "next";
-import { Activity, BookOpen, ExternalLink, KeyRound, ScrollText, ShieldCheck, Users } from "lucide-react";
+import { Activity, BookOpen, ExternalLink, KeyRound, ScrollText, ShieldCheck, TrendingUp, Users } from "lucide-react";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri, TEN_VAI_TRO } from "@/lib/quan-tri";
 import { mucLuc } from "@/lib/kien-thuc";
+import { layCauHinh } from "@/lib/cau-hinh";
+import { TangTruongTuan, type TuanTT } from "@/components/quan-tri/TangTruongTuan";
 
 export const metadata: Metadata = { title: "Bảng điều khiển" };
 
@@ -30,9 +33,7 @@ async function sucKhoeEngine(): Promise<SucKhoe> {
 const ENV_BAT_BUOC = ["ENGINE_URL", "ENGINE_API_KEY", "NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_ANON_KEY",
   "SUPABASE_SERVICE_ROLE_KEY", "LOI_MOI_SECRET"];
 const ENV_DO_LUONG = ["NEXT_PUBLIC_POSTHOG_KEY", "SENTRY_DSN", "NEXT_PUBLIC_SENTRY_DSN", "GOOGLE_SITE_VERIFICATION"];
-const CONG_TAC: [string, string][] = [
-  ["LUAN_GIAI_THU_SAO", "Thu Sao luận giải toàn bộ"], ["NEXT_PUBLIC_HOI_DONG_Y_COOKIE", "Hỏi đồng ý cookie khi mở trang"],
-];
+const CONG_TAC: [string, string][] = [["NEXT_PUBLIC_HOI_DONG_Y_COOKIE", "Hỏi đồng ý cookie khi mở trang"]];
 const daDat = (k: string) => Boolean((process.env[k] ?? "").trim());
 
 const BANG_NGOAI: [string, string][] = [
@@ -80,14 +81,17 @@ export default async function Page() {
   const p = await congQuanTri();
   if (p.trang !== "ok") return <BaoCong trang={p.trang} email={"email" in p ? p.email : null} />;
 
-  const [sk, ds, tk, nk] = await Promise.all([
+  const [sk, ds, tk, nk, tt, thuSao] = await Promise.all([
     sucKhoeEngine(),
     mucLuc(),
     p.sb.rpc("thong_ke_quan_tri"),
     p.vaiTro === "chu_so_huu"
       ? p.sb.from("nhat_ky_quan_tri").select("id,hanh_dong,doi_tuong,tao_luc").order("tao_luc", { ascending: false }).limit(10)
       : Promise.resolve(null),
+    p.sb.rpc("thong_ke_tang_truong", { p_tuan: 12 }),
+    layCauHinh<boolean>("luan_giai.thu_sao"),
   ]);
+  const tuan = (tt.error ? null : tt.data) as TuanTT[] | null;
   const thongKe = (tk.error ? null : tk.data) as Record<string, number> | null;
   const nhatKy = (nk && !nk.error ? nk.data : null) as DongNhatKy[] | null;
 
@@ -110,10 +114,18 @@ export default async function Page() {
         </div>
       </div>
       <p className="mt-3 max-w-2xl text-fg-muted">
-        Chỉ đọc (QT-0). Sửa kho tri thức qua PR, cài đặt site, phân quyền và trợ lý AI đến ở các giai đoạn QT-1 → QT-4.
+        Đối chiếu mục tiêu: thu hút → quay lại → mời bạn → nạp Sao (docs/MUC-TIEU-TANG-TRUONG.md). Số liệu người dùng chỉ là số tổng.
       </p>
 
       <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <Muc icon={TrendingUp} tieuDe="Tăng trưởng 12 tuần" className="md:col-span-2 lg:col-span-3">
+          {tuan ? <TangTruongTuan ds={tuan} />
+            : <p className="text-sm text-cinnabar">Chưa đọc được (chạy migration 0011 trên Supabase).</p>}
+          <p className="mt-3 text-xs text-fg-faint">
+            Search Console, GA4 và phễu sự kiện: <Link href="/quan-tri/tang-truong" className="text-gold hover:underline">Tăng trưởng</Link>.
+          </p>
+        </Muc>
+
         <Muc icon={Activity} tieuDe="Engine tính toán">
           <Dong ten="Trạng thái"><Badge tone={sk.ok ? "jade" : "cinnabar"}>{sk.ok ? "Đang chạy" : "Không trả lời"}</Badge></Dong>
           <Dong ten="Phiên bản">{sk.engine_version ?? "—"}</Dong>
@@ -131,6 +143,9 @@ export default async function Page() {
         <Muc icon={KeyRound} tieuDe="Cấu hình web">
           {ENV_BAT_BUOC.map((k) => <Dong key={k} ten={<TenEnv k={k} />}><CoKhong co={daDat(k)} /></Dong>)}
           {ENV_DO_LUONG.map((k) => <Dong key={k} ten={<TenEnv k={k} />}><CoKhong co={daDat(k)} /></Dong>)}
+          <Dong ten={<Link href="/quan-tri/cai-dat" className="hover:text-gold">Thu Sao luận giải toàn bộ</Link>}>
+            <Badge tone={thuSao ? "gold" : "muted"}>{thuSao ? "Bật" : "Tắt"}</Badge>
+          </Dong>
           {CONG_TAC.map(([k, ten]) => (
             <Dong key={k} ten={ten}><Badge tone={process.env[k] === "1" ? "gold" : "muted"}>{process.env[k] === "1" ? "Bật" : "Tắt"}</Badge></Dong>
           ))}

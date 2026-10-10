@@ -3,13 +3,15 @@
 // Chỉ sửa chuỗi đã có (lib/kb-sua.ts) — thêm/xoá mục là việc của kỹ sư. Máy chủ kiểm lại toàn bộ trước khi mở PR.
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ChevronRight, ExternalLink, GitPullRequest, Search, Undo2 } from "lucide-react";
+import { ChevronRight, ExternalLink, GitPullRequest, Search, Sparkles, Undo2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { khoaDuong, type DuongDan, type MucSua } from "@/lib/kb-sua";
 import { cn } from "@/lib/utils";
+import { goiQT } from "@/lib/goi-quan-tri";
+import { DanhSachCanhBao, TroLyAI, type CanhBao } from "./TroLyAI";
 
 type Json = string | number | boolean | null | Json[] | { [k: string]: Json };
 const MOI_TRANG = 40;
@@ -38,39 +40,71 @@ function moiChuoi(o: Json, d: DuongDan = [], ra: { duong: DuongDan; giaTri: stri
 
 const boDau = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
 
-function OChuoi({ duong, goc, sua, duocSua, onDoi }: {
+function OChuoi({ duong, goc, sua, duocSua, onDoi, tep, nguCanh }: {
   duong: DuongDan; goc: string; sua?: MucSua; duocSua: boolean; onDoi: (moi: string) => void;
+  tep: string; nguCanh: () => Record<string, string>;
 }) {
   const giaTri = sua?.moi ?? goc;
+  const [ai, setAi] = useState(false);
   return (
-    <div className="relative">
-      <textarea value={giaTri} readOnly={!duocSua} onChange={(e) => onDoi(e.target.value)} aria-label={khoaDuong(duong)}
-        rows={Math.min(12, Math.max(1, Math.ceil(giaTri.length / 90) + (giaTri.match(/\n/g)?.length ?? 0)))}
-        className={cn("w-full rounded-xl border bg-bg/60 px-3 py-2 text-sm leading-relaxed text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/30",
-          sua ? "border-gold/70" : "border-line", !duocSua && "opacity-80")} />
-      {sua && (
-        <button type="button" onClick={() => onDoi(goc)} className="absolute right-2 top-2 rounded-md bg-surface-2 p-1 text-fg-muted hover:text-fg" title="Hoàn tác">
-          <Undo2 className="size-3.5" aria-hidden /><span className="sr-only">Hoàn tác</span>
-        </button>
-      )}
+    <div>
+      <div className="relative">
+        <textarea value={giaTri} readOnly={!duocSua} onChange={(e) => onDoi(e.target.value)} aria-label={khoaDuong(duong)}
+          rows={Math.min(12, Math.max(1, Math.ceil(giaTri.length / 90) + (giaTri.match(/\n/g)?.length ?? 0)))}
+          className={cn("w-full rounded-xl border bg-bg/60 py-2 pl-3 pr-16 text-sm leading-relaxed text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/30",
+            sua ? "border-gold/70" : "border-line", !duocSua && "opacity-80")} />
+        <div className="absolute right-2 top-2 flex gap-1">
+          {duocSua && (
+            <button type="button" onClick={() => setAi(!ai)} aria-expanded={ai}
+              className={cn("rounded-md p-1 hover:text-fg", ai ? "bg-moon/20 text-moon" : "bg-surface-2 text-fg-muted")} title="Trợ lý AI">
+              <Sparkles className="size-3.5" aria-hidden /><span className="sr-only">Trợ lý AI</span>
+            </button>
+          )}
+          {sua && (
+            <button type="button" onClick={() => onDoi(goc)} className="rounded-md bg-surface-2 p-1 text-fg-muted hover:text-fg" title="Hoàn tác">
+              <Undo2 className="size-3.5" aria-hidden /><span className="sr-only">Hoàn tác</span>
+            </button>
+          )}
+        </div>
+      </div>
+      {ai && <TroLyAI tep={tep} duong={duong} hienTai={giaTri} nguCanh={nguCanh} onDung={(m) => { onDoi(m); setAi(false); }} />}
     </div>
   );
 }
 
-export function BienTap({ ten, nhan: nhanTep, text, sha, duocSua, urlGithub }: {
-  ten: string; nhan: string; text: string; sha: string; duocSua: boolean; urlGithub: string;
+export function BienTap({ ten, nhan: nhanTep, text, sha, duocSua, urlGithub, timBanDau = "" }: {
+  ten: string; nhan: string; text: string; sha: string; duocSua: boolean; urlGithub: string; timBanDau?: string;
 }) {
   const goc = useMemo(() => JSON.parse(text) as Json, [text]);
   const tatCa = useMemo(() => moiChuoi(goc), [goc]);
   const [duong, setDuong] = useState<DuongDan>([]);
   const [trang, setTrang] = useState(0);
-  const [tim, setTim] = useState("");
+  const [tim, setTim] = useState(timBanDau);
   const [sua, setSua] = useState<Map<string, MucSua>>(new Map());
   const [ghiChu, setGhiChu] = useState("");
   const [moXem, setMoXem] = useState(false);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [pr, setPr] = useState<{ so: number; url: string } | null>(null);
+  const [canhBao, setCanhBao] = useState<Map<string, CanhBao[]>>(new Map());
+
+  // Ngữ cảnh cho AI: các chuỗi anh em cùng nút cha (ngắn gọn), để AI hiểu đoạn đang sửa nói về cái gì.
+  const nguCanhCua = (d: DuongDan) => () => {
+    const cha = layTai(goc, d.slice(0, -1)), ra: Record<string, string> = {};
+    if (laNhanh(cha) && !Array.isArray(cha)) {
+      for (const [k, v] of Object.entries(cha)) if (typeof v === "string" && k !== d.at(-1)) ra[k] = v.slice(0, 400);
+    }
+    return ra;
+  };
+
+  // QT-3: mở bảng thay đổi → kiểm định bằng luật cố định (không AI) mọi ô đang sửa.
+  useEffect(() => {
+    if (!moXem || sua.size === 0) return;
+    const ds = [...sua.values()];
+    goiQT<{ ket_qua: CanhBao[][] }>("/api/quan-tri/ai", { viec: "kiem", muc: ds.map((s) => ({ moi: s.moi, cu: s.cu })) })
+      .then((r) => setCanhBao(new Map(ds.map((s, i) => [khoaDuong(s.duong), r.ket_qua[i] ?? []]))))
+      .catch(() => setCanhBao(new Map()));
+  }, [moXem, sua]);
 
   useEffect(() => {
     if (sua.size === 0) return;
@@ -149,7 +183,8 @@ export function BienTap({ ten, nhan: nhanTep, text, sha, duocSua, urlGithub }: {
                 <button type="button" onClick={() => den(c.duong.slice(0, -1))} className="mb-1 text-left font-mono text-xs text-gold hover:underline">
                   {c.duong.map(tenKhoa).join(" › ")}
                 </button>
-                <OChuoi duong={c.duong} goc={c.giaTri} sua={sua.get(khoaDuong(c.duong))} duocSua={duocSua} onDoi={(m) => doi(c.duong, c.giaTri, m)} />
+                <OChuoi duong={c.duong} goc={c.giaTri} sua={sua.get(khoaDuong(c.duong))} duocSua={duocSua} onDoi={(m) => doi(c.duong, c.giaTri, m)}
+                  tep={ten} nguCanh={nguCanhCua(c.duong)} />
               </li>
             ))}
           </ul>
@@ -173,7 +208,8 @@ export function BienTap({ ten, nhan: nhanTep, text, sha, duocSua, urlGithub }: {
                   {typeof v === "string" ? (
                     <>
                       <p className="mb-1 font-mono text-xs text-fg-muted">{tenKhoa(k)}</p>
-                      <OChuoi duong={d} goc={v} sua={sua.get(khoaDuong(d))} duocSua={duocSua} onDoi={(m) => doi(d, v, m)} />
+                      <OChuoi duong={d} goc={v} sua={sua.get(khoaDuong(d))} duocSua={duocSua} onDoi={(m) => doi(d, v, m)}
+                        tep={ten} nguCanh={nguCanhCua(d)} />
                     </>
                   ) : laNhanh(v) ? (
                     <button type="button" onClick={() => den(d)}
@@ -218,6 +254,7 @@ export function BienTap({ ten, nhan: nhanTep, text, sha, duocSua, urlGithub }: {
                     </div>
                     <p className="mt-2 whitespace-pre-wrap text-cinnabar/90 line-through decoration-cinnabar/40">{s.cu}</p>
                     <p className="mt-1 whitespace-pre-wrap text-jade">{s.moi}</p>
+                    <div className="mt-2"><DanhSachCanhBao ds={canhBao.get(khoaDuong(s.duong)) ?? []} /></div>
                   </div>
                 ))}
                 <textarea value={ghiChu} onChange={(e) => setGhiChu(e.target.value)} maxLength={500} rows={2} placeholder="Ghi chú cho PR (vì sao sửa, nguồn đối chiếu…)"

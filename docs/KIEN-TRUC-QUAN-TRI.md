@@ -40,9 +40,9 @@ Thêm vào đó:
 |---|---|---|
 | **QT-0** | Migration 0010 (`vai_tro_quan_tri`, `nhat_ky_quan_tri`, `cau_hinh`). Cổng 3 lớp. Bảng điều khiển chỉ đọc: engine, tài khoản & Sao (số tổng), cấu hình env, kho tri thức (số trang, đã duyệt, thẩm định), nhật ký, liên kết bảng điều khiển ngoài | ✅ Chạy thật 2026-10-09 |
 | **QT-1** | Xưởng kho tri thức `/quan-tri/tri-thuc`: đọc 20 file từ GitHub (main); duyệt cây, tìm chữ không dấu, sửa **giá trị chuỗi đã có** (không thêm/xoá mục, không đổi kiểu); xem khác biệt; **Xuất bản = nhánh `quan-tri/…` + commit + PR** (mô tả PR có bảng trước/sau, chỉ ghi vai trò + mã rút gọn, không email). Sửa **đúng vị trí chuỗi trong văn bản gốc** (`lib/kb-sua.ts`) → định dạng file giữ nguyên từng byte, PR chỉ có dòng thật sự đổi. Chặn: khác Origin, chưa aal2, vai trò Hỗ trợ/Chỉ xem, file `tham_dinh.json` (sửa bằng `scripts/tham_dinh.py`), file trên main đã đổi (sha), giá trị cũ không khớp. Ghi `nhat_ky_quan_tri` (`kb.de_xuat`) | ✅ Code xong, cần token `QUAN_TRI_GITHUB_TOKEN` (VIEC-CUA-ANH Q5). Bỏ bảng nháp/phiên bản trên Supabase: PR **là** bản nháp, git **là** lịch sử phiên bản → không cần migration |
-| **QT-2** | Cài đặt site (công tắc chuyển từ env vào `cau_hinh`); SEO và chuyển hướng; người dùng và cấp vai trò; Sao (chỉ bút toán có lý do, không sửa số dư); nhật ký hỏi đáp | Cần duyệt danh sách công tắc |
-| **QT-3** | Trợ lý AI: soạn nháp mục thiếu theo skill `thanso-kb`/`huyenhoc-kb`; kiểm định (bịa, lệch cổ thư, vùng cấm, SEO); tìm lỗ hổng từ nhật ký hỏi đáp + Search Console; máy chủ MCP để Claude thao tác CMS. **Mọi thao tác ghi của AI = bản nháp hoặc PR, người duyệt** | Cần hạn mức chi phí AI riêng |
-| **QT-4** | Tìm kiếm ngữ nghĩa (pgvector); kéo số liệu Search Console/GA4 qua API | Cần bật extension pgvector |
+| **QT-2** | Migration **0011** (chỉ thêm hàm). **Cài đặt site** `/quan-tri/cai-dat`: danh mục khoá cố định trong `lib/cau-hinh.ts` (dải thông báo + link, 3 mức thưởng Sao, trần lượt mời/30 ngày, công tắc + giá Luận giải toàn bộ), web đọc qua `cau_hinh_cong_khai()` cache 60 giây; mức thưởng Sao đọc thẳng trong SQL (`sao_muc`, kẹp 0–100) → **chạy chiến dịch mời không cần sửa code**. **Người dùng & Sao** `/quan-tri/nguoi-dung`: cấp/gỡ vai trò (chủ sở hữu, không tự đổi/gỡ mình), tra ví Sao theo email (chủ sở hữu + hỗ trợ, mỗi lần tra ghi nhật ký), bút toán điều chỉnh có lý do + khoá chống ghi trùng. Tổng quan thêm **chuỗi 12 tuần** + hệ số mời K | ✅ Code xong, cần chạy 0011 (VIEC-CUA-ANH Q6). SEO chuyển hướng: để sau (đi qua git như KB khi cần) |
+| **QT-3** | **Hỏi đáp** `/quan-tri/hoi-dap`: nhật ký hỏi đáp ẩn danh → mảng nào chưa phủ, mục KB engine báo thiếu, câu chưa trả lời tốt / bị 👎. **Trợ lý AI** trong trình sửa: nút ✨ mỗi ô → 5 kiểu (viết lại, viết sâu, rút gọn, soát lỗi, nói đời thường) → nháp + cảnh báo → người bấm "Dùng bản nháp". **Kiểm định** luật cố định (giọng phán, vùng cấm, liên hệ, số lạ, độ dài) tự chạy khi mở bảng thay đổi trước Xuất bản. Engine `/v1/quan-tri/soan-nhap`, `/kiem-dinh` (`app/quan_tri_ai.py`), hạn mức AI quản trị riêng `LLM_QT_LUOT_*` | ✅ Code xong. Máy chủ MCP cho Claude thao tác CMS: để sau |
+| **QT-4** | **Tăng trưởng** `/quan-tri/tang-truong`: phễu sự kiện PostHog + tỷ lệ quay lại tuần, Search Console (tổng, truy vấn, trang, **cơ hội**: vị trí 4–20 nhiều hiển thị ít nhấp), GA4 (kênh, sự kiện) — khoá chỉ đọc qua env, JWT ký bằng `node:crypto` (không thêm thư viện), cache 1 giờ. **Tìm toàn kho** (không dấu) ở Kho tri thức → mở thẳng trình sửa đúng chỗ | ✅ Code xong, cần khoá (Q7, Q8). Tìm theo nghĩa (pgvector): để sau — cần bật extension + chi phí nhúng |
 
 ## Luật cho lớp AI trong quản trị
 
@@ -58,5 +58,11 @@ Thêm vào đó:
 - `web/middleware.ts`: làm mới phiên và gắn noindex cho `/quan-tri`
 - `web/app/quan-tri/`: bảng điều khiển và `xac-thuc/` (đăng ký hoặc nhập mã TOTP)
 - `web/e2e/quan-tri.spec.ts`
+- QT-2: `supabase/migrations/0011_quan_tri_2.sql` (+ `.down.sql`) · `web/lib/cau-hinh.ts` · `web/lib/quan-tri-api.ts`
+  · `web/app/quan-tri/{cai-dat,nguoi-dung}/` · `web/app/api/quan-tri/{cai-dat,vai-tro,sao}/` · `web/components/khung/ThongBaoSite.tsx`
+  · `web/components/quan-tri/TangTruongTuan.tsx` · `web/app/api/sao/muc/route.ts`
+- QT-3: `engine/app/quan_tri_ai.py` + `quan_tri_api.py` (+ `tests/test_quan_tri_ai.py`) · `web/app/api/quan-tri/ai/`
+  · `web/app/quan-tri/hoi-dap/` · `web/app/quan-tri/tri-thuc/[tep]/TroLyAI.tsx`
+- QT-4: `web/lib/so-lieu-ngoai.ts` · `web/lib/kb-tim.ts` · `web/app/quan-tri/tang-truong/` · `web/e2e/so-lieu-ngoai.spec.ts`
 - QT-1: `web/lib/kb-sua.ts` (sửa đúng vị trí, kiểm lại cấu trúc) · `web/lib/github-quan-tri.ts` · `web/app/quan-tri/tri-thuc/`
   · `web/app/api/quan-tri/tri-thuc/route.ts` · `web/e2e/kb-sua.spec.ts` (chạy trên mọi file KB thật)

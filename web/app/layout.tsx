@@ -11,6 +11,7 @@ import { GtmNoScript } from "@/components/khung/GoogleTagManager";
 import { DoLuongGoogle } from "@/components/khung/DoLuongGoogle";
 import { HoiDongYCookie } from "@/components/khung/HoiDongYCookie";
 import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE } from "@/lib/seo";
+import { ThongBaoSite } from "@/components/khung/ThongBaoSite";
 import "./globals.css";
 
 // Display: Newsreader — serif, chữ số đẹp cho con số lớn. Body: Be Vietnam Pro — thiết kế cho tiếng Việt.
@@ -77,6 +78,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">
           Bỏ qua điều hướng
         </a>
+        <ThongBaoSite />
         <ThanhTren />
         <main id="noi-dung" className="container pb-28 pt-6 md:pb-16 md:pt-10">
           {children}

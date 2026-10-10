@@ -306,7 +306,7 @@ Thiết kế: `docs/KIEN-TRUC-QUAN-TRI.md`. Cần **bật tài khoản trước*
   ⚠️ Mất điện thoại = không vào được `/quan-tri`. Khi đó vào Supabase → Authentication → Users → chọn tài khoản →
   xoá factor MFA, rồi đăng ký lại.
 
-- [ ] **Q5. Kết nối GitHub cho "Kho tri thức" (QT-1)** — để sửa nội dung ngay trong `/quan-tri/tri-thuc`:
+- [x] **Q5. Kết nối GitHub cho "Kho tri thức" (QT-1)** (anh báo xong 2026-10-10; còn bước 5 sửa thử một chữ) — để sửa nội dung ngay trong `/quan-tri/tri-thuc`:
   1. GitHub → ảnh đại diện → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens**
      → **Generate new token**.
   2. Token name `hieuban-quan-tri` · Expiration **1 năm** (hết hạn thì tạo lại) · Repository access: **Only select
@@ -321,8 +321,36 @@ Thiết kế: `docs/KIEN-TRUC-QUAN-TRI.md`. Cần **bật tài khoản trước*
   ⚠️ Token này ghi được code của repo — chỉ đặt trên Vercel, không dán vào chat/email. Lộ thì vào GitHub xoá token
   (Revoke) rồi tạo cái mới.
 
-Thêm người quản trị khác (tạm thời bằng SQL, giao diện ở QT-2): người đó đăng nhập một lần, rồi chạy câu trên với
-email của họ và vai trò `bien_tap` / `tham_dinh` / `ho_tro` / `xem`.
+Thêm người quản trị khác: sau Q6, vào `/quan-tri/nguoi-dung` → nhập email (người đó phải đăng nhập hieuban.com một
+lần trước) → chọn vai trò → **Cấp / đổi vai trò**.
+
+### QT-2 → QT-4 (2026-10-10)
+
+- [ ] **Q6. Chạy migration `0011_quan_tri_2.sql`** (bắt buộc cho Cài đặt, Người dùng & Sao, Hỏi đáp, chuỗi tuần ở
+  Tổng quan): Supabase → SQL Editor → New query → dán toàn bộ file → Run → phải báo *Success*. Chỉ thêm hàm, không
+  thêm/xoá bảng, không đụng dữ liệu. Gỡ: chạy `0011_quan_tri_2.down.sql`.
+- [ ] **Q7. Search Console + GA4 trong `/quan-tri/tang-truong`** (tuỳ chọn, 10 phút):
+  1. console.cloud.google.com → chọn/tạo project → **APIs & Services → Library** → bật **Google Search Console API**
+     và **Google Analytics Data API**.
+  2. **IAM & Admin → Service Accounts → Create** (tên `hieuban-doc-so-lieu`, không cần cấp role) → vào tài khoản đó
+     → **Keys → Add key → JSON** → tải file về.
+  3. Search Console → hieuban.com → **Cài đặt → Người dùng và quyền → Thêm người dùng** → dán email của service
+     account (dạng `…@….iam.gserviceaccount.com`) → quyền **Bị hạn chế**.
+  4. GA4 → **Quản trị → Quản lý quyền truy cập thuộc tính → +** → cùng email → vai trò **Người xem**. Ghi lại
+     **Mã thuộc tính** (Quản trị → Chi tiết thuộc tính, là một dãy số).
+  5. Vercel → Environment Variables → Production: `GOOGLE_SERVICE_ACCOUNT_JSON` = **toàn bộ nội dung file JSON**,
+     `GA4_PROPERTY_ID` = dãy số ở bước 4 (nếu thuộc tính Search Console không phải dạng tên miền thì thêm
+     `GSC_SITE_URL`, vd `https://hieuban.com/`) → Save → **Redeploy**.
+  ⚠️ File JSON là khoá bí mật (chỉ đọc số liệu) — chỉ dán vào Vercel, xoá file trên máy sau khi dán.
+- [ ] **Q8. Phễu PostHog trong `/quan-tri/tang-truong`** (tuỳ chọn): PostHog → avatar → **Personal API keys → Create**
+  → scope **Query: Read** (chỉ chọn project hieuban) → copy. Vercel: `POSTHOG_PERSONAL_API_KEY` = khoá,
+  `POSTHOG_PROJECT_ID` = số trong URL dự án (`us.posthog.com/project/12345`) → Redeploy. (Dự án ở EU thì thêm
+  `POSTHOG_API_HOST=https://eu.posthog.com`.)
+- [ ] **Q9. Trợ lý AI trong Kho tri thức** dùng `OPENROUTER_API_KEY` sẵn có trên Render — không cần làm gì. Muốn đổi
+  model riêng cho biên tập hoặc hạn mức: Render → Environment: `OPENROUTER_MODEL_QUAN_TRI`, `LLM_QT_LUOT_NGAY`
+  (mặc định 200 lượt/ngày), `LLM_QT_LUOT_GIO` (mặc định 60).
+- [ ] **Q10. Thử chiến dịch mời đầu tiên** ở `/quan-tri/cai-dat`: dải thông báo + thưởng mời (vd 30/30 trong một
+  tuần), xem hệ số K ở Tổng quan tuần sau. Xem `docs/MUC-TIEU-TANG-TRUONG.md`.
 
 ---
 

@@ -4,12 +4,8 @@
 import { redirect } from "next/navigation";
 import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { supabaseMayChu } from "@/lib/supabase/may-chu";
-
-export type VaiTro = "chu_so_huu" | "bien_tap" | "tham_dinh" | "ho_tro" | "xem";
-
-export const TEN_VAI_TRO: Record<VaiTro, string> = {
-  chu_so_huu: "Chủ sở hữu", bien_tap: "Biên tập", tham_dinh: "Chuyên gia thẩm định", ho_tro: "Hỗ trợ", xem: "Chỉ xem",
-};
+import type { VaiTro } from "@/lib/quan-tri-vai-tro";
+export { TEN_VAI_TRO, type VaiTro } from "@/lib/quan-tri-vai-tro";
 
 /** Được đề xuất sửa kho tri thức (mở PR). Hỗ trợ / Chỉ xem: chỉ đọc. Merge vẫn là việc của chủ dự án trên GitHub. */
 export const SUA_KB: readonly VaiTro[] = ["chu_so_huu", "bien_tap", "tham_dinh"];
