@@ -26,6 +26,11 @@ export function ViSao({ daLuuHoSo }: { daLuuHoSo: boolean }) {
   const [daChep, setDaChep] = useState(false);
   const ma = useMaCuaToi(true);
   const daNhan = useRef(false);
+  // QT-2: mức thưởng chủ sở hữu đang đặt (chiến dịch mời). Lỗi mạng → giữ mặc định.
+  const [muc, setMuc] = useState({ moi_ban: 20, duoc_moi: 20, tran: 20 });
+  useEffect(() => {
+    fetch("/api/sao/muc").then((r) => (r.ok ? r.json() : null)).then((m) => { if (m) setMuc(m); }).catch(() => {});
+  }, []);
 
   const tai = useCallback(async () => {
     try { const [d, l] = await Promise.all([soDu(), lichSu()]); setDu(d); setLs(l); setLoi(null); }
@@ -72,8 +77,9 @@ export function ViSao({ daLuuHoSo }: { daLuuHoSo: boolean }) {
       {bao && <p role="status" className="rounded-xl bg-jade/10 px-4 py-3 text-sm text-jade">{bao}</p>}
 
       <div className="space-y-2">
-        <p className="flex items-center gap-2 text-sm font-medium text-fg"><Gift className="size-4 text-gold" aria-hidden /> Mời bạn — cả hai cùng nhận 20 Sao</p>
-        <p className="text-xs text-fg-faint">Bạn bè mở link, tạo tài khoản và lưu hồ sơ trong 7 ngày là cả hai được cộng. Tối đa 20 lượt thưởng mỗi 30 ngày.</p>
+        <p className="flex items-center gap-2 text-sm font-medium text-fg"><Gift className="size-4 text-gold" aria-hidden /> {muc.moi_ban === muc.duoc_moi
+          ? `Mời bạn — cả hai cùng nhận ${muc.moi_ban} Sao` : `Mời bạn — bạn nhận ${muc.moi_ban} Sao, bạn bè nhận ${muc.duoc_moi} Sao`}</p>
+        <p className="text-xs text-fg-faint">Bạn bè mở link, tạo tài khoản và lưu hồ sơ trong 7 ngày là cả hai được cộng. Tối đa {muc.tran} lượt thưởng mỗi 30 ngày.</p>
         {link ? (
           <div className="flex gap-2">
             <Input readOnly value={link} aria-label="Link mời cá nhân" onFocus={(e) => e.currentTarget.select()} />

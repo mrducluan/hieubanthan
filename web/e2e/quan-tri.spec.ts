@@ -36,3 +36,30 @@ test("QT-1: /quan-tri/tri-thuc và API xuất bản khi chưa bật tài khoản
   expect(r.status()).toBe(401);
   expect(r.headers()["x-robots-tag"]).toBe("noindex, nofollow");
 });
+
+test("QT-2…QT-4: trang mới + API mới khi chưa bật tài khoản — báo cổng, không đọc/ghi được gì", async ({ page, request }) => {
+  for (const [duong, id] of [["/quan-tri/cai-dat", "qt-cai-dat"], ["/quan-tri/nguoi-dung", "qt-nguoi-dung"],
+    ["/quan-tri/hoi-dap", "qt-hoi-dap"], ["/quan-tri/tang-truong", "qt-tang-truong"]] as const) {
+    const res = await page.goto(duong);
+    expect(res?.headers()["x-robots-tag"]).toBe("noindex, nofollow");
+    await expect(page.getByTestId("qt-bao-cong")).toHaveAttribute("data-trang", "chua_bat");
+    await expect(page.getByTestId(id)).toHaveCount(0);
+  }
+  const goi: [string, unknown][] = [
+    ["/api/quan-tri/cai-dat", { khoa: "site.thong_bao", gia_tri: "x" }],
+    ["/api/quan-tri/vai-tro", { viec: "cap", email: "a@b.vn", vai_tro: "chu_so_huu" }],
+    ["/api/quan-tri/sao", { viec: "dieu_chinh", email: "a@b.vn", so: 1000, ly_do: "thử lỗ hổng", khoa: "abcdefgh" }],
+    ["/api/quan-tri/ai", { viec: "kiem", muc: [{ moi: "x" }] }],
+  ];
+  for (const [url, data] of goi) {
+    expect((await request.post(url, { data })).status(), url).toBe(403);
+    expect((await request.post(url, { data, headers: { origin: "http://localhost:3000" } })).status(), url).toBe(401);
+  }
+});
+
+test("QT-2: cài đặt công khai khi chưa có Supabase → mặc định, không có dải thông báo", async ({ page, request }) => {
+  expect(await (await request.get("/api/sao/muc")).json()).toEqual({ moi_ban: 20, duoc_moi: 20, chao_mung: 10, tran: 20 });
+  expect(await (await request.get("/api/luan-giai/phi")).json()).toEqual({ thu: false, gia: 10 });
+  await page.goto("/");
+  await expect(page.getByTestId("thong-bao-site")).toHaveCount(0);
+});

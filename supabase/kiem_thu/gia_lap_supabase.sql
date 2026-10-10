@@ -1,6 +1,7 @@
--- Giả lập phần Supabase mà migration cần: schema auth (users, uid()), vai trò anon/authenticated.
+-- Giả lập phần Supabase mà migration cần: schema auth (users, uid(), jwt()), vai trò anon/authenticated.
 create schema if not exists auth;
-create table if not exists auth.users (id uuid primary key, created_at timestamptz not null default now(), email text);
+create table if not exists auth.users (id uuid primary key, created_at timestamptz not null default now(), email text,
+    last_sign_in_at timestamptz);
 create or replace function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
 do $$ begin
   if not exists (select 1 from pg_roles where rolname='anon') then create role anon nologin; end if;
@@ -8,4 +9,8 @@ do $$ begin
   if not exists (select 1 from pg_roles where rolname='service_role') then create role service_role nologin; end if;
 end $$;
 grant usage on schema public, auth to anon, authenticated;
-grant execute on function auth.uid() to anon, authenticated;
+-- jwt(): claim sub + aal (0010: vai_tro_hieu_luc chỉ trả vai trò khi aal2). Đặt bằng request.jwt.claim.aal.
+create or replace function auth.jwt() returns jsonb language sql stable as $$
+    select jsonb_build_object('sub', current_setting('request.jwt.claim.sub', true),
+                              'aal', coalesce(nullif(current_setting('request.jwt.claim.aal', true), ''), 'aal1')) $$;
+grant execute on function auth.uid(), auth.jwt() to anon, authenticated;

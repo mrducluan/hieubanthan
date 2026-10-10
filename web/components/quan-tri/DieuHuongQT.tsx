@@ -3,13 +3,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-const MUC: [string, string][] = [["/quan-tri", "Tổng quan"], ["/quan-tri/tri-thuc", "Kho tri thức"]];
+const MUC: [string, string][] = [
+  ["/quan-tri", "Tổng quan"], ["/quan-tri/tang-truong", "Tăng trưởng"], ["/quan-tri/tri-thuc", "Kho tri thức"],
+  ["/quan-tri/hoi-dap", "Hỏi đáp"], ["/quan-tri/nguoi-dung", "Người dùng & Sao"], ["/quan-tri/cai-dat", "Cài đặt"],
+];
 
 export function DieuHuongQT() {
   const p = usePathname();
   if (p === "/quan-tri/xac-thuc") return null;
   return (
-    <nav aria-label="Quản trị" className="mb-6 flex gap-1 border-b border-line/60 text-sm">
+    <nav aria-label="Quản trị" className="mb-6 flex gap-1 overflow-x-auto whitespace-nowrap border-b border-line/60 text-sm">
       {MUC.map(([href, ten]) => {
         const dang = href === "/quan-tri" ? p === href : p.startsWith(href);
         return (
