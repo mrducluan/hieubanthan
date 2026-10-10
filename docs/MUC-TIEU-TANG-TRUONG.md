@@ -31,8 +31,8 @@
 
 | Khâu | Ý tưởng | Cần gì |
 |---|---|---|
-| 3 ★ | **"Hôm nay của bạn"**: một thẻ mỗi ngày theo ngày cá nhân + lưu nhật Tử vi + quẻ ngày, có nút chia sẻ | Engine đã có số liệu; cần trang + thông báo |
-| 3 ★ | **Chuỗi ngày ghé** (streak) + thưởng Sao nhỏ ngày thứ 7 — mất chuỗi không bị phạt | Bảng điểm danh (migration), trần Sao/tháng |
+| 3 ★ | **"Hôm nay của bạn"** `/hom-nay`: ngày/tháng/năm cá nhân, âm lịch + can chi ngày, câu tự soi, báo trước ngày mai, chuỗi ngày ghé (đếm trên máy), nút chia sẻ, sự kiện `daily_viewed` | **Đã làm (HN-1)**. Tiếp: thêm lưu nhật Tử vi / quẻ ngày, nhắc qua email/Web Push |
+| 3 ★ | **Thưởng Sao cho chuỗi ngày ghé** (ngày thứ 7) — chuỗi đã đếm trên máy (HN-1); thưởng thật cần ghi ở máy chủ | Bảng điểm danh (migration), trần Sao/tháng |
 | 3 | Nhắc qua email / Web Push "thông điệp tuần" (người dùng tự bật) | SMTP / Web Push, trang huỷ đăng ký |
 | 4 ★ | **Chiến dịch mời** chỉnh trong `/quan-tri/cai-dat`: đổi mức thưởng, dải thông báo toàn site | **Đã làm (QT-2)** |
 | 4 ★ | "Xem hợp với ai": hợp đôi gửi link cho người kia tự nhập → cả hai thấy kết quả → hai tài khoản mới | Đã có hợp đôi + link mời; nối thành luồng |
