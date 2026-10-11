@@ -3,7 +3,9 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const BAN_BUILD = Boolean(process.env.CI) || process.env.E2E_PROD === "1";
-export const DB_E2E = process.env.CMS_E2E_DATABASE_URI || "postgres://postgres:postgres@localhost:5432/cms_e2e";
+// Bản build dùng DB riêng: DB đã chạy dev (tự "push" cấu trúc) thì `payload migrate` dừng lại hỏi xác nhận.
+export const DB_E2E = process.env.CMS_E2E_DATABASE_URI
+  || `postgres://postgres:postgres@localhost:5432/${BAN_BUILD ? "cms_e2e_build" : "cms_e2e"}`;
 export const BI_MAT = { webhook: "e2e-webhook-0000", preview: "e2e-preview-0000", apiKey: "e2e-khoa-may-doc-0123456789abcdef" };
 
 const CMS = {
@@ -42,6 +44,14 @@ export default defineConfig({
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 1000 },
     launchOptions: { executablePath: process.env.PW_CHROMIUM_PATH || undefined } } }],
   webServer: [
+    // Engine: web cần nó cho sitemap / llms.txt (danh mục kiến thức). Không LLM, không Supabase — như web/playwright.config.ts.
+    {
+      command: "cd ../engine && python -m uvicorn app.main:app --port 8000",
+      url: "http://localhost:8000/health",
+      env: { ENGINE_API_KEY: "", OPENROUTER_API_KEY: "", SUPABASE_URL: "", SUPABASE_ANON_KEY: "" },
+      reuseExistingServer: !process.env.CI,
+      timeout: 60_000,
+    },
     {
       command: BAN_BUILD ? "npx payload migrate && npm run build && npm run start" : "npm run dev",
       url: "http://localhost:3001/admin/login",

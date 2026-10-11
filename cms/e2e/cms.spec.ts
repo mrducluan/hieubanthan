@@ -15,10 +15,21 @@ const SLUG = "so-chu-dao-7-la-gi-tinh-cach-cong-viec-va-tinh-yeu";
 
 test.describe.configure({ mode: "serial" });
 
+/** Điền form Payload an toàn trên máy chậm: chờ form khởi tạo xong (ô hết disabled, mạng yên) rồi điền và KIỂM giá trị —
+ *  Payload dựng lại trạng thái form sau khi hydrate, chữ điền quá sớm có thể bị xoá trước khi bấm gửi. */
+async function dien(page: Page, o: Record<string, string>) {
+  await page.waitForLoadState("networkidle");
+  for (const [id, v] of Object.entries(o)) {
+    const f = page.locator(`#${id}`);
+    await expect(f).toBeEditable();
+    await f.fill(v);
+  }
+  for (const [id, v] of Object.entries(o)) await expect(page.locator(`#${id}`)).toHaveValue(v);
+}
+
 async function dangNhap(page: Page, ai = QT) {
   await page.goto(`${CMS}/admin/login`);
-  await page.fill("#field-email", ai.email);
-  await page.fill("#field-password", ai.mk);
+  await dien(page, { "field-email": ai.email, "field-password": ai.mk });
   await page.click("button[type=submit]");
   await page.waitForURL(`${CMS}/admin`);
 }
@@ -40,15 +51,12 @@ async function choWeb(request: APIRequestContext, duong: string, kiem: (s: numbe
 test("tài khoản đầu tiên: chỉ email quản trị đã khai báo", async ({ page }) => {
   await page.goto(`${CMS}/admin`);
   await page.waitForURL(/create-first-user/);
-  await page.fill("#field-email", "nguoi-la@vidu.vn");
-  await page.fill("#field-password", QT.mk);
-  await page.fill("#field-confirm-password", QT.mk);
-  await page.fill("#field-ten_hien_thi", "Người lạ");
+  await dien(page, { "field-email": "nguoi-la@vidu.vn", "field-password": QT.mk, "field-confirm-password": QT.mk,
+    "field-ten_hien_thi": "Người lạ" });
   await page.click("button[type=submit]");
   await expect(page.getByText("Email này không phải email quản trị đã khai báo.")).toBeVisible();
 
-  await page.fill("#field-email", QT.email);
-  await page.fill("#field-ten_hien_thi", "Quản trị thử");
+  await dien(page, { "field-email": QT.email, "field-ten_hien_thi": "Quản trị thử" });
   await page.click("button[type=submit]");
   await page.waitForURL(`${CMS}/admin`);
   await expect(page.getByRole("heading", { name: "Phòng biên tập" })).toBeVisible();
@@ -73,6 +81,8 @@ test("viết bài: Kiểm định chấm khi gõ, lỗi chặn không cho xuất
   await dangNhap(page);
   await page.getByTestId("tq-viet-moi").click();
   await expect(page.getByTestId("kiem-dinh")).toBeVisible();
+  await page.waitForLoadState("networkidle");
+  await expect(page.locator("#field-tieu_de")).toBeEditable();
   const diemDau = Number(await page.getByTestId("kiem-dinh-diem").textContent());
 
   await page.fill("#field-tieu_de", TIEU_DE);
