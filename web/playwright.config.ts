@@ -74,7 +74,8 @@ export default defineConfig({
       // (autoSelectFamily) → khi runner CI đang bận biên dịch, fetch tới engine có thể hỏng "fetch failed" giả.
       // Next 15 dev tự khởi động lại máy chủ khi heap > 80% giới hạn (next/dist/server/lib/start-server.js) → trên
       // runner CI, sau ~9 phút biên dịch hàng trăm route, request đang chạy bị ECONNRESET. Nâng giới hạn heap cho dev.
-      env: { ...KHOA_TAT, ENGINE_URL: `http://127.0.0.1:${ENGINE_PORT}`, NODE_OPTIONS: "--max-old-space-size=6144" },
+      // 6 GB đã chạm ngưỡng 80% ở test ~164/168 (2026-10-11, ERR_EMPTY_RESPONSE) → 10 GB (runner public: 16 GB RAM).
+      env: { ...KHOA_TAT, ENGINE_URL: `http://127.0.0.1:${ENGINE_PORT}`, NODE_OPTIONS: "--max-old-space-size=10240" },
       reuseExistingServer: !process.env.CI,
       timeout: 120_000,
     },
