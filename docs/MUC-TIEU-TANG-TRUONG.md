@@ -41,6 +41,8 @@
 | 5 ★ | **Cổng nạp Sao** payOS/VietQR: gói 29k/99k/199k | Đăng ký kinh doanh, điều khoản hoàn tiền (VIEC-CUA-ANH mục E) |
 | 5 | Nhiệm vụ kiếm Sao (lưu hồ sơ, hỏi 3 câu, mời 1 bạn) — dạy người dùng vòng lặp | Migration nhiệm vụ |
 | 5 | Gói "Năm cá nhân" PDF (thần số + lưu niên Tử vi) | Engine đã có dữ liệu; cần dựng PDF |
+| 1 ★ | **Phòng biên tập CMS** (Payload, cms.hieuban.com): viết bài `/blog` có khung Kiểm định SEO/GEO/E-E-A-T, xem trước nháp, lịch xuất bản | **Đã làm (CMS-1)** — anh làm mục CMS ở VIEC-CUA-ANH để chạy thật |
+| 5 ★ | **Thanh toán**: payOS/VietQR → VNPay/OnePay (Visa) → ví → quốc tế; crypto chưa làm (pháp lý) | Kế hoạch `KE-HOACH-THANH-TOAN.md` (TT-1…TT-6) |
 | 1 | Trang kiến thức mới theo truy vấn GSC "nhiều hiển thị, ít nhấp" | **Đã làm (QT-4)**: `/quan-tri/tang-truong` liệt kê cơ hội |
 
 ## Công cụ đo trong `/quan-tri`

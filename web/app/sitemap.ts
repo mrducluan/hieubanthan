@@ -1,7 +1,7 @@
 // sitemap.xml — trang công khai + mọi trang kiến thức có index=true (engine quyết theo chính sách).
 import type { MetadataRoute } from "next";
 import { CHU_DE, dsLaSoMau, dsTuoiHuong, duongTrang, duongTuoi, mucLuc } from "@/lib/kien-thuc";
-import { dsBaiBlog, duongBlog } from "@/lib/blog";
+import { dsBaiTongHop, duongBlog } from "@/lib/blog";
 import { urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
@@ -13,7 +13,7 @@ const TINH: [string, number][] = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [ds, mau, tuoi, blog] = await Promise.all([mucLuc(), dsLaSoMau(), dsTuoiHuong(), dsBaiBlog()]);
+  const [ds, mau, tuoi, blog] = await Promise.all([mucLuc(), dsLaSoMau(), dsTuoiHuong(), dsBaiTongHop()]);
   return [
     ...TINH.map(([d, p]) => ({ url: urlDayDu(d), changeFrequency: "weekly" as const, priority: p })),
     ...Object.keys(CHU_DE).map((k) => ({ url: urlDayDu(`/kien-thuc/${k}`), changeFrequency: "weekly" as const, priority: 0.8 })),
@@ -24,9 +24,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: urlDayDu(duongTrang(t.loai, t.slug)), lastModified: t.cap_nhat, changeFrequency: "monthly" as const,
       priority: t.loai === "so" ? 0.8 : 0.6,
     })),
-    ...blog.map((p) => ({
-      url: urlDayDu(duongBlog(p.slug)), ...(p.published_at ? { lastModified: p.published_at } : {}),
-      changeFrequency: "monthly" as const, priority: 0.5,
+    ...blog.filter((p) => !p.noindex).map((p) => ({
+      url: urlDayDu(duongBlog(p.slug)), ...(p.capNhat ?? p.ngay ? { lastModified: (p.capNhat ?? p.ngay)! } : {}),
+      changeFrequency: "monthly" as const, priority: p.nguon === "cms" ? 0.7 : 0.5,
     })),
   ];
 }

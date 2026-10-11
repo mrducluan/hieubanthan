@@ -354,6 +354,29 @@ lần trước) → chọn vai trò → **Cấp / đổi vai trò**.
 
 ---
 
+## CMS. Phòng biên tập Payload — cms.hieuban.com (CMS-1, 2026-10-11)
+
+Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bước này thì web vẫn chạy như cũ.
+
+- [ ] CMS1. Supabase → Storage → tạo bucket `cms-media` (Public) → Settings → Storage → S3 Connection → tạo Access key.
+- [ ] CMS2. Vercel → Add New Project → repo này, **Root Directory `cms`** → nhập biến theo `cms/.env.example`
+  (`DATABASE_URI` = Session pooler, `PAYLOAD_SECRET`, `CMS_URL`, `WEB_URL`, `CMS_EMAIL_QUAN_TRI` = email của anh,
+  `CMS_WEBHOOK_SECRET`, `CMS_PREVIEW_SECRET`, `CRON_SECRET`, `S3_*`). Không dán khoá vào chat.
+- [ ] CMS3. GoDaddy: CNAME `cms` → Vercel; gắn `cms.hieuban.com` vào project CMS.
+- [ ] CMS4. Mở `https://cms.hieuban.com/admin` → tạo tài khoản đầu tiên bằng đúng email đã khai.
+- [ ] CMS5. CMS → Ban biên tập → tạo "Web hieuban.com", vai trò **Máy đọc**, tick Enable API Key → chép khoá.
+- [ ] CMS6. Vercel project **web** thêm `CMS_URL`, `CMS_API_KEY`, `CMS_WEBHOOK_SECRET`, `CMS_PREVIEW_SECRET` (giống
+  bên CMS), `CMS_ANH_URL` → Redeploy.
+- [ ] CMS7. Tạo tài khoản cho người viết (vai trò Biên tập viên — chỉ lưu nháp; anh là Chủ biên/Quản trị bấm Xuất bản).
+
+## TT. Thanh toán nạp Sao — chuẩn bị (kế hoạch `docs/KE-HOACH-THANH-TOAN.md`)
+
+- [ ] TT-a. Pháp nhân/hộ kinh doanh + MST + tài khoản ngân hàng doanh nghiệp (cùng mục E).
+- [ ] TT-b. Đăng ký payOS (VietQR) — làm trước, đơn giản nhất.
+- [ ] TT-c. Liên hệ VNPay hoặc OnePay nếu muốn nhận thẻ Visa/Master/JCB.
+- [ ] TT-d. Luật sư rà điều khoản Sao + hoàn tiền; chọn nhà cung cấp hoá đơn điện tử.
+- [ ] TT-e. Quyết bật tài khoản (mục F) — Sao cần gắn tài khoản.
+
 ## F. Khi nào muốn bật lại đăng nhập tài khoản (CHƯA cần — giữ để tra)
 
 Làm đủ 4 việc dưới, nút Đăng nhập tự hiện, không cần sửa code:

@@ -1,0 +1,31 @@
+/* Khối riêng của bài CMS (hộp ghi chú, mời dùng công cụ, trích dẫn có nguồn, bảng, ảnh) — dùng kèm .articleContent. */
+.noiDung :global(.hbt-ghi-chu) {
+  border: 1px solid rgb(var(--gold) / 0.35); background: rgb(var(--gold) / 0.06);
+  border-radius: 1rem; padding: 1rem 1.25rem;
+}
+.noiDung :global(.hbt-ghi-chu-tu_soi) { border-color: rgb(var(--jade, 63 166 107) / 0.45); background: rgb(var(--jade, 63 166 107) / 0.06); }
+.noiDung :global(.hbt-ghi-chu-tieu-de) {
+  color: rgb(var(--gold)); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.noiDung :global(.hbt-ghi-chu) > * + * { margin-top: 0.5rem; }
+.noiDung :global(.hbt-keu-goi) {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;
+  border: 1px solid rgb(var(--line)); border-radius: 1rem; padding: 1rem 1.25rem; background: rgb(var(--fg) / 0.03);
+}
+.noiDung :global(.hbt-keu-goi) p { margin: 0; }
+.noiDung :global(.hbt-keu-goi) a {
+  display: inline-block; border-radius: 9999px; background: rgb(var(--gold)); color: rgb(var(--bg));
+  padding: 0.5rem 1.1rem; text-decoration: none; font-weight: 600;
+}
+.noiDung :global(.hbt-keu-goi) a:hover { color: rgb(var(--bg)); filter: brightness(1.08); }
+.noiDung :global(.hbt-trich-dan) blockquote { font-family: var(--font-display), Georgia, serif; color: rgb(var(--fg)); }
+.noiDung :global(.hbt-trich-dan) figcaption { margin-top: 0.5rem; font-size: 0.875rem; color: rgb(var(--fg-faint)); }
+.noiDung :global(.hbt-trich-dan) figcaption::before { content: "— "; }
+.noiDung :global(.hbt-dich-nghia) { margin-top: 0.5rem; font-size: 0.95rem; }
+.noiDung figure img { border-radius: 1rem; border: 1px solid rgb(var(--line) / 0.8); width: 100%; height: auto; }
+.noiDung figure > figcaption { margin-top: 0.5rem; font-size: 0.875rem; color: rgb(var(--fg-faint)); text-align: center; }
+.noiDung :global(.hbt-bang) { width: 100%; border-collapse: collapse; font-size: 0.95rem; display: block; overflow-x: auto; }
+.noiDung :global(.hbt-bang) th, .noiDung :global(.hbt-bang) td { border: 1px solid rgb(var(--line)); padding: 0.5rem 0.75rem; text-align: left; }
+.noiDung :global(.hbt-bang) th { color: rgb(var(--fg)); background: rgb(var(--fg) / 0.04); }
+.noiDung hr { border: 0; border-top: 1px solid rgb(var(--line)); margin: 2.5rem 0; }
+.noiDung code { font-size: 0.9em; background: rgb(var(--fg) / 0.06); padding: 0.1em 0.35em; border-radius: 0.35em; }

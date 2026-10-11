@@ -8,6 +8,7 @@ import { CHU_DE, duongTrang, mucLuc, type MucLuc } from "@/lib/kien-thuc";
 import { NGUYEN_TAC } from "@/lib/markdown";
 import { MO_TA_SITE, TEN_SITE, urlDayDu } from "@/lib/seo";
 import { vanHanh } from "@/lib/van-hanh";
+import { dsBaiCms, tinhNangCms } from "@/lib/cms";
 
 /** Chủ đề có quá nhiều trang cùng khuôn → chỉ liệt kê mục lục + mẫu URL + vài ví dụ. */
 const CUM_LON: Record<string, { mau: string; viDu: string[] }> = {
@@ -66,6 +67,17 @@ export async function taoLlmsTxt(): Promise<string> {
       }
     } else {
       for (const t of muc) dong.push(dongTrang(t));
+    }
+    dong.push("");
+  }
+  // Bài của ban biên tập (CMS) — chỉ bài cho phép lập chỉ mục và bật "đưa vào llms.txt"; công tắc tổng ở CMS.
+  const [tn, bai] = await Promise.all([tinhNangCms(), dsBaiCms()]);
+  const baiLlms = tn.llms_txt ? bai.filter((b) => !b.noindex && b.dua_vao_llms !== false).slice(0, 60) : [];
+  if (baiLlms.length) {
+    dong.push("## Bài viết", "");
+    for (const b of baiLlms) {
+      const moTa = (b.tra_loi_nhanh || b.mo_ta_ngan || b.meta?.description || "").replace(/\s+/g, " ").trim();
+      dong.push(`- [${b.tieu_de}](${urlDayDu(`/blog/${b.slug}`)})${moTa ? `: ${moTa.length > 220 ? `${moTa.slice(0, moTa.lastIndexOf(" ", 217))}…` : moTa}` : ""}`);
     }
     dong.push("");
   }

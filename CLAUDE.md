@@ -46,6 +46,7 @@ engine/          Tầng 1 CALC — Python thuần + FastAPI, không LLM, không 
   fixtures/        Golden dataset — nguồn chân lý cho test
   tests/           Viết TRƯỚC hàm, theo quy tắc code
 web/             Next.js 15 App Router, TS strict, Tailwind + shadcn/ui — chỉ gọi engine, không tự tính
+cms/             Payload CMS 3 (Next 16) — bài viết /blog + công tắc nội dung; web chỉ ĐỌC qua REST (docs/KIEN-TRUC-CMS.md)
 supabase/        Migration, mỗi file .sql có file .down.sql đi kèm
 .claude/skills/  thanso-kb, thanso-tu-cai-thien (thần số) · huyenhoc-kb, huyenhoc-tu-cai-thien (4 mảng Huyền học)
 ```
@@ -113,6 +114,7 @@ Engine không biết Supabase tồn tại. Web không tự tính bất cứ th�
 | 2026-10-09 | **BLOG-1 — NotFair SEO ở `/blog/{slug}`** (chủ dự án yêu cầu, duyệt dependency `notfair-nextjs-blog` 0.4.1 (MIT, tarball GitHub) + `sanitize-html` + `@types/sanitize-html`): bài kéo phía máy chủ bằng env `NOTFAIR_SEO_API_KEY` (không `NEXT_PUBLIC_`), qua `lib/blog.ts` (thiếu khoá/lỗi → danh sách rỗng, không vỡ build). Thân bài HTML từ xa **luôn** qua `lib/notfair-article.ts` (chặn script, style nội dòng, form, class lạ, `javascript:`; ảnh chỉ https), CSS `app/blog/notfair-article.module.css`. Ảnh bìa qua `images.remotePatterns` notfair.co; CSP `img-src` thêm `https://notfair.co`. Sitemap có `/blog` + từng bài. Chưa có nguồn bài riêng — khi thêm thì bài riêng thắng khi trùng slug (`mergeBlogPosts`, `getBlogPostWithSeoFallback`). Dòng `nf-attribution` của NotFair giữ nguyên (lệch BM-1 có chủ ý: bên trao đổi yêu cầu). |
 | 2026-10-10 | **QT-2…QT-4 + mục tiêu tăng trưởng** (chủ dự án giao): vòng thu hút → quay lại → mời bạn → nạp Sao ghi ở đầu file + `docs/MUC-TIEU-TANG-TRUONG.md`, đối chiếu mỗi plan/task. Migration **0011** chỉ thêm hàm: cài đặt site trong `cau_hinh` (danh mục khoá cố định `web/lib/cau-hinh.ts`, công khai qua `cau_hinh_cong_khai()`, **không bao giờ chứa bí mật**), mức thưởng Sao + trần lời mời đọc từ `cau_hinh` trong SQL (kẹp, mặc định cũ 10/20/20/20) → chiến dịch mời không cần sửa code; `luan_giai.thu_sao` thay env `LUAN_GIAI_THU_SAO` (chưa đặt thì vẫn theo env); cấp vai trò + tra/điều chỉnh Sao bằng bút toán có lý do (mọi thao tác ghi nhật ký); quản trị đọc nhật ký hỏi đáp ẩn danh. Trợ lý AI quản trị **chỉ soạn nháp từng ô**, người bấm dùng, xuất bản vẫn là PR; kiểm định luật cố định; hạn mức AI quản trị riêng. Số liệu Search Console/GA4/PostHog chỉ đọc qua env, không thêm thư viện. Thiết kế: `docs/KIEN-TRUC-QUAN-TRI.md`. |
 | 2026-10-10 | **HN-1 "Hôm nay của bạn"** (khâu QUAY LẠI): `/hom-nay` + engine `/v1/thanso/hom-nay` (`luangiai/hom_nay.py`) ghép ngày/tháng/năm cá nhân (mốc 1/1 dương như trang đọc) + âm lịch Việt + can chi ngày + KB `ngay_ca_nhan_tu_soi` (nháp AI) + báo trước ngày mai. Chuỗi ngày ghé chỉ đếm trên máy (localStorage), không phạt khi mất chuỗi. Không dự báo sự kiện, không gọi LLM. Nằm trong trung tâm "Bản thân" (không thêm mục điều hướng thứ 5). Repo chuyển **public** (chủ dự án quyết, để có phút GitHub Actions) — đã rà: không có khoá bí mật trong cây và lịch sử. |
+| 2026-10-11 | **CMS-1 — Payload CMS cho bài viết** (chủ dự án yêu cầu Payload v3; thay phần "không dùng CMS dựng sẵn" của mục 2026-10-09 **chỉ cho bài viết**): app RIÊNG `cms/` (cms.hieuban.com) — Payload **3.90.2** + **Next 16.3.8** (Payload không hỗ trợ Next 15.5 của web; nhúng vào web phải dời mọi route + nới CSP → không làm). Duyệt dependency trong `cms/`: payload, @payloadcms/{next,ui,richtext-lexical,db-postgres,plugin-seo,storage-s3,translations}, next, react, sharp, graphql (+ dev: typescript, @playwright/test). Dữ liệu ở **schema `cms`** trên Supabase (migration Payload có up/down trong `cms/src/migrations`, prod không push), ảnh ở Supabase Storage (S3). Web đọc REST (`web/lib/cms.ts`, cache thẻ "cms" + webhook `/api/cms/lam-moi`), **lọc lại HTML** (`lib/cms-html.ts`), xem nháp bằng link HMAC + khoá Máy đọc. Kiểm định SEO/GEO/E-E-A-T bằng luật cố định (`cms/src/kiem-dinh`, dùng chung trình duyệt + máy chủ) — **lỗi chặn** (vùng cấm, liên hệ, tên nội bộ BM-1, chữ ký thẩm định thiếu xác nhận) không cho xuất bản. Kho tri thức vẫn git + `/quan-tri`; kinh tế Sao vẫn Supabase. Kế hoạch thanh toán: `docs/KE-HOACH-THANH-TOAN.md` (crypto **không** làm: chưa được là phương tiện thanh toán ở VN). |
 
 **Golden SPEC-005:** `engine/fixtures/golden/ziwei_golden.json` (8 lá, sinh cục bộ bằng iztro qua `_generate_ziwei_golden.mjs`). `ziwei_oracle_raw/` giữ 2 lá aov.cc thật làm bằng chứng đối chứng độc lập. Ca `nam_muon_ty` (timeIndex 12) mang `_ty_conflict=true`.
 
@@ -126,4 +128,8 @@ cd engine && python -m venv .venv && .venv/Scripts/pip install -r requirements.t
 
 # web
 cd web && npm install && npm run dev        # http://localhost:3000
+
+# cms (cần Postgres; DATABASE_URI trong cms/.env, xem cms/.env.example)
+cd cms && npm install && npm run dev        # http://localhost:3001/admin
+npm test && npm run test:tich-hop && npm run e2e
 ```

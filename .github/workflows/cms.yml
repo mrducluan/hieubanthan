@@ -1,0 +1,88 @@
+# CMS (Payload, thư mục cms/) — kiểm định, tích hợp trên Postgres thật, migration lên/xuống, e2e xuyên CMS → web.
+# Chỉ chạy khi đổi cms/ hoặc phần web đọc CMS (repo public: phút Actions không giới hạn, nhưng không chạy thừa).
+name: cms
+
+on:
+  push:
+    branches: [main]
+    paths: ["cms/**", "web/lib/cms*.ts", "web/lib/blog*.ts", "web/app/blog/**", "web/app/api/cms/**", "web/components/blog/**", ".github/workflows/cms.yml"]
+  pull_request:
+    paths: ["cms/**", "web/lib/cms*.ts", "web/lib/blog*.ts", "web/app/blog/**", "web/app/api/cms/**", "web/components/blog/**", ".github/workflows/cms.yml"]
+
+concurrency:
+  group: cms-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  cms:
+    name: cms
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: cms_e2e
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      NEXT_TELEMETRY_DISABLED: "1"
+      PAYLOAD_SECRET: ci-payload-secret-chi-dung-thu-0123456789
+      CMS_URL: http://localhost:3001
+      WEB_URL: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            cms/package-lock.json
+            web/package-lock.json
+      - name: Cài CMS
+        working-directory: cms
+        run: npm ci
+      - name: Kiểu + kiểm định (node --test)
+        working-directory: cms
+        run: npx tsc --noEmit && npm test
+      - name: Migration lên → xuống → lên (DB trống)
+        working-directory: cms
+        env:
+          DATABASE_URI: postgres://postgres:postgres@localhost:5432/cms_mig
+          CMS_DB_PUSH: "0"
+        run: |
+          psql -d postgres -c "create database cms_mig"
+          npx payload migrate && npx payload migrate:down && npx payload migrate
+      - name: Tích hợp (phân quyền, chặn xuất bản, HTML, slug)
+        working-directory: cms
+        env:
+          DATABASE_URI: postgres://postgres:postgres@localhost:5432/cms_mig
+          CMS_DB_PUSH: "0"
+        run: npm run test:tich-hop
+      - name: Cài web
+        working-directory: web
+        run: npm ci
+      - name: Cài Chromium
+        working-directory: cms
+        run: npx playwright install --with-deps chromium
+      - name: E2E CMS → web (bản build)
+        working-directory: cms
+        env:
+          CMS_E2E_DATABASE_URI: postgres://postgres:postgres@localhost:5432/cms_e2e
+        run: npm run e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cms-playwright
+          path: |
+            cms/playwright-report/
+            cms/test-results/
+          retention-days: 7

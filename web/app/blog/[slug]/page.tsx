@@ -1,14 +1,17 @@
-// /blog/{slug} — bài blog. Chưa có nguồn bài riêng nên chỉ tra NotFair; khi thêm nguồn riêng: tra nguồn riêng TRƯỚC,
-// chỉ khi không có mới gọi NotFair (getBlogPostWithSeoFallback), notFound() sau cùng.
-// Thân bài là HTML từ xa → luôn qua sanitizeNotFairArticleHtml, không render content_html thô.
+// /blog/{slug} — bài blog. Tra CMS (bài của ban biên tập) TRƯỚC → slug cũ của bài CMS thì chuyển hướng 308 → không có
+// mới gọi NotFair → notFound() sau cùng. Bản nháp CMS chỉ hiện trong draft mode (link xem trước có ký, /api/cms/xem-truoc).
+// Thân bài là HTML từ xa → luôn lọc (cms-html / sanitizeNotFairArticleHtml), không render HTML thô.
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
+import { notFound, permanentRedirect } from "next/navigation";
 import { ArrowRight, BookOpen, CalendarDays, Clock } from "lucide-react";
 import { NotFairPostHero } from "notfair-nextjs-blog/react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { BaiCms } from "@/components/blog/BaiCms";
 import { baiBlog, duongBlog } from "@/lib/blog";
+import { anhCms, baiCms, baiLienQuan, tinhNangCms } from "@/lib/cms";
 import { sanitizeNotFairArticleHtml } from "@/lib/notfair-article";
 import { catMoTa, goiLd, ldDuongDan, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import styles from "../notfair-article.module.css";
@@ -17,6 +20,28 @@ type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const nhap = (await draftMode()).isEnabled;
+  const c = await baiCms(slug, nhap);
+  if (c && "bai" in c) {
+    const b = c.bai;
+    const duong = duongBlog(b.slug);
+    const tieuDe = b.meta?.title || b.tieu_de;
+    const moTa = catMoTa(b.meta?.description || b.mo_ta_ngan || b.tra_loi_nhanh || b.tieu_de);
+    const og = anhCms(b.meta?.image ?? b.anh_bia, "og");
+    return {
+      title: tieuDeSeo(tieuDe),
+      description: moTa,
+      alternates: { canonical: b.canonical || duong, types: { "text/markdown": `${duong}.md` } },
+      ...(nhap || b.noindex ? { robots: { index: false, follow: !nhap } } : {}),
+      openGraph: {
+        type: "article", title: tieuDe, description: moTa, url: duong, locale: "vi_VN", siteName: TEN_SITE,
+        ...(b.publishedAt ? { publishedTime: b.publishedAt } : {}), modifiedTime: b.updatedAt,
+        ...(b.the?.length ? { tags: b.the } : {}),
+        images: og ? [{ url: og.src, width: og.w, height: og.h, alt: og.alt || b.tieu_de }] : ["/og"],
+      },
+      twitter: { card: "summary_large_image", title: tieuDe, description: moTa, images: [og ? og.src : "/og"] },
+    };
+  }
   const p = await baiBlog(slug);
   if (!p) return { title: "Không tìm thấy", robots: { index: false } };
   const duong = duongBlog(p.slug);
@@ -36,6 +61,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
+  const nhap = (await draftMode()).isEnabled;
+  const c = await baiCms(slug, nhap);
+  if (c && "chuyen" in c) permanentRedirect(duongBlog(c.chuyen));
+  if (c && "bai" in c) {
+    const [tn, lienQuan] = await Promise.all([tinhNangCms(), baiLienQuan(c.bai)]);
+    return <BaiCms bai={c.bai} tn={tn} lienQuan={lienQuan} nhap={nhap} />;
+  }
   const p = await baiBlog(slug);
   if (!p) notFound();
   const duong = duongBlog(p.slug);
