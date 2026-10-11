@@ -66,7 +66,7 @@ function nap(): Promise<PostHog | null> {
 
 export function ghi(su_kien: SuKien, p: Record<string, unknown> = {}): void {
   const props = { feature_version: PHIEN_BAN, ...locThuocTinh(p) };
-  if (process.env.NODE_ENV !== "production" && typeof window !== "undefined") {
+  if ((process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_E2E === "1") && typeof window !== "undefined") {
     (window as unknown as { __hbt_su_kien?: unknown[] }).__hbt_su_kien ??= [];
     (window as unknown as { __hbt_su_kien: unknown[] }).__hbt_su_kien.push({ su_kien, ...props });
   }

@@ -5,6 +5,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 const ENGINE_PORT = 8000;
 const WEB_PORT = 3000;
+const BAN_BUILD = Boolean(process.env.CI) || process.env.E2E_PROD === "1";
 
 // Rỗng = tắt (engine/web đều coi chuỗi rỗng là "không set").
 const KHOA_TAT = {
@@ -68,16 +69,23 @@ export default defineConfig({
       timeout: 60_000,
     },
     {
-      command: `npm run dev -- --port ${WEB_PORT}`,
+      // CI: chạy trên BẢN BUILD (next build + next start) — next dev biên dịch từng route lúc chạy, trên runner CI
+      // vừa phình bộ nhớ (tự khởi động lại khi heap > 80%) vừa chậm bất chợt (> 15 s/trang) → mỗi lượt hỏng một test
+      // khác nhau (2026-10-11). Máy cá nhân vẫn dùng dev (nhanh khi sửa). Ép chạy bản build: E2E_PROD=1.
+      command: BAN_BUILD ? `npm run build && npm run start -- --port ${WEB_PORT}` : `npm run dev -- --port ${WEB_PORT}`,
       url: `http://localhost:${WEB_PORT}`,
       // ENGINE_URL dùng 127.0.0.1 (không "localhost"): Node 20 thử ::1 rồi 127.0.0.1 với hạn 250 ms mỗi địa chỉ
-      // (autoSelectFamily) → khi runner CI đang bận biên dịch, fetch tới engine có thể hỏng "fetch failed" giả.
-      // Next 15 dev tự khởi động lại máy chủ khi heap > 80% giới hạn (next/dist/server/lib/start-server.js) → trên
-      // runner CI, sau ~9 phút biên dịch hàng trăm route, request đang chạy bị ECONNRESET. Nâng giới hạn heap cho dev.
-      // 6 GB đã chạm ngưỡng 80% ở test ~164/168 (2026-10-11, ERR_EMPTY_RESPONSE) → 10 GB (runner public: 16 GB RAM).
-      env: { ...KHOA_TAT, ENGINE_URL: `http://127.0.0.1:${ENGINE_PORT}`, NODE_OPTIONS: "--max-old-space-size=10240" },
+      // (autoSelectFamily) → khi runner CI đang bận, fetch tới engine có thể hỏng "fetch failed" giả.
+      // NEXT_PUBLIC_SITE_URL: bản build mặc định canonical về hieuban.com — test cần localhost.
+      // NEXT_PUBLIC_E2E: bản build vẫn ghi sự kiện đo lường vào window.__hbt_su_kien để test đọc (lib/do-luong.ts).
+      env: {
+        ...KHOA_TAT, ENGINE_URL: `http://127.0.0.1:${ENGINE_PORT}`, NEXT_PUBLIC_SITE_URL: `http://localhost:${WEB_PORT}`,
+        NEXT_PUBLIC_E2E: "1",
+        // Bản build bắt buộc có khoá ký link mời/thẻ (lib/ma-moi.ts) — khoá giả chỉ dùng cho test.
+        ...(BAN_BUILD ? { LOI_MOI_SECRET: "e2e-chi-dung-cho-thu-nghiem-0000" } : { NODE_OPTIONS: "--max-old-space-size=6144" }),
+      },
       reuseExistingServer: !process.env.CI,
-      timeout: 120_000,
+      timeout: BAN_BUILD ? 600_000 : 120_000,
     },
   ],
 });
