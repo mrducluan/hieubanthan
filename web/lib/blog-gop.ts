@@ -1,17 +1,18 @@
 // Gộp nguồn blog (CMS + NotFair) — tách riêng khỏi lib/blog.ts để test được mà không nạp thư viện NotFair (ESM).
 import type { SeoPostSummary } from "notfair-nextjs-blog";
-import { anhCms, type BaiCmsTomTat } from "@/lib/cms";
+import { anhCms, cacChuyenMuc, type BaiCmsTomTat, type ChuyenMucCms, type LoaiBai } from "@/lib/cms";
 
 export type BaiBlog = {
   slug: string; tieuDe: string; moTa: string | null; ngay: string | null; capNhat: string | null;
   anh: { src: string; w: number; h: number; alt: string } | null; phut: number | null; nguon: "cms" | "notfair";
   noindex?: boolean;
+  loai?: LoaiBai; mang?: string | null; chuyenMuc?: ChuyenMucCms[];
 };
 
 export const tuCms = (b: BaiCmsTomTat): BaiBlog => ({
   slug: b.slug, tieuDe: b.tieu_de, moTa: b.mo_ta_ngan || b.meta?.description || null,
   ngay: b.publishedAt ?? null, capNhat: b.updatedAt ?? null, anh: anhCms(b.anh_bia, "vua"), phut: null, nguon: "cms",
-  noindex: Boolean(b.noindex),
+  noindex: Boolean(b.noindex), loai: b.loai_bai ?? "bai_viet", mang: b.mang ?? null, chuyenMuc: cacChuyenMuc(b),
 });
 
 export function gopBaiBlog(rieng: BaiBlog[], notfair: SeoPostSummary[]): BaiBlog[] {

@@ -7,7 +7,7 @@ import { ArrowRight, BookOpen, CalendarDays, Clock, Eye, ShieldCheck } from "luc
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CHUYEN_GIA, duongChuyenGia, idChuyenGia, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
-import { anhCms, phutDoc, type BaiCms as Bai, type BaiCmsTomTat, type NguoiCms, type TinhNangCms } from "@/lib/cms";
+import { anhCms, cacChuyenMuc, KIEU_LD, NHAN_LOAI, phutDoc, type BaiCms as Bai, type BaiCmsTomTat, type NguoiCms, type TinhNangCms } from "@/lib/cms";
 import { locHtmlCms } from "@/lib/cms-html";
 import { goiLd, ldDuongDan, ldHoiDap, siteUrl, urlDayDu } from "@/lib/seo";
 import nf from "@/app/blog/notfair-article.module.css";
@@ -70,12 +70,17 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
   const cc = CONG_CU_THEO_MANG[bai.mang ?? "chung"] ?? CONG_CU_THEO_MANG.chung!;
   const xb = ngayIso(bai.publishedAt), sua = ngayIso(bai.updatedAt);
   const coChuyenGiaNoiBo = ky && ky.n.slug && CHUYEN_GIA[ky.n.slug];
+  const cm = cacChuyenMuc(bai)[0];
+  const loai = bai.loai_bai ?? "bai_viet";
+  const duongCm = cm ? `/blog/chuyen-muc/${encodeURIComponent(cm.slug)}` : null;
+  // Tin tức ghi kèm giờ đăng (giờ Việt Nam) — người đọc và Google News cần biết tin mới tới đâu.
+  const gioVN = (iso: string) => new Date(iso).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Ho_Chi_Minh" });
 
   return (
     <article className="mx-auto max-w-3xl" data-nguon-bai="cms">
       {!nhap && <JsonLd data={goiLd(
         {
-          "@type": "BlogPosting",
+          "@type": KIEU_LD[bai.loai_bai ?? "bai_viet"] ?? "BlogPosting",
           "@id": `${urlDayDu(duong)}#bai`,
           headline: bai.tieu_de,
           ...(bai.meta?.description || bai.mo_ta_ngan ? { description: bai.meta?.description || bai.mo_ta_ngan } : {}),
@@ -96,7 +101,8 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
         },
         ...(coChuyenGiaNoiBo ? [ldNguoi(CHUYEN_GIA[ky!.n.slug!]!)] : []),
         ...(hd.length ? [ldHoiDap(hd.map((h) => ({ hoi: h.cau_hoi, dap: h.tra_loi })))] : []),
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Blog", duong: "/blog" }, { ten: bai.tieu_de, duong }]),
+        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Blog", duong: "/blog" },
+          ...(cm && duongCm ? [{ ten: cm.ten, duong: duongCm }] : []), { ten: bai.tieu_de, duong }]),
       )} />}
 
       {nhap && (
@@ -110,16 +116,19 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
       <nav aria-label="Đường dẫn" className="text-xs text-fg-faint">
         <ol className="flex flex-wrap gap-1.5">
           <li><Link href="/blog" className="hover:text-fg">Blog</Link> ›</li>
-          <li>{TEN_MANG[bai.mang ?? "chung"]}</li>
+          {cm && duongCm ? <li><Link href={duongCm} className="hover:text-fg">{cm.ten}</Link></li> : <li>{TEN_MANG[bai.mang ?? "chung"]}</li>}
         </ol>
       </nav>
+      {loai !== "bai_viet" && (
+        <p className="mt-4"><span className="rounded-full bg-gold/15 px-2.5 py-0.5 text-xs font-medium text-gold" data-loai-bai={loai}>{NHAN_LOAI[loai]}</span></p>
+      )}
 
       <h1 className="mt-4 text-3xl leading-tight sm:text-5xl">{bai.tieu_de}</h1>
       {bai.mo_ta_ngan && <p className="mt-4 text-lg text-fg-muted">{bai.mo_ta_ngan}</p>}
 
       <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-fg-faint">
         {xb && <span className="inline-flex items-center gap-1"><CalendarDays className="size-3.5" aria-hidden />
-          Đăng <time dateTime={bai.publishedAt!}>{ngayVN(xb)}</time></span>}
+          Đăng <time dateTime={bai.publishedAt!}>{loai === "tin_tuc" ? `${gioVN(bai.publishedAt!)} · ` : ""}{ngayVN(xb)}</time></span>}
         {sua && sua !== xb && <span>· Cập nhật <time dateTime={bai.updatedAt}>{ngayVN(sua)}</time></span>}
         <span className="inline-flex items-center gap-1"><Clock className="size-3.5" aria-hidden />{phutDoc(bai.noi_dung_html)} phút đọc</span>
       </div>
