@@ -1,5 +1,6 @@
 // Thân bài CMS là HTML do CMS sinh từ Lexical — web vẫn LỌC lại bằng allowlist (phòng tài khoản CMS bị lộ):
-// không script, không style nội dòng, không form/iframe, không javascript:; ảnh chỉ từ CMS / kho ảnh của CMS.
+// không script, không style nội dòng, không form, không javascript:; iframe CHỈ video youtube-nocookie;
+// ảnh chỉ từ CMS / kho ảnh của CMS.
 // Sau khi lọc: gắn id cho H2/H3 (mục lục + link neo), ảnh lazy, link ngoài rel=noopener.
 import sanitizeHtml from "sanitize-html";
 import { cmsUrl } from "@/lib/cms";
@@ -7,7 +8,10 @@ import { cmsUrl } from "@/lib/cms";
 export type MucLucCms = { id: string; text: string; cap: 2 | 3 };
 
 const LOP = ["hbt-ghi-chu", "hbt-ghi-chu-luu_y", "hbt-ghi-chu-meo", "hbt-ghi-chu-tu_soi", "hbt-ghi-chu-tom_tat",
-  "hbt-ghi-chu-tieu-de", "hbt-keu-goi", "hbt-trich-dan", "hbt-dich-nghia", "hbt-bang"];
+  "hbt-ghi-chu-tieu-de", "hbt-keu-goi", "hbt-trich-dan", "hbt-dich-nghia", "hbt-bang", "hbt-video"];
+
+// Video: CHỈ iframe youtube-nocookie với mã 11 ký tự (+ ?start=giây). Mọi iframe khác bị bỏ.
+const VIDEO = /^https:\/\/www\.youtube-nocookie\.com\/embed\/[A-Za-z0-9_-]{11}(\?start=\d{1,6})?$/;
 
 function nguonAnhHopLe(): string[] {
   return [cmsUrl(), (process.env.CMS_ANH_URL || "").replace(/\/+$/, "")].filter(Boolean);
@@ -23,17 +27,18 @@ export function locHtmlCms(html: string | null | undefined): { html: string; muc
   const sach = sanitizeHtml(html ?? "", {
     allowedTags: ["p", "br", "h2", "h3", "h4", "strong", "b", "em", "i", "u", "s", "sub", "sup", "code", "mark",
       "ul", "ol", "li", "blockquote", "a", "img", "picture", "source", "figure", "figcaption", "aside", "hr",
-      "table", "thead", "tbody", "tr", "th", "td", "div", "span"],
+      "table", "thead", "tbody", "tr", "th", "td", "div", "span", "iframe"],
     allowedAttributes: {
       a: ["href", "target", "rel"], img: ["src", "srcset", "sizes", "alt", "width", "height", "loading", "decoding"],
       source: ["srcset", "media", "type"], th: ["colspan", "rowspan"], td: ["colspan", "rowspan"],
-      ol: ["start"], aside: ["class"], p: ["class"], div: ["class"], figure: ["class"], table: ["class"],
+      ol: ["start"], aside: ["class"], iframe: ["src", "title", "loading", "allowfullscreen", "allow", "referrerpolicy"], p: ["class"], div: ["class"], figure: ["class"], table: ["class"],
     },
     allowedClasses: { aside: LOP, p: LOP, div: LOP, figure: LOP, table: LOP },
     allowedSchemes: ["https", "mailto"],
-    allowedSchemesByTag: { img: ["https", "http"], a: ["https", "http", "mailto"] },
+    allowedSchemesByTag: { img: ["https", "http"], a: ["https", "http", "mailto"], iframe: ["https"] },
+    allowedIframeHostnames: ["www.youtube-nocookie.com"],
     allowProtocolRelative: false,
-    exclusiveFilter: (f) => (f.tag === "img" && !anhOk(f.attribs.src ?? "")) || (f.tag === "source" && !anhOk((f.attribs.srcset ?? "").split(/\s/)[0] ?? "")),
+    exclusiveFilter: (f) => (f.tag === "img" && !anhOk(f.attribs.src ?? "")) || (f.tag === "iframe" && !VIDEO.test(f.attribs.src ?? "")) || (f.tag === "source" && !anhOk((f.attribs.srcset ?? "").split(/\s/)[0] ?? "")),
     transformTags: {
       a: (tag, a) => {
         const href = a.href ?? "";
@@ -46,6 +51,10 @@ export function locHtmlCms(html: string | null | undefined): { html: string; muc
         return { tagName: "img", attribs: { ...con, ...(srcset ? { srcset } : {}), loading: "lazy", decoding: "async" } };
       },
       table: () => ({ tagName: "table", attribs: { class: "hbt-bang" } }),
+      iframe: (tag, a) => ({ tagName: "iframe", attribs: {
+        src: a.src ?? "", title: (a.title || "Video").slice(0, 120), loading: "lazy", allowfullscreen: "",
+        allow: "accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share", referrerpolicy: "strict-origin-when-cross-origin",
+      } }),
     },
   });
   // http chỉ chấp nhận khi chính CMS chạy http (máy dev) — bản thật CMS luôn https.
@@ -74,6 +83,8 @@ export function htmlSangMd(html: string): string {
     .replace(/<(strong|b)>([\s\S]*?)<\/\1>/g, "**$2**")
     .replace(/<(em|i)>([\s\S]*?)<\/\1>/g, "*$2*")
     .replace(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/g, (_m, b: string) => b.replace(/<p[^>]*>/g, "> ").replace(/<\/p>/g, "\n"))
+    .replace(/<iframe [^>]*src="https:\/\/www\.youtube-nocookie\.com\/embed\/([A-Za-z0-9_-]{11})[^"]*"[^>]*title="([^"]*)"[^>]*><\/iframe>/g,
+      "[Video: $2](https://www.youtube.com/watch?v=$1)\n")
     .replace(/<img [^>]*alt="([^"]*)"[^>]*>/g, "")
     .replace(/<br\s*\/?>/g, "\n")
     .replace(/<\/(p|aside|figure|figcaption|ul|ol|table|tr)>/g, "\n")

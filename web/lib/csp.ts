@@ -37,7 +37,7 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
     `img-src 'self' data: blob: https://notfair.co ${[...anhCms, ...google, ...them].join(" ")}`,
     "font-src 'self' data: https://fonts.gstatic.com",
     `connect-src ${ketNoi.join(" ")}`,
-    `frame-src 'self' https://www.googletagmanager.com https://tagassistant.google.com https://*.doubleclick.net ${them.join(" ")}`.trim(),
+    `frame-src 'self' https://www.youtube-nocookie.com https://www.googletagmanager.com https://tagassistant.google.com https://*.doubleclick.net ${them.join(" ")}`.trim(),
     "worker-src 'self' blob:",
     "manifest-src 'self'",
     "media-src 'self'",

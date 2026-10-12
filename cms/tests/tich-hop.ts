@@ -33,7 +33,7 @@ const dau = `tt${Date.now().toString(36)}`;
 const nguoi = async (vai_tro: string) => {
   const u = await payload.create({
     collection: "bien-tap-vien", overrideAccess: true,
-    data: { email: `${dau}-${vai_tro}@vidu.vn`, password: "mat-khau-du-dai-123", ten_hien_thi: vai_tro, vai_tro } as never,
+    data: { email: `${dau}-${vai_tro}-${tao.length}@vidu.vn`, password: "mat-khau-du-dai-123", ten_hien_thi: vai_tro, vai_tro } as never,
   });
   tao.push({ collection: "bien-tap-vien", id: u.id });
   return { ...u, collection: "bien-tap-vien" } as never;
@@ -44,6 +44,8 @@ console.log("CMS tích hợp:");
 const chuBien = await nguoi("chu_bien");
 const bienTap = await nguoi("bien_tap");
 const mayDoc = await nguoi("may_doc");
+const ctv = await nguoi("cong_tac_vien");
+const ctv2 = await nguoi("cong_tac_vien");
 
 const baiSach = (slug: string) => ({
   tieu_de: `Số chủ đạo 7 là gì ${slug}`,
@@ -181,6 +183,98 @@ await ca("tính năng: khách đọc được, biên tập viên không sửa đ
   assert.equal(g.blog_bat, true);
   await nem(() => payload.updateGlobal({ slug: "tinh-nang", user: bienTap, overrideAccess: false, data: { blog_bat: false } as never }),
     /not allowed|Forbidden|quyền/i);
+});
+
+// ---------------- cộng tác viên (lộ trình chuyên gia) + chuẩn hoá tiếng Việt + video
+const idCua = (u: unknown) => (u as { id: number }).id;
+let idCtv: number | string = 0;
+await ca("cộng tác viên tạo nháp: tự gắn người tạo, trạng thái 'đang viết', không đổi được chữ ký E-E-A-T", async () => {
+  const b = await payload.create({ collection: "bai-viet", user: ctv, overrideAccess: false, draft: true,
+    data: { ...baiSach(`${dau}-ctv`), ky_ten: "tham_dinh", nguoi_tao: idCua(chuBien), _status: "draft" } as never });
+  tao.push({ collection: "bai-viet", id: b.id });
+  idCtv = b.id;
+  const d = await payload.findByID({ collection: "bai-viet", id: b.id, overrideAccess: true, depth: 0, draft: true }) as unknown as Record<string, unknown>;
+  assert.equal(d.nguoi_tao, idCua(ctv));
+  assert.equal(d.trang_thai_duyet, "dang_viet");
+  assert.equal(d.ky_ten, "ban_bien_tap");
+});
+
+await ca("cộng tác viên KHÔNG xuất bản được", async () => {
+  await nem(() => payload.create({ collection: "bai-viet", user: ctv, overrideAccess: false,
+    data: { ...baiSach(`${dau}-ctv-xb`), _status: "published" } as never }), /not allowed|Forbidden|quyền/i);
+  await nem(() => payload.update({ collection: "bai-viet", id: idCtv, user: ctv, overrideAccess: false,
+    data: { _status: "published" } as never }), /not allowed|Forbidden|quyền/i);
+});
+
+await ca("cộng tác viên khác không thấy, không sửa được nháp của người khác", async () => {
+  const r = await payload.find({ collection: "bai-viet", user: ctv2, overrideAccess: false, draft: true,
+    where: { id: { equals: idCtv } } });
+  assert.equal(r.totalDocs, 0);
+  await nem(() => payload.update({ collection: "bai-viet", id: idCtv, user: ctv2, overrideAccess: false, draft: true,
+    data: { tieu_de: "chiếm bài" } as never }), /not allowed|Forbidden|quyền|Not Found|không tìm/i);
+  const cua = await payload.find({ collection: "bai-viet", user: ctv, overrideAccess: false, draft: true, where: { id: { equals: idCtv } } });
+  assert.equal(cua.totalDocs, 1);
+});
+
+await ca("cộng tác viên gửi duyệt được, tự 'Đã duyệt' thì bị chặn, không sửa ghi chú Chủ biên", async () => {
+  await nem(() => payload.update({ collection: "bai-viet", id: idCtv, user: ctv, overrideAccess: false, draft: true,
+    data: { trang_thai_duyet: "da_duyet" } as never }), /Chỉ Chủ biên/);
+  await payload.update({ collection: "bai-viet", id: idCtv, user: ctv, overrideAccess: false, draft: true,
+    data: { trang_thai_duyet: "cho_duyet", ghi_chu_duyet: "tự khen" } as never });
+  const d = await payload.findByID({ collection: "bai-viet", id: idCtv, overrideAccess: true, draft: true }) as unknown as Record<string, unknown>;
+  assert.equal(d.trang_thai_duyet, "cho_duyet");
+  assert.ok(!d.ghi_chu_duyet);
+});
+
+await ca("gửi duyệt bài có lỗi chặn → bị từ chối", async () => {
+  const x = baiSach(`${dau}-ctv-cam`);
+  x.noi_dung.root.children.push(doan(chu("Gọi hotline 0912 345 678 để xem thêm.")) as never);
+  await nem(() => payload.create({ collection: "bai-viet", user: ctv, overrideAccess: false, draft: true,
+    data: { ...x, trang_thai_duyet: "cho_duyet", _status: "draft" } as never }), /Chưa gửi duyệt được/);
+});
+
+await ca("Chủ biên ghi 'cần sửa' rồi xuất bản → trạng thái 'đã duyệt', người tạo giữ nguyên", async () => {
+  await payload.update({ collection: "bai-viet", id: idCtv, user: chuBien, overrideAccess: false, draft: true,
+    data: { trang_thai_duyet: "can_sua", ghi_chu_duyet: "Thêm nguồn sách." } as never });
+  const a = await payload.findByID({ collection: "bai-viet", id: idCtv, user: ctv, overrideAccess: false, draft: true }) as unknown as Record<string, unknown>;
+  assert.equal(a.ghi_chu_duyet, "Thêm nguồn sách.");
+  await payload.update({ collection: "bai-viet", id: idCtv, user: chuBien, overrideAccess: false,
+    data: { _status: "published" } as never });
+  const d = await payload.findByID({ collection: "bai-viet", id: idCtv, overrideAccess: true, depth: 0 }) as unknown as Record<string, unknown>;
+  assert.equal(d.trang_thai_duyet, "da_duyet");
+  assert.equal(d.nguoi_tao, idCua(ctv));
+  const khach = await payload.findByID({ collection: "bai-viet", id: idCtv, overrideAccess: false }) as unknown as Record<string, unknown>;
+  assert.equal(khach.nguoi_tao, undefined);
+  assert.equal(khach.ghi_chu_duyet, undefined);
+});
+
+await ca("chuẩn hoá tiếng Việt khi lưu: NFC, khoảng trắng, dấu câu (kể cả trong thân bài)", async () => {
+  const x = baiSach(`${dau}-nfc`);
+  x.tieu_de = `  ${"Số chủ đạo".normalize("NFD")}  là gì ? `;
+  x.noi_dung.root.children.push(doan(chu(`${"Thủy".normalize("NFD")}  sinh mộc , hoả sinh thổ .`)) as never);
+  const b = await payload.create({ collection: "bai-viet", user: bienTap, overrideAccess: false, draft: true,
+    data: { ...x, _status: "draft" } as never });
+  tao.push({ collection: "bai-viet", id: b.id });
+  const d = await payload.findByID({ collection: "bai-viet", id: b.id, overrideAccess: true, draft: true }) as unknown as
+    { tieu_de: string; noi_dung: { root: { children: { children?: { text?: string }[] }[] } } };
+  assert.equal(d.tieu_de, "Số chủ đạo là gì?");
+  const cuoi = d.noi_dung.root.children.at(-1)!.children![0]!.text;
+  assert.equal(cuoi, "Thủy sinh mộc, hoả sinh thổ.");
+});
+
+await ca("khối video YouTube → iframe youtube-nocookie trong HTML cho web; link sai bị từ chối", async () => {
+  const x = baiSach(`${dau}-video`);
+  x.noi_dung.root.children.push(khoi({ blockType: "video", url: "https://youtu.be/dQw4w9WgXcQ?t=90", tieu_de: "Cách tính số chủ đạo" }) as never);
+  const b = await payload.create({ collection: "bai-viet", user: chuBien, overrideAccess: false,
+    data: { ...x, _status: "published" } as never });
+  tao.push({ collection: "bai-viet", id: b.id });
+  const d = await payload.findByID({ collection: "bai-viet", id: b.id, overrideAccess: true }) as unknown as { noi_dung_html: string };
+  assert.match(d.noi_dung_html, /<figure class="hbt-video"><iframe src="https:\/\/www\.youtube-nocookie\.com\/embed\/dQw4w9WgXcQ\?start=90" title="Cách tính số chủ đạo"/);
+  const y = baiSach(`${dau}-video-sai`);
+  y.noi_dung.root.children.push(khoi({ blockType: "video", url: "https://evil.example/v", tieu_de: "x" }) as never);
+  // Nháp bỏ qua kiểm hợp lệ (Payload) → kiểm khi xuất bản; bộ chuyển HTML vẫn bỏ link sai nếu lọt.
+  await nem(() => payload.create({ collection: "bai-viet", user: chuBien, overrideAccess: false,
+    data: { ...y, _status: "published" } as never }), /YouTube|invalid|không hợp lệ/i);
 });
 
 // dọn

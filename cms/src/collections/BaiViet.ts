@@ -7,10 +7,10 @@ import {
 } from "@payloadcms/richtext-lexical";
 import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from "@payloadcms/plugin-seo/fields";
 import { APIError, slugField, type CollectionBeforeChangeHook, type CollectionBeforeValidateHook, type CollectionConfig } from "payload";
-import { chiChuBien, daXuatBanHoacNoiBo, suaBai, truongChuBien, truongNoiBo } from "../access";
+import { chiChuBien, daXuatBanHoacNoiBo, docPhienBan, laChuBien, laCongTacVien, suaBai, taoBai, truongBienTap, truongChuBien, truongNoiBo } from "../access";
 import { KHOI } from "../blocks";
 import { lamMoiKhiDoiBai, lamMoiKhiXoaBai } from "../hooks/lamMoiWeb";
-import { kiemDinhBai, slugViet, type BaiKiem } from "../kiem-dinh/kiem-dinh";
+import { chuanHoaDuLieu, kiemDinhBai, slugViet, type BaiKiem } from "../kiem-dinh/kiem-dinh";
 import { boChuyenHtml } from "../lib/html";
 import { taoSlug } from "../lib/slug";
 import { linkXemTruoc } from "../lib/web";
@@ -24,14 +24,23 @@ export const MANG = [
   { label: "Chung / văn hoá", value: "chung" },
 ];
 
+export const TRANG_THAI_DUYET = [
+  { label: "Đang viết", value: "dang_viet" },
+  { label: "Gửi duyệt", value: "cho_duyet" },
+  { label: "Cần sửa", value: "can_sua" },
+  { label: "Đã duyệt", value: "da_duyet" },
+];
+
 const kiemDinhTruocKhiLuu: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
   const bai = { ...(originalDoc ?? {}), ...data } as BaiKiem & { _status?: string };
   const kq = kiemDinhBai(bai);
+  const loi = kq.loi_chan.map((m) => m.thong_diep).join(" · ");
   if (data._status === "published" && kq.loi_chan.length && !req.context?.boQuaKiemDinh) {
-    throw new APIError(
-      "Chưa xuất bản được — sửa các lỗi sau rồi bấm Xuất bản lại: " + kq.loi_chan.map((m) => m.thong_diep).join(" · "),
-      400, null, true,
-    );
+    throw new APIError("Chưa xuất bản được — sửa các lỗi sau rồi bấm Xuất bản lại: " + loi, 400, null, true);
+  }
+  // Gửi duyệt cũng phải sạch lỗi chặn (Chủ biên không phải đọc bài chắc chắn bị chặn).
+  if (data.trang_thai_duyet === "cho_duyet" && originalDoc?.trang_thai_duyet !== "cho_duyet" && kq.loi_chan.length) {
+    throw new APIError("Chưa gửi duyệt được — sửa các lỗi sau trước: " + loi, 400, null, true);
   }
   data.diem_kiem_dinh = kq.diem;
   data.ghi_chu_kiem_dinh = kq.muc.filter((m) => m.muc_do !== "dat").map((m) => m.thong_diep).join("\n");
@@ -59,6 +68,26 @@ const slugTuTieuDe: CollectionBeforeValidateHook = ({ data, originalDoc }) => {
   return data;
 };
 
+/** NFC + gộp khoảng trắng + bỏ khoảng trắng trước dấu câu cho MỌI chuỗi của bài (kể cả cây Lexical). */
+const chuanHoaTiengViet: CollectionBeforeValidateHook = ({ data }) => (data ? chuanHoaDuLieu(data) : data);
+
+/** Người tạo bài + quy trình duyệt cộng tác viên (không tin dữ liệu gửi lên cho các trường này). */
+const quyTrinhDuyet: CollectionBeforeChangeHook = ({ data, originalDoc, operation, req }) => {
+  const u = req.user as { id?: number | string; collection?: string } | null;
+  if (operation === "create") data.nguoi_tao = u?.collection === "bien-tap-vien" ? u.id : (data.nguoi_tao ?? null);
+  else data.nguoi_tao = originalDoc?.nguoi_tao ?? null;
+  if (laCongTacVien(req)) {
+    const moi = data.trang_thai_duyet ?? "dang_viet", cu = originalDoc?.trang_thai_duyet ?? "dang_viet";
+    // Cộng tác viên chỉ chuyển giữa "đang viết" và "gửi duyệt"; "cần sửa"/"đã duyệt" là việc của Chủ biên.
+    if (moi !== cu && !["dang_viet", "cho_duyet"].includes(moi)) {
+      throw new APIError("Chỉ Chủ biên được đánh dấu \"Cần sửa\" hoặc \"Đã duyệt\".", 403, null, true);
+    }
+    data.ghi_chu_duyet = originalDoc?.ghi_chu_duyet ?? null;
+  }
+  if (data._status === "published" && laChuBien(req)) data.trang_thai_duyet = "da_duyet";
+  return data;
+};
+
 const ngayXuatBan: CollectionBeforeChangeHook = ({ data }) => {
   if (data._status === "published" && !data.publishedAt) data.publishedAt = new Date().toISOString();
   return data;
@@ -69,7 +98,7 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
   labels: { singular: "Bài viết", plural: "Bài viết" },
   admin: {
     useAsTitle: "tieu_de",
-    defaultColumns: ["tieu_de", "mang", "diem_kiem_dinh", "_status", "updatedAt"],
+    defaultColumns: ["tieu_de", "mang", "trang_thai_duyet", "diem_kiem_dinh", "_status", "updatedAt"],
     listSearchableFields: ["tieu_de", "slug", "tu_khoa_chinh"],
     group: "Nội dung",
     description: "Bài hiện ở hieuban.com/blog/{đường dẫn}. Biên tập viên lưu nháp; Chủ biên bấm Xuất bản.",
@@ -77,14 +106,14 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     pagination: { defaultLimit: 25 },
   },
   defaultPopulate: { tieu_de: true, slug: true, mo_ta_ngan: true, anh_bia: true, publishedAt: true },
-  access: { read: daXuatBanHoacNoiBo, create: suaBai, update: suaBai, delete: chiChuBien, readVersions: suaBai },
+  access: { read: daXuatBanHoacNoiBo, create: taoBai, update: suaBai, delete: chiChuBien, readVersions: docPhienBan },
   versions: {
     drafts: { autosave: { interval: 2000 }, schedulePublish: true },
     maxPerDoc: 50,
   },
   hooks: {
-    beforeValidate: [slugTuTieuDe],
-    beforeChange: [ngayXuatBan, giuSlugCu, kiemDinhTruocKhiLuu],
+    beforeValidate: [chuanHoaTiengViet, slugTuTieuDe],
+    beforeChange: [quyTrinhDuyet, ngayXuatBan, giuSlugCu, kiemDinhTruocKhiLuu],
     afterChange: [lamMoiKhiDoiBai],
     afterDelete: [lamMoiKhiXoaBai],
   },
@@ -165,14 +194,14 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
               ],
             },
             {
-              name: "canonical", label: "URL chuẩn (canonical) khác", type: "text",
+              name: "canonical", label: "URL chuẩn (canonical) khác", type: "text", access: { update: truongBienTap },
               admin: { description: "Để trống = chính bài này. Chỉ điền khi bài đăng lại từ trang khác của hieuban.com." },
               validate: (v: unknown) => !v || (typeof v === "string" && /^(\/|https:\/\/(www\.)?hieuban\.com\/)/.test(v))
                 || "Chỉ nhận đường dẫn trong hieuban.com",
             },
-            { name: "noindex", label: "Không cho Google lập chỉ mục (noindex)", type: "checkbox", defaultValue: false },
+            { name: "noindex", label: "Không cho Google lập chỉ mục (noindex)", type: "checkbox", defaultValue: false, access: { update: truongBienTap } },
             {
-              name: "dua_vao_llms", label: "Đưa vào llms.txt (gợi ý cho trợ lý AI)", type: "checkbox", defaultValue: true,
+              name: "dua_vao_llms", label: "Đưa vào llms.txt (gợi ý cho trợ lý AI)", type: "checkbox", defaultValue: true, access: { update: truongBienTap },
             },
           ],
         },
@@ -185,6 +214,21 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     },
     slugField({ useAsSlug: "tieu_de", slugify: taoSlug }),
     {
+      name: "trang_thai_duyet", label: "Duyệt bài", type: "select", required: true, defaultValue: "dang_viet",
+      options: TRANG_THAI_DUYET, index: true, access: { read: truongNoiBo },
+      admin: { position: "sidebar", description: "Cộng tác viên viết xong chọn \"Gửi duyệt\". Chủ biên đọc, ghi chỗ cần sửa hoặc duyệt rồi xuất bản." },
+    },
+    {
+      name: "ghi_chu_duyet", label: "Ghi chú của Chủ biên", type: "textarea", maxLength: 2000,
+      access: { read: truongNoiBo, update: truongChuBien },
+      admin: { position: "sidebar", condition: (_, s) => Boolean(s?.ghi_chu_duyet) || s?.trang_thai_duyet !== "dang_viet" },
+    },
+    {
+      name: "nguoi_tao", label: "Người tạo", type: "relationship", relationTo: "bien-tap-vien",
+      access: { read: truongNoiBo }, index: true,
+      admin: { position: "sidebar", readOnly: true },
+    },
+    {
       name: "mang", label: "Mảng", type: "select", required: true, defaultValue: "chung", options: MANG,
       admin: { position: "sidebar", description: "Quyết định công cụ được mời cuối bài và bài liên quan." },
     },
@@ -192,7 +236,7 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     { name: "the", label: "Thẻ", type: "text", hasMany: true, maxRows: 12, admin: { position: "sidebar" } },
     {
       name: "ky_ten", label: "Chữ ký trên bài", type: "select", required: true, defaultValue: "ban_bien_tap",
-      access: { update: truongChuBien },
+      access: { create: truongChuBien, update: truongChuBien },
       options: [
         { label: "Ban biên tập · Chủ biên duyệt xuất bản", value: "ban_bien_tap" },
         { label: "Chuyên gia là tác giả (tự viết)", value: "tac_gia" },
@@ -202,26 +246,26 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     },
     {
       name: "tac_gia", label: "Tác giả", type: "relationship", relationTo: "tac-gia",
-      access: { update: truongChuBien },
+      access: { create: truongChuBien, update: truongChuBien },
       admin: { position: "sidebar", condition: (_, s) => s?.ky_ten === "tac_gia" },
     },
     {
       name: "nguoi_tham_dinh", label: "Người thẩm định", type: "relationship", relationTo: "tac-gia",
-      access: { update: truongChuBien },
+      access: { create: truongChuBien, update: truongChuBien },
       admin: { position: "sidebar", condition: (_, s) => s?.ky_ten === "tham_dinh" },
     },
     {
       name: "ngay_tham_dinh", label: "Ngày thẩm định", type: "date",
-      access: { update: truongChuBien },
+      access: { create: truongChuBien, update: truongChuBien },
       admin: { position: "sidebar", condition: (_, s) => s?.ky_ten === "tham_dinh", date: { pickerAppearance: "dayOnly", displayFormat: "dd/MM/yyyy" } },
     },
     {
       name: "xac_nhan_tham_dinh", label: "Chuyên gia đã đọc toàn bài và đồng ý đứng tên", type: "checkbox",
-      access: { update: truongChuBien, read: truongNoiBo },
+      access: { create: truongChuBien, update: truongChuBien, read: truongNoiBo },
       admin: { position: "sidebar", condition: (_, s) => s?.ky_ten === "tham_dinh" },
     },
     {
-      name: "publishedAt", label: "Ngày xuất bản", type: "date",
+      name: "publishedAt", label: "Ngày xuất bản", type: "date", access: { update: truongBienTap },
       admin: { position: "sidebar", date: { pickerAppearance: "dayAndTime", displayFormat: "dd/MM/yyyy HH:mm" } },
     },
     {

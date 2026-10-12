@@ -1,5 +1,6 @@
 // Khối chèn trong trình soạn Lexical. Mỗi khối có bộ chuyển HTML tương ứng (lib/html.ts) — web chỉ nhận HTML đã lọc.
 import type { Block } from "payload";
+import { maYoutube } from "../lib/video";
 
 export const CONG_CU = [
   { label: "Thần số học — tính số chủ đạo", value: "/than-so" },
@@ -53,4 +54,20 @@ export const TrichDan: Block = {
   ],
 };
 
-export const KHOI = [GhiChu, KeuGoiCongCu, TrichDan];
+export const Video: Block = {
+  slug: "video",
+  interfaceName: "KhoiVideo",
+  labels: { singular: "Video YouTube", plural: "Video YouTube" },
+  fields: [
+    {
+      name: "url", label: "Link YouTube", type: "text", required: true,
+      admin: { description: "Dán link video (youtube.com/watch?v=…, youtu.be/…, Shorts). Phát qua chế độ ít cookie." },
+      validate: (v: unknown) => (maYoutube(v) ? true : "Link YouTube không hợp lệ."),
+    },
+    { name: "tieu_de", label: "Tiêu đề video", type: "text", required: true, maxLength: 120,
+      admin: { description: "Mô tả video là gì — người dùng trình đọc màn hình và Google đọc dòng này." } },
+    { name: "chu_thich", label: "Chú thích dưới video", type: "text", maxLength: 200 },
+  ],
+};
+
+export const KHOI = [GhiChu, KeuGoiCongCu, TrichDan, Video];

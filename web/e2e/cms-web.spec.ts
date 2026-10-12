@@ -19,6 +19,18 @@ test("lọc HTML: bỏ script, style, sự kiện, javascript:, iframe, form", (
   expect(html).toContain("Chào");
 });
 
+test("lọc HTML: video chỉ youtube-nocookie + mã hợp lệ; bản Markdown ra link video", () => {
+  const { html } = locHtmlCms(`<figure class="hbt-video"><iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?start=30" title="Cách tính số chủ đạo" loading="lazy" allowfullscreen onload="x()"></iframe><figcaption>Hướng dẫn</figcaption></figure>
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="a"></iframe><iframe src="https://evil.example/embed/dQw4w9WgXcQ" title="b"></iframe>
+    <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&amp;x=javascript:1" title="c"></iframe>`);
+  expect(html.match(/<iframe/g)?.length).toBe(1);
+  expect(html).toContain('src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?start=30"');
+  expect(html).toContain('class="hbt-video"');
+  expect(html).toContain('referrerpolicy="strict-origin-when-cross-origin"');
+  expect(html).not.toMatch(/onload|evil|youtube\.com\/embed|autoplay/);
+  expect(htmlSangMd(html)).toContain("[Video: Cách tính số chủ đạo](https://www.youtube.com/watch?v=dQw4w9WgXcQ)");
+});
+
 test("lọc HTML: ảnh chỉ từ CMS / kho ảnh CMS, srcset lọc từng mục, ảnh lazy", () => {
   const { html } = locHtmlCms(`<figure><img src="https://cms.hieuban.com/api/media/file/a.webp" srcset="https://cms.hieuban.com/a-480.webp 480w, https://evil.example/b.webp 960w" alt="a"></figure>
     <img src="https://abc.supabase.co/storage/v1/object/public/cms-media/cms/b.webp" alt="b">

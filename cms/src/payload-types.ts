@@ -220,6 +220,12 @@ export interface BaiViet {
   generateSlug?: boolean | null;
   slug: string;
   /**
+   * Cộng tác viên viết xong chọn "Gửi duyệt". Chủ biên đọc, ghi chỗ cần sửa hoặc duyệt rồi xuất bản.
+   */
+  trang_thai_duyet: 'dang_viet' | 'cho_duyet' | 'can_sua' | 'da_duyet';
+  ghi_chu_duyet?: string | null;
+  nguoi_tao?: (number | null) | BienTapVien;
+  /**
    * Quyết định công cụ được mời cuối bài và bài liên quan.
    */
   mang: 'than_so' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy' | 'chung';
@@ -246,7 +252,7 @@ export interface BaiViet {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Ảnh dưới 5 MB. Ghi alt mô tả đúng nội dung ảnh (người khiếm thị và Google đọc alt).
+ * Ảnh dưới 5 MB, nên rộng ≥ 1600px (ảnh bìa ≥ 1200px). Hệ thống tự nén WebP và sinh cỡ 480/960/1600 + ảnh chia sẻ 1200×630. Ghi alt mô tả đúng nội dung ảnh (người khiếm thị và Google đọc alt).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
@@ -287,6 +293,14 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
+    lon?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     og?: {
       url?: string | null;
       width?: number | null;
@@ -296,6 +310,43 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * Tài khoản đăng nhập CMS. Mỗi người một tài khoản; không dùng chung mật khẩu.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bien-tap-vien".
+ */
+export interface BienTapVien {
+  id: number;
+  ten_hien_thi: string;
+  /**
+   * Biên tập viên lưu nháp; Chủ biên xuất bản và ký thẩm định; Máy đọc chỉ để web xem trước nháp.
+   */
+  vai_tro: 'quan_tri' | 'chu_bien' | 'bien_tap' | 'cong_tac_vien' | 'may_doc';
+  updatedAt: string;
+  createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
+  hasAPIKey?: boolean | null;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  resetPasswordRequestedAt?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'bien-tap-vien';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -345,43 +396,6 @@ export interface TacGia {
   slug: string;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * Tài khoản đăng nhập CMS. Mỗi người một tài khoản; không dùng chung mật khẩu.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "bien-tap-vien".
- */
-export interface BienTapVien {
-  id: number;
-  ten_hien_thi: string;
-  /**
-   * Biên tập viên lưu nháp; Chủ biên xuất bản và ký thẩm định; Máy đọc chỉ để web xem trước nháp.
-   */
-  vai_tro: 'quan_tri' | 'chu_bien' | 'bien_tap' | 'may_doc';
-  updatedAt: string;
-  createdAt: string;
-  enableAPIKey?: boolean | null;
-  apiKey?: string | null;
-  apiKeyIndex?: string | null;
-  hasAPIKey?: boolean | null;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  resetPasswordRequestedAt?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-  collection: 'bien-tap-vien';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -600,6 +614,9 @@ export interface BaiVietSelect<T extends boolean = true> {
   dua_vao_llms?: T;
   generateSlug?: T;
   slug?: T;
+  trang_thai_duyet?: T;
+  ghi_chu_duyet?: T;
+  nguoi_tao?: T;
   mang?: T;
   chuyen_muc?: T;
   the?: T;
@@ -683,6 +700,16 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
         vua?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        lon?:
           | T
           | {
               url?: T;
@@ -907,6 +934,24 @@ export interface KhoiTrichDan {
   id?: string | null;
   blockName?: string | null;
   blockType: 'trich_dan';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KhoiVideo".
+ */
+export interface KhoiVideo {
+  /**
+   * Dán link video (youtube.com/watch?v=…, youtu.be/…, Shorts). Phát qua chế độ ít cookie.
+   */
+  url: string;
+  /**
+   * Mô tả video là gì — người dùng trình đọc màn hình và Google đọc dòng này.
+   */
+  tieu_de: string;
+  chu_thich?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'video';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

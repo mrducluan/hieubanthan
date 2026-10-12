@@ -29,3 +29,5 @@
 .noiDung :global(.hbt-bang) th { color: rgb(var(--fg)); background: rgb(var(--fg) / 0.04); }
 .noiDung hr { border: 0; border-top: 1px solid rgb(var(--line)); margin: 2.5rem 0; }
 .noiDung code { font-size: 0.9em; background: rgb(var(--fg) / 0.06); padding: 0.1em 0.35em; border-radius: 0.35em; }
+.noiDung :global(.hbt-video) iframe { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: 1rem; background: rgb(var(--surface)); }
+.noiDung :global(.hbt-video) figcaption { margin-top: 0.5rem; font-size: 0.875rem; color: rgb(var(--fg-faint)); }

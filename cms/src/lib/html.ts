@@ -1,6 +1,7 @@
 // Lexical → HTML phía CMS (web nhận HTML trong trường noi_dung_html, rồi lọc lại bằng allowlist ở web/lib/cms-html.ts).
 import { LinkHTMLConverterAsync, type HTMLConvertersFunctionAsync } from "@payloadcms/richtext-lexical/html-async";
 import { CONG_CU } from "../blocks";
+import { giayBatDau, maYoutube } from "./video";
 
 const thoat = (s: unknown) => String(s ?? "").replace(/[&<>"']/g, (c) =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
@@ -22,10 +23,10 @@ export const boChuyenHtml: HTMLConvertersFunctionAsync = ({ defaultConverters })
       doc = (await populate({ collectionSlug: node.relationTo, id: doc })) as AnhDoc | undefined;
     }
     if (!doc || typeof doc !== "object" || !doc.url || !String(doc.mimeType ?? "").startsWith("image")) return "";
-    const nguon = [["nho", doc.sizes?.nho], ["vua", doc.sizes?.vua]]
-      .filter(([, c]) => c && typeof c === "object" && (c as { url?: string }).url && (c as { width?: number }).width)
-      .map(([, c]) => `${thoat((c as { url: string }).url)} ${(c as { width: number }).width}w`);
-    if (doc.width) nguon.push(`${thoat(doc.url)} ${doc.width}w`);
+    const co = [doc.sizes?.nho, doc.sizes?.vua, doc.sizes?.lon, { url: doc.url, width: doc.width }]
+      .filter((c): c is { url: string; width: number } => Boolean(c && c.url && c.width));
+    const rong = new Set<number>();
+    const nguon = co.filter((c) => !rong.has(c.width) && rong.add(c.width)).map((c) => `${thoat(c.url)} ${c.width}w`);
     const alt = thoat(node.fields?.alt || doc.alt || "");
     const img = `<img src="${thoat(doc.sizes?.vua?.url || doc.url)}"${nguon.length > 1 ? ` srcset="${nguon.join(", ")}" sizes="(max-width: 768px) 100vw, 768px"` : ""} alt="${alt}"${doc.width && doc.height ? ` width="${doc.width}" height="${doc.height}"` : ""}>`;
     return `<figure>${img}${doc.chu_thich ? `<figcaption>${thoat(doc.chu_thich)}</figcaption>` : ""}</figure>`;
@@ -45,6 +46,13 @@ export const boChuyenHtml: HTMLConvertersFunctionAsync = ({ defaultConverters })
     trich_dan: ({ node }: { node: { fields: unknown } }) => {
       const f = node.fields as { cau?: string; nguon?: string; dich_nghia?: string };
       return `<figure class="hbt-trich-dan"><blockquote>${doan(f.cau)}</blockquote><figcaption>${thoat(f.nguon)}</figcaption>${f.dich_nghia ? `<div class="hbt-dich-nghia">${doan(f.dich_nghia)}</div>` : ""}</figure>`;
+    },
+    video: ({ node }: { node: { fields: unknown } }) => {
+      const f = node.fields as { url?: string; tieu_de?: string; chu_thich?: string };
+      const ma = maYoutube(f.url);
+      if (!ma) return "";
+      const t = giayBatDau(f.url);
+      return `<figure class="hbt-video"><iframe src="https://www.youtube-nocookie.com/embed/${ma}${t ? `?start=${t}` : ""}" title="${thoat(f.tieu_de || "Video")}" loading="lazy" allowfullscreen></iframe>${f.chu_thich ? `<figcaption>${thoat(f.chu_thich)}</figcaption>` : ""}</figure>`;
     },
   },
   // Link nội bộ tới bài khác trong CMS → /blog/{slug} (đường dẫn tương đối, web hiểu là trong site).

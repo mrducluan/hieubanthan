@@ -54,6 +54,43 @@ const DAU_CU_MOI: Record<string, string> = {
 };
 const chuanCum = (s: string) => s.normalize("NFC").toLowerCase().replace(/[óòỏõọáàảãạúùủũụýỳỷỹỵéèẻẽẹ]/g, (c) => DAU_CU_MOI[c] ?? c);
 
+// ------------------------------------------------------------------ chuẩn hoá tiếng Việt
+
+const TO_HOP = /[\u0300-\u036f]/;
+
+/** Chuỗi trong một nút chữ / một trường: NFC (chữ dán từ Word/Mac hay ở dạng tổ hợp NFD → tìm kiếm, so khớp, đếm
+ *  ký tự đều lệch), gộp khoảng trắng liền nhau, bỏ khoảng trắng trước dấu câu. KHÔNG trim (nút chữ nối nhau). */
+export function chuanHoaChu(s: string): string {
+  return s.normalize("NFC").replace(/[ \t]{2,}/g, " ").replace(/ +([,.;:!?…])(?=\s|$)/g, "$1");
+}
+
+/** Chuẩn hoá mọi chuỗi trong dữ liệu bài (đệ quy). Trường chữ một dòng thì trim thêm. */
+export function chuanHoaDuLieu<T>(v: T, trim = true): T {
+  if (typeof v === "string") {
+    const c = chuanHoaChu(v);
+    return (trim ? c.trim() : c) as T;
+  }
+  if (Array.isArray(v)) return v.map((x) => chuanHoaDuLieu(x, trim)) as T;
+  if (v && typeof v === "object") {
+    const o = v as Record<string, unknown>;
+    // Nút chữ Lexical: không trim (khoảng trắng đầu/cuối nối với nút bên cạnh).
+    const laNutChu = o.type === "text" && typeof o.text === "string";
+    return Object.fromEntries(Object.entries(o).map(([k, x]) =>
+      [k, k === "text" && laNutChu ? chuanHoaChu(x as string) : chuanHoaDuLieu(x, trim)])) as T;
+  }
+  return v;
+}
+
+// Kiểu bỏ dấu với vần mở oa/oe/uy: "hoà, khoẻ, thuỷ" (kiểu mới — site đang dùng) ↔ "hòa, khỏe, thủy" (kiểu cũ).
+// Chỉ xét âm tiết KHÔNG có phụ âm cuối (hoàng/hoạch giống nhau ở hai kiểu); bỏ "qu" (quý là chuẩn cả hai kiểu).
+const KIEU_CU = /(?:[òóỏõọ][ae]|(?<!q)[ùúủũụ]y)(?!\p{L})/giu;
+
+export function demKieuDau(van: string): { moi: number; cu: number } {
+  const v = van.normalize("NFC");
+  const moi = (v.match(/(?:o[àáảãạèéẻẽẹ]|(?<!q)u[ỳýỷỹỵ])(?!\p{L})/giu) ?? []).length;
+  return { moi, cu: (v.match(KIEU_CU) ?? []).length };
+}
+
 const chuoi = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 const mang = <T>(v: unknown): T[] =>
   (Array.isArray(v) ? (v as T[]).filter((x) => x && typeof x === "object") : []);
@@ -164,7 +201,7 @@ const TRONG_SO: Record<string, number> = {
   tu_khoa_doan_dau: 2, tu_khoa_h2: 1, mat_do_tu_khoa: 1, do_dai: 3, tieu_de_phu: 2, h1_than_bai: 1,
   thu_tu_tieu_de: 1, lien_ket_noi_bo: 2, cta_cong_cu: 1, anh_bia: 2, alt_anh: 2, doan_dai: 1,
   tra_loi_nhanh: 3, hoi_dap: 3, tieu_de_cau_hoi: 1, nguon: 2, cau_truc: 1, dinh_nghia: 1,
-  ky_ten: 1, chuyen_gia: 1,
+  ky_ten: 1, chuyen_gia: 1, tieng_viet: 1, kieu_dau: 1,
 };
 const HE_SO: Record<MucDo, number> = { dat: 1, canh_bao: 0.3, loi: 0 };
 
@@ -327,6 +364,16 @@ export function kiemDinhBai(bai: BaiKiem): KetQuaKiem {
   const noiBo = TEN_NOI_BO.flatMap((r) => toanVan.match(new RegExp(r.source, r.flags + "g")) ?? []);
   if (noiBo.length) them("ten_noi_bo", "noi_dung", "loi",
     `Có tên nội bộ không được công khai: ${[...new Set(noiBo)].join(", ")} — ghi nguồn kiểu sách/trường phái.`, true);
+
+  // ---------------- Tiếng Việt (chữ tổ hợp + kiểu bỏ dấu)
+  const toHop = TO_HOP.test(toanVan) || TO_HOP.test(slug) || TO_HOP.test(tk);
+  them("tieng_viet", "noi_dung", toHop ? "canh_bao" : "dat",
+    toHop ? "Có chữ dạng tổ hợp (thường do dán từ Word/Mac) — hệ thống tự chuẩn hoá NFC khi lưu."
+      : "Chữ tiếng Việt chuẩn (NFC).");
+  const kd = demKieuDau(toanVan);
+  if (kd.moi && kd.cu) them("kieu_dau", "noi_dung", "canh_bao",
+    `Bài trộn hai kiểu bỏ dấu (${kd.moi} chữ kiểu "hoà, thuỷ", ${kd.cu} chữ kiểu "hòa, thủy") — site dùng kiểu "hoà, thuỷ", nên thống nhất.`);
+  else them("kieu_dau", "noi_dung", "dat", kd.cu ? "Thống nhất một kiểu bỏ dấu (kiểu \"hòa, thủy\")." : "Thống nhất một kiểu bỏ dấu.");
 
   // ---------------- điểm
   let co = 0, tong = 0;
