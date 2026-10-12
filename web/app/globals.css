@@ -61,8 +61,53 @@
     background-size: 340px 260px;
     animation: twinkle 7s ease-in-out infinite;
   }
+  /* UX-2: lớp sao thứ ba trôi rất chậm (chỉ transform → chạy trên GPU, không vẽ lại). Tắt khi reduced-motion. */
+  .star-field::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -300px; bottom: 0;
+    background-image:
+      radial-gradient(1px 1px at 40px 60px, rgb(var(--moon) / 0.55), transparent 50%),
+      radial-gradient(1.5px 1.5px at 230px 210px, rgb(var(--gold) / 0.45), transparent 50%),
+      radial-gradient(1px 1px at 150px 270px, rgb(255 255 255 / 0.35), transparent 50%);
+    background-size: 300px 300px;
+    animation: sao-troi 180s linear infinite;
+    will-change: transform;
+  }
   .glass {
     @apply bg-surface/70 border border-line/80 backdrop-blur-md shadow-card;
+  }
+  /* UX-2: thẻ bấm được (link dạng .glass) — nhấc nhẹ + quầng vàng khi rê chuột, nhún khi chạm. */
+  a.glass {
+    transition-property: transform, box-shadow, border-color, color, background-color;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    a.glass:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.06) inset, 0 18px 40px -18px rgb(0 0 0 / 0.7), 0 0 32px -10px rgb(var(--gold) / 0.35);
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) { a.glass:active { transform: translateY(0) scale(0.99); } }
+  /* UX-2: vùng chạm ≥ 44px cho nút/chip nhỏ trên điện thoại mà không đổi kích thước nhìn thấy. */
+  .vung-cham { position: relative; }
+  .vung-cham::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: max(100%, 44px); transform: translateY(-50%); }
+  /* UX-2: hiện dần khi cuộn tới (CSS scroll-driven, trình duyệt chưa hỗ trợ thì hiện ngay; không bao giờ ẩn sẵn). */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .hien-dan {
+        animation: hien-dan linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 60%;
+      }
+    }
+  }
+  /* UX-2: nét chòm sao tự vẽ (path cần pathLength="1"). */
+  .net-ve { stroke-dasharray: 1; animation: net-ve 2.4s cubic-bezier(0.22, 1, 0.36, 1) both 0.2s; }
+  /* UX-2: đường viền sáng mảnh dưới thanh trên — chất "công nghệ" nhẹ, không thêm khối. */
+  .vach-sang { position: relative; }
+  .vach-sang::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgb(var(--gold) / 0.35) 30%, rgb(var(--moon) / 0.35) 70%, transparent);
   }
   .eyebrow { @apply text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-fg-faint; }
   .text-gradient-gold {
@@ -101,6 +146,10 @@
 /* Nhãn nhỏ (eyebrow) trong vùng Giấy cổ: màu xám của giao diện tối chỉ đạt ~3:1 trên giấy → dùng màu chữ của giấy. */
 .la-so-giay .eyebrow { color: var(--ls-mo); }
 .la-so g[role="button"]:focus-visible > rect:first-child { stroke: var(--ls-nhan); stroke-width: 3; }
+
+@keyframes sao-troi { to { transform: translateY(300px); } }
+@keyframes hien-dan { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes net-ve { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

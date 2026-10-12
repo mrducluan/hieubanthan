@@ -32,7 +32,7 @@ export function HinhBauTroi({ className }: { className?: string }) {
       <g className="origin-center animate-spin-slow" style={{ transformOrigin: `${cx}px ${cy}px` }}>
         <circle cx={cx} cy={cy} r={r + 40} className="fill-none stroke-jade/15" strokeWidth={1} strokeDasharray="1 10" />
       </g>
-      <path d={d} className="fill-none stroke-gold/35" strokeWidth={1} />
+      <path d={d} pathLength={1} className="net-ve fill-none stroke-gold/35" strokeWidth={1} />
       <circle cx={cx} cy={cy} r={70} fill="url(#hq-trang)" />
       {/* trăng khuyết: đĩa vàng bị một đĩa màu nền che lệch */}
       <circle cx={cx} cy={cy} r={34} className="fill-gold/90" />

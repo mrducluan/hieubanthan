@@ -40,5 +40,5 @@ export function NutTuyChonCookie() {
   const [co, setCo] = useState(false);
   useEffect(() => setCo(coGoogle()), []);
   if (!co) return null;
-  return <button type="button" onClick={hoiLai} className="underline hover:text-fg">Tuỳ chọn cookie</button>;
+  return <button type="button" onClick={hoiLai} className="vung-cham underline underline-offset-2 hover:text-fg">Tuỳ chọn cookie</button>;
 }

@@ -20,10 +20,10 @@ function dangO(path: string, khop: readonly string[]) {
 export function ThanhTren() {
   const path = usePathname();
   return (
-    <header className="sticky top-0 z-40 border-b border-line/50 bg-bg/70 backdrop-blur-lg">
+    <header className="vach-sang sticky top-0 z-40 border-b border-line/50 bg-bg/70 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5" aria-label="Hiểu Bản Thân — trang chủ">
-          <Logo />
+        <Link href="/" className="group flex min-h-11 items-center gap-2.5" aria-label="Hiểu Bản Thân — trang chủ">
+          <Logo className="size-7 transition-transform duration-700 group-hover:rotate-90" />
           <span className="font-serif text-xl tracking-tight">Hiểu Bản Thân</span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex" aria-label="Điều hướng chính">
@@ -33,8 +33,8 @@ export function ThanhTren() {
               href={href}
               aria-current={dangO(path, khop) ? "page" : undefined}
               className={cn(
-                "rounded-full px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:text-fg",
-                dangO(path, khop) && "bg-surface-2 text-gold",
+                "rounded-full px-4 py-2.5 text-sm font-medium text-fg-muted transition-colors hover:bg-surface-2/60 hover:text-fg",
+                dangO(path, khop) && "bg-surface-2 text-gold shadow-[inset_0_0_0_1px_rgb(var(--gold)/0.25)] hover:text-gold",
               )}
             >
               {ten}
@@ -63,8 +63,8 @@ export function TabDuoi() {
                 href={href}
                 aria-current={on ? "page" : undefined}
                 className={cn(
-                  "flex h-16 flex-col items-center justify-center gap-1 text-[0.7rem] font-medium text-fg-faint transition-colors",
-                  on && "text-gold",
+                  "relative flex h-16 flex-col items-center justify-center gap-1 text-[0.7rem] font-medium text-fg-faint transition-[color,transform] active:scale-95",
+                  on && "text-gold before:absolute before:inset-x-6 before:top-0 before:h-0.5 before:rounded-full before:bg-gold before:shadow-[0_0_12px_rgb(var(--gold)/0.8)]",
                 )}
               >
                 <Icon className={cn("size-5", on && "drop-shadow-[0_0_8px_rgb(var(--gold)/0.6)]")} aria-hidden />

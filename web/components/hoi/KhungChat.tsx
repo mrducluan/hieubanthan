@@ -123,10 +123,10 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
       </div>
 
       <div className="border-t border-line/70 p-4 sm:p-5">
-        <div className="-mx-1 mb-3 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none]" aria-label="Câu hỏi gợi ý">
+        <div className="-mx-1 mb-3 flex gap-2 overflow-x-auto px-1 pb-1 [mask-image:linear-gradient(to_right,black_88%,transparent)] [scrollbar-width:none]" aria-label="Câu hỏi gợi ý">
           {goiY.flatMap((g) => g.cau.map((c) => (
             <button key={c} type="button" disabled={dang} onClick={() => hoi(c)} title={g.nhom}
-              className="shrink-0 rounded-full border border-line bg-surface-2/60 px-3.5 py-1.5 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg disabled:opacity-50">
+              className="min-h-10 shrink-0 rounded-full border border-line bg-surface-2/60 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg active:scale-[0.97] disabled:opacity-50">
               {c}
             </button>
           )))}
@@ -137,7 +137,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
             onChange={(e) => setCau(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void hoi(cau); } }}
             className="max-h-40 min-h-[4.5rem] [field-sizing:content] sm:min-h-12" />
-          <Button type="submit" size="icon" disabled={dang || cau.trim().length < 3} aria-label="Gửi câu hỏi">
+          <Button type="submit" size="icon" className="shrink-0" disabled={dang || cau.trim().length < 3} aria-label="Gửi câu hỏi">
             <Send aria-hidden />
           </Button>
         </form>

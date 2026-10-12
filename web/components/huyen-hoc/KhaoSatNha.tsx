@@ -125,10 +125,10 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
 
           <div>
             <p className="text-sm font-medium text-fg">2. Phòng nằm ở phương nào (nhìn từ giữa nhà)</p>
-            <div className="mt-2 flex flex-wrap gap-1.5" role="radiogroup" aria-label="Chọn phòng để đặt">
+            <div className="mt-2 flex flex-wrap gap-2" role="radiogroup" aria-label="Chọn phòng để đặt">
               {Object.entries(dm?.phong ?? {}).map(([ma, ten]) => (
                 <button key={ma} type="button" role="radio" aria-checked={phongChon === ma} onClick={() => setPhongChon(ma)}
-                  className={cn("rounded-full border px-3 py-1 text-xs", phongChon === ma ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>
+                  className={cn("min-h-9 rounded-full border px-3 py-1.5 text-xs transition-colors", phongChon === ma ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>
                   {ten}{viTri[ma] ? ` · ${viTri[ma]}` : ""}
                 </button>
               ))}

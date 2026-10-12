@@ -38,7 +38,7 @@ export function ChanTrang() {
   const vh = vanHanh();
   const nam = new Date().getFullYear();
   return (
-    <footer className="mt-8 border-t border-line/60 bg-surface/30 pb-28 md:pb-10" data-testid="chan-trang">
+    <footer className="vach-sang mt-8 border-t border-line/60 bg-surface/30 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-10" data-testid="chan-trang">
       <div className="container grid gap-10 pt-10 lg:grid-cols-[1.2fr_2fr]">
         <div>
           <Link href="/" className="inline-flex items-center gap-2.5" aria-label="Hiểu Bản Thân — trang chủ">
@@ -71,9 +71,9 @@ export function ChanTrang() {
           {COT.map((c) => (
             <div key={c.ten}>
               <p className="eyebrow">{c.ten}</p>
-              <ul className="mt-3 space-y-2 text-sm">
+              <ul className="mt-2 space-y-0.5 text-sm">
                 {c.ds.map(([href, ten]) => (
-                  <li key={href}><Link href={href} className="text-fg-muted transition-colors hover:text-gold">{ten}</Link></li>
+                  <li key={href}><Link href={href} className="inline-block py-1 text-fg-muted transition-colors hover:text-gold">{ten}</Link></li>
                 ))}
               </ul>
             </div>
@@ -81,7 +81,8 @@ export function ChanTrang() {
         </nav>
       </div>
 
-      <div className="container mt-10 grid gap-6 border-t border-line/50 pt-6 text-xs leading-relaxed text-fg-faint md:grid-cols-[2fr_1fr]">
+      <div className="container mt-10">
+      <div className="grid gap-6 border-t border-line/50 pt-6 text-xs leading-relaxed text-fg-faint md:grid-cols-[2fr_1fr]">
         <div className="space-y-2">
           <p>
             Nội dung biên soạn từ thư tịch văn hoá cổ điển, để tham khảo và tự suy ngẫm, không phải dự báo. Nội dung không thay
@@ -94,8 +95,8 @@ export function ChanTrang() {
               {vh.chuSoHuu && <p className="text-fg-muted">{vh.chuSoHuu}{vh.maSo ? ` · Mã số: ${vh.maSo}` : ""}{vh.noiCap ? ` · ${vh.noiCap}` : ""}</p>}
               {vh.diaChi && <p className="flex items-start gap-1.5"><MapPin className="mt-0.5 size-3 shrink-0" aria-hidden />{vh.diaChi}</p>}
               <p className="flex flex-wrap gap-x-4 gap-y-1">
-                {vh.email && <a href={`mailto:${vh.email}`} className="inline-flex items-center gap-1.5 hover:text-fg"><Mail className="size-3" aria-hidden />{vh.email}</a>}
-                {vh.dienThoai && <a href={`tel:${vh.dienThoai.replace(/\s/g, "")}`} className="inline-flex items-center gap-1.5 hover:text-fg"><Phone className="size-3" aria-hidden />{vh.dienThoai}</a>}
+                {vh.email && <a href={`mailto:${vh.email}`} className="inline-flex items-center gap-1.5 py-1 hover:text-fg"><Mail className="size-3" aria-hidden />{vh.email}</a>}
+                {vh.dienThoai && <a href={`tel:${vh.dienThoai.replace(/\s/g, "")}`} className="inline-flex items-center gap-1.5 py-1 hover:text-fg"><Phone className="size-3" aria-hidden />{vh.dienThoai}</a>}
               </p>
             </div>
           )}
@@ -115,6 +116,7 @@ export function ChanTrang() {
           )}
           <p>© {nam} Hiểu Bản Thân. Bảo lưu mọi quyền. <NutTuyChonCookie /></p>
         </div>
+      </div>
       </div>
     </footer>
   );

@@ -12,7 +12,7 @@ export function DauMang({ Icon, ten, mo_ta, children }: { Icon: LucideIcon; ten:
   return (
     <header className="mb-8">
       <div className="flex items-center gap-3">
-        <span className="grid size-11 place-items-center rounded-2xl bg-gold/15 text-gold"><Icon className="size-5" aria-hidden /></span>
+        <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-gold/15 text-gold shadow-[0_0_24px_-8px_rgb(var(--gold)/0.6)]"><Icon className="size-5" aria-hidden /></span>
         <p className="eyebrow">Khám phá · huyền học</p>
       </div>
       <h1 className="mt-4 text-4xl sm:text-5xl">{ten}</h1>

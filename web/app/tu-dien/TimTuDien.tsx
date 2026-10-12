@@ -51,7 +51,7 @@ export function TimTuDien({ tenMang, tong }: { tenMang: Record<string, string>; 
         <div role="radiogroup" aria-label="Lọc theo mảng" className="flex flex-wrap gap-1.5">
           {["tat_ca", ...Object.keys(tenMang)].map((k) => (
             <button key={k} type="button" role="radio" aria-checked={mang === k} onClick={() => setMang(k)}
-              className={`rounded-full border px-3 py-1.5 text-sm ${mang === k ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg"}`}>
+              className={`min-h-10 rounded-full border px-3.5 py-2 text-sm transition-colors ${mang === k ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg"}`}>
               {k === "tat_ca" ? "Tất cả" : tenMang[k]}
             </button>
           ))}
