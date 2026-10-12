@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     const b = (await req.json()) as { slug?: unknown };
     slug = typeof b.slug === "string" && /^[a-z0-9-]{1,120}$/.test(b.slug) ? b.slug : null;
   } catch { /* thân rỗng vẫn làm mới */ }
-  revalidateTag(TAG_CMS);
+  revalidateTag(TAG_CMS, { expire: 0 });
   revalidatePath("/blog");
   revalidatePath("/sitemap.xml");
   revalidatePath("/llms.txt");

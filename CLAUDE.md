@@ -1,7 +1,7 @@
 # CLAUDE.md — HieuBanThan
 
 ## Stack (KHÔNG được đổi khi chưa hỏi)
-Next.js 15 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth, Storage - region SG)
+Next.js 16 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth, Storage - region SG)
 / Python FastAPI cho engine tính toán / LLM chỉ qua lớp narrative, model qua OpenRouter
 
 ## Kiến trúc 4 tầng (bất biến)
@@ -45,7 +45,7 @@ engine/          Tầng 1 CALC — Python thuần + FastAPI, không LLM, không 
   app/calc/        Hàm tính thuần: timebase, lunar (Hồ Ngọc Đức), thanso
   fixtures/        Golden dataset — nguồn chân lý cho test
   tests/           Viết TRƯỚC hàm, theo quy tắc code
-web/             Next.js 15 App Router, TS strict, Tailwind + shadcn/ui — chỉ gọi engine, không tự tính
+web/             Next.js 16 App Router, TS strict, Tailwind + shadcn/ui — chỉ gọi engine, không tự tính
 cms/             Payload CMS 3 (Next 16) — bài viết /blog + công tắc nội dung; web chỉ ĐỌC qua REST (docs/KIEN-TRUC-CMS.md)
 supabase/        Migration, mỗi file .sql có file .down.sql đi kèm
 .claude/skills/  thanso-kb, thanso-tu-cai-thien (thần số) · huyenhoc-kb, huyenhoc-tu-cai-thien (4 mảng Huyền học)
@@ -124,6 +124,7 @@ Engine không biết Supabase tồn tại. Web không tự tính bất cứ th�
 | 2026-10-12 | **SAO-2 miễn phí ↔ Sao** (chủ dự án giao, em chốt quy tắc — `docs/KE-HOACH-MIEN-PHI-VA-SAO.md`): phép tính + kiến thức luôn miễn phí. **Luận giải toàn bộ**: chương 1 miễn phí, chương sau chỉ gửi tiêu đề + lời mời (`moi_xem`: điểm nhấn cắt từ chính chương + câu hỏi mở `CAU_HOI_MO`, test cấm từ doạ) — đoạn văn KHÔNG xuống trình duyệt; engine chỉ diễn đạt AI N chương đầu (`dien_dat_toi_da`); mở toàn bộ 10 Sao, xem lại trong ngày miễn phí. **Hỏi đáp**: khách 3 / tài khoản 10 câu/ngày (bảng `luot_hoi`, migration **0013**, khoá khách = HMAC(IP), không lưu câu hỏi), vượt → 1 Sao/câu, người dùng đồng ý từng câu, trừ SAU khi trả lời được; câu khủng hoảng/ngoài phạm vi (`/v1/hoi/dac-biet`) luôn miễn phí. Không đếm được → mở. Mọi số + công tắc ở /quan-tri/cai-dat, **mặc định tắt**. Hộp thoại dùng chung (đăng nhập nhận Sao / đồng ý trừ / nạp nhanh QR rồi quay về đúng trang, tự mở). /quan-tri/doanh-thu (chủ sở hữu): doanh thu, người nạp (email), gói, người mời + bạn có nạp, Sao bán/tặng/tiêu. Cấm doạ, đếm ngược giả, tích sẵn đồng ý. |
 | 2026-10-12 | **CMS-2 trợ lý AI + xác thực 2 bước CMS**: AI chỉ soạn NHÁP một đoạn (cột phải trình viết bài, dùng lại engine `/v1/quan-tri/soan-nhap` + kiểm định luật cố định), người viết tự đọc/sửa/dán — AI không ghi thẳng vào bài, không xuất bản. MFA TOTP tự viết bằng `node:crypto` (không thêm dependency), bí mật mã hoá AES-GCM (khoá suy từ PAYLOAD_SECRET), quyền gắn vào `vaiTro()` (thiếu cookie `cms-mfa` hợp lệ = không quyền; Local API + khoá API Máy đọc không áp). Bắt buộc Quản trị/Chủ biên qua env `CMS_BAT_BUOC_MFA=1` — bật SAU khi chủ dự án tự bật MFA (tránh tự khoá mình). Migration Payload `xac_thuc_2_buoc` (up/down). |
 | 2026-10-12 | **CMS-3 trang đích + CMS-4 liên quan theo nghĩa**: Trang đích = collection Payload (migration up/down) ghép 6 khối, chữ hiện dạng văn bản thuần, link chỉ trong site, hết hạn → noindex; web `/su-kien/{slug}` + sitemap. Liên quan theo nghĩa: vectơ từ khoá luật cố định (không pgvector, không AI, không dependency), CMS tính khi lưu, web cosine + idf; gợi ý liên kết nội bộ khi viết lấy cả trang kiến thức của web. |
+| 2026-10-12 | **CMS-5 — web lên Next 16.3.8** (chủ dự án giao; thay bản 15.5.27 của NX15): web và `cms/` cùng một bản Next. `web/middleware.ts` → `web/proxy.ts` (hàm `proxy`, chạy Node runtime; nội dung không đổi: CSP nonce, làm mới phiên /quan-tri, 308 *.vercel.app). `revalidateTag(tag, { expire: 0 })` giữ hành vi xoá cache ngay của webhook CMS + cài đặt quản trị. Không thêm dependency, không đổi React. |
 
 **Golden SPEC-005:** `engine/fixtures/golden/ziwei_golden.json` (8 lá, sinh cục bộ bằng iztro qua `_generate_ziwei_golden.mjs`). `ziwei_oracle_raw/` giữ 2 lá aov.cc thật làm bằng chứng đối chứng độc lập. Ca `nam_muon_ty` (timeIndex 12) mang `_ty_conflict=true`.
 
