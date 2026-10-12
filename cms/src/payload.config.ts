@@ -37,7 +37,10 @@ const s3 = {
 };
 const coS3 = Boolean(s3.bucket && s3.endpoint && s3.key && s3.secret);
 
-const DB_TREN_MAY = /@(localhost|127\.0\.0\.1)(:\d+)?\//.test((process.env.DATABASE_URI || "").trim());
+const DB_TREN_MAY = (() => {
+  try { return ["localhost", "127.0.0.1", "[::1]"].includes(new URL((process.env.DATABASE_URI || "").trim()).hostname); }
+  catch { return false; }
+})();
 
 export default buildConfig({
   serverURL: cmsUrl,

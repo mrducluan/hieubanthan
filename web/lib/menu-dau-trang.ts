@@ -29,3 +29,15 @@ export function dangOMuc(path: string, m: Pick<MucMenu, "href" | "con">): boolea
     .map((h) => h.split(/[?#]/)[0]!).filter((h) => h && h !== "/");
   return ds.some((k) => path === k || path.startsWith(k + "/"));
 }
+
+/** Chỉ MỘT mục sáng: mục khớp đường dẫn dài nhất (vd /blog là mục cha, /blog/chuyen-muc/x là con của mục khác → mục kia). */
+export function mucDangO(path: string, ds: Pick<MucMenu, "href" | "con">[]): number {
+  let tot = -1, dai = -1;
+  ds.forEach((m, i) => {
+    for (const h of [m.href, ...m.con.map((c) => c.href), ...(m.href === "/tai-khoan" ? ["/dang-nhap"] : [])]) {
+      const k = h.split(/[?#]/)[0]!;
+      if (k && k !== "/" && (path === k || path.startsWith(k + "/")) && k.length > dai) { tot = i; dai = k.length; }
+    }
+  });
+  return tot;
+}

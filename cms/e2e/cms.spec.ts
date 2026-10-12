@@ -338,6 +338,7 @@ test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa
       { nhan: "Bài số 7 nổi bật", loai: "bai", bai: bai.id, mo_ta: "Bài chọn của tuần" },
       { nhan: "Tử vi", loai: "duong_dan", duong_dan: "/tu-vi" } ] },
   ] } })).ok()).toBeTruthy();
+  try {
   await choWeb(request, "/", (s, b) => s === 200 && b.includes("Góc đọc"));
 
   await page.goto(`${WEB}/`);
@@ -356,8 +357,10 @@ test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa
   await dt.getByTestId("nut-menu").click();
   await expect(dt.getByTestId("menu-di-dong").getByRole("link", { name: "Bài số 7 nổi bật" })).toBeVisible();
 
-  // để trống → web quay về menu mặc định trong code
-  expect((await request.post(`${CMS}/api/globals/menu-dau-trang`, { headers: h, data: { muc: [] } })).ok()).toBeTruthy();
+  } finally {
+    // để trống → web quay về menu mặc định trong code (luôn chạy, kể cả khi bước trên hỏng — không làm hỏng test sau)
+    expect((await request.post(`${CMS}/api/globals/menu-dau-trang`, { headers: h, data: { muc: [] } })).ok()).toBeTruthy();
+  }
   await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Góc đọc") && b.includes("Khám phá"));
 });
 

@@ -12,7 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { dangOMuc, MENU_DAU_TRANG, type BieuTuong, type MucMenu } from "@/lib/menu-dau-trang";
+import { dangOMuc, mucDangO, MENU_DAU_TRANG, type BieuTuong, type MucMenu } from "@/lib/menu-dau-trang";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Logo } from "./Logo";
 
@@ -21,32 +21,38 @@ const ICON: Record<BieuTuong, LucideIcon> = {
   lich: CalendarDays, nguoi: UserRound,
 };
 
-function MucCoCon({ m, on }: { m: MucMenu; on: boolean }) {
+function MucCoCon({ m, on, i }: { m: MucMenu; on: boolean; i: number }) {
   // Rê chuột và bấm giữ trạng thái riêng: rê vào (đã mở) rồi bấm mũi tên không làm bảng đóng lại.
   const [re, setRe] = useState(false);
   const [bam, setBam] = useState(false);
   const mo = re || bam;
   const setMo = (v: boolean) => { setRe(v); setBam(v); };
   const goc = useRef<HTMLDivElement>(null);
+  const nut = useRef<HTMLButtonElement>(null);
   const path = usePathname();
   useEffect(() => setMo(false), [path]);
   useEffect(() => {
     if (!mo) return;
     const ngoai = (e: PointerEvent) => { if (!goc.current?.contains(e.target as Node)) setMo(false); };
-    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") setMo(false); };
+    const esc = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (goc.current?.contains(document.activeElement)) nut.current?.focus();   // không để con trỏ bàn phím rơi về đầu trang
+      setMo(false);
+    };
     document.addEventListener("pointerdown", ngoai);
     document.addEventListener("keydown", esc);
     return () => { document.removeEventListener("pointerdown", ngoai); document.removeEventListener("keydown", esc); };
   }, [mo]);
-  const id = `menu-con-${m.href.replace(/[^a-z0-9]/gi, "")}`;
+  const id = `menu-con-${i}`;
   return (
-    <div ref={goc} className="relative" onMouseEnter={() => setRe(true)} onMouseLeave={() => setRe(false)}>
+    <div ref={goc} className="relative" onMouseEnter={() => setRe(true)} onMouseLeave={() => setRe(false)}
+      onBlur={(e) => { if (!goc.current?.contains(e.relatedTarget as Node | null)) setMo(false); }}>
       <div className={cn(
         "flex items-center rounded-full text-sm font-medium text-fg-muted transition-colors hover:bg-surface-2/60 hover:text-fg",
         on && "bg-surface-2 text-gold shadow-[inset_0_0_0_1px_rgb(var(--gold)/0.25)] hover:text-gold",
       )}>
         <Link href={m.href} aria-current={on ? "page" : undefined} className="py-2.5 pl-4 pr-1">{m.ten}</Link>
-        <button type="button" aria-expanded={mo} aria-controls={id} aria-label={`Mở menu ${m.ten}`}
+        <button ref={nut} type="button" aria-expanded={mo} aria-controls={id} aria-label={`Mở menu ${m.ten}`}
           onClick={() => (bam ? setMo(false) : setBam(true))} className="grid min-h-10 place-items-center rounded-full pl-0.5 pr-3">
           <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
         </button>
@@ -74,7 +80,7 @@ function MenuDiDong({ muc }: { muc: MucMenu[] }) {
   useEffect(() => setMo(false), [path]);
   return (
     <>
-      <button type="button" onClick={() => setMo(true)} aria-label="Mở menu" data-testid="nut-menu"
+      <button type="button" onClick={() => setMo(true)} aria-label="Mở menu" aria-haspopup="dialog" aria-expanded={mo} data-testid="nut-menu"
         className="grid size-11 place-items-center rounded-full text-fg-muted hover:bg-surface-2/60 hover:text-fg md:hidden">
         <Menu className="size-5" aria-hidden />
       </button>
@@ -112,6 +118,7 @@ function MenuDiDong({ muc }: { muc: MucMenu[] }) {
 
 export function ThanhTren({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
   const path = usePathname();
+  const sang = mucDangO(path, muc);
   return (
     <header className="vach-sang sticky top-0 z-40 border-b border-line/50 bg-bg/70 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between">
@@ -120,11 +127,11 @@ export function ThanhTren({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
           <span className="font-serif text-xl tracking-tight">Hiểu Bản Thân</span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex" aria-label="Điều hướng chính" data-testid="menu-dau-trang">
-          {muc.map((m) => {
-            const on = dangOMuc(path, m);
-            return m.con.length ? <MucCoCon key={m.href + m.ten} m={m} on={on} /> : (
+          {muc.map((m, i) => {
+            const on = i === sang;
+            return m.con.length ? <MucCoCon key={i} m={m} on={on} i={i} /> : (
               <Link
-                key={m.href + m.ten}
+                key={i}
                 href={m.href}
                 aria-current={on ? "page" : undefined}
                 className={cn(
@@ -146,6 +153,8 @@ export function ThanhTren({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
 export function TabDuoi({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
   const path = usePathname();
   const tab = muc.filter((m) => m.di_dong).slice(0, 5);
+  const sang = mucDangO(path, tab);
+  if (!tab.length) return null;
   return (
     <nav
       className="fixed inset-x-0 bottom-0 z-40 border-t border-line/60 bg-bg/85 backdrop-blur-lg md:hidden"
@@ -153,11 +162,11 @@ export function TabDuoi({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
       aria-label="Điều hướng chính"
     >
       <ul className="grid" style={{ gridTemplateColumns: `repeat(${Math.max(tab.length, 1)}, minmax(0, 1fr))` }}>
-        {tab.map((m) => {
-          const on = dangOMuc(path, m);
+        {tab.map((m, i) => {
+          const on = i === sang;
           const Icon = ICON[m.bieu_tuong] ?? Compass;
           return (
-            <li key={m.href + m.ten}>
+            <li key={i}>
               <Link
                 href={m.href}
                 aria-current={on ? "page" : undefined}

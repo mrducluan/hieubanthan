@@ -60,7 +60,9 @@ export const MenuDauTrang: GlobalConfig = {
       })),
       admin: { initCollapsed: true, components: { RowLabel: "/components/NhanDong#NhanLienKet" } },
       validate: (v: unknown) => {
+        // validate riêng thay bộ kiểm mảng mặc định của Payload → tự kiểm lại maxRows (API cũng bị chặn, không chỉ admin).
         const ds = Array.isArray(v) ? (v as { di_dong?: boolean }[]) : [];
+        if (ds.length > 7) return "Tối đa 7 mục cha (thanh trên máy tính chỉ vừa 7 mục).";
         return ds.filter((m) => m.di_dong).length <= 5 || "Tab dưới trên điện thoại chỉ vừa tối đa 5 mục — bỏ chọn bớt \"Hiện ở tab dưới\".";
       },
       fields: [
