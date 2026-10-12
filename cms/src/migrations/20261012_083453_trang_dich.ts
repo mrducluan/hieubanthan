@@ -363,9 +363,9 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "cms"."_trang_dich_v_blocks_van_ban" CASCADE;
   DROP TABLE "cms"."_trang_dich_v" CASCADE;
   DROP TABLE "cms"."_trang_dich_v_rels" CASCADE;
-  ALTER TABLE "cms"."payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_trang_dich_fk";
+  ALTER TABLE "cms"."payload_locked_documents_rels" DROP CONSTRAINT IF EXISTS "payload_locked_documents_rels_trang_dich_fk";
   
-  DROP INDEX "cms"."payload_locked_documents_rels_trang_dich_id_idx";
+  DROP INDEX IF EXISTS "cms"."payload_locked_documents_rels_trang_dich_id_idx";
   ALTER TABLE "cms"."payload_locked_documents_rels" DROP COLUMN "trang_dich_id";
   DROP TYPE "cms"."enum_trang_dich_blocks_cong_cu_ds";
   DROP TYPE "cms"."enum_trang_dich_blocks_bai_viet_mang";
