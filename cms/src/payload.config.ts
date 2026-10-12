@@ -58,7 +58,7 @@ export default buildConfig({
   globals: [TinhNang],
   editor: lexicalEditor(),
   db: postgresAdapter({
-    pool: { connectionString: process.env.DATABASE_URI || "" },
+    pool: { connectionString: (process.env.DATABASE_URI || "").trim() },
     // Bảng CMS nằm trong schema riêng "cms" — không lẫn với bảng của web (public) trên cùng Supabase.
     schemaName: "cms",
     migrationDir: path.resolve(dirname, "migrations"),
