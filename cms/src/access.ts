@@ -4,6 +4,7 @@
 //   cong_tac_vien — chuyên gia / người dùng đóng góp bài (lộ trình chuyên gia, docs/KE-HOACH-CHUYEN-GIA.md): chỉ thấy và
 //   sửa NHÁP CỦA CHÍNH MÌNH, gửi duyệt; không xuất bản, không đổi chữ ký E-E-A-T, không sửa bài người khác.
 import type { Access, FieldAccess, PayloadRequest, Where } from "payload";
+import { cookieHopLe, docCookie } from "./lib/totp";
 
 export const VAI_TRO = [
   { label: "Quản trị", value: "quan_tri" },
@@ -14,9 +15,20 @@ export const VAI_TRO = [
 ] as const;
 export type VaiTro = (typeof VAI_TRO)[number]["value"];
 
+/** CMS-2: tài khoản này phải qua xác thực 2 bước? (đã tự bật, hoặc Quản trị/Chủ biên khi CMS_BAT_BUOC_MFA=1) */
+export const canMfa = (u: { vai_tro?: string; mfa_bat?: boolean | null }) =>
+  u.mfa_bat === true || (process.env.CMS_BAT_BUOC_MFA === "1" && (u.vai_tro === "quan_tri" || u.vai_tro === "chu_bien"));
+
+/** Vai trò CÓ HIỆU LỰC. Cần MFA mà chưa có cookie cms-mfa hợp lệ → null (không quyền gì, kể cả vào admin — Payload đưa
+ *  sang màn xác thực 2 bước). Không áp cho khoá API (Máy đọc của web) và script máy chủ (Local API KHÔNG kèm cookie /
+ *  Authorization — lưu ý: trang admin của Payload cũng chạy qua Local API nhưng mang cookie trình duyệt → vẫn bị kiểm). */
 export const vaiTro = (req: PayloadRequest): VaiTro | null => {
-  const u = req.user as { collection?: string; vai_tro?: VaiTro } | null;
-  return u && u.collection === "bien-tap-vien" ? (u.vai_tro ?? null) : null;
+  const u = req.user as { id?: string | number; collection?: string; vai_tro?: VaiTro; mfa_bat?: boolean | null; _strategy?: string } | null;
+  if (!u || u.collection !== "bien-tap-vien") return null;
+  const cookie = req.headers?.get?.("cookie") ?? null;
+  const tuScript = req.payloadAPI === "local" && !cookie && !req.headers?.get?.("authorization");
+  if (!tuScript && u._strategy !== "api-key" && canMfa(u) && !cookieHopLe(docCookie(cookie), u.id ?? "")) return null;
+  return u.vai_tro ?? null;
 };
 const la = (...ds: VaiTro[]) => (req: PayloadRequest) => {
   const v = vaiTro(req);

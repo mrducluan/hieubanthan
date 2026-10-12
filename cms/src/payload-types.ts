@@ -71,6 +71,7 @@ export interface Config {
     'chuyen-muc': ChuyenMuc;
     'tac-gia': TacGia;
     media: Media;
+    'trang-dich': TrangDich;
     'bien-tap-vien': BienTapVien;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
@@ -84,6 +85,7 @@ export interface Config {
     'chuyen-muc': ChuyenMucSelect<false> | ChuyenMucSelect<true>;
     'tac-gia': TacGiaSelect<false> | TacGiaSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'trang-dich': TrangDichSelect<false> | TrangDichSelect<true>;
     'bien-tap-vien': BienTapVienSelect<false> | BienTapVienSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
@@ -218,6 +220,15 @@ export interface BaiViet {
   canonical?: string | null;
   noindex?: boolean | null;
   dua_vao_llms?: boolean | null;
+  vecto?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -249,7 +260,7 @@ export interface BaiViet {
   xac_nhan_tham_dinh?: boolean | null;
   publishedAt?: string | null;
   /**
-   * Để trống = tự lấy bài cùng mảng.
+   * Để trống = tự lấy bài gần nghĩa nhất (từ khoá, thẻ, tiêu đề mục), ưu tiên cùng mảng.
    */
   bai_lien_quan?: (number | BaiViet)[] | null;
   diem_kiem_dinh?: number | null;
@@ -329,6 +340,14 @@ export interface BienTapVien {
   id: number;
   ten_hien_thi: string;
   /**
+   * Bật ở màn đăng nhập (/admin/xac-thuc-2-buoc). Quản trị đặt lại khi mất điện thoại.
+   */
+  mfa_bat?: boolean | null;
+  mfa_bi_mat?: string | null;
+  mfa_buoc_cuoi?: number | null;
+  mfa_sai?: number | null;
+  mfa_khoa_den?: string | null;
+  /**
    * Biên tập viên lưu nháp; Chủ biên xuất bản và ký thẩm định; Máy đọc chỉ để web xem trước nháp.
    */
   vai_tro: 'quan_tri' | 'chu_bien' | 'bien_tap' | 'cong_tac_vien' | 'may_doc';
@@ -404,6 +423,93 @@ export interface TacGia {
   slug: string;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * Trang chiến dịch / sự kiện ở hieuban.com/su-kien/{slug}, ghép từ khối. Biên tập viên soạn nháp, Chủ biên xuất bản.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trang-dich".
+ */
+export interface TrangDich {
+  id: number;
+  tieu_de: string;
+  /**
+   * ≤ 160 ký tự, hiện trên Google + thẻ chia sẻ.
+   */
+  mo_ta_seo?: string | null;
+  anh_chia_se?: (number | null) | Media;
+  khoi?:
+    | (
+        | {
+            nhan?: string | null;
+            tieu_de: string;
+            mo_ta?: string | null;
+            anh?: (number | null) | Media;
+            nut_chu?: string | null;
+            nut_link?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'dau_trang';
+          }
+        | {
+            tieu_de?: string | null;
+            ds: ('than_so' | 'hom_nay' | 'hop_doi' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy')[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cong_cu';
+          }
+        | {
+            tieu_de?: string | null;
+            bai?: (number | BaiViet)[] | null;
+            mang?: ('tat_ca' | 'than_so' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy' | 'chung') | null;
+            so_bai?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'bai_viet';
+          }
+        | {
+            tieu_de?: string | null;
+            ds?:
+              | {
+                  cau_hoi: string;
+                  tra_loi: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoi_dap';
+          }
+        | {
+            tieu_de: string;
+            mo_ta?: string | null;
+            nut_chu?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'loi_moi';
+          }
+        | {
+            tieu_de?: string | null;
+            noi_dung: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'van_ban';
+          }
+      )[]
+    | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  /**
+   * Sau thời điểm này web báo "đã kết thúc" và không cho Google index. Để trống = không hết hạn.
+   */
+  het_han?: string | null;
+  noindex?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -538,6 +644,10 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'trang-dich';
+        value: number | TrangDich;
+      } | null)
+    | ({
         relationTo: 'bien-tap-vien';
         value: number | BienTapVien;
       } | null);
@@ -620,6 +730,7 @@ export interface BaiVietSelect<T extends boolean = true> {
   canonical?: T;
   noindex?: T;
   dua_vao_llms?: T;
+  vecto?: T;
   generateSlug?: T;
   slug?: T;
   trang_thai_duyet?: T;
@@ -742,10 +853,96 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trang-dich_select".
+ */
+export interface TrangDichSelect<T extends boolean = true> {
+  tieu_de?: T;
+  mo_ta_seo?: T;
+  anh_chia_se?: T;
+  khoi?:
+    | T
+    | {
+        dau_trang?:
+          | T
+          | {
+              nhan?: T;
+              tieu_de?: T;
+              mo_ta?: T;
+              anh?: T;
+              nut_chu?: T;
+              nut_link?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cong_cu?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?: T;
+              id?: T;
+              blockName?: T;
+            };
+        bai_viet?:
+          | T
+          | {
+              tieu_de?: T;
+              bai?: T;
+              mang?: T;
+              so_bai?: T;
+              id?: T;
+              blockName?: T;
+            };
+        hoi_dap?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?:
+                | T
+                | {
+                    cau_hoi?: T;
+                    tra_loi?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        loi_moi?:
+          | T
+          | {
+              tieu_de?: T;
+              mo_ta?: T;
+              nut_chu?: T;
+              id?: T;
+              blockName?: T;
+            };
+        van_ban?:
+          | T
+          | {
+              tieu_de?: T;
+              noi_dung?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  generateSlug?: T;
+  slug?: T;
+  het_han?: T;
+  noindex?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "bien-tap-vien_select".
  */
 export interface BienTapVienSelect<T extends boolean = true> {
   ten_hien_thi?: T;
+  mfa_bat?: T;
+  mfa_bi_mat?: T;
+  mfa_buoc_cuoi?: T;
+  mfa_sai?: T;
+  mfa_khoa_den?: T;
   vai_tro?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1038,10 +1235,15 @@ export interface TaskSchedulePublish {
   input: {
     type?: ('publish' | 'unpublish') | null;
     locale?: string | null;
-    doc?: {
-      relationTo: 'bai-viet';
-      value: number | BaiViet;
-    } | null;
+    doc?:
+      | ({
+          relationTo: 'bai-viet';
+          value: number | BaiViet;
+        } | null)
+      | ({
+          relationTo: 'trang-dich';
+          value: number | TrangDich;
+        } | null);
     global?: string | null;
     user?: {
       relationTo: 'bien-tap-vien';

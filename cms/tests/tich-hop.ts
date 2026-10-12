@@ -5,6 +5,8 @@ import assert from "node:assert/strict";
 import { getPayload, type Payload } from "payload";
 import config from "../src/payload.config";
 import { MENU_MAC_DINH } from "../src/globals/DieuHuong";
+import { vaiTro } from "../src/access";
+import { buocHienTai, docCookie, maTotp, tuBase32 } from "../src/lib/totp";
 
 const chu = (text: string) => ({ type: "text", text, format: 0, detail: 0, mode: "normal", style: "", version: 1 });
 const doan = (...children: unknown[]) =>
@@ -417,6 +419,52 @@ await ca("Trang chủ & banner: link banner/thông báo phải trong site, số 
   const khach = await payload.findGlobal({ slug: "trang-chu", overrideAccess: false }) as unknown as { thong_bao: { link: string } };
   assert.equal(khach.thong_bao.link, "/tai-khoan");
   await payload.updateGlobal({ slug: "trang-chu", overrideAccess: true, data: { thong_bao: { bat: false, chu: "", link: "" } } as never });
+});
+
+await ca("CMS-2 MFA: bật bằng mã TOTP → cookie mở quyền; thiếu cookie = không quyền; chặn dùng lại mã; sai 5 lần khoá", async () => {
+  const qt = await nguoi("quan_tri") as unknown as { id: number };
+  const ep = payload.collections["bien-tap-vien"].config.endpoints || [];
+  const goi = (path: string, body: unknown, cookie = "") => ep.find((e) => e.path === path)!.handler({
+    user: { ...qt, collection: "bien-tap-vien", _strategy: "local-jwt", mfa_bat: undefined }, payload, payloadAPI: "REST",
+    headers: new Headers(cookie ? { cookie } : {}), json: async () => body, context: {},
+  } as never);
+  const r1 = await goi("/mfa/bat-dau", {});
+  assert.equal(r1.status, 200, JSON.stringify(await r1.clone().json()));
+  const { bi_mat } = await r1.json() as { bi_mat: string };
+  const bi = tuBase32(bi_mat);
+  const ma = maTotp(bi, buocHienTai());
+  const r2 = await goi("/mfa/xac-nhan", { ma });
+  assert.equal(r2.status, 200);
+  const cookie = docCookie(r2.headers.get("set-cookie")?.split(";")[0]);
+  assert.ok(cookie);
+  assert.equal((await goi("/mfa/xac-nhan", { ma })).status, 400);                       // không dùng lại được mã vừa dùng
+  const doc = await payload.findByID({ collection: "bien-tap-vien", id: qt.id, overrideAccess: true }) as { mfa_bat?: boolean; mfa_bi_mat?: string };
+  assert.equal(doc.mfa_bat, true);
+  assert.ok(!(await payload.findByID({ collection: "bien-tap-vien", id: qt.id, overrideAccess: false, user: qt as never }) as unknown as Record<string, unknown>).mfa_bi_mat);
+  // vai trò có hiệu lực: không cookie → null; cookie đúng → quan_tri; Local API (script) không cần
+  const req = (c?: string) => ({ user: { ...qt, collection: "bien-tap-vien", vai_tro: "quan_tri", mfa_bat: true, _strategy: "local-jwt" },
+    payloadAPI: "REST", headers: new Headers(c ? { cookie: `cms-mfa=${c}` } : {}) }) as never;
+  assert.equal(vaiTro(req()), null);
+  assert.equal(vaiTro(req(cookie!)), "quan_tri");
+  assert.equal(vaiTro({ ...(req() as object), payloadAPI: "local" } as never), "quan_tri");
+  for (let i = 0; i < 5; i++) await goi("/mfa/xac-nhan", { ma: "000000" });
+  assert.equal((await goi("/mfa/xac-nhan", { ma: maTotp(bi, buocHienTai() + 1) })).status, 429);
+});
+
+await ca("CMS-2 trợ lý AI: kiểm đầu vào, máy đọc bị từ chối, thiếu engine báo rõ (không bịa)", async () => {
+  const ep = payload.collections["bai-viet"].config.endpoints || [];
+  const h = ep.find((e) => e.path === "/soan-nhap")!.handler;
+  const goi = (user: unknown, body: unknown) => h({ user, payload, payloadAPI: "local", headers: new Headers(), json: async () => body, context: {} } as never);
+  assert.equal((await goi(mayDoc, { van: "Một đoạn văn đủ dài để sửa.", hanh_dong: "viet_lai" })).status, 403);
+  assert.equal((await goi(bienTap, { van: "ngắn", hanh_dong: "viet_lai" })).status, 422);
+  assert.equal((await goi(bienTap, { van: "Một đoạn văn đủ dài để sửa.", hanh_dong: "bia_dat" })).status, 422);
+  const cu = process.env.ENGINE_URL; delete process.env.ENGINE_URL;
+  const r = await goi(ctv, { van: "Một đoạn văn đủ dài để sửa.", hanh_dong: "soat_loi" });
+  process.env.ENGINE_URL = cu;
+  assert.equal(r.status, 200);
+  const d = await r.json() as { nhap: string | null; loi?: string };
+  assert.equal(d.nhap, null);
+  assert.match(d.loi ?? "", /ENGINE_URL/);
 });
 
 // dọn

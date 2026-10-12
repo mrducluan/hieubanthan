@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { CHU_DE, dsLaSoMau, dsTuoiHuong, duongTrang, duongTuoi, mucLuc } from "@/lib/kien-thuc";
 import { dsBaiTongHop, duongBlog } from "@/lib/blog";
 import { urlDayDu } from "@/lib/seo";
+import { daHetHan, dsTrangDichCms } from "@/lib/cms";
 
 export const revalidate = 21600;
 
@@ -13,8 +14,12 @@ const TINH: [string, number][] = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [ds, mau, tuoi, blog] = await Promise.all([mucLuc(), dsLaSoMau(), dsTuoiHuong(), dsBaiTongHop()]);
+  const [ds, mau, tuoi, blog, suKien] = await Promise.all([mucLuc(), dsLaSoMau(), dsTuoiHuong(), dsBaiTongHop(), dsTrangDichCms()]);
   return [
+    // CMS-3: trang đích còn hạn, không noindex
+    ...suKien.filter((t) => !t.noindex && !daHetHan(t)).map((t) => ({
+      url: urlDayDu(`/su-kien/${t.slug}`), lastModified: t.updatedAt, changeFrequency: "weekly" as const, priority: 0.6,
+    })),
     ...TINH.map(([d, p]) => ({ url: urlDayDu(d), changeFrequency: "weekly" as const, priority: p })),
     ...Object.keys(CHU_DE).map((k) => ({ url: urlDayDu(`/kien-thuc/${k}`), changeFrequency: "weekly" as const, priority: 0.8 })),
     { url: urlDayDu("/phong-thuy/huong-hop-tuoi"), changeFrequency: "monthly" as const, priority: 0.8 },

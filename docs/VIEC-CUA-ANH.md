@@ -391,6 +391,15 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
      không dán vào chat) → Redeploy.
   3) /quan-tri/cai-dat → nhóm "Luận giải toàn bộ" bật thu Sao; nhóm "Hỏi đáp" bật giới hạn khi chi phí AI tăng.
   4) Xem tiền + người nạp ở /quan-tri/doanh-thu. Quy tắc + lộ trình: `docs/KE-HOACH-MIEN-PHI-VA-SAO.md`.
+- [ ] CMS11. (2026-10-12, CMS-2) Vercel project **cms** thêm `ENGINE_URL` + `ENGINE_API_KEY` (giống bên web) → Redeploy →
+  khung **Trợ lý AI soạn nháp** ở cột phải trang viết bài chạy được (cần `OPENROUTER_API_KEY` trên Render).
+- [ ] CMS12. (2026-10-12, CMS-2) Bật **xác thực 2 bước** cho chính anh: đăng xuất CMS → mở
+  `https://cms.hieuban.com/admin/xac-thuc-2-buoc` sau khi đăng nhập → "Bật xác thực 2 bước" → thêm khoá vào Google
+  Authenticator → nhập mã. Xong rồi mới đặt env `CMS_BAT_BUOC_MFA=1` ở Vercel cms → Redeploy (bắt buộc với Quản
+  trị/Chủ biên). Mất điện thoại: một Quản trị khác đặt lại, hoặc em xoá cột MFA của tài khoản anh bằng SQL.
+- [ ] CMS13. (2026-10-12, CMS-3/4) Sau khi PR merge + CMS redeploy: thử tạo **Trang đích** (Giao diện website → Trang đích)
+  cho một chiến dịch (vd "Mời bạn tháng 11") → xuất bản → xem ở `hieuban.com/su-kien/{slug}`. Khi viết bài, mở khung
+  **Gợi ý liên kết nội bộ** ở cột phải để chèn 2–5 link tới trang kiến thức/bài liên quan (tốt cho SEO).
 - [ ] CMS9. Ảnh/video: giữ **Supabase Storage** bây giờ, video đăng YouTube rồi chèn khối "Video YouTube"; chuyển R2
   khi vượt ~50 GB ảnh hoặc ~200 GB băng thông/tháng (`docs/LUU-TRU-MEDIA.md`).
 - [ ] CG-a. Chốt **không làm hoa hồng nhiều tầng** (đa cấp dịch vụ bị cấm; Điều 217a BLHS) — thay bằng lộ trình chuyên

@@ -1,5 +1,6 @@
 // CMS Hiểu Bản Thân — Payload 3 (headless). Thiết kế: docs/KIEN-TRUC-CMS.md.
 // Chạy riêng ở cms.hieuban.com; web hieuban.com chỉ ĐỌC qua REST (web/lib/cms.ts). Kho tri thức engine vẫn ở git.
+import { TrangDich } from "./collections/TrangDich";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { postgresAdapter } from "@payloadcms/db-postgres";
@@ -53,10 +54,13 @@ export default buildConfig({
       graphics: { Logo: "/components/ThuongHieu#Logo", Icon: "/components/ThuongHieu#Icon" },
       beforeDashboard: ["/components/TongQuan#TongQuan"],
       beforeLogin: ["/components/TruocDangNhap#TruocDangNhap"],
+      // CMS-2: tài khoản cần MFA mà chưa xác thực bị Payload chuyển sang "unauthorized" → trỏ route đó về màn 2 bước.
+      views: { xacThuc: { Component: "/components/XacThuc#XacThuc", path: "/xac-thuc-2-buoc", exact: true } },
     },
+    routes: { unauthorized: "/xac-thuc-2-buoc" },
   },
   i18n: { supportedLanguages: { vi, en }, fallbackLanguage: "vi" },
-  collections: [BaiViet, ChuyenMuc, TacGia, Media, BienTapVien],
+  collections: [BaiViet, ChuyenMuc, TacGia, Media, TrangDich, BienTapVien],
   globals: [TrangChu, DieuHuong, TinhNang],
   editor: lexicalEditor(),
   db: postgresAdapter({
