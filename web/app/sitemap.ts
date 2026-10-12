@@ -28,5 +28,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: urlDayDu(duongBlog(p.slug)), ...(p.capNhat ?? p.ngay ? { lastModified: (p.capNhat ?? p.ngay)! } : {}),
       changeFrequency: "monthly" as const, priority: p.nguon === "cms" ? 0.7 : 0.5,
     })),
+    // Chuyên mục có ít nhất một bài (trang trống là noindex).
+    ...[...new Set(blog.filter((p) => !p.noindex).flatMap((p) => (p.chuyenMuc ?? []).map((c) => c.slug)))].map((slug) => ({
+      url: urlDayDu(`/blog/chuyen-muc/${encodeURIComponent(slug)}`), changeFrequency: "weekly" as const, priority: 0.5,
+    })),
   ];
 }

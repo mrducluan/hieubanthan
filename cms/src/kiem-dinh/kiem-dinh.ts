@@ -28,6 +28,9 @@ export type Nhom = "seo" | "geo" | "eeat" | "noi_dung";
 export type MucKiem = { ma: string; nhom: Nhom; muc_do: MucDo; thong_diep: string; chan?: boolean };
 export type KetQuaKiem = { diem: number; muc: MucKiem[]; loi_chan: MucKiem[] };
 
+/** Tiêu đề tạm cho bài tự lưu trước khi gõ tiêu đề (danh sách bài không còn dòng "<No Tiêu đề>"). Chưa đổi → chặn xuất bản. */
+export const TIEU_DE_TAM = "(Chưa đặt tiêu đề)";
+
 export const TEN_NHOM: Record<Nhom, string> = {
   seo: "SEO", geo: "AI SEO / GEO", eeat: "E-E-A-T", noi_dung: "Ranh giới nội dung",
 };
@@ -212,7 +215,7 @@ export function kiemDinhBai(bai: BaiKiem): KetQuaKiem {
 
   // Dữ liệu đến từ form đang gõ dở → mọi trường có thể sai kiểu; ép về chuỗi/mảng an toàn.
   const meta = bai.meta && typeof bai.meta === "object" ? bai.meta : {};
-  const tieuDe = chuoi(bai.tieu_de);
+  const tieuDe = chuoi(bai.tieu_de).startsWith(TIEU_DE_TAM) ? "" : chuoi(bai.tieu_de);
   const metaTitle = chuoi(meta.title) || tieuDe;
   const moTa = chuoi(meta.description) || chuoi(bai.mo_ta_ngan);
   const slug = chuoi(bai.slug);
@@ -224,7 +227,7 @@ export function kiemDinhBai(bai: BaiKiem): KetQuaKiem {
   const tln = chuoi(bai.tra_loi_nhanh);
 
   // ---------------- SEO
-  if (!tieuDe) them("tieu_de", "seo", "loi", "Chưa có tiêu đề bài (H1).");
+  if (!tieuDe) them("tieu_de", "seo", "loi", "Chưa có tiêu đề bài (H1).", true);
   else if (tieuDe.length < 20 || tieuDe.length > 70)
     them("tieu_de", "seo", "canh_bao", `Tiêu đề ${tieuDe.length} ký tự — nên 20–70 để vừa kết quả tìm kiếm.`);
   else them("tieu_de", "seo", "dat", `Tiêu đề ${tieuDe.length} ký tự.`);

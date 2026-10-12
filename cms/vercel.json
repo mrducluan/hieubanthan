@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "regions": ["sin1"],
+  "ignoreCommand": "[ \"$VERCEL_ENV\" != \"production\" ]",
   "crons": [{ "path": "/api/payload-jobs/run", "schedule": "0 1 * * *" }]
 }

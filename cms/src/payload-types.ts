@@ -229,6 +229,10 @@ export interface BaiViet {
    * Quyết định công cụ được mời cuối bài và bài liên quan.
    */
   mang: 'than_so' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy' | 'chung';
+  /**
+   * Tin tức → schema NewsArticle (Google News/Discover), ghi rõ ngày giờ đăng và cập nhật.
+   */
+  loai_bai: 'bai_viet' | 'tin_tuc' | 'huong_dan';
   chuyen_muc?: (number | ChuyenMuc)[] | null;
   the?: string[] | null;
   /**
@@ -618,6 +622,7 @@ export interface BaiVietSelect<T extends boolean = true> {
   ghi_chu_duyet?: T;
   nguoi_tao?: T;
   mang?: T;
+  loai_bai?: T;
   chuyen_muc?: T;
   the?: T;
   ky_ten?: T;

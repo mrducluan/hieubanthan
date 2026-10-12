@@ -1,7 +1,7 @@
 // Viết TRƯỚC kiem-dinh.ts (quy tắc dự án). Chạy: npm test (node --test, không cần thư viện test).
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { boDau, docLexical, kiemDinhBai, slugViet, type BaiKiem } from "./kiem-dinh.ts";
+import { boDau, docLexical, kiemDinhBai, slugViet, TIEU_DE_TAM, type BaiKiem } from "./kiem-dinh.ts";
 
 // ---- trợ giúp dựng cây Lexical tối giản (đúng dạng Payload lưu) ----
 const chu = (text: string) => ({ type: "text", text, format: 0, version: 1 });
@@ -209,4 +209,12 @@ test("Điểm nằm trong 0–100 và mỗi mục có thông điệp tiếng Vi�
 test("kiemDinhBai chịu được form gõ dở: mảng là số dòng, trường sai kiểu", () => {
   const kq = kiemDinhBai({ tieu_de: 5 as never, hoi_dap: 2 as never, nguon: "x" as never, meta: "y" as never, tra_loi_nhanh: null });
   assert.ok(kq.diem >= 0);
+});
+
+test("tiêu đề tạm / trống → lỗi chặn xuất bản", () => {
+  for (const t of [TIEU_DE_TAM, "", `${TIEU_DE_TAM} 12/10`]) {
+    const kq = kiemDinhBai({ ...baiTot(), tieu_de: t });
+    assert.ok(kq.loi_chan.some((m) => m.ma === "tieu_de"), t);
+  }
+  assert.ok(!kiemDinhBai(baiTot()).loi_chan.some((m) => m.ma === "tieu_de"));
 });

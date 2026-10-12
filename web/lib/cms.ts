@@ -18,7 +18,14 @@ export type BaiCmsTomTat = {
   publishedAt?: string | null; updatedAt: string; mang?: string | null; the?: string[] | null;
   noindex?: boolean | null; dua_vao_llms?: boolean | null; tra_loi_nhanh?: string | null;
   meta?: { title?: string | null; description?: string | null; image?: AnhCms | null } | null;
+  loai_bai?: LoaiBai | null;
+  chuyen_muc?: ChuyenMucCms[] | null;
 };
+export type LoaiBai = "bai_viet" | "tin_tuc" | "huong_dan";
+export type ChuyenMucCms = { id?: number; ten: string; slug: string; mo_ta?: string | null };
+/** Kiểu schema.org theo loại bài: tin tức → NewsArticle (Google News/Discover), hướng dẫn → Article, còn lại BlogPosting. */
+export const KIEU_LD: Record<LoaiBai, string> = { bai_viet: "BlogPosting", tin_tuc: "NewsArticle", huong_dan: "Article" };
+export const NHAN_LOAI: Record<LoaiBai, string> = { bai_viet: "Bài viết", tin_tuc: "Tin tức", huong_dan: "Hướng dẫn" };
 export type BaiCms = BaiCmsTomTat & {
   noi_dung_html?: string | null;
   hoi_dap?: { cau_hoi: string; tra_loi: string }[] | null;
@@ -26,7 +33,6 @@ export type BaiCms = BaiCmsTomTat & {
   tu_khoa_chinh?: string | null; tu_khoa_phu?: string[] | null; canonical?: string | null;
   ky_ten?: "ban_bien_tap" | "tac_gia" | "tham_dinh" | null;
   tac_gia?: NguoiCms | null; nguoi_tham_dinh?: NguoiCms | null; ngay_tham_dinh?: string | null;
-  chuyen_muc?: { ten: string; slug: string }[] | null;
   bai_lien_quan?: BaiCmsTomTat[] | null; slug_cu?: string[] | null;
   _status?: "draft" | "published";
 };
@@ -76,8 +82,19 @@ const tv = (o: Record<string, unknown>) => chuoiTruyVan(o).join("&");
 
 const CHON_TOM_TAT = {
   tieu_de: true, slug: true, mo_ta_ngan: true, anh_bia: true, publishedAt: true, updatedAt: true, mang: true,
-  the: true, noindex: true, dua_vao_llms: true, tra_loi_nhanh: true, meta: true,
+  the: true, noindex: true, dua_vao_llms: true, tra_loi_nhanh: true, meta: true, loai_bai: true, chuyen_muc: true,
 };
+
+/** Chuyên mục chỉ hợp lệ khi đã populate (object có ten + slug). */
+export const cacChuyenMuc = (b: Pick<BaiCmsTomTat, "chuyen_muc">): ChuyenMucCms[] =>
+  (b.chuyen_muc ?? []).filter((c): c is ChuyenMucCms => Boolean(c && typeof c === "object" && c.slug && c.ten));
+
+/** Mọi chuyên mục (cho trang /blog/chuyen-muc/{slug}). */
+export async function dsChuyenMucCms(): Promise<ChuyenMucCms[]> {
+  if (!coCms()) return [];
+  const r = await goiCms<{ docs: ChuyenMucCms[] }>(`/api/chuyen-muc?${tv({ limit: 100, depth: 0, sort: "ten", select: { ten: true, slug: true, mo_ta: true } })}`);
+  return (r?.docs ?? []).filter((c) => c.slug && c.ten);
+}
 
 export async function tinhNangCms(): Promise<TinhNangCms> {
   const g = await goiCms<Partial<TinhNangCms>>("/api/globals/tinh-nang?depth=0");

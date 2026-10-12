@@ -361,7 +361,7 @@ lần trước) → chọn vai trò → **Cấp / đổi vai trò**.
 
 ---
 
-## CMS. Phòng biên tập Payload — cms.hieuban.com (CMS-1, 2026-10-11)
+## CMS. Phòng biên tập Payload (bản đồ tổng + kế hoạch tiếp: `docs/KE-HOACH-HOAN-THIEN.md`) — cms.hieuban.com (CMS-1, 2026-10-11)
 
 Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bước này thì web vẫn chạy như cũ.
 
@@ -372,8 +372,8 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
 - [ ] CMS2b. Kiểm build log CMS có dòng `[van-tay-kb] 19 tệp, … cụm` (kiểm trùng với kho tri thức, CG-6). Nếu thấy
   "không thấy engine/app/kb/data" → Vercel project cms → Settings → Build and Deployment → Root Directory → bật
   **Include files outside the root directory in the Build Step** → Redeploy.
-- [ ] CMS3. GoDaddy: CNAME `cms` → Vercel; gắn `cms.hieuban.com` vào project CMS.
-- [ ] CMS4. Mở `https://cms.hieuban.com/admin` → tạo tài khoản đầu tiên bằng đúng email đã khai.
+- [x] CMS3. (xong 2026-10-12) GoDaddy: CNAME `cms` → Vercel; gắn `cms.hieuban.com` vào project CMS.
+- [x] CMS4. (xong 2026-10-12) Mở `https://cms.hieuban.com/admin` → tạo tài khoản đầu tiên bằng đúng email đã khai.
 - [ ] CMS5. CMS → Ban biên tập → tạo "Web hieuban.com", vai trò **Máy đọc**, tick Enable API Key → chép khoá.
 - [ ] CMS6. Vercel project **web** thêm `CMS_URL`, `CMS_API_KEY`, `CMS_WEBHOOK_SECRET`, `CMS_PREVIEW_SECRET` (giống
   bên CMS), `CMS_ANH_URL` → Redeploy.

@@ -172,6 +172,55 @@ test("web hiện bài: H1, Trả lời nhanh, mục lục, FAQ, JSON-LD, chữ k
   expect(await md.text()).toContain("## Số 7 trong công việc");
 });
 
+test("chuyên mục + loại Tin tức: chip ở /blog, trang chuyên mục có ItemList, bài ghi NewsArticle + giờ đăng", async ({ page, request }) => {
+  const token = await tokenQt(request);
+  const h = { Authorization: `JWT ${token}` };
+  const cm = await request.post(`${CMS}/api/chuyen-muc`, { headers: h, data: { ten: "Thần số ứng dụng", mo_ta: "Áp dụng thần số học vào đời sống." } });
+  expect(cm.ok(), await cm.text()).toBeTruthy();
+  const cmDoc = (await cm.json()).doc as { id: number; slug: string };
+  expect(cmDoc.slug).toBe("than-so-ung-dung");
+  const r = await request.get(`${CMS}/api/bai-viet?where[slug][equals]=${SLUG}`, { headers: h });
+  const id = (await r.json()).docs[0].id;
+  const u = await request.patch(`${CMS}/api/bai-viet/${id}`, { headers: h, data: { chuyen_muc: [cmDoc.id], loai_bai: "tin_tuc", _status: "published" } });
+  expect(u.ok(), await u.text()).toBeTruthy();
+
+  await choWeb(request, "/blog/chuyen-muc/than-so-ung-dung", (s, b) => s === 200 && b.includes(TIEU_DE));
+  await page.goto(`${WEB}/blog`);
+  await expect(page.getByTestId("chip-chuyen-muc").getByRole("link", { name: /Thần số ứng dụng/ })).toBeVisible();
+  await expect(page.getByTestId("bai-noi-bat")).toContainText("Tin tức");
+  await page.getByTestId("chip-chuyen-muc").getByRole("link", { name: /Thần số ứng dụng/ }).click();
+  await expect(page).toHaveURL(/\/blog\/chuyen-muc\/than-so-ung-dung$/);
+  await expect(page.locator("h1")).toHaveText("Thần số ứng dụng");
+  const ldCm = (await page.locator('script[type="application/ld+json"]').allTextContents()).join("\n");
+  expect(ldCm).toContain('"@type":"CollectionPage"');
+  expect(ldCm).toContain(`/blog/${SLUG}`);
+  expect(await (await request.get(`${WEB}/sitemap.xml`)).text()).toContain("/blog/chuyen-muc/than-so-ung-dung");
+  const rss = await request.get(`${WEB}/blog/rss.xml`);
+  expect(rss.headers()["content-type"]).toContain("application/rss+xml");
+  const rssText = await rss.text();
+  expect(rssText).toContain(`/blog/${SLUG}</link>`);
+  expect(rssText).toContain("<category>Thần số ứng dụng</category>");
+
+  await page.goto(`${WEB}/blog/${SLUG}`);
+  await expect(page.locator('nav[aria-label="Đường dẫn"]').getByRole("link", { name: "Thần số ứng dụng" })).toBeVisible();
+  await expect(page.locator('[data-loai-bai="tin_tuc"]')).toBeVisible();
+  const ld = (await page.locator('script[type="application/ld+json"]').allTextContents()).join("\n");
+  expect(ld).toContain('"@type":"NewsArticle"');
+  // Chuyên mục không tồn tại → 404.
+  expect((await request.get(`${WEB}/blog/chuyen-muc/khong-co-that`)).status()).toBe(404);
+});
+
+test("nháp tạo mới chưa gõ tiêu đề → danh sách hiện '(Chưa đặt tiêu đề)', không '<No …>'", async ({ page }) => {
+  await dangNhap(page);
+  await page.goto(`${CMS}/admin/collections/bai-viet/create`);
+  await expect(page.getByTestId("kiem-dinh")).toBeVisible();
+  // Tự lưu nháp tạo bản ghi → chờ URL có id.
+  await expect(page).toHaveURL(/\/bai-viet\/\d+/, { timeout: 20_000 });
+  await page.goto(`${CMS}/admin/collections/bai-viet`);
+  await expect(page.getByText("(Chưa đặt tiêu đề)").first()).toBeVisible();
+  await expect(page.getByText(/<No /)).toHaveCount(0);
+});
+
 test("sửa nháp: người đọc vẫn thấy bản cũ; link xem trước có ký thấy bản nháp", async ({ page, request, browser }) => {
   await dangNhap(page);
   await page.goto(`${CMS}/admin/collections/bai-viet`);

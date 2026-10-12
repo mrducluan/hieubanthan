@@ -10,7 +10,7 @@ import { APIError, slugField, type CollectionBeforeChangeHook, type CollectionBe
 import { chiChuBien, daDangNhap, daXuatBanHoacNoiBo, docPhienBan, laChuBien, laCongTacVien, suaBai, taoBai, truongBienTap, truongChuBien, truongNoiBo } from "../access";
 import { KHOI } from "../blocks";
 import { lamMoiKhiDoiBai, lamMoiKhiXoaBai } from "../hooks/lamMoiWeb";
-import { chuanHoaDuLieu, kiemDinhBai, slugViet, type BaiKiem } from "../kiem-dinh/kiem-dinh";
+import { chuanHoaDuLieu, kiemDinhBai, slugViet, TIEU_DE_TAM, type BaiKiem } from "../kiem-dinh/kiem-dinh";
 import { boChuyenHtml } from "../lib/html";
 import { kiemTrung } from "../lib/trung-lap";
 import { taoSlug } from "../lib/slug";
@@ -23,6 +23,13 @@ export const MANG = [
   { label: "Kinh Dịch", value: "kinh_dich" },
   { label: "Phong thuỷ", value: "phong_thuy" },
   { label: "Chung / văn hoá", value: "chung" },
+];
+
+/** Loại bài → kiểu schema.org trên web (NewsArticle cho tin tức: Google News / Discover; BlogPosting; Article cho hướng dẫn). */
+export const LOAI_BAI = [
+  { label: "Bài viết (blog)", value: "bai_viet" },
+  { label: "Tin tức / sự kiện", value: "tin_tuc" },
+  { label: "Hướng dẫn / cẩm nang", value: "huong_dan" },
 ];
 
 export const TRANG_THAI_DUYET = [
@@ -72,7 +79,16 @@ const slugTuTieuDe: CollectionBeforeValidateHook = ({ data, originalDoc }) => {
   if (!data) return data;
   const slug = (data.slug ?? originalDoc?.slug ?? "") as string;
   const tieuDe = (data.tieu_de ?? originalDoc?.tieu_de ?? "") as string;
-  if (!String(slug).trim() && String(tieuDe).trim()) data.slug = slugViet(tieuDe);
+  if (!String(slug).trim() && String(tieuDe).trim() && !String(tieuDe).startsWith(TIEU_DE_TAM)) data.slug = slugViet(tieuDe);
+  return data;
+};
+
+/** Bài tự lưu khi chưa gõ tiêu đề → tiêu đề tạm (danh sách bài hiện "(Chưa đặt tiêu đề)" thay vì "<No Tiêu đề>").
+ *  Kiểm định coi tiêu đề tạm là trống → chặn xuất bản / gửi duyệt; slug chỉ sinh khi có tiêu đề thật. */
+const tieuDeTam: CollectionBeforeValidateHook = ({ data, originalDoc }) => {
+  if (!data) return data;
+  const t = data.tieu_de !== undefined ? data.tieu_de : originalDoc?.tieu_de;
+  if (!String(t ?? "").trim()) data.tieu_de = TIEU_DE_TAM;
   return data;
 };
 
@@ -106,7 +122,7 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
   labels: { singular: "Bài viết", plural: "Bài viết" },
   admin: {
     useAsTitle: "tieu_de",
-    defaultColumns: ["tieu_de", "mang", "trang_thai_duyet", "diem_kiem_dinh", "_status", "updatedAt"],
+    defaultColumns: ["tieu_de", "loai_bai", "mang", "trang_thai_duyet", "diem_kiem_dinh", "_status", "updatedAt"],
     listSearchableFields: ["tieu_de", "slug", "tu_khoa_chinh"],
     group: "Nội dung",
     description: "Bài hiện ở hieuban.com/blog/{đường dẫn}. Biên tập viên lưu nháp; Chủ biên bấm Xuất bản.",
@@ -134,7 +150,7 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     },
   ],
   hooks: {
-    beforeValidate: [chuanHoaTiengViet, slugTuTieuDe],
+    beforeValidate: [chuanHoaTiengViet, tieuDeTam, slugTuTieuDe],
     beforeChange: [quyTrinhDuyet, ngayXuatBan, giuSlugCu, kiemDinhTruocKhiLuu],
     afterChange: [lamMoiKhiDoiBai],
     afterDelete: [lamMoiKhiXoaBai],
@@ -253,6 +269,10 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     {
       name: "mang", label: "Mảng", type: "select", required: true, defaultValue: "chung", options: MANG,
       admin: { position: "sidebar", description: "Quyết định công cụ được mời cuối bài và bài liên quan." },
+    },
+    {
+      name: "loai_bai", label: "Loại bài", type: "select", required: true, defaultValue: "bai_viet", options: LOAI_BAI,
+      admin: { position: "sidebar", description: "Tin tức → schema NewsArticle (Google News/Discover), ghi rõ ngày giờ đăng và cập nhật." },
     },
     { name: "chuyen_muc", label: "Chuyên mục", type: "relationship", relationTo: "chuyen-muc", hasMany: true, admin: { position: "sidebar" } },
     { name: "the", label: "Thẻ", type: "text", hasMany: true, maxRows: 12, admin: { position: "sidebar" } },
