@@ -3,7 +3,7 @@ import type { CollectionConfig } from "payload";
 import { slugField } from "payload";
 import { ai, chiChuBien } from "../access";
 import { lamMoiKhiDoi } from "../hooks/lamMoiWeb";
-import { taoSlug } from "../lib/slug";
+import { slugTuTruong, taoSlug } from "../lib/slug";
 
 export const TacGia: CollectionConfig = {
   slug: "tac-gia",
@@ -13,7 +13,7 @@ export const TacGia: CollectionConfig = {
     description: "Người ký tên trên bài. Chỉ ghi thông tin chính người đó đã công bố (EEAT-1).",
   },
   access: { read: ai, create: chiChuBien, update: chiChuBien, delete: chiChuBien },
-  hooks: { afterChange: [lamMoiKhiDoi] },
+  hooks: { beforeValidate: [slugTuTruong("ten")], afterChange: [lamMoiKhiDoi] },
   fields: [
     { name: "ten", label: "Tên", type: "text", required: true },
     { name: "chuc_danh", label: "Chức danh / vai trò", type: "text",

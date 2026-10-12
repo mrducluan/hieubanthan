@@ -307,6 +307,17 @@ await ca("loại bài Tin tức lưu được, khách đọc được qua REST",
   assert.equal(k.loai_bai, "tin_tuc");
 });
 
+await ca("tạo chuyên mục / tác giả qua API không gửi slug → slug tự sinh từ tên (bỏ dấu, cả đ)", async () => {
+  const c = await payload.create({ collection: "chuyen-muc", user: chuBien, overrideAccess: false,
+    data: { ten: `Đời sống ${dau}` } as never }) as unknown as { id: number; slug: string };
+  assert.equal(c.slug, `doi-song-${dau}`);
+  await payload.delete({ collection: "chuyen-muc", id: c.id, overrideAccess: true });
+  const t = await payload.create({ collection: "tac-gia", user: chuBien, overrideAccess: false,
+    data: { ten: `Đức Thử ${dau}` } as never }) as unknown as { id: number; slug: string };
+  tao.push({ collection: "tac-gia", id: t.id });
+  assert.equal(t.slug, `duc-thu-${dau}`);
+});
+
 // ---------------- CG-6 kiểm trùng nội dung
 const vanChep = "Người mang số chủ đạo bảy thường thích đọc sách, tự tìm hiểu bản chất của sự việc, ít khi tin ngay lời "
   + "người khác và cần những khoảng lặng một mình để nạp lại năng lượng sau mỗi tuần làm việc căng thẳng. Họ quan sát lâu "
