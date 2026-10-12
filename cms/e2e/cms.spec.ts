@@ -113,6 +113,11 @@ test("viết bài: Kiểm định chấm khi gõ, lỗi chặn không cho xuất
   await expect(page.getByTestId("kiem-dinh-chan")).toBeVisible();
   await expect(page.locator('[data-ma="vung_cam"][data-muc-do="loi"]')).toBeVisible();
 
+  // CG-6: nút Kiểm trùng gọi máy chủ, so với bài khác + kho tri thức.
+  await page.getByTestId("kiem-trung").getByRole("button", { name: /Kiểm trùng nội dung/ }).click();
+  await expect(page.locator('[data-testid="kiem-trung"] li[data-ma="trung_bai"][data-muc-do="dat"]')).toBeVisible();
+  await expect(page.locator('[data-testid="kiem-trung"] li[data-ma="trung_kho_tri_thuc"]')).toBeVisible();
+
   // Tab SEO · GEO: từ khoá chính
   await page.locator(".tabs-field__tab-button", { hasText: "SEO · GEO" }).click();
   await page.fill("#field-tu_khoa_chinh", "số chủ đạo 7");

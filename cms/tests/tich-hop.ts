@@ -13,6 +13,8 @@ const khoi = (fields: Record<string, unknown>) =>
   ({ type: "block", version: 2, format: "", fields: { id: Math.random().toString(16).slice(2, 14), blockName: "", ...fields } });
 const goc = (...children: unknown[]) => ({ root: { type: "root", children, direction: "ltr", format: "", indent: 0, version: 1 } });
 const tu = (n: number) => Array.from({ length: n }, (_, i) => `chữ${i % 7}`).join(" ");
+// Thân bài riêng cho từng bài thử: bài giống hệt nhau giờ bị kiểm trùng (CG-6) chặn khi cộng tác viên gửi duyệt.
+const tuRieng = (khoa: string, n: number) => Array.from({ length: n }, (_, i) => `${khoa.replace(/\W/g, "")}${i}`).join(" ");
 
 let dat = 0;
 async function ca(ten: string, f: () => Promise<void>) {
@@ -56,7 +58,7 @@ const baiSach = (slug: string) => ({
   noi_dung: goc(
     doan(chu("Số chủ đạo 7 là con số của người thích tìm hiểu.")),
     h("h2", "Số chủ đạo 7 là gì?"),
-    doan(chu(tu(120))),
+    doan(chu(tuRieng(slug, 120))),
     khoi({ blockType: "ghi_chu", kieu: "tu_soi", noi_dung: "Bạn thấy mình giống ở điểm nào?" }),
     khoi({ blockType: "keu_goi", cong_cu: "/than-so", loi_moi: "Xem số của bạn", nut: "Xem ngay" }),
     khoi({ blockType: "trich_dan", cau: "Biết người là trí, biết mình là sáng.", nguon: "Đạo Đức Kinh, chương 33" }),
@@ -275,6 +277,66 @@ await ca("khối video YouTube → iframe youtube-nocookie trong HTML cho web; l
   // Nháp bỏ qua kiểm hợp lệ (Payload) → kiểm khi xuất bản; bộ chuyển HTML vẫn bỏ link sai nếu lọt.
   await nem(() => payload.create({ collection: "bai-viet", user: chuBien, overrideAccess: false,
     data: { ...y, _status: "published" } as never }), /YouTube|invalid|không hợp lệ/i);
+});
+
+// ---------------- CG-6 kiểm trùng nội dung
+const vanChep = "Người mang số chủ đạo bảy thường thích đọc sách, tự tìm hiểu bản chất của sự việc, ít khi tin ngay lời "
+  + "người khác và cần những khoảng lặng một mình để nạp lại năng lượng sau mỗi tuần làm việc căng thẳng. Họ quan sát lâu "
+  + "rồi mới nói, ghét bị thúc ép, và thường chỉ mở lòng với vài người bạn đã chứng tỏ được sự tin cậy qua nhiều năm.";
+const baiChep = (slug: string, van: string) => {
+  const x = baiSach(slug);
+  x.noi_dung.root.children.splice(2, 1, doan(chu(van)) as never);
+  return x;
+};
+await ca("cộng tác viên gửi duyệt bài chép bài đã xuất bản → chặn, nêu tên bài gốc + đoạn trùng", async () => {
+  const goc1 = await payload.create({ collection: "bai-viet", user: chuBien, overrideAccess: false,
+    data: { ...baiChep(`${dau}-goc`, vanChep), tieu_de: "Bài gốc số 7", _status: "published" } as never });
+  tao.push({ collection: "bai-viet", id: goc1.id });
+  await nem(() => payload.create({ collection: "bai-viet", user: ctv2, overrideAccess: false, draft: true,
+    data: { ...baiChep(`${dau}-chep`, vanChep), trang_thai_duyet: "cho_duyet", _status: "draft" } as never }),
+    /Chưa gửi duyệt được.*Trùng \d+% với bài "Bài gốc số 7".*Đoạn trùng: "/);
+  // Lưu nháp vẫn được (kiểm trùng chỉ chạy khi gửi duyệt / xuất bản).
+  const nhap = await payload.create({ collection: "bai-viet", user: ctv2, overrideAccess: false, draft: true,
+    data: { ...baiChep(`${dau}-chep2`, vanChep), _status: "draft" } as never });
+  tao.push({ collection: "bai-viet", id: nhap.id });
+});
+
+await ca("Chủ biên xuất bản bài trùng → chỉ cảnh báo, ghi vào ghi chú kiểm định", async () => {
+  const b = await payload.create({ collection: "bai-viet", user: chuBien, overrideAccess: false,
+    data: { ...baiChep(`${dau}-chep-cb`, vanChep), _status: "published" } as never });
+  tao.push({ collection: "bai-viet", id: b.id });
+  const d = await payload.findByID({ collection: "bai-viet", id: b.id, overrideAccess: true, depth: 0 }) as unknown as { ghi_chu_kiem_dinh?: string };
+  assert.match(d.ghi_chu_kiem_dinh ?? "", /Trùng \d+% với/);
+});
+
+await ca("chép nguyên văn kho tri thức → chặn cộng tác viên (vân tay KB dựng lúc build)", async () => {
+  const fs = await import("node:fs");
+  const kb = JSON.parse(fs.readFileSync("../engine/app/kb/data/thanso_chan_dung.json", "utf8")) as unknown;
+  const ds: string[] = [];
+  const nhat = (v: unknown) => { if (typeof v === "string" && v.length > 200) ds.push(v); else if (v && typeof v === "object") Object.values(v).forEach(nhat); };
+  nhat(kb);
+  assert.ok(ds.length >= 2, "cần đoạn KB đủ dài");
+  await nem(() => payload.create({ collection: "bai-viet", user: ctv2, overrideAccess: false, draft: true,
+    data: { ...baiChep(`${dau}-chep-kb`, ds.slice(0, 3).join(" ")), trang_thai_duyet: "cho_duyet", _status: "draft" } as never }),
+    /kho tri thức/);
+});
+
+await ca("nút Kiểm trùng (POST /api/bai-viet/kiem-trung): cộng tác viên dùng được, bài nháp người khác không lộ tên, máy đọc bị từ chối", async () => {
+  const ep = payload.collections["bai-viet"].config.endpoints || [];
+  const h = ep.find((e) => e.path === "/kiem-trung")!.handler;
+  const goi = (user: unknown, body: unknown) => h({ user, payload, json: async () => body, context: {} } as never);
+  const nhapKhac = await payload.create({ collection: "bai-viet", user: bienTap, overrideAccess: false, draft: true,
+    data: { ...baiChep(`${dau}-nhap-bi-mat`, vanChep.split("").reverse().join("") + " " + tuRieng("bimat", 60)), tieu_de: "Tiêu đề bí mật", _status: "draft" } as never });
+  tao.push({ collection: "bai-viet", id: nhapKhac.id });
+  const x = baiChep(`${dau}-hoi`, vanChep);
+  const r = await goi(ctv, { tra_loi_nhanh: x.tra_loi_nhanh, noi_dung: x.noi_dung, hoi_dap: x.hoi_dap });
+  assert.equal(r.status, 200);
+  const j = await r.json() as { muc: { ma: string; muc_do: string; thong_diep: string }[] };
+  const m = j.muc.find((v) => v.ma === "trung_bai")!;
+  assert.equal(m.muc_do, "loi");
+  assert.doesNotMatch(JSON.stringify(j), /Tiêu đề bí mật/);
+  const r2 = await goi(mayDoc, {});
+  assert.equal(r2.status, 403);
 });
 
 // dọn
