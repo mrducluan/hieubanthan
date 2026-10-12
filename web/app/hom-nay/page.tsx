@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { GioiThieuCongCu, type NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
 import { metaTrang } from "@/lib/seo";
+import { UngHoNho } from "@/components/ung-ho/UngHoNho";
 import { HomNay } from "./HomNay";
 
 const ND: NoiDungCongCu = {
@@ -29,6 +30,7 @@ export default function Page() {
     <>
       <HomNay />
       <GioiThieuCongCu {...ND} />
+      <UngHoNho className="mx-auto mt-10 max-w-3xl" />
     </>
   );
 }

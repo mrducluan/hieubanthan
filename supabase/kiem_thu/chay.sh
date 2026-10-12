@@ -18,3 +18,4 @@ for f in $(ls migrations/*.down.sql | sort -r); do "${P[@]}" -1 -f "$f" >/dev/nu
 for f in $UP; do "${P[@]}" -1 -f "$f" >/dev/null; done; echo "lên lại: OK"
 psql -d "$DB" -q -At -F ' | ' -f kiem_thu/thu_sao.sql
 psql -d "$DB" -q -At -F ' | ' -f kiem_thu/thu_quan_tri.sql
+psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_thanh_toan.sql

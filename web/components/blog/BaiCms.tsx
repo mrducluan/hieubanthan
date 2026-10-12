@@ -12,6 +12,7 @@ import { locHtmlCms } from "@/lib/cms-html";
 import { goiLd, ldDuongDan, ldHoiDap, siteUrl, urlDayDu } from "@/lib/seo";
 import nf from "@/app/blog/notfair-article.module.css";
 import st from "@/app/blog/cms-bai.module.css";
+import { UngHoNho } from "@/components/ung-ho/UngHoNho";
 
 const CHU_BIEN = "duc-luan";
 
@@ -221,6 +222,7 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
         </section>
       )}
 
+      <UngHoNho className="mt-10" />
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <p>Nội dung mang tính tham khảo văn hoá, giúp tự soi — không phải lời phán định mệnh, không thay lời khuyên y tế, pháp lý, tài chính.</p>
         <Link href="/blog" className="mt-2 inline-block text-gold hover:underline">← Tất cả bài viết</Link>

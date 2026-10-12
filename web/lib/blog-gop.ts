@@ -23,3 +23,11 @@ export function gopBaiBlog(rieng: BaiBlog[], notfair: SeoPostSummary[]): BaiBlog
   return [...rieng, ...nf].sort((a, b) => (b.ngay ?? "").localeCompare(a.ngay ?? ""));
 }
 
+/** Next 15 trả params ĐÃ mã hoá phần trăm với ký tự ngoài ASCII (slug NotFair có "đ", dấu…) → giải mã trước khi tra,
+ *  nếu không thư viện mã hoá lần nữa ("%25C4%2591") và bài thành 404. Chuỗi hỏng giữ nguyên. */
+export function slugTuUrl(s: string): string {
+  try { return decodeURIComponent(s).normalize("NFC"); } catch { return s.normalize("NFC"); }
+}
+
+/** Đường dẫn bài, slug mã hoá phần trăm (canonical, sitemap, JSON-LD hợp chuẩn URL kể cả slug có dấu). */
+export const duongBlog = (slug: string) => `/blog/${encodeURIComponent(slug)}`;

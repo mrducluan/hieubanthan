@@ -2,7 +2,8 @@
 // thông tin đơn vị vận hành (env, thiếu thì ẩn), mạng xã hội, dấu Bộ Công Thương (khi có), lời miễn trừ, đường dây khẩn cấp.
 // Server component: đọc env ở máy chủ (lib/van-hanh.ts), không gửi gì thêm xuống trình duyệt.
 import Link from "next/link";
-import { BadgeCheck, Mail, MapPin, Phone, Server, ShieldCheck, Sparkles } from "lucide-react";
+import { BadgeCheck, HeartHandshake, Mail, MapPin, Phone, Server, ShieldCheck, Sparkles } from "lucide-react";
+import { coUngHo } from "@/lib/ung-ho";
 import { vanHanh } from "@/lib/van-hanh";
 import { NutTuyChonCookie } from "@/components/khung/HoiDongYCookie";
 import { Logo } from "./Logo";
@@ -19,7 +20,7 @@ const COT = [
   ] },
   { ten: "Về chúng tôi", ds: [
     ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
-    ["/lien-he#chu-de", "Góp ý, báo lỗi"], ["/tai-khoan", "Tài khoản"],
+    ["/lien-he#chu-de", "Góp ý, báo lỗi"], ["/tai-khoan", "Tài khoản"], ["/nap-sao", "Nạp Sao"],
   ] },
   { ten: "Pháp lý", ds: [
     ["/chinh-sach-rieng-tu", "Chính sách quyền riêng tư"], ["/dieu-khoan", "Điều khoản sử dụng"],
@@ -105,6 +106,12 @@ export function ChanTrang() {
               className="inline-flex items-center gap-2 rounded-lg border border-[rgb(41_110_188)]/60 bg-[rgb(41_110_188)]/15 px-3 py-2 text-[11px] font-semibold text-fg">
               <BadgeCheck className="size-4 text-[rgb(96_165_250)]" aria-hidden /> ĐÃ THÔNG BÁO BỘ CÔNG THƯƠNG
             </a>
+          )}
+          {coUngHo() && (
+            <Link href="/ung-ho" data-testid="chan-trang-ung-ho"
+              className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-3 py-1.5 text-[12px] font-medium text-gold hover:bg-gold/10">
+              <HeartHandshake className="size-3.5" aria-hidden /> Ủng hộ đội ngũ phát triển
+            </Link>
           )}
           <p>© {nam} Hiểu Bản Thân. Bảo lưu mọi quyền. <NutTuyChonCookie /></p>
         </div>

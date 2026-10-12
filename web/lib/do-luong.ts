@@ -8,7 +8,8 @@ export type SuKien =
   | "landing_viewed" | "reading_started" | "reading_completed" | "profile_created"
   | "compatibility_created" | "share_created" | "share_clicked" | "referral_signup"
   | "advisor_question_started" | "advisor_question_completed" | "feedback_submitted"
-  | "credit_earned" | "chart_interacted" | "daily_viewed";
+  | "credit_earned" | "chart_interacted" | "daily_viewed"
+  | "checkout_viewed" | "checkout_started" | "payment_succeeded";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number"> = {

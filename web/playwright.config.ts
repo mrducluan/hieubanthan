@@ -62,6 +62,13 @@ export default defineConfig({
   ],
   webServer: [
     {
+      // API NotFair giả (bài có slug có dấu) → /blog có bài NotFair mà không gọi ra ngoài.
+      command: "node e2e/notfair-gia.mjs",
+      url: "http://127.0.0.1:4555/health",
+      reuseExistingServer: !process.env.CI,
+      timeout: 15_000,
+    },
+    {
       command: `cd ../engine && python -m uvicorn app.main:app --port ${ENGINE_PORT}`,
       url: `http://localhost:${ENGINE_PORT}/health`,
       env: KHOA_TAT,
@@ -81,6 +88,10 @@ export default defineConfig({
       env: {
         ...KHOA_TAT, ENGINE_URL: `http://127.0.0.1:${ENGINE_PORT}`, NEXT_PUBLIC_SITE_URL: `http://localhost:${WEB_PORT}`,
         NEXT_PUBLIC_E2E: "1",
+        NOTFAIR_SEO_API_KEY: "e2e", NOTFAIR_SEO_API_URL: "http://127.0.0.1:4555/",
+        // payOS khoá GIẢ (không gọi payOS thật: chưa bật tài khoản → không tạo đơn) — đủ để thử kiểm chữ ký webhook.
+        PAYOS_CLIENT_ID: "e2e", PAYOS_API_KEY: "e2e", PAYOS_CHECKSUM_KEY: "e2e-payos-checksum-0000", SUPABASE_SERVICE_ROLE_KEY: "",
+        UNG_HO_VI: "USDT (TRC20)|TE2eTestWalletAddress000000000000",
         // Bản build bắt buộc có khoá ký link mời/thẻ (lib/ma-moi.ts) — khoá giả chỉ dùng cho test.
         ...(BAN_BUILD ? { LOI_MOI_SECRET: "e2e-chi-dung-cho-thu-nghiem-0000" } : { NODE_OPTIONS: "--max-old-space-size=6144" }),
       },

@@ -10,16 +10,17 @@ import { NotFairPostHero } from "notfair-nextjs-blog/react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BaiCms } from "@/components/blog/BaiCms";
-import { baiBlog, duongBlog } from "@/lib/blog";
+import { baiBlog, duongBlog, slugTuUrl } from "@/lib/blog";
 import { anhCms, baiCms, baiLienQuan, tinhNangCms } from "@/lib/cms";
 import { sanitizeNotFairArticleHtml } from "@/lib/notfair-article";
 import { catMoTa, goiLd, ldDuongDan, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import styles from "../notfair-article.module.css";
+import { UngHoNho } from "@/components/ung-ho/UngHoNho";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const slug = slugTuUrl((await params).slug);
   const nhap = (await draftMode()).isEnabled;
   const c = await baiCms(slug, nhap);
   if (c && "bai" in c) {
@@ -60,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-  const { slug } = await params;
+  const slug = slugTuUrl((await params).slug);
   const nhap = (await draftMode()).isEnabled;
   const c = await baiCms(slug, nhap);
   if (c && "chuyen" in c) permanentRedirect(duongBlog(c.chuyen));
@@ -115,6 +116,7 @@ export default async function Page({ params }: Props) {
         <Button asChild><Link href="/than-so">Xem của tôi <ArrowRight aria-hidden /></Link></Button>
       </aside>
 
+      <UngHoNho className="mt-10" />
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <Link href="/blog" className="text-gold hover:underline">← Tất cả bài viết</Link>
       </footer>

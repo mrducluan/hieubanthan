@@ -2,6 +2,7 @@
 // Ví Sao (CR-C): số dư, lịch sử, link mời cá nhân. Tự nhận thưởng chào mừng + thưởng được mời MỘT lần
 // sau khi hồ sơ đã lưu vào tài khoản (điều kiện do hàm SQL kiểm, client chỉ gọi).
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { Check, Copy, Gift, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -73,6 +74,7 @@ export function ViSao({ daLuuHoSo }: { daLuuHoSo: boolean }) {
           <p className="text-sm text-fg-muted">Sao của bạn</p>
           <p className="font-serif text-4xl text-gold" data-testid="so-sao">{du}</p>
         </div>
+        <Button asChild size="sm" className="ml-auto"><Link href="/nap-sao">Nạp Sao</Link></Button>
       </div>
       {bao && <p role="status" className="rounded-xl bg-jade/10 px-4 py-3 text-sm text-jade">{bao}</p>}
 
@@ -103,7 +105,7 @@ export function ViSao({ daLuuHoSo }: { daLuuHoSo: boolean }) {
           </ul>
         </details>
       )}
-      <p className="text-xs text-fg-faint">Sao dùng để mở các luận giải chuyên sâu (sắp ra mắt). Sao không đổi ra tiền và không chuyển cho người khác; Sao tặng có hạn 12 tháng.</p>
+      <p className="text-xs text-fg-faint">Sao dùng để mở các luận giải chuyên sâu. Sao không đổi ra tiền và không chuyển cho người khác; Sao tặng có hạn 12 tháng, Sao mua không hết hạn.</p>
     </Card>
   );
 }

@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Bang, TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 import { vanHanh } from "@/lib/van-hanh";
+import { coUngHo } from "@/lib/ung-ho";
 
 export const metadata: Metadata = {
   title: "Giới thiệu & phương pháp",
@@ -80,6 +81,10 @@ export default function GioiThieu() {
         </ul>
       ),
     },
+    ...(coUngHo() ? [{
+      id: "ung-ho", tieuDe: "Ủng hộ đội ngũ",
+      noiDung: <p>Phần lớn công cụ miễn phí và do một nhóm nhỏ phát triển. Nếu thấy hữu ích, bạn có thể <Link href="/ung-ho" className="text-gold underline">ủng hộ đội ngũ</Link> (quà tặng tự nguyện, không kèm quyền lợi).</p>,
+    }] : []),
     ...(vh.chuSoHuu ? [{
       id: "van-hanh", tieuDe: "Đơn vị vận hành",
       noiDung: <p>{vh.chuSoHuu}{vh.maSo ? ` · Mã số ${vh.maSo}` : ""}{vh.diaChi ? ` · ${vh.diaChi}` : ""}.</p>,

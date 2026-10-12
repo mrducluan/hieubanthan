@@ -3,7 +3,7 @@
 import { getSeoPost, getSeoPosts, type SeoPost, type SeoPostSummary } from "notfair-nextjs-blog";
 import { dsBaiCms } from "@/lib/cms";
 import { gopBaiBlog, tuCms } from "@/lib/blog-gop";
-export { gopBaiBlog, type BaiBlog } from "@/lib/blog-gop";
+export { duongBlog, gopBaiBlog, slugTuUrl, type BaiBlog } from "@/lib/blog-gop";
 
 export function coNotFair(): boolean {
   return Boolean(process.env.NOTFAIR_SEO_API_KEY);
@@ -20,8 +20,6 @@ export async function baiBlog(slug: string): Promise<SeoPost | null> {
   if (!coNotFair()) return null;
   try { return await getSeoPost(slug); } catch { return null; }
 }
-
-export const duongBlog = (slug: string) => `/blog/${slug}`;
 
 /** Danh sách cho /blog, sitemap: bài CMS + bài NotFair (bài CMS thắng khi trùng slug). */
 export async function dsBaiTongHop() {

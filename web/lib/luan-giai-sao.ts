@@ -57,7 +57,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   const r = data as { ket_qua: string; so_du?: number };
   if (r.ket_qua === "khong_du") {
     return NextResponse.json({
-      error: `Cần ${gia} Sao, bạn còn ${r.so_du ?? 0} Sao. Nhận thêm Sao ở trang Tài khoản (chào mừng, mời bạn bè).`,
+      error: `Cần ${gia} Sao, bạn còn ${r.so_du ?? 0} Sao. Nạp Sao ở trang /nap-sao hoặc nhận thêm ở trang Tài khoản (mời bạn bè).`,
       can: "them_sao", so_du: r.so_du ?? 0,
     }, { status: 402 });
   }
