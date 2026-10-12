@@ -58,9 +58,22 @@ jobs:
         env:
           DATABASE_URI: postgres://postgres:postgres@localhost:5432/cms_mig
           CMS_DB_PUSH: "0"
+        # migrate:down của Payload có thể thoát TRƯỚC khi lệnh xoá bảng được ghi xong → lệnh migrate ngay sau đó vẫn
+        # thấy bảng cũ, tưởng "đã chạy" rồi bỏ qua (tái hiện 2/6 lần, 2026-10-12). Chờ bảng payload_migrations biến
+        # mất rồi mới migrate lên, và kiểm lại cuối bước.
         run: |
           psql -d postgres -c "create database cms_mig"
-          npx payload migrate && npx payload migrate:down && npx payload migrate
+          npx payload migrate
+          npx payload migrate:down
+          for i in $(seq 1 30); do
+            [ "$(psql -d cms_mig -Atc "select to_regclass('cms.payload_migrations') is null")" = "t" ] && break
+            sleep 1
+          done
+          npx payload migrate
+          so=$(psql -d cms_mig -Atc "select count(*) from cms.payload_migrations")
+          tep=$(ls src/migrations/*.ts | grep -vc index.ts)
+          echo "migration trong DB: $so / tệp: $tep"
+          [ "$so" = "$tep" ]
       - name: Tích hợp (phân quyền, chặn xuất bản, HTML, slug)
         working-directory: cms
         env:
