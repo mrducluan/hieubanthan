@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { headers } from "next/headers";
 import { Newsreader, Be_Vietnam_Pro, Noto_Serif_TC } from "next/font/google";
-import { ChanTrang } from "@/components/khung/ChanTrang";
+import { ChanTrang, KhungChanTrang } from "@/components/khung/ChanTrang";
+import { COT_CHAN_TRANG } from "@/lib/menu-chan-trang";
 import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { GhiGioiThieu } from "@/components/khung/GhiGioiThieu";
@@ -78,12 +80,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">
           Bỏ qua điều hướng
         </a>
-        <ThongBaoSite />
+        {/* Nội dung từ CMS chạy song song, không chặn byte đầu của trang khi CMS chậm (audit 2026-10-12). */}
+        <Suspense fallback={null}><ThongBaoSite /></Suspense>
         <ThanhTren />
         <main id="noi-dung" className="container pb-12 pt-6 md:pb-16 md:pt-10">
           {children}
         </main>
-        <ChanTrang />
+        <Suspense fallback={<KhungChanTrang cot={COT_CHAN_TRANG} />}><ChanTrang /></Suspense>
         <TabDuoi />
         <GhiGioiThieu />
         <GiamSat />

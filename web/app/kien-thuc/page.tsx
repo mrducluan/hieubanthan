@@ -1,4 +1,5 @@
 // Thư viện kiến thức (hub SEO/GEO) — liên kết nội bộ tới mọi chủ đề.
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -43,7 +44,7 @@ export default async function Page() {
           );
         })}
       </div>
-      <BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" />
+      <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" /></Suspense>
     </div>
   );
 }

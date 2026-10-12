@@ -73,7 +73,7 @@ export const DieuHuong: GlobalConfig = {
   hooks: { afterChange: [lamMoiGlobal] },
   fields: [
     {
-      name: "cot", label: "Cột liên kết", type: "array", maxRows: 6,
+      name: "cot", label: "Cột liên kết", type: "array", maxRows: 4,   // chân trang web dựng lưới 4 cột
       labels: { singular: "Cột", plural: "Cột" },
       defaultValue: MENU_MAC_DINH.map((c) => ({ ...c, lien_ket: c.lien_ket.map((l) => ({ ...l, loai: "duong_dan" })) })),
       admin: { initCollapsed: true, components: { RowLabel: "/components/NhanDong#NhanCot" } },

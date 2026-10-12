@@ -22,7 +22,7 @@ Hai trang quản trị, **không trùng việc**. Quy tắc một câu: *chữ v
 
 - Dải thông báo trước nằm ở `/quan-tri/cai-dat` (`site.thong_bao`) → **chuyển sang CMS** (chưa có dữ liệu thật vì
   migration 0011 chưa chạy). Khoá `site.*` trong `web/lib/cau-hinh.ts` đã gỡ.
-- Thanh tab trên đầu (5 mục) **vẫn trong code**: đổi nó là đổi sản phẩm, không phải nội dung.
+- Thanh tab (4 tab: Bản thân · Hợp đôi · Khám phá · Tài khoản) **vẫn trong code**: đổi nó là đổi sản phẩm, không phải nội dung.
 - Web đọc globals qua REST (`web/lib/cms.ts`: `dieuHuongCms`, `trangChuCms`, `baiTheoMang`, `baiTrangChu`), cache thẻ
   `cms`; lưu global → webhook làm mới ngay. CMS chưa nối / lỗi → web dùng mặc định trong code (`ChanTrang.COT`), không vỡ.
 - Link nhập ở CMS chỉ nhận **đường dẫn trong site** (`/…`, chặn `//x`, `/\x`, `https:`, `javascript:`) — kiểm ở cả CMS
@@ -273,6 +273,9 @@ merge. Kiểm thử CMS cho PR do GitHub Actions job `cms` đảm nhận (Postgr
 riêng rồi bỏ dòng `ignoreCommand`.
 
 ## 9. Lộ trình tiếp
+
+> Mã CMS-2…CMS-5 dưới đây là **lộ trình**. Việc đã làm ngoài lộ trình mang tên riêng: CMS-CTV (cộng tác viên, tiếng Việt,
+> video), CMS-GD (giao diện website + phân vai, mục 0).
 
 | Mã | Việc | Khâu |
 |---|---|---|
