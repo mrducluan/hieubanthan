@@ -7,7 +7,7 @@ import { Logo } from "./Logo";
 
 // Bốn trung tâm cố định (bài học CHANI: người dùng cần "nhà" dễ nhận ra) — docs/THIET-KE-UI.md §5.
 export const MUC = [
-  { href: "/ban-than", ten: "Bản thân", Icon: Sparkles, khop: ["/ban-than", "/than-so"] },
+  { href: "/ban-than", ten: "Bản thân", Icon: Sparkles, khop: ["/ban-than", "/than-so", "/hom-nay"] },
   { href: "/hop-doi", ten: "Hợp đôi", Icon: HeartHandshake, khop: ["/hop-doi"] },
   { href: "/kham-pha", ten: "Khám phá", Icon: Compass, khop: ["/kham-pha", "/tu-vi", "/kinh-dich", "/bat-tu", "/phong-thuy"] },
   { href: "/tai-khoan", ten: "Tài khoản", Icon: UserRound, khop: ["/tai-khoan", "/dang-nhap"] },

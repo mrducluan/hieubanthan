@@ -70,11 +70,12 @@ export function NhanLoiMoi({ ma, tenMoi, soMoi, tuKhoa }: Props) {
               </div>
               <Button asChild className="mt-4"><Link href="/ban-than">Mở hồ sơ của tôi <ArrowRight aria-hidden /></Link></Button>
             </Card>
-            <Card>
-              <p className="font-serif text-lg">Mời thêm một người</p>
-              <p className="mb-4 mt-1 text-sm text-fg-muted">Bạn thân, người yêu, đồng nghiệp — họ tự nhập ngày sinh của họ.</p>
-              <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(m) => `/hop-doi/${m}`} nutTao="Tạo link mời của tôi"
-                loiNhan={`${tenGoi(hoSo)} mời bạn xem hai người hợp nhau thế nào qua con số.`} />
+            {/* HN-2: khép vòng — người mời mở link của bạn là thấy cùng kết quả hai người (họ chưa thấy vì không biết ngày sinh của bạn). */}
+            <Card className="border-gold/40" data-testid="gui-lai-loi-moi">
+              <p className="font-serif text-lg">Gửi kết quả lại cho {tenMoi}</p>
+              <p className="mb-4 mt-1 text-sm text-fg-muted">{tenMoi} chưa thấy kết quả hai người. Gửi link của bạn để {tenMoi} mở ra là thấy — cũng dùng để mời thêm bạn thân, người yêu, đồng nghiệp.</p>
+              <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(m) => `/hop-doi/${m}`} nutTao={`Tạo link gửi ${tenMoi}`}
+                loiNhan={`${tenGoi(hoSo)} đã xem hợp đôi với bạn — mở link để thấy kết quả hai người.`} />
             </Card>
           </div>
         </>

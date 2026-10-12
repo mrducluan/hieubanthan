@@ -23,6 +23,7 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
   // Thêm dịch vụ khác qua GTM (vd Meta Pixel: https://connect.facebook.net,https://www.facebook.com) mà không sửa code:
   // env CSP_THEM_MIEN = danh sách origin cách nhau bằng dấu phẩy → được thêm vào img/connect/frame-src.
   const them = (process.env.CSP_THEM_MIEN ?? "").split(",").map((x) => goc(x.trim())).filter((x): x is string => Boolean(x));
+  const anhCms = [goc(process.env.CMS_URL), goc(process.env.CMS_ANH_URL)].filter((x): x is string => Boolean(x));
   const ketNoi = ["'self'", posthog, "https://*.posthog.com", ...google, ...them,
     "https://*.ingest.sentry.io", "https://*.ingest.us.sentry.io", "https://*.ingest.de.sentry.io",
     ...(supabase ? [supabase, supabase.replace(/^https:/, "wss:")] : []),
@@ -32,10 +33,11 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
     `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https: 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}`,
     `style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://fonts.googleapis.com`,
     // notfair.co: ảnh nằm trong thân bài blog NotFair (ảnh bìa đi qua /_next/image = 'self').
-    `img-src 'self' data: blob: https://notfair.co ${[...google, ...them].join(" ")}`,
+    // CMS: ảnh bài viết nằm ở CMS (CMS_URL) hoặc kho ảnh của CMS (CMS_ANH_URL, vd Supabase Storage công khai).
+    `img-src 'self' data: blob: https://notfair.co ${[...anhCms, ...google, ...them].join(" ")}`,
     "font-src 'self' data: https://fonts.gstatic.com",
     `connect-src ${ketNoi.join(" ")}`,
-    `frame-src 'self' https://www.googletagmanager.com https://tagassistant.google.com https://*.doubleclick.net ${them.join(" ")}`.trim(),
+    `frame-src 'self' https://www.youtube-nocookie.com https://www.googletagmanager.com https://tagassistant.google.com https://*.doubleclick.net ${them.join(" ")}`.trim(),
     "worker-src 'self' blob:",
     "manifest-src 'self'",
     "media-src 'self'",

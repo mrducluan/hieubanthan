@@ -14,3 +14,8 @@ create or replace function auth.jwt() returns jsonb language sql stable as $$
     select jsonb_build_object('sub', current_setting('request.jwt.claim.sub', true),
                               'aal', coalesce(nullif(current_setting('request.jwt.claim.aal', true), ''), 'aal1')) $$;
 grant execute on function auth.uid(), auth.jwt() to anon, authenticated;
+-- service_role của Supabase: bỏ qua RLS + có mọi quyền trên bảng public (máy chủ web dùng cho webhook thanh toán).
+alter role service_role bypassrls;
+alter default privileges in schema public grant all on tables to service_role;
+alter default privileges in schema public grant all on sequences to service_role;
+grant usage on schema public to service_role;

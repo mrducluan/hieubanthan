@@ -53,7 +53,9 @@ export default function DieuKhoan() {
           <li>Sao <b>không có giá trị tiền tệ</b>. Sao không đổi ra tiền, không rút, không chuyển nhượng hay mua bán giữa người dùng, và không phải tài sản mã hoá.</li>
           <li>Thưởng mời bạn bè chỉ có <b>một tầng</b> (người mời và người được mời). Không có hoa hồng nhiều tầng.</li>
           <li>Sao tặng có thể có hạn dùng (ghi rõ khi tặng). Sao bị huỷ khi xoá tài khoản.</li>
-          <li>Hiện chưa có hình thức mua Sao. Khi có, điều khoản thanh toán sẽ được công bố riêng trước khi áp dụng.</li>
+          <li><b>Mua Sao</b> (trang Nạp Sao): giá ghi bằng đồng, trả một lần qua chuyển khoản QR, không tự gia hạn. Sao mua không hết hạn.</li>
+          <li><b>Hoàn tiền:</b> nạp nhầm gói hoặc nạp trùng mà chưa dùng số Sao đó, gửi mã đơn qua trang Liên hệ trong 7 ngày → hoàn qua chuyển khoản, Sao của đơn bị trừ lại. Lỗi hệ thống (đã trả tiền mà không nhận Sao) được cộng bù hoặc hoàn tiền.</li>
+          <li>Chúng tôi không lưu số thẻ hay thông tin tài khoản ngân hàng của bạn; cổng thanh toán xử lý việc đó.</li>
         </ul>
       ),
     },

@@ -14,6 +14,9 @@ select * from (values
   ('0009 chân dung + quan hệ',     case when to_regclass('public.thanso_kb_khoi') is null then false
                                    else (xpath('/row/c/text()', query_to_xml(
                                      'select count(*) as c from public.thanso_kb_khoi where khoi = ''chan_dung''',
-                                     false, true, '')))[1]::text::int > 0 end)
+                                     false, true, '')))[1]::text::int > 0 end),
+  ('0010 quản trị',                to_regclass('public.vai_tro_quan_tri') is not null),
+  ('0011 quản trị 2 (cài đặt)',    to_regprocedure('public.dat_cau_hinh(text,jsonb,text)') is not null),
+  ('0012 thanh toán nạp Sao',      to_regclass('public.don_nap') is not null)
 ) as t(migration, da_chay)
 order by 1;

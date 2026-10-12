@@ -115,6 +115,12 @@ export function BanThan() {
         <TieuDeMuc id="muc-nhip" nho="Nhịp hiện tại" lon="Giai đoạn này của bạn"
           mo_ta="Chủ đề của năm và tháng cá nhân — không phải dự báo sự kiện, mà là gợi ý để bạn đặt trọng tâm." />
         <NhipHienTai kq={kq} />
+        <Link href="/hom-nay" className="mt-3 flex items-center justify-between gap-3 rounded-2xl border border-gold/40 bg-gold/5 px-5 py-4 hover:border-gold"
+          data-testid="lien-ket-hom-nay">
+          <span><span className="block font-medium text-fg">Hôm nay của bạn</span>
+            <span className="text-sm text-fg-muted">Ngày cá nhân, âm lịch và một câu hỏi tự soi — mỗi ngày một thẻ mới</span></span>
+          <ArrowRight className="size-5 shrink-0 text-gold" aria-hidden />
+        </Link>
       </section>
 
       <section aria-labelledby="muc-tiep" className="grid gap-3 sm:grid-cols-3">

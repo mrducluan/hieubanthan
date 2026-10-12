@@ -3,7 +3,7 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-10-09.
+> Cập nhật lần cuối: 2026-10-12.
 
 ## Anh đã chốt (2026-10-08)
 
@@ -36,6 +36,13 @@
 7. [ ] Các việc còn lại → mục D (em đã ghi rõ việc nào em làm, việc nào cần anh)
 8. [ ] **Lộ trình đến Gate 2** → mục L (đọc số funnel, chạy 55 câu, bật AI, pháp lý trước khi thu tiền)
 9. [ ] **Trang quản trị `/quan-tri`** → mục Q (Q1–Q4 xong 2026-10-09; còn **Q5 token GitHub** cho Kho tri thức)
+10. [ ] **GitHub ruleset** (để em tự merge PR khi CI xanh): GitHub → repo → Settings → Rules → Rulesets → ruleset của
+   `main` → bỏ "Require approvals" hoặc thêm anh/ứng dụng Claude vào **Bypass list** → Save.
+11. [ ] **Render engine báo "Deploy failed — invalid local: … Dockerfile: not a directory"** → làm theo
+   `docs/TRIEN-KHAI.md` mục **1b**: Docker Build Context Directory = `engine` (thư mục), Dockerfile Path =
+   `engine/Dockerfile`, Instance Type **Starter**, Region **Singapore** (sai vùng thì tạo lại bằng Blueprint).
+12. [ ] **NotFair:** bài slug có chữ "đ" bị 404 — **em đã sửa** (PR #78). Sau khi merge + deploy, mở lại bài
+   `/blog/xem-than-so-hoc-numerology-cach-tinh-va-đoc-ho-so-tinh-tao` và bấm "Verify/Publish" lại trong NotFair.
 
 ---
 
@@ -353,6 +360,43 @@ lần trước) → chọn vai trò → **Cấp / đổi vai trò**.
   tuần), xem hệ số K ở Tổng quan tuần sau. Xem `docs/MUC-TIEU-TANG-TRUONG.md`.
 
 ---
+
+## CMS. Phòng biên tập Payload — cms.hieuban.com (CMS-1, 2026-10-11)
+
+Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bước này thì web vẫn chạy như cũ.
+
+- [ ] CMS1. Supabase → Storage → tạo bucket `cms-media` (Public) → Settings → Storage → S3 Connection → tạo Access key.
+- [ ] CMS2. Vercel → Add New Project → repo này, **Root Directory `cms`** → nhập biến theo `cms/.env.example`
+  (`DATABASE_URI` = Session pooler, `PAYLOAD_SECRET`, `CMS_URL`, `WEB_URL`, `CMS_EMAIL_QUAN_TRI` = email của anh,
+  `CMS_WEBHOOK_SECRET`, `CMS_PREVIEW_SECRET`, `CRON_SECRET`, `S3_*`). Không dán khoá vào chat.
+- [ ] CMS3. GoDaddy: CNAME `cms` → Vercel; gắn `cms.hieuban.com` vào project CMS.
+- [ ] CMS4. Mở `https://cms.hieuban.com/admin` → tạo tài khoản đầu tiên bằng đúng email đã khai.
+- [ ] CMS5. CMS → Ban biên tập → tạo "Web hieuban.com", vai trò **Máy đọc**, tick Enable API Key → chép khoá.
+- [ ] CMS6. Vercel project **web** thêm `CMS_URL`, `CMS_API_KEY`, `CMS_WEBHOOK_SECRET`, `CMS_PREVIEW_SECRET` (giống
+  bên CMS), `CMS_ANH_URL` → Redeploy.
+- [ ] CMS7. Tạo tài khoản cho người viết (vai trò Biên tập viên — chỉ lưu nháp; anh là Chủ biên/Quản trị bấm Xuất bản).
+- [ ] CMS8. Thử quy trình **Cộng tác viên / chuyên gia** (2026-10-12): Ban biên tập → tạo tài khoản vai trò "Cộng tác
+  viên / chuyên gia" → người đó viết, chọn "Duyệt bài → Gửi duyệt" → anh thấy ô **Chờ duyệt** ở Tổng quan → ghi chú
+  "Cần sửa" hoặc Xuất bản. Lộ trình chuyên gia + vì sao không làm hoa hồng nhiều tầng: `docs/KE-HOACH-CHUYEN-GIA.md`.
+- [ ] CMS9. Ảnh/video: giữ **Supabase Storage** bây giờ, video đăng YouTube rồi chèn khối "Video YouTube"; chuyển R2
+  khi vượt ~50 GB ảnh hoặc ~200 GB băng thông/tháng (`docs/LUU-TRU-MEDIA.md`).
+- [ ] CG-a. Chốt **không làm hoa hồng nhiều tầng** (đa cấp dịch vụ bị cấm; Điều 217a BLHS) — thay bằng lộ trình chuyên
+  gia + chia doanh thu theo kết quả của chính mình (`docs/KE-HOACH-CHUYEN-GIA.md` mục 1–2). Anh đồng ý thì nhắn em.
+
+## TT. Thanh toán nạp Sao (kế hoạch + các bước bật: `docs/KE-HOACH-THANH-TOAN.md` mục 0b)
+
+Code đã làm (2026-10-12, hình thức cá nhân): `/nap-sao`, payOS, webhook, đối soát, migration 0012, trang `/ung-ho`.
+
+- [ ] TT-0. Chạy migration **`0012_thanh_toan.sql`** (sau khi bật tài khoản — mục F).
+- [ ] TT-b. Đăng ký **payOS** bằng tài khoản ngân hàng của anh → Vercel đặt `PAYOS_CLIENT_ID`, `PAYOS_API_KEY`,
+  `PAYOS_CHECKSUM_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `CRON_SECRET` → Redeploy → payOS khai Webhook URL
+  `https://hieuban.com/api/thanh-toan/webhook/payos`. Không dán khoá vào chat.
+- [ ] TT-f. **Ủng hộ crypto**: Vercel đặt `UNG_HO_VI` = `USDT (TRC20)|<địa chỉ>;Bitcoin|<địa chỉ>` (tuỳ chọn
+  `UNG_HO_NGAN_HANG` = `Ngân hàng|Số TK|Chủ TK`) → Redeploy → nút ủng hộ hiện ở chân trang, `/ung-ho`, cuối bài.
+- [ ] TT-a. Hộ kinh doanh + MST (anh bổ sung sau) → em làm hoá đơn điện tử (TT-6), mở thẻ Visa (TT-3).
+- [ ] TT-c. Liên hệ VNPay hoặc OnePay nếu muốn nhận thẻ Visa/Master/JCB.
+- [ ] TT-d. Luật sư rà điều khoản Sao + hoàn tiền; chọn nhà cung cấp hoá đơn điện tử.
+- [ ] TT-e. Quyết bật tài khoản (mục F) — Sao cần gắn tài khoản.
 
 ## F. Khi nào muốn bật lại đăng nhập tài khoản (CHƯA cần — giữ để tra)
 

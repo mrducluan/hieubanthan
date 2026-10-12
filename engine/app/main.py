@@ -25,6 +25,7 @@ from app.kb import store as kb_store
 from app.kb import trang as kb_trang
 from app.kb import tham_dinh as kb_tham_dinh
 from app.config import ENGINE_VERSION, HourConfidence, Region
+from app.luangiai import hom_nay
 from app.luangiai import thanso as luangiai_thanso
 from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
 from app import nhat_ky
@@ -343,6 +344,24 @@ class ChuKyInput(BaseModel):
         if tu is not None and (v < tu or v - tu > 30):
             raise ValueError("Khoảng năm không hợp lệ (tối đa 30 năm)")
         return v
+
+
+class HomNayInput(BaseModel):
+    ngay: int = Field(ge=1, le=31)
+    thang: int = Field(ge=1, le=12)
+    nam: int = Field(ge=1900, le=2100)
+    ngay_xem: _dt.date | None = None     # trống = hôm nay theo giờ Việt Nam
+
+
+@app.post("/v1/thanso/hom-nay")
+def api_hom_nay(inp: HomNayInput) -> dict:
+    """HN-1 — "Hôm nay của bạn": ngày/tháng/năm cá nhân + âm lịch, can chi ngày + câu tự soi + ngày mai."""
+    try:
+        _dt.date(inp.nam, inp.thang, inp.ngay)
+    except ValueError:
+        raise HTTPException(422, detail="Ngày không tồn tại")
+    ngay_xem = inp.ngay_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
+    return {"engine_version": ENGINE_VERSION, **hom_nay.the_hom_nay(inp.ngay, inp.thang, inp.nam, ngay_xem)}
 
 
 @app.post("/v1/thanso/chu-ky")

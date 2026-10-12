@@ -8,7 +8,8 @@ export type SuKien =
   | "landing_viewed" | "reading_started" | "reading_completed" | "profile_created"
   | "compatibility_created" | "share_created" | "share_clicked" | "referral_signup"
   | "advisor_question_started" | "advisor_question_completed" | "feedback_submitted"
-  | "credit_earned" | "chart_interacted";
+  | "credit_earned" | "chart_interacted" | "daily_viewed"
+  | "checkout_viewed" | "checkout_started" | "payment_succeeded";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number"> = {
@@ -20,6 +21,8 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   huu_ich: "string",
   ket_qua: "string",
   so_sao: "number",
+  chuoi: "number",      // HN-1: số ngày liên tiếp mở "Hôm nay" (đếm trên máy người dùng)
+  nguon: "string",
 };
 const GIOI_HAN_CHUOI = 40;
 
@@ -64,7 +67,7 @@ function nap(): Promise<PostHog | null> {
 
 export function ghi(su_kien: SuKien, p: Record<string, unknown> = {}): void {
   const props = { feature_version: PHIEN_BAN, ...locThuocTinh(p) };
-  if (process.env.NODE_ENV !== "production" && typeof window !== "undefined") {
+  if ((process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_E2E === "1") && typeof window !== "undefined") {
     (window as unknown as { __hbt_su_kien?: unknown[] }).__hbt_su_kien ??= [];
     (window as unknown as { __hbt_su_kien: unknown[] }).__hbt_su_kien.push({ su_kien, ...props });
   }

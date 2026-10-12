@@ -121,7 +121,7 @@ async function baoCaoGa4Tho(): Promise<BaoCaoGa4> {
 /** Phễu theo mục tiêu tăng trưởng (docs/MUC-TIEU-TANG-TRUONG.md) — tên sự kiện trong lib/do-luong.ts. */
 export const PHEU: [string, string][] = [
   ["landing_viewed", "Vào trang"], ["reading_started", "Bắt đầu xem"], ["reading_completed", "Xem xong"],
-  ["advisor_question_completed", "Hỏi đáp xong"], ["profile_created", "Lưu hồ sơ"], ["share_clicked", "Bấm chia sẻ"],
+  ["advisor_question_completed", "Hỏi đáp xong"], ["profile_created", "Lưu hồ sơ"], ["daily_viewed", "Mở Hôm nay"], ["share_clicked", "Bấm chia sẻ"],
   ["compatibility_created", "Tạo hợp đôi"], ["referral_signup", "Đăng ký qua lời mời"], ["credit_earned", "Nhận Sao"],
 ];
 

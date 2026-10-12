@@ -1,0 +1,46 @@
+// Giao diện admin theo phong cách "Đêm sao phương Đông" của hieuban.com (tối, vàng kim) — vẫn giữ bố cục Payload.
+:root {
+  --font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+html[data-theme="dark"] {
+  --theme-bg: #0e0c1d;
+  --theme-elevation-0: #0e0c1d;
+  --theme-elevation-50: #15122a;
+  --theme-elevation-100: #1c1835;
+  --theme-elevation-150: #231f40;
+  --theme-success-500: #3fa66b;
+}
+html[data-theme="dark"] .btn--style-primary,
+html[data-theme="light"] .btn--style-primary {
+  --bg-color: #c9a45c;
+  --color: #120f22;
+}
+
+/* Khung Kiểm định */
+.hbt-kd { border: 1px solid var(--theme-elevation-150); border-radius: 12px; padding: 14px; margin-bottom: 20px; }
+.hbt-kd-dau { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
+.hbt-kd-vong { width: 62px; height: 62px; border-radius: 50%; border: 4px solid; display: flex; align-items: baseline;
+  justify-content: center; padding-top: 14px; flex-shrink: 0; }
+.hbt-kd-vong b { font-size: 22px; } .hbt-kd-vong span { font-size: 10px; opacity: .6; }
+.hbt-kd-tieu-de { font-weight: 700; margin: 0; } .hbt-kd-phu { margin: 2px 0 0; font-size: 12px; opacity: .85; }
+.hbt-kd-nhom { border-top: 1px solid var(--theme-elevation-100); }
+.hbt-kd-nut { all: unset; cursor: pointer; display: flex; justify-content: space-between; width: 100%; padding: 8px 0; font-weight: 600; }
+.hbt-kd-nut:focus-visible { outline: 2px solid #c9a45c; outline-offset: 2px; }
+.hbt-kd-dem { font-weight: 400; font-size: 12px; opacity: .75; }
+.hbt-kd-them { all: unset; cursor: pointer; font-size: 12px; opacity: .7; margin-top: 6px; text-decoration: underline; }
+.hbt-kd-them:focus-visible { outline: 2px solid #c9a45c; }
+.hbt-kd ul { list-style: none; margin: 0 0 8px; padding: 0; }
+.hbt-kd li { display: flex; gap: 8px; font-size: 12.5px; line-height: 1.45; padding: 4px 0; }
+.hbt-kd-ky { flex-shrink: 0; width: 16px; height: 16px; border-radius: 50%; color: #fff; font-size: 10px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
+
+/* Tổng quan */
+.hbt-tq { margin-bottom: 32px; }
+.hbt-tq-tieu-de { margin: 0 0 6px; } .hbt-tq-phu { opacity: .8; max-width: 760px; }
+.hbt-tq-luoi { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-top: 14px; }
+.hbt-tq-o { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 12px; text-decoration: none;
+  border: 1px solid var(--theme-elevation-150); background: var(--theme-elevation-50); color: inherit; }
+.hbt-tq-o:hover { border-color: #c9a45c; }
+.hbt-tq-so { font-size: 28px; font-weight: 700; }
+.hbt-tq-moi { border-style: dashed; color: #c9a45c; }
+.hbt-tq-can-sua { margin-top: 16px; } .hbt-tq-can-sua ul { margin: 6px 0 0; padding-left: 18px; }

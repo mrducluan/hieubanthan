@@ -1,6 +1,9 @@
-// Blog /blog/{slug} — bài trao đổi SEO từ NotFair (kéo phía máy chủ bằng khoá riêng NOTFAIR_SEO_API_KEY, không NEXT_PUBLIC_).
+// Blog /blog/{slug} — bài của ban biên tập (CMS, lib/cms.ts) + bài trao đổi SEO từ NotFair (kéo phía máy chủ bằng khoá riêng NOTFAIR_SEO_API_KEY, không NEXT_PUBLIC_).
 // Thư viện ném lỗi khi thiếu khoá → bọc lại: chưa đặt khoá hoặc NotFair lỗi thì /blog trống, sitemap vẫn dựng được.
 import { getSeoPost, getSeoPosts, type SeoPost, type SeoPostSummary } from "notfair-nextjs-blog";
+import { dsBaiCms } from "@/lib/cms";
+import { gopBaiBlog, tuCms } from "@/lib/blog-gop";
+export { duongBlog, gopBaiBlog, slugTuUrl, type BaiBlog } from "@/lib/blog-gop";
 
 export function coNotFair(): boolean {
   return Boolean(process.env.NOTFAIR_SEO_API_KEY);
@@ -18,4 +21,8 @@ export async function baiBlog(slug: string): Promise<SeoPost | null> {
   try { return await getSeoPost(slug); } catch { return null; }
 }
 
-export const duongBlog = (slug: string) => `/blog/${slug}`;
+/** Danh sách cho /blog, sitemap: bài CMS + bài NotFair (bài CMS thắng khi trùng slug). */
+export async function dsBaiTongHop() {
+  const [cms, nf] = await Promise.all([dsBaiCms(), dsBaiBlog()]);
+  return gopBaiBlog(cms.map(tuCms), nf);
+}

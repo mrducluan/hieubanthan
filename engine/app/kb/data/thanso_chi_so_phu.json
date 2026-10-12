@@ -126,6 +126,17 @@
   "8": "Ngày cá nhân 8: hợp bàn việc, tiền bạc, quyết định thực tế.",
   "9": "Ngày cá nhân 9: hợp hoàn tất, buông, cho đi."
  },
+ "ngay_ca_nhan_tu_soi": {
+  "1": "Hôm nay có việc gì mình đã chần chừ mà chỉ cần bước đầu tiên là đủ?",
+  "2": "Hôm nay mình có thể lắng nghe ai kỹ hơn một chút thay vì vội trả lời?",
+  "3": "Có điều gì mình muốn nói ra hoặc chia sẻ mà đã để lâu chưa nói?",
+  "4": "Việc nhỏ nào nếu làm xong hôm nay sẽ giúp mình nhẹ đầu cả tuần?",
+  "5": "Hôm nay mình có thể thử khác đi ở một thói quen nhỏ nào?",
+  "6": "Người thân nào hôm nay sẽ vui nếu nhận một lời hỏi han từ mình?",
+  "7": "Mình cần một khoảng lặng ngắn cho điều gì đang nghĩ dở?",
+  "8": "Quyết định thực tế nào mình đã có đủ thông tin để chốt?",
+  "9": "Điều gì mình nên khép lại hoặc buông bớt để có chỗ cho cái mới?"
+ },
  "no_nghiep": {
   "13": {
    "ten": "Nợ nghiệp 13 (13/4)",
