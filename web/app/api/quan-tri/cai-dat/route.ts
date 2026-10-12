@@ -24,6 +24,6 @@ export async function POST(req: Request) {
     const { error } = await p.sb.rpc("dat_cau_hinh", { p_khoa: c.khoa, p_gia_tri: r.giaTri, p_mo_ta: c.ten });
     if (error) return loiSql(error);
   }
-  revalidateTag(TAG_CAU_HINH);
+  revalidateTag(TAG_CAU_HINH, { expire: 0 });
   return NextResponse.json({ ok: true });
 }

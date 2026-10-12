@@ -1,4 +1,4 @@
-// CSP-2 — Content-Security-Policy đầy đủ, tạo MỖI lượt tải trang trong middleware (nonce ngẫu nhiên).
+// CSP-2 — Content-Security-Policy đầy đủ, tạo MỖI lượt tải trang trong proxy.ts (nonce ngẫu nhiên).
 //
 // Script: chỉ chạy script mang nonce của lượt này, hoặc script do chính script đó nạp ('strict-dynamic' — để Next tải
 // các gói JS, GTM tải gtag). Script lạ chèn vào trang (XSS: <img onerror>, <script> không nonce) và script từ tên miền
@@ -49,7 +49,7 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
   ].join("; ");
 }
 
-/** Nonce 128 bit, base64. Chạy được ở Edge runtime (middleware). */
+/** Nonce 128 bit, base64. Chạy được ở cả Edge lẫn Node (proxy.ts). */
 export function taoNonce(): string {
   const b = new Uint8Array(16);
   crypto.getRandomValues(b);

@@ -61,7 +61,7 @@ Thêm vào đó:
 - `supabase/migrations/0010_quan_tri.sql` (+ `.down.sql`)
 - `web/lib/quan-tri.ts`: cổng 3 lớp
 - `web/lib/supabase/may-chu.ts`: Supabase phía máy chủ, chạy theo quyền người dùng
-- `web/middleware.ts`: làm mới phiên và gắn noindex cho `/quan-tri`
+- `web/proxy.ts` (trước Next 16: `middleware.ts`): làm mới phiên và gắn noindex cho `/quan-tri`
 - `web/app/quan-tri/`: bảng điều khiển và `xac-thuc/` (đăng ký hoặc nhập mã TOTP)
 - `web/e2e/quan-tri.spec.ts`
 - QT-2: `supabase/migrations/0011_quan_tri_2.sql` (+ `.down.sql`) · `web/lib/cau-hinh.ts` · `web/lib/quan-tri-api.ts`

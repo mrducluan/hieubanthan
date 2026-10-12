@@ -1,3 +1,4 @@
+// Next 16: middleware.ts đổi tên thành proxy.ts (hàm `proxy`, chạy Node runtime).
 // CSP-2: mỗi lượt tải trang một nonce mới → header Content-Security-Policy (lib/csp.ts). Next đọc nonce từ header CSP
 // của request để gắn vào script của chính nó; layout đọc `x-nonce` để gắn cho script GTM.
 // SEO: bản chạy thật chỉ có MỘT địa chỉ. Ai vào tên miền *.vercel.app của production → chuyển hẳn (308) sang
@@ -31,7 +32,7 @@ export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };
 
-export async function middleware(req: NextRequest): Promise<NextResponse> {
+export async function proxy(req: NextRequest): Promise<NextResponse> {
   const host = req.headers.get("host") ?? "";
   if (process.env.VERCEL_ENV === "production" && host.endsWith(".vercel.app")) {
     const dich = new URL(req.nextUrl.pathname + req.nextUrl.search, process.env.NEXT_PUBLIC_SITE_URL || SITE_CHINH);

@@ -7,7 +7,7 @@ const nextConfig = {
       source: "/:path*",
       headers: [
         { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
-        // CSP đầy đủ (nonce theo lượt tải) đặt ở middleware.ts — xem lib/csp.ts.
+        // CSP đầy đủ (nonce theo lượt tải) đặt ở proxy.ts — xem lib/csp.ts.
         { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
         { key: "X-Content-Type-Options", value: "nosniff" },
         { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },

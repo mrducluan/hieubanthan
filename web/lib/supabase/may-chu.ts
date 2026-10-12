@@ -1,6 +1,6 @@
 // Supabase phía MÁY CHỦ (Server Component / route handler) — đọc phiên đăng nhập từ cookie, chạy với quyền của
 // chính người dùng (RLS). Không dùng service role ở đây. Server Component không ghi được cookie → phiên được làm mới
-// ở middleware (chỉ các đường dẫn cần phiên, vd /quan-tri).
+// ở proxy.ts (chỉ các đường dẫn cần phiên, vd /quan-tri).
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import type { SupabaseClient } from "@supabase/supabase-js";
@@ -10,6 +10,6 @@ export async function supabaseMayChu(): Promise<SupabaseClient | null> {
   if (!url || !key) return null;
   const kho = await cookies();
   return createServerClient(url, key, {
-    cookies: { getAll: () => kho.getAll(), setAll: () => { /* chỉ đọc — middleware làm mới phiên */ } },
+    cookies: { getAll: () => kho.getAll(), setAll: () => { /* chỉ đọc — proxy.ts làm mới phiên */ } },
   });
 }

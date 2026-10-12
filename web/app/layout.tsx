@@ -70,7 +70,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#0a0a17", width: "device-width", initialScale: 1 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  // CSP-2: nonce của lượt tải (middleware) — đọc header cũng khiến mọi trang render động, bắt buộc để nonce khớp từng lượt.
+  // CSP-2: nonce của lượt tải (proxy.ts) — đọc header cũng khiến mọi trang render động, bắt buộc để nonce khớp từng lượt.
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
