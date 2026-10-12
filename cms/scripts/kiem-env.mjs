@@ -32,12 +32,21 @@ function kiemDb(chuoi) {
     return "không đọc được — phải có dạng postgresql://postgres.<mã>:<mật khẩu>@aws-…pooler.supabase.com:5432/postgres";
   }
   console.log(`[kiem-env]   máy chủ ${u.hostname}, cổng ${u.port || "5432"}, người dùng ${decodeURIComponent(u.username)}`);
+  // Mật khẩu: chỉ in ĐỘ DÀI + đặc điểm (để đối chiếu với mật khẩu vừa đặt), không bao giờ in nội dung.
+  const tho = chuoi.trim().replace(/^[a-z]+:\/\//i, "");
+  const mk = tho.slice(tho.indexOf(":") + 1, tho.lastIndexOf("@"));
+  const dacBiet = /[^A-Za-z0-9._~-]/.test(mk.replace(/%[0-9A-Fa-f]{2}/g, ""));
+  console.log(`[kiem-env]   mật khẩu ${decodeURIComponent(mk).length} ký tự · chỉ chữ/số: ${dacBiet ? "KHÔNG" : "có"}`
+    + `${/%[0-9A-Fa-f]{2}/.test(mk) ? " · có ký tự đã mã hoá %xx" : ""}${chuoi !== chuoi.trim() ? " · có khoảng trắng/xuống dòng ở đầu/cuối (đã tự bỏ)" : ""}`);
+  if (/\s/.test(chuoi.trim())) return "chuỗi có khoảng trắng ở giữa — dán lại, không xuống dòng";
+  if (/[\[\]]/.test(mk)) return "mật khẩu còn dấu [ ] — xoá hai dấu ngoặc vuông, chỉ để mật khẩu";
+  if (dacBiet) return "mật khẩu có ký tự đặc biệt (@ # / ? : & % …) làm hỏng chuỗi — đặt lại mật khẩu chỉ gồm chữ và số";
   if (!/^postgres(ql)?:$/.test(u.protocol)) return "phải bắt đầu bằng postgresql://";
   if (/^db\.[a-z0-9]+\.supabase\.co$/i.test(u.hostname)) {
     return "đang là chuỗi \"Direct connection\" (chỉ IPv6, Vercel không kết nối được → ENETUNREACH). "
       + "Supabase → Connect → Connection String → mục \"Session pooler\" → lấy chuỗi có …pooler.supabase.com:5432";
   }
-  if (/\[YOUR-PASSWORD\]|%5BYOUR-PASSWORD%5D/i.test(chuoi)) return "chưa thay [YOUR-PASSWORD] bằng mật khẩu database (bỏ cả dấu [ ])";
+  if (/YOUR-PASSWORD/i.test(chuoi)) return "chưa thay [YOUR-PASSWORD] bằng mật khẩu database (bỏ cả dấu [ ])";
   if (/pooler\.supabase\.com$/i.test(u.hostname) && !/^postgres\.[a-z0-9]+$/i.test(decodeURIComponent(u.username))) {
     return "chuỗi pooler cần người dùng dạng postgres.<mã project> (lấy nguyên chuỗi Supabase đưa, đừng sửa phần trước dấu :)";
   }
