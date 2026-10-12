@@ -1,5 +1,5 @@
 // CMS-4 — xếp "bài liên quan theo nghĩa": cosine trên vectơ từ khoá CMS tính sẵn khi lưu bài (cms/src/kiem-dinh/vecto.ts),
-// idf trên tập bài để giảm từ phổ biến. Bản sao hàm của CMS — giữ khớp (test e2e/sao-2 không phụ thuộc, test riêng ở đây).
+// idf trên tập bài để giảm từ phổ biến. Bản sao hàm doGiong/idfTu của CMS — giữ khớp (test: e2e/lien-quan.spec.ts).
 export type Vecto = Record<string, number>;
 
 export function idfTu(ds: Vecto[]): (t: string) => number {
