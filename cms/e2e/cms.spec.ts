@@ -278,6 +278,49 @@ test("Tính năng: tắt blog → bài CMS ẩn khỏi web; bật lại → hi�
   await choWeb(request, "/blog/so-chu-dao-7", (s) => s === 200);
 });
 
+test("Giao diện website: menu chân trang, dải thông báo, banner, bài mới trang chủ, bài liên quan ở Khám phá — sửa ở CMS, web đổi theo", async ({ page, request }) => {
+  const token = await tokenQt(request);
+  const h = { Authorization: `JWT ${token}` };
+  const bai = (await (await request.get(`${CMS}/api/bai-viet?where[slug][equals]=so-chu-dao-7&depth=0`, { headers: h })).json()).docs[0];
+  expect(bai?.id).toBeTruthy();
+  // link ngoài bị CMS từ chối
+  expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h,
+    data: { cot: [{ ten: "Xấu", lien_ket: [{ nhan: "x", loai: "duong_dan", duong_dan: "//evil.vn" }] }] } })).status()).toBe(400);
+  expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: { cot: [
+    { ten: "Đọc gì hôm nay", lien_ket: [{ nhan: "Bài số 7 nổi bật", loai: "bai", bai: bai.id }, { nhan: "Tử vi", loai: "duong_dan", duong_dan: "/tu-vi" }] },
+    { ten: "Pháp lý", lien_ket: [{ nhan: "Điều khoản", loai: "duong_dan", duong_dan: "/dieu-khoan" }] },
+  ] } })).ok()).toBeTruthy();
+  expect((await request.post(`${CMS}/api/globals/trang-chu`, { headers: h, data: {
+    thong_bao: { bat: true, chu: "Tuần lễ ra mắt: mời bạn được thêm Sao", link: "/tai-khoan" },
+    banner: { bat: true, nhan: "Mới", tieu_de: "Mùa thu tự soi cùng con số", mo_ta: "Chuỗi bài mới mỗi tuần.", nut_chu: "Đọc ngay", nut_link: "/blog" },
+    bai_viet: { bat: true, tieu_de: "Đọc gì hôm nay", so_bai: 3, ghim: [bai.id] },
+  } })).ok()).toBeTruthy();
+  await choWeb(request, "/", (s, b) => s === 200 && b.includes("Mùa thu tự soi cùng con số") && b.includes("Bài số 7 nổi bật"));
+
+  await page.goto(`${WEB}/`);
+  await expect(page.getByTestId("thong-bao-site")).toContainText("Tuần lễ ra mắt");
+  await expect(page.getByTestId("thong-bao-site").getByRole("link")).toHaveAttribute("href", "/tai-khoan");
+  await expect(page.getByTestId("banner-trang-chu").getByRole("link", { name: /Đọc ngay/ })).toHaveAttribute("href", "/blog");
+  await expect(page.getByTestId("bai-moi-trang-chu")).toContainText("Đọc gì hôm nay");
+  await expect(page.getByTestId("bai-moi-trang-chu").locator('a[href="/blog/so-chu-dao-7"]')).toBeVisible();
+  const chan = page.getByTestId("chan-trang");
+  await expect(chan.getByText("Đọc gì hôm nay", { exact: true })).toBeVisible();
+  await expect(chan.getByRole("link", { name: "Bài số 7 nổi bật" })).toHaveAttribute("href", "/blog/so-chu-dao-7");
+  await expect(chan.getByText("Về chúng tôi", { exact: true })).toHaveCount(0);   // menu theo CMS, không trộn mặc định
+
+  await page.goto(`${WEB}/kham-pha`);
+  await expect(page.getByTestId("bai-lien-quan-mang").locator('a[href="/blog/so-chu-dao-7"]')).toBeVisible();
+
+  // tắt hết → web quay về mặc định trong code, không còn dải/banner
+  expect((await request.post(`${CMS}/api/globals/trang-chu`, { headers: h, data: {
+    thong_bao: { bat: false }, banner: { bat: false }, bai_viet: { bat: false }, bai_theo_mang: { bat: false } } })).ok()).toBeTruthy();
+  expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: { cot: [] } })).ok()).toBeTruthy();
+  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Mùa thu tự soi") && b.includes("Về chúng tôi"));
+  await page.goto(`${WEB}/kham-pha`);
+  await expect(page.getByTestId("bai-lien-quan-mang")).toHaveCount(0);
+  await expect(page.getByTestId("thong-bao-site")).toHaveCount(0);
+});
+
 test("CMS không cho index, có header bảo mật; trang gốc vào thẳng admin", async ({ request }) => {
   const r = await request.get(`${CMS}/admin/login`);
   expect(r.headers()["x-robots-tag"]).toContain("noindex");

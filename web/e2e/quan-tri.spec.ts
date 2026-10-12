@@ -46,7 +46,7 @@ test("QT-2…QT-4: trang mới + API mới khi chưa bật tài khoản — báo
     await expect(page.getByTestId(id)).toHaveCount(0);
   }
   const goi: [string, unknown][] = [
-    ["/api/quan-tri/cai-dat", { khoa: "site.thong_bao", gia_tri: "x" }],
+    ["/api/quan-tri/cai-dat", { khoa: "sao.thuong.moi_ban", gia_tri: 99 }],
     ["/api/quan-tri/vai-tro", { viec: "cap", email: "a@b.vn", vai_tro: "chu_so_huu" }],
     ["/api/quan-tri/sao", { viec: "dieu_chinh", email: "a@b.vn", so: 1000, ly_do: "thử lỗ hổng", khoa: "abcdefgh" }],
     ["/api/quan-tri/ai", { viec: "kiem", muc: [{ moi: "x" }] }],

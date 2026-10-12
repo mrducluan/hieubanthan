@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { ArrowRight } from "lucide-react";
 import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -47,6 +48,7 @@ export default function KhamPha() {
         <span><b className="text-fg">Thư viện kiến thức</b> — ý nghĩa 12 con số, 64 quẻ, 14 chính tinh</span>
         <ArrowRight className="size-4" aria-hidden />
       </Link>
+      <BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" />
     </div>
   );
 }

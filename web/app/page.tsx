@@ -6,6 +6,8 @@ import { CuaVao } from "@/components/hoso/CuaVao";
 import { ChuThichLop } from "@/components/than-so/LopNoiDung";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { TEN_SITE } from "@/lib/seo";
+import { BannerTrangChu } from "@/components/khung/BannerTrangChu";
+import { BaiMoiTrangChu } from "@/components/blog/BaiLienQuanMang";
 
 // Mô tả trang chủ ≤ 160 ký tự (mô tả site dài hơn vẫn dùng cho schema/llms.txt).
 const TIEU_DE_CHU = "Hiểu Bản Thân — con số nói gì về bạn";
@@ -49,6 +51,8 @@ export default function TrangChu() {
         <HinhBauTroi className="mx-auto max-w-[17rem] sm:max-w-[20rem] md:mx-0 md:max-w-[22rem] md:self-start" />
       </section>
 
+      <BannerTrangChu />
+
       <section aria-labelledby="ba-lop" className="hien-dan">
         <TieuDeMuc id="ba-lop" nho="Vì sao tin được" lon="Ba lớp, không trộn lẫn"
           mo_ta="Bạn luôn biết câu nào là toán, câu nào là truyền thống, và câu nào là để chính bạn trả lời." />
@@ -69,6 +73,8 @@ export default function TrangChu() {
           ))}
         </div>
       </section>
+
+      <BaiMoiTrangChu className="hien-dan" />
 
       <section className="glass flex items-start gap-4 rounded-2xl p-5 sm:items-center sm:p-6">
         <Sun className="size-7 shrink-0 text-gold sm:size-8" aria-hidden />

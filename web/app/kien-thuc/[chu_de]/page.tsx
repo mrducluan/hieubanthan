@@ -4,10 +4,17 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CHU_DE, HINH_CHU_DE, duongTrang, mucLuc } from "@/lib/kien-thuc";
+import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang } from "@/components/minh-hoa/TrangTri";
 import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
+
+// Chủ đề kiến thức → mảng bài CMS (bài viết liên quan cuối trang).
+const MANG_CHU_DE: Record<string, string> = {
+  "than-so": "than_so", "hop-so": "than_so", "nghe-nghiep": "than_so", "tinh-yeu": "than_so", "nam-ca-nhan": "than_so", "no-nghiep": "than_so",
+  "tu-vi": "tu_vi", "cung-tu-vi": "tu_vi", "sao-cung": "tu_vi", "tu-hoa": "tu_vi", "kinh-dich": "kinh_dich", "bat-tu": "bat_tu", "menh-tuoi": "bat_tu", "thap-than": "bat_tu", "nhat-chu": "bat_tu",
+};
 
 type Props = { params: Promise<{ chu_de: string }> };
 
@@ -48,6 +55,7 @@ export default async function Page({ params: thamSo }: Props) {
           </li>
         ))}
       </ul>
+      <BaiLienQuanMang mang={MANG_CHU_DE[params.chu_de] ?? null} className="mt-12" />
     </div>
   );
 }

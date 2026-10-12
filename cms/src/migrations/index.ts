@@ -1,6 +1,7 @@
 import * as migration_20261011_155556_khoi_tao from './20261011_155556_khoi_tao';
 import * as migration_20261012_015320_cong_tac_vien_video from './20261012_015320_cong_tac_vien_video';
 import * as migration_20261012_042950_loai_bai from './20261012_042950_loai_bai';
+import * as migration_20261012_054903_giao_dien_website from './20261012_054903_giao_dien_website';
 
 export const migrations = [
   {
@@ -16,6 +17,11 @@ export const migrations = [
   {
     up: migration_20261012_042950_loai_bai.up,
     down: migration_20261012_042950_loai_bai.down,
-    name: '20261012_042950_loai_bai'
+    name: '20261012_042950_loai_bai',
+  },
+  {
+    up: migration_20261012_054903_giao_dien_website.up,
+    down: migration_20261012_054903_giao_dien_website.down,
+    name: '20261012_054903_giao_dien_website'
   },
 ];

@@ -11,12 +11,9 @@ export type CaiDat =
   | { khoa: string; ten: string; moTa: string; nhom: string; loai: "chu"; toiDa: number; macDinh: string }
   | { khoa: string; ten: string; moTa: string; nhom: string; loai: "duong_dan"; macDinh: string };
 
-/** Danh mục DUY NHẤT các khoá được sửa trên giao diện. Thêm khoá = thêm ở đây (SQL chỉ nhận tiền tố site./sao./luan_giai.). */
+/** Danh mục DUY NHẤT các khoá được sửa trên giao diện. Chữ/banner hiển thị (dải thông báo…) thuộc CMS (Trang chủ & banner),
+ *  ở đây chỉ còn số + công tắc ảnh hưởng tiền/Sao/AI. Thêm khoá = thêm ở đây (SQL chỉ nhận tiền tố site./sao./luan_giai.). */
 export const CAI_DAT: readonly CaiDat[] = [
-  { khoa: "site.thong_bao", nhom: "Toàn site", loai: "chu", toiDa: 160, macDinh: "",
-    ten: "Dải thông báo đầu trang", moTa: "Hiện trên mọi trang (vd \"Tuần này mời bạn được 40 Sao\"). Để trống = tắt." },
-  { khoa: "site.thong_bao_link", nhom: "Toàn site", loai: "duong_dan", macDinh: "",
-    ten: "Link của dải thông báo", moTa: "Đường dẫn trong site, bắt đầu bằng / (vd /tai-khoan). Để trống = không có link." },
   { khoa: "sao.thuong.moi_ban", nhom: "Sao & lời mời", loai: "so", min: 0, max: 100, macDinh: 20,
     ten: "Thưởng người mời", moTa: "Sao cộng cho người gửi link khi bạn bè tạo tài khoản + lưu hồ sơ." },
   { khoa: "sao.thuong.duoc_moi", nhom: "Sao & lời mời", loai: "so", min: 0, max: 100, macDinh: 20,

@@ -11,6 +11,12 @@ Sanity sẽ thêm một hệ dữ liệu thứ hai, và chúng không hiểu cá
 nháp AI, sổ thẩm định, golden test. Tự xây cho phép dùng lại Supabase Auth và RLS, shadcn, CSP nonce có sẵn, và gần
 như không thêm thư viện.
 
+## Ranh giới với CMS (2026-10-12)
+
+/quan-tri giữ **con số và công tắc** đụng tới tiền, Sao, AI, dữ liệu người dùng, kho tri thức (git → PR). Chữ và hình
+hiển thị (bài viết, menu chân trang, dải thông báo, banner trang chủ, khối bài viết) thuộc **CMS** — bảng đầy đủ ở
+`docs/KIEN-TRUC-CMS.md` mục 0. Khoá `site.thong_bao`, `site.thong_bao_link` đã chuyển sang CMS (global "Trang chủ & banner").
+
 ## Hai loại dữ liệu
 
 | Loại | Nguồn gốc | Đường đi khi sửa |

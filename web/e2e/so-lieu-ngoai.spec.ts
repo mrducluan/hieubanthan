@@ -40,7 +40,7 @@ test("cài đặt site: kẹp kiểu + mặc định + env", () => {
   expect(chuanHoa(so, 2.5).ok).toBe(false);
   expect(giaTriHieuLuc(so, {})).toBe(20);
   expect(giaTriHieuLuc(so, { "sao.thuong.moi_ban": 999 })).toBe(20);   // giá trị hỏng → mặc định
-  const link = CAI_DAT.find((c) => c.khoa === "site.thong_bao_link")!;
+  const link = { khoa: "site.thu_link", ten: "", moTa: "", nhom: "", loai: "duong_dan", macDinh: "" } as const;   // kiểu đường dẫn (chưa có khoá nào dùng)
   expect(chuanHoa(link, "/tai-khoan").ok).toBe(true);
   for (const xau of ["https://x.vn", "//x.vn", "/\\x.vn", "javascript:alert(1)"]) expect(chuanHoa(link, xau).ok).toBe(false);
   const bat = CAI_DAT.find((c) => c.khoa === "luan_giai.thu_sao")!;

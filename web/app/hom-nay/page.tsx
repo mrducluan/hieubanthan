@@ -1,5 +1,6 @@
 // HN-1 — "Hôm nay của bạn" (khâu QUAY LẠI, docs/MUC-TIEU-TANG-TRUONG.md): mỗi ngày một thẻ từ hồ sơ trên máy.
 import type { Metadata } from "next";
+import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { GioiThieuCongCu, type NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
 import { metaTrang } from "@/lib/seo";
 import { UngHoNho } from "@/components/ung-ho/UngHoNho";
@@ -29,6 +30,7 @@ export default function Page() {
   return (
     <>
       <HomNay />
+      <BaiLienQuanMang mang="than_so" className="mt-12" />
       <GioiThieuCongCu {...ND} />
       <UngHoNho className="mx-auto mt-10 max-w-3xl" />
     </>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { GioiThieuCongCu, type NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
 import { metaTrang } from "@/lib/seo";
 import { KinhDich } from "./KinhDich";
@@ -26,6 +27,7 @@ export default function Page() {
   return (
     <>
       <KinhDich />
+      <BaiLienQuanMang mang="kinh_dich" className="mt-12" />
       <GioiThieuCongCu {...ND} />
     </>
   );
