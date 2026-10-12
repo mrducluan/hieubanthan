@@ -15,7 +15,7 @@
     "test": "node --test src/kiem-dinh/*.test.ts",
     "test:tich-hop": "payload run tests/tich-hop.ts",
     "e2e": "playwright test",
-    "vercel-build": "payload migrate && next build"
+    "vercel-build": "node scripts/kiem-env.mjs && payload migrate && next build"
   },
   "engines": {
     "node": ">=20.9.0"
