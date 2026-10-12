@@ -1,7 +1,7 @@
 // Điều hướng chân trang hieuban.com (4 cột: Khám phá · Kiến thức · Về chúng tôi · Pháp lý — hoặc cột anh tự đặt).
 // Mỗi liên kết trỏ tới: một trang trong site (đường dẫn), một bài viết CMS, hoặc một chuyên mục CMS.
 // Để trống toàn bộ = web dùng menu mặc định trong code (MENU_MAC_DINH — giống hệt menu đang chạy).
-// Thanh điều hướng trên cùng (4 tab có biểu tượng) KHÔNG nằm ở đây: gắn với định tuyến công cụ, sửa sai là gãy trang.
+// Thanh menu trên cùng: global riêng "Menu đầu trang" (globals/MenuDauTrang.ts).
 import type { Field, GlobalConfig } from "payload";
 import { ai, chiChuBien } from "../access";
 import { lamMoiGlobal } from "../hooks/lamMoiWeb";

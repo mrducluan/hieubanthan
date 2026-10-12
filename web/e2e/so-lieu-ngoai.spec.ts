@@ -7,6 +7,7 @@ import { docKhoaDichVu, kyJwt, locCoHoi, type DongGsc } from "../lib/so-lieu-ngo
 import { CAI_DAT, chuanHoa, giaTriHieuLuc } from "../lib/cau-hinh";
 import { timToanKho } from "../lib/kb-tim";
 import { COT_CHAN_TRANG } from "../lib/menu-chan-trang";
+import { dangOMuc, MENU_DAU_TRANG } from "../lib/menu-dau-trang";
 
 test("JWT RS256 ký đúng, đọc được khoá JSON thô lẫn base64", () => {
   const { privateKey, publicKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
@@ -71,4 +72,20 @@ test("menu chân trang mặc định của web trùng MENU_MAC_DINH trong CMS (C
   }));
   expect(cot.length).toBe(4);
   expect(cot).toEqual(COT_CHAN_TRANG.map((c) => ({ ten: c.ten, ds: c.ds.map(([a, b]) => [a, b]) })));
+});
+
+test("menu đầu trang mặc định của web trùng MENU_DAU_MAC_DINH trong CMS; mục cha sáng theo menu con", () => {
+  const cms = readFileSync(path.join(__dirname, "..", "..", "cms", "src", "globals", "MenuDauTrang.ts"), "utf8");
+  const khoi = cms.slice(cms.indexOf("MENU_DAU_MAC_DINH"), cms.indexOf("export const MenuDauTrang"));
+  const muc = [...khoi.matchAll(/\{ \.\.\.lk\("([^"]+)", "([^"]+)"\), bieu_tuong: "(\w+)", di_dong: (true|false), con: \[([\s\S]*?)\] \}/g)].map((m) => ({
+    href: m[1], ten: m[2], bieu_tuong: m[3], di_dong: m[4] === "true",
+    con: [...m[5]!.matchAll(/lk\("([^"]+)", "([^"]+)"\), mo_ta: "([^"]+)"/g)].map((x) => ({ href: x[1], ten: x[2], mo_ta: x[3] })),
+  }));
+  expect(muc.length).toBe(MENU_DAU_TRANG.length);
+  expect(muc).toEqual(MENU_DAU_TRANG);
+  const khamPha = MENU_DAU_TRANG.find((m) => m.href === "/kham-pha")!;
+  expect(dangOMuc("/tu-vi", khamPha)).toBe(true);
+  expect(dangOMuc("/tu-vi-xyz", khamPha)).toBe(false);
+  expect(dangOMuc("/dang-nhap", MENU_DAU_TRANG.find((m) => m.href === "/tai-khoan")!)).toBe(true);
+  expect(MENU_DAU_TRANG.filter((m) => m.di_dong).length).toBeLessThanOrEqual(5);
 });

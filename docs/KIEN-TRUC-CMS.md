@@ -12,6 +12,7 @@ Hai trang quản trị, **không trùng việc**. Quy tắc một câu: *chữ v
 | Việc | `cms.hieuban.com/admin` (Payload) | `hieuban.com/quan-tri` (tự xây) |
 |---|---|---|
 | Bài viết `/blog`, chuyên mục, tác giả, thư viện ảnh/video | ✅ | — |
+| **Menu đầu trang** (mục cha + menu con thả xuống; trang / bài / chuyên mục; biểu tượng + tab dưới điện thoại ≤ 5) | ✅ global `menu-dau-trang` | — |
 | **Điều hướng chân trang** (4 cột Khám phá · Kiến thức · Về chúng tôi · Pháp lý: link trang trong site, bài viết, chuyên mục) | ✅ global `dieu-huong` | — |
 | **Trang chủ & banner**: dải thông báo đầu trang, banner trang chủ (ảnh, nút, khung ngày), khối "Bài viết mới" (ghim bài), "Bài viết liên quan" ở trang công cụ / Khám phá / Kiến thức | ✅ global `trang-chu` | — |
 | Công tắc nội dung (bật/tắt blog, cột bài trên web) | ✅ global `tinh-nang` | — |
@@ -22,8 +23,11 @@ Hai trang quản trị, **không trùng việc**. Quy tắc một câu: *chữ v
 
 - Dải thông báo trước nằm ở `/quan-tri/cai-dat` (`site.thong_bao`) → **chuyển sang CMS** (chưa có dữ liệu thật vì
   migration 0011 chưa chạy). Khoá `site.*` trong `web/lib/cau-hinh.ts` đã gỡ.
-- Thanh tab (4 tab: Bản thân · Hợp đôi · Khám phá · Tài khoản) **vẫn trong code**: đổi nó là đổi sản phẩm, không phải nội dung.
-- Web đọc globals qua REST (`web/lib/cms.ts`: `dieuHuongCms`, `trangChuCms`, `baiTheoMang`, `baiTrangChu`), cache thẻ
+- Thanh menu đầu trang: **CMS "Menu đầu trang"** (2026-10-12, chủ dự án yêu cầu menu cha + menu con). Mặc định
+  (`web/lib/menu-dau-trang.ts`) giữ 4 trung tâm Bản thân · Hợp đôi · Khám phá · Tài khoản + Blog; để trống ở CMS = dùng mặc định.
+  Mục cha sáng khi đang ở trang của nó hoặc của một menu con (vd /tu-vi → Khám phá) — đổi menu nhớ giữ trang công cụ
+  làm menu con để tab vẫn sáng đúng.
+- Web đọc globals qua REST (`web/lib/cms.ts`: `menuDauTrangCms`, `dieuHuongCms`, `trangChuCms`, `baiTheoMang`, `baiTrangChu`), cache thẻ
   `cms`; lưu global → webhook làm mới ngay. CMS chưa nối / lỗi → web dùng mặc định trong code (`ChanTrang.COT`), không vỡ.
 - Link nhập ở CMS chỉ nhận **đường dẫn trong site** (`/…`, chặn `//x`, `/\x`, `https:`, `javascript:`) — kiểm ở cả CMS
   (validate) lẫn web (`duongLienKet`). Link tới bài chưa xuất bản bị bỏ qua (không hiện link chết).

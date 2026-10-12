@@ -322,6 +322,48 @@ test("Giao diện website: menu chân trang, dải thông báo, banner, bài m�
   await expect(page.getByTestId("thong-bao-site")).toHaveCount(0);
 });
 
+test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa ở CMS → thanh trên + bảng thả xuống + menu điện thoại", async ({ page, request, browser }) => {
+  const token = await tokenQt(request);
+  const h = { Authorization: `JWT ${token}` };
+  const bai = (await (await request.get(`${CMS}/api/bai-viet?where[slug][equals]=so-chu-dao-7&depth=0`, { headers: h })).json()).docs[0];
+  expect(bai?.id).toBeTruthy();
+  // link ngoài bị chặn; quá 5 mục ở tab dưới điện thoại bị chặn
+  expect((await request.post(`${CMS}/api/globals/menu-dau-trang`, { headers: h,
+    data: { muc: [{ nhan: "x", loai: "duong_dan", duong_dan: "https://evil.vn" }] } })).status()).toBe(400);
+  expect((await request.post(`${CMS}/api/globals/menu-dau-trang`, { headers: h, data: {
+    muc: Array.from({ length: 6 }, (_, i) => ({ nhan: `M${i}`, loai: "duong_dan", duong_dan: `/m${i}`, di_dong: true })) } })).status()).toBe(400);
+  expect((await request.post(`${CMS}/api/globals/menu-dau-trang`, { headers: h, data: { muc: [
+    { nhan: "Bản thân", loai: "duong_dan", duong_dan: "/ban-than", bieu_tuong: "lap_lanh", di_dong: true, con: [] },
+    { nhan: "Góc đọc", loai: "duong_dan", duong_dan: "/blog", bieu_tuong: "bao", di_dong: true, con: [
+      { nhan: "Bài số 7 nổi bật", loai: "bai", bai: bai.id, mo_ta: "Bài chọn của tuần" },
+      { nhan: "Tử vi", loai: "duong_dan", duong_dan: "/tu-vi" } ] },
+  ] } })).ok()).toBeTruthy();
+  try {
+  await choWeb(request, "/", (s, b) => s === 200 && b.includes("Góc đọc"));
+
+  await page.goto(`${WEB}/`);
+  const menu = page.getByTestId("menu-dau-trang");
+  await expect(menu.getByRole("link", { name: "Góc đọc" })).toHaveAttribute("href", "/blog");
+  await expect(menu.getByText("Khám phá", { exact: true })).toHaveCount(0);   // menu theo CMS, không trộn mặc định
+  await page.getByRole("button", { name: "Mở menu Góc đọc" }).click();
+  const con = page.locator("[data-testid=menu-con]:visible");
+  await expect(con.getByRole("link", { name: /Bài số 7 nổi bật/ })).toHaveAttribute("href", "/blog/so-chu-dao-7");
+  await expect(con).toContainText("Bài chọn của tuần");
+  await page.goto(`${WEB}/tu-vi`);   // trang là menu con → mục cha sáng
+  await expect(menu.locator("[aria-current=page]")).toHaveText("Góc đọc");
+
+  const dt = await (await browser.newContext({ viewport: { width: 390, height: 844 } })).newPage();
+  await dt.goto(`${WEB}/`);
+  await dt.getByTestId("nut-menu").click();
+  await expect(dt.getByTestId("menu-di-dong").getByRole("link", { name: "Bài số 7 nổi bật" })).toBeVisible();
+
+  } finally {
+    // để trống → web quay về menu mặc định trong code (luôn chạy, kể cả khi bước trên hỏng — không làm hỏng test sau)
+    expect((await request.post(`${CMS}/api/globals/menu-dau-trang`, { headers: h, data: { muc: [] } })).ok()).toBeTruthy();
+  }
+  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Góc đọc") && b.includes("Khám phá"));
+});
+
 test("CMS-2 xác thực 2 bước: bật bằng mã → phiên mới thiếu mã bị đưa sang màn 2 bước → nhập mã → vào được", async ({ browser, request }) => {
   const token = await tokenQt(request);
   const TK = { email: "mfa@vidu.vn", mk: "mat-khau-mfa-0123456" };

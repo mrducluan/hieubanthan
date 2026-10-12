@@ -99,11 +99,13 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'trang-chu': TrangChu;
+    'menu-dau-trang': MenuDauTrang;
     'dieu-huong': DieuHuong;
     'tinh-nang': TinhNang;
   };
   globalsSelect: {
     'trang-chu': TrangChuSelect<false> | TrangChuSelect<true>;
+    'menu-dau-trang': MenuDauTrangSelect<false> | MenuDauTrangSelect<true>;
     'dieu-huong': DieuHuongSelect<false> | DieuHuongSelect<true>;
     'tinh-nang': TinhNangSelect<false> | TinhNangSelect<true>;
   };
@@ -1086,6 +1088,43 @@ export interface TrangChu {
   createdAt?: string | null;
 }
 /**
+ * Thanh menu trên cùng (máy tính) + tab dưới (điện thoại). Mục cha có thể có menu con thả xuống. Để trống = dùng menu mặc định. Đổi xong có hiệu lực sau vài giây.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-dau-trang".
+ */
+export interface MenuDauTrang {
+  id: number;
+  muc?:
+    | {
+        nhan: string;
+        loai?: ('duong_dan' | 'bai' | 'chuyen_muc') | null;
+        duong_dan?: string | null;
+        bai?: (number | null) | BaiViet;
+        chuyen_muc?: (number | null) | ChuyenMuc;
+        bieu_tuong?: ('lap_lanh' | 'trai_tim' | 'la_ban' | 'sach' | 'bao' | 'sao' | 'lich' | 'nguoi') | null;
+        di_dong?: boolean | null;
+        /**
+         * Để trống = mục cha chỉ là một liên kết, không có bảng thả xuống.
+         */
+        con?:
+          | {
+              nhan: string;
+              loai?: ('duong_dan' | 'bai' | 'chuyen_muc') | null;
+              duong_dan?: string | null;
+              bai?: (number | null) | BaiViet;
+              chuyen_muc?: (number | null) | ChuyenMuc;
+              mo_ta?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * Các cột liên kết cuối mọi trang hieuban.com. Để trống = dùng menu mặc định. Đổi xong có hiệu lực sau vài giây.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1172,6 +1211,38 @@ export interface TrangChuSelect<T extends boolean = true> {
     | {
         bat?: T;
         so_bai?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-dau-trang_select".
+ */
+export interface MenuDauTrangSelect<T extends boolean = true> {
+  muc?:
+    | T
+    | {
+        nhan?: T;
+        loai?: T;
+        duong_dan?: T;
+        bai?: T;
+        chuyen_muc?: T;
+        bieu_tuong?: T;
+        di_dong?: T;
+        con?:
+          | T
+          | {
+              nhan?: T;
+              loai?: T;
+              duong_dan?: T;
+              bai?: T;
+              chuyen_muc?: T;
+              mo_ta?: T;
+              id?: T;
+            };
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

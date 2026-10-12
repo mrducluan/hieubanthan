@@ -7,7 +7,7 @@ import { useState } from "react";
 import { HANH_DONG, type HanhDong, type KetQuaSoan } from "../lib/soan-nhap";
 
 const O: React.CSSProperties = { width: "100%", boxSizing: "border-box", borderRadius: 6, border: "1px solid var(--theme-elevation-150)",
-  background: "var(--theme-input-bg)", color: "var(--theme-text)", padding: 8, fontSize: 13 };
+  background: "var(--theme-input-bg)", color: "var(--theme-text)", padding: 8, fontSize: 13, fontFamily: "inherit", lineHeight: 1.5 };
 
 export function TroLyAI() {
   const tieuDe = useFormFields(([f]) => f.tieu_de?.value as string | undefined);
@@ -33,7 +33,7 @@ export function TroLyAI() {
   }
 
   return (
-    <details style={{ marginBottom: 24 }} data-testid="tro-ly-ai">
+    <details open style={{ marginBottom: 24, border: "1px solid var(--theme-elevation-150)", borderRadius: 8, padding: 12 }} data-testid="tro-ly-ai">
       <summary style={{ cursor: "pointer", fontWeight: 600 }}>Trợ lý AI soạn nháp đoạn văn</summary>
       <div style={{ display: "grid", gap: 8, marginTop: 10 }}>
         <textarea aria-label="Đoạn cần sửa" rows={5} value={van} onChange={(e) => setVan(e.target.value)} placeholder="Dán một đoạn trong bài…" style={O} />

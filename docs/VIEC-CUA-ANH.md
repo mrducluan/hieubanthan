@@ -400,6 +400,19 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
 - [ ] CMS13. (2026-10-12, CMS-3/4) Sau khi PR merge + CMS redeploy: thử tạo **Trang đích** (Giao diện website → Trang đích)
   cho một chiến dịch (vd "Mời bạn tháng 11") → xuất bản → xem ở `hieuban.com/su-kien/{slug}`. Khi viết bài, mở khung
   **Gợi ý liên kết nội bộ** ở cột phải để chèn 2–5 link tới trang kiến thức/bài liên quan (tốt cho SEO).
+- [ ] CMS14. (2026-10-12) **Kiểm thử go-live trên cms.hieuban.com** (CMS production đã deploy bản mới lúc 19:28 — trước đó
+  bị kẹt ở bản #81 do lỗi bước bỏ qua build, đã sửa ở PR #90). Mất ~10 phút, làm theo thứ tự:
+  1) Mở `https://cms.hieuban.com/admin` → thấy nhóm **Giao diện website** (Trang đích · Trang chủ & banner · **Menu đầu
+     trang** · Điều hướng chân trang). Không thấy → nhấn Ctrl+F5; vẫn không → chụp màn hình Vercel project cms → Deployments.
+  2) **Menu đầu trang** (sau khi PR menu merge): mỗi *Mục cha* có ô *Menu con* — thêm "Blog" → menu con trỏ tới Chuyên
+     mục / Bài viết / Trang. Lưu → hieuban.com đổi sau vài giây (máy tính: rê chuột vào mũi tên; điện thoại: nút ☰ góc phải).
+  3) **Điều hướng chân trang**: cột Kiến thức đã có "Blog" mặc định; thêm chuyên mục / trang đích nếu muốn.
+  4) **Bài viết → Tạo mới**: viết thử một bài ngắn; cột phải có **Kiểm định** (chấm điểm), **Gợi ý liên kết nội bộ**
+     (bấm "Tìm trang liên quan") và **Trợ lý AI soạn nháp** (dán một đoạn → Soạn nháp; cần CMS11). Xuất bản → mở
+     `hieuban.com/blog/{slug}`: cuối bài có "Đọc tiếp" (bài liên quan theo nghĩa, cần ≥ 2 bài).
+  5) **Trang đích → Tạo mới**: thêm khối Đầu trang, Thẻ công cụ, Danh sách bài viết, Hỏi đáp, Lời mời → Xuất bản →
+     `hieuban.com/su-kien/{slug}`.
+  Thấy chỗ nào lỗi: chụp màn hình gửi em. Em đã chạy đúng 5 bước này trên bản sao cục bộ (ảnh trong báo cáo QC).
 - [ ] CMS9. Ảnh/video: giữ **Supabase Storage** bây giờ, video đăng YouTube rồi chèn khối "Video YouTube"; chuyển R2
   khi vượt ~50 GB ảnh hoặc ~200 GB băng thông/tháng (`docs/LUU-TRU-MEDIA.md`).
 - [ ] CG-a. Chốt **không làm hoa hồng nhiều tầng** (đa cấp dịch vụ bị cấm; Điều 217a BLHS) — thay bằng lộ trình chuyên
