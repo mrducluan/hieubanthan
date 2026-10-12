@@ -5,6 +5,7 @@ import * as migration_20261012_054903_giao_dien_website from './20261012_054903_
 import * as migration_20261012_083118_xac_thuc_2_buoc from './20261012_083118_xac_thuc_2_buoc';
 import * as migration_20261012_083453_trang_dich from './20261012_083453_trang_dich';
 import * as migration_20261012_083859_bai_lien_quan_nghia from './20261012_083859_bai_lien_quan_nghia';
+import * as migration_20261012_102241_menu_dau_trang from './20261012_102241_menu_dau_trang';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20261012_083859_bai_lien_quan_nghia.up,
     down: migration_20261012_083859_bai_lien_quan_nghia.down,
-    name: '20261012_083859_bai_lien_quan_nghia'
+    name: '20261012_083859_bai_lien_quan_nghia',
+  },
+  {
+    up: migration_20261012_102241_menu_dau_trang.up,
+    down: migration_20261012_102241_menu_dau_trang.down,
+    name: '20261012_102241_menu_dau_trang'
   },
 ];

@@ -3,3 +3,6 @@ node_modules/
 .env*.local
 *.tsbuildinfo
 next-env.d.ts
+# next dev tự sinh (hướng dẫn cho trợ lý AI) — không đưa vào repo
+AGENTS.md
+CLAUDE.md

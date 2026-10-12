@@ -4,6 +4,7 @@
 //   CMS_PREVIEW_SECRET  ký link xem trước (CMS tạo, web kiểm)       CMS_WEBHOOK_SECRET  CMS báo web xoá cache
 // Cache: thẻ "cms", 5 phút; CMS báo đổi → /api/cms/lam-moi xoá ngay. CMS chậm/lỗi → coi như không có bài (không vỡ trang).
 import { xepLienQuan } from "@/lib/lien-quan";
+import type { BieuTuong, MucMenu } from "@/lib/menu-dau-trang";
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 export const TAG_CMS = "cms";
@@ -214,6 +215,27 @@ export async function dieuHuongCms(): Promise<{ ten: string; ds: [string, string
     }),
   })).filter((c) => c.ten && c.ds.length);
   return cot.length ? cot : null;
+}
+
+type MucCms = LienKetCms & { bieu_tuong?: BieuTuong | null; di_dong?: boolean | null;
+  con?: (LienKetCms & { mo_ta?: string | null })[] | null };
+
+/** Menu đầu trang từ CMS ("Menu đầu trang"); để trống / lỗi / chậm → null (web dùng MENU_DAU_TRANG trong code).
+ *  Như chân trang: link sai hoặc trỏ bài chưa xuất bản bị bỏ, blog tắt thì bỏ link /blog. */
+export async function menuDauTrangCms(): Promise<MucMenu[] | null> {
+  if (!coCms()) return null;
+  const [g, tn] = await Promise.all([goiCms<{ muc?: MucCms[] | null }>("/api/globals/menu-dau-trang?depth=1", { hanMs: HAN_KHUNG }), tinhNangCms()]);
+  const dung = (d: string | null) => d && (tn.blog_bat || !(d === "/blog" || d.startsWith("/blog/"))) ? d : null;
+  const muc = (g?.muc ?? []).slice(0, 7).flatMap((m): MucMenu[] => {
+    const href = dung(duongLienKet(m));
+    if (!href || !m.nhan) return [];
+    const con = (m.con ?? []).flatMap((c) => {
+      const h = dung(duongLienKet(c));
+      return h && c.nhan ? [{ href: h, ten: c.nhan, ...(c.mo_ta ? { mo_ta: c.mo_ta } : {}) }] : [];
+    });
+    return [{ href, ten: m.nhan, bieu_tuong: m.bieu_tuong ?? "la_ban", di_dong: m.di_dong ?? true, con }];
+  });
+  return muc.length ? muc : null;
 }
 
 /** Trong khung thời gian đặt ở CMS (giờ máy chủ, so ISO). */

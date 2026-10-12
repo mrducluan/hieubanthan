@@ -27,7 +27,7 @@ export function GoiYLienKet() {
   }
 
   return (
-    <details style={{ marginBottom: 24 }} data-testid="goi-y-lien-ket">
+    <details open style={{ marginBottom: 24, border: "1px solid var(--theme-elevation-150)", borderRadius: 8, padding: 12 }} data-testid="goi-y-lien-ket">
       <summary style={{ cursor: "pointer", fontWeight: 600 }}>Gợi ý liên kết nội bộ</summary>
       <div style={{ display: "grid", gap: 8, marginTop: 10 }}>
         <button type="button" className="btn btn--style-secondary btn--size-small" disabled={dang} onClick={() => void tim()}>

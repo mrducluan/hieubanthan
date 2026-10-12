@@ -7,6 +7,7 @@ import { HopThoaiSao } from "@/components/sao/HopThoaiSao";
 import { ChanTrang, KhungChanTrang } from "@/components/khung/ChanTrang";
 import { COT_CHAN_TRANG } from "@/lib/menu-chan-trang";
 import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
+import { TabDuoiCms, ThanhTrenCms } from "@/components/khung/MenuCms";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { GhiGioiThieu } from "@/components/khung/GhiGioiThieu";
 import { GiamSat } from "@/components/khung/GiamSat";
@@ -83,12 +84,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         </a>
         {/* Nội dung từ CMS chạy song song, không chặn byte đầu của trang khi CMS chậm (audit 2026-10-12). */}
         <Suspense fallback={null}><ThongBaoSite /></Suspense>
-        <ThanhTren />
+        <Suspense fallback={<ThanhTren />}><ThanhTrenCms /></Suspense>
         <main id="noi-dung" className="container pb-12 pt-6 md:pb-16 md:pt-10">
           {children}
         </main>
         <Suspense fallback={<KhungChanTrang cot={COT_CHAN_TRANG} />}><ChanTrang /></Suspense>
-        <TabDuoi />
+        <Suspense fallback={<TabDuoi />}><TabDuoiCms /></Suspense>
         <GhiGioiThieu />
         <GiamSat />
         <HoiDongYCookie />

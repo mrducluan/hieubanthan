@@ -17,6 +17,7 @@ import { ChuyenMuc } from "./collections/ChuyenMuc";
 import { Media } from "./collections/Media";
 import { TacGia } from "./collections/TacGia";
 import { DieuHuong } from "./globals/DieuHuong";
+import { MenuDauTrang } from "./globals/MenuDauTrang";
 import { TinhNang } from "./globals/TinhNang";
 import { TrangChu } from "./globals/TrangChu";
 import { slugViet } from "./kiem-dinh/kiem-dinh";
@@ -63,7 +64,7 @@ export default buildConfig({
   },
   i18n: { supportedLanguages: { vi, en }, fallbackLanguage: "vi" },
   collections: [BaiViet, ChuyenMuc, TacGia, Media, TrangDich, BienTapVien],
-  globals: [TrangChu, DieuHuong, TinhNang],
+  globals: [TrangChu, MenuDauTrang, DieuHuong, TinhNang],
   editor: lexicalEditor(),
   db: postgresAdapter({
     pool: { connectionString: (process.env.DATABASE_URI || "").trim() },
