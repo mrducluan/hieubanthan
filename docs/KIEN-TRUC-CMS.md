@@ -235,6 +235,13 @@ không nâng quyền ai). `vercel-build` tự chạy migration khi deploy.
   (`POST /api/bai-viet/kiem-trung`, mọi tài khoản phòng biên tập trừ Máy đọc).
 - Không bắt được bài chép từ site ngoài (cần tra web — để sau, cân nhắc chi phí).
 
+## 8d. Chỉ build bản chính thức trên Vercel (2026-10-12)
+
+`cms/vercel.json` → `ignoreCommand`: bỏ qua mọi bản Preview (nhánh PR). Lý do: bản Preview không có biến môi trường
+(kiem-env dừng build), và nếu đặt biến trỏ DB thật thì `payload migrate` của nhánh PR sẽ chạy lên DB thật trước khi
+merge. Kiểm thử CMS cho PR do GitHub Actions job `cms` đảm nhận (Postgres riêng). Cần xem trước giao diện CMS → tạo DB
+riêng rồi bỏ dòng `ignoreCommand`.
+
 ## 9. Lộ trình tiếp
 
 | Mã | Việc | Khâu |
