@@ -366,9 +366,12 @@ lần trước) → chọn vai trò → **Cấp / đổi vai trò**.
 Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bước này thì web vẫn chạy như cũ.
 
 - [ ] CMS1. Supabase → Storage → tạo bucket `cms-media` (Public) → Settings → Storage → S3 Connection → tạo Access key.
-- [ ] CMS2. Vercel → Add New Project → repo này, **Root Directory `cms`** → nhập biến theo `cms/.env.example`
+- [x] CMS2. (anh báo deploy thành công 2026-10-12) Vercel → Add New Project → repo này, **Root Directory `cms`** → nhập biến theo `cms/.env.example`
   (`DATABASE_URI` = Session pooler, `PAYLOAD_SECRET`, `CMS_URL`, `WEB_URL`, `CMS_EMAIL_QUAN_TRI` = email của anh,
   `CMS_WEBHOOK_SECRET`, `CMS_PREVIEW_SECRET`, `CRON_SECRET`, `S3_*`). Không dán khoá vào chat.
+- [ ] CMS2b. Kiểm build log CMS có dòng `[van-tay-kb] 19 tệp, … cụm` (kiểm trùng với kho tri thức, CG-6). Nếu thấy
+  "không thấy engine/app/kb/data" → Vercel project cms → Settings → Build and Deployment → Root Directory → bật
+  **Include files outside the root directory in the Build Step** → Redeploy.
 - [ ] CMS3. GoDaddy: CNAME `cms` → Vercel; gắn `cms.hieuban.com` vào project CMS.
 - [ ] CMS4. Mở `https://cms.hieuban.com/admin` → tạo tài khoản đầu tiên bằng đúng email đã khai.
 - [ ] CMS5. CMS → Ban biên tập → tạo "Web hieuban.com", vai trò **Máy đọc**, tick Enable API Key → chép khoá.

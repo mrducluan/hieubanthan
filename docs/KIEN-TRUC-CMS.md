@@ -222,6 +222,19 @@ Chi tiết + lộ trình chuyên gia: `docs/KE-HOACH-CHUYEN-GIA.md` mục 4. Lư
 Migration Payload `20261012_015320_cong_tac_vien_video` (up/down; down hạ cộng tác viên về Máy đọc + tắt khoá API —
 không nâng quyền ai). `vercel-build` tự chạy migration khi deploy.
 
+## 8c. CG-6 (2026-10-12): kiểm trùng nội dung
+
+- `cms/src/kiem-dinh/trung-lap.ts` (thuần, test `trung-lap.test.ts`): vân tay = băm FNV cụm 5 từ đã bỏ dấu; độ trùng =
+  tỉ lệ cụm của bài mới có trong nguồn kia. Ngưỡng `NGUONG`: 20% cảnh báo, 50% lỗi (chặn **cộng tác viên**).
+- `cms/src/lib/trung-lap.ts`: so với mọi bài khác (Local API, `overrideAccess`) + vân tay kho tri thức. Bài nháp người
+  khác chỉ hiện "một bài nháp khác" (không lộ tiêu đề cho cộng tác viên).
+- Vân tay kho tri thức: `npm run van-tay-kb` (tự chạy trong `vercel-build`, `predev`, `pretest:tich-hop`, `pree2e`) →
+  `src/kiem-dinh/van-tay-kb.json` (gitignore, chỉ mã băm). Đóng gói bằng `outputFileTracingIncludes`. Thiếu thư mục
+  engine → tệp rỗng, chỉ bỏ phần so KB.
+- Chạy ở hook trước khi lưu khi **Gửi duyệt / Xuất bản** (không chạy lúc tự lưu nháp) và qua nút "Kiểm trùng nội dung"
+  (`POST /api/bai-viet/kiem-trung`, mọi tài khoản phòng biên tập trừ Máy đọc).
+- Không bắt được bài chép từ site ngoài (cần tra web — để sau, cân nhắc chi phí).
+
 ## 9. Lộ trình tiếp
 
 | Mã | Việc | Khâu |

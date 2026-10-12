@@ -15,6 +15,8 @@ const bao = [
 const nextConfig = {
   poweredByHeader: false,
   agentRules: false,
+  // Vân tay kho tri thức (CG-6) đọc bằng fs lúc chạy → ép đóng gói kèm hàm máy chủ.
+  outputFileTracingIncludes: { "/**/*": ["./src/kiem-dinh/van-tay-kb.json"] },
   images: { localPatterns: [{ pathname: "/api/media/file/**" }] },
   async headers() {
     return [{ source: "/:path*", headers: bao }];

@@ -15,7 +15,12 @@
     "test": "node --test src/kiem-dinh/*.test.ts",
     "test:tich-hop": "payload run tests/tich-hop.ts",
     "e2e": "playwright test",
-    "vercel-build": "node scripts/kiem-env.mjs && payload migrate && next build"
+    "vercel-build": "node scripts/kiem-env.mjs && node scripts/van-tay-kb.mjs && payload migrate && next build",
+    "van-tay-kb": "node scripts/van-tay-kb.mjs",
+    "predev": "node scripts/van-tay-kb.mjs",
+    "pretest:tich-hop": "node scripts/van-tay-kb.mjs",
+    "pree2e": "node scripts/van-tay-kb.mjs",
+    "prebuild": "node scripts/van-tay-kb.mjs"
   },
   "engines": {
     "node": ">=20.9.0"

@@ -7,11 +7,12 @@ import {
 } from "@payloadcms/richtext-lexical";
 import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from "@payloadcms/plugin-seo/fields";
 import { APIError, slugField, type CollectionBeforeChangeHook, type CollectionBeforeValidateHook, type CollectionConfig } from "payload";
-import { chiChuBien, daXuatBanHoacNoiBo, docPhienBan, laChuBien, laCongTacVien, suaBai, taoBai, truongBienTap, truongChuBien, truongNoiBo } from "../access";
+import { chiChuBien, daDangNhap, daXuatBanHoacNoiBo, docPhienBan, laChuBien, laCongTacVien, suaBai, taoBai, truongBienTap, truongChuBien, truongNoiBo } from "../access";
 import { KHOI } from "../blocks";
 import { lamMoiKhiDoiBai, lamMoiKhiXoaBai } from "../hooks/lamMoiWeb";
 import { chuanHoaDuLieu, kiemDinhBai, slugViet, type BaiKiem } from "../kiem-dinh/kiem-dinh";
 import { boChuyenHtml } from "../lib/html";
+import { kiemTrung } from "../lib/trung-lap";
 import { taoSlug } from "../lib/slug";
 import { linkXemTruoc } from "../lib/web";
 
@@ -31,19 +32,26 @@ export const TRANG_THAI_DUYET = [
   { label: "Đã duyệt", value: "da_duyet" },
 ];
 
-const kiemDinhTruocKhiLuu: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
+const kiemDinhTruocKhiLuu: CollectionBeforeChangeHook = async ({ data, originalDoc, req }) => {
   const bai = { ...(originalDoc ?? {}), ...data } as BaiKiem & { _status?: string };
   const kq = kiemDinhBai(bai);
-  const loi = kq.loi_chan.map((m) => m.thong_diep).join(" · ");
-  if (data._status === "published" && kq.loi_chan.length && !req.context?.boQuaKiemDinh) {
+  const xuatBan = data._status === "published";
+  const guiDuyet = data.trang_thai_duyet === "cho_duyet" && originalDoc?.trang_thai_duyet !== "cho_duyet";
+  // CG-6: so trùng lặp chỉ khi xuất bản / gửi duyệt (không chạy mỗi lần tự lưu nháp).
+  const trung = (xuatBan || guiDuyet) && !req.context?.boQuaKiemDinh
+    ? await kiemTrung(req.payload, bai, { id: originalDoc?.id ?? null, congTacVien: laCongTacVien(req) })
+    : [];
+  const chan = [...kq.loi_chan, ...trung.filter((m) => m.chan)];
+  const loi = chan.map((m) => m.thong_diep).join(" · ");
+  if (xuatBan && chan.length && !req.context?.boQuaKiemDinh) {
     throw new APIError("Chưa xuất bản được — sửa các lỗi sau rồi bấm Xuất bản lại: " + loi, 400, null, true);
   }
   // Gửi duyệt cũng phải sạch lỗi chặn (Chủ biên không phải đọc bài chắc chắn bị chặn).
-  if (data.trang_thai_duyet === "cho_duyet" && originalDoc?.trang_thai_duyet !== "cho_duyet" && kq.loi_chan.length) {
+  if (guiDuyet && chan.length) {
     throw new APIError("Chưa gửi duyệt được — sửa các lỗi sau trước: " + loi, 400, null, true);
   }
   data.diem_kiem_dinh = kq.diem;
-  data.ghi_chu_kiem_dinh = kq.muc.filter((m) => m.muc_do !== "dat").map((m) => m.thong_diep).join("\n");
+  data.ghi_chu_kiem_dinh = [...kq.muc, ...trung].filter((m) => m.muc_do !== "dat").map((m) => m.thong_diep).join("\n");
   return data;
 };
 
@@ -111,6 +119,20 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     drafts: { autosave: { interval: 2000 }, schedulePublish: true },
     maxPerDoc: 50,
   },
+  endpoints: [
+    {
+      // Nút "Kiểm trùng" trong khung Kiểm định: POST /api/bai-viet/kiem-trung {id?, tra_loi_nhanh, noi_dung, hoi_dap}.
+      // Chỉ tài khoản phòng biên tập (không máy đọc). Bài nháp người khác không lộ tiêu đề (danhGiaTrung).
+      path: "/kiem-trung", method: "post",
+      handler: async (req) => {
+        if (!daDangNhap(req) || req.user?.vai_tro === "may_doc") return Response.json({ loi: "Cần đăng nhập" }, { status: 403 });
+        const body = (typeof req.json === "function" ? await req.json().catch(() => ({})) : {}) as Record<string, unknown>;
+        const id = typeof body.id === "number" || typeof body.id === "string" ? body.id : null;
+        const muc = await kiemTrung(req.payload, body, { id, congTacVien: laCongTacVien(req) });
+        return Response.json({ muc });
+      },
+    },
+  ],
   hooks: {
     beforeValidate: [chuanHoaTiengViet, slugTuTieuDe],
     beforeChange: [quyTrinhDuyet, ngayXuatBan, giuSlugCu, kiemDinhTruocKhiLuu],

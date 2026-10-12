@@ -151,7 +151,7 @@ Doanh thu tháng ≈ MAU × tỷ lệ trả tiền × ARPPU
 | CG-3 | Email báo: Chủ biên khi có bài "Gửi duyệt"; tác giả khi "Cần sửa"/"Đã xuất bản" (Payload email + SMTP/Resend — **cần duyệt dependency**) | Không ai phải mở CMS để biết có việc |
 | CG-4 | Hồ sơ chuyên gia đọc từ CMS (collection Tác giả: ảnh, tiểu sử, mảng, năm kinh nghiệm, huy hiệu xác minh) thay danh sách cứng `web/lib/chuyen-gia.ts`; nối tài khoản CMS ↔ hồ sơ tác giả | Lộ trình bậc 2–3 |
 | CG-5 | Thưởng Sao tự động khi bài cộng tác được xuất bản (CMS gọi web → hàm SQL có khoá chống trùng theo id bài) | Động lực bậc 1 |
-| CG-6 | Kiểm trùng nội dung với bài đã có + kho tri thức (luật cố định, không gọi AI) | Chặn chép bài |
+| CG-6 ✅ | Kiểm trùng nội dung với bài đã có + kho tri thức (luật cố định, không gọi AI) — **đã làm 2026-10-12**: vân tay cụm 5 từ (bỏ dấu), trùng ≥ 50% → chặn cộng tác viên gửi duyệt, ban biên tập chỉ cảnh báo; 20–50% cảnh báo; nút "Kiểm trùng nội dung" trong khung Kiểm định | Chặn chép bài |
 | CG-7 | MFA TOTP cho tài khoản CMS (nhất là Chủ biên/Quản trị) | Nhiều người ngoài vào CMS hơn |
 | CG-8 | Tư vấn 1:1: lịch hẹn, thanh toán payOS theo buổi, phòng gọi video (bên thứ ba), đánh giá sau buổi, ví thu nhập chuyên gia + đối soát chi | Doanh thu bậc 3–4. Cần pháp nhân + hợp đồng mẫu + luật sư |
 | CG-9 | Gói Hội viên (thanh toán định kỳ — payOS chưa hỗ trợ tự trừ; làm dạng "mua 1/3/12 tháng", nhắc gia hạn) | Doanh thu ổn định |
