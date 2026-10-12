@@ -3,6 +3,7 @@
 //   CMS_API_KEY         khoá API của tài khoản "Máy đọc" — CHỈ dùng khi xem trước bản nháp (draft mode).
 //   CMS_PREVIEW_SECRET  ký link xem trước (CMS tạo, web kiểm)       CMS_WEBHOOK_SECRET  CMS báo web xoá cache
 // Cache: thẻ "cms", 5 phút; CMS báo đổi → /api/cms/lam-moi xoá ngay. CMS chậm/lỗi → coi như không có bài (không vỡ trang).
+import { xepLienQuan } from "@/lib/lien-quan";
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 export const TAG_CMS = "cms";
@@ -20,6 +21,8 @@ export type BaiCmsTomTat = {
   meta?: { title?: string | null; description?: string | null; image?: AnhCms | null } | null;
   loai_bai?: LoaiBai | null;
   chuyen_muc?: ChuyenMucCms[] | null;
+  /** CMS-4: vectơ từ khoá CMS tính khi lưu (bài liên quan theo nghĩa). */
+  vecto?: Record<string, number> | null;
 };
 export type LoaiBai = "bai_viet" | "tin_tuc" | "huong_dan";
 export type ChuyenMucCms = { id?: number; ten: string; slug: string; mo_ta?: string | null };
@@ -82,7 +85,7 @@ const tv = (o: Record<string, unknown>) => chuoiTruyVan(o).join("&");
 
 const CHON_TOM_TAT = {
   tieu_de: true, slug: true, mo_ta_ngan: true, anh_bia: true, publishedAt: true, updatedAt: true, mang: true,
-  the: true, noindex: true, dua_vao_llms: true, tra_loi_nhanh: true, meta: true, loai_bai: true, chuyen_muc: true,
+  the: true, noindex: true, dua_vao_llms: true, tra_loi_nhanh: true, meta: true, loai_bai: true, chuyen_muc: true, vecto: true,
 };
 
 /** Chuyên mục chỉ hợp lệ khi đã populate (object có ten + slug). */
@@ -133,13 +136,12 @@ export async function baiCms(slug: string, nhap = false): Promise<{ bai: BaiCms 
   return moi && moi !== slug ? { chuyen: moi } : null;
 }
 
-/** Bài liên quan: chọn tay trong CMS, thiếu thì lấy bài cùng mảng mới nhất. */
+/** Bài liên quan: chọn tay trong CMS, thiếu thì lấy bài GẦN NGHĨA nhất (CMS-4: vectơ từ khoá), ưu tiên cùng mảng. */
 export async function baiLienQuan(bai: BaiCms, toiDa = 3): Promise<BaiCmsTomTat[]> {
   const chon = (bai.bai_lien_quan ?? []).filter((b) => b && typeof b === "object" && b.slug);
   if (chon.length >= toiDa) return chon.slice(0, toiDa);
   const ds = await dsBaiCms();
-  const them = ds.filter((b) => b.slug !== bai.slug && !chon.some((c) => c.slug === b.slug))
-    .sort((a, b) => Number(b.mang === bai.mang) - Number(a.mang === bai.mang));
+  const them = xepLienQuan(bai, ds.filter((b) => !chon.some((c) => c.slug === b.slug)));
   return [...chon, ...them].slice(0, toiDa);
 }
 
@@ -227,7 +229,7 @@ export async function trangChuCms(): Promise<TrangChuCms | null> {
 }
 
 /** Bài mới nhất đã xuất bản, lọc ngay ở CMS (không tải cả danh sách 500 bài — giữ phản hồi nhỏ để cache được). */
-async function baiMoiCms(mang: string | null, n: number): Promise<BaiCmsTomTat[]> {
+export async function baiMoiCms(mang: string | null, n: number): Promise<BaiCmsTomTat[]> {
   const where: Record<string, unknown> = { _status: { equals: "published" }, noindex: { not_equals: true } };
   if (mang) where.mang = { equals: mang };
   const [tn, r] = await Promise.all([
@@ -257,4 +259,35 @@ export async function baiTrangChu(): Promise<{ tieuDe: string; ds: BaiCmsTomTat[
   const da = new Set(ghim.map((b) => b.slug));
   const gop = [...ghim, ...moi.filter((b) => !da.has(b.slug))].slice(0, n);
   return gop.length ? { tieuDe: k?.tieu_de?.trim() || "Bài viết mới", ds: gop } : null;
+}
+
+// ---------------------------------------------------------------- CMS-3: trang đích /su-kien/{slug}
+export type KhoiTrangDich =
+  | { blockType: "dau_trang"; id?: string; nhan?: string | null; tieu_de: string; mo_ta?: string | null; anh?: AnhCms | null; nut_chu?: string | null; nut_link?: string | null }
+  | { blockType: "cong_cu"; id?: string; tieu_de?: string | null; ds: string[] }
+  | { blockType: "bai_viet"; id?: string; tieu_de?: string | null; bai?: (BaiCmsTomTat | number)[] | null; mang?: string | null; so_bai?: number | null }
+  | { blockType: "hoi_dap"; id?: string; tieu_de?: string | null; ds: { cau_hoi: string; tra_loi: string }[] }
+  | { blockType: "loi_moi"; id?: string; tieu_de: string; mo_ta?: string | null; nut_chu?: string | null }
+  | { blockType: "van_ban"; id?: string; tieu_de?: string | null; noi_dung: string };
+export type TrangDichCms = {
+  id: number; tieu_de: string; slug: string; mo_ta_seo?: string | null; anh_chia_se?: AnhCms | null;
+  khoi?: KhoiTrangDich[] | null; het_han?: string | null; noindex?: boolean | null; updatedAt: string; createdAt: string;
+};
+
+export const daHetHan = (t: Pick<TrangDichCms, "het_han">, now = Date.now()) => Boolean(t.het_han && Date.parse(t.het_han) <= now);
+
+export async function trangDichCms(slug: string): Promise<TrangDichCms | null> {
+  if (!coCms() || !/^[a-z0-9-]{1,120}$/.test(slug)) return null;
+  const r = await goiCms<{ docs: TrangDichCms[] }>(`/api/trang-dich?${tv({
+    where: { slug: { equals: slug }, _status: { equals: "published" } }, limit: 1, depth: 2,
+  })}`);
+  return r?.docs?.[0] ?? null;
+}
+
+export async function dsTrangDichCms(): Promise<Pick<TrangDichCms, "slug" | "updatedAt" | "het_han" | "noindex">[]> {
+  if (!coCms()) return [];
+  const r = await goiCms<{ docs: TrangDichCms[] }>(`/api/trang-dich?${tv({
+    where: { _status: { equals: "published" } }, limit: 200, depth: 0, select: { slug: true, updatedAt: true, het_han: true, noindex: true },
+  })}`);
+  return (r?.docs ?? []).filter((t) => t.slug);
 }

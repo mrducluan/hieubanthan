@@ -5,6 +5,7 @@
 import { createHmac } from "node:crypto";
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
 import { BI_MAT } from "../playwright.config";
+import { buocHienTai, maTotp, tuBase32 } from "../src/lib/totp";
 
 const CMS = "http://localhost:3001";
 const WEB = "http://localhost:3000";
@@ -319,6 +320,83 @@ test("Giao diện website: menu chân trang, dải thông báo, banner, bài m�
   await page.goto(`${WEB}/kham-pha`);
   await expect(page.getByTestId("bai-lien-quan-mang")).toHaveCount(0);
   await expect(page.getByTestId("thong-bao-site")).toHaveCount(0);
+});
+
+test("CMS-2 xác thực 2 bước: bật bằng mã → phiên mới thiếu mã bị đưa sang màn 2 bước → nhập mã → vào được", async ({ browser, request }) => {
+  const token = await tokenQt(request);
+  const TK = { email: "mfa@vidu.vn", mk: "mat-khau-mfa-0123456" };
+  const tao = await request.post(`${CMS}/api/bien-tap-vien`, { headers: { Authorization: `JWT ${token}` },
+    data: { email: TK.email, password: TK.mk, ten_hien_thi: "Người thử MFA", vai_tro: "bien_tap" } });
+  expect(tao.ok()).toBeTruthy();
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await dangNhap(page, TK);
+  // Payload chỉ nhận cookie đăng nhập khi Origin nằm trong csrf (như trình duyệt gửi từ trang admin)
+  const nguon = { headers: { Origin: CMS } };
+  const bat = await page.request.post(`${CMS}/api/bien-tap-vien/mfa/bat-dau`, nguon);
+  expect(bat.status(), await bat.text()).toBe(200);
+  const bi = tuBase32((await bat.json()).bi_mat);
+  expect((await page.request.post(`${CMS}/api/bien-tap-vien/mfa/xac-nhan`, { ...nguon, data: { ma: maTotp(bi, buocHienTai()) } })).ok()).toBeTruthy();
+  // phiên khác (xoá cookie 2 bước, vẫn còn phiên mật khẩu) → không quyền gì cho tới khi nhập mã
+  await ctx.clearCookies({ name: "cms-mfa" });
+  const nhap = await page.request.get(`${CMS}/api/bai-viet?limit=1&draft=true&where[_status][equals]=draft`, nguon);
+  expect((await nhap.json()).totalDocs).toBe(0);                     // thiếu mã → như khách: không thấy bản nháp
+  await page.goto(`${CMS}/admin`);
+  await expect(page).toHaveURL(/\/admin\/xac-thuc-2-buoc/);
+  await expect(page.getByTestId("xac-thuc-2-buoc")).toBeVisible();
+  await page.getByLabel("Mã 6 số").fill(maTotp(bi, buocHienTai() + 1));
+  await page.getByRole("button", { name: "Xác nhận" }).click();
+  await page.waitForURL(`${CMS}/admin`);
+  await expect(page.getByRole("link", { name: /Bài viết/ }).first()).toBeVisible();
+  await ctx.close();
+});
+
+test("CMS-3 trang đích: ghép khối trong CMS → /su-kien/{slug} có H1, thẻ công cụ, hỏi đáp (FAQPage), lời mời; hết hạn → noindex", async ({ page, request }) => {
+  const token = await tokenQt(request);
+  const h = { Authorization: `JWT ${token}` };
+  const khoi = [
+    { blockType: "dau_trang", nhan: "Mùa thi", tieu_de: "Chọn ngành hợp con số của bạn", mo_ta: "Xem số chủ đạo hợp nghề gì.", nut_chu: "Xem số của tôi", nut_link: "/than-so" },
+    { blockType: "cong_cu", tieu_de: "Bắt đầu từ đây", ds: ["than_so", "tu_vi"] },
+    { blockType: "hoi_dap", tieu_de: "Hỏi nhanh", ds: [{ cau_hoi: "Có mất phí không?", tra_loi: "Các công cụ đều miễn phí." }] },
+    { blockType: "loi_moi", tieu_de: "Rủ bạn cùng xem", mo_ta: "Cả hai cùng nhận Sao." },
+  ];
+  expect((await request.post(`${CMS}/api/trang-dich`, { headers: h, data: { tieu_de: "Link xấu", _status: "published",
+    khoi: [{ blockType: "dau_trang", tieu_de: "x", nut_chu: "y", nut_link: "https://evil.vn" }] } })).status()).toBe(400);
+  const tao = await request.post(`${CMS}/api/trang-dich`, { headers: h, data: {
+    tieu_de: "Mùa thi chọn ngành", mo_ta_seo: "Số chủ đạo hợp nghề gì — công cụ miễn phí cho mùa thi.", _status: "published", khoi } });
+  expect(tao.status(), await tao.text()).toBe(201);
+  const { doc } = await tao.json() as { doc: { id: number; slug: string } };
+  expect(doc.slug).toBe("mua-thi-chon-nganh");
+  await choWeb(request, "/su-kien/mua-thi-chon-nganh", (s) => s === 200);
+  await page.goto(`${WEB}/su-kien/mua-thi-chon-nganh`);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Chọn ngành hợp con số của bạn");
+  await expect(page.getByRole("link", { name: /Xem số của tôi/ })).toHaveAttribute("href", "/than-so");
+  await expect(page.locator('[data-khoi="cong_cu"] a')).toHaveCount(2);
+  await expect(page.locator('[data-khoi="loi_moi"] a')).toHaveAttribute("href", "/tai-khoan#moi");
+  const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
+  expect(ld.join("")).toContain('"FAQPage"');
+  expect(await (await request.get(`${WEB}/sitemap.xml`)).text()).toContain("/su-kien/mua-thi-chon-nganh");
+  // hết hạn → còn xem được nhưng báo kết thúc + noindex, rời sitemap
+  expect((await request.patch(`${CMS}/api/trang-dich/${doc.id}`, { headers: h, data: { het_han: "2020-01-01T00:00:00.000Z", _status: "published" } })).ok()).toBeTruthy();
+  await choWeb(request, "/su-kien/mua-thi-chon-nganh", (s, b) => s === 200 && b.includes("đã kết thúc"));
+  await page.goto(`${WEB}/su-kien/mua-thi-chon-nganh`);
+  await expect(page.getByTestId("da-ket-thuc")).toBeVisible();
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  expect((await request.get(`${WEB}/su-kien/khong-co-that`)).status()).toBe(404);
+});
+
+test("CMS-4 gợi ý liên kết nội bộ: bài viết + trang kiến thức gần nghĩa; bài có vectơ khi lưu", async ({ request }) => {
+  const token = await tokenQt(request);
+  const h = { Authorization: `JWT ${token}` };
+  const bai = (await (await request.get(`${CMS}/api/bai-viet?where[slug][equals]=so-chu-dao-7&depth=0`, { headers: h })).json()).docs[0];
+  expect(Object.keys(bai.vecto ?? {}).length).toBeGreaterThan(5);
+  const r = await request.post(`${CMS}/api/bai-viet/goi-y-lien-ket`, { headers: h, data: {
+    tieu_de: "Số chủ đạo 7 hợp nghề gì", tu_khoa_chinh: "số chủ đạo 7", the: ["thần số học"], tra_loi_nhanh: "Người số chủ đạo 7 hợp nghiên cứu." } });
+  expect(r.ok()).toBeTruthy();
+  const ds = (await r.json()).ds as { url: string; loai: string }[];
+  expect(ds.some((m) => m.url === "/blog/so-chu-dao-7")).toBeTruthy();
+  expect(ds.some((m) => m.loai === "trang" && m.url.startsWith("/kien-thuc"))).toBeTruthy();
+  expect((await request.post(`${CMS}/api/bai-viet/goi-y-lien-ket`, { data: {} })).status()).toBe(403);
 });
 
 test("CMS không cho index, có header bảo mật; trang gốc vào thẳng admin", async ({ request }) => {

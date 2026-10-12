@@ -1,6 +1,9 @@
 // Bài viết — nguồn nội dung cho /blog/{slug} trên web.
 // Nháp tự lưu, lịch xuất bản, lịch sử phiên bản; kiểm định SEO/GEO/E-E-A-T chạy ngay khi gõ (khung bên phải)
 // và chạy lại ở máy chủ trước khi lưu: có LỖI CHẶN thì không xuất bản được.
+import { kiemDauVao, soanNhap } from "../lib/soan-nhap";
+import { vectoBai, vectoVan, xepHang, type Vecto } from "../kiem-dinh/vecto";
+import { trangNoiBo } from "../lib/lien-ket";
 import {
   BlocksFeature, EXPERIMENTAL_TableFeature, FixedToolbarFeature, HeadingFeature, HorizontalRuleFeature,
   InlineToolbarFeature, LinkFeature, lexicalEditor, lexicalHTMLField,
@@ -137,6 +140,39 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
   },
   endpoints: [
     {
+      // CMS-4: gợi ý liên kết nội bộ khi viết — bài CMS đã xuất bản + trang kiến thức/công cụ của web, xếp theo độ giống
+      // từ khoá với bài đang viết (luật cố định, không AI). Trả đường dẫn để người viết chèn link.
+      path: "/goi-y-lien-ket", method: "post",
+      handler: async (req) => {
+        if (!daDangNhap(req) || req.user?.vai_tro === "may_doc") return Response.json({ loi: "Cần đăng nhập" }, { status: 403 });
+        const body = (typeof req.json === "function" ? await req.json().catch(() => ({})) : {}) as Record<string, unknown>;
+        const goc = vectoBai(body);
+        if (!Object.keys(goc).length) return Response.json({ ds: [] });
+        const [bai, trang] = await Promise.all([
+          req.payload.find({ collection: "bai-viet", where: { _status: { equals: "published" } }, limit: 500, depth: 0,
+            select: { tieu_de: true, slug: true, vecto: true }, overrideAccess: false, req }),
+          trangNoiBo(),
+        ]);
+        const ung = [
+          ...bai.docs.filter((b) => b.slug && b.vecto).map((b) => ({ id: `bai:${b.id}`, v: b.vecto as Vecto, tieu_de: b.tieu_de, url: `/blog/${b.slug}`, loai: "bai" })),
+          ...trang.map((t) => ({ id: `trang:${t.url}`, v: vectoVan([[t.tieu_de, 4], [t.mo_ta ?? "", 1]]), tieu_de: t.tieu_de, url: t.url, loai: "trang" })),
+        ];
+        const boId = body.id != null ? `bai:${String(body.id)}` : undefined;
+        return Response.json({ ds: xepHang(goc, ung, boId, 10).map(({ tieu_de, url, loai, diem }) => ({ tieu_de, url, loai, diem: Math.round(diem * 100) / 100 })) });
+      },
+    },
+    {
+      // CMS-2: Trợ lý AI soạn nháp một đoạn (cột phải). Người viết (kể cả cộng tác viên) dùng được; máy đọc thì không.
+      path: "/soan-nhap", method: "post",
+      handler: async (req) => {
+        if (!daDangNhap(req) || req.user?.vai_tro === "may_doc") return Response.json({ loi: "Cần đăng nhập" }, { status: 403 });
+        const body = (typeof req.json === "function" ? await req.json().catch(() => ({})) : {}) as Record<string, unknown>;
+        const v = kiemDauVao(body);
+        if (typeof v === "string") return Response.json({ loi: v }, { status: 422 });
+        return Response.json(await soanNhap(v));
+      },
+    },
+    {
       // Nút "Kiểm trùng" trong khung Kiểm định: POST /api/bai-viet/kiem-trung {id?, tra_loi_nhanh, noi_dung, hoi_dap}.
       // Chỉ tài khoản phòng biên tập (không máy đọc). Bài nháp người khác không lộ tiêu đề (danhGiaTrung).
       path: "/kiem-trung", method: "post",
@@ -151,7 +187,9 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
   ],
   hooks: {
     beforeValidate: [chuanHoaTiengViet, tieuDeTam, slugTuTieuDe],
-    beforeChange: [quyTrinhDuyet, ngayXuatBan, giuSlugCu, kiemDinhTruocKhiLuu],
+    beforeChange: [quyTrinhDuyet, ngayXuatBan, giuSlugCu, kiemDinhTruocKhiLuu,
+      // CMS-4: vectơ từ khoá cho "bài liên quan theo nghĩa" (web xếp hạng bằng cosine + idf). Luôn tính lại khi lưu.
+      ({ data, originalDoc }) => ({ ...data, vecto: vectoBai({ ...(originalDoc ?? {}), ...data }) })],
     afterChange: [lamMoiKhiDoiBai],
     afterDelete: [lamMoiKhiXoaBai],
   },
@@ -250,6 +288,15 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
       name: "kiem_dinh", type: "ui",
       admin: { position: "sidebar", components: { Field: "/components/KiemDinh#KiemDinh" } },
     },
+    {
+      name: "goi_y_lien_ket", type: "ui",
+      admin: { position: "sidebar", components: { Field: "/components/GoiYLienKet#GoiYLienKet" } },
+    },
+    { name: "vecto", type: "json", admin: { hidden: true, readOnly: true } },
+    {
+      name: "tro_ly_ai", type: "ui",
+      admin: { position: "sidebar", components: { Field: "/components/TroLyAI#TroLyAI" } },
+    },
     slugField({ useAsSlug: "tieu_de", slugify: taoSlug }),
     {
       name: "trang_thai_duyet", label: "Duyệt bài", type: "select", required: true, defaultValue: "dang_viet",
@@ -313,7 +360,7 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     {
       name: "bai_lien_quan", label: "Bài liên quan", type: "relationship", relationTo: "bai-viet", hasMany: true, maxRows: 4,
       filterOptions: ({ id }) => (id ? { id: { not_equals: id } } : true),
-      admin: { position: "sidebar", description: "Để trống = tự lấy bài cùng mảng." },
+      admin: { position: "sidebar", description: "Để trống = tự lấy bài gần nghĩa nhất (từ khoá, thẻ, tiêu đề mục), ưu tiên cùng mảng." },
     },
     {
       name: "diem_kiem_dinh", label: "Điểm kiểm định", type: "number", min: 0, max: 100,

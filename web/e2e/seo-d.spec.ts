@@ -62,6 +62,7 @@ test("cookie: GTM nạp ngay, đo lường bật mặc định (chưa hỏi khi 
     .map((x) => Array.from(x as ArrayLike<unknown>)).filter((a) => a[0] === "consent")));
   await expect.poll(dongY).toContain('"default",{"analytics_storage":"granted"');
   // người dùng vẫn tắt được ở chân trang
+  await expect(page.getByTestId("chan-trang")).toHaveCount(1);
   await page.getByTestId("chan-trang").getByRole("button", { name: "Tuỳ chọn cookie" }).click();
   await expect(hop).toBeVisible();
   await hop.getByRole("button", { name: "Từ chối" }).click();
@@ -71,6 +72,7 @@ test("cookie: GTM nạp ngay, đo lường bật mặc định (chưa hỏi khi 
   // từ chối thì lần mở sau vẫn denied ngay từ đầu
   await page.reload();
   await expect.poll(dongY).toContain('"default",{"analytics_storage":"denied"');
+  await expect(page.getByTestId("chan-trang")).toHaveCount(1);
   await page.getByTestId("chan-trang").getByRole("button", { name: "Tuỳ chọn cookie" }).click();
   await hop.getByRole("button", { name: "Đồng ý" }).click();
   await expect.poll(dongY).toContain('"update",{"analytics_storage":"granted"}');
