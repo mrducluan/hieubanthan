@@ -52,6 +52,7 @@ nháp bằng link có ký. Chỉ cần anh đặt 5 biến ở Vercel project **
 | HT-10 | Sao lưu: Supabase Free không có PITR → lịch dump tuần (GitHub Actions + lưu riêng) khi có dữ liệu người dùng | An toàn dữ liệu | Em | Làm cùng HT-8 |
 | HT-11 | Chuyển Supabase về Singapore (tạo project mới, chuyển dữ liệu) | Tốc độ | Anh + em | Làm trước HT-8 thì rẻ nhất (chưa có dữ liệu người dùng) |
 | HT-12 | AI soạn nháp từng đoạn trong CMS (dùng lại engine `/v1/quan-tri/soan-nhap` + kiểm định), người duyệt vẫn là người | Thu hút | Em | Cần `OPENROUTER_API_KEY` trên Render |
+| HT-14 | Kiểm trùng CG-6 đang tải TOÀN BỘ thân bài mọi bài mỗi lần Gửi duyệt/Xuất bản — lưu vân tay mỗi bài khi lưu (trường ẩn) rồi chỉ so vân tay | Ổn định | Em | Khi > 200 bài (audit 2026-10-12) |
 | HT-13 | Chạy bộ 55 câu hỏi AI thật, chấm, sửa (mục L) | Quay lại | Anh nạp khoá, em chạy | Trước khi bật AI rộng |
 
 **Thứ tự khuyến nghị:** HT-1 → HT-2 → HT-11 (nếu chuyển) → HT-8 → HT-3/HT-4 → HT-9/HT-10 → còn lại.

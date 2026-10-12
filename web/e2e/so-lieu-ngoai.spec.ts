@@ -6,6 +6,7 @@ import { test, expect } from "@playwright/test";
 import { docKhoaDichVu, kyJwt, locCoHoi, type DongGsc } from "../lib/so-lieu-ngoai";
 import { CAI_DAT, chuanHoa, giaTriHieuLuc } from "../lib/cau-hinh";
 import { timToanKho } from "../lib/kb-tim";
+import { COT_CHAN_TRANG } from "../lib/menu-chan-trang";
 
 test("JWT RS256 ký đúng, đọc được khoá JSON thô lẫn base64", () => {
   const { privateKey, publicKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
@@ -60,4 +61,14 @@ test("tìm toàn kho trên file KB thật: không dấu, trả đúng vị trí,
   expect(kq.some((r) => /Thiên Phủ/i.test(r.doan))).toBe(true);
   expect(timToanKho(tep, "x")).toEqual([]);
   expect(timToanKho(tep, "an", 7)).toHaveLength(7);
+});
+
+test("menu chân trang mặc định của web trùng MENU_MAC_DINH trong CMS (CMS lỗi vẫn hiện đúng menu)", () => {
+  const cms = readFileSync(path.join(__dirname, "..", "..", "cms", "src", "globals", "DieuHuong.ts"), "utf8");
+  const khoi = cms.slice(cms.indexOf("MENU_MAC_DINH"), cms.indexOf("export const truongLienKet"));
+  const cot = [...khoi.matchAll(/\{ ten: "([^"]+)", lien_ket: \[([\s\S]*?)\]\.map/g)].map((m) => ({
+    ten: m[1], ds: [...m[2]!.matchAll(/\["([^"]+)", "([^"]+)"\]/g)].map((x) => [x[1], x[2]]),
+  }));
+  expect(cot.length).toBe(4);
+  expect(cot).toEqual(COT_CHAN_TRANG.map((c) => ({ ten: c.ten, ds: c.ds.map(([a, b]) => [a, b]) })));
 });

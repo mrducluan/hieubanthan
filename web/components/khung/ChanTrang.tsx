@@ -7,29 +7,9 @@ import { BadgeCheck, HeartHandshake, Mail, MapPin, Phone, Server, ShieldCheck, S
 import { coUngHo } from "@/lib/ung-ho";
 import { vanHanh } from "@/lib/van-hanh";
 import { dieuHuongCms } from "@/lib/cms";
+import { COT_CHAN_TRANG, type CotChanTrang } from "@/lib/menu-chan-trang";
 import { NutTuyChonCookie } from "@/components/khung/HoiDongYCookie";
 import { Logo } from "./Logo";
-
-// Mặc định = bản đầu của CMS (cms/src/globals/DieuHuong.ts MENU_MAC_DINH) — đổi một bên thì đổi cả bên kia.
-const COT: { ten: string; ds: readonly (readonly [string, string])[] }[] = [
-  { ten: "Khám phá", ds: [
-    ["/than-so", "Thần số học"], ["/tu-vi", "Tử vi"], ["/bat-tu", "Bát tự"], ["/kinh-dich", "Kinh Dịch"],
-    ["/phong-thuy", "Phong thuỷ"], ["/hop-doi", "Hợp đôi"],
-  ] },
-  { ten: "Kiến thức", ds: [
-    ["/kien-thuc", "Thư viện kiến thức"], ["/kien-thuc/than-so", "Ý nghĩa các con số"], ["/kien-thuc/kinh-dich", "64 quẻ Kinh Dịch"],
-    ["/kien-thuc/tu-vi", "14 chính tinh Tử vi"], ["/tu-dien", "Từ điển thuật ngữ"], ["/la-so-mau", "Lá số mẫu"], ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"],
-    ["/kien-thuc/hop-so", "Số chủ đạo hợp nhau"], ["/blog", "Blog"],
-  ] },
-  { ten: "Về chúng tôi", ds: [
-    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
-    ["/lien-he#chu-de", "Góp ý, báo lỗi"], ["/tai-khoan", "Tài khoản"], ["/nap-sao", "Nạp Sao"],
-  ] },
-  { ten: "Pháp lý", ds: [
-    ["/chinh-sach-rieng-tu", "Chính sách quyền riêng tư"], ["/dieu-khoan", "Điều khoản sử dụng"],
-    ["/mien-tru-trach-nhiem", "Miễn trừ trách nhiệm"], ["/chinh-sach-rieng-tu#quyen", "Yêu cầu về dữ liệu cá nhân"],
-  ] },
-];
 
 const CAM_KET = [
   { Icon: ShieldCheck, chu: "Hồ sơ mặc định chỉ lưu trên máy bạn" },
@@ -37,9 +17,13 @@ const CAM_KET = [
   { Icon: Sparkles, chu: "Không bán dữ liệu, không quảng cáo nhắm mục tiêu" },
 ];
 
+/** Menu từ CMS; CMS chậm/lỗi → layout hiện ngay bản mặc định (Suspense fallback = KhungChanTrang với COT_CHAN_TRANG). */
 export async function ChanTrang() {
+  return <KhungChanTrang cot={(await dieuHuongCms()) ?? COT_CHAN_TRANG} />;
+}
+
+export function KhungChanTrang({ cot }: { cot: readonly CotChanTrang[] }) {
   const vh = vanHanh();
-  const cot = (await dieuHuongCms()) ?? COT;
   const nam = new Date().getFullYear();
   return (
     <footer className="vach-sang mt-8 border-t border-line/60 bg-surface/30 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-10" data-testid="chan-trang">
@@ -72,12 +56,12 @@ export async function ChanTrang() {
         </div>
 
         <nav aria-label="Liên kết cuối trang" className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          {cot.map((c) => (
-            <div key={c.ten}>
+          {cot.map((c, i) => (
+            <div key={i}>
               <p className="eyebrow">{c.ten}</p>
               <ul className="mt-2 space-y-0.5 text-sm">
                 {c.ds.map(([href, ten]) => (
-                  <li key={href + ten}><Link href={href} className="inline-block py-1 text-fg-muted transition-colors hover:text-gold">{ten}</Link></li>
+                  <li key={`${href} ${ten}`}><Link href={href} className="inline-block py-1 text-fg-muted transition-colors hover:text-gold">{ten}</Link></li>
                 ))}
               </ul>
             </div>

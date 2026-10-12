@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { GioiThieuCongCu, type NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
@@ -27,7 +28,7 @@ export default function Page() {
   return (
     <>
       <HopDoi />
-      <BaiLienQuanMang mang="than_so" className="mt-12" />
+      <Suspense fallback={null}><BaiLienQuanMang mang="than_so" className="mt-12" /></Suspense>
       <GioiThieuCongCu {...ND} />
     </>
   );

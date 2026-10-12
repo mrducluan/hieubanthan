@@ -46,9 +46,9 @@ export const TINH_NANG_MAC_DINH: TinhNangCms = {
 export const cmsUrl = () => (process.env.CMS_URL || "").replace(/\/+$/, "");
 export const coCms = () => Boolean(cmsUrl());
 
-type Goi = { nhap?: boolean };
+type Goi = { nhap?: boolean; hanMs?: number };
 
-async function goiCms<T>(duong: string, { nhap = false }: Goi = {}): Promise<T | null> {
+async function goiCms<T>(duong: string, { nhap = false, hanMs = 4_000 }: Goi = {}): Promise<T | null> {
   const goc = cmsUrl();
   if (!goc) return null;
   const headers: Record<string, string> = { accept: "application/json" };
@@ -56,7 +56,7 @@ async function goiCms<T>(duong: string, { nhap = false }: Goi = {}): Promise<T |
   try {
     const r = await fetch(`${goc}${duong}`, {
       headers,
-      signal: AbortSignal.timeout(4_000),
+      signal: AbortSignal.timeout(hanMs),
       ...(nhap ? { cache: "no-store" as const } : { next: { revalidate: 300, tags: [TAG_CMS] } }),
     });
     if (!r.ok) return null;
@@ -201,10 +201,15 @@ export function duongLienKet(l: LienKetCms): string | null {
 
 export async function dieuHuongCms(): Promise<{ ten: string; ds: [string, string][] }[] | null> {
   if (!coCms()) return null;
-  const g = await goiCms<{ cot?: CotCms[] | null }>("/api/globals/dieu-huong?depth=1");
-  const cot = (g?.cot ?? []).map((c) => ({
+  const [g, tn] = await Promise.all([goiCms<{ cot?: CotCms[] | null }>("/api/globals/dieu-huong?depth=1", { hanMs: HAN_KHUNG }), tinhNangCms()]);
+  // Blog tắt ở CMS → bỏ link tới bài / chuyên mục / /blog (không để link chết ở chân trang).
+  const laBlog = (d: string) => d === "/blog" || d.startsWith("/blog/");
+  const cot = (g?.cot ?? []).slice(0, 4).map((c) => ({
     ten: c.ten,
-    ds: (c.lien_ket ?? []).flatMap((l): [string, string][] => { const d = duongLienKet(l); return d && l.nhan ? [[d, l.nhan]] : []; }),
+    ds: (c.lien_ket ?? []).flatMap((l): [string, string][] => {
+      const d = duongLienKet(l);
+      return d && l.nhan && (tn.blog_bat || !laBlog(d)) ? [[d, l.nhan]] : [];
+    }),
   })).filter((c) => c.ten && c.ds.length);
   return cot.length ? cot : null;
 }
@@ -213,29 +218,43 @@ export async function dieuHuongCms(): Promise<{ ten: string; ds: [string, string
 export const dangHien = (l: LichCms, now = Date.now()) =>
   (!l.tu_ngay || Date.parse(l.tu_ngay) <= now) && (!l.den_ngay || Date.parse(l.den_ngay) > now);
 
+/** Nội dung khung trang (dải thông báo, chân trang, banner) chờ CMS tối đa 1,5 giây rồi bỏ qua — không giữ cả trang. */
+const HAN_KHUNG = 1_500;
+
 export async function trangChuCms(): Promise<TrangChuCms | null> {
   if (!coCms()) return null;
-  return goiCms<TrangChuCms>("/api/globals/trang-chu?depth=2");
+  return goiCms<TrangChuCms>("/api/globals/trang-chu?depth=2", { hanMs: HAN_KHUNG });
+}
+
+/** Bài mới nhất đã xuất bản, lọc ngay ở CMS (không tải cả danh sách 500 bài — giữ phản hồi nhỏ để cache được). */
+async function baiMoiCms(mang: string | null, n: number): Promise<BaiCmsTomTat[]> {
+  const where: Record<string, unknown> = { _status: { equals: "published" }, noindex: { not_equals: true } };
+  if (mang) where.mang = { equals: mang };
+  const [tn, r] = await Promise.all([
+    tinhNangCms(),
+    goiCms<{ docs: BaiCmsTomTat[] }>(`/api/bai-viet?${tv({ where, sort: "-publishedAt", limit: n, depth: 1, select: CHON_TOM_TAT })}`, { hanMs: HAN_KHUNG }),
+  ]);
+  return tn.blog_bat ? (r?.docs ?? []).filter((b) => b.slug && b.tieu_de) : [];
 }
 
 /** Bài CMS cùng mảng (trang công cụ / Khám phá / Kiến thức). mang = null → mới nhất mọi mảng. Tắt ở CMS → []. */
 export async function baiTheoMang(mang: string | null, soBai?: number): Promise<BaiCmsTomTat[]> {
-  const [tc, ds] = await Promise.all([trangChuCms(), dsBaiCms()]);
+  const tc = await trangChuCms();
   if (tc?.bai_theo_mang?.bat === false) return [];
-  const n = soBai ?? tc?.bai_theo_mang?.so_bai ?? 3;
-  const cung = mang ? ds.filter((b) => b.mang === mang) : ds;
-  return cung.filter((b) => !b.noindex).slice(0, Math.max(1, Math.min(6, n)));
+  return baiMoiCms(mang, Math.max(1, Math.min(6, soBai ?? tc?.bai_theo_mang?.so_bai ?? 3)));
 }
 
 /** Khối "Bài viết mới" trang chủ: bài ghim (đúng thứ tự, bỏ bài đã gỡ) rồi bù bài mới nhất cho đủ so_bai. Tắt → null. */
 export async function baiTrangChu(): Promise<{ tieuDe: string; ds: BaiCmsTomTat[] } | null> {
-  const [tc, ds] = await Promise.all([trangChuCms(), dsBaiCms()]);
+  const tc = await trangChuCms();
   const k = tc?.bai_viet;
   if (k?.bat === false) return null;
   const n = Math.max(2, Math.min(6, k?.so_bai ?? 3));
-  const coSlug = new Set(ds.map((b) => b.slug));
-  const ghim = (k?.ghim ?? []).filter((b): b is BaiCmsTomTat => typeof b === "object" && !!b?.slug && coSlug.has(b.slug));
+  const moi = await baiMoiCms(null, n + 6);
+  if (!moi.length && !(await tinhNangCms()).blog_bat) return null;
+  // Bài ghim: CMS chỉ populate bài khách đọc được (đã xuất bản) — bài đã gỡ trả về id số → bị bỏ.
+  const ghim = (k?.ghim ?? []).filter((b): b is BaiCmsTomTat => typeof b === "object" && !!b?.slug && !!b.tieu_de && b.noindex !== true);
   const da = new Set(ghim.map((b) => b.slug));
-  const gop = [...ghim.map((g) => ds.find((b) => b.slug === g.slug)!), ...ds.filter((b) => !da.has(b.slug) && !b.noindex)].slice(0, n);
+  const gop = [...ghim, ...moi.filter((b) => !da.has(b.slug))].slice(0, n);
   return gop.length ? { tieuDe: k?.tieu_de?.trim() || "Bài viết mới", ds: gop } : null;
 }

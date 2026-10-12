@@ -1,4 +1,5 @@
 // Trang chủ đề (vd /kien-thuc/kinh-dich): danh sách mọi bài, render phía server. Schema: CollectionPage + ItemList.
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -10,10 +11,9 @@ import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
 
-// Chủ đề kiến thức → mảng bài CMS (bài viết liên quan cuối trang).
-const MANG_CHU_DE: Record<string, string> = {
-  "than-so": "than_so", "hop-so": "than_so", "nghe-nghiep": "than_so", "tinh-yeu": "than_so", "nam-ca-nhan": "than_so", "no-nghiep": "than_so",
-  "tu-vi": "tu_vi", "cung-tu-vi": "tu_vi", "sao-cung": "tu_vi", "tu-hoa": "tu_vi", "kinh-dich": "kinh_dich", "bat-tu": "bat_tu", "menh-tuoi": "bat_tu", "thap-than": "bat_tu", "nhat-chu": "bat_tu",
+// Chủ đề kiến thức → mảng bài CMS, suy từ trang công cụ của chủ đề (CHU_DE[x].mang) — thêm chủ đề không phải sửa ở đây.
+const MANG_CONG_CU: Record<string, string> = {
+  "/than-so": "than_so", "/hop-doi": "than_so", "/tu-vi": "tu_vi", "/bat-tu": "bat_tu", "/kinh-dich": "kinh_dich", "/phong-thuy": "phong_thuy",
 };
 
 type Props = { params: Promise<{ chu_de: string }> };
@@ -55,7 +55,7 @@ export default async function Page({ params: thamSo }: Props) {
           </li>
         ))}
       </ul>
-      <BaiLienQuanMang mang={MANG_CHU_DE[params.chu_de] ?? null} className="mt-12" />
+      <Suspense fallback={null}><BaiLienQuanMang mang={MANG_CONG_CU[cd.mang] ?? null} className="mt-12" /></Suspense>
     </div>
   );
 }

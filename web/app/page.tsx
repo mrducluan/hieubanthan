@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Sun } from "lucide-react";
@@ -51,7 +52,7 @@ export default function TrangChu() {
         <HinhBauTroi className="mx-auto max-w-[17rem] sm:max-w-[20rem] md:mx-0 md:max-w-[22rem] md:self-start" />
       </section>
 
-      <BannerTrangChu />
+      <Suspense fallback={null}><BannerTrangChu /></Suspense>
 
       <section aria-labelledby="ba-lop" className="hien-dan">
         <TieuDeMuc id="ba-lop" nho="Vì sao tin được" lon="Ba lớp, không trộn lẫn"
@@ -74,7 +75,7 @@ export default function TrangChu() {
         </div>
       </section>
 
-      <BaiMoiTrangChu className="hien-dan" />
+      <Suspense fallback={null}><BaiMoiTrangChu className="hien-dan" /></Suspense>
 
       <section className="glass flex items-start gap-4 rounded-2xl p-5 sm:items-center sm:p-6">
         <Sun className="size-7 shrink-0 text-gold sm:size-8" aria-hidden />

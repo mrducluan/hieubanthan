@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
@@ -48,7 +49,7 @@ export default function KhamPha() {
         <span><b className="text-fg">Thư viện kiến thức</b> — ý nghĩa 12 con số, 64 quẻ, 14 chính tinh</span>
         <ArrowRight className="size-4" aria-hidden />
       </Link>
-      <BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" />
+      <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" /></Suspense>
     </div>
   );
 }
