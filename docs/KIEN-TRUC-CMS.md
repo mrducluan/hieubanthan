@@ -267,10 +267,20 @@ không nâng quyền ai). `vercel-build` tự chạy migration khi deploy.
 
 ## 8d. Chỉ build bản chính thức trên Vercel (2026-10-12)
 
-`cms/vercel.json` → `ignoreCommand`: bỏ qua mọi bản Preview (nhánh PR). Lý do: bản Preview không có biến môi trường
-(kiem-env dừng build), và nếu đặt biến trỏ DB thật thì `payload migrate` của nhánh PR sẽ chạy lên DB thật trước khi
-merge. Kiểm thử CMS cho PR do GitHub Actions job `cms` đảm nhận (Postgres riêng). Cần xem trước giao diện CMS → tạo DB
-riêng rồi bỏ dòng `ignoreCommand`.
+`cms/vercel.json` → `ignoreCommand: node scripts/bo-qua-build.mjs`: bỏ qua mọi bản Preview (nhánh PR). Lý do: bản Preview
+không có biến môi trường (kiem-env dừng build), và nếu đặt biến trỏ DB thật thì `payload migrate` của nhánh PR sẽ chạy lên
+DB thật trước khi merge. Kiểm thử CMS cho PR do GitHub Actions job `cms` đảm nhận (Postgres riêng). Cần xem trước giao
+diện CMS → tạo DB riêng rồi bỏ dòng `ignoreCommand`.
+
+**Sự cố 2026-10-12:** bản đầu dùng `[ "$VERCEL_ENV" != "production" ]` → Vercel bỏ qua CẢ bản main ("Canceled by
+Ignored Build Step" từ #83 tới #89) → cms.hieuban.com đứng ở bản #81 (không có Giao diện website, Trang đích, MFA…).
+Script mới build khi `VERCEL_ENV`/`VERCEL_TARGET_ENV` = production **hoặc** nhánh = `main` (đổi bằng env
+`CMS_NHANH_CHINH`), không đọc được gì thì vẫn build; luôn in giá trị ra log build. Đã thử đường nâng cấp DB thật: DB ở
+trạng thái #81 có dữ liệu → `vercel-build` chạy 5 migration mới + build xanh.
+
+**Không bao giờ chạy `npm run dev` của CMS trỏ vào Supabase thật**: Payload sẽ "push" schema và ghi dấu `dev` vào
+`payload_migrations` → lần build sau `payload migrate` dừng hỏi "data loss (y/N)" và treo. Cấu hình nay chỉ push khi DB ở
+localhost (`DB_TREN_MAY` trong `payload.config.ts`).
 
 ## 9. Lộ trình tiếp
 

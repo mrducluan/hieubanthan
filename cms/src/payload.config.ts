@@ -36,6 +36,8 @@ const s3 = {
 };
 const coS3 = Boolean(s3.bucket && s3.endpoint && s3.key && s3.secret);
 
+const DB_TREN_MAY = /@(localhost|127\.0\.0\.1)(:\d+)?\//.test((process.env.DATABASE_URI || "").trim());
+
 export default buildConfig({
   serverURL: cmsUrl,
   secret: process.env.PAYLOAD_SECRET || "",
@@ -68,8 +70,10 @@ export default buildConfig({
     // Bảng CMS nằm trong schema riêng "cms" — không lẫn với bảng của web (public) trên cùng Supabase.
     schemaName: "cms",
     migrationDir: path.resolve(dirname, "migrations"),
-    // Máy chủ thật chỉ đổi cấu trúc bằng migration (có down) — không tự "push".
-    push: process.env.NODE_ENV !== "production" && process.env.CMS_DB_PUSH !== "0",
+    // Máy chủ thật chỉ đổi cấu trúc bằng migration (có down) — không tự "push". Chỉ push khi DB nằm trên chính máy
+    // (localhost): lỡ chạy `npm run dev` trỏ vào Supabase thật thì push sẽ ghi dấu "dev" vào payload_migrations →
+    // lần build sau `payload migrate` dừng hỏi "data loss (y/N)" và treo trên Vercel.
+    push: process.env.NODE_ENV !== "production" && process.env.CMS_DB_PUSH !== "0" && DB_TREN_MAY,
   }),
   sharp,
   graphQL: { disable: true },

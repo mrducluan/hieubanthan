@@ -1,6 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "regions": ["sin1"],
-  "ignoreCommand": "[ \"$VERCEL_ENV\" != \"production\" ]",
-  "crons": [{ "path": "/api/payload-jobs/run", "schedule": "0 1 * * *" }]
+  "regions": [
+    "sin1"
+  ],
+  "ignoreCommand": "node scripts/bo-qua-build.mjs",
+  "crons": [
+    {
+      "path": "/api/payload-jobs/run",
+      "schedule": "0 1 * * *"
+    }
+  ]
 }
