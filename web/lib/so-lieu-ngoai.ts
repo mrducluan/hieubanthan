@@ -123,6 +123,8 @@ export const PHEU: [string, string][] = [
   ["landing_viewed", "Vào trang"], ["reading_started", "Bắt đầu xem"], ["reading_completed", "Xem xong"],
   ["advisor_question_completed", "Hỏi đáp xong"], ["profile_created", "Lưu hồ sơ"], ["daily_viewed", "Mở Hôm nay"], ["share_clicked", "Bấm chia sẻ"],
   ["compatibility_created", "Tạo hợp đôi"], ["referral_signup", "Đăng ký qua lời mời"], ["credit_earned", "Nhận Sao"],
+  ["paywall_viewed", "Thấy phần khoá"], ["unlock_clicked", "Bấm mở khoá"], ["quota_reached", "Hết lượt hỏi miễn phí"],
+  ["checkout_started", "Bắt đầu nạp"], ["payment_succeeded", "Nạp thành công"], ["unlock_succeeded", "Mở khoá thành công"],
 ];
 
 export interface BaoCaoPosthog { pheu: { su_kien: string; ten: string; luot: number; nguoi: number }[]; quayLai: { truoc: number; tro_lai: number } | null }

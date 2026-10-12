@@ -1,5 +1,6 @@
 // POST /api/kinhdich/hoi — proxy hỏi đáp Kinh Dịch tới engine (giữ ENGINE key server-side).
 // Web không tự gieo, không tự chọn quẻ: quẻ do engine gieo, Mai Hoa theo giờ, hoặc gieo tay.
+import { voiCuaHoi } from "@/lib/cua-sao";
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
@@ -17,7 +18,12 @@ const Input = z.object({
   gia_tri_hao: z.array(z.number().int().min(6).max(9)).length(6).optional(),
 }).strict();
 
+// SAO-2: hạn mức câu miễn phí / trừ Sao khi vượt (lib/cua-sao.ts, tắt mặc định).
 export async function POST(req: Request): Promise<NextResponse> {
+  return voiCuaHoi(req, "kinhdich", () => xuLy(req));
+}
+
+async function xuLy(req: Request): Promise<NextResponse> {
   const parsed = Input.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });

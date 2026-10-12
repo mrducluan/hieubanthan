@@ -26,6 +26,16 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Thu Sao cho Luận giải toàn bộ", moTa: "Tắt = miễn phí thử nghiệm. Chưa đặt ở đây thì theo env LUAN_GIAI_THU_SAO." },
   { khoa: "luan_giai.gia_sao", nhom: "Luận giải toàn bộ", loai: "so", min: 1, max: 100, macDinh: 10,
     ten: "Giá Luận giải toàn bộ (Sao/báo cáo)", moTa: "Chỉ áp dụng khi đang thu Sao." },
+  { khoa: "luan_giai.chuong_mien_phi", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 3, macDinh: 1,
+    ten: "Số chương xem miễn phí", moTa: "Khi đang thu Sao: ai cũng đọc trọn N chương đầu; chương sau hiện tiêu đề + điểm nhấn + câu hỏi, mở bằng Sao." },
+  { khoa: "sao.hoi.thu", nhom: "Hỏi đáp", loai: "bat_tat", macDinh: false,
+    ten: "Giới hạn hỏi đáp miễn phí mỗi ngày", moTa: "Tắt = hỏi không giới hạn (vẫn có trần chống lạm dụng ở engine). Bật = quá lượt miễn phí thì mỗi câu tốn Sao." },
+  { khoa: "sao.hoi.mien_phi_khach", nhom: "Hỏi đáp", loai: "so", min: 0, max: 50, macDinh: 3,
+    ten: "Câu miễn phí/ngày — khách chưa đăng nhập", moTa: "Hết lượt → mời đăng nhập (nhận Sao chào mừng) để hỏi tiếp." },
+  { khoa: "sao.hoi.mien_phi_tk", nhom: "Hỏi đáp", loai: "so", min: 0, max: 100, macDinh: 10,
+    ten: "Câu miễn phí/ngày — có tài khoản", moTa: "Tính chung mọi mảng. Hết lượt → mỗi câu tốn Sao (người dùng bấm đồng ý từng câu)." },
+  { khoa: "sao.hoi.gia", nhom: "Hỏi đáp", loai: "so", min: 1, max: 10, macDinh: 1,
+    ten: "Giá mỗi câu vượt lượt (Sao)", moTa: "Chỉ áp dụng khi bật giới hạn hỏi đáp." },
 ];
 
 export const caiDat = (khoa: string) => CAI_DAT.find((c) => c.khoa === khoa);
@@ -57,7 +67,7 @@ async function docTho(): Promise<Record<string, unknown>> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL, key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !key) return {};
   try {
-    // Dải thông báo nằm trong layout mọi trang → Supabase chậm thì bỏ qua sau 3 giây (dùng mặc định), không treo trang.
+    // Đọc trên đường đi của trang/hỏi đáp → Supabase chậm thì bỏ qua sau 3 giây (dùng mặc định), không treo.
     const sb = createClient(url, key, {
       auth: { persistSession: false, autoRefreshToken: false },
       global: { fetch: (u, i) => fetch(u, { ...i, signal: AbortSignal.timeout(3_000) }) },

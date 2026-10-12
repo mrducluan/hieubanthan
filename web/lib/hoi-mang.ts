@@ -1,4 +1,5 @@
 "use client";
+import { fetchSao } from "@/lib/sao-client";
 import type { KetQuaHoi } from "@/components/hoi/KhungChat";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 
@@ -8,6 +9,18 @@ export interface HoiMangRes {
   co_canh_bao?: { loai: string; chi_tiet: string }[];
   thuat_ngu?: ThuatNgu[];
   error?: string;
+  luot?: LuotHoi;
+}
+
+/** SAO-2: máy chủ báo lượt miễn phí còn lại / Sao vừa trừ → một dòng nhỏ dưới câu trả lời. */
+export type LuotHoi = { con_lai: number; tran: number; tai_khoan: boolean } | { sao_da_tru: number; so_du: number | null };
+export function ghiLuot(l?: LuotHoi): string | undefined {
+  if (!l) return undefined;
+  if ("sao_da_tru" in l) return l.sao_da_tru ? `Đã dùng ${l.sao_da_tru} Sao cho câu này${l.so_du != null ? ` · ví còn ${l.so_du} Sao` : ""}.` : undefined;
+  if (l.con_lai > 2) return undefined;
+  return l.con_lai === 0
+    ? `Đây là câu miễn phí cuối của hôm nay.${l.tai_khoan ? " Câu tiếp theo dùng Sao." : " Đăng nhập để hỏi thêm."}`
+    : `Còn ${l.con_lai} câu miễn phí hôm nay.`;
 }
 
 /** Gọi /api/<mảng>/hoi và chuẩn hoá cho KhungChat. `phu` dựng từ phản hồi thô nếu cần. */
@@ -17,10 +30,11 @@ export async function hoiMang<T extends HoiMangRes>(
   phu?: (d: T) => KetQuaHoi["phu"],
   boQuaCanhBao: string[] = [],
 ): Promise<KetQuaHoi> {
-  const r = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+  const r = await fetchSao(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) }, "hoi");
   const d = (await r.json().catch(() => ({}))) as T;
   if (!d.cau_tra_loi) return { loi: d.error ?? "Chưa trả lời được lúc này, thử lại sau." };
   return {
+    ghiLuot: ghiLuot(d.luot),
     van: d.cau_tra_loi,
     thuatNgu: d.thuat_ngu,
     phu: phu?.(d),

@@ -1,5 +1,6 @@
 // POST /api/tuvi/hoi — proxy hỏi đáp Tử vi tới engine (giữ ENGINE key server-side).
 // Web không tự an sao, không tự tính hạn: lá số và vận hạn do engine (iztro) tính.
+import { voiCuaHoi } from "@/lib/cua-sao";
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
@@ -17,7 +18,12 @@ const Input = z.object({
   la_so: LaSo.optional(),
 }).strict();
 
+// SAO-2: hạn mức câu miễn phí / trừ Sao khi vượt (lib/cua-sao.ts, tắt mặc định).
 export async function POST(req: Request): Promise<NextResponse> {
+  return voiCuaHoi(req, "tuvi", () => xuLy(req));
+}
+
+async function xuLy(req: Request): Promise<NextResponse> {
   const parsed = Input.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });

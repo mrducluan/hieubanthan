@@ -45,3 +45,34 @@ def test_api():
 
 def test_api_bat_buoc_la_so():
     assert client.post("/v1/tuvi/luan-giai", json={}).status_code == 422
+
+
+# SAO-2 — lời mời xem tiếp mỗi chương (web chỉ hiện phần này cho chương bị khoá khi bật thu Sao).
+_CAM_DOA = ("tai hoạ", "tai họa", "chết", "xui xẻo", "hạn nặng", "nguy hiểm", "đại hạn xấu", "phá sản", "ly hôn")
+
+
+def _kiem_moi_xem(bc: dict):
+    for c in bc["chuong"]:
+        m = c["moi_xem"]
+        assert m["cau_hoi"].endswith("?") and len(m["cau_hoi"]) <= 160
+        assert 1 <= len(m["diem_nhan"]) <= 200
+        # điểm nhấn là dữ kiện đã có trong chính chương đó (không thêm dữ kiện ngoài input)
+        assert any(d.startswith(m["diem_nhan"].rstrip("…")) for d in c["doan"]), (c["ma"], m["diem_nhan"])
+        assert m["so_doan"] == len(c["doan"]) and m["phut_doc"] >= 1
+        assert not any(t in (m["cau_hoi"] + m["diem_nhan"]).lower() for t in _CAM_DOA)
+
+
+def test_moi_xem_tuvi():
+    _kiem_moi_xem(toan_bo.tuvi({"ngay": dt.date(1997, 3, 19), "ti": 0, "gioi_tinh": "nam"}, ngay_xem=dt.date(2026, 10, 1)))
+    _kiem_moi_xem(toan_bo.tuvi({"ngay": dt.date(1990, 5, 17), "ti": 4, "gioi_tinh": "nu"}, ngay_xem=dt.date(2026, 10, 1)))
+
+
+def test_moi_xem_battu():
+    _kiem_moi_xem(toan_bo.battu({"lich": dt.datetime(1990, 5, 17, 12, 30), "gioi_tinh": "nam"}, ngay_xem=dt.date(2026, 10, 1)))
+
+
+def test_diem_nhan_cat_dung_cho():
+    assert toan_bo.diem_nhan(["Cung Phu Thê: định nghĩa dài.", "Trong lá số của bạn, Thiên Đồng ở cung Phu Thê (Đắc — Sao ở vị trí khá: phát huy được.): Kỳ vọng êm đềm."]) \
+        == "Trong lá số của bạn, Thiên Đồng ở cung Phu Thê (Đắc — Sao ở vị trí khá: phát huy được.)"
+    assert toan_bo.diem_nhan(["Tuổi mụ tại thời điểm xem: 37.", "Đại hạn: cung Điền Trạch (Canh Thìn), từ 36 đến 45 tuổi. Giai đoạn chủ đề Điền Trạch."]) \
+        == "Đại hạn: cung Điền Trạch (Canh Thìn), từ 36 đến 45 tuổi."

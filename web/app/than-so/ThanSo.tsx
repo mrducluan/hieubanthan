@@ -1,4 +1,6 @@
 "use client";
+import { fetchSao } from "@/lib/sao-client";
+import { ghiLuot, type LuotHoi } from "@/lib/hoi-mang";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -27,12 +29,12 @@ const GOI_Y = [
 ];
 
 async function hoiThanSo(h: HoSo, cau: string): Promise<KetQuaHoi> {
-  const r = await fetch("/api/thanso/hoi", {
+  const r = await fetchSao("/api/thanso/hoi", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, cau_hoi: cau }),
-  });
-  const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string; thuat_ngu?: ThuatNgu[] };
+  }, "hoi");
+  const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string; thuat_ngu?: ThuatNgu[]; luot?: LuotHoi };
   const canNguoiKia = d.can_them?.includes("nguoi_kia");
   return {
     van: d.cau_tra_loi,
@@ -41,6 +43,7 @@ async function hoiThanSo(h: HoSo, cau: string): Promise<KetQuaHoi> {
     phu: canNguoiKia ? (
       <Button asChild variant="secondary" size="sm"><Link href="/hop-doi"><HeartHandshake aria-hidden /> Nhập ngày sinh người ấy ở mục Hợp đôi</Link></Button>
     ) : undefined,
+    ghiLuot: ghiLuot(d.luot),
     ghiChu: d.cau_tra_loi ? (d.che_do === "llm" ? "Diễn đạt tự động từ kho tri thức có nguồn." : "Ghép trực tiếp từ kho tri thức có nguồn.") : undefined,
   };
 }

@@ -13,6 +13,8 @@ export interface KetQuaHoi {
   /** Phần trực quan kèm câu trả lời (quẻ, cung, tứ trụ…). */
   phu?: ReactNode;
   ghiChu?: string;
+  /** SAO-2: lượt miễn phí còn lại / Sao vừa dùng (máy chủ báo). */
+  ghiLuot?: string;
   canhBao?: string[];
   loi?: string;
   /** GN — thuật ngữ trong câu trả lời (engine tra từ điển) để gạch chân + giải nghĩa. */
@@ -105,6 +107,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
                     <p key={c} className="flex gap-2 rounded-xl bg-moon/10 px-3 py-2 text-xs text-moon"><Info className="mt-0.5 size-3.5 shrink-0" aria-hidden /> {c}</p>
                   ))}
                   {t.ghiChu && <p className="text-xs text-fg-faint">{t.ghiChu}</p>}
+                  {t.ghiLuot && <p className="text-xs text-gold" data-testid="ghi-luot">{t.ghiLuot}</p>}
                 </div>
               </motion.div>
             ),

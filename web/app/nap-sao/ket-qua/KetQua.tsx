@@ -6,6 +6,7 @@ import { CheckCircle2, Clock, Loader2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import { supabase } from "@/lib/supabase/trinh-duyet";
+import { QUAY_VE } from "@/lib/sao-client";
 
 type Don = { ma_don: number; sao: number; so_tien: number; trang_thai: string };
 const HOI_TOI_DA = 100; // ~5 phút, 3 giây/lần
@@ -16,6 +17,16 @@ export function KetQua() {
   const [don, setDon] = useState<Don | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [het, setHet] = useState(false);
+  // SAO-2: nạp từ hộp "nạp nhanh" → quay về đúng trang đang xem (chỉ đường dẫn nội bộ).
+  const [quayVe, setQuayVe] = useState<string | null>(null);
+  useEffect(() => {
+    try { const v = sessionStorage.getItem(QUAY_VE); if (v && /^\/(?![/\\])/.test(v)) setQuayVe(v); } catch { /* bỏ qua */ }
+  }, []);
+  useEffect(() => {
+    if (don?.trang_thai !== "da_tra" || !quayVe) return;
+    const t = setTimeout(() => { try { sessionStorage.removeItem(QUAY_VE); } catch { /* bỏ qua */ } window.location.href = quayVe; }, 2500);
+    return () => clearTimeout(t);
+  }, [don?.trang_thai, quayVe]);
 
   useEffect(() => {
     if (!/^\d{1,15}$/.test(ma)) { setLoi("Thiếu mã đơn."); return; }
@@ -54,7 +65,10 @@ export function KetQua() {
       )}
       <p className="text-xs text-fg-faint">Mã đơn: <b className="text-fg-muted">{don.ma_don}</b> — dùng mã này khi cần hỗ trợ.</p>
       <div className="flex flex-wrap justify-center gap-3">
-        <Button asChild><Link href="/tai-khoan#sao">Xem ví Sao</Link></Button>
+        {quayVe && don.trang_thai === "da_tra" && (
+          <Button asChild data-testid="quay-ve"><Link href={quayVe}>Quay lại xem tiếp</Link></Button>
+        )}
+        <Button asChild variant={quayVe && don.trang_thai === "da_tra" ? "secondary" : undefined}><Link href="/tai-khoan#sao">Xem ví Sao</Link></Button>
         <Button asChild variant="secondary"><Link href="/nap-sao">Nạp thêm</Link></Button>
       </div>
     </div>

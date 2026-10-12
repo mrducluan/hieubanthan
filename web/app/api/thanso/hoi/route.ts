@@ -1,5 +1,6 @@
 // POST /api/thanso/hoi — proxy hỏi sâu tới engine (giữ ENGINE key server-side).
 // Engine v2 trả lời được cả khi chưa bật LLM (template từ kho tri thức).
+import { voiCuaHoi } from "@/lib/cua-sao";
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
@@ -22,7 +23,12 @@ const Input = z.object({
   }).optional(),
 });
 
+// SAO-2: hạn mức câu miễn phí / trừ Sao khi vượt (lib/cua-sao.ts, tắt mặc định).
 export async function POST(req: Request): Promise<NextResponse> {
+  return voiCuaHoi(req, "thanso", () => xuLy(req));
+}
+
+async function xuLy(req: Request): Promise<NextResponse> {
   const parsed = Input.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });

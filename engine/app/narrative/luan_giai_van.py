@@ -99,14 +99,19 @@ def gan_thuat_ngu(bc: dict) -> dict:
                              for c in bc["chuong"]]}
 
 
-def dien_dat(bc: dict, dung_llm: bool = True) -> dict:
-    """Thêm `van_ai` cho từng chương khi có khoá LLM; `dien_dat` = "ai" | "tron" | "mau"."""
+def dien_dat(bc: dict, dung_llm: bool = True, toi_da: int | None = None) -> dict:
+    """Thêm `van_ai` cho từng chương khi có khoá LLM; `dien_dat` = "ai" | "tron" | "mau".
+
+    `toi_da` (SAO-2): chỉ diễn đạt N chương đầu — bản xem trước khi đang thu Sao, chương bị khoá không tốn lượt AI
+    (đánh dấu `che_do = "chua_dien_dat"`, giữ nguyên đoạn gốc)."""
     if not (dung_llm and os.environ.get("OPENROUTER_API_KEY")):
         return {**bc, "dien_dat": "mau"}
+    n = len(bc["chuong"]) if toi_da is None else max(0, min(toi_da, len(bc["chuong"])))
+    dau, sau = bc["chuong"][:n], bc["chuong"][n:]
     with ThreadPoolExecutor(max_workers=8) as ex:
         # Luồng phụ không tự mang ngữ cảnh (người gọi cho hạn mức RL-1) → chép ngữ cảnh của request sang.
-        ctx = [contextvars.copy_context() for _ in bc["chuong"]]
-        chuong = list(ex.map(lambda p: p[0].run(_mot_chuong, p[1], bc["mo_dun"]), zip(ctx, bc["chuong"])))
+        ctx = [contextvars.copy_context() for _ in dau]
+        chuong = list(ex.map(lambda p: p[0].run(_mot_chuong, p[1], bc["mo_dun"]), zip(ctx, dau)))
     so_ai = sum(c["che_do"] == "llm" for c in chuong)
-    return {**bc, "chuong": chuong,
-            "dien_dat": "ai" if so_ai == len(chuong) else "tron" if so_ai else "mau"}
+    return {**bc, "chuong": chuong + [{**c, "che_do": "chua_dien_dat"} for c in sau],
+            "dien_dat": "ai" if chuong and so_ai == len(chuong) else "tron" if so_ai else "mau"}

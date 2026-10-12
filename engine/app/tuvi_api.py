@@ -473,6 +473,8 @@ class LuanGiaiInput(BaseModel):
 
     la_so: TuanTrietInput
     ngay_xem: _dt.date | None = None
+    # SAO-2: bản xem trước khi thu Sao — chỉ diễn đạt AI N chương đầu (web cắt phần còn lại).
+    dien_dat_toi_da: int | None = Field(default=None, ge=0, le=12)
 
 
 @router.post("/luan-giai")
@@ -483,7 +485,7 @@ def api_luan_giai(inp: LuanGiaiInput) -> dict:
     cal = dv.tb.calendar_dt
     sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender, "tz_lich": dv.tz_lich, **dv.tuy_chon}
     try:
-        bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem)))
+        bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem), toi_da=inp.dien_dat_toi_da))
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
     return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": list(dv.flags)}
