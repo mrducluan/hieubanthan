@@ -47,7 +47,7 @@ export function DongTacGia({ chu_bien, tac_gia, tham_dinh, duyet_xuat_ban }: Pro
             <span className="inline-flex items-center gap-1 text-fg-faint"><BookOpen className="size-3.5" aria-hidden />
               Biên soạn từ cổ thư và tài liệu tham khảo, ghi rõ nguồn và trường phái</span>
           )}
-          <Link href="/gioi-thieu#quy-trinh" className="text-fg-faint underline underline-offset-2 hover:text-fg">Quy trình biên soạn</Link>
+          <Link href="/gioi-thieu#quy-trinh" className="vung-cham inline-block text-fg-faint underline underline-offset-2 hover:text-fg">Quy trình biên soạn</Link>
         </p>
       </div>
     </div>

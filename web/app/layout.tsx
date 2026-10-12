@@ -80,7 +80,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         </a>
         <ThongBaoSite />
         <ThanhTren />
-        <main id="noi-dung" className="container pb-28 pt-6 md:pb-16 md:pt-10">
+        <main id="noi-dung" className="container pb-12 pt-6 md:pb-16 md:pt-10">
           {children}
         </main>
         <ChanTrang />

@@ -85,11 +85,11 @@ export function BatTu() {
                 </TabsList>
               </Tabs>
               <div className="flex items-center rounded-full border border-line bg-surface/60 p-1" role="group" aria-label="Năm xem">
-                <button type="button" className="grid size-8 place-items-center rounded-full text-fg-muted hover:bg-surface-2 hover:text-fg" aria-label="Năm trước" onClick={() => setNamXem((n) => Math.max(1900, n - 1))}><ChevronLeft className="size-4" /></button>
+                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label="Năm trước" onClick={() => setNamXem((n) => Math.max(1900, n - 1))}><ChevronLeft className="size-4" /></button>
                 <span className="min-w-[7.5rem] text-center text-sm" aria-live="polite">
                   Năm <b className="text-fg">{namXem}</b>{lnDung ? <span className="text-fg-faint"> · {lnDung.can} {lnDung.chi}</span> : null}
                 </span>
-                <button type="button" className="grid size-8 place-items-center rounded-full text-fg-muted hover:bg-surface-2 hover:text-fg" aria-label="Năm sau" onClick={() => setNamXem((n) => Math.min(2100, n + 1))}><ChevronRight className="size-4" /></button>
+                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label="Năm sau" onClick={() => setNamXem((n) => Math.min(2100, n + 1))}><ChevronRight className="size-4" /></button>
               </div>
               <Button variant="ghost" size="sm" className="ml-auto" disabled={dangTai} onClick={async () => {
                 if (!tuTruRef.current) return;

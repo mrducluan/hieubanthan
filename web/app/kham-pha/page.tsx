@@ -32,9 +32,9 @@ export default function KhamPha() {
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {MANG.map(({ href, ten, mo, can, kieu }, i) => (
           <Link key={href} href={href}
-            className={`glass group flex flex-col rounded-2xl p-6 transition-colors hover:border-gold/50 ${i === 0 ? "sm:col-span-2" : ""}`}>
+            className={`hien-dan glass group flex flex-col rounded-2xl p-5 hover:border-gold/50 sm:p-6 ${i === 0 ? "sm:col-span-2" : ""}`}>
             <div className="flex items-center justify-between">
-              <HinhMang kieu={kieu} className="h-14 shrink-0" />
+              <HinhMang kieu={kieu} className="h-14 shrink-0 origin-left transition-transform duration-300 group-hover:scale-105" />
               <span className="rounded-full border border-line px-3 py-1 text-xs text-fg-faint">{can}</span>
             </div>
             <h2 className="mt-5 text-2xl">{ten}</h2>

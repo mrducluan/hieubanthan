@@ -16,7 +16,7 @@ export interface NoiDungCongCu {
 
 export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [] }: NoiDungCongCu) {
   return (
-    <section aria-labelledby="gioi-thieu-cong-cu" className="mx-auto mt-16 max-w-3xl border-t border-line/50 pt-10 text-fg-muted">
+    <section aria-labelledby="gioi-thieu-cong-cu" className="mx-auto mt-12 max-w-3xl border-t border-line/50 pt-8 text-fg-muted md:mt-16 md:pt-10">
       <JsonLd data={goiLd(
         { "@type": "WebPage", "@id": `${urlDayDu(duong)}#trang`, url: urlDayDu(duong), name: ten, description: moTa,
           inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl()}/#website` }, about: ten,

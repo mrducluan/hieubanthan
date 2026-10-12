@@ -68,8 +68,8 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
   const tt = (n: number) => ban?.trang_thai_sao.find((x) => x.sao === n)?.trang_thai ?? "tử";
   return (
     <section aria-labelledby="tieu-de-hk" className="glass space-y-5 rounded-2xl p-5 sm:p-6">
-      <div className="flex items-center gap-3">
-        <span className="grid size-10 place-items-center rounded-2xl bg-gold/15 text-gold"><Compass className="size-5" aria-hidden /></span>
+      <div className="flex items-start gap-3">
+        <span className="mt-0.5 grid size-10 shrink-0 place-items-center rounded-2xl bg-gold/15 text-gold"><Compass className="size-5" aria-hidden /></span>
         <div>
           <h2 id="tieu-de-hk" className="text-2xl">Huyền Không phi tinh <span className="text-base text-fg-faint" style={{ fontFamily: "var(--font-han), serif" }}>玄空飛星</span></h2>
           <p className="text-sm text-fg-muted">Bàn sao theo năm xây (hoặc năm dọn vào) và hướng nhà — không cần ngày sinh.</p>
@@ -83,8 +83,8 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
         </label>
         <div className="space-y-1 text-sm">
           <div className="flex gap-3 text-fg-muted">
-            <label className="flex items-center gap-1.5"><input type="radio" checked={cach === "son"} onChange={() => setCach("son")} />Chọn toạ sơn</label>
-            <label className="flex items-center gap-1.5"><input type="radio" checked={cach === "do"} onChange={() => setCach("do")} />Nhập độ la bàn</label>
+            <label className="flex min-h-10 cursor-pointer items-center gap-2"><input type="radio" className="size-4 accent-[rgb(var(--gold))]" checked={cach === "son"} onChange={() => setCach("son")} />Chọn toạ sơn</label>
+            <label className="flex min-h-10 cursor-pointer items-center gap-2"><input type="radio" className="size-4 accent-[rgb(var(--gold))]" checked={cach === "do"} onChange={() => setCach("do")} />Nhập độ la bàn</label>
           </div>
           {cach === "son" ? (
             <Select value={toa} onChange={(e) => setToa(e.target.value)} aria-label="Toạ sơn (lưng nhà)">

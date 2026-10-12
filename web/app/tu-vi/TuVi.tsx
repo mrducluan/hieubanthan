@@ -104,11 +104,11 @@ export function TuVi() {
                 </TabsList>
               </Tabs>
               <div className="flex items-center rounded-full border border-line bg-surface/60 p-1" role="group" aria-label="Năm xem hạn">
-                <button type="button" className="grid size-8 place-items-center rounded-full text-fg-muted hover:bg-surface-2 hover:text-fg" aria-label="Năm trước" onClick={() => setNamXem((n) => Math.max(1900, n - 1))}><ChevronLeft className="size-4" /></button>
+                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label="Năm trước" onClick={() => setNamXem((n) => Math.max(1900, n - 1))}><ChevronLeft className="size-4" /></button>
                 <span className="min-w-[7.5rem] text-center text-sm" aria-live="polite">
                   Năm <b className="text-fg">{namXem}</b>{vh && vh.nam_xem === namXem ? <span className="text-fg-faint"> · {vh.can_chi_nam_xem}</span> : null}
                 </span>
-                <button type="button" className="grid size-8 place-items-center rounded-full text-fg-muted hover:bg-surface-2 hover:text-fg" aria-label="Năm sau" onClick={() => setNamXem((n) => Math.min(2100, n + 1))}><ChevronRight className="size-4" /></button>
+                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label="Năm sau" onClick={() => setNamXem((n) => Math.min(2100, n + 1))}><ChevronRight className="size-4" /></button>
               </div>
               {(["dai_han", "luu_nien"] as const).map((k) => (
                 <button key={k} type="button" aria-pressed={lop[k]} onClick={() => setLop((l) => ({ ...l, [k]: !l[k] }))}

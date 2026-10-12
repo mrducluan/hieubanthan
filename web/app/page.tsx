@@ -27,9 +27,9 @@ const MANG: { href: string; ten: string; mo: string; kieu: KieuMang }[] = [
 
 export default function TrangChu() {
   return (
-    <div className="space-y-20">
-      <section className="grid items-center gap-10 pt-2 md:grid-cols-[1.15fr_1fr] md:pt-8">
-        <div>
+    <div className="space-y-14 md:space-y-20">
+      <section className="grid items-center gap-8 pt-2 md:grid-cols-[1.15fr_1fr] md:gap-x-10 md:gap-y-6 md:pt-8">
+        <div className="md:self-end">
           <p className="eyebrow flex items-center gap-2"><Sparkles className="size-3.5 text-gold" aria-hidden /> Thần số học · Huyền học phương Đông</p>
           <h1 className="mt-4 text-[2.6rem] leading-[1.08] sm:text-6xl">
             Con số nói gì <span className="text-gradient-gold italic">về bạn?</span>
@@ -43,34 +43,35 @@ export default function TrangChu() {
             <li className="flex gap-2"><span className="text-gold">✦</span> Mỗi con số kèm câu hỏi để bạn tự kiểm, không phán thay bạn</li>
             <li className="flex gap-2"><span className="text-moon">✦</span> Một hồ sơ dùng cho cả hợp đôi, Tử vi, Kinh Dịch, Bát tự, Phong thuỷ</li>
           </ul>
-          <HinhBauTroi className="mx-auto mt-8 max-w-[22rem] md:mx-0" />
         </div>
-        <CuaVao />
+        {/* Điện thoại: form ngay sau lời giới thiệu (không bắt cuộn qua hình); máy tính: hình nằm dưới chữ, form cột phải. */}
+        <div className="md:col-start-2 md:row-span-2 md:row-start-1"><CuaVao /></div>
+        <HinhBauTroi className="mx-auto max-w-[17rem] sm:max-w-[20rem] md:mx-0 md:max-w-[22rem] md:self-start" />
       </section>
 
-      <section aria-labelledby="ba-lop">
+      <section aria-labelledby="ba-lop" className="hien-dan">
         <TieuDeMuc id="ba-lop" nho="Vì sao tin được" lon="Ba lớp, không trộn lẫn"
           mo_ta="Bạn luôn biết câu nào là toán, câu nào là truyền thống, và câu nào là để chính bạn trả lời." />
         <ChuThichLop />
       </section>
 
-      <section aria-labelledby="kham-pha">
+      <section aria-labelledby="kham-pha" className="hien-dan">
         <TieuDeMuc id="kham-pha" nho="Khám phá sâu hơn" lon="Bốn mảng huyền học, một hồ sơ"
           mo_ta="Sau thần số, bạn có thể đi tiếp vào các hệ thống phương Đông — dùng luôn hồ sơ đã nhập, chỉ hỏi thêm giờ sinh khi cần." />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {MANG.map(({ href, ten, mo, kieu }) => (
-            <Link key={href} href={href} className="glass group rounded-2xl p-5 transition-colors hover:border-gold/50">
-              <HinhMang kieu={kieu} className="transition-transform group-hover:scale-105" />
-              <p className="mt-4 font-serif text-xl">{ten}</p>
+            <Link key={href} href={href} className="glass group flex flex-col rounded-2xl p-4 hover:border-gold/50 sm:p-5">
+              <HinhMang kieu={kieu} className="h-14 self-start origin-left transition-transform duration-300 group-hover:scale-105 sm:h-16" />
+              <p className="mt-3 font-serif text-lg sm:mt-4 sm:text-xl">{ten}</p>
               <p className="mt-1 text-sm text-fg-muted">{mo}</p>
-              <ArrowRight className="mt-4 size-4 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden />
+              <span className="mt-auto block pt-4"><ArrowRight className="size-4 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden /></span>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="glass flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center">
-        <Sun className="size-8 shrink-0 text-gold" aria-hidden />
+      <section className="glass flex items-start gap-4 rounded-2xl p-5 sm:items-center sm:p-6">
+        <Sun className="size-7 shrink-0 text-gold sm:size-8" aria-hidden />
         <p className="text-sm text-fg-muted">
           <b className="text-fg">Riêng tư theo mặc định.</b> Tên và ngày sinh lưu trên máy của bạn. Chỉ khi bạn bấm
           “Lưu vào tài khoản” thì hồ sơ mới được lưu trên máy chủ — và bạn xoá được bất cứ lúc nào.

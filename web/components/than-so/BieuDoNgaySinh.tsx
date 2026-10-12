@@ -16,7 +16,7 @@ export function BieuDoNgaySinh({ mo }: { mo: MoRong }) {
               return (
                 <div role="cell" key={so} aria-label={`Số ${so}: ${n} lần`}
                   className={cn("grid aspect-square place-items-center rounded-xl text-center font-serif text-lg",
-                    n ? "border border-gold/40 bg-gold/10 text-gold" : "border border-dashed border-line text-fg-faint/40")}>
+                    n ? "border border-gold/40 bg-gold/10 text-gold" : "border border-dashed border-line text-fg-faint")}>
                   {n ? String(so).repeat(n) : so}
                 </div>
               );

@@ -151,7 +151,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
           <div role="radiogroup" aria-label="Loại lịch" className="flex rounded-full border border-line p-0.5 text-xs">
             {(["duong", "am"] as const).map((l) => (
               <button key={l} type="button" role="radio" aria-checked={lich === l} onClick={() => setLich(l)}
-                className={cn("rounded-full px-3 py-1.5 transition-colors", lich === l ? "bg-gold text-bg" : "text-fg-muted hover:text-fg")}>
+                className={cn("vung-cham rounded-full px-3 py-1.5 transition-colors", lich === l ? "bg-gold text-bg" : "text-fg-muted hover:text-fg")}>
                 {l === "duong" ? "Dương lịch" : "Âm lịch"}
               </button>
             ))}
@@ -170,7 +170,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
             <span>Ngày âm theo:</span>
             {([["viet", "Âm lịch Việt Nam"], ["trung", "Âm lịch Trung Quốc"]] as const).map(([v, chu]) => (
               <button key={v} type="button" role="radio" aria-checked={lichAm === v} onClick={() => setLichAm(v)}
-                className={cn("rounded-full border px-3 py-1 transition-colors", lichAm === v ? "border-gold text-gold" : "border-line hover:text-fg")}>
+                className={cn("vung-cham rounded-full border px-3 py-1 transition-colors", lichAm === v ? "border-gold text-gold" : "border-line hover:text-fg")}>
                 {chu}
               </button>
             ))}
@@ -183,7 +183,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
             Tháng nhuận
           </label>
         )}
-        <p className="min-h-5 text-xs" aria-live="polite" data-testid="doi-lich">
+        <p className="min-h-5 text-xs empty:min-h-0" aria-live="polite" data-testid="doi-lich">
           {doi && lich === "duong" && <span className="text-fg-muted">Âm lịch: <b className="text-fg">{moTaAm(doi.am, doi.can_chi_nam)}</b> · ngày {doi.can_chi_ngay}, tháng {doi.can_chi_thang}{doi.lich_mien_nam_utc8 ? " · theo lịch miền Nam thời đó" : " · theo lịch Việt Nam"}</span>}
           {doi && lich === "am" && <span className="text-fg-muted">Dương lịch: <b className="text-fg">{doi.duong.ngay}/{doi.duong.thang}/{doi.duong.nam}</b> · năm {doi.can_chi_nam} · ngày {doi.can_chi_ngay}{doi.lich_mien_nam_utc8 && " · theo lịch miền Nam thời đó"}{lichAm === "trung" && " · đổi theo âm lịch Trung Quốc"}</span>}
           {loiDoi && lich === "am" && <span className="text-cinnabar">{loiDoi.replace(/^Ngày không tồn tại: /, "")}</span>}
@@ -210,7 +210,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
 
       <div className="rounded-xl border border-line/70">
         <button type="button" onClick={() => setMoThem(!moThem)} aria-expanded={moThem}
-          className="flex w-full items-center justify-between px-4 py-3 text-left text-sm text-fg-muted hover:text-fg">
+          className="flex min-h-11 w-full items-center justify-between rounded-xl px-4 py-3 text-left text-sm text-fg-muted transition-colors hover:text-fg">
           <span>{tieuDeThem}</span>
           <ChevronDown className={cn("size-4 shrink-0 transition-transform", moThem && "rotate-180")} aria-hidden />
         </button>

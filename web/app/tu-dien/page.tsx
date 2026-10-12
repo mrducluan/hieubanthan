@@ -21,7 +21,7 @@ export default async function Trang() {
   const d = await tuDien();
   const muc = d?.muc ?? [];
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
+    <div className="mx-auto max-w-4xl md:py-4">
       {muc.length > 0 && (
         <JsonLd data={goiLd(
           {
