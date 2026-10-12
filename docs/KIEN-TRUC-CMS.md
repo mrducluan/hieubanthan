@@ -4,6 +4,36 @@
 > người đọc tới công cụ). **Đo bằng:** Search Console (lượt hiển thị/nhấp của `/blog/*`), lượt AI trích dẫn,
 > `landing_viewed` có nguồn `/blog/*` → `reading_started`. Trong CMS: điểm kiểm định trung bình, số bài dưới 70 điểm.
 
+## 0. Phân vai CMS ↔ /quan-tri (chốt 2026-10-12)
+
+Hai trang quản trị, **không trùng việc**. Quy tắc một câu: *chữ và hình người đọc nhìn thấy → CMS; con số, công tắc
+đụng tới tiền, Sao, AI, dữ liệu người dùng, kho tri thức → /quan-tri.*
+
+| Việc | `cms.hieuban.com/admin` (Payload) | `hieuban.com/quan-tri` (tự xây) |
+|---|---|---|
+| Bài viết `/blog`, chuyên mục, tác giả, thư viện ảnh/video | ✅ | — |
+| **Điều hướng chân trang** (4 cột Khám phá · Kiến thức · Về chúng tôi · Pháp lý: link trang trong site, bài viết, chuyên mục) | ✅ global `dieu-huong` | — |
+| **Trang chủ & banner**: dải thông báo đầu trang, banner trang chủ (ảnh, nút, khung ngày), khối "Bài viết mới" (ghim bài), "Bài viết liên quan" ở trang công cụ / Khám phá / Kiến thức | ✅ global `trang-chu` | — |
+| Công tắc nội dung (bật/tắt blog, cột bài trên web) | ✅ global `tinh-nang` | — |
+| Kho tri thức engine (nghĩa số, quẻ, sao…) — git là nguồn gốc, xuất bản = PR | — | ✅ |
+| Mức thưởng Sao, trần lời mời, thu Sao luận giải, gói nạp, đơn nạp, điều chỉnh Sao | — | ✅ (Supabase, MFA) |
+| Vai trò quản trị, nhật ký, nhật ký hỏi đáp ẩn danh, số liệu GSC/GA4/PostHog | — | ✅ |
+| Biến bí mật (khoá API, payOS…) | chỉ env Vercel/Render | chỉ báo đã đặt / chưa |
+
+- Dải thông báo trước nằm ở `/quan-tri/cai-dat` (`site.thong_bao`) → **chuyển sang CMS** (chưa có dữ liệu thật vì
+  migration 0011 chưa chạy). Khoá `site.*` trong `web/lib/cau-hinh.ts` đã gỡ.
+- Thanh tab trên đầu (5 mục) **vẫn trong code**: đổi nó là đổi sản phẩm, không phải nội dung.
+- Web đọc globals qua REST (`web/lib/cms.ts`: `dieuHuongCms`, `trangChuCms`, `baiTheoMang`, `baiTrangChu`), cache thẻ
+  `cms`; lưu global → webhook làm mới ngay. CMS chưa nối / lỗi → web dùng mặc định trong code (`ChanTrang.COT`), không vỡ.
+- Link nhập ở CMS chỉ nhận **đường dẫn trong site** (`/…`, chặn `//x`, `/\x`, `https:`, `javascript:`) — kiểm ở cả CMS
+  (validate) lẫn web (`duongLienKet`). Link tới bài chưa xuất bản bị bỏ qua (không hiện link chết).
+
+**Vì sao "chuyên mục" không quản lý cột chân trang:** chuyên mục là *phân loại bài viết* (taxonomy, có trang
+`/blog/chuyen-muc/…`, schema CollectionPage). Bốn cột chân trang là *menu điều hướng* trỏ tới trang công cụ, trang kiến
+thức, trang pháp lý — phần lớn không phải bài viết. Gộp hai thứ làm hỏng cả hai (chuyên mục "Pháp lý" sẽ thành trang
+blog rỗng bị index). Vì vậy: menu = global "Điều hướng chân trang" (mỗi link chọn trang / bài / chuyên mục), chuyên mục
+giữ vai trò phân loại, và trang Khám phá / Kiến thức / công cụ **tự kéo bài cùng mảng** (trường "Mảng" của bài).
+
 ## 1. Tóm tắt khuyến nghị
 
 **Chọn phương án C: Payload CMS 3 chạy thành app RIÊNG (`cms/`, tên miền `cms.hieuban.com`), dữ liệu ở schema `cms`

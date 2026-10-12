@@ -168,3 +168,74 @@ export function phutDoc(html: string | null | undefined): number {
   const chu = (html ?? "").replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(chu / 200));
 }
+
+// ---------------------------------------------------------------- giao diện website (globals CMS)
+// "Điều hướng chân trang" + "Trang chủ & banner". CMS chưa đặt / lỗi → null → web dùng mặc định trong code.
+
+export type LienKetCms = { nhan: string; loai?: "duong_dan" | "bai" | "chuyen_muc" | null; duong_dan?: string | null;
+  bai?: { slug?: string | null; _status?: string | null } | number | null; chuyen_muc?: { slug?: string | null } | number | null };
+export type CotCms = { ten: string; lien_ket?: LienKetCms[] | null };
+export type LichCms = { tu_ngay?: string | null; den_ngay?: string | null };
+export type TrangChuCms = {
+  thong_bao?: ({ bat?: boolean | null; chu?: string | null; link?: string | null } & LichCms) | null;
+  banner?: ({ bat?: boolean | null; nhan?: string | null; tieu_de?: string | null; mo_ta?: string | null; anh?: AnhCms | null;
+    nut_chu?: string | null; nut_link?: string | null } & LichCms) | null;
+  bai_viet?: { bat?: boolean | null; tieu_de?: string | null; so_bai?: number | null; ghim?: (BaiCmsTomTat | number)[] | null } | null;
+  bai_theo_mang?: { bat?: boolean | null; so_bai?: number | null } | null;
+};
+
+const TRONG_SITE = /^\/(?![/\\])[^\s\\]*$/;   // chặn //x và /\x (trình duyệt hiểu là link ngoài)
+
+/** Liên kết CMS → đường dẫn web. Sai / trỏ bài chưa xuất bản → null (bỏ qua, không hiện link chết). */
+export function duongLienKet(l: LienKetCms): string | null {
+  if (l.loai === "bai") {
+    const b = l.bai;
+    return b && typeof b === "object" && b.slug && b._status !== "draft" ? `/blog/${encodeURIComponent(b.slug)}` : null;
+  }
+  if (l.loai === "chuyen_muc") {
+    const c = l.chuyen_muc;
+    return c && typeof c === "object" && c.slug ? `/blog/chuyen-muc/${encodeURIComponent(c.slug)}` : null;
+  }
+  return l.duong_dan && TRONG_SITE.test(l.duong_dan) ? l.duong_dan : null;
+}
+
+export async function dieuHuongCms(): Promise<{ ten: string; ds: [string, string][] }[] | null> {
+  if (!coCms()) return null;
+  const g = await goiCms<{ cot?: CotCms[] | null }>("/api/globals/dieu-huong?depth=1");
+  const cot = (g?.cot ?? []).map((c) => ({
+    ten: c.ten,
+    ds: (c.lien_ket ?? []).flatMap((l): [string, string][] => { const d = duongLienKet(l); return d && l.nhan ? [[d, l.nhan]] : []; }),
+  })).filter((c) => c.ten && c.ds.length);
+  return cot.length ? cot : null;
+}
+
+/** Trong khung thời gian đặt ở CMS (giờ máy chủ, so ISO). */
+export const dangHien = (l: LichCms, now = Date.now()) =>
+  (!l.tu_ngay || Date.parse(l.tu_ngay) <= now) && (!l.den_ngay || Date.parse(l.den_ngay) > now);
+
+export async function trangChuCms(): Promise<TrangChuCms | null> {
+  if (!coCms()) return null;
+  return goiCms<TrangChuCms>("/api/globals/trang-chu?depth=2");
+}
+
+/** Bài CMS cùng mảng (trang công cụ / Khám phá / Kiến thức). mang = null → mới nhất mọi mảng. Tắt ở CMS → []. */
+export async function baiTheoMang(mang: string | null, soBai?: number): Promise<BaiCmsTomTat[]> {
+  const [tc, ds] = await Promise.all([trangChuCms(), dsBaiCms()]);
+  if (tc?.bai_theo_mang?.bat === false) return [];
+  const n = soBai ?? tc?.bai_theo_mang?.so_bai ?? 3;
+  const cung = mang ? ds.filter((b) => b.mang === mang) : ds;
+  return cung.filter((b) => !b.noindex).slice(0, Math.max(1, Math.min(6, n)));
+}
+
+/** Khối "Bài viết mới" trang chủ: bài ghim (đúng thứ tự, bỏ bài đã gỡ) rồi bù bài mới nhất cho đủ so_bai. Tắt → null. */
+export async function baiTrangChu(): Promise<{ tieuDe: string; ds: BaiCmsTomTat[] } | null> {
+  const [tc, ds] = await Promise.all([trangChuCms(), dsBaiCms()]);
+  const k = tc?.bai_viet;
+  if (k?.bat === false) return null;
+  const n = Math.max(2, Math.min(6, k?.so_bai ?? 3));
+  const coSlug = new Set(ds.map((b) => b.slug));
+  const ghim = (k?.ghim ?? []).filter((b): b is BaiCmsTomTat => typeof b === "object" && !!b?.slug && coSlug.has(b.slug));
+  const da = new Set(ghim.map((b) => b.slug));
+  const gop = [...ghim.map((g) => ds.find((b) => b.slug === g.slug)!), ...ds.filter((b) => !da.has(b.slug) && !b.noindex)].slice(0, n);
+  return gop.length ? { tieuDe: k?.tieu_de?.trim() || "Bài viết mới", ds: gop } : null;
+}

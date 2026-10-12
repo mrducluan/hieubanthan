@@ -96,9 +96,13 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
+    'trang-chu': TrangChu;
+    'dieu-huong': DieuHuong;
     'tinh-nang': TinhNang;
   };
   globalsSelect: {
+    'trang-chu': TrangChuSelect<false> | TrangChuSelect<true>;
+    'dieu-huong': DieuHuongSelect<false> | DieuHuongSelect<true>;
     'tinh-nang': TinhNangSelect<false> | TinhNangSelect<true>;
   };
   locale: null;
@@ -837,6 +841,81 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * Dải thông báo, banner và khối bài viết trên hieuban.com. Có hiệu lực sau vài giây.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trang-chu".
+ */
+export interface TrangChu {
+  id: number;
+  /**
+   * Một dòng chữ thuần (vd "Tuần này mời bạn được 40 Sao"). Tắt hoặc để trống = không hiện.
+   */
+  thong_bao?: {
+    bat?: boolean | null;
+    chu?: string | null;
+    link?: string | null;
+    tu_ngay?: string | null;
+    den_ngay?: string | null;
+  };
+  /**
+   * Khung nổi bật trên trang chủ, ngay dưới phần giới thiệu. Ảnh ngang (≥ 1200px), chữ ngắn.
+   */
+  banner?: {
+    bat?: boolean | null;
+    nhan?: string | null;
+    tieu_de?: string | null;
+    mo_ta?: string | null;
+    anh?: (number | null) | Media;
+    nut_chu?: string | null;
+    nut_link?: string | null;
+    tu_ngay?: string | null;
+    den_ngay?: string | null;
+  };
+  bai_viet?: {
+    bat?: boolean | null;
+    tieu_de?: string | null;
+    so_bai?: number | null;
+    ghim?: (number | BaiViet)[] | null;
+  };
+  /**
+   * Mỗi trang công cụ (Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Hợp đôi, Hôm nay) tự hiện bài CMS cùng MẢNG.
+   */
+  bai_theo_mang?: {
+    bat?: boolean | null;
+    so_bai?: number | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Các cột liên kết cuối mọi trang hieuban.com. Để trống = dùng menu mặc định. Đổi xong có hiệu lực sau vài giây.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dieu-huong".
+ */
+export interface DieuHuong {
+  id: number;
+  cot?:
+    | {
+        ten: string;
+        lien_ket?:
+          | {
+              nhan: string;
+              loai?: ('duong_dan' | 'bai' | 'chuyen_muc') | null;
+              duong_dan?: string | null;
+              bai?: (number | null) | BaiViet;
+              chuyen_muc?: (number | null) | ChuyenMuc;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * Bật/tắt các phần nội dung trên hieuban.com. Có hiệu lực trong vòng vài giây.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -855,6 +934,76 @@ export interface TinhNang {
   ban_markdown?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trang-chu_select".
+ */
+export interface TrangChuSelect<T extends boolean = true> {
+  thong_bao?:
+    | T
+    | {
+        bat?: T;
+        chu?: T;
+        link?: T;
+        tu_ngay?: T;
+        den_ngay?: T;
+      };
+  banner?:
+    | T
+    | {
+        bat?: T;
+        nhan?: T;
+        tieu_de?: T;
+        mo_ta?: T;
+        anh?: T;
+        nut_chu?: T;
+        nut_link?: T;
+        tu_ngay?: T;
+        den_ngay?: T;
+      };
+  bai_viet?:
+    | T
+    | {
+        bat?: T;
+        tieu_de?: T;
+        so_bai?: T;
+        ghim?: T;
+      };
+  bai_theo_mang?:
+    | T
+    | {
+        bat?: T;
+        so_bai?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dieu-huong_select".
+ */
+export interface DieuHuongSelect<T extends boolean = true> {
+  cot?:
+    | T
+    | {
+        ten?: T;
+        lien_ket?:
+          | T
+          | {
+              nhan?: T;
+              loai?: T;
+              duong_dan?: T;
+              bai?: T;
+              chuyen_muc?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

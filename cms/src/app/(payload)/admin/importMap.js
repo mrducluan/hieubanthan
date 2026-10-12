@@ -29,6 +29,8 @@ import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c08
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { KiemDinh as KiemDinh_8d3763f0a1d973a34443ca19f1ef8f35 } from '../../../components/KiemDinh'
 import { SlugField as SlugField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
+import { NhanLienKet as NhanLienKet_dd6e8d76a5866e3a11a40f1bc002464e } from '../../../components/NhanDong'
+import { NhanCot as NhanCot_dd6e8d76a5866e3a11a40f1bc002464e } from '../../../components/NhanDong'
 import { Icon as Icon_09f42d80f248b1c52a84a2027d923643 } from '../../../components/ThuongHieu'
 import { Logo as Logo_09f42d80f248b1c52a84a2027d923643 } from '../../../components/ThuongHieu'
 import { TongQuan as TongQuan_2d78efa7272e16bbe9cb22b5f5f48f93 } from '../../../components/TongQuan'
@@ -69,6 +71,8 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "/components/KiemDinh#KiemDinh": KiemDinh_8d3763f0a1d973a34443ca19f1ef8f35,
   "@payloadcms/next/client#SlugField": SlugField_2b8867833a34864a02ddf429b0728a40,
+  "/components/NhanDong#NhanLienKet": NhanLienKet_dd6e8d76a5866e3a11a40f1bc002464e,
+  "/components/NhanDong#NhanCot": NhanCot_dd6e8d76a5866e3a11a40f1bc002464e,
   "/components/ThuongHieu#Icon": Icon_09f42d80f248b1c52a84a2027d923643,
   "/components/ThuongHieu#Logo": Logo_09f42d80f248b1c52a84a2027d923643,
   "/components/TongQuan#TongQuan": TongQuan_2d78efa7272e16bbe9cb22b5f5f48f93,

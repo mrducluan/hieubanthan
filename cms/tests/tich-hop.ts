@@ -4,6 +4,7 @@
 import assert from "node:assert/strict";
 import { getPayload, type Payload } from "payload";
 import config from "../src/payload.config";
+import { MENU_MAC_DINH } from "../src/globals/DieuHuong";
 
 const chu = (text: string) => ({ type: "text", text, format: 0, detail: 0, mode: "normal", style: "", version: 1 });
 const doan = (...children: unknown[]) =>
@@ -376,6 +377,46 @@ await ca("nút Kiểm trùng (POST /api/bai-viet/kiem-trung): cộng tác viên 
   assert.doesNotMatch(JSON.stringify(j), /Tiêu đề bí mật/);
   const r2 = await goi(mayDoc, {});
   assert.equal(r2.status, 403);
+});
+
+await ca("Điều hướng chân trang: mặc định 4 cột; link ngoài/thiếu bài bị chặn; chỉ Chủ biên sửa; bài → slug khi đọc", async () => {
+  const g = await payload.findGlobal({ slug: "dieu-huong" }) as unknown as { cot: { ten: string; lien_ket: { duong_dan: string }[] }[] };
+  assert.deepEqual(g.cot.map((c) => c.ten), ["Khám phá", "Kiến thức", "Về chúng tôi", "Pháp lý"]);
+  assert.ok(g.cot[1]!.lien_ket.some((l) => l.duong_dan === "/blog"));
+  const cot = (lien_ket: unknown[]) => ({ cot: [{ ten: "Thử", lien_ket }] }) as never;
+  for (const xau of ["//evil.vn", "/\\evil.vn", "https://evil.vn", "javascript:alert(1)", "tu-vi"]) {
+    await nem(() => payload.updateGlobal({ slug: "dieu-huong", user: chuBien, overrideAccess: false,
+      data: cot([{ nhan: "x", loai: "duong_dan", duong_dan: xau }]) }), /không hợp lệ.*Đường dẫn/);
+  }
+  await nem(() => payload.updateGlobal({ slug: "dieu-huong", user: chuBien, overrideAccess: false,
+    data: cot([{ nhan: "x", loai: "bai" }]) }), /không hợp lệ.*Bài viết/);
+  await nem(() => payload.updateGlobal({ slug: "dieu-huong", user: bienTap, overrideAccess: false,
+    data: cot([{ nhan: "x", loai: "duong_dan", duong_dan: "/tu-vi" }]) }), /permission|quyền|Forbidden/i);
+  const b = await payload.create({ collection: "bai-viet", overrideAccess: true, data: { ...baiSach(`${dau}-menu`), _status: "published" } as never });
+  tao.push({ collection: "bai-viet", id: b.id });
+  await payload.updateGlobal({ slug: "dieu-huong", user: chuBien, overrideAccess: false,
+    data: cot([{ nhan: "Bài hay", loai: "bai", bai: b.id }, { nhan: "Tử vi", loai: "duong_dan", duong_dan: "/tu-vi" }]) });
+  const doc = await payload.findGlobal({ slug: "dieu-huong", depth: 1, overrideAccess: false }) as unknown as
+    { cot: { lien_ket: { bai?: { slug: string } }[] }[] };
+  assert.equal(doc.cot[0]!.lien_ket[0]!.bai!.slug, `${dau}-menu`);
+  await payload.updateGlobal({ slug: "dieu-huong", overrideAccess: true, data: { cot: MENU_MAC_DINH.map((c) => ({ ...c, lien_ket: c.lien_ket.map((l) => ({ ...l, loai: "duong_dan" })) })) } as never });
+});
+
+await ca("Trang chủ & banner: link banner/thông báo phải trong site, số bài kẹp 2–6, biên tập viên không sửa được", async () => {
+  await nem(() => payload.updateGlobal({ slug: "trang-chu", user: chuBien, overrideAccess: false,
+    data: { thong_bao: { bat: true, chu: "Sự kiện", link: "//evil.vn" } } as never }), /không hợp lệ|invalid/i);
+  await nem(() => payload.updateGlobal({ slug: "trang-chu", user: chuBien, overrideAccess: false,
+    data: { banner: { bat: true, tieu_de: "B", nut_link: "https://evil.vn" } } as never }), /không hợp lệ|invalid/i);
+  await nem(() => payload.updateGlobal({ slug: "trang-chu", user: chuBien, overrideAccess: false,
+    data: { bai_viet: { so_bai: 9 } } as never }), /không hợp lệ|invalid/i);
+  await nem(() => payload.updateGlobal({ slug: "trang-chu", user: bienTap, overrideAccess: false,
+    data: { thong_bao: { bat: true, chu: "x" } } as never }), /permission|quyền|Forbidden/i);
+  const ok = await payload.updateGlobal({ slug: "trang-chu", user: chuBien, overrideAccess: false,
+    data: { thong_bao: { bat: true, chu: "Tuần này mời bạn được 40 Sao", link: "/tai-khoan" } } as never }) as unknown as { thong_bao: { chu: string } };
+  assert.equal(ok.thong_bao.chu, "Tuần này mời bạn được 40 Sao");
+  const khach = await payload.findGlobal({ slug: "trang-chu", overrideAccess: false }) as unknown as { thong_bao: { link: string } };
+  assert.equal(khach.thong_bao.link, "/tai-khoan");
+  await payload.updateGlobal({ slug: "trang-chu", overrideAccess: true, data: { thong_bao: { bat: false, chu: "", link: "" } } as never });
 });
 
 // dọn

@@ -1,14 +1,17 @@
-// PL-1 — chân trang: thương hiệu + cam kết dữ liệu, 4 cột liên kết (Khám phá · Kiến thức · Về chúng tôi · Pháp lý),
+// PL-1 — chân trang: thương hiệu + cam kết dữ liệu, 4 cột liên kết (Khám phá · Kiến thức · Về chúng tôi · Pháp lý) — sửa ở CMS
+// "Điều hướng chân trang" (CMS chưa nối / lỗi → dùng COT dưới đây),
 // thông tin đơn vị vận hành (env, thiếu thì ẩn), mạng xã hội, dấu Bộ Công Thương (khi có), lời miễn trừ, đường dây khẩn cấp.
 // Server component: đọc env ở máy chủ (lib/van-hanh.ts), không gửi gì thêm xuống trình duyệt.
 import Link from "next/link";
 import { BadgeCheck, HeartHandshake, Mail, MapPin, Phone, Server, ShieldCheck, Sparkles } from "lucide-react";
 import { coUngHo } from "@/lib/ung-ho";
 import { vanHanh } from "@/lib/van-hanh";
+import { dieuHuongCms } from "@/lib/cms";
 import { NutTuyChonCookie } from "@/components/khung/HoiDongYCookie";
 import { Logo } from "./Logo";
 
-const COT = [
+// Mặc định = bản đầu của CMS (cms/src/globals/DieuHuong.ts MENU_MAC_DINH) — đổi một bên thì đổi cả bên kia.
+const COT: { ten: string; ds: readonly (readonly [string, string])[] }[] = [
   { ten: "Khám phá", ds: [
     ["/than-so", "Thần số học"], ["/tu-vi", "Tử vi"], ["/bat-tu", "Bát tự"], ["/kinh-dich", "Kinh Dịch"],
     ["/phong-thuy", "Phong thuỷ"], ["/hop-doi", "Hợp đôi"],
@@ -16,7 +19,7 @@ const COT = [
   { ten: "Kiến thức", ds: [
     ["/kien-thuc", "Thư viện kiến thức"], ["/kien-thuc/than-so", "Ý nghĩa các con số"], ["/kien-thuc/kinh-dich", "64 quẻ Kinh Dịch"],
     ["/kien-thuc/tu-vi", "14 chính tinh Tử vi"], ["/tu-dien", "Từ điển thuật ngữ"], ["/la-so-mau", "Lá số mẫu"], ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"],
-    ["/kien-thuc/hop-so", "Số chủ đạo hợp nhau"],
+    ["/kien-thuc/hop-so", "Số chủ đạo hợp nhau"], ["/blog", "Blog"],
   ] },
   { ten: "Về chúng tôi", ds: [
     ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
@@ -26,7 +29,7 @@ const COT = [
     ["/chinh-sach-rieng-tu", "Chính sách quyền riêng tư"], ["/dieu-khoan", "Điều khoản sử dụng"],
     ["/mien-tru-trach-nhiem", "Miễn trừ trách nhiệm"], ["/chinh-sach-rieng-tu#quyen", "Yêu cầu về dữ liệu cá nhân"],
   ] },
-] as const;
+];
 
 const CAM_KET = [
   { Icon: ShieldCheck, chu: "Hồ sơ mặc định chỉ lưu trên máy bạn" },
@@ -34,8 +37,9 @@ const CAM_KET = [
   { Icon: Sparkles, chu: "Không bán dữ liệu, không quảng cáo nhắm mục tiêu" },
 ];
 
-export function ChanTrang() {
+export async function ChanTrang() {
   const vh = vanHanh();
+  const cot = (await dieuHuongCms()) ?? COT;
   const nam = new Date().getFullYear();
   return (
     <footer className="vach-sang mt-8 border-t border-line/60 bg-surface/30 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-10" data-testid="chan-trang">
@@ -68,12 +72,12 @@ export function ChanTrang() {
         </div>
 
         <nav aria-label="Liên kết cuối trang" className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          {COT.map((c) => (
+          {cot.map((c) => (
             <div key={c.ten}>
               <p className="eyebrow">{c.ten}</p>
               <ul className="mt-2 space-y-0.5 text-sm">
                 {c.ds.map(([href, ten]) => (
-                  <li key={href}><Link href={href} className="inline-block py-1 text-fg-muted transition-colors hover:text-gold">{ten}</Link></li>
+                  <li key={href + ten}><Link href={href} className="inline-block py-1 text-fg-muted transition-colors hover:text-gold">{ten}</Link></li>
                 ))}
               </ul>
             </div>

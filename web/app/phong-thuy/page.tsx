@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { GioiThieuCongCu, type NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
 import { metaTrang } from "@/lib/seo";
 import { PhongThuy } from "./PhongThuy";
@@ -26,6 +27,7 @@ export default function Page() {
   return (
     <>
       <PhongThuy />
+      <BaiLienQuanMang mang="phong_thuy" className="mt-12" />
       <GioiThieuCongCu {...ND} />
     </>
   );

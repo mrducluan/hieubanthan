@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CHU_DE, HINH_CHU_DE, mucLuc } from "@/lib/kien-thuc";
+import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang } from "@/components/minh-hoa/TrangTri";
 import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
 
@@ -42,6 +43,7 @@ export default async function Page() {
           );
         })}
       </div>
+      <BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" />
     </div>
   );
 }
