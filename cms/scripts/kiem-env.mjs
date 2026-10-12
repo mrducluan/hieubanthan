@@ -23,8 +23,37 @@ for (const ten of [...BAT_BUOC, ...NEN_CO]) {
   console.log(`[kiem-env] ${batBuoc ? "✗" : "!"} ${ten}: ${ly_do}${gan.length ? ` — thấy tên gần giống: ${gan.map((g) => JSON.stringify(g)).join(", ")} (sửa lại đúng tên)` : ""}`);
   if (batBuoc) thieu++;
 }
+// DATABASE_URI của Supabase: chỉ nhận chuỗi "Session/Transaction pooler". Chuỗi "Direct connection"
+// (db.<mã>.supabase.co) chỉ có địa chỉ IPv6 → máy build/hàm Vercel báo ENETUNREACH. In máy chủ/cổng/tên người
+// dùng (không bí mật) để đối chiếu; KHÔNG in mật khẩu.
+function kiemDb(chuoi) {
+  let u;
+  try { u = new URL(chuoi.trim()); } catch {
+    return "không đọc được — phải có dạng postgresql://postgres.<mã>:<mật khẩu>@aws-…pooler.supabase.com:5432/postgres";
+  }
+  console.log(`[kiem-env]   máy chủ ${u.hostname}, cổng ${u.port || "5432"}, người dùng ${decodeURIComponent(u.username)}`);
+  if (!/^postgres(ql)?:$/.test(u.protocol)) return "phải bắt đầu bằng postgresql://";
+  if (/^db\.[a-z0-9]+\.supabase\.co$/i.test(u.hostname)) {
+    return "đang là chuỗi \"Direct connection\" (chỉ IPv6, Vercel không kết nối được → ENETUNREACH). "
+      + "Supabase → Connect → Connection String → mục \"Session pooler\" → lấy chuỗi có …pooler.supabase.com:5432";
+  }
+  if (/\[YOUR-PASSWORD\]|%5BYOUR-PASSWORD%5D/i.test(chuoi)) return "chưa thay [YOUR-PASSWORD] bằng mật khẩu database (bỏ cả dấu [ ])";
+  if (/pooler\.supabase\.com$/i.test(u.hostname) && !/^postgres\.[a-z0-9]+$/i.test(decodeURIComponent(u.username))) {
+    return "chuỗi pooler cần người dùng dạng postgres.<mã project> (lấy nguyên chuỗi Supabase đưa, đừng sửa phần trước dấu :)";
+  }
+  if (!u.password) return "thiếu mật khẩu";
+  return null;
+}
+if (process.env.DATABASE_URI?.trim()) {
+  const loi = kiemDb(process.env.DATABASE_URI);
+  if (loi) {
+    console.log(`[kiem-env] ✗ DATABASE_URI: ${loi}`);
+    thieu++;
+  }
+}
+
 if (thieu) {
-  console.error(`[kiem-env] Thiếu ${thieu} biến bắt buộc. Vercel → project CMS → Settings → Environment Variables: thêm đúng tên,`
+  console.error(`[kiem-env] Có ${thieu} biến bắt buộc thiếu hoặc sai. Vercel → project CMS → Settings → Environment Variables: thêm đúng tên,`
     + ` tick môi trường "${moiTruong}" → Save → Deployments → Redeploy.`);
   process.exit(1);
 }
