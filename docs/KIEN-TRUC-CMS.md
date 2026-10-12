@@ -194,8 +194,8 @@ bài CMS, trang không vỡ.
 
 | Loại | Lệnh | Kết quả |
 |---|---|---|
-| Kiểm định (đơn vị, test trước hàm) | `cd cms && npm test` | **17/17** |
-| Tích hợp Postgres thật (phân quyền, chặn xuất bản, HTML, link nội bộ, slug cũ kể cả sau nháp tự lưu, tài khoản đầu tiên, mật khẩu, tự nâng quyền) | `npm run test:tich-hop` | **15/15** |
+| Kiểm định (đơn vị, test trước hàm) | `cd cms && npm test` | **22/22** (2026-10-12: +chuẩn hoá tiếng Việt, video) |
+| Tích hợp Postgres thật (phân quyền, chặn xuất bản, HTML, link nội bộ, slug cũ kể cả sau nháp tự lưu, tài khoản đầu tiên, mật khẩu, tự nâng quyền; 2026-10-12: cộng tác viên + duyệt, NFC, video) | `npm run test:tich-hop` | **23/23** |
 | Migration lên → xuống → lên trên DB trống | `payload migrate`, `migrate:down` | đạt, bảng chỉ nằm trong schema `cms` |
 | E2E xuyên CMS → web (trình duyệt thật) | `cd cms && npm run e2e` (dev) · `E2E_PROD=1` (bản build như CI) | **9/9** cả hai chế độ |
 | Web: lọc HTML chống XSS, mục lục, gộp nguồn, mã xem trước, route từ chối sai bí mật | `web/e2e/cms-web.spec.ts` | **8/8** |
@@ -215,6 +215,12 @@ bài CMS, trang không vỡ.
 - Chữ 12 px ở dòng chữ ký và đường dẫn: giống các trang kiến thức hiện có.
 - Thanh trạng thái của Payload trên điện thoại cuộn ngang 78 px (giao diện gốc của Payload).
 - Mở "Tạo mới" thì Payload tự lưu ngay một nháp trống. Có thể xoá trong danh sách bài.
+
+## 8b. CMS-2 (2026-10-12): cộng tác viên, tiếng Việt, video, ảnh 1600px
+
+Chi tiết + lộ trình chuyên gia: `docs/KE-HOACH-CHUYEN-GIA.md` mục 4. Lưu ảnh/video: `docs/LUU-TRU-MEDIA.md`.
+Migration Payload `20261012_015320_cong_tac_vien_video` (up/down; down hạ cộng tác viên về Máy đọc + tắt khoá API —
+không nâng quyền ai). `vercel-build` tự chạy migration khi deploy.
 
 ## 9. Lộ trình tiếp
 

@@ -29,6 +29,41 @@ Lý do và phương án: `docs/KIEN-TRUC-VAN-HANH.md`. Làm theo thứ tự; bư
 3. Chờ build xong (5–10 phút, lần đầu cài iztro). Mở `https://hieubanthan-engine-sg.onrender.com/health` → thấy
    `"ok":true` và `"engine_version":"0.1.2"`.
 
+**1b. Sửa lỗi build `invalid local: stat /opt/render/project/src/engine/Dockerfile: not a directory` (2026-10-12)**
+
+Lỗi này nghĩa là ô **Docker Build Context Directory** đang trỏ vào **tệp** `engine/Dockerfile` thay vì **thư mục**
+`engine`. Dịch vụ tạo tay qua "New → Web Service" hay gặp lỗi này. Blueprint (`render.yaml`) thì đã điền đúng.
+
+Render → `hieubanthan-engine-sg` → **Settings**:
+
+| Mục | Giá trị đúng |
+|---|---|
+| Language / Runtime | **Docker** |
+| Branch | `main` |
+| Root Directory | để **trống** |
+| Dockerfile Path | `engine/Dockerfile` (hoặc `./engine/Dockerfile`) |
+| Docker Build Context Directory | `engine` (hoặc `./engine`) — **thư mục, không phải tệp** |
+| Docker Command | để trống (Dockerfile đã có `CMD`) |
+| Health Check Path | `/health` |
+| Instance Type | **Starter** (gói Free ngủ sau 15 phút, lần gọi đầu chờ 50 giây trở lên — đúng dòng cảnh báo tím trên Render) |
+| Region | **Singapore** — chỉ chọn được lúc tạo dịch vụ, xem ở trang Settings/Info |
+
+Lưu ý: nếu muốn đặt Root Directory = `engine` thì Dockerfile Path = `./Dockerfile` và Context = `.` (đường dẫn tính từ
+Root Directory). Không trộn hai cách.
+
+Sửa xong → **Save Changes** → **Manual Deploy → Deploy latest commit**. Log đúng sẽ có dòng
+`iztro 2.6.0` ở bước build. Xong mở `https://hieubanthan-engine-sg.onrender.com/health` → `"ok": true`.
+
+**Nếu Region không phải Singapore:** Render không cho đổi vùng của dịch vụ đã tạo. Có hai cách:
+
+1. (Khuyên) **Xoá dịch vụ sai vùng**, rồi **New → Blueprint** → repo này → Render đọc `render.yaml` (Singapore,
+   Starter, Docker đúng đường dẫn) → nhập `ENGINE_API_KEY` + các biến cũ → Deploy.
+2. Hoặc **New → Web Service** → chọn repo → Region **Singapore** → điền đúng bảng trên → Environment chép biến từ
+   dịch vụ cũ.
+
+Tên dịch vụ mới phải là `hieubanthan-engine-sg` để URL khớp `ENGINE_URL` bên Vercel. Nếu Render báo trùng tên thì
+xoá dịch vụ cũ trước, hoặc đặt tên khác rồi sửa `ENGINE_URL`.
+
 **2. Trỏ web sang engine mới (Vercel)**
 1. Vercel → dự án → Settings → Environment Variables → sửa `ENGINE_URL` =
    `https://hieubanthan-engine-sg.onrender.com` (Production + Preview).

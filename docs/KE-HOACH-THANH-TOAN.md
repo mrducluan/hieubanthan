@@ -1,4 +1,4 @@
-# Kế hoạch thanh toán nạp Sao — trong nước và quốc tế (TT-0, lập 2026-10-11, CHƯA làm)
+# Kế hoạch thanh toán nạp Sao — trong nước và quốc tế (TT-0 lập 2026-10-11 · TT-1/TT-2 ĐÃ LÀM 2026-10-12)
 
 > **Đẩy khâu:** 5 · Nạp Sao. **Đo bằng:**
 > - phễu `checkout_viewed` → `checkout_started` → `payment_succeeded`;
@@ -6,7 +6,60 @@
 > - tỷ lệ hoàn tiền / khiếu nại;
 > - thời gian từ bấm "Nạp" tới khi có Sao (mục tiêu dưới 30 giây với QR).
 >
-> Đây là **kế hoạch**: chưa thêm dependency, chưa đổi schema. Mỗi bước sẽ có PR + migration riêng chờ anh duyệt.
+> **2026-10-12 — anh chốt làm luôn theo hình thức CÁ NHÂN** (đăng ký hộ kinh doanh bổ sung sau). Đã làm TT-1 + TT-2
+> (payOS/VietQR), xem mục 0b. Thẻ Visa/Master, ví, quốc tế (TT-3…TT-5) vẫn cần pháp nhân/hợp đồng cổng.
+
+## 0b. Đã làm (2026-10-12) — anh bật thế nào
+
+**Code (không thêm dependency):**
+
+- **Migration `0012_thanh_toan`** (+ `.down.sql`):
+  - Bảng `goi_sao`: 3 gói 29k/30 · 99k/110 · 199k/240 Sao.
+  - Bảng `don_nap`.
+  - Hàm `tao_don_nap`, `huy_don_nap`.
+  - Hàm `nap_sao_tu_cong`: chỉ service role, idempotent theo mã đơn, sai số tiền thì không cộng.
+  - Hàm `hoan_don_nap`: chủ sở hữu qua MFA, ghi bút toán trừ lại, ghi nhật ký.
+  - Hàm `ds_don_nap`, `don_cho_doi_soat`.
+  - Test SQL `supabase/kiem_thu/thu_thanh_toan.sql` chạy trong CI (job `supabase`).
+- **payOS gọi REST trực tiếp** (`web/lib/thanh-toan/payos.ts`, `fetch` + `node:crypto`). Chữ ký đối chiếu vector sinh
+  bằng SDK chính thức `@payos/node` (`web/e2e/thanh-toan.spec.ts`).
+- **Trang người mua:**
+  - `/nap-sao`: chọn gói, rồi sang trang payOS quét QR bằng app ngân hàng/ví bất kỳ.
+  - `/nap-sao/ket-qua`: tự hỏi trạng thái; nếu webhook lỡ thì máy chủ tra thẳng payOS.
+  - Nút **Nạp Sao** ở ví Sao.
+  - Khi thiếu Sao lúc xem Luận giải, trang báo kèm lối tới `/nap-sao`.
+- **Máy chủ:**
+  - `/api/thanh-toan/webhook/payos`: chỉ tin chữ ký.
+  - `/api/thanh-toan/doi-soat`: cron hằng ngày + tra khi người mua đang chờ.
+  - Cổng **giả** `THANH_TOAN_GIA=1` để thử trọn luồng trên bản preview. Production không bao giờ bật cổng giả.
+- Điều khoản mục Sao: thêm mua, hoàn tiền 7 ngày, không lưu số thẻ.
+- Sự kiện PostHog: `checkout_viewed` → `checkout_started` → `payment_succeeded`.
+
+**Anh làm (thứ tự):**
+
+1. **Bật tài khoản** (VIEC-CUA-ANH mục F) — Sao gắn tài khoản. Chưa bật thì `/nap-sao` hiện gói + "đang chuẩn bị mở".
+2. **Chạy migration `0012_thanh_toan.sql`** trên Supabase (SQL Editor). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`.
+3. **Đăng ký payOS** (payos.vn) bằng tài khoản ngân hàng **cá nhân** của anh.
+   - Điều kiện cá nhân/hộ kinh doanh xem trên trang đăng ký payOS.
+   - Nếu payOS chỉ nhận doanh nghiệp/hộ kinh doanh: làm hộ kinh doanh trước (TT-a) hoặc báo em chuyển sang cổng nhận
+     tài khoản cá nhân (vd SePay — cùng giao diện `lib/thanh-toan`).
+4. payOS → Kênh thanh toán → lấy **Client ID, API Key, Checksum Key**.
+5. Vercel (project web) → Environment Variables (**Production**, không `NEXT_PUBLIC_`):
+
+   | Biến | Giá trị |
+   |---|---|
+   | `PAYOS_CLIENT_ID`, `PAYOS_API_KEY`, `PAYOS_CHECKSUM_KEY` | từ payOS |
+   | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Settings → API (chỉ máy chủ dùng) |
+   | `CRON_SECRET` | chuỗi ngẫu nhiên ≥ 16 ký tự |
+
+   Sau đó Redeploy.
+6. payOS → Kênh thanh toán → **Webhook URL** = `https://hieuban.com/api/thanh-toan/webhook/payos` → Lưu.
+   - payOS gửi thử một webhook; web trả 200 là đạt.
+7. Thử thật bằng gói 29k → thấy "Đã nhận 30 Sao". Hoàn tiền thủ công (nếu cần):
+   - chuyển trả tiền ngoài hệ thống;
+   - rồi gọi `hoan_don_nap(mã đơn, lý do)` (giao diện quản trị cho việc này nằm ở lộ trình QT).
+8. Thuế/hoá đơn khi thu bằng tài khoản cá nhân: hỏi kế toán (doanh thu cá nhân kinh doanh vẫn phải kê khai).
+   - Có hộ kinh doanh/MST thì em làm TT-6 hoá đơn điện tử.
 
 ## 0. Điều kiện trước khi thu tiền (chặn — không làm thì không bật)
 
@@ -46,7 +99,7 @@
 **Stripe** hiện không mở tài khoản cho pháp nhân Việt Nam. Muốn dùng phải có pháp nhân nước ngoài (Singapore/Mỹ), nên
 để GĐ3 nếu doanh thu quốc tế đủ lớn.
 
-## 4. Crypto — vì sao chưa làm
+## 4. Crypto — vì sao không làm THANH TOÁN bằng crypto (nhưng có trang ỦNG HỘ)
 
 - Từ 01/01/2026, Luật Công nghiệp công nghệ số công nhận **tài sản số** là tài sản. Thị trường crypto đang thí điểm có
   cấp phép theo Nghị quyết 05/2025/NQ-CP (2025–2030).
@@ -58,6 +111,24 @@
   - thu qua đơn vị được cấp phép (sàn trong chương trình thí điểm, hoặc pháp nhân nước ngoài chỉ bán cho người mua
     ngoài Việt Nam).
 - Người dùng quốc tế đã có thẻ, PayPal, ví điện tử nên không thiệt.
+
+**Ủng hộ nhà phát triển (anh yêu cầu 2026-10-12) — đã làm:**
+
+- Nơi hiển thị:
+  - trang `/ung-ho`;
+  - nút "Ủng hộ đội ngũ phát triển" ở chân trang;
+  - thẻ nhỏ cuối bài blog, cuối `/hom-nay`, mục trong `/gioi-thieu`.
+- Nội dung là **quà tặng tự nguyện**: không phải mua hàng, không đổi ra Sao, không kèm quyền lợi, không hoàn. Không
+  gắn với tính năng nào nên không thành "thanh toán bằng crypto".
+- Anh khai ở Vercel (env máy chủ):
+  - `UNG_HO_VI` = mỗi ví một mục `Tên mạng|địa chỉ`, ngăn bằng `;`. Ví dụ:
+    `USDT (TRC20)|T…;Bitcoin|bc1…`
+  - (tuỳ chọn) `UNG_HO_NGAN_HANG` = `Ngân hàng|Số TK|Chủ TK`.
+  - Chưa khai thì không hiện gì.
+- Rủi ro còn lại, anh tự quyết:
+  - tiền mã hoá nhận về vẫn là thu nhập phải kê khai;
+  - đổi ra VND qua sàn chưa được cấp phép là rủi ro pháp lý;
+  - hỏi kế toán/luật sư.
 
 ## 5. Trải nghiệm mua (một trang, ít bước nhất)
 
@@ -117,8 +188,8 @@ cổng ──webhook──► /api/thanh-toan/webhook/{cong}
 
 | Bước | Nội dung | Điều kiện |
 |---|---|---|
-| TT-1 | Migration 0012 + `nap_sao()` + test SQL; trang `/nap-sao` chạy **chế độ thử** (cổng giả, không thu tiền); sự kiện PostHog | bật tài khoản |
-| TT-2 | payOS (VietQR) thật + webhook + đối soát + email biên nhận | pháp nhân + tài khoản payOS + mục E |
+| TT-1 ✅ | Migration 0012 + hàm nạp idempotent + test SQL; `/nap-sao` + cổng giả cho preview; sự kiện PostHog | bật tài khoản |
+| TT-2 ✅ | payOS (VietQR) thật + webhook + đối soát (email biên nhận: sau, cần SMTP) | tài khoản payOS (cá nhân) + env |
 | TT-3 | VNPay/OnePay (thẻ nội địa + Visa/Master/JCB) | hợp đồng cổng |
 | TT-4 | MoMo / ZaloPay | hợp đồng ví |
 | TT-5 | Quốc tế: PayPal hoặc MoR, giá USD | xác nhận cổng nhận pháp nhân VN |
