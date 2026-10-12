@@ -1,5 +1,6 @@
 // POST /api/phongthuy/hoi — proxy hỏi đáp Phong thuỷ tới engine (giữ ENGINE key server-side).
 // Web không tự tính mệnh quái hay du niên: engine tính (Bát trạch).
+import { voiCuaHoi } from "@/lib/cua-sao";
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
@@ -19,7 +20,12 @@ const Input = z.object({
   sinh: Sinh.optional(),
 }).strict();
 
+// SAO-2: hạn mức câu miễn phí / trừ Sao khi vượt (lib/cua-sao.ts, tắt mặc định).
 export async function POST(req: Request): Promise<NextResponse> {
+  return voiCuaHoi(req, "phongthuy", () => xuLy(req));
+}
+
+async function xuLy(req: Request): Promise<NextResponse> {
   const parsed = Input.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });

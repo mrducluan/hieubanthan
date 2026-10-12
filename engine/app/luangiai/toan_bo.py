@@ -9,6 +9,7 @@ Không lưu báo cáo (quy tắc: không lưu luận giải gắn user_id). Phí
 from __future__ import annotations
 
 import datetime as dt
+import re
 
 from app.hoidap import battu as hd_battu, tuvi as hd_tuvi
 from app.narrative import hoi_van
@@ -33,6 +34,43 @@ CHUONG_BATTU = [
 ]
 
 
+# SAO-2 — câu hỏi mở cho từng chương (tò mò về chính mình, KHÔNG doạ, không phán): web hiện cùng "điểm nhấn" (dữ kiện
+# đã tính, cắt từ chính chương đó) khi chương bị khoá chờ mở bằng Sao. Không thêm dữ kiện nào ngoài báo cáo.
+CAU_HOI_MO = {
+    ("tuvi", "tong_quan"): "Điểm mạnh nào bạn đang dùng chưa hết, và điểm dễ vấp nào hay lặp lại trong các quyết định lớn?",
+    ("tuvi", "su_nghiep"): "Môi trường và vai trò nào giúp bạn bứt lên, kiểu việc nào khiến bạn mau cạn năng lượng?",
+    ("tuvi", "tien_bac"): "Bạn kiếm tiền hợp nhất theo cách nào, và thói quen chi tiêu nào đang âm thầm làm hao hụt?",
+    ("tuvi", "tinh_cam"): "Bạn thật sự tìm gì ở người bạn đời, và vì sao va chạm hay bắt đầu từ cùng một chỗ?",
+    ("tuvi", "gia_dinh"): "Vì sao bạn phản ứng mạnh với một kiểu góp ý từ người lớn, và cách nào để gần nhau hơn?",
+    ("tuvi", "con_cai"): "Bạn nuôi dưỡng con cái và những điều mình tạo ra theo cách nào, điểm nào nên nới lỏng?",
+    ("tuvi", "tinh_than"): "Điều gì thật sự cho bạn bình an, và điều gì khiến tâm trí bạn khó tĩnh?",
+    ("tuvi", "van_han"): "Mười năm này xoay quanh chủ đề gì, và năm nay nên dồn sức vào đâu?",
+    ("battu", "tong_quan"): "Nhật chủ nói gì về cách bạn phản ứng khi áp lực, và điểm mạnh nào bạn hay bỏ quên?",
+    ("battu", "ngu_hanh"): "Hành nào bạn đang thiếu, và hai cách chọn dụng thần gợi ý bạn cân bằng thế nào?",
+    ("battu", "su_nghiep"): "Thập thần trong lá số cho thấy bạn hợp kiếm tiền và làm việc theo kiểu nào?",
+    ("battu", "van"): "Đại vận mười năm này và năm nay đặt trọng tâm vào đâu trong đời bạn?",
+}
+_DINH_NGHIA = re.compile(r"^(Cung [^:]{2,24}: |Tuổi mụ|Màu sắc|Câu hỏi để tự soi)")
+
+
+def diem_nhan(doan: list[str]) -> str:
+    """Một dữ kiện đã tính của chương (câu đầu có số liệu riêng của người xem), cắt từ chính đoạn trong chương."""
+    ung = [d for d in doan if not _DINH_NGHIA.match(d)] or doan
+    rieng = next((d for d in ung if d.startswith("Trong lá số của bạn")), None)
+    if rieng and "): " in rieng:
+        return rieng[: rieng.index("): ") + 1]
+    d = ung[0] if ung else ""
+    i = d.find(". ")
+    cau = d[: i + 1] if i > 0 else d
+    return cau if len(cau) <= 200 else cau[:199].rstrip() + "…"
+
+
+def _moi_xem(mo_dun: str, ma: str, doan: list[str]) -> dict:
+    chu = sum(len(d.split()) for d in doan)
+    return {"diem_nhan": diem_nhan(doan), "cau_hoi": CAU_HOI_MO.get((mo_dun, ma), "Chương này nói gì về chính bạn?"),
+            "so_doan": len(doan), "phut_doc": max(1, round(chu / 200))}
+
+
 def _ghep(mo_dun: str, chuong: list[tuple[str, str, str]], hoi) -> dict:
     da_co: set[str] = {hoi_van.KET}
     ds = []
@@ -43,7 +81,7 @@ def _ghep(mo_dun: str, chuong: list[tuple[str, str, str]], hoi) -> dict:
             if d and d not in da_co:
                 da_co.add(d)
                 doan.append(d)
-        ds.append({"ma": ma, "tieu_de": tieu_de, "cau_hoi": cau, "doan": doan})
+        ds.append({"ma": ma, "tieu_de": tieu_de, "cau_hoi": cau, "doan": doan, "moi_xem": _moi_xem(mo_dun, ma, doan)})
     return {"mo_dun": mo_dun, "chuong": ds, "ket": hoi_van.KET, "trang_thai": "nhap_ai", "phi": PHI}
 
 

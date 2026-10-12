@@ -67,3 +67,25 @@ def test_api_tra_dien_dat(monkeypatch):
     c = TestClient(app)
     assert c.post("/v1/tuvi/luan-giai", json={"la_so": la}).json()["dien_dat"] == "mau"
     assert c.post("/v1/battu/luan-giai", json={"la_so": la}).json()["dien_dat"] == "mau"
+
+
+def test_xem_truoc_chi_dien_dat_n_chuong_dau(monkeypatch):
+    """SAO-2: bản xem trước chỉ gọi LLM cho N chương đầu (chương khoá không tốn tiền AI); chương còn lại giữ bản mẫu."""
+    monkeypatch.setenv("OPENROUTER_API_KEY", "gia")
+    goi = []
+    monkeypatch.setattr(lgv, "_goi_llm", lambda tieu_de, doan, mo_dun: goi.append(tieu_de) or f"Về {tieu_de.lower()}: " + " ".join(doan))
+    kq = lgv.dien_dat(BC, toi_da=1)
+    assert goi == ["Tổng quan"]
+    assert kq["chuong"][0]["che_do"] == "llm" and "van_ai" not in kq["chuong"][1]
+    assert kq["chuong"][1]["che_do"] == "chua_dien_dat" and kq["dien_dat"] == "ai"   # mọi chương ĐÃ diễn đạt đều qua
+
+
+def test_api_nhan_dien_dat_toi_da(monkeypatch):
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    la = {"birth_date": "1997-03-19", "birth_time": "00:30", "gender": "nam", "noi_sinh": "ha-noi"}
+    c = TestClient(app)
+    for duong in ("/v1/tuvi/luan-giai", "/v1/battu/luan-giai"):
+        r = c.post(duong, json={"la_so": la, "dien_dat_toi_da": 1})
+        assert r.status_code == 200, r.text
+        assert all(ch["moi_xem"]["cau_hoi"] for ch in r.json()["chuong"])
+    assert c.post("/v1/tuvi/luan-giai", json={"la_so": la, "dien_dat_toi_da": 99}).status_code == 422

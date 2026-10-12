@@ -1,68 +1,77 @@
-# Khi nào miễn phí, khi nào cần Sao (ĐỀ XUẤT 2026-10-12, chờ chủ dự án chốt)
+# Khi nào miễn phí, khi nào cần Sao — quy trình và quy tắc (SAO-2, 2026-10-12)
 
-> **Khâu:** 4 · Nạp Sao, nhưng không được làm hỏng khâu 1–3 (thu hút, quay lại, mời bạn). **Đo bằng:** tỷ lệ người
-> đọc xong bài đọc miễn phí → bấm phần trả Sao (`paywall_viewed`), tỷ lệ nạp lần đầu, ARPPU, chi phí AI / doanh thu
-> < 20 %, và tỷ lệ quay lại ngày 7 **không giảm** sau khi bật thu.
+> **Khâu:** 4 · Nạp Sao, nhưng không được làm hỏng khâu 1–3 (thu hút, quay lại, mời bạn).
+> **Đo bằng:** phễu PostHog ở /quan-tri/tang-truong: `paywall_viewed` → `unlock_clicked` → `checkout_started` →
+> `payment_succeeded` → `unlock_succeeded`, cùng `quota_reached`. Doanh thu, người nạp, gói, mời bạn có nạp không:
+> /quan-tri/doanh-thu. Ngưỡng an toàn: chi phí AI / doanh thu < 20 %, tỷ lệ quay lại ngày 7 **không giảm** sau khi bật.
 
-## 1. Hiện trạng (đúng như code ngày 2026-10-12)
+## 1. Quy tắc (đã cài, mọi công tắc ở /quan-tri/cai-dat — mặc định TẮT)
 
-| Tính năng | Hiện tại | Chi phí biên mỗi lượt |
-|---|---|---|
-| Thần số: 4 số cốt lõi, bài đọc, biểu đồ, chu kỳ, Hôm nay | Miễn phí | ~0 (tính + tra kho) |
-| Lá số Tử vi / Bát tự, độ sáng, vận hạn, lưu niên, lưu nguyệt | Miễn phí | ~0 |
-| Kinh Dịch gieo quẻ + nghĩa quẻ/hào | Miễn phí | ~0 |
-| Phong thuỷ mệnh quái, đo hướng, Huyền Không, khảo sát nhà | Miễn phí | ~0 |
-| Hợp đôi + link mời | Miễn phí | ~0 |
-| Trang kiến thức, từ điển, blog | Miễn phí (SEO) | ~0 |
-| Hỏi đáp mỗi mảng (AI diễn đạt, rơi về mẫu khi hết lượt) | Miễn phí, trần 40 lượt/giờ/người (RL-1) | **có**: ~100–400đ/câu |
-| **Luận giải toàn bộ** Tử vi / Bát tự | **10 Sao**, công tắc `luan_giai.thu_sao` **đang tắt** (miễn phí thử nghiệm) | có (nếu bật AI) |
-| Gói nạp (migration 0012, chưa chạy) | 29k = 30 · 99k = 110 · 199k = 240 Sao | — |
+| Tính năng | Khách (chưa đăng nhập) | Có tài khoản | Khi vượt | Công tắc / số |
+|---|---|---|---|---|
+| Mọi phép tính, lá số, quẻ, hướng nhà, Hôm nay, hợp đôi, kiến thức, blog | ✅ miễn phí | ✅ | — | — |
+| Hỏi đáp AI (5 mảng, tính chung) | 3 câu/ngày | 10 câu/ngày | khách → mời đăng nhập · có tài khoản → **1 Sao/câu**, hỏi đồng ý từng câu (hoặc "không hỏi lại trong phiên") | `sao.hoi.thu`, `sao.hoi.mien_phi_khach`, `sao.hoi.mien_phi_tk`, `sao.hoi.gia` |
+| Luận giải toàn bộ Tử vi / Bát tự | chương 1 trọn + các chương sau hiện tiêu đề, **điểm nhấn đã tính**, **câu hỏi mở**, số phút đọc | như khách | **10 Sao** mở toàn bộ, xem lại cả ngày không trừ lần hai | `luan_giai.thu_sao`, `luan_giai.gia_sao`, `luan_giai.chuong_mien_phi` |
+| Sao tặng | — | +10 khi lưu hồ sơ (đủ mở 1 báo cáo) · +20 mỗi bạn mời (hai phía, một tầng) | — | `sao.thuong.*` |
 
-Như vậy hôm nay **chưa có gì thu Sao**: công tắc tắt, chưa bật tài khoản (mục F), migration 0012 chưa chạy.
+Không đếm được (chưa có `SUPABASE_SERVICE_ROLE_KEY` / `SAO_KHOA_SECRET`) → **mở**: thà cho dùng miễn phí còn hơn chặn
+nhầm. Engine lỗi → không trừ Sao. Trừ Sao luôn ở máy chủ, sau khi đã có câu trả lời / báo cáo.
 
-## 2. Nguyên tắc (giữ từ quyết định đã chốt + thực hành freemium)
+## 2. Luồng người dùng (workflow)
 
-1. **Phần tính toán và kho tri thức luôn miễn phí.** Đây là thứ kéo người dùng tới (SEO), làm họ quay lại mỗi ngày
-   (Hôm nay) và mời bạn (hợp đôi). Khoá nó thì giết khâu 1–3.
-2. **Sao chỉ trả cho thứ có chi phí biên thật hoặc giá trị đóng gói:** AI diễn đạt sâu, báo cáo dài theo chương,
-   (sau này) ảnh phong thuỷ, PDF.
-3. **Cho thấy trước, thu sau:** người dùng luôn thấy chương đầu + mục lục đầy đủ của báo cáo rồi mới gặp nút trả Sao.
-   Không làm mờ dữ kiện tính toán (lá số luôn hiện đủ).
-4. **Một lần trả, xem lại cả ngày** (đã có: khoá theo lá số + ngày). Không trừ khi engine lỗi (đã có).
-5. **Không ép**: không đếm ngược giả, không "chỉ còn 2 suất", không doạ hạn. Hết Sao → gợi ý mời bạn (được Sao) ngang
-   hàng với nạp.
-6. **Sao tặng mỗi tháng** cho người có tài khoản để ai cũng dùng thử được phần trả phí (thói quen trước, tiền sau).
+```
+Vào trang công cụ ─► tính lá số (miễn phí) ─► "Đọc miễn phí chương đầu"
+   └► đọc chương 1 trọn vẹn ─► thấy "Đã đọc 1/8 chương" + 7 thẻ chương khoá
+        mỗi thẻ: dữ kiện riêng của lá số (vd "Thiên Đồng ở cung Phu Thê (Đắc)") + câu hỏi mở về chính họ
+        thanh dính đáy: "10 Sao mở 7 chương còn lại · xem lại cả ngày" + gợi ý theo tình trạng ví
+   └► bấm "Mở toàn bộ · 10 Sao"
+        ├ chưa đăng nhập → hộp: "Lưu hồ sơ: tặng 10 Sao — đủ mở báo cáo này" → đăng nhập → quay về, TỰ MỞ
+        ├ thiếu Sao      → hộp nạp nhanh: gói nhỏ nhất đủ dùng chọn sẵn → QR ngân hàng → tiền về →
+        │                  /nap-sao/ket-qua tự đưa về đúng trang (2,5 giây) → TỰ MỞ báo cáo
+        └ đủ Sao         → trừ 10 Sao (máy chủ) → báo cáo đầy đủ
 
-## 3. Ma trận đề xuất
+Hỏi đáp: câu 1…N miễn phí (dưới câu trả lời báo "Còn 2 câu miễn phí hôm nay" khi gần hết)
+   └► hết lượt: khách → hộp mời đăng nhập · có tài khoản → hộp "Câu này dùng 1 Sao · ví còn X" [Dùng 1 Sao] [Để mai]
+```
 
-| Tính năng | Khách (chưa đăng nhập) | Có tài khoản | Trả Sao |
-|---|---|---|---|
-| Mọi phép tính, lá số, quẻ, hướng, Hôm nay, hợp đôi cơ bản, kiến thức | ✅ | ✅ | — |
-| Hỏi đáp AI mỗi mảng | 3 câu/ngày | 10 câu/ngày | sau đó **1 Sao/câu** |
-| Kinh Dịch chế độ `day_du`, Tử vi `chi_tiet` (AI dài) | xem thử 1 lần/ngày | 1 lần/ngày | sau đó **2 Sao/lượt** |
-| Luận giải toàn bộ Tử vi / Bát tự | chương 1 + mục lục | chương 1 + mục lục | **10 Sao** cả báo cáo, xem lại trong ngày miễn phí |
-| Luận giải năm (lưu niên 12 tháng) | tháng hiện tại | tháng hiện tại | **10 Sao** cả năm |
-| Hợp đôi chi tiết theo quan hệ (5 kiểu) | tóm tắt | tóm tắt | **5 Sao** bản đầy đủ |
-| Phong thuỷ: báo cáo bố cục nhà đầy đủ | 3 kết luận đầu | 3 kết luận đầu | **10 Sao** |
-| (Sau) PDF tải về, xem ảnh nhà bằng AI | — | — | 15–30 Sao |
-| Sao tặng | — | **+10 khi lưu hồ sơ, +20 mời bạn (hai phía), +5/tháng nếu ghé ≥ 8 ngày** | — |
+## 3. Tâm lý học hành vi — dùng gì, cấm gì
 
-Một Sao mua ≈ 830–970đ. Chi phí AI một báo cáo 10 Sao ≈ 1–3 nghìn đồng → biên lợi nhuận > 60 % sau phí cổng (~1–2 %).
+**Dùng (đều trung thực, kiểm được):**
+- *Khoảng trống tò mò* (curiosity gap): chương khoá cho thấy **dữ kiện thật của chính họ** + một câu hỏi mở đúng
+  điều người ta hay băn khoăn (tình cảm, công việc, tiền, gia đình, bình an). Câu hỏi ở `CAU_HOI_MO`
+  (`engine/app/luangiai/toan_bo.py`), điểm nhấn cắt từ chính chương (test bảo đảm không thêm dữ kiện).
+- *Hiệu ứng tiến độ / Zeigarnik*: "Đã đọc 1/8 chương" + thanh tiến độ — việc dở dang thôi thúc làm tiếp.
+- *Cá nhân hoá*: "Còn 7 chương viết riêng cho lá số của bạn", số phút đọc thật.
+- *Tặng trước* (reciprocity): 10 Sao chào mừng đủ mở một báo cáo — lần trả tiền đầu tiên không phải tiền.
+- *Neo giá và giảm ma sát*: giá ghi rõ trước khi bấm, "xem lại cả ngày không mất thêm", nạp ngay trong hộp, quay về
+  đúng chỗ, tự mở — không bắt tìm lại.
+- *Lối thay thế ngang hàng*: hết Sao luôn có "mời bạn bè nhận Sao" bên cạnh "nạp".
 
-## 4. Lộ trình bật (mỗi bước đo 2 tuần rồi mới qua bước sau)
+**Cấm** (CLAUDE.md: "không dọa, không phán hung để giữ chân"):
+- Không doạ hạn / tai hoạ / "năm xấu" để bán (test `_CAM_DOA` chặn từ doạ trong lời mời).
+- Không đếm ngược giả, không "chỉ còn 2 suất", không tích sẵn đồng ý trừ Sao.
+- Không làm mờ dữ kiện tính toán (lá số, quẻ luôn hiện đủ); phần khoá **không gửi xuống trình duyệt** (không lộ qua
+  tab Network) — không có chuyện "trả tiền để bỏ lớp mờ".
+- Không thu Sao cho câu hỏi khủng hoảng (bộ lọc an toàn trả lời trước, không đi qua lời mời).
+
+## 4. Lộ trình bật (mỗi bước đo 2 tuần)
 
 | Bước | Việc | Ai | Điều kiện |
 |---|---|---|---|
-| S0 | Bật tài khoản (VIEC-CUA-ANH mục F) + chạy 0012 + payOS (HT-8) | Anh rồi em | — |
-| S1 | Bật `luan_giai.thu_sao` ở /quan-tri — **chỉ** Luận giải toàn bộ 10 Sao; hiện chương 1 + mục lục miễn phí | Em làm "chương 1 miễn phí", anh bật | Đã có ≥ 200 lượt xem luận giải/tuần |
-| S2 | Hạn mức hỏi đáp theo tài khoản (3/10 câu/ngày) + 1 Sao/câu vượt | Em (migration đếm lượt, không lưu nội dung câu hỏi) | Chi phí AI > 500k/tháng hoặc S1 có người trả |
-| S3 | Hợp đôi chi tiết, luận giải năm, báo cáo bố cục nhà | Em | S1 tỷ lệ trả ≥ 2 % |
-| S4 | Sao tặng hằng tháng theo ngày ghé (khâu quay lại) | Em | S2 chạy ổn |
+| S0 | Bật tài khoản (VIEC-CUA-ANH mục F) + chạy 0012, 0013 + payOS + `SUPABASE_SERVICE_ROLE_KEY`, `SAO_KHOA_SECRET` | Anh | — |
+| S1 | Bật `luan_giai.thu_sao` (chương 1 miễn phí, 10 Sao) | Anh bấm ở /quan-tri/cai-dat | ≥ 200 lượt xem luận giải/tuần; quyết định 2026-10-01: sau 2 tháng thử nghiệm |
+| S2 | Bật `sao.hoi.thu` (3/10 câu/ngày, 1 Sao/câu vượt) | Anh | Chi phí AI > 500k/tháng hoặc S1 có người trả |
+| S3 | Hợp đôi chi tiết 5 Sao, luận giải năm 10 Sao, báo cáo bố cục nhà 10 Sao | Em | S1 tỷ lệ trả ≥ 2 % |
+| S4 | Sao tặng hằng tháng theo ngày ghé (khâu quay lại) | Em | S2 ổn |
 
-Mọi giá và hạn mức đặt trong `cau_hinh` (/quan-tri), không sửa code khi đổi giá.
+Một Sao mua ≈ 830–970đ. Chi phí AI một báo cáo ≈ 1–3 nghìn đồng (bản xem trước chỉ diễn đạt AI chương miễn phí
+— `dien_dat_toi_da`) → biên > 60 % sau phí cổng.
 
-## 5. Chủ dự án cần chốt
+## 5. Quản trị
 
-1. Ma trận ở mục 3 (đặc biệt: hỏi đáp 3/10 câu miễn phí mỗi ngày có hợp không).
-2. Giá: giữ Luận giải toàn bộ 10 Sao; hợp đôi chi tiết 5 Sao; lượt AI vượt 1 Sao.
-3. Thời điểm S1 (quyết định 2026-10-01: miễn phí 2 tháng thử nghiệm → sớm nhất ~đầu tháng 12/2026).
+- **/quan-tri/doanh-thu** (chỉ chủ sở hữu, MFA, ghi nhật ký mỗi lần xem): doanh thu 7/30/90 ngày, người nạp, người nạp
+  lần đầu, tỷ lệ tạo đơn → trả, theo ngày, theo gói, **danh sách người nạp nhiều nhất** (email, tổng, số lần, số dư),
+  **người mời nhiều nhất + bạn được mời có nạp không**, Sao bán / tặng / tiêu và tiêu vào đâu, 30 đơn gần nhất.
+- **/quan-tri/tang-truong**: phễu PostHog có thêm các bước xem khoá → mở khoá → nạp.
+- **/quan-tri/nguoi-dung**: tra ví theo email, điều chỉnh Sao có lý do (đã có).
+- **/quan-tri/cai-dat**: mọi số và công tắc ở mục 1.

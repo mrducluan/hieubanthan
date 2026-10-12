@@ -385,6 +385,12 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
   **Giao diện website** → *Điều hướng chân trang* (4 cột chân trang, mỗi link chọn Trang / Bài viết / Chuyên mục) và
   *Trang chủ & banner* (dải thông báo đầu trang, banner trang chủ, khối Bài viết mới + ghim bài, Bài viết liên quan).
   Bấm Lưu → hieuban.com đổi sau vài giây. Dải thông báo **không còn** ở /quan-tri/cai-dat (nếu anh từng đặt chữ ở đó thì đặt lại bên CMS; dòng cũ trong Supabase sẽ được xoá ở migration kế tiếp) (phân vai: `docs/KIEN-TRUC-CMS.md` mục 0).
+- [ ] SAO2. (2026-10-12) Cơ chế miễn phí ↔ Sao đã có code, **mặc định tắt**. Để bật (sau khi bật tài khoản mục F):
+  1) Supabase SQL Editor chạy `supabase/migrations/0013_sao_2.sql` (sau 0012).
+  2) Vercel web: `SUPABASE_SERVICE_ROLE_KEY` (đã cần cho payOS) + `SAO_KHOA_SECRET` (chuỗi ngẫu nhiên ≥ 32 ký tự,
+     không dán vào chat) → Redeploy.
+  3) /quan-tri/cai-dat → nhóm "Luận giải toàn bộ" bật thu Sao; nhóm "Hỏi đáp" bật giới hạn khi chi phí AI tăng.
+  4) Xem tiền + người nạp ở /quan-tri/doanh-thu. Quy tắc + lộ trình: `docs/KE-HOACH-MIEN-PHI-VA-SAO.md`.
 - [ ] CMS9. Ảnh/video: giữ **Supabase Storage** bây giờ, video đăng YouTube rồi chèn khối "Video YouTube"; chuyển R2
   khi vượt ~50 GB ảnh hoặc ~200 GB băng thông/tháng (`docs/LUU-TRU-MEDIA.md`).
 - [ ] CG-a. Chốt **không làm hoa hồng nhiều tầng** (đa cấp dịch vụ bị cấm; Điều 217a BLHS) — thay bằng lộ trình chuyên

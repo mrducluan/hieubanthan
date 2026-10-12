@@ -15,7 +15,7 @@ from typing import Annotated, Literal
 
 from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app import config, giam_sat, gioi_han
 from app.cong_khai import PhanHoiCongKhai
@@ -181,6 +181,19 @@ def api_do_nhay(inp: ThanSoInput) -> dict:
         "so_ket_qua_khac_nhau": {k: len(v) for k, v in dn.items()},
         "canh_bao": canh_bao,
     }
+
+
+class DacBietInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    cau_hoi: str = Field(min_length=1, max_length=500)
+
+
+@app.post("/v1/hoi/dac-biet")
+def api_hoi_dac_biet(inp: DacBietInput) -> dict:
+    """SAO-2: 'an_toan' (khủng hoảng) | 'tu_choi_nhe' | None — web gọi trước khi chặn vì hết lượt hỏi miễn phí, để câu
+    khủng hoảng / ngoài phạm vi luôn được trả lời miễn phí. RULES thuần (cùng danh sách với hỏi đáp), không LLM."""
+    from app.hoidap import chung
+    return {"loai": chung.dac_biet(chung.chuan_hoa(inp.cau_hoi))}
 
 
 @app.post("/v1/thanso/luan-giai")

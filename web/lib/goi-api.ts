@@ -1,9 +1,11 @@
 "use client";
 // Gọi route handler của web từ client (không gọi engine trực tiếp).
 import { useEffect, useState } from "react";
+import { fetchSao } from "@/lib/sao-client";
 
-export async function postJson<T>(url: string, body: unknown): Promise<T> {
-  const r = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+export async function postJson<T>(url: string, body: unknown, them: Record<string, string> = {}): Promise<T> {
+  const r = await fetchSao(url, { method: "POST", headers: { "content-type": "application/json", ...them }, body: JSON.stringify(body) },
+    url.includes("luan-giai") ? "luan_giai" : "hoi");
   const d = (await r.json().catch(() => ({}))) as T & { error?: string };
   if (!r.ok) throw new Error(d.error ?? "Chưa tính được lúc này.");
   return d;
