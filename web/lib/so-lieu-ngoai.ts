@@ -163,6 +163,8 @@ export interface BaoCaoPosthog {
   theoMang: { mo_dun: string; bat_dau: number; xong: number; gop_y: number; co_giup: number }[];
   /** Truy vấn Gate lỗi → bảng Gate hiện "lỗi", không kết luận sai. */
   gateLoi: string | null;
+  /** HN-4: ý định hôm nay (mã) + nhóm việc chưa hỗ trợ trong câu gõ không nhận ra (mã cố định, không có câu). */
+  yDinh: { top: { ma: string; n: number }[]; goTay: number; khongNhanRa: number; nhomMoi: { ma: string; n: number }[] } | null;
 }
 
 async function hogql<T>(query: string): Promise<T[]> {
@@ -209,7 +211,19 @@ async function baoCaoPosthogTho(): Promise<BaoCaoPosthog> {
       WHERE ${DK} AND event IN ('reading_started', 'reading_completed', 'feedback_submitted') GROUP BY properties.mo_dun`),
   ]).catch((e: unknown) => { gateLoi = e instanceof Error ? e.message : "Truy vấn Gate lỗi."; return [[], []] as [number[][], [string | null, number, number, number, number][]]; });
   const t = (tong[0] ?? []).map(Number);
+  const YD = `event = 'daily_intent_set' AND timestamp > now() - INTERVAL 28 DAY`;
+  const yDinh = await Promise.all([
+    hogql<[string, number]>(`SELECT ma, count() AS n FROM events ARRAY JOIN splitByChar(',', toString(properties.y_dinh)) AS ma
+      WHERE ${YD} AND ma != '' GROUP BY ma ORDER BY n DESC LIMIT 11`),
+    hogql<[number, number]>(`SELECT countIf(properties.go_tay = 1), countIf(properties.nhan_ra = 0) FROM events WHERE ${YD}`),
+    hogql<[string, number]>(`SELECT ma, count() AS n FROM events ARRAY JOIN splitByChar(',', toString(properties.nhom_chua_ho_tro)) AS ma
+      WHERE ${YD} AND properties.nhan_ra = 0 AND ma != '' GROUP BY ma ORDER BY n DESC LIMIT 12`),
+  ]).then(([top, dem, moi]) => ({
+    top: top.map(([ma, n]) => ({ ma, n: Number(n) })), goTay: Number(dem[0]?.[0] ?? 0), khongNhanRa: Number(dem[0]?.[1] ?? 0),
+    nhomMoi: moi.map(([ma, n]) => ({ ma, n: Number(n) })),
+  })).catch(() => null);
   return {
+    yDinh,
     pheu: PHEU.map(([e, ten]) => ({ su_kien: e, ten, luot: theo.get(e)?.luot ?? 0, nguoi: nguoi(e) })),
     quayLai: ql[0] ? { truoc: Number(ql[0][0]), tro_lai: Number(ql[0][1]) } : null,
     gate: {

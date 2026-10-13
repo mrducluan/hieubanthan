@@ -39,11 +39,11 @@ const GOI_Y = [
   { nhom: "Cuộc sống", cau: ["Bài học lớn của đời tôi là gì?", "Giai đoạn này tôi nên tập trung điều gì?"] },
 ];
 
-async function hoiThanSo(h: HoSo, cau: string): Promise<KetQuaHoi> {
+async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo): Promise<KetQuaHoi> {
   const r = await fetchSao("/api/thanso/hoi", {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, cau_hoi: cau }),
+    body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, cau_hoi: cau, phai }),
   }, "hoi");
   const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string; thuat_ngu?: ThuatNgu[]; luot?: LuotHoi };
   const canNguoiKia = d.can_them?.includes("nguoi_kia");
@@ -194,13 +194,13 @@ export function ThanSo() {
       <section id="hoi" aria-labelledby="muc-hoi" className="scroll-mt-24">
         <TieuDeMuc id="muc-hoi" nho="Hỏi sâu hơn" lon={`${tenGoi(hoSo)}, bạn đang băn khoăn điều gì?`}
           mo_ta={phai === "chaldea"
-            ? "Hỏi đáp hiện trả lời theo các con số phái Pitago (bản đọc mặc định) — góc nhìn tham khảo để tự ngẫm, không phải lời tiên đoán."
+            ? "Câu về bản thân, tên, tính cách trả lời theo số Chaldea (số kép + số gốc); chủ đề phái Chaldea không có (năm cá nhân, đỉnh cao, biểu đồ, hợp đôi) trả lời theo Pitago và ghi rõ."
             : "Câu trả lời soi câu hỏi của bạn qua chính những con số ở trên — góc nhìn tham khảo để tự ngẫm, không phải lời tiên đoán."} />
         <KhungChat
             moDun="thanso"
           loiChao="Chọn một câu gợi ý bên dưới, hoặc tự đặt câu hỏi về bản thân, nghề nghiệp, tình cảm."
           goiY={GOI_Y}
-          gui={(c) => hoiThanSo(hoSo, c)}
+          gui={(c) => hoiThanSo(hoSo, c, phai)}
         />
       </section>
 

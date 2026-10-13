@@ -21,6 +21,7 @@ test("trang một ngày: HTML máy chủ có H1 + Kim Quỹ, trực Khai, giờ 
   await expect(page.getByTestId("nhan-hoang-dao")).toHaveText("Ngày Hoàng đạo · Kim Quỹ");
   await expect(page.getByTestId("truc")).toContainText("Khai");
   await expect(page.getByTestId("gio-hoang-dao").locator("li")).toHaveCount(6);
+  await expect(page.getByTestId("vong-gio").first()).toHaveAttribute("aria-label", /Tý, Sửu, Thìn, Tỵ, Mùi, Tuất/);
   await expect(page.getByTestId("nghi")).toContainText("Cưới hỏi");
   await expect(page.getByTestId("ky")).toContainText("An táng");
   await expect(page.getByText("Tuổi Giáp Dần")).toBeVisible();
@@ -80,4 +81,27 @@ test("Hôm nay: có hoàng lịch theo tuổi + quẻ đầu ngày", async ({ pa
   await expect(page.getByTestId("hl-tuoi")).toContainText("Canh Ngọ");
   await expect(page.getByTestId("que-ngay")).toContainText("Quẻ đầu ngày");
   await expect(page.getByTestId("nhip-bat-tu")).toContainText("nhật chủ Nhâm");
+  // HN-3: nút nhỏ "Giờ hoàng đạo" mở vòng 12 canh giờ tại chỗ; chip quẻ ngày nhảy tới khung quẻ
+  const chip = page.getByTestId("chip-hom-nay");
+  await expect(page.getByTestId("gio-hoang-dao")).toHaveCount(0);
+  await chip.getByRole("button", { name: "Giờ hoàng đạo" }).click();
+  await expect(page.getByTestId("gio-hoang-dao").locator("li")).toHaveCount(6);
+  await expect(page.getByTestId("gio-hoang-dao").getByTestId("vong-gio")).toBeVisible();
+  await expect(page.getByTestId("kim-gio")).toHaveCount(1);
+  await chip.getByRole("link", { name: /Quẻ ngày/ }).click();
+  await expect(page).toHaveURL(/#que-ngay$/);
+});
+
+test("Kinh Dịch: ?cach=mai_hoa mở sẵn cách khởi Mai Hoa (link từ Hôm nay)", async ({ page }) => {
+  await page.goto("/kinh-dich?cach=mai_hoa");
+  await expect(page.locator("select:has(option[value=mai_hoa])")).toHaveValue("mai_hoa");
+});
+
+test("điện thoại 360px: trang xem ngày và trang chủ không cuộn ngang", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  for (const duong of ["/xem-ngay-tot/2026-10-13", "/"]) {
+    await page.goto(duong);
+    const tran = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(tran, duong).toBeLessThanOrEqual(0);
+  }
 });

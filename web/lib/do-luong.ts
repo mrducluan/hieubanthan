@@ -33,6 +33,8 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   phai: "string",       // TS-PHAI: pitago / chaldea
   y_dinh: "string",     // HN-2: các MÃ ý định nối bằng dấu phẩy (vd "cong_viec,gap_go"), không bao giờ là câu gõ tay
   go_tay: "number",     // HN-2: 1 nếu người dùng có gõ câu (chỉ đếm, không gửi nội dung)
+  nhan_ra: "number",    // HN-4: 1 = câu gõ nhận ra ý định, 0 = không (chỉ đếm)
+  nhom_chua_ho_tro: "string", // HN-4: mã nhóm cố định nối dấu phẩy (từ engine), không bao giờ là chữ người dùng gõ
   viec: "string",       // HL-1: mã việc chọn ngày (cuoi_hoi, khai_truong…)
   so_thang: "number",
   co_tuoi: "number",

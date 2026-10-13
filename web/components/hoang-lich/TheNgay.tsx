@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CalendarHeart, Clock, Compass, MoonStar, Sparkles, Sunrise, ThumbsDown, ThumbsUp, UserRound } from "lucide-react";
 import type { GioNgay, NgayTot } from "@/lib/hoang-lich";
 import { duongNgay, homNayVN } from "@/lib/hoang-lich";
+import { VongGio } from "./VongGio";
 
 /** Giờ đồng hồ VN hiện tại → chỉ số canh giờ của NGÀY ĐANG XEM (Tý đầu ngày = 0 là 00:00–00:59; 23:xx đã là Tý của
  *  ngày mai → 12, tức đã qua mọi giờ hôm nay). */
@@ -52,29 +53,37 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
   const nhanNgay = d.hoang_dao ? "Ngày Hoàng đạo" : "Ngày Hắc đạo";
   return (
     <div className="space-y-4" data-testid="the-ngay">
-      <div className="glass rounded-2xl p-5">
-        <div className="flex flex-wrap items-start justify-between gap-3">
+      <div className="bau-troi p-5 sm:p-7">
+        <div className="grid items-center gap-5 sm:grid-cols-[minmax(0,15rem)_1fr]">
+          <VongGio gio={d.gio} laHomNay={laHomNay} tieuDe={d.than.ten} phuDe={d.hoang_dao ? "HOÀNG ĐẠO" : "HẮC ĐẠO"}
+            className="mx-auto w-full max-w-[15rem]" />
           <div>
-            <p className="text-sm text-fg-muted">{d.thu}, {d.ngay.split("-").reverse().join("/")}</p>
-            <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-fg-muted"><MoonStar className="size-4" aria-hidden />
-              Âm lịch {d.am.chu} · ngày {d.can_chi.ngay}, tháng {d.can_chi.thang}, năm {d.can_chi.nam}</p>
+            <p className="text-sm text-fg-muted">{d.thu} · {d.ngay.split("-").reverse().join("/")}</p>
+            <p className="mt-1 font-serif text-4xl leading-tight sm:text-5xl">
+              <span className="text-gradient-gold">{d.am.ngay}</span>
+              <span className="text-2xl text-fg-muted sm:text-3xl"> tháng {d.am.thang}{d.am.nhuan ? " nhuận" : ""} âm lịch</span>
+            </p>
+            <p className="mt-2 inline-flex items-center gap-1.5 text-sm text-fg-muted"><MoonStar className="size-4 text-moon" aria-hidden />
+              Ngày <b className="font-semibold text-fg">{d.can_chi.ngay}</b> · tháng {d.can_chi.thang} · năm {d.can_chi.nam}</p>
+            <p className="mt-3">
+              <span data-testid="nhan-hoang-dao"
+                className={`inline-flex rounded-full px-3 py-1 text-sm font-semibold ${d.hoang_dao ? "nhan-sang bg-gold/15 text-gold" : "border border-moon/50 bg-moon/10 text-moon"}`}>
+                {nhanNgay} · {d.than.ten}
+              </span>
+            </p>
           </div>
-          <span data-testid="nhan-hoang-dao"
-            className={`rounded-full border px-3 py-1 text-sm font-semibold ${d.hoang_dao ? "border-gold/50 bg-gold/10 text-gold" : "border-moon/40 bg-moon/[0.06] text-moon"}`}>
-            {nhanNgay} · {d.than.ten}
-          </span>
         </div>
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <div className="rounded-xl border border-line/70 p-3">
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <div className="rounded-xl border border-line/70 bg-bg/40 p-3">
             <p className="text-xs uppercase tracking-wider text-fg-faint">Trực</p>
             <p className="mt-1 text-lg" data-testid="truc">{d.truc.ten} <span className="text-sm text-fg-muted">— {d.truc.y}</span></p>
             <p className="mt-1 text-xs text-fg-muted">Hợp: {d.truc.hop}</p>
           </div>
-          <div className="rounded-xl border border-line/70 p-3">
+          <div className="rounded-xl border border-line/70 bg-bg/40 p-3">
             <p className="text-xs uppercase tracking-wider text-fg-faint">Sao (nhị thập bát tú)</p>
             <p className="mt-1 text-lg">{d.tu.ten} <span className="text-sm text-fg-muted">— {d.tu.tot ? "sao tốt" : "sao trung/xấu theo sách"}</span></p>
           </div>
-          <div className="rounded-xl border border-line/70 p-3">
+          <div className="rounded-xl border border-line/70 bg-bg/40 p-3">
             <p className="text-xs uppercase tracking-wider text-fg-faint">Xung</p>
             <p className="mt-1 text-lg">Tuổi {d.xung_tuoi.ten}</p>
             <p className="mt-1 text-xs text-fg-muted">Sát hướng {d.sat}</p>
@@ -86,7 +95,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
           </p>
         )}
         {d.tuoi && (
-          <p className="mt-3 flex items-start gap-2 rounded-xl border border-gold/30 bg-gold/[0.05] p-3 text-sm" data-testid="tuoi-ban">
+          <p className="mt-3 flex items-start gap-2 rounded-xl border border-gold/30 bg-gold/[0.06] p-3 text-sm" data-testid="tuoi-ban">
             <UserRound className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
             <span>Tuổi bạn <b>{d.tuoi.can_chi}</b>{d.tuoi.uoc_luong ? " (tính theo năm sinh)" : ""}: <b>{d.tuoi.quan_he.ten}</b> — {d.tuoi.quan_he.nghia}.</span>
           </p>

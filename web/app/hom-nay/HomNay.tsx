@@ -6,7 +6,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  BookOpen, Briefcase, CalendarDays, Coffee, Dumbbell, Flame, Globe2, Handshake, Heart, Home, LifeBuoy, MessageCircleQuestion,
+  BookOpen, Briefcase, CalendarDays, CalendarHeart, Clock, Hexagon, Coffee, Dumbbell, Flame, Globe2, Handshake, Heart, Home, LifeBuoy, MessageCircleQuestion,
   MoonStar, Palette, Plane, Rocket, Share2, Sparkles, Sunrise, Wallet, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,8 @@ import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
 import { ghi, maNgauNhien } from "@/lib/do-luong";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
+import { VongGio } from "@/components/hoang-lich/VongGio";
+import type { GioNgay } from "@/lib/hoang-lich";
 
 interface NgayCN { so: number; nghia: string; tu_soi: string }
 interface TheHomNay {
@@ -29,6 +31,7 @@ interface TheHomNay {
   // HN-2
   y_dinh_hom_nay: YDinhKq[];
   y_dinh_nhan_dien: string[];
+  nhan_ra?: boolean | null; nhom_chua_ho_tro?: string[];
   ho_tro: string | null;
   danh_sach_y_dinh: Record<string, { ten: string; bieu_tuong: string; cau_hoi: string }>;
   cau_hoi_noi_bat: string[];
@@ -45,6 +48,7 @@ interface TheHomNay {
 interface HoangLichHomNay {
   truc: string; truc_y: string; than: string; hoang_dao: boolean;
   gio_hoang_dao: { chi: string; khung: string; than: string }[];
+  gio: GioNgay[];
   xung_tuoi: string; tuoi: { can_chi: string; quan_he: { ma: string | null; ten: string; nghia: string } } | null;
   nghi: string[]; ky: string[]; ky_dan_gian: string[];
   ngay_tot_gan: { ngay: string; con_ngay?: number; than: string; truc: string } | null;
@@ -112,6 +116,7 @@ export function HomNay() {
   const [chon, setChon] = useState<string[]>([]);
   const [duDinh, setDuDinh] = useState("");
   const [dangXem, setDangXem] = useState(false);
+  const [moGio, setMoGio] = useState(false);
 
   /** Gọi engine; `yDinh`/`cau` rỗng = thẻ cơ bản. Ý định đã nhớ của hôm nay được gửi kèm ngay lần đầu. */
   function taiThe(yDinh: string[], cau: string) {
@@ -136,7 +141,8 @@ export function HomNay() {
       const ma = t.y_dinh_hom_nay.map((x) => x.ma);
       try { localStorage.setItem(KHOA_Y_DINH, JSON.stringify({ ngay: t.ngay_xem, ma })); } catch { /* bỏ qua */ }
       setChon(ma);
-      ghi("daily_intent_set", { y_dinh: ma.join(","), go_tay: duDinh.trim() ? 1 : 0 });
+      ghi("daily_intent_set", { y_dinh: ma.join(","), go_tay: duDinh.trim() ? 1 : 0,
+        ...(t.nhan_ra == null ? {} : { nhan_ra: t.nhan_ra ? 1 : 0, nhom_chua_ho_tro: (t.nhom_chua_ho_tro ?? []).join(",") }) });
       setDuDinh("");
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa tải được."); }
     finally { setDangXem(false); }
@@ -203,6 +209,37 @@ export function HomNay() {
             <span className="inline-flex items-center gap-1.5"><MoonStar className="size-4" aria-hidden />
               Âm lịch {the.am_lich.ngay}/{the.am_lich.thang}{the.am_lich.nhuan ? " (nhuận)" : ""} · ngày {the.am_lich.can_chi_ngay}, tháng {the.am_lich.can_chi_thang}, năm {the.am_lich.can_chi_nam}</span>
           </p>
+          {/* HN-3 (chủ dự án dặn: nút nhỏ) — giờ hoàng đạo mở/đóng tại chỗ · quẻ ngày · xem ngày tốt */}
+          {the.hoang_lich && (
+            <div className="flex flex-wrap items-center gap-2" data-testid="chip-hom-nay">
+              <button type="button" aria-expanded={moGio} aria-controls="gio-hoang-dao" onClick={() => setMoGio((v) => !v)}
+                className={`vung-cham inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition-colors ${moGio ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
+                <Clock className="size-3.5" aria-hidden />Giờ hoàng đạo
+              </button>
+              {the.que_ngay && (
+                <a href="#que-ngay" className="vung-cham inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
+                  <Hexagon className="size-3.5" aria-hidden />Quẻ ngày: {the.que_ngay.ten}
+                </a>
+              )}
+              <Link href="/xem-ngay-tot" className="vung-cham inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
+                <CalendarHeart className="size-3.5" aria-hidden />{the.hoang_lich.hoang_dao ? "Ngày Hoàng đạo" : "Ngày Hắc đạo"}
+              </Link>
+            </div>
+          )}
+          {moGio && the.hoang_lich && (
+            <div id="gio-hoang-dao" className="bau-troi grid items-center gap-4 p-4 sm:grid-cols-[11rem_1fr]" data-testid="gio-hoang-dao">
+              <VongGio gio={the.hoang_lich.gio} laHomNay tieuDe={the.hoang_lich.than} phuDe="12 CANH GIỜ" className="mx-auto w-full max-w-[11rem]" />
+              <div>
+                <ul className="grid grid-cols-2 gap-2 text-sm">
+                  {the.hoang_lich.gio_hoang_dao.map((g) => (
+                    <li key={g.chi}><b className="text-gold">{g.chi}</b> <span className="text-fg-muted">{g.khung}</span>
+                      <span className="block text-xs text-fg-faint">{g.than}</span></li>
+                  ))}
+                </ul>
+                <p className="mt-2 text-xs text-fg-faint">Sáu giờ hoàng đạo của ngày {the.am_lich.can_chi_ngay} theo lịch cổ truyền — tham khảo văn hoá, không phải lời khuyên chọn giờ.</p>
+              </div>
+            </div>
+          )}
 
           <Card className="space-y-4" data-testid="the-hom-nay">
             <div className="flex items-start justify-between gap-4">
@@ -237,8 +274,6 @@ export function HomNay() {
               <p className="text-sm">Trực <b>{the.hoang_lich.truc}</b> ({the.hoang_lich.truc_y}) · xung tuổi {the.hoang_lich.xung_tuoi}
                 {the.hoang_lich.ky_dan_gian.length > 0 && ` · ${the.hoang_lich.ky_dan_gian.join(", ")}`}</p>
               {the.hoang_lich.tuoi && <p className="text-sm" data-testid="hl-tuoi">Tuổi bạn ({the.hoang_lich.tuoi.can_chi}): <b>{the.hoang_lich.tuoi.quan_he.ten}</b> — {the.hoang_lich.tuoi.quan_he.nghia}.</p>}
-              <p className="text-sm"><span className="text-fg-muted">Giờ hoàng đạo:</span>{" "}
-                {the.hoang_lich.gio_hoang_dao.map((g) => `${g.chi} (${g.khung})`).join(" · ")}</p>
               {the.hoang_lich.nghi.length > 0 && <p className="text-sm"><span className="text-jade">Nên:</span> {the.hoang_lich.nghi.join(", ")}</p>}
               {the.hoang_lich.ky.length > 0 && <p className="text-sm"><span className="text-cinnabar">Kiêng:</span> {the.hoang_lich.ky.join(", ")}</p>}
               <p className="text-sm"><Link href="/xem-ngay-tot" className="text-gold hover:underline">Xem đủ giờ tốt, hướng xuất hành, tìm ngày đẹp →</Link>
@@ -324,9 +359,9 @@ export function HomNay() {
           )}
 
           {the.que_ngay && (
-            <section aria-labelledby="que-ngay" className="glass space-y-2 rounded-2xl p-5" data-testid="que-ngay">
+            <section id="que-ngay" aria-labelledby="que-ngay-h" className="glass scroll-mt-24 space-y-2 rounded-2xl p-5" data-testid="que-ngay">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h2 id="que-ngay" className="text-xl">Quẻ đầu ngày: {the.que_ngay.ten}</h2>
+                <h2 id="que-ngay-h" className="text-xl">Quẻ đầu ngày: {the.que_ngay.ten}</h2>
                 <span className="text-xs text-fg-muted">quẻ {the.que_ngay.so} · hào {the.que_ngay.hao_dong} động{the.que_ngay.bien ? ` → ${the.que_ngay.bien.ten}` : ""}</span>
               </div>
               {the.que_ngay.y_chinh && <p className="text-sm">{the.que_ngay.y_chinh}</p>}
@@ -334,7 +369,7 @@ export function HomNay() {
               {the.que_ngay.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {the.que_ngay.cau_tu_soi}</p>}
               <p className="text-xs text-fg-faint">{the.que_ngay.cach_khoi} Mọi người cùng một quẻ trong ngày.{" "}
                 {the.que_ngay.duong && <Link href={the.que_ngay.duong} className="text-gold hover:underline">Đọc quẻ {the.que_ngay.ten}</Link>}{" "}
-                · <Link href="/kinh-dich" className="text-gold hover:underline">Gieo quẻ cho việc của bạn</Link></p>
+                · <Link href="/kinh-dich?cach=mai_hoa" className="text-gold hover:underline">Gieo quẻ Mai Hoa theo giờ này</Link></p>
             </section>
           )}
 

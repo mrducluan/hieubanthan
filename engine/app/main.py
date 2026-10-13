@@ -242,6 +242,8 @@ class HoiInput(ThanSoInput):
     cau_hoi: str = Field(min_length=3, max_length=400)
     nguoi_kia: NguoiKia | None = None
     ngay_xem: _dt.date | None = Field(default=None, description="Mặc định: hôm nay")
+    # TS-PHAI-2: trả lời theo phái người dùng đang xem ở /than-so.
+    phai: Literal["pitago", "chaldea"] = "pitago"
 
 
 @app.get("/v1/tu-dien")
@@ -269,7 +271,7 @@ def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
             raise HTTPException(422, detail="Ngày sinh người thứ hai không tồn tại")
         kia = inp.nguoi_kia.model_dump()
     nguoi = {"ho_ten": inp.ho_ten, "ngay": inp.ngay, "thang": inp.thang, "nam": inp.nam}
-    kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem)
+    kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem, phai=inp.phai)
     background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "thanso")}
 

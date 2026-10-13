@@ -141,6 +141,21 @@ export default async function Page() {
         {ph.ok ? <BangGate du={ph.du} /> : <div className="mt-3"><ChuaCo kq={ph} huongDan="Cần khoá PostHog như mục Phễu bên dưới." /></div>}
       </Card>
 
+      {ph.ok && ph.du.yDinh && (
+        <Card data-testid="qt-y-dinh">
+          <h2 className="text-lg">Ý định hôm nay (PostHog, 28 ngày)</h2>
+          <p className="mt-1 text-sm text-fg-muted">Chỉ đếm MÃ — câu người dùng gõ không bao giờ được lưu. Cách đọc và bổ sung từ khoá: skill <code>do-y-dinh</code>.</p>
+          <p className="mt-3 text-sm">Câu gõ tay: <b>{so(ph.du.yDinh.goTay)}</b> · không nhận ra: <b>{so(ph.du.yDinh.khongNhanRa)}</b>
+            {ph.du.yDinh.goTay > 0 && ` (${Math.round((100 * ph.du.yDinh.khongNhanRa) / ph.du.yDinh.goTay)}%, mục tiêu < 25%)`}</p>
+          <div className="mt-3 grid gap-4 sm:grid-cols-2">
+            <div><p className="text-sm text-fg-muted">Ý định hay chọn</p>
+              <ul className="mt-1 space-y-0.5 text-sm">{ph.du.yDinh.top.map((x) => <li key={x.ma}><code>{x.ma}</code> — {so(x.n)}</li>)}</ul></div>
+            <div><p className="text-sm text-fg-muted">Nhóm việc chưa hỗ trợ (từ câu không nhận ra)</p>
+              <ul className="mt-1 space-y-0.5 text-sm">{ph.du.yDinh.nhomMoi.map((x) => <li key={x.ma}><code>{x.ma}</code> — {so(x.n)}</li>)}</ul></div>
+          </div>
+        </Card>
+      )}
+
       <Card>
         <h2 className="text-lg">Phễu sản phẩm (PostHog, 28 ngày)</h2>
         {ph.ok ? (

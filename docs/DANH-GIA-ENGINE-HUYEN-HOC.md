@@ -41,8 +41,9 @@ gì để "clone, học hỏi, sao chép" bổ sung cho engine hieuban.com.
 1. **Giờ hoàng đạo + trực ngày trên thẻ Hôm nay** — có, cộng tuổi xung/hợp và đánh giá việc theo ý định trong ngày.
 2. **Quẻ Kinh Dịch của ngày** — quẻ Mai Hoa đầu ngày (năm + tháng + ngày âm, giờ Tý). **Nhịp theo ngày**: thay Tử vi
    lưu nhật (chưa chốt phái) bằng **Bát tự lưu nhật** — thập thần của can ngày với nhật chủ, chỉ cần ngày sinh.
-3. **43 trang số kép Chaldea** `/kien-thuc/so-kep/so-kep-{10…52}` (hỏi đáp theo phái Chaldea: PR sau).
-4. **Đo ý định hôm nay**: PR sau (đếm mã ý định + câu không nhận ra, không lưu câu).
+3. **43 trang số kép Chaldea** `/kien-thuc/so-kep/so-kep-{10…52}` + **hỏi đáp theo phái Chaldea** (`phai` ở `/v1/thanso/hoi`).
+4. **Đo ý định hôm nay**: mã ý định + mã nhóm việc chưa hỗ trợ trong câu không nhận ra (không lưu câu), khung ở
+   `/quan-tri/tang-truong`, skill `do-y-dinh` để bổ sung từ khoá theo số thật.
 5. **Xem ngày tốt** `/xem-ngay-tot` + trang từng ngày + lịch tháng + khối nổi bật thứ hai ở trang chủ.
 
 ## 5. Tâm lý người dùng — cách trang giữ chân mà không doạ

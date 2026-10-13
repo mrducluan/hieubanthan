@@ -186,3 +186,14 @@ test("TS-PHAI: đổi sang phái Chaldea → 6 con số engine tính, có số k
   await page.getByTestId("truong-phai-than-so").getByRole("tab", { name: "Pitago" }).click();
   await expect(page.getByTestId("the-duong_doi")).toBeVisible();
 });
+
+test("TS-PHAI-2: phái Chaldea → hỏi đáp bản thân trả lời bằng số Chaldea; câu năm cá nhân ghi rõ theo Pythagoras", async ({ page }) => {
+  await napHoSo(page, LUAN);
+  await page.goto("/than-so");
+  await page.getByTestId("truong-phai-than-so").getByRole("tab", { name: "Chaldea" }).click();
+  await page.getByRole("button", { name: "Điểm mạnh cốt lõi của tôi là gì?" }).click();
+  const ans = page.getByTestId("cau-tra-loi").last();
+  await expect(ans).toContainText("theo phái Chaldea");
+  const nam = await hoi(page, "Năm nay của tôi thế nào?");
+  await expect(nam).toContainText("theo phái Pythagoras");
+});
