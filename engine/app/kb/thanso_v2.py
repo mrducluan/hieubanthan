@@ -22,6 +22,8 @@ FILES = {
     "xu_ly": "thanso_xu_ly.json",
     "chan_dung": "thanso_chan_dung.json",
     "quan_he": "thanso_quan_he.json",
+    "chaldean": "thanso_chaldean.json",
+    "hom_nay": "thanso_hom_nay.json",
 }
 
 
@@ -118,3 +120,42 @@ def nguoi_trong_vai(so: int, ma_qh: str) -> dict | None:
 
 def meta_quan_he() -> dict:
     return _meta("quan_he")
+
+
+# ------------------------------------------------------------------ phái Chaldea (TS-PHAI)
+def chaldea_gioi_thieu() -> dict:
+    d = _doc("chaldean")
+    return {**d["gioi_thieu"], "bang_chu": d["bang_chu"]}
+
+
+def chaldea_goc(so: int) -> dict | None:
+    return _doc("chaldean")["goc"].get(str(so))
+
+
+def chaldea_kep(so: int | None) -> dict | None:
+    return _doc("chaldean")["kep"].get(str(so)) if so is not None else None
+
+
+def meta_chaldea() -> dict:
+    return _meta("chaldean")
+
+
+# ------------------------------------------------------------------ Hôm nay: ý định trong ngày (HN-2)
+def y_dinh_hom_nay() -> dict[str, dict]:
+    return _doc("hom_nay")["y_dinh"]
+
+
+def y_dinh_theo_ngay(so: int, ma: str) -> dict | None:
+    return _doc("hom_nay")["noi_dung"].get(str(so), {}).get(ma)
+
+
+def ngay_pho_quat(so: int) -> str | None:
+    return _doc("hom_nay")["ngay_pho_quat"].get(str(so))
+
+
+def cau_hoi_noi_bat(so: int) -> list[str]:
+    return list(_doc("hom_nay")["cau_hoi_noi_bat"].get(str(so), []))
+
+
+def meta_hom_nay() -> dict:
+    return _meta("hom_nay")
