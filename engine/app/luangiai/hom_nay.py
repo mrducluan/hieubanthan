@@ -13,12 +13,15 @@ Kèm ngày phổ quát, 3 câu hỏi nổi bật xoay theo ngày, và số ngày
 from __future__ import annotations
 
 import datetime as dt
+import json
+from functools import lru_cache
+from pathlib import Path
 
-from app.calc import lunar, thanso, thanso_mo_rong as mr
+from app.calc import kinhdich, kinhdich_maihoa as mh, lunar, thanso, thanso_mo_rong as mr
 from app.config import CALENDAR_MERIDIAN_TZ
 from app.hoidap import chung
 from app.kb import store, thanso_v2
-from app.luangiai import thanso_chaldean
+from app.luangiai import hoang_lich as hl_luan, thanso_chaldean
 
 TOI_DA_Y_DINH = 3
 # Từ khoá (đã bỏ dấu, khớp nguyên từ) → ý định. Thứ tự khoá = thứ tự ưu tiên khi đồng điểm.
@@ -71,6 +74,46 @@ def _y_dinh(so_ngay: int, cac_ma: list[str]) -> list[dict]:
         if len(kq) == TOI_DA_Y_DINH:
             break
     return kq
+
+
+# HL-2: ý định trong ngày ↔ việc trong sách lịch (chỉ những cặp khớp nghĩa rõ).
+Y_DINH_VIEC = {"bat_dau": "khai_truong", "di_chuyen": "xuat_hanh"}
+
+
+def _hoang_lich(ngay_xem: dt.date, ngay: int, thang: int, nam: int, cac_y_dinh: list[str]) -> dict:
+    h = hl_luan.ngay_xem(ngay_xem, nam, thang, ngay)
+    viec = []
+    for ma in dict.fromkeys(Y_DINH_VIEC[x] for x in cac_y_dinh if x in Y_DINH_VIEC):
+        v = hl_luan.ngay_xem(ngay_xem, nam, thang, ngay, viec=ma)["viec"]
+        viec.append({k: v[k] for k in ("ma_viec", "ten", "danh_gia", "ly_do", "ngay_tot_gan")})
+    return {
+        "truc": h["truc"]["ten"], "truc_y": h["truc"]["y"], "than": h["than"]["ten"], "hoang_dao": h["hoang_dao"],
+        "gio_hoang_dao": [{"chi": g["chi"], "khung": g["khung"], "than": g["than"]} for g in h["gio_hoang_dao"]],
+        "xung_tuoi": h["xung_tuoi"]["ten"],
+        "tuoi": {"can_chi": h["tuoi"]["can_chi"], "quan_he": h["tuoi"]["quan_he"]} if h["tuoi"] else None,
+        "nghi": [x["ten"] for x in h["nghi"][:6]], "ky": [x["ten"] for x in h["ky"][:4]],
+        "ky_dan_gian": [x["ten"] for x in h["ky_dan_gian"]],
+        "ngay_tot_gan": h["ngay_tot_gan"], "viec": viec,
+    }
+
+
+def _que_ngay(ngay_xem: dt.date) -> dict:
+    """Quẻ Mai Hoa đầu ngày: khởi theo năm–tháng–ngày âm (lịch Việt) và giờ Tý — mọi người cùng một quẻ trong ngày."""
+    ad, am, ay, _ = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)
+    m = mh.khoi_que_thoi_gian(lunar.can_chi_nam(ay)[1], am, ad, "Tý")
+    q = kinhdich.khoi_que(m["gia_tri_hao"])
+    so = q["quai_ban"]["so_king_wen"]
+    kv = _kb_que().get(str(so), {})
+    bien = q["quai_bien"]
+    return {"so": so, "ten": q["quai_ban"]["ten"], "thuong": m["thuong"], "ha": m["ha"], "hao_dong": m["hao_dong"],
+            "bien": ({"so": bien["so_king_wen"], "ten": bien["ten"]} if bien else None),
+            "y_chinh": kv.get("y_chinh"), "loi_khuyen": kv.get("loi_khuyen"), "cau_tu_soi": kv.get("cau_tu_soi"),
+            "cach_khoi": "Mai Hoa Dịch Số: năm + tháng + ngày âm lịch → quẻ trên; cộng giờ Tý → quẻ dưới và hào động."}
+
+
+@lru_cache(maxsize=1)
+def _kb_que() -> dict:
+    return json.loads((Path(__file__).parents[1] / "kb" / "data" / "kinhdich_kb.json").read_text(encoding="utf-8"))["que"]
 
 
 def _cau_hoi_noi_bat(so_ngay: int, ngay_xem: dt.date) -> list[str]:
@@ -126,6 +169,8 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
         "cau_hoi_noi_bat": _cau_hoi_noi_bat(so_ngay, ngay_xem),
         "ngay_pho_quat": {"so": so_pq, "nghia": thanso_v2.ngay_pho_quat(so_pq)},
         "chaldea": thanso_chaldean.ngay_chaldea(ngay, d),
+        "hoang_lich": _hoang_lich(ngay_xem, ngay, thang, nam, [x["ma"] for x in cac_y_dinh] or list(y_dinh or [])),
+        "que_ngay": _que_ngay(ngay_xem),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],
         "luu_y": "Nhịp theo thần số học để tự soi — gợi chủ đề, không dự báo việc sẽ xảy ra.",

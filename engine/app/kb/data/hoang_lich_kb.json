@@ -1,0 +1,1540 @@
+{
+ "_nguon": "Hoàng lịch: tên Hán Việt + nghĩa đời thường cho bảng nghi/kỵ (Hiệp kỷ biện phương thư), thần sát, trực, hoàng/hắc đạo, nhị thập bát tú, Bành Tổ bách kỵ, giờ xuất hành Lý Thuần Phong, ngày kỵ dân gian Việt. Phép tính ở engine/app/calc/hoang_lich.py.",
+ "source": {
+  "id": "hiep_ky_bien_phuong_thu",
+  "ten": "Hiệp kỷ biện phương thư (khâm định, đời Thanh) · lịch vạn niên dân gian Việt"
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "hoang_lich_vn",
+ "trang_thai": "nhap_ai",
+ "nghi_ky": {
+  "祭祀": {
+   "ten": "Cúng tế",
+   "nghia": "cúng gia tiên, lễ chùa, đền"
+  },
+  "祈福": {
+   "ten": "Cầu phúc",
+   "nghia": "lễ cầu bình an, may mắn"
+  },
+  "求嗣": {
+   "ten": "Cầu con",
+   "nghia": "lễ cầu tự, mong có con"
+  },
+  "开光": {
+   "ten": "Khai quang",
+   "nghia": "làm lễ khai quang tượng, vật thờ"
+  },
+  "塑绘": {
+   "ten": "Tạc, vẽ tượng",
+   "nghia": "đắp tượng, vẽ tranh thờ"
+  },
+  "齐醮": {
+   "ten": "Lập đàn chay",
+   "nghia": "lập đàn cúng chay, cầu siêu"
+  },
+  "斋醮": {
+   "ten": "Lập đàn chay",
+   "nghia": "lập đàn cúng chay, cầu siêu"
+  },
+  "沐浴": {
+   "ten": "Tắm gội, tẩy uế",
+   "nghia": "tắm rửa sạch sẽ trước lễ"
+  },
+  "酬神": {
+   "ten": "Tạ lễ",
+   "nghia": "lễ tạ thần linh sau khi được việc"
+  },
+  "造庙": {
+   "ten": "Dựng đền miếu",
+   "nghia": "xây, sửa đền chùa, miếu"
+  },
+  "祀灶": {
+   "ten": "Cúng ông Táo",
+   "nghia": "cúng thần bếp"
+  },
+  "焚香": {
+   "ten": "Thắp hương",
+   "nghia": "dâng hương"
+  },
+  "谢土": {
+   "ten": "Tạ thổ",
+   "nghia": "lễ tạ đất sau khi xây sửa"
+  },
+  "出火": {
+   "ten": "Dời bếp, bàn thờ",
+   "nghia": "chuyển bếp hoặc bàn thờ sang chỗ tạm"
+  },
+  "雕刻": {
+   "ten": "Chạm khắc",
+   "nghia": "chạm trổ, điêu khắc"
+  },
+  "嫁娶": {
+   "ten": "Cưới hỏi",
+   "nghia": "cưới gả, rước dâu"
+  },
+  "订婚": {
+   "ten": "Đính hôn",
+   "nghia": "lễ ăn hỏi"
+  },
+  "纳采": {
+   "ten": "Nạp thái",
+   "nghia": "nhà trai mang lễ dạm ngõ"
+  },
+  "问名": {
+   "ten": "Vấn danh",
+   "nghia": "hỏi tên tuổi, xem tuổi đôi bên"
+  },
+  "纳婿": {
+   "ten": "Kén rể",
+   "nghia": "đón rể về nhà"
+  },
+  "归宁": {
+   "ten": "Lại mặt",
+   "nghia": "cô dâu về thăm nhà mẹ đẻ"
+  },
+  "安床": {
+   "ten": "Kê giường",
+   "nghia": "đặt giường mới, kê giường cưới"
+  },
+  "合帐": {
+   "ten": "Treo màn cưới",
+   "nghia": "may, treo màn phòng cưới"
+  },
+  "冠笄": {
+   "ten": "Lễ trưởng thành",
+   "nghia": "lễ đội mũ, cài trâm khi đến tuổi"
+  },
+  "订盟": {
+   "ten": "Kết ước",
+   "nghia": "đính ước, giao kết"
+  },
+  "进人口": {
+   "ten": "Nhận người",
+   "nghia": "nhận người làm, nhận con nuôi"
+  },
+  "裁衣": {
+   "ten": "Cắt may áo",
+   "nghia": "may đồ mới"
+  },
+  "挽面": {
+   "ten": "Se mặt",
+   "nghia": "làm đẹp, se lông mặt"
+  },
+  "开容": {
+   "ten": "Sửa dung nhan",
+   "nghia": "chỉnh trang dung mạo"
+  },
+  "修坟": {
+   "ten": "Sửa mộ",
+   "nghia": "tu sửa phần mộ"
+  },
+  "启钻": {
+   "ten": "Cải táng",
+   "nghia": "bốc mộ, sang cát"
+  },
+  "破土": {
+   "ten": "Động thổ (mộ)",
+   "nghia": "đào đất làm mộ"
+  },
+  "安葬": {
+   "ten": "An táng",
+   "nghia": "chôn cất"
+  },
+  "立碑": {
+   "ten": "Dựng bia",
+   "nghia": "dựng bia mộ"
+  },
+  "成服": {
+   "ten": "Mặc đồ tang",
+   "nghia": "phát tang"
+  },
+  "除服": {
+   "ten": "Bỏ đồ tang",
+   "nghia": "mãn tang, xả tang"
+  },
+  "开生坟": {
+   "ten": "Làm sinh phần",
+   "nghia": "xây mộ sẵn khi còn sống"
+  },
+  "合寿木": {
+   "ten": "Đóng thọ mộc",
+   "nghia": "đóng quan tài sẵn"
+  },
+  "入殓": {
+   "ten": "Nhập quan",
+   "nghia": "khâm liệm"
+  },
+  "移柩": {
+   "ten": "Di quan",
+   "nghia": "đưa linh cữu"
+  },
+  "普渡": {
+   "ten": "Cúng thí thực",
+   "nghia": "cúng cô hồn, phổ độ"
+  },
+  "入宅": {
+   "ten": "Nhập trạch",
+   "nghia": "về nhà mới"
+  },
+  "安香": {
+   "ten": "An vị bàn thờ",
+   "nghia": "đặt bát hương, bàn thờ"
+  },
+  "安门": {
+   "ten": "Lắp cửa",
+   "nghia": "đặt, lắp cửa chính"
+  },
+  "修造": {
+   "ten": "Sửa chữa nhà",
+   "nghia": "tu sửa, xây cất"
+  },
+  "起基": {
+   "ten": "Đổ móng",
+   "nghia": "đào móng, làm nền"
+  },
+  "动土": {
+   "ten": "Động thổ",
+   "nghia": "khởi công đào đất làm nhà"
+  },
+  "上梁": {
+   "ten": "Cất nóc",
+   "nghia": "gác đòn dông, đổ mái"
+  },
+  "竖柱": {
+   "ten": "Dựng cột",
+   "nghia": "dựng cột nhà"
+  },
+  "开井开池": {
+   "ten": "Đào giếng, ao",
+   "nghia": "khơi giếng, đào ao"
+  },
+  "作陂放水": {
+   "ten": "Đắp bờ tháo nước",
+   "nghia": "làm bờ, tháo nước ruộng"
+  },
+  "拆卸": {
+   "ten": "Tháo dỡ",
+   "nghia": "phá dỡ công trình cũ"
+  },
+  "破屋": {
+   "ten": "Phá nhà",
+   "nghia": "dỡ nhà cũ"
+  },
+  "坏垣": {
+   "ten": "Phá tường",
+   "nghia": "đập tường"
+  },
+  "补垣": {
+   "ten": "Sửa tường",
+   "nghia": "vá, xây lại tường"
+  },
+  "伐木做梁": {
+   "ten": "Chặt cây làm xà",
+   "nghia": "đẵn gỗ làm rường nhà"
+  },
+  "作灶": {
+   "ten": "Làm bếp",
+   "nghia": "xây, đặt bếp mới"
+  },
+  "解除": {
+   "ten": "Giải trừ",
+   "nghia": "dọn dẹp, tẩy uế, làm sạch nhà"
+  },
+  "开柱眼": {
+   "ten": "Đục lỗ cột",
+   "nghia": "đục mộng cột"
+  },
+  "穿屏扇架": {
+   "ten": "Lắp vách, khung",
+   "nghia": "dựng vách ngăn, khung cửa"
+  },
+  "盖屋合脊": {
+   "ten": "Lợp mái",
+   "nghia": "lợp nhà, gắn nóc"
+  },
+  "开厕": {
+   "ten": "Làm nhà vệ sinh",
+   "nghia": "đào, xây nhà vệ sinh"
+  },
+  "造仓": {
+   "ten": "Làm kho",
+   "nghia": "xây kho chứa"
+  },
+  "塞穴": {
+   "ten": "Lấp hang",
+   "nghia": "bịt lỗ, lấp hang chuột kiến"
+  },
+  "平治道涂": {
+   "ten": "Sửa đường",
+   "nghia": "san lấp, làm đường"
+  },
+  "造桥": {
+   "ten": "Bắc cầu",
+   "nghia": "xây cầu"
+  },
+  "作厕": {
+   "ten": "Làm nhà vệ sinh",
+   "nghia": "xây nhà vệ sinh"
+  },
+  "筑堤": {
+   "ten": "Đắp đê",
+   "nghia": "đắp bờ, đê"
+  },
+  "开池": {
+   "ten": "Đào ao",
+   "nghia": "đào ao, hồ"
+  },
+  "伐木": {
+   "ten": "Chặt cây",
+   "nghia": "đốn cây"
+  },
+  "开渠": {
+   "ten": "Đào mương",
+   "nghia": "khơi mương, rãnh"
+  },
+  "掘井": {
+   "ten": "Đào giếng",
+   "nghia": "khoan, đào giếng"
+  },
+  "扫舍": {
+   "ten": "Quét dọn nhà",
+   "nghia": "tổng vệ sinh nhà cửa"
+  },
+  "放水": {
+   "ten": "Tháo nước",
+   "nghia": "xả nước ao ruộng"
+  },
+  "造屋": {
+   "ten": "Làm nhà",
+   "nghia": "xây nhà"
+  },
+  "合脊": {
+   "ten": "Gắn nóc",
+   "nghia": "hoàn thiện nóc nhà"
+  },
+  "造畜稠": {
+   "ten": "Làm chuồng",
+   "nghia": "làm chuồng trại vật nuôi"
+  },
+  "修门": {
+   "ten": "Sửa cửa",
+   "nghia": "sửa cổng, cửa"
+  },
+  "定磉": {
+   "ten": "Đặt chân cột",
+   "nghia": "đặt đá kê chân cột"
+  },
+  "作梁": {
+   "ten": "Làm xà",
+   "nghia": "làm rường, xà nhà"
+  },
+  "修饰垣墙": {
+   "ten": "Trang trí tường",
+   "nghia": "sơn sửa tường rào"
+  },
+  "架马": {
+   "ten": "Dựng giàn",
+   "nghia": "dựng giàn giáo"
+  },
+  "开市": {
+   "ten": "Khai trương",
+   "nghia": "mở cửa hàng, bắt đầu buôn bán"
+  },
+  "挂匾": {
+   "ten": "Treo biển",
+   "nghia": "treo biển hiệu"
+  },
+  "纳财": {
+   "ten": "Nạp tài",
+   "nghia": "thu tiền, nhập hàng, đòi nợ"
+  },
+  "求财": {
+   "ten": "Cầu tài",
+   "nghia": "lo việc tiền bạc, làm ăn"
+  },
+  "开仓": {
+   "ten": "Mở kho",
+   "nghia": "xuất kho, mở kho hàng"
+  },
+  "买车": {
+   "ten": "Mua xe",
+   "nghia": "mua xe, phương tiện"
+  },
+  "置产": {
+   "ten": "Mua tài sản",
+   "nghia": "mua nhà đất, sắm tài sản lớn"
+  },
+  "雇佣": {
+   "ten": "Thuê người",
+   "nghia": "tuyển, thuê người làm"
+  },
+  "出货财": {
+   "ten": "Xuất hàng",
+   "nghia": "giao hàng, xuất tiền"
+  },
+  "安机械": {
+   "ten": "Lắp máy móc",
+   "nghia": "đặt máy, khởi động thiết bị"
+  },
+  "造车器": {
+   "ten": "Đóng xe, dụng cụ",
+   "nghia": "làm xe, nông cụ"
+  },
+  "经络": {
+   "ten": "Kéo sợi, dệt",
+   "nghia": "se tơ, dệt vải"
+  },
+  "酝酿": {
+   "ten": "Ủ rượu, làm tương",
+   "nghia": "ủ men, lên men"
+  },
+  "作染": {
+   "ten": "Nhuộm",
+   "nghia": "nhuộm vải"
+  },
+  "鼓铸": {
+   "ten": "Đúc kim loại",
+   "nghia": "rèn, đúc"
+  },
+  "造船": {
+   "ten": "Đóng thuyền",
+   "nghia": "đóng tàu thuyền"
+  },
+  "割蜜": {
+   "ten": "Lấy mật",
+   "nghia": "thu mật ong"
+  },
+  "栽种": {
+   "ten": "Trồng trọt",
+   "nghia": "gieo trồng, trồng cây"
+  },
+  "取渔": {
+   "ten": "Đánh cá",
+   "nghia": "bắt cá"
+  },
+  "结网": {
+   "ten": "Đan lưới",
+   "nghia": "đan lưới, làm chài"
+  },
+  "牧养": {
+   "ten": "Chăn nuôi",
+   "nghia": "chăn thả gia súc"
+  },
+  "安碓磑": {
+   "ten": "Đặt cối",
+   "nghia": "đặt cối xay, cối giã"
+  },
+  "习艺": {
+   "ten": "Học nghề",
+   "nghia": "học kỹ năng, tay nghề"
+  },
+  "入学": {
+   "ten": "Nhập học",
+   "nghia": "đi học, bắt đầu khoá học"
+  },
+  "理发": {
+   "ten": "Cắt tóc",
+   "nghia": "cắt, làm tóc"
+  },
+  "探病": {
+   "ten": "Thăm người ốm",
+   "nghia": "đi thăm bệnh"
+  },
+  "见贵": {
+   "ten": "Gặp người quan trọng",
+   "nghia": "gặp cấp trên, quý nhân"
+  },
+  "乘船": {
+   "ten": "Đi thuyền",
+   "nghia": "đi tàu thuyền"
+  },
+  "渡水": {
+   "ten": "Qua sông nước",
+   "nghia": "vượt sông, đi đường thuỷ"
+  },
+  "针灸": {
+   "ten": "Châm cứu",
+   "nghia": "châm cứu, bấm huyệt"
+  },
+  "出行": {
+   "ten": "Xuất hành",
+   "nghia": "đi xa, lên đường"
+  },
+  "移徙": {
+   "ten": "Chuyển nhà",
+   "nghia": "dọn nhà, chuyển chỗ ở"
+  },
+  "分居": {
+   "ten": "Ra ở riêng",
+   "nghia": "tách hộ, ra ở riêng"
+  },
+  "剃头": {
+   "ten": "Cạo đầu",
+   "nghia": "cạo tóc"
+  },
+  "整手足甲": {
+   "ten": "Cắt móng",
+   "nghia": "cắt móng tay chân"
+  },
+  "纳畜": {
+   "ten": "Mua vật nuôi",
+   "nghia": "nhập gia súc, thú nuôi"
+  },
+  "捕捉": {
+   "ten": "Lùng bắt",
+   "nghia": "bắt kẻ gian, bắt thú"
+  },
+  "畋猎": {
+   "ten": "Săn bắn",
+   "nghia": "đi săn"
+  },
+  "教牛马": {
+   "ten": "Luyện vật nuôi",
+   "nghia": "dạy trâu bò, ngựa"
+  },
+  "会亲友": {
+   "ten": "Gặp họ hàng bạn bè",
+   "nghia": "thăm hỏi, tụ họp"
+  },
+  "赴任": {
+   "ten": "Nhậm chức",
+   "nghia": "nhận việc, đi làm chỗ mới"
+  },
+  "求医": {
+   "ten": "Đi khám bệnh",
+   "nghia": "tìm thầy thuốc"
+  },
+  "治病": {
+   "ten": "Chữa bệnh",
+   "nghia": "điều trị"
+  },
+  "词讼": {
+   "ten": "Kiện tụng",
+   "nghia": "khởi kiện, tranh chấp"
+  },
+  "起基动土": {
+   "ten": "Đổ móng, động thổ",
+   "nghia": "khởi công nền móng"
+  },
+  "破屋坏垣": {
+   "ten": "Phá dỡ nhà tường",
+   "nghia": "tháo dỡ nhà, tường"
+  },
+  "盖屋": {
+   "ten": "Lợp nhà",
+   "nghia": "lợp mái"
+  },
+  "造仓库": {
+   "ten": "Làm kho",
+   "nghia": "xây kho"
+  },
+  "立券交易": {
+   "ten": "Ký kết, giao dịch",
+   "nghia": "lập hợp đồng, mua bán"
+  },
+  "交易": {
+   "ten": "Giao dịch",
+   "nghia": "mua bán, trao đổi"
+  },
+  "立券": {
+   "ten": "Ký kết",
+   "nghia": "làm giấy tờ, hợp đồng"
+  },
+  "安机": {
+   "ten": "Lắp máy",
+   "nghia": "đặt máy móc"
+  },
+  "会友": {
+   "ten": "Gặp bạn",
+   "nghia": "gặp gỡ bạn bè"
+  },
+  "求医疗病": {
+   "ten": "Khám chữa bệnh",
+   "nghia": "đi khám, điều trị"
+  },
+  "诸事不宜": {
+   "ten": "Mọi việc nên hoãn",
+   "nghia": "sách khuyên không khởi sự việc lớn"
+  },
+  "馀事勿取": {
+   "ten": "Ngoài việc nêu thì nên hoãn",
+   "nghia": "chỉ nên làm các việc ghi ở mục Nên"
+  },
+  "行丧": {
+   "ten": "Làm tang lễ",
+   "nghia": "lo việc tang"
+  },
+  "断蚁": {
+   "ten": "Diệt mối kiến",
+   "nghia": "trừ mối mọt"
+  },
+  "归岫": {
+   "ten": "Về nơi cũ",
+   "nghia": "trở về chốn cũ"
+  },
+  "无": {
+   "ten": "—",
+   "nghia": ""
+  }
+ },
+ "than_sat": {
+  "天恩": {
+   "ten": "Thiên Ân",
+   "nghia": "ân trạch, hợp việc ân nghĩa, cầu phúc"
+  },
+  "鸣吠": {
+   "ten": "Minh Phệ"
+  },
+  "母仓": {
+   "ten": "Mẫu Thương",
+   "nghia": "kho mẹ, hợp trồng trọt, chăn nuôi"
+  },
+  "不将": {
+   "ten": "Bất Tương"
+  },
+  "四相": {
+   "ten": "Tứ Tướng"
+  },
+  "鸣吠对": {
+   "ten": "Minh Phệ Đối"
+  },
+  "五合": {
+   "ten": "Ngũ Hợp"
+  },
+  "三合": {
+   "ten": "Tam Hợp",
+   "nghia": "hợp lực, hợp hợp tác"
+  },
+  "除神": {
+   "ten": "Trừ Thần"
+  },
+  "月德": {
+   "ten": "Nguyệt Đức",
+   "nghia": "sao phúc trong tháng, hợp việc thiện"
+  },
+  "月空": {
+   "ten": "Nguyệt Không"
+  },
+  "月德合": {
+   "ten": "Nguyệt Đức Hợp"
+  },
+  "月恩": {
+   "ten": "Nguyệt Ân",
+   "nghia": "ơn tháng, hợp việc tốt lành"
+  },
+  "时阴": {
+   "ten": "Thời Âm"
+  },
+  "五富": {
+   "ten": "Ngũ Phú"
+  },
+  "生气": {
+   "ten": "Sinh Khí",
+   "nghia": "khí sinh sôi, hợp khởi đầu"
+  },
+  "金匮": {
+   "ten": "Kim Quỹ"
+  },
+  "相日": {
+   "ten": "Tướng Nhật"
+  },
+  "阴德": {
+   "ten": "Âm Đức"
+  },
+  "六合": {
+   "ten": "Lục Hợp",
+   "nghia": "hoà hợp, hợp kết giao"
+  },
+  "益后": {
+   "ten": "Ích Hậu"
+  },
+  "青龙": {
+   "ten": "Thanh Long"
+  },
+  "续世": {
+   "ten": "Tục Thế"
+  },
+  "明堂": {
+   "ten": "Minh Đường"
+  },
+  "王日": {
+   "ten": "Vương Nhật"
+  },
+  "要安": {
+   "ten": "Yếu An"
+  },
+  "官日": {
+   "ten": "Quan Nhật"
+  },
+  "吉期": {
+   "ten": "Cát Kỳ"
+  },
+  "福德": {
+   "ten": "Phúc Đức"
+  },
+  "六仪": {
+   "ten": "Lục Nghi"
+  },
+  "金堂": {
+   "ten": "Kim Đường"
+  },
+  "宝光": {
+   "ten": "Bảo Quang"
+  },
+  "民日": {
+   "ten": "Dân Nhật"
+  },
+  "临日": {
+   "ten": "Lâm Nhật"
+  },
+  "天马": {
+   "ten": "Thiên Mã",
+   "nghia": "đi xa, hợp xuất hành"
+  },
+  "敬安": {
+   "ten": "Kính An"
+  },
+  "普护": {
+   "ten": "Phổ Hộ"
+  },
+  "驿马": {
+   "ten": "Dịch Mã",
+   "nghia": "đi lại, hợp xuất hành, đổi chỗ"
+  },
+  "天后": {
+   "ten": "Thiên Hậu"
+  },
+  "阳德": {
+   "ten": "Dương Đức"
+  },
+  "天喜": {
+   "ten": "Thiên Hỷ",
+   "nghia": "vui mừng, hợp cưới hỏi, gặp gỡ"
+  },
+  "天医": {
+   "ten": "Thiên Y",
+   "nghia": "thầy thuốc trời, hợp khám chữa bệnh"
+  },
+  "司命": {
+   "ten": "Tư Mệnh"
+  },
+  "圣心": {
+   "ten": "Thánh Tâm"
+  },
+  "玉宇": {
+   "ten": "Ngọc Vũ"
+  },
+  "守日": {
+   "ten": "Thủ Nhật"
+  },
+  "时德": {
+   "ten": "Thời Đức"
+  },
+  "解神": {
+   "ten": "Giải Thần"
+  },
+  "时阳": {
+   "ten": "Thời Dương"
+  },
+  "天仓": {
+   "ten": "Thiên Thương"
+  },
+  "天巫": {
+   "ten": "Thiên Vu"
+  },
+  "玉堂": {
+   "ten": "Ngọc Đường"
+  },
+  "福生": {
+   "ten": "Phúc Sinh"
+  },
+  "天德": {
+   "ten": "Thiên Đức",
+   "nghia": "sao phúc lớn, sách lịch coi là ngày được che chở"
+  },
+  "天德合": {
+   "ten": "Thiên Đức Hợp"
+  },
+  "天愿": {
+   "ten": "Thiên Nguyện"
+  },
+  "天赦": {
+   "ten": "Thiên Xá",
+   "nghia": "ngày xá tội, sách lịch xếp vào ngày tốt bậc nhất"
+  },
+  "天符": {
+   "ten": "Thiên Phù"
+  },
+  "阴神": {
+   "ten": "Âm Thần"
+  },
+  "解除": {
+   "ten": "Giải Trừ"
+  },
+  "五虚": {
+   "ten": "Ngũ Hư"
+  },
+  "五离": {
+   "ten": "Ngũ Ly"
+  },
+  "重日": {
+   "ten": "Trùng Nhật"
+  },
+  "复日": {
+   "ten": "Phục Nhật"
+  },
+  "血支": {
+   "ten": "Huyết Chi"
+  },
+  "天贼": {
+   "ten": "Thiên Tặc"
+  },
+  "土符": {
+   "ten": "Thổ Phù"
+  },
+  "游祸": {
+   "ten": "Du Hoạ"
+  },
+  "白虎": {
+   "ten": "Bạch Hổ",
+   "nghia": "hắc đạo, việc lớn nên cân nhắc"
+  },
+  "小耗": {
+   "ten": "Tiểu Hao",
+   "nghia": "hao nhỏ, cẩn thận chi tiêu"
+  },
+  "致死": {
+   "ten": "Trí Tử"
+  },
+  "河魁": {
+   "ten": "Hà Khôi"
+  },
+  "劫煞": {
+   "ten": "Kiếp Sát",
+   "nghia": "nên giữ gìn đồ đạc, đi đường cẩn thận"
+  },
+  "月煞": {
+   "ten": "Nguyệt Sát",
+   "nghia": "sách lịch khuyên hoãn việc lớn"
+  },
+  "月建": {
+   "ten": "Nguyệt Kiến"
+  },
+  "往亡": {
+   "ten": "Vãng Vong",
+   "nghia": "sách lịch khuyên hoãn đi xa, nhậm chức"
+  },
+  "大时": {
+   "ten": "Đại Thời"
+  },
+  "大败": {
+   "ten": "Đại Bại"
+  },
+  "咸池": {
+   "ten": "Hàm Trì"
+  },
+  "厌对": {
+   "ten": "Yếm Đối"
+  },
+  "招摇": {
+   "ten": "Chiêu Dao"
+  },
+  "九坎": {
+   "ten": "Cửu Khảm"
+  },
+  "九焦": {
+   "ten": "Cửu Tiêu"
+  },
+  "天罡": {
+   "ten": "Thiên Cương"
+  },
+  "死神": {
+   "ten": "Tử Thần"
+  },
+  "月害": {
+   "ten": "Nguyệt Hại"
+  },
+  "死气": {
+   "ten": "Tử Khí"
+  },
+  "月破": {
+   "ten": "Nguyệt Phá",
+   "nghia": "ngày phá của tháng, sách lịch khuyên hoãn việc lớn"
+  },
+  "大耗": {
+   "ten": "Đại Hao",
+   "nghia": "hao tổn, nên giữ tiền bạc"
+  },
+  "天牢": {
+   "ten": "Thiên Lao",
+   "nghia": "việc dễ trì trệ"
+  },
+  "元武": {
+   "ten": "Nguyên Vũ",
+   "nghia": "cẩn thận mất mát"
+  },
+  "月厌": {
+   "ten": "Nguyệt Yếm"
+  },
+  "月虚": {
+   "ten": "Nguyệt Hư"
+  },
+  "归忌": {
+   "ten": "Quy Kỵ",
+   "nghia": "sách lịch khuyên hoãn về nhà mới, đi xa về"
+  },
+  "小时": {
+   "ten": "Tiểu Thời"
+  },
+  "天刑": {
+   "ten": "Thiên Hình",
+   "nghia": "dễ va chạm giấy tờ, cẩn thận"
+  },
+  "朱雀": {
+   "ten": "Chu Tước",
+   "nghia": "dễ khẩu thiệt, nói năng cẩn thận"
+  },
+  "九空": {
+   "ten": "Cửu Không"
+  },
+  "天吏": {
+   "ten": "Thiên Lại"
+  },
+  "地火": {
+   "ten": "Địa Hoả",
+   "nghia": "hoãn trồng trọt, động thổ"
+  },
+  "四击": {
+   "ten": "Tứ Kích"
+  },
+  "大煞": {
+   "ten": "Đại Sát"
+  },
+  "勾陈": {
+   "ten": "Câu Trận",
+   "nghia": "việc dễ vướng víu"
+  },
+  "八专": {
+   "ten": "Bát Chuyên"
+  },
+  "灾煞": {
+   "ten": "Tai Sát",
+   "nghia": "nên làm việc chắc chắn, tránh mạo hiểm"
+  },
+  "天火": {
+   "ten": "Thiên Hoả",
+   "nghia": "cẩn thận lửa, hoãn lợp nhà"
+  },
+  "血忌": {
+   "ten": "Huyết Kỵ",
+   "nghia": "hoãn châm chích, phẫu thuật không gấp"
+  },
+  "土府": {
+   "ten": "Thổ Phủ"
+  },
+  "月刑": {
+   "ten": "Nguyệt Hình"
+  },
+  "触水龙": {
+   "ten": "Xúc Thuỷ Long"
+  },
+  "地囊": {
+   "ten": "Địa Nang"
+  },
+  "八风": {
+   "ten": "Bát Phong"
+  },
+  "四废": {
+   "ten": "Tứ Phế",
+   "nghia": "sách lịch coi ngày yếu khí, nên làm việc nhỏ"
+  },
+  "四忌": {
+   "ten": "Tứ Kỵ"
+  },
+  "四穷": {
+   "ten": "Tứ Cùng"
+  },
+  "五墓": {
+   "ten": "Ngũ Mộ"
+  },
+  "阴错": {
+   "ten": "Âm Thác"
+  },
+  "四耗": {
+   "ten": "Tứ Hao"
+  },
+  "阳错": {
+   "ten": "Dương Thác"
+  },
+  "孤辰": {
+   "ten": "Cô Thần"
+  },
+  "小会": {
+   "ten": "Tiểu Hội"
+  },
+  "大会": {
+   "ten": "Đại Hội"
+  },
+  "八龙": {
+   "ten": "Bát Long"
+  },
+  "七鸟": {
+   "ten": "Thất Điểu"
+  },
+  "九虎": {
+   "ten": "Cửu Hổ"
+  },
+  "六蛇": {
+   "ten": "Lục Xà"
+  },
+  "天狗": {
+   "ten": "Thiên Cẩu"
+  },
+  "行狠": {
+   "ten": "Hành Ngận"
+  },
+  "了戾": {
+   "ten": "Liễu Lệ"
+  },
+  "岁薄": {
+   "ten": "Tuế Bạc"
+  },
+  "逐阵": {
+   "ten": "Trục Trận"
+  },
+  "三丧": {
+   "ten": "Tam Tang"
+  },
+  "三阴": {
+   "ten": "Tam Âm"
+  },
+  "阴道冲阳": {
+   "ten": "Âm Đạo Xung Dương"
+  },
+  "阴位": {
+   "ten": "Âm Vị"
+  },
+  "阴阳交破": {
+   "ten": "Âm Dương Giao Phá"
+  },
+  "阴阳俱错": {
+   "ten": "Âm Dương Câu Thác"
+  },
+  "阴阳击冲": {
+   "ten": "Âm Dương Kích Xung"
+  },
+  "鬼哭": {
+   "ten": "Quỷ Khốc"
+  },
+  "单阴": {
+   "ten": "Đơn Âm"
+  },
+  "绝阴": {
+   "ten": "Tuyệt Âm"
+  },
+  "纯阳": {
+   "ten": "Thuần Dương"
+  },
+  "阳错阴冲": {
+   "ten": "Dương Thác Âm Xung"
+  },
+  "七符": {
+   "ten": "Thất Phù"
+  },
+  "成日": {
+   "ten": "Thành Nhật"
+  },
+  "孤阳": {
+   "ten": "Cô Dương"
+  },
+  "绝阳": {
+   "ten": "Tuyệt Dương"
+  },
+  "纯阴": {
+   "ten": "Thuần Âm"
+  },
+  "大退": {
+   "ten": "Đại Thoái"
+  },
+  "四离": {
+   "ten": "Tứ Ly",
+   "nghia": "ngày trước phân/chí, sách lịch khuyên hoãn việc lớn"
+  },
+  "阳破阴冲": {
+   "ten": "Dương Phá Âm Xung"
+  }
+ },
+ "truc": {
+  "建": {
+   "ten": "Kiến",
+   "y": "khởi đầu, dựng lập",
+   "hop": "xuất hành, gặp người, bắt đầu việc mới",
+   "tranh": "động thổ, đào đất"
+  },
+  "除": {
+   "ten": "Trừ",
+   "y": "trừ bỏ cái cũ",
+   "hop": "dọn dẹp, chữa bệnh, giải trừ",
+   "tranh": "cưới hỏi, khai trương"
+  },
+  "满": {
+   "ten": "Mãn",
+   "y": "đầy đủ, viên mãn",
+   "hop": "cầu tài, cúng tế, mở kho",
+   "tranh": "kiện tụng, nhậm chức"
+  },
+  "平": {
+   "ten": "Bình",
+   "y": "bằng phẳng, êm",
+   "hop": "sửa đường, việc thường ngày",
+   "tranh": "đào đất, khởi việc lớn"
+  },
+  "定": {
+   "ten": "Định",
+   "y": "ổn định",
+   "hop": "ký kết, cưới hỏi, nhập trạch",
+   "tranh": "kiện tụng, xuất hành xa"
+  },
+  "执": {
+   "ten": "Chấp",
+   "y": "nắm giữ",
+   "hop": "xây sửa, trồng trọt, bắt đầu theo đuổi",
+   "tranh": "chuyển nhà, xuất hành"
+  },
+  "破": {
+   "ten": "Phá",
+   "y": "phá vỡ",
+   "hop": "phá dỡ, chữa bệnh",
+   "tranh": "hầu hết việc khởi sự"
+  },
+  "危": {
+   "ten": "Nguy",
+   "y": "chênh vênh",
+   "hop": "cúng tế, việc nhỏ, việc cần cẩn trọng",
+   "tranh": "leo cao, đi thuyền, mạo hiểm"
+  },
+  "成": {
+   "ten": "Thành",
+   "y": "thành tựu",
+   "hop": "khai trương, cưới hỏi, nhập học, ký kết",
+   "tranh": "kiện tụng"
+  },
+  "收": {
+   "ten": "Thu",
+   "y": "thu về",
+   "hop": "nạp tài, thu nợ, thu hoạch",
+   "tranh": "an táng, xuất hành"
+  },
+  "开": {
+   "ten": "Khai",
+   "y": "mở ra",
+   "hop": "khai trương, nhập học, cưới hỏi, xuất hành",
+   "tranh": "an táng, chôn cất"
+  },
+  "闭": {
+   "ten": "Bế",
+   "y": "đóng lại",
+   "hop": "đắp đê, lấp hố, việc kết thúc",
+   "tranh": "khai trương, chữa mắt, xuất hành"
+  }
+ },
+ "than": {
+  "青龙": {
+   "ten": "Thanh Long",
+   "loai": "hoàng đạo"
+  },
+  "明堂": {
+   "ten": "Minh Đường",
+   "loai": "hoàng đạo"
+  },
+  "天刑": {
+   "ten": "Thiên Hình",
+   "loai": "hắc đạo"
+  },
+  "朱雀": {
+   "ten": "Chu Tước",
+   "loai": "hắc đạo"
+  },
+  "金匮": {
+   "ten": "Kim Quỹ",
+   "loai": "hoàng đạo"
+  },
+  "天德": {
+   "ten": "Thiên Đức",
+   "loai": "hoàng đạo"
+  },
+  "白虎": {
+   "ten": "Bạch Hổ",
+   "loai": "hắc đạo"
+  },
+  "玉堂": {
+   "ten": "Ngọc Đường",
+   "loai": "hoàng đạo"
+  },
+  "天牢": {
+   "ten": "Thiên Lao",
+   "loai": "hắc đạo"
+  },
+  "玄武": {
+   "ten": "Huyền Vũ",
+   "loai": "hắc đạo"
+  },
+  "司命": {
+   "ten": "Tư Mệnh",
+   "loai": "hoàng đạo"
+  },
+  "勾陈": {
+   "ten": "Câu Trận",
+   "loai": "hắc đạo"
+  }
+ },
+ "tu": {
+  "角": "Giác",
+  "亢": "Cang",
+  "氐": "Đê",
+  "房": "Phòng",
+  "心": "Tâm",
+  "尾": "Vĩ",
+  "箕": "Cơ",
+  "斗": "Đẩu",
+  "牛": "Ngưu",
+  "女": "Nữ",
+  "虚": "Hư",
+  "危": "Nguy",
+  "室": "Thất",
+  "壁": "Bích",
+  "奎": "Khuê",
+  "娄": "Lâu",
+  "胃": "Vị",
+  "昴": "Mão",
+  "毕": "Tất",
+  "觜": "Chuỷ",
+  "参": "Sâm",
+  "井": "Tỉnh",
+  "鬼": "Quỷ",
+  "柳": "Liễu",
+  "星": "Tinh",
+  "张": "Trương",
+  "翼": "Dực",
+  "轸": "Chẩn"
+ },
+ "phuong": {
+  "坎": "Bắc",
+  "艮": "Đông Bắc",
+  "震": "Đông",
+  "巽": "Đông Nam",
+  "离": "Nam",
+  "坤": "Tây Nam",
+  "兑": "Tây",
+  "乾": "Tây Bắc",
+  "中": "Trung cung",
+  "东": "Đông",
+  "西": "Tây",
+  "南": "Nam",
+  "北": "Bắc",
+  "东南": "Đông Nam",
+  "东北": "Đông Bắc",
+  "西南": "Tây Nam",
+  "西北": "Tây Bắc",
+  "正东": "chính Đông",
+  "正西": "chính Tây",
+  "正南": "chính Nam",
+  "正北": "chính Bắc"
+ },
+ "banh_to": {
+  "甲": "Giáp: không mở kho",
+  "乙": "Ất: không trồng cây",
+  "丙": "Bính: không sửa bếp",
+  "丁": "Đinh: không cắt tóc",
+  "戊": "Mậu: không nhận ruộng",
+  "己": "Kỷ: không huỷ giao kèo",
+  "庚": "Canh: không dệt cửi",
+  "辛": "Tân: không làm tương",
+  "壬": "Nhâm: không tháo nước",
+  "癸": "Quý: không kiện tụng",
+  "子": "Tý: không xem bói",
+  "丑": "Sửu: không đội mũ lễ",
+  "寅": "Dần: không cúng tế lớn",
+  "卯": "Mão: không đào giếng",
+  "辰": "Thìn: không khóc lóc",
+  "巳": "Tỵ: không đi xa",
+  "午": "Ngọ: không lợp nhà",
+  "未": "Mùi: không uống thuốc lạ",
+  "申": "Thân: không kê giường",
+  "酉": "Dậu: không tiếp khách say sưa",
+  "戌": "Tuất: không ăn thịt chó",
+  "亥": "Hợi: không cưới hỏi"
+ },
+ "thai_chu": {
+  "占": "",
+  "门": "cửa",
+  "碓": "cối giã",
+  "磨": "cối xay",
+  "厕": "nhà vệ sinh",
+  "厨": "bếp",
+  "灶": "bếp lò",
+  "炉": "lò",
+  "房": "buồng",
+  "床": "giường",
+  "户": "cửa ngách",
+  "窗": "cửa sổ",
+  "堂": "sảnh",
+  "仓": "kho",
+  "库": "kho",
+  "栖": "chuồng",
+  "外": "ngoài",
+  "内": "trong",
+  "鸡": "chuồng gà",
+  "大门": "cổng",
+  "正": "chính",
+  "东": "Đông",
+  "西": "Tây",
+  "南": "Nam",
+  "北": "Bắc"
+ },
+ "ly_thuan_phong": {
+  "dai_an": {
+   "ten": "Đại An",
+   "tot": true,
+   "nghia": "mọi việc yên ổn, đi về bình an"
+  },
+  "luu_lien": {
+   "ten": "Lưu Liên",
+   "tot": false,
+   "nghia": "việc dễ dây dưa, chậm trễ — nên chuẩn bị kỹ"
+  },
+  "toc_hy": {
+   "ten": "Tốc Hỷ",
+   "tot": true,
+   "nghia": "tin vui đến nhanh, hợp gặp gỡ"
+  },
+  "xich_khau": {
+   "ten": "Xích Khẩu",
+   "tot": false,
+   "nghia": "dễ cãi cọ, lời qua tiếng lại — nói năng mềm mỏng"
+  },
+  "tieu_cat": {
+   "ten": "Tiểu Cát",
+   "tot": true,
+   "nghia": "may mắn nhỏ, có người giúp"
+  },
+  "khong_vong": {
+   "ten": "Không Vong",
+   "tot": false,
+   "nghia": "việc dễ hụt, khó như ý — nên hẹn lúc khác nếu được"
+  }
+ },
+ "ky_dan_gian": {
+  "tam_nuong": {
+   "ten": "Tam Nương",
+   "nghia": "ngày 3, 7, 13, 18, 22, 27 âm lịch — dân gian thường tránh cưới hỏi, khai trương"
+  },
+  "nguyet_ky": {
+   "ten": "Nguyệt Kỵ",
+   "nghia": "ngày 5, 14, 23 âm lịch — dân gian thường tránh đi xa, khởi sự lớn"
+  },
+  "duong_cong": {
+   "ten": "Dương Công kỵ nhật",
+   "nghia": "13 ngày cố định trong năm theo sách cổ — dân gian thường tránh việc trọng đại"
+  }
+ },
+ "quan_he_tuoi": {
+  "xung": {
+   "ten": "Lục xung",
+   "nghia": "ngày xung tuổi bạn — việc lớn nên cân nhắc thêm hoặc chọn ngày khác"
+  },
+  "tam_hop": {
+   "ten": "Tam hợp",
+   "nghia": "ngày tam hợp với tuổi bạn — thuận cho việc cần hợp lực"
+  },
+  "luc_hop": {
+   "ten": "Lục hợp",
+   "nghia": "ngày lục hợp với tuổi bạn — thuận gặp gỡ, kết giao"
+  },
+  "hai": {
+   "ten": "Lục hại",
+   "nghia": "ngày hại tuổi bạn — giữ hoà khí, tránh tranh chấp"
+  },
+  "trung": {
+   "ten": "Trùng tuổi",
+   "nghia": "ngày trùng chi tuổi bạn — dân gian xem là ngày của mình, giữ nhịp vừa phải"
+  }
+ },
+ "viec": [
+  {
+   "ma": "cuoi_hoi",
+   "ten": "Cưới hỏi",
+   "nghi": [
+    "嫁娶",
+    "纳采",
+    "订盟",
+    "订婚"
+   ],
+   "tranh_truc": [
+    "破",
+    "闭"
+   ],
+   "tranh_dan_gian": [
+    "tam_nuong",
+    "nguyet_ky",
+    "duong_cong"
+   ]
+  },
+  {
+   "ma": "khai_truong",
+   "ten": "Khai trương",
+   "nghi": [
+    "开市",
+    "挂匾"
+   ],
+   "tranh_truc": [
+    "破",
+    "闭",
+    "收"
+   ],
+   "tranh_dan_gian": [
+    "tam_nuong",
+    "nguyet_ky",
+    "duong_cong"
+   ]
+  },
+  {
+   "ma": "nhap_trach",
+   "ten": "Về nhà mới",
+   "nghi": [
+    "入宅",
+    "移徙"
+   ],
+   "tranh_truc": [
+    "破"
+   ],
+   "tranh_dan_gian": [
+    "tam_nuong",
+    "nguyet_ky",
+    "duong_cong"
+   ]
+  },
+  {
+   "ma": "dong_tho",
+   "ten": "Động thổ, làm nhà",
+   "nghi": [
+    "动土",
+    "修造",
+    "起基",
+    "起基动土",
+    "造屋"
+   ],
+   "tranh_truc": [
+    "破",
+    "建"
+   ],
+   "tranh_dan_gian": [
+    "tam_nuong",
+    "nguyet_ky",
+    "duong_cong"
+   ]
+  },
+  {
+   "ma": "xuat_hanh",
+   "ten": "Xuất hành, đi xa",
+   "nghi": [
+    "出行"
+   ],
+   "tranh_truc": [
+    "破",
+    "闭"
+   ],
+   "tranh_dan_gian": [
+    "nguyet_ky",
+    "duong_cong"
+   ]
+  },
+  {
+   "ma": "ky_ket",
+   "ten": "Ký kết, giao dịch",
+   "nghi": [
+    "立券",
+    "交易",
+    "立券交易"
+   ],
+   "tranh_truc": [
+    "破"
+   ],
+   "tranh_dan_gian": [
+    "duong_cong"
+   ]
+  },
+  {
+   "ma": "cau_tai",
+   "ten": "Cầu tài, thu tiền",
+   "nghi": [
+    "纳财",
+    "求财"
+   ],
+   "tranh_truc": [
+    "破"
+   ],
+   "tranh_dan_gian": []
+  },
+  {
+   "ma": "mua_xe",
+   "ten": "Mua xe, tài sản",
+   "nghi": [
+    "买车",
+    "置产"
+   ],
+   "tranh_truc": [
+    "破"
+   ],
+   "tranh_dan_gian": [
+    "nguyet_ky",
+    "duong_cong"
+   ]
+  },
+  {
+   "ma": "nhap_hoc",
+   "ten": "Nhập học, thi cử",
+   "nghi": [
+    "入学",
+    "习艺"
+   ],
+   "tranh_truc": [
+    "破"
+   ],
+   "tranh_dan_gian": []
+  },
+  {
+   "ma": "chua_benh",
+   "ten": "Khám chữa bệnh",
+   "nghi": [
+    "求医",
+    "治病",
+    "求医疗病"
+   ],
+   "tranh_truc": [],
+   "tranh_dan_gian": []
+  },
+  {
+   "ma": "cat_toc",
+   "ten": "Cắt tóc",
+   "nghi": [
+    "理发",
+    "剃头"
+   ],
+   "tranh_truc": [],
+   "tranh_dan_gian": []
+  },
+  {
+   "ma": "an_tang",
+   "ten": "An táng, sửa mộ",
+   "nghi": [
+    "安葬",
+    "修坟",
+    "启钻",
+    "立碑"
+   ],
+   "tranh_truc": [],
+   "tranh_dan_gian": []
+  }
+ ]
+}

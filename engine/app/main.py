@@ -34,6 +34,7 @@ from app.narrative import hoi_van, llm as narrative_llm, ngan_sach
 from app.battu_api import router as battu_router
 from app.kinhdich_api import router as kinhdich_router
 from app.lich_api import router as lich_router
+from app.hoang_lich_api import router as hoang_lich_router
 from app.phongthuy_api import router as phongthuy_router
 from app.quan_tri_api import router as quan_tri_router
 from app.tuvi_api import router as tuvi_router
@@ -87,6 +88,7 @@ app.include_router(kinhdich_router)
 app.include_router(battu_router)
 app.include_router(phongthuy_router)
 app.include_router(lich_router)
+app.include_router(hoang_lich_router)
 app.include_router(quan_tri_router)
 
 
