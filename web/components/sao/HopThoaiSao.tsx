@@ -58,12 +58,7 @@ export function HopThoaiSao() {
       <SheetContent title={tieuDe} description={y.error} data-testid="hop-thoai-sao" data-can={y.can}>
         {y.can === "dang_nhap" && <DangNhapNhan y={y} />}
         {y.can === "xac_nhan_sao" && <XacNhan y={y} dong={dong} />}
-        {y.can === "nap" && (
-          <div className="space-y-5">
-            {y.chao_mung ? <NhanChaoMung y={y} xong={() => dong(true)} /> : null}
-            <NapNhanh can={Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0))} />
-          </div>
-        )}
+        {y.can === "nap" && <HopNap y={y} xong={() => dong(true)} />}
       </SheetContent>
     </Sheet>
   );
@@ -90,18 +85,38 @@ function DangNhapNhan({ y }: { y: YeuCauSao }) {
 /** Tài khoản chưa nhận quà: lưu hồ sơ đang dùng trên máy vào tài khoản (người dùng bấm — không tự lưu; tài khoản ĐÃ có
  *  hồ sơ thì giữ nguyên, chỉ nhận quà) → +Sao chào mừng (+ thưởng lời mời nếu đến từ link mời) → đủ Sao thì gửi lại
  *  yêu cầu (lib/sao-client fetchSao), chưa đủ thì ở lại hộp để nạp phần còn thiếu. */
-function NhanChaoMung({ y, xong }: { y: YeuCauSao; xong: () => void }) {
+function HopNap({ y, xong }: { y: YeuCauSao; xong: () => void }) {
+  const [them, setThem] = useState(0);   // Sao vừa nhận trong hộp (quà) → gói gợi ý chỉ bù phần còn thiếu
+  return (
+    <div className="space-y-5">
+      {y.chao_mung ? <NhanChaoMung y={y} xong={xong} daNhan={setThem} /> : null}
+      <NapNhanh can={Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0) - them)} />
+    </div>
+  );
+}
+
+function NhanChaoMung({ y, xong, daNhan: baoDaNhan }: { y: YeuCauSao; xong: () => void; daNhan: (n: number) => void }) {
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daNhan, setDaNhan] = useState<number | null>(null);
   const [tkCoHoSo, setTkCoHoSo] = useState<boolean | null>(null);
+  const [loiKiem, setLoiKiem] = useState(false);
+  const [lanKiem, setLanKiem] = useState(0);
   const hs = useHoSo() ?? null;
+  // Đọc lỗi KHÔNG được coi là "chưa có hồ sơ" (sẽ ghi đè hồ sơ đang có trong tài khoản) → báo lỗi, cho thử lại.
   useEffect(() => {
+    let huy = false;
+    setLoiKiem(false);
     void (async () => {
-      const uid = (await (await supabase())?.auth.getUser())?.data.user?.id;
-      if (uid) setTkCoHoSo(Boolean(await hoSoTaiKhoan(uid).catch(() => null)));
+      try {
+        const uid = (await (await supabase())?.auth.getUser())?.data.user?.id;
+        if (!uid) throw new Error("chua_dang_nhap");
+        const co = Boolean(await hoSoTaiKhoan(uid));
+        if (!huy) setTkCoHoSo(co);
+      } catch { if (!huy) setLoiKiem(true); }
     })();
-  }, []);
+    return () => { huy = true; };
+  }, [lanKiem]);
   const du = (y.chao_mung ?? 0) + (y.so_du ?? 0) >= (y.gia ?? 0);
   async function nhan() {
     setDang(true); setLoi(null);
@@ -125,12 +140,12 @@ function NhanChaoMung({ y, xong }: { y: YeuCauSao; xong: () => void }) {
         if (m && m.ket_qua !== "chua_luu_ho_so") quenMaGioiThieu();
       }
       if ((y.so_du ?? 0) + them >= (y.gia ?? 0)) { xong(); return; }
-      setDaNhan(them); setDang(false);
+      setDaNhan(them); baoDaNhan(them); setDang(false);
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa lưu được."); setDang(false); }
   }
   if (daNhan !== null) {
     return <p className="rounded-2xl border border-jade/40 bg-jade/5 p-4 text-sm text-fg" data-testid="da-nhan-chao-mung">
-      Đã nhận {daNhan} Sao. Ví còn thiếu {Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0) - daNhan)} Sao — nạp thêm bên dưới hoặc mời bạn bè.</p>;
+      {daNhan ? `Đã nhận ${daNhan} Sao.` : "Quà chào mừng đã nhận trước đó."} Ví còn thiếu {Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0) - daNhan)} Sao — nạp thêm bên dưới hoặc mời bạn bè.</p>;
   }
   return (
     <div className="rounded-2xl border border-gold/40 bg-gold/5 p-4" data-testid="nhan-chao-mung">
@@ -139,11 +154,14 @@ function NhanChaoMung({ y, xong }: { y: YeuCauSao; xong: () => void }) {
           ? <>Quà chào mừng: <b className="text-gold">{y.chao_mung} Sao</b> cho tài khoản đã lưu hồ sơ{du ? " — đủ mở ngay." : "."}</>
           : <>Quà chào mừng: lưu hồ sơ <b>{hs?.ho_ten ?? "của bạn"}</b> vào tài khoản để nhận <b className="text-gold">{y.chao_mung} Sao</b>{du ? " — đủ mở ngay." : "."}</>}</span></p>
       {!tkCoHoSo && (
-        <p className="mt-1 text-xs text-fg-faint">Bấm nút là bạn đồng ý lưu <b>họ tên, ngày giờ sinh, giới tính, nơi sinh</b> vào tài khoản để dùng trên máy khác.
+        <p className="mt-1 text-xs text-fg-faint">Bấm nút là bạn đồng ý lưu <b>họ tên (kèm tên thường gọi), ngày giờ sinh (kèm cách nhập lịch), giới tính, nơi sinh</b> vào tài khoản để dùng trên máy khác.
           Nội dung bài đọc và câu hỏi không được lưu. Xoá được bất cứ lúc nào ở trang Tài khoản.{" "}
           <Link href="/chinh-sach-rieng-tu#du-lieu" className="text-gold underline">Chính sách quyền riêng tư</Link></p>
       )}
-      {tkCoHoSo === null ? (
+      {loiKiem ? (
+        <p className="mt-3 text-sm text-cinnabar" role="alert">Chưa kiểm tra được tài khoản.{" "}
+          <button type="button" className="underline" onClick={() => setLanKiem((n) => n + 1)}>Thử lại</button></p>
+      ) : tkCoHoSo === null ? (
         <p className="mt-3 inline-flex items-center gap-2 text-sm text-fg-muted"><Loader2 className="size-4 animate-spin" aria-hidden /> Đang kiểm tra tài khoản…</p>
       ) : tkCoHoSo || hs ? (
         <Button className="mt-3 w-full" onClick={() => void nhan()} disabled={dang} data-testid="nhan-chao-mung-nut">

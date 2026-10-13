@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
-import { ghi } from "@/lib/do-luong";
+import { ghi, maNgauNhien } from "@/lib/do-luong";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 
 interface NgayCN { so: number; nghia: string; tu_soi: string }
@@ -76,7 +76,7 @@ export function HomNay() {
   async function chiaSe() {
     if (!the) return;
     // ?tu=hn.<ngẫu nhiên>: bạn bè mở link → GhiVaoTrang nhớ mã → hồ sơ đầu tiên tính referral_signup (Gate 2, K).
-    const tu = `hn.${crypto.randomUUID().replace(/-/g, "").slice(0, 10)}`;
+    const tu = `hn.${maNgauNhien(10)}`;
     const url = `${window.location.origin}/hom-nay?tu=${tu}`;
     const chu = `Hôm nay là Ngày cá nhân ${the.ngay_ca_nhan.so} của mình — ${boTienTo(the.ngay_ca_nhan.nghia)} Xem ngày của bạn:`;
     ghi("share_created", { kind: "hom_nay", ma_moi: tu });

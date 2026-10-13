@@ -532,9 +532,10 @@ Qua Gate 2 → mới mở **giai đoạn 2 hạ tầng + thu tiền** (Vercel Pr
 báo "chưa đủ mẫu" khi < 300 người bắt đầu, và bảng **theo mảng** (Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Hợp
 đôi, Hôm nay) để thấy mảng nào rơi nhiều nhất — anh không cần tự dựng funnel trong PostHog (chỉ cần làm Q8: khoá
 PostHog cá nhân). Định nghĩa sự kiện đã sửa cho đúng nghĩa cổng: `reading_started` = kết quả của một mảng hiện ra
-(trước đây gắn vào lúc lưu hồ sơ → tỉ lệ sai), `reading_completed` = cuộn tới cuối bài đọc, mỗi phiên một lần mỗi mảng;
+(trước đây gắn vào lúc lưu hồ sơ → tỉ lệ sai), `reading_completed` = cuộn tới cuối bài đọc VÀ đã ở lại ≥ 10 giây, mỗi phiên một lần mỗi mảng; "lưu hồ sơ" = chủ động lưu
+vào tài khoản (chưa bật tài khoản thì bảng ghi "chờ số");
 góp ý 1 chạm có ở MỌI mảng; `landing_viewed` ở mọi trang vào đầu tiên (không chỉ trang chủ); link chia sẻ "Hôm nay" mang
-mã → bạn bè tạo hồ sơ được tính `referral_signup` (K). Số trước ngày đổi không so được với số sau.
+mã → bạn bè tạo hồ sơ được tính `referral_signup` (K). Bảng Gate chỉ tính sự kiện từ bản đo mới (`gate_v1`, từ 2026-10-13) — số cũ không trộn vào.
 
 **Bước 1 — tuần này (anh):**
 - [ ] Render: kiểm dịch vụ engine đang ở **Singapore + Starter** (mục D2); `/health` có `"khoa_engine": true` (mục 4b).

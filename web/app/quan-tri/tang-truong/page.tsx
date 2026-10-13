@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
+import { coTaiKhoan } from "@/lib/cua-sao";
 import { baoCaoGa4, baoCaoGsc, baoCaoPosthog, MAU_TOI_THIEU, tinhGate, type BaoCaoPosthog, type DongGsc, type KetQua } from "@/lib/so-lieu-ngoai";
 
 export const metadata: Metadata = { title: "Tăng trưởng" };
@@ -65,7 +66,8 @@ const TEN_MANG: Record<string, string> = {
 
 /** Gate 1 / Gate 2 (docs/VIEC-CUA-ANH.md mục L): tỉ lệ, ngưỡng đề xuất, đủ mẫu chưa, tách theo mảng. */
 function BangGate({ du }: { du: BaoCaoPosthog }) {
-  const ds = tinhGate(du.gate);
+  if (du.gateLoi) return <p className="mt-3 text-sm text-cinnabar" role="alert">Chưa đọc được số Gate: {du.gateLoi} (thử lại sau một giờ).</p>;
+  const ds = tinhGate(du.gate, { taiKhoanBat: coTaiKhoan() });
   const duMau = du.gate.bat_dau >= MAU_TOI_THIEU;
   return (
     <div className="mt-4 space-y-5" data-testid="qt-gate">
@@ -114,7 +116,8 @@ function BangGate({ du }: { du: BaoCaoPosthog }) {
           </table>
         </div>
       )}
-      <p className="text-xs text-fg-faint">Mỗi chỉ số đếm số trình duyệt khác nhau trong 28 ngày. Lưu hồ sơ: khi tài khoản chưa bật là lưu trên máy (nhập ngày sinh lần đầu).
+      <p className="text-xs text-fg-faint">Mỗi chỉ số đếm số trình duyệt khác nhau trong 28 ngày, chỉ tính sự kiện từ bản đo mới (gate_v1, 2026-10-13).
+        Đọc hết = cuộn tới cuối bài và ở lại ≥ 10 giây. Lưu hồ sơ = chủ động lưu vào tài khoản (chưa bật tài khoản → chờ số).
         K: người tạo hồ sơ lần đầu sau khi mở link mời / thẻ / link Hôm nay của bạn bè, chia cho số người tạo link.</p>
     </div>
   );

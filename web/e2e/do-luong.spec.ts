@@ -54,7 +54,10 @@ test("Gate 1 ở mảng Tử vi: bắt đầu khi lá số hiện, đọc xong k
   await expect.poll(async () => dem(await suKien(page), "reading_started", "tuvi")).toBe(1);
   expect(dem(await suKien(page), "reading_completed", "tuvi")).toBe(0);
   await page.getByTestId("doc-xong-tuvi").scrollIntoViewIfNeeded();
-  await expect.poll(async () => dem(await suKien(page), "reading_completed", "tuvi")).toBe(1);
+  // Đọc xong cần: thấy mốc cuối + đã cuộn + ở lại ≥ 10 giây (không đếm khi vừa mở đã thấy cuối trang).
+  await page.waitForTimeout(3_000);
+  expect(dem(await suKien(page), "reading_completed", "tuvi")).toBe(0);
+  await expect.poll(async () => dem(await suKien(page), "reading_completed", "tuvi"), { timeout: 20_000 }).toBe(1);
   await page.getByTestId("gop-y").getByRole("button", { name: "Một phần" }).click();
   expect((await suKien(page)).find((e) => e.su_kien === "feedback_submitted")).toMatchObject({ huu_ich: "vua", mo_dun: "tuvi" });
   await page.reload();
@@ -100,5 +103,8 @@ test("tinhGate: tỉ lệ + ngưỡng, chưa đủ mẫu thì không kết luậ
   expect(it[0]).toMatchObject({ ma: "G1", tu: 120, mau: 200, ti_le: 0.6 });
   const du = tinhGate({ landing: 2000, bat_dau: MAU_TOI_THIEU, xong: 120, gop_y: 50, co_giup: 35, ho_so: 30, chia_se: 12, dang_ky_moi: 1 });
   expect(Object.fromEntries(du.map((g) => [g.ma, g.dat]))).toEqual({ G1: false, G4: true, LUU: true, G2: true, G3: false });
+  // Tài khoản chưa bật → "lưu hồ sơ vào tài khoản" không đo được → chờ số, không báo "chưa đạt" sai.
+  expect(tinhGate({ landing: 2000, bat_dau: 400, xong: 200, gop_y: 0, co_giup: 0, ho_so: 0, chia_se: 0, dang_ky_moi: 0 }, { taiKhoanBat: false })
+    .find((g) => g.ma === "LUU")).toMatchObject({ ti_le: null, dat: null });
   expect(tinhGate({ landing: 0, bat_dau: 400, xong: 0, gop_y: 0, co_giup: 0, ho_so: 0, chia_se: 0, dang_ky_moi: 0 })[1]!.ti_le).toBeNull();
 });

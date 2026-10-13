@@ -11,7 +11,9 @@ import { NutChiaSe } from "@/components/chia-se/NutChiaSe";
 import { useBaiDoc } from "@/lib/bai-doc";
 import { postJson } from "@/lib/goi-api";
 import { tenGoi, useHoSo } from "@/lib/hoso";
-import { ghi, maMoiTuToken, nhoMaMoi } from "@/lib/do-luong";
+import { batDauDoc, ghi, maMoiTuToken, nhoMaMoi } from "@/lib/do-luong";
+import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
+import { GopY } from "@/components/khung/GopY";
 
 interface Props { ma: string; tenMoi: string; soMoi: number; tuKhoa: string | null }
 
@@ -31,7 +33,7 @@ export function NhanLoiMoi({ ma, tenMoi, soMoi, tuKhoa }: Props) {
     if (!baiDoc) return;
     const so = Object.fromEntries(baiDoc.cac_vi_tri.map((v) => [v.vi_tri, v.gia_tri]));
     postJson<KetQuaHopDoiT>("/api/hop-doi/moi", { ma, b: so })
-      .then((d) => { setKq(d); ghi("compatibility_created", { kind: "loi_moi", ma_moi: maMoiTuToken(ma) }); })
+      .then((d) => { setKq(d); ghi("compatibility_created", { kind: "loi_moi", ma_moi: maMoiTuToken(ma) }); batDauDoc("hopdoi", { kind: "loi_moi" }); })
       .catch((e: unknown) => setLoi(e instanceof Error ? e.message : "Chưa tính được lúc này."));
   }, [baiDoc, ma]);
 
@@ -62,6 +64,7 @@ export function NhanLoiMoi({ ma, tenMoi, soMoi, tuKhoa }: Props) {
       {hoSo && kq && (
         <>
           <KetQuaHopDoi kq={kq} tenA={tenMoi} tenB={tenGoi(hoSo)} />
+          <div className="mx-auto max-w-3xl"><MocDocXong moDun="hopdoi" them={{ kind: "loi_moi" }} /><GopY moDun="hopdoi" cauHoi="Phần so hai người có giúp bạn hiểu mối quan hệ này hơn?" /></div>
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             <Card className="flex flex-col justify-between">
               <div>

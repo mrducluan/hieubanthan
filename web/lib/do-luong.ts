@@ -40,7 +40,8 @@ export function locThuocTinh(p: Record<string, unknown> = {}): Record<string, st
   return kq;
 }
 
-export const PHIEN_BAN = "ui_v1";
+// gate_v1 (2026-10-13): định nghĩa sự kiện Gate mới (reading_* theo mảng) — bảng Gate chỉ đọc sự kiện mang bản này.
+export const PHIEN_BAN = "gate_v1";
 const KHOA_MOI = "hbt.ma_moi";
 
 let ph: PostHog | null = null;
@@ -81,7 +82,21 @@ export function ghi(su_kien: SuKien, p: Record<string, unknown> = {}): void {
  *  khác / quay lại hôm sau vẫn tính) — chỉ là mã ngẫu nhiên của link, không có dữ liệu cá nhân. */
 const HAN_MOI = 14 * 86_400_000;
 export function nhoMaMoi(ma: string): void {
-  try { localStorage.setItem(KHOA_MOI, JSON.stringify({ ma, t: Date.now() })); } catch { /* bỏ qua */ }
+  try {
+    if (localStorage.getItem("hbt.hoso.v1")) return;   // đã có hồ sơ trên máy → không phải người mới, không tính lời mời
+    localStorage.setItem(KHOA_MOI, JSON.stringify({ ma, t: Date.now() }));
+  } catch { /* bỏ qua */ }
+}
+
+/** Mã ngắn ngẫu nhiên (hex) — có cả trình duyệt cũ / http không có crypto.randomUUID. */
+export function maNgauNhien(n = 10): string {
+  try {
+    const b = new Uint8Array(Math.ceil(n / 2));
+    crypto.getRandomValues(b);
+    return Array.from(b, (x) => x.toString(16).padStart(2, "0")).join("").slice(0, n);
+  } catch {
+    return Array.from({ length: n }, () => Math.floor(Math.random() * 16).toString(16)).join("");
+  }
 }
 export function layMaMoi(): string | null {
   try {

@@ -9,11 +9,13 @@ export function GhiVaoTrang() {
   useEffect(() => {
     const u = new URL(window.location.href);
     const tu = u.searchParams.get("tu");
-    if (tu && /^[a-z]{2}\.[A-Za-z0-9_-]{6,16}$/.test(tu)) {
+    if (tu && /^[a-z]{2}\.[a-f0-9]{10}$/.test(tu)) {
       nhoMaMoi(tu);
       if (lanDauTrongPhien(`tu.${tu}`)) ghi("share_clicked", { kind: tu.split(".")[0], ma_moi: tu });
     }
-    if (lanDauTrongPhien("vao-trang")) ghi("landing_viewed", { nguon: u.pathname.split("/")[1] || "trang_chu" });
+    const nguon = u.pathname.split("/")[1] || "trang_chu";
+    if (nguon === "quan-tri") return;   // người vận hành, không phải người dùng
+    if (lanDauTrongPhien("vao-trang")) ghi("landing_viewed", { nguon });
   }, []);
   return null;
 }
