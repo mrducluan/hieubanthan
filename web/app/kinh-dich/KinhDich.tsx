@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Hexagon } from "lucide-react";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc } from "@/components/khung/CuoiBaiDoc";
@@ -44,8 +44,6 @@ const GOI_Y = [
 export function KinhDich() {
   const [cheDo, setCheDo] = useState("tu_dong");
   const [cach, setCach] = useState("may_gieo");
-  // HN-3: link "Quẻ ngày" từ /hom-nay mở sẵn Mai Hoa theo giờ hiện tại (?cach=mai_hoa). Đọc sau khi gắn, không cần Suspense.
-  useEffect(() => { if (new URLSearchParams(location.search).get("cach") === "mai_hoa") setCach("mai_hoa"); }, []);
   const [tay, setTay] = useState("");
   const [lichMH, setLichMH] = useState<"viet" | "trung">("viet");
   const [coQue, setCoQue] = useState(false);   // Gate 1: đã có lời quẻ → bắt đầu đọc + mốc đọc xong/góp ý dưới khung

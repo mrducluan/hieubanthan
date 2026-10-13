@@ -6,7 +6,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  BookOpen, Briefcase, CalendarDays, Clock, Hexagon, Coffee, Dumbbell, Flame, Globe2, Handshake, Heart, Home, LifeBuoy, MessageCircleQuestion,
+  BookOpen, Briefcase, CalendarDays, Coffee, Dumbbell, Flame, Globe2, Handshake, Heart, Home, LifeBuoy, MessageCircleQuestion,
   MoonStar, Palette, Plane, Rocket, Share2, Sparkles, Sunrise, Wallet, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -37,7 +37,6 @@ interface TheHomNay {
     so: number; kep: number | null; so_ngay_sinh: number; cong_huong: boolean;
     nghia_goc: { ten: string; hanh_tinh: string } | null; nghia_kep: { bieu_tuong: string; xu_huong: string } | null;
   };
-  gio_hoang_dao: { chi: string; tu: string; den: string; than: string }[];   // HN-3
 }
 interface YDinhKq { ma: string; ten: string; bieu_tuong: string; nhip: "thuan" | "trung_tinh" | "can_nhac"; nhan: string; cach_lam: string; tu_soi: string }
 
@@ -89,7 +88,6 @@ export function HomNay() {
   const [chon, setChon] = useState<string[]>([]);
   const [duDinh, setDuDinh] = useState("");
   const [dangXem, setDangXem] = useState(false);
-  const [moGio, setMoGio] = useState(false);
 
   /** Gọi engine; `yDinh`/`cau` rỗng = thẻ cơ bản. Ý định đã nhớ của hôm nay được gửi kèm ngay lần đầu. */
   function taiThe(yDinh: string[], cau: string) {
@@ -181,30 +179,6 @@ export function HomNay() {
             <span className="inline-flex items-center gap-1.5"><MoonStar className="size-4" aria-hidden />
               Âm lịch {the.am_lich.ngay}/{the.am_lich.thang}{the.am_lich.nhuan ? " (nhuận)" : ""} · ngày {the.am_lich.can_chi_ngay}, tháng {the.am_lich.can_chi_thang}, năm {the.am_lich.can_chi_nam}</span>
           </p>
-          {/* HN-3: nút nhỏ — giờ hoàng đạo (mở/đóng tại chỗ) + quẻ ngày (sang Kinh Dịch, Mai Hoa theo giờ hiện tại) */}
-          <div className="flex flex-wrap items-center gap-2">
-            {the.gio_hoang_dao.length > 0 && (
-              <button type="button" aria-expanded={moGio} aria-controls="gio-hoang-dao" onClick={() => setMoGio((v) => !v)}
-                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition-colors ${moGio ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
-                <Clock className="size-3.5" aria-hidden />Giờ hoàng đạo
-              </button>
-            )}
-            <Link href="/kinh-dich?cach=mai_hoa" data-testid="que-ngay"
-              className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
-              <Hexagon className="size-3.5" aria-hidden />Quẻ ngày
-            </Link>
-          </div>
-          {moGio && (
-            <div id="gio-hoang-dao" className="rounded-xl border border-line/70 bg-bg/40 p-4" data-testid="gio-hoang-dao">
-              <ul className="grid grid-cols-2 gap-2 text-sm sm:grid-cols-3">
-                {the.gio_hoang_dao.map((g) => (
-                  <li key={g.chi}><b className="text-gold">{g.chi}</b> <span className="text-fg-muted">{g.tu}–{g.den}</span>
-                    <span className="block text-xs text-fg-faint">{g.than}</span></li>
-                ))}
-              </ul>
-              <p className="mt-2 text-xs text-fg-faint">Sáu giờ hoàng đạo của ngày {the.am_lich.can_chi_ngay} theo lịch cổ truyền (12 thần trực giờ) — để tham khảo văn hoá, không phải lời khuyên chọn giờ.</p>
-            </div>
-          )}
 
           <Card className="space-y-4" data-testid="the-hom-nay">
             <div className="flex items-start justify-between gap-4">
