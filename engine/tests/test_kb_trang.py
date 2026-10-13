@@ -26,7 +26,8 @@ def test_danh_sach_du_ba_loai():
                    "cap_so": 45, "nghe": 12, "tinh_yeu": 12, "nam_ca_nhan": 9, "no_nghiep": 4,
                    "sao_cung": 168,   # SEO-H: 14 chính tinh × 12 cung
                    "hoa_cung": 48,    # SEO-I: 4 tứ hoá × 12 cung
-                   "menh_nam": 76}    # SEO-J: sinh năm 1950–2025 mệnh gì
+                   "menh_nam": 76,    # SEO-J: sinh năm 1950–2025 mệnh gì
+                   "so_kep": 43}      # TS-PHAI: số kép Chaldea 10–52
     assert len({(t["loai"], t["slug"]) for t in ds}) == len(ds)
 
 
@@ -76,7 +77,7 @@ def test_lien_quan_tro_toi_trang_ton_tai():
 
 def test_api():
     r = client.get("/v1/kb/trang")
-    assert r.status_code == 200 and len(r.json()["trang"]) == 496
+    assert r.status_code == 200 and len(r.json()["trang"]) == 539
     r = client.get("/v1/kb/trang/so/so-22")
     assert r.status_code == 200 and r.json()["slug"] == "so-22"
     assert client.get("/v1/kb/trang/so/so-10").status_code == 404
@@ -126,3 +127,11 @@ def test_api_loai_moi():
     assert client.get("/v1/kb/trang/nhat_chu/nhat-chu-nham").status_code == 200
     assert client.get("/v1/kb/trang/sao_cung/thai-am-cung-phu-the").status_code == 200    # SEO-H
     assert client.get("/v1/kb/trang/cung/cung-xyz").status_code == 404
+
+
+def test_so_kep_chaldea():
+    t = trang.lay("so_kep", "so-kep-23")
+    assert t["tieu_de"].startswith("Số kép 23 thần số Chaldea") and len(t["tieu_de"]) <= 70
+    assert "số gốc 5" in t["muc"][3]["tieu_de"] and t["minh_hoa"]["so_goc"] == 5
+    assert trang.lay("so_kep", "so-kep-53") is None and trang.lay("so_kep", "so-kep-9") is None
+    assert {x["slug"] for x in t["lien_quan"]} == {"so-kep-22", "so-kep-24"}

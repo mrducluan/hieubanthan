@@ -60,7 +60,7 @@ function BangGsc({ ds, cot }: { ds: DongGsc[]; cot: string }) {
 }
 
 const TEN_MANG: Record<string, string> = {
-  thanso: "Thần số (Bản thân)", thanso_sau: "Thần số chiều sâu", tuvi: "Tử vi", battu: "Bát tự", kinhdich: "Kinh Dịch",
+  thanso: "Thần số (Bản thân)", xem_ngay: "Xem ngày tốt", thanso_sau: "Thần số chiều sâu", tuvi: "Tử vi", battu: "Bát tự", kinhdich: "Kinh Dịch",
   phongthuy: "Phong thuỷ", hopdoi: "Hợp đôi", hom_nay: "Hôm nay", khac: "Chưa gắn mảng (bản cũ)",
 };
 

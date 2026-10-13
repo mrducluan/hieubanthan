@@ -8,6 +8,7 @@ for (const [duong, h1] of [
   ["/kien-thuc/tinh-yeu/so-2-trong-tinh-yeu", "Số chủ đạo 2 trong tình yêu"],
   ["/kien-thuc/nam-ca-nhan/nam-ca-nhan-5", "Năm cá nhân số 5"],
   ["/kien-thuc/no-nghiep/no-nghiep-13", "Nợ nghiệp 13 trong thần số học"],
+  ["/kien-thuc/so-kep/so-kep-23", "Số kép 23 thần số Chaldea"],
 ] as const) {
   test(`trang SEO-G: ${duong}`, async ({ request }) => {
     const r = await request.get(duong);
@@ -26,5 +27,7 @@ test("trang chủ đề, sitemap, cặp số chỉ có một chiều (a ≤ b)",
   expect((cd.match(/href="\/kien-thuc\/hop-so\/so-chu-dao-/g) ?? []).length).toBe(45);
   const sm = await (await request.get("/sitemap.xml")).text();
   expect(sm).toContain("/kien-thuc/nam-ca-nhan/nam-ca-nhan-9</loc>");
+  expect(sm).toContain("/kien-thuc/so-kep/so-kep-52</loc>");
+  expect(sm).toContain("/xem-ngay-tot/thang-");
   expect((await request.get("/kien-thuc/hop-so/so-chu-dao-6-va-3")).status()).toBe(404);
 });

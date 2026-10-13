@@ -20,7 +20,7 @@ from pathlib import Path
 from app.calc import kinhdich, kinhdich_maihoa as mh, lunar, thanso, thanso_mo_rong as mr
 from app.config import CALENDAR_MERIDIAN_TZ
 from app.hoidap import chung
-from app.kb import store, thanso_v2
+from app.kb import store, thanso_v2, trang
 from app.luangiai import hoang_lich as hl_luan, thanso_chaldean
 
 TOI_DA_Y_DINH = 3
@@ -108,6 +108,7 @@ def _que_ngay(ngay_xem: dt.date) -> dict:
     return {"so": so, "ten": q["quai_ban"]["ten"], "thuong": m["thuong"], "ha": m["ha"], "hao_dong": m["hao_dong"],
             "bien": ({"so": bien["so_king_wen"], "ten": bien["ten"]} if bien else None),
             "y_chinh": kv.get("y_chinh"), "loi_khuyen": kv.get("loi_khuyen"), "cau_tu_soi": kv.get("cau_tu_soi"),
+            "duong": f"/kien-thuc/kinh-dich/que-{so}-{trang._slug(kv['ten'])}" if kv.get("ten") else None,
             "cach_khoi": "Mai Hoa Dịch Số: năm + tháng + ngày âm lịch → quẻ trên; cộng giờ Tý → quẻ dưới và hào động."}
 
 

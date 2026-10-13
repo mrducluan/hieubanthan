@@ -13,7 +13,9 @@ export type SuKien =
   // SAO-2: phễu xem trước → chạm khoá → mở khoá / nạp
   | "paywall_viewed" | "unlock_clicked" | "unlock_succeeded" | "quota_reached" | "sao_prompt_answered"
   // TS-PHAI: đổi trường phái thần số · HN-2: người dùng nêu ý định trong ngày (chỉ mã ý định, không gửi câu gõ)
-  | "school_switched" | "daily_intent_set";
+  | "school_switched" | "daily_intent_set"
+  // HL-1: tìm ngày đẹp cho một việc (chỉ mã việc + số ngày tìm được)
+  | "good_day_searched";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number"> = {
@@ -31,6 +33,10 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   phai: "string",       // TS-PHAI: pitago / chaldea
   y_dinh: "string",     // HN-2: các MÃ ý định nối bằng dấu phẩy (vd "cong_viec,gap_go"), không bao giờ là câu gõ tay
   go_tay: "number",     // HN-2: 1 nếu người dùng có gõ câu (chỉ đếm, không gửi nội dung)
+  viec: "string",       // HL-1: mã việc chọn ngày (cuoi_hoi, khai_truong…)
+  so_thang: "number",
+  co_tuoi: "number",
+  so_ngay: "number",
 };
 const GIOI_HAN_CHUOI = 40;
 

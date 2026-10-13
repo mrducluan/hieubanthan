@@ -44,6 +44,7 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Bát tự (Tứ trụ)](${urlDayDu("/bat-tu")}): tứ trụ, ngũ hành vượng suy, thập thần, cách cục, đại vận.`,
     `- [Kinh Dịch](${urlDayDu("/kinh-dich")}): gieo quẻ cho một câu hỏi cụ thể — quẻ chủ, hào động, quẻ biến.`,
     `- [Phong thuỷ nhà](${urlDayDu("/phong-thuy")}): mệnh quái Bát trạch, hướng tốt/xấu, khảo sát bố cục nhà, đo hướng bằng la bàn điện thoại.`,
+    `- [Xem ngày tốt](${urlDayDu("/xem-ngay-tot")}): hoàng lịch theo giờ Việt Nam — hoàng đạo/hắc đạo, trực, giờ hoàng đạo, việc nên làm/kiêng, tuổi xung; tìm ngày đẹp cưới hỏi, khai trương, về nhà mới cho tuổi người dùng.`,
     "",
     "## Trả lời nhanh theo câu hỏi hay gặp",
     "",
@@ -52,6 +53,7 @@ export async function taoLlmsTxt(): Promise<string> {
     `- "Số chủ đạo X hợp nghề gì / yêu thế nào / hợp số mấy?" → ${urlDayDu("/kien-thuc/nghe-nghiep")} · ${urlDayDu("/kien-thuc/tinh-yeu")} · ${urlDayDu("/kien-thuc/hop-so")}`,
     `- "Năm nay tôi là năm cá nhân số mấy?" → cách tự tính ở ${urlDayDu("/kien-thuc/nam-ca-nhan")}, hoặc tính đúng cho từng người tại ${urlDayDu("/")}.`,
     `- "Sao X ở cung Y nghĩa là gì?" → ${urlDayDu("/kien-thuc/sao-cung")} · "Hoá Lộc/Quyền/Khoa/Kỵ ở cung Y?" → ${urlDayDu("/kien-thuc/tu-hoa")}`,
+    `- "Hôm nay / ngày D/M/YYYY tốt hay xấu? Giờ hoàng đạo?" → ${urlDayDu("/xem-ngay-tot")} (trang từng ngày dạng ${urlDayDu("/xem-ngay-tot/2026-10-13")}, lịch tháng dạng ${urlDayDu("/xem-ngay-tot/thang-10-2026")}).`,
     `- "Quẻ X Kinh Dịch nói gì?" → ${urlDayDu("/kien-thuc/kinh-dich")} · thuật ngữ khó (Tuần, Triệt, dụng thần, nạp âm…) → ${urlDayDu("/tu-dien")}`,
     "",
   ];

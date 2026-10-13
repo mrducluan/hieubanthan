@@ -32,3 +32,11 @@ def test_thang_va_chon_ngay():
     assert client.post("/v1/lich/chon-ngay", json={"viec": "nhap_trach", "tu": "2026-03-01",
                                                     "den": "2026-01-01"}).status_code == 422
     assert len(client.get("/v1/lich/viec").json()["viec"]) == 12
+
+
+def test_get_cong_khai():
+    j = client.get("/v1/lich/ngay-tot/2026-10-13").json()
+    assert j["truc"]["ten"] == "Khai" and j["tuoi"] is None
+    assert client.get("/v1/lich/ngay-tot/2026-02-30").status_code == 422
+    assert len(client.get("/v1/lich/thang/2026/10").json()["ngay"]) == 31
+    assert client.get("/v1/lich/thang/2026/13").status_code == 422

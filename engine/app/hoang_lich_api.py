@@ -4,9 +4,9 @@ tính tuổi xung/hợp trong lượt gọi)."""
 from __future__ import annotations
 
 import datetime as _dt
-from typing import Literal
+from typing import Annotated, Literal
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Path
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.luangiai import hoang_lich as L
@@ -80,3 +80,15 @@ def api_chon_ngay(inp: ChonNgayInput) -> dict:
 @router.get("/v1/lich/viec")
 def api_viec() -> dict:
     return {"viec": [{"ma": v["ma"], "ten": v["ten"]} for v in L.KB["viec"]]}
+
+
+# GET không kèm dữ liệu cá nhân → web cache được (trang chủ, trang ngày/tháng cho SEO).
+@router.get("/v1/lich/ngay-tot/{ngay}")
+def api_ngay_tot_cong_khai(ngay: _dt.date) -> dict:
+    _trong_khoang(ngay)
+    return L.ngay_xem(ngay)
+
+
+@router.get("/v1/lich/thang/{nam}/{thang}")
+def api_thang_cong_khai(nam: Annotated[int, Path(ge=1901, le=2099)], thang: Annotated[int, Path(ge=1, le=12)]) -> dict:
+    return L.thang(nam, thang)
