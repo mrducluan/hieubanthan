@@ -44,3 +44,35 @@ test("Bản thân có lối vào Hôm nay", async ({ page }) => {
   await page.getByTestId("lien-ket-hom-nay").click();
   await expect(page).toHaveURL(/\/hom-nay$/);
 });
+
+test("HN-2: chọn ý định + gõ câu → engine trả nhịp, cách làm, câu tự soi; chỉ mã ý định được nhớ/đo", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/hom-nay");
+  const khoi = page.getByTestId("y-dinh");
+  await expect(khoi.getByRole("heading", { name: "Hôm nay bạn định làm gì?" })).toBeVisible();
+  await khoi.getByRole("button", { name: "Việc ở chỗ làm" }).click();
+  await khoi.getByLabel("Dự định hôm nay").fill("tối nay đi tập gym với Nguyễn Văn B");
+  await khoi.getByRole("button", { name: "Xem nhịp hôm nay" }).click();
+  const kq = page.getByTestId("y-dinh-ket-qua");
+  await expect(kq.locator("li")).toHaveCount(2);
+  await expect(kq).toContainText("Tự soi:");
+  await expect(page.getByText("Nguyễn Văn B")).toHaveCount(0);
+  const luu = await page.evaluate(() => localStorage.getItem("hbt.hom_nay_y_dinh") ?? "");
+  expect(luu).not.toContain("gym");
+  const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: { su_kien: string; y_dinh?: string; go_tay?: number }[] }).__hbt_su_kien ?? []);
+  expect(sk.some((e) => e.su_kien === "daily_intent_set" && e.y_dinh === "cong_viec,van_dong" && e.go_tay === 1)).toBe(true);
+  // Mở lại trong ngày: ý định đã chọn vẫn hiện kết quả
+  await page.reload();
+  await expect(page.getByTestId("y-dinh-ket-qua").locator("li")).toHaveCount(2);
+  await expect(page.getByRole("heading", { name: "Câu hỏi nổi bật hôm nay" })).toBeVisible();
+  await expect(page.getByTestId("ngay-chaldea")).toContainText("Theo phái Chaldea");
+});
+
+test("HN-2: câu khủng hoảng → lời hỗ trợ, không luận ý định", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/hom-nay");
+  await page.getByLabel("Dự định hôm nay").fill("mình không muốn sống nữa");
+  await page.getByRole("button", { name: "Xem nhịp hôm nay" }).click();
+  await expect(page.getByTestId("ho-tro")).toContainText("115");
+  await expect(page.getByTestId("y-dinh-ket-qua")).toHaveCount(0);
+});

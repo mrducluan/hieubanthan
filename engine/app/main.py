@@ -26,6 +26,7 @@ from app.kb import trang as kb_trang
 from app.kb import tham_dinh as kb_tham_dinh
 from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.luangiai import hom_nay
+from app.luangiai import thanso_chaldean as luangiai_chaldea
 from app.luangiai import thanso as luangiai_thanso
 from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
 from app import nhat_ky
@@ -207,6 +208,14 @@ def api_luan_giai(inp: ThanSoInput) -> dict:
     return luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam)
 
 
+@app.post("/v1/thanso/chaldea")
+def api_chaldea(inp: ThanSoInput) -> dict:
+    """TS-PHAI — thần số phái Chaldea (Cheiro): số tên gọi, họ tên, ngày sinh, đường đời, linh hồn, nhân cách;
+    số kép 10–52 + số gốc, nghĩa từ KB, đối chiếu với phái Pitago. Biến thể tên thứ hai = tên thường gọi."""
+    inp.kiem_tra_ngay()
+    return {"engine_version": ENGINE_VERSION, **luangiai_chaldea.luan_chaldea(inp.ho_ten, inp.ngay, inp.thang, inp.nam)}
+
+
 @app.post("/v1/thanso/van")
 def api_luan_giai_van(inp: ThanSoInput) -> dict:
     """Bản luận CHI TIẾT — văn xuôi qua LLM (nếu có key), ngược lại template.
@@ -364,6 +373,8 @@ class HomNayInput(BaseModel):
     thang: int = Field(ge=1, le=12)
     nam: int = Field(ge=1900, le=2100)
     ngay_xem: _dt.date | None = None     # trống = hôm nay theo giờ Việt Nam
+    y_dinh: list[str] = Field(default_factory=list, max_length=11)   # HN-2: mã ý định chọn sẵn
+    du_dinh: str | None = Field(default=None, max_length=200)        # HN-2: câu gõ tay — chỉ nhận diện, không lưu
 
 
 @app.post("/v1/thanso/hom-nay")
@@ -374,7 +385,8 @@ def api_hom_nay(inp: HomNayInput) -> dict:
     except ValueError:
         raise HTTPException(422, detail="Ngày không tồn tại")
     ngay_xem = inp.ngay_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
-    return {"engine_version": ENGINE_VERSION, **hom_nay.the_hom_nay(inp.ngay, inp.thang, inp.nam, ngay_xem)}
+    return {"engine_version": ENGINE_VERSION, **hom_nay.the_hom_nay(inp.ngay, inp.thang, inp.nam, ngay_xem,
+                                                                          inp.y_dinh, inp.du_dinh)}
 
 
 @app.post("/v1/thanso/chu-ky")

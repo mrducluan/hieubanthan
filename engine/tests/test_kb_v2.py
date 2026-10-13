@@ -36,7 +36,8 @@ def _chuoi(x):
 
 
 @pytest.mark.parametrize("ten", ["thanso_linh_vuc.json", "thanso_cap_so.json", "thanso_bieu_do.json",
-                                 "thanso_chi_so_phu.json", "thanso_giai_thich.json", "thanso_xu_ly.json"])
+                                 "thanso_chi_so_phu.json", "thanso_giai_thich.json", "thanso_xu_ly.json",
+                                 "thanso_chaldean.json", "thanso_hom_nay.json"])
 def test_co_nguon_truong_phai_trang_thai(ten):
     d = _doc(ten)
     assert d["source_id"] and d["school_id"]
@@ -87,7 +88,8 @@ def test_bieu_do_va_chi_so_phu_du():
 
 
 @pytest.mark.parametrize("ten", ["thanso_linh_vuc.json", "thanso_cap_so.json",
-                                 "thanso_bieu_do.json", "thanso_chi_so_phu.json"])
+                                 "thanso_bieu_do.json", "thanso_chi_so_phu.json",
+                                 "thanso_chaldean.json", "thanso_hom_nay.json"])
 def test_khong_giong_phan_quyet(ten):
     vi_pham = [(c, s[:60]) for s in _chuoi(_doc(ten)) for c in CAM if re.search(c, s.lower())]
     assert vi_pham == []

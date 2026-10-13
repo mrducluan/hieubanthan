@@ -1,0 +1,749 @@
+{
+ "_nguon": "Hôm nay của bạn: ý định trong ngày × ngày cá nhân, ngày phổ quát, câu hỏi gợi mở.",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "pythagoras_vn",
+ "trang_thai": "nhap_ai",
+ "y_dinh": {
+  "cong_viec": {
+   "ten": "Việc ở chỗ làm",
+   "bieu_tuong": "Briefcase",
+   "cau_hoi": "Hôm nay có việc quan trọng ở chỗ làm?"
+  },
+  "gap_go": {
+   "ten": "Gặp gỡ, thương lượng",
+   "bieu_tuong": "Handshake",
+   "cau_hoi": "Hôm nay bạn có buổi gặp, thương lượng hay phỏng vấn?"
+  },
+  "hoc_tap": {
+   "ten": "Học, thi, đọc",
+   "bieu_tuong": "BookOpen",
+   "cau_hoi": "Hôm nay bạn định học, ôn thi hay đọc sách?"
+  },
+  "tinh_cam": {
+   "ten": "Hẹn hò, người thương",
+   "bieu_tuong": "Heart",
+   "cau_hoi": "Hôm nay bạn có hẹn hay muốn nói chuyện với người thương?"
+  },
+  "gia_dinh": {
+   "ten": "Việc nhà, gia đình",
+   "bieu_tuong": "Home",
+   "cau_hoi": "Hôm nay có việc nhà hay thời gian cho bố mẹ, con cái?"
+  },
+  "chi_tieu": {
+   "ten": "Chi tiêu, sắp xếp tiền",
+   "bieu_tuong": "Wallet",
+   "cau_hoi": "Hôm nay bạn định mua sắm lớn hay sắp xếp lại tiền bạc?"
+  },
+  "van_dong": {
+   "ten": "Tập luyện, vận động",
+   "bieu_tuong": "Dumbbell",
+   "cau_hoi": "Hôm nay bạn định tập luyện hay vận động?"
+  },
+  "bat_dau": {
+   "ten": "Bắt đầu việc mới",
+   "bieu_tuong": "Rocket",
+   "cau_hoi": "Hôm nay bạn muốn khởi động một việc hay dự án mới?"
+  },
+  "di_chuyen": {
+   "ten": "Đi xa, chuyển chỗ",
+   "bieu_tuong": "Plane",
+   "cau_hoi": "Hôm nay bạn có chuyến đi xa hay việc chuyển chỗ?"
+  },
+  "nghi_ngoi": {
+   "ten": "Nghỉ, chăm bản thân",
+   "bieu_tuong": "Coffee",
+   "cau_hoi": "Hôm nay bạn muốn nghỉ ngơi, chăm sóc bản thân?"
+  },
+  "sang_tao": {
+   "ten": "Sáng tạo, ý tưởng",
+   "bieu_tuong": "Palette",
+   "cau_hoi": "Hôm nay bạn định viết, vẽ, làm nội dung hay nghĩ ý tưởng?"
+  }
+ },
+ "noi_dung": {
+  "1": {
+   "bat_dau": {
+    "nhip": "thuan",
+    "nhan": "Ngày hợp để mở màn",
+    "cach_lam": "Chọn đúng một việc mới và làm bước đầu tiên trước buổi trưa: gửi email, lập thư mục, gọi cuộc điện thoại mở đầu.",
+    "tu_soi": "Hôm nay bạn đã làm bước đầu tiên của việc mới trước giờ nghỉ trưa chưa?"
+   },
+   "cong_viec": {
+    "nhip": "thuan",
+    "nhan": "Chủ động nhận phần việc chính",
+    "cach_lam": "Xin nhận phần việc bạn muốn dẫn dắt và nêu rõ hướng làm trong vài câu ngắn, thay vì chờ người khác giao.",
+    "tu_soi": "Bạn đã tự đề xuất nhận một phần việc nào trong buổi họp hôm nay chưa?"
+   },
+   "gap_go": {
+    "nhip": "thuan",
+    "nhan": "Là người mở lời trước",
+    "cach_lam": "Chuẩn bị sẵn câu mở đầu nói rõ bạn muốn gì từ buổi gặp, rồi nói nó trong vài phút đầu tiên.",
+    "tu_soi": "Trong buổi gặp hôm nay, bạn có nói ra mong muốn chính của mình ngay từ đầu không?"
+   },
+   "sang_tao": {
+    "nhip": "thuan",
+    "nhan": "Ý tưởng mới đáng được ghi",
+    "cach_lam": "Viết ra ba ý tưởng thô trong mười lăm phút mà chưa cần chấm điểm, sau đó chọn một ý để phác tiếp.",
+    "tu_soi": "Hôm nay bạn có ghi lại ý tưởng mới trước khi tự gạt nó đi không?"
+   },
+   "van_dong": {
+    "nhip": "thuan",
+    "nhan": "Thử một bài tập mới",
+    "cach_lam": "Đổi một bài quen bằng một bài bạn chưa từng tập, giữ cường độ vừa sức để còn muốn tập lại ngày mai.",
+    "tu_soi": "Bạn có thử một động tác hay lộ trình mới trong buổi tập hôm nay không?"
+   },
+   "hoc_tap": {
+    "nhip": "trung_tinh",
+    "nhan": "Học phần nền của chủ đề mới",
+    "cach_lam": "Hợp với việc mở một chủ đề mới: đọc phần tổng quan, lập danh sách câu hỏi, để phần đào sâu cho những ngày sau.",
+    "tu_soi": "Bạn có viết ra những câu hỏi muốn tìm hiểu trước khi bắt đầu đọc không?"
+   },
+   "di_chuyen": {
+    "nhip": "trung_tinh",
+    "nhan": "Lên đường với lịch rõ ràng",
+    "cach_lam": "Tự quyết lộ trình và giờ giấc của mình trước khi đi, báo cho người cần biết bằng một tin nhắn ngắn.",
+    "tu_soi": "Trước khi đi, bạn đã tự chốt lộ trình và báo cho người cần biết chưa?"
+   },
+   "chi_tieu": {
+    "nhip": "trung_tinh",
+    "nhan": "Chi theo kế hoạch tự đặt",
+    "cach_lam": "Ghi trước con số tối đa cho khoản chi rồi mới đi mua, quyết nhanh trong giới hạn đó.",
+    "tu_soi": "Bạn có đặt mức chi tối đa trước khi mở ví hôm nay không?"
+   },
+   "gia_dinh": {
+    "nhip": "trung_tinh",
+    "nhan": "Chủ động một việc trong nhà",
+    "cach_lam": "Nhận làm trọn một việc nhà mà thường để người khác nhắc, làm xong rồi mới báo.",
+    "tu_soi": "Hôm nay bạn có tự làm một việc nhà trước khi có người phải nhắc không?"
+   },
+   "tinh_cam": {
+    "nhip": "can_nhac",
+    "nhan": "Dẫn dắt nhưng chừa chỗ người kia",
+    "cach_lam": "Ngày có nhịp chủ động, nên khi đề xuất kế hoạch hẹn hãy đưa hai lựa chọn để người thương cùng chọn, thay vì chốt một mình.",
+    "tu_soi": "Khi rủ người thương đi đâu hôm nay, bạn có để họ cùng chọn không?"
+   },
+   "nghi_ngoi": {
+    "nhip": "can_nhac",
+    "nhan": "Nghỉ có chủ đích riêng",
+    "cach_lam": "Nhịp ngày thiên về hành động, nên hãy biến giờ nghỉ thành một việc bạn tự chọn và lên lịch, như đi bộ một mình hay đọc vài trang.",
+    "tu_soi": "Bạn có chọn sẵn cách nghỉ cụ thể thay vì lướt điện thoại cho qua giờ không?"
+   }
+  },
+  "2": {
+   "tinh_cam": {
+    "nhip": "thuan",
+    "nhan": "Ngày hợp để lắng nghe nhau",
+    "cach_lam": "Dành một buổi trò chuyện chỉ để hỏi và nghe, nhắc lại điều người thương vừa nói trước khi nêu ý mình.",
+    "tu_soi": "Hôm nay bạn có nhắc lại điều người thương nói trước khi trả lời không?"
+   },
+   "gia_dinh": {
+    "nhip": "thuan",
+    "nhan": "Phối hợp việc nhà nhẹ nhàng",
+    "cach_lam": "Hỏi mỗi người trong nhà muốn nhận phần việc nào rồi chia theo đó, cùng làm một việc nhỏ chung.",
+    "tu_soi": "Bạn có hỏi người nhà muốn làm phần nào trước khi chia việc không?"
+   },
+   "gap_go": {
+    "nhip": "thuan",
+    "nhan": "Tìm điểm chung trước khi bàn",
+    "cach_lam": "Mở buổi gặp bằng việc hỏi mối quan tâm của bên kia, ghi lại hai điểm hai bên cùng muốn rồi mới vào phần khác biệt.",
+    "tu_soi": "Trong buổi gặp, bạn đã tìm ra điểm chung nào với bên kia trước khi bàn chuyện khác?"
+   },
+   "nghi_ngoi": {
+    "nhip": "thuan",
+    "nhan": "Nghỉ chậm và yên",
+    "cach_lam": "Chọn một cách nghỉ ít âm thanh như tắm lâu hơn, nghe nhạc nhẹ hay ngồi uống trà, và tắt thông báo trong lúc đó.",
+    "tu_soi": "Bạn có tắt thông báo trong lúc nghỉ hôm nay không?"
+   },
+   "hoc_tap": {
+    "nhip": "trung_tinh",
+    "nhan": "Học cùng người khác",
+    "cach_lam": "Hợp với học nhóm hoặc hỏi người đi trước: mang theo hai câu hỏi cụ thể và ghi lại cách họ giải thích.",
+    "tu_soi": "Hôm nay bạn có hỏi ai đó một câu cụ thể về điều đang học không?"
+   },
+   "cong_viec": {
+    "nhip": "trung_tinh",
+    "nhan": "Làm tốt vai phối hợp",
+    "cach_lam": "Chọn hỗ trợ một đồng nghiệp ở phần họ đang vướng, hoặc rà lại chỗ nối giữa việc của bạn và việc của nhóm.",
+    "tu_soi": "Bạn có hỏi đồng nghiệp đang cần hỗ trợ ở đâu trước khi lao vào việc riêng không?"
+   },
+   "sang_tao": {
+    "nhip": "trung_tinh",
+    "nhan": "Chỉnh sửa và góp ý",
+    "cach_lam": "Hợp với việc mài lại bản đã có hoặc xin góp ý cho một bản nháp, ghi chép góp ý trước khi phản hồi.",
+    "tu_soi": "Bạn có ghi lại góp ý của người khác trước khi giải thích ý mình không?"
+   },
+   "di_chuyen": {
+    "nhip": "trung_tinh",
+    "nhan": "Đi cùng ai đó cho nhẹ",
+    "cach_lam": "Nếu có chuyến đi, rủ một người đồng hành hoặc nhờ người quen nơi đến hướng dẫn, giữ lịch trình thong thả.",
+    "tu_soi": "Bạn có để dư thời gian trong lịch trình hôm nay để không phải vội không?"
+   },
+   "van_dong": {
+    "nhip": "trung_tinh",
+    "nhan": "Tập cùng nhịp với người khác",
+    "cach_lam": "Hợp với tập đôi, tập nhóm hoặc những bài cần nhịp đều như đi bộ, bơi chậm, giãn cơ.",
+    "tu_soi": "Hôm nay bạn có rủ ai đó cùng vận động không?"
+   },
+   "bat_dau": {
+    "nhip": "can_nhac",
+    "nhan": "Khởi động bằng cách hỏi ý",
+    "cach_lam": "Nhịp ngày thiên về phối hợp, nên bước đầu của việc mới có thể là trò chuyện với người liên quan để nghe góp ý trước khi tự lao vào.",
+    "tu_soi": "Trước khi bắt tay vào việc mới, bạn đã hỏi ý kiến người sẽ cùng làm chưa?"
+   },
+   "chi_tieu": {
+    "nhip": "can_nhac",
+    "nhan": "Bàn với người cùng chi",
+    "cach_lam": "Với khoản chi lớn, hãy trao đổi với người cùng dùng hoặc cùng góp tiền, ghi lại điều cả hai đồng ý rồi mới mua.",
+    "tu_soi": "Khoản chi hôm nay có người cùng liên quan mà bạn đã hỏi ý chưa?"
+   }
+  },
+  "3": {
+   "sang_tao": {
+    "nhip": "thuan",
+    "nhan": "Ngày hợp để tuôn ý tưởng",
+    "cach_lam": "Viết, vẽ hay quay một bản nháp nhanh trong một lần ngồi, ưu tiên cho ra đủ ý trước rồi để chỉnh sau.",
+    "tu_soi": "Hôm nay bạn có hoàn thành một bản nháp trọn vẹn dù còn thô không?"
+   },
+   "gap_go": {
+    "nhip": "thuan",
+    "nhan": "Nói chuyện cởi mở, dễ gần",
+    "cach_lam": "Mang theo một câu chuyện ngắn minh hoạ cho điều bạn muốn nói, giúp buổi gặp gần gũi hơn.",
+    "tu_soi": "Trong buổi gặp hôm nay, bạn có dùng một ví dụ cụ thể để người kia dễ hình dung không?"
+   },
+   "tinh_cam": {
+    "nhip": "thuan",
+    "nhan": "Nói ra điều thương mến",
+    "cach_lam": "Gửi một lời khen cụ thể hoặc kể một kỷ niệm vui với người thương, nói bằng lời chứ không chỉ gửi biểu tượng.",
+    "tu_soi": "Hôm nay bạn có nói thành lời một điều bạn quý ở người thương không?"
+   },
+   "hoc_tap": {
+    "nhip": "thuan",
+    "nhan": "Học bằng cách giảng lại",
+    "cach_lam": "Sau khi đọc, thử giải thích lại cho một người khác hoặc tự ghi âm, chỗ nào nói vấp là chỗ cần học thêm.",
+    "tu_soi": "Bạn có giải thích lại điều vừa học cho ai đó hoặc cho chính mình không?"
+   },
+   "van_dong": {
+    "nhip": "thuan",
+    "nhan": "Vận động cho vui",
+    "cach_lam": "Chọn kiểu vận động có niềm vui như nhảy theo nhạc, chơi bóng cùng bạn hay đạp xe ngắm phố.",
+    "tu_soi": "Buổi vận động hôm nay có phần nào khiến bạn bật cười không?"
+   },
+   "cong_viec": {
+    "nhip": "trung_tinh",
+    "nhan": "Trình bày rõ và gọn",
+    "cach_lam": "Hợp với thuyết trình, viết báo cáo hay gửi cập nhật; giữ mỗi thông điệp trong ba ý để khỏi lan man.",
+    "tu_soi": "Bản cập nhật bạn gửi hôm nay có gói gọn trong ba ý chính không?"
+   },
+   "bat_dau": {
+    "nhip": "trung_tinh",
+    "nhan": "Khởi động bằng một lời giới thiệu",
+    "cach_lam": "Bắt đầu việc mới bằng việc kể về nó cho vài người, ghi lại câu hỏi họ đặt ra để biết cần làm rõ gì.",
+    "tu_soi": "Bạn đã kể về việc mới cho ai và ghi lại câu hỏi của họ chưa?"
+   },
+   "di_chuyen": {
+    "nhip": "trung_tinh",
+    "nhan": "Đi để gặp người, thấy cảnh",
+    "cach_lam": "Nếu đi xa, chừa một khoảng trống trong lịch để ghé một chỗ mới hoặc trò chuyện với người địa phương.",
+    "tu_soi": "Trên đường đi hôm nay, bạn có ghé hay hỏi chuyện được điều gì mới không?"
+   },
+   "gia_dinh": {
+    "nhip": "trung_tinh",
+    "nhan": "Trò chuyện quanh bữa cơm",
+    "cach_lam": "Biến bữa ăn thành lúc kể chuyện: mỗi người kể một điều vui trong ngày, kể cả con nhỏ.",
+    "tu_soi": "Trong bữa cơm hôm nay, bạn có hỏi mỗi người một điều vui của họ không?"
+   },
+   "nghi_ngoi": {
+    "nhip": "trung_tinh",
+    "nhan": "Nghỉ bằng niềm vui nhỏ",
+    "cach_lam": "Nghỉ ngơi kiểu nhẹ nhõm như xem một bộ phim hài, gọi cho bạn cũ hay tô màu, miễn là bạn thấy vui.",
+    "tu_soi": "Giờ nghỉ hôm nay có thật sự làm bạn thấy nhẹ hơn không?"
+   },
+   "chi_tieu": {
+    "nhip": "can_nhac",
+    "nhan": "Mua theo danh sách đã ghi",
+    "cach_lam": "Ngày nhiều hứng khởi dễ mua theo cảm xúc, nên hãy ghi danh sách trước và để món ngoài danh sách vào giỏ chờ đến hôm sau.",
+    "tu_soi": "Món bạn mua hôm nay có nằm trong danh sách đã ghi từ trước không?"
+   }
+  },
+  "4": {
+   "cong_viec": {
+    "nhip": "thuan",
+    "nhan": "Dọn việc tồn, làm chắc tay",
+    "cach_lam": "Chọn hai việc tồn lâu nhất và làm cho xong từng việc một, tắt tab không liên quan trong lúc làm.",
+    "tu_soi": "Hôm nay bạn đã đóng hẳn được việc tồn nào trong danh sách?"
+   },
+   "hoc_tap": {
+    "nhip": "thuan",
+    "nhan": "Ôn đều theo kế hoạch",
+    "cach_lam": "Chia phần cần học thành từng khối nhỏ có giờ bắt đầu và kết thúc, đánh dấu khi xong mỗi khối.",
+    "tu_soi": "Bạn có học đúng các khối giờ đã đặt ra cho hôm nay không?"
+   },
+   "chi_tieu": {
+    "nhip": "thuan",
+    "nhan": "Rà sổ chi tiêu cho gọn",
+    "cach_lam": "Hợp với việc xem lại các khoản chi trong tháng, huỷ một gói đăng ký không dùng và ghi ngân sách cho tuần tới.",
+    "tu_soi": "Hôm nay bạn có tìm ra một khoản chi định kỳ không còn cần không?"
+   },
+   "van_dong": {
+    "nhip": "thuan",
+    "nhan": "Tập đều theo giáo án",
+    "cach_lam": "Làm đúng bài đã định, ghi lại số hiệp hay quãng đường để lần sau so với chính mình.",
+    "tu_soi": "Bạn có ghi lại kết quả buổi tập hôm nay để theo dõi không?"
+   },
+   "gia_dinh": {
+    "nhip": "thuan",
+    "nhan": "Sắp xếp lại góc nhà",
+    "cach_lam": "Chọn một ngăn kéo, một góc bếp hay tủ đồ của con để dọn gọn cùng người nhà, xong trong một buổi.",
+    "tu_soi": "Hôm nay góc nào trong nhà đã được dọn gọn hẳn?"
+   },
+   "bat_dau": {
+    "nhip": "trung_tinh",
+    "nhan": "Đặt móng cho việc mới",
+    "cach_lam": "Nếu bắt đầu việc mới, hãy dành ngày để lập khung: danh sách việc, mốc thời gian, những thứ cần chuẩn bị.",
+    "tu_soi": "Việc mới của bạn đã có danh sách bước và mốc thời gian chưa?"
+   },
+   "gap_go": {
+    "nhip": "trung_tinh",
+    "nhan": "Chuẩn bị kỹ trước buổi gặp",
+    "cach_lam": "Mang theo tài liệu và các con số đã kiểm, ghi rõ những điều cần chốt ở cuối buổi.",
+    "tu_soi": "Cuối buổi gặp hôm nay, bạn có tóm lại những điều đã chốt không?"
+   },
+   "nghi_ngoi": {
+    "nhip": "trung_tinh",
+    "nhan": "Nghỉ đúng giờ đã hẹn",
+    "cach_lam": "Đặt giờ nghỉ cụ thể trong lịch như một cuộc hẹn, đến giờ thì dừng việc dù còn dở.",
+    "tu_soi": "Bạn có dừng việc đúng giờ nghỉ mình đã đặt không?"
+   },
+   "tinh_cam": {
+    "nhip": "trung_tinh",
+    "nhan": "Thương nhau bằng việc làm",
+    "cach_lam": "Làm cho người thương một việc thiết thực như sửa đồ, nấu món họ thích hay lo giúp một thủ tục.",
+    "tu_soi": "Hôm nay bạn có làm giúp người thương một việc cụ thể nào không?"
+   },
+   "di_chuyen": {
+    "nhip": "can_nhac",
+    "nhan": "Đi xa với danh sách kiểm tra",
+    "cach_lam": "Ngày hợp với nề nếp hơn là ngẫu hứng, nên trước chuyến đi hãy soạn danh sách đồ, giấy tờ và giờ giấc để chuyến đi trôi chảy.",
+    "tu_soi": "Bạn có kiểm lại giấy tờ và đồ cần mang trước khi lên đường không?"
+   },
+   "sang_tao": {
+    "nhip": "can_nhac",
+    "nhan": "Sáng tạo trong khung giờ cố định",
+    "cach_lam": "Ý tưởng có thể đến chậm hơn trong ngày kỷ luật, nên hãy ngồi vào một khung giờ cố định và làm phần kỹ thuật như chỉnh câu, căn bố cục.",
+    "tu_soi": "Hôm nay bạn có ngồi đủ khung giờ sáng tạo đã định dù ý tưởng chưa đến không?"
+   }
+  },
+  "5": {
+   "di_chuyen": {
+    "nhip": "thuan",
+    "nhan": "Ngày hợp để lên đường",
+    "cach_lam": "Chọn một đoạn đường hoặc điểm dừng khác lần trước, để mắt và đầu được làm mới.",
+    "tu_soi": "Trong chuyến đi hôm nay, bạn có thử một con đường hay điểm dừng mới không?"
+   },
+   "bat_dau": {
+    "nhip": "thuan",
+    "nhan": "Thử nghiệm nhanh, học nhanh",
+    "cach_lam": "Bắt đầu việc mới dưới dạng một phép thử nhỏ trong vài giờ, xem phản hồi rồi mới quyết làm tiếp.",
+    "tu_soi": "Bạn có làm một phiên bản thử nhỏ thay vì lên kế hoạch quá lâu không?"
+   },
+   "van_dong": {
+    "nhip": "thuan",
+    "nhan": "Đổi kiểu vận động",
+    "cach_lam": "Thay bài quen bằng hoạt động khác hẳn như leo dốc, bơi, chơi một môn đồng đội.",
+    "tu_soi": "Hôm nay bạn có vận động theo một cách khác với thường ngày không?"
+   },
+   "sang_tao": {
+    "nhip": "thuan",
+    "nhan": "Trộn ý tưởng từ nơi lạ",
+    "cach_lam": "Đọc hoặc xem một thứ ngoài lĩnh vực của bạn, rồi ghép một chi tiết từ đó vào việc đang làm.",
+    "tu_soi": "Bạn có mượn được ý nào từ một lĩnh vực khác vào việc sáng tạo hôm nay không?"
+   },
+   "gap_go": {
+    "nhip": "thuan",
+    "nhan": "Linh hoạt khi thương lượng",
+    "cach_lam": "Chuẩn bị sẵn hai ba phương án thay thế để buổi gặp có chỗ xoay khi bên kia đưa đề xuất bất ngờ.",
+    "tu_soi": "Bạn có mang theo phương án thay thế vào buổi gặp hôm nay không?"
+   },
+   "tinh_cam": {
+    "nhip": "trung_tinh",
+    "nhan": "Hẹn hò kiểu mới mẻ",
+    "cach_lam": "Đổi chỗ hẹn quen bằng một nơi hai người chưa từng đến, hoặc cùng thử làm một món mới.",
+    "tu_soi": "Buổi hẹn hôm nay có điều gì mới mà hai người chưa làm cùng nhau không?"
+   },
+   "hoc_tap": {
+    "nhip": "trung_tinh",
+    "nhan": "Học qua nhiều kênh",
+    "cach_lam": "Xen kẽ đọc, xem video và làm bài thực hành theo từng khoảng ngắn để giữ sự tập trung.",
+    "tu_soi": "Hôm nay bạn có đổi cách học khi thấy mình bắt đầu xao nhãng không?"
+   },
+   "cong_viec": {
+    "nhip": "trung_tinh",
+    "nhan": "Thích ứng với thay đổi",
+    "cach_lam": "Khi kế hoạch bị đổi, viết lại danh sách ưu tiên trong năm phút rồi làm tiếp thay vì giữ nguyên lịch cũ.",
+    "tu_soi": "Khi có việc phát sinh hôm nay, bạn có sắp lại thứ tự ưu tiên không?"
+   },
+   "nghi_ngoi": {
+    "nhip": "trung_tinh",
+    "nhan": "Nghỉ bằng một chuyến dạo",
+    "cach_lam": "Đổi không gian để nghỉ: ra công viên, sang quán mới hay đi dạo một khu phố chưa quen.",
+    "tu_soi": "Hôm nay bạn có đổi chỗ ngồi hay không gian để thả lỏng không?"
+   },
+   "chi_tieu": {
+    "nhip": "can_nhac",
+    "nhan": "Hứng mua thì hẹn lại",
+    "cach_lam": "Ngày nhiều hứng thú với cái mới, nên với món lớn hãy ghi lại tên và giá rồi xem lại sau một đêm, nếu vẫn cần thì mua.",
+    "tu_soi": "Với món lớn hôm nay, bạn có để qua một đêm trước khi quyết không?"
+   },
+   "gia_dinh": {
+    "nhip": "can_nhac",
+    "nhan": "Đổi không khí cho cả nhà",
+    "cach_lam": "Ngày muốn bay nhảy có thể khiến việc nhà thấy chật, nên hãy biến việc nhà thành hoạt động mới như cùng nấu món lạ hay đưa cả nhà đi dạo.",
+    "tu_soi": "Hôm nay bạn có rủ người nhà cùng làm một điều mới không?"
+   }
+  },
+  "6": {
+   "gia_dinh": {
+    "nhip": "thuan",
+    "nhan": "Ngày hợp để chăm người nhà",
+    "cach_lam": "Gọi điện hỏi thăm bố mẹ hoặc dành trọn một khoảng thời gian không điện thoại với con.",
+    "tu_soi": "Hôm nay bạn có dành một khoảng thời gian trọn vẹn cho người nhà không?"
+   },
+   "tinh_cam": {
+    "nhip": "thuan",
+    "nhan": "Chăm sóc bằng điều nhỏ",
+    "cach_lam": "Để ý một nhu cầu nhỏ của người thương như ly nước, tin nhắn hỏi han lúc họ bận, và làm mà không cần được nhờ.",
+    "tu_soi": "Bạn có làm một điều nhỏ cho người thương mà không đợi họ nhờ không?"
+   },
+   "nghi_ngoi": {
+    "nhip": "thuan",
+    "nhan": "Chăm sóc chính mình",
+    "cach_lam": "Nấu một bữa tử tế cho bản thân, đi ngủ sớm hơn hoặc dọn góc nghỉ của mình cho dễ chịu.",
+    "tu_soi": "Hôm nay bạn có làm một việc chăm sóc cho chính mình như với người mình thương không?"
+   },
+   "sang_tao": {
+    "nhip": "thuan",
+    "nhan": "Làm đẹp không gian sống",
+    "cach_lam": "Hợp với sáng tạo để tặng hoặc làm đẹp nơi ở: cắm một bình hoa, viết tấm thiệp, sắp lại góc làm việc.",
+    "tu_soi": "Hôm nay bạn có làm một thứ nhỏ để tặng ai hoặc làm đẹp chỗ mình ở không?"
+   },
+   "cong_viec": {
+    "nhip": "trung_tinh",
+    "nhan": "Làm tròn phần trách nhiệm",
+    "cach_lam": "Ưu tiên những việc người khác đang chờ bạn, hoàn thành và báo lại cho họ biết.",
+    "tu_soi": "Có ai đang chờ việc của bạn mà hôm nay bạn đã gửi xong chưa?"
+   },
+   "gap_go": {
+    "nhip": "trung_tinh",
+    "nhan": "Lắng nghe nhu cầu bên kia",
+    "cach_lam": "Trong buổi gặp hay phỏng vấn, hỏi xem bên kia đang cần giải quyết điều gì và nói rõ bạn giúp được phần nào.",
+    "tu_soi": "Bạn có hỏi bên kia đang cần gì trước khi trình bày điều bạn có không?"
+   },
+   "hoc_tap": {
+    "nhip": "trung_tinh",
+    "nhan": "Học để giúp người",
+    "cach_lam": "Chọn học điều bạn có thể dùng ngay cho người thân hay nhóm của mình, như một kỹ năng nấu ăn hay một mẹo sơ cứu cơ bản.",
+    "tu_soi": "Điều bạn học hôm nay có giúp được ai cụ thể không?"
+   },
+   "van_dong": {
+    "nhip": "trung_tinh",
+    "nhan": "Vận động cùng người thân",
+    "cach_lam": "Rủ người nhà đi bộ sau bữa tối hoặc cùng con chơi ngoài trời, giữ nhịp vừa với người yếu sức nhất.",
+    "tu_soi": "Hôm nay bạn có cùng người thân vận động một lúc không?"
+   },
+   "chi_tieu": {
+    "nhip": "trung_tinh",
+    "nhan": "Chi cho tổ ấm có cân nhắc",
+    "cach_lam": "Hợp với khoản chi cho nhà cửa, gia đình; hỏi người cùng dùng trước khi chọn món.",
+    "tu_soi": "Món bạn mua cho nhà hôm nay đã hỏi ý người cùng dùng chưa?"
+   },
+   "bat_dau": {
+    "nhip": "can_nhac",
+    "nhan": "Khởi động mà vẫn giữ lời hứa",
+    "cach_lam": "Ngày nặng phần trách nhiệm, nên trước khi mở việc mới hãy kiểm lại các lời hứa đang dở, báo trước nếu cần dời.",
+    "tu_soi": "Trước khi nhận thêm việc mới, bạn đã rà lại các lời hứa đang dở chưa?"
+   },
+   "di_chuyen": {
+    "nhip": "can_nhac",
+    "nhan": "Đi xa nhưng nhớ người ở nhà",
+    "cach_lam": "Ngày hướng về gia đình, nên khi phải đi hãy sắp xếp việc ở nhà trước và hẹn giờ gọi về.",
+    "tu_soi": "Trước chuyến đi, bạn đã sắp xếp việc ở nhà và hẹn giờ liên lạc chưa?"
+   }
+  },
+  "7": {
+   "hoc_tap": {
+    "nhip": "thuan",
+    "nhan": "Ngày hợp để học sâu",
+    "cach_lam": "Chọn một chủ đề và đọc kỹ một nguồn tốt trong khoảng thời gian dài không bị cắt, ghi chú bằng lời của mình.",
+    "tu_soi": "Hôm nay bạn có ngồi học liền một khoảng dài mà không mở mạng xã hội không?"
+   },
+   "nghi_ngoi": {
+    "nhip": "thuan",
+    "nhan": "Khoảng lặng cho riêng mình",
+    "cach_lam": "Dành một khoảng ở một mình không màn hình: đi bộ, ngồi yên, viết nhật ký vài dòng.",
+    "tu_soi": "Hôm nay bạn có một khoảng thời gian thật sự ở một mình không?"
+   },
+   "sang_tao": {
+    "nhip": "thuan",
+    "nhan": "Nghĩ chậm, viết sâu",
+    "cach_lam": "Hợp với việc nghiền ngẫm một ý tưởng lớn: viết ra câu hỏi cốt lõi và trả lời nó bằng vài đoạn thật kỹ.",
+    "tu_soi": "Bạn có dành thời gian đào sâu một ý thay vì nhảy qua nhiều ý không?"
+   },
+   "van_dong": {
+    "nhip": "trung_tinh",
+    "nhan": "Vận động tĩnh tại",
+    "cach_lam": "Hợp với yoga, giãn cơ, đi bộ một mình hay bơi chậm, những bài để đầu óc lắng lại.",
+    "tu_soi": "Buổi vận động hôm nay có giúp đầu óc bạn lắng lại không?"
+   },
+   "tinh_cam": {
+    "nhip": "trung_tinh",
+    "nhan": "Gần nhau trong yên tĩnh",
+    "cach_lam": "Một buổi bên nhau nhẹ nhàng như cùng đọc sách, đi dạo ít nói, hoặc kể cho nhau điều mình đang suy nghĩ.",
+    "tu_soi": "Hôm nay bạn có chia sẻ với người thương điều mình đang thật sự suy nghĩ không?"
+   },
+   "gia_dinh": {
+    "nhip": "trung_tinh",
+    "nhan": "Trò chuyện sâu với một người",
+    "cach_lam": "Thay vì lo nhiều việc nhà, chọn ngồi nói chuyện lâu hơn với một người trong nhà về điều họ đang bận tâm.",
+    "tu_soi": "Hôm nay bạn có hỏi sâu một người thân về điều họ đang lo nghĩ không?"
+   },
+   "cong_viec": {
+    "nhip": "trung_tinh",
+    "nhan": "Làm phần cần phân tích",
+    "cach_lam": "Ưu tiên việc cần suy nghĩ kỹ như rà số liệu, tìm nguyên nhân một lỗi, viết đề xuất; để phần họp hành sang ngày khác nếu được.",
+    "tu_soi": "Hôm nay bạn có dành thời gian cho phần việc cần suy nghĩ kỹ nhất không?"
+   },
+   "di_chuyen": {
+    "nhip": "trung_tinh",
+    "nhan": "Chuyến đi để ngẫm nghĩ",
+    "cach_lam": "Nếu đi xa, mang theo sổ tay hay sách, dùng thời gian trên đường để suy nghĩ thay vì chỉ lướt điện thoại.",
+    "tu_soi": "Trên đường đi hôm nay, bạn có ghi lại một suy nghĩ nào đáng giữ không?"
+   },
+   "gap_go": {
+    "nhip": "can_nhac",
+    "nhan": "Gặp gỡ với câu hỏi đã soạn",
+    "cach_lam": "Nhịp ngày hướng vào bên trong, nên hãy soạn trước câu hỏi muốn làm rõ, nói ít và nghe kỹ, rồi xin thêm thời gian suy nghĩ trước khi chốt.",
+    "tu_soi": "Trong buổi gặp hôm nay, bạn có xin thêm thời gian suy nghĩ trước khi chốt điều quan trọng không?"
+   },
+   "chi_tieu": {
+    "nhip": "can_nhac",
+    "nhan": "Tìm hiểu kỹ trước khi chi",
+    "cach_lam": "Ngày hợp với tìm hiểu hơn là hành động nhanh, nên hãy so sánh, đọc đánh giá và ghi lý do cần mua, rồi quyết khi đã rõ.",
+    "tu_soi": "Bạn có viết ra lý do cần món đồ trước khi mua không?"
+   },
+   "bat_dau": {
+    "nhip": "can_nhac",
+    "nhan": "Khởi động bằng nghiên cứu",
+    "cach_lam": "Bước đầu của việc mới hôm nay có thể là đọc tài liệu và viết ra câu hỏi cần trả lời, phần hành động để sang những ngày có nhịp mở.",
+    "tu_soi": "Bạn đã viết ra những câu hỏi cần trả lời cho việc mới chưa?"
+   }
+  },
+  "8": {
+   "cong_viec": {
+    "nhip": "thuan",
+    "nhan": "Ngày hợp để chốt việc lớn",
+    "cach_lam": "Đưa ra quyết định đang treo, giao việc rõ người rõ hạn, và ghi lại quyết định bằng văn bản.",
+    "tu_soi": "Hôm nay bạn đã chốt được quyết định nào đang treo lâu chưa?"
+   },
+   "gap_go": {
+    "nhip": "thuan",
+    "nhan": "Thương lượng thẳng vào việc",
+    "cach_lam": "Nêu con số hay điều kiện bạn mong muốn ngay trong buổi gặp, kèm lý do ngắn gọn, và hỏi rõ điều kiện của bên kia.",
+    "tu_soi": "Trong buổi thương lượng, bạn có nói rõ điều kiện mình mong muốn không?"
+   },
+   "chi_tieu": {
+    "nhip": "thuan",
+    "nhan": "Sắp xếp tiền cho ngăn nắp",
+    "cach_lam": "Hợp với việc lập ngân sách, chia tiền vào các mục, trả các khoản đến hạn và ghi lại tổng thu chi.",
+    "tu_soi": "Hôm nay bạn có biết rõ tổng thu chi của mình trong tháng này không?"
+   },
+   "bat_dau": {
+    "nhip": "thuan",
+    "nhan": "Khởi động có kế hoạch cụ thể",
+    "cach_lam": "Bắt đầu việc mới kèm mục tiêu đo được, người chịu trách nhiệm và mốc kiểm tra đầu tiên.",
+    "tu_soi": "Việc mới của bạn đã có mục tiêu đo được và mốc kiểm tra đầu tiên chưa?"
+   },
+   "hoc_tap": {
+    "nhip": "trung_tinh",
+    "nhan": "Học thứ dùng được ngay",
+    "cach_lam": "Chọn học kỹ năng phục vụ trực tiếp cho công việc hay tài chính cá nhân, làm bài áp dụng ngay sau khi học.",
+    "tu_soi": "Điều bạn học hôm nay có áp dụng ngay vào một việc thật không?"
+   },
+   "van_dong": {
+    "nhip": "trung_tinh",
+    "nhan": "Tập có mục tiêu đo được",
+    "cach_lam": "Đặt một chỉ tiêu nhỏ cho buổi tập như thêm một hiệp hay giữ nhịp lâu hơn, và ghi lại kết quả.",
+    "tu_soi": "Buổi tập hôm nay bạn có đặt và đạt một chỉ tiêu nhỏ không?"
+   },
+   "di_chuyen": {
+    "nhip": "trung_tinh",
+    "nhan": "Chuyến đi gọn gàng, hiệu quả",
+    "cach_lam": "Gộp nhiều việc vào một chuyến, đặt trước vé và chỗ ở, giữ hoá đơn cho việc thanh toán sau.",
+    "tu_soi": "Bạn có gộp được nhiều việc vào chuyến đi hôm nay không?"
+   },
+   "gia_dinh": {
+    "nhip": "trung_tinh",
+    "nhan": "Tổ chức việc nhà rõ ràng",
+    "cach_lam": "Họp nhanh với người nhà để chia việc trong tuần và thống nhất các khoản chi chung.",
+    "tu_soi": "Hôm nay cả nhà đã thống nhất ai làm việc gì trong tuần chưa?"
+   },
+   "sang_tao": {
+    "nhip": "trung_tinh",
+    "nhan": "Đưa ý tưởng vào kế hoạch",
+    "cach_lam": "Chọn một ý tưởng đang có và viết ra các bước để biến nó thành sản phẩm, kèm thời hạn cho bước đầu.",
+    "tu_soi": "Ý tưởng bạn quý nhất đã có bước tiếp theo và thời hạn chưa?"
+   },
+   "nghi_ngoi": {
+    "nhip": "can_nhac",
+    "nhan": "Nghỉ để quyết định sáng hơn",
+    "cach_lam": "Ngày nhiều việc phải quyết, nên hãy đặt giờ nghỉ ngắn giữa các quyết định lớn, coi đó là một phần lịch làm việc.",
+    "tu_soi": "Hôm nay bạn có đặt giờ nghỉ giữa các việc lớn không?"
+   },
+   "tinh_cam": {
+    "nhip": "can_nhac",
+    "nhan": "Gác chuyện công việc khi bên nhau",
+    "cach_lam": "Ngày hướng về việc thực tế, nên khi hẹn người thương hãy tắt chuyện công việc và hỏi về một ngày của họ.",
+    "tu_soi": "Khi ở bên người thương hôm nay, bạn có gác chuyện công việc lại không?"
+   }
+  },
+  "9": {
+   "nghi_ngoi": {
+    "nhip": "thuan",
+    "nhan": "Ngày hợp để buông bớt",
+    "cach_lam": "Gạch bớt một việc không còn cần trong danh sách và dùng khoảng trống đó để nghỉ thật sự.",
+    "tu_soi": "Hôm nay bạn đã gạch bỏ được việc nào không còn cần làm?"
+   },
+   "gia_dinh": {
+    "nhip": "thuan",
+    "nhan": "Khép lại chuyện còn dở",
+    "cach_lam": "Nói lời cảm ơn hoặc lời xin lỗi còn nợ với người nhà, hoặc dọn đồ cũ để cho đi.",
+    "tu_soi": "Có lời cảm ơn hay xin lỗi nào với người nhà mà hôm nay bạn đã nói ra chưa?"
+   },
+   "sang_tao": {
+    "nhip": "thuan",
+    "nhan": "Hoàn tất tác phẩm còn dở",
+    "cach_lam": "Chọn một bản nháp đang dở và làm cho xong, chấp nhận nó chưa hoàn hảo để có thể khép lại.",
+    "tu_soi": "Hôm nay bạn có hoàn tất một sản phẩm sáng tạo đang dở không?"
+   },
+   "tinh_cam": {
+    "nhip": "thuan",
+    "nhan": "Bao dung và nhẹ lòng",
+    "cach_lam": "Nhắc lại một điều tốt người thương từng làm và cho qua một chuyện nhỏ còn vướng giữa hai người.",
+    "tu_soi": "Hôm nay bạn có cho qua một chuyện nhỏ còn vướng với người thương không?"
+   },
+   "cong_viec": {
+    "nhip": "trung_tinh",
+    "nhan": "Hoàn tất và bàn giao",
+    "cach_lam": "Ưu tiên kết thúc dự án, viết ghi chú bàn giao và tổng kết điều học được trước khi nhận việc mới.",
+    "tu_soi": "Bạn có viết lại điều rút ra từ việc vừa xong trước khi chuyển sang việc khác không?"
+   },
+   "hoc_tap": {
+    "nhip": "trung_tinh",
+    "nhan": "Ôn lại và tổng kết",
+    "cach_lam": "Hợp với việc ôn toàn bộ chương đã học, tóm tắt thành một trang và ghi rõ chỗ còn hổng.",
+    "tu_soi": "Hôm nay bạn có tóm tắt lại điều đã học thành một trang không?"
+   },
+   "gap_go": {
+    "nhip": "trung_tinh",
+    "nhan": "Khép lại thoả thuận cho trọn",
+    "cach_lam": "Dùng buổi gặp để chốt nốt những điểm còn mở, gửi lại biên bản tóm tắt và cảm ơn bên kia.",
+    "tu_soi": "Sau buổi gặp, bạn có gửi lời tóm tắt và cảm ơn bên kia không?"
+   },
+   "van_dong": {
+    "nhip": "trung_tinh",
+    "nhan": "Vận động để xả bớt",
+    "cach_lam": "Chọn bài tập nhẹ nhàng giúp thả lỏng như đi bộ dài, giãn cơ, hít thở sâu cuối ngày.",
+    "tu_soi": "Sau buổi vận động hôm nay, bạn có thấy thả lỏng hơn không?"
+   },
+   "di_chuyen": {
+    "nhip": "trung_tinh",
+    "nhan": "Dọn đồ trước khi chuyển",
+    "cach_lam": "Nếu chuyển chỗ hay đi xa, tranh thủ bỏ bớt đồ không dùng và mang theo hành lý gọn nhẹ.",
+    "tu_soi": "Bạn có bỏ bớt được món đồ nào không còn dùng trước khi đi không?"
+   },
+   "bat_dau": {
+    "nhip": "can_nhac",
+    "nhan": "Dọn chỗ cho việc mới",
+    "cach_lam": "Ngày thiên về khép lại, nên hãy dùng hôm nay để hoàn tất việc cũ và lập danh sách cho việc mới, bước khởi động để sang ngày tiếp theo.",
+    "tu_soi": "Bạn đã khép lại được việc cũ nào để có chỗ cho việc mới chưa?"
+   },
+   "chi_tieu": {
+    "nhip": "can_nhac",
+    "nhan": "Cho đi và thanh lý",
+    "cach_lam": "Ngày hợp với cho đi hơn là mua thêm, nên hãy trả nốt khoản nợ nhỏ, thanh lý đồ không dùng, còn món lớn thì ghi lại để cân nhắc hôm sau.",
+    "tu_soi": "Hôm nay bạn có trả nốt hay thanh lý được khoản nào còn treo không?"
+   }
+  }
+ },
+ "ngay_pho_quat": {
+  "1": "Không khí chung của ngày là khởi động: nhiều người muốn mở đầu việc mới, nói lên ý mình.",
+  "2": "Không khí chung của ngày là hợp tác: hợp với lắng nghe, nhường nhịn và làm việc theo cặp.",
+  "3": "Không khí chung của ngày là giao tiếp: mọi người dễ trò chuyện, chia sẻ và bày tỏ hơn.",
+  "4": "Không khí chung của ngày là nề nếp: hợp với làm việc chăm chỉ, sắp xếp và giữ cam kết.",
+  "5": "Không khí chung của ngày là chuyển động: nhiều thay đổi nhỏ, hợp với linh hoạt và thử cái mới.",
+  "6": "Không khí chung của ngày là chăm sóc: hợp với quan tâm gia đình, cộng đồng và phần trách nhiệm chung.",
+  "7": "Không khí chung của ngày là lắng lại: hợp với suy ngẫm, tìm hiểu kỹ và giữ nhịp chậm.",
+  "8": "Không khí chung của ngày là thực tế: hợp với bàn việc, tổ chức và những quyết định rõ ràng.",
+  "9": "Không khí chung của ngày là khép lại: hợp với hoàn tất, tha thứ và cho đi."
+ },
+ "cau_hoi_noi_bat": {
+  "1": [
+   "Việc nào hôm nay bạn muốn là người mở lời trước?",
+   "Nếu chỉ làm một bước đầu tiên cho điều đang ấp ủ, bước đó là gì?",
+   "Hôm nay bạn muốn tự quyết điều gì mà không cần chờ ai?",
+   "Ý tưởng nào của bạn đáng được nói ra trong hôm nay?"
+  ],
+  "2": [
+   "Hôm nay bạn muốn lắng nghe ai kỹ hơn một chút?",
+   "Việc nào sẽ nhẹ hơn nếu có người cùng làm với bạn?",
+   "Bạn có thể nói lời cảm ơn với ai vì sự phối hợp gần đây?",
+   "Trong cuộc trò chuyện hôm nay, bạn muốn hỏi điều gì thay vì khẳng định?"
+  ],
+  "3": [
+   "Hôm nay bạn muốn chia sẻ câu chuyện nào với người khác?",
+   "Ý tưởng nào bạn muốn phác thử ra giấy trong hôm nay?",
+   "Ai là người bạn muốn nhắn một lời hỏi thăm vui vẻ?",
+   "Điều gì hôm nay có thể khiến bạn và người bên cạnh cùng cười?"
+  ],
+  "4": [
+   "Việc nhỏ nào nếu xong hôm nay giúp cả tuần nhẹ hơn?",
+   "Góc nào trong nhà hay trên máy tính bạn muốn dọn gọn hôm nay?",
+   "Hôm nay bạn muốn giữ đều thói quen nào?",
+   "Bạn sắp xếp lịch hôm nay thế nào để còn khoảng thở?"
+  ],
+  "5": [
+   "Hôm nay bạn muốn thử khác đi ở thói quen nào?",
+   "Có nơi nào gần nhà mà bạn chưa từng ghé và muốn đến thử?",
+   "Nếu kế hoạch hôm nay bị đổi, bạn muốn giữ lại điều gì?",
+   "Điều mới nào bạn muốn học thử chỉ trong vài phút?"
+  ],
+  "6": [
+   "Người thân nào hôm nay vui nếu nhận lời hỏi han từ bạn?",
+   "Bạn muốn chăm sóc bản thân theo cách nào trong hôm nay?",
+   "Lời hứa nào bạn muốn làm tròn trong hôm nay?",
+   "Bạn có thể làm điều gì nhỏ để góc sống của mình dễ chịu hơn?"
+  ],
+  "7": [
+   "Câu hỏi nào bạn muốn dành thời gian suy nghĩ kỹ hôm nay?",
+   "Hôm nay bạn muốn có khoảng lặng ở đâu và vào lúc nào?",
+   "Cuốn sách hay chủ đề nào bạn muốn đào sâu thêm?",
+   "Điều gì bạn muốn hiểu rõ hơn trước khi quyết định?"
+  ],
+  "8": [
+   "Quyết định nào bạn đã đủ thông tin để chốt hôm nay?",
+   "Hôm nay bạn muốn sắp xếp lại khoản tiền nào cho rõ ràng?",
+   "Việc nào bạn muốn giao cho người khác để tập trung vào phần chính?",
+   "Mục tiêu nào bạn muốn viết ra kèm con số và thời hạn?"
+  ],
+  "9": [
+   "Điều gì bạn muốn khép lại để có chỗ cho cái mới?",
+   "Món đồ hay việc nào bạn sẵn lòng buông bớt hôm nay?",
+   "Bạn muốn nói lời cảm ơn hay lời xin lỗi với ai?",
+   "Việc nào đang dở mà bạn muốn làm cho xong trong hôm nay?"
+  ]
+ }
+}
