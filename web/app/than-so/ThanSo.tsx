@@ -20,6 +20,16 @@ import { TheBaLop } from "@/components/than-so/TheBaLop";
 import { useBaiDoc } from "@/lib/bai-doc";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { hoTenList, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
+import { DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
+import { ChaldeaDoc } from "@/components/than-so/ChaldeaDoc";
+import { ghi } from "@/lib/do-luong";
+
+// TS-PHAI — hai trường phái thần số; lựa chọn nhớ trên máy (localStorage), mặc định Pitago như trước.
+export type PhaiThanSo = "pitago" | "chaldea";
+const KHOA_PHAI = "hbt.thanso_phai";
+function docPhai(): PhaiThanSo {
+  try { return localStorage.getItem(KHOA_PHAI) === "chaldea" ? "chaldea" : "pitago"; } catch { return "pitago"; }
+}
 
 // Gợi ý ở dạng TỰ SOI, không dự đoán tương lai.
 const GOI_Y = [
@@ -54,6 +64,13 @@ export function ThanSo() {
   const router = useRouter();
   const { kq, loi, thuLai } = useBaiDoc(hoSo);
   const [tab, setTab] = useState("dai-doi");
+  const [phai, setPhai] = useState<PhaiThanSo>("pitago");
+  useEffect(() => { setPhai(docPhai()); }, []);
+  function doiPhai(p: PhaiThanSo) {
+    setPhai(p);
+    try { localStorage.setItem(KHOA_PHAI, p); } catch { /* chế độ riêng tư: chỉ nhớ trong phiên */ }
+    ghi("school_switched", { mo_dun: "thanso", phai: p });
+  }
   // Link "/than-so#dong-doi" (từ chân dung) mở thẳng tab Dòng đời.
   useEffect(() => {
     const doc = () => { if (location.hash === "#dong-doi") setTab("dong-doi"); };
@@ -89,6 +106,15 @@ export function ThanSo() {
         <p className="mt-2 text-sm text-fg-muted" data-testid="ngay-sinh">Sinh {kq.ngay_sinh} · {kq.tom_tat_do_tin}</p>
       </header>
 
+      <KhungPhai testId="truong-phai-than-so" moTa={<>Hai phái tính khác nhau từ cùng họ tên và ngày sinh. Pitago (mặc định) dùng bảng chữ 1–9 theo thứ tự ABC, có biểu đồ ngày sinh, đỉnh cao, năm cá nhân. Chaldea dùng bảng chữ 1–8 theo âm, đọc số kép 10–52 và coi trọng tên thường gọi.</>}>
+        <DongPhai ten="Trường phái" nhan="Chọn trường phái thần số" giaTri={phai} doi={doiPhai}
+          luaChon={[["pitago", "Pitago"], ["chaldea", "Chaldea"]]}
+          goiY={phai === "chaldea"
+            ? (hoSo.ten_khac ? `Số tên gọi lấy theo tên thường gọi “${hoSo.ten_khac}”.` : "Chưa có tên thường gọi trong hồ sơ — số tên gọi lấy tiếng cuối của họ tên.")
+            : "Phổ biến nhất ở Việt Nam; mọi phần chiều sâu bên dưới theo phái này."} />
+      </KhungPhai>
+
+      {phai === "chaldea" ? <ChaldeaDoc hoSo={hoSo} /> : (<>
       <section aria-labelledby="bon-so">
         <TieuDeMuc id="bon-so" nho="Bốn con số cốt lõi" lon="Cách tính, ý nghĩa, câu tự soi" />
         <div className="grid gap-4 md:grid-cols-2">
@@ -163,10 +189,13 @@ export function ThanSo() {
       </section>
 
       <CuoiBaiDoc moDun="thanso_sau" cauHoi="Phần chiều sâu có giúp bạn hiểu mình hơn?" />
+      </>)}
 
       <section id="hoi" aria-labelledby="muc-hoi" className="scroll-mt-24">
         <TieuDeMuc id="muc-hoi" nho="Hỏi sâu hơn" lon={`${tenGoi(hoSo)}, bạn đang băn khoăn điều gì?`}
-          mo_ta="Câu trả lời soi câu hỏi của bạn qua chính những con số ở trên — góc nhìn tham khảo để tự ngẫm, không phải lời tiên đoán." />
+          mo_ta={phai === "chaldea"
+            ? "Hỏi đáp hiện trả lời theo các con số phái Pitago (bản đọc mặc định) — góc nhìn tham khảo để tự ngẫm, không phải lời tiên đoán."
+            : "Câu trả lời soi câu hỏi của bạn qua chính những con số ở trên — góc nhìn tham khảo để tự ngẫm, không phải lời tiên đoán."} />
         <KhungChat
             moDun="thanso"
           loiChao="Chọn một câu gợi ý bên dưới, hoặc tự đặt câu hỏi về bản thân, nghề nghiệp, tình cảm."

@@ -165,3 +165,8 @@ def chi_so_mo_rong(ho_ten: str | None, d: int, m: int, y: int,
         kq["so_truong_thanh"] = so_truong_thanh(dd, thanso.gia_tri_xac_dinh(ho_ten, "su_menh"))
         kq["bai_hoc_nghiep"] = bai_hoc_nghiep(ho_ten)
     return kq
+
+
+def ngay_pho_quat(nam_xem: int, thang_xem: int, ngay_xem: int) -> int:
+    """Ngày phổ quát (chung cho mọi người): cộng mọi chữ số của ngày xem, rút về 1–9."""
+    return thanso.rut_gon(sum(_chu_so(ngay_xem, thang_xem, nam_xem)), giu_master=False)

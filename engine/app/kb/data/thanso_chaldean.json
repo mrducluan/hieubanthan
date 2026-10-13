@@ -1,0 +1,368 @@
+{
+ "_nguon": "Thần số học phái Chaldea (Cheiro): nghĩa số gốc 1–9 và số kép 10–52.",
+ "source": {
+  "id": "nhap_ai_chaldea_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo hệ thần số Chaldea — Cheiro, Book of Numbers (1926)",
+  "luu_y": "Bản nháp do AI viết, diễn đạt lại bằng lời mới, không chép sách; hiển thị theo quyết định chủ dự án 2026-09-30, cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_chaldea_2026",
+ "school_id": "chaldean_cheiro",
+ "trang_thai": "nhap_ai",
+ "gioi_thieu": {
+  "ten_phai": "Chaldea",
+  "tom_tat": "Theo truyền thống, hệ thần số Chaldea bắt nguồn từ vùng Babylon cổ và được Cheiro phổ biến trong tiếng Anh vào đầu thế kỷ hai mươi. Mỗi chữ cái mang một giá trị từ 1 đến 8 theo âm đọc, còn số 9 được giữ riêng như con số thiêng, không gán cho chữ nào. Phái này coi trọng cái tên người khác thường gọi bạn và nghĩa biểu tượng của các số kép.",
+  "khac_pitago": [
+   "Bảng chữ khác: chữ cái được gán giá trị 1–8 theo âm thanh và rung động, không theo thứ tự A, B, C như phái Pythagoras.",
+   "Không chữ cái nào mang số 9; số 9 chỉ xuất hiện khi cộng tổng.",
+   "Số kép 10–52 có nghĩa biểu tượng riêng, được đọc trước khi rút gọn về số gốc.",
+   "Coi trọng tên thường gọi hằng ngày (tên được nghe nhiều nhất) hơn họ tên đầy đủ trên giấy tờ.",
+   "Không dùng biểu đồ ngày sinh, mũi tên hay các đỉnh cao như phái Pythagoras.",
+   "Không có số cái: 11 và 22 chỉ được đọc như số kép, rồi rút gọn về 2 và 4."
+  ],
+  "cach_doc": "Số gốc cho thấy xu hướng chính, còn số kép thêm sắc thái và hình ảnh biểu tượng cho xu hướng đó. Đây là gợi ý để tự soi chiếu, không phải lời dự báo về cuộc đời ai."
+ },
+ "bang_chu": {
+  "1": "A I J Q Y",
+  "2": "B K R",
+  "3": "C G L S",
+  "4": "D M T",
+  "5": "E H N X",
+  "6": "U V W",
+  "7": "O Z",
+  "8": "F P"
+ },
+ "goc": {
+  "1": {
+   "ten": "Người khởi xướng",
+   "hanh_tinh": "Mặt Trời",
+   "xu_huong": "Theo truyền thống Chaldea, số 1 thường được mô tả là nguồn năng lượng mở đầu, thích tự đặt hướng đi và đứng ở vị trí dẫn dắt. Người mang số này hay được nói là quyết nhanh và khó chịu khi phải chờ người khác gật đầu.",
+   "mat_toi": "Dễ coi ý mình là ý đúng duy nhất và bỏ qua người lặng lẽ trong nhóm.",
+   "goi_y": "Trong tuần này, trước một quyết định của nhóm, hãy hỏi ý kiến người ít lên tiếng nhất trước khi nêu ý của mình.",
+   "cau_tu_soi": "Tuần qua bạn có quyết một việc của nhóm mà không hỏi ai không?"
+  },
+  "2": {
+   "ten": "Người hoà giải",
+   "hanh_tinh": "Mặt Trăng",
+   "xu_huong": "Số 2 thường được mô tả là mềm mỏng, giàu tưởng tượng và nhạy với không khí xung quanh. Truyền thống gắn số này với Mặt Trăng nên nhấn vào cảm xúc lên xuống và khả năng đọc người khác.",
+   "mat_toi": "Dễ chiều theo người khác đến mức không nói ra điều mình thật sự muốn, rồi âm thầm khó chịu.",
+   "goi_y": "Trong tuần này, chọn một lần bạn định nói 'sao cũng được' và thay bằng một lựa chọn cụ thể của mình.",
+   "cau_tu_soi": "Lần gần nhất bạn từ chối một lời nhờ vả là trong tuần này phải không?"
+  },
+  "3": {
+   "ten": "Người mở rộng",
+   "hanh_tinh": "Sao Mộc",
+   "xu_huong": "Số 3 gắn với Sao Mộc nên thường được mô tả là hướng tới mở rộng, học hỏi và có tham vọng vươn lên. Người mang số này hay được nói là thích tổ chức, thích dạy lại người khác điều mình biết.",
+   "mat_toi": "Dễ ôm quá nhiều kế hoạch cùng lúc và coi trọng danh nghĩa hơn việc hoàn tất.",
+   "goi_y": "Trong tuần này, gạch bớt một việc bạn đã nhận nhưng thật ra không còn muốn làm.",
+   "cau_tu_soi": "Bạn có đang theo đuổi nhiều hơn ba dự định mà chưa cái nào xong không?"
+  },
+  "4": {
+   "ten": "Người đi ngược lối mòn",
+   "hanh_tinh": "Sao Thiên Vương",
+   "xu_huong": "Số 4 trong phái Chaldea thường được mô tả là nhìn sự việc từ góc khác người, thích đặt câu hỏi với lệ thường. Người mang số này hay được nói là làm việc bền bỉ nhưng theo cách riêng.",
+   "mat_toi": "Dễ phản bác theo thói quen, khiến người khác ngại đưa ý tưởng ra bàn.",
+   "goi_y": "Trong tuần này, khi định phản đối một ý kiến, hãy nêu trước một điểm bạn thấy hợp lý trong đó.",
+   "cau_tu_soi": "Trong cuộc họp hay bữa cơm gần nhất, bạn có phản bác ý của ai trước khi nghe hết không?"
+  },
+  "5": {
+   "ten": "Người kết nối",
+   "hanh_tinh": "Sao Thuỷ",
+   "xu_huong": "Số 5 gắn với Sao Thuỷ nên thường được mô tả là nhanh nhạy, khéo ăn nói và thích đổi mới môi trường. Người mang số này hay được nói là học nhanh, dễ kết bạn nhưng chán khi việc lặp lại.",
+   "mat_toi": "Dễ bỏ dở khi điều mới lạ qua đi và hứa nhiều hơn khả năng theo kịp.",
+   "goi_y": "Trong tuần này, chọn một việc đang làm dở và dành trọn một buổi để đưa nó tới bước kế tiếp.",
+   "cau_tu_soi": "Tháng này bạn có bỏ ngang một khoá học hay thói quen mới bắt đầu không?"
+  },
+  "6": {
+   "ten": "Người vun đắp",
+   "hanh_tinh": "Sao Kim",
+   "xu_huong": "Số 6 gắn với Sao Kim nên thường được mô tả là yêu cái đẹp, coi trọng sự êm ấm và có sức hút trong quan hệ. Người mang số này hay được nói là chăm chút nhà cửa, bạn bè và không khí xung quanh mình.",
+   "mat_toi": "Dễ né va chạm cần thiết để giữ vẻ êm đẹp, hoặc ôm việc của người khác vì sợ họ buồn.",
+   "goi_y": "Trong tuần này, nói thẳng một điều chưa vừa ý với người thân bằng giọng nhẹ nhàng thay vì im lặng.",
+   "cau_tu_soi": "Tuần qua bạn có nhận làm thay việc của ai chỉ để tránh không khí căng thẳng không?"
+  },
+  "7": {
+   "ten": "Người mơ mộng",
+   "hanh_tinh": "Sao Hải Vương",
+   "xu_huong": "Số 7 gắn với Sao Hải Vương nên thường được mô tả là giàu trực giác, thích suy tưởng và hướng về những điều khó đo đếm. Người mang số này hay được nói là thích đi xa, đọc sâu và cần khoảng lặng riêng.",
+   "mat_toi": "Dễ trôi vào tưởng tượng mà trì hoãn những việc thực tế trước mắt.",
+   "goi_y": "Trong tuần này, viết ra một ý tưởng bạn ấp ủ lâu nay và ghi kèm một bước nhỏ làm được trong hai ngày.",
+   "cau_tu_soi": "Bạn có đang hoãn một việc giấy tờ hay việc nhà quá một tuần không?"
+  },
+  "8": {
+   "ten": "Người bền chí",
+   "hanh_tinh": "Sao Thổ",
+   "xu_huong": "Số 8 gắn với Sao Thổ nên thường được mô tả là nghiêm túc, chịu được áp lực dài và đi đường xa bằng sự kiên trì. Người mang số này hay được nói là ít bộc lộ, dễ bị hiểu lầm là lạnh lùng.",
+   "mat_toi": "Dễ gánh một mình, không chia sẻ khó khăn và khắt khe với bản thân hơn mức cần.",
+   "goi_y": "Trong tuần này, kể cho một người tin cậy về một việc đang làm bạn nặng lòng.",
+   "cau_tu_soi": "Tuần qua bạn có nhờ ai giúp một việc mình đang thấy quá sức không?"
+  },
+  "9": {
+   "ten": "Người hành động",
+   "hanh_tinh": "Sao Hoả",
+   "xu_huong": "Số 9 gắn với Sao Hoả nên thường được mô tả là nhiều năng lượng, dám đối mặt và hăng hái bảo vệ điều mình tin. Truyền thống Chaldea xem số 9 là con số thiêng, chỉ xuất hiện khi cộng tổng chứ không gán cho chữ cái.",
+   "mat_toi": "Dễ nóng vội, nói gắt khi bị cản và hành động trước khi nghe đủ.",
+   "goi_y": "Trong tuần này, khi thấy bực, chờ một nhịp thở dài rồi mới trả lời tin nhắn hay lời nói đó.",
+   "cau_tu_soi": "Tuần qua bạn có gửi đi một tin nhắn lúc đang bực rồi thấy hối tiếc không?"
+  }
+ },
+ "kep": {
+  "10": {
+   "bieu_tuong": "Bánh xe vận hội",
+   "xu_huong": "Theo truyền thống Chaldea, số kép này được mô tả bằng hình bánh xe quay vòng: thăng trầm luân phiên và năng lực bắt đầu lại sau mỗi vòng. Thường gắn với lòng tự tin và được người khác nhớ tên.",
+   "mat_toi": "Dễ dựa vào hoàn cảnh thuận lợi mà lơ là chuẩn bị cho lúc bánh xe đổi chiều.",
+   "cau_tu_soi": "Khi một kế hoạch đổ vỡ, bạn có bắt tay làm lại trong vòng một tuần không?"
+  },
+  "11": {
+   "bieu_tuong": "Bàn tay nắm chặt",
+   "xu_huong": "Theo truyền thống, số kép này được tả bằng hình bàn tay nắm chặt hay con sư tử bị ghìm: sức mạnh có sẵn nhưng đang bị giữ lại. Chủ đề là học cách tin người đúng chỗ và nói rõ điều mình muốn.",
+   "mat_toi": "Dễ nghi ngờ người khác quá mức hoặc ngược lại, tin vội vào lời hứa đẹp.",
+   "cau_tu_soi": "Bạn có kiểm tra lại một lời hứa quan trọng bằng văn bản trước khi dựa vào nó không?"
+  },
+  "12": {
+   "bieu_tuong": "Người hi sinh",
+   "xu_huong": "Số kép này thường được mô tả bằng hình ảnh người tự nguyện gác nhu cầu riêng để phục vụ mục tiêu của người khác. Chủ đề truyền thống là học cách phân biệt giúp đỡ và bị lợi dụng.",
+   "mat_toi": "Dễ nhận phần thiệt về mình rồi thấy tủi thân mà không nói ra.",
+   "cau_tu_soi": "Tháng này bạn có nói 'không' với một yêu cầu làm thêm không công không?"
+  },
+  "13": {
+   "bieu_tuong": "Mùa chuyển giao",
+   "xu_huong": "Truyền thống Chaldea gắn số kép này với sự thay đổi kế hoạch, chỗ ở hay cách sống: cái cũ khép lại để cái mới có chỗ. Thường được đọc như lời mời chủ động dọn dẹp thay vì níu giữ.",
+   "mat_toi": "Dễ đổi mới vội vàng, bỏ cả những thứ còn giá trị chỉ vì thấy chán.",
+   "cau_tu_soi": "Bạn có giữ một thói quen hay đồ vật đã không còn dùng hơn một năm không?"
+  },
+  "14": {
+   "bieu_tuong": "Dòng chảy kết nối",
+   "xu_huong": "Số kép này thường được mô tả là chuyển động không ngừng, gặp gỡ và kết hợp người với việc, hợp với buôn bán, trao đổi, đi lại. Chủ đề là giữ được sự thận trọng khi mọi thứ trôi nhanh.",
+   "mat_toi": "Dễ đặt cược vào lời người khác mà không tự tìm hiểu kỹ.",
+   "cau_tu_soi": "Lần gần nhất bạn đồng ý tham gia một việc góp vốn hay góp sức, bạn có tự đọc kỹ điều kiện trước không?"
+  },
+  "15": {
+   "bieu_tuong": "Sức hút của lời nói",
+   "xu_huong": "Theo truyền thống, số kép này gắn với tài ăn nói, duyên dáng và sức thuyết phục, được người khác sẵn lòng giúp đỡ. Thường được mô tả như sức hút có thể dùng để nâng người hoặc để chiều ý mình.",
+   "mat_toi": "Dễ dùng sự khéo léo để lấy điều mình muốn mà quên hỏi người kia có thật sự đồng ý.",
+   "cau_tu_soi": "Tuần qua bạn có thuyết phục ai làm điều họ còn lưỡng lự không?"
+  },
+  "16": {
+   "bieu_tuong": "Toà tháp đổi mới",
+   "xu_huong": "Truyền thống Chaldea tả số kép này bằng hình toà tháp bị sét đánh: một cấu trúc cũ không còn hợp phải nhường chỗ. Thường được đọc như chủ đề xây lại trên nền móng thật hơn, khiêm tốn hơn.",
+   "mat_toi": "Dễ bám vào kế hoạch đã định dù nhiều dấu hiệu cho thấy nó cần điều chỉnh.",
+   "cau_tu_soi": "Bạn có đang tiếp tục một kế hoạch chỉ vì đã lỡ bỏ công sức vào đó không?"
+  },
+  "17": {
+   "bieu_tuong": "Ngôi sao dẫn lối",
+   "xu_huong": "Số kép này được truyền thống gọi là ngôi sao của các nhà thông thái: tinh thần vững vàng, vượt qua thử thách để để lại dấu ấn. Thường gắn với sự kiên định và mong muốn được nhớ đến.",
+   "mat_toi": "Dễ quá bận tâm về hình ảnh lâu dài mà bỏ qua người bên cạnh hôm nay.",
+   "cau_tu_soi": "Tuần này bạn có dành một buổi trọn vẹn cho người thân mà không xem điện thoại không?"
+  },
+  "18": {
+   "bieu_tuong": "Mặt trăng và hai bờ",
+   "xu_huong": "Theo truyền thống, số kép này mang hình mặt trăng soi hai bờ: giằng co giữa ham muốn vật chất và đời sống tinh thần. Chủ đề là nhận ra mâu thuẫn bên trong trước khi nó thành xung đột bên ngoài.",
+   "mat_toi": "Dễ hiểu lầm người thân và giữ kín điều không vừa ý đến lúc bùng ra.",
+   "cau_tu_soi": "Gần đây bạn có giận ai mà chưa nói rõ lý do với họ không?"
+  },
+  "19": {
+   "bieu_tuong": "Mặt trời rạng",
+   "xu_huong": "Số kép này được truyền thống gọi là hoàng tử của trời: ánh sáng, sự ghi nhận và niềm vui khi công sức được nhìn thấy. Thường được mô tả là thuận cho việc đặt mục tiêu rõ và theo tới cùng.",
+   "mat_toi": "Dễ tự mãn khi được khen và ngại nghe lời phê bình.",
+   "cau_tu_soi": "Lần gần nhất được góp ý, bạn có hỏi thêm chi tiết thay vì giải thích lại không?"
+  },
+  "20": {
+   "bieu_tuong": "Lời gọi thức tỉnh",
+   "xu_huong": "Truyền thống Chaldea gắn số kép này với sự thức tỉnh: một lời gọi hướng tới mục đích mới, kế hoạch mới. Thường được đọc là thời điểm hợp để xem lại điều mình thật sự muốn theo đuổi.",
+   "mat_toi": "Dễ nghe thấy lời gọi nhưng trì hoãn vì chờ hoàn cảnh hoàn hảo.",
+   "cau_tu_soi": "Bạn có một dự định đã nghĩ tới hơn nửa năm mà chưa làm bước đầu tiên không?"
+  },
+  "21": {
+   "bieu_tuong": "Vương miện chín muồi",
+   "xu_huong": "Số kép này thường được mô tả bằng hình vương miện của sự trưởng thành: thành quả đến sau một chặng đường dài và nhiều thử thách. Chủ đề là sự kiên nhẫn và tin vào quá trình.",
+   "mat_toi": "Dễ nghĩ mình đã đến đích rồi dừng học hỏi.",
+   "cau_tu_soi": "Tháng này bạn có học một kỹ năng mới ngoài công việc quen thuộc không?"
+  },
+  "22": {
+   "bieu_tuong": "Người lữ hành mải mơ",
+   "xu_huong": "Theo truyền thống, số kép này mang hình người đi đường mải mơ mộng, đặt niềm tin vào người khác mà quên nhìn đường. Chủ đề là giữ lý tưởng nhưng vẫn tự kiểm tra thực tế.",
+   "mat_toi": "Dễ để người khác quyết thay những việc quan trọng của mình.",
+   "cau_tu_soi": "Bạn có tự xem lại các khoản chi tiêu của gia đình tháng này không?"
+  },
+  "23": {
+   "bieu_tuong": "Ngôi sao Sư tử",
+   "xu_huong": "Số kép này được truyền thống gọi là ngôi sao hoàng gia của Sư tử: được người có vị trí nâng đỡ và thuận cho kế hoạch riêng. Thường gắn với sự tự tin khi trình bày ý tưởng.",
+   "mat_toi": "Dễ trông chờ người khác mở đường mà ít tự chuẩn bị.",
+   "cau_tu_soi": "Lần gần nhất có cơ hội trình bày ý tưởng, bạn có chuẩn bị trước bằng giấy tờ không?"
+  },
+  "24": {
+   "bieu_tuong": "Sự nâng đỡ",
+   "xu_huong": "Truyền thống Chaldea gắn số kép này với tình cảm, sự sáng tạo và sự giúp đỡ từ người đi trước. Thường được mô tả là quan hệ tốt mở ra cánh cửa mà nỗ lực một mình khó mở.",
+   "mat_toi": "Dễ dựa vào quan hệ mà quên vun đắp năng lực thật.",
+   "cau_tu_soi": "Tuần qua bạn có cảm ơn cụ thể một người đã giúp mình không?"
+  },
+  "25": {
+   "bieu_tuong": "Sức mạnh từ trải nghiệm",
+   "xu_huong": "Số kép này thường được mô tả là sức mạnh hình thành qua quan sát và trải nghiệm, kể cả những lần vấp. Chủ đề là biến bài học cũ thành sự vững vàng mới.",
+   "mat_toi": "Dễ ôm mãi ký ức không vui và kể lại nó nhiều lần.",
+   "cau_tu_soi": "Bạn có ghi lại điều rút ra được sau một lần làm hỏng việc gần đây không?"
+  },
+  "26": {
+   "bieu_tuong": "Bài học hợp tác",
+   "xu_huong": "Theo truyền thống, số kép này nhắc tới những liên kết làm ăn hay hợp tác cần được cân nhắc kỹ. Thường được đọc như chủ đề chọn người đồng hành và nói rõ trách nhiệm từ đầu.",
+   "mat_toi": "Dễ nhận lời góp sức vì nể nang mà không đặt điều kiện rõ.",
+   "cau_tu_soi": "Lần gần nhất làm việc nhóm, bạn có thống nhất ai làm gì bằng lời rõ ràng không?"
+  },
+  "27": {
+   "bieu_tuong": "Quyền trượng",
+   "xu_huong": "Số kép này được truyền thống tả bằng hình quyền trượng: uy tín đến từ suy nghĩ độc lập và sức sáng tạo của chính mình. Thường được mô tả là thuận khi tin vào kế hoạch riêng đã cân nhắc.",
+   "mat_toi": "Dễ cứng nhắc, cho rằng cách của mình là cách duy nhất.",
+   "cau_tu_soi": "Tuần này bạn có thử làm một việc quen theo cách người khác gợi ý không?"
+  },
+  "28": {
+   "bieu_tuong": "Mâu thuẫn và lòng tin",
+   "xu_huong": "Truyền thống Chaldea gắn số kép này với những mâu thuẫn: khởi đầu hứa hẹn nhưng cần thận trọng khi đặt niềm tin. Chủ đề là xây dựng lại bằng chính sức mình thay vì trông vào người khác.",
+   "mat_toi": "Dễ đặt cả kế hoạch vào lời hứa của một người.",
+   "cau_tu_soi": "Bạn có một phương án dự phòng cho việc quan trọng đang phụ thuộc vào người khác không?"
+  },
+  "29": {
+   "bieu_tuong": "Thử thách lòng tin",
+   "xu_huong": "Số kép này thường được mô tả bằng sự không chắc chắn trong quan hệ và những lúc khó phân biệt thật giả. Theo truyền thống, chủ đề là học cách lắng nghe trực giác và hỏi thẳng thay vì đoán.",
+   "mat_toi": "Dễ suy diễn ý người khác rồi phản ứng với điều mình tưởng tượng.",
+   "cau_tu_soi": "Lần gần nhất thấy nghi ngờ ai, bạn có hỏi thẳng người đó không?"
+  },
+  "30": {
+   "bieu_tuong": "Suy ngẫm",
+   "xu_huong": "Theo truyền thống, số kép này gắn với tư duy suy xét, nhìn lại và đặt trí tuệ lên trên vật chất. Người mang số này thường được mô tả là thích đứng ngoài quan sát hơn tranh giành.",
+   "mat_toi": "Dễ xa cách, khiến người thân thấy khó tới gần.",
+   "cau_tu_soi": "Tuần qua bạn có chủ động rủ ai đi gặp mặt không?"
+  },
+  "31": {
+   "bieu_tuong": "Ẩn sĩ tự đủ",
+   "xu_huong": "Số kép này được truyền thống tả bằng hình người tự đủ, sống theo nguyên tắc riêng và ít cần đám đông. Chủ đề là cân bằng giữa độc lập và kết nối.",
+   "mat_toi": "Dễ khép mình đến mức bỏ lỡ sự hỗ trợ đang có sẵn.",
+   "cau_tu_soi": "Tháng này bạn có từ chối nhiều hơn hai lời mời tụ họp không?"
+  },
+  "32": {
+   "bieu_tuong": "Lời nói kết nối",
+   "xu_huong": "Truyền thống Chaldea gắn số kép này với sức mạnh giao tiếp và khả năng gắn kết nhiều người quanh một ý tưởng. Thường được mô tả là thuận khi giữ vững nhận định của chính mình.",
+   "mat_toi": "Dễ bị cuốn theo ý số đông mà quên điều mình đã nghĩ kỹ.",
+   "cau_tu_soi": "Lần gần nhất cả nhóm phản đối ý bạn, bạn có giữ ý đó kèm lý lẽ không?"
+  },
+  "33": {
+   "bieu_tuong": "Tiếng vọng của sự nâng đỡ",
+   "xu_huong": "Theo truyền thống, số kép này không có sắc thái riêng mà mang lại tinh thần của sự nâng đỡ và tình cảm ấm áp. Thường được đọc như chủ đề trao đi sự giúp đỡ mình từng nhận.",
+   "mat_toi": "Dễ giúp người theo cảm hứng rồi bỏ dở khi bận.",
+   "cau_tu_soi": "Bạn có giữ đúng một lời hứa giúp đỡ nhỏ trong tháng này không?"
+  },
+  "34": {
+   "bieu_tuong": "Tiếng vọng của trải nghiệm",
+   "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần sức mạnh từ trải nghiệm. Thường được đọc như chủ đề chia sẻ bài học của mình để người đi sau bớt vấp.",
+   "mat_toi": "Dễ khuyên người khác quá nhiều khi họ chỉ cần được nghe.",
+   "cau_tu_soi": "Lần gần nhất có người tâm sự, bạn có nghe hết mà không chen lời khuyên không?"
+  },
+  "35": {
+   "bieu_tuong": "Tiếng vọng của hợp tác",
+   "xu_huong": "Theo truyền thống, số kép này mang lại chủ đề cân nhắc kỹ trong các mối liên kết. Thường được đọc như lời nhắc giữ ranh giới rõ trong việc tiền bạc với người quen.",
+   "mat_toi": "Dễ trộn lẫn tình cảm và việc làm ăn đến mức khó nói chuyện thẳng.",
+   "cau_tu_soi": "Bạn có cho người quen mượn đồ hay tiền mà chưa hẹn ngày trả không?"
+  },
+  "36": {
+   "bieu_tuong": "Tiếng vọng của quyền trượng",
+   "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần quyền trượng: uy tín từ suy nghĩ độc lập. Thường được mô tả là thuận cho việc đi xa, học hỏi ngoài vùng quen thuộc.",
+   "mat_toi": "Dễ cảm thấy cô đơn ở vị trí dẫn đầu mà không nói ra.",
+   "cau_tu_soi": "Năm nay bạn có đi đến một nơi mới chỉ để học hỏi không?"
+  },
+  "37": {
+   "bieu_tuong": "Tình bạn hoà hợp",
+   "xu_huong": "Theo truyền thống Chaldea, số kép này gắn với tình bạn tốt, tình cảm hoà hợp và sự hợp tác giữa hai người. Thường được mô tả là thuận khi làm việc theo cặp hơn làm một mình.",
+   "mat_toi": "Dễ phụ thuộc vào một người bạn thân mà ít mở rộng quan hệ khác.",
+   "cau_tu_soi": "Tháng này bạn có làm quen thêm một người mới ngoài nhóm bạn quen không?"
+  },
+  "38": {
+   "bieu_tuong": "Tiếng vọng của lòng tin",
+   "xu_huong": "Số kép này được truyền thống xếp cùng chủ đề thử thách lòng tin. Thường được đọc như lời nhắc nói rõ kỳ vọng trong quan hệ thay vì chờ người khác tự hiểu.",
+   "mat_toi": "Dễ thất vọng vì người khác không đoán ra điều mình cần.",
+   "cau_tu_soi": "Tuần qua bạn có nói rõ một mong muốn với người thân thay vì chờ họ tự nhận ra không?"
+  },
+  "39": {
+   "bieu_tuong": "Tiếng vọng của suy ngẫm",
+   "xu_huong": "Theo truyền thống, số kép này mang tinh thần suy xét và nhìn lại. Thường được mô tả là hợp với việc viết, nghiên cứu hay sắp xếp lại suy nghĩ.",
+   "mat_toi": "Dễ nghĩ quá lâu mà lỡ thời điểm hành động.",
+   "cau_tu_soi": "Bạn có một quyết định đã cân nhắc hơn một tháng mà chưa chốt không?"
+  },
+  "40": {
+   "bieu_tuong": "Tiếng vọng của sự tự đủ",
+   "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần người tự đủ. Thường được đọc như chủ đề giữ nhịp sống riêng giữa nhiều đòi hỏi bên ngoài.",
+   "mat_toi": "Dễ coi việc nhờ giúp là yếu đuối.",
+   "cau_tu_soi": "Tuần qua bạn có nhờ ai một việc nhỏ mà mình hoàn toàn tự làm được không?"
+  },
+  "41": {
+   "bieu_tuong": "Tiếng vọng của lời nói",
+   "xu_huong": "Theo truyền thống, số kép này mang sức mạnh giao tiếp và khả năng tập hợp người. Thường được mô tả là thuận cho việc dạy, nói trước đám đông hay viết cho nhiều người đọc.",
+   "mat_toi": "Dễ nói nhiều hơn làm, khiến lời nói mất sức nặng.",
+   "cau_tu_soi": "Tháng này bạn có làm xong điều mình đã tuyên bố trước mọi người không?"
+  },
+  "42": {
+   "bieu_tuong": "Tiếng vọng của tình cảm",
+   "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần tình cảm và sự nâng đỡ. Thường được đọc như chủ đề chăm sóc các mối quan hệ lâu năm.",
+   "mat_toi": "Dễ coi sự quan tâm của người thân là điều đương nhiên.",
+   "cau_tu_soi": "Tuần này bạn có gọi điện hỏi thăm một người lâu rồi chưa liên lạc không?"
+  },
+  "43": {
+   "bieu_tuong": "Biến chuyển lớn",
+   "xu_huong": "Truyền thống Chaldea gắn số kép này với sự xáo trộn và cách mạng: trật tự cũ bị đặt câu hỏi. Thường được đọc như chủ đề dám thay đổi cách làm khi cách cũ không còn hiệu quả.",
+   "mat_toi": "Dễ phá bỏ mọi thứ một lúc thay vì đổi từng phần.",
+   "cau_tu_soi": "Lần gần nhất muốn thay đổi, bạn có chia thành từng bước nhỏ không?"
+  },
+  "44": {
+   "bieu_tuong": "Nền móng được thử",
+   "xu_huong": "Số kép này theo truyền thống được xếp gần chủ đề hợp tác cần cân nhắc. Thường được đọc như lời nhắc kiểm tra lại nền móng của một việc trước khi xây thêm.",
+   "mat_toi": "Dễ mở rộng quá nhanh khi phần cốt lõi còn lỏng lẻo.",
+   "cau_tu_soi": "Bạn có rà lại những việc đang dang dở trước khi nhận thêm việc mới không?"
+  },
+  "45": {
+   "bieu_tuong": "Tiếng vọng của uy tín",
+   "xu_huong": "Theo truyền thống, số kép này mang tinh thần quyền trượng: uy tín được xây bằng sự nhất quán. Thường được mô tả là thuận khi giữ đúng lời đã nói qua thời gian dài.",
+   "mat_toi": "Dễ khắt khe với người không theo kịp tiêu chuẩn của mình.",
+   "cau_tu_soi": "Tuần qua bạn có kiên nhẫn hướng dẫn lại cho ai một việc họ làm chưa đúng không?"
+  },
+  "46": {
+   "bieu_tuong": "Tiếng vọng của tình bạn",
+   "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần tình bạn và hợp tác hoà hợp. Thường được đọc như chủ đề cùng làm thì nhẹ hơn làm một mình.",
+   "mat_toi": "Dễ né tranh luận với bạn thân dù có điều cần nói.",
+   "cau_tu_soi": "Gần đây bạn có góp ý thẳng với một người bạn thân không?"
+  },
+  "47": {
+   "bieu_tuong": "Tiếng vọng của trực giác",
+   "xu_huong": "Theo truyền thống, số kép này mang chủ đề phân biệt điều thật và điều mình mong là thật. Thường được đọc như lời nhắc kiểm tra thông tin trước khi tin.",
+   "mat_toi": "Dễ tin theo cảm giác ban đầu mà bỏ qua dữ kiện ngược lại.",
+   "cau_tu_soi": "Trước khi chia sẻ một tin trên mạng gần đây, bạn có kiểm tra nguồn không?"
+  },
+  "48": {
+   "bieu_tuong": "Người quan sát",
+   "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần suy ngẫm. Thường được đọc như chủ đề lùi lại một bước để nhìn toàn cảnh trước khi phản ứng.",
+   "mat_toi": "Dễ chỉ quan sát và nhận xét mà ngại bắt tay vào việc.",
+   "cau_tu_soi": "Tuần này bạn có tự tay làm một việc mà trước đây mình chỉ góp ý không?"
+  },
+  "49": {
+   "bieu_tuong": "Tiếng vọng của sự độc lập",
+   "xu_huong": "Theo truyền thống, số kép này mang tinh thần người tự đủ. Thường được mô tả là thuận cho việc tự học, tự làm và tự chịu trách nhiệm về lựa chọn của mình.",
+   "mat_toi": "Dễ từ chối lời khuyên chỉ vì muốn tự quyết.",
+   "cau_tu_soi": "Lần gần nhất có người góp ý đúng, bạn có làm theo không?"
+  },
+  "50": {
+   "bieu_tuong": "Tiếng vọng của giao tiếp",
+   "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần lời nói kết nối. Thường được đọc như chủ đề trao đổi ý tưởng và học từ người khác lĩnh vực.",
+   "mat_toi": "Dễ phân tán vì nói chuyện với quá nhiều nơi cùng lúc.",
+   "cau_tu_soi": "Hôm nay bạn có tắt thông báo để làm trọn một việc không?"
+  },
+  "51": {
+   "bieu_tuong": "Chiến binh",
+   "xu_huong": "Truyền thống Chaldea gắn số kép này với hình người chiến binh: sức mạnh, sự tiến lên nhanh và dám nhận phần việc khó. Thường được mô tả là thuận cho người tự xây dựng chỗ đứng.",
+   "mat_toi": "Dễ coi mọi người khác là đối thủ và gây căng thẳng không cần thiết.",
+   "cau_tu_soi": "Tuần qua bạn có tranh hơn thua với ai trong một chuyện nhỏ không?"
+  },
+  "52": {
+   "bieu_tuong": "Tiếng vọng của biến chuyển",
+   "xu_huong": "Số kép này được truyền thống xếp cùng chủ đề biến chuyển lớn. Thường được đọc như lời mời xem lại những thói quen đã lỗi thời và thay bằng cách làm phù hợp hơn.",
+   "mat_toi": "Dễ giữ cách làm cũ chỉ vì đã quen tay.",
+   "cau_tu_soi": "Bạn có đổi một thói quen làm việc nào trong tháng này không?"
+  }
+ }
+}

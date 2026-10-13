@@ -1,0 +1,28 @@
+{
+ "_ghi_chu": "Đáp án TÍNH TAY phái Chaldea (Cheiro): A1 B2 C3 D4 E5 F8 G3 H5 I1 J1 K2 L3 M4 N5 O7 P8 Q1 R2 S3 T4 U6 V6 W6 X5 Y1 Z7. Y nguyên âm/phụ âm theo quy tắc âm tiết đã khoá của sản phẩm; Đ = D. Số kép = giá trị đầu tiên trong chuỗi rút gọn nằm trong 10–52 (tổng > 52 thì cộng chữ số tới khi ≤ 52); gốc rút về 1–9, không giữ số cái.",
+ "ca": [
+  {"ho_ten": "Nguyễn Văn An", "ngay": 15, "thang": 8, "nam": 1990,
+   "so_ten": {"tong": 43, "kep": 43, "goc": 7},
+   "linh_hon": {"tong": 13, "kep": 13, "goc": 4},
+   "nhan_cach": {"tong": 30, "kep": 30, "goc": 3},
+   "ten_goi": {"ten": "An", "tong": 6, "kep": null, "goc": 6},
+   "ngay_sinh": {"tong": 15, "kep": 15, "goc": 6},
+   "duong_doi": {"tong": 33, "kep": 33, "goc": 6}},
+  {"ho_ten": "Lê Thị Hoa", "ngay": 7, "thang": 3, "nam": 1985,
+   "so_ten": {"tong": 31, "kep": 31, "goc": 4},
+   "linh_hon": {"tong": 14, "kep": 14, "goc": 5},
+   "nhan_cach": {"tong": 17, "kep": 17, "goc": 8},
+   "ten_goi": {"ten": "Hoa", "tong": 13, "kep": 13, "goc": 4},
+   "ngay_sinh": {"tong": 7, "kep": null, "goc": 7},
+   "duong_doi": {"tong": 33, "kep": 33, "goc": 6}},
+  {"ho_ten": "Nguyễn Thị Minh Khai", "ngay": 1, "thang": 1, "nam": 2000,
+   "so_ten": {"tong": 59, "kep": 14, "goc": 5},
+   "ten_goi": {"ten": "Khai", "tong": 9, "kep": null, "goc": 9},
+   "ngay_sinh": {"tong": 1, "kep": null, "goc": 1},
+   "duong_doi": {"tong": 4, "kep": null, "goc": 4}},
+  {"ho_ten": "Đỗ Đức", "ngay": 29, "thang": 2, "nam": 1996,
+   "so_ten": {"tong": 24, "kep": 24, "goc": 6},
+   "ngay_sinh": {"tong": 29, "kep": 29, "goc": 2},
+   "duong_doi": {"tong": 38, "kep": 38, "goc": 2}}
+ ]
+}

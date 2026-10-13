@@ -32,6 +32,8 @@
 | Khâu | Ý tưởng | Cần gì |
 |---|---|---|
 | 3 ★ | **"Hôm nay của bạn"** `/hom-nay`: ngày/tháng/năm cá nhân, âm lịch + can chi ngày, câu tự soi, báo trước ngày mai, chuỗi ngày ghé (đếm trên máy), nút chia sẻ, sự kiện `daily_viewed` | **Đã làm (HN-1)**. Tiếp: thêm lưu nhật Tử vi / quẻ ngày, nhắc qua email/Web Push |
+| 3 ★ | **"Hôm nay bạn định làm gì?"** (HN-2): chọn/gõ ý định → nhịp ngày, cách làm, câu tự soi; ngày phổ quát, 3 câu hỏi nổi bật xoay theo ngày, số ngày Chaldea. Đo `daily_intent_set` → tỉ lệ quay lại D1/D7 của người có nêu ý định so với không | **Đã làm (HN-2)**. Tiếp: giờ hoàng đạo + trực ngày (lịch cổ truyền, oracle lunar-typescript), quẻ Kinh Dịch của ngày, nhịp Tử vi lưu nhật |
+| 2 | **Hai trường phái thần số** Pitago ↔ Chaldea (TS-PHAI) — thêm lý do xem lại bài đọc; đo `school_switched` | **Đã làm**. Tiếp: hỏi đáp theo phái Chaldea, trang kiến thức "số kép 10–52" (SEO) |
 | 3 ★ | **Thưởng Sao cho chuỗi ngày ghé** (ngày thứ 7) — chuỗi đã đếm trên máy (HN-1); thưởng thật cần ghi ở máy chủ | Bảng điểm danh (migration), trần Sao/tháng |
 | 3 | Nhắc qua email / Web Push "thông điệp tuần" (người dùng tự bật) | SMTP / Web Push, trang huỷ đăng ký |
 | 4 ★ | **Chiến dịch mời** chỉnh trong `/quan-tri/cai-dat`: đổi mức thưởng, dải thông báo toàn site | **Đã làm (QT-2)** |

@@ -168,3 +168,21 @@ test("TV-LICH: ngày lịch Việt ≠ lịch Trung Quốc → hồ sơ nhắc l
   await expect(page.getByTestId("doi-lich")).toContainText("Âm lịch:");
   await expect(page.getByTestId("nhac-lich-trung")).toHaveCount(0);
 });
+
+test("TS-PHAI: đổi sang phái Chaldea → 6 con số engine tính, có số kép + đối chiếu Pitago; lựa chọn được nhớ", async ({ page, request }) => {
+  await napHoSo(page, LUAN);
+  await page.goto("/than-so");
+  const khung = page.getByTestId("truong-phai-than-so");
+  await khung.getByRole("tab", { name: "Chaldea" }).click();
+  await expect(page.getByTestId("bai-chaldea")).toBeVisible();
+  const api = await (await request.post("/api/thanso/chaldea", { data: { ho_ten: ["Nguyễn Đức Luân"], ngay: 24, thang: 10, nam: 1988 } })).json();
+  for (const s of api.cac_so as { ma: string; goc: number }[]) {
+    await expect(page.getByTestId(`chaldea-${s.ma}`).getByLabel(`Số gốc ${s.goc}`)).toBeVisible();
+  }
+  await expect(page.getByTestId("chaldea-duong_doi")).toContainText("Phái Pitago: Đường đời 33");
+  await expect(page.getByRole("tab", { name: "Biểu đồ ngày sinh" })).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByTestId("bai-chaldea")).toBeVisible();
+  await page.getByTestId("truong-phai-than-so").getByRole("tab", { name: "Pitago" }).click();
+  await expect(page.getByTestId("the-duong_doi")).toBeVisible();
+});
