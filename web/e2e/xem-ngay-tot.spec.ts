@@ -79,4 +79,5 @@ test("Hôm nay: có hoàng lịch theo tuổi + quẻ đầu ngày", async ({ pa
   await expect(page.getByTestId("hoang-lich-hom-nay")).toBeVisible();
   await expect(page.getByTestId("hl-tuoi")).toContainText("Canh Ngọ");
   await expect(page.getByTestId("que-ngay")).toContainText("Quẻ đầu ngày");
+  await expect(page.getByTestId("nhip-bat-tu")).toContainText("nhật chủ Nhâm");
 });

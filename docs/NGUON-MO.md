@@ -14,6 +14,8 @@
 | Thuật toán âm lịch Hồ Ngọc Đức | Đổi âm–dương lịch theo múi giờ Việt Nam (gồm miền Nam 1960–1975) | Thuật toán công bố, tự cài đặt |
 | lasotuvi 0.1.2 (doanguyen) | Golden độ sáng sao, Hoả Linh, vòng Thái Tuế lối Việt | MIT — chỉ sinh dữ liệu đối chiếu |
 | lunar-typescript | Golden tiết khí, can chi cho Bát tự | Chỉ đối chiếu, không chạy runtime |
+| lunar-python 1.4.8 (6tail) | Bảng hoàng lịch: nghi/kỵ, thần sát, 28 tú, Bành Tổ, hướng thần (`calc/hoang_lich_vendor.py`) + golden 898 ngày | MIT — bảng chép nguyên văn kèm bản quyền; thư viện chỉ làm oracle, không chạy runtime |
+| horosa-skill (Horace-Maxwell) | Chỉ đọc danh mục kỹ thuật để đánh giá thiếu hụt (`docs/DANH-GIA-ENGINE-HUYEN-HOC.md`) | **AGPL — KHÔNG chép mã/dữ liệu** |
 | VSOP87 rút gọn | Tiết khí cho Bát tự (sai ≤ 0,63 phút) | Mô hình thiên văn công bố, tự cài đặt |
 | TuViMCP (© 2026 Manh Ha Nguyen) | Danh mục cách cục Tử vi để đối chiếu | MIT |
 | opencode-tianji 0.6.0 | Bản số hoá nguyên văn Chu Dịch (quái từ, hào từ) | MIT |

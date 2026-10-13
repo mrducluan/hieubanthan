@@ -381,6 +381,7 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
 - [ ] CMS8. Thử quy trình **Cộng tác viên / chuyên gia** (2026-10-12): Ban biên tập → tạo tài khoản vai trò "Cộng tác
   viên / chuyên gia" → người đó viết, chọn "Duyệt bài → Gửi duyệt" → anh thấy ô **Chờ duyệt** ở Tổng quan → ghi chú
   "Cần sửa" hoặc Xuất bản. Lộ trình chuyên gia + vì sao không làm hoa hồng nhiều tầng: `docs/KE-HOACH-CHUYEN-GIA.md`.
+- [ ] HL1. (2026-10-13) Sau khi PR "Xem ngày tốt" merge + Render deploy engine: nếu anh đã tự sửa **Menu đầu trang** trong CMS (Giao diện website → Menu đầu trang) thì thêm menu con **"Xem ngày tốt" → /xem-ngay-tot** dưới mục "Bản thân" (menu mặc định trong code đã có; menu CMS đã lưu thì thắng menu mặc định). Search Console → Sitemaps → gửi lại `sitemap.xml` (thêm 15 trang lịch tháng + 43 trang số kép).
 - [ ] CMS10. (2026-10-12) Sau khi PR "Giao diện website" merge + CMS Vercel redeploy (tự chạy migration): vào CMS → nhóm
   **Giao diện website** → *Điều hướng chân trang* (4 cột chân trang, mỗi link chọn Trang / Bài viết / Chuyên mục) và
   *Trang chủ & banner* (dải thông báo đầu trang, banner trang chủ, khối Bài viết mới + ghim bài, Bài viết liên quan).

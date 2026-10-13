@@ -34,3 +34,14 @@ def test_que_dau_ngay_tat_dinh():
     ad, am, ay, _ = lunar.solar_to_lunar(13, 10, 2026, 7.0)
     m = mh.khoi_que_thoi_gian(lunar.can_chi_nam(ay)[1], am, ad, "Tý")
     assert a["hao_dong"] == m["hao_dong"] and a["ten"] and a["cau_tu_soi"] and a["so"] >= 1
+
+
+def test_nhip_bat_tu_luu_nhat():
+    """Lưu nhật Bát tự: thập thần của can ngày xem so với nhật chủ (can ngày sinh) — không cần giờ sinh."""
+    from app.calc import battu
+    d = dt.date(2026, 10, 13)                        # Canh Thân
+    kq = hom_nay.the_hom_nay(*SINH, d)["nhip_bat_tu"]
+    nhat_chu = lunar.can_chi_ngay(dt.date(1990, 5, 17))[0]
+    assert kq["nhat_chu"] == nhat_chu and kq["can_chi_ngay"] == "Canh Thân"
+    assert kq["thap_than"] == battu.thap_than(nhat_chu, "Canh")
+    assert kq["y_nghia"] and kq["cau_tu_soi"] and kq["nhom"]

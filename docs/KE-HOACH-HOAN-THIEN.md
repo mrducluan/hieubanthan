@@ -43,7 +43,7 @@ nháp bằng link có ký. Chỉ cần anh đặt 5 biến ở Vercel project **
 | HT-1 | Nối web ↔ CMS: 5 biến `CMS_*` ở Vercel web | Thu hút | Anh | VIEC-CUA-ANH CMS5–6 |
 | HT-2 | Engine Render ổn định (Docker context, Starter SG) + UptimeRobot 2 monitor | Mọi khâu | Anh | Engine sập = 5 mảng sập |
 | HT-3 | **Email cho CMS** (quên mật khẩu, báo "Gửi duyệt") — Payload hiện chưa có bộ gửi thư nên **quên mật khẩu không gửi được** | Cộng đồng tác giả | Em + anh duyệt dependency (`@payloadcms/email-nodemailer` hoặc Resend) | = CG-3 |
-| HT-4 | MFA (TOTP) cho tài khoản CMS Quản trị/Chủ biên | Bảo mật | Em | = CG-7; trước khi mở cho cộng tác viên ngoài |
+| HT-4 | MFA (TOTP) cho tài khoản CMS Quản trị/Chủ biên | Bảo mật | Em | ✅ Đã làm (CMS-2, `cms/src/lib/totp.ts`) — còn anh bật `CMS_BAT_BUOC_MFA=1` (VIEC-CUA-ANH CMS12) |
 | HT-5 | Giới hạn kết nối DB của CMS (serverless mở nhiều kết nối; pooler Session có trần) — đặt `pool.max` nhỏ, cân nhắc Transaction pooler | Ổn định | Em (khi log có `max clients`) | Theo dõi log Vercel |
 | HT-6 | Sitemap Google News + đăng ký Publisher Center | Thu hút | Em + anh | Khi đăng tin ≥ 2 bài/tuần |
 | HT-7 | Tìm kiếm + phân trang blog | Quay lại | Em | Khi > 30 bài |
@@ -51,7 +51,7 @@ nháp bằng link có ký. Chỉ cần anh đặt 5 biến ở Vercel project **
 | HT-9 | Sentry (lỗi máy chủ) cho web + engine + CMS | Vận hành | Anh tạo DSN, em nối | Hiện lỗi chỉ thấy trong log Vercel |
 | HT-10 | Sao lưu: Supabase Free không có PITR → lịch dump tuần (GitHub Actions + lưu riêng) khi có dữ liệu người dùng | An toàn dữ liệu | Em | Làm cùng HT-8 |
 | HT-11 | Chuyển Supabase về Singapore (tạo project mới, chuyển dữ liệu) | Tốc độ | Anh + em | Làm trước HT-8 thì rẻ nhất (chưa có dữ liệu người dùng) |
-| HT-12 | AI soạn nháp từng đoạn trong CMS (dùng lại engine `/v1/quan-tri/soan-nhap` + kiểm định), người duyệt vẫn là người | Thu hút | Em | Cần `OPENROUTER_API_KEY` trên Render |
+| HT-12 | AI soạn nháp từng đoạn trong CMS (dùng lại engine `/v1/quan-tri/soan-nhap` + kiểm định), người duyệt vẫn là người | Thu hút | Em | ✅ Đã làm (CMS-2, `cms/src/lib/soan-nhap.ts`) — cần `ENGINE_URL` trên Vercel cms (CMS11) |
 | HT-14 | Kiểm trùng CG-6 đang tải TOÀN BỘ thân bài mọi bài mỗi lần Gửi duyệt/Xuất bản — lưu vân tay mỗi bài khi lưu (trường ẩn) rồi chỉ so vân tay | Ổn định | Em | Khi > 200 bài (audit 2026-10-12) |
 | HT-13 | Chạy bộ 55 câu hỏi AI thật, chấm, sửa (mục L) | Quay lại | Anh nạp khoá, em chạy | Trước khi bật AI rộng |
 

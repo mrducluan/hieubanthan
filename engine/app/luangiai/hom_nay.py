@@ -17,7 +17,7 @@ import json
 from functools import lru_cache
 from pathlib import Path
 
-from app.calc import kinhdich, kinhdich_maihoa as mh, lunar, thanso, thanso_mo_rong as mr
+from app.calc import battu, kinhdich, kinhdich_maihoa as mh, lunar, thanso, thanso_mo_rong as mr
 from app.config import CALENDAR_MERIDIAN_TZ
 from app.hoidap import chung
 from app.kb import store, thanso_v2, trang
@@ -113,6 +113,23 @@ def _que_ngay(ngay_xem: dt.date) -> dict:
 
 
 @lru_cache(maxsize=1)
+def _kb_battu() -> dict:
+    return json.loads((Path(__file__).parents[1] / "kb" / "data" / "battu_kb.json").read_text(encoding="utf-8"))
+
+
+def _nhip_bat_tu(ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict:
+    """Lưu nhật Bát tự: can ngày xem so với nhật chủ (can của ngày sinh, giờ Tý theo SWITCH_AT_0000 nên không cần
+    giờ sinh) → thập thần của ngày. Nghĩa + câu tự soi từ KB `battu_kb.thap_than`."""
+    nhat_chu = lunar.can_chi_ngay(dt.date(nam, thang, ngay))[0]
+    can, chi = lunar.can_chi_ngay(ngay_xem)
+    tt = battu.thap_than(nhat_chu, can)
+    m = _kb_battu()["thap_than"].get(tt, {})
+    return {"nhat_chu": nhat_chu, "can_chi_ngay": f"{can} {chi}", "thap_than": tt, "nhom": m.get("nhom"),
+            "y_nghia": m.get("y_nghia"), "tinh_cach": m.get("tinh_cach"), "cau_tu_soi": m.get("cau_tu_soi"),
+            "cach_tinh": f"Can ngày hôm nay ({can}) so với nhật chủ {nhat_chu} của bạn (can ngày sinh) theo ngũ hành và âm dương."}
+
+
+@lru_cache(maxsize=1)
 def _kb_que() -> dict:
     return json.loads((Path(__file__).parents[1] / "kb" / "data" / "kinhdich_kb.json").read_text(encoding="utf-8"))["que"]
 
@@ -172,6 +189,7 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
         "chaldea": thanso_chaldean.ngay_chaldea(ngay, d),
         "hoang_lich": _hoang_lich(ngay_xem, ngay, thang, nam, [x["ma"] for x in cac_y_dinh] or list(y_dinh or [])),
         "que_ngay": _que_ngay(ngay_xem),
+        "nhip_bat_tu": _nhip_bat_tu(ngay, thang, nam, ngay_xem),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],
         "luu_y": "Nhịp theo thần số học để tự soi — gợi chủ đề, không dự báo việc sẽ xảy ra.",

@@ -39,6 +39,8 @@ interface TheHomNay {
   };
   hoang_lich?: HoangLichHomNay;
   que_ngay?: QueNgay;
+  nhip_bat_tu?: { nhat_chu: string; can_chi_ngay: string; thap_than: string; nhom: string | null; y_nghia: string | null;
+    tinh_cach: string | null; cau_tu_soi: string | null; cach_tinh: string };
 }
 interface HoangLichHomNay {
   truc: string; truc_y: string; than: string; hoang_dao: boolean;
@@ -307,6 +309,19 @@ export function HomNay() {
               <p className="text-sm text-fg-muted">Bấm “Xem nhịp hôm nay” để xem các việc đã chọn.</p>
             )}
           </section>
+
+          {the.nhip_bat_tu && (
+            <section aria-labelledby="nhip-bat-tu" className="glass space-y-2 rounded-2xl p-5" data-testid="nhip-bat-tu">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h2 id="nhip-bat-tu" className="text-xl">Nhịp Bát tự: ngày {the.nhip_bat_tu.thap_than}</h2>
+                <span className="text-xs text-fg-muted">nhật chủ {the.nhip_bat_tu.nhat_chu} · ngày {the.nhip_bat_tu.can_chi_ngay}</span>
+              </div>
+              {the.nhip_bat_tu.y_nghia && <p className="text-sm">{the.nhip_bat_tu.y_nghia}</p>}
+              {the.nhip_bat_tu.tinh_cach && <p className="text-sm"><span className="text-jade">Năng lượng gợi ý:</span> {the.nhip_bat_tu.tinh_cach}</p>}
+              {the.nhip_bat_tu.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {the.nhip_bat_tu.cau_tu_soi}</p>}
+              <p className="text-xs text-fg-faint">{the.nhip_bat_tu.cach_tinh} <Link href="/bat-tu" className="text-gold hover:underline">Xem lá Bát tự đầy đủ</Link></p>
+            </section>
+          )}
 
           {the.que_ngay && (
             <section aria-labelledby="que-ngay" className="glass space-y-2 rounded-2xl p-5" data-testid="que-ngay">
