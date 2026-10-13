@@ -60,7 +60,7 @@ function BangGsc({ ds, cot }: { ds: DongGsc[]; cot: string }) {
 }
 
 const TEN_MANG: Record<string, string> = {
-  thanso: "Thần số (Bản thân)", thanso_sau: "Thần số chiều sâu", tuvi: "Tử vi", battu: "Bát tự", kinhdich: "Kinh Dịch",
+  thanso: "Thần số (Bản thân)", xem_ngay: "Xem ngày tốt", thanso_sau: "Thần số chiều sâu", tuvi: "Tử vi", battu: "Bát tự", kinhdich: "Kinh Dịch",
   phongthuy: "Phong thuỷ", hopdoi: "Hợp đôi", hom_nay: "Hôm nay", khac: "Chưa gắn mảng (bản cũ)",
 };
 
@@ -140,6 +140,21 @@ export default async function Page() {
         <p className="mt-1 text-sm text-fg-muted">Gate 1: bài đọc có giá trị (đọc hết, thấy có giúp, lưu hồ sơ). Gate 2: tự lan truyền (chia sẻ, K). Qua Gate 2 mới mở giai đoạn thu tiền.</p>
         {ph.ok ? <BangGate du={ph.du} /> : <div className="mt-3"><ChuaCo kq={ph} huongDan="Cần khoá PostHog như mục Phễu bên dưới." /></div>}
       </Card>
+
+      {ph.ok && ph.du.yDinh && (
+        <Card data-testid="qt-y-dinh">
+          <h2 className="text-lg">Ý định hôm nay (PostHog, 28 ngày)</h2>
+          <p className="mt-1 text-sm text-fg-muted">Chỉ đếm MÃ — câu người dùng gõ không bao giờ được lưu. Cách đọc và bổ sung từ khoá: skill <code>do-y-dinh</code>.</p>
+          <p className="mt-3 text-sm">Câu gõ tay: <b>{so(ph.du.yDinh.goTay)}</b> · không nhận ra: <b>{so(ph.du.yDinh.khongNhanRa)}</b>
+            {ph.du.yDinh.goTay > 0 && ` (${Math.round((100 * ph.du.yDinh.khongNhanRa) / ph.du.yDinh.goTay)}%, mục tiêu < 25%)`}</p>
+          <div className="mt-3 grid gap-4 sm:grid-cols-2">
+            <div><p className="text-sm text-fg-muted">Ý định hay chọn</p>
+              <ul className="mt-1 space-y-0.5 text-sm">{ph.du.yDinh.top.map((x) => <li key={x.ma}><code>{x.ma}</code> — {so(x.n)}</li>)}</ul></div>
+            <div><p className="text-sm text-fg-muted">Nhóm việc chưa hỗ trợ (từ câu không nhận ra)</p>
+              <ul className="mt-1 space-y-0.5 text-sm">{ph.du.yDinh.nhomMoi.map((x) => <li key={x.ma}><code>{x.ma}</code> — {so(x.n)}</li>)}</ul></div>
+          </div>
+        </Card>
+      )}
 
       <Card>
         <h2 className="text-lg">Phễu sản phẩm (PostHog, 28 ngày)</h2>

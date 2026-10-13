@@ -15,6 +15,8 @@ const Input = z.object({
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1900).max(2100),
   cau_hoi: z.string().min(3).max(400),
+  // TS-PHAI-2: trả lời theo phái đang xem ở /than-so.
+  phai: z.enum(["pitago", "chaldea"]).optional(),
   nguoi_kia: z.object({
     ho_ten: z.array(z.string().min(1).max(80)).min(1).max(5).optional(),
     ngay: z.number().int().min(1).max(31),

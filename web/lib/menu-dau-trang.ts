@@ -8,6 +8,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
   { href: "/ban-than", ten: "Bản thân", bieu_tuong: "lap_lanh", di_dong: true, con: [
     { href: "/than-so", ten: "Thần số học", mo_ta: "Con số chủ đạo, biểu đồ ngày sinh, năm cá nhân" },
     { href: "/hom-nay", ten: "Hôm nay của bạn", mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
+    { href: "/xem-ngay-tot", ten: "Xem ngày tốt", mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
   ] },
   { href: "/hop-doi", ten: "Hợp đôi", bieu_tuong: "trai_tim", di_dong: true, con: [] },
   { href: "/kham-pha", ten: "Khám phá", bieu_tuong: "la_ban", di_dong: true, con: [

@@ -9,6 +9,7 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { TEN_SITE } from "@/lib/seo";
 import { BannerTrangChu } from "@/components/khung/BannerTrangChu";
 import { BaiMoiTrangChu } from "@/components/blog/BaiLienQuanMang";
+import { NgayTotTrangChu } from "@/components/hoang-lich/NgayTotTrangChu";
 
 // Mô tả trang chủ ≤ 160 ký tự (mô tả site dài hơn vẫn dùng cho schema/llms.txt).
 const TIEU_DE_CHU = "Hiểu Bản Thân — con số nói gì về bạn";
@@ -51,6 +52,9 @@ export default function TrangChu() {
         <div className="md:col-start-2 md:row-span-2 md:row-start-1"><CuaVao /></div>
         <HinhBauTroi className="mx-auto max-w-[17rem] sm:max-w-[20rem] md:mx-0 md:max-w-[22rem] md:self-start" />
       </section>
+
+      {/* HL-1: điểm nhấn thứ hai sau hồ sơ thần số — hoàng lịch hôm nay (người Việt mở xem mỗi ngày). */}
+      <Suspense fallback={null}><NgayTotTrangChu className="hien-dan" /></Suspense>
 
       <Suspense fallback={null}><BannerTrangChu /></Suspense>
 

@@ -21,6 +21,7 @@ import re
 import httpx
 
 from app.luangiai import hoi
+from app.luangiai import thanso_chaldean as _chaldea
 from app.narrative import llm as _llm
 from app.narrative import ngan_sach as _ngan_sach
 
@@ -96,6 +97,17 @@ def _doan(m: dict) -> tuple[str, str | None]:
         return m["noi_dung"], None
     if l == "giai_thich":
         return f"{m['tieu_de']}: {m['noi_dung']}", None
+    if l == "chaldea":
+        g, k = m.get("nghia_goc") or {}, m.get("nghia_kep") or {}
+        dau = f"{m['ten']} theo phái Chaldea: "
+        dau += (f"số kép {m['kep']} ({k['bieu_tuong']}), rút về số gốc {m['goc']}" if k
+                else f"số gốc {m['goc']}")
+        if g:
+            dau += f" — {g['ten']} ({g['hanh_tinh']})"
+        than = k.get("xu_huong") or g.get("xu_huong", "")
+        toi = k.get("mat_toi") or g.get("mat_toi")
+        return (f"{dau}. {than}" + (f" Mặt tối cần để ý: {toi}" if toi else ""),
+                k.get("cau_tu_soi") or g.get("cau_tu_soi"))
     return "", None
 
 
@@ -170,11 +182,39 @@ def _goi_llm(goi: dict, cau_hoi: str) -> str:
 # --------------------------------------------------------------------------- #
 # Điểm vào
 # --------------------------------------------------------------------------- #
+# TS-PHAI-2: mục Pitago "mô tả con người" → thay bằng số Chaldea; chủ đề khác (năm/tháng/ngày cá nhân, đỉnh cao,
+# biểu đồ, nợ nghiệp, hợp đôi…) phái Chaldea không có → giữ Pythagoras và ghi rõ.
+_LOAI_THAY_CHALDEA = {"linh_vuc", "chan_dung"}
+LUU_Y_CHALDEA = ("Phái Chaldea không có phần này (năm/tháng/ngày cá nhân, đỉnh cao, biểu đồ ngày sinh, nợ nghiệp, "
+                 "hợp đôi theo cặp số), nên câu trả lời trên theo phái Pythagoras.")
+
+
+def _goi_chaldea(goi: dict, pl: dict, nguoi: dict) -> dict:
+    muc = goi["muc"]
+    if not muc or goi["can_them"] or pl.get("doi_tuong") != "ban_than":
+        return goi
+    # Câu "mô tả con người" (mục đầu là nghĩa số/chân dung của chính bạn) → Chaldea; còn lại → Pythagoras + ghi rõ.
+    if not (muc[0]["loai"] in _LOAI_THAY_CHALDEA and all(m.get("vai", "ban") == "ban" for m in muc)):
+        luu = " ".join(x for x in (goi.get("luu_y"), LUU_Y_CHALDEA) if x)
+        return {**goi, "luu_y": luu}
+    ten = nguoi["ho_ten"] if isinstance(nguoi["ho_ten"], list) else [nguoi["ho_ten"]]
+    doc = _chaldea.luan_chaldea(ten, nguoi["ngay"], nguoi["thang"], nguoi["nam"])
+    theo = {m["ma"]: m for m in doc["cac_so"]}
+    thu_tu = (["ten_goi", "so_ten", "duong_doi"] if re.search(r"\bten\b", pl.get("cau_chuan_hoa", ""))
+              else ["duong_doi", "ngay_sinh", "ten_goi"])
+    moi = [{"loai": "chaldea", **{k: theo[ma][k] for k in ("ma", "ten", "kep", "goc", "nghia_goc", "nghia_kep")},
+            "source_id": doc["source_id"], "school_id": doc["school_id"], "trang_thai": doc["trang_thai"]}
+           for ma in thu_tu]
+    return {**goi, "muc": moi, "so_trong_goi": sorted({x["goc"] for x in moi} | {x["kep"] for x in moi if x["kep"]})}
+
+
 def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
-            ngay_xem: dt.date | None = None, dung_llm: bool = True) -> dict:
+            ngay_xem: dt.date | None = None, dung_llm: bool = True, phai: str = "pitago") -> dict:
     ngay_xem = ngay_xem or dt.date.today()
     pl = hoi.phan_loai(cau_hoi)
     goi = hoi.goi_bang_chung(pl, nguoi, nguoi_kia, ngay_xem)
+    if phai == "chaldea":
+        goi = _goi_chaldea(goi, pl, nguoi)
     template = van_template(goi)
     co_key = bool(os.environ.get("OPENROUTER_API_KEY"))
     che_do, van, loi = "template", template, []
@@ -187,6 +227,7 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
             che_do, loi = "template_fallback", [f"llm lỗi: {str(e)[:120]}"]
     dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
     return {
+        "phai": phai,
         "phan_loai": goi["phan_loai"],
         "bang_chung": goi,
         "cau_tra_loi": van,

@@ -235,7 +235,51 @@ def trang_no_nghiep(so: str, slug: str) -> dict:
     }
 
 
-TRANG = {"cap_so": (ds_cap_so, trang_cap_so), "nghe": (ds_nghe, trang_nghe), "tinh_yeu": (ds_tinh_yeu, trang_tinh_yeu),
+# ---- số kép Chaldea 10–52 (TS-PHAI → SEO) ----------------------------------------------------------------
+def ds_so_kep() -> list[tuple[str, str]]:
+    return [(s, f"so-kep-{s}") for s in _t()._doc("thanso_chaldean.json")["kep"]]
+
+
+def trang_so_kep(so: str, slug: str) -> dict:
+    t = _t()
+    kb = t._doc("thanso_chaldean.json")
+    k = kb["kep"][so]
+    goc = so
+    while int(goc) > 9:
+        goc = str(sum(int(c) for c in goc))
+    g = kb["goc"].get(goc, {})
+    bang = "; ".join(f"{v}: {c}" for v, c in kb["bang_chu"].items())
+    tra_loi = f"Số kép {so} — “{k['bieu_tuong']}”. {k['xu_huong']}"
+    muc = [{"tieu_de": f"Biểu tượng: {k['bieu_tuong']}", "doan": k["xu_huong"]},
+           {"tieu_de": "Mặt tối cần để ý", "doan": k["mat_toi"]},
+           {"tieu_de": "Câu hỏi tự soi", "doan": k["cau_tu_soi"]},
+           {"tieu_de": f"Rút gọn về số gốc {goc}" + (f" — {g['ten']} ({g['hanh_tinh']})" if g else ""),
+            "doan": (f"Cộng các chữ số của {so} được số gốc {goc}. " + (g.get("xu_huong", "") + " " if g else "")
+                     + "Phái Chaldea đọc số kép trước để thêm sắc thái, rồi mới đến số gốc.")},
+           {"tieu_de": "Khi nào bạn mang số kép này",
+            "doan": (f"Khi tổng chữ cái của tên (theo bảng Chaldea — {bang}; không chữ nào mang số 9) hoặc tổng ngày sinh "
+                     f"đi qua {so} trên đường rút gọn. Phái này coi trọng tên người khác thường gọi bạn hằng ngày.")},
+           {"tieu_de": "Chaldea khác Pythagoras thế nào", "doan": " ".join(kb["gioi_thieu"]["khac_pitago"][:3])},
+           {"tieu_de": "Nên đọc thế nào", "doan": kb["gioi_thieu"]["cach_doc"]}]
+    hoi_dap = [{"hoi": f"Số kép {so} trong thần số Chaldea nghĩa là gì?", "dap": tra_loi},
+               {"hoi": f"Số kép {so} rút gọn về số mấy?", "dap": f"Về số gốc {goc}" + (f" ({g['ten']})." if g else ".")},
+               {"hoi": f"Làm sao biết tên mình có số kép {so}?",
+                "dap": "Trang Thần số học có công tắc “Trường phái” → Chaldea: nhập họ tên và tên thường gọi, trang tự tính số kép."}]
+    ds = [s_ for s_, _ in ds_so_kep()]
+    i = ds.index(so)
+    return {
+        "loai": "so_kep", "slug": slug,
+        "tieu_de": f"Số kép {so} thần số Chaldea: {k['bieu_tuong'].lower()} — ý nghĩa, mặt tối",
+        "mo_ta": t._cat(f"Số kép {so} trong thần số học Chaldea ({k['bieu_tuong'].lower()}): ý nghĩa, mặt tối, rút gọn về số {goc}, cách biết tên mình mang số này."),
+        "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
+        "nguon": ["Hệ thần số Chaldea — Cheiro, Book of Numbers (1926), diễn đạt lại bằng lời mới"],
+        "trang_thai": kb.get("trang_thai", "nhap_ai"),
+        "lien_quan": [{"loai": "so_kep", "slug": f"so-kep-{ds[j % len(ds)]}"} for j in (i - 1, i + 1)],
+        "minh_hoa": {"kieu": "so", "so": int(so), "so_cai": False, "so_goc": int(goc)},
+    }
+
+
+TRANG = {"so_kep": (ds_so_kep, trang_so_kep), "cap_so": (ds_cap_so, trang_cap_so), "nghe": (ds_nghe, trang_nghe), "tinh_yeu": (ds_tinh_yeu, trang_tinh_yeu),
          "nam_ca_nhan": (ds_nam_ca_nhan, trang_nam_ca_nhan), "no_nghiep": (ds_no_nghiep, trang_no_nghiep)}
 
 TEN_NGAN = {
@@ -244,4 +288,5 @@ TEN_NGAN = {
     "tinh_yeu": lambda s: f"Số {s} trong tình yêu",
     "nam_ca_nhan": lambda s: f"Năm cá nhân số {s}",
     "no_nghiep": lambda s: f"Nợ nghiệp {s}",
+    "so_kep": lambda s: f"Số kép {s} (Chaldea)",
 }

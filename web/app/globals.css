@@ -75,6 +75,28 @@
   .glass {
     @apply bg-surface/70 border border-line/80 backdrop-blur-md shadow-card;
   }
+  /* HL-1: khung "bầu trời" cho thẻ hoàng lịch — quầng vàng + quầng tím, chấm sao, viền vàng mảnh. Chữ trên khung
+     luôn dùng --fg (tương phản ≥ 7:1 trên nền tối). */
+  .bau-troi {
+    @apply relative overflow-hidden rounded-3xl border border-gold/30 shadow-card;
+    background:
+      radial-gradient(120% 80% at 0% 0%, rgb(var(--gold) / 0.16), transparent 55%),
+      radial-gradient(90% 70% at 100% 100%, rgb(var(--moon) / 0.16), transparent 60%),
+      linear-gradient(160deg, rgb(var(--surface-2)) 0%, rgb(var(--bg)) 100%);
+  }
+  .bau-troi::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.7;
+    background-image:
+      radial-gradient(1px 1px at 12% 22%, rgb(255 255 255 / 0.7), transparent 60%),
+      radial-gradient(1px 1px at 78% 14%, rgb(255 255 255 / 0.5), transparent 60%),
+      radial-gradient(1.4px 1.4px at 64% 72%, rgb(var(--gold) / 0.7), transparent 60%),
+      radial-gradient(1px 1px at 32% 86%, rgb(var(--moon) / 0.7), transparent 60%),
+      radial-gradient(1px 1px at 90% 52%, rgb(255 255 255 / 0.45), transparent 60%);
+  }
+  .bau-troi > * { position: relative; }
+  /* Nhãn Hoàng đạo: viền vàng phát sáng nhẹ (nhịp thở chậm, tắt khi giảm chuyển động). */
+  .nhan-sang { box-shadow: 0 0 0 1px rgb(var(--gold) / 0.5), 0 0 22px -4px rgb(var(--gold) / 0.55); }
+  @media (prefers-reduced-motion: no-preference) { .nhan-sang { animation: tho-sang 4.5s ease-in-out infinite; } }
   /* UX-2: thẻ bấm được (link dạng .glass) — nhấc nhẹ + quầng vàng khi rê chuột, nhún khi chạm. */
   a.glass {
     transition-property: transform, box-shadow, border-color, color, background-color;
@@ -149,6 +171,7 @@
 
 @keyframes sao-troi { to { transform: translateY(300px); } }
 @keyframes hien-dan { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes tho-sang { 50% { box-shadow: 0 0 0 1px rgb(var(--gold) / 0.7), 0 0 34px -2px rgb(var(--gold) / 0.7); } }
 @keyframes net-ve { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
 @media (prefers-reduced-motion: reduce) {

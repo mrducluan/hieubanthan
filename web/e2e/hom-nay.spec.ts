@@ -76,3 +76,17 @@ test("HN-2: câu khủng hoảng → lời hỗ trợ, không luận ý định"
   await expect(page.getByTestId("ho-tro")).toContainText("115");
   await expect(page.getByTestId("y-dinh-ket-qua")).toHaveCount(0);
 });
+
+test("HN-4: câu gõ không nhận ra → chỉ đo mã nhóm cố định, không gửi câu", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/hom-nay");
+  await page.getByLabel("Dự định hôm nay").fill("sáng mai đi lễ chùa cùng chị Hoa");
+  await page.getByRole("button", { name: "Xem nhịp hôm nay" }).click();
+  await expect.poll(async () => page.evaluate(() =>
+    ((window as unknown as { __hbt_su_kien?: { su_kien: string }[] }).__hbt_su_kien ?? []).filter((e) => e.su_kien === "daily_intent_set").length)).toBeGreaterThan(0);
+  const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
+  const e = sk.find((x) => x.su_kien === "daily_intent_set")!;
+  expect(e.nhan_ra).toBe(0);
+  expect(e.nhom_chua_ho_tro).toBe("le_bai");
+  expect(JSON.stringify(sk)).not.toContain("Hoa");
+});
