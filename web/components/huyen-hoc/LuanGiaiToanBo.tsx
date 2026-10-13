@@ -12,6 +12,7 @@ import { KhungTai } from "@/components/khung/TieuDe";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { dangChoMo, ghiChoMo, xoaChoMo } from "@/lib/sao-client";
+import { useHoSo } from "@/lib/hoso";
 import type { MoiXem } from "@/lib/sao-xem-truoc";
 import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 
@@ -33,6 +34,10 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
   const [loi, setLoi] = useState<string | null>(null);
   const [goc, setGoc] = useState(false);
   const [phi, setPhi] = useState<{ thu: boolean; gia: number } | null>(null);
+  // Báo cáo chờ mở gắn với NGƯỜI (dữ liệu sinh), không với lựa chọn trường phái — các công tắc phái không lưu qua lượt
+  // đăng nhập / nạp nên lá số quay về có thể khác phái mà vẫn là cùng người.
+  const hs = useHoSo();
+  const nguoi = hs ? { t: hs.ho_ten, d: hs.ngay, m: hs.thang, y: hs.nam, g: hs.gio ?? null, s: hs.gioi_tinh ?? null, n: hs.noi_sinh ?? null } : null;
   useEffect(() => {
     let huy = false;
     fetch("/api/luan-giai/phi").then((r) => r.json()).then((d) => { if (!huy) setPhi(d); }).catch(() => { /* coi như miễn phí */ });
@@ -42,7 +47,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
     setDang(true); setLoi(null);
     if (moKhoa) {
       ghi("unlock_clicked", { mo_dun: duongDan.includes("battu") ? "battu" : "tuvi", kind: tuDong ? "tu_dong" : "bam" });
-      ghiChoMo(duongDan, laSo);   // đi đăng nhập / nạp rồi quay lại → tự mở đúng báo cáo này
+      ghiChoMo(duongDan, nguoi);   // đi đăng nhập / nạp rồi quay lại → tự mở đúng báo cáo này
     }
     try {
       const d = await postJson<BaoCao>(duongDan, { la_so: laSo }, moKhoa ? { "x-mo-khoa": "1" } : {});
@@ -50,16 +55,15 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
       if (moKhoa || !d.so_khoa) xoaChoMo();
       if (moKhoa && d.phi.ly_do === "da_tru_sao") ghi("unlock_succeeded", { mo_dun: d.mo_dun, so_sao: d.phi.sao });
       else if (d.so_khoa) ghi("paywall_viewed", { mo_dun: d.mo_dun, kind: "luan_giai_toan_bo" });
-      ghi("reading_completed", { mo_dun: d.mo_dun, kind: d.so_khoa ? "luan_giai_xem_truoc" : "luan_giai_toan_bo" });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa tải được luận giải."); }
     finally { setDang(false); }
   };
   // Quay lại sau khi đăng nhập / nạp Sao → tự mở đúng báo cáo đang xem dở (cùng lá số, trong 30 phút). Một lần.
   const daTuMo = useRef(false);
   useEffect(() => {
-    if (laSo && !daTuMo.current && dangChoMo(duongDan, laSo)) { daTuMo.current = true; void tai(true, true); }
+    if (laSo && nguoi && !daTuMo.current && dangChoMo(duongDan, nguoi)) { daTuMo.current = true; void tai(true, true); }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ chạy một lần khi lá số sẵn sàng
-  }, [Boolean(laSo)]);
+  }, [Boolean(laSo && nguoi)]);
 
   if (!bc) {
     return (

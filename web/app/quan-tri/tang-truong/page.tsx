@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
-import { baoCaoGa4, baoCaoGsc, baoCaoPosthog, type DongGsc, type KetQua } from "@/lib/so-lieu-ngoai";
+import { baoCaoGa4, baoCaoGsc, baoCaoPosthog, MAU_TOI_THIEU, tinhGate, type BaoCaoPosthog, type DongGsc, type KetQua } from "@/lib/so-lieu-ngoai";
 
 export const metadata: Metadata = { title: "Tăng trưởng" };
 
@@ -58,6 +58,68 @@ function BangGsc({ ds, cot }: { ds: DongGsc[]; cot: string }) {
   );
 }
 
+const TEN_MANG: Record<string, string> = {
+  thanso: "Thần số (Bản thân)", thanso_sau: "Thần số chiều sâu", tuvi: "Tử vi", battu: "Bát tự", kinhdich: "Kinh Dịch",
+  phongthuy: "Phong thuỷ", hopdoi: "Hợp đôi", hom_nay: "Hôm nay", khac: "Chưa gắn mảng (bản cũ)",
+};
+
+/** Gate 1 / Gate 2 (docs/VIEC-CUA-ANH.md mục L): tỉ lệ, ngưỡng đề xuất, đủ mẫu chưa, tách theo mảng. */
+function BangGate({ du }: { du: BaoCaoPosthog }) {
+  const ds = tinhGate(du.gate);
+  const duMau = du.gate.bat_dau >= MAU_TOI_THIEU;
+  return (
+    <div className="mt-4 space-y-5" data-testid="qt-gate">
+      <p className={duMau ? "text-sm text-jade" : "text-sm text-moon"}>
+        {duMau ? `Đủ mẫu: ${so(du.gate.bat_dau)} người bắt đầu xem (≥ ${MAU_TOI_THIEU}).`
+          : `Chưa đủ mẫu: ${so(du.gate.bat_dau)}/${MAU_TOI_THIEU} người bắt đầu xem — tỉ lệ còn dao động mạnh, chưa kết luận đạt/chưa đạt.`}
+      </p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead><tr className="text-left text-xs text-fg-muted">
+            <th className="py-1 font-normal">Cổng</th><th className="font-normal">Chỉ số</th><th className="text-right font-normal">Tử / mẫu</th>
+            <th className="text-right font-normal">Tỉ lệ</th><th className="text-right font-normal">Ngưỡng (đề xuất)</th><th className="text-right font-normal">Kết luận</th>
+          </tr></thead>
+          <tbody>
+            {ds.map((g) => (
+              <tr key={g.ma} className="border-t border-line/60">
+                <td className="py-1.5 text-fg-muted">{g.cong}</td><td>{g.ten}</td>
+                <td className="text-right">{so(g.tu)} / {so(g.mau)}</td>
+                <td className="text-right">{g.ti_le === null ? "—" : pt(g.ti_le)}</td>
+                <td className="text-right text-fg-muted">≥ {pt(g.nguong)}</td>
+                <td className={`text-right ${g.dat === null ? "text-fg-faint" : g.dat ? "text-jade" : "text-cinnabar"}`}>
+                  {g.dat === null ? "chờ số" : g.dat ? "đạt" : "chưa đạt"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {du.theoMang.length > 0 && (
+        <div className="overflow-x-auto">
+          <h3 className="mb-2 text-base">Theo mảng — bước rơi nhiều nhất</h3>
+          <table className="w-full text-sm">
+            <thead><tr className="text-left text-xs text-fg-muted">
+              <th className="py-1 font-normal">Mảng</th><th className="text-right font-normal">Bắt đầu</th><th className="text-right font-normal">Đọc hết</th>
+              <th className="text-right font-normal">Đọc hết %</th><th className="text-right font-normal">Góp ý</th><th className="text-right font-normal">“Có giúp” %</th>
+            </tr></thead>
+            <tbody>
+              {du.theoMang.map((m) => (
+                <tr key={m.mo_dun} className="border-t border-line/60">
+                  <td className="py-1.5">{TEN_MANG[m.mo_dun] ?? m.mo_dun}</td>
+                  <td className="text-right">{so(m.bat_dau)}</td><td className="text-right">{so(m.xong)}</td>
+                  <td className="text-right">{m.bat_dau ? pt(m.xong / m.bat_dau) : "—"}</td>
+                  <td className="text-right">{so(m.gop_y)}</td><td className="text-right">{m.gop_y ? pt(m.co_giup / m.gop_y) : "—"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      <p className="text-xs text-fg-faint">Mỗi chỉ số đếm số trình duyệt khác nhau trong 28 ngày. Lưu hồ sơ: khi tài khoản chưa bật là lưu trên máy (nhập ngày sinh lần đầu).
+        K: người tạo hồ sơ lần đầu sau khi mở link mời / thẻ / link Hôm nay của bạn bè, chia cho số người tạo link.</p>
+    </div>
+  );
+}
+
 export default async function Page() {
   const p = await congQuanTri();
   if (p.trang !== "ok") return <BaoCong trang={p.trang} email={"email" in p ? p.email : null} />;
@@ -69,6 +131,12 @@ export default async function Page() {
         <h1 className="text-2xl">Tăng trưởng</h1>
         <p className="mt-1 text-sm text-fg-muted">28–30 ngày gần nhất. Mục tiêu: thu hút → xem → quay lại → mời bạn → nạp Sao. Số liệu cập nhật mỗi giờ.</p>
       </div>
+
+      <Card>
+        <h2 className="text-lg">Gate 1 · Gate 2 (PostHog, 28 ngày)</h2>
+        <p className="mt-1 text-sm text-fg-muted">Gate 1: bài đọc có giá trị (đọc hết, thấy có giúp, lưu hồ sơ). Gate 2: tự lan truyền (chia sẻ, K). Qua Gate 2 mới mở giai đoạn thu tiền.</p>
+        {ph.ok ? <BangGate du={ph.du} /> : <div className="mt-3"><ChuaCo kq={ph} huongDan="Cần khoá PostHog như mục Phễu bên dưới." /></div>}
+      </Card>
 
       <Card>
         <h2 className="text-lg">Phễu sản phẩm (PostHog, 28 ngày)</h2>

@@ -10,10 +10,12 @@ import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { KetQuaHopDoi, type KetQuaHopDoiT } from "@/components/hop-doi/KetQuaHopDoi";
 import { NutChiaSe } from "@/components/chia-se/NutChiaSe";
+import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
+import { GopY } from "@/components/khung/GopY";
 import { postJson } from "@/lib/goi-api";
 import { hoTenList, ngayHopLe, tenGoi, useHoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
-import { ghi } from "@/lib/do-luong";
+import { batDauDoc, ghi } from "@/lib/do-luong";
 
 // Loại quan hệ — engine luận theo từng vai (người yêu / bạn bè / đồng nghiệp / sếp / gia đình).
 const QUAN_HE = [
@@ -66,6 +68,7 @@ export function HopDoi() {
         quan_he: quanHe,
       }));
       ghi("compatibility_created", { kind: "truc_tiep", quan_he: quanHe });
+      batDauDoc("hopdoi", { quan_he: quanHe });
     } catch (e2) {
       setLoi(e2 instanceof Error ? e2.message : "Chưa tính được lúc này.");
     } finally {
@@ -138,6 +141,7 @@ export function HopDoi() {
       {kq && (
         <>
           <KetQuaHopDoi kq={kq} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : tenQuanHe} />
+          <div className="mx-auto max-w-3xl"><MocDocXong moDun="hopdoi" /><GopY moDun="hopdoi" cauHoi="Phần so hai người có giúp bạn hiểu mối quan hệ này hơn?" /></div>
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             <Card>
               <p className="font-serif text-lg">Mời người ấy xem cùng</p>

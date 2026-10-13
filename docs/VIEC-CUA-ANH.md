@@ -528,6 +528,14 @@ Gate theo `docs/THIET-KE-UI.md` §2 và §9 (giả định G1–G4), hạ tầng
 
 Qua Gate 2 → mới mở **giai đoạn 2 hạ tầng + thu tiền** (Vercel Pro, Supabase Pro, cổng AI, thanh toán Sao).
 
+**Đọc số ở đâu (2026-10-13):** `/quan-tri/tang-truong` → khung **Gate 1 · Gate 2** tự tính 5 tỉ lệ, so ngưỡng đề xuất,
+báo "chưa đủ mẫu" khi < 300 người bắt đầu, và bảng **theo mảng** (Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Hợp
+đôi, Hôm nay) để thấy mảng nào rơi nhiều nhất — anh không cần tự dựng funnel trong PostHog (chỉ cần làm Q8: khoá
+PostHog cá nhân). Định nghĩa sự kiện đã sửa cho đúng nghĩa cổng: `reading_started` = kết quả của một mảng hiện ra
+(trước đây gắn vào lúc lưu hồ sơ → tỉ lệ sai), `reading_completed` = cuộn tới cuối bài đọc, mỗi phiên một lần mỗi mảng;
+góp ý 1 chạm có ở MỌI mảng; `landing_viewed` ở mọi trang vào đầu tiên (không chỉ trang chủ); link chia sẻ "Hôm nay" mang
+mã → bạn bè tạo hồ sơ được tính `referral_signup` (K). Số trước ngày đổi không so được với số sau.
+
 **Bước 1 — tuần này (anh):**
 - [ ] Render: kiểm dịch vụ engine đang ở **Singapore + Starter** (mục D2); `/health` có `"khoa_engine": true` (mục 4b).
 - [ ] UptimeRobot 2 monitor (mục D2) — 5 phút.

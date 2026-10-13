@@ -98,7 +98,7 @@ SMTP hứng, cổng nạp giả) — `web/e2e-that/`, job CI **`sao-that`** ch�
 **Lỗi tìm ra khi chạy thật, đã sửa:** (1) hộp thoại vẫn đè lên trang đăng nhập sau khi bấm "Đăng nhập để xem tiếp"
 (không đăng nhập được); (2) người mới đăng nhập quay về không nhận được 10 Sao đã hứa (quà chỉ trao ở /tai-khoan) →
 hộp nạp có bước "Lưu hồ sơ · nhận 10 Sao"; (3) báo cáo chờ mở ở sessionStorage → mất khi mở link thư ở tab mới, và
-"để sau" vẫn tự bật lại → localStorage gắn route + lá số, hạn 30 phút, "để sau" xoá; (4) thiếu bí mật ký khoá vẫn
+"để sau" vẫn tự bật lại → localStorage gắn route + người (dữ liệu sinh, không theo trường phái), hạn 30 phút, "để sau" xoá; (4) thiếu bí mật ký khoá vẫn
 khoá báo cáo rồi báo 503 → nay mở miễn phí (fail-open như quy tắc); (5) khoá "đã mở hôm nay" có gồm giá → đổi giá giữa
 ngày bị trừ lần hai → bỏ giá khỏi khoá; (6) sự kiện đếm trùng (`paywall_viewed` hai lần, `unlock_succeeded` khi xem
 lại miễn phí, `payment_succeeded` mỗi lần tải lại trang kết quả).

@@ -10,6 +10,7 @@ import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
+import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 
 interface NgayCN { so: number; nghia: string; tu_soi: string }
 interface TheHomNay {
@@ -74,9 +75,11 @@ export function HomNay() {
 
   async function chiaSe() {
     if (!the) return;
-    const url = `${window.location.origin}/hom-nay`;
+    // ?tu=hn.<ngẫu nhiên>: bạn bè mở link → GhiVaoTrang nhớ mã → hồ sơ đầu tiên tính referral_signup (Gate 2, K).
+    const tu = `hn.${crypto.randomUUID().replace(/-/g, "").slice(0, 10)}`;
+    const url = `${window.location.origin}/hom-nay?tu=${tu}`;
     const chu = `Hôm nay là Ngày cá nhân ${the.ngay_ca_nhan.so} của mình — ${boTienTo(the.ngay_ca_nhan.nghia)} Xem ngày của bạn:`;
-    ghi("share_clicked", { nguon: "hom_nay" });
+    ghi("share_created", { kind: "hom_nay", ma_moi: tu });
     try {
       if (navigator.share) { await navigator.share({ title: "Hôm nay của bạn", text: chu, url }); return; }
       await navigator.clipboard.writeText(`${chu} ${url}`);
@@ -84,6 +87,7 @@ export function HomNay() {
     } catch { /* người dùng huỷ chia sẻ */ }
   }
 
+  useBatDauDoc("hom_nay", Boolean(the));
   const tieuDe = <TieuDeMuc cap={1} nho="Mỗi ngày một thẻ" lon="Hôm nay của bạn" />;
   if (hoSo === undefined) return <div className="mx-auto max-w-xl">{tieuDe}<KhungTai /></div>;
   if (hoSo === null) {
@@ -149,6 +153,8 @@ export function HomNay() {
             <p className="text-sm"><span className="text-fg-muted">Ngày mai — Ngày cá nhân {the.ngay_mai.so}:</span>{" "}
               {boTienTo(the.ngay_mai.nghia)} <span className="text-fg-muted">Mở lại vào ngày mai để xem câu hỏi mới.</span></p>
           </Card>
+
+          <CuoiBaiDoc moDun="hom_nay" cauHoi="Thẻ hôm nay có giúp bạn định hướng ngày của mình?" />
 
           <p className="text-xs text-fg-faint">{the.luu_y} Muốn hiểu sâu hơn: <Link href="/ban-than" className="text-gold hover:underline">bài đọc đầy đủ</Link> ·{" "}
             <Link href="/hop-doi" className="text-gold hover:underline">xem hợp với ai</Link>.</p>

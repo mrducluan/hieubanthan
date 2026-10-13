@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { Hexagon } from "lucide-react";
 import { KhungChat } from "@/components/hoi/KhungChat";
+import { CuoiBaiDoc } from "@/components/khung/CuoiBaiDoc";
+import { batDauDoc } from "@/lib/do-luong";
 import { DauMang } from "@/components/huyen-hoc/KhungMang";
 import { VeQue, type Quai } from "@/components/huyen-hoc/VeQue";
 import { Input, Select } from "@/components/ui/input";
@@ -44,6 +46,7 @@ export function KinhDich() {
   const [cach, setCach] = useState("may_gieo");
   const [tay, setTay] = useState("");
   const [lichMH, setLichMH] = useState<"viet" | "trung">("viet");
+  const [coQue, setCoQue] = useState(false);   // Gate 1: đã có lời quẻ → bắt đầu đọc + mốc đọc xong/góp ý dưới khung
 
   async function gui(cau: string) {
     const vals = tay.split(/[^6-9]+/).filter(Boolean).map(Number);
@@ -72,7 +75,7 @@ export function KinhDich() {
       ) : null,
       ["khong_gieo_lai"],
     );
-    if (kq.van) ghiDaHoi(cau);
+    if (kq.van) { ghiDaHoi(cau); batDauDoc("kinhdich"); setCoQue(true); }
     if (nhac) kq.canhBao = ["Bạn đã hỏi đúng câu này trong 30 ngày qua. Theo lời quẻ Mông, hỏi lại cùng việc làm lần xem mất giá trị — nên suy ngẫm quẻ trước.", ...(kq.canhBao ?? [])];
     return kq;
   }
@@ -113,6 +116,7 @@ export function KinhDich() {
           }
           gui={gui}
         />
+        {coQue && <CuoiBaiDoc moDun="kinhdich" cauHoi="Lời quẻ có giúp bạn nhìn rõ việc đang cân nhắc?" />}
       </div>
     </div>
   );

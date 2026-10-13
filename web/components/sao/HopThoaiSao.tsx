@@ -15,8 +15,8 @@ import { ghi } from "@/lib/do-luong";
 import { QUAY_VE, TU_DONG_Y, dangKyHopThoaiSao, xoaChoMo, type YeuCauSao } from "@/lib/sao-client";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { useHoSo } from "@/lib/hoso";
-import { luuVaoTaiKhoan } from "@/lib/tai-khoan";
-import { nhanChaoMung } from "@/lib/sao";
+import { hoSoTaiKhoan, luuVaoTaiKhoan } from "@/lib/tai-khoan";
+import { maGioiThieuDaNho, nhanChaoMung, nhanThuongGioiThieu, quenMaGioiThieu } from "@/lib/sao";
 
 type Goi = { ma: string; ten: string; gia_vnd: number; sao: number; nhan: string | null; mo_ta: string | null };
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
@@ -87,36 +87,67 @@ function DangNhapNhan({ y }: { y: YeuCauSao }) {
   );
 }
 
-/** Tài khoản mới chưa nhận quà: lưu hồ sơ đang dùng trên máy vào tài khoản (người dùng bấm — không tự lưu) → +Sao
- *  chào mừng → gửi lại yêu cầu (lib/sao-client fetchSao). Không có hồ sơ trên máy → dẫn sang /tai-khoan. */
+/** Tài khoản chưa nhận quà: lưu hồ sơ đang dùng trên máy vào tài khoản (người dùng bấm — không tự lưu; tài khoản ĐÃ có
+ *  hồ sơ thì giữ nguyên, chỉ nhận quà) → +Sao chào mừng (+ thưởng lời mời nếu đến từ link mời) → đủ Sao thì gửi lại
+ *  yêu cầu (lib/sao-client fetchSao), chưa đủ thì ở lại hộp để nạp phần còn thiếu. */
 function NhanChaoMung({ y, xong }: { y: YeuCauSao; xong: () => void }) {
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
+  const [daNhan, setDaNhan] = useState<number | null>(null);
+  const [tkCoHoSo, setTkCoHoSo] = useState<boolean | null>(null);
   const hs = useHoSo() ?? null;
+  useEffect(() => {
+    void (async () => {
+      const uid = (await (await supabase())?.auth.getUser())?.data.user?.id;
+      if (uid) setTkCoHoSo(Boolean(await hoSoTaiKhoan(uid).catch(() => null)));
+    })();
+  }, []);
   const du = (y.chao_mung ?? 0) + (y.so_du ?? 0) >= (y.gia ?? 0);
   async function nhan() {
     setDang(true); setLoi(null);
     try {
-      const sb = await supabase();
-      const uid = (await sb?.auth.getUser())?.data.user?.id;
-      if (!uid || !hs) throw new Error("Chưa lưu được — thử lại ở trang Tài khoản.");
-      await luuVaoTaiKhoan(uid, hs);
+      const uid = (await (await supabase())?.auth.getUser())?.data.user?.id;
+      if (!uid) throw new Error("Phiên đăng nhập đã hết — đăng nhập lại rồi thử.");
+      if (!tkCoHoSo) {
+        if (!hs) throw new Error("Chưa có hồ sơ trên máy — lưu ở trang Tài khoản.");
+        await luuVaoTaiKhoan(uid, hs);
+        ghi("profile_created", { kind: "tai_khoan", nguon: "hop_sao" });
+      }
       const r = await nhanChaoMung();
       if (r.ket_qua !== "da_thuong" && r.ket_qua !== "da_nhan") throw new Error("Chưa nhận được Sao chào mừng, thử lại sau.");
-      if (r.ket_qua === "da_thuong") ghi("credit_earned", { kind: "chao_mung", so_sao: r.sao });
-      ghi("profile_created", { kind: "tai_khoan", nguon: "hop_sao" });
-      xong();
+      let them = r.ket_qua === "da_thuong" ? r.sao ?? 0 : 0;
+      if (them) ghi("credit_earned", { kind: "chao_mung", so_sao: them });
+      // Đến từ link mời: nhận thưởng hai phía luôn (như trang Tài khoản), không đợi người dùng ghé /tai-khoan.
+      const gt = maGioiThieuDaNho();
+      if (gt) {
+        const m = await nhanThuongGioiThieu(gt).catch(() => null);
+        if (m?.ket_qua === "da_thuong") { them += m.sao ?? 0; ghi("credit_earned", { kind: "duoc_moi", so_sao: m.sao }); }
+        if (m && m.ket_qua !== "chua_luu_ho_so") quenMaGioiThieu();
+      }
+      if ((y.so_du ?? 0) + them >= (y.gia ?? 0)) { xong(); return; }
+      setDaNhan(them); setDang(false);
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa lưu được."); setDang(false); }
+  }
+  if (daNhan !== null) {
+    return <p className="rounded-2xl border border-jade/40 bg-jade/5 p-4 text-sm text-fg" data-testid="da-nhan-chao-mung">
+      Đã nhận {daNhan} Sao. Ví còn thiếu {Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0) - daNhan)} Sao — nạp thêm bên dưới hoặc mời bạn bè.</p>;
   }
   return (
     <div className="rounded-2xl border border-gold/40 bg-gold/5 p-4" data-testid="nhan-chao-mung">
       <p className="flex gap-2 text-sm text-fg"><Gift className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
-        <span>Quà chào mừng: lưu hồ sơ <b>{hs?.ho_ten ?? "của bạn"}</b> vào tài khoản để nhận <b className="text-gold">{y.chao_mung} Sao</b>
-          {du ? " — đủ mở ngay." : "."}</span></p>
-      <p className="mt-1 text-xs text-fg-faint">Chỉ lưu thông tin sinh để dùng trên mọi thiết bị, không lưu luận giải. Xoá được bất cứ lúc nào ở trang Tài khoản.</p>
-      {hs ? (
+        <span>{tkCoHoSo
+          ? <>Quà chào mừng: <b className="text-gold">{y.chao_mung} Sao</b> cho tài khoản đã lưu hồ sơ{du ? " — đủ mở ngay." : "."}</>
+          : <>Quà chào mừng: lưu hồ sơ <b>{hs?.ho_ten ?? "của bạn"}</b> vào tài khoản để nhận <b className="text-gold">{y.chao_mung} Sao</b>{du ? " — đủ mở ngay." : "."}</>}</span></p>
+      {!tkCoHoSo && (
+        <p className="mt-1 text-xs text-fg-faint">Bấm nút là bạn đồng ý lưu <b>họ tên, ngày giờ sinh, giới tính, nơi sinh</b> vào tài khoản để dùng trên máy khác.
+          Nội dung bài đọc và câu hỏi không được lưu. Xoá được bất cứ lúc nào ở trang Tài khoản.{" "}
+          <Link href="/chinh-sach-rieng-tu#du-lieu" className="text-gold underline">Chính sách quyền riêng tư</Link></p>
+      )}
+      {tkCoHoSo === null ? (
+        <p className="mt-3 inline-flex items-center gap-2 text-sm text-fg-muted"><Loader2 className="size-4 animate-spin" aria-hidden /> Đang kiểm tra tài khoản…</p>
+      ) : tkCoHoSo || hs ? (
         <Button className="mt-3 w-full" onClick={() => void nhan()} disabled={dang} data-testid="nhan-chao-mung-nut">
-          {dang ? <Loader2 className="animate-spin" aria-hidden /> : <Gift aria-hidden />} Lưu hồ sơ · nhận {y.chao_mung} Sao
+          {dang ? <Loader2 className="animate-spin" aria-hidden /> : <Gift aria-hidden />} {tkCoHoSo ? `Nhận ${y.chao_mung} Sao` : `Lưu hồ sơ · nhận ${y.chao_mung} Sao`}
         </Button>
       ) : (
         <Button asChild variant="secondary" className="mt-3 w-full"><Link href="/tai-khoan">Lưu hồ sơ ở trang Tài khoản</Link></Button>

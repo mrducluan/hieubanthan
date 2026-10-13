@@ -28,20 +28,20 @@ export const TU_DONG_Y = "sao:tu-dong-y";   // "không hỏi lại trong phiên 
 export const QUAY_VE = "sao:quay-ve";       // trang cần quay lại sau khi nạp / đăng nhập (sessionStorage)
 
 /** Báo cáo đang chờ mở (người dùng bấm "Mở toàn bộ" rồi đi đăng nhập / nạp): localStorage để sống qua tab mới
- *  (link trong thư) — gắn đúng route + lá số, hết hạn sau 30 phút. Người dùng bấm "Để sau" thì xoá. */
+ *  (link trong thư) — gắn đúng route + người (dữ liệu sinh), hết hạn sau 30 phút. Người dùng bấm "Để sau" thì xoá. */
 const CHO_MO = "lg:cho-mo";
 const CHO_MO_HAN = 30 * 60_000;
 const vanTay = (x: unknown) => { const s = JSON.stringify(x) ?? ""; let h = 5381; for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0; return String(h); };
-export function ghiChoMo(duong: string, laSo: unknown): void {
-  try { localStorage.setItem(CHO_MO, JSON.stringify({ d: duong, k: vanTay(laSo), t: Date.now() })); } catch { /* chế độ riêng tư */ }
+export function ghiChoMo(duong: string, nguoi: unknown): void {
+  try { localStorage.setItem(CHO_MO, JSON.stringify({ d: duong, k: vanTay(nguoi), t: Date.now() })); } catch { /* chế độ riêng tư */ }
 }
 export function xoaChoMo(): void { try { localStorage.removeItem(CHO_MO); } catch { /* bỏ qua */ } }
-export function dangChoMo(duong: string, laSo: unknown): boolean {
+export function dangChoMo(duong: string, nguoi: unknown): boolean {
   try {
     const v = JSON.parse(localStorage.getItem(CHO_MO) ?? "null") as { d?: string; k?: string; t?: number } | null;
     if (!v) return false;
     if (!v.t || Date.now() - v.t > CHO_MO_HAN) { xoaChoMo(); return false; }
-    return v.d === duong && v.k === vanTay(laSo);
+    return v.d === duong && v.k === vanTay(nguoi);
   } catch { return false; }
 }
 
