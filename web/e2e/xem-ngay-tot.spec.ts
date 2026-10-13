@@ -25,6 +25,12 @@ test("trang một ngày: HTML máy chủ có H1 + Kim Quỹ, trực Khai, giờ 
   await expect(page.getByTestId("nghi")).toContainText("Cưới hỏi");
   await expect(page.getByTestId("ky")).toContainText("An táng");
   await expect(page.getByText("Tuổi Giáp Dần")).toBeVisible();
+  await expect(page.getByTestId("hop-nhat")).toContainText("cưới hỏi");
+  await page.getByTestId("giai-nghia-nghi-ky").locator("summary").click();
+  await expect(page.getByTestId("giai-nghia-nghi-ky")).toContainText("Cưới hỏi:");
+  // Trang con: breadcrumb đúng đường dẫn hiển thị, không lặp FAQ của trang chính
+  expect(html).toContain('"name":"Tháng 10/2026"');
+  expect(html).not.toContain('"@type":"FAQPage"');
   // Lịch tháng: ô hôm đó được đánh dấu, bấm sang ngày mai
   await expect(page.locator('[aria-current="date"]')).toContainText("13");
   await page.getByTestId("ngay-mai").click();
@@ -52,6 +58,10 @@ test("trang tháng + trang hôm nay + noindex ngoài cửa sổ + 404 sai dạng
   await expect(page.getByTestId("ngay-dep-thang").locator("li").first()).toBeVisible();
   const html = await (await request.get("/xem-ngay-tot")).text();
   expect(html).toMatch(/<h1[^>]*>Xem ngày tốt hôm nay<\/h1>/);
+  const xa = await (await request.get("/xem-ngay-tot/thang-1-1990")).text();
+  expect(xa).toMatch(/<meta name="robots" content="noindex/);
+  expect(xa).toMatch(/rel="nofollow"[^>]*aria-label="Tháng sau"|aria-label="Tháng sau"[^>]*rel="nofollow"|href="\/xem-ngay-tot\/thang-2-1990" rel="nofollow"/);
+  expect(html).toContain('"@type":"FAQPage"');
   const cu = await (await request.get("/xem-ngay-tot/1990-01-01")).text();
   expect(cu).toMatch(/<meta name="robots" content="noindex/);
   expect((await request.get("/xem-ngay-tot/2026-02-30")).status()).toBe(404);

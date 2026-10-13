@@ -98,7 +98,9 @@ def tom_tat(d: dt.date) -> dict:
     c = _calc(d)
     return {"ngay": d.isoformat(), "am": f"{c['am']['ngay']}/{c['am']['thang']}", "can_chi": _gz(c["ngay_gz"]),
             "truc": KB["truc"][c["truc"]]["ten"], "than": KB["than"][c["than"]]["ten"], "hoang_dao": c["hoang_dao"],
-            "ky_dan_gian": [KB["ky_dan_gian"][k]["ten"] for k in c["ky_dan_gian"]]}
+            "ky_dan_gian": [KB["ky_dan_gian"][k]["ten"] for k in c["ky_dan_gian"]],
+            # "Ngày đẹp" chung (RULES ở engine, web chỉ hiển thị): hoàng đạo + trực tốt + không rơi ngày kỵ dân gian.
+            "dep": bool(c["hoang_dao"] and c["truc"] in TRUC_TOT and not c["ky_dan_gian"])}
 
 
 def ngay_tot_gan(d: dt.date, viec: str | None = None, t: dict | None = None, so_ngay: int = 30) -> dict | None:

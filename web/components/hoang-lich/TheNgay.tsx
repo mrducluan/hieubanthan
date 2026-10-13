@@ -6,15 +6,14 @@ import Link from "next/link";
 import { CalendarHeart, Clock, Compass, MoonStar, Sparkles, Sunrise, ThumbsDown, ThumbsUp, UserRound } from "lucide-react";
 import type { GioNgay, NgayTot } from "@/lib/hoang-lich";
 import { duongNgay, homNayVN } from "@/lib/hoang-lich";
-import { VongGio } from "./VongGio";
+import { VongGio, canhGioHienTai } from "./VongGio";
 
-/** Giờ đồng hồ VN hiện tại → chỉ số canh giờ của NGÀY ĐANG XEM (Tý đầu ngày = 0 là 00:00–00:59; 23:xx đã là Tý của
- *  ngày mai → 12, tức đã qua mọi giờ hôm nay). */
+/** Giờ hiện tại (phút trong ngày, giờ VN) + canh giờ của NGÀY ĐANG XEM (dùng chung với vòng giờ; 23:xx = 12, đã qua). */
 function canhGioVN(d: Date): { i: number; phut: number } {
   const p = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Ho_Chi_Minh", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
     .formatToParts(d);
   const h = Number(p.find((x) => x.type === "hour")?.value ?? 0), m = Number(p.find((x) => x.type === "minute")?.value ?? 0);
-  return { i: h === 23 ? 12 : Math.floor((h + 1) / 2), phut: h * 60 + m };
+  return { i: canhGioHienTai(d) ?? 12, phut: h * 60 + m };
 }
 
 function GioSapToi({ gio }: { gio: GioNgay[] }) {
@@ -71,20 +70,24 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
                 {nhanNgay} · {d.than.ten}
               </span>
             </p>
+            {d.nghi.length > 0 && (
+              <p className="mt-3 text-sm" data-testid="hop-nhat">Sách lịch ghi hôm nay hợp nhất cho:{" "}
+                <b className="text-jade">{d.nghi.slice(0, 3).map((x) => x.ten.toLowerCase()).join(", ")}</b></p>
+            )}
           </div>
         </div>
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           <div className="rounded-xl border border-line/70 bg-bg/40 p-3">
-            <p className="text-xs uppercase tracking-wider text-fg-faint">Trực</p>
+            <p className="text-xs uppercase tracking-wider text-fg-muted">Trực</p>
             <p className="mt-1 text-lg" data-testid="truc">{d.truc.ten} <span className="text-sm text-fg-muted">— {d.truc.y}</span></p>
             <p className="mt-1 text-xs text-fg-muted">Hợp: {d.truc.hop}</p>
           </div>
           <div className="rounded-xl border border-line/70 bg-bg/40 p-3">
-            <p className="text-xs uppercase tracking-wider text-fg-faint">Sao (nhị thập bát tú)</p>
+            <p className="text-xs uppercase tracking-wider text-fg-muted">Sao (nhị thập bát tú)</p>
             <p className="mt-1 text-lg">{d.tu.ten} <span className="text-sm text-fg-muted">— {d.tu.tot ? "sao tốt" : "sao trung/xấu theo sách"}</span></p>
           </div>
           <div className="rounded-xl border border-line/70 bg-bg/40 p-3">
-            <p className="text-xs uppercase tracking-wider text-fg-faint">Xung</p>
+            <p className="text-xs uppercase tracking-wider text-fg-muted">Xung</p>
             <p className="mt-1 text-lg">Tuổi {d.xung_tuoi.ten}</p>
             <p className="mt-1 text-xs text-fg-muted">Sát hướng {d.sat}</p>
           </div>
@@ -115,7 +118,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
         </ul>
       </section>
 
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-3 sm:grid-cols-[3fr_2fr]">
         <section aria-labelledby="nen" className="glass rounded-2xl p-5">
           <h2 id="nen" className="inline-flex items-center gap-2 text-lg"><ThumbsUp className="size-5 text-jade" aria-hidden />Sách lịch ghi nên</h2>
           <div className="mt-3 flex flex-wrap gap-2" data-testid="nghi">
@@ -131,6 +134,17 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
           </div>
         </section>
       </div>
+
+      {(d.nghi.length > 0 || d.ky.length > 0) && (
+        <details className="glass rounded-2xl px-5 py-3 text-sm" data-testid="giai-nghia-nghi-ky">
+          <summary className="cursor-pointer text-gold">Giải nghĩa các việc nên / kiêng</summary>
+          <dl className="mt-2 grid gap-x-6 gap-y-1 sm:grid-cols-2">
+            {[...d.nghi, ...d.ky].filter((x) => x.nghia).map((x) => (
+              <div key={x.ma} className="flex gap-1.5"><dt className="font-medium">{x.ten}:</dt><dd className="text-fg-muted">{x.nghia}</dd></div>
+            ))}
+          </dl>
+        </details>
+      )}
 
       {!gon && (
         <>

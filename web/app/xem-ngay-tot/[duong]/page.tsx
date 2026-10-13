@@ -3,20 +3,31 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { GioiThieuCongCu } from "@/components/seo/GioiThieuCongCu";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { LichThang, XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
-import { docDuong, duongNgay, homNayVN, ngayDangIndex, ngayTotCongKhai, thangCongKhai } from "@/lib/hoang-lich";
-import { metaTrang } from "@/lib/seo";
-import { ND_XEM_NGAY } from "../noi-dung";
+import { docDuong, duongNgay, ngayDangIndex, ngayTotCongKhai, thangCongKhai, thangIndex } from "@/lib/hoang-lich";
+import { goiLd, ldDuongDan, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
 
 type P = { params: Promise<{ duong: string }> };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
 
-function thangIndex(nam: number, thang: number): boolean {
-  const h = homNayVN();
-  const lech = (nam - Number(h.slice(0, 4))) * 12 + (thang - Number(h.slice(5, 7)));
-  return lech >= -12 && lech <= 24;
+/** Trang con: WebPage + breadcrumb đúng như đường dẫn hiển thị; giới thiệu + hỏi đáp chỉ ở trang chính /xem-ngay-tot
+ *  (không lặp FAQ trên hàng trăm trang ngày/tháng). */
+function LdTrangCon({ duong, ten, moTa, cap }: { duong: string; ten: string; moTa: string; cap: { ten: string; duong: string }[] }) {
+  return (
+    <>
+      <JsonLd data={goiLd(
+        { "@type": "WebPage", "@id": `${urlDayDu(duong)}#trang`, url: urlDayDu(duong), name: ten, description: moTa,
+          inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl()}/#website` } },
+        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Xem ngày tốt", duong: "/xem-ngay-tot" }, ...cap]),
+      )} />
+      <p className="mx-auto mt-10 max-w-3xl border-t border-line/50 pt-6 text-sm text-fg-muted">
+        Hoàng lịch tính theo giờ Việt Nam, bảng nghi/kỵ theo sách Hiệp kỷ biện phương thư, kèm ngày kiêng dân gian Việt.
+        Cách đọc, giờ hoàng đạo, ngày Tam nương và câu hỏi thường gặp: <Link href="/xem-ngay-tot" className="text-gold underline">Xem ngày tốt hôm nay</Link>.
+      </p>
+    </>
+  );
 }
 
 export async function generateMetadata({ params }: P): Promise<Metadata> {
@@ -39,23 +50,26 @@ export default async function Page({ params }: P) {
   if (!x) notFound();
   if (x.loai === "ngay") {
     const [d, t] = await Promise.all([ngayTotCongKhai(x.iso), thangCongKhai(Number(x.iso.slice(0, 4)), Number(x.iso.slice(5, 7)))]);
-    if (!d) return <p role="alert" className="mx-auto max-w-3xl text-sm text-fg-muted">Máy tính lịch đang bận, bạn tải lại trang sau ít phút nhé.</p>;
+    if (!d) throw new Error("engine lịch không phản hồi");   // → error.tsx, mã 5xx (không index trang lỗi)
+    const thangCua = { nam: Number(x.iso.slice(0, 4)), thang: Number(x.iso.slice(5, 7)) };
     return (
       <>
         <div className="mx-auto max-w-3xl">
           <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/xem-ngay-tot" className="hover:underline">Xem ngày tốt</Link> ›{" "}
             <Link href={`/xem-ngay-tot/thang-${Number(x.iso.slice(5, 7))}-${x.iso.slice(0, 4)}`} className="hover:underline">Tháng {Number(x.iso.slice(5, 7))}/{x.iso.slice(0, 4)}</Link></nav>
-          <TieuDeMuc cap={1} nho="Hoàng lịch"
-            lon={`Ngày ${dmy(x.iso)} tốt hay xấu?`} mo_ta={`${d.thu}, âm lịch ${d.am.chu} — ngày ${d.can_chi.ngay}.`} />
+          <TieuDeMuc cap={1} nho="Hoàng lịch" lon={`Ngày ${dmy(x.iso)} tốt hay xấu?`} />
           <XemNgayTot banDau={d} thang={t} />
         </div>
-        <GioiThieuCongCu {...ND_XEM_NGAY} duong={duongNgay(x.iso)} ten={`Ngày ${dmy(x.iso)}`} />
+        <LdTrangCon duong={duongNgay(x.iso)} ten={`Ngày ${dmy(x.iso)} tốt hay xấu?`}
+          moTa={`${d.thu}, âm lịch ${d.am.chu}, ngày ${d.can_chi.ngay}: ${d.hoang_dao ? "hoàng đạo" : "hắc đạo"} (${d.than.ten}), trực ${d.truc.ten}.`}
+          cap={[{ ten: `Tháng ${thangCua.thang}/${thangCua.nam}`, duong: `/xem-ngay-tot/thang-${thangCua.thang}-${thangCua.nam}` },
+            { ten: `Ngày ${dmy(x.iso)}`, duong: duongNgay(x.iso) }]} />
       </>
     );
   }
   const t = await thangCongKhai(x.nam, x.thang);
-  if (!t) return <p role="alert" className="mx-auto max-w-3xl text-sm text-fg-muted">Máy tính lịch đang bận, bạn tải lại trang sau ít phút nhé.</p>;
-  const dep = t.ngay.filter((n) => n.hoang_dao && ["Thành", "Khai", "Định", "Mãn", "Trừ"].includes(n.truc) && !n.ky_dan_gian.length);
+  if (!t) throw new Error("engine lịch không phản hồi");
+  const dep = t.ngay.filter((n) => n.dep);
   return (
     <>
       <div className="mx-auto max-w-3xl space-y-5">
@@ -73,7 +87,9 @@ export default async function Page({ params }: P) {
           </ul>
         </section>
       </div>
-      <GioiThieuCongCu {...ND_XEM_NGAY} duong={`/xem-ngay-tot/thang-${x.thang}-${x.nam}`} ten={`Lịch ngày tốt tháng ${x.thang}/${x.nam}`} />
+      <LdTrangCon duong={`/xem-ngay-tot/thang-${x.thang}-${x.nam}`} ten={`Lịch ngày tốt tháng ${x.thang}/${x.nam}`}
+        moTa={`Lịch tháng ${x.thang}/${x.nam}: ngày âm, hoàng đạo/hắc đạo, trực từng ngày và ${dep.length} ngày hoàng đạo có trực tốt.`}
+        cap={[{ ten: `Tháng ${x.thang}/${x.nam}`, duong: `/xem-ngay-tot/thang-${x.thang}-${x.nam}` }]} />
     </>
   );
 }

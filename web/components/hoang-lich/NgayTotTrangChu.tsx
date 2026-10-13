@@ -30,14 +30,14 @@ export async function NgayTotTrangChu({ className = "" }: { className?: string }
           <p className="text-fg-muted">Xung tuổi {d.xung_tuoi.ten}{d.ky_dan_gian.length ? ` · ${d.ky_dan_gian.map((k) => k.ten).join(", ")}` : ""}</p>
           <TuoiHomNay iso={iso} />
         </div>
-        <div className="grid grid-cols-[8.5rem_1fr] items-center gap-3 md:grid-cols-1 md:justify-items-center">
+        <div className="flex flex-col items-center gap-3">
           <VongGio gio={d.gio} laHomNay tieuDe={d.than.ten} phuDe="GIỜ TỐT" className="w-full max-w-[13rem]" />
-          <div className="md:w-full">
+          <div className="w-full">
             <p className="inline-flex items-center gap-1.5 text-sm text-fg-muted"><Clock className="size-4 text-gold" aria-hidden />Giờ hoàng đạo</p>
-            <ul className="mt-2 grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+            <ul className="mt-2 flex flex-wrap gap-1.5">
               {d.gio_hoang_dao.map((g) => (
-                <li key={g.chi} className="rounded-lg border border-gold/30 bg-bg/40 px-2 py-1 text-center text-sm"><b className="text-gold">{g.chi}</b>
-                  <span className="block text-[0.7rem] text-fg-muted">{g.khung}</span></li>
+                <li key={g.chi} className="rounded-full border border-gold/30 bg-bg/40 px-2.5 py-0.5 text-sm"><b className="text-gold">{g.chi}</b>{" "}
+                  <span className="text-xs text-fg-muted">{g.khung}</span></li>
               ))}
             </ul>
           </div>

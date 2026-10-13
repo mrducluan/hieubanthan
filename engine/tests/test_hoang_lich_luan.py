@@ -96,3 +96,11 @@ def test_ngay_mai_va_gio_sap_toi():
     kq = L.ngay_xem(dt.date(2026, 10, 13))
     assert kq["ngay_mai"]["ngay"] == "2026-10-14" and kq["ngay_mai"]["truc"]
     assert kq["ngay_tot_gan"] is None or kq["ngay_tot_gan"]["ngay"] > "2026-10-13"
+
+
+def test_co_ngay_dep_trong_thang():
+    t = L.thang(2026, 11)
+    for n in t["ngay"]:
+        c = hl.ngay(dt.date.fromisoformat(n["ngay"]))
+        assert n["dep"] == bool(c["hoang_dao"] and c["truc"] in L.TRUC_TOT and not c["ky_dan_gian"])
+    assert any(n["dep"] for n in t["ngay"])

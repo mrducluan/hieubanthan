@@ -10,7 +10,7 @@ import { useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import {
-  congNgay, duongNgay, duongThang, homNayVN, type ChonNgayKq, type NgayTot, type ThangLich, type TomTatNgay,
+  congNgay, duongNgay, duongThang, homNayVN, thangIndex, type ChonNgayKq, type NgayTot, type ThangLich, type TomTatNgay,
 } from "@/lib/hoang-lich";
 
 const THU = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
@@ -20,12 +20,14 @@ export function LichThang({ t, chon }: { t: ThangLich; chon?: string }) {
   const dau = (new Date(Date.UTC(t.nam, t.thang - 1, 1)).getUTCDay() + 6) % 7;   // thứ Hai = 0
   const truoc = t.thang === 1 ? { nam: t.nam - 1, thang: 12 } : { nam: t.nam, thang: t.thang - 1 };
   const sau = t.thang === 12 ? { nam: t.nam + 1, thang: 1 } : { nam: t.nam, thang: t.thang + 1 };
+  // Ngoài cửa sổ index: link tháng trước/sau vẫn bấm được nhưng nofollow; hết phạm vi 1901–2099 thì ẩn.
+  const rel = (n: { nam: number; thang: number }) => (thangIndex(n.nam, n.thang) ? undefined : "nofollow");
   return (
     <section aria-labelledby="lich-thang" className="glass rounded-2xl p-4 sm:p-5" data-testid="lich-thang">
       <div className="flex items-center justify-between">
-        <Link href={duongThang(truoc.nam, truoc.thang)} aria-label="Tháng trước" className="rounded-lg p-1.5 hover:bg-surface"><ChevronLeft className="size-5" /></Link>
+        {truoc.nam >= 1901 ? <Link href={duongThang(truoc.nam, truoc.thang)} rel={rel(truoc)} aria-label="Tháng trước" className="vung-cham rounded-lg p-1.5 hover:bg-surface"><ChevronLeft className="size-5" /></Link> : <span />}
         <h2 id="lich-thang" className="text-lg">Tháng {t.thang}/{t.nam}</h2>
-        <Link href={duongThang(sau.nam, sau.thang)} aria-label="Tháng sau" className="rounded-lg p-1.5 hover:bg-surface"><ChevronRight className="size-5" /></Link>
+        {sau.nam <= 2099 ? <Link href={duongThang(sau.nam, sau.thang)} rel={rel(sau)} aria-label="Tháng sau" className="vung-cham rounded-lg p-1.5 hover:bg-surface"><ChevronRight className="size-5" /></Link> : <span />}
       </div>
       <div className="mt-3 grid grid-cols-7 gap-1 text-center text-xs text-fg-faint">{THU.map((x) => <span key={x}>{x}</span>)}</div>
       <ol className="mt-1 grid grid-cols-7 gap-1">
@@ -36,20 +38,19 @@ export function LichThang({ t, chon }: { t: ThangLich; chon?: string }) {
           return (
             <li key={n.ngay}>
               <Link href={duongNgay(n.ngay)} aria-current={dangChon ? "date" : undefined}
-                title={`${n.can_chi} · ${n.hoang_dao ? "Hoàng đạo" : "Hắc đạo"} (${n.than}) · trực ${n.truc}${n.ky_dan_gian.length ? " · " + n.ky_dan_gian.join(", ") : ""}`}
+                aria-label={`${so}/${t.thang}, âm ${n.am}, ${n.hoang_dao ? "Hoàng đạo" : "Hắc đạo"} ${n.than}, trực ${n.truc}${n.dep ? ", ngày đẹp" : ""}${n.ky_dan_gian.length ? ", " + n.ky_dan_gian.join(", ") : ""}${laHomNay ? ", hôm nay" : ""}`}
                 className={`flex min-h-14 flex-col items-center justify-center rounded-lg border px-0.5 py-1 text-sm leading-tight transition-colors
-                  ${dangChon ? "border-gold bg-gold/15" : laHomNay ? "border-gold/50" : "border-line/50 hover:border-gold/40"}`}>
-                <span className="font-semibold">{so}</span>
-                <span className="text-[0.65rem] text-fg-faint">{n.am}</span>
-                <span aria-hidden className={`mt-0.5 size-1.5 rounded-full ${n.hoang_dao ? "bg-gold" : "bg-fg-faint/40"}`} />
+                  ${dangChon ? "border-gold bg-gold/15" : laHomNay ? "border-gold/60" : n.hoang_dao ? "border-gold/25 bg-gold/[0.04] hover:border-gold/50" : "border-line/50 hover:border-gold/40"}`}>
+                <span className={`font-semibold ${n.hoang_dao ? "text-gold" : ""}`}>{so}{n.dep && <span aria-hidden className="ml-0.5 text-[0.6rem] text-jade">★</span>}</span>
+                <span className="text-[0.7rem] text-fg-muted">{n.am}</span>
               </Link>
             </li>
           );
         })}
       </ol>
       <p className="mt-3 flex items-center gap-3 text-xs text-fg-muted">
-        <span className="inline-flex items-center gap-1"><span className="size-1.5 rounded-full bg-gold" /> Hoàng đạo</span>
-        <span className="inline-flex items-center gap-1"><span className="size-1.5 rounded-full bg-fg-faint/40" /> Hắc đạo</span>
+        <span><b className="text-gold">Số vàng</b>: hoàng đạo</span>
+        <span><span className="text-jade">★</span> ngày đẹp (hoàng đạo, trực tốt)</span>
         <span>Số nhỏ: ngày âm</span>
       </p>
     </section>
@@ -99,7 +100,7 @@ function ChonNgay({ dsViec, tu, tuoi }: { dsViec: { ma: string; ten: string }[];
       {!tuoi && <p className="text-xs text-fg-muted">Có hồ sơ ngày sinh thì kết quả tự bỏ ngày xung tuổi bạn. <Link href="/than-so" className="text-gold hover:underline">Tạo hồ sơ</Link></p>}
       {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
       {kq && (
-        <div data-testid="ket-qua-chon-ngay">
+        <div data-testid="ket-qua-chon-ngay" aria-live="polite" ref={(el) => { el?.scrollIntoView({ behavior: "smooth", block: "nearest" }); }}>
           {kq.ngay.length === 0 ? <p className="text-sm text-fg-muted">Khoảng này sách lịch không có ngày hợp riêng cho việc {kq.viec.ten.toLowerCase()} — thử khoảng dài hơn.</p> : (
             <ol className="space-y-2">
               {kq.ngay.slice(0, 8).map((n: TomTatNgay) => (

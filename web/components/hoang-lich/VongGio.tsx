@@ -20,10 +20,11 @@ function cung(i: number): string {
   return `M${x1} ${y1} A${R_NGOAI} ${R_NGOAI} 0 0 1 ${x2} ${y2} L${x3} ${y3} A${R_TRONG} ${R_TRONG} 0 0 0 ${x4} ${y4}Z`;
 }
 
-/** Canh giờ hiện tại theo giờ Việt Nam: Tý = 0 (23:00–00:59). */
-export function canhGioHienTai(d: Date = new Date()): number {
+/** Canh giờ hiện tại CỦA NGÀY ĐANG XEM theo giờ Việt Nam: 00:00–00:59 = Tý (0), Sửu (1)… Hợi (11).
+ *  23:00–23:59 đã là giờ Tý của NGÀY MAI → null (không đánh dấu trên vòng của hôm nay). */
+export function canhGioHienTai(d: Date = new Date()): number | null {
   const h = Number(new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Ho_Chi_Minh", hour: "2-digit", hourCycle: "h23" }).format(d));
-  return Math.floor(((h + 1) % 24) / 2);
+  return h === 23 ? null : Math.floor((h + 1) / 2);
 }
 
 export function VongGio({ gio, laHomNay, tieuDe, phuDe, className = "" }: {
@@ -76,18 +77,22 @@ export function VongGio({ gio, laHomNay, tieuDe, phuDe, className = "" }: {
               fillOpacity={g.hoang_dao ? 0.92 : 1}
               stroke={dang ? "rgb(var(--fg))" : g.hoang_dao ? "rgb(var(--gold) / 0.9)" : "rgb(var(--line))"}
               strokeWidth={dang ? 1.8 : 0.8}
-              filter={g.hoang_dao ? `url(#sang-${id})` : undefined}
-              className={dang ? "motion-safe:animate-twinkle" : undefined}>
+              filter={g.hoang_dao ? `url(#sang-${id})` : undefined}>
               <title>{`${g.chi} ${g.khung} — ${g.than} (${g.hoang_dao ? "hoàng đạo" : "hắc đạo"})`}</title>
             </path>
-            <text x={tx} y={ty + 3.5} textAnchor="middle" fontSize="10.5" fontWeight={g.hoang_dao ? 700 : 500}
-              fill={g.hoang_dao ? "rgb(28 22 10)" : "rgb(var(--fg-muted))"}>{g.chi}</text>
+            <text x={tx} y={ty + 4} textAnchor="middle" fontSize="12.5" fontWeight={g.hoang_dao ? 700 : 600}
+              fill={g.hoang_dao ? "rgb(28 22 10)" : "rgb(var(--fg))"} fillOpacity={g.hoang_dao ? 1 : 0.85}>{g.chi}</text>
           </g>
         );
       })}
       {bay !== null && (() => {
         const [x, y] = diem(bay * 30, R_NGOAI + 6);
-        return <circle cx={x} cy={y} r="3.2" fill="rgb(var(--fg))" stroke="rgb(var(--gold))" strokeWidth="1" data-testid="kim-gio"><title>Giờ hiện tại</title></circle>;
+        return (
+          <g data-testid="kim-gio">
+            <circle cx={x} cy={y} r="6" fill="none" stroke="rgb(var(--gold))" strokeWidth="1" className="motion-safe:animate-twinkle" />
+            <circle cx={x} cy={y} r="3.2" fill="rgb(var(--fg))" stroke="rgb(var(--gold))" strokeWidth="1"><title>Giờ hiện tại</title></circle>
+          </g>
+        );
       })()}
       <circle cx={TAM} cy={TAM} r={R_TRONG - 4} fill="rgb(var(--bg) / 0.92)" stroke="rgb(var(--gold) / 0.35)" strokeWidth="0.8" />
       <text x={TAM} y={TAM - 6} textAnchor="middle" fontSize="15" fontFamily="var(--font-display), Georgia, serif"

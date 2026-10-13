@@ -11,6 +11,8 @@ export interface GioNgay {
 export interface TomTatNgay {
   ngay: string; am: string; can_chi: string; truc: string; than: string; hoang_dao: boolean; ky_dan_gian: string[];
   con_ngay?: number; viec?: string; quan_he_tuoi?: string | null; diem_cong?: string[];
+  /** Engine chấm "ngày đẹp" chung: hoàng đạo + trực tốt + không rơi ngày kỵ dân gian. */
+  dep?: boolean;
 }
 export interface QuanHeTuoi { ma: string | null; ten: string; nghia: string }
 export interface NgayTot {
@@ -98,6 +100,17 @@ export const duongThang = (nam: number, thang: number) => `/xem-ngay-tot/thang-$
 /** Cộng ngày cho chuỗi YYYY-MM-DD (UTC, không lệch múi giờ). */
 export function congNgay(iso: string, n: number): string {
   return new Date(Date.parse(`${iso}T00:00:00Z`) + n * 86_400_000).toISOString().slice(0, 10);
+}
+
+/** Cửa sổ index trang tháng (cũng là cửa sổ sitemap): 12 tháng trước → 24 tháng tới. Ngoài cửa sổ: noindex + link
+ *  tháng trước/sau rel=nofollow (không mở không gian bò vô hạn 1901–2099). */
+export const THANG_TRUOC = 12, THANG_SAU = 24;
+export function lechThang(nam: number, thang: number, h: string = homNayVN()): number {
+  return (nam - Number(h.slice(0, 4))) * 12 + (thang - Number(h.slice(5, 7)));
+}
+export function thangIndex(nam: number, thang: number, h?: string): boolean {
+  const l = lechThang(nam, thang, h);
+  return l >= -THANG_TRUOC && l <= THANG_SAU;
 }
 
 /** Trang ngày được index khi nằm trong cửa sổ hữu ích (7 ngày trước → 400 ngày tới); ngoài ra vẫn xem được, noindex. */

@@ -1,6 +1,5 @@
 // HL-1 — phần giới thiệu + hỏi đáp (SEO) dùng chung cho /xem-ngay-tot và trang ngày/tháng.
 import type { NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
-
 export const ND_XEM_NGAY: NoiDungCongCu = {
   duong: "/xem-ngay-tot",
   ten: "Xem ngày tốt",
