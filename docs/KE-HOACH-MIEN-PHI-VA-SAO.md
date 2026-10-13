@@ -14,7 +14,7 @@
 | Luận giải toàn bộ Tử vi / Bát tự | chương 1 trọn + các chương sau hiện tiêu đề, **điểm nhấn đã tính**, **câu hỏi mở**, số phút đọc | như khách | **10 Sao** mở toàn bộ, xem lại cả ngày không trừ lần hai | `luan_giai.thu_sao`, `luan_giai.gia_sao`, `luan_giai.chuong_mien_phi` |
 | Sao tặng | — | +10 khi lưu hồ sơ (đủ mở 1 báo cáo) · +20 mỗi bạn mời (hai phía, một tầng) | — | `sao.thuong.*` |
 
-Không đếm được (chưa có `SUPABASE_SERVICE_ROLE_KEY` / `SAO_KHOA_SECRET`) → **mở**: thà cho dùng miễn phí còn hơn chặn
+Không đếm được (chưa có `SUPABASE_SERVICE_ROLE_KEY` / `SAO_KHOA_SECRET` — lùi về `LOI_MOI_SECRET` nếu có) → **mở**: thà cho dùng miễn phí còn hơn chặn
 nhầm. Engine lỗi → không trừ Sao. Trừ Sao luôn ở máy chủ, sau khi đã có câu trả lời / báo cáo.
 
 ## 2. Luồng người dùng (workflow)
@@ -25,7 +25,8 @@ Vào trang công cụ ─► tính lá số (miễn phí) ─► "Đọc miễn 
         mỗi thẻ: dữ kiện riêng của lá số (vd "Thiên Đồng ở cung Phu Thê (Đắc)") + câu hỏi mở về chính họ
         thanh dính đáy: "10 Sao mở 7 chương còn lại · xem lại cả ngày" + gợi ý theo tình trạng ví
    └► bấm "Mở toàn bộ · 10 Sao"
-        ├ chưa đăng nhập → hộp: "Lưu hồ sơ: tặng 10 Sao — đủ mở báo cáo này" → đăng nhập → quay về, TỰ MỞ
+        ├ chưa đăng nhập → hộp: "Lưu hồ sơ: tặng 10 Sao — đủ mở báo cáo này" → đăng nhập (mã OTP) → quay về, TỰ MỞ
+        │                  → ví 0 → hộp mời "Lưu hồ sơ · nhận 10 Sao" (người dùng BẤM, không tự lưu) → mở ngay
         ├ thiếu Sao      → hộp nạp nhanh: gói nhỏ nhất đủ dùng chọn sẵn → QR ngân hàng → tiền về →
         │                  /nap-sao/ket-qua tự đưa về đúng trang (2,5 giây) → TỰ MỞ báo cáo
         └ đủ Sao         → trừ 10 Sao (máy chủ) → báo cáo đầy đủ
@@ -75,3 +76,32 @@ Một Sao mua ≈ 830–970đ. Chi phí AI một báo cáo ≈ 1–3 nghìn đ�
 - **/quan-tri/tang-truong**: phễu PostHog có thêm các bước xem khoá → mở khoá → nạp.
 - **/quan-tri/nguoi-dung**: tra ví theo email, điều chỉnh Sao có lý do (đã có).
 - **/quan-tri/cai-dat**: mọi số và công tắc ở mục 1.
+
+## 6. Trạng thái và kiểm thử chuỗi thật (2026-10-13)
+
+**Code: xong, mặc định TẮT.** Bật = anh làm bước S0 rồi bấm công tắc ở /quan-tri/cai-dat (mục 4).
+
+Chuỗi thật chạy trên "Supabase thu nhỏ" (GoTrue + PostgREST + Postgres với migration thật của dự án, thư OTP thật qua
+SMTP hứng, cổng nạp giả) — `web/e2e-that/`, job CI **`sao-that`** chạy mỗi PR. Không giả lập route nào của web:
+
+| Bước | Kiểm |
+|---|---|
+| Khách đọc chương 1 | chương khoá **không có đoạn văn** trong phản hồi mạng, chỉ tiêu đề + điểm nhấn + câu hỏi mở |
+| Mở khoá khi chưa đăng nhập | hộp mời đăng nhập → sang /dang-nhap hộp tự đóng → OTP → quay về /tu-vi |
+| Tự mở sau đăng nhập | ví 0 → hộp mời lưu hồ sơ nhận 10 Sao; **chưa bấm thì chưa lưu** hồ sơ; bấm → +10, −10, báo cáo đầy đủ |
+| Xem lại trong ngày | đầy đủ ngay, sổ Sao vẫn 1 lần trừ |
+| Thiếu Sao (Bát tự) | hộp nạp nhanh (có lối "mời bạn bè") → cổng giả trả → /nap-sao/ket-qua → tự về /bat-tu → tự mở, ví 30 − 10 |
+| Hỏi đáp có tài khoản | 2 câu miễn phí (CI đặt 2) → câu 3 hỏi đồng ý → trừ đúng 1 Sao sau khi trả lời |
+| Câu khủng hoảng khi hết lượt | trả lời, không hỏi Sao, không trừ |
+| Khách hết lượt hỏi | mời đăng nhập; bấm "để sau" ở báo cáo → tải lại không tự bật hộp |
+
+**Lỗi tìm ra khi chạy thật, đã sửa:** (1) hộp thoại vẫn đè lên trang đăng nhập sau khi bấm "Đăng nhập để xem tiếp"
+(không đăng nhập được); (2) người mới đăng nhập quay về không nhận được 10 Sao đã hứa (quà chỉ trao ở /tai-khoan) →
+hộp nạp có bước "Lưu hồ sơ · nhận 10 Sao"; (3) báo cáo chờ mở ở sessionStorage → mất khi mở link thư ở tab mới, và
+"để sau" vẫn tự bật lại → localStorage gắn route + người (dữ liệu sinh, không theo trường phái), hạn 30 phút, "để sau" xoá; (4) thiếu bí mật ký khoá vẫn
+khoá báo cáo rồi báo 503 → nay mở miễn phí (fail-open như quy tắc); (5) khoá "đã mở hôm nay" có gồm giá → đổi giá giữa
+ngày bị trừ lần hai → bỏ giá khỏi khoá; (6) sự kiện đếm trùng (`paywall_viewed` hai lần, `unlock_succeeded` khi xem
+lại miễn phí, `payment_succeeded` mỗi lần tải lại trang kết quả).
+
+**Chấp nhận, ghi lại:** lượt hỏi miễn phí bị tính cả khi engine lỗi / câu khủng hoảng còn trong lượt (không mất Sao,
+chỉ mất một lượt miễn phí trong ngày) — sửa cần thêm hàm SQL trả lượt, để khi có số liệu thật.

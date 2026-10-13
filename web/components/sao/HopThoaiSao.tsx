@@ -2,16 +2,21 @@
 // SAO-2 — hộp thoại dùng chung khi gặp "cửa Sao" (lib/sao-client.ts). Ba tình huống:
 //   dang_nhap    hết lượt miễn phí / muốn mở báo cáo khi chưa đăng nhập → đăng nhập 30 giây, nhận Sao chào mừng
 //   xac_nhan_sao hết câu miễn phí hôm nay → "Hỏi tiếp: 1 Sao" (có ô "không hỏi lại trong phiên này")
-//   nap          ví không đủ → nạp nhanh ngay tại chỗ (chọn gói đủ dùng, QR ngân hàng) rồi QUAY VỀ đúng trang
+//   nap          ví không đủ → chưa nhận quà chào mừng thì mời LƯU HỒ SƠ (người dùng bấm) nhận Sao ngay tại chỗ;
+//                nạp nhanh (chọn gói đủ dùng, QR ngân hàng) rồi QUAY VỀ đúng trang; luôn có lối mời bạn bè nhận Sao
 // Giọng: nói rõ giá trị người dùng nhận được và cái giá, không doạ, không đếm ngược giả, luôn có lối "để sau".
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Gift, Loader2, QrCode, Sparkles, UserPlus } from "lucide-react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
-import { QUAY_VE, TU_DONG_Y, dangKyHopThoaiSao, type YeuCauSao } from "@/lib/sao-client";
+import { QUAY_VE, TU_DONG_Y, dangKyHopThoaiSao, xoaChoMo, type YeuCauSao } from "@/lib/sao-client";
 import { supabase } from "@/lib/supabase/trinh-duyet";
+import { useHoSo } from "@/lib/hoso";
+import { hoSoTaiKhoan, luuVaoTaiKhoan } from "@/lib/tai-khoan";
+import { maGioiThieuDaNho, nhanChaoMung, nhanThuongGioiThieu, quenMaGioiThieu } from "@/lib/sao";
 
 type Goi = { ma: string; ten: string; gia_vnd: number; sao: number; nhan: string | null; mo_ta: string | null };
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
@@ -26,13 +31,23 @@ export function HopThoaiSao() {
     tra.current?.(false);
     tra.current = r;
     setY(yc);
-    ghi(yc.can === "xac_nhan_sao" || yc.nguon === "hoi" ? "quota_reached" : "paywall_viewed", { kind: yc.can, nguon: yc.nguon, mo_dun: yc.mo_dun });
+    // paywall_viewed của báo cáo đã ghi khi hiện bản xem trước — ở đây chỉ ghi hết lượt hỏi đáp.
+    if (yc.nguon === "hoi") ghi("quota_reached", { kind: yc.can, nguon: yc.nguon, mo_dun: yc.mo_dun });
   })), []);
 
   const dong = (v: boolean) => {
     ghi("sao_prompt_answered", { kind: y?.can, ket_qua: v ? "dong_y" : "de_sau", nguon: y?.nguon });
+    if (!v) xoaChoMo();   // "Để sau" / đóng hộp → không tự mở lại khi quay về trang
     tra.current?.(v); tra.current = null; setY(null);
   };
+  // Đi sang trang khác (đăng nhập, nạp, mời bạn) → đóng hộp nhưng GIỮ báo cáo chờ mở để quay về tự mở.
+  const path = usePathname();
+  const pathTruoc = useRef(path);
+  useEffect(() => {
+    if (pathTruoc.current === path) return;
+    pathTruoc.current = path;
+    tra.current?.(false); tra.current = null; setY(null);
+  }, [path]);
 
   if (!y) return null;
   const tieuDe = y.can === "dang_nhap"
@@ -43,7 +58,7 @@ export function HopThoaiSao() {
       <SheetContent title={tieuDe} description={y.error} data-testid="hop-thoai-sao" data-can={y.can}>
         {y.can === "dang_nhap" && <DangNhapNhan y={y} />}
         {y.can === "xac_nhan_sao" && <XacNhan y={y} dong={dong} />}
-        {y.can === "nap" && <NapNhanh can={Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0))} />}
+        {y.can === "nap" && <HopNap y={y} xong={() => dong(true)} />}
       </SheetContent>
     </Sheet>
   );
@@ -63,6 +78,99 @@ function DangNhapNhan({ y }: { y: YeuCauSao }) {
       <Button asChild className="w-full" onClick={() => ghiPhien(QUAY_VE, tiep)}>
         <Link href={`/dang-nhap?tiep=${encodeURIComponent(tiep)}`} data-testid="sao-dang-nhap">Đăng nhập để xem tiếp</Link>
       </Button>
+    </div>
+  );
+}
+
+/** Tài khoản chưa nhận quà: lưu hồ sơ đang dùng trên máy vào tài khoản (người dùng bấm — không tự lưu; tài khoản ĐÃ có
+ *  hồ sơ thì giữ nguyên, chỉ nhận quà) → +Sao chào mừng (+ thưởng lời mời nếu đến từ link mời) → đủ Sao thì gửi lại
+ *  yêu cầu (lib/sao-client fetchSao), chưa đủ thì ở lại hộp để nạp phần còn thiếu. */
+function HopNap({ y, xong }: { y: YeuCauSao; xong: () => void }) {
+  const [them, setThem] = useState(0);   // Sao vừa nhận trong hộp (quà) → gói gợi ý chỉ bù phần còn thiếu
+  return (
+    <div className="space-y-5">
+      {y.chao_mung ? <NhanChaoMung y={y} xong={xong} daNhan={setThem} /> : null}
+      <NapNhanh can={Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0) - them)} />
+    </div>
+  );
+}
+
+function NhanChaoMung({ y, xong, daNhan: baoDaNhan }: { y: YeuCauSao; xong: () => void; daNhan: (n: number) => void }) {
+  const [dang, setDang] = useState(false);
+  const [loi, setLoi] = useState<string | null>(null);
+  const [daNhan, setDaNhan] = useState<number | null>(null);
+  const [tkCoHoSo, setTkCoHoSo] = useState<boolean | null>(null);
+  const [loiKiem, setLoiKiem] = useState(false);
+  const [lanKiem, setLanKiem] = useState(0);
+  const hs = useHoSo() ?? null;
+  // Đọc lỗi KHÔNG được coi là "chưa có hồ sơ" (sẽ ghi đè hồ sơ đang có trong tài khoản) → báo lỗi, cho thử lại.
+  useEffect(() => {
+    let huy = false;
+    setLoiKiem(false);
+    void (async () => {
+      try {
+        const uid = (await (await supabase())?.auth.getUser())?.data.user?.id;
+        if (!uid) throw new Error("chua_dang_nhap");
+        const co = Boolean(await hoSoTaiKhoan(uid));
+        if (!huy) setTkCoHoSo(co);
+      } catch { if (!huy) setLoiKiem(true); }
+    })();
+    return () => { huy = true; };
+  }, [lanKiem]);
+  const du = (y.chao_mung ?? 0) + (y.so_du ?? 0) >= (y.gia ?? 0);
+  async function nhan() {
+    setDang(true); setLoi(null);
+    try {
+      const uid = (await (await supabase())?.auth.getUser())?.data.user?.id;
+      if (!uid) throw new Error("Phiên đăng nhập đã hết — đăng nhập lại rồi thử.");
+      if (!tkCoHoSo) {
+        if (!hs) throw new Error("Chưa có hồ sơ trên máy — lưu ở trang Tài khoản.");
+        await luuVaoTaiKhoan(uid, hs);
+        ghi("profile_created", { kind: "tai_khoan", nguon: "hop_sao" });
+      }
+      const r = await nhanChaoMung();
+      if (r.ket_qua !== "da_thuong" && r.ket_qua !== "da_nhan") throw new Error("Chưa nhận được Sao chào mừng, thử lại sau.");
+      let them = r.ket_qua === "da_thuong" ? r.sao ?? 0 : 0;
+      if (them) ghi("credit_earned", { kind: "chao_mung", so_sao: them });
+      // Đến từ link mời: nhận thưởng hai phía luôn (như trang Tài khoản), không đợi người dùng ghé /tai-khoan.
+      const gt = maGioiThieuDaNho();
+      if (gt) {
+        const m = await nhanThuongGioiThieu(gt).catch(() => null);
+        if (m?.ket_qua === "da_thuong") { them += m.sao ?? 0; ghi("credit_earned", { kind: "duoc_moi", so_sao: m.sao }); }
+        if (m && m.ket_qua !== "chua_luu_ho_so") quenMaGioiThieu();
+      }
+      if ((y.so_du ?? 0) + them >= (y.gia ?? 0)) { xong(); return; }
+      setDaNhan(them); baoDaNhan(them); setDang(false);
+    } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa lưu được."); setDang(false); }
+  }
+  if (daNhan !== null) {
+    return <p className="rounded-2xl border border-jade/40 bg-jade/5 p-4 text-sm text-fg" data-testid="da-nhan-chao-mung">
+      {daNhan ? `Đã nhận ${daNhan} Sao.` : "Quà chào mừng đã nhận trước đó."} Ví còn thiếu {Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0) - daNhan)} Sao — nạp thêm bên dưới hoặc mời bạn bè.</p>;
+  }
+  return (
+    <div className="rounded-2xl border border-gold/40 bg-gold/5 p-4" data-testid="nhan-chao-mung">
+      <p className="flex gap-2 text-sm text-fg"><Gift className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
+        <span>{tkCoHoSo
+          ? <>Quà chào mừng: <b className="text-gold">{y.chao_mung} Sao</b> cho tài khoản đã lưu hồ sơ{du ? " — đủ mở ngay." : "."}</>
+          : <>Quà chào mừng: lưu hồ sơ <b>{hs?.ho_ten ?? "của bạn"}</b> vào tài khoản để nhận <b className="text-gold">{y.chao_mung} Sao</b>{du ? " — đủ mở ngay." : "."}</>}</span></p>
+      {!tkCoHoSo && (
+        <p className="mt-1 text-xs text-fg-faint">Bấm nút là bạn đồng ý lưu <b>họ tên (kèm tên thường gọi), ngày giờ sinh (kèm cách nhập lịch), giới tính, nơi sinh</b> vào tài khoản để dùng trên máy khác.
+          Nội dung bài đọc và câu hỏi không được lưu. Xoá được bất cứ lúc nào ở trang Tài khoản.{" "}
+          <Link href="/chinh-sach-rieng-tu#du-lieu" className="text-gold underline">Chính sách quyền riêng tư</Link></p>
+      )}
+      {loiKiem ? (
+        <p className="mt-3 text-sm text-cinnabar" role="alert">Chưa kiểm tra được tài khoản.{" "}
+          <button type="button" className="underline" onClick={() => setLanKiem((n) => n + 1)}>Thử lại</button></p>
+      ) : tkCoHoSo === null ? (
+        <p className="mt-3 inline-flex items-center gap-2 text-sm text-fg-muted"><Loader2 className="size-4 animate-spin" aria-hidden /> Đang kiểm tra tài khoản…</p>
+      ) : tkCoHoSo || hs ? (
+        <Button className="mt-3 w-full" onClick={() => void nhan()} disabled={dang} data-testid="nhan-chao-mung-nut">
+          {dang ? <Loader2 className="animate-spin" aria-hidden /> : <Gift aria-hidden />} {tkCoHoSo ? `Nhận ${y.chao_mung} Sao` : `Lưu hồ sơ · nhận ${y.chao_mung} Sao`}
+        </Button>
+      ) : (
+        <Button asChild variant="secondary" className="mt-3 w-full"><Link href="/tai-khoan">Lưu hồ sơ ở trang Tài khoản</Link></Button>
+      )}
+      {loi && <p role="alert" className="mt-2 text-sm text-cinnabar">{loi}</p>}
     </div>
   );
 }
@@ -144,6 +252,8 @@ export function NapNhanh({ can = 0 }: { can?: number }) {
         {g ? `Quét QR nạp ${g.sao} Sao · ${vnd(g.gia_vnd)}` : "Chọn gói"}
       </Button>
       <p className="text-xs text-fg-faint">App ngân hàng / ví bất kỳ có VietQR. Sao vào ví trong vài giây, rồi bạn quay lại đúng trang này. Sao không đổi ra tiền, Sao mua không hết hạn.</p>
+      <p className="text-sm text-fg-muted"><UserPlus className="mr-1.5 inline size-4 align-[-3px] text-gold" aria-hidden />
+        Hoặc <Link href="/tai-khoan" className="text-gold underline">mời bạn bè</Link> — mỗi người bạn đăng ký, cả hai cùng nhận Sao.</p>
       {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
     </div>
   );

@@ -12,6 +12,7 @@ import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import { KhungChat, type KetQuaHoi } from "@/components/hoi/KhungChat";
+import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { DaiDoi } from "@/components/than-so/DaiDoi";
 import { DongDoi } from "@/components/than-so/DongDoi";
 import { BieuDoNgaySinh, ChiSoPhu } from "@/components/than-so/BieuDoNgaySinh";
@@ -64,6 +65,7 @@ export function ThanSo() {
     if (kq && tab === "dong-doi" && location.hash === "#dong-doi") document.getElementById("chieu-sau")?.scrollIntoView({ block: "start" });
   }, [kq, tab]);
 
+  useBatDauDoc("thanso_sau", Boolean(kq));
   // Lúc chờ hồ sơ vẫn có <h1> trong HTML phía máy chủ (SEO); có hồ sơ thì tiêu đề là tên người dùng.
   if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeMuc cap={1} nho="Thần số học" lon="Thần số học theo họ tên và ngày sinh" /><KhungTai /></div>;
   if (hoSo === null) {
@@ -159,6 +161,8 @@ export function ThanSo() {
           {kq.mo_rong && <TabsContent value="phu"><ChiSoPhu mo={kq.mo_rong} /></TabsContent>}
         </Tabs>
       </section>
+
+      <CuoiBaiDoc moDun="thanso_sau" cauHoi="Phần chiều sâu có giúp bạn hiểu mình hơn?" />
 
       <section id="hoi" aria-labelledby="muc-hoi" className="scroll-mt-24">
         <TieuDeMuc id="muc-hoi" nho="Hỏi sâu hơn" lon={`${tenGoi(hoSo)}, bạn đang băn khoăn điều gì?`}

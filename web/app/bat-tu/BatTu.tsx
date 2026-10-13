@@ -4,6 +4,7 @@
 import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Download, Layers, Moon, ScrollText } from "lucide-react";
 import { KhungChat } from "@/components/hoi/KhungChat";
+import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { DongGhiChu, DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
@@ -49,6 +50,7 @@ export function BatTu() {
   const [dangTai, setDangTai] = useState(false);
   const [loiAnh, setLoiAnh] = useState<string | null>(null);
 
+  useBatDauDoc("battu", Boolean(ls));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
   const dau = <DauMang Icon={Layers} ten="Bát tự" mo_ta="Tứ trụ năm – tháng – ngày – giờ theo tiết khí, ngũ hành chấm theo thang điểm công bố, dụng thần luôn trình bày hai cách để bạn tự cân nhắc." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
@@ -152,6 +154,7 @@ export function BatTu() {
       {laSo && ls && (
         <section aria-label="Luận giải toàn bộ" className="mt-10">
           <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={laSo} ten="Bát tự" />
+          <CuoiBaiDoc moDun="battu" cauHoi="Tứ trụ và phần luận giải có giúp bạn hiểu mình hơn?" />
         </section>
       )}
 

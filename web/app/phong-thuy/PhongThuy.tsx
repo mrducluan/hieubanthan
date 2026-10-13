@@ -4,6 +4,7 @@ import { Compass } from "lucide-react";
 import { DoHuongDienThoai } from "@/components/huyen-hoc/DoHuongDienThoai";
 import { KhaoSatNha } from "@/components/huyen-hoc/KhaoSatNha";
 import { KhungChat } from "@/components/hoi/KhungChat";
+import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { HuyenKhong } from "@/components/huyen-hoc/HuyenKhong";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { DongPhai, KhungPhai, type MocNam } from "@/components/huyen-hoc/KhungPhai";
@@ -40,6 +41,7 @@ export function PhongThuy() {
   const [doToa, setDoToa] = useState<number | null>(null);
   const [doHuong, setDoHuong] = useState<number | null>(null);
 
+  useBatDauDoc("phongthuy", Boolean(mq));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
   const dau = <DauMang Icon={Compass} ten="Phong thuỷ" mo_ta="Bát trạch: mệnh quái theo năm sinh (mốc Lập xuân, hoặc Tết âm lịch tuỳ bạn chọn) và giới tính, tám hướng du niên, cửa – chủ – bếp, sao năm. Mục nào là quan niệm dân gian đều ghi rõ; không giới thiệu vật phẩm “hoá giải”." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
@@ -78,6 +80,7 @@ export function PhongThuy() {
       </div>
       <div className="mx-auto mt-8 max-w-5xl"><KhaoSatNha sinh={sinh} doHuongGoiY={doHuong} /></div>
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="huyen-khong"><HuyenKhong doToaGoiY={doToa} /></div>
+      {mq && <div className="mx-auto max-w-3xl"><CuoiBaiDoc moDun="phongthuy" cauHoi="Phần hướng nhà và bố trí có giúp ích cho bạn?" /></div>}
 
       <section aria-label="Hỏi Phong thuỷ" className="mt-10">
         <h2 className="mb-4 text-2xl sm:text-3xl">Hỏi đáp cùng AI</h2>

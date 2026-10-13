@@ -25,6 +25,7 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   so_sao: "number",
   chuoi: "number",      // HN-1: số ngày liên tiếp mở "Hôm nay" (đếm trên máy người dùng)
   nguon: "string",
+  quan_he: "string",    // hợp đôi: nguoi_yeu / ban_be / dong_nghiep / sep / gia_dinh
 };
 const GIOI_HAN_CHUOI = 40;
 
@@ -39,7 +40,8 @@ export function locThuocTinh(p: Record<string, unknown> = {}): Record<string, st
   return kq;
 }
 
-export const PHIEN_BAN = "ui_v1";
+// gate_v1 (2026-10-13): định nghĩa sự kiện Gate mới (reading_* theo mảng) — bảng Gate chỉ đọc sự kiện mang bản này.
+export const PHIEN_BAN = "gate_v1";
 const KHOA_MOI = "hbt.ma_moi";
 
 let ph: PostHog | null = null;
@@ -76,13 +78,54 @@ export function ghi(su_kien: SuKien, p: Record<string, unknown> = {}): void {
   void nap().then((p2) => p2?.capture(su_kien, props));
 }
 
-/** Ghi nhận người đến từ link mời/thẻ; dùng khi họ tạo hồ sơ → referral_signup. */
+/** Ghi nhận người đến từ link mời/thẻ; dùng khi họ tạo hồ sơ → referral_signup. localStorage 14 ngày (mở link ở tab
+ *  khác / quay lại hôm sau vẫn tính) — chỉ là mã ngẫu nhiên của link, không có dữ liệu cá nhân. */
+const HAN_MOI = 14 * 86_400_000;
 export function nhoMaMoi(ma: string): void {
-  try { sessionStorage.setItem(KHOA_MOI, ma); } catch { /* bỏ qua */ }
+  try {
+    if (localStorage.getItem("hbt.hoso.v1")) return;   // đã có hồ sơ trên máy → không phải người mới, không tính lời mời
+    localStorage.setItem(KHOA_MOI, JSON.stringify({ ma, t: Date.now() }));
+  } catch { /* bỏ qua */ }
+}
+
+/** Mã ngắn ngẫu nhiên (hex) — có cả trình duyệt cũ / http không có crypto.randomUUID. */
+export function maNgauNhien(n = 10): string {
+  try {
+    const b = new Uint8Array(Math.ceil(n / 2));
+    crypto.getRandomValues(b);
+    return Array.from(b, (x) => x.toString(16).padStart(2, "0")).join("").slice(0, n);
+  } catch {
+    return Array.from({ length: n }, () => Math.floor(Math.random() * 16).toString(16)).join("");
+  }
 }
 export function layMaMoi(): string | null {
-  try { return sessionStorage.getItem(KHOA_MOI); } catch { return null; }
+  try {
+    const v = JSON.parse(localStorage.getItem(KHOA_MOI) ?? "null") as { ma?: string; t?: number } | null;
+    return v?.ma && v.t && Date.now() - v.t < HAN_MOI ? v.ma : null;
+  } catch { return null; }
 }
+
+export function quenMaMoi(): void { try { localStorage.removeItem(KHOA_MOI); } catch { /* bỏ qua */ } }
+
+/** Một lần mỗi phiên trình duyệt (sessionStorage) cho mỗi khoá — trả true nếu là lần đầu. Không có storage → true. */
+export function lanDauTrongPhien(khoa: string): boolean {
+  try {
+    if (sessionStorage.getItem(`hbt.mot-lan.${khoa}`)) return false;
+    sessionStorage.setItem(`hbt.mot-lan.${khoa}`, "1");
+  } catch { /* chế độ riêng tư */ }
+  return true;
+}
+
+/** Gate 1 — bài đọc: reading_started khi KẾT QUẢ của một mảng hiện ra (mỗi phiên một lần mỗi mảng);
+ *  reading_completed khi cuộn tới cuối bài đọc (mỗi phiên một lần mỗi mảng, luôn sau started → tỉ lệ ≤ 100%). */
+export function batDauDoc(moDun: string, them: Record<string, unknown> = {}): void {
+  if (lanDauTrongPhien(`doc-bd.${moDun}`)) ghi("reading_started", { mo_dun: moDun, ...them });
+}
+export function docXong(moDun: string, them: Record<string, unknown> = {}): void {
+  batDauDoc(moDun);
+  if (lanDauTrongPhien(`doc-xong.${moDun}`)) ghi("reading_completed", { mo_dun: moDun, ...them });
+}
+
 export function maMoiTuToken(token: string): string {
   return (token.split(".")[1] ?? "").slice(0, 10);
 }

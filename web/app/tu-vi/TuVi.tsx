@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Download, List, Maximize2, Minimize2, Moon, Orbit, ScrollText } from "lucide-react";
 import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
+import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { TruongPhai } from "@/components/huyen-hoc/TruongPhai";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
@@ -79,6 +80,7 @@ export function TuVi() {
     chatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  useBatDauDoc("tuvi", Boolean(ls));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
   const dau = <DauMang Icon={Orbit} ten="Tử vi" mo_ta="Lá số an ngay trên hệ thống của Hiểu Bản Thân — ngày giờ sinh không gửi cho bên thứ ba. Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn. Không phán bệnh, tai nạn hay sống chết." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
@@ -175,6 +177,7 @@ export function TuVi() {
       {laSo && ls && (
         <section aria-label="Luận giải toàn bộ" className="mt-10">
           <LuanGiaiToanBo duongDan="/api/tuvi/luan-giai" laSo={laSo} ten="lá số Tử vi" />
+          <CuoiBaiDoc moDun="tuvi" cauHoi="Lá số và phần luận giải có giúp bạn hiểu mình hơn?" />
         </section>
       )}
 

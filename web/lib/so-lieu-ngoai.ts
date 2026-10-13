@@ -121,13 +121,49 @@ async function baoCaoGa4Tho(): Promise<BaoCaoGa4> {
 /** Phễu theo mục tiêu tăng trưởng (docs/MUC-TIEU-TANG-TRUONG.md) — tên sự kiện trong lib/do-luong.ts. */
 export const PHEU: [string, string][] = [
   ["landing_viewed", "Vào trang"], ["reading_started", "Bắt đầu xem"], ["reading_completed", "Xem xong"],
-  ["advisor_question_completed", "Hỏi đáp xong"], ["profile_created", "Lưu hồ sơ"], ["daily_viewed", "Mở Hôm nay"], ["share_clicked", "Bấm chia sẻ"],
+  ["feedback_submitted", "Góp ý bài đọc"], ["advisor_question_completed", "Hỏi đáp xong"], ["profile_created", "Lưu hồ sơ"],
+  ["daily_viewed", "Mở Hôm nay"], ["share_created", "Tạo link chia sẻ / mời"], ["share_clicked", "Bạn bè mở link"],
   ["compatibility_created", "Tạo hợp đôi"], ["referral_signup", "Đăng ký qua lời mời"], ["credit_earned", "Nhận Sao"],
   ["paywall_viewed", "Thấy phần khoá"], ["unlock_clicked", "Bấm mở khoá"], ["quota_reached", "Hết lượt hỏi miễn phí"],
   ["checkout_started", "Bắt đầu nạp"], ["payment_succeeded", "Nạp thành công"], ["unlock_succeeded", "Mở khoá thành công"],
 ];
 
-export interface BaoCaoPosthog { pheu: { su_kien: string; ten: string; luot: number; nguoi: number }[]; quayLai: { truoc: number; tro_lai: number } | null }
+// ------------------------------------------------------------------ Gate 1 / Gate 2 (docs/VIEC-CUA-ANH.md mục L)
+/** Số người (trình duyệt) theo sự kiện trong 28 ngày; `co_giup` = góp ý "Có, khá trúng". */
+export interface SoGate {
+  landing: number; bat_dau: number; xong: number; gop_y: number; co_giup: number;
+  /** profile_created kind=tai_khoan — "chủ động lưu hồ sơ" (lưu trên máy xảy ra TRƯỚC bài đọc nên không dùng). */
+  ho_so: number; chia_se: number; dang_ky_moi: number;
+}
+export type DongGate = { ma: string; ten: string; cong: "Gate 1" | "Gate 2"; tu: number; mau: number; ti_le: number | null; nguong: number; dat: boolean | null };
+/** Đủ mẫu để đọc số (dưới mức này tỉ lệ dao động quá mạnh). */
+export const MAU_TOI_THIEU = 300;
+
+/** Tỉ lệ cổng + ngưỡng ĐỀ XUẤT (anh chốt). null = chưa có mẫu số; dat null = chưa đủ mẫu để kết luận. */
+export function tinhGate(s: SoGate, { taiKhoanBat = true }: { taiKhoanBat?: boolean } = {}): DongGate[] {
+  const du = s.bat_dau >= MAU_TOI_THIEU;
+  const d = (ma: string, ten: string, cong: DongGate["cong"], tu: number, mau: number, nguong: number, coThe = true): DongGate => {
+    const ti_le = mau > 0 && coThe ? Math.min(1, tu / mau) : null;
+    return { ma, ten, cong, tu, mau, ti_le, nguong, dat: ti_le === null || !du ? null : ti_le >= nguong };
+  };
+  return [
+    d("G1", "Đọc hết / bắt đầu", "Gate 1", s.xong, s.bat_dau, 0.5),
+    d("G4", "“Có giúp” / góp ý", "Gate 1", s.co_giup, s.gop_y, 0.6),
+    d("LUU", "Lưu hồ sơ vào tài khoản / đọc hết", "Gate 1", s.ho_so, s.xong, 0.2, taiKhoanBat),
+    d("G2", "Chia sẻ / đọc hết", "Gate 2", s.chia_se, s.xong, 0.08),
+    d("G3", "K = đăng ký qua lời mời / chia sẻ", "Gate 2", s.dang_ky_moi, s.chia_se, 0.15),
+  ];
+}
+
+export interface BaoCaoPosthog {
+  pheu: { su_kien: string; ten: string; luot: number; nguoi: number }[];
+  quayLai: { truoc: number; tro_lai: number } | null;
+  gate: SoGate;
+  /** Theo mảng: người bắt đầu / đọc hết / góp ý / "có giúp". */
+  theoMang: { mo_dun: string; bat_dau: number; xong: number; gop_y: number; co_giup: number }[];
+  /** Truy vấn Gate lỗi → bảng Gate hiện "lỗi", không kết luận sai. */
+  gateLoi: string | null;
+}
 
 async function hogql<T>(query: string): Promise<T[]> {
   const key = process.env.POSTHOG_PERSONAL_API_KEY, du_an = process.env.POSTHOG_PROJECT_ID?.trim();
@@ -157,9 +193,32 @@ async function baoCaoPosthogTho(): Promise<BaoCaoPosthog> {
       .catch(() => []),
   ]);
   const theo = new Map(rows.map(([e, l, n]) => [e, { luot: Number(l), nguoi: Number(n) }]));
+  const nguoi = (e: string) => theo.get(e)?.nguoi ?? 0;
+  // Gate: chỉ sự kiện định nghĩa mới (feature_version gate_v1, lib/do-luong PHIEN_BAN) — không trộn số cũ.
+  // countDistinctIf → mỗi người đếm một lần dù góp ý nhiều lần / nhiều mảng.
+  const DK = `timestamp > now() - INTERVAL 28 DAY AND properties.feature_version = 'gate_v1'`;
+  const COT = `countDistinctIf(distinct_id, event = 'reading_started'), countDistinctIf(distinct_id, event = 'reading_completed'),
+    countDistinctIf(distinct_id, event = 'feedback_submitted'), countDistinctIf(distinct_id, event = 'feedback_submitted' AND properties.huu_ich = 'co')`;
+  let gateLoi: string | null = null;
+  const [tong, mang] = await Promise.all([
+    hogql<number[]>(`SELECT countDistinctIf(distinct_id, event = 'landing_viewed'), ${COT},
+      countDistinctIf(distinct_id, event = 'profile_created' AND properties.kind = 'tai_khoan'),
+      countDistinctIf(distinct_id, event = 'share_created'), countDistinctIf(distinct_id, event = 'referral_signup')
+      FROM events WHERE ${DK}`),
+    hogql<[string | null, number, number, number, number]>(`SELECT properties.mo_dun, ${COT} FROM events
+      WHERE ${DK} AND event IN ('reading_started', 'reading_completed', 'feedback_submitted') GROUP BY properties.mo_dun`),
+  ]).catch((e: unknown) => { gateLoi = e instanceof Error ? e.message : "Truy vấn Gate lỗi."; return [[], []] as [number[][], [string | null, number, number, number, number][]]; });
+  const t = (tong[0] ?? []).map(Number);
   return {
-    pheu: PHEU.map(([e, ten]) => ({ su_kien: e, ten, luot: theo.get(e)?.luot ?? 0, nguoi: theo.get(e)?.nguoi ?? 0 })),
+    pheu: PHEU.map(([e, ten]) => ({ su_kien: e, ten, luot: theo.get(e)?.luot ?? 0, nguoi: nguoi(e) })),
     quayLai: ql[0] ? { truoc: Number(ql[0][0]), tro_lai: Number(ql[0][1]) } : null,
+    gate: {
+      landing: t[0] ?? 0, bat_dau: t[1] ?? 0, xong: t[2] ?? 0, gop_y: t[3] ?? 0, co_giup: t[4] ?? 0,
+      ho_so: t[5] ?? 0, chia_se: t[6] ?? 0, dang_ky_moi: t[7] ?? 0,
+    },
+    theoMang: mang.map(([md, bd, x, g, c]) => ({ mo_dun: md || "khac", bat_dau: Number(bd), xong: Number(x), gop_y: Number(g), co_giup: Number(c) }))
+      .sort((a, b) => b.bat_dau - a.bat_dau),
+    gateLoi,
   };
 }
 

@@ -11,16 +11,17 @@ import { NextResponse } from "next/server";
 import type { ZodTypeAny } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { layCauHinh } from "@/lib/cau-hinh";
-import { coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
+import { biMat, chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
 import { catXemTruoc, type BaoCaoDay } from "@/lib/sao-xem-truoc";
 
 /** Giá mặc định; QT-2: chủ sở hữu đổi ở /quan-tri/cai-dat (khoá luan_giai.gia_sao). */
 export const GIA_LUAN_GIAI_SAO = 10;
 export const giaLuanGiaiSao = () => layCauHinh<number>("luan_giai.gia_sao");
 
-/** Công tắc: cài đặt luan_giai.thu_sao (chưa đặt thì theo env LUAN_GIAI_THU_SAO=1) VÀ đã cấu hình Supabase. */
+/** Công tắc: cài đặt luan_giai.thu_sao (chưa đặt thì theo env LUAN_GIAI_THU_SAO=1) VÀ đã cấu hình Supabase + bí mật
+ *  ký khoá giao dịch (SAO_KHOA_SECRET, lùi về LOI_MOI_SECRET). Thiếu bí mật → MỞ (miễn phí), không khoá nhầm. */
 export async function dangThuSao(): Promise<boolean> {
-  return coTaiKhoan() && (await layCauHinh<boolean>("luan_giai.thu_sao"));
+  return coTaiKhoan() && Boolean(biMat()) && (await layCauHinh<boolean>("luan_giai.thu_sao"));
 }
 
 const MIEN_PHI = { sao: 0, ly_do: "mien_phi_thu_nghiem" } as const;
@@ -37,10 +38,11 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
 
   const [gia, mienPhi, phien] = await Promise.all([giaLuanGiaiSao(), layCauHinh<number>("luan_giai.chuong_mien_phi"), phienNguoiDung()]);
   // SEC-1: khoá giao dịch ký HMAC bằng bí mật máy chủ (người dùng không tự tính được để gọi thẳng dung_sao rẻ hơn).
-  const bi_mat = process.env.SAO_KHOA_SECRET || process.env.LOI_MOI_SECRET;
+  // Không gồm giá: đổi giá giữa ngày thì báo cáo đã mở vẫn xem lại được, không trừ lần hai.
+  const bi_mat = biMat();
   const ngay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
-  const khoa = bi_mat && bi_mat.length >= 16
-    ? `lg:${createHmac("sha256", bi_mat).update(`${moDun}|${gia}|${JSON.stringify(parsed.data)}|${ngay}`).digest("hex").slice(0, 40)}`
+  const khoa = bi_mat
+    ? `lg:${createHmac("sha256", bi_mat).update(`${moDun}|${JSON.stringify(parsed.data)}|${ngay}`).digest("hex").slice(0, 40)}`
     : null;
 
   // Đã mở hôm nay? (RLS: người dùng đọc được sổ Sao của chính mình.)
@@ -77,6 +79,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   if (r.ket_qua === "khong_du") {
     return NextResponse.json({
       error: `Cần ${gia} Sao, ví bạn còn ${r.so_du ?? 0} Sao.`, can: "nap", gia, so_du: r.so_du ?? 0,
+      chao_mung: await chaoMungConNhan(phien),
     }, { status: 402 });
   }
   if (r.ket_qua !== "da_dung") return NextResponse.json({ error: "Chưa trừ được Sao, thử lại sau." }, { status: 400 });

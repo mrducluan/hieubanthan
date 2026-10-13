@@ -17,7 +17,8 @@ import { NhipHienTai } from "@/components/than-so/NhipHienTai";
 import { ChanDung } from "@/components/than-so/ChanDung";
 import { useBaiDoc } from "@/lib/bai-doc";
 import { tenGoi, useHoSo } from "@/lib/hoso";
-import { ghi } from "@/lib/do-luong";
+import { docXong } from "@/lib/do-luong";
+import { useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { GopY } from "@/components/khung/GopY";
 
 export function BanThan() {
@@ -29,13 +30,14 @@ export function BanThan() {
   const { kq, loi, thuLai } = useBaiDoc(hoSo);
   const cuoiBai = useRef<HTMLElement>(null);
 
-  // reading_completed: khi người đọc cuộn tới "Nhịp hiện tại" (sau 4 thẻ cốt lõi) — một lần mỗi lượt xem.
+  // Gate 1: bắt đầu = bài đọc hiện ra (sau nghi thức); đọc xong = cuộn tới "Nhịp hiện tại" (sau 4 thẻ cốt lõi).
+  useBatDauDoc("thanso", Boolean(kq && daXongNghiThuc));
   useEffect(() => {
     const el = cuoiBai.current;
     if (!el || !kq || !daXongNghiThuc) return;
     const io = new IntersectionObserver(([e]) => {
       if (e?.isIntersecting) {
-        ghi("reading_completed", { so_duong_doi: kq.cac_vi_tri[0]?.gia_tri });
+        docXong("thanso", { so_duong_doi: kq.cac_vi_tri[0]?.gia_tri });
         io.disconnect();
       }
     }, { threshold: 0.3 });

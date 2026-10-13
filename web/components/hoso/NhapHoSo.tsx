@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { luuHoSo, moTaAm, ngayHopLe, NUOC_NGOAI, type HoSo } from "@/lib/hoso";
 import { postJson } from "@/lib/goi-api";
 import { useDanhSachTinh } from "@/lib/dia-ly";
-import { ghi, layMaMoi } from "@/lib/do-luong";
+import { ghi, layMaMoi, quenMaMoi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -125,10 +125,10 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
       ...(macDinh?.tao_luc ? { tao_luc: macDinh.tao_luc } : {}),
     });
     if (!macDinh) {
-      ghi("reading_started");
+      // reading_started ghi khi kết quả hiện ra ở từng mảng (lib/do-luong batDauDoc), không ghi ở đây.
       ghi("profile_created", { kind: "may" });
       const ma = layMaMoi();
-      if (ma) ghi("referral_signup", { ma_moi: ma });
+      if (ma) { ghi("referral_signup", { ma_moi: ma }); quenMaMoi(); }
     }
     onXong(h);
   }

@@ -39,7 +39,14 @@ export function KetQua() {
       if (!r.ok) { setLoi("Không thấy đơn này."); return; }
       const d = (await r.json()) as Don;
       setDon(d);
-      if (d.trang_thai === "da_tra") { ghi("payment_succeeded", { so_sao: d.sao }); return; }
+      if (d.trang_thai === "da_tra") {
+        // Mỗi đơn ghi một lần (tải lại trang kết quả không đếm thêm).
+        const k = `nap:da-ghi:${d.ma_don}`;
+        let daGhi = false;
+        try { daGhi = localStorage.getItem(k) === "1"; localStorage.setItem(k, "1"); } catch { /* bỏ qua */ }
+        if (!daGhi) ghi("payment_succeeded", { so_sao: d.sao });
+        return;
+      }
       if (d.trang_thai !== "cho" || dung) return;
       if (++lan >= HOI_TOI_DA) { setHet(true); return; }
       setTimeout(() => void hoi(), 3000);

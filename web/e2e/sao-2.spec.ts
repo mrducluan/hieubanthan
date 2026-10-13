@@ -60,7 +60,11 @@ test("xem trước: chương đầu đọc được, chương sau khoá kèm đi
   const hop = page.getByTestId("hop-thoai-sao");
   await expect(hop).toHaveAttribute("data-can", "dang_nhap");
   await expect(hop.getByTestId("sao-dang-nhap")).toHaveAttribute("href", "/dang-nhap?tiep=%2Ftu-vi");
-  expect(await page.evaluate(() => sessionStorage.getItem("lg:cho-mo"))).toBe("/api/tuvi/luan-giai");
+  // Báo cáo chờ mở lưu ở localStorage (sống qua tab mới), gắn route + lá số, có hạn.
+  expect(JSON.parse((await page.evaluate(() => localStorage.getItem("lg:cho-mo")))!)).toMatchObject({ d: "/api/tuvi/luan-giai" });
+  // Bấm đóng ("để sau") → bỏ chờ, không tự bật lại khi quay về.
+  await page.keyboard.press("Escape");
+  expect(await page.evaluate(() => localStorage.getItem("lg:cho-mo"))).toBeNull();
 });
 
 test("mở khoá thiếu Sao → nạp nhanh ngay trong hộp, gợi ý gói nhỏ nhất đủ dùng", async ({ page }) => {
