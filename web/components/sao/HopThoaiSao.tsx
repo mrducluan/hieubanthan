@@ -2,16 +2,21 @@
 // SAO-2 — hộp thoại dùng chung khi gặp "cửa Sao" (lib/sao-client.ts). Ba tình huống:
 //   dang_nhap    hết lượt miễn phí / muốn mở báo cáo khi chưa đăng nhập → đăng nhập 30 giây, nhận Sao chào mừng
 //   xac_nhan_sao hết câu miễn phí hôm nay → "Hỏi tiếp: 1 Sao" (có ô "không hỏi lại trong phiên này")
-//   nap          ví không đủ → nạp nhanh ngay tại chỗ (chọn gói đủ dùng, QR ngân hàng) rồi QUAY VỀ đúng trang
+//   nap          ví không đủ → chưa nhận quà chào mừng thì mời LƯU HỒ SƠ (người dùng bấm) nhận Sao ngay tại chỗ;
+//                nạp nhanh (chọn gói đủ dùng, QR ngân hàng) rồi QUAY VỀ đúng trang; luôn có lối mời bạn bè nhận Sao
 // Giọng: nói rõ giá trị người dùng nhận được và cái giá, không doạ, không đếm ngược giả, luôn có lối "để sau".
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Gift, Loader2, QrCode, Sparkles, UserPlus } from "lucide-react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
-import { QUAY_VE, TU_DONG_Y, dangKyHopThoaiSao, type YeuCauSao } from "@/lib/sao-client";
+import { QUAY_VE, TU_DONG_Y, dangKyHopThoaiSao, xoaChoMo, type YeuCauSao } from "@/lib/sao-client";
 import { supabase } from "@/lib/supabase/trinh-duyet";
+import { useHoSo } from "@/lib/hoso";
+import { luuVaoTaiKhoan } from "@/lib/tai-khoan";
+import { nhanChaoMung } from "@/lib/sao";
 
 type Goi = { ma: string; ten: string; gia_vnd: number; sao: number; nhan: string | null; mo_ta: string | null };
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
@@ -26,13 +31,23 @@ export function HopThoaiSao() {
     tra.current?.(false);
     tra.current = r;
     setY(yc);
-    ghi(yc.can === "xac_nhan_sao" || yc.nguon === "hoi" ? "quota_reached" : "paywall_viewed", { kind: yc.can, nguon: yc.nguon, mo_dun: yc.mo_dun });
+    // paywall_viewed của báo cáo đã ghi khi hiện bản xem trước — ở đây chỉ ghi hết lượt hỏi đáp.
+    if (yc.nguon === "hoi") ghi("quota_reached", { kind: yc.can, nguon: yc.nguon, mo_dun: yc.mo_dun });
   })), []);
 
   const dong = (v: boolean) => {
     ghi("sao_prompt_answered", { kind: y?.can, ket_qua: v ? "dong_y" : "de_sau", nguon: y?.nguon });
+    if (!v) xoaChoMo();   // "Để sau" / đóng hộp → không tự mở lại khi quay về trang
     tra.current?.(v); tra.current = null; setY(null);
   };
+  // Đi sang trang khác (đăng nhập, nạp, mời bạn) → đóng hộp nhưng GIỮ báo cáo chờ mở để quay về tự mở.
+  const path = usePathname();
+  const pathTruoc = useRef(path);
+  useEffect(() => {
+    if (pathTruoc.current === path) return;
+    pathTruoc.current = path;
+    tra.current?.(false); tra.current = null; setY(null);
+  }, [path]);
 
   if (!y) return null;
   const tieuDe = y.can === "dang_nhap"
@@ -43,7 +58,12 @@ export function HopThoaiSao() {
       <SheetContent title={tieuDe} description={y.error} data-testid="hop-thoai-sao" data-can={y.can}>
         {y.can === "dang_nhap" && <DangNhapNhan y={y} />}
         {y.can === "xac_nhan_sao" && <XacNhan y={y} dong={dong} />}
-        {y.can === "nap" && <NapNhanh can={Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0))} />}
+        {y.can === "nap" && (
+          <div className="space-y-5">
+            {y.chao_mung ? <NhanChaoMung y={y} xong={() => dong(true)} /> : null}
+            <NapNhanh can={Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0))} />
+          </div>
+        )}
       </SheetContent>
     </Sheet>
   );
@@ -63,6 +83,45 @@ function DangNhapNhan({ y }: { y: YeuCauSao }) {
       <Button asChild className="w-full" onClick={() => ghiPhien(QUAY_VE, tiep)}>
         <Link href={`/dang-nhap?tiep=${encodeURIComponent(tiep)}`} data-testid="sao-dang-nhap">Đăng nhập để xem tiếp</Link>
       </Button>
+    </div>
+  );
+}
+
+/** Tài khoản mới chưa nhận quà: lưu hồ sơ đang dùng trên máy vào tài khoản (người dùng bấm — không tự lưu) → +Sao
+ *  chào mừng → gửi lại yêu cầu (lib/sao-client fetchSao). Không có hồ sơ trên máy → dẫn sang /tai-khoan. */
+function NhanChaoMung({ y, xong }: { y: YeuCauSao; xong: () => void }) {
+  const [dang, setDang] = useState(false);
+  const [loi, setLoi] = useState<string | null>(null);
+  const hs = useHoSo() ?? null;
+  const du = (y.chao_mung ?? 0) + (y.so_du ?? 0) >= (y.gia ?? 0);
+  async function nhan() {
+    setDang(true); setLoi(null);
+    try {
+      const sb = await supabase();
+      const uid = (await sb?.auth.getUser())?.data.user?.id;
+      if (!uid || !hs) throw new Error("Chưa lưu được — thử lại ở trang Tài khoản.");
+      await luuVaoTaiKhoan(uid, hs);
+      const r = await nhanChaoMung();
+      if (r.ket_qua !== "da_thuong" && r.ket_qua !== "da_nhan") throw new Error("Chưa nhận được Sao chào mừng, thử lại sau.");
+      if (r.ket_qua === "da_thuong") ghi("credit_earned", { kind: "chao_mung", so_sao: r.sao });
+      ghi("profile_created", { kind: "tai_khoan", nguon: "hop_sao" });
+      xong();
+    } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa lưu được."); setDang(false); }
+  }
+  return (
+    <div className="rounded-2xl border border-gold/40 bg-gold/5 p-4" data-testid="nhan-chao-mung">
+      <p className="flex gap-2 text-sm text-fg"><Gift className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
+        <span>Quà chào mừng: lưu hồ sơ <b>{hs?.ho_ten ?? "của bạn"}</b> vào tài khoản để nhận <b className="text-gold">{y.chao_mung} Sao</b>
+          {du ? " — đủ mở ngay." : "."}</span></p>
+      <p className="mt-1 text-xs text-fg-faint">Chỉ lưu thông tin sinh để dùng trên mọi thiết bị, không lưu luận giải. Xoá được bất cứ lúc nào ở trang Tài khoản.</p>
+      {hs ? (
+        <Button className="mt-3 w-full" onClick={() => void nhan()} disabled={dang} data-testid="nhan-chao-mung-nut">
+          {dang ? <Loader2 className="animate-spin" aria-hidden /> : <Gift aria-hidden />} Lưu hồ sơ · nhận {y.chao_mung} Sao
+        </Button>
+      ) : (
+        <Button asChild variant="secondary" className="mt-3 w-full"><Link href="/tai-khoan">Lưu hồ sơ ở trang Tài khoản</Link></Button>
+      )}
+      {loi && <p role="alert" className="mt-2 text-sm text-cinnabar">{loi}</p>}
     </div>
   );
 }
@@ -144,6 +203,8 @@ export function NapNhanh({ can = 0 }: { can?: number }) {
         {g ? `Quét QR nạp ${g.sao} Sao · ${vnd(g.gia_vnd)}` : "Chọn gói"}
       </Button>
       <p className="text-xs text-fg-faint">App ngân hàng / ví bất kỳ có VietQR. Sao vào ví trong vài giây, rồi bạn quay lại đúng trang này. Sao không đổi ra tiền, Sao mua không hết hạn.</p>
+      <p className="text-sm text-fg-muted"><UserPlus className="mr-1.5 inline size-4 align-[-3px] text-gold" aria-hidden />
+        Hoặc <Link href="/tai-khoan" className="text-gold underline">mời bạn bè</Link> — mỗi người bạn đăng ký, cả hai cùng nhận Sao.</p>
       {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
     </div>
   );

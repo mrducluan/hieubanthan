@@ -12,3 +12,5 @@ web/test-results/
 web/playwright-report/
 engine/fixtures/cau_hoi/ung_vien/
 .claude/worktrees/
+web/test-results-that/
+web/playwright-report-that/

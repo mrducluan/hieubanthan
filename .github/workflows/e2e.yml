@@ -54,3 +54,59 @@ jobs:
             web/playwright-report/
             web/test-results/
           retention-days: 7
+
+  # SAO-2 chuỗi THẬT: Supabase thu nhỏ (GoTrue + PostgREST tải bản phát hành ghim, Postgres service, migration thật của
+  # dự án) — đăng nhập OTP qua thư, Sao chào mừng, trừ Sao, nạp qua cổng giả, lượt hỏi. Không giả lập route web nào.
+  sao-that:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: 127.0.0.1
+      PGUSER: postgres
+      PGPASSWORD: postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: engine/requirements.txt
+      - name: Cài engine
+        run: pip install -r engine/requirements.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Cài iztro cho engine
+        run: npm ci --prefix engine/ziwei
+      - name: Cài web
+        working-directory: web
+        run: npm ci
+      - name: Cài Chromium cho Playwright
+        working-directory: web
+        run: npx playwright install --with-deps chromium
+      - name: Dựng Supabase thu nhỏ
+        run: bash web/e2e-that/stack/len.sh
+      - name: Chạy chuỗi Sao thật
+        working-directory: web
+        run: npm run e2e:that
+      - name: Nhật ký Supabase thu nhỏ
+        if: failure()
+        run: tail -n 40 /tmp/sb-thu/*.log
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report-sao-that
+          path: |
+            web/playwright-report-that/
+            web/test-results-that/
+          retention-days: 7

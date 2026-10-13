@@ -4,13 +4,14 @@
 // hiện tiêu đề + điểm nhấn đã tính + câu hỏi mở, mở toàn bộ bằng Sao (trừ ở máy chủ, xem lại trong ngày không mất thêm).
 // Không lưu ở máy chủ.
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BookOpenText, Clock, Gift, LockKeyhole, Printer, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
+import { dangChoMo, ghiChoMo, xoaChoMo } from "@/lib/sao-client";
 import type { MoiXem } from "@/lib/sao-xem-truoc";
 import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 
@@ -25,7 +26,6 @@ interface BaoCao {
   so_khoa?: number;
   phi: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null };
 }
-const CHO_MO = "lg:cho-mo";   // người dùng bấm mở khoá rồi đi đăng nhập / nạp → quay lại tự mở
 
 export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo: unknown; ten: string }) {
   const [bc, setBc] = useState<BaoCao | null>(null);
@@ -38,27 +38,26 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
     fetch("/api/luan-giai/phi").then((r) => r.json()).then((d) => { if (!huy) setPhi(d); }).catch(() => { /* coi như miễn phí */ });
     return () => { huy = true; };
   }, []);
-  const tai = async (moKhoa = false) => {
+  const tai = async (moKhoa = false, tuDong = false) => {
     setDang(true); setLoi(null);
     if (moKhoa) {
-      ghi("unlock_clicked", { mo_dun: duongDan.includes("battu") ? "battu" : "tuvi" });
-      try { sessionStorage.setItem(CHO_MO, duongDan); } catch { /* bỏ qua */ }
+      ghi("unlock_clicked", { mo_dun: duongDan.includes("battu") ? "battu" : "tuvi", kind: tuDong ? "tu_dong" : "bam" });
+      ghiChoMo(duongDan, laSo);   // đi đăng nhập / nạp rồi quay lại → tự mở đúng báo cáo này
     }
     try {
       const d = await postJson<BaoCao>(duongDan, { la_so: laSo }, moKhoa ? { "x-mo-khoa": "1" } : {});
       setBc(d);
-      if (moKhoa || !d.so_khoa) { try { sessionStorage.removeItem(CHO_MO); } catch { /* bỏ qua */ } }
-      if (moKhoa) ghi("unlock_succeeded", { mo_dun: d.mo_dun, so_sao: d.phi.sao });
+      if (moKhoa || !d.so_khoa) xoaChoMo();
+      if (moKhoa && d.phi.ly_do === "da_tru_sao") ghi("unlock_succeeded", { mo_dun: d.mo_dun, so_sao: d.phi.sao });
       else if (d.so_khoa) ghi("paywall_viewed", { mo_dun: d.mo_dun, kind: "luan_giai_toan_bo" });
       ghi("reading_completed", { mo_dun: d.mo_dun, kind: d.so_khoa ? "luan_giai_xem_truoc" : "luan_giai_toan_bo" });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa tải được luận giải."); }
     finally { setDang(false); }
   };
-  // Quay lại sau khi đăng nhập / nạp Sao → tự mở đúng báo cáo đang xem dở.
+  // Quay lại sau khi đăng nhập / nạp Sao → tự mở đúng báo cáo đang xem dở (cùng lá số, trong 30 phút). Một lần.
+  const daTuMo = useRef(false);
   useEffect(() => {
-    let cho: string | null = null;
-    try { cho = sessionStorage.getItem(CHO_MO); } catch { /* bỏ qua */ }
-    if (cho === duongDan && laSo) void tai(true);
+    if (laSo && !daTuMo.current && dangChoMo(duongDan, laSo)) { daTuMo.current = true; void tai(true, true); }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ chạy một lần khi lá số sẵn sàng
   }, [Boolean(laSo)]);
 

@@ -16,7 +16,7 @@ import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { goiEngineDaKiem } from "@/lib/proxy";
 
 export const coTaiKhoan = () => Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-const biMat = () => {
+export const biMat = () => {
   const s = process.env.SAO_KHOA_SECRET || process.env.LOI_MOI_SECRET;
   return s && s.length >= 16 ? s : null;
 };
@@ -30,6 +30,14 @@ export async function phienNguoiDung(): Promise<{ sb: SupabaseClient; user: User
   });
   const { data: { user } } = await sb.auth.getUser();
   return user ? { sb, user } : null;
+}
+
+/** Tài khoản chưa nhận Sao chào mừng → số Sao sẽ nhận (để hộp "nạp" mời lưu hồ sơ trước); đã nhận / lỗi → null. */
+export async function chaoMungConNhan(phien: { sb: SupabaseClient; user: User }): Promise<number | null> {
+  const thuong = await layCauHinh<number>("sao.thuong.chao_mung");
+  if (!thuong) return null;
+  const { data, error } = await phien.sb.from("so_cai_sao").select("id").eq("khoa", `chao_mung:${phien.user.id}`).limit(1);
+  return error || data?.length ? null : thuong;
 }
 
 /** Khoá đếm lượt của khách: HMAC(IP) — không lưu IP. Không có bí mật → null (không đếm). */
@@ -79,6 +87,7 @@ export async function cuaHoi(req: Request, moDun: string): Promise<Cua> {
   if (soDu < gia) {
     return { ok: false, res: NextResponse.json({
       error: `Hết ${tran} câu miễn phí hôm nay. Câu tiếp theo ${gia} Sao, ví bạn còn ${soDu} Sao.`, can: "nap", gia, so_du: soDu, tran,
+      chao_mung: await chaoMungConNhan(phien),
     }, { status: 402 }) };
   }
   if (req.headers.get("x-dong-y-sao") !== "1") {
