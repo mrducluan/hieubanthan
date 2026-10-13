@@ -26,7 +26,7 @@ export interface NgayTot {
   nghi: MucNghiKy[]; ky: MucNghiKy[]; cat_than: ThanSat[]; hung_sat: ThanSat[];
   xung_tuoi: { ten: string; chi: string }; sat: string; banh_to: string[];
   huong: { hy_than: string; tai_than: string; phuc_than: string }; thai_than: string;
-  gio: GioNgay[]; gio_hoang_dao: GioNgay[];
+  gio: GioNgay[]; gio_hoang_dao: GioNgay[]; ghi_chu_gio_ty?: string;
   ky_dan_gian: { ma: string; ten: string; nghia: string }[];
   tuoi: { nam_am: number; can_chi: string; uoc_luong: boolean; quan_he: QuanHeTuoi } | null;
   viec: { ma_viec: string; ten: string; danh_gia: "tot" | "binh" | "tranh"; ly_do: string[]; ngay_tot_gan: TomTatNgay | null } | null;

@@ -16,10 +16,12 @@ from app.config import CALENDAR_MERIDIAN_TZ
 KB = json.loads((Path(__file__).parents[1] / "kb" / "data" / "hoang_lich_kb.json").read_text(encoding="utf-8"))
 _CAN = dict(zip(hl.GAN, lunar.CAN))
 _CHI = dict(zip(hl.ZHI, lunar.CHI))
-_KHUNG = ["23:00–00:59", "01:00–02:59", "03:00–04:59", "05:00–06:59", "07:00–08:59", "09:00–10:59",
+_KHUNG = ["00:00–00:59", "01:00–02:59", "03:00–04:59", "05:00–06:59", "07:00–08:59", "09:00–10:59",
           "11:00–12:59", "13:00–14:59", "15:00–16:59", "17:00–18:59", "19:00–20:59", "21:00–22:59"]
 TRUC_TOT = {"成", "开", "定", "满", "除"}
 _VIEC = {v["ma"]: v for v in KB["viec"]}
+GHI_CHU_GIO_TY = ("Giờ Tý của một ngày tính từ 23:00 đêm hôm trước đến 00:59; khung 23:00–23:59 tối nay đã thuộc giờ Tý "
+                  "của ngày mai (xem ở trang ngày mai).")
 LUU_Y = ("Hoàng lịch là tri thức văn hoá cổ để tham khảo khi chọn ngày, không phải lời tiên đoán. "
          "Việc quan trọng vẫn nên dựa trên chuẩn bị thực tế của bạn.")
 
@@ -43,21 +45,27 @@ def _phuong(ma: str) -> str:
 
 
 def _thai(s: str) -> str:
-    """'占门碓 外东南' → 'cửa, cối giã · phía ngoài Đông Nam'."""
+    """'占门碓 外东南' → 'cửa, cối giã · phía ngoài Đông Nam'; '仓库厕 房内东' → 'kho, nhà vệ sinh · trong buồng, phía Đông'."""
     vi, huong = (s.split(" ") + [""])[:2]
     vi = vi.replace("占", "")
     cho, i = [], 0
     while i < len(vi):
         for n in (2, 1):
             t = vi[i:i + n]
-            if t in KB["thai_chu"] and (n == 1 or t == "大门"):
-                cho.append(KB["thai_chu"][t]); i += n; break
+            if t in KB["thai_chu"]:
+                if KB["thai_chu"][t] and KB["thai_chu"][t] not in cho:
+                    cho.append(KB["thai_chu"][t])
+                i += n
+                break
         else:
             i += 1
-    trong = {"外": "phía ngoài", "内": "trong nhà"}.get(huong[:1], "")
-    p = huong[1:]
-    p = KB["phuong"].get(p, p) if p else ""
-    return ", ".join(x for x in cho if x) + (f" · {trong} {p}".rstrip() if trong else "")
+    for tien, chu in (("房内", "trong buồng, phía"), ("外", "phía ngoài"), ("内", "trong nhà, phía")):
+        if huong.startswith(tien):
+            p = huong[len(tien):]
+            p = KB["phuong"].get(p, p) if p else ""
+            vi_tri = f"{chu} {p}".strip().rstrip(",")
+            return ", ".join(cho) + f" · {vi_tri}"
+    return ", ".join(cho)
 
 
 def tuoi(nam_sinh: int | None, thang_sinh: int | None = None, ngay_sinh: int | None = None) -> dict | None:
@@ -84,6 +92,9 @@ def _danh_gia_viec(c: dict, viec: dict) -> str:
     ma = set(viec["nghi"])
     if ma & set(c["ky"]) or c["truc"] in viec["tranh_truc"] or set(c["ky_dan_gian"]) & set(viec["tranh_dan_gian"]):
         return "tranh"
+    # 诸事不宜: sách khuyên hoãn mọi việc lớn · 馀事勿取: chỉ làm việc ghi ở mục Nên, việc khác để ngày khác.
+    if "诸事不宜" in c["ky"] or ("馀事勿取" in c["nghi"] and not (ma & set(c["nghi"]))):
+        return "tranh"
     if ma & set(c["nghi"]):
         return "tot"
     return "binh"
@@ -100,7 +111,8 @@ def tom_tat(d: dt.date) -> dict:
             "truc": KB["truc"][c["truc"]]["ten"], "than": KB["than"][c["than"]]["ten"], "hoang_dao": c["hoang_dao"],
             "ky_dan_gian": [KB["ky_dan_gian"][k]["ten"] for k in c["ky_dan_gian"]],
             # "Ngày đẹp" chung (RULES ở engine, web chỉ hiển thị): hoàng đạo + trực tốt + không rơi ngày kỵ dân gian.
-            "dep": bool(c["hoang_dao"] and c["truc"] in TRUC_TOT and not c["ky_dan_gian"])}
+            "dep": bool(c["hoang_dao"] and c["truc"] in TRUC_TOT and not c["ky_dan_gian"]
+                        and "馀事勿取" not in c["nghi"] and "诸事不宜" not in c["ky"])}
 
 
 def ngay_tot_gan(d: dt.date, viec: str | None = None, t: dict | None = None, so_ngay: int = 30) -> dict | None:
@@ -114,7 +126,8 @@ def ngay_tot_gan(d: dt.date, viec: str | None = None, t: dict | None = None, so_
                 continue
             if can_hoang_dao and not c["hoang_dao"]:
                 continue
-            ok = _danh_gia_viec(c, v) == "tot" if v else (c["truc"] in TRUC_TOT and not c["ky_dan_gian"])
+            ok = _danh_gia_viec(c, v) == "tot" if v else (c["truc"] in TRUC_TOT and not c["ky_dan_gian"]
+                                                         and "馀事勿取" not in c["nghi"] and "诸事不宜" not in c["ky"])
             if ok:
                 return {**tom_tat(x), "con_ngay": i, **({"viec": v["ten"]} if v else {})}
         if not v:
@@ -133,6 +146,10 @@ def _ly_do(c: dict, v: dict) -> list[str]:
         ra.append(f"trực {KB['truc'][c['truc']]['ten']} — sách lịch khuyên tránh việc này")
     for k in set(c["ky_dan_gian"]) & set(v["tranh_dan_gian"]):
         ra.append(f"ngày {KB['ky_dan_gian'][k]['ten']} — dân gian thường tránh")
+    if "诸事不宜" in c["ky"]:
+        ra.append("sách lịch khuyên hoãn mọi việc lớn trong ngày này")
+    elif "馀事勿取" in c["nghi"] and not (ma & set(c["nghi"])):
+        ra.append("sách lịch khuyên chỉ làm các việc ghi ở mục Nên, việc này nên hoãn sang ngày khác")
     if not ra:
         ra.append("sách lịch không ghi riêng việc này hôm nay")
     return ra
@@ -172,7 +189,7 @@ def ngay_xem(d: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = N
         "huong": {"hy_than": _phuong(c["huong"]["hy_than"]), "tai_than": _phuong(c["huong"]["tai_than"]),
                   "phuc_than": _phuong(c["huong"]["phuc_than"])},
         "thai_than": _thai(c["thai_than"]),
-        "gio": gio, "gio_hoang_dao": [g for g in gio if g["hoang_dao"]],
+        "gio": gio, "gio_hoang_dao": [g for g in gio if g["hoang_dao"]], "ghi_chu_gio_ty": GHI_CHU_GIO_TY,
         "ky_dan_gian": [{"ma": k, **KB["ky_dan_gian"][k]} for k in c["ky_dan_gian"]],
         "tuoi": ({**t, "quan_he": _quan_he(c["ngay_gz"][1], t)} if t else None),
         "viec": viec_kq,

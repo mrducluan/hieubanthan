@@ -53,7 +53,7 @@ def test_the_ngay_13_10_2026():
     assert kq["truc"]["ten"] == "Khai" and kq["than"]["ten"] == "Kim Quỹ" and kq["hoang_dao"] is True
     assert kq["xung_tuoi"]["ten"] == "Giáp Dần" and kq["sat"] == "Nam"
     assert "Cưới hỏi" in [x["ten"] for x in kq["nghi"]] and "An táng" in [x["ten"] for x in kq["ky"]]
-    assert len(kq["gio_hoang_dao"]) == 6 and kq["gio_hoang_dao"][0]["khung"] == "23:00–00:59"
+    assert len(kq["gio_hoang_dao"]) == 6 and kq["gio_hoang_dao"][0]["khung"] == "00:00–00:59"
     assert kq["am"]["ngay"] == 4 and kq["am"]["thang"] == 9
 
 
@@ -102,5 +102,42 @@ def test_co_ngay_dep_trong_thang():
     t = L.thang(2026, 11)
     for n in t["ngay"]:
         c = hl.ngay(dt.date.fromisoformat(n["ngay"]))
-        assert n["dep"] == bool(c["hoang_dao"] and c["truc"] in L.TRUC_TOT and not c["ky_dan_gian"])
+        assert n["dep"] == bool(c["hoang_dao"] and c["truc"] in L.TRUC_TOT and not c["ky_dan_gian"]
+                                and "馀事勿取" not in c["nghi"] and "诸事不宜" not in c["ky"])
     assert any(n["dep"] for n in t["ngay"])
+
+
+def test_ngay_chu_su_bat_nghi_va_du_su_vat_thu():
+    """诸事不宜 (mọi việc nên hoãn) → mọi việc 'tranh'; 馀事勿取 (ngoài việc ghi thì hoãn) → việc không được ghi là 'tranh'."""
+    for k in range(366 * 3):
+        d = dt.date(2026, 1, 1) + dt.timedelta(days=k)
+        c = hl.ngay(d)
+        for v in L.KB["viec"]:
+            dg = L._danh_gia_viec(c, v)
+            if "诸事不宜" in c["ky"]:
+                assert dg == "tranh", (d, v["ma"])
+            if "馀事勿取" in c["nghi"] and not (set(v["nghi"]) & set(c["nghi"])):
+                assert dg == "tranh", (d, v["ma"])
+    kq = L.ngay_xem(dt.date(2026, 1, 12), viec="cuoi_hoi")
+    assert kq["viec"]["danh_gia"] == "tranh" and any("hoãn" in x for x in kq["viec"]["ly_do"])
+    # ngày đẹp gần nhất không rơi vào những ngày này
+    for k in range(0, 366, 5):
+        g = L.ngay_tot_gan(dt.date(2026, 1, 1) + dt.timedelta(days=k))
+        if g:
+            c = hl.ngay(dt.date.fromisoformat(g["ngay"]))
+            assert "馀事勿取" not in c["nghi"] and "诸事不宜" not in c["ky"]
+
+
+def test_thai_than_giu_huong():
+    assert L._thai("仓库厕 房内东") == "kho, nhà vệ sinh · trong buồng, phía Đông"
+    assert L._thai("占门碓 外东南") == "cửa, cối giã · phía ngoài Đông Nam"
+    assert L._thai("厨灶炉 外正南") == "bếp, lò · phía ngoài chính Nam"
+
+
+def test_khong_co_viec_kham_chua_benh():
+    assert "chua_benh" not in {v["ma"] for v in L.KB["viec"]}
+
+
+def test_khung_gio_ty_ro_rang():
+    kq = L.ngay_xem(dt.date(2026, 10, 13))
+    assert kq["gio"][0]["khung"] == "00:00–00:59" and "23:00" in kq["ghi_chu_gio_ty"]

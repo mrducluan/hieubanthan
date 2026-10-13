@@ -554,11 +554,11 @@
   },
   "诸事不宜": {
    "ten": "Mọi việc nên hoãn",
-   "nghia": "sách khuyên không khởi sự việc lớn"
+   "nghia": "sách lịch khuyên không khởi sự việc lớn trong ngày này"
   },
   "馀事勿取": {
    "ten": "Ngoài việc nêu thì nên hoãn",
-   "nghia": "chỉ nên làm các việc ghi ở mục Nên"
+   "nghia": "sách lịch khuyên chỉ làm các việc ghi ở mục Nên, việc khác để ngày khác"
   },
   "行丧": {
    "ten": "Làm tang lễ",
@@ -870,7 +870,7 @@
    "nghia": "việc dễ trì trệ"
   },
   "元武": {
-   "ten": "Nguyên Vũ",
+   "ten": "Huyền Vũ (Nguyên Vũ)",
    "nghia": "cẩn thận mất mát"
   },
   "月厌": {
@@ -927,7 +927,7 @@
   },
   "血忌": {
    "ten": "Huyết Kỵ",
-   "nghia": "hoãn châm chích, phẫu thuật không gấp"
+   "nghia": "sách lịch xếp vào ngày kỵ châm chích — việc khám chữa luôn theo chỉ định của bác sĩ, không hoãn vì ngày"
   },
   "土府": {
    "ten": "Thổ Phủ"
@@ -1290,7 +1290,13 @@
   "东": "Đông",
   "西": "Tây",
   "南": "Nam",
-  "北": "Bắc"
+  "北": "Bắc",
+  "仓库": "kho",
+  "厨灶": "bếp",
+  "房床": "giường buồng",
+  "碓磨": "cối xay giã",
+  "门房": "cửa buồng",
+  "床仓": "giường, kho"
  },
  "ly_thuan_phong": {
   "dai_an": {
@@ -1501,17 +1507,6 @@
    "tranh_truc": [
     "破"
    ],
-   "tranh_dan_gian": []
-  },
-  {
-   "ma": "chua_benh",
-   "ten": "Khám chữa bệnh",
-   "nghi": [
-    "求医",
-    "治病",
-    "求医疗病"
-   ],
-   "tranh_truc": [],
    "tranh_dan_gian": []
   },
   {

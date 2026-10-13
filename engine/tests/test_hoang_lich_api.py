@@ -31,7 +31,7 @@ def test_thang_va_chon_ngay():
                                                     "den": "2026-12-31"}).status_code == 422
     assert client.post("/v1/lich/chon-ngay", json={"viec": "nhap_trach", "tu": "2026-03-01",
                                                     "den": "2026-01-01"}).status_code == 422
-    assert len(client.get("/v1/lich/viec").json()["viec"]) == 12
+    assert len(client.get("/v1/lich/viec").json()["viec"]) == 11
 
 
 def test_get_cong_khai():

@@ -116,6 +116,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
             </li>
           ))}
         </ul>
+        {d.ghi_chu_gio_ty && <p className="mt-2 text-xs text-fg-muted">{d.ghi_chu_gio_ty}</p>}
       </section>
 
       <div className="grid gap-3 sm:grid-cols-[3fr_2fr]">
