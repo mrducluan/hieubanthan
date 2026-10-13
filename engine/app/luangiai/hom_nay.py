@@ -9,12 +9,13 @@ HN-2 — "Hôm nay bạn định làm gì?": người dùng chọn ý định (m
 NHẬN DIỆN ý định bằng luật từ khoá (không LLM), không trả lại, không lưu. Mỗi ý định × ngày cá nhân → nhịp
 (thuận / trung tính / cân nhắc), cách làm hợp nhịp, câu tự soi (KB `thanso_hom_nay`). Câu khủng hoảng → lời hỗ trợ.
 Kèm ngày phổ quát, 3 câu hỏi nổi bật xoay theo ngày, và số ngày theo phái Chaldea.
+HN-3: sáu giờ hoàng đạo của ngày xem (CALC `gio_hoang_dao`, đối chiếu oracle).
 """
 from __future__ import annotations
 
 import datetime as dt
 
-from app.calc import lunar, thanso, thanso_mo_rong as mr
+from app.calc import gio_hoang_dao, lunar, thanso, thanso_mo_rong as mr
 from app.config import CALENDAR_MERIDIAN_TZ
 from app.hoidap import chung
 from app.kb import store, thanso_v2
@@ -126,6 +127,8 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
         "cau_hoi_noi_bat": _cau_hoi_noi_bat(so_ngay, ngay_xem),
         "ngay_pho_quat": {"so": so_pq, "nghia": thanso_v2.ngay_pho_quat(so_pq)},
         "chaldea": thanso_chaldean.ngay_chaldea(ngay, d),
+        # HN-3: giờ hoàng đạo theo lịch cổ truyền (tham khảo văn hoá, không phải lời khuyên chọn giờ)
+        "gio_hoang_dao": gio_hoang_dao.gio_hoang_dao(ngay_xem),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],
         "luu_y": "Nhịp theo thần số học để tự soi — gợi chủ đề, không dự báo việc sẽ xảy ra.",

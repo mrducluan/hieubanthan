@@ -76,3 +76,18 @@ test("HN-2: câu khủng hoảng → lời hỗ trợ, không luận ý định"
   await expect(page.getByTestId("ho-tro")).toContainText("115");
   await expect(page.getByTestId("y-dinh-ket-qua")).toHaveCount(0);
 });
+
+test("HN-3: nút Giờ hoàng đạo mở 6 giờ engine tính; Quẻ ngày mở Kinh Dịch chọn sẵn Mai Hoa", async ({ page, request }) => {
+  await napHoSo(page);
+  await page.goto("/hom-nay");
+  await expect(page.getByTestId("the-hom-nay")).toBeVisible();
+  await expect(page.getByTestId("gio-hoang-dao")).toHaveCount(0);
+  await page.getByRole("button", { name: "Giờ hoàng đạo" }).click();
+  const api = await (await request.post("/api/thanso/hom-nay", { data: { ngay: 17, thang: 5, nam: 1990 } })).json();
+  const khoi = page.getByTestId("gio-hoang-dao");
+  await expect(khoi.locator("li")).toHaveCount(6);
+  for (const g of api.gio_hoang_dao as { chi: string; than: string }[]) await expect(khoi).toContainText(g.than);
+  await page.getByTestId("que-ngay").click();
+  await expect(page).toHaveURL(/\/kinh-dich\?cach=mai_hoa$/);
+  await expect(page.getByLabel("Cách ra quẻ")).toHaveValue("mai_hoa");
+});
