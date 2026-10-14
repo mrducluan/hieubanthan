@@ -69,7 +69,10 @@ export function HinhBauTroi({ className }: { className?: string }) {
       {so.map(({ n, p: [x, y] }, i) => (
         <g key={n} className="svg-tam so-hien" style={{ animationDelay: `${0.25 + i * 0.12}s` }}>
           <g className="svg-tam nut-so">
-            <circle cx={x} cy={y} r={20} fill="url(#hq-so)" className="so-luot stroke-gold/60" strokeWidth={1.4} style={{ animationDelay: `${2 + i}s` }} />
+            <circle cx={x} cy={y} r={20} fill="url(#hq-so)" className="stroke-gold/60" strokeWidth={1.4} />
+            {/* vành sáng luân phiên: chỉ đổi opacity (mặc định ẩn → giảm chuyển động vẫn đủ hình) */}
+            <circle cx={x} cy={y} r={20} fill="none" stroke="rgb(255 236 190)" strokeWidth={1.4} opacity={0} className="so-luot"
+              style={{ animationDelay: `${2 + i}s`, filter: "drop-shadow(0 0 6px rgb(var(--gold)))" }} aria-hidden />
             <text x={x} y={y + 7} textAnchor="middle" className="fill-fg font-serif" fontSize={20}>{n}</text>
           </g>
         </g>

@@ -147,6 +147,23 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     ],
     lien_ket: [{ href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào (1960–2005)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ phong thuỷ" }, { href: "/kham-pha", ten: "Các hệ thống khác" }],
   } },
+  // HL-1 / TDG-1 (nhánh main): công cụ hoàng lịch + tuổi — tên/mô tả = metadata trang (app/*/noi-dung.ts).
+  { duong: "/xem-ngay-tot", nhom: "cong_cu", ten: "Xem ngày tốt", o: O_TRANG_PHU, mac_dinh: {
+    tieu_de_seo: "Xem ngày tốt hôm nay: hoàng đạo, giờ tốt, việc nên làm",
+    mo_ta_seo: "Xem ngày tốt hôm nay theo lịch Việt: ngày hoàng đạo hay hắc đạo, trực, giờ hoàng đạo, việc nên làm và nên kiêng, tuổi xung, hướng xuất hành, tìm ngày đẹp cho cưới hỏi, khai trương, về nhà mới.",
+  } },
+  { duong: "/xem-tuoi-lam-nha", nhom: "cong_cu", ten: "Tuổi làm nhà, cưới hỏi", o: O_TRANG_PHU, mac_dinh: {
+    tieu_de_seo: "Xem tuổi làm nhà, cưới hỏi: Kim lâu, Hoang ốc, Tam tai",
+    mo_ta_seo: "Xem tuổi làm nhà, cưới hỏi theo dân gian Việt: tuổi mụ có phạm Kim lâu, Hoang ốc, Tam tai không, năm nào thuận, hướng nên giữ yên trong năm.",
+  } },
+  { duong: "/tuoi-xong-dat", nhom: "cong_cu", ten: "Tuổi xông đất", o: O_TRANG_PHU, mac_dinh: {
+    tieu_de_seo: "Xem tuổi xông đất đầu năm hợp gia chủ, giờ đẹp mùng 1",
+    mo_ta_seo: "Chọn tuổi xông đất đầu năm hợp với gia chủ: tam hợp, lục hợp với năm và tuổi chủ nhà, can và mệnh nạp âm tương sinh; tránh tuổi xung, tuổi đang Tam tai; giờ đẹp mùng 1.",
+  } },
+  { duong: "/huong-xau-nam", nhom: "cong_cu", ten: "Hướng xấu theo năm", o: O_TRANG_PHU, mac_dinh: {
+    tieu_de_seo: "Hướng xấu theo năm: Thái Tuế, Tam Sát, Ngũ Hoàng",
+    mo_ta_seo: "Hướng nên giữ yên trong năm theo phong thuỷ truyền thống: Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc, kèm bàn phi tinh 9 cung của năm — để tránh động thổ, sửa chữa lớn phía đó.",
+  } },
   { duong: "/ban-than", nhom: "cong_cu", ten: "Hồ sơ bản thân", o: O_TRANG_PHU, mac_dinh: {
     tieu_de_seo: "Hồ sơ bản thân",
     mo_ta_seo: "Hồ sơ bản thân theo thần số học: số đường đời, sứ mệnh, linh hồn, nhân cách — mỗi số ba lớp: đã tính, diễn giải, tự soi.",
@@ -238,12 +255,14 @@ export const TEP_KB_THEO_LOAI: Record<LoaiTrang, string[]> = {
   thap_than: ["battu_kb.json"], nhat_chu: ["battu_kb.json"], menh_nam: ["battu_kb.json"],
   cap_so: ["thanso_cap_so.json", "thanso_quan_he.json"], nghe: ["thanso_chan_dung.json", "thanso_linh_vuc.json"],
   tinh_yeu: ["thanso_chan_dung.json", "thanso_linh_vuc.json"], nam_ca_nhan: ["thanso_depth.json"], no_nghiep: ["thanso_chi_so_phu.json"],
+  so_kep: ["thanso_chaldean.json"],
 };
 /** Trang mẫu của từng loại (để CMS xem trước chữ KB của cụm). */
 const VI_DU: Record<LoaiTrang, string> = {
   so: "so-1", que: "que-1-can", sao: "sao-tu-vi", cung: "cung-menh", thap_than: "ty-kien", nhat_chu: "nhat-chu-giap",
   cap_so: "so-chu-dao-1-va-1", nghe: "so-1-hop-nghe-gi", tinh_yeu: "so-1-trong-tinh-yeu", nam_ca_nhan: "nam-ca-nhan-1",
   no_nghiep: "no-nghiep-13", sao_cung: "tu-vi-cung-menh", hoa_cung: "hoa-loc-cung-menh", menh_nam: "sinh-nam-1950-menh-gi",
+  so_kep: "so-kep-10",
 };
 
 export const MAU_CUM: readonly MauCumTrang[] = [

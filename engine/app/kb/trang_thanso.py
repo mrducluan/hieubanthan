@@ -269,7 +269,9 @@ def trang_so_kep(so: str, slug: str) -> dict:
     i = ds.index(so)
     return {
         "loai": "so_kep", "slug": slug,
-        "tieu_de": f"Số kép {so} thần số Chaldea: {k['bieu_tuong'].lower()} — ý nghĩa, mặt tối",
+        # ≤ 70 ký tự (rà SEO-E): biểu tượng dài thì bỏ đuôi "mặt tối" (mô tả vẫn nêu).
+        "tieu_de": (lambda tt: tt if len(tt) <= 70 else tt.removesuffix(", mặt tối"))(
+            f"Số kép {so} thần số Chaldea: {k['bieu_tuong'].lower()} — ý nghĩa, mặt tối"),
         "mo_ta": t._cat(f"Số kép {so} trong thần số học Chaldea ({k['bieu_tuong'].lower()}): ý nghĩa, mặt tối, rút gọn về số {goc}, cách biết tên mình mang số này."),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
         "nguon": ["Hệ thần số Chaldea — Cheiro, Book of Numbers (1926), diễn đạt lại bằng lời mới"],

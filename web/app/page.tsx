@@ -33,12 +33,13 @@ export default function TrangChu() {
   return (
     <div className="space-y-14 md:space-y-20">
       {/* UI-HERO: cột trái = lời giới thiệu + ô vào (form/chào lại), cột phải = vòng số lớn có chuyển động → hai cột
-          cao gần bằng nhau, không còn khoảng trống trên/dưới thẻ. Điện thoại: chữ → ô vào → hình (không bắt cuộn qua hình). */}
-      <section className="relative grid items-center gap-8 pt-2 md:grid-cols-[1.05fr_1fr] md:gap-10 md:pt-6" data-testid="hero">
+          cao gần bằng nhau, không còn khoảng trống trên/dưới thẻ. Dưới lg (điện thoại, máy tính bảng dọc): một cột chữ → ô vào
+          → hình (768px chia hai cột thì cột chữ quá hẹp, hình nhỏ giữa khoảng trống lớn). */}
+      <section className="relative grid items-center gap-8 pt-2 md:pt-6 lg:grid-cols-[1.05fr_1fr] lg:gap-10" data-testid="hero">
         <div>
           <p className="eyebrow flex items-center gap-2"><Sparkles className="size-3.5 text-gold" aria-hidden /> Thần số học · Huyền học phương Đông</p>
           <h1 className="mt-4 text-[2.6rem] leading-[1.08] sm:text-6xl">
-            Con số nói gì <span className="text-gradient-gold italic">về bạn?</span>
+            <span className="whitespace-nowrap">Con số nói gì</span> <span className="text-gradient-gold italic">về bạn?</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg text-fg-muted">
             Từ tên và ngày sinh, xem bốn con số cốt lõi của bạn — phép tính minh bạch, ý nghĩa có nguồn,
@@ -55,7 +56,7 @@ export default function TrangChu() {
         </div>
         <div className="relative">
           <div className="pointer-events-none absolute inset-[8%] rounded-full bg-gold/10 blur-3xl" aria-hidden />
-          <HinhBauTroi className="relative mx-auto max-w-[19rem] sm:max-w-[24rem] md:max-w-[32rem]" />
+          <HinhBauTroi className="relative mx-auto max-w-[19rem] sm:max-w-[24rem] lg:max-w-[32rem]" />
         </div>
       </section>
 
