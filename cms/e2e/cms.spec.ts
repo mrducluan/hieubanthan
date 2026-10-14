@@ -343,14 +343,17 @@ test("ND-0/ND-1: Đồng bộ ngay tạo Trang website + Mẫu cụm từ sổ t
   } })).ok()).toBeTruthy();
   await choWeb(request, "/", (s, b) => s === 200 && b.includes("Lời giới thiệu sửa từ CMS"));
   await page.goto(`${WEB}/`);
-  await expect(page.getByTestId("chan-trang-gioi-thieu")).toHaveText("Lời giới thiệu sửa từ CMS");
-  await expect(page.getByTestId("chan-trang-cam-ket").locator("li")).toHaveText(["Cam kết sửa từ CMS"]);
-  await expect(page.getByTestId("chan-trang-mien-tru")).toContainText("chủ biên Đức Luân chịu trách nhiệm");
+  // Chân trang nằm trong Suspense: lúc trình duyệt đang thay khung mặc định bằng bản CMS, cả hai cùng có trong DOM
+  // (bản mới ẩn) → chỉ đọc bản đang hiện.
+  const hien = (id: string) => page.getByTestId(id).filter({ visible: true });
+  await expect(hien("chan-trang-gioi-thieu")).toHaveText("Lời giới thiệu sửa từ CMS");
+  await expect(hien("chan-trang-cam-ket").locator("li")).toHaveText(["Cam kết sửa từ CMS"]);
+  await expect(hien("chan-trang-mien-tru")).toContainText("chủ biên Đức Luân chịu trách nhiệm");
   // để trống → web về chữ trong code
   expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: { thuong_hieu: { gioi_thieu: "", cam_ket: [] } } })).ok()).toBeTruthy();
   await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Lời giới thiệu sửa từ CMS") && b.includes("Cách tính minh bạch, nguồn rõ ràng"));
   await page.goto(`${WEB}/`);
-  await expect(page.getByTestId("chan-trang-cam-ket").locator("li")).toHaveCount(3);
+  await expect(hien("chan-trang-cam-ket").locator("li")).toHaveCount(3);
 });
 
 test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa ở CMS → thanh trên + bảng thả xuống + menu điện thoại", async ({ page, request, browser }) => {
