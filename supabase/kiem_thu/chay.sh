@@ -20,3 +20,4 @@ psql -d "$DB" -q -At -F ' | ' -f kiem_thu/thu_sao.sql
 psql -d "$DB" -q -At -F ' | ' -f kiem_thu/thu_quan_tri.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_thanh_toan.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_sao_2.sql
+psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_nhiem_vu.sql

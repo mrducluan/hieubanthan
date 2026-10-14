@@ -81,7 +81,8 @@ test("Gate 2 — link Hôm nay mang mã: người gửi share_created, bạn bè
   expect(tao).toMatchObject({ kind: "hom_nay" });
   const ma = String(tao?.ma_moi);
   expect(ma).toMatch(/^hn\.[a-f0-9]{10}$/);
-  expect(await page.evaluate(() => navigator.clipboard.readText())).toContain(`/hom-nay?tu=${ma}`);
+  // NHIP-1: link được chép sau khi máy chủ ký thẻ ngày (có ảnh) → chờ clipboard.
+  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toContain(`/hom-nay?tu=${ma}`);
 
   const ban = await (await browser.newContext({ baseURL: test.info().project.use.baseURL })).newPage();
   await ban.goto(`/hom-nay?tu=${ma}`);

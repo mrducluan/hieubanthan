@@ -1,6 +1,7 @@
 // SAO-2 chuỗi THẬT (không page.route): trình duyệt → web (route handler thật) → engine thật → Supabase thu nhỏ
 // (GoTrue đăng nhập OTP qua thư, PostgREST + RLS + hàm SQL dung_sao / dung_luot_hoi / nhan_chao_mung, cổng nạp giả).
 // Ví và sổ Sao kiểm trực tiếp trong DB bằng khoá service_role. Dựng: e2e-that/stack/len.sh.
+// SAO-3 (test cuối): nhiệm vụ kiếm Sao trên /ban-than — dùng lại tài khoản của test đầu (đã lưu hồ sơ, đã hỏi ≥ 3 câu).
 import fs from "node:fs";
 import { test, expect, type Page } from "@playwright/test";
 import { createHmac } from "node:crypto";
@@ -151,4 +152,49 @@ test("khách: hết lượt hỏi → mời đăng nhập; 'Để sau' ở báo 
   await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).waitFor();
   await page.waitForTimeout(3_000);
   await expect(hop(page)).toHaveCount(0);
+});
+
+test("SAO-3 nhiệm vụ: tiến độ thật (hồ sơ, câu hỏi đã đếm, lời mời) → nhận Sao một lần mỗi nhiệm vụ", async ({ page }) => {
+  // Tài khoản của test đầu: đã lưu hồ sơ + đã hỏi 4 câu trả lời được (2 miễn phí, 1 trả Sao, 1 câu khủng hoảng).
+  const id = await uid(EMAIL);
+  await page.goto("/dang-nhap?tiep=/ban-than");
+  await dangNhap(page, EMAIL);
+  await expect(page).toHaveURL(/\/ban-than/);
+  const hopNv = page.getByTestId("nhiem-vu-sao");
+  await expect(hopNv).toHaveAttribute("data-trang-thai", "tai_khoan", { timeout: 60_000 });
+  await expect(page.getByTestId("nhiem-vu-tien-do-luu_ho_so")).toHaveText("1/1");
+  await expect(page.getByTestId("nhiem-vu-tien-do-hoi_3_cau")).toHaveText("3/3");
+  await expect(page.getByTestId("nhiem-vu-tien-do-moi_1_ban")).toHaveText("0/1");
+  await expect(page.getByTestId("nhiem-vu-nhan-moi_1_ban")).toHaveCount(0);
+  const dem = (await (await fetch(`${SB}/rest/v1/dem_hoi_tai_khoan?user_id=eq.${id}&select=so`, { headers: H })).json()) as { so: number }[];
+  expect(dem[0]!.so).toBeGreaterThanOrEqual(3);
+
+  const truoc = (await so(EMAIL)).du;
+  await page.getByTestId("nhiem-vu-nhan-luu_ho_so").click();
+  await expect(page.getByTestId("nhiem-vu-da-nhan-luu_ho_so")).toHaveText("Đã nhận +5");
+  await page.getByTestId("nhiem-vu-nhan-hoi_3_cau").click();
+  await expect(page.getByTestId("nhiem-vu-da-nhan-hoi_3_cau")).toHaveText("Đã nhận +5");
+  // Nhận lại qua API (bấm hai lần / gọi thẳng) → da_nhan, không cộng thêm.
+  expect(await (await page.request.post("/api/sao/nhiem-vu", { data: { ma: "luu_ho_so" } })).json()).toMatchObject({ ket_qua: "da_nhan" });
+  expect(await (await page.request.post("/api/sao/nhiem-vu", { data: { ma: "moi_1_ban" } })).json()).toMatchObject({ ket_qua: "chua_dat" });
+  let v = await so(EMAIL);
+  expect([v.du - truoc, v.dem("nhiem_vu")]).toEqual([10, 2]);
+
+  // Bạn bè tạo tài khoản + nhận lời mời (dòng gioi_thieu do hàm SQL ghi — ở đây ghi thẳng bằng service role).
+  const ban = (await (await fetch(`${SB}/auth/v1/admin/users`, { method: "POST", headers: { ...H, "content-type": "application/json" },
+    body: JSON.stringify({ email: `ban${Date.now()}@thu.local`, email_confirm: true }) })).json()) as { id: string };
+  const r = await fetch(`${SB}/rest/v1/gioi_thieu`, { method: "POST", headers: { ...H, "content-type": "application/json" },
+    body: JSON.stringify({ duoc_moi_id: ban.id, nguoi_moi_id: id, ma: "thunv001", thuong_nguoi_moi: false }) });
+  expect(r.status).toBe(201);
+  await page.reload();
+  await expect(page.getByTestId("nhiem-vu-tien-do-moi_1_ban")).toHaveText("1/1", { timeout: 60_000 });
+  await page.getByTestId("nhiem-vu-nhan-moi_1_ban").click();
+  await expect(hopNv.getByRole("status")).toContainText("+5 Sao");
+  v = await so(EMAIL);
+  expect([v.du - truoc, v.dem("nhiem_vu")]).toEqual([15, 3]);
+  // Xong cả ba → tải lại thì hộp tự ẩn.
+  await page.reload();
+  await expect(page.getByTestId("lien-ket-hom-nay")).toBeVisible({ timeout: 60_000 });
+  await page.waitForTimeout(1_500);
+  await expect(hopNv).toHaveCount(0);
 });

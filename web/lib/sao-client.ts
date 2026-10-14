@@ -7,8 +7,8 @@ export type YeuCauSao = {
   can: CanSao; error: string; gia?: number; so_du?: number; tran?: number; thuong?: number | null;
   /** can = nap: tài khoản chưa nhận Sao chào mừng → số Sao nhận được khi lưu hồ sơ vào tài khoản (null = đã nhận). */
   chao_mung?: number | null;
-  /** "hoi" = hỏi đáp vượt lượt · "luan_giai" = mở khoá báo cáo */
-  nguon: "hoi" | "luan_giai"; mo_dun?: string;
+  /** "hoi" = hỏi đáp vượt lượt · "luan_giai" = mở khoá báo cáo · "nhiem_vu" = khách bấm nhận Sao nhiệm vụ (SAO-3) */
+  nguon: "hoi" | "luan_giai" | "nhiem_vu"; mo_dun?: string;
 };
 
 type Nghe = (y: YeuCauSao) => Promise<boolean>;

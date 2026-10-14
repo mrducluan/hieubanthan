@@ -8,7 +8,7 @@
 // Không lưu câu hỏi, không lưu IP: khoá khách = HMAC(IP) bằng bí mật máy chủ, chỉ sống trong bảng đếm theo ngày.
 import { createHmac, randomUUID } from "node:crypto";
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { layCauHinh } from "@/lib/cau-hinh";
@@ -109,8 +109,24 @@ export async function voiCuaHoi(req: Request, moDun: string, chay: () => Promise
   if (!cua.ok) return cua.res;
   const res = await chay();
   if (res.status !== 200) return res;
+  demCauHoi();
   const luot = await cua.xong();
   if (!luot) return res;
   const body = await res.json().catch(() => null);
   return body && typeof body === "object" ? NextResponse.json({ ...body, luot }) : res;
+}
+
+/** SAO-3 (migration 0014): câu trả lời được của người ĐÃ đăng nhập → cộng 1 vào bộ đếm của tài khoản (nhiệm vụ
+ *  "Hỏi 3 câu"). Chỉ con số — không lưu câu hỏi. Ghi bằng service role SAU khi đã trả lời (không làm chậm phản hồi);
+ *  thiếu Supabase / service role / chưa chạy 0014 → bỏ qua lặng lẽ (nhiệm vụ đó chỉ không tiến lên). */
+function demCauHoi(): void {
+  if (!coTaiKhoan()) return;
+  const dv = khachDichVu();
+  if (!dv) return;
+  after(async () => {
+    try {
+      const phien = await phienNguoiDung();
+      if (phien) await dv.rpc("ghi_cau_hoi_tai_khoan", { p_user_id: phien.user.id });
+    } catch { /* bỏ qua */ }
+  });
 }

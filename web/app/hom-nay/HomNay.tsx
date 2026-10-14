@@ -15,7 +15,7 @@ import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
-import { taoLinkNgay } from "@/components/chia-se/NutChiaSeNgay";
+import { maMoiNgay, taoLinkNgay } from "@/components/chia-se/NutChiaSeNgay";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { VongGio } from "@/components/hoang-lich/VongGio";
 import type { GioNgay } from "@/lib/hoang-lich";
@@ -175,9 +175,10 @@ export function HomNay() {
     if (!the || !hoSo) return;
     // ?tu=hn.<ngẫu nhiên>: bạn bè mở link → GhiVaoTrang nhớ mã → hồ sơ đầu tiên tính referral_signup (Gate 2, K).
     // NHIP-1: link mang thêm &the=<mã ký> → Zalo/Messenger hiện ảnh "Hôm nay {tên} là Ngày cá nhân N — còn bạn?".
-    const { url, tu } = await taoLinkNgay(hoSo);
-    const chu = `Hôm nay là Ngày cá nhân ${the.ngay_ca_nhan.so} của mình — ${boTienTo(the.ngay_ca_nhan.nghia)} Xem ngày của bạn:`;
+    const tu = maMoiNgay();
     ghi("share_created", { kind: "hom_nay", ma_moi: tu });
+    const { url } = await taoLinkNgay(hoSo, tu);
+    const chu = `Hôm nay là Ngày cá nhân ${the.ngay_ca_nhan.so} của mình — ${boTienTo(the.ngay_ca_nhan.nghia)} Xem ngày của bạn:`;
     try {
       if (navigator.share) { await navigator.share({ title: "Hôm nay của bạn", text: chu, url }); return; }
       await navigator.clipboard.writeText(`${chu} ${url}`);

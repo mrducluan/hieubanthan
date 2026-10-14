@@ -8,9 +8,11 @@ import { postJson } from "@/lib/goi-api";
 import { tenGoi, type HoSo } from "@/lib/hoso";
 import { ghi, maNgauNhien } from "@/lib/do-luong";
 
+/** Mã ?tu= của link (ngẫu nhiên, không định danh) — tạo trước để ghi share_created ngay lúc bấm. */
+export const maMoiNgay = () => `hn.${maNgauNhien(10)}`;
+
 /** Tạo link chia sẻ thẻ ngày (có ảnh). Lỗi ký mã (thiếu khoá…) → vẫn trả link /hom-nay không ảnh. */
-export async function taoLinkNgay(hoSo: HoSo): Promise<{ url: string; ma: string | null; tu: string }> {
-  const tu = `hn.${maNgauNhien(10)}`;
+export async function taoLinkNgay(hoSo: HoSo, tu = maMoiNgay()): Promise<{ url: string; ma: string | null; tu: string }> {
   const u = new URL("/hom-nay", window.location.origin);
   u.searchParams.set("tu", tu);
   let ma: string | null = null;
@@ -31,9 +33,10 @@ export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false
   async function chiaSe() {
     setDang(true);
     try {
-      const { url, ma: m, tu } = await taoLinkNgay(hoSo);
-      setMa(m);
+      const tu = maMoiNgay();
       ghi("share_created", { kind: "the_ngay", ma_moi: tu });
+      const { url, ma: m } = await taoLinkNgay(hoSo, tu);
+      setMa(m);
       const chu = `Hôm nay là Ngày cá nhân ${soNgay} của mình${chuDe ? ` — ${chuDe}` : ""}. Còn bạn hôm nay là ngày mấy?`;
       if (typeof navigator.share === "function") {
         try { await navigator.share({ title: "Hôm nay của bạn", text: chu, url }); return; } catch { /* huỷ → chép */ }

@@ -51,7 +51,7 @@ export function HopThoaiSao() {
 
   if (!y) return null;
   const tieuDe = y.can === "dang_nhap"
-    ? (y.nguon === "hoi" ? "Hết câu hỏi miễn phí hôm nay" : "Mở toàn bộ báo cáo của bạn")
+    ? (y.nguon === "hoi" ? "Hết câu hỏi miễn phí hôm nay" : y.nguon === "nhiem_vu" ? "Đăng nhập để nhận Sao" : "Mở toàn bộ báo cáo của bạn")
     : y.can === "xac_nhan_sao" ? "Hỏi tiếp câu này?" : "Nạp thêm Sao để xem tiếp";
   return (
     <Sheet open onOpenChange={(o) => { if (!o) dong(false); }}>
@@ -76,7 +76,7 @@ function DangNhapNhan({ y }: { y: YeuCauSao }) {
       </ul>
       <p className="text-xs text-fg-faint">Đăng nhập bằng email hoặc Google, không cần mật khẩu. Hồ sơ của bạn vẫn có thể chỉ lưu trên máy.</p>
       <Button asChild className="w-full" onClick={() => ghiPhien(QUAY_VE, tiep)}>
-        <Link href={`/dang-nhap?tiep=${encodeURIComponent(tiep)}`} data-testid="sao-dang-nhap">Đăng nhập để xem tiếp</Link>
+        <Link href={`/dang-nhap?tiep=${encodeURIComponent(tiep)}`} data-testid="sao-dang-nhap">{y.nguon === "nhiem_vu" ? "Đăng nhập để nhận Sao" : "Đăng nhập để xem tiếp"}</Link>
       </Button>
     </div>
   );

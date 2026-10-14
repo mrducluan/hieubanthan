@@ -17,6 +17,8 @@ select * from (values
                                      false, true, '')))[1]::text::int > 0 end),
   ('0010 quản trị',                to_regclass('public.vai_tro_quan_tri') is not null),
   ('0011 quản trị 2 (cài đặt)',    to_regprocedure('public.dat_cau_hinh(text,jsonb,text)') is not null),
-  ('0012 thanh toán nạp Sao',      to_regclass('public.don_nap') is not null)
+  ('0012 thanh toán nạp Sao',      to_regclass('public.don_nap') is not null),
+  ('0013 hạn mức hỏi (SAO-2)',     to_regclass('public.luot_hoi') is not null),
+  ('0014 nhiệm vụ kiếm Sao',       to_regclass('public.nhiem_vu_sao') is not null)
 ) as t(migration, da_chay)
 order by 1;

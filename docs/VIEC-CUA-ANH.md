@@ -393,6 +393,12 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
      không dán vào chat) → Redeploy.
   3) /quan-tri/cai-dat → nhóm "Luận giải toàn bộ" bật thu Sao; nhóm "Hỏi đáp" bật giới hạn khi chi phí AI tăng.
   4) Xem tiền + người nạp ở /quan-tri/doanh-thu. Quy tắc + lộ trình: `docs/KE-HOACH-MIEN-PHI-VA-SAO.md`.
+- [ ] SAO3. (2026-10-14) **Nhiệm vụ kiếm Sao** (Lưu hồ sơ · Hỏi 3 câu · Mời 1 bạn → nhận Sao) đã có code, **mặc định tắt**:
+  1) Supabase SQL Editor chạy `supabase/migrations/0014_nhiem_vu.sql` (sau 0013). Kiểm: `supabase/kiem_thu/da_chay_chua.sql`.
+  2) Không cần khoá mới — dùng `SUPABASE_SERVICE_ROLE_KEY` đã đặt (để đếm câu hỏi của người đã đăng nhập).
+  3) /quan-tri/cai-dat → nhóm "Nhiệm vụ kiếm Sao": xem mức (mặc định 5/5/5 Sao — cộng THÊM ngoài 10 Sao chào mừng và
+     20+20 Sao mời) rồi bật "Thưởng Sao cho nhiệm vụ". Chưa bật: người đã đăng nhập vẫn thấy tiến độ, khách không thấy hộp.
+  4) Câu hỏi chỉ được đếm từ lúc chạy 0014 (trước đó không có bộ đếm theo tài khoản).
 - [ ] CMS11. (2026-10-12, CMS-2) Vercel project **cms** thêm `ENGINE_URL` + `ENGINE_API_KEY` (giống bên web) → Redeploy →
   khung **Trợ lý AI soạn nháp** ở cột phải trang viết bài chạy được (cần `OPENROUTER_API_KEY` trên Render).
 - [ ] CMS12. (2026-10-12, CMS-2) Bật **xác thực 2 bước** cho chính anh: đăng xuất CMS → mở
