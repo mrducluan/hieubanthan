@@ -8,6 +8,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
   { href: "/ban-than", ten: "Bản thân", bieu_tuong: "lap_lanh", di_dong: true, con: [
     { href: "/than-so", ten: "Thần số học", mo_ta: "Con số chủ đạo, biểu đồ ngày sinh, năm cá nhân" },
     { href: "/hom-nay", ten: "Hôm nay của bạn", mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
+    { href: "/xem-ngay-tot", ten: "Xem ngày tốt", mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
   ] },
   { href: "/hop-doi", ten: "Hợp đôi", bieu_tuong: "trai_tim", di_dong: true, con: [] },
   { href: "/kham-pha", ten: "Khám phá", bieu_tuong: "la_ban", di_dong: true, con: [
@@ -15,6 +16,9 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/bat-tu", ten: "Bát tự", mo_ta: "Tứ trụ, ngũ hành, thập thần" },
     { href: "/kinh-dich", ten: "Kinh Dịch", mo_ta: "Gieo quẻ, đọc lời hào" },
     { href: "/phong-thuy", ten: "Phong thuỷ", mo_ta: "Hướng nhà, mệnh quái, bố trí" },
+    { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi", mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
+    { href: "/huong-xau-nam", ten: "Hướng xấu theo năm", mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
+    { href: "/tuoi-xong-dat", ten: "Tuổi xông đất", mo_ta: "Tuổi hợp gia chủ, giờ đẹp mùng 1" },
     { href: "/kien-thuc", ten: "Thư viện kiến thức", mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
   ] },
   { href: "/blog", ten: "Blog", bieu_tuong: "bao", di_dong: false, con: [] },

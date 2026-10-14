@@ -8,7 +8,7 @@ import type { LoaiTrang, TrangKienThuc } from "@/lib/kien-thuc";
 /** Môn của bài — để chữ ký ghi đúng lĩnh vực chuyên gia đang nói. */
 export const MON_THEO_LOAI: Record<LoaiTrang, string> = {
   so: "thần số học", cap_so: "thần số học", nghe: "thần số học", tinh_yeu: "thần số học", nam_ca_nhan: "thần số học",
-  no_nghiep: "thần số học", que: "Kinh Dịch", sao: "Tử vi", cung: "Tử vi", sao_cung: "Tử vi", hoa_cung: "Tử vi",
+  no_nghiep: "thần số học", so_kep: "thần số học", que: "Kinh Dịch", sao: "Tử vi", cung: "Tử vi", sao_cung: "Tử vi", hoa_cung: "Tử vi",
   thap_than: "Bát tự", nhat_chu: "Bát tự", menh_nam: "Bát tự",
 };
 

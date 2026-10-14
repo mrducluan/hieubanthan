@@ -3,7 +3,7 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-10-12.
+> Cập nhật lần cuối: 2026-10-13.
 
 ## Anh đã chốt (2026-10-08)
 
@@ -349,7 +349,7 @@ lần trước) → chọn vai trò → **Cấp / đổi vai trò**.
      `GA4_PROPERTY_ID` = dãy số ở bước 4 (nếu thuộc tính Search Console không phải dạng tên miền thì thêm
      `GSC_SITE_URL`, vd `https://hieuban.com/`) → Save → **Redeploy**.
   ⚠️ File JSON là khoá bí mật (chỉ đọc số liệu) — chỉ dán vào Vercel, xoá file trên máy sau khi dán.
-- [ ] **Q8. Phễu PostHog trong `/quan-tri/tang-truong`** (tuỳ chọn): PostHog → avatar → **Personal API keys → Create**
+- [x] **Q8. Phễu PostHog (anh báo xong 2026-10-13) trong `/quan-tri/tang-truong`** (tuỳ chọn): PostHog → avatar → **Personal API keys → Create**
   → scope **Query: Read** (chỉ chọn project hieuban) → copy. Vercel: `POSTHOG_PERSONAL_API_KEY` = khoá,
   `POSTHOG_PROJECT_ID` = số trong URL dự án (`us.posthog.com/project/12345`) → Redeploy. (Dự án ở EU thì thêm
   `POSTHOG_API_HOST=https://eu.posthog.com`.)
@@ -381,11 +381,13 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
 - [ ] CMS8. Thử quy trình **Cộng tác viên / chuyên gia** (2026-10-12): Ban biên tập → tạo tài khoản vai trò "Cộng tác
   viên / chuyên gia" → người đó viết, chọn "Duyệt bài → Gửi duyệt" → anh thấy ô **Chờ duyệt** ở Tổng quan → ghi chú
   "Cần sửa" hoặc Xuất bản. Lộ trình chuyên gia + vì sao không làm hoa hồng nhiều tầng: `docs/KE-HOACH-CHUYEN-GIA.md`.
+- [ ] TDG1. (2026-10-14) Sau khi PR "Tuổi làm nhà / hướng xấu năm / xông đất" merge: nếu Menu đầu trang đã sửa trong CMS thì thêm 3 menu con dưới "Khám phá": **/xem-tuoi-lam-nha**, **/huong-xau-nam**, **/tuoi-xong-dat**; gửi lại sitemap trong Search Console (thêm ~190 trang). Nếu nhà mình theo cách đếm Hoang ốc / Kim lâu khác (vd tính tuổi dương) thì báo em — đổi một hàm.
+- [ ] HL1. (2026-10-13) Sau khi PR "Xem ngày tốt" merge + Render deploy engine: nếu anh đã tự sửa **Menu đầu trang** trong CMS (Giao diện website → Menu đầu trang) thì thêm menu con **"Xem ngày tốt" → /xem-ngay-tot** dưới mục "Bản thân" (menu mặc định trong code đã có; menu CMS đã lưu thì thắng menu mặc định). Search Console → Sitemaps → gửi lại `sitemap.xml` (thêm 15 trang lịch tháng + 43 trang số kép).
 - [ ] CMS10. (2026-10-12) Sau khi PR "Giao diện website" merge + CMS Vercel redeploy (tự chạy migration): vào CMS → nhóm
   **Giao diện website** → *Điều hướng chân trang* (4 cột chân trang, mỗi link chọn Trang / Bài viết / Chuyên mục) và
   *Trang chủ & banner* (dải thông báo đầu trang, banner trang chủ, khối Bài viết mới + ghim bài, Bài viết liên quan).
   Bấm Lưu → hieuban.com đổi sau vài giây. Dải thông báo **không còn** ở /quan-tri/cai-dat (nếu anh từng đặt chữ ở đó thì đặt lại bên CMS; dòng cũ trong Supabase sẽ được xoá ở migration kế tiếp) (phân vai: `docs/KIEN-TRUC-CMS.md` mục 0).
-- [ ] SAO2. (2026-10-12) Cơ chế miễn phí ↔ Sao đã có code, **mặc định tắt**. Để bật (sau khi bật tài khoản mục F):
+- [x] SAO2. (anh báo xong bước 1–3 ngày 2026-10-13 — tài khoản đã bật, migration 0012 + 0013 đã chạy, khoá đã đặt) (2026-10-12) Cơ chế miễn phí ↔ Sao đã có code, **mặc định tắt**. Để bật (sau khi bật tài khoản mục F):
   1) Supabase SQL Editor chạy `supabase/migrations/0013_sao_2.sql` (sau 0012).
   2) Vercel web: `SUPABASE_SERVICE_ROLE_KEY` (đã cần cho payOS) + `SAO_KHOA_SECRET` (chuỗi ngẫu nhiên ≥ 32 ký tự,
      không dán vào chat) → Redeploy.

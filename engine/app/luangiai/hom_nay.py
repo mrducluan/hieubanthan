@@ -13,12 +13,15 @@ Kèm ngày phổ quát, 3 câu hỏi nổi bật xoay theo ngày, và số ngày
 from __future__ import annotations
 
 import datetime as dt
+import json
+from functools import lru_cache
+from pathlib import Path
 
-from app.calc import lunar, thanso, thanso_mo_rong as mr
+from app.calc import battu, kinhdich, kinhdich_maihoa as mh, lunar, thanso, thanso_mo_rong as mr
 from app.config import CALENDAR_MERIDIAN_TZ
 from app.hoidap import chung
-from app.kb import store, thanso_v2
-from app.luangiai import thanso_chaldean
+from app.kb import store, thanso_v2, trang
+from app.luangiai import hoang_lich as hl_luan, thanso_chaldean
 
 TOI_DA_Y_DINH = 3
 # Từ khoá (đã bỏ dấu, khớp nguyên từ) → ý định. Thứ tự khoá = thứ tự ưu tiên khi đồng điểm.
@@ -43,6 +46,28 @@ TU_KHOA_Y_DINH: dict[str, list[str]] = {
     "sang_tao": [r"viet", r"ve tranh", r"thiet ke", r"quay video", r"lam noi dung", r"chup anh", r"sang tac",
                  r"y tuong", r"lam nhac"],
 }
+
+# HN-4 — nhóm việc người Việt hay định làm mà CHƯA có ý định tương ứng. Câu gõ không nhận ra → chỉ trả MÃ nhóm khớp
+# (hoặc "khac"), để đếm nhu cầu (skill do-y-dinh). Không trả, không lưu câu. Từ khoá không trùng TU_KHOA_Y_DINH.
+NHOM_CHUA_HO_TRO: dict[str, list[str]] = {
+    "kham_benh": [r"kham benh", r"benh vien", r"di kham", r"nha khoa", r"kham rang", r"tiem phong", r"xet nghiem"],
+    "le_bai": [r"le chua", r"di chua", r"di le", r"cung bai", r"cau an", r"dang huong", r"ngay ram", r"mung mot"],
+    "cuoi_hoi": [r"dam cuoi", r"dam hoi", r"an hoi", r"dam ngo", r"cuoi vo", r"cuoi chong", r"cuoi xin"],
+    "tang_le": [r"dam ma", r"dam tang", r"di vieng", r"dam gio", r"an gio", r"tao mo", r"boc mo"],
+    "lam_dep": [r"cat toc", r"lam toc", r"nhuom toc", r"lam mong", r"trang diem", r"tham my"],
+    "nha_cua": [r"sua nha", r"xay nha", r"dong tho", r"nhap trach", r"don nha", r"don dep", r"son nha"],
+    "dau_tu": [r"dau tu", r"chung khoan", r"co phieu", r"mua vang", r"crypto", r"bat dong san"],
+    "ban_hang": [r"ban hang", r"chot don", r"livestream", r"giao hang", r"nhap hang"],
+    "viec_lam": [r"xin viec", r"nghi viec", r"thoi viec", r"tim viec", r"nhay viec", r"tang luong"],
+    "an_uong": [r"nau an", r"nau com", r"an tiec", r"lien hoan", r"an kieng"],
+}
+
+
+def nhom_chua_ho_tro(cau: str) -> list[str]:
+    """Câu gõ không khớp ý định nào → mã nhóm chưa hỗ trợ (tối đa 3) hoặc ["khac"]."""
+    t = chung.chuan_hoa(cau)
+    co = [m for m, kw in NHOM_CHUA_HO_TRO.items() if chung.dem(t, kw) > 0]
+    return co[:3] or ["khac"]
 
 
 def _ngay(so: int) -> dict:
@@ -73,6 +98,65 @@ def _y_dinh(so_ngay: int, cac_ma: list[str]) -> list[dict]:
     return kq
 
 
+# HL-2: ý định trong ngày ↔ việc trong sách lịch (chỉ những cặp khớp nghĩa rõ).
+Y_DINH_VIEC = {"bat_dau": "khai_truong", "di_chuyen": "xuat_hanh"}
+
+
+def _hoang_lich(ngay_xem: dt.date, ngay: int, thang: int, nam: int, cac_y_dinh: list[str]) -> dict:
+    h = hl_luan.ngay_xem(ngay_xem, nam, thang, ngay)
+    viec = []
+    for ma in dict.fromkeys(Y_DINH_VIEC[x] for x in cac_y_dinh if x in Y_DINH_VIEC):
+        v = hl_luan.ngay_xem(ngay_xem, nam, thang, ngay, viec=ma)["viec"]
+        viec.append({k: v[k] for k in ("ma_viec", "ten", "danh_gia", "ly_do", "ngay_tot_gan")})
+    return {
+        "truc": h["truc"]["ten"], "truc_y": h["truc"]["y"], "than": h["than"]["ten"], "hoang_dao": h["hoang_dao"],
+        "gio_hoang_dao": [{"chi": g["chi"], "khung": g["khung"], "than": g["than"]} for g in h["gio_hoang_dao"]],
+        "gio": h["gio"],
+        "xung_tuoi": h["xung_tuoi"]["ten"],
+        "tuoi": {"can_chi": h["tuoi"]["can_chi"], "quan_he": h["tuoi"]["quan_he"]} if h["tuoi"] else None,
+        "nghi": [x["ten"] for x in h["nghi"][:6]], "ky": [x["ten"] for x in h["ky"][:4]],
+        "ky_dan_gian": [x["ten"] for x in h["ky_dan_gian"]],
+        "ngay_tot_gan": h["ngay_tot_gan"], "viec": viec,
+    }
+
+
+def _que_ngay(ngay_xem: dt.date) -> dict:
+    """Quẻ Mai Hoa đầu ngày: khởi theo năm–tháng–ngày âm (lịch Việt) và giờ Tý — mọi người cùng một quẻ trong ngày."""
+    ad, am, ay, _ = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)
+    m = mh.khoi_que_thoi_gian(lunar.can_chi_nam(ay)[1], am, ad, "Tý")
+    q = kinhdich.khoi_que(m["gia_tri_hao"])
+    so = q["quai_ban"]["so_king_wen"]
+    kv = _kb_que().get(str(so), {})
+    bien = q["quai_bien"]
+    return {"so": so, "ten": q["quai_ban"]["ten"], "thuong": m["thuong"], "ha": m["ha"], "hao_dong": m["hao_dong"],
+            "bien": ({"so": bien["so_king_wen"], "ten": bien["ten"]} if bien else None),
+            "y_chinh": kv.get("y_chinh"), "loi_khuyen": kv.get("loi_khuyen"), "cau_tu_soi": kv.get("cau_tu_soi"),
+            "duong": f"/kien-thuc/kinh-dich/que-{so}-{trang._slug(kv['ten'])}" if kv.get("ten") else None,
+            "cach_khoi": "Mai Hoa Dịch Số: năm + tháng + ngày âm lịch → quẻ trên; cộng giờ Tý → quẻ dưới và hào động."}
+
+
+@lru_cache(maxsize=1)
+def _kb_battu() -> dict:
+    return json.loads((Path(__file__).parents[1] / "kb" / "data" / "battu_kb.json").read_text(encoding="utf-8"))
+
+
+def _nhip_bat_tu(ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict:
+    """Lưu nhật Bát tự: can ngày xem so với nhật chủ (can của ngày sinh, giờ Tý theo SWITCH_AT_0000 nên không cần
+    giờ sinh) → thập thần của ngày. Nghĩa + câu tự soi từ KB `battu_kb.thap_than`."""
+    nhat_chu = lunar.can_chi_ngay(dt.date(nam, thang, ngay))[0]
+    can, chi = lunar.can_chi_ngay(ngay_xem)
+    tt = battu.thap_than(nhat_chu, can)
+    m = _kb_battu()["thap_than"].get(tt, {})
+    return {"nhat_chu": nhat_chu, "can_chi_ngay": f"{can} {chi}", "thap_than": tt, "nhom": m.get("nhom"),
+            "y_nghia": m.get("y_nghia"), "tinh_cach": m.get("tinh_cach"), "cau_tu_soi": m.get("cau_tu_soi"),
+            "cach_tinh": f"Can ngày hôm nay ({can}) so với nhật chủ {nhat_chu} của bạn (can ngày sinh) theo ngũ hành và âm dương."}
+
+
+@lru_cache(maxsize=1)
+def _kb_que() -> dict:
+    return json.loads((Path(__file__).parents[1] / "kb" / "data" / "kinhdich_kb.json").read_text(encoding="utf-8"))["que"]
+
+
 def _cau_hoi_noi_bat(so_ngay: int, ngay_xem: dt.date) -> list[str]:
     kho = thanso_v2.cau_hoi_noi_bat(so_ngay)
     if not kho:
@@ -97,12 +181,16 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
 
     ho_tro = None
     nhan_dien: list[str] = []
+    nhan_ra: bool | None = None          # None = không gõ câu (hoặc câu khủng hoảng — không đo)
+    nhom_moi: list[str] = []
     if du_dinh and du_dinh.strip():
         loai = chung.dac_biet(chung.chuan_hoa(du_dinh))
         if loai == "an_toan":
             ho_tro = thanso_v2.mau("an_toan")
         elif loai is None:
             nhan_dien = nhan_dien_y_dinh(du_dinh)
+            nhan_ra = bool(nhan_dien)
+            nhom_moi = [] if nhan_ra else nhom_chua_ho_tro(du_dinh)
     cac_y_dinh = [] if ho_tro else _y_dinh(so_ngay, list(y_dinh or []) + nhan_dien)
     so_pq = mr.ngay_pho_quat(y, m, d)
     return {
@@ -121,11 +209,15 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
         "ngay_mai": {"ngay": mai.isoformat(), **_ngay(so_mai)},
         "y_dinh_hom_nay": cac_y_dinh,
         "y_dinh_nhan_dien": nhan_dien,
+        "nhan_ra": nhan_ra, "nhom_chua_ho_tro": nhom_moi,
         "ho_tro": ho_tro,
         "danh_sach_y_dinh": thanso_v2.y_dinh_hom_nay(),
         "cau_hoi_noi_bat": _cau_hoi_noi_bat(so_ngay, ngay_xem),
         "ngay_pho_quat": {"so": so_pq, "nghia": thanso_v2.ngay_pho_quat(so_pq)},
         "chaldea": thanso_chaldean.ngay_chaldea(ngay, d),
+        "hoang_lich": _hoang_lich(ngay_xem, ngay, thang, nam, [x["ma"] for x in cac_y_dinh] or list(y_dinh or [])),
+        "que_ngay": _que_ngay(ngay_xem),
+        "nhip_bat_tu": _nhip_bat_tu(ngay, thang, nam, ngay_xem),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],
         "luu_y": "Nhịp theo thần số học để tự soi — gợi chủ đề, không dự báo việc sẽ xảy ra.",
