@@ -1,7 +1,9 @@
 "use client";
 // HL-1 — "vòng 12 canh giờ": đồng hồ tròn, sáu giờ hoàng đạo sáng vàng, kim chỉ giờ hiện tại (giờ Việt Nam, chỉ khi
 // đang xem hôm nay). Chỉ vẽ dữ liệu engine trả (thần trực từng giờ) — không tự tính hoàng đạo.
-// Hiệu ứng (vòng sao xoay chậm, giờ hiện tại nhịp sáng) tắt khi người dùng chọn giảm chuyển động.
+// Hiệu ứng (vòng sao xoay chậm, 12 cung hiện lần lượt, tia quét quanh vòng, giờ hoàng đạo sáng luân phiên, kim chỉ
+// giờ hiện tại, rê chuột cung nổi lên) chỉ CSS và tắt khi người dùng chọn giảm chuyển động.
+// `tamGioHienTai`: lõi giữa ghi giờ đang đi (chi · thần · hoàng/hắc đạo) thay cho tiêu đề — dữ liệu vẫn của engine.
 import { useEffect, useId, useState } from "react";
 import type { GioNgay } from "@/lib/hoang-lich";
 
@@ -27,8 +29,8 @@ export function canhGioHienTai(d: Date = new Date()): number | null {
   return h === 23 ? null : Math.floor((h + 1) / 2);
 }
 
-export function VongGio({ gio, laHomNay, tieuDe, phuDe, className = "" }: {
-  gio: GioNgay[]; laHomNay: boolean; tieuDe: string; phuDe?: string; className?: string;
+export function VongGio({ gio, laHomNay, tieuDe, phuDe, tamGioHienTai = false, className = "" }: {
+  gio: GioNgay[]; laHomNay: boolean; tieuDe: string; phuDe?: string; tamGioHienTai?: boolean; className?: string;
 }) {
   const id = useId().replace(/:/g, "");
   const [bay, setBay] = useState<number | null>(null);
@@ -53,6 +55,10 @@ export function VongGio({ gio, laHomNay, tieuDe, phuDe, className = "" }: {
           <stop offset="0%" stopColor="rgb(250 222 150)" />
           <stop offset="100%" stopColor="rgb(var(--gold))" />
         </linearGradient>
+        <linearGradient id={`quet-${id}`} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="rgb(255 236 190)" stopOpacity="0" />
+          <stop offset="100%" stopColor="rgb(255 236 190)" stopOpacity="0.28" />
+        </linearGradient>
         <filter id={`sang-${id}`} x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="3" result="m" />
           <feMerge><feMergeNode in="m" /><feMergeNode in="SourceGraphic" /></feMerge>
@@ -67,11 +73,18 @@ export function VongGio({ gio, laHomNay, tieuDe, phuDe, className = "" }: {
           return <circle key={k} cx={x} cy={y} r={k % 3 === 0 ? 1.3 : 0.7} fill="rgb(var(--fg) / 0.55)" />;
         })}
       </g>
+      {/* tia quét: một quạt sáng mờ đi vòng quanh 12 cung */}
+      <g className="svg-tam tia-quet" aria-hidden>
+        <circle cx={TAM} cy={TAM} r={R_NGOAI} fill="none" stroke="none" />
+        <path d={`M${TAM} ${TAM} L${diem(-18, R_NGOAI).join(" ")} A${R_NGOAI} ${R_NGOAI} 0 0 1 ${diem(0, R_NGOAI).join(" ")}Z`} fill={`url(#quet-${id})`} />
+      </g>
       {gio.map((g, i) => {
         const [tx, ty] = diem(i * 30, (R_NGOAI + R_TRONG) / 2);
         const dang = bay === i;
+        const thuTuHd = gio.slice(0, i).filter((x) => x.hoang_dao).length;
         return (
-          <g key={g.chi}>
+          <g key={g.chi} className="svg-tam cung-hien" style={{ animationDelay: `${i * 0.06}s` }}>
+           <g className={`svg-tam nut-so ${g.hoang_dao ? "cung-lap" : ""}`} style={g.hoang_dao ? { animationDelay: `${1.5 + thuTuHd * 2}s` } : undefined}>
             <path d={cung(i)}
               fill={g.hoang_dao ? `url(#vang-${id})` : "rgb(var(--surface-2, var(--surface)) / 0.9)"}
               fillOpacity={g.hoang_dao ? 0.92 : 1}
@@ -82,6 +95,7 @@ export function VongGio({ gio, laHomNay, tieuDe, phuDe, className = "" }: {
             </path>
             <text x={tx} y={ty + 4} textAnchor="middle" fontSize="12.5" fontWeight={g.hoang_dao ? 700 : 600}
               fill={g.hoang_dao ? "rgb(28 22 10)" : "rgb(var(--fg))"} fillOpacity={g.hoang_dao ? 1 : 0.85}>{g.chi}</text>
+           </g>
           </g>
         );
       })}
@@ -95,9 +109,27 @@ export function VongGio({ gio, laHomNay, tieuDe, phuDe, className = "" }: {
         );
       })()}
       <circle cx={TAM} cy={TAM} r={R_TRONG - 4} fill="rgb(var(--bg) / 0.92)" stroke="rgb(var(--gold) / 0.35)" strokeWidth="0.8" />
-      <text x={TAM} y={TAM - 6} textAnchor="middle" fontSize="15" fontFamily="var(--font-display), Georgia, serif"
-        fill="rgb(var(--gold))">{tieuDe}</text>
-      {phuDe && <text x={TAM} y={TAM + 13} textAnchor="middle" fontSize="9" letterSpacing="1.5" fill="rgb(var(--fg-muted))">{phuDe}</text>}
+      <circle cx={TAM} cy={TAM} r={R_TRONG - 10} fill="none" stroke="rgb(var(--gold) / 0.18)" strokeWidth="0.6" strokeDasharray="1 3"
+        className="svg-tam quay-nguoc" aria-hidden />
+      {tamGioHienTai && bay !== null && gio[bay] ? (() => {
+        const g = gio[bay]!;
+        return (
+          <g data-testid="tam-gio-hien-tai">
+            <text x={TAM} y={TAM - 18} textAnchor="middle" fontSize="7.5" letterSpacing="1.4" fill="rgb(var(--fg-muted))">BÂY GIỜ</text>
+            <text x={TAM} y={TAM + 2} textAnchor="middle" fontSize="17" fontFamily="var(--font-display), Georgia, serif"
+              fill="rgb(var(--fg))">Giờ {g.chi}</text>
+            <text x={TAM} y={TAM + 15} textAnchor="middle" fontSize="8.5" fill="rgb(var(--gold))">{g.than}</text>
+            <text x={TAM} y={TAM + 28} textAnchor="middle" fontSize="7.5" letterSpacing="1.2" fontWeight={700}
+              fill={g.hoang_dao ? "rgb(var(--gold))" : "rgb(var(--moon))"}>{g.hoang_dao ? "HOÀNG ĐẠO" : "HẮC ĐẠO"}</text>
+          </g>
+        );
+      })() : (
+        <>
+          <text x={TAM} y={TAM - 6} textAnchor="middle" fontSize="15" fontFamily="var(--font-display), Georgia, serif"
+            fill="rgb(var(--gold))">{tieuDe}</text>
+          {phuDe && <text x={TAM} y={TAM + 13} textAnchor="middle" fontSize="9" letterSpacing="1.5" fill="rgb(var(--fg-muted))">{phuDe}</text>}
+        </>
+      )}
     </svg>
   );
 }

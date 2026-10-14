@@ -349,3 +349,26 @@ flowchart LR
 9. Đồng bộ sổ trang **1 lần/ngày** (giới hạn cron Vercel Hobby) + nút "Đồng bộ ngay" là đủ?
 10. Sửa trực quan trên trang (Live Preview, phương án 3) **để sau** ND-6, chỉ làm khi xem trước bằng link chưa đủ?
 11. Làm theo thứ tự ND-0 → ND-1 → ND-2 trước (chân trang + 7 trang công cụ), các pha sau theo số GSC?
+
+---
+
+## 8. Quyết định của anh (2026-10-13) — bản điều chỉnh đã duyệt
+
+Anh duyệt **phương án 2 theo bản điều chỉnh** sau (thay các điểm khác ở mục 3–4 nếu mâu thuẫn):
+
+1. **Không tạo sẵn ~600 tài liệu cho trang kiến thức.** `noi-dung-trang` chỉ đồng bộ tự động các URL nhóm A, B,
+   pháp lý và 15 trang chủ đề (≈ 40 URL). Trang KB (nhóm C) dùng **mẫu cụm** (`mau-cum`, ≈ 18 mẫu); muốn chỉnh riêng
+   một URL thì tạo **ghi đè theo yêu cầu** (tài liệu `noi-dung-trang` với `nhom = kien_thuc`, `duong` kiểm thuộc một
+   cụm có thật).
+2. **Cầu nối CMS ↔ Kho tri thức:** mỗi mẫu cụm / ghi đè trang KB hiện **xem trước chỉ đọc** phần chữ KB của trang
+   (lấy từ engine `/v1/kb/trang/{loai}/{slug}`) và nút **"Sửa nội dung này trong Kho tri thức"** mở
+   `https://hieuban.com/quan-tri/tri-thuc/<tệp>` (cần token GitHub Q5). KB vẫn là git; CMS không lưu chữ KB.
+3. **Pháp lý — hai loại sửa:** mỗi lần lưu chọn `loai_sua` = `sua_chu` (chính tả/định dạng, giữ `ngay_hieu_luc`) hoặc
+   `thay_doi_noi_dung` (bắt buộc `ngay_hieu_luc` mới > ngày cũ, giữ phiên bản cũ để xem lại). Chỉ Quản trị/Chủ biên
+   sửa và xuất bản. Thông báo người dùng khi đổi nội dung chính sách: hỏi luật sư (mục E VIEC-CUA-ANH).
+4. **Cỡ chữ** = lựa chọn có sẵn (cỡ, căn, nền nhấn) + định dạng trong trình soạn; không CSS/px tự do.
+5. **Chữ nhỏ trong công cụ** (nút, thông báo lỗi): để sau ND-5, dạng bảng khoá → chữ có giới hạn độ dài.
+6. **Thứ tự:** ND-0 gọn + ND-1 chân trang → ND-2 bảy trang công cụ → ND-4 pháp lý → ND-3 trang tĩnh → ND-5 mẫu cụm.
+   Video nhúng dạng "ảnh trước, bấm mới tải" để không làm chậm trang công cụ.
+7. Câu 3, 4, 7, 9, 10 mục 7: theo đề xuất (115/113/111 và © giữ code; thông tin đơn vị giữ env; hồ sơ tác giả giữ
+   code; đồng bộ 1 lần/ngày + nút "Đồng bộ ngay"; Live Preview để sau).

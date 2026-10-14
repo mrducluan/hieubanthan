@@ -18,7 +18,7 @@ export const CONG_CU = [
   { label: "Phong thuỷ", value: "phong_thuy" },
 ];
 
-const KHOI: Block[] = [
+export const KHOI: Block[] = [
   {
     slug: "dau_trang", labels: { singular: "Đầu trang (hero)", plural: "Đầu trang" },
     fields: [

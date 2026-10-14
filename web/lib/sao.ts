@@ -8,7 +8,7 @@ export interface DongSao { id: number; so_luong: number; loai: string; ghi_chu: 
 export type KetQuaThuong = "da_thuong" | "da_nhan" | "tu_moi" | "khong_hop_le" | "tai_khoan_cu" | "chua_luu_ho_so";
 
 export const TEN_LOAI: Record<string, string> = {
-  chao_mung: "Chào mừng", moi_ban: "Mời bạn", duoc_moi: "Nhận lời mời", dung: "Đã dùng", mua: "Mua", dieu_chinh: "Điều chỉnh",
+  chao_mung: "Chào mừng", moi_ban: "Mời bạn", duoc_moi: "Nhận lời mời", dung: "Đã dùng", mua: "Mua", dieu_chinh: "Điều chỉnh", nhiem_vu: "Nhiệm vụ",
 };
 
 async function sb() {

@@ -16,6 +16,9 @@ import { BienTapVien } from "./collections/BienTapVien";
 import { ChuyenMuc } from "./collections/ChuyenMuc";
 import { Media } from "./collections/Media";
 import { TacGia } from "./collections/TacGia";
+import { MauCum } from "./collections/MauCum";
+import { NoiDungTrang } from "./collections/NoiDungTrang";
+import { DongBoSoTrangTask } from "./jobs/dong-bo-so-trang";
 import { DieuHuong } from "./globals/DieuHuong";
 import { MenuDauTrang } from "./globals/MenuDauTrang";
 import { TinhNang } from "./globals/TinhNang";
@@ -66,7 +69,7 @@ export default buildConfig({
     routes: { unauthorized: "/xac-thuc-2-buoc" },
   },
   i18n: { supportedLanguages: { vi, en }, fallbackLanguage: "vi" },
-  collections: [BaiViet, ChuyenMuc, TacGia, Media, TrangDich, BienTapVien],
+  collections: [BaiViet, ChuyenMuc, TacGia, Media, TrangDich, NoiDungTrang, MauCum, BienTapVien],
   globals: [TrangChu, MenuDauTrang, DieuHuong, TinhNang],
   editor: lexicalEditor(),
   db: postgresAdapter({
@@ -84,8 +87,9 @@ export default buildConfig({
   upload: { limits: { fileSize: 5_000_000 } },
   cors: [webUrl()],
   csrf: [cmsUrl, webUrl()],
-  // Lịch xuất bản: Vercel Cron gọi /api/payload-jobs/run với Authorization: Bearer CRON_SECRET.
+  // Lịch xuất bản + ND-0 đồng bộ sổ trang: Vercel Cron gọi /api/payload-jobs/run với Authorization: Bearer CRON_SECRET.
   jobs: {
+    tasks: [DongBoSoTrangTask],
     access: {
       run: ({ req }) => {
         if (req.user) return true;

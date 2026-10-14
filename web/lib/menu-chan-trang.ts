@@ -22,3 +22,14 @@ export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
   ] },
 ];
 
+
+// ND-1 — chữ chân trang mặc định (CMS trống / lỗi / chậm). Phải trùng CHAN_TRANG_MAC_DINH trong
+// cms/src/globals/DieuHuong.ts — e2e/so-lieu-ngoai.spec.ts kiểm. 115/113/111, dòng ©, thông tin đơn vị giữ trong ChanTrang.
+export const GIOI_THIEU_CHAN_TRANG = "Năm hệ thống văn hoá — thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ — trong một hồ sơ. Cách tính minh bạch, nguồn rõ ràng, để tự soi chứ không để phán.";
+export const CAM_KET_CHAN_TRANG = [
+  { chu: "Hồ sơ mặc định chỉ lưu trên máy bạn", bieu_tuong: "khien" },
+  { chu: "Lá số tính trên hệ thống riêng; họ tên, ngày sinh không chuyển cho bên thứ ba", bieu_tuong: "may_chu" },
+  { chu: "Không bán dữ liệu, không quảng cáo nhắm mục tiêu", bieu_tuong: "lap_lanh" },
+] as const;
+export const MIEN_TRU_CHAN_TRANG = "Nội dung biên soạn từ thư tịch văn hoá cổ điển, để tham khảo và tự suy ngẫm, không phải dự báo. Nội dung không thay thế ý kiến chuyên môn về y tế, tâm lý, pháp lý, tài chính. Nội dung do Ban biên tập Hiểu Bản Thân biên soạn từ cổ thư và tài liệu tham khảo, chủ biên Đức Luân chịu trách nhiệm.";
+export const NHAN_UNG_HO_CHAN_TRANG = "Ủng hộ đội ngũ phát triển";

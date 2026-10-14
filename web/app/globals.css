@@ -125,6 +125,27 @@
   }
   /* UX-2: nét chòm sao tự vẽ (path cần pathLength="1"). */
   .net-ve { stroke-dasharray: 1; animation: net-ve 2.4s cubic-bezier(0.22, 1, 0.36, 1) both 0.2s; }
+  /* UI-HERO: chuyển động cho hình trang trí SVG (bầu trời số, vòng 12 canh giờ). Chỉ transform/opacity → chạy GPU.
+     Mọi lớp ở đây tự tắt khi người dùng chọn giảm chuyển động (luật reduced-motion cuối tệp). */
+  .svg-tam { transform-box: fill-box; transform-origin: center; }
+  /* Bọc trong no-preference: khi giảm chuyển động, KHÔNG có lớp nào để opacity 0 → hình tĩnh hiện đủ số/cung. */
+  @media (prefers-reduced-motion: no-preference) {
+    .quay-cham { animation: spin-slow 90s linear infinite; }
+    .quay-nguoc { animation: spin-slow 140s linear infinite reverse; }
+    .quy-dao { animation: spin-slow 14s linear infinite; }
+    .tho-trang { animation: tho-trang 6s ease-in-out infinite; }
+    .so-hien { animation: so-hien 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .so-luot { animation: so-luot 9s ease-in-out infinite; }
+    .dong-chay { animation: dong-chay 7s linear infinite; }
+    .cung-hien { animation: cung-hien 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .cung-lap { animation: cung-lap 12s ease-in-out infinite; }
+    .tia-quet { animation: spin-slow 12s linear infinite; }
+  }
+  .dong-chay { stroke-dasharray: 0.05 0.95; }
+  @media (hover: hover) {
+    .nut-so { transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), filter 260ms; }
+    .nut-so:hover { transform: scale(1.14); filter: drop-shadow(0 0 8px rgb(var(--gold) / 0.8)); }
+  }
   /* UX-2: đường viền sáng mảnh dưới thanh trên — chất "công nghệ" nhẹ, không thêm khối. */
   .vach-sang { position: relative; }
   .vach-sang::after {
@@ -173,6 +194,12 @@
 @keyframes hien-dan { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @keyframes tho-sang { 50% { box-shadow: 0 0 0 1px rgb(var(--gold) / 0.7), 0 0 34px -2px rgb(var(--gold) / 0.7); } }
 @keyframes net-ve { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes tho-trang { 50% { transform: scale(1.12); opacity: 0.75; } }
+@keyframes so-hien { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+@keyframes so-luot { 0%, 11%, 100% { opacity: 0; } 4% { opacity: 1; } }
+@keyframes dong-chay { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes cung-hien { from { opacity: 0; transform: scale(0.82) rotate(-12deg); } to { opacity: 1; transform: none; } }
+@keyframes cung-lap { 0%, 8%, 100% { opacity: 1; } 4% { opacity: 0.55; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

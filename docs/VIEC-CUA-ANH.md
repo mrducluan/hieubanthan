@@ -393,6 +393,12 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
      không dán vào chat) → Redeploy.
   3) /quan-tri/cai-dat → nhóm "Luận giải toàn bộ" bật thu Sao; nhóm "Hỏi đáp" bật giới hạn khi chi phí AI tăng.
   4) Xem tiền + người nạp ở /quan-tri/doanh-thu. Quy tắc + lộ trình: `docs/KE-HOACH-MIEN-PHI-VA-SAO.md`.
+- [ ] SAO3. (2026-10-14) **Nhiệm vụ kiếm Sao** (Lưu hồ sơ · Hỏi 3 câu · Mời 1 bạn → nhận Sao) đã có code, **mặc định tắt**:
+  1) Supabase SQL Editor chạy `supabase/migrations/0014_nhiem_vu.sql` (sau 0013). Kiểm: `supabase/kiem_thu/da_chay_chua.sql`.
+  2) Không cần khoá mới — dùng `SUPABASE_SERVICE_ROLE_KEY` đã đặt (để đếm câu hỏi của người đã đăng nhập).
+  3) /quan-tri/cai-dat → nhóm "Nhiệm vụ kiếm Sao": xem mức (mặc định 5/5/5 Sao — cộng THÊM ngoài 10 Sao chào mừng và
+     20+20 Sao mời) rồi bật "Thưởng Sao cho nhiệm vụ". Chưa bật: người đã đăng nhập vẫn thấy tiến độ, khách không thấy hộp.
+  4) Câu hỏi chỉ được đếm từ lúc chạy 0014 (trước đó không có bộ đếm theo tài khoản).
 - [ ] CMS11. (2026-10-12, CMS-2) Vercel project **cms** thêm `ENGINE_URL` + `ENGINE_API_KEY` (giống bên web) → Redeploy →
   khung **Trợ lý AI soạn nháp** ở cột phải trang viết bài chạy được (cần `OPENROUTER_API_KEY` trên Render).
 - [ ] CMS12. (2026-10-12, CMS-2) Bật **xác thực 2 bước** cho chính anh: đăng xuất CMS → mở
@@ -415,6 +421,15 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
   5) **Trang đích → Tạo mới**: thêm khối Đầu trang, Thẻ công cụ, Danh sách bài viết, Hỏi đáp, Lời mời → Xuất bản →
      `hieuban.com/su-kien/{slug}`.
   Thấy chỗ nào lỗi: chụp màn hình gửi em. Em đã chạy đúng 5 bước này trên bản sao cục bộ (ảnh trong báo cáo QC).
+- [ ] CMS15. (2026-10-13, ND-0/ND-1 — sửa nội dung từng trang) Sau khi PR merge, CMS redeploy tự chạy migration
+  `noi_dung_trang`. Không cần biến mới (dùng `WEB_URL` + `CMS_WEBHOOK_SECRET` + `ENGINE_URL` đã có). Thử ~5 phút:
+  1) CMS → **Giao diện website → Trang website** → bấm **"Đồng bộ ngay"** → danh sách hiện ~39 trang (công cụ, trang
+     tĩnh, pháp lý, chủ đề) + **Mẫu cụm trang** (16 mẫu cho trang kiến thức). Lần sau tự đồng bộ mỗi ngày 08:00.
+  2) **Điều hướng chân trang** → nhóm *Khối thương hiệu*: sửa lời giới thiệu / 3 cam kết / lời miễn trừ → Lưu →
+     hieuban.com đổi sau vài giây; để trống = chữ cũ. Cuối trang có danh sách **"Sửa nội dung các trang trong chân trang"**.
+  3) Mở một *Mẫu cụm trang* (vd sao ở cung) → xem trước chữ kho tri thức + nút **"Sửa nội dung này trong Kho tri thức"**
+     (cần Q5 token GitHub để sửa được).
+  Trang công cụ/trang tĩnh **chưa** đọc chữ từ CMS (pha ND-2, ND-3 làm tiếp) — sửa ở đó bây giờ chưa hiện lên web.
 - [ ] CMS9. Ảnh/video: giữ **Supabase Storage** bây giờ, video đăng YouTube rồi chèn khối "Video YouTube"; chuyển R2
   khi vượt ~50 GB ảnh hoặc ~200 GB băng thông/tháng (`docs/LUU-TRU-MEDIA.md`).
 - [ ] CG-a. Chốt **không làm hoa hồng nhiều tầng** (đa cấp dịch vụ bị cấm; Điều 217a BLHS) — thay bằng lộ trình chuyên

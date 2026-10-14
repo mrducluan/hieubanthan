@@ -72,6 +72,8 @@ export interface Config {
     'tac-gia': TacGia;
     media: Media;
     'trang-dich': TrangDich;
+    'noi-dung-trang': NoiDungTrang;
+    'mau-cum': MauCum;
     'bien-tap-vien': BienTapVien;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
@@ -86,6 +88,8 @@ export interface Config {
     'tac-gia': TacGiaSelect<false> | TacGiaSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'trang-dich': TrangDichSelect<false> | TrangDichSelect<true>;
+    'noi-dung-trang': NoiDungTrangSelect<false> | NoiDungTrangSelect<true>;
+    'mau-cum': MauCumSelect<false> | MauCumSelect<true>;
     'bien-tap-vien': BienTapVienSelect<false> | BienTapVienSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
@@ -102,12 +106,14 @@ export interface Config {
     'menu-dau-trang': MenuDauTrang;
     'dieu-huong': DieuHuong;
     'tinh-nang': TinhNang;
+    'payload-jobs-stats': PayloadJobsStat;
   };
   globalsSelect: {
     'trang-chu': TrangChuSelect<false> | TrangChuSelect<true>;
     'menu-dau-trang': MenuDauTrangSelect<false> | MenuDauTrangSelect<true>;
     'dieu-huong': DieuHuongSelect<false> | DieuHuongSelect<true>;
     'tinh-nang': TinhNangSelect<false> | TinhNangSelect<true>;
+    'payload-jobs-stats': PayloadJobsStatsSelect<false> | PayloadJobsStatsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -116,6 +122,7 @@ export interface Config {
   user: BienTapVien;
   jobs: {
     tasks: {
+      'dong-bo-so-trang': TaskDongBoSoTrang;
       schedulePublish: TaskSchedulePublish;
       inline: {
         input: unknown;
@@ -514,6 +521,748 @@ export interface TrangDich {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Mỗi URL của hieuban.com là một dòng (tự đồng bộ). Ô để trống = web hiện chữ đang có trong code. Trang kiến thức: dùng "Mẫu cụm trang", hoặc tạo ghi đè cho một URL.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "noi-dung-trang".
+ */
+export interface NoiDungTrang {
+  id: number;
+  /**
+   * Do đồng bộ tạo. Chỉ nhập tay khi tạo ghi đè cho một trang kiến thức (vd /kien-thuc/sao-cung/tu-vi-cung-menh).
+   */
+  duong: string;
+  ten?: string | null;
+  nhom?: ('cong_cu' | 'tinh' | 'phap_ly' | 'chu_de' | 'kien_thuc' | 'tuoi' | 'la_so_mau' | 'blog_khung') | null;
+  mau?: (number | null) | MauCum;
+  /**
+   * Bỏ dấu = URL đã gỡ khỏi web (không tự xoá tài liệu).
+   */
+  tren_web?: boolean | null;
+  o?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * ≤ 70 ký tự (kể cả hậu tố thương hiệu). Để trống = tiêu đề trong code.
+   */
+  tieu_de_seo?: string | null;
+  /**
+   * ≤ 160 ký tự. Để trống = mô tả trong code.
+   */
+  mo_ta_seo?: string | null;
+  anh_chia_se?: (number | null) | Media;
+  h1?: string | null;
+  loi_dan?: string | null;
+  /**
+   * Chọn trong bộ có sẵn (theo hệ thiết kế, đúng cả hai giao diện Đêm sao / Giấy cổ).
+   */
+  kieu_chu?: {
+    co?: ('nho' | 'thuong' | 'lon' | 'rat_lon') | null;
+    can?: ('trai' | 'giua') | null;
+    nen?: ('khong' | 'nhan' | 'vang' | 'ngoc') | null;
+  };
+  doan?:
+    | {
+        chu: string;
+        id?: string | null;
+      }[]
+    | null;
+  hoi_dap?:
+    | {
+        cau_hoi: string;
+        tra_loi: string;
+        id?: string | null;
+      }[]
+    | null;
+  lien_ket?:
+    | {
+        nhan: string;
+        loai?: ('duong_dan' | 'bai' | 'chuyen_muc') | null;
+        duong_dan?: string | null;
+        bai?: (number | null) | BaiViet;
+        chuyen_muc?: (number | null) | ChuyenMuc;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Sửa chữ = chính tả, định dạng (giữ ngày hiệu lực). Thay đổi nội dung = bắt buộc ngày hiệu lực mới.
+   */
+  loai_sua?: ('sua_chu' | 'thay_doi_noi_dung') | null;
+  ngay_hieu_luc?: string | null;
+  muc?:
+    | {
+        neo: string;
+        tieu_de: string;
+        noi_dung?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        noi_dung_html?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  khoi_tren?:
+    | (
+        | {
+            nhan?: string | null;
+            tieu_de: string;
+            mo_ta?: string | null;
+            anh?: (number | null) | Media;
+            nut_chu?: string | null;
+            nut_link?: string | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            /**
+             * Chọn trong bộ có sẵn (theo hệ thiết kế, đúng cả hai giao diện Đêm sao / Giấy cổ).
+             */
+            kieu_chu?: {
+              co?: ('nho' | 'thuong' | 'lon' | 'rat_lon') | null;
+              can?: ('trai' | 'giua') | null;
+              nen?: ('khong' | 'nhan' | 'vang' | 'ngoc') | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'banner';
+          }
+        | {
+            chu: string;
+            link: string;
+            kieu?: ('chinh' | 'phu') | null;
+            /**
+             * Chữ thường, số, gạch dưới (vd moi_ban_tet). Để so số bấm theo trang.
+             */
+            ma_do?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'nut_moi';
+          }
+        | KhoiGhiChu
+        | KhoiKeuGoi
+        | KhoiTrichDan
+        | KhoiVideo
+        | {
+            tieu_de?: string | null;
+            ds: ('than_so' | 'hom_nay' | 'hop_doi' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy')[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cong_cu';
+          }
+        | {
+            tieu_de?: string | null;
+            bai?: (number | BaiViet)[] | null;
+            mang?: ('tat_ca' | 'than_so' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy' | 'chung') | null;
+            so_bai?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'bai_viet';
+          }
+        | {
+            tieu_de?: string | null;
+            ds?:
+              | {
+                  cau_hoi: string;
+                  tra_loi: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoi_dap';
+          }
+        | {
+            tieu_de: string;
+            mo_ta?: string | null;
+            nut_chu?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'loi_moi';
+          }
+        | {
+            tieu_de?: string | null;
+            noi_dung: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'van_ban';
+          }
+      )[]
+    | null;
+  khoi_duoi?:
+    | (
+        | {
+            nhan?: string | null;
+            tieu_de: string;
+            mo_ta?: string | null;
+            anh?: (number | null) | Media;
+            nut_chu?: string | null;
+            nut_link?: string | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            /**
+             * Chọn trong bộ có sẵn (theo hệ thiết kế, đúng cả hai giao diện Đêm sao / Giấy cổ).
+             */
+            kieu_chu?: {
+              co?: ('nho' | 'thuong' | 'lon' | 'rat_lon') | null;
+              can?: ('trai' | 'giua') | null;
+              nen?: ('khong' | 'nhan' | 'vang' | 'ngoc') | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'banner';
+          }
+        | {
+            chu: string;
+            link: string;
+            kieu?: ('chinh' | 'phu') | null;
+            /**
+             * Chữ thường, số, gạch dưới (vd moi_ban_tet). Để so số bấm theo trang.
+             */
+            ma_do?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'nut_moi';
+          }
+        | KhoiGhiChu
+        | KhoiKeuGoi
+        | KhoiTrichDan
+        | KhoiVideo
+        | {
+            tieu_de?: string | null;
+            ds: ('than_so' | 'hom_nay' | 'hop_doi' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy')[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cong_cu';
+          }
+        | {
+            tieu_de?: string | null;
+            bai?: (number | BaiViet)[] | null;
+            mang?: ('tat_ca' | 'than_so' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy' | 'chung') | null;
+            so_bai?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'bai_viet';
+          }
+        | {
+            tieu_de?: string | null;
+            ds?:
+              | {
+                  cau_hoi: string;
+                  tra_loi: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoi_dap';
+          }
+        | {
+            tieu_de: string;
+            mo_ta?: string | null;
+            nut_chu?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'loi_moi';
+          }
+        | {
+            tieu_de?: string | null;
+            noi_dung: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'van_ban';
+          }
+      )[]
+    | null;
+  khoi_cuoi?:
+    | (
+        | {
+            nhan?: string | null;
+            tieu_de: string;
+            mo_ta?: string | null;
+            anh?: (number | null) | Media;
+            nut_chu?: string | null;
+            nut_link?: string | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            /**
+             * Chọn trong bộ có sẵn (theo hệ thiết kế, đúng cả hai giao diện Đêm sao / Giấy cổ).
+             */
+            kieu_chu?: {
+              co?: ('nho' | 'thuong' | 'lon' | 'rat_lon') | null;
+              can?: ('trai' | 'giua') | null;
+              nen?: ('khong' | 'nhan' | 'vang' | 'ngoc') | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'banner';
+          }
+        | {
+            chu: string;
+            link: string;
+            kieu?: ('chinh' | 'phu') | null;
+            /**
+             * Chữ thường, số, gạch dưới (vd moi_ban_tet). Để so số bấm theo trang.
+             */
+            ma_do?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'nut_moi';
+          }
+        | KhoiGhiChu
+        | KhoiKeuGoi
+        | KhoiTrichDan
+        | KhoiVideo
+        | {
+            tieu_de?: string | null;
+            ds: ('than_so' | 'hom_nay' | 'hop_doi' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy')[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cong_cu';
+          }
+        | {
+            tieu_de?: string | null;
+            bai?: (number | BaiViet)[] | null;
+            mang?: ('tat_ca' | 'than_so' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy' | 'chung') | null;
+            so_bai?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'bai_viet';
+          }
+        | {
+            tieu_de?: string | null;
+            ds?:
+              | {
+                  cau_hoi: string;
+                  tra_loi: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoi_dap';
+          }
+        | {
+            tieu_de: string;
+            mo_ta?: string | null;
+            nut_chu?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'loi_moi';
+          }
+        | {
+            tieu_de?: string | null;
+            noi_dung: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'van_ban';
+          }
+      )[]
+    | null;
+  /**
+   * Khối của mẫu cụm và khối riêng của trang này kết hợp thế nào (từng vị trí).
+   */
+  che_do_mau?: {
+    tren?: ('thay' | 'them_sau' | 'an_mau') | null;
+    duoi?: ('thay' | 'them_sau' | 'an_mau') | null;
+    cuoi?: ('thay' | 'them_sau' | 'an_mau') | null;
+  };
+  mac_dinh?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * ⛔ = chặn xuất bản · ⚠ = nên xem lại.
+   */
+  ghi_chu_kiem_dinh?: string | null;
+  nguoi_sua?: (number | null) | BienTapVien;
+  ghi_chu_noi_bo?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Khối đặt quanh nội dung kiến thức cho CẢ CỤM trang (vd 168 trang "sao ở cung"). Chữ kiến thức sửa ở Kho tri thức (git).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mau-cum".
+ */
+export interface MauCum {
+  id: number;
+  mau_duong: string;
+  ten?: string | null;
+  nhom?: ('cong_cu' | 'tinh' | 'phap_ly' | 'chu_de' | 'kien_thuc' | 'tuoi' | 'la_so_mau' | 'blog_khung') | null;
+  tren_web?: boolean | null;
+  /**
+   * Gõ {ten_bien} trong chữ khối, web thay bằng giá trị của từng trang. Biến lạ giữ nguyên chữ.
+   */
+  bien?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  o?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  nguon_kb?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  khoi_tren?:
+    | (
+        | {
+            nhan?: string | null;
+            tieu_de: string;
+            mo_ta?: string | null;
+            anh?: (number | null) | Media;
+            nut_chu?: string | null;
+            nut_link?: string | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            /**
+             * Chọn trong bộ có sẵn (theo hệ thiết kế, đúng cả hai giao diện Đêm sao / Giấy cổ).
+             */
+            kieu_chu?: {
+              co?: ('nho' | 'thuong' | 'lon' | 'rat_lon') | null;
+              can?: ('trai' | 'giua') | null;
+              nen?: ('khong' | 'nhan' | 'vang' | 'ngoc') | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'banner';
+          }
+        | {
+            chu: string;
+            link: string;
+            kieu?: ('chinh' | 'phu') | null;
+            /**
+             * Chữ thường, số, gạch dưới (vd moi_ban_tet). Để so số bấm theo trang.
+             */
+            ma_do?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'nut_moi';
+          }
+        | KhoiGhiChu
+        | KhoiKeuGoi
+        | KhoiTrichDan
+        | KhoiVideo
+        | {
+            tieu_de?: string | null;
+            ds: ('than_so' | 'hom_nay' | 'hop_doi' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy')[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cong_cu';
+          }
+        | {
+            tieu_de?: string | null;
+            bai?: (number | BaiViet)[] | null;
+            mang?: ('tat_ca' | 'than_so' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy' | 'chung') | null;
+            so_bai?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'bai_viet';
+          }
+        | {
+            tieu_de?: string | null;
+            ds?:
+              | {
+                  cau_hoi: string;
+                  tra_loi: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoi_dap';
+          }
+        | {
+            tieu_de: string;
+            mo_ta?: string | null;
+            nut_chu?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'loi_moi';
+          }
+        | {
+            tieu_de?: string | null;
+            noi_dung: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'van_ban';
+          }
+      )[]
+    | null;
+  khoi_duoi?:
+    | (
+        | {
+            nhan?: string | null;
+            tieu_de: string;
+            mo_ta?: string | null;
+            anh?: (number | null) | Media;
+            nut_chu?: string | null;
+            nut_link?: string | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            /**
+             * Chọn trong bộ có sẵn (theo hệ thiết kế, đúng cả hai giao diện Đêm sao / Giấy cổ).
+             */
+            kieu_chu?: {
+              co?: ('nho' | 'thuong' | 'lon' | 'rat_lon') | null;
+              can?: ('trai' | 'giua') | null;
+              nen?: ('khong' | 'nhan' | 'vang' | 'ngoc') | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'banner';
+          }
+        | {
+            chu: string;
+            link: string;
+            kieu?: ('chinh' | 'phu') | null;
+            /**
+             * Chữ thường, số, gạch dưới (vd moi_ban_tet). Để so số bấm theo trang.
+             */
+            ma_do?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'nut_moi';
+          }
+        | KhoiGhiChu
+        | KhoiKeuGoi
+        | KhoiTrichDan
+        | KhoiVideo
+        | {
+            tieu_de?: string | null;
+            ds: ('than_so' | 'hom_nay' | 'hop_doi' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy')[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cong_cu';
+          }
+        | {
+            tieu_de?: string | null;
+            bai?: (number | BaiViet)[] | null;
+            mang?: ('tat_ca' | 'than_so' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy' | 'chung') | null;
+            so_bai?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'bai_viet';
+          }
+        | {
+            tieu_de?: string | null;
+            ds?:
+              | {
+                  cau_hoi: string;
+                  tra_loi: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoi_dap';
+          }
+        | {
+            tieu_de: string;
+            mo_ta?: string | null;
+            nut_chu?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'loi_moi';
+          }
+        | {
+            tieu_de?: string | null;
+            noi_dung: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'van_ban';
+          }
+      )[]
+    | null;
+  khoi_cuoi?:
+    | (
+        | {
+            nhan?: string | null;
+            tieu_de: string;
+            mo_ta?: string | null;
+            anh?: (number | null) | Media;
+            nut_chu?: string | null;
+            nut_link?: string | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            /**
+             * Chọn trong bộ có sẵn (theo hệ thiết kế, đúng cả hai giao diện Đêm sao / Giấy cổ).
+             */
+            kieu_chu?: {
+              co?: ('nho' | 'thuong' | 'lon' | 'rat_lon') | null;
+              can?: ('trai' | 'giua') | null;
+              nen?: ('khong' | 'nhan' | 'vang' | 'ngoc') | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'banner';
+          }
+        | {
+            chu: string;
+            link: string;
+            kieu?: ('chinh' | 'phu') | null;
+            /**
+             * Chữ thường, số, gạch dưới (vd moi_ban_tet). Để so số bấm theo trang.
+             */
+            ma_do?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'nut_moi';
+          }
+        | KhoiGhiChu
+        | KhoiKeuGoi
+        | KhoiTrichDan
+        | KhoiVideo
+        | {
+            tieu_de?: string | null;
+            ds: ('than_so' | 'hom_nay' | 'hop_doi' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy')[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cong_cu';
+          }
+        | {
+            tieu_de?: string | null;
+            bai?: (number | BaiViet)[] | null;
+            mang?: ('tat_ca' | 'than_so' | 'tu_vi' | 'bat_tu' | 'kinh_dich' | 'phong_thuy' | 'chung') | null;
+            so_bai?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'bai_viet';
+          }
+        | {
+            tieu_de?: string | null;
+            ds?:
+              | {
+                  cau_hoi: string;
+                  tra_loi: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoi_dap';
+          }
+        | {
+            tieu_de: string;
+            mo_ta?: string | null;
+            nut_chu?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'loi_moi';
+          }
+        | {
+            tieu_de?: string | null;
+            noi_dung: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'van_ban';
+          }
+      )[]
+    | null;
+  /**
+   * ⛔ = chặn xuất bản · ⚠ = nên xem lại.
+   */
+  ghi_chu_kiem_dinh?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KhoiGhiChu".
+ */
+export interface KhoiGhiChu {
+  kieu: 'luu_y' | 'meo' | 'tu_soi' | 'tom_tat';
+  tieu_de?: string | null;
+  noi_dung: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ghi_chu';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KhoiKeuGoi".
+ */
+export interface KhoiKeuGoi {
+  cong_cu: '/than-so' | '/hom-nay' | '/hop-doi' | '/tu-vi' | '/bat-tu' | '/kinh-dich' | '/phong-thuy';
+  /**
+   * Vd "Xem số chủ đạo của bạn — miễn phí, có từng bước tính".
+   */
+  loi_moi: string;
+  nut?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'keu_goi';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KhoiTrichDan".
+ */
+export interface KhoiTrichDan {
+  cau: string;
+  nguon: string;
+  dich_nghia?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'trich_dan';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KhoiVideo".
+ */
+export interface KhoiVideo {
+  /**
+   * Dán link video (youtube.com/watch?v=…, youtu.be/…, Shorts). Phát qua chế độ ít cookie.
+   */
+  url: string;
+  /**
+   * Mô tả video là gì — người dùng trình đọc màn hình và Google đọc dòng này.
+   */
+  tieu_de: string;
+  chu_thich?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'video';
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -582,7 +1331,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug: 'inline' | 'schedulePublish';
+        taskSlug: 'inline' | 'dong-bo-so-trang' | 'schedulePublish';
         taskID: string;
         input?:
           | {
@@ -615,10 +1364,19 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  taskSlug?: ('inline' | 'schedulePublish') | null;
+  taskSlug?: ('inline' | 'dong-bo-so-trang' | 'schedulePublish') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
+  meta?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -648,6 +1406,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'trang-dich';
         value: number | TrangDich;
+      } | null)
+    | ({
+        relationTo: 'noi-dung-trang';
+        value: number | NoiDungTrang;
+      } | null)
+    | ({
+        relationTo: 'mau-cum';
+        value: number | MauCum;
       } | null)
     | ({
         relationTo: 'bien-tap-vien';
@@ -936,6 +1702,667 @@ export interface TrangDichSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "noi-dung-trang_select".
+ */
+export interface NoiDungTrangSelect<T extends boolean = true> {
+  duong?: T;
+  ten?: T;
+  nhom?: T;
+  mau?: T;
+  tren_web?: T;
+  o?: T;
+  tieu_de_seo?: T;
+  mo_ta_seo?: T;
+  anh_chia_se?: T;
+  h1?: T;
+  loi_dan?: T;
+  kieu_chu?:
+    | T
+    | {
+        co?: T;
+        can?: T;
+        nen?: T;
+      };
+  doan?:
+    | T
+    | {
+        chu?: T;
+        id?: T;
+      };
+  hoi_dap?:
+    | T
+    | {
+        cau_hoi?: T;
+        tra_loi?: T;
+        id?: T;
+      };
+  lien_ket?:
+    | T
+    | {
+        nhan?: T;
+        loai?: T;
+        duong_dan?: T;
+        bai?: T;
+        chuyen_muc?: T;
+        id?: T;
+      };
+  loai_sua?: T;
+  ngay_hieu_luc?: T;
+  muc?:
+    | T
+    | {
+        neo?: T;
+        tieu_de?: T;
+        noi_dung?: T;
+        noi_dung_html?: T;
+        id?: T;
+      };
+  khoi_tren?:
+    | T
+    | {
+        banner?:
+          | T
+          | {
+              nhan?: T;
+              tieu_de?: T;
+              mo_ta?: T;
+              anh?: T;
+              nut_chu?: T;
+              nut_link?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
+              kieu_chu?:
+                | T
+                | {
+                    co?: T;
+                    can?: T;
+                    nen?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        nut_moi?:
+          | T
+          | {
+              chu?: T;
+              link?: T;
+              kieu?: T;
+              ma_do?: T;
+              id?: T;
+              blockName?: T;
+            };
+        ghi_chu?: T | KhoiGhiChuSelect<T>;
+        keu_goi?: T | KhoiKeuGoiSelect<T>;
+        trich_dan?: T | KhoiTrichDanSelect<T>;
+        video?: T | KhoiVideoSelect<T>;
+        cong_cu?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?: T;
+              id?: T;
+              blockName?: T;
+            };
+        bai_viet?:
+          | T
+          | {
+              tieu_de?: T;
+              bai?: T;
+              mang?: T;
+              so_bai?: T;
+              id?: T;
+              blockName?: T;
+            };
+        hoi_dap?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?:
+                | T
+                | {
+                    cau_hoi?: T;
+                    tra_loi?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        loi_moi?:
+          | T
+          | {
+              tieu_de?: T;
+              mo_ta?: T;
+              nut_chu?: T;
+              id?: T;
+              blockName?: T;
+            };
+        van_ban?:
+          | T
+          | {
+              tieu_de?: T;
+              noi_dung?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  khoi_duoi?:
+    | T
+    | {
+        banner?:
+          | T
+          | {
+              nhan?: T;
+              tieu_de?: T;
+              mo_ta?: T;
+              anh?: T;
+              nut_chu?: T;
+              nut_link?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
+              kieu_chu?:
+                | T
+                | {
+                    co?: T;
+                    can?: T;
+                    nen?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        nut_moi?:
+          | T
+          | {
+              chu?: T;
+              link?: T;
+              kieu?: T;
+              ma_do?: T;
+              id?: T;
+              blockName?: T;
+            };
+        ghi_chu?: T | KhoiGhiChuSelect<T>;
+        keu_goi?: T | KhoiKeuGoiSelect<T>;
+        trich_dan?: T | KhoiTrichDanSelect<T>;
+        video?: T | KhoiVideoSelect<T>;
+        cong_cu?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?: T;
+              id?: T;
+              blockName?: T;
+            };
+        bai_viet?:
+          | T
+          | {
+              tieu_de?: T;
+              bai?: T;
+              mang?: T;
+              so_bai?: T;
+              id?: T;
+              blockName?: T;
+            };
+        hoi_dap?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?:
+                | T
+                | {
+                    cau_hoi?: T;
+                    tra_loi?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        loi_moi?:
+          | T
+          | {
+              tieu_de?: T;
+              mo_ta?: T;
+              nut_chu?: T;
+              id?: T;
+              blockName?: T;
+            };
+        van_ban?:
+          | T
+          | {
+              tieu_de?: T;
+              noi_dung?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  khoi_cuoi?:
+    | T
+    | {
+        banner?:
+          | T
+          | {
+              nhan?: T;
+              tieu_de?: T;
+              mo_ta?: T;
+              anh?: T;
+              nut_chu?: T;
+              nut_link?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
+              kieu_chu?:
+                | T
+                | {
+                    co?: T;
+                    can?: T;
+                    nen?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        nut_moi?:
+          | T
+          | {
+              chu?: T;
+              link?: T;
+              kieu?: T;
+              ma_do?: T;
+              id?: T;
+              blockName?: T;
+            };
+        ghi_chu?: T | KhoiGhiChuSelect<T>;
+        keu_goi?: T | KhoiKeuGoiSelect<T>;
+        trich_dan?: T | KhoiTrichDanSelect<T>;
+        video?: T | KhoiVideoSelect<T>;
+        cong_cu?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?: T;
+              id?: T;
+              blockName?: T;
+            };
+        bai_viet?:
+          | T
+          | {
+              tieu_de?: T;
+              bai?: T;
+              mang?: T;
+              so_bai?: T;
+              id?: T;
+              blockName?: T;
+            };
+        hoi_dap?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?:
+                | T
+                | {
+                    cau_hoi?: T;
+                    tra_loi?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        loi_moi?:
+          | T
+          | {
+              tieu_de?: T;
+              mo_ta?: T;
+              nut_chu?: T;
+              id?: T;
+              blockName?: T;
+            };
+        van_ban?:
+          | T
+          | {
+              tieu_de?: T;
+              noi_dung?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  che_do_mau?:
+    | T
+    | {
+        tren?: T;
+        duoi?: T;
+        cuoi?: T;
+      };
+  mac_dinh?: T;
+  ghi_chu_kiem_dinh?: T;
+  nguoi_sua?: T;
+  ghi_chu_noi_bo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KhoiGhiChu_select".
+ */
+export interface KhoiGhiChuSelect<T extends boolean = true> {
+  kieu?: T;
+  tieu_de?: T;
+  noi_dung?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KhoiKeuGoi_select".
+ */
+export interface KhoiKeuGoiSelect<T extends boolean = true> {
+  cong_cu?: T;
+  loi_moi?: T;
+  nut?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KhoiTrichDan_select".
+ */
+export interface KhoiTrichDanSelect<T extends boolean = true> {
+  cau?: T;
+  nguon?: T;
+  dich_nghia?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KhoiVideo_select".
+ */
+export interface KhoiVideoSelect<T extends boolean = true> {
+  url?: T;
+  tieu_de?: T;
+  chu_thich?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mau-cum_select".
+ */
+export interface MauCumSelect<T extends boolean = true> {
+  mau_duong?: T;
+  ten?: T;
+  nhom?: T;
+  tren_web?: T;
+  bien?: T;
+  o?: T;
+  nguon_kb?: T;
+  khoi_tren?:
+    | T
+    | {
+        banner?:
+          | T
+          | {
+              nhan?: T;
+              tieu_de?: T;
+              mo_ta?: T;
+              anh?: T;
+              nut_chu?: T;
+              nut_link?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
+              kieu_chu?:
+                | T
+                | {
+                    co?: T;
+                    can?: T;
+                    nen?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        nut_moi?:
+          | T
+          | {
+              chu?: T;
+              link?: T;
+              kieu?: T;
+              ma_do?: T;
+              id?: T;
+              blockName?: T;
+            };
+        ghi_chu?: T | KhoiGhiChuSelect<T>;
+        keu_goi?: T | KhoiKeuGoiSelect<T>;
+        trich_dan?: T | KhoiTrichDanSelect<T>;
+        video?: T | KhoiVideoSelect<T>;
+        cong_cu?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?: T;
+              id?: T;
+              blockName?: T;
+            };
+        bai_viet?:
+          | T
+          | {
+              tieu_de?: T;
+              bai?: T;
+              mang?: T;
+              so_bai?: T;
+              id?: T;
+              blockName?: T;
+            };
+        hoi_dap?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?:
+                | T
+                | {
+                    cau_hoi?: T;
+                    tra_loi?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        loi_moi?:
+          | T
+          | {
+              tieu_de?: T;
+              mo_ta?: T;
+              nut_chu?: T;
+              id?: T;
+              blockName?: T;
+            };
+        van_ban?:
+          | T
+          | {
+              tieu_de?: T;
+              noi_dung?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  khoi_duoi?:
+    | T
+    | {
+        banner?:
+          | T
+          | {
+              nhan?: T;
+              tieu_de?: T;
+              mo_ta?: T;
+              anh?: T;
+              nut_chu?: T;
+              nut_link?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
+              kieu_chu?:
+                | T
+                | {
+                    co?: T;
+                    can?: T;
+                    nen?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        nut_moi?:
+          | T
+          | {
+              chu?: T;
+              link?: T;
+              kieu?: T;
+              ma_do?: T;
+              id?: T;
+              blockName?: T;
+            };
+        ghi_chu?: T | KhoiGhiChuSelect<T>;
+        keu_goi?: T | KhoiKeuGoiSelect<T>;
+        trich_dan?: T | KhoiTrichDanSelect<T>;
+        video?: T | KhoiVideoSelect<T>;
+        cong_cu?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?: T;
+              id?: T;
+              blockName?: T;
+            };
+        bai_viet?:
+          | T
+          | {
+              tieu_de?: T;
+              bai?: T;
+              mang?: T;
+              so_bai?: T;
+              id?: T;
+              blockName?: T;
+            };
+        hoi_dap?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?:
+                | T
+                | {
+                    cau_hoi?: T;
+                    tra_loi?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        loi_moi?:
+          | T
+          | {
+              tieu_de?: T;
+              mo_ta?: T;
+              nut_chu?: T;
+              id?: T;
+              blockName?: T;
+            };
+        van_ban?:
+          | T
+          | {
+              tieu_de?: T;
+              noi_dung?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  khoi_cuoi?:
+    | T
+    | {
+        banner?:
+          | T
+          | {
+              nhan?: T;
+              tieu_de?: T;
+              mo_ta?: T;
+              anh?: T;
+              nut_chu?: T;
+              nut_link?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
+              kieu_chu?:
+                | T
+                | {
+                    co?: T;
+                    can?: T;
+                    nen?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        nut_moi?:
+          | T
+          | {
+              chu?: T;
+              link?: T;
+              kieu?: T;
+              ma_do?: T;
+              id?: T;
+              blockName?: T;
+            };
+        ghi_chu?: T | KhoiGhiChuSelect<T>;
+        keu_goi?: T | KhoiKeuGoiSelect<T>;
+        trich_dan?: T | KhoiTrichDanSelect<T>;
+        video?: T | KhoiVideoSelect<T>;
+        cong_cu?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?: T;
+              id?: T;
+              blockName?: T;
+            };
+        bai_viet?:
+          | T
+          | {
+              tieu_de?: T;
+              bai?: T;
+              mang?: T;
+              so_bai?: T;
+              id?: T;
+              blockName?: T;
+            };
+        hoi_dap?:
+          | T
+          | {
+              tieu_de?: T;
+              ds?:
+                | T
+                | {
+                    cau_hoi?: T;
+                    tra_loi?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        loi_moi?:
+          | T
+          | {
+              tieu_de?: T;
+              mo_ta?: T;
+              nut_chu?: T;
+              id?: T;
+              blockName?: T;
+            };
+        van_ban?:
+          | T
+          | {
+              tieu_de?: T;
+              noi_dung?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  ghi_chu_kiem_dinh?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "bien-tap-vien_select".
  */
 export interface BienTapVienSelect<T extends boolean = true> {
@@ -1004,6 +2431,7 @@ export interface PayloadJobsSelect<T extends boolean = true> {
   queue?: T;
   waitUntil?: T;
   processing?: T;
+  meta?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1148,6 +2576,27 @@ export interface DieuHuong {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Để trống = chữ đang chạy trong code.
+   */
+  thuong_hieu?: {
+    gioi_thieu?: string | null;
+    /**
+     * ⚠ Đây là cam kết quyền riêng tư — phải khớp trang Chính sách quyền riêng tư. Tối đa 3 dòng.
+     */
+    cam_ket?:
+      | {
+          chu: string;
+          bieu_tuong: 'khien' | 'may_chu' | 'lap_lanh' | 'khoa' | 'bat_tay' | 'sach' | 'can' | 'la_ban';
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Bắt buộc, chỉ Chủ biên sửa. Đường dây khẩn cấp 115 · 113 · 111 luôn hiện ngay dưới (giữ trong code).
+   */
+  mien_tru: string;
+  nhan_ung_ho?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1168,6 +2617,24 @@ export interface TinhNang {
   keu_goi_cong_cu?: boolean | null;
   llms_txt?: boolean | null;
   ban_markdown?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs-stats".
+ */
+export interface PayloadJobsStat {
+  id: number;
+  stats?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1269,6 +2736,20 @@ export interface DieuHuongSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  thuong_hieu?:
+    | T
+    | {
+        gioi_thieu?: T;
+        cam_ket?:
+          | T
+          | {
+              chu?: T;
+              bieu_tuong?: T;
+              id?: T;
+            };
+      };
+  mien_tru?: T;
+  nhan_ung_ho?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1290,6 +2771,16 @@ export interface TinhNangSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs-stats_select".
+ */
+export interface PayloadJobsStatsSelect<T extends boolean = true> {
+  stats?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "collections_widget".
  */
 export interface CollectionsWidget {
@@ -1297,6 +2788,14 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskDong-bo-so-trang".
+ */
+export interface TaskDongBoSoTrang {
+  input?: unknown;
+  output?: unknown;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1314,6 +2813,14 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'trang-dich';
           value: number | TrangDich;
+        } | null)
+      | ({
+          relationTo: 'noi-dung-trang';
+          value: number | NoiDungTrang;
+        } | null)
+      | ({
+          relationTo: 'mau-cum';
+          value: number | MauCum;
         } | null);
     global?: string | null;
     user?: {
@@ -1322,63 +2829,6 @@ export interface TaskSchedulePublish {
     } | null;
   };
   output?: unknown;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "KhoiGhiChu".
- */
-export interface KhoiGhiChu {
-  kieu: 'luu_y' | 'meo' | 'tu_soi' | 'tom_tat';
-  tieu_de?: string | null;
-  noi_dung: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'ghi_chu';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "KhoiKeuGoi".
- */
-export interface KhoiKeuGoi {
-  cong_cu: '/than-so' | '/hom-nay' | '/hop-doi' | '/tu-vi' | '/bat-tu' | '/kinh-dich' | '/phong-thuy';
-  /**
-   * Vd "Xem số chủ đạo của bạn — miễn phí, có từng bước tính".
-   */
-  loi_moi: string;
-  nut?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'keu_goi';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "KhoiTrichDan".
- */
-export interface KhoiTrichDan {
-  cau: string;
-  nguon: string;
-  dich_nghia?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'trich_dan';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "KhoiVideo".
- */
-export interface KhoiVideo {
-  /**
-   * Dán link video (youtube.com/watch?v=…, youtu.be/…, Shorts). Phát qua chế độ ít cookie.
-   */
-  url: string;
-  /**
-   * Mô tả video là gì — người dùng trình đọc màn hình và Google đọc dòng này.
-   */
-  tieu_de: string;
-  chu_thich?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'video';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

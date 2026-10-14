@@ -39,6 +39,7 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   so_thang: "number",
   co_tuoi: "number",
   so_ngay: "number",
+  nhiem_vu: "string",   // SAO-3: mã nhiệm vụ (luu_ho_so / hoi_3_cau / moi_1_ban)
 };
 const GIOI_HAN_CHUOI = 40;
 

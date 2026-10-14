@@ -79,7 +79,8 @@ for f in $(ls "$ROOT"/supabase/migrations/*.sql | grep -v '\.down\.sql$' | sort)
 # Công tắc Sao BẬT (mặc định production là tắt) + lượt miễn phí nhỏ để test nhanh.
 psql -d "$DB" -q -v ON_ERROR_STOP=1 <<'SQL'
 insert into cau_hinh (khoa, gia_tri) values
-  ('luan_giai.thu_sao', 'true'), ('sao.hoi.thu', 'true'), ('sao.hoi.mien_phi_khach', '2'), ('sao.hoi.mien_phi_tk', '2')
+  ('luan_giai.thu_sao', 'true'), ('sao.hoi.thu', 'true'), ('sao.hoi.mien_phi_khach', '2'), ('sao.hoi.mien_phi_tk', '2'),
+  ('sao.nhiem_vu.bat', 'true')
 on conflict (khoa) do update set gia_tri = excluded.gia_tri;
 SQL
 

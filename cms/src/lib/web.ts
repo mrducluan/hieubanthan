@@ -19,15 +19,16 @@ export function linkXemTruoc(slug: string | undefined | null): string | null {
   return `${webUrl()}/api/cms/xem-truoc?slug=${encodeURIComponent(slug)}&ma=${ma}`;
 }
 
-/** Báo web xoá cache (thẻ "cms"). Không chặn lưu bài khi web chậm/lỗi: chờ tối đa 4 giây, lỗi thì ghi log. */
-export async function baoWebLamMoi(ly_do: string, slug?: string | null): Promise<void> {
+/** Báo web xoá cache (thẻ "cms"; ND: kèm `duong` → web xoá thêm thẻ "trang:<duong>"). Không chặn lưu bài khi web
+ *  chậm/lỗi: chờ tối đa 4 giây, lỗi thì ghi log. */
+export async function baoWebLamMoi(ly_do: string, slug?: string | null, duong?: string | null): Promise<void> {
   const bi = process.env.CMS_WEBHOOK_SECRET;
   if (!bi || !process.env.WEB_URL) return;
   try {
     const r = await fetch(`${webUrl()}/api/cms/lam-moi`, {
       method: "POST",
       headers: { "content-type": "application/json", "x-cms-bi-mat": bi },
-      body: JSON.stringify({ ly_do, slug: slug ?? null }),
+      body: JSON.stringify({ ly_do, slug: slug ?? null, ...(duong ? { duong } : {}) }),
       signal: AbortSignal.timeout(4_000),
     });
     if (!r.ok) console.warn(`[cms] web làm mới trả ${r.status}`);

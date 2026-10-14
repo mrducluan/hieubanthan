@@ -6,7 +6,8 @@ import { test, expect } from "@playwright/test";
 import { docKhoaDichVu, kyJwt, locCoHoi, type DongGsc } from "../lib/so-lieu-ngoai";
 import { CAI_DAT, chuanHoa, giaTriHieuLuc } from "../lib/cau-hinh";
 import { timToanKho } from "../lib/kb-tim";
-import { COT_CHAN_TRANG } from "../lib/menu-chan-trang";
+import { CAM_KET_CHAN_TRANG, COT_CHAN_TRANG, GIOI_THIEU_CHAN_TRANG, MIEN_TRU_CHAN_TRANG, NHAN_UNG_HO_CHAN_TRANG } from "../lib/menu-chan-trang";
+import { chuChanTrang } from "../lib/cms";
 import { dangOMuc, MENU_DAU_TRANG } from "../lib/menu-dau-trang";
 
 test("JWT RS256 ký đúng, đọc được khoá JSON thô lẫn base64", () => {
@@ -88,4 +89,22 @@ test("menu đầu trang mặc định của web trùng MENU_DAU_MAC_DINH trong C
   expect(dangOMuc("/tu-vi-xyz", khamPha)).toBe(false);
   expect(dangOMuc("/dang-nhap", MENU_DAU_TRANG.find((m) => m.href === "/tai-khoan")!)).toBe(true);
   expect(MENU_DAU_TRANG.filter((m) => m.di_dong).length).toBeLessThanOrEqual(5);
+});
+
+test("ND-1: chữ chân trang mặc định của web trùng CHAN_TRANG_MAC_DINH trong CMS; ô CMS trống → về chữ code", () => {
+  const cms = readFileSync(path.join(__dirname, "..", "..", "cms", "src", "globals", "DieuHuong.ts"), "utf8");
+  const khoi = cms.slice(cms.indexOf("export const CHAN_TRANG_MAC_DINH"), cms.indexOf("export const BIEU_TUONG_CAM_KET"));
+  const lay = (k: string) => new RegExp(`${k}: "([^"]+)"`).exec(khoi)?.[1];
+  expect(lay("gioi_thieu")).toBe(GIOI_THIEU_CHAN_TRANG);
+  expect(lay("mien_tru")).toBe(MIEN_TRU_CHAN_TRANG);
+  expect(lay("nhan_ung_ho")).toBe(NHAN_UNG_HO_CHAN_TRANG);
+  const ck = [...khoi.matchAll(/\{ chu: "([^"]+)", bieu_tuong: "(\w+)" \}/g)].map((m) => ({ chu: m[1], bieu_tuong: m[2] }));
+  expect(ck).toEqual(CAM_KET_CHAN_TRANG.map((c) => ({ ...c })));
+  // CMS trả chuỗi rỗng / khoảng trắng / thiếu → null (ChanTrang hiện chữ code); biểu tượng lạ → khiên; tối đa 3 cam kết.
+  expect(chuChanTrang({ thuong_hieu: { gioi_thieu: "  ", cam_ket: [] }, mien_tru: "", nhan_ung_ho: null }))
+    .toEqual({ gioiThieu: null, camKet: null, mienTru: null, nhanUngHo: null });
+  const c = chuChanTrang({ thuong_hieu: { gioi_thieu: "Mới", cam_ket: [1, 2, 3, 4].map((i) => ({ chu: `Cam kết ${i}`, bieu_tuong: i === 1 ? "la" : "khoa" })) } });
+  expect(c.gioiThieu).toBe("Mới");
+  expect(c.camKet).toHaveLength(3);
+  expect(c.camKet![0]!.bieu_tuong).toBe("khien");
 });
