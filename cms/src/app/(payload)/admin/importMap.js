@@ -31,8 +31,11 @@ import { KiemDinh as KiemDinh_8d3763f0a1d973a34443ca19f1ef8f35 } from '../../../
 import { GoiYLienKet as GoiYLienKet_f9c18e7e3ccf0c1b2769d570d2a54d2d } from '../../../components/GoiYLienKet'
 import { TroLyAI as TroLyAI_50e4553feb35a4b92324293ffe2fb1e9 } from '../../../components/TroLyAI'
 import { SlugField as SlugField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
+import { XemTruocKb as XemTruocKb_8b7869676568a84cf1d2960e5c88576f } from '../../../components/XemTruocKb'
+import { DongBoSoTrang as DongBoSoTrang_6df712906f07a37a296a3fd100cefec6 } from '../../../components/DongBoSoTrang'
 import { NhanLienKet as NhanLienKet_dd6e8d76a5866e3a11a40f1bc002464e } from '../../../components/NhanDong'
 import { NhanCot as NhanCot_dd6e8d76a5866e3a11a40f1bc002464e } from '../../../components/NhanDong'
+import { LoiTatChanTrang as LoiTatChanTrang_92832861261b25700f080b0881ee4404 } from '../../../components/LoiTatChanTrang'
 import { Icon as Icon_09f42d80f248b1c52a84a2027d923643 } from '../../../components/ThuongHieu'
 import { Logo as Logo_09f42d80f248b1c52a84a2027d923643 } from '../../../components/ThuongHieu'
 import { TongQuan as TongQuan_2d78efa7272e16bbe9cb22b5f5f48f93 } from '../../../components/TongQuan'
@@ -76,8 +79,11 @@ export const importMap = {
   "/components/GoiYLienKet#GoiYLienKet": GoiYLienKet_f9c18e7e3ccf0c1b2769d570d2a54d2d,
   "/components/TroLyAI#TroLyAI": TroLyAI_50e4553feb35a4b92324293ffe2fb1e9,
   "@payloadcms/next/client#SlugField": SlugField_2b8867833a34864a02ddf429b0728a40,
+  "/components/XemTruocKb#XemTruocKb": XemTruocKb_8b7869676568a84cf1d2960e5c88576f,
+  "/components/DongBoSoTrang#DongBoSoTrang": DongBoSoTrang_6df712906f07a37a296a3fd100cefec6,
   "/components/NhanDong#NhanLienKet": NhanLienKet_dd6e8d76a5866e3a11a40f1bc002464e,
   "/components/NhanDong#NhanCot": NhanCot_dd6e8d76a5866e3a11a40f1bc002464e,
+  "/components/LoiTatChanTrang#LoiTatChanTrang": LoiTatChanTrang_92832861261b25700f080b0881ee4404,
   "/components/ThuongHieu#Icon": Icon_09f42d80f248b1c52a84a2027d923643,
   "/components/ThuongHieu#Logo": Logo_09f42d80f248b1c52a84a2027d923643,
   "/components/TongQuan#TongQuan": TongQuan_2d78efa7272e16bbe9cb22b5f5f48f93,

@@ -390,3 +390,41 @@ export function kiemDinhBai(bai: BaiKiem): KetQuaKiem {
   if (loi_chan.length) diem = Math.min(diem, 40);
   return { diem, muc, loi_chan };
 }
+
+// ------------------------------------------------------------------ ranh giới cho ô tự do (ND — "Trang website", chân trang)
+
+// DX-1 / EEAT-1: ô tự do không được tự nhận "đã thẩm định" — chữ ký thẩm định chỉ đến từ sổ thẩm định / bài có xác nhận.
+const KHAI_THAM_DINH = [/(?:đã|được)\s+(?:chuyên\s+gia\s+)?thẩm\s+định/iu, /thẩm\s+định\s+bởi/iu,
+  /chuyên\s+gia\s+(?:\S+\s+){0,4}(?:đã\s+)?(?:duyệt|kiểm\s+duyệt|xác\s+nhận)/iu];
+// SAO-2: lời mời / nút kêu gọi không doạ, không đếm ngược giả.
+const DOA = ["xui xẻo", "tai hoạ", "hạn nặng", "kẻo", "nếu không sẽ", "chỉ còn", "sắp hết", "hết hạn trong", "đếm ngược",
+  "cơ hội cuối", "duy nhất hôm nay"];
+
+/** Ranh giới nội dung cho chữ CMS NGOÀI bài viết (trang website, mẫu cụm, chân trang). Lỗi chặn (chan: true):
+ *  vùng cấm, số điện thoại/email/Zalo gõ tay, tên nội bộ (BM-1), tự nhận "đã thẩm định" (trừ khi `choThamDinh`),
+ *  doạ/đếm ngược (khi `loiMoi`). Cảnh báo: cụm nhạy cảm, giọng phán. */
+export function kiemRanhGioi(van: string, { choThamDinh = false, loiMoi = false } = {}): MucKiem[] {
+  const muc: MucKiem[] = [];
+  const them = (ma: string, muc_do: MucDo, thong_diep: string, chan = false) =>
+    muc.push({ ma, nhom: "noi_dung", muc_do, thong_diep, ...(chan ? { chan: true } : {}) });
+  const cam = timCum(van, CAM_CHAN);
+  if (cam.length) them("vung_cam", "loi", `Ngoài ranh giới nội dung: ${cam.map((c) => `"${c}"`).join(", ")}.`, true);
+  if (LIEN_HE_CHU.test(van)) them("lien_he", "loi", "Có số điện thoại, email hoặc Zalo gõ tay — thông tin liên hệ lấy từ cấu hình đơn vị vận hành, không gõ vào ô chữ.", true);
+  const noiBo = TEN_NOI_BO.flatMap((r) => van.match(new RegExp(r.source, r.flags + "g")) ?? []);
+  if (noiBo.length) them("ten_noi_bo", "loi", `Có tên nội bộ không được công khai: ${[...new Set(noiBo)].join(", ")}.`, true);
+  if (!choThamDinh && KHAI_THAM_DINH.some((r) => r.test(van.normalize("NFC")))) {
+    them("tham_dinh_gia", "loi", "Không ghi \"đã thẩm định\" / \"chuyên gia đã duyệt\" ở ô tự do — chữ ký thẩm định chỉ có trên trang chuyên gia đã đọc và duyệt.", true);
+  }
+  if (loiMoi) {
+    const doa = timCum(van, DOA);
+    if (doa.length) them("doa", "loi", `Lời mời không doạ, không đếm ngược: ${doa.map((c) => `"${c}"`).join(", ")}.`, true);
+  }
+  const nhay = timCum(van, NHAY_CAM);
+  if (nhay.length) them("nhay_cam", "canh_bao", `Có cụm nhạy cảm ${nhay.map((c) => `"${c}"`).join(", ")} — chỉ giải thích, không khuyên làm, không doạ.`);
+  const phan = timCum(van, GIONG_PHAN);
+  if (phan.length) them("giong_phan", "canh_bao", `Giọng phán quyết: ${phan.map((c) => `"${c}"`).join(", ")}.`);
+  return muc;
+}
+
+/** Đường dẫn trong site (cùng luật với Điều hướng chân trang): bắt đầu "/", không "//" hay "/\". */
+export const laDuongTrongSite = (v: unknown) => typeof v === "string" && /^\/(?![/\\])[^\s\\]*$/.test(v);

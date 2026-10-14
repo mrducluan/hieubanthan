@@ -5,9 +5,9 @@ name: cms
 on:
   push:
     branches: [main]
-    paths: ["cms/**", "engine/app/kb/**", "web/lib/cms*.ts", "web/lib/llms.ts", "web/app/sitemap.ts", "web/lib/blog*.ts", "web/app/blog/**", "web/app/api/cms/**", "web/components/blog/**", ".github/workflows/cms.yml"]
+    paths: ["cms/**", "engine/app/kb/**", "web/lib/cms*.ts", "web/lib/llms.ts", "web/app/sitemap.ts", "web/lib/blog*.ts", "web/app/blog/**", "web/app/api/cms/**", "web/components/blog/**", "web/lib/so-trang.ts", "web/lib/noi-dung-trang.ts", "web/lib/menu-chan-trang.ts", "web/components/khung/ChanTrang.tsx", "web/app/api/so-trang/**", ".github/workflows/cms.yml"]
   pull_request:
-    paths: ["cms/**", "engine/app/kb/**", "web/lib/cms*.ts", "web/lib/llms.ts", "web/app/sitemap.ts", "web/lib/blog*.ts", "web/app/blog/**", "web/app/api/cms/**", "web/components/blog/**", ".github/workflows/cms.yml"]
+    paths: ["cms/**", "engine/app/kb/**", "web/lib/cms*.ts", "web/lib/llms.ts", "web/app/sitemap.ts", "web/lib/blog*.ts", "web/app/blog/**", "web/app/api/cms/**", "web/components/blog/**", "web/lib/so-trang.ts", "web/lib/noi-dung-trang.ts", "web/lib/menu-chan-trang.ts", "web/components/khung/ChanTrang.tsx", "web/app/api/so-trang/**", ".github/workflows/cms.yml"]
 
 concurrency:
   group: cms-${{ github.ref }}

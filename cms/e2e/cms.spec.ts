@@ -322,6 +322,37 @@ test("Giao diện website: menu chân trang, dải thông báo, banner, bài m�
   await expect(page.getByTestId("thong-bao-site")).toHaveCount(0);
 });
 
+test("ND-0/ND-1: Đồng bộ ngay tạo Trang website + Mẫu cụm từ sổ trang của web; chữ chân trang sửa ở CMS, trống → chữ code", async ({ page, request }) => {
+  const token = await tokenQt(request);
+  const h = { Authorization: `JWT ${token}` };
+  const r = await request.post(`${CMS}/api/noi-dung-trang/dong-bo`, { headers: h });
+  expect(r.status(), await r.text()).toBe(200);
+  const dem = async (c: string) => (await (await request.get(`${CMS}/api/${c}?limit=1&depth=0`, { headers: h })).json()).totalDocs as number;
+  expect(await dem("noi-dung-trang")).toBeGreaterThanOrEqual(35);
+  expect(await dem("mau-cum")).toBeGreaterThanOrEqual(16);
+  // khách (web) chưa thấy gì: tài liệu đồng bộ là nháp trống
+  expect((await (await request.get(`${CMS}/api/noi-dung-trang?limit=1`)).json()).totalDocs).toBe(0);
+  // nút trên danh sách
+  await dangNhap(page);
+  await page.goto(`${CMS}/admin/collections/noi-dung-trang`);
+  await page.getByTestId("dong-bo-so-trang").getByRole("button", { name: "Đồng bộ ngay" }).click();
+  await expect(page.getByTestId("dong-bo-so-trang")).toContainText("Xong: 0 trang mới");
+
+  expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: {
+    thuong_hieu: { gioi_thieu: "Lời giới thiệu sửa từ CMS", cam_ket: [{ chu: "Cam kết sửa từ CMS", bieu_tuong: "khoa" }] },
+  } })).ok()).toBeTruthy();
+  await choWeb(request, "/", (s, b) => s === 200 && b.includes("Lời giới thiệu sửa từ CMS"));
+  await page.goto(`${WEB}/`);
+  await expect(page.getByTestId("chan-trang-gioi-thieu")).toHaveText("Lời giới thiệu sửa từ CMS");
+  await expect(page.getByTestId("chan-trang-cam-ket").locator("li")).toHaveText(["Cam kết sửa từ CMS"]);
+  await expect(page.getByTestId("chan-trang-mien-tru")).toContainText("chủ biên Đức Luân chịu trách nhiệm");
+  // để trống → web về chữ trong code
+  expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: { thuong_hieu: { gioi_thieu: "", cam_ket: [] } } })).ok()).toBeTruthy();
+  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Lời giới thiệu sửa từ CMS") && b.includes("Cách tính minh bạch, nguồn rõ ràng"));
+  await page.goto(`${WEB}/`);
+  await expect(page.getByTestId("chan-trang-cam-ket").locator("li")).toHaveCount(3);
+});
+
 test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa ở CMS → thanh trên + bảng thả xuống + menu điện thoại", async ({ page, request, browser }) => {
   const token = await tokenQt(request);
   const h = { Authorization: `JWT ${token}` };

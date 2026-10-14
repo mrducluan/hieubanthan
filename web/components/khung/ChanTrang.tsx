@@ -2,28 +2,32 @@
 // "Điều hướng chân trang" (CMS chưa nối / lỗi → dùng COT dưới đây),
 // thông tin đơn vị vận hành (env, thiếu thì ẩn), mạng xã hội, dấu Bộ Công Thương (khi có), lời miễn trừ, đường dây khẩn cấp.
 // Server component: đọc env ở máy chủ (lib/van-hanh.ts), không gửi gì thêm xuống trình duyệt.
+// ND-1: lời giới thiệu, 3 cam kết, lời miễn trừ, nhãn nút ủng hộ sửa ở CMS; ô trống → chữ trong code (lib/menu-chan-trang.ts).
+// Đường dây khẩn cấp 115/113/111, dòng ©, thông tin đơn vị vận hành (env) luôn giữ trong code.
 import Link from "next/link";
-import { BadgeCheck, HeartHandshake, Mail, MapPin, Phone, Server, ShieldCheck, Sparkles } from "lucide-react";
+import { BadgeCheck, BookOpen, Compass, HeartHandshake, Lock, Mail, MapPin, Phone, Scale, Server, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
 import { coUngHo } from "@/lib/ung-ho";
 import { vanHanh } from "@/lib/van-hanh";
-import { dieuHuongCms } from "@/lib/cms";
-import { COT_CHAN_TRANG, type CotChanTrang } from "@/lib/menu-chan-trang";
+import { chanTrangCms, type BieuTuongCamKet, type ChuChanTrangCms } from "@/lib/cms";
+import {
+  CAM_KET_CHAN_TRANG, COT_CHAN_TRANG, GIOI_THIEU_CHAN_TRANG, MIEN_TRU_CHAN_TRANG, NHAN_UNG_HO_CHAN_TRANG, type CotChanTrang,
+} from "@/lib/menu-chan-trang";
 import { NutTuyChonCookie } from "@/components/khung/HoiDongYCookie";
 import { Logo } from "./Logo";
 
-const CAM_KET = [
-  { Icon: ShieldCheck, chu: "Hồ sơ mặc định chỉ lưu trên máy bạn" },
-  { Icon: Server, chu: "Lá số tính trên hệ thống riêng; họ tên, ngày sinh không chuyển cho bên thứ ba" },
-  { Icon: Sparkles, chu: "Không bán dữ liệu, không quảng cáo nhắm mục tiêu" },
-];
+const BIEU_TUONG: Record<BieuTuongCamKet, LucideIcon> = {
+  khien: ShieldCheck, may_chu: Server, lap_lanh: Sparkles, khoa: Lock, bat_tay: HeartHandshake, sach: BookOpen, can: Scale, la_ban: Compass,
+};
 
-/** Menu từ CMS; CMS chậm/lỗi → layout hiện ngay bản mặc định (Suspense fallback = KhungChanTrang với COT_CHAN_TRANG). */
+/** Menu + chữ từ CMS; CMS chậm/lỗi → layout hiện ngay bản mặc định (Suspense fallback = KhungChanTrang với COT_CHAN_TRANG). */
 export async function ChanTrang() {
-  return <KhungChanTrang cot={(await dieuHuongCms()) ?? COT_CHAN_TRANG} />;
+  const cms = await chanTrangCms();
+  return <KhungChanTrang cot={cms?.cot ?? COT_CHAN_TRANG} chu={cms?.chu} />;
 }
 
-export function KhungChanTrang({ cot }: { cot: readonly CotChanTrang[] }) {
+export function KhungChanTrang({ cot, chu }: { cot: readonly CotChanTrang[]; chu?: ChuChanTrangCms | null }) {
   const vh = vanHanh();
+  const camKet = chu?.camKet ?? CAM_KET_CHAN_TRANG;
   const nam = new Date().getFullYear();
   return (
     <footer className="vach-sang mt-8 border-t border-line/60 bg-surface/30 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-10" data-testid="chan-trang">
@@ -32,14 +36,14 @@ export function KhungChanTrang({ cot }: { cot: readonly CotChanTrang[] }) {
           <Link href="/" className="inline-flex items-center gap-2.5" aria-label="Hiểu Bản Thân — trang chủ">
             <Logo /><span className="font-serif text-xl tracking-tight">Hiểu Bản Thân</span>
           </Link>
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-fg-muted">
-            Năm hệ thống văn hoá — thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ — trong một hồ sơ. Cách tính minh bạch,
-            nguồn rõ ràng, để tự soi chứ không để phán.
+          <p className="mt-3 max-w-sm text-sm leading-relaxed text-fg-muted" data-testid="chan-trang-gioi-thieu">
+            {chu?.gioiThieu ?? GIOI_THIEU_CHAN_TRANG}
           </p>
-          <ul className="mt-4 space-y-2 text-xs text-fg-muted">
-            {CAM_KET.map(({ Icon, chu }) => (
-              <li key={chu} className="flex items-start gap-2"><Icon className="mt-0.5 size-3.5 shrink-0 text-jade" aria-hidden />{chu}</li>
-            ))}
+          <ul className="mt-4 space-y-2 text-xs text-fg-muted" data-testid="chan-trang-cam-ket">
+            {camKet.map(({ chu: dong, bieu_tuong }) => {
+              const Icon = BIEU_TUONG[bieu_tuong];
+              return <li key={dong} className="flex items-start gap-2"><Icon className="mt-0.5 size-3.5 shrink-0 text-jade" aria-hidden />{dong}</li>;
+            })}
           </ul>
           {vh.mangXaHoi.length > 0 && (
             <ul className="mt-5 flex flex-wrap gap-2" aria-label="Mạng xã hội">
@@ -72,11 +76,7 @@ export function KhungChanTrang({ cot }: { cot: readonly CotChanTrang[] }) {
       <div className="container mt-10">
       <div className="grid gap-6 border-t border-line/50 pt-6 text-xs leading-relaxed text-fg-faint md:grid-cols-[2fr_1fr]">
         <div className="space-y-2">
-          <p>
-            Nội dung biên soạn từ thư tịch văn hoá cổ điển, để tham khảo và tự suy ngẫm, không phải dự báo. Nội dung không thay
-            thế ý kiến chuyên môn về y tế, tâm lý, pháp lý, tài chính. Nội dung do Ban biên tập Hiểu Bản Thân biên soạn từ
-            cổ thư và tài liệu tham khảo, chủ biên Đức Luân chịu trách nhiệm.
-          </p>
+          <p data-testid="chan-trang-mien-tru">{chu?.mienTru ?? MIEN_TRU_CHAN_TRANG}</p>
           <p>Đang khủng hoảng hoặc gặp nguy hiểm? Gọi <b className="text-fg-muted">115</b> (cấp cứu) · <b className="text-fg-muted">113</b> (công an) · <b className="text-fg-muted">111</b> (bảo vệ trẻ em).</p>
           {(vh.chuSoHuu || vh.diaChi || vh.email || vh.dienThoai) && (
             <div className="space-y-1 pt-1" data-testid="thong-tin-van-hanh">
@@ -99,7 +99,7 @@ export function KhungChanTrang({ cot }: { cot: readonly CotChanTrang[] }) {
           {coUngHo() && (
             <Link href="/ung-ho" data-testid="chan-trang-ung-ho"
               className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-3 py-1.5 text-[12px] font-medium text-gold hover:bg-gold/10">
-              <HeartHandshake className="size-3.5" aria-hidden /> Ủng hộ đội ngũ phát triển
+              <HeartHandshake className="size-3.5" aria-hidden /> {chu?.nhanUngHo ?? NHAN_UNG_HO_CHAN_TRANG}
             </Link>
           )}
           <p>© {nam} Hiểu Bản Thân. Bảo lưu mọi quyền. <NutTuyChonCookie /></p>

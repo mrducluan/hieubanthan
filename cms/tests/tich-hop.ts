@@ -7,6 +7,7 @@ import config from "../src/payload.config";
 import { MENU_MAC_DINH } from "../src/globals/DieuHuong";
 import { vaiTro } from "../src/access";
 import { buocHienTai, docCookie, maTotp, tuBase32 } from "../src/lib/totp";
+import { dongBoSoTrang, kiemSoTrang } from "../src/lib/so-trang";
 
 const chu = (text: string) => ({ type: "text", text, format: 0, detail: 0, mode: "normal", style: "", version: 1 });
 const doan = (...children: unknown[]) =>
@@ -32,7 +33,7 @@ async function nem(f: () => Promise<unknown>, khop: RegExp) {
 }
 
 const payload: Payload = await getPayload({ config });
-const tao: { collection: "bai-viet" | "bien-tap-vien" | "tac-gia"; id: number | string }[] = [];
+const tao: { collection: "bai-viet" | "bien-tap-vien" | "tac-gia" | "noi-dung-trang" | "mau-cum"; id: number | string }[] = [];
 const dau = `tt${Date.now().toString(36)}`;
 
 const nguoi = async (vai_tro: string) => {
@@ -465,6 +466,168 @@ await ca("CMS-2 trợ lý AI: kiểm đầu vào, máy đọc bị từ chối, 
   const d = await r.json() as { nhap: string | null; loi?: string };
   assert.equal(d.nhap, null);
   assert.match(d.loi ?? "", /ENGINE_URL/);
+});
+
+// ---------------- ND-0 / ND-1: Trang website, Mẫu cụm trang, đồng bộ sổ trang, chân trang
+const nd = `/nd-${dau}`;
+const soTrang = (tenTool: string, coPhapLy = true) => kiemSoTrang({
+  trang: [
+    // mac_dinh nhiều khoá, thứ tự khác thứ tự jsonb tự sắp → lần đồng bộ thứ hai vẫn phải "không đổi gì".
+    { duong: `${nd}/cong-cu`, nhom: "cong_cu", ten: tenTool, o: ["seo", "dau_trang", "gioi_thieu", "khoi_tren"], mac_dinh: { tieu_de_seo: "Mặc định", h1: "H", doan: ["a"] } },
+    { duong: `${nd}/gioi-thieu`, nhom: "tinh", ten: "Giới thiệu", o: ["seo", "muc"], mac_dinh: {} },
+    ...(coPhapLy ? [{ duong: `${nd}/dieu-khoan`, nhom: "phap_ly", ten: "Điều khoản", o: ["seo", "muc"], mac_dinh: { ngay_hieu_luc: "08/10/2026" } }] : []),
+  ],
+  mau: [{ mau_duong: `${nd}/kien-thuc/{slug}`, nhom: "kien_thuc", ten: "Cụm thử", bien: ["tieu_de"], o: ["khoi_tren"], nguon_kb: { kieu: "kb", loai: "sao", vi_du: "sao-tu-vi", tep_kb: ["tuvi_kb.json"] } }],
+});
+const timTrang = async (duong: string, draft = false) => (await payload.find({ collection: "noi-dung-trang", overrideAccess: true, draft,
+  where: { duong: { equals: duong } }, limit: 1, depth: 0 })).docs[0] as unknown as Record<string, unknown> & { id: number };
+const ghiTao = async () => {
+  for (const c of ["noi-dung-trang", "mau-cum"] as const) {
+    const r = await payload.find({ collection: c, overrideAccess: true, limit: 0, pagination: false, depth: 0,
+      where: { [c === "mau-cum" ? "mau_duong" : "duong"]: { like: nd } } });
+    for (const d of r.docs) if (!tao.some((t) => t.id === d.id && t.collection === c)) tao.push({ collection: c, id: d.id });
+  }
+};
+
+await ca("đồng bộ sổ trang: tạo nháp trống cho URL mới + mẫu cụm; lần 2 không tạo trùng", async () => {
+  const kq = await dongBoSoTrang(payload, soTrang("Công cụ thử"));
+  await ghiTao();
+  assert.equal(kq.tao, 3); assert.equal(kq.mau_tao, 1);
+  const d = await timTrang(`${nd}/cong-cu`);
+  assert.equal(d._status, "draft"); assert.equal(d.nhom, "cong_cu"); assert.equal(d.tren_web, true);
+  assert.deepEqual(d.mac_dinh, { tieu_de_seo: "Mặc định", h1: "H", doan: ["a"] });
+  const kq2 = await dongBoSoTrang(payload, soTrang("Công cụ thử"));
+  assert.equal(kq2.tao + kq2.cap_nhat + kq2.mau_tao + kq2.mau_cap_nhat, 0);
+});
+
+await ca("đồng bộ không ghi đè ô biên tập (kể cả nháp chưa xuất bản); URL mất → tren_web=false; đổi tên → cập nhật", async () => {
+  const d = await timTrang(`${nd}/cong-cu`);
+  await payload.update({ collection: "noi-dung-trang", id: d.id, user: chuBien, overrideAccess: false,
+    data: { tieu_de_seo: "Tiêu đề đã xuất bản", _status: "published" } as never });
+  await payload.update({ collection: "noi-dung-trang", id: d.id, user: bienTap, overrideAccess: false, draft: true,
+    data: { loi_dan: "Lời dẫn nháp của biên tập viên" } as never });
+  const kq = await dongBoSoTrang(payload, soTrang("Công cụ đổi tên", false));
+  assert.equal(kq.cap_nhat, 1); assert.equal(kq.go, 1);
+  const xb = await timTrang(`${nd}/cong-cu`), nhap = await timTrang(`${nd}/cong-cu`, true);
+  assert.equal(xb._status, "published"); assert.equal(xb.tieu_de_seo, "Tiêu đề đã xuất bản"); assert.equal(xb.ten, "Công cụ đổi tên");
+  assert.equal(xb.loi_dan ?? null, null, "nháp chưa xuất bản không bị đẩy lên bản xuất bản");
+  assert.equal(nhap.loi_dan, "Lời dẫn nháp của biên tập viên"); assert.equal(nhap.ten, "Công cụ đổi tên");
+  assert.equal((await timTrang(`${nd}/dieu-khoan`)).tren_web, false);
+  await dongBoSoTrang(payload, soTrang("Công cụ đổi tên"));
+  assert.equal((await timTrang(`${nd}/dieu-khoan`)).tren_web, true);
+});
+
+await ca("biên tập viên không đổi được ô hệ thống, không sửa trang pháp lý; Chủ biên sửa được", async () => {
+  const d = await timTrang(`${nd}/cong-cu`);
+  const r = await payload.update({ collection: "noi-dung-trang", id: d.id, user: bienTap, overrideAccess: false, draft: true,
+    data: { duong: "/khac", nhom: "phap_ly", mac_dinh: { x: 1 } } as never }) as unknown as Record<string, unknown>;
+  assert.equal(r.duong, `${nd}/cong-cu`); assert.equal(r.nhom, "cong_cu"); assert.deepEqual(r.mac_dinh, { tieu_de_seo: "Mặc định", h1: "H", doan: ["a"] });
+  const pl = await timTrang(`${nd}/dieu-khoan`);
+  await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: bienTap, overrideAccess: false, draft: true,
+    data: { h1: "Sửa bậy" } as never }), /not allowed|Forbidden|không|quyền|Not Found/i);
+  await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false, draft: true, data: { h1: "Điều khoản" } as never });
+});
+
+await ca("pháp lý: 'Thay đổi nội dung' bắt buộc ngày hiệu lực mới hơn bản đang áp dụng; 'Sửa chữ' giữ ngày", async () => {
+  const pl = await timTrang(`${nd}/dieu-khoan`);
+  await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
+    data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-10-01T00:00:00.000Z", _status: "published" } as never }), /ngày hiệu lực mới/);
+  // Ô ngày "dayOnly" của Payload lưu 12:00 UTC — cùng NGÀY với ngày trong code (08/10/2026) vẫn phải bị chặn.
+  await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
+    data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-10-08T12:00:00.000Z", _status: "published" } as never }), /ngày hiệu lực mới/);
+  await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
+    data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", _status: "published" } as never });
+  await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
+    data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", _status: "published" } as never }), /ngày hiệu lực mới/);
+  const r = await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
+    data: { loai_sua: "sua_chu", ngay_hieu_luc: "2027-01-01T00:00:00.000Z", _status: "published" } as never }) as unknown as { ngay_hieu_luc: string };
+  assert.match(r.ngay_hieu_luc, /^2026-11-01/);
+});
+
+await ca("/gioi-thieu mục 'quy-trinh': chỉ Chủ biên sửa; neo đã có không đổi được", async () => {
+  // Luật gắn với đường dẫn /gioi-thieu → tạm đổi đường dẫn tài liệu thử sang /gioi-thieu (overrideAccess), xong trả lại.
+  const g = await timTrang(`${nd}/gioi-thieu`);
+  const muc = [{ neo: "quy-trinh", tieu_de: "Ai biên soạn, ai thẩm định" }, { neo: "nguon", tieu_de: "Nguồn" }];
+  await payload.update({ collection: "noi-dung-trang", id: g.id, overrideAccess: true, context: { dongBo: true }, data: { duong: "/gioi-thieu", muc } as never });
+  try {
+    const cu = await timTrang("/gioi-thieu") as unknown as { muc: { id: string; neo: string; tieu_de: string }[] };
+    await nem(() => payload.update({ collection: "noi-dung-trang", id: g.id, user: bienTap, overrideAccess: false, draft: true,
+      data: { muc: cu.muc.map((m) => (m.neo === "quy-trinh" ? { ...m, tieu_de: "Đổi bậy" } : m)) } as never }), /Chủ biên/);
+    await nem(() => payload.update({ collection: "noi-dung-trang", id: g.id, user: chuBien, overrideAccess: false, draft: true,
+      data: { muc: cu.muc.map((m) => (m.neo === "nguon" ? { ...m, neo: "nguon-moi" } : m)) } as never }), /neo/);
+    await payload.update({ collection: "noi-dung-trang", id: g.id, user: bienTap, overrideAccess: false, draft: true,
+      data: { muc: cu.muc.map((m) => (m.neo === "nguon" ? { ...m, tieu_de: "Nguồn tri thức" } : m)) } as never });
+  } finally {
+    await payload.update({ collection: "noi-dung-trang", id: g.id, overrideAccess: true, context: { dongBo: true }, data: { duong: `${nd}/gioi-thieu` } as never });
+  }
+});
+
+await ca("kiểm định chặn xuất bản: số điện thoại gõ tay, tự nhận 'đã thẩm định', link nút ra ngoài site", async () => {
+  const d = await timTrang(`${nd}/cong-cu`);
+  await nem(() => payload.update({ collection: "noi-dung-trang", id: d.id, user: chuBien, overrideAccess: false,
+    data: { loi_dan: "Gọi 0912 345 678", _status: "published" } as never }), /Chưa xuất bản được.*điện thoại/);
+  await nem(() => payload.update({ collection: "noi-dung-trang", id: d.id, user: chuBien, overrideAccess: false,
+    data: { doan: [{ chu: "Trang này đã thẩm định bởi chuyên gia." }], _status: "published" } as never }), /thẩm định/);
+  await nem(() => payload.update({ collection: "noi-dung-trang", id: d.id, user: chuBien, overrideAccess: false,
+    data: { khoi_tren: [{ blockType: "nut_moi", chu: "Xem", link: "https://evil.vn" }], _status: "published" } as never }), /trong site|invalid|không hợp lệ/i);
+  const r = await payload.update({ collection: "noi-dung-trang", id: d.id, user: chuBien, overrideAccess: false,
+    data: { loi_dan: "Hoá  giải".normalize("NFD") + " nhẹ nhàng", _status: "published" } as never }) as unknown as { loi_dan: string; ghi_chu_kiem_dinh: string };
+  assert.equal(r.loi_dan, r.loi_dan.normalize("NFC"));
+  assert.match(r.ghi_chu_kiem_dinh, /nhạy cảm/);
+});
+
+await ca("ghi đè trang KB: chỉ đường dẫn thuộc mẫu cụm; tự gắn nhóm + mẫu; trùng bị chặn", async () => {
+  const cu = process.env.ENGINE_URL; delete process.env.ENGINE_URL;   // không hỏi engine → chỉ dựa vào mẫu đường dẫn
+  try {
+    await nem(() => payload.create({ collection: "noi-dung-trang", user: bienTap, overrideAccess: false, draft: true,
+      data: { duong: `${nd}/khong-co/abc` } as never }), /mẫu cụm/);
+    const g = await payload.create({ collection: "noi-dung-trang", user: bienTap, overrideAccess: false, draft: true,
+      data: { duong: `${nd}/kien-thuc/sao-tu-vi`, nhom: "phap_ly", khoi_tren: [{ blockType: "ghi_chu", kieu: "luu_y", noi_dung: "Xem {tieu_de}" }] } as never }) as unknown as Record<string, unknown> & { id: number };
+    tao.push({ collection: "noi-dung-trang", id: g.id });
+    assert.equal(g.nhom, "kien_thuc"); assert.ok(g.mau); assert.equal(g.tren_web, true);
+    // Đồng bộ lại không đánh dấu ghi đè còn khớp mẫu là "URL đã gỡ" (kể cả nhóm tuoi / la_so_mau).
+    const tuoi = kiemSoTrang({ trang: [{ duong: `${nd}/cong-cu`, nhom: "cong_cu", ten: "Công cụ đổi tên", o: [], mac_dinh: {} }],
+      mau: [{ mau_duong: `${nd}/tuoi-{nam}-{gioi}`, nhom: "tuoi", ten: "Tuổi", bien: [], o: ["khoi_tren"], nguon_kb: { kieu: "tuoi", vi_du: "tuoi-1990-nam", tep_kb: [] } }] });
+    await dongBoSoTrang(payload, { trang: soTrang("Công cụ đổi tên").trang, mau: [...soTrang("x").mau, ...tuoi.mau] });
+    await ghiTao();
+    const gt = await payload.create({ collection: "noi-dung-trang", user: bienTap, overrideAccess: false, draft: true,
+      data: { duong: `${nd}/tuoi-1990-nam` } as never }) as unknown as { id: number; nhom: string };
+    tao.push({ collection: "noi-dung-trang", id: gt.id });
+    assert.equal(gt.nhom, "tuoi");
+    const kq = await dongBoSoTrang(payload, { trang: soTrang("Công cụ đổi tên").trang, mau: [...soTrang("x").mau, ...tuoi.mau] });
+    assert.equal(kq.go, 0);
+    assert.equal((await timTrang(`${nd}/tuoi-1990-nam`)).tren_web, true);
+    assert.equal((await timTrang(`${nd}/kien-thuc/sao-tu-vi`)).tren_web, true);
+    await nem(() => payload.create({ collection: "noi-dung-trang", user: chuBien, overrideAccess: false, draft: true,
+      data: { duong: `${nd}/kien-thuc/sao-tu-vi` } as never }), /Đã có|unique|duong/i);
+  } finally { process.env.ENGINE_URL = cu; }
+});
+
+await ca("mẫu cụm: không tạo tay; biến lạ chỉ cảnh báo; cộng tác viên không đọc được hai collection", async () => {
+  await nem(() => payload.create({ collection: "mau-cum", user: chuBien, overrideAccess: false, draft: true,
+    data: { mau_duong: "/x/{slug}" } as never }), /đồng bộ/);
+  const m = (await payload.find({ collection: "mau-cum", overrideAccess: true, where: { mau_duong: { equals: `${nd}/kien-thuc/{slug}` } } })).docs[0]!;
+  const r = await payload.update({ collection: "mau-cum", id: m.id, user: chuBien, overrideAccess: false,
+    data: { khoi_duoi: [{ blockType: "van_ban", noi_dung: "Đọc thêm về {tieu_de} và {la}" }], _status: "published" } as never }) as unknown as { ghi_chu_kiem_dinh: string };
+  assert.match(r.ghi_chu_kiem_dinh, /\{la\}/);
+  await nem(() => payload.find({ collection: "noi-dung-trang", user: ctv, overrideAccess: false }), /not allowed|Forbidden|quyền/i);
+  await nem(() => payload.find({ collection: "mau-cum", user: ctv, overrideAccess: false }), /not allowed|Forbidden|quyền/i);
+  const khach = await payload.find({ collection: "mau-cum", overrideAccess: false, where: { mau_duong: { like: nd } } });
+  assert.equal(khach.docs.length, 1, "khách chỉ thấy bản đã xuất bản");
+});
+
+await ca("chân trang: chữ thương hiệu mặc định; miễn trừ không để trống; liên hệ gõ tay bị chặn; biên tập viên không sửa", async () => {
+  const g = await payload.findGlobal({ slug: "dieu-huong" }) as unknown as { mien_tru: string; nhan_ung_ho: string };
+  assert.match(g.mien_tru, /chủ biên Đức Luân chịu trách nhiệm/);
+  await nem(() => payload.updateGlobal({ slug: "dieu-huong", user: chuBien, overrideAccess: false, data: { mien_tru: "  " } as never }), /Lời miễn trừ|required|bắt buộc|invalid/i);
+  await nem(() => payload.updateGlobal({ slug: "dieu-huong", user: chuBien, overrideAccess: false,
+    data: { thuong_hieu: { gioi_thieu: "Liên hệ 0912 345 678" } } as never }), /điện thoại/);
+  await nem(() => payload.updateGlobal({ slug: "dieu-huong", user: bienTap, overrideAccess: false, data: { nhan_ung_ho: "x" } as never }), /not allowed|Forbidden|quyền/i);
+  await payload.updateGlobal({ slug: "dieu-huong", user: chuBien, overrideAccess: false,
+    data: { thuong_hieu: { gioi_thieu: "Giới thiệu mới", cam_ket: [{ chu: "Không bán dữ liệu", bieu_tuong: "khoa" }] }, nhan_ung_ho: "Ủng hộ" } as never });
+  const d = await payload.findGlobal({ slug: "dieu-huong" }) as unknown as { thuong_hieu: { gioi_thieu: string; cam_ket: { chu: string }[] } };
+  assert.equal(d.thuong_hieu.gioi_thieu, "Giới thiệu mới"); assert.equal(d.thuong_hieu.cam_ket.length, 1);
+  await payload.updateGlobal({ slug: "dieu-huong", overrideAccess: true, data: { thuong_hieu: { gioi_thieu: null, cam_ket: [] }, nhan_ung_ho: null } as never });
 });
 
 // dọn

@@ -50,9 +50,9 @@ export const TINH_NANG_MAC_DINH: TinhNangCms = {
 export const cmsUrl = () => (process.env.CMS_URL || "").replace(/\/+$/, "");
 export const coCms = () => Boolean(cmsUrl());
 
-type Goi = { nhap?: boolean; hanMs?: number };
+type Goi = { nhap?: boolean; hanMs?: number; /** Thẻ cache thêm ngoài "cms" (vd "trang:/tu-vi" — ND). */ the?: string[] };
 
-async function goiCms<T>(duong: string, { nhap = false, hanMs = 4_000 }: Goi = {}): Promise<T | null> {
+export async function goiCms<T>(duong: string, { nhap = false, hanMs = 4_000, the = [] }: Goi = {}): Promise<T | null> {
   const goc = cmsUrl();
   if (!goc) return null;
   const headers: Record<string, string> = { accept: "application/json" };
@@ -61,7 +61,7 @@ async function goiCms<T>(duong: string, { nhap = false, hanMs = 4_000 }: Goi = {
     const r = await fetch(`${goc}${duong}`, {
       headers,
       signal: AbortSignal.timeout(hanMs),
-      ...(nhap ? { cache: "no-store" as const } : { next: { revalidate: 300, tags: [TAG_CMS] } }),
+      ...(nhap ? { cache: "no-store" as const } : { next: { revalidate: 300, tags: [TAG_CMS, ...the] } }),
     });
     if (!r.ok) return null;
     return (await r.json()) as T;
@@ -202,9 +202,39 @@ export function duongLienKet(l: LienKetCms): string | null {
   return l.duong_dan && TRONG_SITE.test(l.duong_dan) ? l.duong_dan : null;
 }
 
-export async function dieuHuongCms(): Promise<{ ten: string; ds: [string, string][] }[] | null> {
+export type BieuTuongCamKet = "khien" | "may_chu" | "lap_lanh" | "khoa" | "bat_tay" | "sach" | "can" | "la_ban";
+/** ND-1: chữ chân trang từ global "Điều hướng chân trang". Ô trống → null (web dùng chữ trong code). */
+export type ChuChanTrangCms = {
+  gioiThieu: string | null; camKet: { chu: string; bieu_tuong: BieuTuongCamKet }[] | null; mienTru: string | null; nhanUngHo: string | null;
+};
+type DieuHuongCms = { cot?: CotCms[] | null; thuong_hieu?: { gioi_thieu?: string | null; cam_ket?: { chu?: string | null; bieu_tuong?: string | null }[] | null } | null;
+  mien_tru?: string | null; nhan_ung_ho?: string | null };
+const BIEU_TUONG_CAM_KET = new Set(["khien", "may_chu", "lap_lanh", "khoa", "bat_tay", "sach", "can", "la_ban"]);
+
+/** Chuẩn hoá chữ chân trang CMS (thuần, để test): chuỗi rỗng / sai kiểu → null; cam kết tối đa 3, biểu tượng lạ → khien. */
+export function chuChanTrang(g: DieuHuongCms | null): ChuChanTrangCms {
+  const chu = (v: unknown, toiDa: number) => (typeof v === "string" && v.trim() ? v.trim().slice(0, toiDa) : null);
+  const ck = (g?.thuong_hieu?.cam_ket ?? []).flatMap((c) => {
+    const t = chu(c?.chu, 120);
+    return t ? [{ chu: t, bieu_tuong: (BIEU_TUONG_CAM_KET.has(String(c?.bieu_tuong)) ? c!.bieu_tuong : "khien") as BieuTuongCamKet }] : [];
+  }).slice(0, 3);
+  return { gioiThieu: chu(g?.thuong_hieu?.gioi_thieu, 300), camKet: ck.length ? ck : null, mienTru: chu(g?.mien_tru, 600), nhanUngHo: chu(g?.nhan_ung_ho, 40) };
+}
+
+/** Chân trang từ CMS: cột liên kết + chữ (ND-1). CMS chưa nối / lỗi / chậm → null (web dùng toàn bộ bản code). */
+export async function chanTrangCms(): Promise<{ cot: { ten: string; ds: [string, string][] }[] | null; chu: ChuChanTrangCms } | null> {
   if (!coCms()) return null;
-  const [g, tn] = await Promise.all([goiCms<{ cot?: CotCms[] | null }>("/api/globals/dieu-huong?depth=1", { hanMs: HAN_KHUNG }), tinhNangCms()]);
+  const [g, tn] = await Promise.all([goiCms<DieuHuongCms>("/api/globals/dieu-huong?depth=1", { hanMs: HAN_KHUNG }), tinhNangCms()]);
+  if (!g) return null;
+  return { cot: cotChanTrang(g, tn.blog_bat), chu: chuChanTrang(g) };
+}
+
+export async function dieuHuongCms(): Promise<{ ten: string; ds: [string, string][] }[] | null> {
+  return (await chanTrangCms())?.cot ?? null;
+}
+
+function cotChanTrang(g: DieuHuongCms, blogBat: boolean): { ten: string; ds: [string, string][] }[] | null {
+  const tn = { blog_bat: blogBat };
   // Blog tắt ở CMS → bỏ link tới bài / chuyên mục / /blog (không để link chết ở chân trang).
   const laBlog = (d: string) => d === "/blog" || d.startsWith("/blog/");
   const cot = (g?.cot ?? []).slice(0, 4).map((c) => ({
