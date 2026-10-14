@@ -1,0 +1,131 @@
+# -*- coding: utf-8 -*-
+"""TDG-1 — ghép lời cho: xem tuổi làm nhà / cưới (Kim lâu, Hoang ốc, Tam tai), hướng xấu theo năm, tuổi xông đất.
+Phép tính ở `calc/tuoi_dan_gian`; tên + nghĩa ở KB `tuoi_dan_gian_kb.json` (nháp AI). Không LLM, không dự báo sự
+kiện; lời lẽ "dân gian thường tránh…", không doạ, không vật phẩm."""
+from __future__ import annotations
+
+import datetime as dt
+import json
+from pathlib import Path
+
+from app.calc import lunar, tuoi_dan_gian as t
+from app.config import CALENDAR_MERIDIAN_TZ
+from app.luangiai import hoang_lich as hl
+
+KB = json.loads((Path(__file__).parents[1] / "kb" / "data" / "tuoi_dan_gian_kb.json").read_text(encoding="utf-8"))
+_HK = json.loads((Path(__file__).parents[1] / "kb" / "data" / "phongthuy_huyen_khong.json").read_text(encoding="utf-8"))
+LUU_Y = ("Đây là tập quán dân gian để tham khảo khi lên kế hoạch, không phải lời tiên đoán. Quyết định làm nhà, cưới "
+         "hỏi nên dựa trên điều kiện thực tế của gia đình.")
+
+
+def _meta() -> dict:
+    return {"nguon": KB["source"]["ten"], "source_id": KB["source_id"], "school_id": KB["school_id"],
+            "trang_thai": KB["trang_thai"], "luu_y": LUU_Y}
+
+
+def nam_am_sinh(nam: int, thang: int | None = None, ngay: int | None = None) -> int:
+    """Năm âm lịch Việt của ngày sinh (đủ ngày/tháng); chỉ có năm → dùng nguyên năm (ghi chú cho người sinh trước Tết)."""
+    if thang and ngay:
+        return lunar.solar_to_lunar(ngay, thang, nam, CALENDAR_MERIDIAN_TZ)[2]
+    return nam
+
+
+def _danh_gia_nam(nam_sinh_am: int, nam_xay: int) -> dict:
+    tuoi = t.tuoi_mu(nam_sinh_am, nam_xay)
+    kl, ho = t.kim_lau(tuoi), t.HOANG_OC[t.hoang_oc(tuoi)]
+    tt = t.pham_tam_tai(t.can_chi_nam(nam_sinh_am)[1], t.can_chi_nam(nam_xay)[1])
+    xau = [x for x in (KB["kim_lau"][kl]["ten"] if kl else None,
+                       KB["hoang_oc"][ho]["ten"] if ho in t.HOANG_OC_XAU else None,
+                       f"Tam tai (năm thứ {tt})" if tt else None) if x]
+    return {"tuoi": tuoi, "kl": kl, "ho": ho, "tt": tt, "xau": xau}
+
+
+def xem_tuoi_lam_nha(nam_sinh: int, nam_xay: int, thang_sinh: int | None = None, ngay_sinh: int | None = None) -> dict:
+    nsa = nam_am_sinh(nam_sinh, thang_sinh, ngay_sinh)
+    can, chi = t.can_chi_nam(nsa)
+    d = _danh_gia_nam(nsa, nam_xay)
+    nam_thuan = []
+    for n in range(nam_xay + 1, nam_xay + 16):
+        x = _danh_gia_nam(nsa, n)
+        if not x["xau"]:
+            nam_thuan.append({"nam": n, "can_chi": " ".join(t.can_chi_nam(n)), "tuoi_mu": x["tuoi"]})
+        if len(nam_thuan) == 4:
+            break
+    ket = ({"ma": "thuan", "chu": f"Năm {nam_xay} tuổi {d['tuoi']} không phạm Kim lâu, Hoang ốc xấu hay Tam tai."}
+           if not d["xau"] else
+           {"ma": "can_nhac", "chu": f"Năm {nam_xay} tuổi {d['tuoi']} rơi vào {', '.join(d['xau'])} — dân gian thường tránh làm nhà, cưới hỏi năm này."})
+    return {
+        "nam_sinh": nam_sinh, "nam_sinh_am": nsa, "can_chi": f"{can} {chi}", "nam_xay": nam_xay,
+        "can_chi_nam_xay": " ".join(t.can_chi_nam(nam_xay)), "tuoi_mu": d["tuoi"],
+        "uoc_luong_nam_sinh": not (thang_sinh and ngay_sinh),
+        "kim_lau": {"ma": d["kl"], **KB["kim_lau"][d["kl"]]} if d["kl"] else None,
+        "hoang_oc": {"ma": d["ho"], **KB["hoang_oc"][d["ho"]]},
+        "tam_tai": ({"nam_thu": d["tt"], **KB["tam_tai"]} if d["tt"] else None),
+        "cac_nam_tam_tai": t.tam_tai(chi),
+        "ket_luan": ket, "nam_thuan": nam_thuan,
+        "cuoi_hoi": ("Với cưới hỏi, dân gian xét Kim lâu theo tuổi mụ của cô dâu: "
+                     + (f"tuổi {d['tuoi']} phạm {KB['kim_lau'][d['kl']]['ten']}." if d["kl"] else f"tuổi {d['tuoi']} không phạm Kim lâu.")),
+        "cach_dan_gian": KB["cach_dan_gian"] if d["xau"] else None,
+        "cach_tinh": ("Tuổi mụ = năm định làm − năm sinh (âm lịch) + 1. Kim lâu: tuổi mụ chia 9 dư 1, 3, 6, 8. Hoang ốc: "
+                      "10 tuổi Nhất Cát, 20 Nhì Nghi, 30 Tam Địa Sát, 40 Tứ Tấn Tài, 50 Ngũ Thọ Tử, 60 Lục Hoang Ốc, số lẻ "
+                      "đếm tiếp. Tam tai: ba năm theo tam hợp của tuổi."),
+        "han_nam": han_nam_luan(nam_xay),
+        **_meta(),
+    }
+
+
+def han_nam_luan(nam: int) -> dict:
+    h = t.han_nam(nam)
+    tranh = [{"ma": m, **KB["han_nam"][m], "phuong": h[m]["phuong"],
+              **({"chi": h[m]["chi"]} if m in ("tam_sat",) else {"chi": [h[m]["chi"]]} if m in ("thai_tue", "tue_pha") else {})}
+             for m in ("thai_tue", "tue_pha", "tam_sat", "ngu_hoang", "nhi_hac")]
+    sao = _HK["sao"]
+    phi_tinh = [{**x, "ten_sao": {1: "Nhất Bạch", 2: "Nhị Hắc", 3: "Tam Bích", 4: "Tứ Lục", 5: "Ngũ Hoàng", 6: "Lục Bạch",
+                                  7: "Thất Xích", 8: "Bát Bạch", 9: "Cửu Tử"}[x["sao"]],
+                 "y_nghia": sao[str(x["sao"])].get("y_vuong")} for x in h["phi_tinh"]]
+    tet = dt.date(*reversed(lunar.lunar_to_solar(1, 1, nam, 0, CALENDAR_MERIDIAN_TZ)))
+    return {"nam": nam, "can_chi": h["can_chi"], "huong_tranh": tranh, "phi_tinh": phi_tinh,
+            "moc": f"Tính từ Lập xuân (khoảng 4/2/{nam}); Tết Việt năm {h['can_chi']} là {tet.day}/{tet.month}/{tet.year}.",
+            **_meta()}
+
+
+def _ly_do(x: dict) -> list[str]:
+    q = KB["quan_he_chi"]
+    ra = []
+    if x["chi_voi_nam"] in ("tam_hop", "luc_hop"):
+        ra.append(f"tuổi {x['chi']} {q[x['chi_voi_nam']]} với năm")
+    if x["chi_voi_chu"] in ("tam_hop", "luc_hop"):
+        ra.append(f"{q[x['chi_voi_chu']]} với tuổi gia chủ")
+    if x["can_voi_chu"] in ("ngu_hop", "sinh_chu"):
+        ra.append(KB["can_voi_chu"][x["can_voi_chu"]])
+    if x["nap_am_voi_chu"] in ("sinh", "bình hoà"):
+        ra.append(f"{x['nap_am']} — {KB['nap_am'][x['nap_am_voi_chu']]}")
+    return ra
+
+
+def xong_dat_luan(nam: int, nam_sinh_chu: int, thang_sinh: int | None = None, ngay_sinh: int | None = None,
+                  tu: int = 1960, den: int = 2008) -> dict:
+    nsa = nam_am_sinh(nam_sinh_chu, thang_sinh, ngay_sinh)
+    ds = t.xong_dat(nam, nsa, range(tu, den + 1))
+    hop = [{"nam_sinh": x["nam_sinh"], "can_chi": x["can_chi"], "nap_am": x["nap_am"], "ly_do": _ly_do(x)}
+           for x in ds if x["diem"] >= 2 and not x["tam_tai"] and _ly_do(x)][:8]
+    can_n, chi_n = t.can_chi_nam(nam)
+    can_c, chi_c = t.can_chi_nam(nsa)
+    xung_nam = t.CHI[(t.CHI.index(chi_n) + 6) % 12]
+    xung_chu = t.CHI[(t.CHI.index(chi_c) + 6) % 12]
+    tam_tai_nam = [c for c in t.CHI if t.pham_tam_tai(c, chi_n)]
+    tet = dt.date(*reversed(lunar.lunar_to_solar(1, 1, nam, 0, CALENDAR_MERIDIAN_TZ)))
+    m1 = hl.ngay_xem(tet)
+    return {
+        "nam": {"nam": nam, "can_chi": f"{can_n} {chi_n}"}, "chu": {"nam_sinh": nam_sinh_chu, "can_chi": f"{can_c} {chi_c}"},
+        "uoc_luong_nam_sinh": not (thang_sinh and ngay_sinh),
+        "tuoi_hop": hop,
+        "nen_tranh": [f"Tuổi {xung_nam} (xung năm {chi_n})", f"Tuổi {xung_chu} (xung tuổi gia chủ {chi_c})",
+                      f"Tuổi {', '.join(tam_tai_nam)} (đang trong Tam tai năm {chi_n})"],
+        "mung_mot": {"ngay": tet.isoformat(), "can_chi": m1["can_chi"]["ngay"],
+                     "gio_hoang_dao": [{"chi": g["chi"], "khung": g["khung"]} for g in m1["gio_hoang_dao"]],
+                     "huong": m1["huong"], "hoang_dao": m1["hoang_dao"], "than": m1["than"]["ten"]},
+        "cach_chon": ("Ưu tiên tuổi tam hợp / lục hợp với năm và với gia chủ, can ngũ hợp hoặc sinh can gia chủ, mệnh "
+                      "nạp âm sinh hoặc cùng hành với gia chủ; bỏ tuổi xung năm, xung gia chủ và tuổi đang Tam tai."),
+        **_meta(),
+    }
