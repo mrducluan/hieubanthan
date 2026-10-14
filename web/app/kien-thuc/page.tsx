@@ -8,11 +8,14 @@ import { CHU_DE, HINH_CHU_DE, mucLuc } from "@/lib/kien-thuc";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang } from "@/components/minh-hoa/TrangTri";
 import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { LoiDanCms } from "@/components/cms/DauTrangCms";
+import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 export const revalidate = 21600;
 
 const MO_TA = "Ý nghĩa 12 con số thần số học, 64 quẻ Kinh Dịch, 14 chính tinh và 12 cung Tử vi, 10 thập thần, 10 nhật chủ Bát tự — có nguồn, có mặt tối, có câu tự soi.";
-export const metadata: Metadata = {
+const META: Metadata = {
   title: { absolute: "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi, Bát tự" },
   description: MO_TA,
   alternates: { canonical: "/kien-thuc", types: { "text/markdown": "/kien-thuc.md" } },
@@ -20,8 +23,14 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Thư viện kiến thức", description: MO_TA },
 };
 
+const DUONG = "/kien-thuc";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(META, await layNoiDungTrang(DUONG));
+}
+
 export default async function Page() {
-  const ds = await mucLuc();
+  const [ds, nd] = await Promise.all([mucLuc(), layNoiDungTrang(DUONG)]);
   return (
     <div className="mx-auto max-w-4xl">
       <JsonLd data={goiLd(
@@ -29,8 +38,9 @@ export default async function Page() {
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Kiến thức", duong: "/kien-thuc" }]),
       )} />
       <p className="eyebrow">Kiến thức</p>
-      <h1 className="mt-2 text-4xl sm:text-5xl">Thư viện kiến thức</h1>
-      <p className="mt-3 max-w-2xl text-fg-muted">{MO_TA}</p>
+      <h1 className="mt-2 text-4xl sm:text-5xl">{nd.dau.h1 ?? "Thư viện kiến thức"}</h1>
+      <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{MO_TA}</LoiDanCms>
+      <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         {Object.entries(CHU_DE).map(([k, cd]) => {
           const n = ds.filter((t) => t.loai === cd.loai).length;
@@ -44,7 +54,9 @@ export default async function Page() {
           );
         })}
       </div>
+      <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-12" />
       <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" /></Suspense>
+      <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />
     </div>
   );
 }

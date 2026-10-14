@@ -3,26 +3,31 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HeartHandshake, Landmark, Wallet } from "lucide-react";
 import { NutChep } from "@/components/ung-ho/NutChep";
-import { metaTrang } from "@/lib/seo";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { lopKieuChu } from "@/lib/kieu-chu";
+import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
 import { dsViUngHo, nganHangUngHo } from "@/lib/ung-ho";
 
-export const metadata: Metadata = metaTrang({
-  tieuDe: "Ủng hộ đội ngũ phát triển Hiểu Bản Thân",
-  moTa: "Hiểu Bản Thân miễn phí phần lớn công cụ. Nếu thấy hữu ích, bạn có thể ủng hộ đội ngũ phát triển bằng chuyển khoản hoặc ví tiền mã hoá.",
-  duong: "/ung-ho",
-});
+const DUONG = "/ung-ho";
 
-export default function Page() {
-  const vi = dsViUngHo(), nh = nganHangUngHo();
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(metaMacDinh(DUONG), await layNoiDungTrang(DUONG));
+}
+
+export default async function Page() {
+  const vi = dsViUngHo(), nh = nganHangUngHo(), nd = await layNoiDungTrang(DUONG);
   return (
     <div className="mx-auto max-w-2xl">
       <p className="eyebrow">Ủng hộ</p>
-      <h1 className="mt-2 font-serif text-4xl leading-tight sm:text-5xl">Ủng hộ đội ngũ phát triển</h1>
+      <h1 className="mt-2 font-serif text-4xl leading-tight sm:text-5xl">{nd.dau.h1 ?? "Ủng hộ đội ngũ phát triển"}</h1>
       <p className="mt-4 text-fg-muted">
+        {nd.dau.loiDan ? <span className={lopKieuChu(nd.dau.kieuChu) || undefined}>{nd.dau.loiDan}</span> : <>
         Hiểu Bản Thân giữ phần lớn công cụ miễn phí, không quảng cáo nhắm mục tiêu, không bán dữ liệu. Chi phí máy chủ,
         biên soạn và kiểm định nội dung do một nhóm nhỏ tự gánh. Nếu trang giúp được bạn, một khoản ủng hộ dù nhỏ cũng là
         động lực để chúng tôi làm tiếp.
+        </>}
       </p>
+      <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
 
       {nh && (
         <section className="glass mt-8 space-y-3 rounded-2xl p-5" data-testid="ung-ho-ngan-hang">
@@ -56,6 +61,7 @@ export default function Page() {
 
       {!nh && vi.length === 0 && <p className="mt-8 text-fg-faint" data-testid="ung-ho-chua-co">Thông tin ủng hộ đang được cập nhật.</p>}
 
+      <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-8" />
       <section className="mt-8 space-y-2 text-sm leading-relaxed text-fg-muted">
         <h2 className="flex items-center gap-2 font-serif text-xl text-fg"><HeartHandshake className="size-5 text-gold" aria-hidden /> Điều cần biết</h2>
         <ul className="list-disc space-y-1.5 pl-5">
@@ -64,6 +70,7 @@ export default function Page() {
           <li>Chúng tôi không bao giờ nhắn tin xin chuyển tiền. Chỉ tin địa chỉ hiển thị trên trang này (hieuban.com/ung-ho).</li>
         </ul>
       </section>
+      <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-10" />
     </div>
   );
 }

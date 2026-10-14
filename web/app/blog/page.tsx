@@ -6,13 +6,22 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { ChipChuyenMuc, chuyenMucCoBai, LuoiBai } from "@/components/blog/LuoiBai";
 import { dsBaiTongHop, duongBlog } from "@/lib/blog";
 import { goiLd, ldDuongDan, metaTrang, urlDayDu } from "@/lib/seo";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { LoiDanCms } from "@/components/cms/DauTrangCms";
+import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 const MO_TA = "Bài viết về hiểu bản thân, thần số học, Tử vi, Kinh Dịch, Bát tự, phong thuỷ và đời sống — đọc thêm ngoài thư viện kiến thức.";
 const META = metaTrang({ tieuDe: "Blog", moTa: MO_TA, duong: "/blog" });
-export const metadata: Metadata = { ...META, alternates: { ...META.alternates, types: { "application/rss+xml": "/blog/rss.xml" } } };
+const META_GOC: Metadata = { ...META, alternates: { ...META.alternates, types: { "application/rss+xml": "/blog/rss.xml" } } };
+
+const DUONG = "/blog";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(META_GOC, await layNoiDungTrang(DUONG));
+}
 
 export default async function Page() {
-  const ds = await dsBaiTongHop();
+  const [ds, nd] = await Promise.all([dsBaiTongHop(), layNoiDungTrang(DUONG)]);
   return (
     <div className="mx-auto max-w-5xl">
       <JsonLd data={goiLd(
@@ -23,13 +32,16 @@ export default async function Page() {
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Blog", duong: "/blog" }]),
       )} />
       <p className="eyebrow">Blog</p>
-      <h1 className="mt-2 text-4xl sm:text-5xl">Blog</h1>
-      <p className="mt-3 max-w-2xl text-fg-muted">{MO_TA}</p>
+      <h1 className="mt-2 text-4xl sm:text-5xl">{nd.dau.h1 ?? "Blog"}</h1>
+      <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{MO_TA}</LoiDanCms>
+      <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
       <ChipChuyenMuc ds={chuyenMucCoBai(ds)} />
 
       {ds.length === 0 ? (
         <p className="glass mt-8 rounded-2xl p-6 text-fg-muted">Chưa có bài viết. Trong lúc chờ, mời bạn đọc <Link href="/kien-thuc" className="text-gold underline underline-offset-4">thư viện kiến thức</Link>.</p>
       ) : <LuoiBai ds={ds} />}
+      <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-12" />
+      <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />
     </div>
   );
 }

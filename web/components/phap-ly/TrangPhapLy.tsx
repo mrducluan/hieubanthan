@@ -15,8 +15,9 @@ const LIEN_QUAN = [
   { href: "/lien-he", ten: "Liên hệ" },
 ];
 
-export function TrangPhapLy({ nhan, tieuDe, moDau, muc, duongDan, hieuLuc = true }: {
+export function TrangPhapLy({ nhan, tieuDe, moDau, muc, duongDan, hieuLuc = true, khoiCuoi }: {
   nhan: string; tieuDe: string; moDau: ReactNode; muc: Muc[]; duongDan: string; hieuLuc?: boolean;
+  /** ND-3: khối CMS cuối trang (trước "Xem thêm"). */ khoiCuoi?: ReactNode;
 }) {
   return (
     <article className="mx-auto max-w-3xl">
@@ -46,6 +47,7 @@ export function TrangPhapLy({ nhan, tieuDe, moDau, muc, duongDan, hieuLuc = true
         ))}
       </div>
 
+      {khoiCuoi}
       <nav aria-label="Trang liên quan" className="mt-12 border-t border-line/60 pt-5">
         <p className="eyebrow">Xem thêm</p>
         <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-2 text-sm">

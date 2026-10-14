@@ -2,8 +2,8 @@
 // Mỗi URL công khai nhóm công cụ / tĩnh / pháp lý / chủ đề là MỘT tài liệu, do job "dong-bo-so-trang" tạo từ sổ trang
 // của web (web/lib/so-trang.ts) — biên tập viên không tạo tay. Trang kiến thức KB không có tài liệu sẵn: muốn chỉnh
 // riêng một URL thì tạo "ghi đè theo yêu cầu" (chỉ nhập đường dẫn, phải thuộc một mẫu cụm có thật).
-// Ô để trống = web hiện chữ đang chạy trong code (mac_dinh, chỉ đọc). Pha ND-0/ND-1: web CHƯA đọc tài liệu này
-// (trừ chân trang ở global Điều hướng) — các pha ND-2… mới nối từng nhóm trang.
+// Ô để trống = web hiện chữ đang chạy trong code (mac_dinh, chỉ đọc). Web đã đọc: trang công cụ (ND-2), trang tĩnh +
+// chủ đề + /gioi-thieu, /lien-he (ND-3). Chưa đọc: pháp lý (ND-4), trang KB / mẫu cụm (ND-5).
 // Quyền: nhóm pháp lý + mục "quy-trinh" của /gioi-thieu chỉ Quản trị/Chủ biên sửa (điều kiện ở access + hook, không chỉ
 // ẩn nút); biên tập viên soạn nháp nhóm khác, Chủ biên xuất bản; cộng tác viên không thấy collection.
 import { FixedToolbarFeature, HeadingFeature, LinkFeature, lexicalEditor, lexicalHTMLField } from "@payloadcms/richtext-lexical";

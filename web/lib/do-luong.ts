@@ -15,7 +15,9 @@ export type SuKien =
   // TS-PHAI: đổi trường phái thần số · HN-2: người dùng nêu ý định trong ngày (chỉ mã ý định, không gửi câu gõ)
   | "school_switched" | "daily_intent_set"
   // HL-1: tìm ngày đẹp cho một việc (chỉ mã việc + số ngày tìm được)
-  | "good_day_searched";
+  | "good_day_searched"
+  // ND-2: bấm nút kêu gọi ban biên tập đặt từ CMS (mã đo + trang + vị trí)
+  | "cms_khoi_bam";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number"> = {
@@ -39,7 +41,10 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   so_thang: "number",
   co_tuoi: "number",
   so_ngay: "number",
-  nhiem_vu: "string",   // SAO-3: mã nhiệm vụ (luu_ho_so / hoi_3_cau / moi_1_ban)
+  nhiem_vu: "string",
+  ma_do: "string",      // ND-2: mã đo ban biên tập đặt cho nút CMS (chữ thường, số, gạch dưới)
+  trang: "string",      // ND-2: đường dẫn trang chứa nút
+  vi_tri: "string",     // ND-2: tren / duoi / cuoi   // SAO-3: mã nhiệm vụ (luu_ho_so / hoi_3_cau / moi_1_ban)
 };
 const GIOI_HAN_CHUOI = 40;
 
