@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Sun } from "lucide-react";
+import { ArrowRight, Layers, MessageCircleQuestionMark, Sparkles, Sun, Zap } from "lucide-react";
 import { HinhBauTroi, HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { CuaVao } from "@/components/hoso/CuaVao";
 import { ChuThichLop } from "@/components/than-so/LopNoiDung";
@@ -32,8 +32,10 @@ const MANG: { href: string; ten: string; mo: string; kieu: KieuMang }[] = [
 export default function TrangChu() {
   return (
     <div className="space-y-14 md:space-y-20">
-      <section className="grid items-center gap-8 pt-2 md:grid-cols-[1.15fr_1fr] md:gap-x-10 md:gap-y-6 md:pt-8">
-        <div className="md:self-end">
+      {/* UI-HERO: cột trái = lời giới thiệu + ô vào (form/chào lại), cột phải = vòng số lớn có chuyển động → hai cột
+          cao gần bằng nhau, không còn khoảng trống trên/dưới thẻ. Điện thoại: chữ → ô vào → hình (không bắt cuộn qua hình). */}
+      <section className="relative grid items-center gap-8 pt-2 md:grid-cols-[1.05fr_1fr] md:gap-10 md:pt-6" data-testid="hero">
+        <div>
           <p className="eyebrow flex items-center gap-2"><Sparkles className="size-3.5 text-gold" aria-hidden /> Thần số học · Huyền học phương Đông</p>
           <h1 className="mt-4 text-[2.6rem] leading-[1.08] sm:text-6xl">
             Con số nói gì <span className="text-gradient-gold italic">về bạn?</span>
@@ -42,15 +44,19 @@ export default function TrangChu() {
             Từ tên và ngày sinh, xem bốn con số cốt lõi của bạn — phép tính minh bạch, ý nghĩa có nguồn,
             và cả những <span className="text-cinnabar">mặt tối</span> mà hầu hết trang khác giấu đi.
           </p>
-          <ul className="mt-6 space-y-2 text-sm text-fg-muted">
-            <li className="flex gap-2"><span className="text-jade">✦</span> Kết quả trong chưa đầy 30 giây, không cần tài khoản</li>
-            <li className="flex gap-2"><span className="text-gold">✦</span> Mỗi con số kèm câu hỏi để bạn tự kiểm, không phán thay bạn</li>
-            <li className="flex gap-2"><span className="text-moon">✦</span> Một hồ sơ dùng cho cả hợp đôi, Tử vi, Kinh Dịch, Bát tự, Phong thuỷ</li>
+          <ul className="mt-5 flex flex-wrap gap-2 text-[0.8rem] text-fg-muted" aria-label="Điểm khác biệt" data-testid="hero-diem">
+            {([[Zap, "text-jade", "30 giây · không cần tài khoản"], [MessageCircleQuestionMark, "text-gold", "Tự soi, không phán thay"], [Layers, "text-moon", "1 hồ sơ cho 5 mảng"]] as const).map(([Icon, mau, chu]) => (
+              <li key={chu} className="inline-flex items-center gap-1.5 rounded-full border border-line/70 bg-surface/50 px-3 py-1 backdrop-blur">
+                <Icon className={`size-3.5 ${mau}`} aria-hidden />{chu}
+              </li>
+            ))}
           </ul>
+          <div className="mt-7 max-w-xl"><CuaVao /></div>
         </div>
-        {/* Điện thoại: form ngay sau lời giới thiệu (không bắt cuộn qua hình); máy tính: hình nằm dưới chữ, form cột phải. */}
-        <div className="md:col-start-2 md:row-span-2 md:row-start-1"><CuaVao /></div>
-        <HinhBauTroi className="mx-auto max-w-[17rem] sm:max-w-[20rem] md:mx-0 md:max-w-[22rem] md:self-start" />
+        <div className="relative">
+          <div className="pointer-events-none absolute inset-[8%] rounded-full bg-gold/10 blur-3xl" aria-hidden />
+          <HinhBauTroi className="relative mx-auto max-w-[19rem] sm:max-w-[24rem] md:max-w-[32rem]" />
+        </div>
       </section>
 
       {/* HL-1: điểm nhấn thứ hai sau hồ sơ thần số — hoàng lịch hôm nay (người Việt mở xem mỗi ngày). */}

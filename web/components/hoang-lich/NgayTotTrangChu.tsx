@@ -22,35 +22,41 @@ export async function NgayTotTrangChu({ className = "" }: { className?: string }
           {d.hoang_dao ? "Hoàng đạo" : "Hắc đạo"} · {d.than.ten}
         </span>
       </div>
-      <div className="mt-5 grid gap-4 md:grid-cols-[1.2fr_1fr]">
-        <div className="space-y-3 text-sm">
+      {/* UI-HERO: vòng giờ to ở cột phải (căn giữa theo chiều dọc), chữ + giờ tốt + lối đi tiếp ở cột trái → không
+          còn khoảng trống dưới cột chữ. Điện thoại: vòng giờ ngay sau tiêu đề. */}
+      <div className="mt-5 grid items-center gap-6 md:grid-cols-[1fr_auto] md:gap-8">
+        <div className="order-2 space-y-3 text-sm md:order-1">
           <p><span className="text-fg-muted">Trực</span> <b>{d.truc.ten}</b> — {d.truc.y}; hợp {d.truc.hop}.</p>
           <p><span className="text-jade">Nên:</span> {d.nghi.slice(0, 5).map((x) => x.ten).join(", ") || "sách không ghi riêng"}</p>
           <p><span className="text-cinnabar">Kiêng:</span> {d.ky.slice(0, 4).map((x) => x.ten).join(", ") || "sách không ghi riêng"}</p>
           <p className="text-fg-muted">Xung tuổi {d.xung_tuoi.ten}{d.ky_dan_gian.length ? ` · ${d.ky_dan_gian.map((k) => k.ten).join(", ")}` : ""}</p>
           <TuoiHomNay iso={iso} />
-        </div>
-        <div className="flex flex-col items-center gap-3">
-          <VongGio gio={d.gio} laHomNay tieuDe={d.than.ten} phuDe="GIỜ TỐT" className="w-full max-w-[13rem]" />
-          <div className="w-full">
-            <p className="inline-flex items-center gap-1.5 text-sm text-fg-muted"><Clock className="size-4 text-gold" aria-hidden />Giờ hoàng đạo</p>
-            <ul className="mt-2 flex flex-wrap gap-1.5">
+          <div className="pt-1">
+            <p className="inline-flex items-center gap-1.5 text-fg-muted"><Clock className="size-4 text-gold" aria-hidden />Giờ hoàng đạo</p>
+            <ul className="mt-2 grid grid-cols-2 gap-1.5 sm:grid-cols-3">
               {d.gio_hoang_dao.map((g) => (
-                <li key={g.chi} className="rounded-full border border-gold/30 bg-bg/40 px-2.5 py-0.5 text-sm"><b className="text-gold">{g.chi}</b>{" "}
+                <li key={g.chi} className="rounded-xl border border-gold/30 bg-bg/40 px-2.5 py-1.5"><b className="text-gold">{g.chi}</b>{" "}
                   <span className="text-xs text-fg-muted">{g.khung}</span></li>
               ))}
             </ul>
           </div>
+          <Link href="/xem-ngay-tot" className="inline-flex items-center gap-1.5 pt-1 font-semibold text-gold hover:underline">
+            Xem đầy đủ & tìm ngày đẹp cho việc của bạn <ArrowRight className="size-4" aria-hidden />
+          </Link>
+          <p className="flex flex-wrap gap-2" data-testid="lien-ket-tuoi">
+            {([["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"], ["/huong-xau-nam", "Hướng xấu năm nay"], ["/tuoi-xong-dat", "Tuổi xông đất Tết"]] as const).map(([h, t]) => (
+              <Link key={h} href={h} className="vung-cham rounded-full border border-line/70 px-3 py-1 text-fg-muted hover:border-gold/50 hover:text-fg">{t}</Link>
+            ))}
+          </p>
+        </div>
+        <div className="order-1 flex justify-center md:order-2">
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-[12%] rounded-full bg-gold/15 blur-3xl" aria-hidden />
+            <VongGio gio={d.gio} laHomNay tieuDe={d.than.ten} phuDe="GIỜ TỐT" tamGioHienTai
+              className="relative w-[17rem] sm:w-[20rem] lg:w-[23rem]" />
+          </div>
         </div>
       </div>
-      <Link href="/xem-ngay-tot" className="mt-5 inline-flex items-center gap-1.5 font-semibold text-gold hover:underline">
-        Xem đầy đủ & tìm ngày đẹp cho việc của bạn <ArrowRight className="size-4" aria-hidden />
-      </Link>
-      <p className="mt-3 flex flex-wrap gap-2 text-sm" data-testid="lien-ket-tuoi">
-        {([["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"], ["/huong-xau-nam", "Hướng xấu năm nay"], ["/tuoi-xong-dat", "Tuổi xông đất Tết"]] as const).map(([h, t]) => (
-          <Link key={h} href={h} className="vung-cham rounded-full border border-line/70 px-3 py-1 text-fg-muted hover:border-gold/50 hover:text-fg">{t}</Link>
-        ))}
-      </p>
     </section>
   );
 }
