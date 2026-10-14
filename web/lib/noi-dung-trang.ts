@@ -1,9 +1,11 @@
 // ND-0 — nội dung một URL = gộp theo thứ tự ưu tiên (docs/KIEN-TRUC-NOI-DUNG-TRANG.md mục 3.1, 3.7):
 //   tài liệu "Trang website" của chính URL (ô có nội dung) > "Mẫu cụm trang" (chỉ khối) > chữ mặc định trong code (lib/so-trang.ts).
 // Luôn trả đủ ô, KHÔNG bao giờ null: CMS chưa nối / lỗi / chậm (hạn 1,5 giây) → toàn bộ mặc định code.
-// Pha ND-0 chưa trang nào gọi hàm này (trang vẫn y như cũ); ND-2… nối dần từng nhóm trang.
+// ND-2 nối trang công cụ, ND-3 trang tĩnh + chủ đề; pháp lý (ND-4) và trang KB (ND-5) chưa đọc.
 // Biến mẫu cụm {tieu_de}…: web thay bằng giá trị engine trả cho đúng trang, THOÁT HTML giá trị trước khi thay, biến lạ giữ nguyên.
-import { dangHien, duongLienKet, goiCms, chuoiTruyVan, type AnhCms, type LienKetCms } from "@/lib/cms";
+import type { Metadata } from "next";
+import { anhCms, dangHien, duongLienKet, goiCms, chuoiTruyVan, type AnhCms, type LienKetCms } from "@/lib/cms";
+import { catMoTa, metaTrang, tieuDeSeo } from "@/lib/seo";
 import { khopMauCum, mucSoTrang, type MacDinhTrang, type NhomTrang } from "@/lib/so-trang";
 
 export type KieuChu = { co: "nho" | "thuong" | "lon" | "rat_lon"; can: "trai" | "giua"; nen: "khong" | "nhan" | "vang" | "ngoc" };
@@ -121,4 +123,38 @@ export async function layNoiDungTrang(duong: string, bien: Record<string, string
       { hanMs: HAN, the: [theTrang(cum.mau.mau_duong)] }) : Promise.resolve(null),
   ]);
   return gopNoiDung(duong, macDinh, r?.docs?.[0] ?? null, m?.docs?.[0] ?? null, { ...(cum?.bien ?? {}), ...bien });
+}
+
+/** Phủ ô SEO của CMS lên metadata gốc của trang. CMS không đổi gì so với chữ trong code → trả NGUYÊN metadata gốc
+ *  (HTML không lệch một byte). `tuyetDoi`: tiêu đề không gắn hậu tố thương hiệu (trang chủ). Ảnh chia sẻ: ảnh CMS nếu có; đổi tiêu đề thì ảnh /og tự vẽ lại theo tiêu đề mới. */
+export function apDungSeo(goc: Metadata, nd: NoiDungTrang, { tuyetDoi = false } = {}): Metadata {
+  const md = mucSoTrang(nd.duong)?.mac_dinh ?? {};
+  const tieuDe = nd.seo.tieuDe && nd.seo.tieuDe !== md.tieu_de_seo ? nd.seo.tieuDe : null;
+  const moTa = nd.seo.moTa && nd.seo.moTa !== md.mo_ta_seo ? catMoTa(nd.seo.moTa) : null;
+  const anh = anhCms(nd.seo.anh, "og");
+  if (!tieuDe && !moTa && !anh) return goc;
+  const og = (goc.openGraph ?? {}) as Record<string, unknown>, tw = (goc.twitter ?? {}) as Record<string, unknown>;
+  const anhGoc = Array.isArray(og.images) ? og.images[0] : og.images;
+  const anhMoi = anh ? [anh.src]
+    : tieuDe && typeof anhGoc === "string" && anhGoc.startsWith("/og?tieu_de=") ? [`/og?tieu_de=${encodeURIComponent(tieuDe)}`] : null;
+  const them = { ...(tieuDe ? { title: tieuDe } : {}), ...(moTa ? { description: moTa } : {}), ...(anhMoi ? { images: anhMoi } : {}) };
+  return {
+    ...goc,
+    ...(tieuDe ? { title: tuyetDoi ? { absolute: tieuDe } : tieuDeSeo(tieuDe) } : {}),
+    ...(moTa ? { description: moTa } : {}),
+    openGraph: { ...og, ...them } as Metadata["openGraph"],
+    twitter: { ...tw, ...them } as Metadata["twitter"],
+  };
+}
+
+/** Props cho khối "Về công cụ…" (GioiThieuCongCu) từ nội dung đã gộp. */
+export const gioiThieuTu = (nd: NoiDungTrang) => ({
+  duong: nd.duong, ten: nd.ten ?? "", moTa: nd.seo.moTa ?? "",
+  doan: nd.gioiThieu.doan, hoiDap: nd.gioiThieu.hoiDap, lienKet: nd.gioiThieu.lienKet,
+});
+
+/** Metadata mặc định từ sổ trang (tiêu đề + mô tả SEO đang chạy trong code) — trang dựng meta gốc từ đây. */
+export function metaMacDinh(duong: string): Metadata {
+  const m = mucSoTrang(duong)?.mac_dinh ?? {};
+  return metaTrang({ tieuDe: m.tieu_de_seo ?? "", moTa: m.mo_ta_seo ?? "", duong });
 }

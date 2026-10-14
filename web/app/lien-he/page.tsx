@@ -1,11 +1,14 @@
 // PL-1 — Liên hệ. Thông tin lấy từ env (lib/van-hanh.ts); thiếu thì ghi "đang cập nhật".
 import type { Metadata } from "next";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
+import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import Link from "next/link";
 import { Mail, MapPin, MessageSquareHeart, Phone, ShieldCheck } from "lucide-react";
 import { TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 import { DANG_CAP_NHAT, vanHanh } from "@/lib/van-hanh";
 
-export const metadata: Metadata = {
+const META: Metadata = {
   title: "Liên hệ",
   description: "Liên hệ Hiểu Bản Thân: góp ý, báo lỗi, yêu cầu về dữ liệu cá nhân, hợp tác.",
   alternates: { canonical: "/lien-he" },
@@ -16,8 +19,14 @@ function Thu({ email, chuDe, nhan }: { email: string | null; chuDe: string; nhan
   return <a className="text-gold underline" href={`mailto:${email}?subject=${encodeURIComponent(chuDe)}`}>{nhan}</a>;
 }
 
-export default function LienHe() {
-  const vh = vanHanh();
+const DUONG = "/lien-he";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(META, await layNoiDungTrang(DUONG));
+}
+
+export default async function LienHe() {
+  const vh = vanHanh(), nd = await layNoiDungTrang(DUONG);
   const muc: Muc[] = [
     {
       id: "thong-tin", tieuDe: "Thông tin liên hệ",
@@ -50,7 +59,8 @@ export default function LienHe() {
     },
   ];
   return (
-    <TrangPhapLy nhan="Về chúng tôi" tieuDe="Liên hệ" duongDan="/lien-he" muc={muc} hieuLuc={false}
-      moDau={<p>Chúng tôi đọc mọi thư và trả lời trong giờ hành chính, thường trong vòng 2 ngày làm việc.</p>} />
+    <TrangPhapLy nhan="Về chúng tôi" tieuDe={nd.dau.h1 ?? "Liên hệ"} duongDan={DUONG} muc={gopMucCms(muc, nd)} hieuLuc={false}
+      khoiCuoi={<KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />}
+      moDau={<LoiDanCms nd={nd}>Chúng tôi đọc mọi thư và trả lời trong giờ hành chính, thường trong vòng 2 ngày làm việc.</LoiDanCms>} />
   );
 }

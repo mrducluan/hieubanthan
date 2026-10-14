@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
-import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
+import { KhungTai } from "@/components/khung/TieuDe";
 import { KetQuaHopDoi, type KetQuaHopDoiT } from "@/components/hop-doi/KetQuaHopDoi";
 import { NutChiaSe } from "@/components/chia-se/NutChiaSe";
 import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
@@ -16,6 +16,7 @@ import { postJson } from "@/lib/goi-api";
 import { hoTenList, ngayHopLe, tenGoi, useHoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
 import { batDauDoc, ghi } from "@/lib/do-luong";
+import { LoiDan, TieuDeTrang, useDauCms } from "@/components/cms/DauCms";
 
 // Loại quan hệ — engine luận theo từng vai (người yêu / bạn bè / đồng nghiệp / sếp / gia đình).
 const QUAN_HE = [
@@ -39,15 +40,16 @@ export function HopDoi() {
   const [kq, setKq] = useState<KetQuaHopDoiT | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
+  const dauCms = useDauCms();
   const thangRef = useRef<HTMLInputElement>(null);
   const namRef = useRef<HTMLInputElement>(null);
 
   // Lúc chờ hồ sơ vẫn có <h1> trong HTML phía máy chủ (SEO).
-  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeMuc cap={1} nho="Hợp đôi" lon="Hợp đôi theo thần số học" /><KhungTai /></div>;
+  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeTrang nho="Hợp đôi" lon="Hợp đôi theo thần số học" /><KhungTai /></div>;
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
-        <TieuDeMuc cap={1} nho="Hợp đôi" lon="Trước hết, con số của bạn" mo_ta="Nhập tên và ngày sinh của bạn, rồi mới đến người ấy." />
+        <TieuDeTrang nho="Hợp đôi" lon="Trước hết, con số của bạn" mo_ta="Nhập tên và ngày sinh của bạn, rồi mới đến người ấy." />
         <Card><NhapHoSo nutGui="Tiếp tục" onXong={() => router.refresh()} /></Card>
       </div>
     );
@@ -80,12 +82,13 @@ export function HopDoi() {
     <div className="space-y-12">
       <header>
         <p className="eyebrow">Hợp đôi</p>
-        <h1 className="mt-2 text-4xl sm:text-5xl">Hai người, hai con số</h1>
-        <p className="mt-3 max-w-2xl text-fg-muted">
+        <h1 className="mt-2 text-4xl sm:text-5xl">{dauCms.h1 ?? "Hai người, hai con số"}</h1>
+        <LoiDan macDinh={<>
           Không có điểm “hợp” hay “khắc”. Chọn người ấy là ai với bạn — người yêu, bạn bè, đồng nghiệp, sếp hay người thân —
           để xem mỗi người hiện ra thế nào trong vai đó, chỗ dễ hoà, chỗ dễ va, và một việc nên cùng làm.
-        </p>
+        </>} />
       </header>
+      {dauCms.khoiTren}
 
       {!kq && (
         <div className="grid items-start gap-6 lg:grid-cols-[1.2fr_1fr]">

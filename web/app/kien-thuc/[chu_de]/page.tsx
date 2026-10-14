@@ -8,6 +8,9 @@ import { CHU_DE, HINH_CHU_DE, duongTrang, mucLuc } from "@/lib/kien-thuc";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang } from "@/components/minh-hoa/TrangTri";
 import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { LoiDanCms } from "@/components/cms/DauTrangCms";
+import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 export const revalidate = 21600;
 
@@ -22,16 +25,17 @@ export async function generateMetadata({ params: thamSo }: Props): Promise<Metad
   const params = await thamSo;
   const cd = CHU_DE[params.chu_de];
   if (!cd) return { title: "Không tìm thấy", robots: { index: false } };
-  return { title: cd.ten, description: cd.mo_ta, alternates: { canonical: `/kien-thuc/${params.chu_de}`, types: { "text/markdown": `/kien-thuc/${params.chu_de}.md` } },
-    openGraph: { title: cd.ten, description: cd.mo_ta, url: `/kien-thuc/${params.chu_de}`, images: [`/og?tieu_de=${encodeURIComponent(cd.ten)}`] } };
+  return apDungSeo({ title: cd.ten, description: cd.mo_ta, alternates: { canonical: `/kien-thuc/${params.chu_de}`, types: { "text/markdown": `/kien-thuc/${params.chu_de}.md` } },
+    openGraph: { title: cd.ten, description: cd.mo_ta, url: `/kien-thuc/${params.chu_de}`, images: [`/og?tieu_de=${encodeURIComponent(cd.ten)}`] } }, await layNoiDungTrang(`/kien-thuc/${params.chu_de}`));
 }
 
 export default async function Page({ params: thamSo }: Props) {
   const params = await thamSo;
   const cd = CHU_DE[params.chu_de];
   if (!cd) notFound();
-  const ds = (await mucLuc()).filter((t) => t.loai === cd.loai);
   const duong = `/kien-thuc/${params.chu_de}`;
+  const [tatCa, nd] = await Promise.all([mucLuc(), layNoiDungTrang(duong)]);
+  const ds = tatCa.filter((t) => t.loai === cd.loai);
   return (
     <div className="mx-auto max-w-4xl">
       <JsonLd data={goiLd(
@@ -42,8 +46,9 @@ export default async function Page({ params: thamSo }: Props) {
       )} />
       <nav aria-label="Đường dẫn" className="text-xs text-fg-faint"><Link href="/kien-thuc" className="hover:text-fg">Kiến thức</Link> ›</nav>
       <HinhMang kieu={HINH_CHU_DE[params.chu_de] ?? "than-so"} className="mt-4 h-20" />
-      <h1 className="mt-3 text-4xl sm:text-5xl">{cd.ten}</h1>
-      <p className="mt-3 max-w-2xl text-fg-muted">{cd.mo_ta}</p>
+      <h1 className="mt-3 text-4xl sm:text-5xl">{nd.dau.h1 ?? cd.ten}</h1>
+      <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{cd.mo_ta}</LoiDanCms>
+      <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-8" />
       {ds.length === 0 && <p className="mt-8 text-fg-muted">Thư viện đang được tải lại, bạn quay lại sau ít phút nhé.</p>}
       <ul className="mt-8 grid gap-3 sm:grid-cols-2">
         {ds.map((t) => (
@@ -55,6 +60,7 @@ export default async function Page({ params: thamSo }: Props) {
           </li>
         ))}
       </ul>
+      <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-12" />
       <Suspense fallback={null}><BaiLienQuanMang mang={MANG_CONG_CU[cd.mang] ?? null} className="mt-12" /></Suspense>
     </div>
   );

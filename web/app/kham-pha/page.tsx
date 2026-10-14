@@ -6,12 +6,21 @@ import { ArrowRight } from "lucide-react";
 import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { goiLd, ldDuongDan, metaTrang } from "@/lib/seo";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { LoiDanCms } from "@/components/cms/DauTrangCms";
+import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
-export const metadata: Metadata = metaTrang({
+const META: Metadata = metaTrang({
   tieuDe: "Khám phá: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch",
   moTa: "Năm lăng kính nhìn lại bản thân: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch — dùng chung một hồ sơ, cách tính minh bạch, diễn giải có nguồn.",
   duong: "/kham-pha",
 });
+
+const DUONG = "/kham-pha";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(META, await layNoiDungTrang(DUONG));
+}
 
 const MANG = [
   { href: "/than-so", ten: "Thần số học", mo: "Bốn con số cốt lõi, dải đời, năm cá nhân, biểu đồ ngày sinh.", can: "Tên + ngày sinh", kieu: "than-so" as KieuMang },
@@ -21,16 +30,18 @@ const MANG = [
   { href: "/kinh-dich", ten: "Kinh Dịch", mo: "Một quẻ cho một việc — Nghĩa Lý, Lục Hào, Mai Hoa.", can: "Chỉ cần câu hỏi", kieu: "kinh-dich" as KieuMang },
 ];
 
-export default function KhamPha() {
+export default async function KhamPha() {
+  const nd = await layNoiDungTrang(DUONG);
   return (
     <div>
       <JsonLd data={goiLd(ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Khám phá", duong: "/kham-pha" }]))} />
       <p className="eyebrow">Khám phá</p>
-      <h1 className="mt-2 text-4xl sm:text-5xl">Năm hệ thống, một hồ sơ</h1>
-      <p className="mt-3 max-w-2xl text-fg-muted">
+      <h1 className="mt-2 text-4xl sm:text-5xl">{nd.dau.h1 ?? "Năm hệ thống, một hồ sơ"}</h1>
+      <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">
         Mỗi hệ thống là một lăng kính khác nhau để nhìn lại chính mình. Hồ sơ bạn đã nhập được dùng chung — chỉ hỏi
         thêm giờ sinh hay giới tính khi mảng đó thật sự cần.
-      </p>
+      </LoiDanCms>
+      <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {MANG.map(({ href, ten, mo, can, kieu }, i) => (
           <Link key={href} href={href}
@@ -49,7 +60,9 @@ export default function KhamPha() {
         <span><b className="text-fg">Thư viện kiến thức</b> — ý nghĩa 12 con số, 64 quẻ, 14 chính tinh</span>
         <ArrowRight className="size-4" aria-hidden />
       </Link>
+      <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-12" />
       <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" /></Suspense>
+      <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />
     </div>
   );
 }

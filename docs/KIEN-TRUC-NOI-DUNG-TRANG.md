@@ -372,3 +372,13 @@ Anh duyệt **phương án 2 theo bản điều chỉnh** sau (thay các điểm
    Video nhúng dạng "ảnh trước, bấm mới tải" để không làm chậm trang công cụ.
 7. Câu 3, 4, 7, 9, 10 mục 7: theo đề xuất (115/113/111 và © giữ code; thông tin đơn vị giữ env; hồ sơ tác giả giữ
    code; đồng bộ 1 lần/ngày + nút "Đồng bộ ngay"; Live Preview để sau).
+
+## 9. Tiến độ
+
+| Pha | Trạng thái | Ghi chú |
+|---|---|---|
+| ND-0, ND-1 | xong (PR #94) | sổ trang, đồng bộ, chân trang |
+| ND-2 | xong (2026-10-14) | 11 trang công cụ (`components/cms/TrangCongCu.tsx` + `DauCms`), /ban-than, /nap-sao, /ung-ho, /tai-khoan theo ô `o`. Chủ dự án giao làm ND-3 ngay sau ND-2 (đổi thứ tự mục 8.6: ND-4 pháp lý làm sau ND-3). |
+| ND-3 | xong (2026-10-14) | /, /kham-pha, /kien-thuc, /la-so-mau, /tu-dien, /phong-thuy/huong-hop-tuoi, /blog, 15 chủ đề; /gioi-thieu, /lien-he sửa mục theo neo (`gopMucCms`). |
+| ND-4 | chưa | pháp lý: `TrangPhapLy` đã nhận `khoiCuoi` + mục CMS dùng chung `gopMucCms`; còn ngày hiệu lực từ CMS + ô xác nhận. |
+| ND-5, ND-6 | chưa | mẫu cụm trang KB (lưu ý: `thayBien` đang thoát HTML trong khi khối render văn bản thuần → sẽ hiện `&amp;`; sửa khi làm ND-5), xem trước nháp mọi URL. |

@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
+import { KhungTai } from "@/components/khung/TieuDe";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
@@ -19,6 +19,7 @@ import { maMoiNgay, taoLinkNgay } from "@/components/chia-se/NutChiaSeNgay";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { VongGio } from "@/components/hoang-lich/VongGio";
 import type { GioNgay } from "@/lib/hoang-lich";
+import { TieuDeTrang } from "@/components/cms/DauCms";
 
 interface NgayCN { so: number; nghia: string; tu_soi: string }
 interface TheHomNay {
@@ -187,7 +188,7 @@ export function HomNay() {
   }
 
   useBatDauDoc("hom_nay", Boolean(the));
-  const tieuDe = <TieuDeMuc cap={1} nho="Mỗi ngày một thẻ" lon="Hôm nay của bạn" />;
+  const tieuDe = <TieuDeTrang nho="Mỗi ngày một thẻ" lon="Hôm nay của bạn" />;
   if (hoSo === undefined) return <div className="mx-auto max-w-xl">{tieuDe}<KhungTai /></div>;
   if (hoSo === null) {
     return (

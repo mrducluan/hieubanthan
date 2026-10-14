@@ -3,7 +3,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { test, expect } from "@playwright/test";
-import { gopNoiDung, layNoiDungTrang, thayBien, duongHopLe, type KhoiCms } from "../lib/noi-dung-trang";
+import { apDungSeo, gopNoiDung, layNoiDungTrang, metaMacDinh, thayBien, duongHopLe, type KhoiCms } from "../lib/noi-dung-trang";
 import { khopMauCum, MAU_CUM, mucSoTrang, SO_TRANG } from "../lib/so-trang";
 import { CHU_DE } from "../lib/kien-thuc";
 
@@ -97,4 +97,29 @@ test("route sổ trang + webhook làm mới từ chối khi thiếu/sai bí mậ
   expect((await request.get("/api/so-trang")).status()).toBe(401);
   expect((await request.get("/api/so-trang", { headers: { "x-cms-bi-mat": "sai" } })).status()).toBe(401);
   expect((await request.post("/api/cms/lam-moi", { data: { duong: "/tu-vi" } })).status()).toBe(401);
+});
+
+test("ND-2: CMS trống → metadata y nguyên bản code; ô SEO CMS phủ tiêu đề, mô tả, ảnh /og vẽ lại", () => {
+  const md = mucSoTrang("/tu-vi")!;
+  const goc = metaMacDinh("/tu-vi");
+  const rong = gopNoiDung("/tu-vi", { ...md.mac_dinh, nhom: md.nhom, ten: md.ten }, null, null);
+  expect(apDungSeo(goc, rong)).toBe(goc);                                   // cùng đối tượng → HTML không đổi
+  const co = gopNoiDung("/tu-vi", md.mac_dinh, { tieu_de_seo: "Lá số Tử vi mới", mo_ta_seo: "Mô tả mới" }, null);
+  const m = apDungSeo(goc, co);
+  expect(m.title).toBe("Lá số Tử vi mới");
+  expect(m.description).toBe("Mô tả mới");
+  expect(m.alternates).toEqual(goc.alternates);
+  expect((m.openGraph as { images: string[] }).images).toEqual([`/og?tieu_de=${encodeURIComponent("Lá số Tử vi mới")}`]);
+  expect(apDungSeo({}, co, { tuyetDoi: true }).title).toEqual({ absolute: "Lá số Tử vi mới" });
+});
+
+test("ND-2: sổ trang — công cụ HL/TDG đọc giới thiệu từ noi-dung.ts; ô cho phép khớp chỗ web thật sự đọc", () => {
+  for (const d of ["/xem-ngay-tot", "/xem-tuoi-lam-nha", "/tuoi-xong-dat", "/huong-xau-nam"]) {
+    const m = mucSoTrang(d)!;
+    expect(m.o).toContain("gioi_thieu");
+    expect(m.mac_dinh.doan?.length).toBeGreaterThan(0);
+    expect(m.mac_dinh.hoi_dap?.length).toBeGreaterThan(0);
+  }
+  expect(mucSoTrang("/ban-than")!.o).toEqual(["seo", "khoi_duoi", "khoi_cuoi"]);
+  expect(mucSoTrang("/tai-khoan")!.o).toEqual(["seo"]);
 });
