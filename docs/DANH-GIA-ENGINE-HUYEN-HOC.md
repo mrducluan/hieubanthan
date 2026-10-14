@@ -27,9 +27,9 @@ gì để "clone, học hỏi, sao chép" bổ sung cho engine hieuban.com.
 
 | Ưu tiên | Hạng mục | Vì sao | Công sức | Vòng tăng trưởng | Cần anh |
 |---|---|---|---|---|---|
-| **P1** | **Tuổi làm nhà / cưới: Kim lâu, Hoang ốc, Tam tai** + trang "tuổi X làm nhà năm Y" | Từ khoá tìm rất nhiều ở VN, quy tắc dân gian thuần, tất định | M | Thu hút (SEO) + Quay lại | Chốt phái Kim lâu (tính tuổi mụ, mốc Tết) |
-| **P1** | **Hướng xấu theo năm**: Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng + phi tinh lưu niên/lưu nguyệt (Huyền Không theo năm) | Có sẵn lõi Huyền Không; trang "hướng xấu năm 2027" mùa cuối năm | S–M | Thu hút | — |
-| **P1** | **Tuổi xông đất / chọn giờ xuất hành Tết** (ghép hoàng lịch + tuổi chủ nhà) | Mùa Tết, chia sẻ mạnh | S | Mời bạn | — |
+| ✅ **P1 (TDG-1)** | **Tuổi làm nhà / cưới: Kim lâu, Hoang ốc, Tam tai** + trang "tuổi X làm nhà năm Y" | Từ khoá tìm rất nhiều ở VN, quy tắc dân gian thuần, tất định | M | Thu hút (SEO) + Quay lại | Chốt phái Kim lâu (tính tuổi mụ, mốc Tết) |
+| ✅ **P1 (TDG-1)** | **Hướng xấu theo năm**: Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng + phi tinh lưu niên/lưu nguyệt (Huyền Không theo năm) | Có sẵn lõi Huyền Không; trang "hướng xấu năm 2027" mùa cuối năm | S–M | Thu hút | — |
+| ✅ **P1 (TDG-1)** | **Tuổi xông đất / chọn giờ xuất hành Tết** (ghép hoàng lịch + tuổi chủ nhà) | Mùa Tết, chia sẻ mạnh | S | Mời bạn | — |
 | P2 | Chọn ngày theo **Bát tự cá nhân** (trạch cát: ngày không xung trụ ngày/năm, dụng thần) | Sâu hơn "không xung tuổi" | M | Nạp Sao (báo cáo chọn ngày) | Duyệt làm gói Sao |
 | P2 | Tử vi **lưu nhật** | Nhịp Tử vi theo ngày (ý tưởng 2 phiên trước) — các phái an lưu nhật khác nhau, chưa có oracle | M | Quay lại | Chốt phái |
 | P2 | Lục hào: vượng suy theo nguyệt kiến/nhật thần, tuần không | Đang gắn cờ "chưa tính" | M | — | — |

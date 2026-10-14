@@ -1,0 +1,110 @@
+{
+ "_nguon": "Tuổi dân gian Việt: Kim lâu, Hoang ốc, Tam tai, hạn năm (Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc), tuổi xông đất. Phép tính ở engine/app/calc/tuoi_dan_gian.py.",
+ "source": {
+  "id": "dan_gian_vn",
+  "ten": "Tập quán chọn tuổi dân gian Việt Nam · Huyền Không phi tinh lưu niên"
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "dan_gian_vn",
+ "trang_thai": "nhap_ai",
+ "kim_lau": {
+  "than": {
+   "ten": "Kim lâu Thân",
+   "nghia": "dân gian cho là ảnh hưởng tới chính người đứng tên làm nhà / cô dâu"
+  },
+  "the": {
+   "ten": "Kim lâu Thê",
+   "nghia": "dân gian cho là ảnh hưởng tới vợ / chồng"
+  },
+  "tu": {
+   "ten": "Kim lâu Tử",
+   "nghia": "dân gian cho là ảnh hưởng tới con cái"
+  },
+  "luc_suc": {
+   "ten": "Kim lâu Lục súc",
+   "nghia": "dân gian cho là ảnh hưởng tới vật nuôi, việc làm ăn"
+  }
+ },
+ "hoang_oc": {
+  "nhat_cat": {
+   "ten": "Nhất Cát",
+   "tot": true,
+   "nghia": "cung tốt, thuận làm nhà"
+  },
+  "nhi_nghi": {
+   "ten": "Nhì Nghi",
+   "tot": true,
+   "nghia": "cung tốt, nhà cửa yên ổn"
+  },
+  "tam_dia_sat": {
+   "ten": "Tam Địa Sát",
+   "tot": false,
+   "nghia": "dân gian thường tránh làm nhà năm này"
+  },
+  "tu_tan_tai": {
+   "ten": "Tứ Tấn Tài",
+   "tot": true,
+   "nghia": "cung tốt, thuận làm ăn"
+  },
+  "ngu_tho_tu": {
+   "ten": "Ngũ Thọ Tử",
+   "tot": false,
+   "nghia": "dân gian thường tránh làm nhà năm này"
+  },
+  "luc_hoang_oc": {
+   "ten": "Lục Hoang Ốc",
+   "tot": false,
+   "nghia": "dân gian thường tránh làm nhà năm này"
+  }
+ },
+ "tam_tai": {
+  "ten": "Tam tai",
+  "nghia": "ba năm liên tiếp dân gian khuyên thận trọng với việc lớn (làm nhà, cưới hỏi, mở việc lớn)"
+ },
+ "cach_dan_gian": "Khi năm định làm rơi vào tuổi dân gian hay tránh, nhiều gia đình chọn năm khác, hoặc nhờ người thân hợp tuổi đứng ra làm lễ động thổ (\"mượn tuổi\"). Đây là tập quán để tham khảo; quyết định nên dựa trên điều kiện thực tế của gia đình.",
+ "han_nam": {
+  "thai_tue": {
+   "ten": "Thái Tuế",
+   "nghia": "phương của năm — truyền thống khuyên không động thổ, đào móng lớn ở phương này"
+  },
+  "tue_pha": {
+   "ten": "Tuế Phá",
+   "nghia": "phương đối Thái Tuế — truyền thống khuyên tránh sửa chữa lớn phía này"
+  },
+  "tam_sat": {
+   "ten": "Tam Sát",
+   "nghia": "ba sơn đối tam hợp của năm — truyền thống khuyên không quay lưng ghế làm việc về phía này, tránh động thổ"
+  },
+  "ngu_hoang": {
+   "ten": "Ngũ Hoàng",
+   "nghia": "sao 5 bay tới — truyền thống khuyên giữ yên phía này, không đục phá"
+  },
+  "nhi_hac": {
+   "ten": "Nhị Hắc",
+   "nghia": "sao 2 bay tới — truyền thống khuyên giữ phía này gọn gàng, yên tĩnh"
+  }
+ },
+ "quan_he_chi": {
+  "tam_hop": "tam hợp",
+  "luc_hop": "lục hợp",
+  "trung": "cùng tuổi",
+  "xung": "xung",
+  "hai": "hại",
+  "hinh": "hình"
+ },
+ "can_voi_chu": {
+  "ngu_hop": "can ngũ hợp với gia chủ",
+  "sinh_chu": "can sinh can gia chủ",
+  "chu_sinh": "can gia chủ sinh can khách",
+  "khac_chu": "can khắc can gia chủ",
+  "chu_khac": "can gia chủ khắc can khách",
+  "binh": "can bình hoà"
+ },
+ "nap_am": {
+  "sinh": "mệnh sinh mệnh gia chủ",
+  "bình hoà": "cùng hành với gia chủ",
+  "bị sinh": "mệnh gia chủ sinh mệnh khách",
+  "khắc": "mệnh khắc mệnh gia chủ",
+  "bị khắc": "mệnh gia chủ khắc mệnh khách"
+ }
+}

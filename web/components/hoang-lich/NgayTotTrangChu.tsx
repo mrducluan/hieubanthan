@@ -46,6 +46,11 @@ export async function NgayTotTrangChu({ className = "" }: { className?: string }
       <Link href="/xem-ngay-tot" className="mt-5 inline-flex items-center gap-1.5 font-semibold text-gold hover:underline">
         Xem đầy đủ & tìm ngày đẹp cho việc của bạn <ArrowRight className="size-4" aria-hidden />
       </Link>
+      <p className="mt-3 flex flex-wrap gap-2 text-sm" data-testid="lien-ket-tuoi">
+        {([["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"], ["/huong-xau-nam", "Hướng xấu năm nay"], ["/tuoi-xong-dat", "Tuổi xông đất Tết"]] as const).map(([h, t]) => (
+          <Link key={h} href={h} className="vung-cham rounded-full border border-line/70 px-3 py-1 text-fg-muted hover:border-gold/50 hover:text-fg">{t}</Link>
+        ))}
+      </p>
     </section>
   );
 }
