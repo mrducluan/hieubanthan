@@ -6,6 +6,7 @@ import { GioiThieuCongCu, type NoiDungCongCu } from "@/components/seo/GioiThieuC
 import { metaTrang } from "@/lib/seo";
 import { UngHoNho } from "@/components/ung-ho/UngHoNho";
 import { HomNay } from "./HomNay";
+import { docMaNgay } from "@/lib/ma-moi";
 
 const ND: NoiDungCongCu = {
   duong: "/hom-nay",
@@ -25,11 +26,37 @@ const ND: NoiDungCongCu = {
     { href: "/than-so", ten: "Thần số học" }, { href: "/hop-doi", ten: "Hợp đôi" }],
 };
 
-export const metadata: Metadata = metaTrang({ tieuDe: "Hôm nay của bạn: ngày cá nhân, âm lịch và câu hỏi tự soi", moTa: ND.moTa, duong: ND.duong });
+const META = metaTrang({ tieuDe: "Hôm nay của bạn: ngày cá nhân, âm lịch và câu hỏi tự soi", moTa: ND.moTa, duong: ND.duong });
+type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
-export default function Page() {
+/** NHIP-1: link chia sẻ mang ?the=<mã ký> → ảnh xem trước "Hôm nay {tên} là Ngày cá nhân N". Canonical vẫn /hom-nay. */
+async function theNgay(sp: Props["searchParams"]) {
+  const v = (await sp).the;
+  return typeof v === "string" ? docMaNgay(v) : null;
+}
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const nd = await theNgay(searchParams);
+  const ma = nd ? ((await searchParams).the as string) : null;
+  if (!nd || !ma) return META;
+  const tieuDe = `Hôm nay ${nd.t} là Ngày cá nhân ${nd.n} — còn bạn?`;
+  const anh = [`/og/ngay?ma=${encodeURIComponent(ma)}`];
+  return {
+    ...META,
+    openGraph: { ...META.openGraph, title: tieuDe, images: anh },
+    twitter: { card: "summary_large_image", title: tieuDe, description: ND.moTa, images: anh },
+  };
+}
+
+export default async function Page({ searchParams }: Props) {
+  const nd = await theNgay(searchParams);
   return (
     <>
+      {nd && (
+        <p className="mx-auto mb-6 max-w-xl rounded-2xl border border-gold/30 bg-gold/[0.06] px-4 py-3 text-center text-sm" data-testid="loi-moi-ngay">
+          Hôm nay <b className="text-gold">{nd.t}</b> là Ngày cá nhân <b className="text-gold">{nd.n}</b>{nd.k ? ` — ${nd.k.toLowerCase()}` : ""}. Còn bạn?
+        </p>
+      )}
       <HomNay />
       <Suspense fallback={null}><BaiLienQuanMang mang="than_so" className="mt-12" /></Suspense>
       <GioiThieuCongCu {...ND} />

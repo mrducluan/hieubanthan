@@ -1,4 +1,5 @@
 "use client";
+import { NhipCaNhan } from "@/components/than-so/NhipCaNhan";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -117,6 +118,8 @@ export function BanThan() {
         <TieuDeMuc id="muc-nhip" nho="Nhịp hiện tại" lon="Giai đoạn này của bạn"
           mo_ta="Chủ đề của năm và tháng cá nhân — không phải dự báo sự kiện, mà là gợi ý để bạn đặt trọng tâm." />
         <NhipHienTai kq={kq} />
+        {/* NHIP-1: tháng tới, năm cá nhân còn bao nhiêu ngày, năm tới — lý do quay lại mỗi tháng. */}
+        <NhipCaNhan hoSo={hoSo} className="mt-4" />
         <Link href="/hom-nay" className="mt-3 flex items-center justify-between gap-3 rounded-2xl border border-gold/40 bg-gold/5 px-5 py-4 hover:border-gold"
           data-testid="lien-ket-hom-nay">
           <span><span className="block font-medium text-fg">Hôm nay của bạn</span>
@@ -140,6 +143,7 @@ export function BanThan() {
           </Link>
         ))}
       </section>
+
 
       <GopY />
 

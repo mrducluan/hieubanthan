@@ -60,3 +60,37 @@ export function docMa(ma: string, homNay = new Date()): NoiDungMa | null {
 export function maNgan(ma: string): string {
   return (ma.split(".")[1] ?? "").slice(0, 10);
 }
+
+// ---------------------------------------------------------------- NHIP-1: thẻ "Hôm nay mình là Ngày cá nhân N"
+// Mã riêng (khoá HMAC tách miền bằng tiền tố "ngay|") → không dùng lẫn được với mã thẻ hồ sơ/lời mời ở trên.
+export const NoiDungMaNgay = z.object({
+  v: z.literal(1),
+  t: z.string().trim().min(1).max(40),
+  /** Ngày cá nhân 1–9 (engine tính). */
+  n: z.number().int().min(1).max(9),
+  /** Chủ đề ngày (KB, engine trả). */
+  k: z.string().max(90).optional(),
+  /** Ngày xem (YYYY-MM-DD, giờ Việt Nam) — thẻ nói về đúng ngày này; cũng dùng để hết hạn. */
+  d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});
+export type NoiDungMaNgay = z.infer<typeof NoiDungMaNgay>;
+
+const kyNgay = (than: string) => b64u(createHmac("sha256", khoa()).update(`ngay|${than}`).digest()).slice(0, 22);
+
+export function kyMaNgay(nd: Omit<NoiDungMaNgay, "v">): string {
+  const than = b64u(Buffer.from(JSON.stringify(NoiDungMaNgay.parse({ ...nd, v: 1 })), "utf8"));
+  return `${than}.${kyNgay(than)}`;
+}
+
+export function docMaNgay(ma: string, homNay = new Date()): NoiDungMaNgay | null {
+  const [than, chu_ky] = ma.split(".");
+  if (!than || !chu_ky || ma.length > 600) return null;
+  const a = Buffer.from(chu_ky), b = Buffer.from(kyNgay(than));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const nd = NoiDungMaNgay.parse(JSON.parse(Buffer.from(than, "base64url").toString("utf8")));
+    return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
+  } catch {
+    return null;
+  }
+}

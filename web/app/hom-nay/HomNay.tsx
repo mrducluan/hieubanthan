@@ -14,7 +14,8 @@ import { Card } from "@/components/ui/card";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
-import { ghi, maNgauNhien } from "@/lib/do-luong";
+import { ghi } from "@/lib/do-luong";
+import { taoLinkNgay } from "@/components/chia-se/NutChiaSeNgay";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { VongGio } from "@/components/hoang-lich/VongGio";
 import type { GioNgay } from "@/lib/hoang-lich";
@@ -171,10 +172,10 @@ export function HomNay() {
   }, [hoSo]);
 
   async function chiaSe() {
-    if (!the) return;
+    if (!the || !hoSo) return;
     // ?tu=hn.<ngẫu nhiên>: bạn bè mở link → GhiVaoTrang nhớ mã → hồ sơ đầu tiên tính referral_signup (Gate 2, K).
-    const tu = `hn.${maNgauNhien(10)}`;
-    const url = `${window.location.origin}/hom-nay?tu=${tu}`;
+    // NHIP-1: link mang thêm &the=<mã ký> → Zalo/Messenger hiện ảnh "Hôm nay {tên} là Ngày cá nhân N — còn bạn?".
+    const { url, tu } = await taoLinkNgay(hoSo);
     const chu = `Hôm nay là Ngày cá nhân ${the.ngay_ca_nhan.so} của mình — ${boTienTo(the.ngay_ca_nhan.nghia)} Xem ngày của bạn:`;
     ghi("share_created", { kind: "hom_nay", ma_moi: tu });
     try {
