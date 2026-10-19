@@ -20,7 +20,8 @@ const moTa = (h: Pick<HoSo, "ho_ten" | "ngay" | "thang" | "nam" | "gio" | "do_ti
 
 function giongNhau(a: HoSo, b: NonNullable<HoSoTK>): boolean {
   return a.ho_ten === b.ho_ten && a.ngay === b.ngay && a.thang === b.thang && a.nam === b.nam &&
-    (gioHienThi(a) ?? null) === (b.gio ?? null) && (a.gioi_tinh ?? null) === (b.gioi_tinh ?? null) &&
+    // "Không biết giờ" (0015: lưu 'unknown', đọc lại giờ đại diện 12:00) và bản lưu chưa có giờ đều = "không có giờ thật".
+    (gioHienThi(a) ?? null) === (gioHienThi(b) ?? null) && (a.gioi_tinh ?? null) === (b.gioi_tinh ?? null) &&
     (a.ten_khac ?? null) === (b.ten_khac ?? null) && (a.vung ?? null) === (b.vung ?? null) &&
     (a.noi_sinh ?? null) === (b.noi_sinh ?? null) && Boolean(a.gio_mua_he) === Boolean(b.gio_mua_he);
 }

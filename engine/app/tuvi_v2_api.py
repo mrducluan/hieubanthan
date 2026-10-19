@@ -144,25 +144,39 @@ class DinhGioInput(BaseModel):
     tat_ca_gio: bool = False
 
 
+GHI_CHU_TY_MUON = ("Giờ bạn nhập rơi vào Tý muộn (23:00–23:59): Tử vi tính giờ này sang ngày hôm sau, nên lá số "
+                   "khác lá Tý sớm (00:00–00:59) của cùng ngày.")
+
+
 def _ung_vien(inp: DinhGioInput, dv: _DauVao) -> list[dict]:
     ls_ = inp.la_so
     gio, phut = int(ls_.birth_time[:2]), int(ls_.birth_time[3:])
     dong_ho = _dt.datetime(dv.duong_goc.year, dv.duong_goc.month, dv.duong_goc.day, gio, phut)
-    ti_nhap = tuvi_an_sao.time_index(dv.tb.calendar_dt.hour, dv.tb.calendar_dt.minute) % 12
+    cal = dv.tb.calendar_dt
+    ti_nhap = tuvi_an_sao.time_index(cal.hour, cal.minute)
     if inp.tat_ca_gio:
-        lech = dong_ho - dv.tb.calendar_dt                      # đồng hồ − kinh tuyến lịch (múi giờ, giờ mùa hè)
-        goc = _dt.datetime.combine(dv.tb.calendar_dt.date(), _dt.time())
-        ds = [(f"Giờ {lunar.CHI[i]}", dong_ho if i == ti_nhap else goc + _dt.timedelta(hours=2 * i) + lech)
+        # 12 canh của NGÀY đã nhập (theo kinh tuyến lịch): Tý = giữa Tý sớm 00:30, canh khác = giữa canh;
+        # canh trùng giờ đã nhập dùng đúng giờ nhập. Nhập 23:xx (Tý muộn) → thêm ứng viên thứ 13.
+        lech = dong_ho - cal                                    # đồng hồ − kinh tuyến lịch (múi giờ, giờ mùa hè)
+        goc = _dt.datetime.combine(cal.date(), _dt.time())
+        ds = [(f"Giờ {lunar.CHI[i]}", dong_ho if i == ti_nhap else
+               goc + (_dt.timedelta(minutes=30) if i == 0 else _dt.timedelta(hours=2 * i)) + lech, None)
               for i in range(12)]
+        if ti_nhap == 12:
+            ds.append(("Giờ Tý muộn (23:00–23:59)", dong_ho, GHI_CHU_TY_MUON))
     else:
-        ds = [("Giờ trước", dong_ho - _dt.timedelta(hours=2)), ("Giờ đã nhập", dong_ho),
-              ("Giờ sau", dong_ho + _dt.timedelta(hours=2))]
+        ds = [("Giờ trước", dong_ho - _dt.timedelta(hours=2), None), ("Giờ đã nhập", dong_ho, None),
+              ("Giờ sau", dong_ho + _dt.timedelta(hours=2), None)]
     ra = []
-    for nhan, t in ds:
+    for nhan, t, ghi_chu in ds:
         dau_vao = {"birth_date": t.date().isoformat(), "birth_time": t.strftime("%H:%M"), "calendar_type": "duong"}
         dv_u = _DauVao(ls_.model_copy(update={**dau_vao, "birth_date": t.date(), "am_nhuan": False}))
-        ra.append({"nhan": nhan, "gio_dai_dien": dau_vao["birth_time"], "la_gio_nhap": t == dong_ho,
-                   "sinh": _sinh(dv_u, ls_.gender), "dau_vao": dau_vao})
+        u = {"nhan": nhan, "gio_dai_dien": dau_vao["birth_time"], "la_gio_nhap": t == dong_ho,
+             "sinh": _sinh(dv_u, ls_.gender), "dau_vao": dau_vao,
+             "lech_phut": round((t - dv_u.tb.calendar_dt).total_seconds() / 60)}
+        if ghi_chu:
+            u["ghi_chu"] = ghi_chu
+        ra.append(u)
     return ra
 
 

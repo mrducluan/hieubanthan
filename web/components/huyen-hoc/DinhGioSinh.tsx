@@ -104,10 +104,24 @@ function ChonNam({ macDinh, onDoi }: { macDinh: number[]; onDoi: (ds: number[] |
   );
 }
 
+type UngVien = DinhGioOutputT["ung_vien"][number];
+
+/** Ứng viên sớm hơn (-1) / trùng (0) / muộn hơn (1) giờ đã nhập — theo ngày giờ đồng hồ engine trả (đúng cả khi có
+ *  ứng viên thứ 13 "Giờ Tý muộn"); thiếu dau_vao thì theo thứ tự (engine xếp theo thời gian). */
+function lechSoVoiNhap(ds: UngVien[], i: number): -1 | 0 | 1 {
+  const iNhap = ds.findIndex((u) => u.la_gio_nhap);
+  if (iNhap < 0) return 0;
+  const a = ds[i]?.dau_vao, b = ds[iNhap]?.dau_vao;
+  if (a && b) {
+    const x = `${a.birth_date}T${a.birth_time}`, y = `${b.birth_date}T${b.birth_time}`;
+    return x === y ? 0 : x < y ? -1 : 1;
+  }
+  return Math.sign(i - iNhap) as -1 | 0 | 1;
+}
+
 function DanhSachUngVien({ d, onDung }: { d: DinhGioOutputT; onDung: (lech: -1 | 0 | 1) => void }) {
   // Tick "đúng với mình" chỉ nằm trong bộ nhớ trang — không gửi, không lưu.
   const [tick, setTick] = useState<Record<string, boolean>>({});
-  const iNhap = d.ung_vien.findIndex((u) => u.la_gio_nhap);
   const nhieu = d.ung_vien.length > 3;
   return (
     <ol className={cn("grid gap-3", nhieu ? "sm:grid-cols-2 lg:grid-cols-3" : "md:grid-cols-3")} aria-label="Các canh giờ ứng viên">
@@ -140,13 +154,19 @@ function DanhSachUngVien({ d, onDung }: { d: DinhGioOutputT; onDung: (lech: -1 |
           </div>
         );
         return (
-          <li key={u.chi_gio} data-testid="ung-vien-gio"
+          <li key={`${i}-${u.nhan}`} data-testid="ung-vien-gio"
             className={cn("flex flex-col gap-2 rounded-2xl border p-4", u.la_gio_nhap ? "border-gold/50 bg-gold/5" : "border-line/70")}>
             <div className="flex items-baseline justify-between gap-2">
               <p className="font-serif text-lg text-fg"><Clock3 className="mr-1 inline size-4 text-fg-muted" aria-hidden />Giờ {u.chi_gio}</p>
               <span className="text-xs text-fg-faint">{u.nhan}</span>
             </div>
-            <p className="text-xs text-fg-faint">{u.khoang_gio}</p>
+            <p className="text-xs text-fg-faint" data-testid="khoang-gio">{u.khoang_gio_dong_ho ?? u.khoang_gio}</p>
+            {u.lech_gio_lich && (
+              <p className="text-[11px] text-fg-faint" data-testid="khoang-gio-lich">
+                theo giờ lịch: {u.khoang_gio} — đồng hồ nơi bạn sinh lúc đó lệch giờ lịch Việt Nam (UTC+7), Tử vi chia canh theo giờ lịch.
+              </p>
+            )}
+            {u.ghi_chu && <p className="text-[11px] text-fg-muted" data-testid="ghi-chu-ung-vien">{u.ghi_chu}</p>}
             <p className="text-sm text-fg-muted">
               Mệnh ở <b className="text-fg">{u.cung_menh.chi}</b>: {u.cung_menh.chinh_tinh.length ? u.cung_menh.chinh_tinh.join(", ") : "vô chính diệu"}
               <br />{u.cuc} · Thân cư {u.than_cu}
@@ -157,7 +177,7 @@ function DanhSachUngVien({ d, onDung }: { d: DinhGioOutputT; onDung: (lech: -1 |
             <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-2">
               <span className="text-xs text-fg-faint" aria-live="polite">{soDung > 0 ? <><Check className="mr-0.5 inline size-3.5 text-jade" aria-hidden />{soDung} câu bạn thấy đúng</> : "Chưa tick câu nào"}</span>
               {(nhieu || !u.la_gio_nhap) && (
-                <Button size="sm" variant="secondary" onClick={() => onDung(iNhap < 0 ? 0 : (Math.sign(i - iNhap) as -1 | 0 | 1))}>
+                <Button size="sm" variant="secondary" onClick={() => onDung(lechSoVoiNhap(d.ung_vien, i))}>
                   Dùng giờ này
                 </Button>
               )}

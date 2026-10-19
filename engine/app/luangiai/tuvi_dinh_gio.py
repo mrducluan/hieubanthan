@@ -31,6 +31,20 @@ def khoang_gio(chi: int) -> str:
     return f"{bd:02d}:00–{(bd + 1) % 24:02d}:59"
 
 
+def khoang_canh(ti: int, lech_phut: int = 0) -> str:
+    """Khoảng giờ của chỉ số giờ `ti` (như time_index: 0 = Tý sớm 00:00–00:59, 12 = Tý muộn 23:00–23:59),
+    dời thêm `lech_phut` = giờ đồng hồ nơi sinh − giờ kinh tuyến lịch (UTC+7). lech 0 → giờ lịch."""
+    if ti == 0:
+        bd, dai = 0, 60
+    elif ti == 12:
+        bd, dai = 23 * 60, 60
+    else:
+        bd, dai = (2 * ti - 1) * 60, 120
+    a = (bd + lech_phut) % 1440
+    b = (a + dai - 1) % 1440
+    return f"{a // 60:02d}:{a % 60:02d}–{b // 60:02d}:{b % 60:02d}"
+
+
 def ly_do(gio: int, phut: int, do_tin_gio: str) -> list[str]:
     """Vì sao nên định giờ: phút trong 15 phút đầu/cuối canh giờ, giờ áng chừng, hoặc không biết giờ."""
     ra = []
@@ -94,21 +108,27 @@ def _khac_nhau(uv: list[dict]) -> list[str]:
 
 
 def lap(ung_vien: list[dict], nam_doi_chieu: list[int], ly_do_: list[str]) -> dict:
-    """`ung_vien` = [{"nhan", "gio_dai_dien", "la_gio_nhap", "sinh": {ngay, ti, gioi_tinh, …}, "dau_vao"?}]."""
+    """`ung_vien` = [{"nhan", "gio_dai_dien", "la_gio_nhap", "sinh": {ngay, ti, gioi_tinh, …}, "dau_vao"?,
+    "lech_phut"? (đồng hồ nơi sinh − kinh tuyến lịch, phút; mặc định 0), "ghi_chu"?}].
+    `khoang_gio` = khoảng giờ theo kinh tuyến lịch UTC+7; `khoang_gio_dong_ho` = cùng canh đó trên đồng hồ nơi sinh."""
     if len(nam_doi_chieu) > TOI_DA_NAM:
         raise ValueError(f"Tối đa {TOI_DA_NAM} năm đối chiếu")
     ra = []
     for u in ung_vien:
         ls = _ls(u["sinh"])
         menh = next(c for c in ls["cung"] if c["ten"] == "Mệnh")
-        chi = u["sinh"]["ti"] % 12
-        x = {"nhan": u["nhan"], "chi_gio": lunar.CHI[chi], "khoang_gio": khoang_gio(chi),
+        ti = u["sinh"]["ti"]
+        lech = int(u.get("lech_phut", 0))
+        x = {"nhan": u["nhan"], "chi_gio": lunar.CHI[ti % 12], "khoang_gio": khoang_canh(ti),
+             "khoang_gio_dong_ho": khoang_canh(ti, lech), "lech_gio_lich": lech != 0,
              "gio_dai_dien": u["gio_dai_dien"], "la_gio_nhap": u["la_gio_nhap"],
              "cung_menh": {"chi": menh["chi"], "chinh_tinh": [s["ten"] for s in menh["chinh_tinh"]]},
              "cuc": ls["cuc"], "than_cu": next((c["ten"] for c in ls["cung"] if c["la_than"]), None),
              "nam": [_nam(ls, n) for n in nam_doi_chieu]}
         if "dau_vao" in u:
             x["dau_vao"] = u["dau_vao"]
+        if u.get("ghi_chu"):
+            x["ghi_chu"] = u["ghi_chu"]
         ra.append(x)
     luu_y = kb.dinh_gio("luu_y")
     luu_y = [s for s in luu_y if isinstance(s, str)] if isinstance(luu_y, list) else []

@@ -88,3 +88,37 @@ def test_khong_kb(monkeypatch):
     r = dg.lap([_uv(1, "Giờ đã nhập", True)], [2024], [])
     assert r["ung_vien"][0]["nam"][0]["cau_hoi"]
     assert r["khac_nhau"]          # một ứng viên: vẫn có câu giải thích
+
+
+# ---- khoảng giờ theo giờ đồng hồ (lệch giữa đồng hồ nơi sinh và kinh tuyến lịch UTC+7) ----
+def test_khoang_canh_theo_chi_so_iztro():
+    # ti 0 = Tý sớm (00:00–00:59 của ngày đó), ti 12 = Tý muộn (23:00–23:59, Tử vi tính sang ngày sau)
+    assert dg.khoang_canh(0) == "00:00–00:59"
+    assert dg.khoang_canh(12) == "23:00–23:59"
+    assert dg.khoang_canh(3) == "05:00–06:59"
+    assert dg.khoang_canh(11) == "21:00–22:59"
+
+
+def test_khoang_canh_lech_dong_ho():
+    assert dg.khoang_canh(3, 60) == "06:00–07:59"        # miền Nam 1965 (UTC+8): canh Mão lịch → đồng hồ
+    assert dg.khoang_canh(11, 60) == "22:00–23:59"
+    assert dg.khoang_canh(12, 60) == "00:00–00:59"
+    assert dg.khoang_canh(0, -60) == "23:00–23:59"
+    assert dg.khoang_canh(6, 30) == "11:30–13:29"
+
+
+def test_lap_khoang_gio_dong_ho():
+    u = {**_uv(3, "Giờ đã nhập", True), "lech_phut": 60}
+    r = dg.lap([u, _uv(4, "Giờ sau")], [2024], [])
+    a, b = r["ung_vien"]
+    assert a["khoang_gio"] == "05:00–06:59" and a["khoang_gio_dong_ho"] == "06:00–07:59" and a["lech_gio_lich"] is True
+    assert b["khoang_gio_dong_ho"] == b["khoang_gio"] == "07:00–08:59" and b["lech_gio_lich"] is False
+
+
+def test_lap_ty_muon_va_ghi_chu():
+    u = {**_uv(12, "Giờ Tý muộn (23:00–23:59)", True), "ghi_chu": "Tử vi tính sang ngày hôm sau."}
+    r = dg.lap([_uv(0, "Giờ Tý"), u], [2024], [])
+    som, muon = r["ung_vien"]
+    assert som["chi_gio"] == muon["chi_gio"] == "Tý"
+    assert som["khoang_gio"] == "00:00–00:59" and muon["khoang_gio"] == "23:00–23:59"
+    assert muon["ghi_chu"] == "Tử vi tính sang ngày hôm sau." and "ghi_chu" not in som

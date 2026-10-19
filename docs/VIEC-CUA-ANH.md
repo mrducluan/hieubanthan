@@ -606,5 +606,6 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
 
 ## TV-V2. Nâng cấp Tử vi (2026-10-19)
 - [ ] Sau khi PR TV-V2 merge + Render deploy engine: mở `/tu-vi`, thử 4 khối mới (Đường bay tứ hoá, 3 tháng tới, Định giờ sinh, Hợp tham) với lá số của anh.
-- [ ] Quyết: có muốn lưu "Không biết giờ" vào tài khoản không (cần migration mới nới cột `do_tin_gio` của 0007).
-- [ ] Quyết: định giờ người sinh miền Nam trước 1975 hiện khoảng giờ theo **giờ đồng hồ** hay giữ giờ lịch + chú thích; giờ Tý khi nhập 23:xx tính 23:xx ngày đó hay 00:xx.
+- [x] Quyết: lưu "Không biết giờ" vào tài khoản — **đã chốt: lưu** (migration 0015 nới `do_tin_gio` nhận `unknown`).
+- [x] Quyết: định giờ hiện khoảng giờ theo **giờ đồng hồ** nơi sinh (kèm dòng "theo giờ lịch" khi lệch) — **đã chốt**; chế độ 12 canh: Tý = 00:00–00:59 ngày đã nhập, nhập 23:xx thì thêm ứng viên "Giờ Tý muộn" — **đã chốt**.
+- [ ] Chạy migration `supabase/migrations/0015_do_tin_gio_unknown.sql` trên Supabase → SQL Editor (sau 0007). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0015). Chưa chạy thì web vẫn lưu được, chỉ là "Không biết giờ" lưu như chưa có giờ.

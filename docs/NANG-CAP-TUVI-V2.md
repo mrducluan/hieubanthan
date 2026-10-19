@@ -105,7 +105,11 @@ Mỗi tháng xếp mức theo tứ hoá của **năm âm chứa tháng đó** (`
 ### POST `/v1/tuvi/dinh-gio` — `{la_so, nam_doi_chieu?: int[] (≤3), tat_ca_gio?: bool}`
 ```jsonc
 { "engine_version", "ly_do": ["gan_ranh_gio|ang_chung|khong_biet"],
-  "ung_vien": [{"nhan": "Giờ trước|Giờ đã nhập|Giờ sau", "chi_gio": "Ngọ", "khoang_gio": "11:00–12:59",
+  "ung_vien": [{"nhan": "Giờ trước|Giờ đã nhập|Giờ sau", "chi_gio": "Ngọ",
+                "khoang_gio": "11:00–12:59",            // theo kinh tuyến lịch UTC+7 (Tử vi chia canh theo giờ này)
+                "khoang_gio_dong_ho": "11:00–12:59",    // cùng canh trên ĐỒNG HỒ nơi sinh
+                "lech_gio_lich": false,                 // true khi đồng hồ nơi sinh ≠ giờ lịch
+                "ghi_chu": "...",                       // chỉ ứng viên "Giờ Tý muộn (23:00–23:59)"
                 "gio_dai_dien": "12:00", "la_gio_nhap": true,
                 "cung_menh": {"chi","chinh_tinh": ["..."]}, "cuc": "Thủy nhị cục", "than_cu": "Quan Lộc",
                 "dau_vao": {"birth_date","birth_time","calendar_type": "duong"},   // giờ ĐỒNG HỒ nơi sinh
@@ -113,14 +117,25 @@ Mỗi tháng xếp mức theo tứ hoá của **năm âm chứa tháng đó** (`
                          "cau_hoi": [{"hoa": "Kỵ", "cung": "Tài Bạch", "cach": "nhap|chieu", "noi_dung": "..."}]}]}],
   "nam_doi_chieu": [2023, 2024, 2025], "khac_nhau": ["..."], "loi_dan": "...", "luu_y": ["..."], "co_canh_bao": [...] }
 ```
-Mặc định 3 ứng viên (giờ trước / đã nhập / sau); `tat_ca_gio=true` → 12 canh giờ (người không biết giờ).
+Mặc định 3 ứng viên (giờ trước / đã nhập / sau = giờ nhập ± 2 giờ đồng hồ); `tat_ca_gio=true` → 12 canh giờ
+(người không biết giờ).
 `nam_doi_chieu` mặc định 3 năm âm gần nhất đã qua.
+
+- **Khoảng giờ**: `khoang_gio` theo chỉ số giờ của lá (Tý sớm `00:00–00:59`, Tý muộn `23:00–23:59`, canh khác 2 giờ).
+  `khoang_gio_dong_ho` = `khoang_gio` dời theo độ lệch *đồng hồ nơi sinh − kinh tuyến lịch* mà tiền xử lý `_DauVao`
+  đã dùng cho chính ứng viên đó (múi giờ lịch sử, vd miền Nam 1960–1975 UTC+8: canh Mão lịch `05:00–06:59` → đồng hồ
+  `06:00–07:59`; nước ngoài có giờ mùa hè: +1 giờ). Không lệch → hai trường bằng nhau, `lech_gio_lich=false`.
+- **12 canh** (`tat_ca_gio`): mọi ứng viên thuộc **ngày đã nhập** (theo giờ lịch); Tý = 00:30 (giữa Tý sớm), canh
+  khác = giữa canh, quy ra giờ đồng hồ; canh trùng giờ đã nhập dùng đúng giờ nhập. Giờ nhập 23:00–23:59 (Tý muộn,
+  Tử vi tính sang ngày hôm sau) → thêm **ứng viên thứ 13** "Giờ Tý muộn (23:00–23:59)" = đúng giờ nhập,
+  `la_gio_nhap=true`, có `ghi_chu`; ứng viên Tý sớm khi đó `la_gio_nhap=false`. Thứ tự = thời gian (Tý sớm … Hợi,
+  Tý muộn cuối) → web tính `lech` (sớm/muộn hơn giờ nhập) theo `dau_vao`.
 
 ## 4. Đầu vào mới cho người dùng (đề xuất UI)
 
 | Ở đâu | Trường | Vì sao |
 |---|---|---|
-| Hồ sơ | "Giờ sinh này": thêm **"Không biết giờ"** (`do_tin_gio=unknown`) | Mở luồng định giờ 12 canh thay vì chặn Tử vi |
+| Hồ sơ | "Giờ sinh này": thêm **"Không biết giờ"** (`do_tin_gio=unknown`) | Mở luồng định giờ 12 canh thay vì chặn Tử vi. Tài khoản lưu `unknown` (giờ để trống) từ migration **0015**; chưa chạy 0015 → lưu như chưa có giờ |
 | Hồ sơ | **Phút sinh** đã có trong ô giờ — hiện gợi ý định giờ khi phút ở 15 phút đầu/cuối canh | Ranh giới canh giờ đổi cả lá |
 | Lá số Tử vi | **Năm đối chiếu** (≤ 3 năm người dùng nhớ rõ) | Định giờ dựa trên năm của chính họ |
 | Hợp tham | **Người kia**: ngày sinh (bắt buộc), giờ + giới tính + nơi sinh (tuỳ chọn → xem hai chiều), **quan hệ** | Can năm đủ cho một chiều; lá đầy đủ cho hai chiều + can Mệnh |

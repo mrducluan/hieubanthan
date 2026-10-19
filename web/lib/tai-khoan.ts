@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase/trinh-duyet";
-import { ngaySinhIso, type HoSo } from "@/lib/hoso";
+import { GIO_DAI_DIEN_KHONG_BIET, ngaySinhIso, type HoSo } from "@/lib/hoso";
 
 /** undefined = đang kiểm tra · null = chưa đăng nhập (hoặc tài khoản chưa bật). */
 export function useNguoiDung(): User | null | undefined {
@@ -24,11 +24,13 @@ export function useNguoiDung(): User | null | undefined {
   return u;
 }
 
-interface HangHoSo {
+export interface HangHoSo {
   ho_ten: string; ten_khac: string | null; ngay_sinh: string; gio_sinh: string | null;
   gioi_tinh: "nam" | "nu" | null; vung: "north" | "south" | null; cap_nhat_luc: string;
   // 0007 — có thể chưa chạy migration: đọc/ghi lùi về bộ cột 0006.
-  noi_sinh?: string | null; gio_mua_he?: boolean; do_tin_gio?: "exact" | "approx" | null; lich_nhap?: "duong" | "am";
+  noi_sinh?: string | null; gio_mua_he?: boolean; lich_nhap?: "duong" | "am";
+  // 'unknown' từ 0015 (TV-V2 "Không biết giờ": gio_sinh để null — không lưu giờ đại diện như giờ thật).
+  do_tin_gio?: "exact" | "approx" | "unknown" | null;
   am_ngay?: number | null; am_thang?: number | null; am_nam?: number | null; am_nhuan?: boolean;
 }
 
@@ -41,17 +43,17 @@ async function batBuoc() {
   return sb;
 }
 
-export async function hoSoTaiKhoan(userId: string): Promise<(Omit<HoSo, "v" | "tao_luc"> & { cap_nhat_luc: string }) | null> {
-  const doc = async (cot: string) => (await batBuoc()).from("ho_so").select(cot).eq("user_id", userId).maybeSingle<HangHoSo>();
-  let { data, error } = await doc(COT_0007);
-  if (error) ({ data, error } = await doc(COT_0006));
-  if (error) throw new Error("Không đọc được hồ sơ trong tài khoản.");
-  if (!data) return null;
+export type HoSoTaiKhoan = Omit<HoSo, "v" | "tao_luc"> & { cap_nhat_luc: string };
+
+/** Dòng ho_so → hồ sơ máy. 'unknown' → giờ đại diện 12:00 (như form "Không biết giờ" lưu trên máy). */
+export function hoSoTuHang(data: HangHoSo): HoSoTaiKhoan {
   const [nam, thang, ngay] = data.ngay_sinh.split("-").map(Number) as [number, number, number];
+  const khongBiet = data.do_tin_gio === "unknown";
+  const gio = khongBiet ? GIO_DAI_DIEN_KHONG_BIET : data.gio_sinh?.slice(0, 5);
   return {
     ho_ten: data.ho_ten, ngay, thang, nam,
     ...(data.ten_khac ? { ten_khac: data.ten_khac } : {}),
-    ...(data.gio_sinh ? { gio: data.gio_sinh.slice(0, 5) } : {}),
+    ...(gio ? { gio } : {}),
     ...(data.gioi_tinh ? { gioi_tinh: data.gioi_tinh } : {}),
     ...(data.vung ? { vung: data.vung } : {}),
     ...(data.noi_sinh ? { noi_sinh: data.noi_sinh } : {}),
@@ -64,21 +66,45 @@ export async function hoSoTaiKhoan(userId: string): Promise<(Omit<HoSo, "v" | "t
   };
 }
 
-export async function luuVaoTaiKhoan(userId: string, h: HoSo): Promise<void> {
-  // TV-V2: "Không biết giờ" chưa có cột (0007 chỉ nhận exact/approx) → tài khoản lưu như chưa có giờ,
-  // không lưu giờ đại diện 12:00 như thể là giờ thật. Đổi = migration mới (chờ duyệt).
+export async function hoSoTaiKhoan(userId: string): Promise<HoSoTaiKhoan | null> {
+  const doc = async (cot: string) => (await batBuoc()).from("ho_so").select(cot).eq("user_id", userId).maybeSingle<HangHoSo>();
+  let { data, error } = await doc(COT_0007);
+  if (error) ({ data, error } = await doc(COT_0006));
+  if (error) throw new Error("Không đọc được hồ sơ trong tài khoản.");
+  return data ? hoSoTuHang(data) : null;
+}
+
+/** Postgres: vi phạm ràng buộc check (vd 0015 chưa chạy → do_tin_gio chưa nhận 'unknown'). */
+const VI_PHAM_CHECK = "23514";
+
+type Upsert = (hang: Record<string, unknown>) => PromiseLike<{ error: { code?: string } | null }>;
+
+/** Ghi hồ sơ bằng `upsert` (tách khỏi Supabase để kiểm thử). Thứ tự lùi:
+ *  1) đủ cột 0007, 'unknown' thật (0015) · 2) chỉ khi vi phạm check (0015 chưa chạy) + không biết giờ: vẫn cột 0007,
+ *  do_tin_gio null (như cũ) · 3) lỗi KHÁC ở lần 1 (0007 chưa chạy, thiếu cột): bộ cột 0006. */
+export async function ghiHoSo(upsert: Upsert, userId: string, h: HoSo): Promise<void> {
   const khongBiet = h.do_tin_gio === "unknown";
   const co_ban = {
     user_id: userId, ho_ten: h.ho_ten, ten_khac: h.ten_khac ?? null, ngay_sinh: ngaySinhIso(h),
     gio_sinh: khongBiet ? null : h.gio ?? null, gioi_tinh: h.gioi_tinh ?? null, vung: h.vung ?? null, dong_y_luc: new Date().toISOString(),
   };
-  let { error } = await (await batBuoc()).from("ho_so").upsert({
-    ...co_ban, noi_sinh: h.noi_sinh ?? null, gio_mua_he: Boolean(h.gio_mua_he), do_tin_gio: khongBiet ? null : h.do_tin_gio ?? null,
+  const day_du = {
+    ...co_ban, noi_sinh: h.noi_sinh ?? null, gio_mua_he: Boolean(h.gio_mua_he), do_tin_gio: h.do_tin_gio ?? null,
     lich_nhap: h.lich_nhap ?? "duong", am_ngay: h.am?.ngay ?? null, am_thang: h.am?.thang ?? null,
     am_nam: h.am?.nam ?? null, am_nhuan: Boolean(h.am?.nhuan),
-  });
-  if (error) ({ error } = await (await batBuoc()).from("ho_so").upsert(co_ban));   // chưa chạy 0007
+  };
+  let { error } = await upsert(day_du);
+  if (error?.code === VI_PHAM_CHECK) {
+    if (khongBiet) ({ error } = await upsert({ ...day_du, do_tin_gio: null }));   // chưa chạy 0015
+  } else if (error) {
+    ({ error } = await upsert(co_ban));                                           // chưa chạy 0007
+  }
   if (error) throw new Error("Chưa lưu được vào tài khoản.");
+}
+
+export async function luuVaoTaiKhoan(userId: string, h: HoSo): Promise<void> {
+  const sb = await batBuoc();
+  await ghiHoSo((hang) => sb.from("ho_so").upsert(hang), userId, h);
 }
 
 export async function xoaHoSoTaiKhoan(userId: string): Promise<void> {

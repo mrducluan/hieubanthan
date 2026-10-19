@@ -327,7 +327,15 @@ export const DinhGioOutput = z.object({
   engine_version: z.string(),
   ly_do: z.array(z.string()),
   ung_vien: z.array(z.object({
-    nhan: z.string(), chi_gio: z.string(), khoang_gio: z.string(), gio_dai_dien: z.string(),
+    nhan: z.string(), chi_gio: z.string(),
+    /** Khoảng giờ của canh theo kinh tuyến lịch UTC+7 (Tử vi chia canh theo giờ này). */
+    khoang_gio: z.string(),
+    /** Cùng canh đó trên ĐỒNG HỒ nơi sinh (lệch khi múi giờ lịch sử ≠ UTC+7, giờ mùa hè…). Optional: engine cũ. */
+    khoang_gio_dong_ho: z.string().optional(),
+    lech_gio_lich: z.boolean().optional(),
+    /** Chỉ ứng viên "Giờ Tý muộn" (chế độ 12 canh, giờ nhập 23:00–23:59). */
+    ghi_chu: z.string().optional(),
+    gio_dai_dien: z.string(),
     la_gio_nhap: z.boolean(),
     cung_menh: z.object({ chi: z.string(), chinh_tinh: z.array(z.string()) }).passthrough(),
     cuc: z.string(), than_cu: z.string(),
@@ -338,7 +346,7 @@ export const DinhGioOutput = z.object({
       /** `cach`: "nhap" = hoá bay vào cung đó, "chieu" = Hoá Kỵ chiếu sang từ cung đối diện. */
       cau_hoi: z.array(z.object({ hoa: z.string(), cung: z.string(), cach: z.enum(["nhap", "chieu"]).optional(), noi_dung: z.string() }).passthrough()),
     }).passthrough()),
-  }).passthrough()).min(1).max(12),
+  }).passthrough()).min(1).max(13),   // 12 canh + "Giờ Tý muộn" khi giờ nhập 23:xx
   khac_nhau: z.array(z.string()).default([]),
   nam_doi_chieu: z.array(z.number()).optional(),
   loi_dan: z.string().optional(),

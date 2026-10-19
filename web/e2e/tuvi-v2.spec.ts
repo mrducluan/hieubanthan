@@ -11,9 +11,11 @@ const NHIP = FX["nhip-3-thang"];
 const DINH_GIO = FX["dinh-gio"];
 const DINH_GIO_12 = FX["dinh-gio-12"];
 const HOP_THAM = FX["hop-tham"];
+const DINH_GIO_NAM_65 = FX["dinh-gio-mien-nam-1965"];
+const DINH_GIO_TY_MUON_12 = FX["dinh-gio-ty-muon-12"];
 const NHAN_MUC: Record<string, string> = { thuan: "Thuận", binh: "Bình", can_than: "Cần thận trọng" };
 
-async function mock(page: Page) {
+async function mock(page: Page, dinhGio?: { ba?: object; muoiHai?: object }) {
   const goi: Record<string, Request[]> = { "phi-hoa": [], "nhip-3-thang": [], "dinh-gio": [], "hop-tham": [] };
   // Cung của mock phi hoá lấy theo lá số thật (tên ↔ chi khớp), để "Xem cung trên lá số" chọn đúng cung.
   let cungThat: { ten: string; chi: string; can: string; la_menh: boolean; la_lai_nhan?: boolean }[] | null = null;
@@ -30,7 +32,9 @@ async function mock(page: Page) {
   for (const k of Object.keys(json) as (keyof typeof json)[]) {
     await page.route(`**/api/tuvi/${k}`, (r) => {
       goi[k]!.push(r.request());
-      const body = k === "phi-hoa" ? phiHoa() : k === "dinh-gio" && r.request().postDataJSON()?.tat_ca_gio ? DINH_GIO_12 : json[k];
+      const body = k === "phi-hoa" ? phiHoa() : k === "dinh-gio"
+        ? (r.request().postDataJSON()?.tat_ca_gio ? dinhGio?.muoiHai ?? DINH_GIO_12 : dinhGio?.ba ?? DINH_GIO)
+        : json[k];
       return r.fulfill({ json: body });
     });
   }
@@ -153,6 +157,49 @@ test("form hồ sơ: chọn “Không biết giờ” → khoá ô giờ, lưu g
   expect(hs).toMatchObject({ gio: "12:00", do_tin_gio: "unknown" });
 });
 
+test("định giờ miền Nam 1965 (đồng hồ UTC+8): khoảng giờ đồng hồ là chính, kèm dòng giờ lịch", async ({ page }) => {
+  await napHoSo(page, { ...HO_SO_MAU, ngay: 20, thang: 7, nam: 1965, gio: "06:10", noi_sinh: "tp-ho-chi-minh", vung: "south" });
+  const goi = await mock(page, { ba: DINH_GIO_NAM_65 });
+  await page.goto("/tu-vi");
+  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
+  await page.getByRole("button", { name: /Định giờ sinh/ }).click();
+  const uv = page.getByTestId("ung-vien-gio");
+  await expect(uv).toHaveCount(3);
+  const nhap = DINH_GIO_NAM_65.ung_vien[1]!;
+  expect(nhap).toMatchObject({ la_gio_nhap: true, khoang_gio: "05:00–06:59", khoang_gio_dong_ho: "06:00–07:59", lech_gio_lich: true });
+  await expect(uv.nth(1).getByTestId("khoang-gio")).toHaveText("06:00–07:59");
+  await expect(uv.nth(1).getByTestId("khoang-gio-lich")).toContainText("theo giờ lịch: 05:00–06:59");
+  await expect(uv.nth(1).getByTestId("khoang-gio-lich")).toContainText("UTC+7");
+  expect(goi["dinh-gio"]!.at(-1)!.postDataJSON()).toMatchObject({ la_so: { birth_time: "06:10", noi_sinh: "tp-ho-chi-minh" } });
+});
+
+test("hồ sơ thường (không lệch giờ lịch): không hiện dòng giờ lịch", async ({ page }) => {
+  await napHoSo(page);
+  await mock(page);
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: /Định giờ sinh/ }).click();
+  await expect(page.getByTestId("ung-vien-gio")).toHaveCount(3);
+  await expect(page.getByTestId("khoang-gio").nth(1)).toHaveText(DINH_GIO.ung_vien[1]!.khoang_gio);
+  await expect(page.getByTestId("khoang-gio-lich")).toHaveCount(0);
+});
+
+test("12 canh khi giờ nhập 23:xx: thêm ứng viên thứ 13 “Giờ Tý muộn”, lech tính theo thời gian", async ({ page }) => {
+  await napHoSo(page, { ...HO_SO_MAU, gio: "12:00", do_tin_gio: "unknown" });
+  await mock(page, { muoiHai: DINH_GIO_TY_MUON_12 });
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: /Định giờ sinh/ }).click();
+  const uv = page.getByTestId("ung-vien-gio");
+  await expect(uv).toHaveCount(13);
+  await expect(uv.nth(12)).toContainText("Giờ Tý muộn (23:00–23:59)");
+  await expect(uv.nth(12).getByTestId("ghi-chu-ung-vien")).toContainText("ngày hôm sau");
+  await expect(uv.nth(0).getByTestId("khoang-gio")).toHaveText("00:00–00:59");
+  await expect(uv.nth(12).getByTestId("khoang-gio")).toHaveText("23:00–23:59");
+  await uv.nth(0).getByRole("button", { name: "Dùng giờ này" }).click();     // Tý sớm 00:30 sớm hơn 23:30 đã nhập
+  await page.keyboard.press("Escape");
+  const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: { su_kien: string; kind?: string; lech?: number }[] }).__hbt_su_kien ?? []);
+  expect(sk.filter((s) => s.kind === "dinh_gio").at(-1)?.lech).toBe(-1);
+});
+
 // Engine THẬT qua proxy web: mọi output phải qua zod của web (proxy trả 502 nếu lệch schema).
 test("engine thật: 4 route TV-V2 qua proxy web, các ca khó", async ({ request }) => {
   const binh = { birth_date: "1990-05-17", birth_time: "12:30", gender: "nam", noi_sinh: "ha-noi" };
@@ -183,4 +230,21 @@ test("engine thật: 4 route TV-V2 qua proxy web, các ca khó", async ({ reques
   const dgTy = await goi("dinh-gio", { la_so: tyMuon });
   expect(dgTy.ung_vien.map((u: { chi_gio: string }) => u.chi_gio)).toEqual(["Hợi", "Tý", "Sửu"]);
   expect(dgTy.ung_vien[2].dau_vao.birth_date).toBe("1992-11-04");
+  // 23:30 + 12 canh: 12 canh của ngày đã nhập (Tý sớm 00:30) + ứng viên thứ 13 Tý muộn = đúng giờ nhập.
+  type U = { nhan: string; chi_gio: string; gio_dai_dien: string; la_gio_nhap: boolean; khoang_gio: string;
+    khoang_gio_dong_ho: string; lech_gio_lich: boolean; ghi_chu?: string; dau_vao: { birth_date: string } };
+  const dgTy12: U[] = (await goi("dinh-gio", { la_so: tyMuon, tat_ca_gio: true })).ung_vien;
+  expect(dgTy12).toHaveLength(13);
+  expect(dgTy12[0]).toMatchObject({ chi_gio: "Tý", gio_dai_dien: "00:30", la_gio_nhap: false });
+  expect(dgTy12[12]).toMatchObject({ nhan: "Giờ Tý muộn (23:00–23:59)", gio_dai_dien: "23:30", la_gio_nhap: true });
+  expect(dgTy12[12]!.ghi_chu).toContain("ngày hôm sau");
+  expect(dgTy12.filter((u) => u.la_gio_nhap)).toHaveLength(1);
+  expect(new Set(dgTy12.map((u) => u.dau_vao.birth_date))).toEqual(new Set(["1992-11-03"]));
+  // Miền Nam 1965 (đồng hồ UTC+8): khoảng giờ đồng hồ = giờ lịch + 1 giờ.
+  const dg65: U[] = (await goi("dinh-gio", { la_so: mienNam65 })).ung_vien;
+  expect(dg65[1]).toMatchObject({ la_gio_nhap: true, chi_gio: "Mão", khoang_gio: "05:00–06:59", khoang_gio_dong_ho: "06:00–07:59", lech_gio_lich: true });
+  const dg65_12: U[] = (await goi("dinh-gio", { la_so: mienNam65, tat_ca_gio: true })).ung_vien;
+  expect(dg65_12).toHaveLength(12);
+  expect(dg65_12.find((u) => u.chi_gio === "Thìn")).toMatchObject({ gio_dai_dien: "09:00", khoang_gio_dong_ho: "08:00–09:59" });
+  expect((await goi("dinh-gio", { la_so: binh })).ung_vien.every((u: U) => !u.lech_gio_lich && u.khoang_gio_dong_ho === u.khoang_gio)).toBe(true);
 });
