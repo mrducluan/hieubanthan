@@ -218,9 +218,11 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
     ngay_xem = ngay_xem or dt.date.today()
     pl = hoi.phan_loai(cau_hoi)
     goi = hoi.goi_bang_chung(pl, nguoi, nguoi_kia, ngay_xem)
-    goi = noi_dau.bo_sung_goi(goi, cau_hoi, nguoi, ngay_xem)   # TS-NOIDAU: câu bấm từ bảng → đúng chỉ số của thẻ
     if phai == "chaldea":
         goi = _goi_chaldea(goi, pl, nguoi)
+    else:
+        # TS-NOIDAU: câu bấm từ bảng → đúng chỉ số của thẻ (thẻ tính theo Pitago; phái Chaldea giữ lời đáp số Chaldea).
+        goi = noi_dau.bo_sung_goi(goi, cau_hoi, nguoi, ngay_xem)
     template = van_template(goi)
     co_key = bool(os.environ.get("OPENROUTER_API_KEY"))
     che_do, van, loi = "template", template, []

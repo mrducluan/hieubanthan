@@ -135,3 +135,12 @@ def test_api_noi_dau_va_hoi_co_cau_lien_quan():
                                        "cau_hoi": "Tôi hợp nghề gì?"})
     assert r.status_code == 200
     assert r.json()["cau_lien_quan"] and r.json()["cau_lien_quan"][0]["tru"] == "su_nghiep_tien_bac"
+
+
+def test_phai_chaldea_khong_bi_chen_so_pitago():
+    # Câu chuẩn "Điểm mạnh cốt lõi" ở phái Chaldea vẫn trả lời bằng số Chaldea (TS-PHAI-2), không chèn số Pitago.
+    from app.narrative import hoi_van
+    nguoi = {"ho_ten": LUAN[0], "ngay": 24, "thang": 10, "nam": 1988}
+    van = hoi_van.tra_loi("Điểm mạnh cốt lõi của tôi là gì?", nguoi, None, NGAY_XEM, dung_llm=False,
+                          phai="chaldea")["cau_tra_loi"]
+    assert "theo phái Chaldea" in van
