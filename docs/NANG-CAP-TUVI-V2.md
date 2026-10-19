@@ -68,7 +68,8 @@ Mọi route nhận `la_so` = `TuanTrietInput` sẵn có (cùng tiền xử lý m
                "tieu_de","nghia","viec_nen_lam","cau_tu_soi","ghi_chu_tuan_triet": null}],  // ≤ 8
   "luu_nien": {"nam": 2026, "can_chi": "Bính Ngọ",
                "hoa": [{"hoa","sao","den_cung","xung_cung"}]} ,                  // chỉ khi có nam_xem
-  "phai": {"ten": "Phi tinh tứ hoá", "ghi_chu": "..."}, "luu_y": ["..."], "trang_thai": "nhap_ai" }
+  "phai": {"ten": "Phi tinh tứ hoá", "ghi_chu": "..."}, "luu_y": ["..."], "trang_thai": "nhap_ai",
+  "co_canh_bao": [{"loai","chi_tiet"}] }
 ```
 `hoa` ∈ `Lộc|Quyền|Khoa|Kỵ`. `xung_cung` = cung đối diện cung đích. `tu_hoa` = can cung nguồn hoá chính sao nằm
 trong cung nguồn.
@@ -77,18 +78,24 @@ trong cung nguồn.
 ```jsonc
 { "engine_version", "ngay_xem", "phai_luu_nguyet": "dau_quan_thai_tue",
   "luu_nien": {"nam_am", "can_chi", "tu_hoa": [{"hoa","sao","cung_goc"}]},
-  "thang": [ {"thang","nhuan","phan","can_chi","tu","den","cung_goc","chu_de",
+  "ten_phai_luu_nguyet": "Đẩu Quân từ Thái Tuế",
+  "luu_nien_sau": {/* như luu_nien */},    // chỉ khi 3 tháng vắt sang năm âm sau
+  "thang": [ {"thang","nhuan","phan","nam_am","can_chi","tu","den","cung_goc","chu_de",
               "muc": "thuan|binh|can_than", "nhan_muc": "Thuận|Bình|Cần thận trọng",
               "ly_do": [{"ma": "chong_ky|song_loc|loc_nhap_cung_chinh|ky_xung_cung_chinh|khoa_giai", "noi_dung"}],
               "tu_hoa_thang": [{"hoa","sao","cung_goc"}], "goi_y", "cau_tu_soi"} ],   // đúng 3 phần tử
-  "uu_tien", "luu_y" }
+  "uu_tien": {"thu_tu": ["dai_han","luu_nien","tieu_han","luu_nguyet"], "ghi_chu": "...",
+              "han_nam": {"dai_han","luu_nien","tieu_han": {"chi","cung_goc"}}},
+  "luu_y": ["..."], "co_canh_bao": [...] }
 ```
+Mỗi tháng xếp mức theo tứ hoá của **năm âm chứa tháng đó** (`nam_am`), nên tháng sau Tết đọc cùng `luu_nien_sau`.
 
 ### POST `/v1/tuvi/hop-tham` — `{la_so, nguoi_kia, quan_he}`
 `nguoi_kia = {birth_date, calendar_type?, am_nhuan?, birth_time?, gender?, noi_sinh?, vung?}`;
 `quan_he ∈ nguoi_yeu|vo_chong|ban_be|dong_nghiep|doi_tac|sep|cha_me_con|gia_dinh` (mặc định `nguoi_yeu`).
 ```jsonc
 { "engine_version", "quan_he", "nhan_quan_he", "can_nam_nguoi_kia": "Ất",
+  "can_menh_nguoi_kia": "Giáp" | null,
   "nguoi_kia_vao_ban": [{"hoa","sao","den_cung","xung_cung","nghia"}],     // 4 phần tử
   "ban_vao_nguoi_kia": [...] | null,      // chỉ khi người kia đủ giờ + giới tính + nơi sinh
   "menh_nguoi_kia_vao_ban": [...] | null, // can cung Mệnh người kia (cũng cần lá đầy đủ)
@@ -101,9 +108,10 @@ trong cung nguồn.
   "ung_vien": [{"nhan": "Giờ trước|Giờ đã nhập|Giờ sau", "chi_gio": "Ngọ", "khoang_gio": "11:00–12:59",
                 "gio_dai_dien": "12:00", "la_gio_nhap": true,
                 "cung_menh": {"chi","chinh_tinh": ["..."]}, "cuc": "Thủy nhị cục", "than_cu": "Quan Lộc",
+                "dau_vao": {"birth_date","birth_time","calendar_type": "duong"},   // giờ ĐỒNG HỒ nơi sinh
                 "nam": [{"nam": 2023, "can_chi": "Quý Mão",
-                         "cau_hoi": [{"hoa": "Kỵ", "cung": "Tài Bạch", "noi_dung": "..."}]}]}],
-  "khac_nhau": ["..."], "luu_y": ["..."] }
+                         "cau_hoi": [{"hoa": "Kỵ", "cung": "Tài Bạch", "cach": "nhap|chieu", "noi_dung": "..."}]}]}],
+  "nam_doi_chieu": [2023, 2024, 2025], "khac_nhau": ["..."], "loi_dan": "...", "luu_y": ["..."], "co_canh_bao": [...] }
 ```
 Mặc định 3 ứng viên (giờ trước / đã nhập / sau); `tat_ca_gio=true` → 12 canh giờ (người không biết giờ).
 `nam_doi_chieu` mặc định 3 năm âm gần nhất đã qua.

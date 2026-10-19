@@ -40,6 +40,13 @@ _MAC_DINH = {
         "viec_nen_lam": "Tách bạch việc của cung {tu_cung} với việc của cung {xung_cung}; quyết định lớn nên có thời gian cân nhắc.",
         "cau_tu_soi": "Điều gì thuộc {mang_tu} đang chiếm nhiều tâm trí của mình nhất lúc này?",
     },
+    # Kỵ bay vào cung đối diện nên chiếu NGƯỢC về chính cung phát (cung phát = cung bị xung).
+    "ky_xung_ve": {
+        "tieu_de": "Hoá Kỵ từ {tu_cung} vào {den_cung}, chiếu ngược về {tu_cung}",
+        "nghia": "Chuyện {mang_tu} đi sang {mang_den} rồi dội lại chính {mang_tu}; đây là chỗ nên làm chậm, rõ ràng hơn.",
+        "viec_nen_lam": "Với việc thuộc cung {tu_cung}, nên làm từng bước và có thời gian cân nhắc trước quyết định lớn.",
+        "cau_tu_soi": "Điều gì thuộc {mang_tu} đang chiếm nhiều tâm trí của mình nhất lúc này?",
+    },
     "loc_nhap": {
         "tieu_de": "Hoá Lộc từ {tu_cung} vào {den_cung}",
         "nghia": "Chuyện {mang_tu} có xu hướng mang thuận lợi tới {mang_den}.",
@@ -104,6 +111,8 @@ def _khop(m: dict, d: dict) -> bool:
 def _noi_bat(loai: str, d: dict, mau: dict | None = None) -> dict:
     b = _bien(d)
     goc = _MAC_DINH.get(loai) or _MAC_DINH["ky_xung" if d["hoa"] == "Kỵ" else "loc_nhap"]
+    if loai == "ky_xung" and d["xung_cung"] == d["tu_cung"]:
+        goc = _MAC_DINH["ky_xung_ve"]
     th = None
     if loai == "tu_hoa":
         th = kb.tu_hoa_cung(d["hoa"])

@@ -429,8 +429,8 @@
    }
   },
   "ly_do": {
-   "chong_ky": "Hoá Kỵ của tháng gặp lại Hoá Kỵ của năm ở {sao}, cung {cung}: mảng này dễ cần nhiều công sức hơn trong tháng.",
-   "song_loc": "Hoá Lộc của năm và của tháng cùng gặp ở {sao}, cung {cung}: cửa thuận ở mảng này rộng hơn.",
+   "chong_ky": "Hoá Kỵ của tháng (sao {sao}) rơi vào cung {cung}, cùng trục với Hoá Kỵ của năm (ở chính cung này hoặc ở cung đối diện): mảng này dễ cần nhiều công sức hơn trong tháng.",
+   "song_loc": "Hoá Lộc của tháng (sao {sao}) và Hoá Lộc của năm cùng rơi vào cung {cung}: cửa thuận ở mảng này rộng hơn.",
    "loc_nhap_cung_chinh": "Hoá Lộc của tháng bay vào cung {cung} qua sao {sao}: mảng bạn đang để ý có thêm cơ hội.",
    "ky_xung_cung_chinh": "Hoá Kỵ của tháng ở sao {sao}, chiếu vào cung {cung} từ cung đối diện: việc của mảng này nên chuẩn bị kỹ hơn.",
    "khoa_giai": "Hoá Khoa ở sao {sao}, cung {cung} giúp gỡ bớt vướng: dễ có người giải thích, hỗ trợ."
@@ -478,7 +478,7 @@
   "cau_hoi": {
    "Mệnh": "Năm {nam}, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?",
    "Phụ Mẫu": "Năm {nam}, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?",
-   "Phúc Đức": "Năm {nam}, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay hay suy nghĩ hơn thường lệ?",
+   "Phúc Đức": "Năm {nam}, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?",
    "Điền Trạch": "Năm {nam}, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?",
    "Quan Lộc": "Năm {nam}, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?",
    "Nô Bộc": "Năm {nam}, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?",

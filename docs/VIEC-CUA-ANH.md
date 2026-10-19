@@ -604,3 +604,7 @@ xuất sửa thẻ chia sẻ / lời mời. Thưởng Sao khi mời bạn **cầ
 **Trước khi thu tiền (song song, anh + luật sư):** mục E — danh nghĩa vận hành, MST, thông báo Bộ Công Thương,
 luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoài. Thiếu phần này thì **không** bật bán Sao dù đã qua Gate 2.
 
+## TV-V2. Nâng cấp Tử vi (2026-10-19)
+- [ ] Sau khi PR TV-V2 merge + Render deploy engine: mở `/tu-vi`, thử 4 khối mới (Đường bay tứ hoá, 3 tháng tới, Định giờ sinh, Hợp tham) với lá số của anh.
+- [ ] Quyết: có muốn lưu "Không biết giờ" vào tài khoản không (cần migration mới nới cột `do_tin_gio` của 0007).
+- [ ] Quyết: định giờ người sinh miền Nam trước 1975 hiện khoảng giờ theo **giờ đồng hồ** hay giữ giờ lịch + chú thích; giờ Tý khi nhập 23:xx tính 23:xx ngày đó hay 00:xx.

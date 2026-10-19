@@ -119,3 +119,22 @@ def test_kb_that_khong_lap_tieu_de(ls):
     r = luan.lap(ls, "Canh")
     td = [nb["tieu_de"] for nb in r["noi_bat"] if nb["loai"] == "mau"]
     assert len(td) == len(set(td)) and len(td) <= luan.TOI_DA_MAU
+
+
+def test_ky_xung_ve_chinh_cung_khong_lap_ten():
+    """QC TV-V2: Kỵ bay vào cung đối diện nên chiếu NGƯỢC về chính cung phát — tiêu đề/việc nên làm không được
+    thành "chiếu sang Tài Bạch ... việc của cung Tài Bạch với việc của cung Tài Bạch"."""
+    d = {"tu_cung": "Tài Bạch", "can": "Ất", "hoa": "Kỵ", "sao": "Thái Âm", "den_cung": "Phúc Đức",
+         "xung_cung": "Tài Bạch", "tu_hoa": False, "den_tuan_triet": []}
+    n = luan._noi_bat("ky_xung", {**d, "nghia": luan.nghia_duong(d)})
+    assert "chiếu ngược về Tài Bạch" in n["tieu_de"]
+    assert "Tài Bạch với việc của cung Tài Bạch" not in n["viec_nen_lam"]
+    assert not any(t in s.lower() for s in _chuoi(n) for t in TU_DOA)
+
+
+def test_kb_nhip_ly_do_khong_gan_sao_thang_cho_ky_nam():
+    """QC TV-V2: câu chong_ky/song_loc đúng cả khi Kỵ (Lộc) năm và tháng là HAI sao khác nhau / ở cung xung."""
+    for ma in ("chong_ky", "song_loc"):
+        s = pkb.nhip("ly_do", ma)
+        if isinstance(s, str):
+            assert "của tháng (sao {sao})" in s

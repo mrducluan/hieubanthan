@@ -1,59 +1,17 @@
 // TV-V2 (docs/NANG-CAP-TUVI-V2.md): 4 khối nâng cao trên /tu-vi — Đường bay tứ hoá, 3 tháng tới, Định giờ sinh,
-// Hợp tham. Lá số thật từ engine; 4 route mới mock theo hợp đồng §3 (engine làm song song) để test tách khỏi engine.
+// Hợp tham. Lá số thật từ engine; 4 route mới trả OUTPUT THẬT của engine đã ghi sẵn (e2e/fixtures/tuvi-v2.json, cùng
+// hồ sơ HO_SO_MAU) để test UI tất định. Test cuối gọi engine thật qua proxy web cho các ca khó (Tý muộn, không biết
+// giờ, miền Nam 1965, ba tháng vắt sang năm âm sau) — bắt lệch hợp đồng zod giữa web và engine.
 import { test, expect, type Page, type Request } from "@playwright/test";
 import { HO_SO_MAU, napHoSo } from "./_hoso";
+import FX from "./fixtures/tuvi-v2.json";
 
-const DUONG = { tu_cung: "Mệnh", can: "Giáp", hoa: "Kỵ", sao: "Thái Dương", den_cung: "Tài Bạch", xung_cung: "Phúc Đức",
-  tu_hoa: false, den_tuan_triet: [], nghia: "Nghĩa đường bay." };
-const TEN_CUNG = ["Mệnh", "Phụ Mẫu", "Phúc Đức", "Điền Trạch", "Quan Lộc", "Nô Bộc", "Thiên Di", "Tật Ách", "Tài Bạch", "Tử Tức", "Phu Thê", "Huynh Đệ"];
-const CHI = ["Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu"];
-
-const PHI_HOA = {
-  engine_version: "test", can_nam_sinh: "Canh",
-  lai_nhan: { cung: "Quan Lộc", chi: "Ngọ", can: "Nhâm" },
-  cung: TEN_CUNG.map((ten, i) => ({ ten, chi: CHI[i], can: "Giáp", la_menh: i === 0, la_lai_nhan: i === 4 })),
-  duong_bay: TEN_CUNG.flatMap((tu_cung) => ["Lộc", "Quyền", "Khoa", "Kỵ"].map((hoa) => ({ ...DUONG, tu_cung, hoa, tu_hoa: tu_cung === "Tài Bạch" }))),
-  tu_hoa: [], vao_menh: [],
-  noi_bat: [
-    { loai: "ky_xung", duong: DUONG, tieu_de: "Kỵ từ Mệnh vào Tài Bạch", nghia: "Bạn để tâm nhiều tới chuyện tiền.",
-      viec_nen_lam: "Ghi chép chi tiêu theo tuần.", cau_tu_soi: "Mình lo về tiền vì điều gì?", ghi_chu_tuan_triet: null },
-    { loai: "loc_nhap", duong: { ...DUONG, hoa: "Lộc", den_cung: "Mệnh" }, tieu_de: "Lộc vào Mệnh", nghia: "Dễ được giúp.",
-      viec_nen_lam: "Nhận lời giúp.", cau_tu_soi: "Mình có hay từ chối không?", ghi_chu_tuan_triet: null },
-  ],
-  luu_nien: { nam: 2026, can_chi: "Bính Ngọ", hoa: [{ hoa: "Lộc", sao: "Thiên Đồng", den_cung: "Quan Lộc", xung_cung: "Phu Thê" }] },
-  phai: { ten: "Phi tinh tứ hoá", ghi_chu: "Một trường phái." }, luu_y: ["Tham khảo văn hoá."], trang_thai: "nhap_ai",
-};
-
-const thang = (n: number, muc: "thuan" | "binh" | "can_than", nhan: string) => ({
-  thang: n, nhuan: false, phan: "ca_thang", can_chi: "Mậu Tuất", tu: `2026-${String(n).padStart(2, "0")}-01`, den: `2026-${String(n).padStart(2, "0")}-28`,
-  cung_goc: "Quan Lộc", chu_de: "Công việc.", muc, nhan_muc: nhan,
-  ly_do: [{ ma: "song_loc", noi_dung: `Lý do tháng ${n}.` }], tu_hoa_thang: [{ hoa: "Lộc", sao: "Tham Lang", cung_goc: "Mệnh" }],
-  goi_y: `Gợi ý tháng ${n}.`, cau_tu_soi: `Tự soi tháng ${n}?`,
-});
-const NHIP = {
-  engine_version: "test", ngay_xem: "2026-10-19", phai_luu_nguyet: "dau_quan_thai_tue",
-  luu_nien: { nam_am: 2026, can_chi: "Bính Ngọ", tu_hoa: [{ hoa: "Lộc", sao: "Thiên Đồng", cung_goc: "Quan Lộc" }] },
-  thang: [thang(9, "thuan", "Thuận"), thang(10, "binh", "Bình"), thang(11, "can_than", "Cần thận trọng")],
-  uu_tien: "Đại hạn > lưu niên > tiểu hạn > lưu nguyệt.", luu_y: "Tham khảo.",
-};
-
-const ungVien = (nhan: string, chi_gio: string, la_gio_nhap: boolean) => ({
-  nhan, chi_gio, khoang_gio: "11:00–12:59", gio_dai_dien: "12:00", la_gio_nhap,
-  cung_menh: { chi: "Dần", chinh_tinh: ["Cự Môn"] }, cuc: "Thổ ngũ cục", than_cu: "Quan Lộc",
-  nam: [{ nam: 2023, can_chi: "Quý Mão", cau_hoi: [{ hoa: "Kỵ", cung: "Tài Bạch", noi_dung: `Năm 2023 bạn có phải xem lại chuyện tiền (${chi_gio})?` }] }],
-});
-const DINH_GIO = {
-  engine_version: "test", ly_do: ["gan_ranh_gio"],
-  ung_vien: [ungVien("Giờ trước", "Tỵ", false), ungVien("Giờ đã nhập", "Ngọ", true), ungVien("Giờ sau", "Mùi", false)],
-  khac_nhau: ["Ba giờ khác nhau ở cung Mệnh."], luu_y: ["Bạn tự chọn, hệ thống không tự đổi."],
-};
-
-const HOA4 = ["Lộc", "Quyền", "Khoa", "Kỵ"].map((hoa) => ({ hoa, sao: "Thái Âm", den_cung: "Phu Thê", xung_cung: "Quan Lộc", nghia: `Nghĩa hoá ${hoa}.` }));
-const HOP_THAM = {
-  engine_version: "test", quan_he: "ban_be", nhan_quan_he: "Bạn bè", can_nam_nguoi_kia: "Ất",
-  nguoi_kia_vao_ban: HOA4, ban_vao_nguoi_kia: null, menh_nguoi_kia_vao_ban: null,
-  tom_tat: ["Hai bạn chạm nhau ở cung Phu Thê."], luu_y: ["Không lưu dữ liệu người ấy."], khong_cham_diem: true,
-};
+const PHI_HOA = FX["phi-hoa"];
+const NHIP = FX["nhip-3-thang"];
+const DINH_GIO = FX["dinh-gio"];
+const DINH_GIO_12 = FX["dinh-gio-12"];
+const HOP_THAM = FX["hop-tham"];
+const NHAN_MUC: Record<string, string> = { thuan: "Thuận", binh: "Bình", can_than: "Cần thận trọng" };
 
 async function mock(page: Page) {
   const goi: Record<string, Request[]> = { "phi-hoa": [], "nhip-3-thang": [], "dinh-gio": [], "hop-tham": [] };
@@ -70,7 +28,11 @@ async function mock(page: Page) {
     : PHI_HOA;
   const json = { "phi-hoa": PHI_HOA, "nhip-3-thang": NHIP, "dinh-gio": DINH_GIO, "hop-tham": HOP_THAM } as const;
   for (const k of Object.keys(json) as (keyof typeof json)[]) {
-    await page.route(`**/api/tuvi/${k}`, (r) => { goi[k]!.push(r.request()); return r.fulfill({ json: k === "phi-hoa" ? phiHoa() : json[k] }); });
+    await page.route(`**/api/tuvi/${k}`, (r) => {
+      goi[k]!.push(r.request());
+      const body = k === "phi-hoa" ? phiHoa() : k === "dinh-gio" && r.request().postDataJSON()?.tat_ca_gio ? DINH_GIO_12 : json[k];
+      return r.fulfill({ json: body });
+    });
   }
   return goi;
 }
@@ -87,13 +49,15 @@ test("4 khối TV-V2 hiện, chỉ gọi engine khi mở, không có giọng do�
   // Đường bay tứ hoá
   await page.getByRole("button", { name: /Đường bay tứ hoá/ }).click();
   const ph = page.getByTestId("phi-hoa-noi-bat");
-  await expect(ph).toContainText("Kỵ từ Mệnh vào Tài Bạch");
-  await expect(ph).toContainText("Nên làm: Ghi chép chi tiêu theo tuần.");
-  await expect(ph).toContainText("Tự soi: Mình lo về tiền vì điều gì?");
+  const nb0 = PHI_HOA.noi_bat[0]!;
+  await expect(ph).toContainText(nb0.tieu_de);
+  await expect(ph).toContainText(`Nên làm: ${nb0.viec_nen_lam}`);
+  await expect(ph).toContainText(`Tự soi: ${nb0.cau_tu_soi}`);
+  await expect(page.getByTestId("phi-hoa-luu-nien")).toContainText(PHI_HOA.luu_nien!.can_chi);
   await page.getByTestId("phi-hoa-bang").locator("summary").click();
   await expect(page.getByTestId("phi-hoa-bang")).toContainText("tự hoá");
   await ph.getByRole("button", { name: "Xem cung trên lá số" }).first().click();
-  await expect(page.getByRole("heading", { name: /Cung Tài Bạch/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: new RegExp(`Cung ${nb0.duong.den_cung ?? nb0.duong.tu_cung}`) })).toBeVisible();
   // next dev (StrictMode) có thể gọi effect hai lần → đếm ≥ 1, xét yêu cầu cuối.
   expect(goi["phi-hoa"]!.length).toBeGreaterThanOrEqual(1);
   expect(goi["phi-hoa"]!.at(-1)!.postDataJSON()).toMatchObject({ la_so: { birth_time: "12:30" }, nam_xem: expect.any(Number) });
@@ -102,16 +66,21 @@ test("4 khối TV-V2 hiện, chỉ gọi engine khi mở, không có giọng do�
   await page.getByRole("button", { name: /3 tháng tới/ }).click();
   const the = page.getByTestId("the-thang");
   await expect(the).toHaveCount(3);
-  await expect(the.nth(0)).toContainText("Thuận");
-  await expect(the.nth(2)).toContainText("Cần thận trọng");
-  await expect(the.nth(2)).toContainText("Tự soi tháng 11?");
+  for (const [k, t] of NHIP.thang.entries()) await expect(the.nth(k)).toContainText(NHAN_MUC[t.muc]!);
+  await expect(the.nth(2)).toContainText(NHIP.thang[2]!.cau_tu_soi!);
+  // Ba tháng vắt sang năm âm sau: hiện cả tứ hoá năm mới + thứ tự ưu tiên (uu_tien là object của engine).
+  const nhip = page.getByTestId("nhip-3-thang-noi-dung");
+  await expect(nhip).toContainText(NHIP.luu_nien_sau!.can_chi);
+  await expect(page.getByTestId("nhip-3-thang-uu-tien")).toContainText(NHIP.uu_tien.ghi_chu);
+  await expect(nhip).not.toContainText("[object Object]");
 
   // Định giờ sinh: tick + "Dùng giờ này" chỉ mở form hồ sơ, ghi lech
   await page.getByRole("button", { name: /Định giờ sinh/ }).click();
   const uv = page.getByTestId("ung-vien-gio");
   await expect(uv).toHaveCount(3);
-  await expect(page.getByTestId("dinh-gio-noi-dung")).toContainText("sát ranh giới");
-  await uv.nth(0).getByRole("checkbox").check();
+  await expect(page.getByTestId("dinh-gio-noi-dung")).toContainText(DINH_GIO.ly_do.length ? "sát ranh giới" : "không sát ranh canh giờ");
+  await expect(page.getByTestId("dinh-gio-noi-dung")).toContainText(DINH_GIO.loi_dan);
+  await uv.nth(0).getByRole("checkbox").first().check();
   await expect(uv.nth(0)).toContainText("1 câu bạn thấy đúng");
   await expect(uv.nth(1).getByRole("button", { name: "Dùng giờ này" })).toHaveCount(0);   // giờ đã nhập
   await uv.nth(2).getByRole("button", { name: "Dùng giờ này" }).click();
@@ -140,7 +109,7 @@ test("4 khối TV-V2 hiện, chỉ gọi engine khi mở, không có giọng do�
   await form.getByRole("button", { name: "Xem hai lá số" }).click();
   const kq = page.getByTestId("hop-tham-ket-qua");
   await expect(kq).toContainText("Không có điểm hợp/khắc");
-  await expect(kq).toContainText("Nghĩa hoá Kỵ.");
+  await expect(kq).toContainText(HOP_THAM.nguoi_kia_vao_ban.find((h) => h.hoa === "Kỵ")!.nghia);
   expect(goi["hop-tham"]![0]!.postDataJSON()).toMatchObject({ quan_he: "ban_be", nguoi_kia: { birth_date: "1995-04-03" } });
   expect(goi["hop-tham"]![0]!.postDataJSON().nguoi_kia.birth_time).toBeUndefined();
 
@@ -165,6 +134,8 @@ test("không biết giờ: hồ sơ chọn được, lá số an tạm 12:00, đ
   await page.getByRole("button", { name: /Định giờ sinh/ }).click();
   await expect.poll(() => goi["dinh-gio"]!.length).toBeGreaterThanOrEqual(1);
   expect(goi["dinh-gio"]!.at(-1)!.postDataJSON()).toMatchObject({ tat_ca_gio: true, la_so: { do_tin_gio: "unknown", birth_time: "12:00" } });
+  await expect(page.getByTestId("ung-vien-gio")).toHaveCount(12);
+  await expect(page.getByTestId("dinh-gio-noi-dung")).toContainText("chưa biết giờ sinh");
 });
 
 test("form hồ sơ: chọn “Không biết giờ” → khoá ô giờ, lưu giờ đại diện + unknown", async ({ page }) => {
@@ -180,4 +151,36 @@ test("form hồ sơ: chọn “Không biết giờ” → khoá ô giờ, lưu g
   await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
   const hs = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1") ?? "{}"));
   expect(hs).toMatchObject({ gio: "12:00", do_tin_gio: "unknown" });
+});
+
+// Engine THẬT qua proxy web: mọi output phải qua zod của web (proxy trả 502 nếu lệch schema).
+test("engine thật: 4 route TV-V2 qua proxy web, các ca khó", async ({ request }) => {
+  const binh = { birth_date: "1990-05-17", birth_time: "12:30", gender: "nam", noi_sinh: "ha-noi" };
+  const tyMuon = { birth_date: "1992-11-03", birth_time: "23:30", gender: "nu", noi_sinh: "ha-noi" };
+  const khongBiet = { birth_date: "1988-02-10", birth_time: "12:00", gender: "nu", noi_sinh: "ha-noi", do_tin_gio: "unknown" };
+  const mienNam65 = { birth_date: "1965-07-20", birth_time: "06:10", gender: "nam", noi_sinh: "tp-ho-chi-minh" };
+  const goi = async (duong: string, data: object) => {
+    const r = await request.post(`/api/tuvi/${duong}`, { data });
+    expect(r.status(), `${duong} ${JSON.stringify(data)}: ${await r.text()}`).toBe(200);
+    return r.json();
+  };
+  for (const la_so of [binh, tyMuon, khongBiet, mienNam65]) {
+    const ph = await goi("phi-hoa", { la_so, nam_xem: 2026 });
+    expect(ph.duong_bay).toHaveLength(48);
+    const nh = await goi("nhip-3-thang", { la_so, ngay_xem: "2027-01-20" });
+    expect(nh.thang.map((t: { nam_am: number }) => t.nam_am)).toEqual([2026, 2027, 2027]);
+    expect(nh.luu_nien_sau.can_chi).toBe("Đinh Mùi");
+    await goi("hop-tham", { la_so, nguoi_kia: { birth_date: "1993-01-20" } });
+    await goi("hop-tham", { la_so, nguoi_kia: { birth_date: "1991-02-14", birth_time: "10:00", gender: "nu", noi_sinh: "ha-noi" } });
+    await goi("dinh-gio", { la_so });
+  }
+  // Người kia sinh 20/01/1993 (trước Tết Quý Dậu 23/01/1993) → năm âm Nhâm Thân, can Nhâm.
+  expect((await goi("hop-tham", { la_so: binh, nguoi_kia: { birth_date: "1993-01-20" } })).can_nam_nguoi_kia).toBe("Nhâm");
+  const dg12 = await goi("dinh-gio", { la_so: khongBiet, tat_ca_gio: true });
+  expect(dg12.ung_vien).toHaveLength(12);
+  expect(dg12.ly_do).toContain("khong_biet");
+  // 23:30: giờ sau qua nửa đêm sang ngày hôm sau.
+  const dgTy = await goi("dinh-gio", { la_so: tyMuon });
+  expect(dgTy.ung_vien.map((u: { chi_gio: string }) => u.chi_gio)).toEqual(["Hợi", "Tý", "Sửu"]);
+  expect(dgTy.ung_vien[2].dau_vao.birth_date).toBe("1992-11-04");
 });

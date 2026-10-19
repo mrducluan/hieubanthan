@@ -43,6 +43,7 @@ export function DinhGioSinh({ laSo, hoSo, khongBietGio }: { laSo: ChartInputVao;
           ) : (
             <p className="text-sm text-fg-muted">Giờ bạn nhập không sát ranh canh giờ. Khối này vẫn mở để bạn đối chiếu nếu chưa thật chắc.</p>
           )}
+          {d.loi_dan && <p className="text-sm text-fg-muted">{d.loi_dan}</p>}
           <ChonNam macDinh={d.ung_vien[0]?.nam.map((n) => n.nam) ?? []} onDoi={setNamChon} />
           <DanhSachUngVien d={d} onDung={(lech) => {
             // Chỉ mã + độ lệch canh giờ so với giờ đã nhập — không ngày giờ.
@@ -89,7 +90,7 @@ function ChonNam({ macDinh, onDoi }: { macDinh: number[]; onDoi: (ds: number[] |
       if (ds.some((n) => n < 1900 || n > max)) return setLoi(`Chọn năm đã qua, từ 1900 đến ${max}.`);
       setLoi(null); setSua(false); onDoi(ds.slice(0, 3));
     }}>
-      <p className="text-sm text-fg-muted">Tối đa 3 năm (dương lịch) bạn nhớ rõ chuyện gì đã xảy ra — đổi việc, chuyển nhà, học hành, gia đình…</p>
+      <p className="text-sm text-fg-muted">Tối đa 3 năm bạn nhớ rõ chuyện gì đã xảy ra — đổi việc, chuyển nhà, học hành, gia đình… (năm tính theo âm lịch, từ Tết đến Tết; chuyện xảy ra trước Tết thì chọn năm trước).</p>
       <div className="flex flex-wrap items-center gap-2">
         {o.map((v, k) => (
           <Input key={k} aria-label={`Năm đối chiếu ${k + 1}`} inputMode="numeric" placeholder="Năm" value={v} className="w-24 text-center"

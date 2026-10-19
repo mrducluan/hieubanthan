@@ -30,11 +30,14 @@ export function NhipBaThang({ laSo, onChonCungTen, onHoi }: {
 
 export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutputT; onChonCungTen: (tenCung: string) => void; onHoi: (cau: string) => void }) {
   const luuY = Array.isArray(d.luu_y) ? d.luu_y.join(" ") : d.luu_y;
+  const tuHoaNam = (n: Nhip3ThangOutputT["luu_nien"]) =>
+    `Năm ${n.can_chi}: tứ hoá của năm ${n.tu_hoa.map((h) => `${h.hoa} ${h.sao}${h.cung_goc ? ` (${h.cung_goc})` : ""}`).join(" · ")}.`;
   return (
     <div className="space-y-4" data-testid="nhip-3-thang-noi-dung">
       <p className="text-sm text-fg-muted">
-        Năm {d.luu_nien.can_chi}: tứ hoá của năm {d.luu_nien.tu_hoa.map((h) => `${h.hoa} ${h.sao}${h.cung_goc ? ` (${h.cung_goc})` : ""}`).join(" · ")}.
-        Mỗi tháng đọc cùng tứ hoá của tháng đó.
+        {tuHoaNam(d.luu_nien)}
+        {d.luu_nien_sau && <> Sang năm âm mới — {tuHoaNam(d.luu_nien_sau)}</>}
+        {" "}Mỗi tháng đọc cùng tứ hoá của tháng đó và của năm âm chứa tháng đó.
       </p>
       <ol className="grid gap-3 md:grid-cols-3" aria-label="Ba tháng âm lịch tới">
         {d.thang.map((t) => {
@@ -75,7 +78,7 @@ export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutpu
                 <Button size="sm" variant="secondary" onClick={() => onChonCungTen(t.cung_goc)}>
                   <MousePointerClick aria-hidden /> Xem cung tháng
                 </Button>
-                <Button size="sm" variant="ghost" onClick={() => onHoi(`Tháng ${t.thang}${t.nhuan ? " nhuận" : ""} âm năm ${d.luu_nien.nam_am} của tôi thế nào?`)}>
+                <Button size="sm" variant="ghost" onClick={() => onHoi(`Tháng ${t.thang}${t.nhuan ? " nhuận" : ""} âm năm ${t.nam_am} của tôi thế nào?`)}>
                   <MessageCircleQuestion aria-hidden /> Hỏi thêm
                 </Button>
               </div>
@@ -83,7 +86,11 @@ export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutpu
           );
         })}
       </ol>
-      {(d.uu_tien || luuY) && <p className="text-xs text-fg-faint">{d.uu_tien} {luuY}</p>}
+      {(d.uu_tien?.ghi_chu || luuY) && (
+        <p className="text-xs text-fg-faint" data-testid="nhip-3-thang-uu-tien">
+          {d.uu_tien?.ghi_chu && <>Thứ tự ưu tiên: {d.uu_tien.ghi_chu} </>}{luuY}
+        </p>
+      )}
     </div>
   );
 }

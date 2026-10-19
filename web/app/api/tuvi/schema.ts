@@ -248,6 +248,7 @@ export const PhiHoaOutput = z.object({
   phai: z.object({ ten: z.string(), ghi_chu: z.string().optional() }).passthrough().optional(),
   luu_y: z.array(z.string()).default([]),
   trang_thai: z.string().optional(),
+  co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })).default([]),
 }).passthrough();
 export type PhiHoaOutputT = z.infer<typeof PhiHoaOutput>;
 
@@ -256,21 +257,31 @@ export const Nhip3ThangInput = z.object({
   ngay_xem: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
 });
 const HoaGoc = z.object({ hoa: z.string(), sao: z.string(), cung_goc: z.string().nullable() }).passthrough();
+const LuuNienNhip = z.object({ nam_am: z.number(), can_chi: z.string(), tu_hoa: z.array(HoaGoc) }).passthrough();
 export const Nhip3ThangOutput = z.object({
   engine_version: z.string(),
   ngay_xem: z.string(),
   phai_luu_nguyet: z.string(),
-  luu_nien: z.object({ nam_am: z.number(), can_chi: z.string(), tu_hoa: z.array(HoaGoc) }).passthrough(),
+  ten_phai_luu_nguyet: z.string().optional(),
+  luu_nien: LuuNienNhip,
+  /** Có khi 3 tháng vắt sang năm âm sau: tứ hoá của năm âm kế tiếp (tháng có `nam_am` = năm này đọc theo nó). */
+  luu_nien_sau: LuuNienNhip.optional(),
   thang: z.array(z.object({
-    thang: z.number(), nhuan: z.boolean(), phan: z.string(), can_chi: z.string(),
+    thang: z.number(), nhuan: z.boolean(), phan: z.string(), nam_am: z.number(), can_chi: z.string(),
     tu: z.string(), den: z.string(), cung_goc: z.string(), chu_de: z.string().nullable(),
     muc: z.enum(["thuan", "binh", "can_than"]), nhan_muc: z.string(),
     ly_do: z.array(z.object({ ma: z.string(), noi_dung: z.string() }).passthrough()),
     tu_hoa_thang: z.array(HoaGoc),
     goi_y: z.string().nullable(), cau_tu_soi: z.string().nullable(),
   }).passthrough()).length(3),
-  uu_tien: z.string().optional(),
+  /** Thứ tự ưu tiên khi các lớp hạn mâu thuẫn (đại hạn > lưu niên > tiểu hạn > lưu nguyệt) + cung hạn của năm. */
+  uu_tien: z.object({
+    thu_tu: z.array(z.string()),
+    ghi_chu: z.string(),
+    han_nam: z.object({ dai_han: TenCung, luu_nien: TenCung, tieu_han: TenCung }).passthrough().optional(),
+  }).passthrough().optional(),
   luu_y: z.union([z.string(), z.array(z.string())]).optional(),
+  co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })).default([]),
 }).passthrough();
 export type Nhip3ThangOutputT = z.infer<typeof Nhip3ThangOutput>;
 
@@ -297,6 +308,7 @@ export const HopThamOutput = z.object({
   engine_version: z.string(),
   quan_he: z.string(), nhan_quan_he: z.string(),
   can_nam_nguoi_kia: z.string(),
+  can_menh_nguoi_kia: z.string().nullable().optional(),
   nguoi_kia_vao_ban: z.array(HoaVao),
   ban_vao_nguoi_kia: z.array(HoaVao).nullable().optional(),
   menh_nguoi_kia_vao_ban: z.array(HoaVao).nullable().optional(),
@@ -319,12 +331,18 @@ export const DinhGioOutput = z.object({
     la_gio_nhap: z.boolean(),
     cung_menh: z.object({ chi: z.string(), chinh_tinh: z.array(z.string()) }).passthrough(),
     cuc: z.string(), than_cu: z.string(),
+    /** Ngày giờ dương lịch theo ĐỒNG HỒ nơi sinh của ứng viên (để người dùng tự nhập lại vào hồ sơ). */
+    dau_vao: z.object({ birth_date: z.string(), birth_time: z.string(), calendar_type: z.string() }).passthrough().optional(),
     nam: z.array(z.object({
       nam: z.number(), can_chi: z.string(),
-      cau_hoi: z.array(z.object({ hoa: z.string(), cung: z.string(), noi_dung: z.string() }).passthrough()),
+      /** `cach`: "nhap" = hoá bay vào cung đó, "chieu" = Hoá Kỵ chiếu sang từ cung đối diện. */
+      cau_hoi: z.array(z.object({ hoa: z.string(), cung: z.string(), cach: z.enum(["nhap", "chieu"]).optional(), noi_dung: z.string() }).passthrough()),
     }).passthrough()),
   }).passthrough()).min(1).max(12),
   khac_nhau: z.array(z.string()).default([]),
+  nam_doi_chieu: z.array(z.number()).optional(),
+  loi_dan: z.string().optional(),
   luu_y: z.array(z.string()).default([]),
+  co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })).default([]),
 }).passthrough();
 export type DinhGioOutputT = z.infer<typeof DinhGioOutput>;
