@@ -37,6 +37,26 @@ const sm = await (await lay(`${goc}/sitemap.xml`)).text();
 const urls = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(gocCanonical, goc));
 console.log(`Sitemap: ${urls.length} URL`);
 
+// URL trong sitemap mà robots.txt chặn (nhóm User-agent: *) — luật khớp dài nhất thắng, Allow thắng khi dài bằng nhau.
+{
+  const rb = await (await lay(`${goc}/robots.txt`)).text();
+  const luat = [];
+  let nhomSao = false, vuaKhaiUa = false;
+  for (const dong of rb.split(/\r?\n/)) {
+    const m = dong.replace(/#.*/, "").trim().match(/^([A-Za-z-]+)\s*:\s*(.*)$/);
+    if (!m) continue;
+    const k = m[1].toLowerCase(), v = m[2].trim();
+    if (k === "user-agent") { nhomSao = vuaKhaiUa ? nhomSao || v === "*" : v === "*"; vuaKhaiUa = true; continue; }
+    vuaKhaiUa = false;
+    if (nhomSao && (k === "allow" || k === "disallow") && v) luat.push({ cho: k === "allow", duong: v });
+  }
+  for (const url of urls) {
+    const duong = new URL(url).pathname;
+    const khop = luat.filter((l) => duong.startsWith(l.duong)).sort((a, b) => b.duong.length - a.duong.length || Number(b.cho) - Number(a.cho))[0];
+    if (khop && !khop.cho) ghi(loi, url, `robots.txt chặn URL có trong sitemap (Disallow: ${khop.duong})`);
+  }
+}
+
 const tieuDe = new Map();
 const moTa = new Map();
 const linkNoiBo = new Set();

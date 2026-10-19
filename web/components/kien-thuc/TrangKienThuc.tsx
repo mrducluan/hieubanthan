@@ -17,6 +17,7 @@ import { CHUYEN_GIA, idChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
 import { CHU_DE, TEN_MANG_SILO, duongTrang, trang, truCua, type TrangKienThuc } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import { duongMoi } from "@/lib/duong-silo";
+import { idTu } from "@/lib/cms-html";
 
 type Thamso = { khoa: string | null; slug: string };
 
@@ -100,6 +101,15 @@ export async function TrangKienThucView(params: Thamso) {
       { ten: t.tieu_de, duong },
     ]),
   );
+  // Neo mục: bỏ dấu từ tiêu đề; trùng (hoặc trùng neo sẵn có của trang) thì thêm hậu tố số.
+  const daDung = new Set(["hoi-dap", "lien-quan", "trang-con", "trang-con-hoa"]);
+  const idMuc = t.muc.map((m) => {
+    const goc = idTu(m.tieu_de);
+    let id = goc;
+    for (let n = 2; daDung.has(id); n++) id = `${goc}-${n}`;
+    daDung.add(id);
+    return id;
+  });
 
   return (
     <article className="mx-auto max-w-3xl">
@@ -132,9 +142,10 @@ export async function TrangKienThucView(params: Thamso) {
       {t.goc_nhin && <GocNhinChuyenGia goc_nhin={t.goc_nhin} loai={t.loai} />}
 
       <div className="mt-8 space-y-8">
-        {t.muc.map((m) => (
+        {t.muc.map((m, i) => (
           <section key={m.tieu_de}>
-            <h2 className="text-2xl">{m.tieu_de}</h2>
+            {/* Neo ổn định cho từng mục: người đọc và trợ lý AI dẫn link thẳng tới đoạn (#ten-muc). */}
+            <h2 id={idMuc[i]} className="scroll-mt-24 text-2xl">{m.tieu_de}</h2>
             {m.doan && <p className="mt-2 leading-relaxed text-fg-muted">{m.doan}</p>}
             {m.danh_sach && (
               <ul className="mt-3 space-y-2">

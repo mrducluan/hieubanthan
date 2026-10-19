@@ -10,14 +10,15 @@ import {
 } from "@payloadcms/richtext-lexical";
 import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from "@payloadcms/plugin-seo/fields";
 import { APIError, slugField, type CollectionBeforeChangeHook, type CollectionBeforeValidateHook, type CollectionConfig } from "payload";
-import { chiChuBien, daDangNhap, daXuatBanHoacNoiBo, docPhienBan, laChuBien, laCongTacVien, suaBai, taoBai, truongBienTap, truongChuBien, truongNoiBo } from "../access";
+import { chiChuBien, daDangNhap, laNguoiViet, daXuatBanHoacNoiBo, docPhienBan, laChuBien, laCongTacVien, suaBai, taoBai, truongBienTap, truongChuBien, truongNoiBo } from "../access";
 import { KHOI } from "../blocks";
 import { lamMoiKhiDoiBai, lamMoiKhiXoaBai } from "../hooks/lamMoiWeb";
 import { chuanHoaDuLieu, kiemDinhBai, slugViet, TIEU_DE_TAM, type BaiKiem } from "../kiem-dinh/kiem-dinh";
 import { boChuyenHtml } from "../lib/html";
 import { kiemTrung } from "../lib/trung-lap";
 import { taoSlug } from "../lib/slug";
-import { linkXemTruoc } from "../lib/web";
+import { linkXemTruoc, webUrl } from "../lib/web";
+import { coKhoaNotFair, dsNotFair, nhapBaiNotFair } from "../lib/notfair";
 
 export const MANG = [
   { label: "Thần số học", value: "than_so" },
@@ -131,6 +132,8 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     description: "Bài hiện ở hieuban.com/blog/{đường dẫn}. Biên tập viên lưu nháp; Chủ biên bấm Xuất bản.",
     preview: (doc) => linkXemTruoc((doc as { slug?: string }).slug),
     pagination: { defaultLimit: 25 },
+    // BLOG-3: bảng bài NotFair + nút "Nhập vào CMS để sửa" ở đầu danh sách bài.
+    components: { beforeListTable: ["/components/NhapNotFair#NhapNotFair"] },
   },
   defaultPopulate: { tieu_de: true, slug: true, mo_ta_ngan: true, anh_bia: true, publishedAt: true },
   access: { read: daXuatBanHoacNoiBo, create: taoBai, update: suaBai, delete: chiChuBien, readVersions: docPhienBan },
@@ -139,6 +142,44 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     maxPerDoc: 50,
   },
   endpoints: [
+    {
+      // BLOG-3: danh sách bài NotFair + bài nào đã nhập vào CMS (id). Ban biên tập xem được; máy đọc/cộng tác viên thì không.
+      path: "/notfair", method: "get",
+      handler: async (req) => {
+        if (!laNguoiViet(req)) return Response.json({ loi: "Chỉ ban biên tập." }, { status: 403 });
+        if (!coKhoaNotFair()) return Response.json({ co_khoa: false, ds: [] });
+        try {
+          const ds = await dsNotFair();
+          const da = await req.payload.find({ collection: "bai-viet", where: { slug: { in: ds.map((p) => p.slug) } },
+            limit: ds.length || 1, depth: 0, draft: true, overrideAccess: true, select: { slug: true, _status: true } });
+          const theoSlug = new Map(da.docs.map((d) => [d.slug, d]));
+          return Response.json({ co_khoa: true, ds: ds.map((p) => {
+            const d = theoSlug.get(p.slug) as { id: number | string; _status?: string } | undefined;
+            return { slug: p.slug, tieu_de: p.title, ngay: p.published_at, anh: p.image_url,
+              url: `${webUrl()}/blog/${encodeURIComponent(p.slug)}`,
+              id_cms: d?.id ?? null, trang_thai_cms: d?._status ?? null };
+          }) });
+        } catch (e) {
+          return Response.json({ co_khoa: true, ds: [], loi: (e as Error).message }, { status: 502 });
+        }
+      },
+    },
+    {
+      // BLOG-3: nhập một bài NotFair thành NHÁP cùng slug (ảnh tải vào Thư viện ảnh). Chỉ Quản trị/Chủ biên —
+      // vì khi xuất bản, bản CMS thay bản NotFair ở đúng URL đối tác đang kiểm tra.
+      path: "/nhap-notfair", method: "post",
+      handler: async (req) => {
+        if (!laChuBien(req)) return Response.json({ loi: "Chỉ Quản trị hoặc Chủ biên được nhập bài NotFair." }, { status: 403 });
+        const body = (typeof req.json === "function" ? await req.json().catch(() => ({})) : {}) as { slug?: unknown };
+        const slug = typeof body.slug === "string" ? body.slug.normalize("NFC").trim() : "";
+        if (!slug || slug.length > 200) return Response.json({ loi: "Thiếu đường dẫn bài." }, { status: 422 });
+        try {
+          return Response.json({ ok: true, ...(await nhapBaiNotFair(req.payload, req, slug)) });
+        } catch (e) {
+          return Response.json({ loi: (e as Error).message }, { status: 502 });
+        }
+      },
+    },
     {
       // CMS-4: gợi ý liên kết nội bộ khi viết — bài CMS đã xuất bản + trang kiến thức/công cụ của web, xếp theo độ giống
       // từ khoá với bài đang viết (luật cố định, không AI). Trả đường dẫn để người viết chèn link.
@@ -371,5 +412,14 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
       access: { read: truongNoiBo }, admin: { hidden: true, readOnly: true },
     },
     { name: "slug_cu", type: "text", hasMany: true, admin: { hidden: true, readOnly: true } },
+    {
+      name: "nguon_goc", label: "Nguồn bài", type: "select", defaultValue: "cms", access: { read: truongNoiBo, update: () => false },
+      options: [{ label: "Viết trong CMS", value: "cms" }, { label: "Nhập từ NotFair (bài trao đổi)", value: "notfair" }],
+      admin: { position: "sidebar", readOnly: true, condition: (d) => d?.nguon_goc === "notfair",
+        description: "Bài trao đổi: giữ nguyên các link của đối tác và dòng ghi nguồn cuối bài. Đường dẫn không đổi." },
+    },
+    // Link ra ngoài của bản NotFair gốc — kiểm định cảnh báo khi bị xoá (BLOG-3). Ghi lúc nhập, không sửa tay.
+    { name: "notfair_lien_ket", type: "text", hasMany: true, access: { read: truongNoiBo, update: () => false },
+      admin: { hidden: true, readOnly: true } },
   ],
 };

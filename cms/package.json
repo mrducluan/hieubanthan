@@ -12,7 +12,7 @@
     "generate:importmap": "payload generate:importmap",
     "migrate": "payload migrate",
     "migrate:create": "payload migrate:create",
-    "test": "node --test src/kiem-dinh/*.test.ts",
+    "test": "node --test src/kiem-dinh/*.test.ts src/lib/*.test.ts",
     "test:tich-hop": "payload run tests/tich-hop.ts",
     "e2e": "playwright test",
     "vercel-build": "node scripts/kiem-env.mjs && node scripts/van-tay-kb.mjs && payload migrate && next build",

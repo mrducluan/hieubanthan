@@ -7,6 +7,9 @@ import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/seo";
 
 const CHAN = ["/api/", "/md/", "/quan-tri", "/tai-khoan", "/dang-nhap", "/auth/", "/chia-se", "/hop-doi/", "/the/"];
+/** Mở lại cụm kiến thức nằm dưới đường dẫn bị chặn (QH-URL: cặp số dời về /hop-doi/cap-so, còn /hop-doi/{mã} là link mời).
+ *  Google/Bing lấy luật khớp DÀI NHẤT → Allow này thắng Disallow "/hop-doi/". */
+const MO = ["/hop-doi/cap-so"];
 /** Bot AI trả lời / tìm kiếm (dẫn link về trang gốc) — mở. */
 export const BOT_AI_TRA_LOI = [
   "OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User",
@@ -22,8 +25,8 @@ export const BOT_AI_HUAN_LUYEN = [
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: "*", allow: "/", disallow: CHAN },
-      { userAgent: BOT_AI_TRA_LOI, allow: ["/", "/llms.txt"], disallow: CHAN },
+      { userAgent: "*", allow: ["/", ...MO], disallow: CHAN },
+      { userAgent: BOT_AI_TRA_LOI, allow: ["/", "/llms.txt", ...MO], disallow: CHAN },
       { userAgent: BOT_AI_HUAN_LUYEN, disallow: "/" },
     ],
     sitemap: `${siteUrl()}/sitemap.xml`,

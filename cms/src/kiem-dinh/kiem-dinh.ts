@@ -21,6 +21,8 @@ export type BaiKiem = {
   nguoi_tham_dinh?: unknown;
   ngay_tham_dinh?: string | null;
   xac_nhan_tham_dinh?: boolean | null;
+  /** BLOG-3: bài nhập từ NotFair — link ra ngoài của bản gốc (đối tác trao đổi kiểm tra các link này). */
+  notfair_lien_ket?: string[] | null;
 };
 
 export type MucDo = "dat" | "canh_bao" | "loi";
@@ -367,6 +369,16 @@ export function kiemDinhBai(bai: BaiKiem): KetQuaKiem {
   const noiBo = TEN_NOI_BO.flatMap((r) => toanVan.match(new RegExp(r.source, r.flags + "g")) ?? []);
   if (noiBo.length) them("ten_noi_bo", "noi_dung", "loi",
     `Có tên nội bộ không được công khai: ${[...new Set(noiBo)].join(", ")} — ghi nguồn kiểu sách/trường phái.`, true);
+
+  // ---------------- BLOG-3: bài trao đổi NotFair — đối tác kiểm tra link trong bài; xoá link = vi phạm thoả thuận trao đổi.
+  const goc = Array.isArray(bai.notfair_lien_ket) ? bai.notfair_lien_ket.filter((u): u is string => typeof u === "string") : [];
+  if (goc.length) {
+    const con = new Set(d.lienKetNgoai.map((u) => u.replace(/\/+$/, "")));
+    const mat = goc.filter((u) => !con.has(u.replace(/\/+$/, "")));
+    them("backlink_notfair", "seo", mat.length ? "loi" : "dat", mat.length
+      ? `Bài trao đổi NotFair: đã xoá/đổi ${mat.length} link của đối tác (${mat.slice(0, 3).join(", ")}${mat.length > 3 ? "…" : ""}) — giữ nguyên link và chữ gắn link, nếu không bài có thể bị NotFair đánh trượt kiểm tra.`
+      : "Giữ đủ link của bài trao đổi NotFair.");
+  }
 
   // ---------------- Tiếng Việt (chữ tổ hợp + kiểu bỏ dấu)
   const toHop = TO_HOP.test(toanVan) || TO_HOP.test(slug) || TO_HOP.test(tk);

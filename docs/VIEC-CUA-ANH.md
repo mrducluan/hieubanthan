@@ -29,6 +29,11 @@
    (Production + Preview, **không** thêm tiền tố `NEXT_PUBLIC_`) → Redeploy. Rồi mở `https://hieuban.com/blog` và một bài
    `/blog/{slug}`: thấy ảnh bìa, mục lục bấm được, bảng cuộn ngang trên điện thoại. Chưa đặt khoá thì /blog chỉ hiện "Chưa có bài viết".
    Khoá đã lộ trong khung chat → nên tạo khoá mới trong NotFair (Integrations → Next.js) rồi dùng khoá mới.
+4e. [ ] **Sửa bài NotFair trong CMS (BLOG-3):** Vercel → dự án **CMS** (cms.hieuban.com) → Settings → Environment Variables →
+   thêm `NOTFAIR_SEO_API_KEY` (cùng giá trị như dự án web, Production + Preview) → Redeploy CMS. Rồi vào CMS → Bài viết →
+   "Bài trao đổi NotFair — nhập vào CMS để sửa" → Nhập → sửa → Xuất bản. Giữ nguyên link của đối tác + dòng ghi nguồn cuối bài.
+4f. [ ] **Audit AIO/SEO — các mục cần anh quyết:** đọc bảng đầu `docs/AUDIT-AIO-SEO-2026-10.md` (ngày cập nhật thật cho kho,
+   trang lập trình gần trùng, `rel="sponsored"` cho link trao đổi, slug NotFair có dấu, cache HTML/CSP).
 5. [x] **Search Console + GA4 trong GTM** (mục H) — anh báo xong 2026-10-09
 5b. [ ] **Render engine** (mục D2): kiểm vùng Singapore + gói Starter, bấm *Save, rebuild, and deploy* sau khi sửa biến
    (anh đang đặt `NHAT_KY_HOI`, `SUPABASE_*`, `LLM_LUOT_*` — 2026-10-09)

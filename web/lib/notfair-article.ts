@@ -27,6 +27,8 @@ export function sanitizeNotFairArticleHtml(html: string) {
     allowedSchemesByTag: { img: ["https"] },
     transformTags: {
       a: sanitizeHtml.simpleTransform("a", { rel: "noopener noreferrer" }, true),
+      // Trang đã có H1 (tiêu đề bài ở NotFairPostHero) → H1 trong thân bài hạ xuống H2 (mỗi trang đúng một H1).
+      h1: "h2",
     },
   });
 }

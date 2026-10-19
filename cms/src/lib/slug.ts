@@ -2,9 +2,10 @@ import { slugViet, TIEU_DE_TAM } from "../kiem-dinh/kiem-dinh";
 
 /** Slug tiếng Việt cho slugField của Payload (kiểu Slugify chưa được export ở gói gốc) (mặc định của Payload không bỏ được "đ").
  *  Tiêu đề tạm "(Chưa đặt tiêu đề)" không sinh slug — nếu không, nháp chưa đặt tên thứ hai sẽ trùng slug với nháp đầu. */
-export const taoSlug = ({ valueToSlugify }: { valueToSlugify?: unknown }): string | undefined =>
+export const taoSlug = ({ valueToSlugify, req }: { valueToSlugify?: unknown; req?: { context?: Record<string, unknown> } }): string | undefined =>
   typeof valueToSlugify === "string" && valueToSlugify.trim() && !valueToSlugify.startsWith(TIEU_DE_TAM)
-    ? slugViet(valueToSlugify) : undefined;
+    // BLOG-3: bài nhập từ NotFair giữ NGUYÊN slug gốc (có thể có dấu) — đối tác kiểm tra đúng URL /blog/{slug} đó.
+    ? (req?.context?.giuSlugGoc ? valueToSlugify.trim() : slugViet(valueToSlugify)) : undefined;
 
 /** Slug trống → sinh từ trường tên TRƯỚC khi kiểm "bắt buộc" (slugField chỉ tự sinh ở beforeChange, sau bước kiểm,
  *  nên tạo qua REST/Local API không gửi slug sẽ bị từ chối "Slug không hợp lệ"). */
