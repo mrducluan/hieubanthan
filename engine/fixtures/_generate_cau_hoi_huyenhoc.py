@@ -75,6 +75,14 @@ def sinh() -> list[dict]:
             them(khong_dau(r["cau_hoi"]), r["mo_dun"], r["linh_vuc"], r["chu_de"], r["y_dinh"],
                  r["doi_tuong"], r["xu_ly"], r["che_do"], r["can"], "khong_dau")
 
+    # Nhãn sửa tay (G.SUA_NHAN) áp lên câu gốc và mọi biến thể của nó (bối cảnh, không dấu) — sau khi sinh biến thể,
+    # để kho giữ đúng như bản đã duyệt.
+    for k, v in getattr(G, "SUA_NHAN", {}).items():
+        for r in rows:
+            c = r["cau_hoi"]
+            if c in (k, khong_dau(k)) or c.endswith(", " + k[0].lower() + k[1:]):
+                r.update(v)
+
     seen, out = set(), []
     for r in rows:
         if r["cau_hoi"] not in seen:

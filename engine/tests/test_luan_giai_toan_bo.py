@@ -6,6 +6,8 @@ from __future__ import annotations
 
 import datetime as dt
 
+import pytest
+
 from fastapi.testclient import TestClient
 
 from app.luangiai import toan_bo
@@ -76,3 +78,25 @@ def test_diem_nhan_cat_dung_cho():
         == "Trong lá số của bạn, Thiên Đồng ở cung Phu Thê (Đắc — Sao ở vị trí khá: phát huy được.)"
     assert toan_bo.diem_nhan(["Tuổi mụ tại thời điểm xem: 37.", "Đại hạn: cung Điền Trạch (Canh Thìn), từ 36 đến 45 tuổi. Giai đoạn chủ đề Điền Trạch."]) \
         == "Đại hạn: cung Điền Trạch (Canh Thìn), từ 36 đến 45 tuổi."
+
+
+# TV-V2 — hai chương mới: "Đường bay tứ hoá" (trước Vận hạn) và "3 tháng tới" (ngay sau Vận hạn).
+def test_tv_v2_hai_chuong_moi_dung_cho():
+    ma = [m for m, _, _ in toan_bo.CHUONG_TUVI]
+    assert ma[0] == "tong_quan"                       # SAO-2: chương 1 (miễn phí) không đổi
+    assert ma.index("duong_bay") + 1 == ma.index("van_han") and ma.index("ba_thang_toi") == ma.index("van_han") + 1
+    assert all(("tuvi", m) in toan_bo.CAU_HOI_MO for m in ma)
+
+
+@pytest.mark.parametrize("sinh", [{"ngay": dt.date(1997, 3, 19), "ti": 0, "gioi_tinh": "nam"},
+                                  {"ngay": dt.date(1990, 5, 17), "ti": 4, "gioi_tinh": "nu"}])
+def test_tv_v2_noi_dung_hai_chuong(sinh):
+    bc = toan_bo.tuvi(sinh, ngay_xem=dt.date(2026, 10, 19))
+    ch = {c["ma"]: c for c in bc["chuong"]}
+    db, ba = " ".join(ch["duong_bay"]["doan"]), " ".join(ch["ba_thang_toi"]["doan"])
+    assert "Lai nhân cung" in db and "tự hoá" in db and "Đường bay" in db
+    assert "Nhịp 3 tháng tới" in ba and ("Thuận" in ba or "Bình" in ba or "Cần thận trọng" in ba)
+    assert "Đại hạn > lưu niên > tiểu hạn > lưu nguyệt" in ba
+    # điểm nhấn của chương khoá là dữ kiện đã tính của chính chương, không phải định nghĩa
+    assert ch["duong_bay"]["moi_xem"]["diem_nhan"].startswith("Lai nhân cung")
+    assert ch["ba_thang_toi"]["moi_xem"]["diem_nhan"].startswith("Nhịp 3 tháng tới")

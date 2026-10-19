@@ -24,7 +24,11 @@ CHUONG_TUVI = [
     ("gia_dinh", "Cha mẹ, con cái", "Cung Phụ Mẫu của tôi thế nào?"),
     ("con_cai", "Con cái, người kế tiếp", "Cung Tử Nữ của tôi thế nào?"),
     ("tinh_than", "Đời sống tinh thần, phúc đức", "Cung Phúc Đức của tôi thế nào?"),
+    # TV-V2: phi tinh tứ hoá (lớp nền của lá gốc) đọc trước vận hạn; nhịp 3 tháng (lưu nguyệt) đọc SAU vận hạn —
+    # đúng thứ tự ưu tiên đại hạn > lưu niên > tiểu hạn > lưu nguyệt.
+    ("duong_bay", "Đường bay tứ hoá", "Đường bay tứ hoá trong lá số của tôi nói gì?"),
     ("van_han", "Vận hạn hiện tại", "Đại hạn hiện tại của tôi là chủ đề gì?"),
+    ("ba_thang_toi", "3 tháng tới", "Ba tháng tới của tôi thế nào?"),
 ]
 CHUONG_BATTU = [
     ("tong_quan", "Nhật chủ và tính cách", "Nhật chủ của tôi là người thế nào?"),
@@ -45,6 +49,8 @@ CAU_HOI_MO = {
     ("tuvi", "con_cai"): "Bạn nuôi dưỡng con cái và những điều mình tạo ra theo cách nào, điểm nào nên nới lỏng?",
     ("tuvi", "tinh_than"): "Điều gì thật sự cho bạn bình an, và điều gì khiến tâm trí bạn khó tĩnh?",
     ("tuvi", "van_han"): "Mười năm này xoay quanh chủ đề gì, và năm nay nên dồn sức vào đâu?",
+    ("tuvi", "duong_bay"): "Mảng đời nào đang âm thầm tác động lên mảng nào, và đâu là chỗ bạn hay tự ôm việc về mình?",
+    ("tuvi", "ba_thang_toi"): "Tháng nào hợp để bắt đầu việc mới, tháng nào nên giữ nhịp và chăm việc đang dở?",
     ("battu", "tong_quan"): "Nhật chủ nói gì về cách bạn phản ứng khi áp lực, và điểm mạnh nào bạn hay bỏ quên?",
     ("battu", "ngu_hanh"): "Hành nào bạn đang thiếu, và hai cách chọn dụng thần gợi ý bạn cân bằng thế nào?",
     ("battu", "su_nghiep"): "Thập thần trong lá số cho thấy bạn hợp kiếm tiền và làm việc theo kiểu nào?",
