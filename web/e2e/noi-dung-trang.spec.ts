@@ -111,6 +111,10 @@ test("ND-2: CMS trống → metadata y nguyên bản code; ô SEO CMS phủ tiê
   expect(m.alternates).toEqual(goc.alternates);
   expect((m.openGraph as { images: string[] }).images).toEqual([`/og?tieu_de=${encodeURIComponent("Lá số Tử vi mới")}`]);
   expect(apDungSeo({}, co, { tuyetDoi: true }).title).toEqual({ absolute: "Lá số Tử vi mới" });
+  // trang không tự khai openGraph (vd pháp lý): sửa tiêu đề vẫn giữ đủ bộ chia sẻ (url, ảnh, thẻ Twitter)
+  const pl = apDungSeo({ title: "Điều khoản sử dụng" }, gopNoiDung("/dieu-khoan", mucSoTrang("/dieu-khoan")!.mac_dinh, { tieu_de_seo: "Điều khoản mới" }, null));
+  expect(pl.openGraph).toMatchObject({ title: "Điều khoản mới", url: "/dieu-khoan", images: [`/og?tieu_de=${encodeURIComponent("Điều khoản mới")}`] });
+  expect(pl.twitter).toMatchObject({ card: "summary_large_image", title: "Điều khoản mới" });
 });
 
 test("ND-2: sổ trang — công cụ HL/TDG đọc giới thiệu từ noi-dung.ts; ô cho phép khớp chỗ web thật sự đọc", () => {
@@ -157,6 +161,9 @@ test("ND-3/ND-4: mục theo neo — CMS sửa tiêu đề/thân đúng neo, mụ
   ] }, null);
   const ra = gopMucCms(muc, nd);
   expect(ra.map((m) => [m.id, m.tieuDe])).toEqual([["a", "A"], ["b", "B mới"], ["c", "C"]]);
+  // neo có trong sổ trang nhưng trang đang ẩn (vd /gioi-thieu "ung-ho" khi chưa bật ủng hộ) → không tự hiện
+  const gt = gopNoiDung("/gioi-thieu", {}, { muc: [{ neo: "ung-ho", tieu_de: "Ủng hộ", noi_dung_html: "<p>x</p>" }] }, null);
+  expect(gopMucCms([{ id: "su-menh", tieuDe: "S", noiDung: "s" }], gt).map((m) => m.id)).toEqual(["su-menh"]);
   expect(ra[0]!.noiDung).toBe("thân A");
   const html = (ra[1]!.noiDung as { props: { dangerouslySetInnerHTML: { __html: string } } }).props.dangerouslySetInnerHTML.__html;
   expect(html).toContain("Thân B mới");

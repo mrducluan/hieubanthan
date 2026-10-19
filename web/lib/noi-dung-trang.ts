@@ -53,7 +53,7 @@ export function thayBien(s: string, bien: Record<string, string>): string {
 }
 /** Thay biến trong mọi chuỗi của một khối (đệ quy), bỏ qua đường dẫn / mã. */
 function thayBienKhoi<T>(v: T, bien: Record<string, string>, khoa = ""): T {
-  if (typeof v === "string") return (["blockType", "id", "url", "link", "nut_link"].includes(khoa) ? v : thayBien(v, bien)) as T;
+  if (typeof v === "string") return (["blockType", "id", "url", "link", "nut_link", "duong_dan", "cong_cu"].includes(khoa) ? v : thayBien(v, bien)) as T;
   if (Array.isArray(v)) return v.map((x) => thayBienKhoi(x, bien, khoa)) as T;
   if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, thayBienKhoi(x, bien, k)])) as T;
   return v;
@@ -132,7 +132,10 @@ export function apDungSeo(goc: Metadata, nd: NoiDungTrang, { tuyetDoi = false } 
   const moTa = nd.seo.moTa && nd.seo.moTa !== md.mo_ta_seo ? catMoTa(nd.seo.moTa) : null;
   const anh = anhCms(nd.seo.anh, "og");
   if (!tieuDe && !moTa && !anh) return goc;
-  const og = (goc.openGraph ?? {}) as Record<string, unknown>, tw = (goc.twitter ?? {}) as Record<string, unknown>;
+  // openGraph/twitter của trang THAY bản layout (không gộp) → trang không tự khai thì dựng đủ bộ (loại, url, ảnh /og, thẻ
+  // Twitter) bằng metaTrang, tránh mất ảnh chia sẻ khi chỉ sửa tiêu đề.
+  const day = metaTrang({ tieuDe: tieuDe ?? md.tieu_de_seo ?? nd.ten ?? "", moTa: moTa ?? md.mo_ta_seo ?? "", duong: nd.duong });
+  const og = (goc.openGraph ?? day.openGraph) as Record<string, unknown>, tw = (goc.twitter ?? day.twitter) as Record<string, unknown>;
   const anhGoc = Array.isArray(og.images) ? og.images[0] : og.images;
   const anhMoi = anh ? [anh.src]
     : tieuDe && typeof anhGoc === "string" && anhGoc.startsWith("/og?tieu_de=") ? [`/og?tieu_de=${encodeURIComponent(tieuDe)}`] : null;

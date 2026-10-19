@@ -541,6 +541,8 @@ await ca("pháp lý: 'Thay đổi nội dung' bắt buộc ngày hiệu lực m�
   const xb = await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
     data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", da_doi_chieu_phap_ly: true, _status: "published" } as never }) as unknown as { da_doi_chieu_phap_ly: boolean };
   assert.equal(xb.da_doi_chieu_phap_ly, false);   // xuất bản xong tự bỏ tích → lần sau xác nhận lại
+  // sau khi xuất bản "thay đổi nội dung": lưu nháp và gỡ xuất bản không bị chặn bởi ngày hiệu lực
+  await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false, draft: true, data: { h1: "Điều khoản (nháp)" } as never });
   await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
     data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", _status: "published" } as never }), /ngày hiệu lực mới/);
   const r = await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,

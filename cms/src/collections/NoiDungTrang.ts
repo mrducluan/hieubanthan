@@ -109,7 +109,8 @@ const quyenMuc: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
  *  ngày của bản đang xuất bản (hoặc ngày đang ghi trong code nếu chưa xuất bản bản nào). */
 const ngayHieuLuc: CollectionBeforeChangeHook = async ({ data, originalDoc, req }) => {
   const cu = (originalDoc ?? {}) as Doc;
-  if (dongBo(req) || cu.nhom !== "phap_ly" || !cu.id) return data;
+  // Chỉ xét khi Xuất bản: lưu nháp / tự lưu / gỡ xuất bản không bị chặn (loai_sua của lần trước còn lưu trong tài liệu).
+  if (dongBo(req) || cu.nhom !== "phap_ly" || !cu.id || !xuatBan(data)) return data;
   const pb = await req.payload.findVersions({ collection: "noi-dung-trang", limit: 1, sort: "-updatedAt", depth: 0, overrideAccess: true, req,
     where: { and: [{ parent: { equals: cu.id } }, { "version._status": { equals: "published" } }] } });
   const dangXb = pb.docs[0]?.version?.ngay_hieu_luc ?? null;
@@ -119,6 +120,7 @@ const ngayHieuLuc: CollectionBeforeChangeHook = async ({ data, originalDoc, req 
     if (!t || t <= moc) {
       throw new APIError(`"Thay đổi nội dung" cần ngày hiệu lực mới, sau ngày đang áp dụng (${new Date(moc).toLocaleDateString("vi-VN", { timeZone: "UTC" })}).`, 400, null, true);
     }
+    data.loai_sua = "sua_chu";   // lần lưu sau mặc định lại "Sửa chữ" — muốn đổi nội dung thì chọn lại có chủ ý
   } else {
     data.ngay_hieu_luc = dangXb;   // sửa chữ: giữ nguyên ngày hiệu lực đang áp dụng
   }
