@@ -37,6 +37,7 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   go_tay: "number",     // HN-2: 1 nếu người dùng có gõ câu (chỉ đếm, không gửi nội dung)
   nhan_ra: "number",    // HN-4: 1 = câu gõ nhận ra ý định, 0 = không (chỉ đếm)
   nhom_chua_ho_tro: "string", // HN-4: mã nhóm cố định nối dấu phẩy (từ engine), không bao giờ là chữ người dùng gõ
+  lech: "number",       // TV-V2: định giờ sinh — canh giờ người dùng chọn lệch -1 / 0 / 1 so với giờ đã nhập (không ngày giờ)
   viec: "string",       // HL-1: mã việc chọn ngày (cuoi_hoi, khai_truong…)
   so_thang: "number",
   co_tuoi: "number",

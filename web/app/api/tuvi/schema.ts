@@ -31,6 +31,8 @@ export const ChartInput = z.object({
   luu_nguyet: z.enum(PHAI_LUU_NGUYET).optional(),
 });
 export type ChartInputT = z.infer<typeof ChartInput>;
+/** Đầu vào phía trình duyệt (trước khi zod điền mặc định) — dùng cho component gửi `la_so`. */
+export type ChartInputVao = z.input<typeof ChartInput>;
 
 const CungChiTiet = z.object({
   cung: z.string(),
@@ -209,3 +211,120 @@ export const LuuNguyetOutput = z.object({
   luu_y: z.string(),
 });
 export type LuuNguyetOutputT = z.infer<typeof LuuNguyetOutput>;
+
+// --------------------------------------------------------------------------- //
+// TV-V2 (docs/NANG-CAP-TUVI-V2.md §3) — phi hoá, nhịp 3 tháng, hợp tham, định giờ sinh.
+// Engine tính hết; web chỉ hiển thị. Output dùng .passthrough() để engine thêm trường không vỡ web.
+// --------------------------------------------------------------------------- //
+export const HOA = ["Lộc", "Quyền", "Khoa", "Kỵ"] as const;
+
+export const PhiHoaInput = z.object({
+  la_so: ChartInput,
+  nam_xem: z.number().int().min(1900).max(2100).optional(),
+});
+const DuongBay = z.object({
+  tu_cung: z.string(), can: z.string(), hoa: z.string(), sao: z.string(),
+  den_cung: z.string().nullable(), xung_cung: z.string().nullable(),
+  tu_hoa: z.boolean(), den_tuan_triet: z.array(z.string()).default([]), nghia: z.string().nullable().optional(),
+}).passthrough();
+export type DuongBayT = z.infer<typeof DuongBay>;
+export const PhiHoaOutput = z.object({
+  engine_version: z.string(),
+  can_nam_sinh: z.string(),
+  lai_nhan: z.object({ cung: z.string(), chi: z.string(), can: z.string() }).passthrough().nullable(),
+  cung: z.array(z.object({ ten: z.string(), chi: z.string(), can: z.string(), la_menh: z.boolean(), la_lai_nhan: z.boolean() }).passthrough()),
+  duong_bay: z.array(DuongBay),
+  tu_hoa: z.array(DuongBay),
+  vao_menh: z.array(DuongBay),
+  noi_bat: z.array(z.object({
+    loai: z.string(), duong: DuongBay, tieu_de: z.string(), nghia: z.string(),
+    viec_nen_lam: z.string().nullable().optional(), cau_tu_soi: z.string().nullable().optional(),
+    ghi_chu_tuan_triet: z.string().nullable().optional(),
+  }).passthrough()).max(8),
+  luu_nien: z.object({
+    nam: z.number(), can_chi: z.string(),
+    hoa: z.array(z.object({ hoa: z.string(), sao: z.string(), den_cung: z.string().nullable(), xung_cung: z.string().nullable() }).passthrough()),
+  }).passthrough().nullable().optional(),
+  phai: z.object({ ten: z.string(), ghi_chu: z.string().optional() }).passthrough().optional(),
+  luu_y: z.array(z.string()).default([]),
+  trang_thai: z.string().optional(),
+}).passthrough();
+export type PhiHoaOutputT = z.infer<typeof PhiHoaOutput>;
+
+export const Nhip3ThangInput = z.object({
+  la_so: ChartInput,
+  ngay_xem: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+});
+const HoaGoc = z.object({ hoa: z.string(), sao: z.string(), cung_goc: z.string().nullable() }).passthrough();
+export const Nhip3ThangOutput = z.object({
+  engine_version: z.string(),
+  ngay_xem: z.string(),
+  phai_luu_nguyet: z.string(),
+  luu_nien: z.object({ nam_am: z.number(), can_chi: z.string(), tu_hoa: z.array(HoaGoc) }).passthrough(),
+  thang: z.array(z.object({
+    thang: z.number(), nhuan: z.boolean(), phan: z.string(), can_chi: z.string(),
+    tu: z.string(), den: z.string(), cung_goc: z.string(), chu_de: z.string().nullable(),
+    muc: z.enum(["thuan", "binh", "can_than"]), nhan_muc: z.string(),
+    ly_do: z.array(z.object({ ma: z.string(), noi_dung: z.string() }).passthrough()),
+    tu_hoa_thang: z.array(HoaGoc),
+    goi_y: z.string().nullable(), cau_tu_soi: z.string().nullable(),
+  }).passthrough()).length(3),
+  uu_tien: z.string().optional(),
+  luu_y: z.union([z.string(), z.array(z.string())]).optional(),
+}).passthrough();
+export type Nhip3ThangOutputT = z.infer<typeof Nhip3ThangOutput>;
+
+export const QUAN_HE_HOP_THAM = ["nguoi_yeu", "vo_chong", "ban_be", "dong_nghiep", "doi_tac", "sep", "cha_me_con", "gia_dinh"] as const;
+export const HopThamInput = z.object({
+  la_so: ChartInput,
+  nguoi_kia: z.object({
+    birth_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Định dạng YYYY-MM-DD"),
+    calendar_type: z.enum(["duong", "am"]).optional(),
+    am_nhuan: z.boolean().optional(),
+    birth_time: z.string().regex(/^\d{2}:\d{2}$/).optional(),
+    gender: z.enum(["nam", "nu"]).optional(),
+    noi_sinh: z.string().regex(/^[a-z0-9_-]{2,40}$/).optional(),
+    vung: z.enum(["north", "south"]).optional(),
+  }),
+  quan_he: z.enum(QUAN_HE_HOP_THAM).default("nguoi_yeu"),
+});
+const HoaVao = z.object({
+  hoa: z.string(), sao: z.string(), den_cung: z.string().nullable(), xung_cung: z.string().nullable(),
+  nghia: z.string().nullable().optional(),
+}).passthrough();
+export type HoaVaoT = z.infer<typeof HoaVao>;
+export const HopThamOutput = z.object({
+  engine_version: z.string(),
+  quan_he: z.string(), nhan_quan_he: z.string(),
+  can_nam_nguoi_kia: z.string(),
+  nguoi_kia_vao_ban: z.array(HoaVao),
+  ban_vao_nguoi_kia: z.array(HoaVao).nullable().optional(),
+  menh_nguoi_kia_vao_ban: z.array(HoaVao).nullable().optional(),
+  tom_tat: z.array(z.string()).default([]),
+  luu_y: z.array(z.string()).default([]),
+  khong_cham_diem: z.literal(true),
+}).passthrough();
+export type HopThamOutputT = z.infer<typeof HopThamOutput>;
+
+export const DinhGioInput = z.object({
+  la_so: ChartInput,
+  nam_doi_chieu: z.array(z.number().int().min(1900).max(2100)).max(3).optional(),
+  tat_ca_gio: z.boolean().optional(),
+});
+export const DinhGioOutput = z.object({
+  engine_version: z.string(),
+  ly_do: z.array(z.string()),
+  ung_vien: z.array(z.object({
+    nhan: z.string(), chi_gio: z.string(), khoang_gio: z.string(), gio_dai_dien: z.string(),
+    la_gio_nhap: z.boolean(),
+    cung_menh: z.object({ chi: z.string(), chinh_tinh: z.array(z.string()) }).passthrough(),
+    cuc: z.string(), than_cu: z.string(),
+    nam: z.array(z.object({
+      nam: z.number(), can_chi: z.string(),
+      cau_hoi: z.array(z.object({ hoa: z.string(), cung: z.string(), noi_dung: z.string() }).passthrough()),
+    }).passthrough()),
+  }).passthrough()).min(1).max(12),
+  khac_nhau: z.array(z.string()).default([]),
+  luu_y: z.array(z.string()).default([]),
+}).passthrough();
+export type DinhGioOutputT = z.infer<typeof DinhGioOutput>;

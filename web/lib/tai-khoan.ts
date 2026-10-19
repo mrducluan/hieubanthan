@@ -65,12 +65,15 @@ export async function hoSoTaiKhoan(userId: string): Promise<(Omit<HoSo, "v" | "t
 }
 
 export async function luuVaoTaiKhoan(userId: string, h: HoSo): Promise<void> {
+  // TV-V2: "Không biết giờ" chưa có cột (0007 chỉ nhận exact/approx) → tài khoản lưu như chưa có giờ,
+  // không lưu giờ đại diện 12:00 như thể là giờ thật. Đổi = migration mới (chờ duyệt).
+  const khongBiet = h.do_tin_gio === "unknown";
   const co_ban = {
     user_id: userId, ho_ten: h.ho_ten, ten_khac: h.ten_khac ?? null, ngay_sinh: ngaySinhIso(h),
-    gio_sinh: h.gio ?? null, gioi_tinh: h.gioi_tinh ?? null, vung: h.vung ?? null, dong_y_luc: new Date().toISOString(),
+    gio_sinh: khongBiet ? null : h.gio ?? null, gioi_tinh: h.gioi_tinh ?? null, vung: h.vung ?? null, dong_y_luc: new Date().toISOString(),
   };
   let { error } = await (await batBuoc()).from("ho_so").upsert({
-    ...co_ban, noi_sinh: h.noi_sinh ?? null, gio_mua_he: Boolean(h.gio_mua_he), do_tin_gio: h.do_tin_gio ?? null,
+    ...co_ban, noi_sinh: h.noi_sinh ?? null, gio_mua_he: Boolean(h.gio_mua_he), do_tin_gio: khongBiet ? null : h.do_tin_gio ?? null,
     lich_nhap: h.lich_nhap ?? "duong", am_ngay: h.am?.ngay ?? null, am_thang: h.am?.thang ?? null,
     am_nam: h.am?.nam ?? null, am_nhuan: Boolean(h.am?.nhuan),
   });

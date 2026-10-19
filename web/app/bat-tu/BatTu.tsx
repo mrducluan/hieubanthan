@@ -24,6 +24,8 @@ import { cn } from "@/lib/utils";
 
 // Cờ từ engine viết cho người phát triển — đổi sang lời dễ hiểu cho người đọc.
 const LOI_NHAN_CO: Record<string, string> = {
+  // TV-V2: giờ áng chừng / không biết giờ (hồ sơ "Không biết giờ" an tạm 12:00) — trụ giờ chưa đáng tin.
+  hour_confidence: "Giờ sinh chưa chắc chắn (áng chừng hoặc chưa biết giờ): trụ giờ có thể khác, nên đọc nặng ba trụ năm, tháng, ngày. Chưa biết giờ thì hệ thống đang tạm dùng 12:00.",
   da_ty: "Bạn sinh 23:00–23:59 (giờ Tý muộn): bát tự ở đây giữ trụ ngày hôm đó, trụ giờ lấy giờ Tý của ngày sau. Có trường phái đổi ngày từ 23:00 nên có thể ra trụ ngày khác; tử vi ở đây tính sang ngày mới.",
 };
 
