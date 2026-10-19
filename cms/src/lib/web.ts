@@ -4,6 +4,14 @@
 //   CMS_PREVIEW_SECRET    bí mật chung ký link xem trước nháp (GET /api/cms/xem-truoc?slug=&ma=)
 import { createHmac } from "node:crypto";
 
+/** Lời nhắc khi web từ chối CMS (web/lib/cms.ts `kiemBiMatCms`): nói rõ bên nào cần sửa, không lộ bí mật. */
+export function loiKetNoiWeb(status: number): string {
+  if (status === 401) return "CMS_WEBHOOK_SECRET trên CMS khác bên web — dán lại CÙNG một giá trị ở cả hai project Vercel (web và cms), rồi Redeploy cả hai (đổi biến môi trường chỉ có hiệu lực sau khi deploy lại).";
+  if (status === 503) return "Web chưa có CMS_WEBHOOK_SECRET — thêm vào project Vercel của web (Production) rồi Redeploy web.";
+  if (status === 404) return "WEB_URL trên CMS trỏ sai địa chỉ (phải là https://hieuban.com) hoặc web chưa deploy bản mới.";
+  return `Web trả ${status}.`;
+}
+
 export const webUrl = () => (process.env.WEB_URL || "http://localhost:3000").replace(/\/+$/, "");
 
 /** Mã ký link xem trước — web kiểm lại bằng cùng công thức (web/lib/cms.ts `maXemTruoc`). */
@@ -22,7 +30,7 @@ export function linkXemTruoc(slug: string | undefined | null): string | null {
 /** Báo web xoá cache (thẻ "cms"; ND: kèm `duong` → web xoá thêm thẻ "trang:<duong>"). Không chặn lưu bài khi web
  *  chậm/lỗi: chờ tối đa 4 giây, lỗi thì ghi log. */
 export async function baoWebLamMoi(ly_do: string, slug?: string | null, duong?: string | null): Promise<void> {
-  const bi = process.env.CMS_WEBHOOK_SECRET;
+  const bi = process.env.CMS_WEBHOOK_SECRET?.trim();
   if (!bi || !process.env.WEB_URL) return;
   try {
     const r = await fetch(`${webUrl()}/api/cms/lam-moi`, {
@@ -31,7 +39,7 @@ export async function baoWebLamMoi(ly_do: string, slug?: string | null, duong?: 
       body: JSON.stringify({ ly_do, slug: slug ?? null, ...(duong ? { duong } : {}) }),
       signal: AbortSignal.timeout(4_000),
     });
-    if (!r.ok) console.warn(`[cms] web làm mới trả ${r.status}`);
+    if (!r.ok) console.warn(`[cms] web làm mới trả ${r.status}: ${loiKetNoiWeb(r.status)}`);
   } catch (e) {
     console.warn("[cms] không báo được web làm mới:", (e as Error).name);
   }

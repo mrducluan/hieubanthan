@@ -160,6 +160,16 @@ export function soKhop(a: string | null | undefined, b: string | null | undefine
   return x.length === y.length && timingSafeEqual(x, y);
 }
 
+/** Kiểm header x-cms-bi-mat với CMS_WEBHOOK_SECRET (cả hai bỏ khoảng trắng/xuống dòng đầu-cuối: dán vào Vercel hay dính
+ *  thừa → hai bên "giống" mà vẫn 401). Web chưa đặt bí mật → 503 kèm lời nhắc, sai bí mật → 401: CMS báo đúng bên cần sửa
+ *  (không lộ gì về bí mật). */
+export function kiemBiMatCms(req: Request): Response | null {
+  const bi = process.env.CMS_WEBHOOK_SECRET?.trim();
+  if (!bi) return Response.json({ loi: "Web chưa đặt CMS_WEBHOOK_SECRET.", ma: "web_chua_dat" }, { status: 503 });
+  if (!soKhop(req.headers.get("x-cms-bi-mat")?.trim(), bi)) return Response.json({ loi: "Không được phép.", ma: "sai_bi_mat" }, { status: 401 });
+  return null;
+}
+
 // ---------------------------------------------------------------- tiện ích hiển thị
 
 export const anhCms = (a: AnhCms | null | undefined, co: "og" | "vua" | "nho" = "vua") =>

@@ -14,7 +14,7 @@ const CMS = {
   CMS_URL: "http://localhost:3001",
   WEB_URL: "http://localhost:3000",
   CMS_EMAIL_QUAN_TRI: "quan-tri@vidu.vn",
-  CMS_WEBHOOK_SECRET: BI_MAT.webhook,
+  CMS_WEBHOOK_SECRET: ` ${BI_MAT.webhook}`,   // khoảng trắng thừa như khi dán vào Vercel — hai bên phải tự bỏ
   CMS_PREVIEW_SECRET: BI_MAT.preview,
   S3_BUCKET: "",
 };
@@ -22,7 +22,7 @@ const CMS = {
 const WEB = {
   CMS_URL: "http://localhost:3001",
   CMS_API_KEY: BI_MAT.apiKey,
-  CMS_WEBHOOK_SECRET: BI_MAT.webhook,
+  CMS_WEBHOOK_SECRET: `${BI_MAT.webhook}\n`,  // xuống dòng thừa (lỗi 401 "Đồng bộ ngay" trên production, 2026-10-19)
   CMS_PREVIEW_SECRET: BI_MAT.preview,
   NEXT_PUBLIC_SITE_URL: "http://localhost:3000",
   ENGINE_URL: "http://127.0.0.1:8000",

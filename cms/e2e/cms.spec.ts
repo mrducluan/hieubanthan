@@ -338,6 +338,12 @@ test("ND-0/ND-1: Đồng bộ ngay tạo Trang website + Mẫu cụm từ sổ t
   await page.goto(`${CMS}/admin/collections/noi-dung-trang`);
   await page.getByTestId("dong-bo-so-trang").getByRole("button", { name: "Đồng bộ ngay" }).click();
   await expect(page.getByTestId("dong-bo-so-trang")).toContainText("Xong: 0 trang mới");
+  // web phân biệt "sai bí mật" (401) với "chưa đặt" (503) để CMS chỉ đúng bên cần sửa; không có header → 401
+  expect((await request.get(`${WEB}/api/so-trang`)).status()).toBe(401);
+  const sai = await request.get(`${WEB}/api/so-trang`, { headers: { "x-cms-bi-mat": "sai-bi-mat" } });
+  expect(sai.status()).toBe(401);
+  expect((await sai.json()).ma).toBe("sai_bi_mat");
+  expect((await request.get(`${WEB}/api/so-trang`, { headers: { "x-cms-bi-mat": `${BI_MAT.webhook} ` } })).status()).toBe(200);
 
   expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: {
     thuong_hieu: { gioi_thieu: "Lời giới thiệu sửa từ CMS", cam_ket: [{ chu: "Cam kết sửa từ CMS", bieu_tuong: "khoa" }] },
