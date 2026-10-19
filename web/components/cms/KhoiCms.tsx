@@ -1,7 +1,7 @@
 // ND-2/ND-3 — khối CMS đặt quanh nội dung một URL (vị trí cố định: trên / dưới / cuối), từ "Trang website" hoặc "Mẫu
 // cụm trang" (lib/noi-dung-trang.ts đã gộp + lọc khung ngày). Chữ hiện dạng VĂN BẢN THUẦN (React tự thoát ký tự), link
 // chỉ nhận đường dẫn trong site, video chỉ youtube-nocookie và chỉ tải khi người đọc bấm → không HTML lạ, không link
-// ngoài, không làm chậm trang công cụ. Khối hỏi đáp KHÔNG xuất FAQPage (trang công cụ đã có FAQPage của phần giới thiệu).
+// ngoài, không làm chậm trang công cụ. Ảnh chỉ từ kho ảnh CMS (CSP img-src đã cho phép). Khối hỏi đáp KHÔNG xuất FAQPage (trang công cụ đã có FAQPage của phần giới thiệu).
 import Link from "next/link";
 import { ArrowRight, Info, Lightbulb, ListChecks, MessageCircleQuestionMark, Quote } from "lucide-react";
 import { KhoiTrangDichView } from "@/components/trang-dich/KhoiTrangDich";
@@ -47,6 +47,21 @@ function MotKhoi({ k, duong, viTri }: { k: KhoiCmsT; duong: string; viTri: ViTri
             <img src={anh.src} alt={anh.alt} width={anh.w} height={anh.h} loading="lazy" className="aspect-video w-full rounded-2xl object-cover" />
           )}
         </section>
+      );
+    }
+    case "anh": {
+      // Ảnh chỉ từ kho ảnh CMS (anhCms đọc url Payload); alt lấy từ "Mô tả ảnh" của thư viện Media.
+      const a = anhCms(k.anh as AnhCms | null, k.co === "nho" ? "nho" : "vua");
+      if (!a) return null;
+      const link = lk(k.link), ct = chu(k.chu_thich);
+      const lop = k.co === "rong" ? "w-full" : k.co === "nho" ? "mx-auto max-w-sm" : "mx-auto max-w-3xl";
+      // eslint-disable-next-line @next/next/no-img-element
+      const img = <img src={a.src} alt={a.alt} width={a.w} height={a.h} loading="lazy" className="h-auto w-full rounded-2xl" />;
+      return (
+        <figure data-khoi="anh" className={lop}>
+          {link ? <Link href={link}>{img}</Link> : img}
+          {ct && <figcaption className="mt-2 text-center text-sm text-fg-muted">{ct}</figcaption>}
+        </figure>
       );
     }
     case "nut_moi": {

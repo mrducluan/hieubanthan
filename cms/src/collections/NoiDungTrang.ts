@@ -2,8 +2,8 @@
 // Mỗi URL công khai nhóm công cụ / tĩnh / pháp lý / chủ đề là MỘT tài liệu, do job "dong-bo-so-trang" tạo từ sổ trang
 // của web (web/lib/so-trang.ts) — biên tập viên không tạo tay. Trang kiến thức KB không có tài liệu sẵn: muốn chỉnh
 // riêng một URL thì tạo "ghi đè theo yêu cầu" (chỉ nhập đường dẫn, phải thuộc một mẫu cụm có thật).
-// Ô để trống = web hiện chữ đang chạy trong code (mac_dinh, chỉ đọc). Web đã đọc: trang công cụ (ND-2), trang tĩnh +
-// chủ đề + /gioi-thieu, /lien-he (ND-3). Chưa đọc: pháp lý (ND-4), trang KB / mẫu cụm (ND-5).
+// Ô để trống = web hiện chữ đang chạy trong code (mac_dinh, chỉ đọc). Web đọc ở mọi nhóm: công cụ (ND-2), tĩnh + chủ đề
+// + /gioi-thieu, /lien-he (ND-3), pháp lý (ND-4), trang KB qua mẫu cụm + ghi đè (ND-5).
 // Quyền: nhóm pháp lý + mục "quy-trinh" của /gioi-thieu chỉ Quản trị/Chủ biên sửa (điều kiện ở access + hook, không chỉ
 // ẩn nút); biên tập viên soạn nháp nhóm khác, Chủ biên xuất bản; cộng tác viên không thấy collection.
 import { FixedToolbarFeature, HeadingFeature, LinkFeature, lexicalEditor, lexicalHTMLField } from "@payloadcms/richtext-lexical";
@@ -125,6 +125,16 @@ const ngayHieuLuc: CollectionBeforeChangeHook = async ({ data, originalDoc, req 
   return data;
 };
 
+/** ND-4: xuất bản trang pháp lý phải tích ô xác nhận đối chiếu; tích xong thì bỏ tích (mỗi lần xuất bản xác nhận lại). */
+const xacNhanPhapLy: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
+  if (dongBo(req) || ((originalDoc ?? {}) as Doc).nhom !== "phap_ly" || !xuatBan(data)) return data;
+  if (data.da_doi_chieu_phap_ly !== true) {
+    throw new APIError("Trang pháp lý: tích ô \"Tôi đã đối chiếu nội dung…\" trước khi Xuất bản.", 400, null, true);
+  }
+  data.da_doi_chieu_phap_ly = false;
+  return data;
+};
+
 const kiemDinh: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
   if (req.context?.boQuaKiemDinh) return data;
   const d = { ...(originalDoc ?? {}), ...data } as Doc;
@@ -208,7 +218,7 @@ export const NoiDungTrang: CollectionConfig = {
   },
   hooks: {
     beforeValidate: [({ data }) => (data ? chuanHoaDuLieu(data) : data)],
-    beforeChange: [giuHeThong, quyenMuc, ngayHieuLuc, kiemDinh],
+    beforeChange: [giuHeThong, quyenMuc, ngayHieuLuc, xacNhanPhapLy, kiemDinh],
     afterChange: [lamMoiTrang],
     afterDelete: [lamMoiKhiXoa],
   },
@@ -290,6 +300,9 @@ export const NoiDungTrang: CollectionConfig = {
             },
             { name: "ngay_hieu_luc", label: "Ngày hiệu lực", type: "date",
               admin: { condition: (d) => d?.nhom === "phap_ly", date: { pickerAppearance: "dayOnly", displayFormat: "dd/MM/yyyy" } } },
+            { name: "da_doi_chieu_phap_ly", label: "Tôi đã đối chiếu nội dung với thực tế xử lý dữ liệu / ý kiến pháp lý", type: "checkbox",
+              admin: { condition: (d) => d?.nhom === "phap_ly",
+                description: "Bắt buộc tích mỗi lần Xuất bản trang pháp lý (tự bỏ tích sau khi xuất bản, lần sau phải xác nhận lại)." } },
             {
               name: "muc", label: "Mục", type: "array", maxRows: 20, labels: { singular: "Mục", plural: "Mục" },
               admin: { initCollapsed: true },
@@ -298,7 +311,7 @@ export const NoiDungTrang: CollectionConfig = {
                 { name: "tieu_de", label: "Tiêu đề mục (H2)", type: "text", required: true, maxLength: 120 },
                 { name: "noi_dung", label: "Nội dung", type: "richText",
                   editor: lexicalEditor({ features: ({ rootFeatures }) => [
-                    ...rootFeatures.filter((f) => !["relationship", "upload", "heading", "link", "checklist", "blocks"].includes(f.key)),
+                    ...rootFeatures.filter((f) => !["relationship", "heading", "link", "checklist", "blocks"].includes(f.key)),   // ảnh (upload) được phép — ND-4/5
                     HeadingFeature({ enabledHeadingSizes: ["h3", "h4"] }), LinkFeature({ enabledCollections: ["bai-viet"] }), FixedToolbarFeature(),
                   ] }) },
                 lexicalHTMLField({ htmlFieldName: "noi_dung_html", lexicalFieldName: "noi_dung", converters: boChuyenHtml }),

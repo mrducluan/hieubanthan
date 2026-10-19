@@ -595,6 +595,10 @@ export interface NoiDungTrang {
    */
   loai_sua?: ('sua_chu' | 'thay_doi_noi_dung') | null;
   ngay_hieu_luc?: string | null;
+  /**
+   * Bắt buộc tích mỗi lần Xuất bản trang pháp lý (tự bỏ tích sau khi xuất bản, lần sau phải xác nhận lại).
+   */
+  da_doi_chieu_phap_ly?: boolean | null;
   muc?:
     | {
         neo: string;
@@ -640,6 +644,20 @@ export interface NoiDungTrang {
             id?: string | null;
             blockName?: string | null;
             blockType: 'banner';
+          }
+        | {
+            /**
+             * Mô tả ảnh (alt) lấy từ ô "Mô tả ảnh" trong thư viện Media — bắt buộc cho người khiếm thị và Google.
+             */
+            anh: number | Media;
+            chu_thich?: string | null;
+            link?: string | null;
+            co?: ('vua' | 'rong' | 'nho') | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'anh';
           }
         | {
             chu: string;
@@ -727,6 +745,20 @@ export interface NoiDungTrang {
             blockType: 'banner';
           }
         | {
+            /**
+             * Mô tả ảnh (alt) lấy từ ô "Mô tả ảnh" trong thư viện Media — bắt buộc cho người khiếm thị và Google.
+             */
+            anh: number | Media;
+            chu_thich?: string | null;
+            link?: string | null;
+            co?: ('vua' | 'rong' | 'nho') | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'anh';
+          }
+        | {
             chu: string;
             link: string;
             kieu?: ('chinh' | 'phu') | null;
@@ -810,6 +842,20 @@ export interface NoiDungTrang {
             id?: string | null;
             blockName?: string | null;
             blockType: 'banner';
+          }
+        | {
+            /**
+             * Mô tả ảnh (alt) lấy từ ô "Mô tả ảnh" trong thư viện Media — bắt buộc cho người khiếm thị và Google.
+             */
+            anh: number | Media;
+            chu_thich?: string | null;
+            link?: string | null;
+            co?: ('vua' | 'rong' | 'nho') | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'anh';
           }
         | {
             chu: string;
@@ -966,6 +1012,20 @@ export interface MauCum {
             blockType: 'banner';
           }
         | {
+            /**
+             * Mô tả ảnh (alt) lấy từ ô "Mô tả ảnh" trong thư viện Media — bắt buộc cho người khiếm thị và Google.
+             */
+            anh: number | Media;
+            chu_thich?: string | null;
+            link?: string | null;
+            co?: ('vua' | 'rong' | 'nho') | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'anh';
+          }
+        | {
             chu: string;
             link: string;
             kieu?: ('chinh' | 'phu') | null;
@@ -1051,6 +1111,20 @@ export interface MauCum {
             blockType: 'banner';
           }
         | {
+            /**
+             * Mô tả ảnh (alt) lấy từ ô "Mô tả ảnh" trong thư viện Media — bắt buộc cho người khiếm thị và Google.
+             */
+            anh: number | Media;
+            chu_thich?: string | null;
+            link?: string | null;
+            co?: ('vua' | 'rong' | 'nho') | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'anh';
+          }
+        | {
             chu: string;
             link: string;
             kieu?: ('chinh' | 'phu') | null;
@@ -1134,6 +1208,20 @@ export interface MauCum {
             id?: string | null;
             blockName?: string | null;
             blockType: 'banner';
+          }
+        | {
+            /**
+             * Mô tả ảnh (alt) lấy từ ô "Mô tả ảnh" trong thư viện Media — bắt buộc cho người khiếm thị và Google.
+             */
+            anh: number | Media;
+            chu_thich?: string | null;
+            link?: string | null;
+            co?: ('vua' | 'rong' | 'nho') | null;
+            tu_ngay?: string | null;
+            den_ngay?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'anh';
           }
         | {
             chu: string;
@@ -1748,6 +1836,7 @@ export interface NoiDungTrangSelect<T extends boolean = true> {
       };
   loai_sua?: T;
   ngay_hieu_luc?: T;
+  da_doi_chieu_phap_ly?: T;
   muc?:
     | T
     | {
@@ -1778,6 +1867,18 @@ export interface NoiDungTrangSelect<T extends boolean = true> {
                     can?: T;
                     nen?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        anh?:
+          | T
+          | {
+              anh?: T;
+              chu_thich?: T;
+              link?: T;
+              co?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
               id?: T;
               blockName?: T;
             };
@@ -1869,6 +1970,18 @@ export interface NoiDungTrangSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        anh?:
+          | T
+          | {
+              anh?: T;
+              chu_thich?: T;
+              link?: T;
+              co?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
+              id?: T;
+              blockName?: T;
+            };
         nut_moi?:
           | T
           | {
@@ -1954,6 +2067,18 @@ export interface NoiDungTrangSelect<T extends boolean = true> {
                     can?: T;
                     nen?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        anh?:
+          | T
+          | {
+              anh?: T;
+              chu_thich?: T;
+              link?: T;
+              co?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
               id?: T;
               blockName?: T;
             };
@@ -2116,6 +2241,18 @@ export interface MauCumSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        anh?:
+          | T
+          | {
+              anh?: T;
+              chu_thich?: T;
+              link?: T;
+              co?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
+              id?: T;
+              blockName?: T;
+            };
         nut_moi?:
           | T
           | {
@@ -2204,6 +2341,18 @@ export interface MauCumSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        anh?:
+          | T
+          | {
+              anh?: T;
+              chu_thich?: T;
+              link?: T;
+              co?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
+              id?: T;
+              blockName?: T;
+            };
         nut_moi?:
           | T
           | {
@@ -2289,6 +2438,18 @@ export interface MauCumSelect<T extends boolean = true> {
                     can?: T;
                     nen?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        anh?:
+          | T
+          | {
+              anh?: T;
+              chu_thich?: T;
+              link?: T;
+              co?: T;
+              tu_ngay?: T;
+              den_ngay?: T;
               id?: T;
               blockName?: T;
             };

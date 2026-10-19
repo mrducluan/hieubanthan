@@ -3,6 +3,7 @@
 // cho xuất bản → xuất bản → web hiện bài (H1, Trả lời nhanh, mục lục, FAQ, JSON-LD, sitemap, llms.txt, .md) → sửa nháp
 // + xem trước có ký → đổi slug giữ link cũ (308) → biên tập viên không có nút Xuất bản → tắt "blog" ở Tính năng.
 import { createHmac } from "node:crypto";
+import sharp from "sharp";
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
 import { BI_MAT } from "../playwright.config";
 import { buocHienTai, maTotp, tuBase32 } from "../src/lib/totp";
@@ -418,6 +419,85 @@ test("ND-2/ND-3: trang công cụ + trang tĩnh đọc 'Trang website' — SEO, 
   }
   await choWeb(request, "/tu-vi", (s, b) => s === 200 && !b.includes("Lá số Tử vi từ CMS") && b.includes("Về công cụ Tử vi"));
   await choWeb(request, "/gioi-thieu", (s, b) => s === 200 && !b.includes("Thân mục sứ mệnh từ CMS.") && b.includes("Giới thiệu &amp; phương pháp"));
+});
+
+test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức, ghi đè một URL ẩn khối mẫu; pháp lý sửa mục + ngày hiệu lực, bắt buộc tích đối chiếu", async ({ page, request }) => {
+  const token = await tokenQt(request);
+  const h = { Authorization: `JWT ${token}` };
+  // ảnh thử (không gọi ra ngoài): PNG 64×64 dựng tại chỗ
+  const png = await sharp({ create: { width: 64, height: 64, channels: 3, background: "#c8a24a" } }).png().toBuffer();
+  const up = await request.post(`${CMS}/api/media`, { headers: h, multipart: {
+    file: { name: "nd5.png", mimeType: "image/png", buffer: png }, _payload: JSON.stringify({ alt: "Ảnh minh hoạ ND-5" }) } });
+  expect(up.status(), await up.text()).toBe(201);
+  const anhId = (await up.json()).doc.id as number;
+
+  // hai trang thật của cụm Kinh Dịch (lấy từ trang chủ đề)
+  const ds = [...(await (await request.get(`${WEB}/kien-thuc/kinh-dich`)).text()).matchAll(/href="(\/kien-thuc\/kinh-dich\/[a-z0-9-]+)"/g)]
+    .map((m) => m[1]!).filter((v, i, a) => a.indexOf(v) === i);
+  expect(ds.length).toBeGreaterThanOrEqual(2);
+  const [u1, u2] = ds as [string, string];
+
+  const mau = (await (await request.get(`${CMS}/api/mau-cum?where[mau_duong][equals]=${encodeURIComponent("/kien-thuc/kinh-dich/{slug}")}&depth=0&draft=true`,
+    { headers: h })).json()).docs[0] as { id: number };
+  const r = await request.patch(`${CMS}/api/mau-cum/${mau.id}`, { headers: h, data: { _status: "published",
+    khoi_tren: [{ blockType: "van_ban", noi_dung: "Mẫu cụm: bạn đang đọc {tieu_de} & thêm." }],
+    khoi_duoi: [{ blockType: "anh", anh: anhId, chu_thich: "Chú thích ảnh mẫu cụm", co: "vua" }],
+    khoi_cuoi: [{ blockType: "keu_goi", cong_cu: "/kinh-dich", loi_moi: "Gieo một quẻ cho việc của bạn", nut: "Gieo quẻ" }],
+  } });
+  expect(r.status(), await r.text()).toBe(200);
+  await choWeb(request, u1, (st, b) => st === 200 && b.includes("Mẫu cụm: bạn đang đọc"));
+  for (const u of [u1, u2]) {
+    await page.goto(`${WEB}${u}`);
+    const td = (await page.locator("h1").textContent())!.trim();
+    await expect(page.getByTestId("khoi-cms-tren")).toHaveText(`Mẫu cụm: bạn đang đọc ${td} & thêm.`);   // biến thay đúng, không "&amp;"
+    const img = page.getByTestId("khoi-cms-duoi").locator("img");
+    await expect(img).toHaveAttribute("alt", "Ảnh minh hoạ ND-5");
+    await expect.poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);   // CSP cho tải ảnh CMS
+    await expect(page.getByTestId("khoi-cms-cuoi").getByRole("link", { name: /Gieo quẻ/ })).toHaveAttribute("href", "/kinh-dich");
+  }
+  const md = await (await request.get(`${WEB}${u1}.md`)).text();
+  expect(md).toContain("Mẫu cụm: bạn đang đọc");
+  expect(md).toContain("Chú thích ảnh mẫu cụm");
+
+  // ghi đè riêng u2: ẩn khối mẫu phía trên, thêm khối cuối sau khối mẫu
+  const gd = await request.post(`${CMS}/api/noi-dung-trang`, { headers: h, data: { duong: u2, _status: "published",
+    che_do_mau: { tren: "an_mau", duoi: "thay", cuoi: "them_sau" },
+    khoi_cuoi: [{ blockType: "ghi_chu", kieu: "tu_soi", noi_dung: "Ghi chú riêng cho một trang." }] } });
+  expect(gd.status(), await gd.text()).toBe(201);
+  await choWeb(request, u2, (st, b) => st === 200 && b.includes("Ghi chú riêng cho một trang."));
+  await page.goto(`${WEB}${u2}`);
+  await expect(page.getByTestId("khoi-cms-tren")).toHaveCount(0);
+  await expect(page.getByTestId("khoi-cms-duoi").locator("img")).toHaveCount(1);
+  await expect(page.getByTestId("khoi-cms-cuoi")).toContainText("Gieo một quẻ");
+  await expect(page.getByTestId("khoi-cms-cuoi")).toContainText("Ghi chú riêng cho một trang.");
+  await page.goto(`${WEB}${u1}`);
+  await expect(page.getByTestId("khoi-cms-tren")).toBeVisible();          // trang khác của cụm không bị ảnh hưởng
+
+  // ND-4: /dieu-khoan — chưa tích đối chiếu → chặn; tích → web đổi H1, mục #sao, ngày hiệu lực
+  const dk = (await (await request.get(`${CMS}/api/noi-dung-trang?where[duong][equals]=%2Fdieu-khoan&depth=0&draft=true`, { headers: h })).json()).docs[0] as { id: number };
+  const lex = (chu: string) => ({ root: { type: "root", version: 1, direction: "ltr", format: "", indent: 0, children: [
+    { type: "paragraph", version: 1, direction: "ltr", format: "", indent: 0, textFormat: 0, children: [
+      { type: "text", version: 1, text: chu, format: 0, detail: 0, mode: "normal", style: "" }] }] } });
+  const duLieu = { h1: "Điều khoản sử dụng (bản mới)", loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-12-01T12:00:00.000Z",
+    muc: [{ neo: "sao", tieu_de: "Sao — điểm dùng trong ứng dụng", noi_dung: lex("Điều khoản Sao sửa từ CMS.") }], _status: "published" };
+  const chan = await request.patch(`${CMS}/api/noi-dung-trang/${dk.id}`, { headers: h, data: duLieu });
+  expect(chan.status()).toBe(400);
+  expect(await chan.text()).toContain("đối chiếu");
+  const ok = await request.patch(`${CMS}/api/noi-dung-trang/${dk.id}`, { headers: h, data: { ...duLieu, da_doi_chieu_phap_ly: true } });
+  expect(ok.status(), await ok.text()).toBe(200);
+  await choWeb(request, "/dieu-khoan", (st, b) => st === 200 && b.includes("Điều khoản Sao sửa từ CMS."));
+  await page.goto(`${WEB}/dieu-khoan`);
+  await expect(page.locator("h1")).toHaveText("Điều khoản sử dụng (bản mới)");
+  await expect(page.getByText("Hiệu lực từ 01/12/2026")).toBeVisible();
+  await expect(page.locator("#sao")).toContainText("Điều khoản Sao sửa từ CMS.");
+  await expect(page.locator("#tai-khoan")).toBeVisible();                 // mục không sửa vẫn còn, neo giữ nguyên
+  await expect(page.getByTestId("khoi-cms-cuoi")).toHaveCount(0);        // pháp lý không có khối quảng bá
+
+  // dọn: gỡ xuất bản → web về chữ code
+  expect((await request.patch(`${CMS}/api/noi-dung-trang/${dk.id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
+  expect((await request.patch(`${CMS}/api/mau-cum/${mau.id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
+  await choWeb(request, "/dieu-khoan", (st, b) => st === 200 && !b.includes("Điều khoản Sao sửa từ CMS.") && b.includes("Hiệu lực từ 08/10/2026"));
+  await choWeb(request, u1, (st, b) => st === 200 && !b.includes("Mẫu cụm: bạn đang đọc"));
 });
 
 test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa ở CMS → thanh trên + bảng thả xuống + menu điện thoại", async ({ page, request, browser }) => {

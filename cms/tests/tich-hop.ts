@@ -528,19 +528,23 @@ await ca("biên tập viên không đổi được ô hệ thống, không sửa
   await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false, draft: true, data: { h1: "Điều khoản" } as never });
 });
 
-await ca("pháp lý: 'Thay đổi nội dung' bắt buộc ngày hiệu lực mới hơn bản đang áp dụng; 'Sửa chữ' giữ ngày", async () => {
+await ca("pháp lý: 'Thay đổi nội dung' bắt buộc ngày hiệu lực mới hơn bản đang áp dụng; 'Sửa chữ' giữ ngày; xuất bản phải tích ô đối chiếu", async () => {
   const pl = await timTrang(`${nd}/dieu-khoan`);
   await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
     data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-10-01T00:00:00.000Z", _status: "published" } as never }), /ngày hiệu lực mới/);
   // Ô ngày "dayOnly" của Payload lưu 12:00 UTC — cùng NGÀY với ngày trong code (08/10/2026) vẫn phải bị chặn.
   await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
     data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-10-08T12:00:00.000Z", _status: "published" } as never }), /ngày hiệu lực mới/);
-  await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
-    data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", _status: "published" } as never });
+  // ND-4: chưa tích "đã đối chiếu" → không xuất bản được (ngày hợp lệ)
+  await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
+    data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", _status: "published" } as never }), /đối chiếu/);
+  const xb = await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
+    data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", da_doi_chieu_phap_ly: true, _status: "published" } as never }) as unknown as { da_doi_chieu_phap_ly: boolean };
+  assert.equal(xb.da_doi_chieu_phap_ly, false);   // xuất bản xong tự bỏ tích → lần sau xác nhận lại
   await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
     data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", _status: "published" } as never }), /ngày hiệu lực mới/);
   const r = await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
-    data: { loai_sua: "sua_chu", ngay_hieu_luc: "2027-01-01T00:00:00.000Z", _status: "published" } as never }) as unknown as { ngay_hieu_luc: string };
+    data: { loai_sua: "sua_chu", ngay_hieu_luc: "2027-01-01T00:00:00.000Z", da_doi_chieu_phap_ly: true, _status: "published" } as never }) as unknown as { ngay_hieu_luc: string };
   assert.match(r.ngay_hieu_luc, /^2026-11-01/);
 });
 

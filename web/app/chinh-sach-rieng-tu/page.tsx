@@ -4,17 +4,28 @@
 // BM-1 (chủ dự án 2026-10-09): ghi NHÓM nhà cung cấp, không ghi tên dịch vụ hạ tầng / tên khoá lưu trữ nội bộ; danh sách
 // cụ thể cung cấp khi người dùng hỏi (giữ trong docs/BAO-MAT.md). Google Analytics giữ tên vì liên quan hộp hỏi cookie.
 import type { Metadata } from "next";
+import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
+import { apDungSeo, layNoiDungTrang, ngayHienThi } from "@/lib/noi-dung-trang";
 import Link from "next/link";
 import { Bang, TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 import { DANG_CAP_NHAT, vanHanh } from "@/lib/van-hanh";
 
-export const metadata: Metadata = {
+const META: Metadata = {
   title: "Chính sách quyền riêng tư",
   description: "Hiểu Bản Thân thu gì, lưu ở đâu, bao lâu, gửi cho ai và bạn có quyền gì với dữ liệu cá nhân của mình — theo Luật Bảo vệ dữ liệu cá nhân 2025.",
   alternates: { canonical: "/chinh-sach-rieng-tu" },
 };
 
-export default function ChinhSachRiengTu() {
+const DUONG = "/chinh-sach-rieng-tu";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(META, await layNoiDungTrang(DUONG));
+}
+
+// ND-4: tiêu đề, lời mở đầu, từng mục (theo neo) và ngày hiệu lực sửa được ở CMS — chỉ Quản trị/Chủ biên, phải tích
+// "đã đối chiếu" mỗi lần xuất bản. Ô trống / gỡ xuất bản → chữ trong file này.
+export default async function ChinhSachRiengTu() {
+  const nd = await layNoiDungTrang(DUONG);
   const vh = vanHanh();
   const lienHe = vh.emailDuLieu
     ? <a href={`mailto:${vh.emailDuLieu}`} className="text-gold underline">{vh.emailDuLieu}</a>
@@ -168,8 +179,9 @@ export default function ChinhSachRiengTu() {
   ];
 
   return (
-    <TrangPhapLy nhan="Pháp lý" tieuDe="Chính sách quyền riêng tư" duongDan="/chinh-sach-rieng-tu" muc={muc}
-      moDau={<p>Trang này nói rõ Hiểu Bản Thân thu dữ liệu gì, lưu ở đâu, giữ bao lâu, gửi cho ai và bạn có quyền gì.
-        Mọi điều ghi ở đây khớp với cách hệ thống đang chạy.</p>} />
+    <TrangPhapLy nhan="Pháp lý" tieuDe={nd.dau.h1 ?? "Chính sách quyền riêng tư"} duongDan={DUONG} muc={gopMucCms(muc, nd)}
+      ngayHieuLuc={ngayHienThi(nd.ngayHieuLuc)}
+      moDau={<LoiDanCms nd={nd}>Trang này nói rõ Hiểu Bản Thân thu dữ liệu gì, lưu ở đâu, giữ bao lâu, gửi cho ai và bạn có quyền gì.
+        Mọi điều ghi ở đây khớp với cách hệ thống đang chạy.</LoiDanCms>} />
   );
 }

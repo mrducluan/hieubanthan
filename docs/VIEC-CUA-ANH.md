@@ -421,6 +421,15 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
   5) **Trang đích → Tạo mới**: thêm khối Đầu trang, Thẻ công cụ, Danh sách bài viết, Hỏi đáp, Lời mời → Xuất bản →
      `hieuban.com/su-kien/{slug}`.
   Thấy chỗ nào lỗi: chụp màn hình gửi em. Em đã chạy đúng 5 bước này trên bản sao cục bộ (ảnh trong báo cáo QC).
+- [ ] ND45. (2026-10-19, ND-4/ND-5) Sau khi PR merge, CMS redeploy tự chạy migration `nd_4_5_anh_phap_ly`. Thử ~5 phút:
+  1) **Trang pháp lý** (Trang website → `/dieu-khoan`…): sửa Mục / ngày hiệu lực → chọn "Thay đổi nội dung" + ngày mới
+     → **tích ô "Tôi đã đối chiếu…"** → Xuất bản. Ô tự bỏ tích sau mỗi lần xuất bản (lần sau xác nhận lại). Đổi nội dung
+     chính sách nên hỏi luật sư trước (mục E).
+  2) **Trang kiến thức** (~600 trang): Giao diện website → **Mẫu cụm trang** → chọn cụm (vd "Trang con · Kinh Dịch") →
+     thêm khối (Ảnh, Banner, Nút kêu gọi, Đoạn văn… — gõ `{tieu_de}` để chèn tên trang) → Xuất bản → áp cho cả cụm.
+     Muốn riêng một URL: Trang website → Tạo mới → nhập đường dẫn → chọn "Ẩn khối mẫu" / "Thêm sau" / "Thay".
+  3) **Ảnh**: tải ảnh vào Media (ghi "Mô tả ảnh"), rồi dùng khối **Ảnh** ở bất kỳ trang nào; trang Giới thiệu / Liên hệ /
+     pháp lý chèn ảnh ngay trong Mục. Chữ của trang kiến thức (nghĩa sao, quẻ…) vẫn sửa ở `/quan-tri/tri-thuc` (git).
 - [ ] ND23. (2026-10-14, ND-2/ND-3) Sau khi PR merge: CMS → **Giao diện website → Trang website** → mở một trang (vd `/tu-vi`,
   `/`, `/gioi-thieu`) → sửa Tiêu đề SEO / H1 / Lời dẫn / Đoạn giới thiệu / Hỏi đáp, thêm khối (Banner, Video, Nút kêu gọi…)
   → **Xuất bản** → hieuban.com đổi sau vài giây. Để trống ô nào = chữ cũ trong code; **gỡ xuất bản** = về nguyên bản.

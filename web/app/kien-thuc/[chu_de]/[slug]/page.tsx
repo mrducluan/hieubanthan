@@ -11,6 +11,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { MinhHoa } from "@/components/minh-hoa/MinhHoa";
 import { DongTacGia } from "@/components/kien-thuc/DongTacGia";
 import { GocNhinChuyenGia } from "@/components/kien-thuc/GocNhinChuyenGia";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { CHUYEN_GIA, idChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
 import { CHU_DE, duongTrang, trang, type TrangKienThuc } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
@@ -51,6 +53,8 @@ export default async function Page({ params: thamSo }: Props) {
   if (!kq) notFound();
   const { cd, t } = kq;
   const duong = duongTrang(t.loai, t.slug);
+  // ND-5: khối CMS của mẫu cụm (+ ghi đè riêng URL này) — đặt quanh văn KB, không xen vào giữa.
+  const nd = await layNoiDungTrang(duong, { tieu_de: t.tieu_de, mo_ta: t.mo_ta, ten_chu_de: cd.ten });
   const nhap = t.trang_thai !== "da_duyet";
   const tacGia = [t.tac_gia, t.tham_dinh?.nguoi].find((x) => x && CHUYEN_GIA[x]);
 
@@ -120,6 +124,7 @@ export default async function Page({ params: thamSo }: Props) {
       </header>
 
       <MinhHoa mh={t.minh_hoa} />
+      <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-6" />
 
       <section aria-label="Trả lời nhanh" className="mt-6 rounded-2xl border border-gold/30 bg-gold/5 p-5">
         <p className="eyebrow">Trả lời nhanh</p>
@@ -169,6 +174,7 @@ export default async function Page({ params: thamSo }: Props) {
         </dl>
       </section>
 
+      <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-10" />
       <aside className="glass mt-10 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center">
         <BookOpen className="size-6 shrink-0 text-gold" aria-hidden />
         <p className="flex-1 text-fg-muted">Đọc chung chung chỉ là điểm bắt đầu. Xem con số, lá số của <b className="text-fg">chính bạn</b> — có từng bước tính để tự kiểm.</p>
@@ -189,6 +195,7 @@ export default async function Page({ params: thamSo }: Props) {
         </nav>
       )}
 
+      <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <p className="font-medium text-fg-muted">Nguồn</p>
         <ul className="mt-1 list-disc space-y-1 pl-5">{t.nguon.map((n) => <li key={n}>{n}</li>)}</ul>

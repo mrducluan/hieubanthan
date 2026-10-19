@@ -1,5 +1,7 @@
 // SEO-F — "Tuổi X (nam/nữ) hợp hướng nào?": 92 trang server-render từ engine (mệnh quái Bát trạch, du niên, KB).
 // Cấu trúc GEO: câu hỏi làm tiêu đề · trả lời nhanh · la bàn + bảng 8 hướng · gợi ý bố trí · mốc đầu năm · hỏi đáp.
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { layNoiDungTrang } from "@/lib/noi-dung-trang";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -46,6 +48,7 @@ export default async function Page({ params: thamSo }: Props) {
   const t = await tuoiHuong(params.slug);
   if (!t) notFound();
   const duong = duongTuoi(t.slug);
+  const nd = await layNoiDungTrang(duong, { tieu_de: t.tieu_de });   // ND-5: khối CMS mẫu cụm "Tuổi hợp hướng"
   const khac = t.gioi_tinh === "nam" ? "nu" : "nam";
   const ld = goiLd(
     {
@@ -73,6 +76,7 @@ export default async function Page({ params: thamSo }: Props) {
           {GIOI[t.gioi_tinh]} · năm {t.can_chi} · nạp âm {t.trang_menh ? <Link href={t.trang_menh} className="underline decoration-gold/50 underline-offset-2 hover:text-fg">{t.nap_am.ten}</Link> : t.nap_am.ten} ({t.nap_am.hanh}) · mệnh quái <b className="text-gold">{t.menh_quai.quai}</b> · {t.menh_quai.nhom}
         </p>
       </header>
+      <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-6" />
 
       <section aria-label="Trả lời nhanh" className="mt-6 rounded-2xl border border-gold/30 bg-gold/5 p-5">
         <p className="eyebrow">Trả lời nhanh</p>
@@ -127,6 +131,7 @@ export default async function Page({ params: thamSo }: Props) {
         </dl>
       </section>
 
+      <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-10" />
       <aside className="glass mt-10 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center">
         <Compass className="size-6 shrink-0 text-gold" aria-hidden />
         <p className="flex-1 text-fg-muted">Tính theo <b className="text-fg">ngày sinh chính xác</b> của bạn (tự xét Lập xuân/Tết), đo hướng nhà bằng la bàn điện thoại, xem bố cục cả nhà.</p>
@@ -147,6 +152,7 @@ export default async function Page({ params: thamSo }: Props) {
         </ul>
       </nav>
 
+      <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <p>Nguồn: {t.nguon}. Lời giải thích do Ban biên tập Hiểu Bản Thân biên soạn.</p>
         {t.luu_y.filter(Boolean).map((l) => <p key={l} className="mt-2">{l}</p>)}

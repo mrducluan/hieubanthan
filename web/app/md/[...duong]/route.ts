@@ -5,6 +5,14 @@ import { mdChuDe, mdDsTuoi, mdThuVien, mdTrang, mdTuDien, mdTuoi, TEN_MANG, traM
 import { taoLlmsTxt } from "@/lib/llms";
 import { baiCms, tinhNangCms } from "@/lib/cms";
 import { htmlSangMd, locHtmlCms } from "@/lib/cms-html";
+import { layNoiDungTrang, mdKhoi } from "@/lib/noi-dung-trang";
+
+/** ND-5: chữ khối CMS (mẫu cụm + ghi đè) nối vào cuối bản Markdown — cùng nội dung với trang HTML. */
+async function voiKhoi(md: string, duong: string, bien: Record<string, string>) {
+  const nd = await layNoiDungTrang(duong, bien);
+  const them = mdKhoi([...nd.khoi.tren, ...nd.khoi.duoi, ...nd.khoi.cuoi]);
+  return them ? `${md.trimEnd()}\n\n${them}\n` : md;
+}
 
 export const revalidate = 21600;
 
@@ -21,7 +29,7 @@ export async function GET(_req: Request, { params: thamSo }: { params: Promise<{
   if (p[0] === "phong-thuy" && p.length === 2) {
     if (p[1] === "huong-hop-tuoi") return traMd(mdDsTuoi(await dsTuoiHuong()), "/phong-thuy/huong-hop-tuoi");
     const t = await tuoiHuong(p[1]!);
-    return t ? traMd(mdTuoi(t), `/phong-thuy/${p[1]}`) : KHONG_CO();
+    return t ? traMd(await voiKhoi(mdTuoi(t), `/phong-thuy/${p[1]}`, { tieu_de: t.tieu_de }), `/phong-thuy/${p[1]}`) : KHONG_CO();
   }
   if (p[0] === "blog" && p.length === 2) {
     // Bài CMS: bản Markdown cùng nội dung trang HTML (tắt được ở CMS → Tính năng nội dung).
@@ -46,5 +54,6 @@ export async function GET(_req: Request, { params: thamSo }: { params: Promise<{
     return md ? traMd(md, `/kien-thuc/${khoa}`) : KHONG_CO();
   }
   const t = await trang(cd.loai, slug);
-  return t ? traMd(mdTrang(t), `/kien-thuc/${khoa}/${slug}`) : KHONG_CO();
+  return t ? traMd(await voiKhoi(mdTrang(t), `/kien-thuc/${khoa}/${slug}`, { tieu_de: t.tieu_de, mo_ta: t.mo_ta, ten_chu_de: cd.ten }),
+    `/kien-thuc/${khoa}/${slug}`) : KHONG_CO();
 }

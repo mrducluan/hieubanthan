@@ -1,15 +1,15 @@
-// ND-0 — lớp phủ nội dung theo URL: gộp URL > mẫu cụm > mặc định code, thay biến (thoát HTML), sổ trang đủ mọi URL
+// ND-0 — lớp phủ nội dung theo URL: gộp URL > mẫu cụm > mặc định code, thay biến (chữ thuần), sổ trang đủ mọi URL
 // tĩnh của sitemap, chữ mặc định trong sổ trùng chữ đang hiện trên trang công cụ, route sổ trang + webhook đòi bí mật.
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { test, expect } from "@playwright/test";
-import { apDungSeo, gopNoiDung, layNoiDungTrang, metaMacDinh, thayBien, duongHopLe, type KhoiCms } from "../lib/noi-dung-trang";
+import { apDungSeo, gopNoiDung, layNoiDungTrang, mdKhoi, metaMacDinh, ngayHienThi, thayBien, duongHopLe, type KhoiCms } from "../lib/noi-dung-trang";
+import { gopMucCms } from "../components/cms/DauTrangCms";
 import { khopMauCum, MAU_CUM, mucSoTrang, SO_TRANG } from "../lib/so-trang";
 import { CHU_DE } from "../lib/kien-thuc";
 
-test("thay biến: thoát HTML giá trị, biến lạ giữ nguyên chữ", () => {
-  expect(thayBien("Xem {tieu_de} và {la}", { tieu_de: `<b>"Tử vi" & 'Mệnh'</b>` }))
-    .toBe("Xem &lt;b&gt;&quot;Tử vi&quot; &amp; &#39;Mệnh&#39;&lt;/b&gt; và {la}");
+test("thay biến: chữ thuần (nơi hiển thị tự thoát — không thoát hai lần), biến lạ giữ nguyên chữ", () => {
+  expect(thayBien("Xem {tieu_de} và {la}", { tieu_de: `"Tử vi" & 'Mệnh'` })).toBe(`Xem "Tử vi" & 'Mệnh' và {la}`);
   expect(thayBien("{constructor}", {})).toBe("{constructor}");
 });
 
@@ -39,7 +39,7 @@ test("gộp khối: mẫu cụm áp cho trang KB; ghi đè 'thay' / 'thêm sau' 
   const mau = { khoi_tren: [k("m1")], khoi_duoi: [k("m2")], khoi_cuoi: [k("m3"), k("cu", { blockType: "banner", den_ngay: "2020-01-01T00:00:00Z" })] };
   const bien = { tieu_de: "Tử Vi <Mệnh>" };
   const chiMau = gopNoiDung("/kien-thuc/sao-cung/tu-vi-cung-menh", {}, null, mau, bien);
-  expect(chiMau.khoi.tren.map((x) => x.noi_dung)).toEqual(["Về Tử Vi &lt;Mệnh&gt; m1"]);
+  expect(chiMau.khoi.tren.map((x) => x.noi_dung)).toEqual(["Về Tử Vi <Mệnh> m1"]);
   expect(chiMau.khoi.cuoi.map((x) => x.id)).toEqual(["m3"]);   // banner hết hạn bị bỏ
   const ghiDe = gopNoiDung("/kien-thuc/sao-cung/tu-vi-cung-menh", {}, {
     khoi_tren: [k("r1")], khoi_duoi: [k("r2")], khoi_cuoi: [],
@@ -122,4 +122,43 @@ test("ND-2: sổ trang — công cụ HL/TDG đọc giới thiệu từ noi-dung
   }
   expect(mucSoTrang("/ban-than")!.o).toEqual(["seo", "khoi_duoi", "khoi_cuoi"]);
   expect(mucSoTrang("/tai-khoan")!.o).toEqual(["seo"]);
+});
+
+test("ND-5: bản Markdown nhận chữ của khối CMS (văn bản, ghi chú, trích dẫn, banner, hỏi đáp); khối không chữ bị bỏ", () => {
+  const md = mdKhoi([
+    { blockType: "van_ban", tieu_de: "Đọc thêm", noi_dung: "Đoạn một." },
+    { blockType: "ghi_chu", tieu_de: "Tự soi", noi_dung: "Câu hỏi\ncho bạn." },
+    { blockType: "trich_dan", cau: "Thiên hành kiện.", nguon: "Chu Dịch" },
+    { blockType: "banner", tieu_de: "Mời bạn", mo_ta: "Mô tả banner." },
+    { blockType: "hoi_dap", ds: [{ cau_hoi: "Hỏi?", tra_loi: "Đáp." }] },
+    { blockType: "video", url: "x", tieu_de: "" }, { blockType: "nut_moi", chu: "Bấm", link: "/x" },
+  ]);
+  expect(md).toBe("## Đọc thêm\n\nĐoạn một.\n\n> **Tự soi** — Câu hỏi cho bạn.\n\n> Thiên hành kiện.\n>\n> — Chu Dịch\n\n**Mời bạn**\n\nMô tả banner.\n\n### Hỏi?\n\nĐáp.");
+  expect(mdKhoi([])).toBe("");
+});
+
+test("ND-4: ngày hiệu lực — chữ trong code giữ nguyên, ngày CMS (ISO 12:00 UTC) ra dd/mm/yyyy, rác → null", () => {
+  expect(ngayHienThi("08/10/2026")).toBe("08/10/2026");
+  expect(ngayHienThi("2026-11-01T12:00:00.000Z")).toBe("01/11/2026");
+  expect(ngayHienThi(null)).toBeNull();
+  expect(ngayHienThi("không phải ngày")).toBeNull();
+  const md = mucSoTrang("/dieu-khoan")!;
+  const nd = gopNoiDung("/dieu-khoan", md.mac_dinh, { ngay_hieu_luc: "2026-11-01T12:00:00.000Z" }, null);
+  expect(ngayHienThi(nd.ngayHieuLuc)).toBe("01/11/2026");
+});
+
+test("ND-3/ND-4: mục theo neo — CMS sửa tiêu đề/thân đúng neo, mục không sửa giữ chữ code, neo mới có thân thêm cuối; CMS trống → y nguyên", () => {
+  const muc = [{ id: "a", tieuDe: "A", noiDung: "thân A" }, { id: "b", tieuDe: "B", noiDung: "thân B" }];
+  const rong = gopNoiDung("/dieu-khoan", {}, null, null);
+  expect(gopMucCms(muc, rong)).toBe(muc);
+  const nd = gopNoiDung("/dieu-khoan", {}, { muc: [
+    { neo: "b", tieu_de: "B mới", noi_dung_html: "<p>Thân B mới</p><script>x()</script>" },
+    { neo: "c", tieu_de: "C", noi_dung_html: "<p>Thân C</p>" }, { neo: "d", tieu_de: "D không thân", noi_dung_html: "" },
+  ] }, null);
+  const ra = gopMucCms(muc, nd);
+  expect(ra.map((m) => [m.id, m.tieuDe])).toEqual([["a", "A"], ["b", "B mới"], ["c", "C"]]);
+  expect(ra[0]!.noiDung).toBe("thân A");
+  const html = (ra[1]!.noiDung as { props: { dangerouslySetInnerHTML: { __html: string } } }).props.dangerouslySetInnerHTML.__html;
+  expect(html).toContain("Thân B mới");
+  expect(html).not.toContain("script");
 });

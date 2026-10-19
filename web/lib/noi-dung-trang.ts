@@ -2,7 +2,8 @@
 //   tài liệu "Trang website" của chính URL (ô có nội dung) > "Mẫu cụm trang" (chỉ khối) > chữ mặc định trong code (lib/so-trang.ts).
 // Luôn trả đủ ô, KHÔNG bao giờ null: CMS chưa nối / lỗi / chậm (hạn 1,5 giây) → toàn bộ mặc định code.
 // ND-2 nối trang công cụ, ND-3 trang tĩnh + chủ đề; pháp lý (ND-4) và trang KB (ND-5) chưa đọc.
-// Biến mẫu cụm {tieu_de}…: web thay bằng giá trị engine trả cho đúng trang, THOÁT HTML giá trị trước khi thay, biến lạ giữ nguyên.
+// Biến mẫu cụm {tieu_de}…: web thay bằng giá trị engine trả cho đúng trang, biến lạ giữ nguyên chữ. KHÔNG thoát HTML ở đây:
+// mọi khối CMS hiện dạng văn bản thuần (React tự thoát ký tự) — thoát hai lần sẽ lộ "&amp;" trên trang (ND-5).
 import type { Metadata } from "next";
 import { anhCms, dangHien, duongLienKet, goiCms, chuoiTruyVan, type AnhCms, type LienKetCms } from "@/lib/cms";
 import { catMoTa, metaTrang, tieuDeSeo } from "@/lib/seo";
@@ -46,11 +47,9 @@ export const duongHopLe = (v: unknown): string | null =>
   typeof v === "string" && v.length <= 300 && TRONG_SITE.test(v) ? v : null;
 export const theTrang = (duong: string) => `trang:${duong}`;
 
-const thoat = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
-
-/** Thay {bien} bằng giá trị (đã thoát HTML). Biến không có trong `bien` giữ nguyên chữ. */
+/** Thay {bien} bằng giá trị (chữ thuần — nơi hiển thị tự thoát). Biến không có trong `bien` giữ nguyên chữ. */
 export function thayBien(s: string, bien: Record<string, string>): string {
-  return s.replace(/\{([a-z_]+)\}/g, (m, k: string) => (Object.hasOwn(bien, k) ? thoat(bien[k]!) : m));
+  return s.replace(/\{([a-z_]+)\}/g, (m, k: string) => (Object.hasOwn(bien, k) ? bien[k]! : m));
 }
 /** Thay biến trong mọi chuỗi của một khối (đệ quy), bỏ qua đường dẫn / mã. */
 function thayBienKhoi<T>(v: T, bien: Record<string, string>, khoa = ""): T {
@@ -157,4 +156,32 @@ export const gioiThieuTu = (nd: NoiDungTrang) => ({
 export function metaMacDinh(duong: string): Metadata {
   const m = mucSoTrang(duong)?.mac_dinh ?? {};
   return metaTrang({ tieuDe: m.tieu_de_seo ?? "", moTa: m.mo_ta_seo ?? "", duong });
+}
+
+const mdChu = (v: unknown) => (typeof v === "string" ? v.trim() : "");
+/** Chữ của các khối CMS dạng Markdown — bản .md của trang cùng nội dung với HTML (SEO-D). Khối không có chữ bị bỏ qua. */
+export function mdKhoi(ds: KhoiCms[]): string {
+  return ds.map((k) => {
+    const td = mdChu(k.tieu_de), nd = mdChu(k.noi_dung), mo = mdChu(k.mo_ta);
+    switch (k.blockType) {
+      case "van_ban": return [td && `## ${td}`, nd].filter(Boolean).join("\n\n");
+      case "ghi_chu": return nd && `> ${td ? `**${td}** — ` : ""}${nd.replace(/\n+/g, " ")}`;
+      case "trich_dan": return mdChu(k.cau) && `> ${mdChu(k.cau)}\n>\n> — ${mdChu(k.nguon)}`;
+      case "banner": case "loi_moi": return [td && `**${td}**`, mo].filter(Boolean).join("\n\n");
+      case "keu_goi": return mdChu(k.loi_moi);
+      case "anh": return mdChu(k.chu_thich);
+      case "hoi_dap": return ((k.ds as { cau_hoi?: string; tra_loi?: string }[] | undefined) ?? [])
+        .map((h) => `### ${mdChu(h.cau_hoi)}\n\n${mdChu(h.tra_loi)}`).join("\n\n");
+      default: return "";
+    }
+  }).filter(Boolean).join("\n\n");
+}
+
+/** Ngày hiệu lực hiển thị dd/mm/yyyy: chữ trong code đã đúng dạng; ngày CMS (ISO, ô "dayOnly" lưu 12:00 UTC) đổi theo UTC. */
+export function ngayHienThi(v: string | null): string | null {
+  if (!v || /^\d{2}\/\d{2}\/\d{4}$/.test(v)) return v;
+  const d = new Date(v);
+  if (Number.isNaN(d.getTime())) return null;
+  const p = (n: number) => String(n).padStart(2, "0");
+  return `${p(d.getUTCDate())}/${p(d.getUTCMonth() + 1)}/${d.getUTCFullYear()}`;
 }
