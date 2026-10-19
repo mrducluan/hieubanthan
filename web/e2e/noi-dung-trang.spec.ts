@@ -94,9 +94,12 @@ for (const m of SO_TRANG.filter((t) => t.nhom === "cong_cu" && t.mac_dinh.doan))
 }
 
 test("route sổ trang + webhook làm mới từ chối khi thiếu/sai bí mật", async ({ request }) => {
-  expect((await request.get("/api/so-trang")).status()).toBe(401);
-  expect((await request.get("/api/so-trang", { headers: { "x-cms-bi-mat": "sai" } })).status()).toBe(401);
-  expect((await request.post("/api/cms/lam-moi", { data: { duong: "/tu-vi" } })).status()).toBe(401);
+  // web e2e không đặt CMS_WEBHOOK_SECRET → 503 + mã "web_chua_dat" (sai bí mật → 401: cms/e2e "Đồng bộ ngay")
+  const r = await request.get("/api/so-trang", { headers: { "x-cms-bi-mat": "sai" } });
+  expect(r.status()).toBe(503);
+  expect((await r.json()).ma).toBe("web_chua_dat");
+  expect((await request.get("/api/so-trang")).status()).toBe(503);
+  expect((await request.post("/api/cms/lam-moi", { data: { duong: "/tu-vi" } })).status()).toBe(503);
 });
 
 test("ND-2: CMS trống → metadata y nguyên bản code; ô SEO CMS phủ tiêu đề, mô tả, ảnh /og vẽ lại", () => {
