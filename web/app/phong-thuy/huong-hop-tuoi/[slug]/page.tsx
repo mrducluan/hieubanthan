@@ -57,7 +57,8 @@ export default async function Page({ params: thamSo }: Props) {
       mainEntityOfPage: urlDayDu(duong), image: urlDayDu(`/og?tieu_de=${encodeURIComponent(t.tieu_de)}`),
       author: { "@type": "Organization", name: TEN_SITE, url: siteUrl() }, publisher: { "@id": `${siteUrl()}/#to-chuc` },
       isAccessibleForFree: true, about: ["Phong thuỷ Bát trạch", `Mệnh ${t.menh_quai.quai}`], citation: t.nguon,
-      abstract: t.tra_loi_nhanh, creativeWorkStatus: t.trang_thai === "da_duyet" ? "Published" : "Draft",
+      // BM-1: trang công khai không tự khai "nháp" — chỉ ghi Published khi đã thẩm định (như TrangKienThuc).
+      abstract: t.tra_loi_nhanh, ...(t.trang_thai === "da_duyet" ? { creativeWorkStatus: "Published" } : {}),
     },
     ldHoiDap(t.hoi_dap),
     ldDuongDan([

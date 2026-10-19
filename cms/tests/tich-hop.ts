@@ -8,6 +8,8 @@ import { MENU_MAC_DINH } from "../src/globals/DieuHuong";
 import { vaiTro } from "../src/access";
 import { buocHienTai, docCookie, maTotp, tuBase32 } from "../src/lib/totp";
 import { dongBoSoTrang, kiemSoTrang } from "../src/lib/so-trang";
+import { nhapBaiNotFair } from "../src/lib/notfair";
+import sharp from "sharp";
 
 const chu = (text: string) => ({ type: "text", text, format: 0, detail: 0, mode: "normal", style: "", version: 1 });
 const doan = (...children: unknown[]) =>
@@ -33,7 +35,7 @@ async function nem(f: () => Promise<unknown>, khop: RegExp) {
 }
 
 const payload: Payload = await getPayload({ config });
-const tao: { collection: "bai-viet" | "bien-tap-vien" | "tac-gia" | "noi-dung-trang" | "mau-cum"; id: number | string }[] = [];
+const tao: { collection: "bai-viet" | "bien-tap-vien" | "tac-gia" | "noi-dung-trang" | "mau-cum" | "media"; id: number | string }[] = [];
 const dau = `tt${Date.now().toString(36)}`;
 
 const nguoi = async (vai_tro: string) => {
@@ -665,6 +667,70 @@ await ca("QH-URL migration: chữ CMS của URL cũ đi theo URL silo (bản ch�
   assert.equal((await duong(b)).duong, `/phong-thuy/tuoi-${dau}`);
   assert.equal((await duong(c2)).duong, `/tu-vi/sao-o-cung/${dau}-c`);      // c chiếm đích cũ → c2 ở lại
   await up(args);   // trả DB thử về trạng thái sau migration
+});
+
+await ca("BLOG-3 nhập bài NotFair: nháp cùng slug, ảnh vào Thư viện ảnh, giữ link đối tác; chỉ Chủ biên; không nhập trùng", async () => {
+  // Giả API NotFair + máy chủ ảnh bằng cách thay fetch (không gọi mạng thật).
+  const png = await sharp({ create: { width: 1600, height: 900, channels: 3, background: "#334" } }).png().toBuffer();
+  const slug = `${dau}-xem-hop-doi-đúng-cách`;
+  const bai = { id: 1, title: "Xem hợp đôi: đọc sao cho tỉnh táo", slug, meta_description: "Cách đọc hợp đôi.", tags: ["hop-doi"],
+    image_url: "https://notfair.co/api/seo/image/bia.png", reading_time_minutes: 5, published_at: "2026-10-17T00:00:00Z", created_at: "2026-10-17T00:00:00Z",
+    content_html: `<h1>Trong bài</h1><h2 id="a">Phần A</h2><p>Đọc <strong>tỉnh táo</strong>, xem <a href="https://doi-tac.vn/bai">đối tác</a>.</p>
+      <figure><img src="https://notfair.co/api/seo/image/so-do.png" alt="Sơ đồ"><figcaption>Hình 1</figcaption></figure>
+      <img src="https://la.example/x.png" alt="ảnh lạ"><ul><li>một</li><li>hai</li></ul>
+      <p class="nf-attribution">Bài trao đổi qua NotFair.</p>` };
+  const fetchGoc = globalThis.fetch;
+  const cu = { url: process.env.NOTFAIR_SEO_API_URL, khoa: process.env.NOTFAIR_SEO_API_KEY };
+  process.env.NOTFAIR_SEO_API_URL = "https://api.notfair.test/content";
+  process.env.NOTFAIR_SEO_API_KEY = "nfbl_thu";
+  globalThis.fetch = (async (dau_vao: string | URL | Request, init?: RequestInit) => {
+    const u = String(dau_vao instanceof Request ? dau_vao.url : dau_vao);
+    if (u.startsWith("https://api.notfair.test/content")) {
+      assert.equal(new Headers(init?.headers).get("authorization"), "Bearer nfbl_thu");
+      const q = new URL(u).searchParams.get("slug");
+      return Response.json(q === null ? { posts: [bai] } : q === slug ? { post: bai } : {}, { status: q && q !== slug ? 404 : 200 });
+    }
+    if (u.startsWith("https://notfair.co/api/seo/image/")) return new Response(png, { headers: { "content-type": "image/png" } });
+    if (u.startsWith("https://la.example/")) throw new Error("không được gọi miền lạ");
+    return fetchGoc(dau_vao as never, init);
+  }) as typeof fetch;
+  try {
+    const req = { payload, user: chuBien } as never;
+    const kq = await nhapBaiNotFair(payload, req, slug);
+    tao.push({ collection: "bai-viet", id: kq.id });
+    assert.equal(kq.da_co, false);
+    assert.deepEqual(kq.anh_loi, ["https://la.example/x.png"]);
+    const d = await payload.findByID({ collection: "bai-viet", id: kq.id, overrideAccess: true, draft: true, depth: 1 }) as unknown as Record<string, unknown>;
+    for (const m of [d.anh_bia as { id: number }]) tao.push({ collection: "media", id: m.id });
+    assert.equal(d.slug, slug, "giữ nguyên slug NotFair (có dấu)");
+    assert.equal(d._status, "draft");
+    assert.equal(d.nguon_goc, "notfair");
+    assert.deepEqual(d.notfair_lien_ket, ["https://doi-tac.vn/bai"]);
+    assert.equal((d.anh_bia as { alt: string }).alt, bai.title);
+    const html = String(d.noi_dung_html);
+    assert.match(html, /<h2[^>]*>Trong bài<\/h2>/);
+    assert.match(html, /<a href="https:\/\/doi-tac\.vn\/bai"[^>]*>đối tác<\/a>/);
+    assert.match(html, /<figure><img [^>]*alt="Sơ đồ"[^>]*><figcaption>Hình 1<\/figcaption><\/figure>/);
+    assert.match(html, /<ul[ >]/);
+    assert.match(html, /Bài trao đổi qua NotFair\./);
+    const up = ((d.noi_dung as { root: { children: { type: string; value: unknown }[] } }).root.children).filter((c) => c.type === "upload");
+    assert.equal(up.length, 1);
+    tao.push({ collection: "media", id: (up[0]!.value as { id: number }).id ?? up[0]!.value as number });
+    // Gọi lại → trả bài đã có, không tạo trùng.
+    const lai = await nhapBaiNotFair(payload, req, slug);
+    assert.equal(lai.da_co, true);
+    assert.equal(String(lai.id), String(kq.id));
+    // Kiểm định: xoá link đối tác → mục "backlink_notfair" báo lỗi.
+    const { kiemDinhBai } = await import("../src/kiem-dinh/kiem-dinh");
+    const muc = kiemDinhBai({ ...d, noi_dung: goc(doan(chu("Hết link."))) } as never).muc.find((m) => m.ma === "backlink_notfair");
+    assert.equal(muc?.muc_do, "loi");
+    assert.equal(kiemDinhBai(d as never).muc.find((m) => m.ma === "backlink_notfair")?.muc_do, "dat");
+  } finally {
+    globalThis.fetch = fetchGoc;
+    process.env.NOTFAIR_SEO_API_URL = cu.url; process.env.NOTFAIR_SEO_API_KEY = cu.khoa;
+    if (cu.url === undefined) delete process.env.NOTFAIR_SEO_API_URL;
+    if (cu.khoa === undefined) delete process.env.NOTFAIR_SEO_API_KEY;
+  }
 });
 
 // dọn

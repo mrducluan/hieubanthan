@@ -32,7 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: tieuDeSeo(tieuDe),
       description: moTa,
-      alternates: { canonical: b.canonical || duong, types: { "text/markdown": `${duong}.md` } },
+      // Bản .md chỉ khai khi route /md trả được (tắt ban_markdown hoặc noindex → route 404, không khai link chết).
+      alternates: { canonical: b.canonical || duong,
+        ...((await tinhNangCms()).ban_markdown && !b.noindex ? { types: { "text/markdown": `${duong}.md` } } : {}) },
       ...(nhap || b.noindex ? { robots: { index: false, follow: !nhap } } : {}),
       openGraph: {
         type: "article", title: tieuDe, description: moTa, url: duong, locale: "vi_VN", siteName: TEN_SITE,
@@ -85,7 +87,10 @@ export default async function Page({ params }: Props) {
           image: p.image_url,
           inLanguage: "vi-VN",
           datePublished: ngay,
+          dateModified: ngay,
           mainEntityOfPage: urlDayDu(duong),
+          // BM-1/EEAT-1: bài trao đổi không do chuyên gia viết → tác giả là ban biên tập (tổ chức), không ghi tên người.
+          author: { "@type": "Organization", name: `Ban biên tập ${TEN_SITE}`, url: siteUrl() },
           publisher: { "@id": `${siteUrl()}/#to-chuc` },
           isPartOf: { "@id": `${siteUrl()}/#website` },
           ...(p.tags.length ? { keywords: p.tags.join(", ") } : {}),

@@ -41,7 +41,7 @@ export default async function Page({ params: thamSo }: Props) {
     {
       "@type": "Article", "@id": `${urlDayDu(duong)}#bai`, headline: m.tieu_de, description: m.mo_ta, inLanguage: "vi-VN",
       mainEntityOfPage: urlDayDu(duong), author: { "@type": "Organization", name: TEN_SITE, url: siteUrl() },
-      publisher: { "@id": `${siteUrl()}/#to-chuc` }, isAccessibleForFree: true, creativeWorkStatus: "Draft",
+      publisher: { "@id": `${siteUrl()}/#to-chuc` }, isAccessibleForFree: true,
       about: "Tử vi Đẩu Số", articleSection: m.buoc.map((b) => b.tieu_de),
     },
     ldDuongDan([

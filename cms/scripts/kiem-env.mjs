@@ -2,7 +2,7 @@
 // Việt (Payload chỉ báo "missing secret key"). CHỈ in TÊN biến + độ dài giá trị, KHÔNG BAO GIỜ in giá trị.
 const BAT_BUOC = ["DATABASE_URI", "PAYLOAD_SECRET", "CMS_URL", "WEB_URL"];
 const NEN_CO = ["CMS_EMAIL_QUAN_TRI", "CMS_WEBHOOK_SECRET", "CMS_PREVIEW_SECRET", "CRON_SECRET",
-  "S3_BUCKET", "S3_ENDPOINT", "S3_REGION", "S3_ACCESS_KEY_ID", "S3_SECRET_ACCESS_KEY", "S3_PUBLIC_URL"];
+  "S3_BUCKET", "S3_ENDPOINT", "S3_REGION", "S3_ACCESS_KEY_ID", "S3_SECRET_ACCESS_KEY", "S3_PUBLIC_URL", "NOTFAIR_SEO_API_KEY"];
 
 const chuan = (s) => s.toUpperCase().replace(/[^A-Z0-9]/g, "");
 const tenCo = Object.keys(process.env);

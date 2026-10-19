@@ -18,7 +18,7 @@ function nguonAnhHopLe(): string[] {
 }
 
 const boDau = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[đĐ]/g, "d").toLowerCase();
-const idTu = (s: string) => boDau(s).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "muc";
+export const idTu = (s: string) => boDau(s).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "muc";
 const giaiMa = (s: string) => s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"").replace(/&#39;/g, "'");
 
 export function locHtmlCms(html: string | null | undefined): { html: string; mucLuc: MucLucCms[] } {

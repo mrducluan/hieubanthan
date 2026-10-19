@@ -275,6 +275,11 @@ export interface BaiViet {
   diem_kiem_dinh?: number | null;
   ghi_chu_kiem_dinh?: string | null;
   slug_cu?: string[] | null;
+  /**
+   * Bài trao đổi: giữ nguyên các link của đối tác và dòng ghi nguồn cuối bài. Đường dẫn không đổi.
+   */
+  nguon_goc?: ('cms' | 'notfair') | null;
+  notfair_lien_ket?: string[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1606,6 +1611,8 @@ export interface BaiVietSelect<T extends boolean = true> {
   diem_kiem_dinh?: T;
   ghi_chu_kiem_dinh?: T;
   slug_cu?: T;
+  nguon_goc?: T;
+  notfair_lien_ket?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

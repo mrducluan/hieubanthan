@@ -31,6 +31,7 @@ import { KiemDinh as KiemDinh_8d3763f0a1d973a34443ca19f1ef8f35 } from '../../../
 import { GoiYLienKet as GoiYLienKet_f9c18e7e3ccf0c1b2769d570d2a54d2d } from '../../../components/GoiYLienKet'
 import { TroLyAI as TroLyAI_50e4553feb35a4b92324293ffe2fb1e9 } from '../../../components/TroLyAI'
 import { SlugField as SlugField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
+import { NhapNotFair as NhapNotFair_fa8ddee3b4e347f6e70af64650e1cd37 } from '../../../components/NhapNotFair'
 import { XemTruocKb as XemTruocKb_8b7869676568a84cf1d2960e5c88576f } from '../../../components/XemTruocKb'
 import { DongBoSoTrang as DongBoSoTrang_6df712906f07a37a296a3fd100cefec6 } from '../../../components/DongBoSoTrang'
 import { NhanLienKet as NhanLienKet_dd6e8d76a5866e3a11a40f1bc002464e } from '../../../components/NhanDong'
@@ -79,6 +80,7 @@ export const importMap = {
   "/components/GoiYLienKet#GoiYLienKet": GoiYLienKet_f9c18e7e3ccf0c1b2769d570d2a54d2d,
   "/components/TroLyAI#TroLyAI": TroLyAI_50e4553feb35a4b92324293ffe2fb1e9,
   "@payloadcms/next/client#SlugField": SlugField_2b8867833a34864a02ddf429b0728a40,
+  "/components/NhapNotFair#NhapNotFair": NhapNotFair_fa8ddee3b4e347f6e70af64650e1cd37,
   "/components/XemTruocKb#XemTruocKb": XemTruocKb_8b7869676568a84cf1d2960e5c88576f,
   "/components/DongBoSoTrang#DongBoSoTrang": DongBoSoTrang_6df712906f07a37a296a3fd100cefec6,
   "/components/NhanDong#NhanLienKet": NhanLienKet_dd6e8d76a5866e3a11a40f1bc002464e,
