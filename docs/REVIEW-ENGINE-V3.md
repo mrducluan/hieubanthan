@@ -1,0 +1,77 @@
+# Review bản "Neuro-Symbolic 3-Layer Engine V3" (Google Drive, 2026-10-19)
+
+Chủ dự án gửi 10 tệp trong thư mục Drive `HieuBan_NeuroSymbolic_Engine_V3`: `01`–`07`, `09` (SQL), `08_numerology_engine.service.ts`
+và `CLAUDE_CODE_UPGRADE_SPEC.md`, kèm yêu cầu chạy 8 tệp SQL vào PostgreSQL rồi chép tệp service vào backend.
+Tài liệu này ghi kết quả review: so V3 với engine thần số đang chạy, liệt kê lỗi, và nói phần nào đã đưa vào sản phẩm (TS-NOIDAU).
+
+## 1. Kết luận
+
+**Không chạy 8 tệp SQL và không chép tệp service.** Lý do, xếp theo mức nặng:
+
+1. **Đi ngược kiến trúc bất biến trong CLAUDE.md.** V3 đặt phép tính (Pitago, Chaldea, Kabbalah, biểu đồ, nhịp) trong
+   PL/pgSQL. CLAUDE.md quy định tầng CALC là Python thuần, tất định, có golden test, và "engine không biết Supabase tồn
+   tại". Hai bộ máy tính song song (Python + SQL) sẽ lệch nhau (xem mục 3) và người dùng thấy hai con số khác nhau.
+2. **Vi phạm quyền riêng tư đã chốt.** `user_feedback_logs` lưu ngày sinh + họ tên đã chuẩn hoá + toàn bộ hồ sơ số;
+   `user_episodic_memories` lưu "ký ức" theo `user_id`. CLAUDE.md: không lưu luận giải gắn user_id; nhật ký hỏi
+   không có user_id / tên / ngày sinh (quyết định 2026-09-30; NĐ 13/2023, Luật BVDLCN 91/2025).
+3. **Kabbalah đã bị loại có lý do** (TS-PHAI 2026-10-13: Kabbalah chỉ dựa tên Hebrew). Bảng của V3 (A–I = 1–9,
+   J–R = 10–90, S–Z = 100–800) là gematria tự chế trên chữ Latin, Sephirah = `(tổng + ngày + tháng + năm) mod 10` —
+   không có nguồn, không đối chiếu được.
+4. **Phụ thuộc và hạ tầng mới chưa duyệt:** extension `vector` (CMS-4 đã chốt không pgvector), gói npm `pg`, kết nối
+   Postgres trực tiếp từ backend (web hiện chỉ đi qua Supabase + engine).
+5. **Bộ tệp chưa chạy được** (mục 2): `03` hỏng khoá ngoại ngay khi chạy, `08` gọi hàm không tồn tại.
+
+## 2. Lỗi trong từng tệp
+
+| Tệp | Lỗi |
+|---|---|
+| 01 | Đường đời tính kiểu "rút từng phần, bỏ số cái rồi cộng" — sản phẩm dùng "cộng mọi chữ số" (đã khoá golden) → khác số với nhiều ngày sinh; vd 24/10/1988: sản phẩm ra **33**, V3 ra 6 + 1 + 8 = 15 → **6**. Đỉnh cao giữ số cái (11/22/33) — sản phẩm rút về 1–9. Quy tắc Y "nguyên âm khi chữ trước không phải nguyên âm" khác quy tắc Y theo âm tiết đã khoá (spec 2026-08-15). Chaldea không tách số kép 10–52 như Cheiro (lấy tổng thô, vd 60 vẫn để 60). |
+| 02 | Chỉ có 2 nút (số 1, 2 Pitago); không có `source_id`/`school_id` bắt buộc cho bảng nghĩa. |
+| 03 | `INSERT graph_edges` trỏ `PYT_KARMIC_19_1`, `CHA_COMP_19_1` — hai nút không có trong `02` → **lỗi khoá ngoại, tệp dừng**. `fn_resolve_3school_matrix`: `SELECT array_append(...) INTO` trên truy vấn không có dòng (chưa có nút SEPHIRAH) gán mảng thành NULL → mất cả 5 nút đã kích hoạt → luôn trả rỗng. |
+| 04 | `search_tsv` không bao giờ được điền (không có trigger), `embedding` NULL → điểm hybrid luôn 0 → "khớp ý định" trả câu bất kỳ. Chỉ 1 ý định. |
+| 05 | Phụ thuộc 03/04 nên gói context không có nút/ý định thật. |
+| 06 | Lưu tên + ngày sinh (mục 1.2). Đạt 5 lần thì báo `AUTO_PROMOTED…` nhưng không tạo luật nào; ON CONFLICT không nối ghi chú mới. Tự "thăng" luật từ phản hồi người dùng mà không người duyệt — trái quy trình KB (người duyệt). |
+| 07 | `strength_arrows`, `empty_arrows` luôn là mảng rỗng (chưa viết). `interpretation_cache` lưu văn trả lời theo hồ sơ 90 ngày. |
+| 08 | Gọi `fn_assemble_llm_context_payload_v2` — không có trong bộ tệp (05 chỉ có bản không hậu tố; spec nói `…_v3_ultimate`, cũng không có). Năm 2026 viết cứng; tham số `callLlmFn` không dùng. |
+| 09 | `user_episodic_memories` theo user_id (mục 1.2). "Radar tháng" ra lệnh và dự báo ("chốt sale lớn", "tránh đầu tư lướt sóng", "rà soát sức khoẻ") — trái quy tắc không dự báo sự kiện / không phán. |
+
+## 3. Đối chiếu với engine đang chạy
+
+| V3 | Engine hiện tại |
+|---|---|
+| `fn_calc_pythagoras` | `calc/thanso.py` — đủ chỉ số + vết tính + độ nhạy quy ước; golden + test. |
+| `fn_calc_chaldean` | `calc/thanso_chaldean.py` (TS-PHAI) — số kép 10–52 đúng Cheiro, tên gọi, golden tính tay. |
+| `fn_calc_kabbalah` | Không làm (TS-PHAI). |
+| Biểu đồ + mũi tên (07) | `calc/thanso_mo_rong.py` — có đủ 8 mũi tên đủ/trống, số lặp, số vắng; bài học nghiệp. |
+| Radar tháng (09) | `luangiai/nhip_ca_nhan.py`, `hom_nay.py` — tháng/ngày cá nhân + KB, lời trung tính. |
+| Phản hồi / self-improvement (06) | Góp ý 1 chạm (không lưu danh tính) + skill `thanso-tu-cai-thien` (người duyệt, có số trước/sau). |
+| Ma trận câu hỏi + chỉ số cần (04) | **Chưa có dạng bảng nỗi đau** → làm ở TS-NOIDAU. |
+| Đồ thị liên phái (03) | Có đối chiếu số từng vị trí; **chưa có "giao điểm" 13/14/16/19** → làm ở TS-NOIDAU. |
+| Hybrid search (04) | Phân loại từ khoá tất định (`luangiai/hoi.py`, golden ~2.000 câu) — thêm `lien_quan()` ở TS-NOIDAU. |
+
+## 4. Phần giá trị đã đưa vào sản phẩm — TS-NOIDAU
+
+Giữ ý tưởng, viết lại theo kiến trúc 4 tầng, không migration, không dependency, không đổi phép tính (không tăng
+`ENGINE_VERSION`):
+
+- **KB `thanso_noi_dau.json`** — 5 trụ đời (map từ `life_pillar_type`), 25 câu nỗi đau, mỗi câu gắn các chỉ số trả
+  lời (`required_indicators`). Test khoá mọi câu chuẩn định tuyến đúng lĩnh vực qua bộ phân loại hỏi đáp thật.
+- **RULES `luangiai/noi_dau.py`** + route `/v1/thanso/noi-dau` — mỗi câu kèm con số của chính người dùng (lấy từ
+  CALC, cùng bộ số hỏi đáp dùng). `lien_quan()` thay hybrid search: so khớp từ bỏ dấu, tất định, không embedding.
+- **Hỏi đáp** trả thêm `cau_lien_quan` (≤ 3 câu "hỏi tiếp"); câu khủng hoảng / ngoài phạm vi không gợi gì.
+- **Giao điểm hai phái** (`thanso_doi_chieu.json`, `giao_diem` trong bài Chaldea) — cạnh có thật duy nhất của đồ thị
+  V3 (19 Pitago ↔ 19 Chaldea), mở cho 13/14/16/19, lời trung tính (bỏ "hậu vận rực rỡ" của V3).
+- **Sửa lỗi phân loại**: "ưu tiên" bỏ dấu thành "uu tien" khớp từ khoá tiền → câu "tháng này nên ưu tiên gì" lạc sang
+  tài chính.
+- **Web** `/than-so`: khối "Bạn đang vướng ở đâu?" (cả hai phái), chip "Hỏi tiếp" dưới câu trả lời, khối giao điểm ở
+  phái Chaldea. Đo `pain_point_clicked {tru, ma_cau, nguon: bang|hoi_tiep}` — chỉ mã.
+
+**Khâu tăng trưởng:** QUAY LẠI (mỗi lần mở có câu gắn đúng nỗi đau + chuỗi hỏi tiếp) và gián tiếp NẠP SAO (câu hỏi
+vượt hạn mức miễn phí SAO-2). Chỉ số: tỉ lệ `pain_point_clicked` / lượt xem `/than-so`, số câu hỏi mỗi phiên
+(`advisor_question_completed`), tỉ lệ `nguon=hoi_tiep`.
+
+## 5. Nếu vẫn muốn bản SQL
+
+Cần chủ dự án chốt lại các quyết định đang có (kiến trúc 4 tầng, Kabbalah, pgvector, quyền riêng tư nhật ký) — đây là
+đổi quyết định, không phải nâng cấp. Khi đó em đề xuất: chỉ dùng Postgres làm **KB** (bảng nghĩa có `source_id` +
+`school_id`, migration có `.down.sql`), phép tính vẫn ở engine Python; phản hồi lưu mã câu + mã số, không tên/ngày sinh.

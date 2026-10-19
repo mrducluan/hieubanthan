@@ -15,10 +15,16 @@ interface SoChaldea {
   ten_goi?: string; nghia_goc: NghiaGoc | null; nghia_kep: NghiaKep | null;
   pitago?: { ten: string; so: number; khac: boolean };
 }
+// TS-NOIDAU: cùng số 13/14/16/19 — Pitago đọc là nợ nghiệp, Chaldea đọc là số kép; engine nối hai cách đọc (KB).
+interface GiaoDiem {
+  ma: string; ten: string; pitago_no_nghiep: number | null; chaldea_kep: number | null; cung_so: boolean;
+  nghia: { pitago: string; chaldea: string; cach_dung: string; tu_soi: string } | null;
+}
 export interface BaiChaldea {
   phai: "chaldea"; ten_chinh: string; ngay_sinh: string; so_khac_pitago: number; luu_y: string; nguon: string; trang_thai: string;
   gioi_thieu: { ten_phai: string; tom_tat: string; khac_pitago: string[]; cach_doc: string; bang_chu: Record<string, string> };
   cac_so: SoChaldea[];
+  giao_diem?: GiaoDiem[];
 }
 
 const boNho = new Map<string, BaiChaldea>();
@@ -103,6 +109,31 @@ export function ChaldeaDoc({ hoSo }: { hoSo: HoSo }) {
           {kq.cac_so.map((s) => <TheSo key={s.ma} s={s} />)}
         </div>
       </section>
+
+      {kq.giao_diem && kq.giao_diem.length > 0 && (
+        <section aria-labelledby="giao-diem" data-testid="giao-diem">
+          <TieuDeMuc id="giao-diem" nho="Giao điểm hai phái" lon="Cùng một con số, hai cách đọc"
+            mo_ta="Số 13, 14, 16, 19: phái Pitago gọi là nợ nghiệp (bài học cần tập), phái Chaldea đọc là số kép mang biểu tượng riêng. Đọc cả hai để thấy chỗ chúng gặp nhau." />
+          <div className="grid gap-3 md:grid-cols-2">
+            {kq.giao_diem.map((g) => (
+              <article key={g.ma} className="rounded-xl border border-line/70 bg-bg/40 p-4">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="text-lg">{g.ten}</h3>
+                  <span className="shrink-0 text-xs text-gold">
+                    {g.pitago_no_nghiep ? `Pitago: nợ nghiệp ${g.pitago_no_nghiep}` : "Pitago: không có nợ nghiệp"} · {g.chaldea_kep ? `Chaldea: kép ${g.chaldea_kep}` : "Chaldea: kép khác"}
+                  </span>
+                </div>
+                {g.nghia && (<>
+                  {g.pitago_no_nghiep && <p className="mt-2 text-sm">{g.nghia.pitago}</p>}
+                  {g.chaldea_kep && <p className="mt-1 text-sm">{g.nghia.chaldea}</p>}
+                  {g.cung_so && <p className="mt-2 text-sm text-jade">{g.nghia.cach_dung}</p>}
+                  <p className="mt-2 text-sm text-fg-muted">Tự soi: {g.nghia.tu_soi}</p>
+                </>)}
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section aria-labelledby="chaldea-gioi-thieu" className="glass rounded-2xl p-5">
         <h2 id="chaldea-gioi-thieu" className="text-lg">Phái Chaldea khác Pitago thế nào?</h2>

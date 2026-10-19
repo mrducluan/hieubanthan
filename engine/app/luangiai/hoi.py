@@ -135,7 +135,7 @@ LINH_VUC_KW: dict[str, list[str]] = {
                   r"di lam", r"ghi nhan", r"lam o", r"nghe y", r"tu van", r"chua lanh",
                   r"kinh doanh online", r"lam viec nhom", r"lam viec mot minh", r"moi truong lam viec",
                   r"lam ky su", r"gop von", r"phong van", r"xin viec", r"hop dong", r"that nghiep", r"nop don nghi"],
-    "tai_chinh": [r"(?<!thang )tien", r"giau", r"tien bac", r"tai chinh", r"dau tu", r"chung khoan", r"mua nha", r"mua dat",
+    "tai_chinh": [r"(?<!thang )(?<!uu )tien", r"giau", r"tien bac", r"tai chinh", r"dau tu", r"chung khoan", r"mua nha", r"mua dat",
                   r"tien ao", r"no nan", r"dang no", r"no nhieu", r"tra het", r"vay tien", r"cho vay", r"tiet kiem", r"tieu tien", r"chi tieu", r"mua sam", r"tai loc",
                   r"cho vay", r"thu nhap", r"cho (nguoi khac|nguoi ta|ban be) vay"],
     "hoc_tap": [r"hoc tap", r"hoc hanh", r"viec hoc", r"hoc bai", r"cach hoc", r"hoc mai", r"em hoc", r"nen hoc(?! cach)", r"hoc nhom", r"hoc buoi", r"hoc truoc", r"thi cu", r"em thi", r"thi dai hoc", r"thi co do", r"ky thi", r"khi thi", r"chon nganh", r"nganh gi khi", r"hoc nganh", r"nganh cong nghe", r"hop hoc", r"dai hoc", r"khoi a", r"khoi d", r"du hoc", r"thac si",

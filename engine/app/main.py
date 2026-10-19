@@ -29,6 +29,7 @@ from app.luangiai import hom_nay
 from app.luangiai import nhip_ca_nhan as nhip
 from app.luangiai import thanso_chaldean as luangiai_chaldea
 from app.luangiai import thanso as luangiai_thanso
+from app.luangiai import noi_dau
 from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
 from app import nhat_ky
 from app.narrative import hoi_van, llm as narrative_llm, ngan_sach
@@ -276,7 +277,20 @@ def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
     nguoi = {"ho_ten": inp.ho_ten, "ngay": inp.ngay, "thang": inp.thang, "nam": inp.nam}
     kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem, phai=inp.phai)
     background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
-    return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "thanso")}
+    return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "thanso"),
+            "cau_lien_quan": noi_dau.lien_quan(inp.cau_hoi.strip())}
+
+
+class NoiDauInput(ThanSoInput):
+    ngay_xem: _dt.date | None = None     # trống = hôm nay theo giờ Việt Nam
+
+
+@app.post("/v1/thanso/noi-dau")
+def api_noi_dau(inp: NoiDauInput) -> dict:
+    """TS-NOIDAU — "Bạn đang vướng ở đâu?": 5 trụ đời × câu hỏi nỗi đau, mỗi câu kèm con số của người này trả lời nó."""
+    inp.kiem_tra_ngay()
+    ngay_xem = inp.ngay_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
+    return {"engine_version": ENGINE_VERSION, **noi_dau.ban_do(inp.ho_ten, inp.ngay, inp.thang, inp.nam, ngay_xem)}
 
 
 QuanHe = Literal["nguoi_yeu", "ban_be", "dong_nghiep", "sep", "gia_dinh"]

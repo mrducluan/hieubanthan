@@ -22,6 +22,7 @@ import { BaoLoi } from "@/components/khung/BaoLoi";
 import { hoTenList, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 import { DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
 import { ChaldeaDoc } from "@/components/than-so/ChaldeaDoc";
+import { NoiDau } from "@/components/than-so/NoiDau";
 import { ghi } from "@/lib/do-luong";
 import { TieuDeTrang, useDauCms } from "@/components/cms/DauCms";
 
@@ -40,20 +41,33 @@ const GOI_Y = [
   { nhom: "Cuộc sống", cau: ["Bài học lớn của đời tôi là gì?", "Giai đoạn này tôi nên tập trung điều gì?"] },
 ];
 
-async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo): Promise<KetQuaHoi> {
+interface CauLienQuan { ma: string; tru: string; cau: string }
+
+async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, hoiTiep: (c: CauLienQuan) => void): Promise<KetQuaHoi> {
   const r = await fetchSao("/api/thanso/hoi", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, cau_hoi: cau, phai }),
   }, "hoi");
-  const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string; thuat_ngu?: ThuatNgu[]; luot?: LuotHoi };
+  const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string; thuat_ngu?: ThuatNgu[]; luot?: LuotHoi; cau_lien_quan?: CauLienQuan[] };
   const canNguoiKia = d.can_them?.includes("nguoi_kia");
+  // TS-NOIDAU: engine gợi ≤ 3 câu chuẩn gần với câu vừa hỏi (không gợi gì cho câu khủng hoảng / ngoài phạm vi).
+  const tiep = d.cau_tra_loi && !canNguoiKia ? d.cau_lien_quan ?? [] : [];
   return {
     van: d.cau_tra_loi,
     thuatNgu: d.thuat_ngu,
     loi: d.cau_tra_loi ? undefined : d.error ?? "Chưa trả lời được lúc này, thử lại sau.",
     phu: canNguoiKia ? (
       <Button asChild variant="secondary" size="sm"><Link href="/hop-doi"><HeartHandshake aria-hidden /> Nhập ngày sinh người ấy ở mục Hợp đôi</Link></Button>
+    ) : tiep.length ? (
+      <div data-testid="hoi-tiep">
+        <p className="text-xs text-fg-muted">Hỏi tiếp</p>
+        <div className="mt-1 flex flex-wrap gap-2">
+          {tiep.map((c) => (
+            <Button key={c.ma} variant="outline" size="sm" className="h-auto whitespace-normal py-1 text-left" onClick={() => hoiTiep(c)}>{c.cau}</Button>
+          ))}
+        </div>
+      </div>
     ) : undefined,
     ghiLuot: ghiLuot(d.luot),
     ghiChu: d.cau_tra_loi ? (d.che_do === "llm" ? "Diễn đạt tự động từ kho tri thức có nguồn." : "Ghép trực tiếp từ kho tri thức có nguồn.") : undefined,
@@ -66,7 +80,13 @@ export function ThanSo() {
   const { kq, loi, thuLai } = useBaiDoc(hoSo);
   const [tab, setTab] = useState("dai-doi");
   const [phai, setPhai] = useState<PhaiThanSo>("pitago");
+  const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
   useEffect(() => { setPhai(docPhai()); }, []);
+  // TS-NOIDAU: câu bấm từ bảng nỗi đau / "hỏi tiếp" → đẩy vào khung hỏi đáp và cuộn tới đó.
+  function hoiCau(cau: string) {
+    setCauNgoai((c) => ({ cau, lan: (c?.lan ?? 0) + 1 }));
+    document.getElementById("hoi")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
   function doiPhai(p: PhaiThanSo) {
     setPhai(p);
     try { localStorage.setItem(KHOA_PHAI, p); } catch { /* chế độ riêng tư: chỉ nhớ trong phiên */ }
@@ -194,6 +214,8 @@ export function ThanSo() {
       <CuoiBaiDoc moDun="thanso_sau" cauHoi="Phần chiều sâu có giúp bạn hiểu mình hơn?" />
       </>)}
 
+      <NoiDau hoSo={hoSo} onHoi={hoiCau} />
+
       <section id="hoi" aria-labelledby="muc-hoi" className="scroll-mt-24">
         <TieuDeMuc id="muc-hoi" nho="Hỏi sâu hơn" lon={`${tenGoi(hoSo)}, bạn đang băn khoăn điều gì?`}
           mo_ta={phai === "chaldea"
@@ -203,7 +225,11 @@ export function ThanSo() {
             moDun="thanso"
           loiChao="Chọn một câu gợi ý bên dưới, hoặc tự đặt câu hỏi về bản thân, nghề nghiệp, tình cảm."
           goiY={GOI_Y}
-          gui={(c) => hoiThanSo(hoSo, c, phai)}
+          cauNgoai={cauNgoai}
+          gui={(c) => hoiThanSo(hoSo, c, phai, (t) => {
+            ghi("pain_point_clicked", { mo_dun: "thanso", tru: t.tru, ma_cau: t.ma, nguon: "hoi_tiep" });
+            hoiCau(t.cau);
+          })}
         />
       </section>
 
