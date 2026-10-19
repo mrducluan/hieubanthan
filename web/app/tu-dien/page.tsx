@@ -6,19 +6,28 @@ import { tuDien } from "@/lib/kien-thuc";
 import { TEN_MANG } from "@/lib/markdown";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { LoiDanCms } from "@/components/cms/DauTrangCms";
+import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { TimTuDien } from "./TimTuDien";
 
 export const revalidate = 21600;
 
-export const metadata: Metadata = {
+const META: Metadata = {
   title: { absolute: "Từ điển thuật ngữ Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Thần số" },
   description: "Hơn 200 thuật ngữ huyền học giải nghĩa bằng ngôn ngữ đời thường: cung Mệnh, Hoá Kỵ, nhật chủ, dụng thần, hào động, quẻ biến, sơn tinh, hướng tinh, số đường đời…",
   alternates: { canonical: "/tu-dien", types: { "text/markdown": "/tu-dien.md" } },
 };
 
 
+const DUONG = "/tu-dien";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(META, await layNoiDungTrang(DUONG));
+}
+
 export default async function Trang() {
-  const d = await tuDien();
+  const [d, nd] = await Promise.all([tuDien(), layNoiDungTrang(DUONG)]);
   const muc = d?.muc ?? [];
   return (
     <div className="mx-auto max-w-4xl md:py-4">
@@ -37,13 +46,14 @@ export default async function Trang() {
       )}
       <header className="space-y-3">
         <p className="eyebrow flex items-center gap-2"><BookOpen className="size-4" aria-hidden /> Từ điển</p>
-        <h1 className="text-4xl">Từ điển thuật ngữ — nói cho dễ hiểu</h1>
-        <p className="text-fg-muted">
+        <h1 className="text-4xl">{nd.dau.h1 ?? "Từ điển thuật ngữ — nói cho dễ hiểu"}</h1>
+        <LoiDanCms nd={nd} className="text-fg-muted">
           Mỗi thuật ngữ trong lá số và lời luận giải đều có lời giải nghĩa bằng ngôn ngữ đời thường. Trong câu trả lời, chữ
           gạch chân chấm là thuật ngữ — bấm vào để xem nhanh.
-        </p>
+        </LoiDanCms>
         <p className="text-xs text-fg-faint">Ban biên tập Hiểu Bản Thân biên soạn · {d?.nguon}</p>
       </header>
+      <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
       {muc.length === 0 ? (
         <p className="mt-8 text-fg-muted">Từ điển đang tải, vui lòng quay lại sau ít phút.</p>
       ) : (
@@ -74,6 +84,8 @@ export default async function Trang() {
           })}
         </div>
       )}
+      <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-12" />
+      <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />
     </div>
   );
 }

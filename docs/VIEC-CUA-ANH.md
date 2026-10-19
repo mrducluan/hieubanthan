@@ -393,7 +393,7 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
      không dán vào chat) → Redeploy.
   3) /quan-tri/cai-dat → nhóm "Luận giải toàn bộ" bật thu Sao; nhóm "Hỏi đáp" bật giới hạn khi chi phí AI tăng.
   4) Xem tiền + người nạp ở /quan-tri/doanh-thu. Quy tắc + lộ trình: `docs/KE-HOACH-MIEN-PHI-VA-SAO.md`.
-- [ ] SAO3. (2026-10-14) **Nhiệm vụ kiếm Sao** (Lưu hồ sơ · Hỏi 3 câu · Mời 1 bạn → nhận Sao) đã có code, **mặc định tắt**:
+- [x] SAO3. (2026-10-14) **Nhiệm vụ kiếm Sao** (Lưu hồ sơ · Hỏi 3 câu · Mời 1 bạn → nhận Sao) đã có code, **mặc định tắt**:
   1) Supabase SQL Editor chạy `supabase/migrations/0014_nhiem_vu.sql` (sau 0013). Kiểm: `supabase/kiem_thu/da_chay_chua.sql`.
   2) Không cần khoá mới — dùng `SUPABASE_SERVICE_ROLE_KEY` đã đặt (để đếm câu hỏi của người đã đăng nhập).
   3) /quan-tri/cai-dat → nhóm "Nhiệm vụ kiếm Sao": xem mức (mặc định 5/5/5 Sao — cộng THÊM ngoài 10 Sao chào mừng và
@@ -421,7 +421,30 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
   5) **Trang đích → Tạo mới**: thêm khối Đầu trang, Thẻ công cụ, Danh sách bài viết, Hỏi đáp, Lời mời → Xuất bản →
      `hieuban.com/su-kien/{slug}`.
   Thấy chỗ nào lỗi: chụp màn hình gửi em. Em đã chạy đúng 5 bước này trên bản sao cục bộ (ảnh trong báo cáo QC).
-- [ ] CMS15. (2026-10-13, ND-0/ND-1 — sửa nội dung từng trang) Sau khi PR merge, CMS redeploy tự chạy migration
+- [ ] QHURL. (2026-10-19, quy hoạch URL phương án B) Sau khi PR merge + deploy:
+  1) Search Console → Sơ đồ trang web → gửi lại `https://hieuban.com/sitemap.xml` (≈ 640 URL mới; URL cũ tự 308).
+     Theo dõi báo cáo "Trang" 4 tuần: URL cũ chuyển dần sang "Trang có chuyển hướng" là đúng.
+  2) CMS redeploy tự chạy migration `qh_url_doi_duong`: mọi "Trang website" + "Mẫu cụm trang" (kể cả bản ghi đè từng URL,
+     `/la-so-mau`, `/huong-xau-nam`) **tự đổi sang đường dẫn mới, giữ nguyên chữ/ảnh anh đã sửa**. Sau đó bấm
+     **Đồng bộ ngay** (Trang website). Chỉ khi log deploy CMS có dòng "TRÙNG đích bỏ qua" (đồng bộ lỡ chạy trước, đã tạo
+     nháp trống ở URL mới) thì xoá nháp trống ở URL mới, đổi đường dẫn dòng cũ sang URL mới.
+  3) Nếu đã tự sửa **Menu đầu trang / Điều hướng chân trang** trong CMS: đổi link `/huong-xau-nam` → `/phong-thuy/huong-xau-nam`,
+     `/la-so-mau` → `/tu-vi/la-so-mau`, `/kien-thuc/…` → link mới (link cũ vẫn chạy nhờ 308 nhưng nên trỏ thẳng).
+- [ ] ND45. (2026-10-19, ND-4/ND-5) Sau khi PR merge, CMS redeploy tự chạy migration `nd_4_5_anh_phap_ly`. Thử ~5 phút:
+  1) **Trang pháp lý** (Trang website → `/dieu-khoan`…): sửa Mục / ngày hiệu lực → chọn "Thay đổi nội dung" + ngày mới
+     → **tích ô "Tôi đã đối chiếu…"** → Xuất bản. Ô tự bỏ tích sau mỗi lần xuất bản (lần sau xác nhận lại). Đổi nội dung
+     chính sách nên hỏi luật sư trước (mục E).
+  2) **Trang kiến thức** (~600 trang): Giao diện website → **Mẫu cụm trang** → chọn cụm (vd "Trang con · Kinh Dịch") →
+     thêm khối (Ảnh, Banner, Nút kêu gọi, Đoạn văn… — gõ `{tieu_de}` để chèn tên trang) → Xuất bản → áp cho cả cụm.
+     Muốn riêng một URL: Trang website → Tạo mới → nhập đường dẫn → chọn "Ẩn khối mẫu" / "Thêm sau" / "Thay".
+  3) **Ảnh**: tải ảnh vào Media (ghi "Mô tả ảnh"), rồi dùng khối **Ảnh** ở bất kỳ trang nào; trang Giới thiệu / Liên hệ /
+     pháp lý chèn ảnh ngay trong Mục. Chữ của trang kiến thức (nghĩa sao, quẻ…) vẫn sửa ở `/quan-tri/tri-thuc` (git).
+- [ ] ND23. (2026-10-14, ND-2/ND-3) Sau khi PR merge: CMS → **Giao diện website → Trang website** → mở một trang (vd `/tu-vi`,
+  `/`, `/gioi-thieu`) → sửa Tiêu đề SEO / H1 / Lời dẫn / Đoạn giới thiệu / Hỏi đáp, thêm khối (Banner, Video, Nút kêu gọi…)
+  → **Xuất bản** → hieuban.com đổi sau vài giây. Để trống ô nào = chữ cũ trong code; **gỡ xuất bản** = về nguyên bản.
+  /gioi-thieu, /lien-he: sửa theo **Mục** (giữ đúng neo, vd `su-menh`, `nguon`). Video chỉ tải khi người đọc bấm phát.
+  Nút kêu gọi có ô "Mã đo" → xem số bấm ở PostHog sự kiện `cms_khoi_bam`. Trang pháp lý + trang kiến thức: pha sau (ND-4, ND-5).
+- [x] CMS15. (2026-10-13, ND-0/ND-1 — sửa nội dung từng trang) Sau khi PR merge, CMS redeploy tự chạy migration
   `noi_dung_trang`. Không cần biến mới (dùng `WEB_URL` + `CMS_WEBHOOK_SECRET` + `ENGINE_URL` đã có). Thử ~5 phút:
   1) CMS → **Giao diện website → Trang website** → bấm **"Đồng bộ ngay"** → danh sách hiện ~39 trang (công cụ, trang
      tĩnh, pháp lý, chủ đề) + **Mẫu cụm trang** (16 mẫu cho trang kiến thức). Lần sau tự đồng bộ mỗi ngày 08:00.

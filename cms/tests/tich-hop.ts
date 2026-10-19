@@ -528,19 +528,25 @@ await ca("biên tập viên không đổi được ô hệ thống, không sửa
   await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false, draft: true, data: { h1: "Điều khoản" } as never });
 });
 
-await ca("pháp lý: 'Thay đổi nội dung' bắt buộc ngày hiệu lực mới hơn bản đang áp dụng; 'Sửa chữ' giữ ngày", async () => {
+await ca("pháp lý: 'Thay đổi nội dung' bắt buộc ngày hiệu lực mới hơn bản đang áp dụng; 'Sửa chữ' giữ ngày; xuất bản phải tích ô đối chiếu", async () => {
   const pl = await timTrang(`${nd}/dieu-khoan`);
   await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
     data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-10-01T00:00:00.000Z", _status: "published" } as never }), /ngày hiệu lực mới/);
   // Ô ngày "dayOnly" của Payload lưu 12:00 UTC — cùng NGÀY với ngày trong code (08/10/2026) vẫn phải bị chặn.
   await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
     data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-10-08T12:00:00.000Z", _status: "published" } as never }), /ngày hiệu lực mới/);
-  await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
-    data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", _status: "published" } as never });
+  // ND-4: chưa tích "đã đối chiếu" → không xuất bản được (ngày hợp lệ)
+  await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
+    data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", _status: "published" } as never }), /đối chiếu/);
+  const xb = await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
+    data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", da_doi_chieu_phap_ly: true, _status: "published" } as never }) as unknown as { da_doi_chieu_phap_ly: boolean };
+  assert.equal(xb.da_doi_chieu_phap_ly, false);   // xuất bản xong tự bỏ tích → lần sau xác nhận lại
+  // sau khi xuất bản "thay đổi nội dung": lưu nháp và gỡ xuất bản không bị chặn bởi ngày hiệu lực
+  await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false, draft: true, data: { h1: "Điều khoản (nháp)" } as never });
   await nem(() => payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
     data: { loai_sua: "thay_doi_noi_dung", ngay_hieu_luc: "2026-11-01T00:00:00.000Z", _status: "published" } as never }), /ngày hiệu lực mới/);
   const r = await payload.update({ collection: "noi-dung-trang", id: pl.id, user: chuBien, overrideAccess: false,
-    data: { loai_sua: "sua_chu", ngay_hieu_luc: "2027-01-01T00:00:00.000Z", _status: "published" } as never }) as unknown as { ngay_hieu_luc: string };
+    data: { loai_sua: "sua_chu", ngay_hieu_luc: "2027-01-01T00:00:00.000Z", da_doi_chieu_phap_ly: true, _status: "published" } as never }) as unknown as { ngay_hieu_luc: string };
   assert.match(r.ngay_hieu_luc, /^2026-11-01/);
 });
 
@@ -628,6 +634,37 @@ await ca("chân trang: chữ thương hiệu mặc định; miễn trừ không 
   const d = await payload.findGlobal({ slug: "dieu-huong" }) as unknown as { thuong_hieu: { gioi_thieu: string; cam_ket: { chu: string }[] } };
   assert.equal(d.thuong_hieu.gioi_thieu, "Giới thiệu mới"); assert.equal(d.thuong_hieu.cam_ket.length, 1);
   await payload.updateGlobal({ slug: "dieu-huong", overrideAccess: true, data: { thuong_hieu: { gioi_thieu: null, cam_ket: [] }, nhan_ung_ho: null } as never });
+});
+
+await ca("QH-URL migration: chữ CMS của URL cũ đi theo URL silo (bản chính + phiên bản); trùng đích không đè; down trả lại", async () => {
+  const { up, down } = await import("../src/migrations/20261019_060000_qh_url_doi_duong");
+  const args = { db: payload.db.drizzle, payload, req: {} } as never;
+  const moi = async (duong: string) => {
+    const d = await payload.create({ collection: "noi-dung-trang", overrideAccess: true, context: { dongBo: true },
+      data: { duong, nhom: "kien_thuc", ten: "QH thử", h1: `H1 ${duong}`, _status: "published" } as never }) as unknown as { id: number };
+    tao.push({ collection: "noi-dung-trang", id: d.id });
+    return d.id;
+  };
+  const a = await moi(`/kien-thuc/sao-cung/${dau}-a`);
+  const b = await moi(`/phong-thuy/tuoi-${dau}`);
+  const c = await moi(`/kien-thuc/sao-cung/${dau}-c`);
+  const c2 = await moi(`/tu-vi/sao-o-cung/${dau}-c`);       // đích đã có (đồng bộ chạy trước) → c giữ nguyên
+  const duong = async (id: number) => ((await payload.findByID({ collection: "noi-dung-trang", id, overrideAccess: true })) as unknown as { duong: string; h1: string });
+  const phienBan = async (id: number) => (await payload.findVersions({ collection: "noi-dung-trang", overrideAccess: true,
+    where: { parent: { equals: id } } })).docs.map((v) => (v.version as { duong: string }).duong);
+  await up(args);
+  assert.deepEqual(await duong(a), { ...(await duong(a)), duong: `/tu-vi/sao-o-cung/${dau}-a`, h1: `H1 /kien-thuc/sao-cung/${dau}-a` });
+  assert.ok((await phienBan(a)).every((d) => d === `/tu-vi/sao-o-cung/${dau}-a`));
+  assert.equal((await duong(b)).duong, `/phong-thuy/huong-hop-tuoi/tuoi-${dau}`);
+  assert.equal((await duong(c)).duong, `/kien-thuc/sao-cung/${dau}-c`);
+  assert.ok((await phienBan(c)).every((d) => d === `/kien-thuc/sao-cung/${dau}-c`));
+  assert.equal((await duong(c2)).duong, `/tu-vi/sao-o-cung/${dau}-c`);
+  await down(args);
+  assert.equal((await duong(a)).duong, `/kien-thuc/sao-cung/${dau}-a`);
+  assert.ok((await phienBan(a)).every((d) => d === `/kien-thuc/sao-cung/${dau}-a`));
+  assert.equal((await duong(b)).duong, `/phong-thuy/tuoi-${dau}`);
+  assert.equal((await duong(c2)).duong, `/tu-vi/sao-o-cung/${dau}-c`);      // c chiếm đích cũ → c2 ở lại
+  await up(args);   // trả DB thử về trạng thái sau migration
 });
 
 // dọn

@@ -3,6 +3,7 @@
 // Kèm schema WebPage + BreadcrumbList + FAQPage. Chỉ mô tả cách hệ thống làm việc, không viết nghĩa mới.
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { TEN_MANG_SILO, truCua } from "@/lib/kien-thuc";
 import { goiLd, ldDuongDan, ldHoiDap, siteUrl, urlDayDu } from "@/lib/seo";
 
 export interface NoiDungCongCu {
@@ -21,7 +22,10 @@ export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [] }
         { "@type": "WebPage", "@id": `${urlDayDu(duong)}#trang`, url: urlDayDu(duong), name: ten, description: moTa,
           inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl()}/#website` }, about: ten,
           potentialAction: { "@type": "UseAction", target: urlDayDu(duong) } },
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Khám phá", duong: "/kham-pha" }, { ten, duong }]),
+        // QH-URL: công cụ nằm trong silo (vd /phong-thuy/huong-xau-nam) → cha là trang trụ; công cụ gốc → cha là Khám phá.
+        ldDuongDan([{ ten: "Trang chủ", duong: "/" },
+          duong.split("/").length > 2 && TEN_MANG_SILO[truCua(duong)] ? { ten: TEN_MANG_SILO[truCua(duong)]!, duong: truCua(duong) } : { ten: "Khám phá", duong: "/kham-pha" },
+          { ten, duong }]),
         ldHoiDap(hoiDap),
       )} />
       <h2 id="gioi-thieu-cong-cu" className="text-2xl text-fg">{`Về công cụ ${ten}`}</h2>

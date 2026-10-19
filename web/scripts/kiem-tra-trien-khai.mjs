@@ -21,7 +21,7 @@ const MUC = [
   ["Phong thuỷ — mệnh quái", "POST", "/api/phongthuy/menh-quai", { birth_date: "1990-05-17", gender: "nam" }],
   ["Kinh Dịch — hỏi", "POST", "/api/kinhdich/hoi", { cau_hoi: "Có nên đổi việc không?" }],
   ["Link chia sẻ (cần LOI_MOI_SECRET)", "POST", "/api/chia-se/tao", { ten_hien_thi: "An", ho_ten: ["Nguyễn Văn An"], ngay: 24, thang: 10, nam: 1988 }],
-  ["Thư viện kiến thức", "GET", "/kien-thuc/than-so/so-7"],
+  ["Thư viện kiến thức", "GET", "/than-so/y-nghia-so/so-7"],
   ["sitemap.xml", "GET", "/sitemap.xml"],
   ["llms.txt", "GET", "/llms.txt"],
 ];
@@ -35,7 +35,7 @@ for (const [ten, method, duong, body] of MUC) {
       body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(90_000),
     });
     const txt = await r.text();
-    const ok = r.ok && !(duong === "/kien-thuc/than-so/so-7" && !txt.includes("Số 7"));
+    const ok = r.ok && !(duong === "/than-so/y-nghia-so/so-7" && !txt.includes("Số 7"));
     if (!ok) hong++;
     let loi = "";
     try { loi = JSON.parse(txt).error ?? ""; } catch { /* không phải JSON */ }

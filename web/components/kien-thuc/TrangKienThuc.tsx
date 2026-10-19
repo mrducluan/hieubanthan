@@ -1,4 +1,4 @@
-// Trang kiến thức — Server Component: HTML đầy đủ ngay lần tải đầu (Google, Bing, và bot AI đọc được không cần JS).
+// Trang kiến thức (dùng chung cho mọi route cụm của các mảng) — Server Component: HTML đầy đủ ngay lần tải đầu (Google, Bing, và bot AI đọc được không cần JS).
 // Cấu trúc GEO: tiêu đề = câu hỏi người ta tìm · đoạn "trả lời nhanh" đứng đầu · mục có tiêu đề · hỏi đáp · nguồn ·
 // ngày cập nhật · nhãn đã thẩm định (BM-1: bài chưa duyệt không gắn nhãn) · liên kết nội bộ. Schema: Article + FAQPage + BreadcrumbList.
 // EEAT-1: dòng tác giả / chủ biên / thẩm định + Person; trang đã thẩm định có WebPage.reviewedBy + lastReviewed.
@@ -11,23 +11,23 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { MinhHoa } from "@/components/minh-hoa/MinhHoa";
 import { DongTacGia } from "@/components/kien-thuc/DongTacGia";
 import { GocNhinChuyenGia } from "@/components/kien-thuc/GocNhinChuyenGia";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { CHUYEN_GIA, idChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
-import { CHU_DE, duongTrang, trang, type TrangKienThuc } from "@/lib/kien-thuc";
+import { CHU_DE, TEN_MANG_SILO, duongTrang, trang, truCua, type TrangKienThuc } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
+import { duongMoi } from "@/lib/duong-silo";
 
-export const revalidate = 21600;
+type Thamso = { khoa: string | null; slug: string };
 
-type Props = { params: Promise<{ chu_de: string; slug: string }> };
-
-async function tai({ chu_de, slug }: Awaited<Props["params"]>) {
-  const cd = CHU_DE[chu_de];
+async function tai({ khoa, slug }: Thamso) {
+  const cd = khoa ? CHU_DE[khoa] : undefined;
   if (!cd) return null;
   const t = await trang(cd.loai, slug);
   return t ? { cd, t } : null;
 }
 
-export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
-  const params = await thamSo;
+export async function metaKienThuc(params: Thamso): Promise<Metadata> {
   const kq = await tai(params);
   if (!kq) return { title: "Không tìm thấy", robots: { index: false } };
   const { t } = kq;
@@ -45,12 +45,14 @@ export async function generateMetadata({ params: thamSo }: Props): Promise<Metad
   };
 }
 
-export default async function Page({ params: thamSo }: Props) {
-  const params = await thamSo;
+/** Trang kiến thức một mục KB (QH-URL: /{mảng}/{cụm}/{trang}); route của từng mảng chỉ đổi đường dẫn → khoá chủ đề. */
+export async function TrangKienThucView(params: Thamso) {
   const kq = await tai(params);
   if (!kq) notFound();
   const { cd, t } = kq;
   const duong = duongTrang(t.loai, t.slug);
+  // ND-5: khối CMS của mẫu cụm (+ ghi đè riêng URL này) — đặt quanh văn KB, không xen vào giữa.
+  const nd = await layNoiDungTrang(duong, { tieu_de: t.tieu_de, mo_ta: t.mo_ta, ten_chu_de: cd.ten });
   const nhap = t.trang_thai !== "da_duyet";
   const tacGia = [t.tac_gia, t.tham_dinh?.nguoi].find((x) => x && CHUYEN_GIA[x]);
 
@@ -93,8 +95,8 @@ export default async function Page({ params: thamSo }: Props) {
     ldHoiDap(t.hoi_dap),
     ldDuongDan([
       { ten: "Trang chủ", duong: "/" },
-      { ten: "Kiến thức", duong: "/kien-thuc" },
-      { ten: cd.ten, duong: `/kien-thuc/${params.chu_de}` },
+      { ten: TEN_MANG_SILO[truCua(cd.duong)] ?? "Kiến thức", duong: truCua(cd.duong) },
+      { ten: cd.ten, duong: cd.duong },
       { ten: t.tieu_de, duong },
     ]),
   );
@@ -104,8 +106,8 @@ export default async function Page({ params: thamSo }: Props) {
       <JsonLd data={ld} />
       <nav aria-label="Đường dẫn" className="text-xs text-fg-faint">
         <ol className="flex flex-wrap gap-1.5">
-          <li><Link href="/kien-thuc" className="hover:text-fg">Kiến thức</Link> ›</li>
-          <li><Link href={`/kien-thuc/${params.chu_de}`} className="hover:text-fg">{cd.ten}</Link> ›</li>
+          <li><Link href={truCua(cd.duong)} className="hover:text-fg">{TEN_MANG_SILO[truCua(cd.duong)] ?? "Kiến thức"}</Link> ›</li>
+          <li><Link href={cd.duong} className="hover:text-fg">{cd.ten}</Link> ›</li>
         </ol>
       </nav>
 
@@ -120,6 +122,7 @@ export default async function Page({ params: thamSo }: Props) {
       </header>
 
       <MinhHoa mh={t.minh_hoa} />
+      <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-6" />
 
       <section aria-label="Trả lời nhanh" className="mt-6 rounded-2xl border border-gold/30 bg-gold/5 p-5">
         <p className="eyebrow">Trả lời nhanh</p>
@@ -169,6 +172,7 @@ export default async function Page({ params: thamSo }: Props) {
         </dl>
       </section>
 
+      <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-10" />
       <aside className="glass mt-10 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center">
         <BookOpen className="size-6 shrink-0 text-gold" aria-hidden />
         <p className="flex-1 text-fg-muted">Đọc chung chung chỉ là điểm bắt đầu. Xem con số, lá số của <b className="text-fg">chính bạn</b> — có từng bước tính để tự kiểm.</p>
@@ -183,12 +187,13 @@ export default async function Page({ params: thamSo }: Props) {
               <li key={l.slug}><Link href={duongTrang(l.loai, l.slug)} className="inline-flex min-h-10 items-center rounded-full border border-line px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg">{l.tieu_de}</Link></li>
             ))}
             {t.lien_ket_ngoai?.map((l) => (
-              <li key={l.duong}><Link href={l.duong} className="inline-flex min-h-10 items-center rounded-full border border-gold/40 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold hover:text-fg">{l.ten}</Link></li>
+              <li key={l.duong}><Link href={duongMoi(l.duong)} className="inline-flex min-h-10 items-center rounded-full border border-gold/40 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold hover:text-fg">{l.ten}</Link></li>
             ))}
           </ul>
         </nav>
       )}
 
+      <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <p className="font-medium text-fg-muted">Nguồn</p>
         <ul className="mt-1 list-disc space-y-1 pl-5">{t.nguon.map((n) => <li key={n}>{n}</li>)}</ul>

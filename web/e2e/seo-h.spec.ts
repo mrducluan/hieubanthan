@@ -3,7 +3,7 @@
 import { test, expect } from "@playwright/test";
 
 test("trang sao ở cung: nội dung máy chủ đầy đủ", async ({ request }) => {
-  const r = await request.get("/kien-thuc/sao-cung/that-sat-cung-menh");
+  const r = await request.get("/tu-vi/sao-o-cung/that-sat-cung-menh");
   expect(r.status()).toBe(200);
   const html = await r.text();
   expect(html).toMatch(/<h1[^>]*>Thất Sát ở cung Mệnh: ý nghĩa, sáng hãm, sao đi cùng<\/h1>/);
@@ -12,16 +12,16 @@ test("trang sao ở cung: nội dung máy chủ đầy đủ", async ({ request 
   expect(html).toContain("Tý (Miếu)");                                   // độ sáng Nam phái theo chi
   expect(html).toContain('data-testid="minh-hoa"');
   expect(html).toContain('"@type":"FAQPage"');
-  expect((await request.get("/kien-thuc/sao-cung/that-sat-cung-menh.md")).status()).toBe(200);
+  expect((await request.get("/tu-vi/sao-o-cung/that-sat-cung-menh.md")).status()).toBe(200);
 });
 
 test("trang sao và trang cung có danh sách trang con; chủ đề + sitemap", async ({ request }) => {
-  const sao = await (await request.get("/kien-thuc/tu-vi/sao-thai-am")).text();
-  expect((sao.match(/href="\/kien-thuc\/sao-cung\/thai-am-cung-/g) ?? []).length).toBeGreaterThanOrEqual(12);
-  const cung = await (await request.get("/kien-thuc/cung-tu-vi/cung-phu-the")).text();
-  expect((cung.match(/href="\/kien-thuc\/sao-cung\/[a-z-]+-cung-phu-the"/g) ?? []).length).toBeGreaterThanOrEqual(14);
-  const cd = await (await request.get("/kien-thuc/sao-cung")).text();
-  expect((cd.match(/href="\/kien-thuc\/sao-cung\/[a-z-]+"/g) ?? []).length).toBe(168);
-  expect(await (await request.get("/sitemap.xml")).text()).toContain("/kien-thuc/sao-cung/tu-vi-cung-menh</loc>");
-  expect((await request.get("/kien-thuc/sao-cung/sao-khong-co-cung-menh")).status()).toBe(404);
+  const sao = await (await request.get("/tu-vi/chinh-tinh/sao-thai-am")).text();
+  expect((sao.match(/href="\/tu-vi\/sao-o-cung\/thai-am-cung-/g) ?? []).length).toBeGreaterThanOrEqual(12);
+  const cung = await (await request.get("/tu-vi/cung/cung-phu-the")).text();
+  expect((cung.match(/href="\/tu-vi\/sao-o-cung\/[a-z-]+-cung-phu-the"/g) ?? []).length).toBeGreaterThanOrEqual(14);
+  const cd = await (await request.get("/tu-vi/sao-o-cung")).text();
+  expect((cd.match(/href="\/tu-vi\/sao-o-cung\/[a-z-]+"/g) ?? []).length).toBe(168);
+  expect(await (await request.get("/sitemap.xml")).text()).toContain("/tu-vi/sao-o-cung/tu-vi-cung-menh</loc>");
+  expect((await request.get("/tu-vi/sao-o-cung/sao-khong-co-cung-menh")).status()).toBe(404);
 });

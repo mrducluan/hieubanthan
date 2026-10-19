@@ -156,10 +156,10 @@ def test_ghi_chu_noi_bo_khong_lo_ra_api(so_dang_ky):
     assert "sửa câu 3" not in client.get("/v1/kb/trang/que/que-47-khon").text
 
 
-# --- GN-1: hàng đợi theo Search Console (file CSV "Trang" anh tải từ GSC) ---
+# --- GN-1: hàng đợi theo Search Console (file CSV "Trang" anh tải từ GSC) — nhận cả URL cũ /kien-thuc/… lẫn silo mới (QH-URL) ---
 CSV_GSC = """Trang hàng đầu,Lượt nhấp,Số lần hiển thị,CTR,Vị trí
 https://hieuban.com/kien-thuc/kinh-dich/que-47-khon,2,1200,0.17%,9.1
-https://hieuban.com/kien-thuc/tu-vi/sao-tu-vi,40,1000,4%,3.2
+https://hieuban.com/tu-vi/chinh-tinh/sao-tu-vi,40,1000,4%,3.2
 https://hieuban.com/kien-thuc/than-so/so-7,30,700,4.3%,4
 https://hieuban.com/lien-he,1,50,2%,20
 """
@@ -172,6 +172,19 @@ def test_hang_doi_theo_gsc(so_dang_ky, tmp_path):
     # Bài đã duyệt (so-7) và trang ngoài kho (lien-he) bị bỏ; nhiều hiển thị mà ít nhấp đứng đầu.
     assert [x["slug"] for x in hd] == ["que-47-khon", "sao-tu-vi"]
     assert hd[0]["hien_thi"] == 1200 and hd[0]["nhap"] == 2 and hd[0]["vi_tri"] == 9.1
+
+
+def test_hang_doi_gsc_gop_url_cu_va_moi(so_dang_ky, tmp_path):
+    # Tuần chuyển URL: GSC báo cả /kien-thuc/kinh-dich/… lẫn /kinh-dich/que/… cho CÙNG một trang → gộp một dòng,
+    # cộng nhấp + hiển thị, vị trí bình quân theo hiển thị (không chia đôi số rồi xếp sai).
+    p = tmp_path / "gsc.csv"
+    p.write_text(CSV_GSC + "https://hieuban.com/kinh-dich/que/que-47-khon,3,300,1%,4.1\n"
+                 "https://hieuban.com/tu-vi/chinh-tinh/sao-tu-vi.md,0,0,0%,0\n", "utf-8")
+    hd = td.hang_doi_gsc(p)
+    assert [x["slug"] for x in hd] == ["que-47-khon", "sao-tu-vi"]
+    assert hd[0]["hien_thi"] == 1500 and hd[0]["nhap"] == 5 and hd[0]["bo_lo"] == 1495
+    assert hd[0]["vi_tri"] == round((9.1 * 1200 + 4.1 * 300) / 1500, 1)
+    assert hd[1]["hien_thi"] == 1000
 
 
 # --- DX-1: chủ biên duyệt xuất bản toàn kho (không phải thẩm định từng bài) ---

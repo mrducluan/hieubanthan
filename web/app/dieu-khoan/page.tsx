@@ -1,17 +1,28 @@
 // PL-1 — Điều khoản sử dụng. Khớp quyết định đã chốt: Sao là credit nội bộ (không đổi tiền, không chuyển nhượng,
 // thưởng mời một tầng), nội dung do ban biên tập biên soạn (BM-1: không gắn nhãn AI trên bài), không phán bệnh/sống chết/xổ số.
 import type { Metadata } from "next";
+import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
+import { apDungSeo, layNoiDungTrang, ngayHienThi } from "@/lib/noi-dung-trang";
 import Link from "next/link";
 import { TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 import { DANG_CAP_NHAT, vanHanh } from "@/lib/van-hanh";
 
-export const metadata: Metadata = {
+const META: Metadata = {
   title: "Điều khoản sử dụng",
   description: "Điều khoản sử dụng Hiểu Bản Thân: tính chất dịch vụ tham khảo văn hoá, tài khoản, Sao, nội dung, sở hữu trí tuệ và giới hạn trách nhiệm.",
   alternates: { canonical: "/dieu-khoan" },
 };
 
-export default function DieuKhoan() {
+const DUONG = "/dieu-khoan";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(META, await layNoiDungTrang(DUONG));
+}
+
+// ND-4: tiêu đề, lời mở đầu, từng mục (theo neo) và ngày hiệu lực sửa được ở CMS — chỉ Quản trị/Chủ biên, phải tích
+// "đã đối chiếu" mỗi lần xuất bản. Ô trống / gỡ xuất bản → chữ trong file này.
+export default async function DieuKhoan() {
+  const nd = await layNoiDungTrang(DUONG);
   const vh = vanHanh();
   const muc: Muc[] = [
     {
@@ -108,7 +119,8 @@ export default function DieuKhoan() {
     },
   ];
   return (
-    <TrangPhapLy nhan="Pháp lý" tieuDe="Điều khoản sử dụng" duongDan="/dieu-khoan" muc={muc}
-      moDau={<p>Các điều khoản dưới đây áp dụng khi bạn dùng web Hiểu Bản Thân, có hoặc không có tài khoản.</p>} />
+    <TrangPhapLy nhan="Pháp lý" tieuDe={nd.dau.h1 ?? "Điều khoản sử dụng"} duongDan={DUONG} muc={gopMucCms(muc, nd)}
+      ngayHieuLuc={ngayHienThi(nd.ngayHieuLuc)}
+      moDau={<LoiDanCms nd={nd}>Các điều khoản dưới đây áp dụng khi bạn dùng web Hiểu Bản Thân, có hoặc không có tài khoản.</LoiDanCms>} />
   );
 }

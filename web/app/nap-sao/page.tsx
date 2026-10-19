@@ -2,26 +2,33 @@
 // sang trang payOS quét QR bằng app ngân hàng / ví bất kỳ → quay về /nap-sao/ket-qua, Sao vào ngay khi tiền về.
 import type { Metadata } from "next";
 import Link from "next/link";
-import { metaTrang } from "@/lib/seo";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { lopKieuChu } from "@/lib/kieu-chu";
+import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
 import { congDangBat, dsGoiSao } from "@/lib/thanh-toan/cong";
 import { NapSao } from "./NapSao";
 
-export const metadata: Metadata = {
-  ...metaTrang({ tieuDe: "Nạp Sao", moTa: "Nạp Sao để mở Luận giải toàn bộ và các tính năng chuyên sâu. Thanh toán bằng QR chuyển khoản qua app ngân hàng hoặc ví điện tử.", duong: "/nap-sao" }),
-  robots: { index: false, follow: true },
-};
+const DUONG = "/nap-sao";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo({ ...metaMacDinh(DUONG), robots: { index: false, follow: true } }, await layNoiDungTrang(DUONG));
+}
 
 export default async function Page() {
-  const [goi, cong] = [await dsGoiSao(), congDangBat()];
+  const [goi, cong, nd] = [await dsGoiSao(), congDangBat(), await layNoiDungTrang(DUONG)];
   return (
     <div className="mx-auto max-w-3xl">
       <p className="eyebrow">Ví Sao</p>
-      <h1 className="mt-2 font-serif text-4xl leading-tight sm:text-5xl">Nạp Sao</h1>
+      <h1 className="mt-2 font-serif text-4xl leading-tight sm:text-5xl">{nd.dau.h1 ?? "Nạp Sao"}</h1>
       <p className="mt-3 max-w-2xl text-fg-muted">
+        {nd.dau.loiDan ? <span className={lopKieuChu(nd.dau.kieuChu) || undefined}>{nd.dau.loiDan}</span> : <>
         Phần lớn công cụ vẫn miễn phí. Sao dùng cho những phần tốn chi phí thật như Luận giải toàn bộ. Giá ghi bằng đồng,
         thanh toán một lần, không tự gia hạn.
+        </>}
       </p>
+      <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
       <NapSao goi={goi} cong={cong} />
+      <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-10" />
       <section className="mt-10 space-y-2 text-sm leading-relaxed text-fg-muted" aria-label="Điều cần biết">
         <h2 className="font-serif text-xl text-fg">Điều cần biết</h2>
         <ul className="list-disc space-y-1.5 pl-5">
@@ -32,6 +39,7 @@ export default async function Page() {
           <li>Hoàn tiền: nạp nhầm và chưa dùng Sao, liên hệ trong 7 ngày. Chi tiết ở <Link href="/dieu-khoan#sao" className="text-gold hover:underline">Điều khoản</Link>.</li>
         </ul>
       </section>
+      <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-10" />
     </div>
   );
 }

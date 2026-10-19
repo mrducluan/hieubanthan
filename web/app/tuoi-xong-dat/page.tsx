@@ -1,21 +1,24 @@
 // TDG-1 — "Xem tuổi xông đất": công cụ (gia chủ từ hồ sơ trên máy) + mục lục theo năm sinh cho Tết sắp tới.
 import type { Metadata } from "next";
 import Link from "next/link";
-import { GioiThieuCongCu } from "@/components/seo/GioiThieuCongCu";
-import { TieuDeMuc } from "@/components/khung/TieuDe";
+import { TieuDeTrang } from "@/components/cms/DauCms";
+import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { CongCuTuoi } from "@/components/tuoi/CongCuTuoi";
+import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { metaTrang } from "@/lib/seo";
 import { NAM_SINH_SEO, duongXongDat, namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { ND_XONG_DAT } from "../xem-tuoi-lam-nha/noi-dung";
 
-export const metadata: Metadata = metaTrang({ tieuDe: "Xem tuổi xông đất đầu năm hợp gia chủ, giờ đẹp mùng 1", moTa: ND_XONG_DAT.moTa, duong: ND_XONG_DAT.duong });
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(metaTrang({ tieuDe: "Xem tuổi xông đất đầu năm hợp gia chủ, giờ đẹp mùng 1", moTa: ND_XONG_DAT.moTa, duong: ND_XONG_DAT.duong }), await layNoiDungTrang(ND_XONG_DAT.duong));
+}
 
 export default async function Page() {
   const tet = (await namAmHienTai()) + 1;
   return (
-    <>
+    <TrangCongCu duong={ND_XONG_DAT.duong}>
       <div className="mx-auto max-w-3xl">
-        <TieuDeMuc cap={1} nho={`Tết ${tet}`} lon="Xem tuổi xông đất"
+        <TieuDeTrang nho={`Tết ${tet}`} lon="Xem tuổi xông đất"
           mo_ta="Tuổi nào hợp xông nhà đầu năm với gia chủ — và giờ hoàng đạo, hướng xuất hành ngày mùng 1." />
         <CongCuTuoi kieu="xong_dat" namMacDinh={tet} />
         <section aria-labelledby="theo-nam-sinh" className="mt-8">
@@ -25,7 +28,6 @@ export default async function Page() {
           </ul>
         </section>
       </div>
-      <GioiThieuCongCu {...ND_XONG_DAT} />
-    </>
+    </TrangCongCu>
   );
 }

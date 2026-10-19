@@ -71,7 +71,7 @@ export function TheBaLop({ vt, macDinh = "giai" }: { vt: ViTriLuanGiai; macDinh?
                 <p>{vt.nghia.tu_khoa} — {vt.khung}.</p>
                 <p className="mt-2"><span className="font-semibold text-cinnabar">Mặt tối:</span> {vt.nghia.mat_toi}.</p>
                 <p className="mt-2 text-xs text-fg-faint">Nguồn: {vt.nghia.trich_nguon}</p>
-                <Link href={`/kien-thuc/than-so/so-${vt.gia_tri}`} className="mt-2 inline-block text-xs text-gold hover:underline">Đọc thêm về số {vt.gia_tri} →</Link>
+                <Link href={`/than-so/y-nghia-so/so-${vt.gia_tri}`} className="mt-2 inline-block text-xs text-gold hover:underline">Đọc thêm về số {vt.gia_tri} →</Link>
               </KhoiLop>
             )}
             {lop === "soi" && vt.nghia && (

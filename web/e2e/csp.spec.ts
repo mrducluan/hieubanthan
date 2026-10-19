@@ -11,8 +11,8 @@ function ghiViPham(page: Page): string[] {
 }
 
 test("header CSP có nonce mới mỗi lượt + script-src strict-dynamic, script của Next mang đúng nonce", async ({ request }) => {
-  const a = await request.get("/kien-thuc/than-so/so-7");
-  const b = await request.get("/kien-thuc/than-so/so-7");
+  const a = await request.get("/than-so/y-nghia-so/so-7");
+  const b = await request.get("/than-so/y-nghia-so/so-7");
   const csp = a.headers()["content-security-policy"] ?? "";
   const nonce = /'nonce-([A-Za-z0-9+/=]+)'/.exec(csp)?.[1];
   expect(nonce).toBeTruthy();
@@ -27,8 +27,8 @@ test("header CSP có nonce mới mỗi lượt + script-src strict-dynamic, scri
   for (const s of scripts) expect(s).toContain(`nonce="${nonce}"`);
 });
 
-for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/kien-thuc/than-so/so-7",
-  "/phong-thuy/tuoi-1990-nam", "/tu-dien"]) {
+for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/than-so/y-nghia-so/so-7",
+  "/phong-thuy/huong-hop-tuoi/tuoi-1990-nam", "/tu-dien"]) {
   test(`không vi phạm CSP: ${duong}`, async ({ page }) => {
     const vp = ghiViPham(page);
     await page.goto(duong);

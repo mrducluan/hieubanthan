@@ -1,3 +1,23 @@
+import { readFileSync } from "node:fs";
+
+const CHUYEN = JSON.parse(readFileSync(new URL("./lib/chuyen-huong.json", import.meta.url), "utf8"));
+
+/** QH-URL (phương án B): URL cũ → URL silo theo mảng, 308 (giữ tín hiệu xếp hạng). Một nguồn với lib/kien-thuc.ts.
+ *  Mỗi mẫu có cả bản ".md" (segment ":trang" nhận luôn đuôi .md) — không chuỗi 2 bước. */
+function chuyenHuong() {
+  const ds = [];
+  const them = (cu, moi) => ds.push(
+    { source: cu, destination: moi, permanent: true },
+    { source: `${cu}.md`, destination: `${moi}.md`, permanent: true },
+    { source: `${cu}/:trang`, destination: `${moi}/:trang`, permanent: true },
+  );
+  for (const [khoa, moi] of Object.entries(CHUYEN.chu_de)) them(`/kien-thuc/${khoa}`, moi);
+  for (const [cu, moi] of CHUYEN.trang) them(cu, moi);
+  // /phong-thuy/tuoi-1990-nam(.md) → /phong-thuy/huong-hop-tuoi/tuoi-1990-nam(.md)
+  ds.push({ source: "/phong-thuy/:trang(tuoi-\\d{4}-(?:nam|nu)(?:\\.md)?)", destination: `${CHUYEN.tuoi_huong}/:trang`, permanent: true });
+  return ds;
+}
+
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   // AIO: bản Markdown cho bot AI — "<trang>.md" → route /md/<trang> (chuẩn llmstxt.org). "/index.md" = trang chủ.
@@ -15,6 +35,9 @@ const nextConfig = {
         { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), accelerometer=(self), gyroscope=(self), magnetometer=(self)" },
       ],
     }];
+  },
+  async redirects() {
+    return chuyenHuong();
   },
   async rewrites() {
     return { beforeFiles: [{ source: "/:duong((?:[^/]+/)*[^/.]+)\\.md", destination: "/md/:duong" }] };

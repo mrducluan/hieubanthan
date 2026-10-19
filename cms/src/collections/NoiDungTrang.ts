@@ -2,8 +2,8 @@
 // Mỗi URL công khai nhóm công cụ / tĩnh / pháp lý / chủ đề là MỘT tài liệu, do job "dong-bo-so-trang" tạo từ sổ trang
 // của web (web/lib/so-trang.ts) — biên tập viên không tạo tay. Trang kiến thức KB không có tài liệu sẵn: muốn chỉnh
 // riêng một URL thì tạo "ghi đè theo yêu cầu" (chỉ nhập đường dẫn, phải thuộc một mẫu cụm có thật).
-// Ô để trống = web hiện chữ đang chạy trong code (mac_dinh, chỉ đọc). Pha ND-0/ND-1: web CHƯA đọc tài liệu này
-// (trừ chân trang ở global Điều hướng) — các pha ND-2… mới nối từng nhóm trang.
+// Ô để trống = web hiện chữ đang chạy trong code (mac_dinh, chỉ đọc). Web đọc ở mọi nhóm: công cụ (ND-2), tĩnh + chủ đề
+// + /gioi-thieu, /lien-he (ND-3), pháp lý (ND-4), trang KB qua mẫu cụm + ghi đè (ND-5).
 // Quyền: nhóm pháp lý + mục "quy-trinh" của /gioi-thieu chỉ Quản trị/Chủ biên sửa (điều kiện ở access + hook, không chỉ
 // ẩn nút); biên tập viên soạn nháp nhóm khác, Chủ biên xuất bản; cộng tác viên không thấy collection.
 import { FixedToolbarFeature, HeadingFeature, LinkFeature, lexicalEditor, lexicalHTMLField } from "@payloadcms/richtext-lexical";
@@ -68,7 +68,7 @@ const giuHeThong: CollectionBeforeChangeHook = async ({ data, originalDoc, opera
   const mau = await req.payload.find({ collection: "mau-cum", limit: 50, depth: 0, overrideAccess: true, req,
     where: { tren_web: { equals: true } } });
   const khop = mau.docs.find((m) => regexMau(String((m as { mau_duong?: string }).mau_duong)).test(duong));
-  if (!khop) throw new APIError("Chỉ tạo ghi đè cho một trang thuộc mẫu cụm có thật (vd /kien-thuc/sao-cung/tu-vi-cung-menh). Trang công cụ, tĩnh, pháp lý, chủ đề đã có sẵn trong danh sách — bấm \"Đồng bộ ngay\" nếu chưa thấy.", 400, null, true);
+  if (!khop) throw new APIError("Chỉ tạo ghi đè cho một trang thuộc mẫu cụm có thật (vd /tu-vi/sao-o-cung/tu-vi-cung-menh). Trang công cụ, tĩnh, pháp lý, chủ đề đã có sẵn trong danh sách — bấm \"Đồng bộ ngay\" nếu chưa thấy.", 400, null, true);
   const m = khop as unknown as { id: number; nhom: string; o?: string[]; nguon_kb?: NguonKb };
   if (m.nguon_kb && (await coTrangKb(m.nguon_kb, duong.split("/").pop()!)) === false) {
     throw new APIError(`Không có trang ${duong} trên web (engine không tìm thấy).`, 400, null, true);
@@ -109,7 +109,8 @@ const quyenMuc: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
  *  ngày của bản đang xuất bản (hoặc ngày đang ghi trong code nếu chưa xuất bản bản nào). */
 const ngayHieuLuc: CollectionBeforeChangeHook = async ({ data, originalDoc, req }) => {
   const cu = (originalDoc ?? {}) as Doc;
-  if (dongBo(req) || cu.nhom !== "phap_ly" || !cu.id) return data;
+  // Chỉ xét khi Xuất bản: lưu nháp / tự lưu / gỡ xuất bản không bị chặn (loai_sua của lần trước còn lưu trong tài liệu).
+  if (dongBo(req) || cu.nhom !== "phap_ly" || !cu.id || !xuatBan(data)) return data;
   const pb = await req.payload.findVersions({ collection: "noi-dung-trang", limit: 1, sort: "-updatedAt", depth: 0, overrideAccess: true, req,
     where: { and: [{ parent: { equals: cu.id } }, { "version._status": { equals: "published" } }] } });
   const dangXb = pb.docs[0]?.version?.ngay_hieu_luc ?? null;
@@ -119,9 +120,20 @@ const ngayHieuLuc: CollectionBeforeChangeHook = async ({ data, originalDoc, req 
     if (!t || t <= moc) {
       throw new APIError(`"Thay đổi nội dung" cần ngày hiệu lực mới, sau ngày đang áp dụng (${new Date(moc).toLocaleDateString("vi-VN", { timeZone: "UTC" })}).`, 400, null, true);
     }
+    data.loai_sua = "sua_chu";   // lần lưu sau mặc định lại "Sửa chữ" — muốn đổi nội dung thì chọn lại có chủ ý
   } else {
     data.ngay_hieu_luc = dangXb;   // sửa chữ: giữ nguyên ngày hiệu lực đang áp dụng
   }
+  return data;
+};
+
+/** ND-4: xuất bản trang pháp lý phải tích ô xác nhận đối chiếu; tích xong thì bỏ tích (mỗi lần xuất bản xác nhận lại). */
+const xacNhanPhapLy: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
+  if (dongBo(req) || ((originalDoc ?? {}) as Doc).nhom !== "phap_ly" || !xuatBan(data)) return data;
+  if (data.da_doi_chieu_phap_ly !== true) {
+    throw new APIError("Trang pháp lý: tích ô \"Tôi đã đối chiếu nội dung…\" trước khi Xuất bản.", 400, null, true);
+  }
+  data.da_doi_chieu_phap_ly = false;
   return data;
 };
 
@@ -208,7 +220,7 @@ export const NoiDungTrang: CollectionConfig = {
   },
   hooks: {
     beforeValidate: [({ data }) => (data ? chuanHoaDuLieu(data) : data)],
-    beforeChange: [giuHeThong, quyenMuc, ngayHieuLuc, kiemDinh],
+    beforeChange: [giuHeThong, quyenMuc, ngayHieuLuc, xacNhanPhapLy, kiemDinh],
     afterChange: [lamMoiTrang],
     afterDelete: [lamMoiKhiXoa],
   },
@@ -231,7 +243,7 @@ export const NoiDungTrang: CollectionConfig = {
     {
       name: "duong", label: "Đường dẫn", type: "text", required: true, unique: true, index: true,
       access: { update: () => false },
-      admin: { description: "Do đồng bộ tạo. Chỉ nhập tay khi tạo ghi đè cho một trang kiến thức (vd /kien-thuc/sao-cung/tu-vi-cung-menh)." },
+      admin: { description: "Do đồng bộ tạo. Chỉ nhập tay khi tạo ghi đè cho một trang kiến thức (vd /tu-vi/sao-o-cung/tu-vi-cung-menh)." },
       validate: (v: unknown) => (typeof v === "string" && DUONG_TRONG_SITE.test(v.trim())) || "Đường dẫn trong site, bắt đầu bằng /",
     },
     docChi({ name: "ten", label: "Tên trang", type: "text", admin: { readOnly: true } }),
@@ -290,6 +302,9 @@ export const NoiDungTrang: CollectionConfig = {
             },
             { name: "ngay_hieu_luc", label: "Ngày hiệu lực", type: "date",
               admin: { condition: (d) => d?.nhom === "phap_ly", date: { pickerAppearance: "dayOnly", displayFormat: "dd/MM/yyyy" } } },
+            { name: "da_doi_chieu_phap_ly", label: "Tôi đã đối chiếu nội dung với thực tế xử lý dữ liệu / ý kiến pháp lý", type: "checkbox",
+              admin: { condition: (d) => d?.nhom === "phap_ly",
+                description: "Bắt buộc tích mỗi lần Xuất bản trang pháp lý (tự bỏ tích sau khi xuất bản, lần sau phải xác nhận lại)." } },
             {
               name: "muc", label: "Mục", type: "array", maxRows: 20, labels: { singular: "Mục", plural: "Mục" },
               admin: { initCollapsed: true },
@@ -298,7 +313,7 @@ export const NoiDungTrang: CollectionConfig = {
                 { name: "tieu_de", label: "Tiêu đề mục (H2)", type: "text", required: true, maxLength: 120 },
                 { name: "noi_dung", label: "Nội dung", type: "richText",
                   editor: lexicalEditor({ features: ({ rootFeatures }) => [
-                    ...rootFeatures.filter((f) => !["relationship", "upload", "heading", "link", "checklist", "blocks"].includes(f.key)),
+                    ...rootFeatures.filter((f) => !["relationship", "heading", "link", "checklist", "blocks"].includes(f.key)),   // ảnh (upload) được phép — ND-4/5
                     HeadingFeature({ enabledHeadingSizes: ["h3", "h4"] }), LinkFeature({ enabledCollections: ["bai-viet"] }), FixedToolbarFeature(),
                   ] }) },
                 lexicalHTMLField({ htmlFieldName: "noi_dung_html", lexicalFieldName: "noi_dung", converters: boChuyenHtml }),

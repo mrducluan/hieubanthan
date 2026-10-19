@@ -82,5 +82,5 @@ def test_tro_toi_trang_menh_gi():
     # SEO-J: mọi trang tuổi (1960–2005) trỏ sang trang "sinh năm X mệnh gì" có thật
     from app.kb import trang
     t = pt_tuoi.tuoi(1990, "nam")
-    assert t["trang_menh"] == "/kien-thuc/menh-tuoi/sinh-nam-1990-menh-gi"
+    assert t["trang_menh"] == "/bat-tu/menh-theo-nam/sinh-nam-1990-menh-gi"
     assert trang.lay("menh_nam", t["trang_menh"].rsplit("/", 1)[1]) is not None

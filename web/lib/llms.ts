@@ -12,9 +12,9 @@ import { dsBaiCms, tinhNangCms } from "@/lib/cms";
 
 /** Chủ đề có quá nhiều trang cùng khuôn → chỉ liệt kê mục lục + mẫu URL + vài ví dụ. */
 const CUM_LON: Record<string, { mau: string; viDu: string[] }> = {
-  "sao-cung": { mau: "/kien-thuc/sao-cung/{sao}-cung-{cung}", viDu: ["tu-vi-cung-menh", "thai-duong-cung-quan-loc", "tham-lang-cung-phu-the"] },
-  "tu-hoa": { mau: "/kien-thuc/tu-hoa/hoa-{loc|quyen|khoa|ky}-cung-{cung}", viDu: ["hoa-loc-cung-menh", "hoa-ky-cung-tai-bach", "hoa-khoa-cung-quan-loc"] },
-  "menh-tuoi": { mau: "/kien-thuc/menh-tuoi/sinh-nam-{1950…2025}-menh-gi", viDu: ["sinh-nam-1990-menh-gi", "sinh-nam-1995-menh-gi", "sinh-nam-2000-menh-gi"] },
+  "sao-cung": { mau: "/tu-vi/sao-o-cung/{sao}-cung-{cung}", viDu: ["tu-vi-cung-menh", "thai-duong-cung-quan-loc", "tham-lang-cung-phu-the"] },
+  "tu-hoa": { mau: "/tu-vi/tu-hoa/hoa-{loc|quyen|khoa|ky}-cung-{cung}", viDu: ["hoa-loc-cung-menh", "hoa-ky-cung-tai-bach", "hoa-khoa-cung-quan-loc"] },
+  "menh-tuoi": { mau: "/bat-tu/menh-theo-nam/sinh-nam-{1950…2025}-menh-gi", viDu: ["sinh-nam-1990-menh-gi", "sinh-nam-1995-menh-gi", "sinh-nam-2000-menh-gi"] },
 };
 
 const dongTrang = (t: MucLuc) => `- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}): ${t.mo_ta}`;
@@ -45,24 +45,24 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Kinh Dịch](${urlDayDu("/kinh-dich")}): gieo quẻ cho một câu hỏi cụ thể — quẻ chủ, hào động, quẻ biến.`,
     `- [Phong thuỷ nhà](${urlDayDu("/phong-thuy")}): mệnh quái Bát trạch, hướng tốt/xấu, khảo sát bố cục nhà, đo hướng bằng la bàn điện thoại.`,
     `- [Xem tuổi làm nhà, cưới hỏi](${urlDayDu("/xem-tuoi-lam-nha")}): tuổi mụ có phạm Kim lâu, Hoang ốc, Tam tai không, năm thuận gần nhất; trang theo năm sinh dạng ${urlDayDu("/xem-tuoi-lam-nha/2027/tuoi-1990")}.`,
-    `- [Hướng xấu theo năm](${urlDayDu("/huong-xau-nam")}): Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc + bàn phi tinh 9 cung (dạng ${urlDayDu("/huong-xau-nam/2027")}).`,
+    `- [Hướng xấu theo năm](${urlDayDu("/phong-thuy/huong-xau-nam")}): Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc + bàn phi tinh 9 cung (dạng ${urlDayDu("/phong-thuy/huong-xau-nam/2027")}).`,
     `- [Tuổi xông đất](${urlDayDu("/tuoi-xong-dat")}): tuổi hợp gia chủ cho Tết, tuổi nên tránh, giờ hoàng đạo mùng 1 (dạng ${urlDayDu("/tuoi-xong-dat/2027/tuoi-1990")}).`,
     `- [Xem ngày tốt](${urlDayDu("/xem-ngay-tot")}): hoàng lịch theo giờ Việt Nam — hoàng đạo/hắc đạo, trực, giờ hoàng đạo, việc nên làm/kiêng, tuổi xung; tìm ngày đẹp cưới hỏi, khai trương, về nhà mới cho tuổi người dùng.`,
     "",
     "## Trả lời nhanh theo câu hỏi hay gặp",
     "",
-    `- "Sinh năm X mệnh gì?" → ${urlDayDu("/kien-thuc/menh-tuoi")} (mỗi năm 1950–2025 một trang: can chi, mệnh nạp âm, màu hợp, tuổi hợp – xung).`,
+    `- "Sinh năm X mệnh gì?" → ${urlDayDu("/bat-tu/menh-theo-nam")} (mỗi năm 1950–2025 một trang: can chi, mệnh nạp âm, màu hợp, tuổi hợp – xung).`,
     `- "Tuổi X hợp hướng nhà nào?" → ${urlDayDu("/phong-thuy/huong-hop-tuoi")} (năm 1960–2005, nam và nữ: 4 hướng tốt, 4 hướng xấu, cách bố trí).`,
-    `- "Số chủ đạo X hợp nghề gì / yêu thế nào / hợp số mấy?" → ${urlDayDu("/kien-thuc/nghe-nghiep")} · ${urlDayDu("/kien-thuc/tinh-yeu")} · ${urlDayDu("/kien-thuc/hop-so")}`,
-    `- "Năm nay tôi là năm cá nhân số mấy?" → cách tự tính ở ${urlDayDu("/kien-thuc/nam-ca-nhan")}, hoặc tính đúng cho từng người tại ${urlDayDu("/")}.`,
-    `- "Sao X ở cung Y nghĩa là gì?" → ${urlDayDu("/kien-thuc/sao-cung")} · "Hoá Lộc/Quyền/Khoa/Kỵ ở cung Y?" → ${urlDayDu("/kien-thuc/tu-hoa")}`,
+    `- "Số chủ đạo X hợp nghề gì / yêu thế nào / hợp số mấy?" → ${urlDayDu("/than-so/nghe-nghiep")} · ${urlDayDu("/than-so/tinh-yeu")} · ${urlDayDu("/hop-doi/cap-so")}`,
+    `- "Năm nay tôi là năm cá nhân số mấy?" → cách tự tính ở ${urlDayDu("/than-so/nam-ca-nhan")}, hoặc tính đúng cho từng người tại ${urlDayDu("/")}.`,
+    `- "Sao X ở cung Y nghĩa là gì?" → ${urlDayDu("/tu-vi/sao-o-cung")} · "Hoá Lộc/Quyền/Khoa/Kỵ ở cung Y?" → ${urlDayDu("/tu-vi/tu-hoa")}`,
     `- "Hôm nay / ngày D/M/YYYY tốt hay xấu? Giờ hoàng đạo?" → ${urlDayDu("/xem-ngay-tot")} (trang từng ngày dạng ${urlDayDu("/xem-ngay-tot/2026-10-13")}, lịch tháng dạng ${urlDayDu("/xem-ngay-tot/thang-10-2026")}).`,
-    `- "Quẻ X Kinh Dịch nói gì?" → ${urlDayDu("/kien-thuc/kinh-dich")} · thuật ngữ khó (Tuần, Triệt, dụng thần, nạp âm…) → ${urlDayDu("/tu-dien")}`,
+    `- "Quẻ X Kinh Dịch nói gì?" → ${urlDayDu("/kinh-dich/que")} · thuật ngữ khó (Tuần, Triệt, dụng thần, nạp âm…) → ${urlDayDu("/tu-dien")}`,
     "",
   ];
   for (const [k, cd] of Object.entries(CHU_DE)) {
     const muc = ds.filter((x) => x.loai === cd.loai && x.index);
-    dong.push(`## ${cd.ten}`, "", `${cd.mo_ta} Mục lục: ${urlDayDu(`/kien-thuc/${k}`)}`, "");
+    dong.push(`## ${cd.ten}`, "", `${cd.mo_ta} Mục lục: ${urlDayDu(cd.duong)}`, "");
     const cum = CUM_LON[k];
     if (cum) {
       dong.push(`${muc.length} trang, đường dẫn dạng ${urlDayDu(cum.mau)}. Ví dụ:`);
@@ -87,7 +87,7 @@ export async function taoLlmsTxt(): Promise<string> {
     dong.push("");
   }
   dong.push("## Tham khảo thêm", "",
-    `- [Lá số minh hoạ đọc từng bước](${urlDayDu("/la-so-mau")}): lá số mẫu, đọc từ cung Mệnh tới vận hạn.`,
+    `- [Lá số minh hoạ đọc từng bước](${urlDayDu("/tu-vi/la-so-mau")}): lá số mẫu, đọc từ cung Mệnh tới vận hạn.`,
     `- [Từ điển thuật ngữ dễ hiểu](${urlDayDu("/tu-dien")})`,
     `- [Giới thiệu & phương pháp](${urlDayDu("/gioi-thieu")})`,
     "",

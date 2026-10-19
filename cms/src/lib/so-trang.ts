@@ -48,7 +48,7 @@ export async function laySoTrang(): Promise<SoTrang> {
   return kiemSoTrang(await r.json());
 }
 
-/** Mẫu cụm "/kien-thuc/sao-cung/{slug}" → regex (biến {nam} 4 chữ số, {gioi} nam|nu, còn lại chữ thường/số/gạch). Cùng
+/** Mẫu cụm "/tu-vi/sao-o-cung/{slug}" → regex (biến {nam} 4 chữ số, {gioi} nam|nu, còn lại chữ thường/số/gạch). Cùng
  *  luật với web/lib/so-trang.ts regexMau. */
 export function regexMau(mau: string): RegExp {
   const BIEN: Record<string, string> = { nam: "(\\d{4})", gioi: "(nam|nu)" };

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 type Xem = { duong?: string; tieu_de?: string | null; doan?: { nhan: string; chu: string }[]; tep?: { ten: string; url: string }[]; loi?: string };
 
-/** Mẫu "/kien-thuc/sao-cung/{slug}" + trang mẫu "tu-vi-cung-menh" → "/kien-thuc/sao-cung/tu-vi-cung-menh". */
+/** Mẫu "/tu-vi/sao-o-cung/{slug}" + trang mẫu "tu-vi-cung-menh" → "/tu-vi/sao-o-cung/tu-vi-cung-menh". */
 const duongMau = (mau: string, viDu: string) => `${mau.split("/").slice(0, -1).join("/")}/${viDu}`;
 
 export function XemTruocKb() {

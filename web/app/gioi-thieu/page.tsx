@@ -3,19 +3,28 @@
 // thành phần mã nguồn mở + giấy phép giữ nội bộ ở docs/NGUON-MO.md (giấy phép MIT không bắt buộc công bố khi chỉ chạy
 // trên máy chủ, nhưng vẫn giữ ghi công trong repo).
 import type { Metadata } from "next";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
+import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import Link from "next/link";
 import { Bang, TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 import { vanHanh } from "@/lib/van-hanh";
 import { coUngHo } from "@/lib/ung-ho";
 
-export const metadata: Metadata = {
+const META: Metadata = {
   title: "Giới thiệu & phương pháp",
   description: "Hiểu Bản Thân là gì, làm việc ra sao, ai biên soạn và thẩm định, kho tri thức dựa trên những cổ thư nào.",
   alternates: { canonical: "/gioi-thieu" },
 };
 
-export default function GioiThieu() {
-  const vh = vanHanh();
+const DUONG = "/gioi-thieu";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(META, await layNoiDungTrang(DUONG));
+}
+
+export default async function GioiThieu() {
+  const vh = vanHanh(), nd = await layNoiDungTrang(DUONG);
   const muc: Muc[] = [
     {
       id: "su-menh", tieuDe: "Chúng tôi làm gì",
@@ -91,8 +100,9 @@ export default function GioiThieu() {
     }] : []),
   ];
   return (
-    <TrangPhapLy nhan="Về chúng tôi" tieuDe="Giới thiệu & phương pháp" duongDan="/gioi-thieu" muc={muc} hieuLuc={false}
-      moDau={<p>Một nơi để hiểu mình hơn qua những hệ thống văn hoá lâu đời, với cách tính minh bạch, nguồn rõ ràng
-        và tôn trọng quyền riêng tư.</p>} />
+    <TrangPhapLy nhan="Về chúng tôi" tieuDe={nd.dau.h1 ?? "Giới thiệu & phương pháp"} duongDan={DUONG} muc={gopMucCms(muc, nd)} hieuLuc={false}
+      khoiCuoi={<KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />}
+      moDau={<LoiDanCms nd={nd}>Một nơi để hiểu mình hơn qua những hệ thống văn hoá lâu đời, với cách tính minh bạch, nguồn rõ ràng
+        và tôn trọng quyền riêng tư.</LoiDanCms>} />
   );
 }

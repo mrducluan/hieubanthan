@@ -372,3 +372,14 @@ Anh duyệt **phương án 2 theo bản điều chỉnh** sau (thay các điểm
    Video nhúng dạng "ảnh trước, bấm mới tải" để không làm chậm trang công cụ.
 7. Câu 3, 4, 7, 9, 10 mục 7: theo đề xuất (115/113/111 và © giữ code; thông tin đơn vị giữ env; hồ sơ tác giả giữ
    code; đồng bộ 1 lần/ngày + nút "Đồng bộ ngay"; Live Preview để sau).
+
+## 9. Tiến độ
+
+| Pha | Trạng thái | Ghi chú |
+|---|---|---|
+| ND-0, ND-1 | xong (PR #94) | sổ trang, đồng bộ, chân trang |
+| ND-2 | xong (2026-10-14) | 11 trang công cụ (`components/cms/TrangCongCu.tsx` + `DauCms`), /ban-than, /nap-sao, /ung-ho, /tai-khoan theo ô `o`. Chủ dự án giao làm ND-3 ngay sau ND-2 (đổi thứ tự mục 8.6: ND-4 pháp lý làm sau ND-3). |
+| ND-3 | xong (2026-10-14) | /, /kham-pha, /kien-thuc, /la-so-mau, /tu-dien, /phong-thuy/huong-hop-tuoi, /blog, 15 chủ đề; /gioi-thieu, /lien-he sửa mục theo neo (`gopMucCms`). |
+| ND-4 | xong (2026-10-19) | 3 trang pháp lý: SEO, H1, lời mở đầu, mục theo neo, ngày hiệu lực (`ngayHienThi`); ô `da_doi_chieu_phap_ly` bắt buộc mỗi lần xuất bản; không khối. |
+| ND-5 | xong (2026-10-19) | ~600 trang KB: khối mẫu cụm + ghi đè (`che_do_mau`), biến chữ thuần (`thayBien` không thoát HTML nữa), `.md` có chữ khối (`mdKhoi`); khối mới **Ảnh**; mục văn bản cho chèn ảnh. Migration `20261019_032830_nd_4_5_anh_phap_ly`. |
+| ND-6 | chưa | xem trước nháp mọi URL (link HMAC `trang:` + draft mode), thẻ quản trị "trang có nội dung CMS". |

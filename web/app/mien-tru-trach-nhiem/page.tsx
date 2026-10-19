@@ -1,16 +1,27 @@
 // PL-1 — Miễn trừ trách nhiệm & nguyên tắc nội dung (khớp các chặn cứng trong engine: khủng hoảng, ngày chết,
 // chẩn đoán bệnh, xổ số, tuyển dụng — app/hoidap/chung.py, thanso_xu_ly.json).
 import type { Metadata } from "next";
+import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
+import { apDungSeo, layNoiDungTrang, ngayHienThi } from "@/lib/noi-dung-trang";
 import Link from "next/link";
 import { TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 
-export const metadata: Metadata = {
+const META: Metadata = {
   title: "Miễn trừ trách nhiệm",
   description: "Hiểu Bản Thân là góc nhìn văn hoá để tự suy ngẫm — không dự báo, không thay thế bác sĩ, luật sư, chuyên gia tài chính hay tâm lý.",
   alternates: { canonical: "/mien-tru-trach-nhiem" },
 };
 
-export default function MienTru() {
+const DUONG = "/mien-tru-trach-nhiem";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return apDungSeo(META, await layNoiDungTrang(DUONG));
+}
+
+// ND-4: tiêu đề, lời mở đầu, từng mục (theo neo) và ngày hiệu lực sửa được ở CMS — chỉ Quản trị/Chủ biên, phải tích
+// "đã đối chiếu" mỗi lần xuất bản. Ô trống / gỡ xuất bản → chữ trong file này.
+export default async function MienTru() {
+  const nd = await layNoiDungTrang(DUONG);
   const muc: Muc[] = [
     {
       id: "tham-khao", tieuDe: "Góc nhìn tham khảo, không phải lời tiên đoán",
@@ -65,7 +76,8 @@ export default function MienTru() {
     },
   ];
   return (
-    <TrangPhapLy nhan="Pháp lý" tieuDe="Miễn trừ trách nhiệm" duongDan="/mien-tru-trach-nhiem" muc={muc}
-      moDau={<p>Đọc trang này một lần để biết Hiểu Bản Thân làm được gì và cố ý không làm gì.</p>} />
+    <TrangPhapLy nhan="Pháp lý" tieuDe={nd.dau.h1 ?? "Miễn trừ trách nhiệm"} duongDan={DUONG} muc={gopMucCms(muc, nd)}
+      ngayHieuLuc={ngayHienThi(nd.ngayHieuLuc)}
+      moDau={<LoiDanCms nd={nd}>Đọc trang này một lần để biết Hiểu Bản Thân làm được gì và cố ý không làm gì.</LoiDanCms>} />
   );
 }

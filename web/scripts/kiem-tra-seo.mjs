@@ -5,6 +5,13 @@
 //
 //   node scripts/kiem-tra-seo.mjs https://hieuban.com
 //   node scripts/kiem-tra-seo.mjs http://localhost:3000 --goc-canonical https://hieuban.com
+import { readFileSync } from "node:fs";
+
+// Trang có bản .md: thư viện /kien-thuc + mọi cụm/trang kiến thức theo silo mảng (QH-URL, lib/chuyen-huong.json).
+const CHUYEN = JSON.parse(readFileSync(new URL("../lib/chuyen-huong.json", import.meta.url), "utf8"));
+const GOC_MD = ["/kien-thuc", ...Object.values(CHUYEN.chu_de), CHUYEN.tuoi_huong];
+const coBanMd = (d) => GOC_MD.some((g) => d === g || d.startsWith(`${g}/`));
+
 const goc = (process.argv[2] ?? "http://localhost:3000").replace(/\/$/, "");
 const iGoc = process.argv.indexOf("--goc-canonical");
 const gocCanonical = (iGoc > 0 ? process.argv[iGoc + 1] : goc).replace(/\/$/, "");
@@ -72,7 +79,7 @@ for (const url of urls) {
   for (const img of html.match(/<img\b[^>]*>/g) ?? []) if (!/\balt="/.test(img)) ghi(loi, url, `ảnh thiếu alt: ${img.slice(0, 80)}`);
   if (!/<html lang="vi"/.test(html)) ghi(loi, url, "thiếu lang=vi");
   for (const m of html.matchAll(/<a [^>]*href="(\/[^"#?]*)/g)) linkNoiBo.add(m[1]);
-  if (duong.startsWith("/kien-thuc") && !/type="text\/markdown"/.test(html)) ghi(canh, url, "thiếu link alternate .md");
+  if (coBanMd(duong) && !/type="text\/markdown"/.test(html)) ghi(canh, url, "thiếu link alternate .md");
   if (i % 25 === 0) console.log(`  …${i}/${urls.length}`);
 }
 for (const [t, ds] of tieuDe) if (ds.length > 1) canh.push(`title trùng "${t}": ${ds.join(", ")}`);

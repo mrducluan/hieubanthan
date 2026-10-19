@@ -15,15 +15,17 @@ const LIEN_QUAN = [
   { href: "/lien-he", ten: "Liên hệ" },
 ];
 
-export function TrangPhapLy({ nhan, tieuDe, moDau, muc, duongDan, hieuLuc = true }: {
+export function TrangPhapLy({ nhan, tieuDe, moDau, muc, duongDan, hieuLuc = true, ngayHieuLuc, khoiCuoi }: {
   nhan: string; tieuDe: string; moDau: ReactNode; muc: Muc[]; duongDan: string; hieuLuc?: boolean;
+  /** ND-3: khối CMS cuối trang (trước "Xem thêm"). */ khoiCuoi?: ReactNode;
+  /** ND-4: ngày hiệu lực từ CMS (dd/mm/yyyy); trống → ngày trong code. */ ngayHieuLuc?: string | null;
 }) {
   return (
     <article className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: tieuDe, duong: duongDan }]))} />
       <p className="eyebrow">{nhan}</p>
       <h1 className="mt-2 text-3xl sm:text-4xl">{tieuDe}</h1>
-      {hieuLuc && <p className="mt-2 text-sm text-fg-faint">Hiệu lực từ {NGAY_HIEU_LUC}</p>}
+      {hieuLuc && <p className="mt-2 text-sm text-fg-faint">Hiệu lực từ {ngayHieuLuc || NGAY_HIEU_LUC}</p>}
       <div className="mt-4 text-fg-muted prose-vn">{moDau}</div>
 
       {muc.length > 2 && (
@@ -46,6 +48,7 @@ export function TrangPhapLy({ nhan, tieuDe, moDau, muc, duongDan, hieuLuc = true
         ))}
       </div>
 
+      {khoiCuoi}
       <nav aria-label="Trang liên quan" className="mt-12 border-t border-line/60 pt-5">
         <p className="eyebrow">Xem thêm</p>
         <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-2 text-sm">

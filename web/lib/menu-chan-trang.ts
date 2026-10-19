@@ -8,9 +8,9 @@ export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
     ["/phong-thuy", "Phong thuỷ"], ["/hop-doi", "Hợp đôi"],
   ] },
   { ten: "Kiến thức", ds: [
-    ["/kien-thuc", "Thư viện kiến thức"], ["/kien-thuc/than-so", "Ý nghĩa các con số"], ["/kien-thuc/kinh-dich", "64 quẻ Kinh Dịch"],
-    ["/kien-thuc/tu-vi", "14 chính tinh Tử vi"], ["/tu-dien", "Từ điển thuật ngữ"], ["/la-so-mau", "Lá số mẫu"], ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"],
-    ["/kien-thuc/hop-so", "Số chủ đạo hợp nhau"], ["/blog", "Blog"],
+    ["/kien-thuc", "Thư viện kiến thức"], ["/than-so/y-nghia-so", "Ý nghĩa các con số"], ["/kinh-dich/que", "64 quẻ Kinh Dịch"],
+    ["/tu-vi/chinh-tinh", "14 chính tinh Tử vi"], ["/tu-dien", "Từ điển thuật ngữ"], ["/tu-vi/la-so-mau", "Lá số mẫu"], ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"],
+    ["/hop-doi/cap-so", "Số chủ đạo hợp nhau"], ["/blog", "Blog"],
   ] },
   { ten: "Về chúng tôi", ds: [
     ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],

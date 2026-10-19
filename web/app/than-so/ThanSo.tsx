@@ -23,6 +23,7 @@ import { hoTenList, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 import { DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
 import { ChaldeaDoc } from "@/components/than-so/ChaldeaDoc";
 import { ghi } from "@/lib/do-luong";
+import { TieuDeTrang, useDauCms } from "@/components/cms/DauCms";
 
 // TS-PHAI — hai trường phái thần số; lựa chọn nhớ trên máy (localStorage), mặc định Pitago như trước.
 export type PhaiThanSo = "pitago" | "chaldea";
@@ -82,13 +83,14 @@ export function ThanSo() {
     if (kq && tab === "dong-doi" && location.hash === "#dong-doi") document.getElementById("chieu-sau")?.scrollIntoView({ block: "start" });
   }, [kq, tab]);
 
+  const dauCms = useDauCms();
   useBatDauDoc("thanso_sau", Boolean(kq));
   // Lúc chờ hồ sơ vẫn có <h1> trong HTML phía máy chủ (SEO); có hồ sơ thì tiêu đề là tên người dùng.
-  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeMuc cap={1} nho="Thần số học" lon="Thần số học theo họ tên và ngày sinh" /><KhungTai /></div>;
+  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeTrang nho="Thần số học" lon="Thần số học theo họ tên và ngày sinh" /><KhungTai /></div>;
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
-        <TieuDeMuc cap={1} nho="Thần số học" lon="Nhập tên và ngày sinh để bắt đầu" />
+        <TieuDeTrang nho="Thần số học" lon="Nhập tên và ngày sinh để bắt đầu" />
         <Card><NhapHoSo onXong={() => router.push("/ban-than?moi=1")} /></Card>
       </div>
     );
@@ -105,6 +107,7 @@ export function ThanSo() {
         <h1 className="mt-2 text-4xl sm:text-5xl" data-testid="ten-chinh">{kq.ten_chinh}</h1>
         <p className="mt-2 text-sm text-fg-muted" data-testid="ngay-sinh">Sinh {kq.ngay_sinh} · {kq.tom_tat_do_tin}</p>
       </header>
+      {dauCms.khoiTren}
 
       <KhungPhai testId="truong-phai-than-so" moTa={<>Hai phái tính khác nhau từ cùng họ tên và ngày sinh. Pitago (mặc định) dùng bảng chữ 1–9 theo thứ tự ABC, có biểu đồ ngày sinh, đỉnh cao, năm cá nhân. Chaldea dùng bảng chữ 1–8 theo âm, đọc số kép 10–52 và coi trọng tên thường gọi.</>}>
         <DongPhai ten="Trường phái" nhan="Chọn trường phái thần số" giaTri={phai} doi={doiPhai}

@@ -2,10 +2,10 @@
 import { test, expect } from "@playwright/test";
 
 test("mục lục 6 lá → lá Mệnh vô chính diệu: lá số SVG, 7 bước, thuật ngữ, CTA", async ({ page }) => {
-  await page.goto("/la-so-mau");
+  await page.goto("/tu-vi/la-so-mau");
   await expect(page.getByTestId("ds-la-so-mau").getByRole("link")).toHaveCount(6);
   await page.getByRole("link", { name: /Mệnh vô chính diệu/ }).click();
-  await expect(page).toHaveURL(/\/la-so-mau\/menh-vo-chinh-dieu$/);
+  await expect(page).toHaveURL(/\/tu-vi\/la-so-mau\/menh-vo-chinh-dieu$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Mệnh vô chính diệu");
   await expect(page.getByTestId("la-so-mau").getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
   const buoc = page.getByTestId("buoc-doc").locator(":scope > li");
@@ -20,8 +20,8 @@ test("mục lục 6 lá → lá Mệnh vô chính diệu: lá số SVG, 7 bướ
 });
 
 test("slug lạ → 404; sitemap có lá số mẫu", async ({ page, request }) => {
-  const r = await page.goto("/la-so-mau/khong-co");
+  const r = await page.goto("/tu-vi/la-so-mau/khong-co");
   expect(r?.status()).toBe(404);
   const sm = await (await request.get("/sitemap.xml")).text();
-  expect(sm).toContain("/la-so-mau/tu-phu-dong-cung");
+  expect(sm).toContain("/tu-vi/la-so-mau/tu-phu-dong-cung");
 });

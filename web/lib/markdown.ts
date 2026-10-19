@@ -3,6 +3,7 @@
 import { CHU_DE, duongTrang, duongTuoi, type MucLuc, type MucTuDien, type MucTuoiHuong, type TrangKienThuc, type TuoiHuong } from "@/lib/kien-thuc";
 import { CHUYEN_GIA, duongChuyenGia } from "@/lib/chuyen-gia";
 import { MO_TA_SITE, TEN_SITE, urlDayDu } from "@/lib/seo";
+import { duongMoi } from "@/lib/duong-silo";
 
 
 /** EEAT-1: dòng tác giả / chủ biên / thẩm định cho bản .md (cùng dữ liệu engine như trang HTML). */
@@ -41,7 +42,7 @@ export function mdTrang(t: TrangKienThuc, cap = 1): string {
   d.push(`${h(1)} Nguồn`, "", ...t.nguon.map((x) => `- ${x}`), "");
   if (t.lien_quan?.length || t.lien_ket_ngoai?.length) {
     d.push(`${h(1)} Liên quan`, "", ...(t.lien_quan ?? []).map((x) => `- [${x.tieu_de}](${urlDayDu(duongTrang(x.loai, x.slug))}.md)`),
-      ...(t.lien_ket_ngoai ?? []).map((x) => `- [${x.ten}](${urlDayDu(x.duong)})`), "");
+      ...(t.lien_ket_ngoai ?? []).map((x) => `- [${x.ten}](${urlDayDu(duongMoi(x.duong))})`), "");
   }
   return d.join("\n");
 }
@@ -50,7 +51,7 @@ export function mdChuDe(khoa: string, ds: MucLuc[]): string | null {
   const cd = CHU_DE[khoa];
   if (!cd) return null;
   const muc = ds.filter((t) => t.loai === cd.loai);
-  return [`# ${cd.ten}`, "", `> ${cd.mo_ta}`, "", `URL: ${urlDayDu(`/kien-thuc/${khoa}`)}`, "",
+  return [`# ${cd.ten}`, "", `> ${cd.mo_ta}`, "", `URL: ${urlDayDu(cd.duong)}`, "",
     ...muc.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}.md): ${t.mo_ta}${t.trang_thai === "da_duyet" ? " (đã thẩm định)" : ""}`),
     ""].join("\n");
 }
@@ -58,7 +59,7 @@ export function mdChuDe(khoa: string, ds: MucLuc[]): string | null {
 export function mdThuVien(ds: MucLuc[]): string {
   const d = [`# Thư viện kiến thức — ${TEN_SITE}`, "", `> ${MO_TA_SITE}`, ""];
   for (const [k, cd] of Object.entries(CHU_DE)) {
-    d.push(`## [${cd.ten}](${urlDayDu(`/kien-thuc/${k}`)}.md)`, "", cd.mo_ta, `(${ds.filter((t) => t.loai === cd.loai).length} trang)`, "");
+    d.push(`## [${cd.ten}](${urlDayDu(cd.duong)}.md)`, "", cd.mo_ta, `(${ds.filter((t) => t.loai === cd.loai).length} trang)`, "");
   }
   return d.join("\n");
 }

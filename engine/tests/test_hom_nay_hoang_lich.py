@@ -34,6 +34,8 @@ def test_que_dau_ngay_tat_dinh():
     ad, am, ay, _ = lunar.solar_to_lunar(13, 10, 2026, 7.0)
     m = mh.khoi_que_thoi_gian(lunar.can_chi_nam(ay)[1], am, ad, "Tý")
     assert a["hao_dong"] == m["hao_dong"] and a["ten"] and a["cau_tu_soi"] and a["so"] >= 1
+    # QH-URL: link quẻ trỏ vào silo Kinh Dịch (/kinh-dich/que/…), trang KB có thật
+    assert a["duong"].startswith(f"/kinh-dich/que/que-{a['so']}-")
 
 
 def test_nhip_bat_tu_luu_nhat():

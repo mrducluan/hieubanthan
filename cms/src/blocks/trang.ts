@@ -1,6 +1,6 @@
 // ND — khối đặt quanh nội dung một URL ("Trang website" / "Mẫu cụm trang"): vị trí cố định (trên / dưới / cuối), mỗi
 // vị trí tối đa 6 khối. Dùng lại 4 khối Lexical (ghi chú, mời dùng công cụ, trích dẫn, video) + 5 khối của Trang đích
-// (thẻ công cụ, danh sách bài, hỏi đáp, lời mời, đoạn văn) + 2 khối mới (banner, nút kêu gọi).
+// (thẻ công cụ, danh sách bài, hỏi đáp, lời mời, đoạn văn) + 3 khối mới (banner, ảnh, nút kêu gọi).
 // "Cỡ chữ" chỉ là lựa chọn có sẵn (cỡ · căn · nền), web ánh xạ sang lớp CSS — không CSS/px tự do (mục 3.3 thiết kế).
 import type { Block, Field } from "payload";
 import { DUONG_TRONG_SITE } from "../globals/DieuHuong";
@@ -48,6 +48,23 @@ export const Banner: Block = {
   ],
 };
 
+/** ND-5 — ảnh đứng riêng (thay hình minh hoạ, ảnh chiến dịch…): ảnh từ thư viện Media, chú thích, link trong site. */
+export const Anh: Block = {
+  slug: "anh",
+  labels: { singular: "Ảnh", plural: "Ảnh" },
+  fields: [
+    { name: "anh", label: "Ảnh", type: "upload", relationTo: "media", required: true,
+      admin: { description: "Mô tả ảnh (alt) lấy từ ô \"Mô tả ảnh\" trong thư viện Media — bắt buộc cho người khiếm thị và Google." } },
+    { name: "chu_thich", label: "Chú thích dưới ảnh", type: "text", maxLength: 200 },
+    { type: "row", fields: [
+      { name: "link", label: "Bấm ảnh dẫn tới (tuỳ chọn)", type: "text", validate: duong(false), admin: { width: "50%" } },
+      { name: "co", label: "Độ rộng", type: "select", defaultValue: "vua", admin: { width: "50%" }, options: [
+        { label: "Vừa (khung chữ)", value: "vua" }, { label: "Rộng (cả khung trang)", value: "rong" }, { label: "Nhỏ", value: "nho" }] },
+    ] },
+    lich,
+  ],
+};
+
 export const NutMoi: Block = {
   slug: "nut_moi",
   labels: { singular: "Nút kêu gọi", plural: "Nút kêu gọi" },
@@ -65,7 +82,7 @@ const tuTrangDich = (slug: string) => KHOI_TRANG_DICH.find((k) => k.slug === slu
 
 /** Bộ khối cho khoi_tren / khoi_duoi / khoi_cuoi. Không có "Đầu trang (hero)" — đầu trang là ô riêng của URL. */
 export const KHOI_TRANG: Block[] = [
-  Banner, NutMoi, GhiChu, KeuGoiCongCu, TrichDan, Video,
+  Banner, Anh, NutMoi, GhiChu, KeuGoiCongCu, TrichDan, Video,
   ...["cong_cu", "bai_viet", "hoi_dap", "loi_moi", "van_ban"].map(tuTrangDich),
 ];
 
