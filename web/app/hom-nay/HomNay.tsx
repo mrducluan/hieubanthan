@@ -20,6 +20,7 @@ import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { VongGio } from "@/components/hoang-lich/VongGio";
 import type { GioNgay } from "@/lib/hoang-lich";
 import { TieuDeTrang } from "@/components/cms/DauCms";
+import { duongMoi } from "@/lib/duong-silo";
 
 interface NgayCN { so: number; nghia: string; tu_soi: string }
 interface TheHomNay {
@@ -371,7 +372,7 @@ export function HomNay() {
               {the.que_ngay.loi_khuyen && <p className="text-sm"><span className="text-jade">Gợi ý:</span> {the.que_ngay.loi_khuyen}</p>}
               {the.que_ngay.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {the.que_ngay.cau_tu_soi}</p>}
               <p className="text-xs text-fg-faint">{the.que_ngay.cach_khoi} Mọi người cùng một quẻ trong ngày.{" "}
-                {the.que_ngay.duong && <Link href={the.que_ngay.duong} className="text-gold hover:underline">Đọc quẻ {the.que_ngay.ten}</Link>}{" "}
+                {the.que_ngay.duong && <Link href={duongMoi(the.que_ngay.duong)} className="text-gold hover:underline">Đọc quẻ {the.que_ngay.ten}</Link>}{" "}
                 · <Link href="/kinh-dich?cach=mai_hoa" className="text-gold hover:underline">Gieo quẻ Mai Hoa theo giờ này</Link></p>
             </section>
           )}

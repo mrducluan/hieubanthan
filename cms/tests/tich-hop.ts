@@ -636,6 +636,37 @@ await ca("chân trang: chữ thương hiệu mặc định; miễn trừ không 
   await payload.updateGlobal({ slug: "dieu-huong", overrideAccess: true, data: { thuong_hieu: { gioi_thieu: null, cam_ket: [] }, nhan_ung_ho: null } as never });
 });
 
+await ca("QH-URL migration: chữ CMS của URL cũ đi theo URL silo (bản chính + phiên bản); trùng đích không đè; down trả lại", async () => {
+  const { up, down } = await import("../src/migrations/20261019_060000_qh_url_doi_duong");
+  const args = { db: payload.db.drizzle, payload, req: {} } as never;
+  const moi = async (duong: string) => {
+    const d = await payload.create({ collection: "noi-dung-trang", overrideAccess: true, context: { dongBo: true },
+      data: { duong, nhom: "kien_thuc", ten: "QH thử", h1: `H1 ${duong}`, _status: "published" } as never }) as unknown as { id: number };
+    tao.push({ collection: "noi-dung-trang", id: d.id });
+    return d.id;
+  };
+  const a = await moi(`/kien-thuc/sao-cung/${dau}-a`);
+  const b = await moi(`/phong-thuy/tuoi-${dau}`);
+  const c = await moi(`/kien-thuc/sao-cung/${dau}-c`);
+  const c2 = await moi(`/tu-vi/sao-o-cung/${dau}-c`);       // đích đã có (đồng bộ chạy trước) → c giữ nguyên
+  const duong = async (id: number) => ((await payload.findByID({ collection: "noi-dung-trang", id, overrideAccess: true })) as unknown as { duong: string; h1: string });
+  const phienBan = async (id: number) => (await payload.findVersions({ collection: "noi-dung-trang", overrideAccess: true,
+    where: { parent: { equals: id } } })).docs.map((v) => (v.version as { duong: string }).duong);
+  await up(args);
+  assert.deepEqual(await duong(a), { ...(await duong(a)), duong: `/tu-vi/sao-o-cung/${dau}-a`, h1: `H1 /kien-thuc/sao-cung/${dau}-a` });
+  assert.ok((await phienBan(a)).every((d) => d === `/tu-vi/sao-o-cung/${dau}-a`));
+  assert.equal((await duong(b)).duong, `/phong-thuy/huong-hop-tuoi/tuoi-${dau}`);
+  assert.equal((await duong(c)).duong, `/kien-thuc/sao-cung/${dau}-c`);
+  assert.ok((await phienBan(c)).every((d) => d === `/kien-thuc/sao-cung/${dau}-c`));
+  assert.equal((await duong(c2)).duong, `/tu-vi/sao-o-cung/${dau}-c`);
+  await down(args);
+  assert.equal((await duong(a)).duong, `/kien-thuc/sao-cung/${dau}-a`);
+  assert.ok((await phienBan(a)).every((d) => d === `/kien-thuc/sao-cung/${dau}-a`));
+  assert.equal((await duong(b)).duong, `/phong-thuy/tuoi-${dau}`);
+  assert.equal((await duong(c2)).duong, `/tu-vi/sao-o-cung/${dau}-c`);      // c chiếm đích cũ → c2 ở lại
+  await up(args);   // trả DB thử về trạng thái sau migration
+});
+
 // dọn
 for (const t of tao.reverse()) {
   await payload.delete({ collection: t.collection, id: t.id, overrideAccess: true }).catch(() => {});

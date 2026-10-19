@@ -424,8 +424,10 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
 - [ ] QHURL. (2026-10-19, quy hoạch URL phương án B) Sau khi PR merge + deploy:
   1) Search Console → Sơ đồ trang web → gửi lại `https://hieuban.com/sitemap.xml` (≈ 640 URL mới; URL cũ tự 308).
      Theo dõi báo cáo "Trang" 4 tuần: URL cũ chuyển dần sang "Trang có chuyển hướng" là đúng.
-  2) CMS → Trang website → **Đồng bộ ngay**: 15 trang chủ đề + 16 mẫu cụm có đường dẫn mới; dòng cũ hiện "URL đã gỡ"
-     (không tự xoá — nếu anh đã sửa chữ ở dòng cũ thì chép sang dòng mới rồi xoá dòng cũ).
+  2) CMS redeploy tự chạy migration `qh_url_doi_duong`: mọi "Trang website" + "Mẫu cụm trang" (kể cả bản ghi đè từng URL,
+     `/la-so-mau`, `/huong-xau-nam`) **tự đổi sang đường dẫn mới, giữ nguyên chữ/ảnh anh đã sửa**. Sau đó bấm
+     **Đồng bộ ngay** (Trang website). Chỉ khi log deploy CMS có dòng "TRÙNG đích bỏ qua" (đồng bộ lỡ chạy trước, đã tạo
+     nháp trống ở URL mới) thì xoá nháp trống ở URL mới, đổi đường dẫn dòng cũ sang URL mới.
   3) Nếu đã tự sửa **Menu đầu trang / Điều hướng chân trang** trong CMS: đổi link `/huong-xau-nam` → `/phong-thuy/huong-xau-nam`,
      `/la-so-mau` → `/tu-vi/la-so-mau`, `/kien-thuc/…` → link mới (link cũ vẫn chạy nhờ 308 nhưng nên trỏ thẳng).
 - [ ] ND45. (2026-10-19, ND-4/ND-5) Sau khi PR merge, CMS redeploy tự chạy migration `nd_4_5_anh_phap_ly`. Thử ~5 phút:

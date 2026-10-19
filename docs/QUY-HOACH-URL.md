@@ -4,7 +4,7 @@
 > `/phong-thuy/huong-xau-nam`, công cụ lịch & tuổi giữ URL gốc. Nguồn đường dẫn + 308: `web/lib/chuyen-huong.json`.
 > Đẩy khâu: **1 Thu hút** (cụm chủ đề rõ → Google hiểu site là chuyên trang từng mảng) và **2 Quay lại** (đường đi
 > từ bài đọc sang công cụ của đúng mảng ngắn hơn). Đo: số trang được index theo cụm, hiển thị/nhấp theo thư mục
-> trong Search Console, tỉ lệ `landing_viewed` trang kiến thức → `reading_started` công cụ cùng mảng.
+> trong Search Console, tỉ lệ `landing_viewed` có `loai = kien_thuc` → `reading_started` công cụ cùng mảng.
 
 ## 1. Hiện trạng (kiểm kê từ code, ≈ 1.300 URL công khai)
 

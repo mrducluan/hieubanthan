@@ -19,7 +19,7 @@ test("trang tuổi 1990 nam: HTML máy chủ có H1, mệnh Khảm, 4 hướng t
 
 test("mục lục 92 trang, bản .md, sitemap, 404 năm ngoài phạm vi", async ({ request, page }) => {
   await page.goto("/phong-thuy/huong-hop-tuoi");
-  await expect(page.getByTestId("huong-hop-tuoi").locator('a[href^="/phong-thuy/tuoi-"]')).toHaveCount(92);
+  await expect(page.getByTestId("huong-hop-tuoi").locator('a[href^="/phong-thuy/huong-hop-tuoi/tuoi-"]')).toHaveCount(92);
   const md = await request.get("/phong-thuy/huong-hop-tuoi/tuoi-1985-nu.md");
   expect(md.status()).toBe(200);
   expect(await md.text()).toContain("Tết (lịch Trung Quốc): 1985-02-20");

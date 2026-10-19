@@ -16,6 +16,7 @@ import { layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { CHUYEN_GIA, idChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
 import { CHU_DE, TEN_MANG_SILO, duongTrang, trang, truCua, type TrangKienThuc } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
+import { duongMoi } from "@/lib/duong-silo";
 
 type Thamso = { khoa: string | null; slug: string };
 
@@ -186,7 +187,7 @@ export async function TrangKienThucView(params: Thamso) {
               <li key={l.slug}><Link href={duongTrang(l.loai, l.slug)} className="inline-flex min-h-10 items-center rounded-full border border-line px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg">{l.tieu_de}</Link></li>
             ))}
             {t.lien_ket_ngoai?.map((l) => (
-              <li key={l.duong}><Link href={l.duong} className="inline-flex min-h-10 items-center rounded-full border border-gold/40 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold hover:text-fg">{l.ten}</Link></li>
+              <li key={l.duong}><Link href={duongMoi(l.duong)} className="inline-flex min-h-10 items-center rounded-full border border-gold/40 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold hover:text-fg">{l.ten}</Link></li>
             ))}
           </ul>
         </nav>

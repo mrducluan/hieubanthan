@@ -3,6 +3,7 @@
 import { CHU_DE, duongTrang, duongTuoi, type MucLuc, type MucTuDien, type MucTuoiHuong, type TrangKienThuc, type TuoiHuong } from "@/lib/kien-thuc";
 import { CHUYEN_GIA, duongChuyenGia } from "@/lib/chuyen-gia";
 import { MO_TA_SITE, TEN_SITE, urlDayDu } from "@/lib/seo";
+import { duongMoi } from "@/lib/duong-silo";
 
 
 /** EEAT-1: dòng tác giả / chủ biên / thẩm định cho bản .md (cùng dữ liệu engine như trang HTML). */
@@ -41,7 +42,7 @@ export function mdTrang(t: TrangKienThuc, cap = 1): string {
   d.push(`${h(1)} Nguồn`, "", ...t.nguon.map((x) => `- ${x}`), "");
   if (t.lien_quan?.length || t.lien_ket_ngoai?.length) {
     d.push(`${h(1)} Liên quan`, "", ...(t.lien_quan ?? []).map((x) => `- [${x.tieu_de}](${urlDayDu(duongTrang(x.loai, x.slug))}.md)`),
-      ...(t.lien_ket_ngoai ?? []).map((x) => `- [${x.ten}](${urlDayDu(x.duong)})`), "");
+      ...(t.lien_ket_ngoai ?? []).map((x) => `- [${x.ten}](${urlDayDu(duongMoi(x.duong))})`), "");
   }
   return d.join("\n");
 }

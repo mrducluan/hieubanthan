@@ -127,7 +127,7 @@ def hang_doi_gsc(duong_csv) -> list[dict]:
     theo_slug = {}
     for t in trang.danh_sach():
         theo_slug.setdefault(t["slug"], []).append(t)
-    ra = []
+    gop = {}   # (loai, slug) → một dòng: tuần chuyển URL GSC báo cả URL cũ lẫn mới cho cùng trang
     with open(duong_csv, encoding="utf-8-sig", newline="") as f:
         dong = list(csv.reader(f))
     for d in dong[1:]:
@@ -139,8 +139,16 @@ def hang_doi_gsc(duong_csv) -> list[dict]:
         if len(khop) != 1 or khop[0]["trang_thai"] == "da_duyet":
             continue
         so = lambda x: float(x.replace("%", "").replace(",", ".") or 0)
-        nhap, hien = int(so(d[1])), int(so(d[2]))
-        ra.append({**khop[0], "nhap": nhap, "hien_thi": hien, "vi_tri": so(d[4]), "bo_lo": hien - nhap})
+        g = gop.setdefault((khop[0]["loai"], slug), {**khop[0], "nhap": 0, "hien_thi": 0, "_vt": 0.0, "_vt_dau": so(d[4])})
+        g["nhap"] += int(so(d[1]))
+        g["hien_thi"] += int(so(d[2]))
+        g["_vt"] += so(d[4]) * int(so(d[2]))
+    ra = []
+    for g in gop.values():
+        vt, dau = g.pop("_vt"), g.pop("_vt_dau")
+        g["vi_tri"] = round(vt / g["hien_thi"], 1) if g["hien_thi"] else dau   # vị trí bình quân theo hiển thị
+        g["bo_lo"] = g["hien_thi"] - g["nhap"]
+        ra.append(g)
     return sorted(ra, key=lambda x: -x["bo_lo"])
 
 

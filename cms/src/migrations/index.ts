@@ -8,6 +8,7 @@ import * as migration_20261012_083859_bai_lien_quan_nghia from './20261012_08385
 import * as migration_20261012_102241_menu_dau_trang from './20261012_102241_menu_dau_trang';
 import * as migration_20261013_154135_noi_dung_trang from './20261013_154135_noi_dung_trang';
 import * as migration_20261019_032830_nd_4_5_anh_phap_ly from './20261019_032830_nd_4_5_anh_phap_ly';
+import * as migration_20261019_060000_qh_url_doi_duong from './20261019_060000_qh_url_doi_duong';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20261019_032830_nd_4_5_anh_phap_ly.up,
     down: migration_20261019_032830_nd_4_5_anh_phap_ly.down,
-    name: '20261019_032830_nd_4_5_anh_phap_ly'
+    name: '20261019_032830_nd_4_5_anh_phap_ly',
+  },
+  {
+    up: migration_20261019_060000_qh_url_doi_duong.up,
+    down: migration_20261019_060000_qh_url_doi_duong.down,
+    name: '20261019_060000_qh_url_doi_duong',
   },
 ];

@@ -529,7 +529,7 @@ export interface TrangDich {
 export interface NoiDungTrang {
   id: number;
   /**
-   * Do đồng bộ tạo. Chỉ nhập tay khi tạo ghi đè cho một trang kiến thức (vd /kien-thuc/sao-cung/tu-vi-cung-menh).
+   * Do đồng bộ tạo. Chỉ nhập tay khi tạo ghi đè cho một trang kiến thức (vd /tu-vi/sao-o-cung/tu-vi-cung-menh).
    */
   duong: string;
   ten?: string | null;

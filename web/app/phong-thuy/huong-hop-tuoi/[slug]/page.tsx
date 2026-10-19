@@ -11,6 +11,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
 import { duongTuoi, tuoiHuong, type TuoiHuong } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
+import { duongMoi } from "@/lib/duong-silo";
 
 export const revalidate = 21600;
 
@@ -73,7 +74,7 @@ export default async function Page({ params: thamSo }: Props) {
       <header className="mt-4">
         <h1 className="text-3xl leading-tight sm:text-5xl">{t.tieu_de}</h1>
         <p className="mt-3 text-sm text-fg-muted">
-          {GIOI[t.gioi_tinh]} · năm {t.can_chi} · nạp âm {t.trang_menh ? <Link href={t.trang_menh} className="underline decoration-gold/50 underline-offset-2 hover:text-fg">{t.nap_am.ten}</Link> : t.nap_am.ten} ({t.nap_am.hanh}) · mệnh quái <b className="text-gold">{t.menh_quai.quai}</b> · {t.menh_quai.nhom}
+          {GIOI[t.gioi_tinh]} · năm {t.can_chi} · nạp âm {t.trang_menh ? <Link href={duongMoi(t.trang_menh)} className="underline decoration-gold/50 underline-offset-2 hover:text-fg">{t.nap_am.ten}</Link> : t.nap_am.ten} ({t.nap_am.hanh}) · mệnh quái <b className="text-gold">{t.menh_quai.quai}</b> · {t.menh_quai.nhom}
         </p>
       </header>
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-6" />
