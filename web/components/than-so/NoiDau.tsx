@@ -25,7 +25,7 @@ export function hienGiaTri(v: SoTraLoi["gia_tri"]): string {
   return String(v);
 }
 
-export function NoiDau({ hoSo, onHoi }: { hoSo: HoSo; onHoi: (cau: string) => void }) {
+export function NoiDau({ hoSo, onHoi, theoPitago = false }: { hoSo: HoSo; onHoi: (cau: string) => void; theoPitago?: boolean }) {
   const khoa = JSON.stringify([hoTenList(hoSo), hoSo.ngay, hoSo.thang, hoSo.nam]);
   const [bd, setBd] = useState<BanDo | null>(boNho.get(khoa) ?? null);
   const [chon, setChon] = useState(0);
@@ -61,6 +61,7 @@ export function NoiDau({ hoSo, onHoi }: { hoSo: HoSo; onHoi: (cau: string) => vo
         })}
       </div>
       <p className="mt-2 text-sm text-fg-muted">{tru.mo_ta}</p>
+      {theoPitago && <p className="mt-1 text-xs text-moon" data-testid="noi-dau-theo-pitago">Con số trên thẻ tính theo phái Pitago; câu về bản thân sẽ được trả lời bằng số Chaldea.</p>}
       <div role="tabpanel" aria-label={tru.ten} className="mt-4 grid gap-3 md:grid-cols-2">
         {tru.cau_hoi.map((q) => (
           <article key={q.ma} data-testid={`noi-dau-${q.ma}`} className="flex flex-col rounded-xl border border-line/70 bg-bg/40 p-4">

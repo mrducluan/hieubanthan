@@ -18,7 +18,7 @@ interface SoChaldea {
 // TS-NOIDAU: cùng số 13/14/16/19 — Pitago đọc là nợ nghiệp, Chaldea đọc là số kép; engine nối hai cách đọc (KB).
 interface GiaoDiem {
   ma: string; ten: string; pitago_no_nghiep: number | null; chaldea_kep: number | null; cung_so: boolean;
-  nghia: { pitago: string; chaldea: string; cach_dung: string; tu_soi: string } | null;
+  pitago: string | null; chaldea: string | null; cach_dung: string | null; tu_soi: string | null;
 }
 export interface BaiChaldea {
   phai: "chaldea"; ten_chinh: string; ngay_sinh: string; so_khac_pitago: number; luu_y: string; nguon: string; trang_thai: string;
@@ -123,12 +123,10 @@ export function ChaldeaDoc({ hoSo }: { hoSo: HoSo }) {
                     {g.pitago_no_nghiep ? `Pitago: nợ nghiệp ${g.pitago_no_nghiep}` : "Pitago: không có nợ nghiệp"} · {g.chaldea_kep ? `Chaldea: kép ${g.chaldea_kep}` : "Chaldea: kép khác"}
                   </span>
                 </div>
-                {g.nghia && (<>
-                  {g.pitago_no_nghiep && <p className="mt-2 text-sm">{g.nghia.pitago}</p>}
-                  {g.chaldea_kep && <p className="mt-1 text-sm">{g.nghia.chaldea}</p>}
-                  {g.cung_so && <p className="mt-2 text-sm text-jade">{g.nghia.cach_dung}</p>}
-                  <p className="mt-2 text-sm text-fg-muted">Tự soi: {g.nghia.tu_soi}</p>
-                </>)}
+                {g.pitago && <p className="mt-2 text-sm">{g.pitago}</p>}
+                {g.chaldea && <p className="mt-1 text-sm">{g.chaldea}</p>}
+                {g.cach_dung && <p className="mt-2 text-sm text-jade">{g.cach_dung}</p>}
+                {g.tu_soi && <p className="mt-2 text-sm text-fg-muted">Tự soi: {g.tu_soi}</p>}
               </article>
             ))}
           </div>

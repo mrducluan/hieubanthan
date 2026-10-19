@@ -36,8 +36,12 @@ def giao_diem(so: dict, ten_chinh: str, ngay: int, thang: int, nam: int) -> list
         p = no.get(vt)
         c = so[ma]["kep"] if so[ma]["kep"] in mr.NO_NGHIEP else None
         if p or c:
+            # Hai phái có thể ra HAI số khác nhau ở vị trí tên (bảng chữ khác) → mỗi phái lời của đúng số mình.
+            np_, nc = kb.giao_diem_phai(p) if p else None, kb.giao_diem_phai(c) if c else None
             kq.append({"ma": ma, "ten": ten[ma], "pitago_no_nghiep": p, "chaldea_kep": c, "cung_so": p == c,
-                       "nghia": kb.giao_diem_phai(c or p)})
+                       "pitago": np_["pitago"] if np_ else None, "chaldea": nc["chaldea"] if nc else None,
+                       "cach_dung": np_["cach_dung"] if p == c and np_ else None,
+                       "tu_soi": (nc or np_)["tu_soi"] if (nc or np_) else None})
     return kq
 
 

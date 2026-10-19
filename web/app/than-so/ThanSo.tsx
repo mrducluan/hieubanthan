@@ -214,7 +214,7 @@ export function ThanSo() {
       <CuoiBaiDoc moDun="thanso_sau" cauHoi="Phần chiều sâu có giúp bạn hiểu mình hơn?" />
       </>)}
 
-      <NoiDau hoSo={hoSo} onHoi={hoiCau} />
+      <NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea"} />
 
       <section id="hoi" aria-labelledby="muc-hoi" className="scroll-mt-24">
         <TieuDeMuc id="muc-hoi" nho="Hỏi sâu hơn" lon={`${tenGoi(hoSo)}, bạn đang băn khoăn điều gì?`}

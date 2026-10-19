@@ -91,6 +91,33 @@ def test_lien_quan_tat_dinh_va_dung_chu_de():
     assert all(x["cau"] != cau for x in noi_dau.lien_quan(cau))
 
 
+def test_thang_mo_dau():
+    # Năm cá nhân 2026 = 8, 2027 = 9 → tháng cá nhân 1 rơi vào 11/2026 (8+11) và 1/2027 (9+1).
+    assert noi_dau.thang_mo_dau(24, 10, NGAY_XEM) == [(2026, 11), (2027, 1)]
+
+
+def test_cau_tra_loi_rieng_tung_the():
+    """Câu bấm từ bảng: lời đáp mở đầu bằng chỉ số đặc trưng của thẻ, không trùng câu khác cùng trụ."""
+    from app.narrative import hoi_van
+    nguoi = {"ho_ten": LUAN[0], "ngay": 24, "thang": 10, "nam": 1988}
+    dau: dict[str, set[str]] = {}
+    for q in KB["cau_hoi"]:
+        if q["linh_vuc"] == ["hop_doi"]:
+            continue
+        van = hoi_van.tra_loi(q["cau"], nguoi, None, NGAY_XEM, dung_llm=False)["cau_tra_loi"]
+        mo = van.split("\n")[0]
+        assert mo not in dau.setdefault(q["tru"], set()), q["ma"]
+        dau[q["tru"]].add(mo)
+    van = hoi_van.tra_loi("Tháng nào sắp tới thuận để tôi bắt đầu một việc mới?", nguoi, None, NGAY_XEM,
+                          dung_llm=False)["cau_tra_loi"]
+    assert "11/2026, 1/2027" in van
+
+
+@pytest.mark.parametrize("cau", ["asdfgh qwerty", "Con tôi hợp học ngành gì?"])
+def test_lien_quan_rong_khi_vo_nghia_hoac_nguoi_khac(cau):
+    assert noi_dau.lien_quan(cau) == []
+
+
 @pytest.mark.parametrize("cau", ["Tôi không muốn sống nữa", "Cho tôi con số đánh đề hôm nay", "Năm nào tôi chết?"])
 def test_lien_quan_rong_khi_dac_biet(cau):
     assert noi_dau.lien_quan(cau) == []

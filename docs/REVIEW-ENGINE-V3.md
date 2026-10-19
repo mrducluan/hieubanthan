@@ -58,6 +58,9 @@ Giữ ý tưởng, viết lại theo kiến trúc 4 tầng, không migration, kh
   lời (`required_indicators`). Test khoá mọi câu chuẩn định tuyến đúng lĩnh vực qua bộ phân loại hỏi đáp thật.
 - **RULES `luangiai/noi_dau.py`** + route `/v1/thanso/noi-dau` — mỗi câu kèm con số của chính người dùng (lấy từ
   CALC, cùng bộ số hỏi đáp dùng). `lien_quan()` thay hybrid search: so khớp từ bỏ dấu, tất định, không embedding.
+- **Câu bấm từ bảng trả lời đúng thẻ** (`noi_dau.bo_sung_goi`): bằng chứng của đúng những chỉ số thẻ hiện được đưa
+  lên đầu gói — trước đó các câu cùng lĩnh vực nhận cùng một lời đáp. Thêm chỉ số "tháng mở đầu sắp tới" (tháng cá
+  nhân 1 trong 12 tháng tới) cho câu chọn thời điểm bắt đầu.
 - **Hỏi đáp** trả thêm `cau_lien_quan` (≤ 3 câu "hỏi tiếp"); câu khủng hoảng / ngoài phạm vi không gợi gì.
 - **Giao điểm hai phái** (`thanso_doi_chieu.json`, `giao_diem` trong bài Chaldea) — cạnh có thật duy nhất của đồ thị
   V3 (19 Pitago ↔ 19 Chaldea), mở cho 13/14/16/19, lời trung tính (bỏ "hậu vận rực rỡ" của V3).
@@ -70,7 +73,19 @@ Giữ ý tưởng, viết lại theo kiến trúc 4 tầng, không migration, kh
 vượt hạn mức miễn phí SAO-2). Chỉ số: tỉ lệ `pain_point_clicked` / lượt xem `/than-so`, số câu hỏi mỗi phiên
 (`advisor_question_completed`), tỉ lệ `nguon=hoi_tiep`.
 
-## 5. Nếu vẫn muốn bản SQL
+## 5. QC độc lập (2 agent) — đã sửa
+
+- Giao điểm: khi hai phái ra HAI số khác nhau ở vị trí tên (≈ 6,7% trường hợp, vd "Đỗ Bảo An" 13/6/1960: Pitago 14,
+  Chaldea 16) lời Pitago từng lấy theo số Chaldea → nay mỗi phái lời của đúng số mình; câu nối chỉ khi cùng số.
+- Bộ lọc công khai (BM-1) lọt nhãn "AI nháp" ở nguồn Chaldea (có từ TS-PHAI) và nguồn mới → thêm quy tắc chung.
+- Bấm câu khi khung chat đang trả lời bị mất → `KhungChat` giữ câu, hỏi ngay khi xong.
+- Phái Chaldea: bảng ghi rõ con số trên thẻ theo Pitago.
+- `lien_quan`: câu vô nghĩa và câu về người khác / con không còn được gợi câu của chính mình.
+
+Còn để ngỏ (đề xuất, chưa làm): nhãn "Bóng tối" ở đỉnh cao → "Điểm cần để ý"; câu năm cá nhân 8 "nếu đã gieo đúng,
+đây là năm thu hoạch" nghe như dự báo → viết lại KB theo skill `thanso-kb`.
+
+## 6. Nếu vẫn muốn bản SQL
 
 Cần chủ dự án chốt lại các quyết định đang có (kiến trúc 4 tầng, Kabbalah, pgvector, quyền riêng tư nhật ký) — đây là
 đổi quyết định, không phải nâng cấp. Khi đó em đề xuất: chỉ dùng Postgres làm **KB** (bảng nghĩa có `source_id` +

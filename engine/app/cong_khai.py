@@ -26,6 +26,8 @@ QUY_TAC: list[tuple[re.Pattern[str], str]] = [(re.compile(m), t) for m, t in [
     # Thần số: nhãn nguồn nội bộ của các file thanso_*.json
     (r"Bản biên soạn tham khảo \(AI nháp, 2026\) theo truyền thống Balliett–Jordan và sách thần số phổ biến"
      r"(?:; khung mục tham khảo anko-ki-maya \(MIT\))?", _TS),
+    # Còn lại (Chaldea, đối chiếu hai phái…): bỏ nhãn "AI nháp" nội bộ, giữ tên sách/trường phái (BM-1).
+    (r"Bản biên soạn tham khảo \(AI nháp, 2026\) ", "Hiểu Bản Thân biên soạn "),
     (r" — Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần\. ", ". "),
     (r"Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần\. ?", ""),
     (r"Truyền thống Pythagoras / Balliett→Jordan\. Renderings tiếng Việt — tham khảo văn hoá, không verbatim từ một "

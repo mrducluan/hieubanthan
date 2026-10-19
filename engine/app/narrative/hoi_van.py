@@ -20,7 +20,7 @@ import re
 
 import httpx
 
-from app.luangiai import hoi
+from app.luangiai import hoi, noi_dau
 from app.luangiai import thanso_chaldean as _chaldea
 from app.narrative import llm as _llm
 from app.narrative import ngan_sach as _ngan_sach
@@ -71,6 +71,11 @@ def _doan(m: dict) -> tuple[str, str | None]:
         th = f"Tháng {m['thang']} là tháng cá nhân {m['so']}" if m.get("thang") else \
             f"Tháng cá nhân {m['so']}"
         return f"{th} ({m['chu_de']}): {m['nen']} Tránh: {m['tranh']}", None
+    if l == "thang_mo_dau":   # TS-NOIDAU: tháng cá nhân 1 trong 12 tháng tới (nhịp mở đầu, không phải ngày "tốt")
+        if not m["cac_thang"]:
+            return "Trong 12 tháng tới chưa có tháng cá nhân 1 — nhịp mở đầu theo thần số.", None
+        return (f"Tháng cá nhân 1 ({m['chu_de']}) của bạn trong 12 tháng tới: {', '.join(m['cac_thang'])}. "
+                f"{m['nen']} Tránh: {m['tranh']}", None)
     if l == "ngay_ca_nhan":
         if m.get("ngay"):
             y, mo, d = m["ngay"].split("-")
@@ -213,6 +218,7 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
     ngay_xem = ngay_xem or dt.date.today()
     pl = hoi.phan_loai(cau_hoi)
     goi = hoi.goi_bang_chung(pl, nguoi, nguoi_kia, ngay_xem)
+    goi = noi_dau.bo_sung_goi(goi, cau_hoi, nguoi, ngay_xem)   # TS-NOIDAU: câu bấm từ bảng → đúng chỉ số của thẻ
     if phai == "chaldea":
         goi = _goi_chaldea(goi, pl, nguoi)
     template = van_template(goi)

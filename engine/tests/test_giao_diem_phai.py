@@ -26,7 +26,26 @@ def test_ngay_19_ca_hai_phai_cung_so():
     gd = {g["ma"]: g for g in kq["giao_diem"]}
     assert gd["ngay_sinh"]["pitago_no_nghiep"] == 19 and gd["ngay_sinh"]["chaldea_kep"] == 19
     assert gd["ngay_sinh"]["cung_so"] is True
-    assert gd["ngay_sinh"]["nghia"]["pitago"]
+    assert gd["ngay_sinh"]["pitago"] == KB["so"]["19"]["pitago"]
+    assert gd["ngay_sinh"]["chaldea"] == KB["so"]["19"]["chaldea"]
+    assert gd["ngay_sinh"]["cach_dung"] == KB["so"]["19"]["cach_dung"]
+
+
+def test_hai_phai_khac_so_moi_phai_loi_cua_so_minh():
+    # Vị trí tên: bảng chữ hai phái khác nhau → có thể Pitago nợ nghiệp 14 mà Chaldea kép 16.
+    kq = lch.luan_chaldea(["Đỗ Bảo An"], 13, 6, 1960)
+    g = next(x for x in kq["giao_diem"] if x["ma"] == "linh_hon")
+    assert (g["pitago_no_nghiep"], g["chaldea_kep"], g["cung_so"]) == (14, 16, False)
+    assert g["pitago"] == KB["so"]["14"]["pitago"] and g["chaldea"] == KB["so"]["16"]["chaldea"]
+    assert g["cach_dung"] is None
+
+
+def test_cong_khai_khong_lo_nhan_nhap_ai():
+    from fastapi.testclient import TestClient
+    from app.main import app
+    r = TestClient(app).post("/v1/thanso/chaldea", json={"ho_ten": ["Nguyễn Văn An"], "ngay": 19, "thang": 5, "nam": 1990})
+    assert r.status_code == 200 and r.json()["giao_diem"]
+    assert "AI nháp" not in r.text
 
 
 def test_khop_calc_tung_vi_tri():

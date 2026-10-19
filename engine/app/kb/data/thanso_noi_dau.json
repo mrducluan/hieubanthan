@@ -49,7 +49,8 @@
   "thu_thach_chinh": "Thử thách chính",
   "no_nghiep": "Nợ nghiệp",
   "bai_hoc_nghiep": "Bài học nghiệp (số vắng trong tên)",
-  "so_vang_bieu_do": "Số vắng trong ngày sinh"
+  "so_vang_bieu_do": "Số vắng trong ngày sinh",
+  "thang_mo_dau": "Tháng mở đầu sắp tới"
  },
  "cau_hoi": [
   {
@@ -82,8 +83,8 @@
     "chuyển công ty"
    ],
    "chi_so": [
-    "nam_ca_nhan",
     "dinh_cao",
+    "nam_ca_nhan",
     "su_menh"
    ],
    "linh_vuc": [
@@ -102,9 +103,9 @@
     "làm chủ"
    ],
    "chi_so": [
+    "nhan_cach",
     "duong_doi",
-    "su_menh",
-    "nhan_cach"
+    "su_menh"
    ],
    "linh_vuc": [
     "su_nghiep"
@@ -180,9 +181,9 @@
     "bị phản bội"
    ],
    "chi_so": [
-    "linh_hon",
     "thu_thach_chinh",
-    "no_nghiep"
+    "no_nghiep",
+    "linh_hon"
    ],
    "linh_vuc": [
     "tinh_yeu"
@@ -199,8 +200,8 @@
     "chưa có người yêu"
    ],
    "chi_so": [
-    "linh_hon",
-    "nhan_cach"
+    "nhan_cach",
+    "linh_hon"
    ],
    "linh_vuc": [
     "tinh_yeu"
@@ -252,9 +253,9 @@
     "năng khiếu"
    ],
    "chi_so": [
+    "so_ngay_sinh",
     "duong_doi",
-    "su_menh",
-    "so_ngay_sinh"
+    "su_menh"
    ],
    "linh_vuc": [
     "ban_than"
@@ -270,9 +271,9 @@
     "so sánh bản thân"
    ],
    "chi_so": [
-    "linh_hon",
     "thu_thach_chinh",
-    "bai_hoc_nghiep"
+    "bai_hoc_nghiep",
+    "linh_hon"
    ],
    "linh_vuc": [
     "ban_than"
@@ -289,8 +290,8 @@
     "không kỷ luật"
    ],
    "chi_so": [
-    "duong_doi",
-    "so_vang_bieu_do"
+    "so_vang_bieu_do",
+    "duong_doi"
    ],
    "linh_vuc": [
     "ban_than"
@@ -306,9 +307,9 @@
     "người ta nghĩ gì về tôi"
    ],
    "chi_so": [
+    "so_thai_do",
     "nhan_cach",
-    "linh_hon",
-    "so_thai_do"
+    "linh_hon"
    ],
    "linh_vuc": [
     "ban_than"
@@ -387,14 +388,15 @@
    "ma": "td_bat_dau",
    "tru": "thoi_diem_chu_ky",
    "noi_dau": "Muốn bắt đầu việc mới mà chưa biết lúc nào",
-   "cau": "Thời điểm nào thuận để tôi bắt đầu một việc mới?",
+   "cau": "Tháng nào sắp tới thuận để tôi bắt đầu một việc mới?",
    "bien_the": [
     "khi nào nên bắt đầu",
     "lúc nào thuận"
    ],
    "chi_so": [
-    "nam_ca_nhan",
-    "thang_ca_nhan"
+    "thang_mo_dau",
+    "thang_ca_nhan",
+    "nam_ca_nhan"
    ],
    "linh_vuc": [
     "thoi_van"
