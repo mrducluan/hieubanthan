@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import datetime as dt
 import re
+import unicodedata
 
 from app import config
 from app.calc import lunar, tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
@@ -90,8 +91,10 @@ SU_KIEN_CHAN_MEM = [r"tai nan", r"thang kien"]   # chi_tiet: trả lời kèm l�
 # TV-V2: lỗ chặn riêng của câu hỏi thời điểm (bộ chung bắt "năm nào chết", chưa bắt "tháng nào tôi chết",
 # "chọn ngày mổ") — chọn ngày cho việc y tế thuộc bác sĩ, không xem bằng tử vi.
 TU_CHOI_TV = [r"(nam|thang|ngay|luc|khi|tuoi) nao (thi )?(toi |minh |em )?(se )?chet", r"(?<!\w)chet (nam|thang|ngay|luc) nao",
-              r"(?<!\w)mo (ruot|tim|mat|u|khoi u|bung|noi soi|lay|xuong|nao)(?!\w)", r"sinh mo", r"(?<!\w)mo de(?! \w+ (kinh|lam|ban))",
+              r"(?<!\w)mo (ruot|khoi u|noi soi)(?!\w)", r"sinh mo(?!\w)",
               r"(ngay|thang|luc) .{0,20}(phau thuat|chua benh|nhap vien|dieu tri)"]
+# Bỏ dấu thì "mổ" trùng "mở/mơ/mộ" ("mở xưởng", "mở để kinh doanh", "mở mắt") → cụm mổ mơ hồ chỉ xét trên câu CÒN DẤU.
+TU_CHOI_TV_DAU = [r"(?<!\w)mổ (tim|mắt|u|bụng|lấy|xương|não|đẻ)(?!\w)"]
 
 # ------------------------------------------------------------------ TV-V2: 8 ý định (KB y_dinh_hoi)
 # Thứ tự = ưu tiên khi một câu khớp nhiều ý định (cụ thể trước, chung sau). Luật từ khoá công khai, không LLM.
@@ -273,7 +276,9 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao") -> dict:
     if che_do == "chi_tiet":
         for m in SU_KIEN_CHAN_MEM:
             t_loc = re.sub(m, " ", t_loc)
-    db = chung.dac_biet(t_loc) or ("tu_choi_nhe" if chung.co(t_loc, TU_CHOI_TV) else None)
+    t_dau = unicodedata.normalize("NFC", cau_hoi).lower()
+    db = chung.dac_biet(t_loc) or ("tu_choi_nhe" if chung.co(t_loc, TU_CHOI_TV)
+                                   or any(re.search(m, t_dau) for m in TU_CHOI_TV_DAU) else None)
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq

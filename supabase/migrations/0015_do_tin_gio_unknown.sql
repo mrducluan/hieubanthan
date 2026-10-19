@@ -6,10 +6,6 @@
 -- Vẫn chỉ lưu khi người dùng bấm "Lưu vào tài khoản" + đồng ý; RLS 0006 giữ nguyên (chủ sở hữu).
 -- Chạy SAU 0007. Rollback: 0015_do_tin_gio_unknown.down.sql
 
-begin;
-
 alter table ho_so drop constraint if exists ho_so_do_tin_gio_check;
 alter table ho_so add constraint ho_so_do_tin_gio_check
     check (do_tin_gio is null or do_tin_gio in ('exact', 'approx', 'unknown'));
-
-commit;

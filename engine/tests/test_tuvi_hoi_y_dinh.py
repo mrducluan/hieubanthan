@@ -151,6 +151,16 @@ def test_van_chan_nhu_cu(cau, xu_ly):
     assert pl["loai"] == "dac_biet"
 
 
+
+@pytest.mark.parametrize("cau", [
+    "Có nên mở xưởng không?",                                   # bỏ dấu "mở xưởng" = "mổ xương"
+    "Năm nay có nên thuê mặt bằng mở để kinh doanh không?",     # "mở để" = "mổ đẻ"
+    "Có nên mở để bán hàng online không?",
+    "Tháng nào nên mở cửa hàng?",
+])
+def test_cau_mo_kinh_doanh_khong_bi_chan(cau):
+    assert tv.phan_loai(cau)["loai"] != "dac_biet"
+
 def test_khong_co_la_so_thi_hoi_la_so():
     kq = tv.tra_loi("Ba tháng tới của tôi thế nào?", ngay_xem=NGAY)
     assert kq["can_them"] == ["la_so"]
