@@ -103,8 +103,8 @@ def trang_menh_nam(nam: int, slug: str) -> dict:
         {"hoi": f"Mệnh {ten} và cung phi khác nhau thế nào?",
          "dap": f"Mệnh nạp âm ({ten}) dùng chung cho cả nam và nữ; cung phi (nam {q_nam['quai']}, nữ {q_nu['quai']}) dùng chọn hướng nhà."},
     ]
-    lien_ket = ([{"duong": f"/phong-thuy/tuoi-{nam}-nam", "ten": f"Nam {nam} hợp hướng nào"},
-                 {"duong": f"/phong-thuy/tuoi-{nam}-nu", "ten": f"Nữ {nam} hợp hướng nào"}] if _PT_DAU <= nam <= _PT_CUOI else [])
+    lien_ket = ([{"duong": f"/phong-thuy/huong-hop-tuoi/tuoi-{nam}-nam", "ten": f"Nam {nam} hợp hướng nào"},
+                 {"duong": f"/phong-thuy/huong-hop-tuoi/tuoi-{nam}-nu", "ten": f"Nữ {nam} hợp hướng nào"}] if _PT_DAU <= nam <= _PT_CUOI else [])
     ln = [n for n in (nam - 1, nam + 1) if NAM_DAU <= n <= NAM_CUOI]
     return {
         "loai": "menh_nam", "slug": slug,

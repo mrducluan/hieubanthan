@@ -19,9 +19,9 @@ export const MENU_MAC_DINH: { ten: string; lien_ket: { nhan: string; duong_dan: 
     ["/phong-thuy", "Phong thuỷ"], ["/hop-doi", "Hợp đôi"],
   ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
   { ten: "Kiến thức", lien_ket: [
-    ["/kien-thuc", "Thư viện kiến thức"], ["/kien-thuc/than-so", "Ý nghĩa các con số"], ["/kien-thuc/kinh-dich", "64 quẻ Kinh Dịch"],
-    ["/kien-thuc/tu-vi", "14 chính tinh Tử vi"], ["/tu-dien", "Từ điển thuật ngữ"], ["/la-so-mau", "Lá số mẫu"],
-    ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"], ["/kien-thuc/hop-so", "Số chủ đạo hợp nhau"], ["/blog", "Blog"],
+    ["/kien-thuc", "Thư viện kiến thức"], ["/than-so/y-nghia-so", "Ý nghĩa các con số"], ["/kinh-dich/que", "64 quẻ Kinh Dịch"],
+    ["/tu-vi/chinh-tinh", "14 chính tinh Tử vi"], ["/tu-dien", "Từ điển thuật ngữ"], ["/tu-vi/la-so-mau", "Lá số mẫu"],
+    ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"], ["/hop-doi/cap-so", "Số chủ đạo hợp nhau"], ["/blog", "Blog"],
   ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
   { ten: "Về chúng tôi", lien_ket: [
     ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"],
@@ -74,7 +74,7 @@ export const truongLienKet: Field[] = [
     admin: { layout: "horizontal" },
   },
   {
-    name: "duong_dan", label: "Đường dẫn (vd /tu-vi, /kien-thuc/than-so)", type: "text",
+    name: "duong_dan", label: "Đường dẫn (vd /tu-vi, /than-so/y-nghia-so)", type: "text",
     admin: { condition: (_, s) => (s?.loai ?? "duong_dan") === "duong_dan" },
     validate: (v: unknown, { siblingData }: { siblingData?: { loai?: string } }) =>
       (siblingData?.loai ?? "duong_dan") !== "duong_dan" || (typeof v === "string" && DUONG_TRONG_SITE.test(v))

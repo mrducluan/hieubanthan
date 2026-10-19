@@ -21,7 +21,7 @@ export async function GET() {
   return NextResponse.json({
     ds: [
       ...CONG_CU.map(([url, tieu_de, mo_ta]) => ({ url, tieu_de, mo_ta })),
-      ...Object.entries(CHU_DE).map(([k, c]) => ({ url: `/kien-thuc/${k}`, tieu_de: c.ten, mo_ta: c.mo_ta })),
+      ...Object.entries(CHU_DE).map(([, c]) => ({ url: c.duong, tieu_de: c.ten, mo_ta: c.mo_ta })),
       ...ds.filter((t) => t.index !== false).map((t) => ({ url: duongTrang(t.loai, t.slug), tieu_de: t.tieu_de, mo_ta: t.mo_ta })),
     ],
   });

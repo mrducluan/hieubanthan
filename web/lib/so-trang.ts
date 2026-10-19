@@ -64,7 +64,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Ngày sinh âm lịch thì sao?", dap: "Bạn nhập âm lịch, hệ thống đổi sang dương lịch theo âm lịch Việt Nam rồi mới tính." },
       { hoi: "Thần số học có dự đoán tương lai không?", dap: "Không. Con số chỉ gợi một khung để nhìn lại bản thân; mọi diễn giải đều kèm mặt tối và câu hỏi tự soi, không phán số phận." },
     ],
-    lien_ket: [{ href: "/kien-thuc/than-so", ten: "Ý nghĩa 12 con số" }, { href: "/kien-thuc/nghe-nghiep", ten: "Số chủ đạo hợp nghề gì" }, { href: "/kien-thuc/nam-ca-nhan", ten: "Năm cá nhân 1–9" }, { href: "/kien-thuc/no-nghiep", ten: "Nợ nghiệp" }, { href: "/kien-thuc/so-kep", ten: "Số kép Chaldea" }, { href: "/hop-doi", ten: "Hợp đôi" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
+    lien_ket: [{ href: "/than-so/y-nghia-so", ten: "Ý nghĩa 12 con số" }, { href: "/than-so/nghe-nghiep", ten: "Số chủ đạo hợp nghề gì" }, { href: "/than-so/nam-ca-nhan", ten: "Năm cá nhân 1–9" }, { href: "/than-so/no-nghiep", ten: "Nợ nghiệp" }, { href: "/than-so/so-kep", ten: "Số kép Chaldea" }, { href: "/hop-doi", ten: "Hợp đôi" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
   } },
   { duong: "/hom-nay", nhom: "cong_cu", ten: "Hôm nay của bạn", o: O_CONG_CU, mac_dinh: {
     tieu_de_seo: "Hôm nay của bạn: ngày cá nhân, âm lịch và câu hỏi tự soi",
@@ -79,7 +79,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Mỗi ngày thẻ có khác không?", dap: "Có. Ngày cá nhân đổi mỗi ngày theo chu kỳ 1–9, thẻ cũng báo trước chủ đề của ngày mai." },
       { hoi: "Có cần tài khoản không?", dap: "Không. Chỉ cần hồ sơ (tên và ngày sinh) lưu trên máy bạn." },
     ],
-    lien_ket: [{ href: "/ban-than", ten: "Bản thân" }, { href: "/kien-thuc/nam-ca-nhan", ten: "Năm cá nhân 1–9" }, { href: "/than-so", ten: "Thần số học" }, { href: "/hop-doi", ten: "Hợp đôi" }],
+    lien_ket: [{ href: "/ban-than", ten: "Bản thân" }, { href: "/than-so/nam-ca-nhan", ten: "Năm cá nhân 1–9" }, { href: "/than-so", ten: "Thần số học" }, { href: "/hop-doi", ten: "Hợp đôi" }],
   } },
   { duong: "/hop-doi", nhom: "cong_cu", ten: "Hợp đôi", o: O_CONG_CU, mac_dinh: {
     tieu_de_seo: "Hợp đôi thần số học: hai người hoà và va ở đâu",
@@ -93,7 +93,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Ngày sinh người kia có bị lưu lại không?", dap: "Không. Ngày sinh chỉ dùng để tính rồi bỏ. Vui lòng chỉ nhập khi người đó biết và đồng ý." },
       { hoi: "Xem hợp đôi đồng nghiệp hay sếp khác gì người yêu?", dap: "Cùng một cặp số nhưng cách đọc khác: mỗi loại quan hệ có phần diễn giải riêng về cách phối hợp, giao tiếp, ranh giới." },
     ],
-    lien_ket: [{ href: "/than-so", ten: "Thần số học của bạn" }, { href: "/kien-thuc/hop-so", ten: "Số chủ đạo nào hợp nhau" }, { href: "/kien-thuc/tinh-yeu", ten: "Số chủ đạo trong tình yêu" }, { href: "/kien-thuc/than-so", ten: "Ý nghĩa 12 con số" }],
+    lien_ket: [{ href: "/than-so", ten: "Thần số học của bạn" }, { href: "/hop-doi/cap-so", ten: "Số chủ đạo nào hợp nhau" }, { href: "/than-so/tinh-yeu", ten: "Số chủ đạo trong tình yêu" }, { href: "/than-so/y-nghia-so", ten: "Ý nghĩa 12 con số" }],
   } },
   { duong: "/tu-vi", nhom: "cong_cu", ten: "Tử vi", o: O_CONG_CU, mac_dinh: {
     tieu_de_seo: "Lập lá số Tử vi online: 12 cung, đại hạn, lưu niên, lưu nguyệt",
@@ -109,7 +109,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Lưu nguyệt tính theo phái nào?", dap: "Mặc định Đẩu Quân từ Thái Tuế; bạn có thể chọn 4 phái khác. Mỗi tháng hiện cung theo cả 5 phái để so." },
       { hoi: "Ngày giờ sinh có bị gửi đi đâu không?", dap: "Không gửi cho bên thứ ba. Máy chủ tính xong là bỏ; hồ sơ nằm trên máy bạn." },
     ],
-    lien_ket: [{ href: "/kien-thuc/tu-vi", ten: "14 chính tinh" }, { href: "/kien-thuc/cung-tu-vi", ten: "12 cung" }, { href: "/la-so-mau", ten: "Lá số mẫu đọc từng bước" }],
+    lien_ket: [{ href: "/tu-vi/chinh-tinh", ten: "14 chính tinh" }, { href: "/tu-vi/cung", ten: "12 cung" }, { href: "/tu-vi/la-so-mau", ten: "Lá số mẫu đọc từng bước" }],
   } },
   { duong: "/bat-tu", nhom: "cong_cu", ten: "Bát tự", o: O_CONG_CU, mac_dinh: {
     tieu_de_seo: "Bát tự Tứ trụ: lập lá số theo giờ sinh, ngũ hành, dụng thần",
@@ -124,7 +124,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Sinh lúc 23 giờ thì tính ngày nào?", dap: "Mặc định giữ trụ ngày của hôm đó và lấy giờ Tý của ngày hôm sau (dạ Tý). Ở khung Trường phái bạn chọn được phái đổi ngày lúc 23:00 — khi đó trụ ngày là ngày hôm sau; trang luôn gắn cờ để bạn biết." },
       { hoi: "Dụng thần là gì?", dap: "Hành giúp lá số cân bằng hơn. Vì các trường phái xác định khác nhau, trang trình bày hai cách thay vì chọn một." },
     ],
-    lien_ket: [{ href: "/kien-thuc/thap-than", ten: "10 thập thần" }, { href: "/kien-thuc/nhat-chu", ten: "10 nhật chủ" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
+    lien_ket: [{ href: "/bat-tu/thap-than", ten: "10 thập thần" }, { href: "/bat-tu/nhat-chu", ten: "10 nhật chủ" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
   } },
   { duong: "/kinh-dich", nhom: "cong_cu", ten: "Kinh Dịch", o: O_CONG_CU, mac_dinh: {
     tieu_de_seo: "Gieo quẻ Kinh Dịch online: 64 quẻ, 384 hào, lời quẻ có nguồn",
@@ -139,7 +139,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Ba cách gieo khác nhau thế nào?", dap: "Máy gieo mô phỏng ba đồng xu; Mai Hoa lấy quẻ theo năm, tháng, ngày âm và giờ lúc hỏi (chọn được âm lịch Việt Nam hoặc Trung Quốc); tự gieo là bạn tung xu thật rồi nhập. Cách đọc lời quẻ giống nhau." },
       { hoi: "Không có hào động thì đọc thế nào?", dap: "Lời chủ là quái từ của quẻ, kèm Thoán truyện dịch nghĩa." },
     ],
-    lien_ket: [{ href: "/kien-thuc/kinh-dich", ten: "64 quẻ Kinh Dịch" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
+    lien_ket: [{ href: "/kinh-dich/que", ten: "64 quẻ Kinh Dịch" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
   } },
   { duong: "/phong-thuy", nhom: "cong_cu", ten: "Phong thuỷ", o: O_CONG_CU, mac_dinh: {
     tieu_de_seo: "Phong thuỷ Bát trạch: mệnh quái, hướng nhà hợp tuổi, bố cục nhà",
@@ -154,7 +154,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Đo hướng nhà thế nào cho đúng?", dap: "Đứng ở cửa chính nhìn thẳng ra ngoài, để điện thoại nằm ngang, tránh xa kim loại; trang dùng la bàn của máy và cho nhập độ tay nếu cần." },
       { hoi: "Có cần mua vật phẩm phong thuỷ không?", dap: "Không. Trang chỉ nêu cách bố trí và quan niệm, không giới thiệu vật phẩm." },
     ],
-    lien_ket: [{ href: "/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào (1960–2005)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ phong thuỷ" }, { href: "/kham-pha", ten: "Các hệ thống khác" }],
+    lien_ket: [{ href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào (1960–2005)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ phong thuỷ" }, { href: "/kham-pha", ten: "Các hệ thống khác" }],
   } },
   // HL-1 / TDG-1: công cụ hoàng lịch + tuổi — giới thiệu + hỏi đáp mặc định ở app/*/noi-dung.ts.
   tuNd(ND_XEM_NGAY, "Xem ngày tốt hôm nay: hoàng đạo, giờ tốt, việc nên làm"),
@@ -191,7 +191,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     h1: "Thư viện kiến thức",
     loi_dan: "Ý nghĩa 12 con số thần số học, 64 quẻ Kinh Dịch, 14 chính tinh và 12 cung Tử vi, 10 thập thần, 10 nhật chủ Bát tự — có nguồn, có mặt tối, có câu tự soi.",
   } },
-  { duong: "/la-so-mau", nhom: "tinh", ten: "Lá số mẫu", o: O_TINH, mac_dinh: {
+  { duong: "/tu-vi/la-so-mau", nhom: "tinh", ten: "Lá số mẫu", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Lá số Tử vi mẫu — đọc từng bước cho người mới", h1: "Lá số Tử vi mẫu — đọc từng bước",
     mo_ta_seo: "6 lá số Tử vi minh hoạ được đọc từng bước: Mệnh–Thân, chính tinh, độ sáng, tam phương tứ chính, cách cục, tứ hoá, đại hạn, lưu niên — kèm giải nghĩa thuật ngữ.",
   } },
@@ -242,7 +242,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
 
   // ---------------- chủ đề kiến thức (tên + mô tả = CHU_DE trong lib/kien-thuc.ts)
   ...Object.entries(CHU_DE).map(([k, c]): MucSoTrang => ({
-    duong: `/kien-thuc/${k}`, nhom: "chu_de", ten: c.ten, o: O_CHU_DE, mac_dinh: { h1: c.ten, loi_dan: c.mo_ta },
+    duong: c.duong, nhom: "chu_de", ten: c.ten, o: O_CHU_DE, mac_dinh: { h1: c.ten, loi_dan: c.mo_ta },
   })),
 ];
 
@@ -265,14 +265,14 @@ const VI_DU: Record<LoaiTrang, string> = {
 
 export const MAU_CUM: readonly MauCumTrang[] = [
   ...Object.entries(CHU_DE).map(([k, c]): MauCumTrang => ({
-    mau_duong: `/kien-thuc/${k}/{slug}`, nhom: "kien_thuc", ten: `Trang con · ${c.ten}`,
+    mau_duong: `${c.duong}/{slug}`, nhom: "kien_thuc", ten: `Trang con · ${c.ten}`,
     bien: ["tieu_de", "mo_ta", "slug", "ten_chu_de"], o: O_CUM,
     nguon_kb: { kieu: "kb", loai: c.loai, vi_du: VI_DU[c.loai], tep_kb: TEP_KB_THEO_LOAI[c.loai] },
   })),
-  { mau_duong: "/phong-thuy/tuoi-{nam}-{gioi}", nhom: "tuoi", ten: "Tuổi hợp hướng (1960–2005)",
+  { mau_duong: "/phong-thuy/huong-hop-tuoi/tuoi-{nam}-{gioi}", nhom: "tuoi", ten: "Tuổi hợp hướng (1960–2005)",
     bien: ["tieu_de", "nam", "gioi"], o: O_CUM,
     nguon_kb: { kieu: "tuoi", vi_du: "tuoi-1990-nam", tep_kb: ["phongthuy_kb.json"] } },
-  { mau_duong: "/la-so-mau/{slug}", nhom: "la_so_mau", ten: "Lá số Tử vi mẫu", bien: ["tieu_de", "slug"], o: O_CUM,
+  { mau_duong: "/tu-vi/la-so-mau/{slug}", nhom: "la_so_mau", ten: "Lá số Tử vi mẫu", bien: ["tieu_de", "slug"], o: O_CUM,
     nguon_kb: { kieu: "la_so_mau", vi_du: "tu-phu-dong-cung", tep_kb: ["tuvi_kb.json", "tuvi_cach_cuc.json"] } },
 ];
 

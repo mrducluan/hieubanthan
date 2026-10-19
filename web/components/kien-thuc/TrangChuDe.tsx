@@ -1,10 +1,11 @@
-// Trang chủ đề (vd /kien-thuc/kinh-dich): danh sách mọi bài, render phía server. Schema: CollectionPage + ItemList.
+// Trang cụm kiến thức (vd /kinh-dich/que, /tu-vi/sao-o-cung): danh sách mọi bài, render phía server. Schema: CollectionPage +
+// ItemList. QH-URL: cụm nằm dưới trang công cụ của mảng (trang trụ) — breadcrumb Trang chủ › {mảng} › {cụm}.
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { CHU_DE, HINH_CHU_DE, duongTrang, mucLuc } from "@/lib/kien-thuc";
+import { CHU_DE, HINH_CHU_DE, TEN_MANG_SILO, duongTrang, mucLuc, truCua } from "@/lib/kien-thuc";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang } from "@/components/minh-hoa/TrangTri";
 import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
@@ -12,28 +13,22 @@ import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
-export const revalidate = 21600;
-
 // Chủ đề kiến thức → mảng bài CMS, suy từ trang công cụ của chủ đề (CHU_DE[x].mang) — thêm chủ đề không phải sửa ở đây.
 const MANG_CONG_CU: Record<string, string> = {
   "/than-so": "than_so", "/hop-doi": "than_so", "/tu-vi": "tu_vi", "/bat-tu": "bat_tu", "/kinh-dich": "kinh_dich", "/phong-thuy": "phong_thuy",
 };
 
-type Props = { params: Promise<{ chu_de: string }> };
-
-export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
-  const params = await thamSo;
-  const cd = CHU_DE[params.chu_de];
+export async function metaChuDe(khoa: string | null): Promise<Metadata> {
+  const cd = khoa ? CHU_DE[khoa] : undefined;
   if (!cd) return { title: "Không tìm thấy", robots: { index: false } };
-  return apDungSeo({ title: cd.ten, description: cd.mo_ta, alternates: { canonical: `/kien-thuc/${params.chu_de}`, types: { "text/markdown": `/kien-thuc/${params.chu_de}.md` } },
-    openGraph: { title: cd.ten, description: cd.mo_ta, url: `/kien-thuc/${params.chu_de}`, images: [`/og?tieu_de=${encodeURIComponent(cd.ten)}`] } }, await layNoiDungTrang(`/kien-thuc/${params.chu_de}`));
+  return apDungSeo({ title: cd.ten, description: cd.mo_ta, alternates: { canonical: cd.duong, types: { "text/markdown": `${cd.duong}.md` } },
+    openGraph: { title: cd.ten, description: cd.mo_ta, url: cd.duong, images: [`/og?tieu_de=${encodeURIComponent(cd.ten)}`] } }, await layNoiDungTrang(cd.duong));
 }
 
-export default async function Page({ params: thamSo }: Props) {
-  const params = await thamSo;
-  const cd = CHU_DE[params.chu_de];
-  if (!cd) notFound();
-  const duong = `/kien-thuc/${params.chu_de}`;
+export async function TrangChuDe({ khoa }: { khoa: string | null }) {
+  const cd = khoa ? CHU_DE[khoa] : undefined;
+  if (!khoa || !cd) notFound();
+  const duong = cd.duong, tru = truCua(duong);
   const [tatCa, nd] = await Promise.all([mucLuc(), layNoiDungTrang(duong)]);
   const ds = tatCa.filter((t) => t.loai === cd.loai);
   return (
@@ -42,10 +37,10 @@ export default async function Page({ params: thamSo }: Props) {
         { "@type": "CollectionPage", name: cd.ten, description: cd.mo_ta, url: urlDayDu(duong), inLanguage: "vi-VN",
           mainEntity: { "@type": "ItemList", numberOfItems: ds.length,
             itemListElement: ds.map((t, i) => ({ "@type": "ListItem", position: i + 1, url: urlDayDu(duongTrang(t.loai, t.slug)), name: t.tieu_de })) } },
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Kiến thức", duong: "/kien-thuc" }, { ten: cd.ten, duong }]),
+        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: TEN_MANG_SILO[tru] ?? "Kiến thức", duong: tru }, { ten: cd.ten, duong }]),
       )} />
-      <nav aria-label="Đường dẫn" className="text-xs text-fg-faint"><Link href="/kien-thuc" className="hover:text-fg">Kiến thức</Link> ›</nav>
-      <HinhMang kieu={HINH_CHU_DE[params.chu_de] ?? "than-so"} className="mt-4 h-20" />
+      <nav aria-label="Đường dẫn" className="text-xs text-fg-faint"><Link href={tru} className="hover:text-fg">{TEN_MANG_SILO[tru] ?? "Kiến thức"}</Link> ›</nav>
+      <HinhMang kieu={HINH_CHU_DE[khoa] ?? "than-so"} className="mt-4 h-20" />
       <h1 className="mt-3 text-4xl sm:text-5xl">{nd.dau.h1 ?? cd.ten}</h1>
       <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{cd.mo_ta}</LoiDanCms>
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-8" />

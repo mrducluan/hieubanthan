@@ -24,24 +24,24 @@ test("gộp: CMS trống → đúng mặc định code; ô có nội dung thắn
   const co = gopNoiDung("/tu-vi", md.mac_dinh, {
     tieu_de_seo: "  ", mo_ta_seo: "Mô tả mới", h1: "Lá số Tử vi", kieu_chu: { co: "lon", can: "giua", nen: "x" as never },
     doan: [{ chu: "Đoạn CMS" }], hoi_dap: [{ cau_hoi: "Hỏi?", tra_loi: "" }],
-    lien_ket: [{ nhan: "Ngoài", loai: "duong_dan", duong_dan: "//evil.vn" }, { nhan: "Sao", loai: "duong_dan", duong_dan: "/kien-thuc/tu-vi" }],
+    lien_ket: [{ nhan: "Ngoài", loai: "duong_dan", duong_dan: "//evil.vn" }, { nhan: "Sao", loai: "duong_dan", duong_dan: "/tu-vi/chinh-tinh" }],
   }, null);
   expect(co.seo.tieuDe).toBe(md.mac_dinh.tieu_de_seo);          // ô chỉ có khoảng trắng = trống
   expect(co.seo.moTa).toBe("Mô tả mới");
   expect(co.dau).toMatchObject({ h1: "Lá số Tử vi", kieuChu: { co: "lon", can: "giua", nen: "khong" } });
   expect(co.gioiThieu.doan).toEqual(["Đoạn CMS"]);
   expect(co.gioiThieu.hoiDap).toEqual(md.mac_dinh.hoi_dap);     // câu thiếu trả lời bị bỏ → về mặc định
-  expect(co.gioiThieu.lienKet).toEqual([{ href: "/kien-thuc/tu-vi", ten: "Sao" }]);
+  expect(co.gioiThieu.lienKet).toEqual([{ href: "/tu-vi/chinh-tinh", ten: "Sao" }]);
 });
 
 test("gộp khối: mẫu cụm áp cho trang KB; ghi đè 'thay' / 'thêm sau' / 'ẩn mẫu'; khung ngày; biến", () => {
   const k = (id: string, x: Record<string, unknown> = {}): KhoiCms => ({ blockType: "van_ban", id, noi_dung: `Về {tieu_de} ${id}`, ...x });
   const mau = { khoi_tren: [k("m1")], khoi_duoi: [k("m2")], khoi_cuoi: [k("m3"), k("cu", { blockType: "banner", den_ngay: "2020-01-01T00:00:00Z" })] };
   const bien = { tieu_de: "Tử Vi <Mệnh>" };
-  const chiMau = gopNoiDung("/kien-thuc/sao-cung/tu-vi-cung-menh", {}, null, mau, bien);
+  const chiMau = gopNoiDung("/tu-vi/sao-o-cung/tu-vi-cung-menh", {}, null, mau, bien);
   expect(chiMau.khoi.tren.map((x) => x.noi_dung)).toEqual(["Về Tử Vi <Mệnh> m1"]);
   expect(chiMau.khoi.cuoi.map((x) => x.id)).toEqual(["m3"]);   // banner hết hạn bị bỏ
-  const ghiDe = gopNoiDung("/kien-thuc/sao-cung/tu-vi-cung-menh", {}, {
+  const ghiDe = gopNoiDung("/tu-vi/sao-o-cung/tu-vi-cung-menh", {}, {
     khoi_tren: [k("r1")], khoi_duoi: [k("r2")], khoi_cuoi: [],
     che_do_mau: { tren: "thay", duoi: "them_sau", cuoi: "an_mau" },
   }, mau, bien);
@@ -58,7 +58,7 @@ test("layNoiDungTrang: chưa nối CMS → không bao giờ null, trả mặc đ
     expect(nd.nhom).toBe("phap_ly");
     expect(nd.ngayHieuLuc).toBe(mucSoTrang("/dieu-khoan")!.mac_dinh.ngay_hieu_luc);
     expect(nd.muc.map((m) => m.id)).toContain("sao");
-    const kb = await layNoiDungTrang("/kien-thuc/sao-cung/tu-vi-cung-menh");
+    const kb = await layNoiDungTrang("/tu-vi/sao-o-cung/tu-vi-cung-menh");
     expect(kb.nhom).toBe("kien_thuc");
     expect((await layNoiDungTrang("//evil.vn")).khoi).toEqual({ tren: [], duoi: [], cuoi: [] });
   } finally { if (cu !== undefined) process.env.CMS_URL = cu; }
@@ -71,14 +71,14 @@ test("sổ trang: không sót URL tĩnh của sitemap + mọi chủ đề; khôn
   const tinh = [...sm.slice(sm.indexOf("const TINH"), sm.indexOf("];", sm.indexOf("const TINH"))).matchAll(/\["(\/[^"]*)", [\d.]+\]/g)].map((m) => m[1]!);
   expect(tinh.length).toBeGreaterThan(15);
   const so = new Set(SO_TRANG.map((t) => t.duong));
-  for (const d of [...tinh, "/phong-thuy/huong-hop-tuoi", ...Object.keys(CHU_DE).map((k) => `/kien-thuc/${k}`)]) expect(so.has(d), d).toBe(true);
+  for (const d of [...tinh, "/phong-thuy/huong-hop-tuoi", ...Object.values(CHU_DE).map((c) => c.duong)]) expect(so.has(d), d).toBe(true);
   expect(so.size).toBe(SO_TRANG.length);
   expect(SO_TRANG.length).toBeLessThanOrEqual(45);   // bản gọn (mục 8.1): không tạo sẵn tài liệu cho trang KB
   expect(MAU_CUM.length).toBe(Object.keys(CHU_DE).length + 2);
-  expect(khopMauCum("/kien-thuc/sao-cung/tu-vi-cung-menh")?.bien).toEqual({ slug: "tu-vi-cung-menh" });
-  expect(khopMauCum("/phong-thuy/tuoi-1990-nam")?.bien).toEqual({ nam: "1990", gioi: "nam" });
+  expect(khopMauCum("/tu-vi/sao-o-cung/tu-vi-cung-menh")?.bien).toEqual({ slug: "tu-vi-cung-menh" });
+  expect(khopMauCum("/phong-thuy/huong-hop-tuoi/tuoi-1990-nam")?.bien).toEqual({ nam: "1990", gioi: "nam" });
   expect(khopMauCum("/phong-thuy/huong-hop-tuoi")).toBeNull();
-  expect(khopMauCum("/kien-thuc/sao-cung")).toBeNull();
+  expect(khopMauCum("/tu-vi/sao-o-cung")).toBeNull();
   for (const m of SO_TRANG) if (m.nhom === "phap_ly") expect(m.o.some((o) => o.startsWith("khoi")), m.duong).toBe(false);
 });
 
@@ -118,7 +118,7 @@ test("ND-2: CMS trống → metadata y nguyên bản code; ô SEO CMS phủ tiê
 });
 
 test("ND-2: sổ trang — công cụ HL/TDG đọc giới thiệu từ noi-dung.ts; ô cho phép khớp chỗ web thật sự đọc", () => {
-  for (const d of ["/xem-ngay-tot", "/xem-tuoi-lam-nha", "/tuoi-xong-dat", "/huong-xau-nam"]) {
+  for (const d of ["/xem-ngay-tot", "/xem-tuoi-lam-nha", "/tuoi-xong-dat", "/phong-thuy/huong-xau-nam"]) {
     const m = mucSoTrang(d)!;
     expect(m.o).toContain("gioi_thieu");
     expect(m.mac_dinh.doan?.length).toBeGreaterThan(0);

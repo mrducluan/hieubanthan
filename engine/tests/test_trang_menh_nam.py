@@ -36,8 +36,8 @@ def test_1990_tinh_tay():
     moc = next(m for k, m in muc.items() if k.startswith("Sinh đầu năm"))["doan"]
     assert "27/01/1990" in moc and "04/02/1990" in moc and "Kỷ Tỵ" in moc       # trước Tết: năm Kỷ Tỵ 1989
     assert t["minh_hoa"] == {"kieu": "menh", "hanh": "Thổ", "nap_am": "Lộ Bàng Thổ", "han": "路旁土", "can_chi": "Canh Ngọ"}
-    assert t["lien_ket_ngoai"] == [{"duong": "/phong-thuy/tuoi-1990-nam", "ten": "Nam 1990 hợp hướng nào"},
-                                   {"duong": "/phong-thuy/tuoi-1990-nu", "ten": "Nữ 1990 hợp hướng nào"}]
+    assert t["lien_ket_ngoai"] == [{"duong": "/phong-thuy/huong-hop-tuoi/tuoi-1990-nam", "ten": "Nam 1990 hợp hướng nào"},
+                                   {"duong": "/phong-thuy/huong-hop-tuoi/tuoi-1990-nu", "ten": "Nữ 1990 hợp hướng nào"}]
 
 
 def test_nap_am_kb_du_30():

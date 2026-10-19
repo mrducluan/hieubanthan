@@ -53,7 +53,7 @@ export const xongDatCongKhai = (nam: number, namSinh: number) => layHoacLoi<Xong
 export const NAM_SINH_SEO = Array.from({ length: 2005 - 1960 + 1 }, (_, i) => 1960 + i);
 export const duongLamNha = (nam: number, namSinh: number) => `/xem-tuoi-lam-nha/${nam}/tuoi-${namSinh}`;
 export const duongXongDat = (nam: number, namSinh: number) => `/tuoi-xong-dat/${nam}/tuoi-${namSinh}`;
-export const duongHanNam = (nam: number) => `/huong-xau-nam/${nam}`;
+export const duongHanNam = (nam: number) => `/phong-thuy/huong-xau-nam/${nam}`;
 
 /** "tuoi-1990" → 1990 (1900–2099), sai dạng → null. */
 export function docTuoi(s: string): number | null {

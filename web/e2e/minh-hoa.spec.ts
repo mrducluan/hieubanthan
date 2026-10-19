@@ -9,12 +9,12 @@ test("trang chủ: hình bầu trời số + hình cho 4 mảng (HTML máy chủ
 });
 
 for (const [duong, title] of [
-  ["/kien-thuc/than-so/so-7", "Số 7 trong thần số học"],
-  ["/kien-thuc/kinh-dich/que-11-thai", "Hình quẻ 11 Kinh Dịch"],
-  ["/kien-thuc/tu-vi/sao-tu-vi", "Sao Tử Vi (紫微), hành Thổ"],
-  ["/kien-thuc/cung-tu-vi/cung-tai-bach", "Cung Tài Bạch — vị trí trong vòng 12 cung"],
-  ["/kien-thuc/thap-than/chinh-quan", "Chính Quan: khắc ta, khác âm dương"],
-  ["/kien-thuc/nhat-chu/nhat-chu-giap", "Nhật chủ Giáp — hành Mộc dương"],
+  ["/than-so/y-nghia-so/so-7", "Số 7 trong thần số học"],
+  ["/kinh-dich/que/que-11-thai", "Hình quẻ 11 Kinh Dịch"],
+  ["/tu-vi/chinh-tinh/sao-tu-vi", "Sao Tử Vi (紫微), hành Thổ"],
+  ["/tu-vi/cung/cung-tai-bach", "Cung Tài Bạch — vị trí trong vòng 12 cung"],
+  ["/bat-tu/thap-than/chinh-quan", "Chính Quan: khắc ta, khác âm dương"],
+  ["/bat-tu/nhat-chu/nhat-chu-giap", "Nhật chủ Giáp — hành Mộc dương"],
 ] as const) {
   test(`trang kiến thức có hình minh hoạ: ${duong}`, async ({ request }) => {
     const r = await request.get(duong);
@@ -26,7 +26,7 @@ for (const [duong, title] of [
 }
 
 test("quẻ Thái vẽ đúng: 3 hào dương dưới, 3 hào âm trên", async ({ page }) => {
-  await page.goto("/kien-thuc/kinh-dich/que-11-thai");
+  await page.goto("/kinh-dich/que/que-11-thai");
   const svg = page.getByTestId("minh-hoa").locator("svg");
   await expect(svg).toBeVisible();
   // hào dương = 1 rect liền, hào âm = 2 rect → 3 + 6 = 9 rect

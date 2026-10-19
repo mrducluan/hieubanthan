@@ -2,7 +2,7 @@
 // từ điển không tải phông chữ Hán (Noto Serif TC chia ~100 mảnh theo ký tự, trước đây ~1,2 MB).
 import { test, expect } from "@playwright/test";
 
-for (const duong of ["/", "/kien-thuc/tu-vi/sao-tu-vi", "/tu-dien", "/than-so"]) {
+for (const duong of ["/", "/tu-vi/chinh-tinh/sao-tu-vi", "/tu-dien", "/than-so"]) {
   test(`không tải thư viện tài khoản: ${duong}`, async ({ page }) => {
     const js: Promise<string>[] = [];
     page.on("response", (r) => { if (r.request().resourceType() === "script" && r.url().includes("/_next/")) js.push(r.text().catch(() => "")); });

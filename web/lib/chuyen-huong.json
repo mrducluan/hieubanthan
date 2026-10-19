@@ -1,0 +1,25 @@
+{
+  "_ghi_chu": "QH-URL (chủ dự án duyệt phương án B, 2026-10-19): MỘT nguồn cho đường dẫn cụm kiến thức (lib/kien-thuc.ts) và bảng 308 (next.config.mjs). Khoá = mã chủ đề cũ /kien-thuc/{khoá}. Đổi ở đây = đổi URL công khai → luôn kèm 308.",
+  "chu_de": {
+    "than-so": "/than-so/y-nghia-so",
+    "nghe-nghiep": "/than-so/nghe-nghiep",
+    "tinh-yeu": "/than-so/tinh-yeu",
+    "nam-ca-nhan": "/than-so/nam-ca-nhan",
+    "no-nghiep": "/than-so/no-nghiep",
+    "so-kep": "/than-so/so-kep",
+    "hop-so": "/hop-doi/cap-so",
+    "tu-vi": "/tu-vi/chinh-tinh",
+    "cung-tu-vi": "/tu-vi/cung",
+    "sao-cung": "/tu-vi/sao-o-cung",
+    "tu-hoa": "/tu-vi/tu-hoa",
+    "thap-than": "/bat-tu/thap-than",
+    "nhat-chu": "/bat-tu/nhat-chu",
+    "menh-tuoi": "/bat-tu/menh-theo-nam",
+    "kinh-dich": "/kinh-dich/que"
+  },
+  "trang": [
+    ["/la-so-mau", "/tu-vi/la-so-mau"],
+    ["/huong-xau-nam", "/phong-thuy/huong-xau-nam"]
+  ],
+  "tuoi_huong": "/phong-thuy/huong-hop-tuoi"
+}

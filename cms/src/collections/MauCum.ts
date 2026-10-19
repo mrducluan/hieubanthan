@@ -1,4 +1,4 @@
-// ND-0 — "Mẫu cụm trang": một tài liệu cho cả cụm trang kiến thức dựng từ KB (vd 168 trang /kien-thuc/sao-cung/{slug}),
+// ND-0 — "Mẫu cụm trang": một tài liệu cho cả cụm trang kiến thức dựng từ KB (vd 168 trang /tu-vi/sao-o-cung/{slug}),
 // do job đồng bộ tạo từ sổ trang của web (mục 8.1 docs/KIEN-TRUC-NOI-DUNG-TRANG.md). CMS chỉ đặt KHỐI quanh nội dung KB
 // (banner, video, đoạn biên tập, nút mời); chữ KB vẫn ở git — khung "Nội dung kho tri thức" xem trước CHỈ ĐỌC một trang
 // mẫu của cụm + nút mở /quan-tri/tri-thuc/<tệp>. Chữ trong khối dùng được biến {tieu_de}… (web thay, thoát HTML).
@@ -69,7 +69,7 @@ export const MauCum: CollectionConfig = {
   },
   endpoints: [
     {
-      // Khung "Nội dung kho tri thức": GET /api/mau-cum/xem-kb?duong=/kien-thuc/sao-cung/tu-vi-cung-menh
+      // Khung "Nội dung kho tri thức": GET /api/mau-cum/xem-kb?duong=/tu-vi/sao-o-cung/tu-vi-cung-menh
       // → chữ engine đang trả cho trang đó (chỉ đọc) + link tệp KB. Dùng cho cả mẫu cụm lẫn ghi đè một URL.
       path: "/xem-kb", method: "get",
       handler: async (req) => {

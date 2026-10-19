@@ -28,12 +28,12 @@ export default async function Page(p: P) {
   return (
     <div className="mx-auto max-w-3xl space-y-5">
       <JsonLd data={goiLd(
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Hướng xấu theo năm", duong: "/huong-xau-nam" }, { ten: `Năm ${n}`, duong: duongHanNam(n) }]),
+        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Phong thuỷ", duong: "/phong-thuy" }, { ten: "Hướng xấu theo năm", duong: "/phong-thuy/huong-xau-nam" }, { ten: `Năm ${n}`, duong: duongHanNam(n) }]),
         ldHoiDap([{ hoi: `Ngũ Hoàng năm ${n} ở hướng nào?`, dap: `Hướng ${ten("ngu_hoang").phuong}.` },
           { hoi: `Tam Sát năm ${n} ở đâu?`, dap: `Phía ${ten("tam_sat").phuong}.` },
           { hoi: `Thái Tuế năm ${n} ở hướng nào?`, dap: `Hướng ${ten("thai_tue").phuong}; Tuế Phá ở ${ten("tue_pha").phuong}.` }]),
       )} />
-      <nav aria-label="Đường dẫn" className="text-sm text-fg-muted"><Link href="/huong-xau-nam" className="hover:underline">Hướng xấu theo năm</Link></nav>
+      <nav aria-label="Đường dẫn" className="text-sm text-fg-muted"><Link href="/phong-thuy" className="hover:underline">Phong thuỷ</Link> › <Link href="/phong-thuy/huong-xau-nam" className="hover:underline">Hướng xấu theo năm</Link></nav>
       <TieuDeMuc cap={1} nho={`Năm ${h.can_chi}`} lon={`Hướng xấu năm ${n}`} />
       <BangHanNam h={h} />
       <p className="flex flex-wrap gap-3 text-sm">

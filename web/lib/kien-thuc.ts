@@ -4,11 +4,14 @@
 import { unstable_noStore as noStore } from "next/cache";
 import type { MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
+import CHUYEN from "@/lib/chuyen-huong.json";
 
 export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu"
   | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep";
 
-export const CHU_DE: Record<string, { loai: LoaiTrang; ten: string; mo_ta: string; mang: string }> = {
+type ChuDe = { loai: LoaiTrang; ten: string; mo_ta: string; mang: string };
+/** Khoá = mã chủ đề (giữ nguyên làm mã nội bộ: CMS, hình, llms); `duong` = URL cụm theo silo mảng (lib/chuyen-huong.json). */
+const CHU_DE_GOC: Record<string, ChuDe> = {
   "than-so": { loai: "so", ten: "Ý nghĩa các con số", mang: "/than-so",
     mo_ta: "12 con số của thần số học Pythagoras (1–9 và số cái 11, 22, 33): từ khoá, mặt tối, năm cá nhân, đỉnh cao, thử thách." },
   // SEO-G: cụm thần số theo câu người Việt hay tìm
@@ -44,6 +47,46 @@ export const CHU_DE: Record<string, { loai: LoaiTrang; ten: string; mo_ta: strin
   "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", mang: "/bat-tu",
     mo_ta: "10 nhật chủ (can ngày sinh) trong Bát tự: hình tượng, tính chất, điểm mạnh, mặt tối và ảnh hưởng của mùa sinh." },
 };
+// QH-URL (phương án B): cụm kiến thức nằm dưới trang công cụ của mảng — /{mảng}/{cụm}/{trang}. URL cũ /kien-thuc/{khoá}/…
+// chuyển 308 (next.config.mjs đọc cùng lib/chuyen-huong.json).
+export const CHU_DE: Record<string, ChuDe & { duong: string }> = Object.fromEntries(Object.entries(CHU_DE_GOC).map(([k, v]) => {
+  const duong = (CHUYEN.chu_de as Record<string, string>)[k];
+  if (!duong) throw new Error(`Chủ đề ${k} chưa có đường dẫn trong lib/chuyen-huong.json`);
+  return [k, { ...v, duong }];
+}));
+/** Trang công cụ = trang trụ (pillar) của silo; tên hiện ở breadcrumb và khối "Kiến thức {mảng}". */
+export const TEN_MANG_SILO: Record<string, string> = {
+  "/than-so": "Thần số học", "/hop-doi": "Hợp đôi", "/tu-vi": "Tử vi", "/bat-tu": "Bát tự", "/kinh-dich": "Kinh Dịch", "/phong-thuy": "Phong thuỷ",
+};
+/** Trang trụ của một đường dẫn cụm/trang: "/tu-vi/sao-o-cung/x" → "/tu-vi". */
+export const truCua = (duong: string) => `/${duong.split("/")[1] ?? ""}`;
+/** Khoá chủ đề theo URL cụm ("/tu-vi/sao-o-cung" → "sao-cung"); không phải cụm → null. */
+export const khoaTheoDuong = (duong: string): string | null =>
+  Object.entries(CHU_DE).find(([, c]) => c.duong === duong)?.[0] ?? null;
+/** Các cụm kiến thức thuộc một trang trụ (theo thứ tự khai báo). */
+export const cumCuaTru = (tru: string) => Object.entries(CHU_DE).filter(([, c]) => truCua(c.duong) === tru);
+/** Thứ tự silo trên thư viện + khối "Kiến thức {mảng}" ở trang công cụ. */
+export const THU_TU_TRU = ["/than-so", "/hop-doi", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy"] as const;
+export type CumHienThi = { duong: string; ten: string; mo_ta: string; khoa: string | null; hinh: KieuMang };
+/** Cụm không dựng từ CHU_DE (lá số mẫu, trang tuổi phong thuỷ) nhưng thuộc silo của mảng. */
+const CUM_PHU: Record<string, CumHienThi[]> = {
+  "/tu-vi": [{ duong: "/tu-vi/la-so-mau", ten: "Lá số mẫu đọc từng bước", khoa: null, hinh: "tu-vi",
+    mo_ta: "6 lá số minh hoạ đọc theo đúng thứ tự: Mệnh–Thân, chính tinh, độ sáng, tam phương tứ chính, tứ hoá, đại hạn." }],
+  "/phong-thuy": [
+    { duong: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào", khoa: null, hinh: "phong-thuy",
+      mo_ta: "Nam, nữ sinh 1960–2005: mệnh quái Bát trạch, 4 hướng tốt, 4 hướng nên tránh, bố trí cửa, bếp, giường." },
+    { duong: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm", khoa: null, hinh: "phong-thuy",
+      mo_ta: "Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc của từng năm — phía nên giữ yên, không động thổ." },
+  ],
+};
+/** Mọi cụm của một trang trụ (cụm KB trước, cụm phụ sau). */
+export function dsCumTru(tru: string): CumHienThi[] {
+  return [
+    ...cumCuaTru(tru).map(([k, c]) => ({ duong: c.duong, ten: c.ten, mo_ta: c.mo_ta, khoa: k, hinh: HINH_CHU_DE[k] ?? "than-so" })),
+    ...(CUM_PHU[tru] ?? []),
+  ];
+}
+
 /** MH-1: hình trang trí cho từng chủ đề. */
 export const HINH_CHU_DE: Record<string, KieuMang> = {
   "than-so": "than-so", "kinh-dich": "kinh-dich", "tu-vi": "tu-vi", "cung-tu-vi": "tu-vi", "thap-than": "bat-tu", "nhat-chu": "bat-tu",
@@ -110,7 +153,7 @@ export function trang(loai: LoaiTrang, slug: string): Promise<TrangKienThuc | nu
   return lay<TrangKienThuc>(`/v1/kb/trang/${loai}/${encodeURIComponent(slug)}`);
 }
 
-export const duongTrang = (loai: LoaiTrang, slug: string) => `/kien-thuc/${CHU_DE_THEO_LOAI[loai]}/${slug}`;
+export const duongTrang = (loai: LoaiTrang, slug: string) => `${CHU_DE[CHU_DE_THEO_LOAI[loai]]!.duong}/${slug}`;
 
 // GN — từ điển thuật ngữ dễ hiểu (engine GET /v1/tu-dien).
 export interface MucTuDien { ma: string; ten: string; bien_the: string[]; han: string | null; mo_dun: string;
@@ -152,7 +195,8 @@ export interface TuoiHuong extends Omit<MucTuoiHuong, "quai" | "nhom"> {
   sinh_truoc_moc: { nam_tinh: number; quai: string; nhom: string; slug: string | null };
   tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; nguon: string; luu_y: string[]; trang_thai: string;
 }
-export const duongTuoi = (slug: string) => `/phong-thuy/${slug}`;
+/** "huong-hop-tuoi" = trang mục lục; "tuoi-1990-nam" = trang con dưới mục lục (QH-URL). */
+export const duongTuoi = (slug: string) => (slug === "huong-hop-tuoi" ? CHUYEN.tuoi_huong : `${CHUYEN.tuoi_huong}/${slug}`);
 export async function dsTuoiHuong(): Promise<MucTuoiHuong[]> {
   const d = await lay<{ trang: MucTuoiHuong[] }>("/v1/phongthuy/tuoi");
   if (!d) noStore();

@@ -2,17 +2,17 @@
 import { test, expect } from "@playwright/test";
 
 test("bản .md: trang kiến thức, chủ đề, thư viện, từ điển, trang chủ — có canonical về HTML", async ({ request }) => {
-  const r = await request.get("/kien-thuc/than-so/so-7.md");
+  const r = await request.get("/than-so/y-nghia-so/so-7.md");
   expect(r.status()).toBe(200);
   expect(r.headers()["content-type"]).toContain("text/markdown");
-  expect(r.headers()["link"]).toContain('<http://localhost:3000/kien-thuc/than-so/so-7>; rel="canonical"');
+  expect(r.headers()["link"]).toContain('<http://localhost:3000/than-so/y-nghia-so/so-7>; rel="canonical"');
   const md = await r.text();
   expect(md).toMatch(/^# /);
   expect(md).toContain("## Trả lời nhanh");
   expect(md).toContain("## Nguồn");
   for (const [duong, chu] of <[string, string][]>[
-    ["/kien-thuc/than-so.md", "/kien-thuc/than-so/so-7.md"],
-    ["/kien-thuc.md", "/kien-thuc/kinh-dich.md"],
+    ["/than-so/y-nghia-so.md", "/than-so/y-nghia-so/so-7.md"],
+    ["/kien-thuc.md", "/kinh-dich/que.md"],
     ["/tu-dien.md", "## Tử vi"],
     ["/index.md", "Hieu Ban Co Ltd"],
   ]) {
@@ -20,15 +20,15 @@ test("bản .md: trang kiến thức, chủ đề, thư viện, từ điển, tr
     expect(x.status(), duong).toBe(200);
     expect(await x.text(), duong).toContain(chu);
   }
-  expect((await request.get("/kien-thuc/than-so/khong-co.md")).status()).toBe(404);
+  expect((await request.get("/than-so/y-nghia-so/khong-co.md")).status()).toBe(404);
   expect((await request.get("/dieu-khoan.md")).status()).toBe(404);
 });
 
 test("HTML khai bản .md (link alternate); llms.txt trỏ trang HTML + đơn vị vận hành; manifest", async ({ page, request }) => {
-  await page.goto("/kien-thuc/than-so/so-7");
-  await expect(page.locator('link[rel="alternate"][type="text/markdown"]')).toHaveAttribute("href", /\/kien-thuc\/than-so\/so-7\.md$/);
+  await page.goto("/than-so/y-nghia-so/so-7");
+  await expect(page.locator('link[rel="alternate"][type="text/markdown"]')).toHaveAttribute("href", /\/than-so\/y-nghia-so\/so-7\.md$/);
   const llms = await (await request.get("/llms.txt")).text();
-  expect(llms).toContain("/kien-thuc/than-so/so-7)");
+  expect(llms).toContain("/than-so/y-nghia-so/so-7)");
   expect(llms).toContain("Hieu Ban Co Ltd");
   expect(llms).toContain("contact@hieuban.com");
   const mf = await (await request.get("/manifest.webmanifest")).json();

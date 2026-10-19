@@ -37,12 +37,12 @@ test("công cụ làm nhà: tự điền năm sinh từ hồ sơ, xem ra kết q
 });
 
 test("hướng xấu năm 2026: Ngũ Hoàng Nam, Tam Sát Bắc; trang chính có bàn 9 cung", async ({ page, request }) => {
-  await page.goto("/huong-xau-nam/2026");
+  await page.goto("/phong-thuy/huong-xau-nam/2026");
   const h = page.getByTestId("han-nam");
   await expect(h.getByRole("cell")).toHaveCount(9);
   await expect(h).toContainText("Ngũ Hoàng — Nam");
   await expect(h).toContainText("Tam Sát — Bắc");
-  const hub = await (await request.get("/huong-xau-nam")).text();
+  const hub = await (await request.get("/phong-thuy/huong-xau-nam")).text();
   expect(hub).toMatch(/<h1[^>]*>Hướng xấu theo năm<\/h1>/);
 });
 
@@ -61,7 +61,7 @@ test("trang chủ có lối vào 3 công cụ; điện thoại 360px không cu�
   await page.goto("/");
   await expect(page.getByTestId("lien-ket-tuoi").getByRole("link")).toHaveCount(3);
   await page.setViewportSize({ width: 360, height: 800 });
-  for (const d of ["/xem-tuoi-lam-nha/2026/tuoi-1990", "/huong-xau-nam/2026", "/tuoi-xong-dat/2027/tuoi-1990"]) {
+  for (const d of ["/xem-tuoi-lam-nha/2026/tuoi-1990", "/phong-thuy/huong-xau-nam/2026", "/tuoi-xong-dat/2027/tuoi-1990"]) {
     await page.goto(d);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), d).toBeLessThanOrEqual(0);
   }

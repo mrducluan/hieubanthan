@@ -16,7 +16,7 @@ export const ND_LAM_NHA: NoiDungCongCu = {
     { hoi: "Tam tai rơi vào năm nào?", dap: "Thân Tý Thìn: năm Dần, Mão, Thìn. Dần Ngọ Tuất: năm Thân, Dậu, Tuất. Hợi Mão Mùi: năm Tỵ, Ngọ, Mùi. Tỵ Dậu Sửu: năm Hợi, Tý, Sửu." },
     { hoi: "Năm không hợp tuổi thì làm sao?", dap: "Nhiều gia đình chọn năm khác, hoặc nhờ người thân hợp tuổi đứng ra làm lễ động thổ (mượn tuổi). Quyết định nên dựa trên điều kiện thực tế." },
   ],
-  lienKet: [{ href: "/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/xem-ngay-tot", ten: "Xem ngày tốt" },
+  lienKet: [{ href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/xem-ngay-tot", ten: "Xem ngày tốt" },
     { href: "/tuoi-xong-dat", ten: "Tuổi xông đất" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi hợp hướng nhà" }],
 };
 
@@ -36,11 +36,11 @@ export const ND_XONG_DAT: NoiDungCongCu = {
     { hoi: "Xông đất giờ nào?", dap: "Thường chọn giờ hoàng đạo ngày mùng 1 theo hoàng lịch; trang liệt kê sẵn sáu giờ hoàng đạo và hướng xuất hành của ngày đó." },
   ],
   lienKet: [{ href: "/xem-ngay-tot", ten: "Xem ngày tốt" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi" },
-    { href: "/huong-xau-nam", ten: "Hướng xấu theo năm" }],
+    { href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }],
 };
 
 export const ND_HAN_NAM: NoiDungCongCu = {
-  duong: "/huong-xau-nam",
+  duong: "/phong-thuy/huong-xau-nam",
   ten: "Hướng xấu theo năm",
   moTa: "Hướng nên giữ yên trong năm theo phong thuỷ truyền thống: Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc, kèm bàn phi tinh 9 cung của năm — để tránh động thổ, sửa chữa lớn phía đó.",
   doan: [

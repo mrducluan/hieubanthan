@@ -131,7 +131,7 @@ def _que_ngay(ngay_xem: dt.date) -> dict:
     return {"so": so, "ten": q["quai_ban"]["ten"], "thuong": m["thuong"], "ha": m["ha"], "hao_dong": m["hao_dong"],
             "bien": ({"so": bien["so_king_wen"], "ten": bien["ten"]} if bien else None),
             "y_chinh": kv.get("y_chinh"), "loi_khuyen": kv.get("loi_khuyen"), "cau_tu_soi": kv.get("cau_tu_soi"),
-            "duong": f"/kien-thuc/kinh-dich/que-{so}-{trang._slug(kv['ten'])}" if kv.get("ten") else None,
+            "duong": f"/kinh-dich/que/que-{so}-{trang._slug(kv['ten'])}" if kv.get("ten") else None,
             "cach_khoi": "Mai Hoa Dịch Số: năm + tháng + ngày âm lịch → quẻ trên; cộng giờ Tý → quẻ dưới và hào động."}
 
 

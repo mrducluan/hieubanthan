@@ -7,7 +7,7 @@ import { BangHanNam } from "@/components/tuoi/KetQuaTuoi";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { metaTrang } from "@/lib/seo";
 import { duongHanNam, hanNamCongKhai, namAmHienTai } from "@/lib/tuoi-dan-gian";
-import { ND_HAN_NAM } from "../xem-tuoi-lam-nha/noi-dung";
+import { ND_HAN_NAM } from "@/app/xem-tuoi-lam-nha/noi-dung";
 
 export async function generateMetadata(): Promise<Metadata> {
   return apDungSeo(metaTrang({ tieuDe: "Hướng xấu theo năm: Thái Tuế, Tam Sát, Ngũ Hoàng", moTa: ND_HAN_NAM.moTa, duong: ND_HAN_NAM.duong }), await layNoiDungTrang(ND_HAN_NAM.duong));

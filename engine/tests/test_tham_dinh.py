@@ -156,10 +156,10 @@ def test_ghi_chu_noi_bo_khong_lo_ra_api(so_dang_ky):
     assert "sửa câu 3" not in client.get("/v1/kb/trang/que/que-47-khon").text
 
 
-# --- GN-1: hàng đợi theo Search Console (file CSV "Trang" anh tải từ GSC) ---
+# --- GN-1: hàng đợi theo Search Console (file CSV "Trang" anh tải từ GSC) — nhận cả URL cũ /kien-thuc/… lẫn silo mới (QH-URL) ---
 CSV_GSC = """Trang hàng đầu,Lượt nhấp,Số lần hiển thị,CTR,Vị trí
 https://hieuban.com/kien-thuc/kinh-dich/que-47-khon,2,1200,0.17%,9.1
-https://hieuban.com/kien-thuc/tu-vi/sao-tu-vi,40,1000,4%,3.2
+https://hieuban.com/tu-vi/chinh-tinh/sao-tu-vi,40,1000,4%,3.2
 https://hieuban.com/kien-thuc/than-so/so-7,30,700,4.3%,4
 https://hieuban.com/lien-he,1,50,2%,20
 """

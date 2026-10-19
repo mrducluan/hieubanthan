@@ -1,4 +1,4 @@
-// Trang kiến thức — Server Component: HTML đầy đủ ngay lần tải đầu (Google, Bing, và bot AI đọc được không cần JS).
+// Trang kiến thức (dùng chung cho mọi route cụm của các mảng) — Server Component: HTML đầy đủ ngay lần tải đầu (Google, Bing, và bot AI đọc được không cần JS).
 // Cấu trúc GEO: tiêu đề = câu hỏi người ta tìm · đoạn "trả lời nhanh" đứng đầu · mục có tiêu đề · hỏi đáp · nguồn ·
 // ngày cập nhật · nhãn đã thẩm định (BM-1: bài chưa duyệt không gắn nhãn) · liên kết nội bộ. Schema: Article + FAQPage + BreadcrumbList.
 // EEAT-1: dòng tác giả / chủ biên / thẩm định + Person; trang đã thẩm định có WebPage.reviewedBy + lastReviewed.
@@ -14,22 +14,19 @@ import { GocNhinChuyenGia } from "@/components/kien-thuc/GocNhinChuyenGia";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { CHUYEN_GIA, idChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
-import { CHU_DE, duongTrang, trang, type TrangKienThuc } from "@/lib/kien-thuc";
+import { CHU_DE, TEN_MANG_SILO, duongTrang, trang, truCua, type TrangKienThuc } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 
-export const revalidate = 21600;
+type Thamso = { khoa: string | null; slug: string };
 
-type Props = { params: Promise<{ chu_de: string; slug: string }> };
-
-async function tai({ chu_de, slug }: Awaited<Props["params"]>) {
-  const cd = CHU_DE[chu_de];
+async function tai({ khoa, slug }: Thamso) {
+  const cd = khoa ? CHU_DE[khoa] : undefined;
   if (!cd) return null;
   const t = await trang(cd.loai, slug);
   return t ? { cd, t } : null;
 }
 
-export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
-  const params = await thamSo;
+export async function metaKienThuc(params: Thamso): Promise<Metadata> {
   const kq = await tai(params);
   if (!kq) return { title: "Không tìm thấy", robots: { index: false } };
   const { t } = kq;
@@ -47,8 +44,8 @@ export async function generateMetadata({ params: thamSo }: Props): Promise<Metad
   };
 }
 
-export default async function Page({ params: thamSo }: Props) {
-  const params = await thamSo;
+/** Trang kiến thức một mục KB (QH-URL: /{mảng}/{cụm}/{trang}); route của từng mảng chỉ đổi đường dẫn → khoá chủ đề. */
+export async function TrangKienThucView(params: Thamso) {
   const kq = await tai(params);
   if (!kq) notFound();
   const { cd, t } = kq;
@@ -97,8 +94,8 @@ export default async function Page({ params: thamSo }: Props) {
     ldHoiDap(t.hoi_dap),
     ldDuongDan([
       { ten: "Trang chủ", duong: "/" },
-      { ten: "Kiến thức", duong: "/kien-thuc" },
-      { ten: cd.ten, duong: `/kien-thuc/${params.chu_de}` },
+      { ten: TEN_MANG_SILO[truCua(cd.duong)] ?? "Kiến thức", duong: truCua(cd.duong) },
+      { ten: cd.ten, duong: cd.duong },
       { ten: t.tieu_de, duong },
     ]),
   );
@@ -108,8 +105,8 @@ export default async function Page({ params: thamSo }: Props) {
       <JsonLd data={ld} />
       <nav aria-label="Đường dẫn" className="text-xs text-fg-faint">
         <ol className="flex flex-wrap gap-1.5">
-          <li><Link href="/kien-thuc" className="hover:text-fg">Kiến thức</Link> ›</li>
-          <li><Link href={`/kien-thuc/${params.chu_de}`} className="hover:text-fg">{cd.ten}</Link> ›</li>
+          <li><Link href={truCua(cd.duong)} className="hover:text-fg">{TEN_MANG_SILO[truCua(cd.duong)] ?? "Kiến thức"}</Link> ›</li>
+          <li><Link href={cd.duong} className="hover:text-fg">{cd.ten}</Link> ›</li>
         </ol>
       </nav>
 

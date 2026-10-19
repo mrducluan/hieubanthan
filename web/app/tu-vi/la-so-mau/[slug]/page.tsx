@@ -20,7 +20,7 @@ export async function generateMetadata({ params: thamSo }: Props): Promise<Metad
   const params = await thamSo;
   const m = await laSoMau(params.slug);
   if (!m) return { title: "Không tìm thấy", robots: { index: false } };
-  const duong = `/la-so-mau/${m.slug}`;
+  const duong = `/tu-vi/la-so-mau/${m.slug}`;
   return {
     title: tieuDeSeo(`Lá số mẫu: ${m.tieu_de}`),
     description: catMoTa(`${m.mo_ta} Đọc từng bước, có giải nghĩa thuật ngữ.`),
@@ -35,7 +35,7 @@ export default async function Page({ params: thamSo }: Props) {
   const params = await thamSo;
   const m = await laSoMau(params.slug);
   if (!m) notFound();
-  const duong = `/la-so-mau/${m.slug}`;
+  const duong = `/tu-vi/la-so-mau/${m.slug}`;
   const nd = await layNoiDungTrang(duong, { tieu_de: m.tieu_de });   // ND-5: khối CMS mẫu cụm "Lá số mẫu"
   const ld = goiLd(
     {
@@ -45,7 +45,7 @@ export default async function Page({ params: thamSo }: Props) {
       about: "Tử vi Đẩu Số", articleSection: m.buoc.map((b) => b.tieu_de),
     },
     ldDuongDan([
-      { ten: "Trang chủ", duong: "/" }, { ten: "Lá số mẫu", duong: "/la-so-mau" }, { ten: m.tieu_de, duong },
+      { ten: "Trang chủ", duong: "/" }, { ten: "Tử vi", duong: "/tu-vi" }, { ten: "Lá số mẫu", duong: "/tu-vi/la-so-mau" }, { ten: m.tieu_de, duong },
     ]),
   );
   const [nam, thang, ngay] = m.ngay.split("-");
@@ -53,7 +53,7 @@ export default async function Page({ params: thamSo }: Props) {
     <article className="mx-auto max-w-5xl">
       <JsonLd data={ld} />
       <nav aria-label="Đường dẫn" className="text-xs text-fg-faint">
-        <Link href="/la-so-mau" className="hover:text-fg">Lá số mẫu</Link> ›
+        <Link href="/tu-vi" className="hover:text-fg">Tử vi</Link> › <Link href="/tu-vi/la-so-mau" className="hover:text-fg">Lá số mẫu</Link> ›
       </nav>
       <header className="mt-3">
         <p className="eyebrow">{m.ten} · {m.gioi_tinh === "nam" ? "Nam" : "Nữ"} · sinh {ngay}/{thang}/{nam} lúc {m.gio}</p>

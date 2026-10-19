@@ -5,6 +5,7 @@ import { Suspense, type ReactNode } from "react";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { DauCms } from "@/components/cms/DauCms";
 import { KhoiCms } from "@/components/cms/KhoiCms";
+import { CumKienThucTru } from "@/components/kien-thuc/CumKienThucTru";
 import { GioiThieuCongCu } from "@/components/seo/GioiThieuCongCu";
 import { gioiThieuTu, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
@@ -20,6 +21,8 @@ export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
         {children}
       </DauCms>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mx-auto mt-12 max-w-5xl" />
+      {/* QH-URL: trang công cụ là trang trụ của silo → trỏ xuống các cụm kiến thức của mảng. */}
+      <CumKienThucTru tru={duong} className="mt-12" />
       {mang && <Suspense fallback={null}><BaiLienQuanMang mang={mang} className="mt-12" /></Suspense>}
       {nd.gioiThieu.doan.length > 0 && <GioiThieuCongCu {...gioiThieuTu(nd)} />}
       {sau}

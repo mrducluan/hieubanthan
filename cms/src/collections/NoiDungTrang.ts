@@ -68,7 +68,7 @@ const giuHeThong: CollectionBeforeChangeHook = async ({ data, originalDoc, opera
   const mau = await req.payload.find({ collection: "mau-cum", limit: 50, depth: 0, overrideAccess: true, req,
     where: { tren_web: { equals: true } } });
   const khop = mau.docs.find((m) => regexMau(String((m as { mau_duong?: string }).mau_duong)).test(duong));
-  if (!khop) throw new APIError("Chỉ tạo ghi đè cho một trang thuộc mẫu cụm có thật (vd /kien-thuc/sao-cung/tu-vi-cung-menh). Trang công cụ, tĩnh, pháp lý, chủ đề đã có sẵn trong danh sách — bấm \"Đồng bộ ngay\" nếu chưa thấy.", 400, null, true);
+  if (!khop) throw new APIError("Chỉ tạo ghi đè cho một trang thuộc mẫu cụm có thật (vd /tu-vi/sao-o-cung/tu-vi-cung-menh). Trang công cụ, tĩnh, pháp lý, chủ đề đã có sẵn trong danh sách — bấm \"Đồng bộ ngay\" nếu chưa thấy.", 400, null, true);
   const m = khop as unknown as { id: number; nhom: string; o?: string[]; nguon_kb?: NguonKb };
   if (m.nguon_kb && (await coTrangKb(m.nguon_kb, duong.split("/").pop()!)) === false) {
     throw new APIError(`Không có trang ${duong} trên web (engine không tìm thấy).`, 400, null, true);
@@ -243,7 +243,7 @@ export const NoiDungTrang: CollectionConfig = {
     {
       name: "duong", label: "Đường dẫn", type: "text", required: true, unique: true, index: true,
       access: { update: () => false },
-      admin: { description: "Do đồng bộ tạo. Chỉ nhập tay khi tạo ghi đè cho một trang kiến thức (vd /kien-thuc/sao-cung/tu-vi-cung-menh)." },
+      admin: { description: "Do đồng bộ tạo. Chỉ nhập tay khi tạo ghi đè cho một trang kiến thức (vd /tu-vi/sao-o-cung/tu-vi-cung-menh)." },
       validate: (v: unknown) => (typeof v === "string" && DUONG_TRONG_SITE.test(v.trim())) || "Đường dẫn trong site, bắt đầu bằng /",
     },
     docChi({ name: "ten", label: "Tên trang", type: "text", admin: { readOnly: true } }),

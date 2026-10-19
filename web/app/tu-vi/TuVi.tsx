@@ -91,7 +91,7 @@ export function TuVi() {
       <section aria-label="Lá số" className="space-y-4">
         {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Để an lá số cần giờ sinh, giới tính và nơi sinh (nơi sinh quyết định múi giờ lúc bạn chào đời). Bạn vẫn hỏi được câu kiến thức chung ở khung bên dưới." />}
         <p className="text-sm text-fg-faint">
-          Mới làm quen Tử vi? <Link href="/la-so-mau" className="text-gold underline">Xem 6 lá số mẫu được đọc từng bước</Link>, có giải nghĩa từng thuật ngữ.
+          Mới làm quen Tử vi? <Link href="/tu-vi/la-so-mau" className="text-gold underline">Xem 6 lá số mẫu được đọc từng bước</Link>, có giải nghĩa từng thuật ngữ.
         </p>
         {laSo && !ls && !loi && <KhungTai dong={6} />}
         {loi && <BaoLoi loi={loi} thuLai={thuLai} />}

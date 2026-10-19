@@ -1,6 +1,7 @@
 # Quy hoạch nhóm URL (URL Taxonomy) — hieuban.com
 
-> Trạng thái: **ĐỀ XUẤT, chờ chủ dự án duyệt** (2026-10-19). Chưa đổi URL nào trong code.
+> Trạng thái: **ĐÃ DUYỆT phương án B và ĐÃ LÀM** (2026-10-19): tên cụm như mục 4, `/huong-xau-nam` chuyển vào
+> `/phong-thuy/huong-xau-nam`, công cụ lịch & tuổi giữ URL gốc. Nguồn đường dẫn + 308: `web/lib/chuyen-huong.json`.
 > Đẩy khâu: **1 Thu hút** (cụm chủ đề rõ → Google hiểu site là chuyên trang từng mảng) và **2 Quay lại** (đường đi
 > từ bài đọc sang công cụ của đúng mảng ngắn hơn). Đo: số trang được index theo cụm, hiển thị/nhấp theo thư mục
 > trong Search Console, tỉ lệ `landing_viewed` trang kiến thức → `reading_started` công cụ cùng mảng.

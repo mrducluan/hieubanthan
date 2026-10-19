@@ -131,7 +131,8 @@ def hang_doi_gsc(duong_csv) -> list[dict]:
     with open(duong_csv, encoding="utf-8-sig", newline="") as f:
         dong = list(csv.reader(f))
     for d in dong[1:]:
-        if len(d) < 5 or "/kien-thuc/" not in d[0]:
+        # Trang KB: URL cũ /kien-thuc/{cụm}/{trang} hoặc silo mới /{mảng}/{cụm}/{trang} (QH-URL) — khớp theo slug duy nhất.
+        if len(d) < 5 or not any(x in d[0] for x in ("/kien-thuc/", "/than-so/", "/hop-doi/cap-so/", "/tu-vi/", "/bat-tu/", "/kinh-dich/que/")):
             continue
         slug = d[0].rstrip("/").split("/")[-1].removesuffix(".md")
         khop = theo_slug.get(slug, [])

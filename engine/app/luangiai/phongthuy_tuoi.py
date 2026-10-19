@@ -96,7 +96,7 @@ def tuoi(nam: int, gioi_tinh: str) -> dict:
                   f"{', '.join(h['huong'] for h in tot)}, hướng cửa, bếp, giường, bàn làm việc theo Bát trạch."),
         "can_chi": f"{can} {chi}", "nap_am": can_chi.nap_am(can, chi),
         # SEO-J: trang "sinh năm X mệnh gì" (1950–2025 phủ trọn 1960–2005)
-        "trang_menh": f"/kien-thuc/menh-tuoi/sinh-nam-{nam}-menh-gi",
+        "trang_menh": f"/bat-tu/menh-theo-nam/sinh-nam-{nam}-menh-gi",   # QH-URL: silo Bát tự
         "menh_quai": {"quai": q, "nhom": nhom, "so": mq["so"], **(kb.quai(q) or {})},
         "huong_tot": tot, "huong_xau": xau, "bang_huong": bang, "goi_y": goi_y,
         "moc_dau_nam": {"lap_xuan": lx, "tet_viet": tet_v, "tet_trung": tet_t, "tet_lech": tet_t != tet_v},

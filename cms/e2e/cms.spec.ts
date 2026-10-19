@@ -432,12 +432,12 @@ test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức
   const anhId = (await up.json()).doc.id as number;
 
   // hai trang thật của cụm Kinh Dịch (lấy từ trang chủ đề)
-  const ds = [...(await (await request.get(`${WEB}/kien-thuc/kinh-dich`)).text()).matchAll(/href="(\/kien-thuc\/kinh-dich\/[a-z0-9-]+)"/g)]
+  const ds = [...(await (await request.get(`${WEB}/kinh-dich/que`)).text()).matchAll(/href="(\/kinh-dich\/que\/[a-z0-9-]+)"/g)]
     .map((m) => m[1]!).filter((v, i, a) => a.indexOf(v) === i);
   expect(ds.length).toBeGreaterThanOrEqual(2);
   const [u1, u2] = ds as [string, string];
 
-  const mau = (await (await request.get(`${CMS}/api/mau-cum?where[mau_duong][equals]=${encodeURIComponent("/kien-thuc/kinh-dich/{slug}")}&depth=0&draft=true`,
+  const mau = (await (await request.get(`${CMS}/api/mau-cum?where[mau_duong][equals]=${encodeURIComponent("/kinh-dich/que/{slug}")}&depth=0&draft=true`,
     { headers: h })).json()).docs[0] as { id: number };
   const r = await request.patch(`${CMS}/api/mau-cum/${mau.id}`, { headers: h, data: { _status: "published",
     khoi_tren: [{ blockType: "van_ban", noi_dung: "Mẫu cụm: bạn đang đọc {tieu_de} & thêm." }],
@@ -615,7 +615,9 @@ test("CMS-4 gợi ý liên kết nội bộ: bài viết + trang kiến thức g
   expect(r.ok()).toBeTruthy();
   const ds = (await r.json()).ds as { url: string; loai: string }[];
   expect(ds.some((m) => m.url === "/blog/so-chu-dao-7")).toBeTruthy();
-  expect(ds.some((m) => m.loai === "trang" && m.url.startsWith("/kien-thuc"))).toBeTruthy();
+  // QH-URL: trang kiến thức nằm trong silo mảng (vd /than-so/nghe-nghiep/…), không còn /kien-thuc/{cụm}
+  expect(ds.some((m) => m.loai === "trang" && /^\/(than-so|hop-doi|tu-vi|bat-tu|kinh-dich)\/[a-z-]+\/[a-z0-9-]+$/.test(m.url))).toBeTruthy();
+  expect(ds.some((m) => m.url.startsWith("/kien-thuc/"))).toBeFalsy();
   expect((await request.post(`${CMS}/api/bai-viet/goi-y-lien-ket`, { data: {} })).status()).toBe(403);
 });
 

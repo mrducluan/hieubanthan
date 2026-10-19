@@ -50,7 +50,7 @@ export function mdChuDe(khoa: string, ds: MucLuc[]): string | null {
   const cd = CHU_DE[khoa];
   if (!cd) return null;
   const muc = ds.filter((t) => t.loai === cd.loai);
-  return [`# ${cd.ten}`, "", `> ${cd.mo_ta}`, "", `URL: ${urlDayDu(`/kien-thuc/${khoa}`)}`, "",
+  return [`# ${cd.ten}`, "", `> ${cd.mo_ta}`, "", `URL: ${urlDayDu(cd.duong)}`, "",
     ...muc.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}.md): ${t.mo_ta}${t.trang_thai === "da_duyet" ? " (đã thẩm định)" : ""}`),
     ""].join("\n");
 }
@@ -58,7 +58,7 @@ export function mdChuDe(khoa: string, ds: MucLuc[]): string | null {
 export function mdThuVien(ds: MucLuc[]): string {
   const d = [`# Thư viện kiến thức — ${TEN_SITE}`, "", `> ${MO_TA_SITE}`, ""];
   for (const [k, cd] of Object.entries(CHU_DE)) {
-    d.push(`## [${cd.ten}](${urlDayDu(`/kien-thuc/${k}`)}.md)`, "", cd.mo_ta, `(${ds.filter((t) => t.loai === cd.loai).length} trang)`, "");
+    d.push(`## [${cd.ten}](${urlDayDu(cd.duong)}.md)`, "", cd.mo_ta, `(${ds.filter((t) => t.loai === cd.loai).length} trang)`, "");
   }
   return d.join("\n");
 }
