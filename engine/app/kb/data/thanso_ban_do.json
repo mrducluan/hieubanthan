@@ -266,5 +266,17 @@
   "quan_he": "Quan hệ, hợp tác",
   "tien_bac": "Tiền bạc, thăng tiến",
   "khep_lai": "Khép lại việc cũ"
- }
+ },
+ "nam_doc_thang": {
+  "1": "Năm mở đầu: tháng nào cũng hợp để gieo việc mới; tháng \"khép lại\" trong năm này là dọn chỗ cho việc mới, không phải bỏ cuộc.",
+  "2": "Năm vun đắp: tháng \"khởi sự\" hợp để bắt đầu nhỏ và cùng người khác; việc thường tiến chậm, đừng ép tiến độ.",
+  "3": "Năm thể hiện: tháng \"đổi việc\" hợp để thử vai trò mới ở mức vừa sức; giữ lời hứa trong khả năng.",
+  "4": "Năm xây nền: tháng \"khởi sự\" hợp để mở việc có kế hoạch rõ; thay đổi lớn nên cân nhắc kỹ trước khi làm.",
+  "5": "Năm thay đổi: tháng khởi sự và đổi việc rất thuận; tháng \"xây nền\" và \"lắng lại\" giúp giữ hướng giữa nhiều đổi thay.",
+  "6": "Năm gắn bó: việc gia đình và cam kết được ưu tiên; tháng \"đổi việc\" nên tính cả đến người thân.",
+  "7": "Năm lắng lại: tháng \"khởi sự\" hợp để học và chuẩn bị hơn là ra mắt lớn; tháng \"tiền bạc\" nên ưu tiên giữ hơn là liều.",
+  "8": "Năm gặt hái: tháng \"tiền bạc\" là điểm nhấn của năm; tháng \"lắng lại\" để không làm quá sức.",
+  "9": "Năm khép lại: tháng \"khởi sự\" trong năm này hợp để phác thảo và chuẩn bị; cam kết lớn nên để sang năm mở đầu (từ tháng 1 năm sau)."
+ },
+ "ghi_chu_thang_1": "Tháng cá nhân bằng năm cá nhân cộng số tháng, nên sang tháng 1 con số đi theo năm cá nhân mới — vì vậy nhịp quanh đầu năm dương lịch có thể lặp lại."
 }

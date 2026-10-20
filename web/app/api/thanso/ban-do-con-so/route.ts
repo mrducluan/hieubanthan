@@ -12,6 +12,10 @@ const Input = z.object({
   quy_uoc_duong_doi: z.enum(["tong_het", "tung_phan"]).optional(),
 }).strict();
 
+// Khoá "đã mở hôm nay" chỉ theo NGƯỜI (tên chính + ngày sinh): đổi cách tính Đường đời hay thêm tên thường gọi trong ngày
+// không bị trừ Sao lần hai (báo cáo chỉ đọc tên chính).
+const khoaTheoNguoi = (d: Record<string, unknown>) => [(d.ho_ten as string[])[0], d.ngay, d.thang, d.nam];
+
 export function POST(req: Request) {
-  return luanGiaiCoSao(req, Input, "/v1/thanso/ban-do-con-so", "thanso");
+  return luanGiaiCoSao(req, Input, "/v1/thanso/ban-do-con-so", "thanso", khoaTheoNguoi);
 }

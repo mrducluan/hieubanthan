@@ -36,15 +36,16 @@ def test_tong_quan_ban_hiem_co_nao():
     dau = " ".join(_bc()["chuong"][0]["doan"])
     t = tl.ty_le(24, 10, 1988, "tung_phan")
     assert f"Đường đời 6" in dau and f"{t['cap']['so_ngay']:,}".replace(",", ".") in dau
-    assert "Số 6 xuất hiện 2 lần" in dau          # Đường đời 6 + Linh hồn 6
-    assert "Kết nối" in dau and "Biểu đạt" in dau  # lời mời chương nghịch lý (chỉ nêu tên nhóm)
+    assert "Số 6 xuất hiện 3 lần" in dau          # Đường đời 6 + Linh hồn 6 + Ngày sinh 24 → 6
+    assert "Kết nối" in dau and "Biểu đạt" in dau  # lời mời chương bên trong/bên ngoài (chỉ nêu tên nhóm)
+    assert "thiếu 3, 5, 6, 7" in dau and "không phải theo số người" in dau and "tháng then chốt" in dau
 
 
 def test_nghich_ly():
     c = " ".join(_bc()["chuong"][1]["doan"])
     assert "Linh hồn 6" in c and "Nhân cách 3" in c and "Ấm áp và tự do" in c
     assert "Đường đời 6" in c and "Sứ mệnh 9" in c
-    assert "thiếu số 3, 5, 6, 7" in c and "Tâm linh" in c
+    assert "Tâm linh" in c and "Gợi ý:" in c
 
 
 def test_muoi_hai_thang():
@@ -52,13 +53,31 @@ def test_muoi_hai_thang():
     chu = " ".join(c["doan"])
     assert "Năm cá nhân 8" in chu and "10/2026" in chu and "9/2027" in chu and "10/2027" not in chu
     assert "giai đoạn 2/4" in chu and "2027" in chu
-    assert "Khởi sự việc mới:" in chu and "Tiền bạc, thăng tiến:" in chu
+    assert "khởi sự việc mới: 11/2026" in chu and "tiền bạc, thăng tiến: 8/2027" in chu
+    assert chu.count("Tháng then chốt — quan hệ, hợp tác") <= 2   # mỗi loại việc tối đa 2 tháng
+    assert "Từ tháng 1/2027: năm cá nhân 9" in chu and "đầu năm dương lịch" in chu
 
 
 def test_su_nghiep():
     chu = " ".join(_bc()["chuong"][3]["doan"])
-    assert "Giáo dục" in chu and "Sứ mệnh 9" in chu
-    assert "31–39" in chu and "40–48" in chu and "49+" in chu
+    assert "giáo dục" in chu and "Sứ mệnh 9" in chu and "Nhân cách 3" in chu
+    assert "Giai đoạn hiện tại 2/4 (tuổi 31–39" in chu and "Từ năm 2028 (tuổi 40): giai đoạn 3" in chu
+    assert "Giai đoạn 1" not in chu and "8/2027" in chu   # chỉ giai đoạn hiện tại + kế tiếp; tháng tiền bạc
+
+
+def test_moi_xem_rieng_va_khong_lo_ma_noi_bo():
+    bc = _bc()
+    m = {c["ma"]: c["moi_xem"] for c in bc["chuong"]}
+    assert "Linh hồn 6 × Nhân cách 3" in m["nghich_ly"]["diem_nhan"]
+    assert "Năm cá nhân 8" in m["muoi_hai_thang"]["diem_nhan"] and "năm cá nhân 8" in m["muoi_hai_thang"]["cau_hoi"]
+    ngoc = bd.bao_cao(["Trần Thị Bích Ngọc"], 13, 4, 1985, NGAY, quy_uoc="tung_phan")
+    chu = " ".join(" ".join(c["doan"]) for c in ngoc["chuong"])
+    for ma in ("ngay_sinh", "duong_doi", "su_menh"):
+        assert f"({ma})" not in chu
+    assert chu.count("Nợ nghiệp 13") == 1 and "Nợ nghiệp 13 — ở Ngày sinh, Đường đời" in chu
+    assert not any(d.rstrip().endswith("Gợi ý:") for c in ngoc["chuong"] for d in c["doan"])
+    assert " ".join(ngoc["chuong"][2]["doan"]).count("năm 2027 (tuổi 42)") == 1   # gộp mốc cùng năm
+    assert "cam kết lớn để từ 1/2027" in chu                           # năm 9 + tháng khởi sự → chuẩn bị
 
 
 def test_tong_het_khac_so_va_ten_khong_chu():

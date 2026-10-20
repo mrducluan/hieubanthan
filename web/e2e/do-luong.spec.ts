@@ -28,7 +28,7 @@ test("funnel Phase 1: landing → bắt đầu → hồ sơ → đọc xong → 
   for (const k of ["landing_viewed", "reading_started", "profile_created", "reading_completed", "feedback_submitted"]) {
     expect(ten).toContain(k);
   }
-  expect(ds.find((e) => e.su_kien === "reading_completed")?.so_duong_doi).toBe(33);
+  expect(ds.find((e) => e.su_kien === "reading_completed")?.so_duong_doi).toBe(6);
   // Gate 1: bắt đầu/xong gắn mảng, mỗi phiên một lần; landing ghi nhóm trang đầu tiên.
   expect(dem(ds, "reading_started", "thanso")).toBe(1);
   expect(dem(ds, "reading_completed", "thanso")).toBe(1);

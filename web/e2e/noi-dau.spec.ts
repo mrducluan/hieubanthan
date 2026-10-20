@@ -10,10 +10,10 @@ test("bảng nỗi đau: con số của mình + bấm câu → câu trả lời 
   await page.goto("/than-so");
   const bang = page.getByTestId("noi-dau");
   await expect(bang.getByRole("tab")).toHaveCount(5);
-  // Trụ đầu (Sự nghiệp): câu chọn nghề kèm số Sứ mệnh 9 + Đường đời 33 của chính người này.
+  // Trụ đầu (Sự nghiệp): câu chọn nghề kèm số Sứ mệnh 9 + Đường đời 6 (rút gọn con số — mặc định) của chính người này.
   const the = bang.getByTestId("noi-dau-sn_sai_nghe");
   await expect(the).toContainText("Sứ mệnh 9");
-  await expect(the).toContainText("Đường đời 33");
+  await expect(the).toContainText("Đường đời 6");
 
   await the.getByRole("button", { name: "Hỏi câu này" }).click();
   const ans = page.getByTestId("cau-tra-loi").last();

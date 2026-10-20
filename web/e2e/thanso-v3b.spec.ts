@@ -68,10 +68,10 @@ test("bản đồ con số: Tổng quan hiện ngay sau 4 số cốt lõi; đủ
   await page.goto("/than-so");
   const bd = page.getByTestId("ban-do-con-so");
   const bc = bd.getByTestId("luan-giai-toan-bo");
-  await expect(bc).toContainText("Tổng quan: bạn hiếm cỡ nào");
-  await expect(bc).toContainText("Số 6 xuất hiện 2 lần trong 4 số cốt lõi");
+  await expect(bc).toContainText("Tổng quan: bộ số của bạn");
+  await expect(bc).toContainText("Số 6 xuất hiện 3 lần trong bộ số của bạn");
   await expect(bc).toContainText("nhóm Kết nối");
-  await expect(bc).toContainText("Nghịch lý bên trong");
+  await expect(bc).toContainText("Bên trong & bên ngoài");
   await expect(bc).toContainText("12 tháng tới của bạn");
   await expect(bc).toContainText("Sự nghiệp & tiền bạc");
   await expect(bc).toContainText("Ấm áp và tự do");

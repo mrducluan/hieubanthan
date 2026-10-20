@@ -33,10 +33,10 @@ export function TheBaLop({ vt }: { vt: ViTriLuanGiai }) {
           <Link href={`/than-so/y-nghia-so/so-${vt.gia_tri}`} className="mt-2 inline-block text-xs text-gold hover:underline">Đọc thêm về số {vt.gia_tri} →</Link>
         </KhoiLop>
       )}
-      {vt.kiem_chung && <KiemChung kc={vt.kiem_chung} so={vt.gia_tri} viTri={vt.vi_tri} />}
+      {vt.kiem_chung && <KiemChung key={`${vt.vi_tri}-${vt.gia_tri}`} kc={vt.kiem_chung} so={vt.gia_tri} viTri={vt.vi_tri} />}
 
       {/* Cách tính thu gọn mặc định — ai cần kiểm tra phép cộng thì bấm mở. */}
-      <button type="button" onClick={() => setMo((v) => !v)} aria-expanded={mo} aria-controls={`cach-tinh-${vt.vi_tri}`}
+      <button type="button" onClick={() => setMo((v) => !v)} aria-expanded={mo} aria-controls={mo ? `cach-tinh-${vt.vi_tri}` : undefined}
         className="mt-4 inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-fg" data-testid="mo-cach-tinh">
         <Calculator className="size-4 text-jade" aria-hidden /> {mo ? "Ẩn cách tính" : "Xem cách tính"}
         <ChevronDown className={cn("size-4 transition-transform", mo && "rotate-180")} aria-hidden />

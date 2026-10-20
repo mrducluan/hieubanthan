@@ -51,7 +51,7 @@ test("trang không tồn tại → 404; từ thẻ số trong bài đọc có li
   expect((await request.get("/than-so/y-nghia-so/so-10")).status()).toBe(404);
   await page.addInitScript(() => localStorage.setItem("hbt.hoso.v1", JSON.stringify({ v: 1, ho_ten: "Nguyễn Đức Luân", ngay: 24, thang: 10, nam: 1988, tao_luc: "x" })));
   await page.goto("/ban-than");
-  await expect(page.getByTestId("the-duong_doi").getByRole("link", { name: "Đọc thêm về số 33" })).toHaveAttribute("href", "/than-so/y-nghia-so/so-33");
+  await expect(page.getByTestId("the-duong_doi").getByRole("link", { name: "Đọc thêm về số 6" })).toHaveAttribute("href", "/than-so/y-nghia-so/so-6");
 });
 
 test("SEO-C: trang cung Tử vi, thập thần, nhật chủ render phía server", async ({ request }) => {
