@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { KetQuaHopDoi, type KetQuaHopDoiT } from "@/components/hop-doi/KetQuaHopDoi";
+import { CayHaiNguoi } from "@/components/hop-doi/CayHaiNguoi";
 import { NutChiaSe } from "@/components/chia-se/NutChiaSe";
 import { useBaiDoc } from "@/lib/bai-doc";
 import { postJson } from "@/lib/goi-api";
@@ -64,6 +65,8 @@ export function NhanLoiMoi({ ma, tenMoi, soMoi, tuKhoa }: Props) {
       {hoSo && kq && (
         <>
           <KetQuaHopDoi kq={kq} tenA={tenMoi} tenB={tenGoi(hoSo)} />
+          {/* TS-V3b: Sephirah người mời đã ký trong link (không có ngày sinh của họ); link cũ chưa có → khối tự ẩn. */}
+          <CayHaiNguoi than={{ ma, b: { ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam } }} tenA={tenMoi} tenB={tenGoi(hoSo)} />
           <div className="mx-auto max-w-3xl"><MocDocXong moDun="hopdoi" them={{ kind: "loi_moi" }} /><GopY moDun="hopdoi" cauHoi="Phần so hai người có giúp bạn hiểu mối quan hệ này hơn?" /></div>
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             <Card className="flex flex-col justify-between">

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const MUC: [string, string][] = [
   ["/quan-tri", "Tổng quan"], ["/quan-tri/tang-truong", "Tăng trưởng"], ["/quan-tri/doanh-thu", "Doanh thu & Sao"], ["/quan-tri/tri-thuc", "Kho tri thức"],
-  ["/quan-tri/hoi-dap", "Hỏi đáp"], ["/quan-tri/nguoi-dung", "Người dùng & Sao"], ["/quan-tri/cai-dat", "Cài đặt"],
+  ["/quan-tri/hoi-dap", "Hỏi đáp"], ["/quan-tri/hoc", "Học từ góp ý"], ["/quan-tri/nguoi-dung", "Người dùng & Sao"], ["/quan-tri/cai-dat", "Cài đặt"],
 ];
 
 export function DieuHuongQT() {

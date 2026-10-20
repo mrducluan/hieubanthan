@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { LuanGiaiResult } from "@/lib/engine";
 import { hoTenList, type HoSo } from "@/lib/hoso";
+import { useQuyUocDD } from "@/lib/quy-uoc-dd";
 
 const boNho = new Map<string, LuanGiaiResult>();
 
@@ -11,7 +12,8 @@ export function khoaBaiDoc(h: HoSo): string {
 }
 
 export function useBaiDoc(h: HoSo | null | undefined) {
-  const khoa = h ? khoaBaiDoc(h) : null;
+  const qu = useQuyUocDD();
+  const khoa = h ? `${khoaBaiDoc(h)}|${qu}` : null;
   const [kq, setKq] = useState<LuanGiaiResult | null>(khoa ? boNho.get(khoa) ?? null : null);
   const [loi, setLoi] = useState<string | null>(null);
   const [lan, setLan] = useState(0);
@@ -26,7 +28,7 @@ export function useBaiDoc(h: HoSo | null | undefined) {
     fetch("/api/thanso/luan-giai", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam }),
+      body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, quy_uoc_duong_doi: qu }),
     })
       .then(async (r) => {
         const d = (await r.json()) as LuanGiaiResult & { error?: string };

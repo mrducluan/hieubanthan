@@ -1,0 +1,380 @@
+{
+ "_nguon": "TS-V3 Qabalah Hermetic: 22 chữ Hebrew = 22 con đường (Sefer Yetzirah; gán con đường theo truyền thống Golden Dawn), 10 Sephirah trên Cây Sự sống. Lời diễn giải trung tính, để tự soi.",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo Sefer Yetzirah và truyền thống Qabalah Hermetic (dựa trên Golden Dawn; Crowley, 777, 1909)",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "kabbalah_hermetic",
+ "trang_thai": "nhap_ai",
+ "gioi_thieu": {
+  "ten_phai": "Qabalah Hermetic (Kabbalah phương Tây)",
+  "tom_tat": "Phái này chuyển tên bạn sang chữ Hebrew theo bảng tương ứng của truyền thống Hermetic (dựa trên Golden Dawn, bổ sung cho chữ Việt), cộng giá trị chữ (gematria) rồi đặt kết quả lên Cây Sự sống: 22 con đường (22 chữ Hebrew) và 10 Sephirah. Việc rút gọn tổng về một con đường hay một Sephirah là quy ước thần số hiện đại.",
+  "cach_doc": "Con đường của tên nói về cách bạn đi qua đời — chất liệu, bài học. Sephirah của ngày sinh là \"trạm\" bạn hay trở về; Sephirah của tên là sắc thái bạn thể hiện ra ngoài.",
+  "luu_y": "Đây là bản phỏng theo của huyền học phương Tây cho tên không viết bằng chữ Hebrew — khác Kabbalah Do Thái giáo (chỉ làm gematria trên chữ Hebrew, gắn với thực hành tôn giáo; chữ Hebrew là chữ thiêng trong Do Thái giáo). Bảng chuyển chữ có biến thể, nên con đường của tên có thể đổi; khi đó trang ghi rõ các khả năng khác. Chữ \"Thị\" (TH = Tav 400) thường chiếm phần lớn tổng ở tên nữ — vì vậy hãy đọc thêm các khả năng khác."
+ },
+ "chu": {
+  "1": {
+   "ten": "Aleph",
+   "nghia_chu": "con bò — sức mạnh nguyên sơ",
+   "nhom": "chữ mẹ",
+   "tuong_ung": "Khí",
+   "con_duong": "Keter – Chokhmah",
+   "gia_tri": 1,
+   "xu_huong": "Năng lượng khởi đầu, tò mò, dám bước vào điều chưa biết; thường được đọc là tinh thần người mở đường không mang theo định kiến.",
+   "mat_toi": "Dễ bốc đồng, bắt đầu nhiều mà thiếu nền để đi xa.",
+   "cau_tu_soi": "Điều mới nào bạn đang muốn thử mà chưa dám bước bước đầu tiên?",
+   "so_duong_cay": 11
+  },
+  "2": {
+   "ten": "Beth",
+   "nghia_chu": "ngôi nhà — chốn chứa đựng",
+   "nhom": "chữ kép",
+   "tuong_ung": "Sao Thuỷ",
+   "con_duong": "Keter – Binah",
+   "gia_tri": 2,
+   "xu_huong": "Biến ý tưởng thành hình hài, khéo dùng lời và công cụ; coi trọng việc xây một chỗ đứng rõ ràng.",
+   "mat_toi": "Dễ ôm quá nhiều việc trong tay, nói hay hơn làm.",
+   "cau_tu_soi": "Bạn đang xây \"ngôi nhà\" nào cho mình — và đã đặt viên gạch nào tuần này?",
+   "so_duong_cay": 12
+  },
+  "3": {
+   "ten": "Gimel",
+   "nghia_chu": "con lạc đà — người đi qua sa mạc",
+   "nhom": "chữ kép",
+   "tuong_ung": "Mặt Trăng",
+   "con_duong": "Keter – Tiferet",
+   "gia_tri": 3,
+   "xu_huong": "Trực giác, sức bền lặng lẽ, khả năng mang điều cần thiết qua giai đoạn khô cằn.",
+   "mat_toi": "Dễ thu mình, giữ cảm xúc cho riêng mình quá lâu.",
+   "cau_tu_soi": "Bạn tin vào trực giác của mình ở chuyện gì, và bỏ qua nó ở chuyện gì?",
+   "so_duong_cay": 13
+  },
+  "4": {
+   "ten": "Daleth",
+   "nghia_chu": "cánh cửa — lối mở",
+   "nhom": "chữ kép",
+   "tuong_ung": "Sao Kim",
+   "con_duong": "Chokhmah – Binah",
+   "gia_tri": 4,
+   "xu_huong": "Nuôi dưỡng, sinh sôi, mở cửa cho người khác bước vào; trân trọng cái đẹp và sự đủ đầy.",
+   "mat_toi": "Dễ chiều chuộng quá mức, khó đặt giới hạn.",
+   "cau_tu_soi": "Cánh cửa nào bạn đang để mở cho người khác mà quên để mở cho chính mình?",
+   "so_duong_cay": 14
+  },
+  "5": {
+   "ten": "He",
+   "nghia_chu": "cửa sổ — tầm nhìn",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Bạch Dương",
+   "con_duong": "Chokhmah – Tiferet",
+   "gia_tri": 5,
+   "xu_huong": "Nhìn xa, muốn tổ chức và dẫn dắt; mang năng lượng của người đặt khung và chịu trách nhiệm.",
+   "mat_toi": "Dễ cứng nhắc, muốn mọi thứ theo ý mình.",
+   "cau_tu_soi": "Bạn đang kiểm soát điều gì vì sợ nó đổ vỡ nếu buông ra?",
+   "so_duong_cay": 15
+  },
+  "6": {
+   "ten": "Vav",
+   "nghia_chu": "cái đinh — mối nối",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Kim Ngưu",
+   "con_duong": "Chokhmah – Chesed",
+   "gia_tri": 6,
+   "xu_huong": "Kết nối, truyền dạy, giữ gìn giá trị bền lâu; người làm cầu nối giữa các thế hệ, các nhóm.",
+   "mat_toi": "Dễ bám nếp cũ, ngại thay đổi.",
+   "cau_tu_soi": "Giá trị nào bạn muốn truyền lại, và giá trị nào đã đến lúc nhìn lại?",
+   "so_duong_cay": 16
+  },
+  "7": {
+   "ten": "Zayin",
+   "nghia_chu": "thanh gươm — sự phân định",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Song Tử",
+   "con_duong": "Binah – Tiferet",
+   "gia_tri": 7,
+   "xu_huong": "Lựa chọn, phân định rõ ràng, cuộc trò chuyện hai chiều; thường được đọc là bài học chọn giữa hai con đường.",
+   "mat_toi": "Dễ do dự lâu hoặc cắt đứt quá nhanh.",
+   "cau_tu_soi": "Lựa chọn nào bạn đang hoãn lại, và cái giá của việc hoãn là gì?",
+   "so_duong_cay": 17
+  },
+  "8": {
+   "ten": "Cheth",
+   "nghia_chu": "hàng rào — vùng an toàn",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Cự Giải",
+   "con_duong": "Binah – Gevurah",
+   "gia_tri": 8,
+   "xu_huong": "Bảo vệ, che chở, ý chí giữ vững những gì mình quý; tiến lên mà vẫn giữ được nhà.",
+   "mat_toi": "Dễ dựng hàng rào quá cao, khó cho người khác đến gần.",
+   "cau_tu_soi": "Hàng rào nào giúp bạn an toàn, hàng rào nào đang làm bạn cô đơn?",
+   "so_duong_cay": 18
+  },
+  "9": {
+   "ten": "Teth",
+   "nghia_chu": "con rắn — sức sống được thuần hoá",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Sư Tử",
+   "con_duong": "Chesed – Gevurah",
+   "gia_tri": 9,
+   "xu_huong": "Sức mạnh mềm, lòng can đảm điềm tĩnh, biết dẫn năng lượng mạnh vào việc có ích.",
+   "mat_toi": "Dễ tự hào quá mức hoặc nén cảm xúc đến khi bùng lên.",
+   "cau_tu_soi": "Cảm xúc mạnh nào trong bạn cần được dẫn hướng thay vì đè nén?",
+   "so_duong_cay": 19
+  },
+  "10": {
+   "ten": "Yod",
+   "nghia_chu": "bàn tay — hạt giống",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Xử Nữ",
+   "con_duong": "Chesed – Tiferet",
+   "gia_tri": 10,
+   "xu_huong": "Chiêm nghiệm, tỉ mỉ, ánh sáng nhỏ soi đường; hợp việc cần chuyên tâm và độc lập.",
+   "mat_toi": "Dễ cầu toàn, tự tách mình khỏi mọi người.",
+   "cau_tu_soi": "Bạn cần bao nhiêu thời gian một mình mỗi tuần để thấy mình cân bằng?",
+   "so_duong_cay": 20
+  },
+  "11": {
+   "ten": "Kaph",
+   "nghia_chu": "lòng bàn tay — nắm và mở",
+   "nhom": "chữ kép",
+   "tuong_ung": "Sao Mộc",
+   "con_duong": "Chesed – Netzach",
+   "gia_tri": 20,
+   "xu_huong": "Chu kỳ, cơ hội, sự rộng mở; đón nhận khi vận đến và buông khi vận qua.",
+   "mat_toi": "Dễ trông chờ may mắn thay vì chuẩn bị.",
+   "cau_tu_soi": "Bạn đang chờ thời điểm, hay đang chuẩn bị cho thời điểm?",
+   "so_duong_cay": 21
+  },
+  "12": {
+   "ten": "Lamed",
+   "nghia_chu": "cây gậy chăn bò — sự cân chỉnh",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Thiên Bình",
+   "con_duong": "Gevurah – Tiferet",
+   "gia_tri": 30,
+   "xu_huong": "Công bằng, cân nhắc, học từ hệ quả; người giữ thăng bằng giữa lý và tình.",
+   "mat_toi": "Dễ phán xét mình và người khác quá khắt khe.",
+   "cau_tu_soi": "Bạn đang đòi công bằng cho người khác, còn với chính mình thì sao?",
+   "so_duong_cay": 22
+  },
+  "13": {
+   "ten": "Mem",
+   "nghia_chu": "nước — sự buông chảy",
+   "nhom": "chữ mẹ",
+   "tuong_ung": "Thuỷ",
+   "con_duong": "Gevurah – Hod",
+   "gia_tri": 40,
+   "xu_huong": "Nhìn sự việc từ góc khác, kiên nhẫn chờ, sẵn sàng tạm dừng để hiểu sâu hơn.",
+   "mat_toi": "Dễ hy sinh quá mức hoặc trì hoãn vì chờ \"đúng lúc\".",
+   "cau_tu_soi": "Nếu nhìn tình huống hiện tại ngược lại, bạn thấy điều gì mới?",
+   "so_duong_cay": 23
+  },
+  "14": {
+   "ten": "Nun",
+   "nghia_chu": "con cá — sự chuyển hoá",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Bọ Cạp",
+   "con_duong": "Tiferet – Netzach",
+   "gia_tri": 50,
+   "xu_huong": "Khép một chương để mở chương khác, tái tạo sau thay đổi; sức chuyển mình sâu sắc.",
+   "mat_toi": "Dễ níu giữ cái cũ, sợ những đổi thay cần thiết.",
+   "cau_tu_soi": "Điều gì trong đời bạn đã xong vai trò của nó mà bạn vẫn đang giữ?",
+   "so_duong_cay": 24
+  },
+  "15": {
+   "ten": "Samekh",
+   "nghia_chu": "cột chống — sự nâng đỡ",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Nhân Mã",
+   "con_duong": "Tiferet – Yesod",
+   "gia_tri": 60,
+   "xu_huong": "Điều hoà, pha trộn hai thái cực thành cái mới, kiên nhẫn tìm điểm vừa đủ.",
+   "mat_toi": "Dễ nửa vời, không dứt khoát chọn hướng.",
+   "cau_tu_soi": "Ở đâu trong đời bạn cần \"vừa đủ\" thay vì \"thật nhiều\"?",
+   "so_duong_cay": 25
+  },
+  "16": {
+   "ten": "Ayin",
+   "nghia_chu": "con mắt — cái nhìn thẳng",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Ma Kết",
+   "con_duong": "Tiferet – Hod",
+   "gia_tri": 70,
+   "xu_huong": "Nhìn thẳng vào ham muốn và nỗi sợ của mình, bền bỉ với vật chất và mục tiêu dài hạn.",
+   "mat_toi": "Dễ bị cuốn vào thói quen hoặc ràng buộc khó dứt.",
+   "cau_tu_soi": "Thói quen nào đang dẫn bạn đi, thay vì bạn dẫn nó?",
+   "so_duong_cay": 26
+  },
+  "17": {
+   "ten": "Pe",
+   "nghia_chu": "cái miệng — lời nói",
+   "nhom": "chữ kép",
+   "tuong_ung": "Sao Hoả",
+   "con_duong": "Netzach – Hod",
+   "gia_tri": 80,
+   "xu_huong": "Nói thẳng, phá vỡ lối cũ không còn hợp; năng lượng hành động và cải tổ.",
+   "mat_toi": "Dễ nóng nảy, lời nói làm tổn thương người khác.",
+   "cau_tu_soi": "Điều gì bạn cần nói ra — và nói thế nào để người kia nghe được?",
+   "so_duong_cay": 27
+  },
+  "18": {
+   "ten": "Tzaddi",
+   "nghia_chu": "lưỡi câu — niềm hy vọng",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Bảo Bình",
+   "con_duong": "Netzach – Yesod",
+   "gia_tri": 90,
+   "xu_huong": "Hy vọng, lý tưởng, tầm nhìn cho cộng đồng; mang tinh thần người gieo niềm tin.",
+   "mat_toi": "Dễ mơ xa mà thiếu bước cụ thể.",
+   "cau_tu_soi": "Hy vọng lớn nhất của bạn cần bước nhỏ nào ngay tuần này?",
+   "so_duong_cay": 28
+  },
+  "19": {
+   "ten": "Qoph",
+   "nghia_chu": "gáy — tiềm thức",
+   "nhom": "chữ đơn",
+   "tuong_ung": "Song Ngư",
+   "con_duong": "Netzach – Malkuth",
+   "gia_tri": 100,
+   "xu_huong": "Giấc mơ, cảm nhận tinh tế, đi qua vùng mờ để hiểu mình sâu hơn.",
+   "mat_toi": "Dễ lo âu mơ hồ, tưởng tượng điều chưa xảy ra.",
+   "cau_tu_soi": "Nỗi lo nào của bạn dựa trên điều đã xảy ra, nỗi lo nào chỉ là tưởng tượng?",
+   "so_duong_cay": 29
+  },
+  "20": {
+   "ten": "Resh",
+   "nghia_chu": "cái đầu — ánh sáng ý thức",
+   "nhom": "chữ kép",
+   "tuong_ung": "Mặt Trời",
+   "con_duong": "Hod – Yesod",
+   "gia_tri": 200,
+   "xu_huong": "Rõ ràng, ấm áp, tự tin lành mạnh; thích được làm việc dưới ánh sáng và chia sẻ niềm vui.",
+   "mat_toi": "Dễ cần được công nhận, ngại bị phê bình.",
+   "cau_tu_soi": "Bạn làm việc tốt nhất khi được nhìn thấy, hay khi không ai để ý?",
+   "so_duong_cay": 30
+  },
+  "21": {
+   "ten": "Shin",
+   "nghia_chu": "cái răng — ngọn lửa",
+   "nhom": "chữ mẹ",
+   "tuong_ung": "Hoả",
+   "con_duong": "Hod – Malkuth",
+   "gia_tri": 300,
+   "xu_huong": "Thức tỉnh, nhìn lại cả chặng đường để chọn cách sống mới; ngọn lửa của sự đổi mới.",
+   "mat_toi": "Dễ tự trách về quá khứ.",
+   "cau_tu_soi": "Nếu được bắt đầu lại một điều từ hôm nay, bạn chọn điều gì?",
+   "so_duong_cay": 31
+  },
+  "22": {
+   "ten": "Tav",
+   "nghia_chu": "dấu ấn — sự hoàn tất",
+   "nhom": "chữ kép",
+   "tuong_ung": "Sao Thổ",
+   "con_duong": "Yesod – Malkuth",
+   "gia_tri": 400,
+   "xu_huong": "Hoàn tất, kỷ luật, đưa việc đến đích; mang dấu ấn của người kiên trì đi trọn vòng.",
+   "mat_toi": "Dễ nặng nề trách nhiệm, khó cho phép mình nghỉ.",
+   "cau_tu_soi": "Việc nào bạn đã gần xong — và cần gì để khép lại trọn vẹn?",
+   "so_duong_cay": 32
+  }
+ },
+ "sephirot": {
+  "1": {
+   "ten": "Keter",
+   "nghia": "Vương miện",
+   "cot": "Cột giữa (cân bằng)",
+   "xu_huong": "Ý chí khởi nguồn, tầm nhìn về điều mình thật sự muốn; điểm bắt đầu của mọi dự định.",
+   "mat_toi": "Dễ ở mãi trong ý tưởng, chưa chạm xuống đời thường.",
+   "cau_tu_soi": "Điều bạn thật sự muốn, nói trong một câu, là gì?"
+  },
+  "2": {
+   "ten": "Chokhmah",
+   "nghia": "Trí tuệ",
+   "cot": "Cột phải (nhân từ)",
+   "xu_huong": "Tia sáng sáng tạo, nghĩ nhanh, thấy khả năng mới trước người khác.",
+   "mat_toi": "Dễ vội, ý tưởng đến nhiều hơn khả năng theo đuổi.",
+   "cau_tu_soi": "Ý tưởng nào của bạn xứng đáng được theo tới cùng?"
+  },
+  "3": {
+   "ten": "Binah",
+   "nghia": "Thấu hiểu",
+   "cot": "Cột trái (nghiêm khắc)",
+   "xu_huong": "Cho ý tưởng hình hài và cấu trúc; kiên nhẫn, sâu sắc, biết đặt khuôn khổ.",
+   "mat_toi": "Dễ nặng lòng, khắt khe với chính mình.",
+   "cau_tu_soi": "Khuôn khổ nào đang giúp bạn, khuôn khổ nào đang bó bạn?"
+  },
+  "4": {
+   "ten": "Chesed",
+   "nghia": "Từ ái",
+   "cot": "Cột phải (nhân từ)",
+   "xu_huong": "Rộng lượng, mở rộng, xây dựng bằng lòng tin và sự hào phóng.",
+   "mat_toi": "Dễ cho quá tay, khó nói không.",
+   "cau_tu_soi": "Lần gần nhất bạn nói \"không\" để giữ sức cho mình là khi nào?"
+  },
+  "5": {
+   "ten": "Gevurah",
+   "nghia": "Sức mạnh – kỷ luật",
+   "cot": "Cột trái (nghiêm khắc)",
+   "xu_huong": "Kỷ luật, ranh giới, can đảm cắt bỏ điều không cần.",
+   "mat_toi": "Dễ cứng rắn quá mức, nóng giận khi mọi thứ không như ý.",
+   "cau_tu_soi": "Ranh giới nào bạn cần đặt rõ hơn trong tháng này?"
+  },
+  "6": {
+   "ten": "Tiferet",
+   "nghia": "Hài hoà",
+   "cot": "Cột giữa (cân bằng)",
+   "xu_huong": "Trung tâm của Cây — cân bằng giữa cho và giữ, giữa lý và tình; sống thật với giá trị của mình.",
+   "mat_toi": "Dễ gánh vai người hoà giải cho mọi người mà quên mình.",
+   "cau_tu_soi": "Bạn đang sống đúng với giá trị nào nhất, và lệch ở đâu?"
+  },
+  "7": {
+   "ten": "Netzach",
+   "nghia": "Bền bỉ – cảm xúc",
+   "cot": "Cột phải (nhân từ)",
+   "xu_huong": "Đam mê, nghệ thuật, sức bền cảm xúc để theo đuổi điều mình yêu.",
+   "mat_toi": "Dễ chạy theo cảm hứng nhất thời.",
+   "cau_tu_soi": "Điều gì bạn vẫn yêu thích dù không ai trả công?"
+  },
+  "8": {
+   "ten": "Hod",
+   "nghia": "Vinh quang – tư duy",
+   "cot": "Cột trái (nghiêm khắc)",
+   "xu_huong": "Lý trí, ngôn ngữ, phân tích và trình bày rõ ràng.",
+   "mat_toi": "Dễ nghĩ quá nhiều, thiếu tin vào cảm nhận.",
+   "cau_tu_soi": "Quyết định nào bạn đã phân tích đủ và chỉ còn cần làm?"
+  },
+  "9": {
+   "ten": "Yesod",
+   "nghia": "Nền tảng",
+   "cot": "Cột giữa (cân bằng)",
+   "xu_huong": "Tiềm thức, thói quen và ký ức làm nền cho mọi hành động; người kết nối giấc mơ với đời thực.",
+   "mat_toi": "Dễ sống theo nếp cũ mà không nhận ra.",
+   "cau_tu_soi": "Thói quen buổi sáng của bạn đang xây nền cho điều gì?"
+  },
+  "10": {
+   "ten": "Malkuth",
+   "nghia": "Vương quốc",
+   "cot": "Cột giữa (cân bằng)",
+   "xu_huong": "Đời sống cụ thể — cơ thể, nhà cửa, công việc hằng ngày; nơi mọi ý định trở thành thật.",
+   "mat_toi": "Dễ chỉ lo việc trước mắt, quên mục đích lớn.",
+   "cau_tu_soi": "Việc nhỏ nào hôm nay nối bạn với mục đích lớn của mình?"
+  }
+ },
+ "cay_hai_nguoi": {
+  "ten": "Cây của hai người",
+  "cach_doc": "Mỗi người có một Sephirah ngày sinh — \"trạm\" mình hay trở về. Đường ngắn nhất nối hai trạm trên Cây Sự sống là những con đường (mỗi con đường một chữ Hebrew) hai người đi qua khi tìm đến nhau. Đường ngắn hay dài không phải hợp hay khắc — chỉ là chất liệu khác nhau.",
+  "cung_tram": "Hai bạn cùng trở về một trạm: {tram}. Cùng trạm thì dễ hiểu nhau mà không cần nói nhiều — và cũng dễ cùng né một bài học. Hãy để ý điều cả hai cùng tránh.",
+  "ke_nhau": "Trạm {tram_a} và trạm {tram_b} nối thẳng bằng một con đường — chữ {chu} ({nghia_chu}). Đây là chất liệu hai bạn trao cho nhau trực tiếp nhất.",
+  "qua_nhieu": "Từ trạm {tram_a} tới trạm {tram_b} cần đi qua {so} con đường: {danh_sach}. Mỗi chữ là một chặng — một điều hai bạn có thể học từ nhau trên đường gặp gỡ.",
+  "nhieu_loi": "Có {so_loi} lối ngắn như nhau giữa hai trạm; ở đây hiện lối theo thứ tự chữ trên Cây, các lối kia cũng ngắn bằng thế.",
+  "cau_tu_soi_chung": "Trên chặng đường này, điều gì bạn muốn học từ người ấy — và điều gì bạn có thể trao lại?",
+  "luu_y": "Cây của hai người là cách đọc biểu tượng để cùng trò chuyện, không chấm điểm hợp hay khắc và không dự báo mối quan hệ."
+ },
+ "chu_ngay": {
+  "ten": "Chữ của ngày",
+  "cach_tinh": "Cộng các chữ số ngày, tháng sinh của bạn với ngày, tháng, năm hôm nay — đúng những chữ số làm nên Ngày cá nhân — nhưng rút về 1–22 như con đường Qabalah thay vì về 1–9.",
+  "luu_y": "Gợi ý để tự soi trong ngày, không dự báo việc sẽ xảy ra."
+ }
+}

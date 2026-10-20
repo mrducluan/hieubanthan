@@ -1,0 +1,37 @@
+{
+ "_nguon": "TS-NOIDAU giao điểm hai phái: cùng số 13/14/16/19, Pitago đọc là nợ nghiệp, Chaldea đọc là số kép — câu nối hai cách đọc (port ý tưởng cross_school_graph của bản V3; chỉ giữ cạnh giữa hai phái sản phẩm dùng).",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) đối chiếu truyền thống Balliett–Jordan (Pitago) và Cheiro (Chaldea)",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30. Hai phái là hai truyền thống văn hoá khác nhau; không phái nào là dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "doi_chieu_pitago_chaldea",
+ "trang_thai": "nhap_ai",
+ "so": {
+  "13": {
+   "pitago": "Pitago coi 13 là bài học kỷ luật, làm đều tay thay vì tìm đường tắt.",
+   "chaldea": "Chaldea đọc kép 13 là mùa chuyển giao: cái cũ khép lại để cái mới có chỗ.",
+   "cach_dung": "Hai cách đọc gặp nhau ở chỗ: đổi mới bền khi đi kèm thói quen đều đặn — dọn cái cũ, rồi kiên nhẫn với cái mới.",
+   "tu_soi": "Thay đổi gần nhất bạn bắt đầu, bạn đã giữ được nhịp đều bao lâu?"
+  },
+  "14": {
+   "pitago": "Pitago coi 14 là bài học chừng mực: tự do đi kèm trách nhiệm.",
+   "chaldea": "Chaldea đọc kép 14 là dòng chảy kết nối: gặp gỡ, trao đổi, mọi thứ trôi nhanh.",
+   "cach_dung": "Hai cách đọc gặp nhau ở chỗ: càng nhiều kết nối và cơ hội, càng cần giới hạn rõ của riêng mình.",
+   "tu_soi": "Điều gì bạn hay nói có mà sau lại thấy quá sức?"
+  },
+  "16": {
+   "pitago": "Pitago coi 16 là bài học về cái tôi: dựng lại sau khi một điều cũ không còn đứng vững.",
+   "chaldea": "Chaldea đọc kép 16 là toà tháp đổi mới: cấu trúc cũ nhường chỗ cho nền móng thật hơn.",
+   "cach_dung": "Hai cách đọc gặp nhau ở chỗ: khiêm tốn nghe phản hồi sớm giúp tự điều chỉnh trước khi phải làm lại từ đầu.",
+   "tu_soi": "Có kế hoạch nào bạn đang giữ chỉ vì đã lỡ bỏ công sức vào đó?"
+  },
+  "19": {
+   "pitago": "Pitago coi 19 là bài học độc lập và biết nhờ giúp: dễ ôm hết một mình.",
+   "chaldea": "Chaldea đọc kép 19 là mặt trời rạng: công sức được nhìn thấy và ghi nhận.",
+   "cach_dung": "Hai cách đọc gặp nhau ở chỗ: tự lực là sức mạnh, và để người khác cùng góp tay cũng là một cách được ghi nhận.",
+   "tu_soi": "Việc nào tuần này bạn có thể nhờ một người cùng làm?"
+  }
+ }
+}

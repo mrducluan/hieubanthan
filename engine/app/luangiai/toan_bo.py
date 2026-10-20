@@ -55,6 +55,12 @@ CAU_HOI_MO = {
     ("battu", "ngu_hanh"): "Hành nào bạn đang thiếu, và hai cách chọn dụng thần gợi ý bạn cân bằng thế nào?",
     ("battu", "su_nghiep"): "Thập thần trong lá số cho thấy bạn hợp kiếm tiền và làm việc theo kiểu nào?",
     ("battu", "van"): "Đại vận mười năm này và năm nay đặt trọng tâm vào đâu trong đời bạn?",
+    ("thanso3", "diem_chung"): "Con số nào nhiều cách tính cùng chỉ ra ở bạn, và nó gọi tên điều gì bạn vốn đã biết?",
+    ("thanso3", "pitago"): "Bốn con số cốt lõi theo Pitago nói gì về hướng đi và điều bạn thật sự muốn?",
+    ("thanso3", "chaldea"): "Tên người khác gọi bạn hằng ngày mang sắc thái gì, và số kép nào đang đi cùng bạn?",
+    ("thanso3", "kabbalah"): "Chữ Hebrew và trạm nào trên Cây Sự sống là của bạn, và bài học nào nằm trên con đường đó?",
+    ("thanso3", "khac_nhau"): "Chỗ ba phái nói khác nhau là những góc nhìn nào, và góc nào đúng với bạn hơn?",
+    ("thanso3", "phai_hop"): "Phái nào nói đúng về bạn nhất theo chính lựa chọn của bạn, và nên dùng nó thế nào?",
 }
 _DINH_NGHIA = re.compile(r"^(Cung [^:]{2,24}: |Tuổi mụ|Màu sắc|Câu hỏi để tự soi)")
 

@@ -71,7 +71,8 @@ export default defineConfig({
     {
       command: `cd ../engine && python -m uvicorn app.main:app --port ${ENGINE_PORT}`,
       url: `http://localhost:${ENGINE_PORT}/health`,
-      env: KHOA_TAT,
+      // Mọi yêu cầu E2E đi từ cùng một IP → nới hạn mức SEC-1 (120/phút/người gọi) để các worker song song không dính 429.
+      env: { ...KHOA_TAT, ENGINE_LUOT_PHUT: "100000" },
       reuseExistingServer: !process.env.CI,
       timeout: 60_000,
     },

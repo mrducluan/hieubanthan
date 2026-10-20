@@ -28,7 +28,8 @@ interface BaoCao {
   phi: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null };
 }
 
-export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo: unknown; ten: string }) {
+/** `than`: thân lời gọi khác `{ la_so }` (vd báo cáo ba phái thần số gửi họ tên + ngày sinh + phiếu); `moDun` cho đo lường. */
+export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun }: { duongDan: string; laSo: unknown; ten: string; than?: unknown; moDun?: string }) {
   const [bc, setBc] = useState<BaoCao | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
@@ -46,11 +47,11 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten }: { duongDan: string; laSo
   const tai = async (moKhoa = false, tuDong = false) => {
     setDang(true); setLoi(null);
     if (moKhoa) {
-      ghi("unlock_clicked", { mo_dun: duongDan.includes("battu") ? "battu" : "tuvi", kind: tuDong ? "tu_dong" : "bam" });
+      ghi("unlock_clicked", { mo_dun: moDun ?? (duongDan.includes("battu") ? "battu" : "tuvi"), kind: tuDong ? "tu_dong" : "bam" });
       ghiChoMo(duongDan, nguoi);   // đi đăng nhập / nạp rồi quay lại → tự mở đúng báo cáo này
     }
     try {
-      const d = await postJson<BaoCao>(duongDan, { la_so: laSo }, moKhoa ? { "x-mo-khoa": "1" } : {});
+      const d = await postJson<BaoCao>(duongDan, than ?? { la_so: laSo }, moKhoa ? { "x-mo-khoa": "1" } : {});
       setBc(d);
       if (moKhoa || !d.so_khoa) xoaChoMo();
       if (moKhoa && d.phi.ly_do === "da_tru_sao") ghi("unlock_succeeded", { mo_dun: d.mo_dun, so_sao: d.phi.sao });

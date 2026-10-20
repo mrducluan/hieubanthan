@@ -14,8 +14,8 @@ from app.calc import thanso
 LOAI_MOC = ("chuyen_dinh", "khoi_chu_ky", "khep_chu_ky")
 
 
-def _giai_doan(d: int, m: int, y: int) -> list[dict]:
-    dc = thanso.dinh_cao(d, m, y, thanso.duong_doi(d, m, y))
+def _giai_doan(d: int, m: int, y: int, quy_uoc: str = "tong_het") -> list[dict]:
+    dc = thanso.dinh_cao(d, m, y, thanso.duong_doi(d, m, y, quy_uoc))
     tt = thanso.thu_thach(d, m, y)
     gan = [tt["thu_thach_1"], tt["thu_thach_2"], tt["thu_thach_chinh"], tt["thu_thach_4"]]
     return [{**p, "thu_thach": gan[i], "tu_nam": y + p["tu_tuoi"],
@@ -33,9 +33,9 @@ def _ncn(d: int, m: int, nam: int) -> int:
     return thanso.nam_ca_nhan(d, m, nam, "duong_lich")  # type: ignore[return-value]
 
 
-def dong_doi(d: int, m: int, y: int, nam_xem: int, den_tuoi: int = 80) -> dict:
+def dong_doi(d: int, m: int, y: int, nam_xem: int, den_tuoi: int = 80, quy_uoc: str = "tong_het") -> dict:
     """Trục đời từ năm sinh tới `den_tuoi` tuổi."""
-    gd = _giai_doan(d, m, y)
+    gd = _giai_doan(d, m, y, quy_uoc)
     nam_cuoi = y + den_tuoi
     moc: list[dict] = [{"nam": g["tu_nam"], "tuoi": g["tu_tuoi"], "loai": "chuyen_dinh", "so": g["so"],
                         "dinh": g["dinh"]} for g in gd[1:] if g["tu_nam"] <= nam_cuoi]
@@ -63,11 +63,11 @@ def dong_doi(d: int, m: int, y: int, nam_xem: int, den_tuoi: int = 80) -> dict:
     }
 
 
-def doi_chieu_nam(d: int, m: int, y: int, nam: int) -> dict:
+def doi_chieu_nam(d: int, m: int, y: int, nam: int, quy_uoc: str = "tong_het") -> dict:
     """Một năm cụ thể (vd năm có biến cố) nằm ở đâu trên trục đời."""
     if nam < y:
         raise ValueError("Năm đối chiếu phải từ năm sinh trở đi")
-    gd = _giai_doan(d, m, y)
+    gd = _giai_doan(d, m, y, quy_uoc)
     tuoi = nam - y
     g = _dinh_o_tuoi(gd, tuoi)
     ncn = _ncn(d, m, nam)

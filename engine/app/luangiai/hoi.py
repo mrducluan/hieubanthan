@@ -135,7 +135,7 @@ LINH_VUC_KW: dict[str, list[str]] = {
                   r"di lam", r"ghi nhan", r"lam o", r"nghe y", r"tu van", r"chua lanh",
                   r"kinh doanh online", r"lam viec nhom", r"lam viec mot minh", r"moi truong lam viec",
                   r"lam ky su", r"gop von", r"phong van", r"xin viec", r"hop dong", r"that nghiep", r"nop don nghi"],
-    "tai_chinh": [r"(?<!thang )tien", r"giau", r"tien bac", r"tai chinh", r"dau tu", r"chung khoan", r"mua nha", r"mua dat",
+    "tai_chinh": [r"(?<!thang )(?<!uu )tien", r"giau", r"tien bac", r"tai chinh", r"dau tu", r"chung khoan", r"mua nha", r"mua dat",
                   r"tien ao", r"no nan", r"dang no", r"no nhieu", r"tra het", r"vay tien", r"cho vay", r"tiet kiem", r"tieu tien", r"chi tieu", r"mua sam", r"tai loc",
                   r"cho vay", r"thu nhap", r"cho (nguoi khac|nguoi ta|ban be) vay"],
     "hoc_tap": [r"hoc tap", r"hoc hanh", r"viec hoc", r"hoc bai", r"cach hoc", r"hoc mai", r"em hoc", r"nen hoc(?! cach)", r"hoc nhom", r"hoc buoi", r"hoc truoc", r"thi cu", r"em thi", r"thi dai hoc", r"thi co do", r"ky thi", r"khi thi", r"chon nganh", r"nganh gi khi", r"hoc nganh", r"nganh cong nghe", r"hop hoc", r"dai hoc", r"khoi a", r"khoi d", r"du hoc", r"thac si",
@@ -381,10 +381,11 @@ def _chi_so_nguoi(nguoi: dict, ngay_xem: _dt.date) -> dict:
     """Mọi chỉ số của một người. `ho_ten` có thể thiếu (chỉ có ngày sinh)."""
     d, m, y = nguoi["ngay"], nguoi["thang"], nguoi["nam"]
     ten = (nguoi.get("ho_ten") or [None])[0]
-    cs: dict = {"duong_doi": thanso.duong_doi(d, m, y)}
+    qu = nguoi.get("quy_uoc") or "tong_het"          # TS-V3: cách cộng Đường đời người dùng chọn
+    cs: dict = {"duong_doi": thanso.duong_doi(d, m, y, qu)}
     if ten:
         cs.update({k: v for k, v in thanso.chi_so_xac_dinh(ten, d, m, y).items() if k != "duong_doi"})
-    cs.update(mr.chi_so_mo_rong(ten, d, m, y, ngay_xem.year, ngay_xem.month, ngay_xem.day))
+    cs.update(mr.chi_so_mo_rong(ten, d, m, y, ngay_xem.year, ngay_xem.month, ngay_xem.day, qu))
     cs["dinh_cao"] = thanso.dinh_cao(d, m, y, cs["duong_doi"])
     cs["thu_thach_chinh"] = thanso.thu_thach(d, m, y)["thu_thach_chinh"]
     cs["tuoi"] = ngay_xem.year - y - ((ngay_xem.month, ngay_xem.day) < (m, d))
@@ -581,6 +582,9 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
 
     so_nhac = dict(pl["so_nhac"])
     cs_ban = _chi_so_nguoi(nguoi, ngay_xem)
+    qu = {"quy_uoc": nguoi.get("quy_uoc") or "tong_het"}      # TS-V3: người kia tính cùng cách cộng Đường đời
+    if nguoi_kia:
+        nguoi_kia = {**nguoi_kia, **qu}
 
     # --- Hai người
     if lv == "hop_doi":
@@ -591,15 +595,15 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
                 a, b = {"linh_hon": pl["cap_nhac"][0]}, {"linh_hon": pl["cap_nhac"][1]}
         elif len(pl["ngay_nhac"]) >= 2:
             (d1, m1, y1), (d2, m2, y2) = pl["ngay_nhac"][:2]
-            a = _chi_so_nguoi({"ngay": d1, "thang": m1, "nam": y1}, ngay_xem)
-            b = _chi_so_nguoi({"ngay": d2, "thang": m2, "nam": y2}, ngay_xem)
+            a = _chi_so_nguoi({**qu, "ngay": d1, "thang": m1, "nam": y1}, ngay_xem)
+            b = _chi_so_nguoi({**qu, "ngay": d2, "thang": m2, "nam": y2}, ngay_xem)
         elif nguoi_kia or pl["ngay_nhac"]:
             a = cs_ban
             if nguoi_kia:
                 b = _chi_so_nguoi(nguoi_kia, ngay_xem)
             else:
                 d, m, y = pl["ngay_nhac"][0]
-                b = _chi_so_nguoi({"ngay": d, "thang": m, "nam": y}, ngay_xem)
+                b = _chi_so_nguoi({**qu, "ngay": d, "thang": m, "nam": y}, ngay_xem)
         if a is None:
             goi["can_them"] = ["nguoi_kia"]
             goi["mau"] = kb.mau("can_nguoi_kia")
@@ -645,7 +649,7 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
             cs = _chi_so_nguoi(nguoi_kia, ngay_xem)
         elif pl["ngay_nhac"]:
             d, m, y = pl["ngay_nhac"][0]
-            cs = _chi_so_nguoi({"ngay": d, "thang": m, "nam": y}, ngay_xem)
+            cs = _chi_so_nguoi({**qu, "ngay": d, "thang": m, "nam": y}, ngay_xem)
         elif so_nhac:
             cs = {}
         elif re.search(r"dat ten|ten con|sinh con|nam nao|ngay nao|ngay mo|ten dem|hai ten", t):

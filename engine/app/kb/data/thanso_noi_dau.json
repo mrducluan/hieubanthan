@@ -1,0 +1,514 @@
+{
+ "_nguon": "TS-NOIDAU ma trận nỗi đau × câu hỏi thần số: 5 trụ đời, mỗi câu gắn các chỉ số trả lời (port ý tưởng question_intents của bản V3 vào KB).",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Câu hỏi để tự soi, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "pythagoras_vn",
+ "trang_thai": "nhap_ai",
+ "tru": {
+  "su_nghiep_tien_bac": {
+   "ten": "Sự nghiệp & tiền bạc",
+   "bieu_tuong": "Briefcase",
+   "mo_ta": "Chọn nghề, đổi việc, kinh doanh, giữ tiền, mất động lực."
+  },
+  "tinh_cam_gia_dinh": {
+   "ten": "Tình cảm & gia đình",
+   "bieu_tuong": "Heart",
+   "mo_ta": "Mình cần gì khi yêu, vì sao lặp lại, chuyện với bố mẹ, người ấy có hợp không."
+  },
+  "ban_than_tam_ly": {
+   "ten": "Bản thân & cảm xúc",
+   "bieu_tuong": "User",
+   "mo_ta": "Điểm mạnh, tự ti, trì hoãn, bị hiểu lầm, cảm xúc thất thường."
+  },
+  "thoi_diem_chu_ky": {
+   "ten": "Thời điểm & nhịp",
+   "bieu_tuong": "CalendarClock",
+   "mo_ta": "Năm nay, tháng này, hôm nay, chặng đời đang đi — nhịp để tự soi, không phải dự báo."
+  },
+  "bai_hoc_y_nghia": {
+   "ten": "Bài học & ý nghĩa sống",
+   "bieu_tuong": "Sparkles",
+   "mo_ta": "Bài học lặp lại, mục đích sống, nợ nghiệp, số vắng, tên gọi."
+  }
+ },
+ "chi_so": {
+  "duong_doi": "Đường đời",
+  "su_menh": "Sứ mệnh",
+  "linh_hon": "Linh hồn",
+  "nhan_cach": "Nhân cách",
+  "so_ngay_sinh": "Ngày sinh",
+  "so_thai_do": "Thái độ",
+  "nam_ca_nhan": "Năm cá nhân",
+  "thang_ca_nhan": "Tháng cá nhân",
+  "ngay_ca_nhan": "Ngày cá nhân",
+  "dinh_cao": "Đỉnh cao hiện tại",
+  "thu_thach_chinh": "Thử thách chính",
+  "no_nghiep": "Nợ nghiệp",
+  "bai_hoc_nghiep": "Bài học nghiệp (số vắng trong tên)",
+  "so_vang_bieu_do": "Số vắng trong ngày sinh",
+  "thang_mo_dau": "Tháng mở đầu sắp tới"
+ },
+ "cau_hoi": [
+  {
+   "ma": "sn_sai_nghe",
+   "tru": "su_nghiep_tien_bac",
+   "noi_dau": "Làm mãi vẫn thấy mình không hợp nghề đang làm",
+   "cau": "Tôi hợp với nghề nghiệp và môi trường làm việc như thế nào?",
+   "bien_the": [
+    "tôi hợp nghề gì",
+    "làm nghề gì hợp với tôi",
+    "chọn ngành gì"
+   ],
+   "chi_so": [
+    "su_menh",
+    "duong_doi",
+    "so_ngay_sinh"
+   ],
+   "linh_vuc": [
+    "su_nghiep"
+   ]
+  },
+  {
+   "ma": "sn_doi_viec",
+   "tru": "su_nghiep_tien_bac",
+   "noi_dau": "Đang phân vân có nên nghỉ việc, đổi hướng",
+   "cau": "Tôi có nên đổi việc trong giai đoạn này không?",
+   "bien_the": [
+    "có nên nghỉ việc",
+    "nhảy việc",
+    "chuyển công ty"
+   ],
+   "chi_so": [
+    "dinh_cao",
+    "nam_ca_nhan",
+    "su_menh"
+   ],
+   "linh_vuc": [
+    "su_nghiep",
+    "thoi_van"
+   ]
+  },
+  {
+   "ma": "sn_kinh_doanh",
+   "tru": "su_nghiep_tien_bac",
+   "noi_dau": "Muốn tự kinh doanh nhưng sợ mình không hợp",
+   "cau": "Tôi có hợp tự kinh doanh hay nên làm thuê?",
+   "bien_the": [
+    "khởi nghiệp",
+    "mở quán",
+    "làm chủ"
+   ],
+   "chi_so": [
+    "nhan_cach",
+    "duong_doi",
+    "su_menh"
+   ],
+   "linh_vuc": [
+    "su_nghiep"
+   ]
+  },
+  {
+   "ma": "sn_tien_bac",
+   "tru": "su_nghiep_tien_bac",
+   "noi_dau": "Kiếm được tiền nhưng không giữ được",
+   "cau": "Cách tôi quản lý tiền bạc có điểm mạnh, điểm yếu gì?",
+   "bien_the": [
+    "tiêu tiền",
+    "tiết kiệm",
+    "giữ tiền",
+    "tài chính"
+   ],
+   "chi_so": [
+    "su_menh",
+    "duong_doi",
+    "thu_thach_chinh"
+   ],
+   "linh_vuc": [
+    "tai_chinh"
+   ]
+  },
+  {
+   "ma": "sn_dong_luc",
+   "tru": "su_nghiep_tien_bac",
+   "noi_dau": "Đi làm kiệt sức, mất động lực",
+   "cau": "Vì sao tôi hay mất động lực trong công việc?",
+   "bien_the": [
+    "chán việc",
+    "kiệt sức",
+    "burnout",
+    "không muốn đi làm"
+   ],
+   "chi_so": [
+    "linh_hon",
+    "thu_thach_chinh",
+    "nam_ca_nhan"
+   ],
+   "linh_vuc": [
+    "su_nghiep",
+    "ban_than"
+   ]
+  },
+  {
+   "ma": "tc_can_gi",
+   "tru": "tinh_cam_gia_dinh",
+   "noi_dau": "Yêu ai cũng thấy thiếu thiếu một điều gì đó",
+   "cau": "Tôi thật sự cần gì trong một mối quan hệ?",
+   "bien_the": [
+    "tôi cần người yêu thế nào",
+    "mẫu người hợp với tôi"
+   ],
+   "chi_so": [
+    "linh_hon",
+    "nhan_cach",
+    "duong_doi"
+   ],
+   "linh_vuc": [
+    "tinh_yeu"
+   ]
+  },
+  {
+   "ma": "tc_lap_lai",
+   "tru": "tinh_cam_gia_dinh",
+   "noi_dau": "Các cuộc tình cứ kết thúc theo cùng một kiểu",
+   "cau": "Điều gì trong tôi hay khiến các mối quan hệ lặp lại cùng một kiểu?",
+   "bien_the": [
+    "chia tay",
+    "yêu ai cũng đổ vỡ",
+    "bị phản bội"
+   ],
+   "chi_so": [
+    "thu_thach_chinh",
+    "no_nghiep",
+    "linh_hon"
+   ],
+   "linh_vuc": [
+    "tinh_yeu"
+   ]
+  },
+  {
+   "ma": "tc_chua_gap",
+   "tru": "tinh_cam_gia_dinh",
+   "noi_dau": "Mãi chưa gặp được người phù hợp",
+   "cau": "Tôi cần hiểu gì về mình để gặp đúng người yêu phù hợp?",
+   "bien_the": [
+    "độc thân",
+    "ế",
+    "chưa có người yêu"
+   ],
+   "chi_so": [
+    "nhan_cach",
+    "linh_hon"
+   ],
+   "linh_vuc": [
+    "tinh_yeu"
+   ]
+  },
+  {
+   "ma": "tc_bo_me",
+   "tru": "tinh_cam_gia_dinh",
+   "noi_dau": "Hay bất đồng với bố mẹ, nói mãi không hiểu nhau",
+   "cau": "Vì sao tôi hay bất đồng với bố mẹ và nên làm sao để gần nhau hơn?",
+   "bien_the": [
+    "cãi nhau với bố mẹ",
+    "gia đình không hiểu tôi"
+   ],
+   "chi_so": [
+    "duong_doi",
+    "linh_hon"
+   ],
+   "linh_vuc": [
+    "gia_dinh"
+   ]
+  },
+  {
+   "ma": "tc_hop_nhau",
+   "tru": "tinh_cam_gia_dinh",
+   "noi_dau": "Không biết người ấy có thật sự hợp với mình",
+   "cau": "Tôi và người yêu có hợp nhau không?",
+   "bien_the": [
+    "hai đứa có hợp không",
+    "xem hợp đôi",
+    "vợ chồng có hợp"
+   ],
+   "chi_so": [
+    "duong_doi",
+    "linh_hon"
+   ],
+   "linh_vuc": [
+    "hop_doi"
+   ]
+  },
+  {
+   "ma": "bt_diem_manh",
+   "tru": "ban_than_tam_ly",
+   "noi_dau": "Không biết mình giỏi gì, mạnh ở đâu",
+   "cau": "Điểm mạnh cốt lõi của tôi là gì?",
+   "bien_the": [
+    "tôi giỏi gì",
+    "tài năng của tôi",
+    "năng khiếu"
+   ],
+   "chi_so": [
+    "so_ngay_sinh",
+    "duong_doi",
+    "su_menh"
+   ],
+   "linh_vuc": [
+    "ban_than"
+   ]
+  },
+  {
+   "ma": "bt_tu_ti",
+   "tru": "ban_than_tam_ly",
+   "noi_dau": "Hay tự ti, so sánh mình với người khác",
+   "cau": "Vì sao tôi hay tự ti và so sánh mình với người khác?",
+   "bien_the": [
+    "thiếu tự tin",
+    "so sánh bản thân"
+   ],
+   "chi_so": [
+    "thu_thach_chinh",
+    "bai_hoc_nghiep",
+    "linh_hon"
+   ],
+   "linh_vuc": [
+    "ban_than"
+   ]
+  },
+  {
+   "ma": "bt_tri_hoan",
+   "tru": "ban_than_tam_ly",
+   "noi_dau": "Biết phải làm nhưng cứ trì hoãn mãi",
+   "cau": "Vì sao tôi hay trì hoãn và làm sao để bắt tay vào việc?",
+   "bien_the": [
+    "lười",
+    "chần chừ",
+    "không kỷ luật"
+   ],
+   "chi_so": [
+    "so_vang_bieu_do",
+    "duong_doi"
+   ],
+   "linh_vuc": [
+    "ban_than"
+   ]
+  },
+  {
+   "ma": "bt_hieu_lam",
+   "tru": "ban_than_tam_ly",
+   "noi_dau": "Người khác hay hiểu lầm con người mình",
+   "cau": "Vì sao người khác hay hiểu lầm tôi?",
+   "bien_the": [
+    "ấn tượng đầu tiên",
+    "người ta nghĩ gì về tôi"
+   ],
+   "chi_so": [
+    "so_thai_do",
+    "nhan_cach",
+    "linh_hon"
+   ],
+   "linh_vuc": [
+    "ban_than"
+   ]
+  },
+  {
+   "ma": "bt_cam_xuc",
+   "tru": "ban_than_tam_ly",
+   "noi_dau": "Cảm xúc lên xuống thất thường, khó bình tâm",
+   "cau": "Tôi nên hiểu cảm xúc của mình thế nào để bình tâm hơn?",
+   "bien_the": [
+    "dễ nóng giận",
+    "hay buồn",
+    "nhạy cảm"
+   ],
+   "chi_so": [
+    "linh_hon",
+    "so_vang_bieu_do"
+   ],
+   "linh_vuc": [
+    "ban_than"
+   ]
+  },
+  {
+   "ma": "td_nam_nay",
+   "tru": "thoi_diem_chu_ky",
+   "noi_dau": "Năm nay mọi thứ cứ rối, không biết bắt đầu từ đâu",
+   "cau": "Năm nay tôi nên tập trung vào điều gì?",
+   "bien_the": [
+    "năm nay thế nào",
+    "năm cá nhân"
+   ],
+   "chi_so": [
+    "nam_ca_nhan",
+    "dinh_cao"
+   ],
+   "linh_vuc": [
+    "thoi_van"
+   ]
+  },
+  {
+   "ma": "td_thang_nay",
+   "tru": "thoi_diem_chu_ky",
+   "noi_dau": "Tháng này nên đẩy mạnh hay chậm lại",
+   "cau": "Tháng này tôi nên ưu tiên việc gì?",
+   "bien_the": [
+    "tháng này thế nào",
+    "tháng cá nhân"
+   ],
+   "chi_so": [
+    "thang_ca_nhan",
+    "nam_ca_nhan"
+   ],
+   "linh_vuc": [
+    "thoi_van"
+   ]
+  },
+  {
+   "ma": "td_giai_doan",
+   "tru": "thoi_diem_chu_ky",
+   "noi_dau": "Không hiểu mình đang ở chặng nào của đời",
+   "cau": "Tôi đang ở giai đoạn nào trong đời và bài học của giai đoạn này là gì?",
+   "bien_the": [
+    "đỉnh cao",
+    "giai đoạn đời"
+   ],
+   "chi_so": [
+    "dinh_cao",
+    "thu_thach_chinh"
+   ],
+   "linh_vuc": [
+    "thoi_van"
+   ]
+  },
+  {
+   "ma": "td_bat_dau",
+   "tru": "thoi_diem_chu_ky",
+   "noi_dau": "Muốn bắt đầu việc mới mà chưa biết lúc nào",
+   "cau": "Tháng nào sắp tới thuận để tôi bắt đầu một việc mới?",
+   "bien_the": [
+    "khi nào nên bắt đầu",
+    "lúc nào thuận"
+   ],
+   "chi_so": [
+    "thang_mo_dau",
+    "thang_ca_nhan",
+    "nam_ca_nhan"
+   ],
+   "linh_vuc": [
+    "thoi_van"
+   ]
+  },
+  {
+   "ma": "td_hom_nay",
+   "tru": "thoi_diem_chu_ky",
+   "noi_dau": "Sáng nào cũng uể oải, ngày trôi qua vô định",
+   "cau": "Hôm nay tôi nên làm gì để ngày trọn vẹn hơn?",
+   "bien_the": [
+    "hôm nay thế nào",
+    "ngày cá nhân"
+   ],
+   "chi_so": [
+    "ngay_ca_nhan",
+    "thang_ca_nhan"
+   ],
+   "linh_vuc": [
+    "thoi_van"
+   ]
+  },
+  {
+   "ma": "bh_bai_hoc",
+   "tru": "bai_hoc_y_nghia",
+   "noi_dau": "Cứ gặp đi gặp lại một kiểu khó khăn",
+   "cau": "Bài học lớn nhất của đời tôi là gì?",
+   "bien_the": [
+    "bài học cuộc đời",
+    "vì sao tôi cứ gặp chuyện"
+   ],
+   "chi_so": [
+    "thu_thach_chinh",
+    "bai_hoc_nghiep",
+    "no_nghiep"
+   ],
+   "linh_vuc": [
+    "tam_linh",
+    "ban_than"
+   ]
+  },
+  {
+   "ma": "bh_muc_dich",
+   "tru": "bai_hoc_y_nghia",
+   "noi_dau": "Sống mà không biết mình sống để làm gì",
+   "cau": "Mục đích sống của tôi là gì?",
+   "bien_the": [
+    "sứ mệnh của tôi",
+    "ý nghĩa cuộc sống"
+   ],
+   "chi_so": [
+    "duong_doi",
+    "su_menh",
+    "linh_hon"
+   ],
+   "linh_vuc": [
+    "ban_than"
+   ]
+  },
+  {
+   "ma": "bh_no_nghiep",
+   "tru": "bai_hoc_y_nghia",
+   "noi_dau": "Nghe nói số mình có nợ nghiệp nên lo lắng",
+   "cau": "Nợ nghiệp trong số của tôi nghĩa là gì?",
+   "bien_the": [
+    "số nợ nghiệp",
+    "13 14 16 19"
+   ],
+   "chi_so": [
+    "no_nghiep"
+   ],
+   "linh_vuc": [
+    "tam_linh",
+    "ky_thuat"
+   ]
+  },
+  {
+   "ma": "bh_so_vang",
+   "tru": "bai_hoc_y_nghia",
+   "noi_dau": "Luôn thấy mình thiếu một điều gì đó",
+   "cau": "Những con số vắng trong biểu đồ của tôi nói lên điều gì?",
+   "bien_the": [
+    "số thiếu",
+    "biểu đồ ngày sinh",
+    "mũi tên trống"
+   ],
+   "chi_so": [
+    "so_vang_bieu_do",
+    "bai_hoc_nghiep"
+   ],
+   "linh_vuc": [
+    "ban_than"
+   ]
+  },
+  {
+   "ma": "bh_ten",
+   "tru": "bai_hoc_y_nghia",
+   "noi_dau": "Đang tính đổi tên hay đặt biệt danh",
+   "cau": "Tên của tôi ảnh hưởng thế nào đến con số của tôi?",
+   "bien_the": [
+    "đổi tên",
+    "tên thường gọi",
+    "biệt danh"
+   ],
+   "chi_so": [
+    "su_menh",
+    "linh_hon",
+    "nhan_cach"
+   ],
+   "linh_vuc": [
+    "ten_goi"
+   ]
+  }
+ ]
+}

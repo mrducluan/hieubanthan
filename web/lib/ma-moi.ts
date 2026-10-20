@@ -13,6 +13,8 @@ export const NoiDungMa = z.object({
   so: z.array(z.number().int().min(1).max(33)).min(1).max(4),
   /** Từ khoá số đường đời (từ KB, engine trả). */
   k: z.string().max(80).optional(),
+  /** TS-V3b: Sephirah ngày sinh 1–10 (engine tính) — cho "Cây của hai người"; link cũ không có. */
+  sp: z.number().int().min(1).max(10).optional(),
   /** Ngày tạo (YYYY-MM-DD) — để hết hạn. */
   d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
 });
@@ -70,6 +72,10 @@ export const NoiDungMaNgay = z.object({
   n: z.number().int().min(1).max(9),
   /** Chủ đề ngày (KB, engine trả). */
   k: z.string().max(90).optional(),
+  /** TS-V3b: số nổi bật qua ba phái (gốc 1–9) và chữ Hebrew của ngày (thứ 1–22) — engine tính; thẻ cũ không có. */
+  s: z.number().int().min(1).max(9).optional(),
+  h: z.number().int().min(1).max(22).optional(),
+  hn: z.string().regex(/^[A-Za-z]{2,8}$/).optional(),
   /** Ngày xem (YYYY-MM-DD, giờ Việt Nam) — thẻ nói về đúng ngày này; cũng dùng để hết hạn. */
   d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
 });

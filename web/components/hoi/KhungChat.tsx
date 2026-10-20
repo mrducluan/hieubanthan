@@ -54,10 +54,21 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
     if (tin.length) cuoi.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [tin.length, dang]);
 
+  // Câu từ ngoài tới lúc đang chờ trả lời → giữ lại, hỏi ngay khi xong (không bỏ mất cú bấm).
+  const cho = useRef<string | null>(null);
   useEffect(() => {
-    if (cauNgoai) void hoi(cauNgoai.cau);
+    if (!cauNgoai) return;
+    if (dang) cho.current = cauNgoai.cau;
+    else void hoi(cauNgoai.cau);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ chạy khi có câu mới từ ngoài
   }, [cauNgoai?.lan]);
+  useEffect(() => {
+    if (dang || !cho.current) return;
+    const c = cho.current;
+    cho.current = null;
+    void hoi(c);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- chạy khi vừa trả lời xong
+  }, [dang]);
 
   async function hoi(q: string) {
     const c = q.trim();

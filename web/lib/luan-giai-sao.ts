@@ -25,9 +25,12 @@ export async function dangThuSao(): Promise<boolean> {
 }
 
 const MIEN_PHI = { sao: 0, ly_do: "mien_phi_thu_nghiem" } as const;
-const TEN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự" };
+const TEN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", thanso3: "ba phái thần số" };
 
-export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: string, moDun: string): Promise<NextResponse> {
+/** `khoaTu`: phần đầu vào dùng làm khoá "đã mở hôm nay" — bỏ những trường không đổi bản chất báo cáo (vd phiếu bình chọn
+ *  của báo cáo ba phái đổi sau mỗi lần bấm) để người dùng không bị trừ Sao lần hai trong ngày. Mặc định: toàn bộ đầu vào. */
+export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: string, moDun: string,
+                                    khoaTu: (d: Record<string, unknown>) => unknown = (d) => d): Promise<NextResponse> {
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
 
@@ -42,7 +45,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   const bi_mat = biMat();
   const ngay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
   const khoa = bi_mat
-    ? `lg:${createHmac("sha256", bi_mat).update(`${moDun}|${JSON.stringify(parsed.data)}|${ngay}`).digest("hex").slice(0, 40)}`
+    ? `lg:${createHmac("sha256", bi_mat).update(`${moDun}|${JSON.stringify(khoaTu(parsed.data as Record<string, unknown>))}|${ngay}`).digest("hex").slice(0, 40)}`
     : null;
 
   // Đã mở hôm nay? (RLS: người dùng đọc được sổ Sao của chính mình.)

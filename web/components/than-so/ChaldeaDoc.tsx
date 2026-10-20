@@ -7,6 +7,7 @@ import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhoiLop } from "@/components/than-so/LopNoiDung";
 import { hoTenList, type HoSo } from "@/lib/hoso";
+import { useQuyUocDD } from "@/lib/quy-uoc-dd";
 
 interface NghiaGoc { ten: string; hanh_tinh: string; xu_huong: string; mat_toi: string; goi_y: string; cau_tu_soi: string }
 interface NghiaKep { bieu_tuong: string; xu_huong: string; mat_toi: string; cau_tu_soi: string }
@@ -15,16 +16,23 @@ interface SoChaldea {
   ten_goi?: string; nghia_goc: NghiaGoc | null; nghia_kep: NghiaKep | null;
   pitago?: { ten: string; so: number; khac: boolean };
 }
+// TS-NOIDAU: cùng số 13/14/16/19 — Pitago đọc là nợ nghiệp, Chaldea đọc là số kép; engine nối hai cách đọc (KB).
+interface GiaoDiem {
+  ma: string; ten: string; pitago_no_nghiep: number | null; chaldea_kep: number | null; cung_so: boolean;
+  pitago: string | null; chaldea: string | null; cach_dung: string | null; tu_soi: string | null;
+}
 export interface BaiChaldea {
   phai: "chaldea"; ten_chinh: string; ngay_sinh: string; so_khac_pitago: number; luu_y: string; nguon: string; trang_thai: string;
   gioi_thieu: { ten_phai: string; tom_tat: string; khac_pitago: string[]; cach_doc: string; bang_chu: Record<string, string> };
   cac_so: SoChaldea[];
+  giao_diem?: GiaoDiem[];
 }
 
 const boNho = new Map<string, BaiChaldea>();
 
 function useChaldea(h: HoSo) {
-  const khoa = JSON.stringify([hoTenList(h), h.ngay, h.thang, h.nam]);
+  const qu = useQuyUocDD();   // TS-V3: đối chiếu Đường đời Pitago theo cách cộng đã chọn
+  const khoa = JSON.stringify([hoTenList(h), h.ngay, h.thang, h.nam, qu]);
   const [kq, setKq] = useState<BaiChaldea | null>(boNho.get(khoa) ?? null);
   const [loi, setLoi] = useState<string | null>(null);
   const [lan, setLan] = useState(0);
@@ -35,7 +43,7 @@ function useChaldea(h: HoSo) {
     setKq(null); setLoi(null);
     fetch("/api/thanso/chaldea", {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam }),
+      body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, quy_uoc_duong_doi: qu }),
     }).then(async (r) => {
       const d = (await r.json()) as BaiChaldea & { error?: string };
       if (!r.ok) throw new Error(d.error ?? "Chưa tính được lúc này.");
@@ -103,6 +111,29 @@ export function ChaldeaDoc({ hoSo }: { hoSo: HoSo }) {
           {kq.cac_so.map((s) => <TheSo key={s.ma} s={s} />)}
         </div>
       </section>
+
+      {kq.giao_diem && kq.giao_diem.length > 0 && (
+        <section aria-labelledby="giao-diem" data-testid="giao-diem">
+          <TieuDeMuc id="giao-diem" nho="Giao điểm hai phái" lon="Cùng một con số, hai cách đọc"
+            mo_ta="Số 13, 14, 16, 19: phái Pitago gọi là nợ nghiệp (bài học cần tập), phái Chaldea đọc là số kép mang biểu tượng riêng. Đọc cả hai để thấy chỗ chúng gặp nhau." />
+          <div className="grid gap-3 md:grid-cols-2">
+            {kq.giao_diem.map((g) => (
+              <article key={g.ma} className="rounded-xl border border-line/70 bg-bg/40 p-4">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="text-lg">{g.ten}</h3>
+                  <span className="shrink-0 text-xs text-gold">
+                    {g.pitago_no_nghiep ? `Pitago: nợ nghiệp ${g.pitago_no_nghiep}` : "Pitago: không có nợ nghiệp"} · {g.chaldea_kep ? `Chaldea: kép ${g.chaldea_kep}` : "Chaldea: kép khác"}
+                  </span>
+                </div>
+                {g.pitago && <p className="mt-2 text-sm">{g.pitago}</p>}
+                {g.chaldea && <p className="mt-1 text-sm">{g.chaldea}</p>}
+                {g.cach_dung && <p className="mt-2 text-sm text-jade">{g.cach_dung}</p>}
+                {g.tu_soi && <p className="mt-2 text-sm text-fg-muted">Tự soi: {g.tu_soi}</p>}
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section aria-labelledby="chaldea-gioi-thieu" className="glass rounded-2xl p-5">
         <h2 id="chaldea-gioi-thieu" className="text-lg">Phái Chaldea khác Pitago thế nào?</h2>

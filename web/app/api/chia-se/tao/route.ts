@@ -21,18 +21,25 @@ export async function POST(req: Request): Promise<NextResponse> {
   const p = Input.safeParse(await req.json().catch(() => null));
   if (!p.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
   const { ten_hien_thi, ...nguoi } = p.data;
+  const goi = (duong: string, than: unknown) => fetch(`${ENGINE_URL}${duong}`, {
+    method: "POST",
+    headers: { "content-type": "application/json", ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}) },
+    body: JSON.stringify(than),
+    cache: "no-store",
+  });
   try {
-    const r = await fetch(`${ENGINE_URL}/v1/thanso/luan-giai`, {
-      method: "POST",
-      headers: { "content-type": "application/json", ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}) },
-      body: JSON.stringify(nguoi),
-      cache: "no-store",
-    });
+    // TS-V3b: thêm Sephirah ngày sinh (cho "Cây của hai người" ở trang nhận lời mời). Lỗi phần này thì link vẫn tạo được.
+    const [r, rc] = await Promise.all([
+      goi("/v1/thanso/luan-giai", nguoi),
+      goi("/v1/thanso/kabbalah", nguoi).catch(() => null),
+    ]);
     if (!r.ok) { const l = loiEngine(r.status, await r.json().catch(() => null)); return NextResponse.json({ error: l.error }, { status: l.status }); }
     const kq = (await r.json()) as LuanGiaiResult;
     const so = kq.cac_vi_tri.map((v) => v.gia_tri);
     const k = kq.cac_vi_tri.find((v) => v.vi_tri === "duong_doi")?.nghia?.tu_khoa;
-    return NextResponse.json({ ma: kyMa({ t: ten_hien_thi, so, ...(k ? { k } : {}) }) });
+    const qb = rc?.ok ? ((await rc.json().catch(() => null)) as { cac_so?: { ma: string; so: number }[] } | null) : null;
+    const sp = qb?.cac_so?.find((c) => c.ma === "sephirah_ngay_sinh")?.so;
+    return NextResponse.json({ ma: kyMa({ t: ten_hien_thi, so, ...(k ? { k } : {}), ...(sp ? { sp } : {}) }) });
   } catch (e) {
     const msg = e instanceof Error && e.message.includes("LOI_MOI_SECRET") ? e.message : "Không kết nối được máy tính toán.";
     return NextResponse.json({ error: msg }, { status: 502 });

@@ -26,14 +26,14 @@ SO_NAM_DU_BAO = 3   # năm cá nhân: hiện tại + 2 năm tới
 
 
 def luan_chieu_sau(ngay: int, thang: int, nam_sinh: int,
-                   nam_moc: int | None = None) -> dict:
+                   nam_moc: int | None = None, quy_uoc: str = "tong_het") -> dict:
     """Chiều sâu: đỉnh cao (theo tuổi), thử thách chính, năm cá nhân sắp tới.
 
     Phép tính từ engine (tất định); nghĩa từ KB chiều sâu (có nguồn). Nếu KB
     chưa có nghĩa cho một giá trị → để None, tầng hiển thị im lặng, không bịa.
     """
     nam_moc = nam_moc or datetime.date.today().year
-    dd = thanso.duong_doi(ngay, thang, nam_sinh)
+    dd = thanso.duong_doi(ngay, thang, nam_sinh, quy_uoc)
 
     dinh_cao = [
         {**p, "nghia": store.nghia_dinh_cao(p["so"])}
@@ -62,7 +62,7 @@ def luan_chieu_sau(ngay: int, thang: int, nam_sinh: int,
         "dinh_cao": dinh_cao,
         "thu_thach_chinh": thu_thach_chinh,
         "nam_ca_nhan": nam_ca_nhan,
-        "dong_doi": luan_dong_doi(ngay, thang, nam_sinh, nam_moc),
+        "dong_doi": luan_dong_doi(ngay, thang, nam_sinh, nam_moc, quy_uoc),
         "trich_nguon": store.trich_nguon_depth(),
         "cach_doc_chieu_sau": (
             "Đỉnh cao là mạch năng lượng chủ đạo của từng GIAI ĐOẠN đời (theo tuổi). "
@@ -77,9 +77,9 @@ NHAN_MOC = {"chuyen_dinh": "Sang giai đoạn đời mới — đỉnh số {so}
             "khep_chu_ky": "Khép chu kỳ 9 năm (năm cá nhân 9)"}
 
 
-def luan_dong_doi(ngay: int, thang: int, nam_sinh: int, nam_xem: int) -> dict:
+def luan_dong_doi(ngay: int, thang: int, nam_sinh: int, nam_xem: int, quy_uoc: str = "tong_het") -> dict:
     """Trục đời: 4 giai đoạn (đỉnh + thử thách, có nghĩa) và các năm bước ngoặt theo nhịp số."""
-    dd = thanso_dong_doi.dong_doi(ngay, thang, nam_sinh, nam_xem)
+    dd = thanso_dong_doi.dong_doi(ngay, thang, nam_sinh, nam_xem, quy_uoc=quy_uoc)
     return {
         **dd,
         "giai_doan": [{**g, "nghia": store.nghia_dinh_cao(g["so"]),
@@ -92,11 +92,11 @@ def luan_dong_doi(ngay: int, thang: int, nam_sinh: int, nam_xem: int) -> dict:
 
 
 def luan_mo_rong(ten: str, ngay: int, thang: int, nam: int,
-                 ngay_xem: datetime.date | None = None) -> dict:
+                 ngay_xem: datetime.date | None = None, quy_uoc: str = "tong_het") -> dict:
     """Chỉ số v2 kèm nghĩa từ KB v2: biểu đồ ngày sinh, mũi tên, chỉ số phụ, nghiệp,
     tháng cá nhân. Thiếu nghĩa trong KB → None (tầng hiển thị im lặng)."""
     hn = ngay_xem or datetime.date.today()
-    cs = mr.chi_so_mo_rong(ten, ngay, thang, nam, hn.year, hn.month, hn.day)
+    cs = mr.chi_so_mo_rong(ten, ngay, thang, nam, hn.year, hn.month, hn.day, quy_uoc)
     bd = cs["bieu_do"]
     return {
         "bieu_do": {
@@ -209,22 +209,29 @@ def _luan_mot_vi_tri(vi_tri: str, gia_tri_chinh: int,
     return ket
 
 
-def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int) -> dict:
+QUY_UOC_DD = {
+    "tong_het": "Cộng mọi chữ số của ngày, tháng, năm sinh rồi rút gọn — cách nhiều sách và trang thần số ở Việt Nam dùng.",
+    "tung_phan": "Rút gọn riêng ngày, tháng, năm (giữ số cái 11/22/33) rồi cộng lại — cách hay gặp ở sách phương Tây "
+                 "(như Hans Decoz).",
+}
+
+
+def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: str = "tong_het") -> dict:
     """Luận giải thần số — kết quả xác định (quy tắc Y khoá) + có nguồn + chống Barnum.
 
     `ho_ten[0]` là tên chính (dùng cho kết quả chính thức). Các biến thể còn lại
     chỉ dùng để tính độ nhạy (ghi chú), không đổi kết quả chính.
     """
     ten_chinh = ho_ten[0]
-    chinh = thanso.chi_so_xac_dinh(ten_chinh, ngay, thang, nam)
+    chinh = thanso.chi_so_xac_dinh(ten_chinh, ngay, thang, nam, quy_uoc)
 
     # Độ nhạy THẬT: áp CHÍNH quy tắc khoá lên từng biến thể tên, xem có lệch không.
     # (Không dùng do_nhay vì nó gộp cả các quy ước mà quy tắc khoá đã quyết.)
     theo_bien_the = [
-        thanso.chi_so_xac_dinh(t, ngay, thang, nam) for t in ho_ten
+        thanso.chi_so_xac_dinh(t, ngay, thang, nam, quy_uoc) for t in ho_ten
     ]
 
-    vet = thanso.vet_tinh(ten_chinh, ngay, thang, nam)
+    vet = thanso.vet_tinh(ten_chinh, ngay, thang, nam, quy_uoc)
     cac_vi_tri = []
     for vt in VI_TRI_THU_TU:
         gia_tri_chinh = chinh[vt]
@@ -235,14 +242,19 @@ def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int) -> dict:
                            "cach_tinh": vet[vt]})
 
     so_on_dinh = sum(1 for v in cac_vi_tri if v["on_dinh"])
+    th, tp = thanso.duong_doi(ngay, thang, nam, "tong_het"), thanso.duong_doi(ngay, thang, nam, "tung_phan")
     return {
         "engine_version": ENGINE_VERSION,
         "ngay_sinh": f"{ngay:02d}/{thang:02d}/{nam}",
         "ten_chinh": ten_chinh,
         "ten_bien_the_da_quet": ho_ten,
+        # TS-V3: hai cách cộng Đường đời, người dùng chọn; luôn trả cả hai số để giao diện báo khi lệch.
+        "quy_uoc_duong_doi": quy_uoc,
+        "duong_doi_hai_cach": {"tong_het": th, "tung_phan": tp, "lech": th != tp},
+        "giai_thich_quy_uoc": QUY_UOC_DD,
         "cac_vi_tri": cac_vi_tri,
-        "chieu_sau": luan_chieu_sau(ngay, thang, nam),
-        "mo_rong": luan_mo_rong(ten_chinh, ngay, thang, nam),
+        "chieu_sau": luan_chieu_sau(ngay, thang, nam, quy_uoc=quy_uoc),
+        "mo_rong": luan_mo_rong(ten_chinh, ngay, thang, nam, quy_uoc=quy_uoc),
         "chan_dung": luan_chan_dung(chinh, ngay, thang, nam),
         "tom_tat_do_tin": (
             f"Kết quả theo quy ước chính thức (quy tắc Y khoá). "

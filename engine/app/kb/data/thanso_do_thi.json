@@ -1,0 +1,106 @@
+{
+ "_nguon": "TS-V3 đồ thị liên phái: loại quan hệ giữa con số các phái. Câu mẫu có chỗ trống điền bằng số do engine tính.",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) đối chiếu ba phái thần số Pythagoras, Chaldea và Qabalah Hermetic",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "tong_hop_ba_phai",
+ "trang_thai": "nhap_ai",
+ "ten_phai": {
+  "pitago": "Pitago",
+  "chaldea": "Chaldea",
+  "kabbalah": "Qabalah",
+  "chung": "Ngày sinh"
+ },
+ "nhom": {
+  "ten_day_du": {
+   "ten": "Cách bạn thể hiện (từ cả họ tên)",
+   "vi_tri": [
+    [
+     "pitago",
+     "su_menh"
+    ],
+    [
+     "chaldea",
+     "so_ten"
+    ],
+    [
+     "kabbalah",
+     "sephirah_ten"
+    ]
+   ]
+  },
+  "linh_hon": {
+   "ten": "Điều bên trong (nguyên âm của tên)",
+   "vi_tri": [
+    [
+     "pitago",
+     "linh_hon"
+    ],
+    [
+     "chaldea",
+     "linh_hon"
+    ]
+   ]
+  },
+  "nhan_cach": {
+   "ten": "Ấn tượng bên ngoài (phụ âm của tên)",
+   "vi_tri": [
+    [
+     "pitago",
+     "nhan_cach"
+    ],
+    [
+     "chaldea",
+     "nhan_cach"
+    ]
+   ]
+  }
+ },
+ "quan_he": {
+  "cong_huong": {
+   "ten": "Cộng hưởng",
+   "cach_doc": "Ở phần {nhom}, các phái cùng ra số {so} ({tu_khoa}). Nhiều cách tính khác nhau cùng chỉ về một nét — đây là chỗ đáng đối chiếu với bản thân trước tiên.",
+   "goi_y": "Đọc kỹ mặt tối của số {so}: nét càng đậm thì mặt tối cũng dễ lộ."
+  },
+  "khac_nhip": {
+   "ten": "Các góc nhìn",
+   "cach_doc": "Ở phần {nhom}, mỗi phái ra một số khác: {danh_sach}. Không phải bên nào sai — mỗi bảng chữ nhìn tên bạn từ một góc.",
+   "goi_y": "Đọc các số này, giữ lại điều bạn thấy đúng với mình qua việc làm thật; phần không khớp thì bỏ qua."
+  },
+  "bo_sung": {
+   "ten": "Bổ sung",
+   "cach_doc": "{nhom}: Pitago thấy nợ nghiệp {so_a}, Chaldea thấy số kép {so_b}. {cach_dung}",
+   "goi_y": "{tu_soi}"
+  },
+  "nhip_thoi_gian": {
+   "ten": "Nhịp thời gian",
+   "cach_doc": "Năm {nam} là năm cá nhân {so} — trùng con số nổi bật nhất của bạn ({tu_khoa}). Một dịp để tự quan sát nét này trong việc hằng ngày.",
+   "goi_y": "Dùng năm này để luyện mặt mạnh của số {so} và để ý mặt tối của nó."
+  }
+ },
+ "quy_tac_dien_dat": [
+  {
+   "ma": "R01_DOI_THUONG",
+   "noi_dung": "Dùng lời đời thường, ẩn dụ gần gũi; thuật ngữ phải kèm giải thích ngắn."
+  },
+  {
+   "ma": "R02_KHONG_PHAN",
+   "noi_dung": "Không phán định tương lai; cấm \"bạn sẽ\", \"chắc chắn\", \"định mệnh\"."
+  },
+  {
+   "ma": "R03_MAT_TOI",
+   "noi_dung": "Mỗi nét tích cực đi kèm mặt tối và một câu tự soi."
+  },
+  {
+   "ma": "R04_CHI_DU_KIEN",
+   "noi_dung": "Chỉ dùng con số và nghĩa có trong gói; không thêm năm, ngày, sự kiện."
+  },
+  {
+   "ma": "R05_HAI_GOC_NHIN",
+   "noi_dung": "Khi các phái ra số khác nhau, trình bày như hai góc nhìn, không chọn bên đúng."
+  }
+ ]
+}
