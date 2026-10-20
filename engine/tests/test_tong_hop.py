@@ -82,3 +82,11 @@ def test_api():
     assert r.status_code == 200 and r.json()["phien_ban"] == "v3"
     r = c.post("/v1/thanso/hoi", json={**body, "cau_hoi": "Điểm mạnh cốt lõi của tôi là gì?", "phai": "kabbalah"})
     assert r.status_code == 200 and "AI nháp" not in r.text
+
+
+def test_chu_ky_so_chi_co_con_so():
+    r = TestClient(app).post("/v1/thanso/chu-ky-so", json={"ho_ten": ["Nguyễn Đức Luân"], "ngay": 24, "thang": 10, "nam": 1988})
+    ck = r.json()["chu_ky"]
+    assert ck["pitago"]["duong_doi"] == 33 and ck["kabbalah"]["sephirah_ngay_sinh"] == 6
+    assert all(isinstance(v, int) and 0 <= v <= 999 for cac in ck.values() for v in cac.values())
+    assert "Luân" not in r.text and "1988" not in r.text

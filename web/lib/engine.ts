@@ -129,6 +129,10 @@ export interface LuanGiaiResult {
   ngay_sinh: string;
   ten_chinh: string;
   ten_bien_the_da_quet: string[];
+  /** TS-V3: cách cộng Đường đời đang dùng + số theo cả hai cách (báo khi lệch). */
+  quy_uoc_duong_doi?: "tong_het" | "tung_phan";
+  duong_doi_hai_cach?: { tong_het: number; tung_phan: number; lech: boolean };
+  giai_thich_quy_uoc?: Record<"tong_het" | "tung_phan", string>;
   cac_vi_tri: ViTriLuanGiai[];
   chieu_sau: ChieuSau;
   mo_rong?: MoRong;

@@ -1,7 +1,7 @@
 "use client";
 import { fetchSao } from "@/lib/sao-client";
 import { ghiLuot, type LuotHoi } from "@/lib/hoi-mang";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { HeartHandshake } from "lucide-react";
@@ -23,15 +23,26 @@ import { hoTenList, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 import { DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
 import { ChaldeaDoc } from "@/components/than-so/ChaldeaDoc";
 import { NoiDau } from "@/components/than-so/NoiDau";
+import { KabbalahDoc } from "@/components/than-so/KabbalahDoc";
+import { TongHopDoc } from "@/components/than-so/TongHopDoc";
+import { GopYCauTraLoi } from "@/components/hoi/GopYCauTraLoi";
+import { ghiQuyUocDD, useQuyUocDD, type QuyUocDD } from "@/lib/quy-uoc-dd";
 import { ghi } from "@/lib/do-luong";
 import { TieuDeTrang, useDauCms } from "@/components/cms/DauCms";
 
-// TS-PHAI — hai trường phái thần số; lựa chọn nhớ trên máy (localStorage), mặc định Pitago như trước.
-export type PhaiThanSo = "pitago" | "chaldea";
+// TS-PHAI / TS-V3 — ba trường phái thần số + tổng hợp; lựa chọn nhớ trên máy (localStorage), mặc định Pitago như trước.
+export type PhaiThanSo = "pitago" | "chaldea" | "kabbalah" | "tong_hop";
 const KHOA_PHAI = "hbt.thanso_phai";
+const CAC_PHAI: PhaiThanSo[] = ["pitago", "chaldea", "kabbalah", "tong_hop"];
 function docPhai(): PhaiThanSo {
-  try { return localStorage.getItem(KHOA_PHAI) === "chaldea" ? "chaldea" : "pitago"; } catch { return "pitago"; }
+  try { const v = localStorage.getItem(KHOA_PHAI) as PhaiThanSo | null; return v && CAC_PHAI.includes(v) ? v : "pitago"; } catch { return "pitago"; }
 }
+const MO_TA_HOI: Record<PhaiThanSo, string> = {
+  pitago: "Câu trả lời soi câu hỏi của bạn qua chính những con số ở trên — góc nhìn tham khảo để tự ngẫm, không phải lời tiên đoán.",
+  chaldea: "Câu về bản thân, tên, tính cách trả lời theo số Chaldea (số kép + số gốc); chủ đề phái Chaldea không có (năm cá nhân, đỉnh cao, biểu đồ, hợp đôi) trả lời theo Pitago và ghi rõ.",
+  kabbalah: "Câu về bản thân trả lời theo Cây Sự sống (Sephirah, con đường của tên); chủ đề phái Qabalah không có (năm cá nhân, đỉnh cao, biểu đồ, hợp đôi) trả lời theo Pitago và ghi rõ.",
+  tong_hop: "Câu về bản thân mở đầu bằng điểm chung của ba phái, phần còn lại theo Pitago.",
+};
 
 // Gợi ý ở dạng TỰ SOI, không dự đoán tương lai.
 const GOI_Y = [
@@ -43,30 +54,41 @@ const GOI_Y = [
 
 interface CauLienQuan { ma: string; tru: string; cau: string }
 
-async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, hoiTiep: (c: CauLienQuan) => void): Promise<KetQuaHoi> {
+async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocDD, hoiTiep: (c: CauLienQuan) => void,
+                         maCau?: string): Promise<KetQuaHoi> {
   const r = await fetchSao("/api/thanso/hoi", {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, cau_hoi: cau, phai }),
+    body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, cau_hoi: cau, phai, quy_uoc_duong_doi: quyUoc }),
   }, "hoi");
-  const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string; thuat_ngu?: ThuatNgu[]; luot?: LuotHoi; cau_lien_quan?: CauLienQuan[] };
+  const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string; thuat_ngu?: ThuatNgu[]; luot?: LuotHoi;
+    cau_lien_quan?: CauLienQuan[]; phan_loai?: { linh_vuc?: string; xu_ly?: string } };
   const canNguoiKia = d.can_them?.includes("nguoi_kia");
   // TS-NOIDAU: engine gợi ≤ 3 câu chuẩn gần với câu vừa hỏi (không gợi gì cho câu khủng hoảng / ngoài phạm vi).
   const tiep = d.cau_tra_loi && !canNguoiKia ? d.cau_lien_quan ?? [] : [];
+  // TS-V3 tầng HỌC: góp ý đúng / chưa đúng — không hỏi với câu khủng hoảng, câu ngoài phạm vi, câu cần người kia.
+  const gopY = d.cau_tra_loi && !canNguoiKia && !["an_toan", "tu_choi_nhe"].includes(d.phan_loai?.xu_ly ?? "")
+    ? <GopYCauTraLoi hoSo={h} nc={{ phai, quyUoc, nguon: maCau ? "noi_dau" : "hoi_dap", linhVuc: d.phan_loai?.linh_vuc, maCau }} />
+    : null;
   return {
     van: d.cau_tra_loi,
     thuatNgu: d.thuat_ngu,
     loi: d.cau_tra_loi ? undefined : d.error ?? "Chưa trả lời được lúc này, thử lại sau.",
     phu: canNguoiKia ? (
       <Button asChild variant="secondary" size="sm"><Link href="/hop-doi"><HeartHandshake aria-hidden /> Nhập ngày sinh người ấy ở mục Hợp đôi</Link></Button>
-    ) : tiep.length ? (
-      <div data-testid="hoi-tiep">
-        <p className="text-xs text-fg-muted">Hỏi tiếp</p>
-        <div className="mt-1 flex flex-wrap gap-2">
-          {tiep.map((c) => (
-            <Button key={c.ma} variant="outline" size="sm" className="h-auto whitespace-normal py-1 text-left" onClick={() => hoiTiep(c)}>{c.cau}</Button>
-          ))}
-        </div>
+    ) : (tiep.length || gopY) ? (
+      <div className="space-y-3">
+        {gopY}
+        {tiep.length > 0 && (
+          <div data-testid="hoi-tiep">
+            <p className="text-xs text-fg-muted">Hỏi tiếp</p>
+            <div className="mt-1 flex flex-wrap gap-2">
+              {tiep.map((c) => (
+                <Button key={c.ma} variant="outline" size="sm" className="h-auto whitespace-normal py-1 text-left" onClick={() => hoiTiep(c)}>{c.cau}</Button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     ) : undefined,
     ghiLuot: ghiLuot(d.luot),
@@ -81,9 +103,12 @@ export function ThanSo() {
   const [tab, setTab] = useState("dai-doi");
   const [phai, setPhai] = useState<PhaiThanSo>("pitago");
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
+  const quyUoc = useQuyUocDD();
+  const maTheoCau = useRef(new Map<string, string>());   // câu chuẩn → mã câu (cho góp ý gắn đúng câu nỗi đau)
   useEffect(() => { setPhai(docPhai()); }, []);
   // TS-NOIDAU: câu bấm từ bảng nỗi đau / "hỏi tiếp" → đẩy vào khung hỏi đáp và cuộn tới đó.
-  function hoiCau(cau: string) {
+  function hoiCau(cau: string, maCau?: string) {
+    if (maCau) maTheoCau.current.set(cau, maCau);
     setCauNgoai((c) => ({ cau, lan: (c?.lan ?? 0) + 1 }));
     document.getElementById("hoi")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -91,6 +116,10 @@ export function ThanSo() {
     setPhai(p);
     try { localStorage.setItem(KHOA_PHAI, p); } catch { /* chế độ riêng tư: chỉ nhớ trong phiên */ }
     ghi("school_switched", { mo_dun: "thanso", phai: p });
+  }
+  function doiQuyUoc(q: QuyUocDD) {
+    ghiQuyUocDD(q);
+    ghi("school_switched", { mo_dun: "thanso_duong_doi", phai: q });
   }
   // Link "/than-so#dong-doi" (từ chân dung) mở thẳng tab Dòng đời.
   useEffect(() => {
@@ -129,15 +158,26 @@ export function ThanSo() {
       </header>
       {dauCms.khoiTren}
 
-      <KhungPhai testId="truong-phai-than-so" moTa={<>Hai phái tính khác nhau từ cùng họ tên và ngày sinh. Pitago (mặc định) dùng bảng chữ 1–9 theo thứ tự ABC, có biểu đồ ngày sinh, đỉnh cao, năm cá nhân. Chaldea dùng bảng chữ 1–8 theo âm, đọc số kép 10–52 và coi trọng tên thường gọi.</>}>
+      <KhungPhai testId="truong-phai-than-so" moTa={<>Ba phái tính khác nhau từ cùng họ tên và ngày sinh. Pitago (mặc định) dùng bảng chữ 1–9 theo thứ tự ABC, có biểu đồ ngày sinh, đỉnh cao, năm cá nhân. Chaldea dùng bảng chữ 1–8 theo âm, đọc số kép 10–52 và coi trọng tên thường gọi. Qabalah chuyển tên sang chữ Hebrew và đặt lên Cây Sự sống. Tổng hợp cho thấy điều các phái cùng chỉ ra.</>}>
         <DongPhai ten="Trường phái" nhan="Chọn trường phái thần số" giaTri={phai} doi={doiPhai}
-          luaChon={[["pitago", "Pitago"], ["chaldea", "Chaldea"]]}
+          luaChon={[["pitago", "Pitago"], ["chaldea", "Chaldea"], ["kabbalah", "Qabalah"], ["tong_hop", "Tổng hợp 3 phái"]]}
           goiY={phai === "chaldea"
             ? (hoSo.ten_khac ? `Số tên gọi lấy theo tên thường gọi “${hoSo.ten_khac}”.` : "Chưa có tên thường gọi trong hồ sơ — số tên gọi lấy tiếng cuối của họ tên.")
+            : phai === "kabbalah" ? "Phái huyền học phương Tây phỏng theo Kabbalah — bảng chuyển chữ có biến thể, trang ghi rõ khi con số có thể đổi."
+            : phai === "tong_hop" ? "So con số của cả ba phái: chỗ trùng là nét đáng đối chiếu trước, chỗ khác là hai góc nhìn."
             : "Phổ biến nhất ở Việt Nam; mọi phần chiều sâu bên dưới theo phái này."} />
+        {(phai === "pitago" || phai === "tong_hop") && (
+          <DongPhai ten="Cách cộng Đường đời" nhan="Chọn cách cộng Đường đời" giaTri={quyUoc} doi={doiQuyUoc}
+            luaChon={[["tong_het", "Cộng hết chữ số"], ["tung_phan", "Rút gọn từng phần"]]}
+            noiBat={Boolean(kq.duong_doi_hai_cach?.lech)}
+            goiY={<span data-testid="goi-y-duong-doi">{kq.giai_thich_quy_uoc?.[quyUoc]}{kq.duong_doi_hai_cach?.lech
+              ? ` Với ngày sinh của bạn hai cách ra khác nhau: ${kq.duong_doi_hai_cach.tong_het} (cộng hết) và ${kq.duong_doi_hai_cach.tung_phan} (từng phần) — luận giải đi theo cách bạn chọn.`
+              : " Với ngày sinh của bạn hai cách ra cùng một số."}</span>} />
+        )}
       </KhungPhai>
 
-      {phai === "chaldea" ? <ChaldeaDoc hoSo={hoSo} /> : (<>
+      {phai === "chaldea" ? <ChaldeaDoc hoSo={hoSo} /> : phai === "kabbalah" ? <KabbalahDoc hoSo={hoSo} quyUoc={quyUoc} />
+        : phai === "tong_hop" ? <TongHopDoc hoSo={hoSo} quyUoc={quyUoc} /> : (<>
       <section aria-labelledby="bon-so">
         <TieuDeMuc id="bon-so" nho="Bốn con số cốt lõi" lon="Cách tính, ý nghĩa, câu tự soi" />
         <div className="grid gap-4 md:grid-cols-2">
@@ -214,22 +254,20 @@ export function ThanSo() {
       <CuoiBaiDoc moDun="thanso_sau" cauHoi="Phần chiều sâu có giúp bạn hiểu mình hơn?" />
       </>)}
 
-      <NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea"} />
+      <NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea" || phai === "kabbalah"} quyUoc={quyUoc} />
 
       <section id="hoi" aria-labelledby="muc-hoi" className="scroll-mt-24">
         <TieuDeMuc id="muc-hoi" nho="Hỏi sâu hơn" lon={`${tenGoi(hoSo)}, bạn đang băn khoăn điều gì?`}
-          mo_ta={phai === "chaldea"
-            ? "Câu về bản thân, tên, tính cách trả lời theo số Chaldea (số kép + số gốc); chủ đề phái Chaldea không có (năm cá nhân, đỉnh cao, biểu đồ, hợp đôi) trả lời theo Pitago và ghi rõ."
-            : "Câu trả lời soi câu hỏi của bạn qua chính những con số ở trên — góc nhìn tham khảo để tự ngẫm, không phải lời tiên đoán."} />
+          mo_ta={MO_TA_HOI[phai]} />
         <KhungChat
             moDun="thanso"
           loiChao="Chọn một câu gợi ý bên dưới, hoặc tự đặt câu hỏi về bản thân, nghề nghiệp, tình cảm."
           goiY={GOI_Y}
           cauNgoai={cauNgoai}
-          gui={(c) => hoiThanSo(hoSo, c, phai, (t) => {
+          gui={(c) => hoiThanSo(hoSo, c, phai, quyUoc, (t) => {
             ghi("pain_point_clicked", { mo_dun: "thanso", tru: t.tru, ma_cau: t.ma, nguon: "hoi_tiep" });
-            hoiCau(t.cau);
-          })}
+            hoiCau(t.cau, t.ma);
+          }, maTheoCau.current.get(c))}
         />
       </section>
 

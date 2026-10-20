@@ -3,11 +3,13 @@
 // con số CỦA BẠN trả lời nó (lớp ĐÃ TÍNH, engine tính — web chỉ hiển thị); bấm "Hỏi câu này" gửi nguyên văn câu
 // chuẩn sang khung hỏi đáp bên dưới. Đo lường chỉ mã câu + mã trụ.
 import { useEffect, useState } from "react";
-import { Briefcase, CalendarClock, Heart, MessageCircleQuestion, Sparkles, User, type LucideIcon } from "lucide-react";
+import { Bookmark, BookmarkCheck, Briefcase, CalendarClock, Heart, MessageCircleQuestion, Sparkles, User, X, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { hoTenList, type HoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
+import { useKyUc } from "@/lib/ky-uc";
+import type { QuyUocDD } from "@/lib/quy-uoc-dd";
 import { cn } from "@/lib/utils";
 
 interface SoTraLoi { ma: string; ten: string; gia_tri: number | number[] | null }
@@ -25,8 +27,10 @@ export function hienGiaTri(v: SoTraLoi["gia_tri"]): string {
   return String(v);
 }
 
-export function NoiDau({ hoSo, onHoi, theoPitago = false }: { hoSo: HoSo; onHoi: (cau: string) => void; theoPitago?: boolean }) {
-  const khoa = JSON.stringify([hoTenList(hoSo), hoSo.ngay, hoSo.thang, hoSo.nam]);
+export function NoiDau({ hoSo, onHoi, theoPitago = false, quyUoc = "tong_het" }:
+  { hoSo: HoSo; onHoi: (cau: string, maCau?: string) => void; theoPitago?: boolean; quyUoc?: QuyUocDD }) {
+  const khoa = JSON.stringify([hoTenList(hoSo), hoSo.ngay, hoSo.thang, hoSo.nam, quyUoc]);
+  const kyUc = useKyUc();
   const [bd, setBd] = useState<BanDo | null>(boNho.get(khoa) ?? null);
   const [chon, setChon] = useState(0);
   useEffect(() => {
@@ -34,7 +38,7 @@ export function NoiDau({ hoSo, onHoi, theoPitago = false }: { hoSo: HoSo; onHoi:
     let huy = false;
     fetch("/api/thanso/noi-dau", {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam }),
+      body: JSON.stringify({ ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam, quy_uoc_duong_doi: quyUoc }),
     }).then((r) => (r.ok ? (r.json() as Promise<BanDo>) : null))
       .then((d) => { if (d) { boNho.set(khoa, d); if (!huy) setBd(d); } })
       .catch(() => { /* bảng gợi ý là phần phụ: lỗi thì ẩn, khung hỏi đáp vẫn dùng được */ });
@@ -43,11 +47,29 @@ export function NoiDau({ hoSo, onHoi, theoPitago = false }: { hoSo: HoSo; onHoi:
   }, [khoa]);
   const tru = bd?.tru[chon] ?? bd?.tru[0];
   if (!bd || !tru) return null;
+  const cauTheoMa = new Map(bd.tru.flatMap((t) => t.cau_hoi.map((q) => [q.ma, q] as const)));
+  const daNho = new Set(kyUc.ds.map((k) => k.ma_cau));
 
   return (
     <section aria-labelledby="noi-dau" data-testid="noi-dau">
       <TieuDeMuc id="noi-dau" nho="Bạn đang vướng ở đâu?" lon="Chọn điều đang làm bạn băn khoăn"
         mo_ta="Mỗi câu hỏi đi kèm những con số của chính bạn dùng để trả lời. Bấm “Hỏi câu này” để xem lời giải ngay bên dưới." />
+      {kyUc.dangNhap && kyUc.ds.length > 0 && (
+        <div className="mb-4 rounded-xl border border-gold/30 bg-gold/[0.05] p-3" data-testid="ky-uc">
+          <p className="text-xs text-fg-muted">Lần trước bạn băn khoăn</p>
+          <ul className="mt-1 space-y-1">
+            {kyUc.ds.map((k) => {
+              const q = k.ma_cau ? cauTheoMa.get(k.ma_cau) : undefined;
+              return q ? (
+                <li key={k.id} className="flex items-center gap-2 text-sm">
+                  <button type="button" className="text-left hover:text-gold" onClick={() => onHoi(q.cau, q.ma)}>“{q.noi_dau}” — hỏi lại hôm nay</button>
+                  <button type="button" aria-label="Xoá ký ức này" className="text-fg-faint hover:text-cinnabar" onClick={() => kyUc.xoa(k.id)}><X className="size-3.5" /></button>
+                </li>
+              ) : null;
+            })}
+          </ul>
+        </div>
+      )}
       <div role="tablist" aria-label="Năm trụ đời" className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none]">
         {bd.tru.map((t, i) => {
           const Icon = BIEU_TUONG[t.bieu_tuong] ?? Sparkles;
@@ -61,7 +83,7 @@ export function NoiDau({ hoSo, onHoi, theoPitago = false }: { hoSo: HoSo; onHoi:
         })}
       </div>
       <p className="mt-2 text-sm text-fg-muted">{tru.mo_ta}</p>
-      {theoPitago && <p className="mt-1 text-xs text-moon" data-testid="noi-dau-theo-pitago">Con số trên thẻ tính theo phái Pitago; câu về bản thân sẽ được trả lời bằng số Chaldea.</p>}
+      {theoPitago && <p className="mt-1 text-xs text-moon" data-testid="noi-dau-theo-pitago">Con số trên thẻ tính theo phái Pitago; câu về bản thân sẽ được trả lời theo phái bạn đang chọn.</p>}
       <div role="tabpanel" aria-label={tru.ten} className="mt-4 grid gap-3 md:grid-cols-2">
         {tru.cau_hoi.map((q) => (
           <article key={q.ma} data-testid={`noi-dau-${q.ma}`} className="flex flex-col rounded-xl border border-line/70 bg-bg/40 p-4">
@@ -74,10 +96,18 @@ export function NoiDau({ hoSo, onHoi, theoPitago = false }: { hoSo: HoSo; onHoi:
                 </li>
               ))}
             </ul>
-            <Button variant="secondary" size="sm" className="mt-3 self-start"
-              onClick={() => { ghi("pain_point_clicked", { mo_dun: "thanso", tru: tru.ma, ma_cau: q.ma, nguon: "bang" }); onHoi(q.cau); }}>
-              <MessageCircleQuestion aria-hidden /> Hỏi câu này
-            </Button>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Button variant="secondary" size="sm"
+                onClick={() => { ghi("pain_point_clicked", { mo_dun: "thanso", tru: tru.ma, ma_cau: q.ma, nguon: "bang" }); onHoi(q.cau, q.ma); }}>
+                <MessageCircleQuestion aria-hidden /> Hỏi câu này
+              </Button>
+              {kyUc.dangNhap && (
+                <Button variant="ghost" size="sm" disabled={daNho.has(q.ma)} onClick={() => kyUc.them(tru.ma, q.ma)}
+                  aria-label={daNho.has(q.ma) ? "Đã ghi nhớ" : "Ghi nhớ điều này"}>
+                  {daNho.has(q.ma) ? <BookmarkCheck aria-hidden /> : <Bookmark aria-hidden />} {daNho.has(q.ma) ? "Đã nhớ" : "Ghi nhớ"}
+                </Button>
+              )}
+            </div>
           </article>
         ))}
       </div>

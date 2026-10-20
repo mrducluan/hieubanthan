@@ -85,8 +85,29 @@ vượt hạn mức miễn phí SAO-2). Chỉ số: tỉ lệ `pain_point_clicke
 Còn để ngỏ (đề xuất, chưa làm): nhãn "Bóng tối" ở đỉnh cao → "Điểm cần để ý"; câu năm cá nhân 8 "nếu đã gieo đúng,
 đây là năm thu hoạch" nghe như dự báo → viết lại KB theo skill `thanso-kb`.
 
-## 6. Nếu vẫn muốn bản SQL
+## 6. TS-V3 (2026-10-20) — chuyển đổi đầy đủ sau khi chủ dự án duyệt
 
-Cần chủ dự án chốt lại các quyết định đang có (kiến trúc 4 tầng, Kabbalah, pgvector, quyền riêng tư nhật ký) — đây là
-đổi quyết định, không phải nâng cấp. Khi đó em đề xuất: chỉ dùng Postgres làm **KB** (bảng nghĩa có `source_id` +
-`school_id`, migration có `.down.sql`), phép tính vẫn ở engine Python; phản hồi lưu mã câu + mã số, không tên/ngày sinh.
+Chủ dự án duyệt: điều chỉnh kiến trúc, quy tắc riêng tư cho vòng tự cải thiện, làm Kabbalah, pgvector + `pg`. Nguyên tắc
+giữ: **một bộ tính** (Python, golden) — SQL chỉ còn là tầng HỌC. Bảng dưới là số phận từng tệp:
+
+| Tệp V3 | Giờ ở đâu | Đã sửa gì so với bản SQL |
+|---|---|---|
+| 01 `fn_calc_pythagoras` | `calc/thanso.py` | Đường đời có **2 cách, người dùng chọn** (`tong_het` mặc định / `tung_phan` = cách V3); Y theo âm tiết đã khoá; đỉnh cao rút về 1–9 |
+| 01 `fn_calc_chaldean` | `calc/thanso_chaldean.py` | Số kép 10–52 đúng Cheiro (V3 để tổng thô) |
+| 01 `fn_calc_kabbalah` | `calc/thanso_kabbalah.py` | Bảng chuyển chữ Golden Dawn + giá trị Hebrew chuẩn (V3 tự chế A–I/J–R/S–Z); Sephirah = rút về ≤ 10 (V3: mod 10 trộn tên + ngày); thêm độ nhạy bảng |
+| 01 schema `knowledge_nodes` | KB JSON có `source_id` + `school_id` | V3 thiếu nguồn bắt buộc |
+| 02 seed (2 nút) | `thanso_meanings` + `thanso_chaldean` + `thanso_kabbalah` | Đủ mọi số của 3 phái |
+| 03 `graph_edges` + `fn_resolve_3school_matrix` | `luangiai/tong_hop.tuong_tac` + KB `thanso_do_thi.json` | Không còn lỗi khoá ngoại / mảng NULL; cạnh sinh từ số thật của người dùng |
+| 04 `question_intents` + hybrid search | KB `thanso_noi_dau.json` + `hoi.phan_loai` + `noi_dau.lien_quan` | Tất định, test định tuyến 25/25; không cần embedding |
+| 05 `fn_assemble_llm_context_payload` | `tong_hop.ngu_canh` · `/v1/thanso/ngu-canh` | Quy tắc diễn đạt ở KB; câu khủng hoảng không dựng ngữ cảnh |
+| 06 vòng tự cải thiện | migration **0015** `thanso_phan_hoi` + `thanso_cum_bat_thuong` + `/quan-tri/hoc` | Chỉ chữ ký số (không tên/ngày sinh); ≥ 5 lần → chờ duyệt, người duyệt sửa KB (V3 báo "AUTO_PROMOTED" mà không làm gì) |
+| 07 biểu đồ + mũi tên | `calc/thanso_mo_rong.py` | Đủ 8 mũi tên (V3 trả mảng rỗng) |
+| 07 `interpretation_cache` | không làm | Engine tất định; LLM có hạn mức RL-1 |
+| 08 service TS | `web/lib/services/numerology-engine.service.ts` | Gọi engine, không `pg`, không hàm `_v2` không tồn tại, không năm viết cứng |
+| 09 `user_episodic_memories` | migration **0015** `ky_uc_nguoi_dung` | Chỉ điều người dùng bấm ghi nhớ; RLS chủ sở hữu; xoá được; 180 ngày |
+| 09 radar tháng | `nhip_ca_nhan` / `hom_nay` (KB tháng cá nhân) | Bỏ lời ra lệnh / dự báo ("chốt sale", "sức khoẻ") |
+| `vector` (pgvector) | chưa bật | Chưa có nguồn embedding; bật khi ≥ 500 câu không nhận ra/tháng |
+
+Cách đọc hai cách cộng Đường đời: **cộng hết** phổ biến ở sách/trang thần số Việt Nam; **rút gọn từng phần** hay gặp
+ở sách phương Tây (Hans Decoz…). Không có cách "đúng" duy nhất — sản phẩm để mặc định cộng hết (kết quả cũ của người
+dùng giữ nguyên), có nút đổi, và luôn báo khi hai cách ra số khác nhau.

@@ -256,6 +256,15 @@ def api_tong_hop(inp: TongHopInput) -> dict:
                                 inp.quy_uoc_duong_doi)}
 
 
+@app.post("/v1/thanso/chu-ky-so")
+def api_chu_ky_so(inp: ThanSoInput) -> dict:
+    """TS-V3 tầng HỌC: CHỈ các con số đã tính của ba phái (không tên, không ngày sinh) — web lưu chữ ký này kèm góp ý
+    đúng/chưa đúng để gom cụm cải thiện KB; họ tên và ngày sinh không rời khỏi lượt gọi."""
+    inp.kiem_tra_ngay()
+    hs = tong_hop.ho_so(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.quy_uoc_duong_doi)
+    return {"chu_ky": {phai: {vt: v["so"] for vt, v in cac.items()} for phai, cac in hs.items() if cac}}
+
+
 @app.post("/v1/thanso/ngu-canh")
 def api_ngu_canh(inp: NguCanhInput) -> dict:
     """TS-V3 — gói ngữ cảnh cho tầng diễn đạt (thay fn_assemble_llm_context_payload_v3 của bản SQL): ý định, hồ sơ
