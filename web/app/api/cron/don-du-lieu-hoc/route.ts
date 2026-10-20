@@ -17,6 +17,6 @@ export async function GET(req: Request) {
   const dv = khachDichVu();
   if (!dv) return NextResponse.json({ error: "Chưa cấu hình" }, { status: 503 });
   const { data, error } = await dv.rpc("don_du_lieu_hoc");
-  if (error) return NextResponse.json({ error: "Chưa dọn được (chạy migration 0015?)" }, { status: 502 });
+  if (error) return NextResponse.json({ error: "Chưa dọn được (chạy migration 0016?)" }, { status: 502 });
   return NextResponse.json(data);
 }

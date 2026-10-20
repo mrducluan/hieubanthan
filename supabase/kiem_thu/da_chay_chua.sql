@@ -19,6 +19,9 @@ select * from (values
   ('0011 quản trị 2 (cài đặt)',    to_regprocedure('public.dat_cau_hinh(text,jsonb,text)') is not null),
   ('0012 thanh toán nạp Sao',      to_regclass('public.don_nap') is not null),
   ('0013 hạn mức hỏi (SAO-2)',     to_regclass('public.luot_hoi') is not null),
-  ('0014 nhiệm vụ kiếm Sao',       to_regclass('public.nhiem_vu_sao') is not null)
+  ('0014 nhiệm vụ kiếm Sao',       to_regclass('public.nhiem_vu_sao') is not null),
+  ('0015 hồ sơ "Không biết giờ"',  exists (select 1 from pg_constraint where conname = 'ho_so_do_tin_gio_check'
+                                             and pg_get_constraintdef(oid) like '%unknown%')),
+  ('0016 tầng HỌC thần số (TS-V3)', to_regclass('public.thanso_phan_hoi') is not null)
 ) as t(migration, da_chay)
 order by 1;

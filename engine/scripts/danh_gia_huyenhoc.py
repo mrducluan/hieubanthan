@@ -56,10 +56,22 @@ KD_LOAI = {"quyet_dinh": "quyet_dinh", "loi_khuyen": "quyet_dinh", "du_doan": "d
 # chu_de (nhãn) → loại câu hỏi mà module Tử vi phải nhận ra (None = chấp nhận mọi loại có căn cứ)
 TV_LOAI = {"hop_hon": {"hop_hon"}, "la_so_con": {"la_so_con"}, "la_so_nguoi_khac": {"nguoi_khac"},
            "tuvi_ky_thuat": {"ky_thuat"}, "dai_han_luu_nien": {"han"}, "han_chi_tiet": {"han"},
-           "sao_cung": {"sao_cung"}, "tu_hoa_cung": {"tu_hoa_cung", "sao_cung"}}
+           "sao_cung": {"sao_cung"}, "tu_hoa_cung": {"tu_hoa_cung", "sao_cung"},
+           "phi_hoa_la_so": {"phi_hoa"}, "phi_hoa_ky_thuat": {"phi_hoa_khai_niem"}}
 TV_CUNG = {"phu_the": {"Phu Thê"}, "tai_bach_dien_trach": {"Tài Bạch", "Điền Trạch"},
            "tat_ach_tinh_than": {"Tật Ách"}, "quan_loc": {"Quan Lộc", "Nô Bộc", "Thiên Di", "Mệnh"}}
 SINH_MAU = {"ngay": None, "ti": 6, "gioi_tinh": "nam"}
+# TV-V2 — ý định → khối bằng chứng bắt buộc trong gói (ngoài khối y_dinh chung).
+TV_YD_MUC = {
+    "di_hay_o": {"y_dinh", "phi_hoa_y_dinh", "han"},
+    "tai_van": {"y_dinh", "phi_hoa_y_dinh", "han"},
+    "hoc_hanh_con": {"y_dinh", "phi_hoa_y_dinh", "han"},
+    "phan_van": {"y_dinh", "phi_hoa_y_dinh"},
+    "ba_thang_toi": {"y_dinh", "nhip_3_thang", "han"},
+    "chon_thoi_diem": {"y_dinh", "nhip_3_thang", "goi_y_trang"},
+    "tong_quan_nam": {"y_dinh", "han", "luu_nien_phi_hoa", "cung_checkpoint"},
+    "hieu_ban_than": {"y_dinh", "phi_hoa_y_dinh", "cung_checkpoint"},
+}
 
 
 def cham_tuvi(r: dict) -> tuple[str, str]:
@@ -80,6 +92,14 @@ def cham_tuvi(r: dict) -> tuple[str, str]:
     muon = TV_LOAI.get(r["chu_de"])
     if muon and pl["loai"] not in muon:
         return "mot_phan", f"lệch loại {r['chu_de']}→{pl['loai']}"
+    if r["chu_de"].startswith("yd_"):                       # TV-V2: 8 ý định (KB y_dinh_hoi)
+        yd = r["chu_de"][3:]
+        if pl.get("y_dinh") != yd:
+            return "mot_phan", f"lệch ý định {yd}→{pl.get('y_dinh')}"
+        co = {m["loai"] for m in kq["bang_chung"]["muc"]}
+        thieu = TV_YD_MUC.get(yd, set()) - co
+        if thieu:
+            return "mot_phan", f"thiếu bằng chứng {yd}: {','.join(sorted(thieu))}"
     cung = TV_CUNG.get(r["chu_de"])
     if cung and pl["loai"] == "la_so" and not cung & set(pl["cung"]):
         return "mot_phan", f"lệch cung {r['chu_de']}→{pl['cung']}"

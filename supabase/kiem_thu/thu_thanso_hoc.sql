@@ -1,4 +1,4 @@
--- TS-V3 tầng HỌC (migration 0015). Chạy SAU thu_nhiem_vu.sql (đã có người dùng 1111…/2222… và vai trò quản trị).
+-- TS-V3 tầng HỌC (migration 0016). Chạy SAU thu_nhiem_vu.sql (đã có người dùng 1111…/2222… và vai trò quản trị).
 set role service_role;
 select 'góp ý đúng' t, gui_phan_hoi_thanso('{"phai":"pitago","nguon":"hoi_dap","linh_vuc":"su_nghiep","ma_cau":"sn_sai_nghe","chu_ky":{"pitago":{"duong_doi":33,"su_menh":9}},"dung":true}') ->> 'ok';
 select 'chưa đúng ×4' t, count(gui_phan_hoi_thanso('{"phai":"pitago","nguon":"hoi_dap","ma_cau":"sn_sai_nghe","chu_ky":{"pitago":{"duong_doi":33}},"dung":false}')) from generate_series(1,4);

@@ -1,6 +1,6 @@
 // TS-V3 tầng HỌC — "Học từ góp ý": góp ý đúng/chưa đúng của người dùng (ẩn danh, chỉ chữ ký số) gom thành cụm.
 // Cụm đủ 5 lần "chưa đúng" chuyển "chờ duyệt"; người duyệt đọc mẫu ghi chú, sửa KB ở Kho tri thức (PR) rồi đánh dấu
-// "đã sửa". Hệ thống KHÔNG tự bật luật. Đọc qua qt_cum_bat_thuong (migration 0015).
+// "đã sửa". Hệ thống KHÔNG tự bật luật. Đọc qua qt_cum_bat_thuong (migration 0016).
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -32,7 +32,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
   const tt = TT.some(([k]) => k === sp.tt) ? sp.tt! : "cho_duyet";
   const { data, error } = await p.sb.rpc("qt_cum_bat_thuong", { p_trang_thai: tt });
   if (error) {
-    return <Card><p role="alert" className="text-sm text-cinnabar">Chưa đọc được góp ý (chạy migration 0015 trên Supabase; vai trò chủ sở hữu, biên tập hoặc thẩm định).</p></Card>;
+    return <Card><p role="alert" className="text-sm text-cinnabar">Chưa đọc được góp ý (chạy migration 0016 trên Supabase; vai trò chủ sở hữu, biên tập hoặc thẩm định).</p></Card>;
   }
   const d = data as DuLieu;
   return (

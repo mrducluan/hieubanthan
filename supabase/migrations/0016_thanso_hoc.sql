@@ -7,7 +7,7 @@
 --     bản V3 báo AUTO_PROMOTED mà không làm gì; ở đây người duyệt quyết, luật được sửa trong KB qua PR).
 --   * ky_uc_nguoi_dung: điều người dùng CHỦ ĐỘNG bấm ghi nhớ (mã câu băn khoăn + ghi chú ngắn), RLS chủ sở hữu, xoá
 --     được ngay, hết hạn 180 ngày, tối đa 50 mục. Chỉ dùng để cá nhân hoá cho chính người đó, không dùng huấn luyện.
--- Không pgvector, không bộ tính trong SQL (phép tính ở engine Python). Chạy SAU 0014. Rollback: 0015_thanso_hoc.down.sql
+-- Không pgvector, không bộ tính trong SQL (phép tính ở engine Python). Chạy SAU 0015. Rollback: 0016_thanso_hoc.down.sql
 
 create table if not exists thanso_phan_hoi (
     id        bigint generated always as identity primary key,

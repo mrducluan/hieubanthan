@@ -26,7 +26,7 @@
 4c. [ ] **Khi web vượt ~100.000 người dùng/tháng** (xem GA4): Vercel → Environment Variables → thêm
    `NEXT_PUBLIC_HOI_DONG_Y_COOKIE=1` → Redeploy — hộp hỏi đồng ý cookie hiện lại khi mở trang (quyết định 2026-10-09).
 4g. [ ] **Tầng HỌC thần số (TS-V3, 2026-10-20):** sau khi merge PR, Supabase → SQL Editor → chạy
-   `supabase/migrations/0015_thanso_hoc.sql` (rollback: `0015_thanso_hoc.down.sql`). Chưa chạy thì góp ý "đúng / chưa
+   `supabase/migrations/0016_thanso_hoc.sql` (rollback: `0016_thanso_hoc.down.sql`). Chưa chạy thì góp ý "đúng / chưa
    đúng" vẫn hiện nhưng không lưu; xem kết quả ở `/quan-tri/hoc`. Cron xoá dữ liệu hết hạn (`/api/cron/don-du-lieu-hoc`,
    3:41 sáng UTC) dùng chung `CRON_SECRET` với cron đối soát — đã có thì không cần làm gì. Đọc kỹ quy tắc riêng tư mới ở CLAUDE.md (mục Quy tắc
    code) — nhờ luật sư rà cùng chính sách quyền riêng tư (mục E).
@@ -609,3 +609,8 @@ xuất sửa thẻ chia sẻ / lời mời. Thưởng Sao khi mời bạn **cầ
 **Trước khi thu tiền (song song, anh + luật sư):** mục E — danh nghĩa vận hành, MST, thông báo Bộ Công Thương,
 luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoài. Thiếu phần này thì **không** bật bán Sao dù đã qua Gate 2.
 
+## TV-V2. Nâng cấp Tử vi (2026-10-19)
+- [ ] Sau khi PR TV-V2 merge + Render deploy engine: mở `/tu-vi`, thử 4 khối mới (Đường bay tứ hoá, 3 tháng tới, Định giờ sinh, Hợp tham) với lá số của anh.
+- [x] Quyết: lưu "Không biết giờ" vào tài khoản — **đã chốt: lưu** (migration 0015 nới `do_tin_gio` nhận `unknown`).
+- [x] Quyết: định giờ hiện khoảng giờ theo **giờ đồng hồ** nơi sinh (kèm dòng "theo giờ lịch" khi lệch) — **đã chốt**; chế độ 12 canh: Tý = 00:00–00:59 ngày đã nhập, nhập 23:xx thì thêm ứng viên "Giờ Tý muộn" — **đã chốt**.
+- [ ] Chạy migration `supabase/migrations/0015_do_tin_gio_unknown.sql` trên Supabase → SQL Editor (sau 0007). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0015). Chưa chạy thì web vẫn lưu được, chỉ là "Không biết giờ" lưu như chưa có giờ.

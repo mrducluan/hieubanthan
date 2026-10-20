@@ -1,4 +1,4 @@
--- Rollback 0015_thanso_hoc.sql: xoá bảng góp ý, cụm, ký ức (dữ liệu học + ký ức người dùng mất hẳn — đúng ý rollback).
+-- Rollback 0016_thanso_hoc.sql: xoá bảng góp ý, cụm, ký ức (dữ liệu học + ký ức người dùng mất hẳn — đúng ý rollback).
 drop function if exists don_du_lieu_hoc();
 drop function if exists qt_cap_nhat_cum(bigint, text, text);
 drop function if exists qt_cum_bat_thuong(text);

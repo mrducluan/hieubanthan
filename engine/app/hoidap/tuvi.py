@@ -13,13 +13,16 @@ from __future__ import annotations
 
 import datetime as dt
 import re
+import unicodedata
 
 from app import config
 from app.calc import lunar, tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
 from app.calc import tuvi_luu_nguyet as ln
 from app.hoidap import chung
 from app.kb import tuvi_kb as kb
+from app.kb import tuvi_phi_hoa_kb as pkb
 from app.luangiai import hoi as _h, tuvi_luu_nguyet as lnl
+from app.luangiai import tuvi_nhip_3_thang as nhip3, tuvi_phi_hoa as phl
 from app.narrative import hoi_van
 
 CHE_DO = ("tham_khao", "chi_tiet")
@@ -85,6 +88,62 @@ SU_KIEN = [r"tai nan", r"kien tung", r"mat tien", r"hao tai", r"lay chong", r"la
 NAM_SAU = [r"nam sau", r"nam toi"]
 TOI_KE = [r"dai han toi", r"muoi nam toi", r"10 nam toi", r"dai han sau"]
 SU_KIEN_CHAN_MEM = [r"tai nan", r"thang kien"]   # chi_tiet: trả lời kèm lưu ý thay vì từ chối
+# TV-V2: lỗ chặn riêng của câu hỏi thời điểm (bộ chung bắt "năm nào chết", chưa bắt "tháng nào tôi chết",
+# "chọn ngày mổ") — chọn ngày cho việc y tế thuộc bác sĩ, không xem bằng tử vi.
+TU_CHOI_TV = [r"(nam|thang|ngay|luc|khi|tuoi) nao (thi )?(toi |minh |em )?(se )?chet", r"(?<!\w)chet (nam|thang|ngay|luc) nao",
+              r"(?<!\w)mo (ruot|khoi u|noi soi)(?!\w)", r"sinh mo(?!\w)",
+              r"(ngay|thang|luc) .{0,20}(phau thuat|chua benh|nhap vien|dieu tri)"]
+# Bỏ dấu thì "mổ" trùng "mở/mơ/mộ" ("mở xưởng", "mở để kinh doanh", "mở mắt") → cụm mổ mơ hồ chỉ xét trên câu CÒN DẤU.
+TU_CHOI_TV_DAU = [r"(?<!\w)mổ (tim|mắt|u|bụng|lấy|xương|não|đẻ)(?!\w)"]
+
+# ------------------------------------------------------------------ TV-V2: 8 ý định (KB y_dinh_hoi)
+# Thứ tự = ưu tiên khi một câu khớp nhiều ý định (cụ thể trước, chung sau). Luật từ khoá công khai, không LLM.
+_CON_REF = (r"(?<!\w)con (toi|minh|em|trai|gai|nha|cai)(?!\w)|(?<!\w)be (nha|toi|minh)(?!\w)|"
+            r"(cua|cho|voi|giup) (con|be)(?!\w)|^con (sap|dang|hoc|thi|chon)")
+_HOC = (r"hoc hanh|viec hoc|chuyen hoc|(?<!\w)hoc (nghe|dai hoc|gi|nganh|truong|them|lop)|on thi|nganh hoc|"
+        r"chon nganh|chon truong|(?<!\w)thi (dai hoc|cu|chuyen cap|tot nghiep|vao|lop|hoc ky)")
+_VIEC_CHON = (r"khai truong|ky (ket )?hop dong|ky ket|chuyen nha|don nha|nhap trach|dong tho|xay nha|khoi cong|"
+              r"(?<!\w)cuoi(?!\w)|dam cuoi|an hoi|xuat hanh|(?<!\w)di xa|ra mat|nhan chuc|"
+              r"(?<!\w)mo (cong ty|cua hang|quan|shop|tiem|van phong|doanh nghiep|chi nhanh)")
+_THOI_CHON = (r"thang nao|ngay nao|khi nao|bao gio|luc nao|thoi diem|chon ngay|chon thang|ngay (dep|tot|hop)|"
+              r"thang (thuan|tot|hop)")
+Y_DINH_KW: dict[str, list[str]] = {
+    "hoc_hanh_con": [],                                    # ghép _CON_REF + _HOC, xem _y_dinh()
+    "chon_thoi_diem": [],                                  # ghép _VIEC_CHON + _THOI_CHON
+    "ba_thang_toi": [r"(3|ba|hai|vai|may|mot vai) thang (toi|sap toi|nua|sau|ke tiep)", r"90 ngay",
+                     r"quy (toi|nay|sau)(?!\w)", r"tung thang", r"thang nay va", r"(cac|nhung) thang (toi|sap toi)",
+                     r"moi thang"],
+    "tong_quan_nam": [],                                   # ghép năm + tổng quan
+    "di_hay_o": [r"nghi viec", r"nhay viec", r"doi viec", r"chuyen viec", r"bo viec", r"thoi viec", r"xin nghi",
+                 r"chuyen (cong ty|cho lam|nganh|sang nganh)", r"ra (ngoai )?lam rieng", r"cho lam (cu|khac|moi)",
+                 r"tim (cho|viec) (lam )?(khac|moi)", r"o lai (cong ty|hay)", r"o lai hay", r"o hay di",
+                 r"di hay o", r"ra ngoai lam", r"nhay (sang|cong ty)", r"giu cho lam"],
+    "phan_van": [r"phan van", r"luong lu", r"dan do", r"chua quyet", r"khong biet (co )?nen", r"nen chon",
+                 r"chon (ben|phuong an|cach|huong) nao", r"lua chon", r"quyet dinh (lon|quan trong|kho)"],
+    "tai_van": [r"tai van", r"tien bac", r"tien nong", r"dong tien", r"tien vao", r"tien ra", r"giu tien",
+                r"(?<!\w)de tien", r"tai chinh", r"chi tieu", r"kiem tien", r"van tien", r"thu nhap", r"de danh"],
+    "hieu_ban_than": [r"toan dien", r"toan bo (cuoc doi|la so)", r"tong quan la so", r"tong the (cuoc doi|la so)",
+                      r"tron (la so|cuoc doi)", r"ca la so", r"cuoc doi (toi|minh|em)", r"nhung chang",
+                      r"chang (doi|nao)", r"hieu (ro )?ban than", r"binh giai", r"luan (toan|ca|tron|het)",
+                      r"con nguoi toi", r"tu a toi z", r"tu a den z"],
+}
+_NAM_REF = r"(?<!\w)nam (nay|sau|toi|20\d\d|\w+ \w+ nay)|luu nien|ca nam|tron nam"
+_TONG = (r"tong quan|nhin chung|ca nam|tron nam|moi mat|(nhung|cac) mang|mang nao|tong the|buc tranh|"
+         r"cong viec tien bac|tong hop")
+_PHAN_VAN_YEU = r"(?<!\w)(nen|co nen) .{1,40} hay (?!khong)"
+# Cấu hình RULES theo ý định: loai đích, có cần ba lớp hạn / nhịp 3 tháng / trang gợi ý / checkpoint.
+Y_DINH_CAU_HINH = {
+    "di_hay_o": {"han": True},
+    "tai_van": {"han": True},
+    "hoc_hanh_con": {"han": True},
+    "phan_van": {},
+    "ba_thang_toi": {"loai_han": True, "nhip": True},
+    "chon_thoi_diem": {"loai_han": True, "nhip": True, "trang": True},
+    "tong_quan_nam": {"loai_han": True, "checkpoint": "nam"},
+    "hieu_ban_than": {"checkpoint": "ban_than"},
+}
+_LOAI_NHAN_Y_DINH = ("la_so", "han", "ky_thuat", "la_so_con")
+PHI_HOA_KW = [r"phi hoa", r"phi tinh", r"duong bay", r"lai nhan", r"cung (nao )?tu hoa"]
 
 
 # QA-RV: câu hỏi "sao X nằm ở đâu", "có cách cục gì", "sát tinh chiếu mệnh không".
@@ -176,6 +235,31 @@ def _nam_nhac(t: str) -> int | None:
     return int(m.group(1)) if m else None
 
 
+def _y_dinh(t: str) -> str | None:
+    """Ý định của câu (mã trong KB y_dinh_hoi) — None nếu không khớp."""
+    if re.search(_CON_REF, t) and re.search(_HOC, t):
+        return "hoc_hanh_con"
+    if re.search(_VIEC_CHON, t) and re.search(_THOI_CHON, t):
+        return "chon_thoi_diem"
+    if chung.co(t, Y_DINH_KW["ba_thang_toi"]):
+        return "ba_thang_toi"
+    if re.search(_NAM_REF, t) and re.search(_TONG, t):
+        return "tong_quan_nam"
+    for ma in ("di_hay_o", "phan_van", "tai_van"):
+        if chung.co(t, Y_DINH_KW[ma]):
+            return ma
+    if re.search(_PHAN_VAN_YEU, t):
+        return "phan_van"
+    if chung.co(t, Y_DINH_KW["hieu_ban_than"]):
+        return "hieu_ban_than"
+    return None
+
+
+def _kb_y_dinh(ma: str) -> dict | None:
+    ds = pkb._lay("y_dinh_hoi")
+    return next((y for y in ds if isinstance(y, dict) and y.get("ma") == ma), None) if isinstance(ds, list) else None
+
+
 def phan_loai(cau_hoi: str, che_do: str = "tham_khao") -> dict:
     gioi_thieu, t_chinh = _h._tach_gioi_thieu(cau_hoi)
     t = chung.chuan_hoa(cau_hoi)
@@ -187,12 +271,14 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao") -> dict:
           "phu": _phu_nhac(t_chinh), "giai_thich": _giai_thich_khop(t_chinh),
           "ca_nhan": chung.co(t_chinh, CA_NHAN), "su_kien": chung.co(t, SU_KIEN),
           "nam_xem": _nam_nhac(t), "han_sau": chung.co(t, NAM_SAU), "han_toi": chung.co(t, TOI_KE),
-          "hoi_thang": chung.co(t, THANG), "sao_tim": []}
+          "hoi_thang": chung.co(t, THANG), "sao_tim": [], "y_dinh": None}
     t_loc = t
     if che_do == "chi_tiet":
         for m in SU_KIEN_CHAN_MEM:
             t_loc = re.sub(m, " ", t_loc)
-    db = chung.dac_biet(t_loc)
+    t_dau = unicodedata.normalize("NFC", cau_hoi).lower()
+    db = chung.dac_biet(t_loc) or ("tu_choi_nhe" if chung.co(t_loc, TU_CHOI_TV)
+                                   or any(re.search(m, t_dau) for m in TU_CHOI_TV_DAU) else None)
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq
@@ -202,6 +288,10 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao") -> dict:
         kq["loai"] = "la_so_con"
     elif chung.co(t, NGUOI_KHAC):
         kq["loai"] = "nguoi_khac"
+    elif chung.co(t_chinh, PHI_HOA_KW) and (kq["ca_nhan"] or chung.co(t_chinh, [r"la so"])):
+        kq["loai"] = "phi_hoa"
+    elif chung.co(t_chinh, PHI_HOA_KW) and not kq["ca_nhan"]:
+        kq["loai"] = "phi_hoa_khai_niem"
     elif kq["giai_thich"] and not kq["ca_nhan"]:
         kq["loai"] = "ky_thuat"
     elif not kq["ca_nhan"] and (cc := _cach_nhac(t_chinh)):
@@ -230,7 +320,30 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao") -> dict:
     if kq["loai"] == "han":
         kq["xu_ly"] = "tra_loi_kem_luu_y"
         kq["cung"] = kq["cung"] or [c for c, m in CHU_DE_CUNG if chung.co(t_chinh, m)][:1]
+    yd = _y_dinh(t_chinh) or _y_dinh(t)          # ý định có thể nằm trong lời dẫn ("Mình đang phân vân…, tử vi nói gì?")
+    if yd in ("tai_van", "di_hay_o") and _co_ten(t_chinh, CUNG_KW):
+        yd = None                       # "Cung Tài Bạch của tôi nói gì về tiền bạc?" = câu bản mệnh, không phải ý định
+    if yd and _kb_y_dinh(yd) and (kq["loai"] in ("la_so", "han", "ky_thuat")
+                                  or (kq["loai"] == "la_so_con" and yd == "hoc_hanh_con")):
+        _ap_y_dinh(kq, yd, t_chinh)
     return kq
+
+
+def _ap_y_dinh(kq: dict, yd: str, t: str) -> None:
+    """Gắn ý định: đổi loại khi cần đọc hạn, chọn cung theo KB khi câu không nêu mảng nào."""
+    ch, y = Y_DINH_CAU_HINH[yd], _kb_y_dinh(yd)
+    tu_chu_de = [c for c, m in CHU_DE_CUNG if chung.co(t, m)]
+    kq["y_dinh"] = yd
+    if kq["loai"] in ("ky_thuat", "la_so_con"):
+        kq["loai"] = "la_so"
+    if ch.get("loai_han"):
+        kq["loai"] = "han"
+    if yd == "hieu_ban_than":
+        kq["cung"] = ["Mệnh"] + [c for c in kq["cung"] if c != "Mệnh"][:1]
+    elif kq["loai"] == "la_so" and (not kq["cung"] or (kq["cung"] == ["Mệnh"] and not tu_chu_de
+                                                        and not _co_ten(t, CUNG_KW))):
+        kq["cung"] = ([] if yd == "phan_van" else y["cung_xem"][:2]) or ["Mệnh"]
+    kq["xu_ly"] = "tra_loi_kem_luu_y"
 
 
 # ------------------------------------------------------------------ lá số (CALC → dạng gọn)
@@ -262,7 +375,9 @@ def tom_tat(la: dict) -> dict:
             ban = theo_chi.get(tuan_triet_vendor.CHI[i ^ 1])
             if ban is not None and sao not in ban["phu_tinh"]:
                 ban["phu_tinh"].append(sao)
+    can_nam = str(la.get("chineseDate", "")).split(" ")[0]
     return {"cuc": la["fiveElementsClass"], "menh_chu": la["soul"], "than_chu": la["body"],
+            "can_nam": can_nam if can_nam in lunar.CAN else None,
             "cung": cung, "tu_hoa": sorted(tu_hoa, key=lambda x: THU_TU_HOA.index(x["hoa"])),
             "cach_cuc": tuvi_cach_cuc.nhan_dien(la)}
 
@@ -385,8 +500,10 @@ def _lop_han(ls: dict, lop: str, vh: dict, che_do: str) -> dict:
 
 
 def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | None = None,
-                   lnm: dict | None = None) -> dict:
-    goi = {"phan_loai": {k: pl[k] for k in ("loai", "che_do", "xu_ly", "cung")},
+                   lnm: dict | None = None, them: dict | None = None) -> dict:
+    """`them` (TV-V2) = {"phi": tuvi_phi_hoa.lap(...), "nhip": tuvi_nhip_3_thang.lap(...)} khi đã tính."""
+    them = them or {}
+    goi = {"phan_loai": {k: pl.get(k) for k in ("loai", "che_do", "xu_ly", "cung", "y_dinh")},
            "muc": [], "can_them": [], "mau": None, "luu_y": None}
     muc = goi["muc"]
     if pl["xu_ly"] == "an_toan":
@@ -439,12 +556,23 @@ def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | No
             if m:
                 muc.append(m)
         return chung.ket(goi)
+    if loai == "phi_hoa_khai_niem":
+        for ma in ("phi_hoa", "tu_hoa", "lai_nhan", "xung_chieu"):
+            k = pkb.khai_niem(ma)
+            if k:
+                muc.append({"loai": "khai_niem_phi_hoa", "ma": ma, "ten": k["ten"], "giai_thich": k["giai_thich"],
+                            **pkb.meta()})
+        muc.append({"loai": "ghi_chu", "noi_dung": phl.PHAI["ghi_chu"]})
+        return chung.ket(goi)
     if ls is None:
         goi["can_them"] = ["la_so"]
         goi["mau"] = kb.mau("can_la_so")
         return chung.ket(goi)
     if loai == "vi_tri_sao":
         _tim_sao(ls, pl["sao_tim"], muc)
+        return chung.ket(goi)
+    if loai == "phi_hoa":
+        _doc_phi_hoa(them.get("phi"), muc)
         return chung.ket(goi)
     if loai == "cach_cuc_la_so":
         ds = ls.get("cach_cuc", [])
@@ -498,7 +626,7 @@ def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | No
                     {"thang": x["thang"], "nhuan": x["nhuan"], "phan": x["phan"], "cung_goc": x["cung_goc"],
                      "ket": x["xu_huong"]["ket"]} for x in lnm["thang"]], **kb.meta()})
             muc.append({"loai": "ghi_chu", "noi_dung": lnm["uu_tien"] + " Bối cảnh năm và vận ở dưới."})
-        elif pl.get("hoi_thang"):
+        elif pl.get("hoi_thang") and not them.get("nhip"):
             muc.append({"loai": "ghi_chu", "noi_dung": (
                 "Muốn xem từng tháng (lưu nguyệt), hãy mở lá số của bạn. Dưới đây là bức tranh cả năm.")})
         if pl["su_kien"]:
@@ -517,10 +645,10 @@ def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | No
             c = _cung_ten(ls, ten)
             muc.append({"loai": "cung_trong_han", "cung": ten, "chu_de": kb.cung(ten)["xem_duoc"],
                         "chinh_tinh": [s["ten"] for s in c["chinh_tinh"]], **kb.meta()})
-        if chung.co(pl["cau_chuan_hoa"], [r"nam nao", r"khi nao", r"bao gio"]):
-            muc.append({"loai": "cac_dai_han", "ds": [
-                {"cung_goc": c["ten"], "tu_tuoi": c["dai_han"][0], "den_tuoi": c["dai_han"][1]}
-                for c in sorted(ls["cung"], key=lambda c: c["dai_han"][0])], **kb.meta()})
+        if chung.co(pl["cau_chuan_hoa"], [r"nam nao", r"khi nao", r"bao gio"]) and not pl.get("y_dinh"):
+            muc.append({"loai": "cac_dai_han", "ds": _cac_dai_han(ls), **kb.meta()})
+        if pl.get("y_dinh"):
+            _them_y_dinh(pl, ls, them, muc)
         goi["luu_y"] = kb.luu_y(pl["che_do"])
         return chung.ket(goi)
     # la_so cá nhân
@@ -533,9 +661,128 @@ def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | No
         m = _m_phu(p, noi)
         if m:
             muc.append(m)
+    if pl.get("y_dinh"):
+        if vh is not None and Y_DINH_CAU_HINH[pl["y_dinh"]].get("han"):
+            muc.append({"loai": "tuoi", "tuoi_mu": vh["tuoi_mu"], "ngay_xem": vh.get("ngay_xem")})
+            for lop in ("dai_han", "luu_nien", "tieu_han"):
+                muc.append(_lop_han(ls, lop, vh, pl["che_do"]))
+            muc.append({"loai": "ghi_chu", "noi_dung": "Thứ tự ưu tiên khi đọc: " + lnl.UU_TIEN})
+            goi["luu_y"] = kb.luu_y(pl["che_do"])
+        _them_y_dinh(pl, ls, them, muc)
     if "Tật Ách" in pl["cung"]:
         goi["luu_y"] = kb.luu_y("tat_ach")
     return chung.ket(goi)
+
+
+def _cac_dai_han(ls: dict) -> list[dict]:
+    return [{"cung_goc": c["ten"], "tu_tuoi": c["dai_han"][0], "den_tuoi": c["dai_han"][1]}
+            for c in sorted(ls["cung"], key=lambda c: c["dai_han"][0])]
+
+
+# ------------------------------------------------------------------ TV-V2: bằng chứng theo ý định
+_TOI_DA_DUONG = 4
+_THU_TU_HOA_DUONG = {"Kỵ": 0, "Lộc": 1, "Khoa": 2, "Quyền": 3}
+
+
+def _gon_duong(d: dict) -> dict:
+    return {k: d[k] for k in ("tu_cung", "can", "sao", "hoa", "den_cung", "xung_cung", "tu_hoa", "nghia")}
+
+
+def _duong_lien_quan(phi: dict, cung_y: list[str], yd: str) -> list[dict]:
+    """Đường bay chạm các cung của ý định: tự hoá tại cung đó, bay vào, hoặc Kỵ chiếu tới; Kỵ/Lộc trước."""
+    if yd == "hieu_ban_than":
+        ung = [d for d in phi["duong_bay"] if d["den_cung"] is not None
+               and (d["den_cung"] == "Mệnh" or (d["tu_cung"] == "Mệnh" and d["tu_hoa"]))]
+    else:
+        cy = set(cung_y)
+        ung = [d for d in phi["duong_bay"] if d["den_cung"] is not None and (
+            (d["tu_hoa"] and d["tu_cung"] in cy)
+            or (not d["tu_hoa"] and d["hoa"] in ("Lộc", "Kỵ") and d["den_cung"] in cy and d["tu_cung"] != d["den_cung"])
+            or (not d["tu_hoa"] and d["hoa"] == "Kỵ" and d["xung_cung"] in cy))]
+    ung.sort(key=lambda d: (not d["tu_hoa"], _THU_TU_HOA_DUONG[d["hoa"]], cung_y.index(d["tu_cung"])
+                            if d["tu_cung"] in cung_y else 99))
+    ra, da = [], set()
+    for d in ung:
+        k = (d["tu_cung"], d["hoa"])
+        if k not in da:
+            da.add(k)
+            ra.append(_gon_duong(d))
+    return ra[:_TOI_DA_DUONG]
+
+
+def _them_y_dinh(pl: dict, ls: dict, them: dict, muc: list) -> None:
+    yd = pl["y_dinh"]
+    y, ch = _kb_y_dinh(yd), Y_DINH_CAU_HINH[yd]
+    cung_y = list(dict.fromkeys([c for c in pl["cung"] if c in THU_TU_CUNG] + y["cung_xem"]))
+    phi, nhip = them.get("phi"), them.get("nhip")
+    if nhip:
+        muc.append({"loai": "nhip_3_thang", "so_thang": 3, "ten_phai": nhip["ten_phai_luu_nguyet"],
+                    "uu_tien": nhip["uu_tien"]["ghi_chu"],
+                    "thang": [{k: t[k] for k in ("thang", "nhuan", "phan", "nam_am", "can_chi", "tu", "den", "cung_goc",
+                                                 "muc", "nhan_muc", "goi_y", "cau_tu_soi")}
+                              | {"ly_do": [x["noi_dung"] for x in t["ly_do"]]} for t in nhip["thang"]],
+                    **pkb.meta()})
+    if ch.get("trang"):
+        thuan = [t for t in (nhip or {}).get("thang", []) if t["muc"] == "thuan"]
+        muc.append({"loai": "goi_y_trang", "duong": "/xem-ngay-tot", "ten": "Xem ngày tốt",
+                    "thang_thuan": [{"thang": t["thang"], "nhuan": t["nhuan"], "can_chi": t["can_chi"]} for t in thuan]})
+    if phi and yd not in ("ba_thang_toi", "chon_thoi_diem", "tong_quan_nam"):
+        m = {"loai": "phi_hoa_y_dinh", "duong": _duong_lien_quan(phi, cung_y, yd), **pkb.meta()}
+        if yd == "hieu_ban_than":
+            m["lai_nhan"] = phi["lai_nhan"]
+        muc.append(m)
+    if phi and phi.get("luu_nien") and (ch.get("han") or yd == "tong_quan_nam"):
+        ln_ = phi["luu_nien"]
+        muc.append({"loai": "luu_nien_phi_hoa", "can_chi": ln_["can_chi"], "hoa": ln_["hoa"],
+                    "cham": [h["hoa"] for h in ln_["hoa"] if h["den_cung"] in cung_y or
+                             (h["hoa"] == "Kỵ" and h["xung_cung"] in cung_y)] if yd != "tong_quan_nam" else [],
+                    **pkb.meta()})
+    if ch.get("checkpoint"):
+        ds_cung = THU_TU_CUNG if ch["checkpoint"] == "nam" else y["cung_xem"]
+        hoa_nam = {}
+        for h in ((phi or {}).get("luu_nien") or {}).get("hoa", []):
+            hoa_nam.setdefault(h["den_cung"], []).append(f"{h['hoa']} ({h['sao']})")
+        ds = []
+        for ten in ds_cung:
+            c = _cung_ten(ls, ten)
+            ds.append({"cung": ten, "chinh_tinh": [s["ten"] + (f" ({s['do_sang']})" if s["do_sang"] else "")
+                                                   for s in c["chinh_tinh"]],
+                       "hoa_nam": hoa_nam.get(ten, []) if ch["checkpoint"] == "nam" else [],
+                       "chu_de": kb.cung(ten)["xem_duoc"] if ch["checkpoint"] == "ban_than" else None})
+        muc.append({"loai": "cung_checkpoint", "kieu": ch["checkpoint"], "ds": ds, **kb.meta()})
+        if ch["checkpoint"] == "ban_than":
+            muc.append({"loai": "cac_dai_han", "ds": _cac_dai_han(ls), **kb.meta()})
+    sao_trong = []
+    for sao in y.get("sao_xem", []):
+        noi = [c["ten"] for c in ls["cung"] if sao in [s["ten"] for s in c["chinh_tinh"]] or sao in c["phu_tinh"]]
+        if noi:
+            sao_trong.append({"sao": sao, "cung": " và ".join(noi)})
+    muc.append({"loai": "y_dinh", "ma": yd, "ten": y["ten"], "cach_ghep": y["cach_ghep"], "cung_xem": cung_y,
+                "sao_trong_la": sao_trong, "source_id": y.get("source_id"), "school_id": y.get("school_id"),
+                **pkb.meta()})
+    if yd == "hoc_hanh_con":
+        muc.append({"loai": "ghi_chu", "noi_dung": (
+            "Đây là góc nhìn từ lá số của cha mẹ về cách đồng hành với con; không đoán điểm, không chọn trường hay "
+            "nghề thay con. Muốn xem kỹ hơn, hãy lập lá số của chính con.")})
+
+
+def _doc_phi_hoa(phi: dict | None, muc: list) -> None:
+    """Câu hỏi về đường bay tứ hoá của chính lá số (chương "Đường bay tứ hoá" của Luận giải toàn bộ)."""
+    if not phi:
+        return
+    muc.append({"loai": "phi_hoa_tong", "lai_nhan": phi["lai_nhan"],
+                "tu_hoa": [_gon_duong(d) for d in phi["tu_hoa"]],
+                "vao_menh": [_gon_duong(d) for d in phi["vao_menh"] if not d["tu_hoa"]], **pkb.meta()})
+    muc.append({"loai": "phi_hoa_noi_bat", "ds": [
+        {"loai_noi_bat": n["loai"], "tieu_de": n["tieu_de"], "nghia": n["nghia"], "viec_nen_lam": n["viec_nen_lam"],
+         "cau_tu_soi": n["cau_tu_soi"], "ghi_chu_tuan_triet": n["ghi_chu_tuan_triet"]} for n in phi["noi_bat"][:5]],
+        **pkb.meta()})
+    for ma in ("phi_hoa", "lai_nhan"):
+        k = pkb.khai_niem(ma)
+        if k:
+            muc.append({"loai": "khai_niem_phi_hoa", "ma": ma, "ten": k["ten"], "giai_thich": k["giai_thich"],
+                        **pkb.meta()})
+    muc.append({"loai": "ghi_chu", "noi_dung": phl.PHAI["ghi_chu"]})
 
 
 def _tim_sao(ls: dict, sao_tim: list[str], muc: list) -> None:
@@ -590,6 +837,20 @@ LOP_TEN = {"dai_han": "Đại hạn", "luu_nien": "Lưu niên", "tieu_han": "Ti�
 def _ngay(d: dt.date | str) -> str:
     d = dt.date.fromisoformat(d) if isinstance(d, str) else d
     return f"{d.day}/{d.month}/{d.year}"
+
+
+def _ten_thang(t: dict) -> str:
+    return f"tháng {t['thang']}{' nhuận' if t['nhuan'] else ''} âm ({t['can_chi']})"
+
+
+def _cau_duong(d: dict) -> str:
+    if d["tu_hoa"]:
+        dau = f"Cung {d['tu_cung']} tự hoá {d['hoa']} ({d['sao']})"
+    else:
+        dau = f"Can {d['can']} của cung {d['tu_cung']} hoá {d['sao']} {d['hoa']} vào cung {d['den_cung']}"
+        if d["hoa"] == "Kỵ" and d["xung_cung"]:
+            dau += f", chiếu cung {d['xung_cung']}"
+    return f"{dau}: {d['nghia'].rstrip('.')}."
 
 
 def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
@@ -725,6 +986,79 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         return (f"Sát tinh trong tam phương tứ chính của Mệnh — {ds}. Sát tinh không phải điềm dữ định sẵn: "
                 "chúng làm cung thêm sức ép và tính quyết liệt; gặp chính tinh sáng thì thành nghị lực, "
                 "gặp chính tinh hãm thì dễ vấp — đọc tiếp nghĩa từng sao bên dưới.", None)
+    if l == "nhip_3_thang":
+        tom = "; ".join(f"{_ten_thang(t)} — {t['nhan_muc']}" for t in m["thang"])
+        s = f"Nhịp {m['so_thang']} tháng tới (lưu nguyệt theo phái {m['ten_phai']}): {tom}."
+        for t in m["thang"]:
+            s += (f" {_ten_thang(t)[0].upper()}{_ten_thang(t)[1:]} (từ {_ngay(t['tu'])} đến {_ngay(t['den'])} dương lịch, "
+                  f"Mệnh tháng ở cung {t['cung_goc']}): {t['nhan_muc']}.")
+            if t["ly_do"]:
+                s += " " + " ".join(t["ly_do"])
+            s += f" {t['goi_y']}"
+        s += f" Thứ tự ưu tiên khi đọc: {m['uu_tien']}"
+        return s, m["thang"][0]["cau_tu_soi"] if m["thang"] else None
+    if l == "goi_y_trang":
+        s = ""
+        if m["thang_thuan"]:
+            s = ("Theo nhịp tứ hoá, tháng nổi lên mức Thuận trong ba tháng tới: "
+                 + ", ".join(_ten_thang(t) for t in m["thang_thuan"]) + ". ")
+        else:
+            s = "Trong ba tháng tới chưa có tháng nào nổi lên mức Thuận theo nhịp tứ hoá — đó là tháng giữ nhịp, không phải tháng xấu. "
+        return (s + f"Tử vi chỉ gợi ý nhịp tháng; muốn chọn ngày, giờ cụ thể (ngày hoàng đạo, giờ tốt, ngày nên tránh "
+                f"theo tuổi), hãy dùng công cụ {m['ten']} ({m['duong']}). Thời điểm chỉ là một yếu tố, sự chuẩn bị của "
+                "bạn quan trọng hơn."), None
+    if l == "phi_hoa_y_dinh":
+        s = ""
+        if m.get("lai_nhan") and m["lai_nhan"].get("cung"):
+            s = (f"Lai nhân cung của bạn là cung {m['lai_nhan']['cung']} (can {m['lai_nhan']['can']}, trùng can năm "
+                 "sinh) — mảng đời bạn mang theo nhiều tâm sức nhất. ")
+        if not m["duong"]:
+            return (s + "Theo phái phi tinh, không có đường bay Lộc hay Kỵ nổi bật chạm vào các cung của câu hỏi này "
+                    "— đọc chính tinh và ba lớp hạn là đủ."), None
+        return s + "Đường bay tứ hoá liên quan (phái phi tinh): " + " ".join(_cau_duong(d) for d in m["duong"]), None
+    if l == "luu_nien_phi_hoa":
+        ds = ", ".join(f"Hoá {h['hoa']} ({h['sao']}) vào cung {h['den_cung']}" for h in m["hoa"] if h["den_cung"])
+        s = f"Tứ hoá lưu niên năm {m['can_chi']} theo can năm: {ds}."
+        if m["cham"]:
+            s += " Mảng bạn hỏi có " + ", ".join(f"Hoá {h} của năm ({phl._Y_HOA[h]})" for h in m["cham"]) + "."
+        return s, None
+    if l == "cung_checkpoint":
+        if m["kieu"] == "nam":
+            ds = "; ".join(f"{x['cung']}: {', '.join(x['chinh_tinh']) or 'vô chính diệu'}"
+                           + (f" — Hoá {', '.join(x['hoa_nam'])} của năm" if x["hoa_nam"] else "") for x in m["ds"])
+            return f"Mười hai mảng để soi trong năm (cung gốc và chính tinh): {ds}.", None
+        ds = "; ".join(f"{x['cung']} ({x['chu_de']}): {', '.join(x['chinh_tinh']) or 'vô chính diệu'}" for x in m["ds"])
+        return f"Các cung chốt để hiểu toàn diện bản thân: {ds}.", None
+    if l == "y_dinh":
+        s = f"Cách đọc nhóm câu hỏi “{m['ten']}”: {m['cach_ghep']}"
+        if m["sao_trong_la"]:
+            s += " Sao nên soi cho câu này trong lá số của bạn: " + ", ".join(
+                f"{x['sao']} ở {x['cung']}" for x in m["sao_trong_la"]) + "."
+        return s, None
+    if l == "phi_hoa_tong":
+        ln_ = m["lai_nhan"]
+        s = (f"Lai nhân cung của bạn là cung {ln_['cung']} (can {ln_['can']}, trùng can năm sinh)." if ln_.get("cung")
+             else "")
+        if m["tu_hoa"]:
+            s += " Cung tự hoá trong lá số: " + "; ".join(
+                f"{d['tu_cung']} tự hoá {d['hoa']} ({d['sao']})" for d in m["tu_hoa"]) + "."
+        else:
+            s += " Lá số không có cung nào tự hoá."
+        if m["vao_menh"]:
+            s += " Đường bay vào cung Mệnh: " + "; ".join(
+                f"can {d['can']} của cung {d['tu_cung']} hoá {d['sao']} {d['hoa']}" for d in m["vao_menh"]) + "."
+        else:
+            s += " Không có đường bay nào từ cung khác vào cung Mệnh."
+        return s.strip(), None
+    if l == "phi_hoa_noi_bat":
+        ds = " ".join(f"{x['tieu_de']}: {x['nghia']} Việc nên làm: {x['viec_nen_lam']}" for x in m["ds"])
+        tt = next((x["ghi_chu_tuan_triet"] for x in m["ds"] if x["ghi_chu_tuan_triet"]), None)
+        if ds and tt:
+            ds += f" Lưu ý Tuần/Triệt: {tt}"
+        return (f"Đường bay nổi bật — {ds}" if ds else "Lá số không có đường bay nổi bật theo luật đang dùng."), \
+            (m["ds"][0]["cau_tu_soi"] if m["ds"] else None)
+    if l == "khai_niem_phi_hoa":
+        return f"{m['ten']}: {m['giai_thich']}", None
     if l == "giai_thich":
         return f"{m['tieu_de']}: {m['noi_dung']}", None
     if l == "ghi_chu":
@@ -769,14 +1103,17 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
     pl = phan_loai(cau_hoi, che_do)
     ls = vh = vh_toi = lnm = None
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
-    can_la_so = pl["loai"] in ("la_so", "han", "vi_tri_sao", "cach_cuc_la_so", "sat_tinh_la_so")
+    can_la_so = pl["loai"] in ("la_so", "han", "vi_tri_sao", "cach_cuc_la_so", "sat_tinh_la_so", "phi_hoa")
+    yd = pl.get("y_dinh")
+    ch = Y_DINH_CAU_HINH.get(yd, {})
+    them: dict = {}
     if sinh and can_la_so:
         ls = tom_tat(az.an_sao_tho(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], "vi-VN",
                                      tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
                                      hoa_linh=sinh.get("hoa_linh", "viet"),
                                      thang_nhuan=sinh.get("thang_nhuan", "thang_sau"),
                                      lich=sinh.get("lich", "viet")))
-        if pl["loai"] == "han":
+        if pl["loai"] == "han" or ch.get("han"):
             xem = ngay_xem
             if pl["nam_xem"]:
                 xem = dt.date(pl["nam_xem"], 7, 1)
@@ -792,10 +1129,19 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
                                     tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
                                     thang_nhuan=sinh.get("thang_nhuan", "thang_sau"),
                                     lich=sinh.get("lich", "viet"))
-        if pl["loai"] == "han" and pl["hoi_thang"]:
+        if pl["loai"] == "han" and pl["hoi_thang"] and not ch.get("nhip"):
             pl["thang_hoi"] = thang_hoi(pl["cau_chuan_hoa"], ngay_xem, pl["nam_xem"], pl["han_sau"])
             lnm = lnl.lap_nam(sinh, pl["thang_hoi"]["nam_am"], sinh.get("luu_nguyet", ln.MAC_DINH), ls=ls)
-    goi = goi_bang_chung(pl, ls, vh, vh_toi, lnm)
+        elif yd == "ba_thang_toi" and chung.co(pl["cau_chuan_hoa"], [r"tung thang", r"moi thang"]):
+            pl["thang_hoi"] = thang_hoi("", ngay_xem, pl["nam_xem"], pl["han_sau"])
+            lnm = lnl.lap_nam(sinh, pl["thang_hoi"]["nam_am"], sinh.get("luu_nguyet", ln.MAC_DINH), ls=ls)
+        if ch.get("nhip"):
+            them["nhip"] = nhip3.lap(sinh, ngay_xem, sinh.get("luu_nguyet", ln.MAC_DINH), ls=ls)
+        if (yd or pl["loai"] == "phi_hoa") and ls.get("can_nam"):
+            xem_phi = dt.date.fromisoformat(vh["ngay_xem"]) if vh else ngay_xem
+            nam_am = lunar.solar_to_lunar(xem_phi.day, xem_phi.month, xem_phi.year, config.CALENDAR_MERIDIAN_TZ)[2]
+            them["phi"] = phl.lap(ls, ls["can_nam"], nam_am if (ch.get("han") or yd == "tong_quan_nam") else None)
+    goi = goi_bang_chung(pl, ls, vh, vh_toi, lnm, them)
     van = van_template(goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:

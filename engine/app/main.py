@@ -42,6 +42,7 @@ from app.tuoi_dan_gian_api import router as tuoi_dan_gian_router
 from app.phongthuy_api import router as phongthuy_router
 from app.quan_tri_api import router as quan_tri_router
 from app.tuvi_api import router as tuvi_router
+from app.tuvi_v2_api import router as tuvi_v2_router
 
 giam_sat.khoi_tao()   # Sentry — chỉ bật khi có SENTRY_DSN, không gửi dữ liệu cá nhân
 
@@ -88,6 +89,7 @@ async def require_engine_key(request: Request, call_next):
 
 
 app.include_router(tuvi_router)
+app.include_router(tuvi_v2_router)
 app.include_router(kinhdich_router)
 app.include_router(battu_router)
 app.include_router(phongthuy_router)

@@ -100,11 +100,11 @@ giữ: **một bộ tính** (Python, golden) — SQL chỉ còn là tầng HỌC
 | 03 `graph_edges` + `fn_resolve_3school_matrix` | `luangiai/tong_hop.tuong_tac` + KB `thanso_do_thi.json` | Không còn lỗi khoá ngoại / mảng NULL; cạnh sinh từ số thật của người dùng |
 | 04 `question_intents` + hybrid search | KB `thanso_noi_dau.json` + `hoi.phan_loai` + `noi_dau.lien_quan` | Tất định, test định tuyến 25/25; không cần embedding |
 | 05 `fn_assemble_llm_context_payload` | `tong_hop.ngu_canh` · `/v1/thanso/ngu-canh` | Quy tắc diễn đạt ở KB; câu khủng hoảng không dựng ngữ cảnh |
-| 06 vòng tự cải thiện | migration **0015** `thanso_phan_hoi` + `thanso_cum_bat_thuong` + `/quan-tri/hoc` | Chỉ chữ ký số (không tên/ngày sinh); ≥ 5 lần → chờ duyệt, người duyệt sửa KB (V3 báo "AUTO_PROMOTED" mà không làm gì) |
+| 06 vòng tự cải thiện | migration **0016** `thanso_phan_hoi` + `thanso_cum_bat_thuong` + `/quan-tri/hoc` | Chỉ chữ ký số (không tên/ngày sinh); ≥ 5 lần → chờ duyệt, người duyệt sửa KB (V3 báo "AUTO_PROMOTED" mà không làm gì) |
 | 07 biểu đồ + mũi tên | `calc/thanso_mo_rong.py` | Đủ 8 mũi tên (V3 trả mảng rỗng) |
 | 07 `interpretation_cache` | không làm | Engine tất định; LLM có hạn mức RL-1 |
 | 08 service TS | `web/lib/services/numerology-engine.service.ts` | Gọi engine, không `pg`, không hàm `_v2` không tồn tại, không năm viết cứng |
-| 09 `user_episodic_memories` | migration **0015** `ky_uc_nguoi_dung` | Chỉ điều người dùng bấm ghi nhớ; RLS chủ sở hữu; xoá được; 180 ngày |
+| 09 `user_episodic_memories` | migration **0016** `ky_uc_nguoi_dung` | Chỉ điều người dùng bấm ghi nhớ; RLS chủ sở hữu; xoá được; 180 ngày |
 | 09 radar tháng | `nhip_ca_nhan` / `hom_nay` (KB tháng cá nhân) | Bỏ lời ra lệnh / dự báo ("chốt sale", "sức khoẻ") |
 | `vector` (pgvector) | chưa bật | Chưa có nguồn embedding; bật khi ≥ 500 câu không nhận ra/tháng |
 

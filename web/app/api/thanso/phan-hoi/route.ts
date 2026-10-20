@@ -1,6 +1,6 @@
 // POST /api/thanso/phan-hoi — TS-V3 tầng HỌC: góp ý "đúng / chưa đúng" cho một câu trả lời thần số.
 // Họ tên + ngày sinh chỉ dùng trong lượt gọi để engine tính CHỮ KÝ SỐ (các con số của ba phái); bảng chỉ lưu chữ ký,
-// mã câu, phái, ghi chú đã lọc (khi người dùng tích đồng ý) — không tên, không ngày sinh, không user_id (migration 0015).
+// mã câu, phái, ghi chú đã lọc (khi người dùng tích đồng ý) — không tên, không ngày sinh, không user_id (migration 0016).
 // Chưa bật Supabase → trả ok, luu: false (góp ý vẫn đo ẩn danh trên PostHog ở trình duyệt).
 import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";

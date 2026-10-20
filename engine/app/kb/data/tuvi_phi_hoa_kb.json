@@ -1,0 +1,902 @@
+{
+ "_nguon": "Phi tinh tứ hoá 12 cung, nhịp ba tháng, hợp tham, định giờ — Ban biên tập Hiểu Bản Thân viết lại từ ý tài liệu chủ dự án gửi, đối chiếu khung Phi tinh Trung Châu và Nam phái Việt Nam. Nháp AI, chờ chuyên gia duyệt.",
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "source": {
+  "phi_tinh_trung_chau": "Phi tinh tứ hoá — Trung Châu phái",
+  "tu_vi_dau_so_toan_thu": "Tử Vi Đẩu Số Toàn Thư (Trần Đoàn, tương truyền)",
+  "khung_nam_phai": "Khung Nam phái Việt Nam (Nguyễn Phát Lộc)",
+  "hbt_tong_hop": "Ban biên tập Hiểu Bản Thân tổng hợp"
+ },
+ "school": {
+  "phi_tinh": "Phi tinh tứ hoá (Trung Châu / Khâm Thiên)",
+  "nam_phai": "Nam phái Việt Nam (Tam hợp, Thái Tuế, Tuần Triệt)"
+ },
+ "khai_niem": {
+  "phi_hoa": {
+   "ten": "Phi hoá (đường bay tứ hoá)",
+   "giai_thich": "Mỗi cung trên lá số mang một thiên can. Từ can ấy, bốn hoá Lộc, Quyền, Khoa, Kỵ được gắn vào bốn sao; sao nằm ở cung nào thì hoá được xem như bay tới cung đó. Đường bay cho thấy mảng đời này đang tác động tới mảng đời nào.",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "tu_hoa": {
+   "ten": "Tự hoá",
+   "giai_thich": "Khi can của một cung làm hoá chính sao đang nằm trong cung ấy, gọi là tự hoá. Cách đọc phổ biến: năng lượng của cung tự sinh rồi tự tiêu, việc của mảng đó phụ thuộc nhiều vào cách chính bạn xử lý.",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "lai_nhan": {
+   "ten": "Lai nhân cung",
+   "giai_thich": "Cung có thiên can trùng can năm sinh. Phái phi tinh xem đây là mảng đời bạn mang theo nhiều tâm sức nhất, nơi nhiều câu chuyện của bạn bắt đầu. Đây là một góc nhìn để tự soi, không phải nhãn tốt hay xấu.",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "xung_chieu": {
+   "ten": "Xung chiếu",
+   "giai_thich": "Mỗi cung có một cung đối diện: Mệnh – Thiên Di, Huynh Đệ – Nô Bộc, Phu Thê – Quan Lộc, Tử Nữ – Điền Trạch, Tài Bạch – Phúc Đức, Tật Ách – Phụ Mẫu. Hoá Kỵ vào một cung thường được đọc kèm cung đối diện, vì hai mảng ấy kéo nhau.",
+   "source_id": "tu_vi_dau_so_toan_thu",
+   "school_id": "phi_tinh"
+  },
+  "hop_tham": {
+   "ten": "Hợp tham hai lá số",
+   "giai_thich": "Lấy can năm sinh của người kia cho bay bốn hoá vào lá số của bạn, để xem họ thường chạm vào mảng đời nào của bạn. Phần này chỉ mô tả mảng hai người dễ gặp nhau, không chấm điểm hợp hay khắc.",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "dinh_gio": {
+   "ten": "Đối chiếu giờ sinh",
+   "giai_thich": "Khi giờ sinh nằm sát ranh giới hai canh giờ, lá số có thể khác hẳn. Bạn chọn vài năm mình nhớ rõ, xem câu hỏi của từng giờ ứng viên và tự thấy giờ nào gần với trải nghiệm của mình hơn. Hệ thống không tự chọn giờ thay bạn.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "nhip_3_thang": {
+   "ten": "Nhịp ba tháng tới",
+   "giai_thich": "Ghép tứ hoá của năm đang xem với tứ hoá của từng tháng, để thấy tháng nào mảng nào nổi lên. Mỗi tháng được gắn một mức Thuận, Bình hoặc Cần thận trọng, kèm việc nên làm và câu tự soi. Đây là chủ đề tháng, không phải biến cố định sẵn.",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  }
+ },
+ "hoa": {
+  "Lộc": {
+   "y": "Hoá Lộc khi bay đi: mảng nguồn đem thuận lợi, cơ hội, niềm vui tới mảng đích. Thuận dễ làm chủ quan, nên biết giữ lại một phần.",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "Quyền": {
+   "y": "Hoá Quyền khi bay đi: mảng nguồn đẩy sức chủ động, trách nhiệm, muốn nắm phần quyết vào mảng đích. Mạnh dễ thành áp đặt, nên lắng nghe thêm.",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "Khoa": {
+   "y": "Hoá Khoa khi bay đi: mảng nguồn đem sự rõ ràng, tiếng tốt, cách gỡ rối nhẹ nhàng tới mảng đích. Tốt về danh và sự minh bạch nhiều hơn về lợi.",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "Kỵ": {
+   "y": "Hoá Kỵ khi bay đi: mảng nguồn khiến bạn để tâm, lo toan nhiều ở mảng đích, nơi việc dễ chậm hoặc vướng. Kỵ chỉ chỗ cần chăm sóc, không phải điềm xui.",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  }
+ },
+ "phi_vao_cung": {
+  "Lộc": {
+   "Mệnh": "Mảng {tu_cung} có xu hướng mang thuận lợi về cho chính bạn: dễ gặp cơ hội, được giúp đỡ từ phía ấy. Nên đón nhận chủ động và nhớ đáp lại người đã giúp mình.",
+   "Phụ Mẫu": "Mảng {tu_cung} đẩy thuận lợi về phía cha mẹ, cấp trên, giấy tờ: hồ sơ, thủ tục, quan hệ với người đi trước dễ trôi chảy hơn. Hợp lúc làm việc cần người duyệt.",
+   "Phúc Đức": "Mảng {tu_cung} nuôi đời sống tinh thần: việc ấy cho bạn niềm vui, sự thư thả. Nên dành thời gian cho sở thích có ích, đừng để hưởng thụ lấn hết kế hoạch.",
+   "Điền Trạch": "Mảng {tu_cung} góp vào nhà cửa, tích luỹ, không khí gia đình. Thuận lợi có xu hướng lắng thành của để dành hơn là tiêu ngay.",
+   "Quan Lộc": "Mảng {tu_cung} mở đường cho công việc: dễ có việc mới, dễ được ghi nhận. Nên chọn việc trọng tâm thay vì nhận hết mọi lời mời.",
+   "Nô Bộc": "Mảng {tu_cung} hướng thuận lợi ra bạn bè, đồng nghiệp, khách hàng: mạng lưới rộng hơn. Bạn thường là người cho đi trước; nên giữ ranh giới để không quá sức.",
+   "Thiên Di": "Mảng {tu_cung} thuận khi bạn ra ngoài: đi lại, gặp người mới, làm việc ở môi trường khác. Hợp mở rộng quan hệ và giới thiệu bản thân.",
+   "Tật Ách": "Mảng {tu_cung} chạm tới nhịp sinh hoạt: việc ấy làm bạn thoải mái, nhưng vui quá cũng dễ khiến giờ giấc lệch đi. Nên giữ giờ ngủ, giờ nghỉ đều đặn.",
+   "Tài Bạch": "Mảng {tu_cung} có xu hướng thành nguồn thu: dễ có thêm khoản lợi từ phía ấy. Nên ghi chép thu chi để thấy rõ tiền đến từ đâu.",
+   "Tử Nữ": "Mảng {tu_cung} hướng niềm vui về con cái, học trò, việc sáng tạo hay hợp tác nhỏ. Hợp dành thời gian dìu dắt, làm dự án riêng.",
+   "Phu Thê": "Mảng {tu_cung} mang thuận lợi vào chuyện đôi lứa: dễ gặp người hợp ý, hoặc quan hệ đang có ấm hơn. Nên nói rõ mong muốn của mình.",
+   "Huynh Đệ": "Mảng {tu_cung} hướng thuận lợi về anh chị em, bạn thân. Phái phi tinh còn xem trục này gắn với khoản tiền giữ lại; nên rõ ràng chuyện tiền với người thân."
+  },
+  "Quyền": {
+   "Mệnh": "Mảng {tu_cung} trao cho bạn thêm quyền chủ động, kèm trách nhiệm. Bạn có xu hướng muốn tự quyết; nên nghe thêm một ý kiến trước khi chốt.",
+   "Phụ Mẫu": "Mảng {tu_cung} làm việc giấy tờ, quan hệ với cấp trên, cha mẹ thêm phần nặng ký: có tiếng nói nhưng dễ căng. Nên trao đổi bằng văn bản rõ ràng.",
+   "Phúc Đức": "Mảng {tu_cung} khiến bạn để tâm và muốn kiểm soát nhiều trong suy nghĩ. Nên có một khoảng nghỉ đầu óc mỗi ngày để không ôm hết vào mình.",
+   "Điền Trạch": "Mảng {tu_cung} đẩy phần quyết về chuyện nhà, tài sản về phía bạn: hợp sửa sang, sắp xếp lại. Nên bàn với người cùng ở trước khi thay đổi lớn.",
+   "Quan Lộc": "Mảng {tu_cung} tăng sức đẩy trong công việc: dễ được giao vai trò, quyền hạn. Nên phân việc cho người khác thay vì tự làm tất cả.",
+   "Nô Bộc": "Mảng {tu_cung} khiến bạn hay đứng ra dẫn nhóm bạn bè, đồng nghiệp, hoặc có người tiếng nói mạnh với bạn. Nên thống nhất vai trò từ đầu.",
+   "Thiên Di": "Mảng {tu_cung} cho bạn vị thế khi ra ngoài: dễ được trao việc, được nể. Nên giữ thái độ mềm mỏng khi vào môi trường mới.",
+   "Tật Ách": "Mảng {tu_cung} làm bạn chịu áp lực khá tốt nhưng hay gồng. Nên chia việc theo từng chặng và giữ giờ nghỉ cố định.",
+   "Tài Bạch": "Mảng {tu_cung} cho bạn sức chủ động kiếm tiền, giỏi xoay xở. Nên đặt hạn mức chi tiêu để sức mạnh ấy không thành vội vàng.",
+   "Tử Nữ": "Mảng {tu_cung} khiến bạn kỳ vọng nhiều vào con cái, học trò hay dự án nhỏ. Nên để họ có phần tự quyết.",
+   "Phu Thê": "Mảng {tu_cung} đưa câu hỏi ai quyết vào quan hệ đôi lứa. Nên chia vai rõ ràng và lắng nghe trước khi đề nghị.",
+   "Huynh Đệ": "Mảng {tu_cung} làm anh chị em, bạn thân có tiếng nói mạnh, hoặc bạn đứng ra lo cho họ. Nên bàn bạc ngang hàng."
+  },
+  "Khoa": {
+   "Mệnh": "Mảng {tu_cung} mang lại tiếng tốt, sự rõ ràng cho bạn: dễ được hiểu đúng, được giới thiệu. Hợp học thêm và chia sẻ chuyên môn.",
+   "Phụ Mẫu": "Mảng {tu_cung} thuận cho giấy tờ, học hành, thi cử, hồ sơ: mọi thứ dễ được xem xét công bằng. Hợp hoàn tất thủ tục còn dở.",
+   "Phúc Đức": "Mảng {tu_cung} giúp tinh thần nhẹ hơn, biết cách tự gỡ rối. Hợp đọc sách, học, ngồi tĩnh hay viết nhật ký.",
+   "Điền Trạch": "Mảng {tu_cung} giúp chuyện nhà cửa, giấy tờ tài sản rõ ràng, êm ả. Hợp sắp xếp lại hồ sơ nhà đất và nếp sinh hoạt trong nhà.",
+   "Quan Lộc": "Mảng {tu_cung} đem tiếng tốt cho công việc: được ghi nhận vì chuyên môn hơn là vì lợi. Nên chăm phần trình bày, báo cáo.",
+   "Nô Bộc": "Mảng {tu_cung} giúp quan hệ bạn bè, đồng nghiệp êm, dễ có người nói giúp. Nên giữ uy tín bằng những lời hứa nhỏ làm được.",
+   "Thiên Di": "Mảng {tu_cung} thuận khi ra ngoài: hình ảnh tốt, dễ gặp người hỗ trợ đúng lúc. Hợp đi học, dự hội thảo, gặp đối tác.",
+   "Tật Ách": "Mảng {tu_cung} giúp bạn tìm được cách thả lỏng, nhịp sinh hoạt dễ điều chỉnh. Nên giữ thói quen nghỉ ngơi mình đã thấy hợp.",
+   "Tài Bạch": "Mảng {tu_cung} giúp chuyện tiền rõ ràng, đủ dùng, ít rối. Tốt về sự minh bạch hơn là khoản lớn; hợp lập ngân sách.",
+   "Tử Nữ": "Mảng {tu_cung} thuận cho việc học của con, học trò, sản phẩm sáng tạo. Hợp đồng hành và khen đúng lúc.",
+   "Phu Thê": "Mảng {tu_cung} giúp quan hệ đôi lứa nhẹ nhàng, dễ hoà giải. Hợp nói chuyện thẳng thắn mà ôn hoà.",
+   "Huynh Đệ": "Mảng {tu_cung} giúp quan hệ anh chị em, bạn thân êm, dễ hiểu nhau. Hợp gặp gỡ, gỡ những hiểu lầm cũ."
+  },
+  "Kỵ": {
+   "Mệnh": "Mảng {tu_cung} là nơi bạn để tâm nhiều, dễ thấy vướng về phía bản thân. Nên chia nhỏ việc ấy và nói ra khi thấy quá tải.",
+   "Phụ Mẫu": "Mảng {tu_cung} dễ kéo theo giấy tờ, hợp đồng, quan hệ với cấp trên cần xem kỹ. Nên đọc lại điều khoản và giữ bản ghi chép.",
+   "Phúc Đức": "Mảng {tu_cung} hay chiếm chỗ trong suy nghĩ, dễ làm bạn trằn trọc. Nên tách thời gian lo việc ra khỏi thời gian nghỉ.",
+   "Điền Trạch": "Mảng {tu_cung} dễ đẩy lo toan về nhà cửa, tài sản, chuyện trong nhà. Nên giữ khoản dự phòng và bàn kế hoạch chung với người nhà.",
+   "Quan Lộc": "Mảng {tu_cung} khiến công việc cần nhiều công sức, dễ chậm hơn mong đợi. Nên ưu tiên việc chính và cập nhật tiến độ thường xuyên.",
+   "Nô Bộc": "Mảng {tu_cung} hướng sự để tâm ra bạn bè, đồng nghiệp: dễ hiểu lầm hoặc nhận việc thay người khác. Nên giữ ranh giới và thoả thuận rõ.",
+   "Thiên Di": "Mảng {tu_cung} khiến việc ra ngoài, đi lại, vào môi trường mới cần chuẩn bị kỹ hơn. Kỵ ở đây cũng chiếu về Mệnh, nên có sẵn phương án dự phòng.",
+   "Tật Ách": "Mảng {tu_cung} dễ kéo căng nhịp sinh hoạt: ngủ muộn, ăn vội, ôm áp lực. Nên đặt giờ nghỉ cố định; điều gì về cơ thể thì hỏi người có chuyên môn.",
+   "Tài Bạch": "Mảng {tu_cung} là nơi tiền bạc cần để mắt: chi ra dễ nhiều hơn dự tính. Nên ghi chép thu chi và không quyết khoản lớn khi đang vội.",
+   "Tử Nữ": "Mảng {tu_cung} khiến bạn lo nhiều cho con cái, học trò hay dự án riêng. Nên lắng nghe nhiều hơn khuyên bảo.",
+   "Phu Thê": "Mảng {tu_cung} đưa điều vướng vào quan hệ đôi lứa: dễ kỳ vọng mà không nói ra. Nên hẹn thời gian trò chuyện riêng, nói cảm nhận thay vì trách.",
+   "Huynh Đệ": "Mảng {tu_cung} hướng sự lo lắng về anh chị em, bạn thân, hoặc khoản tiền dành dụm. Nên rõ ràng khi cho vay mượn trong nhà."
+  }
+ },
+ "tu_hoa_cung": {
+  "Lộc": {
+   "y": "Cung {cung} tự hoá Lộc: thuận lợi của mảng {cung} đến nhanh và cũng dễ trôi đi nhanh, như nước chảy qua.",
+   "viec_nen_lam": "Khi mảng {cung} có kết quả tốt, nên giữ lại một phần thay vì dùng hết ngay.",
+   "cau_tu_soi": "Điều tốt gần đây ở mảng {cung}, bạn đã giữ lại được gì?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "Quyền": {
+   "y": "Cung {cung} tự hoá Quyền: mảng {cung} có sức tự đẩy, bạn hay tự quyết và đổi hướng nhanh.",
+   "viec_nen_lam": "Trước khi đổi kế hoạch ở mảng {cung}, nên chờ một nhịp và hỏi thêm người liên quan.",
+   "cau_tu_soi": "Lần gần nhất bạn tự quyết ở mảng {cung}, có ai lẽ ra nên được hỏi trước không?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "Khoa": {
+   "y": "Cung {cung} tự hoá Khoa: mảng {cung} có cách tự gỡ rối, nhưng tiếng tốt dễ thoảng qua nếu không ghi lại.",
+   "viec_nen_lam": "Ghi lại việc làm tốt ở mảng {cung} để người khác thấy và để chính bạn nhớ.",
+   "cau_tu_soi": "Bạn có hay bỏ qua công sức của mình ở mảng {cung} không?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "Kỵ": {
+   "y": "Cung {cung} tự hoá Kỵ: mảng {cung} là nơi bạn tự lo, tự ôm, đôi khi đổi ý giữa chừng; điểm vướng thường đến từ cách mình xử lý hơn là từ người khác.",
+   "viec_nen_lam": "Với việc lớn ở mảng {cung}, nên viết tiêu chí ra trước và hỏi ý một người ngoài cuộc.",
+   "cau_tu_soi": "Ở mảng {cung}, điều gì bạn hay bỏ dở hoặc đổi ý vào phút cuối?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  }
+ },
+ "mau_duong_bay": [
+  {
+   "ma": "quan_ky_menh",
+   "tu_cung": "Quan Lộc",
+   "hoa": "Kỵ",
+   "den_cung": "Mệnh",
+   "tieu_de": "Công việc đè nặng lên bản thân",
+   "nghia": "Can Quan Lộc cho Hoá Kỵ bay về Mệnh, chiếu sang Thiên Di: công việc chiếm nhiều tâm sức, trong khi việc tìm hướng mới bên ngoài dễ chưa thuận.",
+   "viec_nen_lam": "Trước khi quyết đổi việc, nên viết ra điều mình muốn thay đổi, thử cải thiện ở chỗ hiện tại và tìm hiểu kỹ nơi mới.",
+   "cau_tu_soi": "Điều khiến bạn mệt là bản thân công việc hay cách mình đang làm nó?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "no_ky_tai",
+   "tu_cung": "Nô Bộc",
+   "hoa": "Kỵ",
+   "den_cung": "Tài Bạch",
+   "tieu_de": "Bạn bè, đối tác chạm vào chuyện tiền",
+   "nghia": "Can Nô Bộc cho Hoá Kỵ bay vào Tài Bạch, chiếu Phúc Đức: chuyện tiền dễ dính tới bạn bè, đồng nghiệp, đối tác, và điều đó dễ khiến bạn bận lòng.",
+   "viec_nen_lam": "Với tiền góp chung, cho mượn hay đứng tên giúp, nên thoả thuận bằng văn bản và chỉ dùng khoản mình chấp nhận được.",
+   "cau_tu_soi": "Gần đây bạn có nhận lời về tiền chỉ vì ngại từ chối không?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "tai_tu_ky",
+   "tu_cung": "Tài Bạch",
+   "hoa": "Kỵ",
+   "den_cung": "tu",
+   "tieu_de": "Tiền đến rồi tự đi",
+   "nghia": "Tài Bạch tự hoá Kỵ: bạn kiếm được, nhưng tiền dễ đi theo những quyết định vội của chính mình hơn là vì người khác.",
+   "viec_nen_lam": "Nên tách một khoản để dành riêng ngay khi có thu nhập, và chờ một ngày trước những khoản chi lớn.",
+   "cau_tu_soi": "Khoản chi nào gần đây bạn quyết nhanh rồi thấy tiếc?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "tai_ky_phu_mau",
+   "tu_cung": "Tài Bạch",
+   "hoa": "Kỵ",
+   "den_cung": "Phụ Mẫu",
+   "tieu_de": "Tiền bạc gắn với giấy tờ",
+   "nghia": "Can Tài Bạch cho Hoá Kỵ bay vào Phụ Mẫu, chiếu Tật Ách: chuyện tiền dễ đi kèm hợp đồng, thủ tục, khoản vay, nghĩa vụ giấy tờ cần theo dõi.",
+   "viec_nen_lam": "Nên rà lại các hợp đồng, khoản vay đang có, giữ mức nợ vừa sức và hỏi người có chuyên môn khi chưa rõ điều khoản.",
+   "cau_tu_soi": "Bạn có nắm rõ mọi khoản mình đang phải trả hằng tháng không?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "khoa_vao_phu_mau",
+   "tu_cung": "*",
+   "hoa": "Khoa",
+   "den_cung": "Phụ Mẫu",
+   "tieu_de": "Giấy tờ, học hành thuận",
+   "nghia": "Hoá Khoa bay vào Phụ Mẫu (từ cung nào hay từ can năm xem): thi cử, hồ sơ, thủ tục, quan hệ với người đi trước dễ rõ ràng, dễ có người hướng dẫn.",
+   "viec_nen_lam": "Hợp nộp hồ sơ, đăng ký học, hoàn tất thủ tục còn dở hoặc nhờ người đi trước góp ý.",
+   "cau_tu_soi": "Thủ tục hay việc học nào bạn đã để dành khá lâu?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "ky_xung_menh",
+   "tu_cung": "*",
+   "hoa": "Kỵ",
+   "den_cung": "Thiên Di",
+   "tieu_de": "Kỵ chiếu về bản thân",
+   "nghia": "Hoá Kỵ vào Thiên Di và chiếu thẳng Mệnh: việc ra ngoài, đi xa, môi trường mới dễ làm bạn để tâm và hao sức hơn thường lệ.",
+   "viec_nen_lam": "Nên chuẩn bị kỹ trước chuyến đi hay việc mới, có phương án dự phòng và để dư thời gian.",
+   "cau_tu_soi": "Khi ở chỗ lạ, bạn thường cần điều gì để thấy vững?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "menh_loc_tai",
+   "tu_cung": "Mệnh",
+   "hoa": "Lộc",
+   "den_cung": "Tài Bạch",
+   "tieu_de": "Tự tay làm ra tiền",
+   "nghia": "Can Mệnh cho Hoá Lộc bay vào Tài Bạch: sức của chính bạn dễ chuyển thành nguồn thu, nhất là việc bạn chủ động làm.",
+   "viec_nen_lam": "Nên ghi lại việc nào đem lại thu nhập đều để tập trung vào đó.",
+   "cau_tu_soi": "Việc nào bạn làm vừa vui vừa có thu nhập?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "tai_loc_dien",
+   "tu_cung": "Tài Bạch",
+   "hoa": "Lộc",
+   "den_cung": "Điền Trạch",
+   "tieu_de": "Tiền có xu hướng lắng thành tích luỹ",
+   "nghia": "Can Tài Bạch cho Hoá Lộc bay vào Điền Trạch: tiền kiếm được có xu hướng chuyển thành của để dành, nhà cửa, đồ dùng lâu dài.",
+   "viec_nen_lam": "Nên đặt mục tiêu tích luỹ rõ ràng và theo dõi định kỳ.",
+   "cau_tu_soi": "Bạn đang để dành cho điều gì?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "menh_tu_ky",
+   "tu_cung": "Mệnh",
+   "hoa": "Kỵ",
+   "den_cung": "tu",
+   "tieu_de": "Tự lo, tự ôm",
+   "nghia": "Mệnh tự hoá Kỵ: bạn hay tự đặt áp lực, tự chịu, khó mở lời nhờ người. Điểm vướng thường nằm ở cách mình nhìn chính mình.",
+   "viec_nen_lam": "Nên chọn một người tin được để kể việc đang lo, và cho phép mình làm chưa hoàn hảo.",
+   "cau_tu_soi": "Lần cuối bạn nhờ ai giúp là khi nào?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "menh_tu_loc",
+   "tu_cung": "Mệnh",
+   "hoa": "Lộc",
+   "den_cung": "tu",
+   "tieu_de": "Dễ vui, dễ buông",
+   "nghia": "Mệnh tự hoá Lộc: bạn dễ hài lòng, dễ được mến, nhưng niềm hứng khởi cũng mau qua.",
+   "viec_nen_lam": "Nên gắn niềm vui với một mục tiêu nhỏ để giữ được đà.",
+   "cau_tu_soi": "Việc nào bạn bắt đầu rất hăng rồi để đó?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "tai_tu_loc",
+   "tu_cung": "Tài Bạch",
+   "hoa": "Lộc",
+   "den_cung": "tu",
+   "tieu_de": "Tiền đến nhanh, đi cũng nhanh",
+   "nghia": "Tài Bạch tự hoá Lộc: nguồn thu khá linh hoạt nhưng khó đọng lại nếu không có kế hoạch.",
+   "viec_nen_lam": "Nên tự động chuyển một phần thu nhập sang khoản để dành ngay khi nhận.",
+   "cau_tu_soi": "Cuối tháng, bạn có biết tiền mình đã đi đâu không?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "quan_tu_ky",
+   "tu_cung": "Quan Lộc",
+   "hoa": "Kỵ",
+   "den_cung": "tu",
+   "tieu_de": "Công việc tự vướng",
+   "nghia": "Quan Lộc tự hoá Kỵ: bạn để tâm nhiều vào công việc, dễ tự đổi hướng hoặc tự làm khó mình bằng tiêu chuẩn quá cao.",
+   "viec_nen_lam": "Nên chốt một mục tiêu cho mỗi quý và xin phản hồi từ người cùng làm.",
+   "cau_tu_soi": "Tiêu chuẩn nào bạn đặt cho mình mà người khác không đòi hỏi?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "quan_tu_loc",
+   "tu_cung": "Quan Lộc",
+   "hoa": "Lộc",
+   "den_cung": "tu",
+   "tieu_de": "Việc đến dễ, cần giữ nhịp",
+   "nghia": "Quan Lộc tự hoá Lộc: cơ hội công việc đến khá dễ, nhưng dễ dàn trải nếu nhận nhiều.",
+   "viec_nen_lam": "Nên chọn ít việc hơn và làm tới nơi.",
+   "cau_tu_soi": "Việc nào bạn đang nhận chỉ vì nó đến dễ?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "phu_the_tu_ky",
+   "tu_cung": "Phu Thê",
+   "hoa": "Kỵ",
+   "den_cung": "tu",
+   "tieu_de": "Tự lo trong chuyện đôi lứa",
+   "nghia": "Phu Thê tự hoá Kỵ: bạn dễ tự suy diễn, tự giữ cảm xúc trong quan hệ đôi lứa; vướng thường đến từ điều chưa nói ra.",
+   "viec_nen_lam": "Nên nói thẳng cảm nhận của mình bằng câu bắt đầu từ tôi thấy, thay vì chờ người kia tự hiểu.",
+   "cau_tu_soi": "Điều gì bạn mong người ấy hiểu mà chưa từng nói?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "phu_the_tu_loc",
+   "tu_cung": "Phu Thê",
+   "hoa": "Lộc",
+   "den_cung": "tu",
+   "tieu_de": "Duyên đến nhẹ nhàng",
+   "nghia": "Phu Thê tự hoá Lộc: chuyện tình cảm dễ có niềm vui tự nhiên, nhưng cũng cần vun đắp để không nhạt dần.",
+   "viec_nen_lam": "Nên giữ những thói quen nhỏ cùng nhau, đều đặn.",
+   "cau_tu_soi": "Thói quen nhỏ nào khiến hai người thấy gần nhau?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "dien_tu_ky",
+   "tu_cung": "Điền Trạch",
+   "hoa": "Kỵ",
+   "den_cung": "tu",
+   "tieu_de": "Lo toan việc nhà",
+   "nghia": "Điền Trạch tự hoá Kỵ: bạn hay ôm việc nhà, chuyện tài sản, và dễ đổi ý về kế hoạch nhà cửa.",
+   "viec_nen_lam": "Nên lập danh sách việc nhà chia cho từng người và có một khoản dự phòng riêng cho nhà.",
+   "cau_tu_soi": "Việc nhà nào bạn đang ôm một mình?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "dien_tu_loc",
+   "tu_cung": "Điền Trạch",
+   "hoa": "Lộc",
+   "den_cung": "tu",
+   "tieu_de": "Nhà là nơi vui",
+   "nghia": "Điền Trạch tự hoá Lộc: không khí gia đình dễ ấm, nhưng chi cho nhà cửa cũng dễ phát sinh.",
+   "viec_nen_lam": "Nên đặt ngân sách cho việc sửa sang, mua sắm trong nhà.",
+   "cau_tu_soi": "Khoản chi cho nhà gần đây có đúng điều cả nhà cần không?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "phuc_tu_ky",
+   "tu_cung": "Phúc Đức",
+   "hoa": "Kỵ",
+   "den_cung": "tu",
+   "tieu_de": "Đầu óc khó nghỉ",
+   "nghia": "Phúc Đức tự hoá Kỵ: bạn dễ suy nghĩ nhiều, tự trách, khó thả lỏng ngay cả lúc rảnh.",
+   "viec_nen_lam": "Nên có một hoạt động giúp đầu óc nghỉ thật: đi bộ, làm vườn, viết ra giấy rồi để đó.",
+   "cau_tu_soi": "Lúc nào trong ngày bạn thấy đầu óc yên nhất?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "phuc_tu_loc",
+   "tu_cung": "Phúc Đức",
+   "hoa": "Lộc",
+   "den_cung": "tu",
+   "tieu_de": "Biết tận hưởng",
+   "nghia": "Phúc Đức tự hoá Lộc: bạn biết tìm niềm vui, có sở thích riêng, nhưng dễ chi nhiều cho thú vui.",
+   "viec_nen_lam": "Nên dành một khoản riêng cho sở thích để vui mà không lo.",
+   "cau_tu_soi": "Sở thích nào nuôi bạn thật sự, sở thích nào chỉ giết thời gian?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "thien_di_tu_ky",
+   "tu_cung": "Thiên Di",
+   "hoa": "Kỵ",
+   "den_cung": "tu",
+   "tieu_de": "Ra ngoài dễ hao sức",
+   "nghia": "Thiên Di tự hoá Kỵ: khi ra ngoài hay ở môi trường mới, bạn dễ tự lo, ngại thể hiện, hoặc đổi kế hoạch giữa chừng.",
+   "viec_nen_lam": "Nên chuẩn bị trước điều muốn nói, muốn làm khi ra ngoài, và cho mình thời gian làm quen.",
+   "cau_tu_soi": "Điều gì khiến bạn ngại khi bước vào chỗ mới?",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  }
+ ],
+ "tuan_triet_ghi_chu": {
+  "y": "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn.",
+  "source_id": "khung_nam_phai",
+  "school_id": "nam_phai"
+ },
+ "nhip_3_thang": {
+  "muc": {
+   "thuan": {
+    "nhan": "Thuận",
+    "mo_ta": "Tháng có tín hiệu thuận ở mảng đang xem: hợp bắt đầu, mở rộng, gặp gỡ."
+   },
+   "binh": {
+    "nhan": "Bình",
+    "mo_ta": "Tháng không có tín hiệu nổi bật: hợp làm đều tay việc đang có."
+   },
+   "can_than": {
+    "nhan": "Cần thận trọng",
+    "mo_ta": "Tháng có điểm vướng ở mảng đang xem: hợp chậm lại, chuẩn bị kỹ, giữ dự phòng."
+   }
+  },
+  "ly_do": {
+   "chong_ky": "Hoá Kỵ của tháng (sao {sao}) rơi vào cung {cung}, cùng trục với Hoá Kỵ của năm (ở chính cung này hoặc ở cung đối diện): mảng này dễ cần nhiều công sức hơn trong tháng.",
+   "song_loc": "Hoá Lộc của tháng (sao {sao}) và Hoá Lộc của năm cùng rơi vào cung {cung}: cửa thuận ở mảng này rộng hơn.",
+   "loc_nhap_cung_chinh": "Hoá Lộc của tháng bay vào cung {cung} qua sao {sao}: mảng bạn đang để ý có thêm cơ hội.",
+   "ky_xung_cung_chinh": "Hoá Kỵ của tháng ở sao {sao}, chiếu vào cung {cung} từ cung đối diện: việc của mảng này nên chuẩn bị kỹ hơn.",
+   "khoa_giai": "Hoá Khoa ở sao {sao}, cung {cung} giúp gỡ bớt vướng: dễ có người giải thích, hỗ trợ."
+  },
+  "goi_y": {
+   "thuan": "Hợp bắt đầu việc đã chuẩn bị, chủ động gặp người cần gặp, nhưng vẫn giữ kế hoạch chi tiêu.",
+   "binh": "Hợp làm đều việc đang có, dọn dẹp việc tồn và chuẩn bị cho tháng sau.",
+   "can_than": "Hợp rà soát lại kế hoạch, để dư thời gian, hỏi thêm ý kiến trước việc lớn và giữ khoản dự phòng."
+  },
+  "cau_tu_soi": {
+   "thuan": "Cơ hội nào trong tháng này bạn muốn nắm lấy nhất?",
+   "binh": "Việc tồn nào bạn có thể làm xong trong tháng này?",
+   "can_than": "Việc nào trong tháng này bạn có thể làm chậm lại mà không mất gì?"
+  },
+  "source_id": "phi_tinh_trung_chau",
+  "school_id": "phi_tinh"
+ },
+ "hop_tham": {
+  "quan_he": {
+   "nguoi_yeu": "Người yêu",
+   "vo_chong": "Vợ chồng",
+   "ban_be": "Bạn bè",
+   "dong_nghiep": "Đồng nghiệp",
+   "doi_tac": "Đối tác làm ăn",
+   "sep": "Cấp trên",
+   "cha_me_con": "Cha mẹ – con",
+   "gia_dinh": "Gia đình"
+  },
+  "hoa": {
+   "Lộc": "Người ấy mang Hoá Lộc vào cung {cung} của bạn: ở mảng {chu_de}, sự có mặt của họ thường đem lại thuận lợi, niềm vui, cơ hội.",
+   "Quyền": "Người ấy mang Hoá Quyền vào cung {cung} của bạn: ở mảng {chu_de}, họ thường có tiếng nói mạnh hoặc thúc bạn chủ động hơn. Nên thống nhất ai quyết phần nào.",
+   "Khoa": "Người ấy mang Hoá Khoa vào cung {cung} của bạn: ở mảng {chu_de}, họ thường giúp mọi việc rõ ràng, dễ gỡ rối, dễ hiểu nhau.",
+   "Kỵ": "Người ấy mang Hoá Kỵ vào cung {cung} của bạn: mảng {chu_de} là nơi hai người dễ để tâm, kỳ vọng vào nhau nhiều. Nên thoả thuận rõ ràng ở mảng này."
+  },
+  "luu_y": [
+   "Phần hợp tham chỉ cho thấy mảng đời nào hai người dễ chạm vào nhau, không chấm điểm hợp hay khắc.",
+   "Hoá Kỵ ở đây là chỗ cần nói chuyện kỹ, không phải lý do để xa nhau.",
+   "Quan hệ thật do cách hai người cư xử với nhau mỗi ngày; lá số chỉ là một góc để cùng trò chuyện.",
+   "Ngày sinh của người kia chỉ dùng để tính lúc xem, không được lưu."
+  ],
+  "source_id": "phi_tinh_trung_chau",
+  "school_id": "phi_tinh"
+ },
+ "dinh_gio": {
+  "cau_hoi": {
+   "Mệnh": "Năm {nam}, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?",
+   "Phụ Mẫu": "Năm {nam}, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?",
+   "Phúc Đức": "Năm {nam}, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?",
+   "Điền Trạch": "Năm {nam}, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?",
+   "Quan Lộc": "Năm {nam}, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?",
+   "Nô Bộc": "Năm {nam}, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?",
+   "Thiên Di": "Năm {nam}, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?",
+   "Tật Ách": "Năm {nam}, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?",
+   "Tài Bạch": "Năm {nam}, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?",
+   "Tử Nữ": "Năm {nam}, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?",
+   "Phu Thê": "Năm {nam}, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?",
+   "Huynh Đệ": "Năm {nam}, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+  },
+  "loi_dan": "Chọn những năm bạn nhớ rõ. Với mỗi giờ ứng viên, đọc câu hỏi của từng năm và tự đánh dấu câu nào đúng với trải nghiệm của mình. Giờ nào có nhiều câu khớp hơn thì đáng để bạn xem kỹ hơn.",
+  "luu_y": [
+   "Câu hỏi chỉ hỏi điều bạn tự quan sát được; hệ thống không tự chọn giờ sinh thay bạn.",
+   "Không có câu hỏi về sức khoẻ: phần Tật Ách chỉ hỏi về nhịp sinh hoạt.",
+   "Những năm bạn chọn và câu trả lời không được lưu.",
+   "Khi còn phân vân, giấy khai sinh hoặc lời kể của người nhà vẫn là căn cứ tốt nhất."
+  ],
+  "source_id": "hbt_tong_hop",
+  "school_id": "phi_tinh"
+ },
+ "vai_tro_sao": {
+  "Tử Vi": {
+   "vai_tro": "Người điều phối, giữ khung chung cho cả nhóm.",
+   "the_manh": "Tổ chức, gánh vác, quy tụ người giỏi quanh mình.",
+   "can_luu_y": "Dễ ôm việc một mình vì sĩ diện, ngại nghe góp ý; thiếu người phụ tá thì dễ đuối.",
+   "goi_y": "Xây một nhóm cố vấn nhỏ, chủ động xin phản biện trước quyết định lớn.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Thiên Cơ": {
+   "vai_tro": "Người lên kế hoạch, nghĩ phương án.",
+   "the_manh": "Nhạy với xu hướng, giỏi phân tích, xoay xở nhiều phương án.",
+   "can_luu_y": "Dễ nghĩ nhiều làm ít, đổi ý khi chưa đi hết một hướng.",
+   "goi_y": "Đặt hạn chót cho mỗi quyết định, bắt cặp với người giỏi thực thi.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Thái Dương": {
+   "vai_tro": "Người toả sáng, làm hình ảnh, kết nối cộng đồng.",
+   "the_manh": "Truyền cảm hứng, hào phóng, hợp việc công chúng, giao tiếp rộng.",
+   "can_luu_y": "Dễ lo cho người ngoài mà quên mình, cho đi quá sức rồi mệt.",
+   "goi_y": "Học cách từ chối nhẹ nhàng, giữ ngân sách cho việc giúp người.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Vũ Khúc": {
+   "vai_tro": "Người giữ tiền, thực thi có kỷ luật.",
+   "the_manh": "Nhạy với dòng tiền, quyết đoán, làm việc có kỷ luật.",
+   "can_luu_y": "Dễ thực dụng, khô khan trong lời nói với người thân.",
+   "goi_y": "Giữ chữ tín, mềm lời khi bàn chuyện tiền với người nhà và đối tác.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Thiên Đồng": {
+   "vai_tro": "Người làm dịu, chăm sóc, giữ không khí.",
+   "the_manh": "Thích nghi tốt, dễ gần, hợp việc dịch vụ, chăm sóc, nghệ thuật.",
+   "can_luu_y": "Dễ ở lâu trong vùng thoải mái, cảm xúc lên xuống.",
+   "goi_y": "Đặt mục tiêu rõ ràng có mốc kiểm tra để giữ nhịp tiến bộ.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Liêm Trinh": {
+   "vai_tro": "Người giữ quy tắc, hiểu quan hệ trong tổ chức.",
+   "the_manh": "Sắc sảo về quy trình, nhạy với quan hệ quyền lực, giữ kỷ cương.",
+   "can_luu_y": "Dễ cứng nhắc hoặc vướng chuyện tình cảm lẫn công việc khi ranh giới không rõ.",
+   "goi_y": "Mọi thoả thuận quan trọng nên có giấy tờ; tách bạch việc riêng và việc chung.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Thiên Phủ": {
+   "vai_tro": "Người giữ kho, quản lý tài sản và hậu cần.",
+   "the_manh": "Giữ tiền giỏi, tích luỹ bền, làm việc chắc chắn.",
+   "can_luu_y": "Dễ bảo thủ, chậm đổi mới; nhìn tài sản trên giấy mà quên tiền dùng được.",
+   "goi_y": "Định kỳ xem lại tiền có thể dùng ngay, thử cái mới ở quy mô nhỏ.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Thái Âm": {
+   "vai_tro": "Người tích luỹ thầm lặng, chăm chút chiều sâu.",
+   "the_manh": "Tinh tế, kiên nhẫn, giỏi tích góp theo thời gian.",
+   "can_luu_y": "Dễ lo âu ngầm, để cảm xúc dẫn quyết định tiền bạc.",
+   "goi_y": "Ghi chép tài chính minh bạch, chờ cảm xúc lắng rồi mới quyết.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Tham Lang": {
+   "vai_tro": "Người mở quan hệ, tìm cơ hội mới.",
+   "the_manh": "Giao thiệp rộng, đàm phán giỏi, bắt cơ hội nhanh.",
+   "can_luu_y": "Dễ ham nhiều thứ cùng lúc, mải vui quên kế hoạch.",
+   "goi_y": "Khi có kết quả tốt, giữ lại một phần thay vì dồn hết vào lần sau.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Cự Môn": {
+   "vai_tro": "Người phân tích, đặt câu hỏi, dùng lời nói làm nghề.",
+   "the_manh": "Lập luận sắc, nhìn ra điểm mù, hợp nghề cần thuyết phục, nghiên cứu.",
+   "can_luu_y": "Dễ thị phi, tranh luận để thắng hơn để hiểu, hay nghi.",
+   "goi_y": "Dùng lời nói để xây chuyên môn; hỏi để hiểu trước khi phản bác.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Thiên Tướng": {
+   "vai_tro": "Người giữ cam kết, đứng giữa hoà giải.",
+   "the_manh": "Đáng tin, công bằng, giỏi điều phối và giữ lời.",
+   "can_luu_y": "Dễ nể nang mà nhận ký thay, đứng tên giúp người khác.",
+   "goi_y": "Đọc kỹ trước khi ký, không đứng tên hay bảo lãnh khi chưa hiểu rõ.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Thiên Lương": {
+   "vai_tro": "Người cố vấn, che chở, giữ chuẩn mực.",
+   "the_manh": "Có uy tín về đạo đức và chuyên môn, hợp dạy học, tư vấn, kiểm tra.",
+   "can_luu_y": "Dễ nguyên tắc cứng, hay dạy người khác khi họ chưa hỏi.",
+   "goi_y": "Tập trung vào vai trò hướng dẫn; hỏi người kia cần gì trước khi khuyên.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Thất Sát": {
+   "vai_tro": "Người mở đường, xử lý lúc khó.",
+   "the_manh": "Quyết đoán, làm nhanh, dám tái cấu trúc khi cần.",
+   "can_luu_y": "Dễ đi một mình, đẩy nhịp quá gấp, cuộc sống nhiều chuyển động.",
+   "goi_y": "Biết dừng khi đã đạt mục tiêu, chừa thời gian hồi sức sau giai đoạn căng.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Phá Quân": {
+   "vai_tro": "Người đổi mới, phá cũ lập mới.",
+   "the_manh": "Dám làm điều chưa ai làm, tạo bước ngoặt.",
+   "can_luu_y": "Dễ chi mạnh cho cái mới, tự đổi thứ vừa ổn định.",
+   "goi_y": "Tách quỹ dự phòng trước khi bắt đầu việc mới, không quyết lúc bốc đồng.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  "Tuần Không - Triệt Lộ": {
+   "vai_tro": "Lớp đệm: làm chậm hoặc giảm tác dụng ở cung nó đóng.",
+   "the_manh": "Ở cung nhiều vướng: làm nhẹ bớt, cho thêm thời gian xoay xở.",
+   "can_luu_y": "Ở cung thuận: khởi đầu dễ chậm, thường cần làm lần hai mới trọn.",
+   "goi_y": "Thử ở quy mô nhỏ trước, chấp nhận làm lại lần hai như một phần kế hoạch.",
+   "source_id": "khung_nam_phai",
+   "school_id": "nam_phai",
+   "gom": [
+    "Tuần Không",
+    "Triệt Lộ"
+   ]
+  },
+  "Địa Không - Địa Kiếp": {
+   "vai_tro": "Biến số bất ngờ, lối nghĩ ngược đám đông.",
+   "the_manh": "Sáng tạo khác người, dám nghĩ khác, có lúc bứt lên nhanh.",
+   "can_luu_y": "Kế hoạch dễ bị xáo trộn đột ngột; lên nhanh thì cũng dễ xuống nhanh.",
+   "goi_y": "Khi đạt mục tiêu thì chốt lại phần đã có; không vay mượn quá sức để chạy theo cơ hội.",
+   "source_id": "khung_nam_phai",
+   "school_id": "nam_phai",
+   "gom": [
+    "Địa Không",
+    "Địa Kiếp"
+   ]
+  },
+  "Kình Dương - Đà La": {
+   "vai_tro": "Kình Dương là sức cạnh tranh trực diện, Đà La là sự dây dưa, chậm.",
+   "the_manh": "Bền bỉ, theo mục tiêu tới cùng, hợp việc kỹ thuật cần chính xác.",
+   "can_luu_y": "Kình Dương dễ va chạm lời nói; Đà La dễ kéo dài việc, nợ nần dây dưa.",
+   "goi_y": "Với Kình Dương: hạ giọng khi bàn bạc. Với Đà La: gỡ từng việc một, đừng vội.",
+   "source_id": "khung_nam_phai",
+   "school_id": "nam_phai",
+   "gom": [
+    "Kình Dương",
+    "Đà La"
+   ]
+  },
+  "Văn Xương - Văn Khúc": {
+   "vai_tro": "Sao của chữ nghĩa: học hành, văn bản, nội dung sáng tạo.",
+   "the_manh": "Học tốt, viết tốt, đàm phán văn bản khéo, hợp xây tài sản trí tuệ.",
+   "can_luu_y": "Khi gặp Hoá Kỵ: dễ sót chi tiết giấy tờ hoặc căng thẳng lúc thi.",
+   "goi_y": "Nhờ người thứ hai đọc lại văn bản quan trọng; ôn đều thay vì dồn sát ngày thi.",
+   "source_id": "khung_nam_phai",
+   "school_id": "nam_phai",
+   "gom": [
+    "Văn Xương",
+    "Văn Khúc"
+   ]
+  },
+  "Lộc Tồn - Thiên Mã": {
+   "vai_tro": "Dòng lợi đi theo sự dịch chuyển (Lộc Mã giao trì).",
+   "the_manh": "Hợp việc đi lại, giao thương xa, làm việc từ xa, mở rộng nơi mới.",
+   "can_luu_y": "Lộc Tồn bị Kình Đà kẹp hai bên: có lợi dễ có người tranh. Mã gặp Triệt: đi nhiều mà thu chưa tương xứng.",
+   "goi_y": "Chia lợi công bằng với người cùng làm; tính kỹ chi phí đi lại trước khi đi.",
+   "source_id": "khung_nam_phai",
+   "school_id": "nam_phai",
+   "gom": [
+    "Lộc Tồn",
+    "Thiên Mã"
+   ]
+  }
+ },
+ "phoi_hop_phai": [
+  {
+   "ma": "the_dung",
+   "ten": "Nền và nhịp",
+   "noi_dung": "Nam phái thường đọc nền của lá số: Mệnh, Cục, vòng Thái Tuế, Tuần Triệt. Phi tinh thường đọc nhịp và đường đi của việc: tứ hoá bay giữa các cung theo năm, tháng. Trang hiện cả hai góc, bạn tự đối chiếu, không phái nào được ưu tiên.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "tuan_triet_va_ky",
+   "ten": "Tuần Triệt gặp Hoá Kỵ",
+   "noi_dung": "Khi phi tinh thấy Hoá Kỵ bay vào một cung mà Nam phái thấy cung ấy có Tuần Triệt, hai cách đọc được trình bày song song: phi tinh nói mảng đó có điểm vướng, Nam phái nói tác động được làm chậm hoặc nhẹ đi. Đọc chung: có việc cần lo, nhưng có khoảng đệm.",
+   "source_id": "khung_nam_phai",
+   "school_id": "nam_phai"
+  },
+  {
+   "ma": "cung_chieu",
+   "ten": "Hai phái cùng chỉ một hướng",
+   "noi_dung": "Khi cả hai phái cùng cho thấy một mảng nhiều vướng trong cùng giai đoạn, đó là gợi ý nên chậm lại, giữ dự phòng và chuẩn bị kỹ ở mảng ấy. Đây là nhịp để cẩn thận hơn, không phải lời phán; giai đoạn khó cũng là lúc học được nhiều.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "sao_dep_tu_ky",
+   "ten": "Sao đẹp nhưng tự hoá Kỵ",
+   "noi_dung": "Một cung có sao sáng theo Nam phái nhưng tự hoá Kỵ theo phi tinh: cả hai cách đọc đều đúng ở góc của mình. Thường hiểu là mảng ấy có thế tốt, nhưng kết quả phụ thuộc nhiều vào cách chính bạn quyết định ở bước cuối.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  }
+ ],
+ "y_dinh_hoi": [
+  {
+   "ma": "di_hay_o",
+   "ten": "Ở lại hay đổi việc, ra làm riêng",
+   "cung_xem": [
+    "Mệnh",
+    "Quan Lộc",
+    "Tài Bạch",
+    "Thiên Di"
+   ],
+   "sao_xem": [
+    "Thiên Mã",
+    "Phá Quân",
+    "Thiên Cơ",
+    "Tuần Không",
+    "Triệt Lộ"
+   ],
+   "phi_tinh_xem": [
+    "can Quan Lộc phi hoá",
+    "Hoá Kỵ chiếu Quan Lộc",
+    "Thiên Di tự hoá Kỵ",
+    "tứ hoá lưu niên"
+   ],
+   "cach_ghep": "Nam phái cho biết mong muốn thay đổi mạnh tới đâu (Mã, Phá, Cơ, Tuần Triệt, cung Thân cư); phi tinh cho biết năm nay mảng công việc đang thuận hay vướng. Trình bày cả hai, kèm việc nên chuẩn bị nếu đi và nếu ở; người hỏi tự quyết.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "tai_van",
+   "ten": "Tiền bạc sắp tới: kiếm và giữ",
+   "cung_xem": [
+    "Tài Bạch",
+    "Điền Trạch",
+    "Phúc Đức",
+    "Huynh Đệ",
+    "Nô Bộc"
+   ],
+   "sao_xem": [
+    "Vũ Khúc",
+    "Thái Âm",
+    "Thiên Phủ",
+    "Lộc Tồn",
+    "Địa Không",
+    "Địa Kiếp"
+   ],
+   "phi_tinh_xem": [
+    "Tài Bạch tự hoá Kỵ",
+    "trục Huynh Đệ – Nô Bộc",
+    "trục Tử Nữ – Điền Trạch",
+    "Hoá Kỵ lưu niên vào Tài hoặc Điền"
+   ],
+   "cach_ghep": "Nam phái nói về nền tích luỹ (kho Thiên Phủ, Điền Trạch); phi tinh nói về chỗ tiền dễ ra vào. Ghép thành xu hướng và thói quen nên giữ; không nêu con số tiền, không gợi ý sản phẩm tài chính.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "hoc_hanh_con",
+   "ten": "Đồng hành việc học của con",
+   "cung_xem": [
+    "Tử Nữ",
+    "Phụ Mẫu",
+    "Quan Lộc"
+   ],
+   "sao_xem": [
+    "Văn Xương",
+    "Văn Khúc",
+    "Thiên Khôi",
+    "Thiên Việt"
+   ],
+   "phi_tinh_xem": [
+    "Hoá Khoa lưu niên, lưu nguyệt",
+    "trục Phụ Mẫu – Tật Ách",
+    "Văn Khúc hoặc Văn Xương hoá Kỵ"
+   ],
+   "cach_ghep": "Chỉ nói về cách cha mẹ đồng hành và nhịp học tháng nào cần nhẹ tay; không đoán điểm, không chọn trường hay nghề thay con. Muốn xem kỹ hơn thì dùng lá số của chính con.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "phan_van",
+   "ten": "Một quyết định đang phân vân",
+   "cung_xem": [
+    "Nô Bộc",
+    "Điền Trạch",
+    "Tài Bạch",
+    "Phúc Đức"
+   ],
+   "sao_xem": [
+    "Thiên Tướng",
+    "Thiên Lương"
+   ],
+   "phi_tinh_xem": [
+    "cung đại diện lựa chọn phi Lộc, Khoa về Mệnh, Tài, Điền",
+    "cung đại diện lựa chọn phi Kỵ chiếu Mệnh, Tài"
+   ],
+   "cach_ghep": "Mỗi lựa chọn được gắn với cung đại diện; trình bày đường bay của từng cung như một góc để cân nhắc, kèm câu hỏi tự soi. Không tuyên bố phương án nào đúng, không khuyên bỏ hẳn một phương án.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "ba_thang_toi",
+   "ten": "Ba tháng tới cần để ý gì",
+   "cung_xem": [
+    "Mệnh",
+    "Tài Bạch",
+    "Quan Lộc",
+    "Phu Thê"
+   ],
+   "sao_xem": [
+    "Lộc Tồn",
+    "Kình Dương",
+    "Đà La",
+    "Thiên Mã"
+   ],
+   "phi_tinh_xem": [
+    "tứ hoá lưu nguyệt",
+    "chồng Kỵ năm và tháng",
+    "song Lộc năm và tháng"
+   ],
+   "cach_ghep": "Dùng nhịp ba tháng: mỗi tháng một mức Thuận, Bình hoặc Cần thận trọng kèm lý do, việc nên làm và câu tự soi. Lưu tinh Nam phái mô tả bối cảnh; không chia trọng số, không chốt tháng xảy ra sự việc.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "chon_thoi_diem",
+   "ten": "Chọn thời điểm khai trương, ký kết, đi xa",
+   "cung_xem": [
+    "Mệnh",
+    "Tài Bạch",
+    "Điền Trạch",
+    "Thiên Di"
+   ],
+   "sao_xem": [
+    "Lộc Tồn",
+    "Thiên Mã",
+    "Tả Phù",
+    "Hữu Bật",
+    "Thiên Khôi",
+    "Thiên Việt"
+   ],
+   "phi_tinh_xem": [
+    "tháng có Lộc hoặc Khoa vào Mệnh, Tài, Điền",
+    "tháng có Kỵ chiếu Mệnh"
+   ],
+   "cach_ghep": "Gợi ý những tháng thuận theo nhịp tứ hoá và chỉ sang công cụ Xem ngày tốt để chọn ngày cụ thể. Thời điểm chỉ là một yếu tố; sự chuẩn bị của bạn quan trọng hơn.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "tong_quan_nam",
+   "ten": "Tổng quan cả năm",
+   "cung_xem": [
+    "Mệnh",
+    "Phụ Mẫu",
+    "Phúc Đức",
+    "Điền Trạch",
+    "Quan Lộc",
+    "Nô Bộc",
+    "Thiên Di",
+    "Tật Ách",
+    "Tài Bạch",
+    "Tử Nữ",
+    "Phu Thê",
+    "Huynh Đệ"
+   ],
+   "sao_xem": [],
+   "phi_tinh_xem": [
+    "tứ hoá lưu niên",
+    "lưu niên chồng đại hạn"
+   ],
+   "cach_ghep": "Đọc theo thứ tự đại hạn > lưu niên > tiểu hạn; mỗi mảng (công việc, tiền, tình cảm, gia đình, đi xa, bạn bè) nêu chủ đề và việc nên làm. Mảng Tật Ách chỉ nói nhịp sinh hoạt; không phán biến cố.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  },
+  {
+   "ma": "hieu_ban_than",
+   "ten": "Hiểu toàn diện bản thân",
+   "cung_xem": [
+    "Mệnh",
+    "Phúc Đức",
+    "Quan Lộc",
+    "Tài Bạch",
+    "Phu Thê",
+    "Thiên Di"
+   ],
+   "sao_xem": [],
+   "phi_tinh_xem": [
+    "Lai nhân cung",
+    "tự hoá của cung Mệnh",
+    "đường bay vào Mệnh"
+   ],
+   "cach_ghep": "Ghép chính tinh, độ sáng Nam phái và đường bay tứ hoá thành bức chân dung có điểm mạnh, mặt cần để ý và câu tự soi; đại hạn đọc như chủ đề từng chặng đời, không phải lịch định sẵn.",
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh"
+  }
+ ]
+}

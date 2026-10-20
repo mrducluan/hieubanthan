@@ -1,6 +1,6 @@
 "use client";
 // TS-V3 tầng HỌC — ký ức người dùng: điều bạn CHỦ ĐỘNG bấm "Ghi nhớ" (mã câu băn khoăn), lưu trong bảng
-// ky_uc_nguoi_dung (migration 0015, RLS chủ sở hữu, xoá được ngay, tự hết hạn 180 ngày). Chỉ khi đã đăng nhập; chưa bật
+// ky_uc_nguoi_dung (migration 0016, RLS chủ sở hữu, xoá được ngay, tự hết hạn 180 ngày). Chỉ khi đã đăng nhập; chưa bật
 // tài khoản / chưa đăng nhập → tính năng ẩn. Dùng để nhắc "lần trước bạn băn khoăn…" khi quay lại, không dùng huấn luyện.
 import { useCallback, useEffect, useState } from "react";
 import { coTaiKhoan, supabase } from "@/lib/supabase/trinh-duyet";
