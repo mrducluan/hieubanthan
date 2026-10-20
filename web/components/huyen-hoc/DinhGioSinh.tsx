@@ -24,6 +24,26 @@ const LY_DO: Record<string, string> = {
   khong_biet: "Bạn chưa biết giờ sinh — lá số đang tạm an theo giờ Ngọ (12:00). Dưới đây là đủ 12 canh giờ để đối chiếu.",
 };
 
+/** Câu giải thích dòng "theo giờ lịch" theo mã `ly_do_lech` engine trả (thiếu mã = engine cũ → câu chung). */
+const LY_DO_LECH: Record<string, { nhan: string; cau: string }> = {
+  mui_gio_lich_su: {
+    nhan: "theo giờ lịch",
+    cau: "đồng hồ nơi bạn sinh lúc đó chạy múi giờ khác giờ lịch Việt Nam (UTC+7) — vd miền Nam 1960–1975 dùng UTC+8; Tử vi chia canh theo giờ lịch.",
+  },
+  gio_mua_he: {
+    nhan: "theo giờ chuẩn địa phương",
+    cau: "nơi bạn sinh lúc đó đang dùng giờ mùa hè — lá số lập theo giờ chuẩn địa phương (đã trừ 1 giờ), Tử vi chia canh theo giờ này.",
+  },
+  nuoc_ngoai: {
+    nhan: "theo giờ địa phương",
+    cau: "sinh ở nước ngoài: lá số lập theo giờ địa phương nơi sinh, không quy đổi về giờ Việt Nam.",
+  },
+};
+const LECH_CHUNG = { nhan: "theo giờ lịch", cau: "đồng hồ nơi bạn sinh lúc đó lệch giờ dùng để chia canh; Tử vi chia canh theo giờ lịch." };
+
+/** "1965-03-09" → "09/03/1965". */
+const ngayVN = (iso: string) => iso.split("-").reverse().join("/");
+
 const namNay = () => Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho_Chi_Minh", year: "numeric" }).format(new Date()));
 
 export function DinhGioSinh({ laSo, hoSo, khongBietGio }: { laSo: ChartInputVao; hoSo: HoSo | null; khongBietGio: boolean }) {
@@ -123,6 +143,9 @@ function DanhSachUngVien({ d, onDung }: { d: DinhGioOutputT; onDung: (lech: -1 |
   // Tick "đúng với mình" chỉ nằm trong bộ nhớ trang — không gửi, không lưu.
   const [tick, setTick] = useState<Record<string, boolean>>({});
   const nhieu = d.ung_vien.length > 3;
+  const lechCau = (d.ly_do_lech && LY_DO_LECH[d.ly_do_lech]) || LECH_CHUNG;
+  // Ngày đã nhập theo đồng hồ = ngày của ứng viên "giờ đã nhập"; ứng viên khác ngày này thì ghi rõ ngày.
+  const ngayNhap = d.ung_vien.find((u) => u.la_gio_nhap)?.ngay_duong ?? d.ung_vien.find((u) => u.la_gio_nhap)?.dau_vao?.birth_date;
   return (
     <ol className={cn("grid gap-3", nhieu ? "sm:grid-cols-2 lg:grid-cols-3" : "md:grid-cols-3")} aria-label="Các canh giờ ứng viên">
       {d.ung_vien.map((u, i) => {
@@ -160,10 +183,17 @@ function DanhSachUngVien({ d, onDung }: { d: DinhGioOutputT; onDung: (lech: -1 |
               <p className="font-serif text-lg text-fg"><Clock3 className="mr-1 inline size-4 text-fg-muted" aria-hidden />Giờ {u.chi_gio}</p>
               <span className="text-xs text-fg-faint">{u.nhan}</span>
             </div>
-            <p className="text-xs text-fg-faint" data-testid="khoang-gio">{u.khoang_gio_dong_ho ?? u.khoang_gio}</p>
+            <p className="text-xs text-fg-faint" data-testid="khoang-gio">
+              {u.khoang_gio_dong_ho ?? u.khoang_gio}
+              {(() => {
+                const ngay = u.ngay_duong ?? u.dau_vao?.birth_date;
+                return ngay && ngayNhap && ngay !== ngayNhap
+                  ? <span className="ml-1 text-fg-muted" data-testid="ngay-ung-vien">· ngày {ngayVN(ngay)}</span> : null;
+              })()}
+            </p>
             {u.lech_gio_lich && (
               <p className="text-[11px] text-fg-faint" data-testid="khoang-gio-lich">
-                theo giờ lịch: {u.khoang_gio} — đồng hồ nơi bạn sinh lúc đó lệch giờ lịch Việt Nam (UTC+7), Tử vi chia canh theo giờ lịch.
+                {lechCau.nhan}: {u.khoang_gio} — {lechCau.cau}
               </p>
             )}
             {u.ghi_chu && <p className="text-[11px] text-fg-muted" data-testid="ghi-chu-ung-vien">{u.ghi_chu}</p>}

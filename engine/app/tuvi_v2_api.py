@@ -17,6 +17,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import lunar, tuvi_an_sao
+from app import config
 from app.config import ENGINE_VERSION, Region
 from app.hoidap.tuvi import tom_tat
 from app.luangiai import tuvi_dinh_gio, tuvi_hop_tham, tuvi_nhip_3_thang, tuvi_phi_hoa
@@ -148,22 +149,56 @@ GHI_CHU_TY_MUON = ("Giờ bạn nhập rơi vào Tý muộn (23:00–23:59): T�
                    "khác lá Tý sớm (00:00–00:59) của cùng ngày.")
 
 
+def _ghi_chu_ty_muon(lech_phut: int) -> str:
+    if not lech_phut:
+        return GHI_CHU_TY_MUON
+    return (f"Giờ bạn nhập rơi vào Tý muộn ({tuvi_dinh_gio.khoang_canh(12, lech_phut)} giờ đồng hồ): Tử vi tính "
+            "giờ này sang ngày hôm sau, nên lá số khác lá Tý sớm "
+            f"({tuvi_dinh_gio.khoang_canh(0, lech_phut)} giờ đồng hồ) của cùng ngày.")
+
+
+def _ghi_chu_ty_muon_hom_truoc(dong_ho: _dt.datetime, cal: _dt.datetime, lech_phut: int) -> str:
+    return (f"Giờ bạn nhập ({dong_ho.strftime('%H:%M')} giờ đồng hồ) theo giờ lịch là "
+            f"{cal.strftime('%H:%M ngày %d/%m/%Y')} — Tý muộn. Tử vi tính Tý muộn sang ngày hôm sau, tức đúng ngày "
+            f"bạn nhập, nên lá số trùng lá Tý sớm ({tuvi_dinh_gio.khoang_canh(0, lech_phut)} giờ đồng hồ) của ngày này.")
+
+
+def ly_do_lech(dv: _DauVao, gio_mua_he: bool) -> str | None:
+    """Vì sao đồng hồ nơi sinh lệch giờ lịch: múi giờ lịch sử trong nước (vd miền Nam 1960–1975 UTC+8), giờ mùa
+    hè ở nước ngoài (đã trừ 1 giờ), hay sinh ở nước ngoài (lập theo giờ địa phương, không lệch). None = không lệch."""
+    if dv.nuoc_ngoai:
+        return "gio_mua_he" if gio_mua_he else "nuoc_ngoai"
+    off = dv.tb.clock_offset
+    return "mui_gio_lich_su" if off is not None and off != config.CALENDAR_MERIDIAN_TZ else None
+
+
 def _ung_vien(inp: DinhGioInput, dv: _DauVao) -> list[dict]:
     ls_ = inp.la_so
     gio, phut = int(ls_.birth_time[:2]), int(ls_.birth_time[3:])
-    dong_ho = _dt.datetime(dv.duong_goc.year, dv.duong_goc.month, dv.duong_goc.day, gio, phut)
+    ngay_nhap = dv.duong_goc                                    # ngày dương theo ĐỒNG HỒ người dùng nhập
+    dong_ho = _dt.datetime(ngay_nhap.year, ngay_nhap.month, ngay_nhap.day, gio, phut)
     cal = dv.tb.calendar_dt
     ti_nhap = tuvi_an_sao.time_index(cal.hour, cal.minute)
+    lech = dong_ho - cal                                        # đồng hồ − kinh tuyến lịch (múi giờ, giờ mùa hè)
+    lech_phut = round(lech.total_seconds() / 60)
     if inp.tat_ca_gio:
-        # 12 canh của NGÀY đã nhập (theo kinh tuyến lịch): Tý = giữa Tý sớm 00:30, canh khác = giữa canh;
-        # canh trùng giờ đã nhập dùng đúng giờ nhập. Nhập 23:xx (Tý muộn) → thêm ứng viên thứ 13.
-        lech = dong_ho - cal                                    # đồng hồ − kinh tuyến lịch (múi giờ, giờ mùa hè)
-        goc = _dt.datetime.combine(cal.date(), _dt.time())
-        ds = [(f"Giờ {lunar.CHI[i]}", dong_ho if i == ti_nhap else
-               goc + (_dt.timedelta(minutes=30) if i == 0 else _dt.timedelta(hours=2 * i)) + lech, None)
-              for i in range(12)]
-        if ti_nhap == 12:
-            ds.append(("Giờ Tý muộn (23:00–23:59)", dong_ho, GHI_CHU_TY_MUON))
+        # 12 canh của NGÀY ĐÃ NHẬP theo đồng hồ (lá số vẫn an theo giờ lịch): Tý = giữa Tý sớm 00:30, canh khác =
+        # giữa canh (giờ lịch), đổi ra đồng hồ. Canh trùng giờ đã nhập dùng đúng giờ nhập.
+        goc = _dt.datetime.combine(ngay_nhap, _dt.time())
+        ds = [(f"Giờ {lunar.CHI[i]}", goc + (_dt.timedelta(minutes=30) if i == 0 else _dt.timedelta(hours=2 * i))
+               + lech, None) for i in range(12)]
+        if cal.date() == ngay_nhap and ti_nhap < 12:
+            ds[ti_nhap] = (ds[ti_nhap][0], dong_ho, None)
+        elif ti_nhap == 12 and gio == 23:
+            # Nhập 23:xx đồng hồ và đúng là Tý muộn theo giờ lịch → thêm ứng viên thứ 13.
+            ds.append((tuvi_dinh_gio.nhan_ty_muon(lech_phut), dong_ho, _ghi_chu_ty_muon(lech_phut)))
+        elif ti_nhap == 12 and cal.date() == ngay_nhap - _dt.timedelta(days=1):
+            # Đồng hồ sớm hơn giờ lịch (vd 00:30 UTC+8 = 23:30 hôm trước): Tý muộn hôm trước = Tý của ngày đã nhập.
+            ds[0] = (tuvi_dinh_gio.nhan_ty_muon(lech_phut), dong_ho, _ghi_chu_ty_muon_hom_truoc(dong_ho, cal, lech_phut))
+        else:
+            # Hiếm (đồng hồ lệch ≥ 2 giờ): giờ nhập thuộc canh của ngày hôm trước theo giờ lịch → thêm riêng.
+            ds.insert(0, (f"Giờ {lunar.CHI[ti_nhap % 12]} (giờ lịch ngày hôm trước)", dong_ho,
+                          f"Giờ bạn nhập theo giờ lịch là {cal.strftime('%H:%M ngày %d/%m/%Y')}."))
     else:
         ds = [("Giờ trước", dong_ho - _dt.timedelta(hours=2), None), ("Giờ đã nhập", dong_ho, None),
               ("Giờ sau", dong_ho + _dt.timedelta(hours=2), None)]
@@ -172,7 +207,7 @@ def _ung_vien(inp: DinhGioInput, dv: _DauVao) -> list[dict]:
         dau_vao = {"birth_date": t.date().isoformat(), "birth_time": t.strftime("%H:%M"), "calendar_type": "duong"}
         dv_u = _DauVao(ls_.model_copy(update={**dau_vao, "birth_date": t.date(), "am_nhuan": False}))
         u = {"nhan": nhan, "gio_dai_dien": dau_vao["birth_time"], "la_gio_nhap": t == dong_ho,
-             "sinh": _sinh(dv_u, ls_.gender), "dau_vao": dau_vao,
+             "sinh": _sinh(dv_u, ls_.gender), "dau_vao": dau_vao, "ngay_duong": dau_vao["birth_date"],
              "lech_phut": round((t - dv_u.tb.calendar_dt).total_seconds() / 60)}
         if ghi_chu:
             u["ghi_chu"] = ghi_chu
@@ -190,6 +225,7 @@ def api_dinh_gio(inp: DinhGioInput) -> dict:
     ly_do = tuvi_dinh_gio.ly_do(cal.hour, cal.minute, inp.la_so.do_tin_gio.value)
     try:
         kq = tuvi_dinh_gio.lap(_ung_vien(inp, dv), nam, ly_do)
+        kq["ly_do_lech"] = ly_do_lech(dv, inp.la_so.gio_mua_he)
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
     except ValueError as e:

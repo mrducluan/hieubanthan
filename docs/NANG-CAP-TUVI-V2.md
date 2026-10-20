@@ -109,12 +109,14 @@ Mỗi tháng xếp mức theo tứ hoá của **năm âm chứa tháng đó** (`
                 "khoang_gio": "11:00–12:59",            // theo kinh tuyến lịch UTC+7 (Tử vi chia canh theo giờ này)
                 "khoang_gio_dong_ho": "11:00–12:59",    // cùng canh trên ĐỒNG HỒ nơi sinh
                 "lech_gio_lich": false,                 // true khi đồng hồ nơi sinh ≠ giờ lịch
-                "ghi_chu": "...",                       // chỉ ứng viên "Giờ Tý muộn (23:00–23:59)"
+                "ghi_chu": "...",                       // chỉ ứng viên "Giờ Tý muộn (…)" (chế độ 12 canh)
+                "ngay_duong": "1990-05-17",             // ngày dương theo ĐỒNG HỒ người dùng (= dau_vao.birth_date)
                 "gio_dai_dien": "12:00", "la_gio_nhap": true,
                 "cung_menh": {"chi","chinh_tinh": ["..."]}, "cuc": "Thủy nhị cục", "than_cu": "Quan Lộc",
                 "dau_vao": {"birth_date","birth_time","calendar_type": "duong"},   // giờ ĐỒNG HỒ nơi sinh
                 "nam": [{"nam": 2023, "can_chi": "Quý Mão",
                          "cau_hoi": [{"hoa": "Kỵ", "cung": "Tài Bạch", "cach": "nhap|chieu", "noi_dung": "..."}]}]}],
+  "ly_do_lech": null,      // "mui_gio_lich_su" | "gio_mua_he" | "nuoc_ngoai" | null — vì sao đồng hồ lệch giờ lịch
   "nam_doi_chieu": [2023, 2024, 2025], "khac_nhau": ["..."], "loi_dan": "...", "luu_y": ["..."], "co_canh_bao": [...] }
 ```
 Mặc định 3 ứng viên (giờ trước / đã nhập / sau = giờ nhập ± 2 giờ đồng hồ); `tat_ca_gio=true` → 12 canh giờ
@@ -125,11 +127,22 @@ Mặc định 3 ứng viên (giờ trước / đã nhập / sau = giờ nhập �
   `khoang_gio_dong_ho` = `khoang_gio` dời theo độ lệch *đồng hồ nơi sinh − kinh tuyến lịch* mà tiền xử lý `_DauVao`
   đã dùng cho chính ứng viên đó (múi giờ lịch sử, vd miền Nam 1960–1975 UTC+8: canh Mão lịch `05:00–06:59` → đồng hồ
   `06:00–07:59`; nước ngoài có giờ mùa hè: +1 giờ). Không lệch → hai trường bằng nhau, `lech_gio_lich=false`.
-- **12 canh** (`tat_ca_gio`): mọi ứng viên thuộc **ngày đã nhập** (theo giờ lịch); Tý = 00:30 (giữa Tý sớm), canh
-  khác = giữa canh, quy ra giờ đồng hồ; canh trùng giờ đã nhập dùng đúng giờ nhập. Giờ nhập 23:00–23:59 (Tý muộn,
-  Tử vi tính sang ngày hôm sau) → thêm **ứng viên thứ 13** "Giờ Tý muộn (23:00–23:59)" = đúng giờ nhập,
-  `la_gio_nhap=true`, có `ghi_chu`; ứng viên Tý sớm khi đó `la_gio_nhap=false`. Thứ tự = thời gian (Tý sớm … Hợi,
-  Tý muộn cuối) → web tính `lech` (sớm/muộn hơn giờ nhập) theo `dau_vao`.
+- **12 canh** (`tat_ca_gio`): mọi ứng viên thuộc **ngày đã nhập theo GIỜ ĐỒNG HỒ người dùng** (đúng điều họ thấy;
+  lá số vẫn an theo giờ lịch như cũ): Tý = 00:30 lịch (giữa Tý sớm), canh khác = giữa canh, quy ra giờ đồng hồ; canh
+  trùng giờ đã nhập dùng đúng giờ nhập. Ba ca của giờ nhập Tý muộn (chỉ số 12 theo giờ lịch):
+  1. Giờ **đồng hồ** nhập 23:xx (không lệch) → thêm **ứng viên thứ 13** `nhan` "Giờ Tý muộn (23:00–23:59)" = đúng giờ
+     nhập, `la_gio_nhap=true`, có `ghi_chu`; ứng viên Tý sớm khi đó `la_gio_nhap=false`. Thứ tự = thời gian (Tý sớm …
+     Hợi, Tý muộn cuối) → web tính `lech` (sớm/muộn hơn giờ nhập) theo `dau_vao`.
+  2. Đồng hồ chạy sớm hơn giờ lịch (miền Nam 1960–1975 UTC+8, giờ mùa hè…) và nhập 00:xx = 23:xx **hôm trước** theo
+     giờ lịch → Tử vi tính Tý muộn sang ngày hôm sau = đúng ngày đã nhập, lá trùng lá Tý sớm → giờ nhập **thay** ứng
+     viên Tý (vẫn 12 ứng viên), `nhan` "Giờ Tý muộn (00:00–00:59)" theo **khoảng giờ đồng hồ**, `ghi_chu` nêu giờ lịch.
+  3. Đồng hồ nhập 23:xx nhưng giờ lịch là 22:xx (UTC+8) → giờ Hợi, không thêm ứng viên. (Lệch ≥ 2 giờ, vd UTC+9 năm
+     1945: giờ nhập thuộc canh của hôm trước theo giờ lịch → thêm một ứng viên đầu danh sách.)
+- **`ngay_duong`** mọi ứng viên (cả chế độ ±1 canh, vd "Giờ trước" của 00:30 rơi về hôm trước): web ghi ngày khi khác
+  ngày của ứng viên giờ đã nhập.
+- **`ly_do_lech`** lấy từ tiền xử lý `_DauVao`: `mui_gio_lich_su` (sinh trong nước, đồng hồ lúc đó ≠ UTC+7),
+  `gio_mua_he` (nước ngoài, đã trừ 1 giờ mùa hè — "giờ lịch" ở đây là giờ chuẩn địa phương, không phải UTC+7),
+  `nuoc_ngoai` (nước ngoài, không giờ mùa hè — không lệch), `null`. Web hiện câu giải thích theo mã.
 
 ## 4. Đầu vào mới cho người dùng (đề xuất UI)
 
@@ -152,3 +165,31 @@ Mặc định 3 ứng viên (giờ trước / đã nhập / sau = giờ nhập �
 5. QC độc lập (test, lint, typecheck, rà ranh giới tầng + giọng văn).
 
 Không đổi lá số gốc → **không tăng `ENGINE_VERSION`**.
+
+## 6. Bảng chuyển đổi TS → Python (chứng minh bằng oracle)
+
+Bản TS gốc giữ nguyên văn ở `engine/ziwei/oracle_v22/astroEngine_v2_2.ts` — **chỉ làm ORACLE lúc phát triển**,
+không chạy runtime, không import từ engine/web. `ziwei/oracle_v22/sinh_golden.py` an 67 lá golden phi hoá bằng iztro
+của dự án, đổi tên → mã bằng `app/kb/tuvi_ma_chuan.py` (như adapter 04), chạy TS bằng
+`node --experimental-strip-types sinh_golden.ts` → `fixtures/golden/tuvi_v22_oracle.json`.
+Kiểm: `tests/test_tuvi_v22_oracle.py` (619 ca) + `tests/test_tuvi_ma_chuan.py`. Sinh lại:
+`cd engine && PYTHONPATH=. .venv/bin/python ziwei/oracle_v22/sinh_golden.py [tệp KB v2.2 gốc]`.
+
+| Hàm TS | Python | Trạng thái | Số ca khớp |
+|---|---|---|---|
+| `assignPalaceStemsAndLaiNhan` | `calc/tuvi_phi_hoa.ngu_ho_don`, `lai_nhan` (+ can iztro) | **Trùng** | 804/804 can cung, 67/67 Lai nhân |
+| `calculateFlyingStarMatrix` — `allTransitions`, `selfTransformations` | `calc/tuvi_phi_hoa.phi_hoa` | **Trùng** (cung nguồn, can, hoá, sao, cung đích, cung xung, tự hoá, Tuần/Triệt) | 3.216/3.216 đường bay |
+| `PALACE_CLASH_MAP` (xung theo tên cung) | xung theo chi đối diện | **Trùng** (vòng 12 cung cố định) | 67/67 lá |
+| `criticalClashes` | `luangiai/tuvi_phi_hoa.chon_noi_bat` loại `ky_xung` | **Cố ý khác**: Python chỉ Mệnh/Tài Bạch/Quan Lộc, bỏ tự hoá, tối đa 8 mục nổi bật (TS gồm cả Điền Trạch, Phu Thê, tự hoá → 354 mục, quá nhiều để làm "nổi bật"). Áp đúng luật TS lên đường bay Python → ra đúng tập TS | 67/67 lá (tập TS tái lập); 197/354 là ứng viên Python |
+| `calculateDouJunJanuaryBranch` (adapter 04) | `calc/tuvi_luu_nguyet.cung_thang_gieng("dau_quan_thai_tue")` | **Trùng**, trừ sinh nửa sau tháng nhuận: dự án (như iztro, `thang_nhuan=thang_sau`) tính sang tháng sau, adapter nhận số tháng thô → lệch đúng 1 cung | 66/67 trùng, 1/1 lệch đúng dự kiến |
+| `calculate90DayRadar` — can tháng, cung tháng, tứ hoá tháng (sao + cung đích + cung xung) | `luangiai/tuvi_luu_nguyet.lap_nam` | **Trùng** | 804/804 tháng |
+| `calculate90DayRadar` — `alertLevel` | `luangiai/tuvi_nhip_3_thang.xep_muc` | **Cố ý khác** (đổi tên RED/YELLOW/GREEN → `can_than/binh/thuan`, không giọng báo động). Luật TS tái lập 804/804; Python khác đúng 3 chỗ: Kỵ tháng ở cung đối diện Kỵ năm (TS chỉ so trùng cung) 27 tháng; TS báo đỏ khi Kỵ xung Tật Ách (Python không xếp mức theo sức khoẻ) 46 tháng; Python thêm `song_loc` 10 tháng | 721/804 cùng mức (89,7%), 83 khác đều đúng lý do |
+| `calculate90DayRadar` — vắt năm, tháng nhuận | `nhip_3_thang.lap` | **Cố ý khác (TS sai)**: tháng sang năm âm sau TS vẫn dùng can năm cũ (sai can tháng + Kỵ năm); TS không biết tháng nhuận. Python dùng năm mới, tách nửa tháng nhuận | 157/201 tháng trùng can, cung, tứ hoá; 22 vắt năm + 22 nhuận khác đúng dự kiến |
+| `calculate90DayRadar`, `buildBirthTimeCalibrationTest` — rơi về `'MENH'` khi không thấy sao/cung | `phi_tu_can` trả `None` | **Cố ý khác**: TS âm thầm gán Mệnh (sai cung), Python để trống, không luận | lá thiếu Văn Xương (ca dựng) |
+| `calculateMultiChartSynergy` (can năm + can Mệnh người kia, hai chiều) | `luangiai/tuvi_hop_tham.lap` | **Trùng** cung đích + cung xung; **cố ý khác**: Python không có `impactVerdict` (BENEFACTOR_BOOST / TOXIC_DRAIN_ALERT…) — không chấm điểm hợp/khắc (2026-09-30), lời văn trung tính | 67/67 cặp × 12 hoá (804 đường) |
+| `buildBirthTimeCalibrationTest` | `luangiai/tuvi_dinh_gio.lap` | **Trùng** chi giờ, chính tinh Mệnh, cung bị Kỵ xung theo năm; **cố ý khác**: năm đối chiếu do người dùng chọn (TS cố định 2022–2024), Python hỏi thêm cung Kỵ nhập + Lộc nhập, Tật Ách hỏi nhịp sinh hoạt (TS: "bệnh lý cần điều trị"), 12 canh cho người không biết giờ | 192/192 ứng viên × 3 năm |
+| `calculateBaZhaiGua` | `calc/phongthuy.menh_quai` + `bang_huong` | **Trùng** 1901–2099 cả hai giới (số quái, tên quái, Đông/Tây tứ mệnh, 4 hướng tốt) với ngày sau Lập xuân; **cố ý khác**: TS lấy năm dương, Python năm theo Lập xuân (sinh 20/01 → năm trước); **TS lỗi năm 1900** (ra quái số 10) | 398/398 năm×giới |
+| `0_legacy_adapter_mapping` + `normalizeToken` | `app/kb/tuvi_ma_chuan.py` | **Thêm mới**: mọi mục bảng v2.2 ra đúng mã + tên dự án ("Tử Nữ", "Nô Bộc", "Hoả Tinh", "Tị"); **cố ý khác**: tên cung/can/chi lạ → `ValueError` (TS âm thầm trả MENH/TY/GIAP), sao lạ → `None` (TS tạo `STAR_…`). Không đưa mã vào API công khai | 212/212 mục |
+| `enrichLegacyChartWithV2Engine` | route `app/tuvi_v2_api.py` | **Không chuyển**: dự án không có "engine cũ" cần bọc — route nhận `la_so` và gọi thẳng các hàm trên | — |
+
+Không tìm thấy chỗ Python sai so với TS ở điểm TS đúng.

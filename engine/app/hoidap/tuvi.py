@@ -321,8 +321,9 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao") -> dict:
         kq["xu_ly"] = "tra_loi_kem_luu_y"
         kq["cung"] = kq["cung"] or [c for c, m in CHU_DE_CUNG if chung.co(t_chinh, m)][:1]
     yd = _y_dinh(t_chinh) or _y_dinh(t)          # ý định có thể nằm trong lời dẫn ("Mình đang phân vân…, tử vi nói gì?")
-    if yd in ("tai_van", "di_hay_o") and _co_ten(t_chinh, CUNG_KW):
-        yd = None                       # "Cung Tài Bạch của tôi nói gì về tiền bạc?" = câu bản mệnh, không phải ý định
+    if yd in ("tai_van", "di_hay_o", "phan_van") and _co_ten(t_chinh, CUNG_KW):
+        yd = None                       # "Cung Tài Bạch của tôi nói gì về tiền bạc?", "chọn người yêu hợp cung Phu
+        #                                 Thê" = câu bản mệnh về cung đã nêu, không phải ý định
     if yd and _kb_y_dinh(yd) and (kq["loai"] in ("la_so", "han", "ky_thuat")
                                   or (kq["loai"] == "la_so_con" and yd == "hoc_hanh_con")):
         _ap_y_dinh(kq, yd, t_chinh)

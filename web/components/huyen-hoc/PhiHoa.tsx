@@ -6,8 +6,10 @@ import { HOA, type ChartInputVao, type DuongBayT, type PhiHoaOutputT } from "@/a
 import { NhanLop } from "@/components/huyen-hoc/KhoiMoLuoi";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
+import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { Button } from "@/components/ui/button";
 import { usePost } from "@/lib/goi-api";
+import { maPhiHoa } from "@/lib/kiem-chung";
 import { cn } from "@/lib/utils";
 
 /** Màu dịu theo hoá — Kỵ dùng tông trăng, không đỏ rực. */
@@ -71,6 +73,7 @@ export function PhiHoaXem({ d, onChonCung, onHoi }: { d: PhiHoaOutputT; onChonCu
                     <MessageCircleQuestion aria-hidden /> Hỏi thêm
                   </Button>
                 </div>
+                <KiemChung loai="phi_hoa" mau={maPhiHoa(n)} phai="phi_tinh" />
               </li>
             ))}
           </ul>

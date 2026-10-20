@@ -45,6 +45,11 @@ def khoang_canh(ti: int, lech_phut: int = 0) -> str:
     return f"{a // 60:02d}:{a % 60:02d}–{b // 60:02d}:{b % 60:02d}"
 
 
+def nhan_ty_muon(lech_phut: int = 0) -> str:
+    """Nhãn ứng viên Tý muộn theo khoảng giờ ĐỒNG HỒ nơi sinh (lệch 0 → 23:00–23:59 như giờ lịch)."""
+    return f"Giờ Tý muộn ({khoang_canh(12, lech_phut)})"
+
+
 def ly_do(gio: int, phut: int, do_tin_gio: str) -> list[str]:
     """Vì sao nên định giờ: phút trong 15 phút đầu/cuối canh giờ, giờ áng chừng, hoặc không biết giờ."""
     ra = []
@@ -109,7 +114,8 @@ def _khac_nhau(uv: list[dict]) -> list[str]:
 
 def lap(ung_vien: list[dict], nam_doi_chieu: list[int], ly_do_: list[str]) -> dict:
     """`ung_vien` = [{"nhan", "gio_dai_dien", "la_gio_nhap", "sinh": {ngay, ti, gioi_tinh, …}, "dau_vao"?,
-    "lech_phut"? (đồng hồ nơi sinh − kinh tuyến lịch, phút; mặc định 0), "ghi_chu"?}].
+    "lech_phut"? (đồng hồ nơi sinh − kinh tuyến lịch, phút; mặc định 0), "ngay_duong"? (ngày dương theo đồng hồ
+    người dùng, ISO), "ghi_chu"?}].
     `khoang_gio` = khoảng giờ theo kinh tuyến lịch UTC+7; `khoang_gio_dong_ho` = cùng canh đó trên đồng hồ nơi sinh."""
     if len(nam_doi_chieu) > TOI_DA_NAM:
         raise ValueError(f"Tối đa {TOI_DA_NAM} năm đối chiếu")
@@ -125,6 +131,8 @@ def lap(ung_vien: list[dict], nam_doi_chieu: list[int], ly_do_: list[str]) -> di
              "cung_menh": {"chi": menh["chi"], "chinh_tinh": [s["ten"] for s in menh["chinh_tinh"]]},
              "cuc": ls["cuc"], "than_cu": next((c["ten"] for c in ls["cung"] if c["la_than"]), None),
              "nam": [_nam(ls, n) for n in nam_doi_chieu]}
+        if u.get("ngay_duong"):
+            x["ngay_duong"] = u["ngay_duong"]
         if "dau_vao" in u:
             x["dau_vao"] = u["dau_vao"]
         if u.get("ghi_chu"):

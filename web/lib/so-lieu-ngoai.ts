@@ -8,6 +8,7 @@
 // Kết quả cache 1 giờ (số liệu Google trễ 1–2 ngày, gọi dày không có ích, lại tốn hạn mức API).
 import { createSign } from "node:crypto";
 import { unstable_cache } from "next/cache";
+import type { DongKiemChung } from "@/lib/kiem-chung";
 
 export class ChuaKetNoi extends Error {}
 
@@ -165,6 +166,9 @@ export interface BaoCaoPosthog {
   gateLoi: string | null;
   /** HN-4: ý định hôm nay (mã) + nhóm việc chưa hỗ trợ trong câu gõ không nhận ra (mã cố định, không có câu). */
   yDinh: { top: { ma: string; n: number }[]; goTay: number; khongNhanRa: number; nhomMoi: { ma: string; n: number }[] } | null;
+  /** KC-0: phiếu "Đúng với mình / Chưa đúng" trên thẻ Tử vi theo mã mẫu (90 ngày, mỗi trình duyệt tính một lần mỗi
+   *  kết quả). null = truy vấn lỗi. Chỉ để người biên tập xem lại KB — không tự đổi luận giải. */
+  kiemChung: DongKiemChung[] | null;
 }
 
 async function hogql<T>(query: string): Promise<T[]> {
@@ -222,8 +226,16 @@ async function baoCaoPosthogTho(): Promise<BaoCaoPosthog> {
     top: top.map(([ma, n]) => ({ ma, n: Number(n) })), goTay: Number(dem[0]?.[0] ?? 0), khongNhanRa: Number(dem[0]?.[1] ?? 0),
     nhomMoi: moi.map(([ma, n]) => ({ ma, n: Number(n) })),
   })).catch(() => null);
+  // KC-0: chỉ mã (lib/kiem-chung) — sự kiện không mang chữ, lá số hay ngày giờ. 90 ngày vì phiếu thưa hơn sự kiện xem.
+  const kiemChung = await hogql<[string | null, string | null, number, number]>(
+    `SELECT properties.loai, properties.mau, countDistinctIf(distinct_id, properties.ket_qua = 'dung'),
+       countDistinctIf(distinct_id, properties.ket_qua = 'chua_dung')
+     FROM events WHERE event = 'tuvi_kiem_chung' AND timestamp > now() - INTERVAL 90 DAY
+     GROUP BY properties.loai, properties.mau LIMIT 500`)
+    .then((rows) => rows.filter(([l, m]) => l && m).map(([l, m, d, c]) => ({ loai: l!, mau: m!, dung: Number(d), chua_dung: Number(c) })))
+    .catch(() => null);
   return {
-    yDinh,
+    yDinh, kiemChung,
     pheu: PHEU.map(([e, ten]) => ({ su_kien: e, ten, luot: theo.get(e)?.luot ?? 0, nguoi: nguoi(e) })),
     quayLai: ql[0] ? { truoc: Number(ql[0][0]), tro_lai: Number(ql[0][1]) } : null,
     gate: {

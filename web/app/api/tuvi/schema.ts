@@ -333,8 +333,10 @@ export const DinhGioOutput = z.object({
     /** Cùng canh đó trên ĐỒNG HỒ nơi sinh (lệch khi múi giờ lịch sử ≠ UTC+7, giờ mùa hè…). Optional: engine cũ. */
     khoang_gio_dong_ho: z.string().optional(),
     lech_gio_lich: z.boolean().optional(),
-    /** Chỉ ứng viên "Giờ Tý muộn" (chế độ 12 canh, giờ nhập 23:00–23:59). */
+    /** Chỉ ứng viên "Giờ Tý muộn" (chế độ 12 canh: giờ đồng hồ nhập 23:xx, hoặc 00:xx khi đồng hồ chạy sớm hơn giờ lịch). */
     ghi_chu: z.string().optional(),
+    /** Ngày dương theo ĐỒNG HỒ người dùng (ISO) — web hiện ngày khi khác ngày đã nhập. Optional: engine cũ. */
+    ngay_duong: z.string().optional(),
     gio_dai_dien: z.string(),
     la_gio_nhap: z.boolean(),
     cung_menh: z.object({ chi: z.string(), chinh_tinh: z.array(z.string()) }).passthrough(),
@@ -348,6 +350,9 @@ export const DinhGioOutput = z.object({
     }).passthrough()),
   }).passthrough()).min(1).max(13),   // 12 canh + "Giờ Tý muộn" khi giờ nhập 23:xx
   khac_nhau: z.array(z.string()).default([]),
+  /** Vì sao đồng hồ nơi sinh lệch giờ lịch: "mui_gio_lich_su" | "gio_mua_he" | "nuoc_ngoai"; null = không lệch.
+   *  Để chuỗi (không enum) — mã mới của engine không làm vỡ cả khối; web chỉ hiện câu cho mã đã biết. */
+  ly_do_lech: z.string().nullable().optional(),
   nam_doi_chieu: z.array(z.number()).optional(),
   loi_dan: z.string().optional(),
   luu_y: z.array(z.string()).default([]),

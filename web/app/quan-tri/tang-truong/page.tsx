@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
 import { coTaiKhoan } from "@/lib/cua-sao";
+import { MAU_KIEM_CHUNG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
 import { baoCaoGa4, baoCaoGsc, baoCaoPosthog, MAU_TOI_THIEU, tinhGate, type BaoCaoPosthog, type DongGsc, type KetQua } from "@/lib/so-lieu-ngoai";
 
 export const metadata: Metadata = { title: "Tăng trưởng" };
@@ -123,6 +124,38 @@ function BangGate({ du }: { du: BaoCaoPosthog }) {
   );
 }
 
+/** KC-0: phiếu "Đúng với mình / Chưa đúng" theo mã mẫu Tử vi. Chỉ hiện tỉ lệ khi đủ mẫu. */
+function BangKiemChung({ ds }: { ds: DongKiemChung[] | null }) {
+  if (ds === null) return <p className="mt-3 text-sm text-cinnabar" role="alert">Chưa đọc được phiếu kiểm chứng (thử lại sau một giờ).</p>;
+  const kq = tinhKiemChung(ds);
+  return (
+    <div className="mt-3 space-y-3">
+      <p className="text-sm">Tổng phiếu: <b>{so(kq.tongPhieu)}</b> · mã đủ mẫu (≥ {MAU_KIEM_CHUNG}): <b>{so(kq.du.length)}</b>
+        {kq.chuaDu > 0 && <span className="text-fg-muted"> · {so(kq.chuaDu)} mã chưa đủ mẫu (chưa hiện)</span>}</p>
+      {kq.du.length > 0 ? (
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead><tr className="text-left text-xs text-fg-muted">
+              <th className="py-1 font-normal">Khối</th><th className="font-normal">Mẫu</th><th className="text-right font-normal">Đúng</th>
+              <th className="text-right font-normal">Chưa đúng</th><th className="text-right font-normal">Tỉ lệ đúng</th>
+            </tr></thead>
+            <tbody>
+              {kq.du.map((d) => (
+                <tr key={`${d.loai}|${d.mau}`} className="border-t border-line/60">
+                  <td className="py-1.5 text-fg-muted">{d.loai === "phi_hoa" ? "Đường bay" : "3 tháng tới"}</td>
+                  <td>{d.nhan}<span className="block text-xs text-fg-faint"><code>{d.mau}</code></span></td>
+                  <td className="text-right">{so(d.dung)}</td><td className="text-right">{so(d.chua_dung)}</td>
+                  <td className="text-right">{pt(d.ti_le_dung)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : <p className="text-sm text-fg-faint">Chưa có mã nào đủ {MAU_KIEM_CHUNG} phiếu.</p>}
+    </div>
+  );
+}
+
 export default async function Page() {
   const p = await congQuanTri();
   if (p.trang !== "ok") return <BaoCong trang={p.trang} email={"email" in p ? p.email : null} />;
@@ -155,6 +188,13 @@ export default async function Page() {
           </div>
         </Card>
       )}
+
+      <Card data-testid="qt-kiem-chung">
+        <h2 className="text-lg">Kiểm chứng Tử vi (PostHog, 90 ngày)</h2>
+        <p className="mt-1 text-sm text-fg-muted">Người xem bấm “Đúng với mình / Chưa đúng” trên thẻ Đường bay tứ hoá và tháng đang diễn ra của 3 tháng tới.
+          Chỉ đếm MÃ mẫu; mỗi trình duyệt tính một lần cho mỗi kết quả. Dùng để người biên tập xem lại KB (xếp tỉ lệ đúng thấp lên đầu) — <b>không tự đổi luận giải</b>.</p>
+        {ph.ok ? <BangKiemChung ds={ph.du.kiemChung} /> : <div className="mt-3"><ChuaCo kq={ph} huongDan="Cần khoá PostHog như mục Phễu bên dưới." /></div>}
+      </Card>
 
       <Card>
         <h2 className="text-lg">Phễu sản phẩm (PostHog, 28 ngày)</h2>
