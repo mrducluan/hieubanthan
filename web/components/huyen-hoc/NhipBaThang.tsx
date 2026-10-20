@@ -7,8 +7,10 @@ import { NhanLop } from "@/components/huyen-hoc/KhoiMoLuoi";
 import { MAU_HOA_DIU } from "@/components/huyen-hoc/PhiHoa";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
+import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { Button } from "@/components/ui/button";
 import { usePost } from "@/lib/goi-api";
+import { maNhip } from "@/lib/kiem-chung";
 import { cn } from "@/lib/utils";
 
 const MAU_MUC: Record<Nhip3ThangOutputT["thang"][number]["muc"], { vien: string; cham: string; chu: string }> = {
@@ -82,6 +84,11 @@ export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutpu
                   <MessageCircleQuestion aria-hidden /> Hỏi thêm
                 </Button>
               </div>
+              {/* Chỉ tháng đã bắt đầu (hiện tại / đã qua) mới hỏi kiểm chứng — tháng chưa tới thì chưa ai biết đúng hay không. */}
+              {t.tu <= d.ngay_xem && (
+                <KiemChung loai="nhip_3_thang" mau={maNhip(t)} phai={d.phai_luu_nguyet} khoa={`${t.nam_am}-${t.thang}-${t.nhuan ? 1 : 0}-${t.phan}`}
+                  cauHoi="Tháng này có đúng nhịp với bạn?" />
+              )}
             </li>
           );
         })}

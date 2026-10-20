@@ -21,7 +21,9 @@ export type SuKien =
   // TS-NOIDAU: bấm một câu hỏi nỗi đau (bảng 5 trụ) hoặc câu "hỏi tiếp" sau câu trả lời — chỉ mã câu + mã trụ
   | "pain_point_clicked"
   // TS-V3b: "Phái nào nói đúng về bạn?" — chỉ mã phái + số lần đã chọn (đếm trên máy), không câu chữ
-  | "school_voted";
+  | "school_voted"
+  // KC-0: "Đúng với mình / Chưa đúng" trên thẻ Tử vi (phi hoá, nhịp 3 tháng) — chỉ mã mẫu + loại + kết quả + phái
+  | "tuvi_kiem_chung";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number"> = {
@@ -52,6 +54,8 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   trang: "string",      // ND-2: đường dẫn trang chứa nút
   tru: "string",       // TS-NOIDAU: mã trụ đời (su_nghiep_tien_bac…)
   ma_cau: "string",     // TS-NOIDAU: mã câu hỏi chuẩn trong KB (sn_sai_nghe…), không bao giờ là câu gõ tay
+  mau: "string",        // KC-0: mã mẫu tất định (lib/kiem-chung: "mau.quan_loc.ky.menh", "thuan.ln"), không bao giờ là chữ
+  loai: "string",       // KC-0: phi_hoa / nhip_3_thang
   vi_tri: "string",     // ND-2: tren / duoi / cuoi   // SAO-3: mã nhiệm vụ (luu_ho_so / hoi_3_cau / moi_1_ban)
 };
 const GIOI_HAN_CHUOI = 40;
