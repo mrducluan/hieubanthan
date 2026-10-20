@@ -180,3 +180,61 @@ def test_dinh_gio_23h30_tat_ca_gio_them_ty_muon():
     r = _post("dinh-gio", {"la_so": {**LA_SO, "birth_time": "23:30"}, "nam_doi_chieu": [2024]})
     assert [u["gio_dai_dien"] for u in r["ung_vien"]] == ["21:30", "23:30", "01:30"]
     assert "ghi_chu" not in r["ung_vien"][1]
+
+
+# ---- định giờ: ngày theo giờ ĐỒNG HỒ + Tý muộn/sớm theo đồng hồ khi lệch giờ lịch + lý do lệch ----
+def test_dinh_gio_ngay_duong_va_ly_do_lech_mac_dinh():
+    r = _post("dinh-gio", {"la_so": {**LA_SO, "birth_time": "01:05"}, "nam_doi_chieu": [2024]})
+    assert r["ly_do_lech"] is None
+    assert [u["ngay_duong"] for u in r["ung_vien"]] == ["1990-05-14", "1990-05-15", "1990-05-15"]
+    assert all(u["ngay_duong"] == u["dau_vao"]["birth_date"] for u in r["ung_vien"])
+
+
+def test_dinh_gio_mien_nam_00h30_12_canh_theo_ngay_dong_ho():
+    # 00:30 đồng hồ Sài Gòn 10/03/1965 (UTC+8) = 23:30 ngày 09/03 theo giờ lịch: Tý muộn của ngày hôm trước,
+    # Tử vi tính sang ngày hôm sau → đúng ngày người dùng nhập. 12 canh phải là của NGÀY ĐÃ NHẬP theo đồng hồ.
+    r = _post("dinh-gio", {"la_so": {**NAM_1965, "birth_time": "00:30"}, "nam_doi_chieu": [2024],
+                           "tat_ca_gio": True})
+    uv = r["ung_vien"]
+    assert r["ly_do_lech"] == "mui_gio_lich_su"
+    assert len(uv) == 12 and sum(u["la_gio_nhap"] for u in uv) == 1
+    assert all(u["ngay_duong"] == "1965-03-10" for u in uv)
+    ty = uv[0]
+    assert ty["chi_gio"] == "Tý" and ty["la_gio_nhap"] and ty["gio_dai_dien"] == "00:30"
+    assert ty["khoang_gio"] == "23:00–23:59" and ty["khoang_gio_dong_ho"] == "00:00–00:59"
+    assert ty["nhan"] == "Giờ Tý muộn (00:00–00:59)"
+    assert "ngày hôm sau" in ty["ghi_chu"] and "23:30 ngày 09/03/1965" in ty["ghi_chu"]
+    assert "23:00–23:59" not in ty["nhan"]
+    assert uv[11]["chi_gio"] == "Hợi" and uv[11]["gio_dai_dien"] == "23:00"
+    # Lá Tý muộn hôm trước (giờ lịch) trùng lá Tý sớm của ngày đã nhập
+    r2 = _post("dinh-gio", {"la_so": {**NAM_1965, "birth_time": "01:30"}, "nam_doi_chieu": [2024]})
+    som = r2["ung_vien"][1]
+    assert som["chi_gio"] == "Tý" and (som["cung_menh"], som["cuc"]) == (ty["cung_menh"], ty["cuc"])
+
+
+def test_dinh_gio_mien_nam_23h30_khong_them_ty_muon():
+    # 23:30 đồng hồ UTC+8 = 22:30 giờ lịch = giờ Hợi → không có ứng viên thứ 13
+    r = _post("dinh-gio", {"la_so": {**NAM_1965, "birth_time": "23:30"}, "nam_doi_chieu": [2024],
+                           "tat_ca_gio": True})
+    uv = r["ung_vien"]
+    assert len(uv) == 12 and all(u["ngay_duong"] == "1965-03-10" for u in uv)
+    assert next(u for u in uv if u["la_gio_nhap"])["chi_gio"] == "Hợi"
+
+
+def test_dinh_gio_mien_nam_00h30_ba_ung_vien_co_ngay():
+    r = _post("dinh-gio", {"la_so": {**NAM_1965, "birth_time": "00:30"}, "nam_doi_chieu": [2024]})
+    t, n, s = r["ung_vien"]
+    assert [u["ngay_duong"] for u in (t, n, s)] == ["1965-03-09", "1965-03-10", "1965-03-10"]
+    assert n["nhan"] == "Giờ đã nhập" and n["khoang_gio_dong_ho"] == "00:00–00:59"
+
+
+def test_dinh_gio_nuoc_ngoai_ly_do_lech():
+    nn = {"birth_date": "1990-07-15", "birth_time": "00:30", "gender": "nu", "noi_sinh": "nuoc_ngoai"}
+    r = _post("dinh-gio", {"la_so": {**nn, "gio_mua_he": True}, "nam_doi_chieu": [2024], "tat_ca_gio": True})
+    assert r["ly_do_lech"] == "gio_mua_he"
+    uv = r["ung_vien"]
+    assert len(uv) == 12 and all(u["ngay_duong"] == "1990-07-15" for u in uv)
+    assert uv[0]["la_gio_nhap"] and uv[0]["nhan"] == "Giờ Tý muộn (00:00–00:59)"
+    r = _post("dinh-gio", {"la_so": nn, "nam_doi_chieu": [2024]})
+    assert r["ly_do_lech"] == "nuoc_ngoai"
+    assert all(u["lech_gio_lich"] is False for u in r["ung_vien"])

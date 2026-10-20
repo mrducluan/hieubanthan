@@ -122,3 +122,14 @@ def test_lap_ty_muon_va_ghi_chu():
     assert som["chi_gio"] == muon["chi_gio"] == "Tý"
     assert som["khoang_gio"] == "00:00–00:59" and muon["khoang_gio"] == "23:00–23:59"
     assert muon["ghi_chu"] == "Tử vi tính sang ngày hôm sau." and "ghi_chu" not in som
+
+
+def test_lap_ngay_duong_theo_dong_ho():
+    u = {**_uv(1, "Giờ đã nhập", True), "ngay_duong": "1990-05-15"}
+    r = dg.lap([_uv(0, "Giờ trước"), u], [2024], [])
+    assert "ngay_duong" not in r["ung_vien"][0] and r["ung_vien"][1]["ngay_duong"] == "1990-05-15"
+
+
+def test_nhan_ty_muon_theo_dong_ho():
+    assert dg.nhan_ty_muon(0) == "Giờ Tý muộn (23:00–23:59)"
+    assert dg.nhan_ty_muon(60) == "Giờ Tý muộn (00:00–00:59)"

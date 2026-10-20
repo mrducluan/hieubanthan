@@ -185,3 +185,18 @@ def test_phi_tinh_la_gi_khong_can_la_so():
 
 def test_tu_hoa_la_gi_van_la_ky_thuat():
     assert tv.phan_loai("Tứ hoá là gì?")["loai"] == "ky_thuat"
+
+
+@pytest.mark.parametrize("cau, cung", [
+    ("Tôi nên chọn người yêu tính cách thế nào cho hợp cung Phu Thê?", "Phu Thê"),
+    ("Tôi nên giữ tiền hay đầu tư theo cung Tài Bạch?", "Tài Bạch"),
+    ("Nên chọn nghề gì cho hợp cung Quan Lộc của tôi?", "Quan Lộc"),
+])
+def test_cau_neu_ten_cung_khong_gan_phan_van(cau, cung):
+    # Câu đã nêu tên cung cụ thể = câu bản mệnh về cung đó (như tai_van / di_hay_o), không phải ý định phân vân
+    kq = tv.phan_loai(cau)
+    assert kq["y_dinh"] is None and cung in kq["cung"]
+
+
+def test_phan_van_khong_neu_cung_van_gan():
+    assert tv.phan_loai("Tôi đang phân vân không biết nên chọn hướng nào.")["y_dinh"] == "phan_van"
