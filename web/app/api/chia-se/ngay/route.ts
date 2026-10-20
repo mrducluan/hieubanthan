@@ -9,6 +9,7 @@ import { kyMaNgay } from "@/lib/ma-moi";
 const Input = z.object({
   ten_hien_thi: z.string().trim().min(1).max(40),
   ho_ten: z.array(z.string().trim().min(1).max(80)).min(1).max(5).optional(),
+  quy_uoc_duong_doi: z.enum(["tong_het", "tung_phan"]).optional(),
   ngay: z.number().int().min(1).max(31),
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1900).max(2100),

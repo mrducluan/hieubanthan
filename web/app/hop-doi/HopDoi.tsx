@@ -149,11 +149,7 @@ export function HopDoi() {
       {kq && (
         <>
           <KetQuaHopDoi kq={kq} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : tenQuanHe} />
-          <CayHaiNguoi than={cay} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : tenQuanHe} cuoi={<>
-            <p className="mb-3 text-sm text-fg-muted">Gửi Cây cho người ấy — người ấy tự nhập ngày sinh để thấy cùng con đường (link không mang ngày sinh của bạn).</p>
-            <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(ma) => `/hop-doi/${ma}`} nutTao="Gửi Cây của hai người"
-              loiNhan={`${tenGoi(hoSo)} mời bạn xem con đường nối hai người trên Cây Sự sống.`} />
-          </>} />
+          <CayHaiNguoi than={cay} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : tenQuanHe} />
           <div className="mx-auto max-w-3xl"><MocDocXong moDun="hopdoi" /><GopY moDun="hopdoi" cauHoi="Phần so hai người có giúp bạn hiểu mối quan hệ này hơn?" /></div>
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             <Card>

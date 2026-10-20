@@ -7,7 +7,7 @@ import { napHoSo, hoi } from "./_hoso";
 
 const LUAN = { v: 1, ho_ten: "Nguyễn Đức Luân", ngay: 24, thang: 10, nam: 1988, tao_luc: "2026-09-30T00:00:00Z" };
 
-test("Cây của hai người: hợp đôi trực tiếp vẽ đường Nun → Qoph, không chấm điểm, có nút gửi Cây", async ({ page }) => {
+test("Cây của hai người: hợp đôi trực tiếp vẽ đường Nun → Qoph, không chấm điểm, có nút mời", async ({ page }) => {
   await napHoSo(page, LUAN);
   await page.goto("/hop-doi");
   await page.getByLabel(/Tên người ấy/).fill("Trần Thị Mai");
@@ -24,7 +24,7 @@ test("Cây của hai người: hợp đôi trực tiếp vẽ đường Nun → 
   await expect(cay.locator("line[data-sang]")).toHaveCount(2);
   await expect(cay).toContainText("3 lối ngắn như nhau");
   await expect(cay).toContainText("không chấm điểm");
-  await expect(cay.getByRole("button", { name: "Gửi Cây của hai người" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Tạo link mời" })).toBeVisible();   // mời người ấy xem cùng (kèm Cây)
 });
 
 test("Cây của hai người qua link mời: người được mời thấy Cây; link chỉ mang Sephirah, không ngày sinh", async ({ page, browser }) => {
@@ -62,6 +62,7 @@ test("thẻ hôm nay: số nổi bật + chữ của ngày khớp engine, link c
   await expect(page.getByTestId("chu-ngay")).toContainText(api.chu_ngay.ten);
   await expect(page.getByTestId("chu-ngay")).toContainText(`chữ thứ ${api.chu_ngay.chu}`);
   await page.getByTestId("the-hom-nay").getByRole("button", { name: "Chia sẻ" }).click();
+  await expect(page.getByTestId("the-hom-nay").getByRole("button", { name: "Đã chép link" })).toBeVisible();
   const chep = await page.evaluate(() => navigator.clipboard.readText());
   const ma = new URL(chep.slice(chep.indexOf("http"))).searchParams.get("the")!;
   const nd = JSON.parse(Buffer.from(ma.split(".")[0]!, "base64url").toString("utf8")) as Record<string, unknown>;

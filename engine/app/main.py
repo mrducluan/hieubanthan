@@ -239,7 +239,7 @@ def api_kabbalah(inp: ThanSoInput) -> dict:
 
 
 class TongHopInput(ThanSoInput):
-    ngay_xem: _dt.date | None = None     # trống = hôm nay theo giờ Việt Nam
+    ngay_xem: _dt.date | None = Field(default=None, ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))  # trống = hôm nay (VN)
 
 
 class NguCanhInput(TongHopInput):
@@ -298,7 +298,7 @@ class TheNgayInput(BaseModel):
     ngay: int = Field(ge=1, le=31)
     thang: int = Field(ge=1, le=12)
     nam: int = Field(ge=1900, le=2100)
-    ngay_xem: _dt.date | None = None
+    ngay_xem: _dt.date | None = Field(default=None, ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))
     quy_uoc_duong_doi: Literal["tong_het", "tung_phan"] = "tong_het"
 
     @field_validator("ho_ten")

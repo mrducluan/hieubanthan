@@ -130,3 +130,13 @@ dùng giữ nguyên), có nút đổi, và luôn báo khi hai cách ra số khá
 | `/api/thanso/phan-hoi` không giới hạn (5 lượt đẩy cụm sang chờ duyệt) | Giới hạn 12 góp ý / 10 phút mỗi người gọi |
 | Còn chỗ bỏ qua cách cộng Đường đời (hợp đôi, `/van`, `/chu-ky`, đối chiếu ở Chaldea, người thứ hai) | Đã luồn tham số |
 | Mã nội bộ "v3", "RESONATES_WITH" trong JSON công khai (BM-1) | Bỏ |
+
+## 8. TS-V3b (2026-10-20) — Cây của hai người · thẻ hôm nay ba phái · "Phái nào nói đúng về bạn?"
+
+| Tính năng | Engine | Web | Khâu tăng trưởng · chỉ số |
+|---|---|---|---|
+| Cây của hai người | `calc/thanso_kabbalah.CAY` + `duong_noi` (golden `thanso_kabbalah_cay.json`), `luangiai.thanso_kabbalah.cay_hai_nguoi`, `/v1/thanso/cay-hai-nguoi` | `CayHaiNguoi.tsx` ở kết quả Hợp đôi + trang nhận lời mời; mã lời mời mang `sp` (Sephirah ngày sinh, không ngày sinh) | MỜI · `share_created{kind=invite}` → `compatibility_created{kind=loi_moi}` |
+| Thẻ hôm nay ba phái | `chu_cua_ngay`, `luangiai/the_ngay.py`, `/v1/thanso/the-ngay` | `ChuCuaNgay.tsx` trong thẻ Hôm nay; mã thẻ ngày thêm `s`/`h`/`hn`, ảnh OG | QUAY LẠI + MỜI · chuỗi ngày, `share_created{kind=hom_nay}` |
+| Phái nào nói đúng + báo cáo 3 phái | `luangiai/bao_cao_ba_phai.py` (`ba_goc_nhin`, `bao_cao`), 2 route | `PhaiNaoDung.tsx`, `lib/phieu-phai.ts` (đếm trên máy), `BaoCaoBaPhai.tsx` qua `luanGiaiCoSao` mô-đun `thanso3` | QUAY LẠI + NẠP · `school_voted{phai,lan}`, `paywall_viewed`/`unlock_succeeded{mo_dun=thanso3}` |
+
+**QC độc lập (2 agent) — đã sửa:** khoá "đã mở hôm nay" của báo cáo ba phái bỏ `phieu` (trước đó bình chọn thêm sau khi trả Sao làm đổi khoá → có thể bị trừ lần hai; `luanGiaiCoSao(..., khoaTu)`), sổ Sao ghi "Luận giải toàn bộ ba phái thần số"; thẻ chia sẻ ngày theo cách cộng Đường đời người dùng chọn; bỏ nút mời trùng ở Hợp đôi; tên không có chữ cái không còn lộ "None"/số 0 trong báo cáo và ba góc nhìn; `ngay_xem` giới hạn 1900–2100; chương "phái hợp nhất" nói rõ khi chưa đủ 7 phiếu. Đã kiểm đúng: 22 con đường Golden Dawn khớp KB, 100 cặp Sephirah đối xứng A↔B, chữ của ngày ≡ ngày cá nhân (mod 9) trên ~2.900 mẫu, không tên/ngày sinh trong phản hồi và mã chia sẻ, chương khoá không lộ đoạn văn (`catXemTruoc`).

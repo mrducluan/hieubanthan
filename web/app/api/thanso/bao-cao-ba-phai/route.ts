@@ -14,6 +14,10 @@ const Input = z.object({
   phieu: z.object({ pitago: Dem, chaldea: Dem, kabbalah: Dem }).strict().optional(),
 }).strict();
 
+// Khoá "đã mở hôm nay" bỏ phiếu (đổi sau mỗi lần bấm, khác nhau giữa các máy) — mở rồi thì xem lại trong ngày không trừ thêm.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const khoaKhongPhieu = ({ phieu, ...con }: Record<string, unknown>) => con;
+
 export function POST(req: Request) {
-  return luanGiaiCoSao(req, Input, "/v1/thanso/bao-cao-ba-phai", "thanso3");
+  return luanGiaiCoSao(req, Input, "/v1/thanso/bao-cao-ba-phai", "thanso3", khoaKhongPhieu);
 }

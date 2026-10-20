@@ -64,7 +64,7 @@ export function CayHaiNguoi({ than, tenA, tenB, cuoi }: { than: Record<string, u
           })}
         </svg>
         <div className="space-y-3 text-sm">
-          <p><b className="text-gold">{tenA}</b>: trạm {a.so} · {a.ten} ({a.nghia?.toLowerCase()}) · <b className="text-gold">{tenB}</b>: trạm {b.so} · {b.ten} ({b.nghia?.toLowerCase()})</p>
+          <p><b className="text-gold">{tenA}</b>: trạm {a.so} · {a.ten}{a.nghia ? ` (${a.nghia.toLowerCase()})` : ""} · <b className="text-gold">{tenB}</b>: trạm {b.so} · {b.ten}{b.nghia ? ` (${b.nghia.toLowerCase()})` : ""}</p>
           <p className="text-base" data-testid="cay-cach-doc">{kq.cach_doc_rieng}</p>
           {kq.con_duong.length > 0 && (
             <ol className="space-y-2">

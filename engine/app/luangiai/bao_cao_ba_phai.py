@@ -61,6 +61,8 @@ def _pitago(lg: dict) -> list[str]:
     doan = []
     for v in lg["cac_vi_tri"][:4]:
         n = v.get("nghia") or {}
+        if not v.get("gia_tri") or not n:          # tên không có chữ cái → chỉ số theo tên = 0, bỏ qua
+            continue
         doan.append(f"{v['ten']} {v['gia_tri']} — {v['khung']}: {(n.get('tu_khoa') or '').lower()}."
                     + (f" Mặt tối: {n['mat_toi'].lower()}." if n.get("mat_toi") else ""))
     hoi = next(((v.get("nghia") or {}).get("phan_chung") for v in lg["cac_vi_tri"] if (v.get("nghia") or {}).get("phan_chung")), None)
@@ -74,6 +76,8 @@ def _chaldea(c: dict) -> list[str]:
     da_noi: set[int] = set()
     for s in c["cac_so"]:
         g, k = s.get("nghia_goc") or {}, s.get("nghia_kep") or {}
+        if not s["goc"] or not g:
+            continue
         so = f"{s['kep']}/{s['goc']}" if s["kep"] else str(s["goc"])
         # Số gốc lặp lại (thường gặp ở Chaldea) chỉ giải nghĩa lần đầu, các lần sau chỉ thêm sắc thái số kép.
         cau = (f"{s['ten']} {so} — {g.get('ten', '')}: {_cau_dau(g.get('xu_huong'))}" if s["goc"] not in da_noi
@@ -91,6 +95,8 @@ def _kabbalah(k: dict) -> list[str]:
     doan = []
     for s in k["cac_so"]:
         n = s.get("nghia") or {}
+        if not s["so"] or not n:
+            continue
         if s["ma"] == "con_duong_ten":
             doan.append(f"{s['ten']} {s['so']} — chữ {n.get('ten')} ({n.get('nghia_chu', '')}), con đường số "
                         f"{s['so_duong_cay']} trên Cây: {_cau_dau(n.get('xu_huong'))}")
@@ -124,6 +130,8 @@ def _phai_hop(phieu: dict[str, int] | None) -> list[str]:
                 "Hai cách đọc này cùng chạm vào bạn — đọc song song sẽ thấy rõ hơn chỗ chúng bổ sung cho nhau."]
     else:
         doan = [f"Sau {tong} lần bình chọn, bạn thấy {ten[xep[0]]} nói đúng về mình nhiều nhất ({so}/{tong})."]
+    if tong < 7:
+        doan.append(f"Mới {tong} lần chọn — đủ 7 lần thì kết quả này đáng tin hơn.")
     doan += [DIEM_RIENG[p] for p in dau]
     doan.append(f"Gợi ý: dùng {' hoặc '.join(ten[p] for p in dau)} làm góc nhìn chính, phái còn lại để đối chiếu ở chỗ "
                 "bạn còn băn khoăn. Phiếu chỉ đếm trên máy của bạn.")
@@ -165,17 +173,20 @@ def ba_goc_nhin(ho_ten: list[str], ngay: int, thang: int, nam: int, linh_vuc: st
     y_pt = cd.get(_O_DAU[mat])
     if isinstance(y_pt, list):
         y_pt = "; ".join(y_pt)
-    c = next(s for s in lch.luan_chaldea(ho_ten, ngay, thang, nam, quy_uoc)["cac_so"] if s["ma"] == "ten_goi")
-    k = next(s for s in lkb.luan_kabbalah(ho_ten, ngay, thang, nam, quy_uoc)["cac_so"] if s["ma"] == "con_duong_ten")
-    kn = k.get("nghia") or {}
+    c = next((s for s in lch.luan_chaldea(ho_ten, ngay, thang, nam, quy_uoc)["cac_so"] if s["ma"] == "ten_goi"), None)
+    k = next((s for s in lkb.luan_kabbalah(ho_ten, ngay, thang, nam, quy_uoc)["cac_so"] if s["ma"] == "con_duong_ten"), None)
+    kn = (k or {}).get("nghia") or {}
+    goc_nhin = [{"phai": "pitago", "ten_phai": ten["pitago"], "nhan": f"Đường đời {dd}", "y": _cau_dau(y_pt)}]
+    # Tên không có chữ cái → số theo tên = 0, KB không có nghĩa → phái đó không góp câu (không hiện "None").
+    if c and c["goc"] and c.get("nghia_goc"):
+        goc_nhin.append({"phai": "chaldea", "ten_phai": ten["chaldea"],
+                         "nhan": f"Số tên gọi {c['kep']}/{c['goc']}" if c["kep"] else f"Số tên gọi {c['goc']}",
+                         "y": _cau_dau(c["nghia_goc"].get("xu_huong"))})
+    if k and k["so"] and kn:
+        goc_nhin.append({"phai": "kabbalah", "ten_phai": ten["kabbalah"], "nhan": f"Con đường của tên {k['so']} · {kn.get('ten')}",
+                         "y": _cau_dau(kn.get("xu_huong"))})
     return {
         "mat": mat,
-        "goc_nhin": [
-            {"phai": "pitago", "ten_phai": ten["pitago"], "nhan": f"Đường đời {dd}", "y": _cau_dau(y_pt)},
-            {"phai": "chaldea", "ten_phai": ten["chaldea"], "nhan": f"Số tên gọi {c['kep']}/{c['goc']}" if c["kep"] else f"Số tên gọi {c['goc']}",
-             "y": _cau_dau((c.get("nghia_goc") or {}).get("xu_huong"))},
-            {"phai": "kabbalah", "ten_phai": ten["kabbalah"], "nhan": f"Con đường của tên {k['so']} · {kn.get('ten')}",
-             "y": _cau_dau(kn.get("xu_huong"))},
-        ],
+        "goc_nhin": [g for g in goc_nhin if g["y"]],
         "luu_y": "Ba phái tính từ cùng họ tên và ngày sinh bằng ba bảng khác nhau — chọn câu nghe đúng với bạn hơn.",
     }

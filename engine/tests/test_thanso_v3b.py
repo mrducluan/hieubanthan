@@ -100,3 +100,13 @@ def test_ba_goc_nhin():
     r = client.post("/v1/thanso/ba-goc-nhin", json={"ho_ten": ["Nguyễn Đức Luân"], "ngay": 24, "thang": 10, "nam": 1988,
                                                     "linh_vuc": "su_nghiep"})
     assert r.status_code == 200 and len(r.json()["goc_nhin"]) == 3
+
+
+def test_ten_khong_co_chu_cai_khong_lo_none():
+    bc = bao_cao_ba_phai.bao_cao(["123"], 24, 10, 1988, NGAY, phieu={"pitago": 1})
+    chu = " ".join(" ".join(c["doan"]) for c in bc["chuong"])
+    assert "None" not in chu and " 0 —" not in chu and all(c["doan"] for c in bc["chuong"])
+    assert "đủ 7 lần" in " ".join(bc["chuong"][-1]["doan"])
+    g = bao_cao_ba_phai.ba_goc_nhin(["123"], 24, 10, 1988, None)["goc_nhin"]
+    assert [x["phai"] for x in g] == ["pitago"] and all("None" not in x["nhan"] for x in g)
+    assert client.post("/v1/thanso/the-ngay", json={"ngay": 1, "thang": 1, "nam": 2000, "ngay_xem": "9999-12-31"}).status_code == 422

@@ -17,7 +17,7 @@ export function BaoCaoBaPhai({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: QuyUocDD })
       <LuanGiaiToanBo duongDan="/api/thanso/bao-cao-ba-phai" laSo={than} than={than} ten="ba phái thần số" moDun="thanso3" />
       <p className="text-xs text-fg-faint">
         {tong >= NGUONG_GOI_Y
-          ? `Chương cuối dựa trên ${tong} lần bạn chọn "phái nào nói đúng".`
+          ? `Chương cuối dựa trên số lần bạn chọn "phái nào nói đúng" lúc mở báo cáo (hiện ${tong}); tải lại trang để cập nhật — xem lại trong ngày không mất thêm Sao.`
           : `Chọn "phái nào nói đúng" dưới mỗi câu trả lời (${tong}/${NGUONG_GOI_Y}) — chương cuối sẽ cho biết phái hợp với bạn nhất.`}
       </p>
     </section>
