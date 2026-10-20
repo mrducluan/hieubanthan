@@ -106,12 +106,12 @@ def _tong_ten(ten: str, che_do: str) -> int:
     return tong
 
 
-def no_nghiep(ho_ten: str | None, d: int, m: int, y: int) -> list[dict]:
+def no_nghiep(ho_ten: str | None, d: int, m: int, y: int, quy_uoc: str = "tong_het") -> list[dict]:
     """13/14/16/19 xuất hiện trong chuỗi rút gọn của từng vị trí.
 
-    Không có tên → chỉ xét ngày sinh và đường đời.
+    Không có tên → chỉ xét ngày sinh và đường đời. `quy_uoc`: cách cộng Đường đời (tổng hết / từng phần).
     """
-    tong = {"ngay_sinh": d, "duong_doi": sum(_chu_so(d, m, y))}
+    tong = {"ngay_sinh": d, "duong_doi": thanso.tong_duong_doi(d, m, y, quy_uoc)}
     if ho_ten:
         for vt in ("su_menh", "linh_hon", "nhan_cach"):
             tong[vt] = _tong_ten(ho_ten, vt)
@@ -149,9 +149,9 @@ def hop_doi(chi_so_a: dict[str, int], chi_so_b: dict[str, int]) -> dict[str, str
 
 # ------------------------------------------------------------------ gom
 def chi_so_mo_rong(ho_ten: str | None, d: int, m: int, y: int,
-                   nam_xem: int, thang_xem: int, ngay_xem: int) -> dict:
+                   nam_xem: int, thang_xem: int, ngay_xem: int, quy_uoc: str = "tong_het") -> dict:
     """Mọi chỉ số v2 cho một người, tại một ngày xem."""
-    dd = thanso.duong_doi(d, m, y)
+    dd = thanso.duong_doi(d, m, y, quy_uoc)
     kq: dict = {
         "so_ngay_sinh": so_ngay_sinh(d),
         "so_thai_do": so_thai_do(d, m),
@@ -159,7 +159,7 @@ def chi_so_mo_rong(ho_ten: str | None, d: int, m: int, y: int,
         "thang_ca_nhan": thang_ca_nhan(d, m, nam_xem, thang_xem),
         "ngay_ca_nhan": ngay_ca_nhan(d, m, nam_xem, thang_xem, ngay_xem),
         "bieu_do": bieu_do_ngay_sinh(d, m, y),
-        "no_nghiep": no_nghiep(ho_ten, d, m, y),
+        "no_nghiep": no_nghiep(ho_ten, d, m, y, quy_uoc),
     }
     if ho_ten:
         kq["so_truong_thanh"] = so_truong_thanh(dd, thanso.gia_tri_xac_dinh(ho_ten, "su_menh"))

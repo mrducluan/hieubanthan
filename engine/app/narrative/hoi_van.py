@@ -22,6 +22,8 @@ import httpx
 
 from app.luangiai import hoi, noi_dau
 from app.luangiai import thanso_chaldean as _chaldea
+from app.luangiai import thanso_kabbalah as _kabbalah
+from app.luangiai import tong_hop as _tong_hop
 from app.narrative import llm as _llm
 from app.narrative import ngan_sach as _ngan_sach
 
@@ -113,6 +115,16 @@ def _doan(m: dict) -> tuple[str, str | None]:
         toi = k.get("mat_toi") or g.get("mat_toi")
         return (f"{dau}. {than}" + (f" Mặt tối cần để ý: {toi}" if toi else ""),
                 k.get("cau_tu_soi") or g.get("cau_tu_soi"))
+    if l == "kabbalah":
+        n = m.get("nghia") or {}
+        dau = f"{m['ten']} theo phái Qabalah: số {m['so']}"
+        if n:
+            dau += f" — {n['ten']}" + (f" ({n['nghia_chu']})" if n.get("nghia_chu") else f" ({n['nghia']})" if n.get("nghia") else "")
+        return (f"{dau}. {n.get('xu_huong', '')}" + (f" Mặt tối cần để ý: {n['mat_toi']}" if n.get("mat_toi") else ""),
+                n.get("cau_tu_soi"))
+    if l == "tong_hop":
+        return (f"Điểm chung của ba phái: số {m['goc']} lặp lại {m['lan']} lần ({'; '.join(m['vi_tri'])}) — "
+                f"{m['tu_khoa'] or ''}. Mặt tối cần để ý: {m['mat_toi'] or ''}", m.get("phan_chung"))
     return "", None
 
 
@@ -213,6 +225,48 @@ def _goi_chaldea(goi: dict, pl: dict, nguoi: dict) -> dict:
     return {**goi, "muc": moi, "so_trong_goi": sorted({x["goc"] for x in moi} | {x["kep"] for x in moi if x["kep"]})}
 
 
+LUU_Y_KABBALAH = ("Phái Qabalah không có phần này (năm/tháng/ngày cá nhân, đỉnh cao, biểu đồ ngày sinh, nợ nghiệp, "
+                  "hợp đôi theo cặp số), nên câu trả lời trên theo phái Pythagoras.")
+
+
+def _la_cau_mo_ta(goi: dict, pl: dict) -> bool:
+    muc = goi["muc"]
+    return bool(muc) and not goi["can_them"] and pl.get("doi_tuong") == "ban_than" and \
+        muc[0]["loai"] in _LOAI_THAY_CHALDEA and all(m.get("vai", "ban") == "ban" for m in muc)
+
+
+def _goi_kabbalah(goi: dict, pl: dict, nguoi: dict) -> dict:
+    """TS-V3: câu "mô tả con người" → con số Qabalah (Sephirah ngày sinh, con đường tên); còn lại → Pythagoras + ghi rõ."""
+    if not goi["muc"] or goi["can_them"] or pl.get("doi_tuong") != "ban_than":
+        return goi
+    if not _la_cau_mo_ta(goi, pl):
+        return {**goi, "luu_y": " ".join(x for x in (goi.get("luu_y"), LUU_Y_KABBALAH) if x)}
+    ten = nguoi["ho_ten"] if isinstance(nguoi["ho_ten"], list) else [nguoi["ho_ten"]]
+    doc = _kabbalah.luan_kabbalah(ten, nguoi["ngay"], nguoi["thang"], nguoi["nam"], nguoi.get("quy_uoc") or "tong_het")
+    theo = {m["ma"]: m for m in doc["cac_so"]}
+    thu_tu = (["con_duong_ten", "sephirah_ten", "sephirah_ngay_sinh"] if re.search(r"\bten\b", pl.get("cau_chuan_hoa", ""))
+              else ["sephirah_ngay_sinh", "con_duong_ten", "sephirah_ten"])
+    moi = [{"loai": "kabbalah", **{k: theo[ma][k] for k in ("ma", "ten", "so", "nghia")},
+            "source_id": doc["source_id"], "school_id": doc["school_id"], "trang_thai": doc["trang_thai"]}
+           for ma in thu_tu if ma in theo]
+    return hoi._ket({**goi, "muc": moi})
+
+
+def _goi_tong_hop(goi: dict, pl: dict, nguoi: dict, ngay_xem: dt.date) -> dict:
+    """TS-V3: phái tổng hợp — câu về chính bạn thêm "điểm chung ba phái" lên đầu, phần còn lại như Pythagoras."""
+    if not goi["muc"] or goi["can_them"] or pl.get("doi_tuong") != "ban_than":
+        return goi
+    ten = nguoi["ho_ten"] if isinstance(nguoi["ho_ten"], list) else [nguoi["ho_ten"]]
+    nb = _tong_hop.so_noi_bat(_tong_hop.ho_so(ten, nguoi["ngay"], nguoi["thang"], nguoi["nam"],
+                                              nguoi.get("quy_uoc") or "tong_het"))
+    if not nb:
+        return goi
+    d = _tong_hop.kb.meta_do_thi()
+    muc = {"loai": "tong_hop", **{k: nb[0][k] for k in ("goc", "lan", "vi_tri", "tu_khoa", "mat_toi", "phan_chung")},
+           "source_id": d["source_id"], "school_id": d["school_id"], "trang_thai": d["trang_thai"]}
+    return hoi._ket({**goi, "muc": [muc, *goi["muc"]]})
+
+
 def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
             ngay_xem: dt.date | None = None, dung_llm: bool = True, phai: str = "pitago") -> dict:
     ngay_xem = ngay_xem or dt.date.today()
@@ -220,9 +274,13 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
     goi = hoi.goi_bang_chung(pl, nguoi, nguoi_kia, ngay_xem)
     if phai == "chaldea":
         goi = _goi_chaldea(goi, pl, nguoi)
+    elif phai == "kabbalah":
+        goi = _goi_kabbalah(goi, pl, nguoi)
     else:
         # TS-NOIDAU: câu bấm từ bảng → đúng chỉ số của thẻ (thẻ tính theo Pitago; phái Chaldea giữ lời đáp số Chaldea).
         goi = noi_dau.bo_sung_goi(goi, cau_hoi, nguoi, ngay_xem)
+        if phai == "tong_hop":
+            goi = _goi_tong_hop(goi, pl, nguoi, ngay_xem)
     template = van_template(goi)
     co_key = bool(os.environ.get("OPENROUTER_API_KEY"))
     che_do, van, loi = "template", template, []

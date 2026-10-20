@@ -105,14 +105,25 @@ def gia_tri_xac_dinh(ten: str, che_do: CheDo, giu_master: bool = True) -> int:
     return rut_gon(tong, giu_master)
 
 
-def chi_so_xac_dinh(ten: str, d: int, m: int, y: int) -> dict[str, int]:
-    """Bốn chỉ số thần số theo quy ước chính thức (Y khoá, giữ số cái)."""
+def chi_so_xac_dinh(ten: str, d: int, m: int, y: int,
+                    quy_uoc: QuyUocDuongDoi = "tong_het") -> dict[str, int]:
+    """Bốn chỉ số thần số theo quy ước chính thức (Y khoá, giữ số cái).
+
+    `quy_uoc` chỉ đổi cách cộng Đường đời (TS-V3, người dùng chọn): "tong_het" (mặc định) | "tung_phan".
+    """
     return {
         "su_menh": gia_tri_xac_dinh(ten, "su_menh"),
         "linh_hon": gia_tri_xac_dinh(ten, "linh_hon"),
         "nhan_cach": gia_tri_xac_dinh(ten, "nhan_cach"),
-        "duong_doi": duong_doi(d, m, y, "tong_het", giu_master=True),
+        "duong_doi": duong_doi(d, m, y, quy_uoc, giu_master=True),
     }
+
+
+def tong_duong_doi(d: int, m: int, y: int, quy_uoc: QuyUocDuongDoi = "tong_het") -> int:
+    """Tổng CHƯA rút gọn cuối của Đường đời theo quy ước (dùng dò nợ nghiệp 13/14/16/19)."""
+    if quy_uoc == "tong_het":
+        return sum(int(c) for c in f"{d}{m}{y}")
+    return rut_gon(d) + rut_gon(m) + rut_gon(y)
 
 
 def _chuoi_rut_gon(tong: int, giu_master: bool = True) -> list[int]:
@@ -133,7 +144,7 @@ def _vet(so_hang: list[dict]) -> dict:
             "dien_giai": f"{cong} = {duoi}"}
 
 
-def vet_tinh(ten: str, d: int, m: int, y: int) -> dict[str, dict]:
+def vet_tinh(ten: str, d: int, m: int, y: int, quy_uoc: QuyUocDuongDoi = "tong_het") -> dict[str, dict]:
     """Vết tính từng bước của 4 chỉ số (lớp ĐÃ TÍNH trên UI) — cùng quy tắc với chi_so_xac_dinh.
 
     Mỗi chỉ số: so_hang (ký tự/chữ số → giá trị), tong, rut_gon (chuỗi rút gọn, giữ số cái),
@@ -149,7 +160,8 @@ def vet_tinh(ten: str, d: int, m: int, y: int) -> dict[str, dict]:
             muc = {"ky_tu": ch, "so": gia_tri(ch)}
             ten_vet["su_menh"].append(muc)
             ten_vet["linh_hon" if la_na else "nhan_cach"].append(muc)
-    dd = [{"ky_tu": c, "so": int(c)} for c in f"{d}{m}{y}"]
+    dd = ([{"ky_tu": c, "so": int(c)} for c in f"{d}{m}{y}"] if quy_uoc == "tong_het" else
+          [{"ky_tu": f"{nhan} {n}", "so": rut_gon(n)} for nhan, n in (("Ngày", d), ("Tháng", m), ("Năm", y))])
     return {"duong_doi": _vet(dd), **{k: _vet(v) for k, v in ten_vet.items()}}
 
 

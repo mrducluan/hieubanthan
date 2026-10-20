@@ -51,4 +51,4 @@ def test_api_phai():
                                            "cau_hoi": "tính cách của tôi thế nào", "phai": "chaldea"})
     assert r.status_code == 200 and r.json()["phai"] == "chaldea"
     assert client.post("/v1/thanso/hoi", json={"ho_ten": ["An"], "ngay": 17, "thang": 5, "nam": 1990,
-                                               "cau_hoi": "abc def", "phai": "kabbalah"}).status_code == 422
+                                               "cau_hoi": "abc def", "phai": "vedic"}).status_code == 422

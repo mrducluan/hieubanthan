@@ -381,10 +381,11 @@ def _chi_so_nguoi(nguoi: dict, ngay_xem: _dt.date) -> dict:
     """Mọi chỉ số của một người. `ho_ten` có thể thiếu (chỉ có ngày sinh)."""
     d, m, y = nguoi["ngay"], nguoi["thang"], nguoi["nam"]
     ten = (nguoi.get("ho_ten") or [None])[0]
-    cs: dict = {"duong_doi": thanso.duong_doi(d, m, y)}
+    qu = nguoi.get("quy_uoc") or "tong_het"          # TS-V3: cách cộng Đường đời người dùng chọn
+    cs: dict = {"duong_doi": thanso.duong_doi(d, m, y, qu)}
     if ten:
         cs.update({k: v for k, v in thanso.chi_so_xac_dinh(ten, d, m, y).items() if k != "duong_doi"})
-    cs.update(mr.chi_so_mo_rong(ten, d, m, y, ngay_xem.year, ngay_xem.month, ngay_xem.day))
+    cs.update(mr.chi_so_mo_rong(ten, d, m, y, ngay_xem.year, ngay_xem.month, ngay_xem.day, qu))
     cs["dinh_cao"] = thanso.dinh_cao(d, m, y, cs["duong_doi"])
     cs["thu_thach_chinh"] = thanso.thu_thach(d, m, y)["thu_thach_chinh"]
     cs["tuoi"] = ngay_xem.year - y - ((ngay_xem.month, ngay_xem.day) < (m, d))

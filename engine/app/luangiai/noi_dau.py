@@ -69,10 +69,11 @@ def _chi_so(nguoi: dict, ngay_xem: dt.date) -> dict:
     return cs
 
 
-def ban_do(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict:
+def ban_do(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.date,
+           quy_uoc: str = "tong_het") -> dict:
     """5 trụ đời, mỗi câu hỏi kèm những con số CỦA NGƯỜI NÀY trả lời câu đó (lớp ĐÃ TÍNH)."""
     k = _kb()
-    cs = _chi_so({"ho_ten": ho_ten, "ngay": ngay, "thang": thang, "nam": nam}, ngay_xem)
+    cs = _chi_so({"ho_ten": ho_ten, "ngay": ngay, "thang": thang, "nam": nam, "quy_uoc": quy_uoc}, ngay_xem)
     tru = []
     for ma, t in k["tru"].items():
         cau = [{"ma": q["ma"], "noi_dau": q["noi_dau"], "cau": q["cau"],

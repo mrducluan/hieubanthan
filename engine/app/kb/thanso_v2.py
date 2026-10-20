@@ -25,6 +25,8 @@ FILES = {
     "chaldean": "thanso_chaldean.json",
     "hom_nay": "thanso_hom_nay.json",
     "doi_chieu": "thanso_doi_chieu.json",
+    "kabbalah": "thanso_kabbalah.json",
+    "do_thi": "thanso_do_thi.json",
 }
 
 
@@ -166,3 +168,29 @@ def meta_hom_nay() -> dict:
 def giao_diem_phai(so: int) -> dict | None:
     m = _doc("doi_chieu")["so"].get(str(so))
     return {**m, **_meta("doi_chieu")} if m else None
+
+
+# ------------------------------------------------------------------ TS-V3: Qabalah Hermetic
+def kabbalah_chu(so: int) -> dict | None:
+    return _doc("kabbalah")["chu"].get(str(so))
+
+
+def kabbalah_sephirah(so: int) -> dict | None:
+    return _doc("kabbalah")["sephirot"].get(str(so))
+
+
+def kabbalah_gioi_thieu() -> dict:
+    return _doc("kabbalah")["gioi_thieu"]
+
+
+def meta_kabbalah() -> dict:
+    return _meta("kabbalah")
+
+
+# ------------------------------------------------------------------ TS-V3: đồ thị liên phái
+def do_thi() -> dict:
+    return _doc("do_thi")
+
+
+def meta_do_thi() -> dict:
+    return _meta("do_thi")

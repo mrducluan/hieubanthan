@@ -29,7 +29,8 @@ from app.luangiai import hom_nay
 from app.luangiai import nhip_ca_nhan as nhip
 from app.luangiai import thanso_chaldean as luangiai_chaldea
 from app.luangiai import thanso as luangiai_thanso
-from app.luangiai import noi_dau
+from app.luangiai import noi_dau, tong_hop
+from app.luangiai import thanso_kabbalah as luangiai_kabbalah
 from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
 from app import nhat_ky
 from app.narrative import hoi_van, llm as narrative_llm, ngan_sach
@@ -150,6 +151,8 @@ class ThanSoInput(BaseModel):
     ngay: int = Field(ge=1, le=31)
     thang: int = Field(ge=1, le=12)
     nam: int = Field(ge=1900, le=2100)
+    # TS-V3: cách cộng Đường đời — "tong_het" (mặc định, phổ biến ở VN) | "tung_phan" (Decoz).
+    quy_uoc_duong_doi: Literal["tong_het", "tung_phan"] = "tong_het"
 
     @field_validator("ho_ten")
     @classmethod
@@ -211,7 +214,7 @@ def api_luan_giai(inp: ThanSoInput) -> dict:
     độ nhạy (chỉ số chưa xác định thì nói thẳng, không luận bừa).
     """
     inp.kiem_tra_ngay()
-    return luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam)
+    return luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam, quy_uoc=inp.quy_uoc_duong_doi)
 
 
 @app.post("/v1/thanso/chaldea")
@@ -220,6 +223,47 @@ def api_chaldea(inp: ThanSoInput) -> dict:
     số kép 10–52 + số gốc, nghĩa từ KB, đối chiếu với phái Pitago. Biến thể tên thứ hai = tên thường gọi."""
     inp.kiem_tra_ngay()
     return {"engine_version": ENGINE_VERSION, **luangiai_chaldea.luan_chaldea(inp.ho_ten, inp.ngay, inp.thang, inp.nam)}
+
+
+@app.post("/v1/thanso/kabbalah")
+def api_kabbalah(inp: ThanSoInput) -> dict:
+    """TS-V3 — thần số Qabalah Hermetic: con đường của tên (1–22), Sephirah của tên và ngày sinh (1–10), có độ nhạy
+    bảng chuyển chữ và đối chiếu Đường đời Pitago."""
+    inp.kiem_tra_ngay()
+    return {"engine_version": ENGINE_VERSION,
+            **luangiai_kabbalah.luan_kabbalah(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.quy_uoc_duong_doi)}
+
+
+class TongHopInput(ThanSoInput):
+    ngay_xem: _dt.date | None = None     # trống = hôm nay theo giờ Việt Nam
+
+
+class NguCanhInput(TongHopInput):
+    cau_hoi: str = Field(min_length=3, max_length=400)
+
+
+def _hom_nay_vn() -> _dt.date:
+    return _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
+
+
+@app.post("/v1/thanso/tong-hop")
+def api_tong_hop(inp: TongHopInput) -> dict:
+    """TS-V3 — tổng hợp ba phái: số lặp lại giữa các phái, tương tác liên phái (cộng hưởng / hai góc nhìn / bổ sung /
+    nhịp thời gian). Không lưu."""
+    inp.kiem_tra_ngay()
+    return {"engine_version": ENGINE_VERSION,
+            **tong_hop.tong_hop(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.ngay_xem or _hom_nay_vn(),
+                                inp.quy_uoc_duong_doi)}
+
+
+@app.post("/v1/thanso/ngu-canh")
+def api_ngu_canh(inp: NguCanhInput) -> dict:
+    """TS-V3 — gói ngữ cảnh cho tầng diễn đạt (thay fn_assemble_llm_context_payload_v3 của bản SQL): ý định, hồ sơ
+    ba phái, mục KB kích hoạt, tương tác liên phái, gói bằng chứng, quy tắc diễn đạt bắt buộc. Không lưu."""
+    inp.kiem_tra_ngay()
+    return {"engine_version": ENGINE_VERSION,
+            **tong_hop.ngu_canh(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.cau_hoi.strip(),
+                                inp.ngay_xem or _hom_nay_vn(), inp.quy_uoc_duong_doi)}
 
 
 @app.post("/v1/thanso/van")
@@ -247,7 +291,7 @@ class HoiInput(ThanSoInput):
     nguoi_kia: NguoiKia | None = None
     ngay_xem: _dt.date | None = Field(default=None, description="Mặc định: hôm nay")
     # TS-PHAI-2: trả lời theo phái người dùng đang xem ở /than-so.
-    phai: Literal["pitago", "chaldea"] = "pitago"
+    phai: Literal["pitago", "chaldea", "kabbalah", "tong_hop"] = "pitago"
 
 
 @app.get("/v1/tu-dien")
@@ -274,7 +318,8 @@ def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
         except ValueError:
             raise HTTPException(422, detail="Ngày sinh người thứ hai không tồn tại")
         kia = inp.nguoi_kia.model_dump()
-    nguoi = {"ho_ten": inp.ho_ten, "ngay": inp.ngay, "thang": inp.thang, "nam": inp.nam}
+    nguoi = {"ho_ten": inp.ho_ten, "ngay": inp.ngay, "thang": inp.thang, "nam": inp.nam,
+             "quy_uoc": inp.quy_uoc_duong_doi}
     kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem, phai=inp.phai)
     background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "thanso"),
@@ -290,7 +335,8 @@ def api_noi_dau(inp: NoiDauInput) -> dict:
     """TS-NOIDAU — "Bạn đang vướng ở đâu?": 5 trụ đời × câu hỏi nỗi đau, mỗi câu kèm con số của người này trả lời nó."""
     inp.kiem_tra_ngay()
     ngay_xem = inp.ngay_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
-    return {"engine_version": ENGINE_VERSION, **noi_dau.ban_do(inp.ho_ten, inp.ngay, inp.thang, inp.nam, ngay_xem)}
+    return {"engine_version": ENGINE_VERSION, **noi_dau.ban_do(inp.ho_ten, inp.ngay, inp.thang, inp.nam, ngay_xem,
+                                                                inp.quy_uoc_duong_doi)}
 
 
 QuanHe = Literal["nguoi_yeu", "ban_be", "dong_nghiep", "sep", "gia_dinh"]
