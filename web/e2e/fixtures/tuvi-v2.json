@@ -1,0 +1,4265 @@
+{
+ "_ghi_chu": "Output THẬT của engine (HO_SO_MAU trong e2e/_hoso.ts) cho 4 route TV-V2 — sinh lại bằng cách gọi engine khi hợp đồng đổi.",
+ "phi-hoa": {
+  "engine_version": "e2e",
+  "can_nam_sinh": "Canh",
+  "lai_nhan": {
+   "cung": "Nô Bộc",
+   "chi": "Thìn",
+   "can": "Canh"
+  },
+  "cung": [
+   {
+    "ten": "Điền Trạch",
+    "chi": "Dần",
+    "can": "Mậu",
+    "la_menh": false,
+    "la_lai_nhan": false
+   },
+   {
+    "ten": "Quan Lộc",
+    "chi": "Mão",
+    "can": "Kỷ",
+    "la_menh": false,
+    "la_lai_nhan": false
+   },
+   {
+    "ten": "Nô Bộc",
+    "chi": "Thìn",
+    "can": "Canh",
+    "la_menh": false,
+    "la_lai_nhan": true
+   },
+   {
+    "ten": "Thiên Di",
+    "chi": "Tỵ",
+    "can": "Tân",
+    "la_menh": false,
+    "la_lai_nhan": false
+   },
+   {
+    "ten": "Tật Ách",
+    "chi": "Ngọ",
+    "can": "Nhâm",
+    "la_menh": false,
+    "la_lai_nhan": false
+   },
+   {
+    "ten": "Tài Bạch",
+    "chi": "Mùi",
+    "can": "Quý",
+    "la_menh": false,
+    "la_lai_nhan": false
+   },
+   {
+    "ten": "Tử Nữ",
+    "chi": "Thân",
+    "can": "Giáp",
+    "la_menh": false,
+    "la_lai_nhan": false
+   },
+   {
+    "ten": "Phu Thê",
+    "chi": "Dậu",
+    "can": "Ất",
+    "la_menh": false,
+    "la_lai_nhan": false
+   },
+   {
+    "ten": "Huynh Đệ",
+    "chi": "Tuất",
+    "can": "Bính",
+    "la_menh": false,
+    "la_lai_nhan": false
+   },
+   {
+    "ten": "Mệnh",
+    "chi": "Hợi",
+    "can": "Đinh",
+    "la_menh": true,
+    "la_lai_nhan": false
+   },
+   {
+    "ten": "Phụ Mẫu",
+    "chi": "Tý",
+    "can": "Mậu",
+    "la_menh": false,
+    "la_lai_nhan": false
+   },
+   {
+    "ten": "Phúc Đức",
+    "chi": "Sửu",
+    "can": "Kỷ",
+    "la_menh": false,
+    "la_lai_nhan": false
+   }
+  ],
+  "duong_bay": [
+   {
+    "tu_cung": "Điền Trạch",
+    "can": "Mậu",
+    "hoa": "Lộc",
+    "sao": "Tham Lang",
+    "den_cung": "Huynh Đệ",
+    "xung_cung": "Nô Bộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Điền Trạch hướng thuận lợi về anh chị em, bạn thân. Phái phi tinh còn xem trục này gắn với khoản tiền giữ lại; nên rõ ràng chuyện tiền với người thân."
+   },
+   {
+    "tu_cung": "Điền Trạch",
+    "can": "Mậu",
+    "hoa": "Quyền",
+    "sao": "Thái Âm",
+    "den_cung": "Phu Thê",
+    "xung_cung": "Quan Lộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Điền Trạch đưa câu hỏi ai quyết vào quan hệ đôi lứa. Nên chia vai rõ ràng và lắng nghe trước khi đề nghị."
+   },
+   {
+    "tu_cung": "Điền Trạch",
+    "can": "Mậu",
+    "hoa": "Khoa",
+    "sao": "Hữu Bật",
+    "den_cung": "Tài Bạch",
+    "xung_cung": "Phúc Đức",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Triệt Lộ"
+    ],
+    "nghia": "Mảng Điền Trạch giúp chuyện tiền rõ ràng, đủ dùng, ít rối. Tốt về sự minh bạch hơn là khoản lớn; hợp lập ngân sách."
+   },
+   {
+    "tu_cung": "Điền Trạch",
+    "can": "Mậu",
+    "hoa": "Kỵ",
+    "sao": "Thiên Cơ",
+    "den_cung": "Tài Bạch",
+    "xung_cung": "Phúc Đức",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Triệt Lộ"
+    ],
+    "nghia": "Mảng Điền Trạch là nơi tiền bạc cần để mắt: chi ra dễ nhiều hơn dự tính. Nên ghi chép thu chi và không quyết khoản lớn khi đang vội."
+   },
+   {
+    "tu_cung": "Quan Lộc",
+    "can": "Kỷ",
+    "hoa": "Lộc",
+    "sao": "Vũ Khúc",
+    "den_cung": "Nô Bộc",
+    "xung_cung": "Huynh Đệ",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Quan Lộc hướng thuận lợi ra bạn bè, đồng nghiệp, khách hàng: mạng lưới rộng hơn. Bạn thường là người cho đi trước; nên giữ ranh giới để không quá sức."
+   },
+   {
+    "tu_cung": "Quan Lộc",
+    "can": "Kỷ",
+    "hoa": "Quyền",
+    "sao": "Tham Lang",
+    "den_cung": "Huynh Đệ",
+    "xung_cung": "Nô Bộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Quan Lộc làm anh chị em, bạn thân có tiếng nói mạnh, hoặc bạn đứng ra lo cho họ. Nên bàn bạc ngang hàng."
+   },
+   {
+    "tu_cung": "Quan Lộc",
+    "can": "Kỷ",
+    "hoa": "Khoa",
+    "sao": "Thiên Lương",
+    "den_cung": "Phúc Đức",
+    "xung_cung": "Tài Bạch",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Quan Lộc giúp tinh thần nhẹ hơn, biết cách tự gỡ rối. Hợp đọc sách, học, ngồi tĩnh hay viết nhật ký."
+   },
+   {
+    "tu_cung": "Quan Lộc",
+    "can": "Kỷ",
+    "hoa": "Kỵ",
+    "sao": "Văn Khúc",
+    "den_cung": "Huynh Đệ",
+    "xung_cung": "Nô Bộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Quan Lộc hướng sự lo lắng về anh chị em, bạn thân, hoặc khoản tiền dành dụm. Nên rõ ràng khi cho vay mượn trong nhà."
+   },
+   {
+    "tu_cung": "Nô Bộc",
+    "can": "Canh",
+    "hoa": "Lộc",
+    "sao": "Thái Dương",
+    "den_cung": "Thiên Di",
+    "xung_cung": "Mệnh",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Nô Bộc thuận khi bạn ra ngoài: đi lại, gặp người mới, làm việc ở môi trường khác. Hợp mở rộng quan hệ và giới thiệu bản thân."
+   },
+   {
+    "tu_cung": "Nô Bộc",
+    "can": "Canh",
+    "hoa": "Quyền",
+    "sao": "Vũ Khúc",
+    "den_cung": "Nô Bộc",
+    "xung_cung": "Huynh Đệ",
+    "tu_hoa": true,
+    "den_tuan_triet": [],
+    "nghia": "Cung Nô Bộc tự hoá Quyền: mảng Nô Bộc có sức tự đẩy, bạn hay tự quyết và đổi hướng nhanh."
+   },
+   {
+    "tu_cung": "Nô Bộc",
+    "can": "Canh",
+    "hoa": "Khoa",
+    "sao": "Thái Âm",
+    "den_cung": "Phu Thê",
+    "xung_cung": "Quan Lộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Nô Bộc giúp quan hệ đôi lứa nhẹ nhàng, dễ hoà giải. Hợp nói chuyện thẳng thắn mà ôn hoà."
+   },
+   {
+    "tu_cung": "Nô Bộc",
+    "can": "Canh",
+    "hoa": "Kỵ",
+    "sao": "Thiên Đồng",
+    "den_cung": "Quan Lộc",
+    "xung_cung": "Phu Thê",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Nô Bộc khiến công việc cần nhiều công sức, dễ chậm hơn mong đợi. Nên ưu tiên việc chính và cập nhật tiến độ thường xuyên."
+   },
+   {
+    "tu_cung": "Thiên Di",
+    "can": "Tân",
+    "hoa": "Lộc",
+    "sao": "Cự Môn",
+    "den_cung": "Mệnh",
+    "xung_cung": "Thiên Di",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Thiên Di có xu hướng mang thuận lợi về cho chính bạn: dễ gặp cơ hội, được giúp đỡ từ phía ấy. Nên đón nhận chủ động và nhớ đáp lại người đã giúp mình."
+   },
+   {
+    "tu_cung": "Thiên Di",
+    "can": "Tân",
+    "hoa": "Quyền",
+    "sao": "Thái Dương",
+    "den_cung": "Thiên Di",
+    "xung_cung": "Mệnh",
+    "tu_hoa": true,
+    "den_tuan_triet": [],
+    "nghia": "Cung Thiên Di tự hoá Quyền: mảng Thiên Di có sức tự đẩy, bạn hay tự quyết và đổi hướng nhanh."
+   },
+   {
+    "tu_cung": "Thiên Di",
+    "can": "Tân",
+    "hoa": "Khoa",
+    "sao": "Văn Khúc",
+    "den_cung": "Huynh Đệ",
+    "xung_cung": "Nô Bộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Thiên Di giúp quan hệ anh chị em, bạn thân êm, dễ hiểu nhau. Hợp gặp gỡ, gỡ những hiểu lầm cũ."
+   },
+   {
+    "tu_cung": "Thiên Di",
+    "can": "Tân",
+    "hoa": "Kỵ",
+    "sao": "Văn Xương",
+    "den_cung": "Nô Bộc",
+    "xung_cung": "Huynh Đệ",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Thiên Di hướng sự để tâm ra bạn bè, đồng nghiệp: dễ hiểu lầm hoặc nhận việc thay người khác. Nên giữ ranh giới và thoả thuận rõ."
+   },
+   {
+    "tu_cung": "Tật Ách",
+    "can": "Nhâm",
+    "hoa": "Lộc",
+    "sao": "Thiên Lương",
+    "den_cung": "Phúc Đức",
+    "xung_cung": "Tài Bạch",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Tật Ách nuôi đời sống tinh thần: việc ấy cho bạn niềm vui, sự thư thả. Nên dành thời gian cho sở thích có ích, đừng để hưởng thụ lấn hết kế hoạch."
+   },
+   {
+    "tu_cung": "Tật Ách",
+    "can": "Nhâm",
+    "hoa": "Quyền",
+    "sao": "Tử Vi",
+    "den_cung": "Tử Nữ",
+    "xung_cung": "Điền Trạch",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Tật Ách khiến bạn kỳ vọng nhiều vào con cái, học trò hay dự án nhỏ. Nên để họ có phần tự quyết."
+   },
+   {
+    "tu_cung": "Tật Ách",
+    "can": "Nhâm",
+    "hoa": "Khoa",
+    "sao": "Tả Phù",
+    "den_cung": "Tài Bạch",
+    "xung_cung": "Phúc Đức",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Triệt Lộ"
+    ],
+    "nghia": "Mảng Tật Ách giúp chuyện tiền rõ ràng, đủ dùng, ít rối. Tốt về sự minh bạch hơn là khoản lớn; hợp lập ngân sách."
+   },
+   {
+    "tu_cung": "Tật Ách",
+    "can": "Nhâm",
+    "hoa": "Kỵ",
+    "sao": "Vũ Khúc",
+    "den_cung": "Nô Bộc",
+    "xung_cung": "Huynh Đệ",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Tật Ách hướng sự để tâm ra bạn bè, đồng nghiệp: dễ hiểu lầm hoặc nhận việc thay người khác. Nên giữ ranh giới và thoả thuận rõ."
+   },
+   {
+    "tu_cung": "Tài Bạch",
+    "can": "Quý",
+    "hoa": "Lộc",
+    "sao": "Phá Quân",
+    "den_cung": "Tật Ách",
+    "xung_cung": "Phụ Mẫu",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Triệt Lộ"
+    ],
+    "nghia": "Mảng Tài Bạch chạm tới nhịp sinh hoạt: việc ấy làm bạn thoải mái, nhưng vui quá cũng dễ khiến giờ giấc lệch đi. Nên giữ giờ ngủ, giờ nghỉ đều đặn."
+   },
+   {
+    "tu_cung": "Tài Bạch",
+    "can": "Quý",
+    "hoa": "Quyền",
+    "sao": "Cự Môn",
+    "den_cung": "Mệnh",
+    "xung_cung": "Thiên Di",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Tài Bạch trao cho bạn thêm quyền chủ động, kèm trách nhiệm. Bạn có xu hướng muốn tự quyết; nên nghe thêm một ý kiến trước khi chốt."
+   },
+   {
+    "tu_cung": "Tài Bạch",
+    "can": "Quý",
+    "hoa": "Khoa",
+    "sao": "Thái Âm",
+    "den_cung": "Phu Thê",
+    "xung_cung": "Quan Lộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Tài Bạch giúp quan hệ đôi lứa nhẹ nhàng, dễ hoà giải. Hợp nói chuyện thẳng thắn mà ôn hoà."
+   },
+   {
+    "tu_cung": "Tài Bạch",
+    "can": "Quý",
+    "hoa": "Kỵ",
+    "sao": "Tham Lang",
+    "den_cung": "Huynh Đệ",
+    "xung_cung": "Nô Bộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Tài Bạch hướng sự lo lắng về anh chị em, bạn thân, hoặc khoản tiền dành dụm. Nên rõ ràng khi cho vay mượn trong nhà."
+   },
+   {
+    "tu_cung": "Tử Nữ",
+    "can": "Giáp",
+    "hoa": "Lộc",
+    "sao": "Liêm Trinh",
+    "den_cung": "Phụ Mẫu",
+    "xung_cung": "Tật Ách",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Tử Nữ đẩy thuận lợi về phía cha mẹ, cấp trên, giấy tờ: hồ sơ, thủ tục, quan hệ với người đi trước dễ trôi chảy hơn. Hợp lúc làm việc cần người duyệt."
+   },
+   {
+    "tu_cung": "Tử Nữ",
+    "can": "Giáp",
+    "hoa": "Quyền",
+    "sao": "Phá Quân",
+    "den_cung": "Tật Ách",
+    "xung_cung": "Phụ Mẫu",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Triệt Lộ"
+    ],
+    "nghia": "Mảng Tử Nữ làm bạn chịu áp lực khá tốt nhưng hay gồng. Nên chia việc theo từng chặng và giữ giờ nghỉ cố định."
+   },
+   {
+    "tu_cung": "Tử Nữ",
+    "can": "Giáp",
+    "hoa": "Khoa",
+    "sao": "Vũ Khúc",
+    "den_cung": "Nô Bộc",
+    "xung_cung": "Huynh Đệ",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Tử Nữ giúp quan hệ bạn bè, đồng nghiệp êm, dễ có người nói giúp. Nên giữ uy tín bằng những lời hứa nhỏ làm được."
+   },
+   {
+    "tu_cung": "Tử Nữ",
+    "can": "Giáp",
+    "hoa": "Kỵ",
+    "sao": "Thái Dương",
+    "den_cung": "Thiên Di",
+    "xung_cung": "Mệnh",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Tử Nữ khiến việc ra ngoài, đi lại, vào môi trường mới cần chuẩn bị kỹ hơn. Kỵ ở đây cũng chiếu về Mệnh, nên có sẵn phương án dự phòng."
+   },
+   {
+    "tu_cung": "Phu Thê",
+    "can": "Ất",
+    "hoa": "Lộc",
+    "sao": "Thiên Cơ",
+    "den_cung": "Tài Bạch",
+    "xung_cung": "Phúc Đức",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Triệt Lộ"
+    ],
+    "nghia": "Mảng Phu Thê có xu hướng thành nguồn thu: dễ có thêm khoản lợi từ phía ấy. Nên ghi chép thu chi để thấy rõ tiền đến từ đâu."
+   },
+   {
+    "tu_cung": "Phu Thê",
+    "can": "Ất",
+    "hoa": "Quyền",
+    "sao": "Thiên Lương",
+    "den_cung": "Phúc Đức",
+    "xung_cung": "Tài Bạch",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Phu Thê khiến bạn để tâm và muốn kiểm soát nhiều trong suy nghĩ. Nên có một khoảng nghỉ đầu óc mỗi ngày để không ôm hết vào mình."
+   },
+   {
+    "tu_cung": "Phu Thê",
+    "can": "Ất",
+    "hoa": "Khoa",
+    "sao": "Tử Vi",
+    "den_cung": "Tử Nữ",
+    "xung_cung": "Điền Trạch",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Phu Thê thuận cho việc học của con, học trò, sản phẩm sáng tạo. Hợp đồng hành và khen đúng lúc."
+   },
+   {
+    "tu_cung": "Phu Thê",
+    "can": "Ất",
+    "hoa": "Kỵ",
+    "sao": "Thái Âm",
+    "den_cung": "Phu Thê",
+    "xung_cung": "Quan Lộc",
+    "tu_hoa": true,
+    "den_tuan_triet": [],
+    "nghia": "Cung Phu Thê tự hoá Kỵ: mảng Phu Thê là nơi bạn tự lo, tự ôm, đôi khi đổi ý giữa chừng; điểm vướng thường đến từ cách mình xử lý hơn là từ người khác."
+   },
+   {
+    "tu_cung": "Huynh Đệ",
+    "can": "Bính",
+    "hoa": "Lộc",
+    "sao": "Thiên Đồng",
+    "den_cung": "Quan Lộc",
+    "xung_cung": "Phu Thê",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Huynh Đệ mở đường cho công việc: dễ có việc mới, dễ được ghi nhận. Nên chọn việc trọng tâm thay vì nhận hết mọi lời mời."
+   },
+   {
+    "tu_cung": "Huynh Đệ",
+    "can": "Bính",
+    "hoa": "Quyền",
+    "sao": "Thiên Cơ",
+    "den_cung": "Tài Bạch",
+    "xung_cung": "Phúc Đức",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Triệt Lộ"
+    ],
+    "nghia": "Mảng Huynh Đệ cho bạn sức chủ động kiếm tiền, giỏi xoay xở. Nên đặt hạn mức chi tiêu để sức mạnh ấy không thành vội vàng."
+   },
+   {
+    "tu_cung": "Huynh Đệ",
+    "can": "Bính",
+    "hoa": "Khoa",
+    "sao": "Văn Xương",
+    "den_cung": "Nô Bộc",
+    "xung_cung": "Huynh Đệ",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Huynh Đệ giúp quan hệ bạn bè, đồng nghiệp êm, dễ có người nói giúp. Nên giữ uy tín bằng những lời hứa nhỏ làm được."
+   },
+   {
+    "tu_cung": "Huynh Đệ",
+    "can": "Bính",
+    "hoa": "Kỵ",
+    "sao": "Liêm Trinh",
+    "den_cung": "Phụ Mẫu",
+    "xung_cung": "Tật Ách",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Huynh Đệ dễ kéo theo giấy tờ, hợp đồng, quan hệ với cấp trên cần xem kỹ. Nên đọc lại điều khoản và giữ bản ghi chép."
+   },
+   {
+    "tu_cung": "Mệnh",
+    "can": "Đinh",
+    "hoa": "Lộc",
+    "sao": "Thái Âm",
+    "den_cung": "Phu Thê",
+    "xung_cung": "Quan Lộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Mệnh mang thuận lợi vào chuyện đôi lứa: dễ gặp người hợp ý, hoặc quan hệ đang có ấm hơn. Nên nói rõ mong muốn của mình."
+   },
+   {
+    "tu_cung": "Mệnh",
+    "can": "Đinh",
+    "hoa": "Quyền",
+    "sao": "Thiên Đồng",
+    "den_cung": "Quan Lộc",
+    "xung_cung": "Phu Thê",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Mệnh tăng sức đẩy trong công việc: dễ được giao vai trò, quyền hạn. Nên phân việc cho người khác thay vì tự làm tất cả."
+   },
+   {
+    "tu_cung": "Mệnh",
+    "can": "Đinh",
+    "hoa": "Khoa",
+    "sao": "Thiên Cơ",
+    "den_cung": "Tài Bạch",
+    "xung_cung": "Phúc Đức",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Triệt Lộ"
+    ],
+    "nghia": "Mảng Mệnh giúp chuyện tiền rõ ràng, đủ dùng, ít rối. Tốt về sự minh bạch hơn là khoản lớn; hợp lập ngân sách."
+   },
+   {
+    "tu_cung": "Mệnh",
+    "can": "Đinh",
+    "hoa": "Kỵ",
+    "sao": "Cự Môn",
+    "den_cung": "Mệnh",
+    "xung_cung": "Thiên Di",
+    "tu_hoa": true,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Cung Mệnh tự hoá Kỵ: mảng Mệnh là nơi bạn tự lo, tự ôm, đôi khi đổi ý giữa chừng; điểm vướng thường đến từ cách mình xử lý hơn là từ người khác."
+   },
+   {
+    "tu_cung": "Phụ Mẫu",
+    "can": "Mậu",
+    "hoa": "Lộc",
+    "sao": "Tham Lang",
+    "den_cung": "Huynh Đệ",
+    "xung_cung": "Nô Bộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Phụ Mẫu hướng thuận lợi về anh chị em, bạn thân. Phái phi tinh còn xem trục này gắn với khoản tiền giữ lại; nên rõ ràng chuyện tiền với người thân."
+   },
+   {
+    "tu_cung": "Phụ Mẫu",
+    "can": "Mậu",
+    "hoa": "Quyền",
+    "sao": "Thái Âm",
+    "den_cung": "Phu Thê",
+    "xung_cung": "Quan Lộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Phụ Mẫu đưa câu hỏi ai quyết vào quan hệ đôi lứa. Nên chia vai rõ ràng và lắng nghe trước khi đề nghị."
+   },
+   {
+    "tu_cung": "Phụ Mẫu",
+    "can": "Mậu",
+    "hoa": "Khoa",
+    "sao": "Hữu Bật",
+    "den_cung": "Tài Bạch",
+    "xung_cung": "Phúc Đức",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Triệt Lộ"
+    ],
+    "nghia": "Mảng Phụ Mẫu giúp chuyện tiền rõ ràng, đủ dùng, ít rối. Tốt về sự minh bạch hơn là khoản lớn; hợp lập ngân sách."
+   },
+   {
+    "tu_cung": "Phụ Mẫu",
+    "can": "Mậu",
+    "hoa": "Kỵ",
+    "sao": "Thiên Cơ",
+    "den_cung": "Tài Bạch",
+    "xung_cung": "Phúc Đức",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Triệt Lộ"
+    ],
+    "nghia": "Mảng Phụ Mẫu là nơi tiền bạc cần để mắt: chi ra dễ nhiều hơn dự tính. Nên ghi chép thu chi và không quyết khoản lớn khi đang vội."
+   },
+   {
+    "tu_cung": "Phúc Đức",
+    "can": "Kỷ",
+    "hoa": "Lộc",
+    "sao": "Vũ Khúc",
+    "den_cung": "Nô Bộc",
+    "xung_cung": "Huynh Đệ",
+    "tu_hoa": false,
+    "den_tuan_triet": [],
+    "nghia": "Mảng Phúc Đức hướng thuận lợi ra bạn bè, đồng nghiệp, khách hàng: mạng lưới rộng hơn. Bạn thường là người cho đi trước; nên giữ ranh giới để không quá sức."
+   },
+   {
+    "tu_cung": "Phúc Đức",
+    "can": "Kỷ",
+    "hoa": "Quyền",
+    "sao": "Tham Lang",
+    "den_cung": "Huynh Đệ",
+    "xung_cung": "Nô Bộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Phúc Đức làm anh chị em, bạn thân có tiếng nói mạnh, hoặc bạn đứng ra lo cho họ. Nên bàn bạc ngang hàng."
+   },
+   {
+    "tu_cung": "Phúc Đức",
+    "can": "Kỷ",
+    "hoa": "Khoa",
+    "sao": "Thiên Lương",
+    "den_cung": "Phúc Đức",
+    "xung_cung": "Tài Bạch",
+    "tu_hoa": true,
+    "den_tuan_triet": [],
+    "nghia": "Cung Phúc Đức tự hoá Khoa: mảng Phúc Đức có cách tự gỡ rối, nhưng tiếng tốt dễ thoảng qua nếu không ghi lại."
+   },
+   {
+    "tu_cung": "Phúc Đức",
+    "can": "Kỷ",
+    "hoa": "Kỵ",
+    "sao": "Văn Khúc",
+    "den_cung": "Huynh Đệ",
+    "xung_cung": "Nô Bộc",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Phúc Đức hướng sự lo lắng về anh chị em, bạn thân, hoặc khoản tiền dành dụm. Nên rõ ràng khi cho vay mượn trong nhà."
+   }
+  ],
+  "tu_hoa": [
+   {
+    "tu_cung": "Nô Bộc",
+    "can": "Canh",
+    "hoa": "Quyền",
+    "sao": "Vũ Khúc",
+    "den_cung": "Nô Bộc",
+    "xung_cung": "Huynh Đệ",
+    "tu_hoa": true,
+    "den_tuan_triet": [],
+    "nghia": "Cung Nô Bộc tự hoá Quyền: mảng Nô Bộc có sức tự đẩy, bạn hay tự quyết và đổi hướng nhanh."
+   },
+   {
+    "tu_cung": "Thiên Di",
+    "can": "Tân",
+    "hoa": "Quyền",
+    "sao": "Thái Dương",
+    "den_cung": "Thiên Di",
+    "xung_cung": "Mệnh",
+    "tu_hoa": true,
+    "den_tuan_triet": [],
+    "nghia": "Cung Thiên Di tự hoá Quyền: mảng Thiên Di có sức tự đẩy, bạn hay tự quyết và đổi hướng nhanh."
+   },
+   {
+    "tu_cung": "Phu Thê",
+    "can": "Ất",
+    "hoa": "Kỵ",
+    "sao": "Thái Âm",
+    "den_cung": "Phu Thê",
+    "xung_cung": "Quan Lộc",
+    "tu_hoa": true,
+    "den_tuan_triet": [],
+    "nghia": "Cung Phu Thê tự hoá Kỵ: mảng Phu Thê là nơi bạn tự lo, tự ôm, đôi khi đổi ý giữa chừng; điểm vướng thường đến từ cách mình xử lý hơn là từ người khác."
+   },
+   {
+    "tu_cung": "Mệnh",
+    "can": "Đinh",
+    "hoa": "Kỵ",
+    "sao": "Cự Môn",
+    "den_cung": "Mệnh",
+    "xung_cung": "Thiên Di",
+    "tu_hoa": true,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Cung Mệnh tự hoá Kỵ: mảng Mệnh là nơi bạn tự lo, tự ôm, đôi khi đổi ý giữa chừng; điểm vướng thường đến từ cách mình xử lý hơn là từ người khác."
+   },
+   {
+    "tu_cung": "Phúc Đức",
+    "can": "Kỷ",
+    "hoa": "Khoa",
+    "sao": "Thiên Lương",
+    "den_cung": "Phúc Đức",
+    "xung_cung": "Tài Bạch",
+    "tu_hoa": true,
+    "den_tuan_triet": [],
+    "nghia": "Cung Phúc Đức tự hoá Khoa: mảng Phúc Đức có cách tự gỡ rối, nhưng tiếng tốt dễ thoảng qua nếu không ghi lại."
+   }
+  ],
+  "vao_menh": [
+   {
+    "tu_cung": "Thiên Di",
+    "can": "Tân",
+    "hoa": "Lộc",
+    "sao": "Cự Môn",
+    "den_cung": "Mệnh",
+    "xung_cung": "Thiên Di",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Thiên Di có xu hướng mang thuận lợi về cho chính bạn: dễ gặp cơ hội, được giúp đỡ từ phía ấy. Nên đón nhận chủ động và nhớ đáp lại người đã giúp mình."
+   },
+   {
+    "tu_cung": "Tài Bạch",
+    "can": "Quý",
+    "hoa": "Quyền",
+    "sao": "Cự Môn",
+    "den_cung": "Mệnh",
+    "xung_cung": "Thiên Di",
+    "tu_hoa": false,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Mảng Tài Bạch trao cho bạn thêm quyền chủ động, kèm trách nhiệm. Bạn có xu hướng muốn tự quyết; nên nghe thêm một ý kiến trước khi chốt."
+   },
+   {
+    "tu_cung": "Mệnh",
+    "can": "Đinh",
+    "hoa": "Kỵ",
+    "sao": "Cự Môn",
+    "den_cung": "Mệnh",
+    "xung_cung": "Thiên Di",
+    "tu_hoa": true,
+    "den_tuan_triet": [
+     "Tuần Không"
+    ],
+    "nghia": "Cung Mệnh tự hoá Kỵ: mảng Mệnh là nơi bạn tự lo, tự ôm, đôi khi đổi ý giữa chừng; điểm vướng thường đến từ cách mình xử lý hơn là từ người khác."
+   }
+  ],
+  "noi_bat": [
+   {
+    "loai": "mau",
+    "duong": {
+     "tu_cung": "Mệnh",
+     "can": "Đinh",
+     "hoa": "Kỵ",
+     "sao": "Cự Môn",
+     "den_cung": "Mệnh",
+     "xung_cung": "Thiên Di",
+     "tu_hoa": true,
+     "den_tuan_triet": [
+      "Tuần Không"
+     ],
+     "nghia": "Cung Mệnh tự hoá Kỵ: mảng Mệnh là nơi bạn tự lo, tự ôm, đôi khi đổi ý giữa chừng; điểm vướng thường đến từ cách mình xử lý hơn là từ người khác."
+    },
+    "tieu_de": "Tự lo, tự ôm",
+    "nghia": "Mệnh tự hoá Kỵ: bạn hay tự đặt áp lực, tự chịu, khó mở lời nhờ người. Điểm vướng thường nằm ở cách mình nhìn chính mình.",
+    "viec_nen_lam": "Nên chọn một người tin được để kể việc đang lo, và cho phép mình làm chưa hoàn hảo.",
+    "cau_tu_soi": "Lần cuối bạn nhờ ai giúp là khi nào?",
+    "ghi_chu_tuan_triet": "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn."
+   },
+   {
+    "loai": "mau",
+    "duong": {
+     "tu_cung": "Phu Thê",
+     "can": "Ất",
+     "hoa": "Kỵ",
+     "sao": "Thái Âm",
+     "den_cung": "Phu Thê",
+     "xung_cung": "Quan Lộc",
+     "tu_hoa": true,
+     "den_tuan_triet": [],
+     "nghia": "Cung Phu Thê tự hoá Kỵ: mảng Phu Thê là nơi bạn tự lo, tự ôm, đôi khi đổi ý giữa chừng; điểm vướng thường đến từ cách mình xử lý hơn là từ người khác."
+    },
+    "tieu_de": "Tự lo trong chuyện đôi lứa",
+    "nghia": "Phu Thê tự hoá Kỵ: bạn dễ tự suy diễn, tự giữ cảm xúc trong quan hệ đôi lứa; vướng thường đến từ điều chưa nói ra.",
+    "viec_nen_lam": "Nên nói thẳng cảm nhận của mình bằng câu bắt đầu từ tôi thấy, thay vì chờ người kia tự hiểu.",
+    "cau_tu_soi": "Điều gì bạn mong người ấy hiểu mà chưa từng nói?",
+    "ghi_chu_tuan_triet": null
+   },
+   {
+    "loai": "mau",
+    "duong": {
+     "tu_cung": "Tử Nữ",
+     "can": "Giáp",
+     "hoa": "Kỵ",
+     "sao": "Thái Dương",
+     "den_cung": "Thiên Di",
+     "xung_cung": "Mệnh",
+     "tu_hoa": false,
+     "den_tuan_triet": [],
+     "nghia": "Mảng Tử Nữ khiến việc ra ngoài, đi lại, vào môi trường mới cần chuẩn bị kỹ hơn. Kỵ ở đây cũng chiếu về Mệnh, nên có sẵn phương án dự phòng."
+    },
+    "tieu_de": "Kỵ chiếu về bản thân",
+    "nghia": "Hoá Kỵ vào Thiên Di và chiếu thẳng Mệnh: việc ra ngoài, đi xa, môi trường mới dễ làm bạn để tâm và hao sức hơn thường lệ.",
+    "viec_nen_lam": "Nên chuẩn bị kỹ trước chuyến đi hay việc mới, có phương án dự phòng và để dư thời gian.",
+    "cau_tu_soi": "Khi ở chỗ lạ, bạn thường cần điều gì để thấy vững?",
+    "ghi_chu_tuan_triet": null
+   },
+   {
+    "loai": "loc_nhap",
+    "duong": {
+     "tu_cung": "Thiên Di",
+     "can": "Tân",
+     "hoa": "Lộc",
+     "sao": "Cự Môn",
+     "den_cung": "Mệnh",
+     "xung_cung": "Thiên Di",
+     "tu_hoa": false,
+     "den_tuan_triet": [
+      "Tuần Không"
+     ],
+     "nghia": "Mảng Thiên Di có xu hướng mang thuận lợi về cho chính bạn: dễ gặp cơ hội, được giúp đỡ từ phía ấy. Nên đón nhận chủ động và nhớ đáp lại người đã giúp mình."
+    },
+    "tieu_de": "Hoá Lộc từ Thiên Di vào Mệnh",
+    "nghia": "Mảng Thiên Di có xu hướng mang thuận lợi về cho chính bạn: dễ gặp cơ hội, được giúp đỡ từ phía ấy. Nên đón nhận chủ động và nhớ đáp lại người đã giúp mình.",
+    "viec_nen_lam": "Để ý những cơ hội đến từ ra ngoài, môi trường mới và dùng chúng cho bản thân.",
+    "cau_tu_soi": "Mình đã tận dụng điều tốt đến từ ra ngoài, môi trường mới chưa?",
+    "ghi_chu_tuan_triet": "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn."
+   },
+   {
+    "loai": "loc_nhap",
+    "duong": {
+     "tu_cung": "Phu Thê",
+     "can": "Ất",
+     "hoa": "Lộc",
+     "sao": "Thiên Cơ",
+     "den_cung": "Tài Bạch",
+     "xung_cung": "Phúc Đức",
+     "tu_hoa": false,
+     "den_tuan_triet": [
+      "Triệt Lộ"
+     ],
+     "nghia": "Mảng Phu Thê có xu hướng thành nguồn thu: dễ có thêm khoản lợi từ phía ấy. Nên ghi chép thu chi để thấy rõ tiền đến từ đâu."
+    },
+    "tieu_de": "Hoá Lộc từ Phu Thê vào Tài Bạch",
+    "nghia": "Mảng Phu Thê có xu hướng thành nguồn thu: dễ có thêm khoản lợi từ phía ấy. Nên ghi chép thu chi để thấy rõ tiền đến từ đâu.",
+    "viec_nen_lam": "Để ý những cơ hội đến từ quan hệ đôi lứa và dùng chúng cho tiền bạc, thu nhập.",
+    "cau_tu_soi": "Mình đã tận dụng điều tốt đến từ quan hệ đôi lứa chưa?",
+    "ghi_chu_tuan_triet": "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn."
+   },
+   {
+    "loai": "loc_nhap",
+    "duong": {
+     "tu_cung": "Huynh Đệ",
+     "can": "Bính",
+     "hoa": "Lộc",
+     "sao": "Thiên Đồng",
+     "den_cung": "Quan Lộc",
+     "xung_cung": "Phu Thê",
+     "tu_hoa": false,
+     "den_tuan_triet": [],
+     "nghia": "Mảng Huynh Đệ mở đường cho công việc: dễ có việc mới, dễ được ghi nhận. Nên chọn việc trọng tâm thay vì nhận hết mọi lời mời."
+    },
+    "tieu_de": "Hoá Lộc từ Huynh Đệ vào Quan Lộc",
+    "nghia": "Mảng Huynh Đệ mở đường cho công việc: dễ có việc mới, dễ được ghi nhận. Nên chọn việc trọng tâm thay vì nhận hết mọi lời mời.",
+    "viec_nen_lam": "Để ý những cơ hội đến từ anh chị em, bạn thân và dùng chúng cho công việc, vai trò.",
+    "cau_tu_soi": "Mình đã tận dụng điều tốt đến từ anh chị em, bạn thân chưa?",
+    "ghi_chu_tuan_triet": null
+   },
+   {
+    "loai": "tu_hoa",
+    "duong": {
+     "tu_cung": "Nô Bộc",
+     "can": "Canh",
+     "hoa": "Quyền",
+     "sao": "Vũ Khúc",
+     "den_cung": "Nô Bộc",
+     "xung_cung": "Huynh Đệ",
+     "tu_hoa": true,
+     "den_tuan_triet": [],
+     "nghia": "Cung Nô Bộc tự hoá Quyền: mảng Nô Bộc có sức tự đẩy, bạn hay tự quyết và đổi hướng nhanh."
+    },
+    "tieu_de": "Cung Nô Bộc tự hoá Quyền",
+    "nghia": "Cung Nô Bộc tự hoá Quyền: mảng Nô Bộc có sức tự đẩy, bạn hay tự quyết và đổi hướng nhanh.",
+    "viec_nen_lam": "Trước khi đổi kế hoạch ở mảng Nô Bộc, nên chờ một nhịp và hỏi thêm người liên quan.",
+    "cau_tu_soi": "Lần gần nhất bạn tự quyết ở mảng Nô Bộc, có ai lẽ ra nên được hỏi trước không?",
+    "ghi_chu_tuan_triet": null
+   },
+   {
+    "loai": "tu_hoa",
+    "duong": {
+     "tu_cung": "Thiên Di",
+     "can": "Tân",
+     "hoa": "Quyền",
+     "sao": "Thái Dương",
+     "den_cung": "Thiên Di",
+     "xung_cung": "Mệnh",
+     "tu_hoa": true,
+     "den_tuan_triet": [],
+     "nghia": "Cung Thiên Di tự hoá Quyền: mảng Thiên Di có sức tự đẩy, bạn hay tự quyết và đổi hướng nhanh."
+    },
+    "tieu_de": "Cung Thiên Di tự hoá Quyền",
+    "nghia": "Cung Thiên Di tự hoá Quyền: mảng Thiên Di có sức tự đẩy, bạn hay tự quyết và đổi hướng nhanh.",
+    "viec_nen_lam": "Trước khi đổi kế hoạch ở mảng Thiên Di, nên chờ một nhịp và hỏi thêm người liên quan.",
+    "cau_tu_soi": "Lần gần nhất bạn tự quyết ở mảng Thiên Di, có ai lẽ ra nên được hỏi trước không?",
+    "ghi_chu_tuan_triet": null
+   }
+  ],
+  "luu_nien": {
+   "nam": 2026,
+   "can_chi": "Bính Ngọ",
+   "hoa": [
+    {
+     "hoa": "Lộc",
+     "sao": "Thiên Đồng",
+     "den_cung": "Quan Lộc",
+     "xung_cung": "Phu Thê"
+    },
+    {
+     "hoa": "Quyền",
+     "sao": "Thiên Cơ",
+     "den_cung": "Tài Bạch",
+     "xung_cung": "Phúc Đức"
+    },
+    {
+     "hoa": "Khoa",
+     "sao": "Văn Xương",
+     "den_cung": "Nô Bộc",
+     "xung_cung": "Huynh Đệ"
+    },
+    {
+     "hoa": "Kỵ",
+     "sao": "Liêm Trinh",
+     "den_cung": "Phụ Mẫu",
+     "xung_cung": "Tật Ách"
+    }
+   ]
+  },
+  "phai": {
+   "ten": "Phi tinh tứ hoá",
+   "ghi_chu": "Lớp phi tinh (can cung hoá sao bay sang cung khác) là cách xem của Trung Châu / Khâm Thiên; Nam phái lối Việt chủ yếu xem tứ hoá theo can năm sinh, Tuần/Triệt và tam hợp. Hai cách trình bày song song, bạn tự đối chiếu."
+  },
+  "luu_y": [
+   "Đường bay tứ hoá cho biết các mảng đời sống tác động lẫn nhau thế nào, không phải lời đoán sự kiện.",
+   "Ưu tiên khi đọc: đại hạn > lưu niên > tiểu hạn; đường bay của lá gốc là nền.",
+   "Không lưu lá số hay kết quả này."
+  ],
+  "trang_thai": "nhap_ai",
+  "co_canh_bao": []
+ },
+ "nhip-3-thang": {
+  "engine_version": "e2e",
+  "ngay_xem": "2027-01-20",
+  "phai_luu_nguyet": "dau_quan_thai_tue",
+  "ten_phai_luu_nguyet": "Đẩu Quân từ Thái Tuế",
+  "luu_nien": {
+   "nam_am": 2026,
+   "can_chi": "Bính Ngọ",
+   "tu_hoa": [
+    {
+     "hoa": "Lộc",
+     "sao": "Thiên Đồng",
+     "cung_goc": "Quan Lộc"
+    },
+    {
+     "hoa": "Quyền",
+     "sao": "Thiên Cơ",
+     "cung_goc": "Tài Bạch"
+    },
+    {
+     "hoa": "Khoa",
+     "sao": "Văn Xương",
+     "cung_goc": "Nô Bộc"
+    },
+    {
+     "hoa": "Kỵ",
+     "sao": "Liêm Trinh",
+     "cung_goc": "Phụ Mẫu"
+    }
+   ]
+  },
+  "thang": [
+   {
+    "thang": 12,
+    "nhuan": false,
+    "phan": "ca_thang",
+    "nam_am": 2026,
+    "can_chi": "Tân Sửu",
+    "tu": "2027-01-08",
+    "den": "2027-02-05",
+    "cung_goc": "Tử Nữ",
+    "chu_de": "Giai đoạn chủ đề Tử Nữ: con cái, thế hệ sau, sáng tạo, đầu tư cho điều mình tạo ra.",
+    "muc": "thuan",
+    "nhan_muc": "Thuận",
+    "ly_do": [
+     {
+      "ma": "loc_nhap_cung_chinh",
+      "noi_dung": "Hoá Lộc của tháng bay vào cung Mệnh qua sao Cự Môn: mảng bạn đang để ý có thêm cơ hội."
+     }
+    ],
+    "tu_hoa_thang": [
+     {
+      "hoa": "Lộc",
+      "sao": "Cự Môn",
+      "cung_goc": "Mệnh"
+     },
+     {
+      "hoa": "Quyền",
+      "sao": "Thái Dương",
+      "cung_goc": "Thiên Di"
+     },
+     {
+      "hoa": "Khoa",
+      "sao": "Văn Khúc",
+      "cung_goc": "Huynh Đệ"
+     },
+     {
+      "hoa": "Kỵ",
+      "sao": "Văn Xương",
+      "cung_goc": "Nô Bộc"
+     }
+    ],
+    "goi_y": "Hợp bắt đầu việc đã chuẩn bị, chủ động gặp người cần gặp, nhưng vẫn giữ kế hoạch chi tiêu.",
+    "cau_tu_soi": "Cơ hội nào trong tháng này bạn muốn nắm lấy nhất?"
+   },
+   {
+    "thang": 1,
+    "nhuan": false,
+    "phan": "ca_thang",
+    "nam_am": 2027,
+    "can_chi": "Nhâm Dần",
+    "tu": "2027-02-06",
+    "den": "2027-03-07",
+    "cung_goc": "Huynh Đệ",
+    "chu_de": "Giai đoạn chủ đề Huynh Đệ: quan hệ anh em, bạn bè, cộng sự được đặt lên bàn.",
+    "muc": "binh",
+    "nhan_muc": "Bình",
+    "ly_do": [],
+    "tu_hoa_thang": [
+     {
+      "hoa": "Lộc",
+      "sao": "Thiên Lương",
+      "cung_goc": "Phúc Đức"
+     },
+     {
+      "hoa": "Quyền",
+      "sao": "Tử Vi",
+      "cung_goc": "Tử Nữ"
+     },
+     {
+      "hoa": "Khoa",
+      "sao": "Tả Phù",
+      "cung_goc": "Tài Bạch"
+     },
+     {
+      "hoa": "Kỵ",
+      "sao": "Vũ Khúc",
+      "cung_goc": "Nô Bộc"
+     }
+    ],
+    "goi_y": "Hợp làm đều việc đang có, dọn dẹp việc tồn và chuẩn bị cho tháng sau.",
+    "cau_tu_soi": "Việc tồn nào bạn có thể làm xong trong tháng này?"
+   },
+   {
+    "thang": 2,
+    "nhuan": false,
+    "phan": "ca_thang",
+    "nam_am": 2027,
+    "can_chi": "Quý Mão",
+    "tu": "2027-03-08",
+    "den": "2027-04-06",
+    "cung_goc": "Mệnh",
+    "chu_de": "Giai đoạn chủ đề Mệnh: chú ý chính bản thân, định hình lại cách sống và mục tiêu.",
+    "muc": "binh",
+    "nhan_muc": "Bình",
+    "ly_do": [],
+    "tu_hoa_thang": [
+     {
+      "hoa": "Lộc",
+      "sao": "Phá Quân",
+      "cung_goc": "Tật Ách"
+     },
+     {
+      "hoa": "Quyền",
+      "sao": "Cự Môn",
+      "cung_goc": "Mệnh"
+     },
+     {
+      "hoa": "Khoa",
+      "sao": "Thái Âm",
+      "cung_goc": "Phu Thê"
+     },
+     {
+      "hoa": "Kỵ",
+      "sao": "Tham Lang",
+      "cung_goc": "Huynh Đệ"
+     }
+    ],
+    "goi_y": "Hợp làm đều việc đang có, dọn dẹp việc tồn và chuẩn bị cho tháng sau.",
+    "cau_tu_soi": "Việc tồn nào bạn có thể làm xong trong tháng này?"
+   }
+  ],
+  "uu_tien": {
+   "thu_tu": [
+    "dai_han",
+    "luu_nien",
+    "tieu_han",
+    "luu_nguyet"
+   ],
+   "ghi_chu": "Đại hạn > lưu niên > tiểu hạn > lưu nguyệt — tháng chỉ tô thêm màu cho bức tranh của năm và của vận.",
+   "han_nam": {
+    "dai_han": {
+     "chi": "Dần",
+     "cung_goc": "Điền Trạch"
+    },
+    "luu_nien": {
+     "chi": "Ngọ",
+     "cung_goc": "Tật Ách"
+    },
+    "tieu_han": {
+     "chi": "Thìn",
+     "cung_goc": "Nô Bộc"
+    }
+   }
+  },
+  "luu_y": [
+   "Mức Thuận / Bình / Cần thận trọng là xu hướng theo luật tứ hoá công khai, không phải lời đoán sự kiện.",
+   "Lưu nguyệt có nhiều phái; kết quả theo phái bạn đang chọn trong khung Trường phái.",
+   "Không lưu lá số hay kết quả này."
+  ],
+  "luu_nien_sau": {
+   "nam_am": 2027,
+   "can_chi": "Đinh Mùi",
+   "tu_hoa": [
+    {
+     "hoa": "Lộc",
+     "sao": "Thái Âm",
+     "cung_goc": "Phu Thê"
+    },
+    {
+     "hoa": "Quyền",
+     "sao": "Thiên Đồng",
+     "cung_goc": "Quan Lộc"
+    },
+    {
+     "hoa": "Khoa",
+     "sao": "Thiên Cơ",
+     "cung_goc": "Tài Bạch"
+    },
+    {
+     "hoa": "Kỵ",
+     "sao": "Cự Môn",
+     "cung_goc": "Mệnh"
+    }
+   ]
+  },
+  "co_canh_bao": []
+ },
+ "dinh-gio": {
+  "engine_version": "e2e",
+  "ly_do": [],
+  "nam_doi_chieu": [
+   2023,
+   2024,
+   2025
+  ],
+  "ung_vien": [
+   {
+    "nhan": "Giờ trước",
+    "chi_gio": "Tỵ",
+    "khoang_gio": "09:00–10:59",
+    "khoang_gio_dong_ho": "09:00–10:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "10:30",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Tý",
+     "chinh_tinh": [
+      "Vũ Khúc",
+      "Thiên Phủ"
+     ]
+    },
+    "cuc": "Hỏa Lục Cục",
+    "than_cu": "Phu Thê",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "10:30",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ đã nhập",
+    "chi_gio": "Ngọ",
+    "khoang_gio": "11:00–12:59",
+    "khoang_gio_dong_ho": "11:00–12:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "12:30",
+    "la_gio_nhap": true,
+    "cung_menh": {
+     "chi": "Hợi",
+     "chinh_tinh": [
+      "Cự Môn"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Mệnh",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "12:30",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ sau",
+    "chi_gio": "Mùi",
+    "khoang_gio": "13:00–14:59",
+    "khoang_gio_dong_ho": "13:00–14:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "14:30",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Tuất",
+     "chinh_tinh": [
+      "Tham Lang"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Phúc Đức",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "14:30",
+     "calendar_type": "duong"
+    }
+   }
+  ],
+  "khac_nhau": [
+   "Cung Mệnh: Giờ trước Tý (Vũ Khúc, Thiên Phủ) · Giờ đã nhập Hợi (Cự Môn) · Giờ sau Tuất (Tham Lang)",
+   "Cục: Giờ trước Hỏa Lục Cục · Giờ đã nhập Thổ Ngũ Cục · Giờ sau Thổ Ngũ Cục",
+   "Thân cư: Giờ trước Phu Thê · Giờ đã nhập Mệnh · Giờ sau Phúc Đức"
+  ],
+  "loi_dan": "Chọn những năm bạn nhớ rõ. Với mỗi giờ ứng viên, đọc câu hỏi của từng năm và tự đánh dấu câu nào đúng với trải nghiệm của mình. Giờ nào có nhiều câu khớp hơn thì đáng để bạn xem kỹ hơn.",
+  "luu_y": [
+   "Câu hỏi chỉ hỏi điều bạn tự quan sát được; hệ thống không tự chọn giờ sinh thay bạn.",
+   "Không có câu hỏi về sức khoẻ: phần Tật Ách chỉ hỏi về nhịp sinh hoạt.",
+   "Những năm bạn chọn và câu trả lời không được lưu.",
+   "Khi còn phân vân, giấy khai sinh hoặc lời kể của người nhà vẫn là căn cứ tốt nhất."
+  ],
+  "co_canh_bao": []
+ },
+ "dinh-gio-12": {
+  "engine_version": "e2e",
+  "ly_do": [
+   "khong_biet"
+  ],
+  "nam_doi_chieu": [
+   2023,
+   2024,
+   2025
+  ],
+  "ung_vien": [
+   {
+    "nhan": "Giờ Tý",
+    "chi_gio": "Tý",
+    "khoang_gio": "00:00–00:59",
+    "khoang_gio_dong_ho": "00:00–00:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "00:30",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Tỵ",
+     "chinh_tinh": [
+      "Thiên Cơ"
+     ]
+    },
+    "cuc": "Kim Tứ Cục",
+    "than_cu": "Mệnh",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Nô Bộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "00:30",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Sửu",
+    "chi_gio": "Sửu",
+    "khoang_gio": "01:00–02:59",
+    "khoang_gio_dong_ho": "01:00–02:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "02:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Thìn",
+     "chinh_tinh": [
+      "Thất Sát"
+     ]
+    },
+    "cuc": "Kim Tứ Cục",
+    "than_cu": "Phúc Đức",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "02:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Dần",
+    "chi_gio": "Dần",
+    "khoang_gio": "03:00–04:59",
+    "khoang_gio_dong_ho": "03:00–04:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "04:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Mão",
+     "chinh_tinh": [
+      "Thiên Đồng"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Quan Lộc",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "04:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Mão",
+    "chi_gio": "Mão",
+    "khoang_gio": "05:00–06:59",
+    "khoang_gio_dong_ho": "05:00–06:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "06:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Dần",
+     "chinh_tinh": [
+      "Thất Sát"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Thiên Di",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Nô Bộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "06:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Thìn",
+    "chi_gio": "Thìn",
+    "khoang_gio": "07:00–08:59",
+    "khoang_gio_dong_ho": "07:00–08:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "08:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Sửu",
+     "chinh_tinh": [
+      "Thái Dương",
+      "Thái Âm"
+     ]
+    },
+    "cuc": "Hỏa Lục Cục",
+    "than_cu": "Tài Bạch",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "08:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Tỵ",
+    "chi_gio": "Tỵ",
+    "khoang_gio": "09:00–10:59",
+    "khoang_gio_dong_ho": "09:00–10:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "10:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Tý",
+     "chinh_tinh": [
+      "Vũ Khúc",
+      "Thiên Phủ"
+     ]
+    },
+    "cuc": "Hỏa Lục Cục",
+    "than_cu": "Phu Thê",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "10:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Ngọ",
+    "chi_gio": "Ngọ",
+    "khoang_gio": "11:00–12:59",
+    "khoang_gio_dong_ho": "11:00–12:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "12:00",
+    "la_gio_nhap": true,
+    "cung_menh": {
+     "chi": "Hợi",
+     "chinh_tinh": [
+      "Cự Môn"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Mệnh",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "12:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Mùi",
+    "chi_gio": "Mùi",
+    "khoang_gio": "13:00–14:59",
+    "khoang_gio_dong_ho": "13:00–14:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "14:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Tuất",
+     "chinh_tinh": [
+      "Tham Lang"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Phúc Đức",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "14:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Thân",
+    "chi_gio": "Thân",
+    "khoang_gio": "15:00–16:59",
+    "khoang_gio_dong_ho": "15:00–16:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "16:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Dậu",
+     "chinh_tinh": [
+      "Thái Dương",
+      "Thiên Lương"
+     ]
+    },
+    "cuc": "Thủy Nhị Cục",
+    "than_cu": "Quan Lộc",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Nô Bộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "16:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Dậu",
+    "chi_gio": "Dậu",
+    "khoang_gio": "17:00–18:59",
+    "khoang_gio_dong_ho": "17:00–18:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "18:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Thân",
+     "chinh_tinh": [
+      "Vũ Khúc",
+      "Thiên Tướng"
+     ]
+    },
+    "cuc": "Thủy Nhị Cục",
+    "than_cu": "Thiên Di",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "18:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Tuất",
+    "chi_gio": "Tuất",
+    "khoang_gio": "19:00–20:59",
+    "khoang_gio_dong_ho": "19:00–20:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "20:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Mùi",
+     "chinh_tinh": [
+      "Thiên Cơ"
+     ]
+    },
+    "cuc": "Mộc Tam Cục",
+    "than_cu": "Tài Bạch",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Nô Bộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "20:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Hợi",
+    "chi_gio": "Hợi",
+    "khoang_gio": "21:00–22:59",
+    "khoang_gio_dong_ho": "21:00–22:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "22:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Ngọ",
+     "chinh_tinh": [
+      "Phá Quân"
+     ]
+    },
+    "cuc": "Mộc Tam Cục",
+    "than_cu": "Phu Thê",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "22:00",
+     "calendar_type": "duong"
+    }
+   }
+  ],
+  "khac_nhau": [
+   "Cung Mệnh: Giờ Tý Tỵ (Thiên Cơ) · Giờ Sửu Thìn (Thất Sát) · Giờ Dần Mão (Thiên Đồng) · Giờ Mão Dần (Thất Sát) · Giờ Thìn Sửu (Thái Dương, Thái Âm) · Giờ Tỵ Tý (Vũ Khúc, Thiên Phủ) · Giờ Ngọ Hợi (Cự Môn) · Giờ Mùi Tuất (Tham Lang) · Giờ Thân Dậu (Thái Dương, Thiên Lương) · Giờ Dậu Thân (Vũ Khúc, Thiên Tướng) · Giờ Tuất Mùi (Thiên Cơ) · Giờ Hợi Ngọ (Phá Quân)",
+   "Cục: Giờ Tý Kim Tứ Cục · Giờ Sửu Kim Tứ Cục · Giờ Dần Thổ Ngũ Cục · Giờ Mão Thổ Ngũ Cục · Giờ Thìn Hỏa Lục Cục · Giờ Tỵ Hỏa Lục Cục · Giờ Ngọ Thổ Ngũ Cục · Giờ Mùi Thổ Ngũ Cục · Giờ Thân Thủy Nhị Cục · Giờ Dậu Thủy Nhị Cục · Giờ Tuất Mộc Tam Cục · Giờ Hợi Mộc Tam Cục",
+   "Thân cư: Giờ Tý Mệnh · Giờ Sửu Phúc Đức · Giờ Dần Quan Lộc · Giờ Mão Thiên Di · Giờ Thìn Tài Bạch · Giờ Tỵ Phu Thê · Giờ Ngọ Mệnh · Giờ Mùi Phúc Đức · Giờ Thân Quan Lộc · Giờ Dậu Thiên Di · Giờ Tuất Tài Bạch · Giờ Hợi Phu Thê"
+  ],
+  "loi_dan": "Chọn những năm bạn nhớ rõ. Với mỗi giờ ứng viên, đọc câu hỏi của từng năm và tự đánh dấu câu nào đúng với trải nghiệm của mình. Giờ nào có nhiều câu khớp hơn thì đáng để bạn xem kỹ hơn.",
+  "luu_y": [
+   "Câu hỏi chỉ hỏi điều bạn tự quan sát được; hệ thống không tự chọn giờ sinh thay bạn.",
+   "Không có câu hỏi về sức khoẻ: phần Tật Ách chỉ hỏi về nhịp sinh hoạt.",
+   "Những năm bạn chọn và câu trả lời không được lưu.",
+   "Khi còn phân vân, giấy khai sinh hoặc lời kể của người nhà vẫn là căn cứ tốt nhất."
+  ],
+  "co_canh_bao": [
+   {
+    "loai": "hour_confidence",
+    "chi_tiet": "Độ tin giờ sinh: unknown."
+   }
+  ]
+ },
+ "hop-tham": {
+  "engine_version": "e2e",
+  "quan_he": "ban_be",
+  "nhan_quan_he": "Bạn bè",
+  "can_nam_nguoi_kia": "Ất",
+  "nguoi_kia_vao_ban": [
+   {
+    "hoa": "Lộc",
+    "sao": "Thiên Cơ",
+    "den_cung": "Tài Bạch",
+    "xung_cung": "Phúc Đức",
+    "nghia": "Người ấy mang Hoá Lộc vào cung Tài Bạch của bạn: ở mảng tiền bạc, thu nhập, sự có mặt của họ thường đem lại thuận lợi, niềm vui, cơ hội."
+   },
+   {
+    "hoa": "Quyền",
+    "sao": "Thiên Lương",
+    "den_cung": "Phúc Đức",
+    "xung_cung": "Tài Bạch",
+    "nghia": "Người ấy mang Hoá Quyền vào cung Phúc Đức của bạn: ở mảng đời sống tinh thần, họ thường có tiếng nói mạnh hoặc thúc bạn chủ động hơn. Nên thống nhất ai quyết phần nào."
+   },
+   {
+    "hoa": "Khoa",
+    "sao": "Tử Vi",
+    "den_cung": "Tử Nữ",
+    "xung_cung": "Điền Trạch",
+    "nghia": "Người ấy mang Hoá Khoa vào cung Tử Nữ của bạn: ở mảng con cái, điều mình tạo ra, họ thường giúp mọi việc rõ ràng, dễ gỡ rối, dễ hiểu nhau."
+   },
+   {
+    "hoa": "Kỵ",
+    "sao": "Thái Âm",
+    "den_cung": "Phu Thê",
+    "xung_cung": "Quan Lộc",
+    "nghia": "Người ấy mang Hoá Kỵ vào cung Phu Thê của bạn: mảng quan hệ đôi lứa là nơi hai người dễ để tâm, kỳ vọng vào nhau nhiều. Nên thoả thuận rõ ràng ở mảng này."
+   }
+  ],
+  "ban_vao_nguoi_kia": null,
+  "can_menh_nguoi_kia": null,
+  "menh_nguoi_kia_vao_ban": null,
+  "tom_tat": [
+   "Can năm Ất của người kia vào lá số của bạn: Lộc vào Tài Bạch, Quyền vào Phúc Đức, Khoa vào Tử Nữ, Kỵ vào Phu Thê.",
+   "Quan hệ bạn bè: Lộc, Khoa thường là chỗ dễ hỗ trợ nhau; Kỵ là chỗ nên trò chuyện rõ ràng hơn — không phải lời phán hợp hay không hợp."
+  ],
+  "luu_y": [
+   "Phần hợp tham chỉ cho thấy mảng đời nào hai người dễ chạm vào nhau, không chấm điểm hợp hay khắc.",
+   "Hoá Kỵ ở đây là chỗ cần nói chuyện kỹ, không phải lý do để xa nhau.",
+   "Quan hệ thật do cách hai người cư xử với nhau mỗi ngày; lá số chỉ là một góc để cùng trò chuyện.",
+   "Ngày sinh của người kia chỉ dùng để tính lúc xem, không được lưu.",
+   "Chỉ có ngày sinh thì xem một chiều (can năm người kia vào lá của bạn); thêm giờ, giới tính, nơi sinh của người kia để xem hai chiều."
+  ],
+  "khong_cham_diem": true
+ },
+ "dinh-gio-mien-nam-1965": {
+  "engine_version": "e2e",
+  "ly_do": [
+   "gan_ranh_gio"
+  ],
+  "nam_doi_chieu": [
+   2023,
+   2024,
+   2025
+  ],
+  "ung_vien": [
+   {
+    "nhan": "Giờ trước",
+    "chi_gio": "Dần",
+    "khoang_gio": "03:00–04:59",
+    "khoang_gio_dong_ho": "04:00–05:59",
+    "lech_gio_lich": true,
+    "gio_dai_dien": "04:10",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Tỵ",
+     "chinh_tinh": [
+      "Vũ Khúc",
+      "Phá Quân"
+     ]
+    },
+    "cuc": "Kim Tứ Cục",
+    "than_cu": "Quan Lộc",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1965-07-20",
+     "birth_time": "04:10",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ đã nhập",
+    "chi_gio": "Mão",
+    "khoang_gio": "05:00–06:59",
+    "khoang_gio_dong_ho": "06:00–07:59",
+    "lech_gio_lich": true,
+    "gio_dai_dien": "06:10",
+    "la_gio_nhap": true,
+    "cung_menh": {
+     "chi": "Thìn",
+     "chinh_tinh": [
+      "Thiên Đồng"
+     ]
+    },
+    "cuc": "Kim Tứ Cục",
+    "than_cu": "Thiên Di",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1965-07-20",
+     "birth_time": "06:10",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ sau",
+    "chi_gio": "Thìn",
+    "khoang_gio": "07:00–08:59",
+    "khoang_gio_dong_ho": "08:00–09:59",
+    "lech_gio_lich": true,
+    "gio_dai_dien": "08:10",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Mão",
+     "chinh_tinh": [
+      "Tử Vi",
+      "Tham Lang"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Tài Bạch",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1965-07-20",
+     "birth_time": "08:10",
+     "calendar_type": "duong"
+    }
+   }
+  ],
+  "khac_nhau": [
+   "Cung Mệnh: Giờ trước Tỵ (Vũ Khúc, Phá Quân) · Giờ đã nhập Thìn (Thiên Đồng) · Giờ sau Mão (Tử Vi, Tham Lang)",
+   "Cục: Giờ trước Kim Tứ Cục · Giờ đã nhập Kim Tứ Cục · Giờ sau Thổ Ngũ Cục",
+   "Thân cư: Giờ trước Quan Lộc · Giờ đã nhập Thiên Di · Giờ sau Tài Bạch"
+  ],
+  "loi_dan": "Chọn những năm bạn nhớ rõ. Với mỗi giờ ứng viên, đọc câu hỏi của từng năm và tự đánh dấu câu nào đúng với trải nghiệm của mình. Giờ nào có nhiều câu khớp hơn thì đáng để bạn xem kỹ hơn.",
+  "luu_y": [
+   "Câu hỏi chỉ hỏi điều bạn tự quan sát được; hệ thống không tự chọn giờ sinh thay bạn.",
+   "Không có câu hỏi về sức khoẻ: phần Tật Ách chỉ hỏi về nhịp sinh hoạt.",
+   "Những năm bạn chọn và câu trả lời không được lưu.",
+   "Khi còn phân vân, giấy khai sinh hoặc lời kể của người nhà vẫn là căn cứ tốt nhất."
+  ],
+  "co_canh_bao": [
+   {
+    "loai": "tz_adjusted",
+    "chi_tiet": "Đồng hồ nơi sinh chạy UTC+8; đã quy đổi về kinh tuyến lịch UTC+7: 05:10 ngày 20/07/1965."
+   }
+  ]
+ },
+ "dinh-gio-ty-muon-12": {
+  "engine_version": "e2e",
+  "ly_do": [],
+  "nam_doi_chieu": [
+   2023,
+   2024,
+   2025
+  ],
+  "ung_vien": [
+   {
+    "nhan": "Giờ Tý",
+    "chi_gio": "Tý",
+    "khoang_gio": "00:00–00:59",
+    "khoang_gio_dong_ho": "00:00–00:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "00:30",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Tỵ",
+     "chinh_tinh": [
+      "Thiên Cơ"
+     ]
+    },
+    "cuc": "Kim Tứ Cục",
+    "than_cu": "Mệnh",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Nô Bộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "00:30",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Sửu",
+    "chi_gio": "Sửu",
+    "khoang_gio": "01:00–02:59",
+    "khoang_gio_dong_ho": "01:00–02:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "02:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Thìn",
+     "chinh_tinh": [
+      "Thất Sát"
+     ]
+    },
+    "cuc": "Kim Tứ Cục",
+    "than_cu": "Phúc Đức",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "02:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Dần",
+    "chi_gio": "Dần",
+    "khoang_gio": "03:00–04:59",
+    "khoang_gio_dong_ho": "03:00–04:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "04:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Mão",
+     "chinh_tinh": [
+      "Thiên Đồng"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Quan Lộc",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "04:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Mão",
+    "chi_gio": "Mão",
+    "khoang_gio": "05:00–06:59",
+    "khoang_gio_dong_ho": "05:00–06:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "06:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Dần",
+     "chinh_tinh": [
+      "Thất Sát"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Thiên Di",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Nô Bộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "06:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Thìn",
+    "chi_gio": "Thìn",
+    "khoang_gio": "07:00–08:59",
+    "khoang_gio_dong_ho": "07:00–08:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "08:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Sửu",
+     "chinh_tinh": [
+      "Thái Dương",
+      "Thái Âm"
+     ]
+    },
+    "cuc": "Hỏa Lục Cục",
+    "than_cu": "Tài Bạch",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "08:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Tỵ",
+    "chi_gio": "Tỵ",
+    "khoang_gio": "09:00–10:59",
+    "khoang_gio_dong_ho": "09:00–10:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "10:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Tý",
+     "chinh_tinh": [
+      "Vũ Khúc",
+      "Thiên Phủ"
+     ]
+    },
+    "cuc": "Hỏa Lục Cục",
+    "than_cu": "Phu Thê",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "10:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Ngọ",
+    "chi_gio": "Ngọ",
+    "khoang_gio": "11:00–12:59",
+    "khoang_gio_dong_ho": "11:00–12:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "12:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Hợi",
+     "chinh_tinh": [
+      "Cự Môn"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Mệnh",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "12:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Mùi",
+    "chi_gio": "Mùi",
+    "khoang_gio": "13:00–14:59",
+    "khoang_gio_dong_ho": "13:00–14:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "14:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Tuất",
+     "chinh_tinh": [
+      "Tham Lang"
+     ]
+    },
+    "cuc": "Thổ Ngũ Cục",
+    "than_cu": "Phúc Đức",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "14:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Thân",
+    "chi_gio": "Thân",
+    "khoang_gio": "15:00–16:59",
+    "khoang_gio_dong_ho": "15:00–16:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "16:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Dậu",
+     "chinh_tinh": [
+      "Thái Dương",
+      "Thiên Lương"
+     ]
+    },
+    "cuc": "Thủy Nhị Cục",
+    "than_cu": "Quan Lộc",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Nô Bộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tật Ách",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "16:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Dậu",
+    "chi_gio": "Dậu",
+    "khoang_gio": "17:00–18:59",
+    "khoang_gio_dong_ho": "17:00–18:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "18:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Thân",
+     "chinh_tinh": [
+      "Vũ Khúc",
+      "Thiên Tướng"
+     ]
+    },
+    "cuc": "Thủy Nhị Cục",
+    "than_cu": "Thiên Di",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tật Ách",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, nhịp sinh hoạt của bạn (giờ ngủ, giờ làm, cách nghỉ ngơi) có đổi khác rõ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Tài Bạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "18:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Tuất",
+    "chi_gio": "Tuất",
+    "khoang_gio": "19:00–20:59",
+    "khoang_gio_dong_ho": "19:00–20:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "20:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Mùi",
+     "chinh_tinh": [
+      "Thiên Cơ"
+     ]
+    },
+    "cuc": "Mộc Tam Cục",
+    "than_cu": "Tài Bạch",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Nô Bộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tài Bạch",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, thu nhập hoặc cách bạn chi tiêu có thay đổi rõ, lên hay xuống, không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "20:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Hợi",
+    "chi_gio": "Hợi",
+    "khoang_gio": "21:00–22:59",
+    "khoang_gio_dong_ho": "21:00–22:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "22:00",
+    "la_gio_nhap": false,
+    "cung_menh": {
+     "chi": "Ngọ",
+     "chinh_tinh": [
+      "Phá Quân"
+     ]
+    },
+    "cuc": "Mộc Tam Cục",
+    "than_cu": "Phu Thê",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Quan Lộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, công việc của bạn có đổi vị trí, đổi nơi làm, thêm trách nhiệm hay chững lại rõ rệt không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Phu Thê",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, chuyện tình cảm đôi lứa của bạn có bước chuyển đáng nhớ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Mệnh",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Điền Trạch",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có chuyển nhà, sửa nhà, mua sắm lớn cho nhà hay thay đổi nếp sinh hoạt gia đình không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Tử Nữ",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, chuyện con cái, học trò hay một dự án riêng có chiếm nhiều thời gian của bạn không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "22:00",
+     "calendar_type": "duong"
+    }
+   },
+   {
+    "nhan": "Giờ Tý muộn (23:00–23:59)",
+    "chi_gio": "Tý",
+    "khoang_gio": "23:00–23:59",
+    "khoang_gio_dong_ho": "23:00–23:59",
+    "lech_gio_lich": false,
+    "gio_dai_dien": "23:30",
+    "la_gio_nhap": true,
+    "cung_menh": {
+     "chi": "Tỵ",
+     "chinh_tinh": []
+    },
+    "cuc": "Kim Tứ Cục",
+    "than_cu": "Mệnh",
+    "nam": [
+     {
+      "nam": 2023,
+      "can_chi": "Quý Mão",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Mệnh",
+        "cach": "chieu",
+        "noi_dung": "Năm 2023, bạn có thay đổi rõ về cách nhìn bản thân, thói quen hay hình ảnh của mình không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phúc Đức",
+        "cach": "nhap",
+        "noi_dung": "Năm 2023, tâm trạng chung của bạn thế nào: nhẹ nhõm hơn hay suy nghĩ nhiều hơn thường lệ?"
+       }
+      ]
+     },
+     {
+      "nam": 2024,
+      "can_chi": "Giáp Thìn",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "chieu",
+        "noi_dung": "Năm 2024, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Thiên Di",
+        "cach": "nhap",
+        "noi_dung": "Năm 2024, bạn có đi xa, chuyển nơi sống, hoặc ra ngoài nhiều hơn hẳn thường lệ không?"
+       }
+      ]
+     },
+     {
+      "nam": 2025,
+      "can_chi": "Ất Tỵ",
+      "cau_hoi": [
+       {
+        "hoa": "Kỵ",
+        "cung": "Nô Bộc",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có quen thêm nhiều người, đổi nhóm bạn, hay có chuyện đáng nhớ với đồng nghiệp không?"
+       },
+       {
+        "hoa": "Kỵ",
+        "cung": "Huynh Đệ",
+        "cach": "chieu",
+        "noi_dung": "Năm 2025, quan hệ với anh chị em, bạn thân có gần hơn, xa hơn hay có việc chung đáng nhớ không?"
+       },
+       {
+        "hoa": "Lộc",
+        "cung": "Phụ Mẫu",
+        "cach": "nhap",
+        "noi_dung": "Năm 2025, bạn có nhiều việc giấy tờ, thi cử, hoặc thay đổi trong quan hệ với cha mẹ, cấp trên không?"
+       }
+      ]
+     }
+    ],
+    "dau_vao": {
+     "birth_date": "1990-05-17",
+     "birth_time": "23:30",
+     "calendar_type": "duong"
+    },
+    "ghi_chu": "Giờ bạn nhập rơi vào Tý muộn (23:00–23:59): Tử vi tính giờ này sang ngày hôm sau, nên lá số khác lá Tý sớm (00:00–00:59) của cùng ngày."
+   }
+  ],
+  "khac_nhau": [
+   "Cung Mệnh: Giờ Tý Tỵ (Thiên Cơ) · Giờ Sửu Thìn (Thất Sát) · Giờ Dần Mão (Thiên Đồng) · Giờ Mão Dần (Thất Sát) · Giờ Thìn Sửu (Thái Dương, Thái Âm) · Giờ Tỵ Tý (Vũ Khúc, Thiên Phủ) · Giờ Ngọ Hợi (Cự Môn) · Giờ Mùi Tuất (Tham Lang) · Giờ Thân Dậu (Thái Dương, Thiên Lương) · Giờ Dậu Thân (Vũ Khúc, Thiên Tướng) · Giờ Tuất Mùi (Thiên Cơ) · Giờ Hợi Ngọ (Phá Quân) · Giờ Tý muộn (23:00–23:59) Tỵ (vô chính diệu)",
+   "Cục: Giờ Tý Kim Tứ Cục · Giờ Sửu Kim Tứ Cục · Giờ Dần Thổ Ngũ Cục · Giờ Mão Thổ Ngũ Cục · Giờ Thìn Hỏa Lục Cục · Giờ Tỵ Hỏa Lục Cục · Giờ Ngọ Thổ Ngũ Cục · Giờ Mùi Thổ Ngũ Cục · Giờ Thân Thủy Nhị Cục · Giờ Dậu Thủy Nhị Cục · Giờ Tuất Mộc Tam Cục · Giờ Hợi Mộc Tam Cục · Giờ Tý muộn (23:00–23:59) Kim Tứ Cục",
+   "Thân cư: Giờ Tý Mệnh · Giờ Sửu Phúc Đức · Giờ Dần Quan Lộc · Giờ Mão Thiên Di · Giờ Thìn Tài Bạch · Giờ Tỵ Phu Thê · Giờ Ngọ Mệnh · Giờ Mùi Phúc Đức · Giờ Thân Quan Lộc · Giờ Dậu Thiên Di · Giờ Tuất Tài Bạch · Giờ Hợi Phu Thê · Giờ Tý muộn (23:00–23:59) Mệnh"
+  ],
+  "loi_dan": "Chọn những năm bạn nhớ rõ. Với mỗi giờ ứng viên, đọc câu hỏi của từng năm và tự đánh dấu câu nào đúng với trải nghiệm của mình. Giờ nào có nhiều câu khớp hơn thì đáng để bạn xem kỹ hơn.",
+  "luu_y": [
+   "Câu hỏi chỉ hỏi điều bạn tự quan sát được; hệ thống không tự chọn giờ sinh thay bạn.",
+   "Không có câu hỏi về sức khoẻ: phần Tật Ách chỉ hỏi về nhịp sinh hoạt.",
+   "Những năm bạn chọn và câu trả lời không được lưu.",
+   "Khi còn phân vân, giấy khai sinh hoặc lời kể của người nhà vẫn là căn cứ tốt nhất."
+  ],
+  "co_canh_bao": [
+   {
+    "loai": "ty_edge",
+    "chi_tiet": "Giờ sinh sát ranh giới giờ Tý (23:00–00:59) — trụ ngày nhạy với sai số vài phút và với quy ước ranh giới chưa chốt."
+   }
+  ]
+ }
+}

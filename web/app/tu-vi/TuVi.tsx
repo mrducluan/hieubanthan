@@ -3,7 +3,7 @@
 // → hỏi đáp AI ở DƯỚI, chiếm hết chiều ngang (chủ dự án chốt 2026-10-01).
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Download, List, Maximize2, Minimize2, Moon, Orbit, ScrollText } from "lucide-react";
+import { CalendarClock, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, List, Maximize2, Minimize2, Moon, Orbit, ScrollText, Waypoints } from "lucide-react";
 import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
@@ -13,6 +13,11 @@ import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { LuuNguyet } from "@/components/huyen-hoc/LuuNguyet";
+import { KhoiMoLuoi } from "@/components/huyen-hoc/KhoiMoLuoi";
+import { PhiHoa } from "@/components/huyen-hoc/PhiHoa";
+import { NhipBaThang } from "@/components/huyen-hoc/NhipBaThang";
+import { DinhGioSinh } from "@/components/huyen-hoc/DinhGioSinh";
+import { HopThamTuVi } from "@/components/huyen-hoc/HopThamTuVi";
 import { LaSoTuVi, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -22,7 +27,7 @@ import { ghi } from "@/lib/do-luong";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
-import { laSoTuHoSo, useHoSo } from "@/lib/hoso";
+import { gioHienThi, laSoTuHoSo, useHoSo } from "@/lib/hoso";
 import { taiAnhSvg } from "@/lib/tai-anh-svg";
 import { cn } from "@/lib/utils";
 
@@ -75,6 +80,11 @@ export function TuVi() {
 
   const chiMenh = ls?.cung.find((c) => c.la_menh)?.chi ?? ls?.chi_cung_menh ?? "Dần";
   const chiChon = chon ?? chiMenh;
+  const khongBietGio = hoSo?.do_tin_gio === "unknown";
+  const xemCung = (c: string) => {
+    setChon(c);
+    requestAnimationFrame(() => chiTietRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
   const hoi = (cau: string) => {
     setCauNgoai({ cau, lan: Date.now() });
     chatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -130,6 +140,12 @@ export function TuVi() {
             </div>
 
             {loiAnh && <p role="alert" className="text-sm text-cinnabar">{loiAnh}</p>}
+            {khongBietGio && (
+              <p className="rounded-xl bg-moon/10 px-4 py-3 text-sm text-fg" data-testid="nhac-khong-biet-gio-tuvi">
+                Bạn chưa biết giờ sinh: lá số dưới đây <b>an tạm theo giờ Ngọ (12:00)</b>. Mở khối “Định giờ sinh” để đối chiếu đủ
+                12 canh giờ với những năm bạn nhớ rõ, rồi tự sửa giờ trong hồ sơ.
+              </p>
+            )}
             <TruongPhai
               lich={lich} setLich={setLich} lichKhac={!!ls.phai?.lich_khac}
               phaiDoSang={phaiDoSang} setPhaiDoSang={setPhaiDoSang}
@@ -140,7 +156,7 @@ export function TuVi() {
             {/* Lá số: trên điện thoại mặc định cuộn ngang để giữ chữ đủ lớn; "Toàn cảnh" thu vừa màn hình */}
             <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0" data-testid="la-so-tu-vi">
               <div className={cn("overflow-hidden rounded-[1.25rem] shadow-card", !toanCanh && "min-w-[760px]")}>
-                <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={hoSo?.ho_ten} gioSinh={hoSo?.gio}
+                <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={hoSo?.ho_ten} gioSinh={gioHienThi(hoSo)}
                   chon={chiChon} phaiDoSang={phaiDoSang} onChon={(c) => {
                     setChon(c); ghi("chart_interacted", { mo_dun: "tuvi", kind: "chon_cung" });
                     // Điện thoại: chi tiết cung nằm dưới lá số, ngoài tầm mắt → cuộn tới.
@@ -160,11 +176,35 @@ export function TuVi() {
               <ChiTietCung ls={ls} chi={chiChon} phai={phaiDoSang} vanHan={lop.dai_han || lop.luu_nien ? vh : null} onHoi={hoi} />
             </div>
             {lnm && lnm.nam_am === namXem ? (
-              <LuuNguyet d={lnm} onHoi={hoi} onChonCung={(c) => {
-                setChon(c);
-                requestAnimationFrame(() => chiTietRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
-              }} />
+              <LuuNguyet d={lnm} onHoi={hoi} onChonCung={xemCung} />
             ) : <KhungTai dong={3} />}
+            {/* TV-V2: bốn khối nâng cao — mỗi khối chỉ gọi engine khi người dùng mở (không 4 request mỗi lần vào trang). */}
+            {laSoGoc && laSo && (
+              <div className="space-y-3">
+                <KhoiMoLuoi id="phi-hoa" Icon={Waypoints} tieuDe="Đường bay tứ hoá"
+                  moTa="Can của từng cung hoá Lộc, Quyền, Khoa, Kỵ bay đến đâu trên lá số — những đường đáng để ý nhất."
+                  onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "phi_hoa" })}>
+                  <PhiHoa laSo={laSoGoc} namXem={namXem} onChonCung={xemCung} onHoi={hoi} />
+                </KhoiMoLuoi>
+                <KhoiMoLuoi id="nhip-3-thang" Icon={CalendarClock} tieuDe="3 tháng tới"
+                  moTa="Nhịp từng tháng âm lịch sắp tới: thuận, bình hay cần thận trọng — kèm lý do, gợi ý và câu tự soi."
+                  onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "nhip_3_thang" })}>
+                  <NhipBaThang laSo={laSo} onHoi={hoi} onChonCungTen={(ten) => { const c = ls.cung.find((k) => k.ten === ten); if (c) xemCung(c.chi); }} />
+                </KhoiMoLuoi>
+                <KhoiMoLuoi id="dinh-gio" Icon={Clock3} tieuDe="Định giờ sinh"
+                  moTa={khongBietGio
+                    ? "Chưa biết giờ sinh? Đối chiếu đủ 12 canh giờ với những năm bạn nhớ rõ."
+                    : "Không chắc giờ sinh? So lá số giờ trước, giờ đã nhập và giờ sau với những năm bạn nhớ rõ."}
+                  onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "dinh_gio_mo" })}>
+                  <DinhGioSinh laSo={laSoGoc} hoSo={hoSo} khongBietGio={khongBietGio} />
+                </KhoiMoLuoi>
+                <KhoiMoLuoi id="hop-tham" Icon={HeartHandshake} tieuDe="Hợp tham hai lá số"
+                  moTa="Năm sinh người ấy chạm vào cung nào trong lá số của bạn. Không chấm điểm hợp hay khắc."
+                  onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "hop_tham" })}>
+                  <HopThamTuVi laSo={laSoGoc} onHoi={hoi} />
+                </KhoiMoLuoi>
+              </div>
+            )}
             <ChuGiai />
             {ls.cach_cuc && <CachCuc ds={ls.cach_cuc} luuY={ls.cach_cuc_luu_y} onHoi={hoi} />}
             {ls.co_canh_bao.length > 0 && (

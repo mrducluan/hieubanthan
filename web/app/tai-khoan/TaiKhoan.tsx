@@ -10,17 +10,18 @@ import { ViSao } from "@/components/tai-khoan/ViSao";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 import { dangXuat, hoSoTaiKhoan, luuVaoTaiKhoan, useNguoiDung, xoaHoSoTaiKhoan, xoaTaiKhoan } from "@/lib/tai-khoan";
-import { luuHoSo, useHoSo, xoaHoSo, type HoSo } from "@/lib/hoso";
+import { gioHienThi, luuHoSo, useHoSo, xoaHoSo, type HoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 
 type HoSoTK = Awaited<ReturnType<typeof hoSoTaiKhoan>>;
 
-const moTa = (h: Pick<HoSo, "ho_ten" | "ngay" | "thang" | "nam" | "gio">) =>
-  `${h.ho_ten} · ${String(h.ngay).padStart(2, "0")}/${String(h.thang).padStart(2, "0")}/${h.nam}${h.gio ? ` · ${h.gio}` : ""}`;
+const moTa = (h: Pick<HoSo, "ho_ten" | "ngay" | "thang" | "nam" | "gio" | "do_tin_gio">) =>
+  `${h.ho_ten} · ${String(h.ngay).padStart(2, "0")}/${String(h.thang).padStart(2, "0")}/${h.nam}${h.do_tin_gio === "unknown" ? " · không rõ giờ" : h.gio ? ` · ${h.gio}` : ""}`;
 
 function giongNhau(a: HoSo, b: NonNullable<HoSoTK>): boolean {
   return a.ho_ten === b.ho_ten && a.ngay === b.ngay && a.thang === b.thang && a.nam === b.nam &&
-    (a.gio ?? null) === (b.gio ?? null) && (a.gioi_tinh ?? null) === (b.gioi_tinh ?? null) &&
+    // "Không biết giờ" (0015: lưu 'unknown', đọc lại giờ đại diện 12:00) và bản lưu chưa có giờ đều = "không có giờ thật".
+    (gioHienThi(a) ?? null) === (gioHienThi(b) ?? null) && (a.gioi_tinh ?? null) === (b.gioi_tinh ?? null) &&
     (a.ten_khac ?? null) === (b.ten_khac ?? null) && (a.vung ?? null) === (b.vung ?? null) &&
     (a.noi_sinh ?? null) === (b.noi_sinh ?? null) && Boolean(a.gio_mua_he) === Boolean(b.gio_mua_he);
 }

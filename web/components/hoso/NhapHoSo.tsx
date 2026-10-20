@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { luuHoSo, moTaAm, ngayHopLe, NUOC_NGOAI, type HoSo } from "@/lib/hoso";
+import { GIO_DAI_DIEN_KHONG_BIET, luuHoSo, moTaAm, ngayHopLe, NUOC_NGOAI, type HoSo } from "@/lib/hoso";
 import { postJson } from "@/lib/goi-api";
 import { useDanhSachTinh } from "@/lib/dia-ly";
 import { ghi, layMaMoi, quenMaMoi } from "@/lib/do-luong";
@@ -47,7 +47,8 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
   const [lichAm, setLichAm] = useState<"viet" | "trung">(macDinh?.lich_am ?? "viet");
   const [moThem, setMoThem] = useState(Boolean(can) || Boolean(macDinh?.gio || macDinh?.ten_khac));
   const [tenKhac, setTenKhac] = useState(macDinh?.ten_khac ?? "");
-  const [gio, setGio] = useState(macDinh?.gio ?? "");
+  // "Không biết giờ": giờ lưu là giờ đại diện 12:00 — ô giờ để trống, người dùng nhập khi đã biết.
+  const [gio, setGio] = useState(macDinh?.do_tin_gio === "unknown" ? "" : macDinh?.gio ?? "");
   const [doTin, setDoTin] = useState<string>(macDinh?.do_tin_gio ?? "exact");
   const [gioiTinh, setGioiTinh] = useState<string>(macDinh?.gioi_tinh ?? "");
   const [noiSinh, setNoiSinh] = useState<string>(macDinh?.noi_sinh ?? "");
@@ -94,7 +95,8 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
     e.preventDefault();
     if (ten.trim().length < 2 || !/\p{L}/u.test(ten)) return setLoi("Nhập họ tên đầy đủ (như trên giấy khai sinh).");
     if (!coTheDoi) return setLoi(`Ngày sinh chưa đúng — kiểm tra lại ngày, tháng, năm (${lich === "am" ? "âm" : "dương"} lịch).`);
-    if (can === "day_du" && (!gio || !gioiTinh || !noiSinh)) return setLoi("Mảng này cần giờ sinh, giới tính và nơi sinh.");
+    const khongBietGio = doTin === "unknown";
+    if (can === "day_du" && ((!gio && !khongBietGio) || !gioiTinh || !noiSinh)) return setLoi("Mảng này cần giờ sinh (hoặc chọn “Không biết giờ”), giới tính và nơi sinh.");
     if (can === "gioi_tinh" && !gioiTinh) return setLoi("Mảng này cần giới tính.");
     if (can === "day_du" && canVung && !vung) return setLoi("Sinh ở Quảng Trị trước 13/6/1975: chọn bờ Bắc hay Nam sông Bến Hải.");
     setLoi(null);
@@ -117,7 +119,8 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
       ...(lich === "am" && lichAm === "trung" ? { lich_am: "trung" as const } : {}),
       ...(kq ? { am: kq.am } : {}),
       ...(tenKhac.trim() ? { ten_khac: tenKhac.trim() } : {}),
-      ...(gio ? { gio, do_tin_gio: doTin === "approx" ? "approx" as const : "exact" as const } : {}),
+      ...(khongBietGio ? { gio: GIO_DAI_DIEN_KHONG_BIET, do_tin_gio: "unknown" as const }
+        : gio ? { gio, do_tin_gio: doTin === "approx" ? "approx" as const : "exact" as const } : {}),
       ...(gioiTinh === "nam" || gioiTinh === "nu" ? { gioi_tinh: gioiTinh } : {}),
       ...(noiSinh ? { noi_sinh: noiSinh } : {}),
       ...(nuocNgoai && gioMuaHe ? { gio_mua_he: true } : {}),
@@ -227,16 +230,24 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
               <>
                 <div className="space-y-2">
                   <Label htmlFor="gio-sinh">Giờ sinh</Label>
-                  <Input id="gio-sinh" type="time" value={gio} onChange={(e) => setGio(e.target.value)} />
+                  <Input id="gio-sinh" type="time" value={gio} disabled={doTin === "unknown"}
+                    onChange={(e) => { setGio(e.target.value); if (e.target.value && doTin === "unknown") setDoTin("approx"); }} />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="do-tin-gio">Giờ sinh này</Label>
-                  <Select id="do-tin-gio" value={doTin} onChange={(e) => setDoTin(e.target.value)} disabled={!gio}>
+                  <Select id="do-tin-gio" value={doTin} onChange={(e) => { setDoTin(e.target.value); if (e.target.value === "unknown") setGio(""); }}>
                     <option value="exact">Chính xác (giấy tờ, sổ ghi)</option>
                     <option value="approx">Áng chừng (nghe kể lại)</option>
+                    <option value="unknown">Không biết giờ</option>
                   </Select>
                 </div>
               </>
+            )}
+            {can !== "gioi_tinh" && doTin === "unknown" && (
+              <p className="text-xs text-fg-muted sm:col-span-2" data-testid="nhac-khong-biet-gio">
+                Không sao. Tử vi sẽ an tạm theo giờ Ngọ (12:00) và mở khối “Định giờ sinh” để bạn đối chiếu đủ 12 canh giờ với
+                những năm bạn nhớ rõ. Bát tự khi đó chưa có trụ giờ đáng tin. Biết giờ rồi thì nhập lại ở đây.
+              </p>
             )}
             <div className="space-y-2">
               <Label htmlFor="gioi-tinh">Giới tính</Label>

@@ -21,7 +21,8 @@ export const HoSo = z.object({
   noi_sinh: z.string().regex(/^[a-z0-9_-]{2,40}$/).optional(),
   /** Chỉ khi sinh ở nước ngoài: đồng hồ nơi sinh lúc đó đang là giờ mùa hè. */
   gio_mua_he: z.boolean().optional(),
-  do_tin_gio: z.enum(["exact", "approx"]).optional(),
+  /** TV-V2: "unknown" = không biết giờ → `gio` là giờ đại diện 12:00 chỉ để an tạm lá số; Tử vi mở khối định giờ 12 canh. */
+  do_tin_gio: z.enum(["exact", "approx", "unknown"]).optional(),
   /** Người dùng nhập theo lịch nào; ngày/tháng/năm ở trên LUÔN là dương lịch (engine đổi). */
   lich_nhap: z.enum(["duong", "am"]).optional(),
   /** TP-LICH: ngày âm nhập theo âm lịch Việt Nam (mặc định) hay Trung Quốc (sổ tử vi / lịch Trung Quốc). */
@@ -129,7 +130,7 @@ export const NUOC_NGOAI = "nuoc_ngoai";
 /** Đầu vào lá số (Tử vi / Bát tự) từ hồ sơ — null nếu thiếu giờ sinh, giới tính hoặc nơi sinh. */
 export function laSoTuHoSo(h: HoSo | null | undefined): {
   birth_date: string; birth_time: string; gender: "nam" | "nu"; noi_sinh: string;
-  vung?: "north" | "south"; gio_mua_he?: boolean; do_tin_gio?: "exact" | "approx";
+  vung?: "north" | "south"; gio_mua_he?: boolean; do_tin_gio?: "exact" | "approx" | "unknown";
 } | null {
   if (!h?.gio || !h.gioi_tinh || !h.noi_sinh) return null;
   const nuocNgoai = h.noi_sinh === NUOC_NGOAI;
@@ -140,6 +141,14 @@ export function laSoTuHoSo(h: HoSo | null | undefined): {
     ...(nuocNgoai && h.gio_mua_he ? { gio_mua_he: true } : {}),
     ...(h.do_tin_gio ? { do_tin_gio: h.do_tin_gio } : {}),
   };
+}
+
+/** TV-V2: giờ đại diện khi người dùng chọn "Không biết giờ" (giữa giờ Ngọ) — chỉ để an tạm, luôn gắn do_tin_gio=unknown. */
+export const GIO_DAI_DIEN_KHONG_BIET = "12:00";
+
+/** Giờ sinh để HIỂN THỊ — không biết giờ thì không hiện giờ đại diện như thể là giờ thật. */
+export function gioHienThi(h: Pick<HoSo, "gio" | "do_tin_gio"> | null | undefined): string | undefined {
+  return h?.do_tin_gio === "unknown" ? undefined : h?.gio;
 }
 
 /** "14/9 (nhuận) Mậu Thìn" — chỉ định dạng dữ liệu engine đã trả. */
