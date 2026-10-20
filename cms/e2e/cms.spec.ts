@@ -496,7 +496,7 @@ test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức
   // dọn: gỡ xuất bản → web về chữ code
   expect((await request.patch(`${CMS}/api/noi-dung-trang/${dk.id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
   expect((await request.patch(`${CMS}/api/mau-cum/${mau.id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
-  await choWeb(request, "/dieu-khoan", (st, b) => st === 200 && !b.includes("Điều khoản Sao sửa từ CMS.") && b.replace(/<!-- -->/g, "").includes("Hiệu lực từ 08/10/2026"));   // React chèn <!-- --> giữa hai đoạn chữ
+  await choWeb(request, "/dieu-khoan", (st, b) => st === 200 && !b.includes("Điều khoản Sao sửa từ CMS.") && b.replace(/<!-- -->/g, "").includes("Hiệu lực từ 20/10/2026"));   // NGAY_HIEU_LUC (web/lib/van-hanh.ts); React chèn <!-- --> giữa hai đoạn chữ
   await choWeb(request, u1, (st, b) => st === 200 && !b.includes("Mẫu cụm: bạn đang đọc"));
 });
 
