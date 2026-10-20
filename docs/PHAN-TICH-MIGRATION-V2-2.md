@@ -246,8 +246,8 @@ begin
     p_ngay := least(greatest(coalesce(p_ngay, 90), 1), 365);
     return coalesce((
         select jsonb_agg(jsonb_build_object('loai', loai, 'mau', mau, 'dung', dung, 'chua_dung', chua_dung) order by loai, mau)
-        from (select loai, mau, sum(so) filter (where ket_qua = 'dung') :: int as dung,
-                     sum(so) filter (where ket_qua = 'chua_dung') :: int as chua_dung
+        from (select loai, mau, coalesce(sum(so) filter (where ket_qua = 'dung'), 0) :: int as dung,
+                     coalesce(sum(so) filter (where ket_qua = 'chua_dung'), 0) :: int as chua_dung
               from public.kiem_chung_dem
               where ngay > (now() at time zone 'Asia/Ho_Chi_Minh')::date - p_ngay
               group by loai, mau) t), '[]'::jsonb);
