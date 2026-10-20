@@ -93,6 +93,11 @@ def _con_duong_khac(ten: str, goc: int) -> list[int]:
     return sorted(kq - {goc})
 
 
+def sephirah_ngay_sinh(ngay: int, thang: int, nam: int) -> int:
+    """Cộng mọi chữ số ngày, tháng, năm sinh, rút tới khi ≤ 10 (cùng phép như trong `tinh`)."""
+    return ve_sephirah(sum(int(c) for c in f"{ngay}{thang}{nam}"))
+
+
 def tinh(ho_ten: str, ngay: int, thang: int, nam: int) -> dict:
     tu = _theo_tu(ho_ten, CHU_DON)
     tong = sum(t["tong"] for t in tu)
@@ -109,3 +114,61 @@ def tinh(ho_ten: str, ngay: int, thang: int, nam: int) -> dict:
         "sephirah_ngay_sinh": ve_sephirah(tong_ngay),
         "con_duong_khac": _con_duong_khac(ho_ten, cd) if tong else [],
     }
+
+
+# ---------------------------------------------------------------- TS-V3b: Cây của hai người + chữ của ngày
+# Cây Sự sống theo đánh số Golden Dawn (Crowley, 777): chữ Hebrew thứ n là con đường số n + 10, nối hai Sephirah.
+CAY: dict[int, tuple[int, int]] = {
+    1: (1, 2), 2: (1, 3), 3: (1, 6), 4: (2, 3), 5: (2, 6), 6: (2, 4), 7: (3, 6), 8: (3, 5), 9: (4, 5), 10: (4, 6),
+    11: (4, 7), 12: (5, 6), 13: (5, 8), 14: (6, 7), 15: (6, 9), 16: (6, 8), 17: (7, 8), 18: (7, 9), 19: (7, 10),
+    20: (8, 9), 21: (8, 10), 22: (9, 10),
+}
+_KE: dict[int, list[tuple[int, int]]] = {s: [] for s in range(1, 11)}
+for _chu, (_x, _y) in CAY.items():
+    _KE[_x].append((_chu, _y))
+    _KE[_y].append((_chu, _x))
+
+
+def _moi_loi_ngan_nhat(a: int, b: int) -> list[list[int]]:
+    """Mọi lối ít con đường nhất từ a tới b, mỗi lối là dãy chữ (1–22). Cây có 10 đỉnh → duyệt theo tầng là đủ."""
+    tang: list[tuple[int, list[int]]] = [(a, [])]
+    tham = {a}
+    while tang:
+        toi = [loi for s, loi in tang if s == b]
+        if toi:
+            return sorted(toi)
+        moi: list[tuple[int, list[int]]] = []
+        for s, loi in tang:
+            for chu, t in _KE[s]:
+                if t not in tham:
+                    moi.append((t, loi + [chu]))
+        tham |= {t for t, _ in moi}
+        tang = moi
+    return []
+
+
+def duong_noi(a: int, b: int) -> dict:
+    """Đường nối Sephirah a (người A) với Sephirah b (người B) trên Cây: ít con đường nhất; nhiều lối bằng nhau thì
+    lấy lối có dãy chữ nhỏ nhất khi đi từ Sephirah số nhỏ sang số lớn (nên A→B và B→A là cùng một lối, đảo chiều)."""
+    if not (1 <= a <= 10 and 1 <= b <= 10):
+        raise ValueError("Sephirah phải từ 1 đến 10")
+    thap, cao = min(a, b), max(a, b)
+    loi = _moi_loi_ngan_nhat(thap, cao)
+    chu = loi[0]
+    seph = [thap]
+    for c in chu:
+        x, y = CAY[c]
+        seph.append(y if seph[-1] == x else x)
+    if a > b:
+        chu, seph = chu[::-1], seph[::-1]
+    con_duong = [{"chu": c, "ten": CHU_HEBREW[c - 1], "so_duong_cay": c + 10, "tu": seph[i], "den": seph[i + 1]}
+                 for i, c in enumerate(chu)]
+    return {"sephirot": seph, "con_duong": con_duong, "so_loi": len(loi), "cung_tram": a == b}
+
+
+def chu_cua_ngay(ngay_sinh: int, thang_sinh: int, ngay: int, thang: int, nam: int) -> dict:
+    """Chữ Hebrew của ngày cho một người: cộng chữ số ngày + tháng sinh và ngày + tháng + năm đang xem (cùng các chữ
+    số làm nên ngày cá nhân), rút tới khi ≤ 22 thay vì ≤ 9 — cách rút của con đường Qabalah."""
+    tong = sum(int(c) for c in f"{ngay_sinh}{thang_sinh}{ngay}{thang}{nam}")
+    n = ve_con_duong(tong)
+    return {"tong": tong, "chu": n, "ten": CHU_HEBREW[n - 1], "so_duong_cay": n + 10}

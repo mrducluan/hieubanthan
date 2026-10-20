@@ -19,7 +19,9 @@ export type SuKien =
   // ND-2: bấm nút kêu gọi ban biên tập đặt từ CMS (mã đo + trang + vị trí)
   | "cms_khoi_bam"
   // TS-NOIDAU: bấm một câu hỏi nỗi đau (bảng 5 trụ) hoặc câu "hỏi tiếp" sau câu trả lời — chỉ mã câu + mã trụ
-  | "pain_point_clicked";
+  | "pain_point_clicked"
+  // TS-V3b: "Phái nào nói đúng về bạn?" — chỉ mã phái + số lần đã chọn (đếm trên máy), không câu chữ
+  | "school_voted";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number"> = {
@@ -44,6 +46,7 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   so_thang: "number",
   co_tuoi: "number",
   so_ngay: "number",
+  lan: "number",        // TS-V3b: số phiếu "phái nào nói đúng" đã bấm (đếm trên máy)
   nhiem_vu: "string",
   ma_do: "string",      // ND-2: mã đo ban biên tập đặt cho nút CMS (chữ thường, số, gạch dưới)
   trang: "string",      // ND-2: đường dẫn trang chứa nút

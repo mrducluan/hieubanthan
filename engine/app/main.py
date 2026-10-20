@@ -21,6 +21,7 @@ from app import config, giam_sat, gioi_han
 from app.cong_khai import PhanHoiCongKhai
 from app.kb import tu_dien
 from app.calc import thanso, timebase
+from app.calc import thanso_kabbalah as kabbalah_calc
 from app.kb import store as kb_store
 from app.kb import trang as kb_trang
 from app.kb import tham_dinh as kb_tham_dinh
@@ -29,7 +30,7 @@ from app.luangiai import hom_nay
 from app.luangiai import nhip_ca_nhan as nhip
 from app.luangiai import thanso_chaldean as luangiai_chaldea
 from app.luangiai import thanso as luangiai_thanso
-from app.luangiai import noi_dau, tong_hop
+from app.luangiai import bao_cao_ba_phai, noi_dau, the_ngay, tong_hop
 from app.luangiai import thanso_kabbalah as luangiai_kabbalah
 from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
 from app import nhat_ky
@@ -257,6 +258,105 @@ def api_tong_hop(inp: TongHopInput) -> dict:
     return {"engine_version": ENGINE_VERSION,
             **tong_hop.tong_hop(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.ngay_xem or _hom_nay_vn(),
                                 inp.quy_uoc_duong_doi)}
+
+
+class SephirahVao(BaseModel):
+    """Một người trên "Cây của hai người": ngày sinh, hoặc chỉ Sephirah ngày sinh (người mời — số đã ký trong link)."""
+    model_config = ConfigDict(extra="forbid")
+    ngay: int | None = Field(default=None, ge=1, le=31)
+    thang: int | None = Field(default=None, ge=1, le=12)
+    nam: int | None = Field(default=None, ge=1900, le=2100)
+    sephirah: int | None = Field(default=None, ge=1, le=10)
+
+    def so(self) -> int:
+        if self.sephirah is not None:
+            return self.sephirah
+        if None in (self.ngay, self.thang, self.nam):
+            raise HTTPException(422, detail="Cần ngày sinh hoặc Sephirah")
+        try:
+            _dt.date(self.nam, self.thang, self.ngay)
+        except ValueError:
+            raise HTTPException(422, detail="Ngày sinh không tồn tại")
+        return kabbalah_calc.sephirah_ngay_sinh(self.ngay, self.thang, self.nam)
+
+
+class CayHaiNguoiInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    a: SephirahVao
+    b: SephirahVao
+
+
+@app.post("/v1/thanso/cay-hai-nguoi")
+def api_cay_hai_nguoi(inp: CayHaiNguoiInput) -> dict:
+    """TS-V3b — "Cây của hai người": đường ngắn nhất nối Sephirah ngày sinh của hai người trên Cây Sự sống, mỗi chặng
+    một chữ Hebrew kèm nghĩa. Không chấm điểm, không lưu."""
+    return {"engine_version": ENGINE_VERSION, **luangiai_kabbalah.cay_hai_nguoi(inp.a.so(), inp.b.so())}
+
+
+class TheNgayInput(BaseModel):
+    ho_ten: list[str] | None = Field(default=None, min_length=1, max_length=5)
+    ngay: int = Field(ge=1, le=31)
+    thang: int = Field(ge=1, le=12)
+    nam: int = Field(ge=1900, le=2100)
+    ngay_xem: _dt.date | None = None
+    quy_uoc_duong_doi: Literal["tong_het", "tung_phan"] = "tong_het"
+
+    @field_validator("ho_ten")
+    @classmethod
+    def ten_gon(cls, v: list[str] | None) -> list[str] | None:
+        if v is None:
+            return None
+        v = [t.strip() for t in v if t.strip()]
+        if any(len(t) > 80 for t in v):
+            raise ValueError("Tên tối đa 80 ký tự")
+        return v or None
+
+
+@app.post("/v1/thanso/the-ngay")
+def api_the_ngay(inp: TheNgayInput) -> dict:
+    """TS-V3b — thẻ hôm nay: ngày cá nhân + số nổi bật qua ba phái (khi có họ tên) + chữ Hebrew của ngày."""
+    try:
+        _dt.date(inp.nam, inp.thang, inp.ngay)
+    except ValueError:
+        raise HTTPException(422, detail="Ngày không tồn tại")
+    return {"engine_version": ENGINE_VERSION,
+            **the_ngay.the_ngay(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.ngay_xem or _hom_nay_vn(),
+                                inp.quy_uoc_duong_doi)}
+
+
+class PhieuPhai(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    pitago: int = Field(default=0, ge=0, le=1000)
+    chaldea: int = Field(default=0, ge=0, le=1000)
+    kabbalah: int = Field(default=0, ge=0, le=1000)
+
+
+class BaoCaoBaPhaiInput(TongHopInput):
+    phieu: PhieuPhai | None = None
+    dien_dat_toi_da: int | None = Field(default=None, ge=0, le=20)   # web gửi chung khuôn Luận giải toàn bộ; template
+
+
+@app.post("/v1/thanso/bao-cao-ba-phai")
+def api_bao_cao_ba_phai(inp: BaoCaoBaPhaiInput) -> dict:
+    """TS-V3b — báo cáo ba phái theo chương (khuôn Luận giải toàn bộ: chương đầu miễn phí, web mở phần còn lại bằng
+    Sao). Phiếu "phái nào nói đúng" chỉ là 3 con số đếm trên máy người dùng. Không lưu."""
+    inp.kiem_tra_ngay()
+    return {"engine_version": ENGINE_VERSION,
+            **bao_cao_ba_phai.bao_cao(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.ngay_xem or _hom_nay_vn(),
+                                      inp.quy_uoc_duong_doi, inp.phieu.model_dump() if inp.phieu else None)}
+
+
+class BaGocNhinInput(ThanSoInput):
+    linh_vuc: str | None = Field(default=None, max_length=30, pattern=r"^[a-z_]+$")
+
+
+@app.post("/v1/thanso/ba-goc-nhin")
+def api_ba_goc_nhin(inp: BaGocNhinInput) -> dict:
+    """TS-V3b — "Phái nào nói đúng về bạn?": mỗi phái một câu ngắn (Pitago theo lĩnh vực câu hỏi, Chaldea số tên gọi,
+    Qabalah con đường của tên) để người dùng bấm chọn. Phiếu đếm ở máy người dùng, engine không lưu."""
+    inp.kiem_tra_ngay()
+    return {"engine_version": ENGINE_VERSION,
+            **bao_cao_ba_phai.ba_goc_nhin(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.linh_vuc, inp.quy_uoc_duong_doi)}
 
 
 class ChuKySoInput(ThanSoInput):

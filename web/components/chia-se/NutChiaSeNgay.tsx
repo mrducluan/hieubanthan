@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Check, Download, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { postJson } from "@/lib/goi-api";
-import { tenGoi, type HoSo } from "@/lib/hoso";
+import { hoTenList, tenGoi, type HoSo } from "@/lib/hoso";
 import { ghi, maNgauNhien } from "@/lib/do-luong";
 
 /** Mã ?tu= của link (ngẫu nhiên, không định danh) — tạo trước để ghi share_created ngay lúc bấm. */
@@ -17,14 +17,14 @@ export async function taoLinkNgay(hoSo: HoSo, tu = maMoiNgay()): Promise<{ url: 
   u.searchParams.set("tu", tu);
   let ma: string | null = null;
   try {
-    ({ ma } = await postJson<{ ma: string }>("/api/chia-se/ngay", { ten_hien_thi: tenGoi(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam }));
+    ({ ma } = await postJson<{ ma: string }>("/api/chia-se/ngay", { ten_hien_thi: tenGoi(hoSo), ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam }));
     u.searchParams.set("the", ma);
   } catch { /* không có ảnh vẫn chia sẻ được */ }
   return { url: u.toString(), ma, tu };
 }
 
-export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false }: {
-  hoSo: HoSo; soNgay: number; chuDe?: string; className?: string; nho?: boolean;
+export function NutChiaSeNgay({ hoSo, soNgay, chuDe, chuNgay, className = "", nho = false }: {
+  hoSo: HoSo; soNgay: number; chuDe?: string; chuNgay?: string; className?: string; nho?: boolean;
 }) {
   const [dang, setDang] = useState(false);
   const [ma, setMa] = useState<string | null>(null);
@@ -37,7 +37,7 @@ export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false
       ghi("share_created", { kind: "the_ngay", ma_moi: tu });
       const { url, ma: m } = await taoLinkNgay(hoSo, tu);
       setMa(m);
-      const chu = `Hôm nay là Ngày cá nhân ${soNgay} của mình${chuDe ? ` — ${chuDe}` : ""}. Còn bạn hôm nay là ngày mấy?`;
+      const chu = `Hôm nay là Ngày cá nhân ${soNgay} của mình${chuDe ? ` — ${chuDe}` : ""}${chuNgay ? `, chữ của ngày là ${chuNgay}` : ""}. Còn bạn hôm nay là ngày mấy?`;
       if (typeof navigator.share === "function") {
         try { await navigator.share({ title: "Hôm nay của bạn", text: chu, url }); return; } catch { /* huỷ → chép */ }
       }

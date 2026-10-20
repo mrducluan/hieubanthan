@@ -59,3 +59,44 @@ def luan_kabbalah(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: s
         "trang_thai": meta["trang_thai"],
         "luu_y": "Thần số học là góc nhìn văn hoá để tự soi, không phải dự báo. Ba phái tính khác nhau nên có thể ra số khác nhau.",
     }
+
+
+def _tram(so: int) -> dict:
+    s = kb.kabbalah_sephirah(so) or {}
+    return {"so": so, "ten": s.get("ten"), "nghia": s.get("nghia"), "xu_huong": s.get("xu_huong")}
+
+
+def cay_hai_nguoi(seph_a: int, seph_b: int) -> dict:
+    """TS-V3b — "Cây của hai người": đường ngắn nhất nối Sephirah ngày sinh của A và B trên Cây Sự sống (CALC
+    `duong_noi`), mỗi chặng là một chữ Hebrew kèm nghĩa KB. Không chấm điểm; đường dài/ngắn không phải hợp/khắc."""
+    d = kc.duong_noi(seph_a, seph_b)
+    van = kb.kabbalah_cay_hai_nguoi()
+    a, b = _tram(seph_a), _tram(seph_b)
+    ten_tram = lambda t: f"{t['ten']} ({t['nghia'].lower()})" if t["nghia"] else str(t["ten"])
+    con_duong = [{**p, "nghia": kb.kabbalah_chu(p["chu"])} for p in d["con_duong"]]
+    if d["cung_tram"]:
+        rieng = van["cung_tram"].format(tram=ten_tram(a))
+    elif len(con_duong) == 1:
+        n = con_duong[0]["nghia"] or {}
+        rieng = van["ke_nhau"].format(tram_a=a["ten"], tram_b=b["ten"], chu=con_duong[0]["ten"],
+                                      nghia_chu=n.get("nghia_chu", ""))
+    else:
+        ds = ", ".join(f"{p['ten']} ({(p['nghia'] or {}).get('nghia_chu', '')})" for p in con_duong)
+        rieng = van["qua_nhieu"].format(tram_a=a["ten"], tram_b=b["ten"], so=len(con_duong), danh_sach=ds)
+    meta = kb.meta_kabbalah()
+    return {
+        "phai": "kabbalah",
+        "ten": van["ten"],
+        "tram": [a, b],
+        "sephirot": d["sephirot"],
+        "con_duong": con_duong,
+        "cung_tram": d["cung_tram"],
+        "so_loi": d["so_loi"],
+        "ghi_chu_loi": van["nhieu_loi"].format(so_loi=d["so_loi"]) if d["so_loi"] > 1 else None,
+        "cach_doc": van["cach_doc"],
+        "cach_doc_rieng": rieng,
+        "cau_tu_soi_chung": van["cau_tu_soi_chung"],
+        "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
+        "trang_thai": meta["trang_thai"],
+        "luu_y": van["luu_y"],
+    }

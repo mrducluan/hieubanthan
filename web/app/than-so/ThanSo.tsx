@@ -26,6 +26,8 @@ import { NoiDau } from "@/components/than-so/NoiDau";
 import { KabbalahDoc } from "@/components/than-so/KabbalahDoc";
 import { TongHopDoc } from "@/components/than-so/TongHopDoc";
 import { GopYCauTraLoi } from "@/components/hoi/GopYCauTraLoi";
+import { PhaiNaoDung } from "@/components/than-so/PhaiNaoDung";
+import { BaoCaoBaPhai } from "@/components/than-so/BaoCaoBaPhai";
 import { ghiQuyUocDD, useQuyUocDD, type QuyUocDD } from "@/lib/quy-uoc-dd";
 import { ghi } from "@/lib/do-luong";
 import { TieuDeTrang, useDauCms } from "@/components/cms/DauCms";
@@ -55,7 +57,7 @@ const GOI_Y = [
 interface CauLienQuan { ma: string; tru: string; cau: string }
 
 async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocDD, hoiTiep: (c: CauLienQuan) => void,
-                         maCau?: string): Promise<KetQuaHoi> {
+                         maCau?: string, dungPhai?: (p: PhaiThanSo) => void): Promise<KetQuaHoi> {
   const r = await fetchSao("/api/thanso/hoi", {
     method: "POST",
     headers: { "content-type": "application/json" },
@@ -68,7 +70,11 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
   const tiep = d.cau_tra_loi && !canNguoiKia ? d.cau_lien_quan ?? [] : [];
   // TS-V3 tầng HỌC: góp ý đúng / chưa đúng — không hỏi với câu khủng hoảng, câu ngoài phạm vi, câu cần người kia.
   const gopY = d.cau_tra_loi && !canNguoiKia && !["an_toan", "tu_choi_nhe"].includes(d.phan_loai?.xu_ly ?? "")
-    ? <GopYCauTraLoi hoSo={h} nc={{ phai, quyUoc, nguon: maCau ? "noi_dau" : "hoi_dap", linhVuc: d.phan_loai?.linh_vuc, maCau }} />
+    ? <>
+        <GopYCauTraLoi hoSo={h} nc={{ phai, quyUoc, nguon: maCau ? "noi_dau" : "hoi_dap", linhVuc: d.phan_loai?.linh_vuc, maCau }} />
+        {/* TS-V3b: bình chọn phái nói đúng hơn — cùng điều kiện với góp ý (không hỏi ở câu khủng hoảng / ngoài phạm vi). */}
+        <PhaiNaoDung hoSo={h} quyUoc={quyUoc} linhVuc={d.phan_loai?.linh_vuc} onDungPhai={dungPhai} />
+      </>
     : null;
   return {
     van: d.cau_tra_loi,
@@ -267,9 +273,11 @@ export function ThanSo() {
           gui={(c) => hoiThanSo(hoSo, c, phai, quyUoc, (t) => {
             ghi("pain_point_clicked", { mo_dun: "thanso", tru: t.tru, ma_cau: t.ma, nguon: "hoi_tiep" });
             hoiCau(t.cau, t.ma);
-          }, maTheoCau.current.get(c))}
+          }, maTheoCau.current.get(c), doiPhai)}
         />
       </section>
+
+      <BaoCaoBaPhai hoSo={hoSo} quyUoc={quyUoc} />
 
       <p className="text-xs text-fg-faint">{kq.trich_nguon_chung} · Tên đã quét: {kq.ten_bien_the_da_quet.join(", ")}</p>
     </div>

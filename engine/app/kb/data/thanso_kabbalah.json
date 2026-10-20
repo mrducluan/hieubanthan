@@ -361,5 +361,20 @@
    "mat_toi": "Dễ chỉ lo việc trước mắt, quên mục đích lớn.",
    "cau_tu_soi": "Việc nhỏ nào hôm nay nối bạn với mục đích lớn của mình?"
   }
+ },
+ "cay_hai_nguoi": {
+  "ten": "Cây của hai người",
+  "cach_doc": "Mỗi người có một Sephirah ngày sinh — \"trạm\" mình hay trở về. Đường ngắn nhất nối hai trạm trên Cây Sự sống là những con đường (mỗi con đường một chữ Hebrew) hai người đi qua khi tìm đến nhau. Đường ngắn hay dài không phải hợp hay khắc — chỉ là chất liệu khác nhau.",
+  "cung_tram": "Hai bạn cùng trở về một trạm: {tram}. Cùng trạm thì dễ hiểu nhau mà không cần nói nhiều — và cũng dễ cùng né một bài học. Hãy để ý điều cả hai cùng tránh.",
+  "ke_nhau": "Trạm {tram_a} và trạm {tram_b} nối thẳng bằng một con đường — chữ {chu} ({nghia_chu}). Đây là chất liệu hai bạn trao cho nhau trực tiếp nhất.",
+  "qua_nhieu": "Từ trạm {tram_a} tới trạm {tram_b} cần đi qua {so} con đường: {danh_sach}. Mỗi chữ là một chặng — một điều hai bạn có thể học từ nhau trên đường gặp gỡ.",
+  "nhieu_loi": "Có {so_loi} lối ngắn như nhau giữa hai trạm; ở đây hiện lối theo thứ tự chữ trên Cây, các lối kia cũng ngắn bằng thế.",
+  "cau_tu_soi_chung": "Trên chặng đường này, điều gì bạn muốn học từ người ấy — và điều gì bạn có thể trao lại?",
+  "luu_y": "Cây của hai người là cách đọc biểu tượng để cùng trò chuyện, không chấm điểm hợp hay khắc và không dự báo mối quan hệ."
+ },
+ "chu_ngay": {
+  "ten": "Chữ của ngày",
+  "cach_tinh": "Cộng các chữ số ngày, tháng sinh của bạn với ngày, tháng, năm hôm nay — đúng những chữ số làm nên Ngày cá nhân — nhưng rút về 1–22 như con đường Qabalah thay vì về 1–9.",
+  "luu_y": "Gợi ý để tự soi trong ngày, không dự báo việc sẽ xảy ra."
  }
 }

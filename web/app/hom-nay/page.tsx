@@ -35,7 +35,8 @@ export default async function Page({ searchParams }: Props) {
   return (
     <TrangCongCu duong={DUONG} mang="than_so" sau={<UngHoNho className="mx-auto mt-10 max-w-3xl" />} truoc={nd && (
       <p className="mx-auto mb-6 max-w-xl rounded-2xl border border-gold/30 bg-gold/[0.06] px-4 py-3 text-center text-sm" data-testid="loi-moi-ngay">
-        Hôm nay <b className="text-gold">{nd.t}</b> là Ngày cá nhân <b className="text-gold">{nd.n}</b>{nd.k ? ` — ${nd.k.toLowerCase()}` : ""}. Còn bạn?
+        Hôm nay <b className="text-gold">{nd.t}</b> là Ngày cá nhân <b className="text-gold">{nd.n}</b>{nd.k ? ` — ${nd.k.toLowerCase()}` : ""}
+        {nd.hn ? <>, chữ của ngày là <b className="text-gold">{nd.hn}</b></> : null}. Còn bạn?
       </p>
     )}>
       <HomNay />

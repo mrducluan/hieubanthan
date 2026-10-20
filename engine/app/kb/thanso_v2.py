@@ -194,3 +194,11 @@ def do_thi() -> dict:
 
 def meta_do_thi() -> dict:
     return _meta("do_thi")
+
+
+def kabbalah_cay_hai_nguoi() -> dict:
+    return _doc("kabbalah")["cay_hai_nguoi"]
+
+
+def kabbalah_chu_ngay() -> dict:
+    return _doc("kabbalah")["chu_ngay"]

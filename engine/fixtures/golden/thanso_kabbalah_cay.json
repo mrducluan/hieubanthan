@@ -1,0 +1,16 @@
+{
+ "_ghi_chu": "Đáp án TÍNH TAY. Cây Sự sống theo đánh số Golden Dawn (Crowley, 777, 1909): con đường chữ thứ n nối hai Sephirah — 1 Aleph 1–2, 2 Beth 1–3, 3 Gimel 1–6, 4 Daleth 2–3, 5 He 2–6, 6 Vav 2–4, 7 Zayin 3–6, 8 Cheth 3–5, 9 Teth 4–5, 10 Yod 4–6, 11 Kaph 4–7, 12 Lamed 5–6, 13 Mem 5–8, 14 Nun 6–7, 15 Samekh 6–9, 16 Ayin 6–8, 17 Pe 7–8, 18 Tzaddi 7–9, 19 Qoph 7–10, 20 Resh 8–9, 21 Shin 8–10, 22 Tav 9–10. Đường nối hai người = ít con đường nhất; nhiều lối bằng nhau thì chọn lối có dãy chữ (đi từ Sephirah số nhỏ sang số lớn) nhỏ nhất theo thứ tự từ điển, rồi đảo chiều nếu người A ở Sephirah số lớn hơn; `so_loi` = số lối ngắn nhất. Chữ của ngày: cộng mọi chữ số ngày + tháng sinh và ngày + tháng + năm đang xem, rút (cộng chữ số) tới khi ≤ 22 → chữ Hebrew thứ n.",
+ "duong_noi": [
+  {"a": 6, "b": 7, "sephirot": [6, 7], "chu": [14], "so_loi": 1},
+  {"a": 1, "b": 10, "sephirot": [1, 6, 7, 10], "chu": [3, 14, 19], "so_loi": 3},
+  {"a": 10, "b": 1, "sephirot": [10, 7, 6, 1], "chu": [19, 14, 3], "so_loi": 3},
+  {"a": 2, "b": 5, "sephirot": [2, 3, 5], "chu": [4, 8], "so_loi": 3},
+  {"a": 9, "b": 3, "sephirot": [9, 6, 3], "chu": [15, 7], "so_loi": 1},
+  {"a": 4, "b": 4, "sephirot": [4], "chu": [], "so_loi": 1}
+ ],
+ "chu_cua_ngay": [
+  {"ngay_sinh": 24, "thang_sinh": 10, "ngay": 20, "thang": 10, "nam": 2026, "tong": 20, "chu": 20, "ten": "Resh"},
+  {"ngay_sinh": 1, "thang_sinh": 1, "ngay": 1, "thang": 1, "nam": 2000, "tong": 6, "chu": 6, "ten": "Vav"},
+  {"ngay_sinh": 29, "thang_sinh": 9, "ngay": 29, "thang": 9, "nam": 1999, "tong": 68, "chu": 14, "ten": "Nun"}
+ ]
+}

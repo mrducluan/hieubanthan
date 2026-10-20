@@ -51,6 +51,11 @@ export async function GET(req: Request) {
             <div style={{ display: "flex", fontSize: 44, marginTop: 10, fontFamily: "Serif" }}>{nd.t} là Ngày cá nhân</div>
             <div style={{ display: "flex", fontSize: 200, lineHeight: 1, color: vang, fontFamily: "Serif" }}>{nd.n}</div>
             {nd.k && <div style={{ display: "flex", fontSize: 32, fontFamily: "Serif", marginTop: 4, maxWidth: 900, textAlign: "center" }}>{nd.k}</div>}
+            {(nd.s || nd.hn) && (
+              <div style={{ display: "flex", fontSize: 26, marginTop: 14, color: "#b9a7ff" }}>
+                {[nd.s ? `Số nổi bật ${nd.s}` : "", nd.hn ? `Chữ của ngày: ${nd.hn}` : ""].filter(Boolean).join("  ·  ")}
+              </div>
+            )}
             <div style={{ display: "flex", fontSize: 30, marginTop: 22, color: vang }}>Còn bạn hôm nay là ngày mấy?</div>
           </div>
         ) : (
