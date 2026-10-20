@@ -1,45 +1,33 @@
-// TS-V3 — phái Qabalah, tổng hợp 3 phái, hai cách cộng Đường đời, góp ý đúng/chưa đúng (tầng HỌC). Engine thật.
-// Ca Nguyễn Đức Luân 24/10/1988: Pitago DD 33 (cộng hết) / 6 (từng phần); Qabalah con đường Zayin 7, Sephirah ngày sinh
-// Tiferet 6; số 6 gặp ở 5 nguồn tính độc lập (đường đời ba phái gộp làm một nguồn).
+// TS-V3 — tổng hợp 2 phái, hai cách tính con số Đường đời, góp ý đúng/chưa đúng (tầng HỌC). Engine thật. Qabalah đã bỏ.
+// Ca Nguyễn Đức Luân 24/10/1988: Pitago DD 6 (rút gọn con số — mặc định) / 33 (cộng hết chữ số); số 6 gặp ở 5 nguồn
+// tính độc lập (đường đời hai phái gộp làm một nguồn).
 import { test, expect } from "@playwright/test";
 import { napHoSo, hoi } from "./_hoso";
 
 const LUAN = { v: 1, ho_ten: "Nguyễn Đức Luân", ngay: 24, thang: 10, nam: 1988, tao_luc: "2026-09-30T00:00:00Z" };
 
-test("hai cách cộng Đường đời: báo lệch, đổi cách → số và luận giải đổi theo, nhớ lựa chọn", async ({ page }) => {
+test("hai cách tính con số Đường đời: mặc định rút gọn con số, báo lệch, đổi cách → số và luận giải đổi theo, nhớ lựa chọn", async ({ page }) => {
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
-  await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("33");
-  await expect(page.getByTestId("goi-y-duong-doi")).toContainText("33 (cộng hết) và 6 (từng phần)");
-  await page.getByRole("tab", { name: "Rút gọn từng phần" }).click();
   await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("6");
-  // Hỏi đáp đi theo cách đã chọn.
-  const ans = await hoi(page, "Số chủ đạo của tôi nói gì?");
-  await expect(ans).toContainText("số chủ đạo (đường đời) 6");
-  await page.reload();
-  await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("6");
+  await expect(page.getByRole("tab", { name: "Rút gọn con số" })).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByTestId("goi-y-duong-doi")).toContainText("6 (rút gọn con số) và 33 (cộng hết chữ số)");
   await page.getByRole("tab", { name: "Cộng hết chữ số" }).click();
   await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("33");
+  // Hỏi đáp đi theo cách đã chọn.
+  const ans = await hoi(page, "Số chủ đạo của tôi nói gì?");
+  await expect(ans).toContainText("số chủ đạo (đường đời) 33");
+  await page.reload();
+  await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("33");
+  await page.getByRole("tab", { name: "Rút gọn con số" }).click();
+  await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("6");
+  await expect(page.getByRole("tab", { name: "Qabalah" })).toHaveCount(0);
 });
 
-test("phái Qabalah: Cây Sự sống, độ nhạy bảng chuyển chữ, hỏi đáp theo phái", async ({ page }) => {
+test("tổng hợp 2 phái: số lặp lại + đồ thị liên phái", async ({ page }) => {
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
-  await page.getByRole("tab", { name: "Qabalah" }).click();
-  const bai = page.getByTestId("bai-kabbalah");
-  await expect(bai.getByTestId("kabbalah-con_duong_ten")).toContainText("Zayin");
-  await expect(bai.getByTestId("kabbalah-con_duong_ten")).toContainText("con đường số 17 trên Cây Sự sống");
-  await expect(bai.getByTestId("kabbalah-con_duong_ten")).toContainText("có thể cho con đường 6");
-  await expect(bai.getByTestId("kabbalah-sephirah_ngay_sinh")).toContainText("Tiferet");
-  await expect(bai).toContainText("khác Kabbalah Do Thái giáo");
-  const ans = await hoi(page, "Điểm mạnh cốt lõi của tôi là gì?");
-  await expect(ans).toContainText("theo phái Qabalah");
-});
-
-test("tổng hợp 3 phái: số lặp lại + đồ thị liên phái", async ({ page }) => {
-  await napHoSo(page, LUAN);
-  await page.goto("/than-so");
-  await page.getByRole("tab", { name: "Tổng hợp 3 phái" }).click();
+  await page.getByRole("tab", { name: "Tổng hợp 2 phái" }).click();
   const bai = page.getByTestId("bai-tong-hop");
   await expect(bai.getByTestId("noi-bat-6")).toContainText("5 nguồn tính độc lập");
   await expect(bai.getByTestId("tuong-tac-linh_hon")).toContainText("Cộng hưởng");

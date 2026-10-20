@@ -12,7 +12,7 @@ import { CumGopY } from "./CumGopY";
 export const metadata: Metadata = { title: "Học từ góp ý" };
 
 const TT: [string, string][] = [["cho_duyet", "Chờ duyệt"], ["theo_doi", "Đang theo dõi"], ["da_sua", "Đã sửa"], ["bo_qua", "Bỏ qua"]];
-const PHAI: Record<string, string> = { pitago: "Pitago", chaldea: "Chaldea", kabbalah: "Qabalah", tong_hop: "Tổng hợp" };
+const PHAI: Record<string, string> = { pitago: "Pitago", chaldea: "Chaldea", kabbalah: "Qabalah (đã bỏ)", tong_hop: "Tổng hợp" };
 
 interface Cum {
   id: number; chu_ky_mau: string; phai: string; linh_vuc: string | null; ma_cau: string | null; so_lan: number;

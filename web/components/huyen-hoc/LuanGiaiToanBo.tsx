@@ -28,8 +28,9 @@ interface BaoCao {
   phi: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null };
 }
 
-/** `than`: thân lời gọi khác `{ la_so }` (vd báo cáo ba phái thần số gửi họ tên + ngày sinh + phiếu); `moDun` cho đo lường. */
-export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun }: { duongDan: string; laSo: unknown; ten: string; than?: unknown; moDun?: string }) {
+/** `than`: thân lời gọi khác `{ la_so }` (vd bản đồ con số gửi họ tên + ngày sinh); `moDun` cho đo lường; `tuMo`: tự tải
+ *  bản xem trước (chương miễn phí + lời mời) ngay khi hiện, không chờ bấm. */
+export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false }: { duongDan: string; laSo: unknown; ten: string; than?: unknown; moDun?: string; tuMo?: boolean }) {
   const [bc, setBc] = useState<BaoCao | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
@@ -65,6 +66,18 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun }: { duongDan:
     if (laSo && nguoi && !daTuMo.current && dangChoMo(duongDan, nguoi)) { daTuMo.current = true; void tai(true, true); }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ chạy một lần khi lá số sẵn sàng
   }, [Boolean(laSo && nguoi)]);
+
+  // Bản đồ con số: chương Tổng quan hiện ngay (điểm chuyển từ tổng quan sang chiều sâu). Đổi người / cách tính → tải lại.
+  // Chạy SAU hiệu ứng tự mở ở trên: lượt đầu đang tự mở khoá (quay về từ đăng nhập / nạp Sao) thì không tải bản xem trước.
+  const khoaTuMo = tuMo ? JSON.stringify(than ?? laSo) : "";
+  const lanDauTuMo = useRef(true);
+  useEffect(() => {
+    if (!khoaTuMo) return;
+    const boQua = lanDauTuMo.current && daTuMo.current;
+    lanDauTuMo.current = false;
+    if (!boQua) void tai();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ theo khoá đầu vào
+  }, [khoaTuMo]);
 
   if (!bc) {
     return (

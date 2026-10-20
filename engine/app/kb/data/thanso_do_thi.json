@@ -2,7 +2,7 @@
  "_nguon": "TS-V3 đồ thị liên phái: loại quan hệ giữa con số các phái. Câu mẫu có chỗ trống điền bằng số do engine tính.",
  "source": {
   "id": "nhap_ai_2026",
-  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) đối chiếu ba phái thần số Pythagoras, Chaldea và Qabalah Hermetic",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) đối chiếu hai phái thần số Pythagoras và Chaldea",
   "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30. Tham khảo văn hoá, không phải dự báo."
  },
  "source_id": "nhap_ai_2026",
@@ -11,7 +11,6 @@
  "ten_phai": {
   "pitago": "Pitago",
   "chaldea": "Chaldea",
-  "kabbalah": "Qabalah",
   "chung": "Ngày sinh"
  },
  "nhom": {
@@ -25,10 +24,6 @@
     [
      "chaldea",
      "so_ten"
-    ],
-    [
-     "kabbalah",
-     "sephirah_ten"
     ]
    ]
   },

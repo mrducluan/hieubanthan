@@ -1,17 +1,17 @@
 "use client";
 // TS-V3b — "Phái nào nói đúng về bạn?": phiếu bình chọn sau mỗi câu trả lời thần số. Chỉ đếm 3 con số TRÊN MÁY người
 // dùng (localStorage), không gửi máy chủ, không gắn câu hỏi. Sau NGUONG_GOI_Y phiếu → gợi ý phái hợp nhất (đếm phiếu,
-// không phải phép tính thần số) và mở báo cáo 3 phái (engine viết chương "phái nói đúng về bạn" từ 3 con số này).
+// không phải phép tính thần số) + gợi ý mở bản đồ con số đầy đủ.
 import { useEffect, useState } from "react";
 
-export type PhaiPhieu = "pitago" | "chaldea" | "kabbalah";
+export type PhaiPhieu = "pitago" | "chaldea";
 export type Phieu = Record<PhaiPhieu, number>;
-export const CAC_PHAI_PHIEU: PhaiPhieu[] = ["pitago", "chaldea", "kabbalah"];
-export const TEN_PHAI_PHIEU: Record<PhaiPhieu, string> = { pitago: "Pitago", chaldea: "Chaldea", kabbalah: "Qabalah" };
+export const CAC_PHAI_PHIEU: PhaiPhieu[] = ["pitago", "chaldea"];
+export const TEN_PHAI_PHIEU: Record<PhaiPhieu, string> = { pitago: "Pitago", chaldea: "Chaldea" };
 export const NGUONG_GOI_Y = 7;
 const KHOA = "hbt.thanso_phieu";
 const SU_KIEN = "hbt:phieu-phai";
-const RONG: Phieu = { pitago: 0, chaldea: 0, kabbalah: 0 };
+const RONG: Phieu = { pitago: 0, chaldea: 0 };
 
 export function docPhieu(): Phieu {
   try {
@@ -33,7 +33,7 @@ export function xoaPhieu() {
   window.dispatchEvent(new CustomEvent(SU_KIEN, { detail: { ...RONG } }));
 }
 
-export const tongPhieu = (ph: Phieu) => ph.pitago + ph.chaldea + ph.kabbalah;
+export const tongPhieu = (ph: Phieu) => ph.pitago + ph.chaldea;
 
 /** Phái nhiều phiếu nhất (có thể hoà → nhiều phái). Rỗng khi chưa có phiếu. */
 export function phaiDanDau(ph: Phieu): PhaiPhieu[] {

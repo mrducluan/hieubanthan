@@ -1,5 +1,5 @@
 // POST /api/thanso/phan-hoi — TS-V3 tầng HỌC: góp ý "đúng / chưa đúng" cho một câu trả lời thần số.
-// Họ tên + ngày sinh chỉ dùng trong lượt gọi để engine tính CHỮ KÝ SỐ (các con số của ba phái); bảng chỉ lưu chữ ký,
+// Họ tên + ngày sinh chỉ dùng trong lượt gọi để engine tính CHỮ KÝ SỐ (các con số của hai phái); bảng chỉ lưu chữ ký,
 // mã câu, phái, ghi chú đã lọc (khi người dùng tích đồng ý) — không tên, không ngày sinh, không user_id (migration 0016).
 // Chưa bật Supabase → trả ok, luu: false (góp ý vẫn đo ẩn danh trên PostHog ở trình duyệt).
 import { createHash } from "node:crypto";
@@ -33,7 +33,7 @@ const Input = z.object({
   ngay: z.number().int().min(1).max(31),
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1900).max(2100),
-  phai: z.enum(["pitago", "chaldea", "kabbalah", "tong_hop"]),
+  phai: z.enum(["pitago", "chaldea", "tong_hop"]),
   quy_uoc_duong_doi: z.enum(["tong_het", "tung_phan"]).default("tong_het"),
   nguon: z.enum(["hoi_dap", "bai_doc", "noi_dau"]),
   linh_vuc: z.string().regex(/^[a-z_]{2,30}$/).optional(),

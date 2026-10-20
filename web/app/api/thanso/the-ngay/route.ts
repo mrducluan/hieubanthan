@@ -1,4 +1,4 @@
-// POST /api/thanso/the-ngay — TS-V3b thẻ hôm nay: ngày cá nhân + số nổi bật qua ba phái + chữ Hebrew của ngày (engine tính, không lưu).
+// POST /api/thanso/the-ngay — TS-V3b thẻ hôm nay: ngày cá nhân + số nổi bật qua hai phái (engine tính, không lưu).
 import { z } from "zod";
 import { goiEngine } from "@/lib/proxy";
 

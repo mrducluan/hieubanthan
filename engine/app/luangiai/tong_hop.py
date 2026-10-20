@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""TS-V3 — Tổng hợp ba phái + đồ thị liên phái + gói ngữ cảnh (RULES, không LLM, không DB).
+"""TS-V3 — Tổng hợp hai phái Pitago · Chaldea (Qabalah đã bỏ 2026-10-20) + đồ thị liên phái + gói ngữ cảnh.
 
 Thay phần "Neuro-Symbolic" của bản SQL V3 (docs/REVIEW-ENGINE-V3.md) trong kiến trúc của dự án:
-  - `fn_generate_numerology_profile(ALL_SYNTHESIS)` → `ho_so()`: con số của Pitago, Chaldea, Qabalah, MỘT bộ tính
+  - `fn_generate_numerology_profile(ALL_SYNTHESIS)` → `ho_so()`: con số của Pitago và Chaldea, MỘT bộ tính
     (calc/ Python, có golden) — không có bộ tính thứ hai trong SQL.
   - `fn_resolve_3school_matrix` + `graph_edges` → `tuong_tac()`: cạnh giữa các nhóm vị trí tương đương của các phái
     (cộng hưởng / hai góc nhìn / bổ sung nợ nghiệp–số kép / nhịp thời gian), câu mẫu ở KB `thanso_do_thi.json`.
@@ -14,23 +14,21 @@ from __future__ import annotations
 import collections
 import datetime as dt
 
-from app.calc import thanso, thanso_chaldean as ch, thanso_kabbalah as kc
+from app.calc import thanso, thanso_chaldean as ch
 from app.kb import store, thanso_v2 as kb
 from app.luangiai import hoi, noi_dau, thanso_chaldean as lch
 
-PHAI = ("pitago", "chaldea", "kabbalah")
+PHAI = ("pitago", "chaldea")
 TEN_VI_TRI = {
     ("pitago", "duong_doi"): "Đường đời", ("pitago", "su_menh"): "Sứ mệnh", ("pitago", "linh_hon"): "Linh hồn",
     ("pitago", "nhan_cach"): "Nhân cách", ("chaldea", "so_ten"): "Số họ tên", ("chaldea", "ten_goi"): "Số tên gọi",
     ("chaldea", "ngay_sinh"): "Số ngày sinh", ("chaldea", "duong_doi"): "Số đường đời",
     ("chaldea", "linh_hon"): "Số linh hồn", ("chaldea", "nhan_cach"): "Số nhân cách",
-    ("kabbalah", "con_duong_ten"): "Con đường của tên", ("kabbalah", "sephirah_ten"): "Sephirah của tên",
-    ("kabbalah", "sephirah_ngay_sinh"): "Sephirah của ngày sinh",
 }
 
 
 def goc(n: int) -> int:
-    """Quy mọi con số (số cái, số kép, con đường 1–22, Sephirah 10) về 1–9 để so giữa các phái."""
+    """Quy mọi con số (số cái, số kép) về 1–9 để so giữa các phái."""
     while n > 9:
         n = sum(int(c) for c in str(n))
     return n
@@ -41,23 +39,16 @@ def ho_so(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: str = "to
     ten_goi = ho_ten[1] if len(ho_ten) > 1 else None
     p = thanso.chi_so_xac_dinh(ten, ngay, thang, nam, quy_uoc)
     c = ch.tinh(ten, ngay, thang, nam, ten_goi)
-    k = kc.tinh(ten, ngay, thang, nam)
     return {
         "pitago": {vt: {"so": p[vt], "goc": goc(p[vt])} for vt in ("duong_doi", "su_menh", "linh_hon", "nhan_cach")},
         "chaldea": {vt: {"so": c[vt]["kep"] or c[vt]["goc"], "kep": c[vt]["kep"], "goc": c[vt]["goc"]}
                     for vt in ("so_ten", "ten_goi", "ngay_sinh", "duong_doi", "linh_hon", "nhan_cach")},
-        # Qabalah: con đường 1–22 không quy về 1–9 (chữ Hebrew, không phải con số); Sephirah 1–9 so được với số gốc,
-        # Sephirah 10 (Malkuth) không có số tương ứng → goc None, không tham gia so cộng hưởng.
-        "kabbalah": {vt: {"so": k[ma], "goc": k[ma] if vt != "con_duong_ten" and k[ma] <= 9 else None}
-                     for vt, ma in (("con_duong_ten", "con_duong"), ("sephirah_ten", "sephirah_ten"),
-                                    ("sephirah_ngay_sinh", "sephirah_ngay_sinh")) if k[ma]},
     }
 
 
-# Ba vị trí này của ba phái là CÙNG MỘT phép cộng chữ số ngày sinh → luôn trùng gốc. Gộp thành một nguồn, không coi là
-# "các phái đồng ý" (QC TS-V3). Tương tự Sephirah tên ↔ con đường tên của Qabalah (cùng tổng gematria): chỉ lấy Sephirah.
-HO_NGAY_SINH = {("pitago", "duong_doi"), ("chaldea", "duong_doi"), ("kabbalah", "sephirah_ngay_sinh")}
-BO_QUA = {("kabbalah", "con_duong_ten")}
+# Hai vị trí này của hai phái là CÙNG MỘT phép cộng chữ số ngày sinh → luôn trùng gốc. Gộp thành một nguồn, không coi là
+# "các phái đồng ý" (QC TS-V3).
+HO_NGAY_SINH = {("pitago", "duong_doi"), ("chaldea", "duong_doi")}
 
 
 def _nguon(hs: dict) -> list[tuple[str, str, int]]:
@@ -66,10 +57,10 @@ def _nguon(hs: dict) -> list[tuple[str, str, int]]:
     out: list[tuple[str, str, int]] = []
     dd = hs["pitago"].get("duong_doi")
     if dd and dd["goc"]:
-        out.append(("chung", "Đường đời (ba phái cùng một phép cộng ngày sinh)", dd["goc"]))
+        out.append(("chung", "Đường đời (hai phái cùng một phép cộng ngày sinh)", dd["goc"]))
     for phai in PHAI:
         for vt, v in hs[phai].items():
-            if (phai, vt) in HO_NGAY_SINH or (phai, vt) in BO_QUA or not v["goc"]:
+            if (phai, vt) in HO_NGAY_SINH or not v["goc"]:
                 continue
             out.append((phai, f"{ten_phai[phai]} · {TEN_VI_TRI[(phai, vt)]}", v["goc"]))
     return out
@@ -158,10 +149,10 @@ def tong_hop(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.da
         "so_noi_bat": nb,
         "tuong_tac": tt,
         "nhip": {"nam": ngay_xem.year, "nam_ca_nhan": ncn, "cham_net_noi_bat": bool(nb) and ncn == nb[0]["goc"]},
-        "cach_doc": ("Ba phái tính từ cùng họ tên và ngày sinh bằng ba bảng khác nhau. Chỗ các phái cùng ra một số là nét "
+        "cach_doc": ("Hai phái tính từ cùng họ tên và ngày sinh bằng hai bảng chữ khác nhau. Chỗ các phái cùng ra một số là nét "
                      "đáng đối chiếu trước; chỗ khác nhau là các góc nhìn để bạn tự chọn điều đúng với mình."),
-        "ghi_chu_duong_doi": ("Đường đời của ba phái cùng là một phép cộng chữ số ngày sinh nên luôn trùng nhau — được tính "
-                              "là một nguồn, không coi là ba phái cùng đồng ý."),
+        "ghi_chu_duong_doi": ("Đường đời của hai phái cùng là một phép cộng chữ số ngày sinh nên luôn trùng nhau — được tính "
+                              "là một nguồn, không coi là hai phái cùng đồng ý."),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],
         "luu_y": "Thần số học là góc nhìn văn hoá để tự soi, không phải dự báo.",
@@ -181,11 +172,6 @@ def _nut_kich_hoat(hs: dict) -> list[dict]:
         if n:
             nut.append({"ma": f"CHA_{vt.upper()}_{v['so']}", "phai": "chaldea",
                         "tu_khoa": n.get("bieu_tuong") or n.get("ten"), **{k: kb.meta_chaldea()[k] for k in ("source_id", "school_id")}})
-    for vt, v in hs["kabbalah"].items():
-        n = kb.kabbalah_chu(v["so"]) if vt == "con_duong_ten" else kb.kabbalah_sephirah(v["so"])
-        if n:
-            nut.append({"ma": f"KAB_{vt.upper()}_{v['so']}", "phai": "kabbalah", "tu_khoa": n["ten"],
-                        **{k: kb.meta_kabbalah()[k] for k in ("source_id", "school_id")}})
     return nut
 
 

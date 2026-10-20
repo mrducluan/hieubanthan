@@ -23,27 +23,25 @@ import { hoTenList, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 import { DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
 import { ChaldeaDoc } from "@/components/than-so/ChaldeaDoc";
 import { NoiDau } from "@/components/than-so/NoiDau";
-import { KabbalahDoc } from "@/components/than-so/KabbalahDoc";
 import { TongHopDoc } from "@/components/than-so/TongHopDoc";
 import { GopYCauTraLoi } from "@/components/hoi/GopYCauTraLoi";
 import { PhaiNaoDung } from "@/components/than-so/PhaiNaoDung";
-import { BaoCaoBaPhai } from "@/components/than-so/BaoCaoBaPhai";
+import { BanDoConSo } from "@/components/than-so/BanDoConSo";
 import { ghiQuyUocDD, useQuyUocDD, type QuyUocDD } from "@/lib/quy-uoc-dd";
 import { ghi } from "@/lib/do-luong";
 import { TieuDeTrang, useDauCms } from "@/components/cms/DauCms";
 
 // TS-PHAI / TS-V3 — ba trường phái thần số + tổng hợp; lựa chọn nhớ trên máy (localStorage), mặc định Pitago như trước.
-export type PhaiThanSo = "pitago" | "chaldea" | "kabbalah" | "tong_hop";
+export type PhaiThanSo = "pitago" | "chaldea" | "tong_hop";
 const KHOA_PHAI = "hbt.thanso_phai";
-const CAC_PHAI: PhaiThanSo[] = ["pitago", "chaldea", "kabbalah", "tong_hop"];
+const CAC_PHAI: PhaiThanSo[] = ["pitago", "chaldea", "tong_hop"];
 function docPhai(): PhaiThanSo {
   try { const v = localStorage.getItem(KHOA_PHAI) as PhaiThanSo | null; return v && CAC_PHAI.includes(v) ? v : "pitago"; } catch { return "pitago"; }
 }
 const MO_TA_HOI: Record<PhaiThanSo, string> = {
   pitago: "Câu trả lời soi câu hỏi của bạn qua chính những con số ở trên — góc nhìn tham khảo để tự ngẫm, không phải lời tiên đoán.",
   chaldea: "Câu về bản thân, tên, tính cách trả lời theo số Chaldea (số kép + số gốc); chủ đề phái Chaldea không có (năm cá nhân, đỉnh cao, biểu đồ, hợp đôi) trả lời theo Pitago và ghi rõ.",
-  kabbalah: "Câu về bản thân trả lời theo Cây Sự sống (Sephirah, con đường của tên); chủ đề phái Qabalah không có (năm cá nhân, đỉnh cao, biểu đồ, hợp đôi) trả lời theo Pitago và ghi rõ.",
-  tong_hop: "Câu về bản thân mở đầu bằng điểm chung của ba phái, phần còn lại theo Pitago.",
+  tong_hop: "Câu về bản thân mở đầu bằng điểm chung của hai phái, phần còn lại theo Pitago.",
 };
 
 // Gợi ý ở dạng TỰ SOI, không dự đoán tương lai.
@@ -164,32 +162,33 @@ export function ThanSo() {
       </header>
       {dauCms.khoiTren}
 
-      <KhungPhai testId="truong-phai-than-so" moTa={<>Ba phái tính khác nhau từ cùng họ tên và ngày sinh. Pitago (mặc định) dùng bảng chữ 1–9 theo thứ tự ABC, có biểu đồ ngày sinh, đỉnh cao, năm cá nhân. Chaldea dùng bảng chữ 1–8 theo âm, đọc số kép 10–52 và coi trọng tên thường gọi. Qabalah chuyển tên sang chữ Hebrew và đặt lên Cây Sự sống. Tổng hợp cho thấy điều các phái cùng chỉ ra.</>}>
+      <KhungPhai testId="truong-phai-than-so" moTa={<>Hai phái tính khác nhau từ cùng họ tên và ngày sinh. Pitago (mặc định) dùng bảng chữ 1–9 theo thứ tự ABC, có biểu đồ ngày sinh, đỉnh cao, năm cá nhân. Chaldea dùng bảng chữ 1–8 theo âm, đọc số kép 10–52 và coi trọng tên thường gọi. Tổng hợp cho thấy điều các phái cùng chỉ ra.</>}>
         <DongPhai ten="Trường phái" nhan="Chọn trường phái thần số" giaTri={phai} doi={doiPhai}
-          luaChon={[["pitago", "Pitago"], ["chaldea", "Chaldea"], ["kabbalah", "Qabalah"], ["tong_hop", "Tổng hợp 3 phái"]]}
+          luaChon={[["pitago", "Pitago"], ["chaldea", "Chaldea"], ["tong_hop", "Tổng hợp 2 phái"]]}
           goiY={phai === "chaldea"
             ? (hoSo.ten_khac ? `Số tên gọi lấy theo tên thường gọi “${hoSo.ten_khac}”.` : "Chưa có tên thường gọi trong hồ sơ — số tên gọi lấy tiếng cuối của họ tên.")
-            : phai === "kabbalah" ? "Phái huyền học phương Tây phỏng theo Kabbalah — bảng chuyển chữ có biến thể, trang ghi rõ khi con số có thể đổi."
-            : phai === "tong_hop" ? "So con số của cả ba phái: chỗ trùng là nét đáng đối chiếu trước, chỗ khác là hai góc nhìn."
+            : phai === "tong_hop" ? "So con số của hai phái: chỗ trùng là nét đáng đối chiếu trước, chỗ khác là hai góc nhìn."
             : "Phổ biến nhất ở Việt Nam; mọi phần chiều sâu bên dưới theo phái này."} />
         {(phai === "pitago" || phai === "tong_hop") && (
-          <DongPhai ten="Cách cộng Đường đời" nhan="Chọn cách cộng Đường đời" giaTri={quyUoc} doi={doiQuyUoc}
-            luaChon={[["tong_het", "Cộng hết chữ số"], ["tung_phan", "Rút gọn từng phần"]]}
+          <DongPhai ten="Cách tính con số đường đời" nhan="Chọn cách tính con số đường đời" giaTri={quyUoc} doi={doiQuyUoc}
+            luaChon={[["tung_phan", "Rút gọn con số"], ["tong_het", "Cộng hết chữ số"]]}
             noiBat={Boolean(kq.duong_doi_hai_cach?.lech)}
             goiY={<span data-testid="goi-y-duong-doi">{kq.giai_thich_quy_uoc?.[quyUoc]}{kq.duong_doi_hai_cach?.lech
-              ? ` Với ngày sinh của bạn hai cách ra khác nhau: ${kq.duong_doi_hai_cach.tong_het} (cộng hết) và ${kq.duong_doi_hai_cach.tung_phan} (từng phần) — luận giải đi theo cách bạn chọn.`
+              ? ` Với ngày sinh của bạn hai cách ra khác nhau: ${kq.duong_doi_hai_cach.tung_phan} (rút gọn con số) và ${kq.duong_doi_hai_cach.tong_het} (cộng hết chữ số) — luận giải đi theo cách bạn chọn.`
               : " Với ngày sinh của bạn hai cách ra cùng một số."}</span>} />
         )}
       </KhungPhai>
 
-      {phai === "chaldea" ? <ChaldeaDoc hoSo={hoSo} /> : phai === "kabbalah" ? <KabbalahDoc hoSo={hoSo} quyUoc={quyUoc} />
-        : phai === "tong_hop" ? <TongHopDoc hoSo={hoSo} quyUoc={quyUoc} /> : (<>
+      {phai === "chaldea" ? <><ChaldeaDoc hoSo={hoSo} /><BanDoConSo hoSo={hoSo} quyUoc={quyUoc} /></>
+        : phai === "tong_hop" ? <><TongHopDoc hoSo={hoSo} quyUoc={quyUoc} /><BanDoConSo hoSo={hoSo} quyUoc={quyUoc} /></> : (<>
       <section aria-labelledby="bon-so">
-        <TieuDeMuc id="bon-so" nho="Bốn con số cốt lõi" lon="Cách tính, ý nghĩa, câu tự soi" />
+        <TieuDeMuc id="bon-so" nho="Bốn con số cốt lõi" lon="Ý nghĩa, kiểm chứng, cách tính" />
         <div className="grid gap-4 md:grid-cols-2">
-          {kq.cac_vi_tri.map((vt) => <TheBaLop key={vt.vi_tri} vt={vt} macDinh="tinh" />)}
+          {kq.cac_vi_tri.map((vt) => <TheBaLop key={vt.vi_tri} vt={vt} />)}
         </div>
       </section>
+
+      <BanDoConSo hoSo={hoSo} quyUoc={quyUoc} />
 
       <section aria-labelledby="chieu-sau" id="dong-doi" className="scroll-mt-24">
         <TieuDeMuc id="chieu-sau" nho="Chiều sâu" lon="Đời bạn theo nhịp" mo_ta={cs.cach_doc_chieu_sau} />
@@ -260,7 +259,7 @@ export function ThanSo() {
       <CuoiBaiDoc moDun="thanso_sau" cauHoi="Phần chiều sâu có giúp bạn hiểu mình hơn?" />
       </>)}
 
-      <NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea" || phai === "kabbalah"} quyUoc={quyUoc} />
+      <NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea"} quyUoc={quyUoc} />
 
       <section id="hoi" aria-labelledby="muc-hoi" className="scroll-mt-24">
         <TieuDeMuc id="muc-hoi" nho="Hỏi sâu hơn" lon={`${tenGoi(hoSo)}, bạn đang băn khoăn điều gì?`}
@@ -276,8 +275,6 @@ export function ThanSo() {
           }, maTheoCau.current.get(c), doiPhai)}
         />
       </section>
-
-      <BaoCaoBaPhai hoSo={hoSo} quyUoc={quyUoc} />
 
       <p className="text-xs text-fg-faint">{kq.trich_nguon_chung} · Tên đã quét: {kq.ten_bien_the_da_quet.join(", ")}</p>
     </div>

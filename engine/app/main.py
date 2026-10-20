@@ -21,7 +21,6 @@ from app import config, giam_sat, gioi_han
 from app.cong_khai import PhanHoiCongKhai
 from app.kb import tu_dien
 from app.calc import thanso, timebase
-from app.calc import thanso_kabbalah as kabbalah_calc
 from app.kb import store as kb_store
 from app.kb import trang as kb_trang
 from app.kb import tham_dinh as kb_tham_dinh
@@ -30,8 +29,7 @@ from app.luangiai import hom_nay
 from app.luangiai import nhip_ca_nhan as nhip
 from app.luangiai import thanso_chaldean as luangiai_chaldea
 from app.luangiai import thanso as luangiai_thanso
-from app.luangiai import bao_cao_ba_phai, noi_dau, the_ngay, tong_hop
-from app.luangiai import thanso_kabbalah as luangiai_kabbalah
+from app.luangiai import ban_do_con_so, noi_dau, phai_nao_dung, the_ngay, tong_hop
 from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
 from app import nhat_ky
 from app.narrative import hoi_van, llm as narrative_llm, ngan_sach
@@ -229,15 +227,6 @@ def api_chaldea(inp: ThanSoInput) -> dict:
                                                                                  inp.quy_uoc_duong_doi)}
 
 
-@app.post("/v1/thanso/kabbalah")
-def api_kabbalah(inp: ThanSoInput) -> dict:
-    """TS-V3 — thần số Qabalah Hermetic: con đường của tên (1–22), Sephirah của tên và ngày sinh (1–10), có độ nhạy
-    bảng chuyển chữ và đối chiếu Đường đời Pitago."""
-    inp.kiem_tra_ngay()
-    return {"engine_version": ENGINE_VERSION,
-            **luangiai_kabbalah.luan_kabbalah(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.quy_uoc_duong_doi)}
-
-
 class TongHopInput(ThanSoInput):
     ngay_xem: _dt.date | None = Field(default=None, ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))  # trống = hôm nay (VN)
 
@@ -252,45 +241,12 @@ def _hom_nay_vn() -> _dt.date:
 
 @app.post("/v1/thanso/tong-hop")
 def api_tong_hop(inp: TongHopInput) -> dict:
-    """TS-V3 — tổng hợp ba phái: số lặp lại giữa các phái, tương tác liên phái (cộng hưởng / hai góc nhìn / bổ sung /
+    """TS-V3 — tổng hợp hai phái (Pitago · Chaldea): số lặp lại giữa các phái, tương tác liên phái (cộng hưởng / hai góc nhìn / bổ sung /
     nhịp thời gian). Không lưu."""
     inp.kiem_tra_ngay()
     return {"engine_version": ENGINE_VERSION,
             **tong_hop.tong_hop(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.ngay_xem or _hom_nay_vn(),
                                 inp.quy_uoc_duong_doi)}
-
-
-class SephirahVao(BaseModel):
-    """Một người trên "Cây của hai người": ngày sinh, hoặc chỉ Sephirah ngày sinh (người mời — số đã ký trong link)."""
-    model_config = ConfigDict(extra="forbid")
-    ngay: int | None = Field(default=None, ge=1, le=31)
-    thang: int | None = Field(default=None, ge=1, le=12)
-    nam: int | None = Field(default=None, ge=1900, le=2100)
-    sephirah: int | None = Field(default=None, ge=1, le=10)
-
-    def so(self) -> int:
-        if self.sephirah is not None:
-            return self.sephirah
-        if None in (self.ngay, self.thang, self.nam):
-            raise HTTPException(422, detail="Cần ngày sinh hoặc Sephirah")
-        try:
-            _dt.date(self.nam, self.thang, self.ngay)
-        except ValueError:
-            raise HTTPException(422, detail="Ngày sinh không tồn tại")
-        return kabbalah_calc.sephirah_ngay_sinh(self.ngay, self.thang, self.nam)
-
-
-class CayHaiNguoiInput(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    a: SephirahVao
-    b: SephirahVao
-
-
-@app.post("/v1/thanso/cay-hai-nguoi")
-def api_cay_hai_nguoi(inp: CayHaiNguoiInput) -> dict:
-    """TS-V3b — "Cây của hai người": đường ngắn nhất nối Sephirah ngày sinh của hai người trên Cây Sự sống, mỗi chặng
-    một chữ Hebrew kèm nghĩa. Không chấm điểm, không lưu."""
-    return {"engine_version": ENGINE_VERSION, **luangiai_kabbalah.cay_hai_nguoi(inp.a.so(), inp.b.so())}
 
 
 class TheNgayInput(BaseModel):
@@ -314,7 +270,7 @@ class TheNgayInput(BaseModel):
 
 @app.post("/v1/thanso/the-ngay")
 def api_the_ngay(inp: TheNgayInput) -> dict:
-    """TS-V3b — thẻ hôm nay: ngày cá nhân + số nổi bật qua ba phái (khi có họ tên) + chữ Hebrew của ngày."""
+    """TS-V3b — thẻ hôm nay: ngày cá nhân + số nổi bật qua hai phái (khi có họ tên)."""
     try:
         _dt.date(inp.nam, inp.thang, inp.ngay)
     except ValueError:
@@ -324,26 +280,19 @@ def api_the_ngay(inp: TheNgayInput) -> dict:
                                 inp.quy_uoc_duong_doi)}
 
 
-class PhieuPhai(BaseModel):
+class BanDoInput(TongHopInput):
     model_config = ConfigDict(extra="forbid")
-    pitago: int = Field(default=0, ge=0, le=1000)
-    chaldea: int = Field(default=0, ge=0, le=1000)
-    kabbalah: int = Field(default=0, ge=0, le=1000)
-
-
-class BaoCaoBaPhaiInput(TongHopInput):
-    phieu: PhieuPhai | None = None
     dien_dat_toi_da: int | None = Field(default=None, ge=0, le=20)   # web gửi chung khuôn Luận giải toàn bộ; template
 
 
-@app.post("/v1/thanso/bao-cao-ba-phai")
-def api_bao_cao_ba_phai(inp: BaoCaoBaPhaiInput) -> dict:
-    """TS-V3b — báo cáo ba phái theo chương (khuôn Luận giải toàn bộ: chương đầu miễn phí, web mở phần còn lại bằng
-    Sao). Phiếu "phái nào nói đúng" chỉ là 3 con số đếm trên máy người dùng. Không lưu."""
+@app.post("/v1/thanso/ban-do-con-so")
+def api_ban_do_con_so(inp: BanDoInput) -> dict:
+    """Gói Sao "Bản đồ con số" (Luận giải toàn bộ thần số): Tổng quan (miễn phí ở tầng web) + Nghịch lý bên trong ·
+    12 tháng tới · Sự nghiệp & tiền bạc. Web cắt chương khoá, trừ Sao ở máy chủ. Không lưu."""
     inp.kiem_tra_ngay()
     return {"engine_version": ENGINE_VERSION,
-            **bao_cao_ba_phai.bao_cao(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.ngay_xem or _hom_nay_vn(),
-                                      inp.quy_uoc_duong_doi, inp.phieu.model_dump() if inp.phieu else None)}
+            **ban_do_con_so.bao_cao(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.ngay_xem or _hom_nay_vn(),
+                                    inp.quy_uoc_duong_doi)}
 
 
 class BaGocNhinInput(ThanSoInput):
@@ -352,22 +301,21 @@ class BaGocNhinInput(ThanSoInput):
 
 @app.post("/v1/thanso/ba-goc-nhin")
 def api_ba_goc_nhin(inp: BaGocNhinInput) -> dict:
-    """TS-V3b — "Phái nào nói đúng về bạn?": mỗi phái một câu ngắn (Pitago theo lĩnh vực câu hỏi, Chaldea số tên gọi,
-    Qabalah con đường của tên) để người dùng bấm chọn. Phiếu đếm ở máy người dùng, engine không lưu."""
+    """TS-V3b — "Phái nào nói đúng về bạn?": mỗi phái một câu ngắn (Pitago theo lĩnh vực câu hỏi, Chaldea số tên gọi)
+    để người dùng bấm chọn. Phiếu đếm ở máy người dùng, engine không lưu."""
     inp.kiem_tra_ngay()
     return {"engine_version": ENGINE_VERSION,
-            **bao_cao_ba_phai.ba_goc_nhin(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.linh_vuc, inp.quy_uoc_duong_doi)}
+            **phai_nao_dung.ba_goc_nhin(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.linh_vuc, inp.quy_uoc_duong_doi)}
 
 
 class ChuKySoInput(ThanSoInput):
-    phai: Literal["pitago", "chaldea", "kabbalah", "tong_hop"] = "pitago"
+    phai: Literal["pitago", "chaldea", "tong_hop"] = "pitago"
 
 
 # Chỉ những con số RÚT GỌN mà rất nhiều người có chung — không ngày sinh, không tổng thô (QC TS-V3: giảm khả năng nhận
 # diện). Mỗi phái chỉ gửi số của chính phái được góp ý; Chaldea chỉ gửi số gốc 1–9.
 CHU_KY_KHOA = {"pitago": ("duong_doi", "su_menh", "linh_hon", "nhan_cach"),
-               "chaldea": ("so_ten", "ten_goi", "linh_hon", "nhan_cach"),
-               "kabbalah": ("con_duong_ten", "sephirah_ten", "sephirah_ngay_sinh")}
+               "chaldea": ("so_ten", "ten_goi", "linh_hon", "nhan_cach")}
 
 
 @app.post("/v1/thanso/chu-ky-so")
@@ -384,7 +332,7 @@ def api_chu_ky_so(inp: ChuKySoInput) -> dict:
 @app.post("/v1/thanso/ngu-canh")
 def api_ngu_canh(inp: NguCanhInput) -> dict:
     """TS-V3 — gói ngữ cảnh cho tầng diễn đạt (thay fn_assemble_llm_context_payload_v3 của bản SQL): ý định, hồ sơ
-    ba phái, mục KB kích hoạt, tương tác liên phái, gói bằng chứng, quy tắc diễn đạt bắt buộc. Không lưu."""
+    hai phái, mục KB kích hoạt, tương tác liên phái, gói bằng chứng, quy tắc diễn đạt bắt buộc. Không lưu."""
     inp.kiem_tra_ngay()
     return {"engine_version": ENGINE_VERSION,
             **tong_hop.ngu_canh(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.cau_hoi.strip(),
@@ -416,7 +364,7 @@ class HoiInput(ThanSoInput):
     nguoi_kia: NguoiKia | None = None
     ngay_xem: _dt.date | None = Field(default=None, description="Mặc định: hôm nay")
     # TS-PHAI-2: trả lời theo phái người dùng đang xem ở /than-so.
-    phai: Literal["pitago", "chaldea", "kabbalah", "tong_hop"] = "pitago"
+    phai: Literal["pitago", "chaldea", "tong_hop"] = "pitago"
 
 
 @app.get("/v1/tu-dien")

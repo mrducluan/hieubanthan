@@ -140,3 +140,13 @@ dùng giữ nguyên), có nút đổi, và luôn báo khi hai cách ra số khá
 | Phái nào nói đúng + báo cáo 3 phái | `luangiai/bao_cao_ba_phai.py` (`ba_goc_nhin`, `bao_cao`), 2 route | `PhaiNaoDung.tsx`, `lib/phieu-phai.ts` (đếm trên máy), `BaoCaoBaPhai.tsx` qua `luanGiaiCoSao` mô-đun `thanso3` | QUAY LẠI + NẠP · `school_voted{phai,lan}`, `paywall_viewed`/`unlock_succeeded{mo_dun=thanso3}` |
 
 **QC độc lập (2 agent) — đã sửa:** khoá "đã mở hôm nay" của báo cáo ba phái bỏ `phieu` (trước đó bình chọn thêm sau khi trả Sao làm đổi khoá → có thể bị trừ lần hai; `luanGiaiCoSao(..., khoaTu)`), sổ Sao ghi "Luận giải toàn bộ ba phái thần số"; thẻ chia sẻ ngày theo cách cộng Đường đời người dùng chọn; bỏ nút mời trùng ở Hợp đôi; tên không có chữ cái không còn lộ "None"/số 0 trong báo cáo và ba góc nhìn; `ngay_xem` giới hạn 1900–2100; chương "phái hợp nhất" nói rõ khi chưa đủ 7 phiếu. Đã kiểm đúng: 22 con đường Golden Dawn khớp KB, 100 cặp Sephirah đối xứng A↔B, chữ của ngày ≡ ngày cá nhân (mod 9) trên ~2.900 mẫu, không tên/ngày sinh trong phản hồi và mã chia sẻ, chương khoá không lộ đoạn văn (`catXemTruoc`).
+
+## 9. TS-V3c (2026-10-20) — chủ dự án review UI: bỏ Qabalah, đổi mặc định, thẻ kiểm chứng, "Bản đồ con số"
+
+- **Qabalah bỏ hẳn:** phụ thuộc bảng chuyển chữ Latin→Hebrew tự chế cho tên Việt (vd "Trần Thị Bích Ngọc" ra 6 kết quả
+  khác nhau tuỳ biến thể), nghĩa mỗi chữ 1–2 câu, ít người Việt tìm. Kéo theo Cây của hai người, Chữ của ngày, báo cáo
+  3 phái. Tổng hợp/bình chọn còn Pitago · Chaldea.
+- **Mặc định "Rút gọn con số"** (web), nhãn "Cách tính" thu gọn.
+- **Thẻ kiểm chứng** thay câu tự soi chung chung: người dùng tích nét đúng → biết con số nói trúng tới đâu.
+- **Gói Sao "Bản đồ con số":** Tổng quan miễn phí (bạn hiếm cỡ nào + số lặp + nhóm lệch) là điểm chuyển; 3 chương trả
+  phí: Nghịch lý bên trong · 12 tháng tới · Sự nghiệp & tiền bạc — dữ liệu sâu sẵn có trong kho chân dung + nhịp thời gian.

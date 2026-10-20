@@ -3,9 +3,9 @@ import { cn } from "@/lib/utils";
 
 // Ba lớp nội dung (Blueprint §17) — màu + biểu tượng cố định trên toàn sản phẩm.
 export const LOP = {
-  tinh: { ten: "Đã tính", mo_ta: "Phép tính minh bạch, cùng đầu vào luôn cùng kết quả", Icon: Calculator, mau: "jade" },
+  tinh: { ten: "Cách tính", mo_ta: "Phép tính minh bạch, cùng đầu vào luôn cùng kết quả", Icon: Calculator, mau: "jade" },
   giai: { ten: "Diễn giải", mo_ta: "Ý nghĩa theo truyền thống, có nguồn", Icon: BookOpen, mau: "gold" },
-  soi: { ten: "Tự soi", mo_ta: "Câu hỏi để bạn tự kiểm — không ai trả lời thay bạn", Icon: Moon, mau: "moon" },
+  soi: { ten: "Kiểm chứng", mo_ta: "Tích những nét đúng với bạn — biết con số nói trúng tới đâu", Icon: Moon, mau: "moon" },
 } as const;
 export type LoaiLop = keyof typeof LOP;
 

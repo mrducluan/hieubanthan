@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { hoTenList, tenGoi, type HoSo } from "@/lib/hoso";
 import { postJson } from "@/lib/goi-api";
+import { docQuyUocDD } from "@/lib/quy-uoc-dd";
 import { ghi, maMoiTuToken } from "@/lib/do-luong";
 
 interface Props {
@@ -36,6 +37,7 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
     try {
       const { ma } = await postJson<{ ma: string }>("/api/chia-se/tao", {
         ten_hien_thi: ten.trim() || tenGoi(hoSo), ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam,
+        quy_uoc_duong_doi: docQuyUocDD(),
       });
       const u = new URL(duongDan(ma), window.location.origin);
       if (maCuaToi) u.searchParams.set("gt", maCuaToi);   // người được mời tạo tài khoản → cả hai nhận Sao

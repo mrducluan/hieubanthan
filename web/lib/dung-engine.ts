@@ -1,6 +1,6 @@
 "use client";
 // Gọi một route /api/thanso/* với hồ sơ trên máy, nhớ kết quả trong phiên (khoá = route + hồ sơ + tuỳ chọn).
-// Engine tính, web chỉ hiển thị. Dùng cho bài đọc các phái (Qabalah, tổng hợp).
+// Engine tính, web chỉ hiển thị. Dùng cho bài đọc tổng hợp các phái.
 import { useEffect, useState } from "react";
 import { hoTenList, type HoSo } from "@/lib/hoso";
 

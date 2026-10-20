@@ -8,7 +8,7 @@
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
-export type TruongPhai = "pitago" | "chaldea" | "kabbalah" | "tong_hop";
+export type TruongPhai = "pitago" | "chaldea" | "tong_hop";
 export interface NguCanhV3 {
   loai: "ngu_canh";
   y_dinh: { linh_vuc: string; xu_ly: string; ma_cau: string | null; tru: string | null };
