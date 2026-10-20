@@ -13,6 +13,7 @@ const Input = z.object({
   a: Nguoi,
   b: Nguoi,
   quan_he: z.enum(["nguoi_yeu", "ban_be", "dong_nghiep", "sep", "gia_dinh"]).optional(),
+  quy_uoc_duong_doi: z.enum(["tong_het", "tung_phan"]).optional(),
 }).strict();
 
 export function POST(req: Request) {

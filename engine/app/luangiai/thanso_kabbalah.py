@@ -30,8 +30,9 @@ def luan_kabbalah(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: s
     dd = thanso.duong_doi(ngay, thang, nam, quy_uoc)
     goc_dd = {11: 2, 22: 4, 33: 6}.get(dd, dd)
     cac_so = [
-        {"ma": "con_duong_ten", "ten": "Con đường của tên", "so": kq["con_duong"],
-         "mo_ta": "Gematria cả họ tên, rút về 1–22 → một chữ Hebrew, một con đường trên Cây Sự sống.",
+        {"ma": "con_duong_ten", "ten": "Con đường của tên", "so": kq["con_duong"], "so_duong_cay": kq["so_duong_cay"],
+         "mo_ta": (f"Gematria cả họ tên, rút về 1–22 → chữ Hebrew thứ {kq['con_duong']}"
+                   + (f" ({kq['chu_con_duong']}) — con đường số {kq['so_duong_cay']} trên Cây Sự sống." if kq["con_duong"] else ".")),
          "cach_tinh": f"{_vet(kq)} → {_rut(kq['tong'], 22)}", "nghia": kb.kabbalah_chu(kq["con_duong"]),
          "khac": kq["con_duong_khac"]},
         {"ma": "sephirah_ten", "ten": "Sephirah của tên", "so": kq["sephirah_ten"],
@@ -41,7 +42,9 @@ def luan_kabbalah(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: s
          "mo_ta": "Cộng mọi chữ số ngày, tháng, năm sinh, rút về 1–10 — \"trạm\" bạn hay trở về.",
          "cach_tinh": f"{' + '.join(f'{ngay}{thang}{nam}')} = {kq['tong_ngay_sinh']} → {_rut(kq['tong_ngay_sinh'], 10)}",
          "nghia": kb.kabbalah_sephirah(kq["sephirah_ngay_sinh"]),
-         "pitago": {"ten": "Đường đời", "so": dd, "trung": kq["sephirah_ngay_sinh"] == goc_dd}},
+         # Sephirah 10 (Malkuth) không có số 1–9 tương ứng → không so (cùng quy ước với trang Tổng hợp).
+         "pitago": {"ten": "Đường đời", "so": dd, "trung": kq["sephirah_ngay_sinh"] == goc_dd,
+                    "so_sanh_duoc": kq["sephirah_ngay_sinh"] <= 9}},
     ]
     meta = kb.meta_kabbalah()
     return {

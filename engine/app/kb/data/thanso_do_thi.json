@@ -1,5 +1,5 @@
 {
- "_nguon": "TS-V3 đồ thị liên phái: loại quan hệ giữa con số các phái (thay graph_edges của bản SQL V3). Câu mẫu có chỗ trống điền bằng số do engine tính.",
+ "_nguon": "TS-V3 đồ thị liên phái: loại quan hệ giữa con số các phái. Câu mẫu có chỗ trống điền bằng số do engine tính.",
  "source": {
   "id": "nhap_ai_2026",
   "ten": "Bản biên soạn tham khảo (AI nháp, 2026) đối chiếu ba phái thần số Pythagoras, Chaldea và Qabalah Hermetic",
@@ -11,26 +11,10 @@
  "ten_phai": {
   "pitago": "Pitago",
   "chaldea": "Chaldea",
-  "kabbalah": "Qabalah"
+  "kabbalah": "Qabalah",
+  "chung": "Ngày sinh"
  },
  "nhom": {
-  "duong_doi": {
-   "ten": "Con đường đời (từ ngày sinh)",
-   "vi_tri": [
-    [
-     "pitago",
-     "duong_doi"
-    ],
-    [
-     "chaldea",
-     "duong_doi"
-    ],
-    [
-     "kabbalah",
-     "sephirah_ngay_sinh"
-    ]
-   ]
-  },
   "ten_day_du": {
    "ten": "Cách bạn thể hiện (từ cả họ tên)",
    "vi_tri": [
@@ -78,26 +62,22 @@
  "quan_he": {
   "cong_huong": {
    "ten": "Cộng hưởng",
-   "ma_v3": "RESONATES_WITH",
    "cach_doc": "Ở phần {nhom}, các phái cùng ra số {so} ({tu_khoa}). Nhiều cách tính khác nhau cùng chỉ về một nét — đây là chỗ đáng đối chiếu với bản thân trước tiên.",
    "goi_y": "Đọc kỹ mặt tối của số {so}: nét càng đậm thì mặt tối cũng dễ lộ."
   },
   "khac_nhip": {
-   "ten": "Hai góc nhìn",
-   "ma_v3": "CONFLICTS_WITH",
+   "ten": "Các góc nhìn",
    "cach_doc": "Ở phần {nhom}, mỗi phái ra một số khác: {danh_sach}. Không phải bên nào sai — mỗi bảng chữ nhìn tên bạn từ một góc.",
-   "goi_y": "Đọc cả hai, giữ lại điều bạn thấy đúng với mình qua việc làm thật; phần không khớp thì bỏ qua."
+   "goi_y": "Đọc các số này, giữ lại điều bạn thấy đúng với mình qua việc làm thật; phần không khớp thì bỏ qua."
   },
   "bo_sung": {
    "ten": "Bổ sung",
-   "ma_v3": "COMPLEMENTS",
    "cach_doc": "{nhom}: Pitago thấy nợ nghiệp {so_a}, Chaldea thấy số kép {so_b}. {cach_dung}",
    "goi_y": "{tu_soi}"
   },
   "nhip_thoi_gian": {
    "ten": "Nhịp thời gian",
-   "ma_v3": "MODULATES_TIMING",
-   "cach_doc": "Năm {nam} là năm cá nhân {so} — trùng đúng con số nổi bật nhất của bạn ({tu_khoa}). Nét này thường được cảm nhận rõ hơn trong năm.",
+   "cach_doc": "Năm {nam} là năm cá nhân {so} — trùng con số nổi bật nhất của bạn ({tu_khoa}). Một dịp để tự quan sát nét này trong việc hằng ngày.",
    "goi_y": "Dùng năm này để luyện mặt mạnh của số {so} và để ý mặt tối của nó."
   }
  },

@@ -7,6 +7,7 @@ import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhoiLop } from "@/components/than-so/LopNoiDung";
 import { hoTenList, type HoSo } from "@/lib/hoso";
+import { useQuyUocDD } from "@/lib/quy-uoc-dd";
 
 interface NghiaGoc { ten: string; hanh_tinh: string; xu_huong: string; mat_toi: string; goi_y: string; cau_tu_soi: string }
 interface NghiaKep { bieu_tuong: string; xu_huong: string; mat_toi: string; cau_tu_soi: string }
@@ -30,7 +31,8 @@ export interface BaiChaldea {
 const boNho = new Map<string, BaiChaldea>();
 
 function useChaldea(h: HoSo) {
-  const khoa = JSON.stringify([hoTenList(h), h.ngay, h.thang, h.nam]);
+  const qu = useQuyUocDD();   // TS-V3: đối chiếu Đường đời Pitago theo cách cộng đã chọn
+  const khoa = JSON.stringify([hoTenList(h), h.ngay, h.thang, h.nam, qu]);
   const [kq, setKq] = useState<BaiChaldea | null>(boNho.get(khoa) ?? null);
   const [loi, setLoi] = useState<string | null>(null);
   const [lan, setLan] = useState(0);
@@ -41,7 +43,7 @@ function useChaldea(h: HoSo) {
     setKq(null); setLoi(null);
     fetch("/api/thanso/chaldea", {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam }),
+      body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, quy_uoc_duong_doi: qu }),
     }).then(async (r) => {
       const d = (await r.json()) as BaiChaldea & { error?: string };
       if (!r.ok) throw new Error(d.error ?? "Chưa tính được lúc này.");

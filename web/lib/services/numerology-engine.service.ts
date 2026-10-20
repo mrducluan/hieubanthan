@@ -3,18 +3,19 @@
 // năm 2026 viết cứng. Ở đây giữ nguyên tên lớp + `consultUser()` để nơi khác dùng như thiết kế V3, nhưng gói ngữ cảnh do
 // ENGINE dựng (`POST /v1/thanso/ngu-canh`: một bộ tính Python có golden, KB có nguồn, quy tắc diễn đạt) — không có
 // bộ tính thứ hai trong SQL, không cần chuỗi kết nối DB trên Vercel. Chỉ chạy phía máy chủ (giữ ENGINE_API_KEY).
+// KHÔNG mở thành route công khai: gói có cả câu trả lời từ KB → sẽ lách hạn mức hỏi đáp SAO-2 (QC TS-V3).
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
 export type TruongPhai = "pitago" | "chaldea" | "kabbalah" | "tong_hop";
 export interface NguCanhV3 {
-  phien_ban: "v3";
+  loai: "ngu_canh";
   y_dinh: { linh_vuc: string; xu_ly: string; ma_cau: string | null; tru: string | null };
   ho_so_tinh_toan: Record<string, Record<string, { so: number; goc: number }>>;
   nut_kich_hoat: { ma: string; phai: string; tu_khoa: string; source_id: string; school_id: string }[];
   so_noi_bat: { goc: number; lan: number; phai: string[]; tu_khoa: string | null }[];
-  tuong_tac_lien_phai: { quan_he: string; ma_v3: string; ten_nhom: string; cach_doc: string; goi_y: string }[];
+  tuong_tac_lien_phai: { quan_he: string; ten_nhom: string; cach_doc: string; goi_y: string }[];
   bang_chung: Record<string, unknown>;
   quy_tac_bat_buoc: { ma: string; noi_dung: string }[];
 }

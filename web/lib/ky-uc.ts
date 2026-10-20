@@ -23,6 +23,7 @@ export function useKyUc() {
   async function them(tru: string, ma_cau: string) {
     const sb = await supabase();
     if (!sb) return;
+    // Trùng câu đã nhớ → chỉ mục duy nhất ở SQL từ chối (23505); bỏ qua, coi như đã nhớ.
     await sb.from("ky_uc_nguoi_dung").insert({ tru, ma_cau });
     await tai();
   }

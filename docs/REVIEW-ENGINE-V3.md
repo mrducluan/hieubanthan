@@ -111,3 +111,22 @@ giữ: **một bộ tính** (Python, golden) — SQL chỉ còn là tầng HỌC
 Cách đọc hai cách cộng Đường đời: **cộng hết** phổ biến ở sách/trang thần số Việt Nam; **rút gọn từng phần** hay gặp
 ở sách phương Tây (Hans Decoz…). Không có cách "đúng" duy nhất — sản phẩm để mặc định cộng hết (kết quả cũ của người
 dùng giữ nguyên), có nút đổi, và luôn báo khi hai cách ra số khác nhau.
+
+## 7. QC độc lập vòng 2 (TS-V3) — đã sửa
+
+| Phát hiện | Sửa |
+|---|---|
+| "Cộng hưởng" giả: Đường đời ba phái là CÙNG một phép cộng ngày sinh → luôn trùng (300/300 ngày thử) | Gộp thành một nguồn "chung"; bỏ nhóm đường đời khỏi đồ thị; số nổi bật phải có nguồn độc lập ngoài nhóm này; trang ghi rõ |
+| Quy con đường 1–22 và Sephirah 10 về 1–9 (Malkuth thành "1") | Con đường không quy về số; Sephirah 10 không so; trang Qabalah ghi "không có số tương ứng" |
+| Đánh số con đường lệch Golden Dawn (chữ thứ 14 = Nun nhưng "Path 14" là Daleth) | Trả cả "chữ thứ n" và "con đường số n + 10 trên Cây" |
+| Nguồn ghi quá: bảng không hoàn toàn từ *777* | Ghi "dựa trên 777, bổ sung C F J W X, KH, H câm trong NH/GH/NGH"; rút gọn về con đường là quy ước hiện đại; thêm lưu ý chữ Hebrew là chữ thiêng; lưu ý "Thị" (Tav 400) |
+| H không nhất quán (NH, GH tính He) | NH = Nun, GH = Gimel (H câm) — golden "Phạm Khánh" đổi 185 → 180 (tính tay lại) |
+| Hỏi đáp Qabalah trả cùng một đoạn cho nghề/tình/tiền | Chỉ câu tự mô tả hoặc hỏi thẳng về Qabalah mới đổi; còn lại Pythagoras + ghi chú; câu chuẩn bảng nỗi đau vẫn đúng chỉ số thẻ |
+| Câu tự soi lặp, thiếu dấu chấm | Bỏ trùng trong template, chuẩn dấu câu |
+| Chữ ký số mang ngày sinh (Chaldea ngày sinh, tổng thô) + validator nhận khoá bất kỳ, `{}` và NULL | Chỉ số RÚT GỌN của phái được góp ý; SQL nhận đúng danh sách khoá + khoảng giá trị; rỗng/NULL bị từ chối |
+| Cam kết 12 tháng / 180 ngày chưa có cơ chế xoá; ký ức tự đặt hạn 2100 được | `don_du_lieu_hoc()` + cron ngày `/api/cron/don-du-lieu-hoc`; trigger ép mốc thời gian + chủ sở hữu; không trùng câu |
+| `locGhiChu` lọt điện thoại có dấu, Zalo/FB, ngày viết bằng chữ, email có dấu cách; SQL từ chối thì mất cả góp ý | Lọc thêm các mẫu; SQL từ chối ghi chú → vẫn lưu góp ý không kèm ghi chú; dặn không ghi tên/sức khoẻ/tôn giáo |
+| `/api/thanso/ngu-canh` công khai lách hạn mức hỏi đáp SAO-2 | Gỡ route; service chỉ dùng phía máy chủ |
+| `/api/thanso/phan-hoi` không giới hạn (5 lượt đẩy cụm sang chờ duyệt) | Giới hạn 12 góp ý / 10 phút mỗi người gọi |
+| Còn chỗ bỏ qua cách cộng Đường đời (hợp đôi, `/van`, `/chu-ky`, đối chiếu ở Chaldea, người thứ hai) | Đã luồn tham số |
+| Mã nội bộ "v3", "RESONATES_WITH" trong JSON công khai (BM-1) | Bỏ |

@@ -69,7 +69,7 @@ export default async function ChinhSachRiengTu() {
             [<b key="d">Hồ sơ lưu vào tài khoản</b>, "Chỉ khi bạn bấm lưu", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được", "Đến khi bạn xoá hồ sơ hoặc tài khoản"],
             [<b key="e">Ví Sao, mã mời</b>, "Khi bạn có tài khoản, mời bạn bè, dùng Sao", "Máy chủ dữ liệu tại Singapore", "Đến khi bạn xoá tài khoản"],
             [<b key="f">Câu hỏi đã lọc</b>, "Khi bạn hỏi đáp (nếu bật nhật ký cải thiện chất lượng)", "Máy chủ dữ liệu tại Singapore", "Tối đa 24 tháng"],
-            [<b key="f2">Góp ý "đúng / chưa đúng" cho câu trả lời thần số</b>, "Chỉ khi bạn bấm góp ý; ghi chú chỉ lưu khi bạn tự tích đồng ý", "Máy chủ dữ liệu tại Singapore — chỉ các con số đã tính, mã câu hỏi, trường phái và ghi chú đã lọc; không họ tên, ngày sinh hay tài khoản", "Tối đa 12 tháng"],
+            [<b key="f2">Góp ý "đúng / chưa đúng" cho câu trả lời thần số</b>, "Chỉ khi bạn bấm góp ý; ghi chú chỉ lưu khi bạn tự tích đồng ý", "Máy chủ dữ liệu tại Singapore — chỉ các con số rút gọn của trường phái được góp ý, mã câu hỏi, trường phái và ghi chú đã lọc; không họ tên, ngày sinh hay tài khoản", "Tối đa 12 tháng"],
             [<b key="f3">Điều bạn bấm "Ghi nhớ"</b>, "Chỉ khi đã đăng nhập và bạn bấm Ghi nhớ một câu băn khoăn", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được; xoá được ngay", "Tối đa 180 ngày"],
             [<b key="g">Số liệu sử dụng ẩn danh</b>, "Khi bạn dùng web (nếu bật đo lường)", "Công cụ đo lường ẩn danh", "Tối đa 12 tháng"],
             [<b key="g2">Số liệu truy cập (Google Analytics)</b>, "Khi bạn mở trang (Google Tag Manager). Tắt được ở \"Tuỳ chọn cookie\" chân trang", "Google (qua Google Tag Manager)", "Tối đa 14 tháng"],
@@ -78,9 +78,11 @@ export default async function ChinhSachRiengTu() {
           <p><b>Địa chỉ IP</b> chỉ được băm (không đảo ngược được) và giữ trong bộ nhớ máy chủ tối đa 24 giờ để giới hạn số lượt
             hỏi đáp mỗi người, không ghi vào đâu.</p>
           <p><b>Góp ý để cải thiện câu trả lời</b>: họ tên và ngày sinh chỉ dùng trong lượt gửi để tính lại các con số, rồi
-            bỏ ngay — bảng góp ý chỉ giữ các con số đó (ví dụ "Đường đời 33"), mã câu hỏi và trường phái. Ghi chú bạn viết
-            được xoá email, số điện thoại, ngày tháng trước khi lưu. Góp ý chỉ dùng để sửa nội dung kho tri thức cho mọi người,
-            không dùng vào việc khác, không bán, không gắn với ai.</p>
+            bỏ ngay — bảng góp ý chỉ giữ các con số rút gọn của trường phái bạn đang xem (ví dụ "Đường đời 33, Sứ mệnh 9"; rất
+            nhiều người có chung các số này), mã câu hỏi và trường phái. Không ai tìm ra bạn từ bảng này nếu không biết sẵn họ
+            tên và ngày sinh của bạn. Ghi chú bạn viết chỉ lưu khi bạn tự tích đồng ý, được xoá email, số điện thoại, ngày tháng
+            trước khi lưu — xin đừng ghi tên, sức khoẻ hay tôn giáo. Góp ý chỉ dùng để sửa nội dung kho tri thức cho mọi người,
+            không dùng vào việc khác, không bán. Dữ liệu quá hạn được xoá tự động mỗi ngày.</p>
           <p><b>Câu hỏi đã lọc</b>: ngày tháng, số điện thoại, email và cụm giống họ tên được xoá trước khi ghi. Câu hỏi
             không gắn với tài khoản hay hồ sơ nào.</p>
           <p><b>Số liệu sử dụng</b> chỉ ghi các bước như mở trang, bắt đầu hay xem xong bài đọc. Hệ thống không ghi ngày

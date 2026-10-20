@@ -14,6 +14,7 @@ import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
 import { GopY } from "@/components/khung/GopY";
 import { postJson } from "@/lib/goi-api";
 import { hoTenList, ngayHopLe, tenGoi, useHoSo } from "@/lib/hoso";
+import { useQuyUocDD } from "@/lib/quy-uoc-dd";
 import { cn } from "@/lib/utils";
 import { batDauDoc, ghi } from "@/lib/do-luong";
 import { LoiDan, TieuDeTrang, useDauCms } from "@/components/cms/DauCms";
@@ -30,6 +31,7 @@ type MaQuanHe = (typeof QUAN_HE)[number]["ma"];
 
 export function HopDoi() {
   const hoSo = useHoSo();
+  const quyUoc = useQuyUocDD();   // TS-V3: cùng cách cộng Đường đời đã chọn ở /than-so
   const router = useRouter();
   const [ten, setTen] = useState("");
   const [ngay, setNgay] = useState("");
@@ -67,7 +69,7 @@ export function HopDoi() {
       setKq(await postJson<KetQuaHopDoiT>("/api/thanso/hop-doi", {
         a: { ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam },
         b: { ...(ten.trim() ? { ho_ten: [ten.trim()] } : {}), ngay: d, thang: m, nam: y },
-        quan_he: quanHe,
+        quan_he: quanHe, quy_uoc_duong_doi: quyUoc,
       }));
       ghi("compatibility_created", { kind: "truc_tiep", quan_he: quanHe });
       batDauDoc("hopdoi", { quan_he: quanHe });

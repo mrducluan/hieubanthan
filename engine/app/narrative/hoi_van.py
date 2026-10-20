@@ -123,8 +123,9 @@ def _doan(m: dict) -> tuple[str, str | None]:
         return (f"{dau}. {n.get('xu_huong', '')}" + (f" Mặt tối cần để ý: {n['mat_toi']}" if n.get("mat_toi") else ""),
                 n.get("cau_tu_soi"))
     if l == "tong_hop":
-        return (f"Điểm chung của ba phái: số {m['goc']} lặp lại {m['lan']} lần ({'; '.join(m['vi_tri'])}) — "
-                f"{m['tu_khoa'] or ''}. Mặt tối cần để ý: {m['mat_toi'] or ''}", m.get("phan_chung"))
+        toi = (m["mat_toi"] or "").rstrip(".")
+        return (f"Điểm chung giữa các phái: số {m['goc']} gặp ở {m['lan']} nguồn tính độc lập ({'; '.join(m['vi_tri'])}) — "
+                f"{m['tu_khoa'] or ''}." + (f" Mặt tối cần để ý: {toi}." if toi else ""), m.get("phan_chung"))
     return "", None
 
 
@@ -138,7 +139,7 @@ def van_template(goi: dict) -> str:
         d, s = _doan(m)
         if d:
             doan.append(d)
-        if s and len(soi) < 2:
+        if s and len(soi) < 2 and s not in soi:
             soi.append(s)
     if soi:
         doan.append("Câu hỏi để tự soi: " + " ".join(soi))
@@ -225,8 +226,8 @@ def _goi_chaldea(goi: dict, pl: dict, nguoi: dict) -> dict:
     return {**goi, "muc": moi, "so_trong_goi": sorted({x["goc"] for x in moi} | {x["kep"] for x in moi if x["kep"]})}
 
 
-LUU_Y_KABBALAH = ("Phái Qabalah không có phần này (năm/tháng/ngày cá nhân, đỉnh cao, biểu đồ ngày sinh, nợ nghiệp, "
-                  "hợp đôi theo cặp số), nên câu trả lời trên theo phái Pythagoras.")
+LUU_Y_KABBALAH = "Câu này phái Qabalah không có cách đọc riêng, nên câu trả lời trên theo phái Pythagoras."
+_KABBALAH_KW = re.compile(r"sephirah|sephirot|kabbalah|qabalah|cay su song|con duong cua ten|chu hebrew")
 
 
 def _la_cau_mo_ta(goi: dict, pl: dict) -> bool:
@@ -239,7 +240,10 @@ def _goi_kabbalah(goi: dict, pl: dict, nguoi: dict) -> dict:
     """TS-V3: câu "mô tả con người" → con số Qabalah (Sephirah ngày sinh, con đường tên); còn lại → Pythagoras + ghi rõ."""
     if not goi["muc"] or goi["can_them"] or pl.get("doi_tuong") != "ban_than":
         return goi
-    if not _la_cau_mo_ta(goi, pl):
+    # Chỉ câu tự mô tả (lĩnh vực bản thân) hoặc câu hỏi thẳng về Qabalah mới đổi sang số Qabalah — nghề, tình, tiền,
+    # thời điểm… phái này không có cách đọc riêng, giữ Pythagoras (QC TS-V3).
+    hoi_thang = bool(_KABBALAH_KW.search(pl.get("cau_chuan_hoa", "")))
+    if not hoi_thang and not (_la_cau_mo_ta(goi, pl) and pl.get("linh_vuc") == "ban_than"):
         return {**goi, "luu_y": " ".join(x for x in (goi.get("luu_y"), LUU_Y_KABBALAH) if x)}
     ten = nguoi["ho_ten"] if isinstance(nguoi["ho_ten"], list) else [nguoi["ho_ten"]]
     doc = _kabbalah.luan_kabbalah(ten, nguoi["ngay"], nguoi["thang"], nguoi["nam"], nguoi.get("quy_uoc") or "tong_het")
@@ -276,6 +280,8 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
         goi = _goi_chaldea(goi, pl, nguoi)
     elif phai == "kabbalah":
         goi = _goi_kabbalah(goi, pl, nguoi)
+        if not (goi["muc"] and goi["muc"][0]["loai"] == "kabbalah"):   # giữ Pythagoras → vẫn theo đúng chỉ số thẻ
+            goi = noi_dau.bo_sung_goi(goi, cau_hoi, nguoi, ngay_xem)
     else:
         # TS-NOIDAU: câu bấm từ bảng → đúng chỉ số của thẻ (thẻ tính theo Pitago; phái Chaldea giữ lời đáp số Chaldea).
         goi = noi_dau.bo_sung_goi(goi, cau_hoi, nguoi, ngay_xem)

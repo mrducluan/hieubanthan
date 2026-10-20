@@ -14,6 +14,7 @@ interface TuongTac { quan_he: string; ten_quan_he: string; nhom: string; ten_nho
   cac_so: { phai: string; ten: string; so: number; goc: number }[]; cach_doc: string; goi_y: string }
 interface BaiTongHop {
   phai: "tong_hop"; so_noi_bat: SoNoiBat[]; tuong_tac: TuongTac[]; cach_doc: string; luu_y: string; nguon: string;
+  ghi_chu_duong_doi?: string;
   ho_so: Record<string, Record<string, { so: number; goc: number }>>;
 }
 
@@ -31,14 +32,14 @@ export function TongHopDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: QuyUocDD }) {
       <section aria-labelledby="th-noi-bat">
         <TieuDeMuc id="th-noi-bat" nho="Tổng hợp ba phái" lon="Điều nhiều cách tính cùng chỉ ra" mo_ta={kq.cach_doc} />
         {kq.so_noi_bat.length === 0 ? (
-          <p className="text-sm text-fg-muted">Ba phái không trùng con số nào — mỗi phái là một góc nhìn riêng, đọc từng phái để đối chiếu.</p>
+          <p className="text-sm text-fg-muted">Các phái không trùng con số nào ở những phép tính độc lập — mỗi phái là một góc nhìn riêng, đọc từng phái để đối chiếu.</p>
         ) : (
           <div className="grid gap-4 md:grid-cols-2">
             {kq.so_noi_bat.slice(0, 4).map((s) => (
               <Card key={s.goc} data-testid={`noi-bat-${s.goc}`}>
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="text-xl">Số {s.goc}</h3>
-                  <span className="text-xs text-gold">lặp {s.lan} lần · {s.phai.length} phái</span>
+                  <span className="text-xs text-gold">{s.lan} nguồn tính độc lập</span>
                 </div>
                 {s.tu_khoa && <p className="mt-1 text-sm">{s.tu_khoa}</p>}
                 <ul className="mt-2 flex flex-wrap gap-1.5">{s.vi_tri.map((v) => <li key={v} className="rounded-full bg-gold/10 px-2 py-0.5 text-xs">{v}</li>)}</ul>
@@ -50,7 +51,7 @@ export function TongHopDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: QuyUocDD }) {
         )}
       </section>
       <section aria-labelledby="th-tuong-tac">
-        <TieuDeMuc id="th-tuong-tac" nho="Đồ thị liên phái" lon="Các phái gặp nhau và khác nhau ở đâu" />
+        <TieuDeMuc id="th-tuong-tac" nho="Đồ thị liên phái" lon="Các phái gặp nhau và khác nhau ở đâu" mo_ta={kq.ghi_chu_duong_doi} />
         <div className="grid gap-3 md:grid-cols-2">
           {kq.tuong_tac.map((t) => (
             <article key={`${t.quan_he}-${t.nhom}`} data-testid={`tuong-tac-${t.nhom}`} className={cn("rounded-xl border p-4", MAU[t.quan_he])}>

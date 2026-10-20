@@ -1,7 +1,8 @@
 -- TS-V3 tầng HỌC ("bộ não thứ hai", 2026-10-20): vòng tự cải thiện + ký ức người dùng — port 06/09 của bản SQL V3,
 -- đã sửa lỗi và theo quy tắc riêng tư mới (CLAUDE.md, TS-V3):
---   * thanso_phan_hoi: góp ý đúng/chưa đúng cho từng câu trả lời. CHỈ lưu CHỮ KÝ SỐ (các con số đã tính), mã câu,
---     phái, ghi chú đã lọc — KHÔNG họ tên, KHÔNG ngày sinh, KHÔNG user_id. Hết hạn sau 365 ngày.
+--   * thanso_phan_hoi: góp ý đúng/chưa đúng cho từng câu trả lời. CHỈ lưu CHỮ KÝ SỐ (các con số RÚT GỌN của phái được
+--     góp ý — nhiều người có chung; danh sách khoá cố định, không ngày sinh, không tổng thô), mã câu, phái, ghi chú đã
+--     lọc — KHÔNG họ tên, KHÔNG ngày sinh, KHÔNG user_id. Hết hạn sau 365 ngày, xoá thật bằng don_du_lieu_hoc() (cron).
 --   * thanso_cum_bat_thuong: gom góp ý "chưa đúng" theo chữ ký → đủ 5 lần thì chuyển "chờ duyệt" (KHÔNG tự bật luật —
 --     bản V3 báo AUTO_PROMOTED mà không làm gì; ở đây người duyệt quyết, luật được sửa trong KB qua PR).
 --   * ky_uc_nguoi_dung: điều người dùng CHỦ ĐỘNG bấm ghi nhớ (mã câu băn khoăn + ghi chú ngắn), RLS chủ sở hữu, xoá
@@ -51,6 +52,7 @@ create table if not exists ky_uc_nguoi_dung (
     het_han  timestamptz not null default now() + interval '180 days'
 );
 create index if not exists ky_uc_nguoi_dung_user on ky_uc_nguoi_dung (user_id, tao_luc desc);
+create unique index if not exists ky_uc_nguoi_dung_mot_cau on ky_uc_nguoi_dung (user_id, ma_cau) where ma_cau is not null;
 alter table ky_uc_nguoi_dung enable row level security;
 drop policy if exists ky_uc_chu_xem on ky_uc_nguoi_dung;
 create policy ky_uc_chu_xem on ky_uc_nguoi_dung for select to authenticated
@@ -65,10 +67,14 @@ revoke all on ky_uc_nguoi_dung from anon;
 revoke update, truncate on ky_uc_nguoi_dung from authenticated;
 grant select, insert, delete on ky_uc_nguoi_dung to authenticated;
 
--- Tối đa 50 ký ức mỗi người: mục cũ nhất bị thay khi thêm mục mới.
+-- Máy chủ đặt chủ sở hữu + mốc thời gian (người dùng không tự kéo dài hạn); dọn mục hết hạn; tối đa 50 mục còn hạn.
 create or replace function ky_uc_gioi_han() returns trigger
     language plpgsql security definer set search_path = '' as $$
 begin
+    new.user_id := coalesce((select auth.uid()), new.user_id);
+    new.tao_luc := now();
+    new.het_han := now() + interval '180 days';
+    delete from public.ky_uc_nguoi_dung where user_id = new.user_id and het_han <= now();
     delete from public.ky_uc_nguoi_dung where id in (
         select id from public.ky_uc_nguoi_dung where user_id = new.user_id order by tao_luc desc offset 49);
     return new;
@@ -77,15 +83,19 @@ $$;
 drop trigger if exists ky_uc_gioi_han on ky_uc_nguoi_dung;
 create trigger ky_uc_gioi_han before insert on ky_uc_nguoi_dung for each row execute function ky_uc_gioi_han();
 
--- Chữ ký số chỉ được chứa đúng các khoá con số đã biết, giá trị là số nguyên 0–999 (không lọt chữ/tên/ngày sinh).
+-- Chữ ký số: CHỈ đúng các khoá đã biết của từng phái, giá trị số nguyên trong khoảng của khoá (không lọt chữ, tên,
+-- ngày sinh hay tổng thô). Rỗng / NULL → không hợp lệ.
 create or replace function thanso_chu_ky_hop_le(p jsonb) returns boolean
     language sql immutable set search_path = '' as $$
-    select jsonb_typeof(p) = 'object' and pg_column_size(p) <= 1024 and not exists (
+    select coalesce(jsonb_typeof(p) = 'object' and p <> '{}'::jsonb and pg_column_size(p) <= 512 and not exists (
         select 1 from jsonb_each(p) phai(k, v)
-        where k not in ('pitago', 'chaldea', 'kabbalah') or jsonb_typeof(v) <> 'object' or exists (
+        where jsonb_typeof(v) <> 'object' or v = '{}'::jsonb or exists (
             select 1 from jsonb_each(v) so(k2, v2)
-            where k2 !~ '^[a-z_]{3,25}$' or jsonb_typeof(v2) <> 'number'
-               or (v2::text)::numeric not between 0 and 999 or (v2::text) ~ '\.'))
+            where jsonb_typeof(v2) <> 'number' or (v2::text) !~ '^[0-9]{1,2}$' or not (
+                (k = 'pitago' and k2 in ('duong_doi', 'su_menh', 'linh_hon', 'nhan_cach') and (v2::text)::int between 1 and 33)
+             or (k = 'chaldea' and k2 in ('so_ten', 'ten_goi', 'linh_hon', 'nhan_cach') and (v2::text)::int between 0 and 9)
+             or (k = 'kabbalah' and k2 in ('con_duong_ten', 'sephirah_ten', 'sephirah_ngay_sinh')
+                 and (v2::text)::int between 0 and 22)))), false)
 $$;
 
 -- Nhận một góp ý (web máy chủ gọi bằng service role sau khi lọc ghi chú). Trả {ok, cum, trang_thai}.
@@ -109,8 +119,8 @@ begin
     if (p ->> 'dung')::boolean then return jsonb_build_object('ok', true, 'cum', null); end if;
     -- Chữ ký cụm: phái + mã câu (hoặc lĩnh vực) + số chính của phái đó — không dùng số tên để cụm không quá vụn.
     v_mau := concat_ws('|', p ->> 'phai', coalesce(p ->> 'ma_cau', p ->> 'linh_vuc', 'chung'),
-                       'dd' || coalesce(v_chu_ky -> 'pitago' ->> 'duong_doi', v_chu_ky -> 'chaldea' ->> 'duong_doi', '-'),
-                       'k' || coalesce(v_chu_ky -> 'kabbalah' ->> 'sephirah_ngay_sinh', '-'));
+                       coalesce('dd' || (v_chu_ky -> 'pitago' ->> 'duong_doi'), 'ten' || (v_chu_ky -> 'chaldea' ->> 'so_ten'),
+                                'sep' || (v_chu_ky -> 'kabbalah' ->> 'sephirah_ngay_sinh'), '-'));
     insert into public.thanso_cum_bat_thuong as c (chu_ky_mau, phai, linh_vuc, ma_cau, dieu_kien, so_lan, mau_ghi_chu)
     values (v_mau, p ->> 'phai', p ->> 'linh_vuc', p ->> 'ma_cau', v_chu_ky, 1,
             case when v_ghi is null then '{}' else array[v_ghi] end)
@@ -121,6 +131,23 @@ begin
         cap_nhat = now()
     returning id, trang_thai into v_cum;
     return jsonb_build_object('ok', true, 'cum', v_cum.id, 'trang_thai', v_cum.trang_thai);
+end
+$$;
+
+-- Xoá dữ liệu học hết hạn (cron hằng ngày qua web máy chủ, service role): góp ý > 12 tháng, ký ức > 180 ngày, mẫu ghi
+-- chú của cụm không cập nhật > 12 tháng. Trả số dòng đã xoá / làm sạch.
+create or replace function don_du_lieu_hoc() returns jsonb
+    language plpgsql security definer set search_path = '' as $$
+declare a int; b int; c int;
+begin
+    delete from public.thanso_phan_hoi where het_han < now();
+    get diagnostics a = row_count;
+    delete from public.ky_uc_nguoi_dung where het_han < now();
+    get diagnostics b = row_count;
+    update public.thanso_cum_bat_thuong set mau_ghi_chu = '{}'
+        where mau_ghi_chu <> '{}' and cap_nhat < now() - interval '365 days';
+    get diagnostics c = row_count;
+    return jsonb_build_object('phan_hoi', a, 'ky_uc', b, 'cum_lam_sach', c);
 end
 $$;
 
@@ -158,7 +185,7 @@ end
 $$;
 
 revoke all on function thanso_chu_ky_hop_le(jsonb), gui_phan_hoi_thanso(jsonb), qt_cum_bat_thuong(text),
-    qt_cap_nhat_cum(bigint, text, text), ky_uc_gioi_han() from public, anon, authenticated;
-grant execute on function gui_phan_hoi_thanso(jsonb) to service_role;
+    qt_cap_nhat_cum(bigint, text, text), ky_uc_gioi_han(), don_du_lieu_hoc() from public, anon, authenticated;
+grant execute on function gui_phan_hoi_thanso(jsonb), don_du_lieu_hoc() to service_role;
 grant execute on function qt_cum_bat_thuong(text), qt_cap_nhat_cum(bigint, text, text) to authenticated;
 revoke all on thanso_phan_hoi, thanso_cum_bat_thuong from anon, authenticated;

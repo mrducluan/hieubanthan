@@ -41,10 +41,11 @@ export function GopYCauTraLoi({ hoSo, nc }: { hoSo: HoSo; nc: NguCanhGopY }) {
     return (
       <div className="space-y-2" data-testid="gop-y-ghi-chu">
         <Textarea rows={2} maxLength={300} value={ghiChu} onChange={(e) => setGhiChu(e.target.value)}
-          aria-label="Chưa đúng ở đâu?" placeholder="Chưa đúng ở đâu? (không cần ghi tên, số điện thoại)" />
+          aria-label="Chưa đúng ở đâu?" placeholder="Chưa đúng ở đâu? Đừng ghi tên, số điện thoại, ngày sinh, sức khoẻ hay tôn giáo." />
         <label className="flex items-start gap-2 text-xs text-fg-muted">
           <input type="checkbox" checked={dongY} onChange={(e) => setDongY(e.target.checked)} className="mt-0.5" />
-          Đồng ý dùng ghi chú này để cải thiện hệ thống (không kèm tên, ngày sinh; tự xoá sau 12 tháng).
+          Đồng ý dùng ghi chú này để cải thiện câu trả lời (lưu kèm các con số rút gọn, không kèm tên, ngày sinh hay tài
+          khoản; email, số điện thoại, ngày tháng tự bị xoá; tự xoá sau 12 tháng).
         </label>
         <div className="flex gap-2">
           <Button size="sm" variant="secondary" onClick={() => gui(false, true)}>Gửi góp ý</Button>
@@ -58,6 +59,7 @@ export function GopYCauTraLoi({ hoSo, nc }: { hoSo: HoSo; nc: NguCanhGopY }) {
       <span className="text-xs text-fg-muted">Câu trả lời này có đúng với bạn không?</span>
       <Button size="sm" variant="outline" className="h-8" onClick={() => gui(true)}>Đúng</Button>
       <Button size="sm" variant="outline" className="h-8" onClick={() => setBuoc("ghi_chu")}>Chưa đúng</Button>
+      <span className="w-full text-[11px] text-fg-faint">Góp ý lưu các con số rút gọn của bạn (nhiều người có chung), không lưu tên hay ngày sinh.</span>
     </div>
   );
 }

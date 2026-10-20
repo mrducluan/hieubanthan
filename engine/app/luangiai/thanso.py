@@ -210,7 +210,7 @@ def _luan_mot_vi_tri(vi_tri: str, gia_tri_chinh: int,
 
 
 QUY_UOC_DD = {
-    "tong_het": "Cộng mọi chữ số của ngày, tháng, năm sinh rồi rút gọn — cách phổ biến ở sách và trang thần số Việt Nam.",
+    "tong_het": "Cộng mọi chữ số của ngày, tháng, năm sinh rồi rút gọn — cách nhiều sách và trang thần số ở Việt Nam dùng.",
     "tung_phan": "Rút gọn riêng ngày, tháng, năm (giữ số cái 11/22/33) rồi cộng lại — cách hay gặp ở sách phương Tây "
                  "(như Hans Decoz).",
 }

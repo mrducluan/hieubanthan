@@ -67,11 +67,11 @@ def _cach_tinh(ma: str, so: dict, ho_ten: str, ten_goi: str, ngay: int, thang: i
     return f"{'Nguyên âm' if ma == 'linh_hon' else 'Phụ âm'} của họ tên {duoi}"
 
 
-def luan_chaldea(ho_ten: list[str], ngay: int, thang: int, nam: int) -> dict:
+def luan_chaldea(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: str = "tong_het") -> dict:
     ten_chinh = ho_ten[0]
     ten_goi = ho_ten[1] if len(ho_ten) > 1 else None
     so = ch.tinh(ten_chinh, ngay, thang, nam, ten_goi)
-    pitago = thanso.chi_so_xac_dinh(ten_chinh, ngay, thang, nam)
+    pitago = thanso.chi_so_xac_dinh(ten_chinh, ngay, thang, nam, quy_uoc)
     cac_so = []
     for ma, ten, mo_ta in VI_TRI:
         s = so[ma]

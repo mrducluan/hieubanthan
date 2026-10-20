@@ -582,6 +582,9 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
 
     so_nhac = dict(pl["so_nhac"])
     cs_ban = _chi_so_nguoi(nguoi, ngay_xem)
+    qu = {"quy_uoc": nguoi.get("quy_uoc") or "tong_het"}      # TS-V3: người kia tính cùng cách cộng Đường đời
+    if nguoi_kia:
+        nguoi_kia = {**nguoi_kia, **qu}
 
     # --- Hai người
     if lv == "hop_doi":
@@ -592,15 +595,15 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
                 a, b = {"linh_hon": pl["cap_nhac"][0]}, {"linh_hon": pl["cap_nhac"][1]}
         elif len(pl["ngay_nhac"]) >= 2:
             (d1, m1, y1), (d2, m2, y2) = pl["ngay_nhac"][:2]
-            a = _chi_so_nguoi({"ngay": d1, "thang": m1, "nam": y1}, ngay_xem)
-            b = _chi_so_nguoi({"ngay": d2, "thang": m2, "nam": y2}, ngay_xem)
+            a = _chi_so_nguoi({**qu, "ngay": d1, "thang": m1, "nam": y1}, ngay_xem)
+            b = _chi_so_nguoi({**qu, "ngay": d2, "thang": m2, "nam": y2}, ngay_xem)
         elif nguoi_kia or pl["ngay_nhac"]:
             a = cs_ban
             if nguoi_kia:
                 b = _chi_so_nguoi(nguoi_kia, ngay_xem)
             else:
                 d, m, y = pl["ngay_nhac"][0]
-                b = _chi_so_nguoi({"ngay": d, "thang": m, "nam": y}, ngay_xem)
+                b = _chi_so_nguoi({**qu, "ngay": d, "thang": m, "nam": y}, ngay_xem)
         if a is None:
             goi["can_them"] = ["nguoi_kia"]
             goi["mau"] = kb.mau("can_nguoi_kia")
@@ -646,7 +649,7 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
             cs = _chi_so_nguoi(nguoi_kia, ngay_xem)
         elif pl["ngay_nhac"]:
             d, m, y = pl["ngay_nhac"][0]
-            cs = _chi_so_nguoi({"ngay": d, "thang": m, "nam": y}, ngay_xem)
+            cs = _chi_so_nguoi({**qu, "ngay": d, "thang": m, "nam": y}, ngay_xem)
         elif so_nhac:
             cs = {}
         elif re.search(r"dat ten|ten con|sinh con|nam nao|ngay nao|ngay mo|ten dem|hai ten", t):

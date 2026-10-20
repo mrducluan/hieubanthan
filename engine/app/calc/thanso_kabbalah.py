@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 """Thần số Qabalah Hermetic (phương Tây) — TS-V3, phái thứ ba.
 
-Tên tiếng Việt (bỏ dấu, Đ = D) được chuyển sang chữ Hebrew theo bảng tương ứng Latin→Hebrew của truyền thống
-Golden Dawn (A. Crowley, *777*, 1909 — phạm vi công cộng), cộng giá trị chữ Hebrew chuẩn (mispar hechrechi) thành
-gematria. Từ đó:
-  - Con đường của tên: rút gọn (cộng chữ số) tới khi ≤ 22 → chữ Hebrew thứ n = một trong 22 con đường nối các
-    Sephirah trên Cây Sự sống (Sefer Yetzirah).
+Tên tiếng Việt (bỏ dấu, Đ = D) được chuyển sang chữ Hebrew theo bảng tương ứng Latin→Hebrew DỰA TRÊN truyền thống
+Golden Dawn (A. Crowley, *777*, 1909 — phạm vi công cộng; 777 có A B G D H/E V/U Z Ch T I/Y K L M N S O P Tz Q R Sh Th),
+sản phẩm BỔ SUNG C, F, J, W, X và chữ ghép tiếng Việt (KH; H câm trong NH, GH, NGH), rồi cộng giá trị chữ Hebrew chuẩn
+(mispar hechrechi) thành gematria. Từ đó (rút gọn về con đường/Sephirah là quy ước thần số hiện đại, không phải thực
+hành của Golden Dawn):
+  - Con đường của tên: rút gọn (cộng chữ số) tới khi ≤ 22 → chữ Hebrew thứ n. Trên Cây Sự sống chữ này là con đường
+    số n + 10 theo cách đánh số Golden Dawn (Aleph = 11 … Tav = 32) — trả cả hai để người tra sách không nhầm.
   - Sephirah của tên và của ngày sinh: rút gọn tới khi ≤ 10 → một trong 10 Sephirah (10 = Malkuth).
 Đây là bản PHỎNG THEO cho tên không viết bằng chữ Hebrew — Kabbalah Do Thái giáo chỉ làm gematria trên chữ Hebrew.
 Bảng chuyển chữ có biến thể (O, S, T, C) → trả thêm `con_duong_khac` để nói thật độ nhạy, như `thanso.do_nhay`.
@@ -26,7 +28,8 @@ GIA_TRI = {"Aleph": 1, "Beth": 2, "Gimel": 3, "Daleth": 4, "He": 5, "Vav": 6, "Z
            "Tzaddi": 90, "Qoph": 100, "Resh": 200, "Shin": 300, "Tav": 400}
 
 # Chữ ghép xét trước chữ đơn (theo thứ tự trong danh sách).
-CHU_GHEP = {"TZ": "Tzaddi", "CH": "Cheth", "KH": "Cheth", "SH": "Shin", "TH": "Tav", "PH": "Pe"}
+CHU_GHEP = {"TZ": "Tzaddi", "CH": "Cheth", "KH": "Cheth", "SH": "Shin", "TH": "Tav", "PH": "Pe",
+            "NH": "Nun", "GH": "Gimel"}   # tiếng Việt: H câm trong NH, GH (NGH = N + GH)
 CHU_DON = {"A": "Aleph", "B": "Beth", "C": "Kaph", "D": "Daleth", "E": "He", "F": "Pe", "G": "Gimel", "H": "He",
            "I": "Yod", "J": "Yod", "K": "Kaph", "L": "Lamed", "M": "Mem", "N": "Nun", "O": "Ayin", "P": "Pe",
            "Q": "Qoph", "R": "Resh", "S": "Samekh", "T": "Teth", "U": "Vav", "V": "Vav", "W": "Vav", "X": "Samekh",
@@ -100,6 +103,7 @@ def tinh(ho_ten: str, ngay: int, thang: int, nam: int) -> dict:
         "tong": tong,
         "con_duong": cd,
         "chu_con_duong": CHU_HEBREW[cd - 1] if cd else None,
+        "so_duong_cay": cd + 10 if cd else None,
         "sephirah_ten": ve_sephirah(tong) if tong else 0,
         "tong_ngay_sinh": tong_ngay,
         "sephirah_ngay_sinh": ve_sephirah(tong_ngay),

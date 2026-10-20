@@ -53,6 +53,7 @@ def test_luan_kabbalah():
     assert ma["con_duong_ten"]["so"] == 7 and ma["con_duong_ten"]["nghia"]["ten"] == "Zayin"
     assert ma["sephirah_ngay_sinh"]["so"] == 6 and ma["sephirah_ngay_sinh"]["nghia"]["ten"] == "Tiferet"
     assert ma["con_duong_ten"]["khac"] == [6]
+    assert ma["con_duong_ten"]["so_duong_cay"] == 17 and "con đường số 17" in ma["con_duong_ten"]["mo_ta"]
     assert kq["school_id"] == "kabbalah_hermetic"
     assert "Do Thái" in kq["gioi_thieu"]["luu_y"]
 

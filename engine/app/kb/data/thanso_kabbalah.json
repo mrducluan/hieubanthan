@@ -2,7 +2,7 @@
  "_nguon": "TS-V3 Qabalah Hermetic: 22 chữ Hebrew = 22 con đường (Sefer Yetzirah; gán con đường theo truyền thống Golden Dawn), 10 Sephirah trên Cây Sự sống. Lời diễn giải trung tính, để tự soi.",
  "source": {
   "id": "nhap_ai_2026",
-  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo Sefer Yetzirah và truyền thống Qabalah Hermetic (Golden Dawn; Crowley, 777, 1909)",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo Sefer Yetzirah và truyền thống Qabalah Hermetic (dựa trên Golden Dawn; Crowley, 777, 1909)",
   "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
  },
  "source_id": "nhap_ai_2026",
@@ -10,9 +10,9 @@
  "trang_thai": "nhap_ai",
  "gioi_thieu": {
   "ten_phai": "Qabalah Hermetic (Kabbalah phương Tây)",
-  "tom_tat": "Phái này chuyển tên bạn sang chữ Hebrew theo bảng tương ứng của truyền thống Hermetic, cộng giá trị chữ (gematria) rồi đặt kết quả lên Cây Sự sống: 22 con đường (22 chữ Hebrew) và 10 Sephirah.",
+  "tom_tat": "Phái này chuyển tên bạn sang chữ Hebrew theo bảng tương ứng của truyền thống Hermetic (dựa trên Golden Dawn, bổ sung cho chữ Việt), cộng giá trị chữ (gematria) rồi đặt kết quả lên Cây Sự sống: 22 con đường (22 chữ Hebrew) và 10 Sephirah. Việc rút gọn tổng về một con đường hay một Sephirah là quy ước thần số hiện đại.",
   "cach_doc": "Con đường của tên nói về cách bạn đi qua đời — chất liệu, bài học. Sephirah của ngày sinh là \"trạm\" bạn hay trở về; Sephirah của tên là sắc thái bạn thể hiện ra ngoài.",
-  "luu_y": "Đây là bản phỏng theo cho tên không viết bằng chữ Hebrew, thuộc truyền thống huyền học phương Tây — khác Kabbalah Do Thái giáo (chỉ làm gematria trên chữ Hebrew, gắn với thực hành tôn giáo). Bảng chuyển chữ có biến thể, nên con đường của tên có thể đổi; khi đó trang ghi rõ các khả năng khác."
+  "luu_y": "Đây là bản phỏng theo của huyền học phương Tây cho tên không viết bằng chữ Hebrew — khác Kabbalah Do Thái giáo (chỉ làm gematria trên chữ Hebrew, gắn với thực hành tôn giáo; chữ Hebrew là chữ thiêng trong Do Thái giáo). Bảng chuyển chữ có biến thể, nên con đường của tên có thể đổi; khi đó trang ghi rõ các khả năng khác. Chữ \"Thị\" (TH = Tav 400) thường chiếm phần lớn tổng ở tên nữ — vì vậy hãy đọc thêm các khả năng khác."
  },
  "chu": {
   "1": {
@@ -24,7 +24,8 @@
    "gia_tri": 1,
    "xu_huong": "Năng lượng khởi đầu, tò mò, dám bước vào điều chưa biết; thường được đọc là tinh thần người mở đường không mang theo định kiến.",
    "mat_toi": "Dễ bốc đồng, bắt đầu nhiều mà thiếu nền để đi xa.",
-   "cau_tu_soi": "Điều mới nào bạn đang muốn thử mà chưa dám bước bước đầu tiên?"
+   "cau_tu_soi": "Điều mới nào bạn đang muốn thử mà chưa dám bước bước đầu tiên?",
+   "so_duong_cay": 11
   },
   "2": {
    "ten": "Beth",
@@ -35,7 +36,8 @@
    "gia_tri": 2,
    "xu_huong": "Biến ý tưởng thành hình hài, khéo dùng lời và công cụ; coi trọng việc xây một chỗ đứng rõ ràng.",
    "mat_toi": "Dễ ôm quá nhiều việc trong tay, nói hay hơn làm.",
-   "cau_tu_soi": "Bạn đang xây \"ngôi nhà\" nào cho mình — và đã đặt viên gạch nào tuần này?"
+   "cau_tu_soi": "Bạn đang xây \"ngôi nhà\" nào cho mình — và đã đặt viên gạch nào tuần này?",
+   "so_duong_cay": 12
   },
   "3": {
    "ten": "Gimel",
@@ -46,7 +48,8 @@
    "gia_tri": 3,
    "xu_huong": "Trực giác, sức bền lặng lẽ, khả năng mang điều cần thiết qua giai đoạn khô cằn.",
    "mat_toi": "Dễ thu mình, giữ cảm xúc cho riêng mình quá lâu.",
-   "cau_tu_soi": "Bạn tin vào trực giác của mình ở chuyện gì, và bỏ qua nó ở chuyện gì?"
+   "cau_tu_soi": "Bạn tin vào trực giác của mình ở chuyện gì, và bỏ qua nó ở chuyện gì?",
+   "so_duong_cay": 13
   },
   "4": {
    "ten": "Daleth",
@@ -57,7 +60,8 @@
    "gia_tri": 4,
    "xu_huong": "Nuôi dưỡng, sinh sôi, mở cửa cho người khác bước vào; trân trọng cái đẹp và sự đủ đầy.",
    "mat_toi": "Dễ chiều chuộng quá mức, khó đặt giới hạn.",
-   "cau_tu_soi": "Cánh cửa nào bạn đang để mở cho người khác mà quên để mở cho chính mình?"
+   "cau_tu_soi": "Cánh cửa nào bạn đang để mở cho người khác mà quên để mở cho chính mình?",
+   "so_duong_cay": 14
   },
   "5": {
    "ten": "He",
@@ -68,7 +72,8 @@
    "gia_tri": 5,
    "xu_huong": "Nhìn xa, muốn tổ chức và dẫn dắt; mang năng lượng của người đặt khung và chịu trách nhiệm.",
    "mat_toi": "Dễ cứng nhắc, muốn mọi thứ theo ý mình.",
-   "cau_tu_soi": "Bạn đang kiểm soát điều gì vì sợ nó đổ vỡ nếu buông ra?"
+   "cau_tu_soi": "Bạn đang kiểm soát điều gì vì sợ nó đổ vỡ nếu buông ra?",
+   "so_duong_cay": 15
   },
   "6": {
    "ten": "Vav",
@@ -79,7 +84,8 @@
    "gia_tri": 6,
    "xu_huong": "Kết nối, truyền dạy, giữ gìn giá trị bền lâu; người làm cầu nối giữa các thế hệ, các nhóm.",
    "mat_toi": "Dễ bám nếp cũ, ngại thay đổi.",
-   "cau_tu_soi": "Giá trị nào bạn muốn truyền lại, và giá trị nào đã đến lúc nhìn lại?"
+   "cau_tu_soi": "Giá trị nào bạn muốn truyền lại, và giá trị nào đã đến lúc nhìn lại?",
+   "so_duong_cay": 16
   },
   "7": {
    "ten": "Zayin",
@@ -90,7 +96,8 @@
    "gia_tri": 7,
    "xu_huong": "Lựa chọn, phân định rõ ràng, cuộc trò chuyện hai chiều; thường được đọc là bài học chọn giữa hai con đường.",
    "mat_toi": "Dễ do dự lâu hoặc cắt đứt quá nhanh.",
-   "cau_tu_soi": "Lựa chọn nào bạn đang hoãn lại, và cái giá của việc hoãn là gì?"
+   "cau_tu_soi": "Lựa chọn nào bạn đang hoãn lại, và cái giá của việc hoãn là gì?",
+   "so_duong_cay": 17
   },
   "8": {
    "ten": "Cheth",
@@ -101,7 +108,8 @@
    "gia_tri": 8,
    "xu_huong": "Bảo vệ, che chở, ý chí giữ vững những gì mình quý; tiến lên mà vẫn giữ được nhà.",
    "mat_toi": "Dễ dựng hàng rào quá cao, khó cho người khác đến gần.",
-   "cau_tu_soi": "Hàng rào nào giúp bạn an toàn, hàng rào nào đang làm bạn cô đơn?"
+   "cau_tu_soi": "Hàng rào nào giúp bạn an toàn, hàng rào nào đang làm bạn cô đơn?",
+   "so_duong_cay": 18
   },
   "9": {
    "ten": "Teth",
@@ -112,7 +120,8 @@
    "gia_tri": 9,
    "xu_huong": "Sức mạnh mềm, lòng can đảm điềm tĩnh, biết dẫn năng lượng mạnh vào việc có ích.",
    "mat_toi": "Dễ tự hào quá mức hoặc nén cảm xúc đến khi bùng lên.",
-   "cau_tu_soi": "Cảm xúc mạnh nào trong bạn cần được dẫn hướng thay vì đè nén?"
+   "cau_tu_soi": "Cảm xúc mạnh nào trong bạn cần được dẫn hướng thay vì đè nén?",
+   "so_duong_cay": 19
   },
   "10": {
    "ten": "Yod",
@@ -123,7 +132,8 @@
    "gia_tri": 10,
    "xu_huong": "Chiêm nghiệm, tỉ mỉ, ánh sáng nhỏ soi đường; hợp việc cần chuyên tâm và độc lập.",
    "mat_toi": "Dễ cầu toàn, tự tách mình khỏi mọi người.",
-   "cau_tu_soi": "Bạn cần bao nhiêu thời gian một mình mỗi tuần để thấy mình cân bằng?"
+   "cau_tu_soi": "Bạn cần bao nhiêu thời gian một mình mỗi tuần để thấy mình cân bằng?",
+   "so_duong_cay": 20
   },
   "11": {
    "ten": "Kaph",
@@ -134,7 +144,8 @@
    "gia_tri": 20,
    "xu_huong": "Chu kỳ, cơ hội, sự rộng mở; đón nhận khi vận đến và buông khi vận qua.",
    "mat_toi": "Dễ trông chờ may mắn thay vì chuẩn bị.",
-   "cau_tu_soi": "Bạn đang chờ thời điểm, hay đang chuẩn bị cho thời điểm?"
+   "cau_tu_soi": "Bạn đang chờ thời điểm, hay đang chuẩn bị cho thời điểm?",
+   "so_duong_cay": 21
   },
   "12": {
    "ten": "Lamed",
@@ -145,7 +156,8 @@
    "gia_tri": 30,
    "xu_huong": "Công bằng, cân nhắc, học từ hệ quả; người giữ thăng bằng giữa lý và tình.",
    "mat_toi": "Dễ phán xét mình và người khác quá khắt khe.",
-   "cau_tu_soi": "Bạn đang đòi công bằng cho người khác, còn với chính mình thì sao?"
+   "cau_tu_soi": "Bạn đang đòi công bằng cho người khác, còn với chính mình thì sao?",
+   "so_duong_cay": 22
   },
   "13": {
    "ten": "Mem",
@@ -156,7 +168,8 @@
    "gia_tri": 40,
    "xu_huong": "Nhìn sự việc từ góc khác, kiên nhẫn chờ, sẵn sàng tạm dừng để hiểu sâu hơn.",
    "mat_toi": "Dễ hy sinh quá mức hoặc trì hoãn vì chờ \"đúng lúc\".",
-   "cau_tu_soi": "Nếu nhìn tình huống hiện tại ngược lại, bạn thấy điều gì mới?"
+   "cau_tu_soi": "Nếu nhìn tình huống hiện tại ngược lại, bạn thấy điều gì mới?",
+   "so_duong_cay": 23
   },
   "14": {
    "ten": "Nun",
@@ -167,7 +180,8 @@
    "gia_tri": 50,
    "xu_huong": "Khép một chương để mở chương khác, tái tạo sau thay đổi; sức chuyển mình sâu sắc.",
    "mat_toi": "Dễ níu giữ cái cũ, sợ những đổi thay cần thiết.",
-   "cau_tu_soi": "Điều gì trong đời bạn đã xong vai trò của nó mà bạn vẫn đang giữ?"
+   "cau_tu_soi": "Điều gì trong đời bạn đã xong vai trò của nó mà bạn vẫn đang giữ?",
+   "so_duong_cay": 24
   },
   "15": {
    "ten": "Samekh",
@@ -178,7 +192,8 @@
    "gia_tri": 60,
    "xu_huong": "Điều hoà, pha trộn hai thái cực thành cái mới, kiên nhẫn tìm điểm vừa đủ.",
    "mat_toi": "Dễ nửa vời, không dứt khoát chọn hướng.",
-   "cau_tu_soi": "Ở đâu trong đời bạn cần \"vừa đủ\" thay vì \"thật nhiều\"?"
+   "cau_tu_soi": "Ở đâu trong đời bạn cần \"vừa đủ\" thay vì \"thật nhiều\"?",
+   "so_duong_cay": 25
   },
   "16": {
    "ten": "Ayin",
@@ -189,7 +204,8 @@
    "gia_tri": 70,
    "xu_huong": "Nhìn thẳng vào ham muốn và nỗi sợ của mình, bền bỉ với vật chất và mục tiêu dài hạn.",
    "mat_toi": "Dễ bị cuốn vào thói quen hoặc ràng buộc khó dứt.",
-   "cau_tu_soi": "Thói quen nào đang dẫn bạn đi, thay vì bạn dẫn nó?"
+   "cau_tu_soi": "Thói quen nào đang dẫn bạn đi, thay vì bạn dẫn nó?",
+   "so_duong_cay": 26
   },
   "17": {
    "ten": "Pe",
@@ -200,7 +216,8 @@
    "gia_tri": 80,
    "xu_huong": "Nói thẳng, phá vỡ lối cũ không còn hợp; năng lượng hành động và cải tổ.",
    "mat_toi": "Dễ nóng nảy, lời nói làm tổn thương người khác.",
-   "cau_tu_soi": "Điều gì bạn cần nói ra — và nói thế nào để người kia nghe được?"
+   "cau_tu_soi": "Điều gì bạn cần nói ra — và nói thế nào để người kia nghe được?",
+   "so_duong_cay": 27
   },
   "18": {
    "ten": "Tzaddi",
@@ -211,7 +228,8 @@
    "gia_tri": 90,
    "xu_huong": "Hy vọng, lý tưởng, tầm nhìn cho cộng đồng; mang tinh thần người gieo niềm tin.",
    "mat_toi": "Dễ mơ xa mà thiếu bước cụ thể.",
-   "cau_tu_soi": "Hy vọng lớn nhất của bạn cần bước nhỏ nào ngay tuần này?"
+   "cau_tu_soi": "Hy vọng lớn nhất của bạn cần bước nhỏ nào ngay tuần này?",
+   "so_duong_cay": 28
   },
   "19": {
    "ten": "Qoph",
@@ -222,7 +240,8 @@
    "gia_tri": 100,
    "xu_huong": "Giấc mơ, cảm nhận tinh tế, đi qua vùng mờ để hiểu mình sâu hơn.",
    "mat_toi": "Dễ lo âu mơ hồ, tưởng tượng điều chưa xảy ra.",
-   "cau_tu_soi": "Nỗi lo nào của bạn dựa trên điều đã xảy ra, nỗi lo nào chỉ là tưởng tượng?"
+   "cau_tu_soi": "Nỗi lo nào của bạn dựa trên điều đã xảy ra, nỗi lo nào chỉ là tưởng tượng?",
+   "so_duong_cay": 29
   },
   "20": {
    "ten": "Resh",
@@ -233,7 +252,8 @@
    "gia_tri": 200,
    "xu_huong": "Rõ ràng, ấm áp, tự tin lành mạnh; thích được làm việc dưới ánh sáng và chia sẻ niềm vui.",
    "mat_toi": "Dễ cần được công nhận, ngại bị phê bình.",
-   "cau_tu_soi": "Bạn làm việc tốt nhất khi được nhìn thấy, hay khi không ai để ý?"
+   "cau_tu_soi": "Bạn làm việc tốt nhất khi được nhìn thấy, hay khi không ai để ý?",
+   "so_duong_cay": 30
   },
   "21": {
    "ten": "Shin",
@@ -244,7 +264,8 @@
    "gia_tri": 300,
    "xu_huong": "Thức tỉnh, nhìn lại cả chặng đường để chọn cách sống mới; ngọn lửa của sự đổi mới.",
    "mat_toi": "Dễ tự trách về quá khứ.",
-   "cau_tu_soi": "Nếu được bắt đầu lại một điều từ hôm nay, bạn chọn điều gì?"
+   "cau_tu_soi": "Nếu được bắt đầu lại một điều từ hôm nay, bạn chọn điều gì?",
+   "so_duong_cay": 31
   },
   "22": {
    "ten": "Tav",
@@ -255,7 +276,8 @@
    "gia_tri": 400,
    "xu_huong": "Hoàn tất, kỷ luật, đưa việc đến đích; mang dấu ấn của người kiên trì đi trọn vòng.",
    "mat_toi": "Dễ nặng nề trách nhiệm, khó cho phép mình nghỉ.",
-   "cau_tu_soi": "Việc nào bạn đã gần xong — và cần gì để khép lại trọn vẹn?"
+   "cau_tu_soi": "Việc nào bạn đã gần xong — và cần gì để khép lại trọn vẹn?",
+   "so_duong_cay": 32
   }
  },
  "sephirot": {

@@ -22,12 +22,12 @@ THU_TU = ("duong_doi", "linh_hon", "nhan_cach", "su_menh")
 TEN_VI_TRI = {"duong_doi": "Đường đời", "linh_hon": "Linh hồn", "nhan_cach": "Nhân cách", "su_menh": "Sứ mệnh"}
 
 
-def _chi_so(nguoi: dict) -> dict[str, int]:
+def _chi_so(nguoi: dict, quy_uoc: str = "tong_het") -> dict[str, int]:
     d, m, y = nguoi["ngay"], nguoi["thang"], nguoi["nam"]
     ten = (nguoi.get("ho_ten") or [None])[0]
     if ten:
-        return thanso.chi_so_xac_dinh(ten, d, m, y)
-    return {"duong_doi": thanso.duong_doi(d, m, y)}
+        return thanso.chi_so_xac_dinh(ten, d, m, y, quy_uoc)
+    return {"duong_doi": thanso.duong_doi(d, m, y, quy_uoc)}
 
 
 QUAN_HE_MAC_DINH = "nguoi_yeu"
@@ -39,9 +39,10 @@ def _nhip(n: dict, nam: int) -> dict:
     return {"so": so, "chu_de": ng.get("chu_de"), "y_nghia": ng.get("y_nghia")}
 
 
-def luan_hop_doi(a: dict, b: dict, quan_he: str = QUAN_HE_MAC_DINH, nam_xem: int | None = None) -> dict:
-    """Từ ngày sinh (+ tên nếu có) của hai người."""
-    kq = luan_hop_doi_tu_chi_so(_chi_so(a), _chi_so(b), quan_he)
+def luan_hop_doi(a: dict, b: dict, quan_he: str = QUAN_HE_MAC_DINH, nam_xem: int | None = None,
+                 quy_uoc: str = "tong_het") -> dict:
+    """Từ ngày sinh (+ tên nếu có) của hai người. `quy_uoc`: cách cộng Đường đời (TS-V3), cùng một cách cho cả hai."""
+    kq = luan_hop_doi_tu_chi_so(_chi_so(a, quy_uoc), _chi_so(b, quy_uoc), quan_he)
     nam = nam_xem or datetime.date.today().year
     kq["nhip_nam"] = {
         "nam": nam, "a": _nhip(a, nam), "b": _nhip(b, nam),

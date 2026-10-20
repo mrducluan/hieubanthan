@@ -1,6 +1,6 @@
 // TS-V3 — phái Qabalah, tổng hợp 3 phái, hai cách cộng Đường đời, góp ý đúng/chưa đúng (tầng HỌC). Engine thật.
 // Ca Nguyễn Đức Luân 24/10/1988: Pitago DD 33 (cộng hết) / 6 (từng phần); Qabalah con đường Zayin 7, Sephirah ngày sinh
-// Tiferet 6; số 6 lặp 7 lần ở cả ba phái.
+// Tiferet 6; số 6 gặp ở 5 nguồn tính độc lập (đường đời ba phái gộp làm một nguồn).
 import { test, expect } from "@playwright/test";
 import { napHoSo, hoi } from "./_hoso";
 
@@ -28,6 +28,7 @@ test("phái Qabalah: Cây Sự sống, độ nhạy bảng chuyển chữ, hỏi
   await page.getByRole("tab", { name: "Qabalah" }).click();
   const bai = page.getByTestId("bai-kabbalah");
   await expect(bai.getByTestId("kabbalah-con_duong_ten")).toContainText("Zayin");
+  await expect(bai.getByTestId("kabbalah-con_duong_ten")).toContainText("con đường số 17 trên Cây Sự sống");
   await expect(bai.getByTestId("kabbalah-con_duong_ten")).toContainText("có thể cho con đường 6");
   await expect(bai.getByTestId("kabbalah-sephirah_ngay_sinh")).toContainText("Tiferet");
   await expect(bai).toContainText("khác Kabbalah Do Thái giáo");
@@ -40,11 +41,13 @@ test("tổng hợp 3 phái: số lặp lại + đồ thị liên phái", async (
   await page.goto("/than-so");
   await page.getByRole("tab", { name: "Tổng hợp 3 phái" }).click();
   const bai = page.getByTestId("bai-tong-hop");
-  await expect(bai.getByTestId("noi-bat-6")).toContainText("lặp 7 lần · 3 phái");
-  await expect(bai.getByTestId("tuong-tac-duong_doi")).toContainText("Cộng hưởng");
-  await expect(bai.getByTestId("tuong-tac-ten_day_du")).toContainText("Hai góc nhìn");
+  await expect(bai.getByTestId("noi-bat-6")).toContainText("5 nguồn tính độc lập");
+  await expect(bai.getByTestId("tuong-tac-linh_hon")).toContainText("Cộng hưởng");
+  await expect(bai.getByTestId("tuong-tac-ten_day_du")).toContainText("Các góc nhìn");
+  await expect(bai.getByTestId("tuong-tac-duong_doi")).toHaveCount(0);
+  await expect(bai).toContainText("cùng là một phép cộng chữ số ngày sinh");
   const ans = await hoi(page, "Điểm mạnh cốt lõi của tôi là gì?");
-  await expect(ans).toContainText("Điểm chung của ba phái");
+  await expect(ans).toContainText("Điểm chung giữa các phái");
 });
 
 test("góp ý chưa đúng: ghi chú chỉ gửi khi tự tích đồng ý; câu khủng hoảng không hỏi góp ý", async ({ page }) => {
@@ -85,11 +88,7 @@ test("API góp ý: chưa bật Supabase → ok, không lưu; đầu vào lạ b�
   expect(sai.status()).toBe(422);
 });
 
-test("API ngữ cảnh V3 (bản chạy được của tệp 08)", async ({ request }) => {
-  const r = await request.post("/api/thanso/ngu-canh", { data: { ho_ten: ["Nguyễn Đức Luân"], ngay: 24, thang: 10, nam: 1988, cau_hoi: "Tôi hợp nghề gì?" } });
-  expect(r.ok()).toBeTruthy();
-  const d = await r.json();
-  expect(d.phien_ban).toBe("v3");
-  expect(d.y_dinh.ma_cau).toBe("sn_sai_nghe");
-  expect(Object.keys(d.ho_so_tinh_toan).sort()).toEqual(["chaldea", "kabbalah", "pitago"]);
+test("route ngữ cảnh không mở công khai (tránh lách hạn mức hỏi đáp)", async ({ request }) => {
+  const r = await request.post("/api/thanso/ngu-canh", { data: { ho_ten: ["A"], ngay: 1, thang: 1, nam: 2000, cau_hoi: "Tôi hợp nghề gì?" } });
+  expect(r.status()).toBe(404);
 });

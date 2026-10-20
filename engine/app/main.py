@@ -222,7 +222,8 @@ def api_chaldea(inp: ThanSoInput) -> dict:
     """TS-PHAI — thần số phái Chaldea (Cheiro): số tên gọi, họ tên, ngày sinh, đường đời, linh hồn, nhân cách;
     số kép 10–52 + số gốc, nghĩa từ KB, đối chiếu với phái Pitago. Biến thể tên thứ hai = tên thường gọi."""
     inp.kiem_tra_ngay()
-    return {"engine_version": ENGINE_VERSION, **luangiai_chaldea.luan_chaldea(inp.ho_ten, inp.ngay, inp.thang, inp.nam)}
+    return {"engine_version": ENGINE_VERSION, **luangiai_chaldea.luan_chaldea(inp.ho_ten, inp.ngay, inp.thang, inp.nam,
+                                                                                 inp.quy_uoc_duong_doi)}
 
 
 @app.post("/v1/thanso/kabbalah")
@@ -256,13 +257,26 @@ def api_tong_hop(inp: TongHopInput) -> dict:
                                 inp.quy_uoc_duong_doi)}
 
 
+class ChuKySoInput(ThanSoInput):
+    phai: Literal["pitago", "chaldea", "kabbalah", "tong_hop"] = "pitago"
+
+
+# Chỉ những con số RÚT GỌN mà rất nhiều người có chung — không ngày sinh, không tổng thô (QC TS-V3: giảm khả năng nhận
+# diện). Mỗi phái chỉ gửi số của chính phái được góp ý; Chaldea chỉ gửi số gốc 1–9.
+CHU_KY_KHOA = {"pitago": ("duong_doi", "su_menh", "linh_hon", "nhan_cach"),
+               "chaldea": ("so_ten", "ten_goi", "linh_hon", "nhan_cach"),
+               "kabbalah": ("con_duong_ten", "sephirah_ten", "sephirah_ngay_sinh")}
+
+
 @app.post("/v1/thanso/chu-ky-so")
-def api_chu_ky_so(inp: ThanSoInput) -> dict:
-    """TS-V3 tầng HỌC: CHỈ các con số đã tính của ba phái (không tên, không ngày sinh) — web lưu chữ ký này kèm góp ý
-    đúng/chưa đúng để gom cụm cải thiện KB; họ tên và ngày sinh không rời khỏi lượt gọi."""
+def api_chu_ky_so(inp: ChuKySoInput) -> dict:
+    """TS-V3 tầng HỌC: CHỈ các con số rút gọn của phái được góp ý (không tên, không ngày sinh) — web lưu chữ ký này kèm
+    góp ý đúng/chưa đúng để gom cụm cải thiện KB; họ tên và ngày sinh không rời khỏi lượt gọi."""
     inp.kiem_tra_ngay()
     hs = tong_hop.ho_so(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.quy_uoc_duong_doi)
-    return {"chu_ky": {phai: {vt: v["so"] for vt, v in cac.items()} for phai, cac in hs.items() if cac}}
+    phai = ("pitago",) if inp.phai == "tong_hop" else (inp.phai,)
+    return {"chu_ky": {p: {vt: (hs[p][vt]["goc"] if p == "chaldea" else hs[p][vt]["so"])
+                           for vt in CHU_KY_KHOA[p] if vt in hs[p]} for p in phai if hs[p]}}
 
 
 @app.post("/v1/thanso/ngu-canh")
@@ -283,7 +297,7 @@ def api_luan_giai_van(inp: ThanSoInput) -> dict:
     dữ kiện (xem app/narrative/llm.py). Lỗi LLM tự rơi về template, không sập.
     """
     inp.kiem_tra_ngay()
-    reading = luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam)
+    reading = luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam, quy_uoc=inp.quy_uoc_duong_doi)
     return narrative_llm.dien_dat(reading)
 
 
@@ -356,6 +370,7 @@ class HopDoiInput(BaseModel):
     a: NguoiKia
     b: NguoiKia
     quan_he: QuanHe = "nguoi_yeu"
+    quy_uoc_duong_doi: Literal["tong_het", "tung_phan"] = "tong_het"
 
 
 @app.post("/v1/thanso/hop-doi")
@@ -366,7 +381,7 @@ def api_hop_doi(inp: HopDoiInput) -> dict:
             _dt.date(n.nam, n.thang, n.ngay)
         except ValueError:
             raise HTTPException(422, detail="Ngày sinh không tồn tại")
-    return luan_hop_doi(inp.a.model_dump(), inp.b.model_dump(), inp.quan_he)
+    return luan_hop_doi(inp.a.model_dump(), inp.b.model_dump(), inp.quan_he, quy_uoc=inp.quy_uoc_duong_doi)
 
 
 SoHopLe = Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33]
@@ -434,6 +449,7 @@ class ChuKyInput(BaseModel):
     nam: int = Field(ge=1900, le=2100)
     tu_nam: int = Field(ge=1900, le=2100)
     den_nam: int = Field(ge=1900, le=2100)
+    quy_uoc_duong_doi: Literal["tong_het", "tung_phan"] = "tong_het"
 
     @field_validator("den_nam")
     @classmethod
@@ -490,7 +506,7 @@ def api_chu_ky(inp: ChuKyInput) -> dict:
         _dt.date(inp.nam, inp.thang, inp.ngay)
     except ValueError:
         raise HTTPException(422, detail="Ngày không tồn tại")
-    dd = thanso.duong_doi(inp.ngay, inp.thang, inp.nam)
+    dd = thanso.duong_doi(inp.ngay, inp.thang, inp.nam, inp.quy_uoc_duong_doi)
     return {
         "engine_version": ENGINE_VERSION,
         "ngay_sinh": f"{inp.ngay:02d}/{inp.thang:02d}/{inp.nam}",

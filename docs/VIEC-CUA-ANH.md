@@ -27,7 +27,8 @@
    `NEXT_PUBLIC_HOI_DONG_Y_COOKIE=1` → Redeploy — hộp hỏi đồng ý cookie hiện lại khi mở trang (quyết định 2026-10-09).
 4g. [ ] **Tầng HỌC thần số (TS-V3, 2026-10-20):** sau khi merge PR, Supabase → SQL Editor → chạy
    `supabase/migrations/0015_thanso_hoc.sql` (rollback: `0015_thanso_hoc.down.sql`). Chưa chạy thì góp ý "đúng / chưa
-   đúng" vẫn hiện nhưng không lưu; xem kết quả ở `/quan-tri/hoc`. Đọc kỹ quy tắc riêng tư mới ở CLAUDE.md (mục Quy tắc
+   đúng" vẫn hiện nhưng không lưu; xem kết quả ở `/quan-tri/hoc`. Cron xoá dữ liệu hết hạn (`/api/cron/don-du-lieu-hoc`,
+   3:41 sáng UTC) dùng chung `CRON_SECRET` với cron đối soát — đã có thì không cần làm gì. Đọc kỹ quy tắc riêng tư mới ở CLAUDE.md (mục Quy tắc
    code) — nhờ luật sư rà cùng chính sách quyền riêng tư (mục E).
 4d. [ ] **NotFair blog (/blog):** Vercel → Settings → Environment Variables → thêm `NOTFAIR_SEO_API_KEY` = khoá `nfbl_…`
    (Production + Preview, **không** thêm tiền tố `NEXT_PUBLIC_`) → Redeploy. Rồi mở `https://hieuban.com/blog` và một bài

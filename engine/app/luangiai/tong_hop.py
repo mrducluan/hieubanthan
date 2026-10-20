@@ -6,7 +6,7 @@ Thay phần "Neuro-Symbolic" của bản SQL V3 (docs/REVIEW-ENGINE-V3.md) trong
     (calc/ Python, có golden) — không có bộ tính thứ hai trong SQL.
   - `fn_resolve_3school_matrix` + `graph_edges` → `tuong_tac()`: cạnh giữa các nhóm vị trí tương đương của các phái
     (cộng hưởng / hai góc nhìn / bổ sung nợ nghiệp–số kép / nhịp thời gian), câu mẫu ở KB `thanso_do_thi.json`.
-  - `fn_assemble_llm_context_payload_v3` → `ngu_canh()`: ý định (phân loại + ma trận nỗi đau) + hồ sơ + nút KB kích hoạt
+  - hàm dựng gói ngữ cảnh của bản SQL → `ngu_canh()`: ý định (phân loại + ma trận nỗi đau) + hồ sơ + nút KB kích hoạt
     + tương tác liên phái + gói bằng chứng hỏi đáp + quy tắc diễn đạt bắt buộc. Tầng NARRATIVE chỉ diễn đạt gói này.
 """
 from __future__ import annotations
@@ -46,25 +46,46 @@ def ho_so(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: str = "to
         "pitago": {vt: {"so": p[vt], "goc": goc(p[vt])} for vt in ("duong_doi", "su_menh", "linh_hon", "nhan_cach")},
         "chaldea": {vt: {"so": c[vt]["kep"] or c[vt]["goc"], "kep": c[vt]["kep"], "goc": c[vt]["goc"]}
                     for vt in ("so_ten", "ten_goi", "ngay_sinh", "duong_doi", "linh_hon", "nhan_cach")},
-        "kabbalah": {vt: {"so": k[ma], "goc": goc(k[ma])}
+        # Qabalah: con đường 1–22 không quy về 1–9 (chữ Hebrew, không phải con số); Sephirah 1–9 so được với số gốc,
+        # Sephirah 10 (Malkuth) không có số tương ứng → goc None, không tham gia so cộng hưởng.
+        "kabbalah": {vt: {"so": k[ma], "goc": k[ma] if vt != "con_duong_ten" and k[ma] <= 9 else None}
                      for vt, ma in (("con_duong_ten", "con_duong"), ("sephirah_ten", "sephirah_ten"),
                                     ("sephirah_ngay_sinh", "sephirah_ngay_sinh")) if k[ma]},
     }
 
 
-def so_noi_bat(hs: dict) -> list[dict]:
-    """Số gốc lặp lại ở ≥ 2 vị trí của ≥ 2 phái — "điểm chung" mà nhiều cách tính cùng chỉ ra."""
-    gom: dict[int, list[tuple[str, str]]] = collections.defaultdict(list)
+# Ba vị trí này của ba phái là CÙNG MỘT phép cộng chữ số ngày sinh → luôn trùng gốc. Gộp thành một nguồn, không coi là
+# "các phái đồng ý" (QC TS-V3). Tương tự Sephirah tên ↔ con đường tên của Qabalah (cùng tổng gematria): chỉ lấy Sephirah.
+HO_NGAY_SINH = {("pitago", "duong_doi"), ("chaldea", "duong_doi"), ("kabbalah", "sephirah_ngay_sinh")}
+BO_QUA = {("kabbalah", "con_duong_ten")}
+
+
+def _nguon(hs: dict) -> list[tuple[str, str, int]]:
+    """(phái, nhãn vị trí, số gốc) — mỗi nguồn độc lập một lần; họ ngày sinh gộp làm một nguồn "chung"."""
+    ten_phai = kb.do_thi()["ten_phai"]
+    out: list[tuple[str, str, int]] = []
+    dd = hs["pitago"].get("duong_doi")
+    if dd and dd["goc"]:
+        out.append(("chung", "Đường đời (ba phái cùng một phép cộng ngày sinh)", dd["goc"]))
     for phai in PHAI:
         for vt, v in hs[phai].items():
-            gom[v["goc"]].append((phai, vt))
+            if (phai, vt) in HO_NGAY_SINH or (phai, vt) in BO_QUA or not v["goc"]:
+                continue
+            out.append((phai, f"{ten_phai[phai]} · {TEN_VI_TRI[(phai, vt)]}", v["goc"]))
+    return out
+
+
+def so_noi_bat(hs: dict) -> list[dict]:
+    """Số gốc 1–9 lặp ở ≥ 2 nguồn độc lập thuộc ≥ 2 phái — "điểm chung" mà nhiều cách tính thật sự cùng chỉ ra."""
+    gom: dict[int, list[tuple[str, str]]] = collections.defaultdict(list)
+    for phai, nhan, g in _nguon(hs):
+        gom[g].append((phai, nhan))
     kq = []
     for g, noi in gom.items():
         phai = sorted({p for p, _ in noi})
         if len(noi) >= 2 and len(phai) >= 2:
             n = store.nghia_so(g) or {}
-            kq.append({"goc": g, "lan": len(noi), "phai": phai,
-                       "vi_tri": [f"{kb.do_thi()['ten_phai'][p]} · {TEN_VI_TRI[(p, vt)]}" for p, vt in noi],
+            kq.append({"goc": g, "lan": len(noi), "phai": phai, "vi_tri": [x for _, x in noi],
                        "tu_khoa": n.get("tu_khoa"), "mat_toi": n.get("mat_toi"), "phan_chung": n.get("phan_chung")})
     return sorted(kq, key=lambda x: (-x["lan"], -len(x["phai"]), x["goc"]))
 
@@ -80,7 +101,7 @@ def tuong_tac(hs: dict, ho_ten: list[str], ngay: int, thang: int, nam: int, ngay
     kq = []
     for ma_nhom, nhom in g["nhom"].items():
         cac = [{"phai": p, "ten": f"{ten_phai[p]} · {TEN_VI_TRI[(p, vt)]}", **hs[p][vt]}
-               for p, vt in nhom["vi_tri"] if vt in hs[p]]
+               for p, vt in nhom["vi_tri"] if vt in hs[p] and hs[p][vt]["goc"]]
         if len(cac) < 2:
             continue
         goc_set = {x["goc"] for x in cac}
@@ -93,13 +114,13 @@ def tuong_tac(hs: dict, ho_ten: list[str], ngay: int, thang: int, nam: int, ngay
             loai = "khac_nhip"
             ds = ", ".join(f"{x['ten']} {x['so']}" for x in cac)
             van = {k: _dien(qh[loai][k], nhom=nhom["ten"].lower(), danh_sach=ds) for k in ("cach_doc", "goi_y")}
-        kq.append({"quan_he": loai, "ten_quan_he": qh[loai]["ten"], "ma_v3": qh[loai]["ma_v3"],
+        kq.append({"quan_he": loai, "ten_quan_he": qh[loai]["ten"],
                    "nhom": ma_nhom, "ten_nhom": nhom["ten"], "cac_so": cac, **van})
     # Bổ sung: nợ nghiệp Pitago ↔ số kép Chaldea cùng số (giao điểm đã tính ở bài Chaldea).
     so_ch = ch.tinh(ho_ten[0], ngay, thang, nam, ho_ten[1] if len(ho_ten) > 1 else None)
     for gd in lch.giao_diem(so_ch, ho_ten[0], ngay, thang, nam):
         if gd["cung_so"] and gd["cach_dung"]:
-            kq.append({"quan_he": "bo_sung", "ten_quan_he": qh["bo_sung"]["ten"], "ma_v3": qh["bo_sung"]["ma_v3"],
+            kq.append({"quan_he": "bo_sung", "ten_quan_he": qh["bo_sung"]["ten"],
                        "nhom": gd["ma"], "ten_nhom": gd["ten"],
                        "cac_so": [{"phai": "pitago", "ten": f"Pitago · nợ nghiệp {gd['ma']}", "so": gd["pitago_no_nghiep"],
                                    "goc": goc(gd["pitago_no_nghiep"])},
@@ -114,7 +135,7 @@ def tuong_tac(hs: dict, ho_ten: list[str], ngay: int, thang: int, nam: int, ngay
         s = noi_bat[0]["goc"]
         if ncn == s:
             kq.append({"quan_he": "nhip_thoi_gian", "ten_quan_he": qh["nhip_thoi_gian"]["ten"],
-                       "ma_v3": qh["nhip_thoi_gian"]["ma_v3"], "nhom": "nam_ca_nhan", "ten_nhom": "Năm cá nhân",
+                       "nhom": "nam_ca_nhan", "ten_nhom": "Năm cá nhân",
                        "cac_so": [{"phai": "pitago", "ten": f"Năm cá nhân {ngay_xem.year}", "so": ncn, "goc": ncn}],
                        **{k: _dien(qh["nhip_thoi_gian"][k], nam=ngay_xem.year, so=s,
                                    tu_khoa=(noi_bat[0]["tu_khoa"] or "").lower()) for k in ("cach_doc", "goi_y")}})
@@ -138,7 +159,9 @@ def tong_hop(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.da
         "tuong_tac": tt,
         "nhip": {"nam": ngay_xem.year, "nam_ca_nhan": ncn, "cham_net_noi_bat": bool(nb) and ncn == nb[0]["goc"]},
         "cach_doc": ("Ba phái tính từ cùng họ tên và ngày sinh bằng ba bảng khác nhau. Chỗ các phái cùng ra một số là nét "
-                     "đáng đối chiếu trước; chỗ khác nhau là hai góc nhìn để bạn tự chọn điều đúng với mình."),
+                     "đáng đối chiếu trước; chỗ khác nhau là các góc nhìn để bạn tự chọn điều đúng với mình."),
+        "ghi_chu_duong_doi": ("Đường đời của ba phái cùng là một phép cộng chữ số ngày sinh nên luôn trùng nhau — được tính "
+                              "là một nguồn, không coi là ba phái cùng đồng ý."),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],
         "luu_y": "Thần số học là góc nhìn văn hoá để tự soi, không phải dự báo.",
@@ -180,7 +203,7 @@ def ngu_canh(ho_ten: list[str], ngay: int, thang: int, nam: int, cau_hoi: str, n
     tl = hoi_van.tra_loi(cau_hoi, nguoi, None, ngay_xem, dung_llm=False)
     th = None if dac_biet else tong_hop(ho_ten, ngay, thang, nam, ngay_xem, quy_uoc)
     return {
-        "phien_ban": "v3",
+        "loai": "ngu_canh",
         "che_do": "tong_hop",
         "cau_hoi": cau_hoi,
         "y_dinh": y_dinh,

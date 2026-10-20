@@ -12,7 +12,7 @@ import type { QuyUocDD } from "@/lib/quy-uoc-dd";
 interface Nghia { ten: string; nghia_chu?: string; nghia?: string; nhom?: string; tuong_ung?: string; con_duong?: string; cot?: string;
   xu_huong: string; mat_toi: string; cau_tu_soi: string }
 interface SoKab { ma: string; ten: string; so: number; mo_ta: string; cach_tinh: string; nghia: Nghia | null; khac?: number[];
-  pitago?: { ten: string; so: number; trung: boolean } }
+  pitago?: { ten: string; so: number; trung: boolean; so_sanh_duoc?: boolean } }
 interface BaiKabbalah {
   phai: "kabbalah"; cac_so: SoKab[]; luu_y: string; nguon: string;
   gioi_thieu: { ten_phai: string; tom_tat: string; cach_doc: string; luu_y: string };
@@ -36,8 +36,9 @@ function TheSo({ s }: { s: SoKab }) {
           <p className="mt-1 text-xs text-moon">Bảng chuyển chữ khác (O, S, T, C) có thể cho con đường {s.khac.join(", ")} — đọc thêm để đối chiếu.</p>
         )}
         {s.pitago && (
-          <p className={s.pitago.trung ? "mt-1 text-xs text-fg-faint" : "mt-1 text-xs text-moon"}>
-            Phái Pitago: {s.pitago.ten} {s.pitago.so} — {s.pitago.trung ? "cùng gốc với Sephirah này" : "khác gốc với Sephirah này"}
+          <p className={s.pitago.trung || s.pitago.so_sanh_duoc === false ? "mt-1 text-xs text-fg-faint" : "mt-1 text-xs text-moon"}>
+            Phái Pitago: {s.pitago.ten} {s.pitago.so} — {s.pitago.so_sanh_duoc === false
+              ? "Malkuth (10) không có số 1–9 tương ứng nên không so" : s.pitago.trung ? "cùng gốc với Sephirah này" : "khác gốc với Sephirah này"}
           </p>
         )}
       </KhoiLop>
