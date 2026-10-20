@@ -15,6 +15,7 @@ const Input = z.object({
   ngay: z.number().int().min(1).max(31),
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1900).max(2100),
+  quy_uoc_duong_doi: z.enum(["tong_het", "tung_phan"]).optional(),   // số trên link khớp cách tính người dùng đang xem
 }).strict();
 
 export async function POST(req: Request): Promise<NextResponse> {
@@ -28,18 +29,12 @@ export async function POST(req: Request): Promise<NextResponse> {
     cache: "no-store",
   });
   try {
-    // TS-V3b: thêm Sephirah ngày sinh (cho "Cây của hai người" ở trang nhận lời mời). Lỗi phần này thì link vẫn tạo được.
-    const [r, rc] = await Promise.all([
-      goi("/v1/thanso/luan-giai", nguoi),
-      goi("/v1/thanso/kabbalah", nguoi).catch(() => null),
-    ]);
+    const r = await goi("/v1/thanso/luan-giai", nguoi);
     if (!r.ok) { const l = loiEngine(r.status, await r.json().catch(() => null)); return NextResponse.json({ error: l.error }, { status: l.status }); }
     const kq = (await r.json()) as LuanGiaiResult;
     const so = kq.cac_vi_tri.map((v) => v.gia_tri);
     const k = kq.cac_vi_tri.find((v) => v.vi_tri === "duong_doi")?.nghia?.tu_khoa;
-    const qb = rc?.ok ? ((await rc.json().catch(() => null)) as { cac_so?: { ma: string; so: number }[] } | null) : null;
-    const sp = qb?.cac_so?.find((c) => c.ma === "sephirah_ngay_sinh")?.so;
-    return NextResponse.json({ ma: kyMa({ t: ten_hien_thi, so, ...(k ? { k } : {}), ...(sp ? { sp } : {}) }) });
+    return NextResponse.json({ ma: kyMa({ t: ten_hien_thi, so, ...(k ? { k } : {}) }) });
   } catch (e) {
     const msg = e instanceof Error && e.message.includes("LOI_MOI_SECRET") ? e.message : "Không kết nối được máy tính toán.";
     return NextResponse.json({ error: msg }, { status: 502 });

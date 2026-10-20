@@ -8,7 +8,7 @@
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
-export type TruongPhai = "pitago" | "chaldea" | "kabbalah" | "tong_hop";
+export type TruongPhai = "pitago" | "chaldea" | "tong_hop";
 export interface NguCanhV3 {
   loai: "ngu_canh";
   y_dinh: { linh_vuc: string; xu_ly: string; ma_cau: string | null; tru: string | null };
@@ -25,7 +25,7 @@ export class HieuBanNumerologyEngineService {
 
   /** fullName: họ tên (có thể nhiều biến thể, phân cách bằng "|"); birthDate: "YYYY-MM-DD". */
   async consultUser(fullName: string, birthDate: string, userQuestion: string,
-                    opts: { quyUoc?: "tong_het" | "tung_phan"; ngayXem?: string } = {}): Promise<NguCanhV3> {
+                    opts: { quyUoc?: "tung_phan" | "tung_phan"; ngayXem?: string } = {}): Promise<NguCanhV3> {
     const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(birthDate);
     if (!m) throw new Error("birthDate phải dạng YYYY-MM-DD");
     const r = await fetch(`${ENGINE_URL}/v1/thanso/ngu-canh`, {
@@ -34,7 +34,7 @@ export class HieuBanNumerologyEngineService {
       body: JSON.stringify({
         ho_ten: fullName.split("|").map((t) => t.trim()).filter(Boolean).slice(0, 5),
         nam: Number(m[1]), thang: Number(m[2]), ngay: Number(m[3]), cau_hoi: userQuestion,
-        quy_uoc_duong_doi: opts.quyUoc ?? "tong_het", ...(opts.ngayXem ? { ngay_xem: opts.ngayXem } : {}),
+        quy_uoc_duong_doi: opts.quyUoc ?? "tung_phan", ...(opts.ngayXem ? { ngay_xem: opts.ngayXem } : {}),
       }),
       cache: "no-store",
     });

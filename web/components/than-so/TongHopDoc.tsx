@@ -1,5 +1,5 @@
 "use client";
-// TS-V3 — tổng hợp ba phái (Pitago · Chaldea · Qabalah). Engine tính số lặp lại giữa các phái và các tương tác liên phái
+// TS-V3 — tổng hợp hai phái (Pitago · Chaldea). Engine tính số lặp lại giữa các phái và các tương tác liên phái
 // (cộng hưởng / hai góc nhìn / bổ sung / nhịp thời gian) — /api/thanso/tong-hop; web chỉ hiển thị.
 import { Card } from "@/components/ui/card";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
@@ -30,7 +30,7 @@ export function TongHopDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: QuyUocDD }) {
   return (
     <div className="space-y-10" data-testid="bai-tong-hop">
       <section aria-labelledby="th-noi-bat">
-        <TieuDeMuc id="th-noi-bat" nho="Tổng hợp ba phái" lon="Điều nhiều cách tính cùng chỉ ra" mo_ta={kq.cach_doc} />
+        <TieuDeMuc id="th-noi-bat" nho="Tổng hợp hai phái" lon="Điều nhiều cách tính cùng chỉ ra" mo_ta={kq.cach_doc} />
         {kq.so_noi_bat.length === 0 ? (
           <p className="text-sm text-fg-muted">Các phái không trùng con số nào ở những phép tính độc lập — mỗi phái là một góc nhìn riêng, đọc từng phái để đối chiếu.</p>
         ) : (

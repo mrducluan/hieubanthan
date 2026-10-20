@@ -1,0 +1,282 @@
+{
+ "_nguon": "Bản đồ con số (gói Luận giải toàn bộ thần số, 2026-10-20): nhóm năng lượng của số 1–9 + số cái để đọc chỗ lệch giữa bên trong (Linh hồn) và bên ngoài (Nhân cách), giữa con đường (Đường đời) và đích hướng tới (Sứ mệnh); việc hợp theo tháng cá nhân. Gom nhóm theo cách đọc phổ biến của truyền thống Pythagoras (Balliett–Jordan, sách thần số phổ biến). Viết ở dạng 'thường được mô tả', không dự báo sự kiện.",
+ "source": {
+  "id": "nhap_ai_2026",
+  "ten": "Bản biên soạn tham khảo (AI nháp, 2026) theo truyền thống Balliett–Jordan và sách thần số phổ biến",
+  "luu_y": "Bản nháp do AI viết, hiển thị theo quyết định chủ dự án 2026-09-30; cột trang_thai để duyệt dần. Tham khảo văn hoá, không phải dự báo."
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "pythagoras_vn",
+ "trang_thai": "nhap_ai",
+ "nhom": {
+  "khoi_xuong": {
+   "ten": "Khởi xướng",
+   "so": [
+    1,
+    8
+   ],
+   "muon": "tự quyết định, đi trước và thấy mình tạo ra kết quả",
+   "bieu_hien": "tự tin, quyết đoán, có phần cứng rắn",
+   "bi_hieu_lam": "lạnh lùng, chỉ lo mục tiêu, khó gần",
+   "can": "được tin tưởng giao quyền và được công nhận bằng kết quả"
+  },
+  "ket_noi": {
+   "ten": "Kết nối",
+   "so": [
+    2,
+    6,
+    9,
+    11,
+    33
+   ],
+   "muon": "được gắn bó, được cần đến và thấy người quanh mình ổn",
+   "bieu_hien": "dễ gần, chu đáo, hay nhường",
+   "bi_hieu_lam": "dễ dãi, thiếu chính kiến, ai nhờ cũng nhận",
+   "can": "sự ghi nhận ấm áp và những mối quan hệ có qua có lại"
+  },
+  "bieu_dat": {
+   "ten": "Biểu đạt",
+   "so": [
+    3,
+    5
+   ],
+   "muon": "được tự do thể hiện, thử điều mới, sống có màu sắc",
+   "bieu_hien": "vui, linh hoạt, nói chuyện cuốn hút",
+   "bi_hieu_lam": "hời hợt, cả thèm chóng chán, thiếu kiên định",
+   "can": "không gian để sáng tạo và thay đổi mà không bị trói vào khuôn"
+  },
+  "nen_tang": {
+   "ten": "Nền tảng",
+   "so": [
+    4,
+    22
+   ],
+   "muon": "mọi thứ chắc chắn, có kế hoạch, làm đến nơi đến chốn",
+   "bieu_hien": "điềm đạm, nguyên tắc, đáng tin",
+   "bi_hieu_lam": "cứng nhắc, khô khan, ngại thay đổi",
+   "can": "sự ổn định, quy trình rõ và thời gian để làm kỹ"
+  },
+  "chiem_nghiem": {
+   "ten": "Chiêm nghiệm",
+   "so": [
+    7
+   ],
+   "muon": "hiểu tận gốc và có khoảng lặng riêng để nghĩ",
+   "bieu_hien": "trầm, kín, quan sát nhiều hơn nói",
+   "bi_hieu_lam": "xa cách, khó hiểu, có vẻ kiêu",
+   "can": "thời gian một mình và người tôn trọng chiều sâu của mình"
+  }
+ },
+ "cau_noi": {
+  "khoi_xuong|khoi_xuong": {
+   "ten": "Trong ngoài như một",
+   "doc": "Bên trong và bên ngoài cùng một nhịp quyết đoán: người khác thấy đúng điều bạn muốn.",
+   "cach_noi_ro": "Vì ít khi nói ra cảm xúc, hãy chủ động hỏi người khác cần gì trước khi chốt việc chung.",
+   "khi_hoa": "Sức kéo mạnh: nói được, làm được, người khác dễ đi theo."
+  },
+  "ket_noi|khoi_xuong": {
+   "ten": "Mềm và cứng",
+   "doc": "Một bên muốn giữ hoà khí, một bên muốn đi nhanh tới kết quả — bạn hay giằng co giữa nhường và quyết.",
+   "cach_noi_ro": "Nói rõ cả hai điều: 'Mình muốn mọi người ổn, và mình cũng cần chốt việc này hôm nay.'",
+   "khi_hoa": "Người dẫn dắt biết lắng nghe — quyết nhanh mà không làm ai thấy bị gạt đi."
+  },
+  "bieu_dat|khoi_xuong": {
+   "ten": "Tốc độ và màu sắc",
+   "doc": "Một bên muốn làm chủ, một bên muốn tự do thử điều mới — bạn dễ bắt đầu nhiều việc cùng lúc.",
+   "cach_noi_ro": "Trước khi mở việc mới, nói với người cùng làm việc nào bạn sẽ chốt xong trước.",
+   "khi_hoa": "Người khởi xướng có sức cuốn hút — mở đường và kéo được người khác hào hứng theo."
+  },
+  "khoi_xuong|nen_tang": {
+   "ten": "Quyết và chắc",
+   "doc": "Một bên muốn đi trước, một bên muốn chắc chắn từng bước — bạn có thể tự kìm mình vì sợ sai.",
+   "cach_noi_ro": "Chia việc thành mốc nhỏ: quyết nhanh hướng đi, cẩn thận ở khâu làm.",
+   "khi_hoa": "Người xây được việc lớn: có tầm nhìn và có quy trình để đi tới cùng."
+  },
+  "chiem_nghiem|khoi_xuong": {
+   "ten": "Hành động và suy tư",
+   "doc": "Một bên muốn ra quyết định, một bên muốn hiểu cho tận gốc — bạn hay nghĩ rất lâu rồi làm rất nhanh.",
+   "cach_noi_ro": "Cho người khác biết bạn đang cân nhắc và khi nào sẽ trả lời, để im lặng không bị hiểu là gạt bỏ.",
+   "khi_hoa": "Người quyết định sâu sắc: ít khi chọn sai vì đã nghĩ kỹ."
+  },
+  "ket_noi|ket_noi": {
+   "ten": "Trong ngoài như một",
+   "doc": "Bên trong và bên ngoài cùng hướng về con người: người khác thấy đúng sự chu đáo của bạn.",
+   "cach_noi_ro": "Vì ai cũng tìm đến bạn, hãy tập nói 'lần này mình không nhận được' mà không phải giải thích dài.",
+   "khi_hoa": "Chỗ dựa tin cậy của tập thể — giữ được người và giữ được không khí."
+  },
+  "bieu_dat|ket_noi": {
+   "ten": "Ấm áp và tự do",
+   "doc": "Một bên muốn gắn bó, một bên cần khoảng trống để bay nhảy — bạn có thể thấy có lỗi khi muốn đi riêng.",
+   "cach_noi_ro": "Nói trước với người thân khi bạn cần thời gian riêng, để họ không nghĩ bạn rời xa.",
+   "khi_hoa": "Người kết nối duyên dáng — mang niềm vui đến cho các mối quan hệ."
+  },
+  "ket_noi|nen_tang": {
+   "ten": "Tình và lý",
+   "doc": "Một bên đặt con người lên trước, một bên đặt nguyên tắc lên trước — bạn dễ tự trách khi phải nói 'không' theo quy định.",
+   "cach_noi_ro": "Tách hai việc: 'Mình quý bạn, và quy định này mình vẫn phải giữ.'",
+   "khi_hoa": "Người được tin cậy cả về tình lẫn việc — chu đáo mà có chuẩn mực."
+  },
+  "chiem_nghiem|ket_noi": {
+   "ten": "Gần và xa",
+   "doc": "Một bên muốn gần người, một bên cần một mình — người khác khó đoán khi nào bạn muốn được hỏi han.",
+   "cach_noi_ro": "Có một câu quen để báo: 'Mình cần một buổi yên tĩnh, mai mình nói chuyện nhé.'",
+   "khi_hoa": "Người thấu hiểu — nghe sâu và hiểu người khác hơn họ nghĩ."
+  },
+  "bieu_dat|bieu_dat": {
+   "ten": "Trong ngoài như một",
+   "doc": "Bên trong và bên ngoài cùng nhịp tự do, sáng tạo: người khác thấy đúng năng lượng của bạn.",
+   "cach_noi_ro": "Vì dễ hứng khởi, hãy nói rõ việc nào bạn cam kết, việc nào chỉ đang nghĩ thử.",
+   "khi_hoa": "Nguồn cảm hứng — làm mới mọi thứ quanh mình."
+  },
+  "bieu_dat|nen_tang": {
+   "ten": "Bay và neo",
+   "doc": "Một bên muốn thay đổi, một bên muốn ổn định — bạn có thể vừa chán khuôn vừa sợ mất chỗ dựa.",
+   "cach_noi_ro": "Giữ một nền cố định (giờ giấc, tài chính) và cho phép mình thử mới ở phần còn lại.",
+   "khi_hoa": "Người sáng tạo có kỷ luật — ý tưởng mới mà vẫn làm ra sản phẩm."
+  },
+  "bieu_dat|chiem_nghiem": {
+   "ten": "Sôi nổi và lặng",
+   "doc": "Một bên muốn thể hiện, một bên muốn rút vào trong — người khác thấy bạn lúc rất vui, lúc rất kín.",
+   "cach_noi_ro": "Báo trước nhịp của mình: 'Hôm nay mình hơi trầm, không phải vì ai cả.'",
+   "khi_hoa": "Người kể chuyện có chiều sâu — nói hay vì đã nghĩ kỹ."
+  },
+  "nen_tang|nen_tang": {
+   "ten": "Trong ngoài như một",
+   "doc": "Bên trong và bên ngoài cùng nhịp vững vàng: người khác thấy đúng sự đáng tin của bạn.",
+   "cach_noi_ro": "Vì ít bộc lộ cảm xúc, thỉnh thoảng nói thành lời điều bạn quý ở người khác.",
+   "khi_hoa": "Trụ cột — việc giao cho bạn là yên tâm."
+  },
+  "chiem_nghiem|nen_tang": {
+   "ten": "Chắc và sâu",
+   "doc": "Cả hai đều thích kỹ lưỡng — bạn dễ ôm việc một mình vì muốn chắc chắn trước khi chia sẻ.",
+   "cach_noi_ro": "Chia sẻ bản nháp sớm hơn bạn muốn; người khác cần biết bạn đang đi tới đâu.",
+   "khi_hoa": "Chuyên gia thực thụ — hiểu sâu và làm chuẩn."
+  },
+  "chiem_nghiem|chiem_nghiem": {
+   "ten": "Trong ngoài như một",
+   "doc": "Bên trong và bên ngoài cùng hướng vào chiều sâu: người khác thấy đúng sự trầm tĩnh của bạn.",
+   "cach_noi_ro": "Vì ít nói, hãy chọn một hai người để chia sẻ điều bạn đang nghĩ — đừng để mọi thứ chỉ ở trong đầu.",
+   "khi_hoa": "Người có trí tuệ riêng — góc nhìn ít ai có."
+  }
+ },
+ "thang_hop": {
+  "1": {
+   "nhan": "Mở đầu",
+   "hop_de": [
+    "bắt đầu việc mới",
+    "đặt mục tiêu",
+    "tự đứng ra làm"
+   ],
+   "nhom": [
+    "khoi_su"
+   ]
+  },
+  "2": {
+   "nhan": "Hợp tác",
+   "hop_de": [
+    "tìm người đồng hành",
+    "đàm phán mềm",
+    "vun đắp quan hệ"
+   ],
+   "nhom": [
+    "quan_he"
+   ]
+  },
+  "3": {
+   "nhan": "Thể hiện",
+   "hop_de": [
+    "giới thiệu bản thân",
+    "viết, nói, sáng tạo",
+    "gặp gỡ mở rộng quan hệ"
+   ],
+   "nhom": [
+    "quan_he"
+   ]
+  },
+  "4": {
+   "nhan": "Xây nền",
+   "hop_de": [
+    "sắp xếp tài chính",
+    "làm kỹ việc đang dở",
+    "học kỹ năng nền"
+   ],
+   "nhom": [
+    "on_dinh"
+   ]
+  },
+  "5": {
+   "nhan": "Đổi mới",
+   "hop_de": [
+    "thay đổi công việc",
+    "đi xa, thử điều mới",
+    "làm mới thói quen"
+   ],
+   "nhom": [
+    "doi_viec"
+   ]
+  },
+  "6": {
+   "nhan": "Gắn bó",
+   "hop_de": [
+    "chăm gia đình",
+    "cam kết trong quan hệ",
+    "lo cho nhà cửa"
+   ],
+   "nhom": [
+    "quan_he"
+   ]
+  },
+  "7": {
+   "nhan": "Lắng lại",
+   "hop_de": [
+    "học sâu, nghiên cứu",
+    "nghỉ ngơi, nạp lại",
+    "xem lại hướng đi"
+   ],
+   "nhom": [
+    "nghi_ngoi"
+   ]
+  },
+  "8": {
+   "nhan": "Gặt hái",
+   "hop_de": [
+    "bàn chuyện tiền, lương",
+    "nhận vai trò lớn hơn",
+    "chốt hợp đồng"
+   ],
+   "nhom": [
+    "tien_bac"
+   ]
+  },
+  "9": {
+   "nhan": "Khép lại",
+   "hop_de": [
+    "kết thúc việc không còn hợp",
+    "dọn dẹp, cho đi",
+    "tổng kết chuẩn bị chu kỳ mới"
+   ],
+   "nhom": [
+    "khep_lai"
+   ]
+  }
+ },
+ "nhom_viec": {
+  "khoi_su": "Khởi sự việc mới",
+  "doi_viec": "Thay đổi, đổi việc",
+  "quan_he": "Quan hệ, hợp tác",
+  "tien_bac": "Tiền bạc, thăng tiến",
+  "khep_lai": "Khép lại việc cũ"
+ },
+ "nam_doc_thang": {
+  "1": "Năm mở đầu: tháng nào cũng hợp để gieo việc mới; tháng \"khép lại\" trong năm này là dọn chỗ cho việc mới, không phải bỏ cuộc.",
+  "2": "Năm vun đắp: tháng \"khởi sự\" hợp để bắt đầu nhỏ và cùng người khác; việc thường tiến chậm, đừng ép tiến độ.",
+  "3": "Năm thể hiện: tháng \"đổi việc\" hợp để thử vai trò mới ở mức vừa sức; giữ lời hứa trong khả năng.",
+  "4": "Năm xây nền: tháng \"khởi sự\" hợp để mở việc có kế hoạch rõ; thay đổi lớn nên cân nhắc kỹ trước khi làm.",
+  "5": "Năm thay đổi: tháng khởi sự và đổi việc rất thuận; tháng \"xây nền\" và \"lắng lại\" giúp giữ hướng giữa nhiều đổi thay.",
+  "6": "Năm gắn bó: việc gia đình và cam kết được ưu tiên; tháng \"đổi việc\" nên tính cả đến người thân.",
+  "7": "Năm lắng lại: tháng \"khởi sự\" hợp để học và chuẩn bị hơn là ra mắt lớn; tháng \"tiền bạc\" nên ưu tiên giữ hơn là liều.",
+  "8": "Năm gặt hái: tháng \"tiền bạc\" là điểm nhấn của năm; tháng \"lắng lại\" để không làm quá sức.",
+  "9": "Năm khép lại: tháng \"khởi sự\" trong năm này hợp để phác thảo và chuẩn bị; cam kết lớn nên để sang năm mở đầu (từ tháng 1 năm sau)."
+ },
+ "ghi_chu_thang_1": "Tháng cá nhân bằng năm cá nhân cộng số tháng, nên sang tháng 1 con số đi theo năm cá nhân mới — vì vậy nhịp quanh đầu năm dương lịch có thể lặp lại."
+}

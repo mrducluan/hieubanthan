@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-"""TS-V3 — tổng hợp ba phái (Pitago · Chaldea · Qabalah) + đồ thị liên phái + gói ngữ cảnh (thay
+"""TS-V3 — tổng hợp hai phái (Pitago · Chaldea) + đồ thị liên phái + gói ngữ cảnh (thay
 fn_assemble_llm_context_payload_v3 của bản SQL). RULES thuần, không LLM, không DB.
 
 Ca chuẩn Nguyễn Đức Luân 24/10/1988 (đã biết từ các golden khác):
   Pitago  DD 33 (gốc 6) · SM 9 · LH 6 · NC 3
   Chaldea họ tên 8 · linh hồn 24/6 · nhân cách 29/2 · tên gọi 15/6 · ngày sinh 24/6 · đường đời 33/6
-  Qabalah con đường tên 7 · Sephirah tên 7 · Sephirah ngày sinh 6
-Đường đời của ba phái là CÙNG một phép cộng ngày sinh → gộp làm một nguồn "chung" (không tính là ba phái đồng ý).
+Đường đời của hai phái là CÙNG một phép cộng ngày sinh → gộp làm một nguồn "chung" (không tính là hai phái đồng ý).
 → số 6 gặp ở 5 nguồn độc lập (chung · Pitago LH · Chaldea LH · tên gọi · ngày sinh); "linh hồn" cộng hưởng;
 "họ tên" và "nhân cách" là các góc nhìn khác nhau.
 """
@@ -56,7 +55,7 @@ def test_nhip_cham_net_noi_bat():
 def test_ngu_canh_v3():
     p = tong_hop.ngu_canh(*LUAN, "Tôi hợp nghề gì?", NGAY)
     assert p["y_dinh"]["linh_vuc"] == "su_nghiep" and p["y_dinh"]["ma_cau"] == "sn_sai_nghe"
-    assert set(p["ho_so_tinh_toan"]) == {"pitago", "chaldea", "kabbalah"}
+    assert set(p["ho_so_tinh_toan"]) == {"pitago", "chaldea"}
     assert p["nut_kich_hoat"] and p["tuong_tac_lien_phai"] and p["quy_tac_bat_buoc"]
     assert p["bang_chung"]["muc"]
     # Câu khủng hoảng: không dựng ngữ cảnh luận, chỉ trả mẫu hỗ trợ.
@@ -64,16 +63,12 @@ def test_ngu_canh_v3():
     assert k["y_dinh"]["xu_ly"] == "an_toan" and not k["tuong_tac_lien_phai"]
 
 
-def test_hoi_dap_phai_kabbalah_va_tong_hop():
+def test_hoi_dap_phai_tong_hop():
     nguoi = {"ho_ten": LUAN[0], "ngay": 24, "thang": 10, "nam": 1988}
-    kb = hoi_van.tra_loi("Điểm mạnh cốt lõi của tôi là gì?", nguoi, None, NGAY, dung_llm=False, phai="kabbalah")
-    assert "Qabalah" in kb["cau_tra_loi"] and "Tiferet" in kb["cau_tra_loi"]
     th = hoi_van.tra_loi("Điểm mạnh cốt lõi của tôi là gì?", nguoi, None, NGAY, dung_llm=False, phai="tong_hop")
     assert "Điểm chung giữa các phái" in th["cau_tra_loi"] and not th["loi_kiem_tra"]
     assert th["cau_tra_loi"].count("Lần gần nhất") <= 1
-    # Chủ đề Qabalah không có (năm cá nhân) → giữ Pythagoras, ghi rõ.
-    nam = hoi_van.tra_loi("Năm nay của tôi thế nào?", nguoi, None, NGAY, dung_llm=False, phai="kabbalah")
-    assert "theo phái Pythagoras" in nam["cau_tra_loi"]
+    assert "Qabalah" not in th["cau_tra_loi"]
 
 
 def test_api():
@@ -83,7 +78,7 @@ def test_api():
     assert r.status_code == 200 and r.json()["so_noi_bat"][0]["goc"] == 6
     r = c.post("/v1/thanso/ngu-canh", json={**body, "cau_hoi": "Tôi hợp nghề gì?"})
     assert r.status_code == 200 and r.json()["loai"] == "ngu_canh" and "v3" not in r.text.lower().replace("ngu_canh", "")
-    r = c.post("/v1/thanso/hoi", json={**body, "cau_hoi": "Điểm mạnh cốt lõi của tôi là gì?", "phai": "kabbalah"})
+    r = c.post("/v1/thanso/hoi", json={**body, "cau_hoi": "Điểm mạnh cốt lõi của tôi là gì?", "phai": "tong_hop"})
     assert r.status_code == 200 and "AI nháp" not in r.text
 
 
@@ -96,11 +91,10 @@ def test_chu_ky_so_chi_co_con_so():
     assert "Luân" not in r.text and "1988" not in r.text and "24" not in r.text
     ch = c.post("/v1/thanso/chu-ky-so", json={**body, "phai": "chaldea"}).json()["chu_ky"]["chaldea"]
     assert set(ch) == {"so_ten", "ten_goi", "linh_hon", "nhan_cach"} and all(1 <= v <= 9 for v in ch.values())
-    kb = c.post("/v1/thanso/chu-ky-so", json={**body, "phai": "kabbalah"}).json()["chu_ky"]["kabbalah"]
-    assert kb == {"con_duong_ten": 7, "sephirah_ten": 7, "sephirah_ngay_sinh": 6}
+    assert c.post("/v1/thanso/chu-ky-so", json={**body, "phai": "kabbalah"}).status_code == 422
 
 
-def test_khong_cong_huong_gia_va_sephirah_10():
+def test_khong_cong_huong_gia():
     import random
     random.seed(1)
     for _ in range(200):
@@ -110,14 +104,4 @@ def test_khong_cong_huong_gia_va_sephirah_10():
         # Không còn số nổi bật CHỈ nhờ họ ngày sinh: mọi số nổi bật có ít nhất một nguồn ngoài "chung".
         assert all(set(s["phai"]) - {"chung"} for s in kq["so_noi_bat"])
         assert all(s["goc"] >= 1 for s in kq["so_noi_bat"])
-    # Sephirah 10 (Malkuth) không quy về 1.
-    hs = tong_hop.ho_so(["Phạm Khánh"], 19, 1, 1970)
-    assert hs["kabbalah"]["sephirah_ngay_sinh"]["goc"] is None and hs["kabbalah"]["con_duong_ten"]["goc"] is None
-
-
-def test_hoi_kabbalah_chi_doi_cau_ban_than():
-    nguoi = {"ho_ten": LUAN[0], "ngay": 24, "thang": 10, "nam": 1988}
-    nghe = hoi_van.tra_loi("Tôi hợp nghề gì?", nguoi, None, NGAY, dung_llm=False, phai="kabbalah")["cau_tra_loi"]
-    assert "theo phái Qabalah" not in nghe and "Qabalah không có cách đọc riêng" in nghe
-    seph = hoi_van.tra_loi("Sephirah của tôi là gì?", nguoi, None, NGAY, dung_llm=False, phai="kabbalah")["cau_tra_loi"]
-    assert "Tiferet" in seph
+    assert set(tong_hop.ho_so(["Phạm Khánh"], 19, 1, 1970)) == {"pitago", "chaldea"}

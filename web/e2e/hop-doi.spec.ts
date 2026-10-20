@@ -56,7 +56,7 @@ test("link mời: A tạo → B mở, nhập ngày sinh → thấy kết quả; 
   const b = await (await browser.newContext({ reducedMotion: "reduce" })).newPage();
   await b.goto(link);
   await expect(b.getByRole("heading", { level: 1 })).toContainText("Luân mời bạn xem hai người");
-  await expect(b.getByTestId("so-nguoi-moi")).toHaveText("33");
+  await expect(b.getByTestId("so-nguoi-moi")).toHaveText("6");
   await b.getByLabel("Họ và tên đầy đủ").fill("Trần Thị Mai");
   await b.getByLabel("Ngày", { exact: true }).fill("13");
   await b.getByLabel("Tháng", { exact: true }).fill("5");
@@ -91,7 +91,7 @@ test("thẻ chia sẻ: link thẻ công khai + ảnh OG", async ({ page, request
   await page.getByRole("button", { name: "Tạo link thẻ" }).click();
   const link = await page.getByLabel("Link chia sẻ").inputValue();
   await page.goto(link);
-  await expect(page.getByTestId("so-the")).toHaveText("33");
+  await expect(page.getByTestId("so-the")).toHaveText("6");
   const ma = link.split("/the/")[1] ?? "";
   const og = await request.get(`/og?ma=${ma}`);
   expect(og.status()).toBe(200);

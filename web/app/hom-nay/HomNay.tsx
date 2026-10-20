@@ -16,7 +16,7 @@ import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 import { maMoiNgay, taoLinkNgay } from "@/components/chia-se/NutChiaSeNgay";
-import { ChuCuaNgay } from "@/components/than-so/ChuCuaNgay";
+import { SoNoiBatNgay } from "@/components/than-so/SoNoiBatNgay";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { VongGio } from "@/components/hoang-lich/VongGio";
 import type { GioNgay } from "@/lib/hoang-lich";
@@ -259,7 +259,7 @@ export function HomNay() {
               <p className="text-xs uppercase tracking-wider text-moon">Câu hỏi tự soi</p>
               <p className="mt-1">{the.ngay_ca_nhan.tu_soi}</p>
             </div>
-            <ChuCuaNgay hoSo={hoSo} />
+            <SoNoiBatNgay hoSo={hoSo} />
             <div className="flex flex-wrap items-center justify-between gap-3">
               {chuoi !== null && (
                 <p className="inline-flex items-center gap-1.5 text-sm text-fg-muted" data-testid="chuoi-ngay">

@@ -36,8 +36,8 @@ export function KhoiMoLuoi({ id, Icon, tieuDe, moTa, onMoLanDau, moSan = false, 
   );
 }
 
-/** Nhãn ba lớp: ĐÃ TÍNH (engine) · DIỄN GIẢI (kho tri thức) · TỰ SOI (câu hỏi cho người đọc). */
+/** Nhãn ba lớp: CÁCH TÍNH (engine) · DIỄN GIẢI (kho tri thức) · TỰ SOI (câu hỏi cho người đọc). */
 export function NhanLop({ lop }: { lop: "tinh" | "giai" | "soi" }) {
-  const t = { tinh: ["Đã tính", "text-jade"], giai: ["Diễn giải", "text-gold"], soi: ["Tự soi", "text-moon"] }[lop];
+  const t = { tinh: ["Cách tính", "text-jade"], giai: ["Diễn giải", "text-gold"], soi: ["Tự soi", "text-moon"] }[lop];
   return <span className={cn("eyebrow", t[1])}>{t[0]}</span>;
 }

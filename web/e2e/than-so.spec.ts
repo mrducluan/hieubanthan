@@ -1,5 +1,6 @@
 // Luồng Phase 1 (docs/THIET-KE-UI.md §6.1): landing → nhập → nghi thức → hé lộ → hồ sơ → chiều sâu → hỏi.
-// Ca đã chốt (docs/NHAT-KY-DU-AN.md): Nguyễn Đức Luân 24/10/1988 → DD33 / SM9 / LH6 / NC3.
+// Ca đã chốt (docs/NHAT-KY-DU-AN.md): Nguyễn Đức Luân 24/10/1988 → DD 6 (rút gọn con số — mặc định từ 2026-10-20;
+// cộng hết chữ số ra 33) / SM9 / LH6 / NC3.
 import { test, expect } from "@playwright/test";
 import { hoi, napHoSo } from "./_hoso";
 
@@ -15,20 +16,22 @@ test("landing → nhập 2 trường → hé lộ số đường đời và hồ
   await page.getByRole("button", { name: "Xem con số của tôi" }).click();
 
   await expect(page).toHaveURL(/\/ban-than/);
-  await expect(page.getByTestId("so-duong-doi")).toHaveText("33");
-  await expect(page.getByText("Số cái — giữ nguyên, không rút gọn")).toBeVisible();
+  await expect(page.getByTestId("so-duong-doi")).toHaveText("6");
 
-  for (const [vt, so] of [["duong_doi", "33"], ["su_menh", "9"], ["linh_hon", "6"], ["nhan_cach", "3"]] as const) {
+  for (const [vt, so] of [["duong_doi", "6"], ["su_menh", "9"], ["linh_hon", "6"], ["nhan_cach", "3"]] as const) {
     await expect(page.getByTestId(`the-${vt}`).getByTestId("gia-tri")).toHaveText(so);
   }
-  // Ba lớp: Đã tính (vết cộng) · Diễn giải (mặt tối + nguồn) · Tự soi.
+  // Diễn giải (mặt tối + nguồn) hiện sẵn · Kiểm chứng (tích nét đúng, đếm trên máy) · Cách tính thu gọn, bấm mới mở.
   const dd = page.getByTestId("the-duong_doi");
   await expect(dd).toContainText("Mặt tối:");
   await expect(dd).toContainText("Nguồn:");
-  await dd.getByRole("tab", { name: "Đã tính" }).click();
-  await expect(dd).toContainText("Tổng 33");
-  await dd.getByRole("tab", { name: "Tự soi" }).click();
-  await expect(dd).toContainText("Bạn muốn gì cho riêng mình");
+  await expect(dd).not.toContainText("6 + 1 + 8 = 15");
+  await dd.getByTestId("mo-cach-tinh").click();
+  await expect(dd).toContainText("6 + 1 + 8 = 15 → 6");
+  const kc = dd.getByTestId("kiem-chung-duong_doi").getByRole("checkbox");
+  await expect(kc).toHaveCount(6);
+  for (const i of [0, 1, 2, 3]) await kc.nth(i).click();
+  await expect(dd.getByTestId("ket-qua-kiem-chung-duong_doi")).toContainText("Khớp 4/6. Số 6 khá đúng với bạn.");
 
   await expect(page.getByTestId("the-danh-tinh")).toContainText("Nguyễn Đức Luân");
   // Hồ sơ giữ lại khi quay về trang chủ.
@@ -99,7 +102,7 @@ test("nhập ngày ÂM lịch: xem trước dương lịch, bài đọc tính th
   await page.getByLabel("Năm", { exact: true }).fill("1988");
   await expect(page.getByTestId("doi-lich")).toContainText("Dương lịch: 24/10/1988 · năm Mậu Thìn");
   await page.getByRole("button", { name: "Xem con số của tôi" }).click();
-  await expect(page.getByTestId("so-duong-doi")).toHaveText("33");
+  await expect(page.getByTestId("so-duong-doi")).toHaveText("6");
   const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1") ?? "{}"));
   expect([h.ngay, h.thang, h.nam, h.lich_nhap, h.am?.ngay, h.am?.thang]).toEqual([24, 10, 1988, "am", 14, 9]);
 });
@@ -179,7 +182,7 @@ test("TS-PHAI: đổi sang phái Chaldea → 6 con số engine tính, có số k
   for (const s of api.cac_so as { ma: string; goc: number }[]) {
     await expect(page.getByTestId(`chaldea-${s.ma}`).getByLabel(`Số gốc ${s.goc}`)).toBeVisible();
   }
-  await expect(page.getByTestId("chaldea-duong_doi")).toContainText("Phái Pitago: Đường đời 33");
+  await expect(page.getByTestId("chaldea-duong_doi")).toContainText("Phái Pitago: Đường đời 6");
   await expect(page.getByRole("tab", { name: "Biểu đồ ngày sinh" })).toHaveCount(0);
   await page.reload();
   await expect(page.getByTestId("bai-chaldea")).toBeVisible();

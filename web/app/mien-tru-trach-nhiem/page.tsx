@@ -28,7 +28,7 @@ export default async function MienTru() {
       noiDung: (
         <p>Thần số học, Tử vi, Bát tự, Kinh Dịch và Phong thuỷ là những hệ thống văn hoá có lịch sử lâu đời, nhưng
           <b> chưa được khoa học kiểm chứng là dự báo được tương lai</b>. Chúng tôi trình bày chúng như những lăng kính để
-          bạn nhìn lại chính mình. Mỗi bài đọc luôn tách ba lớp: <b>Đã tính</b> (máy tính theo công thức),{" "}
+          bạn nhìn lại chính mình. Mỗi bài đọc luôn tách ba lớp: <b>Cách tính</b> (máy tính theo công thức),{" "}
           <b>Diễn giải</b> (theo kho tri thức) và <b>Tự soi</b> (câu hỏi dành cho bạn).</p>
       ),
     },

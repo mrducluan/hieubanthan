@@ -209,6 +209,33 @@ def _luan_mot_vi_tri(vi_tri: str, gia_tri_chinh: int,
     return ket
 
 
+TEN_NGAN_VI_TRI = {"duong_doi": "Đường đời", "su_menh": "Sứ mệnh", "linh_hon": "Linh hồn", "nhan_cach": "Nhân cách"}
+
+
+def _kiem_chung(vi_tri: str, so: int, chinh: dict) -> dict | None:
+    """Thẻ kiểm chứng (thay "Tự soi"): 3 nét mạnh + 3 điểm mù thường gặp của số (kho chân dung), người dùng tự tích nét
+    đúng với mình (đếm trên máy). Kết quả theo ngưỡng; chưa khớp thì gợi ý số khác CỦA CHÍNH HỌ có thể đang trội hơn."""
+    cd = (kb2.chan_dung(so) or {}).get("tong_quan") if so else None
+    if not cd:
+        return None
+    khac = next((f"{TEN_NGAN_VI_TRI[v]} {chinh[v]}" for v in VI_TRI_THU_TU
+                 if v != vi_tri and chinh.get(v) and chinh[v] != so and kb2.chan_dung(chinh[v])), None)
+    return {
+        "cau_hoi": "Bạn thấy mình ở những nét nào dưới đây? Tích những điều đúng với bạn.",
+        "net": [{"loai": "manh", "chu": x} for x in cd["diem_manh"][:3]] + [{"loai": "mu", "chu": x} for x in cd["diem_mu"][:3]],
+        "nguong": {"khop": 4, "mot_phan": 2},
+        "ket_qua": {
+            "khop": f"Số {so} khá đúng với bạn. Hướng lớn của số này: {cd['huong_lon']}",
+            "mot_phan": (f"Đúng một phần. Có thể một con số khác của bạn đang trội hơn ở mặt này — đọc thêm {khac}."
+                         if khac else "Đúng một phần — nét của số này có mặt nhưng chưa phải nét chính của bạn."),
+            "chua_khop": ("Chưa giống bạn. Đừng ép mình vào con số; nếu tên bạn có nhiều cách viết, thử nhập tên thường gọi để "
+                          "xem lại."),
+        },
+        "huong_lon": cd["huong_lon"],
+        "khi_cang_thang": cd["khi_cang_thang"],
+    }
+
+
 QUY_UOC_DD = {
     "tong_het": "Cộng mọi chữ số của ngày, tháng, năm sinh rồi rút gọn — cách nhiều sách và trang thần số ở Việt Nam dùng.",
     "tung_phan": "Rút gọn riêng ngày, tháng, năm (giữ số cái 11/22/33) rồi cộng lại — cách hay gặp ở sách phương Tây "
@@ -239,7 +266,7 @@ def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: str =
             {c[vt] for c in theo_bien_the if c[vt] != gia_tri_chinh}
         )
         cac_vi_tri.append({**_luan_mot_vi_tri(vt, gia_tri_chinh, gia_tri_khac),
-                           "cach_tinh": vet[vt]})
+                           "cach_tinh": vet[vt], "kiem_chung": _kiem_chung(vt, gia_tri_chinh, chinh)})
 
     so_on_dinh = sum(1 for v in cac_vi_tri if v["on_dinh"])
     th, tp = thanso.duong_doi(ngay, thang, nam, "tong_het"), thanso.duong_doi(ngay, thang, nam, "tung_phan")

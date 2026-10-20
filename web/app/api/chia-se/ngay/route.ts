@@ -1,6 +1,6 @@
 // POST /api/chia-se/ngay — NHIP-1: mã có KÝ cho thẻ "Hôm nay {tên} là Ngày cá nhân N — còn bạn?".
 // Máy chủ tự gọi engine tính số (client không tự khai số được); mã chỉ mang tên hiển thị + số ngày + chủ đề + ngày xem
-// (TS-V3b: + số nổi bật qua ba phái khi có họ tên + thứ tự chữ Hebrew của ngày). Không mang họ tên, ngày sinh.
+// (TS-V3b: + số nổi bật qua hai phái khi có họ tên). Không mang họ tên, ngày sinh.
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { goiEngineDaKiem } from "@/lib/proxy";
@@ -17,7 +17,7 @@ const Input = z.object({
 
 interface TheNgayEngine {
   ngay_xem: string; ngay_ca_nhan: { so: number; nghia: string | null };
-  so_noi_bat: { goc: number } | null; chu_ngay: { chu: number; ten: string };
+  so_noi_bat: { goc: number } | null;
 }
 
 export async function POST(req: Request): Promise<NextResponse> {
@@ -30,7 +30,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   const k = (d.ngay_ca_nhan.nghia ?? "").replace(/^Ngày cá nhân \d+:\s*/, "").replace(/\.$/, "").slice(0, 90);
   try {
     return NextResponse.json({ ma: kyMaNgay({ t: ten_hien_thi, n: d.ngay_ca_nhan.so, d: d.ngay_xem, ...(k ? { k } : {}),
-      ...(d.so_noi_bat ? { s: d.so_noi_bat.goc } : {}), h: d.chu_ngay.chu, hn: d.chu_ngay.ten }), ngay: d.ngay_xem });
+      ...(d.so_noi_bat ? { s: d.so_noi_bat.goc } : {}) }), ngay: d.ngay_xem });
   } catch (e) {
     return NextResponse.json({ error: e instanceof Error ? e.message : "Chưa tạo được thẻ." }, { status: 502 });
   }

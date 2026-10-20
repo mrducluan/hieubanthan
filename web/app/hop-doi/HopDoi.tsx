@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { KetQuaHopDoi, type KetQuaHopDoiT } from "@/components/hop-doi/KetQuaHopDoi";
-import { CayHaiNguoi } from "@/components/hop-doi/CayHaiNguoi";
 import { NutChiaSe } from "@/components/chia-se/NutChiaSe";
 import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
 import { GopY } from "@/components/khung/GopY";
@@ -41,7 +40,6 @@ export function HopDoi() {
   const [quanHe, setQuanHe] = useState<MaQuanHe>("nguoi_yeu");
   const tenQuanHe = QUAN_HE.find((q) => q.ma === quanHe)?.ten ?? "Người ấy";
   const [kq, setKq] = useState<KetQuaHopDoiT | null>(null);
-  const [cay, setCay] = useState<Record<string, unknown> | null>(null);   // TS-V3b: thân lời gọi "Cây của hai người"
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const dauCms = useDauCms();
@@ -73,7 +71,6 @@ export function HopDoi() {
         b: { ...(ten.trim() ? { ho_ten: [ten.trim()] } : {}), ngay: d, thang: m, nam: y },
         quan_he: quanHe, quy_uoc_duong_doi: quyUoc,
       }));
-      setCay({ a: { ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam }, b: { ngay: d, thang: m, nam: y } });
       ghi("compatibility_created", { kind: "truc_tiep", quan_he: quanHe });
       batDauDoc("hopdoi", { quan_he: quanHe });
     } catch (e2) {
@@ -149,12 +146,11 @@ export function HopDoi() {
       {kq && (
         <>
           <KetQuaHopDoi kq={kq} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : tenQuanHe} />
-          <CayHaiNguoi than={cay} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : tenQuanHe} />
           <div className="mx-auto max-w-3xl"><MocDocXong moDun="hopdoi" /><GopY moDun="hopdoi" cauHoi="Phần so hai người có giúp bạn hiểu mối quan hệ này hơn?" /></div>
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             <Card>
               <p className="font-serif text-lg">Mời người ấy xem cùng</p>
-              <p className="mb-4 mt-1 text-sm text-fg-muted">Người ấy tự nhập ngày sinh của họ để mở kết quả đầy đủ — kèm Cây của hai người trên Cây Sự sống.</p>
+              <p className="mb-4 mt-1 text-sm text-fg-muted">Người ấy sẽ tự nhập ngày sinh của họ để mở kết quả đầy đủ.</p>
               <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(ma) => `/hop-doi/${ma}`} nutTao="Tạo link mời"
                 loiNhan={`${tenGoi(hoSo)} mời bạn xem hai người hợp nhau thế nào qua con số.`} />
             </Card>
@@ -163,7 +159,7 @@ export function HopDoi() {
                 <p className="font-serif text-lg">Xem với người khác</p>
                 <p className="mt-1 text-sm text-fg-muted">Bạn bè, đồng nghiệp, bố mẹ — mỗi mối quan hệ một nhịp riêng.</p>
               </div>
-              <Button variant="secondary" className="mt-4" onClick={() => { setKq(null); setCay(null); setTen(""); setNgay(""); setThang(""); setNam(""); }}>
+              <Button variant="secondary" className="mt-4" onClick={() => { setKq(null); setTen(""); setNgay(""); setThang(""); setNam(""); }}>
                 So với người khác
               </Button>
             </Card>

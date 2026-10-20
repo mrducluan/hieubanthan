@@ -1,7 +1,7 @@
 "use client";
 // TS-V3b — "Phái nào nói đúng về bạn?" dưới mỗi câu trả lời thần số: ba câu ngắn (mỗi phái một câu, engine soạn từ KB
 // theo lĩnh vực câu hỏi) → bấm chọn câu nghe đúng hơn. Phiếu đếm trên máy (lib/phieu-phai). Đủ 7 phiếu → gợi ý phái hợp
-// nhất + mở báo cáo 3 phái (BaoCaoBaPhai, chương đầu miễn phí, phần còn lại bằng Sao khi bật thu Sao).
+// nhất + lời mời mở bản đồ con số đầy đủ (BanDoConSo).
 import { useEffect, useState } from "react";
 import { Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,7 +46,7 @@ export function PhaiNaoDung({ hoSo, quyUoc, linhVuc, onDungPhai }: {
   return (
     <div className="rounded-xl border border-line/70 p-3" data-testid="phai-nao-dung">
       <p className="inline-flex items-center gap-1.5 text-sm font-medium"><Scale className="size-4 text-gold" aria-hidden />Phái nào nói đúng về bạn?</p>
-      <div className="mt-2 grid gap-2 sm:grid-cols-3">
+      <div className="mt-2 grid gap-2 sm:grid-cols-2">
         {d.goc_nhin.map((g) => (
           <button key={g.phai} type="button" disabled={chon !== null} onClick={() => bau(g.phai)} aria-pressed={chon === g.phai}
             data-testid={`bau-${g.phai}`}
@@ -72,7 +72,7 @@ export function PhaiNaoDung({ hoSo, quyUoc, linhVuc, onDungPhai }: {
             {dau.length === 1 && onDungPhai && (
               <Button size="sm" variant="secondary" onClick={() => onDungPhai(dau[0]!)}>Dùng {TEN_PHAI_PHIEU[dau[0]!]} làm phái chính</Button>
             )}
-            <Button size="sm" asChild><a href="#bao-cao-ba-phai">Mở báo cáo 3 phái</a></Button>
+            <Button size="sm" asChild><a href="#ban-do-con-so">Xem bản đồ con số đầy đủ</a></Button>
           </div>
         </div>
       )}

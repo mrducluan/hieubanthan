@@ -9,7 +9,7 @@ import { ghi } from "@/lib/do-luong";
 import { hoTenList, type HoSo } from "@/lib/hoso";
 
 export interface NguCanhGopY {
-  phai: "pitago" | "chaldea" | "kabbalah" | "tong_hop";
+  phai: "pitago" | "chaldea" | "tong_hop";
   quyUoc: "tong_het" | "tung_phan";
   nguon: "hoi_dap" | "bai_doc" | "noi_dau";
   linhVuc?: string;

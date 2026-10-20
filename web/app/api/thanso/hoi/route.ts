@@ -16,7 +16,7 @@ const Input = z.object({
   nam: z.number().int().min(1900).max(2100),
   cau_hoi: z.string().min(3).max(400),
   // TS-PHAI-2: trả lời theo phái đang xem ở /than-so.
-  phai: z.enum(["pitago", "chaldea", "kabbalah", "tong_hop"]).optional(),
+  phai: z.enum(["pitago", "chaldea", "tong_hop"]).optional(),
   // TS-V3: cách cộng Đường đời người dùng chọn.
   quy_uoc_duong_doi: z.enum(["tong_het", "tung_phan"]).optional(),
   nguoi_kia: z.object({

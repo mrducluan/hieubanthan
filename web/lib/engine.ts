@@ -19,8 +19,18 @@ export interface ViTriLuanGiai {
   gia_tri_khac: number[];
   ghi_chu_do_nhay?: string;
   cach_tinh?: CachTinh;
+  /** Thẻ kiểm chứng (thay "Tự soi"): nét thường gặp của số để người dùng tự tích; null khi số = 0 / KB thiếu. */
+  kiem_chung?: KiemChung | null;
 }
-/** Vết tính từng bước (lớp ĐÃ TÍNH) — engine trả, web chỉ hiển thị. */
+export interface KiemChung {
+  cau_hoi: string;
+  net: { loai: "manh" | "mu"; chu: string }[];
+  nguong: { khop: number; mot_phan: number };
+  ket_qua: { khop: string; mot_phan: string; chua_khop: string };
+  huong_lon: string;
+  khi_cang_thang: string;
+}
+/** Vết tính từng bước (lớp CÁCH TÍNH) — engine trả, web chỉ hiển thị. */
 export interface CachTinh {
   so_hang: { ky_tu: string; so: number }[];
   tong: number;

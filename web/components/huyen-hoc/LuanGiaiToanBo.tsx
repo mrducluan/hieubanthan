@@ -28,8 +28,9 @@ interface BaoCao {
   phi: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null };
 }
 
-/** `than`: thân lời gọi khác `{ la_so }` (vd báo cáo ba phái thần số gửi họ tên + ngày sinh + phiếu); `moDun` cho đo lường. */
-export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun }: { duongDan: string; laSo: unknown; ten: string; than?: unknown; moDun?: string }) {
+/** `than`: thân lời gọi khác `{ la_so }` (vd bản đồ con số gửi họ tên + ngày sinh); `moDun` cho đo lường; `tuMo`: tự tải
+ *  bản xem trước (chương miễn phí + lời mời) ngay khi hiện, không chờ bấm. */
+export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false }: { duongDan: string; laSo: unknown; ten: string; than?: unknown; moDun?: string; tuMo?: boolean }) {
   const [bc, setBc] = useState<BaoCao | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
@@ -44,7 +45,11 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun }: { duongDan:
     fetch("/api/luan-giai/phi").then((r) => r.json()).then((d) => { if (!huy) setPhi(d); }).catch(() => { /* coi như miễn phí */ });
     return () => { huy = true; };
   }, []);
-  const tai = async (moKhoa = false, tuDong = false) => {
+  // Chỉ nhận phản hồi của lượt gọi mới nhất — đổi đầu vào (vd cách tính Đường đời) khi một lượt cũ còn bay thì lượt cũ
+  // về muộn không được ghi đè báo cáo mới.
+  const luot = useRef(0);
+  const tai = async (moKhoa = false, tuDong = false, xemTruocTuDong = false) => {
+    const so = ++luot.current;
     setDang(true); setLoi(null);
     if (moKhoa) {
       ghi("unlock_clicked", { mo_dun: moDun ?? (duongDan.includes("battu") ? "battu" : "tuvi"), kind: tuDong ? "tu_dong" : "bam" });
@@ -52,12 +57,14 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun }: { duongDan:
     }
     try {
       const d = await postJson<BaoCao>(duongDan, than ?? { la_so: laSo }, moKhoa ? { "x-mo-khoa": "1" } : {});
+      if (so !== luot.current) return;
       setBc(d);
       if (moKhoa || !d.so_khoa) xoaChoMo();
       if (moKhoa && d.phi.ly_do === "da_tru_sao") ghi("unlock_succeeded", { mo_dun: d.mo_dun, so_sao: d.phi.sao });
-      else if (d.so_khoa) ghi("paywall_viewed", { mo_dun: d.mo_dun, kind: "luan_giai_toan_bo" });
-    } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa tải được luận giải."); }
-    finally { setDang(false); }
+      // Bản xem trước tự tải (bản đồ con số) đo riêng, không làm phồng tỉ lệ paywall của các mảng bấm mới mở.
+      else if (d.so_khoa) ghi("paywall_viewed", { mo_dun: d.mo_dun, kind: xemTruocTuDong ? "luan_giai_tu_dong" : "luan_giai_toan_bo" });
+    } catch (e) { if (so === luot.current) setLoi(e instanceof Error ? e.message : "Chưa tải được luận giải."); }
+    finally { if (so === luot.current) setDang(false); }
   };
   // Quay lại sau khi đăng nhập / nạp Sao → tự mở đúng báo cáo đang xem dở (cùng lá số, trong 30 phút). Một lần.
   const daTuMo = useRef(false);
@@ -65,6 +72,18 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun }: { duongDan:
     if (laSo && nguoi && !daTuMo.current && dangChoMo(duongDan, nguoi)) { daTuMo.current = true; void tai(true, true); }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ chạy một lần khi lá số sẵn sàng
   }, [Boolean(laSo && nguoi)]);
+
+  // Bản đồ con số: chương Tổng quan hiện ngay (điểm chuyển từ tổng quan sang chiều sâu). Đổi người / cách tính → tải lại.
+  // Chạy SAU hiệu ứng tự mở ở trên: lượt đầu đang tự mở khoá (quay về từ đăng nhập / nạp Sao) thì không tải bản xem trước.
+  const khoaTuMo = tuMo ? JSON.stringify(than ?? laSo) : "";
+  const lanDauTuMo = useRef(true);
+  useEffect(() => {
+    if (!khoaTuMo) return;
+    const boQua = lanDauTuMo.current && daTuMo.current;
+    lanDauTuMo.current = false;
+    if (!boQua) void tai(false, false, true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ theo khoá đầu vào
+  }, [khoaTuMo]);
 
   if (!bc) {
     return (
