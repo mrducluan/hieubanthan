@@ -454,6 +454,14 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
   → **Xuất bản** → hieuban.com đổi sau vài giây. Để trống ô nào = chữ cũ trong code; **gỡ xuất bản** = về nguyên bản.
   /gioi-thieu, /lien-he: sửa theo **Mục** (giữ đúng neo, vd `su-menh`, `nguon`). Video chỉ tải khi người đọc bấm phát.
   Nút kêu gọi có ô "Mã đo" → xem số bấm ở PostHog sự kiện `cms_khoi_bam`. Trang pháp lý + trang kiến thức: pha sau (ND-4, ND-5).
+- [ ] CMSNOI. (2026-10-19) "Đồng bộ ngay" báo **401** = web không nhận bí mật của CMS. Bản sửa đã bỏ dấu cách/xuống dòng
+  thừa ở bí mật (lỗi hay gặp khi dán vào Vercel) và nay báo rõ bên nào sai. Sau khi PR merge + web và CMS deploy xong:
+  bấm lại **Đồng bộ ngay**. Nếu vẫn báo lỗi, làm theo đúng câu nó hiện:
+  - "khác bên web" → Vercel **web** và **cms** → Settings → Environment Variables → `CMS_WEBHOOK_SECRET` dán CÙNG một chuỗi
+    (môi trường Production) → **Redeploy cả hai** (đổi biến không có hiệu lực tới khi deploy lại).
+  - "Web chưa có" → thêm `CMS_WEBHOOK_SECRET` vào project **web** (Production) → Redeploy web.
+  - "WEB_URL trỏ sai" → project **cms**: `WEB_URL` = `https://hieuban.com`.
+  Cùng bí mật này dùng để CMS báo web xoá cache khi anh sửa bài/trang → khi còn 401, chữ sửa trên CMS chậm tới ~6 giờ mới lên web.
 - [x] CMS15. (2026-10-13, ND-0/ND-1 — sửa nội dung từng trang) Sau khi PR merge, CMS redeploy tự chạy migration
   `noi_dung_trang`. Không cần biến mới (dùng `WEB_URL` + `CMS_WEBHOOK_SECRET` + `ENGINE_URL` đã có). Thử ~5 phút:
   1) CMS → **Giao diện website → Trang website** → bấm **"Đồng bộ ngay"** → danh sách hiện ~39 trang (công cụ, trang

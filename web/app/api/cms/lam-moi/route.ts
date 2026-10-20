@@ -3,14 +3,12 @@
 // ND: kèm `duong` (trang website vừa đổi) → xoá thêm thẻ "trang:<duong>" (chỉ nhận đường dẫn trong site).
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
-import { soKhop, TAG_CMS } from "@/lib/cms";
+import { kiemBiMatCms, TAG_CMS } from "@/lib/cms";
 import { duongHopLe, theTrang } from "@/lib/noi-dung-trang";
 
 export async function POST(req: Request) {
-  const bi = process.env.CMS_WEBHOOK_SECRET;
-  if (!bi || !soKhop(req.headers.get("x-cms-bi-mat"), bi)) {
-    return NextResponse.json({ loi: "Không được phép." }, { status: 401 });
-  }
+  const chan = kiemBiMatCms(req);
+  if (chan) return chan;
   let slug: string | null = null, duong: string | null = null;
   try {
     const b = (await req.json()) as { slug?: unknown; duong?: unknown };

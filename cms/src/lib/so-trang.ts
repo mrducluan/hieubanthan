@@ -8,7 +8,7 @@
 // Chạy bằng Local API, context dongBo/boQuaLamMoi (không bắn webhook làm mới web cho từng tài liệu).
 import { sql } from "@payloadcms/db-postgres";
 import type { Payload } from "payload";
-import { webUrl } from "./web";
+import { loiKetNoiWeb, webUrl } from "./web";
 
 export type MucSoTrang = { duong: string; nhom: string; ten: string; o: string[]; mac_dinh: Record<string, unknown> };
 export type MauCumSo = { mau_duong: string; nhom: string; ten: string; bien: string[]; o: string[]; nguon_kb: Record<string, unknown> };
@@ -41,10 +41,10 @@ export function kiemSoTrang(d: unknown): SoTrang {
 }
 
 export async function laySoTrang(): Promise<SoTrang> {
-  const bi = process.env.CMS_WEBHOOK_SECRET;
-  if (!bi || !process.env.WEB_URL) throw new Error("Thiếu WEB_URL hoặc CMS_WEBHOOK_SECRET trên CMS.");
+  const bi = process.env.CMS_WEBHOOK_SECRET?.trim();
+  if (!bi || !process.env.WEB_URL) throw new Error("Thiếu WEB_URL hoặc CMS_WEBHOOK_SECRET trên CMS (project Vercel cms) — thêm rồi Redeploy CMS.");
   const r = await fetch(`${webUrl()}/api/so-trang`, { headers: { "x-cms-bi-mat": bi }, signal: AbortSignal.timeout(15_000), cache: "no-store" });
-  if (!r.ok) throw new Error(`Web trả ${r.status} khi đọc sổ trang.`);
+  if (!r.ok) throw new Error(loiKetNoiWeb(r.status));
   return kiemSoTrang(await r.json());
 }
 

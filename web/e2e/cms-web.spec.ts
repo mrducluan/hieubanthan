@@ -103,8 +103,10 @@ test("truy vấn REST kiểu Payload + mã xem trước so thời gian hằng", 
 });
 
 test("route từ CMS: sai bí mật bị từ chối; /blog vẫn chạy khi chưa có CMS", async ({ request, page }) => {
-  expect((await request.post("/api/cms/lam-moi", { data: {} })).status()).toBe(401);
-  expect((await request.post("/api/cms/lam-moi", { headers: { "x-cms-bi-mat": "sai" }, data: {} })).status()).toBe(401);
+  // web e2e chạy không có CMS_WEBHOOK_SECRET → 503 "web chưa đặt" (CMS báo đúng bên cần sửa); có bí mật mà sai → 401
+  // (kiểm ở cms/e2e "Đồng bộ ngay"). Không lần nào nhận yêu cầu.
+  expect((await request.post("/api/cms/lam-moi", { data: {} })).status()).toBe(503);
+  expect((await request.post("/api/cms/lam-moi", { headers: { "x-cms-bi-mat": "sai" }, data: {} })).status()).toBe(503);
   expect((await request.get("/api/cms/xem-truoc?slug=abc&ma=sai", { maxRedirects: 0 })).status()).toBe(401);
   expect((await request.get("/api/cms/xem-truoc?slug=../../x&ma=sai", { maxRedirects: 0 })).status()).toBe(401);
   await page.goto("/blog");
