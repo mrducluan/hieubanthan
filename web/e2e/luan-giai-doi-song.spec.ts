@@ -283,7 +283,7 @@ async function moBaoCaoKhoa(page: Page, bc: object) {
   await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
 }
 
-test("Bát tự / Bản đồ con số giữ cách hiện cũ (không có khối đời sống)", async ({ page }) => {
+test("Bản đồ con số giữ cách hiện cũ (không có khối đời sống; Bát tự đã sang khung đời sống — luan-giai-bat-tu.spec)", async ({ page }) => {
   await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
   await napHoSo(page);
   await page.goto("/than-so");

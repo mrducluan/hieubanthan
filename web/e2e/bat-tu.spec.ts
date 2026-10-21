@@ -45,14 +45,18 @@ test("đổi năm xem → lưu niên đổi theo, giao diện giấy cổ", asyn
   await expect(page.getByTestId("luu-nien-bat-tu")).toContainText(`Lưu niên ${nam}`);
 });
 
-test("luận giải toàn bộ Bát tự", async ({ page }) => {
+test("luận giải toàn bộ Bát tự (engine thật, khung đời sống BT-ĐS)", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/bat-tu");
   await page.getByRole("button", { name: "Xem luận giải" }).click();
   const bc = page.getByTestId("luan-giai-toan-bo");
-  for (const chuong of ["Nhật chủ và tính cách", "Ngũ hành, thân vượng nhược, dụng thần", "Sự nghiệp, tiền bạc qua thập thần", "Đại vận và năm nay"]) {
+  await expect(bc).toHaveAttribute("data-phien-ban", "doi_song_1");
+  for (const chuong of ["Con người bạn", "Năng lượng của bạn: thừa gì, thiếu gì", "Các giai đoạn cuộc đời", "Công việc & sự nghiệp",
+    "Năm nay & tháng tới", "Lời khuyên dành cho bạn"]) {
     await expect(bc).toContainText(chuong);
   }
+  await expect(bc.getByTestId("bieu-do-ngu-hanh").getByTestId("cot-hanh")).toHaveCount(5);
+  await expect(bc.getByTestId("thanh-than")).toBeVisible();
 });
 
 test("tải ảnh tứ trụ: ra file PNG", async ({ page }) => {
