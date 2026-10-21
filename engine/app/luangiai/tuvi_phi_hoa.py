@@ -56,7 +56,8 @@ _MAC_DINH = {
     "tu_hoa": {
         "tieu_de": "Cung {tu_cung} tự hoá {hoa}",
         "nghia": "Cung {tu_cung} tự hoá {hoa}: {y_hoa} xuất phát và quay về ngay trong {mang_tu}.",
-        "viec_nen_lam": "Quan sát chuyện {mang_tu} có xu hướng tự lên xuống theo nhịp riêng.",
+        "viec_nen_lam": ("Ghi lại vài lần chuyện {mang_tu} tự tốt lên hay tự rối đi, để thấy phần nào do chính "
+                         "mình tạo ra."),
         "cau_tu_soi": "Trong {mang_tu}, điều gì mình tự tạo ra rồi tự nhận lại?",
     },
 }

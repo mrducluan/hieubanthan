@@ -2131,7 +2131,7 @@
     "loi_khuyen": "Nói lời cảm ơn cụ thể với người ấy về một việc họ đã làm trong tuần."
    },
    "Tử Nữ": {
-    "y": "Con cái hoặc người nhỏ tuổi bạn dìu dắt thường mang lại niềm vui và cảm giác được tiếp sức.",
+    "y": "Con cái hoặc người nhỏ tuổi bạn dìu dắt thường làm bạn tự hào và thấy được tiếp thêm sức.",
     "loi_khuyen": "Dành một buổi mỗi tuần làm việc con thích, không lồng thêm bài học nào."
    },
    "Tài Bạch": {
@@ -2546,68 +2546,142 @@
    "loi_khuyen": "Làm chậm lại khi lái xe, nấu nướng hay dùng dụng cụ sắc; thấy mệt thì nghỉ ngay, đừng cố nốt."
   },
   "chung": "Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám.",
-  "vo_chinh_dieu": "Khi phần sức khoẻ không có điểm nhấn rõ, nhịp khoẻ của bạn phụ thuộc nhiều vào môi trường và thói quen hằng ngày, nên giữ nếp ăn ngủ đều là cách chăm tốt nhất."
+  "vo_chinh_dieu": "Khi phần sức khoẻ không có điểm nhấn rõ, nhịp khoẻ của bạn phụ thuộc nhiều vào môi trường và thói quen hằng ngày, nên giữ nếp ăn ngủ đều là cách chăm tốt nhất.",
+  "sat_sao": {
+   "Kình Dương": {
+    "thoi_quen": "Bạn hay làm nhanh, vội tay khi cầm dao kéo hay khi lái xe.",
+    "loi_khuyen": "Khi đang vội, chậm lại ở bếp và trên đường; để sẵn hộp sơ cứu ở nhà và trên xe."
+   },
+   "Đà La": {
+    "thoi_quen": "Bạn hay để mệt kéo dài, việc dây dưa làm bạn ngủ không yên.",
+    "loi_khuyen": "Mỗi tối viết ra ba việc còn dở cho ngày mai rồi mới đi ngủ, để đầu óc được nghỉ."
+   },
+   "Hỏa Tinh": {
+    "thoi_quen": "Bạn dễ nóng trong người khi căng thẳng, ăn cay, uống rượu theo cơn.",
+    "loi_khuyen": "Uống đủ nước, bớt đồ cay nóng và rượu bia trong những tuần nhiều áp lực."
+   },
+   "Linh Tinh": {
+    "thoi_quen": "Bạn hay lo ngầm, căng thẳng tích lại mà không nói ra, dễ khó ngủ.",
+    "loi_khuyen": "Khi khó ngủ vài đêm liền, kể chuyện đang lo với một người tin được và tập thở chậm trước giờ ngủ."
+   },
+   "Địa Không": {
+    "thoi_quen": "Bạn hay bỏ bữa, sinh hoạt thất thường khi mải việc hay mải nghĩ.",
+    "loi_khuyen": "Đặt nhắc giờ ăn trưa và giờ đi ngủ trên điện thoại, kể cả ngày bận."
+   },
+   "Địa Kiếp": {
+    "thoi_quen": "Bạn dễ làm quá sức trong một thời gian ngắn rồi đuối hẳn.",
+    "loi_khuyen": "Chia việc lớn thành từng phần, mỗi ngày dừng ở một giờ cố định dù chưa xong."
+   }
+  }
  },
  "dai_han": {
   "Mệnh": {
    "chu_de": "tự định hình con người mình",
    "nen_lam": "Tập trung vào việc bạn thật sự muốn làm và rèn những thói quen nền.",
-   "de_vap": "Dễ ôm hết mọi việc vì muốn tự chứng tỏ mình."
+   "de_vap": "Dễ ôm hết mọi việc vì muốn tự chứng tỏ mình.",
+   "thuan": "Mười năm hợp để chọn hướng đi riêng và thử sức ở việc bạn thật sự muốn.",
+   "can_bang": "Mười năm định hình nếp sống — chọn hai ba thói quen nền và giữ cho đều.",
+   "can_chu_dong": "Mười năm dễ tự gồng — đặt ít mục tiêu hơn và nhờ người góp ý trước quyết định lớn.",
+   "tuoi_nho": "Tuổi nhỏ là lúc tính cách thành hình; người lớn nên để ý con thích gì thật sự."
   },
   "Huynh Đệ": {
    "chu_de": "anh em, bạn thân và chuyện chia sẻ",
    "nen_lam": "Hợp tác với người thân tín và chăm giữ quan hệ anh em.",
-   "de_vap": "Dễ vướng chuyện tiền nong chung với người thân."
+   "de_vap": "Dễ vướng chuyện tiền nong chung với người thân.",
+   "thuan": "Hợp góp sức với anh chị em hay bạn thân làm một việc chung.",
+   "can_bang": "Giữ liên lạc đều với anh chị em; chuyện tiền nong chung thì ghi rõ.",
+   "can_chu_dong": "Tránh góp vốn hay đứng tên chung với người thân khi chưa có giấy tờ rõ.",
+   "tuoi_nho": "Tuổi nhỏ gắn với anh chị em, bạn chơi — học cách chia sẻ và giữ lời."
   },
   "Phu Thê": {
    "chu_de": "tình cảm, hôn nhân và người bạn đời",
    "nen_lam": "Dành thời gian cho người bên cạnh và những thoả thuận chung của hai người.",
-   "de_vap": "Dễ để việc riêng lấn át chuyện hai người."
+   "de_vap": "Dễ để việc riêng lấn át chuyện hai người.",
+   "thuan": "Hợp vun đắp chuyện hai người — cùng làm một kế hoạch lớn, hoặc gặp người hợp nếu còn một mình.",
+   "can_bang": "Dành thời gian riêng cho hai người, chia việc nhà rõ ràng.",
+   "can_chu_dong": "Hai người dễ lệch nhịp — hẹn một buổi mỗi tuần để nói chuyện, việc lớn bàn trước rồi mới làm.",
+   "tuoi_nho": "Tuổi đi học, đây là lúc học cách làm bạn và cư xử với người khác giới."
   },
   "Tử Nữ": {
    "chu_de": "con cái, học trò và việc dìu dắt",
    "nen_lam": "Dành thời gian nuôi dạy con hoặc kèm cặp người trẻ.",
-   "de_vap": "Dễ lo cho con quá mức mà quên chăm chính mình."
+   "de_vap": "Dễ lo cho con quá mức mà quên chăm chính mình.",
+   "thuan": "Hợp dồn sức cho thế hệ sau — con cái, cháu hoặc người trẻ bạn kèm cặp.",
+   "can_bang": "Dành giờ cố định cho con hoặc người trẻ bạn kèm, để họ tự làm việc vừa sức.",
+   "can_chu_dong": "Con cái dễ khiến bạn lo nhiều — nghe con nói hết trước khi góp ý, và chừa sức cho chính mình.",
+   "tuoi_nho": "Tuổi nhỏ hợp chơi với em nhỏ, tập chăm một con vật hay cái cây để biết lo cho người khác."
   },
   "Tài Bạch": {
    "chu_de": "kiếm tiền và quản lý tiền",
    "nen_lam": "Tìm cách tăng thu nhập và lập kế hoạch để dành rõ ràng.",
-   "de_vap": "Dễ chạy theo tiền mà bỏ quên nghỉ ngơi."
+   "de_vap": "Dễ chạy theo tiền mà bỏ quên nghỉ ngơi.",
+   "thuan": "Hợp mở thêm nguồn thu và tích luỹ cho lâu dài.",
+   "can_bang": "Giữ thu chi đều, mỗi tháng để dành một tỉ lệ cố định.",
+   "can_chu_dong": "Tiền dễ hụt — giữ quỹ dự phòng sáu tháng, không vay để đầu tư.",
+   "tuoi_nho": "Tuổi đi học, tập giữ tiền tiêu vặt và biết món nào đáng mua."
   },
   "Tật Ách": {
    "chu_de": "sức khoẻ và nhịp sống",
    "nen_lam": "Xây nếp ăn ngủ, vận động đều và khám sức khoẻ định kỳ.",
-   "de_vap": "Dễ gồng quá sức vì nghĩ mình còn khoẻ."
+   "de_vap": "Dễ gồng quá sức vì nghĩ mình còn khoẻ.",
+   "thuan": "Hợp để xây nếp tập luyện lâu dài khi sức còn dồi dào.",
+   "can_bang": "Giữ giờ ngủ, bữa ăn đều và khám sức khoẻ mỗi năm.",
+   "can_chu_dong": "Sức dễ hao — bớt làm thêm giờ, nghỉ ngay khi mệt kéo dài và khám định kỳ đúng hẹn.",
+   "tuoi_nho": "Tuổi nhỏ, nếp ăn ngủ và chơi ngoài trời là nền sức khoẻ về sau."
   },
   "Thiên Di": {
    "chu_de": "đi xa và môi trường mới",
    "nen_lam": "Mở rộng ra ngoài: đổi chỗ làm, học thêm, gặp người mới.",
-   "de_vap": "Dễ thấy chông chênh khi phải xa chỗ quen."
+   "de_vap": "Dễ thấy chông chênh khi phải xa chỗ quen.",
+   "thuan": "Hợp để đi học xa, nhận việc ở nơi mới hay mở rộng mối quen bên ngoài.",
+   "can_bang": "Ra ngoài vừa đủ — thử chỗ mới nhưng vẫn giữ một nơi quen để về.",
+   "can_chu_dong": "Ra ngoài dễ chông chênh — lo giấy tờ, chỗ ở kỹ trước khi chuyển, đừng đổi nhiều thứ cùng lúc.",
+   "tuoi_nho": "Tuổi nhỏ hợp đi chơi xa, trại hè, làm quen chỗ mới cùng người lớn."
   },
   "Nô Bộc": {
    "chu_de": "bạn bè, đồng nghiệp và đội nhóm",
    "nen_lam": "Xây một nhóm làm việc tốt và chọn bạn kỹ.",
-   "de_vap": "Dễ mất sức vì giúp người không đúng chỗ."
+   "de_vap": "Dễ mất sức vì giúp người không đúng chỗ.",
+   "thuan": "Hợp để lập nhóm, tuyển người hoặc nhận vai dẫn dắt người khác.",
+   "can_bang": "Giữ vài mối quan hệ tốt, giúp người nhưng trong sức mình.",
+   "can_chu_dong": "Dễ hao sức vì người khác — chọn kỹ người cùng làm, chuyện tiền với bạn bè luôn ghi lại.",
+   "tuoi_nho": "Tuổi đi học, chọn bạn chơi và tập làm việc nhóm."
   },
   "Quan Lộc": {
    "chu_de": "sự nghiệp và vị trí trong nghề",
    "nen_lam": "Dồn sức cho chuyên môn và nhận những việc có trách nhiệm rõ.",
-   "de_vap": "Dễ cuốn vào công việc mà lỡ những dịp bên gia đình."
+   "de_vap": "Dễ cuốn vào công việc mà lỡ những dịp bên gia đình.",
+   "thuan": "Hợp nhận vai trò lớn hơn hoặc dồn sức vào việc mình giỏi nhất cho ra kết quả.",
+   "can_bang": "Làm chắc phần việc chính, mỗi năm học thêm một kỹ năng.",
+   "can_chu_dong": "Công việc nhiều sức ép — giữ chỗ làm ổn định, mỗi năm học một kỹ năng dự phòng.",
+   "tuoi_nho": "Tuổi đi học, dồn sức cho việc học và thử nhiều môn để biết mình thích gì."
   },
   "Điền Trạch": {
    "chu_de": "nhà cửa, an cư và tài sản",
    "nen_lam": "Lo chuyện chỗ ở và tích luỹ tài sản lâu dài.",
-   "de_vap": "Dễ vay quá sức vì muốn có nhà thật nhanh."
+   "de_vap": "Dễ vay quá sức vì muốn có nhà thật nhanh.",
+   "thuan": "Hợp để lo chỗ ở lâu dài, sửa nhà hoặc tích luỹ tài sản.",
+   "can_bang": "Lo chỗ ở vừa sức, sửa sang từng phần thay vì làm một lần.",
+   "can_chu_dong": "Nhà cửa dễ tốn kém — không vay quá sức, giấy tờ rõ rồi mới xuống tiền.",
+   "tuoi_nho": "Tuổi nhỏ gắn với nếp nhà; ít đổi chỗ ở thì con học hành yên hơn."
   },
   "Phúc Đức": {
    "chu_de": "đời sống tinh thần và gia đình lớn",
    "nen_lam": "Chăm lo niềm vui riêng, giữ nếp nhà và giấc ngủ yên.",
-   "de_vap": "Dễ trăn trở mãi chuyện cũ trong họ hàng."
+   "de_vap": "Dễ trăn trở mãi chuyện cũ trong họ hàng.",
+   "thuan": "Hợp chăm đời sống tinh thần, gắn bó họ hàng và giữ một thú vui lâu dài.",
+   "can_bang": "Giữ nếp nhà và một thú vui riêng để đầu óc được nghỉ.",
+   "can_chu_dong": "Đầu óc dễ nặng — bớt ôm chuyện họ hàng, mỗi ngày có một khoảng nghỉ không điện thoại.",
+   "tuoi_nho": "Tuổi nhỏ hợp gần ông bà, nghe chuyện nhà và học nếp nhà."
   },
   "Phụ Mẫu": {
    "chu_de": "học hành, cha mẹ và người dẫn dắt",
    "nen_lam": "Học từ người đi trước và giữ gần cha mẹ.",
-   "de_vap": "Dễ va chạm với người lớn vì khác cách nghĩ."
+   "de_vap": "Dễ va chạm với người lớn vì khác cách nghĩ.",
+   "thuan": "Hợp để học thêm, thi cử, làm giấy tờ và học từ người đi trước.",
+   "can_bang": "Giữ gần cha mẹ, việc giấy tờ làm đúng hạn.",
+   "can_chu_dong": "Dễ va với người lớn hoặc vướng thủ tục — nói chuyện bằng lý lẽ nhẹ nhàng, giấy tờ kiểm hai lần.",
+   "tuoi_nho": "Tuổi đi học, việc chính là học hành và nghe thầy cô, cha mẹ chỉ bảo."
   }
  },
  "muc": {
@@ -2619,7 +2693,7 @@
   "tu_phu_dong_cung": "Bạn điềm tĩnh, biết tổ chức và giữ của, dễ được giao việc lớn — chỉ cần tập lắng nghe và giao bớt việc.",
   "tu_phu_vu_tuong": "Bạn hợp môi trường có nề nếp, giỏi quản lý tiền và người; càng nhận trách nhiệm rõ càng làm tốt.",
   "phu_tuong_trieu_vien": "Bạn hay được người trên che chở và có chỗ làm ổn định; đừng vì yên ổn mà ngại thử việc mới.",
-  "co_nguyet_dong_luong": "Bạn hợp làm trong tổ chức, theo chuyên môn, hành chính hay giáo dục; làm đều tay thì vững hơn làm liều.",
+  "co_nguyet_dong_luong": "Bạn hợp làm trong tổ chức, theo chuyên môn, hành chính hay giáo dục; làm chắc từng bước thì vững hơn làm liều.",
   "sat_pha_tham": "Đời bạn nhiều lần đổi hướng; bạn dám làm, hợp tự lập nghiệp, miễn là có kế hoạch dự phòng cho mỗi lần rẽ.",
   "cuc_huong_ly_minh": "Bạn có phong thái đĩnh đạc, dễ được nể trọng và hợp vai dẫn dắt; nhớ nghe ý người làm cùng.",
   "that_sat_trieu_dau": "Bạn can đảm, quyết đoán, có thể làm nên từ hai bàn tay trắng nếu kiên trì tới cùng.",
@@ -2750,24 +2824,228 @@
   "sự chuyển hoá",
   "đích đến"
  ],
- "muc_mo_ta": {
-  "thuan": "Mảng đời này đang có nhiều điều đỡ cho bạn; làm đúng hướng thì dễ ra kết quả.",
-  "can_bang": "Có cả điểm thuận lẫn chỗ cần để ý; kết quả tuỳ nhiều vào cách bạn làm.",
-  "can_chu_dong": "Mảng này không tự trôi chảy; bạn chủ động sắp xếp sớm thì mọi việc nhẹ hơn nhiều."
+ "cum_chung_chung": [
+  "tuỳ hoàn cảnh",
+  "tùy hoàn cảnh",
+  "tuỳ nhiều vào",
+  "tùy nhiều vào",
+  "kết quả tuỳ",
+  "kết quả tùy",
+  "lúc lên lúc xuống",
+  "có lúc thế này",
+  "khi thế này khi thế khác",
+  "mọi chuyện sẽ ổn",
+  "mọi việc sẽ ổn",
+  "mọi việc nhẹ hơn",
+  "đừng chủ quan",
+  "có cả điểm thuận lẫn",
+  "có điểm tựa, cũng có",
+  "có sẵn điểm tựa",
+  "có sẵn nhiều thuận lợi",
+  "nhiều điều đỡ cho bạn",
+  "làm đúng hướng",
+  "giữ nhịp đều",
+  "biết trước thì gỡ được",
+  "mỗi điều có cách gỡ",
+  "dồn sức cho chủ đề này",
+  "việc gì chuẩn bị trước",
+  "đừng đợi việc dồn đến",
+  "không tự trôi chảy",
+  "ít khi tự trôi chảy",
+  "để ý nhịp nghỉ",
+  "theo nhịp riêng",
+  "cần cân bằng",
+  "giữ cân bằng",
+  "không quá dễ cũng không quá khó",
+  "thói quen hằng ngày của bạn quyết định",
+  "làm đều tay",
+  "dùng nó đều tay",
+  "kết quả đến khá tự nhiên",
+  "chuẩn bị sớm cho việc lớn",
+  "hỏi thêm người có kinh nghiệm",
+  "đừng bỏ ngang khi chưa thấy kết quả",
+  "có lúc thuận có lúc",
+  "mặt tốt lẫn mặt xấu",
+  "con dao hai lưỡi",
+  "mang lại niềm vui",
+  "biết hưởng phúc",
+  "có xu hướng tự lên xuống",
+  "chú ý chính bản thân"
+ ],
+ "tuan_triet": {
+  "_ghi_chu": "Tuần/Triệt đóng cung (Nam phái): Triệt mạnh ở tiền vận (lúc trẻ hay bị ngắt, về sau thông), Tuần chậm mà bền (rõ dần về sau). Mỗi cung một câu riêng + việc nên làm.",
+  "Mệnh": {
+   "tuan": "Bạn thường thành công muộn hơn bạn bè cùng lứa; năng lực có sẵn nhưng phải qua vài lần thử mới được người khác nhận ra.",
+   "triet": "Thời trẻ bạn hay phải làm lại từ đầu vì kế hoạch bị ngắt giữa chừng; càng về sau bạn càng tự đứng vững.",
+   "loi_khuyen": "Đặt mục tiêu theo chặng ba năm thay vì so với bạn bè từng năm, và ghi lại điều đã làm được sau mỗi chặng.",
+   "loi_khuyen_triet": "Khi một kế hoạch bị ngắt, ghi lại điều học được rồi bắt đầu lại sớm, đừng đợi đủ điều kiện mới làm."
+  },
+  "Huynh Đệ": {
+   "tuan": "Anh chị em ít khi giúp được bạn ngay lúc cần; tình thân rõ dần khi mọi người đã lớn và có gia đình riêng.",
+   "triet": "Thời nhỏ bạn và anh chị em hay xa nhau hoặc mỗi người một hướng; về sau mới gần lại.",
+   "loi_khuyen": "Đừng đợi anh chị em chủ động; mỗi tháng gọi một cuộc chỉ để hỏi chuyện, không nhờ vả.",
+   "loi_khuyen_triet": "Giữ liên lạc với anh chị em bằng một lịch gặp cố định mỗi năm, kể cả khi ở xa."
+  },
+  "Phu Thê": {
+   "tuan": "Chuyện tình cảm của bạn thường đến muộn hoặc phải qua một hai mối mới thành; quan hệ càng lâu càng bền.",
+   "triet": "Những mối tình đầu của bạn dễ dừng giữa chừng vì hoàn cảnh hơn là vì hết thương; mối về sau thường vững hơn.",
+   "loi_khuyen": "Đừng vội cưới cho kịp tuổi; quen đủ lâu để thấy người ấy xử lý một lần cãi nhau và một lần thiếu tiền ra sao.",
+   "loi_khuyen_triet": "Khi một mối quan hệ dừng, cho mình vài tháng nhìn lại điều mình thật sự cần trước khi bắt đầu mối mới."
+  },
+  "Tử Nữ": {
+   "tuan": "Chuyện con cái thường đến muộn hơn dự tính, hoặc con chậm lộ khả năng nhưng về sau tiến đều.",
+   "triet": "Những năm đầu nuôi con dễ xáo trộn như gửi con xa, đổi trường nhiều lần; con lớn thì yên dần.",
+   "loi_khuyen": "So con với chính nó của năm ngoái, đừng so với con nhà khác; giữ một buổi mỗi tuần chỉ để chơi với con.",
+   "loi_khuyen_triet": "Khi phải đổi trường hay đổi người trông con, cho con thời gian làm quen và giữ nguyên nếp ở nhà."
+  },
+  "Tài Bạch": {
+   "tuan": "Tiền của bạn về chậm: lương tăng muộn, khoản thu hay trễ hạn; bù lại tiền đã giữ được thì ít hao.",
+   "triet": "Thời trẻ thu nhập của bạn hay bị gián đoạn hoặc kẹt ở một khoản; từ trung niên tiền ổn định hơn.",
+   "loi_khuyen": "Luôn có một khoản đủ sống ba tháng, và đừng tính chi tiêu dựa trên khoản tiền chưa về tài khoản.",
+   "loi_khuyen_triet": "Đừng dồn hết thu nhập vào một nguồn; có ít nhất một khoản thu phụ hoặc khoản dự phòng riêng."
+  },
+  "Tật Ách": {
+   "tuan": "Cơ thể bạn hồi sức chậm: mệt một đợt thì lâu lại sức hơn người khác.",
+   "triet": "Thời trẻ nhịp sinh hoạt của bạn hay đứt quãng vì học, làm, thức khuya thất thường; về sau giữ nếp thì sức bền lên.",
+   "loi_khuyen": "Sau mỗi đợt làm căng, cho mình một hai ngày nghỉ thật, và giữ lịch khám định kỳ mỗi năm.",
+   "loi_khuyen_triet": "Giữ giờ ngủ cố định kể cả mùa thi, mùa bận; khám sức khoẻ mỗi năm một lần."
+  },
+  "Thiên Di": {
+   "tuan": "Những lần đi xa hay đổi môi trường của bạn thường khởi đầu chậm: giấy tờ lâu, cần thời gian làm quen.",
+   "triet": "Thời trẻ bạn hay phải hoãn hoặc đổi hướng những dự định đi học, đi làm nơi khác.",
+   "loi_khuyen": "Lo giấy tờ, chỗ ở trước ít nhất một tháng, và cho mình ba tháng làm quen rồi mới đánh giá nơi mới.",
+   "loi_khuyen_triet": "Luôn có phương án hai cho chuyến đi hay kế hoạch chuyển chỗ, và giữ giấy tờ sẵn sàng."
+  },
+  "Nô Bộc": {
+   "tuan": "Bạn tìm được nhóm bạn và đồng nghiệp tin cậy khá muộn; người giúp thật thường đến sau vài lần bạn tự xoay.",
+   "triet": "Nhóm bạn và đội làm việc thời trẻ của bạn hay tan giữa chừng; về sau bạn chọn người kỹ hơn và giữ được lâu hơn.",
+   "loi_khuyen": "Làm chung một việc nhỏ trước khi rủ ai góp vốn hay làm ăn lớn.",
+   "loi_khuyen_triet": "Khi nhóm tan, giữ liên lạc với một hai người tốt nhất trong nhóm; họ hay là người giúp bạn về sau."
+  },
+  "Quan Lộc": {
+   "tuan": "Bạn lên vị trí chậm hơn sức mình: làm tốt nhưng phải đợi lâu mới được ghi nhận, càng về sau càng vững.",
+   "triet": "Thời trẻ công việc của bạn hay bị ngắt như dự án dừng, chỗ làm đổi chủ, phải đổi nghề; từ trung niên mới ổn định một hướng.",
+   "loi_khuyen": "Chọn một chuyên môn chính và tích luỹ đều trong đó; mỗi năm cập nhật hồ sơ năng lực một lần để không bị động khi phải đổi.",
+   "loi_khuyen_triet": "Mỗi lần đổi việc, giữ lại một kỹ năng chính mang theo được, để không phải bắt đầu từ số không."
+  },
+  "Điền Trạch": {
+   "tuan": "Chuyện nhà cửa của bạn thường thành muộn: mua nhà, sửa nhà, sang tên đều kéo dài hơn dự tính.",
+   "triet": "Thời trẻ bạn hay phải chuyển chỗ ở hoặc chưa có chỗ ở cố định; về sau mới yên một chỗ.",
+   "loi_khuyen": "Khi mua nhà, cộng thêm ba tháng và một khoản dự phòng vào kế hoạch; giấy tờ chưa xong thì chưa chuyển hết tiền.",
+   "loi_khuyen_triet": "Khi còn phải chuyển chỗ, chọn đồ đạc gọn, dễ mang theo; chưa cần vội mua nhà."
+  },
+  "Phúc Đức": {
+   "tuan": "Bạn thấy yên lòng muộn: tuổi trẻ hay băn khoăn, càng lớn tuổi càng biết điều gì làm mình vui.",
+   "triet": "Những năm đầu đời bạn ít được nhờ vào nếp nhà hay họ hàng, phải tự tìm chỗ dựa tinh thần.",
+   "loi_khuyen": "Giữ một thói quen nhỏ cho riêng mình như đọc, đi bộ, làm vườn, và làm cả những ngày bận.",
+   "loi_khuyen_triet": "Tự tạo nếp riêng cho mình như một bữa cơm cuối tuần hay một buổi gặp bạn cũ, làm chỗ dựa tinh thần."
+  },
+  "Phụ Mẫu": {
+   "tuan": "Sự giúp đỡ của cha mẹ hay người dẫn dắt thường đến muộn; thời đi học bạn hay phải tự xoay nhiều hơn bạn bè.",
+   "triet": "Thời nhỏ bạn hay xa cha mẹ hoặc ít được cha mẹ kèm; giấy tờ, thủ tục của bạn cũng hay phải làm lại.",
+   "loi_khuyen": "Chủ động xin lời khuyên của người đi trước, và giữ bản sao mọi giấy tờ quan trọng ở một chỗ.",
+   "loi_khuyen_triet": "Tìm một người đi trước để hỏi ý khi chọn trường, chọn việc, và làm giấy tờ sớm hơn hạn."
+  }
  },
- "muc_mo_ta_bien_the": {
-  "_ghi_chu": "Câu thay thế cho muc_mo_ta để các chương không lặp cùng một câu (RULES chọn theo thứ tự chương).",
-  "thuan": [
-   "Đây là chỗ dựa của bạn; dùng nó đều tay thì kết quả đến khá tự nhiên.",
-   "Ở mảng này bạn có sẵn nhiều thuận lợi; điều cần là đừng chủ quan."
-  ],
-  "can_bang": [
-   "Mảng này có điểm tựa, cũng có chỗ phải để tâm; làm đều tay thì giữ được nhịp.",
-   "Không quá dễ cũng không quá khó; thói quen hằng ngày của bạn quyết định nhiều."
-  ],
-  "can_chu_dong": [
-   "Ở mảng này, việc gì chuẩn bị trước một bước thì bớt vất vả hẳn.",
-   "Đây là chỗ nên dành thời gian sớm, đừng đợi việc dồn đến mới lo."
-  ]
+ "than_cu": {
+  "_ghi_chu": "Thân cư cung nào → về sau bạn dồn sức cho mảng đó (Thân chỉ đóng ở Mệnh, Phu Thê, Tài Bạch, Quan Lộc, Thiên Di, Phúc Đức).",
+  "Phu Thê": {
+   "y": "Càng lớn tuổi, bạn càng xoay đời mình quanh người bạn đời: quyết định lớn hay nghĩ tới người ấy trước.",
+   "loi_khuyen": "Bàn với người ấy kế hoạch năm năm của hai người, và giữ một phần việc riêng do mình tự quyết."
+  },
+  "Tài Bạch": {
+   "y": "Càng lớn tuổi, bạn càng dồn sức vào chuyện kiếm và giữ tiền; bạn yên tâm nhất khi tài khoản có dư.",
+   "loi_khuyen": "Đặt một con số đủ dùng cho từng năm; đạt rồi thì dành thời gian cho sức khoẻ và người nhà."
+  },
+  "Quan Lộc": {
+   "y": "Càng lớn tuổi, công việc càng thành phần chính của con người bạn; nghỉ việc lâu bạn dễ thấy hụt.",
+   "loi_khuyen": "Nuôi một sở thích hoặc một nhóm bạn ngoài công việc từ bây giờ, để sau này nghỉ không bị trống."
+  },
+  "Thiên Di": {
+   "y": "Càng lớn tuổi, bạn càng sống nhiều ở bên ngoài: đi lại, gặp người mới làm bạn thấy mình có ích.",
+   "loi_khuyen": "Giữ một chỗ về cố định để nghỉ sau mỗi chuyến, và báo lịch đi lại cho người nhà."
+  },
+  "Phúc Đức": {
+   "y": "Càng lớn tuổi, bạn càng coi trọng sự yên lòng và nếp nhà hơn tiền hay danh.",
+   "loi_khuyen": "Dành thời gian giữ nếp nhà như giỗ chạp, kể chuyện cũ cho con cháu, và một thú vui riêng."
+  },
+  "Mệnh": {
+   "y": "Thân và Mệnh cùng chỗ: con người bạn ít đổi theo tuổi, điểm mạnh và điểm vấp đi theo bạn suốt đời.",
+   "loi_khuyen": "Biết rõ một điểm vấp của mình và đặt sẵn một cách nhắc mình khi nó lặp lại."
+  }
+ },
+ "nhom_sao_chi_tiet": {
+  "_ghi_chu": "Vế thêm theo đúng sao cát/sát có trong cung (nghĩa phổ thông của từng cặp sao).",
+  "Lộc Tồn": "điều tốt ở mảng này thường giữ được lâu",
+  "Tả Phù": "người giúp thường là bạn bè, đồng nghiệp ngang hàng",
+  "Hữu Bật": "người giúp thường là bạn bè, đồng nghiệp ngang hàng",
+  "Văn Xương": "việc cần học, viết, giấy tờ ở mảng này thường suôn",
+  "Văn Khúc": "việc cần học, viết, giấy tờ ở mảng này thường suôn",
+  "Thiên Khôi": "người giúp thường là người lớn tuổi hoặc cấp trên",
+  "Thiên Việt": "người giúp thường là người lớn tuổi hoặc cấp trên",
+  "Kình Dương": "việc bất ngờ thường là va chạm hoặc chuyện kéo dài",
+  "Đà La": "việc bất ngờ thường là va chạm hoặc chuyện kéo dài",
+  "Hỏa Tinh": "chuyện thường bắt đầu từ lúc nóng vội hoặc lo ngầm",
+  "Linh Tinh": "chuyện thường bắt đầu từ lúc nóng vội hoặc lo ngầm",
+  "Địa Không": "dễ có khoản hụt hoặc kế hoạch đổ giữa chừng",
+  "Địa Kiếp": "dễ có khoản hụt hoặc kế hoạch đổ giữa chừng"
+ },
+ "sat_loi_khuyen": {
+  "_ghi_chu": "Việc nên làm khi lục sát ở cung, theo đúng cặp sao: kinh_da (Kình Dương, Đà La — va chạm, dây dưa), hoa_linh (Hoả Tinh, Linh Tinh — nóng vội, lo ngầm), khong_kiep (Địa Không, Địa Kiếp — hao hụt, kế hoạch đổ). Thiếu ô → lời chung của nhóm sát ở cung.",
+  "Mệnh": {
+   "kinh_da": "Khi thấy mình sắp cãi tay đôi, dừng lại hỏi: chuyện này một tuần nữa còn quan trọng không.",
+   "hoa_linh": "Khi nóng lên, đợi mười phút rồi mới trả lời tin nhắn hay quyết việc.",
+   "khong_kiep": "Với kế hoạch lớn, luôn có phương án hai và đừng dồn hết vốn vào một chỗ."
+  },
+  "Huynh Đệ": {
+   "kinh_da": "Có bất đồng với anh chị em thì nói thẳng một lần, đừng để chuyện kéo qua nhiều tháng.",
+   "hoa_linh": "Khi bực anh chị em, nhắn ít lại, gặp mặt nói chuyện thì tốt hơn.",
+   "khong_kiep": "Không đứng tên vay hay bảo lãnh cho anh chị em khi chưa tính được mình chịu nổi nếu mất."
+  },
+  "Phu Thê": {
+   "kinh_da": "Khi hai người căng, mỗi người nói một điều mình cần, không nhắc lại chuyện cũ.",
+   "hoa_linh": "Đặt một luật nhỏ: không bàn chuyện lớn khi một người đang mệt hoặc đói.",
+   "khong_kiep": "Hai người nên có một khoản để dành chung, và bàn trước mọi khoản chi lớn."
+  },
+  "Tử Nữ": {
+   "kinh_da": "Khi con cãi lại, hạ giọng trước rồi hẹn nói tiếp sau bữa cơm.",
+   "hoa_linh": "Khi đang bực, đừng phạt con ngay; đợi tới tối rồi mới nói chuyện.",
+   "khong_kiep": "Để riêng một khoản cho việc học của con, không dùng vào việc khác."
+  },
+  "Tài Bạch": {
+   "kinh_da": "Chuyện tiền với người khác luôn có giấy tờ, kể cả với người quen.",
+   "hoa_linh": "Không cho vay hay đầu tư khi bị giục quyết ngay trong ngày.",
+   "khong_kiep": "Chia tiền làm ba phần: chi tiêu, dự phòng, đầu tư; phần dự phòng không đụng tới."
+  },
+  "Thiên Di": {
+   "kinh_da": "Ra ngoài gặp chuyện va chạm, nhường một bước rồi đi tiếp, đừng đôi co.",
+   "hoa_linh": "Đi sớm hơn dự tính mười lăm phút để không phải vội trên đường.",
+   "khong_kiep": "Khi đi xa, chia tiền và giấy tờ ra hai chỗ, mang theo bản chụp giấy tờ quan trọng."
+  },
+  "Nô Bộc": {
+   "kinh_da": "Với người hay va chạm trong nhóm, nói chuyện trực tiếp một lần, có người thứ ba thì tốt hơn.",
+   "hoa_linh": "Khi bực ai trong nhóm, viết tin nhắn ra nhưng để sáng hôm sau mới gửi.",
+   "khong_kiep": "Chỉ cho bạn bè vay số tiền mà mất đi cũng không ảnh hưởng nhà mình."
+  },
+  "Quan Lộc": {
+   "kinh_da": "Khi bất đồng với đồng nghiệp, gửi tin tóm tắt điều đã thống nhất ngay sau buổi nói chuyện.",
+   "hoa_linh": "Đừng nộp đơn nghỉ hay trả lời sếp lúc đang bực; đợi qua một đêm.",
+   "khong_kiep": "Học thêm một kỹ năng dự phòng để khi cần đổi việc thì không bị động."
+  },
+  "Điền Trạch": {
+   "kinh_da": "Mua bán, sửa nhà đều làm hợp đồng rõ, nhất là khi làm với người quen.",
+   "hoa_linh": "Kiểm tra điện, bếp ga trong nhà định kỳ; bàn việc nhà khi mọi người bình tĩnh.",
+   "khong_kiep": "Giấy tờ nhà đất chưa xong thì chưa chuyển hết tiền, và giữ bản sao ở hai chỗ."
+  },
+  "Phúc Đức": {
+   "kinh_da": "Chuyện cũ trong họ hàng, nói một lần cho rõ rồi thôi, đừng nhắc lại mỗi dịp gặp.",
+   "hoa_linh": "Khi đầu óc rối, viết ra giấy điều đang lo rồi đi bộ hai mươi phút.",
+   "khong_kiep": "Giữ một thú vui ít tốn tiền, để lúc kế hoạch đổ vẫn có chỗ cho đầu óc nghỉ."
+  },
+  "Phụ Mẫu": {
+   "kinh_da": "Bất đồng với cha mẹ hay sếp, nói ý mình kèm lý do và một đề xuất thay vì chỉ phản đối.",
+   "hoa_linh": "Khi đang bực người lớn, đừng trả lời ngay; hẹn nói lại vào hôm sau.",
+   "khong_kiep": "Giấy tờ, hợp đồng quan trọng đọc kỹ hai lần và giữ bản sao."
+  }
  }
 }
