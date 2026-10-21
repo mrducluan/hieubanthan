@@ -101,9 +101,10 @@ def test_tv_v2_noi_dung_hai_chuong(sinh):
     assert db["hop"] and all(h["can_cu"] for h in db["hop"])
     assert any("tự hoá" in x or x.startswith("Hoá ") for x in db["can_cu"])
     thang = [h for h in nn["hop"] if ".thang" in h["ma_mau"]]
-    # tháng liền nhau cùng mức + cùng gợi ý gộp một hộp (mã "thang2+3") → vẫn phủ đủ 3 tháng
-    so = [int(x) for h in thang for x in h["ma_mau"].split(".")[2][5:].split("+")]
-    assert so == [1, 2, 3] and all(h["loai"] == "thoi_diem" for h in thang)
+    # NHIP-2: mỗi tháng một hộp (lời riêng theo cung tháng), mã theo cung tháng → đủ 3 tháng, không trùng lời
+    assert [h["tieu_de"] for h in thang] == ["Tháng 9 âm lịch", "Tháng 10 âm lịch", "Tháng 11 âm lịch"]
+    assert all(h["loai"] == "thoi_diem" and h["ma_mau"].startswith("ds.nam_nay.thang.") for h in thang)
+    assert len({h["noi_dung"] for h in thang}) == 3
     assert "Ưu tiên: đại hạn > lưu niên > tiểu hạn > lưu nguyệt" in nn["can_cu"]
     assert nn["hop"][0]["ma_mau"].startswith("ds.nam_nay.dai_han.")
     # điểm nhấn của chương khoá là câu tóm tắt đã tính của chính chương

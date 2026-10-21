@@ -56,6 +56,11 @@ def test_nhip_3_thang():
     for t in r["thang"]:
         assert {"thang", "nhuan", "phan", "can_chi", "tu", "den", "cung_goc", "chu_de", "muc", "nhan_muc",
                 "ly_do", "tu_hoa_thang", "goi_y", "cau_tu_soi"} <= set(t)
+        # NHIP-2: lời riêng từng tháng + học thuật tách sang can_cu
+        assert {"nhan_thang", "tieu_de_thang", "chu_de_thang", "hop", "can_cu", "diem_sang", "de_y",
+                "noi_tiep"} <= set(t)
+    assert len({t["tieu_de_thang"] for t in r["thang"]}) == 3 and len({t["goi_y"] for t in r["thang"]}) == 3
+    assert r["tom_tat_3_thang"] and len(r["cung"]) == 12
     assert r["uu_tien"] and r["luu_y"]
     # đổi phái lưu nguyệt đi theo la_so
     r2 = _post("nhip-3-thang", {"la_so": {**LA_SO, "luu_nguyet": "dia_chi_thang"}, "ngay_xem": "2026-10-19"})

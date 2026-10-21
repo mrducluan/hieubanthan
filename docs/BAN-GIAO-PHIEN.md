@@ -53,7 +53,7 @@ M1–M7, OpenRouter + workflow llm-55 (mục L), UptimeRobot.
   diệu gặp Tuần/Triệt giữ "việc đến chậm" hay đổi theo Nam phái (mục LG-ĐS trong `VIEC-CUA-ANH.md`).
 
 Mọi việc mới: hỏi trước nếu thêm dependency, đổi schema DB, đổi stack, hay refactor ngoài phạm vi (xem "Cấm tuyệt đối"
-trong `CLAUDE.md`). Đổi kết quả tính toán = tăng `ENGINE_VERSION` (hiện 0.1.4) + golden mới.
+trong `CLAUDE.md`). Đổi kết quả tính toán = tăng `ENGINE_VERSION` (hiện 0.1.5) + golden mới.
 
 ## 5. Cách chủ dự án làm việc với Claude
 

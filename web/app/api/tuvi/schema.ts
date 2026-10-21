@@ -258,6 +258,13 @@ export const Nhip3ThangInput = z.object({
 });
 const HoaGoc = z.object({ hoa: z.string(), sao: z.string(), cung_goc: z.string().nullable() }).passthrough();
 const LuuNienNhip = z.object({ nam_am: z.number(), can_chi: z.string(), tu_hoa: z.array(HoaGoc) }).passthrough();
+/** NHIP-2: hộp nổi bật của một tháng (khuôn Hop LG-ĐS; `nhan` = nhãn riêng "Điểm sáng" / "Nên để ý" / "Nên làm"). */
+const HopThang = z.object({
+  loai: z.enum(["diem_manh", "luu_y", "loi_khuyen"]), nhan: z.string(),
+  tieu_de: z.string(), noi_dung: z.string(), huong_xu_ly: z.string().optional(),
+  can_cu: z.array(z.string()).default([]), cung: z.string().nullable().optional(),
+}).passthrough();
+export type HopThangT = z.infer<typeof HopThang>;
 export const Nhip3ThangOutput = z.object({
   engine_version: z.string(),
   ngay_xem: z.string(),
@@ -266,6 +273,10 @@ export const Nhip3ThangOutput = z.object({
   luu_nien: LuuNienNhip,
   /** Có khi 3 tháng vắt sang năm âm sau: tứ hoá của năm âm kế tiếp (tháng có `nam_am` = năm này đọc theo nó). */
   luu_nien_sau: LuuNienNhip.optional(),
+  /** NHIP-2: một câu so ba tháng (tháng nào thuận cho việc gì) — lời đời thường. Tuỳ chọn để chịu được engine cũ. */
+  tom_tat_3_thang: z.string().optional(),
+  /** 12 cung (tên, chi, nhãn đời thường ngắn) — vẽ vòng 12 cung mini. */
+  cung: z.array(z.object({ ten: z.string(), chi: z.string(), nhan_ngan: z.string() }).passthrough()).optional(),
   thang: z.array(z.object({
     thang: z.number(), nhuan: z.boolean(), phan: z.string(), nam_am: z.number(), can_chi: z.string(),
     tu: z.string(), den: z.string(), cung_goc: z.string(), chu_de: z.string().nullable(),
@@ -273,6 +284,15 @@ export const Nhip3ThangOutput = z.object({
     ly_do: z.array(z.object({ ma: z.string(), noi_dung: z.string() }).passthrough()),
     tu_hoa_thang: z.array(HoaGoc),
     goi_y: z.string().nullable(), cau_tu_soi: z.string().nullable(),
+    // NHIP-2 — lời riêng từng tháng (không thuật ngữ) + học thuật tách riêng trong can_cu ("Vì sao nói vậy").
+    nhan_thang: z.string().optional(),
+    tieu_de_thang: z.string().optional(),
+    chu_de_thang: z.string().optional(),
+    hop: z.array(HopThang).optional(),
+    can_cu: z.array(z.string()).optional(),
+    diem_sang: z.string().nullable().optional(),
+    de_y: z.string().nullable().optional(),
+    noi_tiep: z.boolean().optional(),
   }).passthrough()).length(3),
   /** Thứ tự ưu tiên khi các lớp hạn mâu thuẫn (đại hạn > lưu niên > tiểu hạn > lưu nguyệt) + cung hạn của năm. */
   uu_tien: z.object({

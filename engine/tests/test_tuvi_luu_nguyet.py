@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pytest
 
-from app.calc import tuvi_luu_nguyet as ln
+from app.calc import lunar, tuvi_luu_nguyet as ln
 
 GOLDEN = json.loads((Path(__file__).resolve().parents[1] / "fixtures" / "golden" / "luu_nguyet_iztro.json")
                     .read_text(encoding="utf-8"))
@@ -98,10 +98,35 @@ def test_lich_thang_nam_co_nhuan():
     assert (6, True, "nua_dau") in nhan and (6, True, "nua_sau") in nhan and len(ds) == 14
     nua_sau = next(m for m in ds if m["nhuan"] and m["phan"] == "nua_sau")
     assert nua_sau["thang_tinh"] == 7 and nua_sau["tu"].day >= 1
+    # QC 2026-10-21: nửa sau đếm cung như tháng 7 thì can chi (→ tứ hoá tháng) cũng là của tháng 7 (Giáp Thân).
+    assert nua_sau["can_chi"] == "Giáp Thân" and nua_sau["can"] == "Giáp"
+    nua_dau = next(m for m in ds if m["nhuan"] and m["phan"] == "nua_dau")
+    assert nua_dau["can_chi"] == "Quý Mùi"
+    assert lunar.can_chi_thang(13, 2025) == lunar.can_chi_thang(1, 2026)        # nửa sau nhuận tháng Chạp
+    assert next(m for m in ln.cac_thang(2025, tz=7.0, thang_nhuan="thang_chinh") if m["nhuan"])["can_chi"] == "Quý Mùi"
     gieng = ds[0]
     assert gieng["tu"] == dt.date(2025, 1, 29) and gieng["can_chi"] == "Mậu Dần"
     assert len(ln.cac_thang(2025, tz=7.0, thang_nhuan="thang_chinh")) == 13
     assert len(ln.cac_thang(2026, tz=7.0)) == 12
+
+
+CHI_CN = dict(zip("子丑寅卯辰巳午未申酉戌亥", lunar.CHI))
+
+
+def test_can_chi_thang_xem_khop_iztro_ke_ca_nua_sau_thang_nhuan():
+    """QC 2026-10-21 (lỗi đã sửa): iztro tính nửa sau tháng nhuận (ngày 16+) như THÁNG SAU cả cung lẫn can chi
+    tháng (vd 27/6 nhuận Ất Tỵ → Giáp Thân, không phải Quý Mùi). Python trước đây đếm cung như tháng sau nhưng giữ
+    can chi tháng nhuận → tứ hoá tháng lệch 80/80 ca. Đối chiếu MỌI ca xem của golden (lịch iztro = UTC+8)."""
+    dem = {"ca_thang": 0, "nua_dau": 0, "nua_sau": 0}
+    for c in GOLDEN["cases"]:
+        x = c["xem_am"]
+        t = next(m for m in ln.cac_thang(x["nam"], tz=8.0) if m["thang"] == x["thang"] and m["nhuan"] == x["nhuan"]
+                 and m["ngay_am"][0] <= x["ngay"] <= m["ngay_am"][1])
+        iz = f"{CAN_CN[c['can_chi_thang'][0]]} {CHI_CN[c['can_chi_thang'][1]]}"
+        assert t["can_chi"] == iz and t["can"] == iz.split()[0], (c["id"], c["ngay_xem"], t["can_chi"], iz)
+        assert ln.tu_hoa(t["can"]) == [TEN_CN[s] for s in c["tu_hoa_thang"]]
+        dem[t["phan"]] += 1
+    assert dem["nua_sau"] >= 40 and dem["nua_dau"] >= 40 and dem["ca_thang"] >= 400
 
 
 def test_dong_thang_lien_mach():

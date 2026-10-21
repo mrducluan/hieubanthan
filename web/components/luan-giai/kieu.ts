@@ -8,6 +8,8 @@ export type Muc = "thuan" | "can_bang" | "can_chu_dong";
 
 export interface Hop {
   loai: LoaiHop;
+  /** Nhãn riêng thay nhãn mặc định của loại (vd "Điểm sáng" ở nhịp 3 tháng). */
+  nhan?: string;
   tieu_de: string;
   noi_dung: string;
   can_cu?: string[];

@@ -44,6 +44,19 @@ async function mock(page: Page, dinhGio?: { ba?: object; muoiHai?: object }) {
   return goi;
 }
 
+test("3 tháng tới (NHIP-2) vừa màn hình 360px, không tràn ngang", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await napHoSo(page);
+  await mock(page);
+  await page.goto("/tu-vi");
+  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
+  await page.getByRole("button", { name: /3 tháng tới/ }).click();
+  await expect(page.getByTestId("the-thang")).toHaveCount(3);
+  await expect(page.getByTestId("vong-cung-thang").first()).toBeVisible();
+  const tran = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(tran).toBeLessThanOrEqual(0);
+});
+
 test("4 khối TV-V2 hiện, chỉ gọi engine khi mở, không có giọng doạ", async ({ page }) => {
   await napHoSo(page);
   const goi = await mock(page);
@@ -75,10 +88,32 @@ test("4 khối TV-V2 hiện, chỉ gọi engine khi mở, không có giọng do�
   await expect(the).toHaveCount(3);
   for (const [k, t] of NHIP.thang.entries()) await expect(the.nth(k)).toContainText(NHAN_MUC[t.muc]!);
   await expect(the.nth(2)).toContainText(NHIP.thang[2]!.cau_tu_soi!);
-  // Ba tháng vắt sang năm âm sau: hiện cả tứ hoá năm mới + thứ tự ưu tiên (uu_tien là object của engine).
+  // NHIP-2: câu so ba tháng + biểu đồ nhịp + kết luận riêng từng tháng + 2–3 hộp nổi bật; lời không lặp giữa các tháng.
   const nhip = page.getByTestId("nhip-3-thang-noi-dung");
+  await expect(page.getByTestId("nhip-tom-tat")).toHaveText(NHIP.tom_tat_3_thang!);
+  await expect(page.getByTestId("nhip-bieu-do").locator("[role=button]")).toHaveCount(3);
+  for (const [k, t] of NHIP.thang.entries()) {
+    await expect(the.nth(k).getByTestId("tieu-de-thang")).toHaveText(t.tieu_de_thang!);
+    await expect(the.nth(k).getByTestId("hop-noi-bat")).toHaveCount(t.hop!.length);
+    await expect(the.nth(k).getByText("Nên làm", { exact: true })).toBeVisible();
+    await expect(the.nth(k).getByTestId("vong-cung-thang")).toBeVisible();
+  }
+  expect(new Set(NHIP.thang.map((t) => t.goi_y)).size).toBe(3);
+  // Học thuật thu gọn: chip tứ hoá + câu "Năm …: tứ hoá của năm" chỉ hiện khi bấm.
+  const chip = the.nth(0).getByRole("list", { name: "Tứ hoá theo can tháng" });
+  await expect(chip).toBeHidden();
+  await expect(page.getByText(`Năm ${NHIP.luu_nien.can_chi}: tứ hoá của năm`)).toBeHidden();
+  await the.nth(0).getByRole("button", { name: /Vì sao nói vậy/ }).click();
+  await expect(chip).toBeVisible();
+  await expect(the.nth(0).getByTestId("can-cu")).toContainText(`Tứ hoá tháng ${NHIP.thang[0]!.can_chi}`);
+  // Bấm nút tháng trên biểu đồ → thẻ tháng đó được làm nổi.
+  await page.getByTestId("nhip-bieu-do").locator("[role=button]").nth(2).click();
+  await expect(the.nth(2)).toHaveClass(/shadow-glow/);
+  // Ba tháng vắt sang năm âm sau: hiện cả tứ hoá năm mới + thứ tự ưu tiên (uu_tien là object của engine).
+  await page.getByTestId("nhip-hoc-thuat").locator("summary").click();
   await expect(nhip).toContainText(NHIP.luu_nien_sau!.can_chi);
   await expect(page.getByTestId("nhip-3-thang-uu-tien")).toContainText(NHIP.uu_tien.ghi_chu);
+  await expect(page.getByText(`Năm ${NHIP.luu_nien.can_chi}: tứ hoá của năm`)).toBeVisible();
   await expect(nhip).not.toContainText("[object Object]");
 
   // Định giờ sinh: tick + "Dùng giờ này" chỉ mở form hồ sơ, ghi lech
