@@ -68,7 +68,13 @@ def test_hop_tham_mot_chieu():
     assert r["quan_he"] == "dong_nghiep" and r["nhan_quan_he"]
     assert len(r["nguoi_kia_vao_ban"]) == 4
     assert r["ban_vao_nguoi_kia"] is None and r["menh_nguoi_kia_vao_ban"] is None
-    assert r["khong_cham_diem"] is True and r["tom_tat"] and r["luu_y"]
+    assert r["khong_cham_diem"] is False and r["tom_tat"] and r["luu_y"]
+    # HN-2N: điểm tham khảo; người kia không khai giới tính → bỏ cung phi, chia lại thang
+    d = r["diem"]
+    assert d["phien_ban"] == "hai_nguoi_1" and 0 <= d["tong"] <= 100
+    assert d["tong"] == sum(t["diem"] for t in d["tieu_chi"]) and sum(t["toi_da"] for t in d["tieu_chi"]) == 100
+    assert next(t for t in d["tieu_chi"] if t["ma"] == "cung_phi")["tinh"] is False
+    assert d["hai_chieu"] is False
 
 
 def test_hop_tham_hai_chieu_va_mac_dinh():
@@ -76,6 +82,8 @@ def test_hop_tham_hai_chieu_va_mac_dinh():
                                                          "gender": "nu", "noi_sinh": "nuoc_ngoai"}})
     assert r["quan_he"] == "nguoi_yeu"
     assert len(r["ban_vao_nguoi_kia"]) == 4 and len(r["menh_nguoi_kia_vao_ban"]) == 4
+    assert r["diem"]["hai_chieu"] is True
+    assert all(t["tinh"] for t in r["diem"]["tieu_chi"])          # đủ giới tính hai người → có cung phi
     # thiếu nơi sinh → một chiều
     r = _post("hop-tham", {"la_so": LA_SO, "nguoi_kia": {"birth_date": "1992-08-21", "birth_time": "08:00",
                                                          "gender": "nu"}})

@@ -17,7 +17,7 @@ Vòng tăng trưởng: **QUAY LẠI** (nhịp 3 tháng tới đổi theo tháng 
 | **Phi tinh tứ hoá 12 cung** (cung can → 48 đường bay, tự hoá, xung) | **Chưa có** | **LÀM** — CALC Python thuần, golden đối chứng iztro (`fliesTo`/`selfMutaged`) |
 | Radar 90 ngày (3 tháng lưu nguyệt) | Lưu nguyệt 5 phái + tứ hoá can tháng (TV-LN) | **LÀM** lớp RULES "Nhịp 3 tháng tới" ghép lưu nguyệt + tứ hoá lưu niên (chồng Kỵ, song Lộc) — không tính lại cung tháng |
 | Đẩu Quân tháng Giêng | Đã có, khớp iztro 680/680 | Không làm lại |
-| Hợp tham 2 lá số (can năm B phi hoá vào lá A) | Hợp đôi chỉ có thần số | **LÀM** — trung tính, **không chấm điểm** (quyết định 2026-09-30) |
+| Hợp tham 2 lá số (can năm B phi hoá vào lá A) | Hợp đôi chỉ có thần số | **LÀM** — trung tính, **không chấm điểm** (quyết định 2026-09-30). **HN-2N (2026-10-21):** đổi tên "Xem lá số 2 người", **có điểm tham khảo 0–100** (`luangiai/tuvi_hai_nguoi.py`, xem CLAUDE.md) |
 | Định chuẩn giờ sinh (±1 canh giờ, đối chiếu năm cũ) | `do_tin_gio` exact/approx, cờ giờ nhạy | **LÀM** — người dùng tự chọn năm đối chiếu, không lưu, không câu sức khoẻ |
 | Cung Phi Bát Trạch | Phong thuỷ mệnh quái theo **Lập xuân** (đúng hơn bản TS dùng năm dương) | Không làm lại |
 | Điều hầu dụng thần theo mùa | Bát tự đã có điều hầu (`test_battu_dieu_hau.py`), chi tiết hơn bản 4 mùa | Không làm lại |

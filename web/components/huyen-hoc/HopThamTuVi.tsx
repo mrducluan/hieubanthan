@@ -1,12 +1,15 @@
 "use client";
-// TV-V2 — hợp tham Tử vi: can năm sinh người kia "phi hoá" vào lá số của bạn (và chiều ngược lại khi người kia đủ
-// giờ + giới tính + nơi sinh). KHÔNG chấm điểm hợp/khắc (quyết định 2026-09-30). Engine tính hết, web chỉ hiển thị.
+// TV-V2 + HN-2N — "Xem lá số 2 người" (tên mã cũ: hợp tham): can năm sinh người kia "phi hoá" vào lá số của bạn (và
+// chiều ngược lại khi người kia đủ giờ + giới tính + nơi sinh), kèm ĐIỂM THAM KHẢO hợp – khắc 0–100 theo 5 tiêu chí
+// (chủ dự án chốt 2026-10-21, chỉ cho phần Tử vi 2 người). Engine tính hết, web chỉ hiển thị.
 // Ngày sinh người kia chỉ gửi đi để tính, không lưu (không localStorage, không tài khoản).
 import Link from "next/link";
 import { useState } from "react";
-import { HeartHandshake, Lock, MessageCircleQuestion, Send } from "lucide-react";
+import { ChevronDown, HeartHandshake, ListChecks, Lock, MessageCircleQuestion, Send } from "lucide-react";
 import { QUAN_HE_HOP_THAM, type ChartInputVao, type HoaVaoT, type HopThamOutputT } from "@/app/api/tuvi/schema";
+import { DiemHaiNguoi } from "@/components/huyen-hoc/DiemHaiNguoi";
 import { NhanLop } from "@/components/huyen-hoc/KhoiMoLuoi";
+import { HopNoiBat, KiemChungBai } from "@/components/luan-giai/HopNoiBat";
 import { MAU_HOA_DIU } from "@/components/huyen-hoc/PhiHoa";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
@@ -68,7 +71,8 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
         },
       });
       setKq(r);
-      ghi("chart_interacted", { mo_dun: "tuvi", kind: "hop_tham_xem", quan_he: quanHe });
+      // Đo: chỉ mã (quan hệ, mức điểm) — không ngày sinh, không điểm số cá nhân.
+      ghi("chart_interacted", { mo_dun: "tuvi", kind: "hop_tham_xem", quan_he: quanHe, ...(r.diem ? { muc: r.diem.muc } : {}) });
     } catch (e2) {
       setLoi(e2 instanceof Error ? e2.message : "Chưa tính được lúc này.");
     } finally {
@@ -81,8 +85,9 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
   return (
     <form onSubmit={xem} className="space-y-5" noValidate data-testid="hop-tham-form">
       <p className="rounded-xl bg-surface-2/50 px-3 py-2 text-sm text-fg-muted">
-        Hợp tham <b className="text-fg">không chấm điểm hợp hay khắc</b>. Nó chỉ ra can năm sinh người ấy chạm vào những cung nào trong
-        lá số của bạn — chỗ dễ cùng nhau, chỗ cần nói rõ — để hai người tự nhìn lại.
+        Chấm <b className="text-fg">điểm tham khảo 0–100</b> theo năm mặt: bản mệnh năm sinh, cách nghĩ, con giáp, chỗ ở (cung phi) và
+        lá số Tử vi chạm nhau — kèm cách dung hoà theo đúng quan hệ bạn chọn. Điểm theo luật dân gian và sách cổ; mối quan hệ do cách
+        hai người cư xử.
       </p>
       <fieldset>
         <legend className="text-sm font-medium text-fg-muted">Người ấy là</legend>
@@ -122,7 +127,7 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
       </fieldset>
 
       <fieldset className="rounded-xl border border-line/70 p-4">
-        <legend className="px-1 text-sm text-fg-muted">Không bắt buộc — <b className="text-fg">có giờ, giới tính và nơi sinh thì xem được hai chiều</b></legend>
+        <legend className="px-1 text-sm text-fg-muted">Không bắt buộc — <b className="text-fg">có giới tính thì tính thêm cung phi; đủ giờ, giới tính và nơi sinh thì xem được hai chiều</b></legend>
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="space-y-2">
             <Label htmlFor="ht-gio">Giờ sinh</Label>
@@ -157,13 +162,15 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
           )}
         </div>
         <p className="mt-3 text-xs text-fg-faint">
-          {duLa ? "Đủ để xem cả chiều bạn tác động lên người ấy." : "Chỉ có ngày sinh: xem được chiều người ấy tác động lên lá số của bạn (theo can năm sinh)."}
+          {duLa ? "Đủ để chấm năm mặt và xem cả chiều bạn tác động lên người ấy."
+            : gioiTinh ? "Có giới tính: chấm đủ năm mặt. Thêm giờ và nơi sinh để xem cả chiều bạn tác động lên người ấy."
+              : "Chỉ có ngày sinh: chấm bốn mặt (chưa có cung phi) và xem chiều người ấy tác động lên lá số của bạn."}
         </p>
       </fieldset>
 
       {loi && <p role="alert" className="rounded-xl bg-cinnabar/10 px-4 py-3 text-sm text-cinnabar">{loi}</p>}
       <Button type="submit" className="w-full sm:w-auto" disabled={dang}>
-        <HeartHandshake aria-hidden /> {dang ? "Đang xem…" : "Xem hai lá số"}
+        <HeartHandshake aria-hidden /> {dang ? "Đang xem…" : "Xem độ hợp"}
       </Button>
       <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-fg-faint">
         <span className="inline-flex items-center gap-1.5"><Lock className="size-3.5" aria-hidden /> Dữ liệu người ấy chỉ dùng để tính, không lưu lại.</span>
@@ -197,28 +204,57 @@ function DanhSachHoa({ ds, tieuDe, moTa, testId }: { ds: HoaVaoT[]; tieuDe: stri
 function KetQuaHopTham({ kq, onHoi, onLai }: { kq: HopThamOutputT; onHoi: (cau: string) => void; onLai: () => void }) {
   // Khung hỏi đáp chỉ biết lá số của bạn → câu hỏi thêm hướng về cung của chính bạn mà người ấy chạm vào.
   const cungHoi = (kq.nguoi_kia_vao_ban.find((h) => h.hoa === "Kỵ") ?? kq.nguoi_kia_vao_ban[0])?.den_cung;
+  const d = kq.diem;
+  const hop = d ? [...d.diem_manh, ...d.can_dung_hoa] : [];
   return (
     <div className="space-y-5" data-testid="hop-tham-ket-qua">
       <p className="text-sm text-fg-muted">
-        {kq.nhan_quan_he} · người ấy sinh năm can <b className="text-fg">{kq.can_nam_nguoi_kia}</b>.{" "}
-        <span className="text-fg">Không có điểm hợp/khắc</span> — chỉ là những chỗ hai lá số chạm nhau.
+        {kq.nhan_quan_he} · người ấy sinh năm can <b className="text-fg">{kq.can_nam_nguoi_kia}</b>.
       </p>
-      <p><NhanLop lop="tinh" /></p>
-      <DanhSachHoa ds={kq.nguoi_kia_vao_ban} testId="hop-tham-kia-vao-ban" tieuDe="Người ấy chạm vào lá số của bạn"
-        moTa={`Can năm ${kq.can_nam_nguoi_kia} làm bốn sao hoá — chúng nằm ở các cung này trên lá số của bạn.`} />
-      {kq.ban_vao_nguoi_kia && kq.ban_vao_nguoi_kia.length > 0 && (
-        <DanhSachHoa ds={kq.ban_vao_nguoi_kia} testId="hop-tham-ban-vao-kia" tieuDe="Bạn chạm vào lá số của người ấy" moTa="Can năm sinh của bạn trên lá số người ấy." />
+      {d && <DiemHaiNguoi diem={d} />}
+
+      {hop.length > 0 && (
+        // Mã hn.* chưa có loại kiểm chứng riêng ở máy chủ → tắt nút "Đúng với mình" trong khối này.
+        <KiemChungBai.Provider value={{ tyLe: {}, phai: "nam_phai_viet", tat: true }}>
+          <div className="grid gap-3 sm:grid-cols-2" data-testid="hai-nguoi-hop">
+            {hop.map((h) => <HopNoiBat key={h.ma_mau ?? h.tieu_de} hop={h} />)}
+          </div>
+        </KiemChungBai.Provider>
       )}
-      {kq.menh_nguoi_kia_vao_ban && kq.menh_nguoi_kia_vao_ban.length > 0 && (
-        <DanhSachHoa ds={kq.menh_nguoi_kia_vao_ban} testId="hop-tham-menh-kia" tieuDe="Cung Mệnh người ấy chạm vào lá số của bạn" moTa="Theo can cung Mệnh của người ấy." />
+
+      {d && d.goi_y.length > 0 && (
+        <section className="rounded-2xl border border-line/70 p-4" aria-labelledby="hai-nguoi-goi-y" data-testid="hai-nguoi-goi-y">
+          <h3 id="hai-nguoi-goi-y" className="flex items-center gap-2 font-sans text-[1.02rem] font-semibold text-fg">
+            <ListChecks className="size-4 text-gold" aria-hidden /> Ba việc nên làm cùng nhau
+          </h3>
+          <ol className="mt-2 list-decimal space-y-1 pl-5 text-[0.95rem] text-fg-muted">{d.goi_y.map((g) => <li key={g}>{g}</li>)}</ol>
+        </section>
       )}
-      {!kq.ban_vao_nguoi_kia && <p className="text-xs text-fg-faint">Thêm giờ sinh, giới tính và nơi sinh của người ấy để xem chiều ngược lại.</p>}
-      {kq.tom_tat.length > 0 && (
-        <div>
-          <NhanLop lop="giai" />
-          <ul className="mt-1 space-y-1 text-sm text-fg">{kq.tom_tat.map((t) => <li key={t}>· {t}</li>)}</ul>
+
+      <details className="group rounded-xl border border-line/70 px-3 py-2 text-sm" data-testid="hop-tham-chi-tiet">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-fg-muted hover:text-fg">
+          <span>Đường bay tứ hoá chi tiết (cho người rành Tử vi)</span>
+          <ChevronDown className="size-4 transition-transform group-open:rotate-180" aria-hidden />
+        </summary>
+        <div className="mt-3 space-y-5">
+          <p><NhanLop lop="tinh" /></p>
+          <DanhSachHoa ds={kq.nguoi_kia_vao_ban} testId="hop-tham-kia-vao-ban" tieuDe="Người ấy chạm vào lá số của bạn"
+            moTa={`Can năm ${kq.can_nam_nguoi_kia} làm bốn sao hoá — chúng nằm ở các cung này trên lá số của bạn.`} />
+          {kq.ban_vao_nguoi_kia && kq.ban_vao_nguoi_kia.length > 0 && (
+            <DanhSachHoa ds={kq.ban_vao_nguoi_kia} testId="hop-tham-ban-vao-kia" tieuDe="Bạn chạm vào lá số của người ấy" moTa="Can năm sinh của bạn trên lá số người ấy." />
+          )}
+          {kq.menh_nguoi_kia_vao_ban && kq.menh_nguoi_kia_vao_ban.length > 0 && (
+            <DanhSachHoa ds={kq.menh_nguoi_kia_vao_ban} testId="hop-tham-menh-kia" tieuDe="Cung Mệnh người ấy chạm vào lá số của bạn" moTa="Theo can cung Mệnh của người ấy." />
+          )}
+          {kq.tom_tat.length > 0 && (
+            <div>
+              <NhanLop lop="giai" />
+              <ul className="mt-1 space-y-1 text-sm text-fg">{kq.tom_tat.map((t) => <li key={t}>· {t}</li>)}</ul>
+            </div>
+          )}
         </div>
-      )}
+      </details>
+      {!kq.ban_vao_nguoi_kia && <p className="text-xs text-fg-faint">Thêm giờ sinh, giới tính và nơi sinh của người ấy để xem chiều ngược lại.</p>}
       {kq.luu_y.length > 0 && <p className="text-xs text-fg-faint">{kq.luu_y.join(" ")}</p>}
       <div className="flex flex-wrap gap-2">
         {cungHoi && (
@@ -227,6 +263,9 @@ function KetQuaHopTham({ kq, onHoi, onLai }: { kq: HopThamOutputT; onHoi: (cau: 
           </Button>
         )}
         <Button size="sm" variant="secondary" onClick={onLai}>Xem với người khác</Button>
+        <Button asChild size="sm" variant="ghost">
+          <Link href="/hop-doi"><Send aria-hidden /> Gửi link để người ấy tự xem</Link>
+        </Button>
       </div>
     </div>
   );
