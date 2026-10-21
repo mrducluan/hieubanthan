@@ -236,3 +236,27 @@
   .bao-cao-ds { color: #000; }
   .bao-cao-ds :where(p, li, h2, h3, h4, span, b) { color: #000 !important; }
 }
+
+/* TC-HOOK — trang chủ. (1) Dòng "điểm mù" ở hero: 9 câu xếp chồng, mỗi câu hiện 3 giây (27 giây một vòng). Không
+   chuyển động → chỉ câu đầu hiện (luật reduced-motion phía trên tắt animation, opacity nền giữ nguyên).
+   (2) Bảng so sánh: hàng hiện lần lượt khi cuộn tới (HienKhiThay gắn data-cho/data-hien; không JS → hiện sẵn). */
+.diem-mu-luot > li { position: absolute; inset: 0; opacity: 0; }
+.diem-mu-luot > li:first-child { opacity: 1; }
+.quet-sang { position: relative; overflow: hidden; }
+.quet-sang::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; transform: translateX(-110%);
+  background: linear-gradient(100deg, transparent 30%, rgb(255 236 190 / 0.16) 50%, transparent 70%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .diem-mu-luot > li { animation: diem-mu-luot 27s ease-in-out infinite both; }
+  .quet-sang::after { animation: quet-sang 6s ease-in-out infinite 1s; }
+  [data-cho]:not([data-hien]) .hien-tung { opacity: 0; }
+  [data-hien] .hien-tung { animation: hien-dan 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 110ms); }
+  [data-hien] .dau-nay { animation: so-hien 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 110ms + 300ms); }
+}
+@keyframes diem-mu-luot {
+  0% { opacity: 0; transform: translateY(8px); }
+  2%, 10% { opacity: 1; transform: none; }
+  11.5%, 100% { opacity: 0; transform: translateY(-8px); }
+}
+@keyframes quet-sang { 55%, 100% { transform: translateX(110%); } }

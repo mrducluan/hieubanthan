@@ -177,7 +177,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
 
   // ---------------- B · trang tĩnh / giới thiệu
   { duong: "/", nhom: "tinh", ten: "Trang chủ", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Hiểu Bản Thân — con số nói gì về bạn", h1: "Con số nói gì về bạn?",
+    tieu_de_seo: "Hiểu Bản Thân — con số nói gì về bạn", h1: "Bạn là số mấy?",
     mo_ta_seo: "Thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ): tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.",
   } },
   { duong: "/kham-pha", nhom: "tinh", ten: "Khám phá", o: O_TINH, mac_dinh: {

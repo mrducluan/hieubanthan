@@ -73,7 +73,7 @@ export async function GET(req: Request) {
           </div>
         ) : (
           <div style={{ display: "flex", fontSize: tieuDe.length > 60 ? 50 : 60, marginTop: 20, fontFamily: "Serif", textAlign: "center", maxWidth: 1000, lineHeight: 1.2 }}>
-            {tieuDe || "Con số nói gì về bạn?"}
+            {tieuDe || "Bạn là số mấy?"}
           </div>
         )}
         <div style={{ display: "flex", position: "absolute", bottom: 34, fontSize: 24, color: "#b3b1cf" }}>Hiểu Bản Thân · xem con số của bạn</div>
