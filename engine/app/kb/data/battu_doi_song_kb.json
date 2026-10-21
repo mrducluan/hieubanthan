@@ -5,7 +5,331 @@
   "school_id": "tu_binh",
   "trang_thai": "nhap_ai",
   "can_doi_chieu": true,
-  "muc": {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần chủ động"},
+  "van_han": {
+    "_nguon": "VH-1 (2026-10-21) — chương 'Vận hạn & điều nên tránh' của Bát tự, nháp AI viết lời đời thường. thap_than.<thập thần của can năm>: mang (mảng chịu tác động) · can (năm Cần lưu ý: nhan = vế sau tiêu đề 'Năm N: …'; tre 18–34 tuổi / lon từ 35 tuổi {y, tranh, lam}) · thuan (năm thuận: nhan, y, lam). nho = dưới 18 tuổi (lời cho cha mẹ). co = cờ tập quán dân gian theo chi trụ năm + năm xung / hình chi ngày. Không vật phẩm, không giải hạn, không tên bệnh, không đoán năm ốm.",
+    "source_id": "tu_binh_chan_thuyen",
+    "school_id": "tu_binh",
+    "thap_than": {
+      "Tỷ Kiên": {
+        "mang": "bạn bè, người ngang hàng",
+        "can": {
+          "nhan": "tách bạch việc với bạn",
+          "tre": {
+            "y": "Bạn dễ bị cuốn vào việc của nhóm bạn và khó nói không với người ngang hàng.",
+            "tranh": "góp vốn chung khi chưa thoả thuận ai làm gì, đứng ra gánh lỗi cho cả nhóm",
+            "lam": "việc chung nào cũng ghi rõ phần của từng người trước khi bắt tay vào làm"
+          },
+          "lon": {
+            "y": "Người ngang hàng dễ thành đối thủ ngầm: cùng tranh một chỗ, một khách, một khoản.",
+            "tranh": "hùn làm ăn với người quen chỉ vì nể, tranh cãi công khai với đồng nghiệp cùng cấp",
+            "lam": "giữ một khoản riêng không góp chung, nói chuyện quyền lợi bằng giấy tờ"
+          }
+        },
+        "thuan": {
+          "nhan": "hợp làm cùng người ngang hàng",
+          "y": "Có bạn cùng chí hướng đỡ lưng; việc làm nhóm dễ thành.",
+          "lam": "rủ một người bạn đáng tin cùng làm một dự án nhỏ, chia phần rõ từ đầu"
+        }
+      },
+      "Kiếp Tài": {
+        "mang": "tiền chung, cạnh tranh",
+        "can": {
+          "nhan": "giữ tiền khỏi bị chia",
+          "tre": {
+            "y": "Tiền dễ ra theo đường bạn bè: mời mọc, cho mượn, rủ rê chơi lớn.",
+            "tranh": "cho bạn mượn tiền khi chính mình còn thiếu, chơi đầu tư theo lời rủ trên mạng",
+            "lam": "đặt hạn mức tiêu cho bạn bè mỗi tháng, từ chối khéo bằng một lý do có sẵn"
+          },
+          "lon": {
+            "y": "Có người cạnh tranh hoặc chia phần ngay trong khoản bạn tưởng đã chắc tay.",
+            "tranh": "ký bảo lãnh cho người khác, bỏ hết vốn vào một thương vụ để thắng đối thủ",
+            "lam": "chia tiền ra vài chỗ, mọi thoả thuận tiền bạc đều có chữ ký hai bên"
+          }
+        },
+        "thuan": {
+          "nhan": "hợp để dám làm",
+          "y": "Bạn có gan và có người cùng phe; việc cần cạnh tranh dễ giành phần.",
+          "lam": "nhận một việc cần sức bật, nhưng giữ sẵn mức lỗ tối đa bạn chịu được"
+        }
+      },
+      "Thực Thần": {
+        "mang": "tay nghề, sức khoẻ, con cái",
+        "can": {
+          "nhan": "đừng để việc dễ thành lười",
+          "tre": {
+            "y": "Bạn dễ sa vào ăn chơi, thức khuya, làm việc chỉ vừa đủ rồi thôi.",
+            "tranh": "tiêu nhiều cho ăn uống tụ tập, bỏ dở khoá học đã đóng tiền",
+            "lam": "giữ một giờ mỗi ngày cho việc học nghề và ngủ trước nửa đêm"
+          },
+          "lon": {
+            "y": "Nhịp sống chậm lại, dễ ngại việc mới; chuyện con cái hay ăn uống trong nhà chiếm nhiều tâm sức.",
+            "tranh": "ăn uống thất thường theo tiệc tùng, ôm hết việc của con thay vì để con tự làm",
+            "lam": "giữ bữa ăn đều giờ, giao cho con một việc nhà rõ ràng mỗi tuần"
+          }
+        },
+        "thuan": {
+          "nhan": "hợp để làm ra sản phẩm",
+          "y": "Tay nghề của bạn được người khác trả tiền; việc làm bằng chính tay mình dễ có kết quả.",
+          "lam": "làm xong một sản phẩm trọn vẹn và đưa ra cho người khác dùng thử"
+        }
+      },
+      "Thương Quan": {
+        "mang": "lời nói, giấy tờ, cấp trên",
+        "can": {
+          "nhan": "giữ lời trước cấp trên",
+          "tre": {
+            "y": "Bạn dễ nói thẳng quá đà, cãi lý với người trên rồi mất cơ hội.",
+            "tranh": "đăng bài bức xúc về chỗ làm, nghỉ việc ngay sau một lần bị góp ý",
+            "lam": "viết ra điều muốn nói, để qua một đêm rồi mới gửi"
+          },
+          "lon": {
+            "y": "Chuyện giấy tờ, hợp đồng, lời đã nói dễ bị bắt bẻ; quan hệ với cấp trên căng hơn.",
+            "tranh": "hứa miệng việc quan trọng, ký giấy tờ pháp lý khi chưa nhờ người rành đọc",
+            "lam": "chuyển mọi thoả thuận sang văn bản và giữ bản sao"
+          }
+        },
+        "thuan": {
+          "nhan": "hợp để sáng tạo, nói ra ý mới",
+          "y": "Ý mới của bạn được nghe; việc cần thuyết phục, trình bày, viết lách dễ thành.",
+          "lam": "trình bày một ý tưởng bạn ấp ủ lâu với người có quyền quyết"
+        }
+      },
+      "Thiên Tài": {
+        "mang": "tiền làm ăn, khoản ngoài lương",
+        "can": {
+          "nhan": "đừng ham khoản tiền nhanh",
+          "tre": {
+            "y": "Cơ hội kiếm tiền nhanh đến nhiều, nhưng phần lớn là mồi nhử hoặc vượt sức bạn.",
+            "tranh": "vay để đầu tư, tham gia mô hình hứa lãi cao, bỏ việc chính để chạy theo kèo ngắn",
+            "lam": "chỉ thử cơ hội mới bằng tiền nhàn rỗi và đặt sẵn mức dừng"
+          },
+          "lon": {
+            "y": "Tiền làm ăn vào ra lớn; một quyết định vội có thể kéo theo cả năm gỡ.",
+            "tranh": "mở rộng làm ăn bằng tiền vay, nhận lời đầu tư từ người mới quen",
+            "lam": "làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc"
+          }
+        },
+        "thuan": {
+          "nhan": "hợp mở thêm nguồn thu",
+          "y": "Có khoản thu ngoài việc chính, dễ gặp mối làm ăn hợp.",
+          "lam": "nhận thêm một mối việc hợp tay, để riêng phần lãi vào quỹ dài hạn"
+        }
+      },
+      "Chính Tài": {
+        "mang": "tiền lương, tích luỹ, chuyện nhà",
+        "can": {
+          "nhan": "giữ chặt khoản đều đặn",
+          "tre": {
+            "y": "Thu nhập đều nhưng chi tiêu trong nhà, tiền chung với người yêu dễ thành chuyện.",
+            "tranh": "mua món lớn trả góp dài hạn, góp tiền chung với người yêu khi chưa nói rõ",
+            "lam": "lập bảng chi tiêu tháng và tách tài khoản riêng với tài khoản chung"
+          },
+          "lon": {
+            "y": "Khoản tích luỹ dễ bị rút vì việc nhà, việc của vợ chồng hay người thân.",
+            "tranh": "rút hết tiền tiết kiệm cho một khoản chi chưa cần gấp, cho người thân vay không hẹn ngày trả",
+            "lam": "giữ một khoản tiết kiệm không đụng tới và bàn với người nhà trước mỗi khoản chi lớn"
+          }
+        },
+        "thuan": {
+          "nhan": "hợp để tích luỹ",
+          "y": "Tiền đến đều và giữ được; hợp lo những khoản dài hơi như nhà, học, bảo hiểm.",
+          "lam": "tăng phần để dành mỗi tháng và hoàn tất một khoản tích luỹ đã định"
+        }
+      },
+      "Thất Sát": {
+        "mang": "áp lực, việc gấp, người khó",
+        "can": {
+          "nhan": "áp lực lớn, nên giữ sức",
+          "tre": {
+            "y": "Việc gấp, người khó tính và áp lực đến dồn dập; bạn dễ nóng rồi làm liều.",
+            "tranh": "nhận cùng lúc nhiều việc gấp, đối đầu trực diện với người có quyền hơn mình",
+            "lam": "chia việc gấp thành từng phần nhỏ và nhờ một người có kinh nghiệm chỉ đường"
+          },
+          "lon": {
+            "y": "Trách nhiệm đè nặng; một việc lớn có thể đến nhanh hơn bạn chuẩn bị.",
+            "tranh": "ôm mọi việc một mình, ra quyết định lớn khi đang mệt",
+            "lam": "giao bớt việc cho người tin được, giữ giờ ngủ và đi khám sức khoẻ định kỳ"
+          }
+        },
+        "thuan": {
+          "nhan": "hợp nhận việc khó",
+          "y": "Việc khó đến đúng lúc bạn đủ sức; vượt qua được là có chỗ đứng.",
+          "lam": "nhận một việc khó mà người khác ngại, làm có kế hoạch từng tuần"
+        }
+      },
+      "Chính Quan": {
+        "mang": "công việc, vị trí, khuôn phép",
+        "can": {
+          "nhan": "công việc nên đi chậm",
+          "tre": {
+            "y": "Chỗ làm nhiều quy định, bạn dễ thấy bị gò và bị đánh giá khắt khe.",
+            "tranh": "phá quy định để làm nhanh, đổi việc chỉ vì một lần bị nhắc nhở",
+            "lam": "hỏi rõ tiêu chí đánh giá ngay đầu năm và làm đúng hạn từng việc nhỏ"
+          },
+          "lon": {
+            "y": "Vị trí của bạn dễ bị soi xét; chuyện giấy phép, thủ tục, quy định dễ chậm.",
+            "tranh": "lách thủ tục, làm việc lớn khi giấy phép chưa xong",
+            "lam": "làm đủ thủ tục trước khi bắt đầu, giữ hồ sơ việc làm rõ ràng"
+          }
+        },
+        "thuan": {
+          "nhan": "hợp để tiến trong nghề",
+          "y": "Bạn dễ được ghi nhận, giao vai trò rõ hơn hoặc lên chức.",
+          "lam": "nhận thêm trách nhiệm đúng chuyên môn và đề nghị được đánh giá lại vị trí"
+        }
+      },
+      "Thiên Ấn": {
+        "mang": "học, nghĩ, chuyện trong lòng",
+        "can": {
+          "nhan": "đừng ôm nghĩ một mình",
+          "tre": {
+            "y": "Bạn dễ thu mình, nghĩ nhiều hơn làm, học cái lạ rồi bỏ dở.",
+            "tranh": "đăng ký nhiều khoá học cùng lúc, tự cô lập khi gặp chuyện buồn",
+            "lam": "chọn một môn học theo đến cùng và hẹn gặp bạn thân mỗi tuần"
+          },
+          "lon": {
+            "y": "Bạn hay lo xa, nghi ngại, khó tin người; việc dễ bị chậm vì phân vân.",
+            "tranh": "giữ nỗi lo trong lòng quá lâu, nghe theo lời bàn tán thay vì kiểm tra",
+            "lam": "viết nỗi lo ra giấy kèm một việc làm được ngay, nói chuyện với người đáng tin"
+          }
+        },
+        "thuan": {
+          "nhan": "hợp để học sâu",
+          "y": "Đầu óc sáng, học cái mới vào nhanh, nghĩ ra cách làm riêng.",
+          "lam": "học một chuyên môn sâu hoặc lấy một chứng chỉ bạn đã muốn từ lâu"
+        }
+      },
+      "Chính Ấn": {
+        "mang": "giấy tờ, nhà cửa, người che chở",
+        "can": {
+          "nhan": "giấy tờ, nhà cửa nên chậm",
+          "tre": {
+            "y": "Bạn dễ dựa dẫm người nhà, chậm tự quyết; giấy tờ học hành dễ vướng.",
+            "tranh": "để người khác quyết thay chuyện lớn của mình, nộp hồ sơ sát hạn",
+            "lam": "tự đọc và tự nộp hồ sơ của mình, nộp sớm trước hạn ít nhất một tuần"
+          },
+          "lon": {
+            "y": "Chuyện nhà cửa, giấy tờ đất đai hay sức khoẻ người lớn trong nhà cần bạn lo nhiều.",
+            "tranh": "mua bán nhà khi giấy tờ chưa rõ, để việc của cha mẹ dồn đến phút chót",
+            "lam": "rà lại giấy tờ nhà đất và lịch khám của cha mẹ ngay đầu năm"
+          }
+        },
+        "thuan": {
+          "nhan": "hợp lo giấy tờ, nhà cửa",
+          "y": "Có người che chở; việc giấy tờ, bằng cấp, nhà cửa dễ suôn.",
+          "lam": "hoàn tất một thủ tục nhà cửa hay bằng cấp còn dang dở"
+        }
+      }
+    },
+    "nho": {
+      "can": {
+        "nhan": "con nên đi chậm",
+        "Tỷ Kiếp": {
+          "nhan": "con dễ va với bạn cùng lứa",
+          "mang": "bạn bè của con",
+          "y": "Con dễ tranh hơn thua với bạn cùng lớp hoặc anh chị em trong nhà.",
+          "tranh": "so con với anh chị em, phân xử khi chưa nghe đủ hai bên",
+          "lam": "cho mỗi đứa một việc riêng được khen riêng, nghe con kể hết rồi mới góp ý"
+        },
+        "Ấn": {
+          "nhan": "con cần tự làm lấy",
+          "mang": "việc học, sự tự lập của con",
+          "y": "Con dễ ỷ lại người lớn, ngại tự làm bài và tự lo việc của mình.",
+          "tranh": "làm bài hộ con, dọn hết đồ đạc thay con",
+          "lam": "giao cho con tự soạn cặp và tự đặt giờ học, người lớn chỉ kiểm tra cuối tuần"
+        },
+        "Thực Thương": {
+          "nhan": "con dễ nói thẳng, cãi lại",
+          "mang": "lời nói, cách cư xử của con",
+          "y": "Con dễ cãi lại thầy cô, cha mẹ hoặc nói điều làm bạn buồn.",
+          "tranh": "phạt con trước mặt người khác, bắt con im lặng mà không giải thích",
+          "lam": "dạy con một câu nói thay cho cãi lại và khen khi con nói nhẹ nhàng"
+        },
+        "Tài": {
+          "nhan": "con tập giữ đồ, giữ tiền",
+          "mang": "đồ dùng, tiền tiêu vặt của con",
+          "y": "Con dễ làm mất đồ, tiêu tiền tiêu vặt nhanh hoặc bị bạn mượn không trả.",
+          "tranh": "mua bù ngay mỗi lần con làm mất đồ, cho tiền không hỏi con tiêu vào đâu",
+          "lam": "cho con một khoản cố định mỗi tuần và cùng con ghi sổ tiêu"
+        },
+        "Quan Sát": {
+          "nhan": "con nhiều áp lực, cần người đỡ",
+          "mang": "áp lực học hành của con",
+          "y": "Con dễ chịu áp lực thi cử, nội quy và sợ làm người lớn thất vọng.",
+          "tranh": "dồn thêm lớp học thêm, mắng con vì một lần điểm thấp",
+          "lam": "giữ giờ ngủ đủ cho con và hỏi con điều gì ở trường làm con lo nhất"
+        }
+      },
+      "thuan": {
+        "nhan": "năm thuận cho con",
+        "Tỷ Kiếp": {
+          "nhan": "năm con có bạn tốt",
+          "mang": "bạn bè của con",
+          "y": "Con dễ có bạn thân tốt, học được nhiều khi làm việc nhóm.",
+          "lam": "cho con tham gia một câu lạc bộ hay đội nhóm con thích"
+        },
+        "Ấn": {
+          "nhan": "năm con học vào",
+          "mang": "việc học của con",
+          "y": "Con học vào hơn và dễ được thầy cô quan tâm.",
+          "lam": "cho con học thêm một môn con hỏi tới nhiều nhất"
+        },
+        "Thực Thương": {
+          "nhan": "năm con khéo tay, nhiều ý",
+          "mang": "năng khiếu của con",
+          "y": "Con nhiều ý tưởng, dễ làm ra thứ khiến người lớn bất ngờ.",
+          "lam": "cho con thử vẽ, đàn, làm đồ thủ công và trưng bày sản phẩm của con"
+        },
+        "Tài": {
+          "nhan": "hợp dạy con chuyện tiền",
+          "mang": "tiền tiêu vặt của con",
+          "y": "Con dễ hiểu chuyện tiền và biết để dành.",
+          "lam": "cùng con đặt một món muốn mua và để dành dần cho món ấy"
+        },
+        "Quan Sát": {
+          "nhan": "năm con nên nhận việc",
+          "mang": "nề nếp, trách nhiệm của con",
+          "y": "Con dễ được tin giao việc và làm tròn trách nhiệm.",
+          "lam": "để con nhận một vai trò trong lớp hoặc một việc nhà cố định"
+        }
+      }
+    },
+    "co": {
+      "nam_tuoi": {
+        "nhan": "năm tuổi",
+        "y": "Dân gian dặn năm tuổi nên giữ nếp, đừng dồn nhiều việc lớn vào cùng một năm.",
+        "tranh": "khởi sự nhiều việc lớn cùng lúc",
+        "lam": "chọn một việc lớn nhất để làm kỹ và đi khám sức khoẻ định kỳ đầu năm"
+      },
+      "xung_tuoi": {
+        "nhan": "năm xung tuổi",
+        "y": "Dân gian xem năm xung tuổi là năm hay có thay đổi: đổi chỗ, đổi việc, đi xa.",
+        "tranh": "đổi nhiều thứ trong cùng một lúc",
+        "lam": "thay đổi lần lượt từng việc, giữ một nếp quen làm chỗ dựa"
+      },
+      "va_tuoi": {
+        "nhan": "năm va tuổi",
+        "y": "Dân gian xem đây là năm hay có va chạm nhỏ với người xung quanh."
+      },
+      "tam_tai": {
+        "nhan": "năm tam tai",
+        "y": "Theo tục lệ, ba năm tam tai liền nhau thì việc lớn nên tính kỹ hơn.",
+        "tranh": "vội khởi công, cưới hỏi, mở hàng chỉ vì chọn được ngày đẹp mà chưa chuẩn bị",
+        "lam": "lập kế hoạch tiền cho cả ba năm và bàn kỹ việc lớn với người nhà"
+      },
+      "xung_ngay": {
+        "nhan": "dễ xáo trộn chỗ ở, người gần",
+        "y": "Chỗ ở hoặc người gần nhất (vợ chồng, người yêu) dễ có thay đổi.",
+        "tranh": "chuyển nhà hay quyết chuyện lớn của hai người trong lúc vội",
+        "lam": "bàn trước với người thân mọi thay đổi về chỗ ở và giữ thói quen ăn tối cùng nhau"
+      },
+      "hinh_ngay": {
+        "nhan": "dễ va chạm với người gần",
+        "y": "Người gần dễ có những va chạm nhỏ lặp lại."
+      }
+    }
+  },
+  "muc": {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần lưu ý"},
   "than": {"manh": "Sức tự thân: mạnh, tự đứng vững", "yeu": "Sức tự thân: cần thêm điểm tựa", "can_bang": "Sức tự thân: cân bằng"},
   "nhom": {"Tỷ Kiếp": "sức tự đứng, người ngang hàng", "Ấn": "nguồn nâng đỡ, việc học", "Thực Thương": "sức thể hiện, tay nghề", "Tài": "tiền bạc, thành quả nắm được", "Quan Sát": "khuôn phép, áp lực, trách nhiệm"},
   "nhat_chu": {

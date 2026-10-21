@@ -28,7 +28,8 @@ from app.narrative import hoi_van
 SINH = {"lich": dt.datetime(1990, 5, 17, 12, 30), "gioi_tinh": "nam"}
 XEM = dt.date(2026, 10, 21)
 THU_TU = ["tong_quan", "ngu_hanh", "cuoc_doi", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "hoc_tap", "suc_khoe",
-          "quan_he", "nam_nay", "loi_khuyen"]
+          "quan_he", "nam_nay", "van_han", "loi_khuyen"]
+KHONG_MUC = {"van_han", "loi_khuyen"}      # VH-1: chương tổng hợp / dòng 10 năm không mang chip mức riêng
 LOAI_HOP = {"cot_loi", "diem_manh", "luu_y", "loi_khuyen", "thoi_diem"}
 MUC = {"thuan", "can_bang", "can_chu_dong"}
 _CAN = r"Giáp|Ất|Bính|Đinh|Mậu|Kỷ|Canh|Tân|Nhâm|Quý"
@@ -88,7 +89,10 @@ def test_hop_dong(bc):
         for k in ("ma", "tieu_de", "cau_hoi", "muc", "nhan_muc", "tom_tat", "hop", "doan", "can_cu", "cau_tu_soi",
                   "moi_xem"):
             assert k in c, (c["ma"], k)
-        assert c["muc"] in MUC and c["nhan_muc"] == kb.nhan_muc(c["muc"])
+        if c["ma"] in KHONG_MUC:
+            assert c["muc"] is None and c["nhan_muc"] is None
+        else:
+            assert c["muc"] in MUC and c["nhan_muc"] == kb.nhan_muc(c["muc"])
         assert 1 <= len(c["doan"]) <= 4 and all(isinstance(d, str) and d for d in c["doan"])
         assert 2 <= len(c["hop"]) <= 6, c["ma"]
         for h in c["hop"]:
@@ -135,18 +139,19 @@ def test_cham_mang_la_mau():
     muc = {k: v["muc"] for k, v in cm.items()}
     # su_nghiep: có Quan Sát +1, Quan + Ấn (quan ấn tương sinh) +1 = 2 → thuận
     # tien_bac: có Tài +1, Tài đậm mà là hành kỵ −1 = 0 → cân bằng
-    # tinh_cam (nam → Tài): +1 −1, chi ngày Ngọ tự hình với năm/giờ −1 = −1 → cần chủ động
-    # gia_dinh: có Ấn +1, Ấn là hành hỷ +1, Tài đậm phá Ấn −1 = 1 → cân bằng
+    # tinh_cam (nam → Tài): +1 −1, chi ngày Ngọ tự hình với năm/giờ −1 = −1 → cần lưu ý (ngưỡng tình cảm 1 / −1)
+    # gia_dinh: có Ấn +1, Ấn là hành hỷ +1, Tài đậm phá Ấn −1, trụ ngày–giờ Ngọ–Ngọ tự hình −1 (VH-1) = 0 → cần lưu ý
+    #   (ngưỡng gia đình 2 / 0)
     # hoc_tap: có Ấn +1, Thái Cực Quý Nhân +1 = 2 → cân bằng (ngưỡng Thuận của học là 3)
     # quan_he: Thiên Ất Quý Nhân +1, Vong Thần −1 = 0 → cân bằng
-    # suc_khoe: thiếu Mộc, Hỏa chiếm 48% (≥ 45%) → cần chủ động
-    # tong_quan: hành hỷ Kim có mặt rõ +1, ≥ 2 sao cát +1 = 2 → thuận
-    # ngu_hanh: cách 1 có Kim rõ +1, điều hậu cần Thủy chỉ 11% → 0 = 1 → cân bằng; cách 2: hỷ Kim rõ +1, kỵ Thủy 11%
-    #   không nổi +1 = 2 → thuận; gộp chặt (hai cách khác nhau → cân bằng) = cân bằng
-    # tinh_cam: cân sức cần chủ động, tháng sinh cân bằng → gộp chặt = cân bằng
-    assert muc == {"su_nghiep": "thuan", "tien_bac": "can_bang", "tinh_cam": "can_bang", "gia_dinh": "can_bang",
+    # suc_khoe: thiếu Mộc, Hỏa chiếm 48% (≥ 45%) → cần lưu ý
+    # tong_quan: hành hỷ Kim có mặt rõ +1; 5 sao cát, 1 sao hung (≥ 3 cát và ≤ 1 hung) +1 = 2 → thuận
+    # ngu_hanh (VH-1): Hỏa 48% ≥ 45% −1, vắng Mộc −1; cách 1: Kim rõ +1, điều hậu Thủy 11% → 0 = −1; cách 2: hỷ Kim +1,
+    #   kỵ Thủy không nổi +1 = 0 → cả hai ≤ 0 → cần lưu ý (ngưỡng năng lượng 2 / 0)
+    # tinh_cam: cân sức cần lưu ý, tháng sinh cân bằng → gộp chặt = cân bằng
+    assert muc == {"su_nghiep": "thuan", "tien_bac": "can_bang", "tinh_cam": "can_bang", "gia_dinh": "can_chu_dong",
                    "hoc_tap": "can_bang", "quan_he": "can_bang", "suc_khoe": "can_chu_dong", "tong_quan": "thuan",
-                   "ngu_hanh": "can_bang"}
+                   "ngu_hanh": "can_chu_dong"}
     assert all(v["can_cu"] for v in cm.values())
 
 
@@ -435,6 +440,8 @@ def test_golden(ca):
     tq = next(c for c in b["chuong"] if c["ma"] == "tong_quan")
     assert tq["than_do"]["muc"] == ca["than"]
     assert {c["ma"]: c["muc"] for c in b["chuong"]} == ca["muc"]
+    vh = next(c for c in b["chuong"] if c["ma"] == "van_han")
+    assert [g["muc"] for g in vh["dong_nam"]] == ca["van_han_nam"]
     assert [g["muc"] for g in b["thoi_gian_bieu"]] == ca["dai_van"]
     assert [i for i, g in enumerate(b["thoi_gian_bieu"]) if g["hien_tai"]] == ca["hien_tai"]
     nh = next(c for c in b["chuong"] if c["ma"] == "ngu_hanh")
@@ -522,15 +529,15 @@ def _gop(m1: str, m2: str) -> str:
 
 
 def test_muc_mang_cham_ca_hai_cach_la_mau():
-    """Lỗi QC 2: mức mảng đời không được ngầm theo dụng thần cách 1. Lá mẫu: ngũ hành theo cân sức = cân bằng (Kim rõ,
-    điều hậu Thủy chưa rõ), theo tháng sinh = thuận (Kim rõ) → gộp chặt cân bằng; tình cảm: cân sức trừ Tài đậm (hành nên
-    bớt) → cần chủ động, tháng sinh không coi Hỏa là kỵ → cân bằng → gộp chặt cân bằng."""
+    """Lỗi QC 2: mức mảng đời không được ngầm theo dụng thần cách 1. Lá mẫu: ngũ hành (VH-1: Hỏa ≥ 45% và vắng Mộc trừ
+    chung) theo cân sức = cần lưu ý, theo tháng sinh = cần lưu ý → gộp chặt cần lưu ý; tình cảm: cân sức trừ Tài đậm (hành
+    nên bớt) → cần lưu ý, tháng sinh không coi Hỏa là kỵ → cân bằng → gộp chặt cân bằng."""
     cm = bt.cham_mang(bt.phan_tich(bt._la_so(SINH)))
     for ma in _MANG_HAI_CACH:
         assert {"muc_cach_1", "muc_cach_2"} <= set(cm[ma]), ma
         assert cm[ma]["muc"] == _gop(cm[ma]["muc_cach_1"], cm[ma]["muc_cach_2"]), ma
     assert (cm["ngu_hanh"]["muc_cach_1"], cm["ngu_hanh"]["muc_cach_2"], cm["ngu_hanh"]["muc"]) == \
-        ("can_bang", "thuan", "can_bang")
+        ("can_chu_dong", "can_chu_dong", "can_chu_dong")
     assert (cm["tinh_cam"]["muc_cach_1"], cm["tinh_cam"]["muc_cach_2"], cm["tinh_cam"]["muc"]) == \
         ("can_chu_dong", "can_bang", "can_bang")
     assert any(c.startswith("Theo cách cân sức") for c in cm["tinh_cam"]["can_cu"])

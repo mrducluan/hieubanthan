@@ -1,5 +1,5 @@
 // BT-ĐS (docs/LUAN-GIAI-DOI-SONG.md mục 6) — Luận giải Bát tự "đời sống" dùng chung khung với Tử vi: Điều quan trọng
-// nhất, mục lục 12 chương, chip mức, thanh sức tự thân, biểu đồ 5 hành + hai cách gợi ý bù (không chọn thay), dải đại vận
+// nhất, mục lục 13 chương (VH-1 thêm Vận hạn), chip mức, thanh sức tự thân, biểu đồ 5 hành + hai cách gợi ý bù (không chọn thay), dải đại vận
 // hai cách + dòng thời gian, kiểm chứng (phái "tu_binh", mã ds.bt.*), lưu bài, điện thoại 360px, chương khoá SAO-2.
 // Báo cáo là fixture SINH TỪ ENGINE THẬT (e2e/fixtures/luan-giai-bat-tu.json — `_ghi_chu` nói rõ chỗ sửa tay).
 import { test, expect, type Page, type Request } from "@playwright/test";
@@ -26,16 +26,18 @@ async function moBaoCao(page: Page, bc: object = BC) {
   return goi;
 }
 
-test("Bát tự đời sống: cốt lõi, 12 chương, sức tự thân, 5 hành hai cách, đại vận hai cách", async ({ page }) => {
+test("Bát tự đời sống: cốt lõi, 13 chương, sức tự thân, 5 hành hai cách, đại vận hai cách", async ({ page }) => {
   await moBaoCao(page);
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc.getByRole("heading", { level: 2 })).toHaveText("Luận giải Bát tự");
   await expect(page.getByTestId("lg-cot-loi").getByTestId("hop-noi-bat")).toHaveCount(BC.cot_loi.length);
-  await expect(page.getByTestId("lg-muc-luc").getByRole("link")).toHaveCount(12);
-  const NHAN: Record<string, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần chủ động" };
+  await expect(page.getByTestId("lg-muc-luc").getByRole("link")).toHaveCount(13);
+  const NHAN: Record<string, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần lưu ý" };
   for (const c of BC.chuong) {
-    await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc").first()).toHaveText(NHAN[c.muc]!);
+    if (!c.muc) await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc")).toHaveCount(0);
+    else await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc").first()).toHaveText(NHAN[c.muc]!);
   }
+  expect(BC.chuong.filter((c) => !c.muc).map((c) => c.ma)).toEqual(["van_han", "loi_khuyen"]);
   // Chương 1: thanh sức tự thân — kim đứng đúng tỉ lệ (reduced motion: không hiệu ứng, ở ngay vị trí cuối).
   const tq = page.getByTestId("lg-chuong-tong_quan");
   const than = tq.getByTestId("thanh-than");
@@ -104,7 +106,7 @@ test("Bát tự điện thoại 360px: không cuộn ngang, biểu đồ và dò
   expect(rong[0]).toBeLessThanOrEqual(rong[1]!);
 });
 
-test("Bát tự SAO-2: chương 1 đọc được (kèm thanh sức tự thân), 11 chương khoá, biểu đồ chương 2 không lộ", async ({ page }) => {
+test("Bát tự SAO-2: chương 1 đọc được (kèm thanh sức tự thân), 12 chương khoá, biểu đồ chương 2 không lộ", async ({ page }) => {
   const [dau, ...sau] = BC.chuong;
   const { thoi_gian_bieu: _tg, ...conLai } = BC;
   await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
@@ -123,7 +125,7 @@ test("Bát tự SAO-2: chương 1 đọc được (kèm thanh sức tự thân),
   await expect(bc.getByTestId("thanh-than")).toBeVisible();
   await expect(bc.getByTestId("bieu-do-ngu-hanh")).toHaveCount(0);
   await expect(bc.getByTestId("dong-thoi-gian")).toHaveCount(0);
-  await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(11);
+  await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(12);
   await expect(page.getByTestId("lg-phan-khoa")).toContainText(sau[0]!.moi_xem.cau_hoi);
   await expect(page.getByTestId("luu-bai-luan")).toHaveCount(0);
 });

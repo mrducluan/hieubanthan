@@ -15,7 +15,7 @@ from app.kb import tuvi_doi_song_kb as _tv
 
 _F = Path(__file__).parent / "data" / "battu_doi_song_kb.json"
 SOURCE_ID, SCHOOL_ID = "tu_binh_chan_thuyen", "tu_binh"
-MUC_MAC_DINH = {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần chủ động"}
+MUC_MAC_DINH = {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần lưu ý"}
 THAN_MAC_DINH = {"manh": "Sức tự thân: mạnh", "yeu": "Sức tự thân: cần thêm điểm tựa", "can_bang": "Sức tự thân: cân bằng"}
 CHUNG_SUC_KHOE = _tv.CHUNG_SUC_KHOE
 
@@ -166,6 +166,16 @@ def van_tham_chieu(trang_thai: str) -> dict | None:
     """Câu theo trạng thái đại vận lúc xem (`dang_di` / `chua_khoi` / `da_qua_van_cuoi`) — mẫu có biến {chu_de},
     {tu_tuoi}, {den_tuoi}, {nam_tu}, {nam_den}, {so_nam}, {so_van}, {muc}."""
     return _chuoi_hoa(_muc(_lay("van_tham_chieu", trang_thai)), *VAN_THAM_CHIEU_KHOA)
+
+
+VAN_HAN_KHOA = ("nhan", "mang", "y", "tranh", "lam")
+
+
+def van_han_loi(*khoa: str) -> dict | None:
+    """VH-1 — lời chương "Vận hạn & điều nên tránh": `van_han.<khoá…>` → {nhan, mang, y, tranh, lam} (ô thiếu = None).
+    Khoá: `thap_than.<thập thần>.can|thuan[.<tre|lon>]`, `nho.<can|thuan>`, `co.<cờ>`, `thang.<can|thuan>`."""
+    m = _muc(_lay("van_han", *khoa))
+    return {k: _chuoi(m.get(k)) for k in VAN_HAN_KHOA} if m else None
 
 
 def tom_tat(chuong: str, muc: str) -> str | None:

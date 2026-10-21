@@ -30,7 +30,8 @@ trong cung (Lộc +2, Quyền +1, Khoa +1, Kỵ −2) + lục cát (Tả, Hữu,
 đóng cung: ghi cờ `cham` ("việc đến chậm, cần kiên nhẫn"), không cộng trừ. Cung vô chính diệu: mượn chính tinh cung xung
 chiếu (ghi rõ trong `can_cu`).
 
-Mức: điểm ≥ 3 → `thuan` ("Thuận lợi"), ≤ −2 → `can_chu_dong` ("Cần chủ động"), còn lại `can_bang` ("Cân bằng"). Không
+Mức: điểm ≥ 4 → `thuan` ("Thuận lợi"; VH-1 nâng từ 3), ≤ −2 → `can_chu_dong` ("Cần lưu ý" — VH-1 đổi nhãn từ "Cần chủ
+động", giữ mã), còn lại `can_bang` ("Cân bằng"). Đường bay theo thang riêng (≥ 1 / ≤ −3); Lời khuyên, Vận hạn không mang mức. Không
 có mức "xấu", không điểm số hiện cho người dùng.
 
 ### 2.2 Chương (theo thứ tự; chương 1 miễn phí như SAO-2)
@@ -48,6 +49,7 @@ có mức "xấu", không điểm số hiện cho người dùng.
 | `nha_cua` | Nhà cửa, nơi ở | Điền Trạch |
 | `duong_bay` | Mảng đời nào kéo mảng đời nào | Phi hoá (lời đời thường từ `tuvi_phi_hoa`) |
 | `nam_nay` | Năm nay & 3 tháng tới | Đại hạn → lưu niên → tiểu hạn → nhịp 3 tháng (thứ tự ưu tiên giữ nguyên) |
+| `van_han` | Vận hạn & điều nên tránh | 10 năm tới: tứ hoá năm × cung chính, đại hạn, cờ dân gian (VH-1, mục 8) |
 | `loi_khuyen` | Lời khuyên dành cho bạn | Tổng hợp: 3 điểm mạnh nên dùng, 3 điều nên để ý, 3 việc nên làm |
 
 ### 2.3 Hợp đồng JSON (`POST /v1/tuvi/luan-giai`, giữ mọi trường cũ)
@@ -107,7 +109,7 @@ chỉ mã ≥ 30 phiếu, ≤ 5.000 mục) và `ca_nhan: {ma_mau: "dung"|"chua_d
   "suc_khoe": { "<Chính tinh>": {"bo_phan": "...", "thoi_quen": "...", "loi_khuyen": "..."},
                 "sat": {...}, "chung": "câu miễn trừ" },
   "dai_han": { "<Cung>": {"chu_de": "...", "nen_lam": "...", "de_vap": "..."} },                   // 12
-  "muc": { "thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần chủ động" },
+  "muc": { "thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần lưu ý" },
   "cach_cuc_doi_thuong": { "<tên cách cục>": "một câu đời thường" },
   "cum_cam": ["hành trình", ...] }
 ```
@@ -180,7 +182,7 @@ Mảng có phần phụ thuộc dụng thần (Con người bạn, Năng lượn
 **từng cách** (`muc_cach_1`, `muc_cach_2`, trả ở `chuong[].hai_cach_muc`) rồi gộp bằng `gop_muc` — cùng luật đại vận bên
 dưới; khác nhau → thân bài nói rõ "theo cách cân sức thì…, theo tháng sinh thì…", "Vì sao nói vậy" ghi mức từng cách.
 
-| Mảng | Luật (điểm ≥ 2 Thuận lợi · ≤ −1 Cần chủ động · còn lại Cân bằng) |
+| Mảng | Luật (điểm ≥ 2 Thuận lợi · ≤ −1 Cần lưu ý · còn lại Cân bằng — ngưỡng riêng từng mảng từ VH-1, mục 8.2) |
 |---|---|
 | Công việc | Quan Sát rõ +1 (+ hợp sức; Ấn hoặc Tài đỡ +1; Thực Thương đậm gặp Quan −1); không Quan mà Thực Thương rõ: 0 (sống bằng tay nghề); không cả hai −1 |
 | Tiền bạc | Tài rõ +1 (+ hợp sức; Thực Thương rõ sinh Tài +1); không Tài −1 (0 nếu Thực Thương rõ); Tỷ Kiếp đậm −1. Thân nhược mà Tài đậm → hộp "tiền đến nhiều nhưng dễ mệt vì gánh" |
@@ -190,7 +192,7 @@ dưới; khác nhau → thân bài nói rõ "theo cách cân sức thì…, theo
 | Bạn bè, bên ngoài | thân yếu có bạn ngang hàng đỡ +1; thân mạnh mà Tỷ Kiếp đậm −1; Quan Sát đậm đè thân yếu −1; Thiên Ất Quý Nhân +1; Vong Thần −1; Kiếp Sát −1 |
 | Con người bạn | thân trung hoà +1; hành cần thêm (của từng cách) có mặt rõ +1, vắng hẳn −1; ≥ 2 sao cát +1; ≥ 2 sao hung −1 |
 | Năng lượng | cách 1: phù ức / điều hậu không cần hoặc hành cần bù đã có mặt rõ +1 mỗi phần, vắng hẳn −1; cách 2: hỷ (như trên) + kỵ (hành nên bớt đậm −1, đều mỏng +1) |
-| Sức khoẻ | theo độ lệch: thiếu ≥ 2 hành hoặc một hành ≥ 45% → Cần chủ động; không thiếu và hành lớn nhất < 35% → Thuận lợi |
+| Sức khoẻ | theo độ lệch: thiếu ≥ 2 hành hoặc một hành ≥ 45% → Cần lưu ý; không thiếu và hành lớn nhất < 35% → Thuận lợi |
 
 **Đại vận / lưu niên / lưu nguyệt**: mỗi cách chấm can (1 điểm) + chi (2 điểm, hành bản khí) — hành cần thêm cộng, hành
 nên bớt trừ; ≥ 1 thuận, ≤ −1 cần chủ động. Gộp: cùng mức → mức đó; ngược nhau → Cân bằng + câu "Hai cách đọc cho kết quả
@@ -214,6 +216,7 @@ chính em; ≥ 45 tuổi và sao con mỏng → hộp "con cái tự lập, cầ
 | `suc_khoe` | Sức khoẻ & năng lượng | hành dư / thiếu → phần cơ thể sách xưa gắn với hành (phòng ngừa) + nhịp sức theo thân | miễn trừ `mien_tru` |
 | `quan_he` | Bạn bè, đồng nghiệp, người bên ngoài | Tỷ Kiếp × thân, Quan Sát, Thiên Ất, Tướng Tinh, Dịch Mã, Vong Thần, Kiếp Sát… | |
 | `nam_nay` | Năm nay & tháng tới | đại vận đang đi → lưu niên (+ quan hệ với chi ngày) → 3 tháng theo tiết | |
+| `van_han` | Vận hạn & điều nên tránh | 10 năm lưu niên (hai cách) + cờ dân gian + 12 tháng tiết (VH-1, mục 8) | dòng 10 năm, dải 12 tháng |
 | `loi_khuyen` | Lời khuyên dành cho bạn | 3 điểm mạnh, 3 điều nên để ý, 3 việc nên làm (gom từ các chương) | |
 
 ### 6.4 Hợp đồng JSON (`POST /v1/battu/luan-giai`, cùng `doi_song_1` mục 2.3, nhận `trong_so` / `ca_nhan`)
@@ -431,3 +434,130 @@ Nhãn ai cũng nhận thì không còn nói gì riêng. Đổi: mảng đời d�
 thấy, khác nhau → Cân bằng, thân bài vẫn nói rõ từng cách); Học & nghĩ cần 3 dấu hiệu mới "Thuận lợi". Đại vận / lưu
 niên / lưu nguyệt giữ `gop_muc`. Sau đổi (300 lá): "Thuận lợi" 10–43% tuỳ mảng; test `test_phan_bo_muc_khong_lech_mot_phia`
 chặn mảng nào ≥ 60% "Thuận lợi". Golden 14/15 lá đổi mức (có chủ đích).
+
+## 8. VH-1 — "Vận hạn & điều nên tránh" + cân lại nhãn mức (2026-10-21)
+
+Chủ dự án: đo 300 lá Bát tự sau khi gộp chặt hai cách thấy "Cần chủ động" = 0% ở Con người, Năng lượng, Lời khuyên; người
+dùng quan tâm vận hạn, những điều cần tránh. Vòng tăng trưởng: **QUAY LẠI** (dòng 10 năm đổi theo năm, xem lại khi sắp
+sang năm mới) + **NẠP Sao** (chương sâu, khoá SAO-2 như mọi chương sau chương 1). Đo: `reading_completed` mảng `tuvi` /
+`battu`, tỉ lệ mở chương Vận hạn (`paywall_viewed` → mở khoá), tỉ lệ "Đúng với mình" của mã `ds.van_han.*` /
+`ds.bt.van_han.*`.
+
+### 8.1 Đổi nhãn "Cần chủ động" → "Cần lưu ý"
+
+Giữ mã `can_chu_dong` (phiếu kiểm chứng, bài đã lưu, golden không đổi mã). Nhãn ở KB `muc`, hằng `MUC_MAC_DINH` (Tử vi +
+Bát tự), web `NHAN_MUC`, chú thích biểu đồ đại vận, câu dòng thời gian "Giai đoạn cần lưu ý". Rõ nghĩa "để ý, cẩn trọng"
+hơn mà vẫn không doạ. Tiêu đề hộp kiểu "Chuyện tiền bạc cần bạn chủ động" giữ nguyên (là câu, không phải nhãn).
+
+### 8.2 Cân lại để có đủ ba mức (luật ghi trong docstring `battu_doi_song.py`, `tuvi_doi_song.py`)
+
+- **Lời khuyên** không còn chép mức của Con người bạn — chương tổng hợp, không chip (`muc = null`). **Vận hạn** cũng không
+  chip (mỗi năm một mức).
+- **Bát tự** (ngưỡng riêng `NGUONG_MANG`): Con người bạn — thân rất lệch (tỉ lệ trợ lực < 0,30 hoặc > 0,70) −1; thần sát
+  đếm lại (≥ 3 cát và ≤ 1 hung +1, ≥ 3 hung −1 — sao cát có ở 92% lá nên "≥ 2 cát" không còn phân biệt); ngưỡng 2 / 0.
+  Năng lượng — phần chung theo độ lệch (một hành ≥ 45% −1, vắng hẳn một hành −1, đủ năm hành và hành lớn nhất < 35% +1),
+  điều hậu "không cần bù" 0 (trước +1); ngưỡng 2 / 0. Gia đình — trụ ngày–giờ (con cái) xung / hình / hại −1; ngưỡng 2 / 0.
+  Học & nghĩ — chỉ một dấu hiệu là Cần lưu ý (ngưỡng 3 / 1). Tình cảm, Bạn bè — ngưỡng 1 / −1. Công việc — Quan Sát đậm
+  mà thân nhược −1.
+- **Tử vi**: ngưỡng Thuận lợi của cung 3 → 4 (ngưỡng 3 cho 55% cung, 67% chương Công việc "Thuận lợi"); đường bay theo
+  thang riêng (số đường Lộc − số đường Kỵ nổi bật: ≥ 1 thuận, ≤ −3 cần lưu ý — thẻ nổi bật vốn ưu tiên đường Kỵ nên thang
+  cung cho 60% "Cần lưu ý").
+- Golden đổi có chủ đích: Bát tự `fixtures/golden/battu_doi_song.json` **14/15 lá** đổi ít nhất một mức (+ khoá mức 10 năm
+  `van_han_nam`); Tử vi 60 lá `lasotuvi_60` **45/60 lá** đổi ít nhất một mức chương (đường bay 19, công việc 9, gia đình 8,
+  nhà cửa / bạn bè / tiền / tình cảm / con người 7, sức khoẻ 5, các giai đoạn / năm nay 4) — test 60 lá không khoá mức
+  từng lá, chỉ khoá luật + phân bố.
+
+Phân bố nhãn (Thuận lợi · Cân bằng · Cần lưu ý), ngày xem 21/10/2026. Bát tự 300 lá ngẫu nhiên (seed 2026, sinh
+1940–2015); Tử vi 60 lá golden. Test `tests/test_van_han_doi_song.py::test_phan_bo_nhan_*` chặn: không nhãn nào ≥ 60%, mọi
+chương có mức đều ≥ 5% "Cần lưu ý"; dòng 10 năm mỗi nhãn 10–60%.
+
+| Bát tự (300 lá) | Trước | Sau |
+|---|---|---|
+| Con người bạn | 37 · 63 · **0** | 25 · 54 · 21 |
+| Năng lượng | 15 · **84** · **0** | 29 · 53 · 18 |
+| Các giai đoạn | 46 · 26 · 28 | 46 · 26 · 28 |
+| Công việc | 51 · 41 · 9 | 51 · 41 · 9 |
+| Tiền bạc | 26 · 53 · 22 | 26 · 53 · 22 |
+| Tình cảm | 10 · **65** · 25 | 41 · 34 · 25 |
+| Gia đình | 18 · **75** · 7 | 12 · 49 · 39 |
+| Học & nghĩ | 32 · **66** · **1** | 32 · 50 · 18 |
+| Sức khoẻ | 40 · 47 · 13 | 40 · 47 · 13 |
+| Bạn bè, bên ngoài | 6 · 60 · 35 | 36 · 29 · 35 |
+| Năm nay | 46 · 27 · 27 | 46 · 27 · 27 |
+| Lời khuyên | 37 · 63 · **0** (chép Con người) | không mang mức |
+| Vận hạn — mỗi năm (3.000 năm) | — | 43 · 23 · 34 |
+
+| Tử vi (60 lá) | Trước | Sau |
+|---|---|---|
+| Con người bạn | 58 · 23 · 18 | 47 · 35 · 18 |
+| Các giai đoạn | 57 · 20 · 23 | 50 · 27 · 23 |
+| Công việc | **67** · 20 · 13 | 52 · 35 · 13 |
+| Tiền bạc | 50 · 40 · 10 | 38 · 52 · 10 |
+| Tình cảm | **60** · 23 · 17 | 48 · 35 · 17 |
+| Gia đình | 45 · 37 · 18 | 32 · 50 · 18 |
+| Sức khoẻ | 48 · 25 · 27 | 40 · 33 · 27 |
+| Bạn bè, bên ngoài | 55 · 33 · 12 | 43 · 45 · 12 |
+| Nhà cửa | 52 · 22 · 27 | 40 · 33 · 27 |
+| Đường bay | 8 · 32 · **60** | 20 · 40 · 40 |
+| Năm nay | 57 · 20 · 23 | 50 · 27 · 23 |
+| Lời khuyên | 58 · 23 · 18 (chép Con người) | không mang mức |
+| Vận hạn — mỗi năm (600 năm) | — | 22 · 44 · 35 |
+
+Bát tự Công việc giữ 9% "Cần lưu ý" (≥ 5%): điểm 0 phần lớn là "sống bằng tay nghề" (không Quan, Thực Thương rõ) — không
+phải điều cần lưu ý nên không hạ ngưỡng.
+
+### 8.3 Chương mới `van_han` — "Vận hạn & điều nên tránh" (ngay sau "Năm nay & tháng tới", trước "Lời khuyên")
+
+Mười năm tới tính từ năm đang xem. Chương không chip mức; mỗi năm một mức + cờ. Trả `chuong[van_han].dong_nam` =
+`[{nam, tuoi, muc, nhan_muc, hien_tai, co: [{ma, nhan, y?, tranh?, lam?}], mang, y, nen_tranh, nen_lam, can_cu,
+muc_cach_1?, muc_cach_2?, hai_cach_khac?}]` (Bát tự thêm `thang_toi` 12 tháng theo tiết). Dữ liệu nằm TRONG chương → khoá
+SAO-2 là mất cả dòng (`catXemTruoc` không cần sửa); hộp cốt lõi của chương bị lọc theo `tu_chuong` như mọi hộp.
+
+**Tử vi** (`dong_muoi_nam`, chỉ đọc `calc.tuvi_phi_hoa.phi_tu_can` — bảng tứ hoá theo can năm, đối chiếu `van_han` iztro
+trong test; cung lưu niên = cung mang chi của năm; đại hạn = cung chứa tuổi mụ; năm âm lịch Việt, Tết). Điểm năm: Kỵ năm
+nhập cung chính (Mệnh, Tài Bạch, Quan Lộc, Phu Thê, Điền Trạch) −2, trùng cung Kỵ gốc −1 nữa · Kỵ năm ở cung đối diện,
+chiếu cung chính −1 · Lộc năm nhập cung chính +2 · song Lộc (gặp Lộc gốc / Lộc Tồn) +1 · Kỵ / Lộc năm rơi đúng cung đang
+đi (lưu niên hoặc đại hạn) −1 / +1 · đại hạn Thuận lợi +1 / Cần lưu ý −1. **≥ 2 Thuận lợi · điểm âm mà Kỵ năm chạm cung
+chính → Cần lưu ý** (luôn gọi được tên mảng chịu tác động) · còn lại Cân bằng. "Ưu tiên: đại hạn > lưu niên > tiểu hạn" +
+tiểu hạn năm nay ghi trong "Vì sao nói vậy".
+
+**Bát tự** (`dong_muoi_nam`, chỉ đọc `battu_mo_rong.luu_nien`): năm từ Lập xuân, chấm như đại vận — từng cách (can 1 + chi
+2 theo hành cần thêm / nên bớt) rồi `gop_muc`, khác nhau → câu "Hai cách đọc khác nhau ở năm N…" + cờ trên dòng. Mảng chịu
+tác động theo thập thần của can năm (10 lời riêng). Thêm cờ năm xung / hình chi ngày (chỗ ở, người gần). 12 tháng tới theo
+tiết chấm cùng luật → hộp "Mười hai tháng tới": tháng nên đi chậm (kèm mảng) + tháng thuận để bắt đầu việc mới.
+
+**Cờ tập quán dân gian** (`doi_song_chung.co_dan_gian`, chỉ đọc `calc.tuoi_dan_gian`): năm tuổi (cùng chi năm sinh), năm
+xung tuổi (lục xung), năm va tuổi (hình / hại), tam tai — theo chi năm sinh (Tử vi: năm âm lịch; Bát tự: chi trụ năm).
+Cờ **không đổi mức**; lời nhắc tục lệ cố định (ai có cờ cũng đọc giống nhau) nên KHÔNG thành hộp, chỉ hiện trên dòng 10 năm
+khi bấm năm ("Theo tập quán dân gian — …") và một câu gắn năm trong thân bài ("Theo tập quán dân gian, 2026 là năm tuổi…;
+xem như lời nhắc giữ nếp, không phải điềm báo").
+
+**Hộp** (≤ 6, `doi_song_chung.chon_hop_van_han`): năm Cần lưu ý gần nhất trước (≤ 3 mẫu; năm sau trùng mẫu gộp vào tiêu
+đề "Năm 2027 và 2031: …", không lặp câu) — `luu_y` có **"Nên tránh: …"** + **"Nên làm: …"**; năm thuận gần nhất (1,
+`diem_manh`, "Nên làm"); Bát tự thêm hộp 12 tháng. Ít điểm nhấn → "năm nên giữ nhịp hơn cả" + "năm đáng dồn sức nhất".
+Lời theo mảng × tuổi: 18–34 (`tre`), từ 35 (`lon`), dưới 18 (`nho` — lời cho cha mẹ theo mảng của con: sức, tiền tiêu vặt,
+học, bạn, chỗ ở; không vay, bảo lãnh, cưới xin). KB mới `van_han` trong `tuvi_doi_song_kb.json` (Kỵ nhập 5 cung × 2 tuổi,
+Kỵ chiếu 5, Lộc nhập 5, trẻ 10, cờ 4) và `battu_doi_song_kb.json` (10 thập thần × cần lưu ý 2 tuổi + thuận, trẻ 10, cờ 6) —
+nháp AI, `source_id` + `school_id`. Không vật phẩm, không giải hạn, không tên bệnh, không đoán năm ốm.
+
+**Mã kiểm chứng** (đi qua ràng buộc 0017 `^ds\.[a-z0-9_]+(\.[a-z0-9_+-]+)+$`, không migration mới): Tử vi
+`ds.van_han.{ky_nhap|ky_chieu}.<cung>.<tre|lon|nho>`, `ds.van_han.{loc_nhap|song_loc}.<cung>[.nho]`,
+`ds.van_han.{giu_nhip|don_suc}.<cung>`; Bát tự `ds.bt.van_han.<thập thần>.can.<tre|lon>`,
+`ds.bt.van_han.<nhóm>.can.nho`, `ds.bt.van_han.<thập thần>.thuan`, `ds.bt.van_han.thang.{cham|thuan}`,
+`ds.bt.van_han.{giu_nhip|don_suc}.<thập thần>`.
+
+**Điều quan trọng nhất**: nếu trong 3 năm tới (kể cả năm nay) có năm Cần lưu ý → thêm đúng hộp của năm gần nhất (cùng mã,
+`tu_chuong = van_han`); vẫn ≤ 5 hộp, ≤ 3 hộp mỗi loại, luôn có một điểm mạnh và một lưu ý.
+
+**Lời mời khi khoá (SAO-2)**: câu đầu chương là năm THUẬN gần nhất / năm đáng dồn sức ("Trong mười năm tới, năm thuận gần
+nhất là 2028: hợp nhận việc khó.") — điểm nhấn không đếm số năm phải tránh; câu hỏi mở `CAU_HOI_MO[(…, "van_han")]`.
+
+**Web**: `components/luan-giai/DongMuoiNam.tsx` — 10 chấm (lục / vàng / hổ phách, không đỏ; CSS `.cham-vh`), năm nay vòng
+vàng + "Năm nay", cờ nhỏ (tuổi · xung · va · tam tai · nhà), bấm năm → khung "Nên tránh / Nên làm" + lời tục lệ + "Vì sao
+nói vậy"; chấm hiện lần lượt bằng `motion` (tôn trọng giảm chuyển động); điện thoại 360px cuộn ngang trong khung riêng.
+Bát tự thêm dải 12 tháng. E2E `e2e/van-han.spec.ts`.
+
+**Test**: `tests/test_van_han_doi_song.py` — luật năm trên lá dựng tay, đối chiếu iztro, Bát tự = `muc_hai_cach` của lưu
+niên, cờ không đổi mức, trẻ dưới 18, lời văn (thuật ngữ, doạ, cụm cấm / chung chung, bệnh), không câu Barnum (Bát tự 80
+lá; Tử vi qua `test_tuvi_doi_song_chung_chung`), không lặp câu trong chương, KB đủ ô và sạch, cốt lõi, lời mời không doạ,
+phân bố nhãn. Không đổi lá số / tứ trụ → không tăng `ENGINE_VERSION`.

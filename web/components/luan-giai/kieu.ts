@@ -25,7 +25,20 @@ export interface Hop {
   huong_xu_ly?: string;
   /** Hộp thoi_diem: mức + khoảng thời gian (chữ) hoặc khoảng tuổi. */
   muc?: Muc; tu?: string; den?: string; tu_tuoi?: number; den_tuoi?: number;
+  /** VH-1 chương Vận hạn: năm của hộp (+ các năm cùng mẫu đã gộp). */
+  nam?: number; nam_gop?: number[];
 }
+
+/** VH-1 — một cờ của năm (tập quán dân gian theo chi năm sinh, hoặc năm xung / hình chi ngày ở Bát tự). */
+export interface CoNam { ma: string; nhan: string; y?: string; tranh?: string; lam?: string }
+/** VH-1 — một năm trong dòng 10 năm (engine chấm, web chỉ vẽ). `muc_cach_*` chỉ có ở Bát tự (hai cách dụng thần). */
+export interface NamVanHan {
+  nam: number; tuoi: number; muc: Muc; nhan_muc: string; hien_tai: boolean; co: CoNam[]; mang: string | null;
+  y: string; nen_tranh: string | null; nen_lam: string | null; can_cu: string[];
+  muc_cach_1?: Muc; muc_cach_2?: Muc; hai_cach_khac?: boolean;
+}
+/** VH-1 Bát tự — 12 tháng tới theo tiết. */
+export interface ThangToi { tu: string; den: string; muc: Muc; nhan_muc: string; hai_cach_khac: boolean; mang: string }
 
 export interface MocDaiHan {
   tu_tuoi: number; den_tuoi: number; nam_tu: number; nam_den: number; cung: string;
@@ -54,6 +67,8 @@ export interface ChuongDoiSongMo {
   mien_tru?: string;
   /** BT-ĐS: dữ liệu trực quan (chỉ có ở báo cáo Bát tự). */
   bieu_do?: BieuDoNguHanh; hai_cach?: HaiCach; than_do?: ThanDo;
+  /** VH-1 chương "Vận hạn & điều nên tránh": dòng 10 năm (+ 12 tháng tới ở Bát tự). Nằm TRONG chương → khoá SAO-2 là mất. */
+  dong_nam?: NamVanHan[]; thang_toi?: ThangToi[];
 }
 export interface ChuongKhoa { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem }
 
@@ -70,7 +85,7 @@ export interface BaoCaoDoiSong {
   phi?: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null };
 }
 
-export const NHAN_MUC: Record<Muc, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần chủ động" };
+export const NHAN_MUC: Record<Muc, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần lưu ý" };
 
 /** Mọi mã kiểm chứng trong báo cáo (để xin tỉ lệ một lần cho cả bài). */
 export function maMauBaoCao(bc: Pick<BaoCaoDoiSong, "cot_loi" | "chuong">): string[] {

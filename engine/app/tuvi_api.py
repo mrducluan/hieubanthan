@@ -485,7 +485,7 @@ class LuanGiaiInput(BaseModel):
     la_so: TuanTrietInput
     ngay_xem: _dt.date | None = None
     # SAO-2: bản xem trước khi thu Sao — chỉ diễn đạt AI N chương đầu (web cắt phần còn lại).
-    dien_dat_toi_da: int | None = Field(default=None, ge=0, le=12)
+    dien_dat_toi_da: int | None = Field(default=None, ge=0, le=13)
     # LG-ĐS tầng HỌC: bảng tỉ lệ "thấy đúng" công khai theo mã mẫu (web lấy từ Supabase, ≥ 30 phiếu) và phiếu của
     # chính người đang xem. Chỉ xếp lại / hạ hộp, không sinh câu mới.
     trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)
