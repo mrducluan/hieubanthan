@@ -18,6 +18,14 @@ Chỉ số (đều càng THẤP càng tốt):
   luu_y_huong_chung— số hộp lưu ý có hướng xử lý chung (dùng nguyên văn cho ≥ 2 mảng đời khác nhau trong kho lá,
                      hoặc là câu dự phòng trong mã) / bài.
   kb_*             — soát KB: số mục KB (tuvi_doi_song_kb, tuvi_kb, tuvi_cach_cuc) chứa cụm chung chung / cụm cấm.
+
+`--be-mat` (đợt 2): đo ba bề mặt NGOÀI bài luận giải, mỗi lá một "tập câu" người dùng đọc:
+  phi_hoa   — thẻ "đường bay nổi bật" (`/v1/tuvi/phi-hoa` → noi_bat: tiêu đề, nghĩa, việc nên làm);
+  the_cung  — lời giải nghĩa chính tinh trên thẻ chi tiết 12 cung (`/v1/tuvi/an-sao` → chinh_tinh[].giai_nghia,
+              mọi trường chữ trừ `can_cu`);
+  hoi_dap   — câu trả lời template cho 12 câu "Cung X của tôi nói gì?" (bỏ câu tự soi, câu kết cố định).
+Chỉ số mỗi bề mặt: barnum (câu có ở ≥ 50% số lá), trung_tb / trung_max (giữa hai lá khác hẳn), thuat_ngu, mo_ho,
+cum_cam (câu / lá).
 """
 from __future__ import annotations
 
@@ -57,6 +65,8 @@ CO_DINH = {
     kb.suc_khoe_chung(),
     "Đây là cách các mảng đời tác động lẫn nhau, không phải lời đoán sự kiện.",
     "Khi các lớp nói khác nhau, ưu tiên mười năm trước, rồi đến năm, rồi mới đến tháng.",
+    # hỏi đáp về sức khoẻ: câu miễn trừ cố định (tách câu theo dấu chấm)
+    *(c.strip() for c in re.split(r"(?<=[.!?])\s+", __import__("app.kb.tuvi_kb", fromlist=["x"]).luu_y("tat_ach"))),
 }
 
 
@@ -243,13 +253,95 @@ def kb_soat(cum: list[str]) -> dict:
     return ra
 
 
+# ------------------------------------------------------------------ bề mặt ngoài bài (đợt 2)
+def _ls(sinh: dict) -> dict:
+    from app.calc import tuvi_an_sao as az
+    from app.hoidap.tuvi import tom_tat
+    return tom_tat(az.an_sao_tho(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], "vi-VN"))
+
+
+def cau_phi_hoa(sinh: dict, ls: dict | None = None) -> list[str]:
+    """Câu trên thẻ đường bay nổi bật (tiêu đề + nghĩa + việc nên làm; không gồm căn cứ, câu tự soi)."""
+    from app.luangiai import tuvi_phi_hoa as phl
+    ls = ls or _ls(sinh)
+    ra = []
+    for n in phl.lap(ls, ls["can_nam"])["noi_bat"]:
+        ra.append(n["tieu_de"].strip())
+        for k in ("nghia", "viec_nen_lam"):
+            ra += cac_cau(n[k])
+    return ra
+
+
+def cau_the_cung(sinh: dict, ls: dict | None = None) -> list[str]:
+    """Lời giải nghĩa chính tinh trên thẻ 12 cung — mọi trường chữ của `giai_nghia` trừ `can_cu`."""
+    import inspect
+    from app import tuvi_api
+    ls = ls or _ls(sinh)
+    f = tuvi_api._giai_nghia_sao
+    ba = len(inspect.signature(f).parameters) >= 3
+    ra = []
+    for c in ls["cung"]:
+        for s in c["chinh_tinh"]:
+            g = (f(s["ten"], s["do_sang"], c["ten"]) if ba else f(s["ten"], s["do_sang"])) or {}
+            for k, v in g.items():
+                if k != "can_cu" and isinstance(v, str):
+                    ra += cac_cau(v)
+    return ra
+
+
+_TU_SOI = ("Câu hỏi để tự soi:",)
+
+
+def cau_hoi_dap(sinh: dict) -> list[str]:
+    """Thân câu trả lời template cho 12 câu "Cung X của tôi nói gì?" (bỏ câu tự soi + câu kết cố định)."""
+    from app.hoidap import tuvi as tv
+    from app.narrative import hoi_van
+    ra = []
+    for ten in tv.THU_TU_CUNG:
+        r = tv.tra_loi(f"Cung {ten} của tôi nói gì?", "tham_khao", sinh, XEM)
+        for d in r["cau_tra_loi"].split("\n\n"):
+            if d.startswith(_TU_SOI) or d.strip() == hoi_van.KET.strip():
+                continue
+            ra += cac_cau(d)
+    return ra
+
+
+def do_be_mat(la: list[dict], chi_tiet: bool = False) -> dict:
+    cum, cam = kb.cum_chung_chung(), kb.cum_cam()
+    ls = [_ls(s) for s in la]
+    bo = [{c["ten"]: tuple(sorted(x["ten"] for x in c["chinh_tinh"])) for c in l["cung"]} for l in ls]
+    mat = {"phi_hoa": [cau_phi_hoa(s, l) for s, l in zip(la, ls)],
+           "the_cung": [cau_the_cung(s, l) for s, l in zip(la, ls)],
+           "hoi_dap": [cau_hoi_dap(s) for s in la]}
+    so: dict = {"so_la": len(la)}
+    for ten, chu in mat.items():
+        tap = [set(c) - CO_DINH for c in chu]
+        ty = [len(tap[i] & tap[j]) / (min(len(tap[i]), len(tap[j])) or 1)
+              for i, j in itertools.combinations(range(len(la)), 2) if khac_han(bo[i], bo[j])]
+        dem = Counter(x for t in tap for x in t)
+        barnum = sorted([(n, x) for x, n in dem.items() if n >= max(2, len(la) / 2)], reverse=True)
+        n = len(la)
+        so[f"{ten}_cau_moi_la"] = round(sum(len(c) for c in chu) / n, 1)
+        so[f"{ten}_barnum"] = len(barnum)
+        so[f"{ten}_trung_tb"] = round(sum(ty) / max(1, len(ty)), 3)
+        so[f"{ten}_trung_max"] = round(max(ty, default=0), 3)
+        so[f"{ten}_thuat_ngu"] = round(sum(sum(bool(THUAT_NGU.search(x)) for x in c) for c in chu) / n, 2)
+        so[f"{ten}_mo_ho"] = round(sum(sum(bool(kb.tim_cum_cam(x, cum)) for x in c) for c in chu) / n, 2)
+        so[f"{ten}_cum_cam"] = round(sum(sum(bool(kb.tim_cum_cam(x, cam)) for x in c) for c in chu) / n, 2)
+        if chi_tiet:
+            so[f"_{ten}_barnum"] = [f"{k}× {x}" for k, x in barnum[:25]]
+            so[f"_{ten}_thuat_ngu"] = sorted({x for c in chu for x in c if THUAT_NGU.search(x)})[:15]
+    return so
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tat-ca", action="store_true")
     ap.add_argument("--chi-tiet", action="store_true")
+    ap.add_argument("--be-mat", action="store_true", help="đo phi hoá + thẻ 12 cung + hỏi đáp cung (đợt 2)")
     ap.add_argument("--json")
     a = ap.parse_args()
-    so = do(chon_la(a.tat_ca), a.chi_tiet)
+    so = (do_be_mat if a.be_mat else do)(chon_la(a.tat_ca), a.chi_tiet)
     for k, v in so.items():
         if k.startswith("_"):
             print(f"\n## {k[1:]}")

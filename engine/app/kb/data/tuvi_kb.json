@@ -671,6 +671,21 @@
   "Phúc Đức": "Giai đoạn chủ đề Phúc Đức: đời sống tinh thần, dòng họ, sự bình an nội tâm.",
   "Phụ Mẫu": "Giai đoạn chủ đề Phụ Mẫu: cha mẹ, cấp trên, giấy tờ, học hành."
  },
+ "chu_de_han_ngan": {
+  "_ghi_chu": "Chủ đề của giai đoạn khi hạn đi qua cung — lời thường, không tên cung (dùng thay cho việc cắt chuỗi chu_de_han theo dấu ':').",
+  "Mệnh": "tự định hình lại cách sống, nghề nghiệp và mục tiêu của chính mình",
+  "Huynh Đệ": "quan hệ anh em, bạn bè, cộng sự được đặt lên bàn",
+  "Phu Thê": "quan hệ đôi lứa, hôn nhân, hợp tác thân thiết là tâm điểm",
+  "Tử Nữ": "con cái, thế hệ sau, sáng tạo, đầu tư cho điều mình tạo ra",
+  "Tài Bạch": "tiền bạc, thu nhập, cách quản lý tài chính",
+  "Tật Ách": "sức khoẻ, nhịp sống, cách chịu áp lực cần được chăm sóc",
+  "Thiên Di": "dịch chuyển, môi trường mới, quan hệ bên ngoài",
+  "Nô Bộc": "mạng lưới, đồng nghiệp, cấp dưới, bạn bè xã hội",
+  "Quan Lộc": "công việc, sự nghiệp, vai trò xã hội",
+  "Điền Trạch": "nhà cửa, nơi ở, tài sản, không khí gia đình",
+  "Phúc Đức": "đời sống tinh thần, dòng họ, sự bình an nội tâm",
+  "Phụ Mẫu": "cha mẹ, cấp trên, giấy tờ, học hành"
+ },
  "giai_thich": {
   "tuan_triet": {
    "tieu_de": "Tuần và Triệt là gì?",
@@ -903,7 +918,7 @@
   "tham_khao": "Chế độ tham khảo: hạn được đọc như chủ đề của giai đoạn, không phải biến cố định sẵn.",
   "chi_tiet": "Chế độ chi tiết: có nêu xu hướng thuận/nghịch của năm theo sao tốt xấu, nhưng không phán tai nạn, bệnh tật, kiện tụng hay con số tiền — ba lớp hạn đọc theo thứ tự đại hạn > lưu niên > tiểu hạn.",
   "iztro": "Lá số an bằng iztro (khung Tử Vi Đẩu Số); chính tinh và tứ hoá trùng các nguồn đối chiếu, bộ phụ tinh Nam phái chưa đối chiếu đủ.",
-  "tat_ach": "Cung Tật Ách chỉ nói về cách bạn chịu áp lực; mọi vấn đề sức khoẻ cần hỏi bác sĩ.",
+  "tat_ach": "Phần này chỉ nói về nhịp sống và cách bạn chịu áp lực, không thay lời bác sĩ; mọi vấn đề sức khoẻ cần hỏi bác sĩ.",
   "han_su_kien": "Tử vi không đoán được biến cố cụ thể (tai nạn, kiện tụng, mất tiền, năm cưới, năm có con). Phần dưới chỉ nêu chủ đề và xu hướng của năm để bạn chuẩn bị.",
   "luu_nguyet": "Lưu nguyệt đọc như chủ đề nổi lên trong tháng, xếp sau đại hạn, lưu niên và tiểu hạn. Đổi phái có thể đổi cung tháng — xem bảng so sánh các phái trước khi dựa vào một tháng cụ thể."
  },

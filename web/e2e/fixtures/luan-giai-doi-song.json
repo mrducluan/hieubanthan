@@ -1818,12 +1818,12 @@
     "cau_hoi": "Mảng đời nào đang tác động lên mảng nào?",
     "muc": "can_bang",
     "nhan_muc": "Cân bằng",
-    "tom_tat": "Trong đời bạn, các mảng đời kéo nhau khá rõ: chỗ thuận và chỗ vướng gần ngang nhau.",
+    "tom_tat": "Mảng hay đỡ cho các mảng khác là chuyện ra ngoài, đi xa; mảng hay kéo bận tâm sang chỗ khác là chính bạn.",
     "hop": [
      {
       "loai": "luu_y",
       "tieu_de": "Tự lo, tự ôm",
-      "noi_dung": "Bạn hay tự đặt áp lực, tự chịu, khó mở lời nhờ người. Điểm vướng thường nằm ở cách mình nhìn chính mình. Nên chọn một người tin được để kể việc đang lo, và cho phép mình làm chưa hoàn hảo.",
+      "noi_dung": "Bạn hay tự đặt áp lực, tự chịu, khó mở lời nhờ người; chỗ vướng thường nằm ở cách mình nhìn chính mình. Nên chọn một người tin được để kể việc đang lo, và cho phép mình làm chưa hoàn hảo.",
       "can_cu": [
        "Cung Mệnh tự hoá Kỵ (Cự Môn, can Đinh)",
        "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn."
@@ -1834,7 +1834,7 @@
      {
       "loai": "luu_y",
       "tieu_de": "Tự lo trong chuyện đôi lứa",
-      "noi_dung": "Bạn dễ tự suy diễn, tự giữ cảm xúc trong quan hệ đôi lứa; vướng thường đến từ điều chưa nói ra. Nên nói thẳng cảm nhận của mình bằng câu bắt đầu từ tôi thấy, thay vì chờ người kia tự hiểu.",
+      "noi_dung": "Bạn dễ tự suy diễn, tự giữ cảm xúc trong chuyện tình cảm; vướng thường đến từ điều chưa nói ra. Nên nói thẳng cảm nhận của mình bằng câu bắt đầu từ tôi thấy, thay vì chờ người kia tự hiểu.",
       "can_cu": [
        "Cung Phu Thê tự hoá Kỵ (Thái Âm, can Ất)"
       ],
@@ -1843,50 +1843,51 @@
      },
      {
       "loai": "luu_y",
-      "tieu_de": "Con cái kéo bận tâm sang ra ngoài, đi xa",
-      "noi_dung": "Việc ra ngoài, đi xa, môi trường mới dễ làm bạn để tâm và hao sức hơn thường lệ. Nên chuẩn bị kỹ trước chuyến đi hay việc mới, có phương án dự phòng và để dư thời gian.",
+      "tieu_de": "Lo cho con khi con đi xa",
+      "noi_dung": "Con cái, học trò hay dự án riêng làm bạn phải đi lại nhiều, hoặc lo khi con ra ngoài, đi học xa. Thống nhất với con cách liên lạc khi con ra ngoài, rồi tin con làm theo.",
       "can_cu": [
-       "Hoá Kỵ (Thái Dương, can Giáp) từ cung Tử Nữ vào Thiên Di, chiếu Mệnh"
+       "Hoá Kỵ (Thái Dương, can Giáp) từ cung Tử Nữ vào Thiên Di, chiếu Mệnh",
+       "Hoá Kỵ vào Thiên Di thì chiếu thẳng về Mệnh (cung đối diện)."
       ],
       "ma_mau": "ds.duong_bay.ky_xung_menh.ky.vap",
-      "huong_xu_ly": "Nên chuẩn bị kỹ trước chuyến đi hay việc mới, có phương án dự phòng và để dư thời gian."
+      "huong_xu_ly": "Thống nhất với con cách liên lạc khi con ra ngoài, rồi tin con làm theo."
      },
      {
       "loai": "diem_manh",
-      "tieu_de": "Ra ngoài, đi xa đỡ cho chính bạn",
-      "noi_dung": "Chuyện ra ngoài, đi xa có xu hướng mang thuận lợi tới chính bạn.",
+      "tieu_de": "Ra ngoài đỡ cho chính bạn",
+      "noi_dung": "Chuyện ra ngoài, đi xa hay đem cơ hội và người giúp đến với bạn; nhiều lần chưa kịp mở lời đã có người chìa tay.",
       "can_cu": [
        "Hoá Lộc (Cự Môn, can Tân) từ cung Thiên Di vào Mệnh",
        "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn."
       ],
       "ma_mau": "ds.duong_bay.thien_di+menh.loc.manh",
-      "loi_khuyen": "Nên để ý cơ hội đến từ chuyện ra ngoài, đi xa và dùng nó cho chính bạn."
+      "loi_khuyen": "Khi chuyện ra ngoài, đi xa mở ra cơ hội, nhận lời sớm và nhớ cảm ơn người đã mở đường."
      },
      {
       "loai": "diem_manh",
-      "tieu_de": "Tình cảm, vợ chồng đỡ cho tiền bạc",
-      "noi_dung": "Chuyện tình cảm, vợ chồng có xu hướng mang thuận lợi tới chuyện tiền bạc.",
+      "tieu_de": "Tình cảm đỡ cho tiền bạc",
+      "noi_dung": "Chuyện tình cảm, vợ chồng dễ thành nguồn thu: tiền của bạn thường đến từ chính phía ấy.",
       "can_cu": [
        "Hoá Lộc (Thiên Cơ, can Ất) từ cung Phu Thê vào Tài Bạch",
        "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn."
       ],
       "ma_mau": "ds.duong_bay.phu_the+tai_bach.loc.manh",
-      "loi_khuyen": "Nên để ý cơ hội đến từ chuyện tình cảm, vợ chồng và dùng nó cho chuyện tiền bạc."
+      "loi_khuyen": "Ghi riêng khoản thu đến từ chuyện tình cảm, vợ chồng trong sổ chi tiêu để biết nó đáng bao nhiêu với bạn."
      },
      {
       "loai": "diem_manh",
       "tieu_de": "Anh chị em đỡ cho công việc",
-      "noi_dung": "Chuyện anh chị em có xu hướng mang thuận lợi tới chuyện công việc.",
+      "noi_dung": "Chuyện anh chị em mở đường cho công việc: việc mới, khách mới hay lời giới thiệu thường đến từ phía ấy.",
       "can_cu": [
        "Hoá Lộc (Thiên Đồng, can Bính) từ cung Huynh Đệ vào Quan Lộc"
       ],
       "ma_mau": "ds.duong_bay.huynh_de+quan_loc.loc.manh",
-      "loi_khuyen": "Nên để ý cơ hội đến từ chuyện anh chị em và dùng nó cho chuyện công việc."
+      "loi_khuyen": "Ghi lại những việc đến nhờ chuyện anh chị em, rồi chọn một hai việc làm tới nơi thay vì nhận hết."
      }
     ],
     "doan": [
-     "Trong đời bạn, các mảng đời kéo nhau khá rõ: chỗ thuận và chỗ vướng gần ngang nhau.",
-     "Chỗ các mảng đời đỡ nhau: ra ngoài, đi xa đỡ cho chính bạn; tình cảm, vợ chồng đỡ cho tiền bạc. Còn chỗ hay vướng: tự lo, tự ôm; tự lo trong chuyện đôi lứa — mỗi điều có cách gỡ ngay trong hộp.",
+     "Mảng hay đỡ cho các mảng khác là chuyện ra ngoài, đi xa; mảng hay kéo bận tâm sang chỗ khác là chính bạn.",
+     "Chỗ các mảng đời đỡ nhau: ra ngoài đỡ cho chính bạn; tình cảm đỡ cho tiền bạc. Còn chỗ hay vướng: tự lo, tự ôm; tự lo trong chuyện đôi lứa.",
      "Đây là cách các mảng đời tác động lẫn nhau, không phải lời đoán sự kiện."
     ],
     "can_cu": [
@@ -1894,6 +1895,7 @@
      "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn.",
      "Cung Phu Thê tự hoá Kỵ (Thái Âm, can Ất)",
      "Hoá Kỵ (Thái Dương, can Giáp) từ cung Tử Nữ vào Thiên Di, chiếu Mệnh",
+     "Hoá Kỵ vào Thiên Di thì chiếu thẳng về Mệnh (cung đối diện).",
      "Hoá Lộc (Cự Môn, can Tân) từ cung Thiên Di vào Mệnh",
      "Hoá Lộc (Thiên Cơ, can Ất) từ cung Phu Thê vào Tài Bạch",
      "Hoá Lộc (Thiên Đồng, can Bính) từ cung Huynh Đệ vào Quan Lộc",
@@ -1902,7 +1904,7 @@
     ],
     "cau_tu_soi": "Mảng đời nào của bạn đang âm thầm kéo theo mảng khác?",
     "moi_xem": {
-     "diem_nhan": "Trong đời bạn, các mảng đời kéo nhau khá rõ: chỗ thuận và chỗ vướng gần ngang nhau.",
+     "diem_nhan": "Mảng hay đỡ cho các mảng khác là chuyện ra ngoài, đi xa; mảng hay kéo bận tâm sang chỗ khác là chính bạn.",
      "cau_hoi": "Mảng đời nào đang âm thầm tác động lên mảng nào, và đâu là chỗ bạn hay tự ôm việc về mình?",
      "so_doan": 3,
      "phut_doc": 1
@@ -1951,8 +1953,8 @@
       "de_hieu": "Cách luận Tử vi của sách Việt Nam (Thái Thứ Lang, Nguyễn Phát Lộc…), khác phái Trung Hoa ở vài bảng tra như độ sáng sao, cách an Hoả Linh.",
       "vi_du": null,
       "khop": [
-       "Nam phái",
-       "lối Việt"
+       "lối Việt",
+       "Nam phái"
       ]
      },
      {
