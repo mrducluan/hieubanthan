@@ -217,3 +217,24 @@ def test_cau_khong_y_dinh_it_khi_vuot_nguong(capsys):
     with capsys.disabled():
         print(f"\n[nhung] câu không ý định vượt 0,82: {vuot}/{len(khac)}")
     assert vuot / len(khac) <= 0.02
+
+
+def test_loc_them_ten_lien_ket():
+    """QC hồi quy: bộ lọc nhật ký để lọt "tôi tên Lan", "Mình là Hùng", liên kết mạng xã hội — câu vào kho vectơ
+    (`cau_hoi_vec`, mục (e) CLAUDE.md: bỏ tên, số liên lạc) phải sạch."""
+    from app import nhung as nh
+    assert nh.loc_them("Tôi tên Lan, năm nay đổi việc được không?") == "Tôi tên [tên], năm nay đổi việc được không?"
+    assert nh.loc_them("Mình là Hùng, 34 tuổi, có nên cưới?").startswith("Mình là [tên],")
+    assert nh.loc_them("Chồng tôi tên Minh Anh có hợp không") == "Chồng tôi tên [tên] có hợp không"
+    assert nh.loc_them("xem fb.com/abc hoặc @lan_99") == "xem [liên kết] hoặc [liên kết]"
+    assert nh.loc_them("Tôi là Thiên Cơ ở Mệnh à?") == "Tôi là Thiên Cơ ở Mệnh à?"     # tên sao không phải tên người
+    assert nh.loc_them("Năm nay tôi có nên đổi việc") == "Năm nay tôi có nên đổi việc"
+
+
+def test_api_nhung_loc_ten():
+    from fastapi.testclient import TestClient
+    from app.main import app
+    r = TestClient(app).post("/v1/nhung", json={"cau": ["Tôi tên Lan sinh 12/3/1990, sđt 0912345678, đổi việc?"]})
+    assert r.status_code == 200
+    cau = r.json()["cau_da_loc"][0]
+    assert "Lan" not in cau and "0912345678" not in cau and "1990" not in cau

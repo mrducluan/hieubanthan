@@ -137,3 +137,12 @@ def tim_cum_cam(van: str, ds: list[str] | None = None) -> list[str]:
     import unicodedata
     van = unicodedata.normalize("NFC", van or "")
     return [c for c in (cum_cam() if ds is None else ds) if _mau_cum(unicodedata.normalize("NFC", c)).search(van)]
+
+
+def muc_mo_ta_ds(muc: str) -> list[str]:
+    """Câu mô tả mức: `muc_mo_ta` + các câu thay thế (`muc_mo_ta_bien_the`) — RULES xoay vòng để các chương không lặp."""
+    ds = [muc_mo_ta(muc)]
+    bt = _lay("muc_mo_ta_bien_the", muc)
+    if isinstance(bt, list):
+        ds += [_chuoi(x) for x in bt]
+    return [x for x in ds if x]

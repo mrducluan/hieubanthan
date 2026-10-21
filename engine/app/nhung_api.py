@@ -32,7 +32,7 @@ class NhungInput(BaseModel):
 
 @router.post("")
 def api_nhung(inp: NhungInput) -> dict:
-    da_loc = [nhat_ky.loc_cau_hoi_huyenhoc(c.strip())[:300] for c in inp.cau]
+    da_loc = [nhung.loc_them(nhat_ky.loc_cau_hoi_huyenhoc(c.strip()))[:300] for c in inp.cau]
     return {"engine_version": ENGINE_VERSION, "mo_hinh": nhung.MO_HINH, "so_chieu": nhung.SO_CHIEU,
             "cau_da_loc": da_loc, "vec": [nhung.nhung(c) for c in da_loc]}
 
@@ -53,7 +53,7 @@ def kho_co_nhan(mo_dun: str) -> tuple[dict, ...]:
             r = json.loads(dong)
             if r.get("mo_dun") != mo_dun or not (yd := nhan_y_dinh(r)):
                 continue
-            cau = nhat_ky.loc_cau_hoi_huyenhoc(r["cau_hoi"].strip())[:300]
+            cau = nhung.loc_them(nhat_ky.loc_cau_hoi_huyenhoc(r["cau_hoi"].strip()))[:300]
             if len(cau) < 3 or cau in da_co:
                 continue
             da_co.add(cau)

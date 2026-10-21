@@ -99,7 +99,9 @@ def test_ma_mau_duy_nhat(bc):
 
 def test_thoi_gian_bieu(bc):
     tgb = bc["thoi_gian_bieu"]
-    assert len(tgb) == 12 and [g["tu_tuoi"] for g in tgb] == sorted(g["tu_tuoi"] for g in tgb)
+    # bỏ giai đoạn bắt đầu sau 86 tuổi: lá Hoả lục cục 6, 16, …, 86 → 9 giai đoạn
+    assert len(tgb) == 9 and [g["tu_tuoi"] for g in tgb] == sorted(g["tu_tuoi"] for g in tgb)
+    assert tgb[-1]["tu_tuoi"] == 86 and all(g["tu_tuoi"] <= ds.TUOI_BAT_DAU_TOI_DA for g in tgb)
     for a, b in zip(tgb, tgb[1:]):
         assert b["tu_tuoi"] == a["den_tuoi"] + 1
     for g in tgb:
@@ -166,7 +168,10 @@ def test_chuong_dung_cung(bc):
     assert any("Tuần" in c and "Phu Thê" in c for c in ch["tinh_cam"]["can_cu"])
     assert ch["nam_nay"]["hop"][0]["ma_mau"].startswith("ds.nam_nay.dai_han.")          # đại hạn trước
     thang = [h for h in ch["nam_nay"]["hop"] if ".thang" in h["ma_mau"]]
-    assert len(thang) == 3 and all(h["loai"] == "thoi_diem" and h["tu"] and h["den"] for h in thang)
+    # tháng 10 và 11 cùng mức, cùng gợi ý → gộp một hộp "Tháng 10–11 âm lịch"
+    assert [h["tieu_de"] for h in thang] == ["Tháng 9 âm lịch", "Tháng 10–11 âm lịch"]
+    assert all(h["loai"] == "thoi_diem" and h["tu"] and h["den"] for h in thang)
+    assert thang[1]["ma_mau"] == "ds.nam_nay.thang2+3.binh.chung"
     assert ch["duong_bay"]["hop"] and all(h["can_cu"][0].startswith(("Hoá ", "Cung ")) for h in ch["duong_bay"]["hop"])
 
 
@@ -247,7 +252,7 @@ def test_api_trong_so_ca_nhan():
                                            "ca_nhan": {"ds.tien_bac.hoa_ky+tai_bach.sinh.vap": "chua_dung"}})
     assert r.status_code == 200, r.text
     d = r.json()
-    assert d["phien_ban"] == "doi_song_1" and d["cot_loi"] and len(d["thoi_gian_bieu"]) == 12
+    assert d["phien_ban"] == "doi_song_1" and d["cot_loi"] and len(d["thoi_gian_bieu"]) == 9
     assert "ds.su_nghiep.cu_mon.ham.vap" not in [h["ma_mau"] for c in d["chuong"] for h in c["hop"]]
     for bad in ({"trong_so": {"MA SAI": {"dung": 1, "chua_dung": 1}}},
                 {"trong_so": {"ds.a.b": {"dung": -1, "chua_dung": 0}}},
@@ -323,7 +328,9 @@ def test_golden_60_la(ca):
     b = toan_bo.tuvi(sinh, ngay_xem=XEM)
     assert [c["ma"] for c in b["chuong"]] == THU_TU
     assert 3 <= len(b["cot_loi"]) <= 5 and {"diem_manh", "luu_y"} <= {h["loai_goc"] for h in b["cot_loi"]}
-    assert len(b["thoi_gian_bieu"]) == 12 and sum(g["hien_tai"] for g in b["thoi_gian_bieu"]) <= 1
+    assert 8 <= len(b["thoi_gian_bieu"]) <= 9 and sum(g["hien_tai"] for g in b["thoi_gian_bieu"]) <= 1
+    assert all(g["tu_tuoi"] <= ds.TUOI_BAT_DAU_TOI_DA for g in b["thoi_gian_bieu"])
+    _khong_trung_doan_hop(b)
     tu = b["thoi_gian_bieu"][0]["tu_tuoi"]
     if tu <= b["tuoi_mu"] <= b["thoi_gian_bieu"][-1]["den_tuoi"]:
         assert sum(g["hien_tai"] for g in b["thoi_gian_bieu"]) == 1
@@ -337,3 +344,76 @@ def test_golden_60_la(ca):
                 assert h["huong_xu_ly"]
     sk = next(c for c in b["chuong"] if c["ma"] == "suc_khoe")
     assert kb.suc_khoe_chung() in sk["doan"]
+
+
+# ------------------------------------------------------------------ QC hồi quy (lời văn trên nhiều lá)
+def _khong_trung_doan_hop(b: dict) -> None:
+    """Web hiện cả hộp lẫn thân bài → không câu nào của `doan` trùng nguyên văn câu trong hộp cùng chương."""
+    for c in b["chuong"]:
+        cau_hop = {x.strip() for h in c["hop"] for x in h["noi_dung"].split(". ")}
+        for d in c["doan"]:
+            for x in d.split(". "):
+                assert x.strip() not in cau_hop, (c["ma"], x)
+
+
+def test_doan_khong_chep_lai_hop(bc):
+    _khong_trung_doan_hop(bc)
+    ch = {c["ma"]: c for c in bc["chuong"]}
+    assert all(c["doan"] for c in bc["chuong"])                      # còn đoạn cho moi_xem + diễn đạt AI
+    cd = " ".join(ch["cuoc_doi"]["doan"])
+    assert "Từ 6 đến 15 tuổi" not in cd and "Từ 76 đến 85 tuổi" not in cd     # không kể lại dòng thời gian
+
+
+def test_tieu_de_hop_khong_cut_khong_thuat_ngu():
+    """Hồi quy: "…" cắt giữa câu, vế dẫn cụt ("Trong công việc"), "Người giúp trong cha mẹ", "Kỵ chiếu về bản
+    thân", "chuyện con người bạn", chương "Thuận lợi" mà toàn hộp lưu ý (sức khoẻ)."""
+    tn = re.compile(r"(?<!\w)(?:Kỵ|Lộc|Quyền|Khoa|Hoá|Hóa)(?!\w)|Miếu|Hãm")
+    for ca in _G[:30]:
+        b = toan_bo.tuvi({"ngay": dt.date.fromisoformat(ca["ngay"]), "ti": ca["ti"], "gioi_tinh": ca["gioi_tinh"]},
+                         ngay_xem=XEM)
+        for c in b["chuong"]:
+            if c["muc"] == "thuan" and c["hop"]:
+                assert not all(h["loai"] == "luu_y" for h in c["hop"]), c["ma"]
+            for h in c["hop"]:
+                t = h["tieu_de"]
+                assert not t.endswith("…") and not tn.search(t), t
+                assert not re.fullmatch(r"(Trong|Với|Ở|Về|Khi|Lúc) [^,]{0,22}", t), t
+                assert not re.search(r"trong (cha mẹ|con cái|anh chị em|tiền bạc|công việc)$", t), t
+                assert "con người bạn" not in t and "chuyện con người bạn" not in h["noi_dung"], h["noi_dung"]
+        # tóm tắt chương không lặp cùng một câu mô tả mức ở ≥ 3 chương
+        cau = [x for c in b["chuong"] for x in c["tom_tat"].split(". ")[1:]]
+        assert all(cau.count(x) < 3 for x in cau), cau
+
+
+def test_loi_khuyen_khong_lap_viec_nen_lam(bc):
+    lk = next(c for c in bc["chuong"] if c["ma"] == "loi_khuyen")
+    vap = next(h for h in lk["hop"] if h["ma_mau"] == "ds.loi_khuyen.tong_hop.ba.vap")
+    viec = next(h for h in lk["hop"] if h["ma_mau"] == "ds.loi_khuyen.tong_hop.ba.khuyen")
+    assert not set(viec["noi_dung"].split(". ")) & set(vap["noi_dung"].split(". "))
+
+
+def test_cot_loi_can_hai_phia(bc):
+    goc = [h["loai_goc"] for h in bc["cot_loi"]]
+    assert goc.count("luu_y") <= 3 and goc.count("diem_manh") <= 3
+    ch = [h["tu_chuong"] for h in bc["cot_loi"]]
+    assert all(ch.count(x) <= 2 for x in ch)
+
+
+def test_tieu_de_cat_truoc_tu_noi():
+    s = "Bạn dễ bị bạn bè kéo vào những cuộc vui tốn kém hay những lời mời đầu tư nhanh."
+    assert ds._tieu_de(s, "x") == "Bạn dễ bị bạn bè kéo vào những cuộc vui tốn kém"
+    assert ds._tieu_de("Trong công việc, bạn tỉ mỉ, có mắt thẩm mỹ.", "x") == "Trong công việc, bạn tỉ mỉ"
+    assert ds._tieu_de("Một câu rất dài " * 6, "Mặc định") == "Mặc định"
+    assert ds._sua_menh("Ở chuyện con người bạn, việc thường đến chậm.") == "Với bản thân bạn, việc thường đến chậm."
+    assert ds._ma("ds", "a" * 58, "b") == "ds." + "a" * 57           # không để dấu chấm treo cuối mã
+
+
+def test_nhip_3_thang_theo_phai_nguoi_dung():
+    from app.calc import tuvi_luu_nguyet as ln
+    ra = {}
+    for phai in ("dau_quan_thai_tue", "dia_chi_thang", None):
+        b = toan_bo.tuvi({**SINH, "luu_nguyet": phai}, ngay_xem=XEM)
+        nn = next(c for c in b["chuong"] if c["ma"] == "nam_nay")
+        ra[phai] = next(x for x in nn["can_cu"] if x.startswith("Phái lưu nguyệt: "))
+    assert ra[None] == ra["dau_quan_thai_tue"] and ln.MAC_DINH == "dau_quan_thai_tue"     # None → phái mặc định
+    assert ra["dia_chi_thang"] != ra["dau_quan_thai_tue"]

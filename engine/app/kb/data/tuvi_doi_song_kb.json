@@ -2754,5 +2754,20 @@
   "thuan": "Mảng đời này đang có nhiều điều đỡ cho bạn; làm đúng hướng thì dễ ra kết quả.",
   "can_bang": "Có cả điểm thuận lẫn chỗ cần để ý; kết quả tuỳ nhiều vào cách bạn làm.",
   "can_chu_dong": "Mảng này không tự trôi chảy; bạn chủ động sắp xếp sớm thì mọi việc nhẹ hơn nhiều."
+ },
+ "muc_mo_ta_bien_the": {
+  "_ghi_chu": "Câu thay thế cho muc_mo_ta để các chương không lặp cùng một câu (RULES chọn theo thứ tự chương).",
+  "thuan": [
+   "Đây là chỗ dựa của bạn; dùng nó đều tay thì kết quả đến khá tự nhiên.",
+   "Ở mảng này bạn có sẵn nhiều thuận lợi; điều cần là đừng chủ quan."
+  ],
+  "can_bang": [
+   "Mảng này có điểm tựa, cũng có chỗ phải để tâm; làm đều tay thì giữ được nhịp.",
+   "Không quá dễ cũng không quá khó; thói quen hằng ngày của bạn quyết định nhiều."
+  ],
+  "can_chu_dong": [
+   "Ở mảng này, việc gì chuẩn bị trước một bước thì bớt vất vả hẳn.",
+   "Đây là chỗ nên dành thời gian sớm, đừng đợi việc dồn đến mới lo."
+  ]
  }
 }
