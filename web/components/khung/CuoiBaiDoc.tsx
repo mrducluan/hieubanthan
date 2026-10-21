@@ -7,6 +7,8 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { batDauDoc, docXong } from "@/lib/do-luong";
 import { GopY } from "./GopY";
+import { CtaCuoiBai } from "./CtaCuoiBai";
+import type { GoiMo } from "./GoiMoCheo";
 
 /** Ghi reading_started một lần khi `sanSang` (kết quả của mảng đã hiện). */
 export function useBatDauDoc(moDun: string, sanSang: boolean): void {
@@ -39,12 +41,17 @@ export function MocDocXong({ moDun, them, giayToiThieu = 10 }: { moDun: string; 
   return <div ref={ref} aria-hidden className="h-px w-full" data-testid={`doc-xong-${moDun}`} />;
 }
 
-export function CuoiBaiDoc({ moDun, cauHoi, chiaSe }: { moDun: string; cauHoi?: string; chiaSe?: ReactNode }) {
+export function CuoiBaiDoc({ moDun, cauHoi, chiaSe, maYDinh, goiMo, khongCta = false }: {
+  moDun: string; cauHoi?: string; chiaSe?: ReactNode;
+  /** KC-3/KC-5: mã ý định (chung hoặc riêng của mảng) / gợi mở sẵn từ bài đọc → khối CTA cuối bài. */
+  maYDinh?: string | null; goiMo?: GoiMo | null; khongCta?: boolean;
+}) {
   return (
     <section aria-label="Góp ý bài đọc" className="mt-10 space-y-6">
       <MocDocXong moDun={moDun} />
       <GopY moDun={moDun} cauHoi={cauHoi} />
       {chiaSe}
+      {!khongCta && <CtaCuoiBai moDun={moDun} maYDinh={maYDinh} goiMo={goiMo} />}
     </section>
   );
 }

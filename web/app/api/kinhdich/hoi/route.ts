@@ -12,10 +12,14 @@ const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 const Input = z.object({
   cau_hoi: z.string().min(3).max(500),
   che_do: z.enum(["tu_dong", "nghia_ly", "day_du"]).default("tu_dong"),
-  cach_ra_que: z.enum(["may_gieo", "gieo_tay", "mai_hoa"]).default("may_gieo"),
+  cach_ra_que: z.enum(["may_gieo", "gieo_tay", "mai_hoa", "mai_hoa_so", "mai_hoa_phuong"]).default("may_gieo"),
   /** TP-LICH — âm lịch dùng cho Mai Hoa. */
   lich: z.enum(["viet", "trung"]).optional(),
   gia_tri_hao: z.array(z.number().int().min(6).max(9)).length(6).optional(),
+  /** KD-ĐS: chủ đề (chip) chốt dụng thần; Mai Hoa theo hai số người dùng chọn / theo phương vị. Không chọn quẻ theo ý. */
+  chu_de: z.string().regex(/^[a-z_]{2,40}$/).optional(),
+  so_mai_hoa: z.array(z.number().int().min(1).max(9999)).length(2).optional(),
+  phuong_mai_hoa: z.enum(["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]).optional(),
 }).strict();
 
 // SAO-2: hạn mức câu miễn phí / trừ Sao khi vượt (lib/cua-sao.ts, tắt mặc định).

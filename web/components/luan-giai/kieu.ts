@@ -43,6 +43,8 @@ export interface ChuongKhoa { ma: string; tieu_de: string; khoa: true; moi_xem: 
 export interface BaoCaoDoiSong {
   mo_dun: string;
   phien_ban: "doi_song_1";
+  /** KC-1: phái ghi kèm phiếu kiểm chứng (nam_phai_viet · tu_binh · pitago · bat_trach_huyen_khong). */
+  phai?: string;
   trang_thai: string;
   ket: string;
   dien_dat?: "ai" | "tron" | "mau";

@@ -157,5 +157,392 @@
     "khau_quyet": "Tý Quý tịnh Giáp Thân, Tham Lang nhất lộ hành; Nhâm Mão Ất Mùi Khôn, ngũ vị vi Cự Môn; Càn Hợi Thìn Tốn Tỵ, liên Tuất Vũ Khúc danh; Dậu Tân Sửu Cấn Bính, thiên tinh thuyết Phá Quân; Dần Ngọ Canh Đinh thượng, Hữu Bật tứ tinh lâm.",
     "luu_y": "Các phái khác nhau ở ngưỡng độ (3° hay 4,5°), ở chiều bay sau khi thay sao và ở trường hợp sao 5. Hệ thống theo Thẩm thị và chưa có nguồn đối chiếu độc lập, nên luôn xem kèm hạ quái và đo lại la bàn.",
     "nguon": "Thẩm Thị Huyền Không Học, quyển 2 (Thế quái) — cổ thư công cộng; diễn giải là nháp AI."
+  },
+  "cap_sao": {
+    "1-1": {
+      "ten": "Nhất Bạch trùng",
+      "y": "Hai sao Thuỷ gặp nhau: sáng ý, hợp học hành, đi lại, giao tiếp; nhiều Thuỷ quá thì dễ lạnh lẽo, trôi nổi.",
+      "nhom": "thuan",
+      "hop_cho": "phòng làm việc, phòng học, góc đọc sách",
+      "luu_y": "Giữ ấm, đủ sáng; tránh ẩm thấp."
+    },
+    "1-2": {
+      "ten": "Nhất Nhị",
+      "y": "Thổ ép Thuỷ: chuyện trong nhà dễ nặng nề, trì trệ; người phụ nữ lớn trong nhà hay mệt.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "kho, phòng ít dùng",
+      "luu_y": "Không đặt giường, bếp ở đây; giữ thoáng, sạch."
+    },
+    "1-3": {
+      "ten": "Nhất Tam",
+      "y": "Thuỷ nuôi Mộc: có khởi đầu, có tiếng nói; khi sao 3 suy dễ sinh lời qua tiếng lại, tranh chấp giấy tờ.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng làm việc, phòng khách phụ",
+      "luu_y": "Nói rõ ràng, giấy tờ rõ ràng."
+    },
+    "1-4": {
+      "ten": "Nhất Tứ đồng cung",
+      "y": "Thuỷ nuôi Mộc, cặp sao sách xưa gắn với học hành, thi cử, chữ nghĩa và duyên lành.",
+      "nhom": "thuan",
+      "hop_cho": "phòng học, phòng làm việc, bàn đọc",
+      "luu_y": "Nước bẩn, lộn xộn ở cung này thì mặt tốt giảm."
+    },
+    "1-5": {
+      "ten": "Nhất Ngũ",
+      "y": "Thổ nặng đè Thuỷ: cung này dễ kẹt, nặng, không nên động thổ hay dùng nhiều.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "kho, nhà vệ sinh, nơi ít lui tới",
+      "luu_y": "Giữ yên, sạch; không đặt cửa chính, bếp, giường."
+    },
+    "1-6": {
+      "ten": "Lục Nhất",
+      "y": "Kim sinh Thuỷ: sáng suốt, có người lớn nâng đỡ, hợp việc học, việc công.",
+      "nhom": "thuan",
+      "hop_cho": "phòng làm việc, phòng người trụ cột",
+      "luu_y": "Khi 6 suy thì cứng nhắc, cô độc — thêm hơi ấm, màu sáng."
+    },
+    "1-7": {
+      "ten": "Nhất Thất",
+      "y": "Kim sinh Thuỷ nhưng sao 7 thiên về miệng tiếng, tiêu xài, tình cảm bay bổng.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng khách, phòng tiếp khách",
+      "luu_y": "Giữ lời, giữ tiền; bớt tụ tập ồn ào."
+    },
+    "1-8": {
+      "ten": "Nhất Bát",
+      "y": "Thổ khắc Thuỷ: sao 8 còn khí tốt về của cải, nhưng Thổ ép Thuỷ nên trẻ nhỏ, người nhỏ tuổi trong nhà cần được để ý.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng khách, nơi cất giữ",
+      "luu_y": "Không đặt giường trẻ nhỏ ở đây lâu dài."
+    },
+    "1-9": {
+      "ten": "Nhất Cửu hợp thập",
+      "y": "Thuỷ gặp Hoả, cộng thành mười: âm dương gặp nhau, vận 9 coi là tốt về danh tiếng lẫn tiền bạc.",
+      "nhom": "thuan",
+      "hop_cho": "phòng khách, phòng làm việc, cửa chính",
+      "luu_y": "Thuỷ Hoả đối nhau — giữ bếp và nước không sát nhau."
+    },
+    "2-2": {
+      "ten": "Nhị Hắc trùng",
+      "y": "Hai sao Thổ nặng: cung ì, dễ mệt mỏi, uể oải; sách xưa khuyên giữ yên.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "kho, nhà vệ sinh",
+      "luu_y": "Không nằm ngủ, không nấu ăn ở đây; thoáng khí, đủ sáng."
+    },
+    "2-3": {
+      "ten": "Đấu ngưu sát",
+      "y": "Mộc khắc Thổ, sách gọi 'đấu ngưu': dễ cãi vã, bất hoà giữa người lớn với người trẻ, kiện tụng.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Tránh làm phòng khách, phòng ăn chung; giảm vật sắc nhọn."
+    },
+    "2-4": {
+      "ten": "Nhị Tứ",
+      "y": "Mộc khắc Thổ: người phụ nữ lớn và người trẻ trong nhà dễ lệch ý; việc nhà lục đục nhẹ.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng ngủ phụ, phòng làm việc",
+      "luu_y": "Chia rõ không gian riêng."
+    },
+    "2-5": {
+      "ten": "Nhị Ngũ giao gia",
+      "y": "Hai Thổ xấu gặp nhau — cặp sách xưa coi là nặng nhất về sức khoẻ và hao tổn.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "kho, nhà vệ sinh, nơi không ở",
+      "luu_y": "Không đặt cửa chính, bếp, giường; không động thổ ở cung này."
+    },
+    "2-6": {
+      "ten": "Nhị Lục",
+      "y": "Thổ sinh Kim: hợp người lớn tuổi, việc bất động sản, tích góp; khi suy thì đơn độc, bảo thủ.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng người lớn tuổi, phòng thờ",
+      "luu_y": "Thêm sinh khí (cây, ánh sáng)."
+    },
+    "2-7": {
+      "ten": "Nhị Thất đồng đạo",
+      "y": "Thổ sinh Kim nhưng 2 và 7 là 'số lửa tiên thiên': nóng nảy, miệng tiếng, cẩn thận bếp lửa, điện.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp; kiểm tra điện, lửa."
+    },
+    "2-8": {
+      "ten": "Nhị Bát",
+      "y": "Hai Thổ: của cải từ đất đai, nhà cửa; người trẻ nhất trong nhà vất vả hơn.",
+      "nhom": "can_bang",
+      "hop_cho": "kho của, phòng làm việc tài chính",
+      "luu_y": "Giữ gọn, sạch."
+    },
+    "2-9": {
+      "ten": "Nhị Cửu",
+      "y": "Hoả nuôi Thổ xấu: cung nóng mà nặng, dễ bướng bỉnh, mệt mỏi kéo dài.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp (Hoả càng nuôi Thổ)."
+    },
+    "3-3": {
+      "ten": "Tam Bích trùng",
+      "y": "Hai Mộc: có sức bật, hợp khởi nghiệp, nhưng dễ lời qua tiếng lại, mất đồ.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng làm việc, phòng tập",
+      "luu_y": "Khoá cửa cẩn thận; nói năng chừng mực."
+    },
+    "3-4": {
+      "ten": "Tam Tứ",
+      "y": "Mộc gặp Mộc, gió và sấm: chuyện tình cảm, lời đồn; vận 9 cả hai suy nên dễ thị phi.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng làm việc",
+      "luu_y": "Giữ chuyện riêng kín đáo."
+    },
+    "3-5": {
+      "ten": "Tam Ngũ",
+      "y": "Mộc khắc Thổ xấu: hao tiền vì tranh chấp, va chạm.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "kho",
+      "luu_y": "Không động thổ; tránh đặt cửa."
+    },
+    "3-6": {
+      "ten": "Tam Lục",
+      "y": "Kim chặt Mộc: con trai lớn với người cha dễ khắc khẩu; chân tay, đi lại cẩn thận.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Giảm vật kim loại sắc nhọn."
+    },
+    "3-7": {
+      "ten": "Tam Thất",
+      "y": "Kim chặt Mộc, sách gọi 'xuyên tâm sát': mất trộm, kiện tụng, va chạm dao kéo.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "kho, nơi ít dùng",
+      "luu_y": "Khoá kỹ, không để tiền bạc; không đặt giường."
+    },
+    "3-8": {
+      "ten": "Tam Bát",
+      "y": "Mộc khắc Thổ: trẻ con khó bảo, của cải hao; sao 8 còn khí nên không quá nặng.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng chơi, phòng phụ",
+      "luu_y": "Bớt đồ sắc nhọn, thêm ấm áp."
+    },
+    "3-9": {
+      "ten": "Tam Cửu",
+      "y": "Mộc nuôi Hoả: thông minh, nổi bật, hợp vận 9; nóng tính, vội vàng.",
+      "nhom": "thuan",
+      "hop_cho": "phòng làm việc, phòng khách",
+      "luu_y": "Giữ điềm tĩnh, bớt lửa."
+    },
+    "4-4": {
+      "ten": "Tứ Lục trùng",
+      "y": "Hai Mộc Tốn: chữ nghĩa, giao thiệp; nhiều quá thì bay bổng, thiếu thực tế.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng học, phòng làm việc",
+      "luu_y": "Giữ ngăn nắp."
+    },
+    "4-5": {
+      "ten": "Tứ Ngũ",
+      "y": "Mộc khắc Thổ xấu: hao tổn vì giấy tờ, văn bản; cung nặng.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "kho",
+      "luu_y": "Không động thổ, không đặt bàn thờ, giường."
+    },
+    "4-6": {
+      "ten": "Tứ Lục",
+      "y": "Kim chặt Mộc: người phụ nữ lớn với người cha dễ căng; áp lực tinh thần khi cả hai suy.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng phụ",
+      "luu_y": "Thêm màu ấm, cây xanh mềm."
+    },
+    "4-7": {
+      "ten": "Tứ Thất",
+      "y": "Kim chặt Mộc: lời ra tiếng vào, tình cảm phức tạp, dễ bị nói xấu.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt giường vợ chồng."
+    },
+    "4-8": {
+      "ten": "Tứ Bát",
+      "y": "Mộc khắc Thổ: trẻ nhỏ học hành khó tập trung; sao 8 giữ phần của cải.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng khách, phòng ngủ phụ",
+      "luu_y": "Góc học tập nên đặt cung khác."
+    },
+    "4-9": {
+      "ten": "Tứ Cửu",
+      "y": "Mộc nuôi Hoả: chữ nghĩa sáng rực, danh tiếng, vận 9 thuận.",
+      "nhom": "thuan",
+      "hop_cho": "phòng làm việc, phòng học, phòng khách",
+      "luu_y": "Tránh quá nóng, bí."
+    },
+    "5-5": {
+      "ten": "Ngũ Hoàng trùng",
+      "y": "Hai Ngũ Hoàng: cung nặng nhất trong bàn, sách xưa khuyên tuyệt đối giữ yên.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "nơi không ở, kho",
+      "luu_y": "Không động thổ, không đặt cửa, bếp, giường."
+    },
+    "5-6": {
+      "ten": "Ngũ Lục",
+      "y": "Thổ xấu sinh Kim: người trụ cột gánh nặng, mệt mỏi.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không làm phòng ngủ chính."
+    },
+    "5-7": {
+      "ten": "Ngũ Thất",
+      "y": "Thổ xấu sinh Kim 7: thị phi, miệng tiếng, ăn uống cẩn thận.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp, bàn ăn."
+    },
+    "5-8": {
+      "ten": "Ngũ Bát",
+      "y": "Hai Thổ: sao 8 làm dịu Ngũ Hoàng; của cải từ đất, nhưng vẫn nên giữ yên.",
+      "nhom": "can_bang",
+      "hop_cho": "kho, phòng phụ",
+      "luu_y": "Không động thổ lớn."
+    },
+    "5-9": {
+      "ten": "Ngũ Cửu",
+      "y": "Hoả nuôi Thổ xấu: nóng nảy, căng thẳng; cung cần giữ mát và yên.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp."
+    },
+    "6-6": {
+      "ten": "Lục Bạch trùng",
+      "y": "Hai Kim Càn: quyền uy, kỷ luật, cứng cỏi; vận 9 sao 6 đã lui nên dễ cứng nhắc.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng người trụ cột, phòng làm việc",
+      "luu_y": "Thêm mềm mại, màu ấm."
+    },
+    "6-7": {
+      "ten": "Lục Thất giao kiếm",
+      "y": "Hai Kim chạm nhau như hai lưỡi kiếm: tranh giành, va chạm, lời sắc.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Giảm kim loại, vật nhọn; không đặt giường."
+    },
+    "6-8": {
+      "ten": "Lục Bát",
+      "y": "Thổ sinh Kim: của cải, người quý giúp, ổn định — cặp đẹp của vận 8 còn giá trị sang vận 9.",
+      "nhom": "thuan",
+      "hop_cho": "phòng khách, phòng làm việc, két tiền",
+      "luu_y": "Giữ sáng, gọn."
+    },
+    "6-9": {
+      "ten": "Lục Cửu",
+      "y": "Hoả nung Kim: người cha, người trụ cột chịu áp lực; vận 9 Hoả mạnh nên cần để ý.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng phụ",
+      "luu_y": "Không đặt bếp; không làm phòng ngủ người trụ cột."
+    },
+    "7-7": {
+      "ten": "Thất Xích trùng",
+      "y": "Hai Kim Đoài: ăn nói, buôn bán nhỏ, vui chơi; dễ hao tiền, miệng tiếng.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng khách, phòng ăn",
+      "luu_y": "Giữ lời, giữ tiền."
+    },
+    "7-8": {
+      "ten": "Thất Bát",
+      "y": "Thổ sinh Kim: của cải và duyên trẻ; vận 9 sao 7 đã suy nên mặt tốt giảm.",
+      "nhom": "can_bang",
+      "hop_cho": "phòng khách, phòng ngủ phụ",
+      "luu_y": "Tránh để đồ lộn xộn."
+    },
+    "7-9": {
+      "ten": "Thất Cửu",
+      "y": "Hoả nung Kim: miệng tiếng, nóng nảy; cẩn thận lửa, điện.",
+      "nhom": "can_chu_dong",
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp; kiểm tra điện."
+    },
+    "8-8": {
+      "ten": "Bát Bạch trùng",
+      "y": "Hai Thổ Cấn: của cải, con cái, nền nếp; vận 9 còn khí tốt nhưng giảm dần.",
+      "nhom": "thuan",
+      "hop_cho": "phòng khách, phòng làm việc, phòng ngủ",
+      "luu_y": "Giữ gọn, sáng."
+    },
+    "8-9": {
+      "ten": "Bát Cửu",
+      "y": "Hoả sinh Thổ: chuyện vui, cưới hỏi, của cải — cặp đẹp của vận 9.",
+      "nhom": "thuan",
+      "hop_cho": "phòng khách, phòng ngủ chính, cửa chính",
+      "luu_y": "Giữ sáng, ấm, sạch."
+    },
+    "9-9": {
+      "ten": "Cửu Tử trùng",
+      "y": "Hai Hoả: đương vận 9 — nổi bật, danh tiếng, chuyện vui; nóng quá thì gắt.",
+      "nhom": "thuan",
+      "hop_cho": "phòng khách, phòng làm việc, cửa chính",
+      "luu_y": "Đủ thoáng, tránh bí nóng."
+    }
+  },
+  "sao_doi_thuong": {
+    "1": {
+      "ten": "Nhất Bạch",
+      "goi": "sao của trí tuệ và đi lại",
+      "mat_sang": "sáng ý, học hành, giao tiếp, duyên lành",
+      "mat_toi": "trôi nổi, lạnh lẽo, hao vì tình cảm",
+      "hop_phong": "phòng học, phòng làm việc"
+    },
+    "2": {
+      "ten": "Nhị Hắc",
+      "goi": "sao của đất đai và mệt mỏi",
+      "mat_sang": "tích góp, điền sản (khi vượng)",
+      "mat_toi": "nặng nề, uể oải, ốm vặt — giữ cung này yên",
+      "hop_phong": "kho, nơi ít dùng"
+    },
+    "3": {
+      "ten": "Tam Bích",
+      "goi": "sao của sức bật và tranh cãi",
+      "mat_sang": "khởi đầu, phát triển",
+      "mat_toi": "lời qua tiếng lại, mất đồ",
+      "hop_phong": "phòng tập, phòng làm việc"
+    },
+    "4": {
+      "ten": "Tứ Lục",
+      "goi": "sao của chữ nghĩa và quan hệ",
+      "mat_sang": "học hành, bằng cấp, quan hệ",
+      "mat_toi": "bay bổng, sa đà",
+      "hop_phong": "phòng học, bàn đọc"
+    },
+    "5": {
+      "ten": "Ngũ Hoàng",
+      "goi": "sao nặng nhất, nên giữ yên",
+      "mat_sang": "uy quyền (chỉ khi đương vận 5)",
+      "mat_toi": "kẹt, nặng, hao — không động thổ, không đặt cửa chính",
+      "hop_phong": "nơi ít lui tới"
+    },
+    "6": {
+      "ten": "Lục Bạch",
+      "goi": "sao của quyền uy và người lớn",
+      "mat_sang": "lãnh đạo, quý nhân, kỷ luật",
+      "mat_toi": "cứng nhắc, đơn độc",
+      "hop_phong": "phòng người trụ cột"
+    },
+    "7": {
+      "ten": "Thất Xích",
+      "goi": "sao của miệng tiếng và buôn bán",
+      "mat_sang": "ăn nói, buôn bán nhỏ, vui vẻ",
+      "mat_toi": "thị phi, hao tiền, mất trộm",
+      "hop_phong": "phòng khách"
+    },
+    "8": {
+      "ten": "Bát Bạch",
+      "goi": "sao của của cải và con cái",
+      "mat_sang": "ổn định, nhà đất, con cái",
+      "mat_toi": "thoái khí dần ở vận 9, vẫn khá",
+      "hop_phong": "phòng khách, phòng ngủ"
+    },
+    "9": {
+      "ten": "Cửu Tử",
+      "goi": "sao đương vận (2024–2043)",
+      "mat_sang": "danh tiếng, chuyện vui, công nghệ, truyền thông",
+      "mat_toi": "nóng vội, gắt",
+      "hop_phong": "phòng khách, phòng làm việc, cửa chính"
+    }
+  },
+  "mau_cap": "Sơn tinh {s} ({ten_s}) nói về người ở và sức khoẻ, hướng tinh {h} ({ten_h}) nói về tiền bạc và công việc. {y}",
+  "luu_nguyet": {
+    "y": "Sao tháng (lưu nguyệt) đổi theo tiết khí: tháng Dần bắt đầu từ Lập xuân, tháng Mão từ Kinh trập… Năm Tý Ngọ Mão Dậu: tháng Dần nhập trung 8; năm Thìn Tuất Sửu Mùi: 5; năm Dần Thân Tỵ Hợi: 2; mỗi tháng lùi một số.",
+    "luu_y": "Sao tháng chỉ là lớp khí ngắn hạn chồng lên sao năm và trạch bàn — dùng để chọn lúc động thổ, sửa chữa, dọn phòng; không phải lời tiên đoán."
   }
 }

@@ -18,6 +18,7 @@ import datetime as dt
 
 from app.calc import thanso as tinh, thanso_dong_doi as dd_calc, thanso_mo_rong as mr, thanso_ty_le as tl
 from app.kb import store, thanso_v2 as kb
+from app.luangiai import doi_song_khuon as kh
 from app.luangiai import thanso as lg
 from app.narrative import hoi_van
 
@@ -274,11 +275,113 @@ def bao_cao(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.dat
                        if ke and hien.get("den_nam") else f"Giai đoạn {hien['dinh']}/4 của bạn và thử thách đi kèm."),
                       "Kiểu việc nào dùng được cả thế mạnh hằng ngày lẫn đích bạn hướng tới?"),
     }
+    them = _khuon(so, ngay, thang, nam, ngay_xem, quy_uoc, mo_rong, tc, hien, ke)
     chuong = []
     for ma, doan in noi_dung.items():
         dn, ch = moi.get(ma, (doan[0], "Bộ số của bạn hiếm cỡ nào, và con số nào đậm nhất ở bạn?"))
-        chuong.append({"ma": ma, "tieu_de": TIEU_DE[ma], "doan": doan, "moi_xem": _moi_xem_rieng(ma, doan, dn, ch)})
+        x = them.get(ma, {})
+        chuong.append(kh.chuong(ma, TIEU_DE[ma], doan, hop=x.get("hop"), tom_tat=x.get("tom_tat"), can_cu=x.get("can_cu"),
+                                cau_tu_soi=x.get("cau_tu_soi"), moi_xem=_moi_xem_rieng(ma, doan, dn, ch)))
     meta = kb.meta_ban_do()
-    return {"mo_dun": "thanso", "chuong": chuong, "ket": hoi_van.KET, "dien_dat": "mau", "quy_uoc_duong_doi": quy_uoc,
+    return {"mo_dun": "thanso", "phien_ban": kh.PHIEN_BAN, "phai": "pitago", "cot_loi": kh.chon_cot_loi(chuong[:1]),
+            "chuong": chuong, "ket": hoi_van.KET, "dien_dat": "mau", "quy_uoc_duong_doi": quy_uoc,
             "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
             "trang_thai": meta["trang_thai"]}
+
+
+# ------------------------------------------------------------------ KC-1: khuôn đời sống (hộp · tóm tắt · căn cứ · tự soi)
+def _khuon(so: dict, ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy_uoc: str, mo_rong: dict,
+           tc: dict, hien: dict, ke: dict | None) -> dict[str, dict]:
+    t = tl.ty_le(ngay, thang, nam, quy_uoc)
+    d = t["duong_doi"]
+    nghia_dd = store.nghia_so(d["so"]) or {}
+    bo = {**{v: so.get(v) for v in lg.VI_TRI_THU_TU}, "ngay_sinh": mr.so_ngay_sinh(ngay)}
+    dem: dict[int, list[str]] = {}
+    for vt, s_ in bo.items():
+        if s_:
+            dem.setdefault(s_, []).append(TEN_VT[vt])
+    lap = [(s_, noi) for s_, noi in sorted(dem.items(), key=lambda x: -len(x[1])) if len(noi) >= 2]
+    thieu = (mo_rong.get("bieu_do") or {}).get("so_thieu") or []
+    so_then_chot = len({(x["thang"], x["nam"]) for v in tc.values() for x in v})
+    ra: dict[str, dict] = {}
+
+    # chương 1
+    hop = [kh.hop("cot_loi", f"Đường đời {d['so']} — {nghia_dd.get('tu_khoa', '')}".rstrip(" —"),
+                  f"{_pt(d['ty_le'])} số ngày trong lịch cho ra con số này" + (" (số cái, nét đậm và đòi hỏi nhiều ở chính bạn)" if d["so"] in (11, 22, 33) else "") + ".",
+                  ma=kh.ma_mau("thanso", "tong_quan", "duong_doi", str(d["so"])))]
+    for s_, noi in lap[:1]:
+        hop.append(kh.hop("diem_manh", f"Số {s_} lặp {len(noi)} lần", f"Ở {', '.join(noi)} — nét {(store.nghia_so(s_) or {}).get('tu_khoa', '').lower()} đậm hơn người chỉ có số này một lần.",
+                          ma=kh.ma_mau("thanso", "tong_quan", "lap", str(s_))))
+    if thieu:
+        hop.append(kh.hop("luu_y", f"Biểu đồ thiếu {', '.join(map(str, thieu))}", "Những nét này bạn thường phải chủ động rèn thay vì có sẵn.",
+                          huong_xu_ly="Chọn một thói quen nhỏ cho mỗi số thiếu, làm đều hơn là làm nhiều.",
+                          ma=kh.ma_mau("thanso", "tong_quan", "thieu", "-".join(map(str, thieu)))))
+    hop.append(kh.hop("thoi_diem", "Nhịp sắp tới", f"{so_then_chot} tháng then chốt trong 12 tháng tới; giai đoạn đời hiện tại {hien['dinh']}/4"
+                      + (f" kéo dài tới năm {hien['den_nam']}." if hien.get("den_nam") else " là giai đoạn cuối."),
+                      ma=kh.ma_mau("thanso", "tong_quan", "nhip", str(hien["dinh"]))))
+    ra["tong_quan"] = {"hop": hop, "tom_tat": f"Đường đời {d['so']}" + (f", số {lap[0][0]} lặp {len(lap[0][1])} lần" if lap else "") + f"; {so_then_chot} tháng then chốt sắp tới.",
+                       "can_cu": [f"Tỉ lệ tính trên mẫu mọi ngày trong lịch {t['mau']} (không phải thống kê dân số); cách cộng Đường đời: {quy_uoc}.",
+                                  "Bộ số: " + ", ".join(f"{TEN_VT[v]} {bo[v]}" for v in bo if bo[v]) + "."],
+                       "cau_tu_soi": "Con số nào trong bộ số bạn thấy giống mình nhất ngay lần đọc đầu?"}
+
+    # chương 2
+    lh, nc = _nhom(so.get("linh_hon") or 0), _nhom(so.get("nhan_cach") or 0)
+    dd_, sm = _nhom(so.get("duong_doi") or 0), _nhom(so.get("su_menh") or 0)
+    hop, can_cu = [], []
+    if lh and nc:
+        cn = _cau_noi(lh[0], nc[0])
+        hop.append(kh.hop("cot_loi", f"Bên trong {lh[1]['ten']} · bên ngoài {nc[1]['ten']}", f"Bạn muốn {lh[1]['muon']}; người khác thấy trước một người {nc[1]['bieu_hien']}.",
+                          ma=kh.ma_mau("thanso", "nghich_ly", "lh_nc", f"{so['linh_hon']}-{so['nhan_cach']}")))
+        hop.append(kh.hop("luu_y", "Dễ bị hiểu là", f"{_dau(nc[1]['bi_hieu_lam'])} — trong khi điều bạn cần là {lh[1]['can']}.",
+                          huong_xu_ly=cn.get("cach_noi_ro"), ma=kh.ma_mau("thanso", "nghich_ly", "hieu_lam", str(so["nhan_cach"]))))
+        if cn.get("khi_hoa"):
+            hop.append(kh.hop("loi_khuyen", "Khi hai phía hoà vào nhau", cn["khi_hoa"], ma=kh.ma_mau("thanso", "nghich_ly", "hoa", f"{lh[0]}-{nc[0]}")))
+        can_cu.append(f"Linh hồn {so['linh_hon']} (nhóm {lh[1]['ten']}) × Nhân cách {so['nhan_cach']} (nhóm {nc[1]['ten']}): {cn['ten']}.")
+    if dd_ and sm:
+        if dd_[0] == sm[0]:
+            hop.append(kh.hop("diem_manh", "Đường đi và nơi hướng tới cùng nhóm", f"Đường đời {so['duong_doi']} và Sứ mệnh {so['su_menh']} cùng nhóm {dd_[1]['ten']} — điều cần giữ là {dd_[1]['can']}.",
+                              ma=kh.ma_mau("thanso", "nghich_ly", "dd_sm", "cung")))
+        else:
+            cn2 = _cau_noi(dd_[0], sm[0])
+            hop.append(kh.hop("loi_khuyen", "Đường đi khác nơi hướng tới", f"{cn2['ten']}: {cn2['doc']}", ma=kh.ma_mau("thanso", "nghich_ly", "dd_sm", "khac")))
+        can_cu.append(f"Đường đời {so['duong_doi']} (nhóm {dd_[1]['ten']}) ↔ Sứ mệnh {so['su_menh']} (nhóm {sm[1]['ten']}).")
+    ra["nghich_ly"] = {"hop": hop, "tom_tat": (f"Bên trong {lh[1]['ten'].lower()}, bên ngoài {nc[1]['ten'].lower()}." if lh and nc else "Bộ số chưa đủ để đọc chỗ lệch."),
+                       "can_cu": can_cu, "cau_tu_soi": "Người khác đang thấy bạn khác con người thật ở điểm nào?"}
+
+    # chương 3
+    van = kb.ban_do()
+    y = ngay_xem.year
+    ncn = int(tinh.nam_ca_nhan(ngay, thang, y, "duong_lich"))
+    n_ncn = store.nghia_nam_ca_nhan(ncn) or {}
+    hop = [kh.hop("cot_loi", f"Năm cá nhân {ncn}", f"{n_ncn.get('chu_de', '')}. {van['nam_doc_thang'][str(ncn)]}".strip(". ") + ".",
+                  ma=kh.ma_mau("thanso", "muoi_hai_thang", "nam", str(ncn)))]
+    for k in ("khoi_su", "tien_bac", "quan_he"):
+        for t_ in tc.get(k, [])[:1]:
+            hop.append(kh.hop("thoi_diem", f"{van['nhom_viec'][k]}: {_mm(t_)}", f"Tháng cá nhân {t_['so']} ({t_['nhan'].lower()}): {', '.join(t_['hop_de'])}.",
+                              muc="thuan", ma=kh.ma_mau("thanso", "muoi_hai_thang", k, str(t_["so"]))))
+    ra["muoi_hai_thang"] = {"hop": hop, "tom_tat": f"Năm cá nhân {ncn}; {so_then_chot} tháng then chốt được đánh dấu riêng.",
+                            "can_cu": ["Tháng cá nhân = năm cá nhân + tháng dương, rút gọn; năm cá nhân đổi từ 1/1 dương lịch (mốc trang đọc đang dùng)."],
+                            "cau_tu_soi": "Trong năm cá nhân này, bạn định dồn sức vào tháng nào?"}
+
+    # chương 4
+    cv = ((kb.chan_dung(so["duong_doi"]) or {}).get("cong_viec")) or {}
+    nd = store.nghia_dinh_cao(hien["so"]) or {}
+    hop = []
+    if cv:
+        hop.append(kh.hop("cot_loi", f"Thế mạnh ở chỗ làm (Đường đời {so['duong_doi']})", f"{_dau(cv.get('the_manh'))}.", ma=kh.ma_mau("thanso", "su_nghiep", "manh", str(so["duong_doi"]))))
+        if cv.get("cai_bay"):
+            hop.append(kh.hop("luu_y", "Bẫy hay mắc", f"{_dau(cv['cai_bay'])}.", huong_xu_ly="Đặt một người hoặc một quy tắc kiểm lại trước khi quyết việc lớn.",
+                              ma=kh.ma_mau("thanso", "su_nghiep", "bay", str(so["duong_doi"]))))
+        if cv.get("tien_bac"):
+            hop.append(kh.hop("loi_khuyen", "Tiền bạc", f"{_dau(cv['tien_bac'])}.", ma=kh.ma_mau("thanso", "su_nghiep", "tien", str(so["duong_doi"]))))
+    hop.append(kh.hop("thoi_diem", f"Giai đoạn {hien['dinh']}/4 (tuổi {_tuoi(hien)})", f"Số {hien['so']} — {nd.get('chu_de', '')}." + (f" Từ năm {ke['tu_nam']}: giai đoạn {ke['dinh']}." if ke else ""),
+                      ma=kh.ma_mau("thanso", "su_nghiep", "giai_doan", str(hien["dinh"])), tu_tuoi=hien.get("tu_tuoi"), den_tuoi=hien.get("den_tuoi")))
+    ra["su_nghiep"] = {"hop": hop, "tom_tat": (f"Thế mạnh {cv.get('the_manh', '').split(',')[0].lower()}; " if cv else "") + f"giai đoạn {hien['dinh']}/4.",
+                       "can_cu": [f"Chân dung công việc theo Đường đời {so['duong_doi']}, Sứ mệnh {so.get('su_menh')}, Nhân cách {so.get('nhan_cach')}; giai đoạn đỉnh cao theo chu kỳ 9 năm."],
+                       "cau_tu_soi": "Kiểu việc nào dùng được cả thế mạnh hằng ngày lẫn đích bạn hướng tới?"}
+    return ra
+
+
+def _dau(s: str | None) -> str:
+    s = (s or "").strip().rstrip(".")
+    return s[:1].upper() + s[1:] if s else ""

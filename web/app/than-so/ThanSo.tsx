@@ -259,7 +259,7 @@ export function ThanSo() {
       <CuoiBaiDoc moDun="thanso_sau" cauHoi="Phần chiều sâu có giúp bạn hiểu mình hơn?" />
       </>)}
 
-      <NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea"} quyUoc={quyUoc} />
+      <div id="noi-dau" className="scroll-mt-24"><NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea"} quyUoc={quyUoc} /></div>
 
       <section id="hoi" aria-labelledby="muc-hoi" className="scroll-mt-24">
         <TieuDeMuc id="muc-hoi" nho="Hỏi sâu hơn" lon={`${tenGoi(hoSo)}, bạn đang băn khoăn điều gì?`}

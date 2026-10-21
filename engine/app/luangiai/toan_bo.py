@@ -98,4 +98,10 @@ def tuvi(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = No
 
 
 def battu(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
-    return _ghep("battu", CHUONG_BATTU, lambda c: hd_battu.tra_loi(c, sinh=sinh, ngay_xem=ngay_xem))
+    """KC-1: cùng khuôn `doi_song_1` (hộp, tóm tắt, căn cứ, câu tự soi) — `doan` vẫn ghép từ hỏi đáp như cũ."""
+    from app.luangiai import battu_doi_song  # noqa: PLC0415
+    bc = _ghep("battu", CHUONG_BATTU, lambda c: hd_battu.tra_loi(c, sinh=sinh, ngay_xem=ngay_xem))
+    try:
+        return battu_doi_song.bo_sung(bc, sinh, ngay_xem)
+    except Exception:  # noqa: BLE001 — khuôn là lớp thêm; lỗi không được làm mất báo cáo
+        return bc

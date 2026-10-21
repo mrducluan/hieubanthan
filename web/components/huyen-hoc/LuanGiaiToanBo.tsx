@@ -120,8 +120,10 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
   }
   if (laBaoCaoDoiSong(bc)) {
     const coAi = bc.chuong.some((c) => !c.khoa && c.van_ai);
+    // KC-1: một khuôn cho mọi mảng — Tử vi, Bát tự, Bản đồ con số cùng component; chỉ Tử vi lưu bài (LG-ĐS).
+    const tenLuu = { tuvi: "Luận giải Tử vi", battu: "Luận giải Bát tự", thanso: "Bản đồ con số" }[bc.mo_dun] ?? "Luận giải";
     return (
-      <BaoCaoDoiSongView bc={bc} ten={ten} goc={goc}
+      <BaoCaoDoiSongView bc={bc} ten={ten} goc={goc} nhan={bc.mo_dun === "thanso" ? "Bản đồ con số" : "Luận giải toàn bộ"}
         hanhDong={<>
           {coAi && (
             <Button variant="ghost" size="sm" aria-pressed={goc} onClick={() => setGoc((v) => !v)}>
@@ -133,7 +135,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
         phanKhoa={bc.so_khoa ? <PhanKhoa bc={bc as unknown as BaoCao} dang={dang} loi={loi} moKhoa={() => void tai(true)} /> : null}
         chanTrang={!bc.so_khoa && banLuu ? (
           <div className="mt-6">
-            <LuuBaiLuan moDun={bc.mo_dun} tieuDe={`Luận giải Tử vi — ${hs?.ho_ten ?? "hồ sơ của bạn"}`} noiDung={banLuu}
+            <LuuBaiLuan moDun={bc.mo_dun} tieuDe={`${tenLuu} — ${hs?.ho_ten ?? "hồ sơ của bạn"}`} noiDung={banLuu}
               dangNhap={bc.phi?.dang_nhap} />
           </div>
         ) : null}
