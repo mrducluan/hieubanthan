@@ -1,0 +1,222 @@
+{
+  "_nguon": "Nháp AI (CTA-1, 2026-10-21): câu dẫn ngắn cho khối \"Đọc tiếp về bạn\" cuối phần xem. Mỗi câu chỉ ghép dữ kiện đã tính (con số, hình ảnh ngày sinh, hướng, quẻ ngày, giờ đẹp) với một nét lấy nguyên từ kho tri thức của đúng mảng đó — không thêm nghĩa mới. Câu hỏi cuối để gợi tò mò, không doạ, không hứa trước kết quả.",
+  "source_id": "nhap_ai_2026",
+  "school_id": "da_mang",
+  "trang_thai": "nhap_ai",
+  "mang": {
+    "than_so": {
+      "ten": "Thần số học",
+      "bieu_tuong": "so",
+      "duong": "/than-so",
+      "source_id": "nhap_ai_2026",
+      "school_id": "pythagoras_vn",
+      "nhan": "Đường đời {so}",
+      "cta": "Xem 4 con số của bạn",
+      "mo_dau": [
+        "Ngày sinh của bạn cộng lại ra số {so} — {tu_khoa}. Một nét người số này hay có: {net}.",
+        "Bạn mang con số đường đời {so}. Sách thần số hay tả người số này: {net}.",
+        "Số {so} là con số bạn mang từ ngày sinh. Người quen để ý thấy ở bạn trước tiên: {net}."
+      ],
+      "cau_hoi": [
+        "Nhưng số {so} còn một nét hay giấu kỹ — bạn có đoán ra không?",
+        "Ba con số còn lại trong tên bạn đang kéo về cùng hướng, hay ngược lại?",
+        "Năm nay bạn đang ở năm số mấy trong vòng 9 năm của mình?"
+      ],
+      "chung": {
+        "cau": "Chỉ từ ngày sinh và họ tên, thần số học ra 4 con số nói về cách bạn nghĩ, điều bạn thầm mong và cách người khác nhìn bạn.",
+        "cau_hoi": "Con số đường đời của bạn là mấy?",
+        "cta": "Nhập ngày sinh — 30 giây"
+      }
+    },
+    "tu_vi": {
+      "ten": "Tử vi",
+      "bieu_tuong": "tu_vi",
+      "duong": "/tu-vi",
+      "source_id": "tuvi_vn",
+      "school_id": "nam_phai_viet",
+      "nhan": "Cung Mệnh: {sao}",
+      "nhan_muon": "Cung Mệnh trống, mượn {sao}",
+      "cta": "Xem lá số Tử vi",
+      "mo_dau": [
+        "Lá số theo giờ sinh của bạn nhắc đúng một nét: {net}",
+        "Đọc lá số của bạn, điều hiện ra đầu tiên là cách bạn đứng giữa mọi người: {net}",
+        "Giờ sinh của bạn vẽ ra một nét khá riêng: {net}"
+      ],
+      "cau_hoi": [
+        "Còn chuyện tiền bạc và tình cảm trong lá số của bạn thì nói gì?",
+        "Mười năm bạn đang đi qua thuận nhất cho việc gì?",
+        "Ba tháng tới, tháng nào nhẹ nhất cho việc lớn bạn đang tính?"
+      ],
+      "chung": {
+        "cau": "Lá số Tử vi lập từ giờ sinh chia đời người thành 12 mảng: công việc, tiền bạc, tình cảm, nhà cửa, sức khoẻ…",
+        "cau_hoi": "Trong 12 mảng ấy, mảng nào đang thuận nhất với bạn?",
+        "cta": "Nhập giờ sinh để lập lá số"
+      },
+      "thieu_gio": {
+        "cau": "Tử vi cần giờ sinh để biết bạn đứng ở đâu trong 12 mảng đời. Không nhớ giờ? Chọn \"Không biết giờ\" vẫn xem được bản tạm.",
+        "cau_hoi": "Bạn sinh vào canh giờ nào — sáng sớm hay đêm khuya?",
+        "cta": "Thêm giờ sinh"
+      },
+      "thieu_noi_sinh": {
+        "cau": "Người sinh trước giữa năm 1975 cần nơi sinh, vì hai miền khi đó để đồng hồ khác giờ — lệch một giờ có thể đổi cả lá số.",
+        "cau_hoi": "Bạn sinh ở tỉnh nào?",
+        "cta": "Thêm nơi sinh"
+      }
+    },
+    "bat_tu": {
+      "ten": "Bát tự",
+      "bieu_tuong": "bat_tu",
+      "duong": "/bat-tu",
+      "source_id": "tu_binh_chan_thuyen",
+      "school_id": "tu_binh",
+      "nhan": "Nhật chủ {can} {hanh}",
+      "cta": "Xem tứ trụ của bạn",
+      "mo_dau": [
+        "Ngày bạn sinh mang hình ảnh {hinh_tuong}: {tinh_chat}.",
+        "Bát tự ví mỗi người với một hình ảnh trong tự nhiên. Của bạn là {hinh_tuong} — {tinh_chat}.",
+        "Trong bốn trụ ngày giờ sinh, phần nói về chính bạn là {hinh_tuong}: {tinh_chat}."
+      ],
+      "than": {
+        "vượng": "Sức tự thân của bạn khá dày, hợp việc tự gánh, tự quyết.",
+        "nhược": "Sức tự thân của bạn mỏng hơn mức giữa, làm việc lớn cùng người hợp sức sẽ đỡ hao.",
+        "trung hoà": "Sức tự thân của bạn ở mức vừa: tự làm được, nhờ người cũng không ngại."
+      },
+      "thieu_gio_than": "Thêm giờ sinh để biết sức tự thân của bạn dày hay mỏng.",
+      "cau_hoi": [
+        "Hành nào bạn đang thiếu, và thêm bằng thói quen nào thì vừa?",
+        "Mười năm này của bạn hợp tiến hay hợp giữ?",
+        "Tháng nào trong năm nay hợp để bạn bắt đầu việc mới?"
+      ],
+      "chung": {
+        "cau": "Bát tự ví mỗi người với một hình ảnh trong tự nhiên — cây lớn, ngọn lửa, dòng suối, viên ngọc… tuỳ ngày sinh.",
+        "cau_hoi": "Hình ảnh của bạn là gì?",
+        "cta": "Nhập ngày sinh để xem"
+      }
+    },
+    "phong_thuy": {
+      "ten": "Phong thuỷ",
+      "bieu_tuong": "phong_thuy",
+      "duong": "/phong-thuy",
+      "source_id": "duong_trach_tam_yeu",
+      "school_id": "bat_trach",
+      "nhan": "Cung phi {quai} · hướng tốt {huong}",
+      "cta": "Đo hướng nhà bạn",
+      "mo_dau": [
+        "Theo năm sinh của bạn, hướng {huong} là hướng hợp nhất — hợp kê bàn làm việc hoặc chọn chỗ ngồi khi cần tập trung.",
+        "Bạn hợp bốn hướng {ds_huong}. Mạnh nhất là hướng {huong}.",
+        "Nếu chỉ chỉnh một thứ trong nhà, thử quay bàn làm việc về hướng {huong} — hướng hợp nhất với năm sinh của bạn."
+      ],
+      "cau_hoi": [
+        "Cửa chính nhà bạn đang nhìn về hướng nào?",
+        "Đầu giường của bạn đã quay về hướng hợp chưa?",
+        "Bếp nhà bạn đang nằm ở phía nào của ngôi nhà?"
+      ],
+      "chung": {
+        "cau": "Mỗi người hợp bốn hướng nhà khác nhau, tính từ năm sinh và giới tính — đặt bàn, giường, cửa theo đó là cách dễ làm nhất.",
+        "cau_hoi": "Bốn hướng hợp với bạn là hướng nào?",
+        "cta": "Nhập năm sinh để xem"
+      },
+      "thieu_gioi_tinh": {
+        "cau": "Hướng hợp tính theo năm sinh và giới tính — cùng năm, nam và nữ hợp hướng khác nhau.",
+        "cau_hoi": "Thêm giới tính để biết hướng nào hợp bạn nhất?",
+        "cta": "Thêm giới tính"
+      }
+    },
+    "kinh_dich": {
+      "ten": "Kinh Dịch",
+      "bieu_tuong": "kinh_dich",
+      "duong": "/kinh-dich",
+      "source_id": "chu_dich",
+      "school_id": "mai_hoa",
+      "nhan": "Quẻ đầu ngày: {ten}",
+      "cta": "Gieo quẻ cho việc của bạn",
+      "mo_dau": [
+        "Quẻ đầu ngày hôm nay, kể bằng chuyện thường ngày — {nom_na}",
+        "Hôm nay có một quẻ chung cho mọi người, ý của nó gần với chuyện thường ngày — {nom_na}",
+        "Quẻ của ngày hôm nay gợi một điều, nói cho gần gũi — {nom_na}"
+      ],
+      "cau_hoi": [
+        "Việc riêng bạn đang phân vân thì ra quẻ gì?",
+        "Nếu hỏi cho đúng việc của bạn, quẻ có nói khác không?",
+        "Với việc bạn đang tính, hôm nay nên tiến hay nên chờ?"
+      ],
+      "chung": {
+        "cau": "Mỗi ngày có một quẻ chung khởi theo ngày giờ âm lịch. Còn việc riêng của bạn thì gieo quẻ riêng.",
+        "cau_hoi": "Việc bạn đang phân vân ra quẻ gì?",
+        "cta": "Gieo quẻ"
+      }
+    },
+    "hop_doi": {
+      "ten": "Hợp đôi",
+      "bieu_tuong": "hop_doi",
+      "duong": "/hop-doi",
+      "source_id": "nhap_ai_2026",
+      "school_id": "pythagoras_vn",
+      "nhan": "Đường đời {so} khi thương ai",
+      "cta": "Xem hợp với ai",
+      "mo_dau": [
+        "Người số {so} khi thương ai: {net}",
+        "Số {so} như bạn thường hợp với {net_nho}",
+        "Điều người số {so} cần ở người bên cạnh: {net_nho}"
+      ],
+      "cau_hoi": [
+        "Người bạn đang nghĩ tới mang số mấy — hai con số ấy gặp nhau ở đâu?",
+        "Gửi link để người ấy tự nhập — hai bạn hợp ở mảnh nào?",
+        "Bạn với người thân nhất có cùng nhịp năm không?"
+      ],
+      "chung": {
+        "cau": "Hai ngày sinh đặt cạnh nhau cho thấy hai người dễ hiểu nhau ở đâu và hay lệch nhau ở đâu — không chấm đậu rớt.",
+        "cau_hoi": "Bạn với người ấy hợp ở mảnh nào?",
+        "cta": "Xem hai người"
+      }
+    },
+    "hom_nay": {
+      "ten": "Hôm nay của bạn",
+      "bieu_tuong": "hom_nay",
+      "duong": "/hom-nay",
+      "source_id": "nhap_ai_2026",
+      "school_id": "pythagoras_vn",
+      "nhan": "Ngày cá nhân {so}",
+      "cta": "Xem hôm nay của bạn",
+      "mo_dau": [
+        "Hôm nay là ngày số {so} của riêng bạn — {chu_de}",
+        "Nhịp hôm nay của bạn là số {so}: {chu_de}",
+        "Với riêng bạn, hôm nay mang số {so} — {chu_de}"
+      ],
+      "cau_hoi": [
+        "Ngày mai nhịp của bạn đổi sang số mấy?",
+        "Việc bạn định làm hôm nay có hợp nhịp ngày không?",
+        "Tháng này của bạn đang mở ra hay đang khép lại?"
+      ],
+      "chung": {
+        "cau": "Mỗi người có một nhịp ngày riêng, tính từ ngày sinh — cùng một hôm, người hợp gặp gỡ, người hợp làm một mình.",
+        "cau_hoi": "Hôm nay của bạn là ngày số mấy?",
+        "cta": "Xem hôm nay"
+      }
+    },
+    "xem_ngay": {
+      "ten": "Xem ngày tốt",
+      "bieu_tuong": "xem_ngay",
+      "duong": "/xem-ngay-tot",
+      "source_id": "nhap_ai_2026",
+      "school_id": "hoang_lich_vn",
+      "nhan": "{so_gio} giờ đẹp hôm nay",
+      "cta": "Tìm ngày đẹp",
+      "mo_dau": [
+        "Hôm nay có {so_gio} giờ đẹp. Giờ đẹp đầu tiên tính từ sáng là {khung} — hợp để bắt đầu việc cần suôn.",
+        "Cần hẹn việc quan trọng hôm nay? Khung {khung} là giờ đẹp sớm nhất trong ngày.",
+        "Theo sách lịch, sáng nay khung {khung} là giờ đẹp; cả ngày có {so_gio} khung như vậy."
+      ],
+      "cau_hoi": [
+        "Tuần này ngày nào đẹp cho việc bạn định làm?",
+        "Ngày đẹp gần nhất để khai trương hay đi xa là ngày nào?",
+        "Tháng này có mấy ngày hợp với tuổi bạn?"
+      ],
+      "chung": {
+        "cau": "Sách lịch xưa chia mỗi ngày thành 12 giờ, có giờ đẹp giờ thường — chọn đúng giờ cho việc lớn là thói quen nhiều nhà vẫn giữ.",
+        "cau_hoi": "Hôm nay giờ nào đẹp?",
+        "cta": "Xem ngày tốt"
+      }
+    }
+  }
+}
