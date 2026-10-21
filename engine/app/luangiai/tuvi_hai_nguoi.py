@@ -2,14 +2,15 @@
 """HN-2N — RULES "Xem lá số 2 người": điểm THAM KHẢO hợp – khắc 0–100 (chủ dự án chốt 2026-10-21, chỉ cho phần
 Tử vi 2 người; hợp đôi thần số vẫn không chấm điểm). Tất định, luật công khai, không gọi LLM, không lưu gì.
 
-Luật `hai_nguoi_1` (năm = năm âm lịch Việt của mỗi người; mọi phép tính lấy từ tầng CALC có sẵn):
+Luật `hai_nguoi_1` (năm = năm âm lịch của mỗi người theo CÙNG lịch người dùng chọn — Việt mặc định; riêng cung phi
+lấy năm theo Lập xuân như /phong-thuy; mọi phép tính lấy từ tầng CALC có sẵn):
 
 | Tiêu chí  | Tối đa | Cách chấm (tỉ lệ × tối đa, làm tròn nửa lên) |
 |-----------|-------:|----------------------------------------------|
 | Mệnh      | 20 | nạp âm (`can_chi.nap_am`) tương sinh 1.0 · bình hoà 0.7 · tương khắc 0.25 (ghi chiều ai sinh/khắc ai) |
 | Can năm   | 15 | ngũ hợp 1.0 · hành can tương sinh 0.8 · cùng hành 0.6 · tương khắc 0.35 · tương xung 0.2 |
 | Chi năm   | 20 | tam hợp 1.0 · lục hợp 0.9 · trùng / không xung hợp 0.6 · tứ hành xung 0.45 · lục hại, tương hình 0.35 · lục xung 0.15 |
-| Cung phi  | 15 | du niên Bát trạch giữa hai mệnh quái (`phongthuy.menh_quai`, `bang_huong`): Sinh Khí 1.0 · Diên Niên 0.95 · Thiên Y 0.9 · Phục Vị 0.7 · Hoạ Hại 0.4 · Lục Sát 0.3 · Ngũ Quỷ 0.2 · Tuyệt Mệnh 0.1. Thiếu giới tính một người → bỏ, chia lại 100 theo phần dư lớn nhất |
+| Cung phi  | 15 | du niên Bát trạch giữa hai mệnh quái (`phongthuy.menh_quai` năm theo Lập xuân như /phong-thuy; chỉ có năm âm → theo năm âm, ghi chú), `bang_huong`: Sinh Khí 1.0 · Diên Niên 0.95 · Thiên Y 0.9 · Phục Vị 0.7 · Hoạ Hại 0.4 · Lục Sát 0.3 · Ngũ Quỷ 0.2 · Tuyệt Mệnh 0.1. Thiếu giới tính một người → bỏ, chia lại 100 theo phần dư lớn nhất |
 | Tử vi     | 30 | tứ hoá can năm người kia vào lá bạn (`tuvi_phi_hoa.phi_tu_can`): tỉ lệ 0.55 + 0.1 × r, kẹp 0..1; r = Σ hoá rơi vào cung trọng tâm của quan hệ × trọng số cung (Lộc +2, Khoa +1.5, Quyền +1, Kỵ −2) + Kỵ xung cung trọng tâm (−1 × trọng số). Đủ lá hai người → thêm chiều can năm bạn vào lá người kia, lấy trung bình |
 
 Mức tiêu chí: tỉ lệ ≥ 0.75 Hợp · ≥ 0.5 Bình hoà · còn lại Cần dung hoà. Mức tổng: ≥ 75 Dễ hoà hợp · 55–74 Hợp nếu
@@ -18,6 +19,7 @@ phán, không doạ, không vật phẩm; thuật ngữ chỉ ở `can_cu`. Gold
 """
 from __future__ import annotations
 
+import datetime as dt
 import unicodedata
 
 from app.calc import can_chi as cc
@@ -175,15 +177,42 @@ def _chi(chi_b, chi_k) -> dict:
     return {"loai": loai, "ty": _ty4(TY_CHI[loai]), "can_cu": can_cu}
 
 
-def _cung_phi(nam_b, gt_b, nam_k, gt_k) -> dict | None:
-    if gt_b not in ("nam", "nu") or gt_k not in ("nam", "nu"):
+def _ngay(x) -> dt.date | None:
+    if x is None or isinstance(x, dt.date):
+        return x
+    return dt.date.fromisoformat(str(x))
+
+
+def _quai_mot(p: dict, ai: str) -> tuple[str, int | None, bool, list[str]]:
+    """Mệnh quái một người — năm tính từ LẬP XUÂN như /phong-thuy (`menh_quai(..., ngay_sinh, "lap_xuan")`). Không có
+    ngày dương (chỉ năm âm) → cách gần nhất có sẵn: năm âm lịch, ghi chú. → (quái, năm Bát trạch, mốc khác, ghi chú)."""
+    nam_am, gt = int(p["nam_am"]), p["gioi_tinh"]
+    tet = pt.menh_quai(nam_am, gt)["quai"]                    # theo Tết (năm âm của lịch người dùng chọn)
+    ngay = _ngay(p.get("ngay_duong"))
+    if ngay is None:
+        return tet, None, False, [f"{ai[0].upper() + ai[1:]}: chỉ có năm âm lịch {nam_am} — cung phi tính theo năm "
+                                  "âm lịch (thiếu ngày dương lịch để xét mốc Lập xuân)."]
+    mq = pt.menh_quai(ngay.year, gt, ngay, "lap_xuan")
+    ghi = [f"{ai[0].upper() + ai[1:]}: {c['chi_tiet']}" for c in mq["co_canh_bao"]]
+    khac = mq["quai"] != tet
+    if khac:
+        ghi.append(f"{ai[0].upper() + ai[1:]}: theo mốc Tết (năm âm {nam_am}) là {tet}, khác mốc Lập xuân "
+                   f"({mq['quai']}) — ở đây tính theo Lập xuân như trang Phong thuỷ.")
+    return mq["quai"], mq["nam_tinh"], khac, ghi
+
+
+def _cung_phi(ban: dict, kia: dict) -> dict | None:
+    """QC 2026-10-21: năm cung phi theo Lập xuân (trước đây theo Tết); mốc Tết cho quái khác → ghi rõ (`moc_khac`)."""
+    if ban.get("gioi_tinh") not in ("nam", "nu") or kia.get("gioi_tinh") not in ("nam", "nu"):
         return None
-    qb, qk = pt.menh_quai(nam_b, gt_b)["quai"], pt.menh_quai(nam_k, gt_k)["quai"]
+    qb, nb_bt, kb_, gb = _quai_mot(ban, "bạn")
+    qk, nk_bt, kk_, gk = _quai_mot(kia, "người ấy")
     dn = pt.bang_huong(qb)[pt.QUAI[qk][1]]
     nb, nk = pt.nhom(qb), pt.nhom(qk)
-    can_cu = [f"Cung phi Bát trạch (theo năm âm lịch): bạn {qb} ({nb}), người ấy {qk} ({nk}) → {dn}"
-              + (", cùng nhóm." if nb == nk else ", khác nhóm Đông – Tây.")]
-    return {"loai": _slug(dn), "ty": _ty4(TY_CUNG_PHI[dn]), "can_cu": can_cu}
+    nam = lambda n: f", năm Bát trạch {n}" if n else ""  # noqa: E731
+    can_cu = [f"Cung phi Bát trạch (năm tính từ Lập xuân): bạn {qb} ({nb}{nam(nb_bt)}), người ấy {qk} ({nk}"
+              f"{nam(nk_bt)}) → {dn}" + (", cùng nhóm." if nb == nk else ", khác nhóm Đông – Tây."), *gb, *gk]
+    return {"loai": _slug(dn), "ty": _ty4(TY_CUNG_PHI[dn]), "can_cu": can_cu, "moc_khac": kb_ or kk_}
 
 
 def _slug(s: str) -> str:
@@ -253,14 +282,15 @@ def _muc_tong(tong: int) -> str:
 
 
 def cham_diem(ban: dict, kia: dict, quan_he: str, vao_ban: list[dict], ban_vao: list[dict] | None = None) -> dict:
-    """`ban`/`kia` = {"nam_am": năm âm lịch Việt, "gioi_tinh": "nam" | "nu" | None}. `vao_ban` = đường bay tứ hoá can
+    """`ban`/`kia` = {"nam_am": năm âm lịch (theo lịch người dùng chọn), "gioi_tinh": "nam" | "nu" | None,
+    "ngay_duong"?: ngày sinh dương lịch (date hoặc ISO) — có thì cung phi tính năm theo Lập xuân}. `vao_ban` = đường bay tứ hoá can
     năm người kia vào lá bạn ({hoa, sao, den_cung, xung_cung}); `ban_vao` = chiều ngược lại (có khi đủ lá hai người)."""
     if quan_he not in CUNG_TRONG_TAM:
         raise ValueError(f"Quan hệ không hợp lệ: {quan_he}")
     can_b, chi_b = lunar.can_chi_nam(int(ban["nam_am"]))
     can_k, chi_k = lunar.can_chi_nam(int(kia["nam_am"]))
     phan = {"menh": _menh(can_b, chi_b, can_k, chi_k), "can": _can(can_b, can_k), "chi": _chi(chi_b, chi_k),
-            "cung_phi": _cung_phi(int(ban["nam_am"]), ban.get("gioi_tinh"), int(kia["nam_am"]), kia.get("gioi_tinh")),
+            "cung_phi": _cung_phi(ban, kia),
             "tu_vi": _tu_vi(quan_he, can_b, can_k, vao_ban, ban_vao)}
     co = [m for m in TRONG_SO if phan[m] is not None]
     thang = _chia_thang(co)
@@ -290,6 +320,8 @@ def cham_diem(ban: dict, kia: dict, quan_he: str, vao_ban: list[dict], ban_vao: 
                "_nen": nen, "_w": TRONG_SO[ma]}
         if "chieu" in p:
             muc["chieu"] = p["chieu"]
+        if "moc_khac" in p:
+            muc["moc_khac"] = p["moc_khac"]
         if meta.get("source_id"):
             muc["nguon"] = {"source_id": meta["source_id"], "school_id": meta.get("school_id")}
         tieu_chi.append(muc)

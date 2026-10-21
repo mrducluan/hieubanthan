@@ -1,5 +1,5 @@
 {
-  "_ghi_chu": "HN-2N — golden TÍNH TAY cho điểm tham khảo 'Xem lá số 2 người' (luật hai_nguoi_1, luangiai/tuvi_hai_nguoi.py). Năm = năm âm lịch Việt. Can = (năm−4) mod 10, chi = (năm−4) mod 12, nạp âm = 60 hoa giáp ÷ 2; cung phi: nam (11 − năm mod 9) mod 9, nữ (năm mod 9 + 4) mod 9, 0→9, 5 → Khôn (nam) / Cấn (nữ); du niên = XOR hào hai quái. Tỉ lệ: Mệnh sinh 1.0 · bình hoà 0.7 · khắc 0.25 | Can ngũ hợp 1.0 · sinh 0.8 · bình 0.6 · khắc 0.35 · xung 0.2 | Chi tam hợp 1.0 · lục hợp 0.9 · trùng/không xung hợp 0.6 · tứ hành xung 0.45 · hại/hình 0.35 · lục xung 0.15 | Cung phi Sinh Khí 1.0 · Diên Niên 0.95 · Thiên Y 0.9 · Phục Vị 0.7 · Hoạ Hại 0.4 · Lục Sát 0.3 · Ngũ Quỷ 0.2 · Tuyệt Mệnh 0.1 | Tử vi 0.55 + 0.1 × r (kẹp 0..1), r = Σ hoá vào cung trọng tâm (Lộc +2, Khoa +1.5, Quyền +1, Kỵ −2) × trọng số cung + Kỵ xung cung trọng tâm −1 × trọng số; hai chiều = trung bình. Thang 20/15/20/15/30; thiếu giới tính bỏ cung phi, chia lại 100 theo dư lớn nhất → 24/18/23/35. Điểm tiêu chí = làm tròn nửa lên (tỉ lệ × tối đa). vao_ban/ban_vao là đường bay GIẢ LẬP [hoá, cung đến, cung xung] để test luật, không phải lá số thật.",
+  "_ghi_chu": "HN-2N — golden TÍNH TAY cho điểm tham khảo 'Xem lá số 2 người' (luật hai_nguoi_1, luangiai/tuvi_hai_nguoi.py). Năm = năm âm lịch Việt (cung phi: năm theo Lập xuân khi có ngay_duong — QC 2026-10-21, như /phong-thuy; không có ngày thì theo năm âm). Can = (năm−4) mod 10, chi = (năm−4) mod 12, nạp âm = 60 hoa giáp ÷ 2; cung phi: nam (11 − năm mod 9) mod 9, nữ (năm mod 9 + 4) mod 9, 0→9, 5 → Khôn (nam) / Cấn (nữ); du niên = XOR hào hai quái. Tỉ lệ: Mệnh sinh 1.0 · bình hoà 0.7 · khắc 0.25 | Can ngũ hợp 1.0 · sinh 0.8 · bình 0.6 · khắc 0.35 · xung 0.2 | Chi tam hợp 1.0 · lục hợp 0.9 · trùng/không xung hợp 0.6 · tứ hành xung 0.45 · hại/hình 0.35 · lục xung 0.15 | Cung phi Sinh Khí 1.0 · Diên Niên 0.95 · Thiên Y 0.9 · Phục Vị 0.7 · Hoạ Hại 0.4 · Lục Sát 0.3 · Ngũ Quỷ 0.2 · Tuyệt Mệnh 0.1 | Tử vi 0.55 + 0.1 × r (kẹp 0..1), r = Σ hoá vào cung trọng tâm (Lộc +2, Khoa +1.5, Quyền +1, Kỵ −2) × trọng số cung + Kỵ xung cung trọng tâm −1 × trọng số; hai chiều = trung bình. Thang 20/15/20/15/30; thiếu giới tính bỏ cung phi, chia lại 100 theo dư lớn nhất → 24/18/23/35. Điểm tiêu chí = làm tròn nửa lên (tỉ lệ × tối đa). vao_ban/ban_vao là đường bay GIẢ LẬP [hoá, cung đến, cung xung] để test luật, không phải lá số thật.",
   "phien_ban": "hai_nguoi_1",
   "ca": [
     {
@@ -155,6 +155,30 @@
         "menh": ["tuong_sinh", 20, 20, "hop"], "can": ["tuong_sinh", 12, 15, "hop"], "chi": ["tam_hop", 20, 20, "hop"],
         "cung_phi": ["dien_nien", 14, 15, "hop"], "tu_vi": ["hop", 30, 30, "hop"],
         "chieu_menh": "kia_sinh_ban", "tong": 96, "muc": "de_hoa_hop"
+      }
+    },
+    {
+      "id": "O_cung_phi_lap_xuan_sinh_khi",
+      "_ghi_chu": "QC 2026-10-21: cung phi theo LẬP XUÂN như /phong-thuy. Bạn 30/01/1990 nam: năm âm Canh Ngọ 1990 (Tết 27/01) nhưng trước Lập xuân 04/02/1990 → năm Bát trạch 1989 → (11 − 1989 mod 9) mod 9 = 2 → Khôn (theo Tết: 1990 → 1 → Khảm). Người ấy 01/02/1985 nữ: âm lịch Việt đã sang Ất Sửu (Tết 21/01/1985) nhưng trước Lập xuân 04/02/1985 → 1984 → (1984 mod 9 + 4) mod 9 = 8 → Cấn (theo Tết: 1985 → 9 → Ly). Khôn – Cấn = Sinh Khí 1,0. Mệnh: Lộ Bàng Thổ sinh Hải Trung Kim; can Canh – Ất ngũ hợp; chi Ngọ – Sửu lục hại 0,35 → 7; Tử vi như ca A (r = 2 + 0,9 = 2,9 → 0,84 → 25).",
+      "ban": {"nam_am": 1990, "gioi_tinh": "nam", "ngay_duong": "1990-01-30"}, "kia": {"nam_am": 1985, "gioi_tinh": "nu", "ngay_duong": "1985-02-01"}, "quan_he": "nguoi_yeu",
+      "vao_ban": [["Lộc", "Phu Thê", "Quan Lộc"], ["Quyền", "Tài Bạch", "Phúc Đức"], ["Khoa", "Mệnh", "Thiên Di"], ["Kỵ", "Tật Ách", "Phụ Mẫu"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_sinh", 20, 20, "hop"], "can": ["ngu_hop", 15, 15, "hop"], "chi": ["luc_hai", 7, 20, "can_dung_hoa"],
+        "cung_phi": ["sinh_khi", 15, 15, "hop"], "tu_vi": ["hop", 25, 30, "hop"],
+        "chieu_menh": "ban_sinh_kia", "tong": 82, "muc": "de_hoa_hop"
+      }
+    },
+    {
+      "id": "P_cung_phi_chi_co_nam_am",
+      "_ghi_chu": "Cùng cặp O nhưng KHÔNG có ngày dương (chỉ năm âm — vd ngày âm không đổi được sang dương): dùng năm âm → bạn Khảm, người ấy Ly → Diên Niên 0,95 → 14; căn cứ ghi rõ tính theo năm âm lịch.",
+      "ban": {"nam_am": 1990, "gioi_tinh": "nam"}, "kia": {"nam_am": 1985, "gioi_tinh": "nu"}, "quan_he": "nguoi_yeu",
+      "vao_ban": [["Lộc", "Phu Thê", "Quan Lộc"], ["Quyền", "Tài Bạch", "Phúc Đức"], ["Khoa", "Mệnh", "Thiên Di"], ["Kỵ", "Tật Ách", "Phụ Mẫu"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_sinh", 20, 20, "hop"], "can": ["ngu_hop", 15, 15, "hop"], "chi": ["luc_hai", 7, 20, "can_dung_hoa"],
+        "cung_phi": ["dien_nien", 14, 15, "hop"], "tu_vi": ["hop", 25, 30, "hop"],
+        "chieu_menh": "ban_sinh_kia", "tong": 81, "muc": "de_hoa_hop"
       }
     }
   ]

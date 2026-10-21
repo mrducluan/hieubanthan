@@ -99,6 +99,31 @@ def test_can_cu_co_thuat_ngu():
     assert any("Phu Thê" in s and "Lộc" in s for s in tc["tu_vi"]["can_cu"])
 
 
+def test_cung_phi_theo_lap_xuan_va_ghi_chu_moc():
+    """QC 2026-10-21 (lỗi 3): cung phi tính năm theo Lập xuân như /phong-thuy (không theo Tết). Mốc Tết cho quái khác
+    → `can_cu` ghi rõ; chỉ có năm âm → ghi rõ đang tính theo năm âm lịch."""
+    o = next(c for c in GOLDEN["ca"] if c["id"].startswith("O_"))
+    cp = next(t for t in _cham(o)["tieu_chi"] if t["ma"] == "cung_phi")
+    cu = " ".join(cp["can_cu"])
+    assert "Lập xuân" in cu and "Khôn" in cu and "Cấn" in cu
+    assert "Khảm" in cu and "Ly" in cu                    # mốc Tết cho quái khác (cả hai người) → nói rõ
+    assert cp["moc_khac"] is True and cu.count("theo mốc Tết") == 2
+    p = next(c for c in GOLDEN["ca"] if c["id"].startswith("P_"))
+    cp = next(t for t in _cham(p)["tieu_chi"] if t["ma"] == "cung_phi")
+    assert "năm âm lịch" in " ".join(cp["can_cu"]) and cp["moc_khac"] is False
+    # ngày dương dạng date cũng nhận; hai mốc trùng → không ghi chú mốc
+    import datetime as dt
+    r = hn.cham_diem({"nam_am": 1990, "gioi_tinh": "nam", "ngay_duong": dt.date(1990, 1, 30)},
+                     {"nam_am": 1985, "gioi_tinh": "nu", "ngay_duong": dt.date(1985, 2, 1)}, "nguoi_yeu",
+                     _duong(o["vao_ban"]))
+    assert next(t for t in r["tieu_chi"] if t["ma"] == "cung_phi")["loai"] == "sinh_khi"
+    r = hn.cham_diem({"nam_am": 1990, "gioi_tinh": "nam", "ngay_duong": dt.date(1990, 6, 1)},
+                     {"nam_am": 1992, "gioi_tinh": "nu", "ngay_duong": dt.date(1992, 8, 21)}, "nguoi_yeu",
+                     _duong(o["vao_ban"]))
+    cp = next(t for t in r["tieu_chi"] if t["ma"] == "cung_phi")
+    assert cp["moc_khac"] is False and "theo mốc Tết" not in " ".join(cp["can_cu"])
+
+
 # ------------------------------------------------------------------ tính chất
 def _ngau_nhien_duong(rd: random.Random):
     ra = []
