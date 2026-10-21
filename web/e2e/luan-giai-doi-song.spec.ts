@@ -58,6 +58,9 @@ test("báo cáo đời sống: cốt lõi, mục lục, chip mức, dòng thời
   const chu = (await bc.innerText()).toLowerCase();
   for (const cam of ["xấu", "hành trình", "năng lượng vũ trụ", "tai hoạ"]) expect(chu).not.toContain(cam);
 
+  // Hộp thời điểm có khoảng thời gian + mức; chương sức khoẻ có câu không thay lời bác sĩ.
+  await expect(sn.getByTestId("hop-thoi-gian")).toContainText("tháng 6 âm lịch – tháng 8 âm lịch");
+  await expect(page.getByTestId("lg-chuong-suc_khoe").getByTestId("mien-tru")).toContainText("không thay lời bác sĩ");
   // Dòng thời gian: 12 mốc, đúng 1 "Bạn đang ở đây" ở giai đoạn hiện tại.
   const tg = page.getByTestId("dong-thoi-gian");
   await expect(tg.getByTestId("moc-dai-han")).toHaveCount(12);
@@ -116,6 +119,8 @@ test("kiểm chứng: tỉ lệ công khai ≥ 30 phiếu, dưới 30 chỉ hỏ
   await cot.nth(0).getByRole("button", { name: "Chưa đúng" }).click();
   await expect(cot.nth(0).getByRole("status")).toContainText("Cảm ơn");
   await expect(cot.nth(0).getByTestId("ty-le-dung")).toContainText("78%");
+  // Hộp gốc trong chương dùng chung mã với hộp "Điều quan trọng nhất" → cũng đã trả lời, không hỏi lại.
+  await expect(page.getByTestId("lg-chuong-tong_quan").getByTestId("hop-noi-bat").first().getByRole("status")).toContainText("Cảm ơn");
   await expect.poll(() => goi.kiemChung!.length).toBe(2);
   // Máy chủ trả {ok:false} → không có thông báo lỗi nào.
   await expect(page.getByTestId("luan-giai-toan-bo").getByRole("alert")).toHaveCount(0);
@@ -208,14 +213,19 @@ test("điện thoại 360px: không cuộn ngang, dòng thời gian dọc", asyn
 
 test("SAO-2 với báo cáo đời sống: chương 1 đọc được, chương sau khoá kèm lời mời, không có nút lưu", async ({ page }) => {
   const [dau, ...sau] = BC.chuong;
+  // Như lib/sao-xem-truoc: cot_loi chỉ giữ hộp của chương mở, bỏ thoi_gian_bieu khi "cuoc_doi" bị khoá.
+  const { thoi_gian_bieu: _tg, ...conLai } = BC;
   const xemTruoc = {
-    ...BC, so_khoa: sau.length, phi: { sao: 10, ly_do: "xem_truoc", khoa: true, dang_nhap: true, so_du: 20 },
+    ...conLai, so_khoa: sau.length, phi: { sao: 10, ly_do: "xem_truoc", khoa: true, dang_nhap: true, so_du: 20 },
+    cot_loi: BC.cot_loi.filter((h) => h.tu_chuong === dau!.ma),
     chuong: [dau, ...sau.map((c) => ({ ma: c.ma, tieu_de: c.tieu_de, khoa: true, moi_xem: c.moi_xem }))],
   };
   await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
   await moBaoCaoKhoa(page, xemTruoc);
   const bc = page.getByTestId("luan-giai-toan-bo");
-  await expect(bc.getByTestId("lg-cot-loi")).toBeVisible();
+  await expect(bc.getByTestId("lg-cot-loi").getByTestId("hop-noi-bat")).toHaveCount(1);
+  await expect(bc.getByTestId("dong-thoi-gian")).toHaveCount(0);
+  await expect(bc.getByText("Bạn đang ở đây")).toHaveCount(0);
   await expect(bc.getByTestId("lg-chuong-tong_quan")).toContainText(dau!.doan[0]!);
   await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(11);
   await expect(page.getByTestId("lg-phan-khoa")).toContainText("Đã đọc 1/12 chương");
@@ -225,6 +235,21 @@ test("SAO-2 với báo cáo đời sống: chương 1 đọc được, chương 
   await expect(page.getByTestId("lg-muc-luc").getByRole("link").nth(1)).toHaveAttribute("href", "#lg-khoa");
   await expect(bc).not.toContainText(sau[1]!.doan[0]!);
   await expect(page.getByTestId("luu-bai-luan")).toHaveCount(0);
+});
+
+test("SAO-2: cot_loi rỗng (chương 1 không có hộp nổi bật) → không có khối Điều quan trọng nhất, bài vẫn hiện", async ({ page }) => {
+  const [dau, ...sau] = BC.chuong;
+  const { thoi_gian_bieu: _tg, ...conLai } = BC;
+  await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
+  await moBaoCaoKhoa(page, {
+    ...conLai, cot_loi: [], so_khoa: sau.length, phi: { sao: 10, ly_do: "xem_truoc", khoa: true, dang_nhap: false, so_du: null, thuong_chao_mung: 10 },
+    chuong: [dau, ...sau.map((c) => ({ ma: c.ma, tieu_de: c.tieu_de, khoa: true, moi_xem: c.moi_xem }))],
+  });
+  const bc = page.getByTestId("luan-giai-toan-bo");
+  await expect(bc.getByTestId("lg-chuong-tong_quan")).toBeVisible();
+  await expect(bc.getByTestId("lg-cot-loi")).toHaveCount(0);
+  await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(11);
+  await expect(page.getByTestId("lg-phan-khoa")).toContainText("tặng 10 Sao — đủ mở báo cáo này");
 });
 
 async function moBaoCaoKhoa(page: Page, bc: object) {

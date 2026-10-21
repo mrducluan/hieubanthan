@@ -29,11 +29,16 @@ export function KiemChung({ loai, mau, phai, khoa, cauHoi = "Điều này có đ
   const [da, setDa] = useState(false);
   useEffect(() => {
     try { if (sessionStorage.getItem(KHOA(k))) setDa(true); } catch { /* chế độ riêng tư */ }
+    // Cùng mã hiện hai nơi (hộp "Điều quan trọng nhất" dùng chung mã với hộp gốc trong chương) → bấm một nơi, nơi kia cũng xong.
+    const nghe = (e: Event) => { if ((e as CustomEvent<string>).detail === k) setDa(true); };
+    window.addEventListener("hbt-kiem-chung", nghe);
+    return () => window.removeEventListener("hbt-kiem-chung", nghe);
   }, [k]);
   const tl = tyLeHien(tyLeEngine, tyLe);
   const bam = (kq: KetQuaKiemChung) => {
     if (da) return;
     setDa(true);
+    try { window.dispatchEvent(new CustomEvent("hbt-kiem-chung", { detail: k })); } catch { /* bỏ qua */ }
     if (lanDauTrongPhien(`kiem-chung.${k}`)) {
       ghi("tuvi_kiem_chung", { loai, mau, ket_qua: kq, phai });
       guiMayChu(loai, mau, phai, kq);

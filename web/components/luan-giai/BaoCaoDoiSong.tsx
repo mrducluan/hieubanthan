@@ -107,6 +107,9 @@ function Chuong({ c, so, goc, thoiGian }: { c: ChuongDoiSongMo; so: number; goc:
               (d) => (d.startsWith("Câu hỏi để tự soi") ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""))}
         </div>
       )}
+      {c.mien_tru && !c.doan.some((d) => d.includes(c.mien_tru!)) && (
+        <p className="mt-4 rounded-xl border border-line/70 px-4 py-2.5 text-sm text-fg-muted" data-testid="mien-tru">{c.mien_tru}</p>
+      )}
       {c.cau_tu_soi && (
         <p className="mt-4 rounded-xl bg-moon/10 px-4 py-2.5 text-moon" data-testid="cau-tu-soi">
           <span className="text-xs font-semibold uppercase tracking-wider">Tự hỏi mình</span>

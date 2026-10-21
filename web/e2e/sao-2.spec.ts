@@ -41,6 +41,24 @@ test("thuần: cắt bản xem trước bỏ hẳn đoạn văn chương khoá; 
   expect(x.chuong[1]).toEqual({ ma: "b", tieu_de: "B", khoa: true, moi_xem: MOI("Hỏi?") });
   expect(catXemTruoc(bc, 0).so_khoa).toBe(2);
   expect(catXemTruoc(bc, 9).so_khoa).toBe(0);
+  // LG-ĐS: trường ngoài `chuong` (cot_loi, thoi_gian_bieu) không lộ nội dung chương đang khoá.
+  const ds = { mo_dun: "tuvi", chuong: [
+    { ma: "tong_quan", tieu_de: "Con người bạn", doan: ["mở"] },
+    { ma: "cuoc_doi", tieu_de: "Các giai đoạn", doan: ["BÍ MẬT GIAI ĐOẠN"] },
+    { ma: "tinh_cam", tieu_de: "Tình cảm", doan: ["BÍ MẬT TÌNH CẢM"] },
+  ], cot_loi: [
+    { tieu_de: "Hộp mở", noi_dung: "từ chương mở", tu_chuong: "tong_quan" },
+    { tieu_de: "Hộp khoá", noi_dung: "BÍ MẬT HỘP", tu_chuong: "tinh_cam" },
+    { tieu_de: "Hộp không rõ chương", noi_dung: "BÍ MẬT KHÔNG NGUỒN" },
+  ], thoi_gian_bieu: [{ tu_tuoi: 6, mot_cau: "BÍ MẬT DÒNG THỜI GIAN" }] };
+  const xt = catXemTruoc(ds, 1);
+  expect(JSON.stringify(xt)).not.toContain("BÍ MẬT");
+  expect((xt as { cot_loi?: unknown[] }).cot_loi).toHaveLength(1);
+  expect("thoi_gian_bieu" in xt).toBe(false);
+  const xt2 = catXemTruoc(ds, 2) as { cot_loi?: unknown[]; thoi_gian_bieu?: unknown[] };
+  expect(xt2.thoi_gian_bieu).toHaveLength(1);
+  expect(JSON.stringify(xt2)).not.toContain("BÍ MẬT HỘP");
+  expect(catXemTruoc(ds, 3)).toMatchObject({ so_khoa: 0, cot_loi: ds.cot_loi, thoi_gian_bieu: ds.thoi_gian_bieu });
   expect(ghiLuot({ con_lai: 5, tran: 10, tai_khoan: true })).toBeUndefined();
   expect(ghiLuot({ con_lai: 2, tran: 10, tai_khoan: true })).toBe("Còn 2 câu miễn phí hôm nay.");
   expect(ghiLuot({ con_lai: 0, tran: 3, tai_khoan: false })).toContain("Đăng nhập để hỏi thêm");

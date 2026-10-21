@@ -45,7 +45,10 @@ export const bangTyLe = unstable_cache(docTyLe, ["kiem-chung-ty-le"], { revalida
 
 /** Phiếu "đời sống" + mọi loại của chính người dùng (RLS: chỉ thấy phiếu có user_id của mình). */
 export async function phieuCuaToi(sb: SupabaseClient, userId: string): Promise<PhieuCaNhan> {
-  const { data, error } = await sb.from("kiem_chung_phieu").select("mau, ket_qua").eq("user_id", userId).limit(3000);
+  // ≤ 500 phiếu mới nhất: engine nhận `ca_nhan` tối đa 500 mã (LuanGiaiInput) — vượt thì 422 và luận giải gọi lại
+  // KHÔNG kèm cả `trong_so` lẫn `ca_nhan`.
+  const { data, error } = await sb.from("kiem_chung_phieu").select("mau, ket_qua").eq("user_id", userId)
+    .order("cap_nhat", { ascending: false }).limit(500);
   if (error || !data) return {};
   const kq: PhieuCaNhan = {};
   for (const d of data as { mau: string; ket_qua: "dung" | "chua_dung" }[]) kq[d.mau] = d.ket_qua;

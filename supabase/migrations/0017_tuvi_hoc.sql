@@ -6,7 +6,7 @@
 --   * luan_giai_luu: bài luận người dùng CHỦ ĐỘNG lưu (hoặc bật "tự lưu" — không tích sẵn). RLS chủ sở hữu, ≤ 100 bài,
 --     ≤ 256 KB / bài, hết hạn 365 ngày, xoá ngay.  * tuy_chon_hoc: công tắc tự lưu (mặc định tắt).
 --   * cau_hoi_vec: kho vectơ ý định câu hỏi (câu ĐÃ LỌC bởi engine, không user_id). Người dùng bấm "Đúng ý tôi hỏi"
---     → gộp vào câu gần trùng (cos ≥ 0,95 cùng ý định) hoặc thêm "chờ duyệt"; ≥ 3 khoá khác nhau → "hoạt động".
+--     → gộp vào câu gần trùng (cos ≥ 0,95 cùng ý định) hoặc thêm "chờ duyệt"; ≥ 3 khoá khác nhau (≥ 1 người đăng nhập) → "hoạt động".
 --     Quản trị tắt được. Máy KHÔNG sinh câu luận, KHÔNG sửa KB, chữ người dùng không bao giờ vào lời nhắc AI.
 -- Mọi hàm: security definer + search_path = ''. Không BEGIN/COMMIT (chạy bằng psql -1 hoặc SQL Editor).
 -- Cần extension pgvector (Supabase: Database → Extensions → vector, schema `extensions`; lệnh dưới tự bật nếu được).
@@ -198,6 +198,8 @@ create table if not exists cau_hoi_vec (
     nguon         text not null check (nguon in ('kho', 'nguoi_dung', 'bien_tap')),
     so_xac_nhan   integer not null default 0 check (so_xac_nhan >= 0),
     khoa_xac_nhan text[] not null default '{}' check (cardinality(khoa_xac_nhan) <= 20),
+    -- Số khoá xác nhận là người ĐĂNG NHẬP — tự bật cần ≥ 1 (chặn 3 IP giả tự đưa câu vào kho).
+    so_dang_nhap  integer not null default 0 check (so_dang_nhap >= 0),
     trang_thai    text not null default 'cho_duyet' check (trang_thai in ('hoat_dong', 'cho_duyet', 'tat')),
     tao_luc       timestamptz not null default now(),
     cap_nhat      timestamptz not null default now(),
@@ -246,9 +248,9 @@ end
 $$;
 
 -- Người dùng bấm "Đúng ý tôi hỏi": gộp vào câu gần trùng (cos ≥ 0,95, cùng ý định) hoặc thêm câu "chờ duyệt".
--- ≥ 3 khoá khác nhau → "hoạt động". Câu đã bị quản trị tắt thì không bật lại. `p_cau` là câu ĐÃ LỌC bởi engine.
+-- ≥ 3 khoá khác nhau (≥ 1 người đăng nhập) → "hoạt động". Câu đã bị quản trị tắt thì không bật lại. `p_cau` là câu ĐÃ LỌC bởi engine.
 create or replace function xac_nhan_y_dinh(p_mo_dun text, p_y_dinh text, p_cau text, p_vec jsonb, p_mo_hinh text,
-                                           p_khoa text) returns jsonb
+                                           p_khoa text, p_dang_nhap boolean default false) returns jsonb
     language plpgsql security definer set search_path = '' as $$
 declare
     v extensions.vector := public.vec_tu_jsonb(p_vec);
@@ -263,7 +265,7 @@ begin
     end if;
     -- Không lọt thông tin liên hệ (engine đã lọc; chặn lần nữa).
     if v_cau ~ '[0-9]{6,}|@|https?://' then return jsonb_build_object('ok', false, 'ly_do', 'khong_hop_le'); end if;
-    select c.id, c.trang_thai, c.khoa_xac_nhan, (1 - (c.vec operator(extensions.<=>) v)) as do_gan into g
+    select c.id, c.trang_thai, c.khoa_xac_nhan, c.so_dang_nhap, (1 - (c.vec operator(extensions.<=>) v)) as do_gan into g
     from public.cau_hoi_vec c
     where c.mo_dun = p_mo_dun and c.mo_hinh = p_mo_hinh and c.y_dinh = p_y_dinh
     order by c.vec operator(extensions.<=>) v limit 1;
@@ -276,7 +278,10 @@ begin
         end if;
         v_khoa := (array[p_khoa] || g.khoa_xac_nhan)[1:20];
         update public.cau_hoi_vec set khoa_xac_nhan = v_khoa, so_xac_nhan = so_xac_nhan + 1, cap_nhat = now(),
-            trang_thai = case when trang_thai = 'cho_duyet' and cardinality(v_khoa) >= 3 then 'hoat_dong' else trang_thai end
+            so_dang_nhap = so_dang_nhap + (case when coalesce(p_dang_nhap, false) then 1 else 0 end),
+            trang_thai = case when trang_thai = 'cho_duyet' and cardinality(v_khoa) >= 3
+                                   and g.so_dang_nhap + (case when coalesce(p_dang_nhap, false) then 1 else 0 end) >= 1
+                              then 'hoat_dong' else trang_thai end
         where id = g.id returning trang_thai into v_tt;
         return jsonb_build_object('ok', true, 'id', g.id, 'trang_thai', v_tt, 'gop', true);
     end if;
@@ -285,10 +290,13 @@ begin
        or (select count(*) from public.cau_hoi_vec where trang_thai = 'cho_duyet') >= 20000 then
         return jsonb_build_object('ok', false, 'ly_do', 'qua_nhieu');
     end if;
-    insert into public.cau_hoi_vec (mo_dun, y_dinh, cau, vec, mo_hinh, nguon, so_xac_nhan, khoa_xac_nhan, trang_thai)
-    values (p_mo_dun, p_y_dinh, v_cau, v, p_mo_hinh, 'nguoi_dung', 1, array[p_khoa], 'cho_duyet')
+    insert into public.cau_hoi_vec (mo_dun, y_dinh, cau, vec, mo_hinh, nguon, so_xac_nhan, khoa_xac_nhan, so_dang_nhap, trang_thai)
+    values (p_mo_dun, p_y_dinh, v_cau, v, p_mo_hinh, 'nguoi_dung', 1, array[p_khoa],
+            case when coalesce(p_dang_nhap, false) then 1 else 0 end, 'cho_duyet')
     on conflict (mo_dun, mo_hinh, cau) do nothing
     returning id into g;
+    -- Trùng nguyên câu đã có với ý định KHÁC → không ghi (để người duyệt xử lý câu sẵn có), không báo "đã lưu".
+    if g.id is null then return jsonb_build_object('ok', false, 'ly_do', 'trung_cau'); end if;
     return jsonb_build_object('ok', true, 'id', g.id, 'trang_thai', 'cho_duyet', 'gop', false);
 end
 $$;
@@ -373,9 +381,9 @@ $$;
 revoke all on function kiem_chung_ma_hop_le(text, text, text), ghi_kiem_chung(text, uuid, text, text, text, text),
     ty_le_kiem_chung(text[], integer), luan_giai_luu_gioi_han(), tuy_chon_hoc_moc(), y_dinh_hop_le(text, text),
     vec_tu_jsonb(jsonb), tim_y_dinh_gan(text, jsonb, text, real, integer),
-    xac_nhan_y_dinh(text, text, text, jsonb, text, text), nap_kho_vec(text, text, jsonb), thong_ke_hoc_tuvi(text),
+    xac_nhan_y_dinh(text, text, text, jsonb, text, text, boolean), nap_kho_vec(text, text, jsonb), thong_ke_hoc_tuvi(text),
     duyet_cau_hoi_vec(bigint, text), don_du_lieu_hoc_tuvi() from public, anon, authenticated;
 grant execute on function ghi_kiem_chung(text, uuid, text, text, text, text), ty_le_kiem_chung(text[], integer),
-    tim_y_dinh_gan(text, jsonb, text, real, integer), xac_nhan_y_dinh(text, text, text, jsonb, text, text),
+    tim_y_dinh_gan(text, jsonb, text, real, integer), xac_nhan_y_dinh(text, text, text, jsonb, text, text, boolean),
     nap_kho_vec(text, text, jsonb), don_du_lieu_hoc_tuvi() to service_role;
 grant execute on function thong_ke_hoc_tuvi(text), duyet_cau_hoi_vec(bigint, text) to authenticated;

@@ -5,6 +5,7 @@ create function pg_temp.v(i int, j int default 2, w real default 0) returns json
 \set k1 '''aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'''
 \set k2 '''bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'''
 \set k3 '''cccccccccccccccccccccccccccccccc'''
+\set k4 '''dddddddddddddddddddddddddddddddd'''
 
 -- ---------------------------------------------------------------- kiểm chứng
 set role service_role;
@@ -99,10 +100,12 @@ select 'xác nhận câu mới (khoá 1) → chờ duyệt' t, xac_nhan_y_dinh('
 select 'chưa hoạt động → tìm không thấy' t, count(*) from tim_y_dinh_gan('tuvi', pg_temp.v(7, 8, 0.1), 'bam512_v1', 0.82);
 select 'khoá 1 bấm lại → không cộng' t, xac_nhan_y_dinh('tuvi', 'phan_van', 'Mình nên chọn A hay B nhỉ?', pg_temp.v(7, 8, 0.12), 'bam512_v1', :k1) ->> 'da_co';
 select 'khoá 2, câu gần trùng (cos ≥ 0,95) → gộp, vẫn chờ' t, xac_nhan_y_dinh('tuvi', 'phan_van', 'Nên chọn A hay B?', pg_temp.v(7, 8, 0.12), 'bam512_v1', :k2) ->> 'trang_thai';
-select 'khoá 3 → đủ 3 khoá khác nhau → hoạt động' t, xac_nhan_y_dinh('tuvi', 'phan_van', 'Chọn A hay B đây?', pg_temp.v(7, 8, 0.11), 'bam512_v1', :k3) ->> 'trang_thai';
-select '→ 1 dòng, 3 xác nhận' t, count(*) || '/' || max(so_xac_nhan) from cau_hoi_vec where y_dinh = 'phan_van';
+select 'khoá 3 (khách) → đủ 3 khoá nhưng chưa ai đăng nhập → vẫn chờ' t, xac_nhan_y_dinh('tuvi', 'phan_van', 'Chọn A hay B đây?', pg_temp.v(7, 8, 0.11), 'bam512_v1', :k3) ->> 'trang_thai';
+select 'khoá 4 (đăng nhập) → hoạt động' t, xac_nhan_y_dinh('tuvi', 'phan_van', 'Chọn A hay B nhé?', pg_temp.v(7, 8, 0.11), 'bam512_v1', :k4, true) ->> 'trang_thai';
+select '→ 1 dòng, 4 xác nhận' t, count(*) || '/' || max(so_xac_nhan) from cau_hoi_vec where y_dinh = 'phan_van';
 select 'giờ tìm thấy' t, y_dinh from tim_y_dinh_gan('tuvi', pg_temp.v(7, 8, 0.1), 'bam512_v1', 0.82);
 select 'cùng vectơ nhưng ý định khác → câu mới, không gộp' t, xac_nhan_y_dinh('tuvi', 'tai_van', 'Chọn A hay B về tiền?', pg_temp.v(7, 8, 0.1), 'bam512_v1', :k1) ->> 'gop';
+select 'trùng nguyên câu, ý định khác → không ghi' t, xac_nhan_y_dinh('tuvi', 'hieu_ban_than', 'Chọn A hay B về tiền?', pg_temp.v(13), 'bam512_v1', :k2) ->> 'ly_do';
 select 'ý định lạ → từ chối' t, xac_nhan_y_dinh('tuvi', 'xo_so', 'Số nào trúng hôm nay?', pg_temp.v(9), 'bam512_v1', :k1) ->> 'ly_do';
 select 'câu có số điện thoại → từ chối' t, xac_nhan_y_dinh('tuvi', 'tai_van', 'Gọi 0912345678 hỏi tiền', pg_temp.v(11), 'bam512_v1', :k1) ->> 'ly_do';
 reset role;

@@ -33,12 +33,18 @@ export async function POST(req: Request) {
     const phien = await phienNguoiDung();
     const khoa = khoaHoc(req, phien?.user.id ?? null, "y-dinh");
     if (!khoa) return NextResponse.json({ ok: false, ly_do: "chua_bat" });
+    // Câu khủng hoảng / ngoài phạm vi (cùng luật RULES của hỏi đáp) KHÔNG BAO GIỜ vào kho — route này nhận câu từ
+    // trình duyệt, không tin rằng câu đã đi qua /api/tuvi/hoi. Engine lỗi → không lưu (đóng an toàn).
+    const db = await goiEngineDaKiem({ cau_hoi: vao.data.cau.slice(0, 500) }, "/v1/hoi/dac-biet", dauNguoiGoi(req));
+    if (!db.ok) return NextResponse.json({ ok: false, ly_do: "engine" });
+    if ((db.body as { loai?: string | null })?.loai) return NextResponse.json({ ok: true, da_luu: false, ly_do: "khong_luu" });
     const nh = await goiEngineDaKiem({ cau: [vao.data.cau] }, "/v1/nhung", dauNguoiGoi(req));
     if (!nh.ok) return NextResponse.json({ ok: false, ly_do: "engine" });
     const b = nh.body as { mo_hinh?: string; vec?: number[][]; cau_da_loc?: string[] };
     if (b.mo_hinh !== MO_HINH_NHUNG || !b.vec?.[0] || !b.cau_da_loc?.[0]) return NextResponse.json({ ok: false, ly_do: "engine" });
     const { data, error } = await dv.rpc("xac_nhan_y_dinh", {
       p_mo_dun: "tuvi", p_y_dinh: vao.data.y_dinh, p_cau: b.cau_da_loc[0], p_vec: b.vec[0], p_mo_hinh: b.mo_hinh, p_khoa: khoa,
+      p_dang_nhap: Boolean(phien?.user.id),
     });
     if (error) return NextResponse.json({ ok: false, ly_do: "chua_bat" });
     const r = data as { ok?: boolean; trang_thai?: string };

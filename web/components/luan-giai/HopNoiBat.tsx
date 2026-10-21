@@ -8,7 +8,7 @@ import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { doanCoThuatNgu, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 import type { BangTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
-import type { Hop, LoaiHop } from "./kieu";
+import { NHAN_MUC, type Hop, type LoaiHop } from "./kieu";
 
 export const LOAI_HOP: Record<LoaiHop, { nhan: string; Icon: LucideIcon }> = {
   cot_loi: { nhan: "Điều quan trọng", Icon: Star },
@@ -45,6 +45,8 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
   const { tyLe, phai, tat } = useContext(KiemChungBai);
   const { nhan, Icon } = LOAI_HOP[hop.loai] ?? LOAI_HOP.cot_loi;
   const idTieuDe = useId();
+  const khoang = hop.tu && hop.den ? `${hop.tu} – ${hop.den}`
+    : typeof hop.tu_tuoi === "number" && typeof hop.den_tuoi === "number" ? `${hop.tu_tuoi}–${hop.den_tuoi} tuổi` : null;
   return (
     <section role="note" aria-labelledby={idTieuDe} data-loai={hop.loai} data-testid="hop-noi-bat"
       className={cn("hop-nb flex flex-col rounded-2xl p-4", className)}>
@@ -53,6 +55,15 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
       </p>
       <h4 id={idTieuDe} className="mt-1 font-sans text-[1.02rem] font-semibold leading-snug text-fg">{hop.tieu_de}</h4>
       <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg-muted">{hop.noi_dung}</p>
+      {hop.huong_xu_ly && !hop.noi_dung.includes(hop.huong_xu_ly) && (
+        <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg"><b className="hop-nhan font-semibold">Nên:</b> {hop.huong_xu_ly}</p>
+      )}
+      {hop.loai === "thoi_diem" && (khoang || hop.muc) && (
+        <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-fg-faint" data-testid="hop-thoi-gian">
+          {khoang && <span>{khoang}</span>}
+          {hop.muc && <span data-muc={hop.muc} className="chip-muc rounded-full px-2 py-0">{NHAN_MUC[hop.muc]}</span>}
+        </p>
+      )}
       <ViSao canCu={hop.can_cu} thuatNgu={thuatNgu} nho />
       {hop.ma_mau && !tat && (
         <div className="mt-auto pt-3">

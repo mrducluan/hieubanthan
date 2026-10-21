@@ -4,7 +4,7 @@ drop function if exists don_du_lieu_hoc_tuvi();
 drop function if exists duyet_cau_hoi_vec(bigint, text);
 drop function if exists thong_ke_hoc_tuvi(text);
 drop function if exists nap_kho_vec(text, text, jsonb);
-drop function if exists xac_nhan_y_dinh(text, text, text, jsonb, text, text);
+drop function if exists xac_nhan_y_dinh(text, text, text, jsonb, text, text, boolean);
 drop function if exists tim_y_dinh_gan(text, jsonb, text, real, integer);
 drop table if exists cau_hoi_vec;
 drop function if exists vec_tu_jsonb(jsonb);

@@ -1,5 +1,5 @@
 {
- "_ghi_chu": "Báo cáo đời sống MẪU đúng hợp đồng docs/LUAN-GIAI-DOI-SONG.md mục 2.3 (viết tay cho e2e — engine chưa có thì dùng bản này; khi engine xong nên thay bằng output thật).",
+ "_ghi_chu": "Báo cáo đời sống MẪU đúng hợp đồng docs/LUAN-GIAI-DOI-SONG.md mục 2.3 (viết tay cho e2e, mã chương như engine LG-ĐS). Engine thật kiểm ở tu-vi.spec.ts.",
  "bao_cao": {
   "mo_dun": "tuvi",
   "phien_ban": "doi_song_1",
@@ -24,7 +24,9 @@
     "ma_mau": "ds.cot_loi.tu_quyet",
     "ty_le_dung": 0.78,
     "so_phieu": 120,
-    "dang_xem_lai": false
+    "dang_xem_lai": false,
+    "tu_chuong": "tong_quan",
+    "loai_goc": "diem_manh"
    },
    {
     "loai": "cot_loi",
@@ -34,7 +36,9 @@
      "Thái Âm (Miếu) ở Tài Bạch"
     ],
     "ma_mau": "ds.cot_loi.tien_ke_hoach",
-    "dang_xem_lai": false
+    "dang_xem_lai": false,
+    "tu_chuong": "tien_bac",
+    "loai_goc": "diem_manh"
    },
    {
     "loai": "cot_loi",
@@ -44,7 +48,9 @@
      "Cự Môn (Hãm) ở Phu Thê"
     ],
     "ma_mau": "ds.cot_loi.noi_thang",
-    "dang_xem_lai": false
+    "dang_xem_lai": false,
+    "tu_chuong": "tinh_cam",
+    "loai_goc": "luu_y"
    },
    {
     "loai": "cot_loi",
@@ -53,7 +59,9 @@
     "can_cu": [
      "Đại hạn tại Điền Trạch"
     ],
-    "dang_xem_lai": false
+    "dang_xem_lai": false,
+    "tu_chuong": "cuoc_doi",
+    "loai_goc": "thoi_diem"
    }
   ],
   "thoi_gian_bieu": [
@@ -206,7 +214,7 @@
       "can_cu": [
        "Thiên Cơ (Đắc) ở cung Quan Lộc"
       ],
-      "ma_mau": "ds.tong_quan.thien_co.sang.manh",
+      "ma_mau": "ds.cot_loi.tu_quyet",
       "dang_xem_lai": false
      },
      {
@@ -217,7 +225,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.tong_quan.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -272,7 +281,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.cuoc_doi.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -329,7 +339,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.su_nghiep.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -348,7 +359,10 @@
        "Lưu niên Hoá Lộc nhập Quan Lộc"
       ],
       "ma_mau": "ds.su_nghiep.luu_nien.loc",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "muc": "thuan",
+      "tu": "tháng 6 âm lịch",
+      "den": "tháng 8 âm lịch"
      },
      {
       "loai": "diem_manh",
@@ -404,7 +418,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.tien_bac.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -459,7 +474,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.tinh_cam.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -514,7 +530,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.gia_dinh.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -569,7 +586,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.suc_khoe.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -583,8 +601,7 @@
     ],
     "doan": [
      "Đoạn thân bài chương Sức khoẻ & năng lượng: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
-     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch.",
-     "Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám."
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
     ],
     "can_cu": [
      "Mệnh có Thiên Cơ (Đắc)",
@@ -597,7 +614,8 @@
      "cau_hoi": "Chương Sức khoẻ & năng lượng nói gì về bạn?",
      "so_doan": 2,
      "phut_doc": 2
-    }
+    },
+    "mien_tru": "Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám."
    },
    {
     "ma": "quan_he",
@@ -625,7 +643,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.quan_he.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -680,7 +699,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.nha_cua.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -735,7 +755,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.duong_bay.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -790,7 +811,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.nam_nay.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",
@@ -845,7 +867,8 @@
        "Hoá Kỵ ở Tài Bạch"
       ],
       "ma_mau": "ds.loi_khuyen.hoa_ky.de_vap",
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "huong_xu_ly": "Nên chia việc sớm, nói rõ phần nào cần người phụ."
      },
      {
       "loai": "loi_khuyen",

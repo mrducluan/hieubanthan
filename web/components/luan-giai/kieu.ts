@@ -17,6 +17,12 @@ export interface Hop {
   so_phieu?: number;
   /** Engine đã chuyển hộp này xuống "Vì sao nói vậy" — web không hiện hộp. */
   dang_xem_lai?: boolean;
+  /** Hộp cot_loi: chương gốc + loại hộp gốc (dùng chung ma_mau với hộp gốc). */
+  tu_chuong?: string; loai_goc?: LoaiHop;
+  /** Hộp luu_y: hướng xử lý (thường đã nằm trong noi_dung). */
+  huong_xu_ly?: string;
+  /** Hộp thoi_diem: mức + khoảng thời gian (chữ) hoặc khoảng tuổi. */
+  muc?: Muc; tu?: string; den?: string; tu_tuoi?: number; den_tuoi?: number;
 }
 
 export interface MocDaiHan {
@@ -29,6 +35,8 @@ export interface ChuongDoiSongMo {
   cau_hoi?: string; muc?: Muc; nhan_muc?: string; tom_tat?: string;
   hop?: Hop[]; doan: string[]; can_cu?: string[]; cau_tu_soi?: string;
   van_ai?: string; che_do?: string; thuat_ngu?: ThuatNgu[];
+  /** Chương sức khoẻ: câu "không thay lời bác sĩ". */
+  mien_tru?: string;
 }
 export interface ChuongKhoa { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem }
 
