@@ -1,5 +1,5 @@
 {
- "_ghi_chu": "BT-ĐS — golden luận giải Bát tự đời sống: khoá mức 12 chương, mức 8 đại vận (gộp hai cách), giai đoạn đang đi, thân mạnh/yếu, cách cục. Lá mẫu đầu (hồ sơ e2e) tính tay trong tests/test_battu_doi_song.py; đổi luật chấm trong luangiai/battu_doi_song.py → sinh lại và đọc diff.",
+ "_ghi_chu": "BT-ĐS — golden luận giải Bát tự đời sống: khoá mức 13 chương (Vận hạn và Lời khuyên không mang mức), mức 8 đại vận (gộp hai cách), giai đoạn đang đi, thân mạnh/yếu, cách cục, mức 10 năm của chương Vận hạn (VH-1). Lá mẫu đầu (hồ sơ e2e) tính tay trong tests/test_battu_doi_song.py; đổi luật chấm trong luangiai/battu_doi_song.py → sinh lại và đọc diff.",
  "cases": [
   {
    "id": "nham_nhuoc_thien_tai_nam",
@@ -10,17 +10,18 @@
    "cach": "thien_tai",
    "muc": {
     "tong_quan": "thuan",
-    "ngu_hanh": "can_bang",
+    "ngu_hanh": "can_chu_dong",
     "cuoc_doi": "thuan",
     "su_nghiep": "thuan",
     "tien_bac": "can_bang",
     "tinh_cam": "can_bang",
-    "gia_dinh": "can_bang",
+    "gia_dinh": "can_chu_dong",
     "hoc_tap": "can_bang",
     "suc_khoe": "can_chu_dong",
     "quan_he": "can_bang",
     "nam_nay": "thuan",
-    "loi_khuyen": "thuan"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_chu_dong",
@@ -34,6 +35,18 @@
    ],
    "hien_tai": [
     3
+   ],
+   "van_han_nam": [
+    "can_chu_dong",
+    "can_chu_dong",
+    "thuan",
+    "thuan",
+    "can_bang",
+    "can_bang",
+    "can_bang",
+    "can_chu_dong",
+    "can_chu_dong",
+    "can_chu_dong"
    ]
   },
   {
@@ -50,12 +63,13 @@
     "su_nghiep": "can_bang",
     "tien_bac": "can_bang",
     "tinh_cam": "can_bang",
-    "gia_dinh": "can_bang",
+    "gia_dinh": "can_chu_dong",
     "hoc_tap": "thuan",
     "suc_khoe": "thuan",
     "quan_he": "can_bang",
     "nam_nay": "can_bang",
-    "loi_khuyen": "can_bang"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "thuan",
@@ -69,6 +83,18 @@
    ],
    "hien_tai": [
     3
+   ],
+   "van_han_nam": [
+    "can_chu_dong",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "can_bang",
+    "can_bang"
    ]
   },
   {
@@ -84,13 +110,14 @@
     "cuoc_doi": "can_chu_dong",
     "su_nghiep": "can_bang",
     "tien_bac": "thuan",
-    "tinh_cam": "can_bang",
+    "tinh_cam": "thuan",
     "gia_dinh": "can_bang",
-    "hoc_tap": "can_bang",
+    "hoc_tap": "can_chu_dong",
     "suc_khoe": "can_bang",
-    "quan_he": "can_bang",
+    "quan_he": "thuan",
     "nam_nay": "can_chu_dong",
-    "loi_khuyen": "can_bang"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_chu_dong",
@@ -104,6 +131,18 @@
    ],
    "hien_tai": [
     4
+   ],
+   "van_han_nam": [
+    "can_chu_dong",
+    "can_chu_dong",
+    "thuan",
+    "thuan",
+    "can_chu_dong",
+    "thuan",
+    "thuan",
+    "can_chu_dong",
+    "can_chu_dong",
+    "can_chu_dong"
    ]
   },
   {
@@ -116,7 +155,7 @@
    "cach": "kien_loc",
    "muc": {
     "tong_quan": "thuan",
-    "ngu_hanh": "can_bang",
+    "ngu_hanh": "can_chu_dong",
     "cuoc_doi": "thuan",
     "su_nghiep": "can_bang",
     "tien_bac": "thuan",
@@ -126,7 +165,8 @@
     "suc_khoe": "can_chu_dong",
     "quan_he": "can_chu_dong",
     "nam_nay": "thuan",
-    "loi_khuyen": "thuan"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_chu_dong",
@@ -140,6 +180,18 @@
    ],
    "hien_tai": [
     4
+   ],
+   "van_han_nam": [
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "can_bang",
+    "can_chu_dong",
+    "thuan",
+    "can_chu_dong",
+    "can_chu_dong"
    ]
   },
   {
@@ -155,13 +207,14 @@
     "cuoc_doi": "can_chu_dong",
     "su_nghiep": "can_bang",
     "tien_bac": "thuan",
-    "tinh_cam": "can_bang",
+    "tinh_cam": "thuan",
     "gia_dinh": "can_chu_dong",
     "hoc_tap": "can_bang",
     "suc_khoe": "can_bang",
     "quan_he": "thuan",
     "nam_nay": "can_chu_dong",
-    "loi_khuyen": "thuan"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_bang",
@@ -175,6 +228,18 @@
    ],
    "hien_tai": [
     2
+   ],
+   "van_han_nam": [
+    "thuan",
+    "can_bang",
+    "thuan",
+    "thuan",
+    "can_bang",
+    "can_bang",
+    "can_chu_dong",
+    "can_bang",
+    "can_chu_dong",
+    "can_chu_dong"
    ]
   },
   {
@@ -186,17 +251,18 @@
    "cach": "duong_nhan",
    "muc": {
     "tong_quan": "can_bang",
-    "ngu_hanh": "can_bang",
+    "ngu_hanh": "can_chu_dong",
     "cuoc_doi": "can_bang",
     "su_nghiep": "can_bang",
     "tien_bac": "can_chu_dong",
     "tinh_cam": "can_chu_dong",
-    "gia_dinh": "can_bang",
-    "hoc_tap": "can_bang",
+    "gia_dinh": "can_chu_dong",
+    "hoc_tap": "can_chu_dong",
     "suc_khoe": "can_chu_dong",
     "quan_he": "can_chu_dong",
     "nam_nay": "can_bang",
-    "loi_khuyen": "can_bang"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_bang",
@@ -210,6 +276,18 @@
    ],
    "hien_tai": [
     5
+   ],
+   "van_han_nam": [
+    "thuan",
+    "can_bang",
+    "can_chu_dong",
+    "can_chu_dong",
+    "can_chu_dong",
+    "can_bang",
+    "thuan",
+    "can_chu_dong",
+    "thuan",
+    "thuan"
    ]
   },
   {
@@ -221,7 +299,7 @@
    "cach": "that_sat",
    "muc": {
     "tong_quan": "can_bang",
-    "ngu_hanh": "thuan",
+    "ngu_hanh": "can_bang",
     "cuoc_doi": "thuan",
     "su_nghiep": "thuan",
     "tien_bac": "can_chu_dong",
@@ -231,7 +309,8 @@
     "suc_khoe": "can_bang",
     "quan_he": "can_bang",
     "nam_nay": "thuan",
-    "loi_khuyen": "can_bang"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_bang",
@@ -245,6 +324,18 @@
    ],
    "hien_tai": [
     3
+   ],
+   "van_han_nam": [
+    "can_bang",
+    "can_bang",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "can_bang",
+    "can_bang",
+    "thuan",
+    "thuan"
    ]
   },
   {
@@ -255,18 +346,19 @@
    "than": "yeu",
    "cach": "kien_loc",
    "muc": {
-    "tong_quan": "thuan",
+    "tong_quan": "can_bang",
     "ngu_hanh": "can_bang",
     "cuoc_doi": "can_bang",
     "su_nghiep": "can_bang",
     "tien_bac": "can_bang",
     "tinh_cam": "can_bang",
-    "gia_dinh": "can_bang",
-    "hoc_tap": "can_bang",
+    "gia_dinh": "can_chu_dong",
+    "hoc_tap": "can_chu_dong",
     "suc_khoe": "can_bang",
-    "quan_he": "can_bang",
+    "quan_he": "thuan",
     "nam_nay": "can_bang",
-    "loi_khuyen": "thuan"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_bang",
@@ -280,6 +372,18 @@
    ],
    "hien_tai": [
     0
+   ],
+   "van_han_nam": [
+    "can_bang",
+    "can_bang",
+    "can_bang",
+    "can_bang",
+    "can_bang",
+    "thuan",
+    "thuan",
+    "can_bang",
+    "can_bang",
+    "can_bang"
    ]
   },
   {
@@ -290,18 +394,19 @@
    "than": "yeu",
    "cach": "thien_an",
    "muc": {
-    "tong_quan": "can_bang",
-    "ngu_hanh": "can_bang",
+    "tong_quan": "can_chu_dong",
+    "ngu_hanh": "thuan",
     "cuoc_doi": "can_bang",
     "su_nghiep": "can_bang",
     "tien_bac": "thuan",
-    "tinh_cam": "can_bang",
+    "tinh_cam": "thuan",
     "gia_dinh": "can_bang",
     "hoc_tap": "can_bang",
     "suc_khoe": "thuan",
     "quan_he": "can_chu_dong",
     "nam_nay": "can_bang",
-    "loi_khuyen": "can_bang"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "thuan",
@@ -315,6 +420,18 @@
    ],
    "hien_tai": [
     4
+   ],
+   "van_han_nam": [
+    "thuan",
+    "thuan",
+    "can_chu_dong",
+    "can_chu_dong",
+    "thuan",
+    "can_bang",
+    "can_bang",
+    "can_bang",
+    "can_bang",
+    "can_bang"
    ]
   },
   {
@@ -326,17 +443,18 @@
    "cach": "chinh_quan",
    "muc": {
     "tong_quan": "thuan",
-    "ngu_hanh": "thuan",
+    "ngu_hanh": "can_bang",
     "cuoc_doi": "can_chu_dong",
     "su_nghiep": "thuan",
     "tien_bac": "can_bang",
     "tinh_cam": "thuan",
     "gia_dinh": "can_chu_dong",
-    "hoc_tap": "can_bang",
+    "hoc_tap": "can_chu_dong",
     "suc_khoe": "can_bang",
     "quan_he": "thuan",
     "nam_nay": "can_chu_dong",
-    "loi_khuyen": "thuan"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_bang",
@@ -350,6 +468,18 @@
    ],
    "hien_tai": [
     5
+   ],
+   "van_han_nam": [
+    "thuan",
+    "thuan",
+    "can_chu_dong",
+    "can_chu_dong",
+    "can_bang",
+    "can_bang",
+    "can_bang",
+    "thuan",
+    "can_chu_dong",
+    "can_chu_dong"
    ]
   },
   {
@@ -360,7 +490,7 @@
    "than": "can_bang",
    "cach": "chinh_an",
    "muc": {
-    "tong_quan": "can_bang",
+    "tong_quan": "can_chu_dong",
     "ngu_hanh": "can_bang",
     "cuoc_doi": "thuan",
     "su_nghiep": "can_chu_dong",
@@ -371,7 +501,8 @@
     "suc_khoe": "can_bang",
     "quan_he": "can_chu_dong",
     "nam_nay": "thuan",
-    "loi_khuyen": "can_bang"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_chu_dong",
@@ -385,6 +516,18 @@
    ],
    "hien_tai": [
     1
+   ],
+   "van_han_nam": [
+    "can_chu_dong",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "can_bang",
+    "can_bang",
+    "thuan",
+    "can_bang",
+    "can_bang"
    ]
   },
   {
@@ -401,12 +544,13 @@
     "su_nghiep": "can_chu_dong",
     "tien_bac": "can_bang",
     "tinh_cam": "can_chu_dong",
-    "gia_dinh": "can_bang",
-    "hoc_tap": "can_bang",
+    "gia_dinh": "can_chu_dong",
+    "hoc_tap": "can_chu_dong",
     "suc_khoe": "can_bang",
     "quan_he": "can_bang",
     "nam_nay": "thuan",
-    "loi_khuyen": "can_bang"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "thuan",
@@ -420,6 +564,18 @@
    ],
    "hien_tai": [
     6
+   ],
+   "van_han_nam": [
+    "thuan",
+    "can_bang",
+    "can_chu_dong",
+    "can_chu_dong",
+    "can_chu_dong",
+    "thuan",
+    "thuan",
+    "can_bang",
+    "thuan",
+    "thuan"
    ]
   },
   {
@@ -441,7 +597,8 @@
     "suc_khoe": "can_bang",
     "quan_he": "can_chu_dong",
     "nam_nay": "thuan",
-    "loi_khuyen": "can_bang"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "thuan",
@@ -455,6 +612,18 @@
    ],
    "hien_tai": [
     6
+   ],
+   "van_han_nam": [
+    "can_chu_dong",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "can_bang",
+    "can_bang",
+    "can_bang",
+    "can_chu_dong",
+    "can_chu_dong"
    ]
   },
   {
@@ -466,7 +635,7 @@
    "cach": "thien_an",
    "muc": {
     "tong_quan": "can_bang",
-    "ngu_hanh": "can_bang",
+    "ngu_hanh": "can_chu_dong",
     "cuoc_doi": "thuan",
     "su_nghiep": "can_bang",
     "tien_bac": "can_bang",
@@ -474,9 +643,10 @@
     "gia_dinh": "can_bang",
     "hoc_tap": "can_bang",
     "suc_khoe": "can_bang",
-    "quan_he": "can_bang",
+    "quan_he": "thuan",
     "nam_nay": "thuan",
-    "loi_khuyen": "can_bang"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_chu_dong",
@@ -490,6 +660,18 @@
    ],
    "hien_tai": [
     6
+   ],
+   "van_han_nam": [
+    "can_chu_dong",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "thuan",
+    "can_chu_dong",
+    "can_chu_dong"
    ]
   },
   {
@@ -500,7 +682,7 @@
    "than": "yeu",
    "cach": "chinh_tai",
    "muc": {
-    "tong_quan": "can_bang",
+    "tong_quan": "can_chu_dong",
     "ngu_hanh": "can_bang",
     "cuoc_doi": "can_chu_dong",
     "su_nghiep": "can_bang",
@@ -509,9 +691,10 @@
     "gia_dinh": "can_bang",
     "hoc_tap": "thuan",
     "suc_khoe": "can_bang",
-    "quan_he": "can_bang",
+    "quan_he": "thuan",
     "nam_nay": "can_chu_dong",
-    "loi_khuyen": "can_bang"
+    "van_han": null,
+    "loi_khuyen": null
    },
    "dai_van": [
     "can_chu_dong",
@@ -523,7 +706,19 @@
     "can_chu_dong",
     "can_bang"
    ],
-   "hien_tai": []
+   "hien_tai": [],
+   "van_han_nam": [
+    "can_chu_dong",
+    "can_chu_dong",
+    "can_chu_dong",
+    "can_chu_dong",
+    "can_chu_dong",
+    "thuan",
+    "thuan",
+    "can_bang",
+    "can_bang",
+    "can_bang"
+   ]
   }
  ]
 }

@@ -3,7 +3,8 @@
 // docs/LUAN-GIAI-DOI-SONG.md 2.3 + 6). Bát tự thêm thanh sức tự thân, biểu đồ ngũ hành, dải đại vận hai cách (BieuDoBatTu).
 // Component THUẦN: nhận báo cáo `bc`, không gọi engine — dùng cho bài vừa tải (LuanGiaiToanBo) và bài đã lưu
 // (/ban-than/bai-da-luu). Thứ tự: Điều quan trọng nhất → mục lục → từng chương (mức · tóm tắt · hộp · thân bài · câu
-// tự soi · "Vì sao nói vậy"). Chương "cuoc_doi" có dòng thời gian 12 đại hạn. Chương khoá (SAO-2) chỉ nằm trong mục
+// tự soi · "Vì sao nói vậy"). Chương "cuoc_doi" có dòng thời gian 12 đại hạn; chương "van_han" (VH-1) có dòng 10 năm
+// (DongMuoiNam). Chương Lời khuyên / Vận hạn không mang chip mức. Chương khoá (SAO-2) chỉ nằm trong mục
 // lục; phần mời mở do nơi gọi đưa vào (`phanKhoa`).
 import { useEffect, useRef, type ReactNode } from "react";
 import { LockKeyhole, MapPin } from "lucide-react";
@@ -12,6 +13,7 @@ import { PHAI_DOI_SONG } from "@/lib/kiem-chung";
 import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 import { BieuDoNguHanh, DaiVanHaiCach, ThanhThan } from "./BieuDoBatTu";
+import { DongMuoiNam } from "./DongMuoiNam";
 import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
 import { maMauBaoCao, NHAN_MUC, type BaoCaoDoiSong, type ChuongDoiSongMo, type MocDaiHan, type Muc } from "./kieu";
 
@@ -100,6 +102,7 @@ function Chuong({ c, so, goc, thoiGian }: { c: ChuongDoiSongMo; so: number; goc:
       {c.bieu_do && <BieuDoNguHanh bd={c.bieu_do} haiCach={c.hai_cach} />}
       {thoiGian && thoiGian.length > 0 && <DaiVanHaiCach ds={thoiGian} />}
       {thoiGian && thoiGian.length > 0 && <DongThoiGian ds={thoiGian} />}
+      {c.dong_nam && c.dong_nam.length > 0 && <DongMuoiNam ds={c.dong_nam} thang={c.thang_toi} />}
       {hop.length > 0 && (
         <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
           {hop.map((h, k) => <HopNoiBat key={`${h.ma_mau ?? h.tieu_de}-${k}`} hop={h} thuatNgu={c.thuat_ngu} />)}

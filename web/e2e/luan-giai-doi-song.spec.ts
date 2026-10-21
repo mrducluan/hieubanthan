@@ -1,5 +1,5 @@
 // LG-ĐS (docs/LUAN-GIAI-DOI-SONG.md mục 2.3, 3, 5) — giao diện Luận giải Tử vi "đời sống": Điều quan trọng nhất, mục
-// lục, chip mức, dòng thời gian 12 đại hạn, "Vì sao nói vậy", kiểm chứng (POST /api/kiem-chung + "x% thấy đúng" khi
+// lục (13 chương), chip mức ("Cần lưu ý" — VH-1), dòng thời gian 12 đại hạn, "Vì sao nói vậy", kiểm chứng (POST /api/kiem-chung + "x% thấy đúng" khi
 // ≥ 30 phiếu), lưu bài vào tài khoản + trang bài đã lưu, xác nhận ý định hỏi đáp, điện thoại 360px, chương khoá SAO-2.
 // Báo cáo là fixture SINH TỪ ENGINE THẬT (e2e/fixtures/luan-giai-doi-song.json, `_ghi_chu` nói rõ 3 chỗ sửa tay); mọi
 // route máy chủ mới giả bằng page.route. Mã mẫu / chữ lấy từ fixture, không viết cứng — engine đổi lời thì sinh lại.
@@ -47,18 +47,21 @@ test("báo cáo đời sống: cốt lõi, mục lục, chip mức, dòng thời
   const y = async (l: ReturnType<Page["getByTestId"]>) => (await l.boundingBox())!.y;
   expect(await y(cot)).toBeLessThan(await y(page.getByTestId("lg-muc-luc")));
 
-  // Mục lục: đủ 12 chương, nhảy neo.
+  // Mục lục: đủ 13 chương (VH-1 thêm "Vận hạn & điều nên tránh"), nhảy neo.
   const ml = page.getByTestId("lg-muc-luc").getByRole("link");
-  await expect(ml).toHaveCount(12);
+  await expect(ml).toHaveCount(13);
   await ml.nth(2).click();
   await expect(page).toHaveURL(/#lg-su_nghiep$/);
 
   // Chip mức đời thường, không có mức "xấu".
   const sn = page.getByTestId("lg-chuong-su_nghiep");
-  const NHAN: Record<string, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần chủ động" };
+  const NHAN: Record<string, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần lưu ý" };
   for (const c of BC.chuong) {
-    await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc").first()).toHaveText(NHAN[c.muc]!);
+    // VH-1: Lời khuyên (tổng hợp) và Vận hạn (dòng 10 năm) không mang chip mức riêng.
+    if (!c.muc) await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc")).toHaveCount(0);
+    else await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc").first()).toHaveText(NHAN[c.muc]!);
   }
+  expect(BC.chuong.filter((c) => !c.muc).map((c) => c.ma)).toEqual(["van_han", "loi_khuyen"]);
   await expect(sn.getByTestId("tom-tat")).toContainText(chuong("su_nghiep").tom_tat);
   await expect(sn.getByTestId("cau-tu-soi")).toContainText(chuong("su_nghiep").cau_tu_soi);
   // Hộp đủ 5 loại nhãn (trong cả bài); hộp `dang_xem_lai` không hiện.
@@ -161,7 +164,7 @@ test("lưu bài: nút khi đã đăng nhập, ô tự lưu không tích sẵn �
   await expect(khoi.getByTestId("da-luu")).toContainText("Đã lưu");
   const body = goi.luu![0]!.postDataJSON();
   expect(body).toMatchObject({ mo_dun: "tuvi", tieu_de: `Luận giải Tử vi — ${HO_SO_MAU.ho_ten}`, noi_dung: { phien_ban: "doi_song_1" } });
-  expect(body.noi_dung.chuong).toHaveLength(12);
+  expect(body.noi_dung.chuong).toHaveLength(13);
   expect(body.noi_dung.phi).toBeUndefined();
   await o.check();
   await expect.poll(() => goi.tuyChon!.filter((r) => r.method() === "POST").at(-1)?.postDataJSON()).toEqual({ tu_luu_luan_giai: true });
@@ -249,13 +252,14 @@ test("SAO-2 với báo cáo đời sống: chương 1 đọc được, chương 
   await expect(bc.getByTestId("dong-thoi-gian")).toHaveCount(0);
   await expect(bc.getByText("Bạn đang ở đây")).toHaveCount(0);
   await expect(bc.getByTestId("lg-chuong-tong_quan")).toContainText(dau!.doan[0]!);
-  await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(11);
-  await expect(page.getByTestId("lg-phan-khoa")).toContainText("Đã đọc 1/12 chương");
+  await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(12);
+  await expect(page.getByTestId("lg-phan-khoa")).toContainText("Đã đọc 1/13 chương");
   await expect(page.getByTestId("lg-phan-khoa")).toContainText(sau[0]!.moi_xem.cau_hoi);
   await expect(page.getByTestId("lg-mo-khoa")).toHaveText(/Mở toàn bộ · 10 Sao/);
-  await expect(page.getByTestId("lg-muc-luc").getByLabel("đang khoá")).toHaveCount(11);
+  await expect(page.getByTestId("lg-muc-luc").getByLabel("đang khoá")).toHaveCount(12);
   await expect(page.getByTestId("lg-muc-luc").getByRole("link").nth(1)).toHaveAttribute("href", "#lg-khoa");
-  await expect(bc).not.toContainText(sau[1]!.doan[0]!);
+  // Đoạn thân bài (không phải câu đầu — câu đầu chính là "điểm nhấn" của lời mời) không lộ.
+  await expect(bc).not.toContainText(sau.flatMap((c) => c.doan.slice(1))[0]!);
   await expect(page.getByTestId("luu-bai-luan")).toHaveCount(0);
 });
 
@@ -270,7 +274,7 @@ test("SAO-2: cot_loi rỗng (chương 1 không có hộp nổi bật) → không
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc.getByTestId("lg-chuong-tong_quan")).toBeVisible();
   await expect(bc.getByTestId("lg-cot-loi")).toHaveCount(0);
-  await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(11);
+  await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(12);
   await expect(page.getByTestId("lg-phan-khoa")).toContainText("tặng 10 Sao — đủ mở báo cáo này");
 });
 

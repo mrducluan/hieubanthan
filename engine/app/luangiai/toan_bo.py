@@ -16,10 +16,10 @@ from app.narrative import hoi_van
 
 PHI = {"sao": 0, "ly_do": "mien_phi_thu_nghiem"}
 
-# LG-ĐS (2026-10-21): Tử vi dùng bản "đời sống" (`luangiai.tuvi_doi_song`) — 12 chương, chấm cung, hộp nổi bật.
+# LG-ĐS (2026-10-21): Tử vi dùng bản "đời sống" (`luangiai.tuvi_doi_song`) — 13 chương (VH-1 thêm Vận hạn), chấm cung, hộp nổi bật.
 # Giữ dạng (ma, tiêu đề, câu hỏi) để nơi khác đọc danh sách chương như cũ.
 CHUONG_TUVI = [(ma, tieu_de, cau) for ma, tieu_de, cau, _ in ds_tuvi.CHUONG]
-# BT-ĐS (2026-10-21): Bát tự cùng khung "đời sống" (`luangiai.battu_doi_song`) — 12 chương, chấm mảng, hộp nổi bật.
+# BT-ĐS (2026-10-21): Bát tự cùng khung "đời sống" (`luangiai.battu_doi_song`) — 13 chương (VH-1 thêm Vận hạn), chấm mảng, hộp nổi bật.
 CHUONG_BATTU = list(ds_battu.CHUONG)
 
 
@@ -32,6 +32,7 @@ CAU_HOI_MO = {
     ("tuvi", "quan_he"): "Kiểu người nào giúp bạn đi xa hơn, và bạn hay mất sức vì ai, vì việc gì bên ngoài?",
     ("tuvi", "nha_cua"): "Bạn cần một nơi ở thế nào để thấy yên, và chuyện nhà cửa nên tính theo nhịp nào?",
     ("tuvi", "nam_nay"): "Năm nay nên dồn sức vào đâu, và tháng nào trong 3 tháng tới hợp để bắt đầu việc mới?",
+    ("tuvi", "van_han"): "Những năm nào nên đi chậm lại, và chậm ở chuyện gì?",
     ("tuvi", "loi_khuyen"): "Ba điểm mạnh nào bạn nên dùng nhiều hơn, và ba việc nhỏ nào nên bắt đầu ngay?",
     ("tuvi", "su_nghiep"): "Môi trường và vai trò nào giúp bạn bứt lên, kiểu việc nào khiến bạn mau cạn năng lượng?",
     ("tuvi", "tien_bac"): "Bạn kiếm tiền hợp nhất theo cách nào, và thói quen chi tiêu nào đang âm thầm làm hao hụt?",
@@ -49,6 +50,7 @@ CAU_HOI_MO = {
     ("battu", "suc_khoe"): "Nhịp sức của bạn lệch về phía nào, và nếp nhỏ nào giúp bạn giữ sức lâu?",
     ("battu", "quan_he"): "Người ngang hàng giúp bạn hay làm bạn mệt, và ai là người giúp đúng lúc?",
     ("battu", "nam_nay"): "Năm nay nên dồn sức vào đâu, và tháng nào sắp tới hợp để bắt đầu việc mới?",
+    ("battu", "van_han"): "Những năm nào nên đi chậm lại, và chậm ở chuyện gì? Tháng nào hợp để bắt đầu việc mới?",
     ("battu", "loi_khuyen"): "Ba điểm mạnh nào bạn nên dùng nhiều hơn, và việc nhỏ nào nên bắt đầu ngay?",
     ("thanso", "tong_quan"): "Bộ số của bạn hiếm cỡ nào, và con số nào đậm nhất ở bạn?",
     ("thanso", "nghich_ly"): "Vì sao người khác đôi khi hiểu bạn khác với con người thật bên trong — và nói sao cho họ hiểu?",
@@ -78,7 +80,7 @@ def _moi_xem(mo_dun: str, ma: str, doan: list[str]) -> dict:
 
 def tuvi(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
          ca_nhan: dict | None = None) -> dict:
-    """LG-ĐS: báo cáo `doi_song_1` (cot_loi, thoi_gian_bieu, 12 chương có hop/doan/can_cu) + các trường cũ
+    """LG-ĐS: báo cáo `doi_song_1` (cot_loi, thoi_gian_bieu, 13 chương có hop/doan/can_cu) + các trường cũ
     (mo_dun, chuong[].ma/tieu_de/cau_hoi/doan/moi_xem, ket, trang_thai, phi) cho SAO-2 và tầng diễn đạt."""
     bc = ds_tuvi.lap(sinh, ngay_xem, trong_so=trong_so, ca_nhan=ca_nhan)
     chuong = [{**c, "moi_xem": _moi_xem("tuvi", c["ma"], c["doan"])} for c in bc["chuong"]]
@@ -88,7 +90,7 @@ def tuvi(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = No
 
 def battu(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
           ca_nhan: dict | None = None) -> dict:
-    """BT-ĐS: báo cáo `doi_song_1` cùng khung Tử vi (cot_loi, thoi_gian_bieu đại vận, 12 chương có hop/doan/can_cu) +
+    """BT-ĐS: báo cáo `doi_song_1` cùng khung Tử vi (cot_loi, thoi_gian_bieu đại vận, 13 chương có hop/doan/can_cu) +
     các trường cũ (mo_dun, chuong[].ma/tieu_de/cau_hoi/doan/moi_xem, ket, trang_thai, phi) cho SAO-2 và diễn đạt."""
     bc = ds_battu.lap(sinh, ngay_xem, trong_so=trong_so, ca_nhan=ca_nhan)
     chuong = [{**c, "moi_xem": _moi_xem("battu", c["ma"], c["doan"])} for c in bc["chuong"]]

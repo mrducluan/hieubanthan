@@ -23,7 +23,8 @@ from app.narrative import hoi_van
 SINH = {"ngay": dt.date(1990, 5, 15), "ti": 4, "gioi_tinh": "nam"}     # giờ Thìn — lá ví dụ trong doc
 XEM = dt.date(2026, 10, 21)
 THU_TU = ["tong_quan", "cuoc_doi", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "suc_khoe", "quan_he", "nha_cua",
-          "duong_bay", "nam_nay", "loi_khuyen"]
+          "duong_bay", "nam_nay", "van_han", "loi_khuyen"]
+KHONG_MUC = {"van_han", "loi_khuyen"}      # VH-1: chương tổng hợp / dòng 10 năm không mang chip mức riêng
 LOAI_HOP = {"cot_loi", "diem_manh", "luu_y", "loi_khuyen", "thoi_diem"}
 MUC = {"thuan", "can_bang", "can_chu_dong"}
 # thuật ngữ: độ sáng, tên tứ hoá ("tiêu hoá", "văn hoá" là chữ thường, không tính), tam phương
@@ -72,7 +73,10 @@ def test_hop_dong(bc):
         for k in ("ma", "tieu_de", "cau_hoi", "muc", "nhan_muc", "tom_tat", "hop", "doan", "can_cu", "cau_tu_soi",
                   "moi_xem"):
             assert k in c, (c["ma"], k)
-        assert c["muc"] in MUC and c["nhan_muc"] == kb.nhan_muc(c["muc"])
+        if c["ma"] in KHONG_MUC:
+            assert c["muc"] is None and c["nhan_muc"] is None
+        else:
+            assert c["muc"] in MUC and c["nhan_muc"] == kb.nhan_muc(c["muc"])
         assert 1 <= len(c["doan"]) <= 4 and all(isinstance(d, str) and d for d in c["doan"])
         assert len(c["hop"]) <= 6
         if c["ma"] not in ("nha_cua",):
@@ -339,7 +343,7 @@ def test_golden_60_la(ca):
     ma = [h["ma_mau"] for c in b["chuong"] for h in c["hop"]]
     assert len(ma) == len(set(ma)) and all(ds.MA_MAU_RE.match(m) for m in ma)
     for c in b["chuong"]:
-        assert c["doan"] and c["muc"] in MUC and len(c["hop"]) <= 6
+        assert c["doan"] and (c["muc"] in MUC or c["ma"] in KHONG_MUC) and len(c["hop"]) <= 6
         for h in c["hop"]:
             assert not THUAT_NGU.search(h["noi_dung"]), (c["ma"], h["noi_dung"])
             if h["loai"] == "luu_y":

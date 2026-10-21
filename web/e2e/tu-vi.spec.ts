@@ -76,7 +76,7 @@ test("luận giải toàn bộ theo chương (miễn phí thử nghiệm)", asyn
   await page.goto("/tu-vi");
   await page.getByRole("button", { name: "Xem luận giải" }).click();
   const bc = page.getByTestId("luan-giai-toan-bo");
-  // LG-ĐS: engine trả bản "đời sống" (docs/LUAN-GIAI-DOI-SONG.md) — 12 chương, có Điều quan trọng nhất + dòng thời gian.
+  // LG-ĐS: engine trả bản "đời sống" (docs/LUAN-GIAI-DOI-SONG.md) — 13 chương (VH-1: + Vận hạn), có Điều quan trọng nhất + dòng thời gian.
   await expect(bc).toHaveAttribute("data-phien-ban", "doi_song_1");
   await expect(bc).toContainText("Con người bạn");
   await expect(bc).toContainText("Năm nay & 3 tháng tới");

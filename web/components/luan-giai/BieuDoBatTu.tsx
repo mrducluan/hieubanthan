@@ -117,7 +117,7 @@ export function DaiVanHaiCach({ ds }: { ds: MocDaiHan[] }) {
       <figcaption className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.7rem] text-fg-faint">
         <span className="inline-flex items-center gap-1"><span className="inline-block size-2.5 rounded-full bg-moon" aria-hidden /> cách 1 — cân sức</span>
         <span className="inline-flex items-center gap-1"><span className="inline-block size-2.5 rounded-full border-2 border-moon" aria-hidden /> cách 2 — theo tháng sinh</span>
-        <span>chấm cao = thuận, giữa = cân bằng, thấp = cần chủ động · ≠ hai cách khác nhau</span>
+        <span>chấm cao = thuận, giữa = cân bằng, thấp = cần lưu ý · ≠ hai cách khác nhau</span>
       </figcaption>
     </figure>
   );

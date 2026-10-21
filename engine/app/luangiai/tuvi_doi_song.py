@@ -8,8 +8,10 @@ Chấm cung (mục 2.1): chính tinh theo độ sáng Nam phái (Miếu/Vượng
 trong cung (Lộc +2, Quyền +1, Khoa +1, Kỵ −2) + lục cát (Tả, Hữu, Xương, Khúc, Khôi, Việt, Lộc Tồn: +1) + lục sát
 (Kình, Đà, Hoả, Linh, Không, Kiếp: −1) + NỬA tổng điểm gốc của cung xung chiếu và hai cung tam hợp (cắt về 0).
 Tuần/Triệt → cờ `cham`, không cộng trừ. Cung vô chính diệu mượn chính tinh cung xung chiếu (khi đó phần chính tinh
-của cung xung không tính lại vào nửa điểm, tránh đếm hai lần). Mức: ≥ 3 `thuan`, ≤ −2 `can_chu_dong`, còn lại
-`can_bang`. Điểm không trả ra cho người dùng.
+của cung xung không tính lại vào nửa điểm, tránh đếm hai lần). Mức: ≥ 4 `thuan` (VH-1: trước là 3 — 55% cung "Thuận
+lợi" trên 60 lá golden), ≤ −2 `can_chu_dong` (nhãn "Cần lưu ý"), còn lại `can_bang`. Đường bay theo thang riêng
+(`NGUONG_BAY`); Lời khuyên và Vận hạn không mang mức. Điểm không trả ra cho người dùng. Chương "Vận hạn & điều nên tránh"
+(VH-1): luật điểm năm ở chú thích trên `dong_muoi_nam`.
 
 Tự học (mục 3 — ranh giới): `trong_so` (tỉ lệ công khai theo `ma_mau`) chỉ gắn số / hạ hộp có tỉ lệ đúng thấp,
 `ca_nhan` chỉ xếp lại hộp người này đã bấm "chưa đúng". Không sinh câu mới, không sửa KB.
@@ -22,10 +24,12 @@ import re
 from app import config
 from app.calc import lunar, tuvi_an_sao as az
 from app.calc import tuvi_luu_nguyet as ln
+from app.calc import tuvi_phi_hoa as phi_calc
 from app.kb import tuvi_doi_song_kb as kb
 from app.kb import tuvi_kb
 from app.luangiai import tuvi_nhip_3_thang as nhip3
 from app.luangiai import tuvi_phi_hoa as phl
+from app.luangiai import doi_song_chung as dsc
 from app.luangiai.doi_song_chung import (  # noqa: F401 — tách dùng chung với Bát tự (BT-ĐS), giữ tên cũ
     MA_MAU_RE, TOI_DA_HOP, _ap_hoc, _cac_cau, _cau_dau, _hoa_dau, _ma, _sach, _sap, _tieu_de, slug, trong_so_xem_lai)
 
@@ -37,7 +41,10 @@ LUC_CAT = ("Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Kh�
 LUC_SAT = ("Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp")
 DAO_HOA = ("Hàm Trì", "Hồng Loan", "Thiên Hỷ", "Thiên Diêu")
 TUAN_TRIET = {"Tuần Không": "Tuần", "Triệt Lộ": "Triệt"}
-NGUONG_THUAN, NGUONG_CHU_DONG = 3, -2
+# VH-1 (2026-10-21): ngưỡng Thuận lợi 3 → 4 — đo 60 lá golden: ngưỡng 3 cho 55% cung (và 67% chương Công việc)
+# "Thuận lợi", nhãn ai cũng nhận thì không còn nghĩa. Bảng trước/sau: docs/LUAN-GIAI-DOI-SONG.md mục 8.
+NGUONG_THUAN, NGUONG_CHU_DONG = 4, -2
+NGUONG_BAY = (1, -3)
 CUNG_UU_TIEN = ("Mệnh", "Quan Lộc", "Tài Bạch", "Phu Thê")
 
 # (ma, tiêu đề, câu hỏi chuẩn — giữ cho tương thích, các cung đọc)
@@ -55,6 +62,7 @@ CHUONG = [
     ("nha_cua", "Nhà cửa, nơi ở", "Chuyện nhà cửa của tôi thế nào?", ["Điền Trạch"]),
     ("duong_bay", "Mảng đời nào kéo mảng đời nào", "Mảng đời nào đang tác động lên mảng nào?", []),
     ("nam_nay", "Năm nay & 3 tháng tới", "Năm nay và 3 tháng tới của tôi thế nào?", []),
+    ("van_han", "Vận hạn & điều nên tránh", "Mười năm tới năm nào nên đi chậm, và chậm ở chuyện gì?", []),
     ("loi_khuyen", "Lời khuyên dành cho bạn", "Tôi nên làm gì từ đây?", []),
 ]
 CHUONG_COT_LOI = ("tong_quan", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "quan_he", "nha_cua", "duong_bay")
@@ -91,7 +99,7 @@ _SK_MAC_DINH = "Nên giữ giờ ngủ, ăn uống đều, vận động nhẹ m
 _THU_TU_LOP = ("dai_han", "luu_nien", "tieu_han")
 _MUC_THANG = {"thuan": "thuan", "binh": "can_bang", "can_than": "can_chu_dong"}
 _NHAN_LOP = {"thuan": "mảng này đang thuận", "can_bang": "mảng này ở mức cân bằng",
-             "can_chu_dong": "mảng này cần bạn chủ động hơn"}
+             "can_chu_dong": "mảng này cần lưu ý hơn"}
 # Hướng xử lý dự phòng trong mã (KB thiếu ô) — `scripts/do_chung_chung_tuvi.py` đếm là "hướng chung".
 HUONG_DU_PHONG = (_HUONG_MAC_DINH, _HUONG_TT, _SK_MAC_DINH, *(v[1] for v in _HOA_MAC_DINH.values()),
                   *(v[1] for v in _NHOM_MAC_DINH.values()))
@@ -290,7 +298,7 @@ def _chuong(ma: str, muc: str, tom_tat: str, hop: list[dict], doan: list[str], c
             sach.append(" ".join(giu))
     if not sach or not sach[0].startswith(tom_tat):
         sach.insert(0, tom_tat)
-    return {"ma": ma, "tieu_de": t[1], "cau_hoi": t[2], "muc": muc, "nhan_muc": kb.nhan_muc(muc),
+    return {"ma": ma, "tieu_de": t[1], "cau_hoi": t[2], "muc": muc, "nhan_muc": kb.nhan_muc(muc) if muc else None,
             "tom_tat": tom_tat, "hop": hop, "doan": sach[:4], "can_cu": list(dict.fromkeys(c for c in can_cu if c)),
             "cau_tu_soi": cau_tu_soi, **them}
 
@@ -363,7 +371,7 @@ def ly_do(x: dict) -> list[tuple[str, int]]:
 
 
 def _ly_do_hop_muc(x: dict) -> list[str]:
-    """Lý do xếp theo độ hợp với mức của cung (thuận: đỡ trước; cần chủ động: vướng trước; cân bằng: trung tính)."""
+    """Lý do xếp theo độ hợp với mức của cung (thuận: đỡ trước; cần lưu ý: vướng trước; cân bằng: trung tính)."""
     ld = ly_do(x)
     tot = [a for a, d in ld if d > 0]
     vuong = [a for a, d in ld if d < 0]
@@ -372,7 +380,7 @@ def _ly_do_hop_muc(x: dict) -> list[str]:
 
 
 def ly_do_cau(x: dict, toi_da: int = 2) -> str:
-    """Nối 1–2 lý do hợp với mức: thuận → điều đỡ trước; cần chủ động → điều vướng trước; cân bằng → một đỡ, một
+    """Nối 1–2 lý do hợp với mức: thuận → điều đỡ trước; cần lưu ý → điều vướng trước; cân bằng → một đỡ, một
     vướng ("…, nhưng …")."""
     ld = ly_do(x)
     tot = [a for a, d in ld if d > 0]
@@ -533,7 +541,7 @@ def _chuong_suc_khoe(cc: dict, hoc: tuple) -> dict:
         ma = _ma("ds", "suc_khoe", slug(s["ten"]) + ("" if noi == "Tật Ách" else "+menh"),
                  "muon" if s["muon"] else "sao", "vap")
         w = 2.0 if noi == "Tật Ách" else 1.0
-        # Sao sáng ở cung không cần chủ động → đây là lời chăm sóc phòng ngừa, không phải "lưu ý" (tránh chương
+        # Sao sáng ở cung không cần lưu ý → đây là lời chăm sóc phòng ngừa, không phải "lưu ý" (tránh chương
         # "Thuận lợi" mà toàn hộp lưu ý). Mã giữ nguyên để phiếu kiểm chứng không đổi.
         if s["do_sang"] == "Hãm" or cc[noi]["muc"] == "can_chu_dong":
             cand.append(_hop("luu_y", tieu, nd, [cu], ma, w, huong=lk))
@@ -578,8 +586,8 @@ def thoi_gian_bieu(ls: dict, cc: dict, tuoi_mu: int | None, nam_am_sinh: int) ->
         chu_de = k.get("chu_de") or tuvi_kb.chu_de_han_ngan(c["ten"]) or _ten(c["ten"])
         muc = cc[c["ten"]]["muc"]
         mot = {"thuan": "Giai đoạn thuận", "can_bang": "Giai đoạn cân bằng",
-               "can_chu_dong": "Giai đoạn cần chủ động"}[muc]
-        # Việc nên làm theo MỨC của giai đoạn (thuận: tận dụng; cần chủ động: phòng trước) + một lý do cụ thể nhất của
+               "can_chu_dong": "Giai đoạn cần lưu ý"}[muc]
+        # Việc nên làm theo MỨC của giai đoạn (thuận: tận dụng; cần lưu ý: phòng trước) + một lý do cụ thể nhất của
         # cung. Giai đoạn bắt đầu ≤ TUOI_NHO tuổi dùng lời tuổi đi học (không nói cưới xin, nhà đất với một đứa trẻ).
         nen = ((k.get("tuoi_nho") if tu <= TUOI_NHO else None) or k.get(muc) or k.get("nen_lam")
                or "Nên dồn sức cho chủ đề này.")
@@ -738,6 +746,202 @@ def _chuong_nam_nay(sinh: dict, ls: dict, cc: dict, vh: dict, ngay_xem: dt.date,
                    "Việc nào năm nay đáng để bạn dồn sức nhất?", tuoi_mu=vh["tuoi_mu"])
 
 
+# ---- VH-1: vận hạn 10 năm & điều nên tránh (`docs/LUAN-GIAI-DOI-SONG.md` mục 8)
+# Mỗi năm âm lịch (Tết Việt) từ năm đang xem: tứ hoá theo can năm (bảng tứ hoá — `calc.tuvi_phi_hoa.phi_tu_can`, chỉ
+# ĐỌC), cung đại hạn chứa tuổi mụ năm ấy (mức cung đã chấm), cung lưu niên = cung mang chi của năm. Điểm năm:
+#   Kỵ năm nhập cung chính (Mệnh, Tài Bạch, Quan Lộc, Phu Thê, Điền Trạch) −2 (trùng cung Kỵ gốc: −1 nữa) · Kỵ năm ở
+#   cung đối diện, chiếu cung chính −1 · Lộc năm nhập cung chính +2 · song Lộc (Lộc năm gặp Lộc gốc / Lộc Tồn) +1 ·
+#   Kỵ năm / Lộc năm rơi đúng cung đang đi (cung lưu niên hoặc cung đại hạn của năm) −1 / +1 · đại hạn Thuận lợi +1 /
+#   Cần lưu ý −1 (ưu tiên đại hạn > lưu niên > tiểu hạn).
+# Mức: ≥ 2 Thuận lợi · điểm âm mà Kỵ năm chạm một cung chính (nhập / chiếu) → Cần lưu ý · còn lại Cân bằng (đo 60 lá ×
+# 10 năm — bảng ở docs mục 8). Cờ dân gian (năm tuổi, xung tuổi, va tuổi, tam tai — theo chi
+# năm sinh âm lịch) chỉ thêm lời nhắc, KHÔNG đổi mức. Lời "nên tránh / nên làm" theo mảng chịu tác động × tuổi (KB
+# `van_han`); trẻ dưới 18 tuổi dùng lời cho cha mẹ (không vay, bảo lãnh, cưới xin).
+CUNG_VAN_HAN = ("Mệnh", "Tài Bạch", "Quan Lộc", "Phu Thê", "Điền Trạch")
+NGUONG_NAM = (2, 0)          # thuận ≥ 2 · cần lưu ý < 0 (kèm Kỵ chạm cung chính)
+_DIEM_DH = {"thuan": 1, "can_chu_dong": -1}
+
+
+def _loi_vh(loai: str, cung: str | None, gd: str) -> dict:
+    """Lời KB cho (loại tác động, cung, giai đoạn tuổi): ô của cung (nhan, mang; ky_chieu / loc_nhap có luôn y, tranh,
+    lam) đè bởi ô của giai đoạn tuổi (tre / lon, thiếu thì giai đoạn kia). Dưới 18 tuổi: lời cho cha mẹ (`nho`)."""
+    if not cung:
+        return {}
+    if gd == "nho":                          # lời cho cha mẹ, theo mảng của con (sức, tiền tiêu vặt, học, bạn, chỗ ở)
+        nhom = "loc" if loai in ("loc_nhap", "song_loc") else "ky"
+        return {**{k: v for k, v in (kb.van_han_loi("nho", nhom) or {}).items() if v},
+                **{k: v for k, v in (kb.van_han_loi("nho", nhom, cung) or {}).items() if v}}
+    goc = {k: v for k, v in (kb.van_han_loi(loai, cung) or {}).items() if v}
+    tuoi = kb.van_han_loi(loai, cung, gd) or kb.van_han_loi(loai, cung, "lon" if gd == "tre" else "tre") or {}
+    return {**goc, **{k: v for k, v in tuoi.items() if v}}
+
+
+def _thuong_dau(s: str) -> str:
+    return s[:1].lower() + s[1:] if s else s
+
+
+def dong_muoi_nam(ls: dict, cc: dict, nam_am_xem: int, nam_am_sinh: int) -> list[dict]:
+    """Mười năm tới (năm âm lịch Việt), luật ở chú thích trên. Khoá `_…` là nội bộ (hộp ứng viên, mẫu)."""
+    _, chi_sinh = lunar.can_chi_nam(nam_am_sinh)
+    goc = {x["hoa"]: x["cung"] for x in ls["tu_hoa"]}
+    loc_ton = next((c["ten"] for c in ls["cung"] if "Lộc Tồn" in c["phu_tinh"]), None)
+    ra = []
+    for k in range(dsc.SO_NAM_VAN_HAN):
+        nam = nam_am_xem + k
+        can, chi = lunar.can_chi_nam(nam)
+        tuoi = nam - nam_am_sinh + 1
+        gd = dsc.giai_doan_tuoi(tuoi)
+        hoa = {x["hoa"]: x for x in phi_calc.phi_tu_can(can, ls["cung"])}
+        c_ln = next(c["ten"] for c in ls["cung"] if c["chi"] == chi)
+        dh = next((c["ten"] for c in ls["cung"] if c["dai_han"][0] <= tuoi <= c["dai_han"][1]), None)
+        diem, cu, tac, tot = 0, [], None, None
+        ky, loc = hoa["Kỵ"], hoa["Lộc"]
+        if ky["den_cung"] in CUNG_VAN_HAN:
+            diem -= 2
+            tac = ("ky_nhap", ky["den_cung"])
+            cu.append(f"Hoá Kỵ năm ({ky['sao']}) nhập cung {ky['den_cung']} −2")
+            if goc.get("Kỵ") == ky["den_cung"]:
+                diem -= 1
+                cu.append("trùng cung Hoá Kỵ gốc (chồng Kỵ) −1")
+        elif ky["xung_cung"] in CUNG_VAN_HAN:
+            diem -= 1
+            tac = ("ky_chieu", ky["xung_cung"])
+            cu.append(f"Hoá Kỵ năm ({ky['sao']}) ở cung {ky['den_cung']}, chiếu sang {ky['xung_cung']} −1")
+        elif ky["den_cung"]:
+            cu.append(f"Hoá Kỵ năm ({ky['sao']}) ở cung {ky['den_cung']} (ngoài năm cung chính) 0")
+        if loc["den_cung"] in CUNG_VAN_HAN:
+            diem += 2
+            tot = loc["den_cung"]
+            cu.append(f"Hoá Lộc năm ({loc['sao']}) nhập cung {loc['den_cung']} +2")
+        if loc["den_cung"] and loc["den_cung"] in (goc.get("Lộc"), loc_ton):
+            diem += 1
+            tot = tot or loc["den_cung"]
+            cu.append(f"Hoá Lộc năm gặp Lộc gốc / Lộc Tồn ở cung {loc['den_cung']} (song Lộc) +1")
+        dang = {x for x in (c_ln, dh) if x}          # cung đang "đi" của năm: lưu niên + đại hạn
+        if ky["den_cung"] in dang:
+            diem -= 1
+            cu.append(f"Hoá Kỵ năm rơi đúng cung đang đi ({ky['den_cung']}) −1")
+        if loc["den_cung"] in dang:
+            diem += 1
+            cu.append(f"Hoá Lộc năm rơi đúng cung đang đi ({loc['den_cung']}) +1")
+        if dh:
+            m_dh = cc[dh]["muc"]
+            diem += _DIEM_DH.get(m_dh, 0)
+            cu.append(f"Đại hạn cung {dh} ({kb.nhan_muc(m_dh)}) {'+1' if m_dh == 'thuan' else '−1' if m_dh == 'can_chu_dong' else '0'}")
+        # Cần lưu ý = điểm âm VÀ Kỵ năm chạm một cung chính (nhập / chiếu) — luôn gọi được tên mảng chịu tác động.
+        muc = "thuan" if diem >= NGUONG_NAM[0] else "can_chu_dong" if diem < 0 and tac else "can_bang"
+        co = dsc.co_dan_gian(chi_sinh, chi)
+        chu_de = (kb.dai_han(c_ln) or {}).get("chu_de") or _ten(c_ln)
+        nen_tranh = nen_lam = mang = None
+        if muc == "can_chu_dong" and tac:
+            o = _loi_vh(tac[0], tac[1], gd)
+            mang = o.get("mang") or _vat(tac[1])
+            y = o.get("y") or f"{_chu(tac[1])} dễ làm bạn bận lòng hơn thường lệ."
+            nen_tranh, nen_lam = o.get("tranh"), o.get("lam")
+        elif muc == "thuan" and tot:
+            o = _loi_vh("loc_nhap", tot, gd)
+            mang = o.get("mang") or _vat(tot)
+            y = o.get("y") or f"việc thuận dễ đến từ {_vat(tot)}."
+            nen_lam = o.get("lam")
+        else:
+            y = f"nhịp khá đều; việc hay xoay quanh {chu_de}."
+        cu = [f"Năm {nam} {can} {chi} (âm lịch), tuổi mụ {tuoi}: {'; '.join(cu) or 'không có điểm cộng trừ'} → "
+              f"{kb.nhan_muc(muc)}", f"Cung lưu niên năm {nam}: {c_ln}"]
+        if co:
+            cu.append(f"Chi năm sinh {chi_sinh}, chi năm {chi}: " + ", ".join(dsc.NHAN_CO[x] for x in co)
+                      + " (tập quán dân gian, không đổi mức)")
+        ra.append({"nam": nam, "tuoi": tuoi, "muc": muc, "nhan_muc": kb.nhan_muc(muc), "hien_tai": k == 0,
+                   "co": [dsc.co_ra(x, kb.van_han_loi("co", x)) for x in co],
+                   "mang": mang, "y": f"Năm {nam}, {_thuong_dau(_sua_menh(y))}", "nen_tranh": _sua_menh(nen_tranh),
+                   "nen_lam": _sua_menh(nen_lam), "can_cu": cu, "_tac": tac, "_tot": tot, "_gd": gd, "_diem": diem, "_k": k,
+                   "_cln": c_ln})
+    for g in ra:
+        g["_hop"] = _hop_nam(g)
+    return ra
+
+
+def _hop_nam(g: dict) -> list[dict]:
+    """Hộp ứng viên của một năm (năm Cần lưu ý · năm thuận · cờ dân gian năm tuổi / xung tuổi / tam tai)."""
+    nam, ra = g["nam"], []
+    k = g["_k"]
+    if g["muc"] == "can_chu_dong" and g["_tac"]:
+        loai, cung = g["_tac"]
+        nd = g["y"] + (f" Nên tránh: {_thuong_dau(g['nen_tranh'])}." if g["nen_tranh"] else "")
+        huong = f"Nên làm: {_thuong_dau(g['nen_lam'])}." if g["nen_lam"] else None
+        tieu = (_loi_vh(loai, cung, g["_gd"]).get("nhan") or f"đi chậm ở {g['mang']}")
+        ra.append(_hop("luu_y", f"Năm {nam}: {tieu}", nd, g["can_cu"][:1],
+                       _ma("ds", "van_han", loai, slug(cung), g["_gd"]), 3.0 - 0.01 * k, huong=huong, _vai="can",
+                       nam=nam, muc=g["muc"]))
+    elif g["muc"] == "thuan" and g["_tot"]:
+        cung = g["_tot"]
+        nd = g["y"] + (f" Nên làm: {_thuong_dau(g['nen_lam'])}." if g["nen_lam"] else "")
+        tieu = _loi_vh("loc_nhap", cung, g["_gd"]).get("nhan") or f"thuận cho {g['mang']}"
+        loai = "loc_nhap" if cung in CUNG_VAN_HAN else "song_loc"
+        ra.append(_hop("diem_manh", f"Năm {nam}: {tieu}", nd, g["can_cu"][:1],
+                       _ma("ds", "van_han", loai, slug(cung), "nho" if g["_gd"] == "nho" else ""), 2.5 - 0.01 * k,
+                       _vai="thuan", nam=nam, muc=g["muc"]))
+    return ra
+
+
+def _hop_du_phong(dong: list[dict], hop: list[dict]) -> list[dict]:
+    """Chương còn < 2 hộp (mười năm đều, ít năm nổi): năm nên giữ nhịp hơn cả (điểm thấp nhất) + năm đáng dồn sức nhất
+    (điểm cao nhất), chưa có hộp — lời theo chủ đề cung lưu niên của chính năm ấy."""
+    ra, da = [], {h.get("nam") for h in hop}
+    if len(hop) >= 2:
+        return ra
+    con = [g for g in dong if g["nam"] not in da]
+    if con:
+        g = min(con, key=lambda x: (x["_diem"], x["nam"]))
+        k = kb.dai_han(g["_cln"]) or {}
+        ra.append(_hop("luu_y", f"Năm {g['nam']}: năm nên giữ nhịp hơn cả", g["y"], g["can_cu"][:1],
+                       _ma("ds", "van_han", "giu_nhip", slug(g["_cln"])), 1.1, nam=g["nam"], muc=g["muc"],
+                       huong=k.get("can_bang") or k.get("nen_lam")))
+        da.add(g["nam"])
+    con = [g for g in dong if g["nam"] not in da]
+    if con and len(hop) + len(ra) < 2:
+        g = max(con, key=lambda x: (x["_diem"], -x["nam"]))
+        k = kb.dai_han(g["_cln"]) or {}
+        ra.append(_hop("diem_manh", f"Năm {g['nam']}: năm đáng dồn sức nhất",
+                       f"{g['y']} {k.get('thuan') or ''}".strip(), g["can_cu"][:1],
+                       _ma("ds", "van_han", "don_suc", slug(g["_cln"])), 1.0, nam=g["nam"], muc=g["muc"]))
+    return ra
+
+
+def _chuong_van_han(dong: list[dict], vh: dict, ls: dict, hoc: tuple) -> dict:
+    hop, xem_lai = dsc.chon_hop_van_han(dong, hoc)
+    hop += _hop_du_phong(dong, hop)
+    thuan = [g for g in dong if g["muc"] == "thuan"]
+    can = [g for g in dong if g["muc"] == "can_chu_dong"]
+    if thuan:
+        g = thuan[0]
+        tom = (f"Trong mười năm tới, năm thuận gần nhất là {g['nam']}: "
+               f"{_loi_vh('loc_nhap', g['_tot'], g['_gd']).get('nhan') or 'hợp để dồn sức'}.")
+    else:
+        g = max(dong, key=lambda x: (x["_diem"], -x["nam"]))
+        tom = f"Mười năm tới của bạn không có năm nào vượt hẳn; năm đáng dồn sức nhất là {g['nam']}."
+    if can:
+        cham = "Những năm nên đi chậm: " + ", ".join(f"{g['nam']} ({g['mang']})" for g in can[:4]) + "."
+    else:
+        g = min(dong, key=lambda x: (x["_diem"], x["nam"]))
+        cham = f"Không có năm nào phải đi chậm hẳn; năm nên giữ nhịp hơn cả là {g['nam']}."
+    co = [(g["nam"], c["nhan"]) for g in dong for c in g["co"] if c["ma"] in ("nam_tuoi", "xung_tuoi")]
+    dg = (f"Theo tập quán dân gian, {' và '.join(f'{n} là {t}' for n, t in co)} của bạn; xem như lời nhắc giữ nếp, "
+          "không phải điềm báo." if co else "")
+    th = vh["tieu_han"]
+    can_cu = ["Ưu tiên: đại hạn > lưu niên > tiểu hạn",
+              f"Mức mỗi năm: Hoá Kỵ năm nhập cung chính −2, chiếu −1, chồng Kỵ −1; Hoá Lộc năm nhập cung chính +2, song "
+              f"Lộc +1; Kỵ / Lộc năm rơi đúng cung đang đi −1 / +1; đại hạn Thuận lợi +1 / Cần lưu ý −1. ≥ {NGUONG_NAM[0]} Thuận "
+              f"lợi; điểm âm và Kỵ năm chạm cung chính → Cần lưu ý",
+              f"Cung chính: {', '.join(CUNG_VAN_HAN)}",
+              f"Tiểu hạn năm nay: cung {th.get('cung_goc')} ({th['can']} {th['chi']}) — đọc kèm, xếp sau đại hạn và lưu niên",
+              *(c for g in dong for c in g["can_cu"]), *xem_lai,
+              "Năm tuổi, xung tuổi, va tuổi, tam tai: tập quán dân gian theo chi năm sinh, không đổi mức của năm"]
+    dong_ra = [{k: v for k, v in g.items() if not k.startswith("_")} for g in dong]
+    return _chuong("van_han", None, tom, hop, [tom, cham, dg], can_cu,
+                   "Năm nào trong mười năm tới bạn muốn dành cho việc lớn nhất, và năm nào nên giữ sức?",
+                   dong_nam=dong_ra)
+
+
 # ---- đường bay (phi hoá) — lời đời thường do RULES phi hoá dựng sẵn (KB phi hoá viết theo cặp mảng phát → mảng
 # đích, tên cung/sao/hoá chỉ ở `can_cu`); ở đây chỉ chọn hộp, tránh lặp việc nên làm, gắn mã kiểm chứng.
 def _chu(cung: str) -> str:
@@ -787,7 +991,10 @@ def _chuong_duong_bay(ls: dict, hoc: tuple) -> dict:
     hop, xem_lai = _ap_hoc(_sap(cand), *hoc)
     n_loc = sum(h["ma_mau"].endswith((".loc.manh",)) for h in hop)
     n_ky = sum(h["loai"] == "luu_y" for h in hop)
-    muc = _muc(n_loc - n_ky)
+    # VH-1: thang riêng của đường bay (số đường Lộc − số đường Kỵ nổi bật): ≥ 1 thuận, ≤ −3 cần lưu ý. Thang cung
+    # (≥ 4 / ≤ −2) cho 60% lá "Cần lưu ý" vì thẻ nổi bật vốn ưu tiên đường Kỵ.
+    d_bay = n_loc - n_ky
+    muc = "thuan" if d_bay >= NGUONG_BAY[0] else "can_chu_dong" if d_bay <= NGUONG_BAY[1] else "can_bang"
     do = next((_vat(h["_linh"]) for h in hop if h["loai"] == "diem_manh" and h.get("_linh")), None)
     keo = next((_vat(h["_linh"]) for h in hop if h["loai"] == "luu_y" and h.get("_linh")), None)
     if do and keo and do != keo:
@@ -884,7 +1091,7 @@ def _ten_mang(h: dict) -> str:
     return _vat(c) if c else _TEN_CHUONG.get(h.get("_ch", ""), "mảng này")
 
 
-def chon_cot_loi(ds_chuong: list[dict]) -> list[dict]:
+def chon_cot_loi(ds_chuong: list[dict], toi_da: int = 5) -> list[dict]:
     """3–5 hộp quan trọng nhất cả bài: |trọng số| lớn nhất, ưu tiên Mệnh/Quan Lộc/Tài Bạch/Phu Thê; luôn có ít nhất
     một điểm mạnh và một lưu ý (kèm hướng xử lý). Bỏ hộp đang xem lại và hộp người này đã bấm "chưa đúng"."""
     nguon = [h for c in ds_chuong if c["ma"] in CHUONG_COT_LOI for h in c["hop"]
@@ -907,7 +1114,7 @@ def chon_cot_loi(ds_chuong: list[dict]) -> list[dict]:
         if h:
             chon.append(h)
     for h in nguon:
-        if len(chon) >= 5:
+        if len(chon) >= toi_da:
             break
         if diem(h) >= 1.0 and con_cho(h):
             chon.append(h)
@@ -940,6 +1147,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     hoc = (trong_so, ca_nhan)
     da_dung: set[str] = set()
     tgb = thoi_gian_bieu(ls, cc, vh["tuoi_mu"], nam_am_sinh)
+    dong = dong_muoi_nam(ls, cc, nam_am_xem, nam_am_sinh)
 
     ds: list[dict] = []
     for ma, _, _, cung in CHUONG:
@@ -960,13 +1168,15 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
             c = _chuong_duong_bay(ls, hoc)
         elif ma == "nam_nay":
             c = _chuong_nam_nay(sinh, ls, cc, vh, ngay_xem, hoc)
+        elif ma == "van_han":
+            c = _chuong_van_han(dong, vh, ls, hoc)
         elif ma == "loi_khuyen":
-            c = _chuong_loi_khuyen(ds, ds[0]["muc"], hoc)
+            c = _chuong_loi_khuyen(ds, None, hoc)     # VH-1: chương tổng hợp không mang mức riêng
         else:
             c = _chuong_cung(ma, cung, cc, hoc, da_dung)
         for h in c["hop"]:
             h["_ch"] = ma
         ds.append(c)
-    cot_loi = chon_cot_loi(ds)
+    cot_loi = dsc.them_cot_loi_van_han(chon_cot_loi(ds), ds, nam_am_xem)
     return _sach({"phien_ban": PHIEN_BAN, "cot_loi": cot_loi, "thoi_gian_bieu": tgb, "chuong": ds,
                   "tuoi_mu": vh["tuoi_mu"], "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

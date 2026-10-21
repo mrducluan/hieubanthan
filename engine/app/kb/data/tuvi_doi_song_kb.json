@@ -2684,10 +2684,253 @@
    "tuoi_nho": "Tuổi đi học, việc chính là học hành và nghe thầy cô, cha mẹ chỉ bảo."
   }
  },
+ "van_han": {
+  "_nguon": "VH-1 (2026-10-21) — chương 'Vận hạn & điều nên tránh', nháp AI viết lời đời thường. Khoá: ky_nhap/ky_chieu/loc_nhap.<Cung> (nhan = vế sau tiêu đề 'Năm N: …', mang = mảng đời) + tre (18–34 tuổi) / lon (từ 35 tuổi) {y, tranh, lam}; nho = dưới 18 tuổi (lời cho cha mẹ); co = cờ tập quán dân gian theo chi năm sinh. Không vật phẩm, không giải hạn, không tên bệnh, không đoán năm ốm.",
+  "source_id": "tuvi_vn",
+  "school_id": "nam_phai_viet",
+  "ky_nhap": {
+   "Mệnh": {
+    "nhan": "giữ sức và giữ lời",
+    "mang": "sức và tâm trạng của chính bạn",
+    "tre": {
+     "y": "Bạn dễ ôm nhiều việc một lúc rồi bực chính mình khi việc chưa xong.",
+     "tranh": "nhận thêm việc chỉ vì ngại từ chối, thức khuya liền nhiều tuần để chạy cho kịp",
+     "lam": "chọn hai việc chính cho cả năm và giữ một buổi nghỉ hẳn mỗi tuần"
+    },
+    "lon": {
+     "y": "Bạn dễ mệt hơn mình nghĩ và hay giữ chuyện lo trong lòng.",
+     "tranh": "gánh luôn phần việc của người khác, hoãn buổi khám sức khoẻ định kỳ",
+     "lam": "đi khám sức khoẻ ngay đầu năm, mỗi tháng nói ra một điều đang lo với người thân"
+    }
+   },
+   "Tài Bạch": {
+    "nhan": "giữ chặt tiền",
+    "mang": "tiền bạc",
+    "tre": {
+     "y": "Tiền vào ra thất thường; khoản chi bất ngờ hay đến đúng lúc bạn vừa tiêu nhiều.",
+     "tranh": "vay tiêu dùng, mua trả góp món chưa cần, góp vốn theo lời rủ của bạn bè",
+     "lam": "để riêng một khoản đủ sống ba tháng và ghi lại mọi khoản chi trên một triệu"
+    },
+    "lon": {
+     "y": "Chuyện tiền dễ vướng vì người khác: cho mượn khó đòi, giấy tờ tiền bạc chưa rõ.",
+     "tranh": "ký bảo lãnh, cho vay khoản lớn không giấy tờ, dồn hết tiền vào một chỗ",
+     "lam": "giữ quỹ dự phòng sáu tháng, khoản cho mượn nào cũng ghi giấy có chữ ký hai bên"
+    }
+   },
+   "Quan Lộc": {
+    "nhan": "công việc nên đi chậm",
+    "mang": "công việc",
+    "tre": {
+     "y": "Ở chỗ làm dễ có hiểu lầm với cấp trên, hoặc việc được giao không rõ ai chịu phần nào.",
+     "tranh": "nghỉ việc lúc đang giận, nhảy việc khi chưa có thư mời nhận việc trong tay",
+     "lam": "việc nào giao bằng miệng thì nhắn lại một tin tóm tắt, học thêm một kỹ năng làm chỗ dựa"
+    },
+    "lon": {
+     "y": "Việc dễ chậm và dễ bị soi lỗi; vai trò của bạn có thể đổi ngoài ý muốn.",
+     "tranh": "đổi hướng làm ăn vội, mở rộng khi chưa đủ người, ký hợp đồng lớn mà chưa đọc hết",
+     "lam": "giữ hồ sơ công việc gọn gàng, nhờ một người tin cậy đọc lại hợp đồng trước khi ký"
+    }
+   },
+   "Phu Thê": {
+    "nhan": "giữ hoà khí với người thương",
+    "mang": "tình cảm, vợ chồng",
+    "tre": {
+     "y": "Hai người dễ hiểu lầm vì những mong muốn không nói ra.",
+     "tranh": "quyết chuyện lớn của hai người trong lúc đang giận, xem trộm điện thoại của nhau",
+     "lam": "mỗi tuần dành một buổi nói chuyện không cầm điện thoại, nói rõ điều mình mong"
+    },
+    "lon": {
+     "y": "Chuyện vợ chồng dễ căng vì tiền chung, việc nhà hay chuyện học của con.",
+     "tranh": "to tiếng trước mặt con, giấu nhau một khoản tiền lớn",
+     "lam": "mỗi tháng ngồi bàn tiền chung một lần và chia việc nhà thành phần rõ ràng"
+    }
+   },
+   "Điền Trạch": {
+    "nhan": "chuyện nhà cửa nên chậm",
+    "mang": "nhà cửa, chỗ ở",
+    "tre": {
+     "y": "Chỗ ở dễ phát sinh chuyện: phải chuyển nhà, sửa nhà, hoặc ở chung không hợp.",
+     "tranh": "đặt cọc nhà khi chưa xem giấy tờ, ký hợp đồng thuê dài hạn vội",
+     "lam": "đọc kỹ hợp đồng thuê và để dành sẵn tiền cho một lần chuyển nhà"
+    },
+    "lon": {
+     "y": "Nhà cửa, đất đai dễ tốn công: giấy tờ chậm, sửa chữa đội chi phí.",
+     "tranh": "mua bán nhà đất vội, đứng tên hộ người khác, xây sửa lớn khi chưa đủ tiền",
+     "lam": "làm rõ giấy tờ nhà đất trước, sửa nhà theo từng hạng mục có dự trù"
+    }
+   }
+  },
+  "ky_chieu": {
+   "Mệnh": {
+    "nhan": "ra ngoài nên cẩn thận hơn",
+    "mang": "việc bên ngoài, đi lại",
+    "y": "Việc bên ngoài, đi xa hay gặp người lạ dễ làm bạn mệt và rối.",
+    "tranh": "nhận lời đi xa sát ngày, tin ngay lời hứa của người mới quen",
+    "lam": "lên lịch đi lại sớm, mang đủ giấy tờ, gặp người mới ở nơi đông người"
+   },
+   "Tài Bạch": {
+    "nhan": "tiền và nỗi lo về tiền",
+    "mang": "tiền bạc và sự yên lòng",
+    "y": "Bạn dễ lo chuyện tiền dù chưa có gì xảy ra, rồi quyết vội vì lo.",
+    "tranh": "chạy theo cách làm giàu nhanh, mua bán lúc đang bồn chồn",
+    "lam": "viết ra con số thu chi thật, đợi một tuần rồi mới quyết khoản lớn"
+   },
+   "Quan Lộc": {
+    "nhan": "chuyện nhà kéo sang việc làm",
+    "mang": "công việc",
+    "y": "Chuyện tình cảm, gia đình dễ kéo bận tâm sang công việc.",
+    "tranh": "mang chuyện cãi nhau đến chỗ làm, góp vốn làm ăn với người thương khi chưa rõ phần ai",
+    "lam": "tách giờ làm với giờ ở nhà, việc chung tiền thì ghi rõ phần của mỗi người"
+   },
+   "Phu Thê": {
+    "nhan": "bận việc, nhớ giữ người thương",
+    "mang": "tình cảm",
+    "y": "Việc làm nhiều áp lực dễ làm bạn lạnh nhạt với người thương lúc nào không hay.",
+    "tranh": "huỷ hẹn liên tục vì việc, trút bực bội ở chỗ làm lên người nhà",
+    "lam": "giữ một bữa ăn chung cố định mỗi ngày, báo trước mỗi lần phải về muộn"
+   },
+   "Điền Trạch": {
+    "nhan": "nhà cửa tốn vì người trong nhà",
+    "mang": "nhà cửa",
+    "y": "Chuyện của con cái hay người nhỏ trong nhà dễ kéo theo khoản tốn cho chỗ ở.",
+    "tranh": "đổi nhà, sửa nhà chỉ vì một ý thích nhất thời, cho người nhà vay khoản lớn không bàn trước",
+    "lam": "bàn với cả nhà trước mọi khoản chi cho chỗ ở và để riêng một quỹ sửa nhà"
+   }
+  },
+  "loc_nhap": {
+   "Mệnh": {
+    "nhan": "thuận cho việc của chính bạn",
+    "mang": "việc của chính bạn",
+    "y": "Bạn có sức và được người khác để ý tới; điều bạn đề xuất dễ được nghe.",
+    "lam": "chọn một mục tiêu lớn để dồn sức, nhận lời mời học hay hợp tác hợp với mình"
+   },
+   "Tài Bạch": {
+    "nhan": "hợp để tăng thu",
+    "mang": "tiền bạc",
+    "y": "Tiền dễ vào hơn, có thêm nguồn thu từ chính việc bạn làm giỏi.",
+    "lam": "mở thêm một nguồn thu nhỏ và để dành ngay một phần mỗi khi có khoản lớn"
+   },
+   "Quan Lộc": {
+    "nhan": "hợp để tiến trong nghề",
+    "mang": "công việc",
+    "y": "Việc làm có cơ hội lên vai trò mới hoặc được giao dự án đáng làm.",
+    "lam": "nhận việc khó mà bạn làm được, đề nghị tăng lương khi đã có kết quả trong tay"
+   },
+   "Phu Thê": {
+    "nhan": "hợp chuyện lứa đôi",
+    "mang": "tình cảm",
+    "y": "Chuyện tình cảm êm hơn; người đang một mình dễ gặp người hợp.",
+    "lam": "nói chuyện tương lai của hai người, nhận lời mời gặp gỡ bạn bè giới thiệu"
+   },
+   "Điền Trạch": {
+    "nhan": "hợp lo chuyện nhà",
+    "mang": "nhà cửa",
+    "y": "Hợp lo chỗ ở: mua, sửa hay sắp xếp lại nhà đều dễ suôn.",
+    "lam": "làm việc nhà đã định từ lâu, xem giấy tờ kỹ rồi mới xuống tiền"
+   }
+  },
+  "nho": {
+   "ky": {
+    "nhan": "con nên đi chậm",
+    "Mệnh": {
+     "nhan": "con cần ngủ đủ, chơi đủ",
+     "mang": "sức và tâm trạng của con",
+     "y": "Con dễ mệt, dễ cáu và giữ chuyện buồn trong lòng.",
+     "tranh": "xếp kín lịch học thêm của con, la con khi con đang mệt",
+     "lam": "giữ giờ ngủ đủ cho con và mỗi tối hỏi con một chuyện vui, một chuyện buồn trong ngày"
+    },
+    "Tài Bạch": {
+     "nhan": "con tập giữ tiền tiêu vặt",
+     "mang": "tiền tiêu vặt của con",
+     "y": "Con dễ tiêu hết tiền vào đồ chơi, trò chơi trên mạng hoặc bị bạn rủ mua chung.",
+     "tranh": "cho con giữ thẻ thanh toán không giới hạn, mua bù mỗi lần con làm mất đồ",
+     "lam": "cho con một khoản tiêu vặt cố định mỗi tuần và cùng con ghi lại đã tiêu vào đâu"
+    },
+    "Quan Lộc": {
+     "nhan": "việc học của con nên nhẹ tay",
+     "mang": "việc học của con",
+     "y": "Con dễ áp lực điểm số hoặc va với thầy cô vì một lần hiểu lầm.",
+     "tranh": "dồn thêm lớp học thêm, so sánh điểm của con với bạn cùng lớp",
+     "lam": "gặp thầy cô chủ nhiệm một lần đầu năm và cùng con chia bài vở thành từng phần nhỏ"
+    },
+    "Phu Thê": {
+     "nhan": "con cần người nghe chuyện bạn bè",
+     "mang": "bạn bè thân của con",
+     "y": "Con dễ buồn vì bạn thân, có khi giấu cha mẹ chuyện bị bạn bỏ rơi.",
+     "tranh": "cấm con chơi với bạn mà không hỏi lý do, đọc trộm tin nhắn của con",
+     "lam": "mời bạn thân của con đến nhà chơi và hỏi con về bạn bè bằng giọng tò mò, không tra hỏi"
+    },
+    "Điền Trạch": {
+     "nhan": "nhà cửa đổi, con cần thời gian quen",
+     "mang": "chỗ ở, trường lớp của con",
+     "y": "Chuyện chuyển nhà, chuyển trường hay nhà có thêm người dễ làm con bất an.",
+     "tranh": "chuyển trường giữa năm học khi chưa nói trước với con",
+     "lam": "báo trước cho con mọi thay đổi chỗ ở và giữ một góc học riêng cho con"
+    }
+   },
+   "loc": {
+    "nhan": "năm thuận cho con",
+    "Mệnh": {
+     "nhan": "năm con lớn nhanh, vui khoẻ",
+     "mang": "sức và tâm trạng của con",
+     "y": "Con khoẻ, vui và dễ được mọi người quý.",
+     "lam": "cho con thử một môn thể thao hay năng khiếu con thích"
+    },
+    "Tài Bạch": {
+     "nhan": "hợp dạy con chuyện tiền",
+     "mang": "tiền tiêu vặt của con",
+     "y": "Con dễ hiểu chuyện tiền và biết để dành.",
+     "lam": "mở cho con một ống heo hay sổ tiết kiệm nhỏ và cùng đặt một món muốn mua"
+    },
+    "Quan Lộc": {
+     "nhan": "năm con học vào",
+     "mang": "việc học của con",
+     "y": "Con học vào hơn, dễ được thầy cô để ý và giao việc trong lớp.",
+     "lam": "cho con nhận một vai trò trong lớp và khen đúng việc con đã làm tốt"
+    },
+    "Phu Thê": {
+     "nhan": "năm con có bạn tốt",
+     "mang": "bạn bè thân của con",
+     "y": "Con dễ có bạn thân tốt, học được nhiều từ bạn.",
+     "lam": "tạo dịp cho con đi chơi cùng nhóm bạn có người lớn trông"
+    },
+    "Điền Trạch": {
+     "nhan": "năm nhà cửa êm cho con",
+     "mang": "chỗ ở của con",
+     "y": "Nhà cửa yên, con có chỗ học, chỗ chơi ổn định.",
+     "lam": "cùng con sắp lại góc học tập theo ý con"
+    }
+   }
+  },
+  "co": {
+   "nam_tuoi": {
+    "nhan": "năm tuổi",
+    "y": "Dân gian dặn năm tuổi nên giữ nếp, đừng khởi sự nhiều việc lớn cùng lúc.",
+    "tranh": "làm nhiều việc lớn trong cùng một năm",
+    "lam": "chọn một việc lớn nhất để làm kỹ và đi khám sức khoẻ đầu năm"
+   },
+   "xung_tuoi": {
+    "nhan": "năm xung tuổi",
+    "y": "Dân gian xem năm xung tuổi là năm hay có thay đổi: đổi chỗ, đổi việc, đi xa.",
+    "tranh": "đổi nhiều thứ cùng một lúc",
+    "lam": "thay đổi lần lượt từng việc và giữ một nếp cũ làm chỗ dựa"
+   },
+   "va_tuoi": {
+    "nhan": "năm va tuổi",
+    "y": "Dân gian xem đây là năm hay có va chạm nhỏ với người xung quanh."
+   },
+   "tam_tai": {
+    "nhan": "năm tam tai",
+    "y": "Theo tục lệ, ba năm tam tai liền nhau thì việc lớn nên tính kỹ hơn.",
+    "tranh": "vội khởi công, cưới hỏi hay mở hàng chỉ vì chọn được ngày đẹp mà chưa chuẩn bị",
+    "lam": "lập kế hoạch tiền cho cả ba năm và bàn kỹ việc lớn với người nhà"
+   }
+  }
+ },
  "muc": {
   "thuan": "Thuận lợi",
   "can_bang": "Cân bằng",
-  "can_chu_dong": "Cần chủ động"
+  "can_chu_dong": "Cần lưu ý"
  },
  "cach_cuc_doi_thuong": {
   "tu_phu_dong_cung": "Bạn điềm tĩnh, biết tổ chức và giữ của, dễ được giao việc lớn — chỉ cần tập lắng nghe và giao bớt việc.",

@@ -12,7 +12,7 @@ from pathlib import Path
 
 _F = Path(__file__).parent / "data" / "tuvi_doi_song_kb.json"
 SOURCE_ID, SCHOOL_ID = "tuvi_vn", "nam_phai_viet"
-MUC_MAC_DINH = {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần chủ động"}
+MUC_MAC_DINH = {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần lưu ý"}
 CHUNG_SUC_KHOE = ("Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi "
                   "khám.")
 
@@ -140,6 +140,16 @@ def suc_khoe_sat(sao: str) -> dict | None:
 
 def nhan_muc(muc: str) -> str:
     return _chuoi(_lay("muc", muc)) or MUC_MAC_DINH[muc]
+
+
+VAN_HAN_KHOA = ("nhan", "mang", "y", "tranh", "lam")
+
+
+def van_han_loi(*khoa: str) -> dict | None:
+    """VH-1 — lời chương "Vận hạn & điều nên tránh": `van_han.<khoá…>` → {nhan, mang, y, tranh, lam} (ô thiếu = None).
+    Khoá: `ky_nhap|ky_chieu.<Cung>.<tre|lon>`, `loc_nhap.<Cung>`, `nho.<ky|loc>`, `co.<cờ dân gian>`."""
+    m = _muc(_lay("van_han", *khoa))
+    return {k: _chuoi(m.get(k)) for k in VAN_HAN_KHOA} if m else None
 
 
 def cach_cuc_doi_thuong(ma: str, ten: str | None = None) -> str | None:

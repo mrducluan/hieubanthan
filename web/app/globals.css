@@ -219,6 +219,13 @@
 .cham-muc { --muc: 170 180 214; background: rgb(var(--muc)); }
 :is(.chip-muc, .cham-muc)[data-muc="thuan"] { --muc: 111 211 181; }
 :is(.chip-muc, .cham-muc)[data-muc="can_chu_dong"] { --muc: 245 170 80; }
+/* VH-1 — dòng 10 năm của chương Vận hạn (components/luan-giai/DongMuoiNam): lục = thuận lợi · vàng = cân bằng ·
+   hổ phách = cần lưu ý (không dùng đỏ). Giấy cổ dùng tông đậm cho nền sáng. */
+:root { --vh-thuan: 111 211 181; --vh-bang: 233 196 106; --vh-can: 240 140 60; }
+.la-so-giay { --vh-thuan: 27 116 58; --vh-bang: 150 110 10; --vh-can: 165 75 10; }
+.cham-vh { background: rgb(var(--vh-bang)); }
+.cham-vh[data-muc="thuan"] { background: rgb(var(--vh-thuan)); }
+.cham-vh[data-muc="can_chu_dong"] { background: rgb(var(--vh-can)); }
 /* BT-ĐS — màu ngũ hành cho biểu đồ năng lượng trong Luận giải Bát tự (ngoài khung lá số, cùng tông `.la-so-dem`). */
 .bd-hanh { --hanh: 170 180 214; }
 .bd-hanh[data-hanh="kim"] { --hanh: 214 211 230; }
@@ -240,6 +247,8 @@
   .hop-nb .hop-nhan, .hop-nb .hop-icon, .hop-nb * { color: #000 !important; }
   .chip-muc { color: #000 !important; border-color: #000 !important; background: #fff !important; }
   .cham-muc { background: #000 !important; }
+  .cham-vh { background: #000 !important; }
+  .cham-vh[data-muc="thuan"] { background: #fff !important; border: 1px solid #000; }
   .bao-cao-ds { color: #000; }
   .bao-cao-ds :where(p, li, h2, h3, h4, span, b) { color: #000 !important; }
 }
