@@ -83,8 +83,11 @@ const Sao = z.object({
   tu_hoa: z.string().nullable(),
   /** TV-NP: độ sáng lối Việt (chính tinh; phụ tinh từ TV-NP2 — null nếu sách không luận); `do_sang` là bảng phái Trung của iztro. */
   do_sang_nam_phai: z.string().nullable().optional(),
-  /** Chính tinh: lời đời thường từ KB (tính chất + sắc thái khi sáng/hãm theo Nam phái). */
-  giai_nghia: z.object({ tinh_chat: z.string(), sac_thai: z.string().nullable() }).nullable().optional(),
+  /** Chính tinh: lời đời thường theo sao × cung × sáng/hãm (Nam phái) — điều thường thấy ở bạn + một việc nên làm;
+   *  tên sao, độ sáng, tính chất sao chỉ ở `can_cu` ("Vì sao nói vậy"). */
+  giai_nghia: z.object({
+    thuong_thay: z.string(), nen_lam: z.string().nullable(), can_cu: z.array(z.string()).optional(),
+  }).nullable().optional(),
 });
 
 const PhuTinh = Sao.extend({ loai: z.string().optional() });
@@ -240,6 +243,8 @@ export const PhiHoaOutput = z.object({
     loai: z.string(), duong: DuongBay, tieu_de: z.string(), nghia: z.string(),
     viec_nen_lam: z.string().nullable().optional(), cau_tu_soi: z.string().nullable().optional(),
     ghi_chu_tuan_triet: z.string().nullable().optional(),
+    /** Căn cứ kỹ thuật (tên cung, sao, hoá, can) — chỉ hiện ở "Vì sao nói vậy"; lời trên thẻ là lời thường. */
+    can_cu: z.array(z.string()).optional(),
   }).passthrough()).max(8),
   luu_nien: z.object({
     nam: z.number(), can_chi: z.string(),

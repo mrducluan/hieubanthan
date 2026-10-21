@@ -11,13 +11,16 @@ test("có hồ sơ đủ giờ sinh: vẽ lá số, chọn cung → chi tiết �
   await expect(laSo.getByRole("button", { pressed: true })).toHaveAccessibleName(/^Cung Mệnh/);
   await expect(laSo).toContainText("Tuần");
   await expect(page.getByTestId("cach-cuc")).toBeVisible();          // KB-2: cách cục quanh Mệnh
-  await expect(page.getByTestId("giai-nghia-sao").first()).toContainText("lời nói có sức nặng");   // Cự Môn Đắc tại Mệnh
+  // Cự Môn Đắc tại Mệnh: lời đời thường theo sao × cung (thẻ cung), thuật ngữ trong "Vì sao nói vậy".
+  const gn = page.getByTestId("giai-nghia-sao").first();
+  await expect(gn).toContainText("phân tích việc gì cũng tới nơi");
+  await expect(gn.getByRole("button", { name: /Vì sao nói vậy/ })).toBeVisible();
   await laSo.getByRole("button", { name: /^Cung Quan Lộc/ }).click();
   await expect(page.getByRole("heading", { name: /Cung Quan Lộc/ })).toBeVisible();
   await page.getByRole("button", { name: "Hỏi về cung này" }).click();
   const ans = page.getByTestId("cau-tra-loi").last();
   await expect(ans).toContainText("Cung xem: Quan Lộc");
-  await expect(ans).toContainText("Trong lá số của bạn");
+  await expect(ans.getByRole("button", { name: /Vì sao nói vậy/ })).toBeVisible();   // căn cứ: cung, sao, độ sáng
 });
 
 test("không có hồ sơ: vẫn hỏi được câu kiến thức chung", async ({ page }) => {
@@ -155,8 +158,10 @@ test("KB-TV2b: hỏi tính cách → độ sáng Nam phái + nghĩa riêng khi s
   await napHoSo(page);
   await page.goto("/tu-vi");
   const ans = await hoi(page, "Tính cách của tôi theo tử vi thế nào?");
-  await expect(ans).toContainText("Cự Môn ở cung Mệnh (Đắc");     // Nam phái: Cự Môn tại Hợi
-  await expect(ans).toContainText("lời nói có sức nặng");
+  await expect(ans).toContainText("phân tích việc gì cũng tới nơi");   // lời khi Cự Môn sáng ở Mệnh
+  await ans.getByRole("button", { name: /Vì sao nói vậy/ }).click();
+  await expect(ans.getByTestId("can-cu")).toContainText("Cự Môn ở cung Mệnh (Đắc");     // Nam phái: Cự Môn tại Hợi
+  await expect(ans.getByTestId("can-cu")).toContainText("lời nói có sức nặng");
 });
 
 test("TV-LICH: khung Trường phái — đổi lịch Việt ↔ Trung ra lá khác, tên vòng Thái Tuế theo phái", async ({ page }) => {

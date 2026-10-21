@@ -8,6 +8,8 @@ export interface HoiMangRes {
   che_do?: string;
   co_canh_bao?: { loai: string; chi_tiet: string }[];
   thuat_ngu?: ThuatNgu[];
+  /** Căn cứ kỹ thuật cho "Vì sao nói vậy" (Tử vi: câu trả lời về lá của chính người hỏi). */
+  can_cu?: string[];
   error?: string;
   luot?: LuotHoi;
 }
@@ -37,6 +39,7 @@ export async function hoiMang<T extends HoiMangRes>(
     ghiLuot: ghiLuot(d.luot),
     van: d.cau_tra_loi,
     thuatNgu: d.thuat_ngu,
+    canCu: d.can_cu?.length ? d.can_cu : undefined,
     phu: phu?.(d),
     canhBao: d.co_canh_bao?.filter((c) => !boQuaCanhBao.includes(c.loai)).map((c) => c.chi_tiet),
     ghiChu: d.che_do === "llm" ? "Diễn đạt bởi AI từ kho tri thức có nguồn." : "Ghép từ kho tri thức có nguồn.",

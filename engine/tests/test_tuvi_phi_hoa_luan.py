@@ -127,8 +127,10 @@ def test_ky_xung_ve_chinh_cung_khong_lap_ten():
     d = {"tu_cung": "Tài Bạch", "can": "Ất", "hoa": "Kỵ", "sao": "Thái Âm", "den_cung": "Phúc Đức",
          "xung_cung": "Tài Bạch", "tu_hoa": False, "den_tuan_triet": []}
     n = luan._noi_bat("ky_xung", {**d, "nghia": luan.nghia_duong(d)})
-    assert "chiếu ngược về Tài Bạch" in n["tieu_de"]
-    assert "Tài Bạch với việc của cung Tài Bạch" not in n["viec_nen_lam"]
+    assert n["tieu_de"] == "Tiền bạc vòng qua đời sống tinh thần rồi quay về"
+    assert "quay lại làm chuyện tiền bạc thêm rối" in n["nghia"]
+    assert "chuyện tiền bạc với" not in n["viec_nen_lam"]
+    assert n["can_cu"][0] == "Hoá Kỵ (Thái Âm, can Ất) từ cung Tài Bạch vào Phúc Đức, chiếu Tài Bạch"
     assert not any(t in s.lower() for s in _chuoi(n) for t in TU_DOA)
 
 
@@ -146,8 +148,9 @@ def test_ky_xung_nghia_theo_cung_xung_khong_theo_cung_dich():
     d = {"tu_cung": "Tật Ách", "can": "Giáp", "hoa": "Kỵ", "sao": "Thái Dương", "den_cung": "Phu Thê",
          "xung_cung": "Quan Lộc", "tu_hoa": False, "den_tuan_triet": []}
     n = luan._noi_bat("ky_xung", {**d, "nghia": luan.nghia_duong(d)})
-    assert "chiếu sang Quan Lộc" in n["tieu_de"]
-    assert "đôi lứa" not in n["nghia"] and luan.MANG["Quan Lộc"] in n["nghia"]
+    assert n["tieu_de"] == "Sức khoẻ kéo bận tâm sang công việc"
+    assert pkb.ky_chieu("Quan Lộc").replace("{chu_tu}", "chuyện sức khoẻ") in n["nghia"]   # nói cả mảng bị chiếu
+    assert "chiếu Quan Lộc" in n["can_cu"][0]
     assert n["ma_mau"] is None
 
 
@@ -162,4 +165,80 @@ def test_noi_bat_co_ma_mau(ls):
     # lá 1990-05-15 giờ Thìn (Canh Ngọ): Kỵ Tật Ách → Phu Thê, xung Quan Lộc
     ls2 = tom_tat(az.an_sao_tho(dt.date(1990, 5, 15), 4, "nam", "vi-VN"))
     nb = next(n for n in luan.lap(ls2, "Canh")["noi_bat"] if n["duong"]["tu_cung"] == "Tật Ách" and n["duong"]["hoa"] == "Kỵ")
-    assert nb["duong"]["xung_cung"] == "Quan Lộc" and "đôi lứa" not in nb["nghia"]
+    assert nb["duong"]["xung_cung"] == "Quan Lộc" and "ở chỗ làm bạn cũng khó tập trung" in nb["nghia"]
+
+
+# ------------------------------------------------------------------ rà chung chung đợt 2 (docs/LUAN-GIAI-DOI-SONG.md mục 7)
+import re  # noqa: E402
+
+THUAT_NGU = re.compile(r"(?<!\w)[Hh]o[áa] (?:Lộc|Quyền|Khoa|Kỵ)|(?<!\w)tự ho[áa]|(?<!\w)[Cc]an [A-ZĐ]|(?<!\w)cung [A-ZĐ]|"
+                       r"(?<!\w)(?:Kỵ|Lộc|Quyền|Khoa)(?!\w)|Phái|phi tinh|chiếu|"
+                       + "|".join(luan.MANG) + "|" + "|".join(("Tử Vi", "Thiên Cơ", "Thái Dương", "Vũ Khúc",
+                                                              "Thiên Đồng", "Liêm Trinh", "Thiên Phủ", "Thái Âm",
+                                                              "Tham Lang", "Cự Môn", "Thiên Tướng", "Thiên Lương",
+                                                              "Thất Sát", "Phá Quân")))
+
+
+def _duong(tu, hoa, den, xung=None, tu_hoa=False):
+    return {"tu_cung": tu, "can": "Giáp", "hoa": hoa, "sao": "Thái Dương", "den_cung": den, "xung_cung": xung,
+            "tu_hoa": tu_hoa, "den_tuan_triet": []}
+
+
+def test_loi_nguoi_doc_khong_thuat_ngu_moi_duong_bay():
+    """Mọi cặp cung phát → cung đích × 4 hoá: tiêu đề, nghĩa, việc nên làm, tự soi không lộ tên cung / sao / hoá
+    (tên ấy chỉ ở `can_cu`)."""
+    cung = list(luan.MANG)
+    doi = {c: cung[(i + 6) % 12] for i, c in enumerate(cung)}
+    for tu in cung:
+        for den in cung:
+            for hoa in ("Lộc", "Quyền", "Khoa", "Kỵ"):
+                d = _duong(tu, hoa, den, doi[den], tu_hoa=tu == den)
+                loai = "tu_hoa" if tu == den else "ky_xung" if hoa == "Kỵ" else "loc_nhap"
+                n = luan._noi_bat(loai, {**d, "nghia": luan.nghia_duong(d)})
+                for k in ("tieu_de", "nghia", "viec_nen_lam", "cau_tu_soi"):
+                    assert not THUAT_NGU.search(n[k]), (tu, hoa, den, k, n[k])
+                    assert "{" not in n[k], n[k]
+                assert n["can_cu"] and n["can_cu"][0].startswith(("Hoá ", "Cung "))
+
+
+def test_mau_sao_o_cung_phat_noi_theo_cap_mang():
+    """Hai mẫu "*" (Khoa vào Phụ Mẫu, Kỵ vào Thiên Di) từng ra MỘT câu cho mọi lá — nay mỗi cung phát một lời,
+    giữ nguyên mã mẫu."""
+    mau = {m["ma"]: m for m in pkb.mau_duong_bay()}
+    for ma, hoa, den in (("khoa_vao_phu_mau", "Khoa", "Phụ Mẫu"), ("ky_xung_menh", "Kỵ", "Thiên Di")):
+        loi = set()
+        for tu in luan.MANG:
+            if tu == den:
+                continue
+            xung = "Tật Ách" if den == "Phụ Mẫu" else "Mệnh"
+            d = _duong(tu, hoa, den, xung)
+            n = luan._noi_bat("mau", {**d, "nghia": luan.nghia_duong(d)}, mau[ma])
+            assert n["ma_mau"] == ma
+            loi.add((n["tieu_de"], n["nghia"], n["viec_nen_lam"]))
+            assert not any(THUAT_NGU.search(n[k]) for k in ("tieu_de", "nghia", "viec_nen_lam")), n
+        assert len({x[0] for x in loi}) == len({x[1] for x in loi}) == len({x[2] for x in loi}) == 11, ma
+
+
+def test_kb_phi_hoa_khong_cum_cam_chung_chung():
+    from app.kb import tuvi_doi_song_kb as kds
+    cum, cam = kds.cum_chung_chung(), kds.cum_cam()
+    d = pkb._d()
+
+    def chuoi(x):
+        if isinstance(x, str):
+            yield x
+        elif isinstance(x, dict):
+            for k, v in x.items():
+                if k not in ("source_id", "school_id", "_ghi_chu", "can_cu"):
+                    yield from chuoi(v)
+        elif isinstance(x, list):
+            for v in x:
+                yield from chuoi(v)
+    for khoa in ("phi_vao_cung", "ky_chieu", "tu_hoa_cung", "mau_duong_bay"):
+        for s in chuoi(d[khoa]):
+            assert not kds.tim_cum_cam(s, cum) and not kds.tim_cum_cam(s, cam), (khoa, s)
+    for h, ds in d["phi_vao_cung"].items():
+        if h.startswith("_"):
+            continue
+        for c, m in ds.items():
+            assert m["source_id"] and m["school_id"] and m["y"] and m["viec_nen_lam"], (h, c)

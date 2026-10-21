@@ -84,6 +84,13 @@ def chu_de_han(ten_cung_: str) -> str | None:
     return _d()["chu_de_han"].get(ten_cung_)
 
 
+def chu_de_han_ngan(ten_cung_: str) -> str | None:
+    """Chủ đề giai đoạn bằng lời thường, không tên cung (vd "tiền bạc, thu nhập, cách quản lý tài chính") — trường
+    riêng, thay cho việc cắt `chu_de_han` theo dấu ":"."""
+    x = _d().get("chu_de_han_ngan", {}).get(ten_cung_)
+    return x if isinstance(x, str) and x.strip() else None
+
+
 def giai_thich_tat_ca() -> dict:
     return _d()["giai_thich"]
 

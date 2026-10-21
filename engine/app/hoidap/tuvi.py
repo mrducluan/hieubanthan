@@ -19,10 +19,12 @@ from app import config
 from app.calc import lunar, tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
 from app.calc import tuvi_luu_nguyet as ln
 from app.hoidap import chung
+from app.kb import tuvi_doi_song_kb as kds
 from app.kb import tuvi_kb as kb
 from app.kb import tuvi_phi_hoa_kb as pkb
 from app.luangiai import hoi as _h, tuvi_luu_nguyet as lnl
 from app.luangiai import tuvi_nhip_3_thang as nhip3, tuvi_phi_hoa as phl
+from app.luangiai import tuvi_the_cung as the_cung
 from app.narrative import hoi_van
 
 CHE_DO = ("tham_khao", "chi_tiet")
@@ -437,35 +439,56 @@ def _m_phu(ten: str, cung_: str | None) -> dict | None:
     return {"loai": "phu_tinh", "ten": ten, "cung": cung_, **p} if p else None
 
 
+def _loi(van: list[str | None]) -> str:
+    return " ".join(x.strip() for x in van if x and x.strip())
+
+
+# Lục sát hội về cách cục → lúc nào nét đẹp của cách mờ đi, nói bằng lời thường (theo cặp sao).
+_LUC_PHA = {"Kình Dương": "bạn va chạm, giằng co với người khác", "Đà La": "việc kéo dài, dây dưa",
+            "Hỏa Tinh": "bạn nóng vội", "Hoả Tinh": "bạn nóng vội", "Linh Tinh": "bạn lo ngầm mà không nói ra",
+            "Địa Không": "kế hoạch đổ giữa chừng", "Địa Kiếp": "tiền hụt bất ngờ"}
+
+
+def _noi(ds: list[str]) -> str:
+    return ds[0] if len(ds) == 1 else ", ".join(ds[:-1]) + " hoặc " + ds[-1]
+
+
 def _doc_cung(ls: dict, ten: str, muc: list, chinh: bool = True) -> None:
-    """Một cung trong lá số: nghĩa cung + chính tinh (độ sáng) + tứ hoá + phụ tinh đáng kể."""
+    """Một cung trong lá số: nghĩa cung + chính tinh (độ sáng) + tứ hoá + phụ tinh đáng kể.
+    Lá của CHÍNH người hỏi → mỗi mục kèm `doi_thuong` (lời đời thường nói về người xem, `luangiai.tuvi_the_cung`);
+    câu trả lời template hiện `doi_thuong`, đoạn kỹ thuật cũ chuyển vào `can_cu` ("Vì sao nói vậy")."""
     c = _cung_ten(ls, ten)
-    muc.append(_m_cung(ten))
+    muc.append({**_m_cung(ten), "doi_thuong": ""})           # định nghĩa cung: chỉ ở căn cứ
     if c["chinh_tinh"]:
         for s in c["chinh_tinh"]:
             m = _m_sao_cung(s["ten"], ten, s["do_sang"], "la_so")
             if m:
-                muc.append(m)
+                lo = the_cung.loi_sao_cung(s["ten"], ten, s["do_sang"]) or {}
+                muc.append({**m, "doi_thuong": _loi([lo.get("thuong_thay"), lo.get("nen_lam")])})
     else:
         doi = _cung_doi(ls, c)
+        t, tm = the_cung.ten_mang(ten), the_cung.ten_mang(doi["ten"])
+        vo = ("Bạn ít bị đóng khuôn: tính cách của bạn đổi theo nơi mình sống và người mình gặp." if ten == "Mệnh"
+              else f"Chuyện {t} của bạn ít có khuôn sẵn; nó chịu ảnh hưởng nhiều từ "
+                   + ("chính bạn" if doi["ten"] == "Mệnh" else f"chuyện {tm}") + " và người xung quanh.")
         muc.append({"loai": "vo_chinh_dieu", "cung": ten, "muon_cung": doi["ten"],
-                    "sao_muon": [s["ten"] for s in doi["chinh_tinh"]], **kb.meta()})
+                    "sao_muon": [s["ten"] for s in doi["chinh_tinh"]], "doi_thuong": vo, **kb.meta()})
         for s in doi["chinh_tinh"][:2]:
             m = _m_sao_cung(s["ten"], ten, None, "muon")
             if m:
-                muc.append(m)
+                lo = the_cung.loi_sao_cung(s["ten"], ten, s["do_sang"], muon_tu=doi["ten"]) or {}
+                muc.append({**m, "doi_thuong": _loi([lo.get("thuong_thay"), lo.get("nen_lam")])})
     for x in ls["tu_hoa"]:
         if x["cung"] == ten:
             m = _m_tu_hoa(x["hoa"], ten, x["sao"])
             if m:
-                muc.append(m)
+                muc.append({**m, "doi_thuong": m["noi_dung"]})
     dang_ke = [p for p in c["phu_tinh"] if kb.phu_tinh(p)["nhom"] in
                ("Lục cát tinh", "Lục sát tinh", "Nhóm đào hoa", "Lộc", "Tuần/Triệt")]
     if dang_ke and chinh:
-        muc.append({"loai": "phu_tinh_cung", "cung": ten,
-                    "sao": [{"ten": p, **{k: v for k, v in kb.phu_tinh(p).items()
-                                         if k in ("nhom", "y_nghia")}} for p in dang_ke[:5]],
-                    **kb.meta()})
+        ds = [{"ten": p, **{k: v for k, v in kb.phu_tinh(p).items() if k in ("nhom", "y_nghia")}} for p in dang_ke[:5]]
+        muc.append({"loai": "phu_tinh_cung", "cung": ten, "sao": ds,
+                    "doi_thuong": the_cung.loi_phu_tinh(ten, ds) or "", **kb.meta()})
 
 
 def _doc_menh(ls: dict, muc: list) -> None:
@@ -473,18 +496,30 @@ def _doc_menh(ls: dict, muc: list) -> None:
     sao = [s["ten"] for s in menh["chinh_tinh"]] or [s["ten"] for s in _cung_doi(ls, menh)["chinh_tinh"]]
     if sao:
         ct = kb.chinh_tinh(sao[0])
-        muc.append({"loai": "chinh_tinh", "ten": sao[0], **ct})
+        muc.append({"loai": "chinh_tinh", "ten": sao[0], **ct,
+                    "doi_thuong": f"Bạn {ct['bieu_hien'].rstrip('. ')}."})
         nc = kb.nhom_cach(ct["nhom"])
         if nc:
-            muc.append({"loai": "nhom_cach", "nhom": ct["nhom"], "noi_dung": nc, **kb.meta()})
+            muc.append({"loai": "nhom_cach", "nhom": ct["nhom"], "noi_dung": nc, **kb.meta(),
+                        "doi_thuong": "Kiểu việc và nhịp sống hợp với bạn " + nc.split(":", 1)[-1].strip()})
     # Cách cục quanh Mệnh (KB-2): tối đa 3 cách đầu theo thứ tự ưu tiên, kèm lục sát hội về.
+    pha = False
     for c in [c for c in ls.get("cach_cuc", []) if c["ma"] != "than_menh_dong_cung"][:3]:
         k = kb.cach_cuc(c["ma"])
         if k:
-            muc.append({"loai": "cach_cuc", **k, "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"]})
+            van = [kds.cach_cuc_doi_thuong(c["ma"], k.get("ten")) or k["y"], k.get("loi_khuyen")]
+            if c["sat_hoi"] and not pha:
+                pha = True
+                luc = list(dict.fromkeys(_LUC_PHA[s] for s in c["sat_hoi"] if s in _LUC_PHA))
+                if luc:
+                    van.append(f"Nét này dễ mờ đi mỗi khi {_noi(luc)}.")
+            muc.append({"loai": "cach_cuc", **k, "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"],
+                        "doi_thuong": _loi(van)})
     than = next(c for c in ls["cung"] if c["la_than"])
+    tc = kds.than_cu(than["ten"]) or {}
     muc.append({"loai": "than_cu", "cung": than["ten"], "menh_chu": ls["menh_chu"],
-                "than_chu": ls["than_chu"], "cuc": ls["cuc"], **kb.meta()})
+                "than_chu": ls["than_chu"], "cuc": ls["cuc"], **kb.meta(),
+                "doi_thuong": _loi([tc.get("y"), tc.get("loi_khuyen")])})
 
 
 def _lop_han(ls: dict, lop: str, vh: dict, che_do: str) -> dict:
@@ -1080,17 +1115,33 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
     return "", None
 
 
-def van_template(goi: dict) -> str:
-    if goi["mau"] and not goi["muc"]:
-        return goi["mau"]
-    doan, soi = [], []
+def _ghep(goi: dict) -> tuple[list[str], list[str], list[str]]:
+    """→ (đoạn thân bài, câu tự soi, căn cứ). Mục có `doi_thuong` (lá của chính người hỏi): thân bài là lời đời
+    thường, đoạn kỹ thuật (tên sao, độ sáng, "Mặt tối", định nghĩa cung…) chuyển vào căn cứ."""
+    doan, soi, cu = [], [], []
     da_co_sao = {m["ten"] for m in goi["muc"] if m["loai"] == "chinh_tinh"}
     for m in goi["muc"]:
         d, s = _doan(m, da_co_sao)
+        if "doi_thuong" in m:
+            if d:
+                cu.append(d)
+            d = m["doi_thuong"]
         if d:
             doan.append(d)
         if s and not soi:
             soi.append(s)
+    return doan, soi, list(dict.fromkeys(cu))
+
+
+def can_cu_template(goi: dict) -> list[str]:
+    """Căn cứ kỹ thuật cho "Vì sao nói vậy" (rỗng khi câu trả lời không có mục lời đời thường)."""
+    return [] if goi["mau"] and not goi["muc"] else _ghep(goi)[2]
+
+
+def van_template(goi: dict) -> str:
+    if goi["mau"] and not goi["muc"]:
+        return goi["mau"]
+    doan, soi, _ = _ghep(goi)
     if goi["mau"]:
         doan.append(goi["mau"])
     if soi:
@@ -1171,6 +1222,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
         co.append({"loai": "nam_phai", "chi_tiet": kb.luu_y("iztro")})
     dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
     return {"phan_loai": goi["phan_loai"], "van_han": vh, "bang_chung": goi, "cau_tra_loi": van,
+            "can_cu": can_cu_template(goi),
             "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"],
             "co_canh_bao": co, "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong",
             # LG-ĐS: web chỉ tra kho vectơ khi co_the_goi_y (từ khoá không nhận ra, câu bản mệnh/hạn, không đặc biệt).

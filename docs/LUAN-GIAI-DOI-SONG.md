@@ -324,3 +324,72 @@ câu nào có ở ≥ 50% số lá; (b) không câu lặp trong một bài (tr�
 trong `nam_nay`); (c) không câu nào chứa `cum_chung_chung`, KB lời luận sạch cụm chung chung + cụm cấm; (d) mỗi hộp lưu ý
 có hướng xử lý nằm trong hộp, không phải câu dự phòng trong mã, không dùng chung cho hai mảng đời. Kèm test đơn vị cho lý
 do theo mức, Tuần/Triệt từng cung, lời tuổi đi học, không nói giai đoạn đã qua, sát theo cặp sao, phá cách không lặp.
+
+### 6.5 Đợt 2 — ba bề mặt ngoài bài: đường bay, thẻ cung, hỏi đáp cung
+
+Phạm vi: thẻ "đường bay nổi bật" (`/v1/tuvi/phi-hoa` → `noi_bat`, KB `tuvi_phi_hoa_kb.json` trừ `nhip_3_thang` /
+`hop_tham`), lời giải nghĩa chính tinh trên thẻ chi tiết 12 cung (`/v1/tuvi/an-sao` → `chinh_tinh[].giai_nghia`), câu
+trả lời template "Cung X của tôi nói gì?" (`hoidap/tuvi.py`). Không đổi lá số, không đổi mã mẫu → không tăng
+`ENGINE_VERSION`.
+
+**Đo** — `scripts/do_chung_chung_tuvi.py --be-mat [--tat-ca] [--chi-tiet]`: mỗi lá một tập câu người dùng đọc (không gồm
+căn cứ, câu tự soi, câu kết / miễn trừ cố định). 60 lá golden:
+
+| Chỉ số (càng thấp càng tốt) | Đường bay trước | sau | Thẻ cung trước | sau | Hỏi đáp cung trước | sau |
+|---|---|---|---|---|---|---|
+| Câu "Barnum" (có ở ≥ 50% số lá) | 7 | **0** | 28 | **0** | 76 | **0** |
+| Câu trùng giữa hai lá khác hẳn, trung bình | 0,168 | 0,062 | 0,817 | 0,031 | 0,556 | 0,087 |
+| … cặp tệ nhất | 0,654 | 0,571 | 1,0 | 0,50 | 0,714 | 0,478 |
+| Câu lộ thuật ngữ (tên sao, tên cung kỹ thuật, tứ hoá, độ sáng) / lá | 13,5 | **0** | 3,65 | **0** | 77,2 | **0** |
+| Câu chứa cụm cấm giọng AI / lá | 0 | 0 | 0 | 0 | 4,87¹ | 0 |
+| Câu chứa cụm chung chung / lá | 0 | 0 | 0 | 0 | 0 | 0 |
+| Số câu / lá | 26,2 | 26,1 | 27,5 | 42,0² | 136,2 | 99,0 |
+
+¹ "khắc", "xui", "tai nạn" trong câu định nghĩa cung ("nó không phán 'khắc'…") — nay chỉ ở căn cứ.
+² Thẻ cung nay có 3 câu mỗi chính tinh (điều thường thấy, chỗ dễ vấp, một việc nên làm) thay cho 2 câu nhãn sao.
+
+**Sửa gì**
+
+- **KB phi hoá viết theo cặp mảng phát → mảng đích.** `phi_vao_cung` (48 mục, nay là `{y, viec_nen_lam, can_cu}` có
+  source_id + school_id): `{Chu_tu}` / `{chu_tu}` = mảng phát bằng lời thường ("Chuyện tiền bạc" / "việc của chính bạn"),
+  không tên cung; việc nên làm cũng gắn mảng phát (trước câu thứ hai chỉ theo cung đích → lặp ở nửa số lá). Thuật ngữ cũ
+  lọt lời ("Phái phi tinh còn xem…" ở Lộc → Huynh Đệ, "Kỵ ở đây cũng chiếu về Mệnh" ở Kỵ → Thiên Di) chuyển vào `can_cu`.
+  Thêm `ky_chieu` (12 câu theo cung bị Kỵ chiếu, có `{chu_tu}`) — Kỵ nói cả mảng đích lẫn mảng bị kéo theo. `tu_hoa_cung`
+  bỏ "Cung {cung} tự hoá…", thêm tiêu đề lời thường.
+- **Hai mẫu "*" theo cung phát** (`khoa_vao_phu_mau`, `ky_xung_menh`): `theo_cung_phat` 11 lời mỗi mẫu (tiêu đề, nghĩa,
+  việc nên làm, tự soi) — trước mọi lá ra cùng "Giấy tờ, học hành thuận" / "Kỵ chiếu về bản thân". **Giữ mã mẫu**; mã
+  kiểm chứng phía web (`maPhiHoa` = loại.cung phát.hoá.cung đích) vốn đã theo cặp. 18 mẫu còn lại bỏ phần "Can X cho Hoá Y
+  bay vào Z, chiếu W:" đầu câu nghĩa.
+- **RULES phi hoá** (`luangiai/tuvi_phi_hoa.py`): mọi chuỗi người đọc dựng bằng biến lời thường (`bien_mang`), thẻ nổi
+  bật trả thêm `can_cu` (dòng kỹ thuật "Hoá Kỵ (Thái Dương, can Giáp) từ cung Tật Ách vào Phu Thê, chiếu Quan Lộc" + ghi chú
+  KB); tiêu đề luật chung "{Mảng} đỡ cho / thêm sức cho / làm rõ / kéo bận tâm sang {mảng}". Web `PhiHoa.tsx` hiện
+  `can_cu` bằng "Vì sao nói vậy".
+- **Luận giải đời sống chương "Đường bay"**: bỏ lớp lọc thuật ngữ, cắt chuỗi theo ": ", bộ mẫu rỗng và câu mặc định riêng
+  — dùng thẳng tiêu đề / nghĩa / việc nên làm / căn cứ của thẻ phi hoá (hai nơi nói cùng một lời). Mã kiểm chứng `ds.duong_bay.*`
+  không đổi.
+- **Thẻ cung** (`luangiai/tuvi_the_cung.py`, dùng chung cho `/v1/tuvi/an-sao` và hỏi đáp): `giai_nghia` = `{thuong_thay,
+  nen_lam, can_cu}` theo sao × CUNG × sáng/hãm (KB đời sống `sao_linh_vuc`, cùng nguồn với luận giải) thay cho
+  `{tinh_chat, sac_thai}` chỉ theo sao ("Đế tinh: …", "Sáng: …"). Web `ChiTietCung.tsx` hiện "Nên làm" + "Vì sao nói vậy".
+- **Hỏi đáp về lá của chính người hỏi** (`_doc_cung`, `_doc_menh`): mỗi mục kèm `doi_thuong`; thân bài hiện lời đời thường,
+  đoạn kỹ thuật cũ (định nghĩa cung, "Trong lá số của bạn, X ở cung Y (Đắc — …)", "Nét chung… Mặt tối…", "Biểu hiện dễ
+  thấy…", "Cách cục … Mặt tối … Gợi ý …", "Thân cư cung …", "Phụ tinh đáng kể…") chuyển vào trường mới `can_cu` của câu trả
+  lời. Web `KhungChat` hiện `can_cu` thu gọn dưới câu trả lời (mọi mảng trả `can_cu` đều dùng được). Câu hỏi kiến thức chung
+  (không lá số) và `la_so_mau` không đổi. Phá cách: một câu theo đúng sát tinh hội về ("Nét này dễ mờ đi mỗi khi bạn nóng
+  vội hoặc kế hoạch đổ giữa chừng") thay câu chung. Lục cát / đào hoa không thêm việc nên làm chung theo cung.
+- **`chu_de_han`**: thêm trường riêng `chu_de_han_ngan` (KB `tuvi_kb.json` + `tuvi_kb.chu_de_han_ngan`) — luận giải đời
+  sống thôi cắt "Giai đoạn chủ đề X: …" theo dấu ":" (nơi duy nhất cắt; hỏi đáp hạn, lưu nguyệt, trang kiến thức vẫn dùng câu
+  đầy đủ). Câu miễn trừ sức khoẻ của hỏi đáp bỏ tên cung, thêm "không thay lời bác sĩ".
+
+**Test chặn** — `tests/test_tuvi_be_mat_chung_chung.py` (16 lá): 0 câu Barnum, 0 câu lộ thuật ngữ, 0 cụm chung chung /
+cụm cấm ở cả ba bề mặt; trùng giữa lá ≤ 0,15; hỏi đáp có `can_cu`, câu kiến thức chung không đổi; `chu_de_han_ngan` không
+tên cung. `tests/test_tuvi_phi_hoa_luan.py`: mọi cặp 12 × 12 × 4 hoá không lộ thuật ngữ; hai mẫu "*" ra 11 lời khác nhau,
+giữ mã; KB phi hoá sạch cụm cấm / chung chung, đủ source_id + school_id.
+
+**Ví dụ** (lá 15/05/1990 giờ Thìn nam, xem 21/10/2026; thẻ cung: hồ sơ mẫu e2e 17/05/1990 12:30)
+
+| Chỗ | Trước | Sau |
+|---|---|---|
+| Đường bay Khoa Tài Bạch → Phụ Mẫu (mẫu "*") | **Giấy tờ, học hành thuận** — Hoá Khoa bay vào Phụ Mẫu (từ cung nào hay từ can năm xem): thi cử, hồ sơ, thủ tục, quan hệ với người đi trước dễ rõ ràng, dễ có người hướng dẫn. | **Tiền bạc đi kèm giấy tờ rõ ràng** — Chuyện tiền của bạn thường đi qua hợp đồng, hồ sơ rõ ràng nên ít bị thiệt vì giấy tờ; tiền bỏ ra cho việc học cũng đáng. Nên làm: Với khoản tiền lớn, làm hợp đồng giấy trắng mực đen; dành một khoản cố định cho việc học. |
+| Đường bay Kỵ Tật Ách → Phu Thê, chiếu Quan Lộc | **Hoá Kỵ từ Tật Ách chiếu sang Quan Lộc** — Chuyện nhịp sinh hoạt, cách chịu áp lực dễ kéo theo bận tâm cho công việc, vai trò; đây là chỗ nên làm chậm, rõ ràng hơn. | **Sức khoẻ kéo bận tâm sang công việc** — Chuyện sức khoẻ đưa điều vướng vào chuyện tình cảm: hai người dễ kỳ vọng mà không nói ra. Khi chuyện sức khoẻ rối, ở chỗ làm bạn cũng khó tập trung. |
+| Thẻ cung: Cự Môn (Đắc) ở Mệnh | Ám tinh: sắc sảo, giỏi ăn nói, hay nghi vấn và phân tích đến tận cùng. Sáng: lời nói có sức nặng — giỏi lý luận, phân tích, hợp nghề dùng lời (giảng dạy, luật, tư vấn, truyền thông). | Bạn nói có lý, phân tích việc gì cũng tới nơi, nên khi cần thuyết phục ai, người ta thường nghe bạn. Bạn hay hỏi tại sao và dễ bắt lỗi trong lời người khác, khiến họ thấy bị soi dù bạn chỉ muốn rõ ràng. Nên làm: Trước khi phản biện ai, nói trước một điều bạn đồng ý với họ, rồi mới nêu chỗ bạn thấy chưa ổn. |
+| Hỏi đáp "Cung Quan Lộc của tôi nói gì?" (đoạn đầu) | Cung Quan Lộc: Cách bạn làm việc, kiểu môi trường và vai trò hợp với bạn… Cung này cho thấy phong cách làm việc…; nó không chỉ định một nghề duy nhất… / Trong lá số của bạn, Cự Môn ở cung Quan Lộc (Hãm — Sao ở vị trí hãm: mặt tối dễ lộ…): … Nét chung của Cự Môn: Ám tinh: … Mặt tối cần để ý: … | Chỗ làm dễ có điều tiếng hoặc hiểu lầm quanh bạn, nhất là khi bạn góp ý không chọn lúc. Bạn phát hiện lỗi trong kế hoạch rất nhanh, hợp những việc kiểm tra, rà soát, nghiên cứu. Mọi việc quan trọng sếp giao bằng miệng, gửi lại một tin nhắn tóm tắt để hai bên hiểu giống nhau. (Định nghĩa cung, sao, độ sáng → "Vì sao nói vậy".) |

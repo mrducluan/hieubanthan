@@ -3,6 +3,7 @@
 // độ sáng viết đầy đủ, tam phương tứ chính, Tuần/Triệt, lớp vận hạn; nút đẩy câu hỏi xuống khung hỏi đáp.
 import { MessageCircleQuestion } from "lucide-react";
 import type { LaSoOutputT, VanHanOutputT } from "@/app/api/tuvi/schema";
+import { ViSao } from "@/components/luan-giai/HopNoiBat";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { tenThaiTue, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
@@ -67,9 +68,11 @@ export function ChiTietCung({ ls, chi, vanHan, onHoi, phai = "nam" }: {
                   {s.do_sang && s.do_sang !== s.do_sang_nam_phai && <span className="text-xs text-fg-faint">· {DO_SANG_DAY[s.do_sang] ?? s.do_sang} (phái Trung)</span>}
                   <span className="text-xs text-fg-faint">hành {HANH_SAO[s.ten]}</span>
                   {s.giai_nghia && (
-                    <span className="block w-full text-sm leading-relaxed text-fg-muted" data-testid="giai-nghia-sao">
-                      {s.giai_nghia.tinh_chat}{s.giai_nghia.sac_thai && <> {s.giai_nghia.sac_thai}</>}
-                    </span>
+                    <div className="w-full text-sm leading-relaxed text-fg-muted" data-testid="giai-nghia-sao">
+                      <p>{s.giai_nghia.thuong_thay}</p>
+                      {s.giai_nghia.nen_lam && <p className="mt-1"><span className="text-jade">Nên làm:</span> {s.giai_nghia.nen_lam}</p>}
+                      <ViSao canCu={s.giai_nghia.can_cu} nho />
+                    </div>
                   )}
                 </li>
               ))}

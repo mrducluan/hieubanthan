@@ -24,7 +24,6 @@ from app.calc import lunar, tuvi_an_sao as az
 from app.calc import tuvi_luu_nguyet as ln
 from app.kb import tuvi_doi_song_kb as kb
 from app.kb import tuvi_kb
-from app.kb import tuvi_phi_hoa_kb as kb_ph
 from app.luangiai import tuvi_nhip_3_thang as nhip3
 from app.luangiai import tuvi_phi_hoa as phl
 from app.luangiai.doi_song_chung import (  # noqa: F401 — tách dùng chung với Bát tự (BT-ĐS), giữ tên cũ
@@ -576,7 +575,7 @@ def thoi_gian_bieu(ls: dict, cc: dict, tuoi_mu: int | None, nam_am_sinh: int) ->
         if tu > TUOI_BAT_DAU_TOI_DA and not (tuoi_mu is not None and tu <= tuoi_mu <= den):
             continue
         k = kb.dai_han(c["ten"]) or {}
-        chu_de = k.get("chu_de") or (tuvi_kb.chu_de_han(c["ten"]) or "").split(":")[-1].strip(" .") or _ten(c["ten"])
+        chu_de = k.get("chu_de") or tuvi_kb.chu_de_han_ngan(c["ten"]) or _ten(c["ten"])
         muc = cc[c["ten"]]["muc"]
         mot = {"thuan": "Giai đoạn thuận", "can_bang": "Giai đoạn cân bằng",
                "can_chu_dong": "Giai đoạn cần chủ động"}[muc]
@@ -739,24 +738,8 @@ def _chuong_nam_nay(sinh: dict, ls: dict, cc: dict, vh: dict, ngay_xem: dt.date,
                    "Việc nào năm nay đáng để bạn dồn sức nhất?", tuoi_mu=vh["tuoi_mu"])
 
 
-# ---- đường bay (phi hoá) — lời đời thường, kỹ thuật vào can_cu
-_Y_BAY = {"Lộc": "có xu hướng mang thuận lợi tới", "Quyền": "thêm chủ động, trách nhiệm cho",
-          "Khoa": "thêm uy tín, sự rõ ràng cho", "Kỵ": "hay dồn bận tâm vào"}
-_TU_HOA_VAN = {
-    "Lộc": ("Điều tốt ở chuyện {a} đến nhanh, đi cũng nhanh.", "Nên giữ lại một phần mỗi khi chuyện {a} có kết quả tốt."),
-    "Quyền": ("Ở chuyện {a}, bạn hay tự quyết rất nhanh.", "Nên chờ một nhịp và hỏi thêm người liên quan trước khi đổi kế hoạch."),
-    "Khoa": ("Chuyện {a} có xu hướng tự rõ ràng dần.", "Nên giữ thói quen ghi chép để điều tốt ấy bền."),
-    "Kỵ": ("Bạn hay tự ôm, tự lo chuyện {a}.", "Nên kể việc đang lo với một người tin được và chia nhỏ việc ra."),
-}
-_THUAT_NGU = re.compile(r"Miếu|Hãm|(?<!\w)[Hh]oá (?:Lộc|Quyền|Khoa|Kỵ)|(?<!\w)tự hoá|tam phương|(?<!\w)[Cc]an (?=[A-ZĐ])|"
-                        r"cung (?=[A-ZĐ])")
-
-
-_TIEU_BAY = {"Lộc": "{A} đỡ cho {b}", "Quyền": "{A} thêm sức cho {b}", "Khoa": "{A} làm rõ {b}",
-             "Kỵ": "{A} kéo bận tâm sang {b}"}
-_TN_TIEU_DE = re.compile(r"(?<!\w)(?:Kỵ|Lộc|Quyền|Khoa)(?!\w)")
-
-
+# ---- đường bay (phi hoá) — lời đời thường do RULES phi hoá dựng sẵn (KB phi hoá viết theo cặp mảng phát → mảng
+# đích, tên cung/sao/hoá chỉ ở `can_cu`); ở đây chỉ chọn hộp, tránh lặp việc nên làm, gắn mã kiểm chứng.
 def _chu(cung: str) -> str:
     """Chủ ngữ: "Chuyện tiền bạc" / "Bản thân bạn" (Mệnh)."""
     return "Bản thân bạn" if cung == "Mệnh" else f"Chuyện {_ten(cung)}"
@@ -767,85 +750,28 @@ def _vat(cung: str) -> str:
     return "chính bạn" if cung == "Mệnh" else f"chuyện {_ten(cung)}"
 
 
-_MAU_RONG = None
-
-
-def _mau_rong() -> set[str]:
-    """Mã mẫu đường bay "*" ở cung phát (vd "Khoa vào Phụ Mẫu từ cung nào cũng vậy") — lời mẫu không nói mảng nào
-    phát → ai có đường bay ấy cũng nhận cùng một câu. Với mẫu này dùng lời theo đúng hai mảng của lá (giữ mã mẫu)."""
-    global _MAU_RONG
-    if _MAU_RONG is None:
-        _MAU_RONG = {m.get("ma") for m in kb_ph.mau_duong_bay() if m.get("tu_cung") in ("*", None, "")}
-    return _MAU_RONG
-
-
-def _cau_dich(d: dict) -> tuple[str | None, str | None]:
-    """Câu theo CUNG ĐÍCH của đường bay (KB phi hoá `phi_vao_cung`), điền mảng phát bằng lời đời thường → (ý, việc
-    nên làm). Bỏ câu có thuật ngữ."""
-    mau = kb_ph.phi_vao_cung(d["hoa"], d["den_cung"] or "")
-    if not mau:
-        return None, None
-    van = kb_ph.dien(mau.replace("Mảng {tu_cung}", _chu(d["tu_cung"])), tu_cung=_vat(d["tu_cung"]))
-    cau = [c for c in _cac_cau(van or "") if not _THUAT_NGU.search(c) and not _TN_TIEU_DE.search(c)
-           and "Phái" not in c and "{" not in c]
-    y = cau[0] if cau and cau[0].startswith(_chu(d["tu_cung"])) else None
-    lk = next((c for c in cau[1:] if c.startswith(("Nên", "Hợp"))), None)
-    return y, lk
-
-
 def _hop_bay(n: dict, da_lk: set[str] | None = None) -> dict:
     d = n["duong"]
-    a = _ten(d["tu_cung"])
     den_c = d["den_cung"] or d["tu_cung"]
     hoa = d["hoa"]
-    A = "Bản thân bạn" if d["tu_cung"] == "Mệnh" else _hoa_dau(a)
-    B = "chính bạn" if den_c == "Mệnh" else _ten(den_c)
-    rong = n["loai"] == "mau" and n.get("ma_mau") in _mau_rong()
-    mau = n["loai"] == "mau" and not rong
-    sau = n["nghia"].split(": ", 1)[-1] if mau else ""
-    sau = _hoa_dau(sau) if sau and not _THUAT_NGU.search(sau) else ""
-    y_dich, lk_dich = (None, None) if (mau or d["tu_hoa"]) else _cau_dich(d)
-    if d["tu_hoa"]:
-        y0, lk0 = _TU_HOA_VAN[hoa]
-        y = sau or y0.format(a=a)
-        cu = f"Cung {d['tu_cung']} tự hoá {hoa} ({d['sao']}, can {d['can']})"
+    lk = n["viec_nen_lam"]
+    if lk in (da_lk or set()):              # hai đường bay cùng việc nên làm → lời theo đúng cặp mảng
+        lk = (f"Khi {_vat(d['tu_cung'])} đang căng, hoãn quyết định lớn về {_vat(den_c)} vài ngày và nói rõ với "
+              "người liên quan." if hoa == "Kỵ" else
+              f"Khi {_vat(d['tu_cung'])} đang thuận, dành một phần kết quả ấy cho {_vat(den_c)}.")
+    if n.get("ma_mau"):
+        goc = slug(n["ma_mau"])
+    elif d["tu_hoa"]:
         goc = f"tu+{slug(d['tu_cung'])}"
-        tieu0 = _tieu_de(y, f"{A} tự tác động lên chính mình")
     else:
-        if hoa == "Kỵ" and d["xung_cung"] == d["tu_cung"]:
-            y0 = (f"Bận tâm về {_vat(d['tu_cung'])} hay lan sang {_vat(den_c)}, rồi quay lại làm "
-                  f"{_vat(d['tu_cung'])} thêm rối.")
-            tieu0 = f"{A} vòng qua {B} rồi quay về"
-        elif hoa == "Kỵ":
-            y0 = (f"{_chu(d['tu_cung'])} hay dồn bận tâm vào {_vat(den_c)}, rồi kéo theo "
-                  f"{_vat(d['xung_cung'] or den_c)}.")
-            tieu0 = _TIEU_BAY[hoa].format(A=A, b=B)
-        else:
-            y0 = f"{_chu(d['tu_cung'])} {_Y_BAY[hoa]} {_vat(den_c)}."
-            tieu0 = _TIEU_BAY[hoa].format(A=A, b=B)
-        # Kỵ giữ câu của mã (nói cả mảng bị kéo theo); Lộc/Quyền/Khoa dùng câu theo cung đích nếu KB có.
-        y = sau or (y0 if hoa == "Kỵ" else y_dich or y0)
-        lk_mau = (f"Khi {_vat(d['tu_cung'])} đang căng, hoãn quyết định lớn về {_vat(den_c)} vài ngày và nói "
-                  "rõ với người liên quan." if hoa == "Kỵ" else
-                  f"Khi {_vat(d['tu_cung'])} đang thuận, dành một phần kết quả ấy cho {_vat(den_c)}.")
-        if lk_dich and hoa == "Kỵ":           # việc theo cung đích, gắn vào lúc mảng phát đang căng
-            lk_dich = f"Khi {_vat(d['tu_cung'])} đang căng, {_thuong(lk_dich)}."
-        lk0 = lk_dich if lk_dich and lk_dich not in (da_lk or set()) else lk_mau
-        if hoa == "Khoa" and y_dich and y == y_dich:
-            tieu0 = _tieu_de(y_dich, tieu0)
-        cu = (f"Hoá {hoa} ({d['sao']}, can {d['can']}) từ cung {d['tu_cung']} vào {d['den_cung']}"
-              + (f", chiếu {d['xung_cung']}" if hoa == "Kỵ" else ""))
         goc = f"{slug(d['tu_cung'])}+{slug(d['den_cung'])}"
-    lk = n["viec_nen_lam"] if mau and not _THUAT_NGU.search(n["viec_nen_lam"]) else lk0.format(a=a)
-    goc = slug(n["ma_mau"]) if n.get("ma_mau") else goc
     tt = [n["ghi_chu_tuan_triet"]] if n.get("ghi_chu_tuan_triet") else []
-    tieu = n["tieu_de"] if mau else tieu0
-    if _THUAT_NGU.search(tieu) or _TN_TIEU_DE.search(tieu) or len(tieu) > 60:     # vd mẫu "Kỵ chiếu về bản thân"
-        tieu = tieu0 if len(tieu0) <= 60 else "Mảng đời tác động lẫn nhau"
+    tieu = n["tieu_de"] if len(n["tieu_de"]) <= 60 else "Mảng đời tác động lẫn nhau"
+    cu = list(n.get("can_cu") or [phl.can_cu_duong(d)]) + tt
     if hoa == "Kỵ":
-        return _hop("luu_y", tieu, y, [cu, *tt], _ma("ds", "duong_bay", goc, slug(hoa), "vap"), 2.0, huong=lk,
+        return _hop("luu_y", tieu, n["nghia"], cu, _ma("ds", "duong_bay", goc, slug(hoa), "vap"), 2.0, huong=lk,
                     _linh=d["tu_cung"])
-    return _hop("diem_manh", tieu, y, [cu, *tt], _ma("ds", "duong_bay", goc, slug(hoa), "manh"),
+    return _hop("diem_manh", tieu, n["nghia"], cu, _ma("ds", "duong_bay", goc, slug(hoa), "manh"),
                 1.5 if hoa == "Lộc" else 1.0, loi_khuyen=lk, _linh=d["tu_cung"])
 
 

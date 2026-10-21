@@ -57,8 +57,19 @@ def hoa(h: str) -> dict | None:
     return _muc(_lay("hoa", h))
 
 
-def phi_vao_cung(h: str, cung: str) -> str | None:
-    return _chuoi(_lay("phi_vao_cung", h, cung))
+def phi_vao_cung(h: str, cung: str) -> dict | None:
+    """Lời theo CUNG ĐÍCH của đường bay → {"y", "viec_nen_lam", "can_cu"} (ô thiếu = None). Mẫu có {Chu_tu}/{chu_tu}
+    = mảng phát bằng lời thường. Bản cũ là một chuỗi → coi là "y"."""
+    x = _lay("phi_vao_cung", h, cung)
+    if isinstance(x, str):
+        return {"y": _chuoi(x), "viec_nen_lam": None, "can_cu": None}
+    m = _muc(x)
+    return {k: _chuoi(m.get(k)) for k in ("y", "viec_nen_lam", "can_cu")} if m else None
+
+
+def ky_chieu(cung: str) -> str | None:
+    """Hoá Kỵ chiếu (xung) vào `cung`: một câu đời thường nói mảng ấy bị kéo theo thế nào."""
+    return _chuoi(_lay("ky_chieu", cung))
 
 
 def tu_hoa_cung(h: str) -> dict | None:
