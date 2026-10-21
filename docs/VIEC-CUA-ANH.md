@@ -622,3 +622,12 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
 - [ ] Cập nhật Chính sách quyền riêng tư: bài luận lưu (12 tháng, chỉ khi bấm Lưu/bật Tự lưu), phiếu "Đúng với mình" (24 tháng, khoá ẩn danh), câu hỏi đã lọc lưu khi người dùng chọn chủ đề / xác nhận "đúng ý tôi hỏi".
 - [ ] Deploy engine Render rồi mở `/tu-vi` → "Luận giải toàn bộ" với lá số của anh, đọc thử 12 chương.
 - [ ] Quyết (khi rảnh): Mệnh vô chính diệu gặp Tuần/Triệt — Nam phái thường coi là tốt, hiện bài vẫn ghi "việc đến chậm". Giữ hay đổi?
+
+## PT-KD-ĐS. Nâng cấp Phong thuỷ + Kinh Dịch (2026-10-21, `docs/NANG-CAP-PHONG-THUY-KINH-DICH.md`)
+
+- [ ] **Đọc mục 3 (đề xuất kiến trúc) và duyệt từng ý**: khuôn bài đọc chung mọi mảng · "hồ sơ nhà" lưu trên máy · chip ý định dùng
+  chung · nhắc ứng kỳ opt-in · tín hiệu ngầm thay bình chọn. Em chưa làm mục nào trong 5 mục này.
+- [ ] **Bảng lưu nguyệt trong tài liệu Drive lệch quy tắc chuẩn** (2024 Thìn ghi tháng Dần nhập trung 8; sách Thẩm thị: 5). Em dùng quy
+  tắc chuẩn; nếu anh có nguồn khác cho bảng đó, báo em để thêm công tắc phái.
+- [ ] Sau khi merge: mở `/kinh-dich` hỏi "Tôi nên mua hay bán căn nhà này?" → phải thấy câu hỏi lại trước khi gieo; mở `/phong-thuy` →
+  khối "Nhà của bạn" dưới phần Đo hướng.

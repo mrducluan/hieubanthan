@@ -12,6 +12,33 @@ test("mệnh quái + la bàn + hướng hợp tuổi", async ({ page }) => {
   await expect(ans).toContainText("Tuyệt Mệnh");
 });
 
+test("PT-ĐS: Nhà của bạn — đọc bằng lời thường, 5 chương, người cùng ở khác nhóm, phần sách vở gập", async ({ page }) => {
+  await napHoSo(page);                                   // nam 17/05/1990 → mệnh Khảm (Đông tứ)
+  await page.goto("/phong-thuy");
+  const nha = page.getByTestId("nha-cua-ban");
+  await nha.getByLabel("Độ hướng nhà cho bài đọc").fill("180");
+  await nha.getByLabel("Năm xây hoặc năm dọn vào").fill("2008");
+  await nha.getByRole("button", { name: "Thêm người cùng ở" }).click();
+  await nha.getByLabel("Năm sinh người cùng ở 1").fill("1992");
+  await nha.getByRole("button", { name: "Đọc nhà của tôi" }).click();
+  const bc = nha.getByTestId("bao-cao-nha");
+  await expect(bc).toBeVisible();
+  await expect(bc.getByTestId("nha-chuong-ban_hop_huong")).toContainText("Bạn mệnh Khảm");
+  const c2 = bc.getByTestId("nha-chuong-ngoi_nha_voi_ban");
+  await expect(c2).toContainText("Nhà hướng Nam, Khảm trạch");
+  await expect(c2.getByTestId("chip-muc").first()).toContainText("Thuận lợi");
+  await expect(c2).toContainText("khác nhóm");                              // vợ 1992 → Đoài, Tây tứ
+  await expect(bc.getByTestId("nha-goi-y-phong")).toContainText("Cửa chính / lối vào");
+  await expect(bc.getByTestId("nha-ba-thang").locator("[data-muc]")).toHaveCount(3);
+  await expect(bc.getByTestId("nha-han-nam")).toContainText("Thái Tuế");
+  await expect(bc.getByTestId("nha-hanh-dong")).toContainText("Làm ngay");
+  // thuật ngữ chỉ nằm trong "Vì sao nói vậy" (gập)
+  await expect(c2.getByTestId("can-cu")).toBeHidden();
+  await c2.getByRole("button", { name: "Vì sao nói vậy" }).first().click();
+  await expect(c2.getByTestId("can-cu").first()).toContainText("Diên Niên");
+  await expect(bc).toContainText("Không cần mua gì thêm");
+});
+
 test("bố trí dân gian ghi rõ nguồn", async ({ page }) => {
   await page.goto("/phong-thuy");
   const ans = await hoi(page, "Gương đối diện giường có sao không?");

@@ -207,3 +207,47 @@ def api_tuoi(slug: str) -> dict:
     if k is None:
         raise HTTPException(404, detail="Không có trang tuổi này")
     return {"engine_version": ENGINE_VERSION, **pt_tuoi.tuoi(*k)}
+
+
+# --------------------------------------------------------------------------- #
+# PT-ĐS — báo cáo "Nhà của bạn" (đời thường, tất định, miễn phí)
+# --------------------------------------------------------------------------- #
+_BoCuc = bo_cuc.BoCuc      # tên trường `bo_cuc` che tên module khi pydantic đánh giá chú thích
+
+
+class NhaInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    huong_do: float | None = Field(default=None, ge=0, lt=360, description="Độ HƯỚNG nhà (mặt nhìn ra), 0 = chính Bắc")
+    huong: Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] | None = None
+    nam_xay: int | None = Field(default=None, ge=1864, le=2150)
+    toa: str | None = Field(default=None, max_length=10)
+    theo: Literal["cua", "ban_cong"] = "cua"
+    bo_cuc: _BoCuc | None = None
+
+
+class ThanhVienInput(SinhInput):
+    vai: Literal["vo", "chong", "con", "cha_me", "khac"] = "khac"
+
+
+class LuanGiaiPTInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    sinh: SinhInput | None = None
+    nha: NhaInput
+    thanh_vien: list[ThanhVienInput] = Field(default_factory=list, max_length=6)
+    ngay_xem: _dt.date | None = None
+
+
+@router.post("/luan-giai")
+def api_luan_giai(inp: LuanGiaiPTInput) -> dict:
+    from app.luangiai import phongthuy_doi_song as pt_ds  # noqa: PLC0415
+    nha = inp.nha.model_dump(exclude_none=True)
+    if inp.nha.bo_cuc is not None:
+        nha["bo_cuc"] = inp.nha.bo_cuc.model_dump(exclude_none=True)
+    tvs = [{**t.sinh(), "vai": t.vai} for t in inp.thanh_vien]
+    try:
+        r = pt_ds.luan_giai(inp.sinh.sinh() if inp.sinh else None, nha, tvs, inp.ngay_xem)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)[:300])
+    return {"engine_version": ENGINE_VERSION, **r}

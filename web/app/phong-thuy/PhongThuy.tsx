@@ -6,6 +6,7 @@ import { KhaoSatNha } from "@/components/huyen-hoc/KhaoSatNha";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { HuyenKhong } from "@/components/huyen-hoc/HuyenKhong";
+import { NhaCuaBan } from "@/components/huyen-hoc/NhaCuaBan";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { DongPhai, KhungPhai, type MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
@@ -43,7 +44,7 @@ export function PhongThuy() {
 
   useBatDauDoc("phongthuy", Boolean(mq));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Compass} ten="Phong thuỷ" mo_ta="Bát trạch: mệnh quái theo năm sinh (mốc Lập xuân, hoặc Tết âm lịch tuỳ bạn chọn) và giới tính, tám hướng du niên, cửa – chủ – bếp, sao năm. Mục nào là quan niệm dân gian đều ghi rõ; không giới thiệu vật phẩm “hoá giải”." />;
+  const dau = <DauMang Icon={Compass} ten="Phong thuỷ" mo_ta="Nhà bạn đang ở — hay căn định mua — có hợp bạn không, và nếu chỉ kê lại một món đồ thì kê gì? Nhập năm sinh, đo hướng cửa bằng điện thoại, trang đọc cho bạn bằng lời thường: bạn hợp phía nào, từng phòng nên đặt gì, tháng nào nên sửa. Phần sách vở (du niên, phi tinh) gập lại cho ai muốn mở. Không giới thiệu vật phẩm “hoá giải”." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   return (
     <div>
@@ -78,7 +79,8 @@ export function PhongThuy() {
           document.getElementById("huyen-khong")?.scrollIntoView({ behavior: "smooth", block: "start" });
         }} />
       </div>
-      <div className="mx-auto mt-8 max-w-5xl"><KhaoSatNha sinh={sinh} doHuongGoiY={doHuong} /></div>
+      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="nha-cua-ban"><NhaCuaBan sinh={sinh} doHuongGoiY={doHuong} /></div>
+      <div className="mx-auto mt-8 max-w-5xl scroll-mt-24" id="khao-sat-nha"><KhaoSatNha sinh={sinh} doHuongGoiY={doHuong} /></div>
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="huyen-khong"><HuyenKhong doToaGoiY={doToa} /></div>
       {mq && <div className="mx-auto max-w-3xl"><CuoiBaiDoc moDun="phongthuy" cauHoi="Phần hướng nhà và bố trí có giúp ích cho bạn?" /></div>}
 
