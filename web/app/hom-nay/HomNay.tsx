@@ -425,8 +425,7 @@ export function HomNay() {
 
           <CuoiBaiDoc moDun="hom_nay" cauHoi="Thẻ hôm nay có giúp bạn định hướng ngày của mình?" />
 
-          <p className="text-xs text-fg-faint">{the.luu_y} Muốn hiểu sâu hơn: <Link href="/ban-than" className="text-gold hover:underline">bài đọc đầy đủ</Link> ·{" "}
-            <Link href="/hop-doi" className="text-gold hover:underline">xem hợp với ai</Link>.</p>
+          <p className="text-xs text-fg-faint">{the.luu_y}</p>
         </div>
       )}
     </div>

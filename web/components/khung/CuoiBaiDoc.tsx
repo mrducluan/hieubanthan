@@ -3,9 +3,12 @@
 // một lần mỗi mảng). Nghĩa "đọc xong" từng mảng: Thần số/chiều sâu = tới hết 4 thẻ cốt lõi / phần chiều sâu; Tử vi, Bát tự
 // = cuộn qua lá số + chi tiết + cách cục tới khối luận giải; Kinh Dịch = có lời quẻ và cuộn xuống dưới khung hỏi;
 // Phong thuỷ = qua la bàn + công cụ hướng nhà; Hợp đôi = hết phần so hai người; Hôm nay = hết thẻ ngày/tháng/năm.
-// + góp ý 1 chạm (feedback_submitted, huu_ich) + chỗ cho lời mời chia sẻ của mảng (Gate 2). Đặt SAU phần bài đọc.
+// + góp ý 1 chạm (feedback_submitted, huu_ich) + chỗ cho lời mời chia sẻ của mảng (Gate 2) + khối "Đọc tiếp về bạn" (CTA-1).
+// Đặt SAU phần bài đọc.
 import { useEffect, useRef, type ReactNode } from "react";
 import { batDauDoc, docXong } from "@/lib/do-luong";
+import { CuoiPhanXem } from "@/components/cta/CuoiPhanXem";
+import { MANG_TU_MO_DUN } from "@/lib/goi-y-cheo";
 import { GopY } from "./GopY";
 
 /** Ghi reading_started một lần khi `sanSang` (kết quả của mảng đã hiện). */
@@ -45,6 +48,8 @@ export function CuoiBaiDoc({ moDun, cauHoi, chiaSe }: { moDun: string; cauHoi?: 
       <MocDocXong moDun={moDun} />
       <GopY moDun={moDun} cauHoi={cauHoi} />
       {chiaSe}
+      {/* CTA-1: "Đọc tiếp về bạn" — gợi chéo sang mảng khác (luận giải nhỏ do engine ghép), Sao, chia sẻ, ủng hộ. */}
+      {MANG_TU_MO_DUN[moDun] && <CuoiPhanXem mang={MANG_TU_MO_DUN[moDun]} />}
     </section>
   );
 }
