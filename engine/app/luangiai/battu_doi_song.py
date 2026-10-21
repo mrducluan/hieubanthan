@@ -568,6 +568,16 @@ def muc_hai_cach(pt: dict, can: str, chi: str) -> tuple[str, str, str]:
     return m1, m2, gop_muc(m1, m2)
 
 
+def muc_thang(pt: dict, can: str, chi: str) -> tuple[str, str, str]:
+    """Mức tháng (lưu nguyệt — lớp ưu tiên thấp nhất): cùng ngưỡng ±1 như đại vận nhưng gộp CHẶT hai cách như mảng
+    đời (chỉ Thuận lợi / Cần lưu ý khi cả hai cách cùng thấy). Gộp nới của đại vận làm 34% số tháng "Cần lưu ý", 21% cân
+    bằng (nhiều lá 7–8 tháng cam / năm); gộp chặt: 26 · 58 · 16%, trung bình ~2 tháng cần lưu ý / năm (đo 100 lá ×
+    12 tháng, 2026-10-21)."""
+    m1 = _muc(_diem_tru(can, chi, pt["cach_1"]["hanh"], pt["cach_1"]["ky"]), 1, -1)
+    m2 = _muc(_diem_tru(can, chi, pt["cach_2"]["hanh"], pt["cach_2"]["ky"]), 1, -1)
+    return m1, m2, gop_muc_mang(m1, m2)
+
+
 def _cau_hai_cach(m1: str, m2: str, cho: str = "giai đoạn này") -> str:
     """Câu NÓI RÕ khi hai cách đọc khác nhau (không chọn thay người dùng). `cho` gọi tên lớp thời gian."""
     if m1 == m2:
@@ -1130,7 +1140,7 @@ def _chuong_nam_nay(pt: dict, tgb: list[dict], ngay_xem: dt.date, hoc: tuple, vt
                              [q["mo_ta"] for q in qh], _mm("nam_nay", "nam", loai_qh), 2.5, huong=o.get("loi_khuyen")))
     thang_cau = []
     for i, t in enumerate(ba_thang_tiet(pt, ngay_xem), 1):
-        a, b, m = muc_hai_cach(pt, t["can"], t["chi"])
+        a, b, m = muc_thang(pt, t["can"], t["chi"])
         goi = (f"tháng xoay quanh {_van_kb(t['thap_than'])['chu_de']}" if t["thap_than"] == ln["thap_than"]
                else kb.thang(t["thap_than"]) or "hợp làm việc chính, giữ nhịp đều")
         ten = f"Từ {t['tu'].day}/{t['tu'].month} đến {t['den'].day}/{t['den'].month}"
@@ -1262,7 +1272,7 @@ def muoi_hai_thang(pt: dict, ngay_xem: dt.date) -> list[dict]:
     """12 tháng tới theo tiết, mỗi tháng chấm hai cách như năm (gộp `gop_muc`)."""
     ra = []
     for t in ba_thang_tiet(pt, ngay_xem, 12):
-        a, b, m = muc_hai_cach(pt, t["can"], t["chi"])
+        a, b, m = muc_thang(pt, t["can"], t["chi"])
         o = (kb.van_han_loi("nho", "can", TT_NHOM[t["thap_than"]]) if (pt.get("tuoi") or 99) < dsc.TUOI_VH_NHO
              else kb.van_han_loi("thap_than", t["thap_than"])) or {}
         ra.append({"tu": t["tu"].isoformat(), "den": t["den"].isoformat(), "muc": m, "nhan_muc": kb.nhan_muc(m),

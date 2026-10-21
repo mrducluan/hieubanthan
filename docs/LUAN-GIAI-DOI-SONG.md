@@ -561,3 +561,10 @@ Bát tự thêm dải 12 tháng. E2E `e2e/van-han.spec.ts`.
 niên, cờ không đổi mức, trẻ dưới 18, lời văn (thuật ngữ, doạ, cụm cấm / chung chung, bệnh), không câu Barnum (Bát tự 80
 lá; Tử vi qua `test_tuvi_doi_song_chung_chung`), không lặp câu trong chương, KB đủ ô và sạch, cốt lõi, lời mời không doạ,
 phân bố nhãn. Không đổi lá số / tứ trụ → không tăng `ENGINE_VERSION`.
+
+### 8.x Tháng Bát tự gộp chặt (2026-10-21)
+
+Dải 12 tháng (và 3 tháng ở "Năm nay") dùng `muc_thang`: ngưỡng ±1 như đại vận nhưng gộp chặt hai cách (chỉ Thuận lợi /
+Cần lưu ý khi cả hai cách cùng thấy). Trước: 46 · 21 · 34% (Thuận · Cân bằng · Cần lưu ý), nhiều lá 7–8 tháng cam /
+năm; sau: 26 · 58 · 16%, trung bình ~2 tháng "Cần lưu ý" / năm (100 lá × 12 tháng). Lưu nguyệt là lớp ưu tiên thấp
+nhất nên chỉ tô màu khi tín hiệu đồng thuận. Test `test_thang_chi_to_mau_khi_tin_hieu_ro`.

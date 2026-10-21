@@ -627,3 +627,21 @@ def test_phan_bo_muc_khong_lech_mot_phia():
                 dem.setdefault(c["ma"], Counter())[c["muc"]] += 1
     for ma, c in dem.items():
         assert c["thuan"] / sum(c.values()) < 0.60, (ma, dict(c))
+
+
+def test_thang_chi_to_mau_khi_tin_hieu_ro():
+    """Lưu nguyệt là lớp ưu tiên thấp nhất: tháng chỉ Thuận lợi / Cần lưu ý khi hai cách cùng thấy. Đo 100 lá × 12
+    tháng: không nhãn nào ≥ 65%, mỗi nhãn ≥ 10%, trung bình 1–3 tháng "Cần lưu ý" mỗi năm."""
+    import random
+    from collections import Counter
+    rd = random.Random(5)
+    dem, cam = Counter(), []
+    for _ in range(100):
+        d = dt.datetime(rd.randint(1950, 2010), rd.randint(1, 12), rd.randint(1, 28), rd.randint(0, 23), 30)
+        b = toan_bo.battu({"lich": d, "gioi_tinh": rd.choice(["nam", "nu"])}, ngay_xem=dt.date(2026, 10, 21))
+        ms = [t["muc"] for t in _ch(b, "van_han")["thang_toi"]]
+        dem.update(ms)
+        cam.append(ms.count("can_chu_dong"))
+    tong = sum(dem.values())
+    assert all(0.10 <= dem[m] / tong < 0.65 for m in ("thuan", "can_bang", "can_chu_dong")), dict(dem)
+    assert 1 <= sum(cam) / len(cam) <= 3, sum(cam) / len(cam)
