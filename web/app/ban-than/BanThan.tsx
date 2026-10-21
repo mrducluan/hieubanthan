@@ -143,6 +143,11 @@ export function BanThan() {
             <ArrowRight className="mt-3 size-4 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden />
           </Link>
         ))}
+        <p className="text-sm sm:col-span-3">
+          <Link href="/ban-than/bai-da-luu" className="text-fg-muted underline-offset-4 hover:text-gold hover:underline" data-testid="lien-ket-bai-da-luu">
+            Bài luận đã lưu trong tài khoản →
+          </Link>
+        </p>
       </section>
 
       {/* SAO-3: Lưu hồ sơ · Hỏi 3 câu · Mời 1 bạn → nhận Sao (tự ẩn khi chưa bật tài khoản / công tắc tắt với khách). */}

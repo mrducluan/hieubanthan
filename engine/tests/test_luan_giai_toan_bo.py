@@ -18,15 +18,18 @@ client = TestClient(app)
 LA = {"birth_date": "1997-03-19", "birth_time": "00:30", "gender": "nam", "noi_sinh": "ha-noi"}
 
 
-def test_tuvi_du_chuong_va_khong_trung():
+def test_tuvi_du_chuong_va_ket_mot_lan():
+    """LG-ĐS: Tử vi theo bản đời sống (12 chương); Bát tự vẫn ghép từ hỏi đáp (khử trùng như cũ)."""
     bc = toan_bo.tuvi({"ngay": dt.date(1997, 3, 19), "ti": 0, "gioi_tinh": "nam"}, ngay_xem=dt.date(2026, 10, 1))
     ma = [c["ma"] for c in bc["chuong"]]
-    assert ma == [m for m, _, _ in toan_bo.CHUONG_TUVI]
+    assert ma == [m for m, _, _ in toan_bo.CHUONG_TUVI] and len(ma) == 12 and bc["phien_ban"] == "doi_song_1"
     tat_ca = [d for c in bc["chuong"] for d in c["doan"]]
-    assert len(tat_ca) == len(set(tat_ca))                         # không đoạn nào lặp
     assert hoi_van.KET not in tat_ca and bc["ket"] == hoi_van.KET  # lời kết chỉ một lần
     assert all(c["doan"] for c in bc["chuong"])
-    assert any("Cách cục" in d for d in bc["chuong"][0]["doan"])   # KB-2 (#18) đi qua đường hỏi về Mệnh
+    # trong một chương không đoạn nào lặp
+    assert all(len(c["doan"]) == len(set(c["doan"])) for c in bc["chuong"])
+    # cách cục (KB-2) vẫn đi vào chương 1 — tên gốc ở "Vì sao nói vậy"
+    assert any(x.startswith("Cách cục") for x in bc["chuong"][0]["can_cu"])
 
 
 def test_battu_du_chuong():
@@ -80,11 +83,11 @@ def test_diem_nhan_cat_dung_cho():
         == "Đại hạn: cung Điền Trạch (Canh Thìn), từ 36 đến 45 tuổi."
 
 
-# TV-V2 — hai chương mới: "Đường bay tứ hoá" (trước Vận hạn) và "3 tháng tới" (ngay sau Vận hạn).
+# TV-V2 → LG-ĐS: "Đường bay" (phi hoá) đọc trước "Năm nay & 3 tháng tới" (đại hạn > lưu niên > tiểu hạn > tháng).
 def test_tv_v2_hai_chuong_moi_dung_cho():
     ma = [m for m, _, _ in toan_bo.CHUONG_TUVI]
     assert ma[0] == "tong_quan"                       # SAO-2: chương 1 (miễn phí) không đổi
-    assert ma.index("duong_bay") + 1 == ma.index("van_han") and ma.index("ba_thang_toi") == ma.index("van_han") + 1
+    assert ma.index("duong_bay") + 1 == ma.index("nam_nay") and ma[-1] == "loi_khuyen"
     assert all(("tuvi", m) in toan_bo.CAU_HOI_MO for m in ma)
 
 
@@ -93,10 +96,15 @@ def test_tv_v2_hai_chuong_moi_dung_cho():
 def test_tv_v2_noi_dung_hai_chuong(sinh):
     bc = toan_bo.tuvi(sinh, ngay_xem=dt.date(2026, 10, 19))
     ch = {c["ma"]: c for c in bc["chuong"]}
-    db, ba = " ".join(ch["duong_bay"]["doan"]), " ".join(ch["ba_thang_toi"]["doan"])
-    assert "Lai nhân cung" in db and "tự hoá" in db and "Đường bay" in db
-    assert "Nhịp 3 tháng tới" in ba and ("Thuận" in ba or "Bình" in ba or "Cần thận trọng" in ba)
-    assert "Đại hạn > lưu niên > tiểu hạn > lưu nguyệt" in ba
-    # điểm nhấn của chương khoá là dữ kiện đã tính của chính chương, không phải định nghĩa
-    assert ch["duong_bay"]["moi_xem"]["diem_nhan"].startswith("Lai nhân cung")
-    assert ch["ba_thang_toi"]["moi_xem"]["diem_nhan"].startswith("Nhịp 3 tháng tới")
+    db, nn = ch["duong_bay"], ch["nam_nay"]
+    assert any(x.startswith("Lai nhân cung") for x in db["can_cu"])
+    assert db["hop"] and all(h["can_cu"] for h in db["hop"])
+    assert any("tự hoá" in x or x.startswith("Hoá ") for x in db["can_cu"])
+    thang = [h for h in nn["hop"] if ".thang" in h["ma_mau"]]
+    # tháng liền nhau cùng mức + cùng gợi ý gộp một hộp (mã "thang2+3") → vẫn phủ đủ 3 tháng
+    so = [int(x) for h in thang for x in h["ma_mau"].split(".")[2][5:].split("+")]
+    assert so == [1, 2, 3] and all(h["loai"] == "thoi_diem" for h in thang)
+    assert "Ưu tiên: đại hạn > lưu niên > tiểu hạn > lưu nguyệt" in nn["can_cu"]
+    assert nn["hop"][0]["ma_mau"].startswith("ds.nam_nay.dai_han.")
+    # điểm nhấn của chương khoá là câu tóm tắt đã tính của chính chương
+    assert db["moi_xem"]["diem_nhan"] and nn["doan"][0].startswith(nn["moi_xem"]["diem_nhan"].rstrip("…"))

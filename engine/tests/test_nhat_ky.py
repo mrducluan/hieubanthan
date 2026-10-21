@@ -53,3 +53,39 @@ def test_huyenhoc_khong_luu_tra_loi_khi_co_du_lieu_sinh():
     kq = kd.tra_loi("Tôi có nên nghỉ việc không?", "tu_dong", gia_tri_hao=[7, 7, 8, 7, 7, 9])
     bg = nhat_ky.ban_ghi_huyenhoc("kinhdich", "Tôi có nên nghỉ việc không?", kq, False)
     assert bg["cau_tra_loi"] and bg["mo_dun"] == "kinhdich" and "user_id" not in bg
+
+
+# ----------------------------------------------------------------- QC LG-ĐS: tên một chữ, liên kết, tên sao
+@pytest.mark.parametrize("vao,khong_con", [
+    ("tôi tên Lan, năm nay đổi việc được không?", "Lan"),
+    ("Mình là Hùng, 34 tuổi, có nên cưới?", "Hùng"),
+    ("xin chào, tôi là Mai nha", "Mai"),
+    ("Mình là Khoa, hỏi chút", "Khoa"),                    # "Khoa" trùng tên Hoá Khoa — một chữ sau "là" vẫn lọc
+    ("Chồng tôi tên Minh Anh có hợp không", "Minh"),
+    ("xem fb.com/lan.99 giúp", "fb.com"),
+    ("https://www.facebook.com/lan.nguyen nhé", "facebook"),
+    ("zalo.me/0912 nhé", "zalo"),
+    ("nick @lan_99 đó", "lan_99"),
+])
+def test_loc_ten_mot_chu_va_lien_ket(vao, khong_con):
+    assert khong_con not in nhat_ky.loc_cau_hoi(vao)
+    assert khong_con not in nhat_ky.loc_cau_hoi_huyenhoc(vao)
+
+
+@pytest.mark.parametrize("cau", [
+    "Chính tinh của tôi là Thiên Cơ thì sao?",
+    "Cung Mệnh của tôi có Thiên Cơ ở đó",
+    "Tôi là Thiên Cơ ở Mệnh à?",
+    "Lá số có Tả Phù Hữu Bật ở Mệnh",
+    "Mệnh có Hoá Kỵ và Kình Dương thì sao",
+    "Quan Lộc có Thất Sát, Tài Bạch có Vũ Khúc",
+    "năm nay ở đâu ổn, ấy là điều tôi lo",               # chữ thường có dấu không phải chữ hoa
+])
+def test_khong_loc_nham_ten_sao_cung(cau):
+    assert nhat_ky.loc_cau_hoi_huyenhoc(cau) == cau
+
+
+def test_nhung_dung_chung_bo_loc():
+    from app import nhung  # noqa: PLC0415
+    s = "Tôi tên Lan, xem fb.com/abc"
+    assert nhung.loc_them(s) == nhat_ky.loc_ten_lien_ket(s) == "Tôi tên [tên], xem [liên kết]"

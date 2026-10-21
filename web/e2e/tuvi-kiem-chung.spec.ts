@@ -5,7 +5,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 import FX from "./fixtures/tuvi-v2.json";
 import { locThuocTinh } from "../lib/do-luong";
-import { maNhip, maPhiHoa, MAU_KIEM_CHUNG, nhanMau, tinhKiemChung } from "../lib/kiem-chung";
+import { MA_DOI_SONG, maNhip, maPhiHoa, MAU_KIEM_CHUNG, nhanMau, tinhKiemChung } from "../lib/kiem-chung";
 
 const PHI_HOA = FX["phi-hoa"];
 const NHIP = FX["nhip-3-thang"];
@@ -40,7 +40,14 @@ test("mã kiểm chứng tất định, ngắn, chỉ ASCII — qua được b�
   expect(maNhip({ muc: "binh", ly_do: [] })).toBe("binh.-");
   expect(nhanMau("nhip_3_thang", "thuan.ln")).toBe("Thuận · Lộc nhập cung chính");
   // Bộ lọc vẫn chặn chữ tự do / thuộc tính lạ (không có đường nào để bình luận đi lên PostHog).
-  expect(locThuocTinh({ mau: "x".repeat(41), binh_luan: "sai rồi", loai: "phi_hoa" })).toEqual({ loai: "phi_hoa" });
+  expect(locThuocTinh({ mau: "x".repeat(61), binh_luan: "sai rồi", loai: "phi_hoa" })).toEqual({ loai: "phi_hoa" });
+  // LG-ĐS: mã hộp đời sống "ds.*" tới 60 ký tự đi qua; vẫn chặn 4 chữ số liền (dễ là năm sinh).
+  const ds = "ds.su_nghiep.thien_co.sang.manh";
+  expect(locThuocTinh({ mau: ds, loai: "doi_song" })).toEqual({ mau: ds, loai: "doi_song" });
+  expect(locThuocTinh({ mau: `ds.nam_nay.${"a".repeat(40)}` }).mau).toHaveLength(51);
+  expect(locThuocTinh({ mau: "ds.nam_nay.1990" }).mau).toBeUndefined();
+  expect(MA_DOI_SONG.test(ds) && !MA_DOI_SONG.test("ds.") && !MA_DOI_SONG.test("su_nghiep.manh")).toBe(true);
+  expect(nhanMau("doi_song", ds)).toBe("Công việc · thien co · sáng · điểm mạnh");
 });
 
 test("bảng quản trị: chỉ mã đủ mẫu mới có tỉ lệ, tỉ lệ đúng thấp lên đầu", () => {

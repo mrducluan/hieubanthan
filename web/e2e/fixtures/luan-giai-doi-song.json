@@ -1,0 +1,2491 @@
+{
+ "_ghi_chu": "Báo cáo đời sống SINH TỪ ENGINE THẬT (POST /v1/tuvi/luan-giai, hồ sơ HO_SO_MAU e2e/_hoso.ts, ngày xem 2026-10-21, trong_so cho cot_loi[0] = 94/26 → 78% · 120 phiếu). Sửa tay đúng 3 chỗ để kiểm giao diện: phi (mien_phi, đã đăng nhập), cot_loi[3] bỏ ma_mau (hộp không mã), thêm hộp dang_xem_lai 'ds.su_nghiep.an' vào chương su_nghiep (web phải ẩn). ty_le = bảng tỉ lệ giả cho cot_loi[1] (36/45) và cot_loi[2] (5/12 < 30 phiếu). Engine đổi đầu ra → chạy lại lệnh sinh (xem lịch sử PR LG-ĐS).",
+ "bao_cao": {
+  "mo_dun": "tuvi",
+  "phien_ban": "doi_song_1",
+  "cot_loi": [
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Công việc là điều bạn để tâm nhiều",
+    "noi_dung": "Công việc là điều bạn để tâm nhiều, dễ thấy mình chưa đủ dù đã cố. Đặt mục tiêu theo quý thay vì theo cảm giác, và ghi lại những việc đã xong.",
+    "can_cu": [
+     "Hoá Kỵ (Thiên Đồng) ở cung Quan Lộc"
+    ],
+    "ma_mau": "ds.su_nghiep.hoa_ky.sinh.vap",
+    "huong_xu_ly": "Đặt mục tiêu theo quý thay vì theo cảm giác, và ghi lại những việc đã xong.",
+    "ty_le_dung": 0.78,
+    "so_phieu": 120,
+    "dang_xem_lai": false,
+    "loai_goc": "luu_y",
+    "tu_chuong": "su_nghiep"
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Trong chuyện tình cảm, bạn chu đáo",
+    "noi_dung": "Trong chuyện tình cảm, bạn chu đáo, nhớ món người ấy thích, biết lúc nào nên ngồi cạnh im lặng.",
+    "can_cu": [
+     "Thái Âm (Miếu) ở cung Phu Thê"
+    ],
+    "ma_mau": "ds.tinh_cam.thai_am.sang.manh",
+    "loai_goc": "diem_manh",
+    "tu_chuong": "tinh_cam"
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Chuyện tiền bạc có người chỉ cách làm",
+    "noi_dung": "Chuyện tiền bạc có người chỉ cách làm, và bạn biết giữ tiền khá tốt.",
+    "can_cu": [
+     "Tả Phù, Hữu Bật, Thiên Việt ở cung Tài Bạch (lục cát)"
+    ],
+    "ma_mau": "ds.tien_bac.cat+tai_bach.co.manh",
+    "loi_khuyen": "Hỏi ý một người am hiểu trước khi bỏ tiền vào việc mới.",
+    "loai_goc": "diem_manh",
+    "tu_chuong": "tien_bac"
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Bạn học được từ cha mẹ",
+    "noi_dung": "Bạn học được từ cha mẹ, sếp tính nguyên tắc và sự nghiêm túc trong công việc.",
+    "can_cu": [
+     "Liêm Trinh (Vượng) ở cung Phụ Mẫu"
+    ],
+    "loai_goc": "diem_manh",
+    "tu_chuong": "gia_dinh"
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Tiền vào ra thất thường",
+    "noi_dung": "Tiền vào ra thất thường, dễ có khoản hao vì vội hoặc vì nể. Không cho vay hay đầu tư khi bị giục quyết ngay trong ngày.",
+    "can_cu": [
+     "Đà La, Hỏa Tinh ở cung Tài Bạch (lục sát)"
+    ],
+    "ma_mau": "ds.tien_bac.sat+tai_bach.co.vap",
+    "huong_xu_ly": "Không cho vay hay đầu tư khi bị giục quyết ngay trong ngày.",
+    "loai_goc": "luu_y",
+    "tu_chuong": "tien_bac"
+   }
+  ],
+  "thoi_gian_bieu": [
+   {
+    "tu_tuoi": 5,
+    "den_tuoi": 14,
+    "nam_tu": 1994,
+    "nam_den": 2003,
+    "cung": "Mệnh",
+    "chu_de": "tự định hình con người mình",
+    "muc": "can_bang",
+    "mot_cau": "Giai đoạn cân bằng: Tập trung vào việc bạn thật sự muốn làm và rèn những thói quen nền.",
+    "de_vap": "Dễ ôm hết mọi việc vì muốn tự chứng tỏ mình.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 15,
+    "den_tuoi": 24,
+    "nam_tu": 2004,
+    "nam_den": 2013,
+    "cung": "Phụ Mẫu",
+    "chu_de": "học hành, cha mẹ và người dẫn dắt",
+    "muc": "thuan",
+    "mot_cau": "Giai đoạn thuận: Học từ người đi trước và giữ gần cha mẹ.",
+    "de_vap": "Dễ va chạm với người lớn vì khác cách nghĩ.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 25,
+    "den_tuoi": 34,
+    "nam_tu": 2014,
+    "nam_den": 2023,
+    "cung": "Phúc Đức",
+    "chu_de": "đời sống tinh thần và gia đình lớn",
+    "muc": "thuan",
+    "mot_cau": "Giai đoạn thuận: Chăm lo niềm vui riêng, giữ nếp nhà và giấc ngủ yên.",
+    "de_vap": "Dễ trăn trở mãi chuyện cũ trong họ hàng.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 35,
+    "den_tuoi": 44,
+    "nam_tu": 2024,
+    "nam_den": 2033,
+    "cung": "Điền Trạch",
+    "chu_de": "nhà cửa, an cư và tài sản",
+    "muc": "thuan",
+    "mot_cau": "Giai đoạn thuận: Lo chuyện chỗ ở và tích luỹ tài sản lâu dài.",
+    "de_vap": "Dễ vay quá sức vì muốn có nhà thật nhanh.",
+    "hien_tai": true
+   },
+   {
+    "tu_tuoi": 45,
+    "den_tuoi": 54,
+    "nam_tu": 2034,
+    "nam_den": 2043,
+    "cung": "Quan Lộc",
+    "chu_de": "sự nghiệp và vị trí trong nghề",
+    "muc": "can_bang",
+    "mot_cau": "Giai đoạn cân bằng: Dồn sức cho chuyên môn và nhận những việc có trách nhiệm rõ.",
+    "de_vap": "Dễ cuốn vào công việc mà lỡ những dịp bên gia đình.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 55,
+    "den_tuoi": 64,
+    "nam_tu": 2044,
+    "nam_den": 2053,
+    "cung": "Nô Bộc",
+    "chu_de": "bạn bè, đồng nghiệp và đội nhóm",
+    "muc": "thuan",
+    "mot_cau": "Giai đoạn thuận: Xây một nhóm làm việc tốt và chọn bạn kỹ.",
+    "de_vap": "Dễ mất sức vì giúp người không đúng chỗ.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 65,
+    "den_tuoi": 74,
+    "nam_tu": 2054,
+    "nam_den": 2063,
+    "cung": "Thiên Di",
+    "chu_de": "đi xa và môi trường mới",
+    "muc": "thuan",
+    "mot_cau": "Giai đoạn thuận: Mở rộng ra ngoài: đổi chỗ làm, học thêm, gặp người mới.",
+    "de_vap": "Dễ thấy chông chênh khi phải xa chỗ quen.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 75,
+    "den_tuoi": 84,
+    "nam_tu": 2064,
+    "nam_den": 2073,
+    "cung": "Tật Ách",
+    "chu_de": "sức khoẻ và nhịp sống",
+    "muc": "thuan",
+    "mot_cau": "Giai đoạn thuận: Xây nếp ăn ngủ, vận động đều và khám sức khoẻ định kỳ.",
+    "de_vap": "Dễ gồng quá sức vì nghĩ mình còn khoẻ.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 85,
+    "den_tuoi": 94,
+    "nam_tu": 2074,
+    "nam_den": 2083,
+    "cung": "Tài Bạch",
+    "chu_de": "kiếm tiền và quản lý tiền",
+    "muc": "thuan",
+    "mot_cau": "Giai đoạn thuận: Tìm cách tăng thu nhập và lập kế hoạch để dành rõ ràng.",
+    "de_vap": "Dễ chạy theo tiền mà bỏ quên nghỉ ngơi.",
+    "hien_tai": false
+   }
+  ],
+  "chuong": [
+   {
+    "ma": "tong_quan",
+    "tieu_de": "Con người bạn",
+    "cau_hoi": "Rốt cuộc tôi là người thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Nhìn chung, con người bạn ở mức cân bằng. Có cả điểm thuận lẫn chỗ cần để ý; kết quả tuỳ nhiều vào cách bạn làm.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn nói có lý",
+      "noi_dung": "Bạn nói có lý, phân tích việc gì cũng tới nơi, nên khi cần thuyết phục ai, người ta thường nghe bạn.",
+      "can_cu": [
+       "Cự Môn (Đắc) ở cung Mệnh"
+      ],
+      "ma_mau": "ds.tong_quan.cu_mon+menh.sang.manh"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Việc đến chậm hơn mong đợi",
+      "noi_dung": "Với bản thân bạn, việc thường đến chậm hơn bạn mong. Nên chuẩn bị sớm, kiên nhẫn và đừng bỏ ngang khi chưa thấy kết quả.",
+      "can_cu": [
+       "Tuần ở cung Mệnh: việc đến chậm, cần kiên nhẫn"
+      ],
+      "ma_mau": "ds.tong_quan.tuan_triet+menh.cham.vap",
+      "huong_xu_ly": "Nên chuẩn bị sớm, kiên nhẫn và đừng bỏ ngang khi chưa thấy kết quả."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn có sự vững vàng bên trong",
+      "noi_dung": "Bạn có sự vững vàng bên trong, gặp chuyện lớn vẫn tìm được cách đứng dậy.",
+      "can_cu": [
+       "Thiên Lương (Đắc) ở cung Phúc Đức"
+      ],
+      "ma_mau": "ds.tong_quan.thien_luong+phuc_duc.sang.manh"
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn sống nhất quán với bản tính từ trẻ đến già",
+      "noi_dung": "Bạn sống nhất quán với bản tính từ trẻ đến già; biết rõ điểm mạnh yếu của mình thì càng về sau càng vững. Nét này dễ bị giảm khi gặp áp lực, nên bạn cần tự chủ nhiều hơn để giữ được nó.",
+      "can_cu": [
+       "Cách cục: Thân Mệnh đồng cung (身命同宮); tam phương có Đà La, Hỏa Tinh, Địa Không, Địa Kiếp hội về (sách xưa gọi là phá cách)"
+      ],
+      "ma_mau": "ds.tong_quan.cach.than_menh_dong_cung.pha"
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn có nền nếp tốt từ gia đình",
+      "noi_dung": "Bạn có nền nếp tốt từ gia đình; tâm trí dễ yên khi có sách vở hoặc người hiểu mình.",
+      "can_cu": [
+       "Thiên Khôi ở cung Phúc Đức (lục cát)"
+      ],
+      "ma_mau": "ds.tong_quan.cat+phuc_duc.co.manh",
+      "loi_khuyen": "Dành thời gian cho những người khiến bạn thấy nhẹ lòng."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Bạn hay hỏi tại sao và dễ bắt lỗi trong lời người khác",
+      "noi_dung": "Bạn hay hỏi tại sao và dễ bắt lỗi trong lời người khác, khiến họ thấy bị soi dù bạn chỉ muốn rõ ràng. Trước khi phản biện ai, nói trước một điều bạn đồng ý với họ, rồi mới nêu chỗ bạn thấy chưa ổn.",
+      "can_cu": [
+       "Cự Môn (Đắc) ở cung Mệnh"
+      ],
+      "ma_mau": "ds.tong_quan.cu_mon+menh.sang.vap",
+      "huong_xu_ly": "Trước khi phản biện ai, nói trước một điều bạn đồng ý với họ, rồi mới nêu chỗ bạn thấy chưa ổn."
+     }
+    ],
+    "doan": [
+     "Nhìn chung, con người bạn ở mức cân bằng. Có cả điểm thuận lẫn chỗ cần để ý; kết quả tuỳ nhiều vào cách bạn làm.",
+     "Nét nổi bật của bạn: bạn nói có lý; bạn có sự vững vàng bên trong. Còn điều nên để ý ở chính mình: việc đến chậm hơn mong đợi; bạn hay hỏi tại sao và dễ bắt lỗi trong lời người khác — mỗi điều có cách gỡ ngay trong hộp."
+    ],
+    "can_cu": [
+     "Cự Môn (Đắc) ở cung Mệnh",
+     "Tuần ở cung Mệnh: việc đến chậm, cần kiên nhẫn",
+     "Thiên Lương (Đắc) ở cung Phúc Đức",
+     "Cách cục: Thân Mệnh đồng cung (身命同宮); tam phương có Đà La, Hỏa Tinh, Địa Không, Địa Kiếp hội về (sách xưa gọi là phá cách)",
+     "Thiên Khôi ở cung Phúc Đức (lục cát)",
+     "Cung Mệnh đọc kèm nửa phần cung xung chiếu Thiên Di và hai cung tam hợp Quan Lộc, Tài Bạch",
+     "Cung Phúc Đức đọc kèm nửa phần cung xung chiếu Tài Bạch và hai cung tam hợp Thiên Di, Phu Thê",
+     "Mệnh chủ Cự Môn, Thân chủ Hỏa Tinh, Thổ Ngũ Cục"
+    ],
+    "cau_tu_soi": "Khi áp lực, phản ứng đầu tiên của bạn thường là gì — và nó giúp hay cản bạn?",
+    "moi_xem": {
+     "diem_nhan": "Nhìn chung, con người bạn ở mức cân bằng.",
+     "cau_hoi": "Điểm mạnh nào bạn đang dùng chưa hết, và điểm dễ vấp nào hay lặp lại trong các quyết định lớn?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "cu_mon",
+      "ten": "Cự Môn",
+      "han": "巨門",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'lời nói': giỏi phân tích, tranh luận. Cần để ý: dễ thị phi, nói thẳng làm mất lòng.",
+      "vi_du": null,
+      "khop": [
+       "Cự Môn"
+      ]
+     },
+     {
+      "ma": "cung_menh",
+      "ten": "Cung Mệnh",
+      "han": "命宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô quan trọng nhất, nói về bản thân: tính cách gốc, cách bạn phản ứng với đời. Đọc lá số luôn bắt đầu từ đây.",
+      "vi_du": null,
+      "khop": [
+       "cung Mệnh",
+       "Cung Mệnh",
+       "Mệnh"
+      ]
+     },
+     {
+      "ma": "tuan",
+      "ten": "Tuần",
+      "han": "旬空",
+      "mo_dun": "tuvi",
+      "de_hieu": "Dấu 'khoảng trống' đặt giữa hai cung theo năm sinh: làm sao trong đó yếu đi lúc đầu, về sau mới rõ. Sao xấu gặp Tuần lại bớt xấu.",
+      "vi_du": null,
+      "khop": [
+       "Tuần"
+      ]
+     },
+     {
+      "ma": "thien_luong",
+      "ten": "Thiên Lương",
+      "han": "天梁",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'che chở': nghĩa hiệp, như người anh cả, hợp nghề dạy, chăm sóc. Cần để ý: hay giảng giải, cố chấp.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Lương"
+      ]
+     },
+     {
+      "ma": "phuc_duc",
+      "ten": "Phúc Đức",
+      "han": "福德宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về đời sống tinh thần, niềm vui bên trong và phúc từ dòng họ.",
+      "vi_du": null,
+      "khop": [
+       "cung Phúc Đức",
+       "Cung Phúc Đức"
+      ]
+     },
+     {
+      "ma": "cach_cuc",
+      "ten": "Cách cục",
+      "han": "格局",
+      "mo_dun": "tuvi",
+      "de_hieu": "Một 'tổ hợp sao' có tên riêng mà sách cổ đã mô tả, như Tử Phủ Vũ Tướng hay Sát Phá Tham. Cách cục chỉ là khung tham khảo — thành hay bại còn tuỳ sao xấu đi kèm.",
+      "vi_du": null,
+      "khop": [
+       "Cách cục"
+      ]
+     },
+     {
+      "ma": "tam_phuong_tu_chinh",
+      "ten": "Tam phương tứ chính",
+      "han": "三方四正",
+      "mo_dun": "tuvi",
+      "de_hieu": "Khi xem một cung, phải nhìn thêm 3 cung khác 'chiếu' vào nó: hai cung tạo tam giác (tam hợp) và cung đối diện. Bốn cung này cùng quyết định một mảng đời.",
+      "vi_du": "Xem Mệnh thì nhìn cả Tài Bạch, Quan Lộc (tam hợp) và Thiên Di (đối diện).",
+      "khop": [
+       "tam phương"
+      ]
+     },
+     {
+      "ma": "da_la",
+      "ten": "Đà La",
+      "han": "陀羅",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sát tinh 'vướng víu': chậm trễ, dây dưa, việc hay kéo dài.",
+      "vi_du": null,
+      "khop": [
+       "Đà La"
+      ]
+     },
+     {
+      "ma": "hoa_tinh",
+      "ten": "Hỏa Tinh",
+      "han": "火星",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sát tinh 'lửa bùng': nóng nảy, bột phát, nhanh đến nhanh đi.",
+      "vi_du": null,
+      "khop": [
+       "Hỏa Tinh"
+      ]
+     },
+     {
+      "ma": "dia_khong",
+      "ten": "Địa Không",
+      "han": "地空",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sát tinh 'trống rỗng': ý tưởng lạ, nhưng dễ hụt hẫng, hao hụt.",
+      "vi_du": null,
+      "khop": [
+       "Địa Không"
+      ]
+     },
+     {
+      "ma": "dia_kiep",
+      "ten": "Địa Kiếp",
+      "han": "地劫",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sát tinh 'mất mát': biến động bất ngờ, cần dự phòng.",
+      "vi_du": null,
+      "khop": [
+       "Địa Kiếp"
+      ]
+     },
+     {
+      "ma": "pha_cach",
+      "ten": "Phá cách",
+      "han": "破格",
+      "mo_dun": "tuvi",
+      "de_hieu": "Khi một cách cục tốt gặp sao xấu (Kình, Đà, Hoả, Linh, Không, Kiếp, Kỵ) làm giảm ý nghĩa tốt của nó.",
+      "vi_du": null,
+      "khop": [
+       "phá cách"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "cuoc_doi",
+    "tieu_de": "Các giai đoạn cuộc đời",
+    "cau_hoi": "Đời tôi đi qua những giai đoạn nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Bạn đang ở giai đoạn 35–44 tuổi, xoay quanh nhà cửa, an cư và tài sản.",
+    "hop": [
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Giai đoạn bạn đang đi",
+      "noi_dung": "Từ 35 đến 44 tuổi (2024–2033): nhà cửa, an cư và tài sản. Giai đoạn thuận: Lo chuyện chỗ ở và tích luỹ tài sản lâu dài.",
+      "can_cu": [
+       "Đại hạn cung Điền Trạch"
+      ],
+      "ma_mau": "ds.cuoc_doi.dh_dien_trach.thuan.hien_tai",
+      "tu_tuoi": 35,
+      "den_tuoi": 44
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Giai đoạn kế tiếp",
+      "noi_dung": "Từ 45 đến 54 tuổi (2034–2043): sự nghiệp và vị trí trong nghề. Giai đoạn cân bằng: Dồn sức cho chuyên môn và nhận những việc có trách nhiệm rõ.",
+      "can_cu": [
+       "Đại hạn cung Quan Lộc"
+      ],
+      "ma_mau": "ds.cuoc_doi.dh_quan_loc.can_bang.tiep",
+      "tu_tuoi": 45,
+      "den_tuoi": 54
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Giai đoạn nên tận dụng",
+      "noi_dung": "Từ 55 đến 64 tuổi (2044–2053): bạn bè, đồng nghiệp và đội nhóm. Giai đoạn thuận: Xây một nhóm làm việc tốt và chọn bạn kỹ.",
+      "can_cu": [
+       "Đại hạn cung Nô Bộc"
+      ],
+      "ma_mau": "ds.cuoc_doi.dh_no_boc.thuan.manh"
+     }
+    ],
+    "doan": [
+     "Bạn đang ở giai đoạn 35–44 tuổi, xoay quanh nhà cửa, an cư và tài sản.",
+     "Trên dòng thời gian của bạn có 7 giai đoạn thuận lợi, 2 giai đoạn cân bằng."
+    ],
+    "can_cu": [
+     "5–14 tuổi: đại hạn cung Mệnh",
+     "15–24 tuổi: đại hạn cung Phụ Mẫu",
+     "25–34 tuổi: đại hạn cung Phúc Đức",
+     "35–44 tuổi: đại hạn cung Điền Trạch",
+     "45–54 tuổi: đại hạn cung Quan Lộc",
+     "55–64 tuổi: đại hạn cung Nô Bộc",
+     "65–74 tuổi: đại hạn cung Thiên Di",
+     "75–84 tuổi: đại hạn cung Tật Ách",
+     "85–94 tuổi: đại hạn cung Tài Bạch"
+    ],
+    "cau_tu_soi": "Giai đoạn nào trong đời bạn thấy mình sống đúng nhất, và vì sao?",
+    "moi_xem": {
+     "diem_nhan": "Bạn đang ở giai đoạn 35–44 tuổi, xoay quanh nhà cửa, an cư và tài sản.",
+     "cau_hoi": "Bạn đang đứng ở giai đoạn nào của đời mình, và giai đoạn kế tiếp xoay quanh điều gì?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "dai_han",
+      "ten": "Đại hạn",
+      "han": "大限",
+      "mo_dun": "tuvi",
+      "de_hieu": "Giai đoạn 10 năm của đời, mỗi giai đoạn ứng với một cung. Đọc hạn luôn xét đại hạn trước.",
+      "vi_du": "Đại hạn 25–34 ở cung Quan Lộc: mười năm này việc làm là trọng tâm.",
+      "khop": [
+       "đại hạn"
+      ]
+     },
+     {
+      "ma": "cung_menh",
+      "ten": "Cung Mệnh",
+      "han": "命宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô quan trọng nhất, nói về bản thân: tính cách gốc, cách bạn phản ứng với đời. Đọc lá số luôn bắt đầu từ đây.",
+      "vi_du": null,
+      "khop": [
+       "cung Mệnh"
+      ]
+     },
+     {
+      "ma": "phu_mau",
+      "ten": "Phụ Mẫu",
+      "han": "父母宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về cha mẹ, người dìu dắt và quan hệ với cấp trên.",
+      "vi_du": null,
+      "khop": [
+       "cung Phụ Mẫu"
+      ]
+     },
+     {
+      "ma": "phuc_duc",
+      "ten": "Phúc Đức",
+      "han": "福德宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về đời sống tinh thần, niềm vui bên trong và phúc từ dòng họ.",
+      "vi_du": null,
+      "khop": [
+       "cung Phúc Đức"
+      ]
+     },
+     {
+      "ma": "dien_trach",
+      "ten": "Điền Trạch",
+      "han": "田宅宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về nhà cửa, đất đai, không khí trong gia đình.",
+      "vi_du": null,
+      "khop": [
+       "cung Điền Trạch"
+      ]
+     },
+     {
+      "ma": "quan_loc",
+      "ten": "Quan Lộc",
+      "han": "官祿宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về công việc, nghề nghiệp, cách bạn làm việc và thăng tiến.",
+      "vi_du": null,
+      "khop": [
+       "cung Quan Lộc"
+      ]
+     },
+     {
+      "ma": "no_boc",
+      "ten": "Nô Bộc",
+      "han": "僕役宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về bạn bè, đồng nghiệp, cấp dưới — những người ngang hoặc dưới mình.",
+      "vi_du": null,
+      "khop": [
+       "cung Nô Bộc"
+      ]
+     },
+     {
+      "ma": "thien_di",
+      "ten": "Thiên Di",
+      "han": "遷移宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về lúc ra ngoài xã hội, đi xa, làm việc ở môi trường lạ.",
+      "vi_du": null,
+      "khop": [
+       "cung Thiên Di"
+      ]
+     },
+     {
+      "ma": "tat_ach",
+      "ten": "Tật Ách",
+      "han": "疾厄宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về thể chất và những điểm cơ thể cần để ý. Không dùng để chẩn đoán bệnh — có vấn đề sức khoẻ hãy hỏi bác sĩ.",
+      "vi_du": null,
+      "khop": [
+       "cung Tật Ách"
+      ]
+     },
+     {
+      "ma": "tai_bach",
+      "ten": "Tài Bạch",
+      "han": "財帛宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về cách bạn kiếm tiền, giữ tiền và tiêu tiền.",
+      "vi_du": null,
+      "khop": [
+       "cung Tài Bạch"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "su_nghiep",
+    "tieu_de": "Công việc & sự nghiệp",
+    "cau_hoi": "Tôi hợp làm việc thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Về công việc, nhìn chung bạn ở mức cân bằng. Không quá dễ cũng không quá khó; thói quen hằng ngày của bạn quyết định nhiều.",
+    "hop": [
+     {
+      "loai": "luu_y",
+      "tieu_de": "Công việc là điều bạn để tâm nhiều",
+      "noi_dung": "Công việc là điều bạn để tâm nhiều, dễ thấy mình chưa đủ dù đã cố. Đặt mục tiêu theo quý thay vì theo cảm giác, và ghi lại những việc đã xong.",
+      "can_cu": [
+       "Hoá Kỵ (Thiên Đồng) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.su_nghiep.hoa_ky.sinh.vap",
+      "huong_xu_ly": "Đặt mục tiêu theo quý thay vì theo cảm giác, và ghi lại những việc đã xong.",
+      "ty_le_dung": 0.78,
+      "so_phieu": 120,
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn hợp việc dịch vụ",
+      "noi_dung": "Bạn hợp việc dịch vụ, chăm sóc, giáo dục, môi trường ổn định, nơi sự dễ chịu của bạn được quý.",
+      "can_cu": [
+       "Thiên Đồng (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.su_nghiep.thien_dong.sang.manh"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Bạn dễ ngại nhận việc khó hay vị trí có áp lực",
+      "noi_dung": "Bạn dễ ngại nhận việc khó hay vị trí có áp lực, nên bỏ qua cơ hội lên vị trí cao hơn. Năm nay nhận ít nhất một việc khó hơn sức mình một chút, và nhờ một người có kinh nghiệm kèm.",
+      "can_cu": [
+       "Thiên Đồng (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.su_nghiep.thien_dong.sang.vap",
+      "huong_xu_ly": "Năm nay nhận ít nhất một việc khó hơn sức mình một chút, và nhờ một người có kinh nghiệm kèm."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Hộp đang được xem lại",
+      "noi_dung": "Không được hiện.",
+      "can_cu": [
+       "x"
+      ],
+      "ma_mau": "ds.su_nghiep.an",
+      "dang_xem_lai": true
+     }
+    ],
+    "doan": [
+     "Về công việc, nhìn chung bạn ở mức cân bằng. Không quá dễ cũng không quá khó; thói quen hằng ngày của bạn quyết định nhiều.",
+     "Chỗ mạnh của bạn ở mảng này: bạn hợp việc dịch vụ. Còn chỗ cần để ý: công việc là điều bạn để tâm nhiều; bạn dễ ngại nhận việc khó hay vị trí có áp lực — mỗi điều có cách gỡ ngay trong hộp."
+    ],
+    "can_cu": [
+     "Hoá Kỵ (Thiên Đồng) ở cung Quan Lộc",
+     "Thiên Đồng (Đắc) ở cung Quan Lộc",
+     "Cung Quan Lộc đọc kèm nửa phần cung xung chiếu Phu Thê và hai cung tam hợp Tài Bạch, Mệnh"
+    ],
+    "cau_tu_soi": "Công việc nào khiến bạn quên giờ giấc — và nó có gì chung với việc bạn đang làm?",
+    "moi_xem": {
+     "diem_nhan": "Về công việc, nhìn chung bạn ở mức cân bằng.",
+     "cau_hoi": "Môi trường và vai trò nào giúp bạn bứt lên, kiểu việc nào khiến bạn mau cạn năng lượng?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "hoa_ky",
+      "ten": "Hoá Kỵ",
+      "han": "化忌",
+      "mo_dun": "tuvi",
+      "de_hieu": "Nhãn 'vướng mắc, bận lòng': mảng đó dễ lo nghĩ, cần cẩn thận — cũng là chỗ bạn để tâm nhiều nhất.",
+      "vi_du": null,
+      "khop": [
+       "Hoá Kỵ"
+      ]
+     },
+     {
+      "ma": "thien_dong",
+      "ten": "Thiên Đồng",
+      "han": "天同",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'phúc hậu': hiền hoà, dễ chịu, thích an nhàn. Cần để ý: thiếu quyết liệt, dễ trì hoãn.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Đồng"
+      ]
+     },
+     {
+      "ma": "quan_loc",
+      "ten": "Quan Lộc",
+      "han": "官祿宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về công việc, nghề nghiệp, cách bạn làm việc và thăng tiến.",
+      "vi_du": null,
+      "khop": [
+       "cung Quan Lộc",
+       "Cung Quan Lộc"
+      ]
+     },
+     {
+      "ma": "phu_the",
+      "ten": "Phu Thê",
+      "han": "夫妻宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về chuyện tình cảm, hôn nhân và kiểu người bạn dễ gắn bó.",
+      "vi_du": null,
+      "khop": [
+       "Phu Thê"
+      ]
+     },
+     {
+      "ma": "tai_bach",
+      "ten": "Tài Bạch",
+      "han": "財帛宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về cách bạn kiếm tiền, giữ tiền và tiêu tiền.",
+      "vi_du": null,
+      "khop": [
+       "Tài Bạch"
+      ]
+     },
+     {
+      "ma": "cung_menh",
+      "ten": "Cung Mệnh",
+      "han": "命宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô quan trọng nhất, nói về bản thân: tính cách gốc, cách bạn phản ứng với đời. Đọc lá số luôn bắt đầu từ đây.",
+      "vi_du": null,
+      "khop": [
+       "Mệnh"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "tien_bac",
+    "tieu_de": "Tiền bạc",
+    "cau_hoi": "Tôi kiếm và giữ tiền ra sao?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Nhìn chung — tiền bạc: thuận lợi; nhà cửa: thuận lợi.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Chuyện tiền bạc có người chỉ cách làm",
+      "noi_dung": "Chuyện tiền bạc có người chỉ cách làm, và bạn biết giữ tiền khá tốt.",
+      "can_cu": [
+       "Tả Phù, Hữu Bật, Thiên Việt ở cung Tài Bạch (lục cát)"
+      ],
+      "ma_mau": "ds.tien_bac.cat+tai_bach.co.manh",
+      "loi_khuyen": "Hỏi ý một người am hiểu trước khi bỏ tiền vào việc mới."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Tiền vào ra thất thường",
+      "noi_dung": "Tiền vào ra thất thường, dễ có khoản hao vì vội hoặc vì nể. Không cho vay hay đầu tư khi bị giục quyết ngay trong ngày.",
+      "can_cu": [
+       "Đà La, Hỏa Tinh ở cung Tài Bạch (lục sát)"
+      ],
+      "ma_mau": "ds.tien_bac.sat+tai_bach.co.vap",
+      "huong_xu_ly": "Không cho vay hay đầu tư khi bị giục quyết ngay trong ngày."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn kiếm tiền bằng cái đầu như tư vấn",
+      "noi_dung": "Bạn kiếm tiền bằng cái đầu như tư vấn, lên kế hoạch, giải quyết vấn đề, và thường tìm ra cách làm ra tiền mới.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Tài Bạch"
+      ],
+      "ma_mau": "ds.tien_bac.thien_co+tai_bach.sang.manh"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Việc đến chậm hơn mong đợi",
+      "noi_dung": "Ở chuyện tiền bạc, việc thường đến chậm hơn bạn mong. Nên chuẩn bị sớm, kiên nhẫn và đừng bỏ ngang khi chưa thấy kết quả.",
+      "can_cu": [
+       "Triệt ở cung Tài Bạch: việc đến chậm, cần kiên nhẫn"
+      ],
+      "ma_mau": "ds.tien_bac.tuan_triet+tai_bach.cham.vap",
+      "huong_xu_ly": "Nên chuẩn bị sớm, kiên nhẫn và đừng bỏ ngang khi chưa thấy kết quả."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Thu nhập của bạn dễ lên xuống theo từng giai đoạn",
+      "noi_dung": "Thu nhập của bạn dễ lên xuống theo từng giai đoạn, tháng dư tháng hụt nếu không có khoản đều đặn. Giữ một khoản dự phòng bằng ba đến sáu tháng chi tiêu, chỉ dùng khi tháng đó thu nhập giảm.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Tài Bạch"
+      ],
+      "ma_mau": "ds.tien_bac.thien_co+tai_bach.sang.vap",
+      "huong_xu_ly": "Giữ một khoản dự phòng bằng ba đến sáu tháng chi tiêu, chỉ dùng khi tháng đó thu nhập giảm."
+     }
+    ],
+    "doan": [
+     "Nhìn chung — tiền bạc: thuận lợi; nhà cửa: thuận lợi.",
+     "Chỗ mạnh của bạn ở mảng này: chuyện tiền bạc có người chỉ cách làm; bạn kiếm tiền bằng cái đầu như tư vấn. Còn chỗ cần để ý: tiền vào ra thất thường; việc đến chậm hơn mong đợi — mỗi điều có cách gỡ ngay trong hộp."
+    ],
+    "can_cu": [
+     "Tả Phù, Hữu Bật, Thiên Việt ở cung Tài Bạch (lục cát)",
+     "Đà La, Hỏa Tinh ở cung Tài Bạch (lục sát)",
+     "Thiên Cơ (Đắc) ở cung Tài Bạch",
+     "Triệt ở cung Tài Bạch: việc đến chậm, cần kiên nhẫn",
+     "Cung Tài Bạch đọc kèm nửa phần cung xung chiếu Phúc Đức và hai cung tam hợp Mệnh, Quan Lộc",
+     "Cung Điền Trạch đọc kèm nửa phần cung xung chiếu Tử Nữ và hai cung tam hợp Tật Ách, Huynh Đệ"
+    ],
+    "cau_tu_soi": "Tiền của bạn thường ra đi vì nhu cầu thật hay vì cảm xúc?",
+    "moi_xem": {
+     "diem_nhan": "Nhìn chung — tiền bạc: thuận lợi; nhà cửa: thuận lợi.",
+     "cau_hoi": "Bạn kiếm tiền hợp nhất theo cách nào, và thói quen chi tiêu nào đang âm thầm làm hao hụt?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "ta_phu",
+      "ten": "Tả Phù",
+      "han": "左輔",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'người phụ tá bên trái': có người giúp đỡ, làm việc nhóm tốt.",
+      "vi_du": null,
+      "khop": [
+       "Tả Phù"
+      ]
+     },
+     {
+      "ma": "huu_bat",
+      "ten": "Hữu Bật",
+      "han": "右弼",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'người phụ tá bên phải': có trợ lực, giỏi phối hợp.",
+      "vi_du": null,
+      "khop": [
+       "Hữu Bật"
+      ]
+     },
+     {
+      "ma": "thien_viet",
+      "ten": "Thiên Việt",
+      "han": "天鉞",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'quý nhân ban đêm': được giúp một cách âm thầm, kín đáo.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Việt"
+      ]
+     },
+     {
+      "ma": "tai_bach",
+      "ten": "Tài Bạch",
+      "han": "財帛宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về cách bạn kiếm tiền, giữ tiền và tiêu tiền.",
+      "vi_du": null,
+      "khop": [
+       "cung Tài Bạch",
+       "Cung Tài Bạch"
+      ]
+     },
+     {
+      "ma": "luc_cat",
+      "ten": "Lục cát",
+      "han": "六吉",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sáu sao hỗ trợ: Tả Phù, Hữu Bật, Văn Xương, Văn Khúc, Thiên Khôi, Thiên Việt — như có người giúp, có chữ nghĩa, có quý nhân.",
+      "vi_du": null,
+      "khop": [
+       "lục cát"
+      ]
+     },
+     {
+      "ma": "da_la",
+      "ten": "Đà La",
+      "han": "陀羅",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sát tinh 'vướng víu': chậm trễ, dây dưa, việc hay kéo dài.",
+      "vi_du": null,
+      "khop": [
+       "Đà La"
+      ]
+     },
+     {
+      "ma": "hoa_tinh",
+      "ten": "Hỏa Tinh",
+      "han": "火星",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sát tinh 'lửa bùng': nóng nảy, bột phát, nhanh đến nhanh đi.",
+      "vi_du": null,
+      "khop": [
+       "Hỏa Tinh"
+      ]
+     },
+     {
+      "ma": "luc_sat",
+      "ten": "Lục sát",
+      "han": "六煞",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sáu sao gây trở ngại: Kình Dương, Đà La, Hoả Tinh, Linh Tinh, Địa Không, Địa Kiếp. Chúng làm đời thêm thử thách, nhưng cũng tạo sức bật.",
+      "vi_du": null,
+      "khop": [
+       "lục sát"
+      ]
+     },
+     {
+      "ma": "thien_co",
+      "ten": "Thiên Cơ",
+      "han": "天機",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'quân sư': nhanh trí, khéo tính toán, thích thay đổi. Cần để ý: hay lo nghĩ, khó dừng lại một việc.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Cơ"
+      ]
+     },
+     {
+      "ma": "triet",
+      "ten": "Triệt",
+      "han": "截空",
+      "mo_dun": "tuvi",
+      "de_hieu": "Dấu 'chặn đường' giữa hai cung theo can năm sinh: cản trở mạnh ở giai đoạn đầu đời (thường trước 30 tuổi).",
+      "vi_du": null,
+      "khop": [
+       "Triệt"
+      ]
+     },
+     {
+      "ma": "phuc_duc",
+      "ten": "Phúc Đức",
+      "han": "福德宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về đời sống tinh thần, niềm vui bên trong và phúc từ dòng họ.",
+      "vi_du": null,
+      "khop": [
+       "Phúc Đức"
+      ]
+     },
+     {
+      "ma": "cung_menh",
+      "ten": "Cung Mệnh",
+      "han": "命宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô quan trọng nhất, nói về bản thân: tính cách gốc, cách bạn phản ứng với đời. Đọc lá số luôn bắt đầu từ đây.",
+      "vi_du": null,
+      "khop": [
+       "Mệnh"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "tinh_cam",
+    "tieu_de": "Tình yêu & hôn nhân",
+    "cau_hoi": "Tôi yêu và sống chung thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Về tình cảm, vợ chồng, nhìn chung bạn ở mức cân bằng. Mảng này có điểm tựa, cũng có chỗ phải để tâm; làm đều tay thì giữ được nhịp.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Trong chuyện tình cảm, bạn chu đáo",
+      "noi_dung": "Trong chuyện tình cảm, bạn chu đáo, nhớ món người ấy thích, biết lúc nào nên ngồi cạnh im lặng.",
+      "can_cu": [
+       "Thái Âm (Miếu) ở cung Phu Thê"
+      ],
+      "ma_mau": "ds.tinh_cam.thai_am.sang.manh"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Hai người dễ cãi nhau vì nóng vội",
+      "noi_dung": "Hai người dễ cãi nhau vì nóng vội; tình cảm có lúc lên xuống thất thường. Đặt một luật nhỏ: không bàn chuyện lớn khi một người đang mệt hoặc đói.",
+      "can_cu": [
+       "Kình Dương, Linh Tinh ở cung Phu Thê (lục sát)"
+      ],
+      "ma_mau": "ds.tinh_cam.sat.co.vap",
+      "huong_xu_ly": "Đặt một luật nhỏ: không bàn chuyện lớn khi một người đang mệt hoặc đói."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Người ấy thường có học",
+      "noi_dung": "Người ấy thường có học, lịch sự, và hai người dễ giữ hình ảnh đẹp trước mọi người.",
+      "can_cu": [
+       "Hoá Khoa (Thái Âm) ở cung Phu Thê"
+      ],
+      "ma_mau": "ds.tinh_cam.hoa_khoa.sinh.manh",
+      "loi_khuyen": "Ngoài lịch sự trước mặt người khác, nhớ nói thật lòng khi chỉ có hai người."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Bạn mong người bạn đời tự hiểu ý mình",
+      "noi_dung": "Bạn mong người bạn đời tự hiểu ý mình, nên dễ hụt hẫng khi họ không đoán ra điều bạn chưa nói. Thay vì chờ người ấy tự nhận ra, nói rõ một mong muốn cụ thể, ví dụ: tối nay mình muốn đi dạo cùng nhau.",
+      "can_cu": [
+       "Thái Âm (Miếu) ở cung Phu Thê"
+      ],
+      "ma_mau": "ds.tinh_cam.thai_am.sang.vap",
+      "huong_xu_ly": "Thay vì chờ người ấy tự nhận ra, nói rõ một mong muốn cụ thể, ví dụ: tối nay mình muốn đi dạo cùng nhau."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Chuyện tình cảm nhiều duyên",
+      "noi_dung": "Chuyện tình cảm nhiều duyên, bạn dễ được để ý; cần tỉnh táo khi chọn. Khi đã có đôi, giữ khoảng cách rõ ràng với những lời tán tỉnh khác.",
+      "can_cu": [
+       "Hồng Loan ở cung Phu Thê (nhóm đào hoa)"
+      ],
+      "ma_mau": "ds.tinh_cam.dao_hoa+phu_the.co.manh"
+     }
+    ],
+    "doan": [
+     "Về tình cảm, vợ chồng, nhìn chung bạn ở mức cân bằng. Mảng này có điểm tựa, cũng có chỗ phải để tâm; làm đều tay thì giữ được nhịp.",
+     "Chỗ mạnh của bạn ở mảng này: trong chuyện tình cảm, bạn chu đáo; người ấy thường có học. Còn chỗ cần để ý: hai người dễ cãi nhau vì nóng vội; bạn mong người bạn đời tự hiểu ý mình — mỗi điều có cách gỡ ngay trong hộp."
+    ],
+    "can_cu": [
+     "Thái Âm (Miếu) ở cung Phu Thê",
+     "Kình Dương, Linh Tinh ở cung Phu Thê (lục sát)",
+     "Hoá Khoa (Thái Âm) ở cung Phu Thê",
+     "Hồng Loan ở cung Phu Thê (nhóm đào hoa)",
+     "Cung Phu Thê đọc kèm nửa phần cung xung chiếu Quan Lộc và hai cung tam hợp Phúc Đức, Thiên Di"
+    ],
+    "cau_tu_soi": "Điều bạn mong người kia làm cho mình, bạn đã nói rõ với họ chưa?",
+    "moi_xem": {
+     "diem_nhan": "Về tình cảm, vợ chồng, nhìn chung bạn ở mức cân bằng.",
+     "cau_hoi": "Bạn thật sự tìm gì ở người bạn đời, và vì sao va chạm hay bắt đầu từ cùng một chỗ?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "thai_am",
+      "ten": "Thái Âm",
+      "han": "太陰",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'mặt trăng': tinh tế, giàu cảm xúc, chăm lo gia đình. Cần để ý: hay ôm nỗi niềm riêng.",
+      "vi_du": null,
+      "khop": [
+       "Thái Âm"
+      ]
+     },
+     {
+      "ma": "mieu",
+      "ten": "Miếu",
+      "han": "廟",
+      "mo_dun": "tuvi",
+      "de_hieu": "Mức sáng nhất: sao ở đúng 'nhà' của nó, phát huy mặt tốt rõ nhất.",
+      "vi_du": null,
+      "khop": [
+       "Miếu"
+      ]
+     },
+     {
+      "ma": "phu_the",
+      "ten": "Phu Thê",
+      "han": "夫妻宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về chuyện tình cảm, hôn nhân và kiểu người bạn dễ gắn bó.",
+      "vi_du": null,
+      "khop": [
+       "cung Phu Thê",
+       "Cung Phu Thê"
+      ]
+     },
+     {
+      "ma": "kinh_duong",
+      "ten": "Kình Dương",
+      "han": "擎羊",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sát tinh 'cái giáo': quyết liệt, cạnh tranh, dễ va chạm trực diện.",
+      "vi_du": null,
+      "khop": [
+       "Kình Dương"
+      ]
+     },
+     {
+      "ma": "linh_tinh",
+      "ten": "Linh Tinh",
+      "han": "鈴星",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sát tinh 'lửa âm ỉ': bực bội trong lòng, áp lực ngầm.",
+      "vi_du": null,
+      "khop": [
+       "Linh Tinh"
+      ]
+     },
+     {
+      "ma": "luc_sat",
+      "ten": "Lục sát",
+      "han": "六煞",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sáu sao gây trở ngại: Kình Dương, Đà La, Hoả Tinh, Linh Tinh, Địa Không, Địa Kiếp. Chúng làm đời thêm thử thách, nhưng cũng tạo sức bật.",
+      "vi_du": null,
+      "khop": [
+       "lục sát"
+      ]
+     },
+     {
+      "ma": "hoa_khoa",
+      "ten": "Hoá Khoa",
+      "han": "化科",
+      "mo_dun": "tuvi",
+      "de_hieu": "Nhãn 'danh tiếng, học hành': mảng đó dễ được ghi nhận, có quý nhân nâng đỡ.",
+      "vi_du": null,
+      "khop": [
+       "Hoá Khoa"
+      ]
+     },
+     {
+      "ma": "hong_loan",
+      "ten": "Hồng Loan",
+      "han": "紅鸞",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'duyên đỏ': tình cảm, cưới hỏi, sự duyên dáng.",
+      "vi_du": null,
+      "khop": [
+       "Hồng Loan"
+      ]
+     },
+     {
+      "ma": "dao_hoa",
+      "ten": "Đào Hoa",
+      "han": "桃花",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'hoa đào': sức hút, duyên với người khác giới.",
+      "vi_du": null,
+      "khop": [
+       "đào hoa"
+      ]
+     },
+     {
+      "ma": "quan_loc",
+      "ten": "Quan Lộc",
+      "han": "官祿宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về công việc, nghề nghiệp, cách bạn làm việc và thăng tiến.",
+      "vi_du": null,
+      "khop": [
+       "Quan Lộc"
+      ]
+     },
+     {
+      "ma": "phuc_duc",
+      "ten": "Phúc Đức",
+      "han": "福德宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về đời sống tinh thần, niềm vui bên trong và phúc từ dòng họ.",
+      "vi_du": null,
+      "khop": [
+       "Phúc Đức"
+      ]
+     },
+     {
+      "ma": "thien_di",
+      "ten": "Thiên Di",
+      "han": "遷移宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về lúc ra ngoài xã hội, đi xa, làm việc ở môi trường lạ.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Di"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "gia_dinh",
+    "tieu_de": "Gia đình: cha mẹ, anh em, con cái",
+    "cau_hoi": "Tôi và người nhà hợp nhau ra sao?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Nhìn chung — cha mẹ: thuận lợi; anh chị em: thuận lợi; con cái: thuận lợi.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn học được từ cha mẹ",
+      "noi_dung": "Bạn học được từ cha mẹ, sếp tính nguyên tắc và sự nghiêm túc trong công việc.",
+      "can_cu": [
+       "Liêm Trinh (Vượng) ở cung Phụ Mẫu"
+      ],
+      "ma_mau": "ds.gia_dinh.liem_trinh+phu_mau.sang.manh"
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn kính trọng cha mẹ và cấp trên",
+      "noi_dung": "Bạn kính trọng cha mẹ và cấp trên, biết cư xử đúng mực nên thường được họ tin giao việc.",
+      "can_cu": [
+       "Thiên Tướng (Vượng) ở cung Phụ Mẫu"
+      ],
+      "ma_mau": "ds.gia_dinh.thien_tuong+phu_mau.sang.manh"
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Với anh chị em và bạn bè, bạn là người rủ rê",
+      "noi_dung": "Với anh chị em và bạn bè, bạn là người rủ rê, bày trò, làm buổi tụ tập vui hơn hẳn.",
+      "can_cu": [
+       "Tham Lang (Vượng) ở cung Huynh Đệ"
+      ],
+      "ma_mau": "ds.gia_dinh.tham_lang+huynh_de.sang.manh"
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn đặt kỳ vọng cao và biết tạo nề nếp cho con",
+      "noi_dung": "Bạn đặt kỳ vọng cao và biết tạo nề nếp cho con, nên con lớn lên thường có tự trọng và biết giữ lời.",
+      "can_cu": [
+       "Tử Vi (Miếu) ở cung Tử Nữ"
+      ],
+      "ma_mau": "ds.gia_dinh.tu_vi+tu_nu.sang.manh"
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn lo cho con chu đáo",
+      "noi_dung": "Bạn lo cho con chu đáo, đủ đầy, và con lớn lên trong một nền nếp vững.",
+      "can_cu": [
+       "Thiên Phủ (Miếu) ở cung Tử Nữ"
+      ],
+      "ma_mau": "ds.gia_dinh.thien_phu+tu_nu.sang.manh"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Bạn và người lớn dễ căng",
+      "noi_dung": "Bạn và người lớn dễ căng khi cả hai cùng giữ nguyên tắc riêng, không ai chịu lùi. Khi bất đồng với cha mẹ hay sếp, tìm một điểm cả hai cùng đồng ý trước rồi mới bàn tiếp.",
+      "can_cu": [
+       "Liêm Trinh (Vượng) ở cung Phụ Mẫu"
+      ],
+      "ma_mau": "ds.gia_dinh.liem_trinh+phu_mau.sang.vap",
+      "huong_xu_ly": "Khi bất đồng với cha mẹ hay sếp, tìm một điểm cả hai cùng đồng ý trước rồi mới bàn tiếp."
+     }
+    ],
+    "doan": [
+     "Nhìn chung — cha mẹ: thuận lợi; anh chị em: thuận lợi; con cái: thuận lợi.",
+     "Chỗ mạnh của bạn ở mảng này: bạn học được từ cha mẹ; bạn kính trọng cha mẹ và cấp trên. Còn chỗ cần để ý: bạn và người lớn dễ căng — mỗi điều có cách gỡ ngay trong hộp."
+    ],
+    "can_cu": [
+     "Liêm Trinh (Vượng) ở cung Phụ Mẫu",
+     "Thiên Tướng (Vượng) ở cung Phụ Mẫu",
+     "Tham Lang (Vượng) ở cung Huynh Đệ",
+     "Tử Vi (Miếu) ở cung Tử Nữ",
+     "Thiên Phủ (Miếu) ở cung Tử Nữ",
+     "Cung Phụ Mẫu đọc kèm nửa phần cung xung chiếu Tật Ách và hai cung tam hợp Nô Bộc, Tử Nữ",
+     "Cung Huynh Đệ đọc kèm nửa phần cung xung chiếu Nô Bộc và hai cung tam hợp Điền Trạch, Tật Ách",
+     "Cung Tử Nữ đọc kèm nửa phần cung xung chiếu Điền Trạch và hai cung tam hợp Phụ Mẫu, Nô Bộc"
+    ],
+    "cau_tu_soi": "Điều gì từ cha mẹ bạn muốn giữ, điều gì bạn muốn làm khác đi?",
+    "moi_xem": {
+     "diem_nhan": "Nhìn chung — cha mẹ: thuận lợi; anh chị em: thuận lợi; con cái: thuận lợi.",
+     "cau_hoi": "Vì sao bạn phản ứng mạnh với một kiểu góp ý từ người lớn, và cách nào để gần nhau hơn?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "liem_trinh",
+      "ten": "Liêm Trinh",
+      "han": "廉貞",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'nguyên tắc': có lập trường, mạnh mẽ, đam mê. Cần để ý: cực đoan, dễ va chạm.",
+      "vi_du": null,
+      "khop": [
+       "Liêm Trinh"
+      ]
+     },
+     {
+      "ma": "phu_mau",
+      "ten": "Phụ Mẫu",
+      "han": "父母宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về cha mẹ, người dìu dắt và quan hệ với cấp trên.",
+      "vi_du": null,
+      "khop": [
+       "cung Phụ Mẫu",
+       "Cung Phụ Mẫu",
+       "Phụ Mẫu"
+      ]
+     },
+     {
+      "ma": "thien_tuong",
+      "ten": "Thiên Tướng",
+      "han": "天相",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'ấn tín': đáng tin, công bằng, hay giúp người. Cần để ý: dễ bị kéo vào chuyện người khác.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Tướng"
+      ]
+     },
+     {
+      "ma": "tham_lang",
+      "ten": "Tham Lang",
+      "han": "貪狼",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'đa tài, ham muốn': giao thiệp giỏi, nhiều sở thích. Cần để ý: dễ phân tán, ham vui.",
+      "vi_du": null,
+      "khop": [
+       "Tham Lang"
+      ]
+     },
+     {
+      "ma": "huynh_de",
+      "ten": "Huynh Đệ",
+      "han": "兄弟宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về anh chị em ruột và người cùng trang lứa thân thiết.",
+      "vi_du": null,
+      "khop": [
+       "cung Huynh Đệ",
+       "Cung Huynh Đệ"
+      ]
+     },
+     {
+      "ma": "tu_vi",
+      "ten": "Tử Vi",
+      "han": "紫微",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'vua': tự trọng, thích dẫn dắt, có khí chất. Mặt cần để ý: dễ tự cao, ngại nghe ý trái.",
+      "vi_du": null,
+      "khop": [
+       "Tử Vi"
+      ]
+     },
+     {
+      "ma": "mieu",
+      "ten": "Miếu",
+      "han": "廟",
+      "mo_dun": "tuvi",
+      "de_hieu": "Mức sáng nhất: sao ở đúng 'nhà' của nó, phát huy mặt tốt rõ nhất.",
+      "vi_du": null,
+      "khop": [
+       "Miếu"
+      ]
+     },
+     {
+      "ma": "tu_nu",
+      "ten": "Tử Nữ",
+      "han": "子女宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về con cái, học trò và người nhỏ tuổi mình chăm lo.",
+      "vi_du": null,
+      "khop": [
+       "cung Tử Nữ",
+       "Cung Tử Nữ",
+       "Tử Nữ"
+      ]
+     },
+     {
+      "ma": "thien_phu",
+      "ten": "Thiên Phủ",
+      "han": "天府",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'kho': ổn định, biết giữ của, chu đáo. Cần để ý: thận trọng quá mức, ngại mạo hiểm.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Phủ"
+      ]
+     },
+     {
+      "ma": "tat_ach",
+      "ten": "Tật Ách",
+      "han": "疾厄宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về thể chất và những điểm cơ thể cần để ý. Không dùng để chẩn đoán bệnh — có vấn đề sức khoẻ hãy hỏi bác sĩ.",
+      "vi_du": null,
+      "khop": [
+       "Tật Ách"
+      ]
+     },
+     {
+      "ma": "no_boc",
+      "ten": "Nô Bộc",
+      "han": "僕役宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về bạn bè, đồng nghiệp, cấp dưới — những người ngang hoặc dưới mình.",
+      "vi_du": null,
+      "khop": [
+       "Nô Bộc"
+      ]
+     },
+     {
+      "ma": "dien_trach",
+      "ten": "Điền Trạch",
+      "han": "田宅宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về nhà cửa, đất đai, không khí trong gia đình.",
+      "vi_du": null,
+      "khop": [
+       "Điền Trạch"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "suc_khoe",
+    "tieu_de": "Sức khoẻ & năng lượng",
+    "cau_hoi": "Tôi nên giữ sức thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Nhịp sức của bạn khá bền; giữ được nếp sinh hoạt là giữ được sức.",
+    "hop": [
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Phần cơ thể nên chăm sóc",
+      "noi_dung": "Sách xưa gắn phần này với thận, đường tiết niệu, ruột và xương khớp — nên chăm sóc phòng ngừa. Thay đổi nếp sinh hoạt liên tục, ăn ngủ thất thường mỗi khi có việc mới. Giữ giờ ăn ngủ ổn định dù công việc đổi, uống đủ nước, khám thận và tiêu hoá định kỳ.",
+      "can_cu": [
+       "Phá Quân (Miếu) ở cung Tật Ách"
+      ],
+      "ma_mau": "ds.suc_khoe.pha_quan.sao.vap"
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Nhịp sức của chính bạn",
+      "noi_dung": "Sách xưa gắn phần này với miệng, họng, răng và tiêu hoá — nên chăm sóc phòng ngừa. Nói nhiều, hay để bụng chuyện, ăn uống vội vàng. Uống nước ấm, giữ giọng khi phải nói nhiều, khám răng miệng và tiêu hoá định kỳ.",
+      "can_cu": [
+       "Cự Môn (Đắc) ở cung Mệnh"
+      ],
+      "ma_mau": "ds.suc_khoe.cu_mon+menh.sao.vap"
+     }
+    ],
+    "doan": [
+     "Nhịp sức của bạn khá bền; giữ được nếp sinh hoạt là giữ được sức.",
+     "Các gợi ý dưới đây xoay quanh nếp ăn ngủ, vận động và khám định kỳ — làm đều mỗi ngày quan trọng hơn làm nhiều một lúc.",
+     "Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám."
+    ],
+    "can_cu": [
+     "Phá Quân (Miếu) ở cung Tật Ách",
+     "Cự Môn (Đắc) ở cung Mệnh"
+    ],
+    "cau_tu_soi": "Cơ thể bạn thường báo mệt bằng dấu hiệu nào mà bạn hay bỏ qua?",
+    "mien_tru": "Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám.",
+    "moi_xem": {
+     "diem_nhan": "Nhịp sức của bạn khá bền; giữ được nếp sinh hoạt là giữ được sức.",
+     "cau_hoi": "Thói quen nào đang âm thầm lấy sức của bạn, và nếp nhỏ nào giúp bạn giữ sức lâu?",
+     "so_doan": 3,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "bac_sy",
+      "ten": "Bác Sỹ",
+      "han": "博士",
+      "mo_dun": "tuvi",
+      "de_hieu": "Vòng 12 sao bắt đầu từ Lộc Tồn, nói về tài lộc và công danh nhỏ.",
+      "vi_du": null,
+      "khop": [
+       "bác sĩ"
+      ]
+     },
+     {
+      "ma": "pha_quan",
+      "ten": "Phá Quân",
+      "han": "破軍",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'phá cũ dựng mới': thích đổi mới, không ngại đập đi làm lại. Cần để ý: thất thường, hao tổn.",
+      "vi_du": null,
+      "khop": [
+       "Phá Quân"
+      ]
+     },
+     {
+      "ma": "mieu",
+      "ten": "Miếu",
+      "han": "廟",
+      "mo_dun": "tuvi",
+      "de_hieu": "Mức sáng nhất: sao ở đúng 'nhà' của nó, phát huy mặt tốt rõ nhất.",
+      "vi_du": null,
+      "khop": [
+       "Miếu"
+      ]
+     },
+     {
+      "ma": "tat_ach",
+      "ten": "Tật Ách",
+      "han": "疾厄宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về thể chất và những điểm cơ thể cần để ý. Không dùng để chẩn đoán bệnh — có vấn đề sức khoẻ hãy hỏi bác sĩ.",
+      "vi_du": null,
+      "khop": [
+       "cung Tật Ách"
+      ]
+     },
+     {
+      "ma": "cu_mon",
+      "ten": "Cự Môn",
+      "han": "巨門",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'lời nói': giỏi phân tích, tranh luận. Cần để ý: dễ thị phi, nói thẳng làm mất lòng.",
+      "vi_du": null,
+      "khop": [
+       "Cự Môn"
+      ]
+     },
+     {
+      "ma": "cung_menh",
+      "ten": "Cung Mệnh",
+      "han": "命宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô quan trọng nhất, nói về bản thân: tính cách gốc, cách bạn phản ứng với đời. Đọc lá số luôn bắt đầu từ đây.",
+      "vi_du": null,
+      "khop": [
+       "cung Mệnh"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "quan_he",
+    "tieu_de": "Bạn bè, đồng nghiệp, môi trường bên ngoài",
+    "cau_hoi": "Tôi đi ra ngoài, làm với người khác thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Nhìn chung — bạn bè, đồng nghiệp: thuận lợi; ra ngoài, đi xa: thuận lợi.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn làm việc với đồng nghiệp rõ ràng",
+      "noi_dung": "Bạn làm việc với đồng nghiệp rõ ràng, công bằng, ai làm tốt thì được ghi nhận đúng.",
+      "can_cu": [
+       "Vũ Khúc (Miếu) ở cung Nô Bộc"
+      ],
+      "ma_mau": "ds.quan_he.vu_khuc+no_boc.sang.manh"
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Ra ngoài bạn gặp may hơn ở nhà",
+      "noi_dung": "Ra ngoài bạn gặp may hơn ở nhà: đi công tác, đổi chỗ ở hay gặp người lạ thường mở thêm việc.",
+      "can_cu": [
+       "Hoá Lộc (Thái Dương) ở cung Thiên Di"
+      ],
+      "ma_mau": "ds.quan_he.hoa_loc+thien_di.sinh.manh",
+      "loi_khuyen": "Nhận lời một chuyến đi hoặc một buổi gặp ngoài vòng quen trong tháng này."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Ra ngoài bạn được nhiều người biết",
+      "noi_dung": "Ra ngoài bạn được nhiều người biết, hợp môi trường rộng, có giao lưu, nói trước đám đông.",
+      "can_cu": [
+       "Thái Dương (Miếu) ở cung Thiên Di"
+      ],
+      "ma_mau": "ds.quan_he.thai_duong+thien_di.sang.manh"
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn bè, đồng nghiệp có người rất mạnh tiếng",
+      "noi_dung": "Bạn bè, đồng nghiệp có người rất mạnh tiếng, hoặc chính bạn quen làm trưởng nhóm.",
+      "can_cu": [
+       "Hoá Quyền (Vũ Khúc) ở cung Nô Bộc"
+      ],
+      "ma_mau": "ds.quan_he.hoa_quyen+no_boc.sinh.manh",
+      "loi_khuyen": "Giao việc kèm lý do, và để người khác tự chọn cách làm."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Ra ngoài dễ gặp trục trặc",
+      "noi_dung": "Ra ngoài dễ gặp trục trặc, đổi lịch, hoặc va chạm với người lạ. Đi sớm hơn dự tính, và giữ bình tĩnh khi có người gây chuyện.",
+      "can_cu": [
+       "Địa Không, Địa Kiếp ở cung Thiên Di (lục sát)"
+      ],
+      "ma_mau": "ds.quan_he.sat+thien_di.co.vap",
+      "huong_xu_ly": "Đi sớm hơn dự tính, và giữ bình tĩnh khi có người gây chuyện."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Bạn dễ chỉ nhìn hiệu quả",
+      "noi_dung": "Bạn dễ chỉ nhìn hiệu quả, ít để ý cảm xúc của người làm cùng, nên khó giữ người lâu. Mỗi tuần cảm ơn riêng một đồng nghiệp bằng lời cụ thể về việc họ đã làm.",
+      "can_cu": [
+       "Vũ Khúc (Miếu) ở cung Nô Bộc"
+      ],
+      "ma_mau": "ds.quan_he.vu_khuc+no_boc.sang.vap",
+      "huong_xu_ly": "Mỗi tuần cảm ơn riêng một đồng nghiệp bằng lời cụ thể về việc họ đã làm."
+     }
+    ],
+    "doan": [
+     "Nhìn chung — bạn bè, đồng nghiệp: thuận lợi; ra ngoài, đi xa: thuận lợi.",
+     "Chỗ mạnh của bạn ở mảng này: bạn làm việc với đồng nghiệp rõ ràng; ra ngoài bạn gặp may hơn ở nhà. Còn chỗ cần để ý: ra ngoài dễ gặp trục trặc; bạn dễ chỉ nhìn hiệu quả — mỗi điều có cách gỡ ngay trong hộp."
+    ],
+    "can_cu": [
+     "Vũ Khúc (Miếu) ở cung Nô Bộc",
+     "Hoá Lộc (Thái Dương) ở cung Thiên Di",
+     "Thái Dương (Miếu) ở cung Thiên Di",
+     "Hoá Quyền (Vũ Khúc) ở cung Nô Bộc",
+     "Địa Không, Địa Kiếp ở cung Thiên Di (lục sát)",
+     "Cung Nô Bộc đọc kèm nửa phần cung xung chiếu Huynh Đệ và hai cung tam hợp Tử Nữ, Phụ Mẫu",
+     "Cung Thiên Di đọc kèm nửa phần cung xung chiếu Mệnh và hai cung tam hợp Phu Thê, Phúc Đức"
+    ],
+    "cau_tu_soi": "Bạn chọn bạn bè theo sự thoải mái hay theo giá trị chung?",
+    "moi_xem": {
+     "diem_nhan": "Nhìn chung — bạn bè, đồng nghiệp: thuận lợi; ra ngoài, đi xa: thuận lợi.",
+     "cau_hoi": "Kiểu người nào giúp bạn đi xa hơn, và bạn hay mất sức vì ai, vì việc gì bên ngoài?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "vu_khuc",
+      "ten": "Vũ Khúc",
+      "han": "武曲",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'tài chính': thực tế, quyết đoán, giỏi việc tiền. Cần để ý: cứng nhắc, ít bày tỏ cảm xúc.",
+      "vi_du": null,
+      "khop": [
+       "Vũ Khúc"
+      ]
+     },
+     {
+      "ma": "mieu",
+      "ten": "Miếu",
+      "han": "廟",
+      "mo_dun": "tuvi",
+      "de_hieu": "Mức sáng nhất: sao ở đúng 'nhà' của nó, phát huy mặt tốt rõ nhất.",
+      "vi_du": null,
+      "khop": [
+       "Miếu"
+      ]
+     },
+     {
+      "ma": "no_boc",
+      "ten": "Nô Bộc",
+      "han": "僕役宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về bạn bè, đồng nghiệp, cấp dưới — những người ngang hoặc dưới mình.",
+      "vi_du": null,
+      "khop": [
+       "cung Nô Bộc",
+       "Cung Nô Bộc"
+      ]
+     },
+     {
+      "ma": "hoa_loc",
+      "ten": "Hoá Lộc",
+      "han": "化祿",
+      "mo_dun": "tuvi",
+      "de_hieu": "Nhãn 'được lợi, trôi chảy': mảng có Hoá Lộc thường thuận, dễ có thu hoạch.",
+      "vi_du": null,
+      "khop": [
+       "Hoá Lộc"
+      ]
+     },
+     {
+      "ma": "thai_duong",
+      "ten": "Thái Dương",
+      "han": "太陽",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'mặt trời': cho đi, nhiệt tình, thích được công nhận. Cần để ý: ôm việc người khác, dễ hao sức.",
+      "vi_du": null,
+      "khop": [
+       "Thái Dương"
+      ]
+     },
+     {
+      "ma": "thien_di",
+      "ten": "Thiên Di",
+      "han": "遷移宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về lúc ra ngoài xã hội, đi xa, làm việc ở môi trường lạ.",
+      "vi_du": null,
+      "khop": [
+       "cung Thiên Di",
+       "Cung Thiên Di"
+      ]
+     },
+     {
+      "ma": "hoa_quyen",
+      "ten": "Hoá Quyền",
+      "han": "化權",
+      "mo_dun": "tuvi",
+      "de_hieu": "Nhãn 'nắm quyền, chủ động': mảng đó bạn muốn tự quyết, có sức ảnh hưởng.",
+      "vi_du": null,
+      "khop": [
+       "Hoá Quyền"
+      ]
+     },
+     {
+      "ma": "dia_khong",
+      "ten": "Địa Không",
+      "han": "地空",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sát tinh 'trống rỗng': ý tưởng lạ, nhưng dễ hụt hẫng, hao hụt.",
+      "vi_du": null,
+      "khop": [
+       "Địa Không"
+      ]
+     },
+     {
+      "ma": "dia_kiep",
+      "ten": "Địa Kiếp",
+      "han": "地劫",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sát tinh 'mất mát': biến động bất ngờ, cần dự phòng.",
+      "vi_du": null,
+      "khop": [
+       "Địa Kiếp"
+      ]
+     },
+     {
+      "ma": "luc_sat",
+      "ten": "Lục sát",
+      "han": "六煞",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sáu sao gây trở ngại: Kình Dương, Đà La, Hoả Tinh, Linh Tinh, Địa Không, Địa Kiếp. Chúng làm đời thêm thử thách, nhưng cũng tạo sức bật.",
+      "vi_du": null,
+      "khop": [
+       "lục sát"
+      ]
+     },
+     {
+      "ma": "huynh_de",
+      "ten": "Huynh Đệ",
+      "han": "兄弟宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về anh chị em ruột và người cùng trang lứa thân thiết.",
+      "vi_du": null,
+      "khop": [
+       "Huynh Đệ"
+      ]
+     },
+     {
+      "ma": "tu_nu",
+      "ten": "Tử Nữ",
+      "han": "子女宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về con cái, học trò và người nhỏ tuổi mình chăm lo.",
+      "vi_du": null,
+      "khop": [
+       "Tử Nữ"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "nha_cua",
+    "tieu_de": "Nhà cửa, nơi ở",
+    "cau_hoi": "Chuyện nhà cửa của tôi thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Về nhà cửa, nhìn chung bạn ở mức thuận lợi. Ở mảng này bạn có sẵn nhiều thuận lợi; điều cần là đừng chủ quan.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn dám quyết chuyện nhà cửa",
+      "noi_dung": "Bạn dám quyết chuyện nhà cửa, mua, chuyển, sửa nhà nhanh khi thấy đúng thời điểm.",
+      "can_cu": [
+       "Thất Sát (Miếu) ở cung Điền Trạch"
+      ],
+      "ma_mau": "ds.nha_cua.that_sat.sang.manh"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Bạn dễ quyết chuyện nhà một mình",
+      "noi_dung": "Bạn dễ quyết chuyện nhà một mình, người trong nhà chưa kịp đồng ý đã thấy bạn đặt cọc. Mọi quyết định mua bán, chuyển nhà, bàn với người trong nhà ít nhất hai lần trước khi đặt cọc.",
+      "can_cu": [
+       "Thất Sát (Miếu) ở cung Điền Trạch"
+      ],
+      "ma_mau": "ds.nha_cua.that_sat.sang.vap",
+      "huong_xu_ly": "Mọi quyết định mua bán, chuyển nhà, bàn với người trong nhà ít nhất hai lần trước khi đặt cọc."
+     }
+    ],
+    "doan": [
+     "Về nhà cửa, nhìn chung bạn ở mức thuận lợi. Ở mảng này bạn có sẵn nhiều thuận lợi; điều cần là đừng chủ quan.",
+     "Chỗ mạnh của bạn ở mảng này: bạn dám quyết chuyện nhà cửa. Còn chỗ cần để ý: bạn dễ quyết chuyện nhà một mình — mỗi điều có cách gỡ ngay trong hộp."
+    ],
+    "can_cu": [
+     "Thất Sát (Miếu) ở cung Điền Trạch",
+     "Cung Điền Trạch đọc kèm nửa phần cung xung chiếu Tử Nữ và hai cung tam hợp Tật Ách, Huynh Đệ"
+    ],
+    "cau_tu_soi": "Với bạn, 'nhà' là một nơi chốn hay là những người ở trong đó?",
+    "moi_xem": {
+     "diem_nhan": "Về nhà cửa, nhìn chung bạn ở mức thuận lợi.",
+     "cau_hoi": "Bạn cần một nơi ở thế nào để thấy yên, và chuyện nhà cửa nên tính theo nhịp nào?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "that_sat",
+      "ten": "Thất Sát",
+      "han": "七殺",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'tướng tiên phong': can đảm, dám làm việc khó. Cần để ý: nóng vội, dễ liều.",
+      "vi_du": null,
+      "khop": [
+       "Thất Sát"
+      ]
+     },
+     {
+      "ma": "mieu",
+      "ten": "Miếu",
+      "han": "廟",
+      "mo_dun": "tuvi",
+      "de_hieu": "Mức sáng nhất: sao ở đúng 'nhà' của nó, phát huy mặt tốt rõ nhất.",
+      "vi_du": null,
+      "khop": [
+       "Miếu"
+      ]
+     },
+     {
+      "ma": "dien_trach",
+      "ten": "Điền Trạch",
+      "han": "田宅宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về nhà cửa, đất đai, không khí trong gia đình.",
+      "vi_du": null,
+      "khop": [
+       "cung Điền Trạch",
+       "Cung Điền Trạch"
+      ]
+     },
+     {
+      "ma": "tu_nu",
+      "ten": "Tử Nữ",
+      "han": "子女宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về con cái, học trò và người nhỏ tuổi mình chăm lo.",
+      "vi_du": null,
+      "khop": [
+       "Tử Nữ"
+      ]
+     },
+     {
+      "ma": "tat_ach",
+      "ten": "Tật Ách",
+      "han": "疾厄宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về thể chất và những điểm cơ thể cần để ý. Không dùng để chẩn đoán bệnh — có vấn đề sức khoẻ hãy hỏi bác sĩ.",
+      "vi_du": null,
+      "khop": [
+       "Tật Ách"
+      ]
+     },
+     {
+      "ma": "huynh_de",
+      "ten": "Huynh Đệ",
+      "han": "兄弟宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về anh chị em ruột và người cùng trang lứa thân thiết.",
+      "vi_du": null,
+      "khop": [
+       "Huynh Đệ"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "duong_bay",
+    "tieu_de": "Mảng đời nào kéo mảng đời nào",
+    "cau_hoi": "Mảng đời nào đang tác động lên mảng nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Trong đời bạn, các mảng đời kéo nhau khá rõ: chỗ thuận và chỗ vướng gần ngang nhau.",
+    "hop": [
+     {
+      "loai": "luu_y",
+      "tieu_de": "Tự lo, tự ôm",
+      "noi_dung": "Bạn hay tự đặt áp lực, tự chịu, khó mở lời nhờ người. Điểm vướng thường nằm ở cách mình nhìn chính mình. Nên chọn một người tin được để kể việc đang lo, và cho phép mình làm chưa hoàn hảo.",
+      "can_cu": [
+       "Cung Mệnh tự hoá Kỵ (Cự Môn, can Đinh)",
+       "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn."
+      ],
+      "ma_mau": "ds.duong_bay.menh_tu_ky.ky.vap",
+      "huong_xu_ly": "Nên chọn một người tin được để kể việc đang lo, và cho phép mình làm chưa hoàn hảo."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Tự lo trong chuyện đôi lứa",
+      "noi_dung": "Bạn dễ tự suy diễn, tự giữ cảm xúc trong quan hệ đôi lứa; vướng thường đến từ điều chưa nói ra. Nên nói thẳng cảm nhận của mình bằng câu bắt đầu từ tôi thấy, thay vì chờ người kia tự hiểu.",
+      "can_cu": [
+       "Cung Phu Thê tự hoá Kỵ (Thái Âm, can Ất)"
+      ],
+      "ma_mau": "ds.duong_bay.phu_the_tu_ky.ky.vap",
+      "huong_xu_ly": "Nên nói thẳng cảm nhận của mình bằng câu bắt đầu từ tôi thấy, thay vì chờ người kia tự hiểu."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Con cái kéo bận tâm sang ra ngoài, đi xa",
+      "noi_dung": "Việc ra ngoài, đi xa, môi trường mới dễ làm bạn để tâm và hao sức hơn thường lệ. Nên chuẩn bị kỹ trước chuyến đi hay việc mới, có phương án dự phòng và để dư thời gian.",
+      "can_cu": [
+       "Hoá Kỵ (Thái Dương, can Giáp) từ cung Tử Nữ vào Thiên Di, chiếu Mệnh"
+      ],
+      "ma_mau": "ds.duong_bay.ky_xung_menh.ky.vap",
+      "huong_xu_ly": "Nên chuẩn bị kỹ trước chuyến đi hay việc mới, có phương án dự phòng và để dư thời gian."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Ra ngoài, đi xa đỡ cho chính bạn",
+      "noi_dung": "Chuyện ra ngoài, đi xa có xu hướng mang thuận lợi tới chính bạn.",
+      "can_cu": [
+       "Hoá Lộc (Cự Môn, can Tân) từ cung Thiên Di vào Mệnh",
+       "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn."
+      ],
+      "ma_mau": "ds.duong_bay.thien_di+menh.loc.manh",
+      "loi_khuyen": "Nên để ý cơ hội đến từ chuyện ra ngoài, đi xa và dùng nó cho chính bạn."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Tình cảm, vợ chồng đỡ cho tiền bạc",
+      "noi_dung": "Chuyện tình cảm, vợ chồng có xu hướng mang thuận lợi tới chuyện tiền bạc.",
+      "can_cu": [
+       "Hoá Lộc (Thiên Cơ, can Ất) từ cung Phu Thê vào Tài Bạch",
+       "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn."
+      ],
+      "ma_mau": "ds.duong_bay.phu_the+tai_bach.loc.manh",
+      "loi_khuyen": "Nên để ý cơ hội đến từ chuyện tình cảm, vợ chồng và dùng nó cho chuyện tiền bạc."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Anh chị em đỡ cho công việc",
+      "noi_dung": "Chuyện anh chị em có xu hướng mang thuận lợi tới chuyện công việc.",
+      "can_cu": [
+       "Hoá Lộc (Thiên Đồng, can Bính) từ cung Huynh Đệ vào Quan Lộc"
+      ],
+      "ma_mau": "ds.duong_bay.huynh_de+quan_loc.loc.manh",
+      "loi_khuyen": "Nên để ý cơ hội đến từ chuyện anh chị em và dùng nó cho chuyện công việc."
+     }
+    ],
+    "doan": [
+     "Trong đời bạn, các mảng đời kéo nhau khá rõ: chỗ thuận và chỗ vướng gần ngang nhau.",
+     "Chỗ các mảng đời đỡ nhau: ra ngoài, đi xa đỡ cho chính bạn; tình cảm, vợ chồng đỡ cho tiền bạc. Còn chỗ hay vướng: tự lo, tự ôm; tự lo trong chuyện đôi lứa — mỗi điều có cách gỡ ngay trong hộp.",
+     "Đây là cách các mảng đời tác động lẫn nhau, không phải lời đoán sự kiện."
+    ],
+    "can_cu": [
+     "Cung Mệnh tự hoá Kỵ (Cự Môn, can Đinh)",
+     "Nam phái: Tuần Không, Triệt Lộ đóng ở cung nào thì làm giảm hoặc hoãn tác dụng của sao và hoá ở cung ấy, không xoá hẳn. Đường bay vào cung có Tuần Triệt nên đọc là có, nhưng chậm hoặc nhẹ hơn, thường cần làm lần thứ hai mới trọn.",
+     "Cung Phu Thê tự hoá Kỵ (Thái Âm, can Ất)",
+     "Hoá Kỵ (Thái Dương, can Giáp) từ cung Tử Nữ vào Thiên Di, chiếu Mệnh",
+     "Hoá Lộc (Cự Môn, can Tân) từ cung Thiên Di vào Mệnh",
+     "Hoá Lộc (Thiên Cơ, can Ất) từ cung Phu Thê vào Tài Bạch",
+     "Hoá Lộc (Thiên Đồng, can Bính) từ cung Huynh Đệ vào Quan Lộc",
+     "Lai nhân cung: Nô Bộc (Canh Thìn)",
+     "Lớp phi tinh (can cung hoá sao bay sang cung khác) là cách xem của Trung Châu / Khâm Thiên; Nam phái lối Việt chủ yếu xem tứ hoá theo can năm sinh, Tuần/Triệt và tam hợp. Hai cách trình bày song song, bạn tự đối chiếu."
+    ],
+    "cau_tu_soi": "Mảng đời nào của bạn đang âm thầm kéo theo mảng khác?",
+    "moi_xem": {
+     "diem_nhan": "Trong đời bạn, các mảng đời kéo nhau khá rõ: chỗ thuận và chỗ vướng gần ngang nhau.",
+     "cau_hoi": "Mảng đời nào đang âm thầm tác động lên mảng nào, và đâu là chỗ bạn hay tự ôm việc về mình?",
+     "so_doan": 3,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "cung_menh",
+      "ten": "Cung Mệnh",
+      "han": "命宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô quan trọng nhất, nói về bản thân: tính cách gốc, cách bạn phản ứng với đời. Đọc lá số luôn bắt đầu từ đây.",
+      "vi_du": null,
+      "khop": [
+       "Cung Mệnh",
+       "Mệnh"
+      ]
+     },
+     {
+      "ma": "hoa_ky",
+      "ten": "Hoá Kỵ",
+      "han": "化忌",
+      "mo_dun": "tuvi",
+      "de_hieu": "Nhãn 'vướng mắc, bận lòng': mảng đó dễ lo nghĩ, cần cẩn thận — cũng là chỗ bạn để tâm nhiều nhất.",
+      "vi_du": null,
+      "khop": [
+       "hoá Kỵ",
+       "Hoá Kỵ"
+      ]
+     },
+     {
+      "ma": "cu_mon",
+      "ten": "Cự Môn",
+      "han": "巨門",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'lời nói': giỏi phân tích, tranh luận. Cần để ý: dễ thị phi, nói thẳng làm mất lòng.",
+      "vi_du": null,
+      "khop": [
+       "Cự Môn"
+      ]
+     },
+     {
+      "ma": "nam_phai",
+      "ten": "Nam phái",
+      "han": "南派",
+      "mo_dun": "tuvi",
+      "de_hieu": "Cách luận Tử vi của sách Việt Nam (Thái Thứ Lang, Nguyễn Phát Lộc…), khác phái Trung Hoa ở vài bảng tra như độ sáng sao, cách an Hoả Linh.",
+      "vi_du": null,
+      "khop": [
+       "Nam phái",
+       "lối Việt"
+      ]
+     },
+     {
+      "ma": "tuan",
+      "ten": "Tuần",
+      "han": "旬空",
+      "mo_dun": "tuvi",
+      "de_hieu": "Dấu 'khoảng trống' đặt giữa hai cung theo năm sinh: làm sao trong đó yếu đi lúc đầu, về sau mới rõ. Sao xấu gặp Tuần lại bớt xấu.",
+      "vi_du": null,
+      "khop": [
+       "Tuần Không",
+       "Tuần"
+      ]
+     },
+     {
+      "ma": "triet",
+      "ten": "Triệt",
+      "han": "截空",
+      "mo_dun": "tuvi",
+      "de_hieu": "Dấu 'chặn đường' giữa hai cung theo can năm sinh: cản trở mạnh ở giai đoạn đầu đời (thường trước 30 tuổi).",
+      "vi_du": null,
+      "khop": [
+       "Triệt Lộ",
+       "Triệt"
+      ]
+     },
+     {
+      "ma": "phu_the",
+      "ten": "Phu Thê",
+      "han": "夫妻宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về chuyện tình cảm, hôn nhân và kiểu người bạn dễ gắn bó.",
+      "vi_du": null,
+      "khop": [
+       "Cung Phu Thê",
+       "cung Phu Thê"
+      ]
+     },
+     {
+      "ma": "thai_am",
+      "ten": "Thái Âm",
+      "han": "太陰",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'mặt trăng': tinh tế, giàu cảm xúc, chăm lo gia đình. Cần để ý: hay ôm nỗi niềm riêng.",
+      "vi_du": null,
+      "khop": [
+       "Thái Âm"
+      ]
+     },
+     {
+      "ma": "thai_duong",
+      "ten": "Thái Dương",
+      "han": "太陽",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'mặt trời': cho đi, nhiệt tình, thích được công nhận. Cần để ý: ôm việc người khác, dễ hao sức.",
+      "vi_du": null,
+      "khop": [
+       "Thái Dương"
+      ]
+     },
+     {
+      "ma": "tu_nu",
+      "ten": "Tử Nữ",
+      "han": "子女宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về con cái, học trò và người nhỏ tuổi mình chăm lo.",
+      "vi_du": null,
+      "khop": [
+       "cung Tử Nữ"
+      ]
+     },
+     {
+      "ma": "thien_di",
+      "ten": "Thiên Di",
+      "han": "遷移宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về lúc ra ngoài xã hội, đi xa, làm việc ở môi trường lạ.",
+      "vi_du": null,
+      "khop": [
+       "cung Thiên Di",
+       "Thiên Di"
+      ]
+     },
+     {
+      "ma": "hoa_loc",
+      "ten": "Hoá Lộc",
+      "han": "化祿",
+      "mo_dun": "tuvi",
+      "de_hieu": "Nhãn 'được lợi, trôi chảy': mảng có Hoá Lộc thường thuận, dễ có thu hoạch.",
+      "vi_du": null,
+      "khop": [
+       "Hoá Lộc"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "nam_nay",
+    "tieu_de": "Năm nay & 3 tháng tới",
+    "cau_hoi": "Năm nay và 3 tháng tới của tôi thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Mười năm này xoay quanh nhà cửa, an cư và tài sản; năm nay thêm chuyện sức khoẻ và nhịp sống.",
+    "hop": [
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Mười năm này: nhà cửa, an cư và tài sản",
+      "noi_dung": "Từ 35 đến 44 tuổi, trọng tâm của bạn là nhà cửa, an cư và tài sản. Lo chuyện chỗ ở và tích luỹ tài sản lâu dài.",
+      "can_cu": [
+       "Đại hạn cung Điền Trạch (Mậu Dần), 35–44 tuổi"
+      ],
+      "ma_mau": "ds.nam_nay.dai_han.dien_trach.thuan",
+      "muc": "thuan"
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Năm nay: sức khoẻ và nhịp sống",
+      "noi_dung": "Năm nay, việc hay xoay quanh sức khoẻ và nhịp sống; mảng này đang thuận. Xây nếp ăn ngủ, vận động đều và khám sức khoẻ định kỳ.",
+      "can_cu": [
+       "Lưu niên cung Tật Ách (Bính Ngọ)"
+      ],
+      "ma_mau": "ds.nam_nay.luu_nien.tat_ach.thuan",
+      "muc": "thuan"
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Lớp riêng của năm: bạn bè, đồng nghiệp và đội nhóm",
+      "noi_dung": "Thêm một lớp riêng của năm nay, việc hay xoay quanh bạn bè, đồng nghiệp và đội nhóm; mảng này đang thuận. Xây một nhóm làm việc tốt và chọn bạn kỹ.",
+      "can_cu": [
+       "Tiểu hạn cung Nô Bộc (Canh Thìn)"
+      ],
+      "ma_mau": "ds.nam_nay.tieu_han.no_boc.thuan",
+      "muc": "thuan"
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Tháng 9–11 âm lịch",
+      "noi_dung": "Hợp làm đều việc đang có, dọn dẹp việc tồn và chuẩn bị cho tháng sau.",
+      "can_cu": [
+       "Lưu nguyệt tại cung Thiên Di (Mậu Tuất)",
+       "Lưu nguyệt tại cung Tật Ách (Kỷ Hợi)",
+       "Lưu nguyệt tại cung Tài Bạch (Canh Tý)"
+      ],
+      "ma_mau": "ds.nam_nay.thang1+2+3.binh.chung",
+      "muc": "can_bang",
+      "tu": "2026-10-10",
+      "den": "2027-01-07",
+      "cau_tu_soi": "Việc tồn nào bạn có thể làm xong trong tháng này?"
+     }
+    ],
+    "doan": [
+     "Mười năm này xoay quanh nhà cửa, an cư và tài sản; năm nay thêm chuyện sức khoẻ và nhịp sống.",
+     "Ba tháng tới: tháng 9–11 cân bằng.",
+     "Khi các lớp nói khác nhau, ưu tiên mười năm trước, rồi đến năm, rồi mới đến tháng."
+    ],
+    "can_cu": [
+     "Đại hạn cung Điền Trạch (Mậu Dần), 35–44 tuổi",
+     "Tứ hoá mười năm này: Lộc Tham Lang, Quyền Thái Âm, Khoa Hữu Bật, Kỵ Thiên Cơ",
+     "Lưu niên cung Tật Ách (Bính Ngọ)",
+     "Tứ hoá năm nay: Lộc Thiên Đồng, Quyền Thiên Cơ, Khoa Văn Xương, Kỵ Liêm Trinh",
+     "Tiểu hạn cung Nô Bộc (Canh Thìn)",
+     "Phái lưu nguyệt: Đẩu Quân từ Thái Tuế",
+     "Ưu tiên: đại hạn > lưu niên > tiểu hạn > lưu nguyệt",
+     "Lưu nguyệt tại cung Thiên Di (Mậu Tuất)",
+     "Lưu nguyệt tại cung Tật Ách (Kỷ Hợi)",
+     "Lưu nguyệt tại cung Tài Bạch (Canh Tý)"
+    ],
+    "cau_tu_soi": "Việc nào năm nay đáng để bạn dồn sức nhất?",
+    "tuoi_mu": 37,
+    "moi_xem": {
+     "diem_nhan": "Mười năm này xoay quanh nhà cửa, an cư và tài sản; năm nay thêm chuyện sức khoẻ và nhịp sống.",
+     "cau_hoi": "Năm nay nên dồn sức vào đâu, và tháng nào trong 3 tháng tới hợp để bắt đầu việc mới?",
+     "so_doan": 3,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "dai_han",
+      "ten": "Đại hạn",
+      "han": "大限",
+      "mo_dun": "tuvi",
+      "de_hieu": "Giai đoạn 10 năm của đời, mỗi giai đoạn ứng với một cung. Đọc hạn luôn xét đại hạn trước.",
+      "vi_du": "Đại hạn 25–34 ở cung Quan Lộc: mười năm này việc làm là trọng tâm.",
+      "khop": [
+       "Đại hạn",
+       "đại hạn"
+      ]
+     },
+     {
+      "ma": "dien_trach",
+      "ten": "Điền Trạch",
+      "han": "田宅宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về nhà cửa, đất đai, không khí trong gia đình.",
+      "vi_du": null,
+      "khop": [
+       "cung Điền Trạch"
+      ]
+     },
+     {
+      "ma": "tu_hoa",
+      "ten": "Tứ hoá",
+      "han": "四化",
+      "mo_dun": "tuvi",
+      "de_hieu": "Bốn 'biến hoá' gắn vào 4 sao theo can năm sinh: Hoá Lộc, Hoá Quyền, Hoá Khoa, Hoá Kỵ — như 4 cái nhãn làm sao đó nổi bật theo một hướng.",
+      "vi_du": null,
+      "khop": [
+       "Tứ hoá"
+      ]
+     },
+     {
+      "ma": "tham_lang",
+      "ten": "Tham Lang",
+      "han": "貪狼",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'đa tài, ham muốn': giao thiệp giỏi, nhiều sở thích. Cần để ý: dễ phân tán, ham vui.",
+      "vi_du": null,
+      "khop": [
+       "Tham Lang"
+      ]
+     },
+     {
+      "ma": "hoa_quyen",
+      "ten": "Hoá Quyền",
+      "han": "化權",
+      "mo_dun": "tuvi",
+      "de_hieu": "Nhãn 'nắm quyền, chủ động': mảng đó bạn muốn tự quyết, có sức ảnh hưởng.",
+      "vi_du": null,
+      "khop": [
+       "Quyền"
+      ]
+     },
+     {
+      "ma": "thai_am",
+      "ten": "Thái Âm",
+      "han": "太陰",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'mặt trăng': tinh tế, giàu cảm xúc, chăm lo gia đình. Cần để ý: hay ôm nỗi niềm riêng.",
+      "vi_du": null,
+      "khop": [
+       "Thái Âm"
+      ]
+     },
+     {
+      "ma": "hoa_khoa",
+      "ten": "Hoá Khoa",
+      "han": "化科",
+      "mo_dun": "tuvi",
+      "de_hieu": "Nhãn 'danh tiếng, học hành': mảng đó dễ được ghi nhận, có quý nhân nâng đỡ.",
+      "vi_du": null,
+      "khop": [
+       "Khoa"
+      ]
+     },
+     {
+      "ma": "huu_bat",
+      "ten": "Hữu Bật",
+      "han": "右弼",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'người phụ tá bên phải': có trợ lực, giỏi phối hợp.",
+      "vi_du": null,
+      "khop": [
+       "Hữu Bật"
+      ]
+     },
+     {
+      "ma": "thien_co",
+      "ten": "Thiên Cơ",
+      "han": "天機",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'quân sư': nhanh trí, khéo tính toán, thích thay đổi. Cần để ý: hay lo nghĩ, khó dừng lại một việc.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Cơ"
+      ]
+     },
+     {
+      "ma": "luu_nien",
+      "ten": "Lưu niên",
+      "han": "流年",
+      "mo_dun": "tuvi",
+      "de_hieu": "Hạn của riêng một năm dương/âm lịch (theo chi năm), đặt lên trên lá số gốc để xem năm đó nổi bật mảng nào.",
+      "vi_du": null,
+      "khop": [
+       "Lưu niên",
+       "lưu niên",
+       "Thái Tuế"
+      ]
+     },
+     {
+      "ma": "tat_ach",
+      "ten": "Tật Ách",
+      "han": "疾厄宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về thể chất và những điểm cơ thể cần để ý. Không dùng để chẩn đoán bệnh — có vấn đề sức khoẻ hãy hỏi bác sĩ.",
+      "vi_du": null,
+      "khop": [
+       "cung Tật Ách"
+      ]
+     },
+     {
+      "ma": "thien_dong",
+      "ten": "Thiên Đồng",
+      "han": "天同",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'phúc hậu': hiền hoà, dễ chịu, thích an nhàn. Cần để ý: thiếu quyết liệt, dễ trì hoãn.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Đồng"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "loi_khuyen",
+    "tieu_de": "Lời khuyên dành cho bạn",
+    "cau_hoi": "Tôi nên làm gì từ đây?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Gom lại từ các chương trên: đây là điều bạn nên dùng, nên để ý và nên làm.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Ba điểm mạnh nên dùng",
+      "noi_dung": "Trong chuyện tình cảm, bạn chu đáo, nhớ món người ấy thích, biết lúc nào nên ngồi cạnh im lặng. Bạn học được từ cha mẹ, sếp tính nguyên tắc và sự nghiêm túc trong công việc. Bạn làm việc với đồng nghiệp rõ ràng, công bằng, ai làm tốt thì được ghi nhận đúng.",
+      "can_cu": [
+       "Thái Âm (Miếu) ở cung Phu Thê",
+       "Liêm Trinh (Vượng) ở cung Phụ Mẫu",
+       "Vũ Khúc (Miếu) ở cung Nô Bộc"
+      ],
+      "ma_mau": "ds.loi_khuyen.tong_hop.ba.manh"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Ba điều nên để ý",
+      "noi_dung": "Công việc là điều bạn để tâm nhiều, dễ thấy mình chưa đủ dù đã cố. Bạn hay tự đặt áp lực, tự chịu, khó mở lời nhờ người. Bạn dễ tự suy diễn, tự giữ cảm xúc trong quan hệ đôi lứa; vướng thường đến từ điều chưa nói ra. Nên gỡ từng điều theo ba việc ngay dưới.",
+      "can_cu": [
+       "Hoá Kỵ (Thiên Đồng) ở cung Quan Lộc",
+       "Cung Mệnh tự hoá Kỵ (Cự Môn, can Đinh)",
+       "Cung Phu Thê tự hoá Kỵ (Thái Âm, can Ất)"
+      ],
+      "ma_mau": "ds.loi_khuyen.tong_hop.ba.vap",
+      "huong_xu_ly": "Nên gỡ từng điều theo ba việc ngay dưới."
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Ba việc nên làm",
+      "noi_dung": "Đặt mục tiêu theo quý thay vì theo cảm giác, và ghi lại những việc đã xong. Nên chọn một người tin được để kể việc đang lo, và cho phép mình làm chưa hoàn hảo. Nên nói thẳng cảm nhận của mình bằng câu bắt đầu từ tôi thấy, thay vì chờ người kia tự hiểu.",
+      "can_cu": [],
+      "ma_mau": "ds.loi_khuyen.tong_hop.ba.khuyen"
+     }
+    ],
+    "doan": [
+     "Gom lại từ các chương trên: đây là điều bạn nên dùng, nên để ý và nên làm.",
+     "Nếu tuần này chỉ làm được một việc, hãy bắt đầu từ chuyện công việc — việc nhỏ làm đều có ích hơn kế hoạch lớn bỏ dở."
+    ],
+    "can_cu": [
+     "Thái Âm (Miếu) ở cung Phu Thê",
+     "Liêm Trinh (Vượng) ở cung Phụ Mẫu",
+     "Vũ Khúc (Miếu) ở cung Nô Bộc",
+     "Hoá Kỵ (Thiên Đồng) ở cung Quan Lộc",
+     "Cung Mệnh tự hoá Kỵ (Cự Môn, can Đinh)",
+     "Cung Phu Thê tự hoá Kỵ (Thái Âm, can Ất)"
+    ],
+    "cau_tu_soi": "Trong ba việc nên làm, việc nào bạn bắt đầu được ngay tuần này?",
+    "moi_xem": {
+     "diem_nhan": "Gom lại từ các chương trên: đây là điều bạn nên dùng, nên để ý và nên làm.",
+     "cau_hoi": "Ba điểm mạnh nào bạn nên dùng nhiều hơn, và ba việc nhỏ nào nên bắt đầu ngay?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "thai_am",
+      "ten": "Thái Âm",
+      "han": "太陰",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'mặt trăng': tinh tế, giàu cảm xúc, chăm lo gia đình. Cần để ý: hay ôm nỗi niềm riêng.",
+      "vi_du": null,
+      "khop": [
+       "Thái Âm"
+      ]
+     },
+     {
+      "ma": "mieu",
+      "ten": "Miếu",
+      "han": "廟",
+      "mo_dun": "tuvi",
+      "de_hieu": "Mức sáng nhất: sao ở đúng 'nhà' của nó, phát huy mặt tốt rõ nhất.",
+      "vi_du": null,
+      "khop": [
+       "Miếu"
+      ]
+     },
+     {
+      "ma": "phu_the",
+      "ten": "Phu Thê",
+      "han": "夫妻宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về chuyện tình cảm, hôn nhân và kiểu người bạn dễ gắn bó.",
+      "vi_du": null,
+      "khop": [
+       "cung Phu Thê",
+       "Cung Phu Thê"
+      ]
+     },
+     {
+      "ma": "liem_trinh",
+      "ten": "Liêm Trinh",
+      "han": "廉貞",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'nguyên tắc': có lập trường, mạnh mẽ, đam mê. Cần để ý: cực đoan, dễ va chạm.",
+      "vi_du": null,
+      "khop": [
+       "Liêm Trinh"
+      ]
+     },
+     {
+      "ma": "phu_mau",
+      "ten": "Phụ Mẫu",
+      "han": "父母宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về cha mẹ, người dìu dắt và quan hệ với cấp trên.",
+      "vi_du": null,
+      "khop": [
+       "cung Phụ Mẫu"
+      ]
+     },
+     {
+      "ma": "vu_khuc",
+      "ten": "Vũ Khúc",
+      "han": "武曲",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'tài chính': thực tế, quyết đoán, giỏi việc tiền. Cần để ý: cứng nhắc, ít bày tỏ cảm xúc.",
+      "vi_du": null,
+      "khop": [
+       "Vũ Khúc"
+      ]
+     },
+     {
+      "ma": "no_boc",
+      "ten": "Nô Bộc",
+      "han": "僕役宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về bạn bè, đồng nghiệp, cấp dưới — những người ngang hoặc dưới mình.",
+      "vi_du": null,
+      "khop": [
+       "cung Nô Bộc"
+      ]
+     },
+     {
+      "ma": "hoa_ky",
+      "ten": "Hoá Kỵ",
+      "han": "化忌",
+      "mo_dun": "tuvi",
+      "de_hieu": "Nhãn 'vướng mắc, bận lòng': mảng đó dễ lo nghĩ, cần cẩn thận — cũng là chỗ bạn để tâm nhiều nhất.",
+      "vi_du": null,
+      "khop": [
+       "Hoá Kỵ",
+       "hoá Kỵ"
+      ]
+     },
+     {
+      "ma": "thien_dong",
+      "ten": "Thiên Đồng",
+      "han": "天同",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'phúc hậu': hiền hoà, dễ chịu, thích an nhàn. Cần để ý: thiếu quyết liệt, dễ trì hoãn.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Đồng"
+      ]
+     },
+     {
+      "ma": "quan_loc",
+      "ten": "Quan Lộc",
+      "han": "官祿宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô nói về công việc, nghề nghiệp, cách bạn làm việc và thăng tiến.",
+      "vi_du": null,
+      "khop": [
+       "cung Quan Lộc"
+      ]
+     },
+     {
+      "ma": "cung_menh",
+      "ten": "Cung Mệnh",
+      "han": "命宮",
+      "mo_dun": "tuvi",
+      "de_hieu": "Ô quan trọng nhất, nói về bản thân: tính cách gốc, cách bạn phản ứng với đời. Đọc lá số luôn bắt đầu từ đây.",
+      "vi_du": null,
+      "khop": [
+       "Cung Mệnh"
+      ]
+     },
+     {
+      "ma": "cu_mon",
+      "ten": "Cự Môn",
+      "han": "巨門",
+      "mo_dun": "tuvi",
+      "de_hieu": "Sao 'lời nói': giỏi phân tích, tranh luận. Cần để ý: dễ thị phi, nói thẳng làm mất lòng.",
+      "vi_du": null,
+      "khop": [
+       "Cự Môn"
+      ]
+     }
+    ]
+   }
+  ],
+  "tuoi_mu": 37,
+  "ngay_xem": "2026-10-21",
+  "trang_thai": "nhap_ai",
+  "source_id": "tuvi_vn",
+  "school_id": "nam_phai_viet",
+  "ket": "Đây là góc nhìn tham khảo văn hoá để bạn tự soi, không phải lời tiên đoán về đời bạn.",
+  "phi": {
+   "sao": 10,
+   "ly_do": "mien_phi",
+   "dang_nhap": true
+  },
+  "dien_dat": "mau",
+  "so_khoa": 0
+ },
+ "ty_le": {
+  "ty_le": {
+   "ds.tinh_cam.thai_am.sang.manh": {
+    "dung": 36,
+    "chua_dung": 9
+   },
+   "ds.tien_bac.cat+tai_bach.co.manh": {
+    "dung": 5,
+    "chua_dung": 7
+   }
+  }
+ }
+}

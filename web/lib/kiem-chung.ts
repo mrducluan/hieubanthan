@@ -4,7 +4,7 @@
 // ra cùng mã, không phụ thuộc câu chữ KB. Số đếm chỉ để người biên tập XEM LẠI KB, không tự đổi luận giải.
 // Dùng chung trình duyệt (thẻ) + máy chủ (/quan-tri/tang-truong) — không import gì phía máy chủ ở đây.
 
-export type LoaiKiemChung = "phi_hoa" | "nhip_3_thang";
+export type LoaiKiemChung = "phi_hoa" | "nhip_3_thang" | "doi_song";
 export type KetQuaKiemChung = "dung" | "chua_dung";
 
 /** Chuỗi ASCII thường, gạch dưới: "Quan Lộc" → "quan_loc", "Điền Trạch" → "dien_trach". */
@@ -35,9 +35,28 @@ export function maNhip(t: { muc: string; ly_do: { ma: string }[] }): string {
   return `${maChu(t.muc)}.${ly.length ? ly.join("+") : "-"}`;
 }
 
+/** LG-ĐS: mã hộp luận giải đời sống do engine dựng — `ds.{chương}.{…}` (vd `ds.su_nghiep.thien_co.sang.manh`),
+ *  ≤ 60 ký tự, chữ thường/số/`_.+-`. Web không tự dựng mã này, chỉ chuyển nguyên văn. */
+export const MA_DOI_SONG = /^ds\.[a-z0-9_]+(\.[a-z0-9_+-]+)+$/;
+export const TEN_CHUONG_DS: Record<string, string> = {
+  tong_quan: "Con người bạn", cuoc_doi: "Các giai đoạn cuộc đời", su_nghiep: "Công việc", tien_bac: "Tiền bạc",
+  tinh_cam: "Tình yêu & hôn nhân", gia_dinh: "Gia đình", suc_khoe: "Sức khoẻ", quan_he: "Bạn bè & bên ngoài",
+  nha_cua: "Nhà cửa", duong_bay: "Đường bay tứ hoá", nam_nay: "Năm nay & 3 tháng tới", loi_khuyen: "Lời khuyên",
+  cot_loi: "Điều quan trọng nhất",
+};
+const TEN_PHAN_DS: Record<string, string> = {
+  sang: "sáng", ham: "hãm", manh: "điểm mạnh", de_vap: "dễ vấp", loi_khuyen: "lời khuyên", luu_y: "lưu ý",
+  diem_manh: "điểm mạnh", thoi_diem: "thời điểm", thuan: "thuận lợi", can_bang: "cân bằng", can_chu_dong: "cần chủ động",
+  loc: "Lộc", quyen: "Quyền", khoa: "Khoa", ky: "Kỵ", cat: "cát tinh", sat: "sát tinh", dao_hoa: "đào hoa",
+};
+
 /** Nhãn đọc được cho người biên tập ở /quan-tri (giải mã ngược, không cần engine). */
 export function nhanMau(loai: string, mau: string): string {
   const p = mau.split(".");
+  if (loai === "doi_song") {
+    const [, chuong, ...con] = p;
+    return [TEN_CHUONG_DS[chuong ?? ""] ?? chuong, ...con.map((x) => TEN_PHAN_DS[x] ?? x.replace(/_/g, " "))].join(" · ");
+  }
   if (loai === "nhip_3_thang") {
     const ly = p[1] && p[1] !== "-" ? p[1].split("+").map((x) => TEN_LY_DO[x] ?? x).join(", ") : "không có lý do riêng";
     return `${TEN_MUC[p[0] ?? ""] ?? p[0]} · ${ly}`;
