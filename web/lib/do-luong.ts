@@ -27,7 +27,11 @@ export type SuKien =
   // LG-ĐS: "Đúng ý bạn hỏi?" sau câu trả lời Tử vi có ý định gợi ý từ kho vectơ — chỉ mã ý định + kết quả + độ gần
   | "tuvi_y_dinh_xac_nhan"
   // LG-ĐS: lưu / xoá bài luận (chỉ mã mô-đun), bật tắt tự lưu
-  | "luan_giai_saved";
+  | "luan_giai_saved"
+  // CTA-1: khối "Đọc tiếp về bạn" cuối phần xem — chỉ mã trang (tu), mã mảng đích (den), cờ cá nhân hoá, số chương khoá
+  | "cross_cta_viewed" | "cross_cta_clicked" | "sao_cta_clicked" | "donate_cta_clicked"
+  // CTA-1: trò "Đoán số" trên thẻ Bản đồ 5 mảng — đúng/sai + mã biến thể câu mời
+  | "guess_played";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number"> = {
@@ -61,6 +65,12 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   mau: "string",        // KC-0: mã mẫu tất định (lib/kiem-chung: "mau.quan_loc.ky.menh", "thuan.ln", "ds.su_nghiep…"), ≤ 60
   loai: "string",       // KC-0: phi_hoa / nhip_3_thang / doi_song (LG-ĐS)
   do_gan: "number",     // LG-ĐS: độ gần cosine của gợi ý ý định từ kho vectơ (0–1), không bao giờ là câu hỏi
+  tu: "string",         // CTA-1: mã trang đặt khối gợi chéo (tu_vi, than_so…) — không phải ?tu= của link mời
+  den: "string",        // CTA-1: mã mảng đích của thẻ được bấm
+  ca_nhan: "number",    // CTA-1: 1 = thẻ có luận giải nhỏ cá nhân hoá, 0 = câu chung
+  so_chuong: "number",  // CTA-1: số chương còn khoá khi bấm nút Sao
+  dung: "number",       // CTA-1: trò đoán số — 1 đúng, 0 sai
+  bien_the: "string",   // CTA-1: mã biến thể câu mời / tiêu đề (t0, b1…) để so câu nào được bấm nhiều
   vi_tri: "string",     // ND-2: tren / duoi / cuoi   // SAO-3: mã nhiệm vụ (luu_ho_so / hoi_3_cau / moi_1_ban)
 };
 const GIOI_HAN_CHUOI = 40;

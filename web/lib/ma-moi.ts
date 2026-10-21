@@ -153,6 +153,63 @@ export function docMaHai(ma: string, homNay = new Date()): NoiDungMaHai | null {
   }
 }
 
+// ---------------------------------------------------------------- CTA-1: thẻ "Bản đồ 5 mảng của tôi"
+// Mã riêng miền "bd|". Chỉ mang: tên hiển thị (người dùng tự gõ), các NHÃN engine đã tính — đường đời + từ khoá, nhật chủ
+// + hình ảnh, chính tinh cung Mệnh, cung phi + hướng tốt, quẻ đầu ngày — ba lựa chọn của trò "Đoán số" và mã biến thể
+// câu mời. KHÔNG ngày sinh, giờ sinh, can chi năm, con giáp, nạp âm (đủ để suy năm sinh). Mảnh thiếu (chưa có giờ /
+// giới tính) = chuỗi rỗng.
+export const NoiDungMaBanDo = z.object({
+  v: z.literal(1),
+  t: z.string().trim().min(1).max(24),
+  /** Đường đời 1–33 (engine) + từ khoá KB. */
+  s: z.number().int().min(1).max(33),
+  k: z.string().max(60),
+  /** Nhật chủ ("Nhâm Thủy") + hình ảnh KB ("sông lớn, biển cả"). */
+  n: z.string().max(16),
+  h: z.string().max(40),
+  /** Chính tinh cung Mệnh ("" = chưa có giờ sinh). */
+  m: z.string().max(30),
+  /** Cung phi + hướng tốt nhất ("" = chưa có giới tính). */
+  c: z.string().max(8),
+  g: z.string().max(12),
+  /** Quẻ đầu ngày (tên) — chung cho mọi người trong ngày tạo thẻ. */
+  q: z.string().max(16),
+  /** Ba lựa chọn trò "Đoán số" (có đáp án s). */
+  o: z.array(z.number().int().min(1).max(33)).length(3),
+  /** Mã biến thể câu mời 0–2. */
+  b: z.number().int().min(0).max(2),
+  d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+}).refine((x) => x.o.includes(x.s));
+export type NoiDungMaBanDo = z.infer<typeof NoiDungMaBanDo>;
+
+const kyBanDo = (than: string) => b64u(createHmac("sha256", khoa()).update(`bd|${than}`).digest()).slice(0, 16);
+
+/** Gói: [1, t, s, k, n, h, m, c, g, q, o, b, số ngày từ 1/1/2026]. */
+export function kyMaBanDo(nd: Omit<NoiDungMaBanDo, "v" | "d">, homNay = new Date()): string {
+  const x = NoiDungMaBanDo.parse({ ...nd, v: 1, d: homNay.toISOString().slice(0, 10) });
+  const goi = [1, x.t, x.s, x.k, x.n, x.h, x.m, x.c, x.g, x.q, x.o, x.b, Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
+  return `${than}.${kyBanDo(than)}`;
+}
+
+export function docMaBanDo(ma: string, homNay = new Date()): NoiDungMaBanDo | null {
+  const [than, chu_ky] = ma.split(".");
+  if (!than || !chu_ky || ma.length > 700) return null;
+  const a = Buffer.from(chu_ky), b = Buffer.from(kyBanDo(than));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown[];
+    if (!Array.isArray(g) || g.length !== 13) return null;
+    const nd = NoiDungMaBanDo.parse({
+      v: g[0], t: g[1], s: g[2], k: g[3], n: g[4], h: g[5], m: g[6], c: g[7], g: g[8], q: g[9], o: g[10], b: g[11],
+      d: new Date(NGAY_GOC + Number(g[12]) * 86_400_000).toISOString().slice(0, 10),
+    });
+    return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Mã ?tu= suy ra từ mã thẻ (tiền tố 2 chữ + 10 hex) — để ảnh (QR), trang nhận và nút chia sẻ cùng một mã gán nguồn
  *  mà không cần lưu gì. Chỉ là nhãn đo lường (không bí mật), không định danh người. */
 export function tuTuMa(tienTo: string, ma: string): string {

@@ -3,7 +3,6 @@
 import type { Metadata } from "next";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
-import { UngHoNho } from "@/components/ung-ho/UngHoNho";
 import { HomNay } from "./HomNay";
 import { docMaNgay } from "@/lib/ma-moi";
 import { MAU_TU } from "@/lib/the-chia-se";
@@ -36,7 +35,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 export default async function Page({ searchParams }: Props) {
   const nd = await theNgay(searchParams);
   return (
-    <TrangCongCu duong={DUONG} mang="than_so" sau={<UngHoNho className="mx-auto mt-10 max-w-3xl" />} truoc={nd && (
+    <TrangCongCu duong={DUONG} mang="than_so" truoc={nd && (
       <p className="mx-auto mb-6 max-w-xl rounded-2xl border border-gold/30 bg-gold/[0.06] px-4 py-3 text-center text-sm" data-testid="loi-moi-ngay">
         Hôm nay <b className="text-gold">{nd.t}</b> là Ngày cá nhân <b className="text-gold">{nd.n}</b>{nd.k ? ` — ${nd.k.toLowerCase()}` : ""}. Còn bạn?
       </p>

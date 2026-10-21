@@ -14,6 +14,7 @@ import { KhungTai } from "@/components/khung/TieuDe";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { dangChoMo, ghiChoMo, xoaChoMo } from "@/lib/sao-client";
+import { dangKyCuaLuanGiai } from "@/lib/cta-sao";
 import { useHoSo } from "@/lib/hoso";
 import type { MoiXem } from "@/lib/sao-xem-truoc";
 import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
@@ -74,6 +75,15 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
     } catch (e) { if (so === luot.current) setLoi(e instanceof Error ? e.message : "Chưa tải được luận giải."); }
     finally { if (so === luot.current) setDang(false); }
   };
+  // CTA-1: báo trạng thái báo cáo cho nút Sao ở khối "Đọc tiếp" cuối trang — nút đó gọi đúng hàm mở của báo cáo này.
+  const taiRef = useRef(tai);
+  taiRef.current = tai;
+  const maCua = moDun ?? (duongDan.includes("battu") ? "battu" : duongDan.includes("thanso") ? "thanso" : "tuvi");
+  useEffect(() => dangKyCuaLuanGiai({
+    moDun: maCua, daTai: Boolean(bc), soKhoa: bc?.so_khoa ?? 0, tongChuong: bc?.chuong.length ?? 0,
+    mo: () => void taiRef.current(true), doc: () => void taiRef.current(),
+  }), [maCua, bc]);
+
   // Quay lại sau khi đăng nhập / nạp Sao → tự mở đúng báo cáo đang xem dở (cùng lá số, trong 30 phút). Một lần.
   const daTuMo = useRef(false);
   useEffect(() => {

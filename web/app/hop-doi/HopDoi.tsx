@@ -11,6 +11,7 @@ import { KhungTai } from "@/components/khung/TieuDe";
 import { KetQuaHopDoi, type KetQuaHopDoiT } from "@/components/hop-doi/KetQuaHopDoi";
 import { NutChiaSe } from "@/components/chia-se/NutChiaSe";
 import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
+import { CuoiPhanXem } from "@/components/cta/CuoiPhanXem";
 import { GopY } from "@/components/khung/GopY";
 import { postJson } from "@/lib/goi-api";
 import { hoTenList, ngayHopLe, tenGoi, useHoSo } from "@/lib/hoso";
@@ -164,6 +165,7 @@ export function HopDoi() {
               </Button>
             </Card>
           </div>
+          <div className="mx-auto max-w-5xl"><CuoiPhanXem mang="hop_doi" /></div>
         </>
       )}
     </div>
