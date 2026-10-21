@@ -137,15 +137,16 @@ def test_cham_mang_la_mau():
     # tien_bac: có Tài +1, Tài đậm mà là hành kỵ −1 = 0 → cân bằng
     # tinh_cam (nam → Tài): +1 −1, chi ngày Ngọ tự hình với năm/giờ −1 = −1 → cần chủ động
     # gia_dinh: có Ấn +1, Ấn là hành hỷ +1, Tài đậm phá Ấn −1 = 1 → cân bằng
-    # hoc_tap: có Ấn +1, Thái Cực Quý Nhân +1 = 2 → thuận
+    # hoc_tap: có Ấn +1, Thái Cực Quý Nhân +1 = 2 → cân bằng (ngưỡng Thuận của học là 3)
     # quan_he: Thiên Ất Quý Nhân +1, Vong Thần −1 = 0 → cân bằng
     # suc_khoe: thiếu Mộc, Hỏa chiếm 48% (≥ 45%) → cần chủ động
     # tong_quan: hành hỷ Kim có mặt rõ +1, ≥ 2 sao cát +1 = 2 → thuận
     # ngu_hanh: cách 1 có Kim rõ +1, điều hậu cần Thủy chỉ 11% → 0 = 1 → cân bằng; cách 2: hỷ Kim rõ +1, kỵ Thủy 11%
-    #   không nổi +1 = 2 → thuận; gộp (một cách cân bằng → theo cách còn lại) = thuận (QC 2026-10-21: trước đây chỉ chấm cách 1)
-    assert muc == {"su_nghiep": "thuan", "tien_bac": "can_bang", "tinh_cam": "can_chu_dong", "gia_dinh": "can_bang",
-                   "hoc_tap": "thuan", "quan_he": "can_bang", "suc_khoe": "can_chu_dong", "tong_quan": "thuan",
-                   "ngu_hanh": "thuan"}
+    #   không nổi +1 = 2 → thuận; gộp chặt (hai cách khác nhau → cân bằng) = cân bằng
+    # tinh_cam: cân sức cần chủ động, tháng sinh cân bằng → gộp chặt = cân bằng
+    assert muc == {"su_nghiep": "thuan", "tien_bac": "can_bang", "tinh_cam": "can_bang", "gia_dinh": "can_bang",
+                   "hoc_tap": "can_bang", "quan_he": "can_bang", "suc_khoe": "can_chu_dong", "tong_quan": "thuan",
+                   "ngu_hanh": "can_bang"}
     assert all(v["can_cu"] for v in cm.values())
 
 
@@ -517,23 +518,21 @@ _MANG_HAI_CACH = ("tong_quan", "ngu_hanh", "su_nghiep", "tien_bac", "tinh_cam", 
 
 
 def _gop(m1: str, m2: str) -> str:
-    s = {"thuan": 1, "can_bang": 0, "can_chu_dong": -1}
-    t = s[m1] + s[m2]
-    return "thuan" if t > 0 else "can_chu_dong" if t < 0 else "can_bang"
+    return bt.gop_muc_mang(m1, m2)
 
 
 def test_muc_mang_cham_ca_hai_cach_la_mau():
     """Lỗi QC 2: mức mảng đời không được ngầm theo dụng thần cách 1. Lá mẫu: ngũ hành theo cân sức = cân bằng (Kim rõ,
-    điều hậu Thủy chưa rõ), theo tháng sinh = thuận (Kim rõ) → gộp thuận; tình cảm: cân sức trừ Tài đậm (hành nên
-    bớt) → cần chủ động, tháng sinh không coi Hỏa là kỵ → cân bằng → gộp cần chủ động."""
+    điều hậu Thủy chưa rõ), theo tháng sinh = thuận (Kim rõ) → gộp chặt cân bằng; tình cảm: cân sức trừ Tài đậm (hành nên
+    bớt) → cần chủ động, tháng sinh không coi Hỏa là kỵ → cân bằng → gộp chặt cân bằng."""
     cm = bt.cham_mang(bt.phan_tich(bt._la_so(SINH)))
     for ma in _MANG_HAI_CACH:
         assert {"muc_cach_1", "muc_cach_2"} <= set(cm[ma]), ma
         assert cm[ma]["muc"] == _gop(cm[ma]["muc_cach_1"], cm[ma]["muc_cach_2"]), ma
     assert (cm["ngu_hanh"]["muc_cach_1"], cm["ngu_hanh"]["muc_cach_2"], cm["ngu_hanh"]["muc"]) == \
-        ("can_bang", "thuan", "thuan")
+        ("can_bang", "thuan", "can_bang")
     assert (cm["tinh_cam"]["muc_cach_1"], cm["tinh_cam"]["muc_cach_2"], cm["tinh_cam"]["muc"]) == \
-        ("can_chu_dong", "can_bang", "can_chu_dong")
+        ("can_chu_dong", "can_bang", "can_bang")
     assert any(c.startswith("Theo cách cân sức") for c in cm["tinh_cam"]["can_cu"])
     assert any(c.startswith("Theo tháng sinh") for c in cm["tinh_cam"]["can_cu"])
 
@@ -594,3 +593,30 @@ def test_tong_quan_khong_hai_hop_vap_cung_chu_de(bc):
             cd = [_chu_de_vap(h["ma_mau"]) for h in c["hop"] if h["loai"] == "luu_y"]
             cd = [x for x in cd if x]
             assert len(cd) == len(set(cd)), (sinh, c["ma"], [h["ma_mau"] for h in c["hop"]])
+
+
+def test_gop_muc_mang_chi_thuan_khi_ca_hai_cach_dong_y():
+    """Mảng đời: nhãn chỉ mạnh khi HAI cách dụng thần cùng thấy (khác nhau → Cân bằng + nói rõ hai cách).
+    Đại vận vẫn dùng `gop_muc` (một cách cân bằng → theo cách còn lại)."""
+    from app.luangiai.battu_doi_song import gop_muc_mang
+    assert gop_muc_mang("thuan", "thuan") == "thuan"
+    assert gop_muc_mang("can_chu_dong", "can_chu_dong") == "can_chu_dong"
+    for a, b in [("thuan", "can_bang"), ("can_bang", "thuan"), ("thuan", "can_chu_dong"), ("can_bang", "can_chu_dong")]:
+        assert gop_muc_mang(a, b) == "can_bang"
+
+
+def test_phan_bo_muc_khong_lech_mot_phia():
+    """Không mảng nào cho ≥ 60% số lá cùng một nhãn "Thuận lợi" — nhãn ai cũng nhận thì mất nghĩa."""
+    import random
+    from collections import Counter
+    random.seed(11)
+    dem: dict[str, Counter] = {}
+    for _ in range(150):
+        d = dt.datetime(random.randint(1950, 2010), random.randint(1, 12), random.randint(1, 28),
+                        random.randint(0, 23), 30)
+        bc = toan_bo.battu({"lich": d, "gioi_tinh": random.choice(["nam", "nu"])}, ngay_xem=dt.date(2026, 10, 21))
+        for c in bc["chuong"]:
+            if c.get("muc"):
+                dem.setdefault(c["ma"], Counter())[c["muc"]] += 1
+    for ma, c in dem.items():
+        assert c["thuan"] / sum(c.values()) < 0.60, (ma, dict(c))

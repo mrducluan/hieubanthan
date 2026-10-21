@@ -18,14 +18,16 @@ ngữ chỉ ở đây). Mã kiểm chứng `ds.bt.<chương>.<…>` (đi qua rà
      riêng khi thân nhược / vượng), đổi ra hành.
 4. Mức mảng (điểm ≥ 2 `thuan` · ≤ −1 `can_chu_dong` · còn lại `can_bang`; điểm không trả cho người dùng). Mảng có phần
    phụ thuộc dụng thần (tổng quan, ngũ hành, công việc, tiền, tình cảm, gia đình) chấm mức theo TỪNG cách
-   (`muc_cach_1`, `muc_cach_2`) rồi gộp bằng `gop_muc` như đại vận; khác nhau → nói rõ trong thân bài + "Vì sao":
+   (`muc_cach_1`, `muc_cach_2`) rồi gộp bằng `gop_muc_mang` (chỉ giữ mức mạnh khi hai cách cùng thấy, khác nhau → Cân
+   bằng); khác nhau → nói rõ trong thân bài + "Vì sao":
    - su_nghiep: Quan Sát rõ +1 (+ hợp sức; Ấn hoặc Tài đỡ +1; Thực Thương đậm gặp Quan −1); không Quan mà Thực Thương rõ
      0 (sống bằng tay nghề); không cả hai −1.
    - tien_bac: Tài rõ +1 (+ hợp sức; Thực Thương rõ sinh Tài +1); không Tài: −1 (0 nếu Thực Thương rõ); Tỷ Kiếp đậm −1.
    - tinh_cam: sao phối ngẫu (nam Tài, nữ Quan Sát) rõ +1 + hợp sức, vắng −1; nữ lộ cả Chính Quan lẫn Thất Sát −1; nam Tỷ
      Kiếp đậm −1; chi ngày bị xung/hình/hại −1, được hợp +1.
    - gia_dinh: Ấn rõ +1 + hợp sức; Tài đậm phá Ấn −1; trụ năm–tháng xung/hình/hại −1, hợp +1.
-   - hoc_tap: Ấn rõ +1, Thực Thương rõ +1; Ấn đậm lấn Thực Thương −1; cả hai mỏng −1; Văn Xương / Thái Cực / Hoa Cái +1.
+   - hoc_tap: Ấn rõ +1, Thực Thương rõ +1; Ấn đậm lấn Thực Thương −1; cả hai mỏng −1; Văn Xương / Thái Cực / Hoa Cái +1;
+     ngưỡng Thuận lợi = 3 (hai nhóm "vừa" có ở đa số lá).
    - quan_he: thân yếu có bạn ngang hàng đỡ +1; thân mạnh mà Tỷ Kiếp đậm −1; Quan Sát đậm đè thân yếu −1; Thiên Ất
      Quý Nhân +1; Vong Thần −1; Kiếp Sát −1.
    - tong_quan: trung hoà +1; hành cần thêm (của từng cách) có mặt rõ +1, vắng hẳn −1; ≥ 2 sao cát +1; ≥ 2 sao hung −1.
@@ -216,6 +218,13 @@ def gop_muc(m1: str, m2: str) -> str:
     return "thuan" if s > 0 else "can_chu_dong" if s < 0 else "can_bang"
 
 
+def gop_muc_mang(m1: str, m2: str) -> str:
+    """Gộp mức hai cách cho MẢNG ĐỜI (chặt hơn `gop_muc` của đại vận): chỉ giữ Thuận lợi / Cần chủ động khi cả hai
+    cách cùng thấy; khác nhau → Cân bằng và thân bài nói rõ từng cách. Lý do: nhãn mạnh mà phần lớn lá số đều nhận thì
+    không còn nói gì riêng về người xem (đo 300 lá: luật cũ cho 57–73% "Thuận lợi" ở vài mảng)."""
+    return m1 if m1 == m2 else "can_bang"
+
+
 def _cu_nhom(pt: dict, g: str) -> str:
     return f"{g} (hành {pt['nhom_hanh'][g]}) chiếm {_pct(pt['ty_le'][g])} điểm ngũ hành"
 
@@ -281,11 +290,11 @@ class _Mang:
             return {"diem": self.diem, "muc": muc or _muc(self.diem, *nguong), "can_cu": self.can_cu,
                     "tinh_huong": self.tinh_huong}
         m = {c: _muc(self.diem + self.rieng[c], *nguong) for c in CACH}
-        gop = gop_muc(m["cach_1"], m["cach_2"])
+        gop = gop_muc_mang(m["cach_1"], m["cach_2"])
         cu = [f"{_TEN_CACH_CU[c]}: {kb.nhan_muc(m[c])}" + (f" — {'; '.join(self.ly[c])}" if self.ly[c] else "")
               for c in CACH]
         if m["cach_1"] != m["cach_2"]:
-            cu.append(f"Hai cách cho mức khác nhau → mức chung {kb.nhan_muc(gop)} (cùng luật gộp với đại vận)")
+            cu.append(f"Hai cách cho mức khác nhau → mức chung {kb.nhan_muc(gop)} (chỉ giữ mức mạnh khi cả hai cách cùng thấy)")
         return {"diem": self.diem, "muc": gop, "muc_cach_1": m["cach_1"], "muc_cach_2": m["cach_2"],
                 "can_cu": self.can_cu + cu, "tinh_huong": self.tinh_huong}
 
@@ -439,7 +448,7 @@ def cham_mang(pt: dict, tuoi: int | None = None) -> dict[str, dict]:
         m.th("nen_mong", f"Ấn mỏng, {cn('Thực Thương')}")
     if any(t in ts for t in _THAN_SAT_CHUONG["hoc_tap"]):
         m.cong(1, "Có Văn Xương / Thái Cực Quý Nhân / Hoa Cái")
-    ra["hoc_tap"] = m.ra()
+    ra["hoc_tap"] = m.ra(nguong=(3, NGUONG_CHU_DONG))     # Ấn + Thực Thương "vừa" có ở đa số lá → cần thêm một dấu hiệu
 
     # quan hệ bên ngoài
     m = _Mang()

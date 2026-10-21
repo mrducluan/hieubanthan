@@ -422,3 +422,12 @@ giữ mã; KB phi hoá sạch cụm cấm / chung chung, đủ source_id + schoo
 | Đường bay Kỵ Tật Ách → Phu Thê, chiếu Quan Lộc | **Hoá Kỵ từ Tật Ách chiếu sang Quan Lộc** — Chuyện nhịp sinh hoạt, cách chịu áp lực dễ kéo theo bận tâm cho công việc, vai trò; đây là chỗ nên làm chậm, rõ ràng hơn. | **Sức khoẻ kéo bận tâm sang công việc** — Chuyện sức khoẻ đưa điều vướng vào chuyện tình cảm: hai người dễ kỳ vọng mà không nói ra. Khi chuyện sức khoẻ rối, ở chỗ làm bạn cũng khó tập trung. |
 | Thẻ cung: Cự Môn (Đắc) ở Mệnh | Ám tinh: sắc sảo, giỏi ăn nói, hay nghi vấn và phân tích đến tận cùng. Sáng: lời nói có sức nặng — giỏi lý luận, phân tích, hợp nghề dùng lời (giảng dạy, luật, tư vấn, truyền thông). | Bạn nói có lý, phân tích việc gì cũng tới nơi, nên khi cần thuyết phục ai, người ta thường nghe bạn. Bạn hay hỏi tại sao và dễ bắt lỗi trong lời người khác, khiến họ thấy bị soi dù bạn chỉ muốn rõ ràng. Nên làm: Trước khi phản biện ai, nói trước một điều bạn đồng ý với họ, rồi mới nêu chỗ bạn thấy chưa ổn. |
 | Hỏi đáp "Cung Quan Lộc của tôi nói gì?" (đoạn đầu) | Cung Quan Lộc: Cách bạn làm việc, kiểu môi trường và vai trò hợp với bạn… Cung này cho thấy phong cách làm việc…; nó không chỉ định một nghề duy nhất… / Trong lá số của bạn, Cự Môn ở cung Quan Lộc (Hãm — Sao ở vị trí hãm: mặt tối dễ lộ…): … Nét chung của Cự Môn: Ám tinh: … Mặt tối cần để ý: … | Chỗ làm dễ có điều tiếng hoặc hiểu lầm quanh bạn, nhất là khi bạn góp ý không chọn lúc. Bạn phát hiện lỗi trong kế hoạch rất nhanh, hợp những việc kiểm tra, rà soát, nghiên cứu. Mọi việc quan trọng sếp giao bằng miệng, gửi lại một tin nhắn tóm tắt để hai bên hiểu giống nhau. (Định nghĩa cung, sao, độ sáng → "Vì sao nói vậy".) |
+
+### 6.8 Gộp mức mảng đời chặt hơn (2026-10-21)
+
+Sau QC lỗi 2 (chấm mảng theo cả hai cách dụng thần), luật gộp dùng chung với đại vận ("một cách cân bằng → theo cách
+còn lại") làm nhiều mảng lệch về "Thuận lợi" — đo 300 lá: Năng lượng 73%, Học & nghĩ 84%, Công việc 59%, Con người 57%.
+Nhãn ai cũng nhận thì không còn nói gì riêng. Đổi: mảng đời dùng `gop_muc_mang` (chỉ giữ mức mạnh khi hai cách cùng
+thấy, khác nhau → Cân bằng, thân bài vẫn nói rõ từng cách); Học & nghĩ cần 3 dấu hiệu mới "Thuận lợi". Đại vận / lưu
+niên / lưu nguyệt giữ `gop_muc`. Sau đổi (300 lá): "Thuận lợi" 10–43% tuỳ mảng; test `test_phan_bo_muc_khong_lech_mot_phia`
+chặn mảng nào ≥ 60% "Thuận lợi". Golden 14/15 lá đổi mức (có chủ đích).
