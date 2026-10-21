@@ -16,6 +16,9 @@ test("gieo tay: quẻ Lý biến Đoài — lời đời thường trước, b�
   await expect(dq.getByTestId("hanh-dong")).toBeVisible();
   await expect(dq.getByTestId("cau-tu-soi")).toBeVisible();
   await expect(ans.getByTestId("que")).toContainText("Phái đọc: Nghĩa Lý");
+  // lớp đời thường (trước khi mở phần học thuật) không có giọng AI / từ doạ
+  const van = (await dq.innerText()).toLowerCase();
+  for (const cam of ["hành trình", "vũ trụ", "chắc chắn", "định mệnh", "đại hung", "tai hoạ"]) expect(van).not.toContain(cam);
   // tầng học thuật gập: chưa mở thì không thấy lời kinh
   await expect(ans).not.toContainText("Quẻ bản: Lý");
   await dq.getByRole("button", { name: /Lời kinh nguyên văn/ }).click();
@@ -26,9 +29,6 @@ test("gieo tay: quẻ Lý biến Đoài — lời đời thường trước, b�
   await expect(dq.getByTestId("ban-day-du")).toContainText("Quẻ bản: Lý");
   await expect(dq.getByTestId("ban-day-du")).toContainText("Quẻ biến (xu hướng chuyển tới): Đoài");
   await expect(dq.getByTestId("ban-day-du")).toContainText("Nói nôm na: như làm việc với sếp khó tính");
-  // lớp đời thường không có giọng AI / từ doạ
-  const van = (await dq.innerText()).toLowerCase();
-  for (const cam of ["hành trình", "vũ trụ", "chắc chắn", "định mệnh", "đại hung", "tai hoạ"]) expect(van).not.toContain(cam);
 });
 
 test("máy gieo: luôn có quẻ, lời đời thường và câu hỏi tiếp", async ({ page }) => {
