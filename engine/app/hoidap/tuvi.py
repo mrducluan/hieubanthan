@@ -732,7 +732,7 @@ def _them_y_dinh(pl: dict, ls: dict, them: dict, muc: list) -> None:
         muc.append({"loai": "nhip_3_thang", "so_thang": 3, "ten_phai": nhip["ten_phai_luu_nguyet"],
                     "uu_tien": nhip["uu_tien"]["ghi_chu"],
                     "thang": [{k: t[k] for k in ("thang", "nhuan", "phan", "nam_am", "can_chi", "tu", "den", "cung_goc",
-                                                 "muc", "nhan_muc", "goi_y", "cau_tu_soi")}
+                                                 "muc", "nhan_muc", "tieu_de_thang", "goi_y", "cau_tu_soi")}
                               | {"ly_do": [x["noi_dung"] for x in t["ly_do"]]} for t in nhip["thang"]],
                     **pkb.meta()})
     if ch.get("trang"):
@@ -853,7 +853,8 @@ def _ngay(d: dt.date | str) -> str:
 
 
 def _ten_thang(t: dict) -> str:
-    return f"tháng {t['thang']}{' nhuận' if t['nhuan'] else ''} âm ({t['can_chi']})"
+    dau = {"nua_dau": "nửa đầu ", "nua_sau": "nửa sau "}.get(t.get("phan", ""), "")
+    return f"{dau}tháng {t['thang']}{' nhuận' if t['nhuan'] else ''} âm ({t['can_chi']})"
 
 
 def _cau_duong(d: dict) -> str:
@@ -1004,7 +1005,7 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         s = f"Nhịp {m['so_thang']} tháng tới (lưu nguyệt theo phái {m['ten_phai']}): {tom}."
         for t in m["thang"]:
             s += (f" {_ten_thang(t)[0].upper()}{_ten_thang(t)[1:]} (từ {_ngay(t['tu'])} đến {_ngay(t['den'])} dương lịch, "
-                  f"Mệnh tháng ở cung {t['cung_goc']}): {t['nhan_muc']}.")
+                  f"Mệnh tháng ở cung {t['cung_goc']}): {t['nhan_muc']} — {t['tieu_de_thang'].lower()}.")
             if t["ly_do"]:
                 s += " " + " ".join(t["ly_do"])
             s += f" {t['goi_y']}"

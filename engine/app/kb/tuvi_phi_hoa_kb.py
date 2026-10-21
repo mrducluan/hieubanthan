@@ -81,6 +81,12 @@ def nhip(nhom: str, ma: str) -> str | dict | None:
     return x if isinstance(x, (str, dict)) else None
 
 
+def nhip_lay(*khoa: str):
+    """Tra sâu trong nhip_3_thang (NHIP-2): vd nhip_lay("cung_thang", "Quan Lộc", "muc", "thuan", "ket_luan").
+    Trả nguyên giá trị (str / dict / list) hoặc None."""
+    return _lay("nhip_3_thang", *khoa)
+
+
 def hop_tham(nhom: str, ma: str | None = None):
     x = _lay("hop_tham", nhom) if ma is None else _lay("hop_tham", nhom, ma)
     return x

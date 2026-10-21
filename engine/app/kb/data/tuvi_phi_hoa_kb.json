@@ -435,18 +435,507 @@
    "ky_xung_cung_chinh": "Hoá Kỵ của tháng ở sao {sao}, chiếu vào cung {cung} từ cung đối diện: việc của mảng này nên chuẩn bị kỹ hơn.",
    "khoa_giai": "Hoá Khoa ở sao {sao}, cung {cung} giúp gỡ bớt vướng: dễ có người giải thích, hỗ trợ."
   },
-  "goi_y": {
-   "thuan": "Hợp bắt đầu việc đã chuẩn bị, chủ động gặp người cần gặp, nhưng vẫn giữ kế hoạch chi tiêu.",
-   "binh": "Hợp làm đều việc đang có, dọn dẹp việc tồn và chuẩn bị cho tháng sau.",
-   "can_than": "Hợp rà soát lại kế hoạch, để dư thời gian, hỏi thêm ý kiến trước việc lớn và giữ khoản dự phòng."
-  },
-  "cau_tu_soi": {
-   "thuan": "Cơ hội nào trong tháng này bạn muốn nắm lấy nhất?",
-   "binh": "Việc tồn nào bạn có thể làm xong trong tháng này?",
-   "can_than": "Việc nào trong tháng này bạn có thể làm chậm lại mà không mất gì?"
-  },
   "source_id": "phi_tinh_trung_chau",
-  "school_id": "phi_tinh"
+  "school_id": "phi_tinh",
+  "cung_thang": {
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh",
+   "Mệnh": {
+    "nhan": "chính bạn",
+    "nhan_ngan": "Bản thân",
+    "chu_de": "Tháng này bạn để tâm nhiều tới chính mình: sức bền, cách sống, điều mình thật sự muốn.",
+    "tu_soi": [
+     "Nếu chỉ đổi một thói quen của riêng mình trong tháng này, bạn chọn thói quen nào?",
+     "Điều gì bạn muốn tự hứa với mình và giữ được tới cuối tháng?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng bạn được chú ý, hợp tự đứng ra",
+      "viec": "Tự đứng ra làm việc mình muốn",
+      "nen_lam": "Đặt một mục tiêu nhỏ cho riêng mình và bắt tay làm ngay tuần đầu tháng. Người khác dễ nghe bạn hơn thường lệ."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp chăm lo cho chính mình",
+      "viec": "Sắp lại nếp sống của mình",
+      "nen_lam": "Ngủ đủ, ăn đúng bữa, sắp lại lịch tuần. Tháng này không cần đổi lớn, chỉ cần giữ đều."
+     },
+     "can_than": {
+      "ket_luan": "Tháng nên giữ sức, bớt ôm việc",
+      "viec": "Bớt ôm việc, giữ sức cho mình",
+      "nen_lam": "Nói \"để mình xem lại\" trước khi nhận thêm việc. Mỗi tuần chừa một buổi trống để nghỉ."
+     }
+    }
+   },
+   "Huynh Đệ": {
+    "nhan": "anh chị em, bạn thân",
+    "nhan_ngan": "Anh em",
+    "chu_de": "Tháng này chuyện anh chị em, bạn thân và người cùng làm ngang hàng được nhắc tới nhiều.",
+    "tu_soi": [
+     "Lần gần nhất bạn hỏi han anh chị em hay bạn thân là khi nào?",
+     "Người thân thiết nào bạn muốn cảm ơn mà chưa nói ra?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng thuận để cùng anh em, bạn thân làm việc",
+      "viec": "Rủ người thân thiết làm chung",
+      "nen_lam": "Rủ anh em, bạn thân cùng làm một việc nhỏ: góp một chuyến đi, chung một dự án phụ. Ý kiến của họ tháng này đáng nghe."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp giữ liên lạc với người thân",
+      "viec": "Hỏi han, giữ liên lạc",
+      "nen_lam": "Gọi một cuộc điện thoại, hẹn một bữa cơm với anh chị em hay bạn thân. Việc nhỏ nhưng giữ được tình thân."
+     },
+     "can_than": {
+      "ket_luan": "Tháng nên rõ ràng với anh em, bạn thân",
+      "viec": "Rõ ràng chuyện tiền nong với người thân",
+      "nen_lam": "Cho mượn hay góp vốn với anh em, bạn thân thì ghi lại số tiền và hạn trả. Nói thẳng từ đầu đỡ mất lòng về sau."
+     }
+    }
+   },
+   "Phu Thê": {
+    "nhan": "chuyện tình cảm",
+    "nhan_ngan": "Tình cảm",
+    "chu_de": "Tháng này chuyện tình cảm, vợ chồng hay người yêu chiếm nhiều chỗ trong suy nghĩ của bạn.",
+    "tu_soi": [
+     "Điều gì bạn muốn người ấy hiểu mà bạn chưa nói ra?",
+     "Lần gần nhất hai người cười thật thoải mái với nhau là khi nào?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng ấm áp cho chuyện tình cảm",
+      "viec": "Vun đắp chuyện hai người",
+      "nen_lam": "Dành một buổi riêng cho hai người, hoặc mạnh dạn ngỏ lời nếu đang để ý ai đó. Lời nói tháng này dễ được đón nhận."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp vun chuyện hai người",
+      "viec": "Giữ những quan tâm nhỏ mỗi ngày",
+      "nen_lam": "Hỏi han mỗi ngày, cùng làm việc nhà, nhớ những ngày đáng nhớ của hai người. Chưa cần quyết định gì lớn."
+     },
+     "can_than": {
+      "ket_luan": "Tháng nên nói chậm, nghe nhiều trong chuyện tình cảm",
+      "viec": "Nói chậm, nghe nhiều",
+      "nen_lam": "Khi bất đồng, để sang hôm sau rồi hẵng nói tiếp. Việc lớn như cưới hỏi, về chung nhà nên bàn kỹ hơn."
+     }
+    }
+   },
+   "Tử Nữ": {
+    "nhan": "con cái, việc mình làm ra",
+    "nhan_ngan": "Con cái",
+    "chu_de": "Tháng này bạn để tâm tới con cái, học trò hoặc một việc do chính tay mình làm ra.",
+    "tu_soi": [
+     "Việc gì bạn đang làm ra mà muốn người khác được thấy trong tháng này?",
+     "Con hay người nhỏ tuổi bên bạn đang cần nghe điều gì từ bạn?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng vui với con cái và việc mình làm ra",
+      "viec": "Dành thời gian cho con và việc sáng tạo",
+      "nen_lam": "Đưa con đi chơi, tìm khoá học hợp cho con, hoặc làm tiếp món đồ, bài viết, sản phẩm bạn ấp ủ."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp kèm cặp con, làm tiếp việc dở",
+      "viec": "Kèm cặp đều đặn, làm tiếp việc dở",
+      "nen_lam": "Mỗi ngày dành chút thời gian nghe con kể chuyện, hoặc làm tiếp việc tay của mình từng chút một."
+     },
+     "can_than": {
+      "ket_luan": "Tháng cần kiên nhẫn với con và việc đang làm",
+      "viec": "Kiên nhẫn hơn với con và việc mình làm",
+      "nen_lam": "Bớt la mắng, hỏi lý do trước. Việc đang làm ra chưa vừa ý thì sửa từng phần, đừng bỏ ngang."
+     }
+    }
+   },
+   "Tài Bạch": {
+    "nhan": "tiền bạc",
+    "nhan_ngan": "Tiền bạc",
+    "chu_de": "Tháng này chuyện tiền vào, tiền ra được bạn để ý nhiều hơn thường lệ.",
+    "tu_soi": [
+     "Khoản chi nào tháng này bạn có thể bỏ mà không tiếc?",
+     "Nếu có thêm một khoản tiền nhỏ, bạn muốn để nó vào đâu trước?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng thuận cho chuyện tiền bạc",
+      "viec": "Tìm thêm nguồn thu, đòi khoản còn treo",
+      "nen_lam": "Đề xuất tăng giá, nhận thêm việc, nhắc người còn nợ. Có tiền vào thì để riêng một phần ngay hôm đó."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp sắp lại chi tiêu",
+      "viec": "Ghi chép, sắp lại chi tiêu",
+      "nen_lam": "Ghi lại các khoản chi trong tháng, cắt bớt một khoản không cần. Chưa cần bỏ tiền vào việc gì mới."
+     },
+     "can_than": {
+      "ket_luan": "Tháng nên giữ chặt chuyện tiền",
+      "viec": "Chậm lại với các khoản chi lớn",
+      "nen_lam": "Mua sắm lớn, cho vay, bỏ vốn mới nên chờ thêm vài tuần. Đọc kỹ hợp đồng, giữ một khoản dự phòng."
+     }
+    }
+   },
+   "Tật Ách": {
+    "nhan": "sức khoẻ, nhịp sinh hoạt",
+    "nhan_ngan": "Sức khoẻ",
+    "chu_de": "Tháng này cơ thể và nhịp sinh hoạt hằng ngày đáng được bạn để ý hơn.",
+    "tu_soi": [
+     "Cơ thể bạn đang nhắc điều gì mà bạn hay bỏ qua?",
+     "Giờ nào trong ngày bạn thấy khoẻ nhất, và bạn đang dùng nó vào việc gì?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng hợp bắt đầu thói quen tốt cho sức khoẻ",
+      "viec": "Bắt đầu một thói quen tốt",
+      "nen_lam": "Tập một môn vận động nhẹ, đặt lịch khám định kỳ, đổi bữa ăn cho lành hơn. Bắt đầu tháng này dễ giữ được lâu."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp giữ giờ ăn ngủ",
+      "viec": "Giữ đều giờ ăn, giờ ngủ",
+      "nen_lam": "Ngủ trước 11 giờ đêm, đi bộ mỗi ngày, uống đủ nước. Nhịp đều quan trọng hơn tập nặng."
+     },
+     "can_than": {
+      "ket_luan": "Tháng nên nghỉ đúng lúc, đừng quá sức",
+      "viec": "Nghỉ đúng lúc, đừng cố quá",
+      "nen_lam": "Bớt thức khuya, bớt nhận việc gấp. Thấy mệt kéo dài thì đi khám, lời bác sĩ mới là căn cứ."
+     }
+    }
+   },
+   "Thiên Di": {
+    "nhan": "đi lại, gặp người mới",
+    "nhan_ngan": "Ra ngoài",
+    "chu_de": "Tháng này chuyện ra ngoài, đi lại, gặp người lạ hay làm việc ở nơi mới nổi lên.",
+    "tu_soi": [
+     "Nơi nào hay người nào bên ngoài bạn muốn gặp thêm trong tháng này?",
+     "Lần gần nhất bạn thử một việc ở chỗ hoàn toàn mới là khi nào?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng hợp ra ngoài, mở rộng quan hệ",
+      "viec": "Ra ngoài, mở rộng quan hệ",
+      "nen_lam": "Đi gặp đối tác, dự sự kiện, nhận việc ở nơi mới. Người lạ tháng này dễ mang tới tin tốt."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, đi lại vừa phải",
+      "viec": "Đi lại vừa phải, giữ quan hệ sẵn có",
+      "nen_lam": "Đi đâu cũng lên lịch trước, giữ liên lạc với người quen bên ngoài. Chưa cần đổi chỗ làm, chỗ ở."
+     },
+     "can_than": {
+      "ket_luan": "Tháng đi xa, gặp người lạ cần chuẩn bị kỹ",
+      "viec": "Chuẩn bị kỹ trước khi đi xa",
+      "nen_lam": "Kiểm tra giấy tờ, lịch trình, thời tiết trước khi đi. Lời mời làm ăn từ người mới quen nên tìm hiểu thêm."
+     }
+    }
+   },
+   "Nô Bộc": {
+    "nhan": "bạn bè, đồng nghiệp",
+    "nhan_ngan": "Bạn bè",
+    "chu_de": "Tháng này bạn bè, đồng nghiệp và những người cùng làm với bạn được nhắc tới nhiều.",
+    "tu_soi": [
+     "Ai quanh bạn đang cần một lời cảm ơn hay một chút giúp đỡ?",
+     "Người nào trong nhóm làm việc bạn muốn hiểu thêm một chút?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng bạn bè, đồng nghiệp dễ giúp nhau",
+      "viec": "Nhờ bạn bè, đồng nghiệp hỗ trợ",
+      "nen_lam": "Mạnh dạn nhờ giúp, rủ làm chung, giới thiệu người này với người kia. Mối quen biết tháng này dễ có ích."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp giữ quan hệ quanh mình",
+      "viec": "Giữ quan hệ đều đặn",
+      "nen_lam": "Cảm ơn người đã giúp, trả lời tin nhắn còn treo. Chưa cần mở rộng thêm mối quen biết."
+     },
+     "can_than": {
+      "ket_luan": "Tháng nên rõ ràng khi làm chung",
+      "viec": "Chia rõ phần việc khi làm chung",
+      "nen_lam": "Ghi lại ai làm gì, hạn khi nào. Đứng ra bảo lãnh, cho mượn đồ hay tiền tháng này nên cân nhắc."
+     }
+    }
+   },
+   "Quan Lộc": {
+    "nhan": "công việc",
+    "nhan_ngan": "Công việc",
+    "chu_de": "Tháng này công việc, vai trò và kết quả làm việc là chuyện bạn để tâm nhất.",
+    "tu_soi": [
+     "Việc nào trong công việc, nếu xong trong tháng này, giúp bạn nhẹ người nhất?",
+     "Kỹ năng nào bạn muốn giỏi hơn để công việc đỡ vất vả?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng thuận cho công việc",
+      "viec": "Đề xuất, nhận việc mới",
+      "nen_lam": "Trình bày ý tưởng, xin thêm trách nhiệm, ứng tuyển chỗ mới. Công sức bỏ ra tháng này dễ được nhìn thấy."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp làm chắc việc đang có",
+      "viec": "Làm chắc việc đang có",
+      "nen_lam": "Hoàn thành việc tồn, sắp lại cách làm, học thêm một kỹ năng nhỏ. Chưa cần nhảy việc."
+     },
+     "can_than": {
+      "ket_luan": "Tháng làm việc nên chậm mà chắc",
+      "viec": "Làm chậm mà chắc",
+      "nen_lam": "Kiểm tra lại số liệu, giấy tờ trước khi gửi. Muốn đổi việc thì chuẩn bị kỹ, đừng quyết trong lúc bực."
+     }
+    }
+   },
+   "Điền Trạch": {
+    "nhan": "nhà cửa",
+    "nhan_ngan": "Nhà cửa",
+    "chu_de": "Tháng này chuyện nhà cửa, nơi ở và không khí trong gia đình hay được nhắc tới.",
+    "tu_soi": [
+     "Góc nào trong nhà, nếu dọn lại, làm bạn thấy dễ chịu hơn?",
+     "Bữa cơm nào gần đây làm cả nhà vui nhất, và vì sao?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng thuận cho việc nhà, chỗ ở",
+      "viec": "Lo việc nhà, sửa sang chỗ ở",
+      "nen_lam": "Sửa chỗ hỏng, sắm đồ cần thiết, đi xem nhà nếu đang định mua hay thuê. Việc nhà tháng này dễ trôi chảy."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp dọn dẹp, giữ nếp nhà",
+      "viec": "Dọn dẹp, giữ nếp trong nhà",
+      "nen_lam": "Dọn một góc nhà, cùng người nhà ăn bữa tối. Việc mua bán nhà chưa cần vội."
+     },
+     "can_than": {
+      "ket_luan": "Tháng việc nhà đất nên xem kỹ",
+      "viec": "Xem kỹ giấy tờ nhà đất",
+      "nen_lam": "Mua, bán, thuê nhà thì đọc kỹ hợp đồng, hỏi người rành việc. Trong nhà có bất đồng thì nói nhỏ nhẹ, từ từ."
+     }
+    }
+   },
+   "Phúc Đức": {
+    "nhan": "tinh thần, nghỉ ngơi",
+    "nhan_ngan": "Tinh thần",
+    "chu_de": "Tháng này bạn cần nhiều hơn sự bình yên: nghỉ ngơi, sở thích riêng, thăm hỏi ông bà, họ hàng.",
+    "tu_soi": [
+     "Điều gì làm bạn thấy nhẹ lòng nhất trong tuần qua?",
+     "Sở thích nào bạn đã lâu không dành thời gian cho?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng nhẹ lòng, hợp làm điều mình thích",
+      "viec": "Làm điều khiến mình vui",
+      "nen_lam": "Dành thời gian cho sở thích, đi lễ chùa, thăm họ hàng, làm một việc tốt nhỏ. Tâm trạng tốt kéo theo việc khác thuận."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp dành thời gian nghỉ",
+      "viec": "Giữ thời gian nghỉ cho riêng mình",
+      "nen_lam": "Mỗi tuần một buổi không điện thoại, đọc sách hay đi dạo. Nghỉ đúng cách cũng là một việc cần làm."
+     },
+     "can_than": {
+      "ket_luan": "Tháng nên bớt lo nghĩ, giữ tâm trạng",
+      "viec": "Đừng để lo nghĩ kéo dài",
+      "nen_lam": "Viết ra điều đang lo, kể với một người tin được. Nhiều hôm ngủ không sâu thì giảm bớt việc buổi tối."
+     }
+    }
+   },
+   "Phụ Mẫu": {
+    "nhan": "giấy tờ, người lớn",
+    "nhan_ngan": "Cha mẹ",
+    "chu_de": "Tháng này chuyện cha mẹ, người lớn, cấp trên hay giấy tờ học hành được nhắc tới.",
+    "tu_soi": [
+     "Lần cuối bạn hỏi ý cha mẹ hay người đi trước là về chuyện gì?",
+     "Giấy tờ nào bạn đã hẹn mãi mà chưa làm cho xong?"
+    ],
+    "muc": {
+     "thuan": {
+      "ket_luan": "Tháng người lớn, cấp trên dễ nâng đỡ",
+      "viec": "Xin ý kiến người đi trước, lo giấy tờ",
+      "nen_lam": "Gặp cấp trên trình bày, nộp hồ sơ, thi cử, xin giấy phép. Người lớn tháng này dễ giúp bạn một tay."
+     },
+     "binh": {
+      "ket_luan": "Tháng đều nhịp, hợp thăm hỏi cha mẹ, sắp giấy tờ",
+      "viec": "Thăm hỏi cha mẹ, sắp lại giấy tờ",
+      "nen_lam": "Gọi về nhà, sắp lại hồ sơ, gia hạn giấy tờ sắp hết hạn."
+     },
+     "can_than": {
+      "ket_luan": "Tháng giấy tờ, lời nói với người trên cần cẩn thận",
+      "viec": "Cẩn thận giấy tờ và lời nói với người trên",
+      "nen_lam": "Đọc kỹ trước khi ký, giữ bản sao. Bất đồng với cha mẹ hay cấp trên thì chọn lúc bình tĩnh mới nói."
+     }
+    }
+   }
+  },
+  "loc_dich": {
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh",
+   "Mệnh": {
+    "tieu_de": "Bạn tự tin và được để ý hơn",
+    "noi_dung": "Bạn dễ được người khác chú ý, lời nói có sức nặng hơn. Hợp tự giới thiệu mình, nhận một vai trò mới."
+   },
+   "Huynh Đệ": {
+    "tieu_de": "Anh em, bạn thân là chỗ dựa tốt",
+    "noi_dung": "Người thân thiết dễ giúp đỡ, chia sẻ cơ hội hoặc góp sức cùng bạn."
+   },
+   "Phu Thê": {
+    "tieu_de": "Chuyện tình cảm ấm lên",
+    "noi_dung": "Hai người dễ hiểu nhau hơn; người đang một mình dễ gặp người hợp ý. Người bạn đời cũng có thể mang tới cơ hội."
+   },
+   "Tử Nữ": {
+    "tieu_de": "Niềm vui từ con cái, việc mình làm ra",
+    "noi_dung": "Con cái, học trò dễ có tin vui; việc bạn tự tay làm ra dễ được đón nhận."
+   },
+   "Tài Bạch": {
+    "tieu_de": "Tiền vào dễ hơn tháng thường",
+    "noi_dung": "Có thể có thêm khoản thu, được trả tiền đúng hạn, hoặc tìm được cách kiếm thêm."
+   },
+   "Tật Ách": {
+    "tieu_de": "Sức lực dễ hồi lại",
+    "noi_dung": "Cơ thể dễ lấy lại sức sau những ngày mệt, hợp bắt đầu thói quen tốt; tinh thần thoải mái hơn."
+   },
+   "Thiên Di": {
+    "tieu_de": "Ra ngoài dễ gặp may",
+    "noi_dung": "Đi lại, gặp người mới, làm việc ở nơi khác dễ mở ra cơ hội. Người lạ dễ có thiện cảm với bạn."
+   },
+   "Nô Bộc": {
+    "tieu_de": "Bạn bè, đồng nghiệp sẵn lòng giúp",
+    "noi_dung": "Người quanh bạn sẵn lòng giúp; làm việc nhóm trôi chảy hơn thường lệ."
+   },
+   "Quan Lộc": {
+    "tieu_de": "Công việc có tiến triển",
+    "noi_dung": "Việc đang làm dễ có kết quả, dễ được ghi nhận hoặc có lời mời mới."
+   },
+   "Điền Trạch": {
+    "tieu_de": "Chuyện nhà cửa suôn sẻ",
+    "noi_dung": "Mua sắm cho nhà, sửa sang, tìm chỗ ở mới dễ trôi chảy; trong nhà vui vẻ hơn."
+   },
+   "Phúc Đức": {
+    "tieu_de": "Lòng nhẹ, tâm trạng tốt",
+    "noi_dung": "Bạn dễ thấy bình yên, vui với việc nhỏ; sở thích riêng mang lại niềm vui."
+   },
+   "Phụ Mẫu": {
+    "tieu_de": "Người lớn, cấp trên nâng đỡ",
+    "noi_dung": "Cha mẹ, cấp trên, thầy cô dễ giúp đỡ; giấy tờ, thi cử dễ thông."
+   }
+  },
+  "ky_dich": {
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh",
+   "Mệnh": {
+    "tieu_de": "Dễ tự ôm việc, nghĩ nhiều",
+    "noi_dung": "Bạn dễ tự trách, ôm hết việc về mình và thấy mệt trong người.",
+    "huong_xu_ly": "Chia việc ra, nói không với việc không cần thiết, ngủ đủ giấc."
+   },
+   "Huynh Đệ": {
+    "tieu_de": "Dễ vướng chuyện với anh em, bạn thân",
+    "noi_dung": "Chuyện tiền nong hoặc lời qua tiếng lại với người thân thiết dễ làm bạn bận lòng.",
+    "huong_xu_ly": "Nói rõ ràng từ đầu, ghi lại các khoản góp hay cho mượn."
+   },
+   "Phu Thê": {
+    "tieu_de": "Chuyện hai người dễ hiểu lầm",
+    "noi_dung": "Một câu nói vô tình dễ thành chuyện lớn; bạn dễ để tâm quá nhiều vào phản ứng của người kia.",
+    "huong_xu_ly": "Hỏi lại cho rõ trước khi giận, chọn lúc cả hai bình tĩnh để nói."
+   },
+   "Tử Nữ": {
+    "tieu_de": "Con cái, việc mình làm ra khiến bạn lo",
+    "noi_dung": "Con cái, học trò hoặc sản phẩm bạn làm ra cần nhiều công sức hơn dự tính.",
+    "huong_xu_ly": "Chia nhỏ việc, kiên nhẫn từng bước, nhờ thêm người giúp."
+   },
+   "Tài Bạch": {
+    "tieu_de": "Tiền ra nhanh hơn tiền vào",
+    "noi_dung": "Dễ có khoản chi bất ngờ hoặc tiền về chậm hơn hẹn.",
+    "huong_xu_ly": "Giữ khoản dự phòng, hoãn mua sắm lớn, ghi lại mọi khoản cho mượn."
+   },
+   "Tật Ách": {
+    "tieu_de": "Dễ mệt nếu làm quá sức",
+    "noi_dung": "Cơ thể dễ báo mệt khi bạn thức khuya, ăn uống thất thường.",
+    "huong_xu_ly": "Ngủ sớm, ăn đúng bữa, đi khám nếu thấy mệt kéo dài."
+   },
+   "Thiên Di": {
+    "tieu_de": "Đi lại, việc bên ngoài dễ trục trặc",
+    "noi_dung": "Lịch trình dễ trễ, gặp người lạ dễ hiểu lầm nhau.",
+    "huong_xu_ly": "Đi sớm hơn dự tính, kiểm tra giấy tờ, tìm hiểu kỹ người mới quen."
+   },
+   "Nô Bộc": {
+    "tieu_de": "Làm chung dễ lệch ý",
+    "noi_dung": "Bạn bè, đồng nghiệp dễ làm bạn phiền lòng hoặc không giữ lời.",
+    "huong_xu_ly": "Ghi rõ phần việc của từng người, hạn chế đứng ra bảo lãnh hay cho mượn."
+   },
+   "Quan Lộc": {
+    "tieu_de": "Công việc nhiều áp lực",
+    "noi_dung": "Việc dễ dồn lại, dễ sai sót nhỏ hoặc kết quả đến chậm.",
+    "huong_xu_ly": "Làm từng việc một, kiểm tra kỹ trước khi gửi, báo sớm nếu không kịp hạn."
+   },
+   "Điền Trạch": {
+    "tieu_de": "Việc nhà dễ phát sinh",
+    "noi_dung": "Đồ đạc hỏng, chi phí nhà cửa hoặc chuyện trong nhà khiến bạn bận tâm.",
+    "huong_xu_ly": "Sửa ngay chỗ hỏng nhỏ, xem kỹ giấy tờ nhà đất, nói chuyện nhẹ nhàng với người nhà."
+   },
+   "Phúc Đức": {
+    "tieu_de": "Dễ lo nghĩ, khó thả lỏng",
+    "noi_dung": "Bạn dễ suy nghĩ nhiều, ngủ không sâu, khó vui với việc nhỏ.",
+    "huong_xu_ly": "Viết ra điều đang lo, dành thời gian cho sở thích, trò chuyện với người tin được."
+   },
+   "Phụ Mẫu": {
+    "tieu_de": "Giấy tờ, người trên dễ vướng",
+    "noi_dung": "Giấy tờ dễ thiếu sót; ý kiến với cha mẹ hay cấp trên dễ lệch nhau.",
+    "huong_xu_ly": "Đọc kỹ trước khi ký, giữ bản sao, chọn lúc bình tĩnh để trao đổi."
+   }
+  },
+  "ky_xung": {
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh",
+   "Mệnh": "Việc này dễ dội ngược về chính bạn: thấy mệt, dễ cáu, khó tập trung.",
+   "Tài Bạch": "Việc này dễ kéo theo chuyện tiền: phải chi thêm hoặc tiền về chậm.",
+   "Quan Lộc": "Việc này dễ ảnh hưởng tới công việc: lịch bị xáo, việc chậm hơn dự tính."
+  },
+  "quyen_dich": {
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh",
+   "Mệnh": "bạn chủ động và có tiếng nói hơn",
+   "Huynh Đệ": "bạn dễ là người dẫn dắt khi làm chung với anh em, bạn thân",
+   "Phu Thê": "bạn có tiếng nói hơn trong chuyện hai người",
+   "Tử Nữ": "bạn dễ cầm trịch việc của con cái hay việc mình làm ra",
+   "Tài Bạch": "bạn tự quyết được nhiều hơn trong chuyện tiền",
+   "Tật Ách": "bạn dễ tự đặt ra kỷ luật sinh hoạt cho mình",
+   "Thiên Di": "ra ngoài bạn dễ được tin tưởng, giao việc",
+   "Nô Bộc": "bạn dễ đứng ra điều phối nhóm",
+   "Quan Lộc": "bạn có tiếng nói hơn trong công việc",
+   "Điền Trạch": "bạn dễ làm chủ các việc trong nhà",
+   "Phúc Đức": "bạn tự chủ hơn với cảm xúc của mình",
+   "Phụ Mẫu": "bạn dễ được người trên lắng nghe"
+  },
+  "khoa_dich": {
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh",
+   "Mệnh": "bạn dễ được nhìn nhận đúng, tiếng tốt lan dần",
+   "Huynh Đệ": "anh em, bạn thân dễ hiểu và bênh vực bạn",
+   "Phu Thê": "hai người dễ nói chuyện rõ ràng, nhẹ nhàng hơn",
+   "Tử Nữ": "việc của con cái hay việc mình làm ra dễ được khen",
+   "Tài Bạch": "chuyện tiền dễ rõ ràng, sổ sách gọn hơn",
+   "Tật Ách": "dễ tìm được người hướng dẫn cách sinh hoạt hợp lý",
+   "Thiên Di": "ra ngoài bạn dễ để lại ấn tượng tốt",
+   "Nô Bộc": "người quanh bạn dễ nói tốt về bạn",
+   "Quan Lộc": "công việc dễ được ghi nhận, giấy tờ rõ ràng",
+   "Điền Trạch": "giấy tờ nhà cửa dễ rõ ràng",
+   "Phúc Đức": "lòng bạn dễ lắng lại, nghĩ thông hơn",
+   "Phụ Mẫu": "thi cử, giấy tờ dễ thuận lợi"
+  },
+  "bo_sung": {
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh",
+   "song_loc": "Năm nay chuyện này vốn đã thuận, tháng này thuận thêm một lớp.",
+   "loc_vao_thang": "Điều tốt rơi đúng vào chuyện chính của tháng nên dễ thấy rõ.",
+   "chong_ky": "Chuyện này năm nay vốn đã cần để ý, tháng này dồn thêm một lớp.",
+   "ky_vao_thang": "Đây cũng là chuyện chính của tháng nên sức ép dễ thấy rõ hơn.",
+   "khoa_giai": "Có người hiểu chuyện sẵn lòng giúp nếu bạn mở lời hỏi.",
+   "loc_ky_cung": "Điều vui và điều lo cùng đến từ một chuyện: được thêm thì cũng phải lo thêm.",
+   "lap_lai_loc": "Điều thuận này nối tiếp từ tháng trước.",
+   "lap_lai_ky": "Chuyện này đã cần để ý từ tháng trước; tháng này nên làm cho xong phần còn dở.",
+   "trung_dai_han": "Đây cũng là chuyện chính của cả chặng mười năm bạn đang đi, nên việc làm tháng này có sức nặng hơn.",
+   "trung_luu_nien": "Đây cũng là chuyện chính của năm nay, nên việc làm tháng này có sức nặng hơn.",
+   "trung_tieu_han": "Đây cũng là một chuyện riêng của năm nay, nên làm kỹ hơn thường lệ.",
+   "cung_lap": "Chuyện chính vẫn như tháng trước, nên làm tiếp cho trọn thay vì mở việc mới.",
+   "chon_thang": "Cần chọn một tháng để bắt đầu việc mới thì ưu tiên {thang}.",
+   "khong_thuan": "Chưa có tháng nào nổi bật thuận: giữ nhịp đều, làm chắc việc đang có.",
+   "tieu_de_tiep": "{ket_luan}, nối tiếp tháng trước",
+   "them": "Thêm nữa, {cau}."
+  },
+  "noi_tiep": {
+   "source_id": "hbt_tong_hop",
+   "school_id": "phi_tinh",
+   "ket_luan": "Tháng nối dài nhịp của tháng trước",
+   "viec": "Làm nốt việc của tháng trước",
+   "nen_lam": "Khoảng thời gian này đi lại đúng nhịp của tháng liền trước. Dùng nó để làm cho xong việc đang dở, chưa cần mở việc mới.",
+   "tu_soi": "Việc gì từ tháng trước bạn muốn làm cho xong trong khoảng thời gian thêm này?"
+  }
  },
  "hop_tham": {
   "quan_he": {

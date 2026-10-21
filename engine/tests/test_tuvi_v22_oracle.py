@@ -340,7 +340,7 @@ def test_nhip_co_ca_vat_nam_va_thang_nhuan():
 
 def test_muc_python_khong_dung_nhan_doa():
     assert set(nhip.NHAN_MUC) == {"thuan", "binh", "can_than"}
-    for s in list(nhip.NHAN_MUC.values()) + list(nhip._GOI_Y.values()):
+    for s in [*nhip.NHAN_MUC.values(), *nhip._MAC["nen_lam"].values(), *nhip._MAC["ket_luan"].values()]:
         assert not any(w in s.lower() for w in ("đỏ", "báo động", "đứt gãy", "critical"))
 
 

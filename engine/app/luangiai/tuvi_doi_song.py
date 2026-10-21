@@ -637,27 +637,17 @@ def _chuong_nam_nay(sinh: dict, ls: dict, cc: dict, vh: dict, ngay_xem: dt.date,
         nhip = nhip3.lap(sinh, ngay_xem, sinh.get("luu_nguyet") or ln.MAC_DINH, ls=ls)
     except (ValueError, StopIteration):
         nhip = None
-    # Tháng liền nhau cùng mức + cùng gợi ý → gộp một hộp (tránh lặp nguyên câu).
-    nhom: list[dict] = []
+    # NHIP-2: mỗi tháng đã có lời riêng (kết luận + việc nên làm theo cung tháng × mức) nên không còn gộp tháng.
+    # Mã kiểm chứng theo CUNG tháng + mức + lý do đầu (trước đây theo số thứ tự tháng trong khung — vô nghĩa khi so).
     for i, t in enumerate((nhip or {}).get("thang", []), 1):
-        ten = f"{t['thang']}{' nhuận' if t['nhuan'] else ''}"
-        cu = [x["noi_dung"] for x in t["ly_do"]] + [f"Lưu nguyệt tại cung {t['cung_goc']} ({t['can_chi']})"]
-        if nhom and nhom[-1]["t"]["muc"] == t["muc"] and nhom[-1]["t"]["goi_y"] == t["goi_y"]:
-            g = nhom[-1]
-            g["ten"].append(ten), g["i"].append(i), g["cu"].extend(cu)
-            g["den"] = t["den"]
-            continue
-        nhom.append({"t": t, "ten": [ten], "i": [i], "cu": cu, "tu": t["tu"], "den": t["den"]})
-    thang_cau = []
-    for g in nhom:
-        t = g["t"]
-        muc = _MUC_THANG[t["muc"]]
-        ten_t = f"Tháng {g['ten'][0]}" + (f"–{g['ten'][-1]}" if len(g["ten"]) > 1 else "") + " âm lịch"
+        ten_t = f"Tháng {t['thang']}{' nhuận' if t['nhuan'] else ''} âm lịch"
+        if t["phan"] in ("nua_dau", "nua_sau"):
+            ten_t = f"{t['nhan_thang']} âm lịch"
         ly = t["ly_do"][0]["ma"] if t["ly_do"] else "chung"
-        cand.append(_hop("thoi_diem", ten_t, t["goi_y"], g["cu"],
-                         _ma("ds", "nam_nay", "thang" + "+".join(map(str, g["i"])), t["muc"], slug(ly)),
-                         2.0 - 0.1 * g["i"][0], muc=muc, tu=g["tu"], den=g["den"], cau_tu_soi=t["cau_tu_soi"]))
-        thang_cau.append(f"{ten_t[0].lower()}{ten_t[1:-8]} {kb.nhan_muc(muc).lower()}")
+        cand.append(_hop("thoi_diem", ten_t, f"{t['tieu_de_thang']}. {t['goi_y']}", t["can_cu"],
+                         _ma("ds", "nam_nay", "thang", slug(t["cung_goc"]), t["muc"], slug(ly)),
+                         2.0 - 0.1 * i, muc=_MUC_THANG[t["muc"]], tu=t["tu"], den=t["den"],
+                         cau_tu_soi=t["cau_tu_soi"]))
     hop, xem_lai = _ap_hoc(cand, *hoc)
     cung_dh = ls["cung"][vh["dai_han"]["chi_so"]]["ten"]
     muc = cc[cung_dh]["muc"]
@@ -666,7 +656,8 @@ def _chuong_nam_nay(sinh: dict, ls: dict, cc: dict, vh: dict, ngay_xem: dt.date,
     cd_ln = (kb.dai_han(cung_ln) or {}).get("chu_de") or _ten(cung_ln)
     tom = (f"Mười năm này xoay quanh {cd_dh}" + (f"; năm nay thêm chuyện {cd_ln}" if cung_ln != cung_dh else "")
            + ".")
-    doan = [tom, (f"Ba tháng tới: {'; '.join(thang_cau)}." if thang_cau else ""),
+    doan = [tom, (f"Ba tháng tới: {nhip['tom_tat_3_thang'][:1].lower()}{nhip['tom_tat_3_thang'][1:]}"
+                  if nhip else ""),
             "Khi các lớp nói khác nhau, ưu tiên mười năm trước, rồi đến năm, rồi mới đến tháng."]
     if nhip:
         can_cu += [f"Phái lưu nguyệt: {nhip['ten_phai_luu_nguyet']}", "Ưu tiên: đại hạn > lưu niên > tiểu hạn > lưu nguyệt"]

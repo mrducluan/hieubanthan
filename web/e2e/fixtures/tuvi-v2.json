@@ -999,6 +999,7 @@
     }
    ]
   },
+  "tom_tat_3_thang": "Tháng 12 bạn được chú ý, hợp tự đứng ra; tháng 1 đều nhịp, hợp giữ liên lạc với người thân; tháng 2 đều nhịp, hợp chăm lo cho chính mình. Cần chọn một tháng để bắt đầu việc mới thì ưu tiên tháng 12.",
   "thang": [
    {
     "thang": 12,
@@ -1040,8 +1041,57 @@
       "cung_goc": "Nô Bộc"
      }
     ],
-    "goi_y": "Hợp bắt đầu việc đã chuẩn bị, chủ động gặp người cần gặp, nhưng vẫn giữ kế hoạch chi tiêu.",
-    "cau_tu_soi": "Cơ hội nào trong tháng này bạn muốn nắm lấy nhất?"
+    "nhan_thang": "Tháng 12",
+    "tieu_de_thang": "Tháng bạn được chú ý, hợp tự đứng ra",
+    "chu_de_thang": "Tháng này bạn để tâm tới con cái, học trò hoặc một việc do chính tay mình làm ra.",
+    "tieu_diem": "Mệnh",
+    "diem_sang": "Mệnh",
+    "de_y": "Nô Bộc",
+    "noi_tiep": false,
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "nhan": "Điểm sáng",
+      "tieu_de": "Bạn tự tin và được để ý hơn",
+      "noi_dung": "Bạn dễ được người khác chú ý, lời nói có sức nặng hơn. Hợp tự giới thiệu mình, nhận một vai trò mới.",
+      "can_cu": [
+       "Hoá Lộc tháng Tân Sửu: Cự Môn ở cung Mệnh.",
+       "Hoá Lộc của tháng bay vào cung Mệnh qua sao Cự Môn: mảng bạn đang để ý có thêm cơ hội."
+      ],
+      "cung": "Mệnh"
+     },
+     {
+      "loai": "luu_y",
+      "nhan": "Nên để ý",
+      "tieu_de": "Làm chung dễ lệch ý",
+      "noi_dung": "Bạn bè, đồng nghiệp dễ làm bạn phiền lòng hoặc không giữ lời.",
+      "huong_xu_ly": "Ghi rõ phần việc của từng người, hạn chế đứng ra bảo lãnh hay cho mượn.",
+      "can_cu": [
+       "Hoá Kỵ tháng Tân Sửu: Văn Xương ở cung Nô Bộc."
+      ],
+      "cung": "Nô Bộc"
+     },
+     {
+      "loai": "loi_khuyen",
+      "nhan": "Nên làm",
+      "tieu_de": "Dành thời gian cho con và việc sáng tạo",
+      "noi_dung": "Đưa con đi chơi, tìm khoá học hợp cho con, hoặc làm tiếp món đồ, bài viết, sản phẩm bạn ấp ủ.",
+      "can_cu": [
+       "Cung tháng Tử Nữ (Thân), mức Thuận."
+      ],
+      "cung": "Tử Nữ"
+     }
+    ],
+    "goi_y": "Đưa con đi chơi, tìm khoá học hợp cho con, hoặc làm tiếp món đồ, bài viết, sản phẩm bạn ấp ủ.",
+    "cau_tu_soi": "Việc gì bạn đang làm ra mà muốn người khác được thấy trong tháng này?",
+    "can_cu": [
+     "Cung tháng (lưu nguyệt, phái Đẩu Quân từ Thái Tuế): Tử Nữ (Thân).",
+     "Chính tinh ở cung tháng: Tử Vi (Miếu), Thiên Phủ (Miếu).",
+     "Tứ hoá tháng Tân Sửu: Lộc Cự Môn (Mệnh) · Quyền Thái Dương (Thiên Di) · Khoa Văn Khúc (Huynh Đệ) · Kỵ Văn Xương (Nô Bộc).",
+     "Tứ hoá năm Bính Ngọ: Lộc Thiên Đồng (Quan Lộc) · Quyền Thiên Cơ (Tài Bạch) · Khoa Văn Xương (Nô Bộc) · Kỵ Liêm Trinh (Phụ Mẫu).",
+     "Hoá Lộc của tháng bay vào cung Mệnh qua sao Cự Môn: mảng bạn đang để ý có thêm cơ hội.",
+     "Mức Thuận: Lộc tháng vào Mệnh / Tài Bạch / Quan Lộc / Điền Trạch hoặc trùng cung Lộc năm, và không có luật cần thận trọng nào."
+    ]
    },
    {
     "thang": 1,
@@ -1078,8 +1128,56 @@
       "cung_goc": "Nô Bộc"
      }
     ],
-    "goi_y": "Hợp làm đều việc đang có, dọn dẹp việc tồn và chuẩn bị cho tháng sau.",
-    "cau_tu_soi": "Việc tồn nào bạn có thể làm xong trong tháng này?"
+    "nhan_thang": "Tháng 1",
+    "tieu_de_thang": "Tháng đều nhịp, hợp giữ liên lạc với người thân",
+    "chu_de_thang": "Tháng này chuyện anh chị em, bạn thân và người cùng làm ngang hàng được nhắc tới nhiều.",
+    "tieu_diem": "Huynh Đệ",
+    "diem_sang": "Phúc Đức",
+    "de_y": "Nô Bộc",
+    "noi_tiep": false,
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "nhan": "Điểm sáng",
+      "tieu_de": "Lòng nhẹ, tâm trạng tốt",
+      "noi_dung": "Bạn dễ thấy bình yên, vui với việc nhỏ; sở thích riêng mang lại niềm vui. Thêm nữa, chuyện tiền dễ rõ ràng, sổ sách gọn hơn.",
+      "can_cu": [
+       "Hoá Lộc tháng Nhâm Dần: Thiên Lương ở cung Phúc Đức.",
+       "Hoá Khoa tháng: Tả Phù ở cung Tài Bạch."
+      ],
+      "cung": "Phúc Đức"
+     },
+     {
+      "loai": "luu_y",
+      "nhan": "Nên để ý",
+      "tieu_de": "Làm chung dễ lệch ý",
+      "noi_dung": "Chuyện này đã cần để ý từ tháng trước; tháng này nên làm cho xong phần còn dở. Bạn bè, đồng nghiệp dễ làm bạn phiền lòng hoặc không giữ lời.",
+      "huong_xu_ly": "Ghi rõ phần việc của từng người, hạn chế đứng ra bảo lãnh hay cho mượn.",
+      "can_cu": [
+       "Hoá Kỵ tháng Nhâm Dần: Vũ Khúc ở cung Nô Bộc."
+      ],
+      "cung": "Nô Bộc"
+     },
+     {
+      "loai": "loi_khuyen",
+      "nhan": "Nên làm",
+      "tieu_de": "Hỏi han, giữ liên lạc",
+      "noi_dung": "Gọi một cuộc điện thoại, hẹn một bữa cơm với anh chị em hay bạn thân. Việc nhỏ nhưng giữ được tình thân.",
+      "can_cu": [
+       "Cung tháng Huynh Đệ (Tuất), mức Bình."
+      ],
+      "cung": "Huynh Đệ"
+     }
+    ],
+    "goi_y": "Gọi một cuộc điện thoại, hẹn một bữa cơm với anh chị em hay bạn thân. Việc nhỏ nhưng giữ được tình thân.",
+    "cau_tu_soi": "Lần gần nhất bạn hỏi han anh chị em hay bạn thân là khi nào?",
+    "can_cu": [
+     "Cung tháng (lưu nguyệt, phái Đẩu Quân từ Thái Tuế): Huynh Đệ (Tuất).",
+     "Chính tinh ở cung tháng: Tham Lang (Vượng).",
+     "Tứ hoá tháng Nhâm Dần: Lộc Thiên Lương (Phúc Đức) · Quyền Tử Vi (Tử Nữ) · Khoa Tả Phù (Tài Bạch) · Kỵ Vũ Khúc (Nô Bộc).",
+     "Tứ hoá năm Đinh Mùi: Lộc Thái Âm (Phu Thê) · Quyền Thiên Đồng (Quan Lộc) · Khoa Thiên Cơ (Tài Bạch) · Kỵ Cự Môn (Mệnh).",
+     "Mức Bình: Lộc tháng không vào Mệnh / Tài Bạch / Quan Lộc / Điền Trạch và không trùng Lộc năm; Kỵ tháng không chiếu Mệnh / Tài Bạch / Quan Lộc và không cùng trục Kỵ năm."
+    ]
    },
    {
     "thang": 2,
@@ -1116,8 +1214,118 @@
       "cung_goc": "Huynh Đệ"
      }
     ],
-    "goi_y": "Hợp làm đều việc đang có, dọn dẹp việc tồn và chuẩn bị cho tháng sau.",
-    "cau_tu_soi": "Việc tồn nào bạn có thể làm xong trong tháng này?"
+    "nhan_thang": "Tháng 2",
+    "tieu_de_thang": "Tháng đều nhịp, hợp chăm lo cho chính mình",
+    "chu_de_thang": "Tháng này bạn để tâm nhiều tới chính mình: sức bền, cách sống, điều mình thật sự muốn.",
+    "tieu_diem": "Mệnh",
+    "diem_sang": "Tật Ách",
+    "de_y": "Huynh Đệ",
+    "noi_tiep": false,
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "nhan": "Điểm sáng",
+      "tieu_de": "Sức lực dễ hồi lại",
+      "noi_dung": "Cơ thể dễ lấy lại sức sau những ngày mệt, hợp bắt đầu thói quen tốt; tinh thần thoải mái hơn. Thêm nữa, bạn chủ động và có tiếng nói hơn.",
+      "can_cu": [
+       "Hoá Lộc tháng Quý Mão: Phá Quân ở cung Tật Ách.",
+       "Hoá Quyền tháng: Cự Môn ở cung Mệnh."
+      ],
+      "cung": "Tật Ách"
+     },
+     {
+      "loai": "luu_y",
+      "nhan": "Nên để ý",
+      "tieu_de": "Dễ vướng chuyện với anh em, bạn thân",
+      "noi_dung": "Chuyện tiền nong hoặc lời qua tiếng lại với người thân thiết dễ làm bạn bận lòng.",
+      "huong_xu_ly": "Nói rõ ràng từ đầu, ghi lại các khoản góp hay cho mượn.",
+      "can_cu": [
+       "Hoá Kỵ tháng Quý Mão: Tham Lang ở cung Huynh Đệ."
+      ],
+      "cung": "Huynh Đệ"
+     },
+     {
+      "loai": "loi_khuyen",
+      "nhan": "Nên làm",
+      "tieu_de": "Sắp lại nếp sống của mình",
+      "noi_dung": "Ngủ đủ, ăn đúng bữa, sắp lại lịch tuần. Tháng này không cần đổi lớn, chỉ cần giữ đều.",
+      "can_cu": [
+       "Cung tháng Mệnh (Hợi), mức Bình."
+      ],
+      "cung": "Mệnh"
+     }
+    ],
+    "goi_y": "Ngủ đủ, ăn đúng bữa, sắp lại lịch tuần. Tháng này không cần đổi lớn, chỉ cần giữ đều.",
+    "cau_tu_soi": "Nếu chỉ đổi một thói quen của riêng mình trong tháng này, bạn chọn thói quen nào?",
+    "can_cu": [
+     "Cung tháng (lưu nguyệt, phái Đẩu Quân từ Thái Tuế): Mệnh (Hợi).",
+     "Chính tinh ở cung tháng: Cự Môn (Đắc).",
+     "Tứ hoá tháng Quý Mão: Lộc Phá Quân (Tật Ách) · Quyền Cự Môn (Mệnh) · Khoa Thái Âm (Phu Thê) · Kỵ Tham Lang (Huynh Đệ).",
+     "Tứ hoá năm Đinh Mùi: Lộc Thái Âm (Phu Thê) · Quyền Thiên Đồng (Quan Lộc) · Khoa Thiên Cơ (Tài Bạch) · Kỵ Cự Môn (Mệnh).",
+     "Mức Bình: Lộc tháng không vào Mệnh / Tài Bạch / Quan Lộc / Điền Trạch và không trùng Lộc năm; Kỵ tháng không chiếu Mệnh / Tài Bạch / Quan Lộc và không cùng trục Kỵ năm."
+    ]
+   }
+  ],
+  "cung": [
+   {
+    "ten": "Điền Trạch",
+    "chi": "Dần",
+    "nhan_ngan": "Nhà cửa"
+   },
+   {
+    "ten": "Quan Lộc",
+    "chi": "Mão",
+    "nhan_ngan": "Công việc"
+   },
+   {
+    "ten": "Nô Bộc",
+    "chi": "Thìn",
+    "nhan_ngan": "Bạn bè"
+   },
+   {
+    "ten": "Thiên Di",
+    "chi": "Tỵ",
+    "nhan_ngan": "Ra ngoài"
+   },
+   {
+    "ten": "Tật Ách",
+    "chi": "Ngọ",
+    "nhan_ngan": "Sức khoẻ"
+   },
+   {
+    "ten": "Tài Bạch",
+    "chi": "Mùi",
+    "nhan_ngan": "Tiền bạc"
+   },
+   {
+    "ten": "Tử Nữ",
+    "chi": "Thân",
+    "nhan_ngan": "Con cái"
+   },
+   {
+    "ten": "Phu Thê",
+    "chi": "Dậu",
+    "nhan_ngan": "Tình cảm"
+   },
+   {
+    "ten": "Huynh Đệ",
+    "chi": "Tuất",
+    "nhan_ngan": "Anh em"
+   },
+   {
+    "ten": "Mệnh",
+    "chi": "Hợi",
+    "nhan_ngan": "Bản thân"
+   },
+   {
+    "ten": "Phụ Mẫu",
+    "chi": "Tý",
+    "nhan_ngan": "Cha mẹ"
+   },
+   {
+    "ten": "Phúc Đức",
+    "chi": "Sửu",
+    "nhan_ngan": "Tinh thần"
    }
   ],
   "uu_tien": {

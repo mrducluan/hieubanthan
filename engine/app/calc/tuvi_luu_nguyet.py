@@ -112,7 +112,11 @@ def cac_thang(nam_am: int, tz: float = 7.0, thang_nhuan: str = "thang_sau") -> l
             if la_nhuan and thang_nhuan == "thang_sau":
                 ra.append({**goc, "phan": "nua_dau", "thang_tinh": m, "ngay_am": (1, 15),
                            "tu": tu, "den": tu + dt.timedelta(days=14)})
-                ra.append({**goc, "phan": "nua_sau", "thang_tinh": m + 1, "ngay_am": (16, so),
+                # Nửa sau tính như tháng sau: cả cung (thang_tinh) LẪN can chi tháng → tứ hoá tháng (khớp iztro
+                # 80/80 ca, QC 2026-10-21). can_chi_thang(13, năm) = can chi tháng Giêng năm sau (công thức liền mạch).
+                can2, chi2 = lunar.can_chi_thang(m + 1, nam_am)
+                ra.append({**goc, "can": can2, "chi": chi2, "can_chi": f"{can2} {chi2}",
+                           "phan": "nua_sau", "thang_tinh": m + 1, "ngay_am": (16, so),
                            "tu": tu + dt.timedelta(days=15), "den": tu + dt.timedelta(days=so - 1)})
             else:
                 ra.append({**goc, "phan": "ca_thang", "thang_tinh": m, "ngay_am": (1, so),

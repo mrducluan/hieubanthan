@@ -90,6 +90,26 @@ trong cung nguồn.
 ```
 Mỗi tháng xếp mức theo tứ hoá của **năm âm chứa tháng đó** (`nam_am`), nên tháng sau Tết đọc cùng `luu_nien_sau`.
 
+**NHIP-2 (2026-10-21) — lời riêng từng tháng.** Bản đầu chỉ có gợi ý + tự soi theo 3 mức → ba tháng cùng "Bình" ra
+nguyên văn một câu (chủ dự án báo). Nay mỗi tháng thêm (giữ mọi trường cũ, `goi_y` = lời "Nên làm" mới):
+`nhan_thang`, `tieu_de_thang` (kết luận), `chu_de_thang`, `hop` (khuôn `Hop` LG-ĐS: `diem_manh` "Điểm sáng" theo
+cung Lộc tháng · `luu_y` "Nên để ý" theo cung Kỵ tháng + `huong_xu_ly` · `loi_khuyen` "Nên làm" theo cung tháng × mức),
+`can_cu` (học thuật: cung tháng, chính tinh, tứ hoá tháng/năm, luật xếp mức, ưu tiên), `diem_sang`, `de_y`,
+`tieu_diem`, `noi_tiep`; đầu khung `tom_tat_3_thang` + `cung` (12 cung, nhãn ngắn cho vòng mini). Luật lời:
+- Kết luận theo **tiêu điểm**: thuận → cung Lộc tháng; cần thận trọng → cung bị Kỵ chiếu (Mệnh/Tài/Quan) hoặc cung Kỵ;
+  bình → cung tháng. Trùng tháng trước → lấy kết luận của cung tháng.
+- Bổ sung theo dữ kiện: song Lộc, Lộc/Kỵ rơi đúng cung tháng, Lộc–Kỵ cùng cung, chồng Kỵ, Khoa giải, Quyền/Khoa chạm
+  cung tháng hoặc Mệnh/Tài/Quan; cung tháng trùng cung đại hạn > lưu niên > tiểu hạn → câu ưu tiên trong "Nên làm".
+- Tháng liền sau cùng cung + cùng can chi (tháng nhuận) → lời "nối dài nhịp tháng trước"; cung lặp → câu tự soi thứ hai.
+- KB `tuvi_phi_hoa_kb.json` → `nhip_3_thang.{cung_thang, loc_dich, ky_dich, ky_xung, quyen_dich, khoa_dich, bo_sung,
+  noi_tiep}` (nháp AI, source_id + school_id). Test: 24 lá golden × 4 ngày xem (+ phái, tháng nhuận) không bao giờ
+  trùng kết luận / "Nên làm" / tự soi; lời chính không tên sao, tên cung Hán, "hoá", cụm cấm.
+- Mã kiểm chứng `maNhip` (mức + lý do) **không đổi**. Hộp tháng trong chương `nam_nay` của Luận giải đời sống đổi mã sang
+  `ds.nam_nay.thang.{cung}.{mức}.{lý do}` (trước theo số thứ tự tháng trong khung).
+Web `NhipBaThang.tsx`: câu so ba tháng → biểu đồ nhịp (SVG, `motion`, tôn trọng giảm chuyển động) → thẻ tháng với hộp
+`HopNoiBat` + vòng 12 cung mini (chuyện chính / điểm sáng / nên để ý) → "Vì sao nói vậy" (chip tứ hoá + căn cứ) thu
+gọn; tứ hoá của năm + phái + ưu tiên trong khối "Cách tính" thu gọn cuối khung.
+
 ### POST `/v1/tuvi/hop-tham` — `{la_so, nguoi_kia, quan_he}`
 `nguoi_kia = {birth_date, calendar_type?, am_nhuan?, birth_time?, gender?, noi_sinh?, vung?}`;
 `quan_he ∈ nguoi_yeu|vo_chong|ban_be|dong_nghiep|doi_tac|sep|cha_me_con|gia_dinh` (mặc định `nguoi_yeu`).

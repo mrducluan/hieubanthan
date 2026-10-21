@@ -168,10 +168,12 @@ def test_chuong_dung_cung(bc):
     assert any("Tuần" in c and "Phu Thê" in c for c in ch["tinh_cam"]["can_cu"])
     assert ch["nam_nay"]["hop"][0]["ma_mau"].startswith("ds.nam_nay.dai_han.")          # đại hạn trước
     thang = [h for h in ch["nam_nay"]["hop"] if ".thang" in h["ma_mau"]]
-    # tháng 10 và 11 cùng mức, cùng gợi ý → gộp một hộp "Tháng 10–11 âm lịch"
-    assert [h["tieu_de"] for h in thang] == ["Tháng 9 âm lịch", "Tháng 10–11 âm lịch"]
+    # NHIP-2: mỗi tháng một hộp, lời riêng theo cung tháng (trước đây tháng 10–11 cùng "Bình" bị gộp vì cùng câu)
+    assert [h["tieu_de"] for h in thang] == ["Tháng 9 âm lịch", "Tháng 10 âm lịch", "Tháng 11 âm lịch"]
     assert all(h["loai"] == "thoi_diem" and h["tu"] and h["den"] for h in thang)
-    assert thang[1]["ma_mau"] == "ds.nam_nay.thang2+3.binh.chung"
+    assert len({h["noi_dung"] for h in thang}) == 3 and len({h["cau_tu_soi"] for h in thang}) == 3
+    assert all(re.fullmatch(r"ds\.nam_nay\.thang\.[a-z_]+\.(thuan|binh|can_than)\.[a-z_]+", h["ma_mau"]) for h in thang)
+    assert any(c.startswith("Tứ hoá tháng ") for h in thang for c in h["can_cu"])
     assert ch["duong_bay"]["hop"] and all(h["can_cu"][0].startswith(("Hoá ", "Cung ")) for h in ch["duong_bay"]["hop"])
 
 
