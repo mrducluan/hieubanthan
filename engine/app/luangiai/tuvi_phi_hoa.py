@@ -123,13 +123,16 @@ def _noi_bat(loai: str, d: dict, mau: dict | None = None) -> dict:
             if s and isinstance(s, str):
                 return s
         if k == "nghia":
-            return nghia_duong(d)
+            # Luật `ky_xung` nói về cung bị XUNG (tiêu đề "chiếu sang {xung_cung}") → nghĩa cũng phải theo cung xung;
+            # câu `phi_vao_cung` của KB nói về cung ĐÍCH (vd Phu Thê "quan hệ đôi lứa") nên không dùng ở đây.
+            return kb.dien(goc["nghia"], **b) if loai == "ky_xung" else nghia_duong(d)
         return kb.dien(goc[k], **b)
 
     tt = None
     if d["den_tuan_triet"]:
         tt = kb.tuan_triet_ghi_chu() or _GHI_CHU_TT
-    return {"loai": loai, "duong": d, "tieu_de": lay("tieu_de"), "nghia": lay("nghia"),
+    return {"loai": loai, "duong": d, "ma_mau": (mau or {}).get("ma") or None,
+            "tieu_de": lay("tieu_de"), "nghia": lay("nghia"),
             "viec_nen_lam": lay("viec_nen_lam"), "cau_tu_soi": lay("cau_tu_soi"), "ghi_chu_tuan_triet": tt}
 
 

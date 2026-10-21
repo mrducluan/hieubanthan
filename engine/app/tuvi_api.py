@@ -11,10 +11,10 @@ Phạm vi output khai báo rõ: /tuan-triet → pham_vi = "tuan_triet_only";
 from __future__ import annotations
 
 import datetime as _dt
-from typing import Literal
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 from app import config
 from app.kb import tu_dien
@@ -439,6 +439,9 @@ class HoiTVInput(BaseModel):
     che_do: Literal["tham_khao", "chi_tiet"] = "tham_khao"
     la_so: TuanTrietInput | None = None
     ngay_xem: _dt.date | None = Field(default=None, description="Ngày xem hạn; mặc định hôm nay (giờ VN)")
+    # LG-ĐS: ý định web tìm được ở kho vectơ (tim_y_dinh_gan). Chỉ mã trong Y_DINH_CAU_HINH, chỉ áp khi từ khoá không
+    # nhận ra; mã lạ bị bỏ qua (không lỗi). Không bao giờ vượt bộ chặn khủng hoảng / ngoài phạm vi.
+    y_dinh_goi_y: str | None = Field(default=None, pattern=r"^[a-z_]{2,40}$")
 
 
 @router.post("/hoi")
@@ -457,7 +460,8 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
                 "Sinh 23:00–23:59: tử vi (theo iztro) tính là giờ Tý của NGÀY HÔM SAU — "
                 "lá số có thể khác trang dùng quy ước khác.")})
     try:
-        kq = hoidap_tv.tra_loi(inp.cau_hoi.strip(), inp.che_do, sinh=sinh, ngay_xem=inp.ngay_xem)
+        kq = hoidap_tv.tra_loi(inp.cau_hoi.strip(), inp.che_do, sinh=sinh, ngay_xem=inp.ngay_xem,
+                               y_dinh_goi_y=inp.y_dinh_goi_y)
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
     except ValueError as e:
@@ -465,6 +469,16 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
     background.add_task(nhat_ky.ghi_huyenhoc, "tuvi", inp.cau_hoi, kq, inp.la_so is not None)
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "tuvi")}
+
+
+_MaMau = Annotated[str, StringConstraints(pattern=r"^[a-z0-9_.+-]{3,60}$")]
+
+
+class _Phieu(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    dung: int = Field(ge=0, le=10_000_000)
+    chua_dung: int = Field(ge=0, le=10_000_000)
 
 
 class LuanGiaiInput(BaseModel):
@@ -475,6 +489,10 @@ class LuanGiaiInput(BaseModel):
     ngay_xem: _dt.date | None = None
     # SAO-2: bản xem trước khi thu Sao — chỉ diễn đạt AI N chương đầu (web cắt phần còn lại).
     dien_dat_toi_da: int | None = Field(default=None, ge=0, le=12)
+    # LG-ĐS tầng HỌC: bảng tỉ lệ "thấy đúng" công khai theo mã mẫu (web lấy từ Supabase, ≥ 30 phiếu) và phiếu của
+    # chính người đang xem. Chỉ xếp lại / hạ hộp, không sinh câu mới.
+    trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)
+    ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
 
 
 @router.post("/luan-giai")
@@ -483,9 +501,13 @@ def api_luan_giai(inp: LuanGiaiInput) -> dict:
     from app.narrative import luan_giai_van
     dv = _DauVao(inp.la_so)
     cal = dv.tb.calendar_dt
-    sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender, "tz_lich": dv.tz_lich, **dv.tuy_chon}
+    sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender,
+            "tz_lich": dv.tz_lich, **dv.tuy_chon, "luu_nguyet": inp.la_so.luu_nguyet}
+    trong_so = {k: v.model_dump() for k, v in inp.trong_so.items()} if inp.trong_so else None
     try:
-        bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem), toi_da=inp.dien_dat_toi_da))
+        bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(
+            toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem, trong_so=trong_so, ca_nhan=inp.ca_nhan),
+            toi_da=inp.dien_dat_toi_da))
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
     return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": list(dv.flags)}

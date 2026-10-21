@@ -89,3 +89,34 @@ def test_api_nhan_dien_dat_toi_da(monkeypatch):
         assert r.status_code == 200, r.text
         assert all(ch["moi_xem"]["cau_hoi"] for ch in r.json()["chuong"])
     assert c.post("/v1/tuvi/luan-giai", json={"la_so": la, "dien_dat_toi_da": 99}).status_code == 422
+
+
+def test_kiem_tra_chuong_cum_cam_kb():
+    """LG-ĐS: cụm "giọng AI" / doạ của KB `cum_cam` chặn bản AI (so theo ranh giới âm tiết)."""
+    nguon = "Bạn nhanh trí. Nên khắc phục thói quen đổi ý."
+    assert lgv.kiem_tra_chuong("Bạn nhanh trí, nên khắc phục thói quen đổi ý.", nguon) == []
+    loi = lgv.kiem_tra_chuong("Trên hành trình khám phá bản thân, bạn nhanh trí và sẽ thăng hoa.", nguon)
+    assert {"cụm cấm: hành trình", "cụm cấm: khám phá bản thân", "cụm cấm: thăng hoa"} <= set(loi)
+    assert lgv.kiem_tra_chuong("Hai người tương khắc.", nguon) == ["cụm cấm: khắc"]
+
+
+def test_cum_cam_ai_roi_ve_ban_mau(monkeypatch):
+    monkeypatch.setenv("OPENROUTER_API_KEY", "gia")
+    monkeypatch.setattr(lgv, "_goi_llm", lambda tieu_de, doan, mo_dun: "Hãy nhớ rằng " + " ".join(doan))
+    kq = lgv.dien_dat(BC)
+    assert all(c["che_do"] == "template_fallback" for c in kq["chuong"])
+    assert lgv._SYSTEM.count("{cum_cam}") == 1
+
+
+def test_luan_giai_moi_giu_hop_va_can_cu(monkeypatch):
+    """AI chỉ viết lại `doan`; hộp, can_cu, cot_loi giữ nguyên bản RULES."""
+    import datetime as dt
+    from app.luangiai import toan_bo
+    monkeypatch.setenv("OPENROUTER_API_KEY", "gia")
+    monkeypatch.setattr(lgv, "_goi_llm", lambda tieu_de, doan, mo_dun: " ".join(doan))
+    bc = toan_bo.tuvi({"ngay": dt.date(1990, 5, 15), "ti": 4, "gioi_tinh": "nam"}, ngay_xem=dt.date(2026, 10, 21))
+    kq = lgv.dien_dat(bc, toi_da=2)
+    assert kq["cot_loi"] == bc["cot_loi"]
+    for a, b in zip(kq["chuong"], bc["chuong"]):
+        assert a["hop"] == b["hop"] and a["can_cu"] == b["can_cu"] and a["doan"] == b["doan"]
+    assert [c["che_do"] for c in kq["chuong"][:2]] == ["llm", "llm"]

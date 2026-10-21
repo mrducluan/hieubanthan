@@ -204,3 +204,35 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* LG-ĐS — hộp nổi bật + chip mức của Luận giải đời sống (components/luan-giai). Màu theo `data-loai` / `data-muc`;
+   Giấy cổ và bản in dùng màu đậm trên nền sáng (tương phản ≥ 4.5:1). "Nên để ý" = hổ phách, không dùng đỏ. */
+.hop-nb { --hop: 233 196 106; border: 1px solid rgb(var(--hop) / 0.4); background: rgb(var(--hop) / 0.06); }
+.hop-nb[data-loai="cot_loi"] { --hop: 233 196 106; border-width: 1.5px; border-color: rgb(var(--hop) / 0.75);
+  background: linear-gradient(160deg, rgb(var(--hop) / 0.14), rgb(var(--hop) / 0.04)); }
+.hop-nb[data-loai="diem_manh"] { --hop: 111 211 181; }
+.hop-nb[data-loai="luu_y"] { --hop: 245 170 80; }
+.hop-nb[data-loai="loi_khuyen"] { --hop: 185 167 255; }
+.hop-nb[data-loai="thoi_diem"] { --hop: 126 172 255; }
+.hop-nb .hop-nhan, .hop-nb .hop-icon { color: rgb(var(--hop)); }
+.chip-muc { --muc: 170 180 214; color: rgb(var(--muc)); border: 1px solid rgb(var(--muc) / 0.45); background: rgb(var(--muc) / 0.08); }
+.cham-muc { --muc: 170 180 214; background: rgb(var(--muc)); }
+:is(.chip-muc, .cham-muc)[data-muc="thuan"] { --muc: 111 211 181; }
+:is(.chip-muc, .cham-muc)[data-muc="can_chu_dong"] { --muc: 245 170 80; }
+.la-so-giay .hop-nb[data-loai="cot_loi"] { --hop: 139 91 16; }
+.la-so-giay .hop-nb[data-loai="diem_manh"] { --hop: 27 116 58; }
+.la-so-giay .hop-nb[data-loai="luu_y"] { --hop: 150 80 10; }
+.la-so-giay .hop-nb[data-loai="loi_khuyen"] { --hop: 98 72 178; }
+.la-so-giay .hop-nb[data-loai="thoi_diem"] { --hop: 29 78 137; }
+.la-so-giay :is(.chip-muc, .cham-muc) { --muc: 80 80 110; }
+.la-so-giay :is(.chip-muc, .cham-muc)[data-muc="thuan"] { --muc: 27 116 58; }
+.la-so-giay :is(.chip-muc, .cham-muc)[data-muc="can_chu_dong"] { --muc: 150 80 10; }
+@media print {
+  .hop-nb, .hop-nb[data-loai] { background: #fff !important; border: 1px solid #000 !important; color: #000 !important; break-inside: avoid; }
+  .hop-nb[data-loai="cot_loi"] { border-width: 2px !important; }
+  .hop-nb .hop-nhan, .hop-nb .hop-icon, .hop-nb * { color: #000 !important; }
+  .chip-muc { color: #000 !important; border-color: #000 !important; background: #fff !important; }
+  .cham-muc { background: #000 !important; }
+  .bao-cao-ds { color: #000; }
+  .bao-cao-ds :where(p, li, h2, h3, h4, span, b) { color: #000 !important; }
+}

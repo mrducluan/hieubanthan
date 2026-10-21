@@ -23,7 +23,11 @@ export type SuKien =
   // TS-V3b: "Phái nào nói đúng về bạn?" — chỉ mã phái + số lần đã chọn (đếm trên máy), không câu chữ
   | "school_voted"
   // KC-0: "Đúng với mình / Chưa đúng" trên thẻ Tử vi (phi hoá, nhịp 3 tháng) — chỉ mã mẫu + loại + kết quả + phái
-  | "tuvi_kiem_chung";
+  | "tuvi_kiem_chung"
+  // LG-ĐS: "Đúng ý bạn hỏi?" sau câu trả lời Tử vi có ý định gợi ý từ kho vectơ — chỉ mã ý định + kết quả + độ gần
+  | "tuvi_y_dinh_xac_nhan"
+  // LG-ĐS: lưu / xoá bài luận (chỉ mã mô-đun), bật tắt tự lưu
+  | "luan_giai_saved";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number"> = {
@@ -54,11 +58,14 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   trang: "string",      // ND-2: đường dẫn trang chứa nút
   tru: "string",       // TS-NOIDAU: mã trụ đời (su_nghiep_tien_bac…)
   ma_cau: "string",     // TS-NOIDAU: mã câu hỏi chuẩn trong KB (sn_sai_nghe…), không bao giờ là câu gõ tay
-  mau: "string",        // KC-0: mã mẫu tất định (lib/kiem-chung: "mau.quan_loc.ky.menh", "thuan.ln"), không bao giờ là chữ
-  loai: "string",       // KC-0: phi_hoa / nhip_3_thang
+  mau: "string",        // KC-0: mã mẫu tất định (lib/kiem-chung: "mau.quan_loc.ky.menh", "thuan.ln", "ds.su_nghiep…"), ≤ 60
+  loai: "string",       // KC-0: phi_hoa / nhip_3_thang / doi_song (LG-ĐS)
+  do_gan: "number",     // LG-ĐS: độ gần cosine của gợi ý ý định từ kho vectơ (0–1), không bao giờ là câu hỏi
   vi_tri: "string",     // ND-2: tren / duoi / cuoi   // SAO-3: mã nhiệm vụ (luu_ho_so / hoi_3_cau / moi_1_ban)
 };
 const GIOI_HAN_CHUOI = 40;
+/** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */
+const GIOI_HAN_RIENG: Record<string, number> = { mau: 60 };
 
 export function locThuocTinh(p: Record<string, unknown> = {}): Record<string, string | number> {
   const kq: Record<string, string | number> = {};
@@ -66,7 +73,8 @@ export function locThuocTinh(p: Record<string, unknown> = {}): Record<string, st
     const kieu = CHO_PHEP[k];
     if (kieu === "number" && typeof v === "number" && Number.isFinite(v)) kq[k] = v;
     // Chặn chuỗi có 4 chữ số liền (dễ là năm sinh) — trừ ma_moi (chuỗi chữ ký ngẫu nhiên).
-    else if (kieu === "string" && typeof v === "string" && v.length <= GIOI_HAN_CHUOI && (k === "ma_moi" || !/\d{4}/.test(v))) kq[k] = v;
+    else if (kieu === "string" && typeof v === "string" && v.length <= (GIOI_HAN_RIENG[k] ?? GIOI_HAN_CHUOI)
+             && (k === "ma_moi" || !/\d{4}/.test(v))) kq[k] = v;
   }
   return kq;
 }

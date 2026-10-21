@@ -11,25 +11,15 @@ from __future__ import annotations
 import datetime as dt
 import re
 
-from app.hoidap import battu as hd_battu, tuvi as hd_tuvi
+from app.hoidap import battu as hd_battu
+from app.luangiai import tuvi_doi_song as ds_tuvi
 from app.narrative import hoi_van
 
 PHI = {"sao": 0, "ly_do": "mien_phi_thu_nghiem"}
 
-CHUONG_TUVI = [
-    ("tong_quan", "Tổng quan bản mệnh", "Cung Mệnh của tôi nói gì về tính cách?"),
-    ("su_nghiep", "Sự nghiệp", "Cung Quan Lộc của tôi nói gì về sự nghiệp?"),
-    ("tien_bac", "Tiền bạc", "Cung Tài Bạch của tôi nói gì về tiền bạc?"),
-    ("tinh_cam", "Tình cảm, hôn nhân", "Cung Phu Thê của tôi thế nào?"),
-    ("gia_dinh", "Cha mẹ, con cái", "Cung Phụ Mẫu của tôi thế nào?"),
-    ("con_cai", "Con cái, người kế tiếp", "Cung Tử Nữ của tôi thế nào?"),
-    ("tinh_than", "Đời sống tinh thần, phúc đức", "Cung Phúc Đức của tôi thế nào?"),
-    # TV-V2: phi tinh tứ hoá (lớp nền của lá gốc) đọc trước vận hạn; nhịp 3 tháng (lưu nguyệt) đọc SAU vận hạn —
-    # đúng thứ tự ưu tiên đại hạn > lưu niên > tiểu hạn > lưu nguyệt.
-    ("duong_bay", "Đường bay tứ hoá", "Đường bay tứ hoá trong lá số của tôi nói gì?"),
-    ("van_han", "Vận hạn hiện tại", "Đại hạn hiện tại của tôi là chủ đề gì?"),
-    ("ba_thang_toi", "3 tháng tới", "Ba tháng tới của tôi thế nào?"),
-]
+# LG-ĐS (2026-10-21): Tử vi dùng bản "đời sống" (`luangiai.tuvi_doi_song`) — 12 chương, chấm cung, hộp nổi bật.
+# Giữ dạng (ma, tiêu đề, câu hỏi) để nơi khác đọc danh sách chương như cũ.
+CHUONG_TUVI = [(ma, tieu_de, cau) for ma, tieu_de, cau, _ in ds_tuvi.CHUONG]
 CHUONG_BATTU = [
     ("tong_quan", "Nhật chủ và tính cách", "Nhật chủ của tôi là người thế nào?"),
     ("ngu_hanh", "Ngũ hành, thân vượng nhược, dụng thần", "Dụng thần của tôi là gì?"),
@@ -42,15 +32,17 @@ CHUONG_BATTU = [
 # đã tính, cắt từ chính chương đó) khi chương bị khoá chờ mở bằng Sao. Không thêm dữ kiện nào ngoài báo cáo.
 CAU_HOI_MO = {
     ("tuvi", "tong_quan"): "Điểm mạnh nào bạn đang dùng chưa hết, và điểm dễ vấp nào hay lặp lại trong các quyết định lớn?",
+    ("tuvi", "cuoc_doi"): "Bạn đang đứng ở giai đoạn nào của đời mình, và giai đoạn kế tiếp xoay quanh điều gì?",
+    ("tuvi", "suc_khoe"): "Thói quen nào đang âm thầm lấy sức của bạn, và nếp nhỏ nào giúp bạn giữ sức lâu?",
+    ("tuvi", "quan_he"): "Kiểu người nào giúp bạn đi xa hơn, và bạn hay mất sức vì ai, vì việc gì bên ngoài?",
+    ("tuvi", "nha_cua"): "Bạn cần một nơi ở thế nào để thấy yên, và chuyện nhà cửa nên tính theo nhịp nào?",
+    ("tuvi", "nam_nay"): "Năm nay nên dồn sức vào đâu, và tháng nào trong 3 tháng tới hợp để bắt đầu việc mới?",
+    ("tuvi", "loi_khuyen"): "Ba điểm mạnh nào bạn nên dùng nhiều hơn, và ba việc nhỏ nào nên bắt đầu ngay?",
     ("tuvi", "su_nghiep"): "Môi trường và vai trò nào giúp bạn bứt lên, kiểu việc nào khiến bạn mau cạn năng lượng?",
     ("tuvi", "tien_bac"): "Bạn kiếm tiền hợp nhất theo cách nào, và thói quen chi tiêu nào đang âm thầm làm hao hụt?",
     ("tuvi", "tinh_cam"): "Bạn thật sự tìm gì ở người bạn đời, và vì sao va chạm hay bắt đầu từ cùng một chỗ?",
     ("tuvi", "gia_dinh"): "Vì sao bạn phản ứng mạnh với một kiểu góp ý từ người lớn, và cách nào để gần nhau hơn?",
-    ("tuvi", "con_cai"): "Bạn nuôi dưỡng con cái và những điều mình tạo ra theo cách nào, điểm nào nên nới lỏng?",
-    ("tuvi", "tinh_than"): "Điều gì thật sự cho bạn bình an, và điều gì khiến tâm trí bạn khó tĩnh?",
-    ("tuvi", "van_han"): "Mười năm này xoay quanh chủ đề gì, và năm nay nên dồn sức vào đâu?",
     ("tuvi", "duong_bay"): "Mảng đời nào đang âm thầm tác động lên mảng nào, và đâu là chỗ bạn hay tự ôm việc về mình?",
-    ("tuvi", "ba_thang_toi"): "Tháng nào hợp để bắt đầu việc mới, tháng nào nên giữ nhịp và chăm việc đang dở?",
     ("battu", "tong_quan"): "Nhật chủ nói gì về cách bạn phản ứng khi áp lực, và điểm mạnh nào bạn hay bỏ quên?",
     ("battu", "ngu_hanh"): "Hành nào bạn đang thiếu, và hai cách chọn dụng thần gợi ý bạn cân bằng thế nào?",
     ("battu", "su_nghiep"): "Thập thần trong lá số cho thấy bạn hợp kiếm tiền và làm việc theo kiểu nào?",
@@ -95,8 +87,14 @@ def _ghep(mo_dun: str, chuong: list[tuple[str, str, str]], hoi) -> dict:
     return {"mo_dun": mo_dun, "chuong": ds, "ket": hoi_van.KET, "trang_thai": "nhap_ai", "phi": PHI}
 
 
-def tuvi(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
-    return _ghep("tuvi", CHUONG_TUVI, lambda c: hd_tuvi.tra_loi(c, "chi_tiet", sinh=sinh, ngay_xem=ngay_xem))
+def tuvi(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
+         ca_nhan: dict | None = None) -> dict:
+    """LG-ĐS: báo cáo `doi_song_1` (cot_loi, thoi_gian_bieu, 12 chương có hop/doan/can_cu) + các trường cũ
+    (mo_dun, chuong[].ma/tieu_de/cau_hoi/doan/moi_xem, ket, trang_thai, phi) cho SAO-2 và tầng diễn đạt."""
+    bc = ds_tuvi.lap(sinh, ngay_xem, trong_so=trong_so, ca_nhan=ca_nhan)
+    chuong = [{**c, "moi_xem": _moi_xem("tuvi", c["ma"], c["doan"])} for c in bc["chuong"]]
+    return {"mo_dun": "tuvi", **bc, "chuong": chuong, "ket": hoi_van.KET, "trang_thai": bc.get("trang_thai", "nhap_ai"),
+            "phi": PHI}
 
 
 def battu(sinh: dict, ngay_xem: dt.date | None = None) -> dict:

@@ -138,3 +138,28 @@ def test_kb_nhip_ly_do_khong_gan_sao_thang_cho_ky_nam():
         s = pkb.nhip("ly_do", ma)
         if isinstance(s, str):
             assert "của tháng (sao {sao})" in s
+
+
+def test_ky_xung_nghia_theo_cung_xung_khong_theo_cung_dich():
+    """Hồi quy LG-ĐS: "Hoá Kỵ từ Tật Ách chiếu sang Quan Lộc" từng đi kèm câu của cung ĐÍCH Phu Thê
+    ("đưa điều vướng vào quan hệ đôi lứa"). Nghĩa của luật ky_xung phải nói về cung bị xung (Quan Lộc)."""
+    d = {"tu_cung": "Tật Ách", "can": "Giáp", "hoa": "Kỵ", "sao": "Thái Dương", "den_cung": "Phu Thê",
+         "xung_cung": "Quan Lộc", "tu_hoa": False, "den_tuan_triet": []}
+    n = luan._noi_bat("ky_xung", {**d, "nghia": luan.nghia_duong(d)})
+    assert "chiếu sang Quan Lộc" in n["tieu_de"]
+    assert "đôi lứa" not in n["nghia"] and luan.MANG["Quan Lộc"] in n["nghia"]
+    assert n["ma_mau"] is None
+
+
+def test_noi_bat_co_ma_mau(ls):
+    r = luan.lap(ls, "Canh")
+    for nb in r["noi_bat"]:
+        assert "ma_mau" in nb
+        if nb["loai"] == "mau":
+            assert nb["ma_mau"] in {m["ma"] for m in pkb.mau_duong_bay()}
+        else:
+            assert nb["ma_mau"] is None
+    # lá 1990-05-15 giờ Thìn (Canh Ngọ): Kỵ Tật Ách → Phu Thê, xung Quan Lộc
+    ls2 = tom_tat(az.an_sao_tho(dt.date(1990, 5, 15), 4, "nam", "vi-VN"))
+    nb = next(n for n in luan.lap(ls2, "Canh")["noi_bat"] if n["duong"]["tu_cung"] == "Tật Ách" and n["duong"]["hoa"] == "Kỵ")
+    assert nb["duong"]["xung_cung"] == "Quan Lộc" and "đôi lứa" not in nb["nghia"]

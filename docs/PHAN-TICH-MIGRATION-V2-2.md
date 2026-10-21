@@ -280,3 +280,12 @@ Danh mục cung/phái trong SQL phải khớp `web/lib/kiem-chung.ts` và `calc/
    nhận **nhà cung cấp nhúng** bên ngoài hay muốn chạy cục bộ (tốn RAM, nâng gói Render)?
 4. Có muốn hiện "x% người xem thấy đúng" công khai trên thẻ không? (Em khuyên **không** trong lúc mẫu còn nhỏ — dễ thành
    "bằng chứng xã hội" gây hiểu nhầm là luận chắc chắn đúng.)
+
+### 7b. Anh đã quyết (2026-10-21) → làm ở LG-ĐS (`docs/LUAN-GIAI-DOI-SONG.md`)
+
+1. **Lưu luận giải gắn người dùng + tự học: làm.** Bài luận lưu khi người dùng bấm "Lưu" / tự bật "Tự lưu" (không tích
+   sẵn), RLS chủ sở hữu, 12 tháng. Tự học = xếp lại / hạ hộp theo tỉ lệ kiểm chứng + tự thêm câu hỏi đã lọc vào kho vectơ
+   khi ≥ 3 người xác nhận. Vẫn **không** có đường nào đưa chữ người dùng vào lời nhắc AI, vẫn không trigger tự sinh luật.
+2. **Làm tới GĐ2, bật pgvector:** migration 0017 gộp GĐ1 (phiếu kiểm chứng) + GĐ2 (kho vectơ ý định). Vectơ tạo ngay
+   trong engine (512 chiều, tất định, không gửi câu hỏi ra ngoài); đổi sang mô hình nhúng ngữ nghĩa sau bằng env.
+3. **Hiện công khai "x% thấy đúng"** trên thẻ khi đủ 30 phiếu, kèm chú thích "số người tự bấm, không phải kiểm định".

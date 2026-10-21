@@ -614,3 +614,11 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
 - [x] Quyết: lưu "Không biết giờ" vào tài khoản — **đã chốt: lưu** (migration 0015 nới `do_tin_gio` nhận `unknown`).
 - [x] Quyết: định giờ hiện khoảng giờ theo **giờ đồng hồ** nơi sinh (kèm dòng "theo giờ lịch" khi lệch) — **đã chốt**; chế độ 12 canh: Tý = 00:00–00:59 ngày đã nhập, nhập 23:xx thì thêm ứng viên "Giờ Tý muộn" — **đã chốt**.
 - [ ] Chạy migration `supabase/migrations/0015_do_tin_gio_unknown.sql` trên Supabase → SQL Editor (sau 0007). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0015). Chưa chạy thì web vẫn lưu được, chỉ là "Không biết giờ" lưu như chưa có giờ.
+
+## LG-ĐS. Luận giải Tử vi đời sống + tầng HỌC Tử vi (2026-10-21, `docs/LUAN-GIAI-DOI-SONG.md`)
+- [ ] Supabase → Database → Extensions → bật **vector** (schema `extensions`), rồi chạy `supabase/migrations/0017_tuvi_hoc.sql` (sau 0015, 0016). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`.
+- [ ] Vercel (web): đã có `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SUPABASE_*`, `SAO_KHOA_SECRET` (hoặc `LOI_MOI_SECRET`, ≥ 16 ký tự) — thiếu thì kiểm chứng / lưu bài / kho vectơ tự tắt, trang không lỗi. Tuỳ chọn `Y_DINH_NGUONG` (mặc định 0,82).
+- [ ] Sau khi chạy 0017: `/quan-tri/hoc` → bấm **"Dựng kho vectơ"** một lần (làm lại khi kho câu hỏi đổi).
+- [ ] Cập nhật Chính sách quyền riêng tư: bài luận lưu (12 tháng, chỉ khi bấm Lưu/bật Tự lưu), phiếu "Đúng với mình" (24 tháng, khoá ẩn danh), câu hỏi đã lọc lưu khi người dùng chọn chủ đề / xác nhận "đúng ý tôi hỏi".
+- [ ] Deploy engine Render rồi mở `/tu-vi` → "Luận giải toàn bộ" với lá số của anh, đọc thử 12 chương.
+- [ ] Quyết (khi rảnh): Mệnh vô chính diệu gặp Tuần/Triệt — Nam phái thường coi là tốt, hiện bài vẫn ghi "việc đến chậm". Giữ hay đổi?

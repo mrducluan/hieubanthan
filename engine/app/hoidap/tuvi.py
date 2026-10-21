@@ -143,6 +143,8 @@ Y_DINH_CAU_HINH = {
     "hieu_ban_than": {"checkpoint": "ban_than"},
 }
 _LOAI_NHAN_Y_DINH = ("la_so", "han", "ky_thuat", "la_so_con")
+# Loại câu được nhận ý định GỢI Ý từ kho vectơ (hẹp hơn luật từ khoá: câu kỹ thuật "X là gì" không bao giờ đổi loại).
+_LOAI_GOI_Y = ("la_so", "han")
 PHI_HOA_KW = [r"phi hoa", r"phi tinh", r"duong bay", r"lai nhan", r"cung (nao )?tu hoa"]
 
 
@@ -260,7 +262,10 @@ def _kb_y_dinh(ma: str) -> dict | None:
     return next((y for y in ds if isinstance(y, dict) and y.get("ma") == ma), None) if isinstance(ds, list) else None
 
 
-def phan_loai(cau_hoi: str, che_do: str = "tham_khao") -> dict:
+def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None = None) -> dict:
+    """`y_dinh_goi_y` (LG-ĐS, kho vectơ pgvector): mã ý định web tìm được bằng láng giềng gần nhất — CHỈ áp khi luật
+    từ khoá không nhận ra ý định nào, chỉ cho câu bản mệnh / hạn, chỉ mã trong Y_DINH_CAU_HINH, và đi SAU bộ chặn
+    khủng hoảng / ngoài phạm vi (câu đặc biệt trả về trước, gợi ý bị bỏ qua)."""
     gioi_thieu, t_chinh = _h._tach_gioi_thieu(cau_hoi)
     t = chung.chuan_hoa(cau_hoi)
     if gioi_thieu and (chung.co(gioi_thieu, [r"dai han", r"luu nien", r"tieu han", r"la so", r"cung \w+"])
@@ -271,7 +276,8 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao") -> dict:
           "phu": _phu_nhac(t_chinh), "giai_thich": _giai_thich_khop(t_chinh),
           "ca_nhan": chung.co(t_chinh, CA_NHAN), "su_kien": chung.co(t, SU_KIEN),
           "nam_xem": _nam_nhac(t), "han_sau": chung.co(t, NAM_SAU), "han_toi": chung.co(t, TOI_KE),
-          "hoi_thang": chung.co(t, THANG), "sao_tim": [], "y_dinh": None}
+          "hoi_thang": chung.co(t, THANG), "sao_tim": [], "y_dinh": None,
+          "nhan_ra_y_dinh": False, "co_the_goi_y": False, "y_dinh_tu_goi_y": False}
     t_loc = t
     if che_do == "chi_tiet":
         for m in SU_KIEN_CHAN_MEM:
@@ -321,12 +327,18 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao") -> dict:
         kq["xu_ly"] = "tra_loi_kem_luu_y"
         kq["cung"] = kq["cung"] or [c for c, m in CHU_DE_CUNG if chung.co(t_chinh, m)][:1]
     yd = _y_dinh(t_chinh) or _y_dinh(t)          # ý định có thể nằm trong lời dẫn ("Mình đang phân vân…, tử vi nói gì?")
+    kq["co_the_goi_y"] = yd is None and kq["loai"] in _LOAI_GOI_Y
+    goi_y = yd is None and kq["co_the_goi_y"] and y_dinh_goi_y in Y_DINH_CAU_HINH
+    if goi_y:
+        yd = y_dinh_goi_y
     if yd in ("tai_van", "di_hay_o", "phan_van") and _co_ten(t_chinh, CUNG_KW):
         yd = None                       # "Cung Tài Bạch của tôi nói gì về tiền bạc?", "chọn người yêu hợp cung Phu
         #                                 Thê" = câu bản mệnh về cung đã nêu, không phải ý định
     if yd and _kb_y_dinh(yd) and (kq["loai"] in ("la_so", "han", "ky_thuat")
                                   or (kq["loai"] == "la_so_con" and yd == "hoc_hanh_con")):
         _ap_y_dinh(kq, yd, t_chinh)
+        kq["nhan_ra_y_dinh"] = not goi_y
+        kq["y_dinh_tu_goi_y"] = goi_y
     return kq
 
 
@@ -1097,11 +1109,12 @@ def _cong_nam(d: dt.date, n: int) -> dt.date:
 
 
 def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
-            ngay_xem: dt.date | None = None, dung_llm: bool = False) -> dict:
-    """`sinh` = {"ngay": date (dương, kinh tuyến UTC+7), "ti": 0..12, "gioi_tinh": "nam"|"nu"}."""
+            ngay_xem: dt.date | None = None, dung_llm: bool = False, y_dinh_goi_y: str | None = None) -> dict:
+    """`sinh` = {"ngay": date (dương, kinh tuyến UTC+7), "ti": 0..12, "gioi_tinh": "nam"|"nu"}.
+    `y_dinh_goi_y`: xem phan_loai (mã lạ / câu đặc biệt / từ khoá đã nhận ra → bỏ qua)."""
     if che_do not in CHE_DO:
         raise ValueError(f"che_do phải là một trong {CHE_DO}")
-    pl = phan_loai(cau_hoi, che_do)
+    pl = phan_loai(cau_hoi, che_do, y_dinh_goi_y=y_dinh_goi_y)
     ls = vh = vh_toi = lnm = None
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     can_la_so = pl["loai"] in ("la_so", "han", "vi_tri_sao", "cach_cuc_la_so", "sat_tinh_la_so", "phi_hoa")
@@ -1158,4 +1171,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
     dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
     return {"phan_loai": goi["phan_loai"], "van_han": vh, "bang_chung": goi, "cau_tra_loi": van,
             "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"],
-            "co_canh_bao": co, "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong"}
+            "co_canh_bao": co, "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong",
+            # LG-ĐS: web chỉ tra kho vectơ khi co_the_goi_y (từ khoá không nhận ra, câu bản mệnh/hạn, không đặc biệt).
+            "nhan_ra_y_dinh": bool(pl.get("nhan_ra_y_dinh")), "co_the_goi_y": bool(pl.get("co_the_goi_y")),
+            "y_dinh_tu_goi_y": bool(pl.get("y_dinh_tu_goi_y"))}

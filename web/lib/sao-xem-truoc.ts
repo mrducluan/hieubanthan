@@ -13,5 +13,16 @@ export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T
     ma: c.ma, tieu_de: c.tieu_de, khoa: true,
     moi_xem: c.moi_xem ?? { diem_nhan: "", cau_hoi: "Chương này nói gì về chính bạn?", so_doan: c.doan.length, phut_doc: 1 },
   }));
-  return { ...bc, chuong: [...bc.chuong.slice(0, n), ...khoa], so_khoa: khoa.length };
+  const out: Omit<T, "chuong"> & { chuong: (ChuongDay | ChuongKhoa)[]; so_khoa: number } =
+    { ...bc, chuong: [...bc.chuong.slice(0, n), ...khoa], so_khoa: khoa.length };
+  // LG-ĐS: báo cáo đời sống có trường ngoài `chuong` mang nội dung của chương sau — không được lộ khi chương đó khoá.
+  if (khoa.length) {
+    const mo = new Set(bc.chuong.slice(0, n).map((c) => c.ma));
+    const o = out as Record<string, unknown>;
+    if (Array.isArray(bc.cot_loi)) {
+      o.cot_loi = (bc.cot_loi as { tu_chuong?: unknown }[]).filter((h) => typeof h.tu_chuong === "string" && mo.has(h.tu_chuong));
+    }
+    if ("thoi_gian_bieu" in bc && !mo.has("cuoc_doi")) delete o.thoi_gian_bieu;
+  }
+  return out;
 }
