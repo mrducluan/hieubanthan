@@ -150,3 +150,93 @@ nhãn + vectơ từ `fixtures/cau_hoi/huyenhoc_cau_hoi.jsonl`, web upsert `nguon
 Thẻ có `ma_mau` hiện "**78%** trong 120 người có cùng điểm này thấy đúng" khi ≥ 30 phiếu; dưới ngưỡng: "Bạn thấy
 đúng không?" (không hiện số). Số lấy từ `ty_le_kiem_chung`, route web cache 1 giờ. Ghi chú nhỏ: "số người tự bấm, không
 phải kiểm định khoa học".
+
+## 6. BT-ĐS — Luận giải Bát tự cùng khung (2026-10-21)
+
+Chủ dự án: "Bát tự vẫn là bản cũ. Làm tiếp Bát tự theo cùng khung như Tử vi." Bản cũ (`toan_bo.battu`) ghép 4 câu trả
+lời hỏi đáp → mở bằng định nghĩa, liệt kê thập thần, thiếu tổng hợp, thiếu tình cảm / gia đình / sức khoẻ / lời khuyên.
+Vòng tăng trưởng: **QUAY LẠI** (bài có ích, "Năm nay & tháng tới" đổi theo tháng tiết, bài đã lưu) + **NẠP Sao** (chương 2–12
+mở bằng Sao như SAO-2). Đo: Gate 1/2 mảng `battu` (`reading_completed`), tỉ lệ "Đúng với mình" theo mã `ds.bt.*`,
+`luan_giai_luu` với `mo_dun = battu`.
+
+### 6.1 Đọc gì — một bộ tính
+
+`luangiai/battu_doi_song.py` (RULES, tất định) chỉ ĐỌC số `calc.battu` / `calc.battu_mo_rong` đã tính: 4 trụ, thập thần,
+tàng can, điểm ngũ hành (`THANG_DIEM`), thân vượng / nhược, dụng thần hai cách (`_dung_than`: phù ức + điều hậu kiểu
+Trích Thiên Tuỷ; cách cục Tử Bình Chân Thuyên), đại vận, lưu niên + 12 lưu nguyệt, thần sát, quan hệ hợp / xung / hình /
+hại giữa trụ. Tháng "tới" tính theo tiết (ngày giao tiết giờ VN, `calc.tietkhi`). Không chép phép tính nào sang đây.
+
+### 6.2 Chấm mảng đời (luật công khai, docstring mô-đun)
+
+- **Nhóm thập thần theo hành** (`vai_tro_hanh`): Tỷ Kiếp · Ấn · Thực Thương · Tài · Quan Sát. Tỉ lệ nhóm = điểm hành / tổng.
+  Độ đậm: ≥ 30% `dam` · ≥ 12% `vua` · > 0 `mong` · 0 `vang`; "có mặt rõ" = dam / vua.
+- **Hợp sức**: +1 khi hành của nhóm là hành cần thêm (cách 1) và nhóm có mặt rõ; −1 khi là hành nên bớt và nhóm đậm.
+- **Hai cách (dụng thần — KHÔNG tự chọn, `chon = None`)**: cách 1 "cân sức" = phù ức + điều hậu (hành nên bớt = phần còn
+  lại khi thân vượng / nhược); cách 2 "theo tháng sinh" = hỷ / kỵ theo nhóm của cách cục (KB `cach.<ma>.hy/ky`, có bản riêng
+  khi thân nhược / vượng — vd Tài cách thân nhược: hỷ Ấn, kỵ Tỷ Kiếp).
+
+| Mảng | Luật (điểm ≥ 2 Thuận lợi · ≤ −1 Cần chủ động · còn lại Cân bằng) |
+|---|---|
+| Công việc | Quan Sát rõ +1 (+ hợp sức; Ấn hoặc Tài đỡ +1; Thực Thương đậm gặp Quan −1); không Quan mà Thực Thương rõ: 0 (sống bằng tay nghề); không cả hai −1 |
+| Tiền bạc | Tài rõ +1 (+ hợp sức; Thực Thương rõ sinh Tài +1); không Tài −1 (0 nếu Thực Thương rõ); Tỷ Kiếp đậm −1. Thân nhược mà Tài đậm → hộp "tiền đến nhiều nhưng dễ mệt vì gánh" |
+| Tình cảm | sao phối ngẫu (nam Tài, nữ Quan Sát) rõ +1 + hợp sức, vắng −1; nữ lộ cả Chính Quan lẫn Thất Sát −1; nam Tỷ Kiếp đậm −1; chi ngày (cung phối ngẫu) bị xung / hình / hại −1, hợp +1; bản khí chi ngày → "kiểu gắn bó" |
+| Gia đình | Ấn rõ +1 + hợp sức; Tài đậm phá Ấn −1; trụ năm–tháng xung / hình / hại −1, hợp +1; anh em (Tỷ Kiếp), con cái (nam Quan Sát, nữ Thực Thương; trụ ngày–giờ) chỉ thêm hộp |
+| Học & nghĩ | Ấn rõ +1, Thực Thương rõ +1; Ấn đậm lấn Thực Thương −1; cả hai mỏng −1; Văn Xương / Thái Cực / Hoa Cái +1 |
+| Bạn bè, bên ngoài | thân yếu có bạn ngang hàng đỡ +1; thân mạnh mà Tỷ Kiếp đậm −1; Quan Sát đậm đè thân yếu −1; Thiên Ất Quý Nhân +1; Vong Thần −1; Kiếp Sát −1 |
+| Con người bạn | thân trung hoà +1; hành cần thêm (cách 1) có mặt rõ +1, vắng hẳn −1; ≥ 2 sao cát +1; ≥ 2 sao hung −1 |
+| Năng lượng | phù ức / điều hậu không cần hoặc hành cần bù đã có mặt rõ: +1 mỗi phần; vắng hẳn −1 |
+| Sức khoẻ | theo độ lệch: thiếu ≥ 2 hành hoặc một hành ≥ 45% → Cần chủ động; không thiếu và hành lớn nhất < 35% → Thuận lợi |
+
+**Đại vận / lưu niên / lưu nguyệt**: mỗi cách chấm can (1 điểm) + chi (2 điểm, hành bản khí) — hành cần thêm cộng, hành
+nên bớt trừ; ≥ 1 thuận, ≤ −1 cần chủ động. Gộp: cùng mức → mức đó; ngược nhau → Cân bằng + câu "Hai cách đọc cho kết quả
+ngược nhau…"; một cách cân bằng → theo cách còn lại + câu "Hai cách đọc khác nhau…". Ưu tiên đại vận > lưu niên > lưu nguyệt.
+
+**Tuổi**: < 16 tuổi — chương công việc / tiền / tình cảm thêm câu "nói về xu hướng khi lớn lên", không nói con cái của
+chính em; ≥ 45 tuổi và sao con mỏng → hộp "con cái tự lập, cần quan tâm đều" (không khuyên "lên kế hoạch có con").
+
+### 6.3 Chương (chương 1 miễn phí như SAO-2)
+
+| ma | Tiêu đề | Đọc từ | Trực quan (web) |
+|---|---|---|---|
+| `tong_quan` | Con người bạn | nhật chủ × sức tự thân (KB 10 × 3), thập thần nổi nhất, cách cục (tên đời thường), Thiên/Nguyệt Đức | `than_do` → thanh sức tự thân |
+| `ngu_hanh` | Năng lượng của bạn: thừa gì, thiếu gì | hành dư / thiếu + **hai cách** gợi ý bù (màu, hướng, thói quen, nghề — dân gian) | `bieu_do` → 5 cột ngũ hành, `hai_cach` |
+| `cuoc_doi` | Các giai đoạn cuộc đời | 8 đại vận → `thoi_gian_bieu` (mức gộp + từng cách) | dải đại vận hai cách + dòng thời gian |
+| `su_nghiep` | Công việc & sự nghiệp | Quan Sát, Ấn, Tài, Thực Thương; nghề theo cách cục | |
+| `tien_bac` | Tiền bạc | Tài, Thực Thương, Tỷ Kiếp; Lộc Thần, Kim Dư | |
+| `tinh_cam` | Tình yêu & hôn nhân | sao phối ngẫu, chi ngày, Đào Hoa / Hồng Diễm, Cô Thần / Quả Tú | |
+| `gia_dinh` | Gia đình: cha mẹ, anh em, con cái | Ấn, trụ năm–tháng, Tỷ Kiếp, sao con + trụ giờ | |
+| `hoc_tap` | Cách bạn học và nghĩ | Ấn, Thực Thương, Thiên Ấn, Văn Xương / Thái Cực / Hoa Cái | |
+| `suc_khoe` | Sức khoẻ & năng lượng | hành dư / thiếu → phần cơ thể sách xưa gắn với hành (phòng ngừa) + nhịp sức theo thân | miễn trừ `mien_tru` |
+| `quan_he` | Bạn bè, đồng nghiệp, người bên ngoài | Tỷ Kiếp × thân, Quan Sát, Thiên Ất, Tướng Tinh, Dịch Mã, Vong Thần, Kiếp Sát… | |
+| `nam_nay` | Năm nay & tháng tới | đại vận đang đi → lưu niên (+ quan hệ với chi ngày) → 3 tháng theo tiết | |
+| `loi_khuyen` | Lời khuyên dành cho bạn | 3 điểm mạnh, 3 điều nên để ý, 3 việc nên làm (gom từ các chương) | |
+
+### 6.4 Hợp đồng JSON (`POST /v1/battu/luan-giai`, cùng `doi_song_1` mục 2.3, nhận `trong_so` / `ca_nhan`)
+
+Thêm so với Tử vi: `chuong[tong_quan].than_do = {ti_le, vuong_tu, nhuoc_duoi, muc: manh|yeu|can_bang, nhan}`,
+`chuong[ngu_hanh].bieu_do = {hanh: [{hanh, diem, ty_le, nhom, trang_thai: thieu|thua|vua, cach_1, cach_2}], nhat_chu}`,
+`chuong[ngu_hanh].hai_cach = {cach_1: {ten, hanh}, cach_2: {ten, hanh, ma}, chon: null}`,
+`thoi_gian_bieu[] += {nhan: "vận Ất Dậu", muc_cach_1, muc_cach_2, hai_cach_khac}` (`cung` = can chi của vận),
+`chuong[nam_nay].nam_xem`. Thuật ngữ (thập thần, nhật chủ, dụng thần, can chi…) chỉ ở `can_cu`.
+
+**Mã kiểm chứng `ds.bt.<chương>.<…>`** (vd `ds.bt.tien_bac.tai_nang_than_yeu.vap`, `ds.bt.cuoc_doi.thuong_quan.thuan.hien_tai`):
+dùng tiền tố `ds.` để đi qua ràng buộc có sẵn của migration 0017 (loại `doi_song`, mã `^ds\.…`) — **không cần migration
+mới**; phái ghi kèm phiếu = `tu_binh` (web `PHAI_DOI_SONG`). Bảng tỉ lệ công khai dùng chung với Tử vi (mã khác tiền tố).
+
+### 6.5 KB `engine/app/kb/data/battu_doi_song_kb.json` (nháp AI, `source_id` tu_binh_chan_thuyen, `school_id` tu_binh)
+
+`nhat_chu` (10 can × hình tượng, chân dung, câu tự soi, manh / yeu / can_bang × {manh, de_vap, loi_khuyen}) · `noi_bat`
+(10 thập thần) · `cach` (11 cách: tên đời thường, ý, mặt trái, nghề, hỷ / kỵ theo nhóm) · `hanh` (5 hành: thừa / thiếu,
+màu, hướng, nghề, thói quen, phần cơ thể, nhịp, lời khuyên sức khoẻ) · `than_sat` (18 sao, lời đời thường) ·
+`tinh_huong.<mảng>.<mã>` ({tieu_de, loai, y, loi_khuyen}) · `phoi_ngau` (10, theo bản khí chi ngày) · `suc_khoe` ·
+`van` (10 thập thần của vận: chủ đề, nên làm khi thuận, dễ vấp, nên làm khi cần chủ động) · `thang` · `nam_quan_he` ·
+`tom_tat` · `cau_tu_soi`. Cụm "giọng AI" dùng CHUNG danh sách `cum_cam` của Tử vi. Test: không thuật ngữ ngoài
+`can_cu`, không cụm cấm / doạ, không tên bệnh, không lặp câu giữa các chương, hai lá khác hẳn ít câu chung (< 25%), không
+hộp nào xuất hiện ở > 70% lá golden (chặn câu ai đọc cũng đúng). Golden 15 lá: `fixtures/golden/battu_doi_song.json`.
+
+### 6.6 Web
+
+Trang `/bat-tu` dùng chung `components/luan-giai/BaoCaoDoiSong` (hộp nổi bật, "Vì sao nói vậy", kiểm chứng, lưu bài,
+khoá chương SAO-2) + `BieuDoBatTu.tsx` (thanh sức tự thân, 5 cột ngũ hành, dải đại vận hai cách — `motion`, tôn trọng
+prefers-reduced-motion, SVG nội dòng). Route `/api/battu/luan-giai` gửi `trong_so` + `ca_nhan` như Tử vi
+(`lib/hoc-tuvi.themHocLuanGiai`). E2E: `e2e/luan-giai-bat-tu.spec.ts` (fixture sinh từ engine thật).

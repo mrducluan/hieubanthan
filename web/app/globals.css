@@ -219,6 +219,13 @@
 .cham-muc { --muc: 170 180 214; background: rgb(var(--muc)); }
 :is(.chip-muc, .cham-muc)[data-muc="thuan"] { --muc: 111 211 181; }
 :is(.chip-muc, .cham-muc)[data-muc="can_chu_dong"] { --muc: 245 170 80; }
+/* BT-ĐS — màu ngũ hành cho biểu đồ năng lượng trong Luận giải Bát tự (ngoài khung lá số, cùng tông `.la-so-dem`). */
+.bd-hanh { --hanh: 170 180 214; }
+.bd-hanh[data-hanh="kim"] { --hanh: 214 211 230; }
+.bd-hanh[data-hanh="moc"] { --hanh: 111 211 160; }
+.bd-hanh[data-hanh="thuy"] { --hanh: 126 172 255; }
+.bd-hanh[data-hanh="hoa"] { --hanh: 242 128 104; }
+.bd-hanh[data-hanh="tho"] { --hanh: 233 196 106; }
 .la-so-giay .hop-nb[data-loai="cot_loi"] { --hop: 139 91 16; }
 .la-so-giay .hop-nb[data-loai="diem_manh"] { --hop: 27 116 58; }
 .la-so-giay .hop-nb[data-loai="luu_y"] { --hop: 150 80 10; }

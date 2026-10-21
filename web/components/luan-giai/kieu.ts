@@ -30,7 +30,20 @@ export interface Hop {
 export interface MocDaiHan {
   tu_tuoi: number; den_tuoi: number; nam_tu: number; nam_den: number; cung: string;
   chu_de: string; muc: Muc; mot_cau: string; hien_tai: boolean;
+  /** BT-ĐS: nhãn nhỏ thay "cung …" (vd "vận Ất Dậu") + mức theo từng cách đọc (dụng thần hai cách, không tự chọn). */
+  nhan?: string; muc_cach_1?: Muc; muc_cach_2?: Muc; hai_cach_khac?: boolean;
 }
+
+/** BT-ĐS chương "Năng lượng": điểm 5 hành (đã tính ở engine) + hành mỗi cách gợi ý bù — web chỉ VẼ. */
+export interface HanhBieuDo {
+  hanh: string; diem: number; ty_le: number; nhom: string; trang_thai: "thieu" | "thua" | "vua"; cach_1: boolean; cach_2: boolean;
+}
+export interface BieuDoNguHanh { hanh: HanhBieuDo[]; nhat_chu: string }
+export interface HaiCach {
+  cach_1: { ten: string; hanh: string[] }; cach_2: { ten: string; hanh: string[]; ma?: string }; chon: null;
+}
+/** BT-ĐS chương "Con người bạn": sức tự thân (tỉ lệ trợ lực + hai ngưỡng của thang điểm công bố). */
+export interface ThanDo { ti_le: number; vuong_tu: number; nhuoc_duoi: number; muc: "manh" | "yeu" | "can_bang"; nhan: string }
 
 export interface ChuongDoiSongMo {
   ma: string; tieu_de: string; khoa?: false;
@@ -39,6 +52,8 @@ export interface ChuongDoiSongMo {
   van_ai?: string; che_do?: string; thuat_ngu?: ThuatNgu[];
   /** Chương sức khoẻ: câu "không thay lời bác sĩ". */
   mien_tru?: string;
+  /** BT-ĐS: dữ liệu trực quan (chỉ có ở báo cáo Bát tự). */
+  bieu_do?: BieuDoNguHanh; hai_cach?: HaiCach; than_do?: ThanDo;
 }
 export interface ChuongKhoa { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem }
 

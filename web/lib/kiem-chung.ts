@@ -36,8 +36,16 @@ export function maNhip(t: { muc: string; ly_do: { ma: string }[] }): string {
 }
 
 /** LG-ĐS: mã hộp luận giải đời sống do engine dựng — `ds.{chương}.{…}` (vd `ds.su_nghiep.thien_co.sang.manh`),
- *  ≤ 60 ký tự, chữ thường/số/`_.+-`. Web không tự dựng mã này, chỉ chuyển nguyên văn. */
+ *  ≤ 60 ký tự, chữ thường/số/`_.+-`. Web không tự dựng mã này, chỉ chuyển nguyên văn. BT-ĐS: Bát tự dùng `ds.bt.{chương}.{…}`
+ *  (cùng loại `doi_song`, đi qua ràng buộc của migration 0017 — không cần migration mới). */
 export const MA_DOI_SONG = /^ds\.[a-z0-9_]+(\.[a-z0-9_+-]+)+$/;
+/** Phái ghi kèm phiếu kiểm chứng theo mô-đun của báo cáo đời sống. */
+export const PHAI_DOI_SONG: Record<string, string> = { tuvi: "nam_phai_viet", battu: "tu_binh" };
+export const TEN_CHUONG_BT: Record<string, string> = {
+  tong_quan: "Con người bạn", ngu_hanh: "Năng lượng (ngũ hành)", cuoc_doi: "Các giai đoạn cuộc đời", su_nghiep: "Công việc",
+  tien_bac: "Tiền bạc", tinh_cam: "Tình yêu & hôn nhân", gia_dinh: "Gia đình", hoc_tap: "Học & nghĩ",
+  suc_khoe: "Sức khoẻ", quan_he: "Bạn bè & bên ngoài", nam_nay: "Năm nay & tháng tới", loi_khuyen: "Lời khuyên",
+};
 export const TEN_CHUONG_DS: Record<string, string> = {
   tong_quan: "Con người bạn", cuoc_doi: "Các giai đoạn cuộc đời", su_nghiep: "Công việc", tien_bac: "Tiền bạc",
   tinh_cam: "Tình yêu & hôn nhân", gia_dinh: "Gia đình", suc_khoe: "Sức khoẻ", quan_he: "Bạn bè & bên ngoài",
@@ -48,11 +56,19 @@ const TEN_PHAN_DS: Record<string, string> = {
   sang: "sáng", ham: "hãm", manh: "điểm mạnh", de_vap: "dễ vấp", loi_khuyen: "lời khuyên", luu_y: "lưu ý",
   diem_manh: "điểm mạnh", thoi_diem: "thời điểm", thuan: "thuận lợi", can_bang: "cân bằng", can_chu_dong: "cần chủ động",
   loc: "Lộc", quyen: "Quyền", khoa: "Khoa", ky: "Kỵ", cat: "cát tinh", sat: "sát tinh", dao_hoa: "đào hoa",
+  // BT-ĐS (ds.bt.*)
+  vap: "dễ vấp", khuyen: "lời khuyên", nc: "nhật chủ", noi_bat: "thập thần nổi nhất", cach: "cách cục", ts: "thần sát",
+  yeu: "thân yếu", cach1: "cách 1 (cân sức)", cach2: "cách 2 (tháng sinh)", hai_cach: "hai cách trùng", thua: "thừa",
+  thieu: "thiếu", van: "đại vận", nam: "năm nay", hien_tai: "đang đi", tiep: "kế tiếp", phoi: "cung phối ngẫu",
 };
 
 /** Nhãn đọc được cho người biên tập ở /quan-tri (giải mã ngược, không cần engine). */
 export function nhanMau(loai: string, mau: string): string {
   const p = mau.split(".");
+  if (loai === "doi_song" && p[1] === "bt") {
+    const [, , chuong, ...con] = p;
+    return ["Bát tự", TEN_CHUONG_BT[chuong ?? ""] ?? chuong, ...con.map((x) => TEN_PHAN_DS[x] ?? x.replace(/_/g, " "))].join(" · ");
+  }
   if (loai === "doi_song") {
     const [, chuong, ...con] = p;
     return [TEN_CHUONG_DS[chuong ?? ""] ?? chuong, ...con.map((x) => TEN_PHAN_DS[x] ?? x.replace(/_/g, " "))].join(" · ");

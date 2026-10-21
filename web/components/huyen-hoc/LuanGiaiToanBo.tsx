@@ -2,9 +2,9 @@
 // LG — "Luận giải toàn bộ": báo cáo theo chương do engine ghép từ kho tri thức (cùng bộ lọc an toàn
 // như hỏi đáp). Miễn phí thử nghiệm; khi bật công tắc thu Sao (SAO-LG/SAO-2): đọc miễn phí chương đầu, các chương sau
 // hiện tiêu đề + điểm nhấn đã tính + câu hỏi mở, mở toàn bộ bằng Sao (trừ ở máy chủ, xem lại trong ngày không mất thêm).
-// Không lưu ở máy chủ — trừ khi người dùng đã đăng nhập tự bấm "Lưu vào tài khoản" (LG-ĐS, chỉ báo cáo đời sống Tử vi).
-// Báo cáo `phien_ban: "doi_song_1"` (Tử vi, docs/LUAN-GIAI-DOI-SONG.md) hiện bằng components/luan-giai/BaoCaoDoiSong;
-// báo cáo khác (Bát tự, Bản đồ con số thần số) giữ cách hiện cũ bên dưới.
+// Không lưu ở máy chủ — trừ khi người dùng đã đăng nhập tự bấm "Lưu vào tài khoản" (LG-ĐS, báo cáo đời sống).
+// Báo cáo `phien_ban: "doi_song_1"` (Tử vi LG-ĐS + Bát tự BT-ĐS, docs/LUAN-GIAI-DOI-SONG.md) hiện bằng
+// components/luan-giai/BaoCaoDoiSong; báo cáo khác (Bản đồ con số thần số) giữ cách hiện cũ bên dưới.
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BookOpenText, Clock, Gift, LockKeyhole, Printer, Sparkles } from "lucide-react";
@@ -20,6 +20,8 @@ import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/
 import { BaoCaoDoiSongView } from "@/components/luan-giai/BaoCaoDoiSong";
 import { LuuBaiLuan } from "@/components/luan-giai/LuuBaiLuan";
 import { laBaoCaoDoiSong } from "@/components/luan-giai/kieu";
+
+const TEN_MO_DUN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự" };
 
 type ChuongMo = { ma: string; tieu_de: string; doan: string[]; van_ai?: string; che_do?: string; thuat_ngu?: ThuatNgu[]; khoa?: false };
 type ChuongKhoa = { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem };
@@ -133,7 +135,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
         phanKhoa={bc.so_khoa ? <PhanKhoa bc={bc as unknown as BaoCao} dang={dang} loi={loi} moKhoa={() => void tai(true)} /> : null}
         chanTrang={!bc.so_khoa && banLuu ? (
           <div className="mt-6">
-            <LuuBaiLuan moDun={bc.mo_dun} tieuDe={`Luận giải Tử vi — ${hs?.ho_ten ?? "hồ sơ của bạn"}`} noiDung={banLuu}
+            <LuuBaiLuan moDun={bc.mo_dun} tieuDe={`Luận giải ${TEN_MO_DUN[bc.mo_dun] ?? "Tử vi"} — ${hs?.ho_ten ?? "hồ sơ của bạn"}`} noiDung={banLuu}
               dangNhap={bc.phi?.dang_nhap} />
           </div>
         ) : null}
