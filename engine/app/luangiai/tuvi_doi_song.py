@@ -441,6 +441,10 @@ def _chuong_cung(ma: str, cung: list[str], cc: dict, hoc: tuple, da_dung: set[st
     return _chuong(ma, muc, tom, hop, [tom, _doan_noi(hop)], can_cu, ts)
 
 
+TRONG_PHA_CACH = 0.9        # cách cục tốt bị phá: bằng nửa cách nguyên vẹn (1,8)
+PHA_CACH_LOI = "Nét này dễ bị giảm khi gặp áp lực, nên bạn cần tự chủ nhiều hơn để giữ được nó."
+
+
 def _chuong_tong_quan(ls: dict, cc: dict, hoc: tuple, da_dung: set[str]) -> dict:
     them = []
     than = next((c for c in ls["cung"] if c["la_than"]), None)
@@ -463,6 +467,12 @@ def _chuong_tong_quan(ls: dict, cc: dict, hoc: tuple, da_dung: set[str]) -> dict
             them.append(_hop("luu_y", _tieu_de(phan[0], "Điểm cần để ý ở con người bạn"), phan[0].strip() + ".",
                              [cu], _ma("ds", "tong_quan", "cach", slug(c["ma"]), "vap"), 1.8,
                              huong=_hoa_dau(phan[1].strip()) if len(phan) > 1 else None))
+        elif c.get("sat_hoi"):
+            # Phá cách: nét tốt của cách bị giảm khi sát tinh hội về → hạ trọng số, không lên "Điều quan trọng nhất"
+            # như điểm mạnh, lời luôn kèm "cần tự chủ nhiều hơn".
+            them.append(_hop("diem_manh", _tieu_de(y, "Nét nổi bật của bạn"),
+                             f"{y.rstrip('. ')}. {PHA_CACH_LOI}", [cu],
+                             _ma("ds", "tong_quan", "cach", slug(c["ma"]), "pha"), TRONG_PHA_CACH, _pha_cach=True))
         else:
             them.append(_hop("diem_manh", _tieu_de(y, "Nét nổi bật của bạn"), y, [cu],
                              _ma("ds", "tong_quan", "cach", slug(c["ma"]), "manh"), 1.8))
@@ -775,7 +785,8 @@ def _chuong_loi_khuyen(ds_chuong: list[dict], muc: str, hoc: tuple) -> dict:
         ra, mang, huong = [], set(), set()
 
         def duoc(h: dict) -> bool:          # không lặp cùng một việc nên làm (vd câu Tuần/Triệt ở hai chương)
-            return h["loai"] == loai and h not in ra and h.get("huong_xu_ly") not in huong
+            return (h["loai"] == loai and h not in ra and h.get("huong_xu_ly") not in huong
+                    and not h.get("_pha_cach"))         # cách bị phá không tính là "điểm mạnh nên dùng"
 
         for h in nguon:                         # mỗi mảng đời một ý trước, đủ 3 thì dừng
             if duoc(h) and _linh_vuc(h) not in mang:
@@ -823,7 +834,8 @@ def chon_cot_loi(ds_chuong: list[dict]) -> list[dict]:
     """3–5 hộp quan trọng nhất cả bài: |trọng số| lớn nhất, ưu tiên Mệnh/Quan Lộc/Tài Bạch/Phu Thê; luôn có ít nhất
     một điểm mạnh và một lưu ý (kèm hướng xử lý). Bỏ hộp đang xem lại và hộp người này đã bấm "chưa đúng"."""
     nguon = [h for c in ds_chuong if c["ma"] in CHUONG_COT_LOI for h in c["hop"]
-             if h["loai"] in ("diem_manh", "luu_y") and not h.get("_chua_dung") and not h.get("dang_xem_lai")]
+             if h["loai"] in ("diem_manh", "luu_y") and not h.get("_chua_dung") and not h.get("dang_xem_lai")
+             and not h.get("_pha_cach")]
 
     def diem(h: dict) -> float:
         return h["_w"] + (0.6 if h.get("_cung") in CUNG_UU_TIEN else 0)

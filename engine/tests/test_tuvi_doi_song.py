@@ -417,3 +417,32 @@ def test_nhip_3_thang_theo_phai_nguoi_dung():
         ra[phai] = next(x for x in nn["can_cu"] if x.startswith("Phái lưu nguyệt: "))
     assert ra[None] == ra["dau_quan_thai_tue"] and ln.MAC_DINH == "dau_quan_thai_tue"     # None → phái mặc định
     assert ra["dia_chi_thang"] != ra["dau_quan_thai_tue"]
+
+
+# ------------------------------------------------------------------ QC: phá cách + lời "bạn đời thường"
+PHA = {"ngay": dt.date(1951, 5, 17), "ti": 5, "gioi_tinh": "nam"}       # Cơ Nguyệt Đồng Lương, sát tinh hội về
+
+
+def test_pha_cach_ha_trong_so_khong_vao_cot_loi():
+    b = toan_bo.tuvi(PHA, ngay_xem=XEM)
+    tq = next(c for c in b["chuong"] if c["ma"] == "tong_quan")
+    pha = [h for h in tq["hop"] if h["ma_mau"].startswith("ds.tong_quan.cach.") and h["ma_mau"].endswith(".pha")]
+    assert pha, "lá có cách tốt bị sát tinh hội về phải ra hộp phá cách"
+    for h in pha:
+        assert "cần tự chủ nhiều hơn" in h["noi_dung"]
+        assert any("phá cách" in c for c in h["can_cu"])
+    ma_pha = {h["ma_mau"] for h in pha}
+    assert not ma_pha & {h["ma_mau"] for h in b["cot_loi"]}
+    lk = next(c for c in b["chuong"] if c["ma"] == "loi_khuyen")
+    ba_manh = next((h for h in lk["hop"] if h["ma_mau"] == "ds.loi_khuyen.tong_hop.ba.manh"), None)
+    assert not ba_manh or not any(c.startswith("Cách cục") and "phá cách" in c for c in ba_manh["can_cu"])
+
+
+def test_pha_cach_trong_so_thap_hon_cach_nguyen():
+    assert ds.TRONG_PHA_CACH < 1.8 and "cần tự chủ nhiều hơn" in ds.PHA_CACH_LOI
+
+
+def test_kb_khong_co_cum_ban_doi_thuong():
+    """"người bạn đời thường mang lại…" đọc nhầm thành "bạn đời bình thường" → viết lại."""
+    raw = (Path(__file__).parents[1] / "app" / "kb" / "data" / "tuvi_doi_song_kb.json").read_text("utf-8")
+    assert "bạn đời thường" not in raw.lower()

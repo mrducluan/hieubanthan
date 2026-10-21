@@ -112,7 +112,7 @@ reset role;
 select 'bảng vectơ không có cột user_id' t, not exists (select 1 from information_schema.columns
     where table_name = 'cau_hoi_vec' and column_name in ('user_id', 'ip'));
 select 'anon / authenticated gọi được tim_y_dinh_gan?' t, has_function_privilege('anon', 'tim_y_dinh_gan(text,jsonb,text,real,integer)', 'execute')
-    || '/' || has_function_privilege('authenticated', 'xac_nhan_y_dinh(text,text,text,jsonb,text,text)', 'execute');
+    || '/' || has_function_privilege('authenticated', 'xac_nhan_y_dinh(text,text,text,jsonb,text,text,boolean)', 'execute');
 select 'chỉ mục HNSW cosine có' t, indexdef ~ 'hnsw.*vector_cosine_ops' from pg_indexes where indexname = 'cau_hoi_vec_hnsw';
 
 -- ---------------------------------------------------------------- quản trị

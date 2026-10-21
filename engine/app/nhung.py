@@ -32,29 +32,11 @@ TU_DEM = frozenset(
 _GIU_CHO = re.compile(r"\[[^\]]{1,12}\]")
 
 
-_HOA = r"[A-ZĐÀ-ỸÁÉÍÓÚÝ][\wÀ-ỹ]*"
-# "tên (là) Lan", "Mình là Hùng" (đầu câu / sau dấu câu), "chồng tôi tên Minh" — tên riêng viết hoa sau từ khoá.
-_TEN = re.compile(rf"(?:(?<=\btên )|(?<=\btên là ))(?:{_HOA})(?:\s+{_HOA}){{0,3}}"
-                  rf"|(?:(?:^|(?<=[,.!?;:]\s))(?:[Tt]ôi|[Mm]ình|[Ee]m|[Aa]nh|[Cc]hị|[Cc]on|[Cc]háu) là\s+)"
-                  rf"(?:{_HOA})(?:\s+{_HOA}){{0,3}}")
-_LIEN_KET = re.compile(r"(?i)\b(?:https?://)?(?:www\.)?[a-z0-9-]+\.(?:com|vn|net|org|me|io|co)\b\S*"
-                       r"|@[a-z0-9_.]{3,}")
-
-
 def loc_them(cau: str) -> str:
-    """Lọc bổ sung TRƯỚC khi nhúng / lưu kho vectơ (bộ lọc nhật ký chưa bắt): tên riêng sau "tên", "tôi là…",
-    liên kết mạng xã hội / web, @tài khoản. Không bỏ tên sao / tên cung (Tử vi)."""
-    from app.kb import tuvi_kb
-    giu = set(tuvi_kb.ten_chinh_tinh()) | set(tuvi_kb.ten_cung())
-
-    def thay(m: re.Match) -> str:
-        ten = m.group(0)
-        dau = re.match(r"^(?:\S+ là\s+)", ten)
-        tien = dau.group(0) if dau else ""
-        than = ten[len(tien):]
-        return m.group(0) if any(than.startswith(x) for x in giu) else f"{tien}[tên]"
-
-    return _LIEN_KET.sub("[liên kết]", _TEN.sub(thay, cau or ""))
+    """Lọc tên riêng sau "tên", "tôi là…", liên kết mạng xã hội / web, @tài khoản TRƯỚC khi nhúng / lưu kho vectơ.
+    Logic chung ở `nhat_ky.loc_ten_lien_ket` (nhật ký hỏi dùng cùng bộ lọc — một nguồn); giữ tên sao / cung / quẻ."""
+    from app import nhat_ky  # noqa: PLC0415
+    return nhat_ky.loc_ten_lien_ket(cau or "")
 
 
 def bo_dau(s: str) -> str:

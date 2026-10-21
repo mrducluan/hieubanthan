@@ -1,12 +1,19 @@
 // LG-ĐS (docs/LUAN-GIAI-DOI-SONG.md mục 2.3, 3, 5) — giao diện Luận giải Tử vi "đời sống": Điều quan trọng nhất, mục
 // lục, chip mức, dòng thời gian 12 đại hạn, "Vì sao nói vậy", kiểm chứng (POST /api/kiem-chung + "x% thấy đúng" khi
 // ≥ 30 phiếu), lưu bài vào tài khoản + trang bài đã lưu, xác nhận ý định hỏi đáp, điện thoại 360px, chương khoá SAO-2.
-// Báo cáo là fixture đúng hợp đồng (e2e/fixtures/luan-giai-doi-song.json); mọi route máy chủ mới giả bằng page.route.
+// Báo cáo là fixture SINH TỪ ENGINE THẬT (e2e/fixtures/luan-giai-doi-song.json, `_ghi_chu` nói rõ 3 chỗ sửa tay); mọi
+// route máy chủ mới giả bằng page.route. Mã mẫu / chữ lấy từ fixture, không viết cứng — engine đổi lời thì sinh lại.
 import { test, expect, type Page, type Request } from "@playwright/test";
 import { HO_SO_MAU, napHoSo, hoi } from "./_hoso";
 import FX from "./fixtures/luan-giai-doi-song.json";
 
+const ngayDuong = (iso?: string) => { if (!iso) return ""; const [y, m, d] = iso.split("-"); return `${Number(d)}/${Number(m)}/${y}`; };
+
 const BC = FX.bao_cao;
+type HopFx = { ma_mau?: string; dang_xem_lai?: boolean; tu?: string; den?: string; tu_tuoi?: number; den_tuoi?: number; loai: string };
+const chuong = (ma: string) => BC.chuong.find((c) => c.ma === ma)!;
+const hopHien = (ma: string) => (chuong(ma).hop as HopFx[]).filter((h) => !h.dang_xem_lai);
+const COT = BC.cot_loi.map((h) => (h as HopFx).ma_mau);
 
 async function moBaoCao(page: Page, opts: { bc?: object; tuyChon?: object | number; tyLe?: object } = {}) {
   const goi: Record<string, Request[]> = { tyLe: [], kiemChung: [], luu: [], tuyChon: [] };
@@ -48,22 +55,32 @@ test("báo cáo đời sống: cốt lõi, mục lục, chip mức, dòng thời
 
   // Chip mức đời thường, không có mức "xấu".
   const sn = page.getByTestId("lg-chuong-su_nghiep");
-  await expect(sn.getByTestId("chip-muc").first()).toHaveText("Thuận lợi");
-  await expect(page.getByTestId("lg-chuong-tinh_cam").getByTestId("chip-muc").first()).toHaveText("Cần chủ động");
-  await expect(sn.getByTestId("tom-tat")).toContainText("Nói ngắn");
-  await expect(sn.getByTestId("cau-tu-soi")).toContainText(BC.chuong[2]!.cau_tu_soi);
-  // Hộp đủ 5 loại nhãn; hộp `dang_xem_lai` không hiện.
-  for (const n of ["Điểm mạnh", "Nên để ý", "Lời khuyên", "Thời điểm"]) await expect(sn).toContainText(n);
+  const NHAN: Record<string, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần chủ động" };
+  for (const c of BC.chuong) {
+    await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc").first()).toHaveText(NHAN[c.muc]!);
+  }
+  await expect(sn.getByTestId("tom-tat")).toContainText(chuong("su_nghiep").tom_tat);
+  await expect(sn.getByTestId("cau-tu-soi")).toContainText(chuong("su_nghiep").cau_tu_soi);
+  // Hộp đủ 5 loại nhãn (trong cả bài); hộp `dang_xem_lai` không hiện.
+  for (const n of ["Điểm mạnh", "Nên để ý", "Lời khuyên", "Thời điểm"]) await expect(bc).toContainText(n);
+  await expect(sn.getByTestId("hop-noi-bat")).toHaveCount(hopHien("su_nghiep").length);
   await expect(bc).not.toContainText("Hộp đang được xem lại");
   const chu = (await bc.innerText()).toLowerCase();
   for (const cam of ["xấu", "hành trình", "năng lượng vũ trụ", "tai hoạ"]) expect(chu).not.toContain(cam);
 
-  // Hộp thời điểm có khoảng thời gian + mức; chương sức khoẻ có câu không thay lời bác sĩ.
-  await expect(sn.getByTestId("hop-thoi-gian")).toContainText("tháng 6 âm lịch – tháng 8 âm lịch");
-  await expect(page.getByTestId("lg-chuong-suc_khoe").getByTestId("mien-tru")).toContainText("không thay lời bác sĩ");
-  // Dòng thời gian: 12 mốc, đúng 1 "Bạn đang ở đây" ở giai đoạn hiện tại.
+  // Hộp thời điểm có khoảng thời gian (tu–den, hoặc tuổi) + mức; chương sức khoẻ có câu không thay lời bác sĩ.
+  const thang = hopHien("nam_nay").find((h) => h.loai === "thoi_diem" && h.tu && h.den)!;
+  await expect(page.getByTestId("lg-chuong-nam_nay").getByTestId("hop-thoi-gian")).toContainText([`${ngayDuong(thang.tu)} – ${ngayDuong(thang.den)} dương lịch`]);
+  const dh = hopHien("cuoc_doi").find((h) => typeof h.tu_tuoi === "number")!;
+  await expect(page.getByTestId("lg-chuong-cuoc_doi").getByTestId("hop-thoi-gian").first()).toContainText(`${dh.tu_tuoi}–${dh.den_tuoi} tuổi`);
+  // Engine đặt câu miễn trừ ngay trong `doan` → web không lặp khối "mien-tru" riêng (chỉ hiện khi doan thiếu câu).
+  const sk = page.getByTestId("lg-chuong-suc_khoe");
+  await expect(sk).toContainText("không thay lời bác sĩ");
+  await expect(sk.getByTestId("mien-tru")).toHaveCount(chuong("suc_khoe").doan.some((d) => d.includes("bác sĩ")) ? 0 : 1);
+  // Dòng thời gian: ≤ 9 mốc (engine bỏ giai đoạn bắt đầu sau 86 tuổi, trừ giai đoạn đang đi), đúng 1 "Bạn đang ở đây".
   const tg = page.getByTestId("dong-thoi-gian");
-  await expect(tg.getByTestId("moc-dai-han")).toHaveCount(12);
+  expect(BC.thoi_gian_bieu.length).toBeLessThanOrEqual(9);
+  await expect(tg.getByTestId("moc-dai-han")).toHaveCount(BC.thoi_gian_bieu.length);
   await expect(page.getByText("Bạn đang ở đây")).toHaveCount(1);
   const ht = BC.thoi_gian_bieu.find((m) => m.hien_tai)!;
   const mocHt = tg.locator("[aria-current=step]");
@@ -82,13 +99,13 @@ test("báo cáo đời sống: cốt lõi, mục lục, chip mức, dòng thời
   await expect(hop0.getByTestId("can-cu")).toBeHidden();
   await nut.click();
   await expect(nut).toHaveAttribute("aria-expanded", "true");
-  await expect(hop0.getByTestId("can-cu")).toContainText(BC.cot_loi[0]!.can_cu[1]!);
+  await expect(hop0.getByTestId("can-cu")).toContainText(BC.cot_loi[0]!.can_cu.at(-1)!);
   await nut.click();
   await expect(hop0.getByTestId("can-cu")).toBeHidden();
   // Căn cứ của chương cũng thu gọn.
   const vsChuong = sn.getByTestId("vi-sao").last();
   await vsChuong.getByRole("button").click();
-  await expect(vsChuong.getByTestId("can-cu")).toContainText("Tuần đóng cung Quan Lộc");
+  await expect(vsChuong.getByTestId("can-cu")).toContainText(chuong("su_nghiep").can_cu[0]!);
 });
 
 test("kiểm chứng: tỉ lệ công khai ≥ 30 phiếu, dưới 30 chỉ hỏi; bấm gửi POST /api/kiem-chung (lỗi im lặng)", async ({ page }) => {
@@ -107,26 +124,30 @@ test("kiểm chứng: tỉ lệ công khai ≥ 30 phiếu, dưới 30 chỉ hỏ
 
   expect(goi.tyLe!.length).toBeGreaterThanOrEqual(1);
   const maBai = new URL(goi.tyLe!.at(-1)!.url()).searchParams.get("mau")!.split(",");
-  for (const m of ["ds.cot_loi.tu_quyet", "ds.cot_loi.tien_ke_hoach", "ds.cot_loi.noi_thang", "ds.su_nghiep.thien_co.sang.manh", "ds.loi_khuyen.hoa_ky.de_vap"]) expect(maBai).toContain(m);
+  for (const m of [COT[0], COT[1], COT[2], hopHien("su_nghiep")[1]!.ma_mau, hopHien("loi_khuyen")[0]!.ma_mau]) expect(maBai).toContain(m);
+  expect(COT[3]).toBeUndefined();                     // cot_loi[3] không mã (ca kiểm trên)
   expect(maBai).not.toContain("ds.su_nghiep.an");   // hộp đang xem lại không xin tỉ lệ
   expect(new Set(goi.tyLe!.map((r) => r.url())).size).toBe(1);
 
   await cot.nth(2).getByRole("button", { name: "Đúng với mình" }).click();
   await expect(cot.nth(2).getByRole("status")).toContainText("Cảm ơn");
   await expect.poll(() => goi.kiemChung!.length).toBe(1);
-  expect(goi.kiemChung![0]!.postDataJSON()).toEqual({ loai: "doi_song", mau: "ds.cot_loi.noi_thang", phai: "nam_phai_viet", ket_qua: "dung" });
+  expect(goi.kiemChung![0]!.postDataJSON()).toEqual({ loai: "doi_song", mau: COT[2], phai: "nam_phai_viet", ket_qua: "dung" });
   // Bấm thẻ đủ số: cảm ơn + vẫn hiện tỉ lệ.
   await cot.nth(0).getByRole("button", { name: "Chưa đúng" }).click();
   await expect(cot.nth(0).getByRole("status")).toContainText("Cảm ơn");
   await expect(cot.nth(0).getByTestId("ty-le-dung")).toContainText("78%");
   // Hộp gốc trong chương dùng chung mã với hộp "Điều quan trọng nhất" → cũng đã trả lời, không hỏi lại.
-  await expect(page.getByTestId("lg-chuong-tong_quan").getByTestId("hop-noi-bat").first().getByRole("status")).toContainText("Cảm ơn");
+  const goc = BC.cot_loi[0]!.tu_chuong;
+  const viTri = hopHien(goc).findIndex((h) => h.ma_mau === COT[0]);
+  expect(viTri).toBeGreaterThanOrEqual(0);
+  await expect(page.getByTestId(`lg-chuong-${goc}`).getByTestId("hop-noi-bat").nth(viTri).getByRole("status")).toContainText("Cảm ơn");
   await expect.poll(() => goi.kiemChung!.length).toBe(2);
   // Máy chủ trả {ok:false} → không có thông báo lỗi nào.
   await expect(page.getByTestId("luan-giai-toan-bo").getByRole("alert")).toHaveCount(0);
   const sk = await page.evaluate(() => ((window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? [])
     .filter((e) => e.su_kien === "tuvi_kiem_chung"));
-  expect(sk[0]).toMatchObject({ loai: "doi_song", mau: "ds.cot_loi.noi_thang", ket_qua: "dung" });
+  expect(sk[0]).toMatchObject({ loai: "doi_song", mau: COT[2], ket_qua: "dung" });
 });
 
 test("lưu bài: nút khi đã đăng nhập, ô tự lưu không tích sẵn → trang bài đã lưu xem + xoá", async ({ page }) => {
@@ -217,7 +238,8 @@ test("SAO-2 với báo cáo đời sống: chương 1 đọc được, chương 
   const { thoi_gian_bieu: _tg, ...conLai } = BC;
   const xemTruoc = {
     ...conLai, so_khoa: sau.length, phi: { sao: 10, ly_do: "xem_truoc", khoa: true, dang_nhap: true, so_du: 20 },
-    cot_loi: BC.cot_loi.filter((h) => h.tu_chuong === dau!.ma),
+    // Lá mẫu không có hộp cốt lõi nào từ chương 1 → giả một hộp như vậy (ca rỗng ở test sau).
+    cot_loi: [{ ...BC.cot_loi[0]!, tu_chuong: dau!.ma }],
     chuong: [dau, ...sau.map((c) => ({ ma: c.ma, tieu_de: c.tieu_de, khoa: true, moi_xem: c.moi_xem }))],
   };
   await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));

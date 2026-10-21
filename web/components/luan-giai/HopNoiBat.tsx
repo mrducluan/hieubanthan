@@ -22,6 +22,12 @@ export const LOAI_HOP: Record<LoaiHop, { nhan: string; Icon: LucideIcon }> = {
 export const KiemChungBai = createContext<{ tyLe: BangTyLe; phai: string; tat?: boolean }>({ tyLe: {}, phai: "nam_phai_viet" });
 
 /** Nút "Vì sao nói vậy" + danh sách căn cứ thu gọn — dùng cho hộp và cho chương. */
+/** "2026-10-10" → "10/10/2026" (chuỗi khác dạng ISO giữ nguyên). */
+export function ngayDuong(iso: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  return m ? `${Number(m[3])}/${Number(m[2])}/${m[1]}` : iso;
+}
+
 export function ViSao({ canCu, thuatNgu, nho = false }: { canCu?: string[]; thuatNgu?: ThuatNgu[]; nho?: boolean }) {
   const [mo, setMo] = useState(false);
   const id = useId();
@@ -45,7 +51,7 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
   const { tyLe, phai, tat } = useContext(KiemChungBai);
   const { nhan, Icon } = LOAI_HOP[hop.loai] ?? LOAI_HOP.cot_loi;
   const idTieuDe = useId();
-  const khoang = hop.tu && hop.den ? `${hop.tu} – ${hop.den}`
+  const khoang = hop.tu && hop.den ? `${ngayDuong(hop.tu)} – ${ngayDuong(hop.den)} dương lịch`
     : typeof hop.tu_tuoi === "number" && typeof hop.den_tuoi === "number" ? `${hop.tu_tuoi}–${hop.den_tuoi} tuổi` : null;
   return (
     <section role="note" aria-labelledby={idTieuDe} data-loai={hop.loai} data-testid="hop-noi-bat"

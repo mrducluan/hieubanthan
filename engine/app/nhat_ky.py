@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import os
 import re
+import unicodedata
+from functools import lru_cache
 
 import httpx
 
@@ -21,15 +23,65 @@ from app.config import ENGINE_VERSION
 _NGAY = re.compile(r"(?<!\d)\d{1,2}\s*[/\-.]\s*\d{1,2}\s*[/\-.]\s*\d{2,4}(?!\d)")
 _DT = re.compile(r"(?<!\d)(\+?84|0)\d{8,10}(?!\d)")
 _EMAIL = re.compile(r"\S+@\S+\.\S+")
+# Chữ HOA Latin thật (gồm chữ Việt có dấu). Dải "À-Ỹ" cũ chứa cả chữ thường có dấu ("ở", "ổn") → lọc nhầm câu thường.
+_HOA_CHU = "".join(c for c in map(chr, range(0x41, 0x1EFA))
+                   if c.isupper() and unicodedata.name(c, "").startswith("LATIN"))
+_HOA = rf"[{re.escape(_HOA_CHU)}]\w*"
 # 2–4 từ viết hoa liên tiếp KHÔNG ở đầu câu → nghi là họ tên riêng.
-_TEN = re.compile(r"(?<=[^\s.?!]\s)((?:[A-ZĐÀ-Ỹ][\wÀ-ỹ]*\s){1,3}[A-ZĐÀ-Ỹ][\wÀ-ỹ]*)")
+_TEN = re.compile(rf"(?<=[^\s.?!]\s)((?:{_HOA}\s){{1,3}}{_HOA})")
+# Tên riêng ngay sau từ khoá: "tên (là) Lan", "tôi / mình / em … là Hùng" — bắt cả tên MỘT chữ.
+_TEN_SAU = re.compile(rf"(\b(?:[Tt]ên(?: là|:)?|(?:[Tt]ôi|[Mm]ình|[Ee]m|[Aa]nh|[Cc]hị|[Cc]on|[Cc]háu) là) )"
+                      rf"({_HOA}(?: {_HOA}){{0,3}})")
+# Liên kết web / mạng xã hội và @tài khoản (sau khi đã thay email).
+_LIEN_KET = re.compile(r"(?i)\b(?:https?://)?(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|vn|net|org|me|io|co|ly|gg)"
+                       r"\b\S*|(?<![\w@])@[a-z0-9_.]{3,}")
+_THEM_GIU = ("Tử Vi", "Kinh Dịch", "Bát Tự", "Phong Thuỷ", "Thần Số", "Mai Hoa", "Lưu Niên", "Đại Hạn", "Tiểu Hạn",
+             "Hoá Lộc", "Hoá Quyền", "Hoá Khoa", "Hoá Kỵ", "Lộc", "Quyền", "Khoa", "Kỵ", "Thân", "Tuần", "Triệt",
+             "Vô Chính Diệu", "Lai Nhân", "Bát Trạch", "Huyền Không", "Pitago", "Chaldea", "Can", "Chi")
+
+
+def _bo_dau(s: str) -> str:
+    s = "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
+    return s.replace("đ", "d").replace("Đ", "D").lower()
+
+
+@lru_cache(maxsize=1)
+def _thuat_ngu() -> frozenset[str]:
+    """Tên sao / cung / quẻ / thập thần (đã bỏ dấu) — viết hoa nhưng KHÔNG phải tên người, không lọc."""
+    from app.kb import battu_kb, kinhdich_kb, tuvi_kb  # noqa: PLC0415 — kb không import nhat_ky, chỉ tránh nạp sớm
+    ten = [*tuvi_kb.ten_chinh_tinh(), *tuvi_kb.ten_phu_tinh(), *tuvi_kb.ten_cung(), *battu_kb.ten_thap_than(),
+           *kinhdich_kb.ten_que().values(), *_THEM_GIU]
+    return frozenset(_bo_dau(t) for t in ten)
+
+
+def _la_thuat_ngu(cum: str, toi_thieu_tu: int = 1) -> bool:
+    """Cả cụm ghép trọn từ thuật ngữ đã biết (khớp dài nhất trước)? Tên một chữ sau "tên / tôi là" phải ≥ 2 chữ
+    mới giữ ("Mình là Khoa" vẫn lọc — "Khoa" vừa là tên sao vừa là tên người)."""
+    tu, tn, i = _bo_dau(cum).split(), _thuat_ngu(), 0
+    if len(tu) < toi_thieu_tu:
+        return False
+    while i < len(tu):
+        for n in range(min(4, len(tu) - i), 0, -1):
+            if " ".join(tu[i:i + n]) in tn:
+                i += n
+                break
+        else:
+            return False
+    return True
+
+
+def loc_ten_lien_ket(s: str) -> str:
+    """Bỏ liên kết / @tài khoản, tên sau "tên…", "tôi là…", và cụm 2–4 chữ hoa giữa câu (trừ tên sao, cung, quẻ)."""
+    s = _LIEN_KET.sub("[liên kết]", s)
+    s = _TEN_SAU.sub(lambda m: m.group(0) if _la_thuat_ngu(m.group(2), 2) else f"{m.group(1)}[tên]", s)
+    return _TEN.sub(lambda m: m.group(0) if _la_thuat_ngu(m.group(0)) else "[tên]", s)
 
 
 def loc_cau_hoi(s: str) -> str:
     s = _EMAIL.sub("[email]", s)
     s = _NGAY.sub("[ngày]", s)
     s = _DT.sub("[sđt]", s)
-    return _TEN.sub("[tên]", s)
+    return loc_ten_lien_ket(s)
 
 
 def bat() -> bool:
