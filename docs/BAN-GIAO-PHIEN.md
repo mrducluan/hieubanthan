@@ -19,8 +19,8 @@ Claude không giữ ký ức riêng ngoài repo. Toàn bộ những gì Claude c
 
 ## 2. Trạng thái code (2026-10-21)
 
-- `main` mới nhất: **#103 TS-V3c** (bỏ Qabalah, mặc định "Rút gọn con số", thẻ kiểm chứng, gói Sao "Bản đồ con số").
-  Trước đó: #102 TV-V2b, #101 TS-V3, #100 TV-V2.
+- `main` mới nhất: **#105 LG-ĐS** (luận giải Tử vi đời sống 12 chương + tầng HỌC Tử vi GĐ1–GĐ2 có pgvector, hiện
+  "x% thấy đúng", lưu bài luận — `docs/LUAN-GIAI-DOI-SONG.md`). Trước đó: #103 TS-V3c, #102 TV-V2b, #101 TS-V3, #100 TV-V2.
 - Không có thay đổi chưa commit nào đang dở.
 - **PR còn mở duy nhất:** [mrducluan/hieubanthan#98](https://github.com/mrducluan/hieubanthan/pull/98) (draft,
   nhánh `claude/determined-curie-v9grwi`) — sửa nút "Đồng bộ ngay" của CMS báo 401: bí mật webhook CMS ↔ web bỏ
@@ -32,7 +32,8 @@ Claude không giữ ký ức riêng ngoài repo. Toàn bộ những gì Claude c
 
 Ưu tiên cao:
 1. **Chạy migration Supabase còn chờ:** `0011_quan_tri_2`, `0012_thanh_toan` (sau khi bật tài khoản), `0013_sao_2`,
-   `0014_nhiem_vu`, `0015_do_tin_gio_unknown`, `0016_thanso_hoc` (kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`).
+   `0014_nhiem_vu`, `0015_do_tin_gio_unknown`, `0016_thanso_hoc`, `0017_tuvi_hoc` (bật extension **vector** trước;
+   sau đó `/quan-tri/hoc` → "Dựng kho vectơ"). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`.
 2. **SEC-1:** mở `https://hieubanthan-engine-sg.onrender.com/health` → phải `"khoa_engine": true`.
 3. **Render engine:** vùng Singapore + gói Starter; sửa lỗi "Dockerfile: not a directory" theo `docs/TRIEN-KHAI.md` mục 1b.
 4. **GitHub ruleset** của `main`: bỏ "Require approvals" hoặc thêm bypass để Claude tự merge khi CI xanh.
@@ -48,7 +49,8 @@ M1–M7, OpenRouter + workflow llm-55 (mục L), UptimeRobot.
   nhắc email/Web Push.
 - Khâu 4: thẻ chia sẻ "tuổi xông đất nhà mình"; thẻ theo dịp (Tết, sinh nhật); thưởng mời gắn lần nạp đầu.
 - Khâu 5: gói "Năm cá nhân" PDF; lộ trình chuyên gia CG-2…CG-9 (CG-1 còn là ĐỀ XUẤT chờ chốt).
-- Tầng HỌC Tử vi GĐ1 (bảng đếm 0017) và pgvector GĐ2: **chờ chủ dự án duyệt theo ngưỡng** — không tự làm.
+- Tầng HỌC Tử vi GĐ1–GĐ2 + pgvector: **đã làm ở #105** (chủ dự án duyệt 2026-10-21). Còn chờ anh quyết: Mệnh vô chính
+  diệu gặp Tuần/Triệt giữ "việc đến chậm" hay đổi theo Nam phái (mục LG-ĐS trong `VIEC-CUA-ANH.md`).
 
 Mọi việc mới: hỏi trước nếu thêm dependency, đổi schema DB, đổi stack, hay refactor ngoài phạm vi (xem "Cấm tuyệt đối"
 trong `CLAUDE.md`). Đổi kết quả tính toán = tăng `ENGINE_VERSION` (hiện 0.1.4) + golden mới.
