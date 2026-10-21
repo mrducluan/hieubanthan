@@ -9,13 +9,12 @@ const TRANG: [string, RegExp][] = [
   ["/lien-he", /Liên hệ/],
 ];
 
-test("chân trang: 4 cột liên kết, cam kết dữ liệu, đường dây khẩn cấp; mọi liên kết pháp lý mở được", async ({ page }) => {
+test("chân trang: 4 cột liên kết, cam kết dữ liệu; mọi liên kết pháp lý mở được", async ({ page }) => {
   await page.goto("/");
   const ct = page.getByTestId("chan-trang");
   await expect(ct).toHaveCount(1); // chờ bản CMS stream thay khung chờ (lúc thay có 2 footer)
   for (const cot of ["Khám phá", "Kiến thức", "Về chúng tôi", "Pháp lý"]) await expect(ct).toContainText(cot);
   await expect(ct).toContainText("Hồ sơ mặc định chỉ lưu trên máy bạn");
-  await expect(ct).toContainText("115");
   await expect(ct).toContainText(`© ${new Date().getFullYear()} Hiểu Bản Thân`);
   // Env rỗng → dùng thông tin chủ dự án đã công bố (tên đơn vị + email); mục chưa có thì ẩn, không hiện "đang cập nhật".
   await expect(ct.getByTestId("thong-tin-van-hanh")).toContainText("Hieu Ban Co Ltd");
