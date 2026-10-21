@@ -12,8 +12,12 @@ Next.js 16 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth,
 3. RULES: ghép luận theo priority đại hạn > lưu niên > tiểu hạn, config Nguyễn Phát Lộc; nhận diện ý định (luật tất
    định + ma trận nỗi đau), giải đồ thị liên phái, dựng gói ngữ cảnh (`tong_hop.ngu_canh`).
 4. NARRATIVE: LLM chỉ diễn đạt gói ngữ cảnh từ tầng 1-3 (kèm quy tắc diễn đạt trong KB), cấm thêm dữ kiện ngoài input
-5. HỌC ("bộ não thứ hai"): Postgres lưu góp ý đúng/chưa đúng ẩn danh (chữ ký số), cụm bất thường, ký ức người dùng
-   (opt-in, RLS) → **người duyệt** sửa KB qua PR. Không bao giờ tự bật luật / tự sửa KB. Engine vẫn không chạm DB.
+5. HỌC ("bộ não thứ hai"): Postgres lưu góp ý đúng/chưa đúng (chữ ký số / mã mẫu), cụm bất thường, ký ức người dùng
+   (opt-in, RLS), bài luận người dùng lưu, kho vectơ ý định (pgvector) → **người duyệt** sửa KB qua PR. **Tự học được phép
+   (LG-ĐS, chủ dự án duyệt 2026-10-21)**: máy tự xếp lại / hạ hộp luận theo tỉ lệ kiểm chứng, hạ hộp chính người đó bấm
+   "chưa đúng", tự thêm câu hỏi ĐÃ LỌC vào kho vectơ khi ≥ 3 người xác nhận cùng ý định. Máy **không bao giờ** sinh câu
+   luận mới, tự sửa KB, hay đưa chữ người dùng vào lời nhắc AI (chữ người dùng chỉ là dữ liệu cho người duyệt). Engine
+   vẫn không chạm DB (web máy chủ đọc Supabase rồi truyền số vào engine).
 
 ## Quy tắc code
 - Mọi hàm tính toán phải có test trước khi viết hàm (golden dataset trong /fixtures)
@@ -21,7 +25,15 @@ Next.js 16 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth,
   thiện hệ thống): (a) góp ý — chỉ CHỮ KÝ SỐ (các con số đã tính) + mã câu + phái + ghi chú đã lọc khi người dùng tự
   tích đồng ý; KHÔNG họ tên / ngày sinh / user_id; hết hạn 12 tháng. (b) ký ức — chỉ điều người dùng bấm "Ghi nhớ"
   (mã câu băn khoăn), RLS chủ sở hữu, xoá được ngay, hết hạn 180 ngày, không dùng huấn luyện. Tên/ngày sinh chỉ đi qua
-  lượt gọi để engine tính, không ghi xuống bảng học.
+  lượt gọi để engine tính, không ghi xuống bảng học. Ngoại lệ LG-ĐS (chủ dự án duyệt 2026-10-21): (c) **bài luận người
+  dùng lưu** (`luan_giai_luu`) — chỉ khi người dùng bấm "Lưu" hoặc tự bật "Tự lưu" (không tích sẵn), RLS chủ sở hữu,
+  xoá ngay, hết hạn 12 tháng, ≤ 100 bài, không dùng huấn luyện; (d) **phiếu kiểm chứng** (`kiem_chung_phieu`) — một phiếu
+  / người / mã mẫu (khoá HMAC, user_id khi đăng nhập), hết hạn 24 tháng; công khai CHỈ con số tổng "x% thấy đúng" khi
+  ≥ 30 phiếu; (e) **kho vectơ câu hỏi** (`cau_hoi_vec`) — câu đã lọc (bỏ tên, ngày, số liên lạc), không user_id.
+- Sức khoẻ trong luận giải: được nói nhịp sinh hoạt, thói quen hao sức, "phần cơ thể sách xưa gắn với sao — nên chăm
+  sóc phòng ngừa" + khám định kỳ, luôn kèm câu không thay lời bác sĩ. Vẫn cấm tên bệnh, chẩn đoán, tiên đoán năm/tuổi ốm.
+- Lời luận giải: đời thường, câu ngắn, thuật ngữ chỉ ở "Vì sao nói vậy"; cấm cụm "giọng AI" (danh sách `cum_cam` trong
+  KB, test bắt).
 - Đổi lịch âm: thuật toán Hồ Ngọc Đức, xử lý múi giờ VN trước 1975
 - Ranh giới giờ Tý: **ĐÃ CHỐT `SWITCH_AT_0000`** (quyết định người vận hành,
   2026-08-15) — sinh 23:00–23:59 thuộc ngày hôm đó, giờ Tý. Hằng
@@ -68,7 +80,7 @@ supabase/        Migration, mỗi file .sql có file .down.sql đi kèm
 | KB | Lưu và tra bảng nghĩa | Sinh nghĩa mới |
 | RULES | Ghép luận theo priority | Gọi LLM |
 | NARRATIVE | Diễn đạt JSON tầng 1–3 thành văn | Thêm bất kỳ dữ kiện nào ngoài input |
-| HỌC | Lưu góp ý ẩn danh, gom cụm, ký ức opt-in; đề xuất cho người duyệt | Tự sửa KB / tự bật luật, lưu tên – ngày sinh – user_id cùng góp ý, tính lại số |
+| HỌC | Lưu góp ý, gom cụm, ký ức opt-in, bài luận người dùng lưu, kho vectơ ý định; xếp lại/hạ hộp theo kiểm chứng; đề xuất cho người duyệt | Sinh câu luận mới, tự sửa KB, đưa chữ người dùng vào lời nhắc AI, lưu tên – ngày sinh cùng góp ý, tính lại số |
 
 Engine không biết Supabase tồn tại. Web không tự tính bất cứ thứ gì (tầng HỌC: web máy chủ xin engine "chữ ký số"
 rồi mới ghi Supabase).
