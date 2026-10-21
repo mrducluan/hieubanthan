@@ -196,6 +196,36 @@ export default async function Page() {
         {ph.ok ? <BangKiemChung ds={ph.du.kiemChung} /> : <div className="mt-3"><ChuaCo kq={ph} huongDan="Cần khoá PostHog như mục Phễu bên dưới." /></div>}
       </Card>
 
+      {ph.ok && ph.du.cta && (
+        <Card data-testid="qt-cta">
+          <h2 className="text-lg">Khối “Đọc tiếp” cuối phần xem · thẻ Bản đồ 5 mảng (PostHog, 28 ngày)</h2>
+          <p className="mt-1 text-sm text-fg-muted">CTA-1: người thấy khối → bấm thẻ gợi chéo (mảng khác) · bấm Sao · bấm ủng hộ, theo trang. Biến thể câu mời
+            xoay vòng — so lượt theo mã biến thể để giữ câu kéo người bấm nhiều hơn. Chỉ đếm MÃ.</p>
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead><tr className="text-left text-xs text-fg-muted">
+                <th className="py-1 font-normal">Trang</th><th className="text-right font-normal">Người thấy</th><th className="text-right font-normal">Bấm thẻ</th>
+                <th className="text-right font-normal">Tỉ lệ</th><th className="text-right font-normal">Bấm Sao</th><th className="text-right font-normal">Ủng hộ</th>
+              </tr></thead>
+              <tbody>
+                {ph.du.cta.theoTrang.map((d) => (
+                  <tr key={d.tu} className="border-t border-line/60">
+                    <td className="py-1.5"><code>{d.tu}</code></td><td className="text-right">{so(d.thay)}</td><td className="text-right">{so(d.bam)}</td>
+                    <td className="text-right">{d.thay ? pt(d.bam / d.thay) : "—"}</td><td className="text-right">{so(d.sao)}</td><td className="text-right">{so(d.ung_ho)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-3 grid gap-4 sm:grid-cols-2">
+            <div><p className="text-sm text-fg-muted">Theo biến thể (sự kiện · mã · lượt)</p>
+              <ul className="mt-1 space-y-0.5 text-sm">{ph.du.cta.bienThe.map((x) => <li key={`${x.su_kien}|${x.bien_the}`}><code>{x.su_kien}</code> · <code>{x.bien_the}</code> — {so(x.luot)}</li>)}</ul></div>
+            <div><p className="text-sm text-fg-muted">Trò “Đoán số”</p>
+              <p className="mt-1 text-sm">Đoán đúng <b>{so(ph.du.cta.doan.dung)}</b> · sai <b>{so(ph.du.cta.doan.sai)}</b></p></div>
+          </div>
+        </Card>
+      )}
+
       <Card>
         <h2 className="text-lg">Phễu sản phẩm (PostHog, 28 ngày)</h2>
         {ph.ok ? (

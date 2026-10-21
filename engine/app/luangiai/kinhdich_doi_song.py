@@ -2,7 +2,7 @@
 """KD-ĐS — RULES: đọc quẻ Kinh Dịch bằng lời đời thường, tất định, không LLM.
 
 Từ CÙNG một quẻ đã ra (gói bằng chứng của `hoidap.kinhdich`), dựng:
-  - mức Thuận lợi / Cân bằng / Cần chủ động theo phái đang đọc (lời kinh làm chủ · thể–dụng Mai Hoa · dụng thần Lục Hào),
+  - mức Thuận lợi / Cân bằng / Cần lưu ý theo phái đang đọc (lời kinh làm chủ · thể–dụng Mai Hoa · dụng thần Lục Hào),
   - hộp nổi bật (cốt lõi · điểm mạnh · lưu ý kèm hướng xử lý · lời khuyên · thời điểm), ba nhóm việc nên làm theo chủ đề,
   - "Vì sao nói vậy" (thuật ngữ chỉ ở đây), lời kinh nguyên văn (gập), góc nhìn ba phái, ứng kỳ (nhịp gợi ý),
   - chủ đề (chip) + câu hỏi tiếp; làm rõ câu hỏi TRƯỚC khi gieo khi câu mơ hồ về dụng thần (mua/bán, người ấy, hai việc).

@@ -12,7 +12,7 @@ bằng `app.kb.tuvi_ma_chuan`) → golden `fixtures/golden/tuvi_v22_oracle.json`
 |   criticalClashes                | luangiai.tuvi_phi_hoa noi_bat "ky_xung"             | CỐ Ý khác: lọc hẹp hơn      |
 | calculateDouJunJanuaryBranch     | calc.tuvi_luu_nguyet (Đẩu Quân từ Thái Tuế)         | trùng, trừ nửa sau tháng nhuận |
 | calculate90DayRadar              | luangiai.tuvi_luu_nguyet.lap_nam + nhip_3_thang     | cung/can/tứ hoá trùng; mức CỐ Ý khác |
-| calculateMultiChartSynergy       | luangiai.tuvi_hop_tham.lap                          | cung đích trùng; không chấm điểm |
+| calculateMultiChartSynergy       | luangiai.tuvi_hop_tham.lap                          | cung đích trùng; điểm theo luật riêng |
 | buildBirthTimeCalibrationTest    | luangiai.tuvi_dinh_gio.lap                          | cung bị xung trùng; năm do người dùng chọn |
 | calculateBaZhaiGua               | calc.phongthuy.menh_quai + bang_huong               | trùng 1901–2099 (sau Lập xuân); CỐ Ý khác trước Lập xuân |
 
@@ -340,13 +340,13 @@ def test_nhip_co_ca_vat_nam_va_thang_nhuan():
 
 def test_muc_python_khong_dung_nhan_doa():
     assert set(nhip.NHAN_MUC) == {"thuan", "binh", "can_than"}
-    for s in list(nhip.NHAN_MUC.values()) + list(nhip._GOI_Y.values()):
+    for s in [*nhip.NHAN_MUC.values(), *nhip._MAC["nen_lam"].values(), *nhip._MAC["ket_luan"].values()]:
         assert not any(w in s.lower() for w in ("đỏ", "báo động", "đứt gãy", "critical"))
 
 
 # ------------------------------------------------------------------ 4. calculateMultiChartSynergy
 @pytest.mark.parametrize("cid", IDS)
-def test_hop_tham_cung_dich_trung_va_khong_cham_diem(cid):
+def test_hop_tham_cung_dich_trung_khong_nhan_tung_duong(cid):
     c = BY_ID[cid]
     s = c["synergy"]
     kia = BY_ID[s["partner"]]
@@ -365,8 +365,9 @@ def test_hop_tham_cung_dich_trung_va_khong_cham_diem(cid):
     assert gon(r["nguoi_kia_vao_ban"]) == ts_gon("PARTNER_YEAR_STEM", s["forward"])
     assert gon(r["menh_nguoi_kia_vao_ban"]) == ts_gon("PARTNER_MENH_STEM", s["forward"])
     assert gon(r["ban_vao_nguoi_kia"]) == ts_gon("PARTNER_YEAR_STEM", s["reverse"])
-    # CỐ Ý khác: TS gắn impactVerdict (BENEFACTOR_BOOST / TOXIC_DRAIN_ALERT…); Python không chấm điểm.
-    assert r["khong_cham_diem"] is True
+    # CỐ Ý khác: TS gắn impactVerdict (BENEFACTOR_BOOST / TOXIC_DRAIN_ALERT…) cho TỪNG đường bay; Python không gắn
+    # nhãn lên đường bay — điểm tham khảo (HN-2N) chấm riêng bằng luật công khai luangiai/tuvi_hai_nguoi.py.
+    assert r["diem"] is None
     for ds in (r["nguoi_kia_vao_ban"], r["menh_nguoi_kia_vao_ban"], r["ban_vao_nguoi_kia"]):
         for x in ds:
             assert set(x) == {"hoa", "sao", "den_cung", "xung_cung", "nghia"}

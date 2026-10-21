@@ -1,4 +1,5 @@
-// POST /api/tuvi/hop-tham — TV-V2 — hợp tham hai lá số (can năm người kia phi hoá vào lá mình), không chấm điểm, không lưu người kia.
+// POST /api/tuvi/hop-tham — TV-V2 + HN-2N — "Xem lá số 2 người" (can năm người kia phi hoá vào lá mình + điểm
+// tham khảo hợp – khắc do engine chấm), không lưu người kia.
 // Proxy mỏng: zod hai chiều, KHÔNG tự tính gì.
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";

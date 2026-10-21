@@ -113,4 +113,8 @@ def test_api_an_sao_co_cach_cuc():
 def test_hoi_tinh_cach_co_cach_cuc():
     from app.hoidap import tuvi as hd
     kq = hd.tra_loi("Cung Mệnh của tôi nói gì về tính cách?", sinh={"ngay": dt.date(1997, 3, 19), "ti": 0, "gioi_tinh": "nam"})
-    assert "Cách cục" in kq["cau_tra_loi"]
+    # Rà chung chung đợt 2: thân bài là lời đời thường của cách; tên cách cục ở "Vì sao nói vậy".
+    assert any(c.startswith("Cách cục") for c in kq["can_cu"])
+    assert "Cách cục" not in kq["cau_tra_loi"]
+    m = next(m for m in kq["bang_chung"]["muc"] if m["loai"] == "cach_cuc")
+    assert m["doi_thuong"] and m["doi_thuong"].split(".")[0] in kq["cau_tra_loi"]

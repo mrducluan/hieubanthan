@@ -83,8 +83,11 @@ const Sao = z.object({
   tu_hoa: z.string().nullable(),
   /** TV-NP: độ sáng lối Việt (chính tinh; phụ tinh từ TV-NP2 — null nếu sách không luận); `do_sang` là bảng phái Trung của iztro. */
   do_sang_nam_phai: z.string().nullable().optional(),
-  /** Chính tinh: lời đời thường từ KB (tính chất + sắc thái khi sáng/hãm theo Nam phái). */
-  giai_nghia: z.object({ tinh_chat: z.string(), sac_thai: z.string().nullable() }).nullable().optional(),
+  /** Chính tinh: lời đời thường theo sao × cung × sáng/hãm (Nam phái) — điều thường thấy ở bạn + một việc nên làm;
+   *  tên sao, độ sáng, tính chất sao chỉ ở `can_cu` ("Vì sao nói vậy"). */
+  giai_nghia: z.object({
+    thuong_thay: z.string(), nen_lam: z.string().nullable(), can_cu: z.array(z.string()).optional(),
+  }).nullable().optional(),
 });
 
 const PhuTinh = Sao.extend({ loai: z.string().optional() });
@@ -240,6 +243,8 @@ export const PhiHoaOutput = z.object({
     loai: z.string(), duong: DuongBay, tieu_de: z.string(), nghia: z.string(),
     viec_nen_lam: z.string().nullable().optional(), cau_tu_soi: z.string().nullable().optional(),
     ghi_chu_tuan_triet: z.string().nullable().optional(),
+    /** Căn cứ kỹ thuật (tên cung, sao, hoá, can) — chỉ hiện ở "Vì sao nói vậy"; lời trên thẻ là lời thường. */
+    can_cu: z.array(z.string()).optional(),
   }).passthrough()).max(8),
   luu_nien: z.object({
     nam: z.number(), can_chi: z.string(),
@@ -258,6 +263,13 @@ export const Nhip3ThangInput = z.object({
 });
 const HoaGoc = z.object({ hoa: z.string(), sao: z.string(), cung_goc: z.string().nullable() }).passthrough();
 const LuuNienNhip = z.object({ nam_am: z.number(), can_chi: z.string(), tu_hoa: z.array(HoaGoc) }).passthrough();
+/** NHIP-2: hộp nổi bật của một tháng (khuôn Hop LG-ĐS; `nhan` = nhãn riêng "Điểm sáng" / "Nên để ý" / "Nên làm"). */
+const HopThang = z.object({
+  loai: z.enum(["diem_manh", "luu_y", "loi_khuyen"]), nhan: z.string(),
+  tieu_de: z.string(), noi_dung: z.string(), huong_xu_ly: z.string().optional(),
+  can_cu: z.array(z.string()).default([]), cung: z.string().nullable().optional(),
+}).passthrough();
+export type HopThangT = z.infer<typeof HopThang>;
 export const Nhip3ThangOutput = z.object({
   engine_version: z.string(),
   ngay_xem: z.string(),
@@ -266,13 +278,28 @@ export const Nhip3ThangOutput = z.object({
   luu_nien: LuuNienNhip,
   /** Có khi 3 tháng vắt sang năm âm sau: tứ hoá của năm âm kế tiếp (tháng có `nam_am` = năm này đọc theo nó). */
   luu_nien_sau: LuuNienNhip.optional(),
+  /** NHIP-2: một câu so ba tháng (tháng nào thuận cho việc gì) — lời đời thường. Tuỳ chọn để chịu được engine cũ. */
+  tom_tat_3_thang: z.string().optional(),
+  /** 12 cung (tên, chi, nhãn đời thường ngắn) — vẽ vòng 12 cung mini. */
+  cung: z.array(z.object({ ten: z.string(), chi: z.string(), nhan_ngan: z.string() }).passthrough()).optional(),
   thang: z.array(z.object({
     thang: z.number(), nhuan: z.boolean(), phan: z.string(), nam_am: z.number(), can_chi: z.string(),
+    /** Số tháng dùng để tính (nửa sau tháng nhuận = tháng kế; can chi đi theo số này). */
+    thang_tinh: z.number().optional(),
     tu: z.string(), den: z.string(), cung_goc: z.string(), chu_de: z.string().nullable(),
     muc: z.enum(["thuan", "binh", "can_than"]), nhan_muc: z.string(),
     ly_do: z.array(z.object({ ma: z.string(), noi_dung: z.string() }).passthrough()),
     tu_hoa_thang: z.array(HoaGoc),
     goi_y: z.string().nullable(), cau_tu_soi: z.string().nullable(),
+    // NHIP-2 — lời riêng từng tháng (không thuật ngữ) + học thuật tách riêng trong can_cu ("Vì sao nói vậy").
+    nhan_thang: z.string().optional(),
+    tieu_de_thang: z.string().optional(),
+    chu_de_thang: z.string().optional(),
+    hop: z.array(HopThang).optional(),
+    can_cu: z.array(z.string()).optional(),
+    diem_sang: z.string().nullable().optional(),
+    de_y: z.string().nullable().optional(),
+    noi_tiep: z.boolean().optional(),
   }).passthrough()).length(3),
   /** Thứ tự ưu tiên khi các lớp hạn mâu thuẫn (đại hạn > lưu niên > tiểu hạn > lưu nguyệt) + cung hạn của năm. */
   uu_tien: z.object({
@@ -304,6 +331,42 @@ const HoaVao = z.object({
   nghia: z.string().nullable().optional(),
 }).passthrough();
 export type HoaVaoT = z.infer<typeof HoaVao>;
+// HN-2N — "Xem lá số 2 người": điểm tham khảo 0–100 (engine luangiai/tuvi_hai_nguoi.py, luật `hai_nguoi_1`).
+// Web chỉ hiển thị, không tự tính.
+export const MUC_DIEM_HAI_NGUOI = ["de_hoa_hop", "hop_neu_hieu", "can_dung_hoa_nhieu", "nhieu_khac_biet"] as const;
+export const KET_LUAN_TIEU_CHI = ["hop", "binh_hoa", "can_dung_hoa"] as const;
+const HopDiem = z.object({
+  loai: z.enum(["diem_manh", "luu_y"]),
+  tieu_de: z.string(), noi_dung: z.string(),
+  can_cu: z.array(z.string()).default([]),
+  ma_mau: z.string().regex(/^[a-z0-9_.+-]{3,60}$/).optional(),
+  huong_xu_ly: z.string().optional(),
+}).passthrough();
+const TieuChiDiem = z.object({
+  ma: z.enum(["menh", "can", "chi", "cung_phi", "tu_vi"]),
+  ten: z.string(), mo_ta: z.string().nullable().optional(),
+  tinh: z.boolean(),
+  diem: z.number().int().min(0).max(100), toi_da: z.number().int().min(0).max(100),
+  ty_le: z.number().min(0).max(1).nullable(),
+  loai: z.string(),
+  ket_luan: z.enum(KET_LUAN_TIEU_CHI).nullable(), nhan_ket_luan: z.string().nullable(),
+  giai_thich: z.string(),
+  can_cu: z.array(z.string()).default([]),
+  chieu: z.string().optional(),
+}).passthrough();
+export const DiemHaiNguoi = z.object({
+  phien_ban: z.string(),
+  tong: z.number().int().min(0).max(100), toi_da: z.literal(100),
+  muc: z.enum(MUC_DIEM_HAI_NGUOI), nhan_muc: z.string(), mo_ta_muc: z.string(),
+  tieu_chi: z.array(TieuChiDiem).min(1),
+  diem_manh: z.array(HopDiem).max(3).default([]),
+  can_dung_hoa: z.array(HopDiem).max(3).default([]),
+  goi_y: z.array(z.string()).default([]),
+  loi_dan: z.string(),
+  hai_chieu: z.boolean().default(false),
+}).passthrough();
+export type DiemHaiNguoiT = z.infer<typeof DiemHaiNguoi>;
+export type TieuChiDiemT = z.infer<typeof TieuChiDiem>;
 export const HopThamOutput = z.object({
   engine_version: z.string(),
   quan_he: z.string(), nhan_quan_he: z.string(),
@@ -314,7 +377,8 @@ export const HopThamOutput = z.object({
   menh_nguoi_kia_vao_ban: z.array(HoaVao).nullable().optional(),
   tom_tat: z.array(z.string()).default([]),
   luu_y: z.array(z.string()).default([]),
-  khong_cham_diem: z.literal(true),
+  diem: DiemHaiNguoi.nullable().optional(),
+  khong_cham_diem: z.boolean(),
 }).passthrough();
 export type HopThamOutputT = z.infer<typeof HopThamOutput>;
 

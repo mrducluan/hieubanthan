@@ -23,7 +23,8 @@ from app.narrative import hoi_van
 SINH = {"ngay": dt.date(1990, 5, 15), "ti": 4, "gioi_tinh": "nam"}     # giờ Thìn — lá ví dụ trong doc
 XEM = dt.date(2026, 10, 21)
 THU_TU = ["tong_quan", "cuoc_doi", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "suc_khoe", "quan_he", "nha_cua",
-          "duong_bay", "nam_nay", "loi_khuyen"]
+          "duong_bay", "nam_nay", "van_han", "loi_khuyen"]
+KHONG_MUC = {"van_han", "loi_khuyen"}      # VH-1: chương tổng hợp / dòng 10 năm không mang chip mức riêng
 LOAI_HOP = {"cot_loi", "diem_manh", "luu_y", "loi_khuyen", "thoi_diem"}
 MUC = {"thuan", "can_bang", "can_chu_dong"}
 # thuật ngữ: độ sáng, tên tứ hoá ("tiêu hoá", "văn hoá" là chữ thường, không tính), tam phương
@@ -72,7 +73,10 @@ def test_hop_dong(bc):
         for k in ("ma", "tieu_de", "cau_hoi", "muc", "nhan_muc", "tom_tat", "hop", "doan", "can_cu", "cau_tu_soi",
                   "moi_xem"):
             assert k in c, (c["ma"], k)
-        assert c["muc"] in MUC and c["nhan_muc"] == kb.nhan_muc(c["muc"])
+        if c["ma"] in KHONG_MUC:
+            assert c["muc"] is None and c["nhan_muc"] is None
+        else:
+            assert c["muc"] in MUC and c["nhan_muc"] == kb.nhan_muc(c["muc"])
         assert 1 <= len(c["doan"]) <= 4 and all(isinstance(d, str) and d for d in c["doan"])
         assert len(c["hop"]) <= 6
         if c["ma"] not in ("nha_cua",):
@@ -168,10 +172,12 @@ def test_chuong_dung_cung(bc):
     assert any("Tuần" in c and "Phu Thê" in c for c in ch["tinh_cam"]["can_cu"])
     assert ch["nam_nay"]["hop"][0]["ma_mau"].startswith("ds.nam_nay.dai_han.")          # đại hạn trước
     thang = [h for h in ch["nam_nay"]["hop"] if ".thang" in h["ma_mau"]]
-    # tháng 10 và 11 cùng mức, cùng gợi ý → gộp một hộp "Tháng 10–11 âm lịch"
-    assert [h["tieu_de"] for h in thang] == ["Tháng 9 âm lịch", "Tháng 10–11 âm lịch"]
+    # NHIP-2: mỗi tháng một hộp, lời riêng theo cung tháng (trước đây tháng 10–11 cùng "Bình" bị gộp vì cùng câu)
+    assert [h["tieu_de"] for h in thang] == ["Tháng 9 âm lịch", "Tháng 10 âm lịch", "Tháng 11 âm lịch"]
     assert all(h["loai"] == "thoi_diem" and h["tu"] and h["den"] for h in thang)
-    assert thang[1]["ma_mau"] == "ds.nam_nay.thang2+3.binh.chung"
+    assert len({h["noi_dung"] for h in thang}) == 3 and len({h["cau_tu_soi"] for h in thang}) == 3
+    assert all(re.fullmatch(r"ds\.nam_nay\.thang\.[a-z_]+\.(thuan|binh|can_than)\.[a-z_]+", h["ma_mau"]) for h in thang)
+    assert any(c.startswith("Tứ hoá tháng ") for h in thang for c in h["can_cu"])
     assert ch["duong_bay"]["hop"] and all(h["can_cu"][0].startswith(("Hoá ", "Cung ")) for h in ch["duong_bay"]["hop"])
 
 
@@ -337,7 +343,7 @@ def test_golden_60_la(ca):
     ma = [h["ma_mau"] for c in b["chuong"] for h in c["hop"]]
     assert len(ma) == len(set(ma)) and all(ds.MA_MAU_RE.match(m) for m in ma)
     for c in b["chuong"]:
-        assert c["doan"] and c["muc"] in MUC and len(c["hop"]) <= 6
+        assert c["doan"] and (c["muc"] in MUC or c["ma"] in KHONG_MUC) and len(c["hop"]) <= 6
         for h in c["hop"]:
             assert not THUAT_NGU.search(h["noi_dung"]), (c["ma"], h["noi_dung"])
             if h["loai"] == "luu_y":
