@@ -5,6 +5,8 @@
 thô). Mỗi chương qua `kiem_tra_chuong`: con số, tên sao / cung / thập thần / tứ hoá phải có trong đoạn
 gốc; cấm giọng phán quyết. Vi phạm hoặc LLM lỗi → chương đó giữ bản mẫu (`template_fallback`).
 Bản gốc (`doan`) luôn đi kèm để người dùng đối chiếu. Không lưu gì.
+LG-ĐS: LLM chỉ viết lại `doan` (thân bài); `hop`, `can_cu`, `cot_loi` giữ nguyên bản RULES. Cụm cấm KB `cum_cam`
+(giọng AI, doạ) chặn ở `kiem_tra_chuong` → chương đó rơi về bản mẫu.
 """
 from __future__ import annotations
 
@@ -32,16 +34,26 @@ def _thuat_ngu() -> list[str]:
     return sorted(ds | set(THAP_THAN) | set(TU_HOA), key=len, reverse=True)
 
 
-_SYSTEM = """Bạn là biên tập viên, KHÔNG phải thầy bói. Bạn nhận MỘT CHƯƠNG của bản luận giải {mo_dun} \
-gồm các đoạn đã được hệ thống chọn từ kho tri thức. Viết lại thành một bài liền mạch, tiếng Việt ấm áp, \
-rõ ràng, 6–12 câu, chia 2–4 đoạn.
+_SYSTEM = """Bạn là biên tập viên, KHÔNG phải thầy bói. Bạn nhận MỘT CHƯƠNG của bản luận giải {mo_dun}: \
+tiêu đề và các đoạn thân bài (`doan`) đã được hệ thống chọn từ kho tri thức. Chỉ viết lại PHẦN THÂN BÀI đó thành \
+bài liền mạch, 6–12 câu, chia 2–4 đoạn. Các hộp nổi bật và phần "Vì sao nói vậy" do hệ thống giữ riêng — bạn không \
+viết, không nhắc tới chúng.
+
+GIỌNG VĂN: nói chuyện đời thường như một người bạn hiểu chuyện; câu ngắn; xưng "bạn"; ví dụ đời thường nếu đoạn gốc \
+có. Không dùng thuật ngữ chuyên môn nếu đoạn gốc không có.
 
 RÀNG BUỘC TUYỆT ĐỐI:
 - CHỈ dùng ý có trong các đoạn được cho. Không thêm con số, năm, tuổi, tên sao, tên cung, thập thần, sự \
 kiện, dự đoán hay lời khuyên nào không có trong đó.
-- Giữ cả mặt sáng lẫn MẶT TỐI / lưu ý nếu đoạn gốc có; giữ câu hỏi tự soi nếu có.
+- Giữ cả mặt sáng lẫn MẶT TỐI / lưu ý nếu đoạn gốc có; mỗi lưu ý giữ kèm hướng xử lý của nó; giữ câu tự soi nếu có.
 - Không giọng phán quyết: cấm "bạn sẽ", "chắc chắn", "định mệnh", "số phận đã".
+- KHÔNG dùng các cụm sau (giọng sáo rỗng / doạ): {cum_cam}.
 - Không chào hỏi, không tiêu đề, không kết luận chung chung ngoài đoạn gốc."""
+
+
+def _cum_cam() -> list[str]:
+    from app.kb import tuvi_doi_song_kb
+    return tuvi_doi_song_kb.cum_cam()
 
 
 def kiem_tra_chuong(van: str, nguon: str) -> list[str]:
@@ -61,6 +73,13 @@ def kiem_tra_chuong(van: str, nguon: str) -> list[str]:
     for c in hoi_van.CAM:
         if c in thap and c not in goc:
             loi.append(f"cụm cấm: {c}")
+    # LG-ĐS: cụm "giọng AI" / doạ của KB — so theo ranh giới âm tiết ("khắc" không bắt "khắc phục").
+    from app.kb import tuvi_doi_song_kb
+    ds = [c for c in _cum_cam() if f"cụm cấm: {c}" not in loi]
+    co_goc = set(tuvi_doi_song_kb.tim_cum_cam(nguon, ds))
+    for c in tuvi_doi_song_kb.tim_cum_cam(van, ds):
+        if c not in co_goc:
+            loi.append(f"cụm cấm: {c}")
     return loi
 
 
@@ -73,7 +92,7 @@ def _goi_llm(tieu_de: str, doan: list[str], mo_dun: str) -> str:
         r = c.post(_llm.OPENROUTER_URL,
                    headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
                    json={"model": model, "temperature": 0.4, "messages": [
-                       {"role": "system", "content": _SYSTEM.format(mo_dun=ten)},
+                       {"role": "system", "content": _SYSTEM.format(mo_dun=ten, cum_cam="; ".join(f'"{c}"' for c in _cum_cam()))},
                        {"role": "user", "content": json.dumps({"chuong": tieu_de, "doan": doan}, ensure_ascii=False)}]})
         r.raise_for_status()
         return r.json()["choices"][0]["message"]["content"].strip()
@@ -95,7 +114,9 @@ def _mot_chuong(c: dict, mo_dun: str) -> dict:
 def gan_thuat_ngu(bc: dict) -> dict:
     """GN: mỗi chương kèm thuật ngữ (tra từ điển KB) có trong đoạn gốc + bản AI — để web giải nghĩa."""
     from app.kb import tu_dien
-    return {**bc, "chuong": [{**c, "thuat_ngu": tu_dien.nhan_dien("\n".join([*c["doan"], c.get("van_ai", "")]), bc["mo_dun"])}
+    # LG-ĐS: thuật ngữ nằm ở "Vì sao nói vậy" (`can_cu`) → nhận diện cả ở đó để web giải nghĩa.
+    return {**bc, "chuong": [{**c, "thuat_ngu": tu_dien.nhan_dien("\n".join([*c["doan"], *c.get("can_cu", []),
+                                                                             c.get("van_ai", "")]), bc["mo_dun"])}
                              for c in bc["chuong"]]}
 
 

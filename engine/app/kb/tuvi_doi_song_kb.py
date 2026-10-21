@@ -119,14 +119,17 @@ def cum_cam() -> list[str]:
 
 # Cụm ngắn trùng với từ ghép vô hại: "khắc" ≠ "khắc phục", "xui" ≠ "xui khiến". So khớp theo ranh giới âm tiết.
 _NGOAI_LE = {"khắc": ("phục", "khoải", "ghi", "hoạ", "sâu", "kỷ", "khổ"), "xui": ("khiến", "giục")}
+_NGOAI_LE_TRUOC = {"khắc": ("nghiêm", "khoảnh", "điêu", "chạm", "tạc", "thời"), "xui": ("giục",)}
 
 
 @lru_cache(maxsize=512)
 def _mau_cum(cum: str):
     import re
-    sau = _NGOAI_LE.get(cum)
+    sau, truoc = _NGOAI_LE.get(cum), _NGOAI_LE_TRUOC.get(cum)
     duoi = rf"(?!\s+(?:{'|'.join(sau)})(?!\w))" if sau else ""
-    return re.compile(rf"(?<!\w){re.escape(cum)}(?!\w){duoi}", re.IGNORECASE)
+    # look-behind cần độ dài cố định → mỗi từ đứng trước một nhánh riêng
+    dau = "".join(rf"(?<!(?<!\w){t}\s)" for t in truoc) if truoc else ""
+    return re.compile(rf"(?<!\w){dau}{re.escape(cum)}(?!\w){duoi}", re.IGNORECASE)
 
 
 def tim_cum_cam(van: str, ds: list[str] | None = None) -> list[str]:

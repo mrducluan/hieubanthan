@@ -71,45 +71,2047 @@
   }
  },
  "sao_linh_vuc": {
-  "Thiên Cơ": {
+  "Tử Vi": {
    "Mệnh": {
     "sang": {
-     "manh": "Bạn nhanh trí, hay tính trước vài phương án nên ít khi bị động.",
-     "de_vap": "Bạn dễ nghĩ nhiều mà chậm bắt tay vào làm.",
-     "loi_khuyen": "Nên chốt một hướng, đặt hạn chót rồi mới tính tiếp phương án khác."
+     "manh": "Khi cả nhóm lúng túng, bạn thường là người đứng ra chốt hướng đi, và mọi người nghe theo vì thấy bạn nói có trọng lượng.",
+     "de_vap": "Bạn dễ ôm hết phần quyết định rồi khó nghe góp ý, nhất là khi người góp ý nhỏ tuổi hoặc ít kinh nghiệm hơn mình.",
+     "loi_khuyen": "Trước mỗi quyết định lớn, hỏi ý ít nhất một người hay phản biện bạn, để họ nói hết rồi mới trả lời."
     },
     "ham": {
-     "manh": "Bạn nhạy với thay đổi quanh mình và xoay xở được khi bị dồn.",
-     "de_vap": "Bạn hay đổi ý giữa chừng nên việc dễ dở dang.",
-     "loi_khuyen": "Nên viết ra mục tiêu của tuần và chỉ đổi khi đã làm xong một bước."
+     "manh": "Bạn có lòng tự trọng và muốn tự quyết chuyện đời mình, không thích sống nhờ hay để ai sắp đặt thay.",
+     "de_vap": "Khi thiếu người hỗ trợ, bạn dễ giữ sĩ diện, nói lớn hơn sức mình rồi tự gánh áp lực một mình.",
+     "loi_khuyen": "Tuần này, nhờ một người tin cậy giúp đúng một việc bạn đang cố tự làm, và nói rõ bạn cần họ giúp phần nào."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Anh chị em, bạn thân của bạn thường có chính kiến và năng lực, lúc cần làm việc lớn họ là chỗ dựa đáng tin.",
+     "de_vap": "Hai người cá tính mạnh ngồi cạnh nhau dễ thành cuộc so xem ai đúng, nhất là trong chuyện chung của gia đình.",
+     "loi_khuyen": "Khi bàn việc chung với anh chị em, chia rõ ai lo phần nào ngay từ đầu thay vì cùng quyết mọi thứ."
+    },
+    "ham": {
+     "manh": "Bạn coi trọng thể diện của anh chị em và hay muốn giữ hoà khí trong nhà, dù trong lòng có điều chưa vừa ý.",
+     "de_vap": "Bạn dễ tự nhận vai người lớn trong nhóm rồi chạnh lòng khi anh chị em không nghe hay không cảm ơn.",
+     "loi_khuyen": "Lần tới có chuyện khó chịu với anh chị em, nói thẳng một câu bằng giọng bình thường thay vì im lặng giữ trong lòng."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Bạn chọn người bạn đời có bản lĩnh, và hai người có thể cùng nhau gây dựng một gia đình đàng hoàng, có nề nếp.",
+     "de_vap": "Khi cả hai cùng muốn quyết, chuyện nhỏ như mua đồ hay đi chơi đâu cũng dễ thành cuộc giằng co ai nhường ai.",
+     "loi_khuyen": "Ngồi lại với người ấy chia ba mảng việc nhà, tiền bạc, con cái, mỗi mảng một người có tiếng nói cuối."
+    },
+    "ham": {
+     "manh": "Bạn nghiêm túc trong chuyện tình cảm, muốn người mình chọn đáng để tự hào và muốn giữ mối quan hệ lâu dài.",
+     "de_vap": "Bạn dễ đòi hỏi người ấy phải đúng hình mẫu trong đầu mình, rồi thất vọng âm thầm khi họ không theo kịp.",
+     "loi_khuyen": "Mỗi tuần nói với người ấy một điều cụ thể bạn quý ở họ, kể cả việc nhỏ như nấu bữa cơm hay đón con."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn đặt kỳ vọng cao và biết tạo nề nếp cho con, nên con lớn lên thường có tự trọng và biết giữ lời.",
+     "de_vap": "Bạn dễ áp khuôn của mình lên con, muốn con chọn trường, chọn nghề theo cách bạn từng thấy là đúng.",
+     "loi_khuyen": "Khi con kể chuyện, nghe hết rồi hỏi \"con nghĩ sao?\" trước khi đưa ý kiến của mình."
+    },
+    "ham": {
+     "manh": "Bạn thương con theo kiểu lo xa, muốn con có chỗ đứng đàng hoàng và không phải chịu thiệt như mình.",
+     "de_vap": "Lúc mệt mà con không nghe lời, bạn dễ dùng uy để ép thay vì giải thích, rồi sau đó lại tự trách.",
+     "loi_khuyen": "Chọn một việc trong tuần để con tự quyết hoàn toàn, như món ăn tối hay chỗ đi chơi, và bạn giữ đúng lời."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Tiền của bạn đến từ uy tín và vị trí, người ta trả cho bạn vì tin cách bạn làm việc và giữ lời.",
+     "de_vap": "Bạn dễ chi cho thể diện như mời khách, quà cáp, đồ dùng sang hơn mức cần, nhất là khi có người nhìn vào.",
+     "loi_khuyen": "Mỗi lần nhận lương, chuyển ngay 10–20% sang một tài khoản riêng trước khi tiêu, và không dùng nó cho việc giữ mặt mũi."
+    },
+    "ham": {
+     "manh": "Bạn có ý thức làm ra tiền bằng chính sức mình, không thích vay mượn hay để người khác thấy mình túng.",
+     "de_vap": "Khi tiền chưa dư, bạn vẫn dễ chi để giữ hình ảnh, như bao cả bàn ăn hay mua quà đắt cho người ngoài.",
+     "loi_khuyen": "Đặt một mức trần cho tiền giao tế mỗi tháng, ghi ra giấy, hết mức thì từ chối khéo bằng một câu."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn chịu được áp lực tốt và giữ được bình tĩnh trước mặt người khác, kể cả trong những ngày nhiều việc dồn.",
+     "de_vap": "Bạn hay gánh trách nhiệm một mình, mệt mà vẫn cố, nên căng thẳng tích lại lúc nào không hay.",
+     "loi_khuyen": "Đặt giờ nghỉ cố định mỗi tối, tắt điện thoại công việc, và mỗi tuần giao bớt một việc cho người khác làm."
+    },
+    "ham": {
+     "manh": "Bạn có ý chí, khi cần vẫn gượng dậy làm cho xong, ít than vãn với người xung quanh.",
+     "de_vap": "Thiếu người đỡ đần, bạn dễ thức khuya, bỏ bữa để lo việc, và giấu mệt vì ngại người khác thấy mình yếu.",
+     "loi_khuyen": "Ngủ trước 23 giờ ít nhất năm đêm một tuần, và đi khám sức khoẻ định kỳ mỗi năm một lần."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn dễ được nể, gặp người sẵn lòng giúp; đổi môi trường thường mở cho bạn vai trò lớn hơn.",
+     "de_vap": "Được trọng vọng bên ngoài quen rồi, bạn dễ khó chịu khi vào chỗ mới mà chưa ai biết mình là ai.",
+     "loi_khuyen": "Mỗi lần đến môi trường mới, dành tuần đầu để nghe và hỏi, chưa vội đưa ra cách làm của mình."
+    },
+    "ham": {
+     "manh": "Ở chỗ lạ bạn vẫn giữ được phong thái đàng hoàng, người ta nhìn vào thấy bạn đáng tin.",
+     "de_vap": "Ra ngoài mà chưa có người quen nâng đỡ, bạn dễ thấy mình bị xem nhẹ và rút về, ít mở lời trước.",
+     "loi_khuyen": "Trước chuyến đi hay chỗ làm mới, nhắn trước cho một người quen ở đó để có người dẫn bạn những ngày đầu."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Quanh bạn có những người có vị thế, sẵn lòng giới thiệu cơ hội khi bạn cần mở rộng công việc.",
+     "de_vap": "Người tìm đến bạn đông, trong đó có người chỉ muốn dựa vào uy tín của bạn mà không góp gì.",
+     "loi_khuyen": "Trước khi nhận lời đứng ra bảo lãnh hay giới thiệu ai, xem lại họ đã làm được gì cụ thể cùng bạn."
+    },
+    "ham": {
+     "manh": "Bạn đối xử đàng hoàng với bạn bè, đồng nghiệp và giữ chữ tín, nên vẫn có vài người quý bạn thật lòng.",
+     "de_vap": "Bạn dễ chờ người khác đến với mình trước, nên đôi khi quanh mình ít người giúp được việc lớn.",
+     "loi_khuyen": "Mỗi tháng chủ động mời một người bạn quý đi uống cà phê, chỉ để hỏi thăm, không bàn việc."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp vai trò điều hành, nơi có quy trình rõ; sếp giao việc khó thường yên tâm khi giao cho bạn.",
+     "de_vap": "Bạn khó chịu khi bị giao việc vặt hoặc bị đối xử như người chỉ chạy việc, và dễ để lộ thái độ trong cuộc họp.",
+     "loi_khuyen": "Khi nhận việc mới, hỏi rõ mình được quyết đến đâu trong việc đó trước khi bắt tay vào làm."
+    },
+    "ham": {
+     "manh": "Bạn muốn làm việc tử tế, có trách nhiệm với phần mình phụ trách và không thích làm qua loa.",
+     "de_vap": "Chưa có thế đứng vững mà đã muốn làm chủ, bạn dễ va chạm với sếp hoặc nhận việc vượt sức.",
+     "loi_khuyen": "Trong năm nay, chọn một kỹ năng cụ thể cho vị trí bạn muốn lên, học đến khi có kết quả cầm được."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn biết lo cho nhà cửa đàng hoàng, ổn định, và nơi ở của bạn thường là chỗ cả nhà thấy yên tâm.",
+     "de_vap": "Bạn dễ muốn nhà to, đồ đẹp hơn mức thu nhập, coi nhà là bộ mặt để người khác nhìn vào.",
+     "loi_khuyen": "Trước khi mua hay sửa nhà, tính sao cho khoản trả hằng tháng không quá một phần ba thu nhập của cả nhà."
+    },
+    "ham": {
+     "manh": "Bạn coi trọng một mái nhà ổn định và chịu khó dành dụm để có chỗ ở của riêng mình.",
+     "de_vap": "Khi chưa đủ điều kiện, bạn dễ sốt ruột so nhà mình với nhà người khác và chịu áp lực tự đặt ra.",
+     "loi_khuyen": "Lập một khoản tiết kiệm riêng cho nhà, góp đều mỗi tháng một số cố định, dù nhỏ cũng giữ đều."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Trong lòng bạn có chuẩn mực rõ ràng, và bạn thấy yên khi làm những việc có giá trị lâu dài cho gia đình.",
+     "de_vap": "Bạn dễ thấy trống trải khi việc mình làm không được ai coi trọng, dù bản thân vẫn làm tốt.",
+     "loi_khuyen": "Cuối mỗi tuần viết ra một việc bạn đã làm có ích cho ai đó, kể cả khi không ai nhắc đến."
+    },
+    "ham": {
+     "manh": "Bạn có lòng tự trọng giữ mình, không dễ làm điều trái với điều bạn tin là đúng.",
+     "de_vap": "Lúc thiếu người hiểu mình, bạn dễ thu mình lại, nghĩ không ai cần đến mình nữa.",
+     "loi_khuyen": "Khi thấy chán, gọi cho một người thân và kể thật một chuyện đang làm bạn nặng lòng."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn học được nề nếp và cách cư xử đàng hoàng từ cha mẹ, từ những người đi trước có uy tín.",
+     "de_vap": "Bạn dễ ngại nói thật với cha mẹ hay sếp vì giữ khuôn phép, để chuyện nhỏ thành khoảng cách.",
+     "loi_khuyen": "Trong bữa cơm với cha mẹ tuần này, hỏi họ một chuyện ngày xưa của họ và chỉ nghe, không góp ý."
+    },
+    "ham": {
+     "manh": "Bạn có ý thức giữ thể diện cho gia đình và tôn trọng người lớn, dù đôi lúc không đồng ý với họ.",
+     "de_vap": "Khi cha mẹ hay sếp áp đặt, bạn dễ cứng lại, giữ ý mình và tránh mặt thay vì nói chuyện.",
+     "loi_khuyen": "Khi bất đồng với người lớn, nói \"con hiểu ý bố mẹ, con xin nói thêm một điều\" rồi mới trình bày."
     }
    }
   },
-  "Cự Môn": {
-   "Quan Lộc": {
+  "Thiên Cơ": {
+   "Mệnh": {
     "sang": {
-     "manh": "Bạn làm tốt những việc cần nói, giải thích và thuyết phục người khác.",
-     "de_vap": "Bạn dễ tranh luận tới cùng dù chuyện nhỏ.",
-     "loi_khuyen": "Nên chọn trận để nói, việc nhỏ thì cho qua."
+     "manh": "Bạn nhanh nhạy, gặp việc rối là nghĩ ra ngay hai ba cách gỡ, nên hay được nhờ góp ý khi người khác bí.",
+     "de_vap": "Đầu óc chạy nhanh nên bạn dễ đổi kế hoạch giữa chừng, khiến người làm cùng thấy hụt hơi.",
+     "loi_khuyen": "Với mỗi việc quan trọng, viết ra một hướng đã chọn và giữ nó ít nhất hai tuần trước khi xét đổi."
     },
     "ham": {
-     "manh": "Bạn soi ra chỗ chưa ổn trong công việc nhanh hơn người khác.",
-     "de_vap": "Ở chỗ làm, lời nói của bạn dễ bị hiểu sai, việc hay phải làm lại vì thiếu thống nhất.",
-     "loi_khuyen": "Nên chốt việc bằng tin nhắn hoặc email sau mỗi buổi họp, nói chậm lại khi góp ý."
+     "manh": "Bạn để ý được nhiều chi tiết người khác bỏ qua và luôn có sẵn phương án dự phòng.",
+     "de_vap": "Bạn dễ nghĩ đi nghĩ lại một việc, lo trước những điều chưa xảy ra, rồi chần chừ không bắt tay vào làm.",
+     "loi_khuyen": "Khi thấy mình nghĩ quá lâu, đặt hạn chót 24 giờ để chọn, rồi làm bước đầu tiên ngay trong ngày."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Bạn và anh chị em, bạn thân hay bàn chuyện, trao ý tưởng, và thường giúp nhau gỡ rối bằng lời khuyên đúng lúc.",
+     "de_vap": "Nói chuyện với nhau thì hợp, nhưng làm việc chung lâu dài dễ lệch vì mỗi người một kế hoạch.",
+     "loi_khuyen": "Khi làm việc chung với anh chị em, ghi lại điều đã thống nhất vào tin nhắn để cả hai cùng xem lại."
+    },
+    "ham": {
+     "manh": "Bạn tinh ý với tâm trạng anh chị em, thường nhận ra ai đang có chuyện trước khi họ nói.",
+     "de_vap": "Bạn dễ đoán ý rồi tự suy diễn, hiểu một câu nói của anh chị em thành chuyện lớn.",
+     "loi_khuyen": "Lần tới thấy khó chịu vì một câu nói, hỏi lại thẳng \"ý anh chị là vậy phải không?\" trước khi nghĩ thêm."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Bạn hợp với người hiểu ý, nói chuyện được với nhau hàng giờ, và hai người hay cùng tính chuyện tương lai.",
+     "de_vap": "Hai người cùng nghĩ nhiều thì dễ đoán ý nhau, một tin nhắn trả lời chậm cũng thành chuyện để suy.",
+     "loi_khuyen": "Hẹn với người ấy một quy ước: có gì chưa vui thì nói trong ngày, không để qua đêm rồi tự đoán."
+    },
+    "ham": {
+     "manh": "Bạn để ý từng thay đổi nhỏ của người ấy và biết cách làm họ bất ngờ bằng những điều tinh tế.",
+     "de_vap": "Khi bất an, bạn dễ nghĩ ra nhiều kịch bản xấu trong đầu, rồi hỏi dò thay vì nói thẳng điều mình lo.",
+     "loi_khuyen": "Khi đang lo về chuyện hai người, nói ra đúng một câu \"mình đang lo chuyện này\" thay vì gặng hỏi vòng vo."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn thích dạy con cách suy nghĩ, trả lời những câu hỏi \"tại sao\" của con một cách kiên nhẫn và có lý lẽ.",
+     "de_vap": "Bạn dễ đổi cách dạy con liên tục theo từng bài đọc mới, khiến con không biết đâu là quy tắc thật.",
+     "loi_khuyen": "Chọn ba quy tắc trong nhà cho con và giữ nguyên ít nhất ba tháng, dù có đọc được cách dạy mới."
+    },
+    "ham": {
+     "manh": "Bạn lo cho con chu đáo, tính trước nhiều thứ để con không phải bỡ ngỡ.",
+     "de_vap": "Lo xa quá, bạn dễ hỏi han, nhắc nhở con dồn dập, làm con thấy bị theo dõi hơn là được quan tâm.",
+     "loi_khuyen": "Mỗi ngày chỉ nhắc con một việc quan trọng nhất, những việc còn lại để con tự xoay."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn kiếm tiền bằng cái đầu như tư vấn, lên kế hoạch, giải quyết vấn đề, và thường tìm ra cách làm ra tiền mới.",
+     "de_vap": "Thu nhập của bạn dễ lên xuống theo từng giai đoạn, tháng dư tháng hụt nếu không có khoản đều đặn.",
+     "loi_khuyen": "Giữ một khoản dự phòng bằng ba đến sáu tháng chi tiêu, chỉ dùng khi tháng đó thu nhập giảm."
+    },
+    "ham": {
+     "manh": "Bạn chịu khó tìm hiểu, so sánh trước khi chi tiền, ít khi mua vội.",
+     "de_vap": "Bạn dễ nhảy từ cách kiếm tiền này sang cách khác khi chưa thấy kết quả, nên công sức bị rải mỏng.",
+     "loi_khuyen": "Chọn một nguồn thu phụ duy nhất và theo nó sáu tháng, ghi số tiền mỗi tháng rồi mới quyết có làm tiếp không."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Đầu óc bạn tỉnh táo, xoay việc nhanh, và bạn biết điều chỉnh nhịp làm khi thấy mình bắt đầu quá tải.",
+     "de_vap": "Bạn dễ mang việc lên giường, nằm rồi vẫn nghĩ tiếp kế hoạch ngày mai, nên giấc ngủ hay chập chờn.",
+     "loi_khuyen": "Một giờ trước khi ngủ, viết hết việc ngày mai ra giấy rồi để điện thoại ra xa giường."
+    },
+    "ham": {
+     "manh": "Bạn nhạy với cơ thể mình, thấy khác lạ là để ý ngay.",
+     "de_vap": "Lo nghĩ nhiều nên bạn dễ mệt đầu, khó ngủ, và hay đọc linh tinh trên mạng rồi tự lo thêm.",
+     "loi_khuyen": "Giữ giờ đi ngủ và thức dậy cố định, đi bộ 20 phút mỗi ngày, có gì khác lạ thì đi khám thay vì tự tra mạng."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Bạn thích nghi nhanh ở môi trường mới, đến đâu cũng học được cái hay và tìm ra cách làm mới.",
+     "de_vap": "Thích đổi chỗ nên bạn dễ rời đi khi vừa thấy chán, trước khi kịp gặt hái ở chỗ cũ.",
+     "loi_khuyen": "Trước khi quyết chuyển việc hay chuyển nhà, ghi ra ba điều có thể mất và ba điều nhận được, để một tuần rồi đọc lại."
+    },
+    "ham": {
+     "manh": "Bạn tò mò, chịu đi xa, chịu thử, nên vốn hiểu biết về người và nơi chốn khá rộng.",
+     "de_vap": "Đi nhiều mà chưa có kế hoạch rõ, bạn dễ thấy mình chạy vòng, hết việc này sang việc khác mà chưa đứng chân.",
+     "loi_khuyen": "Mỗi lần định đổi chỗ, đặt một mục tiêu cụ thể cho chỗ mới, như học được nghề gì hay để dành được bao nhiêu."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn có nhiều bạn thông minh, đa dạng; cần ý tưởng hay lời khuyên, bạn biết ngay nên hỏi ai.",
+     "de_vap": "Bạn bè đến rồi đi, ít người gắn bó lâu, nên lúc cần người cùng làm việc dài hạn thì hơi khó tìm.",
+     "loi_khuyen": "Chọn ra ba người bạn muốn giữ lâu dài, mỗi tháng chủ động nhắn hỏi thăm từng người một lần."
+    },
+    "ham": {
+     "manh": "Bạn nói chuyện được với nhiều kiểu người và biết lựa lời trong từng tình huống.",
+     "de_vap": "Bạn dễ nghi ngờ ý tốt của người khác, nghĩ họ có tính toán, nên ngại mở lòng với đồng nghiệp.",
+     "loi_khuyen": "Khi được đồng nghiệp giúp, cảm ơn bằng một việc cụ thể đáp lại thay vì đoán xem họ muốn gì."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn giỏi lên kế hoạch, phân tích, gỡ việc rối; trong nhóm, bạn hợp vai người nghĩ ra cách làm.",
+     "de_vap": "Bạn dễ chán khi việc lặp lại, nên hay muốn đổi việc hoặc đổi cách làm khi dự án mới đi được nửa đường.",
+     "loi_khuyen": "Với mỗi dự án, đặt một mốc hoàn thành cụ thể và làm tới mốc đó rồi mới tính chuyện thay đổi."
+    },
+    "ham": {
+     "manh": "Bạn có nhiều ý tưởng cải tiến và nhìn ra chỗ chưa hợp lý trong cách làm việc của nhóm.",
+     "de_vap": "Nghĩ nhiều mà ít chốt, bạn dễ để sếp thấy bạn bàn hay nhưng chậm ra kết quả.",
+     "loi_khuyen": "Mỗi sáng chọn một việc quan trọng nhất và làm xong trước buổi trưa, rồi mới xem đến ý tưởng mới."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn tính toán nhà cửa rất khéo: chỗ ở tiện đi lại, bố trí gọn, tiền bỏ ra đáng đồng.",
+     "de_vap": "Bạn dễ đổi chỗ ở vài lần, mỗi lần chuyển lại tốn tiền và công sắp xếp lại từ đầu.",
+     "loi_khuyen": "Trước khi chuyển nhà, cộng hết chi phí chuyển, sửa, đặt cọc, rồi so với lợi ích ít nhất hai năm ở chỗ mới."
+    },
+    "ham": {
+     "manh": "Bạn chịu khó sửa sang, sắp xếp lại chỗ ở cho hợp lý dù không gian không lớn.",
+     "de_vap": "Bạn dễ phân vân mua hay thuê, ở đâu, chờ lâu đến mức lỡ những lúc thuận lợi.",
+     "loi_khuyen": "Đặt ra ba tiêu chí bắt buộc cho chỗ ở, chỗ nào đạt cả ba thì quyết trong vòng một tuần."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn thấy vui khi học được điều mới, hiểu ra một chuyện, và cái đầu tò mò giúp bạn ít khi chán đời.",
+     "de_vap": "Đầu óc lúc nào cũng chạy nên bạn khó ngồi yên, kể cả ngày nghỉ cũng tự tìm việc để nghĩ.",
+     "loi_khuyen": "Mỗi ngày dành 15 phút làm một việc không cần nghĩ như tưới cây, đi bộ, nấu ăn, và không mở điện thoại."
+    },
+    "ham": {
+     "manh": "Bạn hay tự vấn, biết nhìn lại mình sau mỗi chuyện.",
+     "de_vap": "Tự vấn quá dễ thành dằn vặt, bạn đem lỗi nhỏ ra nghĩ đi nghĩ lại cả tuần.",
+     "loi_khuyen": "Khi đang nghĩ mãi về một lỗi, viết nó ra cùng một việc lần sau làm khác, rồi gấp tờ giấy lại."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn học được từ cha mẹ, sếp cách nhìn trước tính sau, và hay được họ tin để cùng bàn việc.",
+     "de_vap": "Bạn dễ đoán ý người lớn rồi làm theo điều mình đoán, đến khi lệch thì cả hai đều phật ý.",
+     "loi_khuyen": "Khi cha mẹ hay sếp nhờ việc, hỏi lại một câu \"mình muốn kết quả thế nào ạ?\" trước khi làm."
+    },
+    "ham": {
+     "manh": "Bạn quan tâm cha mẹ theo kiểu tính trước, lo trước những thứ họ có thể cần.",
+     "de_vap": "Bạn dễ lo thay cha mẹ quá nhiều, rồi bực khi họ không làm theo kế hoạch bạn đã tính sẵn.",
+     "loi_khuyen": "Trước khi lo việc gì cho cha mẹ, hỏi họ muốn thế nào và để họ chọn, dù bạn nghĩ cách khác hay hơn."
+    }
+   }
+  },
+  "Thái Dương": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn nhiệt tình, nói thẳng, làm việc công khai; đi đến đâu người ta cũng dễ nhớ và tin bạn.",
+     "de_vap": "Bạn hay nhận việc giúp người trước việc của mình, đến cuối ngày mới thấy phần mình còn bỏ dở.",
+     "loi_khuyen": "Trước khi nhận lời giúp ai, xem lịch của mình đã kín chưa; kín rồi thì hẹn một ngày khác."
+    },
+    "ham": {
+     "manh": "Bạn tốt bụng, lo cho người khác rất thật, nhiều khi làm mà không cần ai biết.",
+     "de_vap": "Bạn dễ cho đi quá sức, lo cho mọi người mà ít được ghi nhận, rồi thấy mệt và tủi lúc chỉ có một mình.",
+     "loi_khuyen": "Mỗi tuần dành riêng một buổi tối cho việc của chính mình, báo trước với mọi người là hôm đó bạn bận."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Bạn thường là người lo cho anh chị em, bạn bè; nhà có việc, mọi người nghĩ đến bạn đầu tiên.",
+     "de_vap": "Lo quen rồi, bạn dễ gánh thay cả phần của anh chị em, kể cả tiền bạc, mà không ai nhận ra.",
+     "loi_khuyen": "Khi nhà có việc chung, đề nghị chia phần việc và phần tiền ngay từ đầu, ghi rõ ai làm gì."
+    },
+    "ham": {
+     "manh": "Bạn có lòng với anh chị em, sẵn sàng giúp dù bản thân cũng đang chật vật.",
+     "de_vap": "Bạn dễ giúp đến cạn sức rồi chạnh lòng vì anh chị em coi đó là chuyện đương nhiên.",
+     "loi_khuyen": "Lần tới anh chị em nhờ, nói rõ bạn giúp được đến đâu, phần còn lại để họ tự lo."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Bạn chọn người đàng hoàng, có danh dự, và hai người có thể đứng cạnh nhau một cách tự hào trước mọi người.",
+     "de_vap": "Bạn dễ bận việc ngoài, việc bạn bè, đến khi về nhà thì người ấy đã thấy mình đứng sau tất cả.",
+     "loi_khuyen": "Giữ một tối mỗi tuần chỉ dành cho hai người, không nhận lời ai khác vào tối đó."
+    },
+    "ham": {
+     "manh": "Bạn chăm lo cho người ấy bằng việc làm cụ thể, ít nói nhưng làm nhiều.",
+     "de_vap": "Bạn dễ lo hết phần nhà rồi giận ngầm vì người ấy không thấy, nhưng lại không nói ra.",
+     "loi_khuyen": "Nói với người ấy một việc bạn muốn được giúp tuần này, cụ thể như rửa bát hay đón con một hôm."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn muốn làm tấm gương cho con, sống thẳng thắn, và con thường cởi mở, dám nói điều mình nghĩ.",
+     "de_vap": "Bận bên ngoài nhiều, bạn dễ bù cho con bằng quà hơn là bằng thời gian ngồi cùng con.",
+     "loi_khuyen": "Mỗi ngày dành 15 phút ngồi với con không điện thoại, để con kể bất cứ chuyện gì con muốn."
+    },
+    "ham": {
+     "manh": "Bạn hy sinh nhiều cho con, lo cho con từ bữa ăn đến chuyện học mà ít khi kể công.",
+     "de_vap": "Lo cho con quá sức, bạn dễ kiệt rồi cáu với con vì những chuyện nhỏ.",
+     "loi_khuyen": "Giao cho con một việc nhà vừa sức mỗi ngày, vừa để con lớn vừa để bạn bớt một phần gánh."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Tiền đến với bạn qua công việc lộ diện, danh tiếng và sự tin tưởng của nhiều người.",
+     "de_vap": "Bạn hào phóng, dễ khao bạn bè, cho mượn tiền, nên cuối tháng có khi chẳng còn bao nhiêu.",
+     "loi_khuyen": "Mỗi lần nhận lương, chuyển ngay 15% vào tài khoản tiết kiệm, rồi mới tính chuyện đãi hay cho mượn."
+    },
+    "ham": {
+     "manh": "Bạn làm việc chăm, đồng tiền kiếm ra bằng mồ hôi nên bạn hiểu giá trị của nó.",
+     "de_vap": "Bạn dễ chi cho người khác trước, đến lúc chính mình cần thì lại hụt.",
+     "loi_khuyen": "Trước khi cho ai mượn tiền, tự hỏi nếu không nhận lại được thì mình có ổn không; không ổn thì từ chối."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn có sức bền, làm nhiều vẫn vui, và biết lấy lại sức nhanh nếu chịu nghỉ.",
+     "de_vap": "Bạn dễ làm quá sức vì không nỡ từ chối; sách xưa gắn mảng này với đôi mắt và nhịp tim, nên chăm sóc phòng ngừa.",
+     "loi_khuyen": "Khám định kỳ mỗi năm, nghỉ mắt 5 phút sau mỗi giờ nhìn màn hình, và ngủ đủ bảy tiếng mỗi đêm."
+    },
+    "ham": {
+     "manh": "Bạn chịu khó, ít kêu mệt, lúc nhà cần vẫn đứng ra lo được.",
+     "de_vap": "Lo cho người khác quen, bạn dễ quên ăn đúng bữa, thức khuya và để sức mình xuống lúc nào không hay.",
+     "loi_khuyen": "Đặt báo thức giờ ăn trưa và giờ đi ngủ, coi như cuộc hẹn không được lỡ với chính mình."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn được nhiều người biết, hợp môi trường rộng, có giao lưu, nói trước đám đông.",
+     "de_vap": "Bạn dễ nhận lời quá nhiều cuộc hẹn, sự kiện, rồi chạy mãi mà không còn sức cho việc chính.",
+     "loi_khuyen": "Mỗi tuần chọn tối đa hai cuộc gặp gỡ bên ngoài, những lời mời khác hẹn lại tuần sau."
+    },
+    "ham": {
+     "manh": "Bạn tử tế với người lạ, sẵn lòng giúp ở nơi mới, nên vẫn có người nhớ ơn bạn.",
+     "de_vap": "Ở chỗ mới bạn dễ làm nhiều mà ít được thấy, công của bạn hay bị người khác nhận.",
+     "loi_khuyen": "Làm xong việc gì cho nhóm, gửi một tin tóm tắt ngắn cho người phụ trách để công sức được ghi lại."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn có mạng lưới rộng, hay giúp người, nên khi cần thì cũng nhiều người sẵn lòng giúp lại.",
+     "de_vap": "Lòng tốt của bạn dễ bị dùng quá đà, có người chỉ tìm bạn khi cần nhờ.",
+     "loi_khuyen": "Để ý ai chỉ liên lạc khi cần nhờ; lần tới với họ, chỉ giúp phần nhỏ và xem họ đáp lại thế nào."
+    },
+    "ham": {
+     "manh": "Bạn đối xử tốt với đồng nghiệp, cấp dưới, thường đứng ra bênh người yếu thế.",
+     "de_vap": "Bạn dễ ôm việc của người khác rồi bị coi là người làm được hết, việc dồn về bạn ngày càng nhiều.",
+     "loi_khuyen": "Khi đồng nghiệp đẩy việc sang, nói \"mình đang có việc này, xong mới làm được\", kèm một ngày cụ thể."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp việc lộ diện và có ích cho nhiều người như dạy học, truyền thông, phục vụ cộng đồng, quản lý nhóm.",
+     "de_vap": "Bạn dễ ham nhận thêm vai trò vì muốn được ghi nhận, đến lúc quá tải thì việc nào cũng vội.",
+     "loi_khuyen": "Trước khi nhận thêm trách nhiệm, bỏ bớt hoặc giao lại một việc cũ cho cân."
+    },
+    "ham": {
+     "manh": "Bạn giỏi làm chuyên môn, làm thầm lặng mà chắc tay, hợp vị trí đứng sau hỗ trợ.",
+     "de_vap": "Bạn dễ thấy mình làm nhiều mà ít được thăng tiến, rồi cố tranh tiếng làm mình thêm mệt.",
+     "loi_khuyen": "Chọn một mảng chuyên môn và đi sâu đến mức người khác phải tìm đến bạn, thay vì cố có mặt ở mọi việc."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Nhà bạn thường sáng sủa, cửa mở đón khách, và tài sản bạn có là nhờ chính công sức làm việc.",
+     "de_vap": "Nhà đông khách, bạn dễ tốn nhiều cho tiếp đãi và ít có góc yên tĩnh của riêng mình.",
+     "loi_khuyen": "Giữ một góc nhỏ trong nhà chỉ cho bạn, mỗi tối ngồi đó mười phút không ai làm phiền."
+    },
+    "ham": {
+     "manh": "Bạn chịu khó vun vén nhà cửa, lo cho người trong nhà có chỗ ở tử tế.",
+     "de_vap": "Bạn dễ lo nhà cho cả họ hàng, gánh phần sửa sang hay trả góp nhiều hơn sức mình.",
+     "loi_khuyen": "Khi góp tiền nhà chung với người thân, ghi rõ phần mỗi người và giữ một bản giấy tờ."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn thấy vui khi được giúp ích, và tấm lòng rộng giúp bạn ít để bụng chuyện cũ.",
+     "de_vap": "Bạn dễ đo giá trị của mình bằng việc được người khác cần, nên ngày không ai nhờ lại thấy hụt.",
+     "loi_khuyen": "Mỗi tuần làm một việc chỉ vì bạn thích, không vì ai cần, như đọc sách, chơi thể thao, học một món mới."
+    },
+    "ham": {
+     "manh": "Bạn sống có tình, nhớ ơn người giúp mình và cố đền đáp.",
+     "de_vap": "Cho đi nhiều mà ít được đáp lại, bạn dễ thấy lòng mình cạn, mệt mà không biết nói với ai.",
+     "loi_khuyen": "Khi thấy mệt lòng, nói thật với một người bạn tin \"dạo này mình đuối\", và để họ lo cho mình một lần."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn học được từ cha, từ người đi trước tinh thần trách nhiệm và cách làm việc đường hoàng.",
+     "de_vap": "Bạn dễ mang áp lực phải làm cha mẹ tự hào, nhận việc lớn chỉ để được khen.",
+     "loi_khuyen": "Kể với cha mẹ một việc bạn đang làm vì bạn thích, không phải vì họ mong, và nói lý do của bạn."
+    },
+    "ham": {
+     "manh": "Bạn có trách nhiệm với cha mẹ, thường là người lo nhiều nhất trong nhà.",
+     "de_vap": "Bạn dễ ôm hết việc lo cho cha mẹ mà ít kể với anh chị em, rồi mệt mà không ai hay.",
+     "loi_khuyen": "Lập một nhóm tin nhắn với anh chị em, chia lịch thăm và lo cho cha mẹ, mỗi người một phần."
+    }
+   }
+  },
+  "Vũ Khúc": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn quyết nhanh, làm đến nơi, và giỏi tính chuyện tiền nong; người ta giao việc cho bạn là yên tâm có kết quả.",
+     "de_vap": "Bạn dễ nói thẳng đến mức cứng, nhất là khi người kia đang buồn và chỉ cần được nghe.",
+     "loi_khuyen": "Khi người thân kể chuyện buồn, hỏi \"mình nghe thôi hay cần mình góp ý?\" trước khi nói."
+    },
+    "ham": {
+     "manh": "Bạn sòng phẳng, nói được làm được, không thích nợ ai.",
+     "de_vap": "Bạn dễ va chạm vì nói thẳng và giữ ý mình, rồi thấy mình đứng một mình khi việc không suôn.",
+     "loi_khuyen": "Trong cuộc tranh luận tới, nói một câu ghi nhận ý người kia trước khi nói ý của bạn."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Bạn và anh chị em sòng phẳng, rõ ràng; giúp nhau thì giúp thật, tính toán thì minh bạch.",
+     "de_vap": "Quan hệ dễ lạnh đi nếu dính đến tiền bạc, như vay mượn hay chia tài sản mà không nói rõ.",
+     "loi_khuyen": "Mọi khoản cho anh chị em vay hay góp chung, ghi số tiền và ngày trả bằng tin nhắn cho cả hai cùng giữ."
+    },
+    "ham": {
+     "manh": "Bạn thẳng tính với anh chị em, có gì nói nấy, không để bụng lâu.",
+     "de_vap": "Bạn dễ chỉ nói với anh chị em chuyện tiền và việc, lâu dần thấy xa nhau mà không rõ vì sao.",
+     "loi_khuyen": "Lần tới gọi cho anh chị em, hỏi thăm một chuyện không liên quan đến tiền hay việc nhà."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Bạn hợp người thực tế, có năng lực; hai người cùng lo kinh tế gia đình thì nhà vững.",
+     "de_vap": "Nói chuyện tiền nhiều quá, tình cảm dễ khô, bữa cơm thành buổi họp ngân sách.",
+     "loi_khuyen": "Tách hẳn một buổi trong tuần để bàn chuyện tiền, những bữa ăn còn lại không nhắc đến tiền."
+    },
+    "ham": {
+     "manh": "Bạn lo cho gia đình bằng việc làm thực tế, ít hứa hẹn nhưng giữ lời.",
+     "de_vap": "Bạn dễ ít nói lời ngọt, khiến người ấy cảm thấy bạn lo toan nhiều hơn quan tâm.",
+     "loi_khuyen": "Mỗi ngày nhắn cho người ấy một câu ngắn không về việc, như \"hôm nay mình ổn không?\"."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn dạy con có kỷ luật, biết quý đồng tiền, và con lớn lên thường tự lập, làm đến nơi đến chốn.",
+     "de_vap": "Bạn dễ nghiêm quá, khen ít chê nhiều, làm con ngại kể với bạn khi gặp chuyện.",
+     "loi_khuyen": "Mỗi ngày khen con một việc cụ thể con đã làm tốt, nói rõ việc đó là gì."
+    },
+    "ham": {
+     "manh": "Bạn lo cho con đầy đủ, tính trước chuyện học hành và tiền bạc cho con.",
+     "de_vap": "Bạn dễ thể hiện tình thương bằng tiền và yêu cầu, ít bằng lời và cái ôm.",
+     "loi_khuyen": "Tối nay hỏi con một câu \"hôm nay có gì vui không?\" và ngồi nghe hết, không chen lời dạy."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn giỏi kiếm và giữ tiền, chi tiêu có kế hoạch, và biết đồng tiền nên nằm ở đâu thì sinh lời.",
+     "de_vap": "Bạn dễ tiếc tiền cho những việc không đo được, như nghỉ ngơi hay quà cho người thân.",
+     "loi_khuyen": "Mỗi tháng để riêng một khoản nhỏ chỉ để tiêu cho niềm vui của bạn và người nhà, tiêu hết không tiếc."
+    },
+    "ham": {
+     "manh": "Bạn quyết đoán khi có cơ hội và dám bỏ công làm ra tiền.",
+     "de_vap": "Tiền dễ đến rồi đi, tháng dư thì chi mạnh tay, tháng sau lại hụt mà không rõ tiêu vào đâu.",
+     "loi_khuyen": "Ghi mọi khoản chi trong một tháng vào điện thoại, cuối tháng cắt bớt mục tiêu nhiều nhất."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn có kỷ luật với cơ thể, đã đặt lịch tập hay giờ ngủ thì thường giữ được.",
+     "de_vap": "Bạn hay nén căng thẳng trong người, không kể với ai, đến lúc thấy mệt thì đã kéo dài.",
+     "loi_khuyen": "Mỗi tuần chọn một cách xả áp lực bằng vận động, như chạy bộ hay bơi, và ghi vào lịch như cuộc họp."
+    },
+    "ham": {
+     "manh": "Bạn chịu đựng giỏi, gặp lúc khó vẫn cắn răng làm cho xong.",
+     "de_vap": "Chịu đựng quen, bạn dễ bỏ qua những dấu hiệu mệt của cơ thể, cứ nghĩ là chưa sao.",
+     "loi_khuyen": "Đặt lịch khám định kỳ ngay hôm nay, và khi mệt kéo dài quá một tuần thì đi khám, không đợi."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài làm ăn bạn vững vàng, hợp môi trường cạnh tranh, nơi kết quả nói bằng con số.",
+     "de_vap": "Ở ngoài bạn dễ chỉ thấy việc, ít để ý người, nên quan hệ dừng ở mức đối tác.",
+     "loi_khuyen": "Sau mỗi cuộc gặp làm ăn, nhớ một chuyện riêng của người kia và hỏi lại ở lần gặp sau."
+    },
+    "ham": {
+     "manh": "Bạn dám đi xa làm ăn, chịu được vất vả ở môi trường lạ.",
+     "de_vap": "Ở chỗ lạ, bạn dễ va chạm vì nói thẳng, bị hiểu là khó gần.",
+     "loi_khuyen": "Tuần đầu ở chỗ mới, chào hỏi và hỏi ý mọi người trước khi nhận xét về cách làm của họ."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn làm việc với đồng nghiệp rõ ràng, công bằng, ai làm tốt thì được ghi nhận đúng.",
+     "de_vap": "Bạn dễ chỉ nhìn hiệu quả, ít để ý cảm xúc của người làm cùng, nên khó giữ người lâu.",
+     "loi_khuyen": "Mỗi tuần cảm ơn riêng một đồng nghiệp bằng lời cụ thể về việc họ đã làm."
+    },
+    "ham": {
+     "manh": "Bạn sòng phẳng với bạn bè, không lợi dụng ai.",
+     "de_vap": "Bạn dễ dính chuyện tiền với bạn bè, cho vay hay hùn vốn rồi mất lòng nhau.",
+     "loi_khuyen": "Không hùn vốn với bạn khi chưa có giấy ghi rõ phần góp, phần chia và cách rút ra."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp việc cần quyết đoán và con số như tài chính, kỹ thuật, quản trị, kinh doanh có kỷ luật.",
+     "de_vap": "Bạn dễ đòi người khác theo tốc độ của mình, làm cả nhóm căng thẳng trước hạn chót.",
+     "loi_khuyen": "Khi giao việc, hỏi người nhận cần bao lâu và thống nhất hạn chót cùng họ, không tự đặt một mình."
+    },
+    "ham": {
+     "manh": "Bạn chăm chỉ, chịu làm việc nặng, và có tài trong những việc cần tay nghề.",
+     "de_vap": "Bạn dễ cứng nhắc với sếp hoặc khách, giữ cách làm của mình dù hoàn cảnh đã khác.",
+     "loi_khuyen": "Khi bị góp ý về cách làm, thử làm theo cách của người kia một lần rồi so kết quả."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn tích luỹ tài sản có kế hoạch, mua gì cũng tính giá trị lâu dài, nên của để dành vững dần.",
+     "de_vap": "Bạn dễ coi nhà là tài sản hơn là tổ ấm, nhà gọn gàng mà thiếu chỗ cho cả nhà quây quần.",
+     "loi_khuyen": "Dành một góc trong nhà cho ảnh gia đình và đồ kỷ niệm, chỗ mọi người hay ngồi cùng nhau."
+    },
+    "ham": {
+     "manh": "Bạn làm lụng vất vả để có tài sản và biết giữ gìn đồ đạc cẩn thận.",
+     "de_vap": "Bạn dễ quyết mua bán nhà đất nhanh theo cảm tính, rồi kẹt tiền trả góp.",
+     "loi_khuyen": "Trước khi xuống tiền nhà đất, để qua ít nhất ba ngày và hỏi ý một người am hiểu."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn thấy yên khi mọi thứ trong tầm tay: tiền có kế hoạch, việc có lịch, nhà có nề nếp.",
+     "de_vap": "Bạn dễ khó chịu khi có việc ngoài dự tính, ngày nghỉ cũng lo xem lại sổ sách.",
+     "loi_khuyen": "Mỗi tuần để một buổi không có kế hoạch, cứ làm theo hứng và tập chấp nhận vài thứ lệch lịch."
+    },
+    "ham": {
+     "manh": "Bạn ít kể khổ, tự lo được chuyện của mình.",
+     "de_vap": "Bạn dễ giữ hết trong lòng, ít người biết bạn đang nghĩ gì, nên cô đơn mà không nói.",
+     "loi_khuyen": "Chọn một người tin được, mỗi tháng kể với họ một chuyện bạn đang bận lòng."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn học được tính kỷ luật, làm đến nơi từ cha mẹ, từ những người sếp nghiêm, và nhờ đó vững tay nghề.",
+     "de_vap": "Bạn dễ thấy cha mẹ, sếp khắt khe rồi giữ khoảng cách, chỉ nói chuyện khi có việc.",
+     "loi_khuyen": "Tuần này gọi cho cha mẹ một cuộc chỉ để hỏi thăm, không có việc gì cần nhờ hay báo."
+    },
+    "ham": {
+     "manh": "Bạn tôn trọng nguyên tắc của cha mẹ, dù có lúc không đồng ý vẫn làm tròn phần mình.",
+     "de_vap": "Bạn và cha mẹ dễ nói chuyện cứng với nhau, cả hai cùng thẳng nên hay va chạm.",
+     "loi_khuyen": "Khi bất đồng với cha mẹ, hạ giọng, nói chậm, và dừng lại trước khi câu chuyện thành to tiếng."
     }
    }
   },
   "Thiên Đồng": {
-   "Tài Bạch": {
+   "Mệnh": {
     "sang": {
-     "manh": "Tiền đến với bạn khá êm, ít phải giành giật.",
-     "de_vap": "Bạn dễ tiêu cho vui mà quên để dành.",
-     "loi_khuyen": "Nên tách khoản để dành ngay khi nhận lương."
+     "manh": "Bạn dễ gần, vui tính, ở đâu cũng làm không khí dễ thở hơn, và gặp khó thường có người giúp.",
+     "de_vap": "Bạn ngại va chạm nên hay để việc khó sang mai, đến lúc gấp mới làm.",
+     "loi_khuyen": "Mỗi sáng làm việc khó nhất trước tiên, chỉ 30 phút, rồi mới đến những việc dễ chịu."
     },
     "ham": {
-     "manh": "Bạn biết sống vừa đủ, không quá áp lực chuyện tiền.",
-     "de_vap": "Bạn hay để chuyện tiền trôi, ngại xem lại sổ sách nên tiền hụt lúc nào không hay.",
-     "loi_khuyen": "Nên ghi thu chi mỗi tuần một lần và đặt hạn mức cho các khoản tiêu vặt."
+     "manh": "Bạn hiền, dễ thích nghi, hoàn cảnh thay đổi vẫn tìm được niềm vui nhỏ.",
+     "de_vap": "Bạn dễ trôi theo hoàn cảnh, để người khác hoặc may rủi quyết thay mình.",
+     "loi_khuyen": "Viết ra một mục tiêu cho ba tháng tới, dán ở chỗ hay nhìn, mỗi tuần làm một bước nhỏ."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Bạn và anh chị em, bạn bè hoà thuận, gặp nhau là vui, ít khi giận nhau lâu.",
+     "de_vap": "Vì ngại mất hoà khí, bạn dễ im lặng khi anh chị em làm điều chưa đúng với mình.",
+     "loi_khuyen": "Lần tới thấy không vừa ý, nói nhẹ nhàng một câu ngay lúc đó thay vì cười cho qua."
+    },
+    "ham": {
+     "manh": "Bạn hay nhường nhịn anh chị em, ít tranh phần.",
+     "de_vap": "Bạn dễ dựa vào anh chị em, để họ lo những việc khó trong nhà.",
+     "loi_khuyen": "Nhận làm một việc chung của gia đình trong tháng này và làm đến xong, không đợi ai nhắc."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Bạn hợp một tình cảm êm đềm, biết chiều người ấy, và nhà có bạn thì không khí nhẹ nhàng.",
+     "de_vap": "Bạn dễ né tránh khi hai người có chuyện, cười trừ cho qua rồi để nó âm ỉ.",
+     "loi_khuyen": "Khi hai người có chuyện, hẹn nói trong vòng một ngày, mỗi người nói năm phút không ngắt lời."
+    },
+    "ham": {
+     "manh": "Bạn dễ thương, biết làm hoà nhanh sau những lần giận dỗi.",
+     "de_vap": "Bạn dễ mong được chiều mà ít chủ động lo việc nhà, khiến người ấy thấy mình gánh nhiều hơn.",
+     "loi_khuyen": "Tự nhận một việc nhà cố định, như đi chợ hay giặt đồ, và làm đều không cần nhắc."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn gần gũi con, chơi được với con, và con thấy thoải mái kể chuyện với bạn.",
+     "de_vap": "Bạn dễ chiều con quá, nói \"không\" rồi lại đổi ý khi con nài.",
+     "loi_khuyen": "Chọn hai điều \"không\" trong nhà và giữ đúng mỗi lần, dù con khóc hay nài."
+    },
+    "ham": {
+     "manh": "Bạn hiền với con, ít quát mắng, con không sợ bạn.",
+     "de_vap": "Bạn dễ để việc dạy con cho người khác lo, đến lúc con có chuyện mới bất ngờ.",
+     "loi_khuyen": "Mỗi tuần dành một buổi xem bài vở hoặc hỏi chuyện trường lớp của con, ghi lại điều con kể."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Tiền của bạn đến đều đặn, ít khi thiếu hụt lớn, và bạn biết tiêu cho những niềm vui đáng tiền.",
+     "de_vap": "Bạn dễ tiêu cho niềm vui nhỏ hằng ngày như cà phê, ăn uống, đồ xinh, cộng lại thành khoản lớn.",
+     "loi_khuyen": "Đặt một hạn mức tiêu vặt mỗi tuần, chuyển sẵn vào một ví riêng, hết là dừng."
+    },
+    "ham": {
+     "manh": "Bạn không quá đặt nặng tiền, nên ít khi vì tiền mà mất lòng ai.",
+     "de_vap": "Bạn dễ ngại tính toán, để tiền trôi đi rồi cuối tháng mới giật mình.",
+     "loi_khuyen": "Cài lệnh tự động chuyển một khoản cố định sang tài khoản tiết kiệm ngay ngày nhận lương."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn có tinh thần thoải mái, ít căng thẳng, nên lấy lại sức khá nhanh sau những ngày mệt.",
+     "de_vap": "Bạn dễ ăn uống tuỳ hứng, ngồi nhiều, lười vận động, cơ thể ì dần mà không để ý.",
+     "loi_khuyen": "Đi bộ 30 phút mỗi ngày sau bữa tối, và ăn ba bữa vào giờ gần giống nhau."
+    },
+    "ham": {
+     "manh": "Bạn biết nghỉ ngơi, không ép mình quá sức.",
+     "de_vap": "Bạn dễ trì hoãn chuyện chăm sóc bản thân, như hẹn đi khám hay bắt đầu tập, mãi chưa làm.",
+     "loi_khuyen": "Đặt lịch khám định kỳ ngay trong tuần này, và rủ một người bạn cùng tập để có người nhắc."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn dễ được quý mến, đi đâu cũng có người giúp, hợp những chuyến đi trải nghiệm.",
+     "de_vap": "Bạn dễ ham vui khi ra ngoài, nhận lời đi chơi mà quên việc đã hẹn.",
+     "loi_khuyen": "Trước khi nhận lời đi chơi, mở lịch việc của mình trong ngày đó ra xem trước."
+    },
+    "ham": {
+     "manh": "Bạn dễ hoà vào chỗ mới, không làm mất lòng ai.",
+     "de_vap": "Ở môi trường mới bạn dễ chờ người khác dẫn, ít tự đi tìm cơ hội.",
+     "loi_khuyen": "Ở chỗ mới, mỗi tuần tự giới thiệu mình với một người và hỏi họ đang làm gì."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn có nhiều bạn vui vẻ, đồng nghiệp dễ chịu, ai cũng muốn làm việc cạnh bạn.",
+     "de_vap": "Bạn bè đông nhưng ít người cùng làm việc lớn, nên lúc cần hợp sức thì thiếu người chịu khó.",
+     "loi_khuyen": "Khi cần làm việc lớn, chọn người theo việc họ đã làm được, đừng chọn chỉ vì ngồi cùng thấy vui."
+    },
+    "ham": {
+     "manh": "Bạn dễ tha thứ cho bạn bè, không để bụng.",
+     "de_vap": "Bạn dễ để bạn bè rủ rê vào những cuộc vui hao thời gian và tiền.",
+     "loi_khuyen": "Mỗi tuần giới hạn hai buổi đi chơi tối, những buổi khác nói thật là mình bận việc riêng."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp việc dịch vụ, chăm sóc, giáo dục, môi trường ổn định, nơi sự dễ chịu của bạn được quý.",
+     "de_vap": "Bạn dễ ngại nhận việc khó hay vị trí có áp lực, nên bỏ qua cơ hội lên vị trí cao hơn.",
+     "loi_khuyen": "Năm nay nhận ít nhất một việc khó hơn sức mình một chút, và nhờ một người có kinh nghiệm kèm."
+    },
+    "ham": {
+     "manh": "Bạn làm việc ôn hoà, ít gây xung đột, giữ được không khí trong nhóm.",
+     "de_vap": "Bạn dễ làm cho đủ mà chưa đặt mục tiêu riêng, nên năm này qua năm khác thấy công việc chưa tiến.",
+     "loi_khuyen": "Đầu mỗi tháng viết ra một kết quả cụ thể muốn đạt trong công việc, cuối tháng tự xem đã làm được chưa."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn biết làm cho nhà thoải mái, tiện nghi, và nhà bạn là chỗ mọi người thích ghé.",
+     "de_vap": "Bạn dễ mua đồ cho nhà theo hứng, nhà nhiều đồ mà ít chỗ.",
+     "loi_khuyen": "Mỗi lần mua một món đồ mới cho nhà, bỏ hoặc cho đi một món cũ."
+    },
+    "ham": {
+     "manh": "Bạn không đặt nặng tài sản lớn, ở đâu cũng sống vui được.",
+     "de_vap": "Bạn dễ chậm lo chuyện nhà cửa lâu dài, ở thuê mãi mà chưa có kế hoạch.",
+     "loi_khuyen": "Ngồi tính xem mình muốn có chỗ ở ổn định vào năm nào, rồi chia ra số tiền cần để dành mỗi tháng."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn lạc quan, biết tìm niềm vui trong chuyện nhỏ, và chính điều đó giúp bạn qua những lúc khó.",
+     "de_vap": "Bạn dễ dùng niềm vui để tránh nghĩ đến chuyện cần giải quyết.",
+     "loi_khuyen": "Mỗi tuần viết ra một việc bạn đang né, rồi làm bước nhỏ nhất của việc đó ngay trong ngày."
+    },
+    "ham": {
+     "manh": "Bạn hiền lành, ít ganh ghét, sống không làm hại ai.",
+     "de_vap": "Bạn dễ buông xuôi khi gặp khó, nghĩ thôi kệ rồi để mọi thứ trôi.",
+     "loi_khuyen": "Khi muốn bỏ cuộc, hẹn với mình thử thêm đúng một lần nữa, rồi mới quyết dừng."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn được cha mẹ, người trên thương và che chở, và quan hệ trong nhà thường êm ấm.",
+     "de_vap": "Được chiều quen, bạn dễ chậm tự lập, việc lớn vẫn chờ cha mẹ quyết.",
+     "loi_khuyen": "Tự quyết một việc lớn của mình trong năm nay, rồi báo cho cha mẹ biết thay vì xin ý trước."
+    },
+    "ham": {
+     "manh": "Bạn hiếu thuận, ít cãi cha mẹ, giữ được hoà khí trong nhà.",
+     "de_vap": "Bạn dễ nghe theo cha mẹ hay sếp cả những việc mình không muốn, rồi làm mà không vui.",
+     "loi_khuyen": "Lần tới không đồng ý với người lớn, nói nhẹ \"con muốn thử cách này\" và nêu một lý do."
+    }
+   }
+  },
+  "Liêm Trinh": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn có nguyên tắc rõ, làm việc chính xác, và có sức hút khiến người khác muốn theo.",
+     "de_vap": "Bạn dễ phản ứng mạnh khi thấy điều trái ý, lời nói ra nặng hơn điều bạn thật lòng nghĩ.",
+     "loi_khuyen": "Khi thấy mình bắt đầu nóng, đếm đến mười hoặc ra ngoài uống cốc nước rồi mới trả lời."
+    },
+    "ham": {
+     "manh": "Bạn có cảm xúc mạnh và lòng quyết tâm, đã muốn gì thì theo đến cùng.",
+     "de_vap": "Bạn dễ nóng, dễ tự ái, và đôi khi bị cuốn vào chuyện thị phi không phải của mình.",
+     "loi_khuyen": "Khi gặp chuyện bực, đợi qua một đêm rồi mới nhắn tin hay nói chuyện với người kia."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Bạn và anh chị em đều có chính kiến, khi cùng hướng thì làm được việc lớn.",
+     "de_vap": "Ai cũng giữ ý mình nên chuyện nhỏ trong nhà dễ thành căng, nhất là chuyện chia việc, chia phần.",
+     "loi_khuyen": "Khi bàn việc nhà, mỗi người nói ý của mình một lượt, ghi lại, rồi mới cùng chọn."
+    },
+    "ham": {
+     "manh": "Bạn bênh anh chị em hết lòng khi họ bị người ngoài làm khó.",
+     "de_vap": "Bạn dễ giận anh chị em vì một câu nói, rồi giữ thái độ lâu.",
+     "loi_khuyen": "Sau mỗi lần căng với anh chị em, chủ động nhắn một tin hỏi thăm trong vòng ba ngày."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Bạn yêu hết lòng, chung thuỷ, và mong người ấy cũng giữ trọn như vậy.",
+     "de_vap": "Yêu mạnh nên bạn dễ ghen, dễ đòi hỏi, một tin nhắn lạ cũng làm bạn bất an cả ngày.",
+     "loi_khuyen": "Nói với người ấy điều gì làm bạn bất an, rồi cùng thống nhất vài điều cả hai đều thấy thoải mái."
+    },
+    "ham": {
+     "manh": "Bạn đam mê, nồng nhiệt, và có sức hút với người mình thích.",
+     "de_vap": "Lúc cãi nhau với người yêu, bạn dễ nói lời nặng hoặc đem chuyện cũ ra, làm vết xước lâu lành.",
+     "loi_khuyen": "Thống nhất với người ấy một câu tạm dừng, như \"mình nghỉ 30 phút nhé\", dùng mỗi khi cãi nhau to."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn dạy con sống ngay thẳng, giữ lời, và con học được từ bạn cách giữ nguyên tắc.",
+     "de_vap": "Bạn dễ đặt chuẩn quá cao, con làm sai một lần là bị nhắc mãi.",
+     "loi_khuyen": "Khi con mắc lỗi, nói một lần rõ ràng, rồi không nhắc lại chuyện đó trong tuần."
+    },
+    "ham": {
+     "manh": "Bạn thương con mãnh liệt, sẵn sàng làm mọi thứ để bảo vệ con.",
+     "de_vap": "Lúc mệt mà con không nghe lời, bạn dễ to tiếng rồi sau đó lại hối.",
+     "loi_khuyen": "Khi thấy mình sắp quát con, đi sang phòng khác hai phút, quay lại rồi mới nói."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn kiếm tiền bằng năng lực tổ chức và kỷ luật, đồng tiền đến từ việc làm rõ ràng.",
+     "de_vap": "Khi thấy cơ hội lớn, bạn dễ bị cuốn vào những khoản kiếm nhanh mà thiếu minh bạch.",
+     "loi_khuyen": "Với mọi khoản đầu tư hứa lãi cao, hỏi rõ tiền sinh lời từ đâu; không trả lời được thì không bỏ tiền."
+    },
+    "ham": {
+     "manh": "Bạn có ý chí làm giàu và dám nghĩ lớn chuyện tiền bạc.",
+     "de_vap": "Bạn dễ chi theo cảm xúc lúc vui hay lúc bực, hoặc tin lời mời làm ăn nhanh.",
+     "loi_khuyen": "Đặt quy tắc cho mình: mọi khoản chi trên một mức bạn tự chọn phải đợi 48 giờ mới quyết."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn có sức bền và kỷ luật, đã quyết giữ nếp sinh hoạt nào thì giữ được.",
+     "de_vap": "Căng thẳng dồn lâu dễ bùng ra thành nóng giận, làm bạn mệt cả người lẫn lòng.",
+     "loi_khuyen": "Mỗi tuần dành ba buổi vận động ra mồ hôi, như chạy, bơi, đạp xe, để xả áp lực."
+    },
+    "ham": {
+     "manh": "Bạn biết cơ thể mình cần gì khi chịu lắng nghe nó.",
+     "de_vap": "Khi bực, bạn dễ trút vào ăn uống, thức khuya hay làm việc quá giờ để quên.",
+     "loi_khuyen": "Khi đang bực, thay việc ăn vặt hay lướt điện thoại bằng mười phút đi bộ ra ngoài."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn có sức hút, dễ được chú ý, và hợp vai trò cần đứng ra xử lý việc khó.",
+     "de_vap": "Được chú ý nhiều thì cũng dễ bị bàn tán, nhất là khi bạn nói thẳng ở chỗ đông người.",
+     "loi_khuyen": "Ở chỗ đông người, góp ý riêng với người đó thay vì nói trước mặt mọi người."
+    },
+    "ham": {
+     "manh": "Bạn dám đến chỗ mới, dám đối mặt với những tình huống khó.",
+     "de_vap": "Ở ngoài bạn dễ dính chuyện thị phi hoặc va chạm vì một phút nóng.",
+     "loi_khuyen": "Khi có người khiêu khích ở ngoài, chọn rời đi trước, chuyện đúng sai tính sau."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn có sức hút với đồng nghiệp, biết tổ chức người làm việc theo nguyên tắc.",
+     "de_vap": "Quan hệ quanh bạn dễ phức tạp, lẫn chuyện tình cảm với chuyện công việc.",
+     "loi_khuyen": "Giữ rõ ranh giới: chuyện tiền và việc với bạn bè luôn có tin nhắn hoặc giấy tờ ghi lại."
+    },
+    "ham": {
+     "manh": "Bạn trung thành với người mình tin, sẵn sàng giúp bạn bè lúc khó.",
+     "de_vap": "Bạn dễ bị kéo vào mâu thuẫn của người khác, đứng về một phe rồi mang tiếng.",
+     "loi_khuyen": "Khi bạn bè kể xấu về ai, nghe thôi, không kể lại và không đứng ra phân xử."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp việc cần kỷ luật và chính xác như quản lý, pháp chế, kỹ thuật, kiểm soát chất lượng.",
+     "de_vap": "Bạn dễ khắt khe với đồng nghiệp, ai làm sai quy trình là bạn khó chịu ra mặt.",
+     "loi_khuyen": "Khi thấy đồng nghiệp làm sai, góp ý riêng và đưa luôn cách sửa kèm theo chỗ sai."
+    },
+    "ham": {
+     "manh": "Bạn có tham vọng, chịu làm nhiều để lên vị trí mình mong muốn.",
+     "de_vap": "Muốn nhanh thì dễ tính đến đường tắt, hoặc va chạm với sếp khi thấy không công bằng.",
+     "loi_khuyen": "Với mỗi cơ hội đi nhanh, tự hỏi nếu việc này bị công khai thì mình có ổn không; không ổn thì bỏ."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn lo nhà cửa, tài sản kỹ, giấy tờ rõ ràng, nên của cải giữ được lâu.",
+     "de_vap": "Bạn dễ căng thẳng với người cùng ở vì những nguyên tắc nhỏ trong nhà.",
+     "loi_khuyen": "Họp gia đình ngắn, thống nhất năm quy tắc chung trong nhà, ngoài năm điều đó thì để mọi người tự do."
+    },
+    "ham": {
+     "manh": "Bạn có ý chí lo được nhà cho mình bằng chính sức mình.",
+     "de_vap": "Bạn dễ vướng rắc rối khi đứng tên chung tài sản hay mua bán thiếu giấy tờ.",
+     "loi_khuyen": "Mọi giao dịch nhà đất, đọc kỹ hợp đồng và nhờ người có chuyên môn xem trước khi ký."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn sống đúng giá trị mình tin, và thấy yên khi việc mình làm rõ ràng, ngay thẳng.",
+     "de_vap": "Trong lòng bạn hay giằng co giữa điều mình muốn và điều mình cho là đúng.",
+     "loi_khuyen": "Khi phân vân, viết ra hai cột \"muốn\" và \"nên\", rồi chọn cách mà một năm sau bạn không thấy hối."
+    },
+    "ham": {
+     "manh": "Bạn có đam mê mạnh, sống hết mình với điều mình thích.",
+     "de_vap": "Bạn dễ tự trách sau những lần nóng, nghĩ mãi về điều đã nói.",
+     "loi_khuyen": "Sau một lần lỡ lời, xin lỗi người kia một câu ngắn, rồi cho phép mình bỏ chuyện đó lại."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn học được từ cha mẹ, sếp tính nguyên tắc và sự nghiêm túc trong công việc.",
+     "de_vap": "Bạn và người lớn dễ căng khi cả hai cùng giữ nguyên tắc riêng, không ai chịu lùi.",
+     "loi_khuyen": "Khi bất đồng với cha mẹ hay sếp, tìm một điểm cả hai cùng đồng ý trước rồi mới bàn tiếp."
+    },
+    "ham": {
+     "manh": "Bạn dám nói thật với người lớn những điều người khác ngại nói.",
+     "de_vap": "Bạn dễ phản ứng gay gắt khi bị người trên áp đặt, làm quan hệ thêm khó.",
+     "loi_khuyen": "Khi không đồng ý với sếp, xin một buổi nói riêng và chuẩn bị sẵn ba lý do bằng số liệu."
+    }
+   }
+  },
+  "Thiên Phủ": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn điềm tĩnh, đáng tin, biết giữ gìn, và người khác yên tâm khi giao việc hay giao tiền cho bạn.",
+     "de_vap": "Bạn dễ chọn chỗ an toàn quá lâu, bỏ qua cơ hội vì ngại thay đổi.",
+     "loi_khuyen": "Mỗi quý thử một việc mới nhỏ trong công việc hay cuộc sống, với mức rủi ro bạn chấp nhận được."
+    },
+    "ham": {
+     "manh": "Bạn cẩn thận, ít khi làm liều, nên ít phải sửa sai lớn.",
+     "de_vap": "Khi thiếu người hỗ trợ, bạn dễ lo thiếu, dè dặt quá mức, cái gì cũng giữ chặt.",
+     "loi_khuyen": "Lần tới có cơ hội mới, hỏi ý một người bạn tin rồi quyết trong một tuần, không để kéo dài."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Anh chị em, bạn bè của bạn là chỗ dựa thực tế, cần gì thì nhờ được.",
+     "de_vap": "Quan hệ bền nhưng dễ dừng ở mức lo cho nhau chuyện vật chất, ít khi nói chuyện thật lòng.",
+     "loi_khuyen": "Lần gặp anh chị em tới, hỏi một chuyện họ đang lo, không phải chuyện tiền hay việc nhà."
+    },
+    "ham": {
+     "manh": "Bạn lo cho anh chị em chu đáo khi họ cần, dù không nói nhiều.",
+     "de_vap": "Bạn dễ giữ kẽ với anh chị em, ngại nhờ vì sợ phiền.",
+     "loi_khuyen": "Tháng này nhờ anh chị em một việc nhỏ, để họ có dịp giúp bạn lại."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Bạn hợp người chu đáo, cùng xây một gia đình ổn định, mọi thứ có nề nếp.",
+     "de_vap": "Ổn định lâu thì dễ nhàm, hai người sống cạnh nhau mà ít điều mới để nói.",
+     "loi_khuyen": "Mỗi tháng cùng người ấy làm một việc chưa làm bao giờ, như món ăn mới hay chỗ đi chơi mới."
+    },
+    "ham": {
+     "manh": "Bạn chung tình, giữ gìn gia đình, ít khi thay lòng.",
+     "de_vap": "Bạn dễ giữ chặt thói quen cũ, người ấy muốn thay đổi gì cũng thấy khó.",
+     "loi_khuyen": "Khi người ấy đề nghị thay đổi một việc trong nhà, đồng ý thử một tháng rồi mới đánh giá."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn lo cho con chu đáo, đủ đầy, và con lớn lên trong một nền nếp vững.",
+     "de_vap": "Bạn dễ lo cho con nhiều về vật chất mà ít thời gian trò chuyện.",
+     "loi_khuyen": "Mỗi tối hỏi con một câu về ngày của con và nghe hết câu trả lời trước khi hỏi chuyện học."
+    },
+    "ham": {
+     "manh": "Bạn cẩn thận với con, tính trước cho con từng bước.",
+     "de_vap": "Bạn dễ bảo bọc con quá, ít cho con tự thử và tự chịu.",
+     "loi_khuyen": "Cho con tự làm một việc bạn vẫn làm thay, như tự chuẩn bị cặp sách hay tự đi mua đồ gần nhà."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn giỏi tích luỹ, chi tiêu thận trọng, quản lý tiền như giữ một cái kho, ít khi hụt.",
+     "de_vap": "Bạn dễ giữ tiền chặt quá, để tiền nằm yên mà không cho nó làm việc.",
+     "loi_khuyen": "Chia tiền để dành làm hai phần: một phần dự phòng giữ nguyên, một phần tìm hiểu kỹ rồi đầu tư dài hạn."
+    },
+    "ham": {
+     "manh": "Bạn biết dè sẻn, không tiêu hoang, khó khăn vẫn xoay được.",
+     "de_vap": "Bạn dễ lo thiếu tiền dù đang đủ, tiếc cả những khoản chi cần thiết cho bản thân.",
+     "loi_khuyen": "Lập danh sách khoản chi thiết yếu cho chính mình mỗi tháng, như ăn uống và khám định kỳ, rồi chi không do dự."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn sống điều độ, giữ được nếp ăn ngủ, và cơ thể thường ổn định.",
+     "de_vap": "Bạn dễ tích căng thẳng vì lo giữ mọi thứ an toàn, và ăn uống thất thường khi có chuyện lo.",
+     "loi_khuyen": "Ăn ba bữa đúng giờ, ăn chậm, và đi bộ sau bữa tối ít nhất 20 phút."
+    },
+    "ham": {
+     "manh": "Bạn chịu khó giữ gìn sức khoẻ khi đã biết cách.",
+     "de_vap": "Bạn dễ lo lắng âm thầm, ăn nhiều hoặc bỏ bữa khi có chuyện chưa yên.",
+     "loi_khuyen": "Khi thấy mình lo, viết điều đang lo ra giấy kèm một việc làm được ngay, rồi đi làm việc đó."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn được tin cậy, hợp vai giữ việc, giữ tiền, giữ người trong nhóm.",
+     "de_vap": "Ở ngoài bạn dễ ngại thử môi trường mới, chỉ muốn ở chỗ quen.",
+     "loi_khuyen": "Mỗi năm nhận ít nhất một chuyến công tác hay một lớp học ở nơi bạn chưa từng đến."
+    },
+    "ham": {
+     "manh": "Bạn cẩn trọng khi ra ngoài, ít khi vướng chuyện không đáng.",
+     "de_vap": "Bạn dễ dè dặt ở chỗ lạ, ít mở lời nên ít người biết đến khả năng của bạn.",
+     "loi_khuyen": "Ở chỗ mới, chủ động nhận một việc nhỏ mình làm tốt để mọi người thấy bạn làm được gì."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn có những người bạn đáng tin, ít nhưng bền, lúc cần là có.",
+     "de_vap": "Bạn dễ chỉ chơi với nhóm quen, ít mở rộng nên lúc cần cơ hội mới thì thiếu người giới thiệu.",
+     "loi_khuyen": "Mỗi tháng nhận lời một buổi gặp gỡ với người ngoài nhóm quen của mình."
+    },
+    "ham": {
+     "manh": "Bạn đối đãi với bạn bè tử tế, giữ lời.",
+     "de_vap": "Bạn dễ ngại tin người mới, giữ khoảng cách lâu nên khó có thêm bạn.",
+     "loi_khuyen": "Lần tới có người mới mời cà phê, nhận lời một lần và hỏi họ một câu về công việc của họ."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp hành chính, tài chính, quản lý tài sản, nơi cần người vững vàng và cẩn thận.",
+     "de_vap": "Bạn dễ ngại nhận việc mới có rủi ro, nên tiến chậm hơn người khác dù năng lực có đủ.",
+     "loi_khuyen": "Khi sếp giao việc mới, nhận trước rồi liệt kê điều cần hỗ trợ, thay vì từ chối vì chưa chắc làm được."
+    },
+    "ham": {
+     "manh": "Bạn làm việc cẩn thận, ít sai sót, hợp việc cần giữ quy trình.",
+     "de_vap": "Bạn dễ giữ cách làm cũ dù đã có cách tốt hơn, khiến nhóm thấy bạn bảo thủ.",
+     "loi_khuyen": "Mỗi quý học một công cụ hay cách làm mới trong nghề và thử áp dụng vào một việc nhỏ."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn coi trọng nhà cửa, đất đai, và tích luỹ tài sản dần dần một cách chắc tay.",
+     "de_vap": "Bạn dễ dồn hết tiền vào nhà đất, đến lúc cần tiền mặt thì khó xoay.",
+     "loi_khuyen": "Trước khi mua thêm tài sản, giữ lại khoản tiền mặt đủ chi tiêu ít nhất sáu tháng."
+    },
+    "ham": {
+     "manh": "Bạn biết giữ gìn nhà cửa, đồ đạc dùng lâu bền.",
+     "de_vap": "Bạn dễ giữ đồ cũ quá nhiều vì tiếc, nhà chật dần.",
+     "loi_khuyen": "Mỗi tháng dọn một ngăn tủ, món nào một năm không dùng thì cho đi."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn thấy an ổn khi có nền tảng vững, và tấm lòng bao dung giúp bạn ít khi mất ngủ vì người khác.",
+     "de_vap": "Bạn dễ cần mọi thứ đủ đầy mới thấy yên, nên hay lo cho cả những thứ chưa thiếu.",
+     "loi_khuyen": "Mỗi tối viết ba điều bạn đang có đủ, để tập thấy mình đã yên được rồi."
+    },
+    "ham": {
+     "manh": "Bạn biết đủ, không chạy theo những thứ quá tầm.",
+     "de_vap": "Bạn dễ lo xa, sợ mất những gì đang có, nên ngại thay đổi cả khi thay đổi tốt hơn.",
+     "loi_khuyen": "Khi sợ một thay đổi, hỏi mình \"tệ nhất là gì, mình có xoay được không?\", rồi viết câu trả lời ra."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Cha mẹ, cấp trên chu đáo, che chở bạn, và bạn thừa hưởng tính cẩn trọng từ họ.",
+     "de_vap": "Được che chở nhiều, bạn dễ ngại tự đứng ra quyết những việc lớn.",
+     "loi_khuyen": "Năm nay tự đứng ra lo trọn một việc lớn của gia đình, như sửa nhà hay tổ chức đám giỗ."
+    },
+    "ham": {
+     "manh": "Bạn chăm lo cho cha mẹ chu đáo, nhớ những việc nhỏ họ cần.",
+     "de_vap": "Bạn dễ giữ ý với cha mẹ, có gì cũng không nói vì sợ họ lo.",
+     "loi_khuyen": "Kể với cha mẹ một chuyện thật bạn đang lo, để họ được góp ý thay vì chỉ nghe tin tốt."
+    }
+   }
+  },
+  "Thái Âm": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn tinh ý, nhìn nét mặt là biết người kia đang mệt hay vui, nên ai ở gần cũng thấy dễ chịu và được để ý.",
+     "de_vap": "Bạn hay giữ chuyện buồn trong lòng, ngoài mặt vẫn cười nói, tới lúc quá tải mới bật ra khiến người khác bất ngờ.",
+     "loi_khuyen": "Mỗi tối dành năm phút viết ra một điều làm bạn chạnh lòng trong ngày, rồi chọn một người tin cậy để kể lại khi cần."
+    },
+    "ham": {
+     "manh": "Bạn nhạy cảm hơn nhiều người, nên dễ đồng cảm với người đang khó và biết nói lời an ủi đúng lúc.",
+     "de_vap": "Tâm trạng bạn lên xuống theo những chuyện nhỏ, một tin nhắn trả lời cụt lủn cũng đủ làm bạn nghĩ ngợi cả buổi.",
+     "loi_khuyen": "Khi thấy mình bắt đầu đoán ý người khác, hỏi thẳng một câu ngắn thay vì tự suy diễn tới khuya."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Với anh chị em và bạn thân, bạn là người nhớ sinh nhật, hỏi han lúc ốm, chăm lo âm thầm mà không cần ai ghi nhận.",
+     "de_vap": "Bạn dễ tủi khi mình lo cho mọi người mà không ai hỏi lại, rồi im lặng xa dần thay vì nói ra.",
+     "loi_khuyen": "Lần tới thấy chạnh lòng, nhắn cho anh chị em một câu thật: dạo này em cũng cần được hỏi han một chút."
+    },
+    "ham": {
+     "manh": "Bạn hiểu cảm giác của anh chị em dù họ không nói, nên thường là người đầu tiên nhận ra nhà có chuyện.",
+     "de_vap": "Bạn dễ để bụng một câu nói vô tình trong bữa cơm, giận ngầm nhiều ngày mà người kia không hề biết.",
+     "loi_khuyen": "Khi một câu nói làm bạn buồn, nói lại trong vòng một ngày bằng giọng nhẹ: câu lúc nãy làm em hơi buồn."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Trong chuyện tình cảm, bạn chu đáo, nhớ món người ấy thích, biết lúc nào nên ngồi cạnh im lặng.",
+     "de_vap": "Bạn mong người bạn đời tự hiểu ý mình, nên dễ hụt hẫng khi họ không đoán ra điều bạn chưa nói.",
+     "loi_khuyen": "Thay vì chờ người ấy tự nhận ra, nói rõ một mong muốn cụ thể, ví dụ: tối nay mình muốn đi dạo cùng nhau."
+    },
+    "ham": {
+     "manh": "Bạn để ý từng thay đổi nhỏ của người ấy, nên dễ nhận ra khi họ mệt hay có chuyện ở chỗ làm.",
+     "de_vap": "Lúc cãi nhau, bạn dễ thu mình lại, nghĩ nhiều hơn nói, khiến người kia không biết bạn đang buồn vì điều gì.",
+     "loi_khuyen": "Khi giận, hẹn nhau một giờ sau nói tiếp, và trong lúc đó viết ra điều bạn thật sự muốn người ấy hiểu."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn chăm con tỉ mỉ, nhớ từng thói quen ăn ngủ, và con thường thấy bạn là chỗ dựa mềm mại để kể chuyện.",
+     "de_vap": "Bạn dễ lo quá mức, một lần con về muộn cũng khiến bạn tưởng tượng đủ chuyện rồi trách con khi chưa nghe kể.",
+     "loi_khuyen": "Mỗi tuần dành một buổi chỉ ngồi nghe con kể chuyện, không góp ý, không dạy, chỉ hỏi: rồi sao nữa con?"
+    },
+    "ham": {
+     "manh": "Bạn rất hiểu những đứa trẻ nhạy cảm, biết khi nào con cần được ôm hơn là được giảng giải.",
+     "de_vap": "Cảm xúc của bạn dễ lây sang con: hôm bạn buồn, cả nhà cũng trầm theo mà con không hiểu vì sao.",
+     "loi_khuyen": "Hôm nào bạn mệt, nói thẳng với con: hôm nay bố mẹ hơi mệt, không phải vì con, rồi nghỉ sớm một chút."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn giữ tiền giỏi, nhận lương là tự để riêng một phần, tích ít một mà nhìn lại sau vài năm đã thành khoản đáng kể.",
+     "de_vap": "Bạn dễ ngại nói chuyện tiền bạc, cho người quen mượn mà không ghi lại, rồi buồn khi họ quên trả.",
+     "loi_khuyen": "Cài trích tiết kiệm tự động ngay ngày nhận lương, và ghi lại mọi khoản cho mượn kèm ngày hẹn trả."
+    },
+    "ham": {
+     "manh": "Bạn biết chi tiêu khéo cho gia đình, đi chợ biết chỗ nào rẻ, món nào đáng tiền.",
+     "de_vap": "Lúc buồn bạn dễ mua sắm cho khuây khoả, hoặc tin lời người quen rủ góp vốn mà chưa hỏi kỹ.",
+     "loi_khuyen": "Đặt luật cho mình: món nào trên một triệu thì chờ ba ngày mới mua, khoản góp vốn nào cũng phải có giấy tờ."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn biết lắng nghe cơ thể, thấy mệt là tự tìm cách nghỉ, ngủ sớm hay pha cốc trà ấm.",
+     "de_vap": "Tâm trạng ảnh hưởng thẳng tới giấc ngủ và bữa ăn của bạn, buồn chuyện gì là trằn trọc, bỏ bữa.",
+     "loi_khuyen": "Giữ giờ đi ngủ cố định, cất điện thoại ra ngoài phòng ngủ sau mười giờ tối, và ăn đủ bữa kể cả hôm bận."
+    },
+    "ham": {
+     "manh": "Bạn nhận ra sớm khi mình bắt đầu căng, chỉ cần chịu dừng lại một chút là hồi lại khá nhanh.",
+     "de_vap": "Bạn hay cố chịu đựng, lúc mệt vẫn cố làm cho xong, rồi nằm mãi không ngủ được vì đầu cứ nghĩ.",
+     "loi_khuyen": "Khi thấy mình nghĩ lan man lúc nằm, đứng dậy viết hết ra giấy rồi mới quay lại giường; đi khám định kỳ mỗi năm."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài, bạn lúc đầu dè dặt nhưng sau được quý vì chu đáo, nhớ tên người, biết hỏi han đúng lúc.",
+     "de_vap": "Ở chỗ lạ bạn dễ ngại lên tiếng, có ý hay mà để người khác nói trước rồi tiếc.",
+     "loi_khuyen": "Trong buổi họp hay buổi gặp mới, đặt mục tiêu nói ít nhất một ý của mình trong mười lăm phút đầu."
+    },
+    "ham": {
+     "manh": "Bạn quan sát kỹ trước khi bước vào chỗ mới, nên ít khi nói hớ hay làm phật lòng ai.",
+     "de_vap": "Đi xa hay đổi môi trường, bạn dễ thấy lạc lõng, nhớ nhà, và rút về một góc thay vì làm quen.",
+     "loi_khuyen": "Mỗi lần tới nơi mới, chủ động bắt chuyện với một người trước, kể cả chỉ là hỏi chỗ ăn trưa gần đó."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn ít bạn nhưng bạn nào cũng thân, và nhiều người tìm tới bạn để tâm sự lúc họ rối.",
+     "de_vap": "Bạn nghe chuyện của người khác nhiều tới mức kiệt sức, mà lại ít khi kể chuyện của mình.",
+     "loi_khuyen": "Khi một người bạn gọi tâm sự lúc bạn đã mệt, nói thật: mai mình gọi lại nghe cậu kể kỹ hơn nhé."
+    },
+    "ham": {
+     "manh": "Bạn có trực giác khá tốt về người, gặp vài lần là đoán được ai thật lòng, ai không.",
+     "de_vap": "Bạn dễ cả tin với người nói ngọt, rồi tổn thương khi họ chỉ tìm tới lúc cần nhờ.",
+     "loi_khuyen": "Trước khi nhận một lời nhờ lớn, tự hỏi: lần trước mình cần, người này đã ở đó chưa?"
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Trong công việc, bạn tỉ mỉ, có mắt thẩm mỹ, hợp những việc cần chăm chút như thiết kế, chăm sóc khách, sổ sách.",
+     "de_vap": "Bạn làm tốt mà ít khi nói ra, nên dễ bị bỏ qua lúc xét tăng lương hay giao việc lớn.",
+     "loi_khuyen": "Cuối mỗi tháng gửi sếp vài dòng tóm tắt những việc bạn đã làm xong và kết quả cụ thể."
+    },
+    "ham": {
+     "manh": "Bạn làm việc cẩn thận, ít sai sót vặt, hợp những việc âm thầm cần sự chính xác.",
+     "de_vap": "Khi bị góp ý trước mặt người khác, bạn dễ chùng xuống cả ngày và mất hứng với việc đang làm.",
+     "loi_khuyen": "Khi sếp góp ý, ghi lại đúng một điều cần sửa, cảm ơn, rồi để chuyện cảm xúc tới lúc về nhà mới nghĩ."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn coi trọng tổ ấm, biết làm căn nhà ấm cúng, và thường có duyên tích góp để có chỗ ở của riêng mình.",
+     "de_vap": "Bạn dễ gắn bó với nhà tới mức ngại thay đổi, kể cả khi chuyển chỗ sẽ tốt hơn cho công việc.",
+     "loi_khuyen": "Lập một khoản tiết kiệm riêng cho chuyện nhà cửa, và mỗi năm ngồi xem lại chỗ ở hiện tại còn hợp không."
+    },
+    "ham": {
+     "manh": "Bạn biết biến một góc nhỏ thành chỗ thoải mái, chỉ cần cây xanh, ánh đèn vàng là thấy dễ chịu.",
+     "de_vap": "Chỗ ở chưa ổn định làm bạn hay bất an, dễ quyết vội chuyện thuê mua chỉ vì muốn có chỗ yên.",
+     "loi_khuyen": "Trước khi ký thuê hay mua nhà, đi xem ít nhất hai lần vào hai giờ khác nhau và đọc kỹ từng dòng hợp đồng."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn biết tự làm mình dịu lại bằng những thứ nhỏ như nhạc, cây cỏ, một buổi đi dạo, nên ít khi bị cuốn theo chuyện ồn ào.",
+     "de_vap": "Bạn hay ôm suy nghĩ một mình, nhớ lại chuyện cũ nhiều lần, dù chuyện đã qua lâu.",
+     "loi_khuyen": "Giữ một thú vui tay chân đều đặn như vẽ, trồng cây hay nấu ăn, mỗi tuần ít nhất hai buổi."
+    },
+    "ham": {
+     "manh": "Bạn cảm nhận được cái đẹp trong những thứ người khác bỏ qua, và đó là niềm vui riêng của bạn.",
+     "de_vap": "Những đêm buồn không rõ lý do, bạn dễ nghĩ mình kém may hơn người khác, rồi càng nghĩ càng chùng.",
+     "loi_khuyen": "Khi thấy buồn không rõ vì sao, ra ngoài đi bộ hai mươi phút hoặc gọi cho một người bạn, đừng nằm lướt điện thoại."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn gần mẹ hoặc người chăm mình nhất, học được sự chu đáo, và biết làm cha mẹ vui bằng những việc nhỏ.",
+     "de_vap": "Bạn dễ để cảm xúc của cha mẹ ảnh hưởng mình, mẹ buồn một câu là bạn day dứt mấy ngày.",
+     "loi_khuyen": "Gọi về nhà vào một giờ cố định mỗi tuần, hỏi một chuyện cụ thể của cha mẹ thay vì chỉ hỏi khoẻ không."
+    },
+    "ham": {
+     "manh": "Bạn hiểu những điều cha mẹ khó nói ra, nên biết lúc nào nên ngồi cạnh thay vì tranh luận.",
+     "de_vap": "Bạn và cha mẹ dễ hiểu lầm nhau vì ai cũng giữ trong lòng, rồi giận nhau qua những câu bóng gió.",
+     "loi_khuyen": "Khi có chuyện chưa vui với cha mẹ, chọn lúc yên, nói một câu bắt đầu bằng 'con thấy' thay vì 'bố mẹ lúc nào cũng'."
+    }
+   }
+  },
+  "Tham Lang": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn ham sống, học gì cũng nhanh, đi đâu cũng có chuyện để nói, nên dễ được người mới để ý và quý.",
+     "de_vap": "Bạn mở nhiều việc cùng lúc, hứng lên thì làm say sưa rồi chán, để lại vài dự án dở dang.",
+     "loi_khuyen": "Trước khi bắt đầu một thú vui hay lớp học mới, viết ra một việc đang dở mà mình cần làm xong trước."
+    },
+    "ham": {
+     "manh": "Bạn có sức sống mạnh, mệt mấy cũng còn hứng đi chơi, gặp bạn, thử món mới.",
+     "de_vap": "Ham muốn đến nhanh và khó dừng, một ván game, một chầu nhậu dễ kéo tới khuya rồi hôm sau mệt.",
+     "loi_khuyen": "Đặt trước giờ về hoặc số tiền tối đa trước mỗi cuộc vui, và nhờ một người bạn nhắc khi bạn quá giờ."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Với anh chị em và bạn bè, bạn là người rủ rê, bày trò, làm buổi tụ tập vui hơn hẳn.",
+     "de_vap": "Bạn dễ vui chơi với nhau nhiều hơn lo cho nhau, đến lúc ai đó cần chỗ dựa thì lại ngại mở lời.",
+     "loi_khuyen": "Trong nhóm anh chị em, chủ động hỏi riêng từng người một câu thật lòng ít nhất mỗi tháng một lần."
+    },
+    "ham": {
+     "manh": "Bạn dễ hoà vào mọi nhóm, anh chị em hay bạn bè đều thấy thoải mái khi có bạn.",
+     "de_vap": "Chuyện góp tiền, mượn đồ với anh em dễ lộn xộn vì ai cũng nghĩ thân thì không cần nói rõ.",
+     "loi_khuyen": "Mọi khoản tiền qua lại với anh chị em, dù nhỏ, ghi vào một ghi chú chung trên điện thoại."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Trong tình cảm, bạn vui tính, biết bày những buổi hẹn mới lạ, khiến người ấy ít khi thấy nhàm.",
+     "de_vap": "Bạn cần sự mới mẻ, nên khi quan hệ vào nếp quen, bạn dễ thấy buồn chán mà không nói ra.",
+     "loi_khuyen": "Mỗi tháng cùng người ấy thử một việc chưa từng làm chung, như nấu món lạ hay đi một con phố mới."
+    },
+    "ham": {
+     "manh": "Bạn biết làm người ấy cười, biết những trò nhỏ khiến không khí trong nhà nhẹ đi.",
+     "de_vap": "Bạn dễ mải mê thú vui riêng hay bạn bè, để người ấy thấy mình đứng sau nhiều thứ khác.",
+     "loi_khuyen": "Giữ một tối mỗi tuần chỉ dành cho hai người, tắt điện thoại, và hỏi người ấy tuần này có gì vui buồn."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn chơi với con như một người bạn lớn, dạy con bằng trò chơi và cho con thử nhiều thứ.",
+     "de_vap": "Bạn dễ cho con theo quá nhiều lớp học thêm vì thấy cái gì cũng hay, khiến con mệt và không đi sâu được.",
+     "loi_khuyen": "Cùng con chọn ra một hai sở thích chính mỗi năm, và hỏi con thật lòng thích cái nào nhất."
+    },
+    "ham": {
+     "manh": "Bạn dễ gần con, con thấy bạn vui tính và hay kể cho bạn nghe những chuyện ở trường.",
+     "de_vap": "Bạn có thể chiều con theo hứng, hôm dễ hôm khó, khiến con không biết đâu là giới hạn.",
+     "loi_khuyen": "Thống nhất với con ba quy tắc rõ ràng, dán lên tủ lạnh, và giữ đúng kể cả hôm bạn đang vui."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn có duyên kiếm tiền từ quan hệ, khéo bán hàng, khéo nắm cơ hội và xoay xở nhiều nguồn thu.",
+     "de_vap": "Tiền vào nhanh nhưng ra cũng nhanh, nhận lương xong là ăn uống, mua sắm, rủ bạn đi chơi.",
+     "loi_khuyen": "Ngay ngày nhận lương, chuyển một phần vào tài khoản riêng khó rút, rồi mới tiêu phần còn lại."
+    },
+    "ham": {
+     "manh": "Bạn nhạy với các cơ hội kiếm thêm và không ngại thử những cách làm ra tiền mới.",
+     "de_vap": "Bạn dễ bị cuốn vào những lời mời làm giàu nhanh, hoặc chi mạnh tay cho những thú vui đắt tiền.",
+     "loi_khuyen": "Với lời mời đầu tư hứa lãi cao, hỏi một người rành tài chính trước và chỉ bỏ số tiền nếu mất cũng không ảnh hưởng nhà."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn có sức bền khá tốt, vui chơi hay làm việc nhiều vẫn hồi lại nhanh sau một giấc ngủ.",
+     "de_vap": "Bạn dễ ăn uống theo hứng, thức khuya vì vui, và nghĩ rằng mình còn khoẻ nên chưa sao.",
+     "loi_khuyen": "Đặt giới hạn hai buổi tiệc tùng mỗi tuần, và hôm sau buổi nào thức khuya thì ngủ bù ít nhất một tiếng."
+    },
+    "ham": {
+     "manh": "Khi tìm được môn vận động mình thích, bạn theo được lâu vì bạn ham cảm giác thấy người nhẹ hẳn sau buổi tập.",
+     "de_vap": "Nhịp sinh hoạt của bạn dễ lệch vì những cuộc vui kéo dài, ăn đêm, uống nhiều, ngủ ít.",
+     "loi_khuyen": "Chọn một môn vận động có bạn đi cùng, như cầu lông hay chạy nhóm, để thói quen tốt cũng thành cuộc vui."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn rất có duyên, đi đâu cũng quen được người, gặp được mối làm ăn hay bạn mới.",
+     "de_vap": "Bạn dễ nhận lời quá nhiều cuộc hẹn, chạy từ chỗ này sang chỗ khác tới mức không còn thời gian cho việc chính.",
+     "loi_khuyen": "Mỗi tuần chỉ nhận số cuộc hẹn đã định trước, và ưu tiên những người giúp bạn tiến trong việc chính."
+    },
+    "ham": {
+     "manh": "Bạn dạn dĩ ở chỗ lạ, dám bắt chuyện, dám thử, nên học được nhiều thứ từ bên ngoài.",
+     "de_vap": "Ở môi trường nhiều cám dỗ, bạn dễ bị cuốn theo đám đông, tiêu tiền và thời gian nhiều hơn định.",
+     "loi_khuyen": "Trước khi đi một chuyến xa hay tới một bữa tiệc, viết ra số tiền và giờ về, rồi giữ đúng."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn quen biết rộng, khi cần việc gì cũng có người giới thiệu, và bạn cũng sẵn lòng giới thiệu người khác.",
+     "de_vap": "Bạn bè đông nhưng phần nhiều là bạn vui chơi, lúc khó thật sự lại ít người ở lại.",
+     "loi_khuyen": "Lập một danh sách năm người bạn thực sự tin, và gặp riêng từng người ít nhất một lần mỗi quý."
+    },
+    "ham": {
+     "manh": "Bạn dễ được mọi người rủ rê, mời mọc, nên không bao giờ thiếu chỗ để đi, người để gặp.",
+     "de_vap": "Bạn dễ bị bạn bè kéo vào những cuộc vui tốn kém hay những việc mình không thật muốn làm.",
+     "loi_khuyen": "Tập nói một câu từ chối ngắn gọn như 'lần này mình không đi được', và không cần giải thích dài."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Trong công việc, bạn khéo giao tiếp, hợp bán hàng, truyền thông, dịch vụ, những việc cần làm người khác thích mình.",
+     "de_vap": "Bạn giỏi nhiều thứ nên dễ nhảy việc khi thấy chỗ khác hấp dẫn hơn, chưa kịp đi sâu ở chỗ nào.",
+     "loi_khuyen": "Trước khi đổi việc, tự hỏi: ở chỗ cũ mình đã học hết điều cần học chưa, và viết câu trả lời ra giấy."
+    },
+    "ham": {
+     "manh": "Bạn linh hoạt, việc gì giao gấp cũng xoay được, và biết cách làm vui lòng khách hay sếp.",
+     "de_vap": "Bạn dễ dồn sức vào phần vui, phần được giao tiếp, còn phần giấy tờ, chi tiết thì để trễ.",
+     "loi_khuyen": "Mỗi sáng làm phần việc chán nhất trước khi mở tin nhắn, chỉ ba mươi phút cũng được."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn thích nhà có không khí, hay mời bạn bè về ăn uống, và biết làm chỗ ở thành nơi vui vẻ.",
+     "de_vap": "Bạn dễ chi nhiều cho đồ trang trí, đồ điện tử, sửa nhà theo hứng hơn là theo nhu cầu.",
+     "loi_khuyen": "Mỗi lần muốn mua đồ cho nhà, ghi vào danh sách chờ và chỉ mua khi món đó vẫn còn muốn sau hai tuần."
+    },
+    "ham": {
+     "manh": "Bạn dễ thích nghi với chỗ ở mới, chuyển nhà hay ở trọ đều nhanh quen.",
+     "de_vap": "Chỗ ở của bạn dễ bừa bộn khi bận vui chơi bên ngoài, đồ đạc mua nhiều mà ít dùng.",
+     "loi_khuyen": "Mỗi cuối tuần dành mười lăm phút dọn một góc nhà, và cho đi một món bạn không dùng tới trong ba tháng qua."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn biết tận hưởng, một bữa ăn ngon, một chuyến đi ngắn cũng đủ làm bạn vui lại sau tuần mệt.",
+     "de_vap": "Bạn dễ tìm niềm vui bên ngoài mỗi khi buồn, mà ít khi ngồi yên để hiểu mình đang buồn vì gì.",
+     "loi_khuyen": "Khi thấy mình muốn đi chơi để quên một chuyện, ngồi lại năm phút viết ra chuyện đó trước rồi mới đi."
+    },
+    "ham": {
+     "manh": "Bạn có nhiều sở thích, nên lúc chán việc này luôn có việc khác để làm mình vui.",
+     "de_vap": "Bạn khó thấy đủ, có rồi lại muốn thêm, nên niềm vui đến nhanh mà cũng đi nhanh.",
+     "loi_khuyen": "Tối nào trước khi ngủ, ghi ra ba thứ trong ngày làm bạn thấy đủ, dù chỉ là cốc cà phê ngon."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn dễ nói chuyện với cha mẹ hay sếp, biết làm họ cười và thường được họ cho tự do làm theo ý mình.",
+     "de_vap": "Bạn dễ hứa với cha mẹ rồi quên vì bận việc riêng, như hứa về ăn cơm cuối tuần mà lỡ hẹn.",
+     "loi_khuyen": "Ghi lịch về thăm hoặc gọi cha mẹ vào điện thoại như một cuộc hẹn công việc, và giữ đúng."
+    },
+    "ham": {
+     "manh": "Bạn ít câu nệ với cha mẹ, nói chuyện thoải mái, nên họ thấy gần bạn.",
+     "de_vap": "Cha mẹ hay sếp có thể thấy bạn ham chơi, chưa chín chắn, dù thật ra bạn vẫn lo việc đàng hoàng.",
+     "loi_khuyen": "Chủ động kể với cha mẹ hoặc sếp một kế hoạch cụ thể bạn đang làm, kèm thời hạn, để họ yên tâm."
+    }
+   }
+  },
+  "Cự Môn": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn nói có lý, phân tích việc gì cũng tới nơi, nên khi cần thuyết phục ai, người ta thường nghe bạn.",
+     "de_vap": "Bạn hay hỏi tại sao và dễ bắt lỗi trong lời người khác, khiến họ thấy bị soi dù bạn chỉ muốn rõ ràng.",
+     "loi_khuyen": "Trước khi phản biện ai, nói trước một điều bạn đồng ý với họ, rồi mới nêu chỗ bạn thấy chưa ổn."
+    },
+    "ham": {
+     "manh": "Bạn nhìn ra chỗ chưa hợp lý mà người khác bỏ qua, và không dễ bị lời ngọt dắt đi.",
+     "de_vap": "Lời nói thẳng của bạn dễ bị hiểu lầm là chê, và bạn cũng hay nghi người khác có ý không tốt với mình.",
+     "loi_khuyen": "Khi thấy nghi ai, kiểm chứng bằng một câu hỏi thẳng với chính người đó trước khi kể với người thứ ba."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Với anh chị em, bạn là người nói thẳng, dám góp ý khi nhà có việc cần bàn, giúp mọi người nhìn rõ vấn đề.",
+     "de_vap": "Những cuộc bàn chuyện nhà dễ thành tranh luận hơn thua, ai cũng muốn mình đúng.",
+     "loi_khuyen": "Khi bàn chuyện chung với anh chị em, viết các phương án ra giấy và để mỗi người nói hết rồi mới chốt."
+    },
+    "ham": {
+     "manh": "Bạn nhìn ra những chuyện anh em ngại nói, và có thể là người gỡ nút nếu chọn lời khéo.",
+     "de_vap": "Một câu nói lỡ lời giữa anh em dễ bị nhắc lại nhiều năm, thành chuyện cũ khó gỡ.",
+     "loi_khuyen": "Có chuyện gì với anh chị em, nói trực tiếp với người đó, không kể qua người thứ ba."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Trong tình cảm, bạn thích nói rõ ràng, và hai người có thể gỡ gần như mọi chuyện bằng cách ngồi nói với nhau.",
+     "de_vap": "Lúc cãi nhau, bạn dễ thắng lý mà thua tình, nói đúng nhưng làm người ấy tổn thương.",
+     "loi_khuyen": "Khi cãi nhau, thay câu 'anh/em sai rồi' bằng 'mình thấy buồn khi…', rồi dừng lại nghe người ấy trả lời."
+    },
+    "ham": {
+     "manh": "Bạn để ý lời nói của người ấy rất kỹ, nên dễ nhận ra khi họ đang có điều khó nói.",
+     "de_vap": "Bạn dễ nghi ngờ, đọc ra ý khác trong một câu bình thường, rồi hỏi dồn khiến người ấy thấy mệt.",
+     "loi_khuyen": "Khi một câu của người ấy làm bạn nghi, hỏi lại đúng một lần: ý anh/em là thế này phải không?"
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn dạy con bằng lý lẽ, giải thích vì sao thay vì ra lệnh, nên con học được cách suy nghĩ.",
+     "de_vap": "Con có thể hay cãi lại, và bạn dễ biến bữa cơm thành buổi tranh luận ai đúng ai sai.",
+     "loi_khuyen": "Khi con cãi, hỏi con: con thấy thế nào thì hợp lý, rồi cùng con chọn một cách làm thử trong một tuần."
+    },
+    "ham": {
+     "manh": "Bạn nhận ra khi con giấu chuyện, và có thể giúp con nếu hỏi bằng giọng nhẹ.",
+     "de_vap": "Bạn dễ nói nặng khi con làm sai, những câu ấy con nhớ rất lâu dù bạn đã quên.",
+     "loi_khuyen": "Khi đang bực con, đợi mười phút rồi mới nói, và kết thúc bằng một câu cho con biết bạn vẫn thương con."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn kiếm tiền tốt bằng chuyên môn và lời nói, như tư vấn, giảng dạy, bán hàng, đàm phán.",
+     "de_vap": "Trong làm ăn bạn dễ tin lời hứa miệng, rồi tranh cãi khi hai bên nhớ khác nhau.",
+     "loi_khuyen": "Mọi thoả thuận tiền bạc, dù với người quen, chốt lại bằng một tin nhắn ghi rõ số tiền, hạn và việc của mỗi bên."
+    },
+    "ham": {
+     "manh": "Bạn soi kỹ hợp đồng và ít khi bị lừa bởi những lời mời nghe quá hay.",
+     "de_vap": "Tiền bạc dễ dính chuyện tranh cãi, đòi nợ, chia phần không rõ, làm bạn mất cả tiền lẫn bạn.",
+     "loi_khuyen": "Không cho mượn hay góp vốn bằng lời nói; khoản nào cũng có giấy ghi hoặc chuyển khoản kèm nội dung rõ."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn chịu tìm hiểu kỹ về sức khoẻ của mình, hỏi đúng câu khi đi khám và làm theo có lý do.",
+     "de_vap": "Đầu óc bạn hay chạy không ngừng, nghĩ đi nghĩ lại một chuyện khiến bạn mệt hơn cả làm việc.",
+     "loi_khuyen": "Mỗi ngày dành mười phút đi bộ không tai nghe, để đầu óc được nghỉ khỏi việc phân tích."
+    },
+    "ham": {
+     "manh": "Bạn nhận ra sớm khi mình căng thẳng, vì nó lộ ngay qua cách bạn nói và ngủ.",
+     "de_vap": "Lo âu dễ tích lại, bạn ôm chuyện một mình, đêm nằm nghĩ ra những kịch bản tệ nhất.",
+     "loi_khuyen": "Khi một nỗi lo cứ quay lại, kể nó với một người tin cậy; đi khám định kỳ để yên tâm thay vì tự đoán."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn mạnh nhất ở chỗ cần lý lẽ: đàm phán, thuyết trình, tranh luận, người ta phải nể.",
+     "de_vap": "Ở môi trường mới bạn dễ tranh luận quá sớm, khi chưa ai hiểu bạn, khiến người ta dè chừng.",
+     "loi_khuyen": "Ở chỗ mới, tuần đầu chủ yếu hỏi và nghe, ghi lại điều bạn thấy chưa ổn, tuần sau mới góp ý."
+    },
+    "ham": {
+     "manh": "Bạn cẩn thận với người lạ, nên ít khi bị lợi dụng khi đi xa hay làm việc với đối tác mới.",
+     "de_vap": "Ra ngoài bạn dễ dính chuyện điều tiếng, một câu nói đùa bị kể lại theo nghĩa khác.",
+     "loi_khuyen": "Ở nơi đông người, tránh bình luận về người vắng mặt, kể cả khi mọi người đang bàn tán."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn chọn bạn kỹ, và những người bạn bạn giữ lại thường là người nói thật với nhau được.",
+     "de_vap": "Trong nhóm bạn hay đồng nghiệp, bạn dễ bị kéo vào những cuộc bàn tán, rồi lời mình bị truyền đi sai.",
+     "loi_khuyen": "Khi ai đó kể xấu người khác với bạn, chỉ nghe, đừng thêm ý, và đổi sang chuyện khác."
+    },
+    "ham": {
+     "manh": "Bạn nhìn ra ai đang nói hai mặt, nên ít khi bị cuốn vào những nhóm thiếu thật lòng.",
+     "de_vap": "Bạn dễ nghi đồng nghiệp hay bạn bè nói sau lưng mình, và sự nghi ngờ làm quan hệ nguội dần.",
+     "loi_khuyen": "Khi nghe được một lời đồn về mình, hỏi thẳng người liên quan bằng giọng bình tĩnh trước khi phản ứng."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp những nghề sống bằng lời và lý: luật, giáo dục, tư vấn, truyền thông, nghiên cứu.",
+     "de_vap": "Bạn dễ tranh luận với sếp trong cuộc họp đông người, đúng ý mà làm sếp mất mặt.",
+     "loi_khuyen": "Ý kiến trái chiều với sếp, nói riêng sau cuộc họp, mở đầu bằng: em có một góc nhìn khác muốn anh/chị xem thử."
+    },
+    "ham": {
+     "manh": "Bạn phát hiện lỗi trong kế hoạch rất nhanh, hợp những việc kiểm tra, rà soát, nghiên cứu.",
+     "de_vap": "Chỗ làm dễ có điều tiếng hoặc hiểu lầm quanh bạn, nhất là khi bạn góp ý không chọn lúc.",
+     "loi_khuyen": "Mọi việc quan trọng sếp giao bằng miệng, gửi lại một tin nhắn tóm tắt để hai bên hiểu giống nhau."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn tìm hiểu kỹ trước khi thuê hay mua nhà, đọc từng điều khoản, hỏi đủ câu cần hỏi.",
+     "de_vap": "Chuyện nhà cửa dễ dính tranh luận trong gia đình, ai cũng có ý riêng về cách sửa, cách chia.",
+     "loi_khuyen": "Khi bàn chuyện nhà với gia đình, ghi các ý kiến ra một tờ giấy chung và hẹn một buổi riêng để chốt."
+    },
+    "ham": {
+     "manh": "Bạn cẩn trọng với giấy tờ nhà đất, nhờ vậy tránh được nhiều rắc rối người khác hay gặp.",
+     "de_vap": "Nhà cửa dễ có chuyện giấy tờ chưa rõ hay bất đồng với hàng xóm, chủ nhà vì những điều chỉ nói miệng.",
+     "loi_khuyen": "Với chủ nhà hay hàng xóm, chuyện gì đã thoả thuận thì nhắn lại bằng tin nhắn ngay hôm đó."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn thích đào sâu, đọc nhiều, và thấy yên khi hiểu thấu một điều mình thắc mắc.",
+     "de_vap": "Đầu óc bạn ít khi chịu nghỉ, có câu hỏi chưa có lời đáp là cứ trằn trọc mãi.",
+     "loi_khuyen": "Giữ một cuốn sổ ghi các câu hỏi đang làm bạn trăn trở, viết xong thì cho phép mình gác lại tới mai."
+    },
+    "ham": {
+     "manh": "Bạn không dễ tin theo đám đông, luôn tự kiểm chứng trước khi chấp nhận một điều gì.",
+     "de_vap": "Bạn dễ nghi ngờ cả những điều tốt đến với mình, nên khó thấy thoải mái dù mọi thứ đang ổn.",
+     "loi_khuyen": "Khi một điều tốt xảy ra, nói lời cảm ơn trước khi đi tìm lý do vì sao nó xảy ra."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn dám nói chuyện thẳng với cha mẹ hay sếp, và khi lý lẽ rõ, họ thường lắng nghe bạn.",
+     "de_vap": "Bạn và cha mẹ dễ tranh luận về cách sống, mỗi lần về nhà lại có chuyện để cãi.",
+     "loi_khuyen": "Mỗi lần về nhà, chọn ra một chủ đề không bàn tới, và dành thời gian hỏi chuyện ngày xưa của cha mẹ."
+    },
+    "ham": {
+     "manh": "Bạn hiểu những điều cha mẹ hay sếp không nói hết, và biết đọc ý giữa các dòng.",
+     "de_vap": "Lời góp ý của cha mẹ hay sếp dễ làm bạn nghe thành lời chê, rồi phản ứng gay gắt.",
+     "loi_khuyen": "Khi cha mẹ hay sếp góp ý, nhắc lại ý họ bằng lời của bạn trước khi trả lời, để chắc mình hiểu đúng."
+    }
+   }
+  },
+  "Thiên Tướng": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn công bằng, giữ lời, và hay là người đứng ra dàn xếp khi hai bên bất đồng mà không ai thấy mất mặt.",
+     "de_vap": "Bạn lo giữ hoà khí và thể diện cho mọi người tới mức ít khi nói ra mong muốn thật của mình.",
+     "loi_khuyen": "Trong tuần này, chọn một chuyện nhỏ và nói rõ ý muốn của bạn trước khi hỏi ý người khác."
+    },
+    "ham": {
+     "manh": "Bạn tử tế, dễ cảm thông, và luôn muốn giúp người đang gặp khó.",
+     "de_vap": "Bạn dễ bị người thân quen thuyết phục làm theo ý họ, rồi gánh phần rắc rối không phải của mình.",
+     "loi_khuyen": "Khi ai nhờ bạn đứng ra bảo lãnh hay nói giúp, hẹn trả lời sau một ngày để có thời gian tự nghĩ."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Bạn là người anh chị em đáng tin, ai có chuyện cũng tìm bạn để nói giúp với cả nhà.",
+     "de_vap": "Bạn hay đứng giữa, gánh cả phần hoà giải mà chính bạn cũng mệt.",
+     "loi_khuyen": "Khi anh chị em nhờ bạn nói hộ với người khác, khuyến khích họ tự nói trước, bạn chỉ ngồi cạnh."
+    },
+    "ham": {
+     "manh": "Bạn sẵn lòng giúp anh chị em khi họ khó, dù việc đó tốn thời gian của bạn.",
+     "de_vap": "Vì thương anh em, bạn dễ đứng ra gánh nợ hay việc của họ, rồi chính mình rơi vào thế khó.",
+     "loi_khuyen": "Đặt cho mình một mức giúp tiền tối đa với anh chị em, và nói rõ đó là cho hay cho mượn."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Bạn tôn trọng người bạn đời, biết giữ thể diện cho người ấy trước gia đình hai bên và bạn bè.",
+     "de_vap": "Bạn dễ giữ vẻ êm đẹp bên ngoài, có chuyện không vui cũng không nói, để lâu thành khoảng cách.",
+     "loi_khuyen": "Mỗi tuần hỏi người ấy một câu cụ thể: tuần này có điều gì em/anh muốn mình làm khác không?"
+    },
+    "ham": {
+     "manh": "Bạn chiều người ấy, sẵn lòng nhường để giữ hoà khí trong nhà.",
+     "de_vap": "Bạn dễ để người ấy hay gia đình hai bên quyết thay mình, rồi âm thầm thấy thiệt thòi.",
+     "loi_khuyen": "Với những quyết định lớn như mua nhà, đổi việc, nói ý của bạn trước khi nghe ý người khác."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn dạy con lễ phép, công bằng giữa các con, và con thường lớn lên biết cư xử.",
+     "de_vap": "Bạn dễ quá chú ý con trông thế nào trong mắt người khác, hơn là con đang thấy thế nào.",
+     "loi_khuyen": "Sau mỗi buổi gặp họ hàng, hỏi riêng con: hôm nay con có thấy thoải mái không?"
+    },
+    "ham": {
+     "manh": "Bạn mềm mỏng với con, con dễ nói chuyện với bạn mà không sợ bị mắng.",
+     "de_vap": "Bạn dễ chiều theo đòi hỏi của con để êm chuyện, rồi khó đặt lại giới hạn.",
+     "loi_khuyen": "Khi con đòi điều bạn thấy chưa hợp, nói 'không' một lần, bình tĩnh, rồi giải thích ngắn lý do."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn giữ tiền đều đặn, minh bạch, hợp những việc có thu nhập ổn định và hay được tin giao quản lý tiền chung.",
+     "de_vap": "Bạn dễ chi cho thể diện, như quà cáp, đám tiệc, đồ dùng đẹp, nhiều hơn mức thật sự cần.",
+     "loi_khuyen": "Đặt một ngân sách cố định mỗi tháng cho quà cáp, hiếu hỉ, và ghi lại từng khoản để cuối tháng xem."
+    },
+    "ham": {
+     "manh": "Bạn sẵn lòng chia sẻ khi người khác cần, nên quanh bạn thường có người nhớ ơn.",
+     "de_vap": "Bạn dễ đứng ra vay hộ, bảo lãnh hay góp tiền theo lời người quen, rồi tiền mình bị kẹt.",
+     "loi_khuyen": "Không ký bảo lãnh hay đứng tên vay cho ai khi chưa bàn với người trong nhà và chưa đọc kỹ giấy tờ."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn sống khá điều độ, ăn ngủ có giờ, và biết giữ nếp sinh hoạt khi mọi thứ ổn.",
+     "de_vap": "Bạn hay lo việc người khác trước, bỏ bữa hay thức khuya vì giúp ai đó, rồi tự hao sức.",
+     "loi_khuyen": "Giữ một bữa ăn trong ngày ngồi ăn đàng hoàng, không làm việc, không nghe điện thoại, dù bận tới đâu."
+    },
+    "ham": {
+     "manh": "Khi có người nhắc, bạn sẵn sàng sửa thói quen, nên có một người bạn tập cùng là giúp bạn rất nhiều.",
+     "de_vap": "Bạn dễ để căng thẳng của người khác ngấm vào mình, mệt mà không biết vì đâu.",
+     "loi_khuyen": "Sau một ngày nghe nhiều chuyện của người khác, dành mười lăm phút tắm nước ấm hay đi bộ trước khi làm việc nhà."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn được tin cậy, người lạ dễ giao việc cho bạn vì bạn chỉn chu và giữ lời.",
+     "de_vap": "Bạn dễ nhận làm người trung gian cho việc của người khác, thêm việc mà không thêm lợi.",
+     "loi_khuyen": "Khi được nhờ làm cầu nối, hỏi rõ phần của bạn tới đâu thì dừng, và nói ra từ đầu."
+    },
+    "ham": {
+     "manh": "Bạn lịch sự, biết cách cư xử ở chỗ lạ, nên ít khi làm ai phật lòng.",
+     "de_vap": "Ở chỗ mới bạn dễ bị người ăn nói khéo kéo theo, nhận lời trước rồi mới thấy không hợp.",
+     "loi_khuyen": "Ở môi trường mới, với mọi lời rủ hợp tác, trả lời 'để mình xem lại' rồi hỏi thêm một người quen trước khi gật."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn đối xử công bằng với đồng nghiệp, cấp dưới, nên dễ được mọi người nể và hợp tác.",
+     "de_vap": "Bạn ngại làm mất lòng, nên chậm nhắc nhở khi một người trong nhóm làm chưa tốt.",
+     "loi_khuyen": "Khi cần nhắc đồng nghiệp, nói riêng, nêu đúng một việc cụ thể và hạn sửa, không vòng vo."
+    },
+    "ham": {
+     "manh": "Bạn dễ gần, ai trong nhóm cũng thấy có thể nhờ bạn được.",
+     "de_vap": "Bạn dễ chịu ảnh hưởng của những người bạn mạnh miệng, làm theo ý họ dù trong lòng không đồng ý.",
+     "loi_khuyen": "Trước mỗi cuộc họp nhóm, viết ra ý của mình trên giấy để không bị ý người khác cuốn mất."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp vai trò quản lý, điều phối, nhân sự, nơi cần một người công bằng giữ cho mọi việc vào nếp.",
+     "de_vap": "Bạn giỏi giúp người khác làm nên chuyện nhưng ít khi đòi phần ghi nhận cho mình.",
+     "loi_khuyen": "Khi một dự án bạn điều phối xong, ghi rõ phần bạn đã làm trong báo cáo gửi sếp."
+    },
+    "ham": {
+     "manh": "Bạn làm tốt vai trò hỗ trợ, cẩn thận và chu đáo với những việc giấy tờ, quy trình.",
+     "de_vap": "Bạn dễ nhận trách nhiệm thay cho lỗi của người khác vì nể nang, rồi bị đánh giá oan.",
+     "loi_khuyen": "Mỗi việc nhận thêm từ đồng nghiệp, nhắn xác nhận rõ ai chịu trách nhiệm phần nào."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn giữ nhà gọn gàng, có nếp, và hay là người lo giấy tờ nhà cửa cho cả gia đình.",
+     "de_vap": "Bạn dễ chi nhiều để nhà trông đẹp khi có khách, trong khi những chỗ dùng hằng ngày lại chưa tiện.",
+     "loi_khuyen": "Trước khi sửa nhà, liệt kê ba chỗ bất tiện nhất khi sinh hoạt hằng ngày và làm những chỗ đó trước."
+    },
+    "ham": {
+     "manh": "Bạn biết sống hoà thuận với hàng xóm, chủ nhà, nên chỗ ở ít khi có xích mích.",
+     "de_vap": "Bạn dễ đứng tên hộ hay cho người thân ở nhờ mà không nói rõ thời hạn, rồi khó mở lời.",
+     "loi_khuyen": "Cho ai ở nhờ hay đứng tên giúp, nói rõ thời hạn và điều kiện ngay từ đầu, ghi lại bằng tin nhắn."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn thấy yên lòng khi sống đúng với lẽ phải, và ít khi phải day dứt vì việc mình làm.",
+     "de_vap": "Bạn dễ ôm phần trách nhiệm cho cả nhà, cả nhóm, nên ít khi cho phép mình nghỉ thật sự.",
+     "loi_khuyen": "Mỗi tháng có một ngày không nhận lời giúp ai, chỉ làm việc mình thích."
+    },
+    "ham": {
+     "manh": "Bạn có lòng tốt, dễ thấy vui khi giúp được người khác.",
+     "de_vap": "Bạn dễ để ý người khác nghĩ gì về mình, nên làm nhiều việc vì sợ mất lòng hơn là vì muốn.",
+     "loi_khuyen": "Trước khi nhận lời một việc, hỏi mình: nếu không ai biết mình làm, mình còn muốn làm không?"
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn kính trọng cha mẹ và cấp trên, biết cư xử đúng mực nên thường được họ tin giao việc.",
+     "de_vap": "Bạn dễ chiều theo mong muốn của cha mẹ trong những việc lớn của đời mình, rồi sau này tiếc.",
+     "loi_khuyen": "Với một quyết định lớn, nghe ý cha mẹ xong, tự viết ra lý do của bạn rồi mới trả lời họ."
+    },
+    "ham": {
+     "manh": "Bạn biết nhường nhịn cha mẹ, giữ không khí trong nhà êm ấm.",
+     "de_vap": "Bạn dễ đứng giữa cha mẹ và người khác trong nhà, phải nói đỡ cho bên này bên kia tới mệt.",
+     "loi_khuyen": "Khi bị kéo vào chuyện giữa cha mẹ và người khác, nói nhẹ: con thương cả hai, hai người nói thẳng với nhau nhé."
+    }
+   }
+  },
+  "Thiên Lương": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn điềm tĩnh, gặp chuyện rối vẫn giữ được bình tĩnh, và người khác hay tìm tới bạn xin lời khuyên.",
+     "de_vap": "Bạn dễ giảng giải khi người ta chỉ cần được nghe, khiến họ thấy như bị dạy.",
+     "loi_khuyen": "Khi ai kể chuyện với bạn, hỏi trước: bạn muốn mình nghe hay muốn mình góp ý?"
+    },
+    "ham": {
+     "manh": "Bạn có lòng tốt và muốn mọi người quanh mình sống đúng, sống tử tế.",
+     "de_vap": "Bạn dễ xen vào chuyện của người khác khi chưa được nhờ, rồi buồn vì họ không nghe.",
+     "loi_khuyen": "Chỉ đưa lời khuyên khi được hỏi; nếu thật lo, hỏi một câu: mình giúp gì được không?"
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Trong anh chị em, bạn như người anh cả, chị cả, ai gặp khó cũng tìm bạn trước.",
+     "de_vap": "Bạn dễ nhận phần lo cho cả nhà, rồi khó chịu khi các em không làm theo lời mình.",
+     "loi_khuyen": "Lần tới anh chị em hỏi ý, đưa hai ba lựa chọn và để họ tự chọn, kể cả khi bạn thấy một cách rõ hơn."
+    },
+    "ham": {
+     "manh": "Bạn sẵn lòng che chở anh em khi họ vấp, không bỏ ai lại phía sau.",
+     "de_vap": "Bạn dễ thấy mình cô đơn giữa anh chị em, như thể chỉ mình lo còn người khác vô tâm.",
+     "loi_khuyen": "Rủ anh chị em làm một việc vui không dính tới trách nhiệm, như ăn một bữa, xem một trận bóng."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Bạn là chỗ dựa vững cho người bạn đời, lúc người ấy rối, bạn là người giữ được bình tĩnh.",
+     "de_vap": "Bạn dễ đóng vai người lớn trong quan hệ, nhắc nhở, chỉ bảo, khiến người ấy thấy như đang bị quản.",
+     "loi_khuyen": "Một tuần thử không góp ý chuyện nhỏ của người ấy, chỉ khen một việc họ làm tốt mỗi ngày."
+    },
+    "ham": {
+     "manh": "Bạn nghiêm túc với chuyện tình cảm và muốn che chở người mình thương.",
+     "de_vap": "Bạn dễ thấy xa người ấy vì hai người khác nhịp, bạn lo xa còn họ sống cho hôm nay.",
+     "loi_khuyen": "Mỗi tuần dành một buổi làm việc người ấy thích, dù bạn thấy nó chưa có ích gì."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn là người thầy đầu tiên của con, dạy con biết phải trái và luôn là chỗ con tìm về.",
+     "de_vap": "Bạn dễ dạy con quá nhiều, bữa cơm nào cũng có bài học, khiến con ngại kể chuyện.",
+     "loi_khuyen": "Mỗi tối hỏi con một chuyện vui trong ngày và chỉ nghe, để bài học dành cho dịp khác."
+    },
+    "ham": {
+     "manh": "Bạn bảo vệ con rất mạnh, luôn đứng về phía con khi con cần.",
+     "de_vap": "Bạn dễ quyết thay con nhiều chuyện, từ chọn bạn tới chọn ngành, con khó tự đứng.",
+     "loi_khuyen": "Giao cho con một việc tự quyết hằng tuần, như chọn món ăn cuối tuần, và tôn trọng lựa chọn đó."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn kiếm tiền ổn định từ chuyên môn, tư vấn, giảng dạy, những việc người khác tin vì bạn có uy tín.",
+     "de_vap": "Bạn dễ ngại nói chuyện giá cả, làm giúp nhiều mà lấy ít hoặc không lấy.",
+     "loi_khuyen": "Viết sẵn một bảng giá cho phần việc bạn hay được nhờ, và gửi trước khi bắt đầu làm."
+    },
+    "ham": {
+     "manh": "Bạn biết sống giản dị, không cần nhiều tiền vẫn thấy đủ.",
+     "de_vap": "Bạn dễ dùng tiền để lo cho người khác, cho người thân mượn, rồi chính mình thiếu lúc cần.",
+     "loi_khuyen": "Giữ một khoản dự phòng bằng ba tháng chi tiêu, và không đụng vào khoản đó để giúp ai."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn chịu được áp lực tốt, gặp việc khó vẫn bình tĩnh, nên ít khi để căng thẳng kéo dài.",
+     "de_vap": "Bạn hay gánh lo của người khác vào mình, tối nằm vẫn nghĩ chuyện của bạn bè, người nhà.",
+     "loi_khuyen": "Tối nào trước khi ngủ, tắt điện thoại và đọc vài trang sách hay giãn cơ mười phút để đầu óc dịu lại."
+    },
+    "ham": {
+     "manh": "Khi chịu nghe lời khuyên, bạn giữ thói quen tốt khá bền vì bạn tin vào kỷ luật.",
+     "de_vap": "Bạn dễ chủ quan với cơ thể, khuyên người khác đi khám nhưng chính mình lại để dành.",
+     "loi_khuyen": "Đặt lịch khám định kỳ mỗi năm vào cùng một tháng, như tháng sinh nhật, để không quên."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn hay gặp người giúp đúng lúc, và chính bạn cũng thường là người giúp người lạ.",
+     "de_vap": "Bạn dễ nhận phần lo cho cả đoàn khi đi đâu, quên mất mình cũng cần được nghỉ.",
+     "loi_khuyen": "Trong chuyến đi tới, chia việc rõ cho mọi người từ trước, và để mình một buổi không lo gì cả."
+    },
+    "ham": {
+     "manh": "Bạn thích đi đây đó, học hỏi được nhiều điều từ những nơi xa.",
+     "de_vap": "Bạn dễ thấy lẻ loi khi ở xa nhà, sống khép kín, ít người để chia sẻ.",
+     "loi_khuyen": "Ở nơi mới, tham gia một nhóm sinh hoạt đều đặn, như câu lạc bộ đọc sách hay nhóm chạy bộ."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn được bạn bè, đồng nghiệp tin như người anh chị, và nhiều người nhớ những lời bạn khuyên.",
+     "de_vap": "Bạn dễ thành người lo việc cho cả nhóm, ai cũng dựa vào bạn mà ít ai đỡ lại.",
+     "loi_khuyen": "Khi nhóm gặp việc, giao từng phần cho từng người thay vì tự ôm, và hỏi lại tiến độ sau."
+    },
+    "ham": {
+     "manh": "Bạn sẵn lòng giúp những người mới, chỉ việc cho họ không tiếc.",
+     "de_vap": "Bạn dễ dạy bảo đồng nghiệp ngang hàng, khiến họ thấy bạn hơi bề trên dù bạn không có ý đó.",
+     "loi_khuyen": "Với đồng nghiệp ngang hàng, thay câu 'bạn nên' bằng 'mình từng làm thế này, bạn xem có hợp không'."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp những việc cần uy tín và sự đứng đắn: giáo dục, y tế, tư vấn, pháp lý, quản lý nhân sự.",
+     "de_vap": "Bạn dễ ngại cạnh tranh, để người khác giành phần việc tốt dù bạn làm được hơn.",
+     "loi_khuyen": "Khi có vị trí hay dự án bạn muốn, nói với sếp ngay trong tuần, kèm một hai lý do cụ thể."
+    },
+    "ham": {
+     "manh": "Bạn làm việc có nguyên tắc, không dễ bị lôi kéo vào chuyện mờ ám ở chỗ làm.",
+     "de_vap": "Bạn dễ bất đồng với sếp vì thấy cách làm chưa đúng, và nói ra theo kiểu dạy lại người trên.",
+     "loi_khuyen": "Khi không đồng ý với sếp, đưa ra một phương án thay thế cụ thể thay vì chỉ nói điều chưa đúng."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Nhà bạn thường là nơi họ hàng, bạn bè tìm tới, và bạn giữ chỗ ở ổn định, ít xáo trộn.",
+     "de_vap": "Bạn dễ gánh việc nhà cửa của cả họ, từ giỗ chạp tới sửa sang, mà ngại nhờ ai.",
+     "loi_khuyen": "Lập một nhóm nhắn tin gia đình để chia việc giỗ, Tết, và ghi rõ ai làm việc gì."
+    },
+    "ham": {
+     "manh": "Bạn sống được ở nơi giản dị, không cần nhà to vẫn thấy ổn.",
+     "de_vap": "Chỗ ở của bạn dễ thay đổi nhiều lần, hoặc bạn ở xa gia đình lâu mà ít về.",
+     "loi_khuyen": "Dù ở đâu, giữ một góc cố định cho đồ quan trọng và một lịch về thăm nhà cố định mỗi quý."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn có sự vững vàng bên trong, gặp chuyện lớn vẫn tìm được cách đứng dậy.",
+     "de_vap": "Bạn ít khi cho mình được yếu, ai hỏi cũng nói ổn, dù có lúc bạn cũng cần được an ủi.",
+     "loi_khuyen": "Chọn một người bạn tin để mỗi tháng nói thật một lần về điều bạn đang mệt."
+    },
+    "ham": {
+     "manh": "Bạn có những nguyên tắc sống rõ ràng, và nhờ đó ít khi lạc hướng.",
+     "de_vap": "Bạn dễ thấy cô độc, như thể không ai hiểu những gì bạn lo nghĩ.",
+     "loi_khuyen": "Mỗi tuần gặp một người ngoài công việc, uống một cốc nước và nói chuyện không cần mục đích."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn được cha mẹ hay cấp trên che chở, và bạn cũng biết đáp lại bằng sự tôn trọng.",
+     "de_vap": "Bạn dễ khuyên ngược lại cha mẹ về cách sống, khiến họ thấy con đang dạy lại mình.",
+     "loi_khuyen": "Khi muốn cha mẹ đổi một thói quen, kể chuyện một người khác đã làm thay vì nói thẳng 'bố mẹ nên'."
+    },
+    "ham": {
+     "manh": "Bạn biết tự lập sớm, ít khi phải dựa vào cha mẹ trong những việc của mình.",
+     "de_vap": "Bạn và cha mẹ dễ xa nhau về khoảng cách hoặc cách nghĩ, ít khi có chuyện chung để nói.",
+     "loi_khuyen": "Mỗi tuần gửi cha mẹ một tấm ảnh hay một câu kể chuyện nhỏ trong ngày, để có chuyện nói tiếp."
+    }
+   }
+  },
+  "Thất Sát": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn quyết đoán, gặp việc khó là xắn tay làm ngay, và chịu được áp lực mà nhiều người né.",
+     "de_vap": "Bạn dễ quyết nhanh khi chưa đủ thông tin, rồi phải sửa lại, tốn công hơn chờ thêm một ngày.",
+     "loi_khuyen": "Với quyết định lớn, đặt luật cho mình: hỏi ý một người hiểu việc và ngủ qua một đêm rồi mới chốt."
+    },
+    "ham": {
+     "manh": "Bạn có ý chí mạnh, ngã ở đâu cũng đứng dậy được và không dễ bỏ cuộc.",
+     "de_vap": "Lúc nóng, bạn dễ nói hoặc làm điều mình tiếc, nhất là khi bị dồn vào thế bí.",
+     "loi_khuyen": "Khi thấy mình nóng lên, ra khỏi phòng uống một cốc nước, đếm tới mười rồi mới trả lời."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Với anh chị em, bạn là người dám đứng ra khi nhà có việc lớn, nói một câu là mọi người yên tâm.",
+     "de_vap": "Bạn dễ quyết thay anh em, nói như ra lệnh, khiến họ thấy không được hỏi ý.",
+     "loi_khuyen": "Trước khi chốt việc chung trong nhà, hỏi từng người một câu: em/anh thấy sao, rồi mới nói ý mình."
+    },
+    "ham": {
+     "manh": "Bạn độc lập, ít phải dựa vào anh chị em, và tự lo được phần mình.",
+     "de_vap": "Bạn và anh chị em dễ va chạm vì ai cũng cứng, một lần cãi to có thể làm xa nhau lâu.",
+     "loi_khuyen": "Sau một trận cãi với anh chị em, chủ động nhắn một câu hỏi thăm trong vòng ba ngày, không cần nhắc lại chuyện cũ."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Bạn hợp với người bạn đời có cá tính, và hai người có thể cùng làm những việc lớn như xây nhà, mở quán.",
+     "de_vap": "Hai người dễ cùng muốn cầm lái, nên chuyện nhỏ cũng thành cuộc giành xem ai quyết.",
+     "loi_khuyen": "Chia rõ với người ấy mảng nào ai quyết chính, ví dụ bạn lo tiền nhà, người ấy lo chuyện con cái."
+    },
+    "ham": {
+     "manh": "Bạn yêu thật lòng và dám làm nhiều thứ vì người mình thương.",
+     "de_vap": "Lúc cãi nhau, bạn dễ nói nặng hoặc đòi dừng lại ngay, rồi sau đó lại hối hận.",
+     "loi_khuyen": "Thoả thuận trước với người ấy: lúc giận không ai nói chuyện dừng lại, nghỉ một tiếng rồi mới nói tiếp."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn dạy con dám làm, dám thử, và con thường lớn lên mạnh mẽ, tự lập.",
+     "de_vap": "Bạn dễ nghiêm, đặt kỳ vọng cao, khiến con sợ làm sai hơn là muốn làm tốt.",
+     "loi_khuyen": "Mỗi lần con làm sai, hỏi con 'lần sau con định làm thế nào' trước khi nói điều bạn không hài lòng."
+    },
+    "ham": {
+     "manh": "Bạn tôn trọng cá tính riêng của con và không bắt con phải giống ai.",
+     "de_vap": "Bạn và con dễ cứng đầu như nhau, hai bên cãi tới cùng mà không ai nhường.",
+     "loi_khuyen": "Khi đang căng với con, bạn là người hạ giọng trước, và hẹn nói tiếp sau bữa cơm."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn dám làm ăn, dám nhận việc khó để kiếm tiền, và có lúc thu nhập tăng nhanh nhờ bản lĩnh.",
+     "de_vap": "Bạn dễ dồn hết tiền vào một cơ hội vì tin mình làm được, không chừa đường lùi.",
+     "loi_khuyen": "Mỗi khoản đầu tư, chỉ bỏ vào tối đa một phần ba số tiền đang có, phần còn lại giữ làm quỹ dự phòng."
+    },
+    "ham": {
+     "manh": "Bạn kiếm được tiền bằng sức của mình, không ngại làm vất vả.",
+     "de_vap": "Tiền bạc dễ lên xuống thất thường vì những quyết định vội, khi được nhiều khi hụt.",
+     "loi_khuyen": "Trước một khoản chi lớn, viết ra trường hợp tệ nhất và tự hỏi mình chịu được không, rồi mới quyết."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn có thể lực tốt, chịu được những đợt làm việc cường độ cao mà vẫn đứng vững.",
+     "de_vap": "Bạn hay làm tới kiệt mới nghỉ, coi nhẹ những chỗ đau nhỏ hay cơn mệt kéo dài.",
+     "loi_khuyen": "Khi chơi thể thao hay làm việc nặng, khởi động kỹ và dừng lại ngay khi cơ thể báo đau, không cố thêm."
+    },
+    "ham": {
+     "manh": "Bạn hồi sức khá nhanh khi chịu nghỉ đúng cách.",
+     "de_vap": "Bạn dễ vội trong sinh hoạt, đi nhanh, làm nhanh, ăn vội, nên hay va quệt và mệt.",
+     "loi_khuyen": "Tập chậm lại ở những lúc dễ vội nhất: lúc lái xe, lúc lên xuống cầu thang, lúc cầm dao trong bếp."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn dám đi xa, dám vào môi trường khó, và thường mở được đường ở những nơi người khác ngại.",
+     "de_vap": "Bạn dễ lao vào chỗ mới khi chưa tìm hiểu, rồi va phải những luật lệ ngầm.",
+     "loi_khuyen": "Trước khi tới một nơi làm việc hay thành phố mới, hỏi chuyện ít nhất hai người đã ở đó."
+    },
+    "ham": {
+     "manh": "Bạn thích nghi nhanh với nơi vất vả, thiếu thốn, và không ngại bắt đầu từ con số không.",
+     "de_vap": "Ở bên ngoài bạn dễ va chạm với người lạ vì thẳng tính, chuyện nhỏ thành to.",
+     "loi_khuyen": "Ra đường hay ở chỗ đông người, khi có va chạm, chọn nói một câu xin lỗi trước dù bạn thấy mình không sai hẳn."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn dẫn được nhóm, đồng nghiệp hay cấp dưới thường theo bạn vì bạn dám nhận việc khó.",
+     "de_vap": "Bạn dễ đòi người khác làm nhanh và mạnh như mình, rồi bực khi họ không theo kịp.",
+     "loi_khuyen": "Khi giao việc cho người khác, hỏi họ cần bao lâu và cùng chốt một thời hạn cả hai thấy được."
+    },
+    "ham": {
+     "manh": "Bạn thẳng thắn, bạn bè biết rõ bạn nghĩ gì, không phải đoán.",
+     "de_vap": "Quan hệ với bạn bè, đồng nghiệp dễ có lúc căng vì bạn nói thẳng mà không rào đón.",
+     "loi_khuyen": "Trước khi góp ý đồng nghiệp, khen một điều họ làm tốt trước, rồi mới nói điều cần sửa."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp những việc cần dám làm: mở thị trường, kinh doanh, kỹ thuật, xử lý sự cố, những chỗ áp lực cao.",
+     "de_vap": "Bạn dễ làm một mình, ôm hết, ngại chờ người khác, nên khó giữ đội lâu dài.",
+     "loi_khuyen": "Mỗi tuần có một buổi ngồi với đội nghe họ nói khó khăn, và giao lại cho họ ít nhất một việc bạn đang ôm."
+    },
+    "ham": {
+     "manh": "Bạn chịu được việc nặng, giao gấp, và không ngại bắt đầu lại từ đầu khi cần.",
+     "de_vap": "Công việc dễ có lúc lên xuống mạnh vì bạn đổi hướng vội hoặc bất đồng với người trên.",
+     "loi_khuyen": "Trước khi bỏ việc hay đổi hướng, chờ đủ hai tuần và bàn với một người bạn tin."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn dám quyết chuyện nhà cửa, mua, chuyển, sửa nhà nhanh khi thấy đúng thời điểm.",
+     "de_vap": "Bạn dễ quyết chuyện nhà một mình, người trong nhà chưa kịp đồng ý đã thấy bạn đặt cọc.",
+     "loi_khuyen": "Mọi quyết định mua bán, chuyển nhà, bàn với người trong nhà ít nhất hai lần trước khi đặt cọc."
+    },
+    "ham": {
+     "manh": "Bạn không quá gắn với chỗ ở, nên sẵn lòng chuyển đi khi công việc cần.",
+     "de_vap": "Chỗ ở dễ thay đổi nhiều, sống tạm bợ lâu vì bạn thấy chưa cần ổn định.",
+     "loi_khuyen": "Dù ở thuê, đầu tư cho một chỗ ngủ thật tốt và giữ nhà gọn, để mỗi tối về có chỗ nghỉ thật."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn có tinh thần mạnh, gặp chuyện khó là thấy mình cần đứng lên, không ngồi than.",
+     "de_vap": "Bạn khó ngồi yên, nghỉ cũng thấy có lỗi, nên ít khi thật sự thư giãn.",
+     "loi_khuyen": "Chọn một kiểu nghỉ có vận động, như leo núi, bơi, đạp xe, để vừa được làm vừa được nghỉ."
+    },
+    "ham": {
+     "manh": "Bạn rèn được ý chí từ những lúc khó, và đó là thứ người khác nể ở bạn.",
+     "de_vap": "Trong lòng bạn hay có cảm giác chưa yên, như luôn phải chuẩn bị cho một trận khó.",
+     "loi_khuyen": "Mỗi ngày có mười phút ngồi thở chậm hay nghe một bản nhạc quen, chỉ để cơ thể biết là nó đang an toàn."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn độc lập từ sớm, tự quyết đời mình, và cha mẹ hay cấp trên thường nể ý chí của bạn.",
+     "de_vap": "Bạn và cha mẹ hay sếp dễ va nhau vì ai cũng muốn mình là người quyết.",
+     "loi_khuyen": "Khi bất đồng với cha mẹ hay sếp, hỏi họ điều họ lo nhất, rồi trả lời đúng vào điều đó."
+    },
+    "ham": {
+     "manh": "Bạn tự đứng được trên đôi chân mình, không phải chờ ai che chở.",
+     "de_vap": "Bạn dễ phản ứng mạnh khi cha mẹ hay sếp áp đặt, nói một câu là hai bên lạnh nhau nhiều ngày.",
+     "loi_khuyen": "Khi thấy bị áp đặt, nói 'cho con nghĩ thêm' thay vì từ chối ngay, rồi trả lời vào hôm sau."
+    }
+   }
+  },
+  "Phá Quân": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn dám đổi, thấy cái cũ không ổn là làm lại, và thường mở ra cách làm mới mà người khác chưa nghĩ tới.",
+     "de_vap": "Bạn dễ chán khi mọi thứ vào nếp, muốn làm lại từ đầu dù việc đang đi được nửa đường.",
+     "loi_khuyen": "Trước khi bỏ một việc để làm lại, viết ra ba điều đã học được từ nó và một điều có thể giữ lại."
+    },
+    "ham": {
+     "manh": "Bạn không sợ thay đổi, mất đi cái gì cũng có thể làm lại từ đầu.",
+     "de_vap": "Bạn dễ bốc đồng, bỏ dở nhiều việc, khiến người khác ngại giao việc dài hạn cho bạn.",
+     "loi_khuyen": "Chọn một việc trong tháng này và làm đến cùng, dù chán giữa chừng, rồi mới bắt đầu việc mới."
+    }
+   },
+   "Huynh Đệ": {
+    "sang": {
+     "manh": "Với anh chị em, bạn là người mang ý tưởng mới, rủ cả nhà thay đổi cách làm ăn, cách sống.",
+     "de_vap": "Quan hệ anh em có lúc gần lúc xa theo giai đoạn, bạn dễ bận việc riêng rồi quên hỏi han.",
+     "loi_khuyen": "Đặt một lời nhắc mỗi tháng gọi cho từng anh chị em, dù chỉ năm phút."
+    },
+    "ham": {
+     "manh": "Bạn độc lập, có đường đi riêng khác hẳn anh chị em, và không ngại khác biệt.",
+     "de_vap": "Chuyện tiền bạc hay làm ăn chung với anh chị em dễ đổ giữa chừng, làm sứt mẻ tình cảm.",
+     "loi_khuyen": "Nếu làm ăn chung với anh chị em, viết thoả thuận rõ từ đầu, kể cả cách rút ra khi không muốn làm tiếp."
+    }
+   },
+   "Phu Thê": {
+    "sang": {
+     "manh": "Trong tình cảm, bạn luôn muốn làm mới, bày những thay đổi để hai người không thấy nhàm.",
+     "de_vap": "Bạn dễ muốn đổi nhanh hơn người ấy theo kịp, như chuyển nhà, đổi việc, mà chưa hỏi kỹ.",
+     "loi_khuyen": "Trước khi đề xuất một thay đổi lớn, hỏi người ấy: em/anh cần bao lâu để nghĩ về chuyện này?"
+    },
+    "ham": {
+     "manh": "Bạn dám nói thật về những gì chưa ổn trong quan hệ, không giả vờ cho êm.",
+     "de_vap": "Lúc chán hay giận, bạn dễ muốn đập đi làm lại cả mối quan hệ thay vì sửa một chỗ.",
+     "loi_khuyen": "Khi thấy chán, viết ra đúng một điều cần thay đổi và bàn với người ấy chỉ điều đó thôi."
+    }
+   },
+   "Tử Nữ": {
+    "sang": {
+     "manh": "Bạn cho con tự do thử những điều khác biệt, và con thường lớn lên sáng tạo, dám nghĩ.",
+     "de_vap": "Bạn dễ đổi cách dạy con liên tục, nay cứng mai mềm, khiến con khó biết điều gì là cố định.",
+     "loi_khuyen": "Cùng người bạn đời thống nhất ba nguyên tắc dạy con, và giữ yên ít nhất sáu tháng."
+    },
+    "ham": {
+     "manh": "Bạn hiểu những đứa trẻ cá tính, không ép con vào khuôn.",
+     "de_vap": "Kế hoạch trong nhà dễ thay đổi liên tục, khiến con thấy mọi thứ lúc nào cũng xáo trộn.",
+     "loi_khuyen": "Giữ cho con một nếp cố định mỗi ngày, như giờ ăn tối chung, dù những việc khác thay đổi."
+    }
+   },
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Bạn dám thay đổi cách kiếm tiền, có sức bật để làm lại khi một nguồn thu không còn hợp.",
+     "de_vap": "Tiền vào ra mạnh, bạn dễ chi lớn cho ý tưởng mới trước khi ý tưởng cũ kịp sinh lời.",
+     "loi_khuyen": "Giữ một quỹ dự phòng sáu tháng chi tiêu ở tài khoản riêng, và chỉ dùng tiền ngoài quỹ cho việc mới."
+    },
+    "ham": {
+     "manh": "Bạn không sợ mất, nên dám thử những cách kiếm tiền mà người khác chưa dám.",
+     "de_vap": "Bạn dễ tiêu theo hứng, mua đồ rồi bỏ, đầu tư rồi rút vội, tiền hao dần mà không rõ đi đâu.",
+     "loi_khuyen": "Ghi mọi khoản chi trong một tháng, cuối tháng gạch ra ba khoản bạn tiếc nhất và cắt hẳn tháng sau."
+    }
+   },
+   "Tật Ách": {
+    "sang": {
+     "manh": "Bạn có sức bật, sau những đợt làm việc dồn dập vẫn hồi lại được nếu chịu nghỉ.",
+     "de_vap": "Bạn dễ sống cường độ cao, thức khuya, làm dồn, rồi đuối sức một lần.",
+     "loi_khuyen": "Giữ giờ ngủ cố định kể cả hôm đang hăng việc, và mỗi tuần có một ngày không làm gì nặng."
+    },
+    "ham": {
+     "manh": "Bạn sẵn lòng đổi thói quen khi thấy cần, nên bắt đầu một nếp sống mới không khó với bạn.",
+     "de_vap": "Nhịp sinh hoạt của bạn dễ đảo lộn, nay ngủ sớm mai thức trắng, ăn uống thất thường.",
+     "loi_khuyen": "Giữ ít nhất một mốc cố định mỗi ngày, như giờ ăn sáng hay giờ đi ngủ, dù những việc khác thay đổi."
+    }
+   },
+   "Thiên Di": {
+    "sang": {
+     "manh": "Ra ngoài bạn thích nghi nhanh, môi trường mới làm bạn hăng hái, hợp những việc phải đi nhiều, đổi chỗ nhiều.",
+     "de_vap": "Bạn dễ đi rồi đổi, chuyển chỗ liên tục, chưa kịp xây quan hệ đã sang nơi khác.",
+     "loi_khuyen": "Ở mỗi nơi từng làm, giữ liên lạc với ít nhất hai người quen sau khi bạn rời đi."
+    },
+    "ham": {
+     "manh": "Bạn dám bỏ chỗ quen để đi tìm cơ hội, nhiều người phục ở bạn sự gan đó.",
+     "de_vap": "Ở bên ngoài, bạn dễ gặp chuyện bất ngờ vì đi vội, quyết vội, chưa chuẩn bị kỹ.",
+     "loi_khuyen": "Trước mỗi chuyến đi hay lần chuyển việc, làm một danh sách chuẩn bị và kiểm tra lại vào tối hôm trước."
+    }
+   },
+   "Nô Bộc": {
+    "sang": {
+     "manh": "Bạn có nhiều nhóm bạn theo từng giai đoạn đời, mỗi nhóm cho bạn những góc nhìn mới.",
+     "de_vap": "Bạn dễ để bạn cũ trôi đi khi bước sang giai đoạn mới, rồi lúc cần lại thấy hụt.",
+     "loi_khuyen": "Mỗi quý nhắn hỏi thăm một người bạn cũ mà bạn đã lâu không liên lạc."
+    },
+    "ham": {
+     "manh": "Bạn dám rời khỏi những nhóm bạn không còn hợp, không ở lại chỉ vì nể.",
+     "de_vap": "Quan hệ bạn bè, đồng nghiệp dễ có xáo trộn, hợp tác rồi tan, góp vốn rồi chia không êm.",
+     "loi_khuyen": "Mọi hợp tác với bạn bè, thoả thuận từ đầu cả cách bắt đầu lẫn cách dừng lại."
+    }
+   },
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn hợp những việc cần đổi mới: khởi nghiệp, cải tổ, công nghệ, những chỗ cần người dám bỏ cách làm cũ.",
+     "de_vap": "Bạn dễ muốn đổi việc, đổi dự án khi mới đi được nửa đường, để lại nhiều việc dang dở.",
+     "loi_khuyen": "Với mỗi dự án, đặt sẵn một mốc tối thiểu phải đạt trước khi cho phép mình đổi hướng."
+    },
+    "ham": {
+     "manh": "Bạn chịu được những giai đoạn công việc bấp bênh, và biết xoay khi mọi thứ thay đổi.",
+     "de_vap": "Công việc dễ thay đổi liên tục, đổi nghề nhiều lần khiến bạn khó tích luỹ kinh nghiệm sâu.",
+     "loi_khuyen": "Chọn một kỹ năng cốt lõi theo đuổi ít nhất ba năm, dù đổi chỗ làm vẫn mang theo kỹ năng đó."
+    }
+   },
+   "Điền Trạch": {
+    "sang": {
+     "manh": "Bạn biết biến nhà cũ thành mới, thích sửa sang, sắp xếp lại để chỗ ở hợp với từng giai đoạn.",
+     "de_vap": "Bạn dễ sửa nhà, chuyển nhà nhiều lần, tốn tiền mà chưa hẳn đã ở yên.",
+     "loi_khuyen": "Trước mỗi lần sửa hay chuyển nhà, viết ra lý do và chi phí, để một tháng rồi xem còn muốn không."
+    },
+    "ham": {
+     "manh": "Bạn dễ sống ở nhiều nơi khác nhau mà không thấy khó chịu.",
+     "de_vap": "Chỗ ở dễ chưa ổn, đồ đạc hay hỏng, bừa, hoặc bạn chưa tìm được nơi muốn ở lâu.",
+     "loi_khuyen": "Giữ một quỹ nhỏ cho sửa chữa nhà mỗi tháng, và sửa đồ hỏng ngay trong tuần thay vì để dồn."
+    }
+   },
+   "Phúc Đức": {
+    "sang": {
+     "manh": "Bạn thấy sống động nhất khi được làm ra cái mới, một dự án riêng, một món đồ tự tay làm.",
+     "de_vap": "Bạn khó yên với những gì đang có, luôn thấy cần thay đổi một cái gì đó.",
+     "loi_khuyen": "Giữ một dự án sáng tạo nhỏ ngoài công việc, như vẽ, viết, làm đồ gỗ, để cái muốn đổi mới có chỗ đi."
+    },
+    "ham": {
+     "manh": "Bạn không sợ bắt đầu lại, và đó là sức mạnh lúc đời có biến động.",
+     "de_vap": "Trong lòng bạn hay bồn chồn, ít khi thấy đủ với hiện tại, dễ bỏ những thứ đang tốt.",
+     "loi_khuyen": "Trước khi bỏ một thứ đang có, viết ra ba điều nó đang cho bạn mỗi ngày, rồi mới quyết."
+    }
+   },
+   "Phụ Mẫu": {
+    "sang": {
+     "manh": "Bạn có cách nghĩ riêng khác cha mẹ, và có thể giúp gia đình đổi mới những nếp đã cũ.",
+     "de_vap": "Bạn và cha mẹ hay sếp dễ khác quan điểm, bạn muốn đổi còn họ muốn giữ.",
+     "loi_khuyen": "Khi muốn thay đổi điều gì trong nhà, đề xuất làm thử trong một tháng thay vì đổi hẳn ngay."
+    },
+    "ham": {
+     "manh": "Bạn tự lập, ít phụ thuộc vào cha mẹ hay cấp trên, tự lo con đường của mình.",
+     "de_vap": "Quan hệ với cha mẹ hay sếp dễ có lúc rạn vì bạn làm theo ý mình mà không báo trước.",
+     "loi_khuyen": "Trước khi làm một việc lớn trái ý cha mẹ hay sếp, báo trước cho họ một câu, dù họ chưa đồng ý."
     }
    }
   }

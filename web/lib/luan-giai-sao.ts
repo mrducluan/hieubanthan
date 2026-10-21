@@ -9,7 +9,7 @@
 import { createHmac } from "node:crypto";
 import { NextResponse } from "next/server";
 import type { ZodTypeAny } from "zod";
-import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
+import { dauNguoiGoi, goiEngineDaKiem as goiEngine } from "@/lib/proxy";
 import { layCauHinh } from "@/lib/cau-hinh";
 import { biMat, chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
 import { catXemTruoc, type BaoCaoDay } from "@/lib/sao-xem-truoc";
@@ -29,10 +29,20 @@ const TEN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", thans
 
 /** `khoaTu`: phần đầu vào dùng làm khoá "đã mở hôm nay" — bỏ những trường không đổi bản chất báo cáo (vd phiếu bình chọn
  *  của báo cáo ba phái đổi sau mỗi lần bấm) để người dùng không bị trừ Sao lần hai trong ngày. Mặc định: toàn bộ đầu vào. */
+/** `them`: trường bổ sung CHỈ gửi engine, không tính vào khoá "đã mở hôm nay" (vd LG-ĐS: bảng tỉ lệ kiểm chứng
+ *  `trong_so` + phiếu của chính người xem `ca_nhan` — đổi theo thời gian, không đổi bản chất báo cáo). Engine bản cũ
+ *  chưa nhận trường đó (422) → gọi lại không kèm, báo cáo vẫn ra. */
 export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: string, moDun: string,
-                                    khoaTu: (d: Record<string, unknown>) => unknown = (d) => d): Promise<NextResponse> {
+                                    khoaTu: (d: Record<string, unknown>) => unknown = (d) => d,
+                                    them?: () => Promise<Record<string, unknown>>): Promise<NextResponse> {
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
+  const bs = them ? await them().catch(() => ({})) : {};
+  const goiEngineDaKiem = async (data: unknown, p: string, dau: Record<string, string>) => {
+    if (!Object.keys(bs).length) return goiEngine(data, p, dau);
+    const kq = await goiEngine({ ...(data as object), ...bs }, p, dau);
+    return !kq.ok && kq.res.status === 422 ? goiEngine(data, p, dau) : kq;
+  };
 
   if (!(await dangThuSao())) {
     const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));

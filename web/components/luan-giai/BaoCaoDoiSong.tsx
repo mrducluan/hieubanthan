@@ -49,7 +49,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
         {cotLoi.length > 0 && (
           <section aria-labelledby="lg-cot-loi" className="mt-6" data-testid="lg-cot-loi">
             <h3 id="lg-cot-loi" className="font-serif text-2xl">Điều quan trọng nhất</h3>
-            <div className="mt-3 grid gap-3 md:grid-cols-2">
+            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
               {cotLoi.map((h, i) => <HopNoiBat key={`${h.ma_mau ?? h.tieu_de}-${i}`} hop={h} className={cotLoi.length % 2 && i === 0 ? "md:col-span-2" : undefined} />)}
             </div>
           </section>
@@ -57,13 +57,13 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
 
         <nav aria-label="Mục lục" className="mt-6 print:hidden" data-testid="lg-muc-luc">
           <p className="text-sm text-fg-faint">Mục lục</p>
-          <ol className="mt-2 grid gap-1.5 text-sm sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-2 grid grid-cols-1 gap-1.5 text-sm sm:grid-cols-2 lg:grid-cols-3">
             {bc.chuong.map((c, i) => (
-              <li key={c.ma}>
+              <li key={c.ma} className="min-w-0">
                 <a href={c.khoa ? "#lg-khoa" : `#lg-${c.ma}`}
                   className="flex items-center gap-2 rounded-xl border border-line/70 px-3 py-1.5 text-fg-muted hover:border-gold/60 hover:text-fg">
                   {c.khoa && <LockKeyhole className="size-3 shrink-0 text-gold" aria-label="đang khoá" />}
-                  <span className="min-w-0 flex-1 truncate">{i + 1}. {c.tieu_de}</span>
+                  <span className="min-w-0 flex-1">{i + 1}. {c.tieu_de}</span>
                   {!c.khoa && c.muc && <span data-muc={c.muc} className="cham-muc size-2 shrink-0 rounded-full" aria-hidden />}
                 </a>
               </li>
@@ -95,7 +95,7 @@ function Chuong({ c, so, goc, thoiGian }: { c: ChuongDoiSongMo; so: number; goc:
       {c.tom_tat && <p className="mt-3 text-lg leading-relaxed text-fg sm:text-xl" data-testid="tom-tat">{c.tom_tat}</p>}
       {thoiGian && thoiGian.length > 0 && <DongThoiGian ds={thoiGian} />}
       {hop.length > 0 && (
-        <div className="mt-4 grid gap-3 md:grid-cols-2">
+        <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
           {hop.map((h, k) => <HopNoiBat key={`${h.ma_mau ?? h.tieu_de}-${k}`} hop={h} thuatNgu={c.thuat_ngu} />)}
         </div>
       )}

@@ -1,0 +1,891 @@
+{
+ "_ghi_chu": "Báo cáo đời sống MẪU đúng hợp đồng docs/LUAN-GIAI-DOI-SONG.md mục 2.3 (viết tay cho e2e — engine chưa có thì dùng bản này; khi engine xong nên thay bằng output thật).",
+ "bao_cao": {
+  "mo_dun": "tuvi",
+  "phien_ban": "doi_song_1",
+  "trang_thai": "nhap_ai",
+  "dien_dat": "mau",
+  "so_khoa": 0,
+  "ket": "Bài luận ghép từ kho tri thức Tử vi lối Việt, để bạn tham khảo và tự soi.",
+  "phi": {
+   "sao": 10,
+   "ly_do": "mien_phi",
+   "dang_nhap": true
+  },
+  "cot_loi": [
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Bạn mạnh nhất khi được tự quyết",
+    "noi_dung": "Việc gì bạn được chủ động sắp xếp thì thường xong tốt. Nên chọn chỗ làm cho bạn tự quyết phần việc của mình.",
+    "can_cu": [
+     "Thiên Cơ (Đắc) ở Mệnh",
+     "Hoá Quyền ở Quan Lộc"
+    ],
+    "ma_mau": "ds.cot_loi.tu_quyet",
+    "ty_le_dung": 0.78,
+    "so_phieu": 120,
+    "dang_xem_lai": false
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Tiền vào đều nếu có kế hoạch",
+    "noi_dung": "Bạn giữ tiền tốt khi chia sẵn từng khoản lúc nhận lương.",
+    "can_cu": [
+     "Thái Âm (Miếu) ở Tài Bạch"
+    ],
+    "ma_mau": "ds.cot_loi.tien_ke_hoach",
+    "dang_xem_lai": false
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Tình cảm cần nói thẳng hơn",
+    "noi_dung": "Bạn hay giữ trong lòng. Lúc cãi nhau, nói rõ mình cần gì sẽ đỡ hiểu lầm.",
+    "can_cu": [
+     "Cự Môn (Hãm) ở Phu Thê"
+    ],
+    "ma_mau": "ds.cot_loi.noi_thang",
+    "dang_xem_lai": false
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Mười năm này là lúc gây dựng",
+    "noi_dung": "Giai đoạn 36–45 tuổi hợp để lo nhà cửa, tích luỹ lâu dài.",
+    "can_cu": [
+     "Đại hạn tại Điền Trạch"
+    ],
+    "dang_xem_lai": false
+   }
+  ],
+  "thoi_gian_bieu": [
+   {
+    "tu_tuoi": 6,
+    "den_tuoi": 15,
+    "nam_tu": 1995,
+    "nam_den": 2004,
+    "cung": "Mệnh",
+    "chu_de": "tuổi nhỏ, nền nếp",
+    "muc": "can_bang",
+    "mot_cau": "Mười năm này xoay quanh tuổi nhỏ, nền nếp; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 16,
+    "den_tuoi": 25,
+    "nam_tu": 2005,
+    "nam_den": 2014,
+    "cung": "Phụ Mẫu",
+    "chu_de": "học hành, người dẫn dắt",
+    "muc": "thuan",
+    "mot_cau": "Mười năm này xoay quanh học hành, người dẫn dắt; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 26,
+    "den_tuoi": 35,
+    "nam_tu": 2015,
+    "nam_den": 2024,
+    "cung": "Phúc Đức",
+    "chu_de": "tìm hướng đi riêng",
+    "muc": "can_bang",
+    "mot_cau": "Mười năm này xoay quanh tìm hướng đi riêng; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 36,
+    "den_tuoi": 45,
+    "nam_tu": 2025,
+    "nam_den": 2034,
+    "cung": "Điền Trạch",
+    "chu_de": "nhà cửa, gây dựng",
+    "muc": "can_chu_dong",
+    "mot_cau": "Mười năm này xoay quanh nhà cửa, gây dựng; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": true
+   },
+   {
+    "tu_tuoi": 46,
+    "den_tuoi": 55,
+    "nam_tu": 2035,
+    "nam_den": 2044,
+    "cung": "Quan Lộc",
+    "chu_de": "công việc chính",
+    "muc": "thuan",
+    "mot_cau": "Mười năm này xoay quanh công việc chính; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 56,
+    "den_tuoi": 65,
+    "nam_tu": 2045,
+    "nam_den": 2054,
+    "cung": "Nô Bộc",
+    "chu_de": "bạn bè, cộng sự",
+    "muc": "can_bang",
+    "mot_cau": "Mười năm này xoay quanh bạn bè, cộng sự; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 66,
+    "den_tuoi": 75,
+    "nam_tu": 2055,
+    "nam_den": 2064,
+    "cung": "Thiên Di",
+    "chu_de": "đi xa, mở rộng",
+    "muc": "thuan",
+    "mot_cau": "Mười năm này xoay quanh đi xa, mở rộng; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 76,
+    "den_tuoi": 85,
+    "nam_tu": 2065,
+    "nam_den": 2074,
+    "cung": "Tật Ách",
+    "chu_de": "giữ sức, chậm lại",
+    "muc": "can_chu_dong",
+    "mot_cau": "Mười năm này xoay quanh giữ sức, chậm lại; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 86,
+    "den_tuoi": 95,
+    "nam_tu": 2075,
+    "nam_den": 2084,
+    "cung": "Tài Bạch",
+    "chu_de": "tiền bạc, tích luỹ",
+    "muc": "can_bang",
+    "mot_cau": "Mười năm này xoay quanh tiền bạc, tích luỹ; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 96,
+    "den_tuoi": 105,
+    "nam_tu": 2085,
+    "nam_den": 2094,
+    "cung": "Tử Nữ",
+    "chu_de": "con cái, truyền lại",
+    "muc": "thuan",
+    "mot_cau": "Mười năm này xoay quanh con cái, truyền lại; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 106,
+    "den_tuoi": 115,
+    "nam_tu": 2095,
+    "nam_den": 2104,
+    "cung": "Phu Thê",
+    "chu_de": "người bạn đời",
+    "muc": "can_bang",
+    "mot_cau": "Mười năm này xoay quanh người bạn đời; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 116,
+    "den_tuoi": 125,
+    "nam_tu": 2105,
+    "nam_den": 2114,
+    "cung": "Huynh Đệ",
+    "chu_de": "anh em, bạn thân",
+    "muc": "can_bang",
+    "mot_cau": "Mười năm này xoay quanh anh em, bạn thân; nên làm đều tay hơn là làm dồn.",
+    "hien_tai": false
+   }
+  ],
+  "chuong": [
+   {
+    "ma": "tong_quan",
+    "tieu_de": "Con người bạn",
+    "cau_hoi": "Con người bạn của tôi thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Nói ngắn: mảng con người bạn của bạn ở mức thuận lợi — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng con người bạn",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.tong_quan.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.tong_quan.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Con người bạn: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Con người bạn",
+     "cau_hoi": "Chương Con người bạn nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "cuoc_doi",
+    "tieu_de": "Các giai đoạn cuộc đời",
+    "cau_hoi": "Các giai đoạn cuộc đời của tôi thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Nói ngắn: mảng các giai đoạn cuộc đời của bạn ở mức cân bằng — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng các giai đoạn cuộc đời",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.cuoc_doi.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.cuoc_doi.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Các giai đoạn cuộc đời: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Các giai đoạn cuộc đời",
+     "cau_hoi": "Chương Các giai đoạn cuộc đời nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "su_nghiep",
+    "tieu_de": "Công việc & sự nghiệp",
+    "cau_hoi": "Công việc & sự nghiệp của tôi thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Nói ngắn: mảng công việc & sự nghiệp của bạn ở mức thuận lợi — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng công việc & sự nghiệp",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.su_nghiep.thien_co.sang.manh",
+      "dang_xem_lai": false,
+      "ty_le_dung": 0.78,
+      "so_phieu": 120
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.su_nghiep.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Giữa năm là lúc dễ đổi vị trí",
+      "noi_dung": "Khoảng tháng 6–8 âm lịch có cơ hội nhận việc mới. Nên chuẩn bị hồ sơ trước.",
+      "can_cu": [
+       "Lưu niên Hoá Lộc nhập Quan Lộc"
+      ],
+      "ma_mau": "ds.su_nghiep.luu_nien.loc",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Hộp đang được xem lại",
+      "noi_dung": "Không được hiện.",
+      "can_cu": [
+       "x"
+      ],
+      "ma_mau": "ds.su_nghiep.an",
+      "dang_xem_lai": true
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Công việc & sự nghiệp: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Công việc & sự nghiệp",
+     "cau_hoi": "Chương Công việc & sự nghiệp nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "tien_bac",
+    "tieu_de": "Tiền bạc",
+    "cau_hoi": "Tiền bạc của tôi thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Nói ngắn: mảng tiền bạc của bạn ở mức cân bằng — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng tiền bạc",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.tien_bac.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.tien_bac.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Tiền bạc: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Tiền bạc",
+     "cau_hoi": "Chương Tiền bạc nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "tinh_cam",
+    "tieu_de": "Tình yêu & hôn nhân",
+    "cau_hoi": "Tình yêu & hôn nhân của tôi thế nào?",
+    "muc": "can_chu_dong",
+    "nhan_muc": "Cần chủ động",
+    "tom_tat": "Nói ngắn: mảng tình yêu & hôn nhân của bạn ở mức cần chủ động — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng tình yêu & hôn nhân",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.tinh_cam.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.tinh_cam.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Tình yêu & hôn nhân: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Tình yêu & hôn nhân",
+     "cau_hoi": "Chương Tình yêu & hôn nhân nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "gia_dinh",
+    "tieu_de": "Gia đình: cha mẹ, anh em, con cái",
+    "cau_hoi": "Gia đình: cha mẹ, anh em, con cái của tôi thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Nói ngắn: mảng gia đình: cha mẹ, anh em, con cái của bạn ở mức cân bằng — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng gia đình: cha mẹ, anh em, con cái",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.gia_dinh.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.gia_dinh.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Gia đình: cha mẹ, anh em, con cái: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Gia đình: cha mẹ, anh em, con cái",
+     "cau_hoi": "Chương Gia đình: cha mẹ, anh em, con cái nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "suc_khoe",
+    "tieu_de": "Sức khoẻ & năng lượng",
+    "cau_hoi": "Sức khoẻ & năng lượng của tôi thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Nói ngắn: mảng sức khoẻ & năng lượng của bạn ở mức cân bằng — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng sức khoẻ & năng lượng",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.suc_khoe.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.suc_khoe.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Sức khoẻ & năng lượng: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch.",
+     "Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Sức khoẻ & năng lượng",
+     "cau_hoi": "Chương Sức khoẻ & năng lượng nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "quan_he",
+    "tieu_de": "Bạn bè, đồng nghiệp, môi trường bên ngoài",
+    "cau_hoi": "Bạn bè, đồng nghiệp, môi trường bên ngoài của tôi thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Nói ngắn: mảng bạn bè, đồng nghiệp, môi trường bên ngoài của bạn ở mức thuận lợi — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng bạn bè, đồng nghiệp, môi trường bên ngoài",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.quan_he.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.quan_he.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Bạn bè, đồng nghiệp, môi trường bên ngoài: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Bạn bè, đồng nghiệp, môi trường bên ngoài",
+     "cau_hoi": "Chương Bạn bè, đồng nghiệp, môi trường bên ngoài nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "nha_cua",
+    "tieu_de": "Nhà cửa, nơi ở",
+    "cau_hoi": "Nhà cửa, nơi ở của tôi thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Nói ngắn: mảng nhà cửa, nơi ở của bạn ở mức cân bằng — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng nhà cửa, nơi ở",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.nha_cua.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.nha_cua.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Nhà cửa, nơi ở: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Nhà cửa, nơi ở",
+     "cau_hoi": "Chương Nhà cửa, nơi ở nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "duong_bay",
+    "tieu_de": "Mảng đời nào kéo mảng đời nào",
+    "cau_hoi": "Mảng đời nào kéo mảng đời nào của tôi thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Nói ngắn: mảng mảng đời nào kéo mảng đời nào của bạn ở mức cân bằng — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng mảng đời nào kéo mảng đời nào",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.duong_bay.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.duong_bay.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Mảng đời nào kéo mảng đời nào: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Mảng đời nào kéo mảng đời nào",
+     "cau_hoi": "Chương Mảng đời nào kéo mảng đời nào nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "nam_nay",
+    "tieu_de": "Năm nay & 3 tháng tới",
+    "cau_hoi": "Năm nay & 3 tháng tới của tôi thế nào?",
+    "muc": "can_chu_dong",
+    "nhan_muc": "Cần chủ động",
+    "tom_tat": "Nói ngắn: mảng năm nay & 3 tháng tới của bạn ở mức cần chủ động — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng năm nay & 3 tháng tới",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.nam_nay.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.nam_nay.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Năm nay & 3 tháng tới: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Năm nay & 3 tháng tới",
+     "cau_hoi": "Chương Năm nay & 3 tháng tới nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   },
+   {
+    "ma": "loi_khuyen",
+    "tieu_de": "Lời khuyên dành cho bạn",
+    "cau_hoi": "Lời khuyên dành cho bạn của tôi thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Nói ngắn: mảng lời khuyên dành cho bạn của bạn ở mức thuận lợi — có chỗ mạnh để dựa vào và một vài điều nên để ý.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Điểm mạnh ở mảng lời khuyên dành cho bạn",
+      "noi_dung": "Bạn làm tốt khi được tự sắp xếp việc của mình. Lúc có người tin giao việc, bạn thường làm vượt mong đợi.",
+      "can_cu": [
+       "Thiên Cơ (Đắc) ở cung Quan Lộc"
+      ],
+      "ma_mau": "ds.loi_khuyen.thien_co.sang.manh",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ ôm việc một mình",
+      "noi_dung": "Khi bận, bạn hay tự làm hết thay vì nhờ người khác. Nên chia việc sớm, nói rõ phần nào cần người phụ.",
+      "can_cu": [
+       "Hoá Kỵ ở Tài Bạch"
+      ],
+      "ma_mau": "ds.loi_khuyen.hoa_ky.de_vap",
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Một việc nên làm tuần này",
+      "noi_dung": "Ghi ra ba việc quan trọng nhất và làm việc khó nhất vào buổi sáng.",
+      "can_cu": [
+       "Thái Dương (Vượng) xung chiếu"
+      ],
+      "dang_xem_lai": false
+     }
+    ],
+    "doan": [
+     "Đoạn thân bài chương Lời khuyên dành cho bạn: bạn làm việc kỹ, thích hiểu rõ trước khi bắt tay vào.",
+     "Khi gặp chuyện gấp, bạn vẫn giữ được bình tĩnh nếu đã có kế hoạch."
+    ],
+    "can_cu": [
+     "Mệnh có Thiên Cơ (Đắc)",
+     "Tam phương: Thái Âm (Miếu) ở Tài Bạch",
+     "Tuần đóng cung Quan Lộc — việc đến chậm"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn thấy mình làm việc trôi chảy là khi nào, và lúc đó có gì khác?",
+    "moi_xem": {
+     "diem_nhan": "Điểm nhấn chương Lời khuyên dành cho bạn",
+     "cau_hoi": "Chương Lời khuyên dành cho bạn nói gì về bạn?",
+     "so_doan": 2,
+     "phut_doc": 2
+    }
+   }
+  ]
+ },
+ "ty_le": {
+  "ty_le": {
+   "ds.cot_loi.tien_ke_hoach": {
+    "dung": 36,
+    "chua_dung": 9
+   },
+   "ds.cot_loi.noi_thang": {
+    "dung": 5,
+    "chua_dung": 7
+   }
+  }
+ }
+}
