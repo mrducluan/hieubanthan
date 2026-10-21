@@ -80,7 +80,7 @@ function NutSao({ tu, thu, gia }: { tu: MangTrang; thu: boolean; gia: number }) 
   if (c && c.daTai && c.soKhoa === 0) return null;          // đã đọc trọn — không mời nữa
   const khoa = c?.daTai ? c.soKhoa : 0;
   const tieuDe = coLuanGiai
-    ? khoa > 0 ? `Mở ${khoa} chương còn lại` : thu ? "Đọc miễn phí chương đầu" : "Đọc luận giải toàn bộ"
+    ? khoa > 0 ? `Mở ${khoa} chương còn lại` : thu ? "Đọc thử chương đầu · luận giải toàn bộ" : "Đọc luận giải toàn bộ"
     : "Luận giải toàn bộ Tử vi · 12 chương";
   const phu = coLuanGiai
     ? khoa > 0 ? `${gia} Sao mở trọn · xem lại cả ngày không mất thêm` : thu ? `trọn bộ ${gia} Sao, chương đầu miễn phí` : "đang miễn phí giai đoạn ra mắt"

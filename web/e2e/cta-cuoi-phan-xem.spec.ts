@@ -106,7 +106,7 @@ test("CTA Sao — công tắc BẬT: còn chương khoá → 'Mở N chương c�
   await page.goto("/tu-vi");
   const k = await khoiCta(page);
   const nut = k.getByTestId("cta-sao");
-  await expect(nut).toContainText("Đọc miễn phí chương đầu");
+  await expect(nut).toContainText("Đọc thử chương đầu");   // khác nhãn nút chính của Luận giải (không trùng tên trên một trang)
   await expect(nut).toContainText("trọn bộ 10 Sao");
   await nut.click();                                                  // tải bản xem trước
   await expect(k.getByTestId("cta-sao")).toContainText("Mở 2 chương còn lại");
