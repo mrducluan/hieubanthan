@@ -56,7 +56,7 @@ def test_bao_cao_day_du():
 
 def test_thieu_sinh_va_thieu_huong_van_tra_bao_cao():
     bc = ds.luan_giai(None, {"huong_do": 180}, ngay_xem=NGAY)
-    assert bc["chuong"][0]["thieu"] == "can_sinh" and bc["chuong"][1]["muc"] is None
+    assert bc["chuong"][0]["thieu"] == "can_sinh" and bc["chuong"][1].get("muc") is None
     assert bc["thieu"] == ["sinh", "nam_xay", "bo_cuc"]
     bc = ds.luan_giai(SINH, {}, ngay_xem=NGAY)
     assert bc["chuong"][1]["thieu"] == "can_huong" and bc["chuong"][0]["tom_tat"]
@@ -104,3 +104,13 @@ def test_api_luan_giai():
     assert client.post("/v1/phongthuy/luan-giai", json={"nha": {}, "la": 1}).status_code == 422
     r = client.post("/v1/phongthuy/luan-giai", json={"nha": {"huong": "Nam"}})
     assert r.status_code == 200 and r.json()["chuong"][0]["thieu"] == "can_sinh"
+
+
+def test_thang_nay_cho_the_hom_nay():
+    r = ds.thang_nay({"huong_do": 180, "nam_xay": 2008}, NGAY)
+    assert r["nam"] == 2026 and r["huong"] == "Nam" and r["thang"]["chi_thang"] == "Tỵ" and len(r["ba_thang"]) == 3
+    assert len(r["phuong_tranh"]) == 5 and r["viec"] and r["huyen_khong"]["cuc_ten"]
+    assert not kb.tim_cum_cam(" ".join(r["viec"]) + r["thang"]["y"])
+    r2 = client.post("/v1/phongthuy/thang-nay", json={"huong": "Nam", "ngay_xem": "2026-05-20"})
+    assert r2.status_code == 200 and r2.json()["huyen_khong"] is None and r2.json()["thang"]["muc"] in kb.MUC
+    assert client.post("/v1/phongthuy/thang-nay", json={"nam_xay": 2008}).status_code == 422

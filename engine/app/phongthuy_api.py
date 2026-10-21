@@ -251,3 +251,30 @@ def api_luan_giai(inp: LuanGiaiPTInput) -> dict:
     except ValueError as e:
         raise HTTPException(422, detail=str(e)[:300])
     return {"engine_version": ENGINE_VERSION, **r}
+
+
+class ThangNayInput(BaseModel):
+    """KC-2 — thẻ "Tháng này nhà bạn": chỉ cần hướng (độ hoặc 8 hướng); năm xây tuỳ chọn."""
+    model_config = ConfigDict(extra="forbid")
+
+    huong_do: float | None = Field(default=None, ge=0, lt=360)
+    huong: Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] | None = None
+    nam_xay: int | None = Field(default=None, ge=1864, le=2150)
+    toa: str | None = Field(default=None, max_length=10)
+    ngay_xem: _dt.date | None = None
+
+    @model_validator(mode="after")
+    def _can_huong(self) -> "ThangNayInput":
+        if self.huong_do is None and self.huong is None:
+            raise ValueError("cần huong_do hoặc huong")
+        return self
+
+
+@router.post("/thang-nay")
+def api_thang_nay(inp: ThangNayInput) -> dict:
+    from app.luangiai import phongthuy_doi_song as pt_ds  # noqa: PLC0415
+    try:
+        r = pt_ds.thang_nay(inp.model_dump(exclude_none=True, exclude={"ngay_xem"}), inp.ngay_xem)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)[:300])
+    return {"engine_version": ENGINE_VERSION, **r}

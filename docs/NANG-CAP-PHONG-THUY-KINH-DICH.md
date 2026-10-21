@@ -74,3 +74,13 @@ Nguyên tắc: **chuyển phần tất định vào engine Python (một bộ t�
   `test_huyen_khong_v2.py`, `test_phongthuy_doi_song.py`.
 - Web: `npm run typecheck`, eslint, Playwright `kinh-dich.spec.ts`, `phong-thuy.spec.ts`.
 - Không đổi phép tính cũ, không migration, không dependency → không tăng `ENGINE_VERSION`.
+
+## 5. Đợt 2 (cùng ngày) — chủ dự án duyệt 5 đề xuất mục 3 + CTA cuối bài
+
+| Mục | Đã làm | Tệp chính |
+|---|---|---|
+| KC-1 khuôn chung | `doi_song_khuon.py` (hộp · chương · mã kiểm chứng `ds.*` · `kiem_giong_van` dùng cho MỌI mảng); **Bản đồ con số** và **Bát tự** trả `phien_ban doi_song_1` (hộp, tóm tắt, căn cứ, câu tự soi; `doan` cũ giữ cho SAO-2 / diễn đạt AI); web dùng một `BaoCaoDoiSongView` (phái kiểm chứng theo `bc.phai`: pitago · tu_binh · nam_phai_viet) | `engine/app/luangiai/{doi_song_khuon,battu_doi_song,ban_do_con_so}.py`, `tests/test_doi_song_khuon.py` |
+| KC-2 hồ sơ nhà | `lib/ho-so-nha.ts` (localStorage `hbt.nha.v1`): Đo hướng, Nhà của bạn, Khảo sát, Huyền Không đọc–ghi chung; **migration 0018** `ho_so_nha` (JSON ≤ 16 KB, RLS, đồng ý rõ ràng) + nút "Lưu nhà vào tài khoản"; thẻ **"Tháng này nhà bạn"** ở Hôm nay (`/v1/phongthuy/thang-nay`, đổi theo tiết khí) | `web/lib/{ho-so-nha,tai-khoan-nha}.ts`, `components/huyen-hoc/{ThangNayNha,LuuNhaTaiKhoan}.tsx` |
+| KC-3 ý định chung | KB `y_dinh_chung.json` 11 mã ↔ chủ đề Kinh Dịch / ý định Tử vi / trụ nỗi đau thần số / ý định Hôm nay / phòng / chương Bát tự; `GET /v1/y-dinh/goi-mo`; `doc_que.goi_mo`, báo cáo nhà `goi_mo`; web `GoiMoCheo` + link mang `?chu_de=` / `?y_dinh=` / `#noi-dau` chọn sẵn | `engine/app/kb/y_dinh_chung.py`, `app/y_dinh_api.py`, `web/components/khung/GoiMoCheo.tsx` |
+| KC-4 nhắc việc | "Nhắc tôi hôm đó" + "Vào lịch" (.ics) ở ứng kỳ và tháng thuận sửa nhà; lưu máy, hiện ở Hôm nay; tài khoản qua `nhac_viec` (0018). Web Push: nghiên cứu + lộ trình GĐ1 (cần duyệt `web-push`, migration 0019, VAPID) — `docs/NHAC-VIEC-VA-WEB-PUSH.md` | `web/lib/nhac-viec.ts`, `components/khung/{NhacToi,NhacHomNay}.tsx` |
+| KC-5 tín hiệu ngầm + CTA | mở "Ba cách đọc"/từng phái/lời kinh/bản đầy đủ → PostHog mã + đếm máy (`thoi-quen-doc.ts`, ≥ 5 lần → chế độ mặc định theo phái, người dùng chọn tay thì thôi); `CtaCuoiBai` ở mọi mảng (gợi mở chéo · đọc trọn luận giải / Sao · rủ một người · nạp Sao hoặc ủng hộ). Ý tưởng lan truyền + nạp Sao: `docs/Y-TUONG-VIRAL-VA-NAP-SAO.md` | `web/components/khung/CtaCuoiBai.tsx`, `web/lib/thoi-quen-doc.ts` |

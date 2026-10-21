@@ -133,3 +133,28 @@ test("PT-V0: khảo sát nhà — đặt phòng trên sơ đồ 9 phương, đá
   await expect(kq).toContainText("Nhà vệ sinh ở giữa nhà");            // suy từ vị trí trung cung
   await expect(kq).toContainText("không giới thiệu vật phẩm");
 });
+
+test("KC-2: hồ sơ nhà lưu trên máy sau khi đọc → Hôm nay có thẻ Tháng này nhà bạn; mốc nhắc tháng thuận hiện ở Hôm nay", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  const nha = page.getByTestId("nha-cua-ban");
+  await nha.getByLabel("Độ hướng nhà cho bài đọc").fill("180");
+  await nha.getByLabel("Năm xây hoặc năm dọn vào").fill("2008");
+  await nha.getByRole("button", { name: "Đọc nhà của tôi" }).click();
+  await expect(nha.getByTestId("bao-cao-nha")).toBeVisible();
+  const hs = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"));
+  expect(hs).toMatchObject({ v: 1, huong_do: 180, nam_xay: 2008, theo: "cua" });
+  await expect(nha.getByTestId("goi-mo-cheo")).toHaveAttribute("data-ma", "nha_cua");
+  const thuan = nha.getByTestId("nha-ba-thang").getByTestId("nhac-toi").first();
+  if (await thuan.count()) {
+    await thuan.getByRole("button", { name: "Nhắc tôi hôm đó" }).click();
+  }
+  await page.goto("/hom-nay");
+  const the = page.getByTestId("thang-nay-nha");
+  await expect(the).toBeVisible();
+  await expect(the).toContainText("phía cửa Nam");
+  await expect(the.getByTestId("chip-muc")).toBeVisible();
+  // Huyền Không điền sẵn năm xây từ hồ sơ nhà
+  await page.goto("/phong-thuy");
+  await expect(page.getByLabel("Năm xây hoặc nhập trạch")).toHaveValue("2008");
+});

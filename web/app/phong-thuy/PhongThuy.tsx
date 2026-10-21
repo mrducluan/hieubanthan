@@ -82,7 +82,7 @@ export function PhongThuy() {
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="nha-cua-ban"><NhaCuaBan sinh={sinh} doHuongGoiY={doHuong} /></div>
       <div className="mx-auto mt-8 max-w-5xl scroll-mt-24" id="khao-sat-nha"><KhaoSatNha sinh={sinh} doHuongGoiY={doHuong} /></div>
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="huyen-khong"><HuyenKhong doToaGoiY={doToa} /></div>
-      {mq && <div className="mx-auto max-w-3xl"><CuoiBaiDoc moDun="phongthuy" cauHoi="Phần hướng nhà và bố trí có giúp ích cho bạn?" /></div>}
+      {mq && <div className="mx-auto max-w-3xl"><CuoiBaiDoc moDun="phongthuy" cauHoi="Phần hướng nhà và bố trí có giúp ích cho bạn?" maYDinh="nha_cua" /></div>}
 
       <section aria-label="Hỏi Phong thuỷ" className="mt-10">
         <h2 className="mb-4 text-2xl sm:text-3xl">Hỏi đáp cùng AI</h2>

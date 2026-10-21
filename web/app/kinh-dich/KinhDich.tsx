@@ -11,6 +11,7 @@ import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
 import { cn } from "@/lib/utils";
 import { DocQue, type DocQueKq } from "@/components/huyen-hoc/DocQue";
 import { ghi } from "@/lib/do-luong";
+import { CHE_DO_THEO_PHAI, daChonTay, danhDauChonTay, phaiUuThich } from "@/lib/thoi-quen-doc";
 
 interface Res extends HoiMangRes {
   que?: { quai_ban: Quai; quai_bien: Quai | null; hao_dong: number[]; nguon_ngau_nhien?: string } | null;
@@ -54,6 +55,12 @@ export function KinhDich() {
   const [cach, setCach] = useState("may_gieo");
   // HN-3: link "Quẻ ngày"/"Gieo Mai Hoa giờ này" từ /hom-nay mở sẵn Mai Hoa theo giờ hiện tại (?cach=mai_hoa).
   useEffect(() => { if (new URLSearchParams(location.search).get("cach") === "mai_hoa") setCach("mai_hoa"); }, []);
+  // KC-5: thói quen đọc (đếm trên máy) → chế độ mặc định theo phái hay mở, trừ khi người dùng đã tự chọn tay.
+  useEffect(() => {
+    const p = phaiUuThich();
+    if (p && CHE_DO_THEO_PHAI[p] && !daChonTay()) setCheDo(CHE_DO_THEO_PHAI[p]!);
+  }, []);
+  const [maYDinh, setMaYDinh] = useState<string | null>(null);
   const [tay, setTay] = useState("");
   const [lichMH, setLichMH] = useState<"viet" | "trung">("viet");
   const [coQue, setCoQue] = useState(false);   // Gate 1: đã có lời quẻ → bắt đầu đọc + mốc đọc xong/góp ý dưới khung
@@ -64,6 +71,9 @@ export function KinhDich() {
   const chuDeChon = useRef<string | null>(null);
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
   useEffect(() => {
+    // KC-3: link gợi mở từ mảng khác mang ?chu_de= → chọn sẵn chip.
+    const q = new URLSearchParams(location.search).get("chu_de");
+    if (q && /^[a-z_]{2,40}$/.test(q)) chuDeChon.current = q;
     fetch("/api/kinhdich/chu-de").then((r) => (r.ok ? r.json() : null)).then((d) => setChuDe((d?.chu_de ?? []) as { ma: string; ten: string }[])).catch(() => setChuDe([]));
   }, []);
   const hoiLai = (cau: string, ma?: string) => { if (ma) chuDeChon.current = ma; setCauNgoai({ cau, lan: Date.now() }); };
@@ -84,6 +94,7 @@ export function KinhDich() {
         ...(ma ? { chu_de: ma } : {}) },
       (d) => (
         (giu.dq = d.doc_que ?? null),
+        (d.doc_que?.y_dinh_chung ? setMaYDinh(d.doc_que.y_dinh_chung) : null),
         <div className="space-y-3">
           {d.can_lam_ro && (
             <div className="flex flex-wrap gap-2" data-testid="lam-ro">
@@ -112,7 +123,7 @@ export function KinhDich() {
               {d.mai_hoa?.dau_vao?.cach === "phuong_vi" && <p className="mt-1 text-xs text-fg-faint" data-testid="mai-hoa-phuong">Mai Hoa theo phương {d.mai_hoa.dau_vao.huong}, giờ {d.mai_hoa.dau_vao.chi_gio}.</p>}
             </div>
           )}
-          {d.doc_que && <DocQue id={`dq-${Date.now()}`} dq={d.doc_que} thuatNgu={d.thuat_ngu} vanDayDu={d.cau_tra_loi} onHoi={(c) => hoiLai(c)} anKetLuan />}
+          {d.doc_que && <DocQue id={`dq-${Date.now()}`} dq={d.doc_que} thuatNgu={d.thuat_ngu} vanDayDu={d.cau_tra_loi} onHoi={(c) => hoiLai(c)} anKetLuan tenQue={d.que?.quai_ban?.ten} />}
         </div>
       ),
       ["khong_gieo_lai"],
@@ -149,7 +160,7 @@ export function KinhDich() {
                   ))}
                 </div>
               )}
-              <Select aria-label="Chế độ" value={cheDo} onChange={(e) => setCheDo(e.target.value)} className="h-10 text-sm">
+              <Select aria-label="Chế độ" value={cheDo} onChange={(e) => { setCheDo(e.target.value); danhDauChonTay(); }} className="h-10 text-sm">
                 <option value="tu_dong">Tự động chọn phái</option>
                 <option value="nghia_ly">Chỉ Nghĩa Lý (phản tư)</option>
                 <option value="day_du">Đầy đủ (thành bại, ứng kỳ)</option>
@@ -186,7 +197,7 @@ export function KinhDich() {
           }
           gui={gui}
         />
-        {coQue && <CuoiBaiDoc moDun="kinhdich" cauHoi="Lời quẻ có giúp bạn nhìn rõ việc đang cân nhắc?" />}
+        {coQue && <CuoiBaiDoc moDun="kinhdich" cauHoi="Lời quẻ có giúp bạn nhìn rõ việc đang cân nhắc?" maYDinh={maYDinh} />}
       </div>
     </div>
   );

@@ -3,7 +3,7 @@
 // 3 tháng tới · Việc nên làm). Người dùng chỉ nhập hướng cửa (hoặc ban công), năm xây, người cùng ở; engine dựng mọi chữ.
 // Tầng đời thường hiện ngay (mức, hộp nổi bật, việc nên làm); tầng học thuật (du niên, phi tinh, cặp sao) gập trong
 // "Vì sao nói vậy". Không lưu gì; thành viên chỉ gửi năm sinh + giới tính.
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Home, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
@@ -14,7 +14,11 @@ import type { Hop, Muc } from "@/components/luan-giai/kieu";
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
+import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
+import { LuuNhaTaiKhoan } from "@/components/huyen-hoc/LuuNhaTaiKhoan";
 import { cn } from "@/lib/utils";
+import { GoiMoCheo, type GoiMo } from "@/components/khung/GoiMoCheo";
+import { NhacToi } from "@/components/khung/NhacToi";
 
 type Sinh = { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
 interface ThanhVien { vai: "vo" | "chong" | "con" | "cha_me" | "khac"; nam: string; gioi_tinh: "nam" | "nu" }
@@ -24,11 +28,11 @@ interface Chuong {
   phong?: { phong: string; ten: string; cung: string; du_nien: string | null; muc: Muc; nhan_muc: string; cap_sao?: { ten: string; y: string; muc: Muc } | null; thuc_te?: string }[];
   goi_y_phong?: { phong: string; ten: string; goi_y: string }[];
   han_nam?: { ma: string; ten: string; phuong: string; nghia: string }[];
-  ba_thang?: { chi_thang: string; ten_sao: string; muc: Muc; nhan_muc: string; y: string; sao_tai_cua: number | null }[];
+  ba_thang?: { chi_thang: string; tu_ngay?: string; ten_sao: string; muc: Muc; nhan_muc: string; y: string; sao_tai_cua: number | null }[];
   hanh_dong?: { ma: string; nhan: string; viec: string[] }[];
 }
 interface BaoCao {
-  ten: string; cot_loi: Hop[]; chuong: Chuong[]; thieu: string[]; ket: string;
+  ten: string; cot_loi: Hop[]; chuong: Chuong[]; thieu: string[]; ket: string; goi_mo?: GoiMo | null;
   da_tinh: { menh_quai: { quai: string; nhom: string } | null; huong_nha: string | null; trach: { quai: string; nhom: string } | null;
     thanh_vien: { ten_vai: string; quai: string; nhom: string; cung_nhom_voi_chu: boolean | null; huong_chung: string[] }[] };
 }
@@ -46,6 +50,17 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   useEffect(() => { if (doHuongGoiY != null) setDoHuong(String(doHuongGoiY)); }, [doHuongGoiY]);
+  // KC-2: hồ sơ nhà lưu trên máy điền sẵn một lần (người dùng đổi tay thì giữ tay).
+  const nhaLuu = useHoSoNha();
+  const daDien = useRef(false);
+  useEffect(() => {
+    if (!nhaLuu || daDien.current) return;
+    daDien.current = true;
+    if (nhaLuu.huong_do != null) setDoHuong(String(nhaLuu.huong_do)); else if (nhaLuu.huong) setHuong(nhaLuu.huong);
+    setTheo(nhaLuu.theo);
+    if (nhaLuu.nam_xay) setNamXay(String(nhaLuu.nam_xay));
+    if (nhaLuu.thanh_vien.length) setTv(nhaLuu.thanh_vien.map((x) => ({ vai: x.vai, nam: String(x.nam), gioi_tinh: x.gioi_tinh })));
+  }, [nhaLuu]);
 
   const doc = async () => {
     setLoi(null);
@@ -63,6 +78,11 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
         ...(thanh_vien.length ? { thanh_vien } : {}),
       });
       setBc(r);
+      // KC-2: nhớ nhà trên máy để Hôm nay, Khảo sát, Huyền Không dùng chung (không gửi máy chủ).
+      try {
+        luuHoSoNha({ ...(d != null ? { huong_do: d, huong: undefined } : huong ? { huong: huong as never, huong_do: undefined } : {}),
+          theo, ...(nx != null ? { nam_xay: nx } : {}), thanh_vien: thanh_vien.map((x) => ({ vai: x.vai, nam: x.birth_year, gioi_tinh: x.gender })) });
+      } catch { /* bỏ qua */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "nha_cua_ban", co_nam_xay: nx != null, so_thanh_vien: thanh_vien.length });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đọc được."); }
     finally { setDang(false); }
@@ -122,6 +142,7 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
       {loi && <BaoLoi loi={loi} thuLai={doc} />}
 
       {bc && <BaoCaoNha bc={bc} />}
+      {bc && <LuuNhaTaiKhoan />}
     </section>
   );
 }
@@ -145,6 +166,7 @@ function BaoCaoNha({ bc }: { bc: BaoCao }) {
         ))}
       </nav>
       {bc.chuong.map((c, i) => <ChuongNha key={c.ma} c={c} so={i + 1} />)}
+      {bc.goi_mo && <GoiMoCheo goiMo={bc.goi_mo} moDun="phongthuy" />}
       <p className="border-t border-line pt-4 text-sm text-fg-faint">{bc.ket}</p>
     </article>
   );
@@ -183,8 +205,12 @@ function ChuongNha({ c, so }: { c: Chuong; so: number }) {
         <div className="mt-3 flex flex-wrap gap-2" data-testid="nha-ba-thang">
           {c.ba_thang.map((t) => (
             <div key={t.chi_thang} data-muc={t.muc} className="chip-muc rounded-xl px-3 py-2 text-sm">
-              <p className="font-semibold">Tháng {t.chi_thang} · {t.nhan_muc}</p>
+              <p className="font-semibold">Tháng {t.chi_thang} · {t.nhan_muc}{t.tu_ngay ? <span className="font-normal opacity-70"> · từ {Number(t.tu_ngay.slice(8, 10))}/{Number(t.tu_ngay.slice(5, 7))}</span> : null}</p>
               <p className="text-xs opacity-80">{t.y}</p>
+              {t.muc === "thuan" && t.tu_ngay && (
+                <NhacToi className="mt-1.5" ngay={t.tu_ngay} ma={`pt.thang.${t.chi_thang.toLowerCase()}`} moDun="phongthuy"
+                  nhan={`Tháng ${t.chi_thang} — tháng thuận sửa sang, kê lại phía cửa`} duong="/phong-thuy#nha-cua-ban" />
+              )}
             </div>
           ))}
         </div>

@@ -13,6 +13,7 @@ import datetime as dt
 
 from app.calc import huyen_khong as hk
 from app.calc import phongthuy as pt
+from app.calc import tietkhi
 from app.calc import tuoi_dan_gian as tdg
 from app.kb import phongthuy_doi_song_kb as kb
 from app.kb import phongthuy_kb as kbp
@@ -318,7 +319,11 @@ def _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem: dt.date) -> dict:
         sao = lm["cung"][q_huong] if q_huong else lm["tam"]
         muc = _muc_thang(sao)
         mucs.append(muc)
-        c["ba_thang"].append({"nam": n2, "thang": th2, "chi_thang": lm["chi_thang"], "sao_tam": lm["tam"], "sao_tai_cua": sao if q_huong else None,
+        # KC-4: ngày dương bắt đầu tháng tiết (giờ VN) — để nhắc việc / lịch; tháng Sửu (k=12) rơi sang năm dương sau.
+        kd = (315 + 30 * (th2 - 1)) % 360
+        tu_ngay = (tietkhi.thoi_diem(n2 + (1 if th2 == 12 else 0), kd) + dt.timedelta(hours=7)).date().isoformat()
+        c["ba_thang"].append({"nam": n2, "thang": th2, "chi_thang": lm["chi_thang"], "tu_ngay": tu_ngay, "sao_tam": lm["tam"],
+                              "sao_tai_cua": sao if q_huong else None,
                               "ten_sao": hk.SAO[sao], "muc": muc, "nhan_muc": kb.nhan_muc(muc), "y": kb.thang_sao().get("y", {}).get(muc, "")})
     if q_huong:
         sao_nam_cua = ln["cung"][q_huong]
@@ -413,5 +418,32 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
                                 "huong": b["huong"]["son"], "cap_huong": b["cap_huong"], "cap_toa": b["cap_toa"],
                                 "cung": [{k: x[k] for k in ("cung", "phuong", "van", "son", "huong")} for x in b["cung"]]} if b else None),
                "thanh_vien": tvs, "ngay_xem": ngay_xem.isoformat()}
-    return {"mo_dun": "phongthuy", "phien_ban": "doi_song_1", "ten": "Nhà của bạn", "cot_loi": cot_loi,
-            "chuong": [c1, c2, c3, c4, c5], "da_tinh": da_tinh, "thieu": thieu, "ket": kb.mau("ket"), **kb.meta()}
+    # KC-1: khoá rỗng không ghi (khuôn chung; web coi thiếu = None).
+    chuong = [{k: v for k, v in c.items() if v is not None} for c in (c1, c2, c3, c4, c5)]
+    return {"mo_dun": "phongthuy", "phien_ban": "doi_song_1", "phai": "bat_trach_huyen_khong", "ten": "Nhà của bạn",
+            "cot_loi": cot_loi, "chuong": chuong, "da_tinh": da_tinh, "thieu": thieu, "ket": kb.mau("ket"),
+            "y_dinh_chung": "nha_cua", "goi_mo": __import__("app.kb.y_dinh_chung", fromlist=["goi_mo"]).goi_mo("nha_cua", "phongthuy"), **kb.meta()}
+
+
+# ----------------------------------------------------------------------------- KC-2: thẻ "Tháng này nhà bạn" (Hôm nay)
+def thang_nay(nha: dict, ngay_xem: dt.date | None = None) -> dict:
+    """Bản rút gọn cho thẻ ngày: phương giữ yên của năm, sao tháng tại cung cửa (3 tháng, theo tiết khí) và việc nên làm /
+    tránh tháng này. Không cần năm sinh; có `nam_xay` thì thêm cục + cặp sao cung cửa. Không lưu."""
+    ngay_xem = ngay_xem or (dt.datetime.now(dt.timezone(dt.timedelta(hours=7)))).date()
+    huong, do = _huong_nha(nha)
+    if not huong:
+        raise ValueError("cần hướng nhà (huong_do hoặc huong)")
+    b = _trach_ban(nha, do, huong)
+    c4 = _chuong_nam_nay(None, None, huong, b, None, ngay_xem)
+    th = c4["ba_thang"][0]
+    ts = kb.thang_sao().get("y", {})
+    viec = {"thuan": ["Sửa sang, kê lại phía cửa trong tháng này là hợp.", "Dọn thoáng lối vào, mở sáng."],
+            "can_bang": ["Sửa nhỏ, dọn gọn được; việc lớn phía cửa để tháng thuận.", "Giữ lối vào sạch, đủ sáng."],
+            "can_chu_dong": ["Tháng này giữ yên phía cửa: không đục phá, không động thổ.", "Chỉ dọn gọn, không kê dời đồ lớn."]}[th["muc"]]
+    t_utc = dt.datetime(ngay_xem.year, ngay_xem.month, ngay_xem.day, 12) - dt.timedelta(hours=7)
+    return {"ngay_xem": ngay_xem.isoformat(), "huong": huong, "do_huong": do, "nam": hk.nam_theo_lap_xuan(t_utc),
+            "phuong_tranh": [{"ten": x["ten"], "phuong": x["phuong"]} for x in c4["han_nam"]],
+            "cua_trung_phuong_tranh": any(x["phuong"] == huong for x in c4["han_nam"]),
+            "thang": {**th, "y": ts.get(th["muc"], th.get("y", ""))}, "ba_thang": c4["ba_thang"], "viec": viec,
+            "huyen_khong": ({"cuc_ten": b["cuc_ten"], "van": b["van"], "cap_huong": {k: b["cap_huong"][k] for k in ("ma", "ten", "muc")}} if b else None),
+            "tom_tat": c4["tom_tat"], **kb.meta()}

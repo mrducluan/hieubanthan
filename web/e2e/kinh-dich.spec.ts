@@ -85,3 +85,27 @@ test("chip chủ đề: chọn trước khi hỏi → bài đọc theo đúng ch
   const ans = await hoi(page, "Việc này có thành không?");
   await expect(ans).toContainText("Về việc mở quán, kinh doanh, đầu tư");
 });
+
+test("KC-3/4/5: ứng kỳ có nút nhắc (lưu máy, hiện ở Hôm nay), gợi mở chéo, CTA cuối bài, ?chu_de= chọn sẵn chip", async ({ page }) => {
+  await page.goto("/kinh-dich?chu_de=kinh_doanh");
+  await expect(page.getByTestId("chip-chu-de").getByRole("button", { name: "Mở quán, kinh doanh, đầu tư" })).toHaveAttribute("aria-pressed", "true");
+  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
+  const ans = await hoi(page, "Việc này có thành không?");
+  const dq = ans.getByTestId("doc-que");
+  await expect(dq.getByTestId("goi-mo-cheo")).toHaveAttribute("data-ma", "kinh_doanh_tien");
+  const nhac = dq.getByTestId("ung-ky").getByTestId("nhac-toi").first();
+  await nhac.getByRole("button", { name: "Nhắc tôi hôm đó" }).click();
+  await expect(nhac.getByRole("button", { name: "Sẽ nhắc ở Hôm nay" })).toBeVisible();
+  const luu = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nhac.v1") ?? "[]"));
+  expect(luu).toHaveLength(1);
+  expect(luu[0].ma).toMatch(/^kd\.ungky\./);
+  expect(JSON.stringify(luu)).not.toContain("Việc này có thành");          // không lưu câu hỏi
+  await expect(page.getByTestId("cta-cuoi-bai")).toBeVisible();
+  await expect(page.getByTestId("cta-luan-giai")).toBeVisible();
+  // tín hiệu ngầm: mở cách đọc Lục Hào → đếm trên máy
+  await dq.getByRole("button", { name: /Ba cách đọc cùng một quẻ/ }).click();
+  await dq.getByTestId("goc-nhin").locator("[data-phai=luc_hao]").getByRole("button").first().click();
+  const tq = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.thoi_quen_kd.v1") ?? "{}"));
+  expect(tq.luc_hao).toBe(1);
+});

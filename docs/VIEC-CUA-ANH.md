@@ -631,3 +631,15 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
   tắc chuẩn; nếu anh có nguồn khác cho bảng đó, báo em để thêm công tắc phái.
 - [ ] Sau khi merge: mở `/kinh-dich` hỏi "Tôi nên mua hay bán căn nhà này?" → phải thấy câu hỏi lại trước khi gieo; mở `/phong-thuy` →
   khối "Nhà của bạn" dưới phần Đo hướng.
+
+## KC. Hồ sơ nhà · nhắc việc · CTA (2026-10-21, đợt 2 của PT-KD-ĐS)
+
+- [ ] **Chạy migration 0018** `supabase/migrations/0018_ho_so_nha_nhac_viec.sql` (rollback `.down.sql`): bảng `ho_so_nha` (lưu nhà
+  vào tài khoản) + `nhac_viec` (mốc nhắc trong tài khoản). Chưa chạy thì hai nút "Lưu nhà vào tài khoản" / "cả trên tài khoản" báo
+  "máy chủ chưa bật" — mọi thứ khác vẫn chạy trên máy người dùng.
+- [ ] **Web Push**: đọc `docs/NHAC-VIEC-VA-WEB-PUSH.md` mục 2–3. Nếu đồng ý làm GĐ1: duyệt dependency `web-push` (MIT), em làm
+  migration 0019 + service worker; anh tạo cặp khoá VAPID và đặt env trên Vercel (em hướng dẫn lệnh).
+- [ ] **Bật thu Sao theo mảng**: đọc `docs/Y-TUONG-VIRAL-VA-NAP-SAO.md` mục C.1 — hiện công tắc `luan_giai.thu_sao` là chung; anh
+  chốt có tách theo mảng (Bản đồ con số + Tử vi trước) không, em làm công tắc ở /quan-tri/cai-dat.
+- [ ] Sau khi merge: mở `/hom-nay` sau khi đã đo hướng nhà ở `/phong-thuy` → thấy thẻ "Tháng này nhà bạn"; cuối mỗi bài đọc có khối
+  gợi mở + luận giải + rủ bạn + ủng hộ.

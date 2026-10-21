@@ -10,6 +10,10 @@ import type { Hop, Muc } from "@/components/luan-giai/kieu";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import { doanCoThuatNgu } from "@/components/hoi/ThuatNgu";
 import { cn } from "@/lib/utils";
+import { ghi } from "@/lib/do-luong";
+import { ghiMoPhai } from "@/lib/thoi-quen-doc";
+import { GoiMoCheo, type GoiMo } from "@/components/khung/GoiMoCheo";
+import { NhacToi } from "@/components/khung/NhacToi";
 
 export interface GocNhin { muc: Muc; nhan: string; tom_tat?: string; can_cu: string[] }
 export interface GocNhinLucHao extends GocNhin {
@@ -31,15 +35,17 @@ export interface DocQueKq {
   cau_lien_quan: string[];
   chu_de: { ma: string; ten: string; dung_than: string | null };
   mot_que_mot_viec?: string;
+  /** KC-3: mã ý định chung + gợi mở sang mảng khác. */
+  y_dinh_chung?: string | null; goi_mo?: GoiMo | null;
 }
 
 const TEN_PHAI: Record<string, string> = { nghia_ly: "Nghĩa Lý (lời kinh)", mai_hoa: "Mai Hoa (thể – dụng)", luc_hao: "Lục Hào (dụng thần)" };
 
-function Gap({ id, Icon, tieuDe, children, testId }: { id: string; Icon: typeof BookOpen; tieuDe: string; children: React.ReactNode; testId?: string }) {
+function Gap({ id, Icon, tieuDe, children, testId, onMo }: { id: string; Icon: typeof BookOpen; tieuDe: string; children: React.ReactNode; testId?: string; onMo?: () => void }) {
   const [mo, setMo] = useState(false);
   return (
     <div className="rounded-xl border border-line/70 bg-bg/30" data-testid={testId}>
-      <button type="button" aria-expanded={mo} aria-controls={id} onClick={() => setMo((v) => !v)}
+      <button type="button" aria-expanded={mo} aria-controls={id} onClick={() => { if (!mo) onMo?.(); setMo((v) => !v); }}
         className="flex min-h-10 w-full items-center gap-2 px-3 py-2 text-left text-sm text-fg-muted hover:text-fg">
         <Icon className="size-4 text-gold" aria-hidden /><span className="flex-1">{tieuDe}</span>
         <ChevronDown className={cn("size-4 transition-transform", mo && "rotate-180")} aria-hidden />
@@ -49,13 +55,22 @@ function Gap({ id, Icon, tieuDe, children, testId }: { id: string; Icon: typeof 
   );
 }
 
-export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false }: {
+export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, tenQue }: {
   dq: DocQueKq; thuatNgu?: ThuatNgu[]; /** lời đọc đầy đủ theo sách (cau_tra_loi) — gập */ vanDayDu?: string;
   onHoi?: (cau: string) => void; id: string; /** nơi gọi đã hiện kết luận làm lời chính */ anKetLuan?: boolean;
+  /** tên quẻ bản (nhãn mốc nhắc). */ tenQue?: string;
 }) {
   const [nhom, setNhom] = useState(0);
+  const [moPhai, setMoPhai] = useState<Record<string, boolean>>({});
   const gn = dq.goc_nhin;
   const cac = (["nghia_ly", "mai_hoa", "luc_hao"] as const).filter((k) => gn[k]);
+  // KC-5: tín hiệu ngầm — mở cách đọc nào thì đếm trên máy (không chữ); đo bằng mã.
+  const moCachDoc = (k: string) => {
+    const dangMo = moPhai[k] ?? k === gn.chinh;
+    setMoPhai((m) => ({ ...m, [k]: !dangMo }));
+    if (!dangMo) { ghiMoPhai(k); ghi("chart_interacted", { mo_dun: "kinhdich", kind: `mo_phai:${k}` }); }
+  };
+  const ungKy = (gn.luc_hao?.ung_ky ?? dq.ung_ky ?? []).slice(0, 3);
   return (
     <div className="space-y-4" data-testid="doc-que">
       <div className="flex flex-wrap items-center gap-2">
@@ -104,16 +119,38 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false }:
         </div>
       )}
 
+      {ungKy.length > 0 && (
+        <div className="rounded-xl border border-line/70 bg-bg/30 p-3 text-sm" data-testid="ung-ky">
+          <p className="text-xs font-semibold uppercase tracking-wider text-fg-faint">Mốc đáng để ý (nhịp gợi ý, không phải dự báo)</p>
+          <ul className="mt-2 space-y-2">
+            {ungKy.map((u) => (
+              <li key={u.chi + u.ngay_gan_nhat} className="flex flex-wrap items-center gap-2">
+                <span>Ngày {u.chi} · {u.ngay_gan_nhat.slice(8, 10)}/{u.ngay_gan_nhat.slice(5, 7)} — {u.ly_do}</span>
+                <NhacToi ngay={u.ngay_gan_nhat} ma={`kd.ungky.${u.chi.toLowerCase()}`} moDun="kinhdich"
+                  nhan={`Ngày ${u.chi} — mốc ứng kỳ${tenQue ? ` quẻ ${tenQue}` : ""} (${dq.chu_de.ten})`} duong="/kinh-dich" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {dq.goi_mo && <GoiMoCheo goiMo={dq.goi_mo} moDun="kinhdich" gon />}
+
       {/* ---- tầng học thuật: gập ---- */}
       <ViSao canCu={dq.can_cu.map((c) => `${c.tieu_de}: ${c.noi_dung}`)} thuatNgu={thuatNgu} />
       <div className="space-y-2">
-        <Gap id={`${id}-goc-nhin`} Icon={Layers} tieuDe={`Ba cách đọc cùng một quẻ (${cac.length})`} testId="goc-nhin">
+        <Gap id={`${id}-goc-nhin`} Icon={Layers} tieuDe={`Ba cách đọc cùng một quẻ (${cac.length})`} testId="goc-nhin"
+          onMo={() => ghi("chart_interacted", { mo_dun: "kinhdich", kind: "mo_goc_nhin" })}>
           <div className="space-y-3">
             {cac.map((k) => {
               const g = gn[k]!;
+              const mo = moPhai[k] ?? k === gn.chinh;
               return (
-                <div key={k} className={cn("rounded-lg border p-3", k === gn.chinh ? "border-gold/50" : "border-line/60")}>
-                  <p className="flex flex-wrap items-center gap-2 text-sm font-semibold text-fg">{TEN_PHAI[k]} <ChipMuc muc={g.muc} nhan={g.nhan} />{k === gn.chinh && <span className="text-xs font-normal text-gold">đang dùng</span>}</p>
+                <div key={k} className={cn("rounded-lg border p-3", k === gn.chinh ? "border-gold/50" : "border-line/60")} data-phai={k}>
+                  <button type="button" aria-expanded={mo} onClick={() => moCachDoc(k)} className="flex w-full flex-wrap items-center gap-2 text-left text-sm font-semibold text-fg">
+                    {TEN_PHAI[k]} <ChipMuc muc={g.muc} nhan={g.nhan} />{k === gn.chinh && <span className="text-xs font-normal text-gold">đang dùng</span>}
+                    <ChevronDown className={cn("ml-auto size-4 text-fg-muted transition-transform", mo && "rotate-180")} aria-hidden />
+                  </button>
+                  {mo && <>
                   {g.tom_tat && <p className="mt-1 text-fg-muted">{g.tom_tat}</p>}
                   {k === "luc_hao" && gn.luc_hao && (
                     <div className="mt-2 overflow-x-auto">
@@ -138,13 +175,14 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false }:
                     <p className="mt-1 text-xs text-fg-faint">Thể {gn.mai_hoa.the} · Dụng {gn.mai_hoa.dung} · Hỗ {gn.mai_hoa.ho.ha}/{gn.mai_hoa.ho.thuong} · Biến {gn.mai_hoa.bien}.{gn.mai_hoa.luu_y ? ` ${gn.mai_hoa.luu_y}` : ""}</p>
                   )}
                   <ul className="mt-2 space-y-1 border-l-2 border-line pl-3 text-xs text-fg-faint">{g.can_cu.map((c, i) => <li key={i}>{c}</li>)}</ul>
+                  </>}
                 </div>
               );
             })}
           </div>
         </Gap>
         {dq.loi_kinh.length > 0 && (
-          <Gap id={`${id}-loi-kinh`} Icon={ScrollText} tieuDe="Lời kinh nguyên văn (Chu Dịch)" testId="loi-kinh">
+          <Gap id={`${id}-loi-kinh`} Icon={ScrollText} tieuDe="Lời kinh nguyên văn (Chu Dịch)" testId="loi-kinh" onMo={() => ghi("chart_interacted", { mo_dun: "kinhdich", kind: "mo_loi_kinh" })}>
             <div className="space-y-3">
               {dq.loi_kinh.map((l, i) => (
                 <div key={i}>
@@ -159,7 +197,7 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false }:
           </Gap>
         )}
         {vanDayDu && (
-          <Gap id={`${id}-day-du`} Icon={BookOpen} tieuDe="Bản đọc đầy đủ theo sách" testId="ban-day-du">
+          <Gap id={`${id}-day-du`} Icon={BookOpen} tieuDe="Bản đọc đầy đủ theo sách" testId="ban-day-du" onMo={() => ghi("chart_interacted", { mo_dun: "kinhdich", kind: "mo_ban_day_du" })}>
             <div className="space-y-2 text-fg-muted">{doanCoThuatNgu(vanDayDu, thuatNgu)}</div>
           </Gap>
         )}

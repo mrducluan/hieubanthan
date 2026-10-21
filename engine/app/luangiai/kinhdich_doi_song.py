@@ -299,6 +299,7 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
             "hop": hop, "doan": doan, "hanh_dong": hanh_dong, "can_cu": can_cu, "cau_tu_soi": q.get("cau_tu_soi"),
             "loi_kinh": loi_kinh, "goc_nhin": gn, "ung_ky": ung_ky, "cau_lien_quan": cau[:3],
             "chu_de": {"ma": ma, "ten": cd["ten"], "dung_than": cd.get("dung_than")},
+            "y_dinh_chung": _y_dinh_chung(ma), "goi_mo": _goi_mo(ma),
             "mot_que_mot_viec": kb.mau("mot_que_mot_viec"), **kb.meta()}
 
 
@@ -306,3 +307,15 @@ def danh_sach_chu_de() -> list[dict]:
     """Chip chủ đề cho web: chỉ chủ đề gốc (bỏ biến thể người ấy nữ/nam)."""
     return [{"ma": ma, "ten": m["ten"], "dung_than": m["dung_than"], "linh_vuc": m.get("linh_vuc")}
             for ma, m in kb.chu_de_tat_ca().items() if not m.get("goc")]
+
+
+def _y_dinh_chung(ma_chu_de: str) -> str | None:
+    from app.kb import y_dinh_chung  # noqa: PLC0415
+    return y_dinh_chung.tu_ma_rieng("kinhdich", ma_chu_de)
+
+
+def _goi_mo(ma_chu_de: str) -> dict | None:
+    """KC-3: cùng nỗi băn khoăn này, mảng khác đọc được gì (link trong site, ≤ 3)."""
+    from app.kb import y_dinh_chung  # noqa: PLC0415
+    mc = y_dinh_chung.tu_ma_rieng("kinhdich", ma_chu_de)
+    return y_dinh_chung.goi_mo(mc, "kinhdich") if mc else None

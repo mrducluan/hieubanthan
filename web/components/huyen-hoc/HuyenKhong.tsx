@@ -1,13 +1,14 @@
 "use client";
 // PT-HK — Huyền Không phi tinh: nhập năm xây + toạ sơn (hoặc độ la bàn) → hạ quái bàn 3×3 (Nam ở trên).
 // Mỗi cung: sơn tinh (trái) · hướng tinh (phải) · vận tinh (giữa dưới) · lưu niên (góc). Engine tính hết.
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
+import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
 import { cn } from "@/lib/utils";
 
 const SON_24: [string, string][] = [
@@ -47,6 +48,15 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
     setCach("do");
     setDoLa(String(doToaGoiY));
   }, [doToaGoiY]);
+  // KC-2: hồ sơ nhà trên máy → năm xây + độ toạ (= hướng + 180°) điền sẵn một lần.
+  const nhaLuu = useHoSoNha();
+  const daDien = useRef(false);
+  useEffect(() => {
+    if (!nhaLuu || daDien.current) return;
+    daDien.current = true;
+    if (nhaLuu.nam_xay) setNamXay(String(nhaLuu.nam_xay));
+    if (nhaLuu.huong_do != null && doToaGoiY == null) { setCach("do"); setDoLa(String(Math.round(((nhaLuu.huong_do + 180) % 360) * 10) / 10)); }
+  }, [nhaLuu, doToaGoiY]);
   const [kiem, setKiem] = useState(false);
   const [ban, setBan] = useState<Ban | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
@@ -60,6 +70,7 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
     try {
       const body = { nam_xay: Number(namXay), ...(cach === "son" ? { toa, ...(kiem ? { the_quai: true } : {}) } : { do: d }) };
       setBan(await postJson<Ban>("/api/phongthuy/huyen-khong", body));
+      try { luuHoSoNha({ nam_xay: nam, ...(cach === "son" ? { toa } : {}) }); } catch { /* bỏ qua */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong" });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa lập được bàn."); }
     finally { setDang(false); }
