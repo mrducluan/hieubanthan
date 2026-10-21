@@ -19,7 +19,7 @@ LA = {"birth_date": "1997-03-19", "birth_time": "00:30", "gender": "nam", "noi_s
 
 
 def test_tuvi_du_chuong_va_ket_mot_lan():
-    """LG-ĐS: Tử vi theo bản đời sống (12 chương); Bát tự vẫn ghép từ hỏi đáp (khử trùng như cũ)."""
+    """LG-ĐS: Tử vi theo bản đời sống (12 chương); Bát tự cũng vậy từ BT-ĐS (test riêng: test_battu_doi_song)."""
     bc = toan_bo.tuvi({"ngay": dt.date(1997, 3, 19), "ti": 0, "gioi_tinh": "nam"}, ngay_xem=dt.date(2026, 10, 1))
     ma = [c["ma"] for c in bc["chuong"]]
     assert ma == [m for m, _, _ in toan_bo.CHUONG_TUVI] and len(ma) == 12 and bc["phien_ban"] == "doi_song_1"

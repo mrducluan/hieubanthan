@@ -1,0 +1,327 @@
+{
+  "_nguon": "Nháp AI tổng hợp theo khung Tử Bình (Uyên Hải Tử Bình, Tử Bình Chân Thuyên, Trích Thiên Tuỷ; thần sát theo Tam Mệnh Thông Hội), viết lại bằng lời đời thường cho Luận giải Bát tự đời sống (BT-ĐS); chưa đối chiếu nguyên văn. Màu, hướng, nghề theo ngũ hành là ứng dụng dân gian.",
+  "source": {"tu_binh_chan_thuyen": "Tử Bình Chân Thuyên (Thẩm Hiếu Chiêm, đời Thanh)", "trich_thien_tuy": "Trích Thiên Tuỷ (Lưu Bá Ôn chú, tương truyền)", "uyen_hai_tu_binh": "Uyên Hải Tử Bình (Từ Đại Thăng, đời Tống)", "tam_menh_thong_hoi": "Tam Mệnh Thông Hội (Vạn Dân Anh, đời Minh)"},
+  "source_id": "tu_binh_chan_thuyen",
+  "school_id": "tu_binh",
+  "trang_thai": "nhap_ai",
+  "can_doi_chieu": true,
+  "muc": {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần chủ động"},
+  "than": {"manh": "Sức tự thân: mạnh, tự đứng vững", "yeu": "Sức tự thân: cần thêm điểm tựa", "can_bang": "Sức tự thân: cân bằng"},
+  "nhom": {"Tỷ Kiếp": "sức tự đứng, người ngang hàng", "Ấn": "nguồn nâng đỡ, việc học", "Thực Thương": "sức thể hiện, tay nghề", "Tài": "tiền bạc, thành quả nắm được", "Quan Sát": "khuôn phép, áp lực, trách nhiệm"},
+  "nhat_chu": {
+    "Giáp": {
+      "hinh_tuong": "cây lớn",
+      "chan_dung": "Bạn giống một cây lớn: thẳng, muốn vươn lên và hay che chắn cho người khác. Bạn làm tốt nhất khi có mục tiêu dài hạn để bám vào.",
+      "cau_tu_soi": "Bạn đang cố đứng thẳng ở chỗ nào mà lẽ ra nên biết uốn mình?",
+      "manh": {"manh": "Bạn đứng vững một mình được, ít cần ai thúc mới chịu làm.", "de_vap": "Khi đã quyết, bạn khó nghe góp ý, cứng như cây không chịu uốn.", "loi_khuyen": "Nên chọn một người bạn tin để phản biện trước khi chốt việc lớn."},
+      "yeu": {"manh": "Bạn biết dựa vào thầy giỏi, nhóm tốt để lớn lên và không ngại học lại từ đầu.", "de_vap": "Gặp áp lực dồn dập, bạn dễ mất phương hướng và bỏ dở kế hoạch dài.", "loi_khuyen": "Nên chia mục tiêu lớn thành từng chặng ba tháng và tìm người hướng dẫn cho chặng đầu."},
+      "can_bang": {"manh": "Bạn vừa có chí vừa biết lùi một bước khi cần, nên ít khi gãy giữa chừng.", "de_vap": "Bạn hay ôm việc chăm lo người khác mà quên phần mình.", "loi_khuyen": "Nên giữ một khoảng thời gian cố định mỗi tuần cho việc riêng của bạn."}
+    },
+    "Ất": {
+      "hinh_tuong": "dây leo, cỏ hoa",
+      "chan_dung": "Bạn giống dây leo, cỏ hoa: mềm mà dai, biết bám vào chỗ vững để vươn ra. Bạn khéo xoay xở và khéo cư xử với người.",
+      "cau_tu_soi": "Bạn đang bám vào ai hay điều gì, và chỗ bám ấy còn vững không?",
+      "manh": {"manh": "Bạn bền bỉ, bị đẩy lùi vẫn tìm đường khác để đi tiếp.", "de_vap": "Bạn dễ chiều theo nhiều phía một lúc rồi rối việc của chính mình.", "loi_khuyen": "Nên nói câu để mình xem lại thay vì nhận lời ngay."},
+      "yeu": {"manh": "Bạn khéo tìm người giúp và biết cách nhờ mà không làm ai khó chịu.", "de_vap": "Không có chỗ dựa, bạn dễ chần chừ, đợi người khác quyết thay.", "loi_khuyen": "Nên tập tự quyết những việc nhỏ trong ngày để quen cảm giác cầm lái."},
+      "can_bang": {"manh": "Bạn mềm mỏng mà có nguyên tắc, nên được nhiều người tin.", "de_vap": "Bạn hay giữ khó chịu trong lòng, để lâu thành mệt.", "loi_khuyen": "Nên nói ra điều mình không thích sớm, khi chuyện còn nhỏ."}
+    },
+    "Bính": {
+      "hinh_tuong": "mặt trời",
+      "chan_dung": "Bạn giống mặt trời: sáng, ấm, thích được nhìn thấy và hay kéo người khác vào việc chung. Ở đâu có bạn, ở đó dễ có không khí.",
+      "cau_tu_soi": "Bạn đang sưởi ấm cho ai, và có chừa phần ấm cho chính mình không?",
+      "manh": {"manh": "Bạn nhiệt tình và dám đứng ra trước đám đông.", "de_vap": "Bạn dễ nói to, làm nhanh rồi hụt hơi giữa chừng.", "loi_khuyen": "Nên nhận ít việc hơn nhưng làm đến nơi, rồi mới nhận thêm."},
+      "yeu": {"manh": "Bạn ấm áp, biết lắng nghe và hiểu cảm giác người khác.", "de_vap": "Bạn dễ đuối khi phải vui vẻ, hoạt náo liên tục mà không được nghỉ.", "loi_khuyen": "Nên xen những ngày yên tĩnh sau các đợt gặp gỡ đông người."},
+      "can_bang": {"manh": "Bạn truyền được hứng khởi mà vẫn biết dừng đúng lúc.", "de_vap": "Bạn dễ chạnh lòng khi công sức không được ai nhắc tới.", "loi_khuyen": "Nên tự ghi lại việc mình đã làm được mỗi tháng, không chờ người khác khen."}
+    },
+    "Đinh": {
+      "hinh_tuong": "ngọn đèn",
+      "chan_dung": "Bạn giống ngọn đèn: không chói nhưng soi rõ chỗ gần. Bạn tinh tế, để ý chi tiết và nhớ lâu những gì người khác làm cho mình.",
+      "cau_tu_soi": "Điều gì bạn đang lo một mình mà có thể kể cho một người tin được?",
+      "manh": {"manh": "Bạn tập trung tốt, đã làm việc gì thì làm kỹ.", "de_vap": "Bạn dễ ôm suy nghĩ một mình, nghĩ nhiều thành lo.", "loi_khuyen": "Nên viết ra điều đang lo, chia nhỏ rồi xử lý từng phần."},
+      "yeu": {"manh": "Bạn nhạy với cảm xúc người khác và biết cách an ủi.", "de_vap": "Bạn dễ chao đảo theo lời khen chê xung quanh.", "loi_khuyen": "Nên chọn hai, ba người tin được để hỏi ý, bớt nghe số đông."},
+      "can_bang": {"manh": "Bạn chu đáo, làm người khác thấy được quan tâm.", "de_vap": "Bạn ngại va chạm nên đôi khi im lặng quá lâu.", "loi_khuyen": "Nên nói rõ mong muốn của mình bằng một câu ngắn, đừng chờ người khác đoán."}
+    },
+    "Mậu": {
+      "hinh_tuong": "ngọn núi",
+      "chan_dung": "Bạn giống ngọn núi: vững, chậm thay đổi, là chỗ người khác tìm đến khi cần dựa. Bạn giữ lời và thích mọi thứ có trật tự.",
+      "cau_tu_soi": "Việc gì bạn đang giữ nguyên chỉ vì quen, không phải vì nó còn đúng?",
+      "manh": {"manh": "Bạn chịu được việc nặng, càng gấp càng bình tĩnh.", "de_vap": "Bạn khó đổi ý, dễ bám cách làm cũ dù nó đã lỗi thời.", "loi_khuyen": "Nên thử một cách làm mới mỗi quý, dù chỉ ở việc nhỏ."},
+      "yeu": {"manh": "Bạn cẩn thận, ít khi hứa điều mình không làm được.", "de_vap": "Bạn dễ ngại bắt đầu, chờ đủ chắc mới làm nên lỡ cơ hội.", "loi_khuyen": "Nên đặt hạn chót cho việc cân nhắc, quá hạn thì làm thử ở quy mô nhỏ."},
+      "can_bang": {"manh": "Bạn đáng tin, làm việc đều tay, ít thất thường.", "de_vap": "Bạn hay gánh việc của người khác vì ngại từ chối.", "loi_khuyen": "Nên tập nói không với một việc ngoài phần mình mỗi tuần."}
+    },
+    "Kỷ": {
+      "hinh_tuong": "mảnh đất vườn",
+      "chan_dung": "Bạn giống mảnh đất vườn: nuôi được nhiều thứ, kiên nhẫn và thực tế. Bạn giỏi chăm sóc, sắp xếp và biến cái nhỏ thành cái dùng được.",
+      "cau_tu_soi": "Bạn đang chăm cho bao nhiêu người, và ai đang chăm cho bạn?",
+      "manh": {"manh": "Bạn bền, lo xa, biết tích góp từng chút.", "de_vap": "Bạn dễ ôm đồm, muốn tự tay lo hết mọi thứ.", "loi_khuyen": "Nên giao bớt việc và chấp nhận người khác làm theo cách của họ."},
+      "yeu": {"manh": "Bạn dễ thích nghi, ở đâu cũng tìm được chỗ đứng.", "de_vap": "Bạn dễ để người khác lấn phần, ngại đòi quyền lợi của mình.", "loi_khuyen": "Nên ghi rõ thoả thuận về công sức và tiền bạc ngay từ đầu."},
+      "can_bang": {"manh": "Bạn chu toàn, nhớ việc của cả nhà, cả nhóm.", "de_vap": "Bạn hay lo trước những việc chưa xảy ra.", "loi_khuyen": "Nên tách việc cần lo hôm nay khỏi việc chỉ cần ghi lại để tính sau."}
+    },
+    "Canh": {
+      "hinh_tuong": "thanh thép",
+      "chan_dung": "Bạn giống thanh thép: thẳng, mạnh, nói là làm. Bạn thích việc rõ ràng và ghét vòng vo.",
+      "cau_tu_soi": "Lần gần nhất bạn nói thẳng, người kia nghe được điều gì?",
+      "manh": {"manh": "Bạn quyết nhanh và dám chịu trách nhiệm cho quyết định của mình.", "de_vap": "Bạn dễ nói thẳng đến mức làm người khác tổn thương.", "loi_khuyen": "Nên dừng ba giây trước khi góp ý, tự hỏi người kia cần nghe điều gì."},
+      "yeu": {"manh": "Bạn có nguyên tắc rõ, biết điều gì mình không chấp nhận.", "de_vap": "Khi bị ép, bạn dễ cứng lại rồi buông cả việc lẫn người.", "loi_khuyen": "Nên chọn môi trường có người dẫn dắt rõ ràng để rèn thêm sức chịu."},
+      "can_bang": {"manh": "Bạn thẳng mà vẫn biết cách nói cho người khác nghe được.", "de_vap": "Bạn hay đòi hỏi cao với người gần mình.", "loi_khuyen": "Nên khen điều người khác làm tốt trước khi nói điều cần sửa."}
+    },
+    "Tân": {
+      "hinh_tuong": "món trang sức đã mài",
+      "chan_dung": "Bạn giống món trang sức đã mài giũa: tinh, sạch, có gu riêng. Bạn coi trọng thể diện và sự chỉn chu.",
+      "cau_tu_soi": "Điều gì bạn đang đòi hoàn hảo mà thật ra đủ tốt là được?",
+      "manh": {"manh": "Bạn có mắt thẩm mỹ và tiêu chuẩn cao trong việc mình làm.", "de_vap": "Bạn dễ khó chịu với cái chưa hoàn hảo, kể cả ở chính mình.", "loi_khuyen": "Nên đặt mức đủ tốt cho việc thường ngày, giữ mức cao cho việc quan trọng."},
+      "yeu": {"manh": "Bạn nhạy và tinh, nhận ra điều người khác bỏ sót.", "de_vap": "Bạn dễ tủi khi bị chê, mất hứng làm tiếp.", "loi_khuyen": "Nên tách lời chê về việc khỏi lời chê về con người bạn."},
+      "can_bang": {"manh": "Bạn khéo léo, biết giữ ý trong giao tiếp.", "de_vap": "Bạn ngại để lộ chỗ yếu nên ít nhờ ai.", "loi_khuyen": "Nên nhờ giúp sớm ở việc mình chưa rành."}
+    },
+    "Nhâm": {
+      "hinh_tuong": "dòng sông lớn",
+      "chan_dung": "Bạn giống dòng sông lớn: chảy mãi, nhiều ý, thích đi xa và đổi mới. Bạn nắm bắt nhanh và chịu được thay đổi.",
+      "cau_tu_soi": "Việc nào bạn đã mở ra mà chưa khép lại?",
+      "manh": {"manh": "Bạn nhiều sức, gặp chỗ chặn là tìm lối khác ngay.", "de_vap": "Bạn dễ lan man, mở nhiều việc mà khó khép lại.", "loi_khuyen": "Nên chọn một việc chính mỗi giai đoạn và đóng hẳn việc cũ trước khi mở việc mới."},
+      "yeu": {"manh": "Bạn linh hoạt, hiểu người nhanh và dễ hoà vào môi trường mới.", "de_vap": "Bạn dễ bị cuốn theo việc của người khác, mất sức vào chỗ không phải của mình.", "loi_khuyen": "Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn."},
+      "can_bang": {"manh": "Bạn thông minh, biết nhìn xa mà vẫn bám việc trước mắt.", "de_vap": "Bạn hay giữ kín kế hoạch, người gần bạn khó theo kịp.", "loi_khuyen": "Nên kể sớm dự định cho người cùng làm để họ chuẩn bị."}
+    },
+    "Quý": {
+      "hinh_tuong": "mạch nước ngầm",
+      "chan_dung": "Bạn giống mạch nước ngầm, cơn mưa nhỏ: lặng lẽ mà thấm sâu. Bạn tinh ý, giàu tưởng tượng và hiểu người qua những điều không nói ra.",
+      "cau_tu_soi": "Điều bạn cảm thấy nhưng chưa nói ra là gì?",
+      "manh": {"manh": "Bạn kiên nhẫn, làm âm thầm mà ra kết quả bền.", "de_vap": "Bạn dễ chìm vào suy nghĩ riêng, ít chia sẻ.", "loi_khuyen": "Nên hẹn một buổi trò chuyện mỗi tuần với người thân để nói ra điều đang nghĩ."},
+      "yeu": {"manh": "Bạn nhạy cảm và giàu lòng thương người.", "de_vap": "Bạn dễ mệt vì gánh cảm xúc của người khác.", "loi_khuyen": "Nên có giờ tắt điện thoại, chỉ ở với chính mình."},
+      "can_bang": {"manh": "Bạn sâu sắc mà mềm mỏng, giỏi gỡ rối chuyện tế nhị.", "de_vap": "Bạn hay nghi ngờ khả năng của mình dù đã làm tốt.", "loi_khuyen": "Nên giữ một danh sách những việc bạn đã làm được để nhìn lại khi chùn bước."}
+    }
+  },
+  "noi_bat": {
+    "Tỷ Kiên": {"y": "Bạn tự lập, thích làm theo cách của mình và muốn được đối xử ngang hàng.", "de_vap": "Bạn ngại nhờ, ngại nghe lệnh, dễ thành một mình gánh việc.", "loi_khuyen": "Nên chọn việc có quyền tự quyết và học cách nhờ đúng người."},
+    "Kiếp Tài": {"y": "Bạn dám cạnh tranh và nhanh tay khi thấy cơ hội.", "de_vap": "Bạn dễ liều, chi tiêu theo hứng và hay so bì với người bằng vai.", "loi_khuyen": "Nên đặt một mức tiền tối đa cho mỗi lần quyết nhanh."},
+    "Thực Thần": {"y": "Bạn ôn hoà, biết tận hưởng và làm ra những thứ dùng được, ăn được, xem được.", "de_vap": "Bạn dễ thoả mãn sớm và ngại việc khó kéo dài.", "loi_khuyen": "Nên đặt một mục tiêu hơi quá sức mỗi năm để không chậm lại."},
+    "Thương Quan": {"y": "Bạn sáng tạo, nói hay và nhìn ra chỗ chưa hợp lý rất nhanh.", "de_vap": "Bạn dễ chê và dễ làm trái luật khi thấy luật vô lý.", "loi_khuyen": "Nên kèm một cách sửa mỗi khi chỉ ra chỗ sai."},
+    "Thiên Tài": {"y": "Bạn nhạy với cơ hội, rộng rãi và quen giao thiệp rộng.", "de_vap": "Bạn dễ tiêu rộng tay, lấy khoản thu sau bù khoản chi trước.", "loi_khuyen": "Nên tách một tài khoản riêng cho khoản không được động tới."},
+    "Chính Tài": {"y": "Bạn thực tế, cần cù, coi trọng chữ tín và sự ổn định.", "de_vap": "Bạn dễ quá chặt với tiền, bỏ lỡ việc đáng bỏ vốn.", "loi_khuyen": "Nên dành một phần nhỏ cố định cho việc học hoặc trải nghiệm mới."},
+    "Thất Sát": {"y": "Bạn gan, chịu áp lực tốt, càng khó càng muốn thắng.", "de_vap": "Bạn dễ nóng, dễ ép mình và ép người quá mức.", "loi_khuyen": "Nên có một việc xả sức đều đặn như chạy bộ hay đánh cầu."},
+    "Chính Quan": {"y": "Bạn đứng đắn, giữ phép tắc, được người lớn tin giao việc.", "de_vap": "Bạn hay lo người khác nghĩ gì về mình, ngại làm khác số đông.", "loi_khuyen": "Nên tự hỏi điều bạn muốn trước khi hỏi điều người khác chờ ở bạn."},
+    "Thiên Ấn": {"y": "Bạn có lối nghĩ riêng, thích cái mới lạ và thích đào sâu một mảng hẹp.", "de_vap": "Bạn dễ thu mình, hay nghi và bỏ dở khi hết hứng.", "loi_khuyen": "Nên gắn sở thích riêng với một sản phẩm cụ thể để có cái mà hoàn thành."},
+    "Chính Ấn": {"y": "Bạn ham học, hiền và biết nghĩ cho người khác.", "de_vap": "Bạn hay chờ được chỉ dẫn, ngại tự đứng ra làm trước.", "loi_khuyen": "Nên nhận một việc phải tự cầm từ đầu đến cuối mỗi năm."}
+  },
+  "cach": {
+    "chinh_quan": {"ten": "người giữ khuôn phép", "y": "Tháng sinh cho bạn nét chỉn chu, biết trên biết dưới, hợp nơi có quy củ.", "de_vap": "Bạn dễ mệt khi phải làm ở chỗ lộn xộn, không ai chịu trách nhiệm.", "loi_khuyen": "Nên hỏi rõ ai quyết việc gì ngay từ đầu khi vào một nhóm mới.", "nghe": "Hợp việc trong tổ chức có cấp bậc rõ: hành chính, ngân hàng, giáo dục, quản lý vận hành.", "hy": ["Tài", "Ấn"], "ky": ["Thực Thương"]},
+    "that_sat": {
+      "ten": "người dám nhận việc khó",
+      "y": "Tháng sinh cho bạn sức chịu áp lực và tinh thần xông lên khi việc gấp.",
+      "de_vap": "Bạn dễ ôm việc quá sức và nóng với người chậm hơn mình.",
+      "loi_khuyen": "Nên chọn trận cần đánh, để những việc nhỏ cho người khác lo.",
+      "nghe": "Hợp việc có thử thách, có cạnh tranh: kỹ thuật hiện trường, mở thị trường mới, an ninh, thể thao, xử lý sự cố.",
+      "hy": ["Thực Thương", "Ấn"],
+      "ky": [],
+      "than_nhuoc": {"hy": ["Ấn"], "ky": ["Tài"]}
+    },
+    "chinh_tai": {
+      "ten": "người làm ăn bền bỉ",
+      "y": "Tháng sinh cho bạn đầu óc thực tế, giỏi quản lý tiền và giữ lời hứa.",
+      "de_vap": "Bạn dễ quá thận trọng, để cơ hội trôi qua.",
+      "loi_khuyen": "Nên dành một khoản nhỏ để thử cơ hội mới, phần còn lại giữ như cũ.",
+      "nghe": "Hợp quản lý, kế toán, tài chính, buôn bán hàng thiết yếu, vận hành chuỗi cung ứng.",
+      "hy": ["Thực Thương", "Quan Sát"],
+      "ky": ["Tỷ Kiếp"],
+      "than_nhuoc": {"hy": ["Ấn"], "ky": ["Tỷ Kiếp"]}
+    },
+    "thien_tai": {
+      "ten": "người nhạy cơ hội",
+      "y": "Tháng sinh cho bạn con mắt nhìn ra cơ hội, giỏi giao thiệp và xoay vốn.",
+      "de_vap": "Bạn dễ ham nhiều việc cùng lúc, tiền vào nhanh ra cũng nhanh.",
+      "loi_khuyen": "Nên chọn tối đa hai cơ hội mỗi năm để theo đến cùng.",
+      "nghe": "Hợp kinh doanh, bán hàng, môi giới, đầu tư có kỷ luật, làm việc với đối tác bên ngoài.",
+      "hy": ["Thực Thương", "Quan Sát"],
+      "ky": ["Tỷ Kiếp"],
+      "than_nhuoc": {"hy": ["Ấn"], "ky": ["Tỷ Kiếp"]}
+    },
+    "chinh_an": {
+      "ten": "người ham học, được nâng đỡ",
+      "y": "Tháng sinh cho bạn lòng ham hiểu biết và hay được người đi trước giúp đỡ.",
+      "de_vap": "Bạn dễ quen được che chở, chậm tự đứng ra.",
+      "loi_khuyen": "Nên tự nhận một việc khó mà không hỏi ý ai trước.",
+      "nghe": "Hợp giáo dục, nghiên cứu, y dược, pháp lý, viết lách, việc cần bằng cấp và uy tín.",
+      "hy": ["Quan Sát"],
+      "ky": ["Tài"],
+      "than_vuong": {"hy": ["Tài", "Thực Thương"], "ky": ["Ấn"]}
+    },
+    "thien_an": {
+      "ten": "người có lối nghĩ riêng",
+      "y": "Tháng sinh cho bạn trực giác tốt và hứng thú với những lĩnh vực ít người chạm tới.",
+      "de_vap": "Bạn dễ chán việc lặp lại và bỏ ngang khi chưa xong.",
+      "loi_khuyen": "Nên đặt mốc hoàn thành rõ cho mỗi việc riêng bạn đang theo.",
+      "nghe": "Hợp nghề chuyên sâu, kỹ thuật lạ, tâm lý, thiết kế, công nghệ, nghiên cứu độc lập.",
+      "hy": ["Quan Sát"],
+      "ky": ["Tài"],
+      "than_vuong": {"hy": ["Tài"], "ky": ["Ấn"]}
+    },
+    "thuc_than": {
+      "ten": "người tài hoa, sống thong thả",
+      "y": "Tháng sinh cho bạn sự khéo tay, khéo miệng và biết tận hưởng.",
+      "de_vap": "Bạn dễ ngại áp lực, chọn việc vừa sức quá lâu.",
+      "loi_khuyen": "Nên nhận một việc có hạn chót rõ mỗi quý để giữ nhịp.",
+      "nghe": "Hợp ẩm thực, nghệ thuật, dạy trẻ, dịch vụ, nội dung số, làm sản phẩm thủ công.",
+      "hy": ["Tài"],
+      "ky": ["Ấn"],
+      "than_nhuoc": {"hy": ["Tỷ Kiếp"], "ky": ["Ấn"]}
+    },
+    "thuong_quan": {
+      "ten": "người sáng tạo, thích làm khác",
+      "y": "Tháng sinh cho bạn đầu óc sắc, giỏi nói, giỏi trình bày và thích làm khác.",
+      "de_vap": "Bạn dễ va chạm với cấp trên, với người giữ luật.",
+      "loi_khuyen": "Nên chọn nơi đánh giá bằng kết quả, ít đánh giá bằng thâm niên.",
+      "nghe": "Hợp sáng tạo nội dung, truyền thông, tranh tụng, thiết kế, khởi nghiệp, nghề biểu diễn.",
+      "hy": ["Tài"],
+      "ky": ["Quan Sát"],
+      "than_nhuoc": {"hy": ["Ấn"], "ky": ["Quan Sát"]}
+    },
+    "kien_loc": {"ten": "người tự lập từ sớm", "y": "Tháng sinh cho bạn sức tự lực: muốn có gì thường tự làm lấy.", "de_vap": "Bạn dễ ôm một mình, ít dựa vào hệ thống hay người khác.", "loi_khuyen": "Nên xây một nhóm nhỏ tin cậy thay vì làm hết một mình.", "nghe": "Hợp việc tự chủ, nghề độc lập, quản lý một mảng riêng, kinh doanh nhỏ do mình nắm.", "hy": ["Quan Sát", "Tài", "Thực Thương"], "ky": ["Tỷ Kiếp"]},
+    "duong_nhan": {"ten": "người quyết liệt", "y": "Tháng sinh cho bạn khí thế mạnh, quyết nhanh, dám đối đầu.", "de_vap": "Bạn dễ nóng vội, làm mạnh tay hơn mức cần.", "loi_khuyen": "Nên tìm môi trường có kỷ luật rõ để sức mạnh ấy có chỗ dùng đúng.", "nghe": "Hợp việc cần quyết đoán, có kỷ luật: quân đội, công an, phẫu thuật, kỹ thuật nặng, thể thao.", "hy": ["Quan Sát"], "ky": ["Tỷ Kiếp"]},
+    "nguyet_kiep": {"ten": "người lớn lên nhờ cạnh tranh", "y": "Tháng sinh cho bạn tinh thần không chịu thua, càng có đối thủ càng cố.", "de_vap": "Bạn dễ tranh phần, hao tiền vì muốn hơn người.", "loi_khuyen": "Nên lấy chính mình năm trước làm đối thủ thay vì người bên cạnh.", "nghe": "Hợp bán hàng theo doanh số, thể thao, khởi nghiệp, môi trường có thi đua rõ.", "hy": ["Quan Sát", "Thực Thương"], "ky": ["Tỷ Kiếp"]}
+  },
+  "hanh": {
+    "Kim": {"ten": "sự rõ ràng, kỷ luật, quyết đoán", "thua": "Kim nhiều làm bạn dễ cứng nhắc, hay phân xử đúng sai rạch ròi cả với chuyện tình cảm.", "thua_loi_khuyen": "Nên tập nói thêm một câu hỏi han trước mỗi lời nhận xét.", "thieu": "Thiếu Kim, bạn dễ thiếu dứt khoát, khó nói không và khó cắt bỏ việc thừa.", "thieu_loi_khuyen": "Nên lập danh sách việc mỗi sáng và gạch hẳn những việc không làm.", "mau": "trắng, bạc, xám", "huong": "Tây, Tây Bắc", "nghe": "tài chính, kỹ thuật, máy móc, luật, quản lý chất lượng", "thoi_quen": "dọn gọn bàn làm việc, lập danh sách việc, tập thở sâu buổi sáng", "co_the": "phổi, da và đường thở", "nhip_thua": "Bạn hay gồng, giữ căng thẳng trong người, vai gáy dễ mỏi.", "nhip_thieu": "Bạn dễ hụt hơi khi làm việc kéo dài.", "loi_khuyen_sk": "Nên tập thở, đi bộ nơi thoáng khí và giữ ấm cổ họng khi trời chuyển mùa.", "tieu_de_thua": "Kim nhiều: dễ cứng nhắc", "tieu_de_thieu": "Thiếu Kim: khó dứt khoát"},
+    "Mộc": {"ten": "sự lớn lên, mềm dẻo, lòng thương người", "thua": "Mộc nhiều làm bạn dễ ôm đồm kế hoạch và cố chấp với ý mình.", "thua_loi_khuyen": "Nên chọn ba kế hoạch chính cho mỗi năm, phần còn lại để vào danh sách chờ.", "thieu": "Thiếu Mộc, bạn dễ ngại khởi đầu, ngại đổi mới và thiếu kế hoạch dài hơi.", "thieu_loi_khuyen": "Nên viết kế hoạch một năm trên một trang giấy và xem lại mỗi tháng.", "mau": "xanh lá, xanh rêu", "huong": "Đông, Đông Nam", "nghe": "giáo dục, xuất bản, cây trồng, thiết kế, chăm sóc con người", "thoi_quen": "chăm một chậu cây, đi bộ trong công viên, đọc vài trang sách mỗi tối", "co_the": "gan, mắt và gân cơ", "nhip_thua": "Bạn dễ cáu khi bị cản và hay thức khuya để làm cho xong.", "nhip_thieu": "Bạn dễ cứng người vì ít vận động giãn cơ.", "loi_khuyen_sk": "Nên ngủ trước 23 giờ, giãn cơ mỗi ngày và cho mắt nghỉ sau mỗi giờ nhìn màn hình.", "tieu_de_thua": "Mộc nhiều: dễ ôm đồm", "tieu_de_thieu": "Thiếu Mộc: ngại khởi đầu"},
+    "Thủy": {"ten": "trí óc, sự linh hoạt, khả năng thích nghi", "thua": "Thủy nhiều làm bạn dễ nghĩ nhiều, lo xa, cảm xúc lên xuống.", "thua_loi_khuyen": "Nên đặt giờ dừng suy nghĩ: ghi việc đang lo ra giấy rồi gác lại tới sáng.", "thieu": "Thiếu Thủy, bạn dễ cứng nhắc, ít mềm mỏng khi hoàn cảnh đổi.", "thieu_loi_khuyen": "Nên tập đưa ra hai phương án cho mỗi việc thay vì chỉ một.", "mau": "đen, xanh dương đậm", "huong": "Bắc", "nghe": "vận tải, du lịch, truyền thông, thương mại, công nghệ thông tin", "thoi_quen": "uống đủ nước, ngủ đủ giấc, dành thời gian tĩnh lặng, đi bơi", "co_the": "thận, tai và xương khớp", "nhip_thua": "Bạn hay mất ngủ vì suy nghĩ chạy vòng.", "nhip_thieu": "Bạn dễ quên uống nước khi bận.", "loi_khuyen_sk": "Nên uống đủ nước, giữ ấm lưng và chân, ngủ đủ giấc vào giờ cố định.", "tieu_de_thua": "Thủy nhiều: dễ nghĩ nhiều", "tieu_de_thieu": "Thiếu Thủy: khó mềm mỏng"},
+    "Hỏa": {"ten": "nhiệt tình, sự hiện diện, niềm vui", "thua": "Hỏa nhiều làm bạn dễ nóng vội, nói nhanh hơn nghĩ và khó ngồi yên.", "thua_loi_khuyen": "Nên tập ngồi yên vài phút trước khi trả lời việc gấp.", "thieu": "Thiếu Hỏa, bạn dễ thiếu hứng khởi và ngại thể hiện mình.", "thieu_loi_khuyen": "Nên làm một việc mình thích mỗi tuần và kể cho người khác nghe.", "mau": "đỏ, cam, hồng, tím", "huong": "Nam", "nghe": "truyền thông, giải trí, ẩm thực, năng lượng, việc đứng trước đám đông", "thoi_quen": "phơi nắng sáng, vận động ra mồ hôi, gặp bạn bè vui vẻ", "co_the": "tim và giấc ngủ", "nhip_thua": "Bạn dễ thức khuya và uống nhiều cà phê để giữ đà.", "nhip_thieu": "Bạn dễ lạnh tay chân, uể oải vào mùa lạnh.", "loi_khuyen_sk": "Nên giữ nhịp làm – nghỉ đều, bớt chất kích thích buổi tối và vận động vừa sức mỗi ngày.", "tieu_de_thua": "Hỏa nhiều: dễ nóng vội", "tieu_de_thieu": "Thiếu Hỏa: thiếu hứng khởi"},
+    "Thổ": {"ten": "sự vững vàng, chữ tín, khả năng gom giữ", "thua": "Thổ nhiều làm bạn dễ ì, chậm đổi, lo nghĩ dồn ứ.", "thua_loi_khuyen": "Nên đổi một thói quen nhỏ mỗi tháng để người không bị lì.", "thieu": "Thiếu Thổ, bạn dễ thiếu điểm tựa, kế hoạch hay bị đứt đoạn.", "thieu_loi_khuyen": "Nên giữ một lịch sinh hoạt cố định làm khung cho mọi việc khác.", "mau": "vàng, nâu, màu đất", "huong": "Đông Bắc, Tây Nam", "nghe": "bất động sản, xây dựng, nông nghiệp, quản lý kho, hành chính, bảo hiểm", "thoi_quen": "ăn đúng bữa, làm vườn, đi chân trần trên cỏ", "co_the": "dạ dày và tiêu hoá", "nhip_thua": "Bạn dễ ăn uống thất thường khi căng thẳng.", "nhip_thieu": "Bạn dễ bỏ bữa, ăn vội khi bận.", "loi_khuyen_sk": "Nên ăn đúng giờ, nhai chậm, bớt ăn khuya và đi bộ nhẹ sau bữa.", "tieu_de_thua": "Thổ nhiều: dễ ì, chậm đổi", "tieu_de_thieu": "Thiếu Thổ: thiếu điểm tựa"}
+  },
+  "than_sat": {
+    "Thiên Ất Quý Nhân": {"tieu_de": "Hay gặp người giúp đúng lúc", "y": "Lúc khó, bạn hay gặp người giúp đúng lúc: thầy, sếp, hoặc người quen của người quen.", "loi_khuyen": "Nên giữ liên lạc với người từng giúp mình và giúp lại người khác khi có thể."},
+    "Văn Xương": {"tieu_de": "Giỏi chữ nghĩa, trình bày", "y": "Bạn tiếp thu chữ nghĩa nhanh, viết và trình bày mạch lạc.", "loi_khuyen": "Nên dùng thế mạnh viết để ghi lại kiến thức, làm nền cho việc dạy hoặc chia sẻ."},
+    "Thái Cực Quý Nhân": {"tieu_de": "Thích hỏi vì sao", "y": "Bạn thích hỏi vì sao, hay tìm hiểu triết lý và ý nghĩa đằng sau mọi việc.", "loi_khuyen": "Nên chọn một môn để học có hệ thống thay vì đọc rải rác."},
+    "Hoa Cái": {"tieu_de": "Làm tốt khi được ở một mình", "y": "Bạn học và làm tốt nhất khi được ở một mình, có khiếu nghệ thuật hoặc chiêm nghiệm.", "loi_khuyen": "Nên dành riêng một góc yên tĩnh cho việc cần tập trung."},
+    "Dịch Mã": {"tieu_de": "Hợp đi lại, đổi chỗ", "y": "Bạn hợp đi lại, đổi chỗ, làm việc gắn với di chuyển hoặc ở nhiều nơi.", "loi_khuyen": "Nên chọn việc cho phép đi đây đi đó thay vì ngồi một chỗ quá lâu."},
+    "Tướng Tinh": {"tieu_de": "Có uy khi dẫn nhóm", "y": "Khi đứng ra dẫn nhóm, bạn có uy và người khác dễ nghe theo.", "loi_khuyen": "Nên nhận vai trưởng nhóm ở việc nhỏ trước để rèn cách dẫn người."},
+    "Đào Hoa": {"tieu_de": "Có sức hút tự nhiên", "y": "Bạn có sức hút tự nhiên, dễ được để ý khi giao tiếp.", "loi_khuyen": "Nên giữ chừng mực và nói rõ ranh giới khi đã có người thương."},
+    "Hồng Diễm": {"tieu_de": "Duyên dáng, giàu cảm xúc", "y": "Bạn duyên dáng và giàu cảm xúc trong chuyện tình cảm.", "loi_khuyen": "Nên cho mối quan hệ thời gian để hiểu nhau thay vì quyết theo cảm xúc lúc đầu."},
+    "Vong Thần": {"tieu_de": "Dễ vướng chuyện thị phi", "y": "Bạn dễ bị cuốn vào chuyện thị phi hoặc tính toán quá nhiều trong quan hệ.", "loi_khuyen": "Nên tránh bàn chuyện người vắng mặt và nói thẳng khi có hiểu lầm."},
+    "Kiếp Sát": {"tieu_de": "Dễ hao vì việc bất ngờ", "y": "Bạn dễ hao tiền, hao sức vì việc bất ngờ do người khác gây ra.", "loi_khuyen": "Nên ký giấy tờ rõ ràng và giữ một khoản dự phòng."},
+    "Khôi Cương": {"tieu_de": "Tính mạnh, nói thẳng", "y": "Bạn tính mạnh, nói thẳng, quyết rồi khó đổi.", "loi_khuyen": "Nên chọn lời mềm hơn khi nói chuyện với người thân."},
+    "Dương Nhận": {"tieu_de": "Dễ phản ứng mạnh khi bị chạm tự ái", "y": "Khi bị chạm tự ái, bạn dễ phản ứng mạnh và nhanh.", "loi_khuyen": "Nên chờ qua một đêm rồi mới trả lời tin nhắn làm bạn bực."},
+    "Cô Thần": {"tieu_de": "Quen tự lo, đôi khi lẻ loi", "y": "Bạn quen tự lo, có lúc thấy lẻ loi ngay cả khi ở giữa người thân.", "loi_khuyen": "Nên chủ động hẹn người thân những buổi gặp nhỏ, đều đặn."},
+    "Quả Tú": {"tieu_de": "Độc lập, ngại mở lòng", "y": "Bạn độc lập, quen tự xoay xở và đôi khi ngại mở lòng.", "loi_khuyen": "Nên kể cho người thân nghe chuyện của bạn, dù là chuyện nhỏ."},
+    "Lộc Thần": {"tieu_de": "Tự lo được cho mình", "y": "Bạn có nền tự lực: dù khởi đầu ít, bạn vẫn tự lo được cho mình.", "loi_khuyen": "Nên đầu tư vào tay nghề, đó là nguồn thu bền nhất của bạn."},
+    "Kim Dư": {"tieu_de": "Hay được nâng đỡ", "y": "Bạn hay được nâng đỡ trong các mối quan hệ, nhất là từ người có điều kiện.", "loi_khuyen": "Nên trân trọng và đáp lại sự giúp đỡ để quan hệ bền lâu."},
+    "Thiên Đức": {"tieu_de": "Việc khó thường có lối ra", "y": "Việc khó với bạn thường có lối ra, nhất là khi bạn sống tử tế với người quanh mình.", "loi_khuyen": "Nên giữ nếp làm việc tốt nhỏ, đều đặn."},
+    "Nguyệt Đức": {"tieu_de": "Việc khó thường có lối ra", "y": "Việc khó với bạn thường có lối ra, nhất là khi bạn sống tử tế với người quanh mình.", "loi_khuyen": "Nên giữ nếp làm việc tốt nhỏ, đều đặn."}
+  },
+  "tinh_huong": {
+    "su_nghiep": {
+      "quan_an": {"tieu_de": "Đi lên nhờ được tin và chịu học", "loai": "diem_manh", "y": "Bạn tiến lên nhờ được tin giao việc và nhờ chịu học thêm để xứng với vị trí. Bằng cấp, chứng chỉ và người hướng dẫn là đòn bẩy của bạn.", "loi_khuyen": "Nên chọn nơi có lộ trình thăng tiến rõ và đầu tư vào một chứng chỉ có giá trị trong nghề."},
+      "tai_sinh_quan": {"tieu_de": "Kết quả cụ thể mở đường cho vị trí", "loai": "diem_manh", "y": "Kết quả làm ra tiền của bạn thường mở đường cho vị trí cao hơn. Người khác nể bạn vì bạn mang về được việc cụ thể.", "loi_khuyen": "Nên ghi lại con số kết quả của mình để dùng khi bàn chuyện lên chức, tăng lương."},
+      "quan_ro": {"tieu_de": "Hợp nơi có luật lệ, vai trò rõ", "loai": "diem_manh", "y": "Bạn hợp môi trường có luật lệ, có cấp bậc và vai trò rõ ràng. Được giao trách nhiệm, bạn làm đến nơi.", "loi_khuyen": "Nên chọn tổ chức có quy trình rõ và nói trước với cấp trên mục tiêu bạn muốn đạt."},
+      "quan_nang": {"tieu_de": "Áp lực trách nhiệm dễ quá sức", "loai": "luu_y", "y": "Trách nhiệm và áp lực công việc dễ đè nặng hơn sức bạn đang có. Bạn hay nhận thêm việc vì ngại từ chối người trên.", "loi_khuyen": "Nên hỏi rõ phạm vi việc trước khi nhận, và xin thêm người hoặc thời gian khi quá tải."},
+      "thuong_kien_quan": {"tieu_de": "Dễ va chạm với cấp trên", "loai": "luu_y", "y": "Bạn hay thấy cách làm của cấp trên chưa hợp lý và dễ nói thẳng ra. Ý đúng nhưng cách nói làm bạn mất điểm.", "loi_khuyen": "Nên góp ý riêng, bằng một đoạn viết ngắn, kèm một phương án thay thế."},
+      "tu_lam": {"tieu_de": "Hợp sống bằng tay nghề riêng", "loai": "diem_manh", "y": "Bạn hợp kiếm sống bằng tay nghề, chuyên môn riêng hoặc tự làm chủ hơn là leo bậc trong bộ máy lớn.", "loi_khuyen": "Nên xây một sản phẩm hay dịch vụ mang tên bạn, dù nhỏ, rồi mở rộng dần."},
+      "thieu_khung": {"tieu_de": "Không ai đặt mục tiêu thì dễ trôi", "loai": "luu_y", "y": "Khi không có ai đặt mục tiêu, bạn dễ trôi theo việc trước mắt và đổi hướng nhiều lần.", "loi_khuyen": "Nên tự đặt mục tiêu theo quý và tìm một người cùng nghề để báo tiến độ."},
+      "sat_lo": {"tieu_de": "Dám nhận việc khó, việc gấp", "loai": "diem_manh", "y": "Bạn dám nhận việc khó, việc gấp mà người khác né. Áp lực làm bạn tỉnh táo hơn.", "loi_khuyen": "Nên nhận vai được giao thử thách rõ ràng, có thời hạn và có quyền quyết đi kèm."},
+      "chinh_quan_lo": {"tieu_de": "Chỉn chu, giữ lời", "loai": "diem_manh", "y": "Bạn làm việc chỉn chu, giữ lời, được người có trách nhiệm tin tưởng.", "loi_khuyen": "Nên giữ thói quen báo cáo ngắn, đúng hẹn: uy tín của bạn lớn lên từ đó."}
+    },
+    "tien_bac": {
+      "tai_ganh_duoc": {"tieu_de": "Kiếm được và quản được tiền", "loai": "diem_manh", "y": "Bạn đủ sức nắm giữ tiền bạc: kiếm được và quản được. Càng có trách nhiệm với tiền, bạn càng làm tốt.", "loi_khuyen": "Nên đặt mục tiêu tài sản theo năm và theo dõi bằng một bảng đơn giản."},
+      "tai_nang_than_yeu": {"tieu_de": "Tiền đến nhiều nhưng dễ mệt vì gánh", "loai": "luu_y", "y": "Tiền và cơ hội kiếm tiền đến khá nhiều, nhưng bạn dễ mệt vì phải gánh. Ôm nhiều mối cùng lúc dễ làm bạn hụt sức.", "loi_khuyen": "Nên chọn ít nguồn thu mà vững, và nhờ người giỏi số liệu giúp quản phần còn lại."},
+      "tai_vua": {"tieu_de": "Tiền đến vừa sức", "loai": "diem_manh", "y": "Tiền đến với bạn ở mức vừa sức: đủ để lo liệu, không nhiều đến mức thành gánh.", "loi_khuyen": "Nên giữ nhịp tích luỹ đều và tránh vay để mở rộng quá nhanh."},
+      "thuc_sinh_tai": {"tieu_de": "Kiếm tiền từ tay nghề của mình", "loai": "diem_manh", "y": "Bạn kiếm tiền tốt nhất từ tay nghề, ý tưởng hoặc sản phẩm do chính mình làm ra.", "loi_khuyen": "Nên định giá đúng công sức của mình, đừng làm không công quá lâu."},
+      "kiep_tai": {"tieu_de": "Tiền dễ ra vì bạn bè, anh em", "loai": "luu_y", "y": "Tiền của bạn dễ ra vì bạn bè, anh em: cho vay, góp chung, chia phần, hoặc chi để giữ thể diện.", "loi_khuyen": "Nên chỉ cho vay số tiền bạn chấp nhận mất và ghi giấy khi góp vốn chung."},
+      "tai_vang": {"tieu_de": "Tiền không tự tìm đến", "loai": "luu_y", "y": "Tiền không tự tìm đến bạn; chi tiêu dễ trôi theo nhu cầu trước mắt.", "loi_khuyen": "Nên trích tiết kiệm tự động ngay ngày nhận lương, trước khi tiêu."},
+      "chinh_tai_lo": {"tieu_de": "Hợp thu nhập đều, tích luỹ chậm mà vững", "loai": "diem_manh", "y": "Bạn hợp thu nhập đều đặn: lương, hợp đồng dài hạn, những khoản tích luỹ chậm mà vững.", "loi_khuyen": "Nên tích luỹ theo kế hoạch dài và tránh các lời mời làm giàu nhanh."},
+      "thien_tai_lo": {"tieu_de": "Tiền đến từ nhiều nguồn", "loai": "diem_manh", "y": "Bạn nhạy với cơ hội; tiền có thể đến từ nhiều nguồn như làm thêm, buôn bán, giới thiệu khách.", "loi_khuyen": "Nên giữ một khoản riêng không bao giờ đem đi đầu tư mạo hiểm."}
+    },
+    "tinh_cam": {
+      "nam.sao_ro": {"tieu_de": "Hợp người thực tế, biết vun vén", "loai": "diem_manh", "y": "Chuyện lứa đôi có chỗ rõ trong đời bạn. Bạn hợp người thực tế, biết vun vén và cùng bạn lo chuyện nhà.", "loi_khuyen": "Nên cùng người ấy bàn thẳng chuyện tiền bạc và kế hoạch chung từ sớm."},
+      "nu.sao_ro": {"tieu_de": "Quý người có trách nhiệm, giữ lời", "loai": "diem_manh", "y": "Chuyện lứa đôi có chỗ rõ trong đời bạn. Bạn quý người có trách nhiệm, có chí và biết giữ lời.", "loi_khuyen": "Nên nhìn cách người ấy giữ lời trong việc nhỏ trước khi tin vào lời hứa lớn."},
+      "nam.sao_nang": {"tieu_de": "Dễ gánh nhiều trong tình cảm", "loai": "luu_y", "y": "Trong tình cảm, bạn dễ gánh nhiều: lo kinh tế, chiều ý, mệt mà không nói ra.", "loi_khuyen": "Nên nói rõ phần việc của mỗi người và giữ thời gian nghỉ cho chính mình."},
+      "nu.sao_nang": {"tieu_de": "Dễ chịu áp lực từ người kia", "loai": "luu_y", "y": "Trong tình cảm, bạn dễ chịu áp lực từ người kia: bị kỳ vọng nhiều, bị quản nhiều.", "loi_khuyen": "Nên đặt ranh giới từ đầu: việc gì bạn tự quyết, việc gì hai người cùng bàn."},
+      "nam.sao_vang": {"tieu_de": "Duyên ít khi tự đến", "loai": "luu_y", "y": "Duyên đôi lứa ít khi tự đến; bạn mải việc và ít để ý đến chuyện tình cảm.", "loi_khuyen": "Nên dành thời gian cố định cho gặp gỡ, đừng chờ có dịp mới mở lòng."},
+      "nu.sao_vang": {"tieu_de": "Quen tự lo nên người khác ngại đến gần", "loai": "luu_y", "y": "Bạn quen tự lo, ít chờ ai che chở, nên người khác đôi khi ngại đến gần.", "loi_khuyen": "Nên để người khác giúp mình vài việc nhỏ, đó là cách mở cửa cho tình cảm."},
+      "nu.quan_sat_lan": {"tieu_de": "Dễ phân vân giữa hai kiểu người", "loai": "luu_y", "y": "Bạn dễ phân vân giữa hai kiểu người: một người ổn định, một người cá tính mạnh.", "loi_khuyen": "Nên viết ra ba điều bạn cần nhất ở bạn đời và đối chiếu khi phải chọn."},
+      "nam.tranh": {"tieu_de": "Người ngoài hay xen vào chuyện hai người", "loai": "luu_y", "y": "Bạn bè, người ngoài hay xen vào chuyện riêng của hai người, có khi thành so bì.", "loi_khuyen": "Nên giữ chuyện riêng của hai người trong phạm vi hai người."},
+      "chi_ngay_xung": {"tieu_de": "Nhịp sống hai người dễ lệch nhau", "loai": "luu_y", "y": "Nhịp sống của hai người dễ lệch nhau: người muốn đi, người muốn ở, kế hoạch hay đổi.", "loi_khuyen": "Nên chừa khoảng riêng cho mỗi người và báo trước những thay đổi lớn như chuyển nhà, đổi việc."},
+      "chi_ngay_hinh": {"tieu_de": "Dễ làm khó nhau bằng lời nói", "loai": "luu_y", "y": "Hai người hay làm khó nhau bằng lời nói, nhất là khi mệt.", "loi_khuyen": "Nên cùng giữ một quy tắc: lúc nóng thì tạm dừng, nói lại sau một giờ."},
+      "chi_ngay_hop": {"tieu_de": "Dễ gắn bó lâu dài", "loai": "diem_manh", "y": "Bạn dễ gắn bó và giữ được tình cảm lâu. Có người bên cạnh, bạn ổn định hơn hẳn.", "loi_khuyen": "Nên giữ những thói quen nhỏ của hai người, như bữa tối chung hay cuộc gọi cuối ngày."}
+    },
+    "gia_dinh": {
+      "an_ro": {"tieu_de": "Có chỗ dựa từ mẹ, người lớn", "loai": "diem_manh", "y": "Mẹ hoặc người lớn trong nhà là chỗ dựa của bạn; lúc khó bạn vẫn có nơi để về.", "loi_khuyen": "Nên dành thời gian đều đặn cho người đã che chở mình, kể cả khi bận."},
+      "an_nang": {"tieu_de": "Được lo nhiều nên ngại tự quyết", "loai": "luu_y", "y": "Bạn được lo lắng nhiều, nên đôi khi ngại tự quyết hoặc để người lớn quyết thay.", "loi_khuyen": "Nên cảm ơn sự lo lắng, rồi nói rõ những việc bạn muốn tự quyết."},
+      "an_vang": {"tieu_de": "Sớm phải tự lo", "loai": "luu_y", "y": "Bạn sớm phải tự lo, ít được bao bọc như nhiều người khác.", "loi_khuyen": "Nên cho phép mình nhận giúp đỡ: tự lập không có nghĩa là phải làm một mình."},
+      "tai_pha_an": {"tieu_de": "Việc kiếm tiền lấn thời gian gia đình", "loai": "luu_y", "y": "Chuyện tiền bạc, công việc hay lấn vào thời gian dành cho gia đình và việc học.", "loi_khuyen": "Nên giữ một buổi cố định mỗi tuần cho gia đình và không làm việc trong buổi đó."},
+      "nam_thang_xung": {"tieu_de": "Gốc gác có xáo trộn", "loai": "luu_y", "y": "Gốc gác của bạn có xáo trộn: đổi chỗ ở, sớm rời nhà hoặc khác nếp với cha mẹ.", "loi_khuyen": "Nên chủ động giữ liên lạc với gia đình theo cách hợp với bạn, không cần giống mọi người."},
+      "nam_thang_hop": {"tieu_de": "Nhà có nền nếp gắn kết", "loai": "diem_manh", "y": "Nhà bạn có nền nếp gắn kết; bạn mang theo nhiều thói quen tốt từ cha mẹ.", "loi_khuyen": "Nên truyền lại những nếp nhà ấy cho thế hệ sau."},
+      "anh_em_do": {"tieu_de": "Anh chị em là chỗ dựa", "loai": "diem_manh", "y": "Anh chị em, bạn thân là chỗ dựa thật sự khi bạn cần.", "loi_khuyen": "Nên giữ lời và chia sẻ công bằng để tình thân bền."},
+      "anh_em_tranh": {"tieu_de": "Anh chị em dễ so bì", "loai": "luu_y", "y": "Anh chị em dễ so bì phần hơn phần thiệt, nhất là chuyện tiền và chuyện chăm cha mẹ.", "loi_khuyen": "Nên bàn chuyện chia việc, chia tiền trong nhà bằng giấy trắng mực đen."},
+      "anh_em_it": {"tieu_de": "Bạn thân thay chỗ anh em", "loai": "loi_khuyen", "y": "Bạn ít dựa vào anh chị em; bạn thân thường giữ vai trò ấy.", "loi_khuyen": "Nên giữ vài tình bạn lâu năm như người nhà."},
+      "con_ro": {"tieu_de": "Con cái là động lực lớn", "loai": "diem_manh", "y": "Chuyện con cái có chỗ rõ trong đời bạn; con là động lực lớn để bạn cố gắng.", "loi_khuyen": "Nên kể cho con nghe cả những lần bạn vượt khó, chứ không riêng thành quả."},
+      "con_vang": {"tieu_de": "Chuyện con cái cần sắp xếp sớm", "loai": "loi_khuyen", "y": "Chuyện con cái thường cần bạn chủ động sắp xếp thời gian và sức lực.", "loi_khuyen": "Nên lên kế hoạch sớm cho giai đoạn có con, cả về công việc lẫn tài chính."},
+      "con_vang_lon": {"tieu_de": "Con cái tự lập, cần quan tâm đều", "loai": "loi_khuyen", "y": "Con cái thường tự lập sớm và ít khi nhờ đến bạn; tình thân giữ được nhờ sự hỏi han đều đặn.", "loi_khuyen": "Nên chủ động hẹn gọi điện hỏi thăm con cháu theo lịch, không chờ có việc mới liên lạc."},
+      "gio_ngay_xung": {"tieu_de": "Con cái dễ khác tính bạn", "loai": "luu_y", "y": "Con cái hoặc người trẻ bạn dìu dắt dễ khác tính bạn và muốn đi đường riêng.", "loi_khuyen": "Nên hỏi con nghĩ gì trước khi khuyên, và để con tự chọn ở việc nhỏ."},
+      "gio_ngay_hop": {"tieu_de": "Dễ gần con cái, người trẻ", "loai": "diem_manh", "y": "Bạn hợp với con cái và người trẻ, dễ nói chuyện và dễ được nghe.", "loi_khuyen": "Nên dành thời gian chơi với con, đó là lúc con học từ bạn nhiều nhất."}
+    },
+    "hoc_tap": {
+      "an_hoc": {"tieu_de": "Học sâu, cần hiểu gốc", "loai": "diem_manh", "y": "Bạn học sâu, cần hiểu gốc rễ rồi mới yên tâm làm.", "loi_khuyen": "Nên chọn sách nền và khoá học bài bản thay vì mẹo nhanh."},
+      "thuc_than_hoc": {"tieu_de": "Học bằng cách làm", "loai": "diem_manh", "y": "Bạn học bằng cách làm: thử, nếm, tự tay làm ra thì nhớ lâu.", "loi_khuyen": "Nên biến bài học thành một sản phẩm nhỏ như món ăn, bài viết hay đoạn video."},
+      "thuong_quan_hoc": {"tieu_de": "Học nhanh, ghét học thuộc", "loai": "diem_manh", "y": "Bạn học nhanh, hay đặt câu hỏi vặn và ghét học thuộc lòng.", "loi_khuyen": "Nên học theo dự án có kết quả rõ, và dạy lại cho người khác để tự kiểm tra."},
+      "thien_an_hoc": {"tieu_de": "Hiểu bằng trực giác trước", "loai": "diem_manh", "y": "Bạn có lối nghĩ riêng, hay hiểu bằng trực giác trước khi giải thích được.", "loi_khuyen": "Nên ghi nhanh ý vừa nảy ra rồi kiểm lại bằng số liệu."},
+      "kieu_doat_thuc": {"tieu_de": "Nghĩ kỹ quá nên ý hay bị bỏ", "loai": "luu_y", "y": "Bạn nghĩ rất kỹ nên ý tưởng hay bị chính bạn gạt đi trước khi kịp làm.", "loi_khuyen": "Nên cho mỗi ý tưởng một bản thử nhỏ trong một tuần rồi mới đánh giá."},
+      "hoc_mong": {"tieu_de": "Học tốt nhất qua trải nghiệm thật", "loai": "luu_y", "y": "Bạn học tốt nhất qua trải nghiệm thật; ngồi học lý thuyết lâu dễ nản.", "loi_khuyen": "Nên chọn lộ trình ngắn, có bài tập thật và có người kèm."},
+      "nen_mong": {"tieu_de": "Dễ hổng kiến thức nền", "loai": "luu_y", "y": "Bạn nói và làm nhanh hơn tốc độ học nền, nên đôi khi hổng kiến thức gốc.", "loi_khuyen": "Nên quay lại học phần cơ bản mỗi khi lên một nấc mới."}
+    },
+    "quan_he": {
+      "ban_do": {"tieu_de": "Bạn bè ngang hàng đỡ bạn", "loai": "diem_manh", "y": "Bạn bè, đồng nghiệp ngang hàng hay đỡ bạn lúc cần; làm theo nhóm giúp bạn đi xa hơn.", "loi_khuyen": "Nên chọn một nhóm nhỏ cùng chí hướng và gặp nhau đều đặn."},
+      "ban_tranh": {"tieu_de": "Dễ thành cạnh tranh với người ngang hàng", "loai": "luu_y", "y": "Với người ngang hàng, bạn dễ thành cạnh tranh: ai giỏi hơn, ai được nhiều hơn.", "loi_khuyen": "Nên hợp tác ở việc lớn và chỉ so với chính mình của năm trước."},
+      "ban_it": {"tieu_de": "Quen tự làm, ít nhờ ai", "loai": "loi_khuyen", "y": "Bạn quen tự làm, ít khi nhờ người ngang hàng.", "loi_khuyen": "Nên thử làm chung một dự án nhỏ để thấy lợi ích của làm nhóm."},
+      "ban_vua": {"tieu_de": "Quan hệ ngang hàng vừa phải", "loai": "diem_manh", "y": "Bạn giữ quan hệ ngang hàng ở mức vừa phải: có người để cùng làm, ít khi tranh phần với ai.", "loi_khuyen": "Nên chủ động rủ người giỏi hơn mình một chút vào việc chung để cùng tiến."},
+      "ap_luc_ngoai": {"tieu_de": "Dễ chịu sức ép từ người có quyền", "loai": "luu_y", "y": "Bạn dễ chịu sức ép từ người có quyền: sếp, khách hàng lớn, người lớn tuổi.", "loi_khuyen": "Nên ghi lại thoả thuận bằng văn bản và hỏi lại khi yêu cầu không rõ."}
+    }
+  },
+  "phoi_ngau": {
+    "Tỷ Kiên": {"tieu_de": "Gắn bó như hai người bạn ngang hàng", "loai": "diem_manh", "y": "Bạn hợp kiểu quan hệ như hai người bạn ngang hàng: cùng làm, cùng quyết.", "loi_khuyen": "Nên chia rõ việc nhà, việc tiền để không ai thấy thiệt."},
+    "Kiếp Tài": {"tieu_de": "Dễ ganh nhau phần hơn", "loai": "luu_y", "y": "Bạn và người ấy dễ ganh nhau phần đúng, phần hơn.", "loi_khuyen": "Nên khen nhau nhiều hơn và tránh so ai đóng góp nhiều."},
+    "Thực Thần": {"tieu_de": "Muốn một mái nhà dễ chịu", "loai": "diem_manh", "y": "Bạn muốn một mái nhà dễ chịu, ăn ngon, nói chuyện vui, và hay chiều người mình thương.", "loi_khuyen": "Nên giữ chút thời gian riêng để không cạn sức vì chiều người khác."},
+    "Thương Quan": {"tieu_de": "Đòi hỏi cao ở người ấy", "loai": "luu_y", "y": "Bạn đòi hỏi cao ở người ấy và dễ chê khi thất vọng.", "loi_khuyen": "Nên nói điều bạn cần thay vì nói điều người ấy làm sai."},
+    "Thiên Tài": {"tieu_de": "Rộng rãi, thích làm người ấy bất ngờ", "loai": "diem_manh", "y": "Bạn rộng rãi, thích làm người ấy bất ngờ, quan hệ có nhiều niềm vui.", "loi_khuyen": "Nên giữ cả sự đều đặn hằng ngày bên cạnh những điều bất ngờ."},
+    "Chính Tài": {"tieu_de": "Chung thuỷ, coi trọng ổn định", "loai": "diem_manh", "y": "Bạn chung thuỷ, coi trọng sự ổn định và chăm lo đời sống hai người.", "loi_khuyen": "Nên thỉnh thoảng làm điều mới để quan hệ không nhạt."},
+    "Thất Sát": {"tieu_de": "Thương nhiều, va chạm cũng nhiều", "loai": "luu_y", "y": "Quan hệ của bạn có nhiều cảm xúc mạnh: thương nhiều mà va chạm cũng nhiều.", "loi_khuyen": "Nên học cách tranh luận không xúc phạm và làm lành trong ngày."},
+    "Chính Quan": {"tieu_de": "Nghiêm túc, muốn cam kết rõ", "loai": "diem_manh", "y": "Bạn nghiêm túc trong tình cảm, muốn một quan hệ rõ ràng, có cam kết.", "loi_khuyen": "Nên để người ấy thấy cả mặt mềm của bạn bên cạnh mặt đúng mực."},
+    "Thiên Ấn": {"tieu_de": "Cần nhiều khoảng riêng", "loai": "luu_y", "y": "Bạn cần nhiều khoảng riêng trong quan hệ, có lúc khiến người ấy thấy xa cách.", "loi_khuyen": "Nên báo trước khi bạn cần ở một mình để người ấy không hiểu lầm."},
+    "Chính Ấn": {"tieu_de": "Tìm sự chăm sóc và thấu hiểu", "loai": "diem_manh", "y": "Bạn tìm ở người ấy sự chăm sóc, thấu hiểu, và cũng chăm người ấy như người nhà.", "loi_khuyen": "Nên để cả hai cùng lớn lên, tránh một người lo hết cho người kia."}
+  },
+  "suc_khoe": {
+    "than": {
+      "manh": {"y": "Sức bền của bạn khá tốt, nhưng bạn hay ép mình làm quá vì tin vào sức.", "loi_khuyen": "Nên nghỉ theo lịch, không chờ đến lúc mệt mới nghỉ."},
+      "yeu": {"y": "Bạn dễ đuối khi ôm nhiều việc cùng lúc; sức hồi lại chậm hơn bạn nghĩ.", "loi_khuyen": "Nên ngủ đủ, chia việc lớn thành phần nhỏ và nghỉ ngắn giữa các phần."},
+      "can_bang": {"y": "Sức lực của bạn lên xuống không nhiều; bạn hồi sức khá nhanh sau một đêm ngủ tốt.", "loi_khuyen": "Nên vận động nhẹ mỗi ngày và khám sức khoẻ định kỳ mỗi năm."}
+    },
+    "can_doi": "Năm hành trong lá số của bạn khá cân, không có phần nào lệch hẳn.",
+    "chung": "Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám."
+  },
+  "van": {
+    "Tỷ Kiên": {"chu_de": "tự lập, làm theo cách của mình, bạn bè ngang hàng", "nen_thuan": "Hợp để tự đứng ra làm, mở việc riêng, rủ người cùng chí hướng.", "de_vap": "Dễ đông người tranh phần, tiền ra vì bạn bè.", "nen_chu_dong": "Nên giữ tiền riêng và ký kết rõ ràng khi làm chung."},
+    "Kiếp Tài": {"chu_de": "cạnh tranh, liều để thắng, tiền vào ra nhanh", "nen_thuan": "Hợp để thử sức ở môi trường cạnh tranh, giành phần việc lớn hơn.", "de_vap": "Dễ hao tiền vì quyết nhanh.", "nen_chu_dong": "Nên đặt hạn mức chi và tránh góp vốn khi chưa rõ."},
+    "Thực Thần": {"chu_de": "làm ra sản phẩm, tận hưởng, con cái, tay nghề", "nen_thuan": "Hợp để trau tay nghề, làm sản phẩm, lo cho con cái và sống thong thả hơn.", "de_vap": "Dễ ham vui và chậm lại.", "nen_chu_dong": "Nên đặt mục tiêu rõ cho từng năm."},
+    "Thương Quan": {"chu_de": "sáng tạo, thể hiện, đổi khuôn khổ cũ", "nen_thuan": "Hợp để làm điều mới, ra mắt sản phẩm, xây tiếng nói riêng.", "de_vap": "Dễ va chạm với cấp trên và luật lệ.", "nen_chu_dong": "Nên góp ý khéo và giữ giấy tờ rõ ràng."},
+    "Thiên Tài": {"chu_de": "cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn", "nen_thuan": "Hợp để mở rộng quan hệ làm ăn và thử nguồn thu mới.", "de_vap": "Dễ tiêu rộng tay, bỏ vốn theo cảm hứng.", "nen_chu_dong": "Nên giữ khoản dự phòng trước khi mở việc mới."},
+    "Chính Tài": {"chu_de": "thu nhập đều, tích luỹ, chuyện nhà cửa vợ chồng", "nen_thuan": "Hợp để tích luỹ, mua tài sản, ổn định gia đình.", "de_vap": "Dễ bị tiền bạc ràng buộc, làm nhiều mà giữ ít.", "nen_chu_dong": "Nên lập ngân sách theo tháng và bám theo nó."},
+    "Thất Sát": {"chu_de": "áp lực, thử thách, việc lớn đến nhanh", "nen_thuan": "Hợp để nhận vai khó, lên vị trí cần bản lĩnh.", "de_vap": "Dễ quá tải và va chạm với người có quyền.", "nen_chu_dong": "Nên giữ sức khoẻ và chỉ nhận việc thật sự cần."},
+    "Chính Quan": {"chu_de": "vị trí, danh tiếng, trách nhiệm, khuôn phép", "nen_thuan": "Hợp để thăng tiến, nhận chức danh, xây uy tín.", "de_vap": "Dễ bị ràng buộc bởi quy định và kỳ vọng.", "nen_chu_dong": "Nên nói rõ điều mình chịu được và điều không."},
+    "Thiên Ấn": {"chu_de": "học điều lạ, chuyên môn sâu, thời gian nhìn vào bên trong", "nen_thuan": "Hợp để học nghề mới, nghiên cứu, đổi hướng chuyên môn.", "de_vap": "Dễ thu mình, hay nghi và bỏ dở.", "nen_chu_dong": "Nên có người cùng học để giữ nhịp."},
+    "Chính Ấn": {"chu_de": "học hành, bằng cấp, được nâng đỡ, nhà cửa giấy tờ", "nen_thuan": "Hợp để học thêm, thi chứng chỉ, nhờ người đi trước dẫn đường.", "de_vap": "Dễ ỷ lại và chậm ra quyết định.", "nen_chu_dong": "Nên tự cầm một việc từ đầu đến cuối."}
+  },
+  "thang": {"Tỷ Kiên": "hợp làm việc riêng, gặp người cùng chí hướng", "Kiếp Tài": "hợp thi đua, nhưng giữ chặt hầu bao", "Thực Thần": "hợp làm sản phẩm, nghỉ ngơi, lo cho con cái", "Thương Quan": "hợp trình bày ý tưởng mới, cẩn thận lời nói với cấp trên", "Thiên Tài": "hợp gặp đối tác, thử nguồn thu mới", "Chính Tài": "hợp sắp xếp tài chính, trả nợ, tiết kiệm", "Thất Sát": "việc gấp dồn tới, nên làm việc quan trọng nhất trước", "Chính Quan": "hợp nộp hồ sơ, xin xét duyệt, làm việc với cấp trên", "Thiên Ấn": "hợp học điều mới, nghĩ lại kế hoạch", "Chính Ấn": "hợp học thêm, nhờ người đi trước góp ý, lo giấy tờ"},
+  "nam_quan_he": {
+    "xung": {"tieu_de": "Năm có thay đổi ở chuyện gần mình", "y": "Năm có thay đổi ở chuyện gần mình: chỗ ở, công việc thường ngày hoặc chuyện đôi lứa.", "loi_khuyen": "Nên tính trước các thay đổi lớn và đừng quyết nhiều việc lớn cùng lúc."},
+    "hop": {"tieu_de": "Năm dễ có gắn kết mới", "y": "Năm dễ có gắn kết mới: hợp tác, quen người, người nhà gần nhau hơn.", "loi_khuyen": "Nên mở lời trước với người bạn muốn gần thêm."},
+    "hinh": {"tieu_de": "Năm dễ tự tạo áp lực", "y": "Năm bạn dễ tự tạo áp lực cho mình, cầu toàn quá mức.", "loi_khuyen": "Nên giảm kỳ vọng và chọn ba việc chính cho cả năm."}
+  },
+  "tom_tat": {
+    "tong_quan": {"thuan": "Bạn có nhiều điểm tựa sẵn trong người; biết mình mạnh ở đâu thì đi nhanh.", "can_bang": "Bạn có điểm mạnh rõ và vài chỗ dễ vấp; hiểu cả hai thì dễ chọn đường.", "can_chu_dong": "Bạn phải tự cân lại nhiều hơn người khác; đổi lại, bạn hiểu mình sớm và kỹ."},
+    "ngu_hanh": {"thuan": "Năng lượng của bạn khá cân; phần cần thêm đã có sẵn trong lá số.", "can_bang": "Năng lượng của bạn lệch về một phía; thêm đúng phần thiếu thì dễ chịu hơn.", "can_chu_dong": "Năng lượng của bạn lệch rõ; nên chủ động bù phần thiếu qua nếp sống hằng ngày."},
+    "su_nghiep": {"thuan": "Công việc là mảng bạn dễ ra kết quả nếu chọn đúng môi trường.", "can_bang": "Công việc của bạn có điểm tựa, nhưng kết quả tuỳ nhiều vào nơi bạn chọn và cách bạn làm.", "can_chu_dong": "Công việc ít khi tự trôi chảy; bạn cần chọn kỹ môi trường và tự đặt khung cho mình."},
+    "tien_bac": {"thuan": "Tiền bạc là mảng bạn nắm được: kiếm ra và giữ lại đều trong tầm tay.", "can_bang": "Tiền bạc của bạn vào ra khá đều; giữ được bao nhiêu tuỳ thói quen chi tiêu.", "can_chu_dong": "Tiền bạc cần bạn để tâm nhiều hơn; có cách quản rõ ràng thì đỡ hao hụt."},
+    "tinh_cam": {"thuan": "Chuyện tình cảm có nền tốt; bạn dễ gắn bó lâu khi gặp đúng người.", "can_bang": "Tình cảm của bạn có ngọt có va; hiểu nhịp của nhau thì êm hơn nhiều.", "can_chu_dong": "Tình cảm cần bạn chủ động nói rõ và vun đắp; để tự nhiên thì dễ lệch nhịp."},
+    "gia_dinh": {"thuan": "Gia đình là chỗ dựa của bạn; bạn nhận được nhiều và cũng cho lại nhiều.", "can_bang": "Gia đình có chỗ gần, chỗ xa; mỗi người một nếp, cần chút khéo để êm.", "can_chu_dong": "Chuyện gia đình đòi bạn tự lo sớm và giữ ranh giới rõ."},
+    "hoc_tap": {"thuan": "Bạn học nhanh và biết cách biến điều học được thành việc làm.", "can_bang": "Bạn học tốt khi đúng cách học của mình; sai cách thì dễ nản.", "can_chu_dong": "Việc học cần lộ trình rõ và người kèm; tự mày mò dễ đứt giữa chừng."},
+    "suc_khoe": {"thuan": "Nhịp sức của bạn khá đều; giữ nếp sinh hoạt là giữ được sức.", "can_bang": "Nhịp sức của bạn lúc lên lúc xuống, tuỳ nhiều vào nếp ăn ngủ.", "can_chu_dong": "Bạn dễ hao sức hơn mình nghĩ; nên chủ động nghỉ trước khi mệt."},
+    "quan_he": {"thuan": "Người xung quanh hay giúp bạn; bạn đi xa nhờ làm cùng người khác.", "can_bang": "Bên ngoài có người giúp, có người làm phiền; chọn người là việc đáng để tâm.", "can_chu_dong": "Môi trường bên ngoài dễ làm bạn mệt; bạn cần chọn kỹ người cùng làm và giữ ranh giới."}
+  },
+  "cau_tu_soi": {"ngu_hanh": "Lúc nào bạn thấy mình đầy sức, lúc nào thấy cạn, và khi ấy bạn đang làm gì?", "cuoc_doi": "Nhìn lại mười năm vừa qua, điều gì bạn muốn giữ và điều gì muốn bỏ ở mười năm tới?", "su_nghiep": "Việc nào bạn làm mà quên cả giờ giấc, và việc nào làm xong thấy cạn sức?", "tien_bac": "Lần gần nhất bạn tiêu tiền mà thấy đáng, đó là cho điều gì?", "tinh_cam": "Bạn cần người ấy làm gì để thấy được thương, và bạn đã nói điều đó ra chưa?", "gia_dinh": "Nếp nào của gia đình bạn muốn giữ, và nếp nào bạn muốn làm khác?", "hoc_tap": "Điều gần nhất bạn học được nhanh là nhờ cách học nào?", "suc_khoe": "Thói quen nhỏ nào nếu làm đều mỗi ngày sẽ giúp bạn khoẻ hơn nhiều nhất?", "quan_he": "Ai là người làm bạn mạnh lên sau mỗi lần gặp, và lần cuối bạn gặp họ là khi nào?", "nam_nay": "Nếu năm nay chỉ làm xong một việc, bạn chọn việc gì?", "loi_khuyen": "Trong ba việc nên làm, việc nào bạn bắt đầu được ngay tuần này?"}
+}
