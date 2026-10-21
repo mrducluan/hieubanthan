@@ -117,26 +117,31 @@ def api_hop_tham(inp: HopThamInput) -> dict:
     k = inp.nguoi_kia
     try:
         la = _la(_sinh(dv, inp.la_so.gender))
-        ls_kia, can_kia, nam_kia = None, None, None
+        ls_kia, can_kia, nam_kia, ngay_kia = None, None, None, None
         if k.birth_time and k.gender and k.noi_sinh:
             dv_k = _DauVao(TuanTrietInput(
                 birth_date=k.birth_date, birth_time=k.birth_time, gender=k.gender, calendar_type=k.calendar_type,
                 am_nhuan=k.am_nhuan, noi_sinh=k.noi_sinh, vung=k.vung, hoa_linh=inp.la_so.hoa_linh,
                 thang_nhuan=inp.la_so.thang_nhuan, lich=inp.la_so.lich))
             la_k = _la(_sinh(dv_k, k.gender))
-            ls_kia, can_kia, nam_kia = tom_tat(la_k), _can_nam(la_k, dv_k.can), dv_k.am[2]
+            ls_kia, can_kia, nam_kia, ngay_kia = tom_tat(la_k), _can_nam(la_k, dv_k.can), dv_k.am[2], dv_k.duong_goc
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
     if can_kia is None:
+        # QC 2026-10-21: chỉ có ngày → cùng lịch người dùng chọn (`la_so.lich`) và vùng suy từ nơi sinh, như đường đủ giờ.
         try:
-            nam_kia = tuvi_hop_tham.nam_am_viet(k.birth_date, k.calendar_type, k.vung)
+            vung_k = tuvi_hop_tham.vung_tu_noi_sinh(k.vung, k.noi_sinh)
+            nam_kia = tuvi_hop_tham.nam_am_viet(k.birth_date, k.calendar_type, vung_k, inp.la_so.lich,
+                                                am_nhuan=k.am_nhuan)
+            ngay_kia = tuvi_hop_tham.ngay_duong_nguoi_kia(k.birth_date, k.calendar_type, k.am_nhuan, vung_k)
         except ValueError as e:
             raise HTTPException(422, detail=str(e))
         can_kia = lunar.can_chi_nam(nam_kia)[0]
     # HN-2N: năm âm + giới tính hai người → điểm tham khảo (giới tính người kia tuỳ chọn: thiếu thì bỏ cung phi).
+    # Ngày dương → cung phi tính năm theo Lập xuân như /phong-thuy.
     kq = tuvi_hop_tham.lap(tom_tat(la), _can_nam(la, dv.can), can_kia, inp.quan_he, ls_kia=ls_kia,
-                           ban={"nam_am": dv.am[2], "gioi_tinh": inp.la_so.gender},
-                           kia={"nam_am": nam_kia, "gioi_tinh": k.gender})
+                           ban={"nam_am": dv.am[2], "gioi_tinh": inp.la_so.gender, "ngay_duong": dv.duong_goc},
+                           kia={"nam_am": nam_kia, "gioi_tinh": k.gender, "ngay_duong": ngay_kia})
     return {"engine_version": ENGINE_VERSION, **kq}
 
 

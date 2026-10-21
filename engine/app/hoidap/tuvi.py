@@ -888,8 +888,10 @@ def _ngay(d: dt.date | str) -> str:
 
 
 def _ten_thang(t: dict) -> str:
+    """Nửa sau tháng nhuận mang can chi tháng sau → ghi "tính như tháng sau" ngay cạnh can chi (QC 2026-10-21)."""
     dau = {"nua_dau": "nửa đầu ", "nua_sau": "nửa sau "}.get(t.get("phan", ""), "")
-    return f"{dau}tháng {t['thang']}{' nhuận' if t['nhuan'] else ''} âm ({t['can_chi']})"
+    nhu = f"tính như {nhip3.nua_sau_nhu(t['thang'])}, " if t.get("phan") == "nua_sau" else ""
+    return f"{dau}tháng {t['thang']}{' nhuận' if t['nhuan'] else ''} âm ({nhu}{t['can_chi']})"
 
 
 def _cau_duong(d: dict) -> str:

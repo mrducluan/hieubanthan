@@ -31,6 +31,10 @@ const DE_Y = "245 170 80";            // cùng màu hộp "Nên để ý" (.hop-
 
 const ngan = (iso: string) => { const [, m, d] = iso.split("-"); return `${Number(d)}/${Number(m)}`; };
 const tenThang = (t: Thang) => t.nhan_thang ?? `Tháng ${t.thang}${t.nhuan ? " nhuận" : ""}`;
+// Nhãn ngắn (trục biểu đồ, tâm vòng cung): hai nửa tháng nhuận phải khác nhau ("6N·đầu" / "6N·sau" — nửa sau tính
+// như tháng sau, can chi theo tháng sau); tháng thường giữ "Tháng 9".
+const nhanNgan = (t: Thang) =>
+  t.nhuan ? `${t.thang}N${t.phan === "nua_dau" ? "·đầu" : t.phan === "nua_sau" ? "·sau" : ""}` : `Tháng ${t.thang}`;
 const idThe = (goc: string, i: number) => `${goc}-thang-${i}`;
 
 /** Engine cũ (trước NHIP-2) chưa có hộp: dựng một hộp "Nên làm" từ gợi ý để thẻ vẫn đọc được. */
@@ -116,7 +120,7 @@ function BieuDoNhip({ thang, chon, onChon }: { thang: Thang[]; chon: number | nu
                 fill={chon === i ? "rgb(var(--gold) / 0.07)" : "transparent"} />
               <circle cx={p.x} cy={p.y} r={chon === i ? 13 : 11} fill={mau} opacity={0.18} />
               <circle cx={p.x} cy={p.y} r={6.5} fill={mau} stroke="rgb(var(--bg))" strokeWidth="2" />
-              <text x={p.x} y={H - 18} textAnchor="middle" fontSize="11" fill="rgb(var(--fg))">{tenThang(t).replace(/^Nửa (đầu|sau) tháng/, "Th.")}</text>
+              <text x={p.x} y={H - 18} textAnchor="middle" fontSize="11" fill="rgb(var(--fg))">{nhanNgan(t)}</text>
               <text x={p.x} y={H - 5} textAnchor="middle" fontSize="9.5" fill={mau}>{t.nhan_muc}</text>
             </motion.g>
           );
@@ -167,7 +171,7 @@ function VongCung({ cung, t }: { cung: NonNullable<Nhip3ThangOutputT["cung"]>; t
         );
       })}
       <g fontSize="8.5" fill="rgb(var(--fg-muted))">
-        <text x={O * 2} y={O + 16} textAnchor="middle" fontSize="10" fill="rgb(var(--fg))">{tenThang(t).replace(/^Nửa (đầu|sau) tháng/, "Th.")}</text>
+        <text x={O * 2} y={O + 16} textAnchor="middle" fontSize="10" fill="rgb(var(--fg))">{nhanNgan(t)}</text>
         <rect x={O + 8} y={O + 27} width={9} height={9} rx={2} fill="rgb(var(--gold) / 0.16)" stroke="rgb(var(--gold))" />
         <text x={O + 21} y={O + 35}>Chuyện chính</text>
         <circle cx={O + 12.5} cy={O + 47} r={3.5} fill={`rgb(${DIEM_SANG})`} />

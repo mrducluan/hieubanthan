@@ -170,10 +170,15 @@ hại giữa trụ. Tháng "tới" tính theo tiết (ngày giao tiết giờ VN
 
 - **Nhóm thập thần theo hành** (`vai_tro_hanh`): Tỷ Kiếp · Ấn · Thực Thương · Tài · Quan Sát. Tỉ lệ nhóm = điểm hành / tổng.
   Độ đậm: ≥ 30% `dam` · ≥ 12% `vua` · > 0 `mong` · 0 `vang`; "có mặt rõ" = dam / vua.
-- **Hợp sức**: +1 khi hành của nhóm là hành cần thêm (cách 1) và nhóm có mặt rõ; −1 khi là hành nên bớt và nhóm đậm.
+- **Hợp sức** (chấm RIÊNG cho từng cách — QC 2026-10-21): +1 khi hành của nhóm là hành cần thêm theo cách ấy và nhóm có
+  mặt rõ; −1 khi là hành nên bớt theo cách ấy và nhóm đậm.
 - **Hai cách (dụng thần — KHÔNG tự chọn, `chon = None`)**: cách 1 "cân sức" = phù ức + điều hậu (hành nên bớt = phần còn
   lại khi thân vượng / nhược); cách 2 "theo tháng sinh" = hỷ / kỵ theo nhóm của cách cục (KB `cach.<ma>.hy/ky`, có bản riêng
   khi thân nhược / vượng — vd Tài cách thân nhược: hỷ Ấn, kỵ Tỷ Kiếp).
+
+Mảng có phần phụ thuộc dụng thần (Con người bạn, Năng lượng, Công việc, Tiền bạc, Tình cảm, Gia đình) chấm mức theo
+**từng cách** (`muc_cach_1`, `muc_cach_2`, trả ở `chuong[].hai_cach_muc`) rồi gộp bằng `gop_muc` — cùng luật đại vận bên
+dưới; khác nhau → thân bài nói rõ "theo cách cân sức thì…, theo tháng sinh thì…", "Vì sao nói vậy" ghi mức từng cách.
 
 | Mảng | Luật (điểm ≥ 2 Thuận lợi · ≤ −1 Cần chủ động · còn lại Cân bằng) |
 |---|---|
@@ -183,8 +188,8 @@ hại giữa trụ. Tháng "tới" tính theo tiết (ngày giao tiết giờ VN
 | Gia đình | Ấn rõ +1 + hợp sức; Tài đậm phá Ấn −1; trụ năm–tháng xung / hình / hại −1, hợp +1; anh em (Tỷ Kiếp), con cái (nam Quan Sát, nữ Thực Thương; trụ ngày–giờ) chỉ thêm hộp |
 | Học & nghĩ | Ấn rõ +1, Thực Thương rõ +1; Ấn đậm lấn Thực Thương −1; cả hai mỏng −1; Văn Xương / Thái Cực / Hoa Cái +1 |
 | Bạn bè, bên ngoài | thân yếu có bạn ngang hàng đỡ +1; thân mạnh mà Tỷ Kiếp đậm −1; Quan Sát đậm đè thân yếu −1; Thiên Ất Quý Nhân +1; Vong Thần −1; Kiếp Sát −1 |
-| Con người bạn | thân trung hoà +1; hành cần thêm (cách 1) có mặt rõ +1, vắng hẳn −1; ≥ 2 sao cát +1; ≥ 2 sao hung −1 |
-| Năng lượng | phù ức / điều hậu không cần hoặc hành cần bù đã có mặt rõ: +1 mỗi phần; vắng hẳn −1 |
+| Con người bạn | thân trung hoà +1; hành cần thêm (của từng cách) có mặt rõ +1, vắng hẳn −1; ≥ 2 sao cát +1; ≥ 2 sao hung −1 |
+| Năng lượng | cách 1: phù ức / điều hậu không cần hoặc hành cần bù đã có mặt rõ +1 mỗi phần, vắng hẳn −1; cách 2: hỷ (như trên) + kỵ (hành nên bớt đậm −1, đều mỏng +1) |
 | Sức khoẻ | theo độ lệch: thiếu ≥ 2 hành hoặc một hành ≥ 45% → Cần chủ động; không thiếu và hành lớn nhất < 35% → Thuận lợi |
 
 **Đại vận / lưu niên / lưu nguyệt**: mỗi cách chấm can (1 điểm) + chi (2 điểm, hành bản khí) — hành cần thêm cộng, hành
@@ -217,7 +222,8 @@ Thêm so với Tử vi: `chuong[tong_quan].than_do = {ti_le, vuong_tu, nhuoc_duo
 `chuong[ngu_hanh].bieu_do = {hanh: [{hanh, diem, ty_le, nhom, trang_thai: thieu|thua|vua, cach_1, cach_2}], nhat_chu}`,
 `chuong[ngu_hanh].hai_cach = {cach_1: {ten, hanh}, cach_2: {ten, hanh, ma}, chon: null}`,
 `thoi_gian_bieu[] += {nhan: "vận Ất Dậu", muc_cach_1, muc_cach_2, hai_cach_khac}` (`cung` = can chi của vận),
-`chuong[nam_nay].nam_xem`. Thuật ngữ (thập thần, nhật chủ, dụng thần, can chi…) chỉ ở `can_cu`.
+`chuong[nam_nay].nam_xem`, `chuong[cuoc_doi|nam_nay].van_tham_chieu = {trang_thai: dang_di|chua_khoi|da_qua_van_cuoi,
+chi_so}` (một hàm cho cả hai chương), `chuong[<mảng>].hai_cach_muc = {cach_1, cach_2}`. Thuật ngữ (thập thần, nhật chủ, dụng thần, can chi…) chỉ ở `can_cu`.
 
 **Mã kiểm chứng `ds.bt.<chương>.<…>`** (vd `ds.bt.tien_bac.tai_nang_than_yeu.vap`, `ds.bt.cuoc_doi.thuong_quan.thuan.hien_tai`):
 dùng tiền tố `ds.` để đi qua ràng buộc có sẵn của migration 0017 (loại `doi_song`, mã `^ds\.…`) — **không cần migration
@@ -240,6 +246,29 @@ Trang `/bat-tu` dùng chung `components/luan-giai/BaoCaoDoiSong` (hộp nổi b�
 khoá chương SAO-2) + `BieuDoBatTu.tsx` (thanh sức tự thân, 5 cột ngũ hành, dải đại vận hai cách — `motion`, tôn trọng
 prefers-reduced-motion, SVG nội dòng). Route `/api/battu/luan-giai` gửi `trong_so` + `ca_nhan` như Tử vi
 (`lib/hoc-tuvi.themHocLuanGiai`). E2E: `e2e/luan-giai-bat-tu.spec.ts` (fixture sinh từ engine thật).
+
+### 6.7 QC 2026-10-21 (rà sau khi giao BT-ĐS)
+
+Đã sửa (test viết trước, `tests/test_battu_doi_song.py` mục "QC 2026-10-21"):
+
+1. **Không có đại vận "đang đi"**: `van_tham_chieu(tgb, nam_xem)` chọn vận tham chiếu + trạng thái (`dang_di` /
+   `chua_khoi` / `da_qua_van_cuoi`); chương "Các giai đoạn" và "Năm nay" dùng cùng kết quả, câu riêng từng trạng thái
+   ở KB `van_tham_chieu` (nháp AI). Người đã qua 8 vận không còn đọc "mười năm này / mười năm tới bắt đầu năm 2016";
+   chương Các giai đoạn lấy vận cuối làm "gần nhất" (mã `…gan_nhat`, `…truoc`); trẻ chưa khởi vận không còn tóm tắt
+   "Mười năm này…". Chưa khởi vận / đã qua vận cuối: mức chương Năm nay theo lưu niên. Test 1936–1959 + trẻ sơ sinh.
+2. **Mức mảng đời ngầm theo dụng thần cách 1**: chấm theo cả hai cách rồi gộp như đại vận (mục 6.2). Golden 12/15 lá
+   đổi mức; 169/315 lá (golden + 300 ngẫu nhiên) đổi ít nhất một mức, đa số Cân bằng → Thuận lợi khi một cách thấy
+   thuận, cách kia cân bằng.
+3. **Hai hộp "dễ vấp" trái nhau ở chương Con người bạn** (vd "quá chặt với tiền" + "tiền vào nhanh ra cũng nhanh"):
+   mỗi chủ đề (`CHU_DE_VAP`: tiền, nóng vội, một mình gánh…) chỉ giữ một hộp — nét nổi nhất thắng nét của cách cục.
+   Test 300 lá.
+
+Cùng đợt (ngoài BT-ĐS): "Xem lá số 2 người" — cung phi năm theo Lập xuân như `/phong-thuy` (ghi rõ khi mốc Tết cho
+quái khác), người kia chỉ có ngày dùng cùng lịch người dùng chọn và suy vùng từ nơi sinh (miền Nam 1960–1975 lịch
+UTC+8); "3 tháng tới" — nhãn "Nửa sau tháng 6 nhuận (tính như tháng 7)", trục biểu đồ "6N·đầu" / "6N·sau".
+
+**Việc mở (chưa sửa, có chủ ý)**: đại vận "đang đi" tính theo NĂM dương, bỏ qua ngày khởi vận — quy ước chung với
+`calc/battu.py` (đại vận hiện tại) và hỏi đáp Bát tự; tính theo ngày khởi vận cần sửa ở calc cho mọi nơi cùng lúc.
 
 ## 7. Rà chung chung Tử vi 2026-10-21
 

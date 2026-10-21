@@ -154,9 +154,19 @@ def _cau(nhom: str, cung: str, mac: str) -> str:
     return _chuoi(kb.nhip_lay(nhom, cung)) or _MAC[mac].replace("{mang}", MANG.get(cung, cung))
 
 
+def nua_sau_nhu(thang: int) -> str:
+    """Nửa sau tháng nhuận (`thang_nhuan="thang_sau"`) tính như tháng kế: "tháng 7" · tháng 12 nhuận → "tháng 1 năm
+    sau". Dùng chung cho nhãn nhịp 3 tháng và hỏi đáp (`hoidap.tuvi._ten_thang`)."""
+    sau = thang % 12 + 1
+    return f"tháng {sau}" + (" năm sau" if sau == 1 else "")
+
+
 def nhan_thang(t: dict) -> str:
-    """"tháng 9" · "tháng 6 nhuận" · "nửa đầu tháng 6 nhuận" — chữ thường, để ghép giữa câu."""
+    """"tháng 9" · "tháng 6 nhuận" · "nửa đầu tháng 6 nhuận" · "nửa sau tháng 6 nhuận (tính như tháng 7)" — chữ
+    thường, để ghép giữa câu. Nửa sau mang can chi THÁNG SAU, nên nhãn nói rõ để can chi in cạnh không gây hiểu lầm."""
     s = f"tháng {t['thang']}" + (" nhuận" if t["nhuan"] else "")
+    if t["phan"] == "nua_sau":
+        s += f" (tính như {nua_sau_nhu(t['thang'])})"
     return {"nua_dau": "nửa đầu ", "nua_sau": "nửa sau "}.get(t["phan"], "") + s
 
 
@@ -379,7 +389,8 @@ def lap(sinh: dict, ngay_xem: dt.date, phai: str = ln.MAC_DINH, ls: dict | None 
                                                    cung=x["cung"], mang=MANG.get(x["cung"], x["cung"]))}
                  for x in ly]
         dg = dien_giai_thang(t, th, luu_nien[n], muc, ly, ly_do, ln.PHAI[phai]["ten"], truoc)
-        return {"thang": t["thang"], "nhuan": t["nhuan"], "phan": t["phan"], "nam_am": n, "can_chi": t["can_chi"],
+        return {"thang": t["thang"], "nhuan": t["nhuan"], "phan": t["phan"], "thang_tinh": t["thang_tinh"],
+                "nam_am": n, "can_chi": t["can_chi"],
                 "tu": t["tu"].isoformat(), "den": t["den"].isoformat(), "cung_goc": t["cung_goc"],
                 "chu_de": t["chu_de"], "muc": muc, "nhan_muc": NHAN_MUC[muc], "ly_do": ly_do, "tu_hoa_thang": th,
                 **dg}

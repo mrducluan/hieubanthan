@@ -284,6 +284,8 @@ export const Nhip3ThangOutput = z.object({
   cung: z.array(z.object({ ten: z.string(), chi: z.string(), nhan_ngan: z.string() }).passthrough()).optional(),
   thang: z.array(z.object({
     thang: z.number(), nhuan: z.boolean(), phan: z.string(), nam_am: z.number(), can_chi: z.string(),
+    /** Số tháng dùng để tính (nửa sau tháng nhuận = tháng kế; can chi đi theo số này). */
+    thang_tinh: z.number().optional(),
     tu: z.string(), den: z.string(), cung_goc: z.string(), chu_de: z.string().nullable(),
     muc: z.enum(["thuan", "binh", "can_than"]), nhan_muc: z.string(),
     ly_do: z.array(z.object({ ma: z.string(), noi_dung: z.string() }).passthrough()),
