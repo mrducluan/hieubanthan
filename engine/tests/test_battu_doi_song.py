@@ -141,10 +141,11 @@ def test_cham_mang_la_mau():
     # quan_he: Thiên Ất Quý Nhân +1, Vong Thần −1 = 0 → cân bằng
     # suc_khoe: thiếu Mộc, Hỏa chiếm 48% (≥ 45%) → cần chủ động
     # tong_quan: hành hỷ Kim có mặt rõ +1, ≥ 2 sao cát +1 = 2 → thuận
-    # ngu_hanh: cách 1 có Kim rõ +1, điều hậu cần Thủy chỉ 11% → 0 = 1 → cân bằng
+    # ngu_hanh: cách 1 có Kim rõ +1, điều hậu cần Thủy chỉ 11% → 0 = 1 → cân bằng; cách 2: hỷ Kim rõ +1, kỵ Thủy 11%
+    #   không nổi +1 = 2 → thuận; gộp (một cách cân bằng → theo cách còn lại) = thuận (QC 2026-10-21: trước đây chỉ chấm cách 1)
     assert muc == {"su_nghiep": "thuan", "tien_bac": "can_bang", "tinh_cam": "can_chu_dong", "gia_dinh": "can_bang",
                    "hoc_tap": "thuan", "quan_he": "can_bang", "suc_khoe": "can_chu_dong", "tong_quan": "thuan",
-                   "ngu_hanh": "can_bang"}
+                   "ngu_hanh": "thuan"}
     assert all(v["can_cu"] for v in cm.values())
 
 
@@ -450,3 +451,146 @@ def test_golden(ca):
                 assert h["huong_xu_ly"] in h["noi_dung"]
     sk = next(c for c in b["chuong"] if c["ma"] == "suc_khoe")
     assert kb.suc_khoe_chung() in sk["doan"]
+
+
+# ------------------------------------------------------------------ QC 2026-10-21
+def _ch(b: dict, ma: str) -> dict:
+    return next(c for c in b["chuong"] if c["ma"] == ma)
+
+
+def _chu_thoi_gian(b: dict) -> str:
+    nn, cd = _ch(b, "nam_nay"), _ch(b, "cuoc_doi")
+    return " ".join([nn["tom_tat"], *nn["doan"], *(h["tieu_de"] + " " + h["noi_dung"] for h in nn["hop"]),
+                     cd["tom_tat"], *cd["doan"], *(h["tieu_de"] + " " + h["noi_dung"] for h in cd["hop"])])
+
+
+@pytest.mark.parametrize("nam", range(1936, 1960))
+def test_van_tham_chieu_nguoi_lon_tuoi(nam):
+    """Lỗi QC 1: người đã qua hết 8 đại vận không được đọc "mười năm này / mười năm tới bắt đầu năm <quá khứ>", chương
+    Các giai đoạn không lấy vận áp chót làm "gần đây". Hai chương dùng CÙNG một vận tham chiếu + trạng thái."""
+    for gt, thang in (("nam", 1), ("nu", 7)):
+        b = toan_bo.battu({"lich": dt.datetime(nam, thang, 15, 10), "gioi_tinh": gt}, ngay_xem=XEM)
+        tgb = b["thoi_gian_bieu"]
+        cd, nn = _ch(b, "cuoc_doi"), _ch(b, "nam_nay")
+        assert cd["van_tham_chieu"] == nn["van_tham_chieu"]
+        ht = [i for i, g in enumerate(tgb) if g["hien_tai"]]
+        if ht:
+            assert nn["van_tham_chieu"] == {"trang_thai": "dang_di", "chi_so": ht[0]}
+            continue
+        assert XEM.year > tgb[-1]["nam_den"]
+        assert nn["van_tham_chieu"] == {"trang_thai": "da_qua_van_cuoi", "chi_so": len(tgb) - 1}
+        chu = _chu_thoi_gian(b)
+        for cum in ("Mười năm này", "mười năm tới", "Mười năm sắp tới", "Giai đoạn gần đây", "Giai đoạn sau đó",
+                    "Giai đoạn bạn đang đi"):
+            assert cum not in chu, (nam, gt, cum)
+        van = next(h for h in nn["hop"] if h["ma_mau"].startswith("ds.bt.nam_nay.van."))
+        assert f"{tgb[-1]['nam_tu']}–{tgb[-1]['nam_den']}" in van["noi_dung"]
+        dau = next(h for h in cd["hop"] if h["loai"] == "thoi_diem")
+        assert (dau["tu_tuoi"], dau["den_tuoi"]) == (tgb[-1]["tu_tuoi"], tgb[-1]["den_tuoi"])
+
+
+def test_van_tham_chieu_vi_du_1944():
+    b = toan_bo.battu({"lich": dt.datetime(1944, 1, 15, 10), "gioi_tinh": "nam"}, ngay_xem=XEM)
+    assert _ch(b, "nam_nay")["van_tham_chieu"]["trang_thai"] == "da_qua_van_cuoi"
+    assert "bắt đầu năm 2016" not in _chu_thoi_gian(b)
+
+
+def test_van_tham_chieu_tre_chua_khoi_van():
+    b = toan_bo.battu({"lich": dt.datetime(2026, 10, 20, 10), "gioi_tinh": "nam"}, ngay_xem=XEM)
+    tgb = b["thoi_gian_bieu"]
+    cd, nn = _ch(b, "cuoc_doi"), _ch(b, "nam_nay")
+    assert cd["van_tham_chieu"] == nn["van_tham_chieu"] == {"trang_thai": "chua_khoi", "chi_so": 0}
+    chu = _chu_thoi_gian(b)
+    assert "Mười năm này" not in chu and "Giai đoạn bạn đang đi" not in chu
+    van = next(h for h in nn["hop"] if h["ma_mau"].startswith("ds.bt.nam_nay.van."))
+    assert str(tgb[0]["nam_tu"]) in van["noi_dung"] and str(tgb[0]["nam_tu"]) in nn["tom_tat"]
+
+
+def test_van_tham_chieu_dang_di_giu_loi_cu(bc):
+    nn = _ch(bc, "nam_nay")
+    assert nn["van_tham_chieu"] == {"trang_thai": "dang_di", "chi_so": 3}
+    assert nn["tom_tat"].startswith("Mười năm này xoay quanh")
+    assert "năm thứ 1 của giai đoạn" in nn["hop"][0]["noi_dung"]
+
+
+_MANG_HAI_CACH = ("tong_quan", "ngu_hanh", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh")
+
+
+def _gop(m1: str, m2: str) -> str:
+    s = {"thuan": 1, "can_bang": 0, "can_chu_dong": -1}
+    t = s[m1] + s[m2]
+    return "thuan" if t > 0 else "can_chu_dong" if t < 0 else "can_bang"
+
+
+def test_muc_mang_cham_ca_hai_cach_la_mau():
+    """Lỗi QC 2: mức mảng đời không được ngầm theo dụng thần cách 1. Lá mẫu: ngũ hành theo cân sức = cân bằng (Kim rõ,
+    điều hậu Thủy chưa rõ), theo tháng sinh = thuận (Kim rõ) → gộp thuận; tình cảm: cân sức trừ Tài đậm (hành nên
+    bớt) → cần chủ động, tháng sinh không coi Hỏa là kỵ → cân bằng → gộp cần chủ động."""
+    cm = bt.cham_mang(bt.phan_tich(bt._la_so(SINH)))
+    for ma in _MANG_HAI_CACH:
+        assert {"muc_cach_1", "muc_cach_2"} <= set(cm[ma]), ma
+        assert cm[ma]["muc"] == _gop(cm[ma]["muc_cach_1"], cm[ma]["muc_cach_2"]), ma
+    assert (cm["ngu_hanh"]["muc_cach_1"], cm["ngu_hanh"]["muc_cach_2"], cm["ngu_hanh"]["muc"]) == \
+        ("can_bang", "thuan", "thuan")
+    assert (cm["tinh_cam"]["muc_cach_1"], cm["tinh_cam"]["muc_cach_2"], cm["tinh_cam"]["muc"]) == \
+        ("can_chu_dong", "can_bang", "can_chu_dong")
+    assert any(c.startswith("Theo cách cân sức") for c in cm["tinh_cam"]["can_cu"])
+    assert any(c.startswith("Theo tháng sinh") for c in cm["tinh_cam"]["can_cu"])
+
+
+def test_muc_mang_hai_cach_tren_nhieu_la():
+    import random
+    rd = random.Random(21)
+    khac = nguoc = 0
+    for _ in range(120):
+        sinh = {"lich": dt.datetime(rd.randint(1940, 2015), rd.randint(1, 12), rd.randint(1, 28), rd.randint(0, 23)),
+                "gioi_tinh": rd.choice(["nam", "nu"])}
+        b = toan_bo.battu(sinh, ngay_xem=XEM)
+        for ma in _MANG_HAI_CACH:
+            c = _ch(b, ma)
+            h = c["hai_cach_muc"]
+            assert c["muc"] == _gop(h["cach_1"], h["cach_2"]), (sinh, ma)
+            cu = " | ".join(c["can_cu"])
+            assert "Theo cách cân sức" in cu and "Theo tháng sinh" in cu, (sinh, ma)
+            if h["cach_1"] != h["cach_2"]:
+                khac += 1
+                nguoc += {h["cach_1"], h["cach_2"]} == {"thuan", "can_chu_dong"}
+                doan = " ".join(c["doan"])
+                assert "theo cách cân sức thì" in doan and "theo tháng sinh thì" in doan, (sinh, ma, c["doan"])
+                assert not THUAT_NGU.search(doan)
+    assert khac > 0 and nguoc > 0
+
+
+_CHU_DE_VAP_TEST = {
+    "noi_bat": {"ty_kien": "mot_minh", "kiep_tai": "tien", "thuc_than": "ngai_kho", "thuong_quan": "luat_le",
+                "thien_tai": "tien", "chinh_tai": "tien", "that_sat": "nong_voi", "chinh_quan": "khuon_phep",
+                "thien_an": "bo_do", "chinh_an": "dua_dam"},
+    "cach": {"chinh_quan": "khuon_phep", "that_sat": "nong_voi", "chinh_tai": "tien", "thien_tai": "tien",
+             "chinh_an": "dua_dam", "thien_an": "bo_do", "thuc_than": "ngai_kho", "thuong_quan": "luat_le",
+             "kien_loc": "mot_minh", "duong_nhan": "nong_voi", "nguyet_kiep": "tien"},
+}
+
+
+def _chu_de_vap(ma: str) -> str | None:
+    p = ma.split(".")
+    if len(p) == 6 and p[2] == "tong_quan" and p[3] in _CHU_DE_VAP_TEST and p[5] == "vap":
+        return _CHU_DE_VAP_TEST[p[3]].get(p[4])
+    return None
+
+
+def test_tong_quan_khong_hai_hop_vap_cung_chu_de(bc):
+    """Lỗi QC 6: "dễ quá chặt với tiền" (nét nổi nhất Chính Tài) và "tiền vào nhanh ra cũng nhanh" (cách Thiên Tài)
+    không cùng nằm trong chương Con người bạn — giữ hộp của nét nổi nhất."""
+    ma = [h["ma_mau"] for h in _ch(bc, "tong_quan")["hop"]]
+    assert "ds.bt.tong_quan.noi_bat.chinh_tai.vap" in ma
+    assert "ds.bt.tong_quan.cach.thien_tai.vap" not in ma
+    import random
+    rd = random.Random(6)
+    for _ in range(300):
+        sinh = {"lich": dt.datetime(rd.randint(1930, 2020), rd.randint(1, 12), rd.randint(1, 28), rd.randint(0, 23)),
+                "gioi_tinh": rd.choice(["nam", "nu"])}
+        b = toan_bo.battu(sinh, ngay_xem=XEM)
+        for c in b["chuong"]:
+            cd = [_chu_de_vap(h["ma_mau"]) for h in c["hop"] if h["loai"] == "luu_y"]
+            cd = [x for x in cd if x]
+            assert len(cd) == len(set(cd)), (sinh, c["ma"], [h["ma_mau"] for h in c["hop"]])

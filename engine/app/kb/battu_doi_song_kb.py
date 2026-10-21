@@ -158,6 +158,16 @@ def nam_quan_he(loai: str) -> dict | None:
     return _chuoi_hoa(_muc(_lay("nam_quan_he", loai)), "tieu_de", "y", "loi_khuyen")
 
 
+VAN_THAM_CHIEU_KHOA = ("cuoc_doi_tom", "cuoc_doi_dau", "cuoc_doi_sau", "nam_nay_tieu_de", "nam_nay_hop",
+                       "nam_nay_muc", "nam_nay_tom")
+
+
+def van_tham_chieu(trang_thai: str) -> dict | None:
+    """Câu theo trạng thái đại vận lúc xem (`dang_di` / `chua_khoi` / `da_qua_van_cuoi`) — mẫu có biến {chu_de},
+    {tu_tuoi}, {den_tuoi}, {nam_tu}, {nam_den}, {so_nam}, {so_van}, {muc}."""
+    return _chuoi_hoa(_muc(_lay("van_tham_chieu", trang_thai)), *VAN_THAM_CHIEU_KHOA)
+
+
 def tom_tat(chuong: str, muc: str) -> str | None:
     return _chuoi(_lay("tom_tat", chuong, muc))
 
