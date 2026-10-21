@@ -150,3 +150,87 @@ nhãn + vectơ từ `fixtures/cau_hoi/huyenhoc_cau_hoi.jsonl`, web upsert `nguon
 Thẻ có `ma_mau` hiện "**78%** trong 120 người có cùng điểm này thấy đúng" khi ≥ 30 phiếu; dưới ngưỡng: "Bạn thấy
 đúng không?" (không hiện số). Số lấy từ `ty_le_kiem_chung`, route web cache 1 giờ. Ghi chú nhỏ: "số người tự bấm, không
 phải kiểm định khoa học".
+
+## 6. Rà chung chung 2026-10-21
+
+Chủ dự án: "Xem lại phần nào luận giải còn mang tính chung chung, không có ý nghĩa thì sửa đi." Phạm vi: 11 chương đời
+sống (trừ `nam_nay` — nhịp tháng do phiên khác sửa), `tuvi_doi_song_kb.json`, `tuvi_kb.json` (nghĩa sao × cung, tứ hoá ×
+cung cho thẻ cung / hỏi đáp / trang SEO), `tuvi_cach_cuc.json`, chữ ghép trong `tuvi_phi_hoa.py`. Không đổi lá số, không
+đổi điểm/mức của cung → không tăng `ENGINE_VERSION`.
+
+### 6.1 Đo — `engine/scripts/do_chung_chung_tuvi.py` (giữ để chạy định kỳ)
+
+`cd engine && .venv/bin/python scripts/do_chung_chung_tuvi.py [--tat-ca] [--chi-tiet]` — 8 lá mẫu (golden
+`lasotuvi_60.json`, người sinh 1946–2005, mỗi kiểu Mệnh một lá) hoặc cả 60 lá. Đơn vị = câu người dùng đọc (tóm tắt,
+đoạn, hộp, dòng thời gian; không gồm "Vì sao nói vậy", câu tự soi, câu miễn trừ cố định).
+
+| Chỉ số (càng thấp càng tốt) | 8 lá trước | 8 lá sau | 60 lá trước | 60 lá sau |
+|---|---|---|---|---|
+| Câu trùng nguyên văn giữa hai lá "khác hẳn" (≤ 3/12 cung cùng bộ chính tinh), trung bình | 0,199 | 0,067 | 0,186 | 0,049 |
+| … cặp tệ nhất | 0,452 | 0,278 | 0,500 | 0,295 |
+| Câu "Barnum" (có ở ≥ 50% số lá) | 30 | 3¹ | 22 | 0 |
+| Câu lặp nguyên văn trong một bài (trung bình / bài) | 4,0 | 0 | 4,02 | 0 |
+| Câu chứa cụm chung chung (KB `cum_chung_chung`) / bài | 14,9 | 0 | 15,3 | 0 |
+| Câu lộ thuật ngữ ngoài "Vì sao nói vậy" / bài | 0 | 0 | 0 | 0 |
+| Câu định nghĩa cung thay vì nói về người xem / bài | 0 | 0 | 0 | 0 |
+| Hộp lưu ý có hướng xử lý chung (một câu cho ≥ 2 mảng đời, hoặc câu dự phòng trong mã) / bài | 2,88 | 0 | 2,85 | 0 |
+| Mục lời luận KB chứa cụm chung chung (đời sống / tuvi_kb / cách cục) | 11 / 6 / 0 | 0 / 0 / 0 | | |
+| Mục lời luận KB chứa cụm cấm giọng AI (đời sống / tuvi_kb / cách cục) | 0 / 3 / 5 | 0 / 0 / 0 | | |
+| Số câu / bài | 133,6 | 128,6 | 132,4 | 127,9 |
+
+¹ Ba câu còn lại là lời theo SAO (lời sức khoẻ của Thiên Cơ, "Ra ngoài bạn mạnh nhất ở chỗ cần lý lẽ" của Cự Môn sáng ở
+Thiên Di) — 4/8 lá mẫu tình cờ có cùng sao ở cùng chỗ; trên 60 lá không còn câu nào ≥ 50%.
+
+Chương `nam_nay` đo riêng (không sửa): trùng giữa lá 0,222 (8 lá) / 0,226 (60 lá); 27/60 bài có câu tháng lặp nguyên
+văn trong chính chương này — chuyển phiên sửa nhịp tháng.
+
+### 6.2 Sửa gì
+
+- **Tóm tắt chương nói VÌ SAO** (`ly_do`, `ly_do_cau`): thay 3 câu mô tả mức dùng chung ("Có cả điểm thuận lẫn chỗ cần
+  để ý; kết quả tuỳ nhiều vào cách bạn làm") bằng lý do lấy từ chính cung: độ sáng chính tinh (lời đời thường), tứ hoá,
+  cát/sát, Tuần/Triệt, cung vô chính diệu, và **tên mảng đời** ở cung xung chiếu / tam hợp đang đỡ hay kéo. Thuận →
+  điều đỡ trước; cần chủ động → điều vướng trước; cân bằng → "…, nhưng …". Cung Tật Ách nói về sức, không nói "nét".
+- **Tuần/Triệt riêng từng cung** (KB `tuan_triet`: câu Tuần, câu Triệt, việc nên làm cho mỗi loại) thay một câu
+  "việc đến chậm… đừng bỏ ngang" cho mọi cung.
+- **Lục sát theo cặp sao** (KB `sat_loi_khuyen` 11 cung × Kình Đà / Hoả Linh / Không Kiếp) và một vế nói rõ cát/sát cụ
+  thể (KB `nhom_sao_chi_tiet`: Khôi Việt → người giúp là người lớn tuổi, Xương Khúc → việc học, giấy tờ…).
+- **Dòng thời gian**: việc nên làm theo MỨC của giai đoạn (KB `dai_han.thuan|can_bang|can_chu_dong`) + lý do; giai
+  đoạn bắt đầu ≤ 12 tuổi dùng lời tuổi đi học (`tuoi_nho` — không còn "lo chỗ ở, tích luỹ tài sản" cho đứa trẻ 6 tuổi).
+  Hộp chương "Các giai đoạn" không chép lại dòng thời gian; "nên tận dụng / nên chuẩn bị trước" chỉ nói giai đoạn chưa
+  qua (người lớn tuổi hết giai đoạn thuận phía trước → hộp mới "Giai đoạn thuận bạn đã đi qua"); câu an ủi chung thay
+  bằng "quãng thuận dài nhất".
+- **Sức khoẻ**: tóm tắt nêu đúng phần cơ thể nên giữ của lá này; bỏ câu chung "các gợi ý dưới đây…"; sát ở Tật Ách theo
+  từng sao (KB `suc_khoe.sat_sao`).
+- **Thân cư** theo cung (KB `than_cu`), **phá cách** nói nét mờ đi khi nào theo nhóm sát hội về (hộp phá cách thứ hai nói
+  khác, không lặp nguyên câu).
+- **Đường bay**: tóm tắt gọi tên mảng hay đỡ / mảng hay kéo; Lộc/Quyền/Khoa dùng câu theo cung đích (KB phi hoá, chỉ
+  đọc) điền mảng phát bằng lời thường; mẫu "*" (không nói mảng phát) không dùng lời mẫu; việc nên làm của Kỵ gắn vào
+  lúc mảng phát đang căng, không lặp giữa hai đường bay.
+- **Lời khuyên**: tóm tắt nêu chỗ dựa lớn nhất / chỗ nên gỡ trước; "Nên gỡ từng điều theo ba việc ngay dưới" → thứ tự
+  mảng cụ thể.
+- **KB thẻ cung / hỏi đáp**: viết lại 48 câu `tu_hoa_cung` (vd "Con cái, sáng tạo mang lại niềm vui.") thành câu cụ thể
+  + một việc nên làm; sửa cụm cấm ("toả sáng", "chìa khoá", "trao quyền", "đồng hành", "tai nạn") ở `tuvi_kb`,
+  `tuvi_cach_cuc`. Bỏ `muc_mo_ta` / `muc_mo_ta_bien_the` (không còn dùng).
+- Danh sách cụm chung chung mới: KB `cum_chung_chung` (46 cụm, tách khỏi `cum_cam`).
+
+**Mã kiểm chứng (`ma_mau`)**: không đổi mã nào. Thêm một mã mới `ds.cuoc_doi.dh_<cung>.thuan.da_qua`. Lời của nhiều mã
+viết lại nhưng cùng điều kiện lá số (cùng sao × cung × sáng/hãm, cùng Tuần/Triệt…), phiếu cũ vẫn dùng được.
+
+### 6.3 Ví dụ trước → sau (lá 15/05/1990 giờ Thìn nam, xem 21/10/2026)
+
+| Chỗ | Trước | Sau |
+|---|---|---|
+| Tóm tắt "Con người bạn" | Nhìn chung, con người bạn ở mức cân bằng. Có cả điểm thuận lẫn chỗ cần để ý; kết quả tuỳ nhiều vào cách bạn làm. | Con người bạn ở mức cân bằng: nét mạnh của bạn dùng được việc, nhưng chuyện tiền bạc lẫn chuyện công việc cũng đang cần bạn lo. |
+| Tuần ở Phu Thê | Ở chuyện tình cảm, vợ chồng, việc thường đến chậm hơn bạn mong. Nên chuẩn bị sớm, kiên nhẫn và đừng bỏ ngang khi chưa thấy kết quả. | Chuyện tình cảm của bạn thường đến muộn hoặc phải qua một hai mối mới thành; quan hệ càng lâu càng bền. Đừng vội cưới cho kịp tuổi; quen đủ lâu để thấy người ấy xử lý một lần cãi nhau và một lần thiếu tiền ra sao. |
+| Thân cư Tài Bạch | Càng lớn tuổi, bạn càng dồn tâm sức cho chuyện tiền bạc. Nên chọn sớm cách làm bền cho mảng này. | Càng lớn tuổi, bạn càng dồn sức vào chuyện kiếm và giữ tiền; bạn yên tâm nhất khi tài khoản có dư. Đặt một con số đủ dùng cho từng năm; đạt rồi thì dành thời gian cho sức khoẻ và người nhà. |
+| Sức khoẻ (tóm tắt + đoạn) | Nhịp sức của bạn khá bền; giữ được nếp sinh hoạt là giữ được sức. Các gợi ý dưới đây xoay quanh nếp ăn ngủ, vận động và khám định kỳ — làm đều mỗi ngày quan trọng hơn làm nhiều một lúc. | Sức của bạn khá bền; chỗ nên giữ kỹ nhất là phổi, hô hấp. |
+| Đường bay (tóm tắt) | Trong đời bạn, các mảng đời kéo nhau khá rõ: chỗ thuận nhiều hơn chỗ vướng. | Mảng hay đỡ cho các mảng khác là chuyện công việc; mảng hay kéo bận tâm sang chỗ khác là chuyện sức khoẻ. |
+| Thẻ cung / hỏi đáp: Hoá Lộc ở Tử Nữ | Con cái, sáng tạo mang lại niềm vui. | Con cái hoặc điều bạn tự làm ra (sản phẩm, học trò) làm bạn tự hào, có khi thành cả nguồn thu. Nên dành thời gian cho con khi mọi việc đang thuận. |
+
+### 6.4 Test chặn tái phạm — `tests/test_tuvi_doi_song_chung_chung.py`
+
+Trên 16 lá golden (mỗi lá thứ 4): (a) trùng giữa hai lá khác hẳn trung bình ≤ **0,10**, cặp tệ nhất ≤ **0,40**, không
+câu nào có ở ≥ 50% số lá; (b) không câu lặp trong một bài (trừ chương "Lời khuyên" gom lại có chủ ý, và lặp nằm trọn
+trong `nam_nay`); (c) không câu nào chứa `cum_chung_chung`, KB lời luận sạch cụm chung chung + cụm cấm; (d) mỗi hộp lưu ý
+có hướng xử lý nằm trong hộp, không phải câu dự phòng trong mã, không dùng chung cho hai mảng đời. Kèm test đơn vị cho lý
+do theo mức, Tuần/Triệt từng cung, lời tuổi đi học, không nói giai đoạn đã qua, sát theo cặp sao, phá cách không lặp.
