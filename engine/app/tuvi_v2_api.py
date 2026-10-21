@@ -3,7 +3,8 @@
 
 - POST /v1/tuvi/phi-hoa       — phi tinh tứ hoá 12 cung (48 đường bay) + tứ hoá lưu niên tuỳ chọn
 - POST /v1/tuvi/nhip-3-thang  — tháng âm hiện tại + 2 tháng sau: Thuận / Bình / Cần thận trọng theo luật công khai
-- POST /v1/tuvi/hop-tham      — can năm người kia phi hoá vào lá của bạn (hai chiều nếu người kia có lá đầy đủ)
+- POST /v1/tuvi/hop-tham      — "Xem lá số 2 người": can năm người kia phi hoá vào lá của bạn (hai chiều nếu người kia
+                                có lá đầy đủ) + điểm tham khảo hợp – khắc 0–100 (HN-2N, luangiai/tuvi_hai_nguoi.py)
 - POST /v1/tuvi/dinh-gio      — so lá số giờ trước / đã nhập / sau (hoặc 12 canh) bằng câu hỏi về năm cũ
 
 Tiền xử lý (múi giờ lịch sử, lịch, phái) dùng lại `_DauVao` của app/tuvi_api.py — không viết lại.
@@ -116,22 +117,26 @@ def api_hop_tham(inp: HopThamInput) -> dict:
     k = inp.nguoi_kia
     try:
         la = _la(_sinh(dv, inp.la_so.gender))
-        ls_kia, can_kia = None, None
+        ls_kia, can_kia, nam_kia = None, None, None
         if k.birth_time and k.gender and k.noi_sinh:
             dv_k = _DauVao(TuanTrietInput(
                 birth_date=k.birth_date, birth_time=k.birth_time, gender=k.gender, calendar_type=k.calendar_type,
                 am_nhuan=k.am_nhuan, noi_sinh=k.noi_sinh, vung=k.vung, hoa_linh=inp.la_so.hoa_linh,
                 thang_nhuan=inp.la_so.thang_nhuan, lich=inp.la_so.lich))
             la_k = _la(_sinh(dv_k, k.gender))
-            ls_kia, can_kia = tom_tat(la_k), _can_nam(la_k, dv_k.can)
+            ls_kia, can_kia, nam_kia = tom_tat(la_k), _can_nam(la_k, dv_k.can), dv_k.am[2]
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
     if can_kia is None:
         try:
-            can_kia = tuvi_hop_tham.can_nam_viet(k.birth_date, k.calendar_type, k.vung)
+            nam_kia = tuvi_hop_tham.nam_am_viet(k.birth_date, k.calendar_type, k.vung)
         except ValueError as e:
             raise HTTPException(422, detail=str(e))
-    kq = tuvi_hop_tham.lap(tom_tat(la), _can_nam(la, dv.can), can_kia, inp.quan_he, ls_kia=ls_kia)
+        can_kia = lunar.can_chi_nam(nam_kia)[0]
+    # HN-2N: năm âm + giới tính hai người → điểm tham khảo (giới tính người kia tuỳ chọn: thiếu thì bỏ cung phi).
+    kq = tuvi_hop_tham.lap(tom_tat(la), _can_nam(la, dv.can), can_kia, inp.quan_he, ls_kia=ls_kia,
+                           ban={"nam_am": dv.am[2], "gioi_tinh": inp.la_so.gender},
+                           kia={"nam_am": nam_kia, "gioi_tinh": k.gender})
     return {"engine_version": ENGINE_VERSION, **kq}
 
 

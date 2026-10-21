@@ -304,6 +304,42 @@ const HoaVao = z.object({
   nghia: z.string().nullable().optional(),
 }).passthrough();
 export type HoaVaoT = z.infer<typeof HoaVao>;
+// HN-2N — "Xem lá số 2 người": điểm tham khảo 0–100 (engine luangiai/tuvi_hai_nguoi.py, luật `hai_nguoi_1`).
+// Web chỉ hiển thị, không tự tính.
+export const MUC_DIEM_HAI_NGUOI = ["de_hoa_hop", "hop_neu_hieu", "can_dung_hoa_nhieu", "nhieu_khac_biet"] as const;
+export const KET_LUAN_TIEU_CHI = ["hop", "binh_hoa", "can_dung_hoa"] as const;
+const HopDiem = z.object({
+  loai: z.enum(["diem_manh", "luu_y"]),
+  tieu_de: z.string(), noi_dung: z.string(),
+  can_cu: z.array(z.string()).default([]),
+  ma_mau: z.string().regex(/^[a-z0-9_.+-]{3,60}$/).optional(),
+  huong_xu_ly: z.string().optional(),
+}).passthrough();
+const TieuChiDiem = z.object({
+  ma: z.enum(["menh", "can", "chi", "cung_phi", "tu_vi"]),
+  ten: z.string(), mo_ta: z.string().nullable().optional(),
+  tinh: z.boolean(),
+  diem: z.number().int().min(0).max(100), toi_da: z.number().int().min(0).max(100),
+  ty_le: z.number().min(0).max(1).nullable(),
+  loai: z.string(),
+  ket_luan: z.enum(KET_LUAN_TIEU_CHI).nullable(), nhan_ket_luan: z.string().nullable(),
+  giai_thich: z.string(),
+  can_cu: z.array(z.string()).default([]),
+  chieu: z.string().optional(),
+}).passthrough();
+export const DiemHaiNguoi = z.object({
+  phien_ban: z.string(),
+  tong: z.number().int().min(0).max(100), toi_da: z.literal(100),
+  muc: z.enum(MUC_DIEM_HAI_NGUOI), nhan_muc: z.string(), mo_ta_muc: z.string(),
+  tieu_chi: z.array(TieuChiDiem).min(1),
+  diem_manh: z.array(HopDiem).max(3).default([]),
+  can_dung_hoa: z.array(HopDiem).max(3).default([]),
+  goi_y: z.array(z.string()).default([]),
+  loi_dan: z.string(),
+  hai_chieu: z.boolean().default(false),
+}).passthrough();
+export type DiemHaiNguoiT = z.infer<typeof DiemHaiNguoi>;
+export type TieuChiDiemT = z.infer<typeof TieuChiDiem>;
 export const HopThamOutput = z.object({
   engine_version: z.string(),
   quan_he: z.string(), nhan_quan_he: z.string(),
@@ -314,7 +350,8 @@ export const HopThamOutput = z.object({
   menh_nguoi_kia_vao_ban: z.array(HoaVao).nullable().optional(),
   tom_tat: z.array(z.string()).default([]),
   luu_y: z.array(z.string()).default([]),
-  khong_cham_diem: z.literal(true),
+  diem: DiemHaiNguoi.nullable().optional(),
+  khong_cham_diem: z.boolean(),
 }).passthrough();
 export type HopThamOutputT = z.infer<typeof HopThamOutput>;
 

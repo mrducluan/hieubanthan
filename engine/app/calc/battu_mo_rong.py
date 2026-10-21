@@ -146,6 +146,7 @@ _TAM_HOI = [(("Dần", "Mão", "Thìn"), "Mộc"), (("Tỵ", "Ngọ", "Mùi"), "
 _CAN_HOP = {frozenset(p): h for p, h in [(("Giáp", "Kỷ"), "Thổ"), (("Ất", "Canh"), "Kim"), (("Bính", "Tân"), "Thủy"),
                                           (("Đinh", "Nhâm"), "Mộc"), (("Mậu", "Quý"), "Hỏa")]}
 _CAN_XUNG = {frozenset(p) for p in [("Giáp", "Canh"), ("Ất", "Tân"), ("Bính", "Nhâm"), ("Đinh", "Quý")]}
+CAN_XUNG = _CAN_XUNG   # HN-2N: tên công khai (cùng giá trị)
 _DOI_SET = {k: {frozenset(p) for p in v} for k, v in _DOI.items()}
 
 

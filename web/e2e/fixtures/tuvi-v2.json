@@ -2708,17 +2708,161 @@
   "can_menh_nguoi_kia": null,
   "menh_nguoi_kia_vao_ban": null,
   "tom_tat": [
+   "Điểm tham khảo: 75/100 — Dễ hoà hợp.",
    "Can năm Ất của người kia vào lá số của bạn: Lộc vào Tài Bạch, Quyền vào Phúc Đức, Khoa vào Tử Nữ, Kỵ vào Phu Thê.",
-   "Quan hệ bạn bè: Lộc, Khoa thường là chỗ dễ hỗ trợ nhau; Kỵ là chỗ nên trò chuyện rõ ràng hơn — không phải lời phán hợp hay không hợp."
+   "Quan hệ bạn bè: Lộc, Khoa thường là chỗ dễ hỗ trợ nhau; Kỵ là chỗ nên trò chuyện rõ ràng hơn."
   ],
   "luu_y": [
-   "Phần hợp tham chỉ cho thấy mảng đời nào hai người dễ chạm vào nhau, không chấm điểm hợp hay khắc.",
+   "Điểm hai người chỉ là tham khảo theo luật dân gian và sách Tử vi, Bát trạch; đường bay cho thấy mảng đời nào hai người dễ chạm vào nhau.",
    "Hoá Kỵ ở đây là chỗ cần nói chuyện kỹ, không phải lý do để xa nhau.",
    "Quan hệ thật do cách hai người cư xử với nhau mỗi ngày; lá số chỉ là một góc để cùng trò chuyện.",
    "Ngày sinh của người kia chỉ dùng để tính lúc xem, không được lưu.",
    "Chỉ có ngày sinh thì xem một chiều (can năm người kia vào lá của bạn); thêm giờ, giới tính, nơi sinh của người kia để xem hai chiều."
   ],
-  "khong_cham_diem": true
+  "diem": {
+   "phien_ban": "hai_nguoi_1",
+   "tong": 75,
+   "toi_da": 100,
+   "muc": "de_hoa_hop",
+   "nhan_muc": "Dễ hoà hợp",
+   "mo_ta_muc": "Phần lớn các tiêu chí nghiêng về thuận. Hai người dễ hiểu nhau mà không cần cố nhiều.",
+   "tieu_chi": [
+    {
+     "ma": "menh",
+     "ten": "Bản mệnh năm sinh",
+     "mo_ta": "Tính nền, cách phản ứng khi vui hay mệt.",
+     "tinh": true,
+     "diem": 24,
+     "toi_da": 24,
+     "ty_le": 1.0,
+     "loai": "tuong_sinh",
+     "ket_luan": "hop",
+     "nhan_ket_luan": "Hợp",
+     "giai_thich": "Hai bạn ở gần nhau thường thấy khoẻ người hơn, chuyện vui dễ nhân đôi. Giữ một thói quen gặp đều, ví dụ cà phê cuối tháng, để cái hợp này không phai.",
+     "can_cu": [
+      "Mệnh nạp âm: bạn Lộ Bàng Thổ (Thổ), người ấy Sơn Đầu Hoả (Hoả). Hoả sinh Thổ — tương sinh, người ấy là bên nâng đỡ."
+     ],
+     "chieu": "kia_sinh_ban",
+     "nguon": {
+      "source_id": "nap_am_luc_thap_hoa_giap",
+      "school_id": "dan_gian_viet"
+     }
+    },
+    {
+     "ma": "can",
+     "ten": "Cách nghĩ, cách quyết",
+     "mo_ta": "Hai người có dễ cùng một ý khi phải chọn hay không.",
+     "tinh": true,
+     "diem": 18,
+     "toi_da": 18,
+     "ty_le": 1.0,
+     "loai": "ngu_hop",
+     "ket_luan": "hop",
+     "nhan_ket_luan": "Hợp",
+     "giai_thich": "Hai bạn dễ rủ được nhau làm việc mới, vì cách nghĩ khớp nhau. Thử cùng học một kỹ năng hay làm một dự án nhỏ — cái hợp này dễ ra kết quả.",
+     "can_cu": [
+      "Thiên can năm: bạn Canh (Kim), người ấy Ất (Mộc). Canh – Ất ngũ hợp."
+     ],
+     "nguon": {
+      "source_id": "thien_can_ngu_hop",
+      "school_id": "dan_gian_viet"
+     }
+    },
+    {
+     "ma": "chi",
+     "ten": "Con giáp",
+     "mo_ta": "Nếp sinh hoạt, cảm giác dễ chịu khi ở gần nhau.",
+     "tinh": true,
+     "diem": 14,
+     "toi_da": 23,
+     "ty_le": 0.6,
+     "loai": "binh",
+     "ket_luan": "binh_hoa",
+     "nhan_ket_luan": "Bình hoà",
+     "giai_thich": "Hai bạn ở mức bình thường, hợp hay không tuỳ có chung sở thích. Tìm một sở thích chung, như thể thao hay một món ăn, làm lý do gặp nhau.",
+     "can_cu": [
+      "Địa chi năm: bạn tuổi Ngọ, người ấy tuổi Hợi — không xung, không hợp."
+     ],
+     "nguon": {
+      "source_id": "dia_chi_hop_xung",
+      "school_id": "dan_gian_viet"
+     }
+    },
+    {
+     "ma": "cung_phi",
+     "ten": "Chỗ ở, không gian chung",
+     "mo_ta": "Gu chọn chỗ ở, chỗ làm, cách bày biện.",
+     "tinh": false,
+     "diem": 0,
+     "toi_da": 0,
+     "ty_le": null,
+     "loai": "chua_tinh",
+     "ket_luan": null,
+     "nhan_ket_luan": null,
+     "giai_thich": "Chưa tính phần này vì thiếu giới tính của một trong hai người — thêm giới tính để có đủ năm tiêu chí. Điểm tổng đã chia lại trên bốn tiêu chí còn lại.",
+     "can_cu": []
+    },
+    {
+     "ma": "tu_vi",
+     "ten": "Lá số Tử vi chạm nhau",
+     "mo_ta": "Năm sinh người ấy rơi vào mảng đời nào của bạn.",
+     "tinh": true,
+     "diem": 19,
+     "toi_da": 35,
+     "ty_le": 0.55,
+     "loai": "binh_hoa",
+     "ket_luan": "binh_hoa",
+     "nhan_ket_luan": "Bình hoà",
+     "giai_thich": "Người bạn này chạm vào lá số của bạn ở mức nhẹ, thân hay sơ tuỳ hai người giữ. Nhắn hỏi thăm khi không có việc gì cần nhờ, tình bạn bền từ đó.",
+     "can_cu": [
+      "Cung trọng tâm của quan hệ bạn bè: Nô Bộc (×1), Mệnh (×0,6), Huynh Đệ (×0,6). Lộc +2, Khoa +1,5, Quyền +1, Kỵ −2 khi rơi vào cung trọng tâm; Kỵ chiếu cung trọng tâm −1.",
+      "Can năm Ất của người ấy: Hoá Lộc (Thiên Cơ) vào cung Tài Bạch của bạn — không tính (ngoài cung trọng tâm).",
+      "Can năm Ất của người ấy: Hoá Quyền (Thiên Lương) vào cung Phúc Đức của bạn — không tính (ngoài cung trọng tâm).",
+      "Can năm Ất của người ấy: Hoá Khoa (Tử Vi) vào cung Tử Nữ của bạn — không tính (ngoài cung trọng tâm).",
+      "Can năm Ất của người ấy: Hoá Kỵ (Thái Âm) vào cung Phu Thê của bạn, chiếu Quan Lộc — không tính (ngoài cung trọng tâm)."
+     ],
+     "nguon": {
+      "source_id": "phi_tinh_trung_chau",
+      "school_id": "phi_tinh"
+     }
+    }
+   ],
+   "diem_manh": [
+    {
+     "loai": "diem_manh",
+     "tieu_de": "Bản mệnh hai người tiếp sức nhau",
+     "noi_dung": "Hai bạn ở gần nhau thường thấy khoẻ người hơn, chuyện vui dễ nhân đôi. Giữ một thói quen gặp đều, ví dụ cà phê cuối tháng, để cái hợp này không phai.",
+     "can_cu": [
+      "Mệnh nạp âm: bạn Lộ Bàng Thổ (Thổ), người ấy Sơn Đầu Hoả (Hoả). Hoả sinh Thổ — tương sinh, người ấy là bên nâng đỡ."
+     ],
+     "ma_mau": "hn.menh.tuong_sinh.ban_be"
+    },
+    {
+     "loai": "diem_manh",
+     "tieu_de": "Dễ đồng ý cách làm",
+     "noi_dung": "Hai bạn dễ rủ được nhau làm việc mới, vì cách nghĩ khớp nhau. Thử cùng học một kỹ năng hay làm một dự án nhỏ — cái hợp này dễ ra kết quả.",
+     "can_cu": [
+      "Thiên can năm: bạn Canh (Kim), người ấy Ất (Mộc). Canh – Ất ngũ hợp."
+     ],
+     "ma_mau": "hn.can.ngu_hop.ban_be"
+    }
+   ],
+   "can_dung_hoa": [],
+   "goi_y": [
+    "Hẹn gặp đều, kể cả khi không có chuyện gì.",
+    "Rạch ròi chuyện tiền khi đi chơi chung.",
+    "Nhớ ngày quan trọng của nhau."
+   ],
+   "loi_dan": "Điểm này là tham khảo, chấm theo luật dân gian và sách Tử vi, Bát trạch. Mối quan hệ tốt hay không do cách hai người cư xử với nhau mỗi ngày.",
+   "hai_chieu": false,
+   "nguon": {
+    "trang_thai": "nhap_ai",
+    "can_doi_chieu": true,
+    "source_id": "hop_tuoi_hai_nguoi",
+    "school_id": "dan_gian_viet"
+   }
+  },
+  "khong_cham_diem": false
  },
  "dinh-gio-mien-nam-1965": {
   "engine_version": "e2e",

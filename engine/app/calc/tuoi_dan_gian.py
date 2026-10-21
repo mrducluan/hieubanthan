@@ -39,6 +39,9 @@ _HINH = {frozenset(x) for x in (("Tý", "Mão"), ("Dần", "Tỵ"), ("Tỵ", "Th
                                 ("Tuất", "Mùi"), ("Sửu", "Mùi"))}
 _NGU_HOP_CAN = {frozenset(x) for x in (("Giáp", "Kỷ"), ("Ất", "Canh"), ("Bính", "Tân"), ("Đinh", "Nhâm"), ("Mậu", "Quý"))}
 _HANH_CAN = dict(zip(CAN, ["Mộc", "Mộc", "Hỏa", "Hỏa", "Thổ", "Thổ", "Kim", "Kim", "Thủy", "Thủy"]))
+# HN-2N: tên công khai cho RULES "Xem lá số 2 người" (cùng giá trị, không đổi luật cũ).
+NGU_HOP_CAN = _NGU_HOP_CAN
+HANH_CAN = _HANH_CAN
 
 
 def tuoi_mu(nam_sinh_am: int, nam_xem_am: int) -> int:
@@ -85,6 +88,12 @@ def quan_he_chi(a: str, b: str) -> str | None:
     if cap in _HINH:
         return "hinh"
     return None
+
+
+def tu_hanh_xung(a: str, b: str) -> bool:
+    """Hai chi khác nhau cùng một nhóm tứ hành xung: Tý Ngọ Mão Dậu · Dần Thân Tỵ Hợi · Thìn Tuất Sửu Mùi
+    (chỉ số chi cùng số dư khi chia 3)."""
+    return a != b and CHI.index(a) % 3 == CHI.index(b) % 3
 
 
 def can_chi_nam(nam_am: int) -> tuple[str, str]:

@@ -1,5 +1,5 @@
 // TV-V2 (docs/NANG-CAP-TUVI-V2.md): 4 khối nâng cao trên /tu-vi — Đường bay tứ hoá, 3 tháng tới, Định giờ sinh,
-// Hợp tham. Lá số thật từ engine; 4 route mới trả OUTPUT THẬT của engine đã ghi sẵn (e2e/fixtures/tuvi-v2.json, cùng
+// Xem lá số 2 người (mã cũ: hợp tham — HN-2N có điểm tham khảo). Lá số thật từ engine; 4 route mới trả OUTPUT THẬT của engine đã ghi sẵn (e2e/fixtures/tuvi-v2.json, cùng
 // hồ sơ HO_SO_MAU) để test UI tất định. Test cuối gọi engine thật qua proxy web cho các ca khó (Tý muộn, không biết
 // giờ, miền Nam 1965, ba tháng vắt sang năm âm sau) — bắt lệch hợp đồng zod giữa web và engine.
 import { test, expect, type Page, type Request } from "@playwright/test";
@@ -102,20 +102,36 @@ test("4 khối TV-V2 hiện, chỉ gọi engine khi mở, không có giọng do�
   await expect.poll(() => goi["dinh-gio"]!.at(-1)?.postDataJSON().nam_doi_chieu).toEqual([2019]);
   expect(goi["dinh-gio"]![0]!.postDataJSON().tat_ca_gio).toBeUndefined();
 
-  // Hợp tham
-  await page.getByRole("button", { name: /Hợp tham hai lá số/ }).click();
+  // Xem lá số 2 người (HN-2N: có điểm tham khảo)
+  await page.getByRole("button", { name: /Xem lá số 2 người/ }).click();
   const form = page.getByTestId("hop-tham-form");
-  await expect(form).toContainText("không chấm điểm hợp hay khắc");
-  await expect(form).toContainText("có giờ, giới tính và nơi sinh thì xem được hai chiều");
+  await expect(form).toContainText("điểm tham khảo 0–100");
+  await expect(form).not.toContainText("không chấm điểm");
+  await expect(form).toContainText("đủ giờ, giới tính và nơi sinh thì xem được hai chiều");
   await expect(form).toContainText("không lưu lại");
   await expect(form.locator("[data-testid^=hop-tham-quan-he-]")).toHaveCount(8);
   await form.getByTestId("hop-tham-quan-he-ban_be").click();
   await form.getByLabel("Ngày sinh người ấy").fill("3");
   await form.getByLabel("Tháng sinh người ấy").fill("4");
   await form.getByLabel("Năm sinh người ấy").fill("1995");
-  await form.getByRole("button", { name: "Xem hai lá số" }).click();
+  await form.getByRole("button", { name: "Xem độ hợp" }).click();
   const kq = page.getByTestId("hop-tham-ket-qua");
-  await expect(kq).toContainText("Không có điểm hợp/khắc");
+  const D = HOP_THAM.diem!;
+  await expect(kq.getByTestId("diem-tong")).toHaveAttribute("data-diem", String(D.tong));
+  await expect(kq.getByTestId("diem-tong")).toContainText(String(D.tong));      // đếm xong
+  await expect(kq.getByTestId("diem-muc")).toHaveText(D.nhan_muc);
+  await expect(kq.locator("[data-testid^=tieu-chi-]")).toHaveCount(5);
+  // chỉ có ngày sinh → chưa tính cung phi, thang chia lại cho 4 tiêu chí
+  await expect(kq.getByTestId("tieu-chi-cung_phi")).toHaveAttribute("data-tinh", "0");
+  await expect(kq.getByTestId("tieu-chi-cung_phi")).toContainText("Chưa tính");
+  for (const t of D.tieu_chi.filter((x) => x.tinh)) await expect(kq.getByTestId(`tieu-chi-${t.ma}`)).toContainText(`${t.diem}/${t.toi_da}`);
+  await expect(kq.getByTestId("hai-nguoi-hop").getByTestId("hop-noi-bat")).toHaveCount(D.diem_manh.length + D.can_dung_hoa.length);
+  await expect(kq.getByTestId("hai-nguoi-goi-y")).toContainText(D.goi_y[0]!);
+  await expect(kq.getByTestId("diem-loi-dan")).toContainText("tham khảo");
+  await expect(kq).not.toContainText("Không có điểm hợp/khắc");
+  // Phần học thuật thu gọn: đường bay chỉ hiện khi mở
+  await expect(kq.getByTestId("hop-tham-kia-vao-ban")).toBeHidden();
+  await kq.getByText("Đường bay tứ hoá chi tiết").click();
   await expect(kq).toContainText(HOP_THAM.nguoi_kia_vao_ban.find((h) => h.hoa === "Kỵ")!.nghia);
   expect(goi["hop-tham"]![0]!.postDataJSON()).toMatchObject({ quan_he: "ban_be", nguoi_kia: { birth_date: "1995-04-03" } });
   expect(goi["hop-tham"]![0]!.postDataJSON().nguoi_kia.birth_time).toBeUndefined();
@@ -130,6 +146,25 @@ test("4 khối TV-V2 hiện, chỉ gọi engine khi mở, không có giọng do�
   const kinds = sk.filter((s) => s.su_kien === "chart_interacted").map((s) => s.kind);
   for (const k of ["phi_hoa", "nhip_3_thang", "hop_tham", "dinh_gio"]) expect(kinds).toContain(k);
   expect(sk.find((s) => s.kind === "dinh_gio")?.lech).toBe(1);
+});
+
+test("Xem lá số 2 người: 360px không tràn ngang, giảm chuyển động thì hiện điểm ngay", async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 360, height: 780 }, reducedMotion: "reduce" });
+  const page = await ctx.newPage();
+  await napHoSo(page);
+  await mock(page);
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: /Xem lá số 2 người/ }).click();
+  const form = page.getByTestId("hop-tham-form");
+  await form.getByLabel("Ngày sinh người ấy").fill("3");
+  await form.getByLabel("Tháng sinh người ấy").fill("4");
+  await form.getByLabel("Năm sinh người ấy").fill("1995");
+  await form.getByRole("button", { name: "Xem độ hợp" }).click();
+  const tong = page.getByTestId("diem-tong");
+  await expect(tong).toContainText(String(HOP_THAM.diem!.tong), { timeout: 300 });
+  const tran = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(tran).toBeLessThanOrEqual(0);
+  await ctx.close();
 });
 
 test("không biết giờ: hồ sơ chọn được, lá số an tạm 12:00, định giờ hỏi đủ 12 canh", async ({ page }) => {
@@ -258,8 +293,11 @@ test("engine thật: 4 route TV-V2 qua proxy web, các ca khó", async ({ reques
     const nh = await goi("nhip-3-thang", { la_so, ngay_xem: "2027-01-20" });
     expect(nh.thang.map((t: { nam_am: number }) => t.nam_am)).toEqual([2026, 2027, 2027]);
     expect(nh.luu_nien_sau.can_chi).toBe("Đinh Mùi");
-    await goi("hop-tham", { la_so, nguoi_kia: { birth_date: "1993-01-20" } });
-    await goi("hop-tham", { la_so, nguoi_kia: { birth_date: "1991-02-14", birth_time: "10:00", gender: "nu", noi_sinh: "ha-noi" } });
+    const mot = await goi("hop-tham", { la_so, nguoi_kia: { birth_date: "1993-01-20" } });
+    expect(mot.diem.tong).toBe(mot.diem.tieu_chi.reduce((s: number, t: { diem: number }) => s + t.diem, 0));
+    const hai = await goi("hop-tham", { la_so, nguoi_kia: { birth_date: "1991-02-14", birth_time: "10:00", gender: "nu", noi_sinh: "ha-noi" } });
+    expect(hai.diem.hai_chieu).toBe(true);
+    expect(hai.khong_cham_diem).toBe(false);
     await goi("dinh-gio", { la_so });
   }
   // Người kia sinh 20/01/1993 (trước Tết Quý Dậu 23/01/1993) → năm âm Nhâm Thân, can Nhâm.

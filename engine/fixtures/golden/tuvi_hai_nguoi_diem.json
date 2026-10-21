@@ -1,0 +1,161 @@
+{
+  "_ghi_chu": "HN-2N — golden TÍNH TAY cho điểm tham khảo 'Xem lá số 2 người' (luật hai_nguoi_1, luangiai/tuvi_hai_nguoi.py). Năm = năm âm lịch Việt. Can = (năm−4) mod 10, chi = (năm−4) mod 12, nạp âm = 60 hoa giáp ÷ 2; cung phi: nam (11 − năm mod 9) mod 9, nữ (năm mod 9 + 4) mod 9, 0→9, 5 → Khôn (nam) / Cấn (nữ); du niên = XOR hào hai quái. Tỉ lệ: Mệnh sinh 1.0 · bình hoà 0.7 · khắc 0.25 | Can ngũ hợp 1.0 · sinh 0.8 · bình 0.6 · khắc 0.35 · xung 0.2 | Chi tam hợp 1.0 · lục hợp 0.9 · trùng/không xung hợp 0.6 · tứ hành xung 0.45 · hại/hình 0.35 · lục xung 0.15 | Cung phi Sinh Khí 1.0 · Diên Niên 0.95 · Thiên Y 0.9 · Phục Vị 0.7 · Hoạ Hại 0.4 · Lục Sát 0.3 · Ngũ Quỷ 0.2 · Tuyệt Mệnh 0.1 | Tử vi 0.55 + 0.1 × r (kẹp 0..1), r = Σ hoá vào cung trọng tâm (Lộc +2, Khoa +1.5, Quyền +1, Kỵ −2) × trọng số cung + Kỵ xung cung trọng tâm −1 × trọng số; hai chiều = trung bình. Thang 20/15/20/15/30; thiếu giới tính bỏ cung phi, chia lại 100 theo dư lớn nhất → 24/18/23/35. Điểm tiêu chí = làm tròn nửa lên (tỉ lệ × tối đa). vao_ban/ban_vao là đường bay GIẢ LẬP [hoá, cung đến, cung xung] để test luật, không phải lá số thật.",
+  "phien_ban": "hai_nguoi_1",
+  "ca": [
+    {
+      "id": "A_tam_hop_nap_am_sinh_dien_nien",
+      "ban": {"nam_am": 1988, "gioi_tinh": "nu"}, "kia": {"nam_am": 1996, "gioi_tinh": "nam"}, "quan_he": "nguoi_yeu",
+      "vao_ban": [["Lộc", "Phu Thê", "Quan Lộc"], ["Quyền", "Tài Bạch", "Phúc Đức"], ["Khoa", "Mệnh", "Thiên Di"], ["Kỵ", "Tật Ách", "Phụ Mẫu"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_sinh", 20, 20, "hop"], "can": ["tuong_sinh", 12, 15, "hop"], "chi": ["tam_hop", 20, 20, "hop"],
+        "cung_phi": ["dien_nien", 14, 15, "hop"], "tu_vi": ["hop", 25, 30, "hop"],
+        "chieu_menh": "kia_sinh_ban", "tong": 91, "muc": "de_hoa_hop"
+      }
+    },
+    {
+      "id": "B_luc_xung_nap_am_khac_tuyet_menh",
+      "ban": {"nam_am": 1990, "gioi_tinh": "nam"}, "kia": {"nam_am": 1996, "gioi_tinh": "nu"}, "quan_he": "vo_chong",
+      "vao_ban": [["Lộc", "Thiên Di", "Mệnh"], ["Quyền", "Tử Nữ", "Điền Trạch"], ["Khoa", "Huynh Đệ", "Nô Bộc"], ["Kỵ", "Phu Thê", "Quan Lộc"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_khac", 5, 20, "can_dung_hoa"], "can": ["tuong_khac", 5, 15, "can_dung_hoa"],
+        "chi": ["luc_xung", 3, 20, "can_dung_hoa"], "cung_phi": ["tuyet_menh", 2, 15, "can_dung_hoa"],
+        "tu_vi": ["can_dung_hoa", 11, 30, "can_dung_hoa"],
+        "chieu_menh": "ban_khac_kia", "tong": 26, "muc": "nhieu_khac_biet"
+      }
+    },
+    {
+      "id": "C_ngu_hop_can_luc_hai_thien_y",
+      "ban": {"nam_am": 1990, "gioi_tinh": "nu"}, "kia": {"nam_am": 1985, "gioi_tinh": "nam"}, "quan_he": "dong_nghiep",
+      "vao_ban": [["Lộc", "Quan Lộc", "Phu Thê"], ["Quyền", "Nô Bộc", "Huynh Đệ"], ["Khoa", "Tài Bạch", "Phúc Đức"], ["Kỵ", "Huynh Đệ", "Nô Bộc"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_sinh", 20, 20, "hop"], "can": ["ngu_hop", 15, 15, "hop"], "chi": ["luc_hai", 7, 20, "can_dung_hoa"],
+        "cung_phi": ["thien_y", 14, 15, "hop"], "tu_vi": ["binh_hoa", 21, 30, "binh_hoa"],
+        "chieu_menh": "ban_sinh_kia", "tong": 77, "muc": "de_hoa_hop"
+      }
+    },
+    {
+      "id": "D_thieu_gioi_tinh_tam_hop_chia_lai_thang",
+      "ban": {"nam_am": 1986, "gioi_tinh": "nam"}, "kia": {"nam_am": 1994, "gioi_tinh": null}, "quan_he": "ban_be",
+      "vao_ban": [["Lộc", "Điền Trạch", "Tử Nữ"], ["Quyền", "Phúc Đức", "Tài Bạch"], ["Khoa", "Nô Bộc", "Huynh Đệ"], ["Kỵ", "Mệnh", "Thiên Di"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["binh_hoa", 17, 24, "binh_hoa"], "can": ["tuong_sinh", 14, 18, "hop"], "chi": ["tam_hop", 23, 23, "hop"],
+        "cung_phi": ["chua_tinh", 0, 0, null], "tu_vi": ["binh_hoa", 20, 35, "binh_hoa"],
+        "tong": 74, "muc": "hop_neu_hieu"
+      }
+    },
+    {
+      "id": "E_hai_chieu_hoa_hai",
+      "ban": {"nam_am": 1990, "gioi_tinh": "nam"}, "kia": {"nam_am": 1992, "gioi_tinh": "nu"}, "quan_he": "nguoi_yeu",
+      "vao_ban": [["Lộc", "Phúc Đức", "Tài Bạch"], ["Quyền", "Phu Thê", "Quan Lộc"], ["Khoa", "Thiên Di", "Mệnh"], ["Kỵ", "Quan Lộc", "Phu Thê"]],
+      "ban_vao": [["Lộc", "Phu Thê", "Quan Lộc"], ["Quyền", "Mệnh", "Thiên Di"], ["Khoa", "Tử Nữ", "Điền Trạch"], ["Kỵ", "Tật Ách", "Phụ Mẫu"]],
+      "ky_vong": {
+        "menh": ["tuong_sinh", 20, 20, "hop"], "can": ["tuong_sinh", 12, 15, "hop"], "chi": ["binh", 12, 20, "binh_hoa"],
+        "cung_phi": ["hoa_hai", 6, 15, "can_dung_hoa"], "tu_vi": ["binh_hoa", 22, 30, "binh_hoa"],
+        "chieu_menh": "ban_sinh_kia", "tong": 72, "muc": "hop_neu_hieu"
+      }
+    },
+    {
+      "id": "F_tu_hanh_xung_phuc_vi",
+      "ban": {"nam_am": 1984, "gioi_tinh": "nam"}, "kia": {"nam_am": 1993, "gioi_tinh": "nam"}, "quan_he": "sep",
+      "vao_ban": [["Lộc", "Mệnh", "Thiên Di"], ["Quyền", "Quan Lộc", "Phu Thê"], ["Khoa", "Điền Trạch", "Tử Nữ"], ["Kỵ", "Nô Bộc", "Huynh Đệ"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["binh_hoa", 14, 20, "binh_hoa"], "can": ["tuong_sinh", 12, 15, "hop"], "chi": ["tu_hanh_xung", 9, 20, "can_dung_hoa"],
+        "cung_phi": ["phuc_vi", 11, 15, "binh_hoa"], "tu_vi": ["binh_hoa", 16, 30, "binh_hoa"],
+        "tong": 62, "muc": "hop_neu_hieu"
+      }
+    },
+    {
+      "id": "G_can_xung_luc_xung_doi_tac",
+      "ban": {"nam_am": 1985, "gioi_tinh": "nu"}, "kia": {"nam_am": 1991, "gioi_tinh": "nam"}, "quan_he": "doi_tac",
+      "vao_ban": [["Lộc", "Tài Bạch", "Phúc Đức"], ["Quyền", "Phụ Mẫu", "Tật Ách"], ["Khoa", "Quan Lộc", "Phu Thê"], ["Kỵ", "Phúc Đức", "Tài Bạch"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_sinh", 20, 20, "hop"], "can": ["tuong_xung", 3, 15, "can_dung_hoa"], "chi": ["luc_xung", 3, 20, "can_dung_hoa"],
+        "cung_phi": ["phuc_vi", 11, 15, "binh_hoa"], "tu_vi": ["hop", 23, 30, "hop"],
+        "chieu_menh": "kia_sinh_ban", "tong": 60, "muc": "hop_neu_hieu"
+      }
+    },
+    {
+      "id": "H_luc_hop_ngu_quy_cha_me_con",
+      "ban": {"nam_am": 1998, "gioi_tinh": "nu"}, "kia": {"nam_am": 1959, "gioi_tinh": "nam"}, "quan_he": "cha_me_con",
+      "vao_ban": [["Lộc", "Phụ Mẫu", "Tật Ách"], ["Quyền", "Phúc Đức", "Tài Bạch"], ["Khoa", "Tử Nữ", "Điền Trạch"], ["Kỵ", "Điền Trạch", "Tử Nữ"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_khac", 5, 20, "can_dung_hoa"], "can": ["binh_hoa", 9, 15, "binh_hoa"], "chi": ["luc_hop", 18, 20, "hop"],
+        "cung_phi": ["ngu_quy", 3, 15, "can_dung_hoa"], "tu_vi": ["hop", 26, 30, "hop"],
+        "chieu_menh": "kia_khac_ban", "tong": 61, "muc": "hop_neu_hieu"
+      }
+    },
+    {
+      "id": "I_tuong_hinh_sinh_khi_gia_dinh",
+      "ban": {"nam_am": 1984, "gioi_tinh": "nu"}, "kia": {"nam_am": 1987, "gioi_tinh": "nu"}, "quan_he": "gia_dinh",
+      "vao_ban": [["Lộc", "Quan Lộc", "Phu Thê"], ["Quyền", "Tử Nữ", "Điền Trạch"], ["Khoa", "Thiên Di", "Mệnh"], ["Kỵ", "Nô Bộc", "Huynh Đệ"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_khac", 5, 20, "can_dung_hoa"], "can": ["tuong_sinh", 12, 15, "hop"], "chi": ["tuong_hinh", 7, 20, "can_dung_hoa"],
+        "cung_phi": ["sinh_khi", 15, 15, "hop"], "tu_vi": ["can_dung_hoa", 14, 30, "can_dung_hoa"],
+        "chieu_menh": "kia_khac_ban", "tong": 53, "muc": "can_dung_hoa_nhieu"
+      }
+    },
+    {
+      "id": "J_cung_nam_trung_chi",
+      "ban": {"nam_am": 1990, "gioi_tinh": "nam"}, "kia": {"nam_am": 1990, "gioi_tinh": "nu"}, "quan_he": "nguoi_yeu",
+      "vao_ban": [["Lộc", "Tử Nữ", "Điền Trạch"], ["Quyền", "Tài Bạch", "Phúc Đức"], ["Khoa", "Nô Bộc", "Huynh Đệ"], ["Kỵ", "Tật Ách", "Phụ Mẫu"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["binh_hoa", 14, 20, "binh_hoa"], "can": ["binh_hoa", 9, 15, "binh_hoa"], "chi": ["trung", 12, 20, "binh_hoa"],
+        "cung_phi": ["ngu_quy", 3, 15, "can_dung_hoa"], "tu_vi": ["binh_hoa", 17, 30, "binh_hoa"],
+        "tong": 55, "muc": "hop_neu_hieu"
+      }
+    },
+    {
+      "id": "K_thieu_gioi_tinh_xung_tu_vi_tot",
+      "ban": {"nam_am": 2000, "gioi_tinh": "nam"}, "kia": {"nam_am": 1994, "gioi_tinh": null}, "quan_he": "ban_be",
+      "vao_ban": [["Lộc", "Nô Bộc", "Huynh Đệ"], ["Quyền", "Mệnh", "Thiên Di"], ["Khoa", "Huynh Đệ", "Nô Bộc"], ["Kỵ", "Quan Lộc", "Phu Thê"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_khac", 6, 24, "can_dung_hoa"], "can": ["tuong_xung", 4, 18, "can_dung_hoa"], "chi": ["luc_xung", 3, 23, "can_dung_hoa"],
+        "cung_phi": ["chua_tinh", 0, 0, null], "tu_vi": ["hop", 32, 35, "hop"],
+        "chieu_menh": "kia_khac_ban", "tong": 45, "muc": "can_dung_hoa_nhieu"
+      }
+    },
+    {
+      "id": "L_hai_chieu_ky_sinh_khi",
+      "ban": {"nam_am": 1982, "gioi_tinh": "nam"}, "kia": {"nam_am": 1988, "gioi_tinh": "nu"}, "quan_he": "vo_chong",
+      "vao_ban": [["Lộc", "Tài Bạch", "Phúc Đức"], ["Quyền", "Huynh Đệ", "Nô Bộc"], ["Khoa", "Tật Ách", "Phụ Mẫu"], ["Kỵ", "Phu Thê", "Quan Lộc"]],
+      "ban_vao": [["Lộc", "Nô Bộc", "Huynh Đệ"], ["Quyền", "Thiên Di", "Mệnh"], ["Khoa", "Tử Nữ", "Điền Trạch"], ["Kỵ", "Quan Lộc", "Phu Thê"]],
+      "ky_vong": {
+        "menh": ["tuong_sinh", 20, 20, "hop"], "can": ["tuong_khac", 5, 15, "can_dung_hoa"], "chi": ["luc_xung", 3, 20, "can_dung_hoa"],
+        "cung_phi": ["sinh_khi", 15, 15, "hop"], "tu_vi": ["can_dung_hoa", 12, 30, "can_dung_hoa"],
+        "chieu_menh": "ban_sinh_kia", "tong": 55, "muc": "hop_neu_hieu"
+      }
+    },
+    {
+      "id": "M_luc_hop_luc_sat",
+      "ban": {"nam_am": 1979, "gioi_tinh": "nam"}, "kia": {"nam_am": 1990, "gioi_tinh": "nu"}, "quan_he": "nguoi_yeu",
+      "vao_ban": [["Lộc", "Phu Thê", "Quan Lộc"], ["Quyền", "Phúc Đức", "Tài Bạch"], ["Khoa", "Mệnh", "Thiên Di"], ["Kỵ", "Tài Bạch", "Phúc Đức"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_sinh", 20, 20, "hop"], "can": ["tuong_sinh", 12, 15, "hop"], "chi": ["luc_hop", 18, 20, "hop"],
+        "cung_phi": ["luc_sat", 5, 15, "can_dung_hoa"], "tu_vi": ["hop", 25, 30, "hop"],
+        "chieu_menh": "ban_sinh_kia", "tong": 80, "muc": "de_hoa_hop"
+      }
+    },
+    {
+      "id": "N_tu_vi_kep_tran",
+      "ban": {"nam_am": 1988, "gioi_tinh": "nu"}, "kia": {"nam_am": 1996, "gioi_tinh": "nam"}, "quan_he": "nguoi_yeu",
+      "vao_ban": [["Lộc", "Phu Thê", "Quan Lộc"], ["Quyền", "Phu Thê", "Quan Lộc"], ["Khoa", "Phu Thê", "Quan Lộc"], ["Kỵ", "Tật Ách", "Phụ Mẫu"]],
+      "ban_vao": null,
+      "ky_vong": {
+        "menh": ["tuong_sinh", 20, 20, "hop"], "can": ["tuong_sinh", 12, 15, "hop"], "chi": ["tam_hop", 20, 20, "hop"],
+        "cung_phi": ["dien_nien", 14, 15, "hop"], "tu_vi": ["hop", 30, 30, "hop"],
+        "chieu_menh": "kia_sinh_ban", "tong": 96, "muc": "de_hoa_hop"
+      }
+    }
+  ]
+}
