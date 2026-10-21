@@ -39,6 +39,8 @@ export interface DocQueKq {
   y_dinh_chung?: string | null; goi_mo?: GoiMo | null;
 }
 
+/** "Tuất" → "tuat" (mã nhắc chỉ a-z). */
+const maChi = (chi: string) => chi.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/gi, "d").toLowerCase();
 const TEN_PHAI: Record<string, string> = { nghia_ly: "Nghĩa Lý (lời kinh)", mai_hoa: "Mai Hoa (thể – dụng)", luc_hao: "Lục Hào (dụng thần)" };
 
 function Gap({ id, Icon, tieuDe, children, testId, onMo }: { id: string; Icon: typeof BookOpen; tieuDe: string; children: React.ReactNode; testId?: string; onMo?: () => void }) {
@@ -126,7 +128,7 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
             {ungKy.map((u) => (
               <li key={u.chi + u.ngay_gan_nhat} className="flex flex-wrap items-center gap-2">
                 <span>Ngày {u.chi} · {u.ngay_gan_nhat.slice(8, 10)}/{u.ngay_gan_nhat.slice(5, 7)} — {u.ly_do}</span>
-                <NhacToi ngay={u.ngay_gan_nhat} ma={`kd.ungky.${u.chi.toLowerCase()}`} moDun="kinhdich"
+                <NhacToi ngay={u.ngay_gan_nhat} ma={`kd.ungky.${maChi(u.chi)}`} moDun="kinhdich"
                   nhan={`Ngày ${u.chi} — mốc ứng kỳ${tenQue ? ` quẻ ${tenQue}` : ""} (${dq.chu_de.ten})`} duong="/kinh-dich" />
               </li>
             ))}

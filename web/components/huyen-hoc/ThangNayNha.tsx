@@ -22,7 +22,8 @@ export function ThangNayNha() {
   const nha = useHoSoNha();
   const [kq, setKq] = useState<ThangNay | null>(null);
   const than = nhaTuHoSo(nha);
-  const khoa = than ? JSON.stringify(than) : "";
+  // Route thang-nay không nhận `theo` (chỉ là ghi chú cách đo) → bỏ trước khi gửi.
+  const khoa = than ? JSON.stringify({ ...than, theo: undefined }) : "";
   useEffect(() => {
     if (!khoa) { setKq(null); return; }
     let huy = false;
