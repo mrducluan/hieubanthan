@@ -18,7 +18,7 @@ import { PhiHoa } from "@/components/huyen-hoc/PhiHoa";
 import { NhipBaThang } from "@/components/huyen-hoc/NhipBaThang";
 import { DinhGioSinh } from "@/components/huyen-hoc/DinhGioSinh";
 import { HopThamTuVi } from "@/components/huyen-hoc/HopThamTuVi";
-import { XacNhanYDinh, type GoiYVec } from "@/components/huyen-hoc/XacNhanYDinh";
+import { ChonYDinh, XacNhanYDinh, type GoiYVec } from "@/components/huyen-hoc/XacNhanYDinh";
 import { LaSoTuVi, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -238,15 +238,19 @@ export function TuVi() {
               </TabsList>
             </Tabs>
           }
-          gui={(cau) => hoiMang<HoiMangRes & { phan_loai?: { cung?: string[] }; goi_y_vec?: GoiYVec | null }>(
+          gui={(cau) => hoiMang<HoiMangRes & {
+            phan_loai?: { cung?: string[]; xu_ly?: string }; goi_y_vec?: GoiYVec | null; co_the_goi_y?: boolean; nhan_ra_y_dinh?: boolean;
+          }>(
             "/api/tuvi/hoi",
             { cau_hoi: cau, che_do: cheDo, ...(laSo ? { la_so: laSo } : {}) },
-            (d) => d.phan_loai?.cung?.length || d.goi_y_vec?.y_dinh ? (
-              <>
-                {d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null}
-                {d.goi_y_vec?.y_dinh ? <XacNhanYDinh cau={cau} goi={d.goi_y_vec} /> : null}
-              </>
-            ) : null,
+            (d) => {
+              const cung = d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null;
+              // LG-ĐS: có câu gần nghĩa trong kho → hỏi lại "đúng ý bạn chứ?"; không có → cho chọn 1 trong 8 chủ đề.
+              const hoc = d.goi_y_vec?.y_dinh ? <XacNhanYDinh cau={cau} goi={d.goi_y_vec} />
+                : d.co_the_goi_y && !d.nhan_ra_y_dinh && !["an_toan", "tu_choi_nhe"].includes(d.phan_loai?.xu_ly ?? "")
+                  ? <ChonYDinh cau={cau} /> : null;
+              return cung || hoc ? <>{cung}{hoc}</> : null;
+            },
           )}
         />
       </section>

@@ -73,8 +73,12 @@ test("luận giải toàn bộ theo chương (miễn phí thử nghiệm)", asyn
   await page.goto("/tu-vi");
   await page.getByRole("button", { name: "Xem luận giải" }).click();
   const bc = page.getByTestId("luan-giai-toan-bo");
-  await expect(bc).toContainText("Tổng quan bản mệnh");
-  await expect(bc).toContainText("Vận hạn hiện tại");
+  // LG-ĐS: engine trả bản "đời sống" (docs/LUAN-GIAI-DOI-SONG.md) — 12 chương, có Điều quan trọng nhất + dòng thời gian.
+  await expect(bc).toHaveAttribute("data-phien-ban", "doi_song_1");
+  await expect(bc).toContainText("Con người bạn");
+  await expect(bc).toContainText("Năm nay & 3 tháng tới");
+  await expect(bc.getByTestId("lg-cot-loi")).toBeVisible();
+  await expect(bc.getByText("Bạn đang ở đây")).toHaveCount(1);
   await expect(bc.getByRole("navigation", { name: "Mục lục" })).toBeVisible();
 });
 
@@ -136,7 +140,7 @@ test("giá luận giải: công tắc thu Sao mặc định tắt → miễn ph�
   await page.goto("/tu-vi");
   await expect(page.getByTestId("gia-luan-giai")).toContainText("miễn phí");
   await page.getByRole("button", { name: "Xem luận giải" }).click();
-  await expect(page.getByTestId("luan-giai-toan-bo")).toContainText("Tổng quan bản mệnh");
+  await expect(page.getByTestId("luan-giai-toan-bo")).toContainText("Con người bạn");
 });
 
 test("KB-TV2: cách cục bổ sung có phiên âm phú cổ", async ({ page }) => {

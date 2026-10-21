@@ -266,3 +266,35 @@ test("hỏi đáp Tử vi: gợi ý ý định từ kho vectơ → hỏi lại, 
   expect(xn[0]!.postDataJSON()).toEqual({ mo_dun: "tuvi", cau: "chán chỗ làm quá muốn đi", y_dinh: "di_hay_o", dung: true });
 });
 
+
+test("hỏi đáp Tử vi: không nhận ra ý định, không có câu gần nghĩa → chọn 1 trong 8 chủ đề, gửi xác nhận", async ({ page }) => {
+  const xn: Request[] = [];
+  await page.route("**/api/tuvi/hoi", (r) => r.fulfill({ json: {
+    cau_tra_loi: "Câu trả lời chung từ kho tri thức.", che_do: "template", co_the_goi_y: true, nhan_ra_y_dinh: false,
+    phan_loai: { xu_ly: "binh_thuong" },
+  } }));
+  await page.route("**/api/hoi/xac-nhan-y-dinh", (r) => { xn.push(r.request()); return r.fulfill({ json: { ok: true } }); });
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await hoi(page, "dạo này lấn cấn quá");
+  const hop = page.getByTestId("chon-y-dinh");
+  await expect(hop).toContainText("Bạn đang hỏi về chuyện gì? Chọn để lần sau hệ thống hiểu nhanh hơn");
+  await expect(hop.getByRole("button")).toHaveCount(8);
+  await expect(page.getByTestId("xac-nhan-y-dinh")).toHaveCount(0);
+  await hop.locator("[data-y-dinh=tai_van]").click();
+  await expect(hop.getByRole("status")).toContainText("tiền bạc sắp tới");
+  await expect.poll(() => xn.length).toBe(1);
+  expect(xn[0]!.postDataJSON()).toEqual({ mo_dun: "tuvi", cau: "dạo này lấn cấn quá", y_dinh: "tai_van", dung: true });
+});
+
+test("hỏi đáp Tử vi: câu đã nhận ra ý định hoặc câu an toàn → không hỏi lại chủ đề", async ({ page }) => {
+  let lan = 0;
+  await page.route("**/api/tuvi/hoi", (r) => r.fulfill({ json: lan++ === 0
+    ? { cau_tra_loi: "Trả lời theo ý định.", che_do: "template", co_the_goi_y: false, nhan_ra_y_dinh: true }
+    : { cau_tra_loi: "Lời hỗ trợ.", che_do: "template", co_the_goi_y: true, phan_loai: { xu_ly: "an_toan" } } }));
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await expect(await hoi(page, "có nên nghỉ việc không")).toContainText("Trả lời theo ý định.");
+  await expect(await hoi(page, "mình mệt mỏi quá rồi")).toContainText("Lời hỗ trợ.");
+  await expect(page.getByTestId("chon-y-dinh")).toHaveCount(0);
+});
