@@ -86,7 +86,10 @@ _BO_SUNG_MAC_DINH = {
     "trung_tieu_han": "Đây cũng là một chuyện riêng của năm nay, nên làm kỹ hơn thường lệ.",
     "cung_lap": "Chuyện chính vẫn như tháng trước, nên làm tiếp cho trọn thay vì mở việc mới.",
     "chon_thang": "Cần chọn một tháng để bắt đầu việc mới thì ưu tiên {thang}.",
-    "khong_thuan": "Chưa có tháng nào nổi bật thuận: giữ nhịp đều, làm chắc việc đang có.",
+    "khong_thuan": "Chưa có tháng nào nổi bật thuận; cần bắt đầu việc gì thì {thang} nhẹ nhàng hơn, nhất là chuyện "
+                   "{mang}.",
+    "ca_ba_can_than": "Cả ba tháng đều nên đi chậm; {thang} đỡ vướng hơn cả, chỗ có thể nhích lên là chuyện {mang}.",
+    "khong_diem_sang": "Chưa có tháng nào nổi bật thuận; {thang} ít vướng nhất, hợp làm nốt việc đang dở.",
     "tieu_de_tiep": "{ket_luan}, nối tiếp tháng trước",
     "them": "Thêm nữa, {cau}.",
 }
@@ -282,7 +285,15 @@ def tom_tat_ba_thang(ds: list[dict]) -> str:
     s = "; ".join(phan)
     s = s[:1].upper() + s[1:] + "."
     thuan = [t for t in ds if t["muc"] == "thuan"]
-    return f"{s} {_bo_sung('chon_thang', thang=nhan_thang(thuan[0])) if thuan else _bo_sung('khong_thuan')}"
+    if thuan:
+        return f"{s} {_bo_sung('chon_thang', thang=nhan_thang(thuan[0]))}"
+    # Không tháng nào thuận: chỉ ra tháng nhẹ nhất (Bình trước Cần thận trọng, rồi tháng sớm hơn) + mảng có Lộc tháng.
+    hang = sorted(ds, key=lambda t: (t["muc"] != "binh", t.get("diem_sang") is None))
+    t = hang[0]
+    if not t.get("diem_sang"):
+        return f"{s} {_bo_sung('khong_diem_sang', thang=nhan_thang(t))}"
+    ma = "khong_thuan" if t["muc"] == "binh" else "ca_ba_can_than"
+    return f"{s} {_bo_sung(ma, thang=nhan_thang(t), mang=MANG.get(t['diem_sang'], t['diem_sang']))}"
 
 
 def xep_muc(thang: dict, nam: dict, xung: dict) -> tuple[str, list[dict]]:

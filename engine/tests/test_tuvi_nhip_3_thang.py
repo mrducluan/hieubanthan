@@ -330,3 +330,25 @@ def test_khong_kb_van_khong_trung(monkeypatch):
     for k in ("tieu_de_thang", "goi_y", "cau_tu_soi"):
         assert len({t[k] for t in r["thang"]}) == 3, k
     assert r["tom_tat_3_thang"] and all(t["hop"] for t in r["thang"])
+
+
+def _t(thang: int, muc: str, loc: str | None, ky: str | None = None) -> dict:
+    return {"thang": thang, "nhuan": False, "phan": None, "muc": muc, "diem_sang": loc, "de_y": ky,
+            "tieu_de_thang": f"Tháng {thang} đều nhịp"}
+
+
+def test_tom_tat_khi_khong_co_thang_thuan_van_chi_ro_thang_va_mang():
+    """Không tháng nào thuận: vẫn nêu tháng nhẹ nhất (ưu tiên Bình hơn Cần thận trọng) + mảng có Lộc tháng —
+    không còn câu chung "giữ nhịp đều" giống nhau cho mọi lá."""
+    s = nh.tom_tat_ba_thang([_t(9, "can_than", "Tài Bạch"), _t(10, "binh", "Quan Lộc"), _t(11, "binh", "Mệnh")])
+    assert "tháng 10" in s and "công việc" in s
+    assert "giữ nhịp đều, làm chắc việc đang có" not in s
+    # cả ba tháng cần thận trọng → vẫn chọn tháng đầu có Lộc tháng, câu khác hẳn
+    s2 = nh.tom_tat_ba_thang([_t(9, "can_than", None), _t(10, "can_than", "Điền Trạch"), _t(11, "can_than", "Mệnh")])
+    assert "tháng 10" in s2 and "nhà cửa" in s2 and s2 != s
+
+
+def test_tom_tat_khong_thuan_khac_nhau_giua_cac_lua_chon():
+    a = nh.tom_tat_ba_thang([_t(9, "binh", "Phu Thê"), _t(10, "binh", "Tài Bạch"), _t(11, "binh", "Mệnh")])
+    b = nh.tom_tat_ba_thang([_t(9, "binh", "Nô Bộc"), _t(10, "binh", "Tài Bạch"), _t(11, "binh", "Mệnh")])
+    assert a.split(". ")[-1] != b.split(". ")[-1]
