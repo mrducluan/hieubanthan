@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Kiểm thử migration trên Postgres thật (giả lập schema auth + vai trò anon/authenticated của Supabase):
 #   1) chạy mọi migration 3 vòng liên tiếp (phải chạy lại được),  2) chạy *.down.sql ngược rồi lên lại,
-#   3) gọi thử các hàm Sao (thu_sao.sql) và quản trị QT-2 (thu_quan_tri.sql) như người dùng thật.
+#   3) gọi thử các hàm Sao (thu_sao.sql), quản trị QT-2 (thu_quan_tri.sql)… như người dùng thật.
+# 0017 cần extension pgvector trên Postgres thử (Ubuntu: apt-get install postgresql-16-pgvector).
 # Cần: psql + một Postgres ≥ 13 (tạo/xoá một database tạm). Kết nối theo biến libpq chuẩn:
 #   PGHOST=localhost PGPORT=5432 PGUSER=postgres ./supabase/kiem_thu/chay.sh
 set -euo pipefail
@@ -23,3 +24,4 @@ psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_sao_2.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_nhiem_vu.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_ho_so_0015.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_thanso_hoc.sql
+psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_tuvi_hoc_0017.sql

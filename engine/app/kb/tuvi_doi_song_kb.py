@@ -118,7 +118,7 @@ def cum_cam() -> list[str]:
 
 
 # Cụm ngắn trùng với từ ghép vô hại: "khắc" ≠ "khắc phục", "xui" ≠ "xui khiến". So khớp theo ranh giới âm tiết.
-_NGOAI_LE = {"khắc": ("phục", "khoải", "ghi", "hoạ", "sâu", "kỷ"), "xui": ("khiến", "giục")}
+_NGOAI_LE = {"khắc": ("phục", "khoải", "ghi", "hoạ", "sâu", "kỷ", "khổ"), "xui": ("khiến", "giục")}
 
 
 @lru_cache(maxsize=512)

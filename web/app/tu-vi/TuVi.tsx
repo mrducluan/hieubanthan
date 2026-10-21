@@ -18,6 +18,7 @@ import { PhiHoa } from "@/components/huyen-hoc/PhiHoa";
 import { NhipBaThang } from "@/components/huyen-hoc/NhipBaThang";
 import { DinhGioSinh } from "@/components/huyen-hoc/DinhGioSinh";
 import { HopThamTuVi } from "@/components/huyen-hoc/HopThamTuVi";
+import { XacNhanYDinh, type GoiYVec } from "@/components/huyen-hoc/XacNhanYDinh";
 import { LaSoTuVi, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -237,10 +238,15 @@ export function TuVi() {
               </TabsList>
             </Tabs>
           }
-          gui={(cau) => hoiMang<HoiMangRes & { phan_loai?: { cung?: string[] } }>(
+          gui={(cau) => hoiMang<HoiMangRes & { phan_loai?: { cung?: string[] }; goi_y_vec?: GoiYVec | null }>(
             "/api/tuvi/hoi",
             { cau_hoi: cau, che_do: cheDo, ...(laSo ? { la_so: laSo } : {}) },
-            (d) => d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null,
+            (d) => d.phan_loai?.cung?.length || d.goi_y_vec?.y_dinh ? (
+              <>
+                {d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null}
+                {d.goi_y_vec?.y_dinh ? <XacNhanYDinh cau={cau} goi={d.goi_y_vec} /> : null}
+              </>
+            ) : null,
           )}
         />
       </section>

@@ -1,0 +1,756 @@
+{
+ "_nguon": "Nháp AI tổng hợp theo khung Nam phái lối Việt và kiến thức phổ thông Tử Vi Đẩu Số Toàn Thư, viết lại bằng lời đời thường; chưa đối chiếu nguyên văn.",
+ "source": {
+  "tuvi_vn": "Khung Nam phái — skill tuvi-vn (Nguyễn Phát Lộc)",
+  "tu_vi_dau_so_toan_thu": "Tử Vi Đẩu Số Toàn Thư (Trần Đoàn, tương truyền)"
+ },
+ "source_id": "tuvi_vn",
+ "school_id": "nam_phai_viet",
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "linh_vuc": {
+  "Mệnh": {
+   "ma": "ban_than",
+   "ten_doi_thuong": "con người bạn",
+   "mo_ta": "Cách bạn nghĩ, phản ứng và tự đứng trên đôi chân mình mỗi ngày."
+  },
+  "Huynh Đệ": {
+   "ma": "anh_em",
+   "ten_doi_thuong": "anh chị em",
+   "mo_ta": "Quan hệ với anh chị em ruột và những người thân ngang hàng như anh em."
+  },
+  "Phu Thê": {
+   "ma": "tinh_cam",
+   "ten_doi_thuong": "tình cảm, vợ chồng",
+   "mo_ta": "Cách bạn yêu, chọn bạn đời và giữ hoà khí khi về chung một nhà."
+  },
+  "Tử Nữ": {
+   "ma": "con_cai",
+   "ten_doi_thuong": "con cái",
+   "mo_ta": "Cách bạn chăm con, dạy con và cả những người nhỏ tuổi bạn dìu dắt."
+  },
+  "Tài Bạch": {
+   "ma": "tien_bac",
+   "ten_doi_thuong": "tiền bạc",
+   "mo_ta": "Cách bạn kiếm tiền, tiêu tiền và giữ lại được bao nhiêu sau mỗi lần nhận lương."
+  },
+  "Tật Ách": {
+   "ma": "suc_khoe",
+   "ten_doi_thuong": "sức khoẻ",
+   "mo_ta": "Nhịp sức khoẻ, thói quen dễ làm bạn mệt và phần cơ thể nên chăm sóc."
+  },
+  "Thiên Di": {
+   "ma": "ra_ngoai",
+   "ten_doi_thuong": "ra ngoài, đi xa",
+   "mo_ta": "Bạn thế nào khi ra khỏi nhà: đi làm xa, gặp người lạ, sống ở nơi mới."
+  },
+  "Nô Bộc": {
+   "ma": "ban_be",
+   "ten_doi_thuong": "bạn bè, đồng nghiệp",
+   "mo_ta": "Bạn bè, đồng nghiệp, cấp dưới và cách bạn chọn người để cùng làm việc."
+  },
+  "Quan Lộc": {
+   "ma": "su_nghiep",
+   "ten_doi_thuong": "công việc",
+   "mo_ta": "Công việc bạn làm, cách bạn làm việc và nghề nghiệp lâu dài của bạn."
+  },
+  "Điền Trạch": {
+   "ma": "nha_cua",
+   "ten_doi_thuong": "nhà cửa",
+   "mo_ta": "Nơi bạn ở, chuyện mua nhà, giữ nhà và không khí trong gia đình."
+  },
+  "Phúc Đức": {
+   "ma": "tinh_than",
+   "ten_doi_thuong": "đời sống tinh thần",
+   "mo_ta": "Điều làm bạn thấy bình yên, niềm vui riêng và nếp nhà truyền lại từ ông bà."
+  },
+  "Phụ Mẫu": {
+   "ma": "cha_me",
+   "ten_doi_thuong": "cha mẹ",
+   "mo_ta": "Quan hệ với cha mẹ, người lớn trong nhà và cả sếp hay thầy cô dìu dắt bạn."
+  }
+ },
+ "sao_linh_vuc": {
+  "Thiên Cơ": {
+   "Mệnh": {
+    "sang": {
+     "manh": "Bạn nhanh trí, hay tính trước vài phương án nên ít khi bị động.",
+     "de_vap": "Bạn dễ nghĩ nhiều mà chậm bắt tay vào làm.",
+     "loi_khuyen": "Nên chốt một hướng, đặt hạn chót rồi mới tính tiếp phương án khác."
+    },
+    "ham": {
+     "manh": "Bạn nhạy với thay đổi quanh mình và xoay xở được khi bị dồn.",
+     "de_vap": "Bạn hay đổi ý giữa chừng nên việc dễ dở dang.",
+     "loi_khuyen": "Nên viết ra mục tiêu của tuần và chỉ đổi khi đã làm xong một bước."
+    }
+   }
+  },
+  "Cự Môn": {
+   "Quan Lộc": {
+    "sang": {
+     "manh": "Bạn làm tốt những việc cần nói, giải thích và thuyết phục người khác.",
+     "de_vap": "Bạn dễ tranh luận tới cùng dù chuyện nhỏ.",
+     "loi_khuyen": "Nên chọn trận để nói, việc nhỏ thì cho qua."
+    },
+    "ham": {
+     "manh": "Bạn soi ra chỗ chưa ổn trong công việc nhanh hơn người khác.",
+     "de_vap": "Ở chỗ làm, lời nói của bạn dễ bị hiểu sai, việc hay phải làm lại vì thiếu thống nhất.",
+     "loi_khuyen": "Nên chốt việc bằng tin nhắn hoặc email sau mỗi buổi họp, nói chậm lại khi góp ý."
+    }
+   }
+  },
+  "Thiên Đồng": {
+   "Tài Bạch": {
+    "sang": {
+     "manh": "Tiền đến với bạn khá êm, ít phải giành giật.",
+     "de_vap": "Bạn dễ tiêu cho vui mà quên để dành.",
+     "loi_khuyen": "Nên tách khoản để dành ngay khi nhận lương."
+    },
+    "ham": {
+     "manh": "Bạn biết sống vừa đủ, không quá áp lực chuyện tiền.",
+     "de_vap": "Bạn hay để chuyện tiền trôi, ngại xem lại sổ sách nên tiền hụt lúc nào không hay.",
+     "loi_khuyen": "Nên ghi thu chi mỗi tuần một lần và đặt hạn mức cho các khoản tiêu vặt."
+    }
+   }
+  }
+ },
+ "hoa_linh_vuc": {
+  "Lộc": {
+   "Mệnh": {
+    "y": "Bạn dễ mến, dễ được người khác mở lời giúp, và thường tìm ra cách xoay xở khi bị kẹt.",
+    "loi_khuyen": "Mỗi tuần nhận lời một cơ hội nhỏ người khác đưa tới, thay vì từ chối theo thói quen."
+   },
+   "Huynh Đệ": {
+    "y": "Anh chị em hoặc bạn thân như anh em là nguồn giúp đỡ thật, có khi cả về tiền nong.",
+    "loi_khuyen": "Giữ lệ gặp anh chị em đều đặn, kể cả khi không có việc cần nhờ."
+   },
+   "Phu Thê": {
+    "y": "Chuyện tình cảm dễ có duyên; người bạn đời thường mang lại sự dễ chịu hoặc thêm thu nhập cho nhà.",
+    "loi_khuyen": "Nói lời cảm ơn cụ thể với người ấy về một việc họ đã làm trong tuần."
+   },
+   "Tử Nữ": {
+    "y": "Con cái hoặc người nhỏ tuổi bạn dìu dắt thường mang lại niềm vui và cảm giác được tiếp sức.",
+    "loi_khuyen": "Dành một buổi mỗi tuần làm việc con thích, không lồng thêm bài học nào."
+   },
+   "Tài Bạch": {
+    "y": "Tiền vào dễ hơn mức trung bình, bạn thường có thêm nguồn thu ngoài lương chính.",
+    "loi_khuyen": "Mỗi lần nhận tiền, chuyển ngay một phần nhỏ sang tài khoản để dành trước khi tiêu."
+   },
+   "Tật Ách": {
+    "y": "Cơ thể bạn hồi lại khá nhanh sau những đợt mệt, miễn là bạn chịu nghỉ.",
+    "loi_khuyen": "Ngủ bù đúng lúc thay vì cố thêm một ngày, nhất là sau những tuần dồn việc."
+   },
+   "Thiên Di": {
+    "y": "Ra ngoài bạn gặp may hơn ở nhà: đi công tác, đổi chỗ ở hay gặp người lạ thường mở thêm việc.",
+    "loi_khuyen": "Nhận lời một chuyến đi hoặc một buổi gặp ngoài vòng quen trong tháng này."
+   },
+   "Nô Bộc": {
+    "y": "Bạn bè và đồng nghiệp hay giới thiệu việc, khách hàng hay mối làm ăn cho bạn.",
+    "loi_khuyen": "Khi được giới thiệu, nhắn lại kết quả và lời cảm ơn cho người đã giới thiệu."
+   },
+   "Quan Lộc": {
+    "y": "Công việc dễ có đà; làm đúng nghề thì cơ hội tăng thu nhập đến khá đều.",
+    "loi_khuyen": "Ghi lại việc nào mang lại kết quả rõ nhất trong quý để dồn sức vào đó."
+   },
+   "Điền Trạch": {
+    "y": "Bạn có duyên với nhà đất; chuyện an cư hay để dành qua tài sản thường thuận.",
+    "loi_khuyen": "Lập một khoản để dành riêng cho nhà, góp đều mỗi tháng dù ít."
+   },
+   "Phúc Đức": {
+    "y": "Bạn dễ tìm được niềm vui từ những điều giản dị và thường được người nhà che chở.",
+    "loi_khuyen": "Giữ một thói quen thư giãn cố định, như đi bộ buổi tối hay đọc sách trước khi ngủ."
+   },
+   "Phụ Mẫu": {
+    "y": "Cha mẹ, sếp hay thầy cô thường giúp bạn, có khi bằng lời khuyên, có khi bằng điều kiện thật.",
+    "loi_khuyen": "Hỏi ý cha mẹ hoặc sếp trước một quyết định lớn, vì họ thường có thông tin bạn còn thiếu."
+   }
+  },
+  "Quyền": {
+   "Mệnh": {
+    "y": "Bạn thích tự quyết, làm việc dứt khoát và dễ được giao vai cầm trịch.",
+    "loi_khuyen": "Trước khi quyết thay cả nhóm, hỏi thử một người xem họ nghĩ gì."
+   },
+   "Huynh Đệ": {
+    "y": "Trong anh em, bạn hay là người đứng ra lo liệu, hoặc có một người rất có tiếng nói.",
+    "loi_khuyen": "Chia việc nhà, việc giỗ chạp rõ ràng để không ai phải gánh một mình."
+   },
+   "Phu Thê": {
+    "y": "Hai người đều có chính kiến; người ấy có thể rất giỏi giang và quen làm chủ.",
+    "loi_khuyen": "Thống nhất trước ai quyết việc gì trong nhà, để bớt cảnh giành nhau câu nói cuối."
+   },
+   "Tử Nữ": {
+    "y": "Con cái có cá tính mạnh, sớm biết mình muốn gì, hoặc bạn khá nghiêm khi dạy con.",
+    "loi_khuyen": "Cho con tự chọn vài việc nhỏ mỗi ngày, như quần áo hay món ăn sáng."
+   },
+   "Tài Bạch": {
+    "y": "Bạn nắm tiền chặt và giỏi tự quyết chuyện chi tiêu, đầu tư.",
+    "loi_khuyen": "Đặt một mức chi lớn mà vượt qua mức đó thì bạn chờ qua một đêm mới quyết."
+   },
+   "Tật Ách": {
+    "y": "Bạn chịu được áp lực lâu, nhưng hay gồng tới khi người mệt rã mới chịu dừng.",
+    "loi_khuyen": "Đặt giờ nghỉ cứng trong lịch làm việc, coi như một cuộc hẹn không được lỡ."
+   },
+   "Thiên Di": {
+    "y": "Ra ngoài bạn có uy, dễ được giao việc dẫn dắt ở nơi mới.",
+    "loi_khuyen": "Ở chỗ làm mới, dành tuần đầu để nghe và quan sát trước khi đề xuất thay đổi."
+   },
+   "Nô Bộc": {
+    "y": "Bạn bè, đồng nghiệp có người rất mạnh tiếng, hoặc chính bạn quen làm trưởng nhóm.",
+    "loi_khuyen": "Giao việc kèm lý do, và để người khác tự chọn cách làm."
+   },
+   "Quan Lộc": {
+    "y": "Công việc hợp với vai trò quản lý, chịu trách nhiệm và ra quyết định.",
+    "loi_khuyen": "Nhận một việc có trách nhiệm rõ ràng, có kết quả đo được, để người khác thấy năng lực của bạn."
+   },
+   "Điền Trạch": {
+    "y": "Bạn thích tự lo chuyện nhà, muốn nhà cửa theo ý mình và tự giữ giấy tờ tài sản.",
+    "loi_khuyen": "Bàn với người nhà trước khi sửa nhà hay mua sắm món đồ lớn."
+   },
+   "Phúc Đức": {
+    "y": "Bạn có ý chí giữ nếp nhà, nhưng đầu óc ít khi chịu nghỉ.",
+    "loi_khuyen": "Mỗi ngày dành một khoảng không điện thoại, không việc, chỉ để đầu óc nghỉ."
+   },
+   "Phụ Mẫu": {
+    "y": "Cha mẹ hoặc sếp có tiếng nói mạnh, đôi khi bạn thấy mình bị quản nhiều.",
+    "loi_khuyen": "Nói rõ việc nào bạn muốn tự quyết, bằng giọng nhẹ và lý do cụ thể."
+   }
+  },
+  "Khoa": {
+   "Mệnh": {
+    "y": "Bạn được người khác tin vì nói có sách, làm có chừng mực; gặp rối thường có người gỡ giúp.",
+    "loi_khuyen": "Giữ một thói quen học đều, như đọc nửa tiếng mỗi tối."
+   },
+   "Huynh Đệ": {
+    "y": "Anh chị em ăn ở hoà nhã, hay được người ngoài khen, và biết góp ý đúng lúc.",
+    "loi_khuyen": "Khi anh em góp ý, nghe hết rồi mới trả lời."
+   },
+   "Phu Thê": {
+    "y": "Người ấy thường có học, lịch sự, và hai người dễ giữ hình ảnh đẹp trước mọi người.",
+    "loi_khuyen": "Ngoài lịch sự trước mặt người khác, nhớ nói thật lòng khi chỉ có hai người."
+   },
+   "Tử Nữ": {
+    "y": "Con cái có duyên học hành, dễ được thầy cô quý.",
+    "loi_khuyen": "Đọc sách cùng con hoặc hỏi con hôm nay học được gì thú vị."
+   },
+   "Tài Bạch": {
+    "y": "Tiền đến nhờ uy tín và chuyên môn hơn là nhờ liều; khi kẹt thường có người sẵn lòng cho mượn.",
+    "loi_khuyen": "Ghi chép thu chi rõ ràng, vì uy tín về tiền bạc là vốn quý của bạn."
+   },
+   "Tật Ách": {
+    "y": "Bạn dễ gặp thầy thuốc giỏi và chịu nghe lời khuyên chăm sóc.",
+    "loi_khuyen": "Chọn một nơi khám quen và đi khám định kỳ mỗi năm."
+   },
+   "Thiên Di": {
+    "y": "Ra ngoài bạn để lại ấn tượng tốt, dễ được giới thiệu và được nhớ tên.",
+    "loi_khuyen": "Chuẩn bị một lời giới thiệu bản thân ngắn, nói rõ việc bạn làm."
+   },
+   "Nô Bộc": {
+    "y": "Bạn quen nhiều người tử tế, có hiểu biết, có thể hỏi ý khi cần.",
+    "loi_khuyen": "Mỗi tháng nhắn hỏi thăm một người bạn đã lâu không gặp."
+   },
+   "Quan Lộc": {
+    "y": "Công việc hợp với chuyên môn, bằng cấp, việc giảng giải; tên bạn dễ được nhắc đến trong nghề.",
+    "loi_khuyen": "Lấy thêm một chứng chỉ, hoặc viết lại kinh nghiệm nghề để chia sẻ với người mới."
+   },
+   "Điền Trạch": {
+    "y": "Nhà cửa yên ổn, giấy tờ rõ ràng, gia đình có tiếng tốt với hàng xóm.",
+    "loi_khuyen": "Cất giấy tờ nhà đất một chỗ, có bản chụp lưu riêng."
+   },
+   "Phúc Đức": {
+    "y": "Bạn thấy bình yên khi được học, được đọc, hoặc trong nếp sống tử tế của gia đình.",
+    "loi_khuyen": "Giữ một góc đọc sách hoặc một buổi yên lặng mỗi tuần."
+   },
+   "Phụ Mẫu": {
+    "y": "Cha mẹ hoặc thầy cô là người hiểu biết, cho bạn nền học hành và lời khuyên tốt.",
+    "loi_khuyen": "Hỏi cha mẹ hoặc người thầy cũ về một bài học họ rút ra ở tuổi bạn bây giờ."
+   }
+  },
+  "Kỵ": {
+   "Mệnh": {
+    "y": "Bạn hay tự trách và cầu toàn, nghĩ đi nghĩ lại một chuyện lâu hơn người khác.",
+    "loi_khuyen": "Khi thấy mình nghĩ quẩn, viết ra giấy ba việc làm được ngay rồi làm một việc."
+   },
+   "Huynh Đệ": {
+    "y": "Chuyện anh em là điều bạn để tâm nhiều; dễ có hiểu lầm về tiền nong hay việc nhà.",
+    "loi_khuyen": "Chuyện tiền với anh em thì ghi lại rõ ràng, dù chỉ là một tin nhắn."
+   },
+   "Phu Thê": {
+    "y": "Tình cảm là chỗ bạn để tâm nhiều, dễ hiểu lầm vì im lặng hoặc nói không hết ý.",
+    "loi_khuyen": "Khi giận, hẹn nói chuyện lại sau một đêm thay vì im lặng kéo dài."
+   },
+   "Tử Nữ": {
+    "y": "Bạn lo cho con nhiều, đôi khi lo quá thành áp lực cho cả hai.",
+    "loi_khuyen": "Mỗi ngày hỏi con một câu mở rồi chỉ nghe, chưa vội khuyên."
+   },
+   "Tài Bạch": {
+    "y": "Tiền bạc là điều bạn hay lo; dễ có khoản chi bất ngờ hoặc tiền về chậm hơn dự tính.",
+    "loi_khuyen": "Để riêng một khoản dự phòng bằng vài tháng chi tiêu trước khi đầu tư thêm."
+   },
+   "Tật Ách": {
+    "y": "Cơ thể dễ báo mệt khi bạn căng thẳng, và bạn hay để ý từng dấu hiệu nhỏ.",
+    "loi_khuyen": "Ngủ đúng giờ, ăn đúng bữa, và đi khám định kỳ để yên tâm thay vì tự đoán."
+   },
+   "Thiên Di": {
+    "y": "Đi xa hay đến chỗ mới, bạn dễ thấy lạc lõng hoặc gặp trục trặc giấy tờ, lịch trình.",
+    "loi_khuyen": "Chuẩn bị kỹ giấy tờ, lịch trình và một phương án dự phòng trước mỗi chuyến đi."
+   },
+   "Nô Bộc": {
+    "y": "Bạn dễ vướng chuyện bạn bè, đồng nghiệp: giúp nhiều mà không được nhớ, hoặc bị hiểu sai ý.",
+    "loi_khuyen": "Giúp trong sức mình, và nói rõ khi bạn không làm được."
+   },
+   "Quan Lộc": {
+    "y": "Công việc là điều bạn để tâm nhiều, dễ thấy mình chưa đủ dù đã cố.",
+    "loi_khuyen": "Đặt mục tiêu theo quý thay vì theo cảm giác, và ghi lại những việc đã xong."
+   },
+   "Điền Trạch": {
+    "y": "Nhà cửa là điều bạn lo nhiều: chuyện mua, sửa, giấy tờ hay không khí trong nhà.",
+    "loi_khuyen": "Làm giấy tờ nhà đất rõ ràng, và bàn chuyện nhà lúc mọi người đang vui vẻ."
+   },
+   "Phúc Đức": {
+    "y": "Đầu óc bạn ít khi được nghỉ; chuyện cũ trong nhà dễ làm bạn trăn trở.",
+    "loi_khuyen": "Tập một thói quen giúp đầu óc chậm lại, như đi bộ, viết nhật ký hay ngồi yên mỗi tối."
+   },
+   "Phụ Mẫu": {
+    "y": "Quan hệ với cha mẹ hoặc sếp là chỗ bạn để tâm nhiều, dễ có khoảng cách vì khác cách nghĩ.",
+    "loi_khuyen": "Gọi cho cha mẹ đều đặn và kể chuyện thường ngày, không đợi tới khi có việc."
+   }
+  }
+ },
+ "nhom_sao_linh_vuc": {
+  "cat": {
+   "Mệnh": {
+    "y": "Bạn hay có người giúp đúng lúc, học nhanh và biết giữ những gì mình có.",
+    "loi_khuyen": "Khi kẹt, mở lời nhờ sớm thay vì cố một mình."
+   },
+   "Huynh Đệ": {
+    "y": "Anh chị em là chỗ dựa, sẵn lòng giúp bạn cả việc nhà lẫn việc riêng.",
+    "loi_khuyen": "Đáp lại bằng việc cụ thể khi anh em cần, dù là việc nhỏ."
+   },
+   "Phu Thê": {
+    "y": "Bạn đời thường là người có học, biết lo toan và đỡ cho bạn nhiều việc.",
+    "loi_khuyen": "Bàn với người ấy trước những kế hoạch lớn, vì họ hay có góc nhìn bạn thiếu."
+   },
+   "Tử Nữ": {
+    "y": "Con cái sáng dạ, dễ được người khác quý và nâng đỡ.",
+    "loi_khuyen": "Cho con thử vài môn khác nhau để con tự tìm thứ mình thích."
+   },
+   "Tài Bạch": {
+    "y": "Chuyện tiền bạc có người chỉ cách làm, và bạn biết giữ tiền khá tốt.",
+    "loi_khuyen": "Hỏi ý một người am hiểu trước khi bỏ tiền vào việc mới."
+   },
+   "Tật Ách": {
+    "y": "Khi mệt, bạn có người nhắc nhở chăm lo và dễ gặp người chữa giỏi.",
+    "loi_khuyen": "Nghe lời người thân nhắc đi khám, đừng gạt đi."
+   },
+   "Thiên Di": {
+    "y": "Ra ngoài bạn dễ gặp người giúp, nhất là khi mới đến một nơi lạ.",
+    "loi_khuyen": "Đến nơi mới, chủ động tìm một người quen đường để hỏi."
+   },
+   "Nô Bộc": {
+    "y": "Bạn có bạn tốt, đồng nghiệp đáng tin và cấp dưới chịu làm.",
+    "loi_khuyen": "Ghi nhận công sức người giúp bạn ngay trước mặt mọi người."
+   },
+   "Quan Lộc": {
+    "y": "Công việc có người đỡ, có chữ nghĩa, dễ được cất nhắc nhờ chuyên môn.",
+    "loi_khuyen": "Tìm một người đi trước trong nghề để hỏi ý định kỳ."
+   },
+   "Điền Trạch": {
+    "y": "Nhà cửa yên, dễ giữ tài sản và được người nhà góp sức.",
+    "loi_khuyen": "Giữ nhà gọn gàng, giấy tờ rõ ràng để tài sản yên ổn lâu dài."
+   },
+   "Phúc Đức": {
+    "y": "Bạn có nền nếp tốt từ gia đình; tâm trí dễ yên khi có sách vở hoặc người hiểu mình.",
+    "loi_khuyen": "Dành thời gian cho những người khiến bạn thấy nhẹ lòng."
+   },
+   "Phụ Mẫu": {
+    "y": "Cha mẹ, thầy cô hay sếp giúp bạn nhiều, có khi bằng kiến thức, có khi bằng quan hệ.",
+    "loi_khuyen": "Giữ liên lạc với thầy cũ, sếp cũ, vì họ là người giúp thật."
+   }
+  },
+  "sat": {
+   "Mệnh": {
+    "y": "Bạn nhanh, dám làm nhưng dễ nóng và hay đổi ý khi bị thúc.",
+    "loi_khuyen": "Trước một quyết định lúc đang bực, đợi qua một đêm."
+   },
+   "Huynh Đệ": {
+    "y": "Anh em dễ va chạm vì tính thẳng, nhất là chuyện tiền hay chuyện chia việc.",
+    "loi_khuyen": "Việc chung với anh em thì thoả thuận trước và viết ra cho rõ."
+   },
+   "Phu Thê": {
+    "y": "Hai người dễ cãi nhau vì nóng vội; tình cảm có lúc lên xuống thất thường.",
+    "loi_khuyen": "Đặt một luật nhỏ: không bàn chuyện lớn khi một người đang mệt hoặc đói."
+   },
+   "Tử Nữ": {
+    "y": "Con cái hiếu động, cá tính, đôi khi làm bạn mất kiên nhẫn.",
+    "loi_khuyen": "Hít một hơi, hạ giọng trước khi nhắc con; nói việc cần làm thay vì chê."
+   },
+   "Tài Bạch": {
+    "y": "Tiền vào ra thất thường, dễ có khoản hao vì vội hoặc vì nể.",
+    "loi_khuyen": "Không cho vay hay đầu tư khi bị giục quyết ngay trong ngày."
+   },
+   "Tật Ách": {
+    "y": "Bạn dễ làm quá sức, dễ va quẹt khi vội, hoặc để mệt dồn lại vì không chịu nghỉ.",
+    "loi_khuyen": "Đi chậm lại khi lái xe hay làm việc tay chân lúc đang gấp."
+   },
+   "Thiên Di": {
+    "y": "Ra ngoài dễ gặp trục trặc, đổi lịch, hoặc va chạm với người lạ.",
+    "loi_khuyen": "Đi sớm hơn dự tính, và giữ bình tĩnh khi có người gây chuyện."
+   },
+   "Nô Bộc": {
+    "y": "Quan hệ bạn bè, đồng nghiệp dễ có lời qua tiếng lại hoặc người làm phiền.",
+    "loi_khuyen": "Giữ ranh giới rõ trong công việc, nói chuyện trực tiếp thay vì qua người khác."
+   },
+   "Quan Lộc": {
+    "y": "Công việc nhiều áp lực và thay đổi, dễ phải làm lại hoặc đổi chỗ làm.",
+    "loi_khuyen": "Học thêm một kỹ năng dự phòng để khi cần đổi việc thì không bị động."
+   },
+   "Điền Trạch": {
+    "y": "Nhà cửa dễ phải sửa, dời chỗ, hoặc có tranh luận trong nhà.",
+    "loi_khuyen": "Kiểm tra điện nước, đồ dùng trong nhà định kỳ; bàn việc nhà khi mọi người bình tĩnh."
+   },
+   "Phúc Đức": {
+    "y": "Đầu óc ít yên, dễ bồn chồn, lo xa hoặc khó ngủ khi nhiều chuyện.",
+    "loi_khuyen": "Bớt màn hình buổi tối, tập thở chậm hoặc đi bộ một vòng trước khi ngủ."
+   },
+   "Phụ Mẫu": {
+    "y": "Với cha mẹ hoặc sếp, bạn dễ bất đồng vì nói thẳng quá.",
+    "loi_khuyen": "Nói ý mình kèm lý do và một đề xuất, thay vì chỉ phản đối."
+   }
+  },
+  "dao_hoa": {
+   "Mệnh": {
+    "y": "Bạn có sức hút tự nhiên, dễ gây thiện cảm và hợp với những việc phải gặp gỡ người khác.",
+    "loi_khuyen": "Dùng sức hút để mở mối làm ăn, và giữ lời hứa để người ta tin lâu."
+   },
+   "Huynh Đệ": {
+    "y": "Anh chị em vui tính, nhà hay đông vui, có không khí tụ họp.",
+    "loi_khuyen": "Rủ anh em một bữa cơm chung định kỳ."
+   },
+   "Phu Thê": {
+    "y": "Chuyện tình cảm nhiều duyên, bạn dễ được để ý; cần tỉnh táo khi chọn.",
+    "loi_khuyen": "Khi đã có đôi, giữ khoảng cách rõ ràng với những lời tán tỉnh khác."
+   },
+   "Tử Nữ": {
+    "y": "Con cái dễ thương, khéo giao tiếp, sớm có nhiều bạn.",
+    "loi_khuyen": "Dạy con cách nói không và giữ an toàn khi kết bạn."
+   },
+   "Tài Bạch": {
+    "y": "Tiền đến nhờ quan hệ, giao tiếp, nghề dịch vụ hay làm đẹp; cũng dễ chi nhiều cho vui chơi.",
+    "loi_khuyen": "Đặt hạn mức chi tiêu cho tiệc tùng, mua sắm mỗi tháng."
+   },
+   "Tật Ách": {
+    "y": "Bạn dễ mệt vì thức khuya, tiệc tùng, ăn uống thất thường.",
+    "loi_khuyen": "Giữ giờ ngủ cố định, kể cả cuối tuần."
+   },
+   "Thiên Di": {
+    "y": "Ra ngoài bạn được nhiều người để ý và dễ có thêm mối quen.",
+    "loi_khuyen": "Chọn lọc mối quen, giữ liên lạc với vài người thật sự hợp."
+   },
+   "Nô Bộc": {
+    "y": "Bạn đông bạn, hay được mời đi chơi, đồng nghiệp quý.",
+    "loi_khuyen": "Biết từ chối bớt lời mời để còn thời gian cho việc chính."
+   },
+   "Quan Lộc": {
+    "y": "Công việc hợp nghề giao tiếp, bán hàng, nghệ thuật hay làm đẹp.",
+    "loi_khuyen": "Đầu tư vào cách trình bày và chăm sóc khách hàng, vì đó là thế mạnh của bạn."
+   },
+   "Điền Trạch": {
+    "y": "Nhà cửa ấm cúng, hay có khách, bạn thích trang trí nhà cho đẹp.",
+    "loi_khuyen": "Giữ một góc riêng yên tĩnh trong nhà cho mình."
+   },
+   "Phúc Đức": {
+    "y": "Bạn tìm niềm vui trong cái đẹp, âm nhạc và những buổi gặp người mình quý.",
+    "loi_khuyen": "Dành thời gian đều đặn cho một sở thích nghệ thuật."
+   },
+   "Phụ Mẫu": {
+    "y": "Cha mẹ hoặc sếp là người cởi mở, dễ gần, quen biết rộng.",
+    "loi_khuyen": "Học cách giao tiếp từ cha mẹ hoặc sếp, và nhờ họ giới thiệu khi cần."
+   }
+  }
+ },
+ "suc_khoe": {
+  "Tử Vi": {
+   "bo_phan": "tiêu hoá, dạ dày, vùng đầu và giấc ngủ khi lo nghĩ nhiều",
+   "thoi_quen": "Ôm nhiều việc, tự gánh trách nhiệm và ăn uống thất thường khi bận.",
+   "loi_khuyen": "Ăn đúng bữa, giao bớt việc cho người khác, và khám tiêu hoá định kỳ."
+  },
+  "Thiên Cơ": {
+   "bo_phan": "gan, tay chân, gân cơ và thần kinh căng",
+   "thoi_quen": "Nghĩ nhiều, làm việc trí óc liên tục, ít vận động.",
+   "loi_khuyen": "Đứng dậy giãn tay chân sau mỗi giờ ngồi, ngủ đủ, và kiểm tra gan định kỳ."
+  },
+  "Thái Dương": {
+   "bo_phan": "mắt, vùng đầu và nhịp tim",
+   "thoi_quen": "Làm việc quá giờ, nhìn màn hình lâu, hay cố tỏ ra mình vẫn khoẻ.",
+   "loi_khuyen": "Cho mắt nghỉ sau mỗi giờ nhìn màn hình, và khám mắt, tim mạch định kỳ."
+  },
+  "Vũ Khúc": {
+   "bo_phan": "phổi, đường hô hấp, răng và mũi",
+   "thoi_quen": "Làm việc cật lực, ít than mệt, hay bỏ qua những cơn ho, cảm nhẹ.",
+   "loi_khuyen": "Giữ ấm cổ họng khi trời trở lạnh, tránh khói thuốc, khám răng và hô hấp định kỳ."
+  },
+  "Thiên Đồng": {
+   "bo_phan": "thận, đường tiết niệu, tai và cân nặng",
+   "thoi_quen": "Thích ăn ngon, ngại vận động, hay để mệt dồn lại rồi mới nghỉ.",
+   "loi_khuyen": "Uống đủ nước, vận động nhẹ mỗi ngày, và kiểm tra thận, tiết niệu định kỳ."
+  },
+  "Liêm Trinh": {
+   "bo_phan": "máu, tim mạch, da và hệ thần kinh",
+   "thoi_quen": "Căng thẳng dồn nén, giữ chuyện trong lòng, làm việc theo cảm hứng.",
+   "loi_khuyen": "Tìm cách xả căng thẳng như chơi thể thao hay trò chuyện; xét nghiệm máu và khám tim mạch định kỳ."
+  },
+  "Thiên Phủ": {
+   "bo_phan": "dạ dày, tiêu hoá và cân nặng",
+   "thoi_quen": "Ăn nhiều khi vui, ngồi lâu, ít đi lại.",
+   "loi_khuyen": "Ăn chậm, bớt đồ béo ngọt, đi bộ sau bữa và khám tiêu hoá định kỳ."
+  },
+  "Thái Âm": {
+   "bo_phan": "thận, giấc ngủ, mắt và nội tiết",
+   "thoi_quen": "Thức khuya, nghĩ ngợi về đêm, dễ để cảm xúc ảnh hưởng tới chuyện ăn ngủ.",
+   "loi_khuyen": "Tắt màn hình sớm trước giờ ngủ, giữ ấm cơ thể, khám mắt và nội tiết định kỳ."
+  },
+  "Tham Lang": {
+   "bo_phan": "gan, thận và sinh lý",
+   "thoi_quen": "Vui chơi, ăn nhậu, thức khuya theo cuộc vui.",
+   "loi_khuyen": "Hạn chế rượu bia, ngủ trước nửa đêm, và kiểm tra gan thận định kỳ."
+  },
+  "Cự Môn": {
+   "bo_phan": "miệng, họng, răng và tiêu hoá",
+   "thoi_quen": "Nói nhiều, hay để bụng chuyện, ăn uống vội vàng.",
+   "loi_khuyen": "Uống nước ấm, giữ giọng khi phải nói nhiều, khám răng miệng và tiêu hoá định kỳ."
+  },
+  "Thiên Tướng": {
+   "bo_phan": "da, đường tiết niệu và hệ bài tiết",
+   "thoi_quen": "Lo chuyện người khác trước chuyện mình, nhịn uống nước khi bận.",
+   "loi_khuyen": "Đặt nhắc uống nước, chăm da khi trời hanh khô, và khám tiết niệu định kỳ."
+  },
+  "Thiên Lương": {
+   "bo_phan": "dạ dày, vùng ngực và tiêu hoá",
+   "thoi_quen": "Hay lo cho người khác, ôm nỗi lo vào người, bỏ bữa khi bận việc giúp ai đó.",
+   "loi_khuyen": "Ăn đúng giờ, kể bớt nỗi lo với người thân, khám tiêu hoá và vùng ngực định kỳ."
+  },
+  "Thất Sát": {
+   "bo_phan": "phổi, hô hấp, xương khớp và cơ",
+   "thoi_quen": "Làm việc dồn sức, dễ va quẹt vì nhanh, ít khởi động trước khi vận động mạnh.",
+   "loi_khuyen": "Khởi động kỹ trước khi tập, giữ đúng tư thế khi mang vác, khám hô hấp và xương khớp định kỳ."
+  },
+  "Phá Quân": {
+   "bo_phan": "thận, đường tiết niệu, ruột và xương khớp",
+   "thoi_quen": "Thay đổi nếp sinh hoạt liên tục, ăn ngủ thất thường mỗi khi có việc mới.",
+   "loi_khuyen": "Giữ giờ ăn ngủ ổn định dù công việc đổi, uống đủ nước, khám thận và tiêu hoá định kỳ."
+  },
+  "sat": {
+   "thoi_quen": "Bạn dễ làm quá sức, vội vàng nên hay va quẹt hoặc trẹo chân, và chỉ nghỉ khi đã mệt rã.",
+   "loi_khuyen": "Làm chậm lại khi lái xe, nấu nướng hay dùng dụng cụ sắc; thấy mệt thì nghỉ ngay, đừng cố nốt."
+  },
+  "chung": "Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám.",
+  "vo_chinh_dieu": "Khi phần sức khoẻ không có điểm nhấn rõ, nhịp khoẻ của bạn phụ thuộc nhiều vào môi trường và thói quen hằng ngày, nên giữ nếp ăn ngủ đều là cách chăm tốt nhất."
+ },
+ "dai_han": {
+  "Mệnh": {
+   "chu_de": "tự định hình con người mình",
+   "nen_lam": "Tập trung vào việc bạn thật sự muốn làm và rèn những thói quen nền.",
+   "de_vap": "Dễ ôm hết mọi việc vì muốn tự chứng tỏ mình."
+  },
+  "Huynh Đệ": {
+   "chu_de": "anh em, bạn thân và chuyện chia sẻ",
+   "nen_lam": "Hợp tác với người thân tín và chăm giữ quan hệ anh em.",
+   "de_vap": "Dễ vướng chuyện tiền nong chung với người thân."
+  },
+  "Phu Thê": {
+   "chu_de": "tình cảm, hôn nhân và người bạn đời",
+   "nen_lam": "Dành thời gian cho người bên cạnh và những thoả thuận chung của hai người.",
+   "de_vap": "Dễ để việc riêng lấn át chuyện hai người."
+  },
+  "Tử Nữ": {
+   "chu_de": "con cái, học trò và việc dìu dắt",
+   "nen_lam": "Dành thời gian nuôi dạy con hoặc kèm cặp người trẻ.",
+   "de_vap": "Dễ lo cho con quá mức mà quên chăm chính mình."
+  },
+  "Tài Bạch": {
+   "chu_de": "kiếm tiền và quản lý tiền",
+   "nen_lam": "Tìm cách tăng thu nhập và lập kế hoạch để dành rõ ràng.",
+   "de_vap": "Dễ chạy theo tiền mà bỏ quên nghỉ ngơi."
+  },
+  "Tật Ách": {
+   "chu_de": "sức khoẻ và nhịp sống",
+   "nen_lam": "Xây nếp ăn ngủ, vận động đều và khám sức khoẻ định kỳ.",
+   "de_vap": "Dễ gồng quá sức vì nghĩ mình còn khoẻ."
+  },
+  "Thiên Di": {
+   "chu_de": "đi xa và môi trường mới",
+   "nen_lam": "Mở rộng ra ngoài: đổi chỗ làm, học thêm, gặp người mới.",
+   "de_vap": "Dễ thấy chông chênh khi phải xa chỗ quen."
+  },
+  "Nô Bộc": {
+   "chu_de": "bạn bè, đồng nghiệp và đội nhóm",
+   "nen_lam": "Xây một nhóm làm việc tốt và chọn bạn kỹ.",
+   "de_vap": "Dễ mất sức vì giúp người không đúng chỗ."
+  },
+  "Quan Lộc": {
+   "chu_de": "sự nghiệp và vị trí trong nghề",
+   "nen_lam": "Dồn sức cho chuyên môn và nhận những việc có trách nhiệm rõ.",
+   "de_vap": "Dễ cuốn vào công việc mà lỡ những dịp bên gia đình."
+  },
+  "Điền Trạch": {
+   "chu_de": "nhà cửa, an cư và tài sản",
+   "nen_lam": "Lo chuyện chỗ ở và tích luỹ tài sản lâu dài.",
+   "de_vap": "Dễ vay quá sức vì muốn có nhà thật nhanh."
+  },
+  "Phúc Đức": {
+   "chu_de": "đời sống tinh thần và gia đình lớn",
+   "nen_lam": "Chăm lo niềm vui riêng, giữ nếp nhà và giấc ngủ yên.",
+   "de_vap": "Dễ trăn trở mãi chuyện cũ trong họ hàng."
+  },
+  "Phụ Mẫu": {
+   "chu_de": "học hành, cha mẹ và người dẫn dắt",
+   "nen_lam": "Học từ người đi trước và giữ gần cha mẹ.",
+   "de_vap": "Dễ va chạm với người lớn vì khác cách nghĩ."
+  }
+ },
+ "muc": {
+  "thuan": "Thuận lợi",
+  "can_bang": "Cân bằng",
+  "can_chu_dong": "Cần chủ động"
+ },
+ "cach_cuc_doi_thuong": {
+  "tu_phu_dong_cung": "Bạn điềm tĩnh, biết tổ chức và giữ của, dễ được giao việc lớn — chỉ cần tập lắng nghe và giao bớt việc.",
+  "tu_phu_vu_tuong": "Bạn hợp môi trường có nề nếp, giỏi quản lý tiền và người; càng nhận trách nhiệm rõ càng làm tốt.",
+  "phu_tuong_trieu_vien": "Bạn hay được người trên che chở và có chỗ làm ổn định; đừng vì yên ổn mà ngại thử việc mới.",
+  "co_nguyet_dong_luong": "Bạn hợp làm trong tổ chức, theo chuyên môn, hành chính hay giáo dục; làm đều tay thì vững hơn làm liều.",
+  "sat_pha_tham": "Đời bạn nhiều lần đổi hướng; bạn dám làm, hợp tự lập nghiệp, miễn là có kế hoạch dự phòng cho mỗi lần rẽ.",
+  "cuc_huong_ly_minh": "Bạn có phong thái đĩnh đạc, dễ được nể trọng và hợp vai dẫn dắt; nhớ nghe ý người làm cùng.",
+  "that_sat_trieu_dau": "Bạn can đảm, quyết đoán, có thể làm nên từ hai bàn tay trắng nếu kiên trì tới cùng.",
+  "that_sat_nguong_dau": "Bạn có chí lớn, thích việc khó và làm độc lập; tìm được người hiểu mình để hỏi ý thì đi xa hơn.",
+  "hung_tu_can_nguyen": "Bạn nguyên tắc, kỷ luật, hợp việc hành chính hay pháp lý; nói mềm hơn một chút thì việc trơn tru hơn.",
+  "nhat_le_trung_thien": "Bạn rộng rãi, nhiệt tình, thích cống hiến và được ghi nhận; hợp việc công khai, đứng trước đám đông.",
+  "nguyet_lang_thien_mon": "Bạn tinh tế, điềm đạm, giỏi tích luỹ, có duyên với nhà cửa và tài sản; cứ đều đặn là thấy của.",
+  "tho_tinh_nhap_mieu": "Bạn có lòng bảo bọc người khác, hợp tư vấn, chăm sóc, giáo dục; nhớ chừa sức cho chính mình.",
+  "anh_tinh_nhap_mieu": "Bạn dám bỏ cái cũ làm cái mới, chịu được đổi thay; hợp vai mở đường cho việc chưa ai làm.",
+  "thach_trung_an_ngoc": "Tài của bạn lộ muộn: giỏi phân tích, ăn nói sắc sảo, càng kiên nhẫn mài giũa càng được biết đến.",
+  "cu_nhat_dong_cung": "Bạn hợp nghề dùng lời như dạy học, truyền thông, luật; nói rõ ràng và giữ chữ tín thì tiếng tốt đi xa.",
+  "cu_co_dong_lam": "Bạn nhạy bén, giỏi tính toán, hợp nghiên cứu hay buôn bán linh hoạt; nói ít lại một chút để bớt hiểu lầm.",
+  "tham_vu_dong_hanh": "Thành quả của bạn thường đến muộn, sau những năm trẻ bươn chải; giỏi làm ăn, cứ tích luỹ đều là có ngày gặt.",
+  "nhat_nguyet_dong_lam": "Bạn lúc sôi nổi lúc trầm lặng, đa tài và nhạy cảm; biết lúc nào cần nghỉ thì giữ được sức lâu.",
+  "minh_chau_xuat_hai": "Bạn thông minh, dễ thích nghi, hay được người xung quanh soi đường; chọn chỗ làm tốt là bạn lớn nhanh.",
+  "tam_ky_gia_hoi": "Bạn có cơ hội cả về tiền, vị trí lẫn tiếng tốt; nắm đúng lúc và giữ khiêm tốn thì được ghi nhận lâu.",
+  "song_loc": "Tiền đến với bạn từ cả công sức đều đặn lẫn cơ hội bất ngờ; bạn hợp để dành và tích luỹ lâu dài.",
+  "loc_ma_giao_tri": "Bạn càng đi lại, buôn bán, đổi chỗ làm thì càng có thêm nguồn thu; ngồi yên một chỗ lại kém hơn.",
+  "ta_huu_dong_cung": "Bạn được nhiều người giúp, giỏi gom người làm việc nhóm; nhớ đáp lại những ai đã đỡ mình.",
+  "xuong_khuc_dong_cung": "Bạn sáng dạ, học giỏi, có khiếu viết lách, nghệ thuật hay ngoại ngữ, và có thể dùng nó làm nghề.",
+  "ta_huu_giap_menh": "Gia đình, bạn bè, đồng nghiệp hay giúp bạn đúng lúc; cứ mở lời nhờ sớm, đừng ngại.",
+  "xuong_khuc_giap_menh": "Quanh bạn có nhiều dịp học: thầy hay, sách tốt, khoá học hữu ích — cứ nhận lấy mà học.",
+  "khoi_viet_hoi_menh": "Bạn hay gặp người đi trước sẵn lòng chỉ đường — miễn là bạn chủ động hỏi.",
+  "hoa_tham": "Cơ hội của bạn hay đến bất ngờ và nhanh; chuẩn bị sẵn để nắm, và giữ lại phần đã có khi thời thuận qua đi.",
+  "linh_tham": "Cơ hội của bạn đến âm thầm qua quan hệ và tính toán kín đáo; kiên nhẫn và giữ chữ tín là điểm tựa.",
+  "dao_hoa_pham_chu": "Bạn có sức hút, giỏi giao tiếp, nhiều tài lẻ; đời sống tình cảm, xã giao phong phú nên cần giữ chừng mực.",
+  "kinh_da_giap_menh": "Bạn hay thấy áp lực từ hai phía và phải tự lực nhiều; đổi lại bạn rèn được sự cứng cỏi ít ai có.",
+  "hoa_linh_giap_menh": "Quanh bạn nhiều việc gấp và đổi thay; giữ bình tĩnh, làm từng việc một là cách bạn đứng vững.",
+  "khong_kiep_giap_menh": "Kế hoạch, tiền nong dễ hụt bất ngờ, nhưng bạn có ý tưởng lạ; giữ khoản dự phòng và thử ý tưởng từ quy mô nhỏ.",
+  "ma_dau_doi_kiem": "Bạn can trường, dám xông vào chỗ khó, hợp nghề cạnh tranh hay đòi kỷ luật cao; nhớ giữ an toàn cho mình khi xông pha.",
+  "hoa_ky_thu_menh": "Bạn hay tự trách và cầu toàn, dễ bị hiểu lầm; biết vậy rồi thì nói rõ ý mình và nhẹ tay với chính mình.",
+  "menh_vo_chinh_dieu": "Bạn linh hoạt, dễ thích nghi, chịu ảnh hưởng nhiều từ môi trường và người bên cạnh — nên chọn chỗ đứng và bạn bè cho kỹ.",
+  "than_menh_dong_cung": "Bạn sống nhất quán với bản tính từ trẻ đến già; biết rõ điểm mạnh yếu của mình thì càng về sau càng vững.",
+  "quan_than_khanh_hoi": "Bạn có tầm nhìn và hay được người tài vây quanh giúp sức; biết giao đúng người đúng việc là thế mạnh lớn.",
+  "duong_luong_xuong_loc": "Bạn sáng dạ, chăm học, có duyên thi cử và bằng cấp; nghề cần chuyên môn sâu là đất của bạn.",
+  "liem_trinh_van_vu": "Bạn vừa tinh tế lễ độ vừa quyết đoán, làm được việc thật; hợp vai vừa lo giấy tờ vừa xử lý tại chỗ.",
+  "dan_tri_que_tri": "Bạn tài hoa, có chí, dễ gặp thời để thành danh; giữ được sức bền thì đi xa hơn nhiều người.",
+  "nhat_chieu_loi_mon": "Bạn năng động, hướng ngoại, thường khởi sắc sớm trong đời; giữ đà bằng việc học đều.",
+  "nhat_nguyet_tinh_minh": "Bạn cân bằng giữa lý trí và tình cảm, học hành thuận; người nhà, nhất là cha mẹ, thường là chỗ dựa.",
+  "nguyet_sinh_thuong_hai": "Bạn hiền hoà, tinh tế, giàu tình cảm và có mắt thẩm mỹ; gia đình và niềm vui tinh thần là nơi bạn có phúc.",
+  "nhat_nguyet_chieu_bich": "Bạn có phúc về nhà cửa, đất đai và tài sản tích luỹ; giữ hoà khí trong nhà thì của càng bền.",
+  "co_luong_gia_hoi": "Bạn mưu lược, giỏi phân tích, hay lo xa cho người khác; hợp tư vấn, lập kế hoạch, giảng dạy.",
+  "van_luong_chan_ky": "Bạn ngay thẳng, trọng nguyên tắc, lời nói có chừng mực; hợp vai người góp ý, thầy giáo hay người thẩm định.",
+  "phu_cung_van_tinh": "Bạn nhanh nhẹn, tài hoa, làm việc trí óc lại có người hỗ trợ; giữ được người giỏi bên cạnh là lợi thế.",
+  "tuong_tinh_dac_dia": "Bạn quyết đoán, thực tế, giỏi quản lý tiền và người; việc càng cụ thể bạn càng làm tới nơi tới chốn.",
+  "hoa_tinh_phan_quy": "Đầu đời có thể vất vả, nhưng bạn càng về sau càng khá nhờ biết rút kinh nghiệm — đừng đánh giá mình quá sớm.",
+  "quyen_loc_hoi_menh": "Bạn vừa có năng lực nắm việc vừa có cơ hội về tiền; làm ăn, sự nghiệp dễ có đà nếu giữ kỷ luật.",
+  "loc_hop_uyen_uong": "Bạn có duyên với tiền và tích luỹ tốt; đời sống vật chất thường đầy đủ khi bạn giữ thói quen để dành.",
+  "loc_ma_boi_an": "Bạn làm ăn, công tác xa nhà mà được việc, dễ có cả tiền lẫn chức vụ; đi xa là cơ hội của bạn.",
+  "minh_loc_am_loc": "Ngoài nguồn thu chính, bạn hay có thêm sự giúp đỡ âm thầm; ghi nhớ và đáp lại những người đã giúp.",
+  "khoa_minh_loc_am": "Tiếng tốt của bạn đi trước, lợi ích đến sau; giữ uy tín là cách bạn kiếm được nhiều nhất.",
+  "khoa_quyen_loc_giap": "Người quanh bạn, như anh em, cha mẹ, thường thuận và hay giúp; nhận giúp đỡ mà vẫn tự đứng vững.",
+  "song_loc_giap_menh": "Bạn dễ được hưởng lợi từ gia đình, người thân hay môi trường, ít khi túng thiếu; dùng điều đó để làm việc lớn hơn.",
+  "tai_loc_giap_ma": "Bạn càng đi lại, buôn bán thì tiền càng dễ đến; nghề cần di chuyển nhiều hợp với bạn.",
+  "quy_tinh_giap_menh": "Bạn hay được người có vị thế để ý và nâng đỡ; giữ lời và làm tốt phần mình để giữ được sự tin cậy ấy.",
+  "quyen_sat_hoa_loc": "Bạn cứng cỏi, từng qua nhiều phen gian khó và biến áp lực thành uy tín; nhớ mềm mỏng với người thân.",
+  "cu_phung_tu_sat": "Bạn dễ vướng lời qua tiếng lại, hiểu lầm; nói chậm lại và viết rõ những thoả thuận quan trọng là cách giữ yên.",
+  "menh_ly_phung_khong": "Bạn có ý tưởng khác người, hay theo đuổi điều trừu tượng; tiền đến rồi dễ đi, nên đặt nguyên tắc để dành thật chặt."
+ },
+ "cum_cam": [
+  "hành trình",
+  "khám phá bản thân",
+  "năng lượng vũ trụ",
+  "hãy nhớ rằng",
+  "điều quan trọng là",
+  "không chỉ",
+  "đánh thức",
+  "tiềm năng vô hạn",
+  "vũ trụ gửi",
+  "bước ngoặt định mệnh",
+  "chìa khoá vàng",
+  "chìa khoá",
+  "thăng hoa",
+  "lan toả",
+  "kiến tạo",
+  "trao quyền",
+  "phiên bản tốt nhất",
+  "đồng hành",
+  "bứt phá",
+  "toả sáng",
+  "sứ mệnh",
+  "tâm hồn",
+  "sâu thẳm",
+  "chắc chắn",
+  "định mệnh",
+  "số phận",
+  "tai hoạ",
+  "xui xẻo",
+  "xui",
+  "đại hạn xấu",
+  "khắc",
+  "phá sản",
+  "ly hôn",
+  "chết",
+  "tai nạn",
+  "bạn sẽ",
+  "trong hành trình",
+  "mở ra cánh cửa",
+  "nguồn cảm hứng",
+  "vững vàng tiến bước",
+  "hãy tin rằng",
+  "bạn xứng đáng",
+  "hãy để",
+  "đừng quên rằng",
+  "hãy luôn",
+  "thấu hiểu sâu sắc",
+  "nuôi dưỡng tâm hồn",
+  "hành trang",
+  "cất cánh",
+  "vươn tầm",
+  "chạm đến",
+  "kết nối sâu sắc",
+  "món quà",
+  "ánh sáng bên trong",
+  "con đường phía trước",
+  "dấu ấn riêng",
+  "giá trị cốt lõi",
+  "hoàn thiện bản thân",
+  "mỗi bước đi",
+  "tấm gương phản chiếu",
+  "sức mạnh nội tại",
+  "điều kỳ diệu",
+  "vượt qua mọi thử thách",
+  "bản giao hưởng",
+  "vũ trụ",
+  "nhiệm màu",
+  "tần số rung động",
+  "sự chuyển hoá",
+  "đích đến"
+ ],
+ "muc_mo_ta": {
+  "thuan": "Mảng đời này đang có nhiều điều đỡ cho bạn; làm đúng hướng thì dễ ra kết quả.",
+  "can_bang": "Có cả điểm thuận lẫn chỗ cần để ý; kết quả tuỳ nhiều vào cách bạn làm.",
+  "can_chu_dong": "Mảng này không tự trôi chảy; bạn chủ động sắp xếp sớm thì mọi việc nhẹ hơn nhiều."
+ }
+}
