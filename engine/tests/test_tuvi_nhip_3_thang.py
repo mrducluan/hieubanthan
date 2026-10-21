@@ -259,7 +259,12 @@ def test_thang_nhuan_noi_tiep():
     assert (a["thang"], a["nhuan"]) == (6, False) and (b["phan"], c["phan"]) == ("nua_dau", "nua_sau")
     assert (a["cung_goc"], a["can_chi"]) == (b["cung_goc"], b["can_chi"])
     assert not a["noi_tiep"] and b["noi_tiep"] and not c["noi_tiep"]
-    assert b["nhan_thang"] == "Nửa đầu tháng 6 nhuận" and c["nhan_thang"] == "Nửa sau tháng 6 nhuận"
+    # QC 2026-10-21 (lỗi 7): nửa sau mang can chi THÁNG SAU → nhãn nói rõ "tính như tháng 7" để can chi đứng cạnh
+    # không trông như lỗi; trả `thang_tinh` cho web vẽ nhãn trục riêng hai nửa.
+    assert b["nhan_thang"] == "Nửa đầu tháng 6 nhuận"
+    assert c["nhan_thang"] == "Nửa sau tháng 6 nhuận (tính như tháng 7)"
+    assert (a["thang_tinh"], b["thang_tinh"], c["thang_tinh"]) == (6, 6, 7)
+    assert "nửa sau tháng 6 nhuận (tính như tháng 7)" in r["tom_tat_3_thang"]
     assert c["can_chi"] == "Giáp Thân"                             # nửa sau tính như tháng 7 (QC lỗi can chi)
     assert any("tháng 7" in x for x in c["can_cu"])
     assert a["muc"] == b["muc"] and a["ly_do"] == b["ly_do"]       # mức theo luật, không đổi vì lời nối tiếp
@@ -352,3 +357,18 @@ def test_tom_tat_khong_thuan_khac_nhau_giua_cac_lua_chon():
     a = nh.tom_tat_ba_thang([_t(9, "binh", "Phu Thê"), _t(10, "binh", "Tài Bạch"), _t(11, "binh", "Mệnh")])
     b = nh.tom_tat_ba_thang([_t(9, "binh", "Nô Bộc"), _t(10, "binh", "Tài Bạch"), _t(11, "binh", "Mệnh")])
     assert a.split(". ")[-1] != b.split(". ")[-1]
+
+
+def test_nhan_thang_nhuan_hai_nua():
+    """QC 2026-10-21 (lỗi 7): nhãn tháng (engine nhịp + hỏi đáp) phân biệt hai nửa tháng nhuận và nói rõ nửa sau tính
+    như tháng sau — can chi in cạnh là của tháng sau."""
+    from app.hoidap.tuvi import _ten_thang
+    t = {"thang": 6, "nhuan": True, "phan": "nua_sau", "can_chi": "Giáp Thân"}
+    assert nh.nhan_thang(t) == "nửa sau tháng 6 nhuận (tính như tháng 7)"
+    assert _ten_thang(t) == "nửa sau tháng 6 nhuận âm (tính như tháng 7, Giáp Thân)"
+    t0 = {**t, "phan": "nua_dau", "can_chi": "Quý Mùi"}
+    assert nh.nhan_thang(t0) == "nửa đầu tháng 6 nhuận" and _ten_thang(t0) == "nửa đầu tháng 6 nhuận âm (Quý Mùi)"
+    t12 = {"thang": 12, "nhuan": True, "phan": "nua_sau", "can_chi": "Giáp Dần"}
+    assert nh.nhan_thang(t12) == "nửa sau tháng 12 nhuận (tính như tháng 1 năm sau)"
+    assert _ten_thang({"thang": 9, "nhuan": False, "phan": "ca_thang", "can_chi": "Mậu Tuất"}) == \
+        "tháng 9 âm (Mậu Tuất)"
