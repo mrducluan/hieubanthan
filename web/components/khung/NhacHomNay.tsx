@@ -1,8 +1,10 @@
 "use client";
-// KC-4 — khối "Mốc bạn đã đánh dấu" trên Hôm nay: mốc hôm nay / hôm qua / 7 ngày tới (lưu trên máy), xoá được.
+// KC-4 — khối "Mốc bạn đã đánh dấu" trên Hôm nay: mốc hôm nay / hôm qua / 7 ngày tới (lưu trên máy), xoá được;
+// GĐ1: nút bật nhắc qua thông báo (Web Push) ngay dưới danh sách.
 import Link from "next/link";
 import { Bell, X } from "lucide-react";
 import { nhacSapToi, useNhacViec, xoaNhac } from "@/lib/nhac-viec";
+import { BatNhacPush } from "@/components/khung/BatNhacPush";
 
 const dmy = (iso: string) => `${Number(iso.slice(8, 10))}/${Number(iso.slice(5, 7))}`;
 
@@ -22,6 +24,7 @@ export function NhacHomNay({ homNay }: { homNay: string }) {
         ))}
       </ul>
       <p className="text-xs text-fg-faint">Mốc là nhịp gợi ý bạn tự đánh dấu, lưu trên máy này. Không phải dự báo.</p>
+      <BatNhacPush />
     </section>
   );
 }

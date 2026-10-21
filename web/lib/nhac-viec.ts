@@ -17,6 +17,9 @@ export const NhacViec = z.object({
 });
 export type NhacViec = z.infer<typeof NhacViec>;
 const TOI_DA = 50;
+/** Mã nhắc từ chữ có dấu (vd chi "Tý" → "ty"): bỏ dấu, đ → d, chữ thường, ký tự khác → "_". */
+export const maKhongDau = (s: string) =>
+  s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/gi, "d").toLowerCase().replace(/[^a-z0-9_.+-]/g, "_");
 
 const nghe = new Set<() => void>();
 let daDoc = false;
@@ -48,6 +51,8 @@ export function themNhac(n: Omit<NhacViec, "id" | "tao_luc">): NhacViec {
   ghiXuong(ds.slice(-TOI_DA));
   return moi;
 }
+/** Mọi mốc đang lưu trên máy (KC-4 GĐ1: chép mốc sắp tới lên tài khoản khi bật nhắc qua thông báo). */
+export const dsNhacTrenMay = (): NhacViec[] => doc();
 export function xoaNhac(id: string): void { ghiXuong(doc().filter((x) => x.id !== id)); }
 export function daNhac(ngay: string, ma: string): boolean { return doc().some((x) => x.id === `${ngay}|${ma}`); }
 function dangKy(f: () => void) {

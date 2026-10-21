@@ -113,6 +113,8 @@ export async function xoaHoSoTaiKhoan(userId: string): Promise<void> {
 }
 
 export async function dangXuat(): Promise<void> {
+  // KC-4 GĐ1: máy dùng chung — đăng xuất thì thiết bị thôi nhận nhắc của tài khoản này (xoá khi phiên còn hiệu lực).
+  await import("@/lib/web-push-trinh-duyet").then((m) => m.tatPush()).catch(() => null);
   await (await supabase())?.auth.signOut();
 }
 
@@ -124,5 +126,6 @@ export async function xoaTaiKhoan(): Promise<void> {
   if (!token) throw new Error("Phiên đăng nhập đã hết, đăng nhập lại để xoá.");
   const r = await fetch("/api/tai-khoan/xoa", { method: "POST", headers: { authorization: `Bearer ${token}` } });
   if (!r.ok) throw new Error("Chưa xoá được tài khoản. Thử lại sau.");
+  await import("@/lib/web-push-trinh-duyet").then((m) => m.tatPush()).catch(() => null);   // bảng đã xoá theo; huỷ cả trên trình duyệt
   await sb.auth.signOut();
 }

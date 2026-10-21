@@ -1,11 +1,13 @@
 "use client";
-// KC-4 — nút "Nhắc tôi hôm đó" (lưu trên máy, hiện ở Hôm nay) + "Thêm vào lịch" (.ics) + tuỳ chọn "cả trên tài khoản".
+// KC-4 — nút "Nhắc tôi hôm đó" (lưu trên máy, hiện ở Hôm nay) + "Thêm vào lịch" (.ics) + tuỳ chọn "cả trên tài khoản"
+// (tự lưu lên tài khoản khi thiết bị đã bật nhắc qua thông báo — GĐ1 Web Push).
 import { useState } from "react";
 import { BellPlus, BellRing, CalendarPlus } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { daNhac, taiIcs, themNhac, type NhacViec } from "@/lib/nhac-viec";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { luuNhacTaiKhoan } from "@/lib/tai-khoan-nhac";
+import { pushDangBatTrenMay } from "@/lib/web-push-trinh-duyet";
 import { cn } from "@/lib/utils";
 
 export function NhacToi({ ngay, ma, moDun, nhan, duong, className }: {
@@ -18,6 +20,8 @@ export function NhacToi({ ngay, ma, moDun, nhan, duong, className }: {
     const n = themNhac({ ngay, ma, mo_dun: moDun, nhan, duong });
     setDa(true);
     ghi("chart_interacted", { mo_dun: moDun, kind: "nhac_viec" });
+    // GĐ1: thiết bị đã bật nhắc qua thông báo → mốc phải nằm trong tài khoản để máy chủ gửi đúng ngày.
+    if (nguoi && pushDangBatTrenMay()) luuNhacTaiKhoan(nguoi.id, n).then(() => setTk("sẽ báo trên thiết bị đã bật nhắc")).catch(() => null);
     return n;
   };
   return (

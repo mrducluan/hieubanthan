@@ -637,9 +637,28 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
 - [ ] **Chạy migration 0018** `supabase/migrations/0018_ho_so_nha_nhac_viec.sql` (rollback `.down.sql`): bảng `ho_so_nha` (lưu nhà
   vào tài khoản) + `nhac_viec` (mốc nhắc trong tài khoản). Chưa chạy thì hai nút "Lưu nhà vào tài khoản" / "cả trên tài khoản" báo
   "máy chủ chưa bật" — mọi thứ khác vẫn chạy trên máy người dùng.
-- [ ] **Web Push**: đọc `docs/NHAC-VIEC-VA-WEB-PUSH.md` mục 2–3. Nếu đồng ý làm GĐ1: duyệt dependency `web-push` (MIT), em làm
-  migration 0019 + service worker; anh tạo cặp khoá VAPID và đặt env trên Vercel (em hướng dẫn lệnh).
+- [x] **Web Push**: anh duyệt GĐ1 (2026-10-21) — em đã làm, việc của anh ở mục **WP** ngay dưới.
 - [ ] **Bật thu Sao theo mảng**: đọc `docs/Y-TUONG-VIRAL-VA-NAP-SAO.md` mục C.1 — hiện công tắc `luan_giai.thu_sao` là chung; anh
   chốt có tách theo mảng (Bản đồ con số + Tử vi trước) không, em làm công tắc ở /quan-tri/cai-dat.
 - [ ] Sau khi merge: mở `/hom-nay` sau khi đã đo hướng nhà ở `/phong-thuy` → thấy thẻ "Tháng này nhà bạn"; cuối mỗi bài đọc có khối
   gợi mở + luận giải + rủ bạn + ủng hộ.
+
+## WP. Nhắc việc qua thông báo điện thoại — Web Push GĐ1 (2026-10-21, `docs/NHAC-VIEC-VA-WEB-PUSH.md` mục 2b)
+
+- [ ] **WP1. Chạy migration** trên Supabase → SQL Editor, theo thứ tự: `0018_ho_so_nha_nhac_viec.sql` (nếu chưa) rồi
+  `0019_push_dang_ky.sql`. Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0018, 0019 = true). Rollback: `.down.sql` cùng tên.
+- [ ] **WP2. Tạo khoá VAPID (một lần)**: máy có Node → trong thư mục `web` chạy `node scripts/tao-khoa-vapid.mjs` → in ra 3 dòng
+  `VAPID_PUBLIC_KEY=…`, `VAPID_PRIVATE_KEY=…`, `VAPID_SUBJECT=mailto:contact@hieuban.com`. **Không dán khoá vào chat/git.**
+  (Không có Node: nhờ em chạy rồi anh tự đổi lại sau cũng được, nhưng tốt nhất anh tự chạy để khoá riêng chỉ anh có.)
+- [ ] **WP3. Đặt env trên Vercel** (project web → Settings → Environment Variables → Production + Preview): 3 biến trên. Kiểm
+  `CRON_SECRET` đã có (≥ 16 ký tự, cùng biến cron dọn dữ liệu) và `SUPABASE_SERVICE_ROLE_KEY`. → **Redeploy**. Đổi khoá VAPID về
+  sau = mọi thiết bị đã bật phải bật lại.
+- [ ] **WP4. Thử trên Android/máy tính**: đăng nhập → `/kinh-dich` gieo một quẻ → ở "Mốc đáng để ý" bấm **Nhắc tôi hôm đó** →
+  `/hom-nay` (hoặc `/tai-khoan`) bấm **Bật nhắc trên điện thoại** → cho phép. Muốn thấy thông báo ngay không chờ 8h sáng: tạo một
+  mốc đúng ngày hôm nay rồi Vercel → project web → Settings → Cron Jobs → `/api/cron/nhac-day` → **Run**. Kết quả trả về dạng
+  `{"nguoi":1,"ok":1,…}`; mỗi người chỉ 1 thông báo/ngày nên chạy lại sẽ ra `nguoi: 0`.
+- [ ] **WP5. Thử trên iPhone** (iOS 16.4+): Safari mở hieuban.com → Chia sẻ → **Thêm vào màn hình chính** → mở từ biểu tượng →
+  đăng nhập → Hôm nay → Bật nhắc. (Safari thường không có nút — đúng như thiết kế, trang sẽ hiện hướng dẫn 2 bước.)
+- [ ] **WP6. Luật sư rà** dòng mới trong Chính sách quyền riêng tư (mục dữ liệu + bên xử lý: dịch vụ thông báo của trình duyệt),
+  ngày hiệu lực đã đổi 21/10/2026. Nếu anh đã sửa trang này trong CMS thì thêm hai dòng đó ở CMS (CMS thắng code).
+

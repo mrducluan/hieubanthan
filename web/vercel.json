@@ -3,6 +3,7 @@
   "regions": ["sin1"],
   "crons": [
     { "path": "/api/thanh-toan/doi-soat", "schedule": "17 2 * * *" },
-    { "path": "/api/cron/don-du-lieu-hoc", "schedule": "41 3 * * *" }
+    { "path": "/api/cron/don-du-lieu-hoc", "schedule": "41 3 * * *" },
+    { "path": "/api/cron/nhac-day", "schedule": "3 1 * * *" }
   ]
 }
