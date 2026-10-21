@@ -8,6 +8,7 @@ import { useState } from "react";
 import { ChevronDown, HeartHandshake, ListChecks, Lock, MessageCircleQuestion, Send } from "lucide-react";
 import { QUAN_HE_HOP_THAM, type ChartInputVao, type HoaVaoT, type HopThamOutputT } from "@/app/api/tuvi/schema";
 import { DiemHaiNguoi } from "@/components/huyen-hoc/DiemHaiNguoi";
+import { NutChiaSeHai } from "@/components/chia-se/NutChiaSeHai";
 import { NhanLop } from "@/components/huyen-hoc/KhoiMoLuoi";
 import { HopNoiBat, KiemChungBai } from "@/components/luan-giai/HopNoiBat";
 import { MAU_HOA_DIU } from "@/components/huyen-hoc/PhiHoa";
@@ -41,6 +42,8 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
   const [noiSinh, setNoiSinh] = useState("");
   const [vung, setVung] = useState("");
   const [kq, setKq] = useState<HopThamOutputT | null>(null);
+  // TCS-1: giữ đúng yêu cầu vừa xem (chỉ trong bộ nhớ trang) để máy chủ chấm lại khi tạo thẻ điểm chia sẻ.
+  const [yeuCau, setYeuCau] = useState<Record<string, unknown> | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const { tinh, loi: loiTinh, thuLai: taiLaiTinh } = useDanhSachTinh();
@@ -59,7 +62,7 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
     if (lich === "duong" && Date.UTC(y, m - 1, d) > Date.now()) return setLoi("Ngày sinh người ấy chưa tới.");
     setLoi(null); setDang(true);
     try {
-      const r = await postJson<HopThamOutputT>("/api/tuvi/hop-tham", {
+      const than = {
         la_so: laSo, quan_he: quanHe,
         nguoi_kia: {
           birth_date: iso,
@@ -69,8 +72,10 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
           ...(noiSinh ? { noi_sinh: noiSinh } : {}),
           ...(canVung && (vung === "north" || vung === "south") ? { vung } : {}),
         },
-      });
+      };
+      const r = await postJson<HopThamOutputT>("/api/tuvi/hop-tham", than);
       setKq(r);
+      setYeuCau(than);
       // Đo: chỉ mã (quan hệ, mức điểm) — không ngày sinh, không điểm số cá nhân.
       ghi("chart_interacted", { mo_dun: "tuvi", kind: "hop_tham_xem", quan_he: quanHe, ...(r.diem ? { muc: r.diem.muc } : {}) });
     } catch (e2) {
@@ -80,7 +85,7 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
     }
   }
 
-  if (kq) return <KetQuaHopTham kq={kq} onHoi={onHoi} onLai={() => setKq(null)} />;
+  if (kq) return <KetQuaHopTham kq={kq} yeuCau={yeuCau} onHoi={onHoi} onLai={() => setKq(null)} />;
 
   return (
     <form onSubmit={xem} className="space-y-5" noValidate data-testid="hop-tham-form">
@@ -201,7 +206,9 @@ function DanhSachHoa({ ds, tieuDe, moTa, testId }: { ds: HoaVaoT[]; tieuDe: stri
   );
 }
 
-function KetQuaHopTham({ kq, onHoi, onLai }: { kq: HopThamOutputT; onHoi: (cau: string) => void; onLai: () => void }) {
+function KetQuaHopTham({ kq, yeuCau, onHoi, onLai }: {
+  kq: HopThamOutputT; yeuCau: Record<string, unknown> | null; onHoi: (cau: string) => void; onLai: () => void;
+}) {
   // Khung hỏi đáp chỉ biết lá số của bạn → câu hỏi thêm hướng về cung của chính bạn mà người ấy chạm vào.
   const cungHoi = (kq.nguoi_kia_vao_ban.find((h) => h.hoa === "Kỵ") ?? kq.nguoi_kia_vao_ban[0])?.den_cung;
   const d = kq.diem;
@@ -262,6 +269,7 @@ function KetQuaHopTham({ kq, onHoi, onLai }: { kq: HopThamOutputT; onHoi: (cau: 
             <MessageCircleQuestion aria-hidden /> Hỏi thêm về cung {cungHoi}
           </Button>
         )}
+        {d && yeuCau && <NutChiaSeHai yeuCau={yeuCau} />}
         <Button size="sm" variant="secondary" onClick={onLai}>Xem với người khác</Button>
         <Button asChild size="sm" variant="ghost">
           <Link href="/hop-doi"><Send aria-hidden /> Gửi link để người ấy tự xem</Link>

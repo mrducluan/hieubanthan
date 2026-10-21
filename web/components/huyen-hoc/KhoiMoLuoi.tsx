@@ -1,7 +1,7 @@
 "use client";
 // TV-V2 — khung mở/đóng dùng chung cho các khối Tử vi nâng cao: nội dung (và lời gọi engine bên trong)
 // chỉ được dựng khi người dùng bấm mở lần đầu → không bắn 4 request mỗi lần mở trang.
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -13,8 +13,16 @@ export function KhoiMoLuoi({ id, Icon, tieuDe, moTa, onMoLanDau, moSan = false, 
 }) {
   const [mo, setMo] = useState(moSan);
   const [daMo, setDaMo] = useState(moSan);
+  const ref = useRef<HTMLElement>(null);
+  // TCS-1: link có #<id> (vd thẻ chia sẻ "Điểm hai người" → /tu-vi#hop-tham) → tự mở khối và cuộn tới.
+  useEffect(() => {
+    if (window.location.hash !== `#${id}`) return;
+    setDaMo(true); setMo(true); onMoLanDau?.();
+    requestAnimationFrame(() => ref.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ xét một lần khi khối hiện ra
+  }, [id]);
   return (
-    <section aria-labelledby={`tieu-de-${id}`} className="rounded-2xl border border-line/70 bg-surface/40" data-testid={id}>
+    <section ref={ref} id={id} aria-labelledby={`tieu-de-${id}`} className="scroll-mt-20 rounded-2xl border border-line/70 bg-surface/40" data-testid={id}>
       <h2 id={`tieu-de-${id}`} className="text-xl">
         <button type="button" aria-expanded={mo} aria-controls={`noi-dung-${id}`}
           onClick={() => {

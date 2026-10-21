@@ -6,6 +6,7 @@ import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
 import { UngHoNho } from "@/components/ung-ho/UngHoNho";
 import { HomNay } from "./HomNay";
 import { docMaNgay } from "@/lib/ma-moi";
+import { MAU_TU } from "@/lib/the-chia-se";
 
 const DUONG = "/hom-nay";
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
@@ -22,7 +23,9 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const ma = nd ? ((await searchParams).the as string) : null;
   if (!nd || !ma) return META;
   const tieuDe = `Hôm nay ${nd.t} là Ngày cá nhân ${nd.n} — còn bạn?`;
-  const anh = [`/og/ngay?ma=${encodeURIComponent(ma)}`];
+  // TCS-1: mã QR trên ảnh mang đúng ?tu= của link (gán nguồn người quét ảnh).
+  const tu = (await searchParams).tu;
+  const anh = [`/og/ngay?ma=${encodeURIComponent(ma)}${typeof tu === "string" && MAU_TU.test(tu) ? `&tu=${tu}` : ""}`];
   return {
     ...META,
     openGraph: { ...META.openGraph, title: tieuDe, images: anh },
