@@ -201,3 +201,97 @@ def trach_ban(nam_xay: int, toa: str, the_quai: bool = False) -> dict:
         "to_hop": _to_hop(van, cuc, hq, cung),
         "trang_thai_sao": [{"sao": n, "ten": SAO[n], "trang_thai": trang_thai(n, van)} for n in range(1, 10)],
     }
+
+
+# --------------------------------------------------------------------------- PT-V3: lưu nguyệt · tổ hợp sơn–hướng · hai mệnh quái
+_CHI = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"]
+_TAM_THANG_DAN = {**dict.fromkeys(["Tý", "Ngọ", "Mão", "Dậu"], 8), **dict.fromkeys(["Thìn", "Tuất", "Sửu", "Mùi"], 5),
+                  **dict.fromkeys(["Dần", "Thân", "Tỵ", "Hợi"], 2)}
+HANH_SAO = {1: "Thuỷ", 2: "Thổ", 3: "Mộc", 4: "Mộc", 5: "Thổ", 6: "Kim", 7: "Kim", 8: "Thổ", 9: "Hoả"}
+HANH_QUAI = {"Khảm": "Thuỷ", "Khôn": "Thổ", "Chấn": "Mộc", "Tốn": "Mộc", "Càn": "Kim", "Đoài": "Kim", "Cấn": "Thổ", "Ly": "Hoả"}
+SINH = {"Mộc": "Hoả", "Hoả": "Thổ", "Thổ": "Kim", "Kim": "Thuỷ", "Thuỷ": "Mộc"}
+KHAC = {"Mộc": "Thổ", "Thổ": "Thuỷ", "Thuỷ": "Hoả", "Hoả": "Kim", "Kim": "Mộc"}
+# Gợi ý dân gian cho hành thông quan (màu / chất liệu ở không gian chung) — ghi rõ là tập quán, không vật phẩm.
+GOI_Y_HANH = {"Mộc": "màu xanh lá, đồ gỗ, cây xanh", "Hoả": "màu đỏ, cam, hồng; đèn ấm, ánh sáng", "Thổ": "màu vàng đất, nâu; gốm, đá",
+              "Kim": "màu trắng, xám, ánh kim; kim loại tròn", "Thuỷ": "màu xanh dương, đen; kính, mặt nước nhỏ"}
+_DONG_TU = {"Khảm", "Ly", "Chấn", "Tốn"}
+_NHOM_DIEM = {"thuan": 1, "can_bang": 0, "can_chu_dong": -1}
+
+
+def luu_nguyet(nam: int, thang: int) -> dict:
+    """Sao tháng (lưu nguyệt): `nam` theo Lập xuân, `thang` 1..12 theo tiết (1 = tháng Dần). Năm Tý Ngọ Mão Dậu →
+    tháng Dần nhập trung 8; Thìn Tuất Sửu Mùi → 5; Dần Thân Tỵ Hợi → 2; mỗi tháng lùi một (Thẩm thị, quy tắc phổ biến)."""
+    if not 1 <= thang <= 12:
+        raise ValueError("tháng tiết phải trong 1..12 (1 = tháng Dần)")
+    chi_nam = _CHI[(nam - 4) % 12]
+    tam = _w(_TAM_THANG_DAN[chi_nam] - (thang - 1))
+    return {"nam": nam, "chi_nam": chi_nam, "thang": thang, "chi_thang": _CHI[(thang + 1) % 12], "tam": tam,
+            "sao_tam": SAO[tam], "cung": phi(tam, True)}
+
+
+def luu_nguyet_tai(ngay: dt.date) -> dict:
+    """Sao tháng tại một ngày (giờ Việt Nam, lấy 12:00 trưa): tháng theo tiết khí, năm theo Lập xuân."""
+    t_utc = dt.datetime(ngay.year, ngay.month, ngay.day, 12) - dt.timedelta(hours=7)
+    (_, g), _ = tietkhi.tiet_bao_quanh(t_utc)
+    thang = ((g - 315) % 360) // 30 + 1
+    return {**luu_nguyet(nam_theo_lap_xuan(t_utc), int(thang)), "ngay": ngay.isoformat()}
+
+
+def _kb_hk() -> dict:
+    from app.kb import phongthuy_kb  # noqa: PLC0415
+    return phongthuy_kb.huyen_khong()
+
+
+def to_hop_cung(son: int, huong: int, van: int) -> dict:
+    """Cặp sơn tinh – hướng tinh trong một cung: quan hệ ngũ hành (sơn → hướng), hợp thập, trạng thái từng sao theo vận,
+    nghĩa từ KB 45 cặp (không thứ tự) ghép vai sơn/hướng, mức thuan · can_bang · can_chu_dong."""
+    hs, hh = HANH_SAO[son], HANH_SAO[huong]
+    if hs == hh:
+        qh = "ty_hoa"
+    elif SINH[hs] == hh:
+        qh = "son_sinh_huong"
+    elif SINH[hh] == hs:
+        qh = "huong_sinh_son"
+    elif KHAC[hs] == hh:
+        qh = "son_khac_huong"
+    else:
+        qh = "huong_khac_son"
+    k = _kb_hk()
+    m = k.get("cap_sao", {}).get(f"{min(son, huong)}-{max(son, huong)}", {})
+    sd = k.get("sao_doi_thuong", {})
+    ts, th = trang_thai(son, van), trang_thai(huong, van)
+    diem = _NHOM_DIEM.get(m.get("nhom", "can_bang"), 0) + (1 if th in ("vượng", "sinh") else 0)
+    if any(s in (2, 5) and t in ("suy", "tử", "thoái") for s, t in ((son, ts), (huong, th))):
+        diem -= 1
+    muc = "thuan" if diem >= 1 else "can_chu_dong" if diem <= -1 else "can_bang"
+    mau = k.get("mau_cap", "{y}")
+    y = mau.format(s=son, h=huong, ten_s=sd.get(str(son), {}).get("ten", SAO[son]), ten_h=sd.get(str(huong), {}).get("ten", SAO[huong]),
+                   y=m.get("y", ""))
+    return {"ma": f"{son}-{huong}", "son": son, "huong": huong, "quan_he": qh, "hop_thap": son + huong == 10,
+            "trang_thai_son": ts, "trang_thai_huong": th, "ten": m.get("ten", f"{SAO[son]} – {SAO[huong]}"), "y": y,
+            "nhom_kb": m.get("nhom"), "hop_cho": m.get("hop_cho"), "luu_y": m.get("luu_y"), "muc": muc}
+
+
+def thong_quan(quai_a: str, quai_b: str) -> dict:
+    """Quan hệ ngũ hành hai mệnh quái; khi khắc nhau → hành thông quan (A khắc B: hành A sinh và sinh B)."""
+    a, b = HANH_QUAI[quai_a], HANH_QUAI[quai_b]
+    if a == b:
+        qh, tq = "cung_hanh", None
+    elif SINH[a] == b:
+        qh, tq = "a_sinh_b", None
+    elif SINH[b] == a:
+        qh, tq = "b_sinh_a", None
+    elif KHAC[a] == b:
+        qh, tq = "a_khac_b", SINH[a]
+    else:
+        qh, tq = "b_khac_a", SINH[b]
+    return {"hanh_a": a, "hanh_b": b, "quan_he": qh, "hanh_thong_quan": tq,
+            "goi_y": (f"Ở không gian chung (phòng khách, phòng ngủ chung) thêm nét thuộc hành {tq}: {GOI_Y_HANH[tq]} — "
+                      "tập quán dân gian để hai hành bớt chạm nhau, không phải vật phẩm.") if tq else None}
+
+
+def huong_chung(quai_a: str, quai_b: str) -> list[str]:
+    """Các hướng cát chung của hai mệnh quái (Bát trạch); khác nhóm Đông/Tây tứ mệnh → rỗng."""
+    from app.calc import phongthuy as pt  # noqa: PLC0415
+    ba, bb = pt.bang_huong(quai_a), pt.bang_huong(quai_b)
+    return [h for h in pt.HUONG if ba[h] in pt.CAT and bb[h] in pt.CAT]

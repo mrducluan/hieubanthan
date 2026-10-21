@@ -73,10 +73,10 @@ test("trang chủ: khối hoàng lịch ngay dưới hồ sơ thần số, gợi
   const khoi = page.getByTestId("ngay-tot-trang-chu");
   await expect(khoi).toBeVisible();
   await expect(khoi.getByTestId("tuoi-goi-y")).toBeVisible();
-  // Đứng ngay sau khối hồ sơ (trước banner/“Ba lớp”)
+  // Đứng ngay sau khối hồ sơ (trước banner/“Vì sao xem ở đây”)
   const thuTu = await page.evaluate(() => {
     const k = document.querySelector('[data-testid="ngay-tot-trang-chu"]')!;
-    const b = document.getElementById("ba-lop")!;
+    const b = document.getElementById("vi-sao-chon")!;
     return Boolean(k.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING);
   });
   expect(thuTu).toBe(true);

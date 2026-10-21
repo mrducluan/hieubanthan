@@ -287,14 +287,17 @@ async function moBaoCaoKhoa(page: Page, bc: object) {
   await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
 }
 
-test("Bản đồ con số giữ cách hiện cũ (không có khối đời sống; Bát tự đã sang khung đời sống — luan-giai-bat-tu.spec)", async ({ page }) => {
+test("KC-1: Bản đồ con số dùng cùng khuôn đời sống (hộp, tóm tắt, Vì sao nói vậy), không dòng thời gian đại hạn", async ({ page }) => {
   await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
+  await page.route("**/api/kiem-chung/ty-le**", (r) => r.fulfill({ json: {} }));
   await napHoSo(page);
   await page.goto("/than-so");
   const bd = page.getByTestId("ban-do-con-so").getByTestId("luan-giai-toan-bo");
   await expect(bd).toContainText("Tổng quan: bộ số của bạn");
-  await expect(bd).not.toHaveAttribute("data-phien-ban", /.+/);
-  await expect(page.getByTestId("lg-cot-loi")).toHaveCount(0);
+  await expect(bd).toHaveAttribute("data-phien-ban", "doi_song_1");
+  await expect(bd.getByTestId("lg-cot-loi").getByTestId("hop-noi-bat").first()).toContainText("Đường đời");
+  await expect(bd.getByTestId("lg-chuong-tong_quan").getByTestId("tom-tat")).toBeVisible();
+  await expect(bd.getByTestId("lg-chuong-tong_quan").getByTestId("hop-noi-bat").first()).toBeVisible();
   await expect(page.getByTestId("dong-thoi-gian")).toHaveCount(0);
 });
 

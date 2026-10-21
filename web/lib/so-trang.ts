@@ -130,7 +130,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     tieu_de_seo: "Gieo quẻ Kinh Dịch online: 64 quẻ, 384 hào, lời quẻ có nguồn",
     mo_ta_seo: "Gieo quẻ Kinh Dịch cho một câu hỏi cụ thể: máy gieo, Mai Hoa theo giờ hoặc tự gieo đồng xu. Đọc theo Nghĩa Lý, Lục Hào, Mai Hoa, có trích Chu Dịch và lời nói nôm na.",
     doan: [
-      "Hỏi một quẻ cho một việc cụ thể bạn đang cân nhắc. Quẻ do máy gieo ngẫu nhiên, theo giờ (Mai Hoa) hoặc bạn tự gieo ba đồng xu sáu lần rồi nhập kết quả — AI không chọn quẻ.",
+      "Đang phân vân một việc — nhận lời mời, dọn nhà, mở quán, nói chuyện lại với một người? Gieo một quẻ, nhận câu trả lời ngắn bằng lời thường: việc đang thuận hay cần đổi cách, và nên làm gì trong tuần này. Quẻ do máy gieo ngẫu nhiên, theo giờ, theo số hay phương vị (Mai Hoa), hoặc bạn tự gieo ba đồng xu — AI không chọn quẻ.",
       "Lời đọc gồm quẻ chủ, hào động, quẻ biến; trích nguyên văn Chu Dịch (quái từ, hào từ, Thoán truyện) kèm dịch nghĩa và lời nói nôm na. Mỗi lời đọc có mặt tối và câu hỏi tự soi.",
       "Hỏi lại cùng một việc nhiều lần trong thời gian ngắn, trang sẽ nhắc theo tinh thần quẻ Mông.",
     ],
@@ -145,7 +145,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     tieu_de_seo: "Phong thuỷ Bát trạch: mệnh quái, hướng nhà hợp tuổi, bố cục nhà",
     mo_ta_seo: "Phong thuỷ Bát trạch: mệnh quái theo năm sinh và giới tính, tám hướng du niên, cửa – chủ – bếp, Huyền Không phi tinh, đo hướng bằng la bàn điện thoại, khảo sát bố cục nhà.",
     doan: [
-      "Mệnh quái tính theo năm sinh (mốc Lập xuân) và giới tính, cho ra tám hướng du niên: bốn hướng cát, bốn hướng hung. Từ đó xét cửa chính, phòng ngủ, bếp theo nguyên tắc cửa – chủ – bếp.",
+      "Nhà bạn đang ở — hay căn định mua — có hợp bạn không, và nếu chỉ kê lại một món đồ thì kê gì? Nhập năm sinh, đo hướng cửa bằng điện thoại, trang đọc cho bạn bằng lời thường: bạn hợp phía nào, từng phòng nên đặt gì, tháng nào nên sửa. Phần sách vở (du niên, phi tinh) gập lại cho ai muốn mở.",
       "Bạn có thể đo hướng nhà bằng la bàn điện thoại hoặc nhập độ, xem bàn Huyền Không phi tinh theo vận, và khai bố cục nhà (phòng nào ở phương nào, 18 dấu hiệu quan sát được) để nhận nhận xét gắn với từng mục kho tri thức.",
       "Mục nào là quan niệm dân gian đều ghi rõ. Trang không giới thiệu hay bán vật phẩm “hoá giải”.",
     ],
@@ -177,7 +177,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
 
   // ---------------- B · trang tĩnh / giới thiệu
   { duong: "/", nhom: "tinh", ten: "Trang chủ", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Hiểu Bản Thân — con số nói gì về bạn", h1: "Con số nói gì về bạn?",
+    tieu_de_seo: "Hiểu Bản Thân — con số nói gì về bạn", h1: "Bạn là số mấy?",
     mo_ta_seo: "Thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ): tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.",
   } },
   { duong: "/kham-pha", nhom: "tinh", ten: "Khám phá", o: O_TINH, mac_dinh: {

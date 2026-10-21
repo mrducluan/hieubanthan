@@ -3,6 +3,8 @@
 // (localStorage, không gửi đi) — mất chuỗi không bị phạt gì, chỉ bắt đầu lại. Chia sẻ không kèm ngày sinh.
 // HN-2: "Hôm nay bạn định làm gì?" — chọn ý định hoặc gõ một câu; engine nhận diện ý định bằng luật từ khoá, không lưu
 // câu, không trả lại câu. Trên máy chỉ nhớ MÃ ý định của đúng ngày đó (mở lại trong ngày vẫn thấy).
+import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
+import { NhacHomNay } from "@/components/khung/NhacHomNay";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
@@ -161,7 +163,10 @@ export function HomNay() {
     let huy = false;
     const homNayVn = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
     const daNho = docYDinh(homNayVn);
-    setChon(daNho);
+    // KC-3: link gợi mở từ mảng khác mang ?y_dinh= (mã trong 11 ý định) → chọn sẵn.
+    const q = new URLSearchParams(location.search).get("y_dinh");
+    const hopLe = q && ["cong_viec", "gap_go", "hoc_tap", "tinh_cam", "gia_dinh", "chi_tieu", "van_dong", "bat_dau", "di_chuyen", "nghi_ngoi", "sang_tao"].includes(q) ? q : null;
+    setChon(hopLe && !daNho.includes(hopLe) ? [...daNho, hopLe].slice(0, TOI_DA_Y_DINH) : daNho);
     taiThe(daNho, "").then((t) => {
       if (huy) return;
       setThe(t); setLoi(null);
@@ -286,6 +291,9 @@ export function HomNay() {
                 {the.hoang_lich.ngay_tot_gan && <span className="text-fg-muted"> · Ngày đẹp gần nhất: {dmy(the.hoang_lich.ngay_tot_gan.ngay)}</span>}</p>
             </section>
           )}
+
+          <NhacHomNay homNay={the.ngay_xem} />
+          <ThangNayNha />
 
           <section aria-labelledby="y-dinh" className="glass space-y-4 rounded-2xl p-5" data-testid="y-dinh">
             <div>

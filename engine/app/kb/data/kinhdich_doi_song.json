@@ -1,0 +1,1101 @@
+{
+  "_nguon": "Kho nghĩa đời thường cho đọc quẻ Kinh Dịch (KD-ĐS). Nháp AI — khung dụng thần theo Tăng San Bốc Dịch, thể–dụng theo Mai Hoa Dịch Số, lời quẻ theo Chu Dịch; hành động là gợi ý việc làm đời thường, không phải lời phán.",
+  "source_id": "kd_doi_song_vn",
+  "school_id": "tong_hop_kd",
+  "trang_thai": {
+    "tuan_khong": "đang rơi vào khoảng trống (tuần không): việc chưa tới lúc, chờ ra khỏi khoảng này sẽ rõ",
+    "nguyet_pha": "bị tháng này xung (nguyệt phá): tháng này khó thành, qua tháng tính lại",
+    "am_dong": "tĩnh mà bị ngày gọi dậy (ám động): việc tưởng yên nhưng đang chuyển ngầm",
+    "nhat_pha": "yếu lại bị ngày xung (nhật phá): hôm nay không phải lúc",
+    "nhap_mo": "đang bị giam (nhập mộ): việc kẹt, chờ ngày mở",
+    "nhat_hop": "bị ngày buộc lại (nhật hợp): việc đang treo, chờ ngày xung mở"
+  },
+  "can_doi_chieu": true,
+  "muc": {
+    "thuan": {
+      "nhan": "Thuận lợi",
+      "mo_ta": "Quẻ nghiêng về phía thuận: điều bạn hỏi có đà, việc cần là giữ nhịp và làm cho đúng cách.",
+      "ket_luan": "Việc này đang có đà. Làm tới, nhưng làm cho đúng cách."
+    },
+    "can_bang": {
+      "nhan": "Cân bằng",
+      "mo_ta": "Quẻ không nghiêng hẳn bên nào: kết quả tuỳ cách bạn làm và thời điểm.",
+      "ket_luan": "Việc này chưa ngã ngũ. Kết quả nằm ở cách bạn làm và lúc bạn làm."
+    },
+    "can_chu_dong": {
+      "nhan": "Cần lưu ý",
+      "mo_ta": "Quẻ báo có lực cản: không phải không làm được, mà cần chuẩn bị kỹ hơn, chọn lúc khác hoặc đổi cách.",
+      "ket_luan": "Việc này đang gặp lực cản. Không phải bỏ, mà cần đổi cách hoặc đổi lúc."
+    }
+  },
+  "nhom_hanh_dong": {
+    "thuan": "Việc nên làm ngay",
+    "can_bang": "Việc nên làm để rõ hơn",
+    "can_chu_dong": "Việc nên tránh hoặc lùi lại"
+  },
+  "chu_de": {
+    "chuyen_viec": {
+      "ten": "Chuyển việc, nhận việc mới",
+      "dung_than": "Quan Quỷ",
+      "linh_vuc": "cong_viec",
+      "tu_khoa": [
+        "chuyen viec",
+        "nhan viec",
+        "viec moi",
+        "nhay viec",
+        "nghi viec",
+        "cong ty moi",
+        "nhan loi lam",
+        "nhan offer",
+        "doi viec",
+        "xin viec",
+        "tim viec",
+        "o lai cong ty"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Chốt ngày trả lời, đừng để lời mời nguội.",
+          "Hỏi rõ việc sẽ làm trong 3 tháng đầu.",
+          "Xin số liệu thật về lương, thưởng, giờ làm."
+        ],
+        "can_bang": [
+          "Viết ra 3 điều được và 3 điều mất khi đi.",
+          "Nói chuyện thẳng với sếp hiện tại trước khi quyết.",
+          "Giữ cửa cũ còn mở trong lúc thử cửa mới."
+        ],
+        "can_chu_dong": [
+          "Chưa nộp đơn nghỉ khi chưa có việc chắc trong tay.",
+          "Tìm hiểu kỹ chỗ mới: hỏi người đang làm ở đó.",
+          "Để qua đợt bận này rồi tính tiếp."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên chuẩn bị gì trước khi nhận việc mới?",
+        "Làm sao để nói chuyện với sếp hiện tại cho khéo?"
+      ]
+    },
+    "thang_tien": {
+      "ten": "Thăng tiến, phỏng vấn, đề bạt",
+      "dung_than": "Quan Quỷ",
+      "linh_vuc": "cong_viec",
+      "tu_khoa": [
+        "phong van",
+        "thang chuc",
+        "len chuc",
+        "de bat",
+        "bo nhiem",
+        "ung tuyen",
+        "thang tien",
+        "duoc chon",
+        "lam quan ly",
+        "lam truong"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Chuẩn bị 3 việc đã làm được có số liệu.",
+          "Chủ động xin một cuộc nói chuyện với người quyết.",
+          "Nhận thêm một việc khó để thấy rõ năng lực."
+        ],
+        "can_bang": [
+          "Hỏi thẳng tiêu chí được chọn là gì.",
+          "Tìm một người đi trước để hỏi kinh nghiệm.",
+          "Làm tốt việc hiện tại, chưa vội đòi hỏi."
+        ],
+        "can_chu_dong": [
+          "Chưa phải lúc ép người ta trả lời ngay.",
+          "Xem lại mình còn thiếu gì so với yêu cầu.",
+          "Giữ quan hệ tốt dù đợt này chưa được."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi cần thể hiện điều gì trong buổi phỏng vấn?",
+        "Nếu đợt này chưa được thì nên làm gì tiếp?"
+      ]
+    },
+    "kinh_doanh": {
+      "ten": "Mở quán, kinh doanh, đầu tư",
+      "dung_than": "Thê Tài",
+      "linh_vuc": "tien_bac",
+      "tu_khoa": [
+        "mo quan",
+        "kinh doanh",
+        "dau tu",
+        "gop von",
+        "khoi nghiep",
+        "buon ban",
+        "lam an",
+        "mo cua hang",
+        "mo cong ty",
+        "ban hang",
+        "chung khoan",
+        "mua coin",
+        "bo tien vao"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Làm thử quy mô nhỏ trước, có số liệu rồi mới mở rộng.",
+          "Ghi rõ vốn bỏ ra và mốc thu về trên giấy.",
+          "Chốt người phụ trách tiền bạc ngay từ đầu."
+        ],
+        "can_bang": [
+          "Tính lại dòng tiền 6 tháng, kể cả tháng không có khách.",
+          "Hỏi hai người đã làm nghề này về cái khó thật.",
+          "Chưa vay thêm để làm."
+        ],
+        "can_chu_dong": [
+          "Chỉ dùng số tiền mất đi cũng không ảnh hưởng tới nhà.",
+          "Lùi ngày khai trương để chuẩn bị kỹ hơn.",
+          "Xem lại người cùng làm có cùng cách nghĩ về tiền không."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên bắt đầu với số vốn thế nào?",
+        "Nên làm một mình hay rủ người cùng làm?"
+      ]
+    },
+    "hop_tac": {
+      "ten": "Hợp tác, đối tác",
+      "dung_than": "Ứng",
+      "linh_vuc": "cong_viec",
+      "tu_khoa": [
+        "hop tac",
+        "doi tac",
+        "bat tay",
+        "lam chung",
+        "chung von",
+        "lien ket voi",
+        "hop tac voi",
+        "ky voi"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Viết thoả thuận rõ phần ai làm, ai hưởng.",
+          "Bắt đầu bằng một việc nhỏ cùng nhau.",
+          "Giữ nhịp trao đổi đều đặn mỗi tuần."
+        ],
+        "can_bang": [
+          "Hỏi người từng làm với họ.",
+          "Chốt cách chia cả khi lỗ lẫn khi lãi.",
+          "Để một lối ra nếu không hợp."
+        ],
+        "can_chu_dong": [
+          "Chưa ký giấy khi còn điều chưa rõ.",
+          "Giữ tiền và tài khoản riêng.",
+          "Nói thẳng điều mình đang lấn cấn."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi cần ghi gì vào thoả thuận hợp tác?",
+        "Dấu hiệu nào cho thấy nên dừng hợp tác?"
+      ]
+    },
+    "tien_no": {
+      "ten": "Tiền nợ, đòi nợ, thu hồi",
+      "dung_than": "Thê Tài",
+      "linh_vuc": "tien_bac",
+      "tu_khoa": [
+        "doi no",
+        "tra no",
+        "thu hoi",
+        "cho vay",
+        "muon tien",
+        "no nan",
+        "mon no",
+        "doi lai tien",
+        "lay lai tien",
+        "vay tien",
+        "tien cho muon"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Nhắc đúng lúc, đúng người, có mốc ngày cụ thể.",
+          "Đề nghị trả dần theo lịch rõ ràng.",
+          "Ghi lại mọi lần trao đổi."
+        ],
+        "can_bang": [
+          "Hỏi thẳng họ đang kẹt ở đâu.",
+          "Chấp nhận nhận một phần trước còn hơn chờ cả.",
+          "Tìm người ở giữa có uy tín giúp nói."
+        ],
+        "can_chu_dong": [
+          "Tạm ngưng cho vay thêm.",
+          "Giữ giấy tờ, tin nhắn làm bằng chứng.",
+          "Xem khoản này như đã mất để đỡ hao tâm, được thì mừng."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên nhắc nợ thế nào để giữ tình?",
+        "Khi nào thì nên nhờ pháp luật?"
+      ]
+    },
+    "mua_nha": {
+      "ten": "Mua nhà, mua đất",
+      "dung_than": "Phụ Mẫu",
+      "linh_vuc": "gia_dinh",
+      "tu_khoa": [
+        "mua nha",
+        "mua dat",
+        "mua can ho",
+        "mua chung cu",
+        "mua manh dat",
+        "xuong tien mua",
+        "coc nha",
+        "dat coc"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Kiểm tra giấy tờ pháp lý ở cơ quan có thẩm quyền.",
+          "Đi xem nhà vào buổi tối và lúc trời mưa.",
+          "Chốt giá có thời hạn, đừng kéo dài."
+        ],
+        "can_bang": [
+          "Xem thêm hai căn nữa để có mốc so sánh.",
+          "Tính khoản vay sao cho trả hằng tháng dưới một phần ba thu nhập.",
+          "Hỏi hàng xóm về khu này."
+        ],
+        "can_chu_dong": [
+          "Chưa đặt cọc khi chưa đọc kỹ giấy tờ.",
+          "Thuê người kiểm tra pháp lý độc lập.",
+          "Lùi lại một nhịp, giá tốt sẽ còn."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi cần kiểm tra giấy tờ gì trước khi đặt cọc?",
+        "Hướng nhà này có hợp tuổi tôi không?"
+      ]
+    },
+    "ban_nha": {
+      "ten": "Bán nhà, bán đất",
+      "dung_than": "Thê Tài",
+      "linh_vuc": "tien_bac",
+      "tu_khoa": [
+        "ban nha",
+        "ban dat",
+        "ban can ho",
+        "ban chung cu",
+        "ban manh dat",
+        "rao ban"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Chuẩn bị giấy tờ sẵn để chốt nhanh khi có khách.",
+          "Định giá theo giao dịch thật gần đây.",
+          "Sửa những chỗ nhỏ làm nhà sáng lên."
+        ],
+        "can_bang": [
+          "Chốt mức giá thấp nhất chấp nhận được trước khi rao.",
+          "Rao qua hai kênh, so người hỏi.",
+          "Hỏi rõ người mua đã có tiền chưa."
+        ],
+        "can_chu_dong": [
+          "Chưa hạ giá vội theo một lời chê.",
+          "Xem lại lý do bán có thật sự cần lúc này.",
+          "Cẩn thận người mua giục cọc nhanh."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên định giá thế nào?",
+        "Nên bán lúc này hay chờ thêm?"
+      ]
+    },
+    "xe_co": {
+      "ten": "Mua xe, phương tiện",
+      "dung_than": "Phụ Mẫu",
+      "linh_vuc": "tien_bac",
+      "tu_khoa": [
+        "mua xe",
+        "xe may",
+        "o to",
+        "xe hoi",
+        "doi xe",
+        "xe cu"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Lái thử đúng đoạn đường mình đi hằng ngày.",
+          "Tính cả tiền nuôi xe mỗi tháng, đừng chỉ nhìn tiền mua.",
+          "Chốt trong tuần, có sẵn giấy tờ."
+        ],
+        "can_bang": [
+          "So hai mẫu xe, hỏi người đang dùng.",
+          "Xem xe cũ bằng thợ quen.",
+          "Chưa vay dài để mua xe."
+        ],
+        "can_chu_dong": [
+          "Lùi lại, xem chiếc đang đi còn dùng tốt không.",
+          "Kiểm tra kỹ nguồn gốc xe.",
+          "Đừng để người bán giục."
+        ]
+      },
+      "cau_tiep": [
+        "Nên mua xe mới hay xe cũ?",
+        "Tôi cần kiểm tra gì khi mua xe cũ?"
+      ]
+    },
+    "thi_cu": {
+      "ten": "Thi cử, học hành",
+      "dung_than": "Phụ Mẫu",
+      "linh_vuc": "hoc_hanh",
+      "tu_khoa": [
+        "ky thi",
+        "thi dau",
+        "thi do",
+        "di thi",
+        "thi dai hoc",
+        "thi chung chi",
+        "bang cap",
+        "du hoc",
+        "hoc bong",
+        "hoc tiep",
+        "hoc them",
+        "hoc cao hoc",
+        "thi tuyen"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Ôn đúng phần hay ra, làm đề thật có bấm giờ.",
+          "Ngủ đủ tuần trước ngày thi.",
+          "Chuẩn bị giấy tờ, đường đi từ hôm trước."
+        ],
+        "can_bang": [
+          "Hỏi người đã thi về cái khó thật.",
+          "Chia việc ôn ra từng ngày, có người kiểm.",
+          "Có phương án hai nếu kết quả chưa như ý."
+        ],
+        "can_chu_dong": [
+          "Lùi lịch nếu được, chưa chín thì chưa thi.",
+          "Học lại phần nền, đừng học mẹo.",
+          "Giảm bớt việc khác để tập trung."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên ôn theo cách nào trong thời gian còn lại?",
+        "Nếu lần này chưa đạt thì nên làm gì?"
+      ]
+    },
+    "giay_to": {
+      "ten": "Giấy tờ, hợp đồng, visa, chờ tin",
+      "dung_than": "Phụ Mẫu",
+      "linh_vuc": "cong_viec",
+      "tu_khoa": [
+        "giay to",
+        "hop dong",
+        "visa",
+        "ho so",
+        "giay phep",
+        "so do",
+        "so hong",
+        "cho ket qua",
+        "cho tin",
+        "duoc duyet",
+        "xet duyet",
+        "ky hop dong",
+        "thu tuc"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Nộp đủ một lần, kiểm tra từng tờ trước khi gửi.",
+          "Ghi lại ngày nộp, người nhận.",
+          "Chủ động hỏi tiến độ đúng hẹn."
+        ],
+        "can_bang": [
+          "Hỏi rõ còn thiếu gì, bổ sung ngay.",
+          "Chuẩn bị sẵn bản phụ nếu bị trả về.",
+          "Đọc kỹ điều khoản phạt trước khi ký."
+        ],
+        "can_chu_dong": [
+          "Chưa ký khi còn điều chưa hiểu.",
+          "Nhờ người rành đọc lại hồ sơ.",
+          "Tính thêm thời gian dự phòng."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên để ý điều khoản nào trong hợp đồng?",
+        "Hồ sơ chậm thì nên hỏi ai?"
+      ]
+    },
+    "tinh_cam": {
+      "ten": "Tình cảm, người ấy",
+      "dung_than": "Ứng",
+      "linh_vuc": "tinh_cam",
+      "hoi_dung_than": true,
+      "tu_khoa": [
+        "nguoi yeu",
+        "ban trai",
+        "ban gai",
+        "crush",
+        "to tinh",
+        "quay lai",
+        "chia tay",
+        "hen ho",
+        "nguoi ay",
+        "co ay",
+        "anh ay",
+        "yeu",
+        "thich toi",
+        "tinh cam",
+        "nguoi do co",
+        "nguoi kia co"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Nói thật điều mình muốn, đừng đoán ý.",
+          "Hẹn một buổi gặp riêng, không qua tin nhắn.",
+          "Giữ nhịp đều, không dồn dập."
+        ],
+        "can_bang": [
+          "Hỏi mình: người này có làm mình dễ chịu khi ở cạnh không?",
+          "Cho cả hai một khoảng thời gian rõ ràng để nhìn lại.",
+          "Nói chuyện với một người bạn tỉnh táo."
+        ],
+        "can_chu_dong": [
+          "Chưa quyết định lớn khi đang nhiều cảm xúc.",
+          "Lùi một bước, chăm sóc việc của mình.",
+          "Đặt ranh giới rõ với điều mình không chấp nhận."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên mở lời thế nào?",
+        "Làm sao biết mình nên tiếp tục hay dừng?"
+      ]
+    },
+    "hon_nhan": {
+      "ten": "Cưới hỏi, hôn nhân",
+      "dung_than": "Ứng",
+      "linh_vuc": "tinh_cam",
+      "hoi_dung_than": true,
+      "tu_khoa": [
+        "cuoi",
+        "ket hon",
+        "hon nhan",
+        "dam cuoi",
+        "ly than",
+        "ly hon",
+        "ve chung",
+        "ra mat",
+        "vo chong"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Bàn rõ ba chuyện: tiền, con cái, nhà hai bên.",
+          "Chốt ngày cùng nhau, không để một bên lo hết.",
+          "Gặp gia đình hai bên sớm."
+        ],
+        "can_bang": [
+          "Nói chuyện về điều mình sợ nhất khi về chung.",
+          "Cho nhau thêm thời gian sống gần để hiểu.",
+          "Nhờ người lớn hai bên hiểu chuyện góp ý."
+        ],
+        "can_chu_dong": [
+          "Chưa ép mốc thời gian khi một bên còn do dự.",
+          "Xem lại điều hai bên hay cãi có giải được không.",
+          "Nhờ người tư vấn hôn nhân nếu cần."
+        ]
+      },
+      "cau_tiep": [
+        "Hai chúng tôi nên bàn chuyện gì trước?",
+        "Làm sao để hai gia đình hiểu nhau?"
+      ]
+    },
+    "gia_dinh": {
+      "ten": "Cha mẹ, gia đình",
+      "dung_than": "Phụ Mẫu",
+      "linh_vuc": "gia_dinh",
+      "tu_khoa": [
+        "bo me",
+        "cha me",
+        "bo toi",
+        "me toi",
+        "ong ba",
+        "gia dinh",
+        "ve que",
+        "cha toi",
+        "ma toi",
+        "nha noi",
+        "nha ngoai"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Về thăm hoặc gọi điện đều đặn, có lịch.",
+          "Hỏi ý cha mẹ trước khi quyết việc lớn.",
+          "Chia việc rõ giữa anh chị em."
+        ],
+        "can_bang": [
+          "Nghe hết rồi mới nói phần mình.",
+          "Chọn thời điểm mọi người bình tĩnh để bàn.",
+          "Nhờ người cha mẹ tin làm cầu nối."
+        ],
+        "can_chu_dong": [
+          "Chưa tranh luận chuyện cũ lúc này.",
+          "Lo việc cụ thể trước mắt, bỏ qua lời ra tiếng vào.",
+          "Giữ sức mình để còn lo được lâu dài."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên nói chuyện với cha mẹ thế nào?",
+        "Làm sao chia việc nhà cho anh chị em công bằng?"
+      ]
+    },
+    "con_cai": {
+      "ten": "Con cái",
+      "dung_than": "Tử Tôn",
+      "linh_vuc": "gia_dinh",
+      "tu_khoa": [
+        "con toi",
+        "con cai",
+        "dua con",
+        "mang thai",
+        "sinh con",
+        "con hoc",
+        "con trai toi",
+        "con gai toi",
+        "chau",
+        "con nho",
+        "co con",
+        "sinh em be"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Dành thời gian riêng với con mỗi ngày, dù ngắn.",
+          "Hỏi con muốn gì trước khi sắp đặt.",
+          "Giữ thói quen ăn ngủ đều."
+        ],
+        "can_bang": [
+          "Nói chuyện với thầy cô, người gần con.",
+          "Giảm kỳ vọng xuống mức con làm được.",
+          "Cả nhà thống nhất một cách dạy."
+        ],
+        "can_chu_dong": [
+          "Chưa quyết thay con việc lớn.",
+          "Đi khám đúng lịch nếu liên quan sức khoẻ, không tự đoán.",
+          "Tìm người có chuyên môn thay vì hỏi quanh."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên ở bên con thế nào lúc này?",
+        "Làm sao để cả nhà thống nhất cách dạy con?"
+      ]
+    },
+    "suc_khoe": {
+      "ten": "Sức khoẻ, nhịp sống",
+      "dung_than": "Thế",
+      "linh_vuc": "gia_dinh",
+      "tu_khoa": [
+        "suc khoe",
+        "met moi",
+        "mat ngu",
+        "di kham",
+        "kham benh",
+        "phau thuat",
+        "mo khong",
+        "nam vien",
+        "dieu tri",
+        "hoi phuc",
+        "dau om"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Giữ giờ ngủ cố định, bớt màn hình buổi tối.",
+          "Đi khám định kỳ đúng hẹn.",
+          "Vận động nhẹ mỗi ngày."
+        ],
+        "can_bang": [
+          "Ghi lại nhịp ăn ngủ một tuần để thấy chỗ hao sức.",
+          "Bớt một việc đang ôm.",
+          "Hỏi bác sĩ điều mình lo, không tự tra rồi đoán."
+        ],
+        "can_chu_dong": [
+          "Nghỉ thật sự, không mang việc theo.",
+          "Làm theo chỉ định của bác sĩ, không bỏ dở.",
+          "Nhờ người nhà cùng đi khám."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên bắt đầu thay đổi thói quen nào trước?",
+        "Nhịp sống của tôi đang hao ở đâu?"
+      ]
+    },
+    "di_xa": {
+      "ten": "Đi xa, chuyển chỗ ở, ra nước ngoài",
+      "dung_than": "Thế",
+      "linh_vuc": "cong_viec",
+      "tu_khoa": [
+        "di xa",
+        "chuyen nha",
+        "chuyen cho o",
+        "xuat ngoai",
+        "di nuoc ngoai",
+        "dinh cu",
+        "du lich",
+        "chuyen vao",
+        "chuyen ra",
+        "len thanh pho",
+        "xuat khau lao dong",
+        "di lam xa"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Chốt chỗ ở và việc làm trước khi đi.",
+          "Chuẩn bị giấy tờ, tiền dự phòng 3 tháng.",
+          "Hẹn một người quen ở nơi đến."
+        ],
+        "can_bang": [
+          "Đi thử một chuyến ngắn trước.",
+          "Tính xem về được không nếu không hợp.",
+          "Bàn kỹ với người nhà ở lại."
+        ],
+        "can_chu_dong": [
+          "Lùi lịch đến khi việc ở nhà ổn.",
+          "Đọc kỹ hợp đồng, điều kiện trước khi đặt bút.",
+          "Không đi qua trung gian chưa rõ."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi cần chuẩn bị gì trước khi đi?",
+        "Nên đi một mình hay cả nhà?"
+      ]
+    },
+    "mat_do": {
+      "ten": "Mất đồ, tìm lại",
+      "dung_than": "Thê Tài",
+      "linh_vuc": "tien_bac",
+      "tu_khoa": [
+        "mat vi",
+        "mat do",
+        "mat dien thoai",
+        "mat xe",
+        "tim lai",
+        "bi trom",
+        "roi mat",
+        "that lac",
+        "mat giay to",
+        "mat tien",
+        "mat cho"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Quay lại nơi vừa ở, hỏi người trông coi.",
+          "Nhắn vào các nhóm khu vực ngay.",
+          "Kiểm tra lại chỗ ít ngờ nhất trong nhà."
+        ],
+        "can_bang": [
+          "Khoá tài khoản, báo mất giấy tờ trước.",
+          "Nhờ xem lại camera gần đó.",
+          "Chờ vài ngày, nhiều thứ tự về."
+        ],
+        "can_chu_dong": [
+          "Làm lại giấy tờ sớm, đừng chờ.",
+          "Rút kinh nghiệm chỗ cất.",
+          "Buông nếu đồ không quá quý."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên tìm ở đâu trước?",
+        "Nên báo mất giấy tờ ngay không?"
+      ]
+    },
+    "tranh_chap": {
+      "ten": "Tranh chấp, kiện tụng",
+      "dung_than": "Quan Quỷ",
+      "linh_vuc": "cong_viec",
+      "tu_khoa": [
+        "kien",
+        "tranh chap",
+        "ra toa",
+        "khieu nai",
+        "to cao",
+        "doi quyen loi",
+        "thua kien",
+        "thang kien",
+        "giai quyet tranh chap",
+        "lam don"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Gom đủ giấy tờ, tin nhắn, người làm chứng.",
+          "Hỏi luật sư trước khi gửi đơn.",
+          "Đề nghị gặp nói chuyện trước khi ra toà."
+        ],
+        "can_bang": [
+          "Tính chi phí, thời gian theo đuổi so với thứ đòi được.",
+          "Tìm người đứng giữa hoà giải.",
+          "Không kể chuyện lên mạng."
+        ],
+        "can_chu_dong": [
+          "Giữ bình tĩnh, không trả đũa.",
+          "Ưu tiên thoả thuận nếu còn cửa.",
+          "Bảo vệ bằng chứng, chưa hành động vội."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên hoà giải hay theo đến cùng?",
+        "Cần chuẩn bị bằng chứng gì?"
+      ]
+    },
+    "ban_be": {
+      "ten": "Bạn bè, đồng nghiệp, đối thủ",
+      "dung_than": "Huynh Đệ",
+      "linh_vuc": "cong_viec",
+      "tu_khoa": [
+        "ban be",
+        "ban than",
+        "dong nghiep",
+        "doi thu",
+        "canh tranh",
+        "ban cu",
+        "nhom ban",
+        "ban cung phong",
+        "ganh dua"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Chủ động mở lời, hẹn gặp mặt.",
+          "Rõ ràng chuyện tiền bạc với bạn.",
+          "Giữ lời đã hứa."
+        ],
+        "can_bang": [
+          "Hỏi thẳng điều đang lấn cấn.",
+          "Bớt kỳ vọng, giữ quan hệ ở mức dễ chịu.",
+          "Không nói chuyện người này với người kia."
+        ],
+        "can_chu_dong": [
+          "Giữ khoảng cách một thời gian.",
+          "Không cho mượn tiền lúc này.",
+          "Tập trung việc mình, không so với người."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên nói chuyện lại với bạn thế nào?",
+        "Làm sao giữ quan hệ mà không bị lợi dụng?"
+      ]
+    },
+    "khac": {
+      "ten": "Việc khác",
+      "dung_than": "Ứng",
+      "linh_vuc": null,
+      "tu_khoa": [],
+      "hanh_dong": {
+        "thuan": [
+          "Chốt một bước nhỏ làm ngay trong tuần.",
+          "Nói với người liên quan điều mình định làm.",
+          "Ghi lại mốc để xem lại sau 1 tháng."
+        ],
+        "can_bang": [
+          "Viết ra được và mất của từng lựa chọn.",
+          "Hỏi thêm một người ngoài cuộc.",
+          "Chờ thêm thông tin rồi quyết."
+        ],
+        "can_chu_dong": [
+          "Chưa hành động lớn lúc này.",
+          "Chuẩn bị kỹ phần mình kiểm soát được.",
+          "Đặt mốc xem lại sau 2 tuần."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên làm bước nào trước?",
+        "Điều gì trong việc này do tôi quyết được?"
+      ]
+    },
+    "tinh_cam_nu": {
+      "ten": "Tình cảm, người ấy (người ấy là nữ)",
+      "dung_than": "Thê Tài",
+      "linh_vuc": "tinh_cam",
+      "hoi_dung_than": false,
+      "tu_khoa": [],
+      "hanh_dong": {
+        "thuan": [
+          "Nói thật điều mình muốn, đừng đoán ý.",
+          "Hẹn một buổi gặp riêng, không qua tin nhắn.",
+          "Giữ nhịp đều, không dồn dập."
+        ],
+        "can_bang": [
+          "Hỏi mình: người này có làm mình dễ chịu khi ở cạnh không?",
+          "Cho cả hai một khoảng thời gian rõ ràng để nhìn lại.",
+          "Nói chuyện với một người bạn tỉnh táo."
+        ],
+        "can_chu_dong": [
+          "Chưa quyết định lớn khi đang nhiều cảm xúc.",
+          "Lùi một bước, chăm sóc việc của mình.",
+          "Đặt ranh giới rõ với điều mình không chấp nhận."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên mở lời thế nào?",
+        "Làm sao biết mình nên tiếp tục hay dừng?"
+      ],
+      "goc": "tinh_cam"
+    },
+    "tinh_cam_nam": {
+      "ten": "Tình cảm, người ấy (người ấy là nam)",
+      "dung_than": "Quan Quỷ",
+      "linh_vuc": "tinh_cam",
+      "hoi_dung_than": false,
+      "tu_khoa": [],
+      "hanh_dong": {
+        "thuan": [
+          "Nói thật điều mình muốn, đừng đoán ý.",
+          "Hẹn một buổi gặp riêng, không qua tin nhắn.",
+          "Giữ nhịp đều, không dồn dập."
+        ],
+        "can_bang": [
+          "Hỏi mình: người này có làm mình dễ chịu khi ở cạnh không?",
+          "Cho cả hai một khoảng thời gian rõ ràng để nhìn lại.",
+          "Nói chuyện với một người bạn tỉnh táo."
+        ],
+        "can_chu_dong": [
+          "Chưa quyết định lớn khi đang nhiều cảm xúc.",
+          "Lùi một bước, chăm sóc việc của mình.",
+          "Đặt ranh giới rõ với điều mình không chấp nhận."
+        ]
+      },
+      "cau_tiep": [
+        "Tôi nên mở lời thế nào?",
+        "Làm sao biết mình nên tiếp tục hay dừng?"
+      ],
+      "goc": "tinh_cam"
+    },
+    "hon_nhan_nu": {
+      "ten": "Cưới hỏi, hôn nhân (người ấy là nữ)",
+      "dung_than": "Thê Tài",
+      "linh_vuc": "tinh_cam",
+      "hoi_dung_than": false,
+      "tu_khoa": [],
+      "hanh_dong": {
+        "thuan": [
+          "Bàn rõ ba chuyện: tiền, con cái, nhà hai bên.",
+          "Chốt ngày cùng nhau, không để một bên lo hết.",
+          "Gặp gia đình hai bên sớm."
+        ],
+        "can_bang": [
+          "Nói chuyện về điều mình sợ nhất khi về chung.",
+          "Cho nhau thêm thời gian sống gần để hiểu.",
+          "Nhờ người lớn hai bên hiểu chuyện góp ý."
+        ],
+        "can_chu_dong": [
+          "Chưa ép mốc thời gian khi một bên còn do dự.",
+          "Xem lại điều hai bên hay cãi có giải được không.",
+          "Nhờ người tư vấn hôn nhân nếu cần."
+        ]
+      },
+      "cau_tiep": [
+        "Hai chúng tôi nên bàn chuyện gì trước?",
+        "Làm sao để hai gia đình hiểu nhau?"
+      ],
+      "goc": "hon_nhan"
+    },
+    "hon_nhan_nam": {
+      "ten": "Cưới hỏi, hôn nhân (người ấy là nam)",
+      "dung_than": "Quan Quỷ",
+      "linh_vuc": "tinh_cam",
+      "hoi_dung_than": false,
+      "tu_khoa": [],
+      "hanh_dong": {
+        "thuan": [
+          "Bàn rõ ba chuyện: tiền, con cái, nhà hai bên.",
+          "Chốt ngày cùng nhau, không để một bên lo hết.",
+          "Gặp gia đình hai bên sớm."
+        ],
+        "can_bang": [
+          "Nói chuyện về điều mình sợ nhất khi về chung.",
+          "Cho nhau thêm thời gian sống gần để hiểu.",
+          "Nhờ người lớn hai bên hiểu chuyện góp ý."
+        ],
+        "can_chu_dong": [
+          "Chưa ép mốc thời gian khi một bên còn do dự.",
+          "Xem lại điều hai bên hay cãi có giải được không.",
+          "Nhờ người tư vấn hôn nhân nếu cần."
+        ]
+      },
+      "cau_tiep": [
+        "Hai chúng tôi nên bàn chuyện gì trước?",
+        "Làm sao để hai gia đình hiểu nhau?"
+      ],
+      "goc": "hon_nhan"
+    }
+  },
+  "luc_thu": {
+    "Thanh Long": {
+      "y": "chuyện vui, chuyện tốt lành, có người quý giúp",
+      "doi_thuong": "việc đi kèm niềm vui, tiệc tùng, được người có thiện cảm giúp"
+    },
+    "Chu Tước": {
+      "y": "lời nói, giấy tờ, tin tức, dễ tranh cãi",
+      "doi_thuong": "việc dính đến lời ăn tiếng nói, giấy tờ, tin nhắn — nói cho rõ để khỏi hiểu lầm"
+    },
+    "Câu Trần": {
+      "y": "chậm, ì, đất đai, ruộng vườn, giam giữ",
+      "doi_thuong": "việc đi chậm, nhiều thủ tục, dính đất đai hoặc chỗ cũ"
+    },
+    "Đằng Xà": {
+      "y": "lo lắng, chuyện lạ, mơ hồ, quanh co",
+      "doi_thuong": "việc còn mơ hồ, nhiều nghi ngại, dễ nghĩ nhiều — cần hỏi cho rõ"
+    },
+    "Bạch Hổ": {
+      "y": "mạnh, gấp, va chạm, dao kéo",
+      "doi_thuong": "việc gấp, mạnh tay, có va chạm — làm thì dứt khoát, cẩn thận an toàn"
+    },
+    "Huyền Vũ": {
+      "y": "mờ ám, mất mát, chuyện kín, lừa gạt",
+      "doi_thuong": "việc có phần chưa lộ, dễ mất mát hoặc bị giấu — kiểm tra kỹ, giữ của"
+    }
+  },
+  "hoa": {
+    "tiến thần": {
+      "muc": 1,
+      "doi_thuong": "việc tiến thêm một bước theo đúng chiều đang đi"
+    },
+    "thoái thần": {
+      "muc": -1,
+      "doi_thuong": "việc lùi lại một nhịp, nguội dần nếu không giữ"
+    },
+    "hồi đầu sinh": {
+      "muc": 1,
+      "doi_thuong": "chính biến động này lại tiếp sức cho việc"
+    },
+    "hồi đầu khắc": {
+      "muc": -1,
+      "doi_thuong": "động mà bị chính kết quả của mình quật lại — làm thì phải tính đường lui"
+    },
+    "hoá tiết": {
+      "muc": -1,
+      "doi_thuong": "động mà hao sức, cho đi nhiều hơn nhận"
+    },
+    "hoá khắc xuất": {
+      "muc": 0,
+      "doi_thuong": "chủ động cắt bớt, mạnh tay nhưng tốn công"
+    },
+    "hoá tỷ": {
+      "muc": 0,
+      "doi_thuong": "đổi mà như không đổi, cùng một tính chất"
+    },
+    "phục ngâm": {
+      "muc": -1,
+      "doi_thuong": "dậm chân tại chỗ, rên mà không bước"
+    },
+    "phản ngâm": {
+      "muc": -1,
+      "doi_thuong": "lật qua lật lại, đổi ý nhiều lần"
+    }
+  },
+  "vi_tri_hao": {
+    "1": "hào dưới cùng — việc mới ở đầu, còn sớm, lo phần nền",
+    "2": "hào hai — việc đã có chỗ đứng, đang ở trong, cần người cùng làm",
+    "3": "hào ba — việc tới ngưỡng, dễ nóng vội, phải cẩn thận lúc chuyển",
+    "4": "hào bốn — việc vừa bước sang giai đoạn mới, gần người quyết, giữ đúng phép",
+    "5": "hào năm — việc ở đỉnh, đúng lúc để chốt, nhưng phải xứng với vị trí",
+    "6": "hào trên cùng — việc đã tới cuối, lo chuyện kết, đừng cố kéo thêm"
+  },
+  "the_ung": "Trong quẻ, hào Thế là bạn, hào Ứng là người hoặc việc phía bên kia.",
+  "lam_ro": {
+    "mua_ban": {
+      "cau_hoi": "Bạn đang mua hay đang bán? Hai việc này nhìn bằng hai hào khác nhau trong quẻ.",
+      "lua_chon": [
+        {
+          "ma": "mua_nha",
+          "nhan": "Tôi đang mua"
+        },
+        {
+          "ma": "ban_nha",
+          "nhan": "Tôi đang bán"
+        }
+      ]
+    },
+    "tinh_cam": {
+      "cau_hoi": "Để chọn đúng hào đại diện cho người ấy (theo cách đọc Lục Hào): người ấy là nữ hay nam? Bạn có thể bỏ qua, quẻ sẽ lấy hào Ứng làm người ấy.",
+      "lua_chon": [
+        {
+          "ma": "{goc}_nu",
+          "nhan": "Người ấy là nữ"
+        },
+        {
+          "ma": "{goc}_nam",
+          "nhan": "Người ấy là nam"
+        },
+        {
+          "ma": "{goc}",
+          "nhan": "Bỏ qua, lấy hào Ứng"
+        }
+      ]
+    },
+    "hai_viec": {
+      "cau_hoi": "Một quẻ chỉ soi được một việc. Bạn muốn soi việc nào trước?",
+      "lua_chon": []
+    }
+  },
+  "mau": {
+    "phuc_than": "Việc bạn hỏi chưa lộ ra trong quẻ: người hoặc thứ bạn quan tâm còn đang ở phía sau, chưa tới lúc xuất hiện.",
+    "khong_hao_dong": "Quẻ không có hào động: việc đang yên, chưa có biến chuyển lớn — đọc theo lời chung của quẻ.",
+    "suc_khoe": "Đây là gợi ý về nhịp sống theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám.",
+    "mot_que_mot_viec": "Một quẻ một việc: muốn hỏi việc khác, hãy đặt câu mới; cùng việc này thì nên ngẫm quẻ này, không gieo lại."
+  },
+  "cum_cam": [
+    "hành trình",
+    "khám phá bản thân",
+    "năng lượng vũ trụ",
+    "hãy nhớ rằng",
+    "điều quan trọng là",
+    "không chỉ",
+    "đánh thức",
+    "tiềm năng vô hạn",
+    "vũ trụ gửi",
+    "bước ngoặt định mệnh",
+    "chìa khoá",
+    "thăng hoa",
+    "lan toả",
+    "kiến tạo",
+    "trao quyền",
+    "phiên bản tốt nhất",
+    "đồng hành",
+    "bứt phá",
+    "toả sáng",
+    "sứ mệnh",
+    "tâm hồn",
+    "sâu thẳm",
+    "chắc chắn",
+    "định mệnh",
+    "số phận",
+    "tai hoạ",
+    "tai ương",
+    "xui xẻo",
+    "xui",
+    "vận đen",
+    "đại hung",
+    "hung",
+    "đại cát",
+    "phá sản",
+    "ly hôn",
+    "chết",
+    "tai nạn",
+    "bạn sẽ",
+    "hãy tin rằng",
+    "bạn xứng đáng",
+    "hãy để",
+    "đừng quên rằng",
+    "hãy luôn",
+    "thấu hiểu sâu sắc",
+    "nuôi dưỡng tâm hồn",
+    "hành trang",
+    "cất cánh",
+    "vươn tầm",
+    "chạm đến",
+    "kết nối sâu sắc",
+    "món quà",
+    "ánh sáng bên trong",
+    "con đường phía trước",
+    "sức mạnh nội tại",
+    "điều kỳ diệu",
+    "vượt qua mọi thử thách",
+    "vũ trụ",
+    "nhiệm màu",
+    "tần số rung động",
+    "sự chuyển hoá",
+    "đích đến",
+    "không thể tránh",
+    "chắc chắn sẽ",
+    "100%",
+    "tiền định",
+    "cúng",
+    "giải hạn",
+    "vật phẩm"
+  ]
+}

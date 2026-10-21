@@ -9,7 +9,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { LockKeyhole, MapPin } from "lucide-react";
 import { doanCoThuatNgu, KhungGiaiNghia } from "@/components/hoi/ThuatNgu";
-import { PHAI_DOI_SONG } from "@/lib/kiem-chung";
 import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 import { BieuDoNguHanh, DaiVanHaiCach, ThanhThan } from "./BieuDoBatTu";
@@ -27,19 +26,22 @@ export function ChipMuc({ muc, nhan, className }: { muc?: Muc; nhan?: string; cl
   );
 }
 
-export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true }: {
+export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan = "Luận giải toàn bộ" }: {
   bc: BaoCaoDoiSong; ten: string; /** hiện bản dữ liệu gốc thay bản diễn đạt AI */ goc?: boolean;
   hanhDong?: ReactNode; phanKhoa?: ReactNode; chanTrang?: ReactNode; /** tắt dòng kiểm chứng (vd bài đã lưu cũ) */ kiemChung?: boolean;
+  /** Nhãn nhỏ trên tiêu đề (KC-1: mỗi mảng một tên gói). */ nhan?: string;
 }) {
   const tyLe = useTyLe(kiemChung ? maMauBaoCao(bc) : []);
   const cotLoi = (bc.cot_loi ?? []).filter((h) => !h.dang_xem_lai);
+  // KC-1: phái ghi kèm phiếu kiểm chứng do engine trả (`phai`); báo cáo Tử vi cũ không có → Nam phái Việt.
+  const phai = bc.phai ?? (bc.mo_dun === "thanso" ? "pitago" : bc.mo_dun === "battu" ? "tu_binh" : "nam_phai_viet");
   return (
-    <KiemChungBai.Provider value={{ tyLe, phai: PHAI_DOI_SONG[bc.mo_dun] ?? "nam_phai_viet", tat: !kiemChung }}>
+    <KiemChungBai.Provider value={{ tyLe, phai, tat: !kiemChung }}>
       <article className="bao-cao-ds glass rounded-2xl p-5 sm:p-8 print:bg-white print:text-black" data-testid="luan-giai-toan-bo"
         data-phien-ban={bc.phien_ban}>
         <header className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0">
-            <p className="eyebrow">Luận giải toàn bộ</p>
+            <p className="eyebrow">{nhan}</p>
             {bc.dien_dat && bc.dien_dat !== "mau" && (
               <p className="mt-1 text-xs text-fg-faint" data-testid="dien-dat-ai">
                 Diễn đạt tự động từ dữ liệu đã tính · mỗi chương đã kiểm: không thêm sao, cung, con số hay lời phán ngoài dữ liệu

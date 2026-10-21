@@ -639,3 +639,24 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] Người rành Tử Bình duyệt bảng hỷ/kỵ theo cách cục (`battu_doi_song_kb.json`, mục `cach.*`) — nháp AI.
 - [ ] Nhờ luật sư rà thêm: điểm "Xem lá số 2 người" ghi rõ là tham khảo; chương Vận hạn dùng "Nên tránh / Nên làm",
   không doạ, không vật phẩm.
+
+## PT-KD-ĐS. Nâng cấp Phong thuỷ + Kinh Dịch (2026-10-21, `docs/NANG-CAP-PHONG-THUY-KINH-DICH.md`)
+
+- [ ] **Đọc mục 3 (đề xuất kiến trúc) và duyệt từng ý**: khuôn bài đọc chung mọi mảng · "hồ sơ nhà" lưu trên máy · chip ý định dùng
+  chung · nhắc ứng kỳ opt-in · tín hiệu ngầm thay bình chọn. Em chưa làm mục nào trong 5 mục này.
+- [ ] **Bảng lưu nguyệt trong tài liệu Drive lệch quy tắc chuẩn** (2024 Thìn ghi tháng Dần nhập trung 8; sách Thẩm thị: 5). Em dùng quy
+  tắc chuẩn; nếu anh có nguồn khác cho bảng đó, báo em để thêm công tắc phái.
+- [ ] Sau khi merge: mở `/kinh-dich` hỏi "Tôi nên mua hay bán căn nhà này?" → phải thấy câu hỏi lại trước khi gieo; mở `/phong-thuy` →
+  khối "Nhà của bạn" dưới phần Đo hướng.
+
+## KC. Hồ sơ nhà · nhắc việc · CTA (2026-10-21, đợt 2 của PT-KD-ĐS)
+
+- [ ] **Chạy migration 0018** `supabase/migrations/0018_ho_so_nha_nhac_viec.sql` (rollback `.down.sql`): bảng `ho_so_nha` (lưu nhà
+  vào tài khoản) + `nhac_viec` (mốc nhắc trong tài khoản). Chưa chạy thì hai nút "Lưu nhà vào tài khoản" / "cả trên tài khoản" báo
+  "máy chủ chưa bật" — mọi thứ khác vẫn chạy trên máy người dùng.
+- [ ] **Web Push**: đọc `docs/NHAC-VIEC-VA-WEB-PUSH.md` mục 2–3. Nếu đồng ý làm GĐ1: duyệt dependency `web-push` (MIT), em làm
+  migration 0019 + service worker; anh tạo cặp khoá VAPID và đặt env trên Vercel (em hướng dẫn lệnh).
+- [ ] **Bật thu Sao theo mảng**: đọc `docs/Y-TUONG-VIRAL-VA-NAP-SAO.md` mục C.1 — hiện công tắc `luan_giai.thu_sao` là chung; anh
+  chốt có tách theo mảng (Bản đồ con số + Tử vi trước) không, em làm công tắc ở /quan-tri/cai-dat.
+- [ ] Sau khi merge: mở `/hom-nay` sau khi đã đo hướng nhà ở `/phong-thuy` → thấy thẻ "Tháng này nhà bạn"; cuối mỗi bài đọc có khối
+  gợi mở + luận giải + rủ bạn + ủng hộ.

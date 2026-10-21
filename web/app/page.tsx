@@ -1,10 +1,11 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Layers, MessageCircleQuestionMark, Sparkles, Sun, Zap } from "lucide-react";
+import { ArrowRight, Eye, ListChecks, Sparkles, Sun, Zap } from "lucide-react";
 import { HinhBauTroi, HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { CuaVao } from "@/components/hoso/CuaVao";
-import { ChuThichLop } from "@/components/than-so/LopNoiDung";
+import { DiemMuLuot } from "@/components/trang-chu/DiemMuLuot";
+import { SoSanhChatbot } from "@/components/trang-chu/SoSanhChatbot";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { TEN_SITE } from "@/lib/seo";
 import { BannerTrangChu } from "@/components/khung/BannerTrangChu";
@@ -26,7 +27,7 @@ const META: Metadata = {
 };
 
 const DUONG = "/";
-const H1_MAC_DINH = "Con số nói gì về bạn?";
+const H1_MAC_DINH = "Bạn là số mấy?";
 
 export async function generateMetadata(): Promise<Metadata> {
   return apDungSeo(META, await layNoiDungTrang(DUONG), { tuyetDoi: true });
@@ -50,14 +51,17 @@ export default async function TrangChu() {
         <div>
           <p className="eyebrow flex items-center gap-2"><Sparkles className="size-3.5 text-gold" aria-hidden /> Thần số học · Huyền học phương Đông</p>
           <h1 className="mt-4 text-[2.6rem] leading-[1.08] sm:text-6xl">
-            {nd.dau.h1 && nd.dau.h1 !== H1_MAC_DINH ? nd.dau.h1 : <><span className="whitespace-nowrap">Con số nói gì</span> <span className="text-gradient-gold italic">về bạn?</span></>}
+            {nd.dau.h1 && nd.dau.h1 !== H1_MAC_DINH ? nd.dau.h1 : <>Bạn là <span className="text-gradient-gold italic">số mấy?</span></>}
           </h1>
-          <LoiDanCms nd={nd} className="mt-5 max-w-xl text-lg text-fg-muted">
-            Từ tên và ngày sinh, xem bốn con số cốt lõi của bạn — phép tính minh bạch, ý nghĩa có nguồn,
-            và cả những <span className="text-cinnabar">mặt tối</span> mà hầu hết trang khác giấu đi.
+          {/* TC-HOOK: 3 giây đầu — một điểm mù rất đời thường của từng con số → người xem nhận ra mình/người quen
+              → muốn biết số của mình. Lời dẫn nói rõ nhận được gì, mất bao lâu. */}
+          <DiemMuLuot className="mt-5 max-w-xl" />
+          <LoiDanCms nd={nd} className="mt-4 max-w-xl text-lg text-fg-muted">
+            Gõ tên và ngày sinh. Nửa phút sau bạn có 4 con số của riêng mình, mỗi số kèm 3 điểm mạnh,
+            3 <span className="text-cinnabar">điểm mù</span> — và bạn tự tích xem nó nói trúng mấy điều.
           </LoiDanCms>
           <ul className="mt-5 flex flex-wrap gap-2 text-[0.8rem] text-fg-muted" aria-label="Điểm khác biệt" data-testid="hero-diem">
-            {([[Zap, "text-jade", "30 giây · không cần tài khoản"], [MessageCircleQuestionMark, "text-gold", "Tự soi, không phán thay"], [Layers, "text-moon", "1 hồ sơ cho 5 mảng"]] as const).map(([Icon, mau, chu]) => (
+            {([[Zap, "text-jade", "30 giây · không cần tài khoản"], [Eye, "text-gold", "Nói thật cả điểm mù"], [ListChecks, "text-moon", "Bạn tự chấm đúng – sai"]] as const).map(([Icon, mau, chu]) => (
               <li key={chu} className="inline-flex items-center gap-1.5 rounded-full border border-line/70 bg-surface/50 px-3 py-1 backdrop-blur">
                 <Icon className={`size-3.5 ${mau}`} aria-hidden />{chu}
               </li>
@@ -78,10 +82,11 @@ export default async function TrangChu() {
 
       <Suspense fallback={null}><BannerTrangChu /></Suspense>
 
-      <section aria-labelledby="ba-lop" className="hien-dan">
-        <TieuDeMuc id="ba-lop" nho="Vì sao tin được" lon="Ba lớp, không trộn lẫn"
-          mo_ta="Bạn luôn biết câu nào là toán, câu nào là truyền thống, và câu nào là để chính bạn trả lời." />
-        <ChuThichLop />
+      {/* TC-HOOK: thay "Ba lớp" — so với nhóm chatbot AI đa năng (không nêu tên hãng, xem SoSanhChatbot). */}
+      <section aria-labelledby="vi-sao-chon">
+        <TieuDeMuc id="vi-sao-chon" nho="Vì sao xem ở đây" lon="Chatbot trả lời rất trôi. Nhưng con số có đúng không?"
+          mo_ta="Hỏi chatbot AI về thần số hay lá số, câu trả lời lúc nào cũng nghe hay. Cái khó là biết câu nào đúng, câu nào tự bịa." />
+        <SoSanhChatbot />
       </section>
 
       <section aria-labelledby="kham-pha" className="hien-dan">

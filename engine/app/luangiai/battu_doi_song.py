@@ -1486,5 +1486,5 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
         ds.append(c)
     cot_loi = dsc.them_cot_loi_van_han(chon_cot_loi(ds), ds, nam0)
     tgb_ra = [{k: v for k, v in g.items() if k != "thap_than"} for g in tgb]
-    return _sach({"phien_ban": PHIEN_BAN, "cot_loi": cot_loi, "thoi_gian_bieu": tgb_ra, "chuong": ds,
+    return _sach({"phien_ban": PHIEN_BAN, "phai": "tu_binh", "cot_loi": cot_loi, "thoi_gian_bieu": tgb_ra, "chuong": ds,
                   "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

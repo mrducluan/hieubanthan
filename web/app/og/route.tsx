@@ -157,7 +157,7 @@ function TheKienThuc({ tieuDe, qr, W, H }: { tieuDe: string; qr: string; W: numb
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "absolute", top: 70, left: 100, width: W - 200 }}>
         <div style={{ display: "flex", fontSize: 24, letterSpacing: 6, color: MAU.mo, textTransform: "uppercase" }}>{tieuDe ? "Thư viện kiến thức" : "Hiểu Bản Thân"}</div>
         <div style={{ display: "flex", marginTop: 24, fontSize: tieuDe.length > 60 ? 50 : 60, fontFamily: "Serif", textAlign: "center", lineHeight: 1.2, justifyContent: "center" }}>
-          {tieuDe || "Con số nói gì về bạn?"}
+          {tieuDe || "Bạn là số mấy?"}
         </div>
       </div>
       <div style={{ display: "flex", position: "absolute", top: H - 24 - 112, left: 40, width: W - 40 - 32, justifyContent: "space-between", alignItems: "flex-end" }}>

@@ -1,0 +1,178 @@
+{
+  "_nguon": "Báo cáo 'Nhà của bạn' (PT-ĐS) — lời đời thường ghép từ Bát trạch (du niên), Dương Trạch Tam Yếu (cửa–chủ–bếp), Huyền Không (trạch bàn, lưu niên, lưu nguyệt), tuổi làm nhà dân gian. Nháp AI; mọi câu là gợi ý bố trí, không phải lời phán, không vật phẩm.",
+  "source_id": "pt_doi_song_vn",
+  "school_id": "bat_trach_huyen_khong",
+  "trang_thai": "nhap_ai",
+  "can_doi_chieu": true,
+  "chuong": {
+    "ban_hop_huong": {
+      "tieu_de": "Bạn hợp hướng nào",
+      "cau_hoi": "Mình nên quay về phía nào khi ngủ, khi làm việc?"
+    },
+    "ngoi_nha_voi_ban": {
+      "tieu_de": "Ngôi nhà này với bạn",
+      "cau_hoi": "Nhà đang ở (hoặc định mua) có 'hợp' mình không?"
+    },
+    "tung_phong": {
+      "tieu_de": "Từng phòng trong nhà",
+      "cau_hoi": "Cửa, giường, bếp — nên đặt thế nào?"
+    },
+    "nam_nay": {
+      "tieu_de": "Năm nay và 3 tháng tới",
+      "cau_hoi": "Lúc nào nên sửa, nên dọn, nên động thổ?"
+    },
+    "viec_nen_lam": {
+      "tieu_de": "Việc nên làm",
+      "cau_hoi": "Nếu chỉ làm ba việc thì làm gì trước?"
+    }
+  },
+  "muc": {
+    "thuan": {
+      "nhan": "Thuận lợi"
+    },
+    "can_bang": {
+      "nhan": "Cân bằng"
+    },
+    "can_chu_dong": {
+      "nhan": "Cần lưu ý"
+    }
+  },
+  "nhom": {
+    "Đông tứ mệnh": "Nhóm Đông: hợp bốn phía Bắc, Nam, Đông, Đông Nam.",
+    "Tây tứ mệnh": "Nhóm Tây: hợp bốn phía Tây, Tây Bắc, Tây Nam, Đông Bắc."
+  },
+  "du_nien_doi_thuong": {
+    "Sinh Khí": {
+      "mot_cau": "phía có đà, hợp làm cửa chính, bàn làm việc",
+      "dung": "cửa chính, bàn làm việc, hướng ngồi"
+    },
+    "Thiên Y": {
+      "mot_cau": "phía yên và lành, hợp bếp và chỗ ngủ của người lớn tuổi",
+      "dung": "miệng bếp, phòng ngủ người lớn tuổi"
+    },
+    "Diên Niên": {
+      "mot_cau": "phía bền và hoà, hợp phòng ngủ vợ chồng, đầu giường",
+      "dung": "đầu giường, phòng ngủ vợ chồng"
+    },
+    "Phục Vị": {
+      "mot_cau": "phía tĩnh, hợp bàn học, bàn thờ, góc đọc sách",
+      "dung": "bàn học, bàn thờ, phòng làm việc tĩnh"
+    },
+    "Hoạ Hại": {
+      "mot_cau": "phía kém nhẹ, hợp làm kho, nhà vệ sinh",
+      "dung": "kho, nhà vệ sinh"
+    },
+    "Lục Sát": {
+      "mot_cau": "phía dễ rối, hợp làm kho, nhà vệ sinh, cầu thang",
+      "dung": "kho, nhà vệ sinh, cầu thang"
+    },
+    "Ngũ Quỷ": {
+      "mot_cau": "phía dễ hao, nên để nhà vệ sinh, kho; không đặt cửa chính",
+      "dung": "nhà vệ sinh, kho"
+    },
+    "Tuyệt Mệnh": {
+      "mot_cau": "phía kém nhất, để nơi ít dùng; tránh cửa chính và đầu giường",
+      "dung": "nơi ít dùng"
+    }
+  },
+  "vai": {
+    "chu": "bạn",
+    "vo": "vợ",
+    "chong": "chồng",
+    "con": "con",
+    "cha_me": "cha mẹ",
+    "khac": "người thân"
+  },
+  "mau": {
+    "can_sinh": "Để biết bạn hợp hướng nào cần năm sinh và giới tính (tốt nhất là ngày sinh đầy đủ, vì mốc đầu năm là Lập xuân, khoảng 4/2).",
+    "can_huong": "Để xem ngôi nhà với bạn cần hướng nhà: đo bằng la bàn điện thoại ở cửa chính (hoặc ban công nếu căn hộ lấy sáng chính từ đó), hay chọn một trong 8 hướng.",
+    "can_bo_cuc": "Khai thêm vị trí cửa chính, phòng ngủ, bếp (nhìn từ tâm nhà) ở mục Khảo sát nhà, phần này sẽ đọc từng phòng.",
+    "can_nam_xay": "Có năm xây hoặc năm dọn vào, phần này thêm lớp sao theo thời gian (Huyền Không) cho từng phòng và từng tháng.",
+    "hinh_the_truoc": "Nhà ở trước hết là ánh sáng, gió, lối đi, an toàn. Những điều dưới đây là lớp 'lý khí' theo sách xưa — chỉ áp dụng sau khi những điều đó đã ổn.",
+    "khac_nhom": "Hai người khác nhóm Đông/Tây: không có hướng nào tốt cho cả hai theo Bát trạch. Cách thường dùng: hướng nhà và cửa theo người trụ cột, còn đầu giường, bàn làm việc thì mỗi người theo mệnh của mình.",
+    "cung_nhom": "Cả nhà cùng nhóm: các phía tốt trùng nhau, dễ bố trí.",
+    "ban_cong": "Căn hộ: nếu cửa ra vào ở hành lang kín, nhiều sách lấy hướng ban công (nơi lấy sáng, lấy gió chính) làm hướng nhà — bạn đã chọn cách này; đổi lại ở phần đo hướng nếu muốn so.",
+    "ket": "Đây là gợi ý bố trí theo sách xưa để bạn tự cân nhắc, không phải lời tiên đoán. Ánh sáng, thông gió, an toàn và nếp sinh hoạt của người ở quan trọng hơn hướng. Không cần mua gì thêm.",
+    "khong_vat_pham": "Mọi gợi ý ở đây chỉ là sắp xếp lại đồ đạc, ánh sáng và nếp dùng phòng — không cần mua gì thêm, không có thứ gì để đeo hay treo."
+  },
+  "thang_sao": {
+    "thuan": [
+      1,
+      4,
+      6,
+      8,
+      9
+    ],
+    "can_chu_dong": [
+      2,
+      5
+    ],
+    "can_bang": [
+      3,
+      7
+    ],
+    "y": {
+      "thuan": "tháng thuận để sửa sang, dọn dẹp, kê lại phía này",
+      "can_bang": "tháng bình thường, sửa nhỏ được, việc lớn chờ",
+      "can_chu_dong": "tháng nên giữ yên phía này: không đục phá, không động thổ, dọn gọn là đủ"
+    }
+  },
+  "cum_cam": [
+    "hành trình",
+    "khám phá bản thân",
+    "năng lượng vũ trụ",
+    "hãy nhớ rằng",
+    "điều quan trọng là",
+    "không chỉ",
+    "đánh thức",
+    "tiềm năng vô hạn",
+    "vũ trụ gửi",
+    "chìa khoá",
+    "thăng hoa",
+    "lan toả",
+    "kiến tạo",
+    "trao quyền",
+    "phiên bản tốt nhất",
+    "đồng hành",
+    "bứt phá",
+    "toả sáng",
+    "sứ mệnh",
+    "tâm hồn",
+    "sâu thẳm",
+    "chắc chắn",
+    "định mệnh",
+    "số phận",
+    "tai hoạ",
+    "tai ương",
+    "xui xẻo",
+    "xui",
+    "vận đen",
+    "đại hung",
+    "hung",
+    "đại cát",
+    "phá sản",
+    "ly hôn",
+    "chết",
+    "tai nạn",
+    "bạn sẽ",
+    "hãy tin rằng",
+    "hãy để",
+    "hãy luôn",
+    "vũ trụ",
+    "nhiệm màu",
+    "tần số rung động",
+    "không thể tránh",
+    "chắc chắn sẽ",
+    "tiền định",
+    "vật phẩm",
+    "tỳ hưu",
+    "thạch anh",
+    "bùa",
+    "giải hạn",
+    "chiêu tài",
+    "trấn trạch",
+    "bệnh tim",
+    "ung thư",
+    "đột quỵ"
+  ]
+}
