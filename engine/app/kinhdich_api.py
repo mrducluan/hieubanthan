@@ -90,12 +90,17 @@ class HoiKDInput(BaseModel):
 
     cau_hoi: str = Field(min_length=3, max_length=500)
     che_do: Literal["tu_dong", "nghia_ly", "day_du"] = "tu_dong"
-    cach_ra_que: Literal["may_gieo", "gieo_tay", "mai_hoa"] = "may_gieo"
+    cach_ra_que: Literal["may_gieo", "gieo_tay", "mai_hoa", "mai_hoa_so", "mai_hoa_phuong"] = "may_gieo"
     phuong_phap: Literal["thi", "tien", "thi-vatly"] = "thi"
     gia_tri_hao: list[int] | None = Field(default=None, min_length=6, max_length=6)
     thoi_diem: _dt.datetime | None = Field(default=None, description="Giờ Việt Nam; mặc định: bây giờ")
     # TP-LICH: âm lịch dùng cho Mai Hoa (năm/tháng/ngày âm của lúc hỏi).
     lich: Literal["viet", "trung"] = "viet"
+    # KD-ĐS: chủ đề (chip) chốt dụng thần + nhóm việc; Mai Hoa theo số người dùng chọn / theo phương vị.
+    # Số và phương do NGƯỜI DÙNG đưa vào theo đúng phép Mai Hoa — không phải trường chọn quẻ theo ý.
+    chu_de: str | None = Field(default=None, max_length=40, pattern=r"^[a-z_]+$")
+    so_mai_hoa: list[int] | None = Field(default=None, min_length=2, max_length=2)
+    phuong_mai_hoa: Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] | None = None
 
 
 @router.post("/hoi")
@@ -103,11 +108,23 @@ def api_hoi(inp: HoiKDInput, background: BackgroundTasks) -> dict:
     """HH-1: phân loại → chọn phái (+ dụng thần) → ra quẻ → gói bằng chứng KB → trả lời."""
     if inp.cach_ra_que == "gieo_tay" and inp.gia_tri_hao is None:
         raise HTTPException(422, detail="Gieo tay: cần 6 giá trị hào (6/7/8/9, hào 1 → 6).")
+    if inp.cach_ra_que == "mai_hoa_so" and (inp.so_mai_hoa is None or any(x <= 0 or x > 9999 for x in inp.so_mai_hoa)):
+        raise HTTPException(422, detail="Mai Hoa theo số: cần hai số nguyên dương (1–9999) bạn tự chọn.")
+    if inp.cach_ra_que == "mai_hoa_phuong" and not inp.phuong_mai_hoa:
+        raise HTTPException(422, detail="Mai Hoa theo phương vị: cần chọn phương.")
     try:
         kq = hoidap_kd.tra_loi(inp.cau_hoi.strip(), inp.che_do, gia_tri_hao=inp.gia_tri_hao,
                                thoi_diem=inp.thoi_diem.replace(tzinfo=None) if inp.thoi_diem else None,
-                               phuong_phap=inp.phuong_phap, cach_ra_que=inp.cach_ra_que, lich=inp.lich)
+                               phuong_phap=inp.phuong_phap, cach_ra_que=inp.cach_ra_que, lich=inp.lich,
+                               chu_de=inp.chu_de, so_mai_hoa=inp.so_mai_hoa, phuong_mai_hoa=inp.phuong_mai_hoa)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     background.add_task(nhat_ky.ghi_huyenhoc, "kinhdich", inp.cau_hoi, kq, False)
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "kinhdich")}
+
+
+@router.get("/chu-de")
+def api_chu_de() -> dict:
+    """KD-ĐS: danh mục chủ đề (chip) — mã, tên, dụng thần Lục Hào tương ứng."""
+    from app.luangiai import kinhdich_doi_song as kd_ds  # noqa: PLC0415
+    return {"engine_version": ENGINE_VERSION, "chu_de": kd_ds.danh_sach_chu_de()}

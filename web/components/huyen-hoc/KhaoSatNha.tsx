@@ -3,12 +3,13 @@
 // hướng vật dụng). Web chỉ gom lựa chọn thành JSON bố cục; engine luận Bát trạch + kho tình huống (có nguồn).
 // Cùng JSON này sau này sẽ do ảnh/video điền sẵn (PT-V2) — người dùng chỉ việc xác nhận.
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check, ClipboardList, Home, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
+import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
 import { cn } from "@/lib/utils";
 
 interface DanhMuc {
@@ -61,6 +62,18 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     fetch("/api/phongthuy/bo-cuc/danh-muc").then((r) => (r.ok ? r.json() : null)).then(setDm).catch(() => setDm(null));
   }, []);
   useEffect(() => { if (doHuongGoiY != null) setDoNha(String(doHuongGoiY)); }, [doHuongGoiY]);
+  // KC-2: bố cục đã khai lần trước (hồ sơ nhà trên máy) điền sẵn một lần.
+  const nhaLuu = useHoSoNha();
+  const daDien = useRef(false);
+  useEffect(() => {
+    if (!nhaLuu || daDien.current) return;
+    daDien.current = true;
+    if (nhaLuu.huong_do != null && doHuongGoiY == null) setDoNha(String(nhaLuu.huong_do)); else if (nhaLuu.huong && doHuongGoiY == null) setHuong(nhaLuu.huong);
+    const b = nhaLuu.bo_cuc;
+    if (b?.vi_tri) setViTri(b.vi_tri);
+    if (b?.dau_hieu) setDau(new Set(b.dau_hieu));
+    if (b?.huong_do) setHuongDo(Object.fromEntries(Object.entries(b.huong_do).map(([k, v]) => [k, String(v)])));
+  }, [nhaLuu, doHuongGoiY]);
 
   const dat = (cung: string) => setViTri((v) => {
     const m = { ...v };
@@ -94,6 +107,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
         ...(sinh ? { sinh } : {}),
       });
       setKq(r);
+      try { luuHoSoNha({ ...(d != null ? { huong_do: d } : {}), bo_cuc: { vi_tri: viTri, huong_do: hd, dau_hieu: [...dau] } }); } catch { /* bỏ qua */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "khao_sat_nha" });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa luận được bố cục này."); }
     finally { setDang(false); }

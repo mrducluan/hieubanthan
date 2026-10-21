@@ -5,6 +5,7 @@ import { Compass, Navigation, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { postJson } from "@/lib/goi-api";
+import { luuHoSoNha } from "@/lib/ho-so-nha";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 
@@ -99,6 +100,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot }: {
       const r = await postJson<KetQuaDoHuong>("/api/phongthuy/do-huong", { do_huong: doHuong, ...(sinh ? { sinh } : {}) });
       setKq(r);
       onChot?.(r);
+      try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined }); } catch { /* bỏ qua */ }   // KC-2: hồ sơ nhà trên máy
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: dangDo ? "la_ban_dien_thoai" : "nhap_do_huong" });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đổi được độ này."); }
     finally { setDang(false); }

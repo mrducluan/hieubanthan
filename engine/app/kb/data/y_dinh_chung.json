@@ -1,0 +1,607 @@
+{
+  "_nguon": "Từ điển ý định dùng chung giữa các mảng (KC-3): một mã cho một nỗi băn khoăn, mỗi mảng ánh xạ sang chủ đề / cung / chỉ số / phòng của mình. Luật tất định, không LLM. Link chỉ trong site.",
+  "source_id": "hbt_y_dinh_chung",
+  "school_id": "tong_hop",
+  "trang_thai": "nhap_ai",
+  "y_dinh": {
+    "cong_viec": {
+      "ten": "Công việc, chuyển việc, thăng tiến",
+      "mo_ta": "nhận việc mới, ở lại hay đi, phỏng vấn, đề bạt",
+      "lien_ket": [
+        {
+          "mo_dun": "kinhdich",
+          "duong": "/kinh-dich?chu_de=chuyen_viec",
+          "nhan": "Gieo một quẻ cho việc đi hay ở"
+        },
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Xem cung Quan Lộc và 3 tháng tới"
+        },
+        {
+          "mo_dun": "thanso",
+          "duong": "/than-so#noi-dau",
+          "nhan": "Năm cá nhân này hợp đổi việc không?"
+        },
+        {
+          "mo_dun": "battu",
+          "duong": "/bat-tu",
+          "nhan": "Thập thần nói gì về cách bạn làm việc"
+        },
+        {
+          "mo_dun": "phongthuy",
+          "duong": "/phong-thuy#nha-cua-ban",
+          "nhan": "Bàn làm việc nên quay phía nào"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay?y_dinh=cong_viec",
+          "nhan": "Hôm nay làm việc đó có thuận?"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [
+          "chuyen_viec",
+          "thang_tien",
+          "giay_to"
+        ],
+        "tuvi": [
+          "di_hay_o"
+        ],
+        "tuvi_cung": "Quan Lộc",
+        "thanso": [
+          "su_nghiep_tien_bac"
+        ],
+        "thanso_linh_vuc": "su_nghiep",
+        "hom_nay": [
+          "cong_viec"
+        ],
+        "phongthuy": [
+          "phong_lam_viec"
+        ],
+        "battu": [
+          "su_nghiep"
+        ]
+      }
+    },
+    "kinh_doanh_tien": {
+      "ten": "Tiền bạc, kinh doanh, đầu tư",
+      "mo_ta": "mở quán, góp vốn, nợ, mua bán tài sản",
+      "lien_ket": [
+        {
+          "mo_dun": "kinhdich",
+          "duong": "/kinh-dich?chu_de=kinh_doanh",
+          "nhan": "Gieo một quẻ cho khoản này"
+        },
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Xem cung Tài Bạch năm nay"
+        },
+        {
+          "mo_dun": "thanso",
+          "duong": "/than-so#noi-dau",
+          "nhan": "Tháng nào hợp bàn chuyện tiền"
+        },
+        {
+          "mo_dun": "battu",
+          "duong": "/bat-tu",
+          "nhan": "Tài tinh trong lá số của bạn"
+        },
+        {
+          "mo_dun": "phongthuy",
+          "duong": "/phong-thuy#nha-cua-ban",
+          "nhan": "Phía cửa năm nay có thuận?"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay?y_dinh=chi_tieu",
+          "nhan": "Hôm nay chi tiêu lớn được không?"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [
+          "kinh_doanh",
+          "tien_no",
+          "mat_do",
+          "xe_co"
+        ],
+        "tuvi": [
+          "tai_van"
+        ],
+        "tuvi_cung": "Tài Bạch",
+        "thanso": [
+          "su_nghiep_tien_bac"
+        ],
+        "thanso_linh_vuc": "tai_chinh",
+        "hom_nay": [
+          "chi_tieu"
+        ],
+        "phongthuy": [
+          "cua_chinh"
+        ],
+        "battu": [
+          "su_nghiep"
+        ]
+      }
+    },
+    "tinh_cam": {
+      "ten": "Tình cảm, hôn nhân",
+      "mo_ta": "người ấy, quay lại, cưới hỏi, vợ chồng",
+      "lien_ket": [
+        {
+          "mo_dun": "kinhdich",
+          "duong": "/kinh-dich?chu_de=tinh_cam",
+          "nhan": "Gieo một quẻ về người ấy"
+        },
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Xem cung Phu Thê"
+        },
+        {
+          "mo_dun": "thanso",
+          "duong": "/hop-doi",
+          "nhan": "Hợp đôi theo thần số (không chấm điểm)"
+        },
+        {
+          "mo_dun": "phongthuy",
+          "duong": "/phong-thuy#nha-cua-ban",
+          "nhan": "Đầu giường hai người nên quay phía nào"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay?y_dinh=tinh_cam",
+          "nhan": "Hôm nay hẹn gặp có thuận?"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [
+          "tinh_cam",
+          "hon_nhan",
+          "tinh_cam_nu",
+          "tinh_cam_nam",
+          "hon_nhan_nu",
+          "hon_nhan_nam"
+        ],
+        "tuvi": [],
+        "tuvi_cung": "Phu Thê",
+        "thanso": [
+          "tinh_cam_gia_dinh"
+        ],
+        "thanso_linh_vuc": "tinh_yeu",
+        "hom_nay": [
+          "tinh_cam"
+        ],
+        "phongthuy": [
+          "phong_ngu_chinh"
+        ],
+        "battu": [
+          "tong_quan"
+        ]
+      }
+    },
+    "gia_dinh": {
+      "ten": "Cha mẹ, con cái, gia đình",
+      "mo_ta": "chuyện trong nhà, con học hành, cha mẹ",
+      "lien_ket": [
+        {
+          "mo_dun": "kinhdich",
+          "duong": "/kinh-dich?chu_de=gia_dinh",
+          "nhan": "Gieo một quẻ cho chuyện nhà"
+        },
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Xem cung Tử Tức, Phụ Mẫu"
+        },
+        {
+          "mo_dun": "thanso",
+          "duong": "/than-so#noi-dau",
+          "nhan": "Số của bạn trong vai người thân"
+        },
+        {
+          "mo_dun": "phongthuy",
+          "duong": "/phong-thuy#nha-cua-ban",
+          "nhan": "Phòng của từng người trong nhà"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay?y_dinh=gia_dinh",
+          "nhan": "Hôm nay về nhà nói chuyện được không?"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [
+          "gia_dinh",
+          "con_cai"
+        ],
+        "tuvi": [
+          "hoc_hanh_con"
+        ],
+        "tuvi_cung": "Tử Tức",
+        "thanso": [
+          "tinh_cam_gia_dinh"
+        ],
+        "thanso_linh_vuc": "gia_dinh",
+        "hom_nay": [
+          "gia_dinh"
+        ],
+        "phongthuy": [
+          "bep"
+        ],
+        "battu": [
+          "tong_quan"
+        ]
+      }
+    },
+    "hoc_hanh": {
+      "ten": "Học hành, thi cử",
+      "mo_ta": "kỳ thi, du học, học thêm, chọn ngành",
+      "lien_ket": [
+        {
+          "mo_dun": "kinhdich",
+          "duong": "/kinh-dich?chu_de=thi_cu",
+          "nhan": "Gieo một quẻ cho kỳ thi"
+        },
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Xem cung Quan Lộc, Phụ Mẫu"
+        },
+        {
+          "mo_dun": "thanso",
+          "duong": "/than-so#noi-dau",
+          "nhan": "Số của bạn học kiểu nào hợp"
+        },
+        {
+          "mo_dun": "phongthuy",
+          "duong": "/phong-thuy#nha-cua-ban",
+          "nhan": "Bàn học nên đặt phía nào"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay?y_dinh=hoc_tap",
+          "nhan": "Hôm nay học có vào không?"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [
+          "thi_cu"
+        ],
+        "tuvi": [
+          "hoc_hanh_con"
+        ],
+        "tuvi_cung": "Quan Lộc",
+        "thanso": [
+          "su_nghiep_tien_bac"
+        ],
+        "thanso_linh_vuc": "hoc_tap",
+        "hom_nay": [
+          "hoc_tap"
+        ],
+        "phongthuy": [
+          "phong_lam_viec"
+        ],
+        "battu": [
+          "ngu_hanh"
+        ]
+      }
+    },
+    "nha_cua": {
+      "ten": "Nhà cửa: mua, bán, sửa, dọn",
+      "mo_ta": "mua nhà, bán nhà, sửa nhà, chuyển nhà",
+      "lien_ket": [
+        {
+          "mo_dun": "phongthuy",
+          "duong": "/phong-thuy#nha-cua-ban",
+          "nhan": "Đọc bài Nhà của bạn"
+        },
+        {
+          "mo_dun": "kinhdich",
+          "duong": "/kinh-dich?chu_de=mua_nha",
+          "nhan": "Gieo một quẻ cho căn này"
+        },
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Xem cung Điền Trạch"
+        },
+        {
+          "mo_dun": "tuoi",
+          "duong": "/xem-tuoi-lam-nha",
+          "nhan": "Tuổi bạn năm nay làm nhà được không"
+        },
+        {
+          "mo_dun": "xem_ngay",
+          "duong": "/xem-ngay-tot",
+          "nhan": "Chọn ngày dọn nhà, động thổ"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay?y_dinh=bat_dau",
+          "nhan": "Hôm nay bắt đầu việc nhà có thuận?"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [
+          "mua_nha",
+          "ban_nha"
+        ],
+        "tuvi": [
+          "chon_thoi_diem"
+        ],
+        "tuvi_cung": "Điền Trạch",
+        "thanso": [
+          "thoi_diem_chu_ky"
+        ],
+        "thanso_linh_vuc": null,
+        "hom_nay": [
+          "bat_dau"
+        ],
+        "phongthuy": [
+          "cua_chinh"
+        ],
+        "battu": [
+          "van"
+        ]
+      }
+    },
+    "suc_khoe": {
+      "ten": "Sức khoẻ, nhịp sống",
+      "mo_ta": "mệt, mất ngủ, nhịp sinh hoạt — không chẩn đoán",
+      "lien_ket": [
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Xem chương Sức khoẻ & năng lượng"
+        },
+        {
+          "mo_dun": "battu",
+          "duong": "/bat-tu",
+          "nhan": "Hành bạn đang thiếu"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay?y_dinh=nghi_ngoi",
+          "nhan": "Hôm nay nên nghỉ hay nên vận động"
+        },
+        {
+          "mo_dun": "phongthuy",
+          "duong": "/phong-thuy#nha-cua-ban",
+          "nhan": "Phòng ngủ có đang ở phía hợp?"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [
+          "suc_khoe"
+        ],
+        "tuvi": [],
+        "tuvi_cung": "Tật Ách",
+        "thanso": [
+          "ban_than_tam_ly"
+        ],
+        "thanso_linh_vuc": null,
+        "hom_nay": [
+          "van_dong",
+          "nghi_ngoi"
+        ],
+        "phongthuy": [
+          "phong_ngu_chinh"
+        ],
+        "battu": [
+          "ngu_hanh"
+        ]
+      }
+    },
+    "di_xa": {
+      "ten": "Đi xa, chuyển chỗ, ra nước ngoài",
+      "mo_ta": "xuất ngoại, định cư, đi làm xa, du lịch",
+      "lien_ket": [
+        {
+          "mo_dun": "kinhdich",
+          "duong": "/kinh-dich?chu_de=di_xa",
+          "nhan": "Gieo một quẻ cho chuyến đi"
+        },
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Xem cung Thiên Di"
+        },
+        {
+          "mo_dun": "xem_ngay",
+          "duong": "/xem-ngay-tot",
+          "nhan": "Chọn ngày xuất hành"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay?y_dinh=di_chuyen",
+          "nhan": "Hôm nay đi lại có thuận?"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [
+          "di_xa"
+        ],
+        "tuvi": [],
+        "tuvi_cung": "Thiên Di",
+        "thanso": [
+          "thoi_diem_chu_ky"
+        ],
+        "thanso_linh_vuc": null,
+        "hom_nay": [
+          "di_chuyen"
+        ],
+        "phongthuy": [
+          "cua_chinh"
+        ],
+        "battu": [
+          "van"
+        ]
+      }
+    },
+    "quan_he": {
+      "ten": "Bạn bè, đối tác, tranh chấp",
+      "mo_ta": "hợp tác, bạn bè, đồng nghiệp, kiện tụng",
+      "lien_ket": [
+        {
+          "mo_dun": "kinhdich",
+          "duong": "/kinh-dich?chu_de=hop_tac",
+          "nhan": "Gieo một quẻ cho mối hợp tác"
+        },
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Xem cung Nô Bộc"
+        },
+        {
+          "mo_dun": "thanso",
+          "duong": "/hop-doi?quan_he=dong_nghiep",
+          "nhan": "Hợp đôi theo quan hệ đồng nghiệp, đối tác"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay?y_dinh=gap_go",
+          "nhan": "Hôm nay gặp gỡ có thuận?"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [
+          "hop_tac",
+          "ban_be",
+          "tranh_chap"
+        ],
+        "tuvi": [],
+        "tuvi_cung": "Nô Bộc",
+        "thanso": [
+          "tinh_cam_gia_dinh"
+        ],
+        "thanso_linh_vuc": null,
+        "hom_nay": [
+          "gap_go"
+        ],
+        "phongthuy": [
+          "cua_chinh"
+        ],
+        "battu": [
+          "su_nghiep"
+        ]
+      }
+    },
+    "thoi_diem": {
+      "ten": "Chọn lúc: tháng nào, ngày nào",
+      "mo_ta": "khi nào nên bắt đầu, 3 tháng tới, năm nay",
+      "lien_ket": [
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Nhịp 3 tháng tới theo Tử vi"
+        },
+        {
+          "mo_dun": "thanso",
+          "duong": "/than-so#noi-dau",
+          "nhan": "Tháng cá nhân then chốt của bạn"
+        },
+        {
+          "mo_dun": "xem_ngay",
+          "duong": "/xem-ngay-tot",
+          "nhan": "Tìm ngày đẹp cho việc đó"
+        },
+        {
+          "mo_dun": "phongthuy",
+          "duong": "/phong-thuy#nha-cua-ban",
+          "nhan": "Tháng nào nên sửa nhà"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay",
+          "nhan": "Hôm nay có phải lúc?"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [],
+        "tuvi": [
+          "ba_thang_toi",
+          "chon_thoi_diem",
+          "tong_quan_nam"
+        ],
+        "tuvi_cung": null,
+        "thanso": [
+          "thoi_diem_chu_ky"
+        ],
+        "thanso_linh_vuc": null,
+        "hom_nay": [
+          "bat_dau"
+        ],
+        "phongthuy": [],
+        "battu": [
+          "van"
+        ]
+      }
+    },
+    "ban_than": {
+      "ten": "Hiểu mình, đang phân vân",
+      "mo_ta": "con người mình, điểm mạnh, chọn bên nào",
+      "lien_ket": [
+        {
+          "mo_dun": "thanso",
+          "duong": "/than-so#ban-do-con-so",
+          "nhan": "Bản đồ con số của bạn"
+        },
+        {
+          "mo_dun": "tuvi",
+          "duong": "/tu-vi",
+          "nhan": "Luận giải Tử vi đời sống"
+        },
+        {
+          "mo_dun": "battu",
+          "duong": "/bat-tu",
+          "nhan": "Nhật chủ của bạn là người thế nào"
+        },
+        {
+          "mo_dun": "kinhdich",
+          "duong": "/kinh-dich",
+          "nhan": "Gieo một quẻ cho điều đang phân vân"
+        },
+        {
+          "mo_dun": "hom_nay",
+          "duong": "/hom-nay?y_dinh=sang_tao",
+          "nhan": "Hôm nay hợp làm gì cho mình"
+        }
+      ],
+      "rieng": {
+        "kinhdich": [
+          "khac"
+        ],
+        "tuvi": [
+          "phan_van",
+          "hieu_ban_than"
+        ],
+        "tuvi_cung": "Mệnh",
+        "thanso": [
+          "ban_than_tam_ly",
+          "bai_hoc_y_nghia"
+        ],
+        "thanso_linh_vuc": null,
+        "hom_nay": [
+          "sang_tao",
+          "nghi_ngoi"
+        ],
+        "phongthuy": [],
+        "battu": [
+          "tong_quan"
+        ]
+      }
+    }
+  },
+  "ten_mo_dun": {
+    "kinhdich": "Kinh Dịch",
+    "tuvi": "Tử vi",
+    "thanso": "Thần số",
+    "battu": "Bát tự",
+    "phongthuy": "Phong thuỷ",
+    "hom_nay": "Hôm nay",
+    "xem_ngay": "Xem ngày tốt",
+    "tuoi": "Tuổi làm nhà"
+  }
+}

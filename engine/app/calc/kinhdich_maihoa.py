@@ -78,3 +78,81 @@ def khoi_que_tu_thoi_diem(thoi_diem: dt.datetime, lich: str = "viet") -> dict:
                      "nam_am": nam_am, "thoi_diem": thoi_diem.isoformat(timespec="minutes")}
     kq["the_dung"] = the_dung(kq["thuong"], kq["ha"], kq["hao_dong"])
     return kq
+
+
+# --------------------------------------------------------------------------- KD-V2: khởi quẻ theo số / phương vị, toàn cục
+# Số phương vị Tiên thiên (Hậu thiên phương → Tiên thiên quái): Nam Ly 3 · Bắc Khảm 6 · Đông Chấn 4 · Tây Đoài 2 ·
+# Tây Bắc Càn 1 · Tây Nam Khôn 8 · Đông Nam Tốn 5 · Đông Bắc Cấn 7 (《梅花易數》 phương vị khởi quái).
+SO_PHUONG = {"Tây Bắc": 1, "Tây": 2, "Nam": 3, "Đông": 4, "Đông Nam": 5, "Bắc": 6, "Đông Bắc": 7, "Tây Nam": 8}
+HO_QUAI_BITS = {v: k for k, v in TRI_BITS.items()}
+_NHOM_HAO = {"Khảm": "trong", "Ly": "trong", "Chấn": "trong", "Tốn": "trong", "Càn": "ngoài", "Khôn": "ngoài",
+             "Cấn": "ngoài", "Đoài": "ngoài"}
+
+
+def _gia_tri(thuong: str, ha: str, dong: int) -> list[int]:
+    bits = list(TRI_BITS[ha]) + list(TRI_BITS[thuong])
+    return [(9 if b else 6) if i + 1 == dong else (7 if b else 8) for i, b in enumerate(bits)]
+
+
+def khoi_que_tu_so(so_tren: int, so_duoi: int, chi_gio: str) -> dict:
+    """Mai Hoa theo số: số thứ nhất → thượng quái, số thứ hai → hạ quái (mod 8, dư 0 → 8); hào động =
+    (số 1 + số 2 + số giờ) mod 6 (dư 0 → 6). Người dùng tự chọn số (vd số nhà, số đồ vật đếm được)."""
+    if so_tren <= 0 or so_duoi <= 0:
+        raise ValueError("số khởi quẻ phải là số nguyên dương")
+    h = CHI.index(chi_gio) + 1
+    thuong, ha = _quai(so_tren), _quai(so_duoi)
+    dong = (so_tren + so_duoi + h) % 6 or 6
+    return {"thuong": thuong, "ha": ha, "hao_dong": dong, "gia_tri_hao": _gia_tri(thuong, ha, dong),
+            "tong_thuong": so_tren, "tong_ha": so_duoi, "the_dung": the_dung(thuong, ha, dong),
+            "dau_vao": {"cach": "so", "so": [so_tren, so_duoi], "chi_gio": chi_gio}}
+
+
+def khoi_que_phuong_vi(huong: str, chi_gio: str) -> dict:
+    """Mai Hoa theo phương vị: số phương làm thượng quái; (số phương + số giờ) mod 8 làm hạ quái; hào động =
+    (số phương + số giờ) mod 6."""
+    if huong not in SO_PHUONG:
+        raise ValueError(f"phương vị phải là một trong {list(SO_PHUONG)}")
+    p, h = SO_PHUONG[huong], CHI.index(chi_gio) + 1
+    thuong, ha = _quai(p), _quai(p + h)
+    dong = (p + h) % 6 or 6
+    return {"thuong": thuong, "ha": ha, "hao_dong": dong, "gia_tri_hao": _gia_tri(thuong, ha, dong),
+            "tong_thuong": p, "tong_ha": p + h, "the_dung": the_dung(thuong, ha, dong),
+            "dau_vao": {"cach": "phuong_vi", "huong": huong, "chi_gio": chi_gio}}
+
+
+def toan_cuc(thuong: str, ha: str, hao_dong: int) -> dict:
+    """Toàn cục Mai Hoa: thể – dụng – hỗ (hai quái giữa) – biến (quái có hào động sau khi biến) so với THỂ.
+    `muc`: thuan (không gì khắc thể, có sinh thể hoặc tỷ hoà) · can_chu_dong (dụng hoặc biến khắc thể) · can_bang."""
+    bits = list(TRI_BITS[ha]) + list(TRI_BITS[thuong])
+    td = the_dung(thuong, ha, hao_dong)
+    ho_ha, ho_thuong = HO_QUAI_BITS[tuple(bits[1:4])], HO_QUAI_BITS[tuple(bits[2:5])]
+    b2 = list(bits)
+    b2[hao_dong - 1] ^= 1
+    bien = HO_QUAI_BITS[tuple(b2[:3])] if hao_dong <= 3 else HO_QUAI_BITS[tuple(b2[3:])]
+    the = td["the"]
+    qh = [{"vai": "dung", "quai": td["dung"], "quan_he": quan_he(the, td["dung"])},
+          {"vai": "ho_thuong", "quai": ho_thuong, "quan_he": quan_he(the, ho_thuong)},
+          {"vai": "ho_ha", "quai": ho_ha, "quan_he": quan_he(the, ho_ha)},
+          {"vai": "bien", "quai": bien, "quan_he": quan_he(the, bien)}]
+    sinh = sum(1 for x in qh if x["quan_he"] == "dung_sinh_the")
+    khac = sum(1 for x in qh if x["quan_he"] == "dung_khac_the")
+    chinh = {qh[0]["quan_he"], qh[3]["quan_he"]}
+    if "dung_khac_the" in chinh:
+        muc = "can_chu_dong"
+    elif khac == 0 and (sinh >= 1 or "ty_hoa" in chinh):
+        muc = "thuan"
+    elif "the_sinh_dung" in chinh and sinh == 0:
+        muc = "can_chu_dong" if khac else "can_bang"
+    else:
+        muc = "can_bang"
+    return {"the": the, "dung": td["dung"], "the_ngu_hanh": TRI_NGU_HANH[the], "ho": {"thuong": ho_thuong, "ha": ho_ha},
+            "bien": bien, "quan_he": qh, "sinh_the": sinh, "khac_the": khac, "muc": muc}
+
+
+def ung_ky_so(thuong: str, ha: str, chi_gio: str) -> dict:
+    """Ứng kỳ theo số quẻ (Mai Hoa): số thượng + số hạ + số giờ. Đơn vị tuỳ việc nhanh/chậm — hệ thống chỉ nêu con số
+    và nói rõ là nhịp gợi ý."""
+    so = TIEN_THIEN.index(thuong) + 1 + TIEN_THIEN.index(ha) + 1 + CHI.index(chi_gio) + 1
+    don_vi = "ngày" if so <= 10 else "tuần" if so <= 20 else "tháng"
+    return {"so": so, "don_vi": don_vi,
+            "y": f"Số quẻ là {so}: việc gần thì tính bằng ngày, việc xa tính bằng tuần hay tháng — đây là nhịp gợi ý."}

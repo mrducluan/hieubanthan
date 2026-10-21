@@ -239,7 +239,7 @@
     "han": "山下出泉，蒙；君子以果行育德。",
     "dich": "Dưới núi có suối chảy ra là Mông; người quân tử quả quyết trong hành động để nuôi dưỡng đức."
    },
-   "nom_na": "Hình ảnh: dưới chân núi có dòng suối mới chảy ra — trí khôn còn non, đang được khai mở. Nôm na: như người học trò, người mới vào nghề: điều quan trọng là thành tâm học, hỏi một lần cho thật, đừng hỏi đi hỏi lại để tìm câu mình thích nghe.",
+   "nom_na": "Hình ảnh: dưới chân núi có dòng suối mới chảy ra — trí khôn còn non, đang được khai mở. Nôm na: như người học trò, người mới vào nghề: cốt ở thành tâm học, hỏi một lần cho thật, đừng hỏi đi hỏi lại để tìm câu mình thích nghe.",
    "thoan": {
     "han": "蒙，山下有險，險而止，蒙。蒙亨，以亨行時中也。匪我求童蒙，童蒙求我，志應也。初噬告，以剛中也。再三瀆，瀆則不告，瀆蒙也。蒙以養正，聖功也。",
     "dich": "Mông: dưới núi có chỗ hiểm, gặp hiểm mà dừng, gọi là Mông. Mông mà hanh thông, vì làm việc đúng thời, đúng mực. Không phải ta tìm trẻ thơ mà trẻ thơ tìm ta, vì chí hai bên ứng nhau. Hỏi lần đầu thì bảo, vì người dạy cứng mà giữ mực; hỏi hai ba lần là nhờn, nhờn thì không bảo, vì làm nhờn sự học. Nuôi dưỡng điều chính ngay từ lúc còn non dại — đó là công của bậc thánh."
@@ -483,7 +483,7 @@
      "han": "師或輿尸，凶。",
      "dich": "Quân có khi chở xác về, xấu.",
      "y": "Giao quyền sai người hoặc nhiều người cùng chỉ huy thì thất bại.",
-     "nom_na": "Như một việc mà ba bốn người cùng chỉ đạo: chắc chắn hỏng."
+     "nom_na": "Như một việc mà ba bốn người cùng chỉ đạo: rất dễ hỏng."
     },
     {
      "vi_tri": 4,
@@ -510,7 +510,7 @@
      "han": "大君有命，開國承家，小人勿用。",
      "dich": "Vua có mệnh, mở nước nối nhà; kẻ tiểu nhân chớ dùng.",
      "y": "Thành công rồi, thưởng công nhưng không giao quyền lớn cho kẻ kém đức.",
-     "nom_na": "Như xong dự án, khen thưởng ai cũng được, nhưng đừng trao quyền lớn cho người kém đức."
+     "nom_na": "Như xong dự án, khen thưởng ai cũng được, nhưng đừng giao quyền lớn cho người kém đức."
     }
    ]
   },
@@ -723,7 +723,7 @@
      "han": "視履考祥，其旋元吉。",
      "dich": "Nhìn lại bước đã đi, xét điềm lành; quay về được thì rất tốt.",
      "y": "Nhìn lại cả hành trình để tự rút ra bài học — đó là phúc.",
-     "nom_na": "Như cuối năm nhìn lại hành trình đã đi, rút ra bài học: đó là phúc."
+     "nom_na": "Như cuối năm nhìn lại chặng đường đã đi, rút ra bài học: đó là phúc."
     }
    ]
   },
@@ -1060,7 +1060,7 @@
      "han": "无不利，撝謙。",
      "dich": "Không gì không lợi, phát huy sự khiêm.",
      "y": "Ở giữa người trên kẻ dưới — khiêm hành động chứ không chỉ lời.",
-     "nom_na": "Như đứng giữa sếp và nhân viên: khiêm bằng việc làm, không chỉ bằng lời."
+     "nom_na": "Như đứng giữa sếp và nhân viên: khiêm bằng việc làm, chứ không bằng lời suông."
     },
     {
      "vi_tri": 5,
@@ -1211,7 +1211,7 @@
      "han": "孚于嘉，吉。",
      "dich": "Tin vào điều tốt đẹp, tốt.",
      "y": "Đặt niềm tin vào cái thiện, cái đúng là chắc chắn lành.",
-     "nom_na": "Như đặt niềm tin vào điều tốt, người tốt: chắc chắn không phí."
+     "nom_na": "Như đặt niềm tin vào điều tốt, người tốt: không phí."
     },
     {
      "vi_tri": 6,
@@ -4144,7 +4144,7 @@
     "han": "風行水上，渙；先王以享于帝立廟。",
     "dich": "Gió đi trên mặt nước là Hoán; tiên vương tế thượng đế, lập miếu."
    },
-   "nom_na": "Hình ảnh: gió thổi trên mặt nước, làm sóng tan ra — tan rã, lan toả. Nôm na: như khi tập thể rời rạc, lòng người phân tán: cần một điều chung để tụ lại; đồng thời gạt bỏ cái tôi, bè phái nhỏ.",
+   "nom_na": "Hình ảnh: gió thổi trên mặt nước, làm sóng tan ra — tan rã, toả rộng. Nôm na: như khi tập thể rời rạc, lòng người phân tán: cần một điều chung để tụ lại; đồng thời gạt bỏ cái tôi, bè phái nhỏ.",
    "thoan": {
     "han": "渙，亨。剛來而不窮，柔得位乎外而上同。王假有廟，王乃在中也。利涉大川，乘木有功也。",
     "dich": "Hoán thì hanh thông. Cái cứng đến mà không cùng, cái mềm được ngôi ở ngoài mà cùng hướng với trên. Vua đến nhà miếu — vua ở chỗ giữa (làm chỗ tụ lòng người). Lợi vượt sông lớn — cưỡi thuyền gỗ mà có công."

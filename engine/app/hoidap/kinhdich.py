@@ -15,11 +15,15 @@ import datetime as dt
 import re
 import unicodedata
 
-from app.calc import kinhdich, kinhdich_maihoa as mh, vuong_suy as vs
+from app.calc import kinhdich, kinhdich_maihoa as mh, luc_hao as lh, vuong_suy as vs
 from app.calc.kinhdich_vendor import CHI_NH, KHAC, SINH
 from app.hoidap import chung
 from app.kb import kinhdich_kb as kb
+from app.luangiai import kinhdich_doi_song as kd_ds
 from app.narrative import hoi_van
+
+MAI_HOA_CACH = ("mai_hoa", "mai_hoa_so", "mai_hoa_phuong")
+_VN = dt.timezone(dt.timedelta(hours=7))
 
 CHE_DO = ("tu_dong", "nghia_ly", "day_du")
 LV_TEN = {"cong_viec": "Công việc", "tinh_cam": "Tình cảm", "gia_dinh": "Gia đình",
@@ -183,6 +187,9 @@ def _muc_dung_than(que: dict, ten: str, tg: dict | None = None) -> dict:
     if ten == "Ứng":
         dt_ = [h for h in hao if h["the_ung"] == "Ứng"]
         ghi = "Câu hỏi về người/việc phía bên kia: dùng hào Ứng làm đại diện."
+    elif ten == "Thế":
+        dt_ = [the]
+        ghi = "Câu hỏi về chính bạn (sức khoẻ, đi xa, bản thân): dùng hào Thế làm đại diện."
     else:
         dt_ = [h for h in hao if h["luc_than"] == ten]
         n = kb.dung_than(ten)
@@ -368,22 +375,56 @@ def van_template(goi: dict) -> str:
     return "\n\n".join(doan)
 
 
+def _ket_som(pl: dict, goi: dict, van: str, **them) -> dict:
+    return {"phan_loai": goi["phan_loai"], "que": None, "mai_hoa": None, "bang_chung": goi, "cau_tra_loi": van,
+            "che_do_van": "template", "loi_kiem_tra": [], "can_them": goi["can_them"], "co_canh_bao": [],
+            "do_phu": "day_du", "doc_que": None, "chu_de": None, "can_lam_ro": None, **them}
+
+
 def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None = None,
             thoi_diem: dt.datetime | None = None, gieo: bool = True, phuong_phap: str = "thi",
-            cach_ra_que: str | None = None, dung_llm: bool = False, lich: str = "viet") -> dict:
+            cach_ra_que: str | None = None, dung_llm: bool = False, lich: str = "viet",
+            chu_de: str | None = None, so_mai_hoa: list[int] | None = None,
+            phuong_mai_hoa: str | None = None) -> dict:
+    """KD-ĐS thêm: `chu_de` (mã chủ đề/chip, chốt dụng thần + nhóm việc), `so_mai_hoa` (hai số người dùng chọn),
+    `phuong_mai_hoa` (phương vị) cho `cach_ra_que` = mai_hoa_so / mai_hoa_phuong; trả thêm `doc_que`, `chu_de`,
+    `can_lam_ro` (câu mơ hồ về dụng thần → hỏi lại trước khi gieo, `can_them` = ["lam_ro"])."""
     if che_do not in CHE_DO:
         raise ValueError(f"che_do phải là một trong {CHE_DO}")
+    if chu_de and not kd_ds.kb.chu_de(chu_de):
+        raise ValueError("chu_de không có trong danh mục")
     pl = phan_loai(cau_hoi, che_do)
-    if cach_ra_que == "mai_hoa" and pl["loai"] not in ("dac_biet", "ky_thuat", "doc_que_da_co"):
+    if cach_ra_que in MAI_HOA_CACH and pl["loai"] not in ("dac_biet", "ky_thuat", "doc_que_da_co"):
         pl["truong_phai"], pl["dung_than"] = "mai_hoa", None
     que, mai_hoa, nguon = None, None, None
     can_que = pl["loai"] not in ("dac_biet", "ky_thuat", "doc_que_da_co")
+    luc = (thoi_diem or dt.datetime.now(_VN).replace(tzinfo=None))
+    ma_cd = chu_de or kd_ds.chu_de_tu_cau(pl["cau_chuan_hoa"])
+    cd = kd_ds.kb.chu_de(ma_cd) or {}
     if can_que:
+        lr = kd_ds.can_lam_ro(pl["cau_chuan_hoa"], chu_de, pl["truong_phai"])
+        if lr:
+            goi = chung.ket({"phan_loai": {k: pl[k] for k in ("loai", "truong_phai", "dung_than", "che_do", "xu_ly",
+                                                              "linh_vuc")}, "muc": [], "can_them": ["lam_ro"],
+                             "mau": lr["cau_hoi"], "luu_y": None})
+            return _ket_som(pl, goi, lr["cau_hoi"], can_lam_ro=lr, lich=lich)
+        # dụng thần theo chủ đề khi phân loại chỉ rơi về hào Ứng, hoặc khi người dùng chọn chủ đề rõ
+        if pl["truong_phai"] == "luc_hao" and cd.get("dung_than") and (chu_de or pl["dung_than"] in (None, "Ứng")):
+            pl["dung_than"] = cd["dung_than"]
         if gia_tri_hao is not None:
             vals, nguon = list(gia_tri_hao), "gieo tay (người dùng nhập)"
+        elif pl["truong_phai"] == "mai_hoa" and cach_ra_que == "mai_hoa_so":
+            if not so_mai_hoa or len(so_mai_hoa) != 2:
+                raise ValueError("Mai Hoa theo số: cần đúng hai số nguyên dương")
+            mai_hoa = mh.khoi_que_tu_so(int(so_mai_hoa[0]), int(so_mai_hoa[1]), mh.chi_gio(luc.hour))
+            vals, nguon = mai_hoa["gia_tri_hao"], "Mai Hoa theo số"
+        elif pl["truong_phai"] == "mai_hoa" and cach_ra_que == "mai_hoa_phuong":
+            if not phuong_mai_hoa:
+                raise ValueError("Mai Hoa theo phương vị: cần phương vị")
+            mai_hoa = mh.khoi_que_phuong_vi(phuong_mai_hoa, mh.chi_gio(luc.hour))
+            vals, nguon = mai_hoa["gia_tri_hao"], "Mai Hoa theo phương vị"
         elif pl["truong_phai"] == "mai_hoa":
-            mai_hoa = mh.khoi_que_tu_thoi_diem(thoi_diem or dt.datetime.now(
-                dt.timezone(dt.timedelta(hours=7))).replace(tzinfo=None), lich=lich)
+            mai_hoa = mh.khoi_que_tu_thoi_diem(luc, lich=lich)
             vals, nguon = mai_hoa["gia_tri_hao"], "Mai Hoa theo thời điểm"
         elif gieo:
             vals, nguon = kinhdich.gieo(phuong_phap), f"engine gieo ({phuong_phap}, CSPRNG)"
@@ -397,10 +438,16 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
                 if len(que["hao_dong"]) == 1:
                     mai_hoa = {"the_dung": mh.the_dung(thuong, ha, que["hao_dong"][0]),
                                "dau_vao": {"nguon": nguon}}
+            if mai_hoa is not None and len(que["hao_dong"]) == 1:          # KD-V2: toàn cục + ứng kỳ số
+                ha, thuong = que["quai_ban"]["ha_quai"], que["quai_ban"]["thuong_quai"]
+                mai_hoa["toan_cuc"] = mh.toan_cuc(thuong, ha, que["hao_dong"][0])
+                cg = (mai_hoa.get("dau_vao") or {}).get("chi_gio")
+                if cg:
+                    mai_hoa["ung_ky_so"] = mh.ung_ky_so(thuong, ha, cg)
     tg = None
-    if pl["truong_phai"] == "luc_hao" and que is not None:
-        tg = vs.thoi_gian(thoi_diem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).replace(tzinfo=None))
-    goi = goi_bang_chung(pl, que, mai_hoa, tg)
+    if que is not None:
+        tg = vs.thoi_gian(luc)
+    goi = goi_bang_chung(pl, que, mai_hoa, tg if pl["truong_phai"] == "luc_hao" else None)
     van = van_template(goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
@@ -416,7 +463,17 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
     if pl["truong_phai"] and pl["loai"] != "doc_que_da_co":
         co.append({"loai": "khong_gieo_lai", "chi_tiet": kb.mau("gieo_lai")})
     dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
+    doc_que = None
+    if que is not None and can_que:
+        pt = None
+        try:
+            pt = lh.phan_tich(que, tg, pl["dung_than"] or cd.get("dung_than") or "Ứng", luc)
+        except Exception:  # noqa: BLE001 — góc nhìn phụ, không làm vỡ câu trả lời
+            pt = None
+        doc_que = kd_ds.doc_que(que, pl, goi, mai_hoa=mai_hoa, luc_hao=pt, thoi_diem=luc, chu_de=ma_cd)
     return {"phan_loai": goi["phan_loai"], "que": que, "mai_hoa": mai_hoa, "bang_chung": goi,
             "cau_tra_loi": van, "che_do_van": che_do_van, "loi_kiem_tra": loi,
             "can_them": goi["can_them"], "co_canh_bao": co,
-            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "lich": lich}
+            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "lich": lich,
+            "doc_que": doc_que, "chu_de": ({"ma": ma_cd, "ten": cd.get("ten", "Việc khác")} if can_que else None),
+            "can_lam_ro": None}
