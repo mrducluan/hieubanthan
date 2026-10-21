@@ -213,3 +213,18 @@ Kiểm: `tests/test_tuvi_v22_oracle.py` (619 ca) + `tests/test_tuvi_ma_chuan.py`
 | `enrichLegacyChartWithV2Engine` | route `app/tuvi_v2_api.py` | **Không chuyển**: dự án không có "engine cũ" cần bọc — route nhận `la_so` và gọi thẳng các hàm trên | — |
 
 Không tìm thấy chỗ Python sai so với TS ở điểm TS đúng.
+
+## Đánh giá `05_CLAUDE_CODE_MASTER_BLUEPRINT.md` (Drive, 2026-10-21)
+
+Bộ Drive chủ dự án gửi lại gồm 5 tệp: 01 KB json, 02 migration SQL, 03 `astroEngine_v2_2.ts` (đã giữ làm oracle ở
+`engine/ziwei/oracle_v22/`), 04 adapter/seeder — đều đã đánh giá ở các mục trên. Tệp mới là 05 (bản đặc tả cho Claude Code):
+
+| Đề xuất trong 05 | Quyết định |
+|---|---|
+| Chạy migration v2.2 + seed 3 bảng KB vào Postgres, adapter `enrichLegacyChartWithV2Engine` | **Không** — một bộ tính duy nhất ở engine Python (TV-V2b); KB nằm trong git |
+| "Hội đồng 3 AI agent" mỗi lượt `/api/v2/consult` | **Không** — LLM chỉ diễn đạt gói ngữ cảnh (tầng NARRATIVE), chi phí ×3, hạn mức RL-1 |
+| Điểm rủi ro thang 10 ở dòng đầu, "cảnh báo trước" | **Không** — trái quy tắc không doạ; dùng mức Thuận / Bình / Cần thận trọng |
+| Radar 90 ngày | **Đã có** — "3 tháng tới" (NHIP-2: lời riêng từng tháng, hộp Điểm sáng / Nên để ý / Nên làm) |
+| "Cung giải cứu" (nơi Hoá Khoa / Tuần–Triệt chặn Kỵ) | **Đề xuất làm** — thêm vào hộp "Nên để ý" một câu "chỗ gỡ" (tất định, đã có `khoa_giai` trong nhịp tháng) |
+| Câu hỏi nghiệm lý quá khứ (retro check) | **Đã có một phần** — Định giờ sinh hỏi năm đã qua; kiểm chứng "Đúng với mình" trên hộp. Đề xuất: mỗi bài luận hỏi 1 năm đã qua của đại hạn trước |
+| Giả lập quyết định A/B, cải vận theo dụng thần Bát tự + cung phi | **Đề xuất cân nhắc** — Bát tự đời sống (BT-ĐS) đã nêu hành cần bổ sung (hai cách dụng thần); cung phi đã dùng trong "Xem lá số 2 người" |
