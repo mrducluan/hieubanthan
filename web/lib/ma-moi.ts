@@ -2,7 +2,7 @@
 // Chỉ chứa tên hiển thị người dùng tự chọn + các con số đã tính (không ngày sinh, không user_id),
 // nên không cần bảng lưu trữ: link tự mang dữ liệu teaser, chữ ký chống giả mạo.
 // Xem docs/THIET-KE-UI.md §8 (quyết định: thay bảng loi_moi bằng mã có ký).
-import { createHmac, timingSafeEqual } from "node:crypto";
+import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { z } from "zod";
 
 export const NoiDungMa = z.object({
@@ -95,4 +95,66 @@ export function docMaNgay(ma: string, homNay = new Date()): NoiDungMaNgay | null
   } catch {
     return null;
   }
+}
+
+// ---------------------------------------------------------------- TCS-1: thẻ "Điểm hai người" (Xem lá số 2 người)
+// Mã riêng miền "hai|". Chỉ mang: tên hiển thị hai người (người dùng tự gõ, có thể trống), quan hệ, điểm tổng, mức và
+// ≤ 3 điểm tiêu chí (phần trăm) — engine chấm, máy chủ ký. KHÔNG ngày sinh, không can chi / con giáp / mệnh (đủ để suy
+// năm sinh). Gói gọn thành mảng JSON + chữ ký 16 ký tự (96 bit) để link ngắn → mã QR trên ảnh nhỏ, dễ quét.
+export const QUAN_HE_HAI = ["nguoi_yeu", "vo_chong", "ban_be", "dong_nghiep", "doi_tac", "sep", "cha_me_con", "gia_dinh"] as const;
+export const MUC_HAI = ["de_hoa_hop", "hop_neu_hieu", "can_dung_hoa_nhieu", "nhieu_khac_biet"] as const;
+export const TIEU_CHI_HAI = ["menh", "can", "chi", "cung_phi", "tu_vi"] as const;
+
+export const NoiDungMaHai = z.object({
+  v: z.literal(1),
+  /** Tên hiển thị người chia sẻ / người kia — trống = "Bạn" / "Người ấy". */
+  a: z.string().trim().max(24),
+  b: z.string().trim().max(24),
+  q: z.enum(QUAN_HE_HAI),
+  /** Điểm tham khảo 0–100 (engine, luật hai_nguoi_1). */
+  p: z.number().int().min(0).max(100),
+  m: z.enum(MUC_HAI),
+  /** 1–3 tiêu chí: mã + phần trăm điểm của tiêu chí đó. */
+  c: z.array(z.tuple([z.enum(TIEU_CHI_HAI), z.number().int().min(0).max(100)])).min(1).max(3),
+  /** Ngày tạo (YYYY-MM-DD) — để hết hạn. */
+  d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});
+export type NoiDungMaHai = z.infer<typeof NoiDungMaHai>;
+
+const NGAY_GOC = Date.UTC(2026, 0, 1);
+const kyHai = (than: string) => b64u(createHmac("sha256", khoa()).update(`hai|${than}`).digest()).slice(0, 16);
+
+/** Ký mã thẻ Điểm hai người. Gói: [1, a, b, quan hệ, điểm, mức, [tiêu chí, %, …], số ngày từ 1/1/2026]. */
+export function kyMaHai(nd: Omit<NoiDungMaHai, "v" | "d">, homNay = new Date()): string {
+  const x = NoiDungMaHai.parse({ ...nd, v: 1, d: homNay.toISOString().slice(0, 10) });
+  const goi = [1, x.a, x.b, QUAN_HE_HAI.indexOf(x.q), x.p, MUC_HAI.indexOf(x.m),
+    x.c.flatMap(([ma, pt]) => [TIEU_CHI_HAI.indexOf(ma), pt]), Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
+  return `${than}.${kyHai(than)}`;
+}
+
+export function docMaHai(ma: string, homNay = new Date()): NoiDungMaHai | null {
+  const [than, chu_ky] = ma.split(".");
+  if (!than || !chu_ky || ma.length > 300) return null;
+  const a = Buffer.from(chu_ky), b = Buffer.from(kyHai(than));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown;
+    if (!Array.isArray(g) || g.length !== 8 || !Array.isArray(g[6]) || g[6].length % 2) return null;
+    const c = g[6] as number[];
+    const nd = NoiDungMaHai.parse({
+      v: g[0], a: g[1], b: g[2], q: QUAN_HE_HAI[g[3] as number], p: g[4], m: MUC_HAI[g[5] as number],
+      c: Array.from({ length: c.length / 2 }, (_, i) => [TIEU_CHI_HAI[c[2 * i]!], c[2 * i + 1]]),
+      d: new Date(NGAY_GOC + Number(g[7]) * 86_400_000).toISOString().slice(0, 10),
+    });
+    return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Mã ?tu= suy ra từ mã thẻ (tiền tố 2 chữ + 10 hex) — để ảnh (QR), trang nhận và nút chia sẻ cùng một mã gán nguồn
+ *  mà không cần lưu gì. Chỉ là nhãn đo lường (không bí mật), không định danh người. */
+export function tuTuMa(tienTo: string, ma: string): string {
+  return `${tienTo}.${createHash("sha256").update(`tu|${ma}`).digest("hex").slice(0, 10)}`;
 }

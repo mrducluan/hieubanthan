@@ -2,6 +2,8 @@
 // băng" style tính sẵn (computed style) rồi bọc trong <svg><foreignObject> và vẽ qua canvas — cùng kỹ
 // thuật các thư viện html-to-image dùng. Phông web không nhúng → ảnh dùng phông hệ thống gần nhất.
 import { taiCanvas } from "@/lib/tai-anh-svg";
+// TCS-1: khung theo giao diện + dải chân (mã QR + hieuban.com) cho mọi ảnh tải về — lib/chan-anh.ts.
+import { dungAnhCoChan, nenCuaPhanTu, type TuyChonChan } from "@/lib/chan-anh";
 
 // Chỉ chép các thuộc tính ảnh hưởng hình thức (chép toàn bộ ~350 thuộc tính làm ảnh nặng hàng chục MB).
 const THUOC_TINH = [
@@ -64,7 +66,7 @@ async function nhungPhong(): Promise<string> {
   return ds.join("\n");
 }
 
-export async function taiAnhHtml(el: HTMLElement, tenFile: string, tiLe = 2): Promise<void> {
+export async function taiAnhHtml(el: HTMLElement, tenFile: string, tiLe = 2, chan: TuyChonChan = {}): Promise<void> {
   const w = el.scrollWidth, h = el.scrollHeight;
   const ban = el.cloneNode(true) as HTMLElement;
   dongBang(el, ban);
@@ -82,12 +84,5 @@ export async function taiAnhHtml(el: HTMLElement, tenFile: string, tiLe = 2): Pr
   const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
   const anh = new Image();
   await new Promise<void>((ok, loi) => { anh.onload = () => ok(); anh.onerror = () => loi(new Error("Không dựng được ảnh")); anh.src = url; });
-  const canvas = document.createElement("canvas");
-  canvas.width = w * tiLe;
-  canvas.height = h * tiLe;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) throw new Error("Trình duyệt không hỗ trợ canvas");
-  ctx.scale(tiLe, tiLe);
-  ctx.drawImage(anh, 0, 0);
-  await taiCanvas(canvas, tenFile);
+  await taiCanvas(dungAnhCoChan(anh, w, h, tiLe, nenCuaPhanTu(el), chan), tenFile);
 }
