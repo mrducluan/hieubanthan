@@ -1133,6 +1133,20 @@ def _ghep(goi: dict) -> tuple[list[str], list[str], list[str]]:
     return doan, soi, list(dict.fromkeys(cu))
 
 
+def goi_cho_llm(goi: dict) -> dict:
+    """Gói cho tầng diễn đạt AI: mục lá của CHÍNH người hỏi chỉ mang lời đời thường (`doi_thuong`) + câu tự soi —
+    đoạn kỹ thuật (độ sáng, "Mặt tối", định nghĩa cung) ở lại "Vì sao nói vậy", không đưa cho AI viết lại.
+    Mục không có `doi_thuong` (câu hỏi kiến thức chung) giữ nguyên."""
+    muc = []
+    for m in goi["muc"]:
+        if "doi_thuong" not in m:
+            muc.append(m)
+        elif m["doi_thuong"]:
+            muc.append({"loai": m.get("loai"), "noi_dung": m["doi_thuong"],
+                        **({"cau_tu_soi": m["cau_tu_soi"]} if m.get("cau_tu_soi") else {})})
+    return {**goi, "muc": muc}
+
+
 def can_cu_template(goi: dict) -> list[str]:
     """Căn cứ kỹ thuật cho "Vì sao nói vậy" (rỗng khi câu trả lời không có mục lời đời thường)."""
     return [] if goi["mau"] and not goi["muc"] else _ghep(goi)[2]
@@ -1212,7 +1226,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:
-            v = hoi_van._goi_llm(goi, cau_hoi)
+            v = hoi_van._goi_llm(goi_cho_llm(goi), cau_hoi)
             loi = hoi_van.kiem_tra_dau_ra(v, goi)
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
