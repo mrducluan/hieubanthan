@@ -54,6 +54,63 @@ def chuong(ma: str, tieu_de: str, doan: list[str], *, hop: list[dict] | None = N
     return c
 
 
+def gan_ma_mau(c: dict, mo_dun: str, *tien_to: str) -> dict:
+    """HỌC-ĐS: gắn `ma_mau` tất định cho mọi hộp của một chương / một gói đọc chưa có mã —
+    `ds.<mảng>.<chương|tiền tố>.<loại hộp>.<tiêu đề rút gọn>`; trùng trong cùng nhóm thì thêm `+2`, `+3`…"""
+    da: dict[str, int] = {}
+    goc = tien_to or (c.get("ma"),)
+    for h in c.get("hop", []):
+        if not h.get("ma_mau"):
+            h["ma_mau"] = ma_mau(mo_dun, *goc, h["loai"], h["tieu_de"])
+        n = da.get(h["ma_mau"], 0) + 1
+        da[h["ma_mau"]] = n
+        if n > 1:
+            h["ma_mau"] = (h["ma_mau"][:57] + f"+{n}")[:60]
+    return c
+
+
+NGUONG_PHIEU, NGUONG_XEM_LAI, TI_LE_XEM_LAI = 30, 100, 0.40
+
+
+def ap_hoc(bc: dict, trong_so: dict | None, ca_nhan: dict | None) -> dict:
+    """Tầng HỌC dùng chung (ranh giới LG-ĐS): `trong_so` = bảng tỉ lệ công khai theo mã (≥ 30 phiếu → gắn `ty_le_dung`,
+    `so_phieu`; ≥ 100 phiếu và < 40% đúng → hộp rời lớp đời thường, ghi một dòng "Đang xem lại" vào `can_cu`);
+    `ca_nhan` = phiếu của chính người xem ("chua_dung" → xếp cuối). Không sinh câu mới, không sửa KB. Nhận cả báo cáo
+    nhiều chương (`chuong[]`) lẫn một gói đọc (`hop` + `can_cu`). Trả về chính `bc` (đã sửa tại chỗ)."""
+    trong_so, ca_nhan = trong_so or {}, ca_nhan or {}
+    if not trong_so and not ca_nhan:
+        return bc
+    xem_lai: set[str] = set()
+
+    def _nhom(g: dict):
+        giu, cuoi = [], []
+        for h in g.get("hop", []):
+            m = h.get("ma_mau")
+            p = trong_so.get(m) if m else None
+            if p:
+                dung, chua = int(p.get("dung", 0)), int(p.get("chua_dung", 0))
+                tong = dung + chua
+                if tong >= NGUONG_PHIEU:
+                    h["ty_le_dung"], h["so_phieu"] = round(dung / tong, 2), tong
+                    if tong >= NGUONG_XEM_LAI and dung / tong < TI_LE_XEM_LAI:
+                        xem_lai.add(m)
+                        dong = f"Đang xem lại: {h['tieu_de']}"
+                        cc = g.setdefault("can_cu", [])
+                        cc.append({"tieu_de": "Đang xem lại", "noi_dung": h["noi_dung"]} if (cc and isinstance(cc[0], dict)) else dong)
+                        continue
+            (cuoi if m and ca_nhan.get(m) == "chua_dung" else giu).append(h)
+        g["hop"] = giu + cuoi
+
+    if "chuong" in bc:
+        for c in bc["chuong"]:
+            _nhom(c)
+        if bc.get("cot_loi"):
+            bc["cot_loi"] = [h for h in bc["cot_loi"] if h.get("ma_mau") not in xem_lai]
+    else:
+        _nhom(bc)
+    return bc
+
+
 def chon_cot_loi(ds_chuong: list[dict], toi_da: int = 3, uu_tien: tuple[str, ...] = ("cot_loi", "luu_y", "thoi_diem")) -> list[dict]:
     """Mỗi chương góp tối đa một hộp (ưu tiên cốt lõi → lưu ý → thời điểm), gắn `tu_chuong` để SAO-2 cắt theo chương khoá."""
     ra: list[dict] = []

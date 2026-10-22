@@ -17,6 +17,7 @@ from app.calc import tietkhi
 from app.calc import tuoi_dan_gian as tdg
 from app.kb import phongthuy_doi_song_kb as kb
 from app.kb import phongthuy_kb as kbp
+from app.luangiai import doi_song_khuon as kh
 from app.luangiai import phongthuy_bo_cuc as bo_cuc
 from app.luangiai import tuoi_dan_gian as tdg_luan
 
@@ -71,7 +72,7 @@ def _huong_nha(nha: dict) -> tuple[str | None, float | None]:
     return (h, None) if h else (None, None)
 
 
-def _trach_ban(nha: dict, do: float | None, huong: str | None) -> dict | None:
+def _trach_ban(nha: dict, do: float | None, huong: str | None, nam_xem: int | None = None) -> dict | None:
     nam_xay = nha.get("nam_xay")
     if not nam_xay:
         return None
@@ -90,8 +91,9 @@ def _trach_ban(nha: dict, do: float | None, huong: str | None) -> dict | None:
         return None
     cung = {c["cung"]: c for c in b["cung"]}
     b["cung_map"] = cung
-    b["cap_huong"] = hk.to_hop_cung(cung[b["huong"]["quai"]]["son"], cung[b["huong"]["quai"]]["huong"], b["van"])
-    b["cap_toa"] = hk.to_hop_cung(cung[b["toa"]["quai"]]["son"], cung[b["toa"]["quai"]]["huong"], b["van"])
+    qh, qt = b["huong"]["quai"], b["toa"]["quai"]
+    b["cap_huong"] = hk.to_hop_cung(cung[qh]["son"], cung[qh]["huong"], b["van"], cung=qh, nam=nam_xem)
+    b["cap_toa"] = hk.to_hop_cung(cung[qt]["son"], cung[qt]["huong"], b["van"], cung=qt, nam=nam_xem)
     return b
 
 
@@ -100,6 +102,28 @@ def _cap_tai(b: dict | None, phuong: str) -> dict | None:
         return None
     c = b["cung_map"][_CUNG_QUAI[phuong]]
     return hk.to_hop_cung(c["son"], c["huong"], b["van"])
+
+
+def _doan_cap_sao(ch: dict) -> list[str]:
+    """PT-81: đoạn đời thường cho cặp sao ở phía cửa — lĩnh vực theo vai (hướng tinh: tiền bạc & công việc; sơn tinh: người ở)
+    và năm sao lưu niên tới cung (năm nên chủ động hơn / năm thuận — nhịp gợi ý, không dự báo)."""
+    lv = ch.get("linh_vuc") or {}
+    ra = []
+    if lv:
+        ra.append(f"Hướng tinh {ch['huong']} ở phía cửa nói về tiền bạc, công việc: {lv.get('tien_bac', '')} {lv.get('cong_viec', '')}".strip())
+        ra.append(f"Sơn tinh {ch['son']} nói về người ở: {lv.get('gia_dao', '')} {lv.get('suc_khoe', '')}".strip())
+        if lv.get("tam_ly"):
+            ra.append(lv["tam_ly"])
+    ny = ch.get("nam_chu_y") or {}
+    if ny.get("chu_dong") or ny.get("thuan"):
+        phan = []
+        if ny.get("chu_dong"):
+            phan.append("năm nên chủ động hơn ở phía cửa (sao " + "/".join(str(x) for x in ch["kich_hoat"]["chu_dong"]) + " bay tới): "
+                        + ", ".join(str(n) for n in ny["chu_dong"]))
+        if ny.get("thuan"):
+            phan.append("năm thuận để sửa sang, mở việc ở phía này: " + ", ".join(str(n) for n in ny["thuan"]))
+        ra.append("Theo sao lưu niên 10 năm tới — " + "; ".join(phan) + ". Đây là nhịp gợi ý để sắp việc, không phải lời đoán.")
+    return ra
 
 
 def _muc_thang(sao: int) -> str:
@@ -197,6 +221,7 @@ def _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan) -> dict:
         kcuc = (kbp.huyen_khong().get("cuc") or {}).get(b["cuc"], {})
         if kcuc:
             c["doan"].append(f"Theo năm xây, nhà thuộc cục {b['cuc_ten'].lower()}: {kcuc.get('y', '')} Gợi ý: {kcuc.get('goi_y', '')}")
+        c["doan"].extend(_doan_cap_sao(ch))
     if tvs:
         khac = [t for t in tvs if t["cung_nhom_voi_chu"] is False]
         if khac:
@@ -398,13 +423,15 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
             bc_luan = bo_cuc.luan(nha["bo_cuc"], sinh)
         except ValueError:
             bc_luan = None
-    b = _trach_ban(nha, do, huong)
+    b = _trach_ban(nha, do, huong, ngay_xem.year)
     tvs = _thanh_vien(mq, thanh_vien or [])
     c1 = _chuong_ban_hop_huong(mq)
     c2 = _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan)
     c3 = _chuong_tung_phong(mq, huong, b, bc_luan, nha.get("bo_cuc"))
     c4 = _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem)
     c5 = _chuong_viec_nen_lam(c1, c2, c3, c4)
+    for c in (c1, c2, c3, c4, c5):          # HỌC-ĐS: mã kiểm chứng ds.phongthuy.<chương>.<loại>.<tiêu đề>
+        kh.gan_ma_mau(c, "phongthuy")
     cot_loi = []
     for c in (c1, c2, c4):
         for h in c.get("hop", []):

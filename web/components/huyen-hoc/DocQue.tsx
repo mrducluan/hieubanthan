@@ -5,7 +5,8 @@
 import { useState } from "react";
 import { BookOpen, ChevronDown, Layers, ScrollText } from "lucide-react";
 import { ChipMuc } from "@/components/luan-giai/BaoCaoDoiSong";
-import { HopNoiBat, ViSao } from "@/components/luan-giai/HopNoiBat";
+import { HopNoiBat, KiemChungBai, ViSao } from "@/components/luan-giai/HopNoiBat";
+import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import type { Hop, Muc } from "@/components/luan-giai/kieu";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import { doanCoThuatNgu } from "@/components/hoi/ThuatNgu";
@@ -73,7 +74,10 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
     if (!dangMo) { ghiMoPhai(k); ghi("chart_interacted", { mo_dun: "kinhdich", kind: `mo_phai:${k}` }); }
   };
   const ungKy = (gn.luc_hao?.ung_ky ?? dq.ung_ky ?? []).slice(0, 3);
+  // HỌC-ĐS: hộp đọc quẻ có mã ds.kinhdich.* → kiểm chứng; phái ghi kèm phiếu = cách đọc chính.
+  const tyLe = useTyLe(dq.hop.map((h) => h.ma_mau).filter((x): x is string => Boolean(x)));
   return (
+    <KiemChungBai.Provider value={{ tyLe, phai: gn.chinh }}>
     <div className="space-y-4" data-testid="doc-que">
       <div className="flex flex-wrap items-center gap-2">
         <ChipMuc muc={dq.muc} nhan={dq.nhan_muc} />
@@ -206,5 +210,6 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
       </div>
       {dq.mot_que_mot_viec && <p className="text-xs text-fg-faint">{dq.mot_que_mot_viec}</p>}
     </div>
+    </KiemChungBai.Provider>
   );
 }

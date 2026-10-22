@@ -17,6 +17,7 @@ from app.calc import kinhdich_maihoa as mh
 from app.calc.kinhdich_vendor import TRI_NGU_HANH
 from app.hoidap import chung
 from app.kb import kinhdich_doi_song_kb as kb
+from app.luangiai import doi_song_khuon as kh
 from app.kb import kinhdich_kb as kbq
 
 LV_TEN = {"cong_viec": "công việc", "tinh_cam": "tình cảm", "gia_dinh": "gia đình", "tien_bac": "tiền bạc",
@@ -263,6 +264,10 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     td_van, ung_ky = _thoi_diem(que, gn, chinh, thoi_diem)
     if td_van:
         hop.append(_hop("thoi_diem", "Nhịp thời gian (gợi ý)", td_van))
+
+    # HỌC-ĐS: mã kiểm chứng tất định ds.kinhdich.<chủ đề>.<loại hộp>.q<quẻ>.<mức> (chỉ dữ kiện đã tính, không chữ người dùng)
+    for h in hop:
+        h["ma_mau"] = kh.ma_mau("kinhdich", ma, h["loai"], f"q{ban['so_king_wen']}", muc)
 
     # ---- đoạn đời thường
     doan = []

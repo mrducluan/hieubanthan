@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
 import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
+import { themHocLuanGiai } from "@/lib/hoc-tuvi";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
@@ -32,17 +33,21 @@ async function xuLy(req: Request): Promise<NextResponse> {
   if (!parsed.success) {
     return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
   }
+  // HỌC-ĐS: trọng số công khai + phiếu cá nhân theo mã hộp đọc quẻ (ds.kinhdich.*); engine chỉ hạ / xếp lại hộp.
+  const them = await themHocLuanGiai({ loai: "doi_song", tienTo: "ds.kinhdich." }).catch(() => ({}));
+  const goi = (data: unknown) => fetch(`${ENGINE_URL}/v1/kinhdich/hoi`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
+      ...dauNguoiGoi(req),
+    },
+    body: JSON.stringify(data),
+    cache: "no-store",
+  });
   try {
-    const r = await fetch(`${ENGINE_URL}/v1/kinhdich/hoi`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
-        ...dauNguoiGoi(req),
-      },
-      body: JSON.stringify(parsed.data),
-      cache: "no-store",
-    });
+    let r = await goi({ ...parsed.data, ...them });
+    if (!r.ok && Object.keys(them).length) r = await goi(parsed.data);
     const body: unknown = await r.json().catch(() => null);
     if (!r.ok) {
       const l = loiEngine(r.status, body);

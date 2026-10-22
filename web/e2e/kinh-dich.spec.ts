@@ -31,6 +31,23 @@ test("gieo tay: quẻ Lý biến Đoài — lời đời thường trước, b�
   await expect(dq.getByTestId("ban-day-du")).toContainText("Nói nôm na: như làm việc với sếp khó tính");
 });
 
+test("HỌC-ĐS: hộp đọc quẻ có nút kiểm chứng — chỉ mã ds.kinhdich.* + cách đọc chính đi lên", async ({ page }) => {
+  await page.goto("/kinh-dich");
+  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
+  const ans = await hoi(page, "Tôi có nên chuyển việc sang công ty mới không?");
+  const dq = ans.getByTestId("doc-que");
+  await expect(dq).toBeVisible();
+  const kc = dq.getByTestId("kiem-chung");
+  expect(await kc.count()).toBeGreaterThan(0);
+  await kc.first().getByRole("button", { name: "Chưa đúng" }).click();
+  const sk = await page.evaluate(() => ((window as unknown as { __hbt_su_kien?: ({ su_kien: string } & Record<string, unknown>)[] }).__hbt_su_kien ?? [])
+    .filter((e) => e.su_kien === "tuvi_kiem_chung"));
+  expect(sk).toHaveLength(1);
+  expect(sk[0]!.mau).toMatch(/^ds\.kinhdich\.[a-z_]+\.[a-z_]+\.q\d{1,2}\.[a-z_]+$/);
+  expect(["nghia_ly", "mai_hoa", "luc_hao"]).toContain(sk[0]!.phai);
+});
+
 test("máy gieo: luôn có quẻ, lời đời thường và câu hỏi tiếp", async ({ page }) => {
   await page.goto("/kinh-dich");
   const ans = await hoi(page, "Hợp đồng này có ký được không?");

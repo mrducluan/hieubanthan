@@ -58,7 +58,20 @@ export const TEN_LOAI_KIEM_CHUNG: Record<string, string> = {
   phi_hoa: "Đường bay", nhip_3_thang: "3 tháng tới", doi_song: "Luận giải đời sống", hai_nguoi: "Xem lá số 2 người",
 };
 /** Phái ghi kèm phiếu kiểm chứng theo mô-đun của báo cáo đời sống. */
-export const PHAI_DOI_SONG: Record<string, string> = { tuvi: "nam_phai_viet", battu: "tu_binh" };
+export const PHAI_DOI_SONG: Record<string, string> = { tuvi: "nam_phai_viet", battu: "tu_binh", phongthuy: "bat_trach_huyen_khong", thanso: "pitago" };
+/** HỌC-ĐS: chương của báo cáo "Nhà của bạn" (ds.phongthuy.*). */
+export const TEN_CHUONG_PT: Record<string, string> = {
+  ban_hop_huong: "Bạn hợp hướng nào", ngoi_nha_voi_ban: "Ngôi nhà này với bạn", tung_phong: "Từng phòng",
+  nam_nay: "Năm nay & 3 tháng tới", viec_nen_lam: "Việc nên làm",
+};
+/** Mảng của một mã kiểm chứng (để /quan-tri/hoc gom theo mảng): ds.bt → battu, ds.phongthuy / ds.kinhdich / ds.thanso, còn lại Tử vi. */
+export function mangCuaMa(loai: string, mau: string): string {
+  if (loai !== "doi_song") return "tuvi";
+  const m = mau.split(".")[1] ?? "";
+  if (m === "bt") return "battu";
+  return ["phongthuy", "kinhdich", "thanso"].includes(m) ? m : "tuvi";
+}
+export const TEN_MANG: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", phongthuy: "Phong thuỷ", kinhdich: "Kinh Dịch", thanso: "Thần số" };
 export const TEN_CHUONG_BT: Record<string, string> = {
   tong_quan: "Con người bạn", ngu_hanh: "Năng lượng (ngũ hành)", cuoc_doi: "Các giai đoạn cuộc đời", su_nghiep: "Công việc",
   tien_bac: "Tiền bạc", tinh_cam: "Tình yêu & hôn nhân", gia_dinh: "Gia đình", hoc_tap: "Học & nghĩ",
@@ -100,6 +113,14 @@ export function nhanMau(loai: string, mau: string): string {
   if (loai === "doi_song" && p[1] === "bt") {
     const [, , chuong, ...con] = p;
     return ["Bát tự", TEN_CHUONG_BT[chuong ?? ""] ?? chuong, ...con.map((x) => TEN_PHAN_DS[x] ?? x.replace(/_/g, " "))].join(" · ");
+  }
+  if (loai === "doi_song" && p[1] === "phongthuy") {
+    const [, , chuong, ...con] = p;
+    return ["Phong thuỷ", TEN_CHUONG_PT[chuong ?? ""] ?? chuong, ...con.map((x) => TEN_PHAN_DS[x] ?? x.replace(/_/g, " "))].join(" · ");
+  }
+  if (loai === "doi_song" && p[1] === "kinhdich") {
+    const [, , chuDe, ...con] = p;
+    return ["Kinh Dịch", (chuDe ?? "").replace(/_/g, " "), ...con.map((x) => TEN_PHAN_DS[x] ?? (x.startsWith("q") ? `quẻ ${x.slice(1)}` : x.replace(/_/g, " ")))].join(" · ");
   }
   if (loai === "doi_song") {
     const [, chuong, ...con] = p;

@@ -242,9 +242,25 @@ def _kb_hk() -> dict:
     return phongthuy_kb.huyen_khong()
 
 
-def to_hop_cung(son: int, huong: int, van: int) -> dict:
+def nam_chu_y(cung: str, kich_hoat: dict, tu_nam: int, so_nam: int = 10) -> dict:
+    """PT-81: những năm sao lưu niên bay tới `cung` (quái Huyền Không) thuộc nhóm kích hoạt của cặp sao — `chu_dong`
+    (năm nên chủ động hơn, không phải dự báo) và `thuan` (năm thuận để làm việc lớn ở phía đó). Tất định theo `luu_nien`."""
+    ra = {"chu_dong": [], "thuan": []}
+    cd, th = set(kich_hoat.get("chu_dong") or []), set(kich_hoat.get("thuan") or [])
+    for n in range(tu_nam, tu_nam + so_nam):
+        sao = luu_nien(n)["cung"].get(cung)
+        if sao in cd:
+            ra["chu_dong"].append(n)
+        elif sao in th:
+            ra["thuan"].append(n)
+    return ra
+
+
+def to_hop_cung(son: int, huong: int, van: int, cung: str | None = None, nam: int | None = None) -> dict:
     """Cặp sơn tinh – hướng tinh trong một cung: quan hệ ngũ hành (sơn → hướng), hợp thập, trạng thái từng sao theo vận,
-    nghĩa từ KB 45 cặp (không thứ tự) ghép vai sơn/hướng, mức thuan · can_bang · can_chu_dong."""
+    nghĩa từ KB `to_hop_81` (81 tổ hợp CÓ THỨ TỰ: sơn = người ở & sức khoẻ, hướng = tiền bạc & công việc — lĩnh vực,
+    chỗ hợp, cách xử lý, sao kích hoạt), rơi về KB 45 cặp không thứ tự khi thiếu; mức thuan · can_bang · can_chu_dong.
+    Có `cung` + `nam` → thêm `nam_chu_y` (năm sao lưu niên tới cung thuộc nhóm kích hoạt, 10 năm)."""
     hs, hh = HANH_SAO[son], HANH_SAO[huong]
     if hs == hh:
         qh = "ty_hoa"
@@ -257,19 +273,29 @@ def to_hop_cung(son: int, huong: int, van: int) -> dict:
     else:
         qh = "huong_khac_son"
     k = _kb_hk()
-    m = k.get("cap_sao", {}).get(f"{min(son, huong)}-{max(son, huong)}", {})
+    m81 = k.get("to_hop_81", {}).get(f"{son}-{huong}")
+    m = m81 or k.get("cap_sao", {}).get(f"{min(son, huong)}-{max(son, huong)}", {})
     sd = k.get("sao_doi_thuong", {})
     ts, th = trang_thai(son, van), trang_thai(huong, van)
     diem = _NHOM_DIEM.get(m.get("nhom", "can_bang"), 0) + (1 if th in ("vượng", "sinh") else 0)
     if any(s in (2, 5) and t in ("suy", "tử", "thoái") for s, t in ((son, ts), (huong, th))):
         diem -= 1
     muc = "thuan" if diem >= 1 else "can_chu_dong" if diem <= -1 else "can_bang"
-    mau = k.get("mau_cap", "{y}")
-    y = mau.format(s=son, h=huong, ten_s=sd.get(str(son), {}).get("ten", SAO[son]), ten_h=sd.get(str(huong), {}).get("ten", SAO[huong]),
-                   y=m.get("y", ""))
-    return {"ma": f"{son}-{huong}", "son": son, "huong": huong, "quan_he": qh, "hop_thap": son + huong == 10,
-            "trang_thai_son": ts, "trang_thai_huong": th, "ten": m.get("ten", f"{SAO[son]} – {SAO[huong]}"), "y": y,
-            "nhom_kb": m.get("nhom"), "hop_cho": m.get("hop_cho"), "luu_y": m.get("luu_y"), "muc": muc}
+    if m81:
+        y = m81["y"]
+    else:
+        mau = k.get("mau_cap", "{y}")
+        y = mau.format(s=son, h=huong, ten_s=sd.get(str(son), {}).get("ten", SAO[son]), ten_h=sd.get(str(huong), {}).get("ten", SAO[huong]),
+                       y=m.get("y", ""))
+    ra = {"ma": f"{son}-{huong}", "son": son, "huong": huong, "quan_he": qh, "hop_thap": son + huong == 10,
+          "trang_thai_son": ts, "trang_thai_huong": th, "ten": m.get("ten", f"{SAO[son]} – {SAO[huong]}"), "y": y,
+          "nhom_kb": m.get("nhom"), "hop_cho": m.get("hop_cho"), "luu_y": m.get("luu_y"), "muc": muc}
+    if m81:
+        ra["linh_vuc"] = dict(m81["linh_vuc"])
+        ra["kich_hoat"] = {kk: list(v) for kk, v in m81["kich_hoat"].items()}
+        if cung and nam:
+            ra["nam_chu_y"] = nam_chu_y(cung, m81["kich_hoat"], int(nam))
+    return ra
 
 
 def thong_quan(quai_a: str, quai_b: str) -> dict:

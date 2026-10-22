@@ -544,5 +544,2156 @@
   "luu_nguyet": {
     "y": "Sao tháng (lưu nguyệt) đổi theo tiết khí: tháng Dần bắt đầu từ Lập xuân, tháng Mão từ Kinh trập… Năm Tý Ngọ Mão Dậu: tháng Dần nhập trung 8; năm Thìn Tuất Sửu Mùi: 5; năm Dần Thân Tỵ Hợi: 2; mỗi tháng lùi một số.",
     "luu_y": "Sao tháng chỉ là lớp khí ngắn hạn chồng lên sao năm và trạch bàn — dùng để chọn lúc động thổ, sửa chữa, dọn phòng; không phải lời tiên đoán."
-  }
+  },
+  "to_hop_81": {
+    "1-1": {
+      "ten": "Nhất Bạch trùng",
+      "y": "Hai sao Thuỷ gặp nhau: sáng ý, hợp học hành, đi lại, giao tiếp; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi. Sơn tinh 1 (Nhất Bạch) nói về người ở: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi; hướng tinh 1 (Nhất Bạch) nói về tiền bạc, công việc: tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+      "nhom": "thuan",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+        "cong_viec": "Hợp việc nghiên cứu, tư vấn, đi lại, giao thương.",
+        "gia_dao": "Nhà có người hay đi xa, hay học; tình cảm dễ bay bổng — giữ nếp gặp nhau mỗi tuần.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 1 sách xưa gắn với thận và tai — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng làm việc, phòng học, góc đọc sách",
+      "luu_y": "Giữ ấm, đủ sáng; tránh ẩm thấp.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "1-2": {
+      "ten": "Nhất Nhị",
+      "y": "Thổ ép Thuỷ: chuyện trong nhà dễ nặng nề, trì trệ; người phụ nữ lớn trong nhà hay mệt. Sơn tinh 1 (Nhất Bạch) nói về người ở: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi; hướng tinh 2 (Nhị Hắc) nói về tiền bạc, công việc: tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+        "cong_viec": "Hợp việc chậm mà chắc: hậu cần, quản lý tài sản; tránh việc cần bứt tốc.",
+        "gia_dao": "Người mẹ, người vợ dễ gánh nhiều việc mà ít ai thấy; chia việc nhà rõ ràng.",
+        "suc_khoe": "Sơn tinh 1 sách xưa gắn với thận và tai: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "kho, phòng ít dùng",
+      "luu_y": "Không đặt giường, bếp ở đây; giữ thoáng, sạch, đủ sáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          1,
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          8
+        ]
+      }
+    },
+    "1-3": {
+      "ten": "Nhất Tam",
+      "y": "Thuỷ nuôi Mộc: có khởi đầu, có tiếng nói; khi sao 3 suy dễ sinh lời qua tiếng lại, tranh chấp giấy tờ. Sơn tinh 1 (Nhất Bạch) nói về người ở: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi; hướng tinh 3 (Tam Bích) nói về tiền bạc, công việc: có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+      "nhom": "can_bang",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Cơ hội đến nhanh, đi cũng nhanh — chỉ ký khi đã đọc kỹ. Có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+        "cong_viec": "Hợp khởi sự, việc cần sức bật; tránh việc nhiều tranh chấp.",
+        "gia_dao": "Trong nhà: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi.",
+        "suc_khoe": "Sơn tinh 1 sách xưa gắn với thận và tai: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng làm việc, phòng khách phụ",
+      "luu_y": "Nói rõ ràng, giấy tờ rõ ràng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "1-4": {
+      "ten": "Nhất Tứ đồng cung",
+      "y": "Thuỷ nuôi Mộc, cặp sao sách xưa gắn với học hành, thi cử, chữ nghĩa và duyên lành. Sơn tinh 1 (Nhất Bạch) nói về người ở: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi; hướng tinh 4 (Tứ Lục) nói về tiền bạc, công việc: tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+      "nhom": "thuan",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ tri thức, chuyên môn, tư vấn, thương hiệu cá nhân. Tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+        "cong_viec": "Hợp dạy học, viết lách, ngoại giao, thương hiệu cá nhân.",
+        "gia_dao": "Con cái học hành thuận; duyên lành với người ở — giữ không gian gọn để duyên không thành sa đà.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 1 sách xưa gắn với thận và tai — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng học, phòng làm việc, bàn đọc",
+      "luu_y": "Nước bẩn, lộn xộn ở cung này thì mặt tốt giảm; giữ sạch và sáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          4,
+          8,
+          9
+        ]
+      }
+    },
+    "1-5": {
+      "ten": "Nhất Ngũ",
+      "y": "Thổ nặng đè Thuỷ: cung này dễ kẹt, nặng, không nên động thổ hay dùng nhiều. Sơn tinh 1 (Nhất Bạch) nói về người ở: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi; hướng tinh 5 (Ngũ Hoàng) nói về tiền bạc, công việc: tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+        "cong_viec": "Không hợp mở việc mới ở phía này; giữ việc đang có cho gọn.",
+        "gia_dao": "Trong nhà: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi.",
+        "suc_khoe": "Sơn tinh 1 sách xưa gắn với thận và tai: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "kho, nhà vệ sinh, nơi ít lui tới",
+      "luu_y": "Giữ yên, sạch; không đặt cửa chính, bếp, giường.",
+      "kich_hoat": {
+        "chu_dong": [
+          1,
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          8
+        ]
+      }
+    },
+    "1-6": {
+      "ten": "Lục Nhất",
+      "y": "Kim sinh Thuỷ: sáng suốt, có người lớn nâng đỡ, hợp việc học, việc công. Sơn tinh 1 (Nhất Bạch) nói về người ở: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi; hướng tinh 6 (Lục Bạch) nói về tiền bạc, công việc: tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+      "nhom": "thuan",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+        "cong_viec": "Hợp quản lý, pháp lý, việc cần uy tín; tránh ôm việc một mình.",
+        "gia_dao": "Cha con, người lớn với người trẻ dễ hiểu nhau khi cùng ngồi làm việc.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 1 sách xưa gắn với thận và tai — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng làm việc, phòng người trụ cột",
+      "luu_y": "Khi 6 suy thì cứng nhắc, cô độc — thêm hơi ấm, màu sáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          6,
+          8,
+          9
+        ]
+      }
+    },
+    "1-7": {
+      "ten": "Nhất Thất",
+      "y": "Kim sinh Thuỷ nhưng sao 7 thiên về miệng tiếng, tiêu xài, tình cảm bay bổng. Sơn tinh 1 (Nhất Bạch) nói về người ở: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi; hướng tinh 7 (Thất Xích) nói về tiền bạc, công việc: tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+      "nhom": "can_bang",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+        "cong_viec": "Hợp bán hàng, dịch vụ, giải trí; cẩn thận hợp đồng miệng.",
+        "gia_dao": "Chuyện tình cảm ngoài luồng dễ bị bàn tán; rõ ràng với nhau từ đầu.",
+        "suc_khoe": "Sơn tinh 1 sách xưa gắn với thận và tai: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng khách, phòng tiếp khách",
+      "luu_y": "Giữ lời, giữ tiền; bớt tụ tập ồn ào.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "1-8": {
+      "ten": "Nhất Bát",
+      "y": "Thổ ép Thuỷ: sao 8 còn khí tốt về của cải, nhưng Thổ ép Thuỷ nên trẻ nhỏ, người nhỏ tuổi trong nhà cần được để ý. Sơn tinh 1 (Nhất Bạch) nói về người ở: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi; hướng tinh 8 (Bát Bạch) nói về tiền bạc, công việc: tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+      "nhom": "can_bang",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+        "cong_viec": "Hợp bất động sản, tài chính, việc tích luỹ dài hơi.",
+        "gia_dao": "Người nhỏ tuổi trong nhà cần được lắng nghe hơn; đừng để các em ngủ lâu ở phía này.",
+        "suc_khoe": "Sơn tinh 1 sách xưa gắn với thận và tai: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng khách, nơi cất giữ",
+      "luu_y": "Không đặt giường trẻ nhỏ ở đây lâu dài.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "1-9": {
+      "ten": "Nhất Cửu hợp thập",
+      "y": "Thuỷ gặp Hoả, cộng thành mười: âm dương gặp nhau, vận 9 coi là tốt về danh tiếng lẫn tiền bạc. Sơn tinh 1 (Nhất Bạch) nói về người ở: người ở sáng ý, hay đi lại, dễ có duyên; nhiều Thuỷ quá thì lạnh lẽo, trôi nổi; hướng tinh 9 (Cửu Tử) nói về tiền bạc, công việc: vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+      "nhom": "thuan",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền bạc và tiếng tăm đi cùng nhau trong vận 9. Vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+        "cong_viec": "Hợp việc cần nổi bật: truyền thông, công nghệ, sáng tạo, làm đẹp.",
+        "gia_dao": "Vợ chồng dễ hoà hợp; nhà có tiếng cười.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 1 sách xưa gắn với thận và tai — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng khách, phòng làm việc, cửa chính",
+      "luu_y": "Thuỷ Hoả đối nhau — giữ bếp và nước không sát nhau.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "2-1": {
+      "ten": "Nhất Nhị",
+      "y": "Thổ ép Thuỷ: chuyện trong nhà dễ nặng nề, trì trệ; người phụ nữ lớn trong nhà hay mệt. Sơn tinh 2 (Nhị Hắc) nói về người ở: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề; hướng tinh 1 (Nhất Bạch) nói về tiền bạc, công việc: tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+        "cong_viec": "Hợp việc nghiên cứu, tư vấn, đi lại, giao thương.",
+        "gia_dao": "Người mẹ, người vợ dễ gánh nhiều việc mà ít ai thấy; chia việc nhà rõ ràng.",
+        "suc_khoe": "Sơn tinh 2 sách xưa gắn với vùng bụng và tiêu hoá: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "kho, phòng ít dùng",
+      "luu_y": "Không đặt giường, bếp ở đây; giữ thoáng, sạch, đủ sáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          1,
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          8
+        ]
+      }
+    },
+    "2-2": {
+      "ten": "Nhị Hắc trùng",
+      "y": "Hai sao Thổ nặng: cung ì, dễ mệt mỏi, uể oải; sách xưa khuyên giữ yên. Sơn tinh 2 (Nhị Hắc) nói về người ở: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề; hướng tinh 2 (Nhị Hắc) nói về tiền bạc, công việc: tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+        "cong_viec": "Hợp việc chậm mà chắc: hậu cần, quản lý tài sản; tránh việc cần bứt tốc.",
+        "gia_dao": "Trong nhà: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề.",
+        "suc_khoe": "Sơn tinh 2 sách xưa gắn với vùng bụng và tiêu hoá: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "kho, nhà vệ sinh",
+      "luu_y": "Không nằm ngủ, không nấu ăn ở đây; thoáng khí, đủ sáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "2-3": {
+      "ten": "Đấu ngưu sát",
+      "y": "Mộc chạm Thổ, sách gọi 'đấu ngưu': dễ cãi vã, bất hoà giữa người lớn với người trẻ, kiện tụng. Sơn tinh 2 (Nhị Hắc) nói về người ở: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề; hướng tinh 3 (Tam Bích) nói về tiền bạc, công việc: có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+        "cong_viec": "Hợp khởi sự, việc cần sức bật; tránh việc nhiều tranh chấp.",
+        "gia_dao": "Mẹ với con trai lớn, người già với người trẻ dễ lệch ý; nói chuyện ở phòng khác.",
+        "suc_khoe": "Sơn tinh 2 sách xưa gắn với vùng bụng và tiêu hoá: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Tránh làm phòng khách, phòng ăn chung; giảm vật sắc nhọn.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          3,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "2-4": {
+      "ten": "Nhị Tứ",
+      "y": "Mộc chạm Thổ: người phụ nữ lớn và người trẻ trong nhà dễ lệch ý; việc nhà lục đục nhẹ. Sơn tinh 2 (Nhị Hắc) nói về người ở: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề; hướng tinh 4 (Tứ Lục) nói về tiền bạc, công việc: tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+      "nhom": "can_bang",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+        "cong_viec": "Hợp dạy học, viết lách, ngoại giao, thương hiệu cá nhân.",
+        "gia_dao": "Trong nhà: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề.",
+        "suc_khoe": "Sơn tinh 2 sách xưa gắn với vùng bụng và tiêu hoá: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng ngủ phụ, phòng làm việc",
+      "luu_y": "Chia rõ không gian riêng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "2-5": {
+      "ten": "Nhị Ngũ giao gia",
+      "y": "Hai Thổ nặng gặp nhau — cặp sách xưa coi là nặng nhất về sức khoẻ và hao tổn; cần tránh dùng làm chỗ ở chính. Sơn tinh 2 (Nhị Hắc) nói về người ở: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề; hướng tinh 5 (Ngũ Hoàng) nói về tiền bạc, công việc: tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ hao vì sức khoẻ, kiện cáo hoặc quyết định vội; không ký việc lớn khi đang mệt. Tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+        "cong_viec": "Không hợp mở việc mới ở phía này; giữ việc đang có cho gọn.",
+        "gia_dao": "Người lớn tuổi trong nhà dễ mệt kéo dài; để các cụ ở phòng phía khác.",
+        "suc_khoe": "Sơn tinh 2 sách xưa gắn với vùng bụng và tiêu hoá: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "kho, nhà vệ sinh, nơi không ở",
+      "luu_y": "Không đặt cửa chính, bếp, giường; không động thổ ở cung này; giữ sạch và yên.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "2-6": {
+      "ten": "Nhị Lục",
+      "y": "Thổ sinh Kim: hợp người lớn tuổi, việc bất động sản, tích góp; khi suy thì đơn độc, bảo thủ. Sơn tinh 2 (Nhị Hắc) nói về người ở: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề; hướng tinh 6 (Lục Bạch) nói về tiền bạc, công việc: tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+      "nhom": "can_bang",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+        "cong_viec": "Hợp quản lý, pháp lý, việc cần uy tín; tránh ôm việc một mình.",
+        "gia_dao": "Trong nhà: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề.",
+        "suc_khoe": "Sơn tinh 2 sách xưa gắn với vùng bụng và tiêu hoá: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng người lớn tuổi, phòng thờ",
+      "luu_y": "Thêm sinh khí: cây xanh, ánh sáng tự nhiên.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "2-7": {
+      "ten": "Nhị Thất đồng đạo",
+      "y": "Thổ sinh Kim nhưng 2 và 7 là 'số lửa tiên thiên': nóng nảy, miệng tiếng, cẩn thận bếp lửa, điện. Sơn tinh 2 (Nhị Hắc) nói về người ở: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề; hướng tinh 7 (Thất Xích) nói về tiền bạc, công việc: tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+        "cong_viec": "Hợp bán hàng, dịch vụ, giải trí; cẩn thận hợp đồng miệng.",
+        "gia_dao": "Trong nhà: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề.",
+        "suc_khoe": "Sơn tinh 2 sách xưa gắn với vùng bụng và tiêu hoá: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp; kiểm tra điện, lửa định kỳ.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          7,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "2-8": {
+      "ten": "Nhị Bát",
+      "y": "Hai Thổ: của cải từ đất đai, nhà cửa; người trẻ nhất trong nhà vất vả hơn. Sơn tinh 2 (Nhị Hắc) nói về người ở: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề; hướng tinh 8 (Bát Bạch) nói về tiền bạc, công việc: tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+      "nhom": "can_bang",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Của cải từ đất đai, tích góp chậm mà bền. Tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+        "cong_viec": "Hợp bất động sản, tài chính, việc tích luỹ dài hơi.",
+        "gia_dao": "Trong nhà: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề.",
+        "suc_khoe": "Sơn tinh 2 sách xưa gắn với vùng bụng và tiêu hoá: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "kho của, phòng làm việc tài chính",
+      "luu_y": "Giữ gọn, sạch. Giữ đủ sáng và thoáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "2-9": {
+      "ten": "Nhị Cửu",
+      "y": "Hoả nuôi Thổ nặng: cung nóng mà nặng, dễ bướng bỉnh, mệt mỏi kéo dài. Sơn tinh 2 (Nhị Hắc) nói về người ở: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề; hướng tinh 9 (Cửu Tử) nói về tiền bạc, công việc: vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+        "cong_viec": "Hợp việc cần nổi bật: truyền thông, công nghệ, sáng tạo, làm đẹp.",
+        "gia_dao": "Trong nhà: người lớn tuổi và phụ nữ trong nhà dễ mệt, uể oải; không khí nhà nặng nề.",
+        "suc_khoe": "Sơn tinh 2 sách xưa gắn với vùng bụng và tiêu hoá: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp (Hoả càng nuôi Thổ); giữ mát, thoáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "3-1": {
+      "ten": "Nhất Tam",
+      "y": "Thuỷ nuôi Mộc: có khởi đầu, có tiếng nói; khi sao 3 suy dễ sinh lời qua tiếng lại, tranh chấp giấy tờ. Sơn tinh 3 (Tam Bích) nói về người ở: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội; hướng tinh 1 (Nhất Bạch) nói về tiền bạc, công việc: tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+      "nhom": "can_bang",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Cơ hội đến nhanh, đi cũng nhanh — chỉ ký khi đã đọc kỹ. Tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+        "cong_viec": "Hợp việc nghiên cứu, tư vấn, đi lại, giao thương.",
+        "gia_dao": "Trong nhà: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội.",
+        "suc_khoe": "Sơn tinh 3 sách xưa gắn với gan và chân: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng làm việc, phòng khách phụ",
+      "luu_y": "Nói rõ ràng, giấy tờ rõ ràng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "3-2": {
+      "ten": "Đấu ngưu sát",
+      "y": "Mộc chạm Thổ, sách gọi 'đấu ngưu': dễ cãi vã, bất hoà giữa người lớn với người trẻ, kiện tụng. Sơn tinh 3 (Tam Bích) nói về người ở: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội; hướng tinh 2 (Nhị Hắc) nói về tiền bạc, công việc: tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+        "cong_viec": "Hợp việc chậm mà chắc: hậu cần, quản lý tài sản; tránh việc cần bứt tốc.",
+        "gia_dao": "Mẹ với con trai lớn, người già với người trẻ dễ lệch ý; nói chuyện ở phòng khác.",
+        "suc_khoe": "Sơn tinh 3 sách xưa gắn với gan và chân: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Tránh làm phòng khách, phòng ăn chung; giảm vật sắc nhọn.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          3,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "3-3": {
+      "ten": "Tam Bích trùng",
+      "y": "Hai Mộc: có sức bật, hợp khởi nghiệp, nhưng dễ lời qua tiếng lại, mất đồ. Sơn tinh 3 (Tam Bích) nói về người ở: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội; hướng tinh 3 (Tam Bích) nói về tiền bạc, công việc: có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+      "nhom": "can_bang",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+        "cong_viec": "Hợp khởi sự, việc cần sức bật; tránh việc nhiều tranh chấp.",
+        "gia_dao": "Trong nhà: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội.",
+        "suc_khoe": "Sơn tinh 3 sách xưa gắn với gan và chân: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng làm việc, phòng tập",
+      "luu_y": "Khoá cửa cẩn thận; nói năng chừng mực.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "3-4": {
+      "ten": "Tam Tứ",
+      "y": "Mộc gặp Mộc, gió và sấm: chuyện tình cảm, lời đồn; vận 9 cả hai suy nên dễ thị phi. Sơn tinh 3 (Tam Bích) nói về người ở: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội; hướng tinh 4 (Tứ Lục) nói về tiền bạc, công việc: tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+      "nhom": "can_bang",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+        "cong_viec": "Hợp dạy học, viết lách, ngoại giao, thương hiệu cá nhân.",
+        "gia_dao": "Trong nhà: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội.",
+        "suc_khoe": "Sơn tinh 3 sách xưa gắn với gan và chân: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng làm việc",
+      "luu_y": "Giữ chuyện riêng kín đáo.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "3-5": {
+      "ten": "Tam Ngũ",
+      "y": "Mộc chạm Thổ nặng: hao tiền vì tranh chấp, va chạm; cung cần giữ yên. Sơn tinh 3 (Tam Bích) nói về người ở: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội; hướng tinh 5 (Ngũ Hoàng) nói về tiền bạc, công việc: tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+        "cong_viec": "Không hợp mở việc mới ở phía này; giữ việc đang có cho gọn.",
+        "gia_dao": "Trong nhà: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội.",
+        "suc_khoe": "Sơn tinh 3 sách xưa gắn với gan và chân: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "kho",
+      "luu_y": "Không động thổ; tránh đặt cửa, giường.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          3,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "3-6": {
+      "ten": "Tam Lục",
+      "y": "Kim chặt Mộc: con trai lớn với người cha dễ to tiếng; chân tay, đi lại cẩn thận. Sơn tinh 3 (Tam Bích) nói về người ở: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội; hướng tinh 6 (Lục Bạch) nói về tiền bạc, công việc: tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+        "cong_viec": "Hợp quản lý, pháp lý, việc cần uy tín; tránh ôm việc một mình.",
+        "gia_dao": "Cha với con trai lớn dễ to tiếng; chọn lúc bình tĩnh để nói chuyện quan trọng.",
+        "suc_khoe": "Sơn tinh 3 sách xưa gắn với gan và chân: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Giảm vật kim loại sắc nhọn; đi lại chậm ở khu này.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          3,
+          5,
+          6
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "3-7": {
+      "ten": "Tam Thất",
+      "y": "Kim chặt Mộc, sách gọi 'xuyên tâm sát': để ý mất đồ, kiện tụng, va chạm vật sắc. Sơn tinh 3 (Tam Bích) nói về người ở: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội; hướng tinh 7 (Thất Xích) nói về tiền bạc, công việc: tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ hao vì giấy tờ, hợp đồng, tranh chấp cổ phần; đọc kỹ, giữ bản gốc. Tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+        "cong_viec": "Hợp bán hàng, dịch vụ, giải trí; cẩn thận hợp đồng miệng.",
+        "gia_dao": "Vợ chồng, anh em dễ lời qua tiếng lại gay gắt; tránh bàn chuyện tiền ở phía này.",
+        "suc_khoe": "Sơn tinh 3 sách xưa gắn với gan và chân: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "kho, nơi ít dùng",
+      "luu_y": "Khoá kỹ, không để tiền bạc, giấy tờ quan trọng; không đặt giường.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "3-8": {
+      "ten": "Tam Bát",
+      "y": "Mộc chạm Thổ: trẻ con khó bảo, của cải hao; sao 8 còn khí nên không quá nặng. Sơn tinh 3 (Tam Bích) nói về người ở: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội; hướng tinh 8 (Bát Bạch) nói về tiền bạc, công việc: tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+      "nhom": "can_bang",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+        "cong_viec": "Hợp bất động sản, tài chính, việc tích luỹ dài hơi.",
+        "gia_dao": "Trong nhà: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội.",
+        "suc_khoe": "Sơn tinh 3 sách xưa gắn với gan và chân: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng chơi, phòng phụ",
+      "luu_y": "Bớt đồ sắc nhọn, thêm ấm áp.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "3-9": {
+      "ten": "Tam Cửu",
+      "y": "Mộc nuôi Hoả: thông minh, nổi bật, hợp vận 9; nóng tính, vội vàng. Sơn tinh 3 (Tam Bích) nói về người ở: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội; hướng tinh 9 (Cửu Tử) nói về tiền bạc, công việc: vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+      "nhom": "thuan",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+        "cong_viec": "Hợp việc cần nổi bật: truyền thông, công nghệ, sáng tạo, làm đẹp.",
+        "gia_dao": "Trong nhà: người ở hoạt bát, nói thẳng; dễ lời qua tiếng lại, nóng vội.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 3 sách xưa gắn với gan và chân — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng làm việc, phòng khách",
+      "luu_y": "Giữ điềm tĩnh, bớt lửa.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          3,
+          8,
+          9
+        ]
+      }
+    },
+    "4-1": {
+      "ten": "Nhất Tứ đồng cung",
+      "y": "Thuỷ nuôi Mộc, cặp sao sách xưa gắn với học hành, thi cử, chữ nghĩa và duyên lành. Sơn tinh 4 (Tứ Lục) nói về người ở: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm; hướng tinh 1 (Nhất Bạch) nói về tiền bạc, công việc: tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+      "nhom": "thuan",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ tri thức, chuyên môn, tư vấn, thương hiệu cá nhân. Tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+        "cong_viec": "Hợp việc nghiên cứu, tư vấn, đi lại, giao thương.",
+        "gia_dao": "Con cái học hành thuận; duyên lành với người ở — giữ không gian gọn để duyên không thành sa đà.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 4 sách xưa gắn với hông, đùi và đường thở — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng học, phòng làm việc, bàn đọc",
+      "luu_y": "Nước bẩn, lộn xộn ở cung này thì mặt tốt giảm; giữ sạch và sáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          4,
+          8,
+          9
+        ]
+      }
+    },
+    "4-2": {
+      "ten": "Nhị Tứ",
+      "y": "Mộc chạm Thổ: người phụ nữ lớn và người trẻ trong nhà dễ lệch ý; việc nhà lục đục nhẹ. Sơn tinh 4 (Tứ Lục) nói về người ở: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm; hướng tinh 2 (Nhị Hắc) nói về tiền bạc, công việc: tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+      "nhom": "can_bang",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+        "cong_viec": "Hợp việc chậm mà chắc: hậu cần, quản lý tài sản; tránh việc cần bứt tốc.",
+        "gia_dao": "Trong nhà: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm.",
+        "suc_khoe": "Sơn tinh 4 sách xưa gắn với hông, đùi và đường thở: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng ngủ phụ, phòng làm việc",
+      "luu_y": "Chia rõ không gian riêng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "4-3": {
+      "ten": "Tam Tứ",
+      "y": "Mộc gặp Mộc, gió và sấm: chuyện tình cảm, lời đồn; vận 9 cả hai suy nên dễ thị phi. Sơn tinh 4 (Tứ Lục) nói về người ở: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm; hướng tinh 3 (Tam Bích) nói về tiền bạc, công việc: có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+      "nhom": "can_bang",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+        "cong_viec": "Hợp khởi sự, việc cần sức bật; tránh việc nhiều tranh chấp.",
+        "gia_dao": "Trong nhà: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm.",
+        "suc_khoe": "Sơn tinh 4 sách xưa gắn với hông, đùi và đường thở: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng làm việc",
+      "luu_y": "Giữ chuyện riêng kín đáo.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "4-4": {
+      "ten": "Tứ Lục trùng",
+      "y": "Hai Mộc Tốn: chữ nghĩa, giao thiệp; nhiều quá thì bay bổng, thiếu thực tế. Sơn tinh 4 (Tứ Lục) nói về người ở: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm; hướng tinh 4 (Tứ Lục) nói về tiền bạc, công việc: tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+      "nhom": "can_bang",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+        "cong_viec": "Hợp dạy học, viết lách, ngoại giao, thương hiệu cá nhân.",
+        "gia_dao": "Trong nhà: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm.",
+        "suc_khoe": "Sơn tinh 4 sách xưa gắn với hông, đùi và đường thở: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng học, phòng làm việc",
+      "luu_y": "Giữ ngăn nắp; chốt việc bằng văn bản.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "4-5": {
+      "ten": "Tứ Ngũ",
+      "y": "Mộc chạm Thổ nặng: hao tổn vì giấy tờ, văn bản; cung nặng. Sơn tinh 4 (Tứ Lục) nói về người ở: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm; hướng tinh 5 (Ngũ Hoàng) nói về tiền bạc, công việc: tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+        "cong_viec": "Không hợp mở việc mới ở phía này; giữ việc đang có cho gọn.",
+        "gia_dao": "Trong nhà: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm.",
+        "suc_khoe": "Sơn tinh 4 sách xưa gắn với hông, đùi và đường thở: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "kho",
+      "luu_y": "Không động thổ, không đặt bàn thờ, giường.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          4,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "4-6": {
+      "ten": "Tứ Lục",
+      "y": "Kim chặt Mộc: người phụ nữ lớn với người cha dễ căng; áp lực tinh thần khi cả hai suy. Sơn tinh 4 (Tứ Lục) nói về người ở: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm; hướng tinh 6 (Lục Bạch) nói về tiền bạc, công việc: tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+      "nhom": "can_bang",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+        "cong_viec": "Hợp quản lý, pháp lý, việc cần uy tín; tránh ôm việc một mình.",
+        "gia_dao": "Vợ chồng lớn tuổi dễ căng vì chuyện nhỏ; mỗi người một góc riêng.",
+        "suc_khoe": "Sơn tinh 4 sách xưa gắn với hông, đùi và đường thở: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng phụ",
+      "luu_y": "Thêm màu ấm, cây xanh mềm.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "4-7": {
+      "ten": "Tứ Thất",
+      "y": "Kim chặt Mộc: lời ra tiếng vào, tình cảm phức tạp, dễ bị nói xấu. Sơn tinh 4 (Tứ Lục) nói về người ở: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm; hướng tinh 7 (Thất Xích) nói về tiền bạc, công việc: tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+        "cong_viec": "Hợp bán hàng, dịch vụ, giải trí; cẩn thận hợp đồng miệng.",
+        "gia_dao": "Chuyện tình cảm dễ có người thứ ba xen lời; giữ kín chuyện riêng.",
+        "suc_khoe": "Sơn tinh 4 sách xưa gắn với hông, đùi và đường thở: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt giường vợ chồng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          4,
+          5,
+          7
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "4-8": {
+      "ten": "Tứ Bát",
+      "y": "Mộc chạm Thổ: trẻ nhỏ học hành khó tập trung; sao 8 giữ phần của cải. Sơn tinh 4 (Tứ Lục) nói về người ở: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm; hướng tinh 8 (Bát Bạch) nói về tiền bạc, công việc: tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+      "nhom": "can_bang",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+        "cong_viec": "Hợp bất động sản, tài chính, việc tích luỹ dài hơi.",
+        "gia_dao": "Trong nhà: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm.",
+        "suc_khoe": "Sơn tinh 4 sách xưa gắn với hông, đùi và đường thở: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng khách, phòng ngủ phụ",
+      "luu_y": "Góc học tập nên đặt cung khác.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "4-9": {
+      "ten": "Tứ Cửu",
+      "y": "Mộc nuôi Hoả: chữ nghĩa sáng rực, danh tiếng, vận 9 thuận. Sơn tinh 4 (Tứ Lục) nói về người ở: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm; hướng tinh 9 (Cửu Tử) nói về tiền bạc, công việc: vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+      "nhom": "thuan",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ danh tiếng, chữ nghĩa, nội dung — vận 9 thuận. Vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+        "cong_viec": "Hợp việc cần nổi bật: truyền thông, công nghệ, sáng tạo, làm đẹp.",
+        "gia_dao": "Trong nhà: người ở ham học, khéo giao thiệp; dễ bay bổng, sa đà chuyện tình cảm.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 4 sách xưa gắn với hông, đùi và đường thở — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng làm việc, phòng học, phòng khách",
+      "luu_y": "Tránh quá nóng, bí.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          4,
+          8,
+          9
+        ]
+      }
+    },
+    "5-1": {
+      "ten": "Nhất Ngũ",
+      "y": "Thổ nặng đè Thuỷ: cung này dễ kẹt, nặng, không nên động thổ hay dùng nhiều. Sơn tinh 5 (Ngũ Hoàng) nói về người ở: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng; hướng tinh 1 (Nhất Bạch) nói về tiền bạc, công việc: tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+        "cong_viec": "Hợp việc nghiên cứu, tư vấn, đi lại, giao thương.",
+        "gia_dao": "Trong nhà: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng.",
+        "suc_khoe": "Sơn tinh 5 sách xưa gắn với sức bền chung của cả nhà: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "kho, nhà vệ sinh, nơi ít lui tới",
+      "luu_y": "Giữ yên, sạch; không đặt cửa chính, bếp, giường.",
+      "kich_hoat": {
+        "chu_dong": [
+          1,
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          8
+        ]
+      }
+    },
+    "5-2": {
+      "ten": "Nhị Ngũ giao gia",
+      "y": "Hai Thổ nặng gặp nhau — cặp sách xưa coi là nặng nhất về sức khoẻ và hao tổn; cần tránh dùng làm chỗ ở chính. Sơn tinh 5 (Ngũ Hoàng) nói về người ở: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng; hướng tinh 2 (Nhị Hắc) nói về tiền bạc, công việc: tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ hao vì sức khoẻ, kiện cáo hoặc quyết định vội; không ký việc lớn khi đang mệt. Tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+        "cong_viec": "Hợp việc chậm mà chắc: hậu cần, quản lý tài sản; tránh việc cần bứt tốc.",
+        "gia_dao": "Người lớn tuổi trong nhà dễ mệt kéo dài; để các cụ ở phòng phía khác.",
+        "suc_khoe": "Sơn tinh 5 sách xưa gắn với sức bền chung của cả nhà: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "kho, nhà vệ sinh, nơi không ở",
+      "luu_y": "Không đặt cửa chính, bếp, giường; không động thổ ở cung này; giữ sạch và yên.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "5-3": {
+      "ten": "Tam Ngũ",
+      "y": "Mộc chạm Thổ nặng: hao tiền vì tranh chấp, va chạm; cung cần giữ yên. Sơn tinh 5 (Ngũ Hoàng) nói về người ở: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng; hướng tinh 3 (Tam Bích) nói về tiền bạc, công việc: có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+        "cong_viec": "Hợp khởi sự, việc cần sức bật; tránh việc nhiều tranh chấp.",
+        "gia_dao": "Trong nhà: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng.",
+        "suc_khoe": "Sơn tinh 5 sách xưa gắn với sức bền chung của cả nhà: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "kho",
+      "luu_y": "Không động thổ; tránh đặt cửa, giường.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          3,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "5-4": {
+      "ten": "Tứ Ngũ",
+      "y": "Mộc chạm Thổ nặng: hao tổn vì giấy tờ, văn bản; cung nặng. Sơn tinh 5 (Ngũ Hoàng) nói về người ở: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng; hướng tinh 4 (Tứ Lục) nói về tiền bạc, công việc: tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+        "cong_viec": "Hợp dạy học, viết lách, ngoại giao, thương hiệu cá nhân.",
+        "gia_dao": "Trong nhà: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng.",
+        "suc_khoe": "Sơn tinh 5 sách xưa gắn với sức bền chung của cả nhà: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "kho",
+      "luu_y": "Không động thổ, không đặt bàn thờ, giường.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          4,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "5-5": {
+      "ten": "Ngũ Hoàng trùng",
+      "y": "Hai Ngũ Hoàng: cung nặng nhất trong bàn, sách xưa khuyên tuyệt đối giữ yên. Sơn tinh 5 (Ngũ Hoàng) nói về người ở: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng; hướng tinh 5 (Ngũ Hoàng) nói về tiền bạc, công việc: tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+        "cong_viec": "Không hợp mở việc mới ở phía này; giữ việc đang có cho gọn.",
+        "gia_dao": "Trong nhà: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng.",
+        "suc_khoe": "Sơn tinh 5 sách xưa gắn với sức bền chung của cả nhà: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "nơi không ở, kho",
+      "luu_y": "Không động thổ, không đặt cửa, bếp, giường; dọn sạch, để yên.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "5-6": {
+      "ten": "Ngũ Lục",
+      "y": "Thổ nặng sinh Kim: người trụ cột gánh nặng, mệt mỏi. Sơn tinh 5 (Ngũ Hoàng) nói về người ở: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng; hướng tinh 6 (Lục Bạch) nói về tiền bạc, công việc: tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+        "cong_viec": "Hợp quản lý, pháp lý, việc cần uy tín; tránh ôm việc một mình.",
+        "gia_dao": "Trong nhà: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng.",
+        "suc_khoe": "Sơn tinh 5 sách xưa gắn với sức bền chung của cả nhà: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không làm phòng ngủ chính; người trụ cột ngủ phía khác.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          6,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "5-7": {
+      "ten": "Ngũ Thất",
+      "y": "Thổ nặng sinh Kim 7: thị phi, miệng tiếng, ăn uống cẩn thận. Sơn tinh 5 (Ngũ Hoàng) nói về người ở: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng; hướng tinh 7 (Thất Xích) nói về tiền bạc, công việc: tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+        "cong_viec": "Hợp bán hàng, dịch vụ, giải trí; cẩn thận hợp đồng miệng.",
+        "gia_dao": "Trong nhà: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng.",
+        "suc_khoe": "Sơn tinh 5 sách xưa gắn với sức bền chung của cả nhà: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp, bàn ăn.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          7,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "5-8": {
+      "ten": "Ngũ Bát",
+      "y": "Hai Thổ: sao 8 làm dịu Ngũ Hoàng; của cải từ đất, nhưng vẫn nên giữ yên. Sơn tinh 5 (Ngũ Hoàng) nói về người ở: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng; hướng tinh 8 (Bát Bạch) nói về tiền bạc, công việc: tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+      "nhom": "can_bang",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+        "cong_viec": "Hợp bất động sản, tài chính, việc tích luỹ dài hơi.",
+        "gia_dao": "Trong nhà: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng.",
+        "suc_khoe": "Sơn tinh 5 sách xưa gắn với sức bền chung của cả nhà: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "kho, phòng phụ",
+      "luu_y": "Không động thổ lớn.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "5-9": {
+      "ten": "Ngũ Cửu",
+      "y": "Hoả nuôi Thổ nặng: nóng nảy, căng thẳng; cung cần giữ mát và yên. Sơn tinh 5 (Ngũ Hoàng) nói về người ở: người ở dễ mệt kéo dài, việc hay kẹt; cung này nên giữ yên, ít dùng; hướng tinh 9 (Cửu Tử) nói về tiền bạc, công việc: vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+        "cong_viec": "Hợp việc cần nổi bật: truyền thông, công nghệ, sáng tạo, làm đẹp.",
+        "gia_dao": "Dễ cãi nhau vì chuyện nhỏ khi trời nóng; tránh họp gia đình ở phía này.",
+        "suc_khoe": "Sơn tinh 5 sách xưa gắn với sức bền chung của cả nhà: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp; không để đèn, thiết bị toả nhiệt lớn.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "6-1": {
+      "ten": "Lục Nhất",
+      "y": "Kim sinh Thuỷ: sáng suốt, có người lớn nâng đỡ, hợp việc học, việc công. Sơn tinh 6 (Lục Bạch) nói về người ở: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc; hướng tinh 1 (Nhất Bạch) nói về tiền bạc, công việc: tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+      "nhom": "thuan",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+        "cong_viec": "Hợp việc nghiên cứu, tư vấn, đi lại, giao thương.",
+        "gia_dao": "Cha con, người lớn với người trẻ dễ hiểu nhau khi cùng ngồi làm việc.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 6 sách xưa gắn với đầu, phổi và xương — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng làm việc, phòng người trụ cột",
+      "luu_y": "Khi 6 suy thì cứng nhắc, cô độc — thêm hơi ấm, màu sáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          6,
+          8,
+          9
+        ]
+      }
+    },
+    "6-2": {
+      "ten": "Nhị Lục",
+      "y": "Thổ sinh Kim: hợp người lớn tuổi, việc bất động sản, tích góp; khi suy thì đơn độc, bảo thủ. Sơn tinh 6 (Lục Bạch) nói về người ở: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc; hướng tinh 2 (Nhị Hắc) nói về tiền bạc, công việc: tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+      "nhom": "can_bang",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+        "cong_viec": "Hợp việc chậm mà chắc: hậu cần, quản lý tài sản; tránh việc cần bứt tốc.",
+        "gia_dao": "Trong nhà: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc.",
+        "suc_khoe": "Sơn tinh 6 sách xưa gắn với đầu, phổi và xương: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng người lớn tuổi, phòng thờ",
+      "luu_y": "Thêm sinh khí: cây xanh, ánh sáng tự nhiên.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "6-3": {
+      "ten": "Tam Lục",
+      "y": "Kim chặt Mộc: con trai lớn với người cha dễ to tiếng; chân tay, đi lại cẩn thận. Sơn tinh 6 (Lục Bạch) nói về người ở: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc; hướng tinh 3 (Tam Bích) nói về tiền bạc, công việc: có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+        "cong_viec": "Hợp khởi sự, việc cần sức bật; tránh việc nhiều tranh chấp.",
+        "gia_dao": "Cha với con trai lớn dễ to tiếng; chọn lúc bình tĩnh để nói chuyện quan trọng.",
+        "suc_khoe": "Sơn tinh 6 sách xưa gắn với đầu, phổi và xương: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Giảm vật kim loại sắc nhọn; đi lại chậm ở khu này.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          3,
+          5,
+          6
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "6-4": {
+      "ten": "Tứ Lục",
+      "y": "Kim chặt Mộc: người phụ nữ lớn với người cha dễ căng; áp lực tinh thần khi cả hai suy. Sơn tinh 6 (Lục Bạch) nói về người ở: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc; hướng tinh 4 (Tứ Lục) nói về tiền bạc, công việc: tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+      "nhom": "can_bang",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+        "cong_viec": "Hợp dạy học, viết lách, ngoại giao, thương hiệu cá nhân.",
+        "gia_dao": "Vợ chồng lớn tuổi dễ căng vì chuyện nhỏ; mỗi người một góc riêng.",
+        "suc_khoe": "Sơn tinh 6 sách xưa gắn với đầu, phổi và xương: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng phụ",
+      "luu_y": "Thêm màu ấm, cây xanh mềm.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "6-5": {
+      "ten": "Ngũ Lục",
+      "y": "Thổ nặng sinh Kim: người trụ cột gánh nặng, mệt mỏi. Sơn tinh 6 (Lục Bạch) nói về người ở: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc; hướng tinh 5 (Ngũ Hoàng) nói về tiền bạc, công việc: tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+        "cong_viec": "Không hợp mở việc mới ở phía này; giữ việc đang có cho gọn.",
+        "gia_dao": "Trong nhà: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc.",
+        "suc_khoe": "Sơn tinh 6 sách xưa gắn với đầu, phổi và xương: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không làm phòng ngủ chính; người trụ cột ngủ phía khác.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          6,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "6-6": {
+      "ten": "Lục Bạch trùng",
+      "y": "Hai Kim Càn: quyền uy, kỷ luật, cứng cỏi; vận 9 sao 6 đã lui nên dễ cứng nhắc. Sơn tinh 6 (Lục Bạch) nói về người ở: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc; hướng tinh 6 (Lục Bạch) nói về tiền bạc, công việc: tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+      "nhom": "can_bang",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+        "cong_viec": "Hợp quản lý, pháp lý, việc cần uy tín; tránh ôm việc một mình.",
+        "gia_dao": "Trong nhà: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc.",
+        "suc_khoe": "Sơn tinh 6 sách xưa gắn với đầu, phổi và xương: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng người trụ cột, phòng làm việc",
+      "luu_y": "Thêm mềm mại, màu ấm.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "6-7": {
+      "ten": "Lục Thất giao kiếm",
+      "y": "Hai Kim chạm nhau như hai lưỡi kiếm: tranh giành, va chạm, lời sắc. Sơn tinh 6 (Lục Bạch) nói về người ở: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc; hướng tinh 7 (Thất Xích) nói về tiền bạc, công việc: tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+      "nhom": "can_chu_dong",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+        "cong_viec": "Hợp bán hàng, dịch vụ, giải trí; cẩn thận hợp đồng miệng.",
+        "gia_dao": "Hai người cứng tính trong nhà dễ va nhau; đừng để cả hai cùng ngồi lâu ở phía này.",
+        "suc_khoe": "Sơn tinh 6 sách xưa gắn với đầu, phổi và xương: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Giảm kim loại, vật nhọn; không đặt giường.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          6,
+          7
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "6-8": {
+      "ten": "Lục Bát",
+      "y": "Thổ sinh Kim: của cải, người quý giúp, ổn định — cặp đẹp của vận 8 còn giá trị sang vận 9. Sơn tinh 6 (Lục Bạch) nói về người ở: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc; hướng tinh 8 (Bát Bạch) nói về tiền bạc, công việc: tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+      "nhom": "thuan",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Của cải bền, hợp bất động sản, quản trị, việc cần uy tín. Tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+        "cong_viec": "Hợp bất động sản, tài chính, việc tích luỹ dài hơi.",
+        "gia_dao": "Nhà nề nếp, người trụ cột vững; con cái có chỗ dựa.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 6 sách xưa gắn với đầu, phổi và xương — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng khách, phòng làm việc, két tiền",
+      "luu_y": "Giữ sáng, gọn. Giữ đủ sáng và thoáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          6,
+          8,
+          9
+        ]
+      }
+    },
+    "6-9": {
+      "ten": "Lục Cửu",
+      "y": "Hoả nung Kim: người cha, người trụ cột chịu áp lực; vận 9 Hoả mạnh nên cần để ý. Sơn tinh 6 (Lục Bạch) nói về người ở: người trụ cột, người cha có uy; khi sao suy thì cứng nhắc, cô độc; hướng tinh 9 (Cửu Tử) nói về tiền bạc, công việc: vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+        "cong_viec": "Hợp việc cần nổi bật: truyền thông, công nghệ, sáng tạo, làm đẹp.",
+        "gia_dao": "Người cha, người lớn tuổi nhất dễ bị dồn việc; san sẻ trách nhiệm.",
+        "suc_khoe": "Sơn tinh 6 sách xưa gắn với đầu, phổi và xương: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng phụ",
+      "luu_y": "Không đặt bếp; không làm phòng ngủ người trụ cột.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          6,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "7-1": {
+      "ten": "Nhất Thất",
+      "y": "Kim sinh Thuỷ nhưng sao 7 thiên về miệng tiếng, tiêu xài, tình cảm bay bổng. Sơn tinh 7 (Thất Xích) nói về người ở: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng; hướng tinh 1 (Nhất Bạch) nói về tiền bạc, công việc: tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+      "nhom": "can_bang",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+        "cong_viec": "Hợp việc nghiên cứu, tư vấn, đi lại, giao thương.",
+        "gia_dao": "Chuyện tình cảm ngoài luồng dễ bị bàn tán; rõ ràng với nhau từ đầu.",
+        "suc_khoe": "Sơn tinh 7 sách xưa gắn với miệng, răng và họng: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng khách, phòng tiếp khách",
+      "luu_y": "Giữ lời, giữ tiền; bớt tụ tập ồn ào.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "7-2": {
+      "ten": "Nhị Thất đồng đạo",
+      "y": "Thổ sinh Kim nhưng 2 và 7 là 'số lửa tiên thiên': nóng nảy, miệng tiếng, cẩn thận bếp lửa, điện. Sơn tinh 7 (Thất Xích) nói về người ở: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng; hướng tinh 2 (Nhị Hắc) nói về tiền bạc, công việc: tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+        "cong_viec": "Hợp việc chậm mà chắc: hậu cần, quản lý tài sản; tránh việc cần bứt tốc.",
+        "gia_dao": "Trong nhà: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng.",
+        "suc_khoe": "Sơn tinh 7 sách xưa gắn với miệng, răng và họng: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp; kiểm tra điện, lửa định kỳ.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          7,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "7-3": {
+      "ten": "Tam Thất",
+      "y": "Kim chặt Mộc, sách gọi 'xuyên tâm sát': để ý mất đồ, kiện tụng, va chạm vật sắc. Sơn tinh 7 (Thất Xích) nói về người ở: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng; hướng tinh 3 (Tam Bích) nói về tiền bạc, công việc: có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ hao vì giấy tờ, hợp đồng, tranh chấp cổ phần; đọc kỹ, giữ bản gốc. Có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+        "cong_viec": "Hợp khởi sự, việc cần sức bật; tránh việc nhiều tranh chấp.",
+        "gia_dao": "Vợ chồng, anh em dễ lời qua tiếng lại gay gắt; tránh bàn chuyện tiền ở phía này.",
+        "suc_khoe": "Sơn tinh 7 sách xưa gắn với miệng, răng và họng: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "kho, nơi ít dùng",
+      "luu_y": "Khoá kỹ, không để tiền bạc, giấy tờ quan trọng; không đặt giường.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "7-4": {
+      "ten": "Tứ Thất",
+      "y": "Kim chặt Mộc: lời ra tiếng vào, tình cảm phức tạp, dễ bị nói xấu. Sơn tinh 7 (Thất Xích) nói về người ở: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng; hướng tinh 4 (Tứ Lục) nói về tiền bạc, công việc: tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+        "cong_viec": "Hợp dạy học, viết lách, ngoại giao, thương hiệu cá nhân.",
+        "gia_dao": "Chuyện tình cảm dễ có người thứ ba xen lời; giữ kín chuyện riêng.",
+        "suc_khoe": "Sơn tinh 7 sách xưa gắn với miệng, răng và họng: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt giường vợ chồng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          4,
+          5,
+          7
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "7-5": {
+      "ten": "Ngũ Thất",
+      "y": "Thổ nặng sinh Kim 7: thị phi, miệng tiếng, ăn uống cẩn thận. Sơn tinh 7 (Thất Xích) nói về người ở: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng; hướng tinh 5 (Ngũ Hoàng) nói về tiền bạc, công việc: tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+        "cong_viec": "Không hợp mở việc mới ở phía này; giữ việc đang có cho gọn.",
+        "gia_dao": "Trong nhà: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng.",
+        "suc_khoe": "Sơn tinh 7 sách xưa gắn với miệng, răng và họng: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp, bàn ăn.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          7,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "7-6": {
+      "ten": "Lục Thất giao kiếm",
+      "y": "Hai Kim chạm nhau như hai lưỡi kiếm: tranh giành, va chạm, lời sắc. Sơn tinh 7 (Thất Xích) nói về người ở: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng; hướng tinh 6 (Lục Bạch) nói về tiền bạc, công việc: tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+      "nhom": "can_chu_dong",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+        "cong_viec": "Hợp quản lý, pháp lý, việc cần uy tín; tránh ôm việc một mình.",
+        "gia_dao": "Hai người cứng tính trong nhà dễ va nhau; đừng để cả hai cùng ngồi lâu ở phía này.",
+        "suc_khoe": "Sơn tinh 7 sách xưa gắn với miệng, răng và họng: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Giảm kim loại, vật nhọn; không đặt giường.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          6,
+          7
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "7-7": {
+      "ten": "Thất Xích trùng",
+      "y": "Hai Kim Đoài: ăn nói, buôn bán nhỏ, vui chơi; dễ hao tiền, miệng tiếng. Sơn tinh 7 (Thất Xích) nói về người ở: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng; hướng tinh 7 (Thất Xích) nói về tiền bạc, công việc: tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+      "nhom": "can_bang",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+        "cong_viec": "Hợp bán hàng, dịch vụ, giải trí; cẩn thận hợp đồng miệng.",
+        "gia_dao": "Trong nhà: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng.",
+        "suc_khoe": "Sơn tinh 7 sách xưa gắn với miệng, răng và họng: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng khách, phòng ăn",
+      "luu_y": "Giữ lời, giữ tiền.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "7-8": {
+      "ten": "Thất Bát",
+      "y": "Thổ sinh Kim: của cải và duyên trẻ; vận 9 sao 7 đã suy nên mặt tốt giảm. Sơn tinh 7 (Thất Xích) nói về người ở: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng; hướng tinh 8 (Bát Bạch) nói về tiền bạc, công việc: tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+      "nhom": "can_bang",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+        "cong_viec": "Hợp bất động sản, tài chính, việc tích luỹ dài hơi.",
+        "gia_dao": "Trong nhà: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng.",
+        "suc_khoe": "Sơn tinh 7 sách xưa gắn với miệng, răng và họng: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng khách, phòng ngủ phụ",
+      "luu_y": "Tránh để đồ lộn xộn.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "7-9": {
+      "ten": "Thất Cửu",
+      "y": "Hoả nung Kim: miệng tiếng, nóng nảy; cẩn thận lửa, điện. Sơn tinh 7 (Thất Xích) nói về người ở: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng; hướng tinh 9 (Cửu Tử) nói về tiền bạc, công việc: vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+      "nhom": "can_chu_dong",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+        "cong_viec": "Hợp việc cần nổi bật: truyền thông, công nghệ, sáng tạo, làm đẹp.",
+        "gia_dao": "Trong nhà: người ở hoạt ngôn, vui vẻ; dễ thị phi, miệng tiếng.",
+        "suc_khoe": "Sơn tinh 7 sách xưa gắn với miệng, răng và họng: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp; kiểm tra điện định kỳ.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          7,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "8-1": {
+      "ten": "Nhất Bát",
+      "y": "Thổ ép Thuỷ: sao 8 còn khí tốt về của cải, nhưng Thổ ép Thuỷ nên trẻ nhỏ, người nhỏ tuổi trong nhà cần được để ý. Sơn tinh 8 (Bát Bạch) nói về người ở: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi; hướng tinh 1 (Nhất Bạch) nói về tiền bạc, công việc: tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+      "nhom": "can_bang",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+        "cong_viec": "Hợp việc nghiên cứu, tư vấn, đi lại, giao thương.",
+        "gia_dao": "Người nhỏ tuổi trong nhà cần được lắng nghe hơn; đừng để các em ngủ lâu ở phía này.",
+        "suc_khoe": "Sơn tinh 8 sách xưa gắn với tay, lưng và khớp: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng khách, nơi cất giữ",
+      "luu_y": "Không đặt giường trẻ nhỏ ở đây lâu dài.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "8-2": {
+      "ten": "Nhị Bát",
+      "y": "Hai Thổ: của cải từ đất đai, nhà cửa; người trẻ nhất trong nhà vất vả hơn. Sơn tinh 8 (Bát Bạch) nói về người ở: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi; hướng tinh 2 (Nhị Hắc) nói về tiền bạc, công việc: tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+      "nhom": "can_bang",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Của cải từ đất đai, tích góp chậm mà bền. Tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+        "cong_viec": "Hợp việc chậm mà chắc: hậu cần, quản lý tài sản; tránh việc cần bứt tốc.",
+        "gia_dao": "Trong nhà: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi.",
+        "suc_khoe": "Sơn tinh 8 sách xưa gắn với tay, lưng và khớp: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "kho của, phòng làm việc tài chính",
+      "luu_y": "Giữ gọn, sạch. Giữ đủ sáng và thoáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "8-3": {
+      "ten": "Tam Bát",
+      "y": "Mộc chạm Thổ: trẻ con khó bảo, của cải hao; sao 8 còn khí nên không quá nặng. Sơn tinh 8 (Bát Bạch) nói về người ở: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi; hướng tinh 3 (Tam Bích) nói về tiền bạc, công việc: có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+      "nhom": "can_bang",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+        "cong_viec": "Hợp khởi sự, việc cần sức bật; tránh việc nhiều tranh chấp.",
+        "gia_dao": "Trong nhà: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi.",
+        "suc_khoe": "Sơn tinh 8 sách xưa gắn với tay, lưng và khớp: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng chơi, phòng phụ",
+      "luu_y": "Bớt đồ sắc nhọn, thêm ấm áp.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "8-4": {
+      "ten": "Tứ Bát",
+      "y": "Mộc chạm Thổ: trẻ nhỏ học hành khó tập trung; sao 8 giữ phần của cải. Sơn tinh 8 (Bát Bạch) nói về người ở: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi; hướng tinh 4 (Tứ Lục) nói về tiền bạc, công việc: tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+      "nhom": "can_bang",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+        "cong_viec": "Hợp dạy học, viết lách, ngoại giao, thương hiệu cá nhân.",
+        "gia_dao": "Trong nhà: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi.",
+        "suc_khoe": "Sơn tinh 8 sách xưa gắn với tay, lưng và khớp: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng khách, phòng ngủ phụ",
+      "luu_y": "Góc học tập nên đặt cung khác.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "8-5": {
+      "ten": "Ngũ Bát",
+      "y": "Hai Thổ: sao 8 làm dịu Ngũ Hoàng; của cải từ đất, nhưng vẫn nên giữ yên. Sơn tinh 8 (Bát Bạch) nói về người ở: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi; hướng tinh 5 (Ngũ Hoàng) nói về tiền bạc, công việc: tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+      "nhom": "can_bang",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+        "cong_viec": "Không hợp mở việc mới ở phía này; giữ việc đang có cho gọn.",
+        "gia_dao": "Trong nhà: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi.",
+        "suc_khoe": "Sơn tinh 8 sách xưa gắn với tay, lưng và khớp: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "kho, phòng phụ",
+      "luu_y": "Không động thổ lớn.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "8-6": {
+      "ten": "Lục Bát",
+      "y": "Thổ sinh Kim: của cải, người quý giúp, ổn định — cặp đẹp của vận 8 còn giá trị sang vận 9. Sơn tinh 8 (Bát Bạch) nói về người ở: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi; hướng tinh 6 (Lục Bạch) nói về tiền bạc, công việc: tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+      "nhom": "thuan",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Của cải bền, hợp bất động sản, quản trị, việc cần uy tín. Tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+        "cong_viec": "Hợp quản lý, pháp lý, việc cần uy tín; tránh ôm việc một mình.",
+        "gia_dao": "Nhà nề nếp, người trụ cột vững; con cái có chỗ dựa.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 8 sách xưa gắn với tay, lưng và khớp — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng khách, phòng làm việc, két tiền",
+      "luu_y": "Giữ sáng, gọn. Giữ đủ sáng và thoáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          6,
+          8,
+          9
+        ]
+      }
+    },
+    "8-7": {
+      "ten": "Thất Bát",
+      "y": "Thổ sinh Kim: của cải và duyên trẻ; vận 9 sao 7 đã suy nên mặt tốt giảm. Sơn tinh 8 (Bát Bạch) nói về người ở: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi; hướng tinh 7 (Thất Xích) nói về tiền bạc, công việc: tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+      "nhom": "can_bang",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+        "cong_viec": "Hợp bán hàng, dịch vụ, giải trí; cẩn thận hợp đồng miệng.",
+        "gia_dao": "Trong nhà: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi.",
+        "suc_khoe": "Sơn tinh 8 sách xưa gắn với tay, lưng và khớp: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng khách, phòng ngủ phụ",
+      "luu_y": "Tránh để đồ lộn xộn.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "8-8": {
+      "ten": "Bát Bạch trùng",
+      "y": "Hai Thổ Cấn: của cải, con cái, nền nếp; vận 9 còn khí tốt nhưng giảm dần. Sơn tinh 8 (Bát Bạch) nói về người ở: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi; hướng tinh 8 (Bát Bạch) nói về tiền bạc, công việc: tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+      "nhom": "thuan",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+        "cong_viec": "Hợp bất động sản, tài chính, việc tích luỹ dài hơi.",
+        "gia_dao": "Trong nhà: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 8 sách xưa gắn với tay, lưng và khớp — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng khách, phòng làm việc, phòng ngủ",
+      "luu_y": "Giữ gọn, sáng. Giữ đủ sáng và thoáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "8-9": {
+      "ten": "Bát Cửu",
+      "y": "Hoả sinh Thổ: chuyện vui, cưới hỏi, của cải — cặp đẹp của vận 9. Sơn tinh 8 (Bát Bạch) nói về người ở: người ở điềm đạm, ổn định; con cái, người trẻ trong nhà được lợi; hướng tinh 9 (Cửu Tử) nói về tiền bạc, công việc: vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+      "nhom": "thuan",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+        "cong_viec": "Hợp việc cần nổi bật: truyền thông, công nghệ, sáng tạo, làm đẹp.",
+        "gia_dao": "Nhà có chuyện vui, cưới hỏi, thêm người; con cái thuận.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 8 sách xưa gắn với tay, lưng và khớp — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng khách, phòng ngủ chính, cửa chính",
+      "luu_y": "Giữ sáng, ấm, sạch.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "9-1": {
+      "ten": "Nhất Cửu hợp thập",
+      "y": "Thuỷ gặp Hoả, cộng thành mười: âm dương gặp nhau, vận 9 coi là tốt về danh tiếng lẫn tiền bạc. Sơn tinh 9 (Cửu Tử) nói về người ở: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng; hướng tinh 1 (Nhất Bạch) nói về tiền bạc, công việc: tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+      "nhom": "thuan",
+      "quan_he": "huong_khac_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền bạc và tiếng tăm đi cùng nhau trong vận 9. Tiền đến từ trí tuệ, đi lại, giao thiệp; vận 9 sao 1 là sinh khí nên còn tốt.",
+        "cong_viec": "Hợp việc nghiên cứu, tư vấn, đi lại, giao thương.",
+        "gia_dao": "Vợ chồng dễ hoà hợp; nhà có tiếng cười.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 9 sách xưa gắn với tim và mắt — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Áp lực tiền bạc, công việc dồn lên người ở; dễ căng, dễ cáu — chia việc, nói ra sớm."
+      },
+      "hop_cho": "phòng khách, phòng làm việc, cửa chính",
+      "luu_y": "Thuỷ Hoả đối nhau — giữ bếp và nước không sát nhau.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "9-2": {
+      "ten": "Nhị Cửu",
+      "y": "Hoả nuôi Thổ nặng: cung nóng mà nặng, dễ bướng bỉnh, mệt mỏi kéo dài. Sơn tinh 9 (Cửu Tử) nói về người ở: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng; hướng tinh 2 (Nhị Hắc) nói về tiền bạc, công việc: tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền bạc trì trệ, dễ hao vì chuyện nhà và sức khoẻ; chỉ nên tích góp chậm, không mở rộng ở phía này.",
+        "cong_viec": "Hợp việc chậm mà chắc: hậu cần, quản lý tài sản; tránh việc cần bứt tốc.",
+        "gia_dao": "Trong nhà: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng.",
+        "suc_khoe": "Sơn tinh 9 sách xưa gắn với tim và mắt: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp (Hoả càng nuôi Thổ); giữ mát, thoáng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "9-3": {
+      "ten": "Tam Cửu",
+      "y": "Mộc nuôi Hoả: thông minh, nổi bật, hợp vận 9; nóng tính, vội vàng. Sơn tinh 9 (Cửu Tử) nói về người ở: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng; hướng tinh 3 (Tam Bích) nói về tiền bạc, công việc: có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+      "nhom": "thuan",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Có cơ hội mới nhưng dễ tranh cãi, hao vì giấy tờ, kiện cáo; làm gì cũng ghi rõ ràng.",
+        "cong_viec": "Hợp khởi sự, việc cần sức bật; tránh việc nhiều tranh chấp.",
+        "gia_dao": "Trong nhà: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 9 sách xưa gắn với tim và mắt — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng làm việc, phòng khách",
+      "luu_y": "Giữ điềm tĩnh, bớt lửa.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          3,
+          8,
+          9
+        ]
+      }
+    },
+    "9-4": {
+      "ten": "Tứ Cửu",
+      "y": "Mộc nuôi Hoả: chữ nghĩa sáng rực, danh tiếng, vận 9 thuận. Sơn tinh 9 (Cửu Tử) nói về người ở: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng; hướng tinh 4 (Tứ Lục) nói về tiền bạc, công việc: tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+      "nhom": "thuan",
+      "quan_he": "huong_sinh_son",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ danh tiếng, chữ nghĩa, nội dung — vận 9 thuận. Tiền từ chữ nghĩa, quan hệ, tư vấn; thiếu thực tế thì trôi — chốt việc bằng văn bản.",
+        "cong_viec": "Hợp dạy học, viết lách, ngoại giao, thương hiệu cá nhân.",
+        "gia_dao": "Trong nhà: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 9 sách xưa gắn với tim và mắt — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Công việc, tiền bạc nâng đỡ người ở; tâm thế nhìn chung thoải mái, chỉ cần không chủ quan."
+      },
+      "hop_cho": "phòng làm việc, phòng học, phòng khách",
+      "luu_y": "Tránh quá nóng, bí.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          4,
+          8,
+          9
+        ]
+      }
+    },
+    "9-5": {
+      "ten": "Ngũ Cửu",
+      "y": "Hoả nuôi Thổ nặng: nóng nảy, căng thẳng; cung cần giữ mát và yên. Sơn tinh 9 (Cửu Tử) nói về người ở: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng; hướng tinh 5 (Ngũ Hoàng) nói về tiền bạc, công việc: tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền dễ kẹt, hao bất ngờ; không mở rộng, không đầu tư lớn, không động thổ ở phía này.",
+        "cong_viec": "Không hợp mở việc mới ở phía này; giữ việc đang có cho gọn.",
+        "gia_dao": "Dễ cãi nhau vì chuyện nhỏ khi trời nóng; tránh họp gia đình ở phía này.",
+        "suc_khoe": "Sơn tinh 9 sách xưa gắn với tim và mắt: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp; không để đèn, thiết bị toả nhiệt lớn.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "9-6": {
+      "ten": "Lục Cửu",
+      "y": "Hoả nung Kim: người cha, người trụ cột chịu áp lực; vận 9 Hoả mạnh nên cần để ý. Sơn tinh 9 (Cửu Tử) nói về người ở: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng; hướng tinh 6 (Lục Bạch) nói về tiền bạc, công việc: tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ quyền chức, người lớn nâng đỡ; vận 9 sao 6 đã lui nên cần kỷ luật chi tiêu.",
+        "cong_viec": "Hợp quản lý, pháp lý, việc cần uy tín; tránh ôm việc một mình.",
+        "gia_dao": "Người cha, người lớn tuổi nhất dễ bị dồn việc; san sẻ trách nhiệm.",
+        "suc_khoe": "Sơn tinh 9 sách xưa gắn với tim và mắt: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng phụ",
+      "luu_y": "Không đặt bếp; không làm phòng ngủ người trụ cột.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          6,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "9-7": {
+      "ten": "Thất Cửu",
+      "y": "Hoả nung Kim: miệng tiếng, nóng nảy; cẩn thận lửa, điện. Sơn tinh 9 (Cửu Tử) nói về người ở: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng; hướng tinh 7 (Thất Xích) nói về tiền bạc, công việc: tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+      "nhom": "can_chu_dong",
+      "quan_he": "son_khac_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ buôn bán, ăn nói; dễ hao vì tiêu xài, thị phi — giữ lời, giữ ví.",
+        "cong_viec": "Hợp bán hàng, dịch vụ, giải trí; cẩn thận hợp đồng miệng.",
+        "gia_dao": "Trong nhà: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng.",
+        "suc_khoe": "Sơn tinh 9 sách xưa gắn với tim và mắt: nên chăm sóc phòng ngừa, nghỉ đủ và khám định kỳ — lời này không thay lời bác sĩ, không phải dự báo ốm đau.",
+        "tam_ly": "Người ở chi phối chuyện tiền bạc — dễ chi theo cảm xúc; có ngân sách riêng cho những khoản vui."
+      },
+      "hop_cho": "phòng ít dùng",
+      "luu_y": "Không đặt bếp; kiểm tra điện định kỳ.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5,
+          7,
+          9
+        ],
+        "thuan": [
+          1,
+          8
+        ]
+      }
+    },
+    "9-8": {
+      "ten": "Bát Cửu",
+      "y": "Hoả sinh Thổ: chuyện vui, cưới hỏi, của cải — cặp đẹp của vận 9. Sơn tinh 9 (Cửu Tử) nói về người ở: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng; hướng tinh 8 (Bát Bạch) nói về tiền bạc, công việc: tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+      "nhom": "thuan",
+      "quan_he": "son_sinh_huong",
+      "linh_vuc": {
+        "tien_bac": "Tiền từ đất đai, tích góp, việc ổn định; vận 9 vẫn còn khá nhưng giảm dần.",
+        "cong_viec": "Hợp bất động sản, tài chính, việc tích luỹ dài hơi.",
+        "gia_dao": "Nhà có chuyện vui, cưới hỏi, thêm người; con cái thuận.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 9 sách xưa gắn với tim và mắt — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Người ở dễ dốc sức cho công việc, tiền bạc rồi quên nghỉ; đặt giờ nghỉ cố định."
+      },
+      "hop_cho": "phòng khách, phòng ngủ chính, cửa chính",
+      "luu_y": "Giữ sáng, ấm, sạch.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    },
+    "9-9": {
+      "ten": "Cửu Tử trùng",
+      "y": "Hai Hoả: đương vận 9 — nổi bật, danh tiếng, chuyện vui; nóng quá thì gắt. Sơn tinh 9 (Cửu Tử) nói về người ở: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng; hướng tinh 9 (Cửu Tử) nói về tiền bạc, công việc: vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+      "nhom": "thuan",
+      "quan_he": "ty_hoa",
+      "linh_vuc": {
+        "tien_bac": "Tiền đến nhanh ở vận 9 khi phía trước thoáng; đừng để nóng vội kéo theo chi tiêu vội. Vượng khí vận 9: danh tiếng, tiền từ ngành sáng tạo, công nghệ, làm đẹp, truyền thông.",
+        "cong_viec": "Hợp việc cần nổi bật: truyền thông, công nghệ, sáng tạo, làm đẹp.",
+        "gia_dao": "Trong nhà: người ở nổi bật, nhiệt tình; dễ nóng, vội, căng thẳng.",
+        "suc_khoe": "Người ở nhìn chung ổn; sao sơn 9 sách xưa gắn với tim và mắt — giữ nhịp sinh hoạt đều và khám định kỳ là đủ; lời này không thay lời bác sĩ.",
+        "tam_ly": "Hai sao cùng hành nên tính sao dễ quá đà — vui thì vui quá, nặng thì nặng thêm; biết dừng là đủ."
+      },
+      "hop_cho": "phòng khách, phòng làm việc, cửa chính",
+      "luu_y": "Đủ thoáng, tránh bí nóng.",
+      "kich_hoat": {
+        "chu_dong": [
+          2,
+          5
+        ],
+        "thuan": [
+          1,
+          8,
+          9
+        ]
+      }
+    }
+  },
+  "_nguon_81": "81 tổ hợp sơn tinh – hướng tinh có thứ tự (sơn = người ở & sức khoẻ, hướng = tiền bạc & công việc). Nghĩa gốc: Huyền Không Tử Bạch Quyết, Phi Tinh Phú, Thẩm Thị Huyền Không Học (cổ thư công cộng) — viết lại trung tính, lời cảnh báo không doạ: không điểm số, không tên bệnh, không vật phẩm, không dự báo ốm đau. kich_hoat: sao lưu niên bay tới cung thì năm đó nên chủ động hơn (chu_dong) / là năm thuận (thuan). Nháp AI, chờ đối chiếu."
 }
