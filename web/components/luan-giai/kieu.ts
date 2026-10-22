@@ -69,6 +69,8 @@ export interface ChuongDoiSongMo {
   mien_tru?: string;
   /** BT-ĐS: dữ liệu trực quan (chỉ có ở báo cáo Bát tự). */
   bieu_do?: BieuDoNguHanh; hai_cach?: HaiCach; than_do?: ThanDo;
+  /** BT-ĐS: mức của chương theo từng cách lấy dụng thần (mức chương = gộp chặt hai cách). */
+  hai_cach_muc?: { cach_1: Muc; cach_2: Muc };
   /** VH-1 chương "Vận hạn & điều nên tránh": dòng 10 năm (+ 12 tháng tới ở Bát tự). Nằm TRONG chương → khoá SAO-2 là mất. */
   dong_nam?: NamVanHan[]; thang_toi?: ThangToi[];
 }

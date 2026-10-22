@@ -270,8 +270,15 @@ Cùng đợt (ngoài BT-ĐS): "Xem lá số 2 người" — cung phi năm theo L
 quái khác), người kia chỉ có ngày dùng cùng lịch người dùng chọn và suy vùng từ nơi sinh (miền Nam 1960–1975 lịch
 UTC+8); "3 tháng tới" — nhãn "Nửa sau tháng 6 nhuận (tính như tháng 7)", trục biểu đồ "6N·đầu" / "6N·sau".
 
-**Việc mở (chưa sửa, có chủ ý)**: đại vận "đang đi" tính theo NĂM dương, bỏ qua ngày khởi vận — quy ước chung với
-`calc/battu.py` (đại vận hiện tại) và hỏi đáp Bát tự; tính theo ngày khởi vận cần sửa ở calc cho mọi nơi cùng lúc.
+**Đã sửa 2026-10-22 — đại vận "đang đi" theo NGÀY khởi vận.** CALC `battu._dai_van` thêm `tu_ngay` / `den_ngay` cho
+mỗi vận (ngày khởi vận + 10 năm), hàm `dai_van_theo_ngay(ls, ngay)`. Luận giải: `thoi_gian_bieu(pt, ngay_xem)` đánh
+dấu `hien_tai` theo ngày, `van_tham_chieu` (chưa khởi / đang đi / đã qua) theo ngày, "năm thứ n của giai đoạn" đếm từ
+ngày bắt đầu vận, giai đoạn mới bắt đầu trong 12 tháng tới → câu "Từ ngày 13/12/2026, bạn sang giai đoạn mười năm
+mới…", căn cứ ghi khoảng ngày. Hỏi đáp "đại vận hiện tại" theo ngày; hỏi một năm cụ thể (và lưu niên, dòng 10 năm)
+giữ **quy ước bảng đại vận** (`dai_van_tai`: năm bắt đầu vận → 9 năm sau, như các phần mềm Bát tự phổ biến), riêng
+năm đang xem lấy đúng vận đang đi và căn cứ ghi "Ngày … sang đại vận …". Hồ sơ mẫu 17/05/1990: Ất Dậu bắt đầu
+13/12/2026 → ngày 21/10/2026 vẫn Giáp Thân (trước báo nhầm Ất Dậu). `tu_nam` / `den_nam` giữ nguyên → không tăng
+`ENGINE_VERSION`. Web: dòng thời gian hiện "từ 13/12/2016 đến 12/12/2026".
 
 ## 7. Rà chung chung Tử vi 2026-10-21
 
@@ -568,3 +575,28 @@ Dải 12 tháng (và 3 tháng ở "Năm nay") dùng `muc_thang`: ngưỡng ±1 n
 Cần lưu ý khi cả hai cách cùng thấy). Trước: 46 · 21 · 34% (Thuận · Cân bằng · Cần lưu ý), nhiều lá 7–8 tháng cam /
 năm; sau: 26 · 58 · 16%, trung bình ~2 tháng "Cần lưu ý" / năm (100 lá × 12 tháng). Lưu nguyệt là lớp ưu tiên thấp
 nhất nên chỉ tô màu khi tín hiệu đồng thuận. Test `test_thang_chi_to_mau_khi_tin_hieu_ro`.
+
+## 9. BT-DC — "Cách nào đúng với bạn?" (2026-10-22)
+
+Chủ dự án hỏi có nên cho người dùng bình chọn cách lấy dụng thần. Bình chọn mơ hồ ("cách nào nghe đúng hơn") dễ chọn
+theo cảm tính; người dùng biết chắc nhất là **đời mình đã qua**. Nên làm **đối chiếu quá khứ**:
+
+- RULES `luangiai/battu_doi_chieu.py` + `POST /v1/battu/doi-chieu-cach` (web `/api/battu/doi-chieu-cach`, không lưu,
+  không trừ Sao): chọn tối đa 5 năm Bát tự đã qua (tuổi ≥ 16, 15 năm gần nhất) + tối đa 1 giai đoạn mười năm đã qua mà
+  hai cách đọc KHÁC nhau (ngược hẳn thuận ↔ cần lưu ý đứng trước), mức từng cách chấm như báo cáo (`muc_hai_cach`).
+  Dưới 3 câu → không hỏi, kèm lời lý do (`it_nam_qua` / `hai_cach_trung`). Mẫu 300 lá: 88% có câu hỏi.
+- Web `components/huyen-hoc/DoiChieuCach.tsx` (trên `/bat-tu`, giữa tứ trụ và luận giải): mỗi câu "Nhìn lại năm 2019
+  (khi bạn 29 tuổi), nhìn chung đó là một năm…" → Khá suôn sẻ / Bình thường / Khá vất vả / Không nhớ rõ; trả lời xong
+  lật ra mỗi cách đã nói gì (✓ chỗ khớp). Đủ 3 câu: so mã (`lib/cach-chinh-battu.ts` `ketQua`, luật `luat` engine trả:
+  chênh ≥ 2 → kết luận một cách, chênh 1 → "nghiêng", bằng → "chưa rõ"), lời kết luận do engine soạn (KB
+  `battu_doi_song_kb.json` → `doi_chieu`, nháp AI).
+- Người dùng có thể **chọn cách chính** → báo cáo hiện thêm "Theo cách bạn chọn: <mức>" cạnh mức chung ở chương và
+  giai đoạn hai cách khác nhau. Mức chung, mã kiểm chứng, phép tính không đổi; hệ thống vẫn không tự chọn (`chon` None).
+- Riêng tư: câu trả lời + cách chính chỉ ở localStorage (`hbt.battu.doi_chieu.v1`, theo từng lá số trên máy, tối đa 8);
+  PostHog `chart_interacted` `kind=battu_doi_chieu` chỉ nhận `cach_cuc`, `than`, `khop_1`, `khop_2`, `so_cau`,
+  `ket_qua` — không năm, không ngày sinh. Số này là dữ liệu thật cho người duyệt bảng hỷ/kỵ (`docs/DUYET-HY-KY-BAT-TU.md`).
+- Khâu tăng trưởng: QUAY LẠI (trò tương tác trên chính đời mình, giữ người đọc tới phần luận giải) + nền móng chất lượng
+  (đo cách nào khớp theo cách cục). Đo: tỉ lệ người mở `/bat-tu` trả lời đủ 3 câu, tỉ lệ chọn cách chính.
+- Việc sau (chờ số): cho "cách chính" đổi luôn mức chung của báo cáo (hiện chỉ nhấn) — cần đo phân bố nhãn theo từng
+  cách (gộp chặt đang giữ 10–60% mỗi nhãn).
+

@@ -9,11 +9,13 @@ import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { DongGhiChu, DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
+import { DoiChieuCach } from "@/components/huyen-hoc/DoiChieuCach";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CachChinhBatTu, khoaLaSo, useCachChinh } from "@/lib/cach-chinh-battu";
 import { ghi } from "@/lib/do-luong";
 import type { LaSoBatTu, LuuNienBatTu } from "@/lib/battu-kieu";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
@@ -52,6 +54,7 @@ export function BatTu() {
   const chatRef = useRef<HTMLElement>(null);
   const tuTruRef = useRef<HTMLDivElement>(null);
   const [dangTai, setDangTai] = useState(false);
+  const cachChinh = useCachChinh(khoaLaSo(laSo));
   const [loiAnh, setLoiAnh] = useState<string | null>(null);
 
   useBatDauDoc("battu", Boolean(ls));
@@ -156,8 +159,14 @@ export function BatTu() {
       </section>
 
       {laSo && ls && (
+        <div className="mt-10"><DoiChieuCach laSo={laSo} /></div>
+      )}
+
+      {laSo && ls && (
         <section aria-label="Luận giải toàn bộ" className="mt-10">
-          <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={laSo} ten="Bát tự" />
+          <CachChinhBatTu.Provider value={{ cach: cachChinh }}>
+            <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={laSo} ten="Bát tự" />
+          </CachChinhBatTu.Provider>
           <CuoiBaiDoc moDun="battu" cauHoi="Tứ trụ và phần luận giải có giúp bạn hiểu mình hơn?" />
         </section>
       )}

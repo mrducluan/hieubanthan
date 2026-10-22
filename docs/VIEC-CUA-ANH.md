@@ -643,13 +643,16 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
   "Xem lá số 2 người" (điểm tham khảo), "3 tháng tới", luận giải toàn bộ (chương mới "Vận hạn & điều nên tránh"),
   khối "Điều ngày sinh còn kể về bạn" cuối trang; thử tạo thẻ "5 mảnh ghép làm nên tôi" + trò đoán số trên điện thoại.
 - [ ] Quyết: thêm loại kiểm chứng `hai_nguoi` (migration nhỏ sau 0017) để bật nút "Đúng với mình" cho phần 2 người.
-- [ ] Quyết: Tử vi "3 tháng tới" — Kỵ tháng rơi THẲNG vào Mệnh / Tài Bạch / Quan Lộc hiện vẫn xếp "Bình" (hộp "Nên để ý"
-  đã nhắc). Đổi thành "Cần thận trọng"? (đổi mức + mã kiểm chứng của nhiều tháng).
+- [x] Quyết: Tử vi "3 tháng tới" — Kỵ tháng rơi THẲNG vào Mệnh / Tài Bạch / Quan Lộc → **có gắn "Cần thận trọng"**
+  (anh chốt 2026-10-22, đã làm: luật `ky_nhap_cung_chinh`).
 - [ ] Quyết 4 ý tưởng nạp Sao cần migration (`docs/MUC-TIEU-TANG-TRUONG.md`): tặng bạn một chương đã mở · thưởng Sao
   chuỗi ngày ghé · thưởng mời gắn lần nạp đầu · gói Sao theo dịp.
-- [ ] Quyết (khi rảnh): Bát tự — mốc đại vận hai cách dụng thần đọc khác nhau, cho người dùng bấm "cách nào đúng với
-  mình" (đếm trên máy, như "Phái nào nói đúng" của thần số)?
-- [ ] Người rành Tử Bình duyệt bảng hỷ/kỵ theo cách cục (`battu_doi_song_kb.json`, mục `cach.*`) — nháp AI.
+- [x] Quyết (khi rảnh): Bát tự — "cách nào đúng với mình" → đã làm theo đề xuất của em (2026-10-22): khối "Cách nào đúng
+  với bạn?" trên `/bat-tu` hỏi lại những năm đã qua mà hai cách đọc khác nhau (`docs/LUAN-GIAI-DOI-SONG.md` mục 9).
+- [ ] **Tìm người rành Tử Bình duyệt bảng hỷ/kỵ theo cách cục** — phiếu duyệt + phân tích tác động sẵn ở
+  `docs/DUYET-HY-KY-BAT-TU.md` (mục 3 có 3 nghi vấn ưu tiên: Chính Quan, Tài cách thân nhược, Thực Thần thân nhược).
+  Ước 1–2 giờ đọc + điền cột "Ý kiến chuyên gia". Gửi lại cho em để áp bằng PR (có đo trước/sau).
+- [x] Đại vận "đang đi" tính theo ngày khởi vận (anh giao 2026-10-22, đã sửa).
 - [ ] Nhờ luật sư rà thêm: điểm "Xem lá số 2 người" ghi rõ là tham khảo; chương Vận hạn dùng "Nên tránh / Nên làm",
   không doạ, không vật phẩm.
 
