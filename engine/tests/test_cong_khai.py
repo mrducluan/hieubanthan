@@ -61,7 +61,9 @@ def test_moi_trang_kien_thuc_khong_lo():
 
 
 @pytest.mark.parametrize("duong", ["/v1/kb/trang", "/v1/tu-dien", "/v1/kb/chuyen-gia/duc-luan",
-                                   "/v1/phongthuy/tuoi", "/v1/phongthuy/tuoi/tuoi-1990-nam"])
+                                   "/v1/phongthuy/tuoi", "/v1/phongthuy/tuoi/tuoi-1990-nam",
+                                   "/v1/lich/nam/2027", "/v1/lich/viec-thang/cuoi_hoi/2026/12",
+                                   "/v1/tuoi/lam-nha-nam/2026", "/v1/tuoi/xong-dat-nam/2027"])
 def test_api_get_khong_lo(duong):
     r = client.get(duong)
     assert r.status_code == 200, r.text

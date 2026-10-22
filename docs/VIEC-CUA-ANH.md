@@ -61,6 +61,9 @@
      → bấm vào lượt chạy → mục **Summary** có dòng `TTFB (… trang): p50 … ms · p90 … ms` → chụp/chép gửi em.
      (Lượt chạy báo đỏ nghĩa là bộ rà tìm thấy LỖI SEO — danh sách nằm ngay dưới, gửi em luôn.) Máy GitHub đặt ở Mỹ nên
      số cao hơn người dùng Việt Nam thấy ~150–250 ms; em tính phần đó khi đề xuất.
+4j. [ ] **Sau khi merge SEO-L (5 phút):** Search Console → **Kiểm tra URL** → dán lần lượt `https://hieuban.com/tuoi-xong-dat/2027`,
+   `https://hieuban.com/xem-tuoi-lam-nha/2027`, `https://hieuban.com/xem-ngay-tot/cuoi-hoi-thang-12-2026` → **Yêu cầu lập chỉ mục**
+   (đẩy nhanh trang mùa Tết). IndexNow giờ tự chạy mỗi sáng 06:13 — không cần làm gì.
 4i. [ ] **sameAs cho Google nhận ra thương hiệu + anh (5 phút, Vercel → web → Environment Variables):** kênh của site
    `MXH_FACEBOOK`, `MXH_YOUTUBE`, `MXH_TIKTOK`, `MXH_ZALO`, `MXH_INSTAGRAM`, `MXH_LINKEDIN`, `MXH_X`, `MXH_THREADS` (link https);
    hồ sơ cá nhân của anh `CHUYEN_GIA_SAME_AS_DUC_LUAN` = các link https cách nhau dấu phẩy (Facebook cá nhân, YouTube,
@@ -707,9 +710,27 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] **Chạy migration 0018** `supabase/migrations/0018_ho_so_nha_nhac_viec.sql` (rollback `.down.sql`): bảng `ho_so_nha` (lưu nhà
   vào tài khoản) + `nhac_viec` (mốc nhắc trong tài khoản). Chưa chạy thì hai nút "Lưu nhà vào tài khoản" / "cả trên tài khoản" báo
   "máy chủ chưa bật" — mọi thứ khác vẫn chạy trên máy người dùng.
-- [ ] **Web Push**: đọc `docs/NHAC-VIEC-VA-WEB-PUSH.md` mục 2–3. Nếu đồng ý làm GĐ1: duyệt dependency `web-push` (MIT), em làm
-  migration 0019 + service worker; anh tạo cặp khoá VAPID và đặt env trên Vercel (em hướng dẫn lệnh).
+- [x] **Web Push**: anh duyệt GĐ1 (2026-10-21) — em đã làm (PR #112), việc của anh ở mục **WP** cuối file.
 - [ ] **Bật thu Sao theo mảng**: đọc `docs/Y-TUONG-VIRAL-VA-NAP-SAO.md` mục C.1 — hiện công tắc `luan_giai.thu_sao` là chung; anh
   chốt có tách theo mảng (Bản đồ con số + Tử vi trước) không, em làm công tắc ở /quan-tri/cai-dat.
 - [ ] Sau khi merge: mở `/hom-nay` sau khi đã đo hướng nhà ở `/phong-thuy` → thấy thẻ "Tháng này nhà bạn"; cuối mỗi bài đọc có khối
   gợi mở + luận giải + rủ bạn + ủng hộ.
+
+## WP. Nhắc việc qua thông báo điện thoại — Web Push GĐ1 (2026-10-21, `docs/NHAC-VIEC-VA-WEB-PUSH.md` mục 2b)
+
+- [ ] **WP1. Chạy migration** trên Supabase → SQL Editor, theo thứ tự: `0018_ho_so_nha_nhac_viec.sql` (nếu chưa) rồi
+  `0019_push_dang_ky.sql`. Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0018, 0019 = true). Rollback: `.down.sql` cùng tên.
+- [ ] **WP2. Tạo khoá VAPID (một lần)**: máy có Node → trong thư mục `web` chạy `node scripts/tao-khoa-vapid.mjs` → in ra 3 dòng
+  `VAPID_PUBLIC_KEY=…`, `VAPID_PRIVATE_KEY=…`, `VAPID_SUBJECT=mailto:contact@hieuban.com`. **Không dán khoá vào chat/git.**
+  (Không có Node: nhờ em chạy rồi anh tự đổi lại sau cũng được, nhưng tốt nhất anh tự chạy để khoá riêng chỉ anh có.)
+- [ ] **WP3. Đặt env trên Vercel** (project web → Settings → Environment Variables → Production + Preview): 3 biến trên. Kiểm
+  `CRON_SECRET` đã có (≥ 16 ký tự, cùng biến cron dọn dữ liệu) và `SUPABASE_SERVICE_ROLE_KEY`. → **Redeploy**. Đổi khoá VAPID về
+  sau = mọi thiết bị đã bật phải bật lại.
+- [ ] **WP4. Thử trên Android/máy tính**: đăng nhập → `/kinh-dich` gieo một quẻ → ở "Mốc đáng để ý" bấm **Nhắc tôi hôm đó** →
+  `/hom-nay` (hoặc `/tai-khoan`) bấm **Bật nhắc trên điện thoại** → cho phép. Muốn thấy thông báo ngay không chờ 8h sáng: tạo một
+  mốc đúng ngày hôm nay rồi Vercel → project web → Settings → Cron Jobs → `/api/cron/hang-ngay` → **Run** (cron ngày đã gộp gửi nhắc + dọn dữ liệu vì
+  Hobby chỉ cho 2 cron). Kết quả trả về dạng `{"nhac":{"nguoi":1,"ok":1,…},"don":{…}}`; mỗi người chỉ 1 thông báo/ngày nên chạy lại sẽ ra `nguoi: 0`.
+- [ ] **WP5. Thử trên iPhone** (iOS 16.4+): Safari mở hieuban.com → Chia sẻ → **Thêm vào màn hình chính** → mở từ biểu tượng →
+  đăng nhập → Hôm nay → Bật nhắc. (Safari thường không có nút — đúng như thiết kế, trang sẽ hiện hướng dẫn 2 bước.)
+- [ ] **WP6. Luật sư rà** dòng mới trong Chính sách quyền riêng tư (mục dữ liệu + bên xử lý: dịch vụ thông báo của trình duyệt),
+  ngày hiệu lực đã đổi 21/10/2026. Nếu anh đã sửa trang này trong CMS thì thêm hai dòng đó ở CMS (CMS thắng code).

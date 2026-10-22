@@ -57,7 +57,8 @@ test("hồ sơ /tac-gia/duc-luan: h1, ProfilePage + Person, số bài, link từ
 const LO = /iztro|lasotuvi|lunar-typescript|VSOP|TuViMCP|anko|tianji|aov\.cc|ctext|OpenRouter|Vercel|\bRender\b|Supabase|PostHog|Sentry|\bMIT\b|Balliett|Jordan|Hồ Ngọc Đức|mã nguồn mở|localStorage|hbt\.|AI hỗ trợ|nháp AI|AI nháp|chờ chuyên gia thẩm định/;
 for (const duong of ["/gioi-thieu", "/chinh-sach-rieng-tu", "/mien-tru-trach-nhiem", "/dieu-khoan", "/tac-gia/duc-luan",
   "/than-so/tinh-yeu/so-1-trong-tinh-yeu", "/than-so/nghe-nghiep/so-1-hop-nghe-gi", "/hop-doi/cap-so/so-chu-dao-1-va-2", "/tu-vi/tu-hoa/hoa-loc-cung-menh", "/tu-vi/sao-o-cung/tu-vi-cung-menh", "/kinh-dich/que/que-1-can",
-  "/bat-tu/menh-theo-nam/sinh-nam-1990-menh-gi", "/than-so/nam-ca-nhan/nam-ca-nhan-1", "/tu-dien", "/than-so/tinh-yeu/so-1-trong-tinh-yeu.md", "/tu-vi/tu-hoa/hoa-loc-cung-menh.md", "/llms.txt"]) {
+  "/bat-tu/menh-theo-nam/sinh-nam-1990-menh-gi", "/than-so/nam-ca-nhan/nam-ca-nhan-1", "/tu-dien", "/than-so/tinh-yeu/so-1-trong-tinh-yeu.md", "/tu-vi/tu-hoa/hoa-loc-cung-menh.md", "/llms.txt",
+  "/lich-am/2025", "/doi-lich-am-duong", "/xem-tuoi-lam-nha/2026", "/tuoi-xong-dat/2027", "/xem-ngay-tot/cuoi-hoi-thang-12-2026"]) {
   test(`không lộ chi tiết nội bộ: ${duong}`, async ({ request }) => {
     const r = await request.get(duong);
     expect(r.status()).toBe(200);

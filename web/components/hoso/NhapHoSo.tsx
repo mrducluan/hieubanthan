@@ -163,11 +163,11 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
           </div>
         </div>
         <div className="grid grid-cols-[1fr_1fr_1.4fr] gap-2">
-          <Input aria-label="Ngày" inputMode="numeric" placeholder="Ngày" value={ngay} className="text-center"
+          <Input aria-label="Ngày" name="ngay-sinh-ngay" autoComplete={lich === "duong" ? "bday-day" : "off"} inputMode="numeric" placeholder="Ngày" value={ngay} className="text-center"
             onChange={(e) => { const v = chiSo(e.target.value, 2); setNgay(v); if (v.length === 2) thangRef.current?.focus(); }} />
-          <Input ref={thangRef} aria-label="Tháng" inputMode="numeric" placeholder="Tháng" value={thang} className="text-center"
+          <Input ref={thangRef} aria-label="Tháng" name="ngay-sinh-thang" autoComplete={lich === "duong" ? "bday-month" : "off"} inputMode="numeric" placeholder="Tháng" value={thang} className="text-center"
             onChange={(e) => { const v = chiSo(e.target.value, 2); setThang(v); if (v.length === 2) namRef.current?.focus(); }} />
-          <Input ref={namRef} aria-label="Năm" inputMode="numeric" placeholder="Năm" value={nam} className="text-center"
+          <Input ref={namRef} aria-label="Năm" name="ngay-sinh-nam" autoComplete={lich === "duong" ? "bday-year" : "off"} inputMode="numeric" placeholder="Năm" value={nam} className="text-center"
             onChange={(e) => setNam(chiSo(e.target.value, 4))} />
         </div>
         {lich === "am" && (

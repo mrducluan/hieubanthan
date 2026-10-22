@@ -56,7 +56,7 @@ async function metaGoc(params: Thamso): Promise<Metadata> {
     robots: { index: t.index, follow: true },
     openGraph: {
       type: "article", title: t.tieu_de, description: t.mo_ta, url: duong, locale: "vi_VN", siteName: TEN_SITE,
-      modifiedTime: t.cap_nhat, images: [{ url: anh, width: 1200, height: 630, alt: t.tieu_de }],
+      ...(t.ngay_dang ? { publishedTime: t.ngay_dang } : {}), modifiedTime: t.cap_nhat, images: [{ url: anh, width: 1200, height: 630, alt: t.tieu_de }],
     },
     twitter: { card: "summary_large_image", title: t.tieu_de, description: t.mo_ta, images: [anh] },
   };
@@ -80,7 +80,7 @@ export async function TrangKienThucView(params: Thamso) {
       headline: t.tieu_de,
       description: t.mo_ta,
       inLanguage: "vi-VN",
-      datePublished: t.cap_nhat,
+      datePublished: t.ngay_dang ?? t.cap_nhat,   // SEO-L4: ngày thật theo sổ băm nội dung
       dateModified: t.cap_nhat,
       mainEntityOfPage: { "@id": `${urlDayDu(duong)}#trang` },
       image: ldAnh(anhKienThuc(t, cd.duong), t.tieu_de),
@@ -143,6 +143,7 @@ export async function TrangKienThucView(params: Thamso) {
         <h1 className="text-3xl leading-tight sm:text-5xl">{t.tieu_de}</h1>
         <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-fg-faint">
           <span className="inline-flex items-center gap-1"><CalendarDays className="size-3.5" aria-hidden />
+            {t.ngay_dang && t.ngay_dang !== t.cap_nhat && <>Đăng <time dateTime={t.ngay_dang}>{t.ngay_dang.split("-").reverse().join("/")}</time> · </>}
             Cập nhật <time dateTime={t.cap_nhat}>{t.cap_nhat.split("-").reverse().join("/")}</time></span>
           {!nhap && <span className="inline-flex items-center gap-1 rounded-full border border-jade/40 px-2.5 py-0.5 text-jade"><ShieldCheck className="size-3.5" aria-hidden /> {t.tac_gia ? "Chuyên gia biên soạn" : "Đã thẩm định"}</span>}
         </div>

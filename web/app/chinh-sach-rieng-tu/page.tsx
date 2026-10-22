@@ -71,6 +71,7 @@ export default async function ChinhSachRiengTu() {
             [<b key="f">Câu hỏi đã lọc</b>, "Khi bạn hỏi đáp (nếu bật nhật ký cải thiện chất lượng)", "Máy chủ dữ liệu tại Singapore", "Tối đa 24 tháng"],
             [<b key="f2">Góp ý "đúng / chưa đúng" cho câu trả lời thần số</b>, "Chỉ khi bạn bấm góp ý; ghi chú chỉ lưu khi bạn tự tích đồng ý", "Máy chủ dữ liệu tại Singapore — chỉ các con số rút gọn của trường phái được góp ý, mã câu hỏi, trường phái và ghi chú đã lọc; không họ tên, ngày sinh hay tài khoản", "Tối đa 12 tháng"],
             [<b key="f3">Điều bạn bấm "Ghi nhớ"</b>, "Chỉ khi đã đăng nhập và bạn bấm Ghi nhớ một câu băn khoăn", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được; xoá được ngay", "Tối đa 180 ngày"],
+            [<b key="f4">Mốc nhắc và thiết bị nhận thông báo</b>, "Chỉ khi đã đăng nhập và bạn bấm \"cả trên tài khoản\" ở một mốc hoặc \"Bật nhắc trên điện thoại\"", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được — ngày, nhãn mốc do hệ thống soạn, địa chỉ nhận thông báo của trình duyệt; không câu hỏi, không luận giải", "Mốc: tối đa 400 ngày; thiết bị: đến khi bạn tắt nhắc, đăng xuất, xoá tài khoản hoặc trình duyệt huỷ đăng ký"],
             [<b key="g">Số liệu sử dụng ẩn danh</b>, "Khi bạn dùng web (nếu bật đo lường)", "Công cụ đo lường ẩn danh", "Tối đa 12 tháng"],
             [<b key="g2">Số liệu truy cập (Google Analytics)</b>, "Khi bạn mở trang (Google Tag Manager). Tắt được ở \"Tuỳ chọn cookie\" chân trang", "Google (qua Google Tag Manager)", "Tối đa 14 tháng"],
             [<b key="h">Báo lỗi kỹ thuật</b>, "Khi trang hoặc máy chủ gặp lỗi (nếu bật)", "Dịch vụ theo dõi lỗi", "Tối đa 90 ngày"],
@@ -116,6 +117,7 @@ export default async function ChinhSachRiengTu() {
             ["Dịch vụ diễn đạt tự động (AI)", "Diễn đạt câu trả lời hỏi đáp cho dễ đọc (khi bật)", "Câu hỏi bạn gõ + kết quả đã tính; không có họ tên, ngày giờ sinh", "Hoa Kỳ"],
             ["Đo lường ẩn danh", "Đếm các bước sử dụng (khi bật)", "Sự kiện sử dụng, mã ẩn danh", "Hoa Kỳ hoặc EU"],
             ["Google (Tag Manager, Analytics)", "Đo lượt truy cập — bật mặc định, tắt được ở \"Tuỳ chọn cookie\"", "Trang đã xem, loại thiết bị, mã cookie _ga; không họ tên, ngày giờ sinh", "Hoa Kỳ"],
+            ["Dịch vụ thông báo của trình duyệt (Google, Apple, Mozilla, Microsoft)", "Chuyển thông báo nhắc tới thiết bị (chỉ khi bạn bật nhắc)", "Thông báo đã mã hoá đầu-cuối — chỉ thiết bị của bạn đọc được", "Hoa Kỳ hoặc nơi nhà cung cấp đặt máy chủ"],
             ["Theo dõi lỗi kỹ thuật", "Báo lỗi (khi bật)", "Thông tin lỗi kỹ thuật", "Hoa Kỳ hoặc EU"],
           ]} />
           <p>Một số dữ liệu trên được xử lý ngoài Việt Nam. Chúng tôi chỉ dùng nhà cung cấp có cam kết bảo mật bằng
@@ -157,7 +159,7 @@ export default async function ChinhSachRiengTu() {
           <p>Chúng tôi không dùng cookie quảng cáo. Trình duyệt của bạn giữ một số mục để web chạy được, chia theo nhóm:</p>
           <Bang dau={["Nhóm", "Dùng để", "Giữ bao lâu"]} dong={[
             [<b key="a">Cần thiết</b>, "Hồ sơ trên máy, giao diện bạn chọn, lựa chọn ở hộp hỏi cookie, phiên đăng nhập (khi bạn đăng nhập)", "Đến khi bạn xoá hoặc đăng xuất"],
-            [<b key="b">Tiện ích</b>, "Nhớ mã mời bạn bè; nhớ câu hỏi Kinh Dịch đã gieo để nhắc khi bạn hỏi lại cùng việc", "Mã mời: đến khi dùng; câu hỏi Kinh Dịch: 30 ngày"],
+            [<b key="b">Tiện ích</b>, "Nhớ mã mời bạn bè; nhớ câu hỏi Kinh Dịch đã gieo để nhắc khi bạn hỏi lại cùng việc; mốc bạn bấm \"Nhắc tôi\"; khi bạn bật nhắc, một tệp nhỏ (service worker) để hiện thông báo — không lưu trang, không đọc dữ liệu khác", "Mã mời: đến khi dùng; câu hỏi Kinh Dịch: 30 ngày; mốc nhắc và tệp thông báo: đến khi bạn xoá hoặc tắt nhắc"],
             [<b key="c">Đo lường ẩn danh</b>, "Mã ngẫu nhiên để đếm lượt dùng, không gắn với bạn (chỉ khi bật đo lường)", "Tối đa 12 tháng"],
             [<b key="d">Thống kê truy cập (Google Analytics)</b>, "Cookie _ga để đo lượt truy cập. Bật mặc định, tắt được", "Tối đa 14 tháng"],
           ]} />

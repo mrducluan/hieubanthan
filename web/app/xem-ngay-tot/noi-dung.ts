@@ -17,7 +17,7 @@ export const ND_XEM_NGAY: NoiDungCongCu = {
     { hoi: "Tuổi xung với ngày là gì?", dap: "Chi của ngày đối xung với chi năm sinh (ví dụ ngày Thân xung tuổi Dần). Sách lịch khuyên người tuổi xung cân nhắc khi chọn ngày đó cho việc lớn." },
     { hoi: "Tháng trong hoàng lịch tính theo âm lịch hay tiết khí?", dap: "Trực và thần sát tính theo tháng tiết khí (tháng đổi vào ngày Lập xuân, Kinh trập…), không theo mùng 1 âm lịch. Trang tính tiết khí theo giờ Việt Nam." },
   ],
-  lienKet: [{ href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi" }, { href: "/tuoi-xong-dat", ten: "Tuổi xông đất" },
+  lienKet: [{ href: "/doi-lich-am-duong", ten: "Đổi lịch âm dương" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi" }, { href: "/tuoi-xong-dat", ten: "Tuổi xông đất" },
     { href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/hom-nay", ten: "Hôm nay của bạn" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào" },
     { href: "/tu-dien", ten: "Từ điển thuật ngữ" }, { href: "/kham-pha", ten: "Khám phá huyền học" }],
 };

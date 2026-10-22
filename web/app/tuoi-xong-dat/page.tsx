@@ -6,7 +6,7 @@ import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { CongCuTuoi } from "@/components/tuoi/CongCuTuoi";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { metaTrang } from "@/lib/seo";
-import { NAM_SINH_SEO, duongXongDat, namAmHienTai } from "@/lib/tuoi-dan-gian";
+import { NAM_SINH_SEO, duongXongDat, duongXongDatNam, namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { ND_XONG_DAT } from "../xem-tuoi-lam-nha/noi-dung";
 import { CHU_XONG_DAT } from "@/lib/chu/cong-cu";
 import { taoChu, thayBienChu } from "@/lib/chu-trang";
@@ -26,6 +26,8 @@ export default async function Page() {
         <CongCuTuoi kieu="xong_dat" namMacDinh={tet} />
         <section aria-labelledby="theo-nam-sinh" className="mt-8">
           <h2 id="theo-nam-sinh" className="text-xl">{c("theo_nam.tieu_de", { tet: String(tet) })}</h2>
+          {/* SEO-L1: bảng cả năm (mọi tuổi gia chủ một trang) */}
+          <p className="mt-1 text-sm"><Link href={duongXongDatNam(tet)} className="text-gold underline">Bảng tuổi xông đất Tết {tet} cho mọi tuổi gia chủ</Link></p>
           <ul className="mt-2 flex flex-wrap gap-1.5">
             {NAM_SINH_SEO.map((ns) => <li key={ns}><Link href={duongXongDat(tet, ns)} className="vung-cham inline-flex rounded-lg border border-line/70 px-2 py-0.5 text-sm hover:border-gold/50">{ns}</Link></li>)}
           </ul>
