@@ -2,6 +2,7 @@
 // NHIP-1 — chia sẻ thẻ "Hôm nay {tên} là Ngày cá nhân N — còn bạn?": máy chủ ký mã (engine tính số), link về /hom-nay
 // mang ?tu=hn.<ngẫu nhiên> (đo referral_signup, Gate 2) + &the=<mã> (ảnh xem trước khi dán vào Zalo/Messenger).
 import { useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { Check, Download, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { postJson } from "@/lib/goi-api";
@@ -32,6 +33,7 @@ export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false
   const [ma, setMa] = useState<string | null>(null);
   const [tuDaTao, setTuDaTao] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const c = useChuChung();
 
   async function chiaSe() {
     setDang(true);
@@ -54,13 +56,13 @@ export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false
   return (
     <div className={`flex flex-wrap items-center gap-2 ${className}`}>
       <Button size={nho ? "sm" : "md"} variant="secondary" onClick={() => void chiaSe()} disabled={dang} data-testid="chia-se-the-ngay">
-        {daChep ? <Check aria-hidden /> : <Share2 aria-hidden />}{daChep ? "Đã chép link" : dang ? "Đang tạo…" : "Chia sẻ thẻ hôm nay"}
+        {daChep ? <Check aria-hidden /> : <Share2 aria-hidden />}{daChep ? c("chia_se.da_chep") : dang ? c("chia_se.dang_tao") : c("chia_se.the_ngay")}
       </Button>
       {/* TCS-1: bản dọc 1080×1350 + mã QR trỏ đúng link vừa chia sẻ (?tu=). */}
       {ma && (
         <a href={`/og/ngay?ma=${encodeURIComponent(ma)}&khung=doc${tuDaTao ? `&tu=${tuDaTao}` : ""}`} download="hom-nay-cua-toi.png"
           className="inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-fg" data-testid="tai-anh-the-ngay">
-          <Download className="size-4" aria-hidden /> Tải ảnh (đăng story)
+          <Download className="size-4" aria-hidden /> {c("chia_se.tai_story")}
         </a>
       )}
     </div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, BookOpen, Compass, HeartHandshake, MessageCircle, Pencil, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { Card } from "@/components/ui/card";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
@@ -30,6 +31,7 @@ export function BanThan() {
   const [daXongNghiThuc, setDaXong] = useState(params.get("moi") !== "1");
   const [suaMo, setSuaMo] = useState(false);
   const { kq, loi, thuLai } = useBaiDoc(hoSo);
+  const cc = useChuChung();
   const cuoiBai = useRef<HTMLElement>(null);
 
   // Gate 1: bắt đầu = bài đọc hiện ra (sau nghi thức); đọc xong = cuộn tới "Nhịp hiện tại" (sau 4 thẻ cốt lõi).
@@ -67,7 +69,7 @@ export function BanThan() {
     return (
       <Card className="mx-auto max-w-lg text-center">
         <p className="text-cinnabar">{loi}</p>
-        <Button className="mt-4" variant="secondary" onClick={thuLai}>Thử lại</Button>
+        <Button className="mt-4" variant="secondary" onClick={thuLai}>{cc("loi.thu_lai")}</Button>
       </Card>
     );
   }

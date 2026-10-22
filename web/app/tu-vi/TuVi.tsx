@@ -2,6 +2,7 @@
 // VZ-2 — trang Tử vi: lá số lớn (2 giao diện, lớp vận hạn theo năm xem) → chi tiết cung đang chọn
 // → hỏi đáp AI ở DƯỚI, chiếm hết chiều ngang (chủ dự án chốt 2026-10-01).
 import { useChu } from "@/components/cms/DauCms";
+import { useChuChung } from "@/components/cms/ChuChung";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CalendarClock, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, List, Maximize2, Minimize2, Moon, Orbit, ScrollText, Waypoints } from "lucide-react";
@@ -75,6 +76,7 @@ export function TuVi() {
   const [cheDo, setCheDo] = useState<"tham_khao" | "chi_tiet">("tham_khao");
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
   const [dangTai, setDangTai] = useState(false);
+  const cc = useChuChung();
   const [loiAnh, setLoiAnh] = useState<string | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const chiTietRef = useRef<HTMLDivElement>(null);
@@ -139,7 +141,7 @@ export function TuVi() {
                 try { await taiAnhSvg(svgRef.current, `la-so-tu-vi-${ls.can_chi_nam.can}-${ls.can_chi_nam.chi}.png`); ghi("chart_interacted", { mo_dun: "tuvi", kind: "tai_anh" }); }
                 catch (e) { setLoiAnh(e instanceof Error ? e.message : "Chưa xuất được ảnh."); }
                 finally { setDangTai(false); }
-              }}><Download aria-hidden /> Tải ảnh</Button>
+              }}><Download aria-hidden /> {cc("doc.tai_anh")}</Button>
             </div>
 
             {loiAnh && <p role="alert" className="text-sm text-cinnabar">{loiAnh}</p>}
