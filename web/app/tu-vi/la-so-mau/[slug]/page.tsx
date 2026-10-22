@@ -1,7 +1,7 @@
 // MAU6 — một lá số minh hoạ đọc từng bước. Server Component: HTML đầy đủ cho máy tìm kiếm; phần lá số SVG +
 // thuật ngữ bấm được nằm trong client component (vẫn render sẵn ở server). Web chỉ hiển thị dữ liệu engine.
 import { KhoiCms } from "@/components/cms/KhoiCms";
-import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -16,7 +16,7 @@ export const revalidate = 21600;
 
 type Props = { params: Promise<{ slug: string }> };
 
-export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
+async function metaGoc({ params: thamSo }: Props): Promise<Metadata> {
   const params = await thamSo;
   const m = await laSoMau(params.slug);
   if (!m) return { title: "Không tìm thấy", robots: { index: false } };
@@ -80,3 +80,6 @@ export default async function Page({ params: thamSo }: Props) {
     </article>
   );
 }
+
+// ND-7 đợt 2: ảnh chia sẻ của cụm (CMS → Mẫu cụm trang → "Hình trên trang") thay ảnh /og tự vẽ khi có.
+export const generateMetadata = async (...a: Parameters<typeof metaGoc>) => voiAnhChiaSe(await metaGoc(...a));

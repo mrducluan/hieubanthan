@@ -19,6 +19,15 @@ export function linkXemTruoc(slug: string | undefined | null): string | null {
   return `${webUrl()}/api/cms/xem-truoc?slug=${encodeURIComponent(slug)}&ma=${ma}`;
 }
 
+/** ND-6: nút "Xem trước" của Trang website / Mẫu cụm → web bật chế độ nháp rồi mở URL (mẫu cụm: web mở một trang ví dụ
+ *  của cụm). Mã ký trên "trang:<đường dẫn hoặc mẫu>" — cùng bí mật CMS_PREVIEW_SECRET, khác miền với link bài viết. */
+export function linkXemTrang(duong: string | undefined | null): string | null {
+  if (!duong || !duong.startsWith("/")) return null;
+  const ma = maXemTruoc(`trang:${duong}`);
+  if (!ma) return null;
+  return `${webUrl()}/api/cms/xem-truoc?duong=${encodeURIComponent(duong)}&ma=${ma}`;
+}
+
 /** Báo web xoá cache (thẻ "cms"; ND: kèm `duong` → web xoá thêm thẻ "trang:<duong>"). Không chặn lưu bài khi web
  *  chậm/lỗi: chờ tối đa 4 giây, lỗi thì ghi log. */
 export async function baoWebLamMoi(ly_do: string, slug?: string | null, duong?: string | null): Promise<void> {

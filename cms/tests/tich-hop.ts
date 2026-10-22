@@ -9,6 +9,7 @@ import { vaiTro } from "../src/access";
 import { buocHienTai, docCookie, maTotp, tuBase32 } from "../src/lib/totp";
 import { dongBoSoTrang, kiemSoTrang } from "../src/lib/so-trang";
 import { nhapBaiNotFair } from "../src/lib/notfair";
+import { linkXemTrang, maXemTruoc } from "../src/lib/web";
 import sharp from "sharp";
 
 const chu = (text: string) => ({ type: "text", text, format: 0, detail: 0, mode: "normal", style: "", version: 1 });
@@ -637,6 +638,49 @@ await ca("ND-7 chữ trên trang: chỉ khoá trong bảng, chữ thuần, cắt
       data: { chu: { "dau.nhan_tren": "Ngày đẹp {ngay}" }, _status: "published" } as never }) as unknown as { chu: Record<string, string> };
     assert.equal(u.chu["dau.nhan_tren"], "Ngày đẹp {ngay}");
   } finally { process.env.ENGINE_URL = cu; }
+});
+
+await ca("ND-7 đợt 2: hình trên trang chụp ảnh thư viện (khoá lạ / ảnh mất bị bỏ); chữ dùng chung lọc + chặn liên hệ; link xem trước ký đúng URL", async () => {
+  const anh = await payload.create({ collection: "media", overrideAccess: true, data: { alt: "Ảnh hero thử" } as never,
+    file: { data: await sharp({ create: { width: 640, height: 640, channels: 3, background: "#c8a24a" } }).png().toBuffer(),
+      mimetype: "image/png", name: "hero-thu.png", size: 1 } }) as unknown as { id: number };
+  tao.push({ collection: "media", id: anh.id });
+  const so = kiemSoTrang({
+    trang: [{ duong: `${nd}/hinh-trang`, nhom: "tinh", ten: "Trang hình", o: ["seo"], mac_dinh: { hinh: { "hero.hinh": { nhan: "Hero", goi_y: "vuông", mac_dinh: "SVG" } } } }],
+    mau: [], chung: { "loi.thu_lai": { nhan: "Nút", mac_dinh: "Thử lại", toi_da: 20 } },
+  });
+  await dongBoSoTrang(payload, { trang: [...soTrang("Công cụ đổi tên").trang, ...so.trang], mau: soTrang("x").mau, chung: so.chung });
+  await ghiTao();
+  const d = await timTrang(`${nd}/hinh-trang`);
+  const r = await payload.update({ collection: "noi-dung-trang", id: d.id, user: chuBien, overrideAccess: false, draft: true,
+    data: { hinh: { "hero.hinh": anh.id, "khoa.la": anh.id, "mang.x": 999999 } } as never }) as unknown as { hinh: Record<string, { id: number; url: string; alt: string; sizes: Record<string, unknown> }> };
+  assert.deepEqual(Object.keys(r.hinh), ["hero.hinh"]);
+  assert.equal(r.hinh["hero.hinh"]!.id, anh.id); assert.equal(r.hinh["hero.hinh"]!.alt, "Ảnh hero thử");
+  assert.match(r.hinh["hero.hinh"]!.url, /hero-thu/); assert.ok(r.hinh["hero.hinh"]!.sizes.nho, "có cỡ nhỏ");
+  // lưu lại với bản đã chụp (giao diện gửi nguyên) → vẫn giữ
+  const r2 = await payload.update({ collection: "noi-dung-trang", id: d.id, user: chuBien, overrideAccess: false, draft: true,
+    data: { hinh: r.hinh } as never }) as unknown as { hinh: Record<string, { id: number }> };
+  assert.equal(r2.hinh["hero.hinh"]!.id, anh.id);
+
+  // chữ dùng chung: đồng bộ ghi bảng gốc; chữ thay lọc theo bảng; số điện thoại gõ tay bị chặn; biên tập viên không sửa
+  const g0 = await payload.findGlobal({ slug: "chu-chung", overrideAccess: true }) as unknown as { mac_dinh: { chu: Record<string, unknown> } };
+  assert.ok(g0.mac_dinh.chu["loi.thu_lai"]);
+  await payload.updateGlobal({ slug: "chu-chung", user: chuBien, overrideAccess: false, data: { chu: { "loi.thu_lai": "Làm lại", "khoa.la": "x" } } as never });
+  const g1 = await payload.findGlobal({ slug: "chu-chung", overrideAccess: true }) as unknown as { chu: Record<string, string>; mac_dinh: unknown };
+  assert.deepEqual(g1.chu, { "loi.thu_lai": "Làm lại" }); assert.deepEqual(g1.mac_dinh, g0.mac_dinh);
+  await nem(() => payload.updateGlobal({ slug: "chu-chung", user: chuBien, overrideAccess: false,
+    data: { chu: { "loi.thu_lai": "Gọi 0912 345 678" } } as never }), /điện thoại/);
+  await nem(() => payload.updateGlobal({ slug: "chu-chung", user: bienTap, overrideAccess: false, data: { chu: {} } as never }), /not allowed|Forbidden|quyền/i);
+  await payload.updateGlobal({ slug: "chu-chung", overrideAccess: true, data: { chu: null } as never });
+
+  // ND-6: link xem trước ký trên "trang:<đường dẫn>" (web kiểm cùng công thức)
+  const cuBi = process.env.CMS_PREVIEW_SECRET; process.env.CMS_PREVIEW_SECRET = "bi-mat-thu";
+  try {
+    const link = linkXemTrang("/tu-vi");
+    assert.match(String(link), /\/api\/cms\/xem-truoc\?duong=%2Ftu-vi&ma=/);
+    assert.ok(link!.endsWith(maXemTruoc("trang:/tu-vi")!));
+    assert.equal(linkXemTrang("evil.vn"), null);
+  } finally { if (cuBi === undefined) delete process.env.CMS_PREVIEW_SECRET; else process.env.CMS_PREVIEW_SECRET = cuBi; }
 });
 
 await ca("mẫu cụm: không tạo tay; biến lạ chỉ cảnh báo; cộng tác viên không đọc được hai collection", async () => {

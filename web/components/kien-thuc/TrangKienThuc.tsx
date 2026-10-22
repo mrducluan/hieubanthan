@@ -12,7 +12,7 @@ import { MinhHoa } from "@/components/minh-hoa/MinhHoa";
 import { DongTacGia } from "@/components/kien-thuc/DongTacGia";
 import { GocNhinChuyenGia } from "@/components/kien-thuc/GocNhinChuyenGia";
 import { KhoiCms } from "@/components/cms/KhoiCms";
-import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHUYEN_GIA, idChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
 import { CHU_DE, TEN_MANG_SILO, duongTrang, trang, truCua, type TrangKienThuc } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
@@ -28,7 +28,12 @@ async function tai({ khoa, slug }: Thamso) {
   return t ? { cd, t } : null;
 }
 
+/** ND-7 đợt 2: ảnh chia sẻ của cụm (CMS) thay ảnh /og tự vẽ khi có. */
 export async function metaKienThuc(params: Thamso): Promise<Metadata> {
+  return voiAnhChiaSe(await metaGoc(params));
+}
+
+async function metaGoc(params: Thamso): Promise<Metadata> {
   const kq = await tai(params);
   if (!kq) return { title: "Không tìm thấy", robots: { index: false } };
   const { t } = kq;

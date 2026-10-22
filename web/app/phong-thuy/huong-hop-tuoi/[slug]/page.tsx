@@ -1,7 +1,7 @@
 // SEO-F — "Tuổi X (nam/nữ) hợp hướng nào?": 92 trang server-render từ engine (mệnh quái Bát trạch, du niên, KB).
 // Cấu trúc GEO: câu hỏi làm tiêu đề · trả lời nhanh · la bàn + bảng 8 hướng · gợi ý bố trí · mốc đầu năm · hỏi đáp.
 import { KhoiCms } from "@/components/cms/KhoiCms";
-import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -19,7 +19,7 @@ type Props = { params: Promise<{ slug: string }> };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
 const GIOI = { nam: "Nam", nu: "Nữ" } as const;
 
-export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
+async function metaGoc({ params: thamSo }: Props): Promise<Metadata> {
   const params = await thamSo;
   const t = await tuoiHuong(params.slug);
   if (!t) return { title: "Không tìm thấy", robots: { index: false } };
@@ -162,3 +162,6 @@ export default async function Page({ params: thamSo }: Props) {
     </article>
   );
 }
+
+// ND-7 đợt 2: ảnh chia sẻ của cụm (CMS → Mẫu cụm trang → "Hình trên trang") thay ảnh /og tự vẽ khi có.
+export const generateMetadata = async (...a: Parameters<typeof metaGoc>) => voiAnhChiaSe(await metaGoc(...a));

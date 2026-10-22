@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowRight, CalendarHeart, Heart, HeartHandshake, Hash, Orbit, X } from "lucide-react";
@@ -15,11 +16,12 @@ import { batDauDoc } from "@/lib/do-luong";
 export function CuaVao() {
   const hoSo = useHoSo();
   const router = useRouter();
+  const c = useChuChung();
   if (hoSo === undefined) return <div className="h-[15rem] animate-pulse rounded-2xl bg-surface/50" />;
   if (hoSo) return <ChaoLai hoSo={hoSo} />;
   return (
     <div className="glass rounded-2xl p-6">
-      <p className="mb-5 font-serif text-xl">Bắt đầu — chỉ cần 2 thông tin</p>
+      <p className="mb-5 font-serif text-xl">{c("cua_vao.tieu_de")}</p>
       <NhapHoSo onXong={() => router.push("/ban-than?moi=1")} />
     </div>
   );
@@ -32,15 +34,16 @@ const LOI_TAT = [["/hom-nay", "Hôm nay", CalendarHeart], ["/than-so", "Thần s
 function ChaoLai({ hoSo }: { hoSo: HoSo }) {
   const nhip = useNhip(hoSo);
   const [moiMo, setMoiMo] = useState(false);
+  const c = useChuChung();
   useEffect(() => { if (nhip) batDauDoc("nhip", { kind: "trang_chu" }); }, [nhip]);
   return (
     <div className="glass rounded-2xl p-5 sm:p-6" data-testid="chao-lai">
       <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
         <div>
-          <p className="eyebrow">Chào lại</p>
+          <p className="eyebrow">{c("cua_vao.chao_lai")}</p>
           <p className="mt-1 font-serif text-3xl">{tenGoi(hoSo)}</p>
         </div>
-        <p className="text-sm text-fg-muted">Hồ sơ đã sẵn sàng trên máy này.</p>
+        <p className="text-sm text-fg-muted">{c("cua_vao.san_sang")}</p>
       </div>
 
       {nhip ? (
@@ -56,19 +59,19 @@ function ChaoLai({ hoSo }: { hoSo: HoSo }) {
       ) : <div className="mt-4 h-[5.5rem] animate-pulse rounded-xl bg-surface/50" aria-hidden />}
 
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
-        <Button asChild size="lg"><Link href="/hom-nay">Xem cả ngày hôm nay <ArrowRight aria-hidden /></Link></Button>
-        <Button asChild size="lg" variant="outline"><Link href="/ban-than">Mở hồ sơ bản thân</Link></Button>
+        <Button asChild size="lg"><Link href="/hom-nay">{c("cua_vao.nut_hom_nay")} <ArrowRight aria-hidden /></Link></Button>
+        <Button asChild size="lg" variant="outline"><Link href="/ban-than">{c("cua_vao.nut_ho_so")}</Link></Button>
       </div>
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
         {nhip && <NutChiaSeNgay hoSo={hoSo} soNgay={nhip.ngay_ca_nhan.so} chuDe={boTienToNgay(nhip.ngay_ca_nhan.nghia).replace(/\.$/, "").toLowerCase()} nho />}
         <Button size="sm" variant="secondary" onClick={() => setMoiMo((v) => !v)} aria-expanded={moiMo} data-testid="xem-hop-voi-ai">
-          {moiMo ? <X aria-hidden /> : <HeartHandshake aria-hidden />} Xem hợp với ai
+          {moiMo ? <X aria-hidden /> : <HeartHandshake aria-hidden />} {c("cua_vao.nut_hop")}
         </Button>
       </div>
       {moiMo && (
         <div className="mt-3 rounded-xl border border-line/70 bg-bg/40 p-4" data-testid="khung-hop-voi-ai">
-          <p className="mb-3 text-sm text-fg-muted">Gửi link cho người bạn muốn xem cùng — họ tự nhập ngày sinh của họ, rồi cả hai thấy kết quả hai người. Không ai thấy ngày sinh của ai.</p>
+          <p className="mb-3 text-sm text-fg-muted">{c("cua_vao.moi_mo_ta")}</p>
           <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(m) => `/hop-doi/${m}`} nutTao="Tạo link mời xem hợp"
             loiNhan={`${tenGoi(hoSo)} muốn xem hai người hợp nhau thế nào — mở link, nhập ngày sinh của bạn là thấy.`} />
         </div>
