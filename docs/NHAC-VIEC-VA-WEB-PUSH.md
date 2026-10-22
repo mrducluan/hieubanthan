@@ -62,5 +62,12 @@ site nhận và hiện thông báo, kể cả khi tab đã đóng.
 Đo: `chart_interacted{kind=push_bat|push_tat|push_mo}` (`push_mo` = mở trang từ thông báo, link mang `?tu=push`).
 Env: `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (tạo bằng `node web/scripts/tao-khoa-vapid.mjs`).
 
+## 2c. GĐ2 — đã làm (2026-10-22): sáng nay · mốc lịch · hỏi lại hôm qua · mời cài app
+
+Chi tiết + kế hoạch tiếp: `docs/DE-XUAT-WEB-PUSH-VA-DOANH-THU.md` mục 4. Migration **0020** `push_tuy_chon` (tuỳ chọn nhận,
+RLS chủ sở hữu, không tích sẵn) + `push_hang_doi_v2` (thêm NGÀY-THÁNG sinh 'dd-mm' chỉ khi người đó bật sáng nay / tháng cá
+nhân); chưa chạy 0020 → cron tự lùi về hàng đợi 0019 (chỉ mốc tự đánh dấu). Engine `/v1/push/sang-nay` (một lời gọi mỗi lượt
+cron). Ý định hôm qua KHÔNG lên máy chủ: IndexedDB `hbt/kv/y_dinh`, trả lời = phiếu kiểm chứng `ds.hn.*` (0017).
+
 ## 3. Thứ tự đề xuất
 GĐ0 (xong) → đo 2–4 tuần → nếu ≥ 10% người có hồ sơ bấm "Nhắc tôi" → GĐ1 Web Push (anh duyệt `web-push` + migration 0019 + VAPID env).

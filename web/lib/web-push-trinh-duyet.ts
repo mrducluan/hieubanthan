@@ -5,6 +5,7 @@
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { luuNhacTaiKhoan } from "@/lib/tai-khoan-nhac";
 import { dsNhacTrenMay } from "@/lib/nhac-viec";
+import { dangChayApp } from "@/lib/che-do-app";
 
 const KHOA_BAT = "hbt.push.v1";   // = user id đã bật nhắc trên thiết bị này (nút "Nhắc tôi" tự lưu mốc vào tài khoản; máy dùng
                                   //   chung: tài khoản khác đăng nhập KHÔNG được kế thừa thiết bị khi chưa tự bấm "Bật nhắc")
@@ -16,7 +17,7 @@ export type TrangThaiPush =
   | "dang_bat" | "chua_bat";
 
 export const laIos = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-const daCaiApp = () => window.matchMedia?.("(display-mode: standalone)").matches || (navigator as { standalone?: boolean }).standalone === true;
+
 
 /** Thiết bị này đang bật nhắc cho đúng tài khoản `userId`? (không có userId: cho bất kỳ tài khoản nào) */
 export function pushDangBatTrenMay(userId?: string): boolean {
@@ -42,7 +43,7 @@ async function dangKyHienTai(): Promise<PushSubscription | null> {
 export async function trangThaiPush(): Promise<TrangThaiPush> {
   if (typeof window === "undefined") return "khong_ho_tro";
   const coApi = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
-  if (!coApi) return laIos() && !daCaiApp() ? "can_cai_ios" : "khong_ho_tro";
+  if (!coApi) return laIos() && !dangChayApp() ? "can_cai_ios" : "khong_ho_tro";
   if (Notification.permission === "denied") return "bi_chan";
   const sub = await dangKyHienTai().catch(() => null);
   if (!sub) datCo(null);
@@ -115,4 +116,31 @@ export async function dongBoThietBi(userId: string, doiMoi = false): Promise<boo
   if (data) { datCo(userId); return true; }
   if (!doiMoi && !pushDangBatTrenMay(userId)) return false;
   try { await ghiThietBi(sub); datCo(userId); return true; } catch { return false; }
+}
+
+// ---------------------------------------------------------------- KC-4 GĐ2: tuỳ chọn nhận thêm (push_tuy_chon, 0020)
+export type MocLichChon = "thang_ca_nhan" | "giao_tiet" | "lap_xuan_tet";
+export interface TuyChonPush { sang_nay: boolean; moc_lich: MocLichChon[] }
+export const TUY_CHON_RONG: TuyChonPush = { sang_nay: false, moc_lich: [] };   // không tích sẵn
+
+/** null = máy chủ chưa chạy 0020 (ẩn phần tuỳ chọn). */
+export async function docTuyChon(userId: string): Promise<TuyChonPush | null> {
+  const sb = await supabase();
+  if (!sb) return null;
+  const { data, error } = await sb.from("push_tuy_chon").select("sang_nay,moc_lich").eq("user_id", userId).maybeSingle();
+  if (error) return null;
+  return data ? { sang_nay: Boolean(data.sang_nay), moc_lich: (data.moc_lich ?? []) as MocLichChon[] } : TUY_CHON_RONG;
+}
+export async function luuTuyChon(userId: string, t: TuyChonPush): Promise<void> {
+  const sb = await supabase();
+  if (!sb) throw new Error("Tài khoản chưa được bật trên hệ thống.");
+  const { error } = await sb.from("push_tuy_chon").upsert({ user_id: userId, sang_nay: t.sang_nay, moc_lich: t.moc_lich }, { onConflict: "user_id" });
+  if (error) throw new Error("Chưa lưu được tuỳ chọn.");
+}
+/** "Sáng nay của bạn" cần ngày + tháng sinh trong hồ sơ tài khoản (bảng ho_so). */
+export async function coHoSoTaiKhoan(userId: string): Promise<boolean> {
+  const sb = await supabase();
+  if (!sb) return false;
+  const { data } = await sb.from("ho_so").select("user_id").eq("user_id", userId).maybeSingle();
+  return Boolean(data);
 }
