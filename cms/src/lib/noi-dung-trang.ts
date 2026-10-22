@@ -1,6 +1,7 @@
 // ND — kiểm định chữ của "Trang website" / "Mẫu cụm trang" trước khi lưu (máy chủ): gom mọi ô chữ biên tập viên gõ,
 // chạy luật ranh giới chung (kiem-dinh.ts kiemRanhGioi) + link trong site + biến mẫu. Không gọi AI.
 import { docLexical, kiemRanhGioi, type MucKiem } from "../kiem-dinh/kiem-dinh";
+import { chuDaSua } from "./chu-trang";
 
 type Dong = Record<string, unknown>;
 const mang = (v: unknown): Dong[] => (Array.isArray(v) ? v.filter((x): x is Dong => Boolean(x) && typeof x === "object") : []);
@@ -24,7 +25,8 @@ export function gomChu(d: Dong, { mucNoiQuyTrinh = false } = {}) {
   const tuDo: string[] = [chu(d.tieu_de_seo), chu(d.mo_ta_seo), chu(d.h1), chu(d.loi_dan),
     ...mang(d.doan).map((x) => chu(x.chu)),
     ...mang(d.hoi_dap).flatMap((x) => [chu(x.cau_hoi), chu(x.tra_loi)]),
-    ...mang(d.lien_ket).map((x) => chu(x.nhan))];
+    ...mang(d.lien_ket).map((x) => chu(x.nhan)),
+    ...chuDaSua(d.chu)];   // ND-7: "Chữ trên trang" cùng luật ranh giới (liên hệ, tên nội bộ, phán định…)
   const muc: string[] = [];
   const lienKetNgoai: string[] = [];
   for (const m of mang(d.muc)) {

@@ -21,6 +21,8 @@ export type NoiDungTrang = {
   muc: { id: string; tieuDe: string; html: string | null }[];
   ngayHieuLuc: string | null;
   khoi: Record<ViTri, KhoiCms[]>;
+  /** ND-7 "Chữ trên trang" thô từ CMS (khoá → chữ; trang URL thắng mẫu cụm) — trang lọc theo bảng chữ của mình (taoChu). */
+  chu: Record<string, string>;
   /** Có lấy được gì từ CMS không (để đo / gỡ lỗi). */
   nguon: { trang: boolean; mau: boolean };
 };
@@ -36,8 +38,9 @@ export type TrangCms = {
   ngay_hieu_luc?: string | null;
   khoi_tren?: KhoiCms[] | null; khoi_duoi?: KhoiCms[] | null; khoi_cuoi?: KhoiCms[] | null;
   che_do_mau?: Partial<Record<ViTri, "thay" | "them_sau" | "an_mau">> | null;
+  chu?: Record<string, unknown> | null;
 };
-export type MauCms = Pick<TrangCms, "khoi_tren" | "khoi_duoi" | "khoi_cuoi"> & { mau_duong?: string };
+export type MauCms = Pick<TrangCms, "khoi_tren" | "khoi_duoi" | "khoi_cuoi" | "chu"> & { mau_duong?: string };
 
 const KIEU_CHU_MAC_DINH: KieuChu = { co: "thuong", can: "trai", nen: "khong" };
 const TRONG_SITE = /^\/(?![/\\])[^\s\\]*$/;   // như DUONG_TRONG_SITE của CMS
@@ -82,6 +85,11 @@ export function gopNoiDung(duong: string, macDinh: MacDinhTrang & { nhom?: NhomT
     const ds = cheDo === "an_mau" ? rieng : cheDo === "them_sau" ? [...cua, ...rieng] : rieng.length ? rieng : cua;
     khoi[vt] = Object.keys(bien).length ? ds.map((k) => thayBienKhoi(k, bien)) : ds;
   }
+  const chuCms: Record<string, string> = {};
+  for (const nguon of [mau?.chu, t.chu]) {
+    if (!nguon || typeof nguon !== "object" || Array.isArray(nguon)) continue;
+    for (const [k, v] of Object.entries(nguon)) if (typeof v === "string" && v.trim()) chuCms[k] = v.trim();
+  }
   const anh = t.anh_chia_se && typeof t.anh_chia_se === "object" && t.anh_chia_se.url ? t.anh_chia_se : null;
   return {
     duong, nhom: t.nhom ?? macDinh.nhom ?? null, ten: t.ten ?? macDinh.ten ?? null,
@@ -102,6 +110,7 @@ export function gopNoiDung(duong: string, macDinh: MacDinhTrang & { nhom?: NhomT
     muc: mucCms.length ? mucCms : (macDinh.muc ?? []).map((m) => ({ id: m.id, tieuDe: m.tieu_de, html: null })),
     ngayHieuLuc: chu(t.ngay_hieu_luc) ?? macDinh.ngay_hieu_luc ?? null,
     khoi,
+    chu: chuCms,
     nguon: { trang: Boolean(trang), mau: Boolean(mau) },
   };
 }
@@ -122,6 +131,16 @@ export async function layNoiDungTrang(duong: string, bien: Record<string, string
       { hanMs: HAN, the: [theTrang(cum.mau.mau_duong)] }) : Promise.resolve(null),
   ]);
   return gopNoiDung(duong, macDinh, r?.docs?.[0] ?? null, m?.docs?.[0] ?? null, { ...(cum?.bien ?? {}), ...bien });
+}
+
+/** ND-7: H1 + lời dẫn đã xuất bản của nhiều URL trong MỘT lần gọi (thẻ chủ đề ở /kien-thuc và khối "Kiến thức …" của
+ *  trang công cụ: sửa tên/mô tả trang chủ đề ở CMS thì thẻ trỏ tới nó đổi theo). Lỗi / CMS chưa nối → {}. */
+export async function layDauNhieuTrang(duongs: string[]): Promise<Record<string, { ten: string | null; moTa: string | null }>> {
+  const ds = [...new Set(duongs.filter((d) => duongHopLe(d)))];
+  if (!ds.length) return {};
+  const r = await goiCms<{ docs?: TrangCms[] }>(`/api/noi-dung-trang?${tv({ where: { duong: { in: ds.join(",") }, _status: { equals: "published" } },
+    limit: ds.length, depth: 0, select: { duong: true, h1: true, loi_dan: true } })}`, { hanMs: HAN });
+  return Object.fromEntries((r?.docs ?? []).flatMap((d) => (d.duong ? [[d.duong, { ten: chu(d.h1), moTa: chu(d.loi_dan) }]] : [])));
 }
 
 /** Phủ ô SEO của CMS lên metadata gốc của trang. CMS không đổi gì so với chữ trong code → trả NGUYÊN metadata gốc

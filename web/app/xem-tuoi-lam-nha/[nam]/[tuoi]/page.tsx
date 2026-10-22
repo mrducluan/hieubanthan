@@ -8,6 +8,10 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KetQuaLamNha } from "@/components/tuoi/KetQuaTuoi";
 import { goiLd, ldDuongDan, ldHoiDap, metaTrang } from "@/lib/seo";
 import { docNam, docTuoi, duongLamNha, lamNhaCongKhai, lamNhaIndex, namAmHienTai } from "@/lib/tuoi-dan-gian";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { taoChu } from "@/lib/chu-trang";
+import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { CHU_LAM_NHA_CON } from "@/lib/chu/trang-con";
 
 type P = { params: Promise<{ nam: string; tuoi: string }> };
 
@@ -31,7 +35,11 @@ export default async function Page(p: P) {
   if (!x) notFound();
   const d = await lamNhaCongKhai(x.n, x.ns);
   if (!d) throw new Error("engine không phản hồi");
-  const tieuDe = `Tuổi ${x.ns} làm nhà năm ${x.n} được không?`;
+  // ND-7: mẫu cụm "/xem-tuoi-lam-nha/{nam}/tuoi-{nam_sinh}" — khối + chữ sửa được ở CMS.
+  const duong = duongLamNha(x.n, x.ns);
+  const bien = { nam: String(x.n), nam_sinh: String(x.ns), can_chi: d.can_chi, can_chi_nam: d.can_chi_nam_xay, nam_sau: String(x.n + 1) };
+  const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_LAM_NHA_CON, nd.chu);
+  const tieuDe = c("dau.tieu_de", bien);
   return (
     <div className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(
@@ -39,10 +47,13 @@ export default async function Page(p: P) {
         ldHoiDap([{ hoi: tieuDe, dap: d.ket_luan.chu }, { hoi: `Tuổi ${x.ns} cưới năm ${x.n} có phạm Kim lâu không?`, dap: d.cuoi_hoi }]),
       )} />
       <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/xem-tuoi-lam-nha" className="hover:underline">Xem tuổi làm nhà</Link></nav>
-      <TieuDeMuc cap={1} nho={`Tuổi ${d.can_chi} · năm ${d.can_chi_nam_xay}`} lon={tieuDe} />
+      <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
+      <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
       <KetQuaLamNha d={d} />
-      <p className="mt-6 text-sm text-fg-muted">Tính cho chính xác theo ngày sinh của bạn: <Link href="/xem-tuoi-lam-nha" className="text-gold underline">công cụ xem tuổi làm nhà</Link> ·{" "}
-        <Link href={duongLamNha(x.n + 1, x.ns)} className="text-gold underline">năm {x.n + 1}</Link></p>
+      <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
+      <p className="mt-6 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/xem-tuoi-lam-nha" className="text-gold underline">{c("cuoi.link", bien)}</Link> ·{" "}
+        <Link href={duongLamNha(x.n + 1, x.ns)} className="text-gold underline">{c("cuoi.nam_sau", bien)}</Link></p>
+      <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </div>
   );
 }

@@ -7,6 +7,10 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { BangHanNam } from "@/components/tuoi/KetQuaTuoi";
 import { goiLd, ldDuongDan, ldHoiDap, metaTrang } from "@/lib/seo";
 import { docNam, duongHanNam, hanNamCongKhai, hanNamIndex, namAmHienTai } from "@/lib/tuoi-dan-gian";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { taoChu } from "@/lib/chu-trang";
+import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { CHU_HAN_NAM_CON } from "@/lib/chu/trang-con";
 
 type P = { params: Promise<{ nam: string }> };
 
@@ -25,6 +29,9 @@ export default async function Page(p: P) {
   const h = await hanNamCongKhai(n);
   if (!h) throw new Error("engine không phản hồi");
   const ten = (ma: string) => h.huong_tranh.find((x) => x.ma === ma)!;
+  // ND-7: mẫu cụm "/phong-thuy/huong-xau-nam/{nam}" — khối + chữ sửa được ở CMS.
+  const duong = duongHanNam(n), bien = { nam: String(n), can_chi: h.can_chi };
+  const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_HAN_NAM_CON, nd.chu);
   return (
     <div className="mx-auto max-w-3xl space-y-5">
       <JsonLd data={goiLd(
@@ -34,14 +41,17 @@ export default async function Page(p: P) {
           { hoi: `Thái Tuế năm ${n} ở hướng nào?`, dap: `Hướng ${ten("thai_tue").phuong}; Tuế Phá ở ${ten("tue_pha").phuong}.` }]),
       )} />
       <nav aria-label="Đường dẫn" className="text-sm text-fg-muted"><Link href="/phong-thuy" className="hover:underline">Phong thuỷ</Link> › <Link href="/phong-thuy/huong-xau-nam" className="hover:underline">Hướng xấu theo năm</Link></nav>
-      <TieuDeMuc cap={1} nho={`Năm ${h.can_chi}`} lon={`Hướng xấu năm ${n}`} />
+      <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={c("dau.tieu_de", bien)} />
+      <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" />
       <BangHanNam h={h} />
+      <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" />
       <p className="flex flex-wrap gap-3 text-sm">
         {n > 1901 && <Link href={duongHanNam(n - 1)} className="text-gold underline">Năm {n - 1}</Link>}
         {n < 2099 && <Link href={duongHanNam(n + 1)} className="text-gold underline">Năm {n + 1}</Link>}
-        <Link href="/xem-tuoi-lam-nha" className="text-gold underline">Xem tuổi làm nhà năm {n}</Link>
+        <Link href="/xem-tuoi-lam-nha" className="text-gold underline">{c("cuoi.lam_nha", bien)}</Link>
       </p>
       <p className="text-xs text-fg-muted">{h.luu_y}</p>
+      <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" />
     </div>
   );
 }

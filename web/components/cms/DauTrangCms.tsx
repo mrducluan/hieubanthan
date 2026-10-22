@@ -1,16 +1,17 @@
 // ND-3 — phần đầu + mục văn bản của trang tĩnh (máy chủ) từ CMS "Trang website". Ô trống → chữ trong code (HTML như cũ).
 import type { ReactNode } from "react";
 import type { Muc } from "@/components/phap-ly/TrangPhapLy";
+import { ChuNhan } from "@/components/cms/ChuNhan";
 import { locHtmlCms } from "@/lib/cms-html";
 import { lopKieuChu } from "@/lib/kieu-chu";
 import type { NoiDungTrang } from "@/lib/noi-dung-trang";
 import { mucSoTrang } from "@/lib/so-trang";
 
-/** Lời dẫn dưới H1: chữ CMS (theo kiểu chữ đã chọn) hoặc nội dung mặc định truyền vào. */
-export function LoiDanCms({ nd, className, children }: { nd: NoiDungTrang; className?: string; children?: ReactNode }) {
+/** Lời dẫn dưới H1: chữ CMS (theo kiểu chữ đã chọn) hoặc nội dung mặc định truyền vào. `*…*` = đoạn nhấn (ND-7). */
+export function LoiDanCms({ nd, className, children, lopNhan }: { nd: NoiDungTrang; className?: string; children?: ReactNode; lopNhan?: string }) {
   if (!nd.dau.loiDan) return children ? <p className={className}>{children}</p> : null;
-  const kc = lopKieuChu(nd.dau.kieuChu);
-  return <p className={className}>{kc ? <span className={kc}>{nd.dau.loiDan}</span> : nd.dau.loiDan}</p>;
+  const kc = lopKieuChu(nd.dau.kieuChu), chu = <ChuNhan chu={nd.dau.loiDan} lopNhan={lopNhan} />;
+  return <p className={className}>{kc ? <span className={kc}>{chu}</span> : chu}</p>;
 }
 
 /** Mục văn bản: CMS sửa tiêu đề / thân mục theo neo (id giữ nguyên — link #neo không gãy); mục CMS có neo MỚI (không

@@ -17,7 +17,7 @@ import { hoTenList, ngayHopLe, tenGoi, useHoSo } from "@/lib/hoso";
 import { useQuyUocDD } from "@/lib/quy-uoc-dd";
 import { cn } from "@/lib/utils";
 import { batDauDoc, ghi } from "@/lib/do-luong";
-import { LoiDan, TieuDeTrang, useDauCms } from "@/components/cms/DauCms";
+import { LoiDan, TieuDeTrang, useChu, useDauCms } from "@/components/cms/DauCms";
 
 // Loại quan hệ — engine luận theo từng vai (người yêu / bạn bè / đồng nghiệp / sếp / gia đình).
 const QUAN_HE = [
@@ -42,16 +42,16 @@ export function HopDoi() {
   const [kq, setKq] = useState<KetQuaHopDoiT | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
-  const dauCms = useDauCms();
+  const dauCms = useDauCms(), c = useChu();
   const thangRef = useRef<HTMLInputElement>(null);
   const namRef = useRef<HTMLInputElement>(null);
 
   // Lúc chờ hồ sơ vẫn có <h1> trong HTML phía máy chủ (SEO).
-  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeTrang nho="Hợp đôi" lon="Hợp đôi theo thần số học" /><KhungTai /></div>;
+  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeTrang nho={c("dau.nhan_tren")} lon={c("dau.dang_tai")} /><KhungTai /></div>;
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
-        <TieuDeTrang nho="Hợp đôi" lon="Trước hết, con số của bạn" mo_ta="Nhập tên và ngày sinh của bạn, rồi mới đến người ấy." />
+        <TieuDeTrang nho={c("dau.nhan_tren")} lon={c("dau.chua_ho_so")} mo_ta={c("dau.chua_ho_so_dan")} />
         <Card><NhapHoSo nutGui="Tiếp tục" onXong={() => router.refresh()} /></Card>
       </div>
     );

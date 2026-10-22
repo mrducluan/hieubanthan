@@ -9,6 +9,8 @@ import { CHUYEN_GIA, duongChuyenGia, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
 import { duongTrang, soTrangChuyenGia } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, siteUrl, urlDayDu } from "@/lib/seo";
 import { vanHanh } from "@/lib/van-hanh";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 export const revalidate = 21600;
 
@@ -37,8 +39,9 @@ export default async function Page({ params }: Props) {
   const { slug } = await params;
   const cg = CHUYEN_GIA[slug];
   if (!cg) notFound();
-  const so = await soTrangChuyenGia(slug);
   const duong = duongChuyenGia(slug);
+  // ND-7: hồ sơ giữ trong code (E-E-A-T) — CMS chỉ thêm khối cuối trang (Trang website của URL hoặc mẫu cụm /tac-gia/{slug}).
+  const [so, nd] = await Promise.all([soTrangChuyenGia(slug), layNoiDungTrang(duong, { slug })]);
   const vh = vanHanh();
 
   const ld = goiLd(
@@ -139,6 +142,7 @@ export default async function Page({ params }: Props) {
         <p className="mt-2">Thấy một bài chưa đúng hoặc thiếu nguồn? Xin gửi qua trang <Link href="/lien-he" className="text-gold underline">Liên hệ</Link>
           {vh.email ? <> hoặc email <a href={`mailto:${vh.email}`} className="text-gold underline">{vh.email}</a></> : null} — bài được sửa sẽ cập nhật ngày thẩm định.</p>
       </section>
+      <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </article>
   );
 }

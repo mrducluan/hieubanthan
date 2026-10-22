@@ -440,6 +440,19 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
      nháp trống ở URL mới) thì xoá nháp trống ở URL mới, đổi đường dẫn dòng cũ sang URL mới.
   3) Nếu đã tự sửa **Menu đầu trang / Điều hướng chân trang** trong CMS: đổi link `/huong-xau-nam` → `/phong-thuy/huong-xau-nam`,
      `/la-so-mau` → `/tu-vi/la-so-mau`, `/kien-thuc/…` → link mới (link cũ vẫn chạy nhờ 308 nhưng nên trỏ thẳng).
+- [ ] ND7. (2026-10-22, ND-7 "Chữ trên trang") Sau khi PR merge, CMS redeploy tự chạy migration `nd_7_chu_tren_trang`
+  (không cần biến mới). Thử ~5 phút:
+  1) CMS → **Giao diện website → Trang website** → bấm **"Đồng bộ ngay"** (mang bảng chữ mới sang CMS + 6 mẫu cụm mới).
+  2) Mở trang `/` → tab **"Chữ trên trang"**: mỗi dòng có chữ gốc + ô gõ chữ mới (vd sửa chip "30 giây · không cần tài
+     khoản", 9 câu "Điểm mù", từng hàng bảng so sánh, thẻ 4 mảng) → **Xuất bản** → hieuban.com đổi sau vài giây. Để trống =
+     chữ gốc; `*chữ*` = đoạn nhấn (vd tiêu đề `Bạn là *số mấy?*` giữ màu vàng); giữ nguyên `{ngay}`, `{ten}`… nếu có.
+  3) Trang công cụ (`/than-so`, `/tu-vi`…): tab "Chữ trên trang" sửa dòng nhỏ trên tiêu đề, tiêu đề các mục, "Hỏi đáp cùng AI",
+     "Kiến thức {mảng}", "Về công cụ {ten}".
+  4) **Mẫu cụm trang** → "Xem ngày tốt · trang ngày" (và tháng, tuổi làm nhà, xông đất, hướng xấu năm): đổi tiêu đề cho cả
+     cụm, thêm khối (banner, ảnh, video…). Riêng một ngày/năm: Trang website → Tạo mới → nhập đường dẫn (vd `/xem-ngay-tot/2027-02-17`).
+  5) Tên + mô tả thẻ chủ đề ở `/kien-thuc`: sửa **H1 / Lời dẫn** của chính trang chủ đề (vd `/tu-vi/sao-o-cung`).
+  Còn trong code (đợt 2): hình chính trang chủ, biểu tượng mảng, ảnh chia sẻ mặc định, xem trước bản nháp, chữ nhỏ trong
+  công cụ (nút, thông báo lỗi). Ảnh tải lên chỉ lưu lâu dài khi đã làm **CMS1** (bucket `cms-media`).
 - [ ] ND45. (2026-10-19, ND-4/ND-5) Sau khi PR merge, CMS redeploy tự chạy migration `nd_4_5_anh_phap_ly`. Thử ~5 phút:
   1) **Trang pháp lý** (Trang website → `/dieu-khoan`…): sửa Mục / ngày hiệu lực → chọn "Thay đổi nội dung" + ngày mới
      → **tích ô "Tôi đã đối chiếu…"** → Xuất bản. Ô tự bỏ tích sau mỗi lần xuất bản (lần sau xác nhận lại). Đổi nội dung

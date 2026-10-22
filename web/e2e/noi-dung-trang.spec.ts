@@ -74,11 +74,18 @@ test("sổ trang: không sót URL tĩnh của sitemap + mọi chủ đề; khôn
   for (const d of [...tinh, "/phong-thuy/huong-hop-tuoi", ...Object.values(CHU_DE).map((c) => c.duong)]) expect(so.has(d), d).toBe(true);
   expect(so.size).toBe(SO_TRANG.length);
   expect(SO_TRANG.length).toBeLessThanOrEqual(45);   // bản gọn (mục 8.1): không tạo sẵn tài liệu cho trang KB
-  expect(MAU_CUM.length).toBe(Object.keys(CHU_DE).length + 2);
+  expect(MAU_CUM.length).toBe(Object.keys(CHU_DE).length + 8);   // + tuổi hợp hướng, lá số mẫu, 6 cụm trang con (ND-7)
   expect(khopMauCum("/tu-vi/sao-o-cung/tu-vi-cung-menh")?.bien).toEqual({ slug: "tu-vi-cung-menh" });
   expect(khopMauCum("/phong-thuy/huong-hop-tuoi/tuoi-1990-nam")?.bien).toEqual({ nam: "1990", gioi: "nam" });
   expect(khopMauCum("/phong-thuy/huong-hop-tuoi")).toBeNull();
   expect(khopMauCum("/tu-vi/sao-o-cung")).toBeNull();
+  // ND-7: trang con theo ngày/năm — tháng khớp TRƯỚC ngày (cùng tiền tố).
+  expect(khopMauCum("/xem-ngay-tot/thang-10-2026")).toMatchObject({ bien: { thang: "10", nam: "2026" } });
+  expect(khopMauCum("/xem-ngay-tot/2026-10-21")).toMatchObject({ bien: { ngay: "2026-10-21" } });
+  expect(khopMauCum("/xem-tuoi-lam-nha/2026/tuoi-1990")?.bien).toEqual({ nam: "2026", nam_sinh: "1990" });
+  expect(khopMauCum("/tuoi-xong-dat/2027/tuoi-1985")?.bien).toEqual({ nam: "2027", nam_sinh: "1985" });
+  expect(khopMauCum("/phong-thuy/huong-xau-nam/2026")?.bien).toEqual({ nam: "2026" });
+  expect(khopMauCum("/xem-ngay-tot/abc")?.mau.mau_duong).not.toBe("/xem-ngay-tot/{ngay}");
   for (const m of SO_TRANG) if (m.nhom === "phap_ly") expect(m.o.some((o) => o.startsWith("khoi")), m.duong).toBe(false);
 });
 
@@ -92,6 +99,16 @@ for (const m of SO_TRANG.filter((t) => t.nhom === "cong_cu" && t.mac_dinh.doan))
       ...m.mac_dinh.lien_ket!.map((l) => l.ten)]) expect(html, s).toContain(s);
   });
 }
+
+// ND-7: mọi URL trong sitemap (trừ bài blog / chuyên mục / trang đích — đã có collection riêng) phải sửa được ở CMS:
+// có trong sổ trang hoặc thuộc một mẫu cụm. Thêm trang công khai mới mà quên khai → test này đỏ.
+test("sitemap: mọi URL đều thuộc sổ trang hoặc một mẫu cụm (sửa được ở CMS)", async ({ request }) => {
+  const xml = await (await request.get("/sitemap.xml")).text();
+  const ds = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]!).pathname);
+  expect(ds.length).toBeGreaterThan(500);
+  const sot = ds.filter((d) => !/^\/(blog|su-kien)(\/|$)/.test(d) && !mucSoTrang(d) && !khopMauCum(d));
+  expect(sot, `URL chưa có chỗ sửa ở CMS: ${sot.slice(0, 10).join(", ")}`).toEqual([]);
+});
 
 test("route sổ trang + webhook làm mới từ chối khi thiếu/sai bí mật", async ({ request }) => {
   expect((await request.get("/api/so-trang")).status()).toBe(401);
