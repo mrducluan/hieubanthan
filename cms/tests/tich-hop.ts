@@ -611,6 +611,34 @@ await ca("ghi đè trang KB: chỉ đường dẫn thuộc mẫu cụm; tự g�
   } finally { process.env.ENGINE_URL = cu; }
 });
 
+await ca("ND-7 chữ trên trang: chỉ khoá trong bảng, chữ thuần, cắt giới hạn; liên hệ gõ tay bị chặn; ghi đè cụm công cụ nhận bảng chữ của mẫu", async () => {
+  const bang = { "dau.chip_1": { nhan: "Chip", mac_dinh: "30 giây", toi_da: 12 }, "so_sanh.lon": { nhan: "Tiêu đề", mac_dinh: "Gốc" } };
+  const so = kiemSoTrang({
+    trang: [{ duong: `${nd}/chu-trang`, nhom: "tinh", ten: "Trang chữ", o: ["seo"], mac_dinh: { chu: bang } }],
+    mau: [{ mau_duong: `${nd}/xem-ngay/{ngay}`, nhom: "cong_cu_con", ten: "Ngày", bien: ["ngay"], o: ["khoi_tren"], nguon_kb: {},
+      mac_dinh: { chu: { "dau.nhan_tren": { nhan: "Nhỏ", mac_dinh: "Ngày {ngay}" } } } }],
+  });
+  await dongBoSoTrang(payload, { trang: [...soTrang("Công cụ đổi tên").trang, ...so.trang], mau: [...soTrang("x").mau, ...so.mau] });
+  await ghiTao();
+  const d = await timTrang(`${nd}/chu-trang`);
+  const r = await payload.update({ collection: "noi-dung-trang", id: d.id, user: chuBien, overrideAccess: false, draft: true,
+    data: { chu: { "dau.chip_1": "<b>Nhanh</b> lắm hôm nay rồi", "so_sanh.lon": "Gốc", "khoa.la": "x" } } as never }) as unknown as { chu: Record<string, string> | null };
+  assert.deepEqual(r.chu, { "dau.chip_1": "Nhanh lắm hô" });
+  await nem(() => payload.update({ collection: "noi-dung-trang", id: d.id, user: chuBien, overrideAccess: false,
+    data: { chu: { "so_sanh.lon": "Gọi 0912 345 678" }, _status: "published" } as never }), /Chưa xuất bản được.*điện thoại/);
+  const cu = process.env.ENGINE_URL; delete process.env.ENGINE_URL;
+  try {
+    const g = await payload.create({ collection: "noi-dung-trang", user: chuBien, overrideAccess: false, draft: true,
+      data: { duong: `${nd}/xem-ngay/2026-10-21` } as never }) as unknown as { id: number; nhom: string; mac_dinh: { chu: Record<string, unknown> } };
+    tao.push({ collection: "noi-dung-trang", id: g.id });
+    assert.equal(g.nhom, "cong_cu_con");
+    assert.ok(g.mac_dinh.chu["dau.nhan_tren"], "ghi đè nhận bảng chữ của mẫu");
+    const u = await payload.update({ collection: "noi-dung-trang", id: g.id, user: chuBien, overrideAccess: false,
+      data: { chu: { "dau.nhan_tren": "Ngày đẹp {ngay}" }, _status: "published" } as never }) as unknown as { chu: Record<string, string> };
+    assert.equal(u.chu["dau.nhan_tren"], "Ngày đẹp {ngay}");
+  } finally { process.env.ENGINE_URL = cu; }
+});
+
 await ca("mẫu cụm: không tạo tay; biến lạ chỉ cảnh báo; cộng tác viên không đọc được hai collection", async () => {
   await nem(() => payload.create({ collection: "mau-cum", user: chuBien, overrideAccess: false, draft: true,
     data: { mau_duong: "/x/{slug}" } as never }), /đồng bộ/);

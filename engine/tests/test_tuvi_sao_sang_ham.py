@@ -41,9 +41,13 @@ def test_tom_tat_dung_nam_phai_giu_ban_trung():
 
 def test_tra_loi_co_sac_thai_sang_ham():
     out = tv.tra_loi("Chuyện tình cảm vợ chồng của tôi theo tử vi thế nào?", "tham_khao", SINH, XEM)
-    van = out["cau_tra_loi"]
-    assert "Thái Âm ở cung Phu Thê (Miếu" in van
-    assert kb.chinh_tinh("Thái Âm")["khi_sang"] in van
+    van, cu = out["cau_tra_loi"], "\n".join(out["can_cu"])
+    # Rà chung chung đợt 2: thân bài = lời đời thường theo sao × cung × SÁNG (KB đời sống); độ sáng + sắc thái
+    # kỹ thuật ở "Vì sao nói vậy".
+    assert "Thái Âm ở cung Phu Thê (Miếu" in cu and kb.chinh_tinh("Thái Âm")["khi_sang"] in cu
+    from app.kb import tuvi_doi_song_kb as kds
+    assert kds.sao_linh_vuc("Thái Âm", "Phu Thê", "sang")["manh"] in van
+    assert "Thái Âm" not in van
     assert hoi_van.kiem_tra_dau_ra(van, out["bang_chung"]) == []
 
 
@@ -55,8 +59,10 @@ def test_sao_ham_dung_khi_ham():
 
 
 def test_api_an_sao_chinh_tinh_kem_giai_nghia():
-    """Thẻ chi tiết cung cần lời giải nghĩa: tính chất sao + sắc thái theo độ sáng Nam phái."""
+    """Thẻ chi tiết cung: lời đời thường theo sao × CUNG × sáng/hãm Nam phái (KB đời sống) + một việc nên làm;
+    tính chất sao + sắc thái sáng/hãm (thuật ngữ) ở `can_cu` — rà chung chung đợt 2."""
     from fastapi.testclient import TestClient
+    from app.kb import tuvi_doi_song_kb as kds
     from app.main import app
     d = TestClient(app).post("/v1/tuvi/an-sao", json={"birth_date": "1990-05-17", "birth_time": "12:30",
                                                        "gender": "nam", "noi_sinh": "ha-noi"}).json()
@@ -64,6 +70,12 @@ def test_api_an_sao_chinh_tinh_kem_giai_nghia():
         for s in c["chinh_tinh"]:
             g = s["giai_nghia"]
             ct = kb.chinh_tinh(s["ten"])
-            assert g["tinh_chat"] == ct["tinh_chat"]
-            nhom = kb.nhom_do_sang(s["do_sang_nam_phai"])
-            assert g.get("sac_thai") == (ct["khi_sang" if nhom == "sang" else "khi_ham"] if nhom else None)
+            nhom = "ham" if s["do_sang_nam_phai"] == "Hãm" else "sang"
+            k = kds.sao_linh_vuc(s["ten"], c["ten"], nhom)
+            assert k["manh"] in g["thuong_thay"] and k["de_vap"] in g["thuong_thay"]
+            assert g["nen_lam"] == k["loi_khuyen"]
+            assert s["ten"] not in g["thuong_thay"] + g["nen_lam"]
+            assert any(ct["tinh_chat"] in x for x in g["can_cu"])
+            sac = kb.nhom_do_sang(s["do_sang_nam_phai"])
+            if sac:
+                assert ct["khi_sang" if sac == "sang" else "khi_ham"] in g["can_cu"]

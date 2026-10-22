@@ -22,7 +22,7 @@ export function ThangNayNha() {
   const nha = useHoSoNha();
   const [kq, setKq] = useState<ThangNay | null>(null);
   const than = nhaTuHoSo(nha);
-  // API thang-nay không nhận `theo` (cửa / ban công chỉ dùng cho bài đọc đầy đủ) — gửi thừa bị từ chối, thẻ không hiện.
+  // Route thang-nay không nhận `theo` (chỉ là ghi chú cách đo) → bỏ trước khi gửi.
   const khoa = than ? JSON.stringify({ ...than, theo: undefined }) : "";
   useEffect(() => {
     if (!khoa) { setKq(null); return; }

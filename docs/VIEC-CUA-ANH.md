@@ -440,6 +440,19 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
      nháp trống ở URL mới) thì xoá nháp trống ở URL mới, đổi đường dẫn dòng cũ sang URL mới.
   3) Nếu đã tự sửa **Menu đầu trang / Điều hướng chân trang** trong CMS: đổi link `/huong-xau-nam` → `/phong-thuy/huong-xau-nam`,
      `/la-so-mau` → `/tu-vi/la-so-mau`, `/kien-thuc/…` → link mới (link cũ vẫn chạy nhờ 308 nhưng nên trỏ thẳng).
+- [ ] ND7. (2026-10-22, ND-7 "Chữ trên trang") Sau khi PR merge, CMS redeploy tự chạy migration `nd_7_chu_tren_trang`
+  (không cần biến mới). Thử ~5 phút:
+  1) CMS → **Giao diện website → Trang website** → bấm **"Đồng bộ ngay"** (mang bảng chữ mới sang CMS + 6 mẫu cụm mới).
+  2) Mở trang `/` → tab **"Chữ trên trang"**: mỗi dòng có chữ gốc + ô gõ chữ mới (vd sửa chip "30 giây · không cần tài
+     khoản", 9 câu "Điểm mù", từng hàng bảng so sánh, thẻ 4 mảng) → **Xuất bản** → hieuban.com đổi sau vài giây. Để trống =
+     chữ gốc; `*chữ*` = đoạn nhấn (vd tiêu đề `Bạn là *số mấy?*` giữ màu vàng); giữ nguyên `{ngay}`, `{ten}`… nếu có.
+  3) Trang công cụ (`/than-so`, `/tu-vi`…): tab "Chữ trên trang" sửa dòng nhỏ trên tiêu đề, tiêu đề các mục, "Hỏi đáp cùng AI",
+     "Kiến thức {mảng}", "Về công cụ {ten}".
+  4) **Mẫu cụm trang** → "Xem ngày tốt · trang ngày" (và tháng, tuổi làm nhà, xông đất, hướng xấu năm): đổi tiêu đề cho cả
+     cụm, thêm khối (banner, ảnh, video…). Riêng một ngày/năm: Trang website → Tạo mới → nhập đường dẫn (vd `/xem-ngay-tot/2027-02-17`).
+  5) Tên + mô tả thẻ chủ đề ở `/kien-thuc`: sửa **H1 / Lời dẫn** của chính trang chủ đề (vd `/tu-vi/sao-o-cung`).
+  Còn trong code (đợt 2): hình chính trang chủ, biểu tượng mảng, ảnh chia sẻ mặc định, xem trước bản nháp, chữ nhỏ trong
+  công cụ (nút, thông báo lỗi). Ảnh tải lên chỉ lưu lâu dài khi đã làm **CMS1** (bucket `cms-media`).
 - [ ] ND45. (2026-10-19, ND-4/ND-5) Sau khi PR merge, CMS redeploy tự chạy migration `nd_4_5_anh_phap_ly`. Thử ~5 phút:
   1) **Trang pháp lý** (Trang website → `/dieu-khoan`…): sửa Mục / ngày hiệu lực → chọn "Thay đổi nội dung" + ngày mới
      → **tích ô "Tôi đã đối chiếu…"** → Xuất bản. Ô tự bỏ tích sau mỗi lần xuất bản (lần sau xác nhận lại). Đổi nội dung
@@ -610,7 +623,7 @@ xuất sửa thẻ chia sẻ / lời mời. Thưởng Sao khi mời bạn **cầ
 luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoài. Thiếu phần này thì **không** bật bán Sao dù đã qua Gate 2.
 
 ## TV-V2. Nâng cấp Tử vi (2026-10-19)
-- [ ] Sau khi PR TV-V2 merge + Render deploy engine: mở `/tu-vi`, thử 4 khối mới (Đường bay tứ hoá, 3 tháng tới, Định giờ sinh, Hợp tham) với lá số của anh.
+- [ ] Sau khi PR TV-V2 merge + Render deploy engine: mở `/tu-vi`, thử 4 khối mới (Đường bay tứ hoá, 3 tháng tới, Định giờ sinh, Xem lá số 2 người — nay có điểm tham khảo hợp – khắc) với lá số của anh.
 - [x] Quyết: lưu "Không biết giờ" vào tài khoản — **đã chốt: lưu** (migration 0015 nới `do_tin_gio` nhận `unknown`).
 - [x] Quyết: định giờ hiện khoảng giờ theo **giờ đồng hồ** nơi sinh (kèm dòng "theo giờ lịch" khi lệch) — **đã chốt**; chế độ 12 canh: Tý = 00:00–00:59 ngày đã nhập, nhập 23:xx thì thêm ứng viên "Giờ Tý muộn" — **đã chốt**.
 - [ ] Chạy migration `supabase/migrations/0015_do_tin_gio_unknown.sql` trên Supabase → SQL Editor (sau 0007). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0015). Chưa chạy thì web vẫn lưu được, chỉ là "Không biết giờ" lưu như chưa có giờ.
@@ -622,6 +635,23 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
 - [ ] Cập nhật Chính sách quyền riêng tư: bài luận lưu (12 tháng, chỉ khi bấm Lưu/bật Tự lưu), phiếu "Đúng với mình" (24 tháng, khoá ẩn danh), câu hỏi đã lọc lưu khi người dùng chọn chủ đề / xác nhận "đúng ý tôi hỏi".
 - [ ] Deploy engine Render rồi mở `/tu-vi` → "Luận giải toàn bộ" với lá số của anh, đọc thử 12 chương.
 - [ ] Quyết (khi rảnh): Mệnh vô chính diệu gặp Tuần/Triệt — Nam phái thường coi là tốt, hiện bài vẫn ghi "việc đến chậm". Giữ hay đổi?
+
+## Phiên 2026-10-21 — Xem lá số 2 người, 3 tháng tới, Bát tự đời sống, thẻ chia sẻ QR, CTA cuối trang, Vận hạn
+Việc kỹ thuật đã xong trên nhánh `claude/confident-heisenberg-08dtom` (chi tiết: các dòng HN-2N, NHIP-2, BT-ĐS, TCS-1,
+CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
+- [ ] Sau khi merge + Render deploy engine (ENGINE_VERSION 0.1.5): mở `/tu-vi` và `/bat-tu` với lá số của anh — đọc
+  "Xem lá số 2 người" (điểm tham khảo), "3 tháng tới", luận giải toàn bộ (chương mới "Vận hạn & điều nên tránh"),
+  khối "Điều ngày sinh còn kể về bạn" cuối trang; thử tạo thẻ "5 mảnh ghép làm nên tôi" + trò đoán số trên điện thoại.
+- [ ] Quyết: thêm loại kiểm chứng `hai_nguoi` (migration nhỏ sau 0017) để bật nút "Đúng với mình" cho phần 2 người.
+- [ ] Quyết: Tử vi "3 tháng tới" — Kỵ tháng rơi THẲNG vào Mệnh / Tài Bạch / Quan Lộc hiện vẫn xếp "Bình" (hộp "Nên để ý"
+  đã nhắc). Đổi thành "Cần thận trọng"? (đổi mức + mã kiểm chứng của nhiều tháng).
+- [ ] Quyết 4 ý tưởng nạp Sao cần migration (`docs/MUC-TIEU-TANG-TRUONG.md`): tặng bạn một chương đã mở · thưởng Sao
+  chuỗi ngày ghé · thưởng mời gắn lần nạp đầu · gói Sao theo dịp.
+- [ ] Quyết (khi rảnh): Bát tự — mốc đại vận hai cách dụng thần đọc khác nhau, cho người dùng bấm "cách nào đúng với
+  mình" (đếm trên máy, như "Phái nào nói đúng" của thần số)?
+- [ ] Người rành Tử Bình duyệt bảng hỷ/kỵ theo cách cục (`battu_doi_song_kb.json`, mục `cach.*`) — nháp AI.
+- [ ] Nhờ luật sư rà thêm: điểm "Xem lá số 2 người" ghi rõ là tham khảo; chương Vận hạn dùng "Nên tránh / Nên làm",
+  không doạ, không vật phẩm.
 
 ## PT-KD-ĐS. Nâng cấp Phong thuỷ + Kinh Dịch (2026-10-21, `docs/NANG-CAP-PHONG-THUY-KINH-DICH.md`)
 
@@ -637,7 +667,7 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
 - [ ] **Chạy migration 0018** `supabase/migrations/0018_ho_so_nha_nhac_viec.sql` (rollback `.down.sql`): bảng `ho_so_nha` (lưu nhà
   vào tài khoản) + `nhac_viec` (mốc nhắc trong tài khoản). Chưa chạy thì hai nút "Lưu nhà vào tài khoản" / "cả trên tài khoản" báo
   "máy chủ chưa bật" — mọi thứ khác vẫn chạy trên máy người dùng.
-- [x] **Web Push**: anh duyệt GĐ1 (2026-10-21) — em đã làm, việc của anh ở mục **WP** ngay dưới.
+- [x] **Web Push**: anh duyệt GĐ1 (2026-10-21) — em đã làm (PR #112), việc của anh ở mục **WP** cuối file.
 - [ ] **Bật thu Sao theo mảng**: đọc `docs/Y-TUONG-VIRAL-VA-NAP-SAO.md` mục C.1 — hiện công tắc `luan_giai.thu_sao` là chung; anh
   chốt có tách theo mảng (Bản đồ con số + Tử vi trước) không, em làm công tắc ở /quan-tri/cai-dat.
 - [ ] Sau khi merge: mở `/hom-nay` sau khi đã đo hướng nhà ở `/phong-thuy` → thấy thẻ "Tháng này nhà bạn"; cuối mỗi bài đọc có khối
@@ -661,4 +691,3 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
   đăng nhập → Hôm nay → Bật nhắc. (Safari thường không có nút — đúng như thiết kế, trang sẽ hiện hướng dẫn 2 bước.)
 - [ ] **WP6. Luật sư rà** dòng mới trong Chính sách quyền riêng tư (mục dữ liệu + bên xử lý: dịch vụ thông báo của trình duyệt),
   ngày hiệu lực đã đổi 21/10/2026. Nếu anh đã sửa trang này trong CMS thì thêm hai dòng đó ở CMS (CMS thắng code).
-

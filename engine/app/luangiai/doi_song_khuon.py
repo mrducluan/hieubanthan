@@ -12,7 +12,7 @@ from __future__ import annotations
 import re
 
 PHIEN_BAN = "doi_song_1"
-NHAN_MUC = {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần chủ động"}
+NHAN_MUC = {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần lưu ý"}
 LOAI_HOP = ("cot_loi", "diem_manh", "luu_y", "loi_khuyen", "thoi_diem")
 _MA = re.compile(r"[^a-z0-9_+-]")
 

@@ -97,6 +97,22 @@
   /* Nhãn Hoàng đạo: viền vàng phát sáng nhẹ (nhịp thở chậm, tắt khi giảm chuyển động). */
   .nhan-sang { box-shadow: 0 0 0 1px rgb(var(--gold) / 0.5), 0 0 22px -4px rgb(var(--gold) / 0.55); }
   @media (prefers-reduced-motion: no-preference) { .nhan-sang { animation: tho-sang 4.5s ease-in-out infinite; } }
+  /* CTA-1: nút chia sẻ có viền sáng chạy quanh (nền đặc phủ giữa, dải vàng xoay phía sau). Giảm chuyển động → viền
+     vàng tĩnh, vẫn nổi bật. */
+  .vien-chay { position: relative; isolation: isolate; overflow: hidden; background: rgb(var(--gold) / 0.55); }
+  .vien-chay::before {
+    content: ""; position: absolute; inset: -250%; z-index: -2; pointer-events: none;
+    background: conic-gradient(from 0deg, transparent 0 62%, rgb(var(--gold)) 80%, rgb(255 244 214) 86%, transparent 94%);
+  }
+  .vien-chay::after { content: ""; position: absolute; inset: 1.5px; z-index: -1; border-radius: inherit; background: rgb(var(--surface)); }
+  @media (prefers-reduced-motion: no-preference) {
+    .vien-chay::before { animation: vien-quay 3.2s linear infinite; }
+    .vien-chay:hover::after { background: rgb(var(--surface-2)); }
+  }
+  /* CTA-1: trò "Đoán số" — lật thẻ (mặt sau xoay 180°), sao lấp lánh khi đoán đúng. */
+  .lat-3d { perspective: 900px; }
+  .lat-mat { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  @media (prefers-reduced-motion: no-preference) { .lap-lanh { animation: lap-lanh 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; } }
   /* UX-2: thẻ bấm được (link dạng .glass) — nhấc nhẹ + quầng vàng khi rê chuột, nhún khi chạm. */
   a.glass {
     transition-property: transform, box-shadow, border-color, color, background-color;
@@ -191,6 +207,8 @@
 .la-so g[role="button"]:focus-visible > rect:first-child { stroke: var(--ls-nhan); stroke-width: 3; }
 
 @keyframes sao-troi { to { transform: translateY(300px); } }
+@keyframes vien-quay { to { transform: rotate(360deg); } }
+@keyframes lap-lanh { 0% { opacity: 0; transform: translate(0, 0) scale(0.2); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1); } }
 @keyframes hien-dan { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @keyframes tho-sang { 50% { box-shadow: 0 0 0 1px rgb(var(--gold) / 0.7), 0 0 34px -2px rgb(var(--gold) / 0.7); } }
 @keyframes net-ve { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
@@ -219,6 +237,20 @@
 .cham-muc { --muc: 170 180 214; background: rgb(var(--muc)); }
 :is(.chip-muc, .cham-muc)[data-muc="thuan"] { --muc: 111 211 181; }
 :is(.chip-muc, .cham-muc)[data-muc="can_chu_dong"] { --muc: 245 170 80; }
+/* VH-1 — dòng 10 năm của chương Vận hạn (components/luan-giai/DongMuoiNam): lục = thuận lợi · vàng = cân bằng ·
+   hổ phách = cần lưu ý (không dùng đỏ). Giấy cổ dùng tông đậm cho nền sáng. */
+:root { --vh-thuan: 111 211 181; --vh-bang: 233 196 106; --vh-can: 240 140 60; }
+.la-so-giay { --vh-thuan: 27 116 58; --vh-bang: 150 110 10; --vh-can: 165 75 10; }
+.cham-vh { background: rgb(var(--vh-bang)); }
+.cham-vh[data-muc="thuan"] { background: rgb(var(--vh-thuan)); }
+.cham-vh[data-muc="can_chu_dong"] { background: rgb(var(--vh-can)); }
+/* BT-ĐS — màu ngũ hành cho biểu đồ năng lượng trong Luận giải Bát tự (ngoài khung lá số, cùng tông `.la-so-dem`). */
+.bd-hanh { --hanh: 170 180 214; }
+.bd-hanh[data-hanh="kim"] { --hanh: 214 211 230; }
+.bd-hanh[data-hanh="moc"] { --hanh: 111 211 160; }
+.bd-hanh[data-hanh="thuy"] { --hanh: 126 172 255; }
+.bd-hanh[data-hanh="hoa"] { --hanh: 242 128 104; }
+.bd-hanh[data-hanh="tho"] { --hanh: 233 196 106; }
 .la-so-giay .hop-nb[data-loai="cot_loi"] { --hop: 139 91 16; }
 .la-so-giay .hop-nb[data-loai="diem_manh"] { --hop: 27 116 58; }
 .la-so-giay .hop-nb[data-loai="luu_y"] { --hop: 150 80 10; }
@@ -233,6 +265,32 @@
   .hop-nb .hop-nhan, .hop-nb .hop-icon, .hop-nb * { color: #000 !important; }
   .chip-muc { color: #000 !important; border-color: #000 !important; background: #fff !important; }
   .cham-muc { background: #000 !important; }
+  .cham-vh { background: #000 !important; }
+  .cham-vh[data-muc="thuan"] { background: #fff !important; border: 1px solid #000; }
   .bao-cao-ds { color: #000; }
   .bao-cao-ds :where(p, li, h2, h3, h4, span, b) { color: #000 !important; }
 }
+
+/* TC-HOOK — trang chủ. (1) Dòng "điểm mù" ở hero: 9 câu xếp chồng, mỗi câu hiện 3 giây (27 giây một vòng). Không
+   chuyển động → chỉ câu đầu hiện (luật reduced-motion phía trên tắt animation, opacity nền giữ nguyên).
+   (2) Bảng so sánh: hàng hiện lần lượt khi cuộn tới (HienKhiThay gắn data-cho/data-hien; không JS → hiện sẵn). */
+.diem-mu-luot > li { position: absolute; inset: 0; opacity: 0; }
+.diem-mu-luot > li:first-child { opacity: 1; }
+.quet-sang { position: relative; overflow: hidden; }
+.quet-sang::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; transform: translateX(-110%);
+  background: linear-gradient(100deg, transparent 30%, rgb(255 236 190 / 0.16) 50%, transparent 70%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .diem-mu-luot > li { animation: diem-mu-luot 27s ease-in-out infinite both; }
+  .quet-sang::after { animation: quet-sang 6s ease-in-out infinite 1s; }
+  [data-cho]:not([data-hien]) .hien-tung { opacity: 0; }
+  [data-hien] .hien-tung { animation: hien-dan 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 110ms); }
+  [data-hien] .dau-nay { animation: so-hien 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 110ms + 300ms); }
+}
+@keyframes diem-mu-luot {
+  0% { opacity: 0; transform: translateY(8px); }
+  2%, 10% { opacity: 1; transform: none; }
+  11.5%, 100% { opacity: 0; transform: translateY(-8px); }
+}
+@keyframes quet-sang { 55%, 100% { transform: translateX(110%); } }

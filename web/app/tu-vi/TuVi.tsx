@@ -1,6 +1,7 @@
 "use client";
 // VZ-2 — trang Tử vi: lá số lớn (2 giao diện, lớp vận hạn theo năm xem) → chi tiết cung đang chọn
 // → hỏi đáp AI ở DƯỚI, chiếm hết chiều ngang (chủ dự án chốt 2026-10-01).
+import { useChu } from "@/components/cms/DauCms";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CalendarClock, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, List, Maximize2, Minimize2, Moon, Orbit, ScrollText, Waypoints } from "lucide-react";
@@ -48,6 +49,7 @@ const namNayVN = () => Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho
 
 export function TuVi() {
   const hoSo = useHoSo();
+  const c = useChu();
   // TV-PHAI (chủ dự án chốt 2026-10-02): "hiện cả hai" — Hoả/Linh lối Việt | Trung Châu; nửa sau tháng nhuận.
   const [hoaLinh, setHoaLinh] = useState<"viet" | "trung">("viet");
   const [thangNhuan, setThangNhuan] = useState<"thang_sau" | "thang_chinh">("thang_sau");
@@ -199,8 +201,8 @@ export function TuVi() {
                   onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "dinh_gio_mo" })}>
                   <DinhGioSinh laSo={laSoGoc} hoSo={hoSo} khongBietGio={khongBietGio} />
                 </KhoiMoLuoi>
-                <KhoiMoLuoi id="hop-tham" Icon={HeartHandshake} tieuDe="Hợp tham hai lá số"
-                  moTa="Năm sinh người ấy chạm vào cung nào trong lá số của bạn. Không chấm điểm hợp hay khắc."
+                <KhoiMoLuoi id="hop-tham" Icon={HeartHandshake} tieuDe="Xem lá số 2 người"
+                  moTa="Điểm tham khảo hợp – khắc theo mệnh, can chi, cung phi và tứ hoá Tử vi — kèm cách dung hoà."
                   onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "hop_tham" })}>
                   <HopThamTuVi laSo={laSoGoc} onHoi={hoi} />
                 </KhoiMoLuoi>
@@ -223,7 +225,7 @@ export function TuVi() {
       )}
 
       <section ref={chatRef} aria-label="Hỏi Tử vi" className="mt-10 scroll-mt-24">
-        <h2 className="mb-4 text-2xl sm:text-3xl">Hỏi đáp cùng AI</h2>
+        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp cùng AI"}</h2>
         <KhungChat
           moDun="tuvi"
           loiChao={laSo ? "Hỏi về một cung, một sao, hoặc hạn hiện tại của bạn." : "Hỏi kiến thức chung về cung, sao, tứ hoá — hoặc bổ sung giờ sinh để hỏi về lá số của bạn."}

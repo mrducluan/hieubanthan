@@ -19,7 +19,6 @@ import { LuuNhaTaiKhoan } from "@/components/huyen-hoc/LuuNhaTaiKhoan";
 import { cn } from "@/lib/utils";
 import { GoiMoCheo, type GoiMo } from "@/components/khung/GoiMoCheo";
 import { NhacToi } from "@/components/khung/NhacToi";
-import { maKhongDau } from "@/lib/nhac-viec";
 
 type Sinh = { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
 interface ThanhVien { vai: "vo" | "chong" | "con" | "cha_me" | "khac"; nam: string; gioi_tinh: "nam" | "nu" }
@@ -209,7 +208,7 @@ function ChuongNha({ c, so }: { c: Chuong; so: number }) {
               <p className="font-semibold">Tháng {t.chi_thang} · {t.nhan_muc}{t.tu_ngay ? <span className="font-normal opacity-70"> · từ {Number(t.tu_ngay.slice(8, 10))}/{Number(t.tu_ngay.slice(5, 7))}</span> : null}</p>
               <p className="text-xs opacity-80">{t.y}</p>
               {t.muc === "thuan" && t.tu_ngay && (
-                <NhacToi className="mt-1.5" ngay={t.tu_ngay} ma={`pt.thang.${maKhongDau(t.chi_thang)}`} moDun="phongthuy"
+                <NhacToi className="mt-1.5" ngay={t.tu_ngay} ma={`pt.thang.${t.chi_thang.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/gi, "d").toLowerCase()}`} moDun="phongthuy"
                   nhan={`Tháng ${t.chi_thang} — tháng thuận sửa sang, kê lại phía cửa`} duong="/phong-thuy#nha-cua-ban" />
               )}
             </div>

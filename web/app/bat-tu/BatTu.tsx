@@ -1,6 +1,7 @@
 "use client";
 // VZ-3 — trang Bát tự: bảng tứ trụ → vòng địa chi + ngũ giác ngũ hành → dụng thần → đại vận/lưu niên
 // → hỏi đáp AI ở DƯỚI (chủ dự án chốt 2026-10-01). Hai giao diện dùng chung với lá số Tử vi.
+import { useChu } from "@/components/cms/DauCms";
 import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Download, Layers, Moon, ScrollText } from "lucide-react";
 import { KhungChat } from "@/components/hoi/KhungChat";
@@ -39,6 +40,7 @@ const namNayVN = () => Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho
 
 export function BatTu() {
   const hoSo = useHoSo();
+  const c = useChu();
   const [gioTy, setGioTy] = useState<"da_ty" | "sang_ngay">("da_ty");
   const goc = laSoTuHoSo(hoSo);
   // TP-LICH: lựa chọn giờ Tý đi theo mọi lời gọi (tứ trụ, lưu niên, hỏi đáp, luận giải) — engine tính lại.
@@ -161,7 +163,7 @@ export function BatTu() {
       )}
 
       <section ref={chatRef} aria-label="Hỏi Bát tự" className="mt-10 scroll-mt-24">
-        <h2 className="mb-4 text-2xl sm:text-3xl">Hỏi đáp cùng AI</h2>
+        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp cùng AI"}</h2>
         <KhungChat
           moDun="battu"
           loiChao={laSo ? "Hỏi về dụng thần, ngũ hành, đại vận hay một năm cụ thể." : "Hỏi kiến thức chung về nhật chủ, thập thần — hoặc bổ sung giờ sinh để hỏi về tứ trụ của bạn."}

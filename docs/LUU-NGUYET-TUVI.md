@@ -22,7 +22,9 @@ Chi đánh số Tý = 0 … Hợi = 11. "Thuận" là chiều kim đồng hồ t
 Từ tháng Giêng, các tháng sau đi **thuận**, mỗi tháng một cung.
 
 **Tháng nhuận** theo lựa chọn `thang_nhuan` đã có, áp cho cả tháng sinh và tháng xem:
-- `thang_sau` (mặc định, giống iztro): ngày 1–15 tính như tháng chính, ngày 16 trở đi tính tháng sau.
+- `thang_sau` (mặc định, giống iztro): ngày 1–15 tính như tháng chính, ngày 16 trở đi tính tháng sau — **cả cung
+  tháng lẫn can chi tháng** (nên tứ hoá tháng cũng là của tháng sau). Sửa 2026-10-21 (NHIP-2): trước đó nửa sau đếm
+  cung như tháng sau nhưng giữ can chi tháng nhuận → tứ hoá tháng lệch iztro 80/80 ca xem ngày 16+ tháng nhuận.
 - `thang_chinh`: cả tháng nhuận tính như tháng chính.
 
 **Tứ hoá tháng** theo can tháng (Ngũ hổ độn), dùng bảng giống iztro. Can Canh và Nhâm giữ theo iztro, như quyết định 2026-10-02.
@@ -46,6 +48,7 @@ Thứ tự ưu tiên khi các lớp mâu thuẫn: đại hạn > lưu niên > ti
 |---|---|
 | Công thức Đẩu Quân so với iztro 2.6.0 (MIT): 40 lá × 17 ngày xem. Có sinh/xem trong tháng nhuận nửa đầu và nửa sau, có sinh Tý muộn, có đủ 12 tháng. | **680/680 khớp** (`fixtures/golden/luu_nguyet_iztro.json`) |
 | Tứ hoá theo can tháng so với iztro, đủ 10 can | Khớp |
+| Can chi tháng của ngày xem (gồm 80 ca nửa đầu + 80 ca nửa sau tháng nhuận) so với iztro | **680/680** sau sửa 2026-10-21 (trước: 600/680) |
 | Lưu niên = cung chi năm xem, đối chiếu iztro | 680/680 |
 | Ca tay: nam 17/05/1990 giờ Ngọ, năm Bính Ngọ. Thái Tuế Ngọ, nghịch 3 → Mão, thuận 6 → Dậu (Phu Thê). Tháng Giêng Canh Dần → Thái Âm hoá Khoa tại Phu Thê. | Đúng |
 | Mỗi phái tính đúng công thức của phái đó trên toàn bộ 12 tháng | 5/5 phái |

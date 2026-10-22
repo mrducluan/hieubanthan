@@ -22,6 +22,7 @@ from app.calc import can_chi, dia_ly, lunar, tuvi_cach_cuc, tuvi_do_sang_vn, tim
 from app.calc import tuvi_luu_nguyet as calc_luu_nguyet
 from app.hoidap import tuvi as hoidap_tv
 from app.luangiai import tuvi_luu_nguyet as luan_luu_nguyet
+from app.luangiai import tuvi_the_cung as the_cung
 from app import nhat_ky
 from app.kb import tuvi_kb
 from app.config import ENGINE_VERSION, HourConfidence, Region
@@ -262,14 +263,10 @@ def _phu(s: dict) -> dict:
     return {**_sao(s), "loai": s["type"]}
 
 
-def _giai_nghia_sao(ten: str, do_sang: str | None) -> dict | None:
-    """Lời đời thường cho thẻ chi tiết cung: tính chất sao + sắc thái khi sáng/hãm (KB, Nam phái)."""
-    ct = tuvi_kb.chinh_tinh(ten)
-    if not ct:
-        return None
-    nhom = tuvi_kb.nhom_do_sang(do_sang)
-    return {"tinh_chat": ct["tinh_chat"],
-            "sac_thai": ct["khi_sang" if nhom == "sang" else "khi_ham"] if nhom else None}
+def _giai_nghia_sao(ten: str, do_sang: str | None, cung: str) -> dict | None:
+    """Lời đời thường cho thẻ chi tiết cung: điều thường thấy ở bạn + một việc nên làm, theo sao × cung × sáng/hãm
+    (Nam phái); tên sao, độ sáng, tính chất sao ở `can_cu` (rà chung chung đợt 2)."""
+    return the_cung.loi_sao_cung(ten, cung, do_sang)
 
 
 def _do_sang_phu(p: dict) -> dict[str, str]:
@@ -353,7 +350,7 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             "la_menh": p["name"] == "Mệnh", "la_than": p["isBodyPalace"],
             "la_lai_nhan": p["isOriginalPalace"],
             "chinh_tinh": [{**_sao(x), "do_sang_nam_phai": (ds := tuvi_do_sang_vn.do_sang(x["name"], p["earthlyBranch"])),
-                            "giai_nghia": _giai_nghia_sao(x["name"], ds)}
+                            "giai_nghia": _giai_nghia_sao(x["name"], ds, p["name"])}
                            for x in p["majorStars"]],
             "phu_tinh": [{**_phu(x), "do_sang_nam_phai": tuvi_do_sang_vn.do_sang_phu(x["name"], p["earthlyBranch"])}
                          for x in p["minorStars"]],
@@ -488,7 +485,7 @@ class LuanGiaiInput(BaseModel):
     la_so: TuanTrietInput
     ngay_xem: _dt.date | None = None
     # SAO-2: bản xem trước khi thu Sao — chỉ diễn đạt AI N chương đầu (web cắt phần còn lại).
-    dien_dat_toi_da: int | None = Field(default=None, ge=0, le=12)
+    dien_dat_toi_da: int | None = Field(default=None, ge=0, le=13)
     # LG-ĐS tầng HỌC: bảng tỉ lệ "thấy đúng" công khai theo mã mẫu (web lấy từ Supabase, ≥ 30 phiếu) và phiếu của
     # chính người đang xem. Chỉ xếp lại / hạ hộp, không sinh câu mới.
     trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)

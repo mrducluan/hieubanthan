@@ -382,4 +382,36 @@ Anh duyệt **phương án 2 theo bản điều chỉnh** sau (thay các điểm
 | ND-3 | xong (2026-10-14) | /, /kham-pha, /kien-thuc, /la-so-mau, /tu-dien, /phong-thuy/huong-hop-tuoi, /blog, 15 chủ đề; /gioi-thieu, /lien-he sửa mục theo neo (`gopMucCms`). |
 | ND-4 | xong (2026-10-19) | 3 trang pháp lý: SEO, H1, lời mở đầu, mục theo neo, ngày hiệu lực (`ngayHienThi`); ô `da_doi_chieu_phap_ly` bắt buộc mỗi lần xuất bản; không khối. |
 | ND-5 | xong (2026-10-19) | ~600 trang KB: khối mẫu cụm + ghi đè (`che_do_mau`), biến chữ thuần (`thayBien` không thoát HTML nữa), `.md` có chữ khối (`mdKhoi`); khối mới **Ảnh**; mục văn bản cho chèn ảnh. Migration `20261019_032830_nd_4_5_anh_phap_ly`. |
-| ND-6 | chưa | xem trước nháp mọi URL (link HMAC `trang:` + draft mode), thẻ quản trị "trang có nội dung CMS". |
+| ND-6 | chưa | xem trước nháp mọi URL (link HMAC `trang:` + draft mode), thẻ quản trị "trang có nội dung CMS". Làm cùng ND-7 đợt 2. |
+| ND-7 đợt 1 | xong (2026-10-22) | "Chữ trên trang" (mục 10): trang chủ, /kham-pha, /kien-thuc, 11 trang công cụ, 6 cụm trang con (xem ngày tốt theo ngày/tháng, tuổi làm nhà, xông đất, hướng xấu năm, tác giả); thẻ chủ đề theo H1/lời dẫn trang chủ đề; sửa khối cuối trang tác giả; xoá mẫu cụm làm mới web ngay. Migration `20261021_235710_nd_7_chu_tren_trang`. |
+| ND-7 đợt 2 | chưa | "Hình trên trang" (hình chính trang chủ, biểu tượng mảng, ảnh chia sẻ mặc định + theo cụm) + xem trước nháp (ND-6) + chữ nhỏ trong công cụ (nút, thông báo lỗi). |
+
+## 10. ND-7 — "Chữ trên trang" (chủ dự án duyệt 2026-10-21)
+
+**Vấn đề (audit 2026-10-21):** CMS mới sửa được "khung" (SEO, H1, lời dẫn, giới thiệu, hỏi đáp, khối, mục) — mọi chữ còn lại
+(chip, tiêu đề mục, bảng so sánh, thẻ mảng, nhãn trong công cụ…) cứng trong code; ~400 trang con theo ngày/năm chưa có trong
+CMS; trang tác giả khai ô "Khối cuối" mà web không hiện.
+
+**Cách làm:** mỗi đoạn chữ cố định của trang có KHOÁ + chữ mặc định trong **bảng chữ** của trang (`web/lib/chu/*.ts` — nguồn
+duy nhất, trang đọc chữ qua bảng: `taoChu(bang, nd.chu)` ở máy chủ, `useChu()` trong công cụ client qua `DauCms`). Sổ trang
+gửi bảng cho CMS (`mac_dinh.chu`); CMS có tab **"Chữ trên trang"** (`cms/src/components/ChuTrenTrang.tsx`): mỗi dòng = chữ gốc
+(chỉ đọc) + ô gõ chữ thay + bộ đếm + "Về chữ gốc", lưu ô json `chu` = { khoá: chữ }. Để trống = chữ gốc.
+
+| Quy tắc | Chi tiết |
+|---|---|
+| Chữ thuần | CMS bỏ thẻ HTML, gộp dòng, cắt theo giới hạn từng khoá, bỏ khoá lạ (`locChuCms`); web lọc lại lần hai (`locChu`). |
+| Nhấn | `*đoạn*` → đoạn nhấn (màu/đậm do chỗ đặt quyết định — vd H1 trang chủ vàng nghiêng, lời dẫn đỏ son). |
+| Biến | `{ten}`, `{ngay}`, `{nam}`… do web điền; biến lạ giữ nguyên chữ. |
+| Kiểm định | Chữ trong ô `chu` chạy cùng luật ranh giới (liên hệ gõ tay, tên nội bộ BM-1, "đã thẩm định"…) → chặn xuất bản. |
+| Mẫu cụm | Cụm có bảng chữ riêng (vd tiêu đề "Ngày {ngay} tốt hay xấu?" cho mọi trang ngày); ghi đè một URL nhận bảng của cụm, chữ URL thắng chữ cụm. |
+| Ngoài phạm vi | Kết quả engine, chữ kho tri thức (sửa ở `/quan-tri/tri-thuc`), hồ sơ chuyên gia (E-E-A-T, PR `lib/chuyen-gia.ts`), thông tin đơn vị (env), tiêu đề trình duyệt + mô tả SEO của trang con theo ngày/năm. |
+
+**Thêm chữ cứng mới vào một trang:** thêm khoá vào bảng chữ của trang → đọc bằng `c("khoá")` → đồng bộ CMS tự hiện dòng mới.
+Trang công khai mới: khai trong `SO_TRANG` hoặc `MAU_CUM` (`e2e/noi-dung-trang.spec.ts` đọc `/sitemap.xml`, sót URL là đỏ).
+
+**Nhóm mới `cong_cu_con`** (ghi đè, không có kho tri thức): `/xem-ngay-tot/thang-{thang}-{nam}`, `/xem-ngay-tot/{ngay}`,
+`/xem-tuoi-lam-nha/{nam}/tuoi-{nam_sinh}`, `/tuoi-xong-dat/{nam}/tuoi-{nam_sinh}`, `/phong-thuy/huong-xau-nam/{nam}`,
+`/tac-gia/{slug}` (chỉ khối cuối).
+
+**Thẻ chủ đề:** tên + mô tả thẻ ở `/kien-thuc` và khối "Kiến thức {mảng}" của trang công cụ lấy theo H1 + lời dẫn đã xuất bản
+của chính trang chủ đề (`layDauNhieuTrang`, một lần gọi CMS) — sửa một chỗ, mọi thẻ đổi theo.

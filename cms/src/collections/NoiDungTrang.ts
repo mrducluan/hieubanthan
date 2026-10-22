@@ -15,6 +15,7 @@ import { laChuBien, laCongTacVien, laNguoiViet, laNoiBo } from "../access";
 import { KHOI_TRANG, truongKieuChu, VI_TRI_KHOI } from "../blocks/trang";
 import { DUONG_TRONG_SITE, truongLienKet } from "../globals/DieuHuong";
 import { chuanHoaDuLieu } from "../kiem-dinh/kiem-dinh";
+import { bangCua, locChuCms } from "../lib/chu-trang";
 import { boChuyenHtml } from "../lib/html";
 import { coTrangKb, type NguonKb } from "../lib/kb-trang";
 import { kiemTrang } from "../lib/noi-dung-trang";
@@ -26,10 +27,12 @@ export const NHOM_TRANG = [
   { label: "Chủ đề kiến thức", value: "chu_de" }, { label: "Trang kiến thức (ghi đè)", value: "kien_thuc" },
   { label: "Tuổi hợp hướng (ghi đè)", value: "tuoi" }, { label: "Lá số mẫu (ghi đè)", value: "la_so_mau" },
   { label: "Khung blog", value: "blog_khung" },
+  // ND-7: trang con theo ngày/năm của công cụ (xem ngày tốt, tuổi làm nhà, xông đất, hướng xấu năm, tác giả) — ghi đè.
+  { label: "Trang con công cụ (ghi đè)", value: "cong_cu_con" },
 ];
 /** Ô hệ thống: chỉ job đồng bộ (hoặc hook tạo ghi đè) được ghi. */
 const HE_THONG = ["duong", "nhom", "ten", "mau", "tren_web", "o", "mac_dinh"] as const;
-const NHOM_GHI_DE = new Set(["kien_thuc", "tuoi", "la_so_mau"]);
+export const NHOM_GHI_DE = new Set(["kien_thuc", "tuoi", "la_so_mau", "cong_cu_con"]);
 
 type Doc = Record<string, unknown> & { id?: number | string; duong?: string; nhom?: string; o?: unknown; muc?: unknown;
   _status?: string; ngay_hieu_luc?: string | null; loai_sua?: string; mac_dinh?: { ngay_hieu_luc?: string } | null };
@@ -69,13 +72,14 @@ const giuHeThong: CollectionBeforeChangeHook = async ({ data, originalDoc, opera
     where: { tren_web: { equals: true } } });
   const khop = mau.docs.find((m) => regexMau(String((m as { mau_duong?: string }).mau_duong)).test(duong));
   if (!khop) throw new APIError("Chỉ tạo ghi đè cho một trang thuộc mẫu cụm có thật (vd /tu-vi/sao-o-cung/tu-vi-cung-menh). Trang công cụ, tĩnh, pháp lý, chủ đề đã có sẵn trong danh sách — bấm \"Đồng bộ ngay\" nếu chưa thấy.", 400, null, true);
-  const m = khop as unknown as { id: number; nhom: string; o?: string[]; nguon_kb?: NguonKb };
-  if (m.nguon_kb && (await coTrangKb(m.nguon_kb, duong.split("/").pop()!)) === false) {
+  const m = khop as unknown as { id: number; nhom: string; o?: string[]; nguon_kb?: NguonKb | Record<string, never>; mac_dinh?: unknown };
+  if (m.nguon_kb && "kieu" in m.nguon_kb && (await coTrangKb(m.nguon_kb as NguonKb, duong.split("/").pop()!)) === false) {
     throw new APIError(`Không có trang ${duong} trên web (engine không tìm thấy).`, 400, null, true);
   }
   const trung = await req.payload.count({ collection: "noi-dung-trang", where: { duong: { equals: duong } }, overrideAccess: true, req });
   if (trung.totalDocs) throw new APIError(`Đã có tài liệu cho ${duong} — mở tài liệu đó để sửa.`, 400, null, true);
-  Object.assign(data, { duong, nhom: m.nhom, ten: duong, mau: m.id, tren_web: true, o: m.o ?? ["khoi_tren", "khoi_duoi", "khoi_cuoi"], mac_dinh: {} });
+  Object.assign(data, { duong, nhom: m.nhom, ten: duong, mau: m.id, tren_web: true, o: m.o ?? ["khoi_tren", "khoi_duoi", "khoi_cuoi"],
+    mac_dinh: { chu: bangCua(m.mac_dinh) } });   // ND-7: ghi đè một URL được sửa chữ của cụm (bảng chữ của mẫu)
   return data;
 };
 
@@ -137,6 +141,13 @@ const xacNhanPhapLy: CollectionBeforeChangeHook = ({ data, originalDoc, req }) =
   return data;
 };
 
+/** ND-7: ô "Chữ trên trang" chỉ giữ khoá có trong bảng chữ của URL, chữ thuần, đúng giới hạn (web lọc lại khi đọc). */
+export const locChu: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
+  if (dongBo(req) || !("chu" in data)) return data;
+  data.chu = locChuCms(bangCua(data.mac_dinh ?? (originalDoc as Doc | undefined)?.mac_dinh), data.chu);
+  return data;
+};
+
 const kiemDinh: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
   if (req.context?.boQuaKiemDinh) return data;
   const d = { ...(originalDoc ?? {}), ...data } as Doc;
@@ -188,6 +199,16 @@ export const tabKhoi = (dieuKien: (d: Partial<Doc>) => boolean, voiCheDo: boolea
   ],
 });
 
+/** ND-7 — tab "Chữ trên trang": hiện khi bảng chữ của URL (mac_dinh.chu, từ sổ trang) có khoá. */
+export const tabChu = {
+  label: "Chữ trên trang",
+  admin: {
+    condition: (d: Partial<Doc>) => Object.keys(bangCua(d?.mac_dinh)).length > 0,
+    description: "Mọi đoạn chữ cố định của trang (nhãn, tiêu đề mục, nút, bảng…). Gõ chữ mới để thay; để trống = chữ gốc.",
+  },
+  fields: [{ name: "chu", label: "Chữ trên trang", type: "json", admin: { components: { Field: "/components/ChuTrenTrang#ChuTrenTrang" } } } as Field],
+};
+
 export const NoiDungTrang: CollectionConfig = {
   slug: "noi-dung-trang",
   labels: { singular: "Trang website", plural: "Trang website" },
@@ -220,7 +241,7 @@ export const NoiDungTrang: CollectionConfig = {
   },
   hooks: {
     beforeValidate: [({ data }) => (data ? chuanHoaDuLieu(data) : data)],
-    beforeChange: [giuHeThong, quyenMuc, ngayHieuLuc, xacNhanPhapLy, kiemDinh],
+    beforeChange: [giuHeThong, quyenMuc, ngayHieuLuc, xacNhanPhapLy, locChu, kiemDinh],
     afterChange: [lamMoiTrang],
     afterDelete: [lamMoiKhiXoa],
   },
@@ -255,7 +276,7 @@ export const NoiDungTrang: CollectionConfig = {
     docChi({ name: "o", label: "Ô được sửa", type: "json", admin: { hidden: true } }),
     {
       type: "ui", name: "xem_kb", label: "Nội dung kho tri thức",
-      admin: { condition: (d) => NHOM_GHI_DE.has(String(d?.nhom)), components: { Field: "/components/XemTruocKb#XemTruocKb" } },
+      admin: { condition: (d) => NHOM_GHI_DE.has(String(d?.nhom)) && d?.nhom !== "cong_cu_con", components: { Field: "/components/XemTruocKb#XemTruocKb" } },
     },
     {
       type: "tabs",
@@ -321,6 +342,7 @@ export const NoiDungTrang: CollectionConfig = {
             },
           ],
         },
+        tabChu,
         tabKhoi(choKhoi, true),
         {
           label: "Mặc định trong code",

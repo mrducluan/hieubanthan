@@ -5,6 +5,8 @@ import { ArrowRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CHUYEN_GIA, duongChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
 import { goiLd, ldDuongDan } from "@/lib/seo";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 export const metadata: Metadata = {
   title: "Đội ngũ chuyên gia",
@@ -12,8 +14,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/tac-gia" },
 };
 
-export default function Page() {
+export default async function Page() {
   const ds = Object.values(CHUYEN_GIA);
+  const nd = await layNoiDungTrang("/tac-gia");   // ND-7: CMS chỉ thêm khối cuối trang
   return (
     <div className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(...ds.map(ldNguoi), ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Đội ngũ", duong: "/tac-gia" }]))} />
@@ -37,6 +40,7 @@ export default function Page() {
           </li>
         ))}
       </ul>
+      <KhoiCms ds={nd.khoi.cuoi} duong="/tac-gia" viTri="cuoi" className="mt-10" />
     </div>
   );
 }

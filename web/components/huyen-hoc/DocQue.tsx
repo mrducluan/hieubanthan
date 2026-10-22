@@ -2,7 +2,7 @@
 // KD-ĐS — lời đọc quẻ hai tầng: tầng ĐỜI THƯỜNG (mức · kết luận · hộp nổi bật · ba nhóm việc · câu tự soi) hiện ngay;
 // tầng HỌC THUẬT (vì sao nói vậy · ba cách đọc cùng một quẻ · lời kinh nguyên văn · bản đọc đầy đủ) gập lại, bấm mới mở.
 // Component THUẦN: mọi chữ do engine dựng (`doc_que`), web không tự tính, không thêm ý.
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { BookOpen, ChevronDown, Layers, ScrollText } from "lucide-react";
 import { ChipMuc } from "@/components/luan-giai/BaoCaoDoiSong";
 import { HopNoiBat, ViSao } from "@/components/luan-giai/HopNoiBat";
@@ -14,7 +14,6 @@ import { ghi } from "@/lib/do-luong";
 import { ghiMoPhai } from "@/lib/thoi-quen-doc";
 import { GoiMoCheo, type GoiMo } from "@/components/khung/GoiMoCheo";
 import { NhacToi } from "@/components/khung/NhacToi";
-import { maKhongDau } from "@/lib/nhac-viec";
 
 export interface GocNhin { muc: Muc; nhan: string; tom_tat?: string; can_cu: string[] }
 export interface GocNhinLucHao extends GocNhin {
@@ -40,6 +39,8 @@ export interface DocQueKq {
   y_dinh_chung?: string | null; goi_mo?: GoiMo | null;
 }
 
+/** "Tuất" → "tuat" (mã nhắc chỉ a-z). */
+const maChi = (chi: string) => chi.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/gi, "d").toLowerCase();
 const TEN_PHAI: Record<string, string> = { nghia_ly: "Nghĩa Lý (lời kinh)", mai_hoa: "Mai Hoa (thể – dụng)", luc_hao: "Lục Hào (dụng thần)" };
 
 function Gap({ id, Icon, tieuDe, children, testId, onMo }: { id: string; Icon: typeof BookOpen; tieuDe: string; children: React.ReactNode; testId?: string; onMo?: () => void }) {
@@ -65,16 +66,11 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
   const [moPhai, setMoPhai] = useState<Record<string, boolean>>({});
   const gn = dq.goc_nhin;
   const cac = (["nghia_ly", "mai_hoa", "luc_hao"] as const).filter((k) => gn[k]);
-  // KC-5: tín hiệu ngầm — chạm vào cách đọc nào thì đếm trên máy (không chữ), mỗi cách đọc một lần cho mỗi quẻ; cách đọc
-  // chính đang mở sẵn nên bấm vào tiêu đề của nó (dù là đóng lại) cũng tính là quan tâm. Đo bằng mã.
-  const daDem = useRef(new Set<string>());
+  // KC-5: tín hiệu ngầm — mở cách đọc nào thì đếm trên máy (không chữ); đo bằng mã.
   const moCachDoc = (k: string) => {
     const dangMo = moPhai[k] ?? k === gn.chinh;
     setMoPhai((m) => ({ ...m, [k]: !dangMo }));
-    if ((!dangMo || k === gn.chinh) && !daDem.current.has(k)) {
-      daDem.current.add(k);
-      ghiMoPhai(k); ghi("chart_interacted", { mo_dun: "kinhdich", kind: `mo_phai:${k}` });
-    }
+    if (!dangMo) { ghiMoPhai(k); ghi("chart_interacted", { mo_dun: "kinhdich", kind: `mo_phai:${k}` }); }
   };
   const ungKy = (gn.luc_hao?.ung_ky ?? dq.ung_ky ?? []).slice(0, 3);
   return (
@@ -132,7 +128,7 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
             {ungKy.map((u) => (
               <li key={u.chi + u.ngay_gan_nhat} className="flex flex-wrap items-center gap-2">
                 <span>Ngày {u.chi} · {u.ngay_gan_nhat.slice(8, 10)}/{u.ngay_gan_nhat.slice(5, 7)} — {u.ly_do}</span>
-                <NhacToi ngay={u.ngay_gan_nhat} ma={`kd.ungky.${maKhongDau(u.chi)}`} moDun="kinhdich"
+                <NhacToi ngay={u.ngay_gan_nhat} ma={`kd.ungky.${maChi(u.chi)}`} moDun="kinhdich"
                   nhan={`Ngày ${u.chi} — mốc ứng kỳ${tenQue ? ` quẻ ${tenQue}` : ""} (${dq.chu_de.ten})`} duong="/kinh-dich" />
               </li>
             ))}

@@ -49,7 +49,8 @@ export function ViSao({ canCu, thuatNgu, nho = false }: { canCu?: string[]; thua
 
 export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: ThuatNgu[]; className?: string }) {
   const { tyLe, phai, tat } = useContext(KiemChungBai);
-  const { nhan, Icon } = LOAI_HOP[hop.loai] ?? LOAI_HOP.cot_loi;
+  const { nhan: nhanLoai, Icon } = LOAI_HOP[hop.loai] ?? LOAI_HOP.cot_loi;
+  const nhan = hop.nhan ?? nhanLoai;
   const idTieuDe = useId();
   const khoang = hop.tu && hop.den ? `${ngayDuong(hop.tu)} – ${ngayDuong(hop.den)} dương lịch`
     : typeof hop.tu_tuoi === "number" && typeof hop.den_tuoi === "number" ? `${hop.tu_tuoi}–${hop.den_tuoi} tuổi` : null;

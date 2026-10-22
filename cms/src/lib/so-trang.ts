@@ -11,7 +11,8 @@ import type { Payload } from "payload";
 import { webUrl } from "./web";
 
 export type MucSoTrang = { duong: string; nhom: string; ten: string; o: string[]; mac_dinh: Record<string, unknown> };
-export type MauCumSo = { mau_duong: string; nhom: string; ten: string; bien: string[]; o: string[]; nguon_kb: Record<string, unknown> };
+export type MauCumSo = { mau_duong: string; nhom: string; ten: string; bien: string[]; o: string[]; nguon_kb: Record<string, unknown>;
+  /** ND-7: { chu: bảng chữ của cụm } */ mac_dinh: Record<string, unknown> };
 export type SoTrang = { trang: MucSoTrang[]; mau: MauCumSo[] };
 export type KetQuaDongBo = { tao: number; cap_nhat: number; go: number; mau_tao: number; mau_cap_nhat: number; mau_go: number };
 
@@ -23,7 +24,7 @@ const MAU = /^\/(?![/\\])[a-z0-9\-/{}_]*$/;
 /** Kiểm sơ sổ trang nhận từ web (không tin mù: đường dẫn phải trong site, nhóm thuộc danh sách). */
 export function kiemSoTrang(d: unknown): SoTrang {
   const o = (d && typeof d === "object" ? d : {}) as { trang?: unknown; mau?: unknown };
-  const nhom = new Set(["cong_cu", "tinh", "phap_ly", "chu_de", "kien_thuc", "tuoi", "la_so_mau", "blog_khung"]);
+  const nhom = new Set(["cong_cu", "tinh", "phap_ly", "chu_de", "kien_thuc", "tuoi", "la_so_mau", "blog_khung", "cong_cu_con"]);
   const mang = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : []);
   const doiTuong = (v: unknown) => (v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {});
   const trang = (Array.isArray(o.trang) ? o.trang : []).flatMap((x): MucSoTrang[] => {
@@ -34,7 +35,8 @@ export function kiemSoTrang(d: unknown): SoTrang {
   const mau = (Array.isArray(o.mau) ? o.mau : []).flatMap((x): MauCumSo[] => {
     const t = doiTuong(x);
     return typeof t.mau_duong === "string" && MAU.test(t.mau_duong) && typeof t.ten === "string" && nhom.has(String(t.nhom))
-      ? [{ mau_duong: t.mau_duong, nhom: String(t.nhom), ten: t.ten.slice(0, 120), bien: mang(t.bien), o: mang(t.o), nguon_kb: doiTuong(t.nguon_kb) }] : [];
+      ? [{ mau_duong: t.mau_duong, nhom: String(t.nhom), ten: t.ten.slice(0, 120), bien: mang(t.bien), o: mang(t.o), nguon_kb: doiTuong(t.nguon_kb),
+        mac_dinh: doiTuong(t.mac_dinh) }] : [];
   });
   if (!trang.length) throw new Error("Sổ trang rỗng hoặc sai định dạng.");
   return { trang, mau };
@@ -48,16 +50,18 @@ export async function laySoTrang(): Promise<SoTrang> {
   return kiemSoTrang(await r.json());
 }
 
-/** Mẫu cụm "/tu-vi/sao-o-cung/{slug}" → regex (biến {nam} 4 chữ số, {gioi} nam|nu, còn lại chữ thường/số/gạch). Cùng
- *  luật với web/lib/so-trang.ts regexMau. */
+/** Mẫu cụm "/tu-vi/sao-o-cung/{slug}" → regex (biến {nam}/{nam_sinh} 4 chữ số, {gioi} nam|nu, {thang} 1–2 chữ số,
+ *  {ngay} yyyy-mm-dd, còn lại chữ thường/số/gạch). Cùng luật với web/lib/so-trang.ts regexMau. */
 export function regexMau(mau: string): RegExp {
-  const BIEN: Record<string, string> = { nam: "(\\d{4})", gioi: "(nam|nu)" };
+  const BIEN: Record<string, string> = {
+    nam: "(\\d{4})", nam_sinh: "(\\d{4})", gioi: "(nam|nu)", thang: "(\\d{1,2})", ngay: "(\\d{4}-\\d{2}-\\d{2})",
+  };
   const thoat = mau.replace(/[.*+?^$()|[\]\\]/g, "\\$&");
   return new RegExp(`^${thoat.replace(/\{([a-z_]+)\}/g, (_, b: string) => BIEN[b] ?? "([a-z0-9-]+)")}$`);
 }
 
 /** Nhóm "ghi đè theo yêu cầu" (tài liệu tạo tay cho một URL thuộc mẫu cụm, không có trong sổ trang). */
-const NHOM_GHI_DE = new Set(["kien_thuc", "tuoi", "la_so_mau"]);
+const NHOM_GHI_DE = new Set(["kien_thuc", "tuoi", "la_so_mau", "cong_cu_con"]);
 
 /** So sâu, KHÔNG phụ thuộc thứ tự khoá: Postgres jsonb tự sắp lại khoá khi lưu (mac_dinh đọc về khác thứ tự sổ trang của
  *  web) — so bằng JSON.stringify thường thì mỗi lần đồng bộ đều "cập nhật" lại mọi tài liệu + mọi phiên bản. */
@@ -92,7 +96,7 @@ export async function dongBoSoTrang(payload: Payload, so: SoTrang): Promise<KetQ
   // ---- mẫu cụm (trước, để ghi đè trang KB gắn được mẫu)
   const mauCo = new Map((await tatCa(payload, "mau-cum")).map((d) => [d.mau_duong!, d]));
   for (const m of so.mau) {
-    const he = { nhom: m.nhom, ten: m.ten, bien: m.bien, o: m.o, nguon_kb: m.nguon_kb, tren_web: true };
+    const he = { nhom: m.nhom, ten: m.ten, bien: m.bien, o: m.o, nguon_kb: m.nguon_kb, mac_dinh: m.mac_dinh, tren_web: true };
     const cu = mauCo.get(m.mau_duong);
     if (!cu) {
       await payload.create({ collection: "mau-cum", draft: true, overrideAccess: true, context: ctx,
@@ -120,13 +124,18 @@ export async function dongBoSoTrang(payload: Payload, so: SoTrang): Promise<KetQ
       kq.cap_nhat++;
     }
   }
-  // URL không còn trong sổ: tài liệu đồng bộ → gỡ; ghi đè trang KB (kien_thuc / tuoi / la_so_mau) → còn khi URL vẫn khớp một mẫu.
+  // URL không còn trong sổ: tài liệu đồng bộ → gỡ; ghi đè trang KB (kien_thuc / tuoi / la_so_mau / cong_cu_con) → còn khi
+  // URL vẫn khớp một mẫu, và nhận bảng chữ mới nhất của mẫu (ND-7 — để tab "Chữ trên trang" của ghi đè khớp code).
   const trangMoi = new Set(so.trang.map((t) => t.duong));
-  const mau = so.mau.map((m) => regexMau(m.mau_duong));
   for (const [d, cu] of trangCo) {
     if (trangMoi.has(d)) continue;
-    const con = NHOM_GHI_DE.has(String(cu.nhom)) && mau.some((r) => r.test(d));
-    if (cu.tren_web !== con) { await ghiHeThong(payload, "noi_dung_trang", cu.id, { tren_web: con }); if (!con) kq.go++; }
+    const m = NHOM_GHI_DE.has(String(cu.nhom)) ? so.mau.find((x) => regexMau(x.mau_duong).test(d)) : undefined;
+    const con = Boolean(m);
+    const he: Record<string, unknown> = {};
+    if (cu.tren_web !== con) he.tren_web = con;
+    const macDinh = { chu: (m?.mac_dinh as { chu?: unknown } | undefined)?.chu ?? {} };
+    if (m && !giong(cu.mac_dinh, macDinh)) he.mac_dinh = macDinh;
+    if (Object.keys(he).length) { await ghiHeThong(payload, "noi_dung_trang", cu.id, he); if (he.tren_web === false) kq.go++; }
   }
   return kq;
 }

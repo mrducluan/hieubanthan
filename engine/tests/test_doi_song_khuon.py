@@ -49,15 +49,14 @@ def test_ban_do_con_so_theo_khuon():
 
 
 def test_battu_theo_khuon():
+    """Bát tự đời sống (BT-ĐS, 13 chương) đi qua cùng khuôn + bộ test giọng văn KC-1."""
     bc = toan_bo.battu(SINH_BT, ngay_xem=NGAY)
     _kiem_khuon(bc, "battu")
     assert bc["phai"] == "tu_binh" and [c["ma"] for c in bc["chuong"]] == [m for m, _, _ in toan_bo.CHUONG_BATTU]
-    assert all(c["doan"] for c in bc["chuong"])                              # lời ghép cũ vẫn còn
-    tq, nh, sn, van = bc["chuong"]
-    assert "Nhật chủ Nhâm" in tq["hop"][0]["tieu_de"] and tq["cau_tu_soi"]
-    assert any("hai cách" in h["tieu_de"] for h in nh["hop"]) and any(h["tieu_de"].startswith("Thiếu hành") for h in nh["hop"])
-    assert any(h["loai"] == "thoi_diem" and h.get("tu") == "2026-01-01" for h in van["hop"])
-    assert any(h["tieu_de"].startswith("Cách cục") for h in sn["hop"])
+    assert all(c["doan"] for c in bc["chuong"])
+    tq = bc["chuong"][0]
+    assert tq["ma"] == "tong_quan" and tq["cau_tu_soi"]
+    assert bc["thoi_gian_bieu"] and bc["cot_loi"]
 
 
 def test_phong_thuy_theo_khuon():

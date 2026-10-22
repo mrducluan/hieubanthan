@@ -1,6 +1,5 @@
 "use client";
-// KC-4 — nút "Nhắc tôi hôm đó" (lưu trên máy, hiện ở Hôm nay) + "Thêm vào lịch" (.ics) + tuỳ chọn "cả trên tài khoản"
-// (tự lưu lên tài khoản khi thiết bị đã bật nhắc qua thông báo — GĐ1 Web Push).
+// KC-4 — nút "Nhắc tôi hôm đó" (lưu trên máy, hiện ở Hôm nay) + "Thêm vào lịch" (.ics) + tuỳ chọn "cả trên tài khoản".
 import { useState } from "react";
 import { BellPlus, BellRing, CalendarPlus } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
@@ -17,12 +16,15 @@ export function NhacToi({ ngay, ma, moDun, nhan, duong, className }: {
   const [da, setDa] = useState(() => (typeof window !== "undefined" ? daNhac(ngay, ma) : false));
   const [tk, setTk] = useState<string | null>(null);
   const them = () => {
-    const n = themNhac({ ngay, ma, mo_dun: moDun, nhan, duong });
-    setDa(true);
-    ghi("chart_interacted", { mo_dun: moDun, kind: "nhac_viec" });
-    // GĐ1: thiết bị đã bật nhắc qua thông báo → mốc phải nằm trong tài khoản để máy chủ gửi đúng ngày.
-    if (nguoi && pushDangBatTrenMay(nguoi.id)) luuNhacTaiKhoan(nguoi.id, n).then(() => setTk("sẽ báo trên thiết bị đã bật nhắc")).catch(() => null);
-    return n;
+    // Mốc không hợp lệ (mã/nhãn lạ) thì bỏ qua lặng lẽ — không làm vỡ bài đọc.
+    try {
+      const n = themNhac({ ngay, ma, mo_dun: moDun, nhan: nhan.slice(0, 80), duong });
+      setDa(true);
+      ghi("chart_interacted", { mo_dun: moDun, kind: "nhac_viec" });
+      // GĐ1 Web Push: thiết bị đã bật nhắc cho tài khoản này → mốc phải nằm trong tài khoản để máy chủ gửi đúng ngày.
+      if (nguoi && pushDangBatTrenMay(nguoi.id)) luuNhacTaiKhoan(nguoi.id, n).then(() => setTk("sẽ báo trên thiết bị đã bật nhắc")).catch(() => null);
+      return n;
+    } catch { return null; }
   };
   return (
     <span className={cn("inline-flex flex-wrap items-center gap-1.5", className)} data-testid="nhac-toi" data-ngay={ngay}>
@@ -30,7 +32,7 @@ export function NhacToi({ ngay, ma, moDun, nhan, duong, className }: {
         className={cn("inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs", da ? "border-gold/60 text-gold" : "border-line text-fg-muted hover:text-fg")}>
         {da ? <BellRing className="size-3.5" aria-hidden /> : <BellPlus className="size-3.5" aria-hidden />}{da ? "Sẽ nhắc ở Hôm nay" : "Nhắc tôi hôm đó"}
       </button>
-      <button type="button" onClick={() => taiIcs(da ? { id: `${ngay}|${ma}`, ngay, ma, mo_dun: moDun, nhan, duong, tao_luc: "" } : them())}
+      <button type="button" onClick={() => { const n = da ? { id: `${ngay}|${ma}`, ngay, ma, mo_dun: moDun, nhan, duong, tao_luc: "" } : them(); if (n) taiIcs(n); }}
         className="inline-flex items-center gap-1 rounded-full border border-line px-2.5 py-0.5 text-xs text-fg-muted hover:text-fg" title="Tải tệp lịch (.ics) để điện thoại tự nhắc">
         <CalendarPlus className="size-3.5" aria-hidden /> Vào lịch
       </button>

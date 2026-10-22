@@ -3,6 +3,7 @@
 // danh mục URL công khai + chữ mặc định đang hiện trên web.
 import { NextResponse } from "next/server";
 import { soKhop } from "@/lib/cms";
+import { bangChoCms } from "@/lib/chu-trang";
 import { MAU_CUM, SO_TRANG } from "@/lib/so-trang";
 
 export const dynamic = "force-dynamic";
@@ -12,5 +13,8 @@ export async function GET(req: Request) {
   if (!bi || !soKhop(req.headers.get("x-cms-bi-mat"), bi)) {
     return NextResponse.json({ loi: "Không được phép." }, { status: 401 });
   }
-  return NextResponse.json({ trang: SO_TRANG, mau: MAU_CUM }, { headers: { "cache-control": "no-store" } });
+  // ND-7: bảng chữ gửi dạng CMS đọc (nhãn · mặc định · giới hạn · nhóm); mẫu cụm gửi trong mac_dinh như trang.
+  const trang = SO_TRANG.map((t) => (t.mac_dinh.chu ? { ...t, mac_dinh: { ...t.mac_dinh, chu: bangChoCms(t.mac_dinh.chu) } } : t));
+  const mau = MAU_CUM.map(({ chu, ...m }) => ({ ...m, nguon_kb: m.nguon_kb ?? {}, mac_dinh: chu ? { chu: bangChoCms(chu) } : {} }));
+  return NextResponse.json({ trang, mau }, { headers: { "cache-control": "no-store" } });
 }

@@ -1,14 +1,18 @@
 "use client";
-// LG-ĐS — phần hiển thị báo cáo "Luận giải Tử vi đời sống" (phien_ban "doi_song_1", docs/LUAN-GIAI-DOI-SONG.md 2.3).
+// LG-ĐS / BT-ĐS — phần hiển thị báo cáo "Luận giải đời sống" Tử vi và Bát tự (phien_ban "doi_song_1",
+// docs/LUAN-GIAI-DOI-SONG.md 2.3 + 6). Bát tự thêm thanh sức tự thân, biểu đồ ngũ hành, dải đại vận hai cách (BieuDoBatTu).
 // Component THUẦN: nhận báo cáo `bc`, không gọi engine — dùng cho bài vừa tải (LuanGiaiToanBo) và bài đã lưu
 // (/ban-than/bai-da-luu). Thứ tự: Điều quan trọng nhất → mục lục → từng chương (mức · tóm tắt · hộp · thân bài · câu
-// tự soi · "Vì sao nói vậy"). Chương "cuoc_doi" có dòng thời gian 12 đại hạn. Chương khoá (SAO-2) chỉ nằm trong mục
+// tự soi · "Vì sao nói vậy"). Chương "cuoc_doi" có dòng thời gian 12 đại hạn; chương "van_han" (VH-1) có dòng 10 năm
+// (DongMuoiNam). Chương Lời khuyên / Vận hạn không mang chip mức. Chương khoá (SAO-2) chỉ nằm trong mục
 // lục; phần mời mở do nơi gọi đưa vào (`phanKhoa`).
 import { useEffect, useRef, type ReactNode } from "react";
 import { LockKeyhole, MapPin } from "lucide-react";
 import { doanCoThuatNgu, KhungGiaiNghia } from "@/components/hoi/ThuatNgu";
 import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
+import { BieuDoNguHanh, DaiVanHaiCach, ThanhThan } from "./BieuDoBatTu";
+import { DongMuoiNam } from "./DongMuoiNam";
 import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
 import { maMauBaoCao, NHAN_MUC, type BaoCaoDoiSong, type ChuongDoiSongMo, type MocDaiHan, type Muc } from "./kieu";
 
@@ -96,7 +100,11 @@ function Chuong({ c, so, goc, thoiGian }: { c: ChuongDoiSongMo; so: number; goc:
         <ChipMuc muc={c.muc} nhan={c.nhan_muc} />
       </div>
       {c.tom_tat && <p className="mt-3 text-lg leading-relaxed text-fg sm:text-xl" data-testid="tom-tat">{c.tom_tat}</p>}
+      {c.than_do && <ThanhThan than={c.than_do} />}
+      {c.bieu_do && <BieuDoNguHanh bd={c.bieu_do} haiCach={c.hai_cach} />}
+      {thoiGian && thoiGian.length > 0 && <DaiVanHaiCach ds={thoiGian} />}
       {thoiGian && thoiGian.length > 0 && <DongThoiGian ds={thoiGian} />}
+      {c.dong_nam && c.dong_nam.length > 0 && <DongMuoiNam ds={c.dong_nam} thang={c.thang_toi} />}
       {hop.length > 0 && (
         <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
           {hop.map((h, k) => <HopNoiBat key={`${h.ma_mau ?? h.tieu_de}-${k}`} hop={h} thuatNgu={c.thuat_ngu} />)}
@@ -156,7 +164,8 @@ function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
               <span className="ml-1.5 font-normal text-fg-faint">{m.nam_tu}–{m.nam_den}</span></p>
             <div className="mt-1 flex flex-wrap items-center gap-1.5">
               <ChipMuc muc={m.muc} className="px-2 py-0 text-[0.7rem]" />
-              <span className="text-xs text-fg-faint">cung {m.cung}</span>
+              <span className="text-xs text-fg-faint">{m.nhan ?? `cung ${m.cung}`}</span>
+              {m.hai_cach_khac && <span className="text-[0.7rem] text-moon" data-testid="hai-cach-khac">hai cách khác nhau</span>}
             </div>
             <p className="mt-1.5 text-sm font-medium text-fg-muted first-letter:uppercase">{m.chu_de}</p>
             <p className="mt-1 text-sm leading-relaxed text-fg-muted">{m.mot_cau}</p>

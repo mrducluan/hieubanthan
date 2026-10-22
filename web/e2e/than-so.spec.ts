@@ -8,7 +8,7 @@ const LUAN = { v: 1, ho_ten: "Nguyễn Đức Luân", ngay: 24, thang: 10, nam: 
 
 test("landing → nhập 2 trường → hé lộ số đường đời và hồ sơ 4 số", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Con số nói gì");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Bạn là số mấy");
   await page.getByLabel("Họ và tên đầy đủ").fill("Nguyễn Đức Luân");
   await page.getByLabel("Ngày", { exact: true }).fill("24");
   await page.getByLabel("Tháng", { exact: true }).fill("10");

@@ -22,7 +22,7 @@ import { SoNoiBatNgay } from "@/components/than-so/SoNoiBatNgay";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { VongGio } from "@/components/hoang-lich/VongGio";
 import type { GioNgay } from "@/lib/hoang-lich";
-import { TieuDeTrang } from "@/components/cms/DauCms";
+import { TieuDeTrang, useChu } from "@/components/cms/DauCms";
 import { duongMoi } from "@/lib/duong-silo";
 
 interface NgayCN { so: number; nghia: string; tu_soi: string }
@@ -114,6 +114,7 @@ const thu = (iso: string) => new Intl.DateTimeFormat("vi-VN", { weekday: "long",
 
 export function HomNay() {
   const hoSo = useHoSo();
+  const c = useChu();
   const [the, setThe] = useState<TheHomNay | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [chuoi, setChuoi] = useState<number | null>(null);
@@ -195,7 +196,7 @@ export function HomNay() {
   }
 
   useBatDauDoc("hom_nay", Boolean(the));
-  const tieuDe = <TieuDeTrang nho="Mỗi ngày một thẻ" lon="Hôm nay của bạn" />;
+  const tieuDe = <TieuDeTrang nho={c("dau.nhan_tren")} lon="Hôm nay của bạn" />;
   if (hoSo === undefined) return <div className="mx-auto max-w-xl">{tieuDe}<KhungTai /></div>;
   if (hoSo === null) {
     return (
@@ -278,7 +279,7 @@ export function HomNay() {
           {the.hoang_lich && (
             <section aria-labelledby="hl-hom-nay" className="glass space-y-3 rounded-2xl p-5" data-testid="hoang-lich-hom-nay">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 id="hl-hom-nay" className="text-xl">Hoàng lịch hôm nay</h2>
+                <h2 id="hl-hom-nay" className="text-xl">{c("hoang_lich.tieu_de")}</h2>
                 <span className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold ${the.hoang_lich.hoang_dao ? "border-gold/50 text-gold" : "border-moon/40 text-moon"}`}>
                   {the.hoang_lich.hoang_dao ? "Hoàng đạo" : "Hắc đạo"} · {the.hoang_lich.than}</span>
               </div>
@@ -297,7 +298,7 @@ export function HomNay() {
 
           <section aria-labelledby="y-dinh" className="glass space-y-4 rounded-2xl p-5" data-testid="y-dinh">
             <div>
-              <h2 id="y-dinh" className="text-xl">Hôm nay bạn định làm gì?</h2>
+              <h2 id="y-dinh" className="text-xl">{c("y_dinh.tieu_de")}</h2>
               <p className="mt-1 text-sm text-fg-muted">Chọn tối đa {TOI_DA_Y_DINH} việc hoặc gõ ngắn — xem việc đó hợp nhịp ngày {the.ngay_ca_nhan.so} thế nào và nên làm theo cách nào.</p>
             </div>
             <div className="flex flex-wrap gap-2" role="group" aria-label="Ý định hôm nay">
@@ -389,7 +390,7 @@ export function HomNay() {
 
           {the.cau_hoi_noi_bat.length > 0 && (
             <section aria-labelledby="noi-bat" className="rounded-2xl border border-line/70 p-5">
-              <h2 id="noi-bat" className="inline-flex items-center gap-2 text-lg"><MessageCircleQuestion className="size-5 text-moon" aria-hidden />Câu hỏi nổi bật hôm nay</h2>
+              <h2 id="noi-bat" className="inline-flex items-center gap-2 text-lg"><MessageCircleQuestion className="size-5 text-moon" aria-hidden />{c("noi_bat.tieu_de")}</h2>
               <ul className="mt-3 space-y-2 text-sm">{the.cau_hoi_noi_bat.map((c) => <li key={c} className="border-l-2 border-moon/50 pl-3">{c}</li>)}</ul>
             </section>
           )}
@@ -433,8 +434,7 @@ export function HomNay() {
 
           <CuoiBaiDoc moDun="hom_nay" cauHoi="Thẻ hôm nay có giúp bạn định hướng ngày của mình?" />
 
-          <p className="text-xs text-fg-faint">{the.luu_y} Muốn hiểu sâu hơn: <Link href="/ban-than" className="text-gold hover:underline">bài đọc đầy đủ</Link> ·{" "}
-            <Link href="/hop-doi" className="text-gold hover:underline">xem hợp với ai</Link>.</p>
+          <p className="text-xs text-fg-faint">{the.luu_y}</p>
         </div>
       )}
     </div>

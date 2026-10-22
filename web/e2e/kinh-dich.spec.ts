@@ -101,11 +101,12 @@ test("KC-3/4/5: ứng kỳ có nút nhắc (lưu máy, hiện ở Hôm nay), g�
   expect(luu).toHaveLength(1);
   expect(luu[0].ma).toMatch(/^kd\.ungky\./);
   expect(JSON.stringify(luu)).not.toContain("Việc này có thành");          // không lưu câu hỏi
-  await expect(page.getByTestId("cta-cuoi-bai")).toBeVisible();
-  await expect(page.getByTestId("cta-luan-giai")).toBeVisible();
-  // tín hiệu ngầm: mở cách đọc Lục Hào → đếm trên máy
+  // Cuối bài hợp nhất (KC-5 + CTA-1): gợi mở theo ý định ở trên + khối "Đọc tiếp về bạn" (gợi chéo, Sao, mời, ủng hộ).
+  await expect(page.getByTestId("cuoi-phan-xem")).toBeVisible();
+  await expect(page.getByTestId("cuoi-phan-xem").getByTestId("the-goi-y").first()).toBeVisible();
+  // tín hiệu ngầm: mở một cách đọc KHÁC phái chính (câu dự đoán → chính là Lục Hào, đã mở sẵn) → đếm trên máy
   await dq.getByRole("button", { name: /Ba cách đọc cùng một quẻ/ }).click();
-  await dq.getByTestId("goc-nhin").locator("[data-phai=luc_hao]").getByRole("button").first().click();
+  await dq.getByTestId("goc-nhin").locator("[data-phai=nghia_ly]").getByRole("button").first().click();
   const tq = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.thoi_quen_kd.v1") ?? "{}"));
-  expect(tq.luc_hao).toBe(1);
+  expect(tq.nghia_ly).toBe(1);
 });

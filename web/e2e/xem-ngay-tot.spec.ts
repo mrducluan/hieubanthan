@@ -73,10 +73,10 @@ test("trang chủ: khối hoàng lịch ngay dưới hồ sơ thần số, gợi
   const khoi = page.getByTestId("ngay-tot-trang-chu");
   await expect(khoi).toBeVisible();
   await expect(khoi.getByTestId("tuoi-goi-y")).toBeVisible();
-  // Đứng ngay sau khối hồ sơ (trước banner/“Ba lớp”)
+  // Đứng ngay sau khối hồ sơ (trước banner/“Vì sao xem ở đây”)
   const thuTu = await page.evaluate(() => {
     const k = document.querySelector('[data-testid="ngay-tot-trang-chu"]')!;
-    const b = document.getElementById("ba-lop")!;
+    const b = document.getElementById("vi-sao-chon")!;
     return Boolean(k.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING);
   });
   expect(thuTu).toBe(true);
@@ -97,7 +97,9 @@ test("Hôm nay: có hoàng lịch theo tuổi + quẻ đầu ngày", async ({ pa
   await chip.getByRole("button", { name: "Giờ hoàng đạo" }).click();
   await expect(page.getByTestId("gio-hoang-dao").locator("li")).toHaveCount(6);
   await expect(page.getByTestId("gio-hoang-dao").getByTestId("vong-gio")).toBeVisible();
-  await expect(page.getByTestId("kim-gio")).toHaveCount(1);
+  // 23:00–23:59 giờ VN đã là giờ Tý của ngày mai → vòng hôm nay cố ý không đánh dấu kim (VongGio.canhGioHienTai)
+  const gioVn = Number(new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Ho_Chi_Minh", hour: "2-digit", hourCycle: "h23" }).format(new Date()));
+  await expect(page.getByTestId("kim-gio")).toHaveCount(gioVn === 23 ? 0 : 1);
   await chip.getByRole("link", { name: /Quẻ ngày/ }).click();
   await expect(page).toHaveURL(/#que-ngay$/);
 });
