@@ -58,9 +58,12 @@ export async function phieuCuaToi(sb: SupabaseClient, userId: string): Promise<P
 /** LG-ĐS / BT-ĐS — phần đầu vào "tầng HỌC" cho luận giải đời sống (Tử vi, Bát tự): `trong_so` (bảng tỉ lệ công khai,
  *  mã ≥ 30 phiếu, cache 1 giờ) + `ca_nhan` (phiếu của chính người đang xem, khi đã đăng nhập). Không chữ người dùng nào
  *  đi vào engine; lỗi / chưa bật → `{}` (luận giải vẫn ra như thường). */
-export async function themHocLuanGiai(): Promise<Record<string, unknown>> {
-  const [bang, phien] = await Promise.all([bangTyLe().catch(() => ({})), phienNguoiDung().catch(() => null)]);
-  const ca_nhan = phien ? await phieuCuaToi(phien.sb, phien.user.id).catch(() => ({})) : {};
+export async function themHocLuanGiai(tienTo?: string): Promise<Record<string, unknown>> {
+  const [bangTat, phien] = await Promise.all([bangTyLe().catch(() => ({})), phienNguoiDung().catch(() => null)]);
+  const caNhanTat = phien ? await phieuCuaToi(phien.sb, phien.user.id).catch(() => ({})) : {};
+  // HỌC-ĐS: mảng khác Tử vi chỉ cần mã của mình (`ds.phongthuy.`, `ds.kinhdich.`) — gọn gói gửi engine.
+  const loc = <T,>(o: Record<string, T>) => (tienTo ? Object.fromEntries(Object.entries(o).filter(([k]) => k.startsWith(tienTo))) : o);
+  const bang = loc(bangTat), ca_nhan = loc(caNhanTat);
   const them: Record<string, unknown> = {};
   if (Object.keys(bang).length) them.trong_so = bang;
   if (Object.keys(ca_nhan).length) them.ca_nhan = ca_nhan;

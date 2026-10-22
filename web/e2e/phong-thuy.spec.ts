@@ -37,6 +37,19 @@ test("PT-ĐS: Nhà của bạn — đọc bằng lời thường, 5 chương, ng
   await c2.getByRole("button", { name: "Vì sao nói vậy" }).first().click();
   await expect(c2.getByTestId("can-cu").first()).toContainText("Diên Niên");
   await expect(bc).toContainText("Không cần mua gì thêm");
+  // HỌC-ĐS: hộp có nút kiểm chứng; chỉ MÃ ds.phongthuy.* + phái đi lên, không chữ
+  const kc = bc.getByTestId("kiem-chung");
+  expect(await kc.count()).toBeGreaterThan(2);
+  await kc.first().getByRole("button", { name: "Đúng với mình" }).click();
+  const sk = await page.evaluate(() => ((window as unknown as { __hbt_su_kien?: ({ su_kien: string } & Record<string, unknown>)[] }).__hbt_su_kien ?? [])
+    .filter((e) => e.su_kien === "tuvi_kiem_chung"));
+  expect(sk).toHaveLength(1);
+  expect(sk[0]!.mau).toMatch(/^ds\.phongthuy\.[a-z0-9_]+\.[a-z0-9_.+-]+$/);
+  expect(sk[0]!.phai).toBe("bat_trach_huyen_khong");
+  expect(sk[0]!.loai).toBe("doi_song");
+  // 81 tổ hợp có thứ tự: chương 2 nêu lĩnh vực theo vai sơn/hướng + năm theo sao lưu niên (nhịp gợi ý)
+  await expect(c2).toContainText(/hướng tinh \d .*tiền bạc/i);
+  await expect(c2).toContainText("không phải lời đoán");
 });
 
 test("bố trí dân gian ghi rõ nguồn", async ({ page }) => {

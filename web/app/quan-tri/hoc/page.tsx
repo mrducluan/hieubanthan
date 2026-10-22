@@ -9,7 +9,7 @@ import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
 import { CumGopY } from "./CumGopY";
 import { DungKhoVec, DuyetVec } from "./HocTuvi";
-import { tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
+import { mangCuaMa, TEN_MANG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
 
 export const metadata: Metadata = { title: "Học từ góp ý" };
 
@@ -120,14 +120,29 @@ function KhungTuvi({ d, ttVec, tt }: { d: HocTuvi | null; ttVec: string; tt: str
     );
   }
   const kc = tinhKiemChung(d.kiem_chung);
+  // HỌC-ĐS: phiếu theo mảng (Tử vi · Bát tự · Phong thuỷ · Kinh Dịch · Thần số) — cùng một bảng, gom theo mã.
+  const theoMang: Record<string, { phieu: number; ma: number; xemLai: number }> = {};
+  for (const r of d.kiem_chung) {
+    const m = mangCuaMa(r.loai, r.mau);
+    const t = (theoMang[m] ??= { phieu: 0, ma: 0, xemLai: 0 });
+    t.phieu += r.dung + r.chua_dung; t.ma += 1;
+    if (r.dung + r.chua_dung >= 100 && r.dung / (r.dung + r.chua_dung) < 0.4) t.xemLai += 1;
+  }
   return (
     <section className="space-y-4" data-testid="qt-hoc-tuvi">
       <div>
-        <h2 className="text-xl">Tử vi — kiểm chứng &amp; kho ý định</h2>
+        <h2 className="text-xl">Kiểm chứng mọi mảng &amp; kho ý định</h2>
         <p className="mt-1 text-sm text-fg-muted">
-          Phiếu "Đúng với mình / Chưa đúng" theo mã thẻ (một phiếu mỗi người mỗi mã, chỉ mã — không chữ, không lá số).
-          Mã đủ 30 phiếu mới có tỉ lệ; tỉ lệ đúng thấp xếp lên đầu để xem lại KB (sửa qua Kho tri thức, máy không tự sửa).
+          Phiếu "Đúng với mình / Chưa đúng" theo mã thẻ (một phiếu mỗi người mỗi mã, chỉ mã — không chữ, không lá số, không
+          ngày sinh). Mã đủ 30 phiếu mới có tỉ lệ; ≥ 100 phiếu mà dưới 40% đúng → hộp tự xuống "Vì sao nói vậy" và xếp lên
+          đầu bảng này để xem lại KB (sửa qua Kho tri thức bằng PR, máy không tự sửa).
         </p>
+      </div>
+      <div className="flex flex-wrap gap-2 text-sm" data-testid="qt-kiem-chung-mang">
+        {Object.entries(theoMang).map(([m, t]) => (
+          <Badge key={m}>{TEN_MANG[m] ?? m}: {t.phieu} phiếu · {t.ma} mã{t.xemLai ? ` · ${t.xemLai} đang xem lại` : ""}</Badge>
+        ))}
+        {Object.keys(theoMang).length === 0 && <span className="text-fg-muted">Chưa có phiếu nào.</span>}
       </div>
       <div className="grid gap-3 sm:grid-cols-4">
         <Card><p className="text-xs text-fg-muted">Phiếu còn hạn</p><p className="text-2xl">{d.phieu.tong}</p></Card>
@@ -140,10 +155,11 @@ function KhungTuvi({ d, ttVec, tt }: { d: HocTuvi | null; ttVec: string; tt: str
       ) : (
         <Card>
           <table className="w-full text-sm" data-testid="qt-kiem-chung-tuvi">
-            <thead><tr className="text-left text-xs text-fg-muted"><th className="py-1">Mã</th><th>Nghĩa</th><th className="text-right">Đúng</th><th className="text-right">Phiếu</th></tr></thead>
+            <thead><tr className="text-left text-xs text-fg-muted"><th className="py-1">Mảng</th><th>Mã</th><th>Nghĩa</th><th className="text-right">Đúng</th><th className="text-right">Phiếu</th></tr></thead>
             <tbody>
               {kc.du.slice(0, 100).map((r) => (
                 <tr key={`${r.loai}|${r.mau}`} className="border-t border-line">
+                  <td className="py-1 text-xs">{TEN_MANG[mangCuaMa(r.loai, r.mau)]}</td>
                   <td className="py-1 font-mono text-xs">{r.mau}</td>
                   <td>{r.nhan}</td>
                   <td className={`text-right ${r.ti_le_dung < 0.4 ? "text-cinnabar" : ""}`}>{Math.round(r.ti_le_dung * 100)}%</td>

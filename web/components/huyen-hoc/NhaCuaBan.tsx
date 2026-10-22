@@ -9,7 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { ChipMuc } from "@/components/luan-giai/BaoCaoDoiSong";
-import { HopNoiBat, ViSao } from "@/components/luan-giai/HopNoiBat";
+import { HopNoiBat, KiemChungBai, ViSao } from "@/components/luan-giai/HopNoiBat";
+import { useTyLe } from "@/lib/ty-le-kiem-chung";
+import { PHAI_DOI_SONG } from "@/lib/kiem-chung";
 import type { Hop, Muc } from "@/components/luan-giai/kieu";
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { ghi } from "@/lib/do-luong";
@@ -148,7 +150,11 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
 }
 
 function BaoCaoNha({ bc }: { bc: BaoCao }) {
+  // HỌC-ĐS: mọi hộp có mã ds.phongthuy.* → nút "Đúng với mình / Chưa đúng" + "x% thấy đúng" (≥ 30 phiếu), một lời gọi tỉ lệ cho cả bài.
+  const maus = [...bc.cot_loi, ...bc.chuong.flatMap((c) => c.hop)].map((h) => h.ma_mau).filter((x): x is string => Boolean(x));
+  const tyLe = useTyLe(maus);
   return (
+    <KiemChungBai.Provider value={{ tyLe, phai: PHAI_DOI_SONG.phongthuy! }}>
     <article className="space-y-8 border-t border-line/70 pt-5" data-testid="bao-cao-nha">
       {bc.cot_loi.length > 0 && (
         <section aria-label="Điều quan trọng nhất">
@@ -169,6 +175,7 @@ function BaoCaoNha({ bc }: { bc: BaoCao }) {
       {bc.goi_mo && <GoiMoCheo goiMo={bc.goi_mo} moDun="phongthuy" />}
       <p className="border-t border-line pt-4 text-sm text-fg-faint">{bc.ket}</p>
     </article>
+    </KiemChungBai.Provider>
   );
 }
 

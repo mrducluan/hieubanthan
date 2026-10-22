@@ -732,3 +732,13 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
   đăng nhập → Hôm nay → Bật nhắc. (Safari thường không có nút — đúng như thiết kế, trang sẽ hiện hướng dẫn 2 bước.)
 - [ ] **WP6. Luật sư rà** dòng mới trong Chính sách quyền riêng tư (mục dữ liệu + bên xử lý: dịch vụ thông báo của trình duyệt),
   ngày hiệu lực đã đổi 21/10/2026. Nếu anh đã sửa trang này trong CMS thì thêm hai dòng đó ở CMS (CMS thắng code).
+
+## PT-81 · HỌC-ĐS · kiến trúc Drive (2026-10-22)
+- [ ] **Quyết bảng Q1–Q8** trong `docs/DANH-GIA-KIEN-TRUC-PHONG-THUY-DRIVE.md` (em đề xuất làm Q1, Q3, Q5, Q6; không làm Q8).
+  Anh tích vào bảng hoặc nhắn em số nào → em làm theo thứ tự đó.
+- [ ] Đọc lướt `docs/VONG-TU-CAI-THIEN.md` mục 3 (ranh giới máy / người) — nếu anh muốn máy được làm thêm điều gì (vd tự đổi
+  phái đọc mặc định theo tín hiệu ngầm), báo em để ghi thành quyết định.
+- [ ] Sau deploy: mở `/phong-thuy` → "Nhà của bạn" nhập hướng 180, năm 2008 → chương 2 có đoạn "Hướng tinh … tiền bạc" và
+  "năm nên chủ động hơn"; dưới mỗi hộp có nút "Đúng với mình / Chưa đúng" (Phong thuỷ, Kinh Dịch nay cũng có). Số "x%" chỉ
+  hiện khi migration 0017 đã chạy và mã đủ 30 phiếu.
+

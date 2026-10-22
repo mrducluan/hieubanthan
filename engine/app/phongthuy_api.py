@@ -6,10 +6,10 @@ Chỉ cần ngày sinh (hoặc năm) + giới tính; không cần giờ. Mệnh 
 from __future__ import annotations
 
 import datetime as _dt
-from typing import Literal
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
 from app.calc import phongthuy as pt
 from app.kb import tu_dien
@@ -244,6 +244,17 @@ class ThanhVienInput(SinhInput):
     vai: Literal["vo", "chong", "con", "cha_me", "khac"] = "khac"
 
 
+# Cùng mẫu với Tử vi (`tuvi_api._MaMau`): web gửi bảng tỉ lệ chung mọi mảng; mã không khớp hộp nào thì không có tác dụng.
+_MaMau = Annotated[str, StringConstraints(pattern=r"^[a-z0-9_.+-]{3,60}$")]
+
+
+class PhieuInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    dung: int = Field(ge=0, le=10_000_000)
+    chua_dung: int = Field(ge=0, le=10_000_000)
+
+
 class LuanGiaiPTInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -251,6 +262,10 @@ class LuanGiaiPTInput(BaseModel):
     nha: NhaInput
     thanh_vien: list[ThanhVienInput] = Field(default_factory=list, max_length=6)
     ngay_xem: _dt.date | None = None
+    # HỌC-ĐS: bảng tỉ lệ "thấy đúng" công khai theo mã (web lấy từ Supabase, ≥ 30 phiếu) + phiếu của chính người xem.
+    # Chỉ hạ / xếp lại hộp — không sinh câu mới. Không chữ người dùng, không ngày sinh.
+    trong_so: dict[_MaMau, PhieuInput] | None = Field(default=None, max_length=5000)
+    ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
 
 
 @router.post("/luan-giai")
@@ -264,6 +279,9 @@ def api_luan_giai(inp: LuanGiaiPTInput) -> dict:
         r = pt_ds.luan_giai(inp.sinh.sinh() if inp.sinh else None, nha, tvs, inp.ngay_xem)
     except ValueError as e:
         raise HTTPException(422, detail=str(e)[:300])
+    if inp.trong_so or inp.ca_nhan:
+        from app.luangiai import doi_song_khuon as kh  # noqa: PLC0415
+        kh.ap_hoc(r, {k: v.model_dump() for k, v in (inp.trong_so or {}).items()}, inp.ca_nhan)
     return {"engine_version": ENGINE_VERSION, **r}
 
 

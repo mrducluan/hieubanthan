@@ -13,10 +13,10 @@ Engine không lưu gì: câu hỏi chỉ được phản hồi lại trong meta.
 from __future__ import annotations
 
 import datetime as _dt
-from typing import Literal
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 from app.calc import kinhdich
 from app.kb import tu_dien
@@ -84,6 +84,17 @@ def api_khoi_que(inp: KhoiQueInput) -> dict:
     }
 
 
+# Cùng mẫu với Tử vi (`tuvi_api._MaMau`): web gửi bảng tỉ lệ chung mọi mảng; mã không khớp hộp nào thì không có tác dụng.
+_MaMau = Annotated[str, StringConstraints(pattern=r"^[a-z0-9_.+-]{3,60}$")]
+
+
+class PhieuInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    dung: int = Field(ge=0, le=10_000_000)
+    chua_dung: int = Field(ge=0, le=10_000_000)
+
+
 class HoiKDInput(BaseModel):
     """Hỏi đáp Kinh Dịch. Không có trường chọn quẻ theo số (extra=forbid)."""
     model_config = ConfigDict(extra="forbid")
@@ -101,6 +112,9 @@ class HoiKDInput(BaseModel):
     chu_de: str | None = Field(default=None, max_length=40, pattern=r"^[a-z_]+$")
     so_mai_hoa: list[int] | None = Field(default=None, min_length=2, max_length=2)
     phuong_mai_hoa: Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] | None = None
+    # HỌC-ĐS: trọng số công khai + phiếu cá nhân theo mã hộp đọc quẻ (ds.kinhdich.*) — chỉ hạ / xếp lại hộp.
+    trong_so: dict[_MaMau, PhieuInput] | None = Field(default=None, max_length=5000)
+    ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
 
 
 @router.post("/hoi")
@@ -119,6 +133,9 @@ def api_hoi(inp: HoiKDInput, background: BackgroundTasks) -> dict:
                                chu_de=inp.chu_de, so_mai_hoa=inp.so_mai_hoa, phuong_mai_hoa=inp.phuong_mai_hoa)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
+    if (inp.trong_so or inp.ca_nhan) and kq.get("doc_que"):
+        from app.luangiai import doi_song_khuon as kh  # noqa: PLC0415
+        kh.ap_hoc(kq["doc_que"], {k: v.model_dump() for k, v in (inp.trong_so or {}).items()}, inp.ca_nhan)
     background.add_task(nhat_ky.ghi_huyenhoc, "kinhdich", inp.cau_hoi, kq, False)
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "kinhdich")}
 
