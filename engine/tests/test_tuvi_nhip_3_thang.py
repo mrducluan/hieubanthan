@@ -47,6 +47,19 @@ def test_xep_muc_ky_xung_cung_chinh():
     assert muc == "can_than" and _ma(ly) == ["ky_xung_cung_chinh"]
 
 
+def test_xep_muc_ky_nhap_cung_chinh():
+    """Chủ dự án chốt 2026-10-22: Kỵ tháng rơi THẲNG vào Mệnh / Tài Bạch / Quan Lộc → Cần thận trọng (trước: Bình)."""
+    for c in ("Mệnh", "Tài Bạch", "Quan Lộc"):
+        muc, ly = nh.xep_muc({"Lộc": "Huynh Đệ", "Quyền": "Nô Bộc", "Khoa": "Tử Nữ", "Kỵ": c},
+                             {"Lộc": "Phúc Đức", "Kỵ": "Tật Ách"}, XUNG)
+        assert muc == "can_than" and _ma(ly) == ["ky_nhap_cung_chinh"], c
+        assert ly[0]["cung"] == c
+    # Điền Trạch không thuộc nhóm cung chính của luật Kỵ (chỉ của luật Lộc) → vẫn Bình
+    muc, ly = nh.xep_muc({"Lộc": "Huynh Đệ", "Quyền": "Nô Bộc", "Khoa": "Tử Nữ", "Kỵ": "Điền Trạch"},
+                         {"Lộc": "Phúc Đức", "Kỵ": "Tật Ách"}, XUNG)
+    assert muc == "binh"
+
+
 def test_xep_muc_thuan():
     muc, ly = nh.xep_muc({"Lộc": "Điền Trạch", "Quyền": "Nô Bộc", "Khoa": "Tử Nữ", "Kỵ": "Huynh Đệ"},
                          {"Lộc": "Phụ Mẫu", "Kỵ": "Tật Ách"}, XUNG)
@@ -210,7 +223,7 @@ def test_tieu_de_thang_theo_muc_va_tieu_diem():
             assert t["tieu_diem"] == th["Lộc"]
         elif t["muc"] == "can_than":
             ky_x = next((x["cung"] for x in t["ly_do"] if x["ma"] == "ky_xung_cung_chinh"), None)
-            assert t["tieu_diem"] == (ky_x or th["Kỵ"]) and ma & {"chong_ky", "ky_xung_cung_chinh"}
+            assert t["tieu_diem"] == (ky_x or th["Kỵ"]) and ma & {"chong_ky", "ky_xung_cung_chinh", "ky_nhap_cung_chinh"}
         else:
             assert t["tieu_diem"] == t["cung_goc"]
 

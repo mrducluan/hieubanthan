@@ -258,7 +258,9 @@ def test_muc_tung_thang_ts_tai_lap_duoc_va_chi_khac_dung_cho_da_ghi():
     - chong_ky_doi_truc: Kỵ tháng ở cung ĐỐI DIỆN Kỵ năm (cùng trục) → Python cần thận trọng; TS chỉ so trùng cung.
     - tat_ach: TS báo đỏ khi Kỵ tháng xung Tật Ách; Python không xếp mức theo Tật Ách (không bàn sức khoẻ).
     - song_loc: Lộc tháng trùng cung Lộc năm → Python thuận; TS không có luật này.
-    - (TS GREEN mà Python can_than) chỉ do chong_ky_doi_truc."""
+    - ky_nhap_cung_chinh (chủ dự án chốt 2026-10-22): Kỵ tháng ở chính Mệnh / Tài Bạch / Quan Lộc → Python cần thận
+      trọng; TS chỉ xét Kỵ XUNG các cung này.
+    - (TS GREEN mà Python can_than) chỉ do chong_ky_doi_truc hoặc ky_nhap_cung_chinh."""
     dem = Counter()
     doi = {"RED_CRITICAL_ALERT": "can_than", "GREEN_GOLDEN_WINDOW": "thuan", "YELLOW_CAUTION": "binh"}
     for c in CASES:
@@ -277,8 +279,9 @@ def test_muc_tung_thang_ts_tai_lap_duoc_va_chi_khac_dung_cho_da_ghi():
             nam = _nam_hoa(can_nam, ls)
             doi_truc = th["Kỵ"] == xung[nam["Kỵ"]]
             if py == "can_than":
-                assert doi_truc, (c["id"], it["lunarMonth"])
-                dem["chong_ky_doi_truc"] += 1
+                nhap = th["Kỵ"] in ("Mệnh", "Tài Bạch", "Quan Lộc")
+                assert doi_truc or nhap, (c["id"], it["lunarMonth"])
+                dem["chong_ky_doi_truc" if doi_truc else "ky_nhap_cung_chinh"] += 1
             elif ts == "RED_CRITICAL_ALERT":
                 assert xung[th["Kỵ"]] == "Tật Ách" and th["Kỵ"] != nam["Kỵ"], (c["id"], it["lunarMonth"])
                 dem["tat_ach"] += 1
@@ -287,6 +290,7 @@ def test_muc_tung_thang_ts_tai_lap_duoc_va_chi_khac_dung_cho_da_ghi():
                 dem["song_loc"] += 1
     assert dem["tong"] == 12 * len(CASES)
     assert dem["chong_ky_doi_truc"] > 0 and dem["tat_ach"] > 0 and dem["song_loc"] > 0
+    assert dem["ky_nhap_cung_chinh"] > 0
     assert dem["trung"] / dem["tong"] > 0.7
 
 

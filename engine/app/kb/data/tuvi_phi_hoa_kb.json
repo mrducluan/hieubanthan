@@ -834,6 +834,7 @@
    "song_loc": "Hoá Lộc của tháng (sao {sao}) và Hoá Lộc của năm cùng rơi vào cung {cung}: cửa thuận ở mảng này rộng hơn.",
    "loc_nhap_cung_chinh": "Hoá Lộc của tháng bay vào cung {cung} qua sao {sao}: mảng bạn đang để ý có thêm cơ hội.",
    "ky_xung_cung_chinh": "Hoá Kỵ của tháng ở sao {sao}, chiếu vào cung {cung} từ cung đối diện: việc của mảng này nên chuẩn bị kỹ hơn.",
+   "ky_nhap_cung_chinh": "Hoá Kỵ của tháng (sao {sao}) rơi thẳng vào cung {cung}: mảng này là chỗ dễ vướng nhất trong tháng, nên làm chậm và rõ ràng.",
    "khoa_giai": "Hoá Khoa ở sao {sao}, cung {cung} giúp gỡ bớt vướng: dễ có người giải thích, hỗ trợ."
   },
   "source_id": "phi_tinh_trung_chau",
