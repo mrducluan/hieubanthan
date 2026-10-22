@@ -106,6 +106,7 @@ export default async function Page({ params: thamSo }: Props) {
       editor: { "@id": `${siteUrl()}/tac-gia/duc-luan#nguoi` },
       publisher: { "@id": `${siteUrl()}/#to-chuc` }, isPartOf: { "@id": `${siteUrl()}/#website` },
       isAccessibleForFree: true, citation: t.nguon, abstract: t.tra_loi_nhanh,
+      ...(t.ngay_dang ? { datePublished: t.ngay_dang, dateModified: t.cap_nhat ?? t.ngay_dang } : {}),
       about: [
         { "@type": "Thing", name: "Phong thuỷ Bát trạch", sameAs: "https://en.wikipedia.org/wiki/Feng_shui" },
         { "@type": "Thing", name: `Mệnh ${gNam.menh_quai.quai}` }, { "@type": "Thing", name: `Mệnh ${gNu.menh_quai.quai}` },

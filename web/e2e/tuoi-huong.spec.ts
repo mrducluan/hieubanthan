@@ -6,7 +6,8 @@ test("trang tuổi 1990: HTML máy chủ có H1, nam Khảm + nữ Cấn, hướ
   expect((html.match(/<h1[\s>]/g) ?? []).length).toBe(1);
   expect(html).toContain("Tuổi Canh Ngọ 1990 hợp hướng nào? Nam mệnh Khảm, nữ mệnh Cấn");
   for (const loai of ['"@type":"Article"', '"@type":"FAQPage"', '"@type":"BreadcrumbList"', '"@type":"ImageObject"']) expect(html).toContain(loai);
-  expect(html).toMatch(/og:image" content="[^"]*mang=phong-thuy/);                    // ảnh đại diện có la bàn
+  expect(html).toMatch(/og:image" content="[^"]*mang=phong-thuy/);
+  expect(html).toMatch(/"datePublished":"\d{4}-\d{2}-\d{2}"/);                     // Article có ngày (review SEO-K)                    // ảnh đại diện có la bàn
   expect(html).toContain('href="/bat-tu/menh-theo-nam/sinh-nam-1990-menh-gi"');          // cùng tuổi: mệnh theo năm
   expect(html).toMatch(/href="\/xem-tuoi-lam-nha\/\d{4}\/tuoi-1990"/);                    // cùng tuổi: làm nhà
   await page.goto("/phong-thuy/huong-hop-tuoi/tuoi-1990");

@@ -145,7 +145,7 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
                 "xem_them": [{"loai": "sao", "slug": f"sao-{t._slug(sao)}"}]})
     muc.append({"tieu_de": f"Tam phương tứ chính của cung {cung}",
                 "doan": (f"Không đọc {sao} một mình: cung {cung} luôn xét cùng cung xung chiếu {doi} và hai cung "
-                         f"tam hợp {th1}, {th2}. Nếu {sao} đứng ở các cung đó trên lá số người khác, nghĩa đổi như sau:"),
+                         f"tam hợp {th1}, {th2}. {sao} đứng ở chính các cung đó thì nghĩa như sau:"),
                 "xem_them": [{"loai": "sao_cung", "slug": f"{t._slug(sao)}-cung-{t._slug(x)}"} for x in (doi, th1, th2)]})
     hoa = _hoa_cua_sao(sao)
     if hoa:
@@ -164,7 +164,7 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
         {"hoi": f"{sao} ở cung {cung} có ý nghĩa gì?", "dap": t._cau(nd)},
         {"hoi": f"{sao} ở cung {cung} tốt hay xấu?",
          "dap": (f"Tử vi không chia sao tốt hay xấu tuyệt đối. {sao} sáng ở {cs}" + (f", hãm ở {ch}" if ham else "")
-                 + f". {tot_xau} Khi {'hãm' if ham else 'kém sáng'}: {o_ham.get('de_vap', '')}").strip()},
+                 + f". {tot_xau}" + (f" Khi {'hãm' if ham else 'kém sáng'}: {o_ham['de_vap']}" if o_ham.get("de_vap") else "")).strip()},
         {"hoi": f"{sao} ở cung {cung} đi cùng sao nào?",
          "dap": (f"Tuỳ chi: {sao} {_nhom_dong_cung(sao)}. Ngoài ra luôn xem cung {doi} xung chiếu và hai cung "
                  f"tam hợp {th1}, {th2}.")},

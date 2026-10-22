@@ -47,6 +47,7 @@ export default async function Page({ params: thamSo }: Props) {
       image: ldAnh(anhBai({ tieuDe: m.tieu_de, mang: "tu-vi" }), m.tieu_de),
       publisher: { "@id": `${siteUrl()}/#to-chuc` }, isPartOf: { "@id": `${siteUrl()}/#website` }, isAccessibleForFree: true,
       about: ldThucThe("tu-vi"), articleSection: m.buoc.map((b) => b.tieu_de),
+      ...(m.ngay_dang ? { datePublished: m.ngay_dang, dateModified: m.cap_nhat ?? m.ngay_dang } : {}),
     },
     ldDuongDan([
       { ten: "Trang chủ", duong: "/" }, { ten: "Tử vi", duong: "/tu-vi" }, { ten: "Lá số mẫu", duong: "/tu-vi/la-so-mau" }, { ten: m.tieu_de, duong },

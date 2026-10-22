@@ -171,6 +171,7 @@ export interface BuocDoc { ma: string; tieu_de: string; cach_doc: string; doan: 
 export interface ThuatNguKb { ma: string; ten: string; han: string | null; mo_dun: string; de_hieu: string; vi_du: string | null; khop: string[] }
 export interface LaSoMau extends MucLaSoMau {
   gioi_tinh: "nam" | "nu"; ngay: string; gio: string; noi_sinh: string; ngay_xem: string; trang_thai: string;
+  ngay_dang?: string; cap_nhat?: string;
   la_so: unknown; buoc: BuocDoc[];
 }
 export async function dsLaSoMau(): Promise<MucLaSoMau[]> {
@@ -202,6 +203,7 @@ export interface TuoiHuong {
   moc_dau_nam: { lap_xuan: string; tet_viet: string; tet_trung: string; tet_lech: boolean };
   sinh_truoc_moc: { nam_tinh: number; slug: string | null };
   tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; nguon: string; luu_y: string[]; trang_thai: string;
+  ngay_dang?: string; cap_nhat?: string;
 }
 /** "huong-hop-tuoi" = trang mục lục; "tuoi-1990" = trang con dưới mục lục (QH-URL). */
 export const duongTuoi = (slug: string) => (slug === "huong-hop-tuoi" ? CHUYEN.tuoi_huong : `${CHUYEN.tuoi_huong}/${slug}`);

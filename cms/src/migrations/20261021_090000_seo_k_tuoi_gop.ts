@@ -9,14 +9,27 @@ const MAU_CU = '/phong-thuy/huong-hop-tuoi/tuoi-{nam}-{gioi}'
 const MAU_MOI = '/phong-thuy/huong-hop-tuoi/tuoi-{nam}'
 const GOC = '/phong-thuy/huong-hop-tuoi/tuoi-'
 
-async function doiMau(db: MigrateUpArgs['db'], cu: string, moi: string) {
-  await db.execute(sql`UPDATE "cms"."mau_cum" SET "mau_duong" = ${moi} WHERE "mau_duong" = ${cu}
-    AND NOT EXISTS (SELECT 1 FROM "cms"."mau_cum" b WHERE b."mau_duong" = ${moi})`)
-  await db.execute(sql`UPDATE "cms"."_mau_cum_v" SET "version_mau_duong" = ${moi} WHERE "version_mau_duong" = ${cu}`)
+async function doiMau(db: MigrateUpArgs['db'], payload: MigrateUpArgs['payload'] | null, cu: string, moi: string) {
+  // Đồng bộ sổ trang (web mới deploy trước) có thể đã tạo sẵn mẫu NHÁP trống ở đường mới → xoá nháp đó để mẫu cũ (chữ
+  // biên tập thật) chuyển sang. Mẫu mới đã xuất bản thì không đụng, chỉ ghi log để Chủ biên gộp tay.
+  const coCu = (await db.execute(sql`SELECT 1 FROM "cms"."mau_cum" WHERE "mau_duong" = ${cu}`)).rows.length > 0
+  if (!coCu) return
+  await db.execute(sql`DELETE FROM "cms"."_mau_cum_v" WHERE "parent_id" IN
+    (SELECT id FROM "cms"."mau_cum" WHERE "mau_duong" = ${moi} AND COALESCE("_status"::text, 'draft') = 'draft')`)
+  await db.execute(sql`DELETE FROM "cms"."mau_cum" WHERE "mau_duong" = ${moi} AND COALESCE("_status"::text, 'draft') = 'draft'`)
+  const r = await db.execute(sql`UPDATE "cms"."mau_cum" SET "mau_duong" = ${moi} WHERE "mau_duong" = ${cu}
+    AND NOT EXISTS (SELECT 1 FROM "cms"."mau_cum" b WHERE b."mau_duong" = ${moi}) RETURNING id`)
+  if (!r.rows.length) {
+    payload?.logger.info(`SEO-K mẫu cụm: ĐÃ có mẫu xuất bản ở ${moi} — giữ nguyên, mẫu ${cu} cần gộp tay`)
+    return
+  }
+  await db.execute(sql`UPDATE "cms"."_mau_cum_v" AS v SET "version_mau_duong" = ${moi} WHERE v."version_mau_duong" = ${cu}
+    AND EXISTS (SELECT 1 FROM "cms"."mau_cum" p WHERE p.id = v.parent_id AND p."mau_duong" = ${moi})`)
+  payload?.logger.info(`SEO-K mẫu cụm: ${cu} → ${moi}`)
 }
 
 export async function up({ db, payload }: MigrateUpArgs): Promise<void> {
-  await doiMau(db, MAU_CU, MAU_MOI)
+  await doiMau(db, payload, MAU_CU, MAU_MOI)
   for (const gioi of ['nam', 'nu']) {
     const re = `^${GOC}[0-9]{4}-${gioi}$`
     const r = await db.execute(sql`
@@ -34,8 +47,8 @@ export async function up({ db, payload }: MigrateUpArgs): Promise<void> {
   }
 }
 
-export async function down({ db }: MigrateDownArgs): Promise<void> {
-  await doiMau(db, MAU_MOI, MAU_CU)
+export async function down({ db, payload }: MigrateDownArgs): Promise<void> {
+  await doiMau(db, payload, MAU_MOI, MAU_CU)
   const re = `^${GOC}[0-9]{4}$`
   await db.execute(sql`UPDATE "cms"."noi_dung_trang" AS a SET "duong" = a."duong" || '-nam' WHERE a."duong" ~ ${re}
     AND NOT EXISTS (SELECT 1 FROM "cms"."noi_dung_trang" b WHERE b."duong" = a."duong" || '-nam')`)

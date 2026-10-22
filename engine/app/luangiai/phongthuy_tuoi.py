@@ -139,6 +139,7 @@ def tieu_de_gop(nam: int) -> str:
     return f"Tuổi {_can_chi(nam)} {nam} hợp hướng nào? Nam mệnh {q_nam}, nữ mệnh {q_nu}"
 
 
+CAP_NHAT_GOP = "2026-10-22"
 _RIENG = ("gioi_tinh", "menh_quai", "huong_tot", "huong_xau", "bang_huong", "goi_y", "tra_loi_nhanh")
 
 
@@ -170,6 +171,8 @@ def tuoi_gop(nam: int) -> dict:
                "dap": ket + " Công cụ Phong thuỷ cho nhập cả hai người để xem hướng chung."})
     return {
         "slug": f"tuoi-{nam}", "nam": nam, "tieu_de": tieu_de_gop(nam),
+        # SEO-F đăng 2026-10-08; SEO-K gộp nam + nữ 2026-10-22 — đổi CAP_NHAT_GOP khi sửa nội dung trang.
+        "ngay_dang": "2026-10-08", "cap_nhat": CAP_NHAT_GOP,
         "mo_ta": (f"Sinh năm {nam} ({a['can_chi']}): nam mệnh {qa['quai']}, nữ mệnh {qb['quai']} — 4 hướng tốt, 4 hướng "
                   f"nên tránh, hướng cửa, bếp, giường cho từng người theo Bát trạch."),
         "can_chi": a["can_chi"], "nap_am": a["nap_am"], "trang_menh": a["trang_menh"],
