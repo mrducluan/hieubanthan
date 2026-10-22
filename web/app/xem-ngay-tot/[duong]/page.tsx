@@ -7,10 +7,10 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { LichThang, XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
 import { docDuong, duongNgay, ngayDangIndex, ngayTotCongKhai, thangCongKhai, thangIndex } from "@/lib/hoang-lich";
-import { goiLd, ldDuongDan, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
+import { goiLd, ldDuongDan, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { taoChu } from "@/lib/chu-trang";
-import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_NGAY, CHU_THANG } from "@/lib/chu/trang-con";
 
 type P = { params: Promise<{ duong: string }> };
@@ -22,8 +22,7 @@ function LdTrangCon({ duong, ten, moTa, cap, cuoi }: { duong: string; ten: strin
   return (
     <>
       <JsonLd data={goiLd(
-        { "@type": "WebPage", "@id": `${urlDayDu(duong)}#trang`, url: urlDayDu(duong), name: ten, description: moTa,
-          inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl()}/#website` } },
+        { ...ldTrangWeb({ duong, ten, about: ["Xem ngày tốt", "Hoàng lịch", "Giờ hoàng đạo"] }), description: moTa },
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Xem ngày tốt", duong: "/xem-ngay-tot" }, ...cap]),
       )} />
       <p className="mx-auto mt-10 max-w-3xl border-t border-line/50 pt-6 text-sm text-fg-muted">
@@ -33,7 +32,7 @@ function LdTrangCon({ duong, ten, moTa, cap, cuoi }: { duong: string; ten: strin
   );
 }
 
-export async function generateMetadata({ params }: P): Promise<Metadata> {
+async function metaGoc({ params }: P): Promise<Metadata> {
   const x = docDuong((await params).duong);
   if (!x) return {};
   if (x.loai === "ngay") {
@@ -106,3 +105,6 @@ export default async function Page({ params }: P) {
     </>
   );
 }
+
+// ND-7 đợt 2: ảnh chia sẻ của cụm (CMS → Mẫu cụm trang → "Hình trên trang") thay ảnh /og tự vẽ khi có.
+export const generateMetadata = async (...a: Parameters<typeof metaGoc>) => voiAnhChiaSe(await metaGoc(...a));

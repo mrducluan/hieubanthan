@@ -7,6 +7,9 @@ import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
 import { coTaiKhoan } from "@/lib/cua-sao";
 import { MAU_KIEM_CHUNG, TEN_LOAI_KIEM_CHUNG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
+import { TrangCmsQt } from "@/components/quan-tri/TrangCmsQt";
+import { cmsUrl } from "@/lib/cms";
+import { baoCaoTrangCms } from "@/lib/trang-cms-qt";
 import { baoCaoGa4, baoCaoGsc, baoCaoPosthog, MAU_TOI_THIEU, tinhGate, type BaoCaoPosthog, type DongGsc, type KetQua } from "@/lib/so-lieu-ngoai";
 
 export const metadata: Metadata = { title: "Tăng trưởng" };
@@ -159,7 +162,7 @@ function BangKiemChung({ ds }: { ds: DongKiemChung[] | null }) {
 export default async function Page() {
   const p = await congQuanTri();
   if (p.trang !== "ok") return <BaoCong trang={p.trang} email={"email" in p ? p.email : null} />;
-  const [ph, gsc, ga] = await Promise.all([baoCaoPosthog(), baoCaoGsc(), baoCaoGa4()]);
+  const [ph, gsc, ga, tc] = await Promise.all([baoCaoPosthog(), baoCaoGsc(), baoCaoGa4(), baoCaoTrangCms()]);
 
   return (
     <div className="space-y-6" data-testid="qt-tang-truong">
@@ -242,6 +245,15 @@ export default async function Page() {
             )}
           </div>
         ) : <div className="mt-3"><ChuaCo kq={ph} huongDan="PostHog → Settings → Personal API keys → tạo khoá quyền query:read → đặt POSTHOG_PERSONAL_API_KEY và POSTHOG_PROJECT_ID (số trong URL dự án) trên Vercel." /></div>}
+      </Card>
+
+      <Card data-testid="qt-trang-cms">
+        <h2 className="text-lg">Trang có nội dung CMS (đã xuất bản)</h2>
+        <p className="mt-1 text-sm text-fg-muted">Trang nào đang chạy chữ / hình / khối sửa trong CMS, và sau lần sửa gần nhất có thêm người bấm
+          vào từ Google không. Sửa tiêu đề, lời dẫn theo bảng “Cơ hội” bên dưới rồi quay lại đây xem số.</p>
+        {tc.ok ? (tc.du ? <TrangCmsQt bc={tc.du} cms={cmsUrl()} />
+          : <p className="mt-3 text-sm text-fg-muted">Chưa đọc được CMS (chưa đặt <code>CMS_URL</code> hoặc CMS không trả lời).</p>)
+          : <p className="mt-3 text-sm text-cinnabar">{tc.loi}</p>}
       </Card>
 
       <Card>

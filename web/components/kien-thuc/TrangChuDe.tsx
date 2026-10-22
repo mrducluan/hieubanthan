@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { CHU_DE, HINH_CHU_DE, TEN_MANG_SILO, duongTrang, mucLuc, truCua } from "@/lib/kien-thuc";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang } from "@/components/minh-hoa/TrangTri";
-import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
+import { goiLd, ldDuongDan, ldThucThe, mangTheoDuong, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
@@ -21,8 +21,8 @@ const MANG_CONG_CU: Record<string, string> = {
 export async function metaChuDe(khoa: string | null): Promise<Metadata> {
   const cd = khoa ? CHU_DE[khoa] : undefined;
   if (!cd) return { title: "Không tìm thấy", robots: { index: false } };
-  return apDungSeo({ title: cd.ten, description: cd.mo_ta, alternates: { canonical: cd.duong, types: { "text/markdown": `${cd.duong}.md` } },
-    openGraph: { title: cd.ten, description: cd.mo_ta, url: cd.duong, images: [`/og?tieu_de=${encodeURIComponent(cd.ten)}`] } }, await layNoiDungTrang(cd.duong));
+  // SEO-K: metaTrang dựng đủ bộ OG + Twitter (trước đây twitter kế thừa tiêu đề trang chủ) + ảnh có hình theo mảng.
+  return apDungSeo(metaTrang({ tieuDe: cd.ten, moTa: cd.mo_ta, duong: cd.duong, md: `${cd.duong}.md` }), await layNoiDungTrang(cd.duong));
 }
 
 export async function TrangChuDe({ khoa }: { khoa: string | null }) {
@@ -34,7 +34,9 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
   return (
     <div className="mx-auto max-w-4xl">
       <JsonLd data={goiLd(
-        { "@type": "CollectionPage", name: cd.ten, description: cd.mo_ta, url: urlDayDu(duong), inLanguage: "vi-VN",
+        { "@type": "CollectionPage", "@id": `${urlDayDu(duong)}#trang`, name: cd.ten, description: cd.mo_ta, url: urlDayDu(duong), inLanguage: "vi-VN",
+          isPartOf: { "@id": `${siteUrl()}/#website` }, publisher: { "@id": `${siteUrl()}/#to-chuc` },
+          about: [ldThucThe(mangTheoDuong(duong))].filter(Boolean),
           mainEntity: { "@type": "ItemList", numberOfItems: ds.length,
             itemListElement: ds.map((t, i) => ({ "@type": "ListItem", position: i + 1, url: urlDayDu(duongTrang(t.loai, t.slug)), name: t.tieu_de })) } },
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: TEN_MANG_SILO[tru] ?? "Kiến thức", duong: tru }, { ten: cd.ten, duong }]),

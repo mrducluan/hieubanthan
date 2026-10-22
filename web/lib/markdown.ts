@@ -34,6 +34,7 @@ export function mdTrang(t: TrangKienThuc, cap = 1): string {
     d.push(`${h(1)} ${m.tieu_de}`, "");
     if (m.doan) d.push(m.doan, "");
     if (m.danh_sach) d.push(...m.danh_sach.map((x) => `- ${x}`), "");
+    if (m.xem_them?.length) d.push(...m.xem_them.map((x) => `- Xem: [${x.tieu_de}](${urlDayDu(duongTrang(x.loai, x.slug))}.md)`), "");
   }
   for (const n of [t.trang_con, t.trang_con_hoa]) {
     if (n?.ds.length) d.push(`${h(1)} ${n.tieu_de}`, "", ...n.ds.map((x) => `- [${x.tieu_de}](${urlDayDu(duongTrang(x.loai, x.slug))}.md)`), "");
@@ -92,22 +93,28 @@ export function traMd(noiDung: string, duongHtml: string): Response {
   });
 }
 
-// SEO-F — trang tuổi hợp hướng
+// SEO-F → SEO-K — trang tuổi hợp hướng (nam + nữ một trang)
 export function mdTuoi(t: TuoiHuong): string {
   const d = [`# ${t.tieu_de}`, "", `> ${t.mo_ta}`, "", `URL: ${urlDayDu(duongTuoi(t.slug))}`,
-    `Năm ${t.can_chi} · nạp âm ${t.nap_am.ten} · mệnh quái ${t.menh_quai.quai} (${t.menh_quai.nhom})`, "",
-    "## Trả lời nhanh", "", t.tra_loi_nhanh, "", "## 4 hướng tốt (từ tốt nhất)", "",
-    ...t.huong_tot.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "", "## 4 hướng nên tránh", "",
-    ...t.huong_xau.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "", "## Cửa, bếp, giường, bàn làm việc", "",
-    ...t.goi_y.map((g) => `- ${g.tieu_de}: ${g.huong.join(" → ")}. ${g.noi_dung}`), "", "## Mốc đầu năm", "",
+    `Năm ${t.can_chi} · nạp âm ${t.nap_am.ten} · ${t.gioi.map((g) => `${g.gioi_tinh === "nam" ? "nam" : "nữ"} mệnh quái ${g.menh_quai.quai} (${g.menh_quai.nhom})`).join(" · ")}`, "",
+    "## Trả lời nhanh", "", t.tra_loi_nhanh, "",
+    ...(t.huong_chung.length ? [`Hướng tốt chung của nam và nữ cùng năm: ${t.huong_chung.join(", ")}.`, ""] : [])];
+  for (const g of t.gioi) {
+    const ten = g.gioi_tinh === "nam" ? "Nam" : "Nữ";
+    d.push(`## ${ten} sinh năm ${t.nam}: mệnh ${g.menh_quai.quai}`, "", g.tra_loi_nhanh, "", "### 4 hướng tốt (từ tốt nhất)", "",
+      ...g.huong_tot.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "", "### 4 hướng nên tránh", "",
+      ...g.huong_xau.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "", "### Cửa, bếp, giường, bàn làm việc", "",
+      ...g.goi_y.map((x) => `- ${x.tieu_de}: ${x.huong.join(" → ")}. ${x.noi_dung}`), "");
+  }
+  d.push("## Mốc đầu năm", "",
     `- Lập xuân: ${t.moc_dau_nam.lap_xuan}; Tết (lịch Việt): ${t.moc_dau_nam.tet_viet}; Tết (lịch Trung Quốc): ${t.moc_dau_nam.tet_trung}.`,
-    `- Sinh trước mốc: tính năm ${t.sinh_truoc_moc.nam_tinh}, mệnh ${t.sinh_truoc_moc.quai}.`, "",
+    `- Sinh trước mốc: tính năm ${t.sinh_truoc_moc.nam_tinh} (${t.gioi.map((g) => `${g.gioi_tinh === "nam" ? "nam" : "nữ"} ${g.sinh_truoc_moc.quai}`).join(", ")}).`, "",
     "## Câu hỏi thường gặp", "", ...t.hoi_dap.flatMap((h) => [`**${h.hoi}**`, "", h.dap, ""]),
-    `Nguồn: ${t.nguon}.`, ""];
+    `Nguồn: ${t.nguon}.`, "");
   return d.join("\n");
 }
 
 export function mdDsTuoi(ds: MucTuoiHuong[]): string {
   return ["# Hướng hợp tuổi (1960–2005, nam và nữ)", "", `URL: ${urlDayDu("/phong-thuy/huong-hop-tuoi")}`, "",
-    ...ds.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTuoi(t.slug))}.md): mệnh ${t.quai}, ${t.nhom}`), ""].join("\n");
+    ...ds.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTuoi(t.slug))}.md): nam ${t.quai_nam} (${t.nhom_nam}), nữ ${t.quai_nu} (${t.nhom_nu})`), ""].join("\n");
 }

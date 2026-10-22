@@ -90,6 +90,17 @@ export function locCoHoi(ds: DongGsc[], toiDa = 20): DongGsc[] {
     .sort((a, b) => b.impressions * (1 - b.ctr) - a.impressions * (1 - a.ctr)).slice(0, toiDa);
 }
 
+/** ND-6: số theo ngày của MỘT trang / một cụm URL (bộ lọc page) từ `tu` tới 2 ngày trước (số liệu chốt). */
+export async function gscTheoNgay(loc: { dimension: "page"; operator: string; expression: string }, tu: string): Promise<DongGsc[]> {
+  const den = doiNgay(2);
+  if (tu > den) return [];
+  const j = await goiGoogle<{ rows?: DongGsc[] }>(
+    `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(gscSite())}/searchAnalytics/query`,
+    { startDate: tu, endDate: den, dimensions: ["date"], dimensionFilterGroups: [{ filters: [loc] }], rowLimit: 200, dataState: "final" });
+  return j.rows ?? [];
+}
+export const ngayChotGsc = () => doiNgay(2);
+
 async function baoCaoGscTho(): Promise<BaoCaoGsc> {
   const [ngay, truyVan, trang, cap, tong] = await Promise.all([
     gsc(["date"], 40), gsc(["query"], 25), gsc(["page"], 25), gsc(["query", "page"], 1000), gsc([], 1),
@@ -178,7 +189,7 @@ export interface BaoCaoPosthog {
   } | null;
 }
 
-async function hogql<T>(query: string): Promise<T[]> {
+export async function hogql<T>(query: string): Promise<T[]> {
   const key = process.env.POSTHOG_PERSONAL_API_KEY, du_an = process.env.POSTHOG_PROJECT_ID?.trim();
   if (!key || !du_an) throw new ChuaKetNoi("Chưa đặt POSTHOG_PERSONAL_API_KEY + POSTHOG_PROJECT_ID.");
   if (!/^\d+$/.test(du_an)) throw new ChuaKetNoi("POSTHOG_PROJECT_ID phải là số.");
@@ -287,7 +298,7 @@ async function baoCaoPosthogTho(): Promise<BaoCaoPosthog> {
 // ------------------------------------------------------------------ cache + kết quả an toàn
 export type KetQua<T> = { ok: true; du: T } | { ok: false; chuaKetNoi: boolean; loi: string };
 
-function anToan<T>(f: () => Promise<T>, khoa: string) {
+export function anToan<T>(f: () => Promise<T>, khoa: string) {
   const c = unstable_cache(f, [khoa], { revalidate: 3600 });
   return async (): Promise<KetQua<T>> => {
     try { return { ok: true, du: await c() }; } catch (e) {

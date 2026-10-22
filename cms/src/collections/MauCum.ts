@@ -8,8 +8,8 @@ import { chuanHoaDuLieu } from "../kiem-dinh/kiem-dinh";
 import { xemKb, type NguonKb } from "../lib/kb-trang";
 import { kiemTrang } from "../lib/noi-dung-trang";
 import { regexMau } from "../lib/so-trang";
-import { baoWebLamMoi } from "../lib/web";
-import { locChu, NHOM_TRANG, tabChu, tabKhoi } from "./NoiDungTrang";
+import { baoWebLamMoi, linkXemTrang } from "../lib/web";
+import { locChu, locHinh, NHOM_TRANG, tabChu, tabHinh, tabKhoi } from "./NoiDungTrang";
 
 const HE_THONG = ["mau_duong", "nhom", "ten", "bien", "o", "nguon_kb", "tren_web", "mac_dinh"] as const;
 type Doc = Record<string, unknown> & { mau_duong?: string; bien?: unknown; _status?: string };
@@ -50,6 +50,8 @@ export const MauCum: CollectionConfig = {
     description: "Khối đặt quanh nội dung kiến thức cho CẢ CỤM trang (vd 168 trang \"sao ở cung\"). Chữ kiến thức sửa ở Kho tri thức (git).",
     hidden: ({ user }) => ["cong_tac_vien", "may_doc"].includes(String((user as { vai_tro?: string } | null)?.vai_tro)),
     pagination: { defaultLimit: 50 },
+    // ND-6: web mở một trang ví dụ của cụm ở chế độ nháp.
+    preview: (doc) => linkXemTrang(typeof doc.mau_duong === "string" ? doc.mau_duong : null),
   },
   versions: { drafts: { autosave: { interval: 2000 }, schedulePublish: true }, maxPerDoc: 30 },
   access: {
@@ -64,7 +66,7 @@ export const MauCum: CollectionConfig = {
   },
   hooks: {
     beforeValidate: [({ data }) => (data ? chuanHoaDuLieu(data) : data)],
-    beforeChange: [giuHeThong, locChu, kiemDinh],
+    beforeChange: [giuHeThong, locChu, locHinh, kiemDinh],
     afterChange: [lamMoi],
     // Xoá mẫu cụm (Chủ biên) → web bỏ khối của cụm ngay, không chờ hạn cache 5 phút.
     afterDelete: [async ({ doc }) => { await baoWebLamMoi("mau_cum"); return doc; }],
@@ -97,7 +99,7 @@ export const MauCum: CollectionConfig = {
     // Cụm không dựng từ kho tri thức (trang con công cụ, tác giả) không có khung xem trước KB.
     { type: "ui", name: "xem_kb", label: "Nội dung kho tri thức", admin: { condition: (d) => Boolean((d?.nguon_kb as { kieu?: string } | undefined)?.kieu),
       components: { Field: "/components/XemTruocKb#XemTruocKb" } } },
-    { type: "tabs", tabs: [tabChu, tabKhoi(() => true, false)] },
+    { type: "tabs", tabs: [tabChu, tabHinh, tabKhoi(() => true, false)] },
     { name: "ghi_chu_kiem_dinh", label: "Kiểm định", type: "textarea",
       access: { read: ({ req }) => laNguoiViet(req) },   // hook kiemDinh ghi đè mỗi lần lưu
       admin: { readOnly: true, position: "sidebar", description: "⛔ = chặn xuất bản · ⚠ = nên xem lại." } },

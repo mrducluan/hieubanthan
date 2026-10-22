@@ -84,3 +84,41 @@ def test_tro_toi_trang_menh_gi():
     t = pt_tuoi.tuoi(1990, "nam")
     assert t["trang_menh"] == "/bat-tu/menh-theo-nam/sinh-nam-1990-menh-gi"
     assert trang.lay("menh_nam", t["trang_menh"].rsplit("/", 1)[1]) is not None
+
+
+# ---- SEO-K (chủ dự án duyệt 2026-10-21): gộp nam + nữ cùng năm vào MỘT trang (92 → 46, 308 từ bản -nam/-nu) ----
+def test_gop_nam_nu_1990():
+    r = pt_tuoi.tuoi_gop(1990)
+    assert r["slug"] == "tuoi-1990" and r["nam"] == 1990 and r["can_chi"] == "Canh Ngọ"
+    assert [g["gioi_tinh"] for g in r["gioi"]] == ["nam", "nu"]
+    assert r["gioi"][0]["menh_quai"]["quai"] == "Khảm" and r["gioi"][1]["menh_quai"]["quai"] == "Cấn"
+    assert r["tieu_de"] == "Tuổi Canh Ngọ 1990 hợp hướng nào? Nam mệnh Khảm, nữ mệnh Cấn"
+    assert len(r["tieu_de"]) <= 70 and len(r["mo_ta"]) <= 160
+    assert "Khảm" in r["tra_loi_nhanh"] and "Cấn" in r["tra_loi_nhanh"]
+    assert r["huong_chung"] == []                        # Đông tứ (Khảm) vs Tây tứ (Cấn): không chung hướng tốt
+    hoi = [h["hoi"] for h in r["hoi_dap"]]
+    assert len(hoi) == len(set(hoi)) >= 6
+    assert r["sinh_truoc_moc"]["slug"] == "tuoi-1989"
+
+
+def test_gop_cung_nhom_co_huong_chung():
+    r = pt_tuoi.tuoi_gop(1993)          # nam 1993 Khôn, nữ 1993 Khảm? — chỉ kiểm tính nhất quán
+    tot = [set(h["huong"] for h in g["huong_tot"]) for g in r["gioi"]]
+    assert set(r["huong_chung"]) == tot[0] & tot[1]
+
+
+def test_gop_danh_sach_46_va_slug():
+    ds = pt_tuoi.danh_sach_gop()
+    assert len(ds) == 46 and ds[0]["slug"] == "tuoi-1960" and ds[-1]["slug"] == "tuoi-2005"
+    assert ds[30]["quai_nam"] and ds[30]["quai_nu"]
+    assert pt_tuoi.tu_slug_gop("tuoi-1990") == 1990
+    assert pt_tuoi.tu_slug_gop("tuoi-1990-nam") == 1990        # slug cũ vẫn tra được (web 308 về bản gộp)
+    assert pt_tuoi.tu_slug_gop("tuoi-1959") is None
+
+
+def test_api_gop():
+    c = TestClient(app)
+    assert len(c.get("/v1/phongthuy/tuoi-gop").json()["trang"]) == 46
+    r = c.get("/v1/phongthuy/tuoi-gop/tuoi-1990").json()
+    assert r["slug"] == "tuoi-1990" and len(r["gioi"]) == 2
+    assert c.get("/v1/phongthuy/tuoi-gop/tuoi-2050").status_code == 404

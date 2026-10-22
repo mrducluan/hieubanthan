@@ -6,6 +6,7 @@ import { HinhBauTroi, HinhMang, type KieuMang } from "@/components/minh-hoa/Tran
 import { CuaVao } from "@/components/hoso/CuaVao";
 import { DiemMuLuot } from "@/components/trang-chu/DiemMuLuot";
 import { ChuNhan } from "@/components/cms/ChuNhan";
+import { AnhCmsHoac } from "@/components/cms/AnhCmsHoac";
 import { taoChu } from "@/lib/chu-trang";
 import { CHU_TRANG_CHU, SO_DIEM_MU } from "@/lib/chu/trang-chu";
 import { SoSanhChatbot } from "@/components/trang-chu/SoSanhChatbot";
@@ -19,13 +20,15 @@ import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 // Mô tả trang chủ ≤ 160 ký tự (mô tả site dài hơn vẫn dùng cho schema/llms.txt).
-const TIEU_DE_CHU = "Hiểu Bản Thân — con số nói gì về bạn";
+// SEO-K (chủ dự án duyệt 2026-10-21): tiêu đề có từ khoá người ta tìm; CMS "Trang website" vẫn ghi đè được.
+const TIEU_DE_CHU = "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân";
 const MO_TA_CHU = "Thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ): tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.";
 const META: Metadata = {
+  title: { absolute: TIEU_DE_CHU },
   description: MO_TA_CHU,
   alternates: { canonical: "/", types: { "text/markdown": "/index.md" } },
   // openGraph/twitter của trang thay hẳn bản ở layout (không gộp) → khai đủ trường.
-  openGraph: { type: "website", locale: "vi_VN", siteName: TEN_SITE, url: "/", title: TIEU_DE_CHU, description: MO_TA_CHU, images: ["/og"] },
+  openGraph: { type: "website", locale: "vi_VN", siteName: TEN_SITE, url: "/", title: TIEU_DE_CHU, description: MO_TA_CHU, images: [{ url: "/og", width: 1200, height: 630, alt: TIEU_DE_CHU }] },
   twitter: { card: "summary_large_image", title: TIEU_DE_CHU, description: MO_TA_CHU, images: ["/og"] },
 };
 
@@ -76,7 +79,9 @@ export default async function TrangChu() {
         </div>
         <div className="relative">
           <div className="pointer-events-none absolute inset-[8%] rounded-full bg-gold/10 blur-3xl" aria-hidden />
-          <HinhBauTroi className="relative mx-auto max-w-[19rem] sm:max-w-[24rem] lg:max-w-[32rem]" />
+          <AnhCmsHoac anh={nd.hinh["hero.hinh"]} uuTien className="relative mx-auto h-auto w-full max-w-[19rem] sm:max-w-[24rem] lg:max-w-[32rem]">
+            <HinhBauTroi className="relative mx-auto max-w-[19rem] sm:max-w-[24rem] lg:max-w-[32rem]" />
+          </AnhCmsHoac>
         </div>
       </section>
 
@@ -98,7 +103,9 @@ export default async function TrangChu() {
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {MANG.map(({ href, khoa, kieu }) => (
             <Link key={href} href={href} className="glass group flex flex-col rounded-2xl p-4 hover:border-gold/50 sm:p-5">
-              <HinhMang kieu={kieu} className="h-14 self-start origin-left transition-transform duration-300 group-hover:scale-105 sm:h-16" />
+              <AnhCmsHoac anh={nd.hinh[`mang.${khoa}`]} co="nho" className="h-14 w-auto self-start object-contain sm:h-16">
+                <HinhMang kieu={kieu} className="h-14 self-start origin-left transition-transform duration-300 group-hover:scale-105 sm:h-16" />
+              </AnhCmsHoac>
               <p className="mt-3 font-serif text-lg sm:mt-4 sm:text-xl">{c(`mang.${khoa}_ten`)}</p>
               <p className="mt-1 text-sm text-fg-muted">{c(`mang.${khoa}_mo`)}</p>
               <span className="mt-auto block pt-4"><ArrowRight className="size-4 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden /></span>

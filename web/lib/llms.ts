@@ -52,7 +52,7 @@ export async function taoLlmsTxt(): Promise<string> {
     "## Trả lời nhanh theo câu hỏi hay gặp",
     "",
     `- "Sinh năm X mệnh gì?" → ${urlDayDu("/bat-tu/menh-theo-nam")} (mỗi năm 1950–2025 một trang: can chi, mệnh nạp âm, màu hợp, tuổi hợp – xung).`,
-    `- "Tuổi X hợp hướng nhà nào?" → ${urlDayDu("/phong-thuy/huong-hop-tuoi")} (năm 1960–2005, nam và nữ: 4 hướng tốt, 4 hướng xấu, cách bố trí).`,
+    `- "Tuổi X hợp hướng nhà nào?" → ${urlDayDu("/phong-thuy/huong-hop-tuoi")} (năm 1960–2005, nam và nữ cùng một trang dạng ${urlDayDu("/phong-thuy/huong-hop-tuoi/tuoi-1990")}: 4 hướng tốt, 4 hướng xấu, cách bố trí).`,
     `- "Số chủ đạo X hợp nghề gì / yêu thế nào / hợp số mấy?" → ${urlDayDu("/than-so/nghe-nghiep")} · ${urlDayDu("/than-so/tinh-yeu")} · ${urlDayDu("/hop-doi/cap-so")}`,
     `- "Năm nay tôi là năm cá nhân số mấy?" → cách tự tính ở ${urlDayDu("/than-so/nam-ca-nhan")}, hoặc tính đúng cho từng người tại ${urlDayDu("/")}.`,
     `- "Sao X ở cung Y nghĩa là gì?" → ${urlDayDu("/tu-vi/sao-o-cung")} · "Hoá Lộc/Quyền/Khoa/Kỵ ở cung Y?" → ${urlDayDu("/tu-vi/tu-hoa")}`,

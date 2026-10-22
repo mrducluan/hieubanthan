@@ -42,6 +42,13 @@ async function tokenQt(request: APIRequestContext): Promise<string> {
   return (await r.json()).token as string;
 }
 
+/** Thanh trên nằm trong <Suspense fallback={menu mặc định}>: lúc trang đang tải dần, bản mặc định và bản CMS (đặt trong
+ *  <div hidden id="S:…"> chờ React hoán đổi — React 19 gom lần lộ theo nhịp, có thể sau sự kiện load) cùng có trong DOM.
+ *  Đợi lộ hết rồi mới đọc / bấm menu. */
+async function daLoHet(p: Page) {
+  await p.waitForFunction(() => !document.querySelector('div[hidden][id^="S:"]'));
+}
+
 /** Chờ web thấy thay đổi (CMS gọi webhook → web xoá cache; dev server có thể biên dịch chậm lần đầu). */
 async function choWeb(request: APIRequestContext, duong: string, kiem: (s: number, body: string) => boolean) {
   await expect.poll(async () => {
@@ -459,6 +466,56 @@ test("ND-7: chữ trên trang — tab trong CMS, sửa chip + hàng bảng trang
   await choWeb(request, "/xem-ngay-tot/2026-10-21", (s, b) => s === 200 && b.includes("Ngày 21/10/2026 tốt hay xấu?"));
 });
 
+test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát), hình lớn trang chủ từ thư viện, chữ dùng chung ở form", async ({ page, request }) => {
+  const token = await tokenQt(request);
+  const h = { Authorization: `JWT ${token}` };
+  const trang = (await (await request.get(`${CMS}/api/noi-dung-trang?where[duong][equals]=%2F&depth=0&draft=true`, { headers: h })).json()).docs[0] as { id: number };
+
+  // 1) nháp chưa xuất bản: người đọc không thấy; mở link xem trước (ký "trang:/") thì thấy + có dải báo; thoát → bản thật
+  expect((await request.patch(`${CMS}/api/noi-dung-trang/${trang.id}?draft=true`, { headers: h,
+    data: { chu: { "dau.chip_1": "Chip nháp chưa xuất bản" } } })).ok()).toBeTruthy();
+  await page.goto(`${WEB}/`);
+  await expect(page.getByTestId("hero-diem")).not.toContainText("Chip nháp chưa xuất bản");
+  const ma = createHmac("sha256", BI_MAT.preview).update("xem-truoc:trang:/").digest("base64url");
+  await page.goto(`${WEB}/api/cms/xem-truoc?duong=%2F&ma=${ma}`);
+  await expect(page).toHaveURL(`${WEB}/`);
+  await expect(page.getByTestId("dai-xem-nhap")).toBeVisible();
+  await expect(page.getByTestId("hero-diem")).toContainText("Chip nháp chưa xuất bản");
+  await page.getByTestId("dai-xem-nhap").getByRole("link", { name: "Thoát xem trước" }).click();
+  await expect(page.getByTestId("dai-xem-nhap")).toHaveCount(0);
+  await expect(page.getByTestId("hero-diem")).not.toContainText("Chip nháp chưa xuất bản");
+
+  // 2) hình lớn trang chủ thay bằng ảnh thư viện (xuất bản) → <img> có alt, hết hình vẽ code ở chỗ đó
+  const png = await sharp({ create: { width: 800, height: 800, channels: 3, background: "#2a2450" } }).png().toBuffer();
+  const up = await request.post(`${CMS}/api/media`, { headers: h, multipart: {
+    file: { name: "hero-nd7.png", mimeType: "image/png", buffer: png }, _payload: JSON.stringify({ alt: "Hình trang chủ ND-7" }) } });
+  expect(up.status(), await up.text()).toBe(201);
+  const anhId = (await up.json()).doc.id as number;
+  const r = await request.patch(`${CMS}/api/noi-dung-trang/${trang.id}`, { headers: h, data: { _status: "published", chu: null, hinh: { "hero.hinh": anhId } } });
+  expect(r.status(), await r.text()).toBe(200);
+  await choWeb(request, "/", (s, b) => s === 200 && b.includes("Hình trang chủ ND-7"));
+  await page.goto(`${WEB}/`);
+  const img = page.getByTestId("hero").getByTestId("anh-cms");
+  await expect(img).toHaveAttribute("alt", "Hình trang chủ ND-7");
+  await expect.poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+
+  // 3) chữ dùng chung: tiêu đề ô vào trang chủ + nút gửi của form hồ sơ
+  expect((await request.post(`${CMS}/api/globals/chu-chung`, { headers: h,
+    data: { chu: { "cua_vao.tieu_de": "Nhập 2 thông tin là xong", "ho_so.nut_xem": "Xem ngay số của tôi" } } })).ok()).toBeTruthy();
+  await choWeb(request, "/", (s, b) => s === 200 && b.includes("Nhập 2 thông tin là xong"));
+  await page.goto(`${WEB}/`);
+  await expect(page.getByText("Nhập 2 thông tin là xong")).toBeVisible();
+  await expect(page.getByRole("button", { name: /Xem ngay số của tôi/ })).toBeVisible();
+
+  // dọn: về chữ + hình gốc
+  expect((await request.post(`${CMS}/api/globals/chu-chung`, { headers: h, data: { chu: null } })).ok()).toBeTruthy();
+  expect((await request.patch(`${CMS}/api/noi-dung-trang/${trang.id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
+  // ô vào trang chủ chỉ dựng ở trình duyệt (sau khi đọc hồ sơ trên máy) → HTML máy chủ chỉ mang chữ thay qua context
+  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Hình trang chủ ND-7") && !b.includes("Nhập 2 thông tin là xong"));
+  await page.goto(`${WEB}/`);
+  await expect(page.getByText("Bắt đầu — chỉ cần 2 thông tin")).toBeVisible();
+});
+
 test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức, ghi đè một URL ẩn khối mẫu; pháp lý sửa mục + ngày hiệu lực, bắt buộc tích đối chiếu", async ({ page, request }) => {
   const token = await tokenQt(request);
   const h = { Authorization: `JWT ${token}` };
@@ -559,6 +616,7 @@ test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa
   await choWeb(request, "/", (s, b) => s === 200 && b.includes("Góc đọc"));
 
   await page.goto(`${WEB}/`);
+  await daLoHet(page);
   const menu = page.getByTestId("menu-dau-trang");
   await expect(menu.getByRole("link", { name: "Góc đọc" })).toHaveAttribute("href", "/blog");
   await expect(menu.getByText("Khám phá", { exact: true })).toHaveCount(0);   // menu theo CMS, không trộn mặc định
@@ -567,10 +625,12 @@ test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa
   await expect(con.getByRole("link", { name: /Bài số 7 nổi bật/ })).toHaveAttribute("href", "/blog/so-chu-dao-7");
   await expect(con).toContainText("Bài chọn của tuần");
   await page.goto(`${WEB}/tu-vi`);   // trang là menu con → mục cha sáng
+  await daLoHet(page);
   await expect(menu.locator("[aria-current=page]")).toHaveText("Góc đọc");
 
   const dt = await (await browser.newContext({ viewport: { width: 390, height: 844 } })).newPage();
   await dt.goto(`${WEB}/`);
+  await daLoHet(dt);
   await dt.getByTestId("nut-menu").click();
   await expect(dt.getByTestId("menu-di-dong").getByRole("link", { name: "Bài số 7 nổi bật" })).toBeVisible();
 

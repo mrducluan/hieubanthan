@@ -1,47 +1,13 @@
-// /blog — mục lục bài blog: bài của ban biên tập (CMS) + bài trao đổi SEO từ NotFair, gộp bằng gopBaiBlog
-// (bài CMS thắng khi trùng slug; mọi link giữ dạng /blog/{slug}). Chip chuyên mục dẫn tới /blog/chuyen-muc/{slug}.
+// /blog — mục lục bài blog (bài CMS + bài trao đổi NotFair). SEO-K: phân trang 24 bài/trang — đây là trang 1, trang sau
+// ở /blog/trang/{n}; khung chung ở components/blog/TrangBlog.tsx.
 import type { Metadata } from "next";
-import Link from "next/link";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { ChipChuyenMuc, chuyenMucCoBai, LuoiBai } from "@/components/blog/LuoiBai";
-import { dsBaiTongHop, duongBlog } from "@/lib/blog";
-import { goiLd, ldDuongDan, metaTrang, urlDayDu } from "@/lib/seo";
-import { KhoiCms } from "@/components/cms/KhoiCms";
-import { LoiDanCms } from "@/components/cms/DauTrangCms";
+import { TrangBlog, META_BLOG, DUONG_BLOG } from "@/components/blog/TrangBlog";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
-const MO_TA = "Bài viết về hiểu bản thân, thần số học, Tử vi, Kinh Dịch, Bát tự, phong thuỷ và đời sống — đọc thêm ngoài thư viện kiến thức.";
-const META = metaTrang({ tieuDe: "Blog", moTa: MO_TA, duong: "/blog" });
-const META_GOC: Metadata = { ...META, alternates: { ...META.alternates, types: { "application/rss+xml": "/blog/rss.xml" } } };
-
-const DUONG = "/blog";
-
 export async function generateMetadata(): Promise<Metadata> {
-  return apDungSeo(META_GOC, await layNoiDungTrang(DUONG));
+  return apDungSeo(META_BLOG, await layNoiDungTrang(DUONG_BLOG));
 }
 
 export default async function Page() {
-  const [ds, nd] = await Promise.all([dsBaiTongHop(), layNoiDungTrang(DUONG)]);
-  return (
-    <div className="mx-auto max-w-5xl">
-      <JsonLd data={goiLd(
-        {
-          "@type": "Blog", name: "Blog", description: MO_TA, url: urlDayDu("/blog"), inLanguage: "vi-VN",
-          blogPost: ds.map((p) => ({ "@type": "BlogPosting", headline: p.tieuDe, url: urlDayDu(duongBlog(p.slug)), ...(p.anh ? { image: p.anh.src } : {}), ...(p.ngay ? { datePublished: p.ngay } : {}) })),
-        },
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Blog", duong: "/blog" }]),
-      )} />
-      <p className="eyebrow">Blog</p>
-      <h1 className="mt-2 text-4xl sm:text-5xl">{nd.dau.h1 ?? "Blog"}</h1>
-      <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{MO_TA}</LoiDanCms>
-      <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
-      <ChipChuyenMuc ds={chuyenMucCoBai(ds)} />
-
-      {ds.length === 0 ? (
-        <p className="glass mt-8 rounded-2xl p-6 text-fg-muted">Chưa có bài viết. Trong lúc chờ, mời bạn đọc <Link href="/kien-thuc" className="text-gold underline underline-offset-4">thư viện kiến thức</Link>.</p>
-      ) : <LuoiBai ds={ds} />}
-      <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-12" />
-      <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />
-    </div>
-  );
+  return <TrangBlog n={1} />;
 }
