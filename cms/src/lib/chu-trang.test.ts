@@ -32,3 +32,16 @@ test("bangCua đọc mac_dinh.chu an toàn; chuDaSua chỉ lấy chuỗi", () =>
   assert.deepEqual(bangCua({ chu: [1] }), {});
   assert.deepEqual(chuDaSua({ a: "x", b: 2 }), ["x"]);
 });
+
+test("hình: chỉ khoá trong bảng, nhận số id hoặc bản đã chụp, ảnh mất khỏi thư viện thì bỏ", async () => {
+  const { chupHinh, maAnh, bangHinhCua } = await import("./chu-trang.ts");
+  const bang = { "hero.hinh": { nhan: "Hero" }, chia_se: { nhan: "OG" } };
+  const kho: Record<string, Record<string, unknown>> = {
+    "7": { id: 7, url: "/api/media/file/a.webp", alt: "Ảnh A", width: 800, height: 800, sizes: { nho: { url: "/n.webp", width: 480, height: 480 }, og: { url: null } } },
+  };
+  const ra = await chupHinh(bang, { "hero.hinh": 7, chia_se: { id: "9", url: "cũ" }, "khoa.la": 7 }, async (id) => kho[String(id)] ?? null);
+  assert.deepEqual(ra, { "hero.hinh": { id: 7, url: "/api/media/file/a.webp", alt: "Ảnh A", width: 800, height: 800, sizes: { nho: { url: "/n.webp", width: 480, height: 480 } } } });
+  assert.equal(await chupHinh(bang, { chia_se: "x" }, async () => null), null);
+  assert.equal(maAnh("12"), "12"); assert.equal(maAnh({ id: 3 }), 3); assert.equal(maAnh("1; drop"), null);
+  assert.deepEqual(bangHinhCua({ hinh: bang }), bang);
+});

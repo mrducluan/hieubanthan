@@ -11,6 +11,7 @@ import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { taoChu } from "@/lib/chu-trang";
 import { CHU_KHAM_PHA } from "@/lib/chu/trang-tinh";
+import { AnhCmsHoac } from "@/components/cms/AnhCmsHoac";
 
 const META: Metadata = metaTrang({
   tieuDe: "Khám phá: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch",
@@ -51,7 +52,9 @@ export default async function KhamPha() {
           <Link key={href} href={href}
             className={`hien-dan glass group flex flex-col rounded-2xl p-5 hover:border-gold/50 sm:p-6 ${i === 0 ? "sm:col-span-2" : ""}`}>
             <div className="flex items-center justify-between">
-              <HinhMang kieu={kieu} className="h-14 shrink-0 origin-left transition-transform duration-300 group-hover:scale-105" />
+              <AnhCmsHoac anh={nd.hinh[`the.${khoa}`]} co="nho" className="h-14 w-auto shrink-0 object-contain">
+                <HinhMang kieu={kieu} className="h-14 shrink-0 origin-left transition-transform duration-300 group-hover:scale-105" />
+              </AnhCmsHoac>
               <span className="rounded-full border border-line px-3 py-1 text-xs text-fg-faint">{c(`the.${khoa}_can`)}</span>
             </div>
             <h2 className="mt-5 text-2xl">{c(`the.${khoa}_ten`)}</h2>

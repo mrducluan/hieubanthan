@@ -29,7 +29,7 @@ def test_hoa_ky_tai_bach():
     assert {"loai": "sao_cung", "slug": "thai-duong-cung-tai-bach"} in [{k: c[k] for k in ("loai", "slug")} for c in con]
     assert all(trang.lay(c["loai"], c["slug"]) for c in con)
     tp = next(m for m in t["muc"] if m["tieu_de"].startswith("Tam phương tứ chính"))
-    assert "Phúc Đức" in " ".join(tp["danh_sach"])                         # Tài Bạch xung Phúc Đức
+    assert "Phúc Đức" in tp["doan"] and "hoa-ky-cung-phuc-duc" in {x["slug"] for x in tp["xem_them"]}                         # Tài Bạch xung Phúc Đức
     assert t["minh_hoa"]["kieu"] == "hoa_cung" and t["minh_hoa"]["hoa"] == "Kỵ"
 
 

@@ -209,6 +209,20 @@ def api_tuoi(slug: str) -> dict:
     return {"engine_version": ENGINE_VERSION, **pt_tuoi.tuoi(*k)}
 
 
+# SEO-K: trang gộp nam + nữ (46 trang). Route cũ giữ để web/CMS bản trước deploy vẫn chạy trong lúc chuyển.
+@router.get("/tuoi-gop")
+def api_tuoi_gop_danh_sach() -> dict:
+    return {"engine_version": ENGINE_VERSION, "trang": pt_tuoi.danh_sach_gop()}
+
+
+@router.get("/tuoi-gop/{slug}")
+def api_tuoi_gop(slug: str) -> dict:
+    nam = pt_tuoi.tu_slug_gop(slug)
+    if nam is None:
+        raise HTTPException(404, detail="Không có trang tuổi này")
+    return {"engine_version": ENGINE_VERSION, **pt_tuoi.tuoi_gop(nam)}
+
+
 # --------------------------------------------------------------------------- #
 # PT-ĐS — báo cáo "Nhà của bạn" (đời thường, tất định, miễn phí)
 # --------------------------------------------------------------------------- #

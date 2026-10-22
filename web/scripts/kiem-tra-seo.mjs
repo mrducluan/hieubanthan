@@ -2,10 +2,14 @@
 // Rà SEO kỹ thuật trên một bản đã chạy (local hoặc production): đọc sitemap.xml, mở từng trang, kiểm tra
 // title · description · canonical · H1 · robots · Open Graph · JSON-LD · alt ảnh · link nội bộ hỏng · bản .md.
 // Không cần thư viện ngoài. Thoát mã 1 nếu có LỖI (cảnh báo không làm hỏng).
+// SEO-K: đo thêm TTFB + byte HTML (gzip) từng trang, vị trí khối "Trả lời nhanh", kiểm JSON-LD đủ chuẩn E-E-A-T
+// (Article có author/publisher/ngày/ảnh; không khai "Draft"), đọc cả /sitemap-ngay.xml (mặc định 30 ngày đầu,
+// --het-ngay để quét đủ). Số TTFB dùng để quyết bộ nhớ đệm HTML (CSP hash/PPR — đụng CSP-2): docs/AUDIT-AIO-SEO-2026-10.md.
 //
 //   node scripts/kiem-tra-seo.mjs https://hieuban.com
 //   node scripts/kiem-tra-seo.mjs http://localhost:3000 --goc-canonical https://hieuban.com
 import { readFileSync } from "node:fs";
+import { gzipSync } from "node:zlib";
 
 // Trang có bản .md: thư viện /kien-thuc + mọi cụm/trang kiến thức theo silo mảng (QH-URL, lib/chuyen-huong.json).
 const CHUYEN = JSON.parse(readFileSync(new URL("../lib/chuyen-huong.json", import.meta.url), "utf8"));
@@ -33,9 +37,15 @@ async function lay(url, opt = {}) {
   }
 }
 
+const docLoc = (xml) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(gocCanonical, goc));
 const sm = await (await lay(`${goc}/sitemap.xml`)).text();
-const urls = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(gocCanonical, goc));
-console.log(`Sitemap: ${urls.length} URL`);
+const urlsChinh = docLoc(sm);
+const rNgay = await lay(`${goc}/sitemap-ngay.xml`);
+const urlsNgay = rNgay.status === 200 ? docLoc(await rNgay.text()) : [];
+if (rNgay.status !== 200) loi.push(`/sitemap-ngay.xml: HTTP ${rNgay.status}`);
+const urls = [...urlsChinh, ...(process.argv.includes("--het-ngay") ? urlsNgay : urlsNgay.slice(0, 30))];
+console.log(`Sitemap: ${urlsChinh.length} URL + sitemap ngày ${urlsNgay.length} URL (quét ${urls.length - urlsChinh.length})`);
+const doTtfb = [];
 
 // URL trong sitemap mà robots.txt chặn (nhóm User-agent: *) — luật khớp dài nhất thắng, Allow thắng khi dài bằng nhau.
 {
@@ -63,10 +73,18 @@ const linkNoiBo = new Set();
 let i = 0;
 for (const url of urls) {
   i++;
+  const t0 = performance.now();
   const r = await lay(url);
+  const ttfb = performance.now() - t0;
   if (r.status !== 200) { ghi(loi, url, `HTTP ${r.status}`); continue; }
   const html = await r.text();
   const duong = url.replace(goc, "") || "/";
+  const gz = gzipSync(html).length;
+  doTtfb.push({ duong, ttfb, byte: Buffer.byteLength(html), gz });
+  if (ttfb > 1500) ghi(canh, url, `TTFB ${Math.round(ttfb)} ms (> 1,5 s — bot trả lời có thể bỏ qua)`);
+  if (gz > 300_000) ghi(canh, url, `HTML ${Math.round(gz / 1000)} KB gzip (> 300 KB)`);
+  const viTriTl = Buffer.byteLength(html.slice(0, Math.max(0, html.indexOf("Trả lời nhanh"))));
+  if (html.includes("Trả lời nhanh") && viTriTl > 100_000) ghi(canh, url, `"Trả lời nhanh" nằm sau byte ${Math.round(viTriTl / 1000)} KB`);
   const t = giaiMa(html.match(/<title>([^<]*)<\/title>/)?.[1] ?? "");
   if (!t) ghi(loi, url, "thiếu <title>");
   else if (!/<title>/.test(html.split("</head>")[0] ?? "")) ghi(loi, url, "<title> không nằm trong <head> (bot không chạy JS đọc sai)");
@@ -93,7 +111,19 @@ for (const url of urls) {
   if (!meta(html, "name", "twitter:card")) ghi(canh, url, "thiếu twitter:card");
   const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   if (!ld.length) ghi(canh, url, "không có JSON-LD riêng của trang (chỉ có của site)");
-  for (const m of ld) { try { JSON.parse(m[1]); } catch { ghi(loi, url, "JSON-LD hỏng"); } }
+  for (const m of ld) {
+    let goi;
+    try { goi = JSON.parse(m[1]); } catch { ghi(loi, url, "JSON-LD hỏng"); continue; }
+    // E-E-A-T: Article/BlogPosting phải có tác giả, nhà xuất bản, ảnh, ngày; không tự khai nháp (BM-1).
+    for (const n of goi["@graph"] ?? [goi]) {
+      const loai = [n["@type"]].flat();
+      if (loai.some((x) => ["Article", "BlogPosting", "NewsArticle"].includes(x))) {
+        for (const k of ["author", "publisher", "image", "headline"]) if (!n[k]) ghi(loi, url, `${loai[0]} thiếu ${k}`);
+        if (!n.datePublished && !n.dateModified) ghi(canh, url, `${loai[0]} thiếu datePublished/dateModified`);
+      }
+      if (n.creativeWorkStatus === "Draft") ghi(loi, url, "schema công khai ghi creativeWorkStatus Draft (BM-1)");
+    }
+  }
   const loaiLd = ld.map((m) => m[1].match(/"@type":"([^"]+)"/g)?.join(",")).join(",");
   if (ld.length <= 1 && !/BreadcrumbList/.test(loaiLd) && duong !== "/") ghi(canh, url, "thiếu BreadcrumbList");
   for (const img of html.match(/<img\b[^>]*>/g) ?? []) if (!/\balt="/.test(img)) ghi(loi, url, `ảnh thiếu alt: ${img.slice(0, 80)}`);
@@ -113,9 +143,17 @@ for (const l of conLai) {
   if (r.status >= 400) loi.push(`link hỏng ${l}: HTTP ${r.status}`);
   else if (r.status >= 300) canh.push(`link nội bộ qua chuyển hướng ${l} → ${r.headers.get("location")}`);
 }
-for (const u of ["/robots.txt", "/llms.txt", "/manifest.webmanifest", "/index.md"]) {
+for (const u of ["/robots.txt", "/llms.txt", "/manifest.webmanifest", "/index.md", "/blog/rss.xml"]) {
   const r = await lay(`${goc}${u}`);
   if (r.status !== 200) loi.push(`${u}: HTTP ${r.status}`);
+}
+
+if (doTtfb.length) {
+  const xep = [...doTtfb].sort((a, b) => a.ttfb - b.ttfb);
+  const pv = (q) => Math.round(xep[Math.min(xep.length - 1, Math.floor(q * xep.length))].ttfb);
+  const gzTb = Math.round(doTtfb.reduce((s, x) => s + x.gz, 0) / doTtfb.length / 1000);
+  console.log(`\nTTFB (${doTtfb.length} trang): p50 ${pv(0.5)} ms · p90 ${pv(0.9)} ms · p99 ${pv(0.99)} ms · HTML gzip TB ${gzTb} KB`);
+  console.log("Chậm nhất:"); for (const x of xep.slice(-5).reverse()) console.log(`  ${Math.round(x.ttfb)} ms  ${Math.round(x.gz / 1000)} KB  ${x.duong}`);
 }
 
 console.log(`\nLỖI (${loi.length}):`); for (const x of loi) console.log("  ✗ " + x);

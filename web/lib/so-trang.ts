@@ -10,9 +10,9 @@ import { NGAY_HIEU_LUC } from "@/lib/van-hanh";
 import type { NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
 import { ND_XEM_NGAY } from "@/app/xem-ngay-tot/noi-dung";
 import { ND_HAN_NAM, ND_LAM_NHA, ND_XONG_DAT } from "@/app/xem-tuoi-lam-nha/noi-dung";
-import type { BangChu } from "@/lib/chu-trang";
-import { CHU_TRANG_CHU } from "@/lib/chu/trang-chu";
-import { CHU_KHAM_PHA, CHU_KIEN_THUC } from "@/lib/chu/trang-tinh";
+import type { BangChu, BangHinh } from "@/lib/chu-trang";
+import { CHU_TRANG_CHU, HINH_TRANG_CHU } from "@/lib/chu/trang-chu";
+import { CHU_KHAM_PHA, CHU_KIEN_THUC, HINH_KHAM_PHA } from "@/lib/chu/trang-tinh";
 import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_NGAY, CHU_THANG, CHU_XONG_DAT_CON } from "@/lib/chu/trang-con";
 import {
   CHU_BAT_TU, CHU_HAN_NAM, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
@@ -31,6 +31,8 @@ export type MacDinhTrang = {
   ngay_hieu_luc?: string;
   /** ND-7 "Chữ trên trang": bảng chữ cố định của trang (khoá → chữ mặc định) — CMS cho sửa từng khoá. */
   chu?: BangChu;
+  /** ND-7 đợt 2 "Hình trên trang": chỗ đặt hình thay được bằng ảnh thư viện CMS. */
+  hinh?: BangHinh;
 };
 export type MucSoTrang = { duong: string; nhom: NhomTrang; ten: string; o: readonly OTrang[]; mac_dinh: MacDinhTrang };
 
@@ -42,6 +44,8 @@ export type MauCumTrang = {
   bien: readonly string[]; o: readonly OTrang[]; nguon_kb: NguonKb | null;
   /** ND-7: bảng chữ dùng chung cho cả cụm (chữ có thể chứa {bien}). */
   chu?: BangChu;
+  /** ND-7 đợt 2: hình của cả cụm (mặc định: ảnh chia sẻ khi gửi link — HINH_CUM). */
+  hinh?: BangHinh;
 };
 
 const O_CONG_CU: readonly OTrang[] = ["seo", "dau_trang", "gioi_thieu", "khoi_tren", "khoi_duoi", "khoi_cuoi"];
@@ -189,12 +193,12 @@ export const SO_TRANG: readonly MucSoTrang[] = [
 
   // ---------------- B · trang tĩnh / giới thiệu
   { duong: "/", nhom: "tinh", ten: "Trang chủ", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Hiểu Bản Thân — con số nói gì về bạn", h1: "Bạn là số mấy?",
+    tieu_de_seo: "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân", h1: "Bạn là số mấy?",
     loi_dan: "Gõ tên và ngày sinh. Nửa phút sau bạn có 4 con số của riêng mình, mỗi số kèm 3 điểm mạnh, 3 *điểm mù* — và bạn tự tích xem nó nói trúng mấy điều.",
-    chu: CHU_TRANG_CHU,
+    chu: CHU_TRANG_CHU, hinh: HINH_TRANG_CHU,
     mo_ta_seo: "Thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ): tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.",
   } },
-  { duong: "/kham-pha", nhom: "tinh", ten: "Khám phá", o: O_TINH, mac_dinh: { chu: CHU_KHAM_PHA,
+  { duong: "/kham-pha", nhom: "tinh", ten: "Khám phá", o: O_TINH, mac_dinh: { chu: CHU_KHAM_PHA, hinh: HINH_KHAM_PHA,
     tieu_de_seo: "Khám phá: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch",
     mo_ta_seo: "Năm lăng kính nhìn lại bản thân: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch — dùng chung một hồ sơ, cách tính minh bạch, diễn giải có nguồn.",
     h1: "Năm hệ thống, một hồ sơ",
@@ -218,7 +222,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Tra hướng nhà, hướng bếp, hướng giường hợp tuổi theo Bát trạch cho nam và nữ sinh từ 1960 đến 2005: mệnh quái, 4 hướng tốt, 4 hướng nên tránh.",
   } },
   { duong: "/blog", nhom: "blog_khung", ten: "Blog", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Blog", h1: "Blog",
+    tieu_de_seo: "Blog thần số học, Tử vi, phong thuỷ, Kinh Dịch", h1: "Blog",
     mo_ta_seo: "Bài viết về hiểu bản thân, thần số học, Tử vi, Kinh Dịch, Bát tự, phong thuỷ và đời sống — đọc thêm ngoài thư viện kiến thức.",
     loi_dan: "Bài viết về hiểu bản thân, thần số học, Tử vi, Kinh Dịch, Bát tự, phong thuỷ và đời sống — đọc thêm ngoài thư viện kiến thức.",
   } },
@@ -277,15 +281,22 @@ const VI_DU: Record<LoaiTrang, string> = {
   so_kep: "so-kep-10",
 };
 
-export const MAU_CUM: readonly MauCumTrang[] = [
+/** ND-7 đợt 2: mọi cụm (trừ hồ sơ chuyên gia) cho đặt MỘT ảnh chia sẻ dùng chung — thay ảnh /og tự vẽ theo tiêu đề. */
+const HINH_CUM: BangHinh = {
+  chia_se: { nhom: "Ảnh chia sẻ", nhan: "Ảnh khi gửi link trang trong cụm (Facebook, Zalo…)", goi_y: "1200×630, chữ lớn nằm giữa",
+    mac_dinh: "Ảnh tự vẽ theo tiêu đề từng trang (vòng sao + tên trang)" },
+};
+
+const MAU_CUM_GOC: readonly MauCumTrang[] = [
   ...Object.entries(CHU_DE).map(([k, c]): MauCumTrang => ({
     mau_duong: `${c.duong}/{slug}`, nhom: "kien_thuc", ten: `Trang con · ${c.ten}`,
     bien: ["tieu_de", "mo_ta", "slug", "ten_chu_de"], o: O_CUM,
     nguon_kb: { kieu: "kb", loai: c.loai, vi_du: VI_DU[c.loai], tep_kb: TEP_KB_THEO_LOAI[c.loai] },
   })),
-  { mau_duong: "/phong-thuy/huong-hop-tuoi/tuoi-{nam}-{gioi}", nhom: "tuoi", ten: "Tuổi hợp hướng (1960–2005)",
-    bien: ["tieu_de", "nam", "gioi"], o: O_CUM,
-    nguon_kb: { kieu: "tuoi", vi_du: "tuoi-1990-nam", tep_kb: ["phongthuy_kb.json"] } },
+  // SEO-K: một trang cho cả nam và nữ cùng năm (CMS migration seo_k_tuoi_gop đổi mẫu cũ "tuoi-{nam}-{gioi}").
+  { mau_duong: "/phong-thuy/huong-hop-tuoi/tuoi-{nam}", nhom: "tuoi", ten: "Tuổi hợp hướng (1960–2005)",
+    bien: ["tieu_de", "nam"], o: O_CUM,
+    nguon_kb: { kieu: "tuoi", vi_du: "tuoi-1990", tep_kb: ["phongthuy_kb.json"] } },
   { mau_duong: "/tu-vi/la-so-mau/{slug}", nhom: "la_so_mau", ten: "Lá số Tử vi mẫu", bien: ["tieu_de", "slug"], o: O_CUM,
     nguon_kb: { kieu: "la_so_mau", vi_du: "tu-phu-dong-cung", tep_kb: ["tuvi_kb.json", "tuvi_cach_cuc.json"] } },
   // ND-7 — trang con theo ngày/năm của công cụ (nội dung engine tính, không phải kho tri thức): khối + "Chữ trên trang".
@@ -303,6 +314,7 @@ export const MAU_CUM: readonly MauCumTrang[] = [
   // Hồ sơ chuyên gia giữ trong code (E-E-A-T) — cụm chỉ cho đặt khối quanh hồ sơ.
   { mau_duong: "/tac-gia/{slug}", nhom: "cong_cu_con", ten: "Hồ sơ chuyên gia", o: ["khoi_cuoi"], nguon_kb: null, bien: ["slug"] },
 ];
+export const MAU_CUM: readonly MauCumTrang[] = MAU_CUM_GOC.map((m) => (m.mau_duong === "/tac-gia/{slug}" ? m : { ...m, hinh: HINH_CUM }));
 
 const BIEN_DUONG: Record<string, string> = {
   nam: "(\\d{4})", nam_sinh: "(\\d{4})", gioi: "(nam|nu)", thang: "(\\d{1,2})", ngay: "(\\d{4}-\\d{2}-\\d{2})",
@@ -323,6 +335,18 @@ export function khopMauCum(duong: string): { mau: MauCumTrang; bien: Record<stri
     return { mau, bien: Object.fromEntries(ten.map((t, i) => [t, m[i + 1]!])) };
   }
   return null;
+}
+
+/** ND-6: một URL thật của cụm để xem trước khối/chữ của mẫu (biến điền giá trị ví dụ: hôm nay, năm nay; trang tuổi và
+ *  hồ sơ năm sinh dùng 1990 — nằm trong khoảng có trang). */
+export function viDuMau(mau: MauCumTrang, nay = new Date()): string {
+  const vn = new Date(nay.getTime() + 7 * 3600_000);   // ngày theo giờ Việt Nam
+  const nam = String(vn.getUTCFullYear()), thang = String(vn.getUTCMonth() + 1);
+  const ngay = `${nam}-${thang.padStart(2, "0")}-${String(vn.getUTCDate()).padStart(2, "0")}`;
+  const gt: Record<string, string> = {
+    nam: mau.nhom === "tuoi" ? "1990" : nam, thang, ngay, nam_sinh: "1990", gioi: "nam", slug: mau.nguon_kb?.vi_du ?? "duc-luan",
+  };
+  return mau.mau_duong.replace(/\{([a-z_]+)\}/g, (m, b: string) => gt[b] ?? m);
 }
 
 export const mucSoTrang = (duong: string): MucSoTrang | null => SO_TRANG.find((m) => m.duong === duong) ?? null;

@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TEN_MANG_SILO, truCua } from "@/lib/kien-thuc";
-import { goiLd, ldDuongDan, ldHoiDap, siteUrl, urlDayDu } from "@/lib/seo";
+import { anhBai, goiLd, ldAnh, ldDuongDan, ldHoiDap, ldThucThe, mangTheoDuong, siteUrl, urlDayDu } from "@/lib/seo";
 
 export interface NoiDungCongCu {
   duong: string;
@@ -23,8 +23,16 @@ export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [], 
     <section aria-labelledby="gioi-thieu-cong-cu" className="mx-auto mt-12 max-w-3xl border-t border-line/50 pt-8 text-fg-muted md:mt-16 md:pt-10">
       <JsonLd data={goiLd(
         { "@type": "WebPage", "@id": `${urlDayDu(duong)}#trang`, url: urlDayDu(duong), name: ten, description: moTa,
-          inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl()}/#website` }, about: ten,
-          potentialAction: { "@type": "UseAction", target: urlDayDu(duong) } },
+          inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl()}/#website` },
+          about: [ldThucThe(mangTheoDuong(duong)), { "@type": "Thing", name: ten }].filter(Boolean),
+          mainEntity: { "@id": `${urlDayDu(duong)}#ung-dung` },
+          primaryImageOfPage: ldAnh(anhBai({ tieuDe: ten, mang: mangTheoDuong(duong) }), ten) },
+        // SEO-K (mục 7): mỗi công cụ là một WebApplication riêng (miễn phí, chạy trên web) — thay UseAction target chuỗi.
+        { "@type": "WebApplication", "@id": `${urlDayDu(duong)}#ung-dung`, name: ten, url: urlDayDu(duong), description: moTa,
+          applicationCategory: "LifestyleApplication", operatingSystem: "Web", inLanguage: "vi-VN", isAccessibleForFree: true,
+          offers: { "@type": "Offer", price: "0", priceCurrency: "VND" }, publisher: { "@id": `${siteUrl()}/#to-chuc` },
+          isPartOf: { "@id": `${siteUrl()}/#ung-dung` },
+          potentialAction: { "@type": "UseAction", target: { "@type": "EntryPoint", urlTemplate: urlDayDu(duong), actionPlatform: ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"] } } },
         // QH-URL: công cụ nằm trong silo (vd /phong-thuy/huong-xau-nam) → cha là trang trụ; công cụ gốc → cha là Khám phá.
         ldDuongDan([{ ten: "Trang chủ", duong: "/" },
           duong.split("/").length > 2 && TEN_MANG_SILO[truCua(duong)] ? { ten: TEN_MANG_SILO[truCua(duong)]!, duong: truCua(duong) } : { ten: "Khám phá", duong: "/kham-pha" },

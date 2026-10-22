@@ -5,16 +5,16 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { BangHanNam } from "@/components/tuoi/KetQuaTuoi";
-import { goiLd, ldDuongDan, ldHoiDap, metaTrang } from "@/lib/seo";
+import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNam, duongHanNam, hanNamCongKhai, hanNamIndex, namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { taoChu } from "@/lib/chu-trang";
-import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_HAN_NAM_CON } from "@/lib/chu/trang-con";
 
 type P = { params: Promise<{ nam: string }> };
 
-export async function generateMetadata(p: P): Promise<Metadata> {
+async function metaGoc(p: P): Promise<Metadata> {
   const n = docNam((await p.params).nam);
   if (!n) return {};
   const m = metaTrang({ tieuDe: `Hướng xấu năm ${n}: Thái Tuế, Tam Sát, Ngũ Hoàng ở đâu?`,
@@ -35,6 +35,7 @@ export default async function Page(p: P) {
   return (
     <div className="mx-auto max-w-3xl space-y-5">
       <JsonLd data={goiLd(
+        ldTrangWeb({ duong: duongHanNam(n), ten: `Hướng xấu năm ${n}`, about: ["Ngũ Hoàng", "Tam Sát", "Thái Tuế", `Năm ${h.can_chi}`] }),
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Phong thuỷ", duong: "/phong-thuy" }, { ten: "Hướng xấu theo năm", duong: "/phong-thuy/huong-xau-nam" }, { ten: `Năm ${n}`, duong: duongHanNam(n) }]),
         ldHoiDap([{ hoi: `Ngũ Hoàng năm ${n} ở hướng nào?`, dap: `Hướng ${ten("ngu_hoang").phuong}.` },
           { hoi: `Tam Sát năm ${n} ở đâu?`, dap: `Phía ${ten("tam_sat").phuong}.` },
@@ -55,3 +56,6 @@ export default async function Page(p: P) {
     </div>
   );
 }
+
+// ND-7 đợt 2: ảnh chia sẻ của cụm (CMS → Mẫu cụm trang → "Hình trên trang") thay ảnh /og tự vẽ khi có.
+export const generateMetadata = async (...a: Parameters<typeof metaGoc>) => voiAnhChiaSe(await metaGoc(...a));

@@ -9,7 +9,8 @@ test("trang sinh năm 1990 mệnh gì: nội dung máy chủ đầy đủ", asyn
   expect(html).toMatch(/<h1[^>]*>Sinh năm 1990 mệnh gì\? Tuổi Canh Ngọ, mệnh Lộ Bàng Thổ<\/h1>/);
   expect(html).toContain("27/01/1990");
   expect(html).toContain("Tam hợp: Dần, Ngọ, Tuất.");
-  expect(html).toContain('href="/phong-thuy/huong-hop-tuoi/tuoi-1990-nam"');
+  expect(html).toContain('href="/phong-thuy/huong-hop-tuoi/tuoi-1990"');      // SEO-K: trang tuổi gộp nam + nữ
+  expect(html).toContain("Những năm đáng chú ý của tuổi Canh Ngọ 1990");
   expect(html).toContain('data-testid="minh-hoa"');
   expect(html).toContain('"@type":"FAQPage"');
   expect((await request.get("/bat-tu/menh-theo-nam/sinh-nam-1990-menh-gi.md")).status()).toBe(200);

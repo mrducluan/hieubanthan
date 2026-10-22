@@ -12,14 +12,24 @@ import { MinhHoa } from "@/components/minh-hoa/MinhHoa";
 import { DongTacGia } from "@/components/kien-thuc/DongTacGia";
 import { GocNhinChuyenGia } from "@/components/kien-thuc/GocNhinChuyenGia";
 import { KhoiCms } from "@/components/cms/KhoiCms";
-import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHUYEN_GIA, idChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
 import { CHU_DE, TEN_MANG_SILO, duongTrang, trang, truCua, type TrangKienThuc } from "@/lib/kien-thuc";
-import { catMoTa, goiLd, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
+import { anhBai, catMoTa, goiLd, ldAnh, ldDuongDan, ldHoiDap, ldThucThe, mangTheoDuong, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import { duongMoi } from "@/lib/duong-silo";
 import { idTu } from "@/lib/cms-html";
 
 type Thamso = { khoa: string | null; slug: string };
+
+/** SEO-K: ảnh đại diện có hình theo mảng; số/quẻ lấy đúng dữ liệu minh hoạ engine trả (vòng số, 6 hào). */
+function anhKienThuc(t: TrangKienThuc, duongCum: string) {
+  const mh = t.minh_hoa;
+  return anhBai({
+    tieuDe: t.tieu_de, mang: mangTheoDuong(duongCum),
+    ...(mh?.kieu === "so" ? { so: mh.so } : mh?.kieu === "cap_so" ? { so: `${mh.a}` } : {}),
+    ...(mh?.kieu === "que" ? { hao: mh.hao } : {}),
+  });
+}
 
 async function tai({ khoa, slug }: Thamso) {
   const cd = khoa ? CHU_DE[khoa] : undefined;
@@ -28,11 +38,17 @@ async function tai({ khoa, slug }: Thamso) {
   return t ? { cd, t } : null;
 }
 
+/** ND-7 đợt 2: ảnh chia sẻ của cụm (CMS) thay ảnh /og tự vẽ khi có. */
 export async function metaKienThuc(params: Thamso): Promise<Metadata> {
+  return voiAnhChiaSe(await metaGoc(params));
+}
+
+async function metaGoc(params: Thamso): Promise<Metadata> {
   const kq = await tai(params);
   if (!kq) return { title: "Không tìm thấy", robots: { index: false } };
-  const { t } = kq;
+  const { t, cd } = kq;
   const duong = duongTrang(t.loai, t.slug);
+  const anh = anhKienThuc(t, cd.duong);
   return {
     title: tieuDeSeo(t.tieu_de),
     description: catMoTa(t.mo_ta),
@@ -40,9 +56,9 @@ export async function metaKienThuc(params: Thamso): Promise<Metadata> {
     robots: { index: t.index, follow: true },
     openGraph: {
       type: "article", title: t.tieu_de, description: t.mo_ta, url: duong, locale: "vi_VN", siteName: TEN_SITE,
-      modifiedTime: t.cap_nhat, images: [`/og?tieu_de=${encodeURIComponent(t.tieu_de)}`],
+      modifiedTime: t.cap_nhat, images: [{ url: anh, width: 1200, height: 630, alt: t.tieu_de }],
     },
-    twitter: { card: "summary_large_image", title: t.tieu_de, description: t.mo_ta },
+    twitter: { card: "summary_large_image", title: t.tieu_de, description: t.mo_ta, images: [anh] },
   };
 }
 
@@ -67,7 +83,7 @@ export async function TrangKienThucView(params: Thamso) {
       datePublished: t.cap_nhat,
       dateModified: t.cap_nhat,
       mainEntityOfPage: { "@id": `${urlDayDu(duong)}#trang` },
-      image: urlDayDu(`/og?tieu_de=${encodeURIComponent(t.tieu_de)}`),
+      image: ldAnh(anhKienThuc(t, cd.duong), t.tieu_de),
       // Tác giả là người khi chuyên gia tự viết hoặc đã đọc, sửa, duyệt bài; bài chưa thẩm định ghi tác giả là ban biên tập.
       author: tacGia
         ? { "@id": idChuyenGia(tacGia) }
@@ -76,7 +92,8 @@ export async function TrangKienThucView(params: Thamso) {
       publisher: { "@id": `${siteUrl()}/#to-chuc` },
       isAccessibleForFree: true,
       isPartOf: { "@id": `${siteUrl()}/#website` },
-      about: cd.ten,
+      about: [ldThucThe(mangTheoDuong(cd.duong)), { "@type": "Thing", name: cd.ten }].filter(Boolean),
+      keywords: [t.tieu_de.split(":")[0], cd.ten, TEN_MANG_SILO[truCua(cd.duong)]].filter(Boolean).join(", "),
       citation: t.nguon,
       ...(nhap ? {} : { creativeWorkStatus: "Published" }),
       abstract: t.tra_loi_nhanh,
@@ -88,6 +105,7 @@ export async function TrangKienThucView(params: Thamso) {
       name: t.tieu_de,
       inLanguage: "vi-VN",
       isPartOf: { "@id": `${siteUrl()}/#website` },
+      primaryImageOfPage: ldAnh(anhKienThuc(t, cd.duong), t.tieu_de),
       ...(t.tham_dinh && CHUYEN_GIA[t.tham_dinh.nguoi]
         ? { reviewedBy: { "@id": idChuyenGia(t.tham_dinh.nguoi) }, lastReviewed: t.tham_dinh.ngay } : {}),
     },
@@ -150,6 +168,13 @@ export async function TrangKienThucView(params: Thamso) {
             {m.danh_sach && (
               <ul className="mt-3 space-y-2">
                 {m.danh_sach.map((d) => <li key={d} className="flex gap-2 leading-relaxed text-fg-muted"><span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-gold/70" aria-hidden />{d}</li>)}
+              </ul>
+            )}
+            {m.xem_them && m.xem_them.length > 0 && (
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {m.xem_them.map((x) => (
+                  <li key={x.slug}><Link href={duongTrang(x.loai, x.slug)} className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-gold/40 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold hover:text-fg">{x.tieu_de}<ArrowRight className="size-3.5 text-gold/70" aria-hidden /></Link></li>
+                ))}
               </ul>
             )}
           </section>

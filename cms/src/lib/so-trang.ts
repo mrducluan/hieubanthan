@@ -13,8 +13,8 @@ import { webUrl } from "./web";
 export type MucSoTrang = { duong: string; nhom: string; ten: string; o: string[]; mac_dinh: Record<string, unknown> };
 export type MauCumSo = { mau_duong: string; nhom: string; ten: string; bien: string[]; o: string[]; nguon_kb: Record<string, unknown>;
   /** ND-7: { chu: bảng chữ của cụm } */ mac_dinh: Record<string, unknown> };
-export type SoTrang = { trang: MucSoTrang[]; mau: MauCumSo[] };
-export type KetQuaDongBo = { tao: number; cap_nhat: number; go: number; mau_tao: number; mau_cap_nhat: number; mau_go: number };
+export type SoTrang = { trang: MucSoTrang[]; mau: MauCumSo[]; /** ND-7 đợt 2: bảng chữ dùng chung */ chung?: Record<string, unknown> };
+export type KetQuaDongBo = { tao: number; cap_nhat: number; go: number; mau_tao: number; mau_cap_nhat: number; mau_go: number; chung?: boolean };
 
 export const NGU_CANH_DONG_BO = { dongBo: true, boQuaLamMoi: true, boQuaKiemDinh: true } as const;
 
@@ -23,7 +23,7 @@ const MAU = /^\/(?![/\\])[a-z0-9\-/{}_]*$/;
 
 /** Kiểm sơ sổ trang nhận từ web (không tin mù: đường dẫn phải trong site, nhóm thuộc danh sách). */
 export function kiemSoTrang(d: unknown): SoTrang {
-  const o = (d && typeof d === "object" ? d : {}) as { trang?: unknown; mau?: unknown };
+  const o = (d && typeof d === "object" ? d : {}) as { trang?: unknown; mau?: unknown; chung?: unknown };
   const nhom = new Set(["cong_cu", "tinh", "phap_ly", "chu_de", "kien_thuc", "tuoi", "la_so_mau", "blog_khung", "cong_cu_con"]);
   const mang = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : []);
   const doiTuong = (v: unknown) => (v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {});
@@ -39,7 +39,7 @@ export function kiemSoTrang(d: unknown): SoTrang {
         mac_dinh: doiTuong(t.mac_dinh) }] : [];
   });
   if (!trang.length) throw new Error("Sổ trang rỗng hoặc sai định dạng.");
-  return { trang, mau };
+  return { trang, mau, chung: doiTuong(o.chung) };
 }
 
 export async function laySoTrang(): Promise<SoTrang> {
@@ -124,6 +124,16 @@ export async function dongBoSoTrang(payload: Payload, so: SoTrang): Promise<KetQ
       kq.cap_nhat++;
     }
   }
+  // ---- chữ dùng chung (global "chu-chung"): chỉ ghi bảng chữ gốc, không đụng chữ biên tập
+  if (so.chung && Object.keys(so.chung).length) {
+    const g = await payload.findGlobal({ slug: "chu-chung", depth: 0, overrideAccess: true }) as { mac_dinh?: unknown };
+    const macDinh = { chu: so.chung };
+    if (!giong(g.mac_dinh, macDinh)) {
+      await payload.updateGlobal({ slug: "chu-chung", overrideAccess: true, context: ctx, data: { mac_dinh: macDinh } as never });
+      kq.chung = true;
+    }
+  }
+
   // URL không còn trong sổ: tài liệu đồng bộ → gỡ; ghi đè trang KB (kien_thuc / tuoi / la_so_mau / cong_cu_con) → còn khi
   // URL vẫn khớp một mẫu, và nhận bảng chữ mới nhất của mẫu (ND-7 — để tab "Chữ trên trang" của ghi đè khớp code).
   const trangMoi = new Set(so.trang.map((t) => t.duong));
@@ -133,7 +143,8 @@ export async function dongBoSoTrang(payload: Payload, so: SoTrang): Promise<KetQ
     const con = Boolean(m);
     const he: Record<string, unknown> = {};
     if (cu.tren_web !== con) he.tren_web = con;
-    const macDinh = { chu: (m?.mac_dinh as { chu?: unknown } | undefined)?.chu ?? {} };
+    const md = m?.mac_dinh as { chu?: unknown; hinh?: unknown } | undefined;
+    const macDinh = { chu: md?.chu ?? {}, hinh: md?.hinh ?? {} };
     if (m && !giong(cu.mac_dinh, macDinh)) he.mac_dinh = macDinh;
     if (Object.keys(he).length) { await ghiHeThong(payload, "noi_dung_trang", cu.id, he); if (he.tren_web === false) kq.go++; }
   }

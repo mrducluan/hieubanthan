@@ -28,6 +28,8 @@ export function vanHanh(): VanHanh {
   const email = v("THONG_TIN_EMAIL") ?? DON_VI_MAC_DINH.email;
   const mxh: [string, string][] = [
     ["Facebook", "MXH_FACEBOOK"], ["Zalo", "MXH_ZALO"], ["TikTok", "MXH_TIKTOK"], ["YouTube", "MXH_YOUTUBE"],
+    // SEO-K (mục 7): thêm kênh cho schema sameAs của tổ chức + nút ở chân trang (đặt env trên Vercel, chỉ https).
+    ["X (Twitter)", "MXH_X"], ["Instagram", "MXH_INSTAGRAM"], ["LinkedIn", "MXH_LINKEDIN"], ["Threads", "MXH_THREADS"],
   ];
   return {
     chuSoHuu: v("THONG_TIN_CHU_SO_HUU") ?? DON_VI_MAC_DINH.ten,

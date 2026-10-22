@@ -1,58 +1,15 @@
-// /blog/chuyen-muc/{slug} — bài theo chuyên mục (chuyên mục tạo trong CMS). Trang thật có URL riêng: Google lập chỉ mục
-// được cụm chủ đề (CollectionPage + ItemList), người đọc chia sẻ được. Chuyên mục không có bài → noindex.
+// /blog/chuyen-muc/{slug} — bài theo chuyên mục (khung chung components/blog/TrangChuyenMuc.tsx; SEO-K: phân trang
+// 24 bài/trang, trang sau ở /blog/chuyen-muc/{slug}/trang/{n}).
 import type { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { ChipChuyenMuc, chuyenMucCoBai, duongChuyenMuc, LuoiBai } from "@/components/blog/LuoiBai";
-import { dsBaiTongHop, duongBlog, slugTuUrl } from "@/lib/blog";
-import { dsChuyenMucCms } from "@/lib/cms";
-import { catMoTa, goiLd, ldDuongDan, metaTrang, urlDayDu } from "@/lib/seo";
+import { TrangChuyenMuc, metaChuyenMuc } from "@/components/blog/TrangChuyenMuc";
+import { slugTuUrl } from "@/lib/blog";
 
 type Props = { params: Promise<{ slug: string }> };
 
-async function duLieu(slug: string) {
-  const [dsCm, ds] = await Promise.all([dsChuyenMucCms(), dsBaiTongHop()]);
-  const cm = dsCm.find((c) => c.slug === slug);
-  if (!cm) return null;
-  return { cm, bai: ds.filter((b) => b.chuyenMuc?.some((c) => c.slug === slug)), tatCa: ds };
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const d = await duLieu(slugTuUrl((await params).slug));
-  if (!d) return { title: "Không tìm thấy", robots: { index: false } };
-  const moTa = catMoTa(d.cm.mo_ta || `Các bài viết chuyên mục ${d.cm.ten} trên blog Hiểu Bản Thân.`);
-  return {
-    ...metaTrang({ tieuDe: `${d.cm.ten} — Blog`, moTa, duong: duongChuyenMuc(d.cm.slug) }),
-    ...(d.bai.length ? {} : { robots: { index: false, follow: true } }),
-  };
+  return metaChuyenMuc(slugTuUrl((await params).slug), 1);
 }
 
 export default async function Page({ params }: Props) {
-  const d = await duLieu(slugTuUrl((await params).slug));
-  if (!d) notFound();
-  const { cm, bai } = d;
-  const duong = duongChuyenMuc(cm.slug);
-  return (
-    <div className="mx-auto max-w-5xl">
-      <JsonLd data={goiLd(
-        {
-          "@type": "CollectionPage", name: cm.ten, url: urlDayDu(duong), inLanguage: "vi-VN",
-          ...(cm.mo_ta ? { description: cm.mo_ta } : {}),
-          mainEntity: { "@type": "ItemList", itemListElement: bai.map((b, i) => ({ "@type": "ListItem", position: i + 1, url: urlDayDu(duongBlog(b.slug)), name: b.tieuDe })) },
-        },
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Blog", duong: "/blog" }, { ten: cm.ten, duong }]),
-      )} />
-      <nav aria-label="Đường dẫn" className="text-xs text-fg-faint">
-        <ol className="flex flex-wrap gap-1.5"><li><Link href="/blog" className="hover:text-fg">Blog</Link> ›</li></ol>
-      </nav>
-      <p className="eyebrow mt-4">Chuyên mục</p>
-      <h1 className="mt-2 text-4xl sm:text-5xl">{cm.ten}</h1>
-      {cm.mo_ta && <p className="mt-3 max-w-2xl text-fg-muted">{cm.mo_ta}</p>}
-      <ChipChuyenMuc ds={chuyenMucCoBai(d.tatCa)} dangChon={cm.slug} />
-      {bai.length ? <LuoiBai ds={bai} /> : (
-        <p className="glass mt-8 rounded-2xl p-6 text-fg-muted">Chuyên mục này chưa có bài. <Link href="/blog" className="text-gold underline underline-offset-4">Xem tất cả bài viết</Link>.</p>
-      )}
-    </div>
-  );
+  return <TrangChuyenMuc slug={slugTuUrl((await params).slug)} n={1} />;
 }

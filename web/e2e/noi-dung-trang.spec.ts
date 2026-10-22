@@ -76,7 +76,8 @@ test("sổ trang: không sót URL tĩnh của sitemap + mọi chủ đề; khôn
   expect(SO_TRANG.length).toBeLessThanOrEqual(45);   // bản gọn (mục 8.1): không tạo sẵn tài liệu cho trang KB
   expect(MAU_CUM.length).toBe(Object.keys(CHU_DE).length + 8);   // + tuổi hợp hướng, lá số mẫu, 6 cụm trang con (ND-7)
   expect(khopMauCum("/tu-vi/sao-o-cung/tu-vi-cung-menh")?.bien).toEqual({ slug: "tu-vi-cung-menh" });
-  expect(khopMauCum("/phong-thuy/huong-hop-tuoi/tuoi-1990-nam")?.bien).toEqual({ nam: "1990", gioi: "nam" });
+  expect(khopMauCum("/phong-thuy/huong-hop-tuoi/tuoi-1990")?.bien).toEqual({ nam: "1990" });       // SEO-K: gộp nam + nữ
+  expect(khopMauCum("/phong-thuy/huong-hop-tuoi/tuoi-1990-nam")).toBeNull();
   expect(khopMauCum("/phong-thuy/huong-hop-tuoi")).toBeNull();
   expect(khopMauCum("/tu-vi/sao-o-cung")).toBeNull();
   // ND-7: trang con theo ngày/năm — tháng khớp TRƯỚC ngày (cùng tiền tố).
@@ -126,11 +127,15 @@ test("ND-2: CMS trống → metadata y nguyên bản code; ô SEO CMS phủ tiê
   expect(m.title).toBe("Lá số Tử vi mới");
   expect(m.description).toBe("Mô tả mới");
   expect(m.alternates).toEqual(goc.alternates);
-  expect((m.openGraph as { images: string[] }).images).toEqual([`/og?tieu_de=${encodeURIComponent("Lá số Tử vi mới")}`]);
+  // SEO-K: ảnh /og vẽ lại theo tiêu đề mới, giữ hình theo mảng (mang=…).
+  const anhOg = new URL((m.openGraph as { images: string[] }).images[0]!, "http://x");
+  expect(anhOg.pathname).toBe("/og");
+  expect(anhOg.searchParams.get("tieu_de")).toBe("Lá số Tử vi mới");
   expect(apDungSeo({}, co, { tuyetDoi: true }).title).toEqual({ absolute: "Lá số Tử vi mới" });
   // trang không tự khai openGraph (vd pháp lý): sửa tiêu đề vẫn giữ đủ bộ chia sẻ (url, ảnh, thẻ Twitter)
   const pl = apDungSeo({ title: "Điều khoản sử dụng" }, gopNoiDung("/dieu-khoan", mucSoTrang("/dieu-khoan")!.mac_dinh, { tieu_de_seo: "Điều khoản mới" }, null));
-  expect(pl.openGraph).toMatchObject({ title: "Điều khoản mới", url: "/dieu-khoan", images: [`/og?tieu_de=${encodeURIComponent("Điều khoản mới")}`] });
+  expect(pl.openGraph).toMatchObject({ title: "Điều khoản mới", url: "/dieu-khoan" });
+  expect(new URL((pl.openGraph as { images: string[] }).images[0]!, "http://x").searchParams.get("tieu_de")).toBe("Điều khoản mới");
   expect(pl.twitter).toMatchObject({ card: "summary_large_image", title: "Điều khoản mới" });
 });
 

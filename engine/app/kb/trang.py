@@ -2,8 +2,8 @@
 """SEO-B — trang kiến thức công khai dựng từ KB (số · quẻ · sao).
 
 Tầng KB: chỉ ĐỌC và GHÉP các trường có sẵn thành cấu trúc trang — không sinh nghĩa mới.
-Chính sách index (chủ dự án chốt lại 2026-09-30): index CẢ nháp AI; trang nháp luôn mang nhãn
-"bản nháp đang duyệt" (trang_thai) để minh bạch. Tắt bằng INDEX_NHAP_AI = False.
+Chính sách index (chủ dự án chốt lại 2026-09-30): index CẢ nháp AI; tắt bằng INDEX_NHAP_AI = False.
+SEO-K (2026-10-21, chủ dự án duyệt nới): nháp có phần riêng < 20 % trong họ trang (do_rieng) tạm index=false.
 
 - Ý nghĩa số (thanso_meanings.json, thanso_depth.json): chủ dự án tự viết → "da_duyet".
 - Quẻ (kinhdich_kb.json), sao (tuvi_kb.json): theo trường `trang_thai` của file (hiện "nhap_ai").
@@ -15,6 +15,7 @@ import unicodedata
 from functools import lru_cache
 from pathlib import Path
 
+from app.kb import do_rieng as _dr
 from app.kb import tham_dinh as _td
 
 _DATA = Path(__file__).parent / "data"
@@ -193,6 +194,11 @@ def _trang_sao(ten: str, slug: str) -> dict:
     ]
     if o_cung:
         muc.append({"tieu_de": f"{ten} ở 12 cung", "danh_sach": [f"{c}: {v}" for c, v in o_cung.items()]})
+    from app.kb import trang_tuvi as ttv          # SEO-K: 12 vị trí theo chi đặt ở trang sao (trước lặp ở 12 trang sao × cung)
+    muc.append({"tieu_de": f"{ten} ở 12 chi: độ sáng và sao đi cùng",
+                "doan": (f"Cung nào chứa {ten} cũng rơi vào một trong 12 chi. Ở mỗi chi, độ sáng (bảng Nam phái), "
+                         f"chính tinh đi cùng và chính tinh ở cung đối diện là cố định:"),
+                "danh_sach": ttv.theo_chi_sao(ten)})
     muc.append({"tieu_de": "Câu hỏi tự soi", "doan": s["cau_tu_soi"]})
     hoi_dap = [{"hoi": f"Sao {ten} trong Tử vi là gì?", "dap": tra_loi},
                {"hoi": f"Mặt tối của sao {ten}?", "dap": _cau(s["mat_toi"])}]
@@ -353,8 +359,10 @@ def _ten_ngan(loai: str, slug: str) -> str:
 
 def _hoan_tat(t: dict) -> dict:
     _td.gan(t)                      # EEAT-1: chủ biên / tác giả / thẩm định (thẩm định → "da_duyet")
-    t["index"] = t["trang_thai"] == "da_duyet" or INDEX_NHAP_AI
-    for l in t["lien_quan"] + (t.get("trang_con") or {}).get("ds", []) + (t.get("trang_con_hoa") or {}).get("ds", []):
+    # SEO-K (2026-10-21): nháp có phần riêng < 20 % trong họ trang → tạm không index (vẫn có link, .md).
+    t["index"] = t["trang_thai"] == "da_duyet" or (INDEX_NHAP_AI and not _dr.thap(t["loai"], t["slug"]))
+    for l in (t["lien_quan"] + (t.get("trang_con") or {}).get("ds", []) + (t.get("trang_con_hoa") or {}).get("ds", [])
+              + [x for m in t["muc"] for x in m.get("xem_them", [])]):
         l["tieu_de"] = _ten_ngan(l["loai"], l["slug"])
     t["cap_nhat"] = max(CAP_NHAT, (t["tham_dinh"] or {}).get("ngay", ""))
     return t
