@@ -382,7 +382,7 @@ Anh duyệt **phương án 2 theo bản điều chỉnh** sau (thay các điểm
 | ND-3 | xong (2026-10-14) | /, /kham-pha, /kien-thuc, /la-so-mau, /tu-dien, /phong-thuy/huong-hop-tuoi, /blog, 15 chủ đề; /gioi-thieu, /lien-he sửa mục theo neo (`gopMucCms`). |
 | ND-4 | xong (2026-10-19) | 3 trang pháp lý: SEO, H1, lời mở đầu, mục theo neo, ngày hiệu lực (`ngayHienThi`); ô `da_doi_chieu_phap_ly` bắt buộc mỗi lần xuất bản; không khối. |
 | ND-5 | xong (2026-10-19) | ~600 trang KB: khối mẫu cụm + ghi đè (`che_do_mau`), biến chữ thuần (`thayBien` không thoát HTML nữa), `.md` có chữ khối (`mdKhoi`); khối mới **Ảnh**; mục văn bản cho chèn ảnh. Migration `20261019_032830_nd_4_5_anh_phap_ly`. |
-| ND-6 | xong phần xem trước (2026-10-22) | nút "Xem trước" ở mọi Trang website + Mẫu cụm (link HMAC `xem-truoc:trang:<đường dẫn>`, draft mode, dải báo "Đang xem bản nháp" + nút thoát; mẫu cụm mở một URL ví dụ của cụm — `viDuMau`). Còn lại: thẻ quản trị "trang có nội dung CMS". |
+| ND-6 | xong (2026-10-22) | nút "Xem trước" ở mọi Trang website + Mẫu cụm (link HMAC `xem-truoc:trang:<đường dẫn>`, draft mode, dải báo "Đang xem bản nháp" + nút thoát; mẫu cụm mở một URL ví dụ của cụm — `viDuMau`). Thẻ quản trị **"Trang có nội dung CMS"** ở `/quan-tri/tang-truong` (mục 10.1). |
 | ND-7 đợt 1 | xong (2026-10-22) | "Chữ trên trang" (mục 10): trang chủ, /kham-pha, /kien-thuc, 11 trang công cụ, 6 cụm trang con (xem ngày tốt theo ngày/tháng, tuổi làm nhà, xông đất, hướng xấu năm, tác giả); thẻ chủ đề theo H1/lời dẫn trang chủ đề; sửa khối cuối trang tác giả; xoá mẫu cụm làm mới web ngay. Migration `20261021_235710_nd_7_chu_tren_trang`. |
 | ND-7 đợt 2 | xong (2026-10-22) | Mục 10.1: "Hình trên trang" (hình lớn trang chủ, 4 biểu tượng mảng trang chủ, 5 thẻ /kham-pha, ảnh chia sẻ theo cụm), "Chữ dùng chung" (global — form hồ sơ, ô vào trang chủ, khung hỏi đáp, "Thử lại"), xem trước nháp (ND-6). Migration `20261022_012038_nd_7_dot_2_hinh_chu_chung`. |
 
@@ -435,3 +435,10 @@ Bảng `web/lib/chu/chung.ts` (`CHU_CHUNG`) đi theo sổ trang (`chung`); layou
 `xem-truoc:trang:<đường dẫn>`, `CMS_PREVIEW_SECRET`). Web chỉ nhận đường dẫn có trong sổ trang hoặc khớp mẫu cụm (mẫu cụm → URL
 ví dụ), bật draft mode → `layNoiDungTrang` đọc bản nháp (không cache) → dải "Đang xem bản nháp" có nút thoát. Mã sai / đường
 dẫn ngoài site → 401; nút thoát chỉ chuyển về đường dẫn trong site.
+
+**Thẻ quản trị "Trang có nội dung CMS"** (`/quan-tri/tang-truong`, `lib/trang-cms-qt.ts`): mọi Trang website + Mẫu cụm đang
+có nội dung ĐÃ XUẤT BẢN (bỏ tài liệu chỉ có ô hệ thống), mới sửa trước: phần đã sửa (SEO, Đầu trang, Giới thiệu, Mục, khối,
+chữ, hình), ngày sửa gần nhất, link "Sửa" vào CMS, lượt bấm nút CMS 28 ngày (PostHog `cms_khoi_bam`, mẫu cụm = tổng các URL
+khớp mẫu) và **Search Console 28 ngày trước ↔ từ ngày sửa** (nhấp/ngày + CTR; mẫu cụm lọc bằng regex cùng luật `regexMau`;
+chỉ 25 dòng sửa gần nhất — hạn mức API). Kỳ sau < 7 ngày hoặc < 20 lượt hiển thị → ghi "chưa đủ số". Cache 1 giờ; thiếu khoá
+Google / PostHog → ô hiện "—" kèm lý do.
