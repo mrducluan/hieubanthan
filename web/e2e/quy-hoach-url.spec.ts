@@ -33,13 +33,16 @@ test("trang kiến thức cũ + .md → đúng trang mới; trang mới có cano
 });
 
 test("phong thuỷ tuổi, hướng xấu năm, lá số mẫu: URL cũ → 308 silo; hướng xấu năm thuộc Phong thuỷ", async ({ request }) => {
-  expect(await tim308(request, "/phong-thuy/tuoi-1990-nam")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi/tuoi-1990-nam" });
-  expect(await tim308(request, "/phong-thuy/tuoi-1990-nu.md")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi/tuoi-1990-nu.md" });
+  // SEO-K: trang tuổi gộp nam + nữ — URL trước QH-URL và URL một giới tính đều 308 MỘT bước về bản gộp.
+  expect(await tim308(request, "/phong-thuy/tuoi-1990-nam")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi/tuoi-1990" });
+  expect(await tim308(request, "/phong-thuy/tuoi-1990-nu.md")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi/tuoi-1990.md" });
+  expect(await tim308(request, "/phong-thuy/huong-hop-tuoi/tuoi-1990-nu")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi/tuoi-1990" });
+  expect(await tim308(request, "/phong-thuy/huong-hop-tuoi/tuoi-1990-nam.md")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi/tuoi-1990.md" });
   expect(await tim308(request, "/huong-xau-nam")).toEqual({ st: 308, den: "/phong-thuy/huong-xau-nam" });
   expect(await tim308(request, "/huong-xau-nam/2027")).toEqual({ st: 308, den: "/phong-thuy/huong-xau-nam/2027" });
   expect(await tim308(request, "/la-so-mau")).toEqual({ st: 308, den: "/tu-vi/la-so-mau" });
   expect(await tim308(request, "/la-so-mau/tu-phu-dong-cung")).toEqual({ st: 308, den: "/tu-vi/la-so-mau/tu-phu-dong-cung" });
-  for (const u of ["/phong-thuy/huong-hop-tuoi/tuoi-1990-nam", "/phong-thuy/huong-hop-tuoi/tuoi-1990-nam.md", "/phong-thuy/huong-xau-nam",
+  for (const u of ["/phong-thuy/huong-hop-tuoi/tuoi-1990", "/phong-thuy/huong-hop-tuoi/tuoi-1990.md", "/phong-thuy/huong-xau-nam",
     "/phong-thuy/huong-xau-nam/2027", "/tu-vi/la-so-mau", "/tu-vi/la-so-mau/tu-phu-dong-cung", "/phong-thuy/huong-hop-tuoi"]) {
     expect((await request.get(u, { maxRedirects: 0 })).status(), u).toBe(200);
   }

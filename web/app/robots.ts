@@ -29,7 +29,8 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: BOT_AI_TRA_LOI, allow: ["/", "/llms.txt", ...MO], disallow: CHAN },
       { userAgent: BOT_AI_HUAN_LUYEN, disallow: "/" },
     ],
-    sitemap: `${siteUrl()}/sitemap.xml`,
+    // SEO-K: sitemap riêng cho trang ngày tốt (≈ 400 URL, đổi hằng ngày).
+    sitemap: [`${siteUrl()}/sitemap.xml`, `${siteUrl()}/sitemap-ngay.xml`],
     host: siteUrl(),
   };
 }

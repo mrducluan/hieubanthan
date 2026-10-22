@@ -6,7 +6,8 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KetQuaLamNha } from "@/components/tuoi/KetQuaTuoi";
-import { goiLd, ldDuongDan, ldHoiDap, metaTrang } from "@/lib/seo";
+import { CungTuoi } from "@/components/tuoi/CungTuoi";
+import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNam, docTuoi, duongLamNha, lamNhaCongKhai, lamNhaIndex, namAmHienTai } from "@/lib/tuoi-dan-gian";
 
 type P = { params: Promise<{ nam: string; tuoi: string }> };
@@ -29,12 +30,13 @@ export async function generateMetadata(p: P): Promise<Metadata> {
 export default async function Page(p: P) {
   const x = await doc(p);
   if (!x) notFound();
-  const d = await lamNhaCongKhai(x.n, x.ns);
+  const [d, namAm] = await Promise.all([lamNhaCongKhai(x.n, x.ns), namAmHienTai()]);
   if (!d) throw new Error("engine không phản hồi");
   const tieuDe = `Tuổi ${x.ns} làm nhà năm ${x.n} được không?`;
   return (
     <div className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(
+        ldTrangWeb({ duong: duongLamNha(x.n, x.ns), ten: tieuDe, tomTat: d.ket_luan.chu, about: ["Kim lâu", "Hoang ốc", "Tam tai", `Tuổi ${d.can_chi}`] }),
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Xem tuổi làm nhà", duong: "/xem-tuoi-lam-nha" }, { ten: tieuDe, duong: duongLamNha(x.n, x.ns) }]),
         ldHoiDap([{ hoi: tieuDe, dap: d.ket_luan.chu }, { hoi: `Tuổi ${x.ns} cưới năm ${x.n} có phạm Kim lâu không?`, dap: d.cuoi_hoi }]),
       )} />
@@ -43,6 +45,7 @@ export default async function Page(p: P) {
       <KetQuaLamNha d={d} />
       <p className="mt-6 text-sm text-fg-muted">Tính cho chính xác theo ngày sinh của bạn: <Link href="/xem-tuoi-lam-nha" className="text-gold underline">công cụ xem tuổi làm nhà</Link> ·{" "}
         <Link href={duongLamNha(x.n + 1, x.ns)} className="text-gold underline">năm {x.n + 1}</Link></p>
+      <CungTuoi namSinh={x.ns} namAm={namAm} bo="lam_nha" />
     </div>
   );
 }

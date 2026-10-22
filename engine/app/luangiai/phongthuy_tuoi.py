@@ -122,3 +122,72 @@ def danh_sach() -> list[dict]:
             ds.append({"slug": f"tuoi-{nam}-{g}", "nam": nam, "gioi_tinh": g, "tieu_de": tieu_de(nam, g),
                        "quai": mq["quai"], "nhom": mq["nhom"], "can_chi": _can_chi(nam)})
     return ds
+
+
+# ---- SEO-K (chủ dự án duyệt 2026-10-21): một trang cho cả nam và nữ cùng năm sinh (92 → 46) --------------------
+def tu_slug_gop(slug: str) -> int | None:
+    """`tuoi-1990` (mới) hoặc `tuoi-1990-nam|nu` (cũ, web 308 về bản gộp) → năm sinh."""
+    p = slug.split("-")
+    if len(p) not in (2, 3) or p[0] != "tuoi" or not p[1].isdigit() or (len(p) == 3 and p[2] not in TEN_GIOI):
+        return None
+    nam = int(p[1])
+    return nam if NAM_DAU <= nam <= NAM_CUOI else None
+
+
+def tieu_de_gop(nam: int) -> str:
+    q_nam, q_nu = pt.menh_quai(nam, "nam")["quai"], pt.menh_quai(nam, "nu")["quai"]
+    return f"Tuổi {_can_chi(nam)} {nam} hợp hướng nào? Nam mệnh {q_nam}, nữ mệnh {q_nu}"
+
+
+_RIENG = ("gioi_tinh", "menh_quai", "huong_tot", "huong_xau", "bang_huong", "goi_y", "tra_loi_nhanh")
+
+
+def tuoi_gop(nam: int) -> dict:
+    a, b = tuoi(nam, "nam"), tuoi(nam, "nu")
+    gioi = [{k: x[k] for k in _RIENG} | {"sinh_truoc_moc": {k: v for k, v in x["sinh_truoc_moc"].items() if k != "slug"}}
+            for x in (a, b)]
+    tot = [[h["huong"] for h in x["huong_tot"]] for x in (a, b)]
+    chung = [h for h in tot[0] if h in tot[1]]
+    qa, qb = a["menh_quai"], b["menh_quai"]
+    ket = (f"Vợ chồng cùng tuổi {a['can_chi']} chung hướng tốt: {', '.join(chung)}." if chung else
+           f"Nam ({qa['nhom']}) và nữ ({qb['nhom']}) cùng năm không chung hướng tốt — khi hai người cùng tuổi ở chung, "
+           "thường ưu tiên mệnh người trụ cột, phòng riêng theo mệnh từng người.")
+    tra_loi = (f"Sinh năm {nam} ({a['can_chi']}): nam mệnh {qa['quai']} ({qa['nhom']}), hướng tốt nhất "
+               f"{a['huong_tot'][0]['huong']}; nữ mệnh {qb['quai']} ({qb['nhom']}), hướng tốt nhất {b['huong_tot'][0]['huong']}. "
+               f"{ket} Sinh trước Lập xuân ({_dmy(a['moc_dau_nam']['lap_xuan'])}) thì tính theo năm {nam - 1}.")
+    hd, da = [], set()
+    for h in a["hoi_dap"] + b["hoi_dap"]:
+        if h["hoi"] not in da and not h["hoi"].startswith("Nữ và nam cùng sinh"):
+            da.add(h["hoi"])
+            hd.append(h)
+    ta, tb = a["sinh_truoc_moc"], b["sinh_truoc_moc"]
+    for h in hd:
+        if h["hoi"].startswith("Sinh đầu năm"):
+            h["dap"] = (f"Bát trạch lấy mốc Lập xuân ({_dmy(a['moc_dau_nam']['lap_xuan'])}): sinh trước ngày này tính theo "
+                        f"năm {nam - 1} — nam mệnh {ta['quai']} ({ta['nhom']}), nữ mệnh {tb['quai']} ({tb['nhom']}). Có sách "
+                        f"lấy mốc Tết âm lịch ({_dmy(a['moc_dau_nam']['tet_viet'])} theo lịch Việt) — công cụ Phong thuỷ cho bạn chọn mốc.")
+    hd.append({"hoi": f"Vợ chồng cùng sinh năm {nam} nên chọn hướng nhà theo ai?",
+               "dap": ket + " Công cụ Phong thuỷ cho nhập cả hai người để xem hướng chung."})
+    return {
+        "slug": f"tuoi-{nam}", "nam": nam, "tieu_de": tieu_de_gop(nam),
+        "mo_ta": (f"Sinh năm {nam} ({a['can_chi']}): nam mệnh {qa['quai']}, nữ mệnh {qb['quai']} — 4 hướng tốt, 4 hướng "
+                  f"nên tránh, hướng cửa, bếp, giường cho từng người theo Bát trạch."),
+        "can_chi": a["can_chi"], "nap_am": a["nap_am"], "trang_menh": a["trang_menh"],
+        "gioi": gioi, "huong_chung": chung,
+        "moc_dau_nam": a["moc_dau_nam"],
+        "sinh_truoc_moc": {"nam_tinh": nam - 1, "slug": f"tuoi-{nam - 1}" if nam - 1 >= NAM_DAU else None},
+        "tra_loi_nhanh": tra_loi, "hoi_dap": hd,
+        "nguon": a["nguon"], "luu_y": a["luu_y"],
+        **{k: a[k] for k in ("trang_thai", "can_doi_chieu") if k in a},
+        "minh_hoa": {"kieu": "la_ban_doi", "nam": nam, "quai_nam": qa["quai"], "quai_nu": qb["quai"],
+                     "huong_tot_nam": tot[0], "huong_tot_nu": tot[1]},
+    }
+
+
+def danh_sach_gop() -> list[dict]:
+    ra = []
+    for nam in range(NAM_DAU, NAM_CUOI + 1):
+        a, b = pt.menh_quai(nam, "nam"), pt.menh_quai(nam, "nu")
+        ra.append({"slug": f"tuoi-{nam}", "nam": nam, "tieu_de": tieu_de_gop(nam), "can_chi": _can_chi(nam),
+                   "quai_nam": a["quai"], "nhom_nam": a["nhom"], "quai_nu": b["quai"], "nhom_nu": b["nhom"]})
+    return ra

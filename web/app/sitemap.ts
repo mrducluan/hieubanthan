@@ -4,6 +4,7 @@ import { CHU_DE, dsLaSoMau, dsTuoiHuong, duongTrang, duongTuoi, mucLuc } from "@
 import { dsBaiTongHop, duongBlog } from "@/lib/blog";
 import { urlDayDu } from "@/lib/seo";
 import { daHetHan, dsTrangDichCms } from "@/lib/cms";
+import { duongTrangSo, soTrang } from "@/lib/phan-trang";
 import { THANG_SAU, THANG_TRUOC, duongThang, homNayVN } from "@/lib/hoang-lich";
 import { NAM_SINH_SEO, duongHanNam, duongLamNha, duongXongDat, namAmHienTai } from "@/lib/tuoi-dan-gian";
 
@@ -48,9 +49,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: urlDayDu(duongBlog(p.slug)), ...(p.capNhat ?? p.ngay ? { lastModified: (p.capNhat ?? p.ngay)! } : {}),
       changeFrequency: "monthly" as const, priority: p.nguon === "cms" ? 0.7 : 0.5,
     })),
-    // Chuyên mục có ít nhất một bài (trang trống là noindex).
-    ...[...new Set(blog.filter((p) => !p.noindex).flatMap((p) => (p.chuyenMuc ?? []).map((c) => c.slug)))].map((slug) => ({
-      url: urlDayDu(`/blog/chuyen-muc/${encodeURIComponent(slug)}`), changeFrequency: "weekly" as const, priority: 0.5,
-    })),
+    // Chuyên mục có ít nhất một bài (trang trống là noindex) + trang 2…n của chuyên mục (SEO-K phân trang).
+    ...[...new Set(blog.filter((p) => !p.noindex).flatMap((p) => (p.chuyenMuc ?? []).map((c) => c.slug)))].flatMap((slug) => {
+      const tong = soTrang(blog.filter((p) => p.chuyenMuc?.some((c) => c.slug === slug)).length);
+      return Array.from({ length: tong }, (_, i) => ({
+        url: urlDayDu(duongTrangSo(`/blog/chuyen-muc/${encodeURIComponent(slug)}`, i + 1)), changeFrequency: "weekly" as const, priority: i ? 0.3 : 0.5,
+      }));
+    }),
+    // SEO-K: /blog/trang/2…n (trang 1 = /blog nằm trong TINH).
+    ...Array.from({ length: soTrang(blog.length) - 1 }, (_, i) => ({ url: urlDayDu(duongTrangSo("/blog", i + 2)), changeFrequency: "weekly" as const, priority: 0.3 })),
   ];
 }

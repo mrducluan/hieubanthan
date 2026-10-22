@@ -15,7 +15,7 @@ import { GiamSat } from "@/components/khung/GiamSat";
 import { GtmNoScript } from "@/components/khung/GoogleTagManager";
 import { DoLuongGoogle } from "@/components/khung/DoLuongGoogle";
 import { HoiDongYCookie } from "@/components/khung/HoiDongYCookie";
-import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE } from "@/lib/seo";
+import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE, TU_KHOA_SITE } from "@/lib/seo";
 import { ThongBaoSite } from "@/components/khung/ThongBaoSite";
 import "./globals.css";
 
@@ -47,11 +47,10 @@ const han = Noto_Serif_TC({ weight: ["600"], subsets: ["latin"], variable: "--fo
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  title: { default: "Hiểu Bản Thân — con số nói gì về bạn", template: "%s · Hiểu Bản Thân" },
+  title: { default: "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân", template: "%s · Hiểu Bản Thân" },
   description: MO_TA_SITE,
   applicationName: TEN_SITE,
-  keywords: ["thần số học", "thần số học Pythagoras", "số chủ đạo", "số đường đời", "tử vi", "lá số tử vi",
-    "bát tự", "tứ trụ", "kinh dịch", "64 quẻ", "phong thuỷ", "mệnh quái", "hợp đôi thần số", "khám phá bản thân"],
+  keywords: TU_KHOA_SITE,
   category: "lifestyle",
   // KHÔNG đặt canonical ở layout (con kế thừa sẽ trỏ hết về "/"); mỗi trang tự khai canonical.
   alternates: { types: { "text/plain": [{ url: "/llms.txt", title: "llms.txt" }] } },

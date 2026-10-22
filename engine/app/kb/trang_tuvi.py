@@ -60,18 +60,6 @@ def _cung_lien(cung: str) -> tuple[str, str, str]:
     return v[(i + 6) % 12], v[(i + 4) % 12], v[(i + 8) % 12]
 
 
-def _theo_chi(sao: str, cung: str) -> list[str]:
-    doi = _cung_lien(cung)[0]
-    ra = []
-    for chi, o in vt.bo_cuc_theo_sao(sao).items():
-        ds = ds_vn.do_sang(sao, chi)
-        dong = f"đồng cung {_ds_ten(o['dong_cung'])}" if o["dong_cung"] else "đứng một mình (không chính tinh khác)"
-        xung = (f"cung {doi} đối diện (ở {o['xung_chieu_chi']}) có {_ds_ten(o['xung_chieu'])}" if o["xung_chieu"]
-                else f"cung {doi} đối diện (ở {o['xung_chieu_chi']}) vô chính diệu")
-        ra.append(f"{chi}{f' ({ds})' if ds else ''}: {dong}; {xung}.")
-    return ra
-
-
 def _nhom_dong_cung(sao: str) -> str:
     """Gom các chi theo bộ sao đồng cung: "đứng một mình ở Tý, Ngọ; cùng Tử Vi ở Tỵ, Hợi; …"."""
     nhom: dict[tuple[str, ...], list[str]] = {}
@@ -90,6 +78,33 @@ def _hoa_cua_sao(sao: str) -> list[tuple[str, str]]:
     return [(can, _HOA[i]) for can, ds in TU_HOA.items() for i, s in enumerate(ds) if s == sao]
 
 
+def _ds_doi_song() -> dict:
+    return _t()._doc("tuvi_doi_song_kb.json")
+
+
+def theo_chi_sao(sao: str) -> list[str]:
+    """12 vị trí của một chính tinh theo chi (độ sáng Nam phái + sao đồng cung + cung đối diện) — dùng ở trang sao."""
+    ra = []
+    for chi, o in vt.bo_cuc_theo_sao(sao).items():
+        ds = ds_vn.do_sang(sao, chi)
+        dong = f"đồng cung {_ds_ten(o['dong_cung'])}" if o["dong_cung"] else "đứng một mình (không chính tinh khác)"
+        xung = (f"cung đối diện (ở {o['xung_chieu_chi']}) có {_ds_ten(o['xung_chieu'])}" if o["xung_chieu"]
+                else f"cung đối diện (ở {o['xung_chieu_chi']}) vô chính diệu")
+        ra.append(f"{chi}{f' ({ds})' if ds else ''}: {dong}; {xung}.")
+    return ra
+
+
+def _loi_doi_song(sao: str, cung: str, tt: str) -> list[str]:
+    """SEO-K: lời đời thường riêng của ô sao × cung (KB tuvi_doi_song_kb.json, cùng nguồn với Luận giải đời sống)."""
+    o = _ds_doi_song()["sao_linh_vuc"].get(sao, {}).get(cung, {}).get(tt)
+    if not o:
+        return []
+    return [f"Điểm mạnh: {o['manh']}", f"Dễ vấp: {o['de_vap']}", f"Gợi ý: {o['loi_khuyen']}"]
+
+
+_KHONG_THAY_BAC_SI = "Đây là thói quen nên để ý theo quan niệm Tử vi, không phải chẩn đoán và không thay lời bác sĩ."
+
+
 def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
     t, kb = _t(), _kb()
     sao, cung = k
@@ -97,47 +112,66 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
     nd = kb["sao_cung"][sao][cung]
     doi, th1, th2 = _cung_lien(cung)
     sang, ham = _sang_ham(sao)
-    khi_sang, khi_ham = _hoa_dau(_bo_nhan(s["khi_sang"])), _hoa_dau(_bo_nhan(s["khi_ham"]))
-    tra_loi = (f"{sao} ở cung {cung}: {_t()._cau(nd)} Cung {cung} nói về {c['xem_duoc']}. "
-               f"Nghĩa đậm hay nhạt tuỳ {sao} sáng hay hãm ở chi cung {cung} rơi vào, và sao nào đi cùng.")
-    sang_ham = []
-    if sang:
-        sang_ham.append(f"Sáng (Miếu/Vượng/Đắc) ở {', '.join(sang)} — {khi_sang}")
-    if ham:
-        sang_ham.append(f"Hãm ở {', '.join(ham)} — {khi_ham}")
-    else:
-        sang_ham.append(f"{sao} không có vị trí hãm theo bảng Nam phái; khi đứng chỗ kém sáng: {khi_ham}")
+    dsg = _ds_doi_song()
+    lv = dsg["linh_vuc"].get(cung, {})
+    loi_sang, loi_ham = _loi_doi_song(sao, cung, "sang"), _loi_doi_song(sao, cung, "ham")
+    manh_sang = (dsg["sao_linh_vuc"].get(sao, {}).get(cung, {}).get("sang") or {}).get("manh", "")
+    tra_loi = (f"{sao} ở cung {cung}: {t._cau(nd)} {manh_sang} "
+               f"Nghĩa đậm hay nhạt tuỳ {sao} sáng hay hãm ở chi cung {cung} rơi vào, và sao nào đi cùng.").replace("  ", " ")
+    cs, ch = (", ".join(sang) or "không chi nào"), (", ".join(ham) if ham else "")
     muc = [
-        {"tieu_de": f"Cung {cung} nói về điều gì", "doan": f"{c['y_nghia']} {_t()._cau(_hoa_dau(c['xem_duoc']))}"},
-        {"tieu_de": f"Tính chất sao {sao}", "danh_sach": [
-            _t()._cau(s["tinh_chat"]), "Điểm mạnh: " + _t()._cau(s["diem_manh"]), "Mặt tối: " + _t()._cau(s["mat_toi"])]},
-        {"tieu_de": f"Khi {sao} sáng, khi {sao} hãm", "danh_sach": sang_ham},
-        {"tieu_de": f"{sao} ở cung {cung} theo từng vị trí", "danh_sach": _theo_chi(sao, cung),
-         "doan": (f"Cung {cung} có thể rơi vào bất kỳ chi nào trong 12 chi. Khi {sao} đứng ở mỗi chi, độ sáng (bảng "
-                  f"Nam phái) và các chính tinh đi cùng là cố định — dưới đây là cả 12 trường hợp.")},
-        {"tieu_de": f"Tam phương tứ chính của cung {cung}",
-         "doan": (f"Không đọc {sao} một mình: cung {cung} luôn xét cùng cung xung chiếu và hai cung tam hợp."),
-         "danh_sach": [f"Xung chiếu — cung {doi}: {kb['cung'][doi]['y_nghia']}",
-                       f"Tam hợp — cung {th1}: {kb['cung'][th1]['y_nghia']}",
-                       f"Tam hợp — cung {th2}: {kb['cung'][th2]['y_nghia']}"]},
+        {"tieu_de": f"Cung {cung} và sao {sao} — nhắc nhanh",
+         "doan": (f"Cung {cung} nói về {lv.get('ten_doi_thuong') or c['xem_duoc']}"
+                  f"{': ' + t._cau(lv['mo_ta'][:1].lower() + lv['mo_ta'][1:]) if lv.get('mo_ta') else '.'} "
+                  f"{sao} là chính tinh hành {s['ngu_hanh']}: {t._cau(s['tinh_chat'][:1].lower() + s['tinh_chat'][1:])}"),
+         "xem_them": [{"loai": "cung", "slug": f"cung-{t._slug(cung)}"}, {"loai": "sao", "slug": f"sao-{t._slug(sao)}"}]},
     ]
+    if loi_sang:
+        muc.append({"tieu_de": f"Khi {sao} sáng ở cung {cung}",
+                    "doan": f"{sao} sáng (Miếu/Vượng/Đắc) khi cung {cung} rơi vào {cs}.", "danh_sach": loi_sang})
+    if loi_ham:
+        muc.append({"tieu_de": f"Khi {sao} hãm ở cung {cung}",
+                    "doan": (f"{sao} hãm khi cung {cung} rơi vào {ch}." if ham else
+                             f"{sao} không có vị trí hãm theo bảng Nam phái; ý dưới đây dùng khi sao đứng chỗ kém sáng."),
+                    "danh_sach": loi_ham})
+    if cung == "Tật Ách" and (sk := dsg["suc_khoe"].get(sao)):
+        muc.append({"tieu_de": f"{sao} ở cung Tật Ách: nhịp sinh hoạt nên để ý",
+                    "danh_sach": [f"Thói quen dễ hao sức: {sk['thoi_quen']}",
+                                  f"Phần cơ thể sách xưa gắn với sao: {sk['bo_phan']} — nên chăm sóc phòng ngừa.",
+                                  f"Gợi ý: {sk['loi_khuyen']}", _KHONG_THAY_BAC_SI]})
+    muc.append({"tieu_de": f"{sao} đi cùng sao nào",
+                "doan": (f"Tuỳ chi cung {cung} rơi vào, {sao} {_nhom_dong_cung(sao)}. Độ sáng và sao đối diện ở cả 12 "
+                         f"vị trí có ở trang sao {sao}."),
+                "xem_them": [{"loai": "sao", "slug": f"sao-{t._slug(sao)}"}]})
+    muc.append({"tieu_de": f"Tam phương tứ chính của cung {cung}",
+                "doan": (f"Không đọc {sao} một mình: cung {cung} luôn xét cùng cung xung chiếu {doi} và hai cung "
+                         f"tam hợp {th1}, {th2}. Nếu {sao} đứng ở các cung đó trên lá số người khác, nghĩa đổi như sau:"),
+                "xem_them": [{"loai": "sao_cung", "slug": f"{t._slug(sao)}-cung-{t._slug(x)}"} for x in (doi, th1, th2)]})
     hoa = _hoa_cua_sao(sao)
     if hoa:
+        hlv = dsg["hoa_linh_vuc"]
         muc.append({"tieu_de": f"Khi {sao} hoá Lộc, Quyền, Khoa, Kỵ ở cung {cung}",
                     "doan": "Sinh năm có thiên can dưới đây thì sao được hoá (bảng tứ hoá dùng trên lá số Hiểu Bản Thân).",
-                    "danh_sach": [f"Năm {can}: {sao} hoá {h} — {kb['tu_hoa_cung'][h][cung]}" for can, h in hoa
-                                  if cung in kb["tu_hoa_cung"].get(h, {})]})
-    muc.append({"tieu_de": "Câu hỏi tự soi", "danh_sach": [s["cau_tu_soi"], c["cau_tu_soi"]]})
+                    "danh_sach": [f"Năm {can}: {sao} hoá {h} — {(hlv.get(h, {}).get(cung) or {}).get('y') or kb['tu_hoa_cung'][h][cung]}"
+                                  for can, h in hoa if cung in kb["tu_hoa_cung"].get(h, {})],
+                    "xem_them": [{"loai": "hoa_cung", "slug": f"{_slug_hoa(h)}-cung-{t._slug(cung)}"}
+                                 for h in dict.fromkeys(h for _, h in hoa)]})
+    muc.append({"tieu_de": "Câu hỏi tự soi", "doan": s["cau_tu_soi"]})
 
+    tot_xau = f"Khi sáng: {manh_sang}" if manh_sang else ""
+    o_ham = (dsg["sao_linh_vuc"].get(sao, {}).get(cung, {}).get("ham") or {})
     hoi_dap = [
-        {"hoi": f"{sao} ở cung {cung} có ý nghĩa gì?", "dap": _t()._cau(nd)},
+        {"hoi": f"{sao} ở cung {cung} có ý nghĩa gì?", "dap": t._cau(nd)},
         {"hoi": f"{sao} ở cung {cung} tốt hay xấu?",
-         "dap": (f"Tử vi không chia sao tốt hay xấu tuyệt đối. {sao} sáng ở {', '.join(sang) or 'không chi nào'}"
-                 + (f", hãm ở {', '.join(ham)}" if ham else "") + f". Khi sáng: {khi_sang} Khi {'hãm' if ham else 'kém sáng'}: {khi_ham}")},
+         "dap": (f"Tử vi không chia sao tốt hay xấu tuyệt đối. {sao} sáng ở {cs}" + (f", hãm ở {ch}" if ham else "")
+                 + f". {tot_xau} Khi {'hãm' if ham else 'kém sáng'}: {o_ham.get('de_vap', '')}").strip()},
         {"hoi": f"{sao} ở cung {cung} đi cùng sao nào?",
          "dap": (f"Tuỳ chi: {sao} {_nhom_dong_cung(sao)}. Ngoài ra luôn xem cung {doi} xung chiếu và hai cung "
                  f"tam hợp {th1}, {th2}.")},
     ]
+    if loi_sang:
+        hoi_dap.append({"hoi": f"Người có {sao} ở cung {cung} nên làm gì?",
+                        "dap": (dsg["sao_linh_vuc"][sao][cung]["sang"]["loi_khuyen"])})
     if hoa:
         hoi_dap.append({"hoi": f"Năm nào {sao} hoá Lộc, Quyền, Khoa, Kỵ?",
                         "dap": _hoa_dau("; ".join(f"năm {can}: hoá {h}" for can, h in hoa)) + "."})
@@ -146,14 +180,14 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
     return {
         "loai": "sao_cung", "slug": slug,
         "tieu_de": f"{sao} ở cung {cung}: ý nghĩa, sáng hãm, sao đi cùng",
-        "mo_ta": t._cat(f"{sao} ở cung {cung} trong Tử vi: {nd} Sáng hãm theo 12 chi, sao đồng cung, xung chiếu, tứ hoá."),
+        "mo_ta": t._cat(f"{sao} ở cung {cung} trong Tử vi: {nd} Khi sáng, khi hãm, sao đồng cung, tam phương, tứ hoá."),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
         "nguon": list(kb["source"].values()) + [
             "Vị trí chính tinh và độ sáng: tính theo khẩu quyết an sao, đối chiếu lasotuvi (MIT) 60 lá số mẫu."],
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "sao", "slug": f"sao-{t._slug(sao)}"}, {"loai": "cung", "slug": f"cung-{t._slug(cung)}"},
-                      {"loai": "sao_cung", "slug": f"{t._slug(sao)}-cung-{t._slug(doi)}"},
-                      {"loai": "sao_cung", "slug": f"{t._slug(sao)}-cung-{t._slug(v[(i + 1) % 12])}"}],
+                      {"loai": "sao_cung", "slug": f"{t._slug(sao)}-cung-{t._slug(v[(i + 1) % 12])}"},
+                      {"loai": "sao_cung", "slug": f"{t._slug(sao)}-cung-{t._slug(v[(i - 1) % 12])}"}],
         "minh_hoa": {"kieu": "sao_cung", "ten": sao, "ten_han": s["ten_han"], "ngu_hanh": s["ngu_hanh"],
                      "chi_so": i, "vong": v},
     }
@@ -178,29 +212,39 @@ def trang_hoa_cung(k: tuple[str, str], slug: str) -> dict:
     doi, th1, th2 = _cung_lien(cung)
     i_h = _HOA.index(h)
     theo_can = [(can, ds[i_h]) for can, ds in TU_HOA.items()]          # mỗi thiên can đúng một sao mang hoá này
-    tra_loi = (f"Hoá {h} ở cung {cung}: {t._cau(nd)} {t._cau(th['y_nghia'])} "
-               f"Hoá {h} đi theo một sao cụ thể, do thiên can năm sinh quyết định — xem bảng bên dưới.")
+    o = _ds_doi_song()["hoa_linh_vuc"].get(h, {}).get(cung) or {}
+    lv = _ds_doi_song()["linh_vuc"].get(cung, {})
+    tra_loi = (f"Hoá {h} ở cung {cung}: {t._cau(nd)} {o.get('y', '')} "
+               f"Hoá {h} đi theo một sao cụ thể, do thiên can năm sinh quyết định — xem bảng bên dưới.").replace("  ", " ")
     muc = [
-        {"tieu_de": f"Hoá {h} là gì", "doan": f"{th['y_nghia']} Lưu ý: {th['luu_y']}"},
-        {"tieu_de": f"Cung {cung} nói về điều gì", "doan": f"{c['y_nghia']} {t._cau(_hoa_dau(c['xem_duoc']))}"},
+        {"tieu_de": f"Hoá {h} và cung {cung} — nhắc nhanh",
+         "doan": (f"{t._cau(th['y_nghia'])} Cung {cung} nói về {lv.get('ten_doi_thuong') or c['xem_duoc']}"
+                  f"{': ' + t._cau(lv['mo_ta'][:1].lower() + lv['mo_ta'][1:]) if lv.get('mo_ta') else '.'}"),
+         "xem_them": [{"loai": "cung", "slug": f"cung-{t._slug(cung)}"}]},
+    ]
+    if o:
+        muc.append({"tieu_de": f"Hoá {h} ở cung {cung} trong đời thường",
+                    "danh_sach": [o["y"], f"Gợi ý: {o['loi_khuyen']}"]})
+    muc += [
         {"tieu_de": f"Năm sinh nào có Hoá {h}",
          "doan": (f"Tứ hoá theo thiên can năm sinh: mỗi can có đúng một sao hoá {h}. Hoá {h} chỉ rơi vào cung {cung} khi "
                   f"sao đó nằm ở cung {cung} trên lá số của bạn (bảng tứ hoá dùng trên lá số Hiểu Bản Thân)."),
          "danh_sach": [f"Năm {can}: {sao} hoá {h}." for can, sao in theo_can]},
         {"tieu_de": f"Tam phương tứ chính của cung {cung}",
-         "doan": f"Hoá {h} ở cung {cung} cần đọc cùng cung xung chiếu và hai cung tam hợp.",
-         "danh_sach": [f"Xung chiếu — cung {doi}: {kb['cung'][doi]['y_nghia']}",
-                       f"Tam hợp — cung {th1}: {kb['cung'][th1]['y_nghia']}",
-                       f"Tam hợp — cung {th2}: {kb['cung'][th2]['y_nghia']}"]},
-        {"tieu_de": "Câu hỏi tự soi", "doan": c["cau_tu_soi"]},
+         "doan": (f"Hoá {h} ở cung {cung} cần đọc cùng cung xung chiếu {doi} và hai cung tam hợp {th1}, {th2}. "
+                  f"Hoá {h} ở chính các cung đó nghĩa như sau:"),
+         "xem_them": [{"loai": "hoa_cung", "slug": f"{_slug_hoa(h)}-cung-{t._slug(x)}"} for x in (doi, th1, th2)]},
+        {"tieu_de": "Lưu ý khi đọc", "doan": t._cau(th["luu_y"])},
     ]
     hoi_dap = [
-        {"hoi": f"Hoá {h} ở cung {cung} nghĩa là gì?", "dap": t._cau(nd)},
+        {"hoi": f"Hoá {h} ở cung {cung} nghĩa là gì?", "dap": f"{t._cau(nd)} {o.get('y', '')}".strip()},
         {"hoi": f"Năm sinh nào có Hoá {h}?",
          "dap": _hoa_dau("; ".join(f"năm {can}: {sao}" for can, sao in theo_can)) + "."},
         {"hoi": f"Hoá {h} ở cung {cung} tốt hay xấu?",
          "dap": f"{th['y_nghia']} {t._cau(th['luu_y'])} Đọc kèm sao mang hoá và độ sáng của sao đó."},
     ]
+    if o:
+        hoi_dap.append({"hoi": f"Có Hoá {h} ở cung {cung} nên làm gì?", "dap": o["loi_khuyen"]})
     chinh = list(kb["chinh_tinh"])
     sao_con = list(dict.fromkeys(sao for _, sao in theo_can if sao in chinh))
     v = _vong()

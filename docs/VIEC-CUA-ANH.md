@@ -37,8 +37,17 @@
 4e. [ ] **Sửa bài NotFair trong CMS (BLOG-3):** Vercel → dự án **CMS** (cms.hieuban.com) → Settings → Environment Variables →
    thêm `NOTFAIR_SEO_API_KEY` (cùng giá trị như dự án web, Production + Preview) → Redeploy CMS. Rồi vào CMS → Bài viết →
    "Bài trao đổi NotFair — nhập vào CMS để sửa" → Nhập → sửa → Xuất bản. Giữ nguyên link của đối tác + dòng ghi nguồn cuối bài.
-4f. [ ] **Audit AIO/SEO — các mục cần anh quyết:** đọc bảng đầu `docs/AUDIT-AIO-SEO-2026-10.md` (ngày cập nhật thật cho kho,
-   trang lập trình gần trùng, `rel="sponsored"` cho link trao đổi, slug NotFair có dấu, cache HTML/CSP).
+4f. [x] **Audit AIO/SEO — anh đã quyết 7 mục (2026-10-21, SEO-K)**. Còn chờ anh: ngày cập nhật thật cho kho (`CAP_NHAT`),
+   slug NotFair có dấu, `/ung-ho` có index không, `GoogleOther` chặn hay mở (bảng đầu `docs/AUDIT-AIO-SEO-2026-10.md`).
+4h. [ ] **Sau khi merge SEO-K (5 phút):** (1) **deploy engine Render TRƯỚC web** (web mới gọi `/v1/phongthuy/tuoi-gop`);
+   (2) CMS chạy migration `20261021_090000_seo_k_tuoi_gop` khi deploy (đổi mẫu cụm "Tuổi hợp hướng" sang trang gộp; log ghi
+   năm nào có ghi đè cả nam lẫn nữ → anh gộp tay); (3) Search Console → Sơ đồ trang web → gửi thêm
+   `https://hieuban.com/sitemap-ngay.xml`; (4) chạy `node web/scripts/kiem-tra-seo.mjs https://hieuban.com` và gửi em dòng
+   **TTFB p50/p90** — em dựa vào số này đề xuất bật bộ nhớ đệm HTML (đụng CSP-2) hay không.
+4i. [ ] **sameAs cho Google nhận ra thương hiệu + anh (5 phút, Vercel → web → Environment Variables):** kênh của site
+   `MXH_FACEBOOK`, `MXH_YOUTUBE`, `MXH_TIKTOK`, `MXH_ZALO`, `MXH_INSTAGRAM`, `MXH_LINKEDIN`, `MXH_X`, `MXH_THREADS` (link https);
+   hồ sơ cá nhân của anh `CHUYEN_GIA_SAME_AS_DUC_LUAN` = các link https cách nhau dấu phẩy (Facebook cá nhân, YouTube,
+   LinkedIn…). Chỉ link thật của anh — em không tự điền.
 5. [x] **Search Console + GA4 trong GTM** (mục H) — anh báo xong 2026-10-09
 5b. [ ] **Render engine** (mục D2): kiểm vùng Singapore + gói Starter, bấm *Save, rebuild, and deploy* sau khi sửa biến
    (anh đang đặt `NHAT_KY_HOI`, `SUPABASE_*`, `LLM_LUOT_*` — 2026-10-09)
@@ -242,6 +251,7 @@ Vì sao và cách làm: `docs/EEAT-VA-CHUYEN-GIA.md`. Tóm tắt: anh đứng t�
   **Chỉ ghi điều có thật** — em không tự thêm.
 - [ ] **M2. Ảnh chân dung** (tuỳ chọn; hiện dùng chữ "ĐL"). Ảnh anh gửi được phép đăng công khai.
 - [ ] **M3. Link mạng xã hội / kênh của anh** (Facebook, YouTube, TikTok…) → schema `sameAs`, giúp Google nhận ra anh.
+  Từ SEO-K đặt thẳng env `CHUYEN_GIA_SAME_AS_DUC_LUAN` (mục 4i), không cần sửa code.
 - [ ] **M4. Duyệt kho tri thức theo cụm tại Phòng duyệt** — https://claude.ai/artifact/5ok13DRcbdxDGF7iMQ1TP4 (trang riêng,
   chỉ anh mở và ghi được; dùng tốt trên điện thoại). 496 bài chia 14 cụm: chọn cụm → mở bài → bấm **Đạt** (đúng với hiểu
   biết và trường phái của anh) hoặc **Cần sửa** + ghi chú; ô Góc nhìn chuyên gia tuỳ chọn. Bài Đạt → web ghi "Biên soạn &

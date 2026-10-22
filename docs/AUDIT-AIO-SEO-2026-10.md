@@ -16,14 +16,26 @@ Hai agent chuyên biệt rà **mã nguồn** (site thật không mở được t
 | H2 trang kiến thức (~600 URL) không có neo → AI không dẫn link tới từng mục | P1 | **Đã sửa**: `id` ổn định từ tiêu đề mục |
 | Thiếu bản `.md` cho `/xem-ngay-tot/*`, làm nhà, xông đất, hướng xấu năm, blog, công cụ, pháp lý | P1 | Chưa — việc tiếp theo (dữ liệu có sẵn, thêm nhánh vào `app/md/[...duong]`) |
 | Ngày cập nhật cả kho dùng chung hằng `CAP_NHAT` | P1 | **Cần chủ dự án quyết** cách sinh ngày thật |
-| Trang lập trình gần trùng (sao-ở-cung 9 % phần riêng, tuổi hợp hướng 8 %…) | P1 | **Cần chủ dự án quyết**: viết thêm KB theo hàng đợi GSC / noindex tạm trang < 20 % / gộp nam–nữ |
+| Trang lập trình gần trùng (sao-ở-cung 9 % phần riêng, tuổi hợp hướng 8 %…) | P1 | **Đã làm (SEO-K)** — xem bảng quyết định dưới |
 | Engine lỗi → trang KB trả 404 thay vì 5xx | P1 | Chưa — đề xuất trả 503 khi engine lỗi |
-| Link trao đổi NotFair không gắn `rel="sponsored"` | P1 | **Cần chủ dự án quyết** (rủi ro chính sách link spam của Google ↔ thoả thuận trao đổi) |
+| Link trao đổi NotFair không gắn `rel="sponsored"` | P1 | **Đã làm (SEO-K)**: `rel="sponsored nofollow"` cho link ra ngoài |
 | Slug NotFair có dấu | P1 | **Cần quyết**: bí danh ASCII / đề nghị NotFair đổi |
-| Mọi trang render động vì nonce CSP (không cache HTML) | P1 | **Cần quyết** sau khi đo TTFB thật (đụng CSP-2) |
+| Mọi trang render động vì nonce CSP (không cache HTML) | P1 | Bộ rà đã đo TTFB (SEO-K); **chờ số production** rồi mới quyết (đụng CSP-2) |
 | Danh sách bot AI (thêm YouBot, Amzn-SearchBot…; chặn thêm AI2Bot, Webzio-Extended…) | P1 | Cần đối chiếu tài liệu nhà cung cấp rồi mới thêm |
 | Form công cụ không có trong HTML máy chủ; ô ngày sinh thiếu `name`/`autocomplete` | P1 | Chưa — việc tiếp theo |
 | P2 (twitter:title kế thừa, sitemap thiếu trang ngày, DefinedTerm `@id`, `sameAs` rỗng, RSS `length="0"`…) | P2 | Xem chi tiết dưới |
+
+### Quyết định của chủ dự án (2026-10-21) → SEO-K đã làm
+
+| Mục chờ quyết | Đã làm |
+|---|---|
+| (1) Nội dung lập trình mỏng | Khối dùng chung → câu + link `xem_them`; lời đời thường riêng từng ô sao × cung / hoá × cung (KB có sẵn `tuvi_doi_song_kb.json`); 12 vị trí theo chi dời về trang sao; mệnh theo năm thêm mốc riêng theo năm sinh. Phần riêng: sao-ở-cung 0,09 → 0,39 · tứ-hoá 0,10 → 0,24 · mệnh-năm 0,19 → 0,36. `index=false` tự động cho nháp < 20 % (`engine/app/kb/do_rieng.py`) — hiện 0 trang. Viết thêm KB theo hàng đợi GSC: chờ số Search Console (M7). |
+| (2) Gộp tuổi hướng nam/nữ + ảnh minh hoạ | 46 trang `/phong-thuy/huong-hop-tuoi/tuoi-{năm}`, 308 một bước từ `-nam/-nu` (cả URL trước QH-URL); CMS migration `seo_k_tuoi_gop`; khối "Cùng tuổi". Ảnh đại diện 1200×630 theo mảng (`/og?mang=`) cho mọi trang kiến thức, tuổi, lá số mẫu, công cụ + `ImageObject`. |
+| (3) `rel="sponsored nofollow"` NotFair | Link ra ngoài trong thân bài; link về hieuban.com giữ follow. |
+| (4) Bộ nhớ đệm HTML | Chưa đổi CSP (đúng điều kiện "đo TTFB trước"); bộ rà đo TTFB p50/p90/p99 + byte gzip. Chờ số production. |
+| (5) Tiêu đề trang chủ, `/blog` | "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân"; "Blog thần số học, Tử vi, phong thuỷ, Kinh Dịch". |
+| (6) Phân trang blog, sitemap trang ngày | `/blog/trang/{n}`, `/blog/chuyen-muc/{slug}/trang/{n}` (24 bài/trang); `/sitemap-ngay.xml` (−7…+400 ngày) khai trong robots. |
+| (7) Schema E-E-A-T, sameAs, từ khoá | `about` nối Wikipedia; WebApplication từng công cụ; WebPage cho làm nhà/xông đất/hướng xấu/ngày tốt; DefinedTerm `@id`; lá số mẫu author = ban biên tập; cụm kiến thức đủ OG/Twitter; sameAs qua env (chờ link thật — VIEC-CUA-ANH 4i); `TU_KHOA_SITE`. Bộ rà báo lỗi Article thiếu author/publisher/image hoặc "Draft". |
 
 ---
 

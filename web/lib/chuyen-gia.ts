@@ -35,8 +35,18 @@ export const CHUYEN_GIA: Record<string, ChuyenGia> = {
   },
 };
 
+/** Ảnh chân dung công khai (đặt tệp vào web/public khi chủ dự án gửi ảnh — VIEC-CUA-ANH mục M2). */
+const CHUYEN_GIA_ANH: Record<string, string | undefined> = {};
+
 export const duongChuyenGia = (slug: string) => `/tac-gia/${slug}`;
 export const idChuyenGia = (slug: string) => `${siteUrl()}${duongChuyenGia(slug)}#nguoi`;
+
+/** sameAs = hồ sơ trong code + env máy chủ `CHUYEN_GIA_SAME_AS_<SLUG>` (link https cách nhau dấu phẩy, ví dụ
+ *  CHUYEN_GIA_SAME_AS_DUC_LUAN) — chủ dự án tự đặt link hồ sơ thật, không cần sửa code (VIEC-CUA-ANH mục M3). */
+export function sameAsChuyenGia(cg: ChuyenGia): string[] {
+  const env = typeof process !== "undefined" ? process.env[`CHUYEN_GIA_SAME_AS_${cg.slug.toUpperCase().replace(/-/g, "_")}`] ?? "" : "";
+  return [...new Set([...cg.sameAs, ...env.split(",").map((x) => x.trim()).filter((x) => /^https:\/\/[^\s]+$/.test(x))])];
+}
 
 export function ldNguoi(cg: ChuyenGia) {
   return {
@@ -47,8 +57,9 @@ export function ldNguoi(cg: ChuyenGia) {
     jobTitle: cg.vaiTro,
     description: cg.tomTat,
     knowsAbout: cg.linhVuc,
+    ...(CHUYEN_GIA_ANH[cg.slug] ? { image: urlDayDu(CHUYEN_GIA_ANH[cg.slug]!) } : {}),
     worksFor: { "@id": `${siteUrl()}/#to-chuc` },
-    ...(cg.sameAs.length ? { sameAs: cg.sameAs } : {}),
+    ...(sameAsChuyenGia(cg).length ? { sameAs: sameAsChuyenGia(cg) } : {}),
   };
 }
 

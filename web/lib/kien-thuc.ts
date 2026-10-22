@@ -99,7 +99,8 @@ export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = {
   sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi",
 };
 
-export interface MucTrang { tieu_de: string; doan?: string; danh_sach?: string[] }
+/** SEO-K: `xem_them` = link sang trang gốc thay cho chép lại khối dùng chung (engine dựng, tiêu đề điền sẵn). */
+export interface MucTrang { tieu_de: string; doan?: string; danh_sach?: string[]; xem_them?: { loai: LoaiTrang; slug: string; tieu_de: string }[] }
 export interface TrangKienThuc {
   loai: LoaiTrang; slug: string; tieu_de: string; mo_ta: string; tra_loi_nhanh: string;
   muc: MucTrang[]; hoi_dap: { hoi: string; dap: string }[]; nguon: string[];
@@ -118,7 +119,7 @@ export interface TrangKienThuc {
   trang_con?: { tieu_de: string; ds: { loai: LoaiTrang; slug: string; tieu_de: string }[] };
   /** SEO-I: trang cung trỏ tới 4 trang "Hoá X ở cung này". */
   trang_con_hoa?: { tieu_de: string; ds: { loai: LoaiTrang; slug: string; tieu_de: string }[] };
-  /** SEO-J: link sang trang ngoài thư viện kiến thức (vd /phong-thuy/tuoi-1990-nam). Engine dựng đường dẫn. */
+  /** SEO-J: link sang trang ngoài thư viện kiến thức (vd /phong-thuy/huong-hop-tuoi/tuoi-1990). Engine dựng đường dẫn. */
   lien_ket_ngoai?: { duong: string; ten: string }[];
 }
 export type MucLuc = Pick<TrangKienThuc, "loai" | "slug" | "tieu_de" | "mo_ta" | "trang_thai" | "index" | "cap_nhat"
@@ -181,29 +182,39 @@ export function laSoMau(slug: string): Promise<LaSoMau | null> {
   return lay<LaSoMau>(`/v1/tuvi/la-so-mau/${encodeURIComponent(slug)}`);
 }
 
-// SEO-F — trang "tuổi X hợp hướng nào" (engine GET /v1/phongthuy/tuoi[/slug]); 92 trang năm 1960–2005 × nam/nữ.
-export interface MucTuoiHuong { slug: string; nam: number; gioi_tinh: "nam" | "nu"; tieu_de: string; quai: string; nhom: string; can_chi: string }
+// SEO-F → SEO-K (2026-10-21): trang "tuổi X hợp hướng nào" GỘP nam + nữ cùng năm (46 trang 1960–2005;
+// bản cũ -nam/-nu 308 về bản gộp). Engine GET /v1/phongthuy/tuoi-gop[/slug].
+export interface MucTuoiHuong { slug: string; nam: number; tieu_de: string; can_chi: string;
+  quai_nam: string; nhom_nam: string; quai_nu: string; nhom_nu: string }
 export interface HuongDuNien { huong: string; du_nien: string; y_nghia: string; dung_cho: string }
-export interface TuoiHuong extends Omit<MucTuoiHuong, "quai" | "nhom"> {
-  mo_ta: string; nap_am: { ten: string; hanh: string; han: string };
-  /** SEO-J: đường dẫn trang "sinh năm X mệnh gì" (engine dựng). */
-  trang_menh?: string;
+export interface TuoiTheoGioi {
+  gioi_tinh: "nam" | "nu";
   menh_quai: { quai: string; nhom: string; so: number; ngu_hanh?: string; tinh_chat?: string };
   huong_tot: HuongDuNien[]; huong_xau: HuongDuNien[]; bang_huong: Record<string, string>;
   goi_y: { ma: string; tieu_de: string; noi_dung: string; nguon: string; huong: string[]; du_nien: string[] }[];
+  tra_loi_nhanh: string; sinh_truoc_moc: { nam_tinh: number; quai: string; nhom: string };
+}
+export interface TuoiHuong {
+  slug: string; nam: number; tieu_de: string; mo_ta: string; can_chi: string; nap_am: { ten: string; hanh: string; han: string };
+  /** SEO-J: đường dẫn trang "sinh năm X mệnh gì" (engine dựng). */
+  trang_menh?: string;
+  gioi: TuoiTheoGioi[]; huong_chung: string[];
   moc_dau_nam: { lap_xuan: string; tet_viet: string; tet_trung: string; tet_lech: boolean };
-  sinh_truoc_moc: { nam_tinh: number; quai: string; nhom: string; slug: string | null };
+  sinh_truoc_moc: { nam_tinh: number; slug: string | null };
   tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; nguon: string; luu_y: string[]; trang_thai: string;
 }
-/** "huong-hop-tuoi" = trang mục lục; "tuoi-1990-nam" = trang con dưới mục lục (QH-URL). */
+/** "huong-hop-tuoi" = trang mục lục; "tuoi-1990" = trang con dưới mục lục (QH-URL). */
 export const duongTuoi = (slug: string) => (slug === "huong-hop-tuoi" ? CHUYEN.tuoi_huong : `${CHUYEN.tuoi_huong}/${slug}`);
+export const SLUG_TUOI = /^tuoi-\d{4}$/;
+/** Slug cũ trước SEO-K (một giới tính) → slug gộp; null nếu không phải dạng cũ. */
+export const slugTuoiGop = (slug: string) => /^tuoi-\d{4}-(nam|nu)$/.test(slug) ? slug.slice(0, 9) : null;
 export async function dsTuoiHuong(): Promise<MucTuoiHuong[]> {
-  const d = await lay<{ trang: MucTuoiHuong[] }>("/v1/phongthuy/tuoi");
+  const d = await lay<{ trang: MucTuoiHuong[] }>("/v1/phongthuy/tuoi-gop");
   if (!d) noStore();
   return d?.trang ?? [];
 }
 export function tuoiHuong(slug: string): Promise<TuoiHuong | null> {
-  return /^tuoi-\d{4}-(nam|nu)$/.test(slug) ? lay<TuoiHuong>(`/v1/phongthuy/tuoi/${slug}`) : Promise.resolve(null);
+  return SLUG_TUOI.test(slug) ? lay<TuoiHuong>(`/v1/phongthuy/tuoi-gop/${slug}`) : Promise.resolve(null);
 }
 
 // ---- EEAT-1: số trang theo chuyên gia (engine đếm từ sổ thẩm định) ----------------
