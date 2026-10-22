@@ -3,10 +3,15 @@
 // cho xuất bản → xuất bản → web hiện bài (H1, Trả lời nhanh, mục lục, FAQ, JSON-LD, sitemap, llms.txt, .md) → sửa nháp
 // + xem trước có ký → đổi slug giữ link cũ (308) → biên tập viên không có nút Xuất bản → tắt "blog" ở Tính năng.
 import { createHmac } from "node:crypto";
+import { readFileSync } from "node:fs";
 import sharp from "sharp";
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
 import { BI_MAT } from "../playwright.config";
 import { buocHienTai, maTotp, tuBase32 } from "../src/lib/totp";
+
+/** Ngày hiệu lực mặc định của trang pháp lý trong code web — đọc từ nguồn (đổi ngày ở web không làm vỡ test). */
+const NGAY_HIEU_LUC = /export const NGAY_HIEU_LUC = "([^"]+)"/.exec(
+  readFileSync(new URL("../../web/lib/van-hanh.ts", import.meta.url), "utf8"))?.[1] ?? "";
 
 const CMS = "http://localhost:3001";
 const WEB = "http://localhost:3000";
@@ -603,7 +608,7 @@ test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức
   // dọn: gỡ xuất bản → web về chữ code
   expect((await request.patch(`${CMS}/api/noi-dung-trang/${dk.id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
   expect((await request.patch(`${CMS}/api/mau-cum/${mau.id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
-  await choWeb(request, "/dieu-khoan", (st, b) => st === 200 && !b.includes("Điều khoản Sao sửa từ CMS.") && b.replace(/<!-- -->/g, "").includes("Hiệu lực từ 20/10/2026"));   // NGAY_HIEU_LUC (web/lib/van-hanh.ts); React chèn <!-- --> giữa hai đoạn chữ
+  await choWeb(request, "/dieu-khoan", (st, b) => st === 200 && !b.includes("Điều khoản Sao sửa từ CMS.") && NGAY_HIEU_LUC !== "" && b.replace(/<!-- -->/g, "").includes(`Hiệu lực từ ${NGAY_HIEU_LUC}`));   // React chèn <!-- --> giữa hai đoạn chữ
   await choWeb(request, u1, (st, b) => st === 200 && !b.includes("Mẫu cụm: bạn đang đọc"));
 });
 
