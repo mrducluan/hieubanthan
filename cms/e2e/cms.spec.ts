@@ -490,6 +490,7 @@ test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức
     await expect(page.getByTestId("khoi-cms-tren")).toHaveText(`Mẫu cụm: bạn đang đọc ${td} & thêm.`);   // biến thay đúng, không "&amp;"
     const img = page.getByTestId("khoi-cms-duoi").locator("img");
     await expect(img).toHaveAttribute("alt", "Ảnh minh hoạ ND-5");
+    await img.scrollIntoViewIfNeeded();   // ảnh loading="lazy": nằm xa dưới màn hình thì trình duyệt chưa tải
     await expect.poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);   // CSP cho tải ảnh CMS
     await expect(page.getByTestId("khoi-cms-cuoi").getByRole("link", { name: /Gieo quẻ/ })).toHaveAttribute("href", "/kinh-dich");
   }
