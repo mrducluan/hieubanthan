@@ -9,7 +9,7 @@ import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
 import { CumGopY } from "./CumGopY";
 import { DungKhoVec, DuyetVec } from "./HocTuvi";
-import { mangCuaMa, TEN_MANG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
+import { mangCuaMa, TEN_LOAI_KIEM_CHUNG, TEN_MANG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
 
 export const metadata: Metadata = { title: "Học từ góp ý" };
 
@@ -161,7 +161,7 @@ function KhungTuvi({ d, ttVec, tt }: { d: HocTuvi | null; ttVec: string; tt: str
                 <tr key={`${r.loai}|${r.mau}`} className="border-t border-line">
                   <td className="py-1 text-xs">{TEN_MANG[mangCuaMa(r.loai, r.mau)]}</td>
                   <td className="py-1 font-mono text-xs">{r.mau}</td>
-                  <td>{r.nhan}</td>
+                  <td>{r.nhan}<span className="block text-xs text-fg-faint">{TEN_LOAI_KIEM_CHUNG[r.loai] ?? r.loai}</span></td>
                   <td className={`text-right ${r.ti_le_dung < 0.4 ? "text-cinnabar" : ""}`}>{Math.round(r.ti_le_dung * 100)}%</td>
                   <td className="text-right">{r.tong}</td>
                 </tr>

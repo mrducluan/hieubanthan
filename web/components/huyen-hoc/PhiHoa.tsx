@@ -11,6 +11,7 @@ import { ViSao } from "@/components/luan-giai/HopNoiBat";
 import { Button } from "@/components/ui/button";
 import { usePost } from "@/lib/goi-api";
 import { maPhiHoa } from "@/lib/kiem-chung";
+import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 
 /** Màu dịu theo hoá — Kỵ dùng tông trăng, không đỏ rực. */
@@ -36,6 +37,8 @@ export function PhiHoaXem({ d, onChonCung, onHoi }: { d: PhiHoaOutputT; onChonCu
     m.set(x.hoa, x);
     theoCung.set(x.tu_cung, m);
   }
+  // "x% trong N người thấy đúng" khi mã đủ ≥ 30 phiếu (LG-ĐS mục 5) — một lời gọi cho mọi thẻ nổi bật.
+  const tyLe = useTyLe(d.noi_bat.map(maPhiHoa));
 
   return (
     <div className="space-y-5" data-testid="phi-hoa-noi-dung">
@@ -76,7 +79,7 @@ export function PhiHoaXem({ d, onChonCung, onHoi }: { d: PhiHoaOutputT; onChonCu
                     <MessageCircleQuestion aria-hidden /> Hỏi thêm
                   </Button>
                 </div>
-                <KiemChung loai="phi_hoa" mau={maPhiHoa(n)} phai="phi_tinh" />
+                <KiemChung loai="phi_hoa" mau={maPhiHoa(n)} phai="phi_tinh" tyLe={tyLe[maPhiHoa(n)]} />
               </li>
             ))}
           </ul>

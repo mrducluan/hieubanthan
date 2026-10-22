@@ -34,7 +34,7 @@ async function xuLy(req: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
   }
   // HỌC-ĐS: trọng số công khai + phiếu cá nhân theo mã hộp đọc quẻ (ds.kinhdich.*); engine chỉ hạ / xếp lại hộp.
-  const them = await themHocLuanGiai("ds.kinhdich.").catch(() => ({}));
+  const them = await themHocLuanGiai({ loai: "doi_song", tienTo: "ds.kinhdich." }).catch(() => ({}));
   const goi = (data: unknown) => fetch(`${ENGINE_URL}/v1/kinhdich/hoi`, {
     method: "POST",
     headers: {

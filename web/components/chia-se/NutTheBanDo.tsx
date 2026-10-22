@@ -3,6 +3,7 @@
 // hiển thị + nhãn, không ngày sinh). Link /the/ban-do/<mã>?tu=bd.<…> (người nhận chơi "Đoán số" rồi được mời tự xem);
 // ảnh /og/ban-do (dọc 1080×1350 cho story là bản chính khi tải) có mã QR + hieuban.com.
 import { useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { Check, Copy, Download, Share2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +31,7 @@ export function NutTheBanDo({ onMo }: { onMo: () => void }) {
 }
 
 export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
+  const c = useChuChung();
   const [ten, setTen] = useState(tenGoi(hoSo).slice(0, 24));
   const [kq, setKq] = useState<{ ma: string; tu: string; bien_the: string; the: The; link: string } | null>(null);
   const [dang, setDang] = useState(false);
@@ -97,7 +99,7 @@ export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
             testId="xem-truoc-ban-do" />
           <div className="flex gap-2">
             <Input readOnly value={kq.link} aria-label="Link thẻ bản đồ" onFocus={(e) => e.currentTarget.select()} className="text-sm" data-testid="link-the-ban-do" />
-            <Button variant="secondary" size="icon" onClick={() => void chep()} aria-label="Sao chép link">{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
+            <Button variant="secondary" size="icon" onClick={() => void chep()} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
           </div>
           <div className="flex flex-wrap gap-2">
             <Button size="sm" onClick={() => void chiaSe()}><Share2 aria-hidden /> Gửi bạn bè đoán thử</Button>

@@ -35,12 +35,14 @@ from app import nhat_ky
 from app.narrative import hoi_van, llm as narrative_llm, ngan_sach
 from app.battu_api import router as battu_router
 from app.y_dinh_api import router as y_dinh_router
+from app.push_api import router as push_router
 from app.kinhdich_api import router as kinhdich_router
 from app.lich_api import router as lich_router
 from app.hoang_lich_api import router as hoang_lich_router
 from app.tuoi_dan_gian_api import router as tuoi_dan_gian_router
 from app.phongthuy_api import router as phongthuy_router
 from app.quan_tri_api import router as quan_tri_router
+from app.tuvi_api import _MaMau, _Phieu
 from app.tuvi_api import router as tuvi_router
 from app.tuvi_v2_api import router as tuvi_v2_router
 from app.nhung_api import router as nhung_router
@@ -92,6 +94,7 @@ async def require_engine_key(request: Request, call_next):
 
 app.include_router(tuvi_router)
 app.include_router(y_dinh_router)
+app.include_router(push_router)
 app.include_router(tuvi_v2_router)
 app.include_router(kinhdich_router)
 app.include_router(battu_router)
@@ -289,6 +292,9 @@ def api_the_ngay(inp: TheNgayInput) -> dict:
 class BanDoInput(TongHopInput):
     model_config = ConfigDict(extra="forbid")
     dien_dat_toi_da: int | None = Field(default=None, ge=0, le=20)   # web gửi chung khuôn Luận giải toàn bộ; template
+    # Tầng HỌC (như /v1/tuvi/luan-giai): web máy chủ gửi — chỉ mã + số đếm, không chữ người dùng.
+    trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)
+    ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
 
 
 @app.post("/v1/thanso/ban-do-con-so")
@@ -298,7 +304,9 @@ def api_ban_do_con_so(inp: BanDoInput) -> dict:
     inp.kiem_tra_ngay()
     return {"engine_version": ENGINE_VERSION,
             **ban_do_con_so.bao_cao(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.ngay_xem or _hom_nay_vn(),
-                                    inp.quy_uoc_duong_doi)}
+                                    inp.quy_uoc_duong_doi,
+                                    trong_so={m: v.model_dump() for m, v in inp.trong_so.items()} if inp.trong_so else None,
+                                    ca_nhan=inp.ca_nhan)}
 
 
 class BaGocNhinInput(ThanSoInput):
@@ -331,8 +339,16 @@ def api_chu_ky_so(inp: ChuKySoInput) -> dict:
     inp.kiem_tra_ngay()
     hs = tong_hop.ho_so(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.quy_uoc_duong_doi)
     phai = ("pitago",) if inp.phai == "tong_hop" else (inp.phai,)
-    return {"chu_ky": {p: {vt: (hs[p][vt]["goc"] if p == "chaldea" else hs[p][vt]["so"])
-                           for vt in CHU_KY_KHOA[p] if vt in hs[p]} for p in phai if hs[p]}}
+    # Rà vòng HỌC 2026-10-22: SQL `thanso_chu_ky_hop_le` (0016) nhận Pitago 1–33 / Chaldea 0–9, số nguyên. Chỉ số không
+    # tính được (tên thiếu nguyên âm / phụ âm / chữ cái → 0 hoặc None ở Pitago) bị BỎ khỏi chữ ký — trước đây làm DB từ
+    # chối CẢ góp ý mà không ai biết.
+    def _so(p: str, vt: str):
+        x = hs[p][vt]["goc"] if p == "chaldea" else hs[p][vt]["so"]
+        return x if isinstance(x, int) and (x >= 1 or (p == "chaldea" and x == 0)) else None
+
+    ck = {p: {vt: v for vt in CHU_KY_KHOA[p] if vt in hs[p] and (v := _so(p, vt)) is not None}
+          for p in phai if hs[p]}
+    return {"chu_ky": {p: v for p, v in ck.items() if v}}
 
 
 @app.post("/v1/thanso/ngu-canh")

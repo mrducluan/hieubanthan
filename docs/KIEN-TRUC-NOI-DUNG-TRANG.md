@@ -430,6 +430,12 @@ web không phải gọi thêm. Web: `AnhCmsHoac` — có ảnh CMS thì hiện �
 ở nhiều trang — nhãn + nút form hồ sơ, ô vào trang chủ / chào lại, ô nhập + lỗi kết nối của khung hỏi đáp, nút "Thử lại".
 Bảng `web/lib/chu/chung.ts` (`CHU_CHUNG`) đi theo sổ trang (`chung`); layout đọc một lần (`chuChungCms`) → context
 `ChuChung` → `useChuChung()`. Cùng lọc + kiểm định như "Chữ trên trang".
+**Đợt 3 (2026-10-22)** thêm 23 khoá: góp ý cuối bài (câu hỏi mặc định + 3 nút đo Gate 1 — mã đo `co/vua/khong` cố định,
+chỉ chữ đổi), góp ý dưới câu trả lời thần số, kiểm chứng "Đúng với mình / Chưa đúng", nút chia sẻ (tên trên link, đang tạo,
+gửi, chép link, tải ảnh story, chia sẻ thẻ hôm nay), "Vì sao nói vậy", "Tải ảnh" lá số / tứ trụ, "Thử lại" ở /ban-than và
+hộp thoại Sao (hộp thoại nằm ngoài `<main>` → layout bọc thêm `ChuChung`). **Không** đưa vào CMS: câu cam kết dữ liệu (link
+"không có ngày sinh", ô đồng ý lưu ghi chú, lời đồng ý lưu hồ sơ) và câu tỉ lệ "x% thấy đúng" — lời hứa về hệ thống, đổi
+bằng PR như trang pháp lý.
 
 **Xem trước bản nháp.** Nút "Xem trước" của Trang website / Mẫu cụm mở `/api/cms/xem-truoc?duong=…&ma=…` (HMAC
 `xem-truoc:trang:<đường dẫn>`, `CMS_PREVIEW_SECRET`). Web chỉ nhận đường dẫn có trong sổ trang hoặc khớp mẫu cụm (mẫu cụm → URL

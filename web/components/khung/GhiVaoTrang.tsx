@@ -6,19 +6,22 @@
 import { useEffect } from "react";
 import { ghi, lanDauTrongPhien, nhoMaMoi } from "@/lib/do-luong";
 import { laTrangKienThuc } from "@/lib/duong-silo";
+import { dangChayApp } from "@/lib/che-do-app";
 
 export function GhiVaoTrang() {
   useEffect(() => {
     const u = new URL(window.location.href);
     const tu = u.searchParams.get("tu");
     if (tu === "push" && lanDauTrongPhien("tu.push")) ghi("chart_interacted", { kind: "push_mo" });   // bấm thông báo nhắc (sw.js)
+    if (tu === "app" && lanDauTrongPhien("tu.app")) ghi("chart_interacted", { kind: "pwa_mo" });      // mở từ biểu tượng app đã cài
     if (tu && /^[a-z]{2}\.[a-f0-9]{10}$/.test(tu)) {
       nhoMaMoi(tu);
       if (lanDauTrongPhien(`tu.${tu}`)) ghi("share_clicked", { kind: tu.split(".")[0], ma_moi: tu });
     }
     const nguon = u.pathname.split("/")[1] || "trang_chu";
     if (nguon === "quan-tri") return;   // người vận hành, không phải người dùng
-    if (lanDauTrongPhien("vao-trang")) ghi("landing_viewed", { nguon, loai: laTrangKienThuc(u.pathname) ? "kien_thuc" : "khac" });
+    if (lanDauTrongPhien("vao-trang")) ghi("landing_viewed", { nguon, loai: laTrangKienThuc(u.pathname) ? "kien_thuc" : "khac",
+      app: dangChayApp() ? 1 : 0 });   // KC-4 GĐ2: % phiên mở ở chế độ app đã cài
   }, []);
   return null;
 }

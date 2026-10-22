@@ -2,6 +2,7 @@
 // VZ-3 — trang Bát tự: bảng tứ trụ → vòng địa chi + ngũ giác ngũ hành → dụng thần → đại vận/lưu niên
 // → hỏi đáp AI ở DƯỚI (chủ dự án chốt 2026-10-01). Hai giao diện dùng chung với lá số Tử vi.
 import { useChu } from "@/components/cms/DauCms";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Download, Layers, Moon, ScrollText } from "lucide-react";
 import { KhungChat } from "@/components/hoi/KhungChat";
@@ -9,11 +10,13 @@ import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { DongGhiChu, DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
+import { DoiChieuCach } from "@/components/huyen-hoc/DoiChieuCach";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CachChinhBatTu, khoaLaSo, useCachChinh } from "@/lib/cach-chinh-battu";
 import { ghi } from "@/lib/do-luong";
 import type { LaSoBatTu, LuuNienBatTu } from "@/lib/battu-kieu";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
@@ -52,6 +55,8 @@ export function BatTu() {
   const chatRef = useRef<HTMLElement>(null);
   const tuTruRef = useRef<HTMLDivElement>(null);
   const [dangTai, setDangTai] = useState(false);
+  const cachChinh = useCachChinh(khoaLaSo(laSo));
+  const cc = useChuChung();
   const [loiAnh, setLoiAnh] = useState<string | null>(null);
 
   useBatDauDoc("battu", Boolean(ls));
@@ -105,7 +110,7 @@ export function BatTu() {
                   ghi("chart_interacted", { mo_dun: "battu", kind: "tai_anh" });
                 } catch (e) { setLoiAnh(e instanceof Error ? e.message : "Chưa xuất được ảnh."); }
                 finally { setDangTai(false); }
-              }}><Download aria-hidden /> Tải ảnh</Button>
+              }}><Download aria-hidden /> {cc("doc.tai_anh")}</Button>
             </div>
             {loiAnh && <p role="alert" className="text-sm text-cinnabar">{loiAnh}</p>}
 
@@ -156,8 +161,14 @@ export function BatTu() {
       </section>
 
       {laSo && ls && (
+        <div className="mt-10"><DoiChieuCach laSo={laSo} /></div>
+      )}
+
+      {laSo && ls && (
         <section aria-label="Luận giải toàn bộ" className="mt-10">
-          <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={laSo} ten="Bát tự" />
+          <CachChinhBatTu.Provider value={{ cach: cachChinh }}>
+            <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={laSo} ten="Bát tự" />
+          </CachChinhBatTu.Provider>
           <CuoiBaiDoc moDun="battu" cauHoi="Tứ trụ và phần luận giải có giúp bạn hiểu mình hơn?" />
         </section>
       )}

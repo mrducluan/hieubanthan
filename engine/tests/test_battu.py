@@ -97,3 +97,39 @@ def test_luu_nien():
     ln = bt.luu_nien(bt.la_so(dt.datetime(1990, 5, 17, 12, 30), "nam"), 2026)
     assert (ln["can"], ln["chi"]) == ("Bính", "Ngọ") and ln["thap_than"] == "Thiên Tài"
     assert ln["voi_tru_ngay"] == "phục ngâm (trùng chi)"
+
+
+# ------------------------------------------------------------------ đại vận theo NGÀY khởi vận (2026-10-22)
+# Hồ sơ mẫu e2e: 17/05/1990 12:30 nam → khởi vận 6 năm 6 tháng 26 ngày 8 giờ = 13/12/1996; vận Ất Dậu bắt đầu
+# 13/12/2026, KHÔNG phải 1/1/2026. Trước đây "đang đi" tính theo năm dương → ngày 21/10/2026 báo nhầm Ất Dậu.
+def _mau():
+    return bt.la_so(dt.datetime(1990, 5, 17, 12, 30), "nam")
+
+
+def test_dai_van_co_ngay_bat_dau_ket_thuc():
+    ds = _mau()["dai_van"]["ds"]
+    assert ds[0]["tu_ngay"] == "1996-12-13" and ds[0]["den_ngay"] == "2006-12-12"
+    assert ds[3]["tu_ngay"] == "2026-12-13" and (ds[3]["can"], ds[3]["chi"]) == ("Ất", "Dậu")
+    for a, b in zip(ds, ds[1:]):
+        assert dt.date.fromisoformat(a["den_ngay"]) + dt.timedelta(days=1) == dt.date.fromisoformat(b["tu_ngay"])
+    for d in ds:      # năm hiển thị giữ nguyên quy ước cũ (năm của ngày bắt đầu)
+        assert int(d["tu_ngay"][:4]) == d["tu_nam"]
+
+
+def test_dai_van_theo_ngay_dung_moc_khoi_van():
+    ls = _mau()
+    g = lambda s: (lambda d: d and (d["can"], d["chi"]))(bt.dai_van_theo_ngay(ls, dt.date.fromisoformat(s)))  # noqa: E731
+    assert g("2026-10-21") == ("Giáp", "Thân")
+    assert g("2026-12-12") == ("Giáp", "Thân")
+    assert g("2026-12-13") == ("Ất", "Dậu")
+    assert g("1996-12-12") is None                   # chưa khởi vận
+    assert g("1996-12-13") == ("Nhâm", "Ngọ")
+    assert g("2100-01-01") is None                   # đã qua vận cuối
+
+
+def test_dai_van_tai_nam_theo_quy_uoc_bang():
+    """Theo NĂM: quy ước bảng đại vận (năm bắt đầu vận) — khác "đang đi lúc này" ở năm đổi vận."""
+    ls = _mau()
+    assert (bt.dai_van_tai(ls, 2026)["can"], bt.dai_van_tai(ls, 2026)["chi"]) == ("Ất", "Dậu")
+    assert (bt.dai_van_theo_ngay(ls, dt.date(2026, 10, 21))["can"]) == "Giáp"
+    assert bt.dai_van_tai(ls, 1995) is None

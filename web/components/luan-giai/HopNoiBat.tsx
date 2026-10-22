@@ -3,6 +3,7 @@
 // (app/globals.css `.hop-nb`): Điều quan trọng (vàng) · Điểm mạnh (lục) · Nên để ý (hổ phách, KHÔNG đỏ) · Lời khuyên
 // (tím) · Thời điểm (lam). "Vì sao nói vậy" mở căn cứ (thuật ngữ, sao, cung) — lời chính không chứa thuật ngữ.
 import { createContext, useContext, useId, useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { CalendarClock, ChevronDown, Eye, Lightbulb, Sprout, Star, type LucideIcon } from "lucide-react";
 import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { doanCoThuatNgu, type ThuatNgu } from "@/components/hoi/ThuatNgu";
@@ -18,8 +19,10 @@ export const LOAI_HOP: Record<LoaiHop, { nhan: string; Icon: LucideIcon }> = {
   thoi_diem: { nhan: "Thời điểm", Icon: CalendarClock },
 };
 
-/** Bảng tỉ lệ "thấy đúng" của cả bài (một lời gọi, xem lib/ty-le-kiem-chung) + phái ghi kèm phiếu. */
-export const KiemChungBai = createContext<{ tyLe: BangTyLe; phai: string; tat?: boolean }>({ tyLe: {}, phai: "nam_phai_viet" });
+/** Bảng tỉ lệ "thấy đúng" của cả bài (một lời gọi, xem lib/ty-le-kiem-chung) + phái ghi kèm phiếu + loại phiếu
+ *  (mặc định "doi_song"; "Xem lá số 2 người" dùng "hai_nguoi" — migration 0021). */
+export const KiemChungBai = createContext<{ tyLe: BangTyLe; phai: string; tat?: boolean; loai?: "doi_song" | "hai_nguoi" }>(
+  { tyLe: {}, phai: "nam_phai_viet" });
 
 /** Nút "Vì sao nói vậy" + danh sách căn cứ thu gọn — dùng cho hộp và cho chương. */
 /** "2026-10-10" → "10/10/2026" (chuỗi khác dạng ISO giữ nguyên). */
@@ -31,13 +34,14 @@ export function ngayDuong(iso: string): string {
 export function ViSao({ canCu, thuatNgu, nho = false }: { canCu?: string[]; thuatNgu?: ThuatNgu[]; nho?: boolean }) {
   const [mo, setMo] = useState(false);
   const id = useId();
+  const c = useChuChung();
   if (!canCu?.length) return null;
   return (
     <div className="mt-2" data-testid="vi-sao">
       <button type="button" aria-expanded={mo} aria-controls={id} onClick={() => setMo((v) => !v)}
         className={cn("inline-flex items-center gap-1 rounded-full text-fg-muted underline-offset-4 hover:text-fg hover:underline print:hidden",
           nho ? "text-xs" : "text-sm")}>
-        Vì sao nói vậy <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
+        {c("doc.vi_sao")} <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
       </button>
       <div id={id} hidden={!mo} className="mt-1.5 space-y-1 border-l-2 border-line pl-3 text-xs leading-relaxed text-fg-faint print:block"
         data-testid="can-cu">
@@ -48,7 +52,7 @@ export function ViSao({ canCu, thuatNgu, nho = false }: { canCu?: string[]; thua
 }
 
 export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: ThuatNgu[]; className?: string }) {
-  const { tyLe, phai, tat } = useContext(KiemChungBai);
+  const { tyLe, phai, tat, loai = "doi_song" } = useContext(KiemChungBai);
   const { nhan: nhanLoai, Icon } = LOAI_HOP[hop.loai] ?? LOAI_HOP.cot_loi;
   const nhan = hop.nhan ?? nhanLoai;
   const idTieuDe = useId();
@@ -74,7 +78,7 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
       <ViSao canCu={hop.can_cu} thuatNgu={thuatNgu} nho />
       {hop.ma_mau && !tat && (
         <div className="mt-auto pt-3">
-          <KiemChung loai="doi_song" mau={hop.ma_mau} phai={phai} tyLe={tyLe[hop.ma_mau]}
+          <KiemChung loai={loai} mau={hop.ma_mau} phai={phai} tyLe={tyLe[hop.ma_mau]}
             tyLeEngine={{ ty_le_dung: hop.ty_le_dung, so_phieu: hop.so_phieu }} />
         </div>
       )}

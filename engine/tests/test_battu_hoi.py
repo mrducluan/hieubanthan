@@ -60,8 +60,15 @@ def test_dung_than_hai_cach_trong_cau_tra_loi():
 def test_van_hien_tai_va_luu_nien():
     out = bh.tra_loi("Đại vận hiện tại của tôi là gì?", SINH, XEM)
     m = {x["loai"]: x for x in out["bang_chung"]["muc"]}
-    assert (m["dai_van"]["can"], m["dai_van"]["chi"]) == ("Ất", "Dậu")
+    # 30/9/2026: vận Ất Dậu mới bắt đầu 13/12/2026 → hiện tại vẫn Giáp Thân (đang đi theo ngày khởi vận)
+    assert (m["dai_van"]["can"], m["dai_van"]["chi"]) == ("Giáp", "Thân")
     assert (m["luu_nien"]["can"], m["luu_nien"]["chi"]) == ("Bính", "Ngọ")
+
+
+def test_van_nam_cu_the_theo_bang():
+    out = bh.tra_loi("Đại vận năm 2027 của tôi là gì?", SINH, XEM)
+    m = {x["loai"]: x for x in out["bang_chung"]["muc"]}
+    assert (m["dai_van"]["can"], m["dai_van"]["chi"]) == ("Ất", "Dậu")
 
 
 def test_hon_nhan_nam_xem_the_tinh():

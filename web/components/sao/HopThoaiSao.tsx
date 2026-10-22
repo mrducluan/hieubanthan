@@ -6,6 +6,7 @@
 //                nạp nhanh (chọn gói đủ dùng, QR ngân hàng) rồi QUAY VỀ đúng trang; luôn có lối mời bạn bè nhận Sao
 // Giọng: nói rõ giá trị người dùng nhận được và cái giá, không doạ, không đếm ngược giả, luôn có lối "để sau".
 import { useEffect, useRef, useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Gift, Loader2, QrCode, Sparkles, UserPlus } from "lucide-react";
@@ -101,6 +102,7 @@ function NhanChaoMung({ y, xong, daNhan: baoDaNhan }: { y: YeuCauSao; xong: () =
   const [daNhan, setDaNhan] = useState<number | null>(null);
   const [tkCoHoSo, setTkCoHoSo] = useState<boolean | null>(null);
   const [loiKiem, setLoiKiem] = useState(false);
+  const cc = useChuChung();
   const [lanKiem, setLanKiem] = useState(0);
   const hs = useHoSo() ?? null;
   // Đọc lỗi KHÔNG được coi là "chưa có hồ sơ" (sẽ ghi đè hồ sơ đang có trong tài khoản) → báo lỗi, cho thử lại.
@@ -160,7 +162,7 @@ function NhanChaoMung({ y, xong, daNhan: baoDaNhan }: { y: YeuCauSao; xong: () =
       )}
       {loiKiem ? (
         <p className="mt-3 text-sm text-cinnabar" role="alert">Chưa kiểm tra được tài khoản.{" "}
-          <button type="button" className="underline" onClick={() => setLanKiem((n) => n + 1)}>Thử lại</button></p>
+          <button type="button" className="underline" onClick={() => setLanKiem((n) => n + 1)}>{cc("loi.thu_lai")}</button></p>
       ) : tkCoHoSo === null ? (
         <p className="mt-3 inline-flex items-center gap-2 text-sm text-fg-muted"><Loader2 className="size-4 animate-spin" aria-hidden /> Đang kiểm tra tài khoản…</p>
       ) : tkCoHoSo || hs ? (

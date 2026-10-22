@@ -106,6 +106,21 @@ class LuanGiaiBTInput(BaseModel):
     ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
 
 
+class DoiChieuBTInput(BaseModel):
+    """BT-DC — "Cách nào đúng với mình?": câu hỏi nhìn lại năm đã qua (không lưu, không trừ Sao)."""
+    model_config = ConfigDict(extra="forbid")
+
+    la_so: TuanTrietInput
+    ngay_xem: _dt.date | None = None
+
+
+@router.post("/doi-chieu-cach")
+def api_doi_chieu_cach(inp: DoiChieuBTInput) -> dict:
+    from app.luangiai import battu_doi_chieu
+    sinh, flags = _sinh(inp.la_so)
+    return {"engine_version": ENGINE_VERSION, **battu_doi_chieu.lap(sinh, inp.ngay_xem), "co_canh_bao": flags}
+
+
 @router.post("/luan-giai")
 def api_luan_giai(inp: LuanGiaiBTInput) -> dict:
     from app.luangiai import toan_bo

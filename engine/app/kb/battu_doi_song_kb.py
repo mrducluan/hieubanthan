@@ -191,3 +191,9 @@ def cum_cam() -> list[str]:
     rieng = _lay("cum_cam")
     them = [s.strip() for s in rieng if isinstance(s, str) and s.strip()] if isinstance(rieng, list) else []
     return list(dict.fromkeys([*_tv.cum_cam(), *them]))
+
+
+def doi_chieu(*khoa: str):
+    """BT-DC "Cách nào đúng với mình?" — chuỗi / bảng theo khoá (None khi thiếu)."""
+    x = _lay("doi_chieu", *khoa)
+    return _chuoi(x) if isinstance(x, str) else x if isinstance(x, dict) else None

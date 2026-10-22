@@ -3,10 +3,15 @@
 // cho xuất bản → xuất bản → web hiện bài (H1, Trả lời nhanh, mục lục, FAQ, JSON-LD, sitemap, llms.txt, .md) → sửa nháp
 // + xem trước có ký → đổi slug giữ link cũ (308) → biên tập viên không có nút Xuất bản → tắt "blog" ở Tính năng.
 import { createHmac } from "node:crypto";
+import { readFileSync } from "node:fs";
 import sharp from "sharp";
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
 import { BI_MAT } from "../playwright.config";
 import { buocHienTai, maTotp, tuBase32 } from "../src/lib/totp";
+
+/** Ngày hiệu lực mặc định của trang pháp lý trong code web — đọc từ nguồn (đổi ngày ở web không làm vỡ test). */
+const NGAY_HIEU_LUC = /export const NGAY_HIEU_LUC = "([^"]+)"/.exec(
+  readFileSync(new URL("../../web/lib/van-hanh.ts", import.meta.url), "utf8"))?.[1] ?? "";
 
 const CMS = "http://localhost:3001";
 const WEB = "http://localhost:3000";
@@ -449,24 +454,27 @@ test("ND-7: chữ trên trang — tab trong CMS, sửa chip + hàng bảng trang
   await choWeb(request, "/", (s, b) => s === 200 && b.includes("Một phút là xong") && b.includes("Hàng chatbot sửa từ CMS"));
 
   // mẫu cụm trang ngày: đổi tiêu đề cho cả cụm (biến {ngay}) + khối phía trên
+  // ngày hôm nay (giờ VN) — trang người dùng thật hay mở, luôn trong cửa sổ index
+  const iso = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
+  const dmy = iso.split("-").reverse().join("/");
   const mau = await tim("mau-cum", "mau_duong", "/xem-ngay-tot/{ngay}");
   const m = await request.patch(`${CMS}/api/mau-cum/${mau.id}`, { headers: h, data: {
     _status: "published", chu: { "dau.tieu_de": "Ngày {ngay} có hợp việc lớn không?" },
     khoi_tren: [{ blockType: "van_ban", noi_dung: "Khối cụm ngày từ CMS ({ngay})." }] } });
   expect(m.status(), await m.text()).toBe(200);
-  await choWeb(request, "/xem-ngay-tot/2026-10-21", (s, b) => s === 200 && b.includes("Ngày 21/10/2026 có hợp việc lớn không?"));
-  await page.goto(`${WEB}/xem-ngay-tot/2026-10-21`);
-  await expect(page.locator("h1")).toHaveText("Ngày 21/10/2026 có hợp việc lớn không?");
-  await expect(page.getByTestId("khoi-cms-tren")).toContainText("Khối cụm ngày từ CMS (21/10/2026).");
+  await choWeb(request, `/xem-ngay-tot/${iso}`, (s, b) => s === 200 && b.includes(`Ngày ${dmy} có hợp việc lớn không?`));
+  await page.goto(`${WEB}/xem-ngay-tot/${iso}`);
+  await expect(page.locator("h1")).toHaveText(`Ngày ${dmy} có hợp việc lớn không?`);
+  await expect(page.getByTestId("khoi-cms-tren")).toContainText(`Khối cụm ngày từ CMS (${dmy}).`);
 
   for (const [c, id] of [["noi-dung-trang", chu.id], ["mau-cum", mau.id]] as const) {
     expect((await request.patch(`${CMS}/api/${c}/${id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
   }
   await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Một phút là xong") && b.includes("30 giây · không cần tài khoản"));
-  await choWeb(request, "/xem-ngay-tot/2026-10-21", (s, b) => s === 200 && b.includes("Ngày 21/10/2026 tốt hay xấu?"));
+  await choWeb(request, `/xem-ngay-tot/${iso}`, (s, b) => s === 200 && b.includes(`Ngày ${dmy} tốt hay xấu?`));
 });
 
-test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát), hình lớn trang chủ từ thư viện, chữ dùng chung ở form", async ({ page, request }) => {
+test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát), hình lớn trang chủ từ thư viện, chữ dùng chung ở form", async ({ page, request, browser }) => {
   const token = await tokenQt(request);
   const h = { Authorization: `JWT ${token}` };
   const trang = (await (await request.get(`${CMS}/api/noi-dung-trang?where[duong][equals]=%2F&depth=0&draft=true`, { headers: h })).json()).docs[0] as { id: number };
@@ -501,11 +509,22 @@ test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát),
 
   // 3) chữ dùng chung: tiêu đề ô vào trang chủ + nút gửi của form hồ sơ
   expect((await request.post(`${CMS}/api/globals/chu-chung`, { headers: h,
-    data: { chu: { "cua_vao.tieu_de": "Nhập 2 thông tin là xong", "ho_so.nut_xem": "Xem ngay số của tôi" } } })).ok()).toBeTruthy();
+    data: { chu: { "cua_vao.tieu_de": "Nhập 2 thông tin là xong", "ho_so.nut_xem": "Xem ngay số của tôi",
+      "gop_y_bai.co": "Trúng lắm" } } })).ok()).toBeTruthy();
   await choWeb(request, "/", (s, b) => s === 200 && b.includes("Nhập 2 thông tin là xong"));
   await page.goto(`${WEB}/`);
   await expect(page.getByText("Nhập 2 thông tin là xong")).toBeVisible();
   await expect(page.getByRole("button", { name: /Xem ngay số của tôi/ })).toBeVisible();
+  // nút góp ý cuối bài (đo Gate 1: mã "co" không đổi, chỉ đổi chữ) — cần hồ sơ trên máy để /ban-than có bài đọc
+  // (trình duyệt riêng: hồ sơ nạp sẵn làm trang chủ hiện "Chào lại" — bước dọn bên dưới cần trang chủ chưa có hồ sơ)
+  const ctx = await browser.newContext();
+  try {
+    const bt = await ctx.newPage();
+    await bt.addInitScript(() => localStorage.setItem("hbt.hoso.v1", JSON.stringify({ v: 1, ho_ten: "Nguyễn Văn An", ngay: 24, thang: 10,
+      nam: 1988, tao_luc: "2026-10-01T00:00:00Z" })));
+    await bt.goto(`${WEB}/ban-than`);
+    await expect(bt.getByTestId("gop-y").getByRole("button", { name: "Trúng lắm" })).toBeVisible({ timeout: 60_000 });
+  } finally { await ctx.close(); }
 
   // dọn: về chữ + hình gốc
   expect((await request.post(`${CMS}/api/globals/chu-chung`, { headers: h, data: { chu: null } })).ok()).toBeTruthy();
@@ -592,7 +611,7 @@ test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức
   // dọn: gỡ xuất bản → web về chữ code
   expect((await request.patch(`${CMS}/api/noi-dung-trang/${dk.id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
   expect((await request.patch(`${CMS}/api/mau-cum/${mau.id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
-  await choWeb(request, "/dieu-khoan", (st, b) => st === 200 && !b.includes("Điều khoản Sao sửa từ CMS.") && b.replace(/<!-- -->/g, "").includes("Hiệu lực từ 20/10/2026"));   // NGAY_HIEU_LUC (web/lib/van-hanh.ts); React chèn <!-- --> giữa hai đoạn chữ
+  await choWeb(request, "/dieu-khoan", (st, b) => st === 200 && !b.includes("Điều khoản Sao sửa từ CMS.") && NGAY_HIEU_LUC !== "" && b.replace(/<!-- -->/g, "").includes(`Hiệu lực từ ${NGAY_HIEU_LUC}`));   // React chèn <!-- --> giữa hai đoạn chữ
   await choWeb(request, u1, (st, b) => st === 200 && !b.includes("Mẫu cụm: bạn đang đọc"));
 });
 

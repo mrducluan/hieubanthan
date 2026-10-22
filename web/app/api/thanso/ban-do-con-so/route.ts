@@ -1,7 +1,9 @@
 // POST /api/thanso/ban-do-con-so — gói Sao "Bản đồ con số" (Luận giải toàn bộ thần số): chương Tổng quan miễn phí,
 // Nghịch lý bên trong · 12 tháng tới · Sự nghiệp & tiền bạc mở bằng Sao khi bật thu Sao (lib/luan-giai-sao). Engine
-// ghép từ CALC + KB, không lưu.
+// ghép từ CALC + KB, không lưu. Tầng HỌC (rà 2026-10-22): kèm tỉ lệ công khai + phiếu của chính người xem cho mã
+// `ds.thanso.*` để engine hạ/xếp hộp như Tử vi, Bát tự (không vào khoá "đã mở hôm nay").
 import { z } from "zod";
+import { themHocLuanGiai } from "@/lib/hoc-tuvi";
 import { luanGiaiCoSao } from "@/lib/luan-giai-sao";
 
 const Input = z.object({
@@ -17,5 +19,6 @@ const Input = z.object({
 const khoaTheoNguoi = (d: Record<string, unknown>) => [(d.ho_ten as string[])[0], d.ngay, d.thang, d.nam];
 
 export function POST(req: Request) {
-  return luanGiaiCoSao(req, Input, "/v1/thanso/ban-do-con-so", "thanso", khoaTheoNguoi);
+  return luanGiaiCoSao(req, Input, "/v1/thanso/ban-do-con-so", "thanso", khoaTheoNguoi,
+    () => themHocLuanGiai({ loai: "doi_song", tienTo: "ds.thanso." }));
 }

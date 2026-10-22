@@ -67,7 +67,12 @@ export async function POST(req: Request) {
     let { data, error } = await goi(ghi);
     // Ghi chú còn sót thông tin liên hệ (SQL chặn) → vẫn lưu góp ý, bỏ ghi chú; không đánh rơi cả góp ý.
     if (error && ghi) ({ data, error } = await goi(null));
-    if (error) return NextResponse.json({ ok: true, luu: false });
+    if (error) {
+      // Rà vòng HỌC 2026-10-22: DB từ chối (vd chữ ký ngoài khoảng của thanso_chu_ky_hop_le) = góp ý mất âm thầm → báo
+      // Sentry (chỉ mã lỗi, không chữ ký / ghi chú). Chưa chạy 0016 (PGRST202) thì im như cũ.
+      if (error.code !== "PGRST202") baoLoi(new Error(`phan_hoi_thanso_${error.code ?? "loi"}`), { noi: "api", duong: "/api/thanso/phan-hoi" });
+      return NextResponse.json({ ok: true, luu: false });
+    }
     return NextResponse.json({ ok: true, luu: true, cho_duyet: (data as { trang_thai?: string })?.trang_thai === "cho_duyet" });
   } catch (e) {
     baoLoi(e, { noi: "api", duong: "/api/thanso/phan-hoi" });

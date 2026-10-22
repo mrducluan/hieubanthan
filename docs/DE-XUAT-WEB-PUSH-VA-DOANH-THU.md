@@ -54,15 +54,28 @@ Hiện `manifest.ts` có nhưng chưa ai được mời cài; sw.js mới chỉ 
 **Không làm** (giữ ranh giới): bán "giải hạn/vật phẩm", gói theo nỗi sợ, đếm ngược giả, mờ nội dung bằng CSS, khoá câu trả
 lời khủng hoảng, hoa hồng nhiều tầng, crypto.
 
-## 4. Thứ tự em đề xuất (6 tuần, sau khi PR Web Push GĐ1 merge + anh chạy 0019 + VAPID)
+## 4. Trạng thái + kế hoạch còn lại (cập nhật 2026-10-22, chủ dự án duyệt làm 1.1 · 1.3 · 1.4 · mục 2)
 
-| Tuần | Làm | Mốc đo để đi tiếp |
+**Đã làm (GĐ2, nhánh sau PR #112)** — chờ anh chạy migration 0020:
+
+| # | Việc | Ở đâu |
 |---|---|---|
-| 1 | 1.6 thống kê push ở quản trị · 2.2 icon PNG + manifest đủ điều kiện cài · 3.2 công tắc thu Sao theo mảng | ≥ 50 thiết bị bật nhắc; Lighthouse installable pass |
-| 2 | 1.1 "Sáng nay của bạn" (tuỳ chọn, gộp một thông báo) · 2.1 mời cài đúng lúc | Tỉ lệ mở thông báo ≥ 25 %; D7 nhóm bật ≥ 1,5× nhóm không |
-| 3 | 1.3 nhắc theo nhịp lịch (tháng cá nhân, giao tiết, Lập xuân/Tết) · 2.5 deep link | `push_mo` → `reading_started` ≥ 40 % |
-| 4 | 3.1 gói "Nhịp của tôi" (bằng Sao, tự gia hạn tắt mặc định) · 3.4 gói 20 câu | ≥ 3 % người bật push mua gói trong 30 ngày |
-| 5–6 | 3.3 "Năm của tôi" in được (trước Tết) · 1.4 phiếu kiểm chứng qua thông báo · 3.5 thưởng mời gắn nạp đầu | Doanh thu mùa Tết; K-factor |
+| 1.1 ✅ | "Sáng nay của bạn": người dùng tự tích, cần hồ sơ trong tài khoản; máy chủ chỉ đọc NGÀY-THÁNG sinh (không năm) → engine tính ngày cá nhân + câu tự soi | `engine/app/luangiai/sang_nay.py`, `/v1/push/sang-nay`, migration `0020_push_tuy_chon.sql`, `web/lib/cron.ts` |
+| 1.3 ✅ | Mốc lịch tự chọn: đầu tháng cá nhân · giao tiết (12 tiết, giờ VN) · Lập xuân + Tết âm lịch Việt | cùng trên; KB `push_sang_nay.json` (nháp AI) |
+| 1.4 ✅ | "Hôm qua việc X — đúng không?": ý định hôm qua chỉ nằm trên máy (IndexedDB) → hai nút ngay trên thông báo (Android/máy tính) hoặc khối "Hôm qua của bạn" ở Hôm nay (mọi máy, cả iPhone) → phiếu kiểm chứng ẩn danh có sẵn (mã `ds.hn.<ý định>.<nhịp>.n<số ngày>`, không migration) | `web/public/sw.js`, `web/lib/hom-qua.ts`, `components/khung/HoiHomQua.tsx` |
+| — ✅ | Vẫn ≤ 1 thông báo / thiết bị / ngày: mốc tự đánh dấu > mốc lịch > sáng nay, gộp một | `ghepThongBao` trong `web/lib/web-push.ts` |
+| 2.1 ✅ | Mời cài đúng lúc (ghé Hôm nay 2 ngày/7 ngày hoặc có mốc nhắc; Android nút một chạm, iPhone 2 bước; đóng → 30 ngày) | `components/khung/MoiCaiApp.tsx` |
+| 2.2 ✅ | Biểu tượng PNG 192/512 + maskable, manifest `id`/`scope`/lối tắt, mở app vào `/hom-nay?tu=app` | `app/bieu-tuong/[co]`, `app/manifest.ts`, `lib/bieu-tuong.tsx` |
+| đo ✅ | `chart_interacted{kind=push_tuy_chon\|pwa_moi\|pwa_cai\|pwa_tu_choi\|pwa_dong\|pwa_da_cai\|pwa_mo}`, `landing_viewed.app` (phiên mở từ app đã cài), `feedback_submitted{kind=hom_qua}` | |
+
+**Còn lại (đề xuất thứ tự, mỗi bước chờ số đo của bước trước):**
+
+| Đợt | Làm | Mốc đo để đi tiếp | Cần anh |
+|---|---|---|---|
+| A (ngay sau khi chạy 0020 + VAPID) | 1.6 khung số liệu push ở `/quan-tri/tang-truong` (thiết bị bật, gửi/mở/tắt, tỉ lệ 410) + nút tạm dừng gửi | ≥ 50 thiết bị bật nhắc | — |
+| B (+1–2 tuần) | 2.5 mở thẳng khối tương ứng từ thông báo · 3.2 công tắc thu Sao theo mảng | Mở thông báo ≥ 25 %; D7 nhóm bật ≥ 1,5× nhóm không | chốt mảng thu Sao |
+| C (+3–4 tuần) | 3.1 gói "Nhịp của tôi" 15 Sao/tháng (tự gia hạn tắt mặc định) · 3.4 gói 20 câu | ≥ 3 % người bật push mua gói trong 30 ngày | duyệt migration bảng gói |
+| D (trước Tết) | 3.3 "Năm của tôi" in được · 3.5 thưởng mời gắn nạp đầu · 1.2 chọn giờ nhận | Doanh thu mùa Tết, K-factor | **Vercel Pro** (1.2 cần nhiều cron) |
 
 Điều kiện kỹ thuật cần anh quyết sớm: **Vercel Pro** (nhiều cron/giờ gửi; Hobby cũng cấm dùng thương mại khi đã thu Sao —
-`KIEN-TRUC-VAN-HANH.md` mục 6) và chạy migration 0018/0019.
+`KIEN-TRUC-VAN-HANH.md` mục 6) và chạy migration 0018 → 0019 → 0020.

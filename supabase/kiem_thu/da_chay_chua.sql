@@ -25,6 +25,9 @@ select * from (values
   ('0016 tầng HỌC thần số (TS-V3)', to_regclass('public.thanso_phan_hoi') is not null),
   ('0017 tầng HỌC Tử vi (LG-ĐS)',  to_regclass('public.cau_hoi_vec') is not null),
   ('0018 hồ sơ nhà + nhắc việc',   to_regclass('public.nhac_viec') is not null),
-  ('0019 Web Push (thiết bị nhắc)', to_regclass('public.push_dang_ky') is not null)
+  ('0019 Web Push (thiết bị nhắc)', to_regclass('public.push_dang_ky') is not null),
+  ('0020 Web Push (sáng nay, mốc lịch)', to_regclass('public.push_tuy_chon') is not null),
+  ('0021 kiểm chứng 2 người',      exists (select 1 from pg_constraint where conname = 'kiem_chung_phieu_loai_check'
+                                             and pg_get_constraintdef(oid) like '%hai_nguoi%'))
 ) as t(migration, da_chay)
 order by 1;

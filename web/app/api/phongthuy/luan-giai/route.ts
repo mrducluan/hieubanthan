@@ -39,7 +39,7 @@ const Input = z.object({
 export async function POST(req: Request) {
   const parsed = Input.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
-  const them = await themHocLuanGiai("ds.phongthuy.").catch(() => ({}));
+  const them = await themHocLuanGiai({ loai: "doi_song", tienTo: "ds.phongthuy." }).catch(() => ({}));
   const dau = dauNguoiGoi(req);
   let kq = await goiEngineDaKiem({ ...parsed.data, ...them }, "/v1/phongthuy/luan-giai", dau);
   if (!kq.ok && Object.keys(them).length) kq = await goiEngineDaKiem(parsed.data, "/v1/phongthuy/luan-giai", dau);

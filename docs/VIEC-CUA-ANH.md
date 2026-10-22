@@ -30,6 +30,11 @@
    đúng" vẫn hiện nhưng không lưu; xem kết quả ở `/quan-tri/hoc`. Cron xoá dữ liệu hết hạn (`/api/cron/don-du-lieu-hoc`,
    3:41 sáng UTC) dùng chung `CRON_SECRET` với cron đối soát — đã có thì không cần làm gì. Đọc kỹ quy tắc riêng tư mới ở CLAUDE.md (mục Quy tắc
    code) — nhờ luật sư rà cùng chính sách quyền riêng tư (mục E).
+4h. [ ] **Kiểm chứng "Xem lá số 2 người" (HN-2N, 2026-10-22):** sau khi merge PR, Supabase → SQL Editor → chạy
+   `supabase/migrations/0021_kiem_chung_hai_nguoi.sql` (SAU 0017; rollback: `0021_kiem_chung_hai_nguoi.down.sql` — xoá
+   phiếu loại hai người). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0021 = true). Chưa chạy thì nút "Đúng với
+   mình / Chưa đúng" dưới hộp điểm 2 người vẫn hiện, PostHog vẫn đếm, nhưng máy chủ không lưu phiếu (Sentry báo một lần
+   `kiem_chung_tu_choi` — đó là dấu hiệu chưa chạy). Nếu chưa chạy 0018 (`hồ sơ nhà + nhắc việc`) thì chạy 0018 trước.
 4d. [ ] **NotFair blog (/blog):** Vercel → Settings → Environment Variables → thêm `NOTFAIR_SEO_API_KEY` = khoá `nfbl_…`
    (Production + Preview, **không** thêm tiền tố `NEXT_PUBLIC_`) → Redeploy. Rồi mở `https://hieuban.com/blog` và một bài
    `/blog/{slug}`: thấy ảnh bìa, mục lục bấm được, bảng cuộn ngang trên điện thoại. Chưa đặt khoá thì /blog chỉ hiện "Chưa có bài viết".
@@ -492,7 +497,9 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
      tải ảnh mới (ghi mô tả ảnh) → Xuất bản. "Về hình gốc" = hình vẽ cũ. Mẫu cụm có ô **"Ảnh chia sẻ"** (ảnh hiện khi dán link
      lên Facebook/Zalo) cho cả cụm — nên ảnh 1200×630.
   4) **Giao diện website → Chữ dùng chung**: nhãn + nút form "Họ tên / Ngày sinh / Xem con số của tôi", ô vào trang chủ, ô hỏi
-     đáp, "Thử lại" — sửa một lần, mọi trang đổi theo.
+     đáp, "Thử lại"; từ đợt 3 thêm nút góp ý cuối bài ("Có, khá trúng / Một phần / Chưa" — đổi chữ không lệch số Gate),
+     "Đúng với mình / Chưa đúng", các nút chia sẻ (gửi, chép link, tải ảnh story), "Vì sao nói vậy" — sửa một lần, mọi trang
+     đổi theo. Bấm "Đồng bộ ngay" sau mỗi lần web deploy có khoá mới.
   **Ảnh cần CMS1** (bucket `cms-media`): chưa làm thì ảnh tải lên có thể mất sau lần deploy CMS kế tiếp.
 - [ ] ND45. (2026-10-19, ND-4/ND-5) Sau khi PR merge, CMS redeploy tự chạy migration `nd_4_5_anh_phap_ly`. Thử ~5 phút:
   1) **Trang pháp lý** (Trang website → `/dieu-khoan`…): sửa Mục / ngày hiệu lực → chọn "Thay đổi nội dung" + ngày mới
@@ -684,13 +691,16 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
   "Xem lá số 2 người" (điểm tham khảo), "3 tháng tới", luận giải toàn bộ (chương mới "Vận hạn & điều nên tránh"),
   khối "Điều ngày sinh còn kể về bạn" cuối trang; thử tạo thẻ "5 mảnh ghép làm nên tôi" + trò đoán số trên điện thoại.
 - [ ] Quyết: thêm loại kiểm chứng `hai_nguoi` (migration nhỏ sau 0017) để bật nút "Đúng với mình" cho phần 2 người.
-- [ ] Quyết: Tử vi "3 tháng tới" — Kỵ tháng rơi THẲNG vào Mệnh / Tài Bạch / Quan Lộc hiện vẫn xếp "Bình" (hộp "Nên để ý"
-  đã nhắc). Đổi thành "Cần thận trọng"? (đổi mức + mã kiểm chứng của nhiều tháng).
+- [x] Quyết: Tử vi "3 tháng tới" — Kỵ tháng rơi THẲNG vào Mệnh / Tài Bạch / Quan Lộc → **có gắn "Cần thận trọng"**
+  (anh chốt 2026-10-22, đã làm: luật `ky_nhap_cung_chinh`).
 - [ ] Quyết 4 ý tưởng nạp Sao cần migration (`docs/MUC-TIEU-TANG-TRUONG.md`): tặng bạn một chương đã mở · thưởng Sao
   chuỗi ngày ghé · thưởng mời gắn lần nạp đầu · gói Sao theo dịp.
-- [ ] Quyết (khi rảnh): Bát tự — mốc đại vận hai cách dụng thần đọc khác nhau, cho người dùng bấm "cách nào đúng với
-  mình" (đếm trên máy, như "Phái nào nói đúng" của thần số)?
-- [ ] Người rành Tử Bình duyệt bảng hỷ/kỵ theo cách cục (`battu_doi_song_kb.json`, mục `cach.*`) — nháp AI.
+- [x] Quyết (khi rảnh): Bát tự — "cách nào đúng với mình" → đã làm theo đề xuất của em (2026-10-22): khối "Cách nào đúng
+  với bạn?" trên `/bat-tu` hỏi lại những năm đã qua mà hai cách đọc khác nhau (`docs/LUAN-GIAI-DOI-SONG.md` mục 9).
+- [ ] **Tìm người rành Tử Bình duyệt bảng hỷ/kỵ theo cách cục** — phiếu duyệt + phân tích tác động sẵn ở
+  `docs/DUYET-HY-KY-BAT-TU.md` (mục 3 có 3 nghi vấn ưu tiên: Chính Quan, Tài cách thân nhược, Thực Thần thân nhược).
+  Ước 1–2 giờ đọc + điền cột "Ý kiến chuyên gia". Gửi lại cho em để áp bằng PR (có đo trước/sau).
+- [x] Đại vận "đang đi" tính theo ngày khởi vận (anh giao 2026-10-22, đã sửa).
 - [ ] Nhờ luật sư rà thêm: điểm "Xem lá số 2 người" ghi rõ là tham khảo; chương Vận hạn dùng "Nên tránh / Nên làm",
   không doạ, không vật phẩm.
 
@@ -741,4 +751,17 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] Sau deploy: mở `/phong-thuy` → "Nhà của bạn" nhập hướng 180, năm 2008 → chương 2 có đoạn "Hướng tinh … tiền bạc" và
   "năm nên chủ động hơn"; dưới mỗi hộp có nút "Đúng với mình / Chưa đúng" (Phong thuỷ, Kinh Dịch nay cũng có). Số "x%" chỉ
   hiện khi migration 0017 đã chạy và mã đủ 30 phiếu.
+## WP-GĐ2. Sáng nay của bạn · mốc lịch · hỏi lại hôm qua · mời cài app (2026-10-22)
+
+- [ ] **WP7. Chạy migration `0020_push_tuy_chon.sql`** (sau 0018, 0019; rollback `.down.sql`). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`
+  (dòng 0020 = true). Chưa chạy thì nhắc mốc tự đánh dấu vẫn gửi, chỉ phần tuỳ chọn (sáng nay, mốc lịch) ẩn đi.
+- [ ] **WP8. Deploy engine Render** (route mới `/v1/push/sang-nay`) **trước** khi merge web — web gọi engine trong cron sáng.
+- [ ] **WP9. Thử**: điện thoại Android đã bật nhắc → Tài khoản → tích "Sáng nay của bạn" (cần đã lưu hồ sơ vào tài khoản) →
+  Vercel → Cron Jobs → `/api/cron/hang-ngay` → Run → nhận một thông báo "Sáng nay của bạn · Ngày cá nhân N". Hôm trước chọn một
+  ý định ở "Hôm nay bạn định làm gì?" thì thông báo có thêm hai nút "Đúng với mình / Chưa đúng".
+- [ ] **WP10. Thử cài app**: Chrome Android/máy tính mở `/hom-nay` hai ngày khác nhau → thấy thẻ "Mở Hiểu Bản Thân nhanh hơn mỗi
+  sáng" → Cài. iPhone: thẻ hướng dẫn 2 bước. Sau 1–2 tuần xem `/quan-tri/tang-truong` (PostHog `pwa_*`, `landing_viewed.app`).
+- [ ] **WP11. Luật sư rà** dòng "Mốc nhắc, thiết bị và tuỳ chọn nhận thông báo" + dòng Tiện ích trong Chính sách quyền riêng tư
+  (hiệu lực 22/10/2026). Nếu đã sửa trang này trong CMS thì thêm ở CMS (CMS thắng code).
+- [ ] **WP12. Quyết Vercel Pro** trước khi bật thu Sao / muốn chọn giờ nhận thông báo (Hobby: 2 cron, cấm thương mại).
 

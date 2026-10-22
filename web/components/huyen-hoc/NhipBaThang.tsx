@@ -4,6 +4,7 @@
 // câu so ba tháng → biểu đồ nhịp → thẻ tháng (hộp nổi bật + vòng 12 cung mini). Học thuật (tứ hoá, luật, phái) thu gọn
 // sau nút "Vì sao nói vậy". Màu dịu, không biểu tượng cảnh báo — đây là nhịp để tự soi, không phải lời phán.
 import { useId, useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { motion, useReducedMotion } from "motion/react";
 import { CalendarClock, ChevronDown, MessageCircleQuestion, MousePointerClick, Sparkles } from "lucide-react";
 import type { ChartInputVao, HopThangT, Nhip3ThangOutputT } from "@/app/api/tuvi/schema";
@@ -16,6 +17,7 @@ import { HopNoiBat } from "@/components/luan-giai/HopNoiBat";
 import { Button } from "@/components/ui/button";
 import { usePost } from "@/lib/goi-api";
 import { maNhip } from "@/lib/kiem-chung";
+import { useTyLe, type BangTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 
 type Thang = Nhip3ThangOutputT["thang"][number];
@@ -56,6 +58,7 @@ export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutpu
   const goc = useId().replace(/:/g, "");
   const giam = useReducedMotion();
   const [chon, setChon] = useState<number | null>(null);
+  const tyLe = useTyLe(d.thang.map(maNhip));         // "x% thấy đúng" khi mã đủ ≥ 30 phiếu (LG-ĐS mục 5)
   const toi = (i: number) => {
     setChon(i);
     document.getElementById(idThe(goc, i))?.scrollIntoView({ behavior: giam ? "auto" : "smooth", block: "start" });
@@ -73,7 +76,7 @@ export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutpu
       <ol className="space-y-4" aria-label="Ba tháng âm lịch tới">
         {d.thang.map((t, i) => (
           <TheThang key={`${t.nam_am}-${t.thang}-${t.nhuan}-${t.phan}`} id={idThe(goc, i)} t={t} i={i} d={d}
-            noiBat={chon === i} onChonCungTen={onChonCungTen} onHoi={onHoi} />
+            noiBat={chon === i} onChonCungTen={onChonCungTen} onHoi={onHoi} tyLe={tyLe} />
         ))}
       </ol>
       <HocThuatNam d={d} />
@@ -184,9 +187,9 @@ function VongCung({ cung, t }: { cung: NonNullable<Nhip3ThangOutputT["cung"]>; t
 }
 
 // ------------------------------------------------------------------ thẻ tháng
-function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi }: {
+function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi, tyLe }: {
   id: string; t: Thang; i: number; d: Nhip3ThangOutputT; noiBat: boolean;
-  onChonCungTen: (tenCung: string) => void; onHoi: (cau: string) => void;
+  onChonCungTen: (tenCung: string) => void; onHoi: (cau: string) => void; tyLe?: BangTyLe;
 }) {
   const giam = useReducedMotion();
   const mau = MAU_MUC[t.muc];
@@ -241,6 +244,7 @@ function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi }: {
       {t.tu <= d.ngay_xem && (
         <div className="mt-3">
           <KiemChung loai="nhip_3_thang" mau={maNhip(t)} phai={d.phai_luu_nguyet} khoa={`${t.nam_am}-${t.thang}-${t.nhuan ? 1 : 0}-${t.phan}`}
+            tyLe={tyLe?.[maNhip(t)]}
             cauHoi="Tháng này có đúng nhịp với bạn?" />
         </div>
       )}
@@ -252,12 +256,13 @@ function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi }: {
 function ViSaoThang({ t }: { t: Thang }) {
   const [mo, setMo] = useState(false);
   const id = useId();
+  const c = useChuChung();
   const canCu = t.can_cu?.length ? t.can_cu : t.ly_do.map((l) => l.noi_dung);
   return (
     <div className="mt-3" data-testid="vi-sao">
       <button type="button" aria-expanded={mo} aria-controls={id} onClick={() => setMo((v) => !v)}
         className="inline-flex items-center gap-1 rounded-full text-sm text-fg-muted underline-offset-4 hover:text-fg hover:underline">
-        Vì sao nói vậy <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
+        {c("doc.vi_sao")} <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
       </button>
       <div id={id} hidden={!mo} className="mt-2 space-y-2 border-l-2 border-line pl-3" data-testid="can-cu">
         <p className="text-xs text-fg-faint"><NhanLop lop="tinh" /> <span className="ml-1">Cung tháng: <b className="text-fg-muted">{t.cung_goc}</b> · tứ hoá theo can tháng {t.can_chi}</span></p>

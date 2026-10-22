@@ -270,8 +270,15 @@ Cùng đợt (ngoài BT-ĐS): "Xem lá số 2 người" — cung phi năm theo L
 quái khác), người kia chỉ có ngày dùng cùng lịch người dùng chọn và suy vùng từ nơi sinh (miền Nam 1960–1975 lịch
 UTC+8); "3 tháng tới" — nhãn "Nửa sau tháng 6 nhuận (tính như tháng 7)", trục biểu đồ "6N·đầu" / "6N·sau".
 
-**Việc mở (chưa sửa, có chủ ý)**: đại vận "đang đi" tính theo NĂM dương, bỏ qua ngày khởi vận — quy ước chung với
-`calc/battu.py` (đại vận hiện tại) và hỏi đáp Bát tự; tính theo ngày khởi vận cần sửa ở calc cho mọi nơi cùng lúc.
+**Đã sửa 2026-10-22 — đại vận "đang đi" theo NGÀY khởi vận.** CALC `battu._dai_van` thêm `tu_ngay` / `den_ngay` cho
+mỗi vận (ngày khởi vận + 10 năm), hàm `dai_van_theo_ngay(ls, ngay)`. Luận giải: `thoi_gian_bieu(pt, ngay_xem)` đánh
+dấu `hien_tai` theo ngày, `van_tham_chieu` (chưa khởi / đang đi / đã qua) theo ngày, "năm thứ n của giai đoạn" đếm từ
+ngày bắt đầu vận, giai đoạn mới bắt đầu trong 12 tháng tới → câu "Từ ngày 13/12/2026, bạn sang giai đoạn mười năm
+mới…", căn cứ ghi khoảng ngày. Hỏi đáp "đại vận hiện tại" theo ngày; hỏi một năm cụ thể (và lưu niên, dòng 10 năm)
+giữ **quy ước bảng đại vận** (`dai_van_tai`: năm bắt đầu vận → 9 năm sau, như các phần mềm Bát tự phổ biến), riêng
+năm đang xem lấy đúng vận đang đi và căn cứ ghi "Ngày … sang đại vận …". Hồ sơ mẫu 17/05/1990: Ất Dậu bắt đầu
+13/12/2026 → ngày 21/10/2026 vẫn Giáp Thân (trước báo nhầm Ất Dậu). `tu_nam` / `den_nam` giữ nguyên → không tăng
+`ENGINE_VERSION`. Web: dòng thời gian hiện "từ 13/12/2016 đến 12/12/2026".
 
 ## 7. Rà chung chung Tử vi 2026-10-21
 
@@ -568,3 +575,87 @@ Dải 12 tháng (và 3 tháng ở "Năm nay") dùng `muc_thang`: ngưỡng ±1 n
 Cần lưu ý khi cả hai cách cùng thấy). Trước: 46 · 21 · 34% (Thuận · Cân bằng · Cần lưu ý), nhiều lá 7–8 tháng cam /
 năm; sau: 26 · 58 · 16%, trung bình ~2 tháng "Cần lưu ý" / năm (100 lá × 12 tháng). Lưu nguyệt là lớp ưu tiên thấp
 nhất nên chỉ tô màu khi tín hiệu đồng thuận. Test `test_thang_chi_to_mau_khi_tin_hieu_ro`.
+
+## 9. BT-DC — "Cách nào đúng với bạn?" (2026-10-22)
+
+Chủ dự án hỏi có nên cho người dùng bình chọn cách lấy dụng thần. Bình chọn mơ hồ ("cách nào nghe đúng hơn") dễ chọn
+theo cảm tính; người dùng biết chắc nhất là **đời mình đã qua**. Nên làm **đối chiếu quá khứ**:
+
+- RULES `luangiai/battu_doi_chieu.py` + `POST /v1/battu/doi-chieu-cach` (web `/api/battu/doi-chieu-cach`, không lưu,
+  không trừ Sao): chọn tối đa 5 năm Bát tự đã qua (tuổi ≥ 16, 15 năm gần nhất) + tối đa 1 giai đoạn mười năm đã qua mà
+  hai cách đọc KHÁC nhau (ngược hẳn thuận ↔ cần lưu ý đứng trước), mức từng cách chấm như báo cáo (`muc_hai_cach`).
+  Dưới 3 câu → không hỏi, kèm lời lý do (`it_nam_qua` / `hai_cach_trung`). Mẫu 300 lá: 88% có câu hỏi.
+- Web `components/huyen-hoc/DoiChieuCach.tsx` (trên `/bat-tu`, giữa tứ trụ và luận giải): mỗi câu "Nhìn lại năm 2019
+  (khi bạn 29 tuổi), nhìn chung đó là một năm…" → Khá suôn sẻ / Bình thường / Khá vất vả / Không nhớ rõ; trả lời xong
+  lật ra mỗi cách đã nói gì (✓ chỗ khớp). Đủ 3 câu: so mã (`lib/cach-chinh-battu.ts` `ketQua`, luật `luat` engine trả:
+  chênh ≥ 2 → kết luận một cách, chênh 1 → "nghiêng", bằng → "chưa rõ"), lời kết luận do engine soạn (KB
+  `battu_doi_song_kb.json` → `doi_chieu`, nháp AI).
+- Người dùng có thể **chọn cách chính** → báo cáo hiện thêm "Theo cách bạn chọn: <mức>" cạnh mức chung ở chương và
+  giai đoạn hai cách khác nhau. Mức chung, mã kiểm chứng, phép tính không đổi; hệ thống vẫn không tự chọn (`chon` None).
+- Riêng tư: câu trả lời + cách chính chỉ ở localStorage (`hbt.battu.doi_chieu.v1`, theo từng lá số trên máy, tối đa 8);
+  PostHog `chart_interacted` `kind=battu_doi_chieu` chỉ nhận `cach_cuc`, `than`, `khop_1`, `khop_2`, `so_cau`,
+  `ket_qua` — không năm, không ngày sinh. Số này là dữ liệu thật cho người duyệt bảng hỷ/kỵ (`docs/DUYET-HY-KY-BAT-TU.md`).
+- Khâu tăng trưởng: QUAY LẠI (trò tương tác trên chính đời mình, giữ người đọc tới phần luận giải) + nền móng chất lượng
+  (đo cách nào khớp theo cách cục). Đo: tỉ lệ người mở `/bat-tu` trả lời đủ 3 câu, tỉ lệ chọn cách chính.
+- Việc sau (chờ số): cho "cách chính" đổi luôn mức chung của báo cáo (hiện chỉ nhấn) — cần đo phân bố nhãn theo từng
+  cách (gộp chặt đang giữ 10–60% mỗi nhãn).
+
+## 10. Kiểm chứng "Xem lá số 2 người" + rà toàn bộ vòng HỌC (2026-10-22)
+
+### 10.1 Loại phiếu `hai_nguoi` (migration 0021, chủ dự án duyệt)
+
+- **Mã** do engine dựng (`luangiai/tuvi_hai_nguoi.py`): `hn.<tiêu chí>.<loại>.<quan hệ>` — tiêu chí `menh · can · chi ·
+  cung_phi · tu_vi`, loại = kiểu quan hệ giữa hai năm sinh (tương sinh, tam hợp, Diên Niên…), quan hệ = lựa chọn của
+  người dùng. Không tên, ngày sinh, năm, can chi của ai (test `test_ma_mau_khong_lo_nhan_than`). Phái = phiên bản luật
+  chấm (`hai_nguoi_1`).
+- **SQL** `kiem_chung_ma_hop_le` nhánh `hai_nguoi`: danh mục chặt `c_hn_*` = đúng những loại có thể thành HỘP (kết luận
+  "Hợp" hoặc "Cần dung hoà"; loại chỉ ra "Bình hoà" như `binh_hoa`, `trung`, `binh`, `phuc_vi` bị từ chối). Danh mục so
+  HAI CHIỀU với hằng số engine (`TY_*`, `_ket_luan`) trong `tests/test_kiem_chung_ma.py`.
+- **Web**: hộp điểm mạnh / cần dung hoà dùng `HopNoiBat` với `KiemChungBai` `{loai: "hai_nguoi", phai: diem.phien_ban}`;
+  "x% trong N người thấy đúng" khi ≥ 30 phiếu (một lời gọi `/api/kiem-chung/ty-le`). PostHog `tuvi_kiem_chung` chỉ mang
+  mã. Chưa chạy 0021 → hàm cũ trả false → route trả `{da_luu:false, ly_do:"tu_choi"}`, Sentry báo một lần mỗi loại mỗi
+  phiên bản máy chủ; người dùng vẫn thấy "Cảm ơn".
+- **Tự học** (cùng luật mục 3, `doi_song_chung._ap_hoc`): `/api/tuvi/hop-tham` gửi engine `trong_so` (mã `hn.*` ≥ 30
+  phiếu) + `ca_nhan` (phiếu `hai_nguoi` của chính người đăng nhập). Hộp ≥ 100 phiếu & < 40% đúng bị bỏ khỏi hộp, dòng
+  "Đang xem lại: …" vào căn cứ của tiêu chí ("Vì sao nói vậy"), tiêu chí cùng kết luận kế tiếp (nếu có) thay chỗ; hộp
+  người xem bấm "chưa đúng" xếp cuối. **Điểm, mức, lời không đổi** (test). Engine cũ chưa nhận trường mới → 422 → route
+  gọi lại không kèm.
+
+### 10.2 Rà end-to-end từng loại phiếu
+
+| Loại | Nút (web) | API → RPC → bảng | x% công khai | Engine học (`trong_so`/`ca_nhan`) | Quản trị |
+|---|---|---|---|---|---|
+| `phi_hoa` (Đường bay) | `PhiHoa.tsx`, mã web `maPhiHoa`, phái `phi_tinh` | `/api/kiem-chung` → `ghi_kiem_chung` → `kiem_chung_phieu` | **mới có** (trước: không tải tỉ lệ) | không (thẻ, chưa có luật hạ) | tang-truong (PostHog) + hoc (DB) |
+| `nhip_3_thang` | `NhipBaThang.tsx`, `maNhip`, phái lưu nguyệt | như trên | **mới có** | không | như trên |
+| `doi_song` Tử vi `ds.*` | `BaoCaoDoiSong` → `HopNoiBat` | như trên | có | có (`toan_bo.tuvi`) | như trên |
+| `doi_song` Bát tự `ds.bt.*` (+ `ds.bt.van_han.*`) | như trên, phái `tu_binh` | như trên | có | có | như trên |
+| `doi_song` Thần số `ds.thanso.*` | như trên, phái `pitago` | như trên | có | **mới có** (`ban_do_con_so.bao_cao`, route `/api/thanso/ban-do-con-so`) | như trên |
+| `doi_song` Phong thuỷ / Kinh Dịch | `NhaCuaBan`, `DocQue` | — | — | — | **chưa có mã** (`ma_mau`) — chưa có phiếu |
+| `hai_nguoi` `hn.*` | `HopThamTuVi` | như trên (0021) | có | có | như trên |
+| Thần số hỏi đáp | `GopYCauTraLoi` | `/api/thanso/phan-hoi` → engine `chu-ky-so` → `gui_phan_hoi_thanso` → `thanso_phan_hoi` + cụm | — | — (cụm → người duyệt) | hoc (cụm bất thường) |
+
+**Lỗi tìm được và đã sửa** (đều có test):
+1. Phiếu bị DB từ chối mất âm thầm: `/api/kiem-chung` nay trả `ly_do: "tu_choi"` + báo Sentry (một lần / loại);
+   `/api/thanso/phan-hoi` báo Sentry khi DB từ chối.
+2. Chữ ký số thần số có chỉ số 0 (tên thiếu nguyên âm / phụ âm, vd "Y") → `thanso_chu_ky_hop_le` (Pitago 1–33) từ chối
+   CẢ góp ý: engine `/v1/thanso/chu-ky-so` bỏ khoá 0 / rỗng (`test_chu_ky_so_luon_qua_rang_buoc_sql`).
+3. Cron dọn dữ liệu: 0016 lỗi thì trả 502 trước khi dọn phiếu 0017; `don_nhac_viec` (0018) chưa từng được gọi → ba hàm
+   chạy độc lập.
+4. `phieuCuaToi` lấy 500 phiếu mới nhất MỌI loại → người bấm nhiều thẻ có thể mất `ca_nhan` của mảng đang xem; nay lọc
+   theo loại, `trong_so` lọc theo tiền tố mảng (lời gọi engine nhỏ hơn).
+5. `/quan-tri/tang-truong` ghi mọi phiếu không phải phi hoá là "3 tháng tới" (kể cả đời sống) → nhãn theo loại;
+   `/quan-tri/hoc` thêm tên khối; `nhanMau` đọc được mã `hn.*` và `ds.thanso.*`.
+6. Thần số "Bản đồ con số" có nút + x% nhưng engine không nhận `trong_so`/`ca_nhan` → thêm như Tử vi / Bát tự.
+
+**Kiểm thử mới**: `engine/tests/test_kiem_chung_ma.py` liệt kê mã thật (60 lá Tử vi, golden Bát tự, 40 hồ sơ thần số,
+1.500 cặp hai người, phi hoá 30 lá, nhịp 5 phái) và kiểm từng mã với hàm SQL dựng lại từ CHÍNH tệp migration mới nhất;
+có `KIEM_CHUNG_PGDB` thì chạy luôn hàm SQL thật (job CI `sao-that`). `supabase/kiem_thu/thu_kiem_chung_0021.sql`
+(ASSERT). `web/e2e-that/kiem-chung-that.spec.ts`: ghi phiếu → tỉ lệ ≥ 30 → đổi ý không cộng dồn → mã ngoài danh mục bị
+từ chối có lý do → nút trên /tu-vi ghi `hai_nguoi` → hộp < 40% bị hạ → phiếu "chưa đúng" của người đăng nhập xếp cuối.
+
+**Còn mở (cần quyết)**: Phong thuỷ "Nhà của bạn" và Kinh Dịch chưa có `ma_mau` (một quẻ gieo ngẫu nhiên thì "đúng với
+mình" đo gì? — cần chủ dự án chốt trước khi gắn); `DocQue`/`NhaCuaBan` dùng `HopNoiBat` ngoài `KiemChungBai` nên khi gắn
+mã phải bọc provider (mặc định phái `nam_phai_viet`). Phi hoá / nhịp chưa có luật hạ thẻ theo tỉ lệ. Tỉ lệ `ty_le_kiem_chung`
+gộp mọi phái theo mã (mã nhịp như `binh.-` chung cho 5 phái lưu nguyệt). `don_nhac_viec` (0018) chỉ `revoke from public`
+— trên Supabase vai trò anon/authenticated vẫn có quyền mặc định gọi (chỉ xoá mốc > 400 ngày, rủi ro thấp; nên thu hồi
+ở migration sau).

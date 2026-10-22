@@ -19,6 +19,7 @@ import { useDanhSachTinh } from "@/lib/dia-ly";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { ngayHopLe, NUOC_NGOAI } from "@/lib/hoso";
+import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 
 type MaQuanHe = (typeof QUAN_HE_HOP_THAM)[number];
@@ -213,6 +214,8 @@ function KetQuaHopTham({ kq, yeuCau, onHoi, onLai }: {
   const cungHoi = (kq.nguoi_kia_vao_ban.find((h) => h.hoa === "Kỵ") ?? kq.nguoi_kia_vao_ban[0])?.den_cung;
   const d = kq.diem;
   const hop = d ? [...d.diem_manh, ...d.can_dung_hoa] : [];
+  // "x% trong N người thấy đúng" (≥ 30 phiếu) — một lời gọi cho mọi mã hộp; số engine gắn sẵn (`ty_le_dung`) ưu tiên.
+  const tyLe = useTyLe(hop.map((h) => h.ma_mau).filter((m): m is string => Boolean(m)));
   return (
     <div className="space-y-5" data-testid="hop-tham-ket-qua">
       <p className="text-sm text-fg-muted">
@@ -220,9 +223,10 @@ function KetQuaHopTham({ kq, yeuCau, onHoi, onLai }: {
       </p>
       {d && <DiemHaiNguoi diem={d} />}
 
-      {hop.length > 0 && (
-        // Mã hn.* chưa có loại kiểm chứng riêng ở máy chủ → tắt nút "Đúng với mình" trong khối này.
-        <KiemChungBai.Provider value={{ tyLe: {}, phai: "nam_phai_viet", tat: true }}>
+      {hop.length > 0 && d && (
+        // Kiểm chứng loại "hai_nguoi" (migration 0021): mã hn.* do engine dựng, phái = phiên bản luật chấm (hai_nguoi_1).
+        // Chưa chạy 0021 → máy chủ không lưu, PostHog vẫn đo (người dùng không thấy lỗi).
+        <KiemChungBai.Provider value={{ tyLe, phai: d.phien_ban, loai: "hai_nguoi" }}>
           <div className="grid gap-3 sm:grid-cols-2" data-testid="hai-nguoi-hop">
             {hop.map((h) => <HopNoiBat key={h.ma_mau ?? h.tieu_de} hop={h} />)}
           </div>
