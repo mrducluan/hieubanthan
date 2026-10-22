@@ -3,6 +3,7 @@ import { useChu } from "@/components/cms/DauCms";
 import { useState } from "react";
 import { Compass } from "lucide-react";
 import { DoHuongDienThoai } from "@/components/huyen-hoc/DoHuongDienThoai";
+import { HanhTrinhNha } from "@/components/huyen-hoc/HanhTrinhNha";
 import { KhaoSatNha } from "@/components/huyen-hoc/KhaoSatNha";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
@@ -22,6 +23,8 @@ interface MenhQuai {
   co_canh_bao: { loai: string; chi_tiet: string }[];
   /** TP-LICH: engine tính cả ba mốc đầu năm để người dùng thấy đổi mốc có làm khác mệnh quái không. */
   so_sanh_moc?: Record<MocNam, { quai: string; nhom: string; nam_tinh: number }>; moc_khac?: boolean;
+  /** UI-PT 1: nghĩa + "dùng cho" của 8 du niên (KB) cho la bàn sống. */
+  du_nien_y?: Record<string, { loai: string; y_nghia: string; dung_cho: string }>;
 }
 
 const TEN_MOC: Record<MocNam, string> = { lap_xuan: "Lập xuân", tet_viet: "Tết (lịch Việt)", tet_trung: "Tết (lịch Trung Quốc)" };
@@ -51,7 +54,8 @@ export function PhongThuy() {
   return (
     <div>
       {dau}
-      <section aria-label="Mệnh quái" className="mx-auto max-w-3xl space-y-3">
+      <div className="mx-auto mb-6 max-w-3xl"><HanhTrinhNha mq={mq ? { quai: mq.quai, nhom: mq.nhom } : null} coSinh={Boolean(sinh)} /></div>
+      <section aria-label="Mệnh quái" id="menh-quai" className="mx-auto max-w-3xl scroll-mt-24 space-y-3">
           {!sinh && <XinThemDuLieu hoSo={hoSo} can="gioi_tinh" nut="Thêm giới tính" ly_do="Mệnh quái tính theo năm sinh và giới tính. Câu hỏi bố trí chung thì không cần." />}
           {sinh && !mq && !loi && <KhungTai dong={2} />}
           {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
@@ -76,7 +80,8 @@ export function PhongThuy() {
           )}
       </section>
       <div className="mx-auto mt-8 max-w-3xl">
-        <DoHuongDienThoai sinh={sinh} onChot={(k) => setDoHuong(k.do_huong)} onDungToa={(d) => {
+        <DoHuongDienThoai sinh={sinh} laBan={mq ? { quai: mq.quai, bang: mq.bang_huong, huongCat: mq.huong_cat, duNienY: mq.du_nien_y } : null}
+          onChot={(k) => setDoHuong(k.do_huong)} onDungToa={(d) => {
           setDoToa(d);
           document.getElementById("huyen-khong")?.scrollIntoView({ behavior: "smooth", block: "start" });
         }} />

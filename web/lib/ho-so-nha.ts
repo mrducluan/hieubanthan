@@ -31,6 +31,8 @@ export const HoSoNha = z.object({
     vi_tri: z.record(z.string().max(30), z.string().max(12)).optional(),
     huong_do: z.record(z.string().max(30), z.number().min(0).lt(360)).optional(),
     dau_hieu: z.array(z.string().max(40)).optional(),
+    /** UI-PT 4: dấu hiệu người dùng bấm "Tôi đã xử lý" — gửi engine `co: false` (thắng suy luận từ mặt bằng), Khảo sát không tích lại. */
+    da_xu_ly: z.array(z.string().max(40)).optional(),
     mat_bang: z.object({
       luoi: z.array(z.string().regex(/^[01]{3,12}$/)).min(3).max(12),
       phong: z.record(z.string().max(30), z.tuple([z.number().int().min(0).max(11), z.number().int().min(0).max(11)])).optional(),

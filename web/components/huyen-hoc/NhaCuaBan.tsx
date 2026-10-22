@@ -22,6 +22,10 @@ import { cn } from "@/lib/utils";
 import { GoiMoCheo, type GoiMo } from "@/components/khung/GoiMoCheo";
 import { NhacToi } from "@/components/khung/NhacToi";
 import { datGocNhin, TEN_GOC_NHIN, useGocNhin, type GocNhin } from "@/lib/goc-nhin-pt";
+import { SoDoNha } from "@/components/huyen-hoc/SoDoNha";
+import { NHAN_MUC } from "@/components/luan-giai/kieu";
+import type { HoSoNha } from "@/lib/ho-so-nha";
+import { Undo2, Wrench } from "lucide-react";
 
 type Sinh = { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
 interface ThanhVien { vai: "vo" | "chong" | "con" | "cha_me" | "khac"; nam: string; gioi_tinh: "nam" | "nu" }
@@ -69,6 +73,8 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const [yDinh, setYDinh] = useState<string | null>(null);
+  // UI-PT 4 (Y7): bài đọc TRƯỚC khi bấm "Tôi đã xử lý" một dấu hiệu lớn → so trước–sau theo chương.
+  const [soSanh, setSoSanh] = useState<{ truoc: BaoCao; ma: string; tieu_de: string } | null>(null);
   const gocNhin = useGocNhin();
   useEffect(() => { if (doHuongGoiY != null) setDoHuong(String(doHuongGoiY)); }, [doHuongGoiY]);
   // KC-2: hồ sơ nhà lưu trên máy điền sẵn một lần (người dùng đổi tay thì giữ tay).
@@ -83,7 +89,8 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
     if (nhaLuu.thanh_vien.length) setTv(nhaLuu.thanh_vien.map((x) => ({ vai: x.vai, nam: String(x.nam), gioi_tinh: x.gioi_tinh })));
   }, [nhaLuu]);
 
-  const doc = async () => {
+  const doc = async (nhaMoi?: HoSoNha | null) => {
+    const nhaDung = nhaMoi === undefined ? nhaLuu : nhaMoi;
     setLoi(null);
     const d = doHuong.trim() === "" ? null : Number(doHuong.replace(",", "."));
     if (d != null && !(d >= 0 && d < 360)) { setLoi("Độ hướng cần từ 0 đến dưới 360 (0 = chính Bắc)."); return; }
@@ -94,11 +101,14 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
     setDang(true);
     try {
       // Q2/Q1: bố cục đã khai ở Khảo sát nhà (hồ sơ nhà trên máy) đi kèm → báo cáo có hình thế, trần mức, việc theo chi phí.
-      const bc_luu = nhaLuu?.bo_cuc;
-      const bo_cuc = bc_luu && ((bc_luu.vi_tri && Object.keys(bc_luu.vi_tri).length) || bc_luu.dau_hieu?.length || bc_luu.mat_bang)
-        ? { ...(d != null ? { huong_nha_do: d } : huong ? { huong_nha: huong } : {}), ...(nhaLuu?.loai_nha ? { loai_nha: nhaLuu.loai_nha } : {}),
+      const bc_luu = nhaDung?.bo_cuc;
+      const daXuLy = bc_luu?.da_xu_ly ?? [];
+      const bo_cuc = bc_luu && ((bc_luu.vi_tri && Object.keys(bc_luu.vi_tri).length) || bc_luu.dau_hieu?.length || bc_luu.mat_bang || daXuLy.length)
+        ? { ...(d != null ? { huong_nha_do: d } : huong ? { huong_nha: huong } : {}), ...(nhaDung?.loai_nha ? { loai_nha: nhaDung.loai_nha } : {}),
             vi_tri: bc_luu.vi_tri ?? {}, huong_do: bc_luu.huong_do ?? {},
-            dau_hieu: Object.fromEntries((bc_luu.dau_hieu ?? []).map((m) => [m, { co: true, nguon: "nguoi_dung" }])),
+            // UI-PT 4: dấu hiệu đã xử lý gửi co:false — engine không luận lại dù mặt bằng suy ra (trần mức gỡ).
+            dau_hieu: Object.fromEntries([...(bc_luu.dau_hieu ?? []).filter((m) => !daXuLy.includes(m)).map((m) => [m, { co: true, nguon: "nguoi_dung" }]),
+              ...daXuLy.map((m) => [m, { co: false, nguon: "nguoi_dung" }])]),
             ...(bc_luu.mat_bang ? { mat_bang: bc_luu.mat_bang } : {}) }
         : null;
       const r = await postJson<BaoCao>("/api/phongthuy/luan-giai", {
@@ -116,6 +126,29 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "nha_cua_ban", co_nam_xay: nx != null, so_thanh_vien: thanh_vien.length, y_dinh: yDinh ?? "", goc_nhin: gocNhin, co_bo_cuc: Boolean(bo_cuc) });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đọc được."); }
     finally { setDang(false); }
+  };
+
+  /** UI-PT 4: "Tôi đã xử lý <dấu hiệu>" → ghi vào hồ sơ nhà trên máy, đọc lại, giữ bài cũ để so. */
+  const daXuLy = (ma: string, tieu_de: string) => {
+    if (!bc) return;
+    const b = nhaLuu?.bo_cuc ?? {};
+    let moi: HoSoNha | null = null;
+    try {
+      moi = luuHoSoNha({ bo_cuc: { ...b, dau_hieu: (b.dau_hieu ?? []).filter((x) => x !== ma), da_xu_ly: [...new Set([...(b.da_xu_ly ?? []), ma])] } });
+    } catch { return; }
+    setSoSanh({ truoc: bc, ma, tieu_de });
+    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "da_xu_ly", ma });
+    void doc(moi);
+  };
+  const hoanTac = () => {
+    if (!soSanh) return;
+    const b = nhaLuu?.bo_cuc ?? {};
+    let moi: HoSoNha | null = null;
+    try {
+      moi = luuHoSoNha({ bo_cuc: { ...b, dau_hieu: [...new Set([...(b.dau_hieu ?? []), soSanh.ma])], da_xu_ly: (b.da_xu_ly ?? []).filter((x) => x !== soSanh.ma) } });
+    } catch { return; }
+    setSoSanh(null);
+    void doc(moi);
   };
 
   return (
@@ -183,17 +216,31 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
           ))}
         </div>
       </div>
-      <Button onClick={doc} disabled={dang}>{dang ? "Đang đọc…" : "Đọc nhà của tôi"}</Button>
+      <Button onClick={() => void doc()} disabled={dang}>{dang ? "Đang đọc…" : "Đọc nhà của tôi"}</Button>
       {!sinh && <p className="text-xs text-fg-faint">Chưa có năm sinh và giới tính trong hồ sơ: bài đọc sẽ theo hướng nhà, bỏ qua phần hợp mệnh.</p>}
-      {loi && <BaoLoi loi={loi} thuLai={doc} />}
+      {loi && <BaoLoi loi={loi} thuLai={() => void doc()} />}
 
-      {bc && <BaoCaoNha bc={bc} />}
+      {bc && <BaoCaoNha bc={bc} soSanh={soSanh} onDaXuLy={daXuLy} onHoanTac={hoanTac} dang={dang} />}
       {bc && <LuuNhaTaiKhoan />}
     </section>
   );
 }
 
-function BaoCaoNha({ bc }: { bc: BaoCao }) {
+/** UI-PT 4: các chương đổi mức / gỡ trần sau khi xử lý một dấu hiệu. */
+function khacNhau(truoc: BaoCao, sau: BaoCao) {
+  return sau.chuong.flatMap((c) => {
+    const t = truoc.chuong.find((x) => x.ma === c.ma);
+    if (!t) return [];
+    const doiMuc = t.muc !== c.muc && (t.muc || c.muc);
+    const goTran = Boolean(t.tran_muc) && !c.tran_muc;
+    return doiMuc || goTran ? [{ ma: c.ma, tieu_de: c.tieu_de, truoc: t.muc, sau: c.muc, goTran }] : [];
+  });
+}
+
+function BaoCaoNha({ bc, soSanh, onDaXuLy, onHoanTac, dang }: {
+  bc: BaoCao; soSanh: { truoc: BaoCao; ma: string; tieu_de: string } | null;
+  onDaXuLy: (ma: string, tieu_de: string) => void; onHoanTac: () => void; dang: boolean;
+}) {
   // HỌC-ĐS: mọi hộp có mã ds.phongthuy.* → nút "Đúng với mình / Chưa đúng" + "x% thấy đúng" (≥ 30 phiếu), một lời gọi tỉ lệ cho cả bài.
   const maus = [...bc.cot_loi, ...bc.chuong.flatMap((c) => c.hop)].map((h) => h.ma_mau).filter((x): x is string => Boolean(x));
   const tyLe = useTyLe(maus);
@@ -208,6 +255,49 @@ function BaoCaoNha({ bc }: { bc: BaoCao }) {
           </div>
         </section>
       )}
+      {(soSanh || (bc.da_tinh.veto_da_xac_nhan?.length ?? 0) > 0) && (
+        <section aria-labelledby="nha-da-xu-ly-td" className="rounded-2xl border border-line/70 bg-bg/40 p-4" data-testid="nha-da-xu-ly">
+          <h3 id="nha-da-xu-ly-td" className="flex items-center gap-2 font-serif text-lg"><Wrench className="size-4 text-gold" aria-hidden /> Đã xử lý rồi? Xem bài đọc đổi thế nào</h3>
+          {soSanh && (
+            <div className="mt-2 rounded-xl border border-jade/40 bg-jade/[0.06] p-3 text-sm" data-testid="nha-so-sanh">
+              <p className="text-fg">Sau khi xử lý <b>{soSanh.tieu_de.toLowerCase()}</b>:</p>
+              {(() => {
+                const kh = khacNhau(soSanh.truoc, bc);
+                const con = bc.da_tinh.veto_da_xac_nhan ?? [];
+                return (
+                  <>
+                    {kh.length > 0 ? (
+                      <ul className="mt-1 space-y-0.5">
+                        {kh.map((k) => (
+                          <li key={k.ma} className="flex flex-wrap items-center gap-1.5">
+                            <span>{k.tieu_de}:</span>
+                            {k.truoc && <ChipMuc muc={k.truoc} />}{k.truoc && k.sau && <span aria-hidden>→</span>}{k.sau && <ChipMuc muc={k.sau} />}
+                            {k.goTran && <span className="text-xs text-jade">không còn trần mức</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="mt-1 text-fg-muted">Mức các chương chưa đổi{con.length ? <> — còn {con.length} dấu hiệu lớn chưa xử lý: {con.map((v) => v.tieu_de.toLowerCase()).join(", ")}.</> : "."}</p>
+                    )}
+                    <button type="button" onClick={onHoanTac} disabled={dang} className="mt-2 inline-flex items-center gap-1 text-xs text-fg-muted underline-offset-4 hover:underline"><Undo2 className="size-3" aria-hidden /> Chưa xử lý xong, hoàn tác</button>
+                  </>
+                );
+              })()}
+            </div>
+          )}
+          {(bc.da_tinh.veto_da_xac_nhan?.length ?? 0) > 0 && (
+            <>
+              <p className="mt-2 text-sm text-fg-muted">Bấm vào dấu hiệu bạn đã xử lý (che xà, dời đồ, đổi cách dùng…) — bài đọc tính lại ngay, so với trước. Ghi nhớ trên máy, không gửi đi đâu.</p>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {bc.da_tinh.veto_da_xac_nhan!.map((v) => (
+                  <button key={v.ma} type="button" disabled={dang} onClick={() => onDaXuLy(v.ma, v.tieu_de)}
+                    className="rounded-full border border-moon/50 px-3 py-1 text-xs text-moon hover:bg-moon/10 disabled:opacity-50">Đã xử lý: {v.tieu_de}</button>
+                ))}
+              </div>
+            </>
+          )}
+        </section>
+      )}
       {bc.theo_y_dinh && <TheoYDinhKhoi t={bc.theo_y_dinh} />}
       <nav aria-label="Mục lục bài đọc nhà" className="flex flex-wrap gap-1.5 text-xs">
         {bc.chuong.map((c, i) => (
@@ -216,7 +306,7 @@ function BaoCaoNha({ bc }: { bc: BaoCao }) {
           </a>
         ))}
       </nav>
-      {bc.chuong.map((c, i) => <ChuongNha key={c.ma} c={c} so={i + 1} />)}
+      {bc.chuong.map((c, i) => <ChuongNha key={c.ma} c={c} so={i + 1} huongNha={bc.da_tinh.huong_nha} />)}
       {bc.goi_mo && <GoiMoCheo goiMo={bc.goi_mo} moDun="phongthuy" />}
       {bc.nguyen_tac && <p className="text-xs text-fg-faint" data-testid="nha-nguyen-tac">{bc.nguyen_tac}</p>}
       <p className="border-t border-line pt-4 text-sm text-fg-faint">{bc.ket}</p>
@@ -248,7 +338,7 @@ function TheoYDinhKhoi({ t }: { t: TheoYDinh }) {
   );
 }
 
-function ChuongNha({ c, so }: { c: Chuong; so: number }) {
+function ChuongNha({ c, so, huongNha }: { c: Chuong; so: number; huongNha?: string | null }) {
   const [nhom, setNhom] = useState(0);
   const [theoChiPhi, setTheoChiPhi] = useState(false);
   const hanhDong = theoChiPhi && c.hanh_dong_chi_phi ? c.hanh_dong_chi_phi : c.hanh_dong;
@@ -257,12 +347,16 @@ function ChuongNha({ c, so }: { c: Chuong; so: number }) {
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
         <h3 id={`nha-td-${c.ma}`} className="font-serif text-xl"><span className="text-gold">{so}.</span> {c.tieu_de}</h3>
         {c.muc && <ChipMuc muc={c.muc} nhan={c.nhan_muc ?? undefined} />}
-        {c.tran_muc && <span className="text-xs text-moon" data-testid="nha-tran-muc" title={c.tran_muc.giai_thich}>trần Cân bằng — còn {c.tran_muc.ly_do.join(", ").toLowerCase()}</span>}
+        {c.tran_muc && <span className="text-xs text-moon" data-testid="nha-tran-muc" title={c.tran_muc.giai_thich}>tối đa {NHAN_MUC[c.tran_muc.muc_toi_da]} cho tới khi xử lý: {c.tran_muc.ly_do.join(", ").toLowerCase()}</span>}
       </div>
       {c.cau_hoi && <p className="mt-0.5 text-xs text-fg-faint">{c.cau_hoi}</p>}
       {c.tom_tat && <p className={cn("mt-2 leading-relaxed", c.thieu ? "rounded-xl border border-dashed border-line px-4 py-2.5 text-sm text-fg-muted" : "text-lg text-fg")} data-testid="nha-tom-tat">{c.tom_tat}</p>}
       {c.hop.length > 0 && (
         <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">{c.hop.map((h, k) => <HopNoiBat key={`${h.loai}-${k}`} hop={h} />)}</div>
+      )}
+      {c.phong && c.phong.length > 0 && (
+        <SoDoNha className="mt-3" huongNha={huongNha} duNien={Object.fromEntries(c.phong.map((p) => [p.cung, p.du_nien]))}
+          phong={c.phong.map((p) => ({ cung: p.cung, ten: p.ten, muc: p.muc }))} />
       )}
       {c.phong && c.phong.length > 0 && (
         <ul className="mt-3 grid gap-2 sm:grid-cols-2" data-testid="nha-phong">

@@ -12,6 +12,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
 from app.calc import phongthuy as pt
+from app.kb import phongthuy_kb as kbp
 from app.kb import tu_dien
 from app import nhat_ky
 from app.config import ENGINE_VERSION
@@ -50,8 +51,11 @@ def api_menh_quai(inp: SinhInput) -> dict:
     # Engine tự tính cả ba mốc để người dùng thấy đổi mốc có làm khác mệnh quái không.
     ss = {m: {k: v for k, v in pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"], m).items() if k in ("quai", "nhom", "nam_tinh")}
           for m in pt.MOC_NAM}
+    # UI-PT "la bàn sống": nghĩa + "dùng cho" của 8 du niên (KB) để web đọc hướng đang quay về theo thời gian thực.
+    du_nien_y = {ten: {k: v for k, v in (kbp.du_nien(ten) or {}).items() if k in ("loai", "y_nghia", "dung_cho")} for ten in set(bang.values())}
     return {"engine_version": ENGINE_VERSION, **mq, "bang_huong": bang,
             "huong_cat": [h for h, d in bang.items() if d in pt.CAT],
+            "du_nien_y": du_nien_y,
             "so_sanh_moc": ss, "moc_khac": len({x["quai"] for x in ss.values()}) > 1}
 
 

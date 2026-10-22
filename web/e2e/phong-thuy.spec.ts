@@ -7,6 +7,12 @@ test("mệnh quái + la bàn + hướng hợp tuổi", async ({ page }) => {
   await page.goto("/phong-thuy");
   await expect(page.getByTestId("menh-quai")).toContainText("Khảm");
   await expect(page.getByRole("img", { name: /La bàn 8 hướng/ })).toBeVisible();
+  // UI-PT 3: thẻ "Hành trình nhà bạn" — mệnh đã có, hướng nhà sẵn sàng (chưa đo), khảo sát sẵn sàng
+  const ht = page.getByTestId("hanh-trinh-nha");
+  await expect(ht).toContainText("mệnh Khảm");
+  await expect(ht.getByTestId("hanh-trinh-menh")).toHaveAttribute("data-trang-thai", "xong");
+  await expect(ht.getByTestId("hanh-trinh-huong")).toHaveAttribute("data-trang-thai", "san_sang");
+  await expect(ht.getByTestId("hanh-trinh-ten-nha")).toHaveCount(0);                // chưa có nhà lưu → không có tên/xoá
   const ans = await hoi(page, "Nhà hướng Tây Nam có hợp với tôi không?");
   await expect(ans).toContainText("Mệnh quái (cung phi) của bạn: Khảm");
   await expect(ans).toContainText("Tuyệt Mệnh");
@@ -102,6 +108,20 @@ test("PT-V1: đo hướng nhà — nhập tay và la bàn điện thoại (giả
   await napHoSo(page);   // hồ sơ mẫu: nam 17/05/1990 → mệnh Khảm
   await page.goto("/phong-thuy");
   const o = page.getByTestId("do-huong");
+  // UI-PT 1 "la bàn sống": có mệnh quái → mặt la bàn tô 8 cung (4 cát của Khảm: Bắc, Đông, Đông Nam, Nam)
+  await expect(o.getByTestId("la-ban-cung")).toHaveCount(8);
+  await expect(o.locator('[data-testid="la-ban-cung"][data-cat="true"]')).toHaveCount(4);
+  // chế độ "Tìm hướng kê bàn, đầu giường": nhập độ chỉ đọc sống (không gọi engine, không lưu nhà), nhãn du niên + "hợp đặt"
+  await o.getByTestId("la-ban-che-do-ke_do").click();
+  await o.getByLabel("Độ đo được").fill("135");
+  await o.getByRole("button", { name: "Xem" }).click();
+  const song = o.getByTestId("la-ban-song");
+  await expect(song).toContainText("Đông Nam");
+  await expect(song).toContainText("Sinh Khí");
+  await expect(song).toContainText("bàn làm việc");
+  await expect(o.getByTestId("ket-qua-do-huong")).toHaveCount(0);
+  expect(await page.evaluate(() => localStorage.getItem("hbt.nha.v1"))).toBeNull();
+  await o.getByTestId("la-ban-che-do-nha").click();
   await o.getByLabel("Độ hướng nhà").fill("135");
   await o.getByRole("button", { name: "Xem" }).click();
   const kq = page.getByTestId("ket-qua-do-huong");
@@ -117,6 +137,7 @@ test("PT-V1: đo hướng nhà — nhập tay và la bàn điện thoại (giả
     window.dispatchEvent(new DeviceOrientationEvent(ten, { alpha: 180, beta: 0, gamma: 0, absolute: true }));
   });
   await expect(o.getByText("180°")).toBeVisible();
+  await expect(o.getByTestId("la-ban-song")).toContainText("Diên Niên");       // Nam với Khảm, đọc theo thời gian thực
   await o.getByRole("button", { name: "Chốt hướng này" }).click();
   await expect(kq).toContainText("Nam");
   await expect(kq).toContainText("sơn Ngọ");
@@ -194,6 +215,7 @@ test("Q2/Q1/Q4/Q5/Q6: vẽ mặt bằng → suy WC giữa nhà + cửa thông ba
   await expect(kq.getByTestId("kq-mat-bang")).toContainText("Nhà vệ sinh ở vùng giữa nhà");
   await expect(kq.getByTestId("kq-mat-bang")).toContainText("Cửa chính nhìn thẳng ra ban công");
   await expect(kq.getByTestId("dau-hieu-wc_giua_nha")).toContainText("suy từ mặt bằng");
+  await expect(kq.getByTestId("so-do-nha")).toContainText("Nhà vệ sinh");                         // UI-PT 2: sơ đồ 3×3 tô màu
   await expect(kq.getByTestId("dau-hieu-veto").first()).toBeVisible();
   await expect(kq.getByTestId("dau-hieu-xa_ngang").getByTestId("dau-hieu-viec")).toContainText("0 đồng");
   await expect(kq.getByTestId("quy-tac-khong_dap_ket_cau")).toBeVisible();          // Q6: căn hộ không đập dầm
@@ -218,6 +240,38 @@ test("Q2/Q1/Q4/Q5/Q6: vẽ mặt bằng → suy WC giữa nhà + cửa thông ba
   const c5 = nha.getByTestId("nha-chuong-viec_nen_lam");
   await c5.getByTestId("nha-theo-chi-phi").click();
   await expect(c5.getByTestId("nha-hanh-dong")).toContainText("0 đồng");
+  await expect(nha.getByTestId("nha-chuong-tung_phong").getByTestId("so-do-nha")).toBeVisible();   // UI-PT 2
+  await expect(nha.getByTestId("nha-tran-muc").first()).toContainText("tối đa Cân bằng");
+  // UI-PT 4 (Y7): "Đã xử lý: xà ngang" → đọc lại, khối so trước–sau; nút của xà ngang biến mất, hồ sơ nhà ghi da_xu_ly
+  const dx = nha.getByTestId("nha-da-xu-ly");
+  await expect(dx.getByRole("button", { name: /^Đã xử lý:/ })).toHaveCount(3);                    // xà ngang · WC giữa nhà · cửa thông ban công
+  await dx.getByRole("button", { name: /Đã xử lý: Giường, bàn dưới xà ngang/ }).click();
+  await expect(nha.getByTestId("nha-so-sanh")).toContainText("xà ngang");
+  await expect(dx.getByRole("button", { name: /^Đã xử lý:/ })).toHaveCount(2);
+  const hs2 = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"));
+  expect(hs2.bo_cuc.da_xu_ly).toEqual(["xa_ngang"]);
+  expect(hs2.bo_cuc.dau_hieu).not.toContain("xa_ngang");
+  // hai dấu hiệu lớn còn lại suy từ mặt bằng → xử lý nốt → không còn trần mức, khối so sánh báo chương đổi
+  await dx.getByRole("button", { name: /Đã xử lý: Nhà vệ sinh ở giữa nhà/ }).click();
+  await expect(dx.getByRole("button", { name: /^Đã xử lý:/ })).toHaveCount(1);
+  await dx.getByRole("button", { name: /^Đã xử lý:/ }).click();
+  await expect(nha.getByTestId("nha-tran-muc")).toHaveCount(0);
+  await expect(nha.getByTestId("nha-so-sanh")).toContainText("không còn trần mức");
+  // hoàn tác → trần quay lại
+  await nha.getByRole("button", { name: /hoàn tác/ }).click();
+  await expect(nha.getByTestId("nha-tran-muc").first()).toBeVisible();
+  // UI-PT 3: hành trình đã có hướng + khảo sát; "Xem nhà khác" hỏi lại rồi xoá hồ sơ nhà trên máy
+  const ht = page.getByTestId("hanh-trinh-nha");
+  await expect(ht.getByTestId("hanh-trinh-huong")).toHaveAttribute("data-trang-thai", "xong");
+  await expect(ht.getByTestId("hanh-trinh-khao_sat")).toHaveAttribute("data-trang-thai", "xong");
+  await ht.getByRole("button", { name: "Đặt tên cho nhà này" }).click();
+  await ht.getByLabel("Tên gọi cho nhà này").fill("Căn định mua");
+  await ht.getByRole("button", { name: "Lưu" }).click();
+  await expect(ht.getByTestId("hanh-trinh-ten-nha")).toContainText("Căn định mua");
+  await ht.getByRole("button", { name: "Xoá nhà đã lưu trên máy" }).click();
+  await ht.getByRole("button", { name: "Xoá", exact: true }).click();
+  await expect(ht.getByTestId("hanh-trinh-ten-nha")).toHaveCount(0);
+  expect(await page.evaluate(() => localStorage.getItem("hbt.nha.v1"))).toBeNull();
 });
 
 test("Q3: hướng nhà từ hai điểm bản đồ (dán toạ độ) → đổi ra hướng, sơn, trạch như đo la bàn", async ({ page }) => {
