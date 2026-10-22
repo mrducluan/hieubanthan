@@ -134,6 +134,9 @@ function Chuong({ c, so, goc, thoiGian }: { c: ChuongDoiSongMo; so: number; goc:
 }
 
 /** 12 đại hạn: dọc trên điện thoại, ngang (cuộn trong khung) trên máy tính; giai đoạn đang đi nổi bật. */
+/** "2026-12-13" → "13/12/2026" (chỉ đổi cách viết ngày engine đã tính). */
+const ngayVn = (iso: string) => iso.split("-").reverse().map((x, i) => (i < 2 ? String(Number(x)) : x)).join("/");
+
 function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
   const khung = useRef<HTMLOListElement>(null);
   const hienTai = useRef<HTMLLIElement>(null);
@@ -161,7 +164,10 @@ function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
               </p>
             )}
             <p className="text-sm font-semibold text-fg">{m.tu_tuoi}–{m.den_tuoi} tuổi
-              <span className="ml-1.5 font-normal text-fg-faint">{m.nam_tu}–{m.nam_den}</span></p>
+              {!m.tu_ngay && <span className="ml-1.5 font-normal text-fg-faint">{m.nam_tu}–{m.nam_den}</span>}</p>
+            {m.tu_ngay && m.den_ngay && (
+              <p className="text-[0.7rem] text-fg-faint" data-testid="ngay-van">từ {ngayVn(m.tu_ngay)} đến {ngayVn(m.den_ngay)}</p>
+            )}
             <div className="mt-1 flex flex-wrap items-center gap-1.5">
               <ChipMuc muc={m.muc} className="px-2 py-0 text-[0.7rem]" />
               <span className="text-xs text-fg-faint">{m.nhan ?? `cung ${m.cung}`}</span>

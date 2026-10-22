@@ -45,6 +45,8 @@ export interface MocDaiHan {
   chu_de: string; muc: Muc; mot_cau: string; hien_tai: boolean;
   /** BT-ĐS: nhãn nhỏ thay "cung …" (vd "vận Ất Dậu") + mức theo từng cách đọc (dụng thần hai cách, không tự chọn). */
   nhan?: string; muc_cach_1?: Muc; muc_cach_2?: Muc; hai_cach_khac?: boolean;
+  /** Bát tự: ngày bắt đầu / kết thúc vận theo ngày khởi vận thật (ISO) — "đang ở đây" engine đã tính theo ngày này. */
+  tu_ngay?: string; den_ngay?: string;
 }
 
 /** BT-ĐS chương "Năng lượng": điểm 5 hành (đã tính ở engine) + hành mỗi cách gợi ý bù — web chỉ VẼ. */

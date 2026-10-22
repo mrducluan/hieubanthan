@@ -242,9 +242,11 @@ def _dai_van(lich: dt.datetime, t_utc: dt.datetime, t_truoc: dt.datetime, t_sau:
     khoi = _cong_thoi_gian(lich, nam, thang, ngay, gio)
     goc = _chi_so_60(can_thang, chi_thang)
     ds = []
+    moc = [_cong_thoi_gian(khoi, 10 * k, 0, 0, 0).date() for k in range(9)]      # ngày bắt đầu vận 1…9
     for k in range(1, 9):
         i = (goc + k) % 60 if thuan else (goc - k) % 60
         ds.append({**_gz(i), "tu_nam": khoi.year + 10 * (k - 1), "den_nam": khoi.year + 10 * k - 1,
+                   "tu_ngay": moc[k - 1].isoformat(), "den_ngay": (moc[k] - dt.timedelta(days=1)).isoformat(),
                    "tu_tuoi_thuc": nam + 10 * (k - 1)})
     return {"thuan": thuan, "khoi_van": {"nam": nam, "thang": thang, "ngay": ngay, "gio": gio},
             "ngay_khoi": khoi.date().isoformat(), "ds": ds}
@@ -267,5 +269,15 @@ def luu_nien(ls: dict, nam: int) -> dict:
             "ngu_hanh_can": _nh_can(g["can"]), "voi_tru_ngay": quan_he_chi(g["chi"], ls["tru"][2]["chi"])}
 
 
+def dai_van_theo_ngay(ls: dict, ngay: dt.date) -> dict | None:
+    """Đại vận đang đi vào NGÀY `ngay` (theo ngày khởi vận thật, không theo năm dương). None: chưa khởi vận / đã qua
+    vận cuối."""
+    s = ngay.isoformat()
+    return next((d for d in ls["dai_van"]["ds"] if d["tu_ngay"] <= s <= d["den_ngay"]), None)
+
+
 def dai_van_tai(ls: dict, nam: int) -> dict | None:
+    """Đại vận của NĂM `nam` theo quy ước bảng đại vận (năm bắt đầu vận → 9 năm sau), như các phần mềm Bát tự phổ
+    biến. Năm đổi vận giữa chừng thuộc vận MỚI dù vận cũ còn tới ngày `den_ngay`; hỏi "đang đi lúc này" phải dùng
+    `dai_van_theo_ngay`."""
     return next((d for d in ls["dai_van"]["ds"] if d["tu_nam"] <= nam <= d["den_nam"]), None)
