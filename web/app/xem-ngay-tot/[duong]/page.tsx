@@ -6,12 +6,12 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { LichThang, XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
-import { docDuong, duongNgay, ngayDangIndex, ngayTotCongKhai, thangCongKhai, thangIndex } from "@/lib/hoang-lich";
-import { goiLd, ldDuongDan, ldTrangWeb, metaTrang } from "@/lib/seo";
+import { VIEC_SEO, docDuong, duongNgay, duongThang, duongViecThang, ngayDangIndex, ngayTotCongKhai, thangCongKhai, thangIndex, viecThangCongKhai } from "@/lib/hoang-lich";
+import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
-import { CHU_NGAY, CHU_THANG } from "@/lib/chu/trang-con";
+import { CHU_NGAY, CHU_THANG, CHU_VIEC_THANG } from "@/lib/chu/trang-con";
 
 type P = { params: Promise<{ duong: string }> };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
@@ -35,6 +35,14 @@ function LdTrangCon({ duong, ten, moTa, cap, cuoi }: { duong: string; ten: strin
 async function metaGoc({ params }: P): Promise<Metadata> {
   const x = docDuong((await params).duong);
   if (!x) return {};
+  if (x.loai === "viec") {
+    // SEO-L2: "Ngày tốt cưới hỏi tháng 12 năm 2026" — cùng cửa sổ index với trang tháng.
+    const ten = x.viec.ten.charAt(0).toLowerCase() + x.viec.ten.slice(1);
+    const m = metaTrang({ tieuDe: `Ngày tốt ${ten} tháng ${x.thang}/${x.nam} theo hoàng lịch`,
+      moTa: `Các ngày tốt ${ten} tháng ${x.thang} năm ${x.nam}: ngày âm, can chi, hoàng đạo, trực — chọn theo mục nên/kiêng của sách lịch, kèm ngày đẹp nhất trong tháng.`,
+      duong: duongViecThang(x.viec.slug, x.nam, x.thang), anh: anhBai({ tieuDe: `Ngày tốt ${ten} tháng ${x.thang}/${x.nam}`, mang: "lich" }) });
+    return thangIndex(x.nam, x.thang) ? m : { ...m, robots: { index: false, follow: true } };
+  }
   if (x.loai === "ngay") {
     const m = metaTrang({ tieuDe: `Ngày ${dmy(x.iso)} tốt hay xấu? Hoàng đạo, giờ tốt, việc nên làm`,
       moTa: `Xem ngày ${dmy(x.iso)}: âm lịch, can chi, hoàng đạo hay hắc đạo, trực, giờ hoàng đạo, việc nên làm và nên kiêng, tuổi xung, hướng xuất hành.`,
@@ -50,6 +58,7 @@ async function metaGoc({ params }: P): Promise<Metadata> {
 export default async function Page({ params }: P) {
   const x = docDuong((await params).duong);
   if (!x) notFound();
+  if (x.loai === "viec") return <TrangViecThang x={x} />;
   if (x.loai === "ngay") {
     const [d, t] = await Promise.all([ngayTotCongKhai(x.iso), thangCongKhai(Number(x.iso.slice(0, 4)), Number(x.iso.slice(5, 7)))]);
     if (!d) throw new Error("engine lịch không phản hồi");   // → error.tsx, mã 5xx (không index trang lỗi)
@@ -96,11 +105,81 @@ export default async function Page({ params }: P) {
             ))}
           </ul>
         </section>
+        {/* SEO-L2: ngày tốt theo việc trong tháng này */}
+        <nav aria-labelledby="theo-viec" className="text-sm">
+          <h2 id="theo-viec" className="text-xl">Ngày tốt theo việc tháng {x.thang}/{x.nam}</h2>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {VIEC_SEO.map((v) => <li key={v.slug}><Link href={duongViecThang(v.slug, x.nam, x.thang)} className="inline-flex min-h-10 items-center rounded-full border border-line px-3.5 py-2 text-fg-muted hover:border-gold/50 hover:text-fg">{v.ten}</Link></li>)}
+          </ul>
+        </nav>
         <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" />
       </div>
       <LdTrangCon duong={duong} ten={tieuDe} cuoi={{ chu: c("cuoi.chu"), link: c("cuoi.link") }}
         moTa={`Lịch tháng ${x.thang}/${x.nam}: ngày âm, hoàng đạo/hắc đạo, trực từng ngày và ${dep.length} ngày hoàng đạo có trực tốt.`}
         cap={[{ ten: `Tháng ${x.thang}/${x.nam}`, duong }]} />
+      <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mx-auto mt-10 max-w-3xl" />
+    </>
+  );
+}
+
+/** SEO-L2 — "Ngày tốt {việc} tháng M/YYYY": danh sách do engine lọc bằng đúng `chon_ngay` (không xét tuổi). */
+async function TrangViecThang({ x }: { x: { viec: (typeof VIEC_SEO)[number]; nam: number; thang: number } }) {
+  const d = await viecThangCongKhai(x.viec.ma, x.nam, x.thang);
+  if (!d) throw new Error("engine lịch không phản hồi");
+  const duong = duongViecThang(x.viec.slug, x.nam, x.thang);
+  const viec = x.viec.ten.charAt(0).toLowerCase() + x.viec.ten.slice(1);
+  const bien = { viec, thang: String(x.thang), nam: String(x.nam), thang_am: d.thang_am };
+  const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_VIEC_THANG, nd.chu), tieuDe = c("dau.tieu_de", bien);
+  const truoc = x.thang === 1 ? { nam: x.nam - 1, thang: 12 } : { nam: x.nam, thang: x.thang - 1 };
+  const sau = x.thang === 12 ? { nam: x.nam + 1, thang: 1 } : { nam: x.nam, thang: x.thang + 1 };
+  return (
+    <>
+      <JsonLd data={goiLd(ldHoiDap(d.hoi_dap))} />
+      <div className="mx-auto max-w-3xl space-y-5">
+        <nav aria-label="Đường dẫn" className="text-sm text-fg-muted"><Link href="/xem-ngay-tot" className="hover:underline">Xem ngày tốt</Link> ›{" "}
+          <Link href={duongThang(x.nam, x.thang)} className="hover:underline">Tháng {x.thang}/{x.nam}</Link></nav>
+        <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
+        <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" />
+        <section aria-label="Trả lời nhanh" className="rounded-2xl border border-gold/30 bg-gold/5 p-5">
+          <p className="eyebrow">Trả lời nhanh</p>
+          <p className="mt-2 leading-relaxed text-fg">{d.tra_loi_nhanh}</p>
+        </section>
+        <section aria-labelledby="ds-ngay" data-testid="ngay-tot-viec">
+          <h2 id="ds-ngay" className="text-xl">{c("ds.tieu_de", bien)}</h2>
+          {d.ngay.length === 0 ? <p className="mt-2 text-sm text-fg-muted">Tháng này không có ngày đủ điều kiện. Xem tháng sau bên dưới.</p> : (
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {d.ngay.map((n) => (
+                <li key={n.ngay}><Link href={duongNgay(n.ngay)} className="block rounded-xl border border-line/70 px-3 py-2 text-sm hover:border-gold/50">
+                  <b>{dmy(n.ngay)}</b> <span className="text-fg-muted">({n.am} âm · {n.can_chi}) · {n.than} · trực {n.truc}</span>
+                  {n.diem_cong && n.diem_cong.length > 0 && <span className="mt-0.5 block text-xs text-jade">{n.diem_cong.join(" · ")}</span>}
+                </Link></li>
+              ))}
+            </ul>
+          )}
+          <p className="mt-3 text-xs leading-relaxed text-fg-faint">{d.cach_chon} Danh sách chưa xét tuổi — mở một ngày để xem tuổi xung, giờ hoàng đạo.</p>
+        </section>
+        <nav aria-labelledby="viec-khac" className="text-sm">
+          <h2 id="viec-khac" className="text-xl">{c("viec_khac.tieu_de", bien)}</h2>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {VIEC_SEO.filter((v) => v.slug !== x.viec.slug).map((v) => <li key={v.slug}><Link href={duongViecThang(v.slug, x.nam, x.thang)} className="inline-flex min-h-10 items-center rounded-full border border-line px-3.5 py-2 text-fg-muted hover:border-gold/50 hover:text-fg">{v.ten}</Link></li>)}
+          </ul>
+          <p className="mt-3 flex flex-wrap gap-3">
+            {truoc.nam >= 1901 && <Link href={duongViecThang(x.viec.slug, truoc.nam, truoc.thang)} className="text-gold underline">← Tháng {truoc.thang}/{truoc.nam}</Link>}
+            {sau.nam <= 2099 && <Link href={duongViecThang(x.viec.slug, sau.nam, sau.thang)} className="text-gold underline">Tháng {sau.thang}/{sau.nam} →</Link>}
+          </p>
+        </nav>
+        <section aria-labelledby="hoi-dap" className="space-y-3">
+          <h2 id="hoi-dap" className="text-xl">Câu hỏi thường gặp</h2>
+          <dl className="space-y-3">{d.hoi_dap.map((h) => (
+            <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
+          ))}</dl>
+        </section>
+        <p className="text-xs text-fg-faint">{d.luu_y}</p>
+        <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" />
+      </div>
+      <LdTrangCon duong={duong} ten={tieuDe} cuoi={{ chu: c("cuoi.chu"), link: c("cuoi.link") }}
+        moTa={d.tra_loi_nhanh.slice(0, 300)}
+        cap={[{ ten: `Tháng ${x.thang}/${x.nam}`, duong: duongThang(x.nam, x.thang) }, { ten: x.viec.ten, duong }]} />
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mx-auto mt-10 max-w-3xl" />
     </>
   );

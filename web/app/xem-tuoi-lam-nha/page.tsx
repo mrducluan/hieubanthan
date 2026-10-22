@@ -6,7 +6,7 @@ import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { CongCuTuoi } from "@/components/tuoi/CongCuTuoi";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { metaTrang } from "@/lib/seo";
-import { NAM_SINH_SEO, duongLamNha, namAmHienTai } from "@/lib/tuoi-dan-gian";
+import { NAM_SINH_SEO, duongLamNha, duongLamNhaNam, namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { ND_LAM_NHA } from "./noi-dung";
 import { CHU_LAM_NHA } from "@/lib/chu/cong-cu";
 import { taoChu } from "@/lib/chu-trang";
@@ -28,7 +28,9 @@ export default async function Page() {
           <h2 id="theo-nam-sinh" className="text-xl">{c("theo_nam.tieu_de")}</h2>
           {[nam, nam + 1].map((n) => (
             <div key={n} className="mt-3">
-              <p className="text-sm text-fg-muted">{c("theo_nam.dong", { nam: String(n) })}</p>
+              <p className="text-sm text-fg-muted">{c("theo_nam.dong", { nam: String(n) })}{" "}
+                {/* SEO-L1: bảng cả năm */}
+                <Link href={duongLamNhaNam(n)} className="text-gold underline">bảng tuổi năm {n}</Link></p>
               <ul className="mt-1 flex flex-wrap gap-1.5">
                 {NAM_SINH_SEO.map((ns) => <li key={ns}><Link href={duongLamNha(n, ns)} className="vung-cham inline-flex rounded-lg border border-line/70 px-2 py-0.5 text-sm hover:border-gold/50">{ns}</Link></li>)}
               </ul>

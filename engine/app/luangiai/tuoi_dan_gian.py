@@ -129,3 +129,75 @@ def xong_dat_luan(nam: int, nam_sinh_chu: int, thang_sinh: int | None = None, ng
                       "nạp âm sinh hoặc cùng hành với gia chủ; bỏ tuổi xung năm, xung gia chủ và tuổi đang Tam tai."),
         **_meta(),
     }
+
+
+# ---- SEO-L1 (chủ dự án duyệt 2026-10-22): trang trụ theo năm — ghép lại đúng các hàm của từng tuổi ----------------
+NAM_SINH_SEO = range(1960, 2006)
+
+
+def lam_nha_nam(nam_xay: int) -> dict:
+    """Bảng "tuổi nào làm nhà, cưới hỏi năm X được": mỗi tuổi 1960–2005 dùng `_danh_gia_nam` như trang con."""
+    can_n, chi_n = t.can_chi_nam(nam_xay)
+    ds = []
+    for ns in NAM_SINH_SEO:
+        d = _danh_gia_nam(ns, nam_xay)
+        ds.append({"nam_sinh": ns, "can_chi": " ".join(t.can_chi_nam(ns)), "tuoi_mu": d["tuoi"],
+                   "kim_lau": KB["kim_lau"][d["kl"]]["ten"] if d["kl"] else None,
+                   "hoang_oc": KB["hoang_oc"][d["ho"]]["ten"], "hoang_oc_xau": d["ho"] in t.HOANG_OC_XAU,
+                   "tam_tai": d["tt"], "thuan": not d["xau"], "xau": d["xau"]})
+    thuan = [x for x in ds if x["thuan"]]
+    ten = lambda xs: ", ".join(f"{x['nam_sinh']} ({x['can_chi']})" for x in xs)  # noqa: E731
+    tra_loi = (f"Năm {nam_xay} ({can_n} {chi_n}), trong các tuổi sinh 1960–2005 có {len(thuan)} tuổi không phạm Kim lâu, "
+               f"Hoang ốc xấu hay Tam tai: {ten(thuan) or 'không có'}. Các tuổi còn lại dân gian thường lùi năm hoặc mượn "
+               f"tuổi người nhà để đứng tên. Tuổi tính theo tuổi mụ (năm âm lịch).")
+    tt = [x for x in ds if x["tam_tai"]]
+    hd = [
+        {"hoi": f"Năm {nam_xay} tuổi nào làm nhà được?", "dap": tra_loi},
+        {"hoi": f"Năm {nam_xay} tuổi nào phạm Kim lâu?",
+         "dap": ten([x for x in ds if x["kim_lau"]]) + ". Kim lâu tính theo tuổi mụ chia 9 dư 1, 3, 6, 8."},
+        {"hoi": f"Năm {nam_xay} tuổi nào phạm Tam tai?",
+         "dap": (f"Năm {chi_n} là năm Tam tai của các tuổi {', '.join(sorted({x['can_chi'].split()[1] for x in tt}))}."
+                 if tt else f"Năm {chi_n} không có tuổi nào trong khoảng này phạm Tam tai.")},
+        {"hoi": f"Năm {nam_xay} tuổi nào cưới được?",
+         "dap": ("Với cưới hỏi, dân gian xét Kim lâu theo tuổi mụ của cô dâu. Các tuổi không phạm Kim lâu năm "
+                 f"{nam_xay}: {ten([x for x in ds if not x['kim_lau']])}.")},
+    ]
+    return {"nam": nam_xay, "can_chi": f"{can_n} {chi_n}", "ds": ds, "so_thuan": len(thuan),
+            "tra_loi_nhanh": tra_loi, "hoi_dap": hd,
+            "cach_tinh": ("Tuổi mụ = năm định làm − năm sinh (âm lịch) + 1. Kim lâu: tuổi mụ chia 9 dư 1, 3, 6, 8. Hoang ốc: "
+                          "10 tuổi Nhất Cát, 20 Nhì Nghi, 30 Tam Địa Sát, 40 Tứ Tấn Tài, 50 Ngũ Thọ Tử, 60 Lục Hoang Ốc, "
+                          "số lẻ đếm tiếp. Tam tai: ba năm theo tam hợp của tuổi. Sinh tháng 1 hoặc đầu tháng 2 (trước Tết) "
+                          "thì tính theo năm âm lịch trước đó."),
+            "han_nam": han_nam_luan(nam_xay), **_meta()}
+
+
+def xong_dat_nam(nam: int) -> dict:
+    """Bảng "tuổi xông đất Tết năm X" theo từng tuổi gia chủ 1960–2005 (3 tuổi hợp đầu, như trang con)."""
+    can_n, chi_n = t.can_chi_nam(nam)
+    tet = dt.date(*reversed(lunar.lunar_to_solar(1, 1, nam, 0, CALENDAR_MERIDIAN_TZ)))
+    m1 = hl.ngay_xem(tet)
+    xung_nam = t.CHI[(t.CHI.index(chi_n) + 6) % 12]
+    tam_tai_nam = [c for c in t.CHI if t.pham_tam_tai(c, chi_n)]
+    ds = []
+    for ns in NAM_SINH_SEO:
+        xs = t.xong_dat(nam, ns, range(1960, 2009))
+        hop = [{"nam_sinh": x["nam_sinh"], "can_chi": x["can_chi"]}
+               for x in xs if x["diem"] >= 2 and not x["tam_tai"] and _ly_do(x)][:3]
+        ds.append({"nam_sinh": ns, "can_chi": " ".join(t.can_chi_nam(ns)), "tuoi_hop": hop})
+    tra_loi = (f"Tết {can_n} {chi_n} rơi vào ngày {tet.day}/{tet.month}/{tet.year}. Người xông đất nên tránh tuổi {xung_nam} "
+               f"(xung năm {chi_n}) và các tuổi {', '.join(tam_tai_nam)} (đang Tam tai). Tuổi hợp còn tuỳ tuổi gia chủ — "
+               f"bảng dưới ghi 3 tuổi hợp nhất cho từng năm sinh gia chủ 1960–2005.")
+    hd = [
+        {"hoi": f"Tết {nam} nên chọn tuổi nào xông đất?", "dap": tra_loi},
+        {"hoi": f"Mùng 1 Tết {nam} là ngày nào, giờ nào tốt?",
+         "dap": (f"Mùng 1 Tết {can_n} {chi_n} là {tet.day}/{tet.month}/{tet.year}, ngày {m1['can_chi']['ngay']}. Giờ hoàng đạo: "
+                 + ", ".join(f"{g['chi']} ({g['khung']})" for g in m1["gio_hoang_dao"]) + ".")},
+        {"hoi": f"Tết {nam} tránh tuổi nào xông đất?",
+         "dap": f"Tuổi {xung_nam} (xung năm {chi_n}); các tuổi {', '.join(tam_tai_nam)} đang Tam tai; tuổi xung với gia chủ."},
+    ]
+    return {"nam": {"nam": nam, "can_chi": f"{can_n} {chi_n}"}, "ds": ds, "tra_loi_nhanh": tra_loi, "hoi_dap": hd,
+            "nen_tranh": [f"Tuổi {xung_nam} (xung năm {chi_n})", f"Tuổi {', '.join(tam_tai_nam)} (đang trong Tam tai năm {chi_n})"],
+            "mung_mot": {"ngay": tet.isoformat(), "can_chi": m1["can_chi"]["ngay"],
+                         "gio_hoang_dao": [{"chi": g["chi"], "khung": g["khung"]} for g in m1["gio_hoang_dao"]],
+                         "huong": m1["huong"]},
+            **_meta()}
