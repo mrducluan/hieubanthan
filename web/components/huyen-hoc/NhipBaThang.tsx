@@ -4,6 +4,7 @@
 // câu so ba tháng → biểu đồ nhịp → thẻ tháng (hộp nổi bật + vòng 12 cung mini). Học thuật (tứ hoá, luật, phái) thu gọn
 // sau nút "Vì sao nói vậy". Màu dịu, không biểu tượng cảnh báo — đây là nhịp để tự soi, không phải lời phán.
 import { useId, useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { motion, useReducedMotion } from "motion/react";
 import { CalendarClock, ChevronDown, MessageCircleQuestion, MousePointerClick, Sparkles } from "lucide-react";
 import type { ChartInputVao, HopThangT, Nhip3ThangOutputT } from "@/app/api/tuvi/schema";
@@ -252,12 +253,13 @@ function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi }: {
 function ViSaoThang({ t }: { t: Thang }) {
   const [mo, setMo] = useState(false);
   const id = useId();
+  const c = useChuChung();
   const canCu = t.can_cu?.length ? t.can_cu : t.ly_do.map((l) => l.noi_dung);
   return (
     <div className="mt-3" data-testid="vi-sao">
       <button type="button" aria-expanded={mo} aria-controls={id} onClick={() => setMo((v) => !v)}
         className="inline-flex items-center gap-1 rounded-full text-sm text-fg-muted underline-offset-4 hover:text-fg hover:underline">
-        Vì sao nói vậy <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
+        {c("doc.vi_sao")} <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
       </button>
       <div id={id} hidden={!mo} className="mt-2 space-y-2 border-l-2 border-line pl-3" data-testid="can-cu">
         <p className="text-xs text-fg-faint"><NhanLop lop="tinh" /> <span className="ml-1">Cung tháng: <b className="text-fg-muted">{t.cung_goc}</b> · tứ hoá theo can tháng {t.can_chi}</span></p>

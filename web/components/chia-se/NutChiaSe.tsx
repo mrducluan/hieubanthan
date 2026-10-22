@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { useMaCuaToi } from "@/lib/sao";
 import { Check, Copy, Share2 } from "lucide-react";
@@ -29,6 +30,7 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const c = useChuChung();
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
 
@@ -69,12 +71,12 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
     return (
       <div className="space-y-3">
         <div className="space-y-2">
-          <Label htmlFor="ten-hien-thi">Tên hiển thị trên link (có thể dùng biệt danh)</Label>
+          <Label htmlFor="ten-hien-thi">{c("chia_se.ten_link")}</Label>
           <Input id="ten-hien-thi" value={ten} maxLength={40} onChange={(e) => setTen(e.target.value)} />
         </div>
         <p className="text-xs text-fg-faint">Link chỉ hiện tên hiển thị và các con số của bạn — không có ngày sinh. Hết hạn sau 90 ngày.</p>
         {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
-        <Button onClick={tao} disabled={dang} className="w-full"><Share2 aria-hidden /> {dang ? "Đang tạo…" : nutTao}</Button>
+        <Button onClick={tao} disabled={dang} className="w-full"><Share2 aria-hidden /> {dang ? c("chia_se.dang_tao") : nutTao}</Button>
       </div>
     );
   }
@@ -82,9 +84,9 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
     <div className="space-y-3">
       <div className="flex gap-2">
         <Input readOnly value={link} aria-label="Link chia sẻ" onFocus={(e) => e.currentTarget.select()} className="text-sm" />
-        <Button variant="secondary" size="icon" onClick={chep} aria-label="Sao chép link">{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
+        <Button variant="secondary" size="icon" onClick={chep} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
       </div>
-      <Button onClick={chiaSe} className="w-full"><Share2 aria-hidden /> Gửi qua Zalo, Messenger…</Button>
+      <Button onClick={chiaSe} className="w-full"><Share2 aria-hidden /> {c("chia_se.gui")}</Button>
     </div>
   );
 }

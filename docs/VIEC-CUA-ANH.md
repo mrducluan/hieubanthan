@@ -489,7 +489,9 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
      tải ảnh mới (ghi mô tả ảnh) → Xuất bản. "Về hình gốc" = hình vẽ cũ. Mẫu cụm có ô **"Ảnh chia sẻ"** (ảnh hiện khi dán link
      lên Facebook/Zalo) cho cả cụm — nên ảnh 1200×630.
   4) **Giao diện website → Chữ dùng chung**: nhãn + nút form "Họ tên / Ngày sinh / Xem con số của tôi", ô vào trang chủ, ô hỏi
-     đáp, "Thử lại" — sửa một lần, mọi trang đổi theo.
+     đáp, "Thử lại"; từ đợt 3 thêm nút góp ý cuối bài ("Có, khá trúng / Một phần / Chưa" — đổi chữ không lệch số Gate),
+     "Đúng với mình / Chưa đúng", các nút chia sẻ (gửi, chép link, tải ảnh story), "Vì sao nói vậy" — sửa một lần, mọi trang
+     đổi theo. Bấm "Đồng bộ ngay" sau mỗi lần web deploy có khoá mới.
   **Ảnh cần CMS1** (bucket `cms-media`): chưa làm thì ảnh tải lên có thể mất sau lần deploy CMS kế tiếp.
 - [ ] ND45. (2026-10-19, ND-4/ND-5) Sau khi PR merge, CMS redeploy tự chạy migration `nd_4_5_anh_phap_ly`. Thử ~5 phút:
   1) **Trang pháp lý** (Trang website → `/dieu-khoan`…): sửa Mục / ngày hiệu lực → chọn "Thay đổi nội dung" + ngày mới

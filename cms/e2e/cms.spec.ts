@@ -501,11 +501,17 @@ test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát),
 
   // 3) chữ dùng chung: tiêu đề ô vào trang chủ + nút gửi của form hồ sơ
   expect((await request.post(`${CMS}/api/globals/chu-chung`, { headers: h,
-    data: { chu: { "cua_vao.tieu_de": "Nhập 2 thông tin là xong", "ho_so.nut_xem": "Xem ngay số của tôi" } } })).ok()).toBeTruthy();
+    data: { chu: { "cua_vao.tieu_de": "Nhập 2 thông tin là xong", "ho_so.nut_xem": "Xem ngay số của tôi",
+      "gop_y_bai.co": "Trúng lắm" } } })).ok()).toBeTruthy();
   await choWeb(request, "/", (s, b) => s === 200 && b.includes("Nhập 2 thông tin là xong"));
   await page.goto(`${WEB}/`);
   await expect(page.getByText("Nhập 2 thông tin là xong")).toBeVisible();
   await expect(page.getByRole("button", { name: /Xem ngay số của tôi/ })).toBeVisible();
+  // nút góp ý cuối bài (đo Gate 1: mã "co" không đổi, chỉ đổi chữ) — cần hồ sơ trên máy để /ban-than có bài đọc
+  await page.addInitScript(() => localStorage.setItem("hbt.hoso.v1", JSON.stringify({ v: 1, ho_ten: "Nguyễn Văn An", ngay: 24, thang: 10,
+    nam: 1988, tao_luc: "2026-10-01T00:00:00Z" })));
+  await page.goto(`${WEB}/ban-than`);
+  await expect(page.getByTestId("gop-y").getByRole("button", { name: "Trúng lắm" })).toBeVisible({ timeout: 60_000 });
 
   // dọn: về chữ + hình gốc
   expect((await request.post(`${CMS}/api/globals/chu-chung`, { headers: h, data: { chu: null } })).ok()).toBeTruthy();
