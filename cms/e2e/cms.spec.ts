@@ -503,7 +503,10 @@ test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát),
   // dọn: về chữ + hình gốc
   expect((await request.post(`${CMS}/api/globals/chu-chung`, { headers: h, data: { chu: null } })).ok()).toBeTruthy();
   expect((await request.patch(`${CMS}/api/noi-dung-trang/${trang.id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
-  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Hình trang chủ ND-7") && b.includes("Bắt đầu — chỉ cần 2 thông tin"));
+  // ô vào trang chủ chỉ dựng ở trình duyệt (sau khi đọc hồ sơ trên máy) → HTML máy chủ chỉ mang chữ thay qua context
+  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Hình trang chủ ND-7") && !b.includes("Nhập 2 thông tin là xong"));
+  await page.goto(`${WEB}/`);
+  await expect(page.getByText("Bắt đầu — chỉ cần 2 thông tin")).toBeVisible();
 });
 
 test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức, ghi đè một URL ẩn khối mẫu; pháp lý sửa mục + ngày hiệu lực, bắt buộc tích đối chiếu", async ({ page, request }) => {
