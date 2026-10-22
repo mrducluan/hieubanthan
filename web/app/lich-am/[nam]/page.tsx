@@ -55,7 +55,7 @@ export default async function Page(p: P) {
             <tbody>
               {d.thang.map((t) => (
                 <tr key={`${t.thang}${t.nhuan ? "n" : ""}`} className="border-t border-line/50">
-                  <td className="py-2 pr-3 text-fg">Tháng {t.thang === 1 ? "Giêng" : t.thang === 12 ? "Chạp" : t.thang}{t.nhuan ? " (nhuận)" : ""}</td>
+                  <td className="py-2 pr-3 text-fg">{`Tháng ${t.thang === 1 ? "Giêng" : t.thang === 12 ? "Chạp" : t.thang}${t.nhuan ? " (nhuận)" : ""}`}</td>
                   <td className="pr-3 text-fg-muted">{t.can_chi}</td>
                   <td className="pr-3"><Link href={duongThang(Number(t.mung_mot.slice(0, 4)), Number(t.mung_mot.slice(5, 7)))} className="text-gold underline decoration-gold/40 underline-offset-2">{dmy(t.mung_mot)}</Link></td>
                   <td className="pr-3 text-fg-muted">{dmy(t.ram)}</td>
