@@ -65,7 +65,8 @@ export async function donDuLieuHoc(dv: SupabaseClient): Promise<{ ok: boolean; k
   // Rà vòng HỌC 2026-10-22: ba hàm dọn chạy ĐỘC LẬP — trước đây 0016 lỗi thì dừng ngay, phiếu kiểm chứng (0017) và mốc
   // nhắc việc (0018) không bao giờ được dọn. Hàm chưa có (migration chưa chạy, PGRST202) → null; lỗi khác báo Sentry
   // (chỉ tên hàm).
-  const [ts, tv, nv] = await Promise.all(["don_du_lieu_hoc", "don_du_lieu_hoc_tuvi", "don_nhac_viec"].map(async (ham) => {
+  // Q7 (0022): dọn phiếu sau 30 ngày hết hạn + máy GOM hàng đợi "đề xuất luật" cho người duyệt (chỉ số, không tự bật gì).
+  const [ts, tv, nv, ks, gx] = await Promise.all(["don_du_lieu_hoc", "don_du_lieu_hoc_tuvi", "don_nhac_viec", "don_kiem_chung_sau", "gom_de_xuat_luat"].map(async (ham) => {
     const { data, error } = await dv.rpc(ham);
     if (error && error.code !== "PGRST202") baoLoi(new Error(`cron_don_${ham}`), { noi: "cron", duong: "/api/cron/don-du-lieu-hoc" });
     return error ? null : data;
@@ -73,5 +74,5 @@ export async function donDuLieuHoc(dv: SupabaseClient): Promise<{ ok: boolean; k
   if (ts === null && tv === null && nv === null) {
     return { ok: false, ket_qua: { loi: "Chưa dọn được (chạy migration 0016–0018?)" } };
   }
-  return { ok: true, ket_qua: { ...(ts as object | null ?? {}), tuvi: tv, nhac_viec: nv } };
+  return { ok: true, ket_qua: { ...(ts as object | null ?? {}), tuvi: tv, nhac_viec: nv, kiem_chung_sau: ks, de_xuat_luat: gx } };
 }

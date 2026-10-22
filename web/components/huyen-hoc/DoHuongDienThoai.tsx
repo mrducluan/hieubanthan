@@ -1,7 +1,7 @@
 "use client";
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Compass, Navigation, Smartphone } from "lucide-react";
+import { Compass, MapPin, Navigation, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { postJson } from "@/lib/goi-api";
@@ -22,6 +22,21 @@ export interface KetQuaDoHuong {
 }
 
 type SuKienLaBan = DeviceOrientationEvent & { webkitCompassHeading?: number };
+
+/** Q3: đọc "vĩ độ, kinh độ" từ chuỗi dán vào — số thuần "10.776, 106.700" hoặc link bản đồ (@lat,lon · q=lat,lon · !3dlat!4dlon). */
+export function docToaDo(s: string): [number, number] | null {
+  const t = decodeURIComponent(s.trim());
+  const mau = [/@(-?\d{1,2}\.\d+),(-?\d{1,3}\.\d+)/, /[?&](?:q|ll|query|center)=(-?\d{1,2}\.\d+),\s*(-?\d{1,3}\.\d+)/, /!3d(-?\d{1,2}\.\d+)!4d(-?\d{1,3}\.\d+)/,
+    /^\s*(-?\d{1,2}(?:\.\d+)?)\s*[, ]\s*(-?\d{1,3}(?:\.\d+)?)\s*$/];
+  for (const m of mau) {
+    const k = m.exec(t);
+    if (k) {
+      const la = Number(k[1]), lo = Number(k[2]);
+      if (Math.abs(la) <= 90 && Math.abs(lo) <= 180) return [la, lo];
+    }
+  }
+  return null;
+}
 type CoXinQuyen = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
 
 /** Độ hướng từ sự kiện cảm biến: iOS cho sẵn webkitCompassHeading; Android cho alpha tuyệt đối (ngược chiều kim). */
@@ -64,6 +79,24 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot }: {
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const huy = useRef<(() => void) | null>(null);
+  // Q3: hướng từ hai điểm bản đồ (tâm nhà → điểm trước mặt nhà) — cho căn hộ không đo được la bàn ở cửa.
+  const [moBanDo, setMoBanDo] = useState(false);
+  const [tam, setTam] = useState("");
+  const [truoc, setTruoc] = useState("");
+  const [kcBanDo, setKcBanDo] = useState<number | null>(null);
+  const chotBanDo = async () => {
+    const a = docToaDo(tam), b = docToaDo(truoc);
+    if (!a || !b) { setLoi("Dán toạ độ dạng \"10.776, 106.700\" hoặc link bản đồ có toạ độ cho cả hai điểm."); return; }
+    setDang(true); setLoi(null);
+    try {
+      const r = await postJson<KetQuaDoHuong & { khoang_cach_m: number }>("/api/phongthuy/huong-ban-do", { tam: a, truoc: b, ...(sinh ? { sinh } : {}) });
+      setKq(r); setKcBanDo(r.khoang_cach_m); setDoSong(r.do_huong);
+      onChot?.(r);
+      try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined }); } catch { /* bỏ qua */ }
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huong_ban_do" });
+    } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa tính được từ hai điểm này."); }
+    finally { setDang(false); }
+  };
 
   useEffect(() => () => huy.current?.(), []);
 
@@ -137,6 +170,20 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot }: {
               onChange={(e) => setNhap(e.target.value.replace(/[^\d.,]/g, "").slice(0, 6))} />
             <Button type="submit" size="sm" variant="ghost" disabled={dang}>Xem</Button>
           </form>
+          <div data-testid="huong-ban-do">
+            <button type="button" aria-expanded={moBanDo} onClick={() => setMoBanDo((v) => !v)} className="inline-flex items-center gap-1 text-xs text-fg-muted underline-offset-4 hover:underline">
+              <MapPin className="size-3.5" aria-hidden /> Không đo được ở cửa (căn hộ)? Lấy hướng từ bản đồ
+            </button>
+            {moBanDo && (
+              <form className="mt-2 space-y-2 rounded-xl border border-line/70 bg-bg/30 p-3" onSubmit={(e) => { e.preventDefault(); void chotBanDo(); }}>
+                <p className="text-xs text-fg-muted">Mở bản đồ, nhấn giữ vào <b className="text-fg">tâm nhà</b> rồi vào <b className="text-fg">điểm ngay trước mặt nhà</b> (ngoài đường / dưới ban công), chép toạ độ hoặc link vào hai ô. Toạ độ chỉ dùng để tính góc, không lưu.</p>
+                <Input aria-label="Toạ độ tâm nhà" placeholder="Tâm nhà: 10.7769, 106.7009 hoặc link bản đồ" value={tam} onChange={(e) => setTam(e.target.value.slice(0, 300))} />
+                <Input aria-label="Toạ độ điểm trước mặt nhà" placeholder="Điểm trước mặt nhà" value={truoc} onChange={(e) => setTruoc(e.target.value.slice(0, 300))} />
+                <Button type="submit" size="sm" variant="secondary" disabled={dang}><MapPin aria-hidden /> Tính hướng từ hai điểm</Button>
+                {kcBanDo != null && <p className="text-xs text-fg-faint">Hai điểm cách nhau {kcBanDo} m.</p>}
+              </form>
+            )}
+          </div>
           {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
         </div>
       </div>

@@ -570,7 +570,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Để ý rò rỉ, thấm nước và sàn trơn ở phía này: kiểm tra đường ống, chống thấm, thảm chống trượt ở chỗ hay ướt."
+      ]
     },
     "1-2": {
       "ten": "Nhất Nhị",
@@ -596,7 +599,10 @@
         "thuan": [
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Để ý rò rỉ, thấm nước và sàn trơn ở phía này: kiểm tra đường ống, chống thấm, thảm chống trượt ở chỗ hay ướt."
+      ]
     },
     "1-3": {
       "ten": "Nhất Tam",
@@ -675,7 +681,10 @@
         "thuan": [
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Để ý rò rỉ, thấm nước và sàn trơn ở phía này: kiểm tra đường ống, chống thấm, thảm chống trượt ở chỗ hay ướt."
+      ]
     },
     "1-6": {
       "ten": "Lục Nhất",
@@ -702,7 +711,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Chỗ này nên kín gió vừa phải: tránh ngồi, nằm ngay luồng gió lùa hay dưới điều hoà thổi thẳng."
+      ]
     },
     "1-7": {
       "ten": "Nhất Thất",
@@ -728,7 +740,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Chỗ này nên kín gió vừa phải: tránh ngồi, nằm ngay luồng gió lùa hay dưới điều hoà thổi thẳng."
+      ]
     },
     "1-8": {
       "ten": "Nhất Bát",
@@ -806,7 +821,10 @@
         "thuan": [
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Để ý rò rỉ, thấm nước và sàn trơn ở phía này: kiểm tra đường ống, chống thấm, thảm chống trượt ở chỗ hay ướt."
+      ]
     },
     "2-2": {
       "ten": "Nhị Hắc trùng",
@@ -832,7 +850,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Giữ khô thoáng, chống ẩm mốc; thức ăn đậy kín, bảo quản kỹ; không động thổ, đục phá ở phía này trong năm có sao 5, sao 2 bay tới."
+      ]
     },
     "2-3": {
       "ten": "Đấu ngưu sát",
@@ -859,7 +880,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Việc tiền bạc, hợp đồng nói rõ ràng từ đầu, có giấy tờ; tranh cãi thì dừng lại một nhịp rồi nói sau."
+      ]
     },
     "2-4": {
       "ten": "Nhị Tứ",
@@ -911,7 +935,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Giữ khô thoáng, chống ẩm mốc; thức ăn đậy kín, bảo quản kỹ; không động thổ, đục phá ở phía này trong năm có sao 5, sao 2 bay tới."
+      ]
     },
     "2-6": {
       "ten": "Nhị Lục",
@@ -964,7 +991,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà."
+      ]
     },
     "2-8": {
       "ten": "Nhị Bát",
@@ -1016,7 +1046,11 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà.",
+        "Bếp ở phía này thì giữ sạch, thức ăn bảo quản kỹ, mở quạt hút khi nấu."
+      ]
     },
     "3-1": {
       "ten": "Nhất Tam",
@@ -1069,7 +1103,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Việc tiền bạc, hợp đồng nói rõ ràng từ đầu, có giấy tờ; tranh cãi thì dừng lại một nhịp rồi nói sau."
+      ]
     },
     "3-3": {
       "ten": "Tam Bích trùng",
@@ -1095,7 +1132,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Bậc thang, sàn nhà phía này cần chắc, đủ sáng; dây dợ, đồ chơi không để ngang lối đi."
+      ]
     },
     "3-4": {
       "ten": "Tam Tứ",
@@ -1121,7 +1161,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Bậc thang, sàn nhà phía này cần chắc, đủ sáng; dây dợ, đồ chơi không để ngang lối đi."
+      ]
     },
     "3-5": {
       "ten": "Tam Ngũ",
@@ -1204,7 +1247,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Cất dao và vật sắc nhọn vào ngăn có nắp; khoá cửa sổ, cửa phụ chắc; tiền bạc, giấy tờ cất nơi có khoá."
+      ]
     },
     "3-8": {
       "ten": "Tam Bát",
@@ -1257,7 +1303,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Nếu là bếp hoặc nơi để nhiều đồ điện: kiểm tra bếp gas, dây điện định kỳ; nấu xong tắt bếp, khoá gas."
+      ]
     },
     "4-1": {
       "ten": "Nhất Tứ đồng cung",
@@ -1336,7 +1385,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Bậc thang, sàn nhà phía này cần chắc, đủ sáng; dây dợ, đồ chơi không để ngang lối đi."
+      ]
     },
     "4-4": {
       "ten": "Tứ Lục trùng",
@@ -1362,7 +1414,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Bậc thang, sàn nhà phía này cần chắc, đủ sáng; dây dợ, đồ chơi không để ngang lối đi."
+      ]
     },
     "4-5": {
       "ten": "Tứ Ngũ",
@@ -1496,7 +1551,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Nếu là bếp hoặc nơi để nhiều đồ điện: kiểm tra bếp gas, dây điện định kỳ; nấu xong tắt bếp, khoá gas."
+      ]
     },
     "5-1": {
       "ten": "Nhất Ngũ",
@@ -1522,7 +1580,10 @@
         "thuan": [
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Để ý rò rỉ, thấm nước và sàn trơn ở phía này: kiểm tra đường ống, chống thấm, thảm chống trượt ở chỗ hay ướt."
+      ]
     },
     "5-2": {
       "ten": "Nhị Ngũ giao gia",
@@ -1548,7 +1609,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Giữ khô thoáng, chống ẩm mốc; thức ăn đậy kín, bảo quản kỹ; không động thổ, đục phá ở phía này trong năm có sao 5, sao 2 bay tới."
+      ]
     },
     "5-3": {
       "ten": "Tam Ngũ",
@@ -1628,7 +1692,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Giữ khô thoáng, chống ẩm mốc; thức ăn đậy kín, bảo quản kỹ; không động thổ, đục phá ở phía này trong năm có sao 5, sao 2 bay tới."
+      ]
     },
     "5-6": {
       "ten": "Ngũ Lục",
@@ -1734,7 +1801,11 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà.",
+        "Bếp ở phía này thì giữ sạch, thức ăn bảo quản kỹ, mở quạt hút khi nấu."
+      ]
     },
     "6-1": {
       "ten": "Lục Nhất",
@@ -1761,7 +1832,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Chỗ này nên kín gió vừa phải: tránh ngồi, nằm ngay luồng gió lùa hay dưới điều hoà thổi thẳng."
+      ]
     },
     "6-2": {
       "ten": "Nhị Lục",
@@ -1894,7 +1968,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Chỗ này nên kín gió vừa phải: tránh ngồi, nằm ngay luồng gió lùa hay dưới điều hoà thổi thẳng."
+      ]
     },
     "6-7": {
       "ten": "Lục Thất giao kiếm",
@@ -1922,7 +1999,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Cất dao và vật sắc nhọn vào ngăn có nắp; khoá cửa sổ, cửa phụ chắc; tiền bạc, giấy tờ cất nơi có khoá."
+      ]
     },
     "6-8": {
       "ten": "Lục Bát",
@@ -1976,7 +2056,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Nếu là bếp hoặc nơi để nhiều đồ điện: kiểm tra bếp gas, dây điện định kỳ; nấu xong tắt bếp, khoá gas."
+      ]
     },
     "7-1": {
       "ten": "Nhất Thất",
@@ -2002,7 +2085,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Chỗ này nên kín gió vừa phải: tránh ngồi, nằm ngay luồng gió lùa hay dưới điều hoà thổi thẳng."
+      ]
     },
     "7-2": {
       "ten": "Nhị Thất đồng đạo",
@@ -2029,7 +2115,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà."
+      ]
     },
     "7-3": {
       "ten": "Tam Thất",
@@ -2057,7 +2146,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Cất dao và vật sắc nhọn vào ngăn có nắp; khoá cửa sổ, cửa phụ chắc; tiền bạc, giấy tờ cất nơi có khoá."
+      ]
     },
     "7-4": {
       "ten": "Tứ Thất",
@@ -2140,7 +2232,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Cất dao và vật sắc nhọn vào ngăn có nắp; khoá cửa sổ, cửa phụ chắc; tiền bạc, giấy tờ cất nơi có khoá."
+      ]
     },
     "7-7": {
       "ten": "Thất Xích trùng",
@@ -2166,7 +2261,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Cất dao và vật sắc nhọn vào ngăn có nắp; khoá cửa sổ, cửa phụ chắc; tiền bạc, giấy tờ cất nơi có khoá."
+      ]
     },
     "7-8": {
       "ten": "Thất Bát",
@@ -2219,7 +2317,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà."
+      ]
     },
     "8-1": {
       "ten": "Nhất Bát",
@@ -2506,7 +2607,11 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà.",
+        "Bếp ở phía này thì giữ sạch, thức ăn bảo quản kỹ, mở quạt hút khi nấu."
+      ]
     },
     "9-3": {
       "ten": "Tam Cửu",
@@ -2533,7 +2638,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Nếu là bếp hoặc nơi để nhiều đồ điện: kiểm tra bếp gas, dây điện định kỳ; nấu xong tắt bếp, khoá gas."
+      ]
     },
     "9-4": {
       "ten": "Tứ Cửu",
@@ -2560,7 +2668,10 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Nếu là bếp hoặc nơi để nhiều đồ điện: kiểm tra bếp gas, dây điện định kỳ; nấu xong tắt bếp, khoá gas."
+      ]
     },
     "9-5": {
       "ten": "Ngũ Cửu",
@@ -2586,7 +2697,11 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà.",
+        "Bếp ở phía này thì giữ sạch, thức ăn bảo quản kỹ, mở quạt hút khi nấu."
+      ]
     },
     "9-6": {
       "ten": "Lục Cửu",
@@ -2613,7 +2728,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Nếu là bếp hoặc nơi để nhiều đồ điện: kiểm tra bếp gas, dây điện định kỳ; nấu xong tắt bếp, khoá gas."
+      ]
     },
     "9-7": {
       "ten": "Thất Cửu",
@@ -2640,7 +2758,10 @@
           1,
           8
         ]
-      }
+      },
+      "an_toan": [
+        "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà."
+      ]
     },
     "9-8": {
       "ten": "Bát Cửu",
@@ -2692,8 +2813,13 @@
           8,
           9
         ]
-      }
+      },
+      "an_toan": [
+        "Phía này dễ nóng bí: thông gió, che nắng, không dồn thiết bị toả nhiệt; dây điện đừng để quá tải.",
+        "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà."
+      ]
     }
   },
-  "_nguon_81": "81 tổ hợp sơn tinh – hướng tinh có thứ tự (sơn = người ở & sức khoẻ, hướng = tiền bạc & công việc). Nghĩa gốc: Huyền Không Tử Bạch Quyết, Phi Tinh Phú, Thẩm Thị Huyền Không Học (cổ thư công cộng) — viết lại trung tính, lời cảnh báo không doạ: không điểm số, không tên bệnh, không vật phẩm, không dự báo ốm đau. kich_hoat: sao lưu niên bay tới cung thì năm đó nên chủ động hơn (chu_dong) / là năm thuận (thuan). Nháp AI, chờ đối chiếu."
+  "_nguon_81": "81 tổ hợp sơn tinh – hướng tinh có thứ tự (sơn = người ở & sức khoẻ, hướng = tiền bạc & công việc). Nghĩa gốc: Huyền Không Tử Bạch Quyết, Phi Tinh Phú, Thẩm Thị Huyền Không Học (cổ thư công cộng) — viết lại trung tính, lời cảnh báo không doạ: không điểm số, không tên bệnh, không vật phẩm, không dự báo ốm đau. kich_hoat: sao lưu niên bay tới cung thì năm đó nên chủ động hơn (chu_dong) / là năm thuận (thuan). Nháp AI, chờ đối chiếu.",
+  "_an_toan": "Lưu ý an toàn (Q-lửa điện, 2026-10-22): bộ tài liệu Drive ghi 'trúng độc', 'tai nạn lửa điện', tên bệnh trong domain_impacts; ở đây viết lại thành lời nhắc chăm nhà cẩn thận hơn (lửa, điện, nước, vật nhọn, ẩm mốc, lối đi) theo ngũ hành cặp sao — không dự báo, không doạ. Lời mở đầu dùng chung: phongthuy_kb.mau_an_toan."
 }

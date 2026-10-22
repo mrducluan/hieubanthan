@@ -9,7 +9,7 @@ import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { doanCoThuatNgu, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 import type { BangTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
-import { NHAN_MUC, type Hop, type LoaiHop } from "./kieu";
+import { NHAN_MUC, TEN_CHI_PHI, type Hop, type LoaiHop } from "./kieu";
 
 export const LOAI_HOP: Record<LoaiHop, { nhan: string; Icon: LucideIcon }> = {
   cot_loi: { nhan: "Điều quan trọng", Icon: Star },
@@ -64,10 +64,26 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
       <p className="hop-nhan flex items-center gap-1.5 text-[0.72rem] font-semibold uppercase tracking-wider">
         <Icon className="hop-icon size-3.5" aria-hidden /> {nhan}
       </p>
-      <h4 id={idTieuDe} className="mt-1 font-sans text-[1.02rem] font-semibold leading-snug text-fg">{hop.tieu_de}</h4>
+      <h4 id={idTieuDe} className="mt-1 font-sans text-[1.02rem] font-semibold leading-snug text-fg">
+        {hop.tieu_de}
+        {hop.veto && <span className="ml-2 align-middle rounded-full border border-moon/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-moon" data-testid="hop-veto">Xử lý trước</span>}
+      </h4>
       <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg-muted">{hop.noi_dung}</p>
       {hop.huong_xu_ly && !hop.noi_dung.includes(hop.huong_xu_ly) && (
         <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg"><b className="hop-nhan font-semibold">Nên:</b> {hop.huong_xu_ly}</p>
+      )}
+      {hop.an_toan && hop.an_toan.length > 1 && (
+        <ul className="mt-1.5 list-disc space-y-0.5 pl-5 text-sm text-fg-muted" data-testid="hop-an-toan">{hop.an_toan.slice(1).map((x) => <li key={x}>{x}</li>)}</ul>
+      )}
+      {hop.viec && hop.viec.length > 0 && (
+        <ul className="mt-2 space-y-1 text-sm" data-testid="hop-viec">
+          {hop.viec.map((v) => (
+            <li key={v.lam} className="flex gap-2">
+              <span className="chip-chi-phi shrink-0 rounded-full border border-line px-2 text-[0.7rem] font-semibold uppercase tracking-wide text-fg-faint" data-chi-phi={v.chi_phi}>{TEN_CHI_PHI[v.chi_phi]}</span>
+              <span className="text-fg-muted">{v.lam}</span>
+            </li>
+          ))}
+        </ul>
       )}
       {hop.loai === "thoi_diem" && (khoang || hop.muc) && (
         <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-fg-faint" data-testid="hop-thoi-gian">
@@ -79,7 +95,8 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
       {hop.ma_mau && !tat && (
         <div className="mt-auto pt-3">
           <KiemChung loai={loai} mau={hop.ma_mau} phai={phai} tyLe={tyLe[hop.ma_mau]}
-            tyLeEngine={{ ty_le_dung: hop.ty_le_dung, so_phieu: hop.so_phieu }} />
+            tyLeEngine={{ ty_le_dung: hop.ty_le_dung, so_phieu: hop.so_phieu }}
+            theoDoi={hop.loai === "luu_y" || hop.loai === "loi_khuyen" || hop.loai_goc === "luu_y" ? hop.tieu_de : undefined} />
         </div>
       )}
     </section>

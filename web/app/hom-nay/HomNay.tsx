@@ -6,6 +6,7 @@
 import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
 import { NhacHomNay } from "@/components/khung/NhacHomNay";
 import { HoiHomQua } from "@/components/khung/HoiHomQua";
+import { HoiSau30Ngay } from "@/components/khung/HoiSau30Ngay";
 import { MoiCaiApp } from "@/components/khung/MoiCaiApp";
 import { nhoYDinhHomNay } from "@/lib/hom-qua";
 import { useEffect, useRef, useState } from "react";
@@ -299,6 +300,7 @@ export function HomNay() {
           )}
 
           <HoiHomQua homNay={the.ngay_xem} tieuDe={c("hom_qua.tieu_de")} cau={(b) => c("hom_qua.cau", b)} camOn={c("hom_qua.cam_on")} />
+          <HoiSau30Ngay homNay={the.ngay_xem} />
           <NhacHomNay homNay={the.ngay_xem} />
           <MoiCaiApp noi="hom_nay" />
           <ThangNayNha />

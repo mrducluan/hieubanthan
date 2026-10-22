@@ -171,3 +171,65 @@ test("KC-2: hồ sơ nhà lưu trên máy sau khi đọc → Hôm nay có thẻ 
   await page.goto("/phong-thuy");
   await expect(page.getByLabel("Năm xây hoặc nhập trạch")).toHaveValue("2008");
 });
+
+test("Q2/Q1/Q4/Q5/Q6: vẽ mặt bằng → suy WC giữa nhà + cửa thông ban công (xử lý trước), căn hộ áp luật, việc theo chi phí, đổi góc nhìn", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  const ks = page.getByTestId("khao-sat-nha");
+  await ks.getByRole("textbox", { name: "Độ hướng nhà khảo sát" }).fill("180");
+  await ks.getByLabel("Loại nhà").selectOption("can_ho");
+  await ks.getByLabel(/Vẽ mặt bằng/).check();
+  const ve = ks.getByTestId("ve-mat-bang");
+  // tô cả 6×6 bằng cách bấm từng ô (chế độ "Tô ô")
+  for (let r = 0; r < 6; r++) for (let c = 0; c < 6; c++) await ve.getByRole("button", { name: `Ô hàng ${r + 1} cột ${c + 1}` }).click();
+  await ve.getByRole("radio", { name: "Cửa" }).click();
+  await ve.getByRole("button", { name: /^Ô hàng 1 cột 3/ }).click();
+  await ve.getByRole("radio", { name: "WC" }).click();
+  await ve.getByRole("button", { name: /^Ô hàng 3 cột 3/ }).click();
+  await ve.getByRole("radio", { name: "Ban công" }).click();
+  await ve.getByRole("button", { name: /^Ô hàng 6 cột 3/ }).click();
+  await ks.getByLabel(/Giường hoặc bàn làm việc nằm ngay dưới xà ngang/).check();
+  await ks.getByRole("button", { name: "Xem luận bố cục" }).click();
+  const kq = page.getByTestId("ket-qua-bo-cuc");
+  await expect(kq.getByTestId("kq-mat-bang")).toContainText("Nhà vệ sinh ở vùng giữa nhà");
+  await expect(kq.getByTestId("kq-mat-bang")).toContainText("Cửa chính nhìn thẳng ra ban công");
+  await expect(kq.getByTestId("dau-hieu-wc_giua_nha")).toContainText("suy từ mặt bằng");
+  await expect(kq.getByTestId("dau-hieu-veto").first()).toBeVisible();
+  await expect(kq.getByTestId("dau-hieu-xa_ngang").getByTestId("dau-hieu-viec")).toContainText("0 đồng");
+  await expect(kq.getByTestId("quy-tac-khong_dap_ket_cau")).toBeVisible();          // Q6: căn hộ không đập dầm
+  await expect(kq.getByTestId("quy-tac-hanh_lang_chung_cu")).toBeVisible();         // Q6: cửa thông ban công ở căn hộ → xử lý trong cửa
+  // Q4: đổi góc nhìn → câu đời sống lên trước (nói về dầm / giấc ngủ)
+  await ks.getByTestId("ks-goc-nhin-doi_song").click();
+  await ks.getByRole("button", { name: "Xem luận bố cục" }).click();
+  await expect(kq.getByTestId("dau-hieu-xa_ngang")).toContainText("Sách xưa:");
+  // Hồ sơ nhà trên máy có mặt bằng + loại nhà → "Nhà của bạn" đọc kèm: trần mức, việc theo chi phí, ý định
+  const hs = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"));
+  expect(hs.loai_nha).toBe("can_ho");
+  expect(hs.bo_cuc.mat_bang.luoi).toHaveLength(6);
+  const nha = page.getByTestId("nha-cua-ban");
+  await nha.getByLabel("Năm xây hoặc năm dọn vào").fill("2008");
+  await nha.getByTestId("nha-y-dinh").getByRole("radio", { name: "Sức khoẻ, giấc ngủ" }).click();
+  await nha.getByRole("button", { name: "Đọc nhà của tôi" }).click();
+  await expect(nha.getByTestId("bao-cao-nha")).toBeVisible();
+  await expect(nha.getByTestId("nha-tran-muc").first()).toBeVisible();              // Q1: trần Cân bằng
+  await expect(nha.getByTestId("hop-veto").first()).toBeVisible();
+  await expect(nha.getByTestId("nha-theo-y-dinh")).toContainText("sức khoẻ");
+  await expect(nha.getByTestId("nha-nguyen-tac")).toContainText("Hình thế là nền");
+  const c5 = nha.getByTestId("nha-chuong-viec_nen_lam");
+  await c5.getByTestId("nha-theo-chi-phi").click();
+  await expect(c5.getByTestId("nha-hanh-dong")).toContainText("0 đồng");
+});
+
+test("Q3: hướng nhà từ hai điểm bản đồ (dán toạ độ) → đổi ra hướng, sơn, trạch như đo la bàn", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  const o = page.getByTestId("do-huong");
+  await o.getByRole("button", { name: /Lấy hướng từ bản đồ/ }).click();
+  await o.getByLabel("Toạ độ tâm nhà").fill("https://www.google.com/maps/@10.7769,106.7009,19z");
+  await o.getByLabel("Toạ độ điểm trước mặt nhà").fill("10.7769, 106.7019");
+  await o.getByRole("button", { name: "Tính hướng từ hai điểm" }).click();
+  const kq = page.getByTestId("ket-qua-do-huong");
+  await expect(kq).toContainText("Đông");
+  await expect(kq).toContainText("bắc thật");
+  await expect(o.getByTestId("huong-ban-do")).toContainText("cách nhau");
+});

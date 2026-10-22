@@ -43,14 +43,86 @@
    ],
    "title": "DauHieuVao",
    "type": "object"
+  },
+  "MatBang": {
+   "additionalProperties": false,
+   "description": "Q2 — mặt bằng vẽ tay trên lưới N×N (3–12): hàng trên cùng = mặt trước nhà. Ô tô = '1'. `phong` = ô đại diện của\ntừng phòng (tính phương từ tâm nhà), `ban_cong` = ô ban công / cửa sổ lớn (xét cửa chính thông thẳng ra sau).",
+   "properties": {
+    "luoi": {
+     "items": {
+      "type": "string"
+     },
+     "maxItems": 12,
+     "minItems": 3,
+     "title": "Luoi",
+     "type": "array"
+    },
+    "phong": {
+     "additionalProperties": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "integer"
+       }
+      ],
+      "type": "array"
+     },
+     "propertyNames": {
+      "enum": [
+       "cua_chinh",
+       "phong_ngu_chinh",
+       "bep",
+       "ve_sinh",
+       "ban_tho",
+       "phong_lam_viec"
+      ]
+     },
+     "title": "Phong",
+     "type": "object"
+    },
+    "ban_cong": {
+     "anyOf": [
+      {
+       "maxItems": 2,
+       "minItems": 2,
+       "prefixItems": [
+        {
+         "type": "integer"
+        },
+        {
+         "type": "integer"
+        }
+       ],
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Ban Cong"
+    }
+   },
+   "required": [
+    "luoi"
+   ],
+   "title": "MatBang",
+   "type": "object"
   }
  },
  "additionalProperties": false,
  "description": "Bố cục nhà đã chuẩn hoá — đầu vào chung cho form khảo sát (hôm nay) và ảnh/video (PT-V2, PT-V4).",
  "properties": {
   "phien_ban": {
-   "const": "0.1",
-   "default": "0.1",
+   "default": "0.2",
+   "enum": [
+    "0.1",
+    "0.2"
+   ],
    "title": "Phien Ban",
    "type": "string"
   },
@@ -177,11 +249,25 @@
      "phong_ngu_tren_bep",
      "bep_wc",
      "quay_lung_cua",
-     "wc_giua_nha"
+     "wc_giua_nha",
+     "cua_thong_ban_cong",
+     "ban_tho_gio_thoi"
     ]
    },
    "title": "Dau Hieu",
    "type": "object"
+  },
+  "mat_bang": {
+   "anyOf": [
+    {
+     "$ref": "#/$defs/MatBang"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "description": "Q2: mặt bằng vẽ tay — suy vị trí phòng, WC giữa nhà, khuyết góc, cửa thông ban công"
   }
  },
  "title": "BoCuc",

@@ -90,20 +90,67 @@ def api_do_huong(inp: DoHuongInput) -> dict:
 
 
 class BoCucInput(BaseModel):
-    """PT-V0 — luận từ bố cục nhà (form khảo sát hôm nay; ảnh/video từ PT-V2). Không lưu gì."""
+    """PT-V0 — luận từ bố cục nhà (form khảo sát hôm nay; ảnh/video từ PT-V2). Không lưu gì.
+    Q4: `goc_nhin` chọn câu giải thích dấu hiệu đưa lên trước (sách xưa / đời sống). Q2: `bo_cuc.mat_bang` vẽ tay."""
     model_config = ConfigDict(extra="forbid")
 
     bo_cuc: bo_cuc.BoCuc
     sinh: SinhInput | None = None
+    goc_nhin: Literal["sach_xua", "doi_song"] = "sach_xua"
 
 
 @router.post("/bo-cuc")
 def api_bo_cuc(inp: BoCucInput) -> dict:
     try:
-        r = bo_cuc.luan(inp.bo_cuc.model_dump(exclude_none=True), inp.sinh.sinh() if inp.sinh else None)
+        r = bo_cuc.luan(inp.bo_cuc.model_dump(exclude_none=True), inp.sinh.sinh() if inp.sinh else None, inp.goc_nhin)
     except ValueError as e:
         raise HTTPException(422, detail=str(e)[:300])
     return {"engine_version": ENGINE_VERSION, **r}
+
+
+class HuongBanDoInput(BaseModel):
+    """Q3 — hướng nhà từ hai điểm trên bản đồ: tâm nhà → điểm ngay trước mặt nhà (căn hộ không đo được la bàn ở cửa).
+    Toạ độ chỉ dùng để tính góc, không lưu, không trả lại."""
+    model_config = ConfigDict(extra="forbid")
+
+    tam: tuple[float, float] = Field(description="(vĩ độ, kinh độ) tâm nhà")
+    truoc: tuple[float, float] = Field(description="(vĩ độ, kinh độ) điểm trước mặt nhà")
+    sinh: SinhInput | None = None
+
+    @model_validator(mode="after")
+    def _toa_do(self) -> "HuongBanDoInput":
+        for la, lo in (self.tam, self.truoc):
+            if not (-90 <= la <= 90 and -180 <= lo <= 180):
+                raise ValueError("Toạ độ không hợp lệ")
+        return self
+
+
+@router.post("/huong-ban-do")
+def api_huong_ban_do(inp: HuongBanDoInput) -> dict:
+    from app.calc import mat_bang as mb  # noqa: PLC0415
+    kc = mb.khoang_cach_m(*inp.tam, *inp.truoc)
+    if kc < 1:
+        raise HTTPException(422, detail="Hai điểm trùng nhau — chọn điểm trước mặt nhà cách tâm ít nhất vài mét.")
+    do = mb.bearing(*inp.tam, *inp.truoc)
+    ra = api_do_huong(DoHuongInput(do_huong=do, sinh=inp.sinh))
+    ra["khoang_cach_m"] = kc
+    ra["luu_y"] = ("Hướng lấy từ hai điểm trên bản đồ là hướng theo bắc thật (không lệch từ), sai số khoảng 1–2° khi hai điểm cách "
+                   "nhau trên 10 m. " + ("Hai điểm quá gần (dưới 5 m) — chọn điểm trước mặt xa hơn cho chắc. " if kc < 5 else "")
+                   + "Vẫn nên đối chiếu với la bàn ở cửa nếu đo được.")
+    return ra
+
+
+@router.get("/do-thi/{y_dinh}")
+def api_do_thi(y_dinh: str) -> dict:
+    """Đồ thị tri thức theo ý định (thay Apache AGE): phòng cần nhìn, dấu hiệu nên rà, sao liên quan — để web gợi câu hỏi
+    khảo sát theo điều người dùng băn khoăn. Chỉ tra KB, không nhận dữ liệu nhà."""
+    from app.kb import phongthuy_do_thi as do_thi  # noqa: PLC0415
+    g = do_thi.theo_y_dinh(y_dinh)
+    if not g:
+        raise HTTPException(404, detail="Không có ý định này trong đồ thị")
+    g["dau_hieu_hoi"] = {x: bo_cuc.DAU_HIEU[x]["hoi"] for x in g["dau_hieu"] if x in bo_cuc.DAU_HIEU}
+    g["ten_phong"] = {p: bo_cuc.TEN_PHONG[p] for p in g["phong"]}
+    return {"engine_version": ENGINE_VERSION, **g, **do_thi.meta()}
 
 
 @router.get("/bo-cuc/danh-muc")
@@ -266,6 +313,9 @@ class LuanGiaiPTInput(BaseModel):
     # Chỉ hạ / xếp lại hộp — không sinh câu mới. Không chữ người dùng, không ngày sinh.
     trong_so: dict[_MaMau, PhieuInput] | None = Field(default=None, max_length=5000)
     ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
+    # Q4 góc nhìn giải thích dấu hiệu · đồ thị tri thức: ý định chung (KC-3) → mục "Theo điều bạn đang băn khoăn".
+    goc_nhin: Literal["sach_xua", "doi_song"] = "sach_xua"
+    y_dinh: Annotated[str, StringConstraints(pattern=r"^[a-z_]{3,30}$")] | None = None
 
 
 @router.post("/luan-giai")
@@ -276,7 +326,7 @@ def api_luan_giai(inp: LuanGiaiPTInput) -> dict:
         nha["bo_cuc"] = inp.nha.bo_cuc.model_dump(exclude_none=True)
     tvs = [{**t.sinh(), "vai": t.vai} for t in inp.thanh_vien]
     try:
-        r = pt_ds.luan_giai(inp.sinh.sinh() if inp.sinh else None, nha, tvs, inp.ngay_xem)
+        r = pt_ds.luan_giai(inp.sinh.sinh() if inp.sinh else None, nha, tvs, inp.ngay_xem, inp.goc_nhin, inp.y_dinh)
     except ValueError as e:
         raise HTTPException(422, detail=str(e)[:300])
     if inp.trong_so or inp.ca_nhan:

@@ -90,3 +90,23 @@ test("HN-4: câu gõ không nhận ra → chỉ đo mã nhóm cố định, khô
   expect(e.nhom_chua_ho_tro).toBe("le_bai");
   expect(JSON.stringify(sk)).not.toContain("Hoa");
 });
+
+test("Q7: hộp đã bấm 'Đúng với mình' 35 ngày trước → Hôm nay hỏi lại hai câu ba mức, gửi phiếu sau (chỉ mã), không hỏi lại lần hai", async ({ page }) => {
+  await napHoSo(page);
+  const ngay = new Date(Date.now() - 35 * 86_400_000).toISOString().slice(0, 10);
+  await page.addInitScript((g) => localStorage.setItem("hbt.kc_sau.v1", g), JSON.stringify([
+    { loai: "doi_song", mau: "ds.phongthuy.tung_phong.luu_y.xa_ngang", phai: "bat_trach_huyen_khong", nhan: "Giường, bàn dưới xà ngang", mo_dun: "phongthuy", ngay, da_hoi: false },
+  ]));
+  const goi: unknown[] = [];
+  await page.route("**/api/kiem-chung/sau", async (route) => { goi.push(route.request().postDataJSON()); await route.fulfill({ json: { ok: true, da_luu: true } }); });
+  await page.goto("/hom-nay");
+  const h = page.getByTestId("hoi-sau-30");
+  await expect(h).toContainText("35 ngày trước");
+  await expect(h).toContainText("Giường, bàn dưới xà ngang");
+  await h.getByRole("radio", { name: "Làm một phần" }).click();
+  await h.getByRole("button", { name: "Dễ chịu hơn" }).click();
+  await expect(h).toContainText("Cảm ơn bạn");
+  expect(goi).toEqual([{ loai: "doi_song", mau: "ds.phongthuy.tung_phong.luu_y.xa_ngang", phai: "bat_trach_huyen_khong", da_lam: "mot_phan", thay_khac: "tot_hon", sau_ngay: 35 }]);
+  await page.reload();
+  await expect(page.getByTestId("hoi-sau-30")).toHaveCount(0);
+});

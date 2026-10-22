@@ -24,11 +24,18 @@ export const HoSoNha = z.object({
   nam_xay: z.number().int().min(1864).max(2150).optional(),
   toa: z.string().max(10).optional(),
   thanh_vien: z.array(ThanhVienNha).max(6).default([]),
-  /** Bố cục đã khai ở Khảo sát nhà (schema BoCuc 0.1 của engine) — giữ nguyên để gửi lại. */
+  /** Loại nhà (Q6: căn hộ → luật thực hành căn hộ). */
+  loai_nha: z.enum(["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"]).optional(),
+  /** Bố cục đã khai ở Khảo sát nhà (schema BoCuc 0.2 của engine) — giữ nguyên để gửi lại; Q2: mặt bằng vẽ tay (lưới, ô phòng, ô ban công). */
   bo_cuc: z.object({
     vi_tri: z.record(z.string().max(30), z.string().max(12)).optional(),
     huong_do: z.record(z.string().max(30), z.number().min(0).lt(360)).optional(),
     dau_hieu: z.array(z.string().max(40)).optional(),
+    mat_bang: z.object({
+      luoi: z.array(z.string().regex(/^[01]{3,12}$/)).min(3).max(12),
+      phong: z.record(z.string().max(30), z.tuple([z.number().int().min(0).max(11), z.number().int().min(0).max(11)])).optional(),
+      ban_cong: z.tuple([z.number().int().min(0).max(11), z.number().int().min(0).max(11)]).optional(),
+    }).optional(),
   }).optional(),
   cap_nhat_luc: z.string(),
 });

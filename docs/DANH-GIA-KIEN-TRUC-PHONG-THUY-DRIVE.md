@@ -39,7 +39,7 @@ Tri Thức (Apache AGE) & Động cơ PL/pgSQL*, *Thiết kế Kho Câu Hỏi & 
 | 4 công tắc UI | Khung "Trường phái" (lịch, mốc năm, giờ Tý…) | `facing_mode` đã có (đo ở cửa / ban công); `grid_mode` = PT-V2; `persona_mode` = chỉ đổi lời giải thích | Thêm **một** công tắc "góc nhìn: theo sách xưa / theo đời sống hiện đại" cho lời giải thích dấu hiệu (tuỳ anh, mục 6) |
 | Remedy khoa học (Kelvin, âm thanh, vi khí hậu) & vật phẩm | KB chỉ nói nếp dùng phòng, không vật phẩm | Phần ánh sáng / thông gió / tiếng ồn **dùng được** như gợi ý sinh hoạt; vật phẩm (thạch anh, hồ lô, tỳ hưu) **cấm** | Lấy phần sinh hoạt, ghi là "cách nhìn hiện đại", không gắn mác khoa học |
 | Remedy 3 mức ngân sách | "Việc nên làm" có 3 nhóm theo *thời điểm* | Chia theo **chi phí** (0 đồng / ít tiền / sửa chữa) dễ hành động hơn | Thêm nhãn chi phí cho việc nên làm (mục 5.3) |
-| Apache AGE + Cypher theo ý định | Luật từ khoá + từ điển ý định chung (`y_dinh_chung.json`) + kho vectơ nội bộ | Supabase không có AGE; đồ thị nhỏ; Cypher cứng khó test | **Không** |
+| Apache AGE + Cypher theo ý định | Luật từ khoá + từ điển ý định chung (`y_dinh_chung.json`) + kho vectơ nội bộ | Supabase không có AGE; đồ thị nhỏ; Cypher cứng khó test | **Làm theo cách khác (2026-10-22, chủ dự án giao)**: đồ thị JSON trong git `phongthuy_do_thi.json` (11 ý định · 6 phòng · 20 dấu hiệu · 9 sao; cạnh QUAN_TAM / CAN_XEM / SAO_LIEN_QUAN / KICH_HOAT / O_PHONG / HOA_GIAI_BOI + sinh/khắc tính từ ngũ hành sao), duyệt bằng Python `kb/phongthuy_do_thi.py` (`theo_y_dinh`, `duong_di` BFS) — một câu Cypher của Drive = một lần `theo_y_dinh()`. Báo cáo Nhà của bạn nhận `y_dinh` → mục "Theo điều bạn đang băn khoăn" (phòng cần nhìn, dấu hiệu nên rà, hộp liên quan, năm sao kích hoạt tới phía phòng = TRIGGERS_TIMING); route `/v1/phongthuy/do-thi/{y_dinh}`. Không cạnh sao ↔ con số thần số. |
 | pgvector 1536 (OpenAI/Gemini) | pgvector + `bam512_v1` nội bộ (không gửi câu hỏi ra ngoài), bật theo ngưỡng | Đã quyết (TS-V3/LG-ĐS) | Giữ |
 | Golden samples 4 lớp từ lời LLM | Không lưu văn LLM làm chuẩn | Lưu lời LLM làm "mẫu chuẩn" rồi nạp lại = tự nhiễm (model collapse / poisoning) | **Không** |
 | RLHF patch rules tự ghi vào prompt | Tầng HỌC: máy chỉ xếp lại/hạ hộp, người duyệt sửa KB qua PR | 7 luật mẫu trong Drive **đều là tri thức tốt** (ranh giới Lập xuân, hành lang chung cư, không đập kết cấu, đảo bếp ≠ bếp nấu, điều hoà thổi bàn thờ, nước ở Cửu Tử vận 9…) nhưng phải vào **KB / luật RULES qua PR**, không tự bật | Chuyển 7 luật thành mục KB `phongthuy_bo_cuc` + luật RULES (việc riêng, mục 6) |
@@ -63,7 +63,7 @@ Tri Thức (Apache AGE) & Động cơ PL/pgSQL*, *Thiết kế Kho Câu Hỏi & 
 
 1. Phép tính trong PL/pgSQL (song song với engine) → **hai bộ tính sẽ lệch số** (CLAUDE.md tầng CALC).
 2. Điểm số −100…+100 và nhãn `HUNG / DAI_CAT / CỰC HUNG` → trái "không doạ, không phán hung để giữ chân".
-3. Tên bệnh, "trúng độc", "tai nạn lửa điện" trong `domain_impacts` → trái quy tắc sức khoẻ.
+3. Tên bệnh, "trúng độc", "tai nạn lửa điện" trong `domain_impacts` → trái quy tắc sức khoẻ. **Đã làm lại (2026-10-22, chủ dự án yêu cầu giữ ý, đổi lời)**: 40 tổ hợp có `an_toan` — lời nhắc chăm nhà theo ngũ hành cặp sao ("cẩn thận hơn với lửa và điện: kiểm tra dây điện, bếp gas, có bình chữa cháy nhỏ"; nước rò rỉ, sàn trơn; vật sắc nhọn cất kỹ; ẩm mốc, thức ăn đậy kín; bậc thang, lối đi; gió lùa), mở đầu bằng "sách xưa gắn cặp sao này với … — lời nhắc chăm nhà, không phải dự báo"; test cấm tên bệnh / "tai nạn" / "cháy nổ".
 4. Vật phẩm hoá giải (thạch anh, tỳ hưu, hồ lô, chuông gió) trong `remedy_traditional` → trái quy tắc KB.
 5. Lưu `full_name`, `birth_date`, mặt bằng, toggles, lời luận theo `user_id` và dùng để huấn luyện → trái quy tắc riêng tư.
 6. `rlhf_patch_rules` + `AUTO_PATCHED` + golden samples từ lời LLM → máy tự sửa luật/tự sinh chuẩn → trái tầng HỌC
@@ -106,18 +106,33 @@ lat2, lon2)` cho hướng từ bản đồ. Không PostGIS, không dependency (t
 PostGIS, Apache AGE, PL/pgSQL tính toán, embedding bên ngoài, điểm số, golden samples từ lời LLM, luật tự bật, lưu định
 danh/mặt bằng theo user.
 
-## 6. Bảng quyết định (anh tích chọn)
+## 6. Bảng quyết định — **chủ dự án đã chốt 2026-10-22: làm Q1 → Q7 lần lượt, Q8 không làm**; trạng thái bên dưới
 
 | # | Việc | Khâu tăng trưởng | Ước lượng | Phụ thuộc | Đề xuất của em |
 |---|---|---|---|---|---|
-| Q1 | Ghi hai nguyên tắc 5.1 vào CLAUDE.md + cờ `veto` trong KB `bo_tri`, luật trần mức + test | nền móng (lời luận đúng hơn) | 0,5 ngày | — | **Làm** |
-| Q2 | `calc/mat_bang.py` (hình học thuần) + sơ đồ vẽ tay trên lưới 3×3 ở Khảo sát nhà | THU HÚT (công cụ căn hộ) | 2 ngày | — | Làm sau Q1 |
-| Q3 | Hướng nhà từ hai điểm bản đồ (nhập toạ độ / dán link bản đồ) | THU HÚT | 0,5 ngày | — | **Làm** (rẻ, hữu ích) |
-| Q4 | Giải thích hai lối + công tắc "sách xưa / đời sống" cho dấu hiệu hình thế | QUAY LẠI (đọc dễ hiểu) | 1,5 ngày (viết KB 18 dấu hiệu × 2) | — | Làm khi anh muốn nhấn "hiện đại" |
-| Q5 | Việc nên làm theo 3 mức chi phí | QUAY LẠI | 0,5 ngày | — | **Làm** |
-| Q6 | Bảy luật Drive → KB/luật RULES qua PR | nền móng | 1 ngày | — | **Làm** |
-| Q7 | Phiếu sau 30 ngày + hàng đợi đề xuất luật (migration 0019) | nền móng tầng HỌC | 1,5 ngày + anh chạy migration | KC-4 nhắc việc | Làm sau khi 0017/0018 đã chạy và có ≥ 300 phiếu/tháng |
-| Q8 | PostGIS / AGE / PL/pgSQL / embedding ngoài / điểm số | — | — | — | **Không làm** |
+| Q1 | Ghi hai nguyên tắc 5.1 vào CLAUDE.md + cờ `veto` trong KB `bo_tri`, luật trần mức + test | nền móng (lời luận đúng hơn) | 0,5 ngày | — | **Đã làm**: `bo_tri[*].veto` (đường đâm, xà ngang, WC giữa nhà, cửa thông ban công), `phongthuy_doi_song._ap_tran_muc` → chương 2 & 3 không vượt Cân bằng, `tran_muc` giải thích, hộp veto đứng đầu "Điều quan trọng nhất", `nguyen_tac` trong báo cáo; web badge "Xử lý trước" + dòng "trần Cân bằng — còn …" |
+| Q2 | `calc/mat_bang.py` (hình học thuần) + sơ đồ vẽ tay trên lưới 3×3 ở Khảo sát nhà | THU HÚT (công cụ căn hộ) | 2 ngày | — | **Đã làm**: lưới **6×6** vẽ tay (hàng trên = mặt trước), ô đại diện phòng + ban công; engine tính tâm (trọng tâm diện tích), Cửu cung trên khung bao (khuyết góc < 40 %), phương theo góc từ tâm quay theo độ hướng, WC trong 1/3 giữa, cửa–tâm–ban công thẳng hàng ≤ 12° không ô trống chắn → tự suy `vi_tri` + dấu hiệu `wc_giua_nha` / `nha_chu_l` / `cua_thong_ban_cong` (BoCuc 0.2 `mat_bang`); không PostGIS |
+| Q3 | Hướng nhà từ hai điểm bản đồ (nhập toạ độ / dán link bản đồ) | THU HÚT | 0,5 ngày | — | **Đã làm**: `mat_bang.bearing` (phương vị ban đầu, bắc thật) + `khoang_cach_m`, route `/v1/phongthuy/huong-ban-do` (trả như đo la bàn + khoảng cách + lưu ý), web ô "Lấy hướng từ bản đồ" trong Đo hướng (đọc "lat, lon" hoặc link `@lat,lon` / `q=` / `!3d!4d`); toạ độ không lưu |
+| Q4 | Giải thích hai lối + công tắc "sách xưa / đời sống" cho dấu hiệu hình thế | QUAY LẠI (đọc dễ hiểu) | 1,5 ngày (viết KB 18 dấu hiệu × 2) | — | **Đã làm**: `bo_tri[*].giai_thich_hien_dai` cho 20 dấu hiệu (ánh sáng, gió, tiếng ồn, tầm nhìn — không mác khoa học), `goc_nhin` ở `/bo-cuc` và `/luan-giai` (câu đưa lên trước, câu kia ở `giai_thich`), công tắc dùng chung Khảo sát nhà + Nhà của bạn (nhớ máy `hbt.pt_goc_nhin`); hỏi đáp bố trí thêm "Nhìn theo đời sống" |
+| Q5 | Việc nên làm theo 3 mức chi phí | QUAY LẠI | 0,5 ngày | — | **Đã làm**: `bo_tri[*].viec[{chi_phi ∈ khong_ton·it_tien·sua_chua, lam}]` (mỗi dấu hiệu luôn có việc 0 đồng), hộp dấu hiệu mang `viec`, chương Việc nên làm thêm `hanh_dong_chi_phi` (web nút "xếp theo: thời điểm / chi phí"), không vật phẩm |
+| Q6 | Bảy luật Drive → KB/luật RULES qua PR | nền móng | 1 ngày | — | **Đã làm**: KB `quy_tac_thuc_hanh` (7 luật, có `ap_dung`); RULES: căn hộ + đường đâm/cửa đối/cửa thông ban công → "xử lý bên trong cửa"; căn hộ + WC giữa nhà/xà ngang → bỏ việc đụng kết cấu, chỉ trần thạch cao / đổi chiều cửa; câu hỏi bếp nói rõ "bếp nấu, không tính bàn đảo"; dấu hiệu mới `ban_tho_gio_thoi`; vận 9 `to_hop_cung.khong_dat_nuoc` (sơn tinh 9 / có 5, 2 → không bể cá, thác nước) vào đoạn báo cáo; Lập xuân đã là mặc định engine; "sửa nhà / sửa thói quen" = đoạn chương 5 (không ghép số thần số với sao) |
+| Q7 | Phiếu sau 30 ngày + hàng đợi đề xuất luật | nền móng tầng HỌC | 1,5 ngày + anh chạy migration | 0017 | **Đã làm (migration 0022 chờ anh chạy)**: `kiem_chung_sau` (mã + phái + `da_lam` 3 mức + `thay_khac` 3 mức + số ngày; khoá HMAC, 1 phiếu/người/mã, 24 tháng) — máy người dùng nhớ hộp Nên để ý / Lời khuyên đã bấm "Đúng với mình" (localStorage), ≥ 30 ngày Hôm nay hỏi lại; `de_xuat_luat` máy chỉ GOM (≥ 100 phiếu & < 40 % đúng, hoặc ≥ 30 phiếu sau & ≥ 60 % "như cũ") cho người duyệt ở `/quan-tri/hoc`, cron ngày gọi `gom_de_xuat_luat` + `don_kiem_chung_sau`; không tự bật gì |
+| Q8 | PostGIS / AGE / PL/pgSQL / embedding ngoài / điểm số | — | — | — | **Không làm** (chủ dự án chốt); phần "đồ thị theo ý định" của AGE làm bằng JSON + Python (dòng Apache AGE ở mục 2) |
 
 Mỗi việc "Làm" sẽ có dòng quyết định riêng trong CLAUDE.md khi bắt đầu; phép tính Huyền Không, Bát trạch hiện tại không
 đổi → không tăng `ENGINE_VERSION` cho Q1–Q7.
+
+## 7. Ý tưởng mới ghi nhận khi rà codebase (2026-10-22, chủ dự án dặn "có ý tưởng gì mới thì bổ sung") — chờ anh tích
+
+| # | Ý tưởng | Khâu | Vì sao đáng làm | Cần gì |
+|---|---|---|---|---|
+| Y1 | **"Chụp một góc, hỏi một câu"** (PT-V2 nhẹ): người dùng chụp ảnh phòng → chỉ hỏi 3–5 câu có/không do đồ thị chọn theo ý định (vd sức khoẻ: xà ngang? gương đối giường? WC giữa nhà?) — ảnh **không gửi lên máy chủ**, chỉ để người dùng nhìn mà trả lời; không cần model thị giác | THU HÚT | Dấu hiệu khai tay hiện ít người điền hết 20 ô; đồ thị đã có cạnh ý định → dấu hiệu nên rút gọn form được ngay | 1 ngày web, không engine |
+| Y2 | **Mặt bằng từ thẻ chia sẻ**: ảnh "Nhà của bạn" (OG) vẽ lưới 3×3 phủ màu theo mức + chấm veto, QR về `/phong-thuy?tu=nha.…`; chỉ dữ liệu công khai (8 hướng, mức), không địa chỉ | MỜI | Thẻ chia sẻ các mảng khác đã có concept riêng (TCS-1); Phong thuỷ chưa có thẻ | 0,5 ngày (`lib/og-chung.tsx`) |
+| Y3 | **Nhắc theo mùa của nhà**: cron sáng (KC-4 GĐ2) thêm mốc "tháng tiết mới — phía cửa tháng này nên giữ yên / thuận sửa" cho người đã bật "mốc lịch", lấy từ `thang_nay` (chỉ cần hướng trong `ho_so_nha`) | QUAY LẠI | Hồ sơ nhà + push đã có, chỉ ghép; đúng nhịp 12 lần/năm, không doạ | 0,5 ngày, không migration (0018 + 0020 đủ) |
+| Y4 | **Hộp "Việc 0 đồng tuần này"** ở Hôm nay: mỗi tuần một việc 0 đồng từ dấu hiệu đã khai (xoay vòng, có nút "đã làm" → phiếu sau 30 ngày tự có nhãn) | QUAY LẠI | Nối thẳng Q5 với Q7: việc nhỏ dễ làm → phiếu "đã làm" có ý nghĩa hơn | 0,5 ngày web |
+| Y5 | **Trang kiến thức "20 dấu hiệu nhà ở"** `/phong-thuy/dau-hieu/{mã}` dựng từ KB (sách xưa + đời sống + việc theo chi phí + luật căn hộ), ảnh OG la bàn; nối từ hỏi đáp và báo cáo | THU HÚT (SEO cụm "gương đối giường", "nhà vệ sinh giữa nhà", "xà ngang đè giường" — truy vấn lớn) | KB đã đủ hai lối + việc; chỉ dựng trang như SEO-F/H | 1 ngày (engine route + web + sitemap + mẫu cụm CMS) |
+| Y6 | **Hỏi đáp Phong thuỷ đọc hồ sơ nhà**: câu "bếp nhà tôi có sao không?" → engine nhận `nha` (hướng, bố cục trên máy) như `sinh` → trả lời theo đúng nhà thay vì chung chung | QUAY LẠI | Hồ sơ nhà đã lưu máy; hỏi đáp hiện chỉ biết mệnh | 1 ngày engine + web |
+| Y7 | **So "trước – sau" khi sửa**: người dùng đánh dấu "đã xử lý" một dấu hiệu → bài đọc tính lại không trần mức, hiện hai mức cạnh nhau; nút "đã xử lý" cũng là phiếu sau 30 ngày | QUAY LẠI | Cho thấy việc 0 đồng đổi được gì ngay — động lực làm thật | 0,5 ngày (web + `dau_hieu[*].da_xu_ly` bỏ qua trần) |
+| Y8 | **Rà lại 45 cặp cũ `cap_sao`**: KB còn giữ 45 cặp không thứ tự làm dự phòng; sau khi `to_hop_81` ổn định một tháng (phiếu kiểm chứng), bỏ dự phòng để KB một nguồn | nền móng | Hai bảng nghĩa song song dễ lệch khi sửa | 0,2 ngày + phiếu |
+
+Em đề xuất làm trước: **Y5** (SEO, KB đã sẵn), **Y3** (ghép hai thứ đã có), **Y7** (đóng vòng Q1 → Q5 → Q7).

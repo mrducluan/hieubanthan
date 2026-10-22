@@ -58,11 +58,13 @@ Phiếu không dùng huấn luyện mô hình; chỉ để xếp lại hộp và
 | `knowledge_golden_samples` (lời LLM 4 lớp tự thăng làm chuẩn) | **Không.** Chuẩn là KB trong git (người viết/duyệt) + golden *phép tính* trong `fixtures/`. |
 | `rlhf_patch_rules` (`patch_instruction` ghi thẳng vào prompt/engine, `AUTO_PATCHED`) | Luật chỉ sống trong RULES (Python, có test) hoặc KB (JSON), **qua PR**. Bảy luật mẫu có giá trị → việc Q6 trong tài liệu đánh giá. |
 | `feedback_quarantine_log` + "Critic Agent" | `/quan-tri/hoc`: hộp tỉ lệ thấp + cụm thần số "chờ duyệt". Không có agent tự chẩn đoán/tự vá. |
-| rating 1–5 + outcome 30 ngày | 1 chạm "Đúng / Chưa đúng" (đã có) + **phiếu sau 30 ngày** (đề xuất Q7, 3 mức, chỉ mã, opt-in qua nhắc việc). |
+| rating 1–5 + outcome 30 ngày | 1 chạm "Đúng / Chưa đúng" (đã có) + **phiếu sau 30 ngày** (Q7, **đã làm 2026-10-22**, migration 0022): máy người dùng nhớ hộp Nên để ý / Lời khuyên vừa bấm "Đúng với mình" (chỉ mã + nhãn, localStorage `hbt.kc_sau.v1`); ≥ 30 ngày sau, Hôm nay hỏi hai câu ba mức "đã làm theo chưa" · "thấy khác gì" → `kiem_chung_sau` (mã + phái + hai mức + số ngày, khoá HMAC). Không chữ, không nhà, không ngày sinh. |
+| `rlhf_patch_rules` tự bật | **`de_xuat_luat`** (0022): cron ngày gọi `gom_de_xuat_luat` — máy chỉ GOM dòng (mã, số phiếu, tỉ lệ, số phiếu sau) khi ≥ 100 phiếu & < 40 % đúng hoặc ≥ 30 phiếu sau & ≥ 60 % "như cũ"; người duyệt ở `/quan-tri/hoc` sửa KB / viết luật qua PR rồi đánh dấu "Đã sửa" / "Bỏ qua" (ghi nhật ký quản trị). Bảy luật mẫu của Drive đã vào KB `quy_tac_thuc_hanh` qua PR (Q6). |
 
 ## 5. Việc còn mở (chờ chủ dự án)
 
 1. Chạy migration **0017** (kiểm chứng, bài đã lưu, kho vectơ) và **0018** (hồ sơ nhà, nhắc việc) — chưa chạy thì nút vẫn hiện,
    phiếu chỉ lên PostHog, số "x%" chưa có.
-2. Duyệt **Q7** (phiếu sau 30 ngày + hàng đợi đề xuất luật → migration 0019) khi đã có ≥ 300 phiếu/tháng.
-3. Duyệt **Q6** (bảy luật Drive → KB/RULES qua PR).
+2. ~~Duyệt Q7~~ → **đã làm**: chạy migration **0022** (sau 0017, 0021). Chưa chạy thì Hôm nay vẫn hỏi lại, phiếu chỉ lên PostHog
+   (`feedback_submitted{kind=sau_30}`), hàng đợi đề xuất luật trống.
+3. ~~Duyệt Q6~~ → **đã làm** (KB `quy_tac_thuc_hanh`, luật căn hộ + nước vận 9 trong RULES).

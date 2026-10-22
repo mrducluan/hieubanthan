@@ -47,6 +47,16 @@ def bo_tri(ma: str) -> dict | None:
     return m
 
 
+def quy_tac_thuc_hanh() -> dict:
+    """Q6: bảy luật thực hành (từ Drive, viết lại thành KB) — {mã: {tieu_de, ap_dung, noi_dung, trong_engine?}}."""
+    return _d().get("quy_tac_thuc_hanh") or {}
+
+
+def mau_an_toan(thu: str) -> str:
+    """Câu mở đầu cho lưu ý an toàn của cặp sao (lửa điện / nước / vật nhọn…), không doạ."""
+    return (_d().get("mau_an_toan") or "Sách xưa gắn cặp sao này với {thu} — lời nhắc chăm nhà, không phải dự báo.").format(thu=thu)
+
+
 def am_trach_tat_ca() -> dict:
     return _d()["am_trach"]
 

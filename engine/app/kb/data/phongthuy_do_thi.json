@@ -1,0 +1,311 @@
+{
+ "_nguon": "Đồ thị tri thức Phong thuỷ theo ý định (thay Apache AGE của bộ tài liệu Drive, 2026-10-22): JSON trong git là nguồn gốc, engine duyệt cạnh bằng Python (kb/phongthuy_do_thi.py), không Cypher, không DB. Nút: y_dinh (từ điển ý định chung KC-3), phong (6 phòng của bố cục), dau_hieu (mã bo_tri), sao (1–9). Cạnh có loại; sao↔sao theo ngũ hành sinh/khắc tính trong mã. Không có cạnh sao ↔ con số thần số (không có trong cổ thư). Nháp AI, chờ đối chiếu.",
+ "source_id": "hbt_phongthuy_do_thi",
+ "school_id": "bat_trach_huyen_khong",
+ "trang_thai": "nhap_ai",
+ "loai_canh": {
+  "QUAN_TAM": "ý định → phòng cần nhìn trước",
+  "CAN_XEM": "ý định → dấu hiệu hình thế hay liên quan",
+  "SAO_LIEN_QUAN": "ý định → sao Huyền Không hay được xét cho chuyện đó",
+  "KICH_HOAT": "sao (lưu niên / hướng tinh) tới cung có dấu hiệu → năm/tháng đó nên chủ động xử lý dấu hiệu hơn",
+  "O_PHONG": "dấu hiệu → phòng thường gặp",
+  "HOA_GIAI_BOI": "sao → sao làm dịu theo ngũ hành (tiết khí)"
+ },
+ "y_dinh": {
+  "cong_viec": {
+   "phong": [
+    "phong_lam_viec",
+    "cua_chinh"
+   ],
+   "dau_hieu": [
+    "quay_lung_cua",
+    "xa_ngang",
+    "cua_doi_nhau"
+   ],
+   "sao": [
+    1,
+    4,
+    6
+   ]
+  },
+  "kinh_doanh_tien": {
+   "phong": [
+    "cua_chinh"
+   ],
+   "dau_hieu": [
+    "duong_dam",
+    "minh_duong",
+    "cua_thong_ban_cong",
+    "bep_doi_cua",
+    "nga_ba"
+   ],
+   "sao": [
+    8,
+    9,
+    1,
+    7
+   ]
+  },
+  "tinh_cam": {
+   "phong": [
+    "phong_ngu_chinh"
+   ],
+   "dau_hieu": [
+    "guong_giuong",
+    "xa_ngang",
+    "cua_doi_nhau",
+    "phong_ngu_tren_bep"
+   ],
+   "sao": [
+    1,
+    4,
+    3,
+    7
+   ]
+  },
+  "gia_dinh": {
+   "phong": [
+    "bep",
+    "ban_tho",
+    "phong_ngu_chinh"
+   ],
+   "dau_hieu": [
+    "bep_wc",
+    "bep_doi_cua",
+    "ban_tho_gio_thoi",
+    "cua_doi_nhau"
+   ],
+   "sao": [
+    2,
+    8,
+    3
+   ]
+  },
+  "hoc_hanh": {
+   "phong": [
+    "phong_lam_viec"
+   ],
+   "dau_hieu": [
+    "quay_lung_cua",
+    "xa_ngang",
+    "guong_giuong"
+   ],
+   "sao": [
+    1,
+    4
+   ]
+  },
+  "nha_cua": {
+   "phong": [
+    "cua_chinh",
+    "phong_ngu_chinh",
+    "bep",
+    "ve_sinh"
+   ],
+   "dau_hieu": [
+    "duong_dam",
+    "xa_ngang",
+    "wc_giua_nha",
+    "cua_thong_ban_cong",
+    "nha_chu_l",
+    "no_hau",
+    "minh_duong"
+   ],
+   "sao": [
+    5,
+    2,
+    9,
+    8
+   ]
+  },
+  "suc_khoe": {
+   "phong": [
+    "phong_ngu_chinh",
+    "bep",
+    "ve_sinh"
+   ],
+   "dau_hieu": [
+    "xa_ngang",
+    "wc_giua_nha",
+    "bep_wc",
+    "phong_ngu_tren_bep",
+    "guong_giuong",
+    "nghia_trang"
+   ],
+   "sao": [
+    2,
+    5
+   ]
+  },
+  "di_xa": {
+   "phong": [
+    "cua_chinh"
+   ],
+   "dau_hieu": [
+    "duong_dam",
+    "cot_dien",
+    "nga_ba"
+   ],
+   "sao": [
+    1,
+    6
+   ]
+  },
+  "quan_he": {
+   "phong": [
+    "cua_chinh",
+    "phong_lam_viec"
+   ],
+   "dau_hieu": [
+    "cua_doi_nhau",
+    "nga_ba",
+    "quay_lung_cua"
+   ],
+   "sao": [
+    3,
+    7,
+    6
+   ]
+  },
+  "thoi_diem": {
+   "phong": [
+    "cua_chinh"
+   ],
+   "dau_hieu": [],
+   "sao": [
+    5,
+    2,
+    3
+   ]
+  },
+  "ban_than": {
+   "phong": [
+    "phong_lam_viec",
+    "phong_ngu_chinh"
+   ],
+   "dau_hieu": [
+    "quay_lung_cua",
+    "guong_giuong"
+   ],
+   "sao": [
+    4,
+    1
+   ]
+  }
+ },
+ "sao_kich_hoat": {
+  "5": [
+   "duong_dam",
+   "cua_thong_ban_cong",
+   "wc_giua_nha",
+   "nga_ba"
+  ],
+  "2": [
+   "wc_giua_nha",
+   "bep_wc",
+   "phong_ngu_tren_bep",
+   "nghia_trang"
+  ],
+  "9": [
+   "bep_doi_cua",
+   "phong_ngu_tren_bep",
+   "ban_tho_gio_thoi"
+  ],
+  "7": [
+   "cua_thong_ban_cong",
+   "guong_cua_chinh",
+   "cot_dien"
+  ],
+  "3": [
+   "cua_doi_nhau",
+   "nga_ba",
+   "cau_thang_cua"
+  ],
+  "1": [
+   "song_truoc"
+  ]
+ },
+ "dau_hieu_phong": {
+  "xa_ngang": [
+   "phong_ngu_chinh",
+   "phong_lam_viec"
+  ],
+  "guong_giuong": [
+   "phong_ngu_chinh"
+  ],
+  "guong_cua_chinh": [
+   "cua_chinh"
+  ],
+  "bep_doi_cua": [
+   "bep",
+   "cua_chinh"
+  ],
+  "bep_wc": [
+   "bep",
+   "ve_sinh"
+  ],
+  "wc_giua_nha": [
+   "ve_sinh"
+  ],
+  "phong_ngu_tren_bep": [
+   "phong_ngu_chinh",
+   "bep"
+  ],
+  "quay_lung_cua": [
+   "phong_lam_viec"
+  ],
+  "cau_thang_cua": [
+   "cua_chinh"
+  ],
+  "cua_thong_ban_cong": [
+   "cua_chinh"
+  ],
+  "ban_tho_gio_thoi": [
+   "ban_tho"
+  ],
+  "duong_dam": [
+   "cua_chinh"
+  ],
+  "nga_ba": [
+   "cua_chinh"
+  ],
+  "cot_dien": [
+   "cua_chinh"
+  ],
+  "minh_duong": [
+   "cua_chinh"
+  ],
+  "song_truoc": [
+   "cua_chinh"
+  ],
+  "nghia_trang": [
+   "cua_chinh",
+   "phong_ngu_chinh"
+  ],
+  "no_hau": [],
+  "nha_chu_l": [],
+  "cua_doi_nhau": [
+   "phong_ngu_chinh"
+  ]
+ },
+ "sao_lam_diu": {
+  "5": [
+   6,
+   7
+  ],
+  "2": [
+   6,
+   7
+  ],
+  "9": [
+   2,
+   8
+  ],
+  "3": [
+   9
+  ],
+  "7": [
+   1
+  ]
+ }
+}
