@@ -45,7 +45,7 @@ export default async function Page(p: P) {
       <TieuDeMuc cap={1} nho={`Tết ${d.nam.can_chi} · gia chủ ${d.chu.can_chi}`} lon={tieuDe} />
       <KetQuaXongDat d={d} />
       <p className="mt-6 text-sm text-fg-muted">Tính theo ngày sinh đầy đủ của gia chủ: <Link href="/tuoi-xong-dat" className="text-gold underline">công cụ xem tuổi xông đất</Link></p>
-      <CungTuoi namSinh={x.ns} namAm={namAm} bo="xong_dat" />
+      <CungTuoi namSinh={x.ns} canChi={d.chu.can_chi} namAm={namAm} bo="xong_dat" />
     </div>
   );
 }

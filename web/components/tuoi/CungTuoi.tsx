@@ -1,16 +1,11 @@
 // SEO-K — "Cùng tuổi {can chi} {năm}": link chéo giữa các trang theo năm sinh (mệnh, hướng hợp tuổi, làm nhà, xông đất).
-// Anchor có can chi (người ta tìm "tuổi Canh Ngọ 1990"), không chỉ con số. Chỉ dựng link — không tính gì.
+// Anchor có can chi (người ta tìm "tuổi Canh Ngọ 1990"), không chỉ con số. Chỉ dựng link — can chi do ENGINE trả
+// (trang gọi truyền vào), web không tự tính (CLAUDE.md: một bộ tính duy nhất).
 import Link from "next/link";
 import { duongTuoi } from "@/lib/kien-thuc";
 import { NAM_SINH_SEO, duongLamNha, duongXongDat } from "@/lib/tuoi-dan-gian";
 
-const CAN = ["Canh", "Tân", "Nhâm", "Quý", "Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ"];
-const CHI = ["Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi"];
-/** Can chi năm âm lịch theo chu kỳ 60 (năm có đuôi 0 = Canh, năm chia 12 dư 0 = Thân) — chỉ để đặt chữ cho link. */
-export const canChiNam = (n: number) => `${CAN[n % 10]} ${CHI[n % 12]}`;
-
-export function CungTuoi({ namSinh, namAm, bo }: { namSinh: number; namAm: number; bo?: "huong" | "lam_nha" | "xong_dat" }) {
-  const cc = canChiNam(namSinh);
+export function CungTuoi({ namSinh, canChi: cc, namAm, bo }: { namSinh: number; canChi: string; namAm: number; bo?: "huong" | "lam_nha" | "xong_dat" }) {
   const ds: [string, string][] = [];
   if (namSinh >= 1950 && namSinh <= 2025) ds.push([`/bat-tu/menh-theo-nam/sinh-nam-${namSinh}-menh-gi`, `Sinh năm ${namSinh} mệnh gì`]);
   if (bo !== "huong" && NAM_SINH_SEO.includes(namSinh)) ds.push([duongTuoi(`tuoi-${namSinh}`), `Tuổi ${cc} ${namSinh} hợp hướng nào`]);

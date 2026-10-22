@@ -348,3 +348,36 @@ Bảng 308 (`next.config.mjs:6-18`): 15 cụm + 2 trang + mẫu tuổi, mỗi m�
 - Số liệu nội dung: script nháp `sim2.py` / `sim3.py` trong thư mục nháp này, gọi `app.kb.trang.danh_sach()` / `lay()` và `phongthuy_tuoi.tuoi()`; "phần riêng" = tỷ lệ cụm 6 từ (shingle) chỉ xuất hiện ở một trang trong cùng họ. Đây là chỉ số tương đối, không phải con số Google dùng.
 - Không chạy `kiem-tra-seo.mjs` vì cần engine + CMS + mạng; lỗi P0 đằng nào bộ rà hiện tại cũng không bắt được.
 - Không sửa tệp nào trong repo, không commit.
+
+---
+
+## GoogleOther — chặn (2026-10-22, chủ dự án giao em quyết)
+
+| | Mở | Chặn (đã chọn) |
+|---|---|---|
+| Google Search, AI Overviews, Discover | Không đổi | **Không đổi** — chỉ Googlebot quyết định; Google ghi rõ luật cho GoogleOther không ảnh hưởng Search |
+| GoogleOther làm gì | Bot "đa dụng" cho các nhóm sản phẩm Google lấy nội dung công khai để **nghiên cứu, phát triển** (crawl một lần, ngoài Search) | — |
+| Lợi | Không có lợi ích đo được cho hieuban.com (không đem lượt truy cập, không ghi nguồn) | Bớt tải máy chủ (mọi trang render động, mỗi lượt bot = một lần chạy hàm `sin1`); đúng tinh thần BM-2: nội dung không bị lấy ngoài mục đích tìm kiếm/trích dẫn |
+| Hại | Tốn tài nguyên; nội dung có thể dùng cho mục đích ta không kiểm soát | Gần như không — nếu sau này Google dùng GoogleOther cho một sản phẩm đem traffic thì mở lại một dòng |
+
+Làm: `web/app/robots.ts` thêm `GoogleOther`, `GoogleOther-Image`, `GoogleOther-Video` vào nhóm `Disallow: /` (e2e `seo-k.spec.ts`).
+
+## SEO-L — đề xuất tiếp theo (chờ chủ dự án chọn)
+
+Xếp theo lợi ích ước tính cho khâu THU HÚT. Mục ★ là nhạy thời vụ (Tết Đinh Mùi 2027 = 06/02/2027 — Google cần 6–10 tuần
+để xếp hạng trang mới, nên làm trong tháng 11/2026).
+
+| # | Đề xuất | Vì sao | Công |
+|---|---|---|---|
+| 1 ★ | **Trang trụ theo năm**: `/tuoi-xong-dat/2027` (bảng 46 tuổi gia chủ → tuổi hợp), `/xem-tuoi-lam-nha/2027` (tuổi nào làm nhà, cưới hỏi được năm 2027: Kim lâu/Hoang ốc/Tam tai cho 1960–2005) | Lấp lỗ cây URL (audit P2: `/xem-tuoi-lam-nha/2026` đang 404); bắt cụm "tuổi xông đất 2027", "tuổi làm nhà 2027" — lượng tìm rất lớn quanh Tết; link xuống 46 trang con | Engine thêm route gộp năm (tính sẵn có), web 2 trang |
+| 2 ★ | **Xem ngày tốt theo việc**: `/xem-ngay-tot/{viec}-thang-{m}-{yyyy}` cho cưới hỏi, động thổ, nhập trạch, khai trương, xuất hành, mua xe (6 việc × 13 tháng) | Cụm "ngày tốt cưới hỏi tháng 12", "ngày đẹp khai trương 2027" lượng tìm lớn; dữ liệu nghi/kỵ từng ngày đã có → mỗi trang khác nhau thật, không mỏng | Engine lọc ngày theo mã việc (có sẵn), web 1 khuôn |
+| 3 | **Đổi lịch âm ↔ dương** `/doi-lich-am-duong` + `/lich-am/{yyyy}` (bảng 12 tháng, Tết, tháng nhuận) | "lịch âm hôm nay", "đổi ngày âm sang dương" thuộc nhóm tìm nhiều nhất VN; engine có Hồ Ngọc Đức; dẫn sang ngày tốt + hồ sơ | Nhỏ |
+| 4 | **Engine lỗi → 503 thay 404** (audit P1 còn mở) | Mỗi lần Render khởi động lại, ~600 trang KB trả 404 → Google có thể gỡ chỉ mục; 503 giữ chỉ mục | Nhỏ (`lib/kien-thuc.ts` `lay`) |
+| 5 | **Ngày cập nhật thật cho KB** (audit P1 chờ quyết): sổ `ngay_cap_nhat.json` sinh tự động trong CI = ngày đổi băm nội dung từng trang | Hiện ~600 trang cùng một ngày 07/10 → Google bỏ qua lastmod; trang vừa sửa ở SEO-K không được báo "mới" | Nhỏ–vừa |
+| 6 | **Bản .md cho họ trang còn thiếu** (ngày tốt, làm nhà, xông đất, hướng xấu năm, lá số mẫu, pháp lý) | AI trả lời trích theo .md; đúng khuôn SEO-D | Vừa |
+| 7 | **Ảnh trong sitemap** (`<image:image>` trỏ ảnh `/og?mang=…`) | Ảnh minh hoạ mới vào Google Hình ảnh nhanh hơn | Nhỏ |
+| 8 | **IndexNow hằng ngày cho trang ngày mới** (cron) | Bing/Cốc Cốc… biết trang ngày sắp tới ngay | Nhỏ |
+| 9 | **Form công cụ có trong HTML máy chủ + `autocomplete`** (audit P1-7) | Agent AI (ChatGPT/Claude đọc HTML) dùng được công cụ; trình duyệt tự điền ngày sinh | Nhỏ |
+| 10 | **CTA bài blog theo chủ đề** + metadata đủ cho `/ban-than`, `/the/[ma]`, `/hop-doi/[ma]` (audit P2) | Bài blog dẫn đúng công cụ; thẻ chia sẻ hiện đúng tiêu đề trên Zalo/Facebook (khâu MỜI) | Nhỏ |
+
+Đề xuất làm trước: **1 + 2 (★, trước Tết)**, rồi 4, 5, 3.

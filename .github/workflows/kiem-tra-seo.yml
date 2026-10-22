@@ -1,0 +1,43 @@
+# SEO-K — chạy bộ rà SEO trên site thật bằng một cú bấm (GitHub → Actions → "Kiểm tra SEO" → Run workflow).
+# Quét toàn sitemap (+ 30 ngày đầu của sitemap ngày): lỗi SEO, schema E-E-A-T, TTFB p50/p90/p99, byte HTML.
+# Kết quả hiện ở trang tóm tắt của lượt chạy (Summary). Máy chạy GitHub ở Mỹ → TTFB cộng thêm ~150–250 ms đường
+# truyền tới Singapore; dùng để so giữa các lần đo, không phải số người dùng Việt Nam thấy.
+name: Kiểm tra SEO
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Địa chỉ site"
+        default: "https://hieuban.com"
+        required: true
+permissions:
+  contents: read
+jobs:
+  ra-seo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Rà SEO
+        env:
+          URL_SITE: ${{ inputs.url }}
+        run: |
+          set +e
+          node web/scripts/kiem-tra-seo.mjs "$URL_SITE" | tee ket-qua.txt
+          ma=${PIPESTATUS[0]}
+          {
+            echo "## Kiểm tra SEO — $URL_SITE"
+            echo '```'
+            grep -E "^Sitemap:|^TTFB|^Chậm nhất|^  [0-9]+ ms|^LỖI|^CẢNH BÁO" ket-qua.txt
+            echo '```'
+            echo "<details><summary>Toàn bộ kết quả</summary>"
+            echo
+            echo '```'
+            tail -n 300 ket-qua.txt
+            echo '```'
+            echo "</details>"
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit $ma

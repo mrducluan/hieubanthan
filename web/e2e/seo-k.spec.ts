@@ -3,6 +3,7 @@
 import { test, expect } from "@playwright/test";
 import { laLinkNoiBo, sanitizeNotFairArticleHtml } from "../lib/notfair-article";
 import { catTrang, docSoTrang, duongTrangSo, soTrang } from "../lib/phan-trang";
+import { vanHanh } from "../lib/van-hanh";
 
 test("NotFair: link ra ngoài gắn sponsored nofollow, link về hieuban.com giữ follow", () => {
   expect(laLinkNoiBo("/than-so")).toBe(true);
@@ -65,4 +66,20 @@ test("công cụ có WebApplication riêng; từ điển có @id từng thuật 
   expect(ln).toContain('"@type":"WebPage"');
   expect(ln).toContain('href="/phong-thuy/huong-hop-tuoi/tuoi-1990"');
   expect(ln).toContain("Cùng tuổi Canh Ngọ 1990");
+});
+
+test("chân trang + schema: kênh X (Twitter) hiện khi đặt env MXH_X (chỉ link https)", () => {
+  const cu = process.env.MXH_X;
+  process.env.MXH_X = "https://x.com/vi-du";
+  expect(vanHanh().mangXaHoi).toContainEqual({ ten: "X (Twitter)", url: "https://x.com/vi-du" });
+  process.env.MXH_X = "http://x.com/khong-https";
+  expect(vanHanh().mangXaHoi.some((m) => m.ten.startsWith("X"))).toBe(false);
+  if (cu === undefined) delete process.env.MXH_X; else process.env.MXH_X = cu;
+});
+
+test("robots: chặn GoogleOther, Googlebot vẫn được vào", async ({ request }) => {
+  const rb = await (await request.get("/robots.txt")).text();
+  const nhom = rb.split(/\n\s*\n/).find((n) => /User-Agent: GoogleOther\b/i.test(n)) ?? "";
+  expect(nhom).toMatch(/Disallow: \/\s*$/m);
+  expect(rb).not.toMatch(/User-Agent: Googlebot/i);       // Googlebot theo nhóm "*" (mở)
 });

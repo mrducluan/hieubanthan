@@ -45,7 +45,7 @@ export default async function Page(p: P) {
       <KetQuaLamNha d={d} />
       <p className="mt-6 text-sm text-fg-muted">Tính cho chính xác theo ngày sinh của bạn: <Link href="/xem-tuoi-lam-nha" className="text-gold underline">công cụ xem tuổi làm nhà</Link> ·{" "}
         <Link href={duongLamNha(x.n + 1, x.ns)} className="text-gold underline">năm {x.n + 1}</Link></p>
-      <CungTuoi namSinh={x.ns} namAm={namAm} bo="lam_nha" />
+      <CungTuoi namSinh={x.ns} canChi={d.can_chi} namAm={namAm} bo="lam_nha" />
     </div>
   );
 }

@@ -49,7 +49,7 @@ export function KhungChanTrang({ cot, chu }: { cot: readonly CotChanTrang[]; chu
             <ul className="mt-5 flex flex-wrap gap-2" aria-label="Mạng xã hội">
               {vh.mangXaHoi.map((m) => (
                 <li key={m.ten}>
-                  <a href={m.url} target="_blank" rel="noopener noreferrer me"
+                  <a href={m.url} target="_blank" rel="noopener noreferrer me" aria-label={`Hiểu Bản Thân trên ${m.ten}`}
                     className="inline-flex h-8 items-center rounded-full border border-line px-3 text-xs text-fg-muted hover:border-gold hover:text-fg">
                     {m.ten}
                   </a>

@@ -38,16 +38,34 @@
    thêm `NOTFAIR_SEO_API_KEY` (cùng giá trị như dự án web, Production + Preview) → Redeploy CMS. Rồi vào CMS → Bài viết →
    "Bài trao đổi NotFair — nhập vào CMS để sửa" → Nhập → sửa → Xuất bản. Giữ nguyên link của đối tác + dòng ghi nguồn cuối bài.
 4f. [x] **Audit AIO/SEO — anh đã quyết 7 mục (2026-10-21, SEO-K)**. Còn chờ anh: ngày cập nhật thật cho kho (`CAP_NHAT`),
-   slug NotFair có dấu, `/ung-ho` có index không, `GoogleOther` chặn hay mở (bảng đầu `docs/AUDIT-AIO-SEO-2026-10.md`).
-4h. [ ] **Sau khi merge SEO-K (5 phút):** (1) **deploy engine Render TRƯỚC web** (web mới gọi `/v1/phongthuy/tuoi-gop`);
-   (2) CMS chạy migration `20261021_090000_seo_k_tuoi_gop` khi deploy (đổi mẫu cụm "Tuổi hợp hướng" sang trang gộp; log ghi
-   năm nào có ghi đè cả nam lẫn nữ → anh gộp tay); (3) Search Console → Sơ đồ trang web → gửi thêm
-   `https://hieuban.com/sitemap-ngay.xml`; (4) chạy `node web/scripts/kiem-tra-seo.mjs https://hieuban.com` và gửi em dòng
-   **TTFB p50/p90** — em dựa vào số này đề xuất bật bộ nhớ đệm HTML (đụng CSP-2) hay không.
+   slug NotFair có dấu, `/ung-ho` có index không (bảng đầu `docs/AUDIT-AIO-SEO-2026-10.md`). `GoogleOther`: em đã chặn
+   (2026-10-22, không ảnh hưởng Google Search — lý do ở audit). Đề xuất SEO tiếp theo chờ anh chọn: audit mục "SEO-L".
+4h. [ ] **Sau khi merge SEO-K (15 phút) — làm theo thứ tự:**
+   - **(1) Engine (Render) lên bản mới.** Merge vào `main` thì Render và Vercel **tự** deploy cùng lúc, anh không phải bấm
+     theo thứ tự. Chỉ cần kiểm: Render → dịch vụ `hieubanthan-engine-sg` → **Events** → dòng mới nhất "Deploy live" có
+     commit SEO-K (thường 5–10 phút). Nếu sau 15 phút vẫn "Build failed"/"Deploy failed" → bấm **Manual Deploy → Deploy
+     latest commit**, rồi báo em log. Trong vài phút web lên trước engine, 46 trang tuổi hợp hướng trả 404 tạm — web
+     KHÔNG lưu cache lỗi (chỉ cache phản hồi 200), engine lên là trang tự hết lỗi, không cần redeploy web.
+     Kiểm nhanh: mở `https://hieuban.com/phong-thuy/huong-hop-tuoi/tuoi-1990` → thấy "Nam mệnh Khảm, nữ mệnh Cấn" là xong;
+     mở `https://hieuban.com/phong-thuy/huong-hop-tuoi/tuoi-1990-nam` → tự chuyển về trang trên.
+   - **(2) CMS: xem log migration.** Vercel → dự án **CMS** (cms.hieuban.com) → **Deployments** → bản Production mới nhất
+     (Ready) → **Build Logs** → ô tìm kiếm gõ `SEO-K`. Có 3 khả năng:
+     không thấy dòng nào = anh chưa sửa trang tuổi nào trong CMS, **xong**;
+     `SEO-K tuổi nam: đổi N` = N trang đã tự chuyển sang trang gộp, **xong**;
+     `TRÙNG đích bỏ qua: /phong-thuy/huong-hop-tuoi/tuoi-1990-nu` = năm 1990 anh sửa riêng cả nam lẫn nữ → em giữ bản
+     nam; vào CMS → **Trang website** → mở `…/tuoi-1990` → chép phần chữ cần giữ từ bản `…/tuoi-1990-nu` sang → Xuất bản
+     → xoá bản `-nu`. Build CMS báo đỏ ở bước `payload migrate` → gửi em ảnh log.
+   - **(3) Search Console** → Sơ đồ trang web → ô "Thêm sơ đồ trang web mới" gõ `sitemap-ngay.xml` → Gửi.
+   - **(4) Đo tốc độ (TTFB) — không cần cài gì:** GitHub → repo `hieubanthan` → tab **Actions** → bên trái chọn
+     **"Kiểm tra SEO"** → nút **Run workflow** (để nguyên `https://hieuban.com`) → Run. Chờ 15–30 phút (quét ~950 trang)
+     → bấm vào lượt chạy → mục **Summary** có dòng `TTFB (… trang): p50 … ms · p90 … ms` → chụp/chép gửi em.
+     (Lượt chạy báo đỏ nghĩa là bộ rà tìm thấy LỖI SEO — danh sách nằm ngay dưới, gửi em luôn.) Máy GitHub đặt ở Mỹ nên
+     số cao hơn người dùng Việt Nam thấy ~150–250 ms; em tính phần đó khi đề xuất.
 4i. [ ] **sameAs cho Google nhận ra thương hiệu + anh (5 phút, Vercel → web → Environment Variables):** kênh của site
    `MXH_FACEBOOK`, `MXH_YOUTUBE`, `MXH_TIKTOK`, `MXH_ZALO`, `MXH_INSTAGRAM`, `MXH_LINKEDIN`, `MXH_X`, `MXH_THREADS` (link https);
    hồ sơ cá nhân của anh `CHUYEN_GIA_SAME_AS_DUC_LUAN` = các link https cách nhau dấu phẩy (Facebook cá nhân, YouTube,
-   LinkedIn…). Chỉ link thật của anh — em không tự điền.
+   LinkedIn…). Chỉ link thật của anh — em không tự điền. Đặt biến nào thì chân trang tự hiện nút kênh đó (vd `MXH_X` →
+   nút "X (Twitter)") và schema `sameAs` tự có — xong bấm **Redeploy** dự án web.
 5. [x] **Search Console + GA4 trong GTM** (mục H) — anh báo xong 2026-10-09
 5b. [ ] **Render engine** (mục D2): kiểm vùng Singapore + gói Starter, bấm *Save, rebuild, and deploy* sau khi sửa biến
    (anh đang đặt `NHAT_KY_HOI`, `SUPABASE_*`, `LLM_LUOT_*` — 2026-10-09)

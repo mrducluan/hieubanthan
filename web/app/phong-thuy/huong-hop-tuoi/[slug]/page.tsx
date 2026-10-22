@@ -194,7 +194,7 @@ export default async function Page({ params: thamSo }: Props) {
         <Button asChild><Link href="/phong-thuy">Mở công cụ <ArrowRight aria-hidden /></Link></Button>
       </aside>
 
-      <CungTuoi namSinh={t.nam} namAm={namAm} bo="huong" />
+      <CungTuoi namSinh={t.nam} canChi={t.can_chi} namAm={namAm} bo="huong" />
       <nav className="mt-8" aria-labelledby="tuoi-khac">
         <h2 id="tuoi-khac" className="text-xl">Năm sinh khác</h2>
         <ul className="mt-3 flex flex-wrap gap-2 text-sm">
