@@ -31,7 +31,7 @@ site nhận và hiện thông báo, kể cả khi tab đã đóng.
    → đăng ký SW bằng script có nonce; thêm `worker-src 'self'` vào `lib/csp.ts`, kiểm bằng `e2e/csp.spec.ts`.
 2. **Khoá VAPID** (cặp khoá ES256, tạo một lần) — env `VAPID_PUBLIC_KEY` (public, đưa xuống trình duyệt), `VAPID_PRIVATE_KEY`,
    `VAPID_SUBJECT=mailto:contact@hieuban.com`. Không hardcode.
-3. **Bảng `push_dang_ky`** (migration kế tiếp — 0020, vì 0019 đã dùng cho kiểm chứng "Xem lá số 2 người"; chờ duyệt): `user_id` (bắt buộc đăng nhập — để xoá được, không lưu ẩn danh),
+3. **Bảng `push_dang_ky`** (migration 0019, chờ duyệt): `user_id` (bắt buộc đăng nhập — để xoá được, không lưu ẩn danh),
    `endpoint`, `p256dh`, `auth`, `tao_luc`, `lan_cuoi_gui`; RLS chủ sở hữu; xoá khi 410 Gone. Không lưu nội dung nhắc trong
    bảng này (nội dung lấy từ `nhac_viec` lúc gửi).
 4. **Gửi**: cron ngày (`/api/cron/nhac-day`, service role) — mỗi sáng 8:00 giờ VN gom `nhac_viec` có `ngay = hôm nay`
@@ -47,5 +47,20 @@ site nhận và hiện thông báo, kể cả khi tab đã đóng.
 
 **Thay thế rẻ hơn nếu chưa muốn Web Push**: email nhắc (SMTP/Resend, cũng cần dependency hoặc REST), hoặc chỉ `.ics` như hiện tại.
 
+## 2b. GĐ1 — đã làm (chủ dự án duyệt 2026-10-21)
+
+| Việc | Ở đâu |
+|---|---|
+| Mã hoá RFC 8291 (aes128gcm) + JWT VAPID ES256 bằng `node:crypto` — **không thêm dependency**: gói `web-push` thực tế là **MPL-2.0** (không phải MIT) và kéo 5 gói con. Khớp từng byte test vector RFC 8291 phụ lục A; đã đối chiếu `web-push` 3.6.7 / `http_ece` làm oracle ngoài repo | `web/lib/web-push.ts`, test `web/e2e/web-push.spec.ts` |
+| Service worker chỉ cho push (không chặn fetch, không cache); chỉ đăng ký khi người dùng bấm "Bật nhắc" | `web/public/sw.js`, `web/lib/web-push-trinh-duyet.ts` |
+| Bảng `push_dang_ky` **migration 0019**: bắt buộc đăng nhập, RLS chủ sở hữu (xem/xoá), ghi qua `dang_ky_push()`; endpoint chỉ nhận máy chủ push của Google/Mozilla/Apple/Microsoft (CHECK trong DB + kiểm lại khi gửi); ≤ 5 thiết bị/người; 404/410 hoặc lỗi 5 lần liền → xoá | `supabase/migrations/0019_push_dang_ky.sql`, test `supabase/kiem_thu/thu_push_0019.sql` |
+| Cron 8:03 sáng giờ VN `/api/cron/hang-ngay` (Bearer `CRON_SECRET`; **Vercel Hobby chỉ cho 2 cron** nên gộp gửi nhắc + dọn dữ liệu hết hạn vào một route; chạy tay từng việc: `/api/cron/nhac-day`, `/api/cron/don-du-lieu-hoc`): `push_hang_doi(ngày)` → gửi → `push_ket_qua()`; ≤ 1 thông báo/người/ngày (chạy lại không trùng); nội dung = nhãn mốc + đường dẫn trong site | `web/lib/cron.ts`, `web/app/api/cron/hang-ngay/route.ts`, `web/vercel.json` |
+| Khoá công khai `GET /api/push/khoa` (chưa đặt env → 404, nút tự ẩn) | `web/app/api/push/khoa/route.ts` |
+| Nút "Bật nhắc trên điện thoại" dưới "Mốc bạn đã đánh dấu" (Hôm nay) và trong Tài khoản; chưa đăng nhập → mời đăng nhập; iPhone chưa cài → hướng dẫn 2 bước; bị chặn → chỉ cách mở lại. Bật = chép mốc sắp tới lên tài khoản; sau đó "Nhắc tôi" tự lưu lên tài khoản. Đăng xuất / xoá tài khoản → huỷ đăng ký thiết bị | `web/components/khung/BatNhacPush.tsx` |
+| Sửa kèm: mã nhắc có dấu ("kd.ungky.tý") bị từ chối → bỏ dấu (`maKhongDau`) | `web/lib/nhac-viec.ts` |
+
+Đo: `chart_interacted{kind=push_bat|push_tat|push_mo}` (`push_mo` = mở trang từ thông báo, link mang `?tu=push`).
+Env: `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (tạo bằng `node web/scripts/tao-khoa-vapid.mjs`).
+
 ## 3. Thứ tự đề xuất
-GĐ0 (xong) → đo 2–4 tuần → nếu ≥ 10% người có hồ sơ bấm "Nhắc tôi" → GĐ1 Web Push (anh duyệt `web-push` + migration 0020 + VAPID env).
+GĐ0 (xong) → đo 2–4 tuần → nếu ≥ 10% người có hồ sơ bấm "Nhắc tôi" → GĐ1 Web Push (anh duyệt `web-push` + migration 0019 + VAPID env).

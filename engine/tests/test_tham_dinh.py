@@ -48,13 +48,14 @@ def test_trang_nhap_ai_khong_gan_ten_tac_gia(so_dang_ky):
 
 
 def test_da_tham_dinh_thi_doi_trang_thai(so_dang_ky):
-    so_dang_ky["trang"]["que/que-1-can"] = {"nguoi": "duc-luan", "ngay": "2026-10-10"}
+    # SEO-L4: ngày sửa thật của trang lấy từ sổ băm — ngày thẩm định MỚI HƠN ngày sửa thì thành ngày cập nhật.
+    so_dang_ky["trang"]["que/que-1-can"] = {"nguoi": "duc-luan", "ngay": "2026-12-10"}
     t = trang.lay("que", "que-1-can")
-    assert t["tham_dinh"] == {"nguoi": "duc-luan", "ngay": "2026-10-10"}
+    assert t["tham_dinh"] == {"nguoi": "duc-luan", "ngay": "2026-12-10"}
     assert t["trang_thai"] == "da_duyet"
     assert t["tac_gia"] is None            # thẩm định ≠ viết: vẫn ghi rõ biên soạn có AI hỗ trợ
     assert t["bien_soan"] == "ai_ho_tro"
-    assert t["cap_nhat"] == "2026-10-10"   # ngày thẩm định mới hơn → ngày cập nhật trang
+    assert t["cap_nhat"] == "2026-12-10"   # ngày thẩm định mới hơn → ngày cập nhật trang
     muc = next(x for x in trang.danh_sach() if x["slug"] == "que-1-can")
     assert muc["trang_thai"] == "da_duyet" and muc["tham_dinh"]["nguoi"] == "duc-luan"
 

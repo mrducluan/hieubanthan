@@ -602,7 +602,7 @@ theo cảm tính; người dùng biết chắc nhất là **đời mình đã qu
 
 ## 10. Kiểm chứng "Xem lá số 2 người" + rà toàn bộ vòng HỌC (2026-10-22)
 
-### 10.1 Loại phiếu `hai_nguoi` (migration 0019, chủ dự án duyệt)
+### 10.1 Loại phiếu `hai_nguoi` (migration 0020, chủ dự án duyệt)
 
 - **Mã** do engine dựng (`luangiai/tuvi_hai_nguoi.py`): `hn.<tiêu chí>.<loại>.<quan hệ>` — tiêu chí `menh · can · chi ·
   cung_phi · tu_vi`, loại = kiểu quan hệ giữa hai năm sinh (tương sinh, tam hợp, Diên Niên…), quan hệ = lựa chọn của
@@ -613,7 +613,7 @@ theo cảm tính; người dùng biết chắc nhất là **đời mình đã qu
   HAI CHIỀU với hằng số engine (`TY_*`, `_ket_luan`) trong `tests/test_kiem_chung_ma.py`.
 - **Web**: hộp điểm mạnh / cần dung hoà dùng `HopNoiBat` với `KiemChungBai` `{loai: "hai_nguoi", phai: diem.phien_ban}`;
   "x% trong N người thấy đúng" khi ≥ 30 phiếu (một lời gọi `/api/kiem-chung/ty-le`). PostHog `tuvi_kiem_chung` chỉ mang
-  mã. Chưa chạy 0019 → hàm cũ trả false → route trả `{da_luu:false, ly_do:"tu_choi"}`, Sentry báo một lần mỗi loại mỗi
+  mã. Chưa chạy 0020 → hàm cũ trả false → route trả `{da_luu:false, ly_do:"tu_choi"}`, Sentry báo một lần mỗi loại mỗi
   phiên bản máy chủ; người dùng vẫn thấy "Cảm ơn".
 - **Tự học** (cùng luật mục 3, `doi_song_chung._ap_hoc`): `/api/tuvi/hop-tham` gửi engine `trong_so` (mã `hn.*` ≥ 30
   phiếu) + `ca_nhan` (phiếu `hai_nguoi` của chính người đăng nhập). Hộp ≥ 100 phiếu & < 40% đúng bị bỏ khỏi hộp, dòng
@@ -631,7 +631,7 @@ theo cảm tính; người dùng biết chắc nhất là **đời mình đã qu
 | `doi_song` Bát tự `ds.bt.*` (+ `ds.bt.van_han.*`) | như trên, phái `tu_binh` | như trên | có | có | như trên |
 | `doi_song` Thần số `ds.thanso.*` | như trên, phái `pitago` | như trên | có | **mới có** (`ban_do_con_so.bao_cao`, route `/api/thanso/ban-do-con-so`) | như trên |
 | `doi_song` Phong thuỷ / Kinh Dịch | `NhaCuaBan`, `DocQue` | — | — | — | **chưa có mã** (`ma_mau`) — chưa có phiếu |
-| `hai_nguoi` `hn.*` | `HopThamTuVi` | như trên (0019) | có | có | như trên |
+| `hai_nguoi` `hn.*` | `HopThamTuVi` | như trên (0020) | có | có | như trên |
 | Thần số hỏi đáp | `GopYCauTraLoi` | `/api/thanso/phan-hoi` → engine `chu-ky-so` → `gui_phan_hoi_thanso` → `thanso_phan_hoi` + cụm | — | — (cụm → người duyệt) | hoc (cụm bất thường) |
 
 **Lỗi tìm được và đã sửa** (đều có test):
@@ -649,7 +649,7 @@ theo cảm tính; người dùng biết chắc nhất là **đời mình đã qu
 
 **Kiểm thử mới**: `engine/tests/test_kiem_chung_ma.py` liệt kê mã thật (60 lá Tử vi, golden Bát tự, 40 hồ sơ thần số,
 1.500 cặp hai người, phi hoá 30 lá, nhịp 5 phái) và kiểm từng mã với hàm SQL dựng lại từ CHÍNH tệp migration mới nhất;
-có `KIEM_CHUNG_PGDB` thì chạy luôn hàm SQL thật (job CI `sao-that`). `supabase/kiem_thu/thu_kiem_chung_0019.sql`
+có `KIEM_CHUNG_PGDB` thì chạy luôn hàm SQL thật (job CI `sao-that`). `supabase/kiem_thu/thu_kiem_chung_0020.sql`
 (ASSERT). `web/e2e-that/kiem-chung-that.spec.ts`: ghi phiếu → tỉ lệ ≥ 30 → đổi ý không cộng dồn → mã ngoài danh mục bị
 từ chối có lý do → nút trên /tu-vi ghi `hai_nguoi` → hộp < 40% bị hạ → phiếu "chưa đúng" của người đăng nhập xếp cuối.
 

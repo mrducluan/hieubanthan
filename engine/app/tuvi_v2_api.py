@@ -109,7 +109,7 @@ class HopThamInput(BaseModel):
     nguoi_kia: NguoiKiaInput
     quan_he: Literal["nguoi_yeu", "vo_chong", "ban_be", "dong_nghiep", "doi_tac", "sep", "cha_me_con",
                      "gia_dinh"] = "nguoi_yeu"
-    # Tầng HỌC (kiểm chứng loại `hai_nguoi`, migration 0019): web máy chủ gửi — chỉ mã + số đếm, không chữ người dùng.
+    # Tầng HỌC (kiểm chứng loại `hai_nguoi`, migration 0020): web máy chủ gửi — chỉ mã + số đếm, không chữ người dùng.
     trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)
     ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
 

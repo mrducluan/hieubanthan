@@ -283,7 +283,7 @@ def _muc_tong(tong: int) -> str:
 
 
 def _ap_hoc_hop(hop: list[dict], trong_so: dict | None, ca_nhan: dict | None, theo_ma: dict[str, dict]) -> list[dict]:
-    """Tầng HỌC (kiểm chứng loại `hai_nguoi`, migration 0019) — cùng luật LG-ĐS (`doi_song_chung._ap_hoc`): gắn
+    """Tầng HỌC (kiểm chứng loại `hai_nguoi`, migration 0020) — cùng luật LG-ĐS (`doi_song_chung._ap_hoc`): gắn
     `ty_le_dung`/`so_phieu` khi ≥ 30 phiếu; hộp ≥ 100 phiếu và < 40% đúng → bỏ khỏi hộp, thêm dòng "Đang xem lại" vào
     căn cứ của tiêu chí (web hiện ở "Vì sao nói vậy"); hộp chính người xem bấm "chưa đúng" xếp cuối. Không đổi điểm, mức,
     lời; không sinh câu mới. `hop` = mọi ứng viên theo thứ tự ưu tiên (nơi gọi cắt ≤ 3 SAU bước này)."""
@@ -306,7 +306,7 @@ def cham_diem(ban: dict, kia: dict, quan_he: str, vao_ban: list[dict], ban_vao: 
     "ngay_duong"?: ngày sinh dương lịch (date hoặc ISO) — có thì cung phi tính năm theo Lập xuân}. `vao_ban` = đường bay tứ hoá can
     năm người kia vào lá bạn ({hoa, sao, den_cung, xung_cung}); `ban_vao` = chiều ngược lại (có khi đủ lá hai người).
     `trong_so` = {mã: {dung, chua_dung}} (tỉ lệ công khai), `ca_nhan` = {mã: "dung" | "chua_dung"} (phiếu của chính người
-    xem) — chỉ chọn/xếp hộp (`_ap_hoc_hop`), KHÔNG đổi điểm. Mã hộp: `hn.<tiêu chí>.<loại>.<quan hệ>` (khớp SQL 0019)."""
+    xem) — chỉ chọn/xếp hộp (`_ap_hoc_hop`), KHÔNG đổi điểm. Mã hộp: `hn.<tiêu chí>.<loại>.<quan hệ>` (khớp SQL 0020)."""
     if quan_he not in CUNG_TRONG_TAM:
         raise ValueError(f"Quan hệ không hợp lệ: {quan_he}")
     can_b, chi_b = lunar.can_chi_nam(int(ban["nam_am"]))

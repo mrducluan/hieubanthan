@@ -105,6 +105,8 @@ export interface TrangKienThuc {
   loai: LoaiTrang; slug: string; tieu_de: string; mo_ta: string; tra_loi_nhanh: string;
   muc: MucTrang[]; hoi_dap: { hoi: string; dap: string }[]; nguon: string[];
   trang_thai: string; index: boolean; cap_nhat: string;
+  /** SEO-L4: ngày đăng thật (sổ băm nội dung engine); `cap_nhat` = ngày sửa nội dung gần nhất. */
+  ngay_dang?: string;
   /** EEAT-1: mã chuyên gia (tra hồ sơ ở lib/chuyen-gia.ts). tac_gia chỉ có khi chuyên gia tự viết; tham_dinh chỉ khi đã duyệt. */
   chu_bien: string; tac_gia: string | null; tham_dinh: { nguoi: string; ngay: string } | null;
   /** GN-1: lời chính chuyên gia viết (2–4 câu kinh nghiệm), chỉ có trên trang người đó đã thẩm định / tự viết. */
@@ -122,7 +124,7 @@ export interface TrangKienThuc {
   /** SEO-J: link sang trang ngoài thư viện kiến thức (vd /phong-thuy/huong-hop-tuoi/tuoi-1990). Engine dựng đường dẫn. */
   lien_ket_ngoai?: { duong: string; ten: string }[];
 }
-export type MucLuc = Pick<TrangKienThuc, "loai" | "slug" | "tieu_de" | "mo_ta" | "trang_thai" | "index" | "cap_nhat"
+export type MucLuc = Pick<TrangKienThuc, "loai" | "slug" | "tieu_de" | "mo_ta" | "trang_thai" | "index" | "cap_nhat" | "ngay_dang"
   | "chu_bien" | "tac_gia" | "tham_dinh" | "bien_soan">;
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
@@ -142,6 +144,26 @@ async function lay<T>(duong: string): Promise<T | null> {
   }
 }
 
+/** SEO-L3 — trang MỘT mục: engine trả 404/422 = không có trang (→ notFound 404); engine lỗi / không kết nối được → NÉM
+ *  lỗi (→ error.tsx, HTTP 5xx) để Google giữ chỉ mục và thử lại, thay vì thấy ~600 trang 404 mỗi lần engine khởi động lại.
+ *  Phản hồi lỗi không vào bộ nhớ đệm (Next chỉ cache 200). */
+export class LoiEngine extends Error {}
+async function layTrangMot<T>(duong: string): Promise<T | null> {
+  let r: Response;
+  try {
+    r = await fetch(`${ENGINE_URL}${duong}`, {
+      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+      next: { revalidate: LAM_MOI },
+      signal: AbortSignal.timeout(20_000),
+    });
+  } catch {
+    throw new LoiEngine(`engine không kết nối được: ${duong}`);
+  }
+  if (r.ok) return (await r.json()) as T;
+  if (r.status === 404 || r.status === 422) return null;
+  throw new LoiEngine(`engine lỗi ${r.status}: ${duong}`);
+}
+
 export async function mucLuc(): Promise<MucLuc[]> {
   const ds = (await lay<{ trang: MucLuc[] }>("/v1/kb/trang"))?.trang;
   // Engine chưa sẵn sàng (vd lúc build, Render đang ngủ): KHÔNG cache bản rỗng 6 giờ —
@@ -151,7 +173,7 @@ export async function mucLuc(): Promise<MucLuc[]> {
 }
 
 export function trang(loai: LoaiTrang, slug: string): Promise<TrangKienThuc | null> {
-  return lay<TrangKienThuc>(`/v1/kb/trang/${loai}/${encodeURIComponent(slug)}`);
+  return layTrangMot<TrangKienThuc>(`/v1/kb/trang/${loai}/${encodeURIComponent(slug)}`);
 }
 
 export const duongTrang = (loai: LoaiTrang, slug: string) => `${CHU_DE[CHU_DE_THEO_LOAI[loai]]!.duong}/${slug}`;
@@ -180,7 +202,7 @@ export async function dsLaSoMau(): Promise<MucLaSoMau[]> {
   return d?.ds ?? [];
 }
 export function laSoMau(slug: string): Promise<LaSoMau | null> {
-  return lay<LaSoMau>(`/v1/tuvi/la-so-mau/${encodeURIComponent(slug)}`);
+  return layTrangMot<LaSoMau>(`/v1/tuvi/la-so-mau/${encodeURIComponent(slug)}`);
 }
 
 // SEO-F → SEO-K (2026-10-21): trang "tuổi X hợp hướng nào" GỘP nam + nữ cùng năm (46 trang 1960–2005;
@@ -216,7 +238,7 @@ export async function dsTuoiHuong(): Promise<MucTuoiHuong[]> {
   return d?.trang ?? [];
 }
 export function tuoiHuong(slug: string): Promise<TuoiHuong | null> {
-  return SLUG_TUOI.test(slug) ? lay<TuoiHuong>(`/v1/phongthuy/tuoi-gop/${slug}`) : Promise.resolve(null);
+  return SLUG_TUOI.test(slug) ? layTrangMot<TuoiHuong>(`/v1/phongthuy/tuoi-gop/${slug}`) : Promise.resolve(null);
 }
 
 // ---- EEAT-1: số trang theo chuyên gia (engine đếm từ sổ thẩm định) ----------------

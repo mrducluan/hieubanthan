@@ -31,6 +31,8 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
   const duong = cd.duong, tru = truCua(duong);
   const [tatCa, nd] = await Promise.all([mucLuc(), layNoiDungTrang(duong)]);
   const ds = tatCa.filter((t) => t.loai === cd.loai);
+  // SEO-L3: cụm rỗng = engine chưa trả mục lục (lỗi) → 5xx thay vì trang 200 rỗng (soft-404).
+  if (ds.length === 0) throw new Error("engine chưa trả mục lục kiến thức");
   return (
     <div className="mx-auto max-w-4xl">
       <JsonLd data={goiLd(
@@ -46,7 +48,6 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
       <h1 className="mt-3 text-4xl sm:text-5xl">{nd.dau.h1 ?? cd.ten}</h1>
       <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{cd.mo_ta}</LoiDanCms>
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-8" />
-      {ds.length === 0 && <p className="mt-8 text-fg-muted">Thư viện đang được tải lại, bạn quay lại sau ít phút nhé.</p>}
       <ul className="mt-8 grid gap-3 sm:grid-cols-2">
         {ds.map((t) => (
           <li key={t.slug}>

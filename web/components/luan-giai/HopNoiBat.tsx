@@ -19,7 +19,7 @@ export const LOAI_HOP: Record<LoaiHop, { nhan: string; Icon: LucideIcon }> = {
 };
 
 /** Bảng tỉ lệ "thấy đúng" của cả bài (một lời gọi, xem lib/ty-le-kiem-chung) + phái ghi kèm phiếu + loại phiếu
- *  (mặc định "doi_song"; "Xem lá số 2 người" dùng "hai_nguoi" — migration 0019). */
+ *  (mặc định "doi_song"; "Xem lá số 2 người" dùng "hai_nguoi" — migration 0020). */
 export const KiemChungBai = createContext<{ tyLe: BangTyLe; phai: string; tat?: boolean; loai?: "doi_song" | "hai_nguoi" }>(
   { tyLe: {}, phai: "nam_phai_viet" });
 

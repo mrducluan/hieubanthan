@@ -6,6 +6,7 @@ import { ghi } from "@/lib/do-luong";
 import { daNhac, taiIcs, themNhac, type NhacViec } from "@/lib/nhac-viec";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { luuNhacTaiKhoan } from "@/lib/tai-khoan-nhac";
+import { pushDangBatTrenMay } from "@/lib/web-push-trinh-duyet";
 import { cn } from "@/lib/utils";
 
 export function NhacToi({ ngay, ma, moDun, nhan, duong, className }: {
@@ -20,6 +21,8 @@ export function NhacToi({ ngay, ma, moDun, nhan, duong, className }: {
       const n = themNhac({ ngay, ma, mo_dun: moDun, nhan: nhan.slice(0, 80), duong });
       setDa(true);
       ghi("chart_interacted", { mo_dun: moDun, kind: "nhac_viec" });
+      // GĐ1 Web Push: thiết bị đã bật nhắc cho tài khoản này → mốc phải nằm trong tài khoản để máy chủ gửi đúng ngày.
+      if (nguoi && pushDangBatTrenMay(nguoi.id)) luuNhacTaiKhoan(nguoi.id, n).then(() => setTk("sẽ báo trên thiết bị đã bật nhắc")).catch(() => null);
       return n;
     } catch { return null; }
   };

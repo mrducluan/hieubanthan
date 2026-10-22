@@ -224,8 +224,8 @@ function KetQuaHopTham({ kq, yeuCau, onHoi, onLai }: {
       {d && <DiemHaiNguoi diem={d} />}
 
       {hop.length > 0 && d && (
-        // Kiểm chứng loại "hai_nguoi" (migration 0019): mã hn.* do engine dựng, phái = phiên bản luật chấm (hai_nguoi_1).
-        // Chưa chạy 0019 → máy chủ không lưu, PostHog vẫn đo (người dùng không thấy lỗi).
+        // Kiểm chứng loại "hai_nguoi" (migration 0020): mã hn.* do engine dựng, phái = phiên bản luật chấm (hai_nguoi_1).
+        // Chưa chạy 0020 → máy chủ không lưu, PostHog vẫn đo (người dùng không thấy lỗi).
         <KiemChungBai.Provider value={{ tyLe, phai: d.phien_ban, loai: "hai_nguoi" }}>
           <div className="grid gap-3 sm:grid-cols-2" data-testid="hai-nguoi-hop">
             {hop.map((h) => <HopNoiBat key={h.ma_mau ?? h.tieu_de} hop={h} />)}

@@ -1,4 +1,4 @@
--- Rollback 0019_kiem_chung_hai_nguoi.sql: xoá phiếu loại `hai_nguoi` (mất hẳn — đúng ý rollback; bắt buộc trước khi
+-- Rollback 0020_kiem_chung_hai_nguoi.sql: xoá phiếu loại `hai_nguoi` (mất hẳn — đúng ý rollback; bắt buộc trước khi
 -- trả ràng buộc cũ), trả ràng buộc `loai` và hàm kiem_chung_ma_hop_le về NGUYÊN VĂN 0017.
 delete from kiem_chung_phieu where loai = 'hai_nguoi';
 alter table kiem_chung_phieu drop constraint if exists kiem_chung_phieu_loai_check;

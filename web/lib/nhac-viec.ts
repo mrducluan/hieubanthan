@@ -17,6 +17,9 @@ export const NhacViec = z.object({
 });
 export type NhacViec = z.infer<typeof NhacViec>;
 const TOI_DA = 50;
+/** Mã nhắc từ chữ có dấu (vd chi "Tý" → "ty"): bỏ dấu, đ → d, chữ thường, ký tự khác → "_". */
+export const maKhongDau = (s: string) =>
+  s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/gi, "d").toLowerCase().replace(/[^a-z0-9_.+-]/g, "_");
 
 const nghe = new Set<() => void>();
 let daDoc = false;
@@ -29,7 +32,10 @@ function doc(): NhacViec[] {
     daDoc = true;
     try {
       const raw = JSON.parse(window.localStorage.getItem(KHOA_NHAC) ?? "[]");
-      cache = Array.isArray(raw) ? raw.map((x) => NhacViec.safeParse(x)).filter((k) => k.success).map((k) => k.data) : [];
+      // Mốc lưu trước bản sửa mã có dấu ("kd.ungky.tý") → chuẩn hoá mã + id khi đọc để vẫn nhận ra và lưu được lên tài khoản.
+      const chuan = (x: unknown) => (x && typeof x === "object" && typeof (x as { ma?: unknown }).ma === "string" && typeof (x as { ngay?: unknown }).ngay === "string"
+        ? { ...(x as object), ma: maKhongDau((x as { ma: string }).ma), id: `${(x as { ngay: string }).ngay}|${maKhongDau((x as { ma: string }).ma)}` } : x);
+      cache = Array.isArray(raw) ? raw.map((x) => NhacViec.safeParse(chuan(x))).filter((k) => k.success).map((k) => k.data) : [];
     } catch { cache = []; }
   }
   return cache;
@@ -48,6 +54,8 @@ export function themNhac(n: Omit<NhacViec, "id" | "tao_luc">): NhacViec {
   ghiXuong(ds.slice(-TOI_DA));
   return moi;
 }
+/** Mọi mốc đang lưu trên máy (KC-4 GĐ1: chép mốc sắp tới lên tài khoản khi bật nhắc qua thông báo). */
+export const dsNhacTrenMay = (): NhacViec[] => doc();
 export function xoaNhac(id: string): void { ghiXuong(doc().filter((x) => x.id !== id)); }
 export function daNhac(ngay: string, ma: string): boolean { return doc().some((x) => x.id === `${ngay}|${ma}`); }
 function dangKy(f: () => void) {

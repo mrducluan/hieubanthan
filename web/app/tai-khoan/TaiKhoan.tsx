@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { ViSao } from "@/components/tai-khoan/ViSao";
+import { BatNhacPush } from "@/components/khung/BatNhacPush";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 import { dangXuat, hoSoTaiKhoan, luuVaoTaiKhoan, useNguoiDung, xoaHoSoTaiKhoan, xoaTaiKhoan } from "@/lib/tai-khoan";
@@ -130,6 +131,7 @@ export function TaiKhoan() {
                 )}
               </>
             )}
+            <BatNhacPush />
             <div className="flex flex-wrap gap-2 border-t border-line/70 pt-4">
               <Button variant="ghost" size="sm" onClick={() => void dangXuat()}><LogOut aria-hidden /> Đăng xuất</Button>
               {tk && <Button variant="ghost" size="sm" onClick={() => setXacNhanXoa("tk")}><Trash2 aria-hidden /> Xoá hồ sơ khỏi tài khoản</Button>}

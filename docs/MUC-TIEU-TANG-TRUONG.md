@@ -37,7 +37,7 @@
 | 3 ★ | **Tuổi làm nhà / hướng xấu năm / tuổi xông đất** (TDG-1): công cụ + ~190 trang SEO theo năm sinh và năm (nhu cầu tìm kiếm mùa cuối năm, Tết). Đo `reading_started{mo_dun=tuoi_lam_nha|tuoi_xong_dat}`, lượt vào trang từ Search Console | **Đã làm (TDG-1)**. Tiếp: thẻ chia sẻ "tuổi xông đất nhà mình" (khâu mời bạn), nhắc mùa Tết |
 | 2 | **Hai trường phái thần số** Pitago ↔ Chaldea (TS-PHAI) — thêm lý do xem lại bài đọc; đo `school_switched` | **Đã làm**. Tiếp: hỏi đáp theo phái Chaldea, trang kiến thức "số kép 10–52" (SEO) |
 | 3 ★ | **Thưởng Sao cho chuỗi ngày ghé** (ngày thứ 7) — chuỗi đã đếm trên máy (HN-1); thưởng thật cần ghi ở máy chủ | Bảng điểm danh (migration), trần Sao/tháng |
-| 3 | Nhắc qua email / Web Push "thông điệp tuần" (người dùng tự bật) | SMTP / Web Push, trang huỷ đăng ký |
+| 3 ★ | **Web Push nhắc mốc** (KC-4 GĐ1): người dùng tự bật, ≤ 1 thông báo/ngày, 8:03 sáng. Đo `chart_interacted{kind=push_bat\|push_tat\|push_mo}` | **Đã làm (PR #112)** — chờ anh chạy 0019 + khoá VAPID. Tiếp: `docs/DE-XUAT-WEB-PUSH-VA-DOANH-THU.md` (Sáng nay của bạn, mời cài web app, gói "Nhịp của tôi") |
 | 4 ★ | **Chiến dịch mời** chỉnh trong `/quan-tri/cai-dat`: đổi mức thưởng, dải thông báo toàn site | **Đã làm (QT-2)** |
 | 4 ★ | "Xem hợp với ai": hợp đôi gửi link cho người kia tự nhập → cả hai thấy kết quả → hai tài khoản mới | **Đã làm (NHIP-1)**: nút ở thẻ "Chào lại" trang chủ tạo link mời tại chỗ; người được mời gửi lại kết quả |
 | 4 | Thẻ chia sẻ theo dịp (Tết, sinh nhật, năm mới cá nhân) | Mẫu thẻ OG. **NHIP-1** đã có thẻ "Hôm nay mình là Ngày cá nhân N — còn bạn?" (`/og/ngay`) |
