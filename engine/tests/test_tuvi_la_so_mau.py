@@ -72,4 +72,5 @@ def test_hoi_dap_luu_y_pha_cach_chi_mot_lan():
     from app.kb import tuvi_kb
     kq = tv.tra_loi("Cung Mệnh của tôi nói gì về tính cách?", "tham_khao",
                     sinh={"ngay": dt.date(1981, 11, 6), "ti": 4, "gioi_tinh": "nu"})
-    assert kq["cau_tra_loi"].count(tuvi_kb.luu_y_pha_cach()) == 1
+    assert sum(c.count(tuvi_kb.luu_y_pha_cach()) for c in kq["can_cu"]) == 1   # căn cứ: một lần
+    assert kq["cau_tra_loi"].count("Nét này dễ mờ đi") <= 1                      # thân bài: một lần

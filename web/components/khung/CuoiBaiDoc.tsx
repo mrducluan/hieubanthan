@@ -3,12 +3,15 @@
 // một lần mỗi mảng). Nghĩa "đọc xong" từng mảng: Thần số/chiều sâu = tới hết 4 thẻ cốt lõi / phần chiều sâu; Tử vi, Bát tự
 // = cuộn qua lá số + chi tiết + cách cục tới khối luận giải; Kinh Dịch = có lời quẻ và cuộn xuống dưới khung hỏi;
 // Phong thuỷ = qua la bàn + công cụ hướng nhà; Hợp đôi = hết phần so hai người; Hôm nay = hết thẻ ngày/tháng/năm.
-// + góp ý 1 chạm (feedback_submitted, huu_ich) + chỗ cho lời mời chia sẻ của mảng (Gate 2). Đặt SAU phần bài đọc.
+// + góp ý 1 chạm (feedback_submitted, huu_ich) + chỗ cho lời mời chia sẻ của mảng (Gate 2) + khối "Đọc tiếp về bạn" (CTA-1).
+// Đặt SAU phần bài đọc.
 import { useEffect, useRef, type ReactNode } from "react";
 import { batDauDoc, docXong } from "@/lib/do-luong";
+import { CuoiPhanXem } from "@/components/cta/CuoiPhanXem";
+import { MANG_TU_MO_DUN } from "@/lib/goi-y-cheo";
 import { GopY } from "./GopY";
 import { CtaCuoiBai } from "./CtaCuoiBai";
-import type { GoiMo } from "./GoiMoCheo";
+import { GoiMoCheo, type GoiMo } from "./GoiMoCheo";
 
 /** Ghi reading_started một lần khi `sanSang` (kết quả của mảng đã hiện). */
 export function useBatDauDoc(moDun: string, sanSang: boolean): void {
@@ -51,7 +54,13 @@ export function CuoiBaiDoc({ moDun, cauHoi, chiaSe, maYDinh, goiMo, khongCta = f
       <MocDocXong moDun={moDun} />
       <GopY moDun={moDun} cauHoi={cauHoi} />
       {chiaSe}
-      {!khongCta && <CtaCuoiBai moDun={moDun} maYDinh={maYDinh} goiMo={goiMo} />}
+      {/* Hợp nhất CTA-1 + KC-5: (1) KC-3 gợi mở theo ĐÚNG nỗi băn khoăn người dùng vừa hỏi (chỉ khi bài đọc có ý định);
+          (2) CTA-1 "Đọc tiếp về bạn" — luận giải nhỏ cá nhân sang mảng khác + Sao + Bản đồ 5 mảng + mời + ủng hộ.
+          Mảng chưa có trong CTA-1 → khối KC-5 cũ (CtaCuoiBai). Không hiện hai lưới gợi ý chồng nhau. */}
+      {!khongCta && (goiMo || maYDinh) && MANG_TU_MO_DUN[moDun] && <GoiMoCheo goiMo={goiMo} moDun={moDun} ma={goiMo ? undefined : maYDinh} />}
+      {!khongCta && (MANG_TU_MO_DUN[moDun]
+        ? <CuoiPhanXem mang={MANG_TU_MO_DUN[moDun]} />
+        : <CtaCuoiBai moDun={moDun} maYDinh={maYDinh} goiMo={goiMo} />)}
     </section>
   );
 }

@@ -56,6 +56,11 @@ def test_nhip_3_thang():
     for t in r["thang"]:
         assert {"thang", "nhuan", "phan", "can_chi", "tu", "den", "cung_goc", "chu_de", "muc", "nhan_muc",
                 "ly_do", "tu_hoa_thang", "goi_y", "cau_tu_soi"} <= set(t)
+        # NHIP-2: lời riêng từng tháng + học thuật tách sang can_cu
+        assert {"nhan_thang", "tieu_de_thang", "chu_de_thang", "hop", "can_cu", "diem_sang", "de_y",
+                "noi_tiep"} <= set(t)
+    assert len({t["tieu_de_thang"] for t in r["thang"]}) == 3 and len({t["goi_y"] for t in r["thang"]}) == 3
+    assert r["tom_tat_3_thang"] and len(r["cung"]) == 12
     assert r["uu_tien"] and r["luu_y"]
     # đổi phái lưu nguyệt đi theo la_so
     r2 = _post("nhip-3-thang", {"la_so": {**LA_SO, "luu_nguyet": "dia_chi_thang"}, "ngay_xem": "2026-10-19"})
@@ -68,7 +73,13 @@ def test_hop_tham_mot_chieu():
     assert r["quan_he"] == "dong_nghiep" and r["nhan_quan_he"]
     assert len(r["nguoi_kia_vao_ban"]) == 4
     assert r["ban_vao_nguoi_kia"] is None and r["menh_nguoi_kia_vao_ban"] is None
-    assert r["khong_cham_diem"] is True and r["tom_tat"] and r["luu_y"]
+    assert r["khong_cham_diem"] is False and r["tom_tat"] and r["luu_y"]
+    # HN-2N: điểm tham khảo; người kia không khai giới tính → bỏ cung phi, chia lại thang
+    d = r["diem"]
+    assert d["phien_ban"] == "hai_nguoi_1" and 0 <= d["tong"] <= 100
+    assert d["tong"] == sum(t["diem"] for t in d["tieu_chi"]) and sum(t["toi_da"] for t in d["tieu_chi"]) == 100
+    assert next(t for t in d["tieu_chi"] if t["ma"] == "cung_phi")["tinh"] is False
+    assert d["hai_chieu"] is False
 
 
 def test_hop_tham_hai_chieu_va_mac_dinh():
@@ -76,6 +87,8 @@ def test_hop_tham_hai_chieu_va_mac_dinh():
                                                          "gender": "nu", "noi_sinh": "nuoc_ngoai"}})
     assert r["quan_he"] == "nguoi_yeu"
     assert len(r["ban_vao_nguoi_kia"]) == 4 and len(r["menh_nguoi_kia_vao_ban"]) == 4
+    assert r["diem"]["hai_chieu"] is True
+    assert all(t["tinh"] for t in r["diem"]["tieu_chi"])          # đủ giới tính hai người → có cung phi
     # thiếu nơi sinh → một chiều
     r = _post("hop-tham", {"la_so": LA_SO, "nguoi_kia": {"birth_date": "1992-08-21", "birth_time": "08:00",
                                                          "gender": "nu"}})
@@ -87,6 +100,52 @@ def test_hop_tham_hai_chieu_va_mac_dinh():
 def test_hop_tham_ngay_am():
     r = _post("hop-tham", {"la_so": LA_SO, "nguoi_kia": {"birth_date": "1984-12-30", "calendar_type": "am"}})
     assert r["can_nam_nguoi_kia"] == "Giáp"
+
+
+def _tieu_chi(r: dict, ma: str) -> dict:
+    return next(t for t in r["diem"]["tieu_chi"] if t["ma"] == ma)
+
+
+def test_hop_tham_cung_phi_theo_lap_xuan():
+    """QC 2026-10-21 (lỗi 3): cung phi hai người tính năm theo Lập xuân như /phong-thuy. Bạn 30/01/1990 nam (năm âm
+    Canh Ngọ, nhưng trước Lập xuân → Khôn), người ấy 01/02/1985 nữ (năm âm Việt Ất Sửu, trước Lập xuân → Cấn):
+    Sinh Khí. Theo Tết sẽ là Khảm – Ly (Diên Niên) → căn cứ ghi rõ mốc Tết khác."""
+    la = {"birth_date": "1990-01-30", "birth_time": "10:00", "gender": "nam"}
+    for kia in ({"birth_date": "1985-02-01", "gender": "nu"},
+                {"birth_date": "1985-02-01", "gender": "nu", "birth_time": "08:00", "noi_sinh": "ha-noi"},
+                {"birth_date": "1985-01-12", "calendar_type": "am", "gender": "nu"}):   # = 01/02/1985 dương
+        r = _post("hop-tham", {"la_so": la, "nguoi_kia": kia})
+        cp = _tieu_chi(r, "cung_phi")
+        assert cp["loai"] == "sinh_khi", (kia, cp["can_cu"])
+        assert cp["moc_khac"] is True and "Lập xuân" in " ".join(cp["can_cu"])
+
+
+def test_hop_tham_cung_lich_trung_hai_nguoi():
+    """QC 2026-10-21 (lỗi 4): người kia chỉ có ngày dùng CÙNG lịch người dùng chọn (`la_so.lich`). 01/02/1985: lịch
+    Việt đã sang Ất Sửu (Tết 21/01), lịch Trung Quốc còn Giáp Tý (Tết 20/02)."""
+    la = {"birth_date": "1985-02-01", "birth_time": "10:00", "gender": "nam", "lich": "trung"}
+    chi_ngay = _post("hop-tham", {"la_so": la, "nguoi_kia": {"birth_date": "1985-02-01"}})
+    du_gio = _post("hop-tham", {"la_so": la, "nguoi_kia": {"birth_date": "1985-02-01", "birth_time": "10:00",
+                                                           "gender": "nu", "noi_sinh": "ha-noi"}})
+    assert chi_ngay["can_nam_nguoi_kia"] == du_gio["can_nam_nguoi_kia"] == "Giáp"
+    assert _tieu_chi(chi_ngay, "can")["loai"] == _tieu_chi(du_gio, "can")["loai"] == "binh_hoa"
+    viet = _post("hop-tham", {"la_so": {**la, "lich": "viet"}, "nguoi_kia": {"birth_date": "1985-02-01"}})
+    assert viet["can_nam_nguoi_kia"] == "Ất"
+
+
+def test_hop_tham_nguoi_kia_mien_nam_chi_co_ngay():
+    """QC 2026-10-21 (lỗi 5): người kia sinh miền Nam 1960–1975 chỉ khai ngày + nơi sinh (không `vung`): suy vùng từ
+    tỉnh → lịch UTC+8 (Tết Mậu Thân miền Nam 30/01/1968) — cùng can chi năm với đường đủ giờ."""
+    kia = {"birth_date": "1968-01-29", "gender": "nu", "noi_sinh": "tp-ho-chi-minh"}
+    chi_ngay = _post("hop-tham", {"la_so": LA_SO, "nguoi_kia": kia})
+    du_gio = _post("hop-tham", {"la_so": LA_SO, "nguoi_kia": {**kia, "birth_time": "10:00"}})
+    assert chi_ngay["can_nam_nguoi_kia"] == du_gio["can_nam_nguoi_kia"] == "Đinh"
+    for r in (chi_ngay, du_gio):
+        assert "người ấy tuổi Mùi" in " ".join(_tieu_chi(r, "chi")["can_cu"])
+    # miền Bắc cùng ngày đã sang Mậu Thân (Tết 29/01/1968)
+    bac = _post("hop-tham", {"la_so": LA_SO, "nguoi_kia": {**kia, "noi_sinh": "ha-noi"}})
+    assert bac["can_nam_nguoi_kia"] == "Mậu"
+    _post("hop-tham", {"la_so": LA_SO, "nguoi_kia": {**kia, "noi_sinh": "khong-co"}}, 422)
 
 
 def test_dinh_gio_ba_ung_vien():

@@ -1,0 +1,2583 @@
+{
+ "_ghi_chu": "Báo cáo Bát tự đời sống SINH TỪ ENGINE THẬT (POST /v1/battu/luan-giai, hồ sơ HO_SO_MAU e2e/_hoso.ts, ngày xem 2026-10-21, trong_so cho cot_loi[0] = 94/26 → 78% · 120 phiếu). Sửa tay đúng 1 chỗ: phi (mien_phi, đã đăng nhập). ty_le = bảng tỉ lệ giả cho cot_loi[1] (36/45). Engine đổi đầu ra → chạy lại lệnh sinh (xem PR BT-ĐS, VH-1).",
+ "bao_cao": {
+  "engine_version": "0.1.5",
+  "mo_dun": "battu",
+  "phien_ban": "doi_song_1",
+  "cot_loi": [
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Bạn linh hoạt",
+    "noi_dung": "Bạn linh hoạt, hiểu người nhanh và dễ hoà vào môi trường mới.",
+    "can_cu": [
+     "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)"
+    ],
+    "ma_mau": "ds.bt.tong_quan.nc.nham.yeu.manh",
+    "loi_khuyen": "Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
+    "ty_le_dung": 0.78,
+    "so_phieu": 120,
+    "dang_xem_lai": false,
+    "loai_goc": "diem_manh",
+    "tu_chuong": "tong_quan"
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Bạn dễ bị cuốn theo việc của người khác",
+    "noi_dung": "Bạn dễ bị cuốn theo việc của người khác, mất sức vào chỗ không phải của mình. Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
+    "can_cu": [
+     "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)"
+    ],
+    "ma_mau": "ds.bt.tong_quan.nc.nham.yeu.vap",
+    "huong_xu_ly": "Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
+    "loai_goc": "luu_y",
+    "tu_chuong": "tong_quan"
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Tiền đến nhiều nhưng dễ mệt vì gánh",
+    "noi_dung": "Tiền và cơ hội kiếm tiền đến khá nhiều, nhưng bạn dễ mệt vì phải gánh. Ôm nhiều mối cùng lúc dễ làm bạn hụt sức. Nên chọn ít nguồn thu mà vững, và nhờ người giỏi số liệu giúp quản phần còn lại.",
+    "can_cu": [
+     "Tài (hành Hỏa) chiếm 48% điểm ngũ hành; Tài đậm mà thân nhược (tài đa thân nhược)"
+    ],
+    "ma_mau": "ds.bt.tien_bac.tai_nang_than_yeu.vap",
+    "huong_xu_ly": "Nên chọn ít nguồn thu mà vững, và nhờ người giỏi số liệu giúp quản phần còn lại.",
+    "loai_goc": "luu_y",
+    "tu_chuong": "tien_bac"
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Đi lên nhờ được tin và chịu học",
+    "noi_dung": "Bạn tiến lên nhờ được tin giao việc và nhờ chịu học thêm để xứng với vị trí. Bằng cấp, chứng chỉ và người hướng dẫn là đòn bẩy của bạn. Nên chọn nơi có lộ trình thăng tiến rõ và đầu tư vào một chứng chỉ có giá trị trong nghề.",
+    "can_cu": [
+     "Quan gặp Ấn (quan ấn tương sinh)"
+    ],
+    "ma_mau": "ds.bt.su_nghiep.quan_an.manh",
+    "loi_khuyen": "Nên chọn nơi có lộ trình thăng tiến rõ và đầu tư vào một chứng chỉ có giá trị trong nghề.",
+    "loai_goc": "diem_manh",
+    "tu_chuong": "su_nghiep"
+   },
+   {
+    "loai": "cot_loi",
+    "tieu_de": "Năm 2026: đừng ham khoản tiền nhanh",
+    "noi_dung": "Năm 2026, tiền làm ăn vào ra lớn; một quyết định vội có thể kéo theo cả năm gỡ. Hai cách đọc khác nhau ở năm 2026: một cách thấy cần lưu ý, cách kia thấy cân bằng. Nên tránh: mở rộng làm ăn bằng tiền vay, nhận lời đầu tư từ người mới quen. Nên làm: làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc.",
+    "can_cu": [
+     "Năm 2026 Bính Ngọ (tính từ Lập xuân, Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+     "Năm 2026 nằm trong đại vận Ất Dậu (thuận lợi)"
+    ],
+    "ma_mau": "ds.bt.van_han.thien_tai.can.lon",
+    "huong_xu_ly": "Nên làm: làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc.",
+    "nam": 2026,
+    "muc": "can_chu_dong",
+    "loai_goc": "luu_y",
+    "tu_chuong": "van_han"
+   }
+  ],
+  "thoi_gian_bieu": [
+   {
+    "tu_tuoi": 6,
+    "den_tuoi": 15,
+    "nam_tu": 1996,
+    "nam_den": 2005,
+    "cung": "Nhâm Ngọ",
+    "nhan": "vận Nhâm Ngọ",
+    "chu_de": "tự lập, làm theo cách của mình, bạn bè ngang hàng",
+    "muc": "can_chu_dong",
+    "muc_cach_1": "can_chu_dong",
+    "muc_cach_2": "can_chu_dong",
+    "hai_cach_khac": false,
+    "mot_cau": "Giai đoạn cần lưu ý: dễ đông người tranh phần, tiền ra vì bạn bè. Nên giữ tiền riêng và ký kết rõ ràng khi làm chung.",
+    "de_vap": "Dễ đông người tranh phần, tiền ra vì bạn bè.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 16,
+    "den_tuoi": 25,
+    "nam_tu": 2006,
+    "nam_den": 2015,
+    "cung": "Quý Mùi",
+    "nhan": "vận Quý Mùi",
+    "chu_de": "cạnh tranh, liều để thắng, tiền vào ra nhanh",
+    "muc": "can_chu_dong",
+    "muc_cach_1": "can_chu_dong",
+    "muc_cach_2": "can_chu_dong",
+    "hai_cach_khac": false,
+    "mot_cau": "Giai đoạn cần lưu ý: dễ hao tiền vì quyết nhanh. Nên đặt hạn mức chi và tránh góp vốn khi chưa rõ.",
+    "de_vap": "Dễ hao tiền vì quyết nhanh.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 26,
+    "den_tuoi": 35,
+    "nam_tu": 2016,
+    "nam_den": 2025,
+    "cung": "Giáp Thân",
+    "nhan": "vận Giáp Thân",
+    "chu_de": "làm ra sản phẩm, tận hưởng, con cái, tay nghề",
+    "muc": "thuan",
+    "muc_cach_1": "thuan",
+    "muc_cach_2": "thuan",
+    "hai_cach_khac": false,
+    "mot_cau": "Giai đoạn thuận: hợp để trau tay nghề, làm sản phẩm, lo cho con cái và sống thong thả hơn.",
+    "de_vap": "Dễ ham vui và chậm lại.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 36,
+    "den_tuoi": 45,
+    "nam_tu": 2026,
+    "nam_den": 2035,
+    "cung": "Ất Dậu",
+    "nhan": "vận Ất Dậu",
+    "chu_de": "sáng tạo, thể hiện, đổi khuôn khổ cũ",
+    "muc": "thuan",
+    "muc_cach_1": "thuan",
+    "muc_cach_2": "thuan",
+    "hai_cach_khac": false,
+    "mot_cau": "Giai đoạn thuận: hợp để làm điều mới, ra mắt sản phẩm, xây tiếng nói riêng.",
+    "de_vap": "Dễ va chạm với cấp trên và luật lệ.",
+    "hien_tai": true
+   },
+   {
+    "tu_tuoi": 46,
+    "den_tuoi": 55,
+    "nam_tu": 2036,
+    "nam_den": 2045,
+    "cung": "Bính Tuất",
+    "nhan": "vận Bính Tuất",
+    "chu_de": "cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn",
+    "muc": "can_chu_dong",
+    "muc_cach_1": "can_chu_dong",
+    "muc_cach_2": "can_bang",
+    "hai_cach_khac": true,
+    "mot_cau": "Giai đoạn cần lưu ý: dễ tiêu rộng tay, bỏ vốn theo cảm hứng. Nên giữ khoản dự phòng trước khi mở việc mới. Hai cách đọc khác nhau ở giai đoạn này: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+    "de_vap": "Dễ tiêu rộng tay, bỏ vốn theo cảm hứng.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 56,
+    "den_tuoi": 65,
+    "nam_tu": 2046,
+    "nam_den": 2055,
+    "cung": "Đinh Hợi",
+    "nhan": "vận Đinh Hợi",
+    "chu_de": "thu nhập đều, tích luỹ, chuyện nhà cửa vợ chồng",
+    "muc": "can_bang",
+    "muc_cach_1": "thuan",
+    "muc_cach_2": "can_chu_dong",
+    "hai_cach_khac": true,
+    "mot_cau": "Giai đoạn cân bằng: hợp để tích luỹ, mua tài sản, ổn định gia đình. Hai cách đọc cho kết quả ngược nhau ở giai đoạn này: nên thử nhỏ trước khi làm lớn.",
+    "de_vap": "Dễ bị tiền bạc ràng buộc, làm nhiều mà giữ ít.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 66,
+    "den_tuoi": 75,
+    "nam_tu": 2056,
+    "nam_den": 2065,
+    "cung": "Mậu Tý",
+    "nhan": "vận Mậu Tý",
+    "chu_de": "áp lực, thử thách, việc lớn đến nhanh",
+    "muc": "can_bang",
+    "muc_cach_1": "thuan",
+    "muc_cach_2": "can_chu_dong",
+    "hai_cach_khac": true,
+    "mot_cau": "Giai đoạn cân bằng: hợp để nhận vai khó, lên vị trí cần bản lĩnh. Giai đoạn này hay có thay đổi về chỗ ở hoặc chuyện đôi lứa. Hai cách đọc cho kết quả ngược nhau ở giai đoạn này: nên thử nhỏ trước khi làm lớn.",
+    "de_vap": "Dễ quá tải và va chạm với người có quyền.",
+    "hien_tai": false
+   },
+   {
+    "tu_tuoi": 76,
+    "den_tuoi": 85,
+    "nam_tu": 2066,
+    "nam_den": 2075,
+    "cung": "Kỷ Sửu",
+    "nhan": "vận Kỷ Sửu",
+    "chu_de": "vị trí, danh tiếng, trách nhiệm, khuôn phép",
+    "muc": "can_chu_dong",
+    "muc_cach_1": "can_chu_dong",
+    "muc_cach_2": "can_bang",
+    "hai_cach_khac": true,
+    "mot_cau": "Giai đoạn cần lưu ý: dễ bị ràng buộc bởi quy định và kỳ vọng. Nên nói rõ điều mình chịu được và điều không. Hai cách đọc khác nhau ở giai đoạn này: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+    "de_vap": "Dễ bị ràng buộc bởi quy định và kỳ vọng.",
+    "hien_tai": false
+   }
+  ],
+  "chuong": [
+   {
+    "ma": "tong_quan",
+    "tieu_de": "Con người bạn",
+    "cau_hoi": "Rốt cuộc tôi là người thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Bạn giống dòng sông lớn: chảy mãi, nhiều ý, thích đi xa và đổi mới. Bạn nắm bắt nhanh và chịu được thay đổi.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn linh hoạt",
+      "noi_dung": "Bạn linh hoạt, hiểu người nhanh và dễ hoà vào môi trường mới.",
+      "can_cu": [
+       "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)"
+      ],
+      "ma_mau": "ds.bt.tong_quan.nc.nham.yeu.manh",
+      "loi_khuyen": "Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
+      "ty_le_dung": 0.78,
+      "so_phieu": 120,
+      "dang_xem_lai": false
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Bạn dễ bị cuốn theo việc của người khác",
+      "noi_dung": "Bạn dễ bị cuốn theo việc của người khác, mất sức vào chỗ không phải của mình. Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
+      "can_cu": [
+       "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)"
+      ],
+      "ma_mau": "ds.bt.tong_quan.nc.nham.yeu.vap",
+      "huong_xu_ly": "Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn là người nhạy cơ hội",
+      "noi_dung": "Tháng sinh cho bạn con mắt nhìn ra cơ hội, giỏi giao thiệp và xoay vốn.",
+      "can_cu": [
+       "Cách cục Tử Bình Chân Thuyên: Thiên Tài cách (can Bính, lộ ra thiên can; tháng Tỵ)"
+      ],
+      "ma_mau": "ds.bt.tong_quan.cach.thien_tai.manh"
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Bạn thực tế",
+      "noi_dung": "Bạn thực tế, cần cù, coi trọng chữ tín và sự ổn định.",
+      "can_cu": [
+       "Thập thần nổi nhất: Chính Tài (3 lần ở thiên can và bản khí)"
+      ],
+      "ma_mau": "ds.bt.tong_quan.noi_bat.chinh_tai.manh",
+      "loi_khuyen": "Nên dành một phần nhỏ cố định cho việc học hoặc trải nghiệm mới."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Bạn dễ quá chặt với tiền",
+      "noi_dung": "Bạn dễ quá chặt với tiền, bỏ lỡ việc đáng bỏ vốn. Nên dành một phần nhỏ cố định cho việc học hoặc trải nghiệm mới.",
+      "can_cu": [
+       "Thập thần nổi nhất: Chính Tài (3 lần ở thiên can và bản khí)"
+      ],
+      "ma_mau": "ds.bt.tong_quan.noi_bat.chinh_tai.vap",
+      "huong_xu_ly": "Nên dành một phần nhỏ cố định cho việc học hoặc trải nghiệm mới."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Việc khó thường có lối ra",
+      "noi_dung": "Việc khó với bạn thường có lối ra, nhất là khi bạn sống tử tế với người quanh mình. Nên giữ nếp làm việc tốt nhỏ, đều đặn.",
+      "can_cu": [
+       "Thần sát Thiên Đức (cát) ở trụ tháng — phúc đức trời che, giảm hung"
+      ],
+      "ma_mau": "ds.bt.tong_quan.ts.duc.manh",
+      "loi_khuyen": "Nên giữ nếp làm việc tốt nhỏ, đều đặn."
+     }
+    ],
+    "doan": [
+     "Bạn giống dòng sông lớn: chảy mãi, nhiều ý, thích đi xa và đổi mới. Bạn nắm bắt nhanh và chịu được thay đổi.",
+     "Bạn có nhiều điểm tựa sẵn trong người; biết mình mạnh ở đâu thì đi nhanh.",
+     "Nét nổi bật của bạn: bạn linh hoạt; bạn là người nhạy cơ hội. Còn điều nên để ý ở chính mình: bạn dễ bị cuốn theo việc của người khác; bạn dễ quá chặt với tiền — mỗi điều có cách gỡ ngay trong hộp."
+    ],
+    "can_cu": [
+     "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)",
+     "Cách cục Tử Bình Chân Thuyên: Thiên Tài cách (can Bính, lộ ra thiên can; tháng Tỵ)",
+     "Thập thần nổi nhất: Chính Tài (3 lần ở thiên can và bản khí)",
+     "Thần sát Thiên Đức (cát) ở trụ tháng — phúc đức trời che, giảm hung",
+     "Thần sát: 5 sao cát, 1 sao hung",
+     "Theo cách cân sức (dụng thần phù ức + điều hậu): Thuận lợi — hành cần thêm đã có mặt rõ: Kim +1",
+     "Theo tháng sinh (hỷ / kỵ của cách cục): Thuận lợi — hành cần thêm đã có mặt rõ: Kim +1"
+    ],
+    "cau_tu_soi": "Việc nào bạn đã mở ra mà chưa khép lại?",
+    "than_do": {
+     "ti_le": 0.4,
+     "vuong_tu": 0.55,
+     "nhuoc_duoi": 0.45,
+     "muc": "yeu",
+     "nhan": "Sức tự thân: cần thêm điểm tựa"
+    },
+    "hai_cach_muc": {
+     "cach_1": "thuan",
+     "cach_2": "thuan"
+    },
+    "moi_xem": {
+     "diem_nhan": "Bạn giống dòng sông lớn: chảy mãi, nhiều ý, thích đi xa và đổi mới.",
+     "cau_hoi": "Bạn phản ứng thế nào khi bị áp lực, và điểm mạnh nào bạn hay bỏ quên?",
+     "so_doan": 3,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "nhat_chu",
+      "ten": "Nhật chủ",
+      "han": "日主",
+      "mo_dun": "battu",
+      "de_hieu": "Can của trụ ngày — đại diện cho chính bạn. Mọi thứ khác trong Bát tự được xét trong quan hệ với chữ này.",
+      "vi_du": "Sinh ngày Nhâm Ngọ → nhật chủ Nhâm (nước lớn).",
+      "khop": [
+       "Nhật chủ"
+      ]
+     },
+     {
+      "ma": "than_nhuoc",
+      "ten": "Thân nhược",
+      "han": "身弱",
+      "mo_dun": "battu",
+      "de_hieu": "Nhật chủ ít được hỗ trợ — cần được nuôi dưỡng, bồi đắp.",
+      "vi_du": null,
+      "khop": [
+       "thân nhược"
+      ]
+     },
+     {
+      "ma": "tu_binh_chan_thuyen",
+      "ten": "Tử Bình Chân Thuyên",
+      "han": "Tử Bình Chân Thuyên (子平真詮)",
+      "mo_dun": "battu",
+      "de_hieu": "Sách cổ đời Thanh (Thẩm Hiếu Chiêm) về định cách cục Bát tự theo tháng sinh.",
+      "vi_du": null,
+      "khop": [
+       "Tử Bình Chân Thuyên"
+      ]
+     },
+     {
+      "ma": "thien_tai",
+      "ten": "Thiên Tài",
+      "han": "偏財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bất ngờ, cơ hội, kinh doanh; người cha.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Tài"
+      ]
+     },
+     {
+      "ma": "thap_than",
+      "ten": "Thập thần",
+      "han": "十神",
+      "mo_dun": "battu",
+      "de_hieu": "Mười 'vai trò' của các can khác đối với nhật chủ (bạn): như người anh em, đứa con tinh thần, tiền bạc, cấp trên, người che chở…",
+      "vi_du": null,
+      "khop": [
+       "Thập thần"
+      ]
+     },
+     {
+      "ma": "chinh_tai",
+      "ten": "Chính Tài",
+      "han": "正財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bạc ổn định, lao động chân chính; với nam còn chỉ vợ.",
+      "vi_du": null,
+      "khop": [
+       "Chính Tài"
+      ]
+     },
+     {
+      "ma": "than_sat",
+      "ten": "Thần sát",
+      "han": "神煞",
+      "mo_dun": "battu",
+      "de_hieu": "Các 'sao phụ' của Bát tự như Thiên Ất Quý Nhân, Đào Hoa, Dịch Mã — tín hiệu phụ, không phải phần luận chính.",
+      "vi_du": null,
+      "khop": [
+       "Thần sát"
+      ]
+     },
+     {
+      "ma": "dung_than",
+      "ten": "Dụng thần",
+      "han": "用神",
+      "mo_dun": "battu",
+      "de_hieu": "Hành 'bạn cần' để cân bằng lá số. Hệ thống trình bày hai cách tìm (phù ức, điều hậu) và không tự chọn thay bạn.",
+      "vi_du": null,
+      "khop": [
+       "dụng thần"
+      ]
+     },
+     {
+      "ma": "phu_uc",
+      "ten": "Phù ức",
+      "han": "扶抑",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo nguyên tắc 'yếu thì bồi, mạnh thì tiết' cho nhật chủ.",
+      "vi_du": null,
+      "khop": [
+       "phù ức"
+      ]
+     },
+     {
+      "ma": "dieu_hau",
+      "ten": "Điều hậu",
+      "han": "調候",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo khí hậu mùa sinh: sinh mùa nóng cần nước, mùa lạnh cần lửa.",
+      "vi_du": null,
+      "khop": [
+       "điều hậu"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "ngu_hanh",
+    "tieu_de": "Năng lượng của bạn: thừa gì, thiếu gì",
+    "cau_hoi": "Tôi thừa gì, thiếu gì và nên bù thế nào?",
+    "muc": "can_chu_dong",
+    "nhan_muc": "Cần lưu ý",
+    "tom_tat": "Năng lượng của bạn lệch rõ; nên chủ động bù phần thiếu qua nếp sống hằng ngày.",
+    "hop": [
+     {
+      "loai": "luu_y",
+      "tieu_de": "Hỏa nhiều: dễ nóng vội",
+      "noi_dung": "Hỏa nhiều làm bạn dễ nóng vội, nói nhanh hơn nghĩ và khó ngồi yên. Nên tập ngồi yên vài phút trước khi trả lời việc gấp.",
+      "can_cu": [
+       "Hỏa chiếm 48% điểm ngũ hành"
+      ],
+      "ma_mau": "ds.bt.ngu_hanh.thua.hoa.vap",
+      "huong_xu_ly": "Nên tập ngồi yên vài phút trước khi trả lời việc gấp."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Thiếu Mộc: ngại khởi đầu",
+      "noi_dung": "Thiếu Mộc, bạn dễ ngại khởi đầu, ngại đổi mới và thiếu kế hoạch dài hơi. Nên viết kế hoạch một năm trên một trang giấy và xem lại mỗi tháng.",
+      "can_cu": [
+       "Mộc: 0 điểm"
+      ],
+      "ma_mau": "ds.bt.ngu_hanh.thieu.moc.vap",
+      "huong_xu_ly": "Nên viết kế hoạch một năm trên một trang giấy và xem lại mỗi tháng."
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Cách 1 — cân sức: Kim, Thủy",
+      "noi_dung": "Cách đọc thứ nhất cân sức mạnh của bạn và mùa sinh: nên bù Kim, Thủy. Kim: màu trắng, bạc, xám; hướng Tây, Tây Bắc; thói quen dọn gọn bàn làm việc, lập danh sách việc, tập thở sâu buổi sáng. Nghề gần với Kim: tài chính, kỹ thuật, máy móc, luật, quản lý chất lượng. Thủy: màu đen, xanh dương đậm; hướng Bắc; thói quen uống đủ nước, ngủ đủ giấc, dành thời gian tĩnh lặng, đi bơi.",
+      "can_cu": [
+       "Dụng thần phù ức (Trích Thiên Tuỷ, thân nhược): Kim, Thủy",
+       "Điều hậu (sinh tháng Tỵ — cần điều hoà khí hậu): Thủy"
+      ],
+      "ma_mau": "ds.bt.ngu_hanh.cach1.kim+thuy.khuyen"
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Cách 2 — theo tháng sinh: Kim",
+      "noi_dung": "Cách đọc thứ hai dựa vào tháng sinh: nên dựa vào Kim. Kim: màu trắng, bạc, xám; hướng Tây, Tây Bắc; thói quen dọn gọn bàn làm việc, lập danh sách việc, tập thở sâu buổi sáng. Nghề gần với Kim: tài chính, kỹ thuật, máy móc, luật, quản lý chất lượng.",
+      "can_cu": [
+       "Cách cục Tử Bình Chân Thuyên: Thiên Tài cách → hỷ Ấn (Kim); kỵ Tỷ Kiếp (Thủy)"
+      ],
+      "ma_mau": "ds.bt.ngu_hanh.cach2.kim.khuyen"
+     }
+    ],
+    "doan": [
+     "Năng lượng của bạn lệch rõ; nên chủ động bù phần thiếu qua nếp sống hằng ngày.",
+     "Có hai cách đọc phần năng lượng cần thêm, đến từ hai trường phái; hệ thống không chọn thay bạn. Hai cách ở đây gợi ý khác nhau — hãy thử từng cách trong vài tuần và giữ cách bạn thấy hợp.",
+     "Màu sắc, hướng, nhóm nghề theo ngũ hành là cách ứng dụng dân gian phổ biến, không có trong cổ thư như một quy tắc bắt buộc — dùng để tham khảo, đừng để nó quyết định thay bạn."
+    ],
+    "can_cu": [
+     "Điểm ngũ hành (thang điểm hệ thống): Mộc 0 · Hỏa 4.3 · Thổ 1.1 · Kim 2.6 · Thủy 1",
+     "Thân nhược: tỉ lệ trợ lực 0.4 — Mỗi thiên can 1 điểm; mỗi địa chi chia theo tàng can (1 / 0,7+0,3 / 0,6+0,3+0,1); chi tháng (nguyệt lệnh) nhân 2. Tỉ lệ = (điểm hành nhật chủ + hành sinh nhật chủ) / tổng; ≥ 0,55 vượng, ≤ 0,45 nhược, giữa là trung hoà.",
+     "Dụng thần phù ức (Trích Thiên Tuỷ, thân nhược): Kim, Thủy",
+     "Điều hậu (sinh tháng Tỵ — cần điều hoà khí hậu): Thủy",
+     "Cách cục Tử Bình Chân Thuyên: Thiên Tài cách → hỷ Ấn (Kim); kỵ Tỷ Kiếp (Thủy)",
+     "Một hành chiếm 48% điểm ngũ hành (≥ 45%) −1",
+     "Vắng hẳn Mộc −1",
+     "Theo cách cân sức (dụng thần phù ức + điều hậu): Cần lưu ý — phù ức: hành cần thêm (Kim, Thủy) đã có mặt rõ +1; điều hậu: hành cần thêm (Thủy) còn mỏng 0",
+     "Theo tháng sinh (hỷ / kỵ của cách cục): Cần lưu ý — hỷ: hành cần thêm (Kim) đã có mặt rõ +1; kỵ: hành nên bớt (Thủy) không nổi +1",
+     "Hai cách lấy dụng thần trình bày song song, hệ thống không tự chọn."
+    ],
+    "cau_tu_soi": "Lúc nào bạn thấy mình đầy sức, lúc nào thấy cạn, và khi ấy bạn đang làm gì?",
+    "bieu_do": {
+     "hanh": [
+      {
+       "hanh": "Mộc",
+       "diem": 0.0,
+       "ty_le": 0.0,
+       "nhom": "sức thể hiện, tay nghề",
+       "trang_thai": "thieu",
+       "cach_1": false,
+       "cach_2": false
+      },
+      {
+       "hanh": "Hỏa",
+       "diem": 4.3,
+       "ty_le": 0.478,
+       "nhom": "tiền bạc, thành quả nắm được",
+       "trang_thai": "thua",
+       "cach_1": false,
+       "cach_2": false
+      },
+      {
+       "hanh": "Thổ",
+       "diem": 1.1,
+       "ty_le": 0.122,
+       "nhom": "khuôn phép, áp lực, trách nhiệm",
+       "trang_thai": "vua",
+       "cach_1": false,
+       "cach_2": false
+      },
+      {
+       "hanh": "Kim",
+       "diem": 2.6,
+       "ty_le": 0.289,
+       "nhom": "nguồn nâng đỡ, việc học",
+       "trang_thai": "vua",
+       "cach_1": true,
+       "cach_2": true
+      },
+      {
+       "hanh": "Thủy",
+       "diem": 1.0,
+       "ty_le": 0.111,
+       "nhom": "sức tự đứng, người ngang hàng",
+       "trang_thai": "vua",
+       "cach_1": true,
+       "cach_2": false
+      }
+     ],
+     "nhat_chu": "Thủy"
+    },
+    "hai_cach": {
+     "cach_1": {
+      "ten": "Cân sức mạnh của bạn",
+      "hanh": [
+       "Kim",
+       "Thủy"
+      ]
+     },
+     "cach_2": {
+      "ten": "Theo tháng sinh",
+      "hanh": [
+       "Kim"
+      ],
+      "ma": "thien_tai"
+     },
+     "chon": null
+    },
+    "hai_cach_muc": {
+     "cach_1": "can_chu_dong",
+     "cach_2": "can_chu_dong"
+    },
+    "moi_xem": {
+     "diem_nhan": "Năng lượng của bạn lệch rõ; nên chủ động bù phần thiếu qua nếp sống hằng ngày.",
+     "cau_hoi": "Phần năng lượng nào bạn đang thiếu, và hai cách đọc gợi ý bạn bù lại thế nào?",
+     "so_doan": 3,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "ngu_hanh",
+      "ten": "Ngũ hành",
+      "han": "五行",
+      "mo_dun": "battu",
+      "de_hieu": "Năm loại 'khí': Kim (kim loại), Mộc (cây), Thuỷ (nước), Hoả (lửa), Thổ (đất). Chúng sinh nhau và khắc nhau theo vòng.",
+      "vi_du": "Mộc sinh Hoả (gỗ nhóm lửa); Thuỷ khắc Hoả (nước dập lửa).",
+      "khop": [
+       "ngũ hành"
+      ]
+     },
+     {
+      "ma": "than_nhuoc",
+      "ten": "Thân nhược",
+      "han": "身弱",
+      "mo_dun": "battu",
+      "de_hieu": "Nhật chủ ít được hỗ trợ — cần được nuôi dưỡng, bồi đắp.",
+      "vi_du": null,
+      "khop": [
+       "Thân nhược",
+       "thân nhược"
+      ]
+     },
+     {
+      "ma": "tang_can",
+      "ten": "Tàng can",
+      "han": "藏干",
+      "mo_dun": "battu",
+      "de_hieu": "Những can 'giấu' bên trong mỗi địa chi. Ví dụ chi Tỵ giấu Bính, Canh, Mậu. Chúng là sức mạnh ngầm của lá số.",
+      "vi_du": null,
+      "khop": [
+       "tàng can"
+      ]
+     },
+     {
+      "ma": "nguyet_lenh",
+      "ten": "Nguyệt lệnh",
+      "han": "月令",
+      "mo_dun": "battu",
+      "de_hieu": "Địa chi của tháng sinh — 'mùa' bạn sinh ra, quyết định hành nào đang mạnh. Đây là chữ quan trọng nhất để định cách cục.",
+      "vi_du": null,
+      "khop": [
+       "nguyệt lệnh",
+       "chi tháng"
+      ]
+     },
+     {
+      "ma": "nhat_chu",
+      "ten": "Nhật chủ",
+      "han": "日主",
+      "mo_dun": "battu",
+      "de_hieu": "Can của trụ ngày — đại diện cho chính bạn. Mọi thứ khác trong Bát tự được xét trong quan hệ với chữ này.",
+      "vi_du": "Sinh ngày Nhâm Ngọ → nhật chủ Nhâm (nước lớn).",
+      "khop": [
+       "nhật chủ"
+      ]
+     },
+     {
+      "ma": "dung_than",
+      "ten": "Dụng thần",
+      "han": "用神",
+      "mo_dun": "battu",
+      "de_hieu": "Hành 'bạn cần' để cân bằng lá số. Hệ thống trình bày hai cách tìm (phù ức, điều hậu) và không tự chọn thay bạn.",
+      "vi_du": null,
+      "khop": [
+       "Dụng thần",
+       "dụng thần"
+      ]
+     },
+     {
+      "ma": "phu_uc",
+      "ten": "Phù ức",
+      "han": "扶抑",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo nguyên tắc 'yếu thì bồi, mạnh thì tiết' cho nhật chủ.",
+      "vi_du": null,
+      "khop": [
+       "phù ức"
+      ]
+     },
+     {
+      "ma": "dieu_hau",
+      "ten": "Điều hậu",
+      "han": "調候",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo khí hậu mùa sinh: sinh mùa nóng cần nước, mùa lạnh cần lửa.",
+      "vi_du": null,
+      "khop": [
+       "Điều hậu",
+       "điều hậu"
+      ]
+     },
+     {
+      "ma": "tu_binh_chan_thuyen",
+      "ten": "Tử Bình Chân Thuyên",
+      "han": "Tử Bình Chân Thuyên (子平真詮)",
+      "mo_dun": "battu",
+      "de_hieu": "Sách cổ đời Thanh (Thẩm Hiếu Chiêm) về định cách cục Bát tự theo tháng sinh.",
+      "vi_du": null,
+      "khop": [
+       "Tử Bình Chân Thuyên"
+      ]
+     },
+     {
+      "ma": "thien_tai",
+      "ten": "Thiên Tài",
+      "han": "偏財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bất ngờ, cơ hội, kinh doanh; người cha.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Tài"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "cuoc_doi",
+    "tieu_de": "Các giai đoạn cuộc đời",
+    "cau_hoi": "Đời tôi đi qua những giai đoạn mười năm nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Bạn đang ở giai đoạn 36–45 tuổi, xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ.",
+    "hop": [
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Giai đoạn bạn đang đi",
+      "noi_dung": "Từ 36 đến 45 tuổi (2026–2035): sáng tạo, thể hiện, đổi khuôn khổ cũ. Giai đoạn thuận: hợp để làm điều mới, ra mắt sản phẩm, xây tiếng nói riêng.",
+      "can_cu": [
+       "Đại vận Ất Dậu (Thương Quan), 2026–2035; cách 1: thuận lợi, cách 2: thuận lợi"
+      ],
+      "ma_mau": "ds.bt.cuoc_doi.thuong_quan.thuan.hien_tai",
+      "muc": "thuan",
+      "tu_tuoi": 36,
+      "den_tuoi": 45
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Giai đoạn kế tiếp",
+      "noi_dung": "Từ 46 đến 55 tuổi (2036–2045): cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn. Giai đoạn cần lưu ý: dễ tiêu rộng tay, bỏ vốn theo cảm hứng. Nên giữ khoản dự phòng trước khi mở việc mới. Hai cách đọc khác nhau ở giai đoạn này: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+      "can_cu": [
+       "Đại vận Bính Tuất (Thiên Tài), 2036–2045; cách 1: cần lưu ý, cách 2: cân bằng"
+      ],
+      "ma_mau": "ds.bt.cuoc_doi.thien_tai.can_chu_dong.tiep",
+      "muc": "can_chu_dong",
+      "tu_tuoi": 46,
+      "den_tuoi": 55
+     }
+    ],
+    "doan": [
+     "Bạn đang ở giai đoạn 36–45 tuổi, xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ.",
+     "Trên dòng thời gian của bạn có 2 giai đoạn thuận lợi, 2 giai đoạn cân bằng, 4 giai đoạn cần lưu ý. Giai đoạn cần lưu ý không phải lúc kém may — chỉ là lúc nên chuẩn bị trước nhiều hơn.",
+     "Có 4 giai đoạn mà hai cách đọc cho kết quả khác nhau; ở những giai đoạn đó, đối chiếu với điều bạn thực sự trải qua để chọn cách hợp với mình."
+    ],
+    "can_cu": [
+     "6–15 tuổi: đại vận Nhâm Ngọ (Tỷ Kiên)",
+     "16–25 tuổi: đại vận Quý Mùi (Kiếp Tài)",
+     "26–35 tuổi: đại vận Giáp Thân (Thực Thần)",
+     "36–45 tuổi: đại vận Ất Dậu (Thương Quan)",
+     "46–55 tuổi: đại vận Bính Tuất (Thiên Tài)",
+     "56–65 tuổi: đại vận Đinh Hợi (Chính Tài)",
+     "66–75 tuổi: đại vận Mậu Tý (Thất Sát)",
+     "76–85 tuổi: đại vận Kỷ Sửu (Chính Quan)",
+     "Tuổi tính theo năm khởi vận (tuổi tròn); mỗi đại vận mười năm",
+     "Mức mỗi đại vận: can 1 điểm, chi 2 điểm theo hành cần thêm / nên bớt của từng cách",
+     "Đại vận tham chiếu lúc xem: Ất Dậu (dang_di)"
+    ],
+    "cau_tu_soi": "Nhìn lại mười năm vừa qua, điều gì bạn muốn giữ và điều gì muốn bỏ ở mười năm tới?",
+    "van_tham_chieu": {
+     "trang_thai": "dang_di",
+     "chi_so": 3
+    },
+    "moi_xem": {
+     "diem_nhan": "Bạn đang ở giai đoạn 36–45 tuổi, xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ.",
+     "cau_hoi": "Mười năm bạn đang đi xoay quanh điều gì, và giai đoạn nào sắp tới nên chuẩn bị trước?",
+     "so_doan": 3,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "dai_van",
+      "ten": "Đại vận",
+      "han": "大運",
+      "mo_dun": "battu",
+      "de_hieu": "Giai đoạn 10 năm của Bát tự, mỗi giai đoạn mang một cặp can chi mới tác động lên lá số.",
+      "vi_du": null,
+      "khop": [
+       "đại vận",
+       "Đại vận"
+      ]
+     },
+     {
+      "ma": "ty_kien",
+      "ten": "Tỷ Kiên",
+      "han": "比肩",
+      "mo_dun": "battu",
+      "de_hieu": "Ngang vai, cùng hành cùng âm dương với bạn: bạn bè, anh em, tinh thần tự lập.",
+      "vi_du": null,
+      "khop": [
+       "Tỷ Kiên"
+      ]
+     },
+     {
+      "ma": "kiep_tai",
+      "ten": "Kiếp Tài",
+      "han": "劫財",
+      "mo_dun": "battu",
+      "de_hieu": "Cùng hành khác âm dương: người cạnh tranh, cũng là sức mạnh dám tranh giành.",
+      "vi_du": null,
+      "khop": [
+       "Kiếp Tài"
+      ]
+     },
+     {
+      "ma": "thuc_than",
+      "ten": "Thực Thần",
+      "han": "食神",
+      "mo_dun": "battu",
+      "de_hieu": "Thứ bạn sinh ra một cách thoải mái: tài năng, hưởng thụ, sự sáng tạo ôn hoà.",
+      "vi_du": null,
+      "khop": [
+       "Thực Thần"
+      ]
+     },
+     {
+      "ma": "thuong_quan",
+      "ten": "Thương Quan",
+      "han": "傷官",
+      "mo_dun": "battu",
+      "de_hieu": "Thứ bạn sinh ra một cách sắc bén: sáng tạo phá cách, ăn nói, dám chống khuôn khổ.",
+      "vi_du": null,
+      "khop": [
+       "Thương Quan"
+      ]
+     },
+     {
+      "ma": "thien_tai",
+      "ten": "Thiên Tài",
+      "han": "偏財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bất ngờ, cơ hội, kinh doanh; người cha.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Tài"
+      ]
+     },
+     {
+      "ma": "chinh_tai",
+      "ten": "Chính Tài",
+      "han": "正財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bạc ổn định, lao động chân chính; với nam còn chỉ vợ.",
+      "vi_du": null,
+      "khop": [
+       "Chính Tài"
+      ]
+     },
+     {
+      "ma": "that_sat_battu",
+      "ten": "Thất Sát",
+      "han": "七殺",
+      "mo_dun": "battu",
+      "de_hieu": "Áp lực, thử thách, quyền uy cứng rắn — vừa là sức ép vừa là động lực.",
+      "vi_du": null,
+      "khop": [
+       "Thất Sát"
+      ]
+     },
+     {
+      "ma": "chinh_quan",
+      "ten": "Chính Quan",
+      "han": "正官",
+      "mo_dun": "battu",
+      "de_hieu": "Khuôn phép, cấp trên, danh dự; với nữ còn chỉ chồng.",
+      "vi_du": null,
+      "khop": [
+       "Chính Quan"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "su_nghiep",
+    "tieu_de": "Công việc & sự nghiệp",
+    "cau_hoi": "Tôi hợp làm việc thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Công việc là mảng bạn dễ ra kết quả nếu chọn đúng môi trường.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Đi lên nhờ được tin và chịu học",
+      "noi_dung": "Bạn tiến lên nhờ được tin giao việc và nhờ chịu học thêm để xứng với vị trí. Bằng cấp, chứng chỉ và người hướng dẫn là đòn bẩy của bạn. Nên chọn nơi có lộ trình thăng tiến rõ và đầu tư vào một chứng chỉ có giá trị trong nghề.",
+      "can_cu": [
+       "Quan gặp Ấn (quan ấn tương sinh)"
+      ],
+      "ma_mau": "ds.bt.su_nghiep.quan_an.manh",
+      "loi_khuyen": "Nên chọn nơi có lộ trình thăng tiến rõ và đầu tư vào một chứng chỉ có giá trị trong nghề."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Kết quả cụ thể mở đường cho vị trí",
+      "noi_dung": "Kết quả làm ra tiền của bạn thường mở đường cho vị trí cao hơn. Người khác nể bạn vì bạn mang về được việc cụ thể. Nên ghi lại con số kết quả của mình để dùng khi bàn chuyện lên chức, tăng lương.",
+      "can_cu": [
+       "Tài sinh Quan"
+      ],
+      "ma_mau": "ds.bt.su_nghiep.tai_sinh_quan.manh",
+      "loi_khuyen": "Nên ghi lại con số kết quả của mình để dùng khi bàn chuyện lên chức, tăng lương."
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Kiểu việc hợp với bạn",
+      "noi_dung": "Hợp kinh doanh, bán hàng, môi giới, đầu tư có kỷ luật, làm việc với đối tác bên ngoài.",
+      "can_cu": [
+       "Cách cục Thiên Tài cách (Tử Bình Chân Thuyên)"
+      ],
+      "ma_mau": "ds.bt.su_nghiep.nghe.thien_tai.khuyen"
+     }
+    ],
+    "doan": [
+     "Công việc là mảng bạn dễ ra kết quả nếu chọn đúng môi trường.",
+     "Chỗ mạnh của bạn ở mảng này: đi lên nhờ được tin và chịu học; kết quả cụ thể mở đường cho vị trí."
+    ],
+    "can_cu": [
+     "Quan gặp Ấn (quan ấn tương sinh)",
+     "Tài sinh Quan",
+     "Cách cục Thiên Tài cách (Tử Bình Chân Thuyên)",
+     "Quan Sát (hành Thổ) chiếm 12% điểm ngũ hành",
+     "Theo cách cân sức (dụng thần phù ức + điều hậu): Thuận lợi",
+     "Theo tháng sinh (hỷ / kỵ của cách cục): Thuận lợi"
+    ],
+    "cau_tu_soi": "Việc nào bạn làm mà quên cả giờ giấc, và việc nào làm xong thấy cạn sức?",
+    "hai_cach_muc": {
+     "cach_1": "thuan",
+     "cach_2": "thuan"
+    },
+    "moi_xem": {
+     "diem_nhan": "Công việc là mảng bạn dễ ra kết quả nếu chọn đúng môi trường.",
+     "cau_hoi": "Bạn hợp làm việc trong môi trường nào, và kiểu việc nào khiến bạn mau cạn sức?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "thien_tai",
+      "ten": "Thiên Tài",
+      "han": "偏財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bất ngờ, cơ hội, kinh doanh; người cha.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Tài"
+      ]
+     },
+     {
+      "ma": "tu_binh_chan_thuyen",
+      "ten": "Tử Bình Chân Thuyên",
+      "han": "Tử Bình Chân Thuyên (子平真詮)",
+      "mo_dun": "battu",
+      "de_hieu": "Sách cổ đời Thanh (Thẩm Hiếu Chiêm) về định cách cục Bát tự theo tháng sinh.",
+      "vi_du": null,
+      "khop": [
+       "Tử Bình Chân Thuyên"
+      ]
+     },
+     {
+      "ma": "ngu_hanh",
+      "ten": "Ngũ hành",
+      "han": "五行",
+      "mo_dun": "battu",
+      "de_hieu": "Năm loại 'khí': Kim (kim loại), Mộc (cây), Thuỷ (nước), Hoả (lửa), Thổ (đất). Chúng sinh nhau và khắc nhau theo vòng.",
+      "vi_du": "Mộc sinh Hoả (gỗ nhóm lửa); Thuỷ khắc Hoả (nước dập lửa).",
+      "khop": [
+       "ngũ hành"
+      ]
+     },
+     {
+      "ma": "dung_than",
+      "ten": "Dụng thần",
+      "han": "用神",
+      "mo_dun": "battu",
+      "de_hieu": "Hành 'bạn cần' để cân bằng lá số. Hệ thống trình bày hai cách tìm (phù ức, điều hậu) và không tự chọn thay bạn.",
+      "vi_du": null,
+      "khop": [
+       "dụng thần"
+      ]
+     },
+     {
+      "ma": "phu_uc",
+      "ten": "Phù ức",
+      "han": "扶抑",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo nguyên tắc 'yếu thì bồi, mạnh thì tiết' cho nhật chủ.",
+      "vi_du": null,
+      "khop": [
+       "phù ức"
+      ]
+     },
+     {
+      "ma": "dieu_hau",
+      "ten": "Điều hậu",
+      "han": "調候",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo khí hậu mùa sinh: sinh mùa nóng cần nước, mùa lạnh cần lửa.",
+      "vi_du": null,
+      "khop": [
+       "điều hậu"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "tien_bac",
+    "tieu_de": "Tiền bạc",
+    "cau_hoi": "Tôi kiếm và giữ tiền ra sao?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Tiền bạc của bạn vào ra khá đều; giữ được bao nhiêu tuỳ thói quen chi tiêu.",
+    "hop": [
+     {
+      "loai": "luu_y",
+      "tieu_de": "Tiền đến nhiều nhưng dễ mệt vì gánh",
+      "noi_dung": "Tiền và cơ hội kiếm tiền đến khá nhiều, nhưng bạn dễ mệt vì phải gánh. Ôm nhiều mối cùng lúc dễ làm bạn hụt sức. Nên chọn ít nguồn thu mà vững, và nhờ người giỏi số liệu giúp quản phần còn lại.",
+      "can_cu": [
+       "Tài (hành Hỏa) chiếm 48% điểm ngũ hành; Tài đậm mà thân nhược (tài đa thân nhược)"
+      ],
+      "ma_mau": "ds.bt.tien_bac.tai_nang_than_yeu.vap",
+      "huong_xu_ly": "Nên chọn ít nguồn thu mà vững, và nhờ người giỏi số liệu giúp quản phần còn lại."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Tiền đến từ nhiều nguồn",
+      "noi_dung": "Bạn nhạy với cơ hội; tiền có thể đến từ nhiều nguồn như làm thêm, buôn bán, giới thiệu khách. Nên giữ một khoản riêng không bao giờ đem đi đầu tư mạo hiểm.",
+      "can_cu": [
+       "Thiên Tài lộ ra thiên can"
+      ],
+      "ma_mau": "ds.bt.tien_bac.thien_tai_lo.manh",
+      "loi_khuyen": "Nên giữ một khoản riêng không bao giờ đem đi đầu tư mạo hiểm."
+     }
+    ],
+    "doan": [
+     "Tiền bạc của bạn vào ra khá đều; giữ được bao nhiêu tuỳ thói quen chi tiêu.",
+     "Chỗ mạnh của bạn ở mảng này: tiền đến từ nhiều nguồn. Còn chỗ cần để ý: tiền đến nhiều nhưng dễ mệt vì gánh — cách gỡ nằm ngay trong từng hộp."
+    ],
+    "can_cu": [
+     "Tài (hành Hỏa) chiếm 48% điểm ngũ hành; Tài đậm mà thân nhược (tài đa thân nhược)",
+     "Thiên Tài lộ ra thiên can",
+     "Theo cách cân sức (dụng thần phù ức + điều hậu): Cân bằng — Tài (Hỏa) là hành nên bớt mà đậm −1",
+     "Theo tháng sinh (hỷ / kỵ của cách cục): Cân bằng"
+    ],
+    "cau_tu_soi": "Lần gần nhất bạn tiêu tiền mà thấy đáng, đó là cho điều gì?",
+    "hai_cach_muc": {
+     "cach_1": "can_bang",
+     "cach_2": "can_bang"
+    },
+    "moi_xem": {
+     "diem_nhan": "Tiền bạc của bạn vào ra khá đều; giữ được bao nhiêu tuỳ thói quen chi tiêu.",
+     "cau_hoi": "Tiền đến với bạn theo đường nào, và thói quen nào làm tiền ra nhanh hơn bạn nghĩ?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "ngu_hanh",
+      "ten": "Ngũ hành",
+      "han": "五行",
+      "mo_dun": "battu",
+      "de_hieu": "Năm loại 'khí': Kim (kim loại), Mộc (cây), Thuỷ (nước), Hoả (lửa), Thổ (đất). Chúng sinh nhau và khắc nhau theo vòng.",
+      "vi_du": "Mộc sinh Hoả (gỗ nhóm lửa); Thuỷ khắc Hoả (nước dập lửa).",
+      "khop": [
+       "ngũ hành"
+      ]
+     },
+     {
+      "ma": "than_nhuoc",
+      "ten": "Thân nhược",
+      "han": "身弱",
+      "mo_dun": "battu",
+      "de_hieu": "Nhật chủ ít được hỗ trợ — cần được nuôi dưỡng, bồi đắp.",
+      "vi_du": null,
+      "khop": [
+       "thân nhược"
+      ]
+     },
+     {
+      "ma": "thien_tai",
+      "ten": "Thiên Tài",
+      "han": "偏財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bất ngờ, cơ hội, kinh doanh; người cha.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Tài"
+      ]
+     },
+     {
+      "ma": "dung_than",
+      "ten": "Dụng thần",
+      "han": "用神",
+      "mo_dun": "battu",
+      "de_hieu": "Hành 'bạn cần' để cân bằng lá số. Hệ thống trình bày hai cách tìm (phù ức, điều hậu) và không tự chọn thay bạn.",
+      "vi_du": null,
+      "khop": [
+       "dụng thần"
+      ]
+     },
+     {
+      "ma": "phu_uc",
+      "ten": "Phù ức",
+      "han": "扶抑",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo nguyên tắc 'yếu thì bồi, mạnh thì tiết' cho nhật chủ.",
+      "vi_du": null,
+      "khop": [
+       "phù ức"
+      ]
+     },
+     {
+      "ma": "dieu_hau",
+      "ten": "Điều hậu",
+      "han": "調候",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo khí hậu mùa sinh: sinh mùa nóng cần nước, mùa lạnh cần lửa.",
+      "vi_du": null,
+      "khop": [
+       "điều hậu"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "tinh_cam",
+    "tieu_de": "Tình yêu & hôn nhân",
+    "cau_hoi": "Tôi yêu và sống chung thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Tình cảm của bạn có ngọt có va; hiểu nhịp của nhau thì êm hơn nhiều.",
+    "hop": [
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ gánh nhiều trong tình cảm",
+      "noi_dung": "Trong tình cảm, bạn dễ gánh nhiều: lo kinh tế, chiều ý, mệt mà không nói ra. Nên nói rõ phần việc của mỗi người và giữ thời gian nghỉ cho chính mình.",
+      "can_cu": [
+       "Sao phối ngẫu (nam: Tài): Tài (hành Hỏa) chiếm 48% điểm ngũ hành"
+      ],
+      "ma_mau": "ds.bt.tinh_cam.nam_sao_nang.vap",
+      "huong_xu_ly": "Nên nói rõ phần việc của mỗi người và giữ thời gian nghỉ cho chính mình."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ làm khó nhau bằng lời nói",
+      "noi_dung": "Hai người hay làm khó nhau bằng lời nói, nhất là khi mệt. Nên cùng giữ một quy tắc: lúc nóng thì tạm dừng, nói lại sau một giờ.",
+      "can_cu": [
+       "Chi ngày (cung phối ngẫu): năm – ngày: Ngọ–Ngọ tự hình; ngày – giờ: Ngọ–Ngọ tự hình"
+      ],
+      "ma_mau": "ds.bt.tinh_cam.chi_ngay_hinh.vap",
+      "huong_xu_ly": "Nên cùng giữ một quy tắc: lúc nóng thì tạm dừng, nói lại sau một giờ."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Chung thuỷ, coi trọng ổn định",
+      "noi_dung": "Bạn chung thuỷ, coi trọng sự ổn định và chăm lo đời sống hai người. Nên thỉnh thoảng làm điều mới để quan hệ không nhạt.",
+      "can_cu": [
+       "Chi ngày Ngọ (cung phối ngẫu), bản khí Đinh là Chính Tài"
+      ],
+      "ma_mau": "ds.bt.tinh_cam.phoi.chinh_tai.manh",
+      "loi_khuyen": "Nên thỉnh thoảng làm điều mới để quan hệ không nhạt."
+     }
+    ],
+    "doan": [
+     "Tình cảm của bạn có ngọt có va; hiểu nhịp của nhau thì êm hơn nhiều.",
+     "Hai cách đọc khác nhau ở mảng này: theo cách cân sức thì cần lưu ý, theo tháng sinh thì cân bằng; phần dưới viết theo mức chung là cân bằng.",
+     "Chỗ mạnh của bạn ở mảng này: chung thuỷ, coi trọng ổn định. Còn chỗ cần để ý: dễ gánh nhiều trong tình cảm; dễ làm khó nhau bằng lời nói — mỗi hộp đã kèm việc nên làm."
+    ],
+    "can_cu": [
+     "Sao phối ngẫu (nam: Tài): Tài (hành Hỏa) chiếm 48% điểm ngũ hành",
+     "Chi ngày (cung phối ngẫu): năm – ngày: Ngọ–Ngọ tự hình; ngày – giờ: Ngọ–Ngọ tự hình",
+     "Chi ngày Ngọ (cung phối ngẫu), bản khí Đinh là Chính Tài",
+     "Theo cách cân sức (dụng thần phù ức + điều hậu): Cần lưu ý — Tài (Hỏa) là hành nên bớt mà đậm −1",
+     "Theo tháng sinh (hỷ / kỵ của cách cục): Cân bằng",
+     "Hai cách cho mức khác nhau → mức chung Cân bằng (chỉ giữ mức mạnh khi cả hai cách cùng thấy)"
+    ],
+    "cau_tu_soi": "Bạn cần người ấy làm gì để thấy được thương, và bạn đã nói điều đó ra chưa?",
+    "hai_cach_muc": {
+     "cach_1": "can_chu_dong",
+     "cach_2": "can_bang"
+    },
+    "moi_xem": {
+     "diem_nhan": "Tình cảm của bạn có ngọt có va; hiểu nhịp của nhau thì êm hơn nhiều.",
+     "cau_hoi": "Bạn gắn bó theo kiểu nào, và va chạm trong tình cảm hay bắt đầu từ đâu?",
+     "so_doan": 3,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "ngu_hanh",
+      "ten": "Ngũ hành",
+      "han": "五行",
+      "mo_dun": "battu",
+      "de_hieu": "Năm loại 'khí': Kim (kim loại), Mộc (cây), Thuỷ (nước), Hoả (lửa), Thổ (đất). Chúng sinh nhau và khắc nhau theo vòng.",
+      "vi_du": "Mộc sinh Hoả (gỗ nhóm lửa); Thuỷ khắc Hoả (nước dập lửa).",
+      "khop": [
+       "ngũ hành"
+      ]
+     },
+     {
+      "ma": "hinh",
+      "ten": "Hình",
+      "han": "刑",
+      "mo_dun": "battu",
+      "de_hieu": "Quan hệ 'làm tổn thương' giữa các chi — dễ phiền muộn, thị phi.",
+      "vi_du": null,
+      "khop": [
+       "tự hình"
+      ]
+     },
+     {
+      "ma": "chinh_tai",
+      "ten": "Chính Tài",
+      "han": "正財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bạc ổn định, lao động chân chính; với nam còn chỉ vợ.",
+      "vi_du": null,
+      "khop": [
+       "Chính Tài"
+      ]
+     },
+     {
+      "ma": "dung_than",
+      "ten": "Dụng thần",
+      "han": "用神",
+      "mo_dun": "battu",
+      "de_hieu": "Hành 'bạn cần' để cân bằng lá số. Hệ thống trình bày hai cách tìm (phù ức, điều hậu) và không tự chọn thay bạn.",
+      "vi_du": null,
+      "khop": [
+       "dụng thần"
+      ]
+     },
+     {
+      "ma": "phu_uc",
+      "ten": "Phù ức",
+      "han": "扶抑",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo nguyên tắc 'yếu thì bồi, mạnh thì tiết' cho nhật chủ.",
+      "vi_du": null,
+      "khop": [
+       "phù ức"
+      ]
+     },
+     {
+      "ma": "dieu_hau",
+      "ten": "Điều hậu",
+      "han": "調候",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo khí hậu mùa sinh: sinh mùa nóng cần nước, mùa lạnh cần lửa.",
+      "vi_du": null,
+      "khop": [
+       "điều hậu"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "gia_dinh",
+    "tieu_de": "Gia đình: cha mẹ, anh em, con cái",
+    "cau_hoi": "Tôi và người nhà hợp nhau ra sao?",
+    "muc": "can_chu_dong",
+    "nhan_muc": "Cần lưu ý",
+    "tom_tat": "Chuyện gia đình đòi bạn tự lo sớm và giữ ranh giới rõ.",
+    "hop": [
+     {
+      "loai": "luu_y",
+      "tieu_de": "Việc kiếm tiền lấn thời gian gia đình",
+      "noi_dung": "Chuyện tiền bạc, công việc hay lấn vào thời gian dành cho gia đình và việc học. Nên giữ một buổi cố định mỗi tuần cho gia đình và không làm việc trong buổi đó.",
+      "can_cu": [
+       "Tài đậm (48%) phá Ấn"
+      ],
+      "ma_mau": "ds.bt.gia_dinh.tai_pha_an.vap",
+      "huong_xu_ly": "Nên giữ một buổi cố định mỗi tuần cho gia đình và không làm việc trong buổi đó."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Con cái dễ khác tính bạn",
+      "noi_dung": "Con cái hoặc người trẻ bạn dìu dắt dễ khác tính bạn và muốn đi đường riêng. Nên hỏi con nghĩ gì trước khi khuyên, và để con tự chọn ở việc nhỏ.",
+      "can_cu": [
+       "Trụ ngày – trụ giờ có xung / hình / hại (trụ giờ: con cái)"
+      ],
+      "ma_mau": "ds.bt.gia_dinh.gio_ngay_xung.vap",
+      "huong_xu_ly": "Nên hỏi con nghĩ gì trước khi khuyên, và để con tự chọn ở việc nhỏ."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Có chỗ dựa từ mẹ, người lớn",
+      "noi_dung": "Mẹ hoặc người lớn trong nhà là chỗ dựa của bạn; lúc khó bạn vẫn có nơi để về. Nên dành thời gian đều đặn cho người đã che chở mình, kể cả khi bận.",
+      "can_cu": [
+       "Ấn (hành Kim) chiếm 29% điểm ngũ hành (mẹ, người che chở)"
+      ],
+      "ma_mau": "ds.bt.gia_dinh.an_ro.manh",
+      "loi_khuyen": "Nên dành thời gian đều đặn cho người đã che chở mình, kể cả khi bận."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Con cái là động lực lớn",
+      "noi_dung": "Chuyện con cái có chỗ rõ trong đời bạn; con là động lực lớn để bạn cố gắng. Nên kể cho con nghe cả những lần bạn vượt khó, chứ không riêng thành quả.",
+      "can_cu": [
+       "Sao con cái (nam: Quan Sát): Quan Sát (hành Thổ) chiếm 12% điểm ngũ hành"
+      ],
+      "ma_mau": "ds.bt.gia_dinh.con_ro.manh",
+      "loi_khuyen": "Nên kể cho con nghe cả những lần bạn vượt khó, chứ không riêng thành quả."
+     }
+    ],
+    "doan": [
+     "Chuyện gia đình đòi bạn tự lo sớm và giữ ranh giới rõ.",
+     "Chỗ mạnh của bạn ở mảng này: có chỗ dựa từ mẹ, người lớn; con cái là động lực lớn. Còn chỗ cần để ý: việc kiếm tiền lấn thời gian gia đình; con cái dễ khác tính bạn — mỗi điều có cách gỡ ngay trong hộp."
+    ],
+    "can_cu": [
+     "Tài đậm (48%) phá Ấn",
+     "Trụ ngày – trụ giờ có xung / hình / hại (trụ giờ: con cái)",
+     "Ấn (hành Kim) chiếm 29% điểm ngũ hành (mẹ, người che chở)",
+     "Sao con cái (nam: Quan Sát): Quan Sát (hành Thổ) chiếm 12% điểm ngũ hành",
+     "Theo cách cân sức (dụng thần phù ức + điều hậu): Cần lưu ý — Ấn (Kim) là hành cần thêm +1",
+     "Theo tháng sinh (hỷ / kỵ của cách cục): Cần lưu ý — Ấn (Kim) là hành cần thêm +1"
+    ],
+    "cau_tu_soi": "Nếp nào của gia đình bạn muốn giữ, và nếp nào bạn muốn làm khác?",
+    "hai_cach_muc": {
+     "cach_1": "can_chu_dong",
+     "cach_2": "can_chu_dong"
+    },
+    "moi_xem": {
+     "diem_nhan": "Chuyện gia đình đòi bạn tự lo sớm và giữ ranh giới rõ.",
+     "cau_hoi": "Bạn nhận được gì từ gia đình, và nếp nào bạn muốn làm khác cho thế hệ sau?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "ngu_hanh",
+      "ten": "Ngũ hành",
+      "han": "五行",
+      "mo_dun": "battu",
+      "de_hieu": "Năm loại 'khí': Kim (kim loại), Mộc (cây), Thuỷ (nước), Hoả (lửa), Thổ (đất). Chúng sinh nhau và khắc nhau theo vòng.",
+      "vi_du": "Mộc sinh Hoả (gỗ nhóm lửa); Thuỷ khắc Hoả (nước dập lửa).",
+      "khop": [
+       "ngũ hành"
+      ]
+     },
+     {
+      "ma": "dung_than",
+      "ten": "Dụng thần",
+      "han": "用神",
+      "mo_dun": "battu",
+      "de_hieu": "Hành 'bạn cần' để cân bằng lá số. Hệ thống trình bày hai cách tìm (phù ức, điều hậu) và không tự chọn thay bạn.",
+      "vi_du": null,
+      "khop": [
+       "dụng thần"
+      ]
+     },
+     {
+      "ma": "phu_uc",
+      "ten": "Phù ức",
+      "han": "扶抑",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo nguyên tắc 'yếu thì bồi, mạnh thì tiết' cho nhật chủ.",
+      "vi_du": null,
+      "khop": [
+       "phù ức"
+      ]
+     },
+     {
+      "ma": "dieu_hau",
+      "ten": "Điều hậu",
+      "han": "調候",
+      "mo_dun": "battu",
+      "de_hieu": "Cách tìm dụng thần theo khí hậu mùa sinh: sinh mùa nóng cần nước, mùa lạnh cần lửa.",
+      "vi_du": null,
+      "khop": [
+       "điều hậu"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "hoc_tap",
+    "tieu_de": "Cách bạn học và nghĩ",
+    "cau_hoi": "Tôi học và suy nghĩ theo kiểu nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Bạn học tốt khi đúng cách học của mình; sai cách thì dễ nản.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Học sâu, cần hiểu gốc",
+      "noi_dung": "Bạn học sâu, cần hiểu gốc rễ rồi mới yên tâm làm. Nên chọn sách nền và khoá học bài bản thay vì mẹo nhanh.",
+      "can_cu": [
+       "Ấn (hành Kim) chiếm 29% điểm ngũ hành (học sâu)"
+      ],
+      "ma_mau": "ds.bt.hoc_tap.an_hoc.manh",
+      "loi_khuyen": "Nên chọn sách nền và khoá học bài bản thay vì mẹo nhanh."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Hiểu bằng trực giác trước",
+      "noi_dung": "Bạn có lối nghĩ riêng, hay hiểu bằng trực giác trước khi giải thích được. Nên ghi nhanh ý vừa nảy ra rồi kiểm lại bằng số liệu.",
+      "can_cu": [
+       "Thiên Ấn lộ ra thiên can"
+      ],
+      "ma_mau": "ds.bt.hoc_tap.thien_an_hoc.manh",
+      "loi_khuyen": "Nên ghi nhanh ý vừa nảy ra rồi kiểm lại bằng số liệu."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Thích hỏi vì sao",
+      "noi_dung": "Bạn thích hỏi vì sao, hay tìm hiểu triết lý và ý nghĩa đằng sau mọi việc. Nên chọn một môn để học có hệ thống thay vì đọc rải rác.",
+      "can_cu": [
+       "Thần sát Thái Cực Quý Nhân (cát) ở trụ tháng — thiên hướng học hỏi, chiêm nghiệm, tôn giáo – triết học"
+      ],
+      "ma_mau": "ds.bt.hoc_tap.ts.thai_cuc_quy_nhan.manh",
+      "loi_khuyen": "Nên chọn một môn để học có hệ thống thay vì đọc rải rác."
+     }
+    ],
+    "doan": [
+     "Bạn học tốt khi đúng cách học của mình; sai cách thì dễ nản.",
+     "Chỗ mạnh của bạn ở mảng này: học sâu, cần hiểu gốc; hiểu bằng trực giác trước."
+    ],
+    "can_cu": [
+     "Ấn (hành Kim) chiếm 29% điểm ngũ hành (học sâu)",
+     "Thiên Ấn lộ ra thiên can",
+     "Thần sát Thái Cực Quý Nhân (cát) ở trụ tháng — thiên hướng học hỏi, chiêm nghiệm, tôn giáo – triết học",
+     "Có Văn Xương / Thái Cực Quý Nhân / Hoa Cái"
+    ],
+    "cau_tu_soi": "Điều gần nhất bạn học được nhanh là nhờ cách học nào?",
+    "moi_xem": {
+     "diem_nhan": "Bạn học tốt khi đúng cách học của mình; sai cách thì dễ nản.",
+     "cau_hoi": "Bạn học nhanh nhất theo cách nào, và vì sao có lúc ý hay bị bỏ dở?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "ngu_hanh",
+      "ten": "Ngũ hành",
+      "han": "五行",
+      "mo_dun": "battu",
+      "de_hieu": "Năm loại 'khí': Kim (kim loại), Mộc (cây), Thuỷ (nước), Hoả (lửa), Thổ (đất). Chúng sinh nhau và khắc nhau theo vòng.",
+      "vi_du": "Mộc sinh Hoả (gỗ nhóm lửa); Thuỷ khắc Hoả (nước dập lửa).",
+      "khop": [
+       "ngũ hành"
+      ]
+     },
+     {
+      "ma": "thien_an",
+      "ten": "Thiên Ấn",
+      "han": "偏印",
+      "mo_dun": "battu",
+      "de_hieu": "Kiến thức riêng, lối nghĩ độc đáo, sự che chở không theo lối thường.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Ấn"
+      ]
+     },
+     {
+      "ma": "than_sat",
+      "ten": "Thần sát",
+      "han": "神煞",
+      "mo_dun": "battu",
+      "de_hieu": "Các 'sao phụ' của Bát tự như Thiên Ất Quý Nhân, Đào Hoa, Dịch Mã — tín hiệu phụ, không phải phần luận chính.",
+      "vi_du": null,
+      "khop": [
+       "Thần sát"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "suc_khoe",
+    "tieu_de": "Sức khoẻ & năng lượng",
+    "cau_hoi": "Tôi nên giữ sức thế nào?",
+    "muc": "can_chu_dong",
+    "nhan_muc": "Cần lưu ý",
+    "tom_tat": "Bạn dễ hao sức hơn mình nghĩ; nên chủ động nghỉ trước khi mệt.",
+    "hop": [
+     {
+      "loai": "luu_y",
+      "tieu_de": "Phần cơ thể nên chăm sóc",
+      "noi_dung": "Sách xưa gắn Hỏa với tim và giấc ngủ — nên chăm sóc phòng ngừa. Bạn dễ thức khuya và uống nhiều cà phê để giữ đà. Nên giữ nhịp làm – nghỉ đều, bớt chất kích thích buổi tối và vận động vừa sức mỗi ngày.",
+      "can_cu": [
+       "Hỏa chiếm 48% điểm ngũ hành (thừa)"
+      ],
+      "ma_mau": "ds.bt.suc_khoe.thua.hoa.vap",
+      "huong_xu_ly": "Nên giữ nhịp làm – nghỉ đều, bớt chất kích thích buổi tối và vận động vừa sức mỗi ngày."
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Phần nên bù thêm: Mộc",
+      "noi_dung": "Phần sách xưa gắn với Mộc là gan, mắt và gân cơ — nên chăm sóc phòng ngừa. Bạn dễ cứng người vì ít vận động giãn cơ. Nên ngủ trước 23 giờ, giãn cơ mỗi ngày và cho mắt nghỉ sau mỗi giờ nhìn màn hình.",
+      "can_cu": [
+       "Mộc: 0 điểm (thiếu)"
+      ],
+      "ma_mau": "ds.bt.suc_khoe.thieu.moc.khuyen"
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Nhịp sức của riêng bạn",
+      "noi_dung": "Bạn dễ đuối khi ôm nhiều việc cùng lúc; sức hồi lại chậm hơn bạn nghĩ. Nên ngủ đủ, chia việc lớn thành phần nhỏ và nghỉ ngắn giữa các phần.",
+      "can_cu": [
+       "Thân nhược (tỉ lệ trợ lực 0.4)"
+      ],
+      "ma_mau": "ds.bt.suc_khoe.than.yeu.khuyen"
+     }
+    ],
+    "doan": [
+     "Bạn dễ hao sức hơn mình nghĩ; nên chủ động nghỉ trước khi mệt.",
+     "Các gợi ý dưới đây xoay quanh nếp ăn ngủ, vận động và khám định kỳ — làm đều mỗi ngày quan trọng hơn làm nhiều một lúc.",
+     "Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám."
+    ],
+    "can_cu": [
+     "Hỏa chiếm 48% điểm ngũ hành (thừa)",
+     "Mộc: 0 điểm (thiếu)",
+     "Thân nhược (tỉ lệ trợ lực 0.4)",
+     "Mức chương này theo độ lệch ngũ hành: thiếu ≥ 2 hành hoặc một hành ≥ 45% là cần lưu ý",
+     "Ngũ hành chỉ gợi ý nhịp sống; mọi vấn đề sức khoẻ cần hỏi bác sĩ."
+    ],
+    "cau_tu_soi": "Thói quen nhỏ nào nếu làm đều mỗi ngày sẽ giúp bạn khoẻ hơn nhiều nhất?",
+    "mien_tru": "Đây là gợi ý chăm sóc theo sách xưa, không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám.",
+    "moi_xem": {
+     "diem_nhan": "Bạn dễ hao sức hơn mình nghĩ; nên chủ động nghỉ trước khi mệt.",
+     "cau_hoi": "Nhịp sức của bạn lệch về phía nào, và nếp nhỏ nào giúp bạn giữ sức lâu?",
+     "so_doan": 3,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "ngu_hanh",
+      "ten": "Ngũ hành",
+      "han": "五行",
+      "mo_dun": "battu",
+      "de_hieu": "Năm loại 'khí': Kim (kim loại), Mộc (cây), Thuỷ (nước), Hoả (lửa), Thổ (đất). Chúng sinh nhau và khắc nhau theo vòng.",
+      "vi_du": "Mộc sinh Hoả (gỗ nhóm lửa); Thuỷ khắc Hoả (nước dập lửa).",
+      "khop": [
+       "ngũ hành",
+       "Ngũ hành"
+      ]
+     },
+     {
+      "ma": "than_nhuoc",
+      "ten": "Thân nhược",
+      "han": "身弱",
+      "mo_dun": "battu",
+      "de_hieu": "Nhật chủ ít được hỗ trợ — cần được nuôi dưỡng, bồi đắp.",
+      "vi_du": null,
+      "khop": [
+       "Thân nhược"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "quan_he",
+    "tieu_de": "Bạn bè, đồng nghiệp, người bên ngoài",
+    "cau_hoi": "Tôi làm việc với người khác thế nào?",
+    "muc": "can_bang",
+    "nhan_muc": "Cân bằng",
+    "tom_tat": "Bên ngoài có người giúp, có người làm phiền; chọn người là việc đáng để tâm.",
+    "hop": [
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Quen tự làm, ít nhờ ai",
+      "noi_dung": "Bạn quen tự làm, ít khi nhờ người ngang hàng. Nên thử làm chung một dự án nhỏ để thấy lợi ích của làm nhóm.",
+      "can_cu": [
+       "Tỷ Kiếp (hành Thủy) chiếm 11% điểm ngũ hành (người ngang hàng); thân nhược"
+      ],
+      "ma_mau": "ds.bt.quan_he.ban_it.khuyen",
+      "loi_khuyen": "Nên thử làm chung một dự án nhỏ để thấy lợi ích của làm nhóm."
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Dễ vướng chuyện thị phi",
+      "noi_dung": "Bạn dễ bị cuốn vào chuyện thị phi hoặc tính toán quá nhiều trong quan hệ. Nên tránh bàn chuyện người vắng mặt và nói thẳng khi có hiểu lầm.",
+      "can_cu": [
+       "Thần sát Vong Thần (hung) ở trụ tháng — dễ thị phi, tính toán quá mức"
+      ],
+      "ma_mau": "ds.bt.quan_he.ts.vong_than.vap",
+      "huong_xu_ly": "Nên tránh bàn chuyện người vắng mặt và nói thẳng khi có hiểu lầm."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Hay gặp người giúp đúng lúc",
+      "noi_dung": "Lúc khó, bạn hay gặp người giúp đúng lúc: thầy, sếp, hoặc người quen của người quen. Nên giữ liên lạc với người từng giúp mình và giúp lại người khác khi có thể.",
+      "can_cu": [
+       "Thần sát Thiên Ất Quý Nhân (cát) ở trụ tháng — quý nhân phù trợ, gặp khó có người giúp"
+      ],
+      "ma_mau": "ds.bt.quan_he.ts.thien_at_quy_nhan.manh",
+      "loi_khuyen": "Nên giữ liên lạc với người từng giúp mình và giúp lại người khác khi có thể."
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Có uy khi dẫn nhóm",
+      "noi_dung": "Khi đứng ra dẫn nhóm, bạn có uy và người khác dễ nghe theo. Nên nhận vai trưởng nhóm ở việc nhỏ trước để rèn cách dẫn người.",
+      "can_cu": [
+       "Thần sát Tướng Tinh (cát) ở trụ năm, ngày, giờ — khí chất lãnh đạo, có uy"
+      ],
+      "ma_mau": "ds.bt.quan_he.ts.tuong_tinh.manh",
+      "loi_khuyen": "Nên nhận vai trưởng nhóm ở việc nhỏ trước để rèn cách dẫn người."
+     }
+    ],
+    "doan": [
+     "Bên ngoài có người giúp, có người làm phiền; chọn người là việc đáng để tâm.",
+     "Chỗ mạnh của bạn ở mảng này: hay gặp người giúp đúng lúc; có uy khi dẫn nhóm. Còn chỗ cần để ý: dễ vướng chuyện thị phi — mỗi điều có cách gỡ ngay trong hộp."
+    ],
+    "can_cu": [
+     "Tỷ Kiếp (hành Thủy) chiếm 11% điểm ngũ hành (người ngang hàng); thân nhược",
+     "Thần sát Vong Thần (hung) ở trụ tháng — dễ thị phi, tính toán quá mức",
+     "Thần sát Thiên Ất Quý Nhân (cát) ở trụ tháng — quý nhân phù trợ, gặp khó có người giúp",
+     "Thần sát Tướng Tinh (cát) ở trụ năm, ngày, giờ — khí chất lãnh đạo, có uy"
+    ],
+    "cau_tu_soi": "Ai là người làm bạn mạnh lên sau mỗi lần gặp, và lần cuối bạn gặp họ là khi nào?",
+    "moi_xem": {
+     "diem_nhan": "Bên ngoài có người giúp, có người làm phiền; chọn người là việc đáng để tâm.",
+     "cau_hoi": "Người ngang hàng giúp bạn hay làm bạn mệt, và ai là người giúp đúng lúc?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "ngu_hanh",
+      "ten": "Ngũ hành",
+      "han": "五行",
+      "mo_dun": "battu",
+      "de_hieu": "Năm loại 'khí': Kim (kim loại), Mộc (cây), Thuỷ (nước), Hoả (lửa), Thổ (đất). Chúng sinh nhau và khắc nhau theo vòng.",
+      "vi_du": "Mộc sinh Hoả (gỗ nhóm lửa); Thuỷ khắc Hoả (nước dập lửa).",
+      "khop": [
+       "ngũ hành"
+      ]
+     },
+     {
+      "ma": "than_nhuoc",
+      "ten": "Thân nhược",
+      "han": "身弱",
+      "mo_dun": "battu",
+      "de_hieu": "Nhật chủ ít được hỗ trợ — cần được nuôi dưỡng, bồi đắp.",
+      "vi_du": null,
+      "khop": [
+       "thân nhược"
+      ]
+     },
+     {
+      "ma": "than_sat",
+      "ten": "Thần sát",
+      "han": "神煞",
+      "mo_dun": "battu",
+      "de_hieu": "Các 'sao phụ' của Bát tự như Thiên Ất Quý Nhân, Đào Hoa, Dịch Mã — tín hiệu phụ, không phải phần luận chính.",
+      "vi_du": null,
+      "khop": [
+       "Thần sát"
+      ]
+     },
+     {
+      "ma": "thien_at_quy_nhan",
+      "ten": "Thiên Ất Quý Nhân",
+      "han": "天乙貴人",
+      "mo_dun": "battu",
+      "de_hieu": "Thần sát tốt nhất: có người giúp đỡ lúc khó.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Ất Quý Nhân"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "nam_nay",
+    "tieu_de": "Năm nay & tháng tới",
+    "cau_hoi": "Năm nay và mấy tháng tới của tôi thế nào?",
+    "muc": "thuan",
+    "nhan_muc": "Thuận lợi",
+    "tom_tat": "Mười năm này xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
+    "hop": [
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Mười năm này: sáng tạo, thể hiện, đổi khuôn khổ cũ",
+      "noi_dung": "Mười năm này xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ; năm nay là năm thứ 1 của giai đoạn. Cả giai đoạn ở mức thuận lợi với bạn.",
+      "can_cu": [
+       "Đại vận Ất Dậu (Thương Quan), 2026–2035 — dang_di"
+      ],
+      "ma_mau": "ds.bt.nam_nay.van.thuong_quan.thuan",
+      "muc": "thuan"
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Năm nay",
+      "noi_dung": "Năm nay việc hay xoay quanh cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn; với bạn, năm ở mức cần lưu ý. Cả năm hợp gặp đối tác, thử nguồn thu mới. Hai cách đọc khác nhau ở năm nay: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+      "can_cu": [
+       "Lưu niên 2026 Bính Ngọ (Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng"
+      ],
+      "ma_mau": "ds.bt.nam_nay.nam.thien_tai.can_chu_dong",
+      "muc": "can_chu_dong"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Năm dễ tự tạo áp lực",
+      "noi_dung": "Năm bạn dễ tự tạo áp lực cho mình, cầu toàn quá mức. Nên giảm kỳ vọng và chọn ba việc chính cho cả năm.",
+      "can_cu": [
+       "ngày – lưu niên: Ngọ–Ngọ tự hình"
+      ],
+      "ma_mau": "ds.bt.nam_nay.nam.hinh",
+      "huong_xu_ly": "Nên giảm kỳ vọng và chọn ba việc chính cho cả năm."
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Từ 8/10 đến 6/11",
+      "noi_dung": "Việc gấp dồn tới, nên làm việc quan trọng nhất trước. Hai cách đọc khác nhau ở tháng này: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+      "can_cu": [
+       "Lưu nguyệt (tháng theo tiết) Mậu Tuất (Thất Sát), từ 2026-10-08"
+      ],
+      "ma_mau": "ds.bt.nam_nay.thang1.that_sat.can_chu_dong",
+      "muc": "can_chu_dong",
+      "tu": "2026-10-08",
+      "den": "2026-11-06"
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Từ 7/11 đến 6/12",
+      "noi_dung": "Hợp nộp hồ sơ, xin xét duyệt, làm việc với cấp trên. Hai cách đọc cho kết quả ngược nhau ở tháng này: nên thử nhỏ trước khi làm lớn.",
+      "can_cu": [
+       "Lưu nguyệt (tháng theo tiết) Kỷ Hợi (Chính Quan), từ 2026-11-07"
+      ],
+      "ma_mau": "ds.bt.nam_nay.thang2.chinh_quan.can_bang",
+      "muc": "can_bang",
+      "tu": "2026-11-07",
+      "den": "2026-12-06"
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Từ 7/12 đến 4/1",
+      "noi_dung": "Hợp học điều mới, nghĩ lại kế hoạch. Hai cách đọc cho kết quả ngược nhau ở tháng này: nên thử nhỏ trước khi làm lớn.",
+      "can_cu": [
+       "Lưu nguyệt (tháng theo tiết) Canh Tý (Thiên Ấn), từ 2026-12-07"
+      ],
+      "ma_mau": "ds.bt.nam_nay.thang3.thien_an.can_bang",
+      "muc": "can_bang",
+      "tu": "2026-12-07",
+      "den": "2027-01-04"
+     }
+    ],
+    "doan": [
+     "Mười năm này xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
+     "Ba tháng tới (tính theo tiết): từ 8/10 đến 6/11 cần lưu ý; từ 7/11 đến 6/12 cân bằng; từ 7/12 đến 4/1 cân bằng.",
+     "Khi các lớp nói khác nhau, ưu tiên mười năm trước, rồi đến năm, rồi mới đến tháng."
+    ],
+    "can_cu": [
+     "Đại vận Ất Dậu (Thương Quan), 2026–2035 — dang_di",
+     "Lưu niên 2026 Bính Ngọ (Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng",
+     "năm – lưu niên: Ngọ–Ngọ tự hình",
+     "tháng – lưu niên: Tân–Bính ngũ hợp (hoá Thủy)",
+     "ngày – lưu niên: Ngọ–Ngọ tự hình",
+     "ngày – lưu niên: Nhâm–Bính tương xung",
+     "giờ – lưu niên: Ngọ–Ngọ tự hình",
+     "Lưu nguyệt (tháng theo tiết) Mậu Tuất (Thất Sát), từ 2026-10-08",
+     "Lưu nguyệt (tháng theo tiết) Kỷ Hợi (Chính Quan), từ 2026-11-07",
+     "Lưu nguyệt (tháng theo tiết) Canh Tý (Thiên Ấn), từ 2026-12-07",
+     "Ưu tiên: đại vận > lưu niên > lưu nguyệt",
+     "Năm tính từ Lập xuân, tháng tính từ ngày giao tiết"
+    ],
+    "cau_tu_soi": "Nếu năm nay chỉ làm xong một việc, bạn chọn việc gì?",
+    "nam_xem": 2026,
+    "van_tham_chieu": {
+     "trang_thai": "dang_di",
+     "chi_so": 3
+    },
+    "moi_xem": {
+     "diem_nhan": "Mười năm này xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
+     "cau_hoi": "Năm nay nên dồn sức vào đâu, và tháng nào sắp tới hợp để bắt đầu việc mới?",
+     "so_doan": 3,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "dai_van",
+      "ten": "Đại vận",
+      "han": "大運",
+      "mo_dun": "battu",
+      "de_hieu": "Giai đoạn 10 năm của Bát tự, mỗi giai đoạn mang một cặp can chi mới tác động lên lá số.",
+      "vi_du": null,
+      "khop": [
+       "Đại vận",
+       "đại vận"
+      ]
+     },
+     {
+      "ma": "thuong_quan",
+      "ten": "Thương Quan",
+      "han": "傷官",
+      "mo_dun": "battu",
+      "de_hieu": "Thứ bạn sinh ra một cách sắc bén: sáng tạo phá cách, ăn nói, dám chống khuôn khổ.",
+      "vi_du": null,
+      "khop": [
+       "Thương Quan"
+      ]
+     },
+     {
+      "ma": "thien_tai",
+      "ten": "Thiên Tài",
+      "han": "偏財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bất ngờ, cơ hội, kinh doanh; người cha.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Tài"
+      ]
+     },
+     {
+      "ma": "hinh",
+      "ten": "Hình",
+      "han": "刑",
+      "mo_dun": "battu",
+      "de_hieu": "Quan hệ 'làm tổn thương' giữa các chi — dễ phiền muộn, thị phi.",
+      "vi_du": null,
+      "khop": [
+       "tự hình"
+      ]
+     },
+     {
+      "ma": "that_sat_battu",
+      "ten": "Thất Sát",
+      "han": "七殺",
+      "mo_dun": "battu",
+      "de_hieu": "Áp lực, thử thách, quyền uy cứng rắn — vừa là sức ép vừa là động lực.",
+      "vi_du": null,
+      "khop": [
+       "Thất Sát"
+      ]
+     },
+     {
+      "ma": "chinh_quan",
+      "ten": "Chính Quan",
+      "han": "正官",
+      "mo_dun": "battu",
+      "de_hieu": "Khuôn phép, cấp trên, danh dự; với nữ còn chỉ chồng.",
+      "vi_du": null,
+      "khop": [
+       "Chính Quan"
+      ]
+     },
+     {
+      "ma": "thien_an",
+      "ten": "Thiên Ấn",
+      "han": "偏印",
+      "mo_dun": "battu",
+      "de_hieu": "Kiến thức riêng, lối nghĩ độc đáo, sự che chở không theo lối thường.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Ấn"
+      ]
+     },
+     {
+      "ma": "lap_xuan",
+      "ten": "Lập xuân",
+      "han": "立春",
+      "mo_dun": "battu",
+      "de_hieu": "Tiết đầu năm (khoảng 4/2 dương lịch). Bát tự và Phong thuỷ đổi năm tại Lập xuân chứ không tại Tết.",
+      "vi_du": null,
+      "khop": [
+       "Lập xuân"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "van_han",
+    "tieu_de": "Vận hạn & điều nên tránh",
+    "cau_hoi": "Mười năm tới năm nào nên đi chậm, và chậm ở chuyện gì?",
+    "muc": null,
+    "nhan_muc": null,
+    "tom_tat": "Trong mười năm tới, năm thuận gần nhất là 2028: hợp nhận việc khó.",
+    "hop": [
+     {
+      "loai": "luu_y",
+      "tieu_de": "Năm 2026: đừng ham khoản tiền nhanh",
+      "noi_dung": "Năm 2026, tiền làm ăn vào ra lớn; một quyết định vội có thể kéo theo cả năm gỡ. Hai cách đọc khác nhau ở năm 2026: một cách thấy cần lưu ý, cách kia thấy cân bằng. Nên tránh: mở rộng làm ăn bằng tiền vay, nhận lời đầu tư từ người mới quen. Nên làm: làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc.",
+      "can_cu": [
+       "Năm 2026 Bính Ngọ (tính từ Lập xuân, Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+       "Năm 2026 nằm trong đại vận Ất Dậu (thuận lợi)"
+      ],
+      "ma_mau": "ds.bt.van_han.thien_tai.can.lon",
+      "huong_xu_ly": "Nên làm: làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc.",
+      "nam": 2026,
+      "muc": "can_chu_dong"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Năm 2027: giữ chặt khoản đều đặn",
+      "noi_dung": "Năm 2027, khoản tích luỹ dễ bị rút vì việc nhà, việc của vợ chồng hay người thân. Hai cách đọc khác nhau ở năm 2027: một cách thấy cần lưu ý, cách kia thấy cân bằng. Nên tránh: rút hết tiền tiết kiệm cho một khoản chi chưa cần gấp, cho người thân vay không hẹn ngày trả. Nên làm: giữ một khoản tiết kiệm không đụng tới và bàn với người nhà trước mỗi khoản chi lớn.",
+      "can_cu": [
+       "Năm 2027 Đinh Mùi (tính từ Lập xuân, Chính Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+       "Năm 2027 nằm trong đại vận Ất Dậu (thuận lợi)"
+      ],
+      "ma_mau": "ds.bt.van_han.chinh_tai.can.lon",
+      "huong_xu_ly": "Nên làm: giữ một khoản tiết kiệm không đụng tới và bàn với người nhà trước mỗi khoản chi lớn.",
+      "nam": 2027,
+      "muc": "can_chu_dong"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Năm 2033: giữ tiền khỏi bị chia",
+      "noi_dung": "Năm 2033, có người cạnh tranh hoặc chia phần ngay trong khoản bạn tưởng đã chắc tay. Nên tránh: ký bảo lãnh cho người khác, bỏ hết vốn vào một thương vụ để thắng đối thủ. Nên làm: chia tiền ra vài chỗ, mọi thoả thuận tiền bạc đều có chữ ký hai bên.",
+      "can_cu": [
+       "Năm 2033 Quý Sửu (tính từ Lập xuân, Kiếp Tài); cách 1: cần lưu ý, cách 2: cần lưu ý → Cần lưu ý",
+       "Năm 2033 nằm trong đại vận Ất Dậu (thuận lợi)"
+      ],
+      "ma_mau": "ds.bt.van_han.kiep_tai.can.lon",
+      "huong_xu_ly": "Nên làm: chia tiền ra vài chỗ, mọi thoả thuận tiền bạc đều có chữ ký hai bên.",
+      "nam": 2033,
+      "muc": "can_chu_dong"
+     },
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Năm 2028: hợp nhận việc khó",
+      "noi_dung": "Năm 2028, việc khó đến đúng lúc bạn đủ sức; vượt qua được là có chỗ đứng. Nên làm: nhận một việc khó mà người khác ngại, làm có kế hoạch từng tuần.",
+      "can_cu": [
+       "Năm 2028 Mậu Thân (tính từ Lập xuân, Thất Sát); cách 1: thuận lợi, cách 2: thuận lợi → Thuận lợi",
+       "Năm 2028 nằm trong đại vận Ất Dậu (thuận lợi)"
+      ],
+      "ma_mau": "ds.bt.van_han.that_sat.thuan",
+      "nam": 2028,
+      "muc": "thuan"
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Mười hai tháng tới",
+      "noi_dung": "Tháng nên đi chậm: từ 8/10 đến 6/11 (áp lực, việc gấp, người khó); từ 4/2 đến 5/3 (bạn bè, người ngang hàng); từ 6/3 đến 4/4 (tiền chung, cạnh tranh); từ 5/4 đến 5/5 (tay nghề, sức khoẻ, con cái). Tháng thuận để bắt đầu việc mới: từ 8/8 đến 7/9; từ 8/9 đến 7/10.",
+      "can_cu": [
+       "Tháng tiết Mậu Tuất (Thất Sát) từ 2026-10-08: cách 1 cần lưu ý, cách 2 cân bằng",
+       "Tháng tiết Kỷ Hợi (Chính Quan) từ 2026-11-07: cách 1 thuận lợi, cách 2 cần lưu ý",
+       "Tháng tiết Canh Tý (Thiên Ấn) từ 2026-12-07: cách 1 thuận lợi, cách 2 cần lưu ý",
+       "Tháng tiết Tân Sửu (Chính Ấn) từ 2027-01-05: cách 1 cần lưu ý, cách 2 thuận lợi",
+       "Tháng tiết Nhâm Dần (Tỷ Kiên) từ 2027-02-04: cách 1 cần lưu ý, cách 2 cần lưu ý",
+       "Tháng tiết Quý Mão (Kiếp Tài) từ 2027-03-06: cách 1 cần lưu ý, cách 2 cần lưu ý",
+       "Tháng tiết Giáp Thìn (Thực Thần) từ 2027-04-05: cách 1 cần lưu ý, cách 2 cân bằng",
+       "Tháng tiết Ất Tỵ (Thương Quan) từ 2027-05-06: cách 1 cần lưu ý, cách 2 cân bằng",
+       "Tháng tiết Bính Ngọ (Thiên Tài) từ 2027-06-06: cách 1 cần lưu ý, cách 2 cân bằng",
+       "Tháng tiết Đinh Mùi (Chính Tài) từ 2027-07-07: cách 1 cần lưu ý, cách 2 cân bằng",
+       "Tháng tiết Mậu Thân (Thất Sát) từ 2027-08-08: cách 1 thuận lợi, cách 2 thuận lợi",
+       "Tháng tiết Kỷ Dậu (Chính Quan) từ 2027-09-08: cách 1 thuận lợi, cách 2 thuận lợi"
+      ],
+      "ma_mau": "ds.bt.van_han.thang.cham"
+     }
+    ],
+    "doan": [
+     "Trong mười năm tới, năm thuận gần nhất là 2028: hợp nhận việc khó.",
+     "Những năm nên đi chậm: 2026 (tiền làm ăn, khoản ngoài lương), 2027 (tiền lương, tích luỹ, chuyện nhà), 2033 (tiền chung, cạnh tranh), 2034 (tay nghề, sức khoẻ, con cái).",
+     "Theo tập quán dân gian, 2026 là năm tuổi và 2032 là năm xung tuổi của bạn; xem như lời nhắc giữ nếp, không phải điềm báo. 2032 dễ có xáo trộn về chỗ ở hoặc chuyện của người gần nhất; thay đổi nào cũng nên bàn trước với người trong nhà.",
+     "Có 7 năm hai cách đọc cho kết quả khác nhau; ở những năm đó, thử nhỏ trước khi làm lớn."
+    ],
+    "can_cu": [
+     "Ưu tiên: đại vận > lưu niên > lưu nguyệt",
+     "Mức mỗi năm / tháng: can 1 điểm, chi 2 điểm theo hành cần thêm (+) / nên bớt (−) của từng cách; ≥ 1 thuận, ≤ −1 cần lưu ý; hai cách gộp như đại vận (ngược nhau → cân bằng, nói rõ)",
+     "Năm 2026 Bính Ngọ (tính từ Lập xuân, Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+     "Năm 2026 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Năm 2026: ngày – lưu niên: Ngọ–Ngọ tự hình",
+     "Chi trụ năm Ngọ, chi năm Ngọ: năm tuổi (tập quán dân gian, không đổi mức)",
+     "Năm 2027 Đinh Mùi (tính từ Lập xuân, Chính Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+     "Năm 2027 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Năm 2027: ngày – lưu niên: Ngọ–Mùi lục hợp",
+     "Năm 2027: năm – tháng – ngày – giờ – lưu niên: Tỵ–Ngọ–Mùi tam hội (Hỏa phương)",
+     "Năm 2028 Mậu Thân (tính từ Lập xuân, Thất Sát); cách 1: thuận lợi, cách 2: thuận lợi → Thuận lợi",
+     "Năm 2028 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Chi trụ năm Ngọ, chi năm Thân: năm tam tai (tập quán dân gian, không đổi mức)",
+     "Năm 2029 Kỷ Dậu (tính từ Lập xuân, Chính Quan); cách 1: thuận lợi, cách 2: thuận lợi → Thuận lợi",
+     "Năm 2029 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Chi trụ năm Ngọ, chi năm Dậu: năm tam tai (tập quán dân gian, không đổi mức)",
+     "Năm 2030 Canh Tuất (tính từ Lập xuân, Thiên Ấn); cách 1: cần lưu ý, cách 2: thuận lợi → Cân bằng",
+     "Năm 2030 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Năm 2030: năm – ngày – giờ – lưu niên: Ngọ–Tuất bán hợp (Hỏa)",
+     "Chi trụ năm Ngọ, chi năm Tuất: năm tam tai (tập quán dân gian, không đổi mức)",
+     "Năm 2031 Tân Hợi (tính từ Lập xuân, Chính Ấn); cách 1: thuận lợi, cách 2: cần lưu ý → Cân bằng",
+     "Năm 2031 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Năm 2032 Nhâm Tý (tính từ Lập xuân, Tỷ Kiên); cách 1: thuận lợi, cách 2: cần lưu ý → Cân bằng",
+     "Năm 2032 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Năm 2032: ngày – lưu niên: Ngọ–Tý lục xung",
+     "Chi trụ năm Ngọ, chi năm Tý: năm xung tuổi (tập quán dân gian, không đổi mức)",
+     "Năm 2033 Quý Sửu (tính từ Lập xuân, Kiếp Tài); cách 1: cần lưu ý, cách 2: cần lưu ý → Cần lưu ý",
+     "Năm 2033 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Năm 2033: ngày – lưu niên: Ngọ–Sửu lục hại",
+     "Chi trụ năm Ngọ, chi năm Sửu: năm va tuổi (tập quán dân gian, không đổi mức)",
+     "Năm 2034 Giáp Dần (tính từ Lập xuân, Thực Thần); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+     "Năm 2034 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Năm 2034: năm – ngày – giờ – lưu niên: Dần–Ngọ bán hợp (Hỏa)",
+     "Năm 2035 Ất Mão (tính từ Lập xuân, Thương Quan); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+     "Năm 2035 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Năm 2035: ngày – lưu niên: Ngọ–Mão tương phá",
+     "Năm tuổi, xung tuổi, va tuổi, tam tai: tập quán dân gian theo chi trụ năm, không đổi mức của năm",
+     "Năm tính từ Lập xuân, tháng tính từ ngày giao tiết (giờ Việt Nam)"
+    ],
+    "cau_tu_soi": "Năm nào trong mười năm tới bạn muốn dành cho việc lớn nhất, và năm nào nên giữ sức?",
+    "dong_nam": [
+     {
+      "nam": 2026,
+      "tuoi": 36,
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "muc_cach_1": "can_chu_dong",
+      "muc_cach_2": "can_bang",
+      "hai_cach_khac": true,
+      "hien_tai": true,
+      "co": [
+       {
+        "ma": "nam_tuoi",
+        "nhan": "năm tuổi",
+        "y": "Dân gian dặn năm tuổi nên giữ nếp, đừng dồn nhiều việc lớn vào cùng một năm.",
+        "tranh": "khởi sự nhiều việc lớn cùng lúc",
+        "lam": "chọn một việc lớn nhất để làm kỹ và đi khám sức khoẻ định kỳ đầu năm"
+       },
+       {
+        "ma": "hinh_ngay",
+        "nhan": "dễ va chạm với người gần",
+        "y": "Người gần dễ có những va chạm nhỏ lặp lại."
+       }
+      ],
+      "mang": "tiền làm ăn, khoản ngoài lương",
+      "y": "Năm 2026, tiền làm ăn vào ra lớn; một quyết định vội có thể kéo theo cả năm gỡ. Hai cách đọc khác nhau ở năm 2026: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+      "nen_tranh": "mở rộng làm ăn bằng tiền vay, nhận lời đầu tư từ người mới quen",
+      "nen_lam": "làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc",
+      "can_cu": [
+       "Năm 2026 Bính Ngọ (tính từ Lập xuân, Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+       "Năm 2026 nằm trong đại vận Ất Dậu (thuận lợi)",
+       "Năm 2026: ngày – lưu niên: Ngọ–Ngọ tự hình",
+       "Chi trụ năm Ngọ, chi năm Ngọ: năm tuổi (tập quán dân gian, không đổi mức)"
+      ]
+     },
+     {
+      "nam": 2027,
+      "tuoi": 37,
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "muc_cach_1": "can_chu_dong",
+      "muc_cach_2": "can_bang",
+      "hai_cach_khac": true,
+      "hien_tai": false,
+      "co": [],
+      "mang": "tiền lương, tích luỹ, chuyện nhà",
+      "y": "Năm 2027, khoản tích luỹ dễ bị rút vì việc nhà, việc của vợ chồng hay người thân. Hai cách đọc khác nhau ở năm 2027: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+      "nen_tranh": "rút hết tiền tiết kiệm cho một khoản chi chưa cần gấp, cho người thân vay không hẹn ngày trả",
+      "nen_lam": "giữ một khoản tiết kiệm không đụng tới và bàn với người nhà trước mỗi khoản chi lớn",
+      "can_cu": [
+       "Năm 2027 Đinh Mùi (tính từ Lập xuân, Chính Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+       "Năm 2027 nằm trong đại vận Ất Dậu (thuận lợi)",
+       "Năm 2027: ngày – lưu niên: Ngọ–Mùi lục hợp",
+       "Năm 2027: năm – tháng – ngày – giờ – lưu niên: Tỵ–Ngọ–Mùi tam hội (Hỏa phương)"
+      ]
+     },
+     {
+      "nam": 2028,
+      "tuoi": 38,
+      "muc": "thuan",
+      "nhan_muc": "Thuận lợi",
+      "muc_cach_1": "thuan",
+      "muc_cach_2": "thuan",
+      "hai_cach_khac": false,
+      "hien_tai": false,
+      "co": [
+       {
+        "ma": "tam_tai",
+        "nhan": "năm tam tai",
+        "y": "Theo tục lệ, ba năm tam tai liền nhau thì việc lớn nên tính kỹ hơn.",
+        "tranh": "vội khởi công, cưới hỏi, mở hàng chỉ vì chọn được ngày đẹp mà chưa chuẩn bị",
+        "lam": "lập kế hoạch tiền cho cả ba năm và bàn kỹ việc lớn với người nhà"
+       }
+      ],
+      "mang": "áp lực, việc gấp, người khó",
+      "y": "Năm 2028, việc khó đến đúng lúc bạn đủ sức; vượt qua được là có chỗ đứng.",
+      "nen_tranh": null,
+      "nen_lam": "nhận một việc khó mà người khác ngại, làm có kế hoạch từng tuần",
+      "can_cu": [
+       "Năm 2028 Mậu Thân (tính từ Lập xuân, Thất Sát); cách 1: thuận lợi, cách 2: thuận lợi → Thuận lợi",
+       "Năm 2028 nằm trong đại vận Ất Dậu (thuận lợi)",
+       "Chi trụ năm Ngọ, chi năm Thân: năm tam tai (tập quán dân gian, không đổi mức)"
+      ]
+     },
+     {
+      "nam": 2029,
+      "tuoi": 39,
+      "muc": "thuan",
+      "nhan_muc": "Thuận lợi",
+      "muc_cach_1": "thuan",
+      "muc_cach_2": "thuan",
+      "hai_cach_khac": false,
+      "hien_tai": false,
+      "co": [
+       {
+        "ma": "tam_tai",
+        "nhan": "năm tam tai",
+        "y": "Theo tục lệ, ba năm tam tai liền nhau thì việc lớn nên tính kỹ hơn.",
+        "tranh": "vội khởi công, cưới hỏi, mở hàng chỉ vì chọn được ngày đẹp mà chưa chuẩn bị",
+        "lam": "lập kế hoạch tiền cho cả ba năm và bàn kỹ việc lớn với người nhà"
+       }
+      ],
+      "mang": "công việc, vị trí, khuôn phép",
+      "y": "Năm 2029, bạn dễ được ghi nhận, giao vai trò rõ hơn hoặc lên chức.",
+      "nen_tranh": null,
+      "nen_lam": "nhận thêm trách nhiệm đúng chuyên môn và đề nghị được đánh giá lại vị trí",
+      "can_cu": [
+       "Năm 2029 Kỷ Dậu (tính từ Lập xuân, Chính Quan); cách 1: thuận lợi, cách 2: thuận lợi → Thuận lợi",
+       "Năm 2029 nằm trong đại vận Ất Dậu (thuận lợi)",
+       "Chi trụ năm Ngọ, chi năm Dậu: năm tam tai (tập quán dân gian, không đổi mức)"
+      ]
+     },
+     {
+      "nam": 2030,
+      "tuoi": 40,
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
+      "muc_cach_1": "can_chu_dong",
+      "muc_cach_2": "thuan",
+      "hai_cach_khac": true,
+      "hien_tai": false,
+      "co": [
+       {
+        "ma": "tam_tai",
+        "nhan": "năm tam tai",
+        "y": "Theo tục lệ, ba năm tam tai liền nhau thì việc lớn nên tính kỹ hơn.",
+        "tranh": "vội khởi công, cưới hỏi, mở hàng chỉ vì chọn được ngày đẹp mà chưa chuẩn bị",
+        "lam": "lập kế hoạch tiền cho cả ba năm và bàn kỹ việc lớn với người nhà"
+       }
+      ],
+      "mang": null,
+      "y": "Năm 2030, nhịp khá đều; việc hay xoay quanh học điều lạ, chuyên môn sâu, thời gian nhìn vào bên trong. Hai cách đọc cho kết quả ngược nhau ở năm 2030: nên thử nhỏ trước khi làm lớn.",
+      "nen_tranh": null,
+      "nen_lam": null,
+      "can_cu": [
+       "Năm 2030 Canh Tuất (tính từ Lập xuân, Thiên Ấn); cách 1: cần lưu ý, cách 2: thuận lợi → Cân bằng",
+       "Năm 2030 nằm trong đại vận Ất Dậu (thuận lợi)",
+       "Năm 2030: năm – ngày – giờ – lưu niên: Ngọ–Tuất bán hợp (Hỏa)",
+       "Chi trụ năm Ngọ, chi năm Tuất: năm tam tai (tập quán dân gian, không đổi mức)"
+      ]
+     },
+     {
+      "nam": 2031,
+      "tuoi": 41,
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
+      "muc_cach_1": "thuan",
+      "muc_cach_2": "can_chu_dong",
+      "hai_cach_khac": true,
+      "hien_tai": false,
+      "co": [],
+      "mang": null,
+      "y": "Năm 2031, nhịp khá đều; việc hay xoay quanh học hành, bằng cấp, được nâng đỡ, nhà cửa giấy tờ. Hai cách đọc cho kết quả ngược nhau ở năm 2031: nên thử nhỏ trước khi làm lớn.",
+      "nen_tranh": null,
+      "nen_lam": null,
+      "can_cu": [
+       "Năm 2031 Tân Hợi (tính từ Lập xuân, Chính Ấn); cách 1: thuận lợi, cách 2: cần lưu ý → Cân bằng",
+       "Năm 2031 nằm trong đại vận Ất Dậu (thuận lợi)"
+      ]
+     },
+     {
+      "nam": 2032,
+      "tuoi": 42,
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
+      "muc_cach_1": "thuan",
+      "muc_cach_2": "can_chu_dong",
+      "hai_cach_khac": true,
+      "hien_tai": false,
+      "co": [
+       {
+        "ma": "xung_tuoi",
+        "nhan": "năm xung tuổi",
+        "y": "Dân gian xem năm xung tuổi là năm hay có thay đổi: đổi chỗ, đổi việc, đi xa.",
+        "tranh": "đổi nhiều thứ trong cùng một lúc",
+        "lam": "thay đổi lần lượt từng việc, giữ một nếp quen làm chỗ dựa"
+       },
+       {
+        "ma": "xung_ngay",
+        "nhan": "dễ xáo trộn chỗ ở, người gần",
+        "y": "Chỗ ở hoặc người gần nhất (vợ chồng, người yêu) dễ có thay đổi.",
+        "tranh": "chuyển nhà hay quyết chuyện lớn của hai người trong lúc vội",
+        "lam": "bàn trước với người thân mọi thay đổi về chỗ ở và giữ thói quen ăn tối cùng nhau"
+       }
+      ],
+      "mang": null,
+      "y": "Năm 2032, nhịp khá đều; việc hay xoay quanh tự lập, làm theo cách của mình, bạn bè ngang hàng. Hai cách đọc cho kết quả ngược nhau ở năm 2032: nên thử nhỏ trước khi làm lớn.",
+      "nen_tranh": null,
+      "nen_lam": null,
+      "can_cu": [
+       "Năm 2032 Nhâm Tý (tính từ Lập xuân, Tỷ Kiên); cách 1: thuận lợi, cách 2: cần lưu ý → Cân bằng",
+       "Năm 2032 nằm trong đại vận Ất Dậu (thuận lợi)",
+       "Năm 2032: ngày – lưu niên: Ngọ–Tý lục xung",
+       "Chi trụ năm Ngọ, chi năm Tý: năm xung tuổi (tập quán dân gian, không đổi mức)"
+      ]
+     },
+     {
+      "nam": 2033,
+      "tuoi": 43,
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "muc_cach_1": "can_chu_dong",
+      "muc_cach_2": "can_chu_dong",
+      "hai_cach_khac": false,
+      "hien_tai": false,
+      "co": [
+       {
+        "ma": "va_tuoi",
+        "nhan": "năm va tuổi",
+        "y": "Dân gian xem đây là năm hay có va chạm nhỏ với người xung quanh."
+       },
+       {
+        "ma": "hinh_ngay",
+        "nhan": "dễ va chạm với người gần",
+        "y": "Người gần dễ có những va chạm nhỏ lặp lại."
+       }
+      ],
+      "mang": "tiền chung, cạnh tranh",
+      "y": "Năm 2033, có người cạnh tranh hoặc chia phần ngay trong khoản bạn tưởng đã chắc tay.",
+      "nen_tranh": "ký bảo lãnh cho người khác, bỏ hết vốn vào một thương vụ để thắng đối thủ",
+      "nen_lam": "chia tiền ra vài chỗ, mọi thoả thuận tiền bạc đều có chữ ký hai bên",
+      "can_cu": [
+       "Năm 2033 Quý Sửu (tính từ Lập xuân, Kiếp Tài); cách 1: cần lưu ý, cách 2: cần lưu ý → Cần lưu ý",
+       "Năm 2033 nằm trong đại vận Ất Dậu (thuận lợi)",
+       "Năm 2033: ngày – lưu niên: Ngọ–Sửu lục hại",
+       "Chi trụ năm Ngọ, chi năm Sửu: năm va tuổi (tập quán dân gian, không đổi mức)"
+      ]
+     },
+     {
+      "nam": 2034,
+      "tuoi": 44,
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "muc_cach_1": "can_chu_dong",
+      "muc_cach_2": "can_bang",
+      "hai_cach_khac": true,
+      "hien_tai": false,
+      "co": [],
+      "mang": "tay nghề, sức khoẻ, con cái",
+      "y": "Năm 2034, nhịp sống chậm lại, dễ ngại việc mới; chuyện con cái hay ăn uống trong nhà chiếm nhiều tâm sức. Hai cách đọc khác nhau ở năm 2034: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+      "nen_tranh": "ăn uống thất thường theo tiệc tùng, ôm hết việc của con thay vì để con tự làm",
+      "nen_lam": "giữ bữa ăn đều giờ, giao cho con một việc nhà rõ ràng mỗi tuần",
+      "can_cu": [
+       "Năm 2034 Giáp Dần (tính từ Lập xuân, Thực Thần); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+       "Năm 2034 nằm trong đại vận Ất Dậu (thuận lợi)",
+       "Năm 2034: năm – ngày – giờ – lưu niên: Dần–Ngọ bán hợp (Hỏa)"
+      ]
+     },
+     {
+      "nam": 2035,
+      "tuoi": 45,
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "muc_cach_1": "can_chu_dong",
+      "muc_cach_2": "can_bang",
+      "hai_cach_khac": true,
+      "hien_tai": false,
+      "co": [],
+      "mang": "lời nói, giấy tờ, cấp trên",
+      "y": "Năm 2035, chuyện giấy tờ, hợp đồng, lời đã nói dễ bị bắt bẻ; quan hệ với cấp trên căng hơn. Hai cách đọc khác nhau ở năm 2035: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+      "nen_tranh": "hứa miệng việc quan trọng, ký giấy tờ pháp lý khi chưa nhờ người rành đọc",
+      "nen_lam": "chuyển mọi thoả thuận sang văn bản và giữ bản sao",
+      "can_cu": [
+       "Năm 2035 Ất Mão (tính từ Lập xuân, Thương Quan); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
+       "Năm 2035 nằm trong đại vận Ất Dậu (thuận lợi)",
+       "Năm 2035: ngày – lưu niên: Ngọ–Mão tương phá"
+      ]
+     }
+    ],
+    "thang_toi": [
+     {
+      "tu": "2026-10-08",
+      "den": "2026-11-06",
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "hai_cach_khac": true,
+      "mang": "áp lực, việc gấp, người khó"
+     },
+     {
+      "tu": "2026-11-07",
+      "den": "2026-12-06",
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
+      "hai_cach_khac": true,
+      "mang": "công việc, vị trí, khuôn phép"
+     },
+     {
+      "tu": "2026-12-07",
+      "den": "2027-01-04",
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
+      "hai_cach_khac": true,
+      "mang": "học, nghĩ, chuyện trong lòng"
+     },
+     {
+      "tu": "2027-01-05",
+      "den": "2027-02-03",
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
+      "hai_cach_khac": true,
+      "mang": "giấy tờ, nhà cửa, người che chở"
+     },
+     {
+      "tu": "2027-02-04",
+      "den": "2027-03-05",
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "hai_cach_khac": false,
+      "mang": "bạn bè, người ngang hàng"
+     },
+     {
+      "tu": "2027-03-06",
+      "den": "2027-04-04",
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "hai_cach_khac": false,
+      "mang": "tiền chung, cạnh tranh"
+     },
+     {
+      "tu": "2027-04-05",
+      "den": "2027-05-05",
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "hai_cach_khac": true,
+      "mang": "tay nghề, sức khoẻ, con cái"
+     },
+     {
+      "tu": "2027-05-06",
+      "den": "2027-06-05",
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "hai_cach_khac": true,
+      "mang": "lời nói, giấy tờ, cấp trên"
+     },
+     {
+      "tu": "2027-06-06",
+      "den": "2027-07-06",
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "hai_cach_khac": true,
+      "mang": "tiền làm ăn, khoản ngoài lương"
+     },
+     {
+      "tu": "2027-07-07",
+      "den": "2027-08-07",
+      "muc": "can_chu_dong",
+      "nhan_muc": "Cần lưu ý",
+      "hai_cach_khac": true,
+      "mang": "tiền lương, tích luỹ, chuyện nhà"
+     },
+     {
+      "tu": "2027-08-08",
+      "den": "2027-09-07",
+      "muc": "thuan",
+      "nhan_muc": "Thuận lợi",
+      "hai_cach_khac": false,
+      "mang": "áp lực, việc gấp, người khó"
+     },
+     {
+      "tu": "2027-09-08",
+      "den": "2027-10-07",
+      "muc": "thuan",
+      "nhan_muc": "Thuận lợi",
+      "hai_cach_khac": false,
+      "mang": "công việc, vị trí, khuôn phép"
+     }
+    ],
+    "moi_xem": {
+     "diem_nhan": "Trong mười năm tới, năm thuận gần nhất là 2028: hợp nhận việc khó.",
+     "cau_hoi": "Những năm nào nên đi chậm lại, và chậm ở chuyện gì? Tháng nào hợp để bắt đầu việc mới?",
+     "so_doan": 4,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "dai_van",
+      "ten": "Đại vận",
+      "han": "大運",
+      "mo_dun": "battu",
+      "de_hieu": "Giai đoạn 10 năm của Bát tự, mỗi giai đoạn mang một cặp can chi mới tác động lên lá số.",
+      "vi_du": null,
+      "khop": [
+       "đại vận"
+      ]
+     },
+     {
+      "ma": "lap_xuan",
+      "ten": "Lập xuân",
+      "han": "立春",
+      "mo_dun": "battu",
+      "de_hieu": "Tiết đầu năm (khoảng 4/2 dương lịch). Bát tự và Phong thuỷ đổi năm tại Lập xuân chứ không tại Tết.",
+      "vi_du": null,
+      "khop": [
+       "Lập xuân"
+      ]
+     },
+     {
+      "ma": "thien_tai",
+      "ten": "Thiên Tài",
+      "han": "偏財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bất ngờ, cơ hội, kinh doanh; người cha.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Tài"
+      ]
+     },
+     {
+      "ma": "hinh",
+      "ten": "Hình",
+      "han": "刑",
+      "mo_dun": "battu",
+      "de_hieu": "Quan hệ 'làm tổn thương' giữa các chi — dễ phiền muộn, thị phi.",
+      "vi_du": null,
+      "khop": [
+       "tự hình"
+      ]
+     },
+     {
+      "ma": "chinh_tai",
+      "ten": "Chính Tài",
+      "han": "正財",
+      "mo_dun": "battu",
+      "de_hieu": "Tiền bạc ổn định, lao động chân chính; với nam còn chỉ vợ.",
+      "vi_du": null,
+      "khop": [
+       "Chính Tài"
+      ]
+     },
+     {
+      "ma": "luc_hop",
+      "ten": "Lục hợp",
+      "han": "六合",
+      "mo_dun": "battu",
+      "de_hieu": "Hai địa chi 'bắt tay' với nhau, như Tý–Sửu, Dần–Hợi: gắn kết, hoà hợp.",
+      "vi_du": null,
+      "khop": [
+       "lục hợp"
+      ]
+     },
+     {
+      "ma": "that_sat_battu",
+      "ten": "Thất Sát",
+      "han": "七殺",
+      "mo_dun": "battu",
+      "de_hieu": "Áp lực, thử thách, quyền uy cứng rắn — vừa là sức ép vừa là động lực.",
+      "vi_du": null,
+      "khop": [
+       "Thất Sát"
+      ]
+     },
+     {
+      "ma": "chinh_quan",
+      "ten": "Chính Quan",
+      "han": "正官",
+      "mo_dun": "battu",
+      "de_hieu": "Khuôn phép, cấp trên, danh dự; với nữ còn chỉ chồng.",
+      "vi_du": null,
+      "khop": [
+       "Chính Quan"
+      ]
+     },
+     {
+      "ma": "thien_an",
+      "ten": "Thiên Ấn",
+      "han": "偏印",
+      "mo_dun": "battu",
+      "de_hieu": "Kiến thức riêng, lối nghĩ độc đáo, sự che chở không theo lối thường.",
+      "vi_du": null,
+      "khop": [
+       "Thiên Ấn"
+      ]
+     },
+     {
+      "ma": "chinh_an",
+      "ten": "Chính Ấn",
+      "han": "正印",
+      "mo_dun": "battu",
+      "de_hieu": "Sự che chở, học vấn, mẹ, người nâng đỡ.",
+      "vi_du": null,
+      "khop": [
+       "Chính Ấn"
+      ]
+     },
+     {
+      "ma": "ty_kien",
+      "ten": "Tỷ Kiên",
+      "han": "比肩",
+      "mo_dun": "battu",
+      "de_hieu": "Ngang vai, cùng hành cùng âm dương với bạn: bạn bè, anh em, tinh thần tự lập.",
+      "vi_du": null,
+      "khop": [
+       "Tỷ Kiên"
+      ]
+     },
+     {
+      "ma": "luc_xung",
+      "ten": "Lục xung",
+      "han": "六沖",
+      "mo_dun": "battu",
+      "de_hieu": "Hai địa chi đối đầu, như Tý–Ngọ: va chạm, thay đổi, xáo trộn.",
+      "vi_du": null,
+      "khop": [
+       "lục xung"
+      ]
+     }
+    ]
+   },
+   {
+    "ma": "loi_khuyen",
+    "tieu_de": "Lời khuyên dành cho bạn",
+    "cau_hoi": "Tôi nên làm gì từ đây?",
+    "muc": null,
+    "nhan_muc": null,
+    "tom_tat": "Gom lại từ các chương trên: đây là điều bạn nên dùng, nên để ý và nên làm.",
+    "hop": [
+     {
+      "loai": "diem_manh",
+      "tieu_de": "Ba điểm mạnh nên dùng",
+      "noi_dung": "Bạn linh hoạt, hiểu người nhanh và dễ hoà vào môi trường mới. Bạn tiến lên nhờ được tin giao việc và nhờ chịu học thêm để xứng với vị trí. Mẹ hoặc người lớn trong nhà là chỗ dựa của bạn; lúc khó bạn vẫn có nơi để về.",
+      "can_cu": [
+       "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)",
+       "Quan gặp Ấn (quan ấn tương sinh)",
+       "Ấn (hành Kim) chiếm 29% điểm ngũ hành (mẹ, người che chở)"
+      ],
+      "ma_mau": "ds.bt.loi_khuyen.ba.manh"
+     },
+     {
+      "loai": "luu_y",
+      "tieu_de": "Ba điều nên để ý",
+      "noi_dung": "Bạn dễ bị cuốn theo việc của người khác, mất sức vào chỗ không phải của mình. Tiền và cơ hội kiếm tiền đến khá nhiều, nhưng bạn dễ mệt vì phải gánh. Trong tình cảm, bạn dễ gánh nhiều: lo kinh tế, chiều ý, mệt mà không nói ra. Nên gỡ từng điều theo ba việc ngay dưới.",
+      "can_cu": [
+       "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)",
+       "Tài (hành Hỏa) chiếm 48% điểm ngũ hành; Tài đậm mà thân nhược (tài đa thân nhược)",
+       "Sao phối ngẫu (nam: Tài): Tài (hành Hỏa) chiếm 48% điểm ngũ hành"
+      ],
+      "ma_mau": "ds.bt.loi_khuyen.ba.vap",
+      "huong_xu_ly": "Nên gỡ từng điều theo ba việc ngay dưới."
+     },
+     {
+      "loai": "loi_khuyen",
+      "tieu_de": "Ba việc nên làm",
+      "noi_dung": "Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn. Nên chọn ít nguồn thu mà vững, và nhờ người giỏi số liệu giúp quản phần còn lại. Nên nói rõ phần việc của mỗi người và giữ thời gian nghỉ cho chính mình.",
+      "can_cu": [],
+      "ma_mau": "ds.bt.loi_khuyen.ba.khuyen"
+     }
+    ],
+    "doan": [
+     "Gom lại từ các chương trên: đây là điều bạn nên dùng, nên để ý và nên làm.",
+     "Nếu tuần này chỉ làm được một việc, hãy bắt đầu từ chính thói quen của bạn — việc nhỏ làm đều có ích hơn kế hoạch lớn bỏ dở."
+    ],
+    "can_cu": [
+     "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)",
+     "Quan gặp Ấn (quan ấn tương sinh)",
+     "Ấn (hành Kim) chiếm 29% điểm ngũ hành (mẹ, người che chở)",
+     "Tài (hành Hỏa) chiếm 48% điểm ngũ hành; Tài đậm mà thân nhược (tài đa thân nhược)",
+     "Sao phối ngẫu (nam: Tài): Tài (hành Hỏa) chiếm 48% điểm ngũ hành"
+    ],
+    "cau_tu_soi": "Trong ba việc nên làm, việc nào bạn bắt đầu được ngay tuần này?",
+    "moi_xem": {
+     "diem_nhan": "Gom lại từ các chương trên: đây là điều bạn nên dùng, nên để ý và nên làm.",
+     "cau_hoi": "Ba điểm mạnh nào bạn nên dùng nhiều hơn, và việc nhỏ nào nên bắt đầu ngay?",
+     "so_doan": 2,
+     "phut_doc": 1
+    },
+    "thuat_ngu": [
+     {
+      "ma": "nhat_chu",
+      "ten": "Nhật chủ",
+      "han": "日主",
+      "mo_dun": "battu",
+      "de_hieu": "Can của trụ ngày — đại diện cho chính bạn. Mọi thứ khác trong Bát tự được xét trong quan hệ với chữ này.",
+      "vi_du": "Sinh ngày Nhâm Ngọ → nhật chủ Nhâm (nước lớn).",
+      "khop": [
+       "Nhật chủ"
+      ]
+     },
+     {
+      "ma": "than_nhuoc",
+      "ten": "Thân nhược",
+      "han": "身弱",
+      "mo_dun": "battu",
+      "de_hieu": "Nhật chủ ít được hỗ trợ — cần được nuôi dưỡng, bồi đắp.",
+      "vi_du": null,
+      "khop": [
+       "thân nhược"
+      ]
+     },
+     {
+      "ma": "ngu_hanh",
+      "ten": "Ngũ hành",
+      "han": "五行",
+      "mo_dun": "battu",
+      "de_hieu": "Năm loại 'khí': Kim (kim loại), Mộc (cây), Thuỷ (nước), Hoả (lửa), Thổ (đất). Chúng sinh nhau và khắc nhau theo vòng.",
+      "vi_du": "Mộc sinh Hoả (gỗ nhóm lửa); Thuỷ khắc Hoả (nước dập lửa).",
+      "khop": [
+       "ngũ hành"
+      ]
+     }
+    ]
+   }
+  ],
+  "ngay_xem": "2026-10-21",
+  "trang_thai": "nhap_ai",
+  "source_id": "tu_binh_chan_thuyen",
+  "school_id": "tu_binh",
+  "ket": "Đây là góc nhìn tham khảo văn hoá để bạn tự soi, không phải lời tiên đoán về đời bạn.",
+  "phi": {
+   "sao": 0,
+   "ly_do": "mien_phi",
+   "dang_nhap": true
+  },
+  "dien_dat": "mau",
+  "co_canh_bao": []
+ },
+ "ty_le": {
+  "ty_le": {
+   "ds.bt.tong_quan.nc.nham.yeu.vap": {
+    "dung": 36,
+    "chua_dung": 9
+   }
+  }
+ }
+}

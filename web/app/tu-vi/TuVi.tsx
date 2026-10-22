@@ -201,8 +201,8 @@ export function TuVi() {
                   onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "dinh_gio_mo" })}>
                   <DinhGioSinh laSo={laSoGoc} hoSo={hoSo} khongBietGio={khongBietGio} />
                 </KhoiMoLuoi>
-                <KhoiMoLuoi id="hop-tham" Icon={HeartHandshake} tieuDe="Hợp tham hai lá số"
-                  moTa="Năm sinh người ấy chạm vào cung nào trong lá số của bạn. Không chấm điểm hợp hay khắc."
+                <KhoiMoLuoi id="hop-tham" Icon={HeartHandshake} tieuDe="Xem lá số 2 người"
+                  moTa="Điểm tham khảo hợp – khắc theo mệnh, can chi, cung phi và tứ hoá Tử vi — kèm cách dung hoà."
                   onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "hop_tham" })}>
                   <HopThamTuVi laSo={laSoGoc} onHoi={hoi} />
                 </KhoiMoLuoi>

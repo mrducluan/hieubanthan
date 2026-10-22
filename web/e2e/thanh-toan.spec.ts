@@ -1,5 +1,6 @@
 // Thanh toán nạp Sao (TT-1/TT-2) + ủng hộ. Chữ ký payOS đối chiếu VECTOR sinh bằng SDK chính thức @payos/node 1.0.10
 // (không cài SDK vào dự án — chỉ dùng một lần để sinh số đúng). Luồng có Supabase thật thử bằng supabase/kiem_thu.
+import { napHoSo } from "./_hoso";
 import { test, expect } from "@playwright/test";
 import { createHmac } from "node:crypto";
 import { chuoiDuLieu, kiemWebhook, kyDuLieu, kyYeuCau, moTaChuyenKhoan } from "../lib/thanh-toan/payos";
@@ -72,6 +73,9 @@ test("/nap-sao: 3 gói, chưa bật tài khoản thì báo sắp mở; /ung-ho +
   await expect(page.getByTestId("ung-ho-vi")).toContainText("USDT (TRC20)");
   await expect(page.getByTestId("ung-ho-vi")).toContainText("TE2eTestWalletAddress000000000000");
   await expect(page.getByTestId("chan-trang-ung-ho")).toBeVisible();
+  // CTA-1: thẻ ủng hộ nằm trong khối "Đọc tiếp" cuối phần xem (hiện khi đã có kết quả — cần hồ sơ trên máy).
+  await napHoSo(page);
   await page.goto("/hom-nay");
+  await page.getByTestId("cuoi-phan-xem").scrollIntoViewIfNeeded();
   await expect(page.getByTestId("ung-ho-nho")).toBeVisible();
 });

@@ -1,7 +1,10 @@
 // Tải một <svg> trên trang thành ảnh PNG (không thêm thư viện). Biến màu CSS (--ls-*) được "đóng băng"
 // vào bản sao vì ảnh vẽ qua canvas không đọc stylesheet của trang. Phông chữ web không nhúng → trình
 // duyệt dùng phông hệ thống gần nhất trong ảnh.
-export async function taiAnhSvg(svg: SVGSVGElement, tenFile: string, tiLe = 2): Promise<void> {
+// TCS-1: ảnh tải về luôn có khung theo giao diện + dải chân (mã QR + hieuban.com) — lib/chan-anh.ts.
+import { dungAnhCoChan, nenCuaPhanTu, type TuyChonChan } from "@/lib/chan-anh";
+
+export async function taiAnhSvg(svg: SVGSVGElement, tenFile: string, tiLe = 2, chan: TuyChonChan = {}): Promise<void> {
   const cs = getComputedStyle(svg);
   const banSao = svg.cloneNode(true) as SVGSVGElement;
   const bien: string[] = [];
@@ -27,14 +30,8 @@ export async function taiAnhSvg(svg: SVGSVGElement, tenFile: string, tiLe = 2): 
   try {
     const anh = new Image();
     await new Promise<void>((ok, loi) => { anh.onload = () => ok(); anh.onerror = () => loi(new Error("Không dựng được ảnh")); anh.src = url; });
-    const canvas = document.createElement("canvas");
-    canvas.width = vb.width * tiLe;
-    canvas.height = vb.height * tiLe;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) throw new Error("Trình duyệt không hỗ trợ canvas");
-    ctx.scale(tiLe, tiLe);
-    ctx.drawImage(anh, 0, 0);
-    await taiCanvas(canvas, tenFile);
+    const nen = cs.getPropertyValue("--ls-nen").trim() || nenCuaPhanTu(svg);
+    await taiCanvas(dungAnhCoChan(anh, vb.width, vb.height, tiLe, nen, chan), tenFile);
   } finally {
     URL.revokeObjectURL(url);
   }

@@ -3,9 +3,9 @@
 import type { Metadata } from "next";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
-import { UngHoNho } from "@/components/ung-ho/UngHoNho";
 import { HomNay } from "./HomNay";
 import { docMaNgay } from "@/lib/ma-moi";
+import { MAU_TU } from "@/lib/the-chia-se";
 
 const DUONG = "/hom-nay";
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
@@ -22,7 +22,9 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const ma = nd ? ((await searchParams).the as string) : null;
   if (!nd || !ma) return META;
   const tieuDe = `Hôm nay ${nd.t} là Ngày cá nhân ${nd.n} — còn bạn?`;
-  const anh = [`/og/ngay?ma=${encodeURIComponent(ma)}`];
+  // TCS-1: mã QR trên ảnh mang đúng ?tu= của link (gán nguồn người quét ảnh).
+  const tu = (await searchParams).tu;
+  const anh = [`/og/ngay?ma=${encodeURIComponent(ma)}${typeof tu === "string" && MAU_TU.test(tu) ? `&tu=${tu}` : ""}`];
   return {
     ...META,
     openGraph: { ...META.openGraph, title: tieuDe, images: anh },
@@ -33,7 +35,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 export default async function Page({ searchParams }: Props) {
   const nd = await theNgay(searchParams);
   return (
-    <TrangCongCu duong={DUONG} mang="than_so" sau={<UngHoNho className="mx-auto mt-10 max-w-3xl" />} truoc={nd && (
+    <TrangCongCu duong={DUONG} mang="than_so" truoc={nd && (
       <p className="mx-auto mb-6 max-w-xl rounded-2xl border border-gold/30 bg-gold/[0.06] px-4 py-3 text-center text-sm" data-testid="loi-moi-ngay">
         Hôm nay <b className="text-gold">{nd.t}</b> là Ngày cá nhân <b className="text-gold">{nd.n}</b>{nd.k ? ` — ${nd.k.toLowerCase()}` : ""}. Còn bạn?
       </p>

@@ -7,6 +7,7 @@ import { NhanLop } from "@/components/huyen-hoc/KhoiMoLuoi";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { KiemChung } from "@/components/huyen-hoc/KiemChung";
+import { ViSao } from "@/components/luan-giai/HopNoiBat";
 import { Button } from "@/components/ui/button";
 import { usePost } from "@/lib/goi-api";
 import { maPhiHoa } from "@/lib/kiem-chung";
@@ -65,6 +66,8 @@ export function PhiHoaXem({ d, onChonCung, onHoi }: { d: PhiHoaOutputT; onChonCu
                 {n.viec_nen_lam && <p className="text-sm"><span className="text-jade">Nên làm:</span> {n.viec_nen_lam}</p>}
                 {n.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {n.cau_tu_soi}</p>}
                 {n.ghi_chu_tuan_triet && <p className="text-xs text-fg-faint">{n.ghi_chu_tuan_triet}</p>}
+                <ViSao canCu={n.can_cu} nho />
+
                 <div className="mt-auto flex flex-wrap gap-2 pt-1">
                   <Button size="sm" variant="secondary" onClick={() => chon(n.duong.den_cung ?? n.duong.tu_cung)}>
                     <MousePointerClick aria-hidden /> Xem cung trên lá số

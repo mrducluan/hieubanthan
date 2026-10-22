@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-"""TV-V2 — RULES hợp tham hai lá số (luangiai/tuvi_hop_tham.py). Viết TRƯỚC hàm.
-Can năm người kia theo âm lịch VIỆT (đổi năm tại Tết); trung tính, KHÔNG chấm điểm."""
+"""TV-V2 — RULES "Xem lá số 2 người" (tên cũ hợp tham hai lá số, luangiai/tuvi_hop_tham.py). Viết TRƯỚC hàm.
+Can năm người kia theo âm lịch VIỆT (đổi năm tại Tết). HN-2N: có `ban`/`kia` thì kèm điểm tham khảo (luật chi tiết
+ở test_tuvi_hai_nguoi.py); không có thì `diem` = None như cũ."""
 from __future__ import annotations
 
 import datetime as dt
@@ -33,13 +34,15 @@ def test_can_nam_viet_doi_tai_tet():
     assert ht.can_nam_viet(dt.date(1985, 2, 15)) == "Ất"
     # ngày âm: năm âm lấy thẳng
     assert ht.can_nam_viet(dt.date(1984, 12, 30), calendar_type="am") == "Giáp"
+    assert ht.nam_am_viet(dt.date(1990, 1, 26)) == 1989 and ht.nam_am_viet(dt.date(1990, 1, 27)) == 1990
+    assert ht.nam_am_viet(dt.date(1984, 12, 30), calendar_type="am") == 1984
 
 
 def test_mot_chieu(ls_a):
     r = ht.lap(ls_a, "Canh", "Ất", "ban_be")
     assert r["quan_he"] == "ban_be" and r["nhan_quan_he"] == "Bạn bè"
     assert r["can_nam_nguoi_kia"] == "Ất"
-    assert r["khong_cham_diem"] is True
+    assert r["diem"] is None and r["khong_cham_diem"] is True      # không đưa năm/giới tính → chưa chấm
     kq = ph.phi_tu_can("Ất", ls_a["cung"])
     assert [(x["hoa"], x["sao"], x["den_cung"], x["xung_cung"]) for x in r["nguoi_kia_vao_ban"]] == \
         [(x["hoa"], x["sao"], x["den_cung"], x["xung_cung"]) for x in kq]
@@ -77,13 +80,30 @@ def _chuoi(x):
     return []
 
 
-def test_trung_tinh_khong_doa_khong_diem(ls_a, ls_b):
+def test_co_diem_tham_khao(ls_a, ls_b):
+    ban, kia = {"nam_am": 1990, "gioi_tinh": "nam"}, {"nam_am": 1992, "gioi_tinh": "nu"}
+    mot = ht.lap(ls_a, "Canh", "Nhâm", "nguoi_yeu", ban=ban, kia=kia)
+    hai = ht.lap(ls_a, "Canh", "Nhâm", "nguoi_yeu", ls_kia=ls_b, ban=ban, kia=kia)
+    for r in (mot, hai):
+        assert r["khong_cham_diem"] is False and 0 <= r["diem"]["tong"] <= 100
+        assert r["tom_tat"][0].startswith(f"Điểm tham khảo: {r['diem']['tong']}/100")
+    assert mot["diem"]["hai_chieu"] is False and hai["diem"]["hai_chieu"] is True
+    tv = next(t for t in hai["diem"]["tieu_chi"] if t["ma"] == "tu_vi")
+    assert any("Can năm Canh của bạn" in s for s in tv["can_cu"])
+
+
+def test_trung_tinh_khong_doa(ls_a, ls_b):
     for q in ht.QUAN_HE:
-        r = ht.lap(ls_a, "Canh", "Nhâm", q, ls_kia=ls_b)
-        assert "diem" not in r and "muc_hop" not in r
-        for s in _chuoi({k: v for k, v in r.items() if k != "luu_y"}):
+        r = ht.lap(ls_a, "Canh", "Nhâm", q, ls_kia=ls_b, ban={"nam_am": 1990, "gioi_tinh": "nam"},
+                   kia={"nam_am": 1992, "gioi_tinh": "nu"})
+        bo = {"luu_y", "diem"}
+        chu = _chuoi({k: v for k, v in r.items() if k not in bo})
+        d = r["diem"]
+        chu += [d["nhan_muc"], d["mo_ta_muc"], d["loi_dan"], *d["goi_y"], *(t["giai_thich"] for t in d["tieu_chi"])]
+        for s in chu:
             for tu in TU_DOA:
                 assert tu not in s.lower(), (tu, s)
+            assert "không chấm điểm" not in s.lower()
 
 
 def test_khong_kb(ls_a, monkeypatch):

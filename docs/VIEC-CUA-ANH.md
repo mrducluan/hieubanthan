@@ -623,7 +623,7 @@ xuất sửa thẻ chia sẻ / lời mời. Thưởng Sao khi mời bạn **cầ
 luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoài. Thiếu phần này thì **không** bật bán Sao dù đã qua Gate 2.
 
 ## TV-V2. Nâng cấp Tử vi (2026-10-19)
-- [ ] Sau khi PR TV-V2 merge + Render deploy engine: mở `/tu-vi`, thử 4 khối mới (Đường bay tứ hoá, 3 tháng tới, Định giờ sinh, Hợp tham) với lá số của anh.
+- [ ] Sau khi PR TV-V2 merge + Render deploy engine: mở `/tu-vi`, thử 4 khối mới (Đường bay tứ hoá, 3 tháng tới, Định giờ sinh, Xem lá số 2 người — nay có điểm tham khảo hợp – khắc) với lá số của anh.
 - [x] Quyết: lưu "Không biết giờ" vào tài khoản — **đã chốt: lưu** (migration 0015 nới `do_tin_gio` nhận `unknown`).
 - [x] Quyết: định giờ hiện khoảng giờ theo **giờ đồng hồ** nơi sinh (kèm dòng "theo giờ lịch" khi lệch) — **đã chốt**; chế độ 12 canh: Tý = 00:00–00:59 ngày đã nhập, nhập 23:xx thì thêm ứng viên "Giờ Tý muộn" — **đã chốt**.
 - [ ] Chạy migration `supabase/migrations/0015_do_tin_gio_unknown.sql` trên Supabase → SQL Editor (sau 0007). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0015). Chưa chạy thì web vẫn lưu được, chỉ là "Không biết giờ" lưu như chưa có giờ.
@@ -635,6 +635,23 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
 - [ ] Cập nhật Chính sách quyền riêng tư: bài luận lưu (12 tháng, chỉ khi bấm Lưu/bật Tự lưu), phiếu "Đúng với mình" (24 tháng, khoá ẩn danh), câu hỏi đã lọc lưu khi người dùng chọn chủ đề / xác nhận "đúng ý tôi hỏi".
 - [ ] Deploy engine Render rồi mở `/tu-vi` → "Luận giải toàn bộ" với lá số của anh, đọc thử 12 chương.
 - [ ] Quyết (khi rảnh): Mệnh vô chính diệu gặp Tuần/Triệt — Nam phái thường coi là tốt, hiện bài vẫn ghi "việc đến chậm". Giữ hay đổi?
+
+## Phiên 2026-10-21 — Xem lá số 2 người, 3 tháng tới, Bát tự đời sống, thẻ chia sẻ QR, CTA cuối trang, Vận hạn
+Việc kỹ thuật đã xong trên nhánh `claude/confident-heisenberg-08dtom` (chi tiết: các dòng HN-2N, NHIP-2, BT-ĐS, TCS-1,
+CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
+- [ ] Sau khi merge + Render deploy engine (ENGINE_VERSION 0.1.5): mở `/tu-vi` và `/bat-tu` với lá số của anh — đọc
+  "Xem lá số 2 người" (điểm tham khảo), "3 tháng tới", luận giải toàn bộ (chương mới "Vận hạn & điều nên tránh"),
+  khối "Điều ngày sinh còn kể về bạn" cuối trang; thử tạo thẻ "5 mảnh ghép làm nên tôi" + trò đoán số trên điện thoại.
+- [ ] Quyết: thêm loại kiểm chứng `hai_nguoi` (migration nhỏ sau 0017) để bật nút "Đúng với mình" cho phần 2 người.
+- [ ] Quyết: Tử vi "3 tháng tới" — Kỵ tháng rơi THẲNG vào Mệnh / Tài Bạch / Quan Lộc hiện vẫn xếp "Bình" (hộp "Nên để ý"
+  đã nhắc). Đổi thành "Cần thận trọng"? (đổi mức + mã kiểm chứng của nhiều tháng).
+- [ ] Quyết 4 ý tưởng nạp Sao cần migration (`docs/MUC-TIEU-TANG-TRUONG.md`): tặng bạn một chương đã mở · thưởng Sao
+  chuỗi ngày ghé · thưởng mời gắn lần nạp đầu · gói Sao theo dịp.
+- [ ] Quyết (khi rảnh): Bát tự — mốc đại vận hai cách dụng thần đọc khác nhau, cho người dùng bấm "cách nào đúng với
+  mình" (đếm trên máy, như "Phái nào nói đúng" của thần số)?
+- [ ] Người rành Tử Bình duyệt bảng hỷ/kỵ theo cách cục (`battu_doi_song_kb.json`, mục `cach.*`) — nháp AI.
+- [ ] Nhờ luật sư rà thêm: điểm "Xem lá số 2 người" ghi rõ là tham khảo; chương Vận hạn dùng "Nên tránh / Nên làm",
+  không doạ, không vật phẩm.
 
 ## PT-KD-ĐS. Nâng cấp Phong thuỷ + Kinh Dịch (2026-10-21, `docs/NANG-CAP-PHONG-THUY-KINH-DICH.md`)
 

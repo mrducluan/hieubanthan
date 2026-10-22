@@ -8,7 +8,7 @@ from pathlib import Path
 
 _F = Path(__file__).parent / "data" / "phongthuy_doi_song.json"
 MUC = ("thuan", "can_bang", "can_chu_dong")
-NHAN_MAC_DINH = {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần chủ động"}
+NHAN_MAC_DINH = {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần lưu ý"}
 
 
 @lru_cache(maxsize=1)

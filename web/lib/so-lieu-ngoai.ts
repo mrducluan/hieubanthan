@@ -169,6 +169,13 @@ export interface BaoCaoPosthog {
   /** KC-0: phiếu "Đúng với mình / Chưa đúng" trên thẻ Tử vi theo mã mẫu (90 ngày, mỗi trình duyệt tính một lần mỗi
    *  kết quả). null = truy vấn lỗi. Chỉ để người biên tập xem lại KB — không tự đổi luận giải. */
   kiemChung: DongKiemChung[] | null;
+  /** CTA-1: khối "Đọc tiếp" cuối phần xem theo trang (người thấy / lượt bấm thẻ / bấm Sao / bấm ủng hộ) + biến thể câu
+   *  mời (thẻ Bản đồ 5 mảng, tiêu đề khối) + trò đoán số. null = truy vấn lỗi. Chỉ mã. */
+  cta: {
+    theoTrang: { tu: string; thay: number; bam: number; sao: number; ung_ho: number }[];
+    bienThe: { su_kien: string; bien_the: string; luot: number }[];
+    doan: { dung: number; sai: number };
+  } | null;
 }
 
 async function hogql<T>(query: string): Promise<T[]> {
@@ -234,8 +241,37 @@ async function baoCaoPosthogTho(): Promise<BaoCaoPosthog> {
      GROUP BY properties.loai, properties.mau LIMIT 500`)
     .then((rows) => rows.filter(([l, m]) => l && m).map(([l, m, d, c]) => ({ loai: l!, mau: m!, dung: Number(d), chua_dung: Number(c) })))
     .catch(() => null);
+  const CT = `timestamp > now() - INTERVAL 28 DAY`;
+  const cta = await Promise.all([
+    hogql<[string | null, string | null, number, number]>(
+      `SELECT event, properties.tu, count(), count(DISTINCT distinct_id) FROM events
+       WHERE ${CT} AND event IN ('cross_cta_viewed', 'cross_cta_clicked', 'sao_cta_clicked', 'donate_cta_clicked')
+       GROUP BY event, properties.tu LIMIT 200`),
+    hogql<[string, string | null, number]>(
+      `SELECT event, properties.bien_the, count() FROM events
+       WHERE ${CT} AND event IN ('cross_cta_viewed', 'cross_cta_clicked', 'share_created', 'guess_played')
+         AND properties.bien_the != '' GROUP BY event, properties.bien_the LIMIT 200`),
+    hogql<[number, number]>(`SELECT countIf(properties.dung = 1), countIf(properties.dung = 0) FROM events
+       WHERE ${CT} AND event = 'guess_played'`),
+  ]).then(([tt, bt, dd]) => {
+    const theo = new Map<string, { tu: string; thay: number; bam: number; sao: number; ung_ho: number }>();
+    for (const [e, tu, luot, nguoi] of tt) {
+      const k = tu || "khac";
+      const d = theo.get(k) ?? { tu: k, thay: 0, bam: 0, sao: 0, ung_ho: 0 };
+      if (e === "cross_cta_viewed") d.thay += Number(nguoi);
+      else if (e === "cross_cta_clicked") d.bam += Number(luot);
+      else if (e === "sao_cta_clicked") d.sao += Number(luot);
+      else d.ung_ho += Number(luot);
+      theo.set(k, d);
+    }
+    return {
+      theoTrang: [...theo.values()].sort((a, b) => b.thay - a.thay),
+      bienThe: bt.filter(([, b]) => b).map(([e, b, n]) => ({ su_kien: e, bien_the: b!, luot: Number(n) })),
+      doan: { dung: Number(dd[0]?.[0] ?? 0), sai: Number(dd[0]?.[1] ?? 0) },
+    };
+  }).catch(() => null);
   return {
-    yDinh, kiemChung,
+    yDinh, kiemChung, cta,
     pheu: PHEU.map(([e, ten]) => ({ su_kien: e, ten, luot: theo.get(e)?.luot ?? 0, nguoi: nguoi(e) })),
     quayLai: ql[0] ? { truoc: Number(ql[0][0]), tro_lai: Number(ql[0][1]) } : null,
     gate: {

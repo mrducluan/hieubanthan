@@ -17,7 +17,7 @@ Vòng tăng trưởng: **QUAY LẠI** (nhịp 3 tháng tới đổi theo tháng 
 | **Phi tinh tứ hoá 12 cung** (cung can → 48 đường bay, tự hoá, xung) | **Chưa có** | **LÀM** — CALC Python thuần, golden đối chứng iztro (`fliesTo`/`selfMutaged`) |
 | Radar 90 ngày (3 tháng lưu nguyệt) | Lưu nguyệt 5 phái + tứ hoá can tháng (TV-LN) | **LÀM** lớp RULES "Nhịp 3 tháng tới" ghép lưu nguyệt + tứ hoá lưu niên (chồng Kỵ, song Lộc) — không tính lại cung tháng |
 | Đẩu Quân tháng Giêng | Đã có, khớp iztro 680/680 | Không làm lại |
-| Hợp tham 2 lá số (can năm B phi hoá vào lá A) | Hợp đôi chỉ có thần số | **LÀM** — trung tính, **không chấm điểm** (quyết định 2026-09-30) |
+| Hợp tham 2 lá số (can năm B phi hoá vào lá A) | Hợp đôi chỉ có thần số | **LÀM** — trung tính, **không chấm điểm** (quyết định 2026-09-30). **HN-2N (2026-10-21):** đổi tên "Xem lá số 2 người", **có điểm tham khảo 0–100** (`luangiai/tuvi_hai_nguoi.py`, xem CLAUDE.md) |
 | Định chuẩn giờ sinh (±1 canh giờ, đối chiếu năm cũ) | `do_tin_gio` exact/approx, cờ giờ nhạy | **LÀM** — người dùng tự chọn năm đối chiếu, không lưu, không câu sức khoẻ |
 | Cung Phi Bát Trạch | Phong thuỷ mệnh quái theo **Lập xuân** (đúng hơn bản TS dùng năm dương) | Không làm lại |
 | Điều hầu dụng thần theo mùa | Bát tự đã có điều hầu (`test_battu_dieu_hau.py`), chi tiết hơn bản 4 mùa | Không làm lại |
@@ -89,6 +89,26 @@ trong cung nguồn.
   "luu_y": ["..."], "co_canh_bao": [...] }
 ```
 Mỗi tháng xếp mức theo tứ hoá của **năm âm chứa tháng đó** (`nam_am`), nên tháng sau Tết đọc cùng `luu_nien_sau`.
+
+**NHIP-2 (2026-10-21) — lời riêng từng tháng.** Bản đầu chỉ có gợi ý + tự soi theo 3 mức → ba tháng cùng "Bình" ra
+nguyên văn một câu (chủ dự án báo). Nay mỗi tháng thêm (giữ mọi trường cũ, `goi_y` = lời "Nên làm" mới):
+`nhan_thang`, `tieu_de_thang` (kết luận), `chu_de_thang`, `hop` (khuôn `Hop` LG-ĐS: `diem_manh` "Điểm sáng" theo
+cung Lộc tháng · `luu_y` "Nên để ý" theo cung Kỵ tháng + `huong_xu_ly` · `loi_khuyen` "Nên làm" theo cung tháng × mức),
+`can_cu` (học thuật: cung tháng, chính tinh, tứ hoá tháng/năm, luật xếp mức, ưu tiên), `diem_sang`, `de_y`,
+`tieu_diem`, `noi_tiep`; đầu khung `tom_tat_3_thang` + `cung` (12 cung, nhãn ngắn cho vòng mini). Luật lời:
+- Kết luận theo **tiêu điểm**: thuận → cung Lộc tháng; cần thận trọng → cung bị Kỵ chiếu (Mệnh/Tài/Quan) hoặc cung Kỵ;
+  bình → cung tháng. Trùng tháng trước → lấy kết luận của cung tháng.
+- Bổ sung theo dữ kiện: song Lộc, Lộc/Kỵ rơi đúng cung tháng, Lộc–Kỵ cùng cung, chồng Kỵ, Khoa giải, Quyền/Khoa chạm
+  cung tháng hoặc Mệnh/Tài/Quan; cung tháng trùng cung đại hạn > lưu niên > tiểu hạn → câu ưu tiên trong "Nên làm".
+- Tháng liền sau cùng cung + cùng can chi (tháng nhuận) → lời "nối dài nhịp tháng trước"; cung lặp → câu tự soi thứ hai.
+- KB `tuvi_phi_hoa_kb.json` → `nhip_3_thang.{cung_thang, loc_dich, ky_dich, ky_xung, quyen_dich, khoa_dich, bo_sung,
+  noi_tiep}` (nháp AI, source_id + school_id). Test: 24 lá golden × 4 ngày xem (+ phái, tháng nhuận) không bao giờ
+  trùng kết luận / "Nên làm" / tự soi; lời chính không tên sao, tên cung Hán, "hoá", cụm cấm.
+- Mã kiểm chứng `maNhip` (mức + lý do) **không đổi**. Hộp tháng trong chương `nam_nay` của Luận giải đời sống đổi mã sang
+  `ds.nam_nay.thang.{cung}.{mức}.{lý do}` (trước theo số thứ tự tháng trong khung).
+Web `NhipBaThang.tsx`: câu so ba tháng → biểu đồ nhịp (SVG, `motion`, tôn trọng giảm chuyển động) → thẻ tháng với hộp
+`HopNoiBat` + vòng 12 cung mini (chuyện chính / điểm sáng / nên để ý) → "Vì sao nói vậy" (chip tứ hoá + căn cứ) thu
+gọn; tứ hoá của năm + phái + ưu tiên trong khối "Cách tính" thu gọn cuối khung.
 
 ### POST `/v1/tuvi/hop-tham` — `{la_so, nguoi_kia, quan_he}`
 `nguoi_kia = {birth_date, calendar_type?, am_nhuan?, birth_time?, gender?, noi_sinh?, vung?}`;
@@ -193,3 +213,18 @@ Kiểm: `tests/test_tuvi_v22_oracle.py` (619 ca) + `tests/test_tuvi_ma_chuan.py`
 | `enrichLegacyChartWithV2Engine` | route `app/tuvi_v2_api.py` | **Không chuyển**: dự án không có "engine cũ" cần bọc — route nhận `la_so` và gọi thẳng các hàm trên | — |
 
 Không tìm thấy chỗ Python sai so với TS ở điểm TS đúng.
+
+## Đánh giá `05_CLAUDE_CODE_MASTER_BLUEPRINT.md` (Drive, 2026-10-21)
+
+Bộ Drive chủ dự án gửi lại gồm 5 tệp: 01 KB json, 02 migration SQL, 03 `astroEngine_v2_2.ts` (đã giữ làm oracle ở
+`engine/ziwei/oracle_v22/`), 04 adapter/seeder — đều đã đánh giá ở các mục trên. Tệp mới là 05 (bản đặc tả cho Claude Code):
+
+| Đề xuất trong 05 | Quyết định |
+|---|---|
+| Chạy migration v2.2 + seed 3 bảng KB vào Postgres, adapter `enrichLegacyChartWithV2Engine` | **Không** — một bộ tính duy nhất ở engine Python (TV-V2b); KB nằm trong git |
+| "Hội đồng 3 AI agent" mỗi lượt `/api/v2/consult` | **Không** — LLM chỉ diễn đạt gói ngữ cảnh (tầng NARRATIVE), chi phí ×3, hạn mức RL-1 |
+| Điểm rủi ro thang 10 ở dòng đầu, "cảnh báo trước" | **Không** — trái quy tắc không doạ; dùng mức Thuận / Bình / Cần thận trọng |
+| Radar 90 ngày | **Đã có** — "3 tháng tới" (NHIP-2: lời riêng từng tháng, hộp Điểm sáng / Nên để ý / Nên làm) |
+| "Cung giải cứu" (nơi Hoá Khoa / Tuần–Triệt chặn Kỵ) | **Đề xuất làm** — thêm vào hộp "Nên để ý" một câu "chỗ gỡ" (tất định, đã có `khoa_giai` trong nhịp tháng) |
+| Câu hỏi nghiệm lý quá khứ (retro check) | **Đã có một phần** — Định giờ sinh hỏi năm đã qua; kiểm chứng "Đúng với mình" trên hộp. Đề xuất: mỗi bài luận hỏi 1 năm đã qua của đại hạn trước |
+| Giả lập quyết định A/B, cải vận theo dụng thần Bát tự + cung phi | **Đề xuất cân nhắc** — Bát tự đời sống (BT-ĐS) đã nêu hành cần bổ sung (hai cách dụng thần); cung phi đã dùng trong "Xem lá số 2 người" |

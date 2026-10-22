@@ -5,23 +5,13 @@
 import { z } from "zod";
 import { LaSoVao } from "@/lib/la-so-vao";
 import { luanGiaiCoSao } from "@/lib/luan-giai-sao";
-import { phienNguoiDung } from "@/lib/cua-sao";
-import { bangTyLe, phieuCuaToi } from "@/lib/hoc-tuvi";
+import { themHocLuanGiai } from "@/lib/hoc-tuvi";
 
 const Input = z.object({ la_so: LaSoVao }).strict();
 
 // AI diễn đạt từng chương chạy song song phía engine (mỗi chương ≤ 40 giây).
 export const maxDuration = 60;
 
-async function trongSo(): Promise<Record<string, unknown>> {
-  const [bang, phien] = await Promise.all([bangTyLe().catch(() => ({})), phienNguoiDung().catch(() => null)]);
-  const ca_nhan = phien ? await phieuCuaToi(phien.sb, phien.user.id).catch(() => ({})) : {};
-  const them: Record<string, unknown> = {};
-  if (Object.keys(bang).length) them.trong_so = bang;
-  if (Object.keys(ca_nhan).length) them.ca_nhan = ca_nhan;
-  return them;
-}
-
 export function POST(req: Request) {
-  return luanGiaiCoSao(req, Input, "/v1/tuvi/luan-giai", "tuvi", undefined, trongSo);
+  return luanGiaiCoSao(req, Input, "/v1/tuvi/luan-giai", "tuvi", undefined, themHocLuanGiai);
 }
