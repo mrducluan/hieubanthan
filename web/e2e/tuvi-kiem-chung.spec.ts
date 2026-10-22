@@ -5,9 +5,10 @@ import { test, expect, type Page } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 import FX from "./fixtures/tuvi-v2.json";
 import { locThuocTinh } from "../lib/do-luong";
-import { MA_DOI_SONG, maNhip, maPhiHoa, MAU_KIEM_CHUNG, nhanMau, tinhKiemChung } from "../lib/kiem-chung";
+import { MA_DOI_SONG, MA_HAI_NGUOI, maNhip, maPhiHoa, MAU_KIEM_CHUNG, nhanMau, PHAI_HAI_NGUOI, tinhKiemChung } from "../lib/kiem-chung";
 
 const PHI_HOA = FX["phi-hoa"];
+const HOP_THAM = FX["hop-tham"];
 const NHIP = FX["nhip-3-thang"];
 type SK = { su_kien: string } & Record<string, unknown>;
 const kiemChung = (p: Page) => p.evaluate(() =>
@@ -104,4 +105,58 @@ test("thẻ Đường bay + tháng hiện tại có nút kiểm chứng; sự ki
   sk = (await kiemChung(page)).filter((e) => e.loai === "nhip_3_thang");
   expect(sk).toHaveLength(1);
   expect(sk[0]).toEqual({ su_kien: "tuvi_kiem_chung", feature_version: "gate_v1", loai: "nhip_3_thang", mau: maNhip(NHIP.thang[0]!), ket_qua: "dung", phai: NHIP.phai_luu_nguyet });
+});
+
+test("Xem lá số 2 người: hộp điểm có nút kiểm chứng loại hai_nguoi — gửi máy chủ + PostHog chỉ mã; hiện % khi đủ 30 phiếu", async ({ page }) => {
+  const D = HOP_THAM.diem!;
+  const hop = [...D.diem_manh, ...D.can_dung_hoa];
+  expect(hop.length).toBeGreaterThan(1);
+  for (const h of hop) expect(MA_HAI_NGUOI.test(h.ma_mau!), h.ma_mau).toBe(true);
+  expect(PHAI_HAI_NGUOI.test(D.phien_ban)).toBe(true);
+  expect(MA_HAI_NGUOI.test("hn.menh.tuong_sinh.1990") || MA_HAI_NGUOI.test("hn.ten.an.nguoi_yeu")).toBe(false);
+  expect(nhanMau("hai_nguoi", "hn.chi.tam_hop.nguoi_yeu")).toBe("2 người · Con giáp · tam hop · người yêu");
+
+  const guiMayChu: Record<string, unknown>[] = [];
+  let hoiTyLe = "";
+  await napHoSo(page);
+  await mock(page);
+  await page.route("**/api/tuvi/hop-tham", (r) => r.fulfill({ json: HOP_THAM }));
+  await page.route("**/api/kiem-chung", (r) => { guiMayChu.push(r.request().postDataJSON()); return r.fulfill({ json: { ok: true, da_luu: true } }); });
+  await page.route("**/api/kiem-chung/ty-le**", (r) => {
+    hoiTyLe = new URL(r.request().url()).searchParams.get("mau") ?? "";
+    return r.fulfill({ json: { ty_le: { [hop[1]!.ma_mau!]: { dung: 31, chua_dung: 9 } } } });
+  });
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: /Xem lá số 2 người/ }).click();
+  const form = page.getByTestId("hop-tham-form");
+  await form.getByLabel("Ngày sinh người ấy").fill("3");
+  await form.getByLabel("Tháng sinh người ấy").fill("4");
+  await form.getByLabel("Năm sinh người ấy").fill("1995");
+  await form.getByRole("button", { name: "Xem độ hợp" }).click();
+  const khoi = page.getByTestId("hai-nguoi-hop");
+  await expect(khoi.getByTestId("kiem-chung")).toHaveCount(hop.length);
+  await expect(khoi.locator("input, textarea, [contenteditable]")).toHaveCount(0);
+  // Một lời gọi tỉ lệ cho mọi mã hộp; mã đủ 30 phiếu hiện "x% trong N người"
+  await expect.poll(() => hoiTyLe.split(",").sort()).toEqual(hop.map((h) => h.ma_mau!).sort());
+  await expect(khoi.getByTestId("hop-noi-bat").nth(1).getByTestId("ty-le-dung")).toContainText("78% trong 40 người");
+  await expect(khoi.getByTestId("hop-noi-bat").nth(0).getByTestId("ty-le-dung")).toHaveCount(0);
+
+  await khoi.getByTestId("hop-noi-bat").nth(0).getByRole("button", { name: "Đúng với mình" }).click();
+  await expect(khoi.getByTestId("hop-noi-bat").nth(0).getByRole("status")).toContainText("Cảm ơn");
+  await expect.poll(() => guiMayChu.length).toBe(1);
+  expect(guiMayChu[0]).toEqual({ loai: "hai_nguoi", mau: hop[0]!.ma_mau, phai: D.phien_ban, ket_qua: "dung" });
+  const sk = await kiemChung(page);
+  expect(sk).toEqual([{ su_kien: "tuvi_kiem_chung", feature_version: "gate_v1", loai: "hai_nguoi", mau: hop[0]!.ma_mau, ket_qua: "dung", phai: D.phien_ban }]);
+});
+
+test("API kiểm chứng: loại hai_nguoi chỉ nhận đúng dạng mã + phái (chưa bật Supabase → chua_bat, không lỗi)", async ({ request }) => {
+  const gui = (d: object) => request.post("/api/kiem-chung", { data: d });
+  const tot = { loai: "hai_nguoi", mau: "hn.chi.tam_hop.nguoi_yeu", phai: "hai_nguoi_1", ket_qua: "dung" };
+  const r = await gui(tot);
+  expect(r.status()).toBe(200);
+  expect(await r.json()).toMatchObject({ ok: false, ly_do: "chua_bat" });
+  for (const sai of [{ ...tot, phai: "nam_phai_viet" }, { ...tot, mau: "hn.ten.an.nguoi_yeu" }, { ...tot, mau: "hn.chi.tam_hop.1990" },
+    { ...tot, mau: "ds.tong_quan.x" }, { ...tot, loai: "khac" }]) {
+    expect((await gui(sai)).status(), JSON.stringify(sai)).toBe(422);
+  }
 });

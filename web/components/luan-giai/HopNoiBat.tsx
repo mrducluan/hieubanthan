@@ -18,8 +18,10 @@ export const LOAI_HOP: Record<LoaiHop, { nhan: string; Icon: LucideIcon }> = {
   thoi_diem: { nhan: "Thời điểm", Icon: CalendarClock },
 };
 
-/** Bảng tỉ lệ "thấy đúng" của cả bài (một lời gọi, xem lib/ty-le-kiem-chung) + phái ghi kèm phiếu. */
-export const KiemChungBai = createContext<{ tyLe: BangTyLe; phai: string; tat?: boolean }>({ tyLe: {}, phai: "nam_phai_viet" });
+/** Bảng tỉ lệ "thấy đúng" của cả bài (một lời gọi, xem lib/ty-le-kiem-chung) + phái ghi kèm phiếu + loại phiếu
+ *  (mặc định "doi_song"; "Xem lá số 2 người" dùng "hai_nguoi" — migration 0019). */
+export const KiemChungBai = createContext<{ tyLe: BangTyLe; phai: string; tat?: boolean; loai?: "doi_song" | "hai_nguoi" }>(
+  { tyLe: {}, phai: "nam_phai_viet" });
 
 /** Nút "Vì sao nói vậy" + danh sách căn cứ thu gọn — dùng cho hộp và cho chương. */
 /** "2026-10-10" → "10/10/2026" (chuỗi khác dạng ISO giữ nguyên). */
@@ -48,7 +50,7 @@ export function ViSao({ canCu, thuatNgu, nho = false }: { canCu?: string[]; thua
 }
 
 export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: ThuatNgu[]; className?: string }) {
-  const { tyLe, phai, tat } = useContext(KiemChungBai);
+  const { tyLe, phai, tat, loai = "doi_song" } = useContext(KiemChungBai);
   const { nhan: nhanLoai, Icon } = LOAI_HOP[hop.loai] ?? LOAI_HOP.cot_loi;
   const nhan = hop.nhan ?? nhanLoai;
   const idTieuDe = useId();
@@ -74,7 +76,7 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
       <ViSao canCu={hop.can_cu} thuatNgu={thuatNgu} nho />
       {hop.ma_mau && !tat && (
         <div className="mt-auto pt-3">
-          <KiemChung loai="doi_song" mau={hop.ma_mau} phai={phai} tyLe={tyLe[hop.ma_mau]}
+          <KiemChung loai={loai} mau={hop.ma_mau} phai={phai} tyLe={tyLe[hop.ma_mau]}
             tyLeEngine={{ ty_le_dung: hop.ty_le_dung, so_phieu: hop.so_phieu }} />
         </div>
       )}

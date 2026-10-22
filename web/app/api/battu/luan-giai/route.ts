@@ -12,5 +12,6 @@ const Input = z.object({ la_so: LaSoVao }).strict();
 export const maxDuration = 60;
 
 export function POST(req: Request) {
-  return luanGiaiCoSao(req, Input, "/v1/battu/luan-giai", "battu", undefined, themHocLuanGiai);
+  return luanGiaiCoSao(req, Input, "/v1/battu/luan-giai", "battu", undefined,
+    () => themHocLuanGiai({ loai: "doi_song", tienTo: "ds.bt." }));
 }

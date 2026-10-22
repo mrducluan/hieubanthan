@@ -31,7 +31,7 @@ site nhận và hiện thông báo, kể cả khi tab đã đóng.
    → đăng ký SW bằng script có nonce; thêm `worker-src 'self'` vào `lib/csp.ts`, kiểm bằng `e2e/csp.spec.ts`.
 2. **Khoá VAPID** (cặp khoá ES256, tạo một lần) — env `VAPID_PUBLIC_KEY` (public, đưa xuống trình duyệt), `VAPID_PRIVATE_KEY`,
    `VAPID_SUBJECT=mailto:contact@hieuban.com`. Không hardcode.
-3. **Bảng `push_dang_ky`** (migration 0019, chờ duyệt): `user_id` (bắt buộc đăng nhập — để xoá được, không lưu ẩn danh),
+3. **Bảng `push_dang_ky`** (migration kế tiếp — 0020, vì 0019 đã dùng cho kiểm chứng "Xem lá số 2 người"; chờ duyệt): `user_id` (bắt buộc đăng nhập — để xoá được, không lưu ẩn danh),
    `endpoint`, `p256dh`, `auth`, `tao_luc`, `lan_cuoi_gui`; RLS chủ sở hữu; xoá khi 410 Gone. Không lưu nội dung nhắc trong
    bảng này (nội dung lấy từ `nhac_viec` lúc gửi).
 4. **Gửi**: cron ngày (`/api/cron/nhac-day`, service role) — mỗi sáng 8:00 giờ VN gom `nhac_viec` có `ngay = hôm nay`
@@ -48,4 +48,4 @@ site nhận và hiện thông báo, kể cả khi tab đã đóng.
 **Thay thế rẻ hơn nếu chưa muốn Web Push**: email nhắc (SMTP/Resend, cũng cần dependency hoặc REST), hoặc chỉ `.ics` như hiện tại.
 
 ## 3. Thứ tự đề xuất
-GĐ0 (xong) → đo 2–4 tuần → nếu ≥ 10% người có hồ sơ bấm "Nhắc tôi" → GĐ1 Web Push (anh duyệt `web-push` + migration 0019 + VAPID env).
+GĐ0 (xong) → đo 2–4 tuần → nếu ≥ 10% người có hồ sơ bấm "Nhắc tôi" → GĐ1 Web Push (anh duyệt `web-push` + migration 0020 + VAPID env).

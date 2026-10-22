@@ -16,6 +16,7 @@ import { HopNoiBat } from "@/components/luan-giai/HopNoiBat";
 import { Button } from "@/components/ui/button";
 import { usePost } from "@/lib/goi-api";
 import { maNhip } from "@/lib/kiem-chung";
+import { useTyLe, type BangTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 
 type Thang = Nhip3ThangOutputT["thang"][number];
@@ -56,6 +57,7 @@ export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutpu
   const goc = useId().replace(/:/g, "");
   const giam = useReducedMotion();
   const [chon, setChon] = useState<number | null>(null);
+  const tyLe = useTyLe(d.thang.map(maNhip));         // "x% thấy đúng" khi mã đủ ≥ 30 phiếu (LG-ĐS mục 5)
   const toi = (i: number) => {
     setChon(i);
     document.getElementById(idThe(goc, i))?.scrollIntoView({ behavior: giam ? "auto" : "smooth", block: "start" });
@@ -73,7 +75,7 @@ export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutpu
       <ol className="space-y-4" aria-label="Ba tháng âm lịch tới">
         {d.thang.map((t, i) => (
           <TheThang key={`${t.nam_am}-${t.thang}-${t.nhuan}-${t.phan}`} id={idThe(goc, i)} t={t} i={i} d={d}
-            noiBat={chon === i} onChonCungTen={onChonCungTen} onHoi={onHoi} />
+            noiBat={chon === i} onChonCungTen={onChonCungTen} onHoi={onHoi} tyLe={tyLe} />
         ))}
       </ol>
       <HocThuatNam d={d} />
@@ -184,9 +186,9 @@ function VongCung({ cung, t }: { cung: NonNullable<Nhip3ThangOutputT["cung"]>; t
 }
 
 // ------------------------------------------------------------------ thẻ tháng
-function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi }: {
+function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi, tyLe }: {
   id: string; t: Thang; i: number; d: Nhip3ThangOutputT; noiBat: boolean;
-  onChonCungTen: (tenCung: string) => void; onHoi: (cau: string) => void;
+  onChonCungTen: (tenCung: string) => void; onHoi: (cau: string) => void; tyLe?: BangTyLe;
 }) {
   const giam = useReducedMotion();
   const mau = MAU_MUC[t.muc];
@@ -241,6 +243,7 @@ function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi }: {
       {t.tu <= d.ngay_xem && (
         <div className="mt-3">
           <KiemChung loai="nhip_3_thang" mau={maNhip(t)} phai={d.phai_luu_nguyet} khoa={`${t.nam_am}-${t.thang}-${t.nhuan ? 1 : 0}-${t.phan}`}
+            tyLe={tyLe?.[maNhip(t)]}
             cauHoi="Tháng này có đúng nhịp với bạn?" />
         </div>
       )}

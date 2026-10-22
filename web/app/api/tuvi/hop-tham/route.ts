@@ -1,8 +1,11 @@
 // POST /api/tuvi/hop-tham — TV-V2 + HN-2N — "Xem lá số 2 người" (can năm người kia phi hoá vào lá mình + điểm
 // tham khảo hợp – khắc do engine chấm), không lưu người kia.
-// Proxy mỏng: zod hai chiều, KHÔNG tự tính gì.
+// Proxy mỏng: zod hai chiều, KHÔNG tự tính gì. Tầng HỌC (migration 0019): máy chủ thêm `trong_so` (tỉ lệ công khai mã
+// hn.*, ≥ 30 phiếu) + `ca_nhan` (phiếu hn.* của chính người đang đăng nhập) để engine hạ/xếp hộp — không đổi điểm.
+// Chưa bật Supabase / chưa chạy 0017–0019 → không kèm gì, kết quả như cũ.
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
+import { themHocLuanGiai } from "@/lib/hoc-tuvi";
 import { loiEngine } from "@/lib/proxy";
 import { HopThamInput, HopThamOutput } from "../schema";
 
@@ -18,17 +21,21 @@ export async function POST(req: Request): Promise<NextResponse> {
     );
   }
 
+  const hoc = await themHocLuanGiai({ loai: "hai_nguoi", tienTo: "hn." }).catch(() => ({}));
+  const goi = (than: object) => fetch(`${ENGINE_URL}/v1/tuvi/hop-tham`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
+    },
+    body: JSON.stringify(than),
+    cache: "no-store",
+  });
   let engineRes: Response;
   try {
-    engineRes = await fetch(`${ENGINE_URL}/v1/tuvi/hop-tham`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
-      },
-      body: JSON.stringify(parsed.data),
-      cache: "no-store",
-    });
+    engineRes = await goi({ ...parsed.data, ...hoc });
+    // Engine cũ chưa nhận trong_so/ca_nhan (lệch deploy) → 422: gọi lại không kèm tầng HỌC, điểm vẫn ra như cũ.
+    if (engineRes.status === 422 && Object.keys(hoc).length) engineRes = await goi(parsed.data);
   } catch (e) {
     baoLoi(e, { noi: "api", duong: new URL(req.url).pathname });
     return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });

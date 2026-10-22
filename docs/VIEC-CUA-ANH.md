@@ -30,6 +30,11 @@
    đúng" vẫn hiện nhưng không lưu; xem kết quả ở `/quan-tri/hoc`. Cron xoá dữ liệu hết hạn (`/api/cron/don-du-lieu-hoc`,
    3:41 sáng UTC) dùng chung `CRON_SECRET` với cron đối soát — đã có thì không cần làm gì. Đọc kỹ quy tắc riêng tư mới ở CLAUDE.md (mục Quy tắc
    code) — nhờ luật sư rà cùng chính sách quyền riêng tư (mục E).
+4h. [ ] **Kiểm chứng "Xem lá số 2 người" (HN-2N, 2026-10-22):** sau khi merge PR, Supabase → SQL Editor → chạy
+   `supabase/migrations/0019_kiem_chung_hai_nguoi.sql` (SAU 0017; rollback: `0019_kiem_chung_hai_nguoi.down.sql` — xoá
+   phiếu loại hai người). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0019 = true). Chưa chạy thì nút "Đúng với
+   mình / Chưa đúng" dưới hộp điểm 2 người vẫn hiện, PostHog vẫn đếm, nhưng máy chủ không lưu phiếu (Sentry báo một lần
+   `kiem_chung_tu_choi` — đó là dấu hiệu chưa chạy). Nếu chưa chạy 0018 (`hồ sơ nhà + nhắc việc`) thì chạy 0018 trước.
 4d. [ ] **NotFair blog (/blog):** Vercel → Settings → Environment Variables → thêm `NOTFAIR_SEO_API_KEY` = khoá `nfbl_…`
    (Production + Preview, **không** thêm tiền tố `NEXT_PUBLIC_`) → Redeploy. Rồi mở `https://hieuban.com/blog` và một bài
    `/blog/{slug}`: thấy ảnh bìa, mục lục bấm được, bảng cuộn ngang trên điện thoại. Chưa đặt khoá thì /blog chỉ hiện "Chưa có bài viết".

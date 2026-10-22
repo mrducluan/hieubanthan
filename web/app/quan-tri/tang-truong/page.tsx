@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
 import { coTaiKhoan } from "@/lib/cua-sao";
-import { MAU_KIEM_CHUNG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
+import { MAU_KIEM_CHUNG, TEN_LOAI_KIEM_CHUNG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
 import { baoCaoGa4, baoCaoGsc, baoCaoPosthog, MAU_TOI_THIEU, tinhGate, type BaoCaoPosthog, type DongGsc, type KetQua } from "@/lib/so-lieu-ngoai";
 
 export const metadata: Metadata = { title: "Tăng trưởng" };
@@ -142,7 +142,7 @@ function BangKiemChung({ ds }: { ds: DongKiemChung[] | null }) {
             <tbody>
               {kq.du.map((d) => (
                 <tr key={`${d.loai}|${d.mau}`} className="border-t border-line/60">
-                  <td className="py-1.5 text-fg-muted">{d.loai === "phi_hoa" ? "Đường bay" : "3 tháng tới"}</td>
+                  <td className="py-1.5 text-fg-muted">{TEN_LOAI_KIEM_CHUNG[d.loai] ?? d.loai}</td>
                   <td>{d.nhan}<span className="block text-xs text-fg-faint"><code>{d.mau}</code></span></td>
                   <td className="text-right">{so(d.dung)}</td><td className="text-right">{so(d.chua_dung)}</td>
                   <td className="text-right">{pt(d.ti_le_dung)}</td>
