@@ -42,6 +42,13 @@ async function tokenQt(request: APIRequestContext): Promise<string> {
   return (await r.json()).token as string;
 }
 
+/** Thanh trên nằm trong <Suspense fallback={menu mặc định}>: lúc trang đang tải dần, bản mặc định và bản CMS (đặt trong
+ *  <div hidden id="S:…"> chờ React hoán đổi — React 19 gom lần lộ theo nhịp, có thể sau sự kiện load) cùng có trong DOM.
+ *  Đợi lộ hết rồi mới đọc / bấm menu. */
+async function daLoHet(p: Page) {
+  await p.waitForFunction(() => !document.querySelector('div[hidden][id^="S:"]'));
+}
+
 /** Chờ web thấy thay đổi (CMS gọi webhook → web xoá cache; dev server có thể biên dịch chậm lần đầu). */
 async function choWeb(request: APIRequestContext, duong: string, kiem: (s: number, body: string) => boolean) {
   await expect.poll(async () => {
@@ -609,6 +616,7 @@ test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa
   await choWeb(request, "/", (s, b) => s === 200 && b.includes("Góc đọc"));
 
   await page.goto(`${WEB}/`);
+  await daLoHet(page);
   const menu = page.getByTestId("menu-dau-trang");
   await expect(menu.getByRole("link", { name: "Góc đọc" })).toHaveAttribute("href", "/blog");
   await expect(menu.getByText("Khám phá", { exact: true })).toHaveCount(0);   // menu theo CMS, không trộn mặc định
@@ -617,10 +625,12 @@ test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa
   await expect(con.getByRole("link", { name: /Bài số 7 nổi bật/ })).toHaveAttribute("href", "/blog/so-chu-dao-7");
   await expect(con).toContainText("Bài chọn của tuần");
   await page.goto(`${WEB}/tu-vi`);   // trang là menu con → mục cha sáng
+  await daLoHet(page);
   await expect(menu.locator("[aria-current=page]")).toHaveText("Góc đọc");
 
   const dt = await (await browser.newContext({ viewport: { width: 390, height: 844 } })).newPage();
   await dt.goto(`${WEB}/`);
+  await daLoHet(dt);
   await dt.getByTestId("nut-menu").click();
   await expect(dt.getByTestId("menu-di-dong").getByRole("link", { name: "Bài số 7 nổi bật" })).toBeVisible();
 
