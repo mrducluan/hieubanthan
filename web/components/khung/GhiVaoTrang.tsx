@@ -11,6 +11,7 @@ export function GhiVaoTrang() {
   useEffect(() => {
     const u = new URL(window.location.href);
     const tu = u.searchParams.get("tu");
+    if (tu === "push" && lanDauTrongPhien("tu.push")) ghi("chart_interacted", { kind: "push_mo" });   // bấm thông báo nhắc (sw.js)
     if (tu && /^[a-z]{2}\.[a-f0-9]{10}$/.test(tu)) {
       nhoMaMoi(tu);
       if (lanDauTrongPhien(`tu.${tu}`)) ghi("share_clicked", { kind: tu.split(".")[0], ma_moi: tu });
