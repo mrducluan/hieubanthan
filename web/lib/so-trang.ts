@@ -356,7 +356,7 @@ export function viDuMau(mau: MauCumTrang, nay = new Date()): string {
   const nam = String(vn.getUTCFullYear()), thang = String(vn.getUTCMonth() + 1);
   const ngay = `${nam}-${thang.padStart(2, "0")}-${String(vn.getUTCDate()).padStart(2, "0")}`;
   const gt: Record<string, string> = {
-    nam: mau.nhom === "tuoi" ? "1990" : nam, thang, ngay, nam_sinh: "1990", gioi: "nam", slug: mau.nguon_kb?.vi_du ?? "duc-luan",
+    nam: mau.nhom === "tuoi" ? "1990" : nam, thang, ngay, nam_sinh: "1990", gioi: "nam", viec: "cuoi-hoi", slug: mau.nguon_kb?.vi_du ?? "duc-luan",
   };
   return mau.mau_duong.replace(/\{([a-z_]+)\}/g, (m, b: string) => gt[b] ?? m);
 }
