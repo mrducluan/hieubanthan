@@ -92,3 +92,11 @@ def api_ngay_tot_cong_khai(ngay: _dt.date) -> dict:
 @router.get("/v1/lich/thang/{nam}/{thang}")
 def api_thang_cong_khai(nam: Annotated[int, Path(ge=1901, le=2099)], thang: Annotated[int, Path(ge=1, le=12)]) -> dict:
     return L.thang(nam, thang)
+
+
+# SEO-L2: ngày tốt theo việc trong một tháng (không dữ liệu cá nhân → web cache được).
+@router.get("/v1/lich/viec-thang/{viec}/{nam}/{thang}")
+def api_viec_thang(viec: str, nam: Annotated[int, Path(ge=1901, le=2099)], thang: Annotated[int, Path(ge=1, le=12)]) -> dict:
+    if viec not in {v["ma"] for v in L.VIEC_SEO}:
+        raise HTTPException(404, detail="Không có trang cho việc này")
+    return L.viec_thang(viec, nam, thang)

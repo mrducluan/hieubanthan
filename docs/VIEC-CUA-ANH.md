@@ -61,6 +61,9 @@
      → bấm vào lượt chạy → mục **Summary** có dòng `TTFB (… trang): p50 … ms · p90 … ms` → chụp/chép gửi em.
      (Lượt chạy báo đỏ nghĩa là bộ rà tìm thấy LỖI SEO — danh sách nằm ngay dưới, gửi em luôn.) Máy GitHub đặt ở Mỹ nên
      số cao hơn người dùng Việt Nam thấy ~150–250 ms; em tính phần đó khi đề xuất.
+4j. [ ] **Sau khi merge SEO-L (5 phút):** Search Console → **Kiểm tra URL** → dán lần lượt `https://hieuban.com/tuoi-xong-dat/2027`,
+   `https://hieuban.com/xem-tuoi-lam-nha/2027`, `https://hieuban.com/xem-ngay-tot/cuoi-hoi-thang-12-2026` → **Yêu cầu lập chỉ mục**
+   (đẩy nhanh trang mùa Tết). IndexNow giờ tự chạy mỗi sáng 06:13 — không cần làm gì.
 4i. [ ] **sameAs cho Google nhận ra thương hiệu + anh (5 phút, Vercel → web → Environment Variables):** kênh của site
    `MXH_FACEBOOK`, `MXH_YOUTUBE`, `MXH_TIKTOK`, `MXH_ZALO`, `MXH_INSTAGRAM`, `MXH_LINKEDIN`, `MXH_X`, `MXH_THREADS` (link https);
    hồ sơ cá nhân của anh `CHUYEN_GIA_SAME_AS_DUC_LUAN` = các link https cách nhau dấu phẩy (Facebook cá nhân, YouTube,

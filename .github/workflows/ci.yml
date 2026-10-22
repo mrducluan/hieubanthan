@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PYTHONIOENCODING: utf-8
+      # SEO-L4: PR sửa KB từ /quan-tri (nhánh quan-tri/…) không chạy được lệnh cập nhật sổ ngày → chỉ kiểm khuôn sổ.
+      NGAY_CAP_NHAT_KIEM: ${{ startsWith(github.head_ref, 'quan-tri/') && '0' || '1' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

@@ -45,6 +45,23 @@ async function layHoacLoi<T>(duong: string): Promise<T | null> {
   return r;
 }
 
+// SEO-L1 — bảng theo năm (engine ghép lại đúng các hàm của từng tuổi; web chỉ hiển thị).
+export interface HoiDap { hoi: string; dap: string }
+export interface LamNhaNam extends MetaKb {
+  nam: number; can_chi: string; so_thuan: number; tra_loi_nhanh: string; hoi_dap: HoiDap[]; cach_tinh: string; han_nam: HanNam;
+  ds: { nam_sinh: number; can_chi: string; tuoi_mu: number; kim_lau: string | null; hoang_oc: string; hoang_oc_xau: boolean;
+    tam_tai: number | null; thuan: boolean; xau: string[] }[];
+}
+export interface XongDatNam extends MetaKb {
+  nam: { nam: number; can_chi: string }; tra_loi_nhanh: string; hoi_dap: HoiDap[]; nen_tranh: string[];
+  ds: { nam_sinh: number; can_chi: string; tuoi_hop: { nam_sinh: number; can_chi: string }[] }[];
+  mung_mot: { ngay: string; can_chi: string; gio_hoang_dao: { chi: string; khung: string }[]; huong: { hy_than: string; tai_than: string; phuc_than: string } };
+}
+export const lamNhaNamCongKhai = (nam: number) => layHoacLoi<LamNhaNam>(`/v1/tuoi/lam-nha-nam/${nam}`);
+export const xongDatNamCongKhai = (nam: number) => layHoacLoi<XongDatNam>(`/v1/tuoi/xong-dat-nam/${nam}`);
+export const duongLamNhaNam = (nam: number) => `/xem-tuoi-lam-nha/${nam}`;
+export const duongXongDatNam = (nam: number) => `/tuoi-xong-dat/${nam}`;
+
 export const hanNamCongKhai = (nam: number) => layHoacLoi<HanNam>(`/v1/tuoi/han-nam/${nam}`);
 export const lamNhaCongKhai = (nam: number, namSinh: number) => layHoacLoi<LamNha>(`/v1/tuoi/lam-nha/${nam}/${namSinh}`);
 export const xongDatCongKhai = (nam: number, namSinh: number) => layHoacLoi<XongDat>(`/v1/tuoi/xong-dat/${nam}/${namSinh}`);

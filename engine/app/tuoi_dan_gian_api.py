@@ -69,3 +69,14 @@ def api_xong_dat_cong_khai(nam: NamXem, nam_sinh: NamSinh) -> dict:
     if nam_sinh > nam:
         raise HTTPException(422, detail="Năm sinh phải trước năm xem")
     return L.xong_dat_luan(nam, nam_sinh)
+
+
+# SEO-L1: bảng theo năm (không dữ liệu cá nhân → web cache được).
+@router.get("/v1/tuoi/lam-nha-nam/{nam}")
+def api_lam_nha_nam(nam: NamXem) -> dict:
+    return L.lam_nha_nam(nam)
+
+
+@router.get("/v1/tuoi/xong-dat-nam/{nam}")
+def api_xong_dat_nam(nam: NamXem) -> dict:
+    return L.xong_dat_nam(nam)

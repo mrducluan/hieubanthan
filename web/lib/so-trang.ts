@@ -10,12 +10,13 @@ import { NGAY_HIEU_LUC } from "@/lib/van-hanh";
 import type { NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
 import { ND_XEM_NGAY } from "@/app/xem-ngay-tot/noi-dung";
 import { ND_HAN_NAM, ND_LAM_NHA, ND_XONG_DAT } from "@/app/xem-tuoi-lam-nha/noi-dung";
+import { ND_DOI_LICH } from "@/app/doi-lich-am-duong/noi-dung";
 import type { BangChu } from "@/lib/chu-trang";
 import { CHU_TRANG_CHU } from "@/lib/chu/trang-chu";
 import { CHU_KHAM_PHA, CHU_KIEN_THUC } from "@/lib/chu/trang-tinh";
-import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_NGAY, CHU_THANG, CHU_XONG_DAT_CON } from "@/lib/chu/trang-con";
+import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM } from "@/lib/chu/trang-con";
 import {
-  CHU_BAT_TU, CHU_HAN_NAM, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
+  CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
   CHU_XEM_NGAY, CHU_XONG_DAT,
 } from "@/lib/chu/cong-cu";
 
@@ -173,6 +174,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   tuNd(ND_LAM_NHA, "Xem tuổi làm nhà, cưới hỏi: Kim lâu, Hoang ốc, Tam tai", CHU_LAM_NHA),
   tuNd(ND_XONG_DAT, "Xem tuổi xông đất đầu năm hợp gia chủ, giờ đẹp mùng 1", CHU_XONG_DAT),
   tuNd(ND_HAN_NAM, "Hướng xấu theo năm: Thái Tuế, Tam Sát, Ngũ Hoàng", CHU_HAN_NAM),
+  tuNd(ND_DOI_LICH, "Đổi lịch âm dương: ngày âm hôm nay, can chi, tháng nhuận", CHU_DOI_LICH),   // SEO-L5
   { duong: "/ban-than", nhom: "cong_cu", ten: "Hồ sơ bản thân", o: ["seo", "khoi_duoi", "khoi_cuoi"], mac_dinh: {
     tieu_de_seo: "Hồ sơ bản thân",
     mo_ta_seo: "Hồ sơ bản thân theo thần số học: số đường đời, sứ mệnh, linh hồn, nhân cách — mỗi số ba lớp: đã tính, diễn giải, tự soi.",
@@ -293,12 +295,22 @@ export const MAU_CUM: readonly MauCumTrang[] = [
   // Thứ tự quan trọng: trang tháng trước trang ngày (cùng tiền tố /xem-ngay-tot/).
   { mau_duong: "/xem-ngay-tot/thang-{thang}-{nam}", nhom: "cong_cu_con", ten: "Xem ngày tốt · trang tháng", o: O_CUM, nguon_kb: null,
     bien: ["thang", "nam"], chu: CHU_THANG },
+  // SEO-L2: ngày tốt theo việc — trước trang ngày (cùng tiền tố /xem-ngay-tot/).
+  { mau_duong: "/xem-ngay-tot/{viec}-thang-{thang}-{nam}", nhom: "cong_cu_con", ten: "Xem ngày tốt · theo việc trong tháng", o: O_CUM,
+    nguon_kb: null, bien: ["viec", "thang", "nam", "thang_am"], chu: CHU_VIEC_THANG },
   { mau_duong: "/xem-ngay-tot/{ngay}", nhom: "cong_cu_con", ten: "Xem ngày tốt · trang ngày", o: O_CUM, nguon_kb: null,
     bien: ["ngay", "thu", "am"], chu: CHU_NGAY },
   { mau_duong: "/xem-tuoi-lam-nha/{nam}/tuoi-{nam_sinh}", nhom: "cong_cu_con", ten: "Tuổi làm nhà · theo năm sinh", o: O_CUM, nguon_kb: null,
     bien: ["nam", "nam_sinh", "can_chi", "can_chi_nam", "nam_sau"], chu: CHU_LAM_NHA_CON },
   { mau_duong: "/tuoi-xong-dat/{nam}/tuoi-{nam_sinh}", nhom: "cong_cu_con", ten: "Tuổi xông đất · theo năm sinh", o: O_CUM, nguon_kb: null,
     bien: ["nam", "nam_sinh", "can_chi", "can_chi_nam"], chu: CHU_XONG_DAT_CON },
+  // SEO-L1 / SEO-L5: trang trụ theo năm + lịch âm cả năm.
+  { mau_duong: "/xem-tuoi-lam-nha/{nam}", nhom: "cong_cu_con", ten: "Tuổi làm nhà · bảng theo năm", o: O_CUM, nguon_kb: null,
+    bien: ["nam", "can_chi"], chu: CHU_LAM_NHA_NAM },
+  { mau_duong: "/tuoi-xong-dat/{nam}", nhom: "cong_cu_con", ten: "Tuổi xông đất · bảng theo năm", o: O_CUM, nguon_kb: null,
+    bien: ["nam", "can_chi"], chu: CHU_XONG_DAT_NAM },
+  { mau_duong: "/lich-am/{nam}", nhom: "cong_cu_con", ten: "Lịch âm · từng năm", o: O_CUM, nguon_kb: null,
+    bien: ["nam", "can_chi"], chu: CHU_LICH_AM_NAM },
   { mau_duong: "/phong-thuy/huong-xau-nam/{nam}", nhom: "cong_cu_con", ten: "Hướng xấu theo năm · từng năm", o: O_CUM, nguon_kb: null,
     bien: ["nam", "can_chi"], chu: CHU_HAN_NAM_CON },
   // Hồ sơ chuyên gia giữ trong code (E-E-A-T) — cụm chỉ cho đặt khối quanh hồ sơ.

@@ -230,3 +230,41 @@ def chon_ngay(viec: str, tu: dt.date, den: dt.date, nam_sinh: int | None = None,
             "tuoi": t, "ngay": ra, "luu_y": LUU_Y,
             "cach_chon": "Ngày có việc này trong mục Nên của sách lịch, không nằm trong mục Kiêng, trực không thuộc "
                          "nhóm sách khuyên tránh cho việc này" + (", không xung tuổi bạn" if t else "") + "."}
+
+
+# ---- SEO-L2 (chủ dự án duyệt 2026-10-22): "ngày tốt {việc} tháng M/YYYY" — dùng đúng chon_ngay, không dữ liệu cá nhân --
+VIEC_SEO = [{"ma": m, "slug": m.replace("_", "-"), "ten": _VIEC[m]["ten"]}
+            for m in ("cuoi_hoi", "khai_truong", "nhap_trach", "dong_tho", "xuat_hanh", "mua_xe")]
+_THEO_SLUG = {v["slug"]: v["ma"] for v in VIEC_SEO}
+
+
+def viec_tu_slug(slug: str) -> str | None:
+    return _THEO_SLUG.get(slug)
+
+
+def viec_thang(viec: str, nam: int, thang_: int) -> dict:
+    tu = dt.date(nam, thang_, 1)
+    den = (dt.date(nam + (thang_ == 12), thang_ % 12 + 1, 1) - dt.timedelta(days=1))
+    kq = chon_ngay(viec, tu, den)
+    v = next(x for x in VIEC_SEO if x["ma"] == viec) if viec in _THEO_SLUG.values() else \
+        {"ma": viec, "slug": viec.replace("_", "-"), "ten": _VIEC[viec]["ten"]}
+    ten = v["ten"][:1].lower() + v["ten"][1:]
+    ds = sorted(kq["ngay"], key=lambda x: x["ngay"])
+    dmy = lambda iso: "/".join(reversed(iso.split("-")))  # noqa: E731
+    am = lambda x: f"{dmy(x['ngay'])} (âm {x['am']}, {x['can_chi']})"  # noqa: E731
+    l0, l1 = lunar.solar_to_lunar(1, thang_, nam, CALENDAR_MERIDIAN_TZ), lunar.solar_to_lunar(den.day, thang_, nam, CALENDAR_MERIDIAN_TZ)
+    thang_am = f"từ {l0[0]}/{l0[1]}{' nhuận' if l0[3] else ''} đến {l1[0]}/{l1[1]}{' nhuận' if l1[3] else ''} âm lịch"
+    dep = kq["ngay"][0] if kq["ngay"] else None
+    tra_loi = (f"Tháng {thang_}/{nam} ({thang_am}) có {len(ds)} ngày tốt cho {ten} theo hoàng lịch: "
+               + (", ".join(am(x) for x in ds) + "." if ds else "không có ngày nào đủ điều kiện — nên xem tháng kế tiếp.")
+               + (f" Đẹp nhất: {am(dep)} — {', '.join(dep['diem_cong'])}." if dep and dep["diem_cong"] else ""))
+    hd = [
+        {"hoi": f"Tháng {thang_} năm {nam} ngày nào tốt để {ten}?", "dap": tra_loi},
+        {"hoi": f"Chọn ngày {ten} dựa vào đâu?", "dap": kq["cach_chon"] + " Ngày nào cũng nên xem thêm có xung tuổi người chủ việc không."},
+        {"hoi": f"Ngày tốt {ten} tháng {thang_}/{nam} có hợp với tuổi tôi không?",
+         "dap": "Bảng này chưa xét tuổi. Nhập năm sinh trong công cụ Xem ngày tốt để bỏ các ngày xung tuổi bạn."},
+    ]
+    return {"viec": v, "nam": nam, "thang": thang_, "tieu_de": f"Ngày tốt {ten} tháng {thang_} năm {nam}",
+            "thang_am": thang_am, "ngay": ds, "so_ngay": len(ds), "dep_nhat": dep,
+            "tra_loi_nhanh": tra_loi, "hoi_dap": hd, "cach_chon": kq["cach_chon"], "luu_y": LUU_Y,
+            "trang_thai": KB["trang_thai"]}
