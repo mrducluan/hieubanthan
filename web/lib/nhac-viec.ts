@@ -32,7 +32,10 @@ function doc(): NhacViec[] {
     daDoc = true;
     try {
       const raw = JSON.parse(window.localStorage.getItem(KHOA_NHAC) ?? "[]");
-      cache = Array.isArray(raw) ? raw.map((x) => NhacViec.safeParse(x)).filter((k) => k.success).map((k) => k.data) : [];
+      // Mốc lưu trước bản sửa mã có dấu ("kd.ungky.tý") → chuẩn hoá mã + id khi đọc để vẫn nhận ra và lưu được lên tài khoản.
+      const chuan = (x: unknown) => (x && typeof x === "object" && typeof (x as { ma?: unknown }).ma === "string" && typeof (x as { ngay?: unknown }).ngay === "string"
+        ? { ...(x as object), ma: maKhongDau((x as { ma: string }).ma), id: `${(x as { ngay: string }).ngay}|${maKhongDau((x as { ma: string }).ma)}` } : x);
+      cache = Array.isArray(raw) ? raw.map((x) => NhacViec.safeParse(chuan(x))).filter((k) => k.success).map((k) => k.data) : [];
     } catch { cache = []; }
   }
   return cache;

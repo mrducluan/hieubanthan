@@ -48,23 +48,25 @@ begin
     return true;
 end; $$;
 
--- Hàng đợi gửi của một ngày (giờ VN, cron truyền vào): người có mốc nhac_viec đúng ngày + có thiết bị, chưa được gửi
--- trong ngày đó (≤ 1 thông báo / người / ngày, chạy lại cron không gửi trùng). Chỉ nhãn + đường dẫn do engine soạn.
+-- Hàng đợi gửi của một ngày (giờ VN, cron truyền vào): người có mốc nhac_viec đúng ngày + thiết bị CHƯA nhận trong ngày
+-- đó (≤ 1 thông báo / thiết bị / ngày; chạy lại cron chỉ gửi tiếp thiết bị lỗi, không gửi trùng). Chỉ nhãn + đường dẫn
+-- do engine soạn.
 create or replace function push_hang_doi(p_ngay date) returns table (user_id uuid, nhac jsonb, thiet_bi jsonb)
 language sql stable security definer set search_path = '' as $$
     select n.user_id,
            jsonb_agg(distinct jsonb_build_object('nhan', n.nhan, 'duong', n.duong, 'ma', n.ma)),
            (select jsonb_agg(jsonb_build_object('id', d.id, 'endpoint', d.endpoint, 'p256dh', d.p256dh, 'auth', d.auth))
-              from public.push_dang_ky d where d.user_id = n.user_id)
+              from public.push_dang_ky d
+             where d.user_id = n.user_id and (d.lan_cuoi_gui is null or d.lan_cuoi_gui <> p_ngay))
     from public.nhac_viec n
     where n.ngay = p_ngay
-      and exists (select 1 from public.push_dang_ky d where d.user_id = n.user_id)
-      and not exists (select 1 from public.push_dang_ky d where d.user_id = n.user_id and d.lan_cuoi_gui = p_ngay)
+      and exists (select 1 from public.push_dang_ky d
+                   where d.user_id = n.user_id and (d.lan_cuoi_gui is null or d.lan_cuoi_gui <> p_ngay))
     group by n.user_id
 $$;
 
 -- Ghi kết quả gửi cho MỘT thiết bị: ok → đánh dấu đã gửi ngày đó; het_han (404/410) → xoá; lỗi khác → đếm, 5 lần liền
--- thì xoá. Cùng người có thiết bị lỗi vẫn được đánh dấu "đã gửi" nếu thiết bị khác nhận được.
+-- thì xoá (thiết bị lỗi vẫn nằm trong hàng đợi của ngày để lần chạy lại gửi tiếp).
 create or replace function push_ket_qua(p_id uuid, p_ngay date, p_ket_qua text) returns void
 language plpgsql security definer set search_path = '' as $$
 begin
@@ -79,6 +81,11 @@ begin
         raise exception 'push_ket_qua: ket qua la %', p_ket_qua using errcode = 'invalid_parameter_value';
     end if;
 end; $$;
+
+-- 0018 ghi CHECK duong không có '#', trong khi web đặt mốc tới neo trong trang (vd /phong-thuy#nha-cua-ban) → nới cho khớp
+-- zod ở web/lib/nhac-viec.ts (vẫn chỉ đường dẫn trong site).
+alter table nhac_viec drop constraint if exists nhac_viec_duong_check;
+alter table nhac_viec add constraint nhac_viec_duong_check check (duong is null or duong ~ '^/[a-z0-9/_?=&.#-]{0,120}$');
 
 revoke all on function dang_ky_push(text, text, text), push_hang_doi(date), push_ket_qua(uuid, date, text)
     from public, anon, authenticated;

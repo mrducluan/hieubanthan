@@ -17,16 +17,22 @@ export function BatNhacPush({ className }: { className?: string }) {
   const [ban, setBan] = useState(false);
   const [bao, setBao] = useState<string | null>(null);
 
+  const uid = nguoi?.id ?? null;
   useEffect(() => {
     let huy = false;
     void khoaMayChu().then((k) => { if (!huy) setCoMayChu(Boolean(k)); });
     void trangThaiPush().then((t) => {
       if (huy) return;
       setTt(t);
-      if (t === "dang_bat") void dongBoThietBi().then((con) => { if (!con && !huy) setTt("chua_bat"); });
+      // "Đang bật" chỉ khi máy chủ có thiết bị này cho ĐÚNG tài khoản đang đăng nhập (máy dùng chung không kế thừa).
+      if (t === "dang_bat" && uid) void dongBoThietBi(uid).then((con) => { if (!con && !huy) setTt("chua_bat"); });
+      else if (t === "dang_bat" && nguoi === null) setTt("chua_bat");
     });
-    return () => { huy = true; };
-  }, []);
+    // sw.js báo trình duyệt vừa tự đổi subscription → ghi lại thiết bị cho tài khoản đang bật.
+    const nghe = (e: MessageEvent) => { if (e.data?.loai === "push_doi" && uid) void dongBoThietBi(uid, true); };
+    navigator.serviceWorker?.addEventListener("message", nghe);
+    return () => { huy = true; navigator.serviceWorker?.removeEventListener("message", nghe); };
+  }, [uid, nguoi]);
 
   if (!coMayChu || tt === null || tt === "khong_ho_tro" || nguoi === undefined) return null;
   const khung = cn("space-y-1.5 rounded-xl border border-line/70 p-3 text-sm", className);

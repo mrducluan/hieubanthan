@@ -21,7 +21,7 @@ export function NhacToi({ ngay, ma, moDun, nhan, duong, className }: {
     setDa(true);
     ghi("chart_interacted", { mo_dun: moDun, kind: "nhac_viec" });
     // GĐ1: thiết bị đã bật nhắc qua thông báo → mốc phải nằm trong tài khoản để máy chủ gửi đúng ngày.
-    if (nguoi && pushDangBatTrenMay()) luuNhacTaiKhoan(nguoi.id, n).then(() => setTk("sẽ báo trên thiết bị đã bật nhắc")).catch(() => null);
+    if (nguoi && pushDangBatTrenMay(nguoi.id)) luuNhacTaiKhoan(nguoi.id, n).then(() => setTk("sẽ báo trên thiết bị đã bật nhắc")).catch(() => null);
     return n;
   };
   return (

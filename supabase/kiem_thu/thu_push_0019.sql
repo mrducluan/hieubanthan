@@ -6,7 +6,7 @@
 \set S '''BTBZMqHH6r4Tts7J_aSIgg'''
 insert into nhac_viec (user_id, ngay, ma, mo_dun, nhan, duong) values
     (:A, '2026-11-02', 'ung_ky.que_1', 'kinhdich', 'Ứng kỳ quẻ Càn', '/kinh-dich'),
-    (:A, '2026-11-02', 'sua_nha.thang_10', 'phongthuy', 'Tháng hợp sửa nhà', '/phong-thuy'),
+    (:A, '2026-11-02', 'sua_nha.thang_10', 'phongthuy', 'Tháng hợp sửa nhà', '/phong-thuy#nha-cua-ban'),
     (:B, '2026-11-02', 'ung_ky.que_2', 'kinhdich', 'Ứng kỳ quẻ Khôn', '/kinh-dich'),
     (:B, '2026-11-03', 'ung_ky.que_3', 'kinhdich', 'Mốc khác ngày', null);
 
@@ -53,7 +53,10 @@ select 'hàng đợi 3/11: B' t, count(*) from push_hang_doi('2026-11-03');
 select 'hàng đợi 4/11: rỗng' t, count(*) from push_hang_doi('2026-11-04');
 select 'gửi được 1 thiết bị của A' t, push_ket_qua((select id from push_dang_ky where user_id = :A order by tao_luc limit 1), '2026-11-02', 'ok');
 select 'thiết bị B báo 410 → xoá' t, push_ket_qua((select id from push_dang_ky where user_id = :B), '2026-11-02', 'het_han');
-select '→ hàng đợi 2/11 hết (A đã gửi, B hết thiết bị)' t, count(*) from push_hang_doi('2026-11-02');
+select '→ hàng đợi 2/11 còn A với 3 thiết bị chưa nhận (B hết thiết bị)' t,
+    string_agg(left(user_id::text, 1) || ':' || jsonb_array_length(thiet_bi), ',') from push_hang_doi('2026-11-02');
+select 'gửi nốt 3 thiết bị của A' t, count(push_ket_qua(id, '2026-11-02', 'ok')) from push_dang_ky where user_id = :A and lan_cuoi_gui is null;
+select '→ hàng đợi 2/11 hết' t, count(*) from push_hang_doi('2026-11-02');
 select 'lỗi 5 lần liền → xoá' t, count(push_ket_qua(x.id, '2026-11-05', 'loi')) from
     (select id from push_dang_ky where user_id = :A order by tao_luc desc limit 1) x, generate_series(1, 5);
 select '→ A còn 3 thiết bị' t, count(*) from push_dang_ky where user_id = :A;

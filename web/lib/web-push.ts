@@ -18,6 +18,11 @@ export interface KhoaVapid { congKhai: string; riengTu: string; chuThe: string }
 export function khoaVapid(): KhoaVapid | null {
   const congKhai = process.env.VAPID_PUBLIC_KEY?.trim(), riengTu = process.env.VAPID_PRIVATE_KEY?.trim();
   if (!congKhai || !riengTu || tuB64u(congKhai).length !== 65 || tuB64u(riengTu).length !== 32) return null;
+  // Khoá công khai phải suy ra được từ khoá riêng tư (dán nhầm hai lần tạo khoá → mọi lần gửi 401, 5 ngày là mất hết đăng ký).
+  try {
+    const e = createECDH("prime256v1"); e.setPrivateKey(tuB64u(riengTu));
+    if (!e.getPublicKey().equals(tuB64u(congKhai))) return null;
+  } catch { return null; }
   return { congKhai, riengTu, chuThe: process.env.VAPID_SUBJECT?.trim() || "mailto:contact@hieuban.com" };
 }
 

@@ -2,7 +2,8 @@
 // chỉ gửi tới máy chủ push của trình duyệt; service worker + route; nút bật nhắc không tự hiện khi chưa đủ điều kiện.
 import { test, expect } from "@playwright/test";
 import { createDecipheriv, createECDH, createHmac, createPublicKey, generateKeyPairSync, verify } from "node:crypto";
-import { MAY_CHU_PUSH, b64u, goiThongBao, homNayVn, jwtVapid, maHoa, tuB64u } from "../lib/web-push";
+import { MAY_CHU_PUSH, b64u, goiThongBao, homNayVn, jwtVapid, khoaVapid, maHoa, tuB64u } from "../lib/web-push";
+import { maKhongDau } from "../lib/nhac-viec";
 import { napHoSo } from "./_hoso";
 
 // RFC 8291 phụ lục A
@@ -50,6 +51,20 @@ test("JWT VAPID: ES256 ký đúng, aud = origin máy chủ push, hạn 12 giờ"
   expect(JSON.parse(tuB64u(dau!).toString())).toEqual({ typ: "JWT", alg: "ES256" });
   expect(JSON.parse(tuB64u(than!).toString())).toEqual({ aud: "https://fcm.googleapis.com", exp: 1_800_043_200, sub: "mailto:contact@hieuban.com" });
   expect(verify("sha256", Buffer.from(`${dau}.${than}`), { key: createPublicKey({ format: "jwk", key: p }), dsaEncoding: "ieee-p1363" }, tuB64u(ky!))).toBe(true);
+});
+
+test("khoá VAPID: cặp khớp → nhận; công khai không suy từ riêng tư → null (tránh 401 hàng loạt)", () => {
+  const cu = { ...process.env };
+  const { privateKey, publicKey } = generateKeyPairSync("ec", { namedCurve: "prime256v1" });
+  const p = publicKey.export({ format: "jwk" });
+  process.env.VAPID_PUBLIC_KEY = b64u(Buffer.concat([Buffer.from([4]), tuB64u(p.x!), tuB64u(p.y!)]));
+  process.env.VAPID_PRIVATE_KEY = privateKey.export({ format: "jwk" }).d!;
+  expect(khoaVapid()?.chuThe).toBe("mailto:contact@hieuban.com");
+  process.env.VAPID_PRIVATE_KEY = AS_PRIV;   // khoá riêng của cặp khác
+  expect(khoaVapid()).toBeNull();
+  process.env.VAPID_PUBLIC_KEY = cu.VAPID_PUBLIC_KEY; process.env.VAPID_PRIVATE_KEY = cu.VAPID_PRIVATE_KEY;
+  expect(maKhongDau("kd.ungky.Tý")).toBe("kd.ungky.ty");
+  expect(maKhongDau("pt.thang.Đinh Mão")).toBe("pt.thang.dinh_mao");
 });
 
 test("chỉ gửi tới máy chủ push của trình duyệt", () => {

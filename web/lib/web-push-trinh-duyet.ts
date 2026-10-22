@@ -6,7 +6,8 @@ import { supabase } from "@/lib/supabase/trinh-duyet";
 import { luuNhacTaiKhoan } from "@/lib/tai-khoan-nhac";
 import { dsNhacTrenMay } from "@/lib/nhac-viec";
 
-const KHOA_BAT = "hbt.push.v1";   // "1" = thiết bị này đang bật nhắc (để nút "Nhắc tôi" tự lưu mốc vào tài khoản)
+const KHOA_BAT = "hbt.push.v1";   // = user id đã bật nhắc trên thiết bị này (nút "Nhắc tôi" tự lưu mốc vào tài khoản; máy dùng
+                                  //   chung: tài khoản khác đăng nhập KHÔNG được kế thừa thiết bị khi chưa tự bấm "Bật nhắc")
 
 export type TrangThaiPush =
   | "khong_ho_tro"     // trình duyệt không có Push API
@@ -17,11 +18,12 @@ export type TrangThaiPush =
 export const laIos = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 const daCaiApp = () => window.matchMedia?.("(display-mode: standalone)").matches || (navigator as { standalone?: boolean }).standalone === true;
 
-export function pushDangBatTrenMay(): boolean {
-  try { return window.localStorage.getItem(KHOA_BAT) === "1"; } catch { return false; }
+/** Thiết bị này đang bật nhắc cho đúng tài khoản `userId`? (không có userId: cho bất kỳ tài khoản nào) */
+export function pushDangBatTrenMay(userId?: string): boolean {
+  try { const v = window.localStorage.getItem(KHOA_BAT); return Boolean(v) && (!userId || v === userId); } catch { return false; }
 }
-function datCo(bat: boolean) {
-  try { if (bat) window.localStorage.setItem(KHOA_BAT, "1"); else window.localStorage.removeItem(KHOA_BAT); } catch { /* riêng tư */ }
+function datCo(userId: string | null) {
+  try { if (userId) window.localStorage.setItem(KHOA_BAT, userId); else window.localStorage.removeItem(KHOA_BAT); } catch { /* riêng tư */ }
 }
 
 /** Khoá VAPID công khai; null = máy chủ chưa bật nhắc qua thông báo. */
@@ -43,7 +45,7 @@ export async function trangThaiPush(): Promise<TrangThaiPush> {
   if (!coApi) return laIos() && !daCaiApp() ? "can_cai_ios" : "khong_ho_tro";
   if (Notification.permission === "denied") return "bi_chan";
   const sub = await dangKyHienTai().catch(() => null);
-  if (!sub) datCo(false);
+  if (!sub) datCo(null);
   return sub && Notification.permission === "granted" ? "dang_bat" : "chua_bat";
 }
 
@@ -82,7 +84,7 @@ export async function batPush(userId: string): Promise<void> {
   if (sub && !cungKhoa(sub, khoaByte)) { await sub.unsubscribe().catch(() => false); sub = null; }   // máy chủ đã đổi khoá VAPID
   sub ??= await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: khoaByte });
   await ghiThietBi(sub);
-  datCo(true);
+  datCo(userId);
   const homNay = new Date(Date.now() + 7 * 3_600_000).toISOString().slice(0, 10);
   await Promise.all(dsNhacTrenMay().filter((n) => n.ngay >= homNay).map((n) => luuNhacTaiKhoan(userId, n).catch(() => null)));
 }
@@ -90,7 +92,7 @@ export async function batPush(userId: string): Promise<void> {
 /** Tắt nhắc trên thiết bị này: huỷ subscription + xoá khỏi tài khoản. Mốc trong tài khoản giữ nguyên. */
 export async function tatPush(): Promise<void> {
   const sub = await dangKyHienTai().catch(() => null);
-  datCo(false);
+  datCo(null);
   if (!sub) return;
   const endpoint = sub.endpoint;
   await sub.unsubscribe().catch(() => false);
@@ -98,13 +100,19 @@ export async function tatPush(): Promise<void> {
   if (sb) await sb.from("push_dang_ky").delete().eq("endpoint", endpoint);
 }
 
-/** Trang mở ra sau khi trình duyệt tự đổi subscription (sw.js báo "push_doi") → ghi lại thiết bị. */
-export async function dongBoThietBi(): Promise<boolean> {
-  if (!pushDangBatTrenMay()) return false;
+/** Khi mở trang với thiết bị đang có subscription: CHỈ ĐỌC — tài khoản hiện tại có đúng thiết bị này trong `push_dang_ky`
+ *  không. Ghi lại chỉ khi (a) trình duyệt vừa tự đổi subscription (sw.js báo "push_doi", `doiMoi = true`) hoặc (b) cờ trên
+ *  máy ghi đúng tài khoản này mà máy chủ không còn endpoint hiện tại (đổi subscription lúc trang đóng). Tài khoản khác đăng
+ *  nhập trên máy này → false, không chuyển thiết bị (phải tự bấm "Bật nhắc"). Khoá máy chủ đổi → tắt, trả false. */
+export async function dongBoThietBi(userId: string, doiMoi = false): Promise<boolean> {
   const sub = await dangKyHienTai().catch(() => null);
   if (!sub) return false;
   const khoa = await khoaMayChu();
-  if (khoa && !cungKhoa(sub, tuB64u(khoa))) { await tatPush(); return false; }   // khoá máy chủ đã đổi → cần bật lại
-  await ghiThietBi(sub).catch(() => null);
-  return true;
+  if (khoa && !cungKhoa(sub, tuB64u(khoa))) { await tatPush(); return false; }
+  const sb = await supabase();
+  if (!sb) return false;
+  const { data } = await sb.from("push_dang_ky").select("id").eq("endpoint", sub.endpoint).maybeSingle();   // RLS: chỉ hàng của mình
+  if (data) { datCo(userId); return true; }
+  if (!doiMoi && !pushDangBatTrenMay(userId)) return false;
+  try { await ghiThietBi(sub); datCo(userId); return true; } catch { return false; }
 }

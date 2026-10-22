@@ -2,7 +2,7 @@
 // KD-ĐS — lời đọc quẻ hai tầng: tầng ĐỜI THƯỜNG (mức · kết luận · hộp nổi bật · ba nhóm việc · câu tự soi) hiện ngay;
 // tầng HỌC THUẬT (vì sao nói vậy · ba cách đọc cùng một quẻ · lời kinh nguyên văn · bản đọc đầy đủ) gập lại, bấm mới mở.
 // Component THUẦN: mọi chữ do engine dựng (`doc_que`), web không tự tính, không thêm ý.
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { BookOpen, ChevronDown, Layers, ScrollText } from "lucide-react";
 import { ChipMuc } from "@/components/luan-giai/BaoCaoDoiSong";
 import { HopNoiBat, ViSao } from "@/components/luan-giai/HopNoiBat";
@@ -65,11 +65,16 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
   const [moPhai, setMoPhai] = useState<Record<string, boolean>>({});
   const gn = dq.goc_nhin;
   const cac = (["nghia_ly", "mai_hoa", "luc_hao"] as const).filter((k) => gn[k]);
-  // KC-5: tín hiệu ngầm — mở cách đọc nào thì đếm trên máy (không chữ); đo bằng mã.
+  // KC-5: tín hiệu ngầm — chạm vào cách đọc nào thì đếm trên máy (không chữ), mỗi cách đọc một lần cho mỗi quẻ; cách đọc
+  // chính đang mở sẵn nên bấm vào tiêu đề của nó (dù là đóng lại) cũng tính là quan tâm. Đo bằng mã.
+  const daDem = useRef(new Set<string>());
   const moCachDoc = (k: string) => {
     const dangMo = moPhai[k] ?? k === gn.chinh;
     setMoPhai((m) => ({ ...m, [k]: !dangMo }));
-    if (!dangMo) { ghiMoPhai(k); ghi("chart_interacted", { mo_dun: "kinhdich", kind: `mo_phai:${k}` }); }
+    if ((!dangMo || k === gn.chinh) && !daDem.current.has(k)) {
+      daDem.current.add(k);
+      ghiMoPhai(k); ghi("chart_interacted", { mo_dun: "kinhdich", kind: `mo_phai:${k}` });
+    }
   };
   const ungKy = (gn.luc_hao?.ung_ky ?? dq.ung_ky ?? []).slice(0, 3);
   return (

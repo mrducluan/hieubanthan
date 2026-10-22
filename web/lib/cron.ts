@@ -16,24 +16,26 @@ export function dungKhoaCron(req: Request): boolean {
 type Hang = { user_id: string; nhac: { nhan: string; duong: string | null }[]; thiet_bi: (DangKyPush & { id: string })[] };
 
 /** KC-4 GĐ1: gửi Web Push cho người có mốc nhac_viec đúng hôm nay (giờ VN) và đã bật nhắc (push_dang_ky, 0019).
- *  ≤ 1 thông báo / người / ngày — SQL loại người đã gửi nên chạy lại không trùng. Thiếu VAPID → bỏ qua (không lỗi). */
+ *  ≤ 1 thông báo / thiết bị / ngày — SQL chỉ trả thiết bị chưa nhận nên chạy lại không trùng. Thiếu VAPID → bỏ qua (không lỗi). */
 export async function guiNhacNgay(dv: SupabaseClient): Promise<Record<string, unknown>> {
   const k = khoaVapid();
   const ngay = homNayVn();
   if (!k) return { ngay, bo_qua: "chưa đặt khoá VAPID" };
   const { data, error } = await dv.rpc("push_hang_doi", { p_ngay: ngay });
   if (error) return { ngay, loi: "Chưa đọc được hàng đợi (chạy migration 0018 + 0019?)" };
-  const dem: Record<KetQuaGui, number> = { ok: 0, het_han: 0, loi: 0 };
+  const dem: Record<KetQuaGui | "loi_ghi", number> = { ok: 0, het_han: 0, loi: 0, loi_ghi: 0 };
   const hang = (data ?? []) as Hang[];
-  // Từng lô 10 người — đủ nhanh cho vài nghìn người trong 60 giây, không dồn hàng nghìn kết nối một lúc.
+  // Từng lô 10 người — đủ nhanh cho vài nghìn người trong 60 giây, không dồn hàng nghìn kết nối một lúc. Mỗi thiết bị
+  // gửi xong ghi ngay kết quả; ghi hỏng (loi_ghi) → thiết bị còn trong hàng đợi, lần chạy lại gửi tiếp (≤ 1 / thiết bị / ngày).
   for (let i = 0; i < hang.length; i += 10) {
-    await Promise.all(hang.slice(i, i + 10).map(async (h) => {
+    await Promise.all(hang.slice(i, i + 10).flatMap((h) => {
       const goi = goiThongBao(h.nhac, ngay);
-      for (const tb of h.thiet_bi ?? []) {
+      return (h.thiet_bi ?? []).map(async (tb) => {
         const kq = await guiPush(tb, goi, k);
         dem[kq] += 1;
-        await dv.rpc("push_ket_qua", { p_id: tb.id, p_ngay: ngay, p_ket_qua: kq });
-      }
+        const { error: e } = await dv.rpc("push_ket_qua", { p_id: tb.id, p_ngay: ngay, p_ket_qua: kq });
+        if (e) dem.loi_ghi += 1;
+      });
     }));
   }
   return { ngay, nguoi: hang.length, ...dem };
