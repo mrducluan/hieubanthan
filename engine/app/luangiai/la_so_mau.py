@@ -40,6 +40,8 @@ MAU = [
 ]
 _THEO_SLUG = {m["slug"]: m for m in MAU}
 _NOI_SINH = "ha-noi"
+# Ngày đăng / sửa lời đọc lá số mẫu (schema Article) — sửa lời đọc thì đổi CAP_NHAT.
+NGAY_DANG, CAP_NHAT = "2026-10-08", "2026-10-08"
 
 
 def danh_sach() -> list[dict]:
@@ -110,7 +112,9 @@ def _doc(slug: str) -> dict:
                                               ("cach_cuc", b4), ("tu_hoa", b5), ("dai_han", b6), ("luu_nien", b7))]
     return {**{k: m[k] for k in ("slug", "ten", "gioi_tinh", "ngay", "gio", "tieu_de", "mo_ta")},
             "noi_sinh": _NOI_SINH, "hu_cau": True, "ngay_xem": NGAY_XEM.isoformat(),
-            "la_so": la_so, "buoc": buoc, "trang_thai": "nhap_ai"}
+            "la_so": la_so, "buoc": buoc, "trang_thai": "nhap_ai",
+            # Ngày đăng / sửa nội dung (schema Article) — đổi CAP_NHAT khi sửa lời đọc của lá số mẫu.
+            "ngay_dang": NGAY_DANG, "cap_nhat": CAP_NHAT}
 
 
 def doc(slug: str) -> dict:

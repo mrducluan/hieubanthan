@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { LichThang, XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
 import { docDuong, duongNgay, ngayDangIndex, ngayTotCongKhai, thangCongKhai, thangIndex } from "@/lib/hoang-lich";
-import { goiLd, ldDuongDan, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
+import { goiLd, ldDuongDan, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
@@ -22,8 +22,7 @@ function LdTrangCon({ duong, ten, moTa, cap, cuoi }: { duong: string; ten: strin
   return (
     <>
       <JsonLd data={goiLd(
-        { "@type": "WebPage", "@id": `${urlDayDu(duong)}#trang`, url: urlDayDu(duong), name: ten, description: moTa,
-          inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl()}/#website` } },
+        { ...ldTrangWeb({ duong, ten, about: ["Xem ngày tốt", "Hoàng lịch", "Giờ hoàng đạo"] }), description: moTa },
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Xem ngày tốt", duong: "/xem-ngay-tot" }, ...cap]),
       )} />
       <p className="mx-auto mt-10 max-w-3xl border-t border-line/50 pt-6 text-sm text-fg-muted">

@@ -5,6 +5,18 @@ import sanitizeHtml from "sanitize-html";
  * response cannot add scripts, inline styles, forms, or unsafe URLs to the
  * host site. The nf-* classes are structural hooks for the stylesheet below.
  */
+/** Link nội bộ: đường dẫn tương đối, neo, hoặc tên miền hieuban.com (kể cả www). */
+export function laLinkNoiBo(href: string | undefined): boolean {
+  const h = (href ?? "").trim();
+  if (!h || h.startsWith("#") || (h.startsWith("/") && !h.startsWith("//"))) return true;
+  try {
+    const host = new URL(h).hostname.toLowerCase();
+    return host === "hieuban.com" || host === "www.hieuban.com";
+  } catch {
+    return false;
+  }
+}
+
 export function sanitizeNotFairArticleHtml(html: string) {
   return sanitizeHtml(html, {
     allowedTags: [
@@ -26,7 +38,12 @@ export function sanitizeNotFairArticleHtml(html: string) {
     allowedSchemes: ["http", "https", "mailto"],
     allowedSchemesByTag: { img: ["https"] },
     transformTags: {
-      a: sanitizeHtml.simpleTransform("a", { rel: "noopener noreferrer" }, true),
+      // SEO-K (chủ dự án duyệt 2026-10-21): link RA NGOÀI trong bài trao đổi NotFair gắn rel="sponsored nofollow"
+      // (chính sách link spam của Google: link trao đổi phải khai báo); link về chính hieuban.com giữ follow.
+      a: (tagName, attribs) => ({
+        tagName,
+        attribs: { ...attribs, rel: laLinkNoiBo(attribs.href) ? "noopener noreferrer" : "sponsored nofollow noopener noreferrer" },
+      }),
       // Trang đã có H1 (tiêu đề bài ở NotFairPostHero) → H1 trong thân bài hạ xuống H2 (mỗi trang đúng một H1).
       h1: "h2",
     },

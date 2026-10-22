@@ -16,6 +16,7 @@ from app.calc import can_chi as cc
 from app.calc import lunar
 from app.calc import phongthuy as pt
 from app.calc import tietkhi as tk
+from app.calc import tuoi_dan_gian as tdg
 from app.calc.battu import LUC_HOP, LUC_XUNG
 
 NAM_DAU, NAM_CUOI = 1950, 2025
@@ -39,6 +40,27 @@ def _dmy(d: dt.date) -> str:
 
 def _doi(chi: str, nhom: set) -> str:
     return next(b for p in nhom if chi in p for b in p if b != chi)
+
+
+_TEN_KIM_LAU = {"than": "Kim lâu Thân", "the": "Kim lâu Thê", "tu": "Kim lâu Tử", "luc_suc": "Kim lâu Lục súc"}
+
+
+def _nam_dang_chu_y(nam: int, chi: str) -> list[str]:
+    """SEO-K: mốc dân gian riêng theo NĂM SINH (tính, không phải lời luận) — năm tuổi, Kim lâu, Tam tai theo tuổi mụ."""
+    nam_tuoi = [nam + 12 * k for k in range(1, 8)]
+    kl = [(nam + t - 1, t, tdg.kim_lau(t)) for t in range(18, 76) if tdg.kim_lau(t)]
+    tt = tdg.tam_tai(chi)
+    tam_tai = [n for n in range(nam + 17, nam + 75) if lunar.can_chi_nam(n)[1] in tt]
+    nhuan = lunar.thang_nhuan(nam, config.TZ_LICH_AM["viet"])
+    tet_sau = dt.date(*reversed(lunar.lunar_to_solar(1, 1, nam + 1, 0, config.TZ_LICH_AM["viet"])))
+    return [
+        f"Năm âm lịch {nam} kéo dài tới {_dmy(tet_sau - dt.timedelta(days=1))}"
+        + (f", có tháng {nhuan} nhuận (13 tháng)." if nhuan else ", không có tháng nhuận (12 tháng)."),
+        "Năm tuổi (năm cùng con giáp): " + ", ".join(f"{n} ({n - nam + 1} tuổi mụ)" for n in nam_tuoi) + ".",
+        "Năm chạm Kim lâu theo tuổi mụ (dân gian thường tránh làm nhà, cưới hỏi): "
+        + ", ".join(f"{n} ({t} tuổi, {_TEN_KIM_LAU[k]})" for n, t, k in kl) + ".",
+        f"Năm Tam tai (tuổi {chi} gặp năm {', '.join(tt)}): " + ", ".join(str(n) for n in tam_tai) + ".",
+    ]
 
 
 def ds_menh_nam() -> list[tuple[int, str]]:
@@ -90,6 +112,10 @@ def trang_menh_nam(nam: int, slug: str) -> dict:
          "doan": (f"Năm âm lịch {can} {chi} bắt đầu từ Tết ({_dmy(tet)}, theo âm lịch Việt Nam) — cách tính tuổi và mệnh nạp âm "
                   f"phổ biến. Bát tự và Bát trạch lấy mốc Lập xuân ({_dmy(lx)}). Sinh trước mốc thì thuộc năm {can_t} {chi_t} "
                   f"({nam - 1}), mệnh {na_t['ten']}.")},
+        {"tieu_de": f"Những năm đáng chú ý của tuổi {can} {chi} {nam}",
+         "doan": ("Mốc theo tập quán dân gian, tính từ năm sinh âm lịch (tuổi mụ = năm xem − năm sinh + 1). Chỉ để tham "
+                  "khảo khi chọn thời điểm việc lớn; nhiều gia đình vẫn làm như thường hoặc mượn tuổi."),
+         "danh_sach": _nam_dang_chu_y(nam, chi)},
         {"tieu_de": "Câu hỏi tự soi", "doan": m["cau_tu_soi"]},
     ]
     hoi_dap = [
@@ -103,8 +129,9 @@ def trang_menh_nam(nam: int, slug: str) -> dict:
         {"hoi": f"Mệnh {ten} và cung phi khác nhau thế nào?",
          "dap": f"Mệnh nạp âm ({ten}) dùng chung cho cả nam và nữ; cung phi (nam {q_nam['quai']}, nữ {q_nu['quai']}) dùng chọn hướng nhà."},
     ]
-    lien_ket = ([{"duong": f"/phong-thuy/huong-hop-tuoi/tuoi-{nam}-nam", "ten": f"Nam {nam} hợp hướng nào"},
-                 {"duong": f"/phong-thuy/huong-hop-tuoi/tuoi-{nam}-nu", "ten": f"Nữ {nam} hợp hướng nào"}] if _PT_DAU <= nam <= _PT_CUOI else [])
+    # SEO-K: trang tuổi hợp hướng gộp nam + nữ một trang (308 từ bản -nam/-nu).
+    lien_ket = ([{"duong": f"/phong-thuy/huong-hop-tuoi/tuoi-{nam}", "ten": f"Tuổi {can} {chi} {nam} hợp hướng nào"}]
+                if _PT_DAU <= nam <= _PT_CUOI else [])
     ln = [n for n in (nam - 1, nam + 1) if NAM_DAU <= n <= NAM_CUOI]
     return {
         "loai": "menh_nam", "slug": slug,

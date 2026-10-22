@@ -8,14 +8,15 @@ const CU_MOI: [string, string][] = [
   ...Object.entries(CHUYEN.chu_de).map(([k, moi]) => [`/kien-thuc/${k}`, moi] as [string, string]),
   ...(CHUYEN.trang as [string, string][]),
 ];
-const TUOI_CU = /^\/phong-thuy\/(tuoi-\d{4}-(?:nam|nu)(?:\.md)?)$/;
+// SEO-K: trang tuổi một giới tính (cả trước QH-URL) → trang gộp nam + nữ.
+const TUOI_CU = /^\/phong-thuy\/(?:huong-hop-tuoi\/)?(tuoi-\d{4})-(?:nam|nu)(\.md)?$/;
 
 /** URL cũ (trước QH-URL) → URL mới; URL khác giữ nguyên. Giữ query/hash. */
 export function duongMoi(duong: string): string {
   const m = duong.match(/^([^?#]*)(.*)$/)!;
   const p = m[1]!, duoi = m[2]!;
   const t = p.match(TUOI_CU);
-  if (t) return `${CHUYEN.tuoi_huong}/${t[1]}${duoi}`;
+  if (t) return `${CHUYEN.tuoi_huong}/${t[1]}${t[2] ?? ""}${duoi}`;
   for (const [cu, moi] of CU_MOI) {
     if (p === cu || p === `${cu}.md`) return `${moi}${p.slice(cu.length)}${duoi}`;
     if (p.startsWith(`${cu}/`)) return `${moi}${p.slice(cu.length)}${duoi}`;

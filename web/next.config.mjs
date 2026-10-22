@@ -13,8 +13,14 @@ function chuyenHuong() {
   );
   for (const [khoa, moi] of Object.entries(CHUYEN.chu_de)) them(`/kien-thuc/${khoa}`, moi);
   for (const [cu, moi] of CHUYEN.trang) them(cu, moi);
-  // /phong-thuy/tuoi-1990-nam(.md) → /phong-thuy/huong-hop-tuoi/tuoi-1990-nam(.md)
-  ds.push({ source: "/phong-thuy/:trang(tuoi-\\d{4}-(?:nam|nu)(?:\\.md)?)", destination: `${CHUYEN.tuoi_huong}/:trang`, permanent: true });
+  // SEO-K: trang tuổi gộp nam + nữ → /phong-thuy/huong-hop-tuoi/tuoi-1990(.md). Bản một giới tính (cả đường dẫn trước
+  // QH-URL /phong-thuy/tuoi-1990-nam) đi THẲNG một bước tới bản gộp.
+  for (const goc of ["/phong-thuy", CHUYEN.tuoi_huong]) {
+    ds.push(
+      { source: `${goc}/tuoi-:nam(\\d{4})-:gioi(nam|nu)`, destination: `${CHUYEN.tuoi_huong}/tuoi-:nam`, permanent: true },
+      { source: `${goc}/tuoi-:nam(\\d{4})-:gioi(nam|nu).md`, destination: `${CHUYEN.tuoi_huong}/tuoi-:nam.md`, permanent: true },
+    );
+  }
   return ds;
 }
 

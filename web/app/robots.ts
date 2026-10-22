@@ -15,11 +15,14 @@ export const BOT_AI_TRA_LOI = [
   "OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User",
   "DuckAssistBot", "MistralAI-User", "meta-externalfetcher",
 ];
-/** Bot thu thập để huấn luyện mô hình — chặn toàn site. */
+/** Bot thu thập để huấn luyện mô hình — chặn toàn site.
+ *  SEO-K (2026-10-21): thêm GoogleOther (+ -Image, -Video) — bot Google dùng cho nghiên cứu / sản phẩm ngoài Search;
+ *  chặn KHÔNG ảnh hưởng Googlebot, Google Search hay AI Overviews (Google ghi rõ trong tài liệu crawler), chỉ bớt tải
+ *  máy chủ và giữ đúng tinh thần BM-2 (nội dung không bị lấy ngoài mục đích tìm kiếm). */
 export const BOT_AI_HUAN_LUYEN = [
   "GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "Applebot-Extended", "CCBot", "Bytespider",
   "meta-externalagent", "cohere-ai", "cohere-training-data-crawler", "Diffbot", "Omgilibot", "Timpibot",
-  "ImagesiftBot", "PanguBot", "Amazonbot",
+  "ImagesiftBot", "PanguBot", "Amazonbot", "GoogleOther", "GoogleOther-Image", "GoogleOther-Video",
 ];
 
 export default function robots(): MetadataRoute.Robots {
@@ -29,7 +32,8 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: BOT_AI_TRA_LOI, allow: ["/", "/llms.txt", ...MO], disallow: CHAN },
       { userAgent: BOT_AI_HUAN_LUYEN, disallow: "/" },
     ],
-    sitemap: `${siteUrl()}/sitemap.xml`,
+    // SEO-K: sitemap riêng cho trang ngày tốt (≈ 400 URL, đổi hằng ngày).
+    sitemap: [`${siteUrl()}/sitemap.xml`, `${siteUrl()}/sitemap-ngay.xml`],
     host: siteUrl(),
   };
 }

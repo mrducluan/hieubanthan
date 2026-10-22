@@ -2,6 +2,7 @@
 // hỏi đáp (FAQPage) → nguồn → mời dùng công cụ → đọc tiếp. Thân bài là HTML CMS đã lọc lại ở web (lib/cms-html.ts).
 // Chữ ký theo EEAT-1 / BM-1 / DX-1: chưa có chuyên gia đọc → "Ban biên tập … · Chủ biên duyệt xuất bản" (author =
 // Organization); chỉ khi CMS ghi "tác giả"/"thẩm định" (có xác nhận, có ngày) mới đứng tên người.
+import { duongBlog } from "@/lib/blog-gop";
 import Link from "next/link";
 import { ArrowRight, BookOpen, CalendarDays, Clock, Eye, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -59,7 +60,7 @@ function ldNguoiCms(n: NguoiCms) {
 }
 
 export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms; lienQuan: BaiCmsTomTat[]; nhap: boolean }) {
-  const duong = `/blog/${bai.slug}`;
+  const duong = duongBlog(bai.slug);       // cùng dạng với canonical (audit P2)
   const { html, mucLuc } = locHtmlCms(bai.noi_dung_html);
   const anh = anhCms(bai.anh_bia, "vua");
   const anhOg = anhCms(bai.meta?.image ?? bai.anh_bia, "og");
