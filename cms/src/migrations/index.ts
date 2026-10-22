@@ -10,6 +10,7 @@ import * as migration_20261013_154135_noi_dung_trang from './20261013_154135_noi
 import * as migration_20261019_032830_nd_4_5_anh_phap_ly from './20261019_032830_nd_4_5_anh_phap_ly';
 import * as migration_20261019_060000_qh_url_doi_duong from './20261019_060000_qh_url_doi_duong';
 import * as migration_20261019_065416_blog_3_notfair from './20261019_065416_blog_3_notfair';
+import * as migration_20261021_090000_seo_k_tuoi_gop from './20261021_090000_seo_k_tuoi_gop';
 import * as migration_20261021_235710_nd_7_chu_tren_trang from './20261021_235710_nd_7_chu_tren_trang';
 
 export const migrations = [
@@ -72,6 +73,11 @@ export const migrations = [
     up: migration_20261019_065416_blog_3_notfair.up,
     down: migration_20261019_065416_blog_3_notfair.down,
     name: '20261019_065416_blog_3_notfair',
+  },
+  {
+    up: migration_20261021_090000_seo_k_tuoi_gop.up,
+    down: migration_20261021_090000_seo_k_tuoi_gop.down,
+    name: '20261021_090000_seo_k_tuoi_gop',
   },
   {
     up: migration_20261021_235710_nd_7_chu_tren_trang.up,

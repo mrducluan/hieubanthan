@@ -9,6 +9,7 @@ import { ImageResponse } from "next/og";
 import { docMa, tuTuMa, type NoiDungMa } from "@/lib/ma-moi";
 import { bam, ChanQr, CO_ANH, khungTuThamSo, MAU, napPhong, saoRai } from "@/lib/og-chung";
 import { GOC_QR, urlQr } from "@/lib/the-chia-se";
+import { HinhMang, MANG_HINH, NHAN_MANG, type MangHinh } from "./hinh";
 
 export const runtime = "nodejs";
 
@@ -168,6 +169,29 @@ function TheKienThuc({ tieuDe, qr, W, H }: { tieuDe: string; qr: string; W: numb
   );
 }
 
+/** SEO-K: ảnh đại diện bài có hình theo mảng (la bàn tô hướng tốt, 12 cung, 6 hào, tứ trụ, vòng số, lịch) — chỉ tham
+ *  số công khai, không dữ liệu cá nhân; vẫn có QR + tên miền như mọi ảnh (TCS-1). */
+function TheMang({ mang, tieuDe, nhan, tot, so, hao, qr, W, H }: {
+  mang: MangHinh; tieuDe: string; nhan: string; tot: string[]; so: string; hao: number[]; qr: string; W: number; H: number;
+}) {
+  return (
+    <div style={{ width: "100%", height: "100%", display: "flex", position: "relative",
+      background: `radial-gradient(circle at 78% 50%, #2a2350 0%, ${MAU.nen} 60%)`, color: MAU.chu, fontFamily: "Sans" }}>
+      <HinhMang mang={mang} tot={tot} so={so || "?"} hao={hao} />
+      <div style={{ position: "absolute", left: 64, top: 70, width: 600, display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", fontSize: 24, letterSpacing: 5, color: MAU.vang, textTransform: "uppercase" }}>{NHAN_MANG[mang]}</div>
+        <div style={{ display: "flex", fontSize: tieuDe.length > 70 ? 44 : tieuDe.length > 45 ? 52 : 60, marginTop: 22, fontFamily: "Serif", lineHeight: 1.18 }}>
+          {tieuDe}
+        </div>
+        {nhan && <div style={{ display: "flex", fontSize: 26, marginTop: 26, color: MAU.mo2 }}>{nhan}</div>}
+      </div>
+      <div style={{ display: "flex", position: "absolute", top: H - 24 - 112, left: 40, width: 600, alignItems: "flex-end" }}>
+        <ChanQr url={qr} canh={112} loiMoi="Quét để đọc tiếp" />
+      </div>
+    </div>
+  );
+}
+
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const ma = url.searchParams.get("ma") ?? "";
@@ -190,7 +214,16 @@ export async function GET(req: Request) {
     // Người quét đã thấy thẻ trên ảnh → dẫn thẳng tới bước kế tiếp (tự xem con số) khi mã thẻ quá dài cho QR thưa.
     anh = <TheHoSo nd={nd} doc={khung === "doc"} qr={urlQr(`${GOC_QR}/the/${ma}?tu=${tu}`, `${GOC_QR}/?tu=${tu}`)} W={co.width} H={co.height} />;
   } else {
-    anh = <TheKienThuc tieuDe={tieuDe} qr={GOC_QR} W={co.width} H={co.height} />;
+    const mangTs = url.searchParams.get("mang") ?? "";
+    const mang = tieuDe && (MANG_HINH as readonly string[]).includes(mangTs) ? (mangTs as MangHinh) : null;
+    anh = mang ? (
+      <TheMang mang={mang} tieuDe={tieuDe} nhan={(url.searchParams.get("nhan") ?? "").slice(0, 60)}
+        tot={(url.searchParams.get("tot") ?? "").split(",").map((x) => x.trim()).filter(Boolean).slice(0, 8)}
+        so={(url.searchParams.get("so") ?? "").replace(/[^0-9]/g, "").slice(0, 2)}
+        hao={(url.searchParams.get("hao") ?? "").replace(/[^01]/g, "").slice(0, 6).split("").map(Number)}
+        qr={GOC_QR} W={co.width} H={co.height} />
+    ) : <TheKienThuc tieuDe={tieuDe} qr={GOC_QR} W={co.width} H={co.height} />;
   }
-  return new ImageResponse(anh, { ...co, ...(fonts.length ? { fonts } : {}) });
+  return new ImageResponse(anh, { ...co, ...(fonts.length ? { fonts } : {}),
+    ...(!nd ? { headers: { "cache-control": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400" } } : {}) });
 }

@@ -5,7 +5,7 @@ import { BookOpen } from "lucide-react";
 import { tuDien } from "@/lib/kien-thuc";
 import { TEN_MANG } from "@/lib/markdown";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
+import { goiLd, ldDuongDan, siteUrl, urlDayDu } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
@@ -35,9 +35,11 @@ export default async function Trang() {
         <JsonLd data={goiLd(
           {
             "@type": "DefinedTermSet", "@id": `${urlDayDu("/tu-dien")}#tu-dien`, name: "Từ điển thuật ngữ huyền học",
-            url: urlDayDu("/tu-dien"), inLanguage: "vi-VN",
+            url: urlDayDu("/tu-dien"), inLanguage: "vi-VN", publisher: { "@id": `${siteUrl()}/#to-chuc` },
             hasDefinedTerm: muc.map((m) => ({
-              "@type": "DefinedTerm", name: m.ten, description: m.de_hieu, termCode: m.ma,
+              // SEO-K: mỗi thuật ngữ có @id/url = neo trên trang (#mã) → AI dẫn thẳng tới định nghĩa.
+              "@type": "DefinedTerm", "@id": `${urlDayDu("/tu-dien")}#${m.ma}`, url: `${urlDayDu("/tu-dien")}#${m.ma}`,
+              name: m.ten, description: m.de_hieu, termCode: m.ma,
               ...(m.han ? { alternateName: m.han } : {}), inDefinedTermSet: `${urlDayDu("/tu-dien")}#tu-dien`,
             })),
           },

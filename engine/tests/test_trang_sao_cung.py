@@ -25,13 +25,10 @@ def test_so_luong_va_slug():
 def test_trang_that_sat_menh():
     t = trang.lay("sao_cung", "that-sat-cung-menh")
     assert t["tieu_de"].startswith("Thất Sát ở cung Mệnh")
-    tieu = [m["tieu_de"] for m in t["muc"]]
-    assert "Thất Sát ở cung Mệnh theo từng vị trí" in tieu
-    theo_chi = next(m for m in t["muc"] if m["tieu_de"] == "Thất Sát ở cung Mệnh theo từng vị trí")["danh_sach"]
-    assert len(theo_chi) == 12
+    # SEO-K: 12 vị trí theo chi dời về trang sao (tính tay: Thất Sát ở Tý một mình, đối diện Ngọ có Vũ Khúc + Thiên Phủ)
+    theo_chi = next(m for m in trang.lay("sao", "sao-that-sat")["muc"] if m["tieu_de"].endswith("độ sáng và sao đi cùng"))["danh_sach"]
     ty = next(d for d in theo_chi if d.startswith("Tý"))
-    # tính tay: Thất Sát ở Tý đứng một mình, cung đối (Thiên Di, ở Ngọ) có Vũ Khúc + Thiên Phủ
-    assert "Thiên Di" in ty and "Vũ Khúc" in ty and "Thiên Phủ" in ty
+    assert "Vũ Khúc" in ty and "Thiên Phủ" in ty
     # cung Mệnh xung chiếu Thiên Di, tam hợp Tài Bạch + Quan Lộc
     tp = next(m for m in t["muc"] if m["tieu_de"].startswith("Tam phương tứ chính"))
     assert all(c in (tp.get("doan") or "") + " ".join(tp.get("danh_sach") or []) for c in ("Thiên Di", "Tài Bạch", "Quan Lộc"))
@@ -69,7 +66,8 @@ def test_khong_trung_noi_dung_giua_hai_trang_cung_sao():
     a, b = trang.lay("sao_cung", "thai-am-cung-menh"), trang.lay("sao_cung", "thai-am-cung-phu-the")
     ma = {m["tieu_de"]: m for m in a["muc"]}
     mb = {m["tieu_de"]: m for m in b["muc"]}
-    assert ma["Thái Âm ở cung Mệnh theo từng vị trí"]["danh_sach"] != mb["Thái Âm ở cung Phu Thê theo từng vị trí"]["danh_sach"]
+    assert ma["Khi Thái Âm sáng ở cung Mệnh"]["danh_sach"] != mb["Khi Thái Âm sáng ở cung Phu Thê"]["danh_sach"]
+    assert ma["Tam phương tứ chính của cung Mệnh"]["xem_them"] != mb["Tam phương tứ chính của cung Phu Thê"]["xem_them"]
 
 
 def test_trang_sao_va_cung_tro_toi_trang_con():

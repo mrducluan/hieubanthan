@@ -155,9 +155,12 @@ export function apDungSeo(goc: Metadata, nd: NoiDungTrang, { tuyetDoi = false } 
   // Twitter) bằng metaTrang, tránh mất ảnh chia sẻ khi chỉ sửa tiêu đề.
   const day = metaTrang({ tieuDe: tieuDe ?? md.tieu_de_seo ?? nd.ten ?? "", moTa: moTa ?? md.mo_ta_seo ?? "", duong: nd.duong });
   const og = (goc.openGraph ?? day.openGraph) as Record<string, unknown>, tw = (goc.twitter ?? day.twitter) as Record<string, unknown>;
-  const anhGoc = Array.isArray(og.images) ? og.images[0] : og.images;
+  const anhGoc0 = Array.isArray(og.images) ? og.images[0] : og.images;
+  const anhGoc = typeof anhGoc0 === "string" ? anhGoc0 : (anhGoc0 as { url?: unknown } | undefined)?.url;
+  // Ảnh /og vẽ theo tiêu đề: đổi tiêu đề thì giữ nguyên hình theo mảng (SEO-K), chỉ thay chữ.
+  const veLai = (u: string) => { const q = new URLSearchParams(u.slice(4)); q.set("tieu_de", tieuDe!); return `/og?${q.toString()}`; };
   const anhMoi = anh ? [anh.src]
-    : tieuDe && typeof anhGoc === "string" && anhGoc.startsWith("/og?tieu_de=") ? [`/og?tieu_de=${encodeURIComponent(tieuDe)}`] : null;
+    : tieuDe && typeof anhGoc === "string" && anhGoc.startsWith("/og?tieu_de=") ? [veLai(anhGoc)] : null;
   const them = { ...(tieuDe ? { title: tieuDe } : {}), ...(moTa ? { description: moTa } : {}), ...(anhMoi ? { images: anhMoi } : {}) };
   return {
     ...goc,

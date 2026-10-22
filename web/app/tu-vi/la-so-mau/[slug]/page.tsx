@@ -9,7 +9,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { laSoMau } from "@/lib/kien-thuc";
-import { catMoTa, goiLd, ldDuongDan, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
+import { anhBai, catMoTa, goiLd, ldAnh, ldDuongDan, ldThucThe, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import { DocLaSoMau } from "./DocLaSoMau";
 
 export const revalidate = 21600;
@@ -26,8 +26,8 @@ export async function generateMetadata({ params: thamSo }: Props): Promise<Metad
     description: catMoTa(`${m.mo_ta} Đọc từng bước, có giải nghĩa thuật ngữ.`),
     alternates: { canonical: duong },
     openGraph: { type: "article", title: m.tieu_de, description: catMoTa(m.mo_ta), url: duong, locale: "vi_VN", siteName: TEN_SITE,
-      images: [`/og?tieu_de=${encodeURIComponent(m.tieu_de)}`] },
-    twitter: { card: "summary_large_image", title: m.tieu_de, description: catMoTa(m.mo_ta) },
+      images: [{ url: anhBai({ tieuDe: m.tieu_de, mang: "tu-vi" }), width: 1200, height: 630, alt: m.tieu_de }] },
+    twitter: { card: "summary_large_image", title: m.tieu_de, description: catMoTa(m.mo_ta), images: [anhBai({ tieuDe: m.tieu_de, mang: "tu-vi" })] },
   };
 }
 
@@ -40,9 +40,14 @@ export default async function Page({ params: thamSo }: Props) {
   const ld = goiLd(
     {
       "@type": "Article", "@id": `${urlDayDu(duong)}#bai`, headline: m.tieu_de, description: m.mo_ta, inLanguage: "vi-VN",
-      mainEntityOfPage: urlDayDu(duong), author: { "@type": "Organization", name: TEN_SITE, url: siteUrl() },
-      publisher: { "@id": `${siteUrl()}/#to-chuc` }, isAccessibleForFree: true,
-      about: "Tử vi Đẩu Số", articleSection: m.buoc.map((b) => b.tieu_de),
+      mainEntityOfPage: urlDayDu(duong),
+      // BM-1 / EEAT-1 (SEO-K mục 7): bài chưa thẩm định → tác giả là ban biên tập, chủ biên là editor; có ảnh đại diện.
+      author: { "@type": "Organization", name: `Ban biên tập ${TEN_SITE}`, url: siteUrl() },
+      editor: { "@id": `${siteUrl()}/tac-gia/duc-luan#nguoi` },
+      image: ldAnh(anhBai({ tieuDe: m.tieu_de, mang: "tu-vi" }), m.tieu_de),
+      publisher: { "@id": `${siteUrl()}/#to-chuc` }, isPartOf: { "@id": `${siteUrl()}/#website` }, isAccessibleForFree: true,
+      about: ldThucThe("tu-vi"), articleSection: m.buoc.map((b) => b.tieu_de),
+      ...(m.ngay_dang ? { datePublished: m.ngay_dang, dateModified: m.cap_nhat ?? m.ngay_dang } : {}),
     },
     ldDuongDan([
       { ten: "Trang chủ", duong: "/" }, { ten: "Tử vi", duong: "/tu-vi" }, { ten: "Lá số mẫu", duong: "/tu-vi/la-so-mau" }, { ten: m.tieu_de, duong },

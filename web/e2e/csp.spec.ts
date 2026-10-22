@@ -28,7 +28,7 @@ test("header CSP có nonce mới mỗi lượt + script-src strict-dynamic, scri
 });
 
 for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/than-so/y-nghia-so/so-7",
-  "/phong-thuy/huong-hop-tuoi/tuoi-1990-nam", "/tu-dien"]) {
+  "/phong-thuy/huong-hop-tuoi/tuoi-1990", "/tu-dien"]) {
   test(`không vi phạm CSP: ${duong}`, async ({ page }) => {
     const vp = ghiViPham(page);
     await page.goto(duong);

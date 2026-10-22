@@ -19,13 +19,15 @@ import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 // Mô tả trang chủ ≤ 160 ký tự (mô tả site dài hơn vẫn dùng cho schema/llms.txt).
-const TIEU_DE_CHU = "Hiểu Bản Thân — con số nói gì về bạn";
+// SEO-K (chủ dự án duyệt 2026-10-21): tiêu đề có từ khoá người ta tìm; CMS "Trang website" vẫn ghi đè được.
+const TIEU_DE_CHU = "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân";
 const MO_TA_CHU = "Thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ): tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.";
 const META: Metadata = {
+  title: { absolute: TIEU_DE_CHU },
   description: MO_TA_CHU,
   alternates: { canonical: "/", types: { "text/markdown": "/index.md" } },
   // openGraph/twitter của trang thay hẳn bản ở layout (không gộp) → khai đủ trường.
-  openGraph: { type: "website", locale: "vi_VN", siteName: TEN_SITE, url: "/", title: TIEU_DE_CHU, description: MO_TA_CHU, images: ["/og"] },
+  openGraph: { type: "website", locale: "vi_VN", siteName: TEN_SITE, url: "/", title: TIEU_DE_CHU, description: MO_TA_CHU, images: [{ url: "/og", width: 1200, height: 630, alt: TIEU_DE_CHU }] },
   twitter: { card: "summary_large_image", title: TIEU_DE_CHU, description: MO_TA_CHU, images: ["/og"] },
 };
 

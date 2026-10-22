@@ -1,4 +1,4 @@
-// SEO-H — 168 trang "sao X ở cung Y": H1 + trả lời nhanh + 12 vị trí (độ sáng, đồng cung, xung chiếu) + hình
+// SEO-H — 168 trang "sao X ở cung Y": H1 + trả lời nhanh + lời đời thường riêng (SEO-K) + hình
 // minh hoạ trong HTML máy chủ; trang sao / trang cung trỏ tới trang con; có bản .md và sitemap.
 import { test, expect } from "@playwright/test";
 
@@ -8,8 +8,10 @@ test("trang sao ở cung: nội dung máy chủ đầy đủ", async ({ request 
   const html = await r.text();
   expect(html).toMatch(/<h1[^>]*>Thất Sát ở cung Mệnh: ý nghĩa, sáng hãm, sao đi cùng<\/h1>/);
   expect(html).toContain("Trả lời nhanh");
-  expect(html).toContain("Thất Sát ở cung Mệnh theo từng vị trí");
-  expect(html).toContain("Tý (Miếu)");                                   // độ sáng Nam phái theo chi
+  expect(html).toContain("Khi Thất Sát sáng ở cung Mệnh");               // SEO-K: lời đời thường riêng ô sao × cung
+  expect(html).toContain('href="/tu-vi/sao-o-cung/that-sat-cung-thien-di"'); // tam phương = link, không chép đoạn
+  // 12 vị trí theo chi (độ sáng Nam phái) dời về trang sao
+  expect(await (await request.get("/tu-vi/chinh-tinh/sao-that-sat")).text()).toContain("Tý (Miếu)");
   expect(html).toContain('data-testid="minh-hoa"');
   expect(html).toContain('"@type":"FAQPage"');
   expect((await request.get("/tu-vi/sao-o-cung/that-sat-cung-menh.md")).status()).toBe(200);

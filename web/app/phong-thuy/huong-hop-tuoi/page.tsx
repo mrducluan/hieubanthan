@@ -1,4 +1,4 @@
-// SEO-F — mục lục 92 trang "tuổi X hợp hướng nào" (1960–2005 × nam/nữ), nhóm theo thập niên.
+// SEO-F → SEO-K — mục lục 46 trang "tuổi X hợp hướng nào" (1960–2005, mỗi trang cả nam và nữ), nhóm theo thập niên.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -46,12 +46,12 @@ export default async function Page() {
           {thapNien.map((tn) => (
             <section key={tn} aria-labelledby={`tn-${tn}`}>
               <h2 id={`tn-${tn}`} className="text-xl">Sinh thập niên {tn}</h2>
-              <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
                 {ds.filter((t) => Math.floor(t.nam / 10) * 10 === tn).map((t) => (
                   <li key={t.slug}>
                     <Link href={duongTuoi(t.slug)} className="block rounded-xl border border-line/70 px-3 py-2 text-sm hover:border-gold/50">
-                      <span className="text-fg">{t.gioi_tinh === "nam" ? "Nam" : "Nữ"} {t.nam}</span>
-                      <span className="block text-xs text-fg-faint">{t.can_chi} · {t.quai}</span>
+                      <span className="text-fg">Tuổi {t.can_chi} {t.nam}</span>
+                      <span className="block text-xs text-fg-faint">Nam {t.quai_nam} · Nữ {t.quai_nu}</span>
                     </Link>
                   </li>
                 ))}

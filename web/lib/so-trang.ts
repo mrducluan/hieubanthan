@@ -189,7 +189,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
 
   // ---------------- B · trang tĩnh / giới thiệu
   { duong: "/", nhom: "tinh", ten: "Trang chủ", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Hiểu Bản Thân — con số nói gì về bạn", h1: "Bạn là số mấy?",
+    tieu_de_seo: "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân", h1: "Bạn là số mấy?",
     loi_dan: "Gõ tên và ngày sinh. Nửa phút sau bạn có 4 con số của riêng mình, mỗi số kèm 3 điểm mạnh, 3 *điểm mù* — và bạn tự tích xem nó nói trúng mấy điều.",
     chu: CHU_TRANG_CHU,
     mo_ta_seo: "Thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ): tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.",
@@ -218,7 +218,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Tra hướng nhà, hướng bếp, hướng giường hợp tuổi theo Bát trạch cho nam và nữ sinh từ 1960 đến 2005: mệnh quái, 4 hướng tốt, 4 hướng nên tránh.",
   } },
   { duong: "/blog", nhom: "blog_khung", ten: "Blog", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Blog", h1: "Blog",
+    tieu_de_seo: "Blog thần số học, Tử vi, phong thuỷ, Kinh Dịch", h1: "Blog",
     mo_ta_seo: "Bài viết về hiểu bản thân, thần số học, Tử vi, Kinh Dịch, Bát tự, phong thuỷ và đời sống — đọc thêm ngoài thư viện kiến thức.",
     loi_dan: "Bài viết về hiểu bản thân, thần số học, Tử vi, Kinh Dịch, Bát tự, phong thuỷ và đời sống — đọc thêm ngoài thư viện kiến thức.",
   } },
@@ -283,9 +283,10 @@ export const MAU_CUM: readonly MauCumTrang[] = [
     bien: ["tieu_de", "mo_ta", "slug", "ten_chu_de"], o: O_CUM,
     nguon_kb: { kieu: "kb", loai: c.loai, vi_du: VI_DU[c.loai], tep_kb: TEP_KB_THEO_LOAI[c.loai] },
   })),
-  { mau_duong: "/phong-thuy/huong-hop-tuoi/tuoi-{nam}-{gioi}", nhom: "tuoi", ten: "Tuổi hợp hướng (1960–2005)",
-    bien: ["tieu_de", "nam", "gioi"], o: O_CUM,
-    nguon_kb: { kieu: "tuoi", vi_du: "tuoi-1990-nam", tep_kb: ["phongthuy_kb.json"] } },
+  // SEO-K: một trang cho cả nam và nữ cùng năm (CMS migration seo_k_tuoi_gop đổi mẫu cũ "tuoi-{nam}-{gioi}").
+  { mau_duong: "/phong-thuy/huong-hop-tuoi/tuoi-{nam}", nhom: "tuoi", ten: "Tuổi hợp hướng (1960–2005)",
+    bien: ["tieu_de", "nam"], o: O_CUM,
+    nguon_kb: { kieu: "tuoi", vi_du: "tuoi-1990", tep_kb: ["phongthuy_kb.json"] } },
   { mau_duong: "/tu-vi/la-so-mau/{slug}", nhom: "la_so_mau", ten: "Lá số Tử vi mẫu", bien: ["tieu_de", "slug"], o: O_CUM,
     nguon_kb: { kieu: "la_so_mau", vi_du: "tu-phu-dong-cung", tep_kb: ["tuvi_kb.json", "tuvi_cach_cuc.json"] } },
   // ND-7 — trang con theo ngày/năm của công cụ (nội dung engine tính, không phải kho tri thức): khối + "Chữ trên trang".
