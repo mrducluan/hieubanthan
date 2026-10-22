@@ -18,6 +18,10 @@ import { HoiDongYCookie } from "@/components/khung/HoiDongYCookie";
 import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE, TU_KHOA_SITE } from "@/lib/seo";
 import { ThongBaoSite } from "@/components/khung/ThongBaoSite";
 import "./globals.css";
+import { DaiXemNhap } from "@/components/cms/DaiXemNhap";
+import { ChuChung } from "@/components/cms/ChuChung";
+import { chuChungCms } from "@/lib/cms";
+import { dangXemNhap } from "@/lib/noi-dung-trang";
 
 // Display: Newsreader — serif, chữ số đẹp cho con số lớn. Body: Be Vietnam Pro — thiết kế cho tiếng Việt.
 // PERF-1: tách nghiêng ra bản riêng KHÔNG preload — bản nghiêng (64 KB) chỉ dùng ở vài câu trích, trước đây
@@ -70,9 +74,14 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#0a0a17", width: "device-width", initialScale: 1 };
 
+/** ND-6: dải "đang xem bản nháp" khi bật chế độ nháp từ CMS. */
+async function XemNhap() {
+  return (await dangXemNhap()) ? <DaiXemNhap /> : null;
+}
+
 export default async function RootLayout({ children }: { children: ReactNode }) {
   // CSP-2: nonce của lượt tải (proxy.ts) — đọc header cũng khiến mọi trang render động, bắt buộc để nonce khớp từng lượt.
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const [nonce, chuChung] = await Promise.all([(async () => (await headers()).get("x-nonce") ?? undefined)(), chuChungCms()]);
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
       <body>
@@ -83,10 +92,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           Bỏ qua điều hướng
         </a>
         {/* Nội dung từ CMS chạy song song, không chặn byte đầu của trang khi CMS chậm (audit 2026-10-12). */}
+        <Suspense fallback={null}><XemNhap /></Suspense>
         <Suspense fallback={null}><ThongBaoSite /></Suspense>
         <Suspense fallback={<ThanhTren />}><ThanhTrenCms /></Suspense>
         <main id="noi-dung" className="container pb-12 pt-6 md:pb-16 md:pt-10">
-          {children}
+          <ChuChung chu={chuChung}>{children}</ChuChung>
         </main>
         <Suspense fallback={<KhungChanTrang cot={COT_CHAN_TRANG} />}><ChanTrang /></Suspense>
         <Suspense fallback={<TabDuoi />}><TabDuoiCms /></Suspense>

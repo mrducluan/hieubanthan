@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { AnimatePresence, motion } from "motion/react";
 import { Info, Send, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,7 +47,8 @@ interface Props {
 
 // Mỗi mảng một khung chat (chủ dự án chốt): lịch sử trong phiên, gợi ý câu hỏi, không lưu phía server
 // ngoài nhật ký ẩn danh đã lọc (0004/0005).
-export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi của bạn", goiYO = "Gõ điều bạn đang băn khoăn…", cauNgoai, moDun, className }: Props) {
+export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi của bạn", goiYO, cauNgoai, moDun, className }: Props) {
+  const cc = useChuChung();
   const [tin, setTin] = useState<Tin[]>([]);
   const [cau, setCau] = useState("");
   const [dang, setDang] = useState(false);
@@ -85,7 +87,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
       setTin((t) => [...t, { id: ++soId.current, ai: "he", ...kq }]);
       ghi("advisor_question_completed", { mo_dun: moDun, ket_qua: kq.loi ? "loi" : "ok" });
     } catch {
-      setTin((t) => [...t, { id: ++soId.current, ai: "he", loi: "Không kết nối được. Thử lại sau." }]);
+      setTin((t) => [...t, { id: ++soId.current, ai: "he", loi: cc("hoi.loi_ket_noi") }]);
     } finally {
       setDang(false);
     }
@@ -151,7 +153,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
         </div>
         {dieuKhien && <div className="mb-3">{dieuKhien}</div>}
         <form className="flex items-end gap-2" onSubmit={(e) => { e.preventDefault(); void hoi(cau); }}>
-          <Textarea rows={1} value={cau} maxLength={400} aria-label={nhanO} placeholder={goiYO}
+          <Textarea rows={1} value={cau} maxLength={400} aria-label={nhanO} placeholder={goiYO ?? cc("hoi.o_nhap")}
             onChange={(e) => setCau(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void hoi(cau); } }}
             className="max-h-40 min-h-[4.5rem] [field-sizing:content] sm:min-h-12" />

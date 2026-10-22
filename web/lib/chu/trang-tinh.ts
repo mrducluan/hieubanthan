@@ -1,6 +1,6 @@
 // ND-7 — bảng chữ các trang tĩnh còn chữ cứng ngoài H1/lời dẫn: /kham-pha, /kien-thuc. Sửa ở CMS → Trang website → URL
 // → tab "Chữ trên trang". Tên/mô tả các thẻ chủ đề ở /kien-thuc lấy theo H1/lời dẫn của chính trang chủ đề (sửa ở đó).
-import type { BangChu } from "@/lib/chu-trang";
+import type { BangChu, BangHinh } from "@/lib/chu-trang";
 
 const THE = "Thẻ năm hệ thống";
 const MANG: [string, string, string, string][] = [
@@ -23,6 +23,10 @@ export const CHU_KHAM_PHA = {
   "thu_vien.chu": { nhom: "Thẻ thư viện", nhan: "Phần còn lại", mac_dinh: "— ý nghĩa 12 con số, 64 quẻ, 14 chính tinh", toi_da: 120 },
 } as const satisfies BangChu;
 export const KHOA_MANG_KHAM_PHA = MANG.map(([k]) => k);
+
+/** ND-7 đợt 2 — biểu tượng năm thẻ ở /kham-pha thay được bằng ảnh thư viện CMS. */
+export const HINH_KHAM_PHA: BangHinh = Object.fromEntries(MANG.map(([k, ten]) => [`the.${k}`, { nhom: THE, nhan: `Biểu tượng thẻ ${ten}`,
+  goi_y: "Vuông hoặc ngang 2:1, ≥ 256 px, nền trong suốt", mac_dinh: `Biểu tượng ${ten} vẽ bằng code` }]));
 
 export const CHU_KIEN_THUC = {
   "dau.nhan_tren": { nhom: "Đầu trang", nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Kiến thức", toi_da: 60 },

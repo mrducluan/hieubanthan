@@ -275,6 +275,14 @@ export const dangHien = (l: LichCms, now = Date.now()) =>
 /** Nội dung khung trang (dải thông báo, chân trang, banner) chờ CMS tối đa 1,5 giây rồi bỏ qua — không giữ cả trang. */
 const HAN_KHUNG = 1_500;
 
+/** ND-7 đợt 2: chữ dùng chung (global "chu-chung") — đã lọc theo bảng CHU_CHUNG; CMS trống / lỗi → {} (chữ gốc). */
+export async function chuChungCms(): Promise<Record<string, string>> {
+  const g = await goiCms<{ chu?: unknown }>("/api/globals/chu-chung?depth=0", { hanMs: HAN_KHUNG });
+  const { locChu } = await import("@/lib/chu-trang");
+  const { CHU_CHUNG } = await import("@/lib/chu/chung");
+  return locChu(CHU_CHUNG, g?.chu);
+}
+
 export async function trangChuCms(): Promise<TrangChuCms | null> {
   if (!coCms()) return null;
   return goiCms<TrangChuCms>("/api/globals/trang-chu?depth=2", { hanMs: HAN_KHUNG });

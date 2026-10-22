@@ -1,7 +1,7 @@
 // ND-7 — bảng chữ trang chủ (`/`). Sửa chữ mặc định ở đây = đổi chữ trên web; người biên tập đổi ở CMS → Trang website
 // → "/" → tab "Chữ trên trang". `*…*` = đoạn nhấn. Mỗi dòng phía Hiểu Bản Thân của bảng so sánh phải đúng với hệ thống
 // đang chạy (TC-HOOK) — kiểm định CMS không biết điều này, người duyệt phải đọc.
-import type { BangChu } from "@/lib/chu-trang";
+import type { BangChu, BangHinh } from "@/lib/chu-trang";
 
 const D = "Đầu trang", DM = "Dòng điểm mù chạy", SS = "Vì sao xem ở đây", B = "Bảng so sánh", M = "Bốn mảng huyền học", R = "Ô riêng tư";
 
@@ -90,3 +90,11 @@ export const CHU_TRANG_CHU = {
   "rieng_tu.chu": { nhom: R, nhan: "Phần còn lại (phải khớp Chính sách quyền riêng tư)", toi_da: 300,
     mac_dinh: "Tên và ngày sinh lưu trên máy của bạn. Chỉ khi bạn bấm “Lưu vào tài khoản” thì hồ sơ mới được lưu trên máy chủ — và bạn xoá được bất cứ lúc nào." },
 } as const satisfies BangChu;
+
+/** ND-7 đợt 2 — hình trang chủ thay được bằng ảnh thư viện CMS (tab "Hình trên trang"). */
+export const HINH_TRANG_CHU: BangHinh = {
+  "hero.hinh": { nhom: "Đầu trang", nhan: "Hình lớn cạnh tiêu đề", goi_y: "Vuông, ≥ 1000×1000, nền tối hoặc trong suốt",
+    mac_dinh: "Bầu trời số 1–9 vẽ bằng code, có chuyển động" },
+  ...Object.fromEntries(MANG.map(([k, ten]) => [`mang.${k}`, { nhom: "Bốn mảng huyền học", nhan: `Biểu tượng thẻ ${ten}`,
+    goi_y: "Vuông hoặc ngang 2:1, ≥ 256 px, nền trong suốt", mac_dinh: `Biểu tượng ${ten} vẽ bằng code` }])),
+};

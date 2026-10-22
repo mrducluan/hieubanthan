@@ -5,6 +5,7 @@
 // Biến mẫu cụm {tieu_de}…: web thay bằng giá trị engine trả cho đúng trang, biến lạ giữ nguyên chữ. KHÔNG thoát HTML ở đây:
 // mọi khối CMS hiện dạng văn bản thuần (React tự thoát ký tự) — thoát hai lần sẽ lộ "&amp;" trên trang (ND-5).
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import { anhCms, dangHien, duongLienKet, goiCms, chuoiTruyVan, type AnhCms, type LienKetCms } from "@/lib/cms";
 import { catMoTa, metaTrang, tieuDeSeo } from "@/lib/seo";
 import { khopMauCum, mucSoTrang, type MacDinhTrang, type NhomTrang } from "@/lib/so-trang";
@@ -23,6 +24,8 @@ export type NoiDungTrang = {
   khoi: Record<ViTri, KhoiCms[]>;
   /** ND-7 "Chữ trên trang" thô từ CMS (khoá → chữ; trang URL thắng mẫu cụm) — trang lọc theo bảng chữ của mình (taoChu). */
   chu: Record<string, string>;
+  /** ND-7 đợt 2 "Hình trên trang": khoá → ảnh thư viện CMS (trang URL thắng mẫu cụm); khoá không có = hình gốc trong code. */
+  hinh: Record<string, AnhCms>;
   /** Có lấy được gì từ CMS không (để đo / gỡ lỗi). */
   nguon: { trang: boolean; mau: boolean };
 };
@@ -39,8 +42,9 @@ export type TrangCms = {
   khoi_tren?: KhoiCms[] | null; khoi_duoi?: KhoiCms[] | null; khoi_cuoi?: KhoiCms[] | null;
   che_do_mau?: Partial<Record<ViTri, "thay" | "them_sau" | "an_mau">> | null;
   chu?: Record<string, unknown> | null;
+  hinh?: Record<string, unknown> | null;
 };
-export type MauCms = Pick<TrangCms, "khoi_tren" | "khoi_duoi" | "khoi_cuoi" | "chu"> & { mau_duong?: string };
+export type MauCms = Pick<TrangCms, "khoi_tren" | "khoi_duoi" | "khoi_cuoi" | "chu" | "hinh"> & { mau_duong?: string };
 
 const KIEU_CHU_MAC_DINH: KieuChu = { co: "thuong", can: "trai", nen: "khong" };
 const TRONG_SITE = /^\/(?![/\\])[^\s\\]*$/;   // như DUONG_TRONG_SITE của CMS
@@ -90,6 +94,15 @@ export function gopNoiDung(duong: string, macDinh: MacDinhTrang & { nhom?: NhomT
     if (!nguon || typeof nguon !== "object" || Array.isArray(nguon)) continue;
     for (const [k, v] of Object.entries(nguon)) if (typeof v === "string" && v.trim()) chuCms[k] = v.trim();
   }
+  // Ảnh: CMS lưu bản chụp {url, alt, width, height, sizes} của ảnh thư viện; chỉ nhận url http(s) hoặc đường dẫn trong site.
+  const hinhCms: Record<string, AnhCms> = {};
+  for (const nguon of [mau?.hinh, t.hinh]) {
+    if (!nguon || typeof nguon !== "object" || Array.isArray(nguon)) continue;
+    for (const [k, v] of Object.entries(nguon)) {
+      const a = v as AnhCms | null;
+      if (a && typeof a === "object" && typeof a.url === "string" && /^(https?:\/\/|\/(?!\/))/.test(a.url)) hinhCms[k] = a;
+    }
+  }
   const anh = t.anh_chia_se && typeof t.anh_chia_se === "object" && t.anh_chia_se.url ? t.anh_chia_se : null;
   return {
     duong, nhom: t.nhom ?? macDinh.nhom ?? null, ten: t.ten ?? macDinh.ten ?? null,
@@ -111,11 +124,21 @@ export function gopNoiDung(duong: string, macDinh: MacDinhTrang & { nhom?: NhomT
     ngayHieuLuc: chu(t.ngay_hieu_luc) ?? macDinh.ngay_hieu_luc ?? null,
     khoi,
     chu: chuCms,
+    hinh: hinhCms,
     nguon: { trang: Boolean(trang), mau: Boolean(mau) },
   };
 }
 
 const HAN = 1_500;   // chạy trên mọi trang → ngắn hơn hạn đọc bài (4 giây)
+
+/** ND-6: trình duyệt đang ở chế độ xem nháp (bật qua /api/cms/xem-truoc)? Ngoài một lượt yêu cầu (vd test gọi hàm thuần)
+ *  → false. Chế độ nháp: đọc bản NHÁP mới nhất bằng khoá Máy đọc, không cache. */
+export async function dangXemNhap(): Promise<boolean> {
+  try { return (await draftMode()).isEnabled; } catch { return false; }
+}
+/** Điều kiện + tham số truy vấn theo chế độ: người đọc → chỉ bản đã xuất bản; xem nháp → bản mới nhất (draft=true). */
+const theoCheDo = (nhap: boolean, where: Record<string, unknown>) =>
+  nhap ? { where, draft: "true" } : { where: { ...where, _status: { equals: "published" } } };
 const tv = (o: Record<string, unknown>) => chuoiTruyVan(o).join("&");
 
 /** Nội dung của một URL (bản đã xuất bản). `bien`: giá trị biến cho mẫu cụm (trang KB). */
@@ -123,12 +146,12 @@ export async function layNoiDungTrang(duong: string, bien: Record<string, string
   const muc = mucSoTrang(duong), cum = muc ? null : khopMauCum(duong);
   const macDinh = { ...(muc?.mac_dinh ?? {}), nhom: muc?.nhom ?? cum?.mau.nhom ?? null, ten: muc?.ten ?? null };
   if (!duongHopLe(duong)) return gopNoiDung(duong, macDinh, null, null);
-  const daXb = { _status: { equals: "published" } };
+  const nhap = await dangXemNhap();
   const [r, m] = await Promise.all([
-    goiCms<{ docs?: TrangCms[] }>(`/api/noi-dung-trang?${tv({ where: { duong: { equals: duong }, ...daXb }, limit: 1, depth: 1 })}`,
-      { hanMs: HAN, the: [theTrang(duong)] }),
-    cum ? goiCms<{ docs?: MauCms[] }>(`/api/mau-cum?${tv({ where: { mau_duong: { equals: cum.mau.mau_duong }, ...daXb }, limit: 1, depth: 1 })}`,
-      { hanMs: HAN, the: [theTrang(cum.mau.mau_duong)] }) : Promise.resolve(null),
+    goiCms<{ docs?: TrangCms[] }>(`/api/noi-dung-trang?${tv({ ...theoCheDo(nhap, { duong: { equals: duong } }), limit: 1, depth: 1 })}`,
+      { hanMs: HAN, the: [theTrang(duong)], nhap }),
+    cum ? goiCms<{ docs?: MauCms[] }>(`/api/mau-cum?${tv({ ...theoCheDo(nhap, { mau_duong: { equals: cum.mau.mau_duong } }), limit: 1, depth: 1 })}`,
+      { hanMs: HAN, the: [theTrang(cum.mau.mau_duong)], nhap }) : Promise.resolve(null),
   ]);
   return gopNoiDung(duong, macDinh, r?.docs?.[0] ?? null, m?.docs?.[0] ?? null, { ...(cum?.bien ?? {}), ...bien });
 }
@@ -138,8 +161,9 @@ export async function layNoiDungTrang(duong: string, bien: Record<string, string
 export async function layDauNhieuTrang(duongs: string[]): Promise<Record<string, { ten: string | null; moTa: string | null }>> {
   const ds = [...new Set(duongs.filter((d) => duongHopLe(d)))];
   if (!ds.length) return {};
-  const r = await goiCms<{ docs?: TrangCms[] }>(`/api/noi-dung-trang?${tv({ where: { duong: { in: ds.join(",") }, _status: { equals: "published" } },
-    limit: ds.length, depth: 0, select: { duong: true, h1: true, loi_dan: true } })}`, { hanMs: HAN });
+  const nhap = await dangXemNhap();
+  const r = await goiCms<{ docs?: TrangCms[] }>(`/api/noi-dung-trang?${tv({ ...theoCheDo(nhap, { duong: { in: ds.join(",") } }),
+    limit: ds.length, depth: 0, select: { duong: true, h1: true, loi_dan: true } })}`, { hanMs: HAN, nhap });
   return Object.fromEntries((r?.docs ?? []).flatMap((d) => (d.duong ? [[d.duong, { ten: chu(d.h1), moTa: chu(d.loi_dan) }]] : [])));
 }
 
@@ -169,6 +193,20 @@ export function apDungSeo(goc: Metadata, nd: NoiDungTrang, { tuyetDoi = false } 
     openGraph: { ...og, ...them } as Metadata["openGraph"],
     twitter: { ...tw, ...them } as Metadata["twitter"],
   };
+}
+
+/** ND-7 đợt 2: ảnh chia sẻ của cụm (hình "chia_se" ở Mẫu cụm / ghi đè URL) thay ảnh /og tự vẽ trong metadata gốc. */
+export function apDungAnhChiaSe(goc: Metadata, nd: NoiDungTrang): Metadata {
+  const a = anhCms(nd.hinh.chia_se, "og");
+  if (!a) return goc;
+  const anh = [{ url: a.src, width: a.w, height: a.h, alt: a.alt }];
+  return { ...goc, openGraph: { ...(goc.openGraph ?? {}), images: anh }, twitter: { ...(goc.twitter ?? {}), images: [a.src] } as Metadata["twitter"] };
+}
+
+/** Bọc generateMetadata của trang trong cụm: đọc canonical của metadata gốc → nội dung CMS của URL đó → ảnh chia sẻ. */
+export async function voiAnhChiaSe(m: Metadata): Promise<Metadata> {
+  const duong = typeof m.alternates?.canonical === "string" ? m.alternates.canonical : null;
+  return duong && duongHopLe(duong) ? apDungAnhChiaSe(m, await layNoiDungTrang(duong)) : m;
 }
 
 /** Props cho khối "Về công cụ…" (GioiThieuCongCu) từ nội dung đã gộp. */

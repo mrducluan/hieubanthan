@@ -10,7 +10,7 @@ import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNam, docTuoi, duongXongDat, namAmHienTai, xongDatCongKhai, xongDatIndex } from "@/lib/tuoi-dan-gian";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { taoChu } from "@/lib/chu-trang";
-import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_XONG_DAT_CON } from "@/lib/chu/trang-con";
 
 type P = { params: Promise<{ nam: string; tuoi: string }> };
@@ -21,7 +21,7 @@ async function doc(p: P) {
   return n && ns && ns <= n ? { n, ns } : null;
 }
 
-export async function generateMetadata(p: P): Promise<Metadata> {
+async function metaGoc(p: P): Promise<Metadata> {
   const x = await doc(p);
   if (!x) return {};
   const m = metaTrang({ tieuDe: `Tuổi xông đất năm ${x.n} cho gia chủ sinh năm ${x.ns}`,
@@ -60,3 +60,6 @@ export default async function Page(p: P) {
     </div>
   );
 }
+
+// ND-7 đợt 2: ảnh chia sẻ của cụm (CMS → Mẫu cụm trang → "Hình trên trang") thay ảnh /og tự vẽ khi có.
+export const generateMetadata = async (...a: Parameters<typeof metaGoc>) => voiAnhChiaSe(await metaGoc(...a));

@@ -22,6 +22,7 @@ import { DongBoSoTrangTask } from "./jobs/dong-bo-so-trang";
 import { DieuHuong } from "./globals/DieuHuong";
 import { MenuDauTrang } from "./globals/MenuDauTrang";
 import { TinhNang } from "./globals/TinhNang";
+import { ChuChung } from "./globals/ChuChung";
 import { TrangChu } from "./globals/TrangChu";
 import { slugViet } from "./kiem-dinh/kiem-dinh";
 import { webUrl } from "./lib/web";
@@ -70,7 +71,7 @@ export default buildConfig({
   },
   i18n: { supportedLanguages: { vi, en }, fallbackLanguage: "vi" },
   collections: [BaiViet, ChuyenMuc, TacGia, Media, TrangDich, NoiDungTrang, MauCum, BienTapVien],
-  globals: [TrangChu, MenuDauTrang, DieuHuong, TinhNang],
+  globals: [TrangChu, MenuDauTrang, DieuHuong, TinhNang, ChuChung],
   editor: lexicalEditor(),
   db: postgresAdapter({
     pool: { connectionString: (process.env.DATABASE_URI || "").trim() },
