@@ -3,6 +3,7 @@
 // kyMaHai — chỉ tên hiển thị, quan hệ, điểm, mức, ≤ 3 tiêu chí; không ngày sinh). Link /the/hai/<mã>?tu=hp.<…> đo
 // referral_signup như các thẻ khác; ảnh /og/hai (dọc 1080×1350) tải về để đăng story — ảnh có mã QR + hieuban.com.
 import { useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { Check, Copy, Download, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,6 +21,7 @@ export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const c = useChuChung();
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
 
@@ -81,21 +83,21 @@ export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
           </p>
           {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
           <Button onClick={() => void tao()} disabled={dang} data-testid="tao-the-hai">
-            <Share2 aria-hidden /> {dang ? "Đang tạo…" : "Tạo thẻ"}
+            <Share2 aria-hidden /> {dang ? c("chia_se.dang_tao") : "Tạo thẻ"}
           </Button>
         </div>
       ) : (
         <div className="mt-3 space-y-3">
           <div className="flex gap-2">
             <Input readOnly value={the.link} aria-label="Link thẻ điểm" onFocus={(e) => e.currentTarget.select()} className="text-sm" data-testid="link-the-hai" />
-            <Button variant="secondary" size="icon" onClick={() => void chep()} aria-label="Sao chép link">{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
+            <Button variant="secondary" size="icon" onClick={() => void chep()} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Button size="sm" onClick={() => void chiaSe()}><Share2 aria-hidden /> Gửi qua Zalo, Messenger…</Button>
+            <Button size="sm" onClick={() => void chiaSe()}><Share2 aria-hidden /> {c("chia_se.gui")}</Button>
             <Button asChild size="sm" variant="outline">
               <a href={`/og/hai?ma=${encodeURIComponent(the.ma)}&khung=doc`} download="diem-hai-nguoi.png" data-testid="tai-anh-the-hai"
                 onClick={() => ghi("share_created", { kind: "hai_nguoi_anh", ma_moi: the.tu })}>
-                <Download aria-hidden /> Tải ảnh (đăng story)
+                <Download aria-hidden /> {c("chia_se.tai_story")}
               </a>
             </Button>
           </div>

@@ -103,7 +103,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <GhiGioiThieu />
         <GiamSat />
         <HoiDongYCookie />
-        <HopThoaiSao />
+        <ChuChung chu={chuChung}><HopThoaiSao /></ChuChung>
         <GhiVaoTrang />
         <DoLuongGoogle nonce={nonce} />
       </body>
