@@ -42,3 +42,25 @@ export function DuyetVec({ id, trangThai }: { id: number; trangThai: string }) {
     </div>
   );
 }
+
+
+/** Q7: người duyệt đánh dấu một dòng hàng đợi "đề xuất luật" (0022). */
+export function DuyetDeXuat({ id, trangThai }: { id: number; trangThai: string }) {
+  const [tt, setTt] = useState<string>(trangThai);
+  const [ghi, setGhi] = useState("");
+  const [loi, setLoi] = useState<string | null>(null);
+  async function doi(trang_thai: "cho_duyet" | "da_sua" | "bo_qua") {
+    const { ok, j } = await guiJson("/api/quan-tri/hoc/de-xuat", { id, trang_thai, ...(ghi.trim() ? { ghi_chu: ghi.trim() } : {}) });
+    if (ok) { setTt(trang_thai); setLoi(null); } else setLoi((j.error as string) ?? "Chưa lưu được.");
+  }
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <input aria-label="Ghi chú duyệt (PR, lý do)" value={ghi} onChange={(e) => setGhi(e.target.value.slice(0, 500))} placeholder="PR / lý do (tuỳ chọn)"
+        className="h-8 w-56 rounded-full border border-line bg-surface/60 px-3 text-xs" />
+      {tt !== "da_sua" && <Button size="sm" variant="secondary" onClick={() => doi("da_sua")}>Đã sửa</Button>}
+      {tt !== "bo_qua" && <Button size="sm" variant="outline" onClick={() => doi("bo_qua")}>Bỏ qua</Button>}
+      {tt !== "cho_duyet" && <Button size="sm" variant="ghost" onClick={() => doi("cho_duyet")}>Chờ duyệt</Button>}
+      {loi && <span className="text-xs text-cinnabar" role="alert">{loi}</span>}
+    </div>
+  );
+}

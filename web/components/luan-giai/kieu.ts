@@ -27,7 +27,10 @@ export interface Hop {
   muc?: Muc; tu?: string; den?: string; tu_tuoi?: number; den_tuoi?: number;
   /** VH-1 chương Vận hạn: năm của hộp (+ các năm cùng mẫu đã gộp). */
   nam?: number; nam_gop?: number[];
+  /** Phong thuỷ Q1: dấu hiệu nhóm veto (xử lý trước, trần mức chương). Q5: việc nên làm theo chi phí. An toàn: lửa điện, nước… */
+  veto?: boolean; viec?: { chi_phi: "khong_ton" | "it_tien" | "sua_chua"; lam: string }[]; an_toan?: string[];
 }
+export const TEN_CHI_PHI: Record<"khong_ton" | "it_tien" | "sua_chua", string> = { khong_ton: "0 đồng", it_tien: "Ít tiền", sua_chua: "Sửa chữa" };
 
 /** VH-1 — một cờ của năm (tập quán dân gian theo chi năm sinh, hoặc năm xung / hình chi ngày ở Bát tự). */
 export interface CoNam { ma: string; nhan: string; y?: string; tranh?: string; lam?: string }

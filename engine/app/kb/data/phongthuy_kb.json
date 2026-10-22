@@ -109,6 +109,22 @@
     "duong dam",
     "cuoi duong",
     "dam thang"
+   ],
+   "veto": true,
+   "giai_thich_hien_dai": "Đường hay hành lang dài đâm thẳng vào cửa dồn gió, bụi và tiếng động đi thẳng vào nhà; mắt luôn thấy xe hay người lao tới nên người ở khó thả lỏng khi ngồi gần cửa.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Kê ghế ngồi, bàn làm việc lệch khỏi đường thẳng từ cửa vào; đóng cửa khi không dùng."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Rèm dày hoặc chậu cây tán rộng ngay sau cửa để bẻ hướng gió và che tầm nhìn thẳng."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Vách ngăn thấp hay tủ giày cao ở sảnh (huyền quan); nhà phố có sân thì làm cổng, tường thấp hoặc hàng cây phía trước."
+    }
    ]
   },
   "nga_ba": {
@@ -119,6 +135,21 @@
    "tu_khoa": [
     "nga ba",
     "nga tu"
+   ],
+   "giai_thich_hien_dai": "Nhà ở ngã ba, ngã tư nhận ồn, bụi và đèn xe từ nhiều phía; góc nhà hứng gió xoáy nên bụi đọng nhanh.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Phòng ngủ dùng phòng phía trong, xa mặt đường."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Cửa kính hai lớp hoặc rèm dày cho phòng hướng ra ngã tư; cây xanh dọc mặt tiền."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Làm hiên hoặc mái che rộng, lùi cửa chính vào trong."
+    }
    ]
   },
   "cot_dien": {
@@ -130,6 +161,21 @@
     "cot dien",
     "cay lon truoc",
     "doi dien cot"
+   ],
+   "giai_thich_hien_dai": "Cột điện, cây to sát cửa chắn sáng, chắn lối, và là vật dễ bị va chạm khi ra vào; dây điện sát nhà cần kiểm tra an toàn.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Giữ lối ra vào thoáng, không để xe hay đồ dựa vào cột."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Thêm đèn sảnh để bù phần sáng bị chắn."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Xin dời cột hoặc tỉa cây theo quy định địa phương khi sửa nhà."
+    }
    ]
   },
   "song_truoc": {
@@ -144,6 +190,21 @@
     "nuoc truoc",
     "ho nuoc",
     "ao truoc"
+   ],
+   "giai_thich_hien_dai": "Mặt nước trước nhà cho tầm nhìn mở, không khí mát hơn vài độ vào mùa nóng; đổi lại là ẩm, muỗi và cần để ý trẻ nhỏ gần bờ.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Mở cửa đón gió từ mặt nước vào ban ngày, đóng khi chiều muộn để bớt ẩm, muỗi."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Lưới chống muỗi, máy hút ẩm nếu tầng trệt ẩm."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Lan can, rào chắn an toàn cho trẻ nếu bờ nước sát nhà."
+    }
    ]
   },
   "nghia_trang": {
@@ -155,6 +216,21 @@
     "nghia trang",
     "gan benh vien",
     "nha tang le"
+   ],
+   "giai_thich_hien_dai": "Nhìn thẳng ra nơi nhiều người đau buồn qua lại hay đèn xe cấp cứu đêm khuya khiến tâm lý khó yên; thực tế còn là tiếng ồn và không khí trầm.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Quay ghế ngồi, giường ngủ về phía trong nhà; sinh hoạt chính ở phòng phía sau."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Rèm, cây xanh ở cửa sổ phía đó; đèn ấm trong phòng khách."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Tường rào kín hoặc dàn cây cao che tầm nhìn trực diện."
+    }
    ]
   },
   "no_hau": {
@@ -165,6 +241,21 @@
    "tu_khoa": [
     "no hau",
     "thop hau"
+   ],
+   "giai_thich_hien_dai": "Đất nở hậu cho phần sau rộng, dễ bố trí phòng ngủ, sân sau thoáng; thóp hậu thì phần sau chật, khó lấy sáng và gió cho phòng trong.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đặt phòng cần yên tĩnh ở phần rộng phía sau."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Thóp hậu: gương lớn hay đèn sáng ở phần hẹp để đỡ bí."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Thóp hậu: mở giếng trời nhỏ ở phần sau khi sửa."
+    }
    ]
   },
   "minh_duong": {
@@ -174,6 +265,21 @@
    "nguon": "co_thu",
    "tu_khoa": [
     "minh duong"
+   ],
+   "giai_thich_hien_dai": "Khoảng sân, hiên thoáng trước cửa cho ánh sáng và gió vào đều, lối ra vào rộng; nhìn ra xa được làm mắt và đầu óc dễ chịu.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Giữ sân, hiên sạch, không chất đồ hay để xe chắn cửa."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Đèn sân và một hai chậu cây thấp để sân luôn sáng, sống động."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Không xây thêm che kín phần sân trước nếu còn cách khác."
+    }
    ]
   },
   "tu_linh": {
@@ -197,6 +303,21 @@
    "tu_khoa": [
     "bep doi dien cua",
     "bep dat doi dien"
+   ],
+   "giai_thich_hien_dai": "Mở cửa là thấy ngay bếp: gió từ cửa thổi tạt lửa, mùi dầu mỡ bay ngược vào nhà, và nhà mất riêng tư. Bàn đảo khô không nấu thì không tính là bếp — nó còn che bếp khá tốt.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đóng cửa khi nấu; xoay hướng đứng nấu nếu bếp di động."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Rèm hạt, kệ hở hay chậu cây cao giữa cửa và bếp."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Vách kính sọc, quầy bar hoặc bàn đảo ngăn giữa cửa và bếp nấu."
+    }
    ]
   },
   "wc_giua_nha": {
@@ -210,6 +331,22 @@
     "toilet giua",
     "ve sinh (o |nam )?(trung tam|giua)",
     "(wc|toilet) (o |nam )?trung tam"
+   ],
+   "veto": true,
+   "giai_thich_hien_dai": "Nhà vệ sinh giữa nhà thường không có cửa sổ, chỉ trông vào ống hút chung; hút yếu là ẩm và mùi đọng ngay giữa nhà rồi lan ra các phòng.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Luôn đóng cửa, lau khô sàn sau khi tắm, không phơi đồ trong đó."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Quạt hút công suất đủ, chạy hẹn giờ; nắp bồn cầu đóng khi xả; tinh dầu hoặc than hoạt tính hút ẩm."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Tách khu khô và khu ướt, đổi chiều mở cửa (hoặc cửa giấu); chung cư không dời được ống kỹ thuật nên không đập dời phòng."
+    }
    ]
   },
   "cau_thang_cua": {
@@ -219,6 +356,21 @@
    "nguon": "dan_gian",
    "tu_khoa": [
     "cau thang doi dien"
+   ],
+   "giai_thich_hien_dai": "Cầu thang đâm thẳng ra cửa làm lối vào chật, người ngoài nhìn thẳng lên tầng trên; gió theo thang hút thẳng lên.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Để trống chân cầu thang, không chất đồ."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Bình phong thấp hoặc tủ giày làm vách che một phần."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Xoay chân cầu thang hoặc thêm vách sảnh khi sửa lớn."
+    }
    ]
   },
   "phong_ngu_tren_bep": {
@@ -229,6 +381,21 @@
    "tu_khoa": [
     "phong ngu tren bep",
     "ngu tren bep"
+   ],
+   "giai_thich_hien_dai": "Sàn phòng ngủ ngay trên bếp nóng hơn, mùi và tiếng nấu nướng vọng lên; giấc ngủ dễ bị quấy.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Kê giường lệch khỏi vị trí thẳng trên bếp nấu."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Thảm dày, quạt thông gió bếp hút tốt để mùi không bốc lên."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Cách nhiệt, cách âm sàn khi sửa; dời bếp nấu sang góc khác nếu được."
+    }
    ]
   },
   "guong_cua_chinh": {
@@ -240,6 +407,17 @@
     "guong (doi dien|chieu|chieu thang|chieu vao|ngay) cua",
     "guong o (loi|cua) vao",
     "guong bat quai"
+   ],
+   "giai_thich_hien_dai": "Gương đối thẳng cửa làm người bước vào giật mình vì thấy bóng mình, và phản chiếu ánh sáng, cảnh ngoài vào nhà.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dời gương sang tường bên hông cửa."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Thay bằng tranh hoặc kệ treo đồ nhỏ ở lối vào."
+    }
    ]
   },
   "guong_giuong": {
@@ -251,6 +429,17 @@
     "guong (doi dien|chieu|chieu vao|chieu thang) giuong",
     "guong trong phong ngu",
     "guong (doi dien|chieu)(?! cua)"
+   ],
+   "giai_thich_hien_dai": "Gương chiếu giường phản xạ ánh sáng khi tỉnh giấc ban đêm, dễ giật mình; nhiều người thấy khó ngủ sâu.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dời gương hoặc xoay cánh tủ gương khỏi hướng giường."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Rèm che gương hoặc dán phim mờ khi ngủ."
+    }
    ]
   },
   "ban_tho": {
@@ -272,6 +461,21 @@
     "cua doi nhau",
     "cua sau doi dien cua truoc",
     "cua (chinh|truoc) doi dien cua sau"
+   ],
+   "giai_thich_hien_dai": "Hai cửa phòng đối thẳng nhau làm hai phòng nhìn thấu nhau, tiếng động truyền thẳng, mất riêng tư; ở chung cư, cửa đối cửa hàng xóm còn dễ va chạm khi cùng mở.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Thói quen đóng cửa phòng; kê giường lệch khỏi đường thẳng hai cửa."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Rèm hạt gỗ hoặc vách lửng ngay trong cửa; ở chung cư thì mọi thứ làm bên trong cửa nhà mình, không treo gì chiếu sang nhà đối diện."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Dời một trong hai cửa khi sửa phòng."
+    }
    ]
   },
   "nha_chu_l": {
@@ -283,6 +487,21 @@
     "chu l",
     "thieu goc",
     "khuyet goc"
+   ],
+   "giai_thich_hien_dai": "Nhà chữ L hay khuyết góc có góc tối, lối đi gãy khúc, một phần nhà xa cửa sổ; cảm giác chật và lệch.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dùng phần khuyết làm sân, kho hay chỗ phơi; không cố nhét phòng ngủ vào góc tối."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Đèn sáng và gương ở vách gần góc khuyết cho không gian cân hơn."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Mái hiên, sàn gỗ ngoài trời lấp phần khuyết thành hiên dùng được."
+    }
    ]
   },
   "xa_ngang": {
@@ -293,6 +512,22 @@
    "tu_khoa": [
     "xa ngang",
     "duoi xa"
+   ],
+   "veto": true,
+   "giai_thich_hien_dai": "Dầm nhô ngay trên đầu giường hay bàn làm việc tạo cảm giác bị đè khi nhìn lên, luồng gió điều hoà cuộn xuống đúng chỗ nằm; nhiều người ngủ chập chờn, hay tỉnh.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Kê giường, bàn ra khỏi hình chiếu của dầm — thường chỉ cần dịch 40–60 cm."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Đèn hắt ngược lên trần để làm nhẹ khối dầm; màn giường hoặc tán che."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Đóng trần thạch cao phẳng hoặc giật cấp bo tròn để giấu dầm (không cần đụng kết cấu)."
+    }
    ]
   },
   "quay_lung_cua": {
@@ -303,6 +538,17 @@
    "tu_khoa": [
     "quay lung",
     "lung ra cua"
+   ],
+   "giai_thich_hien_dai": "Ngồi quay lưng ra cửa, ai bước vào cũng không thấy nên luôn phải ngoái lại; khó tập trung lâu.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Xoay bàn để nhìn chéo ra cửa, lưng tựa tường."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Không xoay được thì đặt một gương nhỏ trên bàn để thấy cửa sau lưng."
+    }
    ]
   },
   "bep_wc": {
@@ -314,6 +560,21 @@
     "bep va nha ve sinh",
     "bep canh",
     "bep sat"
+   ],
+   "giai_thich_hien_dai": "Bếp sát nhà vệ sinh là chuyện vệ sinh thực phẩm: ẩm và mùi từ nhà vệ sinh lan sang chỗ nấu; cửa nhà vệ sinh mở ra bếp lại càng khó chịu.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Luôn đóng cửa nhà vệ sinh; không để thớt, rổ rá sát vách chung."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Quạt hút nhà vệ sinh chạy đủ lâu sau khi dùng; vách kính hoặc rèm giữa hai khu."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Đổi chiều mở cửa nhà vệ sinh hoặc dời bếp nấu xa vách chung khi sửa."
+    }
    ]
   },
   "phong_lam_viec": {
@@ -442,6 +703,62 @@
     "ho ca",
     "nuoi ca",
     "ca canh"
+   ]
+  },
+  "cua_thong_ban_cong": {
+   "tieu_de": "Cửa chính nhìn thẳng ra ban công, cửa sổ lớn",
+   "noi_dung": "Loan đầu gọi là 'xuyên đường sát': khí vào cửa đi thẳng một mạch ra ban công, không đọng lại trong nhà — 'tiền thông hậu thông'. Rất hay gặp ở căn hộ.",
+   "goi_y": "Đặt một vật che tầm nhìn thẳng giữa cửa và ban công: tủ giày, kệ hở, chậu cây hoặc rèm; không cần mua vật phẩm.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "cua chinh thang ban cong",
+    "thong ra ban cong",
+    "xuyen duong",
+    "nhin thau ban cong",
+    "cua thong cua so"
+   ],
+   "veto": true,
+   "giai_thich_hien_dai": "Mở cửa chính là thấy thấu ra ban công: hai cửa cùng mở tạo gió lùa mạnh, cuốn bụi vào và đập cửa; người ngoài hành lang nhìn thấy hết nhà nên khó thấy riêng tư.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Kê sofa hoặc kệ sách chắn ngang một phần đường thẳng cửa – ban công; đóng bớt một cửa khi gió lớn."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Rèm hai lớp ở ban công, chậu cây tán rộng hoặc kệ hở ngay sau cửa chính."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Vách sảnh bán kín kèm tủ giày cao 1,8–2,2 m ngay sau cửa chính."
+    }
+   ]
+  },
+  "ban_tho_gio_thoi": {
+   "tieu_de": "Điều hoà, quạt trần thổi thẳng vào bàn thờ",
+   "noi_dung": "Nhà chung cư hay đặt bàn thờ ở phòng khách ngay dưới quạt trần hoặc trước dàn lạnh. Dân gian gọi là 'phong xuy tán khí': gió thổi tạt nhang đèn, bay tàn.",
+   "goi_y": "Chỉnh cánh gió hoặc dời bàn thờ lệch khỏi luồng gió; lắp tấm chắn gió cho dàn lạnh.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "dieu hoa thoi ban tho",
+    "quat tran ban tho",
+    "gio thoi ban tho",
+    "ban tho duoi quat"
+   ],
+   "giai_thich_hien_dai": "Gió điều hoà, quạt trần thổi thẳng vào bát hương làm tàn nhang bay, lửa đèn chập chờn — vừa bẩn vừa có nguy cơ bén lửa vào rèm, giấy.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Chỉnh cánh gió điều hoà hướng khác; không bật quạt trần số lớn khi đang thắp nhang."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Tấm chắn gió gắn dàn lạnh; tấm chống ám khói trên trần."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Dời bàn thờ hoặc dời dàn lạnh khi sửa phòng."
+    }
    ]
   }
  },
@@ -728,5 +1045,91 @@
    "Điều bạn mong ở ngôi nhà là gì — nghỉ ngơi, sum họp hay làm việc? Bố trí hiện tại phục vụ điều đó đến đâu?"
   ],
   "luu_y": "Phong thuỷ ở đây là góc nhìn văn hoá để bố trí nhà hợp lý hơn: ưu tiên sửa bố trí (xoay giường, dời bàn, thông gió) — hệ thống không giới thiệu vật phẩm hoá giải và không phán cát hung về sức khoẻ, tiền bạc."
- }
+ },
+ "quy_tac_thuc_hanh": {
+  "_nguon": "Bảy luật thực hành từ bộ tài liệu Drive (rlhf_patch_rules, 2026-10-19) viết lại thành KB có nguồn; không tự bật, vào qua PR (Q6, 2026-10-22). Nháp AI, chờ chủ dự án đối chiếu.",
+  "moc_lap_xuan": {
+   "tieu_de": "Năm phong thuỷ đổi ở Lập xuân",
+   "ap_dung": {
+    "luon": true
+   },
+   "noi_dung": "Sao năm (lưu niên), vận Huyền Không và năm Bát tự đổi tại giờ Lập xuân (khoảng 3–5/2 dương lịch), không phải mùng 1 Tết hay 1/1. Mệnh quái mặc định cũng tính theo Lập xuân; dân gian tính theo Tết thì công tắc 'Mốc đầu năm' cho so.",
+   "trong_engine": "huyen_khong.nam_theo_lap_xuan · phongthuy.menh_quai(moc_nam='lap_xuan')"
+  },
+  "hanh_lang_chung_cu": {
+   "tieu_de": "Căn hộ: xử lý bên trong cửa nhà mình",
+   "ap_dung": {
+    "loai_nha": [
+     "can_ho"
+    ],
+    "dau_hieu": [
+     "duong_dam",
+     "cua_doi_nhau",
+     "cua_thong_ban_cong"
+    ]
+   },
+   "noi_dung": "Hành lang chung cư hẹp, cửa đối cửa là chuyện thường. Mọi cách xử lý nằm bên trong cửa nhà mình: rèm, vách sảnh, phim mờ, cây. Không treo gương, vật nhọn hay bất cứ thứ gì chiếu sang cửa hàng xóm — dễ mất lòng và trái nội quy toà nhà."
+  },
+  "khong_dap_ket_cau": {
+   "tieu_de": "Căn hộ: không đập dầm, không dời hộp kỹ thuật",
+   "ap_dung": {
+    "loai_nha": [
+     "can_ho"
+    ],
+    "dau_hieu": [
+     "wc_giua_nha",
+     "xa_ngang"
+    ]
+   },
+   "noi_dung": "Dầm bê tông và ống kỹ thuật nhà vệ sinh là kết cấu chung của toà nhà. Không có lời khuyên 'đập bỏ nhà vệ sinh dời ra góc khác' hay 'cắt dầm'. Việc làm được: kê dịch giường, bàn; đổi chiều mở cửa nhà vệ sinh; quạt hút; trần thạch cao bo tròn."
+  },
+  "dao_bep_khong_phai_bep": {
+   "tieu_de": "Bàn đảo không phải bếp nấu",
+   "ap_dung": {
+    "dau_hieu": [
+     "bep_doi_cua",
+     "bep_wc"
+    ],
+    "phong": [
+     "bep"
+    ]
+   },
+   "noi_dung": "Chỉ chỗ có mặt bếp sinh nhiệt (bếp từ, bếp gas) mới tính là 'bếp' khi xét hướng bếp hay bếp đối cửa. Bàn đảo, quầy bar khô không tính — ngược lại chúng là tấm che bếp rất tốt."
+  },
+  "ban_tho_gio": {
+   "tieu_de": "Bàn thờ và luồng gió điều hoà, quạt",
+   "ap_dung": {
+    "dau_hieu": [
+     "ban_tho_gio_thoi"
+    ],
+    "phong": [
+     "ban_tho"
+    ]
+   },
+   "noi_dung": "Ngoài không tựa vách nhà vệ sinh và không dưới dầm, bàn thờ ở căn hộ cần tránh luồng gió điều hoà, quạt trần thổi thẳng vào bát hương (tạt lửa, bay tàn). Tấm chắn gió cho dàn lạnh là đủ."
+  },
+  "nuoc_van_9": {
+   "tieu_de": "Vận 9: không đặt bể cá, thác nước tuỳ tiện",
+   "ap_dung": {
+    "van": [
+     9
+    ],
+    "sao": [
+     9,
+     5,
+     2
+    ]
+   },
+   "noi_dung": "Vận 9 (2024–2043) sao Cửu Tử đương vận, nhưng chỉ nên có nước (bể cá, thác nước) ở phía có HƯỚNG tinh 9. Phía có SƠN tinh 9 (cần yên, không cần động) hoặc có sao 5, sao 2 cùng cung thì không đặt nước, không đèn đỏ rực — giữ yên và sạch.",
+   "trong_engine": "huyen_khong.to_hop_cung → khong_dat_nuoc"
+  },
+  "sua_nha_sua_thoi_quen": {
+   "tieu_de": "Sửa nhà hay sửa thói quen?",
+   "ap_dung": {
+    "luon": true
+   },
+   "noi_dung": "Nhiều điều khó chịu trong nhà là do nếp dùng (bừa, bí, để đồ chắn lối) chứ không do hướng. Bài đọc luôn tách hai nhóm: việc của nhà (kê lại, sửa) và việc của thói quen (dọn, đóng cửa, giờ giấc). Không ghép sao Huyền Không với con số thần số — hai hệ không có cầu nối trong cổ thư; chỉ gợi mở sang mảng khác bằng ý định chung."
+  }
+ },
+ "mau_an_toan": "Sách xưa gắn cặp sao này với {thu} — đây là lời nhắc chăm nhà cho cẩn thận, không phải dự báo."
 }

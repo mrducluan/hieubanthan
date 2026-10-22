@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
 import { CumGopY } from "./CumGopY";
-import { DungKhoVec, DuyetVec } from "./HocTuvi";
+import { DungKhoVec, DuyetDeXuat, DuyetVec } from "./HocTuvi";
 import { mangCuaMa, TEN_LOAI_KIEM_CHUNG, TEN_MANG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
 
 export const metadata: Metadata = { title: "Học từ góp ý" };
@@ -43,17 +43,32 @@ interface HocTuvi {
   vec: CauVec[];
 }
 
-export default async function Page({ searchParams }: { searchParams: Promise<{ tt?: string; vec?: string }> }) {
+// Q7 (migration 0022): hàng đợi "đề xuất luật" máy gom + phiếu sau 30 ngày.
+const TT_DX: [string, string][] = [["cho_duyet", "Chờ duyệt"], ["da_sua", "Đã sửa"], ["bo_qua", "Bỏ qua"]];
+const LY_DO_DX: Record<string, string> = { ti_le_thap: "≥ 100 phiếu, dưới 40% đúng", sau_30_nhu_cu: "≥ 30 phiếu sau 30 ngày, ≥ 60% \"như cũ\"" };
+interface DeXuat { id: number; loai: string; mau: string; ly_do: string; so_phieu: number; ti_le_dung: number | null; so_phieu_sau: number; ti_le_nhu_cu: number | null; trang_thai: string; ghi_chu: string | null; cap_nhat: string }
+interface HocDeXuat {
+  de_xuat: DeXuat[]; theo_trang_thai: Record<string, number>;
+  phieu_sau: { tong: number; trong_30_ngay: number; da_lam: number; tot_hon: number };
+  phieu_sau_theo_ma: { loai: string; mau: string; so_phieu: number; da_lam: number; tot_hon: number; nhu_cu: number }[];
+}
+
+export default async function Page({ searchParams }: { searchParams: Promise<{ tt?: string; vec?: string; dx?: string }> }) {
   const p = await congQuanTri();
   if (p.trang !== "ok") return <BaoCong trang={p.trang} email={"email" in p ? p.email : null} />;
   const sp = await searchParams;
   const tt = TT.some(([k]) => k === sp.tt) ? sp.tt! : "cho_duyet";
   const ttVec = TT_VEC.some(([k]) => k === sp.vec) ? sp.vec! : "cho_duyet";
-  const [{ data, error }, tv] = await Promise.all([
+  const ttDx = TT_DX.some(([k]) => k === sp.dx) ? sp.dx! : "cho_duyet";
+  const [{ data, error }, tv, dx] = await Promise.all([
     p.sb.rpc("qt_cum_bat_thuong", { p_trang_thai: tt }),
     p.sb.rpc("thong_ke_hoc_tuvi", { p_trang_thai: ttVec }),
+    p.sb.rpc("thong_ke_de_xuat_luat", { p_trang_thai: ttDx }),
   ]);
-  const khungTuvi = <KhungTuvi d={tv.error ? null : (tv.data as HocTuvi)} ttVec={ttVec} tt={tt} />;
+  const khungTuvi = (<>
+    <KhungTuvi d={tv.error ? null : (tv.data as HocTuvi)} ttVec={ttVec} tt={tt} />
+    <KhungDeXuat d={dx.error ? null : (dx.data as HocDeXuat)} ttDx={ttDx} tt={tt} ttVec={ttVec} />
+  </>);
   if (error) {
     return (
       <div className="space-y-6">
@@ -201,6 +216,69 @@ function KhungTuvi({ d, ttVec, tt }: { d: HocTuvi | null; ttVec: string; tt: str
           </div>
         )}
       </div>
+    </section>
+  );
+}
+
+
+function KhungDeXuat({ d, ttDx, tt, ttVec }: { d: HocDeXuat | null; ttDx: string; tt: string; ttVec: string }) {
+  const pt = (a: number | null) => (a == null ? "—" : `${Math.round(a * 100)}%`);
+  return (
+    <section className="space-y-4" data-testid="qt-de-xuat-luat">
+      <div>
+        <h2 className="text-xl">Đề xuất luật (máy gom, người duyệt) &amp; phiếu sau 30 ngày</h2>
+        <p className="mt-1 text-sm text-fg-muted">
+          Máy chỉ GOM: hộp ≥ 100 phiếu mà dưới 40% đúng, hoặc ≥ 30 phiếu "sau 30 ngày" mà ≥ 60% thấy "như cũ" → một dòng chờ duyệt
+          (chỉ mã + con số, không lời luận). Người đọc, sửa KB ở <Link href="/quan-tri/tri-thuc" className="text-gold hover:underline">Kho tri thức</Link> hoặc
+          viết luật RULES qua PR, rồi đánh dấu "Đã sửa". Không có gì tự bật.
+        </p>
+      </div>
+      {!d ? (
+        <p role="alert" className="text-sm text-cinnabar">Chưa đọc được (chạy migration 0022 trên Supabase).</p>
+      ) : (
+        <>
+          <div className="grid gap-3 sm:grid-cols-4">
+            <Card><p className="text-xs text-fg-muted">Phiếu sau 30 ngày</p><p className="text-2xl">{d.phieu_sau.tong}</p></Card>
+            <Card><p className="text-xs text-fg-muted">Trong 30 ngày</p><p className="text-2xl">{d.phieu_sau.trong_30_ngay}</p></Card>
+            <Card><p className="text-xs text-fg-muted">Đã làm theo (cả một phần)</p><p className="text-2xl">{d.phieu_sau.da_lam}</p></Card>
+            <Card><p className="text-xs text-fg-muted">Thấy dễ chịu hơn</p><p className="text-2xl">{d.phieu_sau.tot_hon}</p></Card>
+          </div>
+          <nav aria-label="Trạng thái đề xuất luật" className="flex flex-wrap gap-2 text-sm">
+            {TT_DX.map(([k, ten]) => (
+              <Link key={k} href={`/quan-tri/hoc?tt=${tt}&vec=${ttVec}&dx=${k}`} aria-current={k === ttDx ? "page" : undefined}
+                className={k === ttDx ? "rounded-full bg-gold/15 px-3 py-1 text-gold" : "rounded-full border border-line px-3 py-1 text-fg-muted"}>{ten} ({d.theo_trang_thai[k] ?? 0})</Link>
+            ))}
+          </nav>
+          {d.de_xuat.length === 0 ? <p className="text-sm text-fg-muted">Chưa có đề xuất nào ở trạng thái này.</p> : (
+            <div className="grid gap-2">
+              {d.de_xuat.map((x) => (
+                <Card key={x.id} data-testid="de-xuat-luat">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <p className="font-mono text-sm">{x.mau} <span className="text-xs text-fg-faint">· {TEN_MANG[mangCuaMa(x.loai, x.mau)] ?? x.loai}</span></p>
+                    <span className="text-xs text-gold">{LY_DO_DX[x.ly_do] ?? x.ly_do}</span>
+                  </div>
+                  <p className="mt-1 text-xs text-fg-muted">{x.so_phieu} phiếu · {pt(x.ti_le_dung)} đúng · {x.so_phieu_sau} phiếu sau · {pt(x.ti_le_nhu_cu)} như cũ{x.ghi_chu ? ` · ${x.ghi_chu}` : ""}</p>
+                  <div className="mt-2"><DuyetDeXuat id={x.id} trangThai={x.trang_thai} /></div>
+                </Card>
+              ))}
+            </div>
+          )}
+          {d.phieu_sau_theo_ma.length > 0 && (
+            <Card>
+              <table className="w-full text-sm" data-testid="qt-phieu-sau">
+                <thead><tr className="text-left text-xs text-fg-muted"><th className="py-1">Mã</th><th className="text-right">Phiếu sau</th><th className="text-right">Đã làm</th><th className="text-right">Dễ chịu hơn</th><th className="text-right">Như cũ</th></tr></thead>
+                <tbody>
+                  {d.phieu_sau_theo_ma.slice(0, 50).map((r) => (
+                    <tr key={`${r.loai}|${r.mau}`} className="border-t border-line">
+                      <td className="py-1 font-mono text-xs">{r.mau}</td><td className="text-right">{r.so_phieu}</td><td className="text-right">{r.da_lam}</td><td className="text-right">{r.tot_hon}</td><td className="text-right">{r.nhu_cu}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Card>
+          )}
+        </>
+      )}
     </section>
   );
 }

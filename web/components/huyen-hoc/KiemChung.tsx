@@ -8,6 +8,7 @@ import { useChuChung } from "@/components/cms/ChuChung";
 import { ghi, lanDauTrongPhien } from "@/lib/do-luong";
 import type { KetQuaKiemChung, LoaiKiemChung } from "@/lib/kiem-chung";
 import { tyLeHien, type TyLe } from "@/lib/ty-le-kiem-chung";
+import { ghiNhanDung } from "@/lib/kiem-chung-sau";
 
 const KHOA = (k: string) => `hbt.mot-lan.kiem-chung.${k}`;
 
@@ -21,10 +22,12 @@ function guiMayChu(loai: string, mau: string, phai: string, ket_qua: KetQuaKiemC
   } catch { /* im lặng */ }
 }
 
-export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine }: {
+export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, theoDoi }: {
   loai: LoaiKiemChungWeb; mau: string; phai: string; /** định danh thẻ trong phiên (mặc định = mã mẫu) */ khoa?: string; cauHoi?: string;
   /** Số phiếu công khai tải về (route tỉ lệ). */ tyLe?: TyLe;
   /** Số engine gắn sẵn vào hộp — ưu tiên hơn `tyLe`. */ tyLeEngine?: { ty_le_dung?: number; so_phieu?: number };
+  /** Q7: nhãn hộp đáng hỏi lại sau 30 ngày (hộp Nên để ý / Lời khuyên) — bấm "Đúng với mình" thì máy nhớ để Hôm nay hỏi lại. */
+  theoDoi?: string;
 }) {
   const k = `${loai}.${khoa ?? mau}`;
   const c = useChuChung();
@@ -44,6 +47,9 @@ export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine }: {
     if (lanDauTrongPhien(`kiem-chung.${k}`)) {
       ghi("tuvi_kiem_chung", { loai, mau, ket_qua: kq, phai });
       guiMayChu(loai, mau, phai, kq);
+      if (kq === "dung" && theoDoi && (loai === "doi_song" || loai === "hai_nguoi")) {
+        ghiNhanDung({ loai, mau, phai, nhan: theoDoi.slice(0, 80), mo_dun: mau.split(".")[1] ?? "" });
+      }
     }
   };
   const dongTyLe = tl && (

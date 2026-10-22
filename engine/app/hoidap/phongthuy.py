@@ -308,7 +308,11 @@ def _doan(m: dict) -> tuple[str, str | None]:
                 f"{'Cùng nhóm Đông/Tây tứ — thuận.' if m['cung_nhom'] else 'Khác nhóm Đông/Tây tứ — kém thuận; có thể xoay miệng bếp về hướng tốt.'}", None)
     if l == "bo_tri":
         nhan = " (quan niệm dân gian)" if m["nguon"] == "dan_gian" else ""
-        return f"{m['tieu_de']}{nhan}: {m['noi_dung']} Gợi ý thực tế: {m['goi_y']}", None
+        # Q4/Q5: thêm cách nhìn đời sống + việc 0 đồng (KB bo_tri.viec) cho các dấu hiệu có trong form khảo sát.
+        them = f" Nhìn theo đời sống: {m['giai_thich_hien_dai']}" if m.get("giai_thich_hien_dai") else ""
+        v0 = next((v["lam"] for v in (m.get("viec") or []) if v["chi_phi"] == "khong_ton"), None)
+        viec = f" Việc không tốn gì: {v0}" if v0 else ""
+        return f"{m['tieu_de']}{nhan}: {m['noi_dung']}{them} Gợi ý thực tế: {m['goi_y']}{viec}", None
     if l == "am_trach":
         return f"{m['tieu_de']}: {m['noi_dung']}", None
     if l == "sao_nam":

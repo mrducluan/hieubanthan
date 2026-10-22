@@ -293,8 +293,14 @@ def to_hop_cung(son: int, huong: int, van: int, cung: str | None = None, nam: in
     if m81:
         ra["linh_vuc"] = dict(m81["linh_vuc"])
         ra["kich_hoat"] = {kk: list(v) for kk, v in m81["kich_hoat"].items()}
+        if m81.get("an_toan"):
+            ra["an_toan"] = list(m81["an_toan"])          # lời nhắc chăm nhà (lửa điện, nước, vật nhọn…), không doạ
         if cung and nam:
             ra["nam_chu_y"] = nam_chu_y(cung, m81["kich_hoat"], int(nam))
+    # Q6 luật nước vận 9 (KB quy_tac_thuc_hanh.nuoc_van_9): chỉ đặt nước nơi HƯỚNG tinh 9; sơn tinh 9 hoặc có 5 / 2 → không.
+    if van == 9:
+        ra["khong_dat_nuoc"] = son == 9 or 5 in (son, huong) or 2 in (son, huong)
+        ra["hop_dat_nuoc"] = huong == 9 and not ra["khong_dat_nuoc"]
     return ra
 
 

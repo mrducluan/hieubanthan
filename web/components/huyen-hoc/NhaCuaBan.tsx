@@ -21,6 +21,7 @@ import { LuuNhaTaiKhoan } from "@/components/huyen-hoc/LuuNhaTaiKhoan";
 import { cn } from "@/lib/utils";
 import { GoiMoCheo, type GoiMo } from "@/components/khung/GoiMoCheo";
 import { NhacToi } from "@/components/khung/NhacToi";
+import { datGocNhin, TEN_GOC_NHIN, useGocNhin, type GocNhin } from "@/lib/goc-nhin-pt";
 
 type Sinh = { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
 interface ThanhVien { vai: "vo" | "chong" | "con" | "cha_me" | "khac"; nam: string; gioi_tinh: "nam" | "nu" }
@@ -32,12 +33,28 @@ interface Chuong {
   han_nam?: { ma: string; ten: string; phuong: string; nghia: string }[];
   ba_thang?: { chi_thang: string; tu_ngay?: string; ten_sao: string; muc: Muc; nhan_muc: string; y: string; sao_tai_cua: number | null }[];
   hanh_dong?: { ma: string; nhan: string; viec: string[] }[];
+  /** Q5: cùng việc ấy xếp theo chi phí · Q1: trần mức vì dấu hiệu lớn chưa xử lý. */
+  hanh_dong_chi_phi?: { ma: string; nhan: string; viec: string[] }[];
+  tran_muc?: { muc_toi_da: Muc; ly_do: string[]; giai_thich: string };
+}
+/** Đồ thị tri thức theo ý định (thay Apache AGE): phòng cần nhìn, dấu hiệu nên rà, năm sao tới phía phòng. */
+interface TheoYDinh {
+  ma: string; ten: string; phong: { ma: string; ten: string; cung: string | null }[];
+  dau_hieu: { ma: string; hoi: string; co: boolean; veto: boolean; sao_kich_hoat: number[] }[];
+  hop: (Hop & { tu_chuong?: string })[]; nam_sao_toi: { phong: string; ten: string; cung: string; nam: number[]; sao: number[] }[]; loi: string;
 }
 interface BaoCao {
-  ten: string; cot_loi: Hop[]; chuong: Chuong[]; thieu: string[]; ket: string; goi_mo?: GoiMo | null;
+  ten: string; cot_loi: Hop[]; chuong: Chuong[]; thieu: string[]; ket: string; goi_mo?: GoiMo | null; theo_y_dinh?: TheoYDinh | null; nguyen_tac?: string;
   da_tinh: { menh_quai: { quai: string; nhom: string } | null; huong_nha: string | null; trach: { quai: string; nhom: string } | null;
-    thanh_vien: { ten_vai: string; quai: string; nhom: string; cung_nhom_voi_chu: boolean | null; huong_chung: string[] }[] };
+    thanh_vien: { ten_vai: string; quai: string; nhom: string; cung_nhom_voi_chu: boolean | null; huong_chung: string[] }[];
+    veto_da_xac_nhan?: { ma: string; tieu_de: string }[]; goc_nhin?: GocNhin };
 }
+/** 11 ý định chung (KB y_dinh_chung.json của engine) — chỉ nhãn để chọn; engine tra đồ thị. */
+const Y_DINH: [string, string][] = [
+  ["nha_cua", "Nhà cửa, sửa sang"], ["kinh_doanh_tien", "Tiền bạc, làm ăn"], ["cong_viec", "Công việc"], ["tinh_cam", "Tình cảm"],
+  ["gia_dinh", "Gia đình"], ["suc_khoe", "Sức khoẻ, giấc ngủ"], ["hoc_hanh", "Học hành của con"], ["quan_he", "Hàng xóm, quan hệ"],
+  ["di_xa", "Đi xa, chuyển chỗ"], ["thoi_diem", "Chọn lúc làm"], ["ban_than", "Bản thân"],
+];
 
 const HUONG8 = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"];
 const VAI: [ThanhVien["vai"], string][] = [["vo", "Vợ"], ["chong", "Chồng"], ["con", "Con"], ["cha_me", "Cha mẹ"], ["khac", "Người thân"]];
@@ -51,6 +68,8 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
   const [bc, setBc] = useState<BaoCao | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
+  const [yDinh, setYDinh] = useState<string | null>(null);
+  const gocNhin = useGocNhin();
   useEffect(() => { if (doHuongGoiY != null) setDoHuong(String(doHuongGoiY)); }, [doHuongGoiY]);
   // KC-2: hồ sơ nhà lưu trên máy điền sẵn một lần (người dùng đổi tay thì giữ tay).
   const nhaLuu = useHoSoNha();
@@ -74,10 +93,19 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
     const thanh_vien = tv.filter((x) => /^\d{4}$/.test(x.nam)).map((x) => ({ vai: x.vai, birth_year: Number(x.nam), gender: x.gioi_tinh }));
     setDang(true);
     try {
+      // Q2/Q1: bố cục đã khai ở Khảo sát nhà (hồ sơ nhà trên máy) đi kèm → báo cáo có hình thế, trần mức, việc theo chi phí.
+      const bc_luu = nhaLuu?.bo_cuc;
+      const bo_cuc = bc_luu && ((bc_luu.vi_tri && Object.keys(bc_luu.vi_tri).length) || bc_luu.dau_hieu?.length || bc_luu.mat_bang)
+        ? { ...(d != null ? { huong_nha_do: d } : huong ? { huong_nha: huong } : {}), ...(nhaLuu?.loai_nha ? { loai_nha: nhaLuu.loai_nha } : {}),
+            vi_tri: bc_luu.vi_tri ?? {}, huong_do: bc_luu.huong_do ?? {},
+            dau_hieu: Object.fromEntries((bc_luu.dau_hieu ?? []).map((m) => [m, { co: true, nguon: "nguoi_dung" }])),
+            ...(bc_luu.mat_bang ? { mat_bang: bc_luu.mat_bang } : {}) }
+        : null;
       const r = await postJson<BaoCao>("/api/phongthuy/luan-giai", {
         ...(sinh ? { sinh } : {}),
-        nha: { ...(d != null ? { huong_do: d } : huong ? { huong } : {}), ...(nx != null ? { nam_xay: nx } : {}), theo },
+        nha: { ...(d != null ? { huong_do: d } : huong ? { huong } : {}), ...(nx != null ? { nam_xay: nx } : {}), theo, ...(bo_cuc ? { bo_cuc } : {}) },
         ...(thanh_vien.length ? { thanh_vien } : {}),
+        goc_nhin: gocNhin, ...(yDinh ? { y_dinh: yDinh } : {}),
       });
       setBc(r);
       // KC-2: nhớ nhà trên máy để Hôm nay, Khảo sát, Huyền Không dùng chung (không gửi máy chủ).
@@ -85,7 +113,7 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
         luuHoSoNha({ ...(d != null ? { huong_do: d, huong: undefined } : huong ? { huong: huong as never, huong_do: undefined } : {}),
           theo, ...(nx != null ? { nam_xay: nx } : {}), thanh_vien: thanh_vien.map((x) => ({ vai: x.vai, nam: x.birth_year, gioi_tinh: x.gender })) });
       } catch { /* bỏ qua */ }
-      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "nha_cua_ban", co_nam_xay: nx != null, so_thanh_vien: thanh_vien.length });
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "nha_cua_ban", co_nam_xay: nx != null, so_thanh_vien: thanh_vien.length, y_dinh: yDinh ?? "", goc_nhin: gocNhin, co_bo_cuc: Boolean(bo_cuc) });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đọc được."); }
     finally { setDang(false); }
   };
@@ -139,6 +167,22 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
           </div>
         </div>
       </div>
+      <div className="space-y-2 text-sm" data-testid="nha-y-dinh">
+        <span className="text-fg-muted">Bạn đang băn khoăn điều gì? (không bắt buộc — bài đọc sẽ soi kỹ phần đó)</span>
+        <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="Điều đang băn khoăn">
+          {Y_DINH.map(([ma, ten]) => (
+            <button key={ma} type="button" role="radio" aria-checked={yDinh === ma} onClick={() => setYDinh((v) => (v === ma ? null : ma))}
+              className={cn("rounded-full border px-3 py-1 text-xs", yDinh === ma ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>{ten}</button>
+          ))}
+        </div>
+        <div className="flex flex-wrap items-center gap-2 pt-1">
+          <span className="text-xs text-fg-faint">Giải thích dấu hiệu:</span>
+          {(Object.keys(TEN_GOC_NHIN) as GocNhin[]).map((g) => (
+            <button key={g} type="button" aria-pressed={gocNhin === g} onClick={() => datGocNhin(g)} data-testid={`goc-nhin-${g}`}
+              className={cn("rounded-full border px-2.5 py-0.5 text-xs", gocNhin === g ? "border-gold/70 text-gold" : "border-line text-fg-muted hover:text-fg")}>{TEN_GOC_NHIN[g]}</button>
+          ))}
+        </div>
+      </div>
       <Button onClick={doc} disabled={dang}>{dang ? "Đang đọc…" : "Đọc nhà của tôi"}</Button>
       {!sinh && <p className="text-xs text-fg-faint">Chưa có năm sinh và giới tính trong hồ sơ: bài đọc sẽ theo hướng nhà, bỏ qua phần hợp mệnh.</p>}
       {loi && <BaoLoi loi={loi} thuLai={doc} />}
@@ -164,6 +208,7 @@ function BaoCaoNha({ bc }: { bc: BaoCao }) {
           </div>
         </section>
       )}
+      {bc.theo_y_dinh && <TheoYDinhKhoi t={bc.theo_y_dinh} />}
       <nav aria-label="Mục lục bài đọc nhà" className="flex flex-wrap gap-1.5 text-xs">
         {bc.chuong.map((c, i) => (
           <a key={c.ma} href={`#nha-${c.ma}`} className="inline-flex items-center gap-1.5 rounded-full border border-line/70 px-2.5 py-1 text-fg-muted hover:border-gold/60 hover:text-fg">
@@ -173,19 +218,46 @@ function BaoCaoNha({ bc }: { bc: BaoCao }) {
       </nav>
       {bc.chuong.map((c, i) => <ChuongNha key={c.ma} c={c} so={i + 1} />)}
       {bc.goi_mo && <GoiMoCheo goiMo={bc.goi_mo} moDun="phongthuy" />}
+      {bc.nguyen_tac && <p className="text-xs text-fg-faint" data-testid="nha-nguyen-tac">{bc.nguyen_tac}</p>}
       <p className="border-t border-line pt-4 text-sm text-fg-faint">{bc.ket}</p>
     </article>
     </KiemChungBai.Provider>
   );
 }
 
+function TheoYDinhKhoi({ t }: { t: TheoYDinh }) {
+  return (
+    <section aria-labelledby="nha-theo-y-dinh" className="rounded-2xl border border-gold/40 bg-gold/[0.06] p-4" data-testid="nha-theo-y-dinh">
+      <h3 id="nha-theo-y-dinh" className="font-serif text-xl">Theo điều bạn đang băn khoăn: {t.ten.toLowerCase()}</h3>
+      <p className="mt-1 text-sm text-fg-muted">Phòng nên nhìn trước: {t.phong.map((p) => p.ten.toLowerCase() + (p.cung ? ` (phía ${p.cung})` : "")).join(", ")}.</p>
+      {t.dau_hieu.length > 0 && (
+        <ul className="mt-2 grid gap-1 text-sm sm:grid-cols-2" data-testid="nha-dau-hieu-ra">
+          {t.dau_hieu.map((d) => (
+            <li key={d.ma} className={cn("flex items-start gap-2", d.co ? "text-fg" : "text-fg-muted")}>
+              <span className={cn("mt-1 size-2 shrink-0 rounded-full", d.co ? "bg-moon" : "bg-line")} aria-hidden />
+              <span>{d.hoi}{d.co ? <b className="ml-1 text-moon">— bạn đã khai có{d.veto ? ", xử lý trước" : ""}</b> : <span className="ml-1 text-xs text-fg-faint">— rà xem ở Khảo sát nhà</span>}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      {t.hop.length > 0 && <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">{t.hop.map((h, i) => <HopNoiBat key={i} hop={h} />)}</div>}
+      {t.nam_sao_toi.length > 0 && (
+        <p className="mt-3 text-sm text-fg-muted" data-testid="nha-nam-sao-toi">Năm nên chủ động hơn với phòng này (sao năm bay tới): {t.nam_sao_toi.map((x) => `${x.ten.toLowerCase()} ${x.nam.join(", ")}`).join(" · ")}. {t.loi}</p>
+      )}
+    </section>
+  );
+}
+
 function ChuongNha({ c, so }: { c: Chuong; so: number }) {
   const [nhom, setNhom] = useState(0);
+  const [theoChiPhi, setTheoChiPhi] = useState(false);
+  const hanhDong = theoChiPhi && c.hanh_dong_chi_phi ? c.hanh_dong_chi_phi : c.hanh_dong;
   return (
     <section id={`nha-${c.ma}`} aria-labelledby={`nha-td-${c.ma}`} className="scroll-mt-24" data-testid={`nha-chuong-${c.ma}`}>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
         <h3 id={`nha-td-${c.ma}`} className="font-serif text-xl"><span className="text-gold">{so}.</span> {c.tieu_de}</h3>
         {c.muc && <ChipMuc muc={c.muc} nhan={c.nhan_muc ?? undefined} />}
+        {c.tran_muc && <span className="text-xs text-moon" data-testid="nha-tran-muc" title={c.tran_muc.giai_thich}>trần Cân bằng — còn {c.tran_muc.ly_do.join(", ").toLowerCase()}</span>}
       </div>
       {c.cau_hoi && <p className="mt-0.5 text-xs text-fg-faint">{c.cau_hoi}</p>}
       {c.tom_tat && <p className={cn("mt-2 leading-relaxed", c.thieu ? "rounded-xl border border-dashed border-line px-4 py-2.5 text-sm text-fg-muted" : "text-lg text-fg")} data-testid="nha-tom-tat">{c.tom_tat}</p>}
@@ -225,16 +297,23 @@ function ChuongNha({ c, so }: { c: Chuong; so: number }) {
       {c.han_nam && c.han_nam.length > 0 && (
         <p className="mt-3 text-sm text-fg-muted" data-testid="nha-han-nam">Phía năm nay nên giữ yên: {c.han_nam.map((h) => `${h.phuong} (${h.ten})`).join(" · ")}.</p>
       )}
-      {c.hanh_dong && c.hanh_dong.length > 0 && (
+      {hanhDong && hanhDong.length > 0 && (
         <div className="mt-3 rounded-xl border border-line/70 bg-surface/40 p-3" data-testid="nha-hanh-dong">
+          {c.hanh_dong_chi_phi && (
+            <div className="mb-2 flex flex-wrap items-center gap-2 text-xs text-fg-faint">
+              <span>Xếp theo:</span>
+              <button type="button" aria-pressed={!theoChiPhi} onClick={() => { setTheoChiPhi(false); setNhom(0); }} className={cn("rounded-full border px-2.5 py-0.5", !theoChiPhi ? "border-gold/70 text-gold" : "border-line text-fg-muted")}>thời điểm</button>
+              <button type="button" aria-pressed={theoChiPhi} onClick={() => { setTheoChiPhi(true); setNhom(0); }} data-testid="nha-theo-chi-phi" className={cn("rounded-full border px-2.5 py-0.5", theoChiPhi ? "border-gold/70 text-gold" : "border-line text-fg-muted")}>chi phí</button>
+            </div>
+          )}
           <div role="tablist" className="flex flex-wrap gap-1.5">
-            {c.hanh_dong.map((n, i) => (
+            {hanhDong.map((n, i) => (
               <button key={n.ma} role="tab" type="button" aria-selected={i === nhom} onClick={() => setNhom(i)}
                 className={cn("rounded-full border px-3 py-1 text-xs", i === nhom ? "border-gold/70 text-gold" : "border-line text-fg-muted hover:text-fg")}>{n.nhan}</button>
             ))}
           </div>
           <ul role="tabpanel" className="mt-3 list-disc space-y-1.5 pl-5 text-[0.95rem] text-fg">
-            {(c.hanh_dong[nhom] ?? c.hanh_dong[0])?.viec.map((v) => <li key={v}>{v}</li>)}
+            {(hanhDong[nhom] ?? hanhDong[0])?.viec.map((v) => <li key={v}>{v}</li>)}
           </ul>
         </div>
       )}

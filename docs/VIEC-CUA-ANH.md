@@ -744,13 +744,28 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
   ngày hiệu lực đã đổi 21/10/2026. Nếu anh đã sửa trang này trong CMS thì thêm hai dòng đó ở CMS (CMS thắng code).
 
 ## PT-81 · HỌC-ĐS · kiến trúc Drive (2026-10-22)
-- [ ] **Quyết bảng Q1–Q8** trong `docs/DANH-GIA-KIEN-TRUC-PHONG-THUY-DRIVE.md` (em đề xuất làm Q1, Q3, Q5, Q6; không làm Q8).
-  Anh tích vào bảng hoặc nhắn em số nào → em làm theo thứ tự đó.
+- [x] **Quyết bảng Q1–Q8** — anh chốt làm Q1 → Q7, không Q8 (đã làm xong cùng ngày, mục Q1–Q7 bên dưới).
 - [ ] Đọc lướt `docs/VONG-TU-CAI-THIEN.md` mục 3 (ranh giới máy / người) — nếu anh muốn máy được làm thêm điều gì (vd tự đổi
   phái đọc mặc định theo tín hiệu ngầm), báo em để ghi thành quyết định.
 - [ ] Sau deploy: mở `/phong-thuy` → "Nhà của bạn" nhập hướng 180, năm 2008 → chương 2 có đoạn "Hướng tinh … tiền bạc" và
   "năm nên chủ động hơn"; dưới mỗi hộp có nút "Đúng với mình / Chưa đúng" (Phong thuỷ, Kinh Dịch nay cũng có). Số "x%" chỉ
   hiện khi migration 0017 đã chạy và mã đủ 30 phiếu.
+## Q1–Q7 · đồ thị theo ý định · lưu ý lửa điện (2026-10-22, `docs/DANH-GIA-KIEN-TRUC-PHONG-THUY-DRIVE.md` mục 6)
+- [ ] **Chạy migration `0022_kiem_chung_sau_de_xuat_luat.sql`** (sau 0017 và 0021; rollback `.down.sql`). Kiểm bằng
+  `supabase/kiem_thu/da_chay_chua.sql` (dòng 0022 = true). Chưa chạy: Hôm nay vẫn hỏi lại sau 30 ngày, phiếu chỉ lên PostHog;
+  `/quan-tri/hoc` khối "Đề xuất luật" báo chưa đọc được.
+- [ ] **Deploy engine Render trước web** (route mới `/v1/phongthuy/huong-ban-do`, `/v1/phongthuy/do-thi/{ý định}`, BoCuc 0.2 `mat_bang`,
+  `goc_nhin`, `y_dinh` — web gửi trường mới, engine cũ sẽ 422).
+- [ ] **Thử sau deploy**: `/phong-thuy` → Khảo sát nhà: chọn "Căn hộ chung cư", tích "Vẽ mặt bằng", tô ô, đặt Cửa hàng 1 / WC giữa /
+  Ban công hàng cuối → kết quả báo "Nhà vệ sinh ở vùng giữa nhà", "Cửa chính nhìn thẳng ra ban công", nhãn **Xử lý trước**, việc
+  0 đồng / ít tiền / sửa chữa, hai luật căn hộ. Nhà của bạn: chọn một điều băn khoăn → mục "Theo điều bạn đang băn khoăn"; chương
+  Việc nên làm có nút "xếp theo chi phí". Đo hướng: "Lấy hướng từ bản đồ" dán hai toạ độ.
+- [ ] **Thử phiếu sau 30 ngày**: bấm "Đúng với mình" ở một hộp Nên để ý; muốn thử ngay thì trong DevTools sửa `ngay` của
+  `localStorage["hbt.kc_sau.v1"]` lùi 35 ngày rồi mở `/hom-nay` → hộp "35 ngày trước bạn thấy đúng điều này".
+- [ ] **Đọc 7 luật thực hành** ở `engine/app/kb/data/phongthuy_kb.json` → `quy_tac_thuc_hanh` (nháp AI viết lại từ Drive) và
+  20 câu "giải thích theo đời sống" (`bo_tri[*].giai_thich_hien_dai`) — sai chỗ nào sửa ở Kho tri thức.
+- [ ] Ý tưởng mới em ghi ở `docs/DANH-GIA-KIEN-TRUC-PHONG-THUY-DRIVE.md` mục 7 — anh tích cái nào em làm cái đó.
+
 ## WP-GĐ2. Sáng nay của bạn · mốc lịch · hỏi lại hôm qua · mời cài app (2026-10-22)
 
 - [ ] **WP7. Chạy migration `0020_push_tuy_chon.sql`** (sau 0018, 0019; rollback `.down.sql`). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`

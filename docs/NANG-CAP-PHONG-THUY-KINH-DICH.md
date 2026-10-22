@@ -84,3 +84,13 @@ Nguyên tắc: **chuyển phần tất định vào engine Python (một bộ t�
 | KC-3 ý định chung | KB `y_dinh_chung.json` 11 mã ↔ chủ đề Kinh Dịch / ý định Tử vi / trụ nỗi đau thần số / ý định Hôm nay / phòng / chương Bát tự; `GET /v1/y-dinh/goi-mo`; `doc_que.goi_mo`, báo cáo nhà `goi_mo`; web `GoiMoCheo` + link mang `?chu_de=` / `?y_dinh=` / `#noi-dau` chọn sẵn | `engine/app/kb/y_dinh_chung.py`, `app/y_dinh_api.py`, `web/components/khung/GoiMoCheo.tsx` |
 | KC-4 nhắc việc | "Nhắc tôi hôm đó" + "Vào lịch" (.ics) ở ứng kỳ và tháng thuận sửa nhà; lưu máy, hiện ở Hôm nay; tài khoản qua `nhac_viec` (0018). Web Push: nghiên cứu + lộ trình GĐ1 (cần duyệt `web-push`, migration 0019, VAPID) — `docs/NHAC-VIEC-VA-WEB-PUSH.md` | `web/lib/nhac-viec.ts`, `components/khung/{NhacToi,NhacHomNay}.tsx` |
 | KC-5 tín hiệu ngầm + CTA | mở "Ba cách đọc"/từng phái/lời kinh/bản đầy đủ → PostHog mã + đếm máy (`thoi-quen-doc.ts`, ≥ 5 lần → chế độ mặc định theo phái, người dùng chọn tay thì thôi); `CtaCuoiBai` ở mọi mảng (gợi mở chéo · đọc trọn luận giải / Sao · rủ một người · nạp Sao hoặc ủng hộ). Ý tưởng lan truyền + nạp Sao: `docs/Y-TUONG-VIRAL-VA-NAP-SAO.md` | `web/components/khung/CtaCuoiBai.tsx`, `web/lib/thoi-quen-doc.ts` |
+
+## 6. Đợt 4 (2026-10-22) — Q1–Q7 kiến trúc Drive, đồ thị theo ý định, lưu ý lửa điện
+
+Chi tiết từng việc và trạng thái: `docs/DANH-GIA-KIEN-TRUC-PHONG-THUY-DRIVE.md` mục 6 (bảng Q1–Q8) và mục 7 (ý tưởng mới).
+Tệp chính: `engine/app/calc/mat_bang.py` (Q2/Q3), `engine/app/kb/phongthuy_do_thi.py` + `kb/data/phongthuy_do_thi.json` (đồ thị),
+`luangiai/phongthuy_bo_cuc.py` (BoCuc 0.2, veto, hai lối, việc theo chi phí, luật căn hộ), `luangiai/phongthuy_doi_song.py`
+(trần mức, an toàn, chi phí, theo ý định), `supabase/migrations/0022_*` (Q7), web `KhaoSatNha.tsx` (vẽ mặt bằng), `NhaCuaBan.tsx`
+(ý định, góc nhìn, trần mức), `DoHuongDienThoai.tsx` (bản đồ), `components/khung/HoiSau30Ngay.tsx`, `/quan-tri/hoc` (đề xuất luật).
+Test: `engine/tests/test_mat_bang.py`, `test_phongthuy_q.py`; e2e `phong-thuy.spec.ts` (2 test mới), `hom-nay.spec.ts` (Q7);
+SQL `supabase/kiem_thu/thu_kiem_chung_sau_0022.sql`.
