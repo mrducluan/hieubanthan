@@ -74,7 +74,14 @@ export default buildConfig({
   globals: [TrangChu, MenuDauTrang, DieuHuong, TinhNang, ChuChung],
   editor: lexicalEditor(),
   db: postgresAdapter({
-    pool: { connectionString: (process.env.DATABASE_URI || "").trim() },
+    // Vercel chạy nhiều bản hàm song song, mỗi bản giữ pool riêng. pg mặc định max=10 → vài bản là vượt hạn mức
+    // Session pooler của Supabase ("max clients reached") → trang /admin lúc được lúc lỗi 500. Giữ pool nhỏ + nhả sớm.
+    pool: {
+      connectionString: (process.env.DATABASE_URI || "").trim(),
+      max: Number(process.env.CMS_DB_POOL_MAX) || 3,
+      idleTimeoutMillis: 10_000,
+      connectionTimeoutMillis: 10_000,
+    },
     // Bảng CMS nằm trong schema riêng "cms" — không lẫn với bảng của web (public) trên cùng Supabase.
     schemaName: "cms",
     migrationDir: path.resolve(dirname, "migrations"),
