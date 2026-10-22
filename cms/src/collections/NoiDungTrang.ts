@@ -15,12 +15,12 @@ import { laChuBien, laCongTacVien, laNguoiViet, laNoiBo } from "../access";
 import { KHOI_TRANG, truongKieuChu, VI_TRI_KHOI } from "../blocks/trang";
 import { DUONG_TRONG_SITE, truongLienKet } from "../globals/DieuHuong";
 import { chuanHoaDuLieu } from "../kiem-dinh/kiem-dinh";
-import { bangCua, locChuCms } from "../lib/chu-trang";
+import { bangCua, bangHinhCua, chupHinh, locChuCms } from "../lib/chu-trang";
 import { boChuyenHtml } from "../lib/html";
 import { coTrangKb, type NguonKb } from "../lib/kb-trang";
 import { kiemTrang } from "../lib/noi-dung-trang";
 import { regexMau } from "../lib/so-trang";
-import { baoWebLamMoi, webUrl } from "../lib/web";
+import { baoWebLamMoi, linkXemTrang } from "../lib/web";
 
 export const NHOM_TRANG = [
   { label: "Công cụ", value: "cong_cu" }, { label: "Trang tĩnh", value: "tinh" }, { label: "Pháp lý", value: "phap_ly" },
@@ -79,7 +79,7 @@ const giuHeThong: CollectionBeforeChangeHook = async ({ data, originalDoc, opera
   const trung = await req.payload.count({ collection: "noi-dung-trang", where: { duong: { equals: duong } }, overrideAccess: true, req });
   if (trung.totalDocs) throw new APIError(`Đã có tài liệu cho ${duong} — mở tài liệu đó để sửa.`, 400, null, true);
   Object.assign(data, { duong, nhom: m.nhom, ten: duong, mau: m.id, tren_web: true, o: m.o ?? ["khoi_tren", "khoi_duoi", "khoi_cuoi"],
-    mac_dinh: { chu: bangCua(m.mac_dinh) } });   // ND-7: ghi đè một URL được sửa chữ của cụm (bảng chữ của mẫu)
+    mac_dinh: { chu: bangCua(m.mac_dinh), hinh: bangHinhCua(m.mac_dinh) } });   // ND-7: ghi đè một URL nhận bảng chữ + bảng hình của mẫu
   return data;
 };
 
@@ -148,6 +148,15 @@ export const locChu: CollectionBeforeChangeHook = ({ data, originalDoc, req }) =
   return data;
 };
 
+/** ND-7 đợt 2: ô "Hình trên trang" — chỉ khoá có trong bảng hình của URL; mỗi ảnh chụp lại từ Thư viện ảnh (url, alt, cỡ). */
+export const locHinh: CollectionBeforeChangeHook = async ({ data, originalDoc, req }) => {
+  if (dongBo(req) || !("hinh" in data)) return data;
+  const bang = bangHinhCua(data.mac_dinh ?? (originalDoc as Doc | undefined)?.mac_dinh);
+  data.hinh = await chupHinh(bang, data.hinh, (id) => req.payload.findByID({ collection: "media", id, depth: 0, overrideAccess: true, req,
+    disableErrors: true }) as Promise<Record<string, unknown> | null>);
+  return data;
+};
+
 const kiemDinh: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
   if (req.context?.boQuaKiemDinh) return data;
   const d = { ...(originalDoc ?? {}), ...data } as Doc;
@@ -209,6 +218,16 @@ export const tabChu = {
   fields: [{ name: "chu", label: "Chữ trên trang", type: "json", admin: { components: { Field: "/components/ChuTrenTrang#ChuTrenTrang" } } } as Field],
 };
 
+/** ND-7 đợt 2 — tab "Hình trên trang": hiện khi bảng hình của URL (mac_dinh.hinh, từ sổ trang) có khoá. */
+export const tabHinh = {
+  label: "Hình trên trang",
+  admin: {
+    condition: (d: Partial<Doc>) => Object.keys(bangHinhCua(d?.mac_dinh)).length > 0,
+    description: "Thay hình vẽ trong code (hình lớn trang chủ, biểu tượng mảng, ảnh chia sẻ của cụm…) bằng ảnh Thư viện ảnh. Bỏ chọn = hình gốc.",
+  },
+  fields: [{ name: "hinh", label: "Hình trên trang", type: "json", admin: { components: { Field: "/components/HinhTrenTrang#HinhTrenTrang" } } } as Field],
+};
+
 export const NoiDungTrang: CollectionConfig = {
   slug: "noi-dung-trang",
   labels: { singular: "Trang website", plural: "Trang website" },
@@ -219,7 +238,8 @@ export const NoiDungTrang: CollectionConfig = {
     listSearchableFields: ["ten", "duong"],
     description: "Mỗi URL của hieuban.com là một dòng (tự đồng bộ). Ô để trống = web hiện chữ đang có trong code. Trang kiến thức: dùng \"Mẫu cụm trang\", hoặc tạo ghi đè cho một URL.",
     hidden: ({ user }) => ["cong_tac_vien", "may_doc"].includes(String((user as { vai_tro?: string } | null)?.vai_tro)),
-    preview: (doc) => (typeof doc.duong === "string" && DUONG_TRONG_SITE.test(doc.duong) ? `${webUrl()}${doc.duong}` : null),
+    // ND-6: mở web ở chế độ nháp (cookie phiên, chỉ trình duyệt này) → thấy bản đang soạn trước khi Xuất bản.
+    preview: (doc) => (typeof doc.duong === "string" && DUONG_TRONG_SITE.test(doc.duong) ? linkXemTrang(doc.duong) : null),
     components: { beforeListTable: ["/components/DongBoSoTrang#DongBoSoTrang"] },
     pagination: { defaultLimit: 50 },
   },
@@ -241,7 +261,7 @@ export const NoiDungTrang: CollectionConfig = {
   },
   hooks: {
     beforeValidate: [({ data }) => (data ? chuanHoaDuLieu(data) : data)],
-    beforeChange: [giuHeThong, quyenMuc, ngayHieuLuc, xacNhanPhapLy, locChu, kiemDinh],
+    beforeChange: [giuHeThong, quyenMuc, ngayHieuLuc, xacNhanPhapLy, locChu, locHinh, kiemDinh],
     afterChange: [lamMoiTrang],
     afterDelete: [lamMoiKhiXoa],
   },
@@ -343,6 +363,7 @@ export const NoiDungTrang: CollectionConfig = {
           ],
         },
         tabChu,
+        tabHinh,
         tabKhoi(choKhoi, true),
         {
           label: "Mặc định trong code",

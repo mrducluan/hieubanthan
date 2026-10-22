@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { ArrowRight, ChevronDown, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
@@ -36,7 +37,8 @@ interface KetQuaDoi {
 
 // Nhập MỘT LẦN, dùng mọi mảng (docs/THIET-KE-UI.md §4.3). Chỉ tên + ngày sinh bắt buộc; phần còn lại
 // hỏi đúng lúc mảng cần (can). Ngày âm do engine đổi — web không tự đổi lịch.
-export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onXong, className }: Props) {
+export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
+  const c = useChuChung();
   const nhapAm = macDinh?.lich_nhap === "am" && macDinh.am;
   const [ten, setTen] = useState(macDinh?.ho_ten ?? "");
   const [lich, setLich] = useState<"duong" | "am">(nhapAm ? "am" : "duong");
@@ -137,20 +139,20 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
   }
 
   const chiSo = (v: string, max: number) => v.replace(/\D/g, "").slice(0, max);
-  const tieuDeThem = can === "day_du" ? "Giờ sinh, giới tính & nơi sinh (cần cho mảng này)"
-    : can === "gioi_tinh" ? "Giới tính (cần cho mảng này)" : "Thêm tên thường gọi, giờ sinh, nơi sinh (không bắt buộc)";
+  const tieuDeThem = can === "day_du" ? c("ho_so.them_day_du")
+    : can === "gioi_tinh" ? c("ho_so.them_gioi_tinh") : c("ho_so.them_khong_bat_buoc");
 
   return (
     <form onSubmit={gui} className={cn("space-y-5", className)} noValidate>
       <div className="space-y-2">
-        <Label htmlFor="ho-ten">Họ và tên đầy đủ</Label>
+        <Label htmlFor="ho-ten">{c("ho_so.ho_ten")}</Label>
         <Input id="ho-ten" name="ho-ten" autoComplete="name" value={ten} maxLength={80}
-          onChange={(e) => setTen(e.target.value)} placeholder="Nguyễn Văn An" />
+          onChange={(e) => setTen(e.target.value)} placeholder={c("ho_so.ho_ten_vi_du")} />
       </div>
 
       <fieldset className="space-y-2">
         <div className="flex items-center justify-between gap-3">
-          <legend className="text-sm font-medium text-fg-muted">Ngày sinh</legend>
+          <legend className="text-sm font-medium text-fg-muted">{c("ho_so.ngay_sinh")}</legend>
           <div role="radiogroup" aria-label="Loại lịch" className="flex rounded-full border border-line p-0.5 text-xs">
             {(["duong", "am"] as const).map((l) => (
               <button key={l} type="button" role="radio" aria-checked={lich === l} onClick={() => setLich(l)}
@@ -221,7 +223,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
           <div className="grid gap-4 border-t border-line/70 p-4 sm:grid-cols-2">
             {can !== "day_du" && can !== "gioi_tinh" && (
               <div className="space-y-2 sm:col-span-2">
-                <Label htmlFor="ten-khac">Tên thường gọi / cách viết khác</Label>
+                <Label htmlFor="ten-khac">{c("ho_so.ten_khac")}</Label>
                 <Input id="ten-khac" value={tenKhac} maxLength={80} onChange={(e) => setTenKhac(e.target.value)}
                   placeholder="Không dấu, tên ở nhà…" />
               </div>
@@ -229,7 +231,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
             {can !== "gioi_tinh" && (
               <>
                 <div className="space-y-2">
-                  <Label htmlFor="gio-sinh">Giờ sinh</Label>
+                  <Label htmlFor="gio-sinh">{c("ho_so.gio_sinh")}</Label>
                   <Input id="gio-sinh" type="time" value={gio} disabled={doTin === "unknown"}
                     onChange={(e) => { setGio(e.target.value); if (e.target.value && doTin === "unknown") setDoTin("approx"); }} />
                 </div>
@@ -250,7 +252,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
               </p>
             )}
             <div className="space-y-2">
-              <Label htmlFor="gioi-tinh">Giới tính</Label>
+              <Label htmlFor="gioi-tinh">{c("ho_so.gioi_tinh")}</Label>
               <Select id="gioi-tinh" value={gioiTinh} onChange={(e) => setGioiTinh(e.target.value)}>
                 <option value="">— Chọn —</option>
                 <option value="nam">Nam</option>
@@ -259,7 +261,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
             </div>
             {can !== "gioi_tinh" && (
               <div className="space-y-2">
-                <Label htmlFor="noi-sinh">Nơi sinh</Label>
+                <Label htmlFor="noi-sinh">{c("ho_so.noi_sinh")}</Label>
                 <Select id="noi-sinh" value={noiSinh} onChange={(e) => setNoiSinh(e.target.value)} disabled={!tinh && !loiTinh}>
                   <option value="">{tinh ? "— Chọn tỉnh/thành —" : "Đang tải…"}</option>
                   <option value={NUOC_NGOAI}>Sinh ở nước ngoài</option>
@@ -296,7 +298,7 @@ export function NhapHoSo({ macDinh, nutGui = "Xem con số của tôi", can, onX
       {loi && <p role="alert" className="rounded-xl bg-cinnabar/10 px-4 py-3 text-sm text-cinnabar">{loi}</p>}
 
       <Button type="submit" size="lg" className="w-full" disabled={dang}>
-        {nutGui} <ArrowRight aria-hidden />
+        {nutGui ?? c("ho_so.nut_xem")} <ArrowRight aria-hidden />
       </Button>
       <p className="flex items-center justify-center gap-1.5 text-xs text-fg-faint">
         <Lock className="size-3.5" aria-hidden /> Lưu trên máy của bạn · không cần tài khoản

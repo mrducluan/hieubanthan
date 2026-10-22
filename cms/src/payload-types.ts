@@ -106,6 +106,7 @@ export interface Config {
     'menu-dau-trang': MenuDauTrang;
     'dieu-huong': DieuHuong;
     'tinh-nang': TinhNang;
+    'chu-chung': ChuChung;
     'payload-jobs-stats': PayloadJobsStat;
   };
   globalsSelect: {
@@ -113,6 +114,7 @@ export interface Config {
     'menu-dau-trang': MenuDauTrangSelect<false> | MenuDauTrangSelect<true>;
     'dieu-huong': DieuHuongSelect<false> | DieuHuongSelect<true>;
     'tinh-nang': TinhNangSelect<false> | TinhNangSelect<true>;
+    'chu-chung': ChuChungSelect<false> | ChuChungSelect<true>;
     'payload-jobs-stats': PayloadJobsStatsSelect<false> | PayloadJobsStatsSelect<true>;
   };
   locale: null;
@@ -638,6 +640,15 @@ export interface NoiDungTrang {
     | number
     | boolean
     | null;
+  hinh?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   khoi_tren?:
     | (
         | {
@@ -1016,6 +1027,15 @@ export interface MauCum {
     | boolean
     | null;
   chu?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  hinh?:
     | {
         [k: string]: unknown;
       }
@@ -1885,6 +1905,7 @@ export interface NoiDungTrangSelect<T extends boolean = true> {
         id?: T;
       };
   chu?: T;
+  hinh?: T;
   khoi_tren?:
     | T
     | {
@@ -2258,6 +2279,7 @@ export interface MauCumSelect<T extends boolean = true> {
   nguon_kb?: T;
   mac_dinh?: T;
   chu?: T;
+  hinh?: T;
   khoi_tren?:
     | T
     | {
@@ -2823,6 +2845,35 @@ export interface TinhNang {
   createdAt?: string | null;
 }
 /**
+ * Chữ nhỏ lặp lại trên nhiều trang: form hồ sơ, ô vào trang chủ, khung hỏi đáp, nút Thử lại. Sửa một lần, đổi ở mọi trang (sau vài giây). Để trống = chữ gốc.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "chu-chung".
+ */
+export interface ChuChung {
+  id: number;
+  mac_dinh?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  chu?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs-stats".
  */
@@ -2967,6 +3018,17 @@ export interface TinhNangSelect<T extends boolean = true> {
   keu_goi_cong_cu?: T;
   llms_txt?: T;
   ban_markdown?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "chu-chung_select".
+ */
+export interface ChuChungSelect<T extends boolean = true> {
+  mac_dinh?: T;
+  chu?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

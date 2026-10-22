@@ -66,6 +66,16 @@ export function tachNhan(s: string): { chu: string; nhan: boolean }[] {
 /** Bỏ dấu nhấn (cho metadata, aria, chỗ chỉ nhận chữ thuần). */
 export const boNhan = (s: string) => tachNhan(s).map((p) => p.chu).join("");
 
+// ---------------------------------------------------------------- ND-7 đợt 2: "Hình trên trang"
+/** Một chỗ đặt hình của trang: hình gốc là hình vẽ trong code (SVG, có chuyển động) — CMS cho thay bằng ảnh thư viện. */
+export type MucHinh = {
+  nhan: string;
+  /** Mô tả hình gốc trong code (CMS hiện cho người sửa biết đang thay cái gì). */ mac_dinh: string;
+  /** Gợi ý kích thước / tỉ lệ ảnh nên tải lên. */ goi_y: string;
+  nhom?: string;
+};
+export type BangHinh = Readonly<Record<string, MucHinh>>;
+
 /** Bảng chữ gửi CMS: chỉ nhãn + mặc định + giới hạn + nhóm (đúng dạng CMS đọc). */
 export const bangChoCms = (bang: BangChu) =>
   Object.fromEntries(Object.entries(bang).map(([k, m]) => [k, { nhan: m.nhan, mac_dinh: m.mac_dinh, toi_da: m.toi_da ?? TOI_DA_CHU, ...(m.nhom ? { nhom: m.nhom } : {}) }]));

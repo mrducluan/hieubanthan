@@ -3,7 +3,7 @@
 // đây (next.config.mjs; trang này tự chuyển khi ai gọi thẳng). Cấu trúc GEO: câu hỏi làm tiêu đề · trả lời nhanh ·
 // hai la bàn nam/nữ · hướng chung vợ chồng cùng tuổi · bảng 8 hướng · bố trí · mốc đầu năm · hỏi đáp · cùng tuổi.
 import { KhoiCms } from "@/components/cms/KhoiCms";
-import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
@@ -30,7 +30,7 @@ const anhTuoi = (t: TuoiHuong) => anhBai({
   nhan: `Nam ${t.gioi[0]!.menh_quai.quai} · Nữ ${t.gioi[1]!.menh_quai.quai} · ${t.can_chi}`,
 });
 
-export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
+async function metaGoc({ params: thamSo }: Props): Promise<Metadata> {
   const params = await thamSo;
   const t = await tuoiHuong(params.slug);
   if (!t) return { title: "Không tìm thấy", robots: { index: false } };
@@ -217,3 +217,6 @@ export default async function Page({ params: thamSo }: Props) {
     </article>
   );
 }
+
+// ND-7 đợt 2: ảnh chia sẻ của cụm (CMS → Mẫu cụm trang → "Hình trên trang") thay ảnh /og tự vẽ khi có.
+export const generateMetadata = async (...a: Parameters<typeof metaGoc>) => voiAnhChiaSe(await metaGoc(...a));

@@ -10,13 +10,13 @@ import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/li
 import { duongThang, homNayVN } from "@/lib/hoang-lich";
 import { docNamLich, duongLichAm, lichAmIndex, lichNamCongKhai } from "@/lib/lich-am";
 import { taoChu } from "@/lib/chu-trang";
-import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_LICH_AM_NAM } from "@/lib/chu/trang-con";
 
 type P = { params: Promise<{ nam: string }> };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
 
-export async function generateMetadata(p: P): Promise<Metadata> {
+async function metaGoc(p: P): Promise<Metadata> {
   const n = docNamLich((await p.params).nam);
   if (!n) return {};
   const m = metaTrang({ tieuDe: `Lịch âm ${n}: Tết, tháng nhuận, các tháng âm lịch`,
@@ -83,3 +83,6 @@ export default async function Page(p: P) {
     </div>
   );
 }
+
+// ND-7 đợt 2: ảnh chia sẻ của cụm (CMS → Mẫu cụm trang → "Hình trên trang") thay ảnh /og tự vẽ khi có.
+export const generateMetadata = async (...a: Parameters<typeof metaGoc>) => voiAnhChiaSe(await metaGoc(...a));
