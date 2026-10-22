@@ -25,6 +25,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Page() {
   const [ds, nd] = await Promise.all([dsLaSoMau(), layNoiDungTrang(DUONG)]);
+  // SEO-L3: engine lỗi → 5xx (Google thử lại), không trả trang 200 rỗng.
+  if (!ds.length) throw new Error("Engine chưa trả danh sách lá số mẫu");
   return (
     <div className="mx-auto max-w-4xl">
       <JsonLd data={goiLd(ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Tử vi", duong: "/tu-vi" }, { ten: "Lá số mẫu", duong: "/tu-vi/la-so-mau" }]))} />
@@ -48,7 +50,6 @@ export default async function Page() {
           </li>
         ))}
       </ul>
-      {!ds.length && <p className="mt-8 text-fg-faint">Chưa tải được danh sách — thử lại sau ít phút.</p>}
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-12" />
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />
     </div>

@@ -1,9 +1,12 @@
 # Sau mỗi lần merge vào main: đợi Vercel deploy xong rồi báo IndexNow danh sách URL trong sitemap.
+# SEO-L6: thêm lịch hằng ngày 06:13 giờ VN — chỉ báo trang ngày tốt 30 ngày tới + trang hôm nay (nội dung đổi theo ngày).
 name: indexnow
 on:
   push:
     branches: [main]
     paths: ["web/**"]
+  schedule:
+    - cron: "13 23 * * *"
   workflow_dispatch: {}
 jobs:
   bao:
@@ -14,6 +17,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - name: Đợi Vercel deploy
+        if: github.event_name == 'push'
         run: sleep 240
       - name: Gửi IndexNow
-        run: node web/scripts/indexnow.mjs https://hieuban.com
+        run: node web/scripts/indexnow.mjs https://hieuban.com ${{ github.event_name == 'schedule' && '--ngay' || '' }}

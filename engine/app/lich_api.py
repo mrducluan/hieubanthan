@@ -8,14 +8,15 @@ chiếu với giấy tờ/sổ tử vi của gia đình.
 from __future__ import annotations
 
 import datetime as _dt
-from typing import Literal
+from typing import Annotated, Literal
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Path as FPath
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
 from app.calc import dia_ly, lunar
 from app.config import Region
+from app.luangiai import lich_nam as _lich_nam
 
 router = APIRouter(tags=["lich"])
 
@@ -92,3 +93,9 @@ def api_doi_lich(inp: DoiLichInput) -> dict:
         "so_ngay_thang": lunar.so_ngay_thang(am[1], am[2], int(am[3]), tz),
         "lich_mien_nam_utc8": inp.lich == "viet" and tz != config.CALENDAR_MERIDIAN_TZ,
     }
+
+
+# SEO-L5: lịch âm cả năm (các tháng, Tết, nhuận) — không dữ liệu cá nhân.
+@router.get("/v1/lich/nam/{nam}")
+def api_lich_nam(nam: Annotated[int, FPath(ge=1901, le=2098)]) -> dict:
+    return _lich_nam.lich_nam(nam)

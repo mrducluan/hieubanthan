@@ -381,3 +381,9 @@ Xếp theo lợi ích ước tính cho khâu THU HÚT. Mục ★ là nhạy th�
 | 10 | **CTA bài blog theo chủ đề** + metadata đủ cho `/ban-than`, `/the/[ma]`, `/hop-doi/[ma]` (audit P2) | Bài blog dẫn đúng công cụ; thẻ chia sẻ hiện đúng tiêu đề trên Zalo/Facebook (khâu MỜI) | Nhỏ |
 
 Đề xuất làm trước: **1 + 2 (★, trước Tết)**, rồi 4, 5, 3.
+
+**Trạng thái (2026-10-22, chủ dự án duyệt làm cả 6 mục đã nêu trong trả lời):** đã làm 1, 2, 3 (đổi lịch + lịch âm năm),
+4 (5xx khi engine lỗi), 5 (sổ ngày cập nhật thật), 8 (IndexNow hằng ngày), 9 (một phần: `name`/`autocomplete` ô ngày sinh;
+form chưa render sẵn ở máy chủ). **Không làm 7** (ảnh trong sitemap): ảnh `/og` là ảnh chia sẻ, không hiện trong trang —
+Google chỉ lập chỉ mục ảnh có trong trang. Còn mở: 6 (bản .md cho họ trang còn thiếu), 10 (CTA blog theo chủ đề,
+metadata `/the`, `/hop-doi/[ma]`).

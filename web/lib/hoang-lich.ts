@@ -73,11 +73,40 @@ export async function thangCongKhai(nam: number, thang: number): Promise<ThangLi
   return r;
 }
 
+// SEO-L2 — "ngày tốt {việc} tháng M/YYYY": 6 việc có trang riêng (engine VIEC_SEO; engine trả 404 cho việc khác).
+export const VIEC_SEO = [
+  { ma: "cuoi_hoi", slug: "cuoi-hoi", ten: "Cưới hỏi" }, { ma: "khai_truong", slug: "khai-truong", ten: "Khai trương" },
+  { ma: "nhap_trach", slug: "nhap-trach", ten: "Về nhà mới" }, { ma: "dong_tho", slug: "dong-tho", ten: "Động thổ, làm nhà" },
+  { ma: "xuat_hanh", slug: "xuat-hanh", ten: "Xuất hành, đi xa" }, { ma: "mua_xe", slug: "mua-xe", ten: "Mua xe, tài sản" },
+] as const;
+export type ViecSeo = (typeof VIEC_SEO)[number];
+export interface ViecThang {
+  viec: { ma: string; slug: string; ten: string }; nam: number; thang: number; tieu_de: string; thang_am: string;
+  ngay: TomTatNgay[]; so_ngay: number; dep_nhat: TomTatNgay | null; tra_loi_nhanh: string;
+  hoi_dap: { hoi: string; dap: string }[]; cach_chon: string; luu_y: string; trang_thai: string;
+}
+export async function viecThangCongKhai(ma: string, nam: number, thang: number): Promise<ViecThang | null> {
+  const r = await lay<ViecThang>(`/v1/lich/viec-thang/${ma}/${nam}/${thang}`);
+  if (!r) noStore();
+  return r;
+}
+export const duongViecThang = (slug: string, nam: number, thang: number) => `/xem-ngay-tot/${slug}-thang-${thang}-${nam}`;
+const RE_VIEC = /^([a-z-]+)-thang-(\d{1,2})-(\d{4})$/;
+
 const RE_NGAY = /^(\d{4})-(\d{2})-(\d{2})$/;
 const RE_THANG = /^thang-(\d{1,2})-(\d{4})$/;
 
-/** Đường dẫn con của /xem-ngay-tot: "2026-10-13" (một ngày) hoặc "thang-10-2026" (cả tháng). Sai dạng → null. */
-export function docDuong(s: string): { loai: "ngay"; iso: string } | { loai: "thang"; nam: number; thang: number } | null {
+/** Đường dẫn con của /xem-ngay-tot: "2026-10-13" (một ngày), "thang-10-2026" (cả tháng) hoặc "cuoi-hoi-thang-10-2026"
+ *  (ngày tốt cho một việc trong tháng — SEO-L2). Sai dạng → null. */
+export function docDuong(s: string): { loai: "ngay"; iso: string } | { loai: "thang"; nam: number; thang: number }
+  | { loai: "viec"; viec: ViecSeo; nam: number; thang: number } | null {
+  const v = RE_VIEC.exec(s);
+  if (v) {
+    const viec = VIEC_SEO.find((x) => x.slug === v[1]);
+    const [m, y] = [Number(v[2]), Number(v[3])];
+    if (!viec || m < 1 || m > 12 || y < 1901 || y > 2099 || String(m) !== v[2]) return null;
+    return { loai: "viec", viec, nam: y, thang: m };
+  }
   const a = RE_NGAY.exec(s);
   if (a) {
     const [y, m, d] = [Number(a[1]), Number(a[2]), Number(a[3])];

@@ -16,11 +16,12 @@ from functools import lru_cache
 from pathlib import Path
 
 from app.kb import do_rieng as _dr
+from app.kb import ngay_cap_nhat as _ncn
 from app.kb import tham_dinh as _td
 
 _DATA = Path(__file__).parent / "data"
 
-# Đổi khi nội dung KB của các trang này thay đổi (hiển thị "Cập nhật" + sitemap lastmod).
+# Ngày mặc định cho trang chưa có trong sổ `data/ngay_cap_nhat.json` (SEO-L4: ngày thật lấy từ sổ băm nội dung).
 CAP_NHAT = "2026-10-07"
 
 # Quyết định chủ dự án: index cả nội dung nháp AI (vẫn hiển thị nhãn nháp).
@@ -364,7 +365,10 @@ def _hoan_tat(t: dict) -> dict:
     for l in (t["lien_quan"] + (t.get("trang_con") or {}).get("ds", []) + (t.get("trang_con_hoa") or {}).get("ds", [])
               + [x for m in t["muc"] for x in m.get("xem_them", [])]):
         l["tieu_de"] = _ten_ngan(l["loai"], l["slug"])
-    t["cap_nhat"] = max(CAP_NHAT, (t["tham_dinh"] or {}).get("ngay", ""))
+    # SEO-L4: ngày thật theo sổ băm nội dung (kb/ngay_cap_nhat.py); thẩm định mới hơn thì lấy ngày thẩm định.
+    dang, sua = _ncn.ngay(t["loai"], t["slug"], CAP_NHAT)
+    t["ngay_dang"] = dang
+    t["cap_nhat"] = max(sua, (t["tham_dinh"] or {}).get("ngay", ""))
     return t
 
 
@@ -396,6 +400,6 @@ def danh_sach() -> list[dict]:
         for slug in slugs:
             t = lay(loai, slug)
             assert t is not None
-            ra.append({k: t[k] for k in ("loai", "slug", "tieu_de", "mo_ta", "trang_thai", "index", "cap_nhat",
+            ra.append({k: t[k] for k in ("loai", "slug", "tieu_de", "mo_ta", "trang_thai", "index", "cap_nhat", "ngay_dang",
                                        "chu_bien", "tac_gia", "tham_dinh", "bien_soan")})
     return ra
