@@ -734,3 +734,18 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
   đăng nhập → Hôm nay → Bật nhắc. (Safari thường không có nút — đúng như thiết kế, trang sẽ hiện hướng dẫn 2 bước.)
 - [ ] **WP6. Luật sư rà** dòng mới trong Chính sách quyền riêng tư (mục dữ liệu + bên xử lý: dịch vụ thông báo của trình duyệt),
   ngày hiệu lực đã đổi 21/10/2026. Nếu anh đã sửa trang này trong CMS thì thêm hai dòng đó ở CMS (CMS thắng code).
+
+## WP-GĐ2. Sáng nay của bạn · mốc lịch · hỏi lại hôm qua · mời cài app (2026-10-22)
+
+- [ ] **WP7. Chạy migration `0020_push_tuy_chon.sql`** (sau 0018, 0019; rollback `.down.sql`). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`
+  (dòng 0020 = true). Chưa chạy thì nhắc mốc tự đánh dấu vẫn gửi, chỉ phần tuỳ chọn (sáng nay, mốc lịch) ẩn đi.
+- [ ] **WP8. Deploy engine Render** (route mới `/v1/push/sang-nay`) **trước** khi merge web — web gọi engine trong cron sáng.
+- [ ] **WP9. Thử**: điện thoại Android đã bật nhắc → Tài khoản → tích "Sáng nay của bạn" (cần đã lưu hồ sơ vào tài khoản) →
+  Vercel → Cron Jobs → `/api/cron/hang-ngay` → Run → nhận một thông báo "Sáng nay của bạn · Ngày cá nhân N". Hôm trước chọn một
+  ý định ở "Hôm nay bạn định làm gì?" thì thông báo có thêm hai nút "Đúng với mình / Chưa đúng".
+- [ ] **WP10. Thử cài app**: Chrome Android/máy tính mở `/hom-nay` hai ngày khác nhau → thấy thẻ "Mở Hiểu Bản Thân nhanh hơn mỗi
+  sáng" → Cài. iPhone: thẻ hướng dẫn 2 bước. Sau 1–2 tuần xem `/quan-tri/tang-truong` (PostHog `pwa_*`, `landing_viewed.app`).
+- [ ] **WP11. Luật sư rà** dòng "Mốc nhắc, thiết bị và tuỳ chọn nhận thông báo" + dòng Tiện ích trong Chính sách quyền riêng tư
+  (hiệu lực 22/10/2026). Nếu đã sửa trang này trong CMS thì thêm ở CMS (CMS thắng code).
+- [ ] **WP12. Quyết Vercel Pro** trước khi bật thu Sao / muốn chọn giờ nhận thông báo (Hobby: 2 cron, cấm thương mại).
+

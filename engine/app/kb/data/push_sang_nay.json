@@ -1,0 +1,43 @@
+{
+  "_meta": {
+    "source_id": "hbt_bien_tap_push",
+    "school_id": "chung",
+    "trang_thai": "nhap_ai",
+    "ghi_chu": "KC-4 GĐ2 — chữ của thông báo Web Push (người dùng tự bật). Tên 12 tiết và chi tháng theo tiết là dữ kiện lịch; lời mời do ban biên tập soạn (nháp AI). Không doạ, không dự báo sự kiện, chỉ đường dẫn trong site."
+  },
+  "tiet": {
+    "315": {"ten": "Lập xuân", "chi": "Dần"},
+    "345": {"ten": "Kinh trập", "chi": "Mão"},
+    "15": {"ten": "Thanh minh", "chi": "Thìn"},
+    "45": {"ten": "Lập hạ", "chi": "Tỵ"},
+    "75": {"ten": "Mang chủng", "chi": "Ngọ"},
+    "105": {"ten": "Tiểu thử", "chi": "Mùi"},
+    "135": {"ten": "Lập thu", "chi": "Thân"},
+    "165": {"ten": "Bạch lộ", "chi": "Dậu"},
+    "195": {"ten": "Hàn lộ", "chi": "Tuất"},
+    "225": {"ten": "Lập đông", "chi": "Hợi"},
+    "255": {"ten": "Đại tuyết", "chi": "Tý"},
+    "285": {"ten": "Tiểu hàn", "chi": "Sửu"}
+  },
+  "mau": {
+    "sang_nay_tieu_de": "Sáng nay của bạn · Ngày cá nhân {so}",
+    "sang_nay_du_phong": "Một ngày mới để thử nhịp của riêng bạn.",
+    "thang_moi_tieu_de": "Tháng cá nhân {so} bắt đầu",
+    "thang_moi_noi_dung": "{chu_de}. {nen}",
+    "giao_tiet_tieu_de": "Hôm nay giao tiết {ten}",
+    "giao_tiet_noi_dung": "Sang tháng {chi} theo tiết khí — xem tháng này nhà bạn hợp làm gì.",
+    "giao_tiet_duong": "/hom-nay#thang-nay-nha",
+    "lap_xuan_tieu_de": "Hôm nay Lập xuân",
+    "lap_xuan_noi_dung": "Năm mới theo tiết khí bắt đầu từ hôm nay — xem hướng nên giữ yên của năm và tháng Dần nhà bạn.",
+    "lap_xuan_duong": "/phong-thuy/huong-xau-nam",
+    "tet_tieu_de": "Năm mới {can_chi} — chúc bạn an vui",
+    "tet_noi_dung": "Xem tuổi hợp xông đất và nhịp năm cá nhân của bạn trong năm mới.",
+    "tet_duong": "/tuoi-xong-dat"
+  },
+  "hoi_hom_qua": {
+    "cau": "Hôm qua gợi ý cho việc {ten}: {nhip}. Với bạn có đúng vậy không?",
+    "nhip": {"thuan": "nhịp thuận", "trung_tinh": "nhịp bình thường", "can_nhac": "nên làm cách khác"},
+    "dung": "Đúng với mình",
+    "chua_dung": "Chưa đúng"
+  }
+}
