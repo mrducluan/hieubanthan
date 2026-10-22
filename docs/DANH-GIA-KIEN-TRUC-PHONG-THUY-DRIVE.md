@@ -135,4 +135,4 @@ Mỗi việc "Làm" sẽ có dòng quyết định riêng trong CLAUDE.md khi b�
 | Y7 | **So "trước – sau" khi sửa**: người dùng đánh dấu "đã xử lý" một dấu hiệu → bài đọc tính lại không trần mức, hiện hai mức cạnh nhau; nút "đã xử lý" cũng là phiếu sau 30 ngày | QUAY LẠI | Cho thấy việc 0 đồng đổi được gì ngay — động lực làm thật | 0,5 ngày (web + `dau_hieu[*].da_xu_ly` bỏ qua trần) |
 | Y8 | **Rà lại 45 cặp cũ `cap_sao`**: KB còn giữ 45 cặp không thứ tự làm dự phòng; sau khi `to_hop_81` ổn định một tháng (phiếu kiểm chứng), bỏ dự phòng để KB một nguồn | nền móng | Hai bảng nghĩa song song dễ lệch khi sửa | 0,2 ngày + phiếu |
 
-Em đề xuất làm trước: **Y5** (SEO, KB đã sẵn), **Y3** (ghép hai thứ đã có), ~~**Y7**~~ (đã làm ở UI-PT 2026-10-22 — nút "Tôi đã xử lý" + so trước–sau, `docs/RA-SOAT-UI-PHONG-THUY.md`). Y1, Y2 ghi lại thành P6, P7 trong cùng tài liệu.
+Em đề xuất làm trước: **Y5** (SEO, KB đã sẵn), **Y3** (ghép hai thứ đã có), ~~**Y7**~~ (đã làm ở UI-PT 2026-10-22 — nút "Tôi đã xử lý" + so trước–sau, `docs/RA-SOAT-UI-PHONG-THUY.md`). Y1, Y2 ghi lại thành P6, P7 và **đã làm ở UI-PT2** (2026-10-22) cùng P5 so hai căn.

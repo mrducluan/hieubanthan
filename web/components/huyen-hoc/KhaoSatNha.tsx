@@ -13,6 +13,9 @@ import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
 import { datGocNhin, TEN_GOC_NHIN, useGocNhin, type GocNhin } from "@/lib/goc-nhin-pt";
 import { cn } from "@/lib/utils";
 import { SoDoNha } from "@/components/huyen-hoc/SoDoNha";
+import { CachLam } from "@/components/huyen-hoc/CachLam";
+import { HoiNhanhAnh } from "@/components/huyen-hoc/HoiNhanhAnh";
+import { ImagePlus, RotateCw } from "lucide-react";
 
 interface DanhMuc {
   phong: Record<string, string>;
@@ -83,6 +86,17 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
   const [luoi, setLuoi] = useState<boolean[][]>(LUOI_TRONG);
   const [cheDo, setCheDo] = useState<string>("to");
   const [oPhong, setOPhong] = useState<Record<string, [number, number]>>({});
+  // UI-PT2 B: ảnh mặt bằng (chụp / tải từ máy) đặt DƯỚI lưới để tô theo — chỉ là nền trên trình duyệt, không gửi đi, không lưu.
+  const [anhNen, setAnhNen] = useState<{ url: string; xoay: number; mo: number } | null>(null);
+  const anhRef = useRef<string | null>(null);
+  useEffect(() => () => { if (anhRef.current) URL.revokeObjectURL(anhRef.current); }, []);
+  const chonAnhNen = (f: File | undefined) => {
+    if (anhRef.current) URL.revokeObjectURL(anhRef.current);
+    if (!f) { anhRef.current = null; setAnhNen(null); return; }
+    const url = URL.createObjectURL(f);
+    anhRef.current = url; setAnhNen({ url, xoay: 0, mo: 0.55 }); setVeMb(true);
+    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "anh_mat_bang_nen" });
+  };
 
   useEffect(() => {
     fetch("/api/phongthuy/bo-cuc/danh-muc").then((r) => (r.ok ? r.json() : null)).then(setDm).catch(() => setDm(null));
@@ -90,22 +104,31 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
   useEffect(() => { if (doHuongGoiY != null) setDoNha(String(doHuongGoiY)); }, [doHuongGoiY]);
   // KC-2: bố cục đã khai lần trước (hồ sơ nhà trên máy) điền sẵn một lần.
   const nhaLuu = useHoSoNha();
-  const daDien = useRef(false);
+  // UI-PT2 P5: điền lại khi đổi CĂN đang xem (id khác); UI-PT2 A: loại nhà luôn theo hồ sơ nhà (chọn ở Hành trình).
+  const daDien = useRef<string | null>(null);
+  useEffect(() => { if (nhaLuu?.loai_nha) setLoaiNha(nhaLuu.loai_nha); }, [nhaLuu?.loai_nha]);
   useEffect(() => {
-    if (!nhaLuu || daDien.current) return;
-    daDien.current = true;
+    const khoa = nhaLuu ? `${nhaLuu.id ?? "_"}` : null;
+    if (!nhaLuu || daDien.current === khoa) return;
+    const doiCan = daDien.current !== null && daDien.current !== "_" && khoa !== "_";
+    const lanDau = daDien.current === null;
+    daDien.current = khoa;
+    if (!lanDau && !doiCan) return;
     if (nhaLuu.huong_do != null && doHuongGoiY == null) setDoNha(String(nhaLuu.huong_do)); else if (nhaLuu.huong && doHuongGoiY == null) setHuong(nhaLuu.huong);
     const b = nhaLuu.bo_cuc;
-    if (b?.vi_tri) setViTri(b.vi_tri);
-    if (b?.dau_hieu) setDau(new Set(b.dau_hieu));
-    if (b?.huong_do) setHuongDo(Object.fromEntries(Object.entries(b.huong_do).map(([k, v]) => [k, String(v)])));
+    if (b?.vi_tri || doiCan) setViTri(b?.vi_tri ?? {});
+    if (b?.dau_hieu || doiCan) setDau(new Set(b?.dau_hieu ?? []));
+    if (b?.huong_do || doiCan) setHuongDo(Object.fromEntries(Object.entries(b?.huong_do ?? {}).map(([k, v]) => [k, String(v)])));
     if (nhaLuu.loai_nha) setLoaiNha(nhaLuu.loai_nha);
+    if (doiCan) setKq(null);
     if (b?.mat_bang && b.mat_bang.luoi.length === N && b.mat_bang.luoi.every((r) => r.length === N)) {
       setVeMb(true);
       setLuoi(b.mat_bang.luoi.map((r) => [...r].map((c) => c === "1")));
       const o: Record<string, [number, number]> = { ...(b.mat_bang.phong ?? {}) } as Record<string, [number, number]>;
       if (b.mat_bang.ban_cong) o.ban_cong = b.mat_bang.ban_cong;
       setOPhong(o);
+    } else if (doiCan) {
+      setVeMb(false); setLuoi(LUOI_TRONG); setOPhong({});
     }
   }, [nhaLuu, doHuongGoiY]);
 
@@ -205,6 +228,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
                   className={cn("rounded-full border px-2.5 py-0.5", gocNhin === g ? "border-gold/70 text-gold" : "border-line text-fg-muted hover:text-fg")}>{TEN_GOC_NHIN[g]}</button>
               ))}
             </div>
+            <CachLam viec="dat_phong" className="mt-2" />
           </div>
 
           <div data-testid="ve-mat-bang">
@@ -215,6 +239,21 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
             {veMb && (
               <div className="mt-2 space-y-2">
                 <p className="text-xs text-fg-muted">Hàng trên cùng là <b className="text-fg">mặt trước nhà</b> (phía nhìn ra). Tô ô theo hình nhà (chữ L thì bỏ trống góc khuyết); chọn chế độ rồi bấm ô để đặt phòng. Máy tính tâm nhà, nhà vệ sinh có ở giữa nhà không, khuyết góc, cửa có thông thẳng ra ban công không.</p>
+                <CachLam viec="ve_mat_bang" />
+                <div className="flex flex-wrap items-center gap-2 text-xs" data-testid="anh-mat-bang">
+                  <label className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg">
+                    <ImagePlus className="size-3.5" aria-hidden /> {anhNen ? "Đổi ảnh mặt bằng" : "Đặt ảnh mặt bằng làm nền để tô theo"}
+                    <input type="file" accept="image/*" className="sr-only" aria-label="Ảnh mặt bằng làm nền (chỉ hiện trên máy)" onChange={(e) => chonAnhNen(e.target.files?.[0])} />
+                  </label>
+                  {anhNen && (
+                    <>
+                      <button type="button" onClick={() => setAnhNen((a) => a && { ...a, xoay: (a.xoay + 90) % 360 })} className="inline-flex items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg" aria-label="Xoay ảnh 90 độ"><RotateCw className="size-3.5" aria-hidden /> Xoay</button>
+                      <label className="inline-flex items-center gap-1.5 text-fg-muted">Rõ <input type="range" min={0.2} max={0.9} step={0.05} value={anhNen.mo} onChange={(e) => setAnhNen((a) => a && { ...a, mo: Number(e.target.value) })} aria-label="Độ rõ của ảnh nền" className="w-20 accent-[rgb(var(--gold))]" /></label>
+                      <button type="button" onClick={() => chonAnhNen(undefined)} className="text-fg-faint hover:text-fg">Bỏ ảnh</button>
+                    </>
+                  )}
+                  <span className="text-fg-faint">Ảnh chỉ nằm trên máy bạn — không tải lên, không lưu.</span>
+                </div>
                 <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="Chế độ vẽ">
                   {([["to", "Tô ô"], ...PHONG_VE] as [string, string][]).map(([m, t]) => (
                     <button key={m} type="button" role="radio" aria-checked={cheDo === m} onClick={() => setCheDo(m)}
@@ -223,16 +262,23 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
                     </button>
                   ))}
                 </div>
-                <div className="grid w-fit grid-cols-6 gap-0.5 rounded-lg border border-line/70 p-1" aria-label="Lưới mặt bằng 6×6, hàng trên là mặt trước">
+                <div className="relative w-fit overflow-hidden rounded-lg">
+                {anhNen && (
+                  // eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng, không qua next/image
+                  <img src={anhNen.url} alt="" aria-hidden className="pointer-events-none absolute inset-0 size-full object-contain"
+                    style={{ opacity: anhNen.mo, transform: `rotate(${anhNen.xoay}deg)` }} />
+                )}
+                <div className={cn("relative grid w-fit grid-cols-6 gap-0.5 rounded-lg border border-line/70 p-1", anhNen && "bg-transparent")} aria-label="Lưới mặt bằng 6×6, hàng trên là mặt trước">
                   {luoi.map((row, r) => row.map((v, c) => {
                     const nhan = Object.entries(oPhong).filter(([, o]) => o[0] === r && o[1] === c).map(([k]) => PHONG_VE.find(([m]) => m === k)?.[1] ?? k);
                     return (
                       <button key={`${r}-${c}`} type="button" onClick={() => bamO(r, c)} aria-label={`Ô hàng ${r + 1} cột ${c + 1}${v ? " (đã tô)" : ""}${nhan.length ? `: ${nhan.join(", ")}` : ""}`}
-                        aria-pressed={v} className={cn("flex size-10 items-center justify-center rounded text-[10px] leading-none sm:size-11", v ? "bg-gold/25 text-fg" : "bg-bg/40 text-fg-faint", nhan.length && "ring-1 ring-gold")}>
+                        aria-pressed={v} className={cn("flex size-10 items-center justify-center rounded text-[10px] leading-none sm:size-11", v ? "bg-gold/25 text-fg" : anhNen ? "bg-bg/10 text-fg-faint" : "bg-bg/40 text-fg-faint", nhan.length && "ring-1 ring-gold")}>
                         {nhan.join("·") || (r === 0 ? "▲" : "")}
                       </button>
                     );
                   }))}
+                </div>
                 </div>
               </div>
             )}
@@ -276,7 +322,9 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
           </div>
         </div>
 
-        <fieldset className="space-y-3">
+        <div className="space-y-3">
+          <HoiNhanhAnh dau={dau} onDat={(ma, co) => setDau((s0) => { const n = new Set(s0); if (co) n.add(ma); else n.delete(ma); return n; })} />
+          <fieldset className="space-y-3">
           <legend className="text-sm font-medium text-fg">4. Dấu hiệu bạn thấy (đánh dấu nếu có)</legend>
           {Object.entries(NHOM_DH).map(([nhom, ten]) => (
             <div key={nhom}>
@@ -294,7 +342,8 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
               </ul>
             </div>
           ))}
-        </fieldset>
+          </fieldset>
+        </div>
       </div>
 
       <div className="mt-5 flex flex-wrap items-center gap-3">

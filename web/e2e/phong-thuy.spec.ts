@@ -266,7 +266,7 @@ test("Q2/Q1/Q4/Q5/Q6: vẽ mặt bằng → suy WC giữa nhà + cửa thông ba
   await expect(ht.getByTestId("hanh-trinh-khao_sat")).toHaveAttribute("data-trang-thai", "xong");
   await ht.getByRole("button", { name: "Đặt tên cho nhà này" }).click();
   await ht.getByLabel("Tên gọi cho nhà này").fill("Căn định mua");
-  await ht.getByRole("button", { name: "Lưu" }).click();
+  await ht.getByRole("button", { name: "Lưu", exact: true }).click();
   await expect(ht.getByTestId("hanh-trinh-ten-nha")).toContainText("Căn định mua");
   await ht.getByRole("button", { name: "Xoá nhà đã lưu trên máy" }).click();
   await ht.getByRole("button", { name: "Xoá", exact: true }).click();
@@ -286,4 +286,133 @@ test("Q3: hướng nhà từ hai điểm bản đồ (dán toạ độ) → đ�
   await expect(kq).toContainText("Đông");
   await expect(kq).toContainText("bắc thật");
   await expect(o.getByTestId("huong-ban-do")).toContainText("cách nhau");
+});
+
+
+// PNG 1×1 (nền ảnh mặt bằng / ảnh góc nhà) — chỉ để thử chọn tệp; ảnh không rời máy.
+const PNG_1 = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==", "base64");
+
+test("UI-PT2 A/B: chọn Chung cư → hướng dẫn căn hộ + Cách làm; GPS điền hai điểm → hướng; lưu theo ban công; Huyền Không ghi chú", async ({ page, context }) => {
+  await context.grantPermissions(["geolocation"]);
+  await context.setGeolocation({ latitude: 10.7769, longitude: 106.7009, accuracy: 8 });
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  const ht = page.getByTestId("hanh-trinh-nha");
+  await ht.getByTestId("loai-nha-can_ho").click();
+  await expect(ht.getByTestId("hanh-trinh-huong")).toContainText("ban công");
+  const o = page.getByTestId("do-huong");
+  await expect(o).toContainText("ban công hoặc cửa sổ lớn nhất");
+  await o.getByTestId("cach-lam-do_huong_can_ho").getByTestId("cach-lam-mo").click();
+  await expect(o.getByTestId("cach-lam-do_huong_can_ho")).toContainText("Căn hộ chung cư: đo ở đâu?");
+  await o.getByRole("button", { name: /Lấy hướng từ bản đồ/ }).click();
+  await o.getByRole("button", { name: "Lấy vị trí hiện tại làm tâm nhà" }).click();
+  await expect(o.getByLabel("Toạ độ tâm nhà")).toHaveValue("10.776900, 106.700900");
+  await expect(o.getByTestId("gps-chinh-xac")).toContainText("±8 m");
+  await context.setGeolocation({ latitude: 10.7769, longitude: 106.7019, accuracy: 30 });
+  await o.getByRole("button", { name: "Lấy vị trí hiện tại làm điểm trước mặt nhà" }).click();
+  await expect(o.getByLabel("Toạ độ điểm trước mặt nhà")).toHaveValue("10.776900, 106.701900");
+  await expect(o.getByTestId("gps-chinh-xac")).toContainText("khá lệch");
+  await o.getByRole("button", { name: "Tính hướng từ hai điểm" }).click();
+  await expect(page.getByTestId("ket-qua-do-huong")).toContainText("Đông");
+  const hs = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"));
+  expect(hs.loai_nha).toBe("can_ho");
+  expect(hs.theo).toBe("ban_cong");                                   // căn hộ → hướng lưu là hướng ban công
+  await expect(page.getByTestId("hk-can-ho")).toBeVisible();
+  await expect(page.getByTestId("khao-sat-nha").getByLabel("Loại nhà")).toHaveValue("can_ho");   // Khảo sát đọc cùng hồ sơ nhà
+});
+
+test("UI-PT2 B/C: ảnh mặt bằng làm nền lưới (chỉ trên máy) + Chụp một góc, trả lời 3 câu → tích đúng ô dấu hiệu", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  const ks = page.getByTestId("khao-sat-nha");
+  await ks.getByLabel(/Vẽ mặt bằng/).check();
+  const ve = ks.getByTestId("ve-mat-bang");
+  await ve.getByTestId("cach-lam-ve_mat_bang").getByTestId("cach-lam-mo").click();
+  await expect(ve).toContainText("Hàng trên cùng là mặt trước nhà");
+  await ve.getByLabel("Ảnh mặt bằng làm nền (chỉ hiện trên máy)").setInputFiles({ name: "mat-bang.png", mimeType: "image/png", buffer: PNG_1 });
+  await expect(ve.getByTestId("anh-mat-bang")).toContainText("Đổi ảnh mặt bằng");
+  await expect(ve.locator("img[src^='blob:']")).toHaveCount(1);        // ảnh là blob trên máy, không có URL máy chủ
+  await ve.getByRole("button", { name: "Xoay ảnh 90 độ" }).click();
+  await expect(ve.locator("img[src^='blob:']")).toHaveAttribute("style", /rotate\(90deg\)/);
+  await ve.getByRole("button", { name: "Bỏ ảnh" }).click();
+  await expect(ve.locator("img")).toHaveCount(0);
+  // P6: hỏi nhanh theo ý định — sức khoẻ → câu đầu là xà ngang; "Có" tích ô dấu hiệu, "Không" bỏ tích
+  const hn = ks.getByTestId("hoi-nhanh-anh");
+  await hn.getByTestId("hoi-nhanh-suc_khoe").click();
+  const cau = hn.getByTestId("hoi-nhanh-cau").getByRole("listitem");
+  await expect(cau).toHaveCount(5);
+  await expect(cau.first()).toContainText("xà ngang");
+  await cau.first().getByRole("radio", { name: "Có" }).click();
+  await expect(ks.getByRole("checkbox", { name: /Giường hoặc bàn làm việc nằm ngay dưới xà ngang/ })).toBeChecked();
+  await cau.first().getByRole("radio", { name: "Không", exact: true }).click();
+  await expect(ks.getByRole("checkbox", { name: /Giường hoặc bàn làm việc nằm ngay dưới xà ngang/ })).not.toBeChecked();
+  await hn.getByLabel("Chụp hoặc chọn ảnh góc nhà (chỉ hiện trên máy)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
+  await expect(hn.getByRole("img", { name: /Góc nhà bạn vừa chụp/ })).toBeVisible();
+  // không có yêu cầu mạng nào mang ảnh: tổng số request tới /api không đổi khi chọn ảnh (chỉ kiểm nhanh qua localStorage không chứa blob)
+  expect(await page.evaluate(() => JSON.stringify(localStorage))).not.toContain("blob:");
+});
+
+test("UI-PT2 D/E: lưu hai căn → So hai căn hai cột không điểm số; Chia sẻ thẻ nhà → mã chỉ hướng/mức, trang nhận, ảnh PNG", async ({ page, request }) => {
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  const o = page.getByTestId("do-huong");
+  await o.getByLabel("Độ hướng nhà").fill("180");
+  await o.getByRole("button", { name: "Xem" }).click();
+  await expect(page.getByTestId("ket-qua-do-huong")).toContainText("Nam");
+  const ht = page.getByTestId("hanh-trinh-nha");
+  await ht.getByTestId("luu-can-so").click();
+  await expect(ht.getByTestId("can-0")).toBeVisible();
+  await expect(ht.getByTestId("luu-can-so")).toContainText("Cập nhật căn này");
+  // căn thứ hai: xem nhà khác (xoá hồ sơ đang xem), đo 45° rồi lưu
+  await ht.getByRole("button", { name: "Xoá nhà đã lưu trên máy" }).click();
+  await ht.getByRole("button", { name: "Xoá", exact: true }).click();
+  await o.getByLabel("Độ hướng nhà").fill("45");
+  await o.getByRole("button", { name: "Xem" }).click();
+  await expect(page.getByTestId("ket-qua-do-huong")).toContainText("Đông Bắc");
+  await ht.getByTestId("luu-can-so").click();
+  await expect(ht.getByTestId("can-1")).toBeVisible();
+  await ht.getByTestId("mo-so-hai-can").click();
+  const so = page.getByTestId("so-hai-can");
+  await expect(so.getByTestId("so-can-0").getByTestId("so-can-chuong")).toBeVisible();
+  await expect(so.getByTestId("so-can-1").getByTestId("so-can-chuong")).toBeVisible();
+  await expect(so.getByTestId("so-can-0")).toContainText("hướng Nam");
+  await expect(so.getByTestId("so-can-1")).toContainText("hướng Đông Bắc");
+  await expect(so).not.toContainText(/\d+\s*\/\s*100/);               // không điểm số
+  // đổi căn đang xem từ chip → hồ sơ nhà hiện tại đổi hướng, ô hướng của bài đọc điền lại theo căn vừa chọn
+  await ht.getByTestId("can-0").click();
+  expect((await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"))).huong_do).toBe(180);
+  const nha = page.getByTestId("nha-cua-ban");
+  await expect(nha.getByLabel("Độ hướng nhà cho bài đọc")).toHaveValue("180");
+
+  // P7: thẻ chia sẻ nhà từ bài đọc
+  await nha.getByRole("button", { name: "Đọc nhà của tôi" }).click();
+  await expect(nha.getByTestId("bao-cao-nha")).toBeVisible();
+  await nha.getByTestId("mo-chia-se-nha").click();
+  await nha.getByLabel("Tên trên thẻ (không bắt buộc)").fill("Lan");
+  await nha.getByTestId("tao-the-nha").click();
+  const link = await nha.getByTestId("link-the-nha").inputValue();
+  expect(link).toMatch(/\/the\/nha\/[A-Za-z0-9_-]+\.[A-Za-z0-9_-]{16}\?tu=nh\.[0-9a-f]{10}/);
+  const ma = decodeURIComponent(link.split("/the/nha/")[1]!.split("?")[0]!);
+  const than = Buffer.from(ma.split(".")[0]!, "base64url").toString("utf8");
+  for (const s of ["1990", "180", "05-17", "Khảm"]) expect(than).not.toContain(s);   // không năm sinh, không độ la bàn, không mệnh
+  const g = JSON.parse(than) as unknown[];
+  expect(g[1]).toBe("Lan");
+  expect(g[2]).toBe(4);                                                   // hướng Nam = chỉ số 4 trong 8 hướng
+  const html = await (await request.get(`/the/nha/${ma}`)).text();
+  expect(html).toContain("Nhà của Lan");
+  expect(html).toContain("hướng Nam");
+  expect(html).toContain(`/og/nha?ma=${ma}`);
+  for (const s of ["1990", "17/05", "Khảm"]) expect(html).not.toContain(s);
+  for (const k of ["", "&khung=doc"]) {
+    const anh = await request.get(`/og/nha?ma=${encodeURIComponent(ma)}${k}`);
+    expect(anh.status()).toBe(200);
+    expect(anh.headers()["content-type"]).toContain("image/png");
+  }
+  // mã sửa hướng → chữ ký lệch → hết hiệu lực
+  g[2] = ((g[2] as number) + 1) % 8;
+  const sua = `${Buffer.from(JSON.stringify(g)).toString("base64url")}.${ma.split(".")[1]}`;
+  expect(await (await request.get(`/the/nha/${sua}`)).text()).toContain("Thẻ không còn hiệu lực");
+  // API trực tiếp: thiếu hướng nhà → 422 rõ ràng
+  const r = await request.post("/api/chia-se/nha", { data: { sinh: { birth_date: "1990-05-17", gender: "nam" }, nha: {}, ten_hien_thi: "A" } });
+  expect(r.status()).toBe(422);
 });

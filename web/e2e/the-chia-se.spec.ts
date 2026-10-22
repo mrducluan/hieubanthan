@@ -98,7 +98,7 @@ test("mọi ảnh thẻ trả PNG (ngang + dọc), kể cả không mã", async 
   const ngay = await (await request.post("/api/chia-se/ngay", { data: { ten_hien_thi: "Ánh", ngay: 17, thang: 5, nam: 1990 } })).json();
   const ma = encodeURIComponent(the.ma), mn = encodeURIComponent(ngay.ma);
   for (const d of [`/og?ma=${ma}`, `/og?ma=${ma}&khung=doc`, `/og?ma=${ma}&kieu=moi`, "/og?tieu_de=Th%E1%BB%AD", "/og",
-    `/og/ngay?ma=${mn}`, `/og/ngay?ma=${mn}&khung=doc&tu=hn.0123456789`, "/og/ngay", "/og/hai"]) {
+    `/og/ngay?ma=${mn}`, `/og/ngay?ma=${mn}&khung=doc&tu=hn.0123456789`, "/og/ngay", "/og/hai", "/og/nha", "/og/nha?khung=doc"]) {
     const r = await request.get(d);
     expect(r.status(), d).toBe(200);
     expect(r.headers()["content-type"], d).toContain("image/png");

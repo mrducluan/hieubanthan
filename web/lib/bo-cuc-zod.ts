@@ -28,3 +28,27 @@ export const BoCucZ = z.object({
 }).strict();
 /** Q4: câu giải thích dấu hiệu đưa lên trước — theo sách xưa hay theo đời sống (ánh sáng, gió, tiếng ồn). */
 export const GocNhinZ = z.enum(["sach_xua", "doi_song"]);
+
+/** Đầu vào /api/phongthuy/luan-giai (PT-ĐS) — dùng chung với /api/chia-se/nha (UI-PT2 P7: máy chủ đọc lại rồi ký thẻ). */
+export const SinhZ = z.object({
+  birth_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+  birth_year: z.number().int().min(1860).max(2150).optional(),
+  gender: z.enum(["nam", "nu"]),
+  moc_nam: z.enum(["lap_xuan", "tet_viet", "tet_trung"]).optional(),
+}).strict();
+export const LuanGiaiPTZ = z.object({
+  sinh: SinhZ.optional(),
+  nha: z.object({
+    huong_do: Do.optional(),
+    huong: z.enum(["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]).optional(),
+    nam_xay: z.number().int().min(1864).max(2150).optional(),
+    toa: z.string().max(10).optional(),
+    theo: z.enum(["cua", "ban_cong"]).optional(),
+    bo_cuc: BoCucZ.optional(),
+  }).strict(),
+  thanh_vien: z.array(SinhZ.extend({ vai: z.enum(["vo", "chong", "con", "cha_me", "khac"]).optional() }).strict()).max(6).optional(),
+  ngay_xem: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+  // Q4 góc nhìn giải thích dấu hiệu · đồ thị tri thức: ý định chung → mục "Theo điều bạn đang băn khoăn".
+  goc_nhin: GocNhinZ.optional(),
+  y_dinh: z.string().regex(/^[a-z_]{3,30}$/).optional(),
+}).strict();
