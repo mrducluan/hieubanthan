@@ -84,6 +84,9 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
         <div>
           <h2 id="tieu-de-hk" className="text-2xl">Huyền Không phi tinh <span className="text-base text-fg-faint" style={{ fontFamily: "var(--font-han), serif" }}>玄空飛星</span></h2>
           <p className="text-sm text-fg-muted">Bàn sao theo năm xây (hoặc năm dọn vào) và hướng nhà — không cần ngày sinh.</p>
+          {nhaLuu?.loai_nha === "can_ho" && (
+            <p className="mt-1 text-xs text-fg-faint" data-testid="hk-can-ho">Căn hộ: toạ – hướng lấy theo mặt thoáng (ban công) của căn, năm xây lấy năm bàn giao toà nhà hoặc năm bạn dọn vào — hai cách cho bàn sao khác nhau, kết quả là tham khảo.</p>
+          )}
         </div>
       </div>
 

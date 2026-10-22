@@ -35,3 +35,12 @@ export const MAU_MUC_HAI: Record<string, string> = {
   de_hoa_hop: "#6fd3b5", hop_neu_hieu: "#e9c46a", can_dung_hoa_nhieu: "#f5aa50", nhieu_khac_biet: "#e0965a",
 };
 export const tenHai = (a: string, b: string) => [a.trim() || "Bạn", b.trim() || "Người ấy"] as const;
+
+/** UI-PT2 P7 — thẻ "Nhà của bạn": nhãn + màu mức (cùng tông chip-muc của web, không đỏ). */
+export const TEN_PHONG_THE: Record<string, string> = {
+  cua_chinh: "Cửa chính", phong_ngu_chinh: "Phòng ngủ", bep: "Bếp", ve_sinh: "Nhà vệ sinh", ban_tho: "Bàn thờ", phong_lam_viec: "Làm việc",
+};
+export const TEN_LOAI_NHA_THE: Record<string, string> = { nha_pho: "nhà phố", can_ho: "căn hộ", biet_thu: "biệt thự", nha_cap4: "nhà cấp 4", khac: "nhà" };
+export const NHAN_MUC_THE: Record<string, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần lưu ý" };
+export const MAU_MUC_THE: Record<string, string> = { thuan: "#6fd3b5", can_bang: "#aab4d6", can_chu_dong: "#f5aa50" };
+export const tenNhaThe = (t: string) => (t.trim() ? `Nhà của ${t.trim()}` : "Nhà của bạn");

@@ -210,6 +210,62 @@ export function docMaBanDo(ma: string, homNay = new Date()): NoiDungMaBanDo | nu
   }
 }
 
+// ---------------------------------------------------------------- UI-PT2 P7: thẻ "Nhà của bạn"
+// Mã riêng miền "nha|". Chỉ mang: tên hiển thị (người dùng tự gõ, có thể trống), hướng nhà (1 trong 8), loại nhà, mức
+// "ngôi nhà này với bạn" và ≤ 6 phòng [phòng, phương, mức] — engine chấm, máy chủ ký. KHÔNG địa chỉ, toạ độ, độ la bàn
+// chính xác, năm xây, năm sinh, mệnh quái (mệnh + giới tính suy ra được khoảng năm sinh).
+export const HUONG_8 = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] as const;
+export const CUNG_9 = [...HUONG_8, "Trung cung"] as const;
+export const LOAI_NHA_THE = ["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"] as const;
+export const MUC_THE = ["thuan", "can_bang", "can_chu_dong"] as const;
+export const PHONG_THE = ["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "phong_lam_viec"] as const;
+
+export const NoiDungMaNha = z.object({
+  v: z.literal(1),
+  t: z.string().trim().max(24),
+  h: z.enum(HUONG_8),
+  l: z.enum(LOAI_NHA_THE).nullable(),
+  /** Mức chương "Ngôi nhà này với bạn" (null khi chưa có năm sinh). */
+  m: z.enum(MUC_THE).nullable(),
+  /** Phòng: [mã phòng, phương, mức]. */
+  p: z.array(z.tuple([z.enum(PHONG_THE), z.enum(CUNG_9), z.enum(MUC_THE).nullable()])).max(6),
+  d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});
+export type NoiDungMaNha = z.infer<typeof NoiDungMaNha>;
+
+const kyNha = (than: string) => b64u(createHmac("sha256", khoa()).update(`nha|${than}`).digest()).slice(0, 16);
+const idx = <T extends readonly string[]>(ds: T, v: string | null) => (v == null ? -1 : ds.indexOf(v as T[number]));
+
+/** Gói: [1, t, hướng, loại, mức, [[phòng, phương, mức], …], số ngày từ 1/1/2026] — chỉ số thay chữ để link ngắn. */
+export function kyMaNha(nd: Omit<NoiDungMaNha, "v" | "d">, homNay = new Date()): string {
+  const x = NoiDungMaNha.parse({ ...nd, v: 1, d: homNay.toISOString().slice(0, 10) });
+  const goi = [1, x.t, HUONG_8.indexOf(x.h), idx(LOAI_NHA_THE, x.l), idx(MUC_THE, x.m),
+    x.p.map(([ph, c, m]) => [PHONG_THE.indexOf(ph), CUNG_9.indexOf(c), idx(MUC_THE, m)]),
+    Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
+  return `${than}.${kyNha(than)}`;
+}
+
+export function docMaNha(ma: string, homNay = new Date()): NoiDungMaNha | null {
+  const [than, chu_ky] = ma.split(".");
+  if (!than || !chu_ky || ma.length > 400) return null;
+  const a = Buffer.from(chu_ky), b = Buffer.from(kyNha(than));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown[];
+    if (!Array.isArray(g) || g.length !== 7 || !Array.isArray(g[5])) return null;
+    const tai = <T extends readonly string[]>(ds: T, i: unknown) => (typeof i === "number" && i >= 0 ? ds[i] ?? null : null);
+    const nd = NoiDungMaNha.parse({
+      v: g[0], t: g[1], h: tai(HUONG_8, g[2]), l: tai(LOAI_NHA_THE, g[3]), m: tai(MUC_THE, g[4]),
+      p: (g[5] as unknown[][]).map((r) => [tai(PHONG_THE, r[0]), tai(CUNG_9, r[1]), tai(MUC_THE, r[2])]),
+      d: new Date(NGAY_GOC + Number(g[6]) * 86_400_000).toISOString().slice(0, 10),
+    });
+    return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Mã ?tu= suy ra từ mã thẻ (tiền tố 2 chữ + 10 hex) — để ảnh (QR), trang nhận và nút chia sẻ cùng một mã gán nguồn
  *  mà không cần lưu gì. Chỉ là nhãn đo lường (không bí mật), không định danh người. */
 export function tuTuMa(tienTo: string, ma: string): string {

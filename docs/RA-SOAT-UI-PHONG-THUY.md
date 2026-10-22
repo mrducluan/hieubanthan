@@ -154,3 +154,77 @@ mới nên để chủ dự án tích.
   hết trần mức, hoàn tác → trần quay lại; hành trình trạng thái + đặt tên + xoá nhà.
 - Deploy **engine trước web** (web gửi `co: false` và đọc `du_nien_y`; engine cũ bỏ qua hai thứ này không lỗi nhưng
   nút "Đã xử lý" sẽ không gỡ được dấu hiệu suy từ mặt bằng cho tới khi engine mới lên).
+
+
+## 7. Đợt 2 (UI-PT2, 2026-10-22) — chủ dự án duyệt "làm theo phương án đề xuất" + bốn câu hỏi
+
+Chủ dự án hỏi thêm: (1) UI đã tốt nhất cho người có nhu cầu xem phong thuỷ chưa, đối chiếu kho tri thức; (2) nhập liệu
+có dễ, có hướng dẫn chưa; (3) tải lên, định vị, đọc hình ảnh để engine tính chưa; (4) phải có lựa chọn nhà phố và chung
+cư; bố cục thuận tiện. Trả lời từng câu bằng việc đã làm trong đợt này.
+
+### 7.1 Kho tri thức ↔ UI (đối chiếu `phongthuy_kb.json`, `phongthuy_do_thi.json`, hỏi đáp)
+
+| Kho tri thức | Có trong UI? | Ghi chú / việc đã làm |
+|---|---|---|
+| `bo_tri` 33 mục | 20 mục là dấu hiệu khai được ở Khảo sát (`DAU_HIEU`); **13 mục còn lại** (`tu_linh`, `ban_tho`, `phong_lam_viec`, `phong_tre`, `nguoi_gia`, `vo_chong_ngu`, `cai_nhau`, `cua_hang`, `can_ho`, `hoa_giai`, `cau_thang_giua_nha`, `cay_truoc_cua`, `be_ca`) chỉ tới được qua **hỏi đáp** (từ khoá) và gợi ý phòng | Đúng vai: đó là mục tình huống / lời khuyên, không phải dấu hiệu có / không. **Đề xuất kế tiếp** (chưa làm): `cau_thang_giua_nha`, `cay_truoc_cua`, `be_ca` có thể thành 3 ô dấu hiệu mới (cần `giai_thich_hien_dai` + `viec` + test) |
+| `bo_cuc.vi_tri_phong` 6 phòng · `huong_vat` 3 vật | Đủ: sơ đồ 9 phương + lưới 6×6 + 3 ô độ | Thiếu phòng trẻ, phòng người già (KB có lời ở `bo_tri`) — chờ người dùng hỏi nhiều mới thêm, tránh form dài |
+| `quy_tac_thuc_hanh` 7 luật | Có: áp theo `loai_nha` + dấu hiệu, hiện ở Khảo sát | Đợt 2: **loại nhà chọn ngay đầu trang** nên luật căn hộ không còn phụ thuộc người dùng nhớ chọn ở form |
+| `du_nien` 8 · `quai` 8 | La bàn 8 hướng + **la bàn sống** (đợt 1) đọc "dùng cho" | — |
+| Đồ thị theo ý định (11 ý định → phòng, dấu hiệu, sao) | Đợt 1: "Theo điều bạn đang băn khoăn" trong bài đọc. **Đợt 2: P6 dùng đồ thị để chọn 3–5 câu hỏi nhanh** | `thoi_diem` không có dấu hiệu → chỉ dùng cho bài đọc |
+| `am_trach` 3 mục (mộ phần) | Không có UI, chỉ hỏi đáp | Đúng chủ ý: ngoài phạm vi "nhà ở", không mở công cụ |
+| `giai_thich` 12 mục (vì sao Bát trạch, Huyền Không, khoa học…) | Có trong hỏi đáp + "Vì sao nói vậy" | — |
+| Huyền Không: 81 tổ hợp, lưu niên, lưu nguyệt, an toàn | Bàn 3×3 + báo cáo + thẻ "Tháng này nhà bạn" | Căn hộ: thêm ghi chú lấy toạ – hướng theo mặt thoáng, năm bàn giao / dọn vào |
+
+Kết luận: không còn mảng tri thức nào "có trong KB mà người dùng không với tới được"; phần chưa có ô nhập là chủ ý (âm
+trạch, tình huống chỉ qua hỏi đáp).
+
+### 7.2 Nhập liệu + hướng dẫn (câu 2) — đã làm
+
+- **Chọn loại nhà ngay đầu trang** (Hành trình nhà bạn): Nhà phố · Chung cư · Biệt thự · Nhà cấp 4 · Khác → lưu `loai_nha`
+  vào hồ sơ nhà; chọn Chung cư thì: chỗ đo mặc định là ban công (`theo = ban_cong`), lời dẫn đo hướng đổi, nút bản đồ
+  đổi tên, Khảo sát điền sẵn loại nhà (luật căn hộ tự áp), Huyền Không có ghi chú cách lấy toạ – hướng – năm.
+- **"Cách làm (30 giây)"** gập ở 4 chỗ: đo hướng (nhà phố / căn hộ hai bản), lấy hướng từ bản đồ, vẽ mặt bằng, đặt phòng
+  + dấu hiệu — mỗi chỗ 3 bước có hình vẽ nét, một dòng lưu ý. Chỉ hướng dẫn thao tác, không thêm dữ kiện phong thuỷ.
+- Các ô nhập vẫn ở từng khối (không gộp) nhưng đều điền sẵn từ hồ sơ nhà; thẻ hành trình cho thấy ô nào đã có.
+
+### 7.3 Tải lên · định vị · đọc hình ảnh (câu 3) — đã làm phần an toàn, nói rõ phần chưa
+
+| Việc | Trạng thái | Cách làm trong đợt 2 |
+|---|---|---|
+| **Tải ảnh mặt bằng** | ✅ trên máy | Chọn / chụp ảnh mặt bằng → đặt làm **nền mờ dưới lưới 6×6** để tô theo (xoay 90°, chỉnh độ rõ, bỏ ảnh). Ảnh là `blob:` trong trình duyệt, **không tải lên máy chủ**, không lưu (`URL.revokeObjectURL` khi bỏ). Engine chỉ nhận lưới ô đã tô. |
+| **Định vị** | ✅ | Nút "Lấy vị trí hiện tại" cho tâm nhà và điểm trước mặt nhà (GPS điện thoại, hỏi quyền), báo độ chính xác ±m và cảnh báo khi > 15 m; toạ độ chỉ đi qua lượt gọi `/huong-ban-do` để tính góc, không lưu. |
+| **Chụp ảnh góc nhà → trả lời câu hỏi** (P6) | ✅ trên máy | Chọn điều băn khoăn → đồ thị tri thức chọn 3–5 câu có / không đúng phòng; ảnh chỉ hiện để người dùng nhìn mà trả lời. Câu "Có" tích thẳng vào ô dấu hiệu. |
+| **Máy tự đọc ảnh để điền dấu hiệu / mặt bằng** (PT-V2) | ⏳ chưa | Cần mô hình thị giác = gửi ảnh nhà ra nhà cung cấp ngoài (trái "không lưu ảnh người dùng", NĐ 13/2023) hoặc chạy mô hình riêng; quyết định đã ghi: chờ **50–100 bộ ảnh có phiếu đồng ý** để đánh giá, ảnh không vào git. Khi làm, kết quả máy đọc vẫn vào ô `nguon: anh` và **chỉ luận khi người dùng xác nhận** (`can_xac_nhan` đã có trong engine). |
+
+### 7.4 Nhà phố và chung cư (câu 4) — đã làm
+
+Một lựa chọn, đi suốt trang (mục 7.2). Khác biệt chung cư được thể hiện ở: chỗ đo (ban công / bản đồ), lời dẫn, luật
+thực hành (không đập kết cấu, xử lý trong cửa, hành lang chung), ghi chú Huyền Không, nhãn loại nhà trên thẻ chia sẻ.
+
+### 7.5 Ba phác thảo còn lại — đã làm
+
+- **P5 So hai căn**: "Lưu căn này để so" (≤ 3 căn, `hbt.nha.ds.v1` trên máy, căn đang xem vẫn là `hbt.nha.v1`), chip đổi
+  căn, khối "So hai căn" hai cột: mức từng chương (chip), dấu hiệu lớn, sơ đồ phòng thu nhỏ, điều quan trọng nhất —
+  **không điểm số, không "căn nào tốt hơn"**.
+- **P6 Chụp một góc, trả lời 3 câu**: mục 7.3.
+- **P7 Thẻ "Nhà của bạn"**: `/api/chia-se/nha` (máy chủ đọc lại qua engine rồi ký `nha|`), ảnh `/og/nha` (sơ đồ 3×3 tô
+  màu + mũi tên cửa + QR), trang `/the/nha/[ma]` noindex mời "Đọc nhà của bạn" → `/phong-thuy?tu=nh.…`. Mã chỉ mang tên
+  hiển thị, hướng 1/8, loại nhà, mức, ≤ 6 phòng; không địa chỉ / toạ độ / độ la bàn / năm xây / năm sinh / mệnh.
+
+### 7.6 Bố cục trang sau đợt 2
+
+```
+[Đầu trang]
+[Hành trình nhà bạn: loại nhà · 5 bước có trạng thái · căn đã lưu · So hai căn]
+[Mệnh quái + la bàn]                 ← "Bạn hợp phía nào"
+[Đo hướng: la bàn sống · Cách làm · bản đồ + GPS]   ← "Hướng nhà"
+[Nhà của bạn: bài đọc · sơ đồ nhà · Đã xử lý → trước–sau · Chia sẻ sơ đồ nhà]   ← "Nhà này với bạn"
+[Khảo sát: Cách làm · mặt bằng (ảnh nền) · 9 phương · hỏi nhanh theo ảnh · 20 dấu hiệu]   ← "Kê gì ở đâu"
+[Huyền Không (+ ghi chú căn hộ)]     ← "Khi nào sửa"
+[Góp ý · Hỏi đáp]
+```
+
+### 7.7 Đo thêm
+
+`chart_interacted{kind = chon_loai_nha | cach_lam | dinh_vi_gps | anh_mat_bang_nen | hoi_nhanh_y_dinh | hoi_nhanh_anh |
+luu_can_so | doi_can | so_hai_can | chon_can_chinh}`, `share_created{nha, nha_anh}` → `share_clicked{nh}` → `referral_signup`.

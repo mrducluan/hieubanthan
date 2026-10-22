@@ -54,7 +54,7 @@ export function PhongThuy() {
   return (
     <div>
       {dau}
-      <div className="mx-auto mb-6 max-w-3xl"><HanhTrinhNha mq={mq ? { quai: mq.quai, nhom: mq.nhom } : null} coSinh={Boolean(sinh)} /></div>
+      <div className="mx-auto mb-6 max-w-3xl"><HanhTrinhNha mq={mq ? { quai: mq.quai, nhom: mq.nhom } : null} coSinh={Boolean(sinh)} sinh={sinh} /></div>
       <section aria-label="Mệnh quái" id="menh-quai" className="mx-auto max-w-3xl scroll-mt-24 space-y-3">
           {!sinh && <XinThemDuLieu hoSo={hoSo} can="gioi_tinh" nut="Thêm giới tính" ly_do="Mệnh quái tính theo năm sinh và giới tính. Câu hỏi bố trí chung thì không cần." />}
           {sinh && !mq && !loi && <KhungTai dong={2} />}

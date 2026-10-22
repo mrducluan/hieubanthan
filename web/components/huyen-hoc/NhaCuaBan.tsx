@@ -24,7 +24,8 @@ import { NhacToi } from "@/components/khung/NhacToi";
 import { datGocNhin, TEN_GOC_NHIN, useGocNhin, type GocNhin } from "@/lib/goc-nhin-pt";
 import { SoDoNha } from "@/components/huyen-hoc/SoDoNha";
 import { NHAN_MUC } from "@/components/luan-giai/kieu";
-import type { HoSoNha } from "@/lib/ho-so-nha";
+import { boCucGui, type HoSoNha } from "@/lib/ho-so-nha";
+import { NutChiaSeNha } from "@/components/chia-se/NutChiaSeNha";
 import { Undo2, Wrench } from "lucide-react";
 
 type Sinh = { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
@@ -75,18 +76,27 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
   const [yDinh, setYDinh] = useState<string | null>(null);
   // UI-PT 4 (Y7): bài đọc TRƯỚC khi bấm "Tôi đã xử lý" một dấu hiệu lớn → so trước–sau theo chương.
   const [soSanh, setSoSanh] = useState<{ truoc: BaoCao; ma: string; tieu_de: string } | null>(null);
+  // UI-PT2 P7: đầu vào của bài đọc đang hiện — máy chủ đọc lại rồi ký thẻ chia sẻ (không ký ở trình duyệt).
+  const [yeuCau, setYeuCau] = useState<Record<string, unknown> | null>(null);
   const gocNhin = useGocNhin();
   useEffect(() => { if (doHuongGoiY != null) setDoHuong(String(doHuongGoiY)); }, [doHuongGoiY]);
   // KC-2: hồ sơ nhà lưu trên máy điền sẵn một lần (người dùng đổi tay thì giữ tay).
   const nhaLuu = useHoSoNha();
-  const daDien = useRef(false);
+  // UI-PT2 P5: điền lại khi đổi CĂN đang xem (id khác) — người dùng gõ tay trong cùng một căn thì giữ tay.
+  const daDien = useRef<string | null>(null);
   useEffect(() => {
-    if (!nhaLuu || daDien.current) return;
-    daDien.current = true;
-    if (nhaLuu.huong_do != null) setDoHuong(String(nhaLuu.huong_do)); else if (nhaLuu.huong) setHuong(nhaLuu.huong);
+    const khoa = nhaLuu ? `${nhaLuu.id ?? "_"}` : null;
+    if (!nhaLuu || daDien.current === khoa) return;
+    // Đổi căn thật = hai mã căn khác nhau (không phải lần điền đầu, không phải vừa "Lưu căn này để so" gắn id cho căn đang xem).
+    const doiCan = daDien.current !== null && daDien.current !== "_" && khoa !== "_";
+    const lanDau = daDien.current === null;
+    daDien.current = khoa;
+    if (!lanDau && !doiCan) return;
+    if (nhaLuu.huong_do != null) { setDoHuong(String(nhaLuu.huong_do)); setHuong(""); } else if (nhaLuu.huong) { setHuong(nhaLuu.huong); setDoHuong(""); }
     setTheo(nhaLuu.theo);
-    if (nhaLuu.nam_xay) setNamXay(String(nhaLuu.nam_xay));
-    if (nhaLuu.thanh_vien.length) setTv(nhaLuu.thanh_vien.map((x) => ({ vai: x.vai, nam: String(x.nam), gioi_tinh: x.gioi_tinh })));
+    if (nhaLuu.nam_xay || doiCan) setNamXay(nhaLuu.nam_xay ? String(nhaLuu.nam_xay) : "");
+    if (nhaLuu.thanh_vien.length || doiCan) setTv(nhaLuu.thanh_vien.map((x) => ({ vai: x.vai, nam: String(x.nam), gioi_tinh: x.gioi_tinh })));
+    if (doiCan) { setBc(null); setSoSanh(null); }
   }, [nhaLuu]);
 
   const doc = async (nhaMoi?: HoSoNha | null) => {
@@ -101,22 +111,16 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
     setDang(true);
     try {
       // Q2/Q1: bố cục đã khai ở Khảo sát nhà (hồ sơ nhà trên máy) đi kèm → báo cáo có hình thế, trần mức, việc theo chi phí.
-      const bc_luu = nhaDung?.bo_cuc;
-      const daXuLy = bc_luu?.da_xu_ly ?? [];
-      const bo_cuc = bc_luu && ((bc_luu.vi_tri && Object.keys(bc_luu.vi_tri).length) || bc_luu.dau_hieu?.length || bc_luu.mat_bang || daXuLy.length)
-        ? { ...(d != null ? { huong_nha_do: d } : huong ? { huong_nha: huong } : {}), ...(nhaDung?.loai_nha ? { loai_nha: nhaDung.loai_nha } : {}),
-            vi_tri: bc_luu.vi_tri ?? {}, huong_do: bc_luu.huong_do ?? {},
-            // UI-PT 4: dấu hiệu đã xử lý gửi co:false — engine không luận lại dù mặt bằng suy ra (trần mức gỡ).
-            dau_hieu: Object.fromEntries([...(bc_luu.dau_hieu ?? []).filter((m) => !daXuLy.includes(m)).map((m) => [m, { co: true, nguon: "nguoi_dung" }]),
-              ...daXuLy.map((m) => [m, { co: false, nguon: "nguoi_dung" }])]),
-            ...(bc_luu.mat_bang ? { mat_bang: bc_luu.mat_bang } : {}) }
-        : null;
-      const r = await postJson<BaoCao>("/api/phongthuy/luan-giai", {
+      // Q2/Q1: bố cục đã khai ở Khảo sát nhà (hồ sơ nhà trên máy) + dấu hiệu đã xử lý (UI-PT 4) — một hàm dựng chung (lib/ho-so-nha).
+      const bo_cuc = boCucGui(nhaDung, d != null ? { huong_do: d } : huong ? { huong } : {});
+      const yc = {
         ...(sinh ? { sinh } : {}),
         nha: { ...(d != null ? { huong_do: d } : huong ? { huong } : {}), ...(nx != null ? { nam_xay: nx } : {}), theo, ...(bo_cuc ? { bo_cuc } : {}) },
         ...(thanh_vien.length ? { thanh_vien } : {}),
         goc_nhin: gocNhin, ...(yDinh ? { y_dinh: yDinh } : {}),
-      });
+      };
+      const r = await postJson<BaoCao>("/api/phongthuy/luan-giai", yc);
+      setYeuCau(yc);
       setBc(r);
       // KC-2: nhớ nhà trên máy để Hôm nay, Khảo sát, Huyền Không dùng chung (không gửi máy chủ).
       try {
@@ -222,6 +226,7 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
 
       {bc && <BaoCaoNha bc={bc} soSanh={soSanh} onDaXuLy={daXuLy} onHoanTac={hoanTac} dang={dang} />}
       {bc && <LuuNhaTaiKhoan />}
+      {bc && yeuCau && <NutChiaSeNha yeuCau={yeuCau} />}
     </section>
   );
 }
