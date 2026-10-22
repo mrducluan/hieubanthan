@@ -9,9 +9,9 @@ import { xemKb, type NguonKb } from "../lib/kb-trang";
 import { kiemTrang } from "../lib/noi-dung-trang";
 import { regexMau } from "../lib/so-trang";
 import { baoWebLamMoi } from "../lib/web";
-import { NHOM_TRANG, tabKhoi } from "./NoiDungTrang";
+import { locChu, NHOM_TRANG, tabChu, tabKhoi } from "./NoiDungTrang";
 
-const HE_THONG = ["mau_duong", "nhom", "ten", "bien", "o", "nguon_kb", "tren_web"] as const;
+const HE_THONG = ["mau_duong", "nhom", "ten", "bien", "o", "nguon_kb", "tren_web", "mac_dinh"] as const;
 type Doc = Record<string, unknown> & { mau_duong?: string; bien?: unknown; _status?: string };
 const xuatBan = (d: unknown) => (d as { _status?: string } | undefined)?._status === "published";
 const docChi = (f: Field): Field => ({ ...f, access: { update: () => false } } as Field);
@@ -64,8 +64,10 @@ export const MauCum: CollectionConfig = {
   },
   hooks: {
     beforeValidate: [({ data }) => (data ? chuanHoaDuLieu(data) : data)],
-    beforeChange: [giuHeThong, kiemDinh],
+    beforeChange: [giuHeThong, locChu, kiemDinh],
     afterChange: [lamMoi],
+    // Xoá mẫu cụm (Chủ biên) → web bỏ khối của cụm ngay, không chờ hạn cache 5 phút.
+    afterDelete: [async ({ doc }) => { await baoWebLamMoi("mau_cum"); return doc; }],
   },
   endpoints: [
     {
@@ -77,7 +79,7 @@ export const MauCum: CollectionConfig = {
         const duong = String(new URL(req.url ?? "http://x").searchParams.get("duong") ?? "").slice(0, 200);
         const ds = await req.payload.find({ collection: "mau-cum", limit: 50, depth: 0, overrideAccess: true, req });
         const m = ds.docs.find((x) => regexMau(String(x.mau_duong)).test(duong)) as unknown as (Doc & { nguon_kb?: NguonKb }) | undefined;
-        if (!m?.nguon_kb) return Response.json({ loi: "Đường dẫn không thuộc mẫu cụm nào." }, { status: 404 });
+        if (!m?.nguon_kb?.kieu) return Response.json({ loi: "Đường dẫn không thuộc mẫu cụm nào." }, { status: 404 });
         return Response.json(await xemKb(m.nguon_kb, duong.split("/").pop()!, duong));
       },
     },
@@ -91,8 +93,11 @@ export const MauCum: CollectionConfig = {
       description: "Gõ {ten_bien} trong chữ khối, web thay bằng giá trị của từng trang. Biến lạ giữ nguyên chữ." } }),
     docChi({ name: "o", label: "Vị trí khối", type: "json", admin: { hidden: true } }),
     docChi({ name: "nguon_kb", label: "Nguồn kho tri thức", type: "json", admin: { hidden: true } }),
-    { type: "ui", name: "xem_kb", label: "Nội dung kho tri thức", admin: { components: { Field: "/components/XemTruocKb#XemTruocKb" } } },
-    { type: "tabs", tabs: [tabKhoi(() => true, false)] },
+    docChi({ name: "mac_dinh", label: "Chữ mặc định trong code", type: "json", admin: { hidden: true } }),
+    // Cụm không dựng từ kho tri thức (trang con công cụ, tác giả) không có khung xem trước KB.
+    { type: "ui", name: "xem_kb", label: "Nội dung kho tri thức", admin: { condition: (d) => Boolean((d?.nguon_kb as { kieu?: string } | undefined)?.kieu),
+      components: { Field: "/components/XemTruocKb#XemTruocKb" } } },
+    { type: "tabs", tabs: [tabChu, tabKhoi(() => true, false)] },
     { name: "ghi_chu_kiem_dinh", label: "Kiểm định", type: "textarea",
       access: { read: ({ req }) => laNguoiViet(req) },   // hook kiemDinh ghi đè mỗi lần lưu
       admin: { readOnly: true, position: "sidebar", description: "⛔ = chặn xuất bản · ⚠ = nên xem lại." } },

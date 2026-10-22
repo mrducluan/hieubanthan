@@ -421,6 +421,44 @@ test("ND-2/ND-3: trang công cụ + trang tĩnh đọc 'Trang website' — SEO, 
   await choWeb(request, "/gioi-thieu", (s, b) => s === 200 && !b.includes("Thân mục sứ mệnh từ CMS.") && b.includes("Giới thiệu &amp; phương pháp"));
 });
 
+test("ND-7: chữ trên trang — tab trong CMS, sửa chip + hàng bảng trang chủ, mẫu cụm trang ngày đặt khối + đổi tiêu đề; gỡ xuất bản → chữ code", async ({ page, request }) => {
+  const token = await tokenQt(request);
+  const h = { Authorization: `JWT ${token}` };
+  const tim = async (c: string, k: string, v: string) => (await (await request.get(
+    `${CMS}/api/${c}?where[${k}][equals]=${encodeURIComponent(v)}&depth=0&draft=true`, { headers: h })).json()).docs[0] as { id: number; mac_dinh?: { chu?: Record<string, unknown> } };
+  const chu = await tim("noi-dung-trang", "duong", "/");
+  expect(Object.keys(chu.mac_dinh?.chu ?? {}).length).toBeGreaterThan(30);   // đồng bộ đã mang bảng chữ trang chủ sang CMS
+
+  // giao diện: tab "Chữ trên trang" liệt kê chữ gốc + ô gõ
+  await dangNhap(page);
+  await page.goto(`${CMS}/admin/collections/noi-dung-trang/${chu.id}`);
+  await page.locator(".tabs-field__tab-button", { hasText: "Chữ trên trang" }).click();
+  await expect(page.getByTestId("chu-tren-trang")).toContainText("Gốc: 30 giây · không cần tài khoản");
+
+  const r = await request.patch(`${CMS}/api/noi-dung-trang/${chu.id}`, { headers: h, data: {
+    _status: "published", chu: { "dau.chip_1": "Một phút là xong", "so_sanh.hang_1_ai": "Hàng chatbot sửa từ CMS", "khoa.la": "bỏ" } } });
+  expect(r.status(), await r.text()).toBe(200);
+  expect((await r.json()).doc.chu).toEqual({ "dau.chip_1": "Một phút là xong", "so_sanh.hang_1_ai": "Hàng chatbot sửa từ CMS" });
+  await choWeb(request, "/", (s, b) => s === 200 && b.includes("Một phút là xong") && b.includes("Hàng chatbot sửa từ CMS"));
+
+  // mẫu cụm trang ngày: đổi tiêu đề cho cả cụm (biến {ngay}) + khối phía trên
+  const mau = await tim("mau-cum", "mau_duong", "/xem-ngay-tot/{ngay}");
+  const m = await request.patch(`${CMS}/api/mau-cum/${mau.id}`, { headers: h, data: {
+    _status: "published", chu: { "dau.tieu_de": "Ngày {ngay} có hợp việc lớn không?" },
+    khoi_tren: [{ blockType: "van_ban", noi_dung: "Khối cụm ngày từ CMS ({ngay})." }] } });
+  expect(m.status(), await m.text()).toBe(200);
+  await choWeb(request, "/xem-ngay-tot/2026-10-21", (s, b) => s === 200 && b.includes("Ngày 21/10/2026 có hợp việc lớn không?"));
+  await page.goto(`${WEB}/xem-ngay-tot/2026-10-21`);
+  await expect(page.locator("h1")).toHaveText("Ngày 21/10/2026 có hợp việc lớn không?");
+  await expect(page.getByTestId("khoi-cms-tren")).toContainText("Khối cụm ngày từ CMS (21/10/2026).");
+
+  for (const [c, id] of [["noi-dung-trang", chu.id], ["mau-cum", mau.id]] as const) {
+    expect((await request.patch(`${CMS}/api/${c}/${id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
+  }
+  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Một phút là xong") && b.includes("30 giây · không cần tài khoản"));
+  await choWeb(request, "/xem-ngay-tot/2026-10-21", (s, b) => s === 200 && b.includes("Ngày 21/10/2026 tốt hay xấu?"));
+});
+
 test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức, ghi đè một URL ẩn khối mẫu; pháp lý sửa mục + ngày hiệu lực, bắt buộc tích đối chiếu", async ({ page, request }) => {
   const token = await tokenQt(request);
   const h = { Authorization: `JWT ${token}` };
@@ -452,6 +490,7 @@ test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức
     await expect(page.getByTestId("khoi-cms-tren")).toHaveText(`Mẫu cụm: bạn đang đọc ${td} & thêm.`);   // biến thay đúng, không "&amp;"
     const img = page.getByTestId("khoi-cms-duoi").locator("img");
     await expect(img).toHaveAttribute("alt", "Ảnh minh hoạ ND-5");
+    await img.scrollIntoViewIfNeeded();   // ảnh loading="lazy": nằm xa dưới màn hình thì trình duyệt chưa tải
     await expect.poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);   // CSP cho tải ảnh CMS
     await expect(page.getByTestId("khoi-cms-cuoi").getByRole("link", { name: /Gieo quẻ/ })).toHaveAttribute("href", "/kinh-dich");
   }

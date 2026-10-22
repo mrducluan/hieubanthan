@@ -1,0 +1,48 @@
+// ND-7 — bảng chữ các cụm trang con của công cụ (trang theo ngày / tháng / năm / năm sinh) — một bảng cho CẢ CỤM, sửa ở
+// CMS → Mẫu cụm trang → tab "Chữ trên trang"; muốn riêng một URL thì tạo ghi đè. {bien} = giá trị của từng trang.
+// Tiêu đề trình duyệt + mô tả SEO của các trang này vẫn dựng trong code (đồng bộ với sitemap/rà SEO).
+import type { BangChu } from "@/lib/chu-trang";
+
+const D = "Đầu trang", C = "Cuối trang";
+const cuoiLich: BangChu = {
+  "cuoi.chu": { nhom: C, nhan: "Đoạn cuối trang (trước link)", toi_da: 300,
+    mac_dinh: "Hoàng lịch tính theo giờ Việt Nam, bảng nghi/kỵ theo sách Hiệp kỷ biện phương thư, kèm ngày kiêng dân gian Việt. Cách đọc, giờ hoàng đạo, ngày Tam nương và câu hỏi thường gặp:" },
+  "cuoi.link": { nhom: C, nhan: "Chữ link về trang chính", mac_dinh: "Xem ngày tốt hôm nay", toi_da: 60 },
+};
+
+export const CHU_NGAY = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Hoàng lịch", toi_da: 60 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({ngay} = dd/mm/yyyy)", mac_dinh: "Ngày {ngay} tốt hay xấu?", toi_da: 120 },
+  ...cuoiLich,
+} as const satisfies BangChu;
+
+export const CHU_THANG = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Xem ngày tốt", toi_da: 60 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({thang}, {nam})", mac_dinh: "Lịch ngày tốt tháng {thang}/{nam}", toi_da: 120 },
+  "dau.mo_ta": { nhom: D, nhan: "Lời dẫn", mac_dinh: "Bấm vào một ngày để xem giờ hoàng đạo, việc nên làm và nên kiêng.", toi_da: 300 },
+  "dep.tieu_de": { nhom: "Ngày đẹp trong tháng", nhan: "Tiêu đề mục", mac_dinh: "Ngày hoàng đạo có trực tốt trong tháng", toi_da: 100 },
+  "dep.mo_ta": { nhom: "Ngày đẹp trong tháng", nhan: "Giải thích dưới tiêu đề", toi_da: 400,
+    mac_dinh: "Hoàng đạo, trực Thành/Khai/Định/Mãn/Trừ, không rơi vào Tam nương, Nguyệt kỵ, Dương công. Việc cụ thể (cưới hỏi, khai trương…) nên bấm vào ngày để xem mục nên/kiêng." },
+  ...cuoiLich,
+} as const satisfies BangChu;
+
+export const CHU_LAM_NHA_CON = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi} tuổi, {can_chi_nam} năm làm)", mac_dinh: "Tuổi {can_chi} · năm {can_chi_nam}", toi_da: 80 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam_sinh}, {nam})", mac_dinh: "Tuổi {nam_sinh} làm nhà năm {nam} được không?", toi_da: 120 },
+  "cuoi.chu": { nhom: C, nhan: "Chữ trước link công cụ", mac_dinh: "Tính cho chính xác theo ngày sinh của bạn:", toi_da: 120 },
+  "cuoi.link": { nhom: C, nhan: "Chữ link công cụ", mac_dinh: "công cụ xem tuổi làm nhà", toi_da: 60 },
+  "cuoi.nam_sau": { nhom: C, nhan: "Link năm sau ({nam_sau})", mac_dinh: "năm {nam_sau}", toi_da: 40 },
+} as const satisfies BangChu;
+
+export const CHU_XONG_DAT_CON = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi_nam} Tết, {can_chi} gia chủ)", mac_dinh: "Tết {can_chi_nam} · gia chủ {can_chi}", toi_da: 80 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam}, {nam_sinh})", mac_dinh: "Tuổi xông đất năm {nam} cho gia chủ sinh năm {nam_sinh}", toi_da: 120 },
+  "cuoi.chu": { nhom: C, nhan: "Chữ trước link công cụ", mac_dinh: "Tính theo ngày sinh đầy đủ của gia chủ:", toi_da: 120 },
+  "cuoi.link": { nhom: C, nhan: "Chữ link công cụ", mac_dinh: "công cụ xem tuổi xông đất", toi_da: 60 },
+} as const satisfies BangChu;
+
+export const CHU_HAN_NAM_CON = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi} = can chi năm)", mac_dinh: "Năm {can_chi}", toi_da: 60 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Hướng xấu năm {nam}", toi_da: 120 },
+  "cuoi.lam_nha": { nhom: C, nhan: "Link xem tuổi làm nhà ({nam})", mac_dinh: "Xem tuổi làm nhà năm {nam}", toi_da: 60 },
+} as const satisfies BangChu;

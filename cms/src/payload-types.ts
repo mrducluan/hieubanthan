@@ -538,7 +538,9 @@ export interface NoiDungTrang {
    */
   duong: string;
   ten?: string | null;
-  nhom?: ('cong_cu' | 'tinh' | 'phap_ly' | 'chu_de' | 'kien_thuc' | 'tuoi' | 'la_so_mau' | 'blog_khung') | null;
+  nhom?:
+    | ('cong_cu' | 'tinh' | 'phap_ly' | 'chu_de' | 'kien_thuc' | 'tuoi' | 'la_so_mau' | 'blog_khung' | 'cong_cu_con')
+    | null;
   mau?: (number | null) | MauCum;
   /**
    * Bỏ dấu = URL đã gỡ khỏi web (không tự xoá tài liệu).
@@ -626,6 +628,15 @@ export interface NoiDungTrang {
         noi_dung_html?: string | null;
         id?: string | null;
       }[]
+    | null;
+  chu?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
     | null;
   khoi_tren?:
     | (
@@ -961,7 +972,9 @@ export interface MauCum {
   id: number;
   mau_duong: string;
   ten?: string | null;
-  nhom?: ('cong_cu' | 'tinh' | 'phap_ly' | 'chu_de' | 'kien_thuc' | 'tuoi' | 'la_so_mau' | 'blog_khung') | null;
+  nhom?:
+    | ('cong_cu' | 'tinh' | 'phap_ly' | 'chu_de' | 'kien_thuc' | 'tuoi' | 'la_so_mau' | 'blog_khung' | 'cong_cu_con')
+    | null;
   tren_web?: boolean | null;
   /**
    * Gõ {ten_bien} trong chữ khối, web thay bằng giá trị của từng trang. Biến lạ giữ nguyên chữ.
@@ -985,6 +998,24 @@ export interface MauCum {
     | boolean
     | null;
   nguon_kb?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  mac_dinh?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  chu?:
     | {
         [k: string]: unknown;
       }
@@ -1853,6 +1884,7 @@ export interface NoiDungTrangSelect<T extends boolean = true> {
         noi_dung_html?: T;
         id?: T;
       };
+  chu?: T;
   khoi_tren?:
     | T
     | {
@@ -2224,6 +2256,8 @@ export interface MauCumSelect<T extends boolean = true> {
   bien?: T;
   o?: T;
   nguon_kb?: T;
+  mac_dinh?: T;
+  chu?: T;
   khoi_tren?:
     | T
     | {

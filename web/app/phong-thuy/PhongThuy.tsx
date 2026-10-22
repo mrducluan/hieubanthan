@@ -1,4 +1,5 @@
 "use client";
+import { useChu } from "@/components/cms/DauCms";
 import { useState } from "react";
 import { Compass } from "lucide-react";
 import { DoHuongDienThoai } from "@/components/huyen-hoc/DoHuongDienThoai";
@@ -33,6 +34,7 @@ const GOI_Y = [
 
 export function PhongThuy() {
   const hoSo = useHoSo();
+  const c = useChu();
   const [mocNam, setMocNam] = useState<MocNam>("lap_xuan");
   // TP-LICH: mốc đầu năm đi theo mọi lời gọi (mệnh quái, đo hướng, khảo sát nhà, hỏi đáp) — engine tính lại.
   const sinh = hoSo?.gioi_tinh
@@ -85,7 +87,7 @@ export function PhongThuy() {
       {mq && <div className="mx-auto max-w-3xl"><CuoiBaiDoc moDun="phongthuy" cauHoi="Phần hướng nhà và bố trí có giúp ích cho bạn?" maYDinh="nha_cua" /></div>}
 
       <section aria-label="Hỏi Phong thuỷ" className="mt-10">
-        <h2 className="mb-4 text-2xl sm:text-3xl">Hỏi đáp cùng AI</h2>
+        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp cùng AI"}</h2>
           <KhungChat
             moDun="phongthuy"
             loiChao="Hỏi về hướng nhà, bếp, bàn làm việc, năm làm nhà — hoặc một tình huống bố trí cụ thể."

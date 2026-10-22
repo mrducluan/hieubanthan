@@ -9,6 +9,7 @@ import { homNayVN, ngayTotCongKhai, thangCongKhai } from "@/lib/hoang-lich";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { metaTrang } from "@/lib/seo";
 import { ND_XEM_NGAY } from "./noi-dung";
+import { CHU_XEM_NGAY } from "@/lib/chu/cong-cu";
 
 export async function generateMetadata(): Promise<Metadata> {
   return apDungSeo(metaTrang({ tieuDe: "Xem ngày tốt hôm nay: hoàng đạo, giờ tốt, việc nên làm", moTa: ND_XEM_NGAY.moTa, duong: "/xem-ngay-tot" }), await layNoiDungTrang(ND_XEM_NGAY.duong));
@@ -21,7 +22,7 @@ export default async function Page() {
   return (
     <TrangCongCu duong={ND_XEM_NGAY.duong}>
       <div className="mx-auto max-w-3xl">
-        <TieuDeTrang nho="Hoàng lịch mỗi ngày" lon="Xem ngày tốt hôm nay"
+        <TieuDeTrang nho={CHU_XEM_NGAY["dau.nhan_tren"]!.mac_dinh} lon="Xem ngày tốt hôm nay"
           mo_ta="Ngày hoàng đạo hay hắc đạo, giờ tốt, việc sách lịch ghi nên làm và nên kiêng — và ngày này có xung tuổi bạn không." />
         <XemNgayTot banDau={d} thang={t} />
         <p className="mt-4 text-xs text-fg-faint">Đường dẫn cố định của ngày này: <Link href={`/xem-ngay-tot/${iso}`} className="text-gold underline">/xem-ngay-tot/{iso}</Link></p>
