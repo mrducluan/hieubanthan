@@ -382,9 +382,9 @@ Anh duyệt **phương án 2 theo bản điều chỉnh** sau (thay các điểm
 | ND-3 | xong (2026-10-14) | /, /kham-pha, /kien-thuc, /la-so-mau, /tu-dien, /phong-thuy/huong-hop-tuoi, /blog, 15 chủ đề; /gioi-thieu, /lien-he sửa mục theo neo (`gopMucCms`). |
 | ND-4 | xong (2026-10-19) | 3 trang pháp lý: SEO, H1, lời mở đầu, mục theo neo, ngày hiệu lực (`ngayHienThi`); ô `da_doi_chieu_phap_ly` bắt buộc mỗi lần xuất bản; không khối. |
 | ND-5 | xong (2026-10-19) | ~600 trang KB: khối mẫu cụm + ghi đè (`che_do_mau`), biến chữ thuần (`thayBien` không thoát HTML nữa), `.md` có chữ khối (`mdKhoi`); khối mới **Ảnh**; mục văn bản cho chèn ảnh. Migration `20261019_032830_nd_4_5_anh_phap_ly`. |
-| ND-6 | chưa | xem trước nháp mọi URL (link HMAC `trang:` + draft mode), thẻ quản trị "trang có nội dung CMS". Làm cùng ND-7 đợt 2. |
+| ND-6 | xong phần xem trước (2026-10-22) | nút "Xem trước" ở mọi Trang website + Mẫu cụm (link HMAC `xem-truoc:trang:<đường dẫn>`, draft mode, dải báo "Đang xem bản nháp" + nút thoát; mẫu cụm mở một URL ví dụ của cụm — `viDuMau`). Còn lại: thẻ quản trị "trang có nội dung CMS". |
 | ND-7 đợt 1 | xong (2026-10-22) | "Chữ trên trang" (mục 10): trang chủ, /kham-pha, /kien-thuc, 11 trang công cụ, 6 cụm trang con (xem ngày tốt theo ngày/tháng, tuổi làm nhà, xông đất, hướng xấu năm, tác giả); thẻ chủ đề theo H1/lời dẫn trang chủ đề; sửa khối cuối trang tác giả; xoá mẫu cụm làm mới web ngay. Migration `20261021_235710_nd_7_chu_tren_trang`. |
-| ND-7 đợt 2 | chưa | "Hình trên trang" (hình chính trang chủ, biểu tượng mảng, ảnh chia sẻ mặc định + theo cụm) + xem trước nháp (ND-6) + chữ nhỏ trong công cụ (nút, thông báo lỗi). |
+| ND-7 đợt 2 | xong (2026-10-22) | Mục 10.1: "Hình trên trang" (hình lớn trang chủ, 4 biểu tượng mảng trang chủ, 5 thẻ /kham-pha, ảnh chia sẻ theo cụm), "Chữ dùng chung" (global — form hồ sơ, ô vào trang chủ, khung hỏi đáp, "Thử lại"), xem trước nháp (ND-6). Migration `20261022_012038_nd_7_dot_2_hinh_chu_chung`. |
 
 ## 10. ND-7 — "Chữ trên trang" (chủ dự án duyệt 2026-10-21)
 
@@ -415,3 +415,23 @@ Trang công khai mới: khai trong `SO_TRANG` hoặc `MAU_CUM` (`e2e/noi-dung-tr
 
 **Thẻ chủ đề:** tên + mô tả thẻ ở `/kien-thuc` và khối "Kiến thức {mảng}" của trang công cụ lấy theo H1 + lời dẫn đã xuất bản
 của chính trang chủ đề (`layDauNhieuTrang`, một lần gọi CMS) — sửa một chỗ, mọi thẻ đổi theo.
+
+### 10.1 Đợt 2 (2026-10-22) — hình, chữ dùng chung, xem trước
+
+**Hình trên trang.** Bảng hình của trang (`BangHinh` trong `web/lib/chu/*.ts`: `HINH_TRANG_CHU`, `HINH_KHAM_PHA`; mẫu cụm có
+`HINH_CUM` = ảnh chia sẻ) đi theo sổ trang sang CMS (`mac_dinh.hinh`). Tab CMS **"Hình trên trang"**
+(`cms/src/components/HinhTrenTrang.tsx`) chỉ hiện khi trang có chỗ đặt hình: chọn ảnh thư viện / tải ảnh mới (bắt buộc mô tả
+ảnh) / "Về hình gốc". Ô json `hinh` = { khoá: id ảnh }; khi lưu, hook `locHinh` bỏ khoá lạ và **chụp** {url, alt, cỡ ảnh} để
+web không phải gọi thêm. Web: `AnhCmsHoac` — có ảnh CMS thì hiện ảnh, không thì hình vẽ SVG gốc; ảnh chia sẻ
+(`chia_se`) thay ảnh Open Graph/Twitter của mọi trang trong cụm (`voiAnhChiaSe`), URL riêng thắng cụm. Chỉ nhận URL
+`https://` hoặc đường dẫn trong site.
+
+**Chữ dùng chung.** Global CMS **"Chữ dùng chung"** (`cms/src/globals/ChuChung.ts`, cùng giao diện "Chữ trên trang"): chữ lặp
+ở nhiều trang — nhãn + nút form hồ sơ, ô vào trang chủ / chào lại, ô nhập + lỗi kết nối của khung hỏi đáp, nút "Thử lại".
+Bảng `web/lib/chu/chung.ts` (`CHU_CHUNG`) đi theo sổ trang (`chung`); layout đọc một lần (`chuChungCms`) → context
+`ChuChung` → `useChuChung()`. Cùng lọc + kiểm định như "Chữ trên trang".
+
+**Xem trước bản nháp.** Nút "Xem trước" của Trang website / Mẫu cụm mở `/api/cms/xem-truoc?duong=…&ma=…` (HMAC
+`xem-truoc:trang:<đường dẫn>`, `CMS_PREVIEW_SECRET`). Web chỉ nhận đường dẫn có trong sổ trang hoặc khớp mẫu cụm (mẫu cụm → URL
+ví dụ), bật draft mode → `layNoiDungTrang` đọc bản nháp (không cache) → dải "Đang xem bản nháp" có nút thoát. Mã sai / đường
+dẫn ngoài site → 401; nút thoát chỉ chuyển về đường dẫn trong site.

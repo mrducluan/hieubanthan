@@ -451,8 +451,18 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
   4) **Mẫu cụm trang** → "Xem ngày tốt · trang ngày" (và tháng, tuổi làm nhà, xông đất, hướng xấu năm): đổi tiêu đề cho cả
      cụm, thêm khối (banner, ảnh, video…). Riêng một ngày/năm: Trang website → Tạo mới → nhập đường dẫn (vd `/xem-ngay-tot/2027-02-17`).
   5) Tên + mô tả thẻ chủ đề ở `/kien-thuc`: sửa **H1 / Lời dẫn** của chính trang chủ đề (vd `/tu-vi/sao-o-cung`).
-  Còn trong code (đợt 2): hình chính trang chủ, biểu tượng mảng, ảnh chia sẻ mặc định, xem trước bản nháp, chữ nhỏ trong
-  công cụ (nút, thông báo lỗi). Ảnh tải lên chỉ lưu lâu dài khi đã làm **CMS1** (bucket `cms-media`).
+  Ảnh tải lên chỉ lưu lâu dài khi đã làm **CMS1** (bucket `cms-media`).
+- [ ] ND7b. (2026-10-22, ND-7 đợt 2) Sau khi PR merge, CMS redeploy tự chạy migration `nd_7_dot_2_hinh_chu_chung` (không cần
+  biến mới; xem trước dùng `CMS_PREVIEW_SECRET` đã có). Thử ~5 phút:
+  1) Trang website → **"Đồng bộ ngay"** (mang bảng hình + chữ dùng chung sang CMS).
+  2) Mở `/` → sửa một chữ → **Lưu nháp** (chưa xuất bản) → bấm **"Xem trước"**: web hiện bản nháp + dải "Đang xem bản nháp"
+     (bấm "Thoát" để về bản công khai). Mẫu cụm cũng có "Xem trước" (mở một trang ví dụ của cụm).
+  3) `/` → tab **"Hình trên trang"**: thay hình lớn đầu trang, 4 biểu tượng mảng (`/kham-pha`: 5 thẻ) bằng ảnh thư viện hoặc
+     tải ảnh mới (ghi mô tả ảnh) → Xuất bản. "Về hình gốc" = hình vẽ cũ. Mẫu cụm có ô **"Ảnh chia sẻ"** (ảnh hiện khi dán link
+     lên Facebook/Zalo) cho cả cụm — nên ảnh 1200×630.
+  4) **Giao diện website → Chữ dùng chung**: nhãn + nút form "Họ tên / Ngày sinh / Xem con số của tôi", ô vào trang chủ, ô hỏi
+     đáp, "Thử lại" — sửa một lần, mọi trang đổi theo.
+  **Ảnh cần CMS1** (bucket `cms-media`): chưa làm thì ảnh tải lên có thể mất sau lần deploy CMS kế tiếp.
 - [ ] ND45. (2026-10-19, ND-4/ND-5) Sau khi PR merge, CMS redeploy tự chạy migration `nd_4_5_anh_phap_ly`. Thử ~5 phút:
   1) **Trang pháp lý** (Trang website → `/dieu-khoan`…): sửa Mục / ngày hiệu lực → chọn "Thay đổi nội dung" + ngày mới
      → **tích ô "Tôi đã đối chiếu…"** → Xuất bản. Ô tự bỏ tích sau mỗi lần xuất bản (lần sau xác nhận lại). Đổi nội dung
