@@ -196,6 +196,9 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
     co = {ma for ma, dh in b.dau_hieu.items() if _nhan(dh)} | dh_mb
     if b.vi_tri.get("ve_sinh") == "Trung cung":
         co.add("wc_giua_nha")
+    # UI-PT 4 ("Tôi đã xử lý"): người dùng khai rõ `co: false` thắng dấu hiệu máy suy từ mặt bằng / vị trí phòng
+    # (đã che xà, đã dời WC…) — chỉ nguồn người dùng; nguồn ảnh/video không ghi đè.
+    co -= {ma for ma, dh in b.dau_hieu.items() if not dh.co and dh.nguon == "nguoi_dung"}
     veto_ds = dau_hieu_veto()
     dau_hieu = []
     for ma in DAU_HIEU:

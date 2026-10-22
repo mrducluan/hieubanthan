@@ -12,6 +12,7 @@ import { postJson } from "@/lib/goi-api";
 import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
 import { datGocNhin, TEN_GOC_NHIN, useGocNhin, type GocNhin } from "@/lib/goc-nhin-pt";
 import { cn } from "@/lib/utils";
+import { SoDoNha } from "@/components/huyen-hoc/SoDoNha";
 
 interface DanhMuc {
   phong: Record<string, string>;
@@ -142,6 +143,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
       hd[k] = x;
     }
     const mb = matBang();
+    const daXuLy = (nhaLuu?.bo_cuc?.da_xu_ly ?? []).filter((m) => !dau.has(m));   // tích lại = chưa xử lý nữa
     if (d == null && !huong && Object.keys(viTri).length === 0 && dau.size === 0 && !mb) {
       setLoi("Hãy khai ít nhất hướng nhà, vị trí một phòng, một dấu hiệu, hoặc vẽ mặt bằng."); return;
     }
@@ -152,7 +154,9 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
           ...(d != null ? { huong_nha_do: d } : huong ? { huong_nha: huong } : {}),
           ...(loaiNha ? { loai_nha: loaiNha } : {}),
           vi_tri: viTri, huong_do: hd,
-          dau_hieu: Object.fromEntries([...dau].map((m) => [m, { co: true, nguon: "nguoi_dung" }])),
+          // UI-PT 4: dấu hiệu đã bấm "Tôi đã xử lý" ở bài đọc (hồ sơ nhà) gửi co:false → engine không luận lại dù mặt bằng suy ra.
+          dau_hieu: Object.fromEntries([...[...dau].map((m) => [m, { co: true, nguon: "nguoi_dung" }]),
+            ...daXuLy.map((m) => [m, { co: false, nguon: "nguoi_dung" }])]),
           ...(mb ? { mat_bang: mb } : {}),
         },
         goc_nhin: gocNhin,
@@ -161,7 +165,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
       setKq(r);
       try {
         luuHoSoNha({ ...(d != null ? { huong_do: d } : {}), ...(loaiNha ? { loai_nha: loaiNha as "can_ho" } : {}),
-          bo_cuc: { vi_tri: viTri, huong_do: hd, dau_hieu: [...dau], ...(mb ? { mat_bang: mb } : {}) } });
+          bo_cuc: { vi_tri: viTri, huong_do: hd, dau_hieu: [...dau], ...(daXuLy.length ? { da_xu_ly: daXuLy } : {}), ...(mb ? { mat_bang: mb } : {}) } });
       } catch { /* bỏ qua */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "khao_sat_nha", co_mat_bang: Boolean(mb), loai_nha: loaiNha, goc_nhin: gocNhin });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa luận được bố cục này."); }
@@ -315,6 +319,11 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
           {d.trach ? <>Nhà hướng <b>{d.huong_nha}</b>, toạ {d.trach.toa} → <b className="text-gold">{d.trach.quai} trạch</b> ({d.trach.nhom}). </> : "Chưa có hướng nhà. "}
           {d.menh_quai && <>Gia chủ mệnh <b className="text-gold">{d.menh_quai.quai}</b> ({d.menh_quai.nhom}){d.cung_nhom != null && <> — {d.cung_nhom ? "cùng nhóm với nhà" : "khác nhóm với nhà"}</>}.</>}
         </p>
+        {d.vi_tri.length > 0 && (
+          <SoDoNha className="mt-3" tieuDe="Sơ đồ phòng theo phương" huongNha={d.huong_nha}
+            duNien={Object.fromEntries(d.vi_tri.map((x) => [x.cung, x.du_nien_menh ?? x.du_nien_trach]))}
+            phong={d.vi_tri.map((x) => ({ cung: x.cung, ten: x.ten, muc: x.hop == null ? null : x.hop ? "thuan" : "can_chu_dong" }))} />
+        )}
         {d.vi_tri.length > 0 && (
           <div className="-mx-1 mt-2 overflow-x-auto">
             <table className="w-full min-w-[30rem] text-left text-sm">

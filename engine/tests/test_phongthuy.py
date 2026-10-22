@@ -115,3 +115,16 @@ def test_api_menh_quai_danh_dau_huong_cat():
     d = r.json()
     assert r.status_code == 200 and d["quai"] == "Khảm"
     assert sorted(d["huong_cat"]) == sorted(["Bắc", "Đông", "Đông Nam", "Nam"])
+
+
+def test_api_menh_quai_kem_nghia_du_nien_cho_la_ban_song():
+    # UI-PT 1 "la bàn sống": web đọc tên du niên + ý nghĩa + "dùng cho" từ engine (KB du_nien) — không tự giữ bảng nghĩa.
+    from fastapi.testclient import TestClient
+    from app.main import app
+
+    d = TestClient(app).post("/v1/phongthuy/menh-quai", json={"birth_date": "1990-05-17", "gender": "nam"}).json()
+    y = d["du_nien_y"]
+    assert set(y) == set(d["bang_huong"].values()) and len(y) == 8
+    for ten, v in y.items():
+        assert v["loai"] in ("cát", "hung") and v["y_nghia"] and v["dung_cho"]
+        assert (v["loai"] == "cát") == (ten in {d["bang_huong"][h] for h in d["huong_cat"]})

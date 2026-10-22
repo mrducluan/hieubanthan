@@ -199,3 +199,18 @@ def test_api_huong_ban_do_va_luan_giai_y_dinh():
     r = client.post("/v1/phongthuy/luan-giai", json={"nha": {"huong_do": 180, "bo_cuc": BO_CUC_VETO}, "y_dinh": "nha_cua", "goc_nhin": "doi_song", "ngay_xem": "2026-05-20"})
     assert r.status_code == 200 and r.json()["theo_y_dinh"]["ma"] == "nha_cua" and r.json()["da_tinh"]["goc_nhin"] == "doi_song"
     assert client.post("/v1/phongthuy/luan-giai", json={"nha": {"huong_do": 180}, "y_dinh": "Nhà cửa!"}).status_code == 422
+
+
+def test_da_xu_ly_co_false_thang_dau_hieu_suy_tu_mat_bang():
+    # UI-PT 4: người dùng bấm "Tôi đã xử lý" → web gửi {co: false, nguon: nguoi_dung}; dấu hiệu máy suy từ vị trí / mặt bằng
+    # không còn được luận, trần mức Q1 gỡ; nguồn ảnh không ghi đè.
+    bo = {**BO_CUC_VETO, "vi_tri": {**BO_CUC_VETO["vi_tri"], "ve_sinh": "Trung cung"},
+          "dau_hieu": {"xa_ngang": {"co": False, "nguon": "nguoi_dung"}, "wc_giua_nha": {"co": False, "nguon": "nguoi_dung"}}}
+    r = bc.luan(bc.BoCuc(**bo), SINH)
+    assert {d["ma"] for d in r["dien_giai"]["dau_hieu"]} == set() and r["veto_da_xac_nhan"] == []
+    bao = ds.luan_giai(SINH, {"bo_cuc": bo}, ngay_xem=NGAY)
+    assert "tran_muc" not in bao["chuong"][1] and bao["da_tinh"]["veto_da_xac_nhan"] == []
+    # nguồn ảnh khai "không có" không ghi đè suy luận từ vị trí
+    bo2 = {**bo, "dau_hieu": {"wc_giua_nha": {"co": False, "nguon": "anh"}}}
+    r2 = bc.luan(bc.BoCuc(**bo2), SINH)
+    assert "wc_giua_nha" in {d["ma"] for d in r2["dien_giai"]["dau_hieu"]}

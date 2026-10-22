@@ -23,6 +23,18 @@ export interface KetQuaDoHuong {
 
 type SuKienLaBan = DeviceOrientationEvent & { webkitCompassHeading?: number };
 
+/** UI-PT 1 "la bàn sống": bảng 8 hướng → du niên của mệnh quái + nghĩa / "dùng cho" (engine `/menh-quai` trả, KB du_nien). */
+export interface LaBanCaNhan {
+  quai: string; bang: Record<string, string>; huongCat: string[];
+  duNienY?: Record<string, { loai: string; y_nghia: string; dung_cho: string }>;
+}
+const HUONG8 = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"];
+/** Ô 45° đang quay về (ranh giới ±22,5° quanh chính hướng — đúng cách vẽ 8 cung của la bàn). Chỉ để tô màu + đọc nhãn
+ *  theo thời gian thực; hướng NHÀ vẫn do engine đổi từ độ khi bấm "Chốt" (sơn, toạ, trạch, cảnh báo ranh giới). */
+export function oHuong(doHuong: number): string {
+  return HUONG8[Math.round((((doHuong % 360) + 360) % 360) / 45) % 8]!;
+}
+
 /** Q3: đọc "vĩ độ, kinh độ" từ chuỗi dán vào — số thuần "10.776, 106.700" hoặc link bản đồ (@lat,lon · q=lat,lon · !3dlat!4dlon). */
 export function docToaDo(s: string): [number, number] | null {
   const t = decodeURIComponent(s.trim());
@@ -46,11 +58,22 @@ function doTuSuKien(e: SuKienLaBan, tuyetDoi: boolean): number | null {
   return null;
 }
 
-function MatLaBan({ doHuong }: { doHuong: number | null }) {
+function cungLaBan(i: number, r0: number, r1: number) {
+  const a0 = ((i * 45 - 22.5 - 90) * Math.PI) / 180, a1 = ((i * 45 + 22.5 - 90) * Math.PI) / 180;
+  const p = (r: number, a: number) => `${100 + r * Math.cos(a)} ${100 + r * Math.sin(a)}`;
+  return `M ${p(r0, a0)} L ${p(r1, a0)} A ${r1} ${r1} 0 0 1 ${p(r1, a1)} L ${p(r0, a1)} A ${r0} ${r0} 0 0 0 ${p(r0, a0)} Z`;
+}
+
+function MatLaBan({ doHuong, laBan }: { doHuong: number | null; laBan?: LaBanCaNhan | null }) {
   return (
-    <svg viewBox="0 0 200 200" className="mx-auto h-48 w-48" role="img" aria-label={doHuong == null ? "La bàn" : `La bàn: ${Math.round(doHuong)} độ`}>
+    <svg viewBox="0 0 200 200" className="mx-auto h-48 w-48" role="img"
+      aria-label={(doHuong == null ? "La bàn" : `La bàn: ${Math.round(doHuong)} độ`) + (laBan ? ` — tô hướng tốt của mệnh ${laBan.quai}` : "")}>
       <circle cx="100" cy="100" r="94" fill="rgb(var(--surface))" stroke="rgb(var(--line))" />
       <g style={{ transform: `rotate(${-(doHuong ?? 0)}deg)`, transformOrigin: "100px 100px", transition: "transform 0.15s linear" }}>
+        {laBan && HUONG8.map((h, i) => (
+          <path key={h} d={cungLaBan(i, 44, 88)} data-testid="la-ban-cung" data-cat={laBan.huongCat.includes(h)}
+            fill={laBan.huongCat.includes(h) ? "rgb(var(--jade) / 0.22)" : "rgb(var(--cinnabar) / 0.08)"} stroke="rgb(var(--line) / 0.6)" strokeWidth="0.5" />
+        ))}
         {Array.from({ length: 24 }, (_, i) => (
           <line key={i} x1="100" y1="10" x2="100" y2={i % 3 === 0 ? 22 : 16} stroke="rgb(var(--fg-faint))" strokeWidth={i % 3 === 0 ? 2 : 1}
             transform={`rotate(${i * 15} 100 100)`} />
@@ -66,13 +89,20 @@ function MatLaBan({ doHuong }: { doHuong: number | null }) {
   );
 }
 
-export function DoHuongDienThoai({ sinh, onDungToa, onChot }: {
+export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
   sinh: { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
   onDungToa?: (doToa: number) => void;
   /** PT-V0: báo kết quả engine vừa đổi (độ hướng nhà) cho khung Khảo sát nhà. */
   onChot?: (kq: KetQuaDoHuong) => void;
+  /** UI-PT 1: có mệnh quái → mặt la bàn tô 8 cung + đọc du niên của hướng đang quay về theo thời gian thực. */
+  laBan?: LaBanCaNhan | null;
 }) {
   const [doSong, setDoSong] = useState<number | null>(null);
+  // Hai việc cùng một la bàn: đo hướng NHÀ (chốt → engine → hồ sơ nhà) · tìm hướng TỐT để kê bàn, đầu giường (chỉ đọc sống, không lưu).
+  const [cheDo, setCheDo] = useState<"nha" | "ke_do">("nha");
+  const hSong = doSong == null ? null : oHuong(doSong);
+  const dnSong = hSong && laBan ? laBan.bang[hSong] ?? null : null;
+  const ySong = dnSong && laBan?.duNienY ? laBan.duNienY[dnSong] ?? null : null;
   const [dangDo, setDangDo] = useState(false);
   const [nhap, setNhap] = useState("");
   const [kq, setKq] = useState<KetQuaDoHuong | null>(null);
@@ -142,31 +172,59 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot }: {
   const chotNhap = () => {
     const d = Number(nhap.replace(",", "."));
     if (!(nhap.trim() !== "" && d >= 0 && d < 360)) { setLoi("Độ cần là số từ 0 đến dưới 360 (0 = chính Bắc)."); return; }
+    if (cheDo === "ke_do") { setDoSong(d); setLoi(null); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "la_ban_ke_do", nhap_tay: true }); return; }
     void chot(d);
   };
 
   return (
     <section className="glass rounded-2xl p-5" aria-labelledby="do-huong" data-testid="do-huong">
-      <h2 id="do-huong" className="flex items-center gap-2 text-xl"><Navigation className="size-5 text-gold" aria-hidden /> Đo hướng nhà</h2>
+      <h2 id="do-huong" className="flex items-center gap-2 text-xl"><Navigation className="size-5 text-gold" aria-hidden /> {cheDo === "nha" ? "Đo hướng nhà" : "Tìm hướng tốt để kê đồ"}</h2>
+      {laBan && (
+        <div className="mt-2 flex flex-wrap gap-1.5" role="radiogroup" aria-label="Dùng la bàn để">
+          {([["nha", "Đo hướng nhà"], ["ke_do", "Tìm hướng kê bàn, đầu giường"]] as const).map(([m, t]) => (
+            <button key={m} type="button" role="radio" aria-checked={cheDo === m} data-testid={`la-ban-che-do-${m}`}
+              onClick={() => { setCheDo(m); if (m === "ke_do") ghi("chart_interacted", { mo_dun: "phongthuy", kind: "la_ban_ke_do" }); }}
+              className={cn("rounded-full border px-3 py-1 text-xs", cheDo === m ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>{t}</button>
+          ))}
+        </div>
+      )}
       <p className="mt-1 text-sm text-fg-muted">
-        Đứng ở cửa chính, <b className="text-fg">quay lưng vào nhà</b>, giữ điện thoại nằm ngang trước ngực, mặt nhìn ra ngoài. Tránh xa xe, cột thép, loa.
+        {cheDo === "nha"
+          ? <>Đứng ở cửa chính, <b className="text-fg">quay lưng vào nhà</b>, giữ điện thoại nằm ngang trước ngực, mặt nhìn ra ngoài. Tránh xa xe, cột thép, loa.</>
+          : <>Đứng ở chỗ định kê, giữ điện thoại nằm ngang, <b className="text-fg">xoay người</b> cho kim vào vùng xanh. Bàn làm việc, cửa chính hợp hướng <b className="text-fg">Sinh Khí</b>; đầu giường hợp <b className="text-fg">Diên Niên</b> (vợ chồng) hay <b className="text-fg">Thiên Y</b> (sức khoẻ); bàn học <b className="text-fg">Phục Vị</b>. Không lưu gì.</>}
       </p>
 
       <div className="mt-4 grid items-center gap-4 sm:grid-cols-[auto_1fr]">
         <div>
-          <MatLaBan doHuong={doSong} />
+          <MatLaBan doHuong={doSong} laBan={laBan} />
           <p className="text-center font-serif text-2xl text-gold" aria-live="polite">{doSong == null ? "—" : `${Math.round(doSong)}°`}</p>
+          {laBan && (
+            <p className="mt-1 text-center text-[11px] text-fg-faint">
+              <span className="mr-1 inline-block size-2 rounded-sm bg-jade/40 align-middle" /> hướng tốt với mệnh {laBan.quai}
+              <span className="ml-2 mr-1 inline-block size-2 rounded-sm bg-cinnabar/30 align-middle" /> hướng xấu
+            </p>
+          )}
         </div>
         <div className="space-y-3">
+          {laBan && hSong && (
+            <p className="rounded-xl border border-line/70 bg-bg/40 px-3 py-2 text-sm" data-testid="la-ban-song" aria-live="polite">
+              Đang quay về <b className="text-fg">{hSong}</b>
+              {dnSong && <> · <b className={cn(laBan.huongCat.includes(hSong) ? "text-jade" : "text-cinnabar")}>{dnSong}</b>
+                <span className="text-fg-muted"> ({laBan.huongCat.includes(hSong) ? "hướng tốt" : "hướng xấu"} với bạn)</span></>}
+              {ySong && <span className="block text-xs text-fg-muted">{ySong.y_nghia} Hợp đặt: {ySong.dung_cho}.</span>}
+            </p>
+          )}
           {!dangDo ? (
             <Button onClick={batDau} variant="secondary"><Smartphone aria-hidden /> Đo bằng la bàn điện thoại</Button>
-          ) : (
+          ) : cheDo === "nha" ? (
             <Button onClick={() => doSong != null && chot(doSong)} disabled={doSong == null || dang}>
               <Compass aria-hidden /> {dang ? "Đang đổi…" : "Chốt hướng này"}
             </Button>
+          ) : (
+            <p className="text-xs text-fg-faint">Dừng ở hướng ghi đúng việc bạn cần (Sinh Khí · Diên Niên · Thiên Y · Phục Vị) rồi kê theo đó. Muốn lưu hướng NHÀ, chuyển lại “Đo hướng nhà”.</p>
           )}
           <form className="flex flex-wrap items-center gap-2" onSubmit={(e) => { e.preventDefault(); chotNhap(); }}>
-            <Input aria-label="Độ hướng nhà" inputMode="decimal" placeholder="hoặc nhập độ, vd 135" value={nhap} className="w-44"
+            <Input aria-label={cheDo === "nha" ? "Độ hướng nhà" : "Độ đo được"} inputMode="decimal" placeholder="hoặc nhập độ, vd 135" value={nhap} className="w-44"
               onChange={(e) => setNhap(e.target.value.replace(/[^\d.,]/g, "").slice(0, 6))} />
             <Button type="submit" size="sm" variant="ghost" disabled={dang}>Xem</Button>
           </form>
