@@ -82,13 +82,19 @@ trong cung nguồn.
   "luu_nien_sau": {/* như luu_nien */},    // chỉ khi 3 tháng vắt sang năm âm sau
   "thang": [ {"thang","nhuan","phan","nam_am","can_chi","tu","den","cung_goc","chu_de",
               "muc": "thuan|binh|can_than", "nhan_muc": "Thuận|Bình|Cần thận trọng",
-              "ly_do": [{"ma": "chong_ky|song_loc|loc_nhap_cung_chinh|ky_xung_cung_chinh|khoa_giai", "noi_dung"}],
+              "ly_do": [{"ma": "chong_ky|song_loc|loc_nhap_cung_chinh|ky_xung_cung_chinh|ky_nhap_cung_chinh|khoa_giai",
+                         "noi_dung"}],      // ky_nhap_cung_chinh: Kỵ tháng ở chính Mệnh/Tài/Quan (2026-10-22)
               "tu_hoa_thang": [{"hoa","sao","cung_goc"}], "goi_y", "cau_tu_soi"} ],   // đúng 3 phần tử
   "uu_tien": {"thu_tu": ["dai_han","luu_nien","tieu_han","luu_nguyet"], "ghi_chu": "...",
               "han_nam": {"dai_han","luu_nien","tieu_han": {"chi","cung_goc"}}},
   "luu_y": ["..."], "co_canh_bao": [...] }
 ```
 Mỗi tháng xếp mức theo tứ hoá của **năm âm chứa tháng đó** (`nam_am`), nên tháng sau Tết đọc cùng `luu_nien_sau`.
+
+**Kỵ tháng vào thẳng Mệnh / Tài / Quan (chủ dự án chốt 2026-10-22).** Trước: Kỵ tháng XUNG Mệnh/Tài/Quan mới "Cần thận
+trọng", còn Kỵ rơi thẳng vào ba cung này chỉ "Bình" (hộp "Nên để ý" có nhắc). Nay thêm luật `ky_nhap_cung_chinh` → "Cần
+thận trọng" (tiêu điểm = chính cung đó). Khác bản TS v2.2 có chủ ý (TS chỉ xét Kỵ xung), test oracle ghi rõ. Mã kiểm
+chứng `maNhip` mang mức + lý do nên tháng đổi mức có mã mới (phiếu cũ của tháng đó không cộng sang).
 
 **NHIP-2 (2026-10-21) — lời riêng từng tháng.** Bản đầu chỉ có gợi ý + tự soi theo 3 mức → ba tháng cùng "Bình" ra
 nguyên văn một câu (chủ dự án báo). Nay mỗi tháng thêm (giữ mọi trường cũ, `goi_y` = lời "Nên làm" mới):

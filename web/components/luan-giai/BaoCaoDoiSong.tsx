@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { BieuDoNguHanh, DaiVanHaiCach, ThanhThan } from "./BieuDoBatTu";
 import { DongMuoiNam } from "./DongMuoiNam";
 import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
+import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
 import { maMauBaoCao, NHAN_MUC, type BaoCaoDoiSong, type ChuongDoiSongMo, type MocDaiHan, type Muc } from "./kieu";
 
 export function ChipMuc({ muc, nhan, className }: { muc?: Muc; nhan?: string; className?: string }) {
@@ -98,6 +99,7 @@ function Chuong({ c, so, goc, thoiGian }: { c: ChuongDoiSongMo; so: number; goc:
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
         <h3 id={`lg-tieu-de-${c.ma}`} className="font-serif text-2xl"><span className="text-gold">{so}.</span> {c.tieu_de}</h3>
         <ChipMuc muc={c.muc} nhan={c.nhan_muc} />
+        <MucCachChinh hai={c.hai_cach_muc} />
       </div>
       {c.tom_tat && <p className="mt-3 text-lg leading-relaxed text-fg sm:text-xl" data-testid="tom-tat">{c.tom_tat}</p>}
       {c.than_do && <ThanhThan than={c.than_do} />}
@@ -134,6 +136,21 @@ function Chuong({ c, so, goc, thoiGian }: { c: ChuongDoiSongMo; so: number; goc:
 }
 
 /** 12 đại hạn: dọc trên điện thoại, ngang (cuộn trong khung) trên máy tính; giai đoạn đang đi nổi bật. */
+/** BT-DC: hai cách nói khác nhau + người dùng đã chọn cách chính ("Cách nào đúng với bạn?") → hiện mức theo cách đó
+ * cạnh mức chung. Không đổi mức chung, không tính gì (mức từng cách engine đã trả). */
+function MucCachChinh({ hai, ngan = false }: { hai?: { cach_1: Muc; cach_2: Muc }; ngan?: boolean }) {
+  const { cach } = useCachChinhBaoCao();
+  if (!cach || !hai || hai.cach_1 === hai.cach_2) return null;
+  return (
+    <span className="inline-flex items-center gap-1.5 text-xs text-fg-faint" data-testid="muc-cach-chinh">
+      {ngan ? "cách bạn chọn:" : "Theo cách bạn chọn:"} <ChipMuc muc={hai[cach]} className={ngan ? "px-2 py-0 text-[0.7rem]" : undefined} />
+    </span>
+  );
+}
+
+/** "2026-12-13" → "13/12/2026" (chỉ đổi cách viết ngày engine đã tính). */
+const ngayVn = (iso: string) => iso.split("-").reverse().map((x, i) => (i < 2 ? String(Number(x)) : x)).join("/");
+
 function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
   const khung = useRef<HTMLOListElement>(null);
   const hienTai = useRef<HTMLLIElement>(null);
@@ -161,11 +178,15 @@ function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
               </p>
             )}
             <p className="text-sm font-semibold text-fg">{m.tu_tuoi}–{m.den_tuoi} tuổi
-              <span className="ml-1.5 font-normal text-fg-faint">{m.nam_tu}–{m.nam_den}</span></p>
+              {!m.tu_ngay && <span className="ml-1.5 font-normal text-fg-faint">{m.nam_tu}–{m.nam_den}</span>}</p>
+            {m.tu_ngay && m.den_ngay && (
+              <p className="text-[0.7rem] text-fg-faint" data-testid="ngay-van">từ {ngayVn(m.tu_ngay)} đến {ngayVn(m.den_ngay)}</p>
+            )}
             <div className="mt-1 flex flex-wrap items-center gap-1.5">
               <ChipMuc muc={m.muc} className="px-2 py-0 text-[0.7rem]" />
               <span className="text-xs text-fg-faint">{m.nhan ?? `cung ${m.cung}`}</span>
               {m.hai_cach_khac && <span className="text-[0.7rem] text-moon" data-testid="hai-cach-khac">hai cách khác nhau</span>}
+              {m.hai_cach_khac && m.muc_cach_1 && m.muc_cach_2 && <MucCachChinh hai={{ cach_1: m.muc_cach_1, cach_2: m.muc_cach_2 }} ngan />}
             </div>
             <p className="mt-1.5 text-sm font-medium text-fg-muted first-letter:uppercase">{m.chu_de}</p>
             <p className="mt-1 text-sm leading-relaxed text-fg-muted">{m.mot_cau}</p>

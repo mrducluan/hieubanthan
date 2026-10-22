@@ -4,6 +4,7 @@
   "engine_version": "0.1.5",
   "mo_dun": "battu",
   "phien_ban": "doi_song_1",
+  "phai": "tu_binh",
   "cot_loi": [
    {
     "loai": "cot_loi",
@@ -62,7 +63,7 @@
     "noi_dung": "Năm 2026, tiền làm ăn vào ra lớn; một quyết định vội có thể kéo theo cả năm gỡ. Hai cách đọc khác nhau ở năm 2026: một cách thấy cần lưu ý, cách kia thấy cân bằng. Nên tránh: mở rộng làm ăn bằng tiền vay, nhận lời đầu tư từ người mới quen. Nên làm: làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc.",
     "can_cu": [
      "Năm 2026 Bính Ngọ (tính từ Lập xuân, Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
-     "Năm 2026 nằm trong đại vận Ất Dậu (thuận lợi)"
+     "Năm 2026 nằm trong đại vận Giáp Thân (thuận lợi)"
     ],
     "ma_mau": "ds.bt.van_han.thien_tai.can.lon",
     "huong_xu_ly": "Nên làm: làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc.",
@@ -87,6 +88,8 @@
     "hai_cach_khac": false,
     "mot_cau": "Giai đoạn cần lưu ý: dễ đông người tranh phần, tiền ra vì bạn bè. Nên giữ tiền riêng và ký kết rõ ràng khi làm chung.",
     "de_vap": "Dễ đông người tranh phần, tiền ra vì bạn bè.",
+    "tu_ngay": "1996-12-13",
+    "den_ngay": "2006-12-12",
     "hien_tai": false
    },
    {
@@ -103,6 +106,8 @@
     "hai_cach_khac": false,
     "mot_cau": "Giai đoạn cần lưu ý: dễ hao tiền vì quyết nhanh. Nên đặt hạn mức chi và tránh góp vốn khi chưa rõ.",
     "de_vap": "Dễ hao tiền vì quyết nhanh.",
+    "tu_ngay": "2006-12-13",
+    "den_ngay": "2016-12-12",
     "hien_tai": false
    },
    {
@@ -119,7 +124,9 @@
     "hai_cach_khac": false,
     "mot_cau": "Giai đoạn thuận: hợp để trau tay nghề, làm sản phẩm, lo cho con cái và sống thong thả hơn.",
     "de_vap": "Dễ ham vui và chậm lại.",
-    "hien_tai": false
+    "tu_ngay": "2016-12-13",
+    "den_ngay": "2026-12-12",
+    "hien_tai": true
    },
    {
     "tu_tuoi": 36,
@@ -135,7 +142,9 @@
     "hai_cach_khac": false,
     "mot_cau": "Giai đoạn thuận: hợp để làm điều mới, ra mắt sản phẩm, xây tiếng nói riêng.",
     "de_vap": "Dễ va chạm với cấp trên và luật lệ.",
-    "hien_tai": true
+    "tu_ngay": "2026-12-13",
+    "den_ngay": "2036-12-12",
+    "hien_tai": false
    },
    {
     "tu_tuoi": 46,
@@ -151,6 +160,8 @@
     "hai_cach_khac": true,
     "mot_cau": "Giai đoạn cần lưu ý: dễ tiêu rộng tay, bỏ vốn theo cảm hứng. Nên giữ khoản dự phòng trước khi mở việc mới. Hai cách đọc khác nhau ở giai đoạn này: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
     "de_vap": "Dễ tiêu rộng tay, bỏ vốn theo cảm hứng.",
+    "tu_ngay": "2036-12-13",
+    "den_ngay": "2046-12-12",
     "hien_tai": false
    },
    {
@@ -167,6 +178,8 @@
     "hai_cach_khac": true,
     "mot_cau": "Giai đoạn cân bằng: hợp để tích luỹ, mua tài sản, ổn định gia đình. Hai cách đọc cho kết quả ngược nhau ở giai đoạn này: nên thử nhỏ trước khi làm lớn.",
     "de_vap": "Dễ bị tiền bạc ràng buộc, làm nhiều mà giữ ít.",
+    "tu_ngay": "2046-12-13",
+    "den_ngay": "2056-12-12",
     "hien_tai": false
    },
    {
@@ -183,6 +196,8 @@
     "hai_cach_khac": true,
     "mot_cau": "Giai đoạn cân bằng: hợp để nhận vai khó, lên vị trí cần bản lĩnh. Giai đoạn này hay có thay đổi về chỗ ở hoặc chuyện đôi lứa. Hai cách đọc cho kết quả ngược nhau ở giai đoạn này: nên thử nhỏ trước khi làm lớn.",
     "de_vap": "Dễ quá tải và va chạm với người có quyền.",
+    "tu_ngay": "2056-12-13",
+    "den_ngay": "2066-12-12",
     "hien_tai": false
    },
    {
@@ -199,6 +214,8 @@
     "hai_cach_khac": true,
     "mot_cau": "Giai đoạn cần lưu ý: dễ bị ràng buộc bởi quy định và kỳ vọng. Nên nói rõ điều mình chịu được và điều không. Hai cách đọc khác nhau ở giai đoạn này: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
     "de_vap": "Dễ bị ràng buộc bởi quy định và kỳ vọng.",
+    "tu_ngay": "2066-12-13",
+    "den_ngay": "2076-12-12",
     "hien_tai": false
    }
   ],
@@ -685,35 +702,47 @@
     "cau_hoi": "Đời tôi đi qua những giai đoạn mười năm nào?",
     "muc": "thuan",
     "nhan_muc": "Thuận lợi",
-    "tom_tat": "Bạn đang ở giai đoạn 36–45 tuổi, xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ.",
+    "tom_tat": "Bạn đang ở giai đoạn 26–35 tuổi, xoay quanh làm ra sản phẩm, tận hưởng, con cái, tay nghề.",
     "hop": [
      {
       "loai": "thoi_diem",
       "tieu_de": "Giai đoạn bạn đang đi",
+      "noi_dung": "Từ 26 đến 35 tuổi (2016–2025): làm ra sản phẩm, tận hưởng, con cái, tay nghề. Giai đoạn thuận: hợp để trau tay nghề, làm sản phẩm, lo cho con cái và sống thong thả hơn.",
+      "can_cu": [
+       "Đại vận Giáp Thân (Thực Thần), 2016–2025; cách 1: thuận lợi, cách 2: thuận lợi"
+      ],
+      "ma_mau": "ds.bt.cuoc_doi.thuc_than.thuan.hien_tai",
+      "muc": "thuan",
+      "tu_tuoi": 26,
+      "den_tuoi": 35
+     },
+     {
+      "loai": "thoi_diem",
+      "tieu_de": "Giai đoạn kế tiếp",
       "noi_dung": "Từ 36 đến 45 tuổi (2026–2035): sáng tạo, thể hiện, đổi khuôn khổ cũ. Giai đoạn thuận: hợp để làm điều mới, ra mắt sản phẩm, xây tiếng nói riêng.",
       "can_cu": [
        "Đại vận Ất Dậu (Thương Quan), 2026–2035; cách 1: thuận lợi, cách 2: thuận lợi"
       ],
-      "ma_mau": "ds.bt.cuoc_doi.thuong_quan.thuan.hien_tai",
+      "ma_mau": "ds.bt.cuoc_doi.thuong_quan.thuan.tiep",
       "muc": "thuan",
       "tu_tuoi": 36,
       "den_tuoi": 45
      },
      {
-      "loai": "thoi_diem",
-      "tieu_de": "Giai đoạn kế tiếp",
-      "noi_dung": "Từ 46 đến 55 tuổi (2036–2045): cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn. Giai đoạn cần lưu ý: dễ tiêu rộng tay, bỏ vốn theo cảm hứng. Nên giữ khoản dự phòng trước khi mở việc mới. Hai cách đọc khác nhau ở giai đoạn này: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+      "loai": "luu_y",
+      "tieu_de": "Giai đoạn nên chuẩn bị trước",
+      "noi_dung": "Từ 46 đến 55 tuổi (2036–2045): cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn. Dễ tiêu rộng tay, bỏ vốn theo cảm hứng. Nên giữ khoản dự phòng trước khi mở việc mới.",
       "can_cu": [
        "Đại vận Bính Tuất (Thiên Tài), 2036–2045; cách 1: cần lưu ý, cách 2: cân bằng"
       ],
-      "ma_mau": "ds.bt.cuoc_doi.thien_tai.can_chu_dong.tiep",
-      "muc": "can_chu_dong",
+      "ma_mau": "ds.bt.cuoc_doi.thien_tai.can_chu_dong.vap",
+      "huong_xu_ly": "Nên giữ khoản dự phòng trước khi mở việc mới.",
       "tu_tuoi": 46,
       "den_tuoi": 55
      }
     ],
     "doan": [
-     "Bạn đang ở giai đoạn 36–45 tuổi, xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ.",
+     "Bạn đang ở giai đoạn 26–35 tuổi, xoay quanh làm ra sản phẩm, tận hưởng, con cái, tay nghề.",
      "Trên dòng thời gian của bạn có 2 giai đoạn thuận lợi, 2 giai đoạn cân bằng, 4 giai đoạn cần lưu ý. Giai đoạn cần lưu ý không phải lúc kém may — chỉ là lúc nên chuẩn bị trước nhiều hơn.",
      "Có 4 giai đoạn mà hai cách đọc cho kết quả khác nhau; ở những giai đoạn đó, đối chiếu với điều bạn thực sự trải qua để chọn cách hợp với mình."
     ],
@@ -728,15 +757,15 @@
      "76–85 tuổi: đại vận Kỷ Sửu (Chính Quan)",
      "Tuổi tính theo năm khởi vận (tuổi tròn); mỗi đại vận mười năm",
      "Mức mỗi đại vận: can 1 điểm, chi 2 điểm theo hành cần thêm / nên bớt của từng cách",
-     "Đại vận tham chiếu lúc xem: Ất Dậu (dang_di)"
+     "Đại vận tham chiếu lúc xem: Giáp Thân (dang_di)"
     ],
     "cau_tu_soi": "Nhìn lại mười năm vừa qua, điều gì bạn muốn giữ và điều gì muốn bỏ ở mười năm tới?",
     "van_tham_chieu": {
      "trang_thai": "dang_di",
-     "chi_so": 3
+     "chi_so": 2
     },
     "moi_xem": {
-     "diem_nhan": "Bạn đang ở giai đoạn 36–45 tuổi, xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ.",
+     "diem_nhan": "Bạn đang ở giai đoạn 26–35 tuổi, xoay quanh làm ra sản phẩm, tận hưởng, con cái, tay nghề.",
      "cau_hoi": "Mười năm bạn đang đi xoay quanh điều gì, và giai đoạn nào sắp tới nên chuẩn bị trước?",
      "so_doan": 3,
      "phut_doc": 1
@@ -1638,16 +1667,16 @@
     "cau_hoi": "Năm nay và mấy tháng tới của tôi thế nào?",
     "muc": "thuan",
     "nhan_muc": "Thuận lợi",
-    "tom_tat": "Mười năm này xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
+    "tom_tat": "Mười năm này xoay quanh làm ra sản phẩm, tận hưởng, con cái, tay nghề; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
     "hop": [
      {
       "loai": "thoi_diem",
-      "tieu_de": "Mười năm này: sáng tạo, thể hiện, đổi khuôn khổ cũ",
-      "noi_dung": "Mười năm này xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ; năm nay là năm thứ 1 của giai đoạn. Cả giai đoạn ở mức thuận lợi với bạn.",
+      "tieu_de": "Mười năm này: làm ra sản phẩm, tận hưởng, con cái, tay nghề",
+      "noi_dung": "Mười năm này xoay quanh làm ra sản phẩm, tận hưởng, con cái, tay nghề; năm nay là năm thứ 10 của giai đoạn. Cả giai đoạn ở mức thuận lợi với bạn. Từ ngày 13/12/2026, bạn sang giai đoạn mười năm mới, xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ.",
       "can_cu": [
-       "Đại vận Ất Dậu (Thương Quan), 2026–2035 — dang_di"
+       "Đại vận Giáp Thân (Thực Thần), 2016–2025 — dang_di"
       ],
-      "ma_mau": "ds.bt.nam_nay.van.thuong_quan.thuan",
+      "ma_mau": "ds.bt.nam_nay.van.thuc_than.thuan",
       "muc": "thuan"
      },
      {
@@ -1677,8 +1706,8 @@
       "can_cu": [
        "Lưu nguyệt (tháng theo tiết) Mậu Tuất (Thất Sát), từ 2026-10-08"
       ],
-      "ma_mau": "ds.bt.nam_nay.thang1.that_sat.can_chu_dong",
-      "muc": "can_chu_dong",
+      "ma_mau": "ds.bt.nam_nay.thang1.that_sat.can_bang",
+      "muc": "can_bang",
       "tu": "2026-10-08",
       "den": "2026-11-06"
      },
@@ -1708,12 +1737,12 @@
      }
     ],
     "doan": [
-     "Mười năm này xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
-     "Ba tháng tới (tính theo tiết): từ 8/10 đến 6/11 cần lưu ý; từ 7/11 đến 6/12 cân bằng; từ 7/12 đến 4/1 cân bằng.",
+     "Mười năm này xoay quanh làm ra sản phẩm, tận hưởng, con cái, tay nghề; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
+     "Ba tháng tới (tính theo tiết): từ 8/10 đến 6/11 cân bằng; từ 7/11 đến 6/12 cân bằng; từ 7/12 đến 4/1 cân bằng.",
      "Khi các lớp nói khác nhau, ưu tiên mười năm trước, rồi đến năm, rồi mới đến tháng."
     ],
     "can_cu": [
-     "Đại vận Ất Dậu (Thương Quan), 2026–2035 — dang_di",
+     "Đại vận Giáp Thân (Thực Thần), 2016–2025 — dang_di",
      "Lưu niên 2026 Bính Ngọ (Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng",
      "năm – lưu niên: Ngọ–Ngọ tự hình",
      "tháng – lưu niên: Tân–Bính ngũ hợp (hoá Thủy)",
@@ -1730,10 +1759,10 @@
     "nam_xem": 2026,
     "van_tham_chieu": {
      "trang_thai": "dang_di",
-     "chi_so": 3
+     "chi_so": 2
     },
     "moi_xem": {
-     "diem_nhan": "Mười năm này xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
+     "diem_nhan": "Mười năm này xoay quanh làm ra sản phẩm, tận hưởng, con cái, tay nghề; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
      "cau_hoi": "Năm nay nên dồn sức vào đâu, và tháng nào sắp tới hợp để bắt đầu việc mới?",
      "so_doan": 3,
      "phut_doc": 1
@@ -1752,14 +1781,14 @@
       ]
      },
      {
-      "ma": "thuong_quan",
-      "ten": "Thương Quan",
-      "han": "傷官",
+      "ma": "thuc_than",
+      "ten": "Thực Thần",
+      "han": "食神",
       "mo_dun": "battu",
-      "de_hieu": "Thứ bạn sinh ra một cách sắc bén: sáng tạo phá cách, ăn nói, dám chống khuôn khổ.",
+      "de_hieu": "Thứ bạn sinh ra một cách thoải mái: tài năng, hưởng thụ, sự sáng tạo ôn hoà.",
       "vi_du": null,
       "khop": [
-       "Thương Quan"
+       "Thực Thần"
       ]
      },
      {
@@ -1844,7 +1873,7 @@
       "noi_dung": "Năm 2026, tiền làm ăn vào ra lớn; một quyết định vội có thể kéo theo cả năm gỡ. Hai cách đọc khác nhau ở năm 2026: một cách thấy cần lưu ý, cách kia thấy cân bằng. Nên tránh: mở rộng làm ăn bằng tiền vay, nhận lời đầu tư từ người mới quen. Nên làm: làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc.",
       "can_cu": [
        "Năm 2026 Bính Ngọ (tính từ Lập xuân, Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
-       "Năm 2026 nằm trong đại vận Ất Dậu (thuận lợi)"
+       "Năm 2026 nằm trong đại vận Giáp Thân (thuận lợi)"
       ],
       "ma_mau": "ds.bt.van_han.thien_tai.can.lon",
       "huong_xu_ly": "Nên làm: làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc.",
@@ -1892,7 +1921,7 @@
      {
       "loai": "thoi_diem",
       "tieu_de": "Mười hai tháng tới",
-      "noi_dung": "Tháng nên đi chậm: từ 8/10 đến 6/11 (áp lực, việc gấp, người khó); từ 4/2 đến 5/3 (bạn bè, người ngang hàng); từ 6/3 đến 4/4 (tiền chung, cạnh tranh); từ 5/4 đến 5/5 (tay nghề, sức khoẻ, con cái). Tháng thuận để bắt đầu việc mới: từ 8/8 đến 7/9; từ 8/9 đến 7/10.",
+      "noi_dung": "Tháng nên đi chậm: từ 4/2 đến 5/3 (bạn bè, người ngang hàng); từ 6/3 đến 4/4 (tiền chung, cạnh tranh). Tháng thuận để bắt đầu việc mới: từ 8/8 đến 7/9; từ 8/9 đến 7/10.",
       "can_cu": [
        "Tháng tiết Mậu Tuất (Thất Sát) từ 2026-10-08: cách 1 cần lưu ý, cách 2 cân bằng",
        "Tháng tiết Kỷ Hợi (Chính Quan) từ 2026-11-07: cách 1 thuận lợi, cách 2 cần lưu ý",
@@ -1920,7 +1949,8 @@
      "Ưu tiên: đại vận > lưu niên > lưu nguyệt",
      "Mức mỗi năm / tháng: can 1 điểm, chi 2 điểm theo hành cần thêm (+) / nên bớt (−) của từng cách; ≥ 1 thuận, ≤ −1 cần lưu ý; hai cách gộp như đại vận (ngược nhau → cân bằng, nói rõ)",
      "Năm 2026 Bính Ngọ (tính từ Lập xuân, Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
-     "Năm 2026 nằm trong đại vận Ất Dậu (thuận lợi)",
+     "Năm 2026 nằm trong đại vận Giáp Thân (thuận lợi)",
+     "Ngày 13/12/2026 sang đại vận Ất Dậu",
      "Năm 2026: ngày – lưu niên: Ngọ–Ngọ tự hình",
      "Chi trụ năm Ngọ, chi năm Ngọ: năm tuổi (tập quán dân gian, không đổi mức)",
      "Năm 2027 Đinh Mùi (tính từ Lập xuân, Chính Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
@@ -1987,7 +2017,8 @@
       "nen_lam": "làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc",
       "can_cu": [
        "Năm 2026 Bính Ngọ (tính từ Lập xuân, Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng → Cần lưu ý",
-       "Năm 2026 nằm trong đại vận Ất Dậu (thuận lợi)",
+       "Năm 2026 nằm trong đại vận Giáp Thân (thuận lợi)",
+       "Ngày 13/12/2026 sang đại vận Ất Dậu",
        "Năm 2026: ngày – lưu niên: Ngọ–Ngọ tự hình",
        "Chi trụ năm Ngọ, chi năm Ngọ: năm tuổi (tập quán dân gian, không đổi mức)"
       ]
@@ -2230,8 +2261,8 @@
      {
       "tu": "2026-10-08",
       "den": "2026-11-06",
-      "muc": "can_chu_dong",
-      "nhan_muc": "Cần lưu ý",
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
       "hai_cach_khac": true,
       "mang": "áp lực, việc gấp, người khó"
      },
@@ -2278,32 +2309,32 @@
      {
       "tu": "2027-04-05",
       "den": "2027-05-05",
-      "muc": "can_chu_dong",
-      "nhan_muc": "Cần lưu ý",
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
       "hai_cach_khac": true,
       "mang": "tay nghề, sức khoẻ, con cái"
      },
      {
       "tu": "2027-05-06",
       "den": "2027-06-05",
-      "muc": "can_chu_dong",
-      "nhan_muc": "Cần lưu ý",
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
       "hai_cach_khac": true,
       "mang": "lời nói, giấy tờ, cấp trên"
      },
      {
       "tu": "2027-06-06",
       "den": "2027-07-06",
-      "muc": "can_chu_dong",
-      "nhan_muc": "Cần lưu ý",
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
       "hai_cach_khac": true,
       "mang": "tiền làm ăn, khoản ngoài lương"
      },
      {
       "tu": "2027-07-07",
       "den": "2027-08-07",
-      "muc": "can_chu_dong",
-      "nhan_muc": "Cần lưu ý",
+      "muc": "can_bang",
+      "nhan_muc": "Cân bằng",
       "hai_cach_khac": true,
       "mang": "tiền lương, tích luỹ, chuyện nhà"
      },

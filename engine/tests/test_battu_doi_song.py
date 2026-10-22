@@ -172,7 +172,23 @@ def test_dai_van_hai_cach(bc):
             assert "Hai cách đọc" in g["mot_cau"], g["mot_cau"]
         assert g["den_tuoi"] == g["tu_tuoi"] + 9 and g["nam_den"] == g["nam_tu"] + 9 and g["nhan"]
     ht = [g for g in tgb if g["hien_tai"]]
-    assert len(ht) == 1 and ht[0]["cung"] == "Ất Dậu" and ht[0]["nam_tu"] == 2026
+    # Đang đi theo NGÀY khởi vận: Ất Dậu bắt đầu 13/12/2026 → ngày 21/10/2026 vẫn ở Giáp Thân (2016-12-13 → 2026-12-12)
+    assert len(ht) == 1 and ht[0]["cung"] == "Giáp Thân" and (ht[0]["tu_ngay"], ht[0]["den_ngay"]) == (
+        "2016-12-13", "2026-12-12")
+
+
+def test_sap_doi_van_noi_ro_ngay(bc):
+    nn = next(c for c in bc["chuong"] if c["ma"] == "nam_nay")
+    van = next(h for h in nn["hop"] if h["ma_mau"].startswith("ds.bt.nam_nay.van."))
+    assert "năm thứ 10 của giai đoạn" in van["noi_dung"]
+    assert "Từ ngày 13/12/2026, bạn sang giai đoạn mười năm mới" in van["noi_dung"]
+    # Qua ngày đổi vận: đang đi Ất Dậu, năm thứ 1
+    b = toan_bo.battu(SINH, ngay_xem=dt.date(2026, 12, 13))
+    ht = [g for g in b["thoi_gian_bieu"] if g["hien_tai"]]
+    assert ht[0]["cung"] == "Ất Dậu"
+    van = next(h for h in next(c for c in b["chuong"] if c["ma"] == "nam_nay")["hop"]
+               if h["ma_mau"].startswith("ds.bt.nam_nay.van."))
+    assert "năm thứ 1 của giai đoạn" in van["noi_dung"] and "Từ ngày" not in van["noi_dung"]
 
 
 def test_nam_nay_uu_tien_va_thang_tiet(bc):
@@ -485,7 +501,7 @@ def test_van_tham_chieu_nguoi_lon_tuoi(nam):
         if ht:
             assert nn["van_tham_chieu"] == {"trang_thai": "dang_di", "chi_so": ht[0]}
             continue
-        assert XEM.year > tgb[-1]["nam_den"]
+        assert XEM.isoformat() > tgb[-1]["den_ngay"]
         assert nn["van_tham_chieu"] == {"trang_thai": "da_qua_van_cuoi", "chi_so": len(tgb) - 1}
         chu = _chu_thoi_gian(b)
         for cum in ("Mười năm này", "mười năm tới", "Mười năm sắp tới", "Giai đoạn gần đây", "Giai đoạn sau đó",
@@ -498,7 +514,11 @@ def test_van_tham_chieu_nguoi_lon_tuoi(nam):
 
 
 def test_van_tham_chieu_vi_du_1944():
-    b = toan_bo.battu({"lich": dt.datetime(1944, 1, 15, 10), "gioi_tinh": "nam"}, ngay_xem=XEM)
+    # Vận cuối Đinh Tỵ: 7/12/2016 → 6/12/2026 (theo ngày khởi vận) → 21/10/2026 vẫn đang đi, sang 2027 thì đã qua
+    sinh = {"lich": dt.datetime(1944, 1, 15, 10), "gioi_tinh": "nam"}
+    b = toan_bo.battu(sinh, ngay_xem=XEM)
+    assert _ch(b, "nam_nay")["van_tham_chieu"] == {"trang_thai": "dang_di", "chi_so": 7}
+    b = toan_bo.battu(sinh, ngay_xem=dt.date(2027, 1, 10))
     assert _ch(b, "nam_nay")["van_tham_chieu"]["trang_thai"] == "da_qua_van_cuoi"
     assert "bắt đầu năm 2016" not in _chu_thoi_gian(b)
 
@@ -516,9 +536,9 @@ def test_van_tham_chieu_tre_chua_khoi_van():
 
 def test_van_tham_chieu_dang_di_giu_loi_cu(bc):
     nn = _ch(bc, "nam_nay")
-    assert nn["van_tham_chieu"] == {"trang_thai": "dang_di", "chi_so": 3}
+    assert nn["van_tham_chieu"] == {"trang_thai": "dang_di", "chi_so": 2}
     assert nn["tom_tat"].startswith("Mười năm này xoay quanh")
-    assert "năm thứ 1 của giai đoạn" in nn["hop"][0]["noi_dung"]
+    assert "năm thứ 10 của giai đoạn" in nn["hop"][0]["noi_dung"]
 
 
 _MANG_HAI_CACH = ("tong_quan", "ngu_hanh", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh")

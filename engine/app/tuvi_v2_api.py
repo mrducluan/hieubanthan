@@ -22,7 +22,7 @@ from app import config
 from app.config import ENGINE_VERSION, Region
 from app.hoidap.tuvi import tom_tat
 from app.luangiai import tuvi_dinh_gio, tuvi_hop_tham, tuvi_nhip_3_thang, tuvi_phi_hoa
-from app.tuvi_api import TuanTrietInput, _DauVao, _loi_an_sao
+from app.tuvi_api import TuanTrietInput, _DauVao, _loi_an_sao, _MaMau, _Phieu
 
 router = APIRouter(prefix="/v1/tuvi", tags=["tuvi"])
 _VN = _dt.timezone(_dt.timedelta(hours=7))
@@ -109,6 +109,9 @@ class HopThamInput(BaseModel):
     nguoi_kia: NguoiKiaInput
     quan_he: Literal["nguoi_yeu", "vo_chong", "ban_be", "dong_nghiep", "doi_tac", "sep", "cha_me_con",
                      "gia_dinh"] = "nguoi_yeu"
+    # Tầng HỌC (kiểm chứng loại `hai_nguoi`, migration 0021): web máy chủ gửi — chỉ mã + số đếm, không chữ người dùng.
+    trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)
+    ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
 
 
 @router.post("/hop-tham")
@@ -141,7 +144,9 @@ def api_hop_tham(inp: HopThamInput) -> dict:
     # Ngày dương → cung phi tính năm theo Lập xuân như /phong-thuy.
     kq = tuvi_hop_tham.lap(tom_tat(la), _can_nam(la, dv.can), can_kia, inp.quan_he, ls_kia=ls_kia,
                            ban={"nam_am": dv.am[2], "gioi_tinh": inp.la_so.gender, "ngay_duong": dv.duong_goc},
-                           kia={"nam_am": nam_kia, "gioi_tinh": k.gender, "ngay_duong": ngay_kia})
+                           kia={"nam_am": nam_kia, "gioi_tinh": k.gender, "ngay_duong": ngay_kia},
+                           trong_so={m: v.model_dump() for m, v in inp.trong_so.items()} if inp.trong_so else None,
+                           ca_nhan=inp.ca_nhan)
     return {"engine_version": ENGINE_VERSION, **kq}
 
 

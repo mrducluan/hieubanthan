@@ -110,9 +110,11 @@ def _gon(ds: list[dict]) -> str:
 
 
 def lap(ls_ban: dict, can_nam_ban: str, can_nam_kia: str, quan_he: str = MAC_DINH,
-        ls_kia: dict | None = None, ban: dict | None = None, kia: dict | None = None) -> dict:
+        ls_kia: dict | None = None, ban: dict | None = None, kia: dict | None = None,
+        trong_so: dict | None = None, ca_nhan: dict | None = None) -> dict:
     """`ls_*` = hoidap.tuvi.tom_tat(lá số). `ls_kia` chỉ có khi người kia đủ giờ + giới tính + nơi sinh.
-    `ban`/`kia` = {"nam_am", "gioi_tinh"} → có thì chấm điểm tham khảo (`diem`, luật tuvi_hai_nguoi)."""
+    `ban`/`kia` = {"nam_am", "gioi_tinh"} → có thì chấm điểm tham khảo (`diem`, luật tuvi_hai_nguoi). `trong_so` /
+    `ca_nhan` = tầng HỌC của hộp điểm (kiểm chứng loại `hai_nguoi`) — chỉ chọn/xếp hộp, không đổi điểm."""
     if quan_he not in QUAN_HE:
         raise ValueError(f"Quan hệ không hợp lệ: {quan_he}")
     nhan = kb.hop_tham("quan_he", quan_he)
@@ -132,7 +134,7 @@ def lap(ls_ban: dict, can_nam_ban: str, can_nam_kia: str, quan_he: str = MAC_DIN
                "hơn.")
     diem = None
     if ban is not None and kia is not None:
-        diem = tuvi_hai_nguoi.cham_diem(ban, kia, quan_he, vao_ban, ban_vao)
+        diem = tuvi_hai_nguoi.cham_diem(ban, kia, quan_he, vao_ban, ban_vao, trong_so=trong_so, ca_nhan=ca_nhan)
         tom.insert(0, f"Điểm tham khảo: {diem['tong']}/100 — {diem['nhan_muc']}.")
     luu_y = kb.hop_tham("luu_y")
     luu_y = [s for s in luu_y if isinstance(s, str)] if isinstance(luu_y, list) and luu_y else []

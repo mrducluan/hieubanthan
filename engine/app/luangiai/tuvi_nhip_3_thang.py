@@ -7,6 +7,7 @@ và tứ hoá lưu niên (`calc.tuvi_an_sao.van_han`). Không gọi LLM, không 
 Luật công khai (mỗi tháng):
 - chong_ky            Kỵ tháng cùng trục (đích hoặc xung) với Kỵ năm                    → cần thận trọng
 - ky_xung_cung_chinh  Kỵ tháng xung Mệnh / Tài Bạch / Quan Lộc                          → cần thận trọng
+- ky_nhap_cung_chinh  Kỵ tháng rơi thẳng vào Mệnh / Tài Bạch / Quan Lộc (chốt 2026-10-22) → cần thận trọng
 - loc_nhap_cung_chinh Lộc tháng vào Mệnh / Tài Bạch / Quan Lộc / Điền Trạch            → thuận
 - song_loc            Lộc tháng và Lộc năm cùng cung                                    → thuận
 - khoa_giai           Khoa tháng vào cung đang chồng Kỵ                                 → thêm lý do, không đổi mức
@@ -40,6 +41,8 @@ _LY_DO = {
     "chong_ky": "Hoá Kỵ của tháng ({sao}) rơi vào trục cung {cung}, nơi Hoá Kỵ của năm đã ở hoặc chiếu tới: "
                 "chuyện thuộc cung này dễ dồn lại, nên làm chậm và rõ ràng.",
     "ky_xung_cung_chinh": "Hoá Kỵ của tháng ({sao}) chiếu sang cung {cung}: chuyện {mang} cần chăm chút hơn.",
+    "ky_nhap_cung_chinh": "Hoá Kỵ của tháng ({sao}) rơi thẳng vào cung {cung}: chuyện {mang} là chỗ dễ vướng nhất "
+                          "tháng này, nên làm chậm và rõ ràng.",
     "loc_nhap_cung_chinh": "Hoá Lộc của tháng ({sao}) vào cung {cung}: {mang} có thêm thuận lợi.",
     "song_loc": "Lộc của tháng và Lộc của năm cùng ở cung {cung}: thuận lợi cộng hưởng cho {mang}.",
     "khoa_giai": "Hoá Khoa của tháng ({sao}) cũng vào cung {cung}: có thêm sự rõ ràng, người hỗ trợ để gỡ dần.",
@@ -103,10 +106,10 @@ _NOI_TIEP_MAC_DINH = {
 _GIAI_MUC = {
     "thuan": "Mức Thuận: Lộc tháng vào Mệnh / Tài Bạch / Quan Lộc / Điền Trạch hoặc trùng cung Lộc năm, "
              "và không có luật cần thận trọng nào.",
-    "can_than": "Mức Cần thận trọng: Kỵ tháng cùng trục với Kỵ năm hoặc chiếu Mệnh / Tài Bạch / Quan Lộc "
+    "can_than": "Mức Cần thận trọng: Kỵ tháng cùng trục với Kỵ năm, hoặc rơi vào / chiếu Mệnh / Tài Bạch / Quan Lộc "
                 "(luật cần thận trọng thắng luật thuận).",
     "binh": "Mức Bình: Lộc tháng không vào Mệnh / Tài Bạch / Quan Lộc / Điền Trạch và không trùng Lộc năm; Kỵ tháng "
-            "không chiếu Mệnh / Tài Bạch / Quan Lộc và không cùng trục Kỵ năm.",
+            "không rơi vào hay chiếu Mệnh / Tài Bạch / Quan Lộc và không cùng trục Kỵ năm.",
 }
 
 
@@ -222,6 +225,8 @@ def dien_giai_thang(t: dict, th: list[dict], nam: dict, muc: str, ly: list[dict]
         if ky_x:
             nd.append(_cau("ky_xung", ky_x, "ky_xung"))
             cu.append(ly_cau["ky_xung_cung_chinh"])
+        if "ky_nhap_cung_chinh" in ma:
+            cu.append(ly_cau["ky_nhap_cung_chinh"])
         if "chong_ky" in ma:
             nd.append(_bo_sung("chong_ky"))
             cu.append(ly_cau["chong_ky"])
@@ -317,6 +322,8 @@ def xep_muc(thang: dict, nam: dict, xung: dict) -> tuple[str, list[dict]]:
         ly.append({"ma": "chong_ky", "hoa": "Kỵ", "cung": ky_t})
     if ky_t and xung.get(ky_t) in CUNG_CHINH:
         ly.append({"ma": "ky_xung_cung_chinh", "hoa": "Kỵ", "cung": xung[ky_t]})
+    if ky_t in CUNG_CHINH:
+        ly.append({"ma": "ky_nhap_cung_chinh", "hoa": "Kỵ", "cung": ky_t})
     if chong and khoa_t and khoa_t in (ky_t, ky_n):
         ly.append({"ma": "khoa_giai", "hoa": "Khoa", "cung": khoa_t})
     if loc_t and loc_t in CUNG_LOC:
@@ -324,7 +331,7 @@ def xep_muc(thang: dict, nam: dict, xung: dict) -> tuple[str, list[dict]]:
     if loc_t and loc_t == loc_n:
         ly.append({"ma": "song_loc", "hoa": "Lộc", "cung": loc_t})
     ma = {x["ma"] for x in ly}
-    if ma & {"chong_ky", "ky_xung_cung_chinh"}:
+    if ma & {"chong_ky", "ky_xung_cung_chinh", "ky_nhap_cung_chinh"}:
         return "can_than", ly
     if ma & {"loc_nhap_cung_chinh", "song_loc"}:
         return "thuan", ly

@@ -157,7 +157,10 @@ def _m_dung_than(ls: dict) -> dict:
             "nhat_chu": ls["nhat_chu"]["can"], "thang": ls["tru"][1]["chi"], **kb.meta()}
 
 
-def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: int) -> dict:
+def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: int,
+                   ngay_hien_tai: dt.date | None = None) -> dict:
+    """`ngay_hien_tai`: câu hỏi về HIỆN TẠI (không nêu năm) → đại vận đang đi theo ngày khởi vận; câu nêu năm → đại vận
+    giữ phần lớn năm đó."""
     goi = {"phan_loai": {k: pl[k] for k in ("loai", "chu_de", "xu_ly")},
            "muc": [], "can_them": [], "mau": None, "luu_y": None}
     muc = goi["muc"]
@@ -195,7 +198,7 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
     muc.append({"loai": "tu_tru", "tru": _tru_str(ls), "nhat_chu": ls["nhat_chu"], **kb.meta()})
     dm = ls["nhat_chu"]["can"]
     if loai == "van":
-        dv = bt.dai_van_tai(ls, nam_xem)
+        dv = bt.dai_van_theo_ngay(ls, ngay_hien_tai) if ngay_hien_tai else bt.dai_van_tai(ls, nam_xem)
         ds = ls["dai_van"]["ds"]
         muc.append({"loai": "khoi_van", **ls["dai_van"]["khoi_van"], "thuan": ls["dai_van"]["thuan"],
                     "ngay_khoi": ls["dai_van"]["ngay_khoi"], **kb.meta()})
@@ -416,7 +419,8 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     ls = None
     if sinh and pl["loai"] in ("la_so", "van", "hop"):
         ls = bt.la_so(sinh["lich"], sinh["gioi_tinh"], sinh.get("gio_ty", "da_ty"))
-    goi = goi_bang_chung(pl, ls, sinh["gioi_tinh"] if sinh else None, nam_xem)
+    hien_tai = ngay_xem if not pl["nam_xem"] and nam_xem == ngay_xem.year else None
+    goi = goi_bang_chung(pl, ls, sinh["gioi_tinh"] if sinh else None, nam_xem, hien_tai)
     van = van_template(goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:

@@ -71,6 +71,11 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   so_chuong: "number",  // CTA-1: số chương còn khoá khi bấm nút Sao
   dung: "number",       // CTA-1: trò đoán số — 1 đúng, 0 sai
   bien_the: "string",   // CTA-1: mã biến thể câu mời / tiêu đề (t0, b1…) để so câu nào được bấm nhiều
+  cach_cuc: "string",   // BT-DC: mã cách cục Bát tự (thien_tai…) — chỉ mã, không tứ trụ
+  than: "string",       // BT-DC: manh / yeu / can_bang
+  khop_1: "number",     // BT-DC: số năm đã qua người dùng kể khớp cách cân sức (đếm trên máy, không gửi năm)
+  khop_2: "number",     // BT-DC: … khớp cách theo tháng sinh
+  so_cau: "number",     // BT-DC: số câu đã trả lời (bỏ "không nhớ")
   vi_tri: "string",     // ND-2: tren / duoi / cuoi   // SAO-3: mã nhiệm vụ (luu_ho_so / hoi_3_cau / moi_1_ban)
 };
 const GIOI_HAN_CHUOI = 40;

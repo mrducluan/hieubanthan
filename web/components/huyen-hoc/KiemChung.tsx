@@ -11,7 +11,7 @@ import { tyLeHien, type TyLe } from "@/lib/ty-le-kiem-chung";
 
 const KHOA = (k: string) => `hbt.mot-lan.kiem-chung.${k}`;
 
-export type LoaiKiemChungWeb = LoaiKiemChung | "doi_song";
+export type LoaiKiemChungWeb = LoaiKiemChung;
 
 function guiMayChu(loai: string, mau: string, phai: string, ket_qua: KetQuaKiemChung) {
   try {

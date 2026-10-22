@@ -94,6 +94,19 @@ def test_chu_ky_so_chi_co_con_so():
     assert c.post("/v1/thanso/chu-ky-so", json={**body, "phai": "kabbalah"}).status_code == 422
 
 
+def test_chu_ky_so_luon_qua_rang_buoc_sql():
+    """Rà vòng HỌC 2026-10-22: SQL `thanso_chu_ky_hop_le` (0016) chỉ nhận Pitago 1–33, Chaldea 0–9, số nguyên. Tên không có
+    nguyên âm / phụ âm (vd "Y", chỉ có số) cho chỉ số 0 → cả góp ý bị DB từ chối âm thầm. Engine bỏ khoá rỗng/0 thay vì gửi."""
+    c = TestClient(app)
+    for ten in (["Y"], ["Ng"], ["123"], ["Nguyễn Thị Ý"], ["Quỳnh"]):
+        for phai in ("pitago", "chaldea", "tong_hop"):
+            r = c.post("/v1/thanso/chu-ky-so", json={"ho_ten": ten, "ngay": 11, "thang": 10, "nam": 2004, "phai": phai})
+            assert r.status_code == 200
+            for p, v in r.json()["chu_ky"].items():
+                lo, hi = (1, 33) if p == "pitago" else (0, 9)
+                assert v and all(isinstance(x, int) and lo <= x <= hi for x in v.values()), (ten, phai, v)
+
+
 def test_khong_cong_huong_gia():
     import random
     random.seed(1)

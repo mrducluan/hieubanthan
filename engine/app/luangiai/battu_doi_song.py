@@ -593,7 +593,8 @@ def _van_kb(tt: str) -> dict:
                           "nen_chu_dong": "Nên chuẩn bị sớm cho việc lớn."}
 
 
-def thoi_gian_bieu(pt: dict, nam_xem: int) -> list[dict]:
+def thoi_gian_bieu(pt: dict, ngay_xem: dt.date) -> list[dict]:
+    """Tám đại vận + mức hai cách. "Đang đi" theo NGÀY khởi vận thật (`tu_ngay`…`den_ngay`), không theo năm dương."""
     ls = pt["ls"]
     nc = ls["nhat_chu"]["can"]
     chi_ngay = ls["tru"][2]["chi"]
@@ -615,7 +616,8 @@ def thoi_gian_bieu(pt: dict, nam_xem: int) -> list[dict]:
                    "nam_den": d["den_nam"], "cung": f"{d['can']} {d['chi']}", "nhan": f"vận {d['can']} {d['chi']}",
                    "thap_than": tt, "chu_de": k["chu_de"], "muc": muc, "muc_cach_1": m1, "muc_cach_2": m2,
                    "hai_cach_khac": m1 != m2, "mot_cau": mot.strip(), "de_vap": k["de_vap"],
-                   "hien_tai": d["tu_nam"] <= nam_xem <= d["den_nam"]})
+                   "tu_ngay": d["tu_ngay"], "den_ngay": d["den_ngay"],
+                   "hien_tai": d["tu_ngay"] <= ngay_xem.isoformat() <= d["den_ngay"]})
     return ra
 
 
@@ -949,14 +951,45 @@ _VAN_TC_MAC_DINH = {
 }
 
 
-def van_tham_chieu(tgb: list[dict], nam_xem: int) -> dict:
+def _ngay_vn(iso: str) -> str:
+    d = dt.date.fromisoformat(iso)
+    return f"{d.day}/{d.month}/{d.year}"
+
+
+def _thang_nam(iso: str) -> str:
+    d = dt.date.fromisoformat(iso)
+    return f"{d.month}/{d.year}"
+
+
+def _khoang_ngay(g: dict) -> str:
+    return f"từ {_ngay_vn(g['tu_ngay'])} đến {_ngay_vn(g['den_ngay'])}"
+
+
+def _so_nam_tu(tu_ngay: str, ngay_xem: dt.date) -> int:
+    """Năm thứ mấy của giai đoạn, đếm từ ngày bắt đầu vận (không theo năm dương)."""
+    d = dt.date.fromisoformat(tu_ngay)
+    return max(1, ngay_xem.year - d.year - ((ngay_xem.month, ngay_xem.day) < (d.month, d.day)) + 1)
+
+
+def _sap_doi_van(tgb: list[dict], vt: dict, ngay_xem: dt.date) -> str:
+    """Giai đoạn mới bắt đầu trong vòng 12 tháng tới → nói rõ ngày (người dùng hay thắc mắc "đổi vận khi nào")."""
+    k = vt["chi_so"] + 1 if vt["trang_thai"] == "dang_di" else 0 if vt["trang_thai"] == "chua_khoi" else None
+    if k is None or k >= len(tgb):
+        return ""
+    bd = dt.date.fromisoformat(tgb[k]["tu_ngay"])
+    if not (ngay_xem < bd <= ngay_xem + dt.timedelta(days=366)):
+        return ""
+    return f"Từ ngày {_ngay_vn(tgb[k]['tu_ngay'])}, bạn sang giai đoạn mười năm mới, xoay quanh {tgb[k]['chu_de']}."
+
+
+def van_tham_chieu(tgb: list[dict], ngay_xem: dt.date) -> dict:
     """Đại vận THAM CHIẾU lúc xem + trạng thái — MỘT hàm cho chương "Các giai đoạn" và "Năm nay" (hai chương không tự
     chọn riêng): đang đi (vận chứa năm xem) · chưa khởi vận (năm xem trước vận đầu: vận đầu) · đã qua vận cuối (năm xem
-    sau vận cuối: vận cuối). Năm "đang đi" theo năm dương như `calc.battu` (việc mở: tính theo ngày khởi vận)."""
+    sau vận cuối: vận cuối). "Đang đi" theo ngày khởi vận thật (`calc.battu.dai_van_theo_ngay`)."""
     i = next((k for k, g in enumerate(tgb) if g["hien_tai"]), None)
     if i is not None:
         return {"trang_thai": "dang_di", "chi_so": i}
-    if nam_xem < tgb[0]["nam_tu"]:
+    if ngay_xem.isoformat() < tgb[0]["tu_ngay"]:
         return {"trang_thai": "chua_khoi", "chi_so": 0}
     return {"trang_thai": "da_qua_van_cuoi", "chi_so": len(tgb) - 1}
 
@@ -975,10 +1008,11 @@ def _chuong_cuoc_doi(tgb: list[dict], nam_xem: int, hoc: tuple, vt: dict) -> dic
     cand = []
 
     def cau(g: dict) -> str:
-        return f"Từ {g['tu_tuoi']} đến {g['den_tuoi']} tuổi ({g['nam_tu']}–{g['nam_den']}): {g['chu_de']}."
+        return f"Từ {g['tu_tuoi']} đến {g['den_tuoi']} tuổi ({_thang_nam(g['tu_ngay'])}–{_thang_nam(g['den_ngay'])}): " \
+               f"{g['chu_de']}."
 
     def cu(g: dict) -> list[str]:
-        return [f"Đại vận {g['cung']} ({g['thap_than']}), {g['nam_tu']}–{g['nam_den']}; "
+        return [f"Đại vận {g['cung']} ({g['thap_than']}), {_khoang_ngay(g)}; "
                 f"cách 1: {kb.nhan_muc(g['muc_cach_1']).lower()}, cách 2: {kb.nhan_muc(g['muc_cach_2']).lower()}"]
 
     def ma(g: dict, vai: str) -> str:
@@ -1104,13 +1138,16 @@ def _chuong_nam_nay(pt: dict, tgb: list[dict], ngay_xem: dt.date, hoc: tuple, vt
     cand, can_cu = [], []
     tt_van = vt["trang_thai"]
     g = tgb[vt["chi_so"]]
-    bien = {"so_nam": ngay_xem.year - g["nam_tu"] + 1, "so_van": len(tgb), "muc": kb.nhan_muc(g["muc"]).lower()}
+    bien = {"so_nam": _so_nam_tu(g["tu_ngay"], ngay_xem), "so_van": len(tgb), "muc": kb.nhan_muc(g["muc"]).lower()}
     cau_muc = _cau_van(vt, "nam_nay_muc", g, **bien)
     nd = _cau_van(vt, "nam_nay_hop", g, **bien)
     if cau_muc:                                  # vận đã qua: không nói mức, không so hai cách
         nd += f" {cau_muc}" + _cau_hai_cach(g["muc_cach_1"], g["muc_cach_2"], "cả mười năm")
+    sap_doi = _sap_doi_van(tgb, vt, ngay_xem)
+    if sap_doi:
+        nd += f" {sap_doi}"
     tieu = _cau_van(vt, "nam_nay_tieu_de", g, **bien)
-    can_cu.append(f"Đại vận {g['cung']} ({g['thap_than']}), {g['nam_tu']}–{g['nam_den']} — {tt_van}")
+    can_cu.append(f"Đại vận {g['cung']} ({g['thap_than']}), {_khoang_ngay(g)} — {tt_van}")
     ma_van = (_mm("nam_nay", "van", slug(g["thap_than"]), "da_qua") if tt_van == "da_qua_van_cuoi" else
               _mm("nam_nay", "van", slug(g["thap_than"]), g["muc"]))
     cand.append(_hop("thoi_diem", tieu if len(tieu) <= 60 else _VAN_TC_MAC_DINH[tt_van]["cuoc_doi_dau"], nd,
@@ -1190,7 +1227,7 @@ def _loi_bt(tt: str, loai: str, gd: str) -> dict:
     return ra
 
 
-def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int) -> list[dict]:
+def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int, vt: dict | None = None) -> list[dict]:
     """Mười năm tới (năm Lập xuân `nam0` …), luật ở chú thích trên. Khoá `_…` là nội bộ (hộp ứng viên)."""
     ls = pt["ls"]
     chi_sinh, chi_ngay = ls["tru"][0]["chi"], ls["tru"][2]["chi"]
@@ -1208,7 +1245,12 @@ def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int) -> list[d
             co.append("xung_ngay")
         elif any(q["loai"] in _HINH for q in q_ngay):
             co.append("hinh_ngay")
-        g_dv = next((g for g in tgb if g["nam_tu"] <= nam <= g["nam_den"]), None)
+        # Năm đang xem: đúng vận đang đi hôm nay (như chương Năm nay); năm khác: theo bảng đại vận (năm bắt đầu vận).
+        if k == 0 and vt and vt["trang_thai"] == "dang_di":
+            g_dv = tgb[vt["chi_so"]]
+        else:
+            g_dv = next((g for g in tgb if g["nam_tu"] <= nam <= g["nam_den"]), None)
+        doi = next((g for g in tgb if g["tu_ngay"][:4] == str(nam)), None)      # năm này có ngày đổi vận
         nen_tranh = nen_lam = mang = None
         if muc == "can_chu_dong":
             o = _loi_bt(tt, "can", gd)
@@ -1228,6 +1270,8 @@ def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int) -> list[d
               f"{kb.nhan_muc(m1).lower()}, cách 2: {kb.nhan_muc(m2).lower()} → {kb.nhan_muc(muc)}"]
         if g_dv:
             cu.append(f"Năm {nam} nằm trong đại vận {g_dv['cung']} ({kb.nhan_muc(g_dv['muc']).lower()})")
+        if doi:
+            cu.append(f"Ngày {_ngay_vn(doi['tu_ngay'])} sang đại vận {doi['cung']}")
         cu += [f"Năm {nam}: {q['mo_ta']}" for q in q_ngay]
         dg = [x for x in co if x in dsc.CO_DAN_GIAN]
         if dg:
@@ -1454,11 +1498,11 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     cm = cham_mang(pt, tuoi)
     hoc = (trong_so, ca_nhan)
     da_dung: set[str] = set()
-    tgb = thoi_gian_bieu(pt, ngay_xem.year)
-    vt = van_tham_chieu(tgb, ngay_xem.year)
+    tgb = thoi_gian_bieu(pt, ngay_xem)
+    vt = van_tham_chieu(tgb, ngay_xem)
     tz = dt.timedelta(hours=config.CALENDAR_MERIDIAN_TZ)
     nam0 = _nam_bat_tu(dt.datetime(ngay_xem.year, ngay_xem.month, ngay_xem.day, 12) - tz)
-    dong = dong_muoi_nam(pt, tgb, nam0, sinh["lich"].year)
+    dong = dong_muoi_nam(pt, tgb, nam0, sinh["lich"].year, vt)
     ds: list[dict] = []
     for ma, _, _ in CHUONG:
         if ma == "tong_quan":

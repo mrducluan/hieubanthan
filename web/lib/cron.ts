@@ -3,6 +3,7 @@
 // cron riêng. Các route lẻ (/api/cron/nhac-day, /api/cron/don-du-lieu-hoc) vẫn còn để chạy tay từng việc.
 import { timingSafeEqual } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { baoLoi } from "@/lib/giam-sat";
 import { goiEngineDaKiem } from "@/lib/proxy";
 import { ghepThongBao, guiPush, homNayVn, khoaVapid, type DangKyPush, type GoiSangNay, type KetQuaGui, type NguoiNhan } from "@/lib/web-push";
 
@@ -61,9 +62,16 @@ export async function guiNhacNgay(dv: SupabaseClient): Promise<Record<string, un
  *  ký ức > 180 ngày (0016); phiếu kiểm chứng > 24 tháng, bài luận đã lưu > 365 ngày (0017); mốc nhắc > 400 ngày (0018).
  *  Migration nào chưa chạy → mục đó null. */
 export async function donDuLieuHoc(dv: SupabaseClient): Promise<{ ok: boolean; ket_qua: Record<string, unknown> }> {
-  const { data, error } = await dv.rpc("don_du_lieu_hoc");
-  if (error) return { ok: false, ket_qua: { loi: "Chưa dọn được (chạy migration 0016?)" } };
-  const tv = await dv.rpc("don_du_lieu_hoc_tuvi");
-  const nv = await dv.rpc("don_nhac_viec");
-  return { ok: true, ket_qua: { ...(data as object), tuvi: tv.error ? null : tv.data, nhac_viec: nv.error ? null : nv.data } };
+  // Rà vòng HỌC 2026-10-22: ba hàm dọn chạy ĐỘC LẬP — trước đây 0016 lỗi thì dừng ngay, phiếu kiểm chứng (0017) và mốc
+  // nhắc việc (0018) không bao giờ được dọn. Hàm chưa có (migration chưa chạy, PGRST202) → null; lỗi khác báo Sentry
+  // (chỉ tên hàm).
+  const [ts, tv, nv] = await Promise.all(["don_du_lieu_hoc", "don_du_lieu_hoc_tuvi", "don_nhac_viec"].map(async (ham) => {
+    const { data, error } = await dv.rpc(ham);
+    if (error && error.code !== "PGRST202") baoLoi(new Error(`cron_don_${ham}`), { noi: "cron", duong: "/api/cron/don-du-lieu-hoc" });
+    return error ? null : data;
+  }));
+  if (ts === null && tv === null && nv === null) {
+    return { ok: false, ket_qua: { loi: "Chưa dọn được (chạy migration 0016–0018?)" } };
+  }
+  return { ok: true, ket_qua: { ...(ts as object | null ?? {}), tuvi: tv, nhac_viec: nv } };
 }
