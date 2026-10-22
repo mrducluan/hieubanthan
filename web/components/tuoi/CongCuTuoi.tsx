@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
-import type { LamNha, XongDat } from "@/lib/tuoi-dan-gian";
+import { NAM_BANG_TU, type LamNha, type XongDat } from "@/lib/tuoi-dan-gian";
+import { NutChiaSeXongDat } from "@/components/chia-se/NutChiaSeXongDat";
 import { KetQuaLamNha, KetQuaXongDat } from "./KetQuaTuoi";
 
 type Kieu = "lam_nha" | "xong_dat";
@@ -63,6 +64,10 @@ export function CongCuTuoi({ kieu, namMacDinh }: { kieu: Kieu; namMacDinh: numbe
       <div aria-live="polite">
         {kq && (kieu === "lam_nha" ? <KetQuaLamNha d={kq as LamNha} /> : <KetQuaXongDat d={kq as XongDat} />)}
       </div>
+      {/* Thẻ xông đất theo năm: chỉ năm + can chi năm, không tuổi gia chủ vừa nhập. */}
+      {kq && kieu === "xong_dat" && (kq as XongDat).nam.nam >= NAM_BANG_TU && (
+        <NutChiaSeXongDat nam={(kq as XongDat).nam.nam} canChi={(kq as XongDat).nam.can_chi} />
+      )}
       {kq && <CuoiBaiDoc moDun={kieu === "lam_nha" ? "tuoi_lam_nha" : "tuoi_xong_dat"} cauHoi="Kết quả có giúp bạn lên kế hoạch?" />}
     </div>
   );
