@@ -284,3 +284,119 @@ def test_khong_kb_van_chay(monkeypatch):
     assert r["tong"] == GOLDEN["ca"][1]["ky_vong"]["tong"]
     assert all(t["giai_thich"] for t in r["tieu_chi"])
     assert r["loi_dan"] and len(r["goi_y"]) == 3
+
+
+# ------------------------------------------------------------------ tầng HỌC (kiểm chứng "hai_nguoi", migration 0019)
+# Như LG-ĐS: `trong_so` (tỉ lệ công khai, mã ≥ 30 phiếu) gắn "x% thấy đúng"; hộp ≥ 100 phiếu và < 40% đúng → bỏ khỏi
+# hộp, chuyển một dòng "Đang xem lại" xuống "Vì sao nói vậy" của tiêu chí; hộp chính người xem bấm "chưa đúng" xếp
+# cuối. KHÔNG đổi điểm, mức, lời — chỉ chọn/xếp hộp đã có.
+def _cham_hoc(ca, trong_so=None, ca_nhan=None):
+    return hn.cham_diem(ca["ban"], ca["kia"], ca["quan_he"], _duong(ca["vao_ban"]), _duong(ca["ban_vao"]),
+                        trong_so=trong_so, ca_nhan=ca_nhan)
+
+
+def _ca_co_hop(toi_thieu: int, khoa: str = "diem_manh"):
+    return next(c for c in GOLDEN["ca"] if len(_cham(c)[khoa]) >= toi_thieu)
+
+
+def test_hoc_mac_dinh_y_nguyen():
+    for ca in GOLDEN["ca"]:
+        assert _cham_hoc(ca) == _cham(ca) == _cham_hoc(ca, {}, {})
+
+
+def test_hoc_khong_doi_diem_muc_loi():
+    for ca in GOLDEN["ca"]:
+        goc = _cham(ca)
+        hop = goc["diem_manh"] + goc["can_dung_hoa"]
+        # mọi ứng viên (cả tiêu chí ngoài 3 hộp đầu) — hạ hết thì không còn hộp thay chỗ
+        ung_vien = [f"hn.{t['ma']}.{t['loai']}.{ca['quan_he']}" for t in goc["tieu_chi"]
+                    if t["ket_luan"] in ("hop", "can_dung_hoa")]
+        ts = {m: {"dung": 1, "chua_dung": 199} for m in ung_vien}
+        cn = {m: "chua_dung" for m in ung_vien}
+        r = _cham_hoc(ca, ts, cn)
+        assert (r["tong"], r["muc"], r["nhan_muc"]) == (goc["tong"], goc["muc"], goc["nhan_muc"])
+        for a, b in zip(r["tieu_chi"], goc["tieu_chi"]):
+            assert (a["diem"], a["toi_da"], a["ket_luan"], a["giai_thich"]) == (b["diem"], b["toi_da"], b["ket_luan"],
+                                                                                  b["giai_thich"])
+        # mọi hộp đều bị hạ → không còn hộp, mỗi hộp để lại đúng một dòng "Đang xem lại" ở tiêu chí của nó
+        assert r["diem_manh"] == [] and r["can_dung_hoa"] == []
+        for h in hop:
+            ma = h["ma_mau"].split(".")[1]
+            tc = next(t for t in r["tieu_chi"] if t["ma"] == ma)
+            assert tc["can_cu"].count(f"Đang xem lại: {h['tieu_de']}") == 1
+
+
+def test_hoc_gan_ty_le_tu_30_phieu():
+    ca = _ca_co_hop(2)
+    goc = _cham(ca)
+    a, b = goc["diem_manh"][0]["ma_mau"], goc["diem_manh"][1]["ma_mau"]
+    r = _cham_hoc(ca, {a: {"dung": 24, "chua_dung": 6}, b: {"dung": 20, "chua_dung": 9}})
+    ha = {h["ma_mau"]: h for h in r["diem_manh"]}
+    assert ha[a]["ty_le_dung"] == 0.8 and ha[a]["so_phieu"] == 30
+    assert "ty_le_dung" not in ha[b] and "so_phieu" not in ha[b]          # 29 phiếu: chưa đủ ngưỡng
+    assert [h["ma_mau"] for h in r["diem_manh"]] == [h["ma_mau"] for h in goc["diem_manh"]]
+    for h in r["diem_manh"]:
+        assert not any(k.startswith("_") for k in h) and "dang_xem_lai" not in h
+
+
+def test_hoc_ha_hop_it_nguoi_thay_dung():
+    ca = _ca_co_hop(2)
+    goc = _cham(ca)
+    ma0 = goc["diem_manh"][0]["ma_mau"]
+    # 99 phiếu (dưới 100) dù tỉ lệ thấp: chưa hạ
+    r = _cham_hoc(ca, {ma0: {"dung": 10, "chua_dung": 89}})
+    assert r["diem_manh"][0]["ma_mau"] == ma0
+    # ≥ 100 phiếu, đúng 40%: chưa hạ (ngưỡng < 40%)
+    r = _cham_hoc(ca, {ma0: {"dung": 40, "chua_dung": 60}})
+    assert ma0 in [h["ma_mau"] for h in r["diem_manh"]]
+    # ≥ 100 phiếu, < 40%: hạ xuống "Vì sao nói vậy"
+    r = _cham_hoc(ca, {ma0: {"dung": 39, "chua_dung": 61}})
+    assert ma0 not in [h["ma_mau"] for h in r["diem_manh"]]
+    so_hop = sum(t["ket_luan"] == "hop" for t in goc["tieu_chi"])
+    assert len(r["diem_manh"]) == min(3, so_hop - 1)                    # tiêu chí "Hợp" kế tiếp (nếu có) thay chỗ
+    tc = next(t for t in r["tieu_chi"] if t["ma"] == ma0.split(".")[1])
+    assert f"Đang xem lại: {goc['diem_manh'][0]['tieu_de']}" in tc["can_cu"]
+
+
+def test_hoc_ca_nhan_chua_dung_xep_cuoi():
+    ca = _ca_co_hop(2)
+    goc = _cham(ca)
+    ds = [h["ma_mau"] for h in goc["diem_manh"]]
+    r = _cham_hoc(ca, ca_nhan={ds[0]: "chua_dung", ds[1]: "dung"})
+    assert [h["ma_mau"] for h in r["diem_manh"]] == ds[1:] + ds[:1]
+    assert all(not any(k.startswith("_") for k in h) for h in r["diem_manh"])
+
+
+def test_ma_mau_khong_lo_nhan_than():
+    """Mã chỉ gồm tiêu chí · loại quan hệ giữa hai năm sinh · quan hệ người dùng chọn — không năm, can, chi, tên."""
+    for ca in GOLDEN["ca"]:
+        r = _cham(ca)
+        for h in r["diem_manh"] + r["can_dung_hoa"]:
+            p = h["ma_mau"].split(".")
+            assert len(p) == 4 and p[0] == "hn" and p[1] in TIEU_CHI and p[3] in QUAN_HE
+            assert not re.search(r"\d", h["ma_mau"])
+
+
+def test_api_hop_tham_nhan_trong_so_ca_nhan():
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+    c = TestClient(app)
+    la = {"birth_date": "1990-05-15", "birth_time": "02:00", "gender": "nam", "noi_sinh": "ha-noi"}
+    kia = {"birth_date": "1992-08-21", "gender": "nu"}
+    goc = c.post("/v1/tuvi/hop-tham", json={"la_so": la, "nguoi_kia": kia})
+    assert goc.status_code == 200, goc.text
+    d0 = goc.json()["diem"]
+    hop = d0["diem_manh"] + d0["can_dung_hoa"]
+    assert hop
+    ma0 = hop[0]["ma_mau"]
+    r = c.post("/v1/tuvi/hop-tham", json={"la_so": la, "nguoi_kia": kia,
+                                          "trong_so": {ma0: {"dung": 5, "chua_dung": 120}},
+                                          "ca_nhan": {ma0: "chua_dung"}})
+    assert r.status_code == 200, r.text
+    d = r.json()["diem"]
+    assert ma0 not in [h["ma_mau"] for h in d["diem_manh"] + d["can_dung_hoa"]]
+    assert d["tong"] == d0["tong"]
+    for bad in ({"trong_so": {"MA SAI": {"dung": 1, "chua_dung": 1}}}, {"ca_nhan": {"hn.a.b.c": "co_le"}},
+                {"trong_so": {f"hn.x.{i}": {"dung": 1, "chua_dung": 1} for i in range(5001)}}):
+        assert c.post("/v1/tuvi/hop-tham", json={"la_so": la, "nguoi_kia": kia, **bad}).status_code == 422

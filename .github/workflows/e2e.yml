@@ -96,6 +96,11 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Dựng Supabase thu nhỏ
         run: bash web/e2e-that/stack/len.sh
+      - name: Đối chiếu mã kiểm chứng engine với hàm SQL thật (kiem_chung_ma_hop_le)
+        working-directory: engine
+        env:
+          KIEM_CHUNG_PGDB: sb_thu
+        run: python -m pytest -q tests/test_kiem_chung_ma.py
       - name: Chạy chuỗi Sao thật
         working-directory: web
         run: npm run e2e:that

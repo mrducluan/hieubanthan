@@ -18,6 +18,7 @@ import datetime as dt
 
 from app.calc import thanso as tinh, thanso_dong_doi as dd_calc, thanso_mo_rong as mr, thanso_ty_le as tl
 from app.kb import store, thanso_v2 as kb
+from app.luangiai import doi_song_chung as dsc
 from app.luangiai import doi_song_khuon as kh
 from app.luangiai import thanso as lg
 from app.narrative import hoi_van
@@ -251,7 +252,26 @@ def _moi_xem_rieng(ma: str, doan: list[str], diem_nhan: str, cau_hoi: str) -> di
     return {"diem_nhan": diem_nhan, "cau_hoi": cau_hoi, "so_doan": len(doan), "phut_doc": max(1, round(chu / 200))}
 
 
-def bao_cao(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy_uoc: str = "tong_het") -> dict:
+def _ap_hoc(x: dict, trong_so: dict | None, ca_nhan: dict | None) -> None:
+    """Tầng HỌC (như Tử vi / Bát tự đời sống, `doi_song_chung._ap_hoc`): hộp ≥ 100 phiếu & < 40% đúng → bỏ khỏi hộp,
+    dòng "Đang xem lại" vào căn cứ chương; hộp người xem bấm "chưa đúng" xếp cuối; gắn `ty_le_dung`/`so_phieu` khi ≥ 30
+    phiếu. Không đổi lời, không sinh câu mới."""
+    if not (trong_so or ca_nhan) or not x.get("hop"):
+        return
+    hop, xem_lai = dsc._ap_hoc(x["hop"], trong_so, ca_nhan)
+    for h in hop:
+        h.pop("_chua_dung", None)
+        if not h.get("dang_xem_lai"):
+            h.pop("dang_xem_lai", None)
+    x["hop"] = hop
+    if xem_lai:
+        x["can_cu"] = [*(x.get("can_cu") or []), *xem_lai]
+
+
+def bao_cao(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy_uoc: str = "tong_het",
+            trong_so: dict | None = None, ca_nhan: dict | None = None) -> dict:
+    """`trong_so` = {mã: {dung, chua_dung}} (tỉ lệ công khai), `ca_nhan` = {mã: "dung" | "chua_dung"} (phiếu của chính
+    người xem) — tầng HỌC chỉ chọn/xếp hộp (`_ap_hoc`)."""
     so = tinh.chi_so_xac_dinh(ho_ten[0], ngay, thang, nam, quy_uoc)
     mo_rong = lg.luan_mo_rong(ho_ten[0], ngay, thang, nam, quy_uoc=quy_uoc)
     noi_dung = {
@@ -276,6 +296,8 @@ def bao_cao(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.dat
                       "Kiểu việc nào dùng được cả thế mạnh hằng ngày lẫn đích bạn hướng tới?"),
     }
     them = _khuon(so, ngay, thang, nam, ngay_xem, quy_uoc, mo_rong, tc, hien, ke)
+    for x in them.values():
+        _ap_hoc(x, trong_so, ca_nhan)
     chuong = []
     for ma, doan in noi_dung.items():
         dn, ch = moi.get(ma, (doan[0], "Bộ số của bạn hiếm cỡ nào, và con số nào đậm nhất ở bạn?"))

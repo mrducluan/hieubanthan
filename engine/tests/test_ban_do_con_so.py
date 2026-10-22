@@ -93,3 +93,50 @@ def test_api():
     r = c.post("/v1/thanso/ban-do-con-so", json=body)
     assert r.status_code == 200 and len(r.json()["chuong"]) == 4
     assert c.post("/v1/thanso/ban-do-con-so", json={**body, "la": 1}).status_code == 422
+
+
+# ------------------------------------------------------------------ tầng HỌC (rà 2026-10-22): như Tử vi / Bát tự đời sống
+def _hop(bc: dict) -> list[dict]:
+    return [h for c in bc["chuong"] for h in c["hop"]]
+
+
+def test_hoc_mac_dinh_y_nguyen():
+    assert _bc() == _bc(trong_so={}, ca_nhan={}) == _bc(trong_so=None, ca_nhan=None)
+
+
+def test_hoc_gan_ty_le_va_ha_hop():
+    goc = _bc()
+    c0 = next(c for c in goc["chuong"] if c["ma"] == "su_nghiep" and len(c["hop"]) >= 2)
+    ma0, ma1 = c0["hop"][0]["ma_mau"], c0["hop"][1]["ma_mau"]
+    b = _bc(trong_so={ma0: {"dung": 30, "chua_dung": 90}, ma1: {"dung": 24, "chua_dung": 6}})
+    c = next(c for c in b["chuong"] if c["ma"] == "su_nghiep")
+    assert ma0 not in [h["ma_mau"] for h in c["hop"]]                     # 120 phiếu, 25% → "đang xem lại"
+    assert f"Đang xem lại: {c0['hop'][0]['tieu_de']}" in c["can_cu"]
+    h1 = next(h for h in c["hop"] if h["ma_mau"] == ma1)
+    assert h1["ty_le_dung"] == 0.8 and h1["so_phieu"] == 30
+    assert c["doan"] == c0["doan"]                                          # không đổi lời, không sinh câu mới
+    for h in _hop(b) + b["cot_loi"]:
+        assert not any(k.startswith("_") for k in h)
+
+
+def test_hoc_ca_nhan_xuong_cuoi():
+    goc = _bc()
+    c0 = next(c for c in goc["chuong"] if len(c["hop"]) >= 2)
+    ma0 = c0["hop"][0]["ma_mau"]
+    b = _bc(ca_nhan={ma0: "chua_dung"})
+    c = next(c for c in b["chuong"] if c["ma"] == c0["ma"])
+    assert [h["ma_mau"] for h in c["hop"]] == [h["ma_mau"] for h in c0["hop"][1:]] + [ma0]
+
+
+def test_api_trong_so_ca_nhan():
+    c = TestClient(app)
+    body = {"ho_ten": LUAN[0], "ngay": 24, "thang": 10, "nam": 1988, "ngay_xem": "2026-10-20",
+            "quy_uoc_duong_doi": "tung_phan"}
+    goc = c.post("/v1/thanso/ban-do-con-so", json=body).json()
+    ma0 = goc["chuong"][1]["hop"][0]["ma_mau"]
+    r = c.post("/v1/thanso/ban-do-con-so", json={**body, "trong_so": {ma0: {"dung": 1, "chua_dung": 150}},
+                                                  "ca_nhan": {ma0: "chua_dung"}})
+    assert r.status_code == 200, r.text
+    assert ma0 not in [h["ma_mau"] for h in r.json()["chuong"][1]["hop"]]
+    for bad in ({"trong_so": {"MA SAI": {"dung": 1, "chua_dung": 1}}}, {"ca_nhan": {"ds.a.b": "co_le"}}):
+        assert c.post("/v1/thanso/ban-do-con-so", json={**body, **bad}).status_code == 422

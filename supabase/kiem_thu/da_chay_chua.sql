@@ -23,6 +23,9 @@ select * from (values
   ('0015 hồ sơ "Không biết giờ"',  exists (select 1 from pg_constraint where conname = 'ho_so_do_tin_gio_check'
                                              and pg_get_constraintdef(oid) like '%unknown%')),
   ('0016 tầng HỌC thần số (TS-V3)', to_regclass('public.thanso_phan_hoi') is not null),
-  ('0017 tầng HỌC Tử vi (LG-ĐS)',  to_regclass('public.cau_hoi_vec') is not null)
+  ('0017 tầng HỌC Tử vi (LG-ĐS)',  to_regclass('public.cau_hoi_vec') is not null),
+  ('0018 hồ sơ nhà + nhắc việc',   to_regclass('public.ho_so_nha') is not null),
+  ('0019 kiểm chứng 2 người',      exists (select 1 from pg_constraint where conname = 'kiem_chung_phieu_loai_check'
+                                             and pg_get_constraintdef(oid) like '%hai_nguoi%'))
 ) as t(migration, da_chay)
 order by 1;

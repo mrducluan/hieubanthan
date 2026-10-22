@@ -4,7 +4,7 @@
 // ra cùng mã, không phụ thuộc câu chữ KB. Số đếm chỉ để người biên tập XEM LẠI KB, không tự đổi luận giải.
 // Dùng chung trình duyệt (thẻ) + máy chủ (/quan-tri/tang-truong) — không import gì phía máy chủ ở đây.
 
-export type LoaiKiemChung = "phi_hoa" | "nhip_3_thang" | "doi_song";
+export type LoaiKiemChung = "phi_hoa" | "nhip_3_thang" | "doi_song" | "hai_nguoi";
 export type KetQuaKiemChung = "dung" | "chua_dung";
 
 /** Chuỗi ASCII thường, gạch dưới: "Quan Lộc" → "quan_loc", "Điền Trạch" → "dien_trach". */
@@ -23,9 +23,10 @@ export function maPhiHoa(n: { loai: string; duong: { tu_cung: string; hoa: strin
 /** Mã lý do nhịp — viết tắt cố định để mã đủ ngắn (giới hạn 40 ký tự của lib/do-luong). */
 export const LY_DO_NGAN: Record<string, string> = {
   chong_ky: "ck", ky_xung_cung_chinh: "kx", khoa_giai: "kg", loc_nhap_cung_chinh: "ln", song_loc: "sl",
+  ky_nhap_cung_chinh: "kn",   // NHIP-3 (2026-10-22): Kỵ tháng rơi thẳng vào Mệnh / Tài / Quan
 };
 export const TEN_LY_DO: Record<string, string> = {
-  ck: "chồng Kỵ", kx: "Kỵ xung cung chính", kg: "Khoa giải", ln: "Lộc nhập cung chính", sl: "song Lộc",
+  ck: "chồng Kỵ", kx: "Kỵ xung cung chính", kn: "Kỵ vào cung chính", kg: "Khoa giải", ln: "Lộc nhập cung chính", sl: "song Lộc",
 };
 const TEN_MUC: Record<string, string> = { thuan: "Thuận", binh: "Bình", can_than: "Cần thận trọng" };
 
@@ -39,6 +40,23 @@ export function maNhip(t: { muc: string; ly_do: { ma: string }[] }): string {
  *  ≤ 60 ký tự, chữ thường/số/`_.+-`. Web không tự dựng mã này, chỉ chuyển nguyên văn. BT-ĐS: Bát tự dùng `ds.bt.{chương}.{…}`
  *  (cùng loại `doi_song`, đi qua ràng buộc của migration 0017 — không cần migration mới). */
 export const MA_DOI_SONG = /^ds\.[a-z0-9_]+(\.[a-z0-9_+-]+)+$/;
+/** HN-2N (migration 0019): mã hộp "Xem lá số 2 người" do engine dựng — `hn.{tiêu chí}.{loại}.{quan hệ}`
+ *  (vd `hn.chi.tam_hop.nguoi_yeu`): chỉ tiêu chí · kiểu quan hệ giữa hai năm sinh · quan hệ người dùng chọn — không tên,
+ *  ngày sinh, can chi. Danh mục chặt nằm ở SQL `kiem_chung_ma_hop_le` (test engine `tests/test_kiem_chung_ma.py`); ở đây
+ *  chỉ chặn dạng. Phái = phiên bản luật chấm điểm (`diem.phien_ban`, vd `hai_nguoi_1`). */
+export const MA_HAI_NGUOI = /^hn\.(menh|can|chi|cung_phi|tu_vi)\.[a-z_]{2,20}\.[a-z_]{2,20}$/;
+export const PHAI_HAI_NGUOI = /^hai_nguoi_[0-9]{1,3}$/;
+const TEN_TIEU_CHI_HN: Record<string, string> = {
+  menh: "Bản mệnh năm sinh", can: "Cách nghĩ (can năm)", chi: "Con giáp", cung_phi: "Cung phi", tu_vi: "Lá số chạm nhau",
+};
+const TEN_QUAN_HE_HN: Record<string, string> = {
+  nguoi_yeu: "người yêu", vo_chong: "vợ chồng", ban_be: "bạn bè", dong_nghiep: "đồng nghiệp", doi_tac: "đối tác",
+  sep: "cấp trên", cha_me_con: "cha mẹ – con", gia_dinh: "gia đình",
+};
+/** Tên khối hiển thị ở /quan-tri theo loại phiếu. */
+export const TEN_LOAI_KIEM_CHUNG: Record<string, string> = {
+  phi_hoa: "Đường bay", nhip_3_thang: "3 tháng tới", doi_song: "Luận giải đời sống", hai_nguoi: "Xem lá số 2 người",
+};
 /** Phái ghi kèm phiếu kiểm chứng theo mô-đun của báo cáo đời sống. */
 export const PHAI_DOI_SONG: Record<string, string> = { tuvi: "nam_phai_viet", battu: "tu_binh" };
 export const TEN_CHUONG_BT: Record<string, string> = {
@@ -71,6 +89,14 @@ const TEN_PHAN_DS: Record<string, string> = {
 /** Nhãn đọc được cho người biên tập ở /quan-tri (giải mã ngược, không cần engine). */
 export function nhanMau(loai: string, mau: string): string {
   const p = mau.split(".");
+  if (loai === "hai_nguoi") {
+    const [, tc, kieu, qh] = p;
+    return ["2 người", TEN_TIEU_CHI_HN[tc ?? ""] ?? tc, (kieu ?? "").replace(/_/g, " "), TEN_QUAN_HE_HN[qh ?? ""] ?? qh].join(" · ");
+  }
+  if (loai === "doi_song" && p[1] === "thanso") {
+    const [, , ...con] = p;
+    return ["Thần số", ...con.map((x) => TEN_PHAN_DS[x] ?? x.replace(/_/g, " "))].join(" · ");
+  }
   if (loai === "doi_song" && p[1] === "bt") {
     const [, , chuong, ...con] = p;
     return ["Bát tự", TEN_CHUONG_BT[chuong ?? ""] ?? chuong, ...con.map((x) => TEN_PHAN_DS[x] ?? x.replace(/_/g, " "))].join(" · ");

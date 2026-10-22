@@ -600,3 +600,62 @@ theo cảm tính; người dùng biết chắc nhất là **đời mình đã qu
 - Việc sau (chờ số): cho "cách chính" đổi luôn mức chung của báo cáo (hiện chỉ nhấn) — cần đo phân bố nhãn theo từng
   cách (gộp chặt đang giữ 10–60% mỗi nhãn).
 
+## 10. Kiểm chứng "Xem lá số 2 người" + rà toàn bộ vòng HỌC (2026-10-22)
+
+### 10.1 Loại phiếu `hai_nguoi` (migration 0019, chủ dự án duyệt)
+
+- **Mã** do engine dựng (`luangiai/tuvi_hai_nguoi.py`): `hn.<tiêu chí>.<loại>.<quan hệ>` — tiêu chí `menh · can · chi ·
+  cung_phi · tu_vi`, loại = kiểu quan hệ giữa hai năm sinh (tương sinh, tam hợp, Diên Niên…), quan hệ = lựa chọn của
+  người dùng. Không tên, ngày sinh, năm, can chi của ai (test `test_ma_mau_khong_lo_nhan_than`). Phái = phiên bản luật
+  chấm (`hai_nguoi_1`).
+- **SQL** `kiem_chung_ma_hop_le` nhánh `hai_nguoi`: danh mục chặt `c_hn_*` = đúng những loại có thể thành HỘP (kết luận
+  "Hợp" hoặc "Cần dung hoà"; loại chỉ ra "Bình hoà" như `binh_hoa`, `trung`, `binh`, `phuc_vi` bị từ chối). Danh mục so
+  HAI CHIỀU với hằng số engine (`TY_*`, `_ket_luan`) trong `tests/test_kiem_chung_ma.py`.
+- **Web**: hộp điểm mạnh / cần dung hoà dùng `HopNoiBat` với `KiemChungBai` `{loai: "hai_nguoi", phai: diem.phien_ban}`;
+  "x% trong N người thấy đúng" khi ≥ 30 phiếu (một lời gọi `/api/kiem-chung/ty-le`). PostHog `tuvi_kiem_chung` chỉ mang
+  mã. Chưa chạy 0019 → hàm cũ trả false → route trả `{da_luu:false, ly_do:"tu_choi"}`, Sentry báo một lần mỗi loại mỗi
+  phiên bản máy chủ; người dùng vẫn thấy "Cảm ơn".
+- **Tự học** (cùng luật mục 3, `doi_song_chung._ap_hoc`): `/api/tuvi/hop-tham` gửi engine `trong_so` (mã `hn.*` ≥ 30
+  phiếu) + `ca_nhan` (phiếu `hai_nguoi` của chính người đăng nhập). Hộp ≥ 100 phiếu & < 40% đúng bị bỏ khỏi hộp, dòng
+  "Đang xem lại: …" vào căn cứ của tiêu chí ("Vì sao nói vậy"), tiêu chí cùng kết luận kế tiếp (nếu có) thay chỗ; hộp
+  người xem bấm "chưa đúng" xếp cuối. **Điểm, mức, lời không đổi** (test). Engine cũ chưa nhận trường mới → 422 → route
+  gọi lại không kèm.
+
+### 10.2 Rà end-to-end từng loại phiếu
+
+| Loại | Nút (web) | API → RPC → bảng | x% công khai | Engine học (`trong_so`/`ca_nhan`) | Quản trị |
+|---|---|---|---|---|---|
+| `phi_hoa` (Đường bay) | `PhiHoa.tsx`, mã web `maPhiHoa`, phái `phi_tinh` | `/api/kiem-chung` → `ghi_kiem_chung` → `kiem_chung_phieu` | **mới có** (trước: không tải tỉ lệ) | không (thẻ, chưa có luật hạ) | tang-truong (PostHog) + hoc (DB) |
+| `nhip_3_thang` | `NhipBaThang.tsx`, `maNhip`, phái lưu nguyệt | như trên | **mới có** | không | như trên |
+| `doi_song` Tử vi `ds.*` | `BaoCaoDoiSong` → `HopNoiBat` | như trên | có | có (`toan_bo.tuvi`) | như trên |
+| `doi_song` Bát tự `ds.bt.*` (+ `ds.bt.van_han.*`) | như trên, phái `tu_binh` | như trên | có | có | như trên |
+| `doi_song` Thần số `ds.thanso.*` | như trên, phái `pitago` | như trên | có | **mới có** (`ban_do_con_so.bao_cao`, route `/api/thanso/ban-do-con-so`) | như trên |
+| `doi_song` Phong thuỷ / Kinh Dịch | `NhaCuaBan`, `DocQue` | — | — | — | **chưa có mã** (`ma_mau`) — chưa có phiếu |
+| `hai_nguoi` `hn.*` | `HopThamTuVi` | như trên (0019) | có | có | như trên |
+| Thần số hỏi đáp | `GopYCauTraLoi` | `/api/thanso/phan-hoi` → engine `chu-ky-so` → `gui_phan_hoi_thanso` → `thanso_phan_hoi` + cụm | — | — (cụm → người duyệt) | hoc (cụm bất thường) |
+
+**Lỗi tìm được và đã sửa** (đều có test):
+1. Phiếu bị DB từ chối mất âm thầm: `/api/kiem-chung` nay trả `ly_do: "tu_choi"` + báo Sentry (một lần / loại);
+   `/api/thanso/phan-hoi` báo Sentry khi DB từ chối.
+2. Chữ ký số thần số có chỉ số 0 (tên thiếu nguyên âm / phụ âm, vd "Y") → `thanso_chu_ky_hop_le` (Pitago 1–33) từ chối
+   CẢ góp ý: engine `/v1/thanso/chu-ky-so` bỏ khoá 0 / rỗng (`test_chu_ky_so_luon_qua_rang_buoc_sql`).
+3. Cron dọn dữ liệu: 0016 lỗi thì trả 502 trước khi dọn phiếu 0017; `don_nhac_viec` (0018) chưa từng được gọi → ba hàm
+   chạy độc lập.
+4. `phieuCuaToi` lấy 500 phiếu mới nhất MỌI loại → người bấm nhiều thẻ có thể mất `ca_nhan` của mảng đang xem; nay lọc
+   theo loại, `trong_so` lọc theo tiền tố mảng (lời gọi engine nhỏ hơn).
+5. `/quan-tri/tang-truong` ghi mọi phiếu không phải phi hoá là "3 tháng tới" (kể cả đời sống) → nhãn theo loại;
+   `/quan-tri/hoc` thêm tên khối; `nhanMau` đọc được mã `hn.*` và `ds.thanso.*`.
+6. Thần số "Bản đồ con số" có nút + x% nhưng engine không nhận `trong_so`/`ca_nhan` → thêm như Tử vi / Bát tự.
+
+**Kiểm thử mới**: `engine/tests/test_kiem_chung_ma.py` liệt kê mã thật (60 lá Tử vi, golden Bát tự, 40 hồ sơ thần số,
+1.500 cặp hai người, phi hoá 30 lá, nhịp 5 phái) và kiểm từng mã với hàm SQL dựng lại từ CHÍNH tệp migration mới nhất;
+có `KIEM_CHUNG_PGDB` thì chạy luôn hàm SQL thật (job CI `sao-that`). `supabase/kiem_thu/thu_kiem_chung_0019.sql`
+(ASSERT). `web/e2e-that/kiem-chung-that.spec.ts`: ghi phiếu → tỉ lệ ≥ 30 → đổi ý không cộng dồn → mã ngoài danh mục bị
+từ chối có lý do → nút trên /tu-vi ghi `hai_nguoi` → hộp < 40% bị hạ → phiếu "chưa đúng" của người đăng nhập xếp cuối.
+
+**Còn mở (cần quyết)**: Phong thuỷ "Nhà của bạn" và Kinh Dịch chưa có `ma_mau` (một quẻ gieo ngẫu nhiên thì "đúng với
+mình" đo gì? — cần chủ dự án chốt trước khi gắn); `DocQue`/`NhaCuaBan` dùng `HopNoiBat` ngoài `KiemChungBai` nên khi gắn
+mã phải bọc provider (mặc định phái `nam_phai_viet`). Phi hoá / nhịp chưa có luật hạ thẻ theo tỉ lệ. Tỉ lệ `ty_le_kiem_chung`
+gộp mọi phái theo mã (mã nhịp như `binh.-` chung cho 5 phái lưu nguyệt). `don_nhac_viec` (0018) chỉ `revoke from public`
+— trên Supabase vai trò anon/authenticated vẫn có quyền mặc định gọi (chỉ xoá mốc > 400 ngày, rủi ro thấp; nên thu hồi
+ở migration sau).

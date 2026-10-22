@@ -28,6 +28,7 @@ from app.calc import phongthuy as pt
 from app.calc import tuoi_dan_gian as tdg
 from app.calc.battu_mo_rong import CAN_XUNG
 from app.kb import tuvi_hai_nguoi_kb as kb
+from app.luangiai import doi_song_chung as dsc
 from app.luangiai.tuvi_phi_hoa import MANG
 
 PHIEN_BAN_DIEM = "hai_nguoi_1"
@@ -281,10 +282,31 @@ def _muc_tong(tong: int) -> str:
     return next(m for m, nguong in MUC_TONG.items() if tong >= nguong)
 
 
-def cham_diem(ban: dict, kia: dict, quan_he: str, vao_ban: list[dict], ban_vao: list[dict] | None = None) -> dict:
+def _ap_hoc_hop(hop: list[dict], trong_so: dict | None, ca_nhan: dict | None, theo_ma: dict[str, dict]) -> list[dict]:
+    """Tầng HỌC (kiểm chứng loại `hai_nguoi`, migration 0019) — cùng luật LG-ĐS (`doi_song_chung._ap_hoc`): gắn
+    `ty_le_dung`/`so_phieu` khi ≥ 30 phiếu; hộp ≥ 100 phiếu và < 40% đúng → bỏ khỏi hộp, thêm dòng "Đang xem lại" vào
+    căn cứ của tiêu chí (web hiện ở "Vì sao nói vậy"); hộp chính người xem bấm "chưa đúng" xếp cuối. Không đổi điểm, mức,
+    lời; không sinh câu mới. `hop` = mọi ứng viên theo thứ tự ưu tiên (nơi gọi cắt ≤ 3 SAU bước này)."""
+    chon, xem_lai = dsc._ap_hoc(hop, trong_so, ca_nhan)
+    for h, dong in zip((h for h in hop if h.get("dang_xem_lai")), xem_lai):
+        theo_ma[h["ma_mau"].split(".")[1]]["can_cu"].append(dong)
+    giu = {id(h) for h in chon}
+    ra = [h for h in hop if id(h) in giu][:3]      # ≤ 3 hộp đầu theo thứ tự ưu tiên, rồi "chưa đúng" xuống cuối
+    ra = [h for h in ra if not h.get("_chua_dung")] + [h for h in ra if h.get("_chua_dung")]
+    for h in ra:
+        h.pop("_chua_dung", None)
+        if not h.get("dang_xem_lai"):
+            h.pop("dang_xem_lai", None)
+    return ra
+
+
+def cham_diem(ban: dict, kia: dict, quan_he: str, vao_ban: list[dict], ban_vao: list[dict] | None = None,
+              trong_so: dict | None = None, ca_nhan: dict | None = None) -> dict:
     """`ban`/`kia` = {"nam_am": năm âm lịch (theo lịch người dùng chọn), "gioi_tinh": "nam" | "nu" | None,
     "ngay_duong"?: ngày sinh dương lịch (date hoặc ISO) — có thì cung phi tính năm theo Lập xuân}. `vao_ban` = đường bay tứ hoá can
-    năm người kia vào lá bạn ({hoa, sao, den_cung, xung_cung}); `ban_vao` = chiều ngược lại (có khi đủ lá hai người)."""
+    năm người kia vào lá bạn ({hoa, sao, den_cung, xung_cung}); `ban_vao` = chiều ngược lại (có khi đủ lá hai người).
+    `trong_so` = {mã: {dung, chua_dung}} (tỉ lệ công khai), `ca_nhan` = {mã: "dung" | "chua_dung"} (phiếu của chính người
+    xem) — chỉ chọn/xếp hộp (`_ap_hoc_hop`), KHÔNG đổi điểm. Mã hộp: `hn.<tiêu chí>.<loại>.<quan hệ>` (khớp SQL 0019)."""
     if quan_he not in CUNG_TRONG_TAM:
         raise ValueError(f"Quan hệ không hợp lệ: {quan_he}")
     can_b, chi_b = lunar.can_chi_nam(int(ban["nam_am"]))
@@ -335,9 +357,14 @@ def cham_diem(ban: dict, kia: dict, quan_he: str, vao_ban: list[dict], ban_vao: 
         return h
 
     tinh = [t for t in tieu_chi if t["tinh"]]
-    manh = sorted((t for t in tinh if t["ket_luan"] == "hop"), key=lambda t: (-t["ty_le"], -t["_w"]))[:3]
-    dung = sorted((t for t in tinh if t["ket_luan"] == "can_dung_hoa"), key=lambda t: (t["ty_le"], -t["_w"]))[:3]
+    manh = sorted((t for t in tinh if t["ket_luan"] == "hop"), key=lambda t: (-t["ty_le"], -t["_w"]))
+    dung = sorted((t for t in tinh if t["ket_luan"] == "can_dung_hoa"), key=lambda t: (t["ty_le"], -t["_w"]))
     diem_manh, can_dung_hoa = [_hop(t, "diem_manh") for t in manh], [_hop(t, "luu_y") for t in dung]
+    if trong_so or ca_nhan:
+        theo_ma = {t["ma"]: t for t in tieu_chi}
+        diem_manh = _ap_hoc_hop(diem_manh, trong_so, ca_nhan, theo_ma)
+        can_dung_hoa = _ap_hoc_hop(can_dung_hoa, trong_so, ca_nhan, theo_ma)
+    diem_manh, can_dung_hoa = diem_manh[:3], can_dung_hoa[:3]
     for t in tieu_chi:
         t.pop("_nen", None)
         t.pop("_w", None)
