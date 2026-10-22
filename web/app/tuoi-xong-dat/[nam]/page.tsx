@@ -6,11 +6,12 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";
-import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, urlDayDu } from "@/lib/seo";
+import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, urlDayDu } from "@/lib/seo";
 import { NAM_BANG_TU, docNamBang, duongLamNhaNam, duongXongDat, duongXongDatNam, namAmHienTai, xongDatNamCongKhai } from "@/lib/tuoi-dan-gian";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_XONG_DAT_NAM } from "@/lib/chu/trang-con";
+import { NutChiaSeXongDat } from "@/components/chia-se/NutChiaSeXongDat";
 
 type P = { params: Promise<{ nam: string }> };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
@@ -20,7 +21,7 @@ async function metaGoc(p: P): Promise<Metadata> {
   if (!n) return {};
   const m = metaTrang({ tieuDe: `Tuổi xông đất Tết ${n} hợp gia chủ, tuổi nên tránh, giờ đẹp`,
     moTa: `Tết ${n}: tuổi nào hợp xông đất cho gia chủ sinh 1960–2005, tuổi nên tránh (xung năm, Tam tai), giờ hoàng đạo và hướng xuất hành mùng 1.`,
-    duong: duongXongDatNam(n), anh: anhBai({ tieuDe: `Tuổi xông đất Tết ${n}`, mang: "lich" }) });
+    duong: duongXongDatNam(n), anh: `/og/xong-dat?nam=${n}` });
   const namAm = await namAmHienTai();
   return n === namAm || n === namAm + 1 ? m : { ...m, robots: { index: false, follow: true } };
 }
@@ -48,6 +49,7 @@ export default async function Page(p: P) {
       <section aria-label="Trả lời nhanh" className="rounded-2xl border border-gold/30 bg-gold/5 p-5">
         <p className="eyebrow">Trả lời nhanh</p>
         <p className="mt-2 leading-relaxed text-fg">{d.tra_loi_nhanh}</p>
+        <NutChiaSeXongDat nam={n} canChi={d.nam.can_chi} nho className="mt-4" />
       </section>
 
       <section className="mt-6 grid gap-3 sm:grid-cols-2">

@@ -60,6 +60,7 @@ export const CHU_CHUNG = {
   "chia_se.da_chep": { nhom: CS, nhan: "Báo đã chép link", mac_dinh: "Đã chép link", toi_da: 30 },
   "chia_se.tai_story": { nhom: CS, nhan: "Nút tải ảnh dọc", mac_dinh: "Tải ảnh (đăng story)", toi_da: 40 },
   "chia_se.the_ngay": { nhom: CS, nhan: "Nút chia sẻ thẻ hôm nay", mac_dinh: "Chia sẻ thẻ hôm nay", toi_da: 40 },
+  "chia_se.xong_dat": { nhom: CS, nhan: "Nút chia sẻ thẻ xông đất theo năm (không kèm tuổi gia chủ)", mac_dinh: "Rủ nhà khác xem tuổi xông đất", toi_da: 40 },
 
   "doc.vi_sao": { nhom: BD, nhan: "Nút mở căn cứ (thuật ngữ) dưới mỗi hộp / câu trả lời", mac_dinh: "Vì sao nói vậy", toi_da: 30 },
   "doc.tai_anh": { nhom: BD, nhan: "Nút tải ảnh lá số / tứ trụ", mac_dinh: "Tải ảnh", toi_da: 30 },
