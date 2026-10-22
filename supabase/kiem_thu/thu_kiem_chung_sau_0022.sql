@@ -17,16 +17,24 @@ end $$;
 select 'phiếu chưa đúng' t, ghi_kiem_chung(:k7, null, 'doi_song', 'ds.phongthuy.tung_phong.luu_y.xa_ngang', 'bat_trach_huyen_khong', 'chua_dung');
 select 'gom' t, gom_de_xuat_luat(1, 0.5, 1, 0.5);
 do $$
+declare n int;
 begin
+    -- phiếu "chưa đúng" của các test trước (0017: mau.quan_loc.ky.menh…) cũng được gom → chỉ so SỐ DÒNG trước/sau, không so tuyệt đối
     assert (select count(*) from public.de_xuat_luat where ly_do = 'ti_le_thap' and mau = 'ds.phongthuy.tung_phong.luu_y.xa_ngang') = 1, 'gom tỉ lệ thấp';
     assert (select count(*) from public.de_xuat_luat where ly_do = 'sau_30_nhu_cu') = 1, 'gom sau 30';
-    assert (select trang_thai from public.de_xuat_luat limit 1) = 'cho_duyet', 'mặc định chờ duyệt';
-    -- gom lại không nhân đôi
+    assert (select count(*) from public.de_xuat_luat where trang_thai <> 'cho_duyet') = 0, 'mặc định chờ duyệt';
+    select count(*) into n from public.de_xuat_luat;
+    -- gom lại không nhân đôi (on conflict cập nhật số)
     perform public.gom_de_xuat_luat(1, 0.5, 1, 0.5);
-    assert (select count(*) from public.de_xuat_luat) = 2, 'gom lại trùng';
+    assert (select count(*) from public.de_xuat_luat) = n, 'gom lại trùng';
     -- ngưỡng mặc định (100 phiếu / 30 phiếu sau) → không thêm gì
     perform public.gom_de_xuat_luat();
-    assert (select count(*) from public.de_xuat_luat) = 2, 'ngưỡng mặc định';
+    assert (select count(*) from public.de_xuat_luat) = n, 'ngưỡng mặc định';
+    -- người duyệt đánh dấu "bỏ qua" → gom lại không ghi đè số của dòng đó (chỉ đụng dòng chờ duyệt)
+    update public.de_xuat_luat set trang_thai = 'bo_qua', so_phieu = -1 where ly_do = 'ti_le_thap' and mau = 'ds.phongthuy.tung_phong.luu_y.xa_ngang';
+    perform public.gom_de_xuat_luat(1, 0.5, 1, 0.5);
+    assert (select so_phieu from public.de_xuat_luat where ly_do = 'ti_le_thap' and mau = 'ds.phongthuy.tung_phong.luu_y.xa_ngang') = -1, 'không đụng dòng đã bỏ qua';
+    assert (select count(*) from public.de_xuat_luat) = n, 'gom sau bỏ qua không thêm dòng';
 end $$;
 select 'tỉ lệ sau theo mã' t, count(*) from ty_le_kiem_chung_sau(1);
 select 'dọn (chưa hết hạn → 0)' t, don_kiem_chung_sau();
