@@ -29,7 +29,7 @@ import { PhaiNaoDung } from "@/components/than-so/PhaiNaoDung";
 import { BanDoConSo } from "@/components/than-so/BanDoConSo";
 import { ghiQuyUocDD, useQuyUocDD, type QuyUocDD } from "@/lib/quy-uoc-dd";
 import { ghi } from "@/lib/do-luong";
-import { TieuDeTrang, useDauCms } from "@/components/cms/DauCms";
+import { TieuDeTrang, useChu, useDauCms } from "@/components/cms/DauCms";
 
 // TS-PHAI / TS-V3 — ba trường phái thần số + tổng hợp; lựa chọn nhớ trên máy (localStorage), mặc định Pitago như trước.
 export type PhaiThanSo = "pitago" | "chaldea" | "tong_hop";
@@ -136,14 +136,14 @@ export function ThanSo() {
     if (kq && tab === "dong-doi" && location.hash === "#dong-doi") document.getElementById("chieu-sau")?.scrollIntoView({ block: "start" });
   }, [kq, tab]);
 
-  const dauCms = useDauCms();
+  const dauCms = useDauCms(), c = useChu();
   useBatDauDoc("thanso_sau", Boolean(kq));
   // Lúc chờ hồ sơ vẫn có <h1> trong HTML phía máy chủ (SEO); có hồ sơ thì tiêu đề là tên người dùng.
-  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeTrang nho="Thần số học" lon="Thần số học theo họ tên và ngày sinh" /><KhungTai /></div>;
+  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeTrang nho={c("dau.nhan_tren")} lon={c("dau.dang_tai")} /><KhungTai /></div>;
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
-        <TieuDeTrang nho="Thần số học" lon="Nhập tên và ngày sinh để bắt đầu" />
+        <TieuDeTrang nho={c("dau.nhan_tren")} lon={c("dau.chua_ho_so")} />
         <Card><NhapHoSo onXong={() => router.push("/ban-than?moi=1")} /></Card>
       </div>
     );
@@ -156,7 +156,7 @@ export function ThanSo() {
   return (
     <div className="space-y-14">
       <header>
-        <p className="eyebrow">Thần số học · chiều sâu</p>
+        <p className="eyebrow">{c("ket_qua.nhan_tren")}</p>
         <h1 className="mt-2 text-4xl sm:text-5xl" data-testid="ten-chinh">{kq.ten_chinh}</h1>
         <p className="mt-2 text-sm text-fg-muted" data-testid="ngay-sinh">Sinh {kq.ngay_sinh} · {kq.tom_tat_do_tin}</p>
       </header>
@@ -182,7 +182,7 @@ export function ThanSo() {
       {phai === "chaldea" ? <><ChaldeaDoc hoSo={hoSo} /><BanDoConSo hoSo={hoSo} quyUoc={quyUoc} /></>
         : phai === "tong_hop" ? <><TongHopDoc hoSo={hoSo} quyUoc={quyUoc} /><BanDoConSo hoSo={hoSo} quyUoc={quyUoc} /></> : (<>
       <section aria-labelledby="bon-so">
-        <TieuDeMuc id="bon-so" nho="Bốn con số cốt lõi" lon="Ý nghĩa, kiểm chứng, cách tính" />
+        <TieuDeMuc id="bon-so" nho={c("bon_so.nho")} lon={c("bon_so.lon")} />
         <div className="grid gap-4 md:grid-cols-2">
           {kq.cac_vi_tri.map((vt) => <TheBaLop key={vt.vi_tri} vt={vt} />)}
         </div>
@@ -191,7 +191,7 @@ export function ThanSo() {
       <BanDoConSo hoSo={hoSo} quyUoc={quyUoc} />
 
       <section aria-labelledby="chieu-sau" id="dong-doi" className="scroll-mt-24">
-        <TieuDeMuc id="chieu-sau" nho="Chiều sâu" lon="Đời bạn theo nhịp" mo_ta={cs.cach_doc_chieu_sau} />
+        <TieuDeMuc id="chieu-sau" nho={c("chieu_sau.nho")} lon={c("chieu_sau.lon")} mo_ta={cs.cach_doc_chieu_sau} />
         <Tabs value={tab} onValueChange={setTab}>
           <div className="-mx-4 overflow-x-auto px-4 [scrollbar-width:none]">
             <TabsList>
@@ -262,7 +262,7 @@ export function ThanSo() {
       <div id="noi-dau" className="scroll-mt-24"><NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea"} quyUoc={quyUoc} /></div>
 
       <section id="hoi" aria-labelledby="muc-hoi" className="scroll-mt-24">
-        <TieuDeMuc id="muc-hoi" nho="Hỏi sâu hơn" lon={`${tenGoi(hoSo)}, bạn đang băn khoăn điều gì?`}
+        <TieuDeMuc id="muc-hoi" nho={c("hoi.nho")} lon={c("hoi.lon", { ten: tenGoi(hoSo) })}
           mo_ta={MO_TA_HOI[phai]} />
         <KhungChat
             moDun="thanso"

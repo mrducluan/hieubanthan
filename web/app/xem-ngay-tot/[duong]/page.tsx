@@ -8,13 +8,17 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { LichThang, XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
 import { docDuong, duongNgay, ngayDangIndex, ngayTotCongKhai, thangCongKhai, thangIndex } from "@/lib/hoang-lich";
 import { goiLd, ldDuongDan, ldTrangWeb, metaTrang } from "@/lib/seo";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { taoChu } from "@/lib/chu-trang";
+import { layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { CHU_NGAY, CHU_THANG } from "@/lib/chu/trang-con";
 
 type P = { params: Promise<{ duong: string }> };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
 
 /** Trang con: WebPage + breadcrumb đúng như đường dẫn hiển thị; giới thiệu + hỏi đáp chỉ ở trang chính /xem-ngay-tot
  *  (không lặp FAQ trên hàng trăm trang ngày/tháng). */
-function LdTrangCon({ duong, ten, moTa, cap }: { duong: string; ten: string; moTa: string; cap: { ten: string; duong: string }[] }) {
+function LdTrangCon({ duong, ten, moTa, cap, cuoi }: { duong: string; ten: string; moTa: string; cap: { ten: string; duong: string }[]; cuoi: { chu: string; link: string } }) {
   return (
     <>
       <JsonLd data={goiLd(
@@ -22,8 +26,7 @@ function LdTrangCon({ duong, ten, moTa, cap }: { duong: string; ten: string; moT
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Xem ngày tốt", duong: "/xem-ngay-tot" }, ...cap]),
       )} />
       <p className="mx-auto mt-10 max-w-3xl border-t border-line/50 pt-6 text-sm text-fg-muted">
-        Hoàng lịch tính theo giờ Việt Nam, bảng nghi/kỵ theo sách Hiệp kỷ biện phương thư, kèm ngày kiêng dân gian Việt.
-        Cách đọc, giờ hoàng đạo, ngày Tam nương và câu hỏi thường gặp: <Link href="/xem-ngay-tot" className="text-gold underline">Xem ngày tốt hôm nay</Link>.
+        {cuoi.chu} <Link href="/xem-ngay-tot" className="text-gold underline">{cuoi.link}</Link>.
       </p>
     </>
   );
@@ -51,33 +54,41 @@ export default async function Page({ params }: P) {
     const [d, t] = await Promise.all([ngayTotCongKhai(x.iso), thangCongKhai(Number(x.iso.slice(0, 4)), Number(x.iso.slice(5, 7)))]);
     if (!d) throw new Error("engine lịch không phản hồi");   // → error.tsx, mã 5xx (không index trang lỗi)
     const thangCua = { nam: Number(x.iso.slice(0, 4)), thang: Number(x.iso.slice(5, 7)) };
+    // ND-7: mẫu cụm "/xem-ngay-tot/{ngay}" — khối CMS + chữ (tiêu đề, đoạn cuối) sửa được cho cả cụm hoặc riêng ngày.
+    const duong = duongNgay(x.iso), bien = { ngay: dmy(x.iso), thu: d.thu, am: d.am.chu };
+    const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_NGAY, nd.chu), tieuDe = c("dau.tieu_de", bien);
     return (
       <>
+        <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mx-auto mb-6 max-w-3xl" />
         <div className="mx-auto max-w-3xl">
           <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/xem-ngay-tot" className="hover:underline">Xem ngày tốt</Link> ›{" "}
             <Link href={`/xem-ngay-tot/thang-${Number(x.iso.slice(5, 7))}-${x.iso.slice(0, 4)}`} className="hover:underline">Tháng {Number(x.iso.slice(5, 7))}/{x.iso.slice(0, 4)}</Link></nav>
-          <TieuDeMuc cap={1} nho="Hoàng lịch" lon={`Ngày ${dmy(x.iso)} tốt hay xấu?`} />
+          <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
           <XemNgayTot banDau={d} thang={t} />
         </div>
-        <LdTrangCon duong={duongNgay(x.iso)} ten={`Ngày ${dmy(x.iso)} tốt hay xấu?`}
+        <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mx-auto mt-10 max-w-3xl" />
+        <LdTrangCon duong={duong} ten={tieuDe} cuoi={{ chu: c("cuoi.chu"), link: c("cuoi.link") }}
           moTa={`${d.thu}, âm lịch ${d.am.chu}, ngày ${d.can_chi.ngay}: ${d.hoang_dao ? "hoàng đạo" : "hắc đạo"} (${d.than.ten}), trực ${d.truc.ten}.`}
           cap={[{ ten: `Tháng ${thangCua.thang}/${thangCua.nam}`, duong: `/xem-ngay-tot/thang-${thangCua.thang}-${thangCua.nam}` },
             { ten: `Ngày ${dmy(x.iso)}`, duong: duongNgay(x.iso) }]} />
+        <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mx-auto mt-10 max-w-3xl" />
       </>
     );
   }
   const t = await thangCongKhai(x.nam, x.thang);
   if (!t) throw new Error("engine lịch không phản hồi");
   const dep = t.ngay.filter((n) => n.dep);
+  const duong = `/xem-ngay-tot/thang-${x.thang}-${x.nam}`, bien = { thang: String(x.thang), nam: String(x.nam) };
+  const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_THANG, nd.chu), tieuDe = c("dau.tieu_de", bien);
   return (
     <>
       <div className="mx-auto max-w-3xl space-y-5">
-        <TieuDeMuc cap={1} nho="Xem ngày tốt" lon={`Lịch ngày tốt tháng ${x.thang}/${x.nam}`}
-          mo_ta="Bấm vào một ngày để xem giờ hoàng đạo, việc nên làm và nên kiêng." />
+        <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} mo_ta={c("dau.mo_ta", bien)} />
+        <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" />
         <LichThang t={t} />
         <section aria-labelledby="ngay-dep" className="glass rounded-2xl p-5" data-testid="ngay-dep-thang">
-          <h2 id="ngay-dep" className="text-xl">Ngày hoàng đạo có trực tốt trong tháng</h2>
-          <p className="mt-1 text-sm text-fg-muted">Hoàng đạo, trực Thành/Khai/Định/Mãn/Trừ, không rơi vào Tam nương, Nguyệt kỵ, Dương công. Việc cụ thể (cưới hỏi, khai trương…) nên bấm vào ngày để xem mục nên/kiêng.</p>
+          <h2 id="ngay-dep" className="text-xl">{c("dep.tieu_de", bien)}</h2>
+          <p className="mt-1 text-sm text-fg-muted">{c("dep.mo_ta", bien)}</p>
           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
             {dep.map((n) => (
               <li key={n.ngay}><Link href={duongNgay(n.ngay)} className="block rounded-xl border border-line/70 px-3 py-2 text-sm hover:border-gold/50">
@@ -85,10 +96,12 @@ export default async function Page({ params }: P) {
             ))}
           </ul>
         </section>
+        <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" />
       </div>
-      <LdTrangCon duong={`/xem-ngay-tot/thang-${x.thang}-${x.nam}`} ten={`Lịch ngày tốt tháng ${x.thang}/${x.nam}`}
+      <LdTrangCon duong={duong} ten={tieuDe} cuoi={{ chu: c("cuoi.chu"), link: c("cuoi.link") }}
         moTa={`Lịch tháng ${x.thang}/${x.nam}: ngày âm, hoàng đạo/hắc đạo, trực từng ngày và ${dep.length} ngày hoàng đạo có trực tốt.`}
-        cap={[{ ten: `Tháng ${x.thang}/${x.nam}`, duong: `/xem-ngay-tot/thang-${x.thang}-${x.nam}` }]} />
+        cap={[{ ten: `Tháng ${x.thang}/${x.nam}`, duong }]} />
+      <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mx-auto mt-10 max-w-3xl" />
     </>
   );
 }

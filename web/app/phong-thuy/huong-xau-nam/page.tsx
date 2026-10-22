@@ -8,6 +8,7 @@ import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { metaTrang } from "@/lib/seo";
 import { duongHanNam, hanNamCongKhai, namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { ND_HAN_NAM } from "@/app/xem-tuoi-lam-nha/noi-dung";
+import { CHU_HAN_NAM } from "@/lib/chu/cong-cu";
 
 export async function generateMetadata(): Promise<Metadata> {
   return apDungSeo(metaTrang({ tieuDe: "Hướng xấu theo năm: Thái Tuế, Tam Sát, Ngũ Hoàng", moTa: ND_HAN_NAM.moTa, duong: ND_HAN_NAM.duong }), await layNoiDungTrang(ND_HAN_NAM.duong));
@@ -20,7 +21,7 @@ export default async function Page() {
   return (
     <TrangCongCu duong={ND_HAN_NAM.duong}>
       <div className="mx-auto max-w-3xl space-y-5">
-        <TieuDeTrang nho="Phong thuỷ theo năm" lon="Hướng xấu theo năm"
+        <TieuDeTrang nho={CHU_HAN_NAM["dau.nhan_tren"]!.mac_dinh} lon="Hướng xấu theo năm"
           mo_ta="Những phía truyền thống khuyên giữ yên — không động thổ, đục phá, sửa chữa lớn — trong năm." />
         <BangHanNam h={h} />
         <p className="flex flex-wrap gap-3 text-sm">

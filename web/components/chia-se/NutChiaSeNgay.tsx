@@ -30,6 +30,7 @@ export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false
 }) {
   const [dang, setDang] = useState(false);
   const [ma, setMa] = useState<string | null>(null);
+  const [tuDaTao, setTuDaTao] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
 
   async function chiaSe() {
@@ -39,6 +40,7 @@ export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false
       ghi("share_created", { kind: "the_ngay", ma_moi: tu });
       const { url, ma: m } = await taoLinkNgay(hoSo, tu);
       setMa(m);
+      setTuDaTao(tu);
       const chu = `Hôm nay là Ngày cá nhân ${soNgay} của mình${chuDe ? ` — ${chuDe}` : ""}. Còn bạn hôm nay là ngày mấy?`;
       if (typeof navigator.share === "function") {
         try { await navigator.share({ title: "Hôm nay của bạn", text: chu, url }); return; } catch { /* huỷ → chép */ }
@@ -54,8 +56,9 @@ export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false
       <Button size={nho ? "sm" : "md"} variant="secondary" onClick={() => void chiaSe()} disabled={dang} data-testid="chia-se-the-ngay">
         {daChep ? <Check aria-hidden /> : <Share2 aria-hidden />}{daChep ? "Đã chép link" : dang ? "Đang tạo…" : "Chia sẻ thẻ hôm nay"}
       </Button>
+      {/* TCS-1: bản dọc 1080×1350 + mã QR trỏ đúng link vừa chia sẻ (?tu=). */}
       {ma && (
-        <a href={`/og/ngay?ma=${encodeURIComponent(ma)}`} download="hom-nay-cua-toi.png"
+        <a href={`/og/ngay?ma=${encodeURIComponent(ma)}&khung=doc${tuDaTao ? `&tu=${tuDaTao}` : ""}`} download="hom-nay-cua-toi.png"
           className="inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-fg" data-testid="tai-anh-the-ngay">
           <Download className="size-4" aria-hidden /> Tải ảnh (đăng story)
         </a>

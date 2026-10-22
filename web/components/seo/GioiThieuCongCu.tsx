@@ -15,7 +15,10 @@ export interface NoiDungCongCu {
   lienKet?: { href: string; ten: string }[];
 }
 
-export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [] }: NoiDungCongCu) {
+/** Nhãn khung (ND-7, chữ CMS) — thiếu thì dùng chữ mặc định. */
+type NhanGioiThieu = { tieuDe?: string; hoiDap?: string; docThem?: string };
+
+export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [], nhan = {} }: NoiDungCongCu & { nhan?: NhanGioiThieu }) {
   return (
     <section aria-labelledby="gioi-thieu-cong-cu" className="mx-auto mt-12 max-w-3xl border-t border-line/50 pt-8 text-fg-muted md:mt-16 md:pt-10">
       <JsonLd data={goiLd(
@@ -36,9 +39,9 @@ export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [] }
           { ten, duong }]),
         ldHoiDap(hoiDap),
       )} />
-      <h2 id="gioi-thieu-cong-cu" className="text-2xl text-fg">{`Về công cụ ${ten}`}</h2>
+      <h2 id="gioi-thieu-cong-cu" className="text-2xl text-fg">{nhan.tieuDe || `Về công cụ ${ten}`}</h2>
       <div className="mt-3 space-y-3 leading-relaxed">{doan.map((p) => <p key={p}>{p}</p>)}</div>
-      <h3 className="mt-8 text-xl text-fg">Câu hỏi thường gặp</h3>
+      <h3 className="mt-8 text-xl text-fg">{nhan.hoiDap || "Câu hỏi thường gặp"}</h3>
       <dl className="mt-3 space-y-4">
         {hoiDap.map((h) => (
           <div key={h.hoi}>
@@ -48,7 +51,7 @@ export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [] }
         ))}
       </dl>
       {lienKet.length > 0 && (
-        <p className="mt-6 text-sm">Đọc thêm:{" "}
+        <p className="mt-6 text-sm">{nhan.docThem || "Đọc thêm:"}{" "}
           {lienKet.map((l, i) => <span key={l.href}>{i > 0 && " · "}<Link href={l.href} className="text-gold underline">{l.ten}</Link></span>)}
         </p>
       )}

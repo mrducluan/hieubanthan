@@ -7,7 +7,7 @@
 import { createHmac } from "node:crypto";
 import { unstable_cache } from "next/cache";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { biMat } from "@/lib/cua-sao";
+import { biMat, phienNguoiDung } from "@/lib/cua-sao";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { MAU_KIEM_CHUNG } from "@/lib/kiem-chung";
 
@@ -53,6 +53,18 @@ export async function phieuCuaToi(sb: SupabaseClient, userId: string): Promise<P
   const kq: PhieuCaNhan = {};
   for (const d of data as { mau: string; ket_qua: "dung" | "chua_dung" }[]) kq[d.mau] = d.ket_qua;
   return kq;
+}
+
+/** LG-ĐS / BT-ĐS — phần đầu vào "tầng HỌC" cho luận giải đời sống (Tử vi, Bát tự): `trong_so` (bảng tỉ lệ công khai,
+ *  mã ≥ 30 phiếu, cache 1 giờ) + `ca_nhan` (phiếu của chính người đang xem, khi đã đăng nhập). Không chữ người dùng nào
+ *  đi vào engine; lỗi / chưa bật → `{}` (luận giải vẫn ra như thường). */
+export async function themHocLuanGiai(): Promise<Record<string, unknown>> {
+  const [bang, phien] = await Promise.all([bangTyLe().catch(() => ({})), phienNguoiDung().catch(() => null)]);
+  const ca_nhan = phien ? await phieuCuaToi(phien.sb, phien.user.id).catch(() => ({})) : {};
+  const them: Record<string, unknown> = {};
+  if (Object.keys(bang).length) them.trong_so = bang;
+  if (Object.keys(ca_nhan).length) them.ca_nhan = ca_nhan;
+  return them;
 }
 
 /** Nguồn gửi khác origin (form lạ trên trang khác) → chặn thao tác ghi bằng phiên cookie. */

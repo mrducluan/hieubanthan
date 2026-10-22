@@ -7,6 +7,7 @@ Giờ Tý bát tự: SWITCH_AT_0000 (chính sách đã chốt) — khác tử vi
 from __future__ import annotations
 
 import datetime as _dt
+from typing import Literal
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
@@ -17,7 +18,7 @@ from app import nhat_ky
 from app.config import ENGINE_VERSION
 from app.hoidap import battu as hoidap_bt
 from app.kb import battu_kb
-from app.tuvi_api import TuanTrietInput, _DauVao
+from app.tuvi_api import TuanTrietInput, _DauVao, _MaMau, _Phieu
 
 router = APIRouter(prefix="/v1/battu", tags=["battu"])
 
@@ -92,13 +93,17 @@ def api_hoi(inp: HoiBTInput, background: BackgroundTasks) -> dict:
 
 
 class LuanGiaiBTInput(BaseModel):
-    """LG — luận giải toàn bộ Bát tự theo chương (không lưu)."""
+    """LG / BT-ĐS — luận giải toàn bộ Bát tự "đời sống" theo chương (không lưu)."""
     model_config = ConfigDict(extra="forbid")
 
     la_so: TuanTrietInput
     ngay_xem: _dt.date | None = None
     # SAO-2: bản xem trước khi thu Sao — chỉ diễn đạt AI N chương đầu (web cắt phần còn lại).
-    dien_dat_toi_da: int | None = Field(default=None, ge=0, le=12)
+    dien_dat_toi_da: int | None = Field(default=None, ge=0, le=13)
+    # Tầng HỌC (như Tử vi LG-ĐS): bảng tỉ lệ "thấy đúng" công khai theo mã mẫu (≥ 30 phiếu) + phiếu của chính người
+    # đang xem. Chỉ xếp lại / hạ hộp, không sinh câu mới.
+    trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)
+    ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
 
 
 @router.post("/luan-giai")
@@ -106,5 +111,8 @@ def api_luan_giai(inp: LuanGiaiBTInput) -> dict:
     from app.luangiai import toan_bo
     from app.narrative import luan_giai_van
     sinh, flags = _sinh(inp.la_so)
-    bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(toan_bo.battu(sinh, ngay_xem=inp.ngay_xem), toi_da=inp.dien_dat_toi_da))
+    trong_so = {k: v.model_dump() for k, v in inp.trong_so.items()} if inp.trong_so else None
+    bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(
+        toan_bo.battu(sinh, ngay_xem=inp.ngay_xem, trong_so=trong_so, ca_nhan=inp.ca_nhan),
+        toi_da=inp.dien_dat_toi_da))
     return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": flags}

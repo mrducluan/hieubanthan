@@ -1,9 +1,10 @@
 // PL-1 — chân trang: thương hiệu + cam kết dữ liệu, 4 cột liên kết (Khám phá · Kiến thức · Về chúng tôi · Pháp lý) — sửa ở CMS
 // "Điều hướng chân trang" (CMS chưa nối / lỗi → dùng COT dưới đây),
-// thông tin đơn vị vận hành (env, thiếu thì ẩn), mạng xã hội, dấu Bộ Công Thương (khi có), lời miễn trừ, đường dây khẩn cấp.
+// thông tin đơn vị vận hành (env, thiếu thì ẩn), mạng xã hội, dấu Bộ Công Thương (khi có), lời miễn trừ.
 // Server component: đọc env ở máy chủ (lib/van-hanh.ts), không gửi gì thêm xuống trình duyệt.
 // ND-1: lời giới thiệu, 3 cam kết, lời miễn trừ, nhãn nút ủng hộ sửa ở CMS; ô trống → chữ trong code (lib/menu-chan-trang.ts).
-// Đường dây khẩn cấp 115/113/111, dòng ©, thông tin đơn vị vận hành (env) luôn giữ trong code.
+// Dòng ©, thông tin đơn vị vận hành (env) luôn giữ trong code. (Đường dây khẩn cấp đã bỏ khỏi chân trang — TC-HOOK; lời
+// hỗ trợ khủng hoảng nằm trong hỏi đáp + trang Miễn trừ.)
 import Link from "next/link";
 import { BadgeCheck, BookOpen, Compass, HeartHandshake, Lock, Mail, MapPin, Phone, Scale, Server, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
 import { coUngHo } from "@/lib/ung-ho";

@@ -2,9 +2,9 @@
 // LG — "Luận giải toàn bộ": báo cáo theo chương do engine ghép từ kho tri thức (cùng bộ lọc an toàn
 // như hỏi đáp). Miễn phí thử nghiệm; khi bật công tắc thu Sao (SAO-LG/SAO-2): đọc miễn phí chương đầu, các chương sau
 // hiện tiêu đề + điểm nhấn đã tính + câu hỏi mở, mở toàn bộ bằng Sao (trừ ở máy chủ, xem lại trong ngày không mất thêm).
-// Không lưu ở máy chủ — trừ khi người dùng đã đăng nhập tự bấm "Lưu vào tài khoản" (LG-ĐS, chỉ báo cáo đời sống Tử vi).
-// Báo cáo `phien_ban: "doi_song_1"` (Tử vi, docs/LUAN-GIAI-DOI-SONG.md) hiện bằng components/luan-giai/BaoCaoDoiSong;
-// báo cáo khác (Bát tự, Bản đồ con số thần số) giữ cách hiện cũ bên dưới.
+// Không lưu ở máy chủ — trừ khi người dùng đã đăng nhập tự bấm "Lưu vào tài khoản" (LG-ĐS, báo cáo đời sống).
+// Báo cáo `phien_ban: "doi_song_1"` (Tử vi LG-ĐS + Bát tự BT-ĐS, docs/LUAN-GIAI-DOI-SONG.md) hiện bằng
+// components/luan-giai/BaoCaoDoiSong; báo cáo khác (Bản đồ con số thần số) giữ cách hiện cũ bên dưới.
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BookOpenText, Clock, Gift, LockKeyhole, Printer, Sparkles } from "lucide-react";
@@ -14,12 +14,14 @@ import { KhungTai } from "@/components/khung/TieuDe";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { dangChoMo, ghiChoMo, xoaChoMo } from "@/lib/sao-client";
+import { dangKyCuaLuanGiai } from "@/lib/cta-sao";
 import { useHoSo } from "@/lib/hoso";
 import type { MoiXem } from "@/lib/sao-xem-truoc";
 import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 import { BaoCaoDoiSongView } from "@/components/luan-giai/BaoCaoDoiSong";
 import { LuuBaiLuan } from "@/components/luan-giai/LuuBaiLuan";
 import { laBaoCaoDoiSong } from "@/components/luan-giai/kieu";
+
 
 type ChuongMo = { ma: string; tieu_de: string; doan: string[]; van_ai?: string; che_do?: string; thuat_ngu?: ThuatNgu[]; khoa?: false };
 type ChuongKhoa = { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem };
@@ -72,6 +74,15 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
     } catch (e) { if (so === luot.current) setLoi(e instanceof Error ? e.message : "Chưa tải được luận giải."); }
     finally { if (so === luot.current) setDang(false); }
   };
+  // CTA-1: báo trạng thái báo cáo cho nút Sao ở khối "Đọc tiếp" cuối trang — nút đó gọi đúng hàm mở của báo cáo này.
+  const taiRef = useRef(tai);
+  taiRef.current = tai;
+  const maCua = moDun ?? (duongDan.includes("battu") ? "battu" : duongDan.includes("thanso") ? "thanso" : "tuvi");
+  useEffect(() => dangKyCuaLuanGiai({
+    moDun: maCua, daTai: Boolean(bc), soKhoa: bc?.so_khoa ?? 0, tongChuong: bc?.chuong.length ?? 0,
+    mo: () => void taiRef.current(true), doc: () => void taiRef.current(),
+  }), [maCua, bc]);
+
   // Quay lại sau khi đăng nhập / nạp Sao → tự mở đúng báo cáo đang xem dở (cùng lá số, trong 30 phút). Một lần.
   const daTuMo = useRef(false);
   useEffect(() => {

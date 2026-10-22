@@ -41,7 +41,7 @@ export function ChiaSe() {
             loiNhan={`Con số đường đời của ${tenGoi(hoSo)} là ${kq.cac_vi_tri[0]?.gia_tri}. Còn bạn?`} />
           {ma && (
             <Button asChild variant="outline" className="mt-3 w-full">
-              <a href={`/og?ma=${encodeURIComponent(ma)}`} download="the-hieu-ban-than.png"><Download aria-hidden /> Tải ảnh thẻ (đăng story)</a>
+              <a href={`/og?ma=${encodeURIComponent(ma)}&khung=doc`} download="the-hieu-ban-than.png" data-testid="tai-anh-the-ho-so"><Download aria-hidden /> Tải ảnh thẻ (đăng story)</a>
             </Button>
           )}
         </Card>

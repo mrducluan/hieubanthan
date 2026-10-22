@@ -7,11 +7,14 @@ import { Textarea } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
 import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
+import { ViSao } from "@/components/luan-giai/HopNoiBat";
 
 export interface KetQuaHoi {
   van?: string;
   /** Phần trực quan kèm câu trả lời (quẻ, cung, tứ trụ…). */
   phu?: ReactNode;
+  /** Căn cứ kỹ thuật (tên sao, cung, độ sáng…) — hiện thu gọn "Vì sao nói vậy" ngay dưới câu trả lời. */
+  canCu?: string[];
   ghiChu?: string;
   /** SAO-2: lượt miễn phí còn lại / Sao vừa dùng (máy chủ báo). */
   ghiLuot?: string;
@@ -111,6 +114,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
                   {t.van && (
                     <div className="prose-vn rounded-2xl rounded-tl-md border border-line/70 bg-bg/40 px-4 py-3 text-[0.95rem] leading-relaxed">
                       {doanCoThuatNgu(t.van, t.thuatNgu)}
+                      <ViSao canCu={t.canCu} thuatNgu={t.thuatNgu} nho />
                     </div>
                   )}
                   <KhungGiaiNghia ds={t.thuatNgu} />
