@@ -1,4 +1,4 @@
-// POST /api/kiem-chung — LG-ĐS tầng HỌC (migration 0017 + 0020): phiếu "Đúng với mình / Chưa đúng" trên một thẻ.
+// POST /api/kiem-chung — LG-ĐS tầng HỌC (migration 0017 + 0021): phiếu "Đúng với mình / Chưa đúng" trên một thẻ.
 // Chỉ MÃ tất định (phi_hoa / nhip_3_thang / doi_song "ds.*" / hai_nguoi "hn.*"), không chữ, không lá số. Một phiếu / người / mã — bấm lại
 // là đổi ý (SQL cập nhật, không cộng dồn). Khoá = HMAC máy chủ của user_id (đăng nhập) hoặc IP — không lưu IP.
 // Chưa bật Supabase / chưa có bí mật / chưa chạy 0017 → {ok:false, ly_do:"chua_bat"} (200; PostHog vẫn đo ở trình duyệt).
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       p_khoa: khoa, p_user_id: phien?.user.id ?? null, p_loai: d.loai, p_mau: d.mau, p_phai: d.phai, p_ket_qua: d.ket_qua,
     });
     if (error) {
-      // PGRST202 = chưa có hàm (chưa chạy 0017) → "chưa bật" như cũ; lỗi khác (vd vi phạm ràng buộc `loai` khi 0020
+      // PGRST202 = chưa có hàm (chưa chạy 0017) → "chưa bật" như cũ; lỗi khác (vd vi phạm ràng buộc `loai` khi 0021
       // chưa chạy mà hàm cũ lại nhận) thì báo một lần.
       if (error.code !== "PGRST202") baoTuChoi(d.loai, "loi_db");
       return NextResponse.json({ ok: false, ly_do: "chua_bat" });

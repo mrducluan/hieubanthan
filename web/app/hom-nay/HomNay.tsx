@@ -5,6 +5,9 @@
 // câu, không trả lại câu. Trên máy chỉ nhớ MÃ ý định của đúng ngày đó (mở lại trong ngày vẫn thấy).
 import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
 import { NhacHomNay } from "@/components/khung/NhacHomNay";
+import { HoiHomQua } from "@/components/khung/HoiHomQua";
+import { MoiCaiApp } from "@/components/khung/MoiCaiApp";
+import { nhoYDinhHomNay } from "@/lib/hom-qua";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
@@ -147,6 +150,8 @@ export function HomNay() {
       setThe(t); setLoi(null);
       const ma = t.y_dinh_hom_nay.map((x) => x.ma);
       try { localStorage.setItem(KHOA_Y_DINH, JSON.stringify({ ngay: t.ngay_xem, ma })); } catch { /* bỏ qua */ }
+      // KC-4 GĐ2: nhớ trên máy để sáng mai hỏi lại "gợi ý đó có đúng với bạn không?" (thông báo hoặc khối Hôm qua).
+      void nhoYDinhHomNay(t.ngay_xem, t.ngay_ca_nhan.so, t.y_dinh_hom_nay);
       setChon(ma);
       ghi("daily_intent_set", { y_dinh: ma.join(","), go_tay: duDinh.trim() ? 1 : 0,
         ...(t.nhan_ra == null ? {} : { nhan_ra: t.nhan_ra ? 1 : 0, nhom_chua_ho_tro: (t.nhom_chua_ho_tro ?? []).join(",") }) });
@@ -293,7 +298,9 @@ export function HomNay() {
             </section>
           )}
 
+          <HoiHomQua homNay={the.ngay_xem} tieuDe={c("hom_qua.tieu_de")} cau={(b) => c("hom_qua.cau", b)} camOn={c("hom_qua.cam_on")} />
           <NhacHomNay homNay={the.ngay_xem} />
+          <MoiCaiApp noi="hom_nay" />
           <ThangNayNha />
 
           <section aria-labelledby="y-dinh" className="glass space-y-4 rounded-2xl p-5" data-testid="y-dinh">

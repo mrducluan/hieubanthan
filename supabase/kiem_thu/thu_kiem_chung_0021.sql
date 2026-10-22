@@ -1,4 +1,4 @@
--- HN-2N kiểm chứng "Xem lá số 2 người" (migration 0020). Chạy SAU thu_tuvi_hoc_0017.sql. Dùng ASSERT: sai là lỗi → job đỏ.
+-- HN-2N kiểm chứng "Xem lá số 2 người" (migration 0021). Chạy SAU thu_tuvi_hoc_0017.sql. Dùng ASSERT: sai là lỗi → job đỏ.
 -- Danh mục đầy đủ mã engine sinh được đối chiếu ở engine/tests/test_kiem_chung_ma.py (đọc chính tệp migration).
 \set k5 '''eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'''
 -- Hàm kiểm mã chỉ gọi được bởi chủ sở hữu / hàm security definer (đã revoke public) → kiểm bằng vai trò chủ.
@@ -44,4 +44,4 @@ begin
     assert not has_function_privilege('anon', 'kiem_chung_ma_hop_le(text,text,text)', 'execute'), 'anon gọi hàm kiểm mã';
     assert not has_function_privilege('anon', 'ghi_kiem_chung(text,uuid,text,text,text,text)', 'execute'), 'anon ghi phiếu';
 end $$;
-select 'kiểm chứng 2 người (0020): OK' t;
+select 'kiểm chứng 2 người (0021): OK' t;

@@ -454,21 +454,24 @@ test("ND-7: chữ trên trang — tab trong CMS, sửa chip + hàng bảng trang
   await choWeb(request, "/", (s, b) => s === 200 && b.includes("Một phút là xong") && b.includes("Hàng chatbot sửa từ CMS"));
 
   // mẫu cụm trang ngày: đổi tiêu đề cho cả cụm (biến {ngay}) + khối phía trên
+  // ngày hôm nay (giờ VN) — trang người dùng thật hay mở, luôn trong cửa sổ index
+  const iso = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
+  const dmy = iso.split("-").reverse().join("/");
   const mau = await tim("mau-cum", "mau_duong", "/xem-ngay-tot/{ngay}");
   const m = await request.patch(`${CMS}/api/mau-cum/${mau.id}`, { headers: h, data: {
     _status: "published", chu: { "dau.tieu_de": "Ngày {ngay} có hợp việc lớn không?" },
     khoi_tren: [{ blockType: "van_ban", noi_dung: "Khối cụm ngày từ CMS ({ngay})." }] } });
   expect(m.status(), await m.text()).toBe(200);
-  await choWeb(request, "/xem-ngay-tot/2026-10-21", (s, b) => s === 200 && b.includes("Ngày 21/10/2026 có hợp việc lớn không?"));
-  await page.goto(`${WEB}/xem-ngay-tot/2026-10-21`);
-  await expect(page.locator("h1")).toHaveText("Ngày 21/10/2026 có hợp việc lớn không?");
-  await expect(page.getByTestId("khoi-cms-tren")).toContainText("Khối cụm ngày từ CMS (21/10/2026).");
+  await choWeb(request, `/xem-ngay-tot/${iso}`, (s, b) => s === 200 && b.includes(`Ngày ${dmy} có hợp việc lớn không?`));
+  await page.goto(`${WEB}/xem-ngay-tot/${iso}`);
+  await expect(page.locator("h1")).toHaveText(`Ngày ${dmy} có hợp việc lớn không?`);
+  await expect(page.getByTestId("khoi-cms-tren")).toContainText(`Khối cụm ngày từ CMS (${dmy}).`);
 
   for (const [c, id] of [["noi-dung-trang", chu.id], ["mau-cum", mau.id]] as const) {
     expect((await request.patch(`${CMS}/api/${c}/${id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
   }
   await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Một phút là xong") && b.includes("30 giây · không cần tài khoản"));
-  await choWeb(request, "/xem-ngay-tot/2026-10-21", (s, b) => s === 200 && b.includes("Ngày 21/10/2026 tốt hay xấu?"));
+  await choWeb(request, `/xem-ngay-tot/${iso}`, (s, b) => s === 200 && b.includes(`Ngày ${dmy} tốt hay xấu?`));
 });
 
 test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát), hình lớn trang chủ từ thư viện, chữ dùng chung ở form", async ({ page, request, browser }) => {

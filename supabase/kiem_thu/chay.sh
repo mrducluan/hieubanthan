@@ -26,4 +26,5 @@ psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_ho_so_0015.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_thanso_hoc.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_tuvi_hoc_0017.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_push_0019.sql
-psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_kiem_chung_0020.sql
+psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_push_0020.sql
+psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_kiem_chung_0021.sql

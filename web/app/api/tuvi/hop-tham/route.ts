@@ -1,8 +1,8 @@
 // POST /api/tuvi/hop-tham — TV-V2 + HN-2N — "Xem lá số 2 người" (can năm người kia phi hoá vào lá mình + điểm
 // tham khảo hợp – khắc do engine chấm), không lưu người kia.
-// Proxy mỏng: zod hai chiều, KHÔNG tự tính gì. Tầng HỌC (migration 0020): máy chủ thêm `trong_so` (tỉ lệ công khai mã
+// Proxy mỏng: zod hai chiều, KHÔNG tự tính gì. Tầng HỌC (migration 0021): máy chủ thêm `trong_so` (tỉ lệ công khai mã
 // hn.*, ≥ 30 phiếu) + `ca_nhan` (phiếu hn.* của chính người đang đăng nhập) để engine hạ/xếp hộp — không đổi điểm.
-// Chưa bật Supabase / chưa chạy 0017 + 0020 → không kèm gì, kết quả như cũ.
+// Chưa bật Supabase / chưa chạy 0017 + 0021 → không kèm gì, kết quả như cũ.
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
 import { themHocLuanGiai } from "@/lib/hoc-tuvi";

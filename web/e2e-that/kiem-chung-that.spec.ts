@@ -1,5 +1,5 @@
 // Rà vòng HỌC (2026-10-22) — chuỗi THẬT, không page.route: trình duyệt / request → route web thật (/api/kiem-chung,
-// /api/kiem-chung/ty-le, /api/tuvi/hop-tham) → Supabase thu nhỏ chạy migration thật (0017 + 0020) → engine thật.
+// /api/kiem-chung/ty-le, /api/tuvi/hop-tham) → Supabase thu nhỏ chạy migration thật (0017 + 0021) → engine thật.
 // Kiểm: ghi phiếu → đọc tỉ lệ (≥ 30 phiếu) → đổi ý KHÔNG cộng dồn → mã ngoài danh mục SQL bị từ chối có báo
 // (`ly_do: "tu_choi"`) → loại `hai_nguoi` mới: nút trên /tu-vi ghi đúng loại/phái, tỉ lệ thấp hạ hộp (trong_so), phiếu
 // "chưa đúng" của chính người đăng nhập đẩy hộp xuống cuối (ca_nhan) — điểm số không đổi.

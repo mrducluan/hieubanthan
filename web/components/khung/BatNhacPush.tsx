@@ -7,7 +7,8 @@ import Link from "next/link";
 import { BellOff, BellRing, Share } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { useNguoiDung } from "@/lib/tai-khoan";
-import { batPush, dongBoThietBi, khoaMayChu, tatPush, trangThaiPush, type TrangThaiPush } from "@/lib/web-push-trinh-duyet";
+import { batPush, coHoSoTaiKhoan, docTuyChon, dongBoThietBi, khoaMayChu, luuTuyChon, tatPush, trangThaiPush,
+  type MocLichChon, type TrangThaiPush, type TuyChonPush } from "@/lib/web-push-trinh-duyet";
 import { cn } from "@/lib/utils";
 
 export function BatNhacPush({ className }: { className?: string }) {
@@ -86,11 +87,14 @@ export function BatNhacPush({ className }: { className?: string }) {
   return (
     <div className={khung} data-testid="bat-nhac-push" data-trang-thai={tt}>
       {tt === "dang_bat" ? (
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-1 text-gold"><BellRing className="size-4" aria-hidden /> Đang bật nhắc trên thiết bị này</span>
-          <button type="button" disabled={ban} onClick={tat} className="inline-flex items-center gap-1 text-xs text-fg-faint hover:text-fg">
-            <BellOff className="size-3.5" aria-hidden /> Tắt</button>
-        </div>
+        <>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1 text-gold"><BellRing className="size-4" aria-hidden /> Đang bật nhắc trên thiết bị này</span>
+            <button type="button" disabled={ban} onClick={tat} className="inline-flex items-center gap-1 text-xs text-fg-faint hover:text-fg">
+              <BellOff className="size-3.5" aria-hidden /> Tắt</button>
+          </div>
+          <TuyChonNhan userId={nguoi.id} />
+        </>
       ) : (
         <>
           <button type="button" disabled={ban} onClick={bat}
@@ -102,5 +106,51 @@ export function BatNhacPush({ className }: { className?: string }) {
       )}
       {bao && <p className="text-xs text-fg-muted" role="status">{bao}</p>}
     </div>
+  );
+}
+
+const MOC: { ma: MocLichChon; chu: string }[] = [
+  { ma: "thang_ca_nhan", chu: "Đầu tháng cá nhân mới (ngày 1 dương lịch)" },
+  { ma: "giao_tiet", chu: "Ngày giao tiết — sang tháng mới theo tiết khí (tháng của nhà)" },
+  { ma: "lap_xuan_tet", chu: "Lập xuân và Tết âm lịch" },
+];
+
+/** GĐ2: người dùng tự tích nhận thêm (không tích sẵn). Vẫn tối đa một thông báo mỗi ngày — gộp vào một. */
+function TuyChonNhan({ userId }: { userId: string }) {
+  const [tc, setTc] = useState<TuyChonPush | null>(null);
+  const [coHoSo, setCoHoSo] = useState(true);
+  const [bao, setBao] = useState<string | null>(null);
+  useEffect(() => {
+    let huy = false;
+    void docTuyChon(userId).then((t) => { if (!huy) setTc(t); });
+    void coHoSoTaiKhoan(userId).then((c) => { if (!huy) setCoHoSo(c); });
+    return () => { huy = true; };
+  }, [userId]);
+  if (!tc) return null;   // máy chủ chưa bật phần này
+  const doi = (moi: TuyChonPush) => {
+    setTc(moi); setBao(null);
+    luuTuyChon(userId, moi).then(() => {
+      setBao("Đã lưu.");
+      ghi("chart_interacted", { kind: "push_tuy_chon", sang_nay: moi.sang_nay ? 1 : 0, moc_lich: moi.moc_lich.join(",") });
+    }).catch((e) => setBao(e instanceof Error ? e.message : "Chưa lưu được."));
+  };
+  return (
+    <fieldset className="space-y-1.5 border-t border-line/60 pt-2" data-testid="push-tuy-chon">
+      <legend className="text-xs text-fg-faint">Nhận thêm vào thông báo buổi sáng (tự chọn, vẫn tối đa một thông báo mỗi ngày)</legend>
+      <label className="flex items-start gap-2">
+        <input type="checkbox" className="mt-1" checked={tc.sang_nay} onChange={(e) => doi({ ...tc, sang_nay: e.target.checked })} />
+        <span><b>Sáng nay của bạn</b> — Ngày cá nhân và một câu tự soi cho hôm nay.
+          {!coHoSo && <span className="block text-xs text-fg-faint">Cần <Link href="/tai-khoan" className="text-gold hover:underline">lưu hồ sơ vào tài khoản</Link> để máy chủ biết ngày, tháng sinh (không dùng năm sinh).</span>}</span>
+      </label>
+      {MOC.map((m) => (
+        <label key={m.ma} className="flex items-start gap-2">
+          <input type="checkbox" className="mt-1" checked={tc.moc_lich.includes(m.ma)}
+            onChange={(e) => doi({ ...tc, moc_lich: e.target.checked ? [...tc.moc_lich, m.ma] : tc.moc_lich.filter((x) => x !== m.ma) })} />
+          <span>{m.chu}</span>
+        </label>
+      ))}
+      <p className="text-xs text-fg-faint">Sáng hôm sau ngày bạn chọn “Hôm nay bạn định làm gì?”, thông báo sẽ hỏi lại một chạm: gợi ý hôm qua có đúng với bạn không.</p>
+      {bao && <p className="text-xs text-fg-muted" role="status">{bao}</p>}
+    </fieldset>
   );
 }

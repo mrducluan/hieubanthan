@@ -286,7 +286,7 @@ def test_khong_kb_van_chay(monkeypatch):
     assert r["loi_dan"] and len(r["goi_y"]) == 3
 
 
-# ------------------------------------------------------------------ tầng HỌC (kiểm chứng "hai_nguoi", migration 0020)
+# ------------------------------------------------------------------ tầng HỌC (kiểm chứng "hai_nguoi", migration 0021)
 # Như LG-ĐS: `trong_so` (tỉ lệ công khai, mã ≥ 30 phiếu) gắn "x% thấy đúng"; hộp ≥ 100 phiếu và < 40% đúng → bỏ khỏi
 # hộp, chuyển một dòng "Đang xem lại" xuống "Vì sao nói vậy" của tiêu chí; hộp chính người xem bấm "chưa đúng" xếp
 # cuối. KHÔNG đổi điểm, mức, lời — chỉ chọn/xếp hộp đã có.

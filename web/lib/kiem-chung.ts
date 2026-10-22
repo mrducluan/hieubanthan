@@ -40,7 +40,7 @@ export function maNhip(t: { muc: string; ly_do: { ma: string }[] }): string {
  *  ≤ 60 ký tự, chữ thường/số/`_.+-`. Web không tự dựng mã này, chỉ chuyển nguyên văn. BT-ĐS: Bát tự dùng `ds.bt.{chương}.{…}`
  *  (cùng loại `doi_song`, đi qua ràng buộc của migration 0017 — không cần migration mới). */
 export const MA_DOI_SONG = /^ds\.[a-z0-9_]+(\.[a-z0-9_+-]+)+$/;
-/** HN-2N (migration 0020): mã hộp "Xem lá số 2 người" do engine dựng — `hn.{tiêu chí}.{loại}.{quan hệ}`
+/** HN-2N (migration 0021): mã hộp "Xem lá số 2 người" do engine dựng — `hn.{tiêu chí}.{loại}.{quan hệ}`
  *  (vd `hn.chi.tam_hop.nguoi_yeu`): chỉ tiêu chí · kiểu quan hệ giữa hai năm sinh · quan hệ người dùng chọn — không tên,
  *  ngày sinh, can chi. Danh mục chặt nằm ở SQL `kiem_chung_ma_hop_le` (test engine `tests/test_kiem_chung_ma.py`); ở đây
  *  chỉ chặn dạng. Phái = phiên bản luật chấm điểm (`diem.phien_ban`, vd `hai_nguoi_1`). */

@@ -8,9 +8,9 @@
 --   * `phai` = phiên bản luật chấm (`hai_nguoi_1`, `PHIEN_BAN_DIEM` của engine) → nhận `hai_nguoi_<số>`.
 --   * Phần còn lại của hàm giữ nguyên 0017 (phi_hoa · nhip_3_thang · doi_song), mảng cố định tách thành hằng có tên để
 --     test đọc được. Riêng nhip_3_thang nhận thêm lý do `kn` (Kỵ tháng rơi thẳng vào Mệnh / Tài / Quan — NHIP-3,
---     2026-10-22); trước khi chạy 0020, phiếu tháng có lý do này bị hàm 0017 từ chối (web báo `tu_choi`).
+--     2026-10-22); trước khi chạy 0021, phiếu tháng có lý do này bị hàm 0017 từ chối (web báo `tu_choi`).
 -- Không BEGIN/COMMIT (chạy bằng psql -1 hoặc SQL Editor). Chạy SAU 0017 (cần bảng kiem_chung_phieu).
--- Rollback: 0020_kiem_chung_hai_nguoi.down.sql (xoá phiếu loại hai_nguoi, trả ràng buộc + hàm về 0017).
+-- Rollback: 0021_kiem_chung_hai_nguoi.down.sql (xoá phiếu loại hai_nguoi, trả ràng buộc + hàm về 0017).
 
 alter table kiem_chung_phieu drop constraint if exists kiem_chung_phieu_loai_check;
 alter table kiem_chung_phieu add constraint kiem_chung_phieu_loai_check
