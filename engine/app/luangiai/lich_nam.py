@@ -39,6 +39,6 @@ def lich_nam(nam: int) -> dict:
     ]
     return {"nam": nam, "can_chi": f"{can} {chi}", "tet": tet.isoformat(), "tet_sau": tet_sau.isoformat(),
             "thang_nhuan": nhuan, "thang": thang, "tra_loi_nhanh": tra_loi, "hoi_dap": hd,
-            "cach_tinh": ("Âm lịch Việt Nam tính theo giờ Hà Nội (UTC+7), thuật toán Hồ Ngọc Đức: mùng 1 là ngày có điểm sóc, "
+            "cach_tinh": ("Âm lịch Việt Nam tính theo giờ Hà Nội (UTC+7) theo phép tính thiên văn: mùng 1 là ngày có điểm sóc, "
                           "tháng nhuận là tháng đầu tiên trong năm không chứa trung khí. Lịch Trung Quốc tính theo UTC+8 nên "
                           "có năm lệch một ngày hoặc một tháng.")}

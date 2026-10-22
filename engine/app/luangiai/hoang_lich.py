@@ -254,7 +254,8 @@ def viec_thang(viec: str, nam: int, thang_: int) -> dict:
     am = lambda x: f"{dmy(x['ngay'])} (âm {x['am']}, {x['can_chi']})"  # noqa: E731
     l0, l1 = lunar.solar_to_lunar(1, thang_, nam, CALENDAR_MERIDIAN_TZ), lunar.solar_to_lunar(den.day, thang_, nam, CALENDAR_MERIDIAN_TZ)
     thang_am = f"từ {l0[0]}/{l0[1]}{' nhuận' if l0[3] else ''} đến {l1[0]}/{l1[1]}{' nhuận' if l1[3] else ''} âm lịch"
-    dep = kq["ngay"][0] if kq["ngay"] else None
+    # "Đẹp nhất" = ngày đầu bảng xếp hạng KHÔNG vướng kiêng dân gian (Tam nương, Nguyệt kỵ…); cả tháng đều vướng thì không nêu.
+    dep = next((x for x in kq["ngay"] if not x.get("ky_dan_gian")), None)
     tra_loi = (f"Tháng {thang_}/{nam} ({thang_am}) có {len(ds)} ngày tốt cho {ten} theo hoàng lịch: "
                + (", ".join(am(x) for x in ds) + "." if ds else "không có ngày nào đủ điều kiện — nên xem tháng kế tiếp.")
                + (f" Đẹp nhất: {am(dep)} — {', '.join(dep['diem_cong'])}." if dep and dep["diem_cong"] else ""))

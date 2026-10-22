@@ -58,6 +58,7 @@ QUY_TAC: list[tuple[re.Pattern[str], str]] = [(re.compile(m), t) for m, t in [
      "Nạp âm Lục thập hoa giáp; can chi năm theo âm lịch Việt Nam; mốc Lập xuân tính theo tiết khí, giờ Việt Nam."),
     (r"âm lịch Hồ Ngọc Đức \(Việt Nam\)", "âm lịch Việt Nam"),
     (r" \(thuật toán Hồ Ngọc Đức\)", ""),
+    (r"thuật toán Hồ Ngọc Đức", "phép tính thiên văn"),
     (r" — ctext\.org/[\w\-/]*", ""),
     (r"; bản số hoá opencode-tianji [\d.]+, MIT", ""),
     (r"bản nháp tổng hợp quan niệm phổ thông", "tổng hợp quan niệm phổ thông"),

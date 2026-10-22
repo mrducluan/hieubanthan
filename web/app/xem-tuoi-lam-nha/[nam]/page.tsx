@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, urlDayDu } from "@/lib/seo";
-import { docNam, duongHanNam, duongLamNha, duongLamNhaNam, duongXongDatNam, lamNhaNamCongKhai, namAmHienTai } from "@/lib/tuoi-dan-gian";
+import { NAM_BANG_TU, docNamBang, duongHanNam, duongLamNha, duongLamNhaNam, duongXongDatNam, lamNhaNamCongKhai, namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { CHU_LAM_NHA_NAM } from "@/lib/chu/trang-con";
@@ -15,7 +15,7 @@ import { CHU_LAM_NHA_NAM } from "@/lib/chu/trang-con";
 type P = { params: Promise<{ nam: string }> };
 
 export async function generateMetadata(p: P): Promise<Metadata> {
-  const n = docNam((await p.params).nam);
+  const n = docNamBang((await p.params).nam);
   if (!n) return {};
   const m = metaTrang({ tieuDe: `Tuổi nào làm nhà năm ${n}? Bảng Kim lâu, Hoang ốc, Tam tai`,
     moTa: `Năm ${n}: tuổi sinh 1960–2005 nào làm nhà, cưới hỏi được, tuổi nào phạm Kim lâu, Hoang ốc, Tam tai — tính theo tuổi mụ âm lịch.`,
@@ -25,7 +25,7 @@ export async function generateMetadata(p: P): Promise<Metadata> {
 }
 
 export default async function Page(p: P) {
-  const n = docNam((await p.params).nam);
+  const n = docNamBang((await p.params).nam);
   if (!n) notFound();
   const [d, namAm] = await Promise.all([lamNhaNamCongKhai(n), namAmHienTai()]);
   if (!d) throw new Error("engine không phản hồi");   // → error.tsx (5xx), không để Google index trang lỗi
@@ -89,7 +89,7 @@ export default async function Page(p: P) {
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-8 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/xem-tuoi-lam-nha" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>
       <p className="mt-3 flex flex-wrap gap-3 text-sm">
-        {n > 1901 && <Link href={duongLamNhaNam(n - 1)} className="text-gold underline">Năm {n - 1}</Link>}
+        {n > NAM_BANG_TU && <Link href={duongLamNhaNam(n - 1)} className="text-gold underline">Năm {n - 1}</Link>}
         {n < 2099 && <Link href={duongLamNhaNam(n + 1)} className="text-gold underline">Năm {n + 1}</Link>}
         <Link href={duongHanNam(n)} className="text-gold underline">Hướng xấu năm {n}</Link>
         {n >= namAm && <Link href={duongXongDatNam(n)} className="text-gold underline">Tuổi xông đất Tết {n}</Link>}

@@ -83,6 +83,13 @@ export function docNam(s: string): number | null {
   return n >= 1901 && n <= 2099 ? n : null;
 }
 
+/** Bảng theo năm liệt kê tuổi sinh 1960–2005 → chỉ có từ năm 2006 (năm sớm hơn sẽ có tuổi chưa sinh). Khớp engine. */
+export const NAM_BANG_TU = 2006;
+export function docNamBang(s: string): number | null {
+  const n = docNam(s);
+  return n && n >= NAM_BANG_TU ? n : null;
+}
+
 /** Năm âm lịch hôm nay (engine trả qua hoàng lịch hôm nay); engine bận → năm dương (gần đúng, chỉ làm mặc định ô nhập). */
 export async function namAmHienTai(): Promise<number> {
   const { homNayVN, ngayTotCongKhai } = await import("@/lib/hoang-lich");

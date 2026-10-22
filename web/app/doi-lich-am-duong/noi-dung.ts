@@ -6,7 +6,7 @@ export const ND_DOI_LICH: NoiDungCongCu = {
   ten: "Đổi lịch âm dương",
   moTa: "Đổi ngày dương lịch sang âm lịch và ngược lại theo âm lịch Việt Nam (giờ Hà Nội), kèm can chi ngày, tháng, năm, tháng nhuận và chỗ lệch với lịch Trung Quốc.",
   doan: [
-    "Âm lịch Việt Nam tính theo giờ Hà Nội (UTC+7) bằng thuật toán Hồ Ngọc Đức: mùng 1 là ngày có điểm sóc (trăng non), tháng nhuận là tháng đầu tiên trong năm không chứa trung khí.",
+    "Âm lịch Việt Nam tính theo giờ Hà Nội (UTC+7) theo phép tính thiên văn: mùng 1 là ngày có điểm sóc (trăng non), tháng nhuận là tháng đầu tiên trong năm không chứa trung khí.",
     "Lịch Trung Quốc tính theo giờ Bắc Kinh (UTC+8), nên có năm Tết hai nước lệch nhau một ngày hoặc cả tháng (như năm 1985). Công cụ ghi rõ khi hai lịch khác nhau.",
     "Kết quả kèm can chi của ngày, tháng, năm và số ngày của tháng âm (29 hoặc 30) — tiện đối chiếu sổ tử vi, giấy tờ cũ hay chọn ngày giỗ, ngày rằm.",
   ],

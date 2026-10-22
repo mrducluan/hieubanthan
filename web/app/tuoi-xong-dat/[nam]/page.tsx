@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, urlDayDu } from "@/lib/seo";
-import { docNam, duongLamNhaNam, duongXongDat, duongXongDatNam, namAmHienTai, xongDatNamCongKhai } from "@/lib/tuoi-dan-gian";
+import { NAM_BANG_TU, docNamBang, duongLamNhaNam, duongXongDat, duongXongDatNam, namAmHienTai, xongDatNamCongKhai } from "@/lib/tuoi-dan-gian";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { CHU_XONG_DAT_NAM } from "@/lib/chu/trang-con";
@@ -16,7 +16,7 @@ type P = { params: Promise<{ nam: string }> };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
 
 export async function generateMetadata(p: P): Promise<Metadata> {
-  const n = docNam((await p.params).nam);
+  const n = docNamBang((await p.params).nam);
   if (!n) return {};
   const m = metaTrang({ tieuDe: `Tuổi xông đất Tết ${n} hợp gia chủ, tuổi nên tránh, giờ đẹp`,
     moTa: `Tết ${n}: tuổi nào hợp xông đất cho gia chủ sinh 1960–2005, tuổi nên tránh (xung năm, Tam tai), giờ hoàng đạo và hướng xuất hành mùng 1.`,
@@ -26,7 +26,7 @@ export async function generateMetadata(p: P): Promise<Metadata> {
 }
 
 export default async function Page(p: P) {
-  const n = docNam((await p.params).nam);
+  const n = docNamBang((await p.params).nam);
   if (!n) notFound();
   const d = await xongDatNamCongKhai(n);
   if (!d) throw new Error("engine không phản hồi");
@@ -95,7 +95,7 @@ export default async function Page(p: P) {
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-8 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/tuoi-xong-dat" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>
       <p className="mt-3 flex flex-wrap gap-3 text-sm">
-        {n > 1901 && <Link href={duongXongDatNam(n - 1)} className="text-gold underline">Tết {n - 1}</Link>}
+        {n > NAM_BANG_TU && <Link href={duongXongDatNam(n - 1)} className="text-gold underline">Tết {n - 1}</Link>}
         {n < 2099 && <Link href={duongXongDatNam(n + 1)} className="text-gold underline">Tết {n + 1}</Link>}
         <Link href={duongLamNhaNam(n)} className="text-gold underline">Tuổi làm nhà năm {n}</Link>
       </p>

@@ -60,8 +60,10 @@ export function DoiLich({ homNay }: { homNay: string }) {
             {kq.thang_nhuan_nam ? `; năm ${kq.am_viet.nam} nhuận tháng ${kq.thang_nhuan_nam}` : ""}.</p>
           {kq.lech_lich_trung && <p className="text-fg-muted">Lịch Trung Quốc ghi ngày này là {kq.am_trung_quoc.ngay}/{kq.am_trung_quoc.thang}{kq.am_trung_quoc.nhuan ? " (nhuận)" : ""}/{kq.am_trung_quoc.nam} — hai lịch lệch vì tính theo múi giờ khác nhau.</p>}
           <p className="flex flex-wrap gap-3 pt-1">
-            <Link href={`/xem-ngay-tot/${kq.duong.nam}-${hai(kq.duong.thang)}-${hai(kq.duong.ngay)}`} className="text-gold underline">Ngày này tốt hay xấu?</Link>
-            <Link href={`/lich-am/${kq.am_viet.nam}`} className="text-gold underline">Lịch âm cả năm {kq.am_viet.nam}</Link>
+            {kq.duong.nam >= 1901 && kq.duong.nam <= 2099 &&
+              <Link href={`/xem-ngay-tot/${kq.duong.nam}-${hai(kq.duong.thang)}-${hai(kq.duong.ngay)}`} className="text-gold underline">Ngày này tốt hay xấu?</Link>}
+            {kq.am_viet.nam >= 1901 && kq.am_viet.nam <= 2098 && /* khớp docNamLich — năm khác không có trang */
+              <Link href={`/lich-am/${kq.am_viet.nam}`} className="text-gold underline">Lịch âm cả năm {kq.am_viet.nam}</Link>}
           </p>
         </div>
       )}

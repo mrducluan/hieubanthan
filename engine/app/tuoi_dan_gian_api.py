@@ -12,6 +12,8 @@ from app.luangiai import tuoi_dan_gian as L
 
 router = APIRouter(tags=["tuoi-dan-gian"])
 NamXem = Annotated[int, Path(ge=1901, le=2099)]
+# Bảng theo năm liệt kê tuổi sinh 1960–2005 → chỉ từ năm 2006 (khớp web NAM_BANG_TU).
+NamBang = Annotated[int, Path(ge=2006, le=2099)]
 NamSinh = Annotated[int, Path(ge=1900, le=2099)]
 
 
@@ -73,10 +75,10 @@ def api_xong_dat_cong_khai(nam: NamXem, nam_sinh: NamSinh) -> dict:
 
 # SEO-L1: bảng theo năm (không dữ liệu cá nhân → web cache được).
 @router.get("/v1/tuoi/lam-nha-nam/{nam}")
-def api_lam_nha_nam(nam: NamXem) -> dict:
+def api_lam_nha_nam(nam: NamBang) -> dict:
     return L.lam_nha_nam(nam)
 
 
 @router.get("/v1/tuoi/xong-dat-nam/{nam}")
-def api_xong_dat_nam(nam: NamXem) -> dict:
+def api_xong_dat_nam(nam: NamBang) -> dict:
     return L.xong_dat_nam(nam)

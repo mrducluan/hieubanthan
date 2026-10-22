@@ -7,7 +7,7 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KetQuaXongDat } from "@/components/tuoi/KetQuaTuoi";
 import { CungTuoi } from "@/components/tuoi/CungTuoi";
 import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
-import { docNam, docTuoi, duongXongDat, duongXongDatNam, namAmHienTai, xongDatCongKhai, xongDatIndex } from "@/lib/tuoi-dan-gian";
+import { docNam, docTuoi, duongXongDat, duongXongDatNam, namAmHienTai, xongDatCongKhai, xongDatIndex, NAM_BANG_TU } from "@/lib/tuoi-dan-gian";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang } from "@/lib/noi-dung-trang";
@@ -44,12 +44,12 @@ export default async function Page(p: P) {
     <div className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(
         ldTrangWeb({ duong: duongXongDat(x.n, x.ns), ten: tieuDe, about: ["Xông đất", `Tết ${d.nam.can_chi}`, `Tuổi ${d.chu.can_chi}`] }),
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Tuổi xông đất", duong: "/tuoi-xong-dat" }, { ten: `Tết ${x.n}`, duong: duongXongDatNam(x.n) }, { ten: tieuDe, duong: duongXongDat(x.n, x.ns) }]),
+        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Tuổi xông đất", duong: "/tuoi-xong-dat" }, ...(x.n >= NAM_BANG_TU ? [{ ten: `Tết ${x.n}`, duong: duongXongDatNam(x.n) }] : []), { ten: tieuDe, duong: duongXongDat(x.n, x.ns) }]),
         ldHoiDap([{ hoi: `Gia chủ sinh năm ${x.ns} nên chọn tuổi nào xông đất năm ${x.n}?`,
           dap: d.tuoi_hop.slice(0, 4).map((t) => `${t.nam_sinh} (${t.can_chi})`).join(", ") + "." },
           { hoi: "Nên tránh tuổi nào?", dap: d.nen_tranh.join("; ") + "." }]),
       )} />
-      <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/tuoi-xong-dat" className="hover:underline">Tuổi xông đất</Link> › <Link href={duongXongDatNam(x.n)} className="hover:underline">Tết {x.n}</Link></nav>
+      <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/tuoi-xong-dat" className="hover:underline">Tuổi xông đất</Link>{x.n >= NAM_BANG_TU && <> › <Link href={duongXongDatNam(x.n)} className="hover:underline">Tết {x.n}</Link></>}</nav>
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
       <KetQuaXongDat d={d} />

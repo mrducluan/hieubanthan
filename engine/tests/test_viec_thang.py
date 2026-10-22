@@ -33,3 +33,12 @@ def test_api_viec_thang():
     assert r.status_code == 200 and r.json()["viec"]["ma"] == "khai_truong"
     assert client.get("/v1/lich/viec-thang/cat_toc/2027/1").status_code == 404
     assert client.get("/v1/lich/viec-thang/cuoi_hoi/2027/13").status_code == 422
+
+
+def test_dep_nhat_khong_vuong_kieng_dan_gian():
+    # 08/2027 xuất hành: ngày xếp đầu (04/08) là Tam nương → "Đẹp nhất" phải là ngày khác không vướng kiêng.
+    from app.luangiai.hoang_lich import viec_thang
+    for nam, th in ((2027, 8), (2026, 12), (2027, 1)):
+        for v in ("xuat_hanh", "cuoi_hoi", "khai_truong"):
+            d = viec_thang(v, nam, th)["dep_nhat"]
+            assert d is None or not d.get("ky_dan_gian"), (v, nam, th, d)

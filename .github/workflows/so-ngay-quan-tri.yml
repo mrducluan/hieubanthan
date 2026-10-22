@@ -1,0 +1,45 @@
+# SEO-L4 — PR sửa KB từ /quan-tri (nhánh quan-tri/…) không chạy được lệnh cập nhật sổ ngày đăng/sửa trang kiến thức.
+# Job này chạy hộ `python scripts/ngay_cap_nhat.py` rồi đẩy commit vào chính nhánh đó → sau khi merge, main luôn khớp sổ
+# (test_ngay_cap_nhat.py kiểm chặt trên main và mọi PR khác). Commit bằng GITHUB_TOKEN không kích CI chạy lại;
+# CI của nhánh quan-tri/… đã bỏ qua kiểm chặt (NGAY_CAP_NHAT_KIEM=0 trong ci.yml).
+name: Sổ ngày cập nhật (quan-tri)
+
+on:
+  pull_request:
+    paths: ["engine/app/kb/**"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: so-ngay-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  cap-nhat:
+    if: startsWith(github.head_ref, 'quan-tri/') && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    env:
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0   # script đọc ngày git khi khởi tạo; chế độ thường không cần nhưng giữ đủ lịch sử cho chắc
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: engine/requirements.txt
+      - run: pip install -r engine/requirements.txt
+      - name: Cập nhật sổ
+        working-directory: engine
+        run: python scripts/ngay_cap_nhat.py
+      - name: Đẩy commit nếu sổ đổi
+        run: |
+          if git diff --quiet -- engine/app/kb/data/ngay_cap_nhat.json; then echo "Sổ đã khớp"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add engine/app/kb/data/ngay_cap_nhat.json
+          git commit -m "Cập nhật sổ ngày đăng/sửa trang kiến thức (tự động, SEO-L4)"
+          git push origin HEAD:${{ github.head_ref }}

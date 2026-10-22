@@ -48,3 +48,11 @@ def test_api_theo_nam():
     r = client.get("/v1/tuoi/xong-dat-nam/2027")
     assert r.status_code == 200 and len(r.json()["ds"]) == 46
     assert client.get("/v1/tuoi/lam-nha-nam/1800").status_code == 422
+
+
+def test_bang_theo_nam_chi_tu_2006():
+    # Bảng liệt kê tuổi sinh 1960–2005 → năm sớm hơn 2006 sẽ có tuổi chưa sinh (tuổi âm, link trang con 404).
+    for duong in ("/v1/tuoi/lam-nha-nam", "/v1/tuoi/xong-dat-nam"):
+        assert client.get(f"{duong}/2005").status_code == 422
+        assert client.get(f"{duong}/2006").status_code == 200
+    assert min(x["tuoi_mu"] for x in L.lam_nha_nam(2006)["ds"]) >= 1
