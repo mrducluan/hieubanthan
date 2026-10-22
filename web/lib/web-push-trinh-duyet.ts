@@ -52,6 +52,14 @@ const tuB64u = (s: string) => {
   return Uint8Array.from(b, (c) => c.charCodeAt(0));
 };
 
+/** Subscription hiện có được tạo bằng đúng khoá máy chủ hiện tại? (đổi khoá VAPID → phải đăng ký lại). */
+function cungKhoa(sub: PushSubscription, khoa: Uint8Array): boolean {
+  const k = sub.options?.applicationServerKey;
+  if (!k) return true;   // trình duyệt không trả khoá → không kết luận được, giữ
+  const a = new Uint8Array(k);
+  return a.length === khoa.length && a.every((x, i) => x === khoa[i]);
+}
+
 async function ghiThietBi(sub: PushSubscription): Promise<void> {
   const j = sub.toJSON();
   const sb = await supabase();
@@ -69,8 +77,10 @@ export async function batPush(userId: string): Promise<void> {
   if (quyen !== "granted") throw new Error("Bạn chưa cho phép thông báo — có thể bật lại trong phần cài đặt trang của trình duyệt.");
   const reg = await navigator.serviceWorker.register("/sw.js", { scope: "/" });
   await navigator.serviceWorker.ready;
-  const sub = (await reg.pushManager.getSubscription())
-    ?? await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: tuB64u(khoa) });
+  const khoaByte = tuB64u(khoa);
+  let sub = await reg.pushManager.getSubscription();
+  if (sub && !cungKhoa(sub, khoaByte)) { await sub.unsubscribe().catch(() => false); sub = null; }   // máy chủ đã đổi khoá VAPID
+  sub ??= await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: khoaByte });
   await ghiThietBi(sub);
   datCo(true);
   const homNay = new Date(Date.now() + 7 * 3_600_000).toISOString().slice(0, 10);
@@ -89,8 +99,12 @@ export async function tatPush(): Promise<void> {
 }
 
 /** Trang mở ra sau khi trình duyệt tự đổi subscription (sw.js báo "push_doi") → ghi lại thiết bị. */
-export async function dongBoThietBi(): Promise<void> {
-  if (!pushDangBatTrenMay()) return;
+export async function dongBoThietBi(): Promise<boolean> {
+  if (!pushDangBatTrenMay()) return false;
   const sub = await dangKyHienTai().catch(() => null);
-  if (sub) await ghiThietBi(sub).catch(() => null);
+  if (!sub) return false;
+  const khoa = await khoaMayChu();
+  if (khoa && !cungKhoa(sub, tuB64u(khoa))) { await tatPush(); return false; }   // khoá máy chủ đã đổi → cần bật lại
+  await ghiThietBi(sub).catch(() => null);
+  return true;
 }

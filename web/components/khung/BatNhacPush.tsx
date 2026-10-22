@@ -23,7 +23,7 @@ export function BatNhacPush({ className }: { className?: string }) {
     void trangThaiPush().then((t) => {
       if (huy) return;
       setTt(t);
-      if (t === "dang_bat") void dongBoThietBi();
+      if (t === "dang_bat") void dongBoThietBi().then((con) => { if (!con && !huy) setTt("chua_bat"); });
     });
     return () => { huy = true; };
   }, []);

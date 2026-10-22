@@ -26,7 +26,10 @@ self.addEventListener("notificationclick", (e) => {
   e.waitUntil((async () => {
     const ds = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
     const cung = ds.find((c) => new URL(c.url).origin === self.location.origin);
-    if (cung) { await cung.navigate(u.href).catch(() => null); return cung.focus(); }
+    if (cung) {
+      const ok = await cung.navigate(u.href).then(() => true).catch(() => false);
+      if (ok) return cung.focus();
+    }
     return self.clients.openWindow(u.href);
   })());
 });

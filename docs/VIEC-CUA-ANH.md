@@ -655,8 +655,8 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
   sau = mọi thiết bị đã bật phải bật lại.
 - [ ] **WP4. Thử trên Android/máy tính**: đăng nhập → `/kinh-dich` gieo một quẻ → ở "Mốc đáng để ý" bấm **Nhắc tôi hôm đó** →
   `/hom-nay` (hoặc `/tai-khoan`) bấm **Bật nhắc trên điện thoại** → cho phép. Muốn thấy thông báo ngay không chờ 8h sáng: tạo một
-  mốc đúng ngày hôm nay rồi Vercel → project web → Settings → Cron Jobs → `/api/cron/nhac-day` → **Run**. Kết quả trả về dạng
-  `{"nguoi":1,"ok":1,…}`; mỗi người chỉ 1 thông báo/ngày nên chạy lại sẽ ra `nguoi: 0`.
+  mốc đúng ngày hôm nay rồi Vercel → project web → Settings → Cron Jobs → `/api/cron/hang-ngay` → **Run** (cron ngày đã gộp gửi nhắc + dọn dữ liệu vì
+  Hobby chỉ cho 2 cron). Kết quả trả về dạng `{"nhac":{"nguoi":1,"ok":1,…},"don":{…}}`; mỗi người chỉ 1 thông báo/ngày nên chạy lại sẽ ra `nguoi: 0`.
 - [ ] **WP5. Thử trên iPhone** (iOS 16.4+): Safari mở hieuban.com → Chia sẻ → **Thêm vào màn hình chính** → mở từ biểu tượng →
   đăng nhập → Hôm nay → Bật nhắc. (Safari thường không có nút — đúng như thiết kế, trang sẽ hiện hướng dẫn 2 bước.)
 - [ ] **WP6. Luật sư rà** dòng mới trong Chính sách quyền riêng tư (mục dữ liệu + bên xử lý: dịch vụ thông báo của trình duyệt),

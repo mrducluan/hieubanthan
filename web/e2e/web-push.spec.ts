@@ -82,6 +82,7 @@ test("service worker: phục vụ ở gốc, không chặn fetch, mở đường
 test("route: chưa đặt khoá VAPID → 404; cron thiếu khoá bí mật → 401", async ({ request }) => {
   expect((await request.get("/api/push/khoa")).status()).toBe(404);
   expect((await request.get("/api/cron/nhac-day")).status()).toBe(401);
+  expect((await request.get("/api/cron/hang-ngay")).status()).toBe(401);
   expect((await request.get("/api/cron/nhac-day", { headers: { authorization: "Bearer sai-khoa-sai-khoa-sai" } })).status()).toBe(401);
 });
 
