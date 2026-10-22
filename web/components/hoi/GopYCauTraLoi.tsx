@@ -3,6 +3,7 @@
 // Gửi /api/thanso/phan-hoi: máy chủ chỉ lưu các con số đã tính + mã câu + phái (không tên, không ngày sinh); ghi chú chỉ
 // được lưu khi người dùng TỰ tích đồng ý, và đã lọc email / số điện thoại / ngày tháng. PostHog chỉ nhận mã.
 import { useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/input";
 import { ghi } from "@/lib/do-luong";
@@ -17,6 +18,7 @@ export interface NguCanhGopY {
 }
 
 export function GopYCauTraLoi({ hoSo, nc }: { hoSo: HoSo; nc: NguCanhGopY }) {
+  const c = useChuChung();
   const [buoc, setBuoc] = useState<"hoi" | "ghi_chu" | "xong">("hoi");
   const [ghiChu, setGhiChu] = useState("");
   const [dongY, setDongY] = useState(false);
@@ -36,7 +38,7 @@ export function GopYCauTraLoi({ hoSo, nc }: { hoSo: HoSo; nc: NguCanhGopY }) {
     }).catch(() => { /* góp ý là phần phụ: lỗi mạng thì thôi */ });
   }
 
-  if (buoc === "xong") return <p className="text-xs text-fg-muted" data-testid="gop-y-xong">Cảm ơn bạn — góp ý này giúp câu trả lời tốt hơn cho mọi người.</p>;
+  if (buoc === "xong") return <p className="text-xs text-fg-muted" data-testid="gop-y-xong">{c("gop_y_cau.cam_on")}</p>;
   if (buoc === "ghi_chu") {
     return (
       <div className="space-y-2" data-testid="gop-y-ghi-chu">
@@ -48,17 +50,17 @@ export function GopYCauTraLoi({ hoSo, nc }: { hoSo: HoSo; nc: NguCanhGopY }) {
           khoản; email, số điện thoại, ngày tháng tự bị xoá; tự xoá sau 12 tháng).
         </label>
         <div className="flex gap-2">
-          <Button size="sm" variant="secondary" onClick={() => gui(false, true)}>Gửi góp ý</Button>
-          <Button size="sm" variant="ghost" onClick={() => gui(false)}>Bỏ qua ghi chú</Button>
+          <Button size="sm" variant="secondary" onClick={() => gui(false, true)}>{c("gop_y_cau.gui")}</Button>
+          <Button size="sm" variant="ghost" onClick={() => gui(false)}>{c("gop_y_cau.bo_qua")}</Button>
         </div>
       </div>
     );
   }
   return (
     <div className="flex flex-wrap items-center gap-2" data-testid="gop-y-cau">
-      <span className="text-xs text-fg-muted">Câu trả lời này có đúng với bạn không?</span>
-      <Button size="sm" variant="outline" className="h-8" onClick={() => gui(true)}>Đúng</Button>
-      <Button size="sm" variant="outline" className="h-8" onClick={() => setBuoc("ghi_chu")}>Chưa đúng</Button>
+      <span className="text-xs text-fg-muted">{c("gop_y_cau.hoi")}</span>
+      <Button size="sm" variant="outline" className="h-8" onClick={() => gui(true)}>{c("gop_y_cau.dung")}</Button>
+      <Button size="sm" variant="outline" className="h-8" onClick={() => setBuoc("ghi_chu")}>{c("gop_y_cau.chua_dung")}</Button>
       <span className="w-full text-[11px] text-fg-faint">Góp ý lưu các con số rút gọn của bạn (nhiều người có chung), không lưu tên hay ngày sinh.</span>
     </div>
   );

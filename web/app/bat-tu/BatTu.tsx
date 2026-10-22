@@ -2,6 +2,7 @@
 // VZ-3 — trang Bát tự: bảng tứ trụ → vòng địa chi + ngũ giác ngũ hành → dụng thần → đại vận/lưu niên
 // → hỏi đáp AI ở DƯỚI (chủ dự án chốt 2026-10-01). Hai giao diện dùng chung với lá số Tử vi.
 import { useChu } from "@/components/cms/DauCms";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Download, Layers, Moon, ScrollText } from "lucide-react";
 import { KhungChat } from "@/components/hoi/KhungChat";
@@ -55,6 +56,7 @@ export function BatTu() {
   const tuTruRef = useRef<HTMLDivElement>(null);
   const [dangTai, setDangTai] = useState(false);
   const cachChinh = useCachChinh(khoaLaSo(laSo));
+  const cc = useChuChung();
   const [loiAnh, setLoiAnh] = useState<string | null>(null);
 
   useBatDauDoc("battu", Boolean(ls));
@@ -108,7 +110,7 @@ export function BatTu() {
                   ghi("chart_interacted", { mo_dun: "battu", kind: "tai_anh" });
                 } catch (e) { setLoiAnh(e instanceof Error ? e.message : "Chưa xuất được ảnh."); }
                 finally { setDangTai(false); }
-              }}><Download aria-hidden /> Tải ảnh</Button>
+              }}><Download aria-hidden /> {cc("doc.tai_anh")}</Button>
             </div>
             {loiAnh && <p role="alert" className="text-sm text-cinnabar">{loiAnh}</p>}
 

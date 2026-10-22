@@ -3,6 +3,7 @@
 // (app/globals.css `.hop-nb`): Điều quan trọng (vàng) · Điểm mạnh (lục) · Nên để ý (hổ phách, KHÔNG đỏ) · Lời khuyên
 // (tím) · Thời điểm (lam). "Vì sao nói vậy" mở căn cứ (thuật ngữ, sao, cung) — lời chính không chứa thuật ngữ.
 import { createContext, useContext, useId, useState } from "react";
+import { useChuChung } from "@/components/cms/ChuChung";
 import { CalendarClock, ChevronDown, Eye, Lightbulb, Sprout, Star, type LucideIcon } from "lucide-react";
 import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { doanCoThuatNgu, type ThuatNgu } from "@/components/hoi/ThuatNgu";
@@ -33,13 +34,14 @@ export function ngayDuong(iso: string): string {
 export function ViSao({ canCu, thuatNgu, nho = false }: { canCu?: string[]; thuatNgu?: ThuatNgu[]; nho?: boolean }) {
   const [mo, setMo] = useState(false);
   const id = useId();
+  const c = useChuChung();
   if (!canCu?.length) return null;
   return (
     <div className="mt-2" data-testid="vi-sao">
       <button type="button" aria-expanded={mo} aria-controls={id} onClick={() => setMo((v) => !v)}
         className={cn("inline-flex items-center gap-1 rounded-full text-fg-muted underline-offset-4 hover:text-fg hover:underline print:hidden",
           nho ? "text-xs" : "text-sm")}>
-        Vì sao nói vậy <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
+        {c("doc.vi_sao")} <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
       </button>
       <div id={id} hidden={!mo} className="mt-1.5 space-y-1 border-l-2 border-line pl-3 text-xs leading-relaxed text-fg-faint print:block"
         data-testid="can-cu">
