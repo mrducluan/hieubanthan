@@ -11,7 +11,16 @@
    "muc": [
     {
      "tieu_de": "Năm cá nhân số 1 là năm thế nào?",
-     "doan": "Năm cá nhân số 1 là năm mở màn một vòng chín năm mới, thường được mô tả là lúc tự đứng ra quyết và gieo việc. Sau năm 9 dọn dẹp, nhịp sống hay chuyển sang muốn làm lại từ đầu. Nhiều người sốt ruột vì gieo rồi mà chưa thấy gì mọc, trong khi kết quả của năm này thường được xem là hiện rõ hơn ở các năm 4 và 8 sau đó. Mặt tối hay gặp là ôm hết một mình, ngại hỏi ai, hoặc mở năm bảy đầu việc rồi bỏ lửng cả năm bảy. Việc làm được ngay tuần này: viết đúng một mục tiêu cho cả năm lên giấy, kèm ngày làm bước đầu tiên."
+     "doan": "Năm cá nhân số 1 là năm mở màn một vòng chín năm mới, thường được mô tả là lúc tự đứng ra quyết và gieo việc. Sau năm 9 dọn dẹp, nhịp sống hay chuyển sang muốn làm lại từ đầu. Nhiều người sốt ruột vì gieo rồi mà chưa thấy gì mọc, trong khi kết quả của năm này thường được xem là hiện rõ hơn ở các năm 4 và 8 sau đó."
+    },
+    {
+     "tieu_de": "Năm cá nhân 1 dễ vấp ở đâu, nên làm gì trước?",
+     "doan": "Chỗ dễ vấp nhất của năm 1 là ôm hết một mình.",
+     "danh_sach": [
+      "Mặt tối hay gặp: ngại hỏi ai, tự gánh mọi quyết định.",
+      "Mở năm bảy đầu việc rồi bỏ lửng cả năm bảy.",
+      "Việc làm được ngay tuần này: viết đúng một mục tiêu cho cả năm lên giấy, kèm ngày làm bước đầu tiên."
+     ]
     },
     {
      "tieu_de": "Năm cá nhân 1 nên làm gì từng quý?",

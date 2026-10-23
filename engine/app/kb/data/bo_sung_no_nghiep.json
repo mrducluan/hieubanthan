@@ -10,8 +10,17 @@
   "no-nghiep-13": {
    "muc": [
     {
-     "tieu_de": "Nợ nghiệp 13 là gì, tính thế nào?",
-     "doan": "Nợ nghiệp 13 là cách thần số học Pythagoras gọi tổng 13 xuất hiện ngay trước khi một con số chính rút về 4. Ở Đường đời, kết quả phụ thuộc cách cộng. Rút gọn con số (cách mặc định trên Hiểu Bản Thân) rút riêng ngày, tháng, năm rồi mới cộng, nên tổng 13 hiện ra khá thường: khoảng 6,3% số ngày từ 1940 đến 2010. Cộng hết chữ số cộng dồn mọi chữ số một lần, nên chỉ khoảng 1,1% số ngày đi qua 13. Riêng người sinh ngày 13 thì số Ngày sinh mang 13/4 với cả hai cách. Tên cũng có thể mang 13, ví dụ tên “Nguyễn Thị Tâm” có số tên đầy đủ cộng ra 58 → 13 → 4."
+     "tieu_de": "Nợ nghiệp 13 là gì?",
+     "doan": "Nợ nghiệp 13 là cách thần số học Pythagoras gọi tổng 13 xuất hiện ngay trước khi một con số chính rút về 4. Nó có thể nằm ở Đường đời, số Ngày sinh hoặc các số tên. Riêng người sinh ngày 13 thì số Ngày sinh mang 13/4 với cả hai cách cộng."
+    },
+    {
+     "tieu_de": "Nợ nghiệp 13 tính thế nào ở Đường đời và tên?",
+     "doan": "Ở Đường đời, có gặp 13 hay không tùy cách cộng.",
+     "danh_sach": [
+      "Rút gọn con số (cách mặc định trên Hiểu Bản Thân): rút riêng ngày, tháng, năm rồi mới cộng, nên tổng 13 hiện ra khá thường — khoảng 6,3% số ngày từ 1940 đến 2010.",
+      "Cộng hết chữ số: cộng dồn mọi chữ số một lần, nên chỉ khoảng 1,1% số ngày đi qua 13.",
+      "Tên: cũng có thể mang 13, ví dụ tên “Nguyễn Thị Tâm” có số tên đầy đủ cộng ra 58 → 13 → 4."
+     ]
     },
     {
      "tieu_de": "Dấu hiệu nợ nghiệp 13 trong đời thường",
@@ -85,7 +94,7 @@
      "nghia": "Tổng 13 đứng sau số 4 được đọc là bài học về làm việc bền bỉ, không dựa vào đường tắt."
     },
     {
-     "sach": "Cheiro, Book of Numbers (1926)",
+     "sach": "Cheiro's Book of Numbers (1926)",
      "chuong": "Số kép 13",
      "nghia": "Trong hệ Chaldea, Cheiro gắn số kép 13 với thay đổi kế hoạch, nơi chốn; ông không dùng khái niệm nợ nghiệp."
     }
@@ -101,7 +110,7 @@
    "muc": [
     {
      "tieu_de": "Nợ nghiệp 14 là gì, tính thế nào?",
-     "doan": "Nợ nghiệp 14 là khi một con số chính đi qua tổng 14 rồi mới rút về 5, và được đọc là bài học về chừng mực. Có bốn chỗ để dò: số Ngày sinh (sinh ngày 14), Đường đời, và ba số tên. Ở Đường đời, hai cách cộng cho kết quả khác hẳn: rút gọn con số gặp 14 ở khoảng 6,3% số ngày 1940–2010, cộng hết chữ số chỉ khoảng 1,2%. Về tên, tên “Nguyễn Ngọc An” có số tên đầy đủ cộng ra 59 → 14 → 5. Máy tính của Hiểu Bản Thân báo vị trí nào mang 14 và theo cách cộng nào."
+     "doan": "Nợ nghiệp 14 là khi một con số chính đi qua tổng 14 rồi mới rút về 5, và được đọc là bài học về chừng mực. Có năm con số để dò: số Ngày sinh (sinh ngày 14), Đường đời và ba số tính từ tên. Ở Đường đời, hai cách cộng cho kết quả khác hẳn: rút gọn con số gặp 14 ở khoảng 6,3% số ngày 1940–2010, cộng hết chữ số chỉ khoảng 1,2%. Về tên, tên “Nguyễn Ngọc An” có số tên đầy đủ cộng ra 59 → 14 → 5. Máy tính của Hiểu Bản Thân báo vị trí nào mang 14 và theo cách cộng nào."
     },
     {
      "tieu_de": "Dấu hiệu nợ nghiệp 14 trong đời thường",
@@ -175,7 +184,7 @@
      "nghia": "Tổng 14 đứng sau số 5: tự do cần đi kèm điều độ và trách nhiệm với lựa chọn của mình."
     },
     {
-     "sach": "Cheiro, Book of Numbers (1926)",
+     "sach": "Cheiro's Book of Numbers (1926)",
      "chuong": "Số kép 14",
      "nghia": "Cheiro tả số kép 14 là chuyển động, kết hợp người và việc, hợp buôn bán trao đổi, kèm lời nhắc thận trọng."
     }
@@ -265,7 +274,7 @@
      "nghia": "Tổng 16 đứng sau số 7: bài học buông sự kiêu hãnh, xây lại trên nền khiêm tốn và thật hơn."
     },
     {
-     "sach": "Cheiro, Book of Numbers (1926)",
+     "sach": "Cheiro's Book of Numbers (1926)",
      "chuong": "Số kép 16",
      "nghia": "Cheiro tả số kép 16 bằng hình toà tháp bị sét đánh, nhắc cẩn trọng với kế hoạch dựng trên nền chưa chắc."
     }
@@ -355,7 +364,7 @@
      "nghia": "Tổng 19 đứng sau số 1: bài học dùng sức mạnh cá nhân mà không ích kỷ, biết nhận và cho sự giúp đỡ."
     },
     {
-     "sach": "Cheiro, Book of Numbers (1926)",
+     "sach": "Cheiro's Book of Numbers (1926)",
      "chuong": "Số kép 19",
      "nghia": "Cheiro gọi số kép 19 là “hoàng tử của trời”, một số thuận về ghi nhận và thành công; đây là cách đọc hệ Chaldea."
     }
