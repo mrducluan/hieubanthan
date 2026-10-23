@@ -103,3 +103,30 @@ def test_api_mai_hoa():
 def test_api_cam_chon_que_bang_so():
     r = client.post("/v1/kinhdich/hoi", json={"cau_hoi": "abc xyz", "so_que": 1})
     assert r.status_code == 422
+
+
+# UI-KD (2026-10-23): thời điểm gieo có cấu trúc để web hiện can chi ngày / chi giờ / tuần không (web không tự tính);
+# "Xem lại" gửi `thoi_diem` cũ → Lục Hào đọc theo ngày gieo, không theo ngày xem.
+def test_thoi_diem_gieo_co_cau_truc_theo_luc_gui():
+    out = kd.tra_loi("Tôi có nên nghỉ việc không?", "tu_dong", gia_tri_hao=QUE_LY, thoi_diem=THOI)
+    tg = out["thoi_diem_gieo"]
+    assert tg["thoi_diem"] == "2026-09-30T10:15:00"
+    assert tg["chi_gio"] == "Tỵ"                       # 10:15 → giờ Tỵ (09:00–10:59)
+    assert tg["can_ngay"] and tg["chi_ngay"] and tg["chi_thang"]
+    assert isinstance(tg["tuan_khong"], list) and len(tg["tuan_khong"]) == 2
+    # Nhất quán với dòng căn cứ Lục Hào đã có (một nguồn tính)
+    cc = out["doc_que"]["goc_nhin"]["luc_hao"]["can_cu"][0]
+    assert tg["can_ngay"] in cc and tg["chi_ngay"] in cc
+
+
+def test_thoi_diem_gieo_khong_co_khi_chua_gieo():
+    out = kd.tra_loi("Tôi có nên nghỉ việc không?", "tu_dong", gieo=False)
+    assert out.get("thoi_diem_gieo") is None
+
+
+def test_api_hoi_nhan_thoi_diem_xem_lai():
+    r = client.post("/v1/kinhdich/hoi", json={"cau_hoi": "Tôi có nên nghỉ việc không?", "che_do": "tu_dong",
+                                              "cach_ra_que": "gieo_tay", "gia_tri_hao": QUE_LY,
+                                              "thoi_diem": "2026-09-30T10:15:00"})
+    assert r.status_code == 200, r.text
+    assert r.json()["thoi_diem_gieo"]["chi_gio"] == "Tỵ"

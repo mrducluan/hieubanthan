@@ -226,7 +226,7 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
 
       {bc && <BaoCaoNha bc={bc} soSanh={soSanh} onDaXuLy={daXuLy} onHoanTac={hoanTac} dang={dang} />}
       {bc && <LuuNhaTaiKhoan />}
-      {bc && yeuCau && <NutChiaSeNha yeuCau={yeuCau} />}
+      {bc && yeuCau && <NutChiaSeNha yeuCau={yeuCau} loaiNha={nhaLuu?.loai_nha ?? null} />}
     </section>
   );
 }

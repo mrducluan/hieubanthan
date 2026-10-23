@@ -26,7 +26,7 @@ VatHuong = Literal["mieng_bep", "dau_giuong", "ban_lam_viec"]
 DAU_HIEU: dict[str, dict] = {
     "duong_dam": {"hoi": "Có con đường đâm thẳng vào cửa nhà không?", "nhom": "ngoai_canh"},
     "nga_ba": {"hoi": "Nhà nằm ngay ngã ba / ngã tư không?", "nhom": "ngoai_canh"},
-    "cot_dien": {"hoi": "Có cột điện, cây to chắn ngay trước cửa không?", "nhom": "ngoai_canh"},
+    "cot_dien": {"hoi": "Có cột điện, trụ cứng chắn ngay trước cửa không?", "nhom": "ngoai_canh"},
     "song_truoc": {"hoi": "Trước nhà có sông, hồ, mương nước không?", "nhom": "ngoai_canh"},
     "nghia_trang": {"hoi": "Nhà nhìn thẳng ra nghĩa trang, bệnh viện, nơi thờ tự lớn không?", "nhom": "ngoai_canh"},
     "minh_duong": {"hoi": "Trước cửa có khoảng sân / hiên thoáng, sạch không?", "nhom": "ngoai_canh", "tot": True},
@@ -45,6 +45,11 @@ DAU_HIEU: dict[str, dict] = {
     # Q6 (2026-10-22, hai dấu hiệu từ luật thực hành Drive): xuyên đường sát ở căn hộ + bàn thờ dưới luồng gió.
     "cua_thong_ban_cong": {"hoi": "Mở cửa chính là nhìn thẳng ra ban công / cửa sổ lớn phía sau không?", "nhom": "trong_nha"},
     "ban_tho_gio_thoi": {"hoi": "Điều hoà hoặc quạt trần thổi thẳng vào bàn thờ không?", "nhom": "trong_nha"},
+    # PT-V2 (2026-10-23, ba ô khảo sát thêm — cũng là nhãn cho lớp đọc ảnh): cầu thang trung cung, cây che cửa, bể cá.
+    # `be_ca` là dấu hiệu TRUNG TÍNH (không veto, không `tot`): hợp hay không tuỳ vị trí — KB nói rõ.
+    "cau_thang_giua_nha": {"hoi": "Cầu thang nằm ngay giữa nhà (chiếm trung cung)?", "nhom": "trong_nha"},
+    "cay_truoc_cua": {"hoi": "Có cây to che ngay trước cửa chính?", "nhom": "ngoai_canh"},
+    "be_ca": {"hoi": "Trong nhà có bể cá / hồ nước nhỏ?", "nhom": "trong_nha"},
 }
 # Q1: dấu hiệu nhóm "veto" — đã xác nhận thì mức chương liên quan không vượt "Cân bằng" (đọc từ cờ `veto` trong KB bo_tri).
 def dau_hieu_veto() -> set[str]:

@@ -251,7 +251,10 @@
      "quay_lung_cua",
      "wc_giua_nha",
      "cua_thong_ban_cong",
-     "ban_tho_gio_thoi"
+     "ban_tho_gio_thoi",
+     "cau_thang_giua_nha",
+     "cay_truoc_cua",
+     "be_ca"
     ]
    },
    "title": "Dau Hieu",

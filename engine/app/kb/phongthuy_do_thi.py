@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Đồ thị tri thức Phong thuỷ theo ý định (thay Apache AGE + Cypher của bộ tài liệu Drive — 2026-10-22).
 
-Supabase không có AGE; đồ thị này nhỏ (11 ý định · 6 phòng · 20 dấu hiệu · 9 sao) nên JSON trong git là nguồn gốc và engine
+Supabase không có AGE; đồ thị này nhỏ (11 ý định · 6 phòng · 23 dấu hiệu · 9 sao) nên JSON trong git là nguồn gốc và engine
 duyệt cạnh bằng Python thuần — một "câu Cypher" của Drive tương đương một lần `theo_y_dinh()` / `duong_di()` ở đây, có test.
 Chỉ TRA, không sinh nghĩa. Cạnh sao ↔ sao (sinh / khắc) lấy từ ngũ hành của sao trong `calc.huyen_khong` (một nguồn).
 """

@@ -623,6 +623,11 @@ Ví Sao, link mời có thưởng chỉ chạy khi đã bật tài khoản.
      dấu 18 câu hỏi dấu hiệu, chính là các câu trong form Khảo sát nhà. Em chuyển thành nhãn JSON.
      Hướng dẫn: `engine/fixtures/phongthuy_anh/README.md`.
   3. Chọn model thị giác trên OpenRouter để em chạy thử PT-V2 (dùng chung khoá OpenRouter ở D1).
+- [ ] **PT-V2 "Để máy đọc ảnh" (2026-10-23, anh đã duyệt gửi ảnh tới dịch vụ AI bên thứ ba):** Render → dịch vụ engine →
+  Environment → thêm `DOC_ANH_MODEL` (tuỳ chọn, mặc định `google/gemini-2.5-flash`; đổi model thị giác khác trên
+  OpenRouter thì ghi tên vào đây). `OPENROUTER_API_KEY` đã có — có khoá là có đọc ảnh; chưa đặt khoá thì web tự báo
+  "chưa bật", người dùng tích tay. Ảnh chỉ đi qua lượt gọi khi người dùng tự tích đồng ý, không lưu ở đâu. Chính sách
+  riêng tư đã thêm dòng "Ảnh nhà để máy đọc" (hiệu lực 23/10/2026) — nhờ luật sư rà cùng mục E.
 
 Vẫn **chặn cho tới khi qua cổng đánh giá**: thanh toán (mua Sao), cộng đồng, marketplace, app di động.
 

@@ -1,5 +1,5 @@
 {
- "_nguon": "Đồ thị tri thức Phong thuỷ theo ý định (thay Apache AGE của bộ tài liệu Drive, 2026-10-22): JSON trong git là nguồn gốc, engine duyệt cạnh bằng Python (kb/phongthuy_do_thi.py), không Cypher, không DB. Nút: y_dinh (từ điển ý định chung KC-3), phong (6 phòng của bố cục), dau_hieu (mã bo_tri), sao (1–9). Cạnh có loại; sao↔sao theo ngũ hành sinh/khắc tính trong mã. Không có cạnh sao ↔ con số thần số (không có trong cổ thư). Nháp AI, chờ đối chiếu.",
+ "_nguon": "Đồ thị tri thức Phong thuỷ theo ý định (thay Apache AGE của bộ tài liệu Drive, 2026-10-22): JSON trong git là nguồn gốc, engine duyệt cạnh bằng Python (kb/phongthuy_do_thi.py), không Cypher, không DB. Nút: y_dinh (từ điển ý định chung KC-3), phong (6 phòng của bố cục), dau_hieu (mã bo_tri; 2026-10-23 thêm cau_thang_giua_nha, cay_truoc_cua, be_ca), sao (1–9). Cạnh có loại; sao↔sao theo ngũ hành sinh/khắc tính trong mã. Không có cạnh sao ↔ con số thần số (không có trong cổ thư). Nháp AI, chờ đối chiếu.",
  "source_id": "hbt_phongthuy_do_thi",
  "school_id": "bat_trach_huyen_khong",
  "trang_thai": "nhap_ai",
@@ -37,7 +37,9 @@
     "minh_duong",
     "cua_thong_ban_cong",
     "bep_doi_cua",
-    "nga_ba"
+    "nga_ba",
+    "be_ca",
+    "cay_truoc_cua"
    ],
    "sao": [
     8,
@@ -73,7 +75,8 @@
     "bep_wc",
     "bep_doi_cua",
     "ban_tho_gio_thoi",
-    "cua_doi_nhau"
+    "cua_doi_nhau",
+    "cau_thang_giua_nha"
    ],
    "sao": [
     2,
@@ -109,7 +112,10 @@
     "cua_thong_ban_cong",
     "nha_chu_l",
     "no_hau",
-    "minh_duong"
+    "minh_duong",
+    "be_ca",
+    "cay_truoc_cua",
+    "cau_thang_giua_nha"
    ],
    "sao": [
     5,
@@ -130,7 +136,8 @@
     "bep_wc",
     "phong_ngu_tren_bep",
     "guong_giuong",
-    "nghia_trang"
+    "nghia_trang",
+    "cau_thang_giua_nha"
    ],
    "sao": [
     2,
@@ -144,7 +151,8 @@
    "dau_hieu": [
     "duong_dam",
     "cot_dien",
-    "nga_ba"
+    "nga_ba",
+    "cay_truoc_cua"
    ],
    "sao": [
     1,
@@ -198,7 +206,8 @@
    "duong_dam",
    "cua_thong_ban_cong",
    "wc_giua_nha",
-   "nga_ba"
+   "nga_ba",
+   "cau_thang_giua_nha"
   ],
   "2": [
    "wc_giua_nha",
@@ -219,10 +228,12 @@
   "3": [
    "cua_doi_nhau",
    "nga_ba",
-   "cau_thang_cua"
+   "cau_thang_cua",
+   "cay_truoc_cua"
   ],
   "1": [
-   "song_truoc"
+   "song_truoc",
+   "be_ca"
   ]
  },
  "dau_hieu_phong": {
@@ -286,7 +297,12 @@
   "nha_chu_l": [],
   "cua_doi_nhau": [
    "phong_ngu_chinh"
-  ]
+  ],
+  "cay_truoc_cua": [
+   "cua_chinh"
+  ],
+  "cau_thang_giua_nha": [],
+  "be_ca": []
  },
  "sao_lam_diu": {
   "5": [
