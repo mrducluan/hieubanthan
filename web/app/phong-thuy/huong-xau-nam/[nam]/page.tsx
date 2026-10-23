@@ -6,8 +6,10 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { BangHanNam } from "@/components/tuoi/KetQuaTuoi";
 import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
-import { docNam, duongHanNam, hanNamCongKhai, hanNamIndex, namAmHienTai } from "@/lib/tuoi-dan-gian";
+import { NAM_BANG_TU, docNam, duongHanNam, duongLamNhaNam, duongXongDatNam, hanNamCongKhai, hanNamIndex, namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { KhoiCms } from "@/components/cms/KhoiCms";
+import { HoiDapHien, TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
+import { duongLichAm } from "@/lib/lich-am";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_HAN_NAM_CON } from "@/lib/chu/trang-con";
@@ -37,19 +39,24 @@ export default async function Page(p: P) {
       <JsonLd data={goiLd(
         ldTrangWeb({ duong: duongHanNam(n), ten: `Hướng xấu năm ${n}`, about: ["Ngũ Hoàng", "Tam Sát", "Thái Tuế", `Năm ${h.can_chi}`] }),
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Phong thuỷ", duong: "/phong-thuy" }, { ten: "Hướng xấu theo năm", duong: "/phong-thuy/huong-xau-nam" }, { ten: `Năm ${n}`, duong: duongHanNam(n) }]),
-        ldHoiDap([{ hoi: `Ngũ Hoàng năm ${n} ở hướng nào?`, dap: `Hướng ${ten("ngu_hoang").phuong}.` },
+        ldHoiDap(h.hoi_dap?.length ? h.hoi_dap : [{ hoi: `Ngũ Hoàng năm ${n} ở hướng nào?`, dap: `Hướng ${ten("ngu_hoang").phuong}.` },
           { hoi: `Tam Sát năm ${n} ở đâu?`, dap: `Phía ${ten("tam_sat").phuong}.` },
           { hoi: `Thái Tuế năm ${n} ở hướng nào?`, dap: `Hướng ${ten("thai_tue").phuong}; Tuế Phá ở ${ten("tue_pha").phuong}.` }]),
       )} />
       <nav aria-label="Đường dẫn" className="text-sm text-fg-muted"><Link href="/phong-thuy" className="hover:underline">Phong thuỷ</Link> › <Link href="/phong-thuy/huong-xau-nam" className="hover:underline">Hướng xấu theo năm</Link></nav>
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={c("dau.tieu_de", bien)} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" />
+      <TraLoiNhanh chu={h.tra_loi_nhanh} />
       <BangHanNam h={h} />
+      <HoiDapHien ds={h.hoi_dap} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" />
       <p className="flex flex-wrap gap-3 text-sm">
         {n > 1901 && <Link href={duongHanNam(n - 1)} className="text-gold underline">Năm {n - 1}</Link>}
         {n < 2099 && <Link href={duongHanNam(n + 1)} className="text-gold underline">Năm {n + 1}</Link>}
         <Link href="/xem-tuoi-lam-nha" className="text-gold underline">{c("cuoi.lam_nha", bien)}</Link>
+        {n >= NAM_BANG_TU && <Link href={duongLamNhaNam(n)} className="text-gold underline">{c("cuoi.bang_lam_nha", bien)}</Link>}
+        {n >= NAM_BANG_TU && <Link href={duongXongDatNam(n)} className="text-gold underline">{c("cuoi.bang_xong_dat", bien)}</Link>}
+        {n <= 2098 && <Link href={duongLichAm(n)} className="text-gold underline">{c("cuoi.lich_am", bien)}</Link>}
       </p>
       <p className="text-xs text-fg-muted">{h.luu_y}</p>
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" />

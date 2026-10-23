@@ -2,6 +2,7 @@
 // Ngày ngoài cửa sổ hữu ích (7 ngày trước → 400 ngày tới) vẫn xem được nhưng noindex; tháng index trong ±2 năm.
 import type { Metadata } from "next";
 import Link from "next/link";
+import { HoiDapHien, TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
@@ -73,6 +74,7 @@ export default async function Page({ params }: P) {
           <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/xem-ngay-tot" className="hover:underline">Xem ngày tốt</Link> ›{" "}
             <Link href={`/xem-ngay-tot/thang-${Number(x.iso.slice(5, 7))}-${x.iso.slice(0, 4)}`} className="hover:underline">Tháng {Number(x.iso.slice(5, 7))}/{x.iso.slice(0, 4)}</Link></nav>
           <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
+          <div className="mb-5"><TraLoiNhanh chu={d.tra_loi_nhanh} /></div>
           <XemNgayTot banDau={d} thang={t} />
         </div>
         <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mx-auto mt-10 max-w-3xl" />
@@ -94,6 +96,7 @@ export default async function Page({ params }: P) {
       <div className="mx-auto max-w-3xl space-y-5">
         <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} mo_ta={c("dau.mo_ta", bien)} />
         <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" />
+        <TraLoiNhanh chu={t.tra_loi_nhanh} />
         <LichThang t={t} />
         <section aria-labelledby="ngay-dep" className="glass rounded-2xl p-5" data-testid="ngay-dep-thang">
           <h2 id="ngay-dep" className="text-xl">{c("dep.tieu_de", bien)}</h2>
@@ -108,10 +111,22 @@ export default async function Page({ params }: P) {
         {/* SEO-L2: ngày tốt theo việc trong tháng này */}
         <nav aria-labelledby="theo-viec" className="text-sm">
           <h2 id="theo-viec" className="text-xl">Ngày tốt theo việc tháng {x.thang}/{x.nam}</h2>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {VIEC_SEO.map((v) => <li key={v.slug}><Link href={duongViecThang(v.slug, x.nam, x.thang)} className="inline-flex min-h-10 items-center rounded-full border border-line px-3.5 py-2 text-fg-muted hover:border-gold/50 hover:text-fg">{v.ten}</Link></li>)}
-          </ul>
+          {t.theo_viec?.length ? (
+            // SEO-M: số ngày tốt + ngày đẹp nhất từng việc (engine dùng đúng chon_ngay như trang việc).
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {t.theo_viec.map((v) => (
+                <li key={v.slug}><Link href={duongViecThang(v.slug, x.nam, x.thang)} className="block rounded-xl border border-line/70 px-3 py-2 hover:border-gold/50">
+                  <b className="text-fg">{v.viec.ten}</b> <span className="text-fg-muted">· {v.so_ngay} ngày tốt{v.dep_nhat ? ` · đẹp nhất ${dmy(v.dep_nhat.ngay)}` : ""}</span></Link></li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {VIEC_SEO.map((v) => <li key={v.slug}><Link href={duongViecThang(v.slug, x.nam, x.thang)} className="inline-flex min-h-10 items-center rounded-full border border-line px-3.5 py-2 text-fg-muted hover:border-gold/50 hover:text-fg">{v.ten}</Link></li>)}
+            </ul>
+          )}
         </nav>
+        <HoiDapHien ds={t.hoi_dap} />
+        {t.hoi_dap?.length ? <JsonLd data={goiLd(ldHoiDap(t.hoi_dap))} /> : null}
         <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" />
       </div>
       <LdTrangCon duong={duong} ten={tieuDe} cuoi={{ chu: c("cuoi.chu"), link: c("cuoi.link") }}

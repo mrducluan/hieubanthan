@@ -153,7 +153,7 @@ export function CuoiPhanXem({ mang }: { mang: MangTrang }) {
   if (!d) return null;
   const the = d.the.slice(0, SO_THE);
   return (
-    <section ref={ref} aria-labelledby={`doc-tiep-${mang}`} className="mt-12 space-y-5" data-testid="cuoi-phan-xem" data-tu={mang}>
+    <section ref={ref} aria-labelledby={`doc-tiep-${mang}`} className="mt-12 space-y-5" data-nosnippet="" data-testid="cuoi-phan-xem" data-tu={mang}>
       <header>
         <p className="eyebrow text-gold/80">{d.ca_nhan ? "Viết riêng từ ngày sinh của bạn" : "Mỗi môn nhìn bạn một góc"}</p>
         <h2 id={`doc-tiep-${mang}`} className="mt-1 font-serif text-2xl sm:text-3xl" data-bien-the={tieu.ma}>{tieu.lon}</h2>

@@ -46,7 +46,11 @@ const nextConfig = {
     return chuyenHuong();
   },
   async rewrites() {
-    return { beforeFiles: [{ source: "/:duong((?:[^/]+/)*[^/.]+)\\.md", destination: "/md/:duong" }] };
+    return { beforeFiles: [
+      { source: "/:duong((?:[^/]+/)*[^/.]+)\\.md", destination: "/md/:duong" },
+      // SEO-M: sitemap theo cụm đặt ở gốc site (luật thư mục của sitemaps.org) → route /sitemap-cum/[ten].
+      { source: "/sitemap-cum-:ma([a-z-]+).xml", destination: "/sitemap-cum/:ma.xml" },
+    ] };
   },
   // Next 15 mặc định "stream" metadata: <title>/<meta> nằm cuối <body> (JS mới dời lên <head>). Googlebot và bot AI
   // (GPTBot, ClaudeBot, PerplexityBot…) không nằm trong danh sách mặc định → bot không chạy JS đọc nhầm <title> của

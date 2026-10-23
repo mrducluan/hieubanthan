@@ -100,10 +100,18 @@ export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = {
 };
 
 /** SEO-K: `xem_them` = link sang trang gốc thay cho chép lại khối dùng chung (engine dựng, tiêu đề điền sẵn). */
-export interface MucTrang { tieu_de: string; doan?: string; danh_sach?: string[]; xem_them?: { loai: LoaiTrang; slug: string; tieu_de: string }[] }
+/** SEO-M: trích dẫn sách (nguyên văn ≤ 2 câu, có phiên âm + nghĩa) — KB bo_sung_<loai>.json. */
+export interface TrichDan { sach: string; chuong?: string; nguyen_van?: string; phien_am?: string; nghia?: string }
+export interface MucTrang {
+  tieu_de: string; doan?: string; danh_sach?: string[]; xem_them?: { loai: LoaiTrang; slug: string; tieu_de: string }[];
+  /** SEO-M: bảng thật · trích dẫn · phần do ban biên tập bổ sung trên trang chuyên gia tự viết (EEAT-1). */
+  bang?: { cot: string[]; dong: string[][] }; trich_dan?: TrichDan[]; bien_tap?: boolean;
+}
 export interface TrangKienThuc {
   loai: LoaiTrang; slug: string; tieu_de: string; mo_ta: string; tra_loi_nhanh: string;
-  muc: MucTrang[]; hoi_dap: { hoi: string; dap: string }[]; nguon: string[];
+  muc: MucTrang[]; hoi_dap: { hoi: string; dap: string; bien_tap?: boolean }[]; nguon: string[];
+  /** SEO-M: 3–5 ý chính cho ảnh infographic (/og/y-chinh). */
+  y_chinh?: string[];
   trang_thai: string; index: boolean; cap_nhat: string;
   /** SEO-L4: ngày đăng thật (sổ băm nội dung engine); `cap_nhat` = ngày sửa nội dung gần nhất. */
   ngay_dang?: string;

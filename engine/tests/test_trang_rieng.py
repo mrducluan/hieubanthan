@@ -4,7 +4,7 @@
 - Khối dùng chung (tính chất sao, nghĩa cung, tam phương) thành một câu + link sang trang gốc, không chép nguyên đoạn.
 - Trang "sao ở cung" / "Hoá ở cung" thêm lời đời thường riêng từng ô sao × cung (KB tuvi_doi_song_kb.json — đã có, nháp AI).
 - 12 vị trí theo chi (giống nhau ở 12 cung của cùng một sao) dời về trang sao.
-- Trang có phần riêng < 20 % (cụm 6 từ chỉ có ở trang đó trong cùng họ) và chưa thẩm định → index=false (vẫn giữ link, .md).
+- Trang có phần riêng < 30 % (SEO-M, trước 20 %) (cụm 6 từ chỉ có ở trang đó trong cùng họ) và chưa thẩm định → index=false (vẫn giữ link, .md).
 """
 from __future__ import annotations
 

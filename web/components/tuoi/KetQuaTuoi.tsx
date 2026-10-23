@@ -100,7 +100,7 @@ export function KetQuaLamNha({ d }: { d: LamNha }) {
           <p className="mt-2 text-sm">{d.cuoi_hoi}</p>
         </section>
       </div>
-      {d.cach_dan_gian && <p className="glass rounded-2xl p-4 text-sm text-fg-muted">{d.cach_dan_gian}</p>}
+      {d.cach_dan_gian && <p className="glass rounded-2xl p-4 text-sm text-fg-muted" data-nosnippet="">{d.cach_dan_gian}</p>}
       <BangHanNam h={d.han_nam} gon />
       <p className="text-xs text-fg-muted">{d.cach_tinh} {d.luu_y}</p>
     </div>

@@ -8,7 +8,9 @@ export const revalidate = 21600;
 
 function dsNgaySitemap(homNay: string = homNayVN()): string[] {
   const ra: string[] = [];
-  for (let i = -7; i <= 400; i++) {
+  // Chừa 1 ngày ở hai đầu cửa sổ index (−7…+400): sitemap cache tới 6 giờ, qua nửa đêm không lọt ngày vừa ra khỏi
+  // cửa sổ (rà site thật 2026-10-23: /xem-ngay-tot/2026-10-15 trong sitemap nhưng đã noindex).
+  for (let i = -6; i <= 399; i++) {
     const iso = congNgay(homNay, i);
     if (ngayDangIndex(iso, homNay)) ra.push(iso);
   }

@@ -33,7 +33,8 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: BOT_AI_HUAN_LUYEN, disallow: "/" },
     ],
     // SEO-K: sitemap riêng cho trang ngày tốt (≈ 400 URL, đổi hằng ngày).
-    sitemap: [`${siteUrl()}/sitemap.xml`, `${siteUrl()}/sitemap-ngay.xml`],
+    // SEO-M: chỉ mục sitemap theo cụm kiến thức — Search Console báo chỉ mục theo từng cụm.
+    sitemap: [`${siteUrl()}/sitemap.xml`, `${siteUrl()}/sitemap-ngay.xml`, `${siteUrl()}/sitemap-cum.xml`],
     host: siteUrl(),
   };
 }

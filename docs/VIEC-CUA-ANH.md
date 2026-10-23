@@ -69,6 +69,19 @@
 4j. [ ] **Sau khi merge SEO-L (5 phút):** Search Console → **Kiểm tra URL** → dán lần lượt `https://hieuban.com/tuoi-xong-dat/2027`,
    `https://hieuban.com/xem-tuoi-lam-nha/2027`, `https://hieuban.com/xem-ngay-tot/cuoi-hoi-thang-12-2026` → **Yêu cầu lập chỉ mục**
    (đẩy nhanh trang mùa Tết). IndexNow giờ tự chạy mỗi sáng 06:13 — không cần làm gì.
+4k. [ ] **Sau khi merge SEO-M (10 phút):**
+   - **Search Console** → Sơ đồ trang web → gửi `sitemap-cum.xml` (một lần; Google tự đọc 16 sitemap con). Từ đó mục
+     "Trang" lọc theo từng sitemap = biết cụm nào đã/chưa lập chỉ mục. **90 ngày sau**: cụm nào không có lượt hiển thị →
+     báo em gộp hoặc tạm noindex.
+   - **Search Console** → Cài đặt → bật **"Search generative AI"** (báo cáo trang được AI trích) nếu tài khoản có.
+   - **Bing Webmaster Tools** → Sitemaps → gửi `sitemap.xml`, `sitemap-ngay.xml`, `sitemap-cum.xml` (Bing là nguồn tìm
+     trang của ChatGPT). Xem thêm mục AI Performance của Bing nếu có.
+   - **Phòng duyệt / đọc nhanh**: 205 trang kiến thức có thêm 500–980 chữ (nháp ban biên tập, ghi nguồn sách). Ưu tiên
+     đọc đoạn "Sách xưa nói gì" ở thập thần / nhật chủ / tứ hoá — trích dẫn cổ thư cần người đối chiếu.
+   - **Ảnh AI cho trang trụ** (anh chọn "cả hai"): cần một dịch vụ tạo ảnh có khoá API (vd qua OpenRouter đang dùng) —
+     báo em dịch vụ + đặt khoá vào env thì em làm; hiện mọi trang đã có ảnh tóm tắt vẽ bằng code (có QR).
+   - **Quyết định còn chờ** (audit SEO-M): mở bot `Google-Extended` (Gemini app trích được site, đổi lại cho phép dùng
+     huấn luyện — lệch BM-2) hay giữ chặn.
 4i. [ ] **sameAs cho Google nhận ra thương hiệu + anh (5 phút, Vercel → web → Environment Variables):** kênh của site
    `MXH_FACEBOOK`, `MXH_YOUTUBE`, `MXH_TIKTOK`, `MXH_ZALO`, `MXH_INSTAGRAM`, `MXH_LINKEDIN`, `MXH_X`, `MXH_THREADS` (link https);
    hồ sơ cá nhân của anh `CHUYEN_GIA_SAME_AS_DUC_LUAN` = các link https cách nhau dấu phẩy (Facebook cá nhân, YouTube,

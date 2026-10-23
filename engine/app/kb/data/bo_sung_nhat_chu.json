@@ -1,0 +1,1509 @@
+{
+ "source_id": "bo_sung_nhat_chu_v1",
+ "school_id": "tu_binh",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Bổ sung trang nhật chủ",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + cổ thư công cộng (nháp AI, chờ thẩm định)"
+ },
+ "trang": {
+  "nhat-chu-giap": {
+   "muc": [
+    {
+     "tieu_de": "Cách tự biết mình là nhật chủ Giáp",
+     "doan": "Nhật chủ là can của trụ ngày sinh, nên người sinh vào ngày Giáp Tý, Giáp Dần, Giáp Thìn, Giáp Ngọ, Giáp Thân hoặc Giáp Tuất là nhật chủ Giáp. Can ngày đổi mỗi ngày theo vòng sáu mươi, không theo năm sinh, nên hai anh em sinh cùng năm vẫn có thể khác nhật chủ. Cách nhanh nhất là lập lá Bát tự bằng ngày giờ sinh dương lịch rồi nhìn can ở cột ngày."
+    },
+    {
+     "tieu_de": "Nhật chủ Giáp hợp nghề gì?",
+     "doan": "Nhật chủ Giáp thường hợp việc có tầm dài, cần người dựng khung và dẫn nhóm: quản lý dự án, giáo dục, quy hoạch, lâm nghiệp, khởi dựng tổ chức. Cây đại thụ lớn chậm nhưng bền, nên Giáp làm tốt khi được giao một mảng để vun nhiều năm. Khó cho Giáp là nơi đổi hướng liên tục, ai cũng chen vào sửa. Nghề cụ thể vẫn phải xem lá số đang cần thêm hành nào."
+    },
+    {
+     "tieu_de": "Nhật chủ Giáp trong tình cảm",
+     "doan": "Giáp trong tình cảm thường che chở, giữ lời, muốn làm chỗ dựa cho người mình thương. Điểm dễ vướng là ít nói ra mệt mỏi, cố đứng thẳng đến khi quá sức. Giáp hợp Kỷ theo luật ngũ hợp; với nam Giáp, Kỷ cũng là Chính Tài, nên sách xưa hay nhắc mối hợp này. Việc nhỏ trong tuần: nói với người thân một điều mình đang cần, không chờ họ đoán."
+    },
+    {
+     "tieu_de": "Nhật chủ Giáp gặp hành nào thì thuận?",
+     "doan": "Không có hành thuận chung cho mọi nhật chủ Giáp; phải xem Giáp mạnh hay yếu và sinh tháng nào. Theo lối cân sức, Giáp yếu cần Thuỷ (Ấn) và Mộc (Tỷ Kiếp), Giáp mạnh cần Hoả để xả, Thổ để có việc, Kim để tỉa. Theo lối điều hoà khí hậu, sinh tháng Tỵ, Ngọ, Mùi cần Thuỷ, sinh tháng Hợi, Tý, Sửu cần Hoả. Theo Tử Bình Chân Thuyên, hành thuận là hành giúp cách cục của tháng. Ba lối có thể chỉ ra hành khác nhau."
+    },
+    {
+     "tieu_de": "Ngày Giáp Tý, Giáp Dần… khác nhau thế nào?",
+     "danh_sach": [
+      "Với Giáp, chi ngày như phần rễ nằm dưới đất: sách xưa gọi đó là cung vợ chồng, và các can ẩn trong chi cho biết quan hệ gần mang màu gì.",
+      "Giáp Tý: chi ngày giữ Quý làm khí chính, là Chính Ấn của Giáp — nhà là chỗ dựa, được chăm sóc; Tý chỉ tàng một can nên khí rất thuần.",
+      "Giáp Dần: chi ngày giữ Giáp làm khí chính, là Tỷ Kiên của Giáp — ngồi trên gốc của chính mình, tự lực cao; trong Dần còn Bính (Thực Thần) và Mậu (Thiên Tài), thêm nét thư thả, biết hưởng.",
+      "Giáp Thìn: chi ngày giữ Mậu làm khí chính, là Thiên Tài của Giáp — người bên cạnh nhạy chuyện làm ăn, giao thiệp; trong Thìn còn Ất (Kiếp Tài) và Quý (Chính Ấn), thêm nét ganh đua, chia phần.",
+      "Giáp Ngọ: chi ngày giữ Đinh làm khí chính, là Thương Quan của Giáp — trong nhà hay nói thẳng, góp ý nhiều; trong Ngọ còn Kỷ (Chính Tài), thêm nét chắc tay chuyện tiền.",
+      "Giáp Thân: chi ngày giữ Canh làm khí chính, là Thất Sát của Giáp — quan hệ gần nhiều sức ép, cần nói rõ ranh giới; trong Thân còn Nhâm (Thiên Ấn) và Mậu (Thiên Tài), thêm nhu cầu khoảng riêng.",
+      "Giáp Tuất: chi ngày giữ Mậu làm khí chính, là Thiên Tài của Giáp — người bên cạnh nhạy chuyện làm ăn, giao thiệp; trong Tuất còn Tân (Chính Quan) và Đinh (Thương Quan), thêm nét nề nếp."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhật chủ Giáp sinh tháng nào thì được lệnh?",
+    "chu_thich": "Được lệnh nghĩa là hành của tháng trùng hành Mộc hoặc là Thuỷ sinh Mộc. Tháng Thìn, Mùi tuy không được lệnh vẫn giấu chút Mộc (Ất) cho Giáp bám rễ.",
+    "cot": [
+     "Tháng sinh (theo tiết)",
+     "Hành của tháng",
+     "Khí chính của tháng với Giáp",
+     "Được lệnh?"
+    ],
+    "dong": [
+     [
+      "Dần · tháng Giêng (từ Lập xuân)",
+      "Mộc",
+      "Giáp — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Mão · tháng Hai (từ Kinh trập)",
+      "Mộc",
+      "Ất — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Thìn · tháng Ba (từ Thanh minh)",
+      "Thổ",
+      "Mậu — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Tỵ · tháng Tư (từ Lập hạ)",
+      "Hoả",
+      "Bính — Thực Thần",
+      "Không"
+     ],
+     [
+      "Ngọ · tháng Năm (từ Mang chủng)",
+      "Hoả",
+      "Đinh — Thương Quan",
+      "Không"
+     ],
+     [
+      "Mùi · tháng Sáu (từ Tiểu thử)",
+      "Thổ",
+      "Kỷ — Chính Tài",
+      "Không"
+     ],
+     [
+      "Thân · tháng Bảy (từ Lập thu)",
+      "Kim",
+      "Canh — Thất Sát",
+      "Không"
+     ],
+     [
+      "Dậu · tháng Tám (từ Bạch lộ)",
+      "Kim",
+      "Tân — Chính Quan",
+      "Không"
+     ],
+     [
+      "Tuất · tháng Chín (từ Hàn lộ)",
+      "Thổ",
+      "Mậu — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Hợi · tháng Mười (từ Lập đông)",
+      "Thuỷ",
+      "Nhâm — Thiên Ấn",
+      "Có — Thuỷ sinh Mộc"
+     ],
+     [
+      "Tý · tháng Mười một (từ Đại tuyết)",
+      "Thuỷ",
+      "Quý — Chính Ấn",
+      "Có — Thuỷ sinh Mộc"
+     ],
+     [
+      "Sửu · tháng Chạp (từ Tiểu hàn)",
+      "Thổ",
+      "Kỷ — Chính Tài",
+      "Không"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhật chủ Giáp sinh tháng Dậu thì sao?",
+     "dap": "Tháng Dậu Kim vượng, Tân là Chính Quan của Giáp đứng ở lệnh tháng. Theo Tử Bình đây là Chính Quan cách; theo lối cân sức, Giáp không được lệnh nên cần Thuỷ (Ấn) chuyển sức Kim sang nuôi Mộc."
+    },
+    {
+     "hoi": "Nhật chủ Giáp và Ất khác nhau thế nào?",
+     "dap": "Cùng hành Mộc, Giáp là cây cổ thụ đứng thẳng, Ất là dây leo, hoa cỏ biết uốn. Giáp hợp vai dựng khung, Ất hợp vai kết nối, mềm mỏng."
+    },
+    {
+     "hoi": "Vì sao Trích Thiên Tuỷ nói Giáp thoát thai cần Hoả?",
+     "dap": "Ý là Giáp muốn lớn cần Hoả để đưa sức ra ngoài, như cây cần nắng mới ra hoa kết trái. Giáp có Mộc mà không có Hoả thường giỏi chuẩn bị nhưng chậm cho ra kết quả."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Thông thần luận — Thiên can",
+     "nguyen_van": "甲木參天，脫胎要火。",
+     "phien_am": "Giáp mộc tham thiên, thoát thai yếu hoả.",
+     "nghia": "Giáp Mộc cao vút lên trời; muốn thoát thai, thành hình, cần có Hoả."
+    },
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận dụng thần",
+     "nguyen_van": "八字用神，專求月令。",
+     "phien_am": "Bát tự dụng thần, chuyên cầu nguyệt lệnh.",
+     "nghia": "Dụng thần của tám chữ trước hết tìm ở tháng sinh — vì thế bảng tháng bên trên là bước đầu khi đọc một lá Giáp theo lối Tử Bình."
+    }
+   ],
+   "y_chinh": [
+    "Nhật chủ = can của trụ ngày, không phải năm sinh",
+    "Giáp hợp việc dựng khung, vun lâu năm",
+    "Tình cảm: che chở, giữ lời, ít nói mệt",
+    "Giáp mạnh cần Hoả xả; Giáp yếu cần Thuỷ nuôi"
+   ]
+  },
+  "nhat-chu-at": {
+   "muc": [
+    {
+     "tieu_de": "Làm sao biết mình là nhật chủ Ất?",
+     "doan": "Một người là nhật chủ Ất khi trụ ngày sinh có can Ất, tức một trong sáu ngày Ất Sửu, Ất Mão, Ất Tỵ, Ất Mùi, Ất Dậu, Ất Hợi. Năm sinh cho con giáp, còn ngày sinh mới cho nhật chủ; nhiều người tuổi Mão nhưng nhật chủ lại là Canh hay Quý. Sinh từ 23 giờ đến nửa đêm, cách tính mặc định ở đây vẫn giữ ngày hôm đó cho trụ ngày."
+    },
+    {
+     "tieu_de": "Nhật chủ Ất hợp nghề gì?",
+     "doan": "Nhật chủ Ất thường hợp việc cần khéo léo, mềm mỏng và kết nối: thiết kế, cắm hoa, chăm sóc khách hàng, ngoại giao, biên tập, làm vườn, tư vấn. Dây leo biết dựa vào giàn để lên cao, nên Ất làm tốt trong nhóm có người dẫn rõ và có chỗ để tự uốn. Việc đòi một mình đối đầu thường làm Ất hao hơn người khác."
+    },
+    {
+     "tieu_de": "Nhật chủ Ất trong tình cảm",
+     "doan": "Ất trong tình cảm thường dịu, để ý chi tiết, giỏi đọc không khí. Mặt khó là ngại va chạm nên hay nhường tới mức tự thấy thiệt. Ất hợp Canh theo ngũ hợp; với nữ Ất, Canh lại là Chính Quan, nên sách xưa hay nhắc nét hút nhau của cặp mềm – cứng này. Gợi ý trong tuần: nói không với một việc nhỏ trước giờ vẫn nhận cho êm."
+    },
+    {
+     "tieu_de": "Nhật chủ Ất gặp hành nào thì thuận?",
+     "doan": "Tuỳ Ất mạnh hay yếu: Ất yếu thường cần Thuỷ nuôi và Mộc đỡ, Ất mạnh thì cần Hoả để nở hoa và Thổ để bám rễ làm việc. Trích Thiên Tuỷ tả Ất ôm Đinh ẵm Bính, ý là có Hoả thì Ất không ngại tháng Kim. Lối xét tháng sinh lại lấy cách cục làm gốc. Đọc hai lối cạnh nhau rồi so với đời thật."
+    },
+    {
+     "tieu_de": "Ngày Ất Sửu, Ất Mão… khác nhau thế nào?",
+     "danh_sach": [
+      "Dây leo Ất bám vào chi ngày như bám giàn; sách xưa xem chỗ này là cung phối ngẫu, can chính trong chi tô màu đậm nhất.",
+      "Ất Sửu: chi ngày giữ Kỷ làm khí chính, là Thiên Tài của Ất — người bên cạnh nhạy chuyện làm ăn, giao thiệp; trong Sửu còn Quý (Thiên Ấn) và Tân (Thất Sát), thêm nhu cầu khoảng riêng.",
+      "Ất Mão: chi ngày giữ Ất làm khí chính, là Tỷ Kiên của Ất — ngồi trên gốc của chính mình, tự lực cao; Mão chỉ tàng một can nên khí rất thuần.",
+      "Ất Tỵ: chi ngày giữ Bính làm khí chính, là Thương Quan của Ất — trong nhà hay nói thẳng, góp ý nhiều; trong Tỵ còn Canh (Chính Quan) và Mậu (Chính Tài), thêm nét nề nếp.",
+      "Ất Mùi: chi ngày giữ Kỷ làm khí chính, là Thiên Tài của Ất — người bên cạnh nhạy chuyện làm ăn, giao thiệp; trong Mùi còn Đinh (Thực Thần) và Ất (Tỷ Kiên), thêm nét thư thả, biết hưởng.",
+      "Ất Dậu: chi ngày giữ Tân làm khí chính, là Thất Sát của Ất — quan hệ gần nhiều sức ép, cần nói rõ ranh giới; Dậu chỉ tàng một can nên khí rất thuần.",
+      "Ất Hợi: chi ngày giữ Nhâm làm khí chính, là Chính Ấn của Ất — nhà là chỗ dựa, được chăm sóc; trong Hợi còn Giáp (Kiếp Tài), thêm nét ganh đua, chia phần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhật chủ Ất sinh tháng nào thì được lệnh?",
+    "chu_thich": "Ất được lệnh ở tháng Mộc và tháng Thuỷ. Cột thứ ba cho biết tháng sinh đặt Ất vào thế gì: tháng Thân là Chính Quan, tháng Dậu là Thất Sát — sức ép rõ nhất với Ất.",
+    "cot": [
+     "Tháng sinh (theo tiết)",
+     "Hành của tháng",
+     "Khí chính của tháng với Ất",
+     "Được lệnh?"
+    ],
+    "dong": [
+     [
+      "Dần · tháng Giêng (từ Lập xuân)",
+      "Mộc",
+      "Giáp — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Mão · tháng Hai (từ Kinh trập)",
+      "Mộc",
+      "Ất — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Thìn · tháng Ba (từ Thanh minh)",
+      "Thổ",
+      "Mậu — Chính Tài",
+      "Không"
+     ],
+     [
+      "Tỵ · tháng Tư (từ Lập hạ)",
+      "Hoả",
+      "Bính — Thương Quan",
+      "Không"
+     ],
+     [
+      "Ngọ · tháng Năm (từ Mang chủng)",
+      "Hoả",
+      "Đinh — Thực Thần",
+      "Không"
+     ],
+     [
+      "Mùi · tháng Sáu (từ Tiểu thử)",
+      "Thổ",
+      "Kỷ — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Thân · tháng Bảy (từ Lập thu)",
+      "Kim",
+      "Canh — Chính Quan",
+      "Không"
+     ],
+     [
+      "Dậu · tháng Tám (từ Bạch lộ)",
+      "Kim",
+      "Tân — Thất Sát",
+      "Không"
+     ],
+     [
+      "Tuất · tháng Chín (từ Hàn lộ)",
+      "Thổ",
+      "Mậu — Chính Tài",
+      "Không"
+     ],
+     [
+      "Hợi · tháng Mười (từ Lập đông)",
+      "Thuỷ",
+      "Nhâm — Chính Ấn",
+      "Có — Thuỷ sinh Mộc"
+     ],
+     [
+      "Tý · tháng Mười một (từ Đại tuyết)",
+      "Thuỷ",
+      "Quý — Thiên Ấn",
+      "Có — Thuỷ sinh Mộc"
+     ],
+     [
+      "Sửu · tháng Chạp (từ Tiểu hàn)",
+      "Thổ",
+      "Kỷ — Thiên Tài",
+      "Không"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhật chủ Ất có yếu đuối không?",
+     "dap": "Không. Ất mềm nhưng dai: Trích Thiên Tuỷ nói Ất tuy mềm vẫn cắt được dê, mổ được trâu, ý là Ất vẫn bám rễ được trong đất Mùi, Sửu."
+    },
+    {
+     "hoi": "Nhật chủ Ất sinh tháng Thân, Dậu thì sao?",
+     "dap": "Tháng Thân, Dậu Kim vượng, Ất bị chế mạnh. Lối cân sức thường tìm Thuỷ để chuyển Kim sang nuôi Mộc; lối tháng sinh xem đây là Chính Quan hay Thất Sát cách rồi xét thần đi kèm."
+    },
+    {
+     "hoi": "Nhật chủ Ất hợp với nhật chủ nào?",
+     "dap": "Theo ngũ hợp, Ất hợp Canh. Ngoài ngũ hợp, hai người hợp hay không còn ở cách cư xử hằng ngày; Bát tự chỉ gợi chỗ dễ chịu và chỗ cần nhường."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Thông thần luận — Thiên can",
+     "nguyen_van": "乙木雖柔，刲羊解牛。懷丁抱丙，跨鳳乘猴。",
+     "phien_am": "Ất mộc tuy nhu, khuê dương giải ngưu. Hoài Đinh bão Bính, khoá phụng thừa hầu.",
+     "nghia": "Ất Mộc tuy mềm vẫn cắt được dê, mổ được trâu (bám rễ ở Mùi, Sửu); ôm Đinh ẵm Bính thì cưỡi được phượng, khỉ (đứng vững ở Dậu, Thân)."
+    },
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận thập can phối hợp tính tình",
+     "nghia": "Sách nhắc tính tình không đọc từ riêng can ngày, mà từ cách can ngày phối với các can khác — một Ất hợp Canh khác hẳn một Ất không gặp Canh."
+    }
+   ],
+   "y_chinh": [
+    "Ất: hoa cỏ, dây leo — mềm mà dai",
+    "Hợp việc khéo léo, kết nối, có người dẫn rõ",
+    "Có Hoả thì Ất không ngại tháng Kim",
+    "Ngũ hợp: Ất – Canh"
+   ]
+  },
+  "nhat-chu-binh": {
+   "muc": [
+    {
+     "tieu_de": "Cách biết mình là nhật chủ Bính",
+     "doan": "Nhật chủ Bính là người có trụ ngày mang can Bính: Bính Tý, Bính Dần, Bính Thìn, Bính Ngọ, Bính Thân hoặc Bính Tuất. Can ngày lặp lại sau mỗi mười ngày, nên một tháng có khoảng ba ngày Bính. Đừng nhầm với can năm: can năm ứng với tuổi, can ngày mới là mình trong Bát tự."
+    },
+    {
+     "tieu_de": "Nhật chủ Bính hợp nghề gì?",
+     "doan": "Nhật chủ Bính thường hợp việc đứng trước đám đông hoặc truyền cảm hứng: bán hàng, truyền thông, sân khấu, giảng dạy, tổ chức sự kiện, ngành năng lượng. Mặt trời soi khắp nơi nên Bính thích công khai, khó chịu khi phải làm lén lút. Bính dễ dồn hết sức giai đoạn đầu rồi hụt; chia dự án thành chặng giúp giữ lửa đều."
+    },
+    {
+     "tieu_de": "Nhật chủ Bính trong tình cảm",
+     "doan": "Bính trong tình cảm thường ấm, chủ động, thích thể hiện bằng hành động lớn. Người bên cạnh đôi khi thấy Bính chói quá, ít chừa chỗ cho mình nói. Theo ngũ hợp, Bính hợp Tân; với nam Bính, Tân là Chính Tài. Việc làm được trong tuần: hỏi người thân một câu rồi nghe hết, không chen ngang."
+    },
+    {
+     "tieu_de": "Nhật chủ Bính gặp hành nào thì thuận?",
+     "doan": "Bính sinh mùa hè quá nóng thường thuận khi gặp Thuỷ, nhất là Nhâm, để điều hoà; Bính sinh mùa đông yếu thì cần Mộc nhóm lửa. Trích Thiên Tuỷ còn tả Bính gặp Thổ nhiều thì hoá hiền, gặp Thuỷ mạnh lại lộ khí tiết. Lối Tử Bình thì hỏi tháng sinh là thần gì với Bính rồi tìm thần giúp cách. Hai lối nên đọc song song."
+    },
+    {
+     "tieu_de": "Ngày Bính Tý, Bính Dần… khác nhau thế nào?",
+     "danh_sach": [
+      "Mặt trời Bính chiếu xuống chi ngày ngay dưới chân; lối Tử Bình lấy chi này làm cung vợ chồng, đọc khí chính trước rồi tới can ẩn.",
+      "Bính Tý: chi ngày giữ Quý làm khí chính, là Chính Quan của Bính — coi trọng nề nếp, lễ độ trong nhà; Tý chỉ tàng một can nên khí rất thuần.",
+      "Bính Dần: chi ngày giữ Giáp làm khí chính, là Thiên Ấn của Bính — cần khoảng riêng ngay trong quan hệ gần; trong Dần còn Bính (Tỷ Kiên) và Mậu (Thực Thần), thêm nét tự lập.",
+      "Bính Thìn: chi ngày giữ Mậu làm khí chính, là Thực Thần của Bính — nhà là chỗ thư giãn, thích cùng hưởng thụ; trong Thìn còn Ất (Chính Ấn) và Quý (Chính Quan), thêm sự che chở.",
+      "Bính Ngọ: chi ngày giữ Đinh làm khí chính, là Kiếp Tài của Bính — người gần dễ cùng chia việc, chia phần; trong Ngọ còn Kỷ (Thương Quan), thêm nét thẳng tính, hay góp ý.",
+      "Bính Thân: chi ngày giữ Canh làm khí chính, là Thiên Tài của Bính — người bên cạnh nhạy chuyện làm ăn, giao thiệp; trong Thân còn Nhâm (Thất Sát) và Mậu (Thực Thần), thêm sức ép, cần ranh giới.",
+      "Bính Tuất: chi ngày giữ Mậu làm khí chính, là Thực Thần của Bính — nhà là chỗ thư giãn, thích cùng hưởng thụ; trong Tuất còn Tân (Chính Tài) và Đinh (Kiếp Tài), thêm nét chắc tay chuyện tiền."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhật chủ Bính sinh tháng nào thì được lệnh?",
+    "chu_thich": "Bính được lệnh ở tháng Hoả và tháng Mộc. Tháng Hợi, Tý Thuỷ vượng: khí chính là Thất Sát và Chính Quan của Bính, lửa mặt trời yếu nhất trong năm.",
+    "cot": [
+     "Tháng sinh (theo tiết)",
+     "Hành của tháng",
+     "Khí chính của tháng với Bính",
+     "Được lệnh?"
+    ],
+    "dong": [
+     [
+      "Dần · tháng Giêng (từ Lập xuân)",
+      "Mộc",
+      "Giáp — Thiên Ấn",
+      "Có — Mộc sinh Hoả"
+     ],
+     [
+      "Mão · tháng Hai (từ Kinh trập)",
+      "Mộc",
+      "Ất — Chính Ấn",
+      "Có — Mộc sinh Hoả"
+     ],
+     [
+      "Thìn · tháng Ba (từ Thanh minh)",
+      "Thổ",
+      "Mậu — Thực Thần",
+      "Không"
+     ],
+     [
+      "Tỵ · tháng Tư (từ Lập hạ)",
+      "Hoả",
+      "Bính — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Ngọ · tháng Năm (từ Mang chủng)",
+      "Hoả",
+      "Đinh — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Mùi · tháng Sáu (từ Tiểu thử)",
+      "Thổ",
+      "Kỷ — Thương Quan",
+      "Không"
+     ],
+     [
+      "Thân · tháng Bảy (từ Lập thu)",
+      "Kim",
+      "Canh — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Dậu · tháng Tám (từ Bạch lộ)",
+      "Kim",
+      "Tân — Chính Tài",
+      "Không"
+     ],
+     [
+      "Tuất · tháng Chín (từ Hàn lộ)",
+      "Thổ",
+      "Mậu — Thực Thần",
+      "Không"
+     ],
+     [
+      "Hợi · tháng Mười (từ Lập đông)",
+      "Thuỷ",
+      "Nhâm — Thất Sát",
+      "Không"
+     ],
+     [
+      "Tý · tháng Mười một (từ Đại tuyết)",
+      "Thuỷ",
+      "Quý — Chính Quan",
+      "Không"
+     ],
+     [
+      "Sửu · tháng Chạp (từ Tiểu hàn)",
+      "Thổ",
+      "Kỷ — Thương Quan",
+      "Không"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhật chủ Bính có hợp làm lãnh đạo không?",
+     "dap": "Nhiều Bính có khí chất dẫn dắt vì thích nhận phần việc khó và nói rõ ý mình. Làm lãnh đạo tốt hay không còn tuỳ lá số có Quan, Ấn giữ nhịp hay không."
+    },
+    {
+     "hoi": "Nhật chủ Bính và Đinh khác nhau thế nào?",
+     "dap": "Cùng hành Hoả, Bính là can dương như mặt trời, sáng rộng; Đinh là can âm như ngọn đèn, sáng gần và bền. Bính hợp việc đông người, Đinh hợp việc cần tập trung."
+    },
+    {
+     "hoi": "Vì sao Trích Thiên Tuỷ nói Bính gặp Tân lại rụt?",
+     "dap": "Vì Bính hợp Tân, sức nóng bị hút vào mối hợp nên mất vẻ mạnh mẽ thường ngày. Đời thường, người Bính hay mềm hẳn trước người mình quý."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Thông thần luận — Thiên can",
+     "nguyen_van": "丙火猛烈，欺霜侮雪。能煅庚金，逢辛反怯。",
+     "phien_am": "Bính hoả mãnh liệt, khi sương vũ tuyết. Năng đoán Canh kim, phùng Tân phản khiếp.",
+     "nghia": "Bính Hoả mạnh mẽ, coi thường sương tuyết; nung chảy được Canh Kim, nhưng gặp Tân lại hoá rụt rè."
+    },
+    {
+     "sach": "Uyên Hải Tử Bình",
+     "nghia": "Sách gom phép lấy can ngày làm chủ của Tử Bình; mỗi can được tả bằng một hình tượng tự nhiên, Bính là lửa mặt trời, để người đọc hình dung tính khí trước khi đi vào mười thần."
+    }
+   ],
+   "y_chinh": [
+    "Bính: mặt trời — sáng rộng, thích công khai",
+    "Hợp việc trước đám đông, truyền cảm hứng",
+    "Mùa hè cần Thuỷ; mùa đông cần Mộc nhóm lửa",
+    "Ngũ hợp: Bính – Tân"
+   ]
+  },
+  "nhat-chu-dinh": {
+   "muc": [
+    {
+     "tieu_de": "Làm sao biết mình là nhật chủ Đinh?",
+     "doan": "Người sinh vào ngày Đinh Sửu, Đinh Mão, Đinh Tỵ, Đinh Mùi, Đinh Dậu hoặc Đinh Hợi là nhật chủ Đinh. Muốn chắc, nên lập lá số bằng ngày dương lịch kèm giờ sinh; ngày âm lịch nhập tay dễ lệch nếu gặp tháng nhuận. Giờ sinh ít khi làm đổi can ngày; trường hợp sinh sau 23 giờ, mỗi trường phái tính khác nhau, nên xem ghi chú trên lá số."
+    },
+    {
+     "tieu_de": "Nhật chủ Đinh hợp nghề gì?",
+     "doan": "Đinh thường hợp việc tỉ mỉ, soi sáng cho người khác ở cự li gần: tư vấn, tham vấn tâm lý, biên tập, thiết kế ánh sáng, nghiên cứu, kỹ thuật tinh, làm bánh. Ngọn đèn sáng nhất ở nơi tối, nên Đinh hay nổi bật khi người khác bối rối. Nơi ồn, thay đổi liên tục thường làm Đinh chao đảo."
+    },
+    {
+     "tieu_de": "Nhật chủ Đinh trong tình cảm",
+     "doan": "Đinh trong tình cảm thường chu đáo, nhớ chi tiết, quan tâm theo kiểu lặng lẽ. Mặt khó là đọc nhiều ý trong một câu nói bâng quơ. Đinh hợp Nhâm theo ngũ hợp; với nữ Đinh, Nhâm là Chính Quan, và Trích Thiên Tuỷ có câu Đinh hợp Nhâm mà trung. Một việc nhỏ: hỏi lại thẳng thay vì đoán ý người kia."
+    },
+    {
+     "tieu_de": "Nhật chủ Đinh gặp hành nào thì thuận?",
+     "doan": "Đinh yếu thường thuận khi có Mộc, nhất là Giáp làm củi, và Hoả đỡ; Đinh mạnh thì thuận với Thổ để xả, Kim để có việc, Thuỷ vừa phải để tiết chế. Lối điều hoà khí hậu: sinh tháng Tỵ, Ngọ, Mùi cần Thuỷ, sinh tháng Hợi, Tý, Sửu cần Hoả ấm. Lối tháng sinh lấy cách cục làm gốc. Không nên áp một bảng màu chung cho mọi Đinh."
+    },
+    {
+     "tieu_de": "Ngày Đinh Sửu, Đinh Mão… khác nhau thế nào?",
+     "danh_sach": [
+      "Ngọn đèn Đinh đặt trên chi ngày nào thì cháy theo kiểu đó; chi ngày cũng là cung phối ngẫu trong lối đọc Tử Bình.",
+      "Đinh Sửu: chi ngày giữ Kỷ làm khí chính, là Thực Thần của Đinh — nhà là chỗ thư giãn, thích cùng hưởng thụ; trong Sửu còn Quý (Thất Sát) và Tân (Thiên Tài), thêm sức ép, cần ranh giới.",
+      "Đinh Mão: chi ngày giữ Ất làm khí chính, là Thiên Ấn của Đinh — cần khoảng riêng ngay trong quan hệ gần; Mão chỉ tàng một can nên khí rất thuần.",
+      "Đinh Tỵ: chi ngày giữ Bính làm khí chính, là Kiếp Tài của Đinh — người gần dễ cùng chia việc, chia phần; trong Tỵ còn Canh (Chính Tài) và Mậu (Thương Quan), thêm nét chắc tay chuyện tiền.",
+      "Đinh Mùi: chi ngày giữ Kỷ làm khí chính, là Thực Thần của Đinh — nhà là chỗ thư giãn, thích cùng hưởng thụ; trong Mùi còn Đinh (Tỷ Kiên) và Ất (Thiên Ấn), thêm nét tự lập.",
+      "Đinh Dậu: chi ngày giữ Tân làm khí chính, là Thiên Tài của Đinh — người bên cạnh nhạy chuyện làm ăn, giao thiệp; Dậu chỉ tàng một can nên khí rất thuần.",
+      "Đinh Hợi: chi ngày giữ Nhâm làm khí chính, là Chính Quan của Đinh — coi trọng nề nếp, lễ độ trong nhà; trong Hợi còn Giáp (Chính Ấn), thêm sự che chở."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhật chủ Đinh sinh tháng nào thì được lệnh?",
+    "chu_thich": "Đinh được lệnh khi tháng sinh thuộc Hoả hoặc Mộc. Tháng Hợi tuy không được lệnh nhưng giấu Giáp — Chính Ấn của Đinh — nên vẫn có củi.",
+    "cot": [
+     "Tháng sinh (theo tiết)",
+     "Hành của tháng",
+     "Khí chính của tháng với Đinh",
+     "Được lệnh?"
+    ],
+    "dong": [
+     [
+      "Dần · tháng Giêng (từ Lập xuân)",
+      "Mộc",
+      "Giáp — Chính Ấn",
+      "Có — Mộc sinh Hoả"
+     ],
+     [
+      "Mão · tháng Hai (từ Kinh trập)",
+      "Mộc",
+      "Ất — Thiên Ấn",
+      "Có — Mộc sinh Hoả"
+     ],
+     [
+      "Thìn · tháng Ba (từ Thanh minh)",
+      "Thổ",
+      "Mậu — Thương Quan",
+      "Không"
+     ],
+     [
+      "Tỵ · tháng Tư (từ Lập hạ)",
+      "Hoả",
+      "Bính — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Ngọ · tháng Năm (từ Mang chủng)",
+      "Hoả",
+      "Đinh — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Mùi · tháng Sáu (từ Tiểu thử)",
+      "Thổ",
+      "Kỷ — Thực Thần",
+      "Không"
+     ],
+     [
+      "Thân · tháng Bảy (từ Lập thu)",
+      "Kim",
+      "Canh — Chính Tài",
+      "Không"
+     ],
+     [
+      "Dậu · tháng Tám (từ Bạch lộ)",
+      "Kim",
+      "Tân — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Tuất · tháng Chín (từ Hàn lộ)",
+      "Thổ",
+      "Mậu — Thương Quan",
+      "Không"
+     ],
+     [
+      "Hợi · tháng Mười (từ Lập đông)",
+      "Thuỷ",
+      "Nhâm — Chính Quan",
+      "Không"
+     ],
+     [
+      "Tý · tháng Mười một (từ Đại tuyết)",
+      "Thuỷ",
+      "Quý — Thất Sát",
+      "Không"
+     ],
+     [
+      "Sửu · tháng Chạp (từ Tiểu hàn)",
+      "Thổ",
+      "Kỷ — Thực Thần",
+      "Không"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Vì sao nói Đinh mạnh mà không gắt, yếu mà không tắt?",
+     "dap": "Đó là ý câu vượng nhi bất liệt, suy nhi bất cùng trong Trích Thiên Tuỷ: lửa đèn khi mạnh vẫn dịu, khi yếu vẫn còn le lói. Người Đinh thường bền hơn vẻ ngoài."
+    },
+    {
+     "hoi": "Nhật chủ Đinh sinh tháng Hợi có ổn không?",
+     "dap": "Tháng Hợi Thuỷ vượng, Đinh không được lệnh, nhưng Hợi giấu Giáp là Chính Ấn của Đinh nên vẫn có nguồn nuôi. Đây là thế Quan có Ấn đi kèm, thường được đọc là áp lực đi cùng người nâng đỡ."
+    },
+    {
+     "hoi": "Nhật chủ Đinh hợp với nhật chủ nào?",
+     "dap": "Theo ngũ hợp, Đinh hợp Nhâm: lửa đèn và sông lớn gặp nhau. Hợp hay không vẫn tuỳ cách hai người cư xử; Bát tự chỉ gợi chỗ dễ và chỗ cần nhường."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Thông thần luận — Thiên can",
+     "nguyen_van": "丁火柔中，內性昭融。抱乙而孝，合壬而忠。",
+     "phien_am": "Đinh hoả nhu trung, nội tính chiêu dung. Bão Ất nhi hiếu, hợp Nhâm nhi trung.",
+     "nghia": "Đinh Hoả mềm mà giữ được chỗ giữa, bên trong sáng và ấm; ôm Ất (mẹ) thì hiếu, hợp Nhâm thì trung."
+    },
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận dụng thần",
+     "nghia": "Sách đặt việc tìm dụng thần bắt đầu từ tháng sinh; với Đinh, biết tháng sinh là Ấn, Quan hay Tài là biết lá số xoay quanh trục nào trước khi bàn hành thuận."
+    }
+   ],
+   "y_chinh": [
+    "Đinh: ngọn đèn — sáng gần, bền, chu đáo",
+    "Hợp việc tỉ mỉ, soi sáng cho người khác",
+    "Đinh yếu cần Giáp làm củi",
+    "Ngũ hợp: Đinh – Nhâm"
+   ]
+  },
+  "nhat-chu-mau": {
+   "muc": [
+    {
+     "tieu_de": "Cách tự biết mình là nhật chủ Mậu",
+     "doan": "Nhật chủ Mậu là người có can ngày Mậu, rơi vào các ngày Mậu Tý, Mậu Dần, Mậu Thìn, Mậu Ngọ, Mậu Thân, Mậu Tuất. Mậu là can dương của hành Thổ, khác Kỷ là can âm. Trên lá số, hãy nhìn ô can của cột Ngày, không phải ô của cột Năm."
+    },
+    {
+     "tieu_de": "Nhật chủ Mậu hợp nghề gì?",
+     "doan": "Mậu thường hợp việc cần người giữ trục và chịu tải: xây dựng, bất động sản, quản trị vận hành, kho vận, bảo hiểm, an ninh, hành chính. Núi không chạy theo gió, nên Mậu được tin vì ổn định. Ngành đổi mốt từng tháng khiến Mậu mệt hơn người khác. Nghề cụ thể vẫn tuỳ lá số cần hành nào."
+    },
+    {
+     "tieu_de": "Nhật chủ Mậu trong tình cảm",
+     "doan": "Mậu trong tình cảm thường đáng tin, ít lời hoa mỹ, thể hiện bằng việc làm đều đặn. Người bên cạnh đôi khi thấy Mậu khó đoán vì ít nói cảm xúc. Theo ngũ hợp, Mậu hợp Quý; với nam Mậu, Quý là Chính Tài. Gợi ý trong tuần: kể cho người thân nghe một điều mình đang lo, dù nhỏ."
+    },
+    {
+     "tieu_de": "Nhật chủ Mậu gặp hành nào thì thuận?",
+     "doan": "Mậu yếu thường cần Hoả sinh và Thổ đỡ; Mậu mạnh thì thuận với Kim để tiết, Thuỷ để làm việc, Mộc để khai thông. Trích Thiên Tuỷ nhắc Mậu ở Dần hay Thân thì ngại bị xung, ưa yên. Sinh mùa hạ khô thường cần Thuỷ; sinh mùa đông lạnh thường cần Hoả. Lối tháng sinh coi hành thuận là hành giúp cách cục."
+    },
+    {
+     "tieu_de": "Ngày Mậu Tý, Mậu Dần… khác nhau thế nào?",
+     "danh_sach": [
+      "Núi Mậu ngồi trên chi ngày như ngồi trên nền đất; nền ấy, theo sách xưa, là cung vợ chồng, khí chính của nó nói nhiều nhất.",
+      "Mậu Tý: chi ngày giữ Quý làm khí chính, là Chính Tài của Mậu — coi trọng sự chu toàn, vun vén trong nhà; Tý chỉ tàng một can nên khí rất thuần.",
+      "Mậu Dần: chi ngày giữ Giáp làm khí chính, là Thất Sát của Mậu — quan hệ gần nhiều sức ép, cần nói rõ ranh giới; trong Dần còn Bính (Thiên Ấn) và Mậu (Tỷ Kiên), thêm nhu cầu khoảng riêng.",
+      "Mậu Thìn: chi ngày giữ Mậu làm khí chính, là Tỷ Kiên của Mậu — ngồi trên gốc của chính mình, tự lực cao; trong Thìn còn Ất (Chính Quan) và Quý (Chính Tài), thêm nét nề nếp.",
+      "Mậu Ngọ: chi ngày giữ Đinh làm khí chính, là Chính Ấn của Mậu — nhà là chỗ dựa, được chăm sóc; trong Ngọ còn Kỷ (Kiếp Tài), thêm nét ganh đua, chia phần.",
+      "Mậu Thân: chi ngày giữ Canh làm khí chính, là Thực Thần của Mậu — nhà là chỗ thư giãn, thích cùng hưởng thụ; trong Thân còn Nhâm (Thiên Tài) và Mậu (Tỷ Kiên), thêm nét xoay xở, giao thiệp.",
+      "Mậu Tuất: chi ngày giữ Mậu làm khí chính, là Tỷ Kiên của Mậu — ngồi trên gốc của chính mình, tự lực cao; trong Tuất còn Tân (Thương Quan) và Đinh (Chính Ấn), thêm nét thẳng tính, hay góp ý."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhật chủ Mậu sinh tháng nào thì được lệnh?",
+    "chu_thich": "Mậu được lệnh ở bốn tháng Thổ (Thìn, Mùi, Tuất, Sửu) và hai tháng Hoả (Tỵ, Ngọ). Tháng Dần, Mão Mộc vượng là lúc Mậu chịu sức ép nhiều nhất.",
+    "cot": [
+     "Tháng sinh (theo tiết)",
+     "Hành của tháng",
+     "Khí chính của tháng với Mậu",
+     "Được lệnh?"
+    ],
+    "dong": [
+     [
+      "Dần · tháng Giêng (từ Lập xuân)",
+      "Mộc",
+      "Giáp — Thất Sát",
+      "Không"
+     ],
+     [
+      "Mão · tháng Hai (từ Kinh trập)",
+      "Mộc",
+      "Ất — Chính Quan",
+      "Không"
+     ],
+     [
+      "Thìn · tháng Ba (từ Thanh minh)",
+      "Thổ",
+      "Mậu — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Tỵ · tháng Tư (từ Lập hạ)",
+      "Hoả",
+      "Bính — Thiên Ấn",
+      "Có — Hoả sinh Thổ"
+     ],
+     [
+      "Ngọ · tháng Năm (từ Mang chủng)",
+      "Hoả",
+      "Đinh — Chính Ấn",
+      "Có — Hoả sinh Thổ"
+     ],
+     [
+      "Mùi · tháng Sáu (từ Tiểu thử)",
+      "Thổ",
+      "Kỷ — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Thân · tháng Bảy (từ Lập thu)",
+      "Kim",
+      "Canh — Thực Thần",
+      "Không"
+     ],
+     [
+      "Dậu · tháng Tám (từ Bạch lộ)",
+      "Kim",
+      "Tân — Thương Quan",
+      "Không"
+     ],
+     [
+      "Tuất · tháng Chín (từ Hàn lộ)",
+      "Thổ",
+      "Mậu — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Hợi · tháng Mười (từ Lập đông)",
+      "Thuỷ",
+      "Nhâm — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Tý · tháng Mười một (từ Đại tuyết)",
+      "Thuỷ",
+      "Quý — Chính Tài",
+      "Không"
+     ],
+     [
+      "Sửu · tháng Chạp (từ Tiểu hàn)",
+      "Thổ",
+      "Kỷ — Kiếp Tài",
+      "Có — cùng hành"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhật chủ Mậu sinh tháng Dần thì sao?",
+     "dap": "Tháng Dần Mộc vượng, Giáp là Thất Sát của Mậu đứng ở lệnh; nhưng Dần giấu Bính là Thiên Ấn nên có lối Sát sinh Ấn, Ấn sinh thân. Sách Tử Bình gọi đây là Sát có Ấn hoá."
+    },
+    {
+     "hoi": "Mậu và Kỷ khác nhau thế nào?",
+     "dap": "Cùng hành Thổ, Mậu là núi, đê, can dương: vững, chắn, chịu tải; Kỷ là đất ruộng, can âm: mềm, ẩm, nuôi dưỡng. Mậu giữ trục, Kỷ vun đắp."
+    },
+    {
+     "hoi": "Vì sao sách nói Mậu giữ mạng sống muôn vật?",
+     "dap": "Câu tĩnh hấp động tịch, vạn vật tư mệnh trong Trích Thiên Tuỷ tả Mậu lúc tĩnh thì thu, lúc động thì mở. Ý đời thường là Mậu hợp vai giữ nhịp cho cả nhóm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Thông thần luận — Thiên can",
+     "nguyen_van": "戊土固重，既中且正。靜翕動辟，萬物司命。",
+     "phien_am": "Mậu thổ cố trọng, ký trung thả chính. Tĩnh hấp động tịch, vạn vật tư mệnh.",
+     "nghia": "Mậu Thổ vững và nặng, vừa ở giữa vừa ngay thẳng; tĩnh thì thu lại, động thì mở ra, giữ mạng sống muôn vật."
+    },
+    {
+     "sach": "Cùng Thông Bảo Giám",
+     "nghia": "Sách điều hậu đời Thanh xét mười can ngày theo từng tháng sinh; với Mậu, tháng sinh quyết định Thổ khô hay ẩm, nặng hay nhẹ trước khi xét các thần khác."
+    }
+   ],
+   "y_chinh": [
+    "Mậu: núi lớn — vững, chịu tải, giữ trục",
+    "Hợp xây dựng, vận hành, việc cần sự tin cậy",
+    "Tháng Dần: Sát có Ấn hoá",
+    "Ngũ hợp: Mậu – Quý"
+   ]
+  },
+  "nhat-chu-ky": {
+   "muc": [
+    {
+     "tieu_de": "Làm sao biết mình là nhật chủ Kỷ?",
+     "doan": "Ai sinh vào ngày Kỷ Sửu, Kỷ Mão, Kỷ Tỵ, Kỷ Mùi, Kỷ Dậu hoặc Kỷ Hợi thì là nhật chủ Kỷ. Kỷ là đất ẩm ruộng vườn, can âm của Thổ. Lịch vạn niên giấy cũng ghi can chi ngày; tra theo dương lịch rồi nhìn can ngày là đủ, không cần đổi sang âm lịch trước."
+    },
+    {
+     "tieu_de": "Nhật chủ Kỷ hợp nghề gì?",
+     "doan": "Kỷ thường hợp việc nuôi dưỡng và vun đắp dần: giáo dục mầm non, nhân sự, nông nghiệp, ẩm thực, chăm sóc khách hàng, kế toán nội bộ. Ruộng tốt nhờ chăm đều, nên Kỷ giỏi việc cần kiên nhẫn và chi tiết. Khó cho Kỷ là việc phải quyết nhanh, gánh rủi ro lớn một mình."
+    },
+    {
+     "tieu_de": "Nhật chủ Kỷ trong tình cảm",
+     "doan": "Kỷ trong tình cảm thường chăm lo, nhớ ngày quan trọng, lo bữa ăn, giữ nếp nhà. Mặt khó là ôm việc rồi buồn vì không ai thấy. Kỷ hợp Giáp theo ngũ hợp; với nữ Kỷ, Giáp là Chính Quan. Một việc làm được tuần này: nhờ người thân làm một phần việc nhà trước giờ mình tự ôm."
+    },
+    {
+     "tieu_de": "Nhật chủ Kỷ gặp hành nào thì thuận?",
+     "doan": "Kỷ yếu thường thuận khi có Hoả sinh, nhất là Bính sưởi, và Thổ đỡ; Kỷ mạnh thì thuận với Kim để tiết, Mộc để xới đất, Thuỷ vừa đủ để tưới. Trích Thiên Tuỷ nói Kỷ không lo Mộc thịnh, không sợ Thuỷ cuồng, ý là đất ẩm chứa được nhiều. Lối cân sức và lối tháng sinh vẫn nên đọc song song."
+    },
+    {
+     "tieu_de": "Ngày Kỷ Sửu, Kỷ Mão… khác nhau thế nào?",
+     "danh_sach": [
+      "Ruộng Kỷ nằm trên chi ngày: chi này vừa là gốc của bản thân, vừa là cung phối ngẫu theo lối đọc Tử Bình.",
+      "Kỷ Sửu: chi ngày giữ Kỷ làm khí chính, là Tỷ Kiên của Kỷ — ngồi trên gốc của chính mình, tự lực cao; trong Sửu còn Quý (Thiên Tài) và Tân (Thực Thần), thêm nét xoay xở, giao thiệp.",
+      "Kỷ Mão: chi ngày giữ Ất làm khí chính, là Thất Sát của Kỷ — quan hệ gần nhiều sức ép, cần nói rõ ranh giới; Mão chỉ tàng một can nên khí rất thuần.",
+      "Kỷ Tỵ: chi ngày giữ Bính làm khí chính, là Chính Ấn của Kỷ — nhà là chỗ dựa, được chăm sóc; trong Tỵ còn Canh (Thương Quan) và Mậu (Kiếp Tài), thêm nét thẳng tính, hay góp ý.",
+      "Kỷ Mùi: chi ngày giữ Kỷ làm khí chính, là Tỷ Kiên của Kỷ — ngồi trên gốc của chính mình, tự lực cao; trong Mùi còn Đinh (Thiên Ấn) và Ất (Thất Sát), thêm nhu cầu khoảng riêng.",
+      "Kỷ Dậu: chi ngày giữ Tân làm khí chính, là Thực Thần của Kỷ — nhà là chỗ thư giãn, thích cùng hưởng thụ; Dậu chỉ tàng một can nên khí rất thuần.",
+      "Kỷ Hợi: chi ngày giữ Nhâm làm khí chính, là Chính Tài của Kỷ — coi trọng sự chu toàn, vun vén trong nhà; trong Hợi còn Giáp (Chính Quan), thêm nét nề nếp."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhật chủ Kỷ sinh tháng nào thì được lệnh?",
+    "chu_thich": "Kỷ được lệnh ở tháng Thổ và tháng Hoả, giống Mậu, nhưng khí chính trong cùng một tháng lại mang tên thập thần khác vì Kỷ là can âm.",
+    "cot": [
+     "Tháng sinh (theo tiết)",
+     "Hành của tháng",
+     "Khí chính của tháng với Kỷ",
+     "Được lệnh?"
+    ],
+    "dong": [
+     [
+      "Dần · tháng Giêng (từ Lập xuân)",
+      "Mộc",
+      "Giáp — Chính Quan",
+      "Không"
+     ],
+     [
+      "Mão · tháng Hai (từ Kinh trập)",
+      "Mộc",
+      "Ất — Thất Sát",
+      "Không"
+     ],
+     [
+      "Thìn · tháng Ba (từ Thanh minh)",
+      "Thổ",
+      "Mậu — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Tỵ · tháng Tư (từ Lập hạ)",
+      "Hoả",
+      "Bính — Chính Ấn",
+      "Có — Hoả sinh Thổ"
+     ],
+     [
+      "Ngọ · tháng Năm (từ Mang chủng)",
+      "Hoả",
+      "Đinh — Thiên Ấn",
+      "Có — Hoả sinh Thổ"
+     ],
+     [
+      "Mùi · tháng Sáu (từ Tiểu thử)",
+      "Thổ",
+      "Kỷ — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Thân · tháng Bảy (từ Lập thu)",
+      "Kim",
+      "Canh — Thương Quan",
+      "Không"
+     ],
+     [
+      "Dậu · tháng Tám (từ Bạch lộ)",
+      "Kim",
+      "Tân — Thực Thần",
+      "Không"
+     ],
+     [
+      "Tuất · tháng Chín (từ Hàn lộ)",
+      "Thổ",
+      "Mậu — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Hợi · tháng Mười (từ Lập đông)",
+      "Thuỷ",
+      "Nhâm — Chính Tài",
+      "Không"
+     ],
+     [
+      "Tý · tháng Mười một (từ Đại tuyết)",
+      "Thuỷ",
+      "Quý — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Sửu · tháng Chạp (từ Tiểu hàn)",
+      "Thổ",
+      "Kỷ — Tỷ Kiên",
+      "Có — cùng hành"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhật chủ Kỷ sinh tháng Mão thì sao?",
+     "dap": "Tháng Mão Mộc vượng, Ất là Thất Sát của Kỷ đứng ở lệnh tháng. Theo Tử Bình, đây là Thất Sát cách, cần Thực Thần chế hoặc Ấn hoá; người Kỷ ở đây thường chịu áp lực công việc sớm."
+    },
+    {
+     "hoi": "Nhật chủ Kỷ hợp với nhật chủ nào?",
+     "dap": "Theo ngũ hợp, Kỷ hợp Giáp: cây cần đất, đất nhờ rễ cây giữ lại. Hợp thật hay không vẫn ở cách hai người chia việc và nói chuyện."
+    },
+    {
+     "hoi": "Vì sao Kỷ được tả là giữ kho ở giữa?",
+     "dap": "Trích Thiên Tuỷ tả Kỷ thấp ẩm, trung chính, cất giữ. Ý đời thường là Kỷ giỏi tích dần, giữ đồ, giữ người, giữ nếp."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Thông thần luận — Thiên can",
+     "nguyen_van": "己土卑濕，中正蓄藏。不愁木盛，不畏水狂。",
+     "phien_am": "Kỷ thổ ti thấp, trung chính súc tàng. Bất sầu mộc thịnh, bất uý thuỷ cuồng.",
+     "nghia": "Kỷ Thổ thấp và ẩm, ở giữa, ngay thẳng, cất chứa; không lo Mộc thịnh, không sợ Thuỷ cuồng."
+    },
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận thập can phối hợp tính tình",
+     "nghia": "Sách cho rằng cùng một can ngày, gặp can khác phối vào thì tính tình đổi sắc; Kỷ hợp Giáp khác hẳn Kỷ đứng một mình."
+    }
+   ],
+   "y_chinh": [
+    "Kỷ: đất ruộng vườn — nuôi dưỡng, vun đắp",
+    "Hợp việc kiên nhẫn, chi tiết, chăm người",
+    "Kỷ yếu cần Bính sưởi",
+    "Ngũ hợp: Kỷ – Giáp"
+   ]
+  },
+  "nhat-chu-canh": {
+   "muc": [
+    {
+     "tieu_de": "Cách tự biết mình là nhật chủ Canh",
+     "doan": "Người có trụ ngày là Canh Tý, Canh Dần, Canh Thìn, Canh Ngọ, Canh Thân hoặc Canh Tuất là nhật chủ Canh. Con giáp năm sinh không cho biết điều này. Hai người cùng tuổi Thìn, một người nhật chủ Canh, người kia nhật chủ Ất, cách đọc khác hẳn."
+    },
+    {
+     "tieu_de": "Nhật chủ Canh hợp nghề gì?",
+     "doan": "Canh thường hợp việc cần quyết đoán và chịu sức ép: kỹ thuật cơ khí, xây lắp, pháp chế, quân đội, thể thao, cứu hộ, xử lý sự cố. Kim thô cần rèn mới thành đồ dùng, nên Canh lớn lên nhờ môi trường có kỷ luật và người thầy nghiêm. Ở nơi quá dễ dãi, Canh hay mất hướng."
+    },
+    {
+     "tieu_de": "Nhật chủ Canh trong tình cảm",
+     "doan": "Canh trong tình cảm thường thẳng, giữ nghĩa, bảo vệ người mình thương bằng hành động. Mặt khó là lời nói sắc, có khi làm đau mà không biết. Canh hợp Ất theo ngũ hợp; với nam Canh, Ất là Chính Tài. Trích Thiên Tuỷ có câu Canh thắng được anh Giáp, thua em Ất: cứng gặp mềm thì chịu. Gợi ý: trước khi góp ý, nói một điều mình quý ở người kia."
+    },
+    {
+     "tieu_de": "Nhật chủ Canh gặp hành nào thì thuận?",
+     "doan": "Canh mạnh, nhất là sinh mùa thu, thường thuận khi có Đinh Hoả rèn và Thuỷ để lộ vẻ thanh; Canh yếu thì cần Thổ ẩm sinh và Kim đỡ. Trích Thiên Tuỷ nói được Thuỷ thì thanh, được Hoả thì sắc; Thổ ẩm thì sinh, Thổ khô thì giòn. Lối tháng sinh và lối cân sức có thể chỉ ra hành khác nhau, nên đọc cả hai."
+    },
+    {
+     "tieu_de": "Ngày Canh Tý, Canh Dần… khác nhau thế nào?",
+     "danh_sach": [
+      "Kim Canh đứng trên chi ngày như lưỡi rìu trên đe; sách xưa đọc chi này là cung vợ chồng, xét khí chính trước, can ẩn sau.",
+      "Canh Tý: chi ngày giữ Quý làm khí chính, là Thương Quan của Canh — trong nhà hay nói thẳng, góp ý nhiều; Tý chỉ tàng một can nên khí rất thuần.",
+      "Canh Dần: chi ngày giữ Giáp làm khí chính, là Thiên Tài của Canh — người bên cạnh nhạy chuyện làm ăn, giao thiệp; trong Dần còn Bính (Thất Sát) và Mậu (Thiên Ấn), thêm sức ép, cần ranh giới.",
+      "Canh Thìn: chi ngày giữ Mậu làm khí chính, là Thiên Ấn của Canh — cần khoảng riêng ngay trong quan hệ gần; trong Thìn còn Ất (Chính Tài) và Quý (Thương Quan), thêm nét chắc tay chuyện tiền.",
+      "Canh Ngọ: chi ngày giữ Đinh làm khí chính, là Chính Quan của Canh — coi trọng nề nếp, lễ độ trong nhà; trong Ngọ còn Kỷ (Chính Ấn), thêm sự che chở.",
+      "Canh Thân: chi ngày giữ Canh làm khí chính, là Tỷ Kiên của Canh — ngồi trên gốc của chính mình, tự lực cao; trong Thân còn Nhâm (Thực Thần) và Mậu (Thiên Ấn), thêm nét thư thả, biết hưởng.",
+      "Canh Tuất: chi ngày giữ Mậu làm khí chính, là Thiên Ấn của Canh — cần khoảng riêng ngay trong quan hệ gần; trong Tuất còn Tân (Kiếp Tài) và Đinh (Chính Quan), thêm nét ganh đua, chia phần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhật chủ Canh sinh tháng nào thì được lệnh?",
+    "chu_thich": "Canh được lệnh ở tháng Kim và tháng Thổ. Tháng Tỵ, Ngọ Hoả mạnh: khí chính là Thất Sát và Chính Quan của Canh — thời điểm kim bị luyện.",
+    "cot": [
+     "Tháng sinh (theo tiết)",
+     "Hành của tháng",
+     "Khí chính của tháng với Canh",
+     "Được lệnh?"
+    ],
+    "dong": [
+     [
+      "Dần · tháng Giêng (từ Lập xuân)",
+      "Mộc",
+      "Giáp — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Mão · tháng Hai (từ Kinh trập)",
+      "Mộc",
+      "Ất — Chính Tài",
+      "Không"
+     ],
+     [
+      "Thìn · tháng Ba (từ Thanh minh)",
+      "Thổ",
+      "Mậu — Thiên Ấn",
+      "Có — Thổ sinh Kim"
+     ],
+     [
+      "Tỵ · tháng Tư (từ Lập hạ)",
+      "Hoả",
+      "Bính — Thất Sát",
+      "Không"
+     ],
+     [
+      "Ngọ · tháng Năm (từ Mang chủng)",
+      "Hoả",
+      "Đinh — Chính Quan",
+      "Không"
+     ],
+     [
+      "Mùi · tháng Sáu (từ Tiểu thử)",
+      "Thổ",
+      "Kỷ — Chính Ấn",
+      "Có — Thổ sinh Kim"
+     ],
+     [
+      "Thân · tháng Bảy (từ Lập thu)",
+      "Kim",
+      "Canh — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Dậu · tháng Tám (từ Bạch lộ)",
+      "Kim",
+      "Tân — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Tuất · tháng Chín (từ Hàn lộ)",
+      "Thổ",
+      "Mậu — Thiên Ấn",
+      "Có — Thổ sinh Kim"
+     ],
+     [
+      "Hợi · tháng Mười (từ Lập đông)",
+      "Thuỷ",
+      "Nhâm — Thực Thần",
+      "Không"
+     ],
+     [
+      "Tý · tháng Mười một (từ Đại tuyết)",
+      "Thuỷ",
+      "Quý — Thương Quan",
+      "Không"
+     ],
+     [
+      "Sửu · tháng Chạp (từ Tiểu hàn)",
+      "Thổ",
+      "Kỷ — Chính Ấn",
+      "Có — Thổ sinh Kim"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhật chủ Canh sinh tháng Ngọ thì sao?",
+     "dap": "Tháng Ngọ Hoả mạnh, Đinh là Chính Quan của Canh đứng ở lệnh tháng, và Ngọ còn giấu Kỷ là Chính Ấn. Sách gọi là Quan Ấn cùng có mặt; đời thường hay thấy người chịu khuôn phép sớm nhưng có người dạy dỗ."
+    },
+    {
+     "hoi": "Canh và Tân khác nhau thế nào?",
+     "dap": "Canh là kim thô, can dương: mạnh, thích hành động; Tân là kim đã chế tác, can âm: tinh, chuộng chuẩn mực. Canh ưa được rèn bằng Đinh, Tân ưa được rửa bằng Nhâm."
+    },
+    {
+     "hoi": "Vì sao Trích Thiên Tuỷ nói Canh mang khí sát?",
+     "dap": "Sách mở đầu phần Canh bằng câu Canh kim mang khí sát, cứng mạnh bậc nhất. Ý đời thường là Canh có sức quyết rất lớn, cần chỗ để dùng cho đúng việc."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Thông thần luận — Thiên can",
+     "nguyen_van": "庚金帶煞，剛健為最。得水而清，得火而銳。",
+     "phien_am": "Canh kim đái sát, cương kiện vi tối. Đắc thuỷ nhi thanh, đắc hoả nhi duệ.",
+     "nghia": "Canh Kim mang khí sát, cứng mạnh bậc nhất; có Thuỷ thì trong, có Hoả thì sắc."
+    },
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận dụng thần",
+     "nghia": "Sách chia dụng thần thành loại dùng thuận và loại dùng ngược; Canh đứng ở tháng Ngọ, Tỵ là ví dụ dễ thấy của việc phải cân Quan Sát với sức của thân trước khi bàn hành thuận."
+    }
+   ],
+   "y_chinh": [
+    "Canh: kim thô, đao kiếm — quả cảm, dứt khoát",
+    "Lớn lên nhờ kỷ luật, người thầy nghiêm",
+    "Có Thuỷ thì trong, có Hoả thì sắc",
+    "Ngũ hợp: Canh – Ất"
+   ]
+  },
+  "nhat-chu-tan": {
+   "muc": [
+    {
+     "tieu_de": "Làm sao biết mình là nhật chủ Tân?",
+     "doan": "Nhật chủ Tân là người sinh vào một trong sáu ngày Tân Sửu, Tân Mão, Tân Tỵ, Tân Mùi, Tân Dậu, Tân Hợi. Mỗi lá Bát tự có tám chữ, nhưng chỉ chữ can ở cột ngày được gọi là nhật chủ. Bảy chữ còn lại được gọi tên theo quan hệ với chữ này."
+    },
+    {
+     "tieu_de": "Nhật chủ Tân hợp nghề gì?",
+     "doan": "Tân thường hợp việc cần con mắt tinh và chuẩn mực cao: trang sức, thời trang, thẩm định, kiểm toán, thiết kế sản phẩm, làm đẹp, biên tập hình ảnh. Vàng bạc quý nhờ được mài và giữ sạch, nên Tân làm tốt ở nơi coi trọng chất lượng hơn số lượng. Việc thô, ồn, thiếu tôn trọng dễ làm Tân nản."
+    },
+    {
+     "tieu_de": "Nhật chủ Tân trong tình cảm",
+     "doan": "Tân trong tình cảm thường tinh tế, để ý cách người kia đối xử với mình qua chi tiết nhỏ. Mặt khó là dễ tự ái, đặt chuẩn cao rồi thất vọng âm thầm. Tân hợp Bính theo ngũ hợp; với nữ Tân, Bính là Chính Quan. Một việc trong tuần: nói rõ một mong muốn thay vì chờ người kia tự nhận ra."
+    },
+    {
+     "tieu_de": "Nhật chủ Tân gặp hành nào thì thuận?",
+     "doan": "Tân thường thuận khi có Nhâm Thuỷ rửa cho sáng, và Thổ vừa đủ để sinh, không dày quá vùi lấp. Trích Thiên Tuỷ nói Tân sợ Thổ chồng lớp, vui khi Thuỷ đầy; trời nóng mừng có Thổ, trời lạnh mừng có Đinh. Lối tháng sinh vẫn lấy cách cục làm gốc. Hai lối đặt cạnh nhau, không chọn thay người đọc."
+    },
+    {
+     "tieu_de": "Ngày Tân Sửu, Tân Mão… khác nhau thế nào?",
+     "danh_sach": [
+      "Viên ngọc Tân đặt trên nền chi ngày nào thì ánh lên theo nền đó; chi ngày cũng là cung phối ngẫu trong Bát tự.",
+      "Tân Sửu: chi ngày giữ Kỷ làm khí chính, là Thiên Ấn của Tân — cần khoảng riêng ngay trong quan hệ gần; trong Sửu còn Quý (Thực Thần) và Tân (Tỷ Kiên), thêm nét thư thả, biết hưởng.",
+      "Tân Mão: chi ngày giữ Ất làm khí chính, là Thiên Tài của Tân — người bên cạnh nhạy chuyện làm ăn, giao thiệp; Mão chỉ tàng một can nên khí rất thuần.",
+      "Tân Tỵ: chi ngày giữ Bính làm khí chính, là Chính Quan của Tân — coi trọng nề nếp, lễ độ trong nhà; trong Tỵ còn Canh (Kiếp Tài) và Mậu (Chính Ấn), thêm nét ganh đua, chia phần.",
+      "Tân Mùi: chi ngày giữ Kỷ làm khí chính, là Thiên Ấn của Tân — cần khoảng riêng ngay trong quan hệ gần; trong Mùi còn Đinh (Thất Sát) và Ất (Thiên Tài), thêm sức ép, cần ranh giới.",
+      "Tân Dậu: chi ngày giữ Tân làm khí chính, là Tỷ Kiên của Tân — ngồi trên gốc của chính mình, tự lực cao; Dậu chỉ tàng một can nên khí rất thuần.",
+      "Tân Hợi: chi ngày giữ Nhâm làm khí chính, là Thương Quan của Tân — trong nhà hay nói thẳng, góp ý nhiều; trong Hợi còn Giáp (Chính Tài), thêm nét chắc tay chuyện tiền."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhật chủ Tân sinh tháng nào thì được lệnh?",
+    "chu_thich": "Tân được lệnh ở tháng Kim và tháng Thổ. Riêng tháng Tý, Hợi Thuỷ vượng: khí chính là Thực Thần, Thương Quan của Tân — Thuỷ rửa cho vàng sáng.",
+    "cot": [
+     "Tháng sinh (theo tiết)",
+     "Hành của tháng",
+     "Khí chính của tháng với Tân",
+     "Được lệnh?"
+    ],
+    "dong": [
+     [
+      "Dần · tháng Giêng (từ Lập xuân)",
+      "Mộc",
+      "Giáp — Chính Tài",
+      "Không"
+     ],
+     [
+      "Mão · tháng Hai (từ Kinh trập)",
+      "Mộc",
+      "Ất — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Thìn · tháng Ba (từ Thanh minh)",
+      "Thổ",
+      "Mậu — Chính Ấn",
+      "Có — Thổ sinh Kim"
+     ],
+     [
+      "Tỵ · tháng Tư (từ Lập hạ)",
+      "Hoả",
+      "Bính — Chính Quan",
+      "Không"
+     ],
+     [
+      "Ngọ · tháng Năm (từ Mang chủng)",
+      "Hoả",
+      "Đinh — Thất Sát",
+      "Không"
+     ],
+     [
+      "Mùi · tháng Sáu (từ Tiểu thử)",
+      "Thổ",
+      "Kỷ — Thiên Ấn",
+      "Có — Thổ sinh Kim"
+     ],
+     [
+      "Thân · tháng Bảy (từ Lập thu)",
+      "Kim",
+      "Canh — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Dậu · tháng Tám (từ Bạch lộ)",
+      "Kim",
+      "Tân — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Tuất · tháng Chín (từ Hàn lộ)",
+      "Thổ",
+      "Mậu — Chính Ấn",
+      "Có — Thổ sinh Kim"
+     ],
+     [
+      "Hợi · tháng Mười (từ Lập đông)",
+      "Thuỷ",
+      "Nhâm — Thương Quan",
+      "Không"
+     ],
+     [
+      "Tý · tháng Mười một (từ Đại tuyết)",
+      "Thuỷ",
+      "Quý — Thực Thần",
+      "Không"
+     ],
+     [
+      "Sửu · tháng Chạp (từ Tiểu hàn)",
+      "Thổ",
+      "Kỷ — Thiên Ấn",
+      "Có — Thổ sinh Kim"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhật chủ Tân sinh tháng Tỵ thì sao?",
+     "dap": "Tháng Tỵ Hoả mạnh, Bính là Chính Quan của Tân ở lệnh tháng; Tỵ còn giấu Mậu là Chính Ấn và Canh là Kiếp Tài. Hoả nóng làm Tân khó sáng, nên lối điều hoà khí hậu thường tìm Thuỷ."
+    },
+    {
+     "hoi": "Vì sao sách nói Tân giúp được xã tắc, cứu được sinh linh?",
+     "dap": "Câu năng phù xã tắc, năng cứu sinh linh trong Trích Thiên Tuỷ tả Tân tuy mềm nhưng có ích lớn khi đặt đúng chỗ. Người Tân thường làm tốt việc giữ chuẩn mực chung."
+    },
+    {
+     "hoi": "Nhật chủ Tân hợp với nhật chủ nào?",
+     "dap": "Theo ngũ hợp, Tân hợp Bính: vàng gặp nắng thì ánh lên. Ngoài luật này, hai người hợp hay không vẫn tuỳ cách tôn trọng nhau mỗi ngày."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Thông thần luận — Thiên can",
+     "nguyen_van": "辛金軟弱，溫潤而清。畏土之疊，樂水之盈。",
+     "phien_am": "Tân kim nhuyễn nhược, ôn nhuận nhi thanh. Uý thổ chi điệp, lạc thuỷ chi doanh.",
+     "nghia": "Tân Kim mềm yếu, ấm nhuận mà trong; sợ Thổ chồng lớp, vui khi Thuỷ đầy."
+    },
+    {
+     "sach": "Uyên Hải Tử Bình",
+     "nghia": "Sách lấy can ngày làm chủ để gọi tên mười thần; với Tân, gặp Nhâm là Thương Quan, gặp Bính là Chính Quan — cùng một chữ Thuỷ, Hoả nhưng mang vai khác nhau theo chủ."
+    }
+   ],
+   "y_chinh": [
+    "Tân: vàng bạc, trang sức — tinh, chuẩn mực",
+    "Hợp việc coi trọng chất lượng, con mắt tinh",
+    "Thích Nhâm Thuỷ rửa, sợ Thổ dày vùi lấp",
+    "Ngũ hợp: Tân – Bính"
+   ]
+  },
+  "nhat-chu-nham": {
+   "muc": [
+    {
+     "tieu_de": "Cách tự biết mình là nhật chủ Nhâm",
+     "doan": "Nếu can ngày sinh là Nhâm (Nhâm Tý, Nhâm Dần, Nhâm Thìn, Nhâm Ngọ, Nhâm Thân, Nhâm Tuất) thì đó là nhật chủ Nhâm. Can ngày chạy vòng sáu mươi liên tục từ xưa đến nay, không bắt đầu lại vào Tết hay đầu năm. Vì thế lá số cần đúng ngày; ngày âm lịch chỉ là cách ghi khác của cùng một ngày."
+    },
+    {
+     "tieu_de": "Nhật chủ Nhâm hợp nghề gì?",
+     "doan": "Nhâm thường hợp việc chuyển động và kết nối rộng: thương mại, vận tải, du lịch, xuất nhập khẩu, truyền thông số, tư vấn chiến lược. Sông lớn cần bờ, nên Nhâm phát huy khi có khung kế hoạch và người giữ tiến độ. Không có bờ, sức nhiều mà dễ tràn ra nhiều việc dang dở."
+    },
+    {
+     "tieu_de": "Nhật chủ Nhâm trong tình cảm",
+     "doan": "Nhâm trong tình cảm thường cởi mở, hào phóng, thích cùng đi xa và thử điều mới. Mặt khó là cần khoảng riêng lớn, dễ bị đọc là hờ hững. Nhâm hợp Đinh theo ngũ hợp; với nam Nhâm, Đinh là Chính Tài. Gợi ý: hẹn một giờ cố định mỗi tuần chỉ dành cho người thân."
+    },
+    {
+     "tieu_de": "Nhật chủ Nhâm gặp hành nào thì thuận?",
+     "doan": "Nhâm mạnh, sinh mùa thu hay mùa đông, thường thuận với Mậu Thổ làm đê, Mộc để tiết, Hoả để ấm; Nhâm yếu, sinh mùa hạ, thì cần Kim sinh và Thuỷ đỡ. Trích Thiên Tuỷ tả Nhâm thông với sông, tiết được khí Kim. Lối tháng sinh coi hành thuận là hành giúp cách cục; lối cân sức là hành kéo Nhâm về giữa."
+    },
+    {
+     "tieu_de": "Ngày Nhâm Tý, Nhâm Dần… khác nhau thế nào?",
+     "danh_sach": [
+      "Sông Nhâm chảy trên chi ngày như chảy trên lòng sông; lòng sông ấy được xem là cung vợ chồng, khí chính tô màu rõ nhất.",
+      "Nhâm Tý: chi ngày giữ Quý làm khí chính, là Kiếp Tài của Nhâm — người gần dễ cùng chia việc, chia phần; Tý chỉ tàng một can nên khí rất thuần.",
+      "Nhâm Dần: chi ngày giữ Giáp làm khí chính, là Thực Thần của Nhâm — nhà là chỗ thư giãn, thích cùng hưởng thụ; trong Dần còn Bính (Thiên Tài) và Mậu (Thất Sát), thêm nét xoay xở, giao thiệp.",
+      "Nhâm Thìn: chi ngày giữ Mậu làm khí chính, là Thất Sát của Nhâm — quan hệ gần nhiều sức ép, cần nói rõ ranh giới; trong Thìn còn Ất (Thương Quan) và Quý (Kiếp Tài), thêm nét thẳng tính, hay góp ý.",
+      "Nhâm Ngọ: chi ngày giữ Đinh làm khí chính, là Chính Tài của Nhâm — coi trọng sự chu toàn, vun vén trong nhà; trong Ngọ còn Kỷ (Chính Quan), thêm nét nề nếp.",
+      "Nhâm Thân: chi ngày giữ Canh làm khí chính, là Thiên Ấn của Nhâm — cần khoảng riêng ngay trong quan hệ gần; trong Thân còn Nhâm (Tỷ Kiên) và Mậu (Thất Sát), thêm nét tự lập.",
+      "Nhâm Tuất: chi ngày giữ Mậu làm khí chính, là Thất Sát của Nhâm — quan hệ gần nhiều sức ép, cần nói rõ ranh giới; trong Tuất còn Tân (Chính Ấn) và Đinh (Chính Tài), thêm sự che chở."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhật chủ Nhâm sinh tháng nào thì được lệnh?",
+    "chu_thich": "Nhâm được lệnh ở tháng Thuỷ và tháng Kim. Bốn tháng Thổ (Thìn, Mùi, Tuất, Sửu) đặt Quan Sát lên lệnh tháng — như nước gặp đê.",
+    "cot": [
+     "Tháng sinh (theo tiết)",
+     "Hành của tháng",
+     "Khí chính của tháng với Nhâm",
+     "Được lệnh?"
+    ],
+    "dong": [
+     [
+      "Dần · tháng Giêng (từ Lập xuân)",
+      "Mộc",
+      "Giáp — Thực Thần",
+      "Không"
+     ],
+     [
+      "Mão · tháng Hai (từ Kinh trập)",
+      "Mộc",
+      "Ất — Thương Quan",
+      "Không"
+     ],
+     [
+      "Thìn · tháng Ba (từ Thanh minh)",
+      "Thổ",
+      "Mậu — Thất Sát",
+      "Không"
+     ],
+     [
+      "Tỵ · tháng Tư (từ Lập hạ)",
+      "Hoả",
+      "Bính — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Ngọ · tháng Năm (từ Mang chủng)",
+      "Hoả",
+      "Đinh — Chính Tài",
+      "Không"
+     ],
+     [
+      "Mùi · tháng Sáu (từ Tiểu thử)",
+      "Thổ",
+      "Kỷ — Chính Quan",
+      "Không"
+     ],
+     [
+      "Thân · tháng Bảy (từ Lập thu)",
+      "Kim",
+      "Canh — Thiên Ấn",
+      "Có — Kim sinh Thuỷ"
+     ],
+     [
+      "Dậu · tháng Tám (từ Bạch lộ)",
+      "Kim",
+      "Tân — Chính Ấn",
+      "Có — Kim sinh Thuỷ"
+     ],
+     [
+      "Tuất · tháng Chín (từ Hàn lộ)",
+      "Thổ",
+      "Mậu — Thất Sát",
+      "Không"
+     ],
+     [
+      "Hợi · tháng Mười (từ Lập đông)",
+      "Thuỷ",
+      "Nhâm — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Tý · tháng Mười một (từ Đại tuyết)",
+      "Thuỷ",
+      "Quý — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Sửu · tháng Chạp (từ Tiểu hàn)",
+      "Thổ",
+      "Kỷ — Chính Quan",
+      "Không"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhật chủ Nhâm sinh tháng Tuất thì sao?",
+     "dap": "Tháng Tuất Thổ dày, Mậu là Thất Sát của Nhâm đứng ở lệnh; Tuất còn giấu Tân (Chính Ấn) và Đinh (Chính Tài). Nước gặp đê, sức được dẫn vào khuôn: áp lực công việc rõ nhưng có người dạy, có tiền công."
+    },
+    {
+     "hoi": "Nhâm và Quý khác nhau thế nào?",
+     "dap": "Cùng hành Thuỷ, Nhâm là can dương như sông lớn: mạnh, chảy xa; Quý là can âm như mưa, sương: nhẹ, thấm sâu. Nhâm hợp việc mở rộng, Quý hợp việc đi sâu."
+    },
+    {
+     "hoi": "Nhật chủ Nhâm hợp với nhật chủ nào?",
+     "dap": "Theo ngũ hợp, Nhâm hợp Đinh, sách xưa nói hai can này hợp hoá Mộc. Ngoài ngũ hợp, hợp hay không còn ở cách hai người giữ nhịp riêng và nhịp chung."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Thông thần luận — Thiên can",
+     "nguyen_van": "壬水通河，能洩金氣。剛中之德，周流不滯。",
+     "phien_am": "Nhâm thuỷ thông hà, năng tiết kim khí. Cương trung chi đức, chu lưu bất trệ.",
+     "nghia": "Nhâm Thuỷ thông với sông, tiết được khí Kim; mang đức cứng mà giữ chỗ giữa, chảy khắp không ứ đọng."
+    },
+    {
+     "sach": "Cùng Thông Bảo Giám",
+     "nghia": "Sách điều hậu đời Thanh xét can ngày theo từng tháng sinh; Nhâm sinh mùa thu, đông được tả như nước lớn cần Thổ làm bờ, sinh mùa hạ như sông cạn cần nguồn."
+    }
+   ],
+   "y_chinh": [
+    "Nhâm: sông lớn — rộng, linh hoạt, thích chuyển động",
+    "Hợp thương mại, vận tải, việc kết nối rộng",
+    "Nhâm mạnh cần Mậu làm đê",
+    "Ngũ hợp: Nhâm – Đinh"
+   ]
+  },
+  "nhat-chu-quy": {
+   "muc": [
+    {
+     "tieu_de": "Làm sao biết mình là nhật chủ Quý?",
+     "doan": "Người sinh ngày Quý Sửu, Quý Mão, Quý Tỵ, Quý Mùi, Quý Dậu hoặc Quý Hợi là nhật chủ Quý. Quý là can cuối của mười can, can âm của Thuỷ. Khi lá số cho thấy can ngày Quý, các chữ khác được gọi tên theo Quý: gặp Mậu là Chính Quan, gặp Canh là Chính Ấn, gặp Bính là Chính Tài."
+    },
+    {
+     "tieu_de": "Nhật chủ Quý hợp nghề gì?",
+     "doan": "Quý thường hợp việc cần quan sát sâu và làm thấm dần: nghiên cứu, phân tích dữ liệu, tâm lý học, viết, nghệ thuật, công việc hậu trường. Mưa nhỏ thấm lâu, nên Quý làm tốt việc dài hơi và tinh. Nơi đòi tranh luận lớn tiếng liên tục thường làm Quý thu lại."
+    },
+    {
+     "tieu_de": "Nhật chủ Quý trong tình cảm",
+     "doan": "Quý trong tình cảm thường nhạy, cảm được điều người kia chưa nói, quan tâm kín đáo. Mặt khó là hay nghĩ một mình rồi rút lui. Quý hợp Mậu theo ngũ hợp; với nữ Quý, Mậu là Chính Quan. Một việc trong tuần: nhắn cho người thân điều mình đã cảm thấy mà chưa nói."
+    },
+    {
+     "tieu_de": "Nhật chủ Quý gặp hành nào thì thuận?",
+     "doan": "Quý yếu thường thuận khi có Kim (Canh, Tân) sinh và Thuỷ đỡ; Quý mạnh, nhất là sinh mùa đông, thì thuận với Hoả ấm, Mộc tiết, Thổ vừa đủ. Trích Thiên Tuỷ nói Quý không lo Hoả Thổ, không bàn Canh Tân, ý là Quý tuy yếu nhưng linh hoạt. Lối cân sức và lối tháng sinh vẫn nên đọc cạnh nhau."
+    },
+    {
+     "tieu_de": "Ngày Quý Sửu, Quý Mão… khác nhau thế nào?",
+     "danh_sach": [
+      "Giọt mưa Quý rơi xuống chi ngày nào thì thấm theo đất đó; lối Tử Bình xem chi ngày là cung phối ngẫu, đọc cả khí chính lẫn can ẩn.",
+      "Quý Sửu: chi ngày giữ Kỷ làm khí chính, là Thất Sát của Quý — quan hệ gần nhiều sức ép, cần nói rõ ranh giới; trong Sửu còn Quý (Tỷ Kiên) và Tân (Thiên Ấn), thêm nét tự lập.",
+      "Quý Mão: chi ngày giữ Ất làm khí chính, là Thực Thần của Quý — nhà là chỗ thư giãn, thích cùng hưởng thụ; Mão chỉ tàng một can nên khí rất thuần.",
+      "Quý Tỵ: chi ngày giữ Bính làm khí chính, là Chính Tài của Quý — coi trọng sự chu toàn, vun vén trong nhà; trong Tỵ còn Canh (Chính Ấn) và Mậu (Chính Quan), thêm sự che chở.",
+      "Quý Mùi: chi ngày giữ Kỷ làm khí chính, là Thất Sát của Quý — quan hệ gần nhiều sức ép, cần nói rõ ranh giới; trong Mùi còn Đinh (Thiên Tài) và Ất (Thực Thần), thêm nét xoay xở, giao thiệp.",
+      "Quý Dậu: chi ngày giữ Tân làm khí chính, là Thiên Ấn của Quý — cần khoảng riêng ngay trong quan hệ gần; Dậu chỉ tàng một can nên khí rất thuần.",
+      "Quý Hợi: chi ngày giữ Nhâm làm khí chính, là Kiếp Tài của Quý — người gần dễ cùng chia việc, chia phần; trong Hợi còn Giáp (Thương Quan), thêm nét thẳng tính, hay góp ý."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhật chủ Quý sinh tháng nào thì được lệnh?",
+    "chu_thich": "Quý được lệnh ở tháng Thuỷ và tháng Kim. Tháng Tỵ, Ngọ Hoả mạnh: khí chính là Chính Tài, Thiên Tài của Quý — mưa nhỏ dễ khô.",
+    "cot": [
+     "Tháng sinh (theo tiết)",
+     "Hành của tháng",
+     "Khí chính của tháng với Quý",
+     "Được lệnh?"
+    ],
+    "dong": [
+     [
+      "Dần · tháng Giêng (từ Lập xuân)",
+      "Mộc",
+      "Giáp — Thương Quan",
+      "Không"
+     ],
+     [
+      "Mão · tháng Hai (từ Kinh trập)",
+      "Mộc",
+      "Ất — Thực Thần",
+      "Không"
+     ],
+     [
+      "Thìn · tháng Ba (từ Thanh minh)",
+      "Thổ",
+      "Mậu — Chính Quan",
+      "Không"
+     ],
+     [
+      "Tỵ · tháng Tư (từ Lập hạ)",
+      "Hoả",
+      "Bính — Chính Tài",
+      "Không"
+     ],
+     [
+      "Ngọ · tháng Năm (từ Mang chủng)",
+      "Hoả",
+      "Đinh — Thiên Tài",
+      "Không"
+     ],
+     [
+      "Mùi · tháng Sáu (từ Tiểu thử)",
+      "Thổ",
+      "Kỷ — Thất Sát",
+      "Không"
+     ],
+     [
+      "Thân · tháng Bảy (từ Lập thu)",
+      "Kim",
+      "Canh — Chính Ấn",
+      "Có — Kim sinh Thuỷ"
+     ],
+     [
+      "Dậu · tháng Tám (từ Bạch lộ)",
+      "Kim",
+      "Tân — Thiên Ấn",
+      "Có — Kim sinh Thuỷ"
+     ],
+     [
+      "Tuất · tháng Chín (từ Hàn lộ)",
+      "Thổ",
+      "Mậu — Chính Quan",
+      "Không"
+     ],
+     [
+      "Hợi · tháng Mười (từ Lập đông)",
+      "Thuỷ",
+      "Nhâm — Kiếp Tài",
+      "Có — cùng hành"
+     ],
+     [
+      "Tý · tháng Mười một (từ Đại tuyết)",
+      "Thuỷ",
+      "Quý — Tỷ Kiên",
+      "Có — cùng hành"
+     ],
+     [
+      "Sửu · tháng Chạp (từ Tiểu hàn)",
+      "Thổ",
+      "Kỷ — Thất Sát",
+      "Không"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhật chủ Quý sinh tháng Thân thì sao?",
+     "dap": "Tháng Thân Kim vượng sinh Thuỷ, Quý được lệnh qua Chính Ấn Canh; Thân còn giấu Nhâm (Kiếp Tài) và Mậu (Chính Quan). Lá này thường có nguồn học hỏi tốt; cần xem Tài, Thực có đủ để đưa sức ra ngoài."
+    },
+    {
+     "hoi": "Vì sao Quý được gọi là thuỷ yếu nhất?",
+     "dap": "Câu mở đầu phần Quý trong Trích Thiên Tuỷ nói Quý là thuỷ yếu nhất, như sương móc. Nhưng sách cũng nói Quý đi tới tận bến trời, ý là sức thấm của Quý rất xa."
+    },
+    {
+     "hoi": "Nhật chủ Quý hợp với nhật chủ nào?",
+     "dap": "Theo ngũ hợp, Quý hợp Mậu: mưa và núi. Trích Thiên Tuỷ còn nói hợp Mậu mà thấy Hoả thì hoá thật. Hợp ngoài đời vẫn tuỳ cách hai người lắng nghe nhau."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Thông thần luận — Thiên can",
+     "nguyen_van": "癸水至弱，達於天津。得龍而運，功化斯神。",
+     "phien_am": "Quý thuỷ chí nhược, đạt ư thiên tân. Đắc long nhi vận, công hoá tư thần.",
+     "nghia": "Quý Thuỷ yếu nhất mà đi tới tận bến trời; gặp Rồng (Thìn) thì chuyển vận, công hoá thật thần diệu."
+    },
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận thập can phối hợp tính tình",
+     "nghia": "Sách nhắc các can hợp nhau làm tính tình đổi sắc; Quý hợp Mậu là ví dụ: Thuỷ mềm gặp Thổ cứng, người kín đáo có thêm điểm tựa."
+    }
+   ],
+   "y_chinh": [
+    "Quý: mưa, sương — thấm sâu, nhạy, kín đáo",
+    "Hợp việc quan sát sâu, làm dài hơi",
+    "Quý yếu cần Kim sinh; Quý mạnh cần Hoả ấm",
+    "Ngũ hợp: Quý – Mậu"
+   ]
+  }
+ }
+}

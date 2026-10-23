@@ -31,7 +31,7 @@ jobs:
           {
             echo "## Kiểm tra SEO — $URL_SITE"
             echo '```'
-            grep -E "^Sitemap:|^TTFB|^Chậm nhất|^  [0-9]+ ms|^LỖI|^CẢNH BÁO" ket-qua.txt
+            grep -E "^Sitemap:|^TTFB|^Nội dung|^Chậm nhất|^  [0-9]+ ms|^LỖI|^CẢNH BÁO" ket-qua.txt
             echo '```'
             echo "<details><summary>Toàn bộ kết quả</summary>"
             echo

@@ -173,9 +173,21 @@ def ngay_xem(d: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = N
         viec_kq = {"ma_viec": viec, "ten": v["ten"], "danh_gia": _danh_gia_viec(c, v), "ly_do": _ly_do(c, v),
                    "ngay_tot_gan": ngay_tot_gan(d, viec, t, 60)}
     xc = c["xung"]
+    thu = ["Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy", "Chủ nhật"][d.weekday()]
+    am_chu = f"{c['am']['ngay']}/{c['am']['thang']}{' nhuận' if c['am']['nhuan'] else ''}"
+    # SEO-M: trả lời trước — chỉ ghép trường đã tính ở trên.
+    nghi3 = [KB["nghi_ky"][x]["ten"].lower() for x in c["nghi"] if x in KB["nghi_ky"]][:3]
+    ky_dg = [KB["ky_dan_gian"][k]["ten"] for k in c["ky_dan_gian"]]
+    gio_hd = [_CHI[g["chi"]] for g in c["gio"] if g["hoang_dao"]]
+    tra_loi = (f"{thu}, {d.day}/{d.month}/{d.year} (âm lịch {am_chu}, ngày {_gz(c['ngay_gz'])}) là ngày "
+               f"{'hoàng đạo' if c['hoang_dao'] else 'hắc đạo'} ({KB['than'][c['than']]['ten']}), trực {truc['ten']} — "
+               f"hợp {truc['hop']}." + (f" Sách lịch ghi nên: {', '.join(nghi3)}." if nghi3 else "")
+               + (f" Dân gian thường tránh việc lớn vì là ngày {', '.join(ky_dg)}." if ky_dg else "")
+               + f" Xung tuổi {_CAN[xc['can']]} {_CHI[xc['chi']]}. Giờ hoàng đạo: {', '.join(gio_hd)}.")
     return {
-        "ngay": d.isoformat(), "thu": ["Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy", "Chủ nhật"][d.weekday()],
-        "am": {**c["am"], "chu": f"{c['am']['ngay']}/{c['am']['thang']}{' nhuận' if c['am']['nhuan'] else ''}"},
+        "tra_loi_nhanh": tra_loi,
+        "ngay": d.isoformat(), "thu": thu,
+        "am": {**c["am"], "chu": am_chu},
         "can_chi": {"nam": _gz(c["nam_gz"]), "thang": _gz(c["thang_gz"]), "ngay": _gz(c["ngay_gz"])},
         "hoang_dao": c["hoang_dao"],
         "than": {"han": c["than"], **KB["than"][c["than"]]},
@@ -201,13 +213,55 @@ def ngay_xem(d: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = N
     }
 
 
+def _thang_am(nam: int, thang_: int, den: dt.date) -> str:
+    l0 = lunar.solar_to_lunar(1, thang_, nam, CALENDAR_MERIDIAN_TZ)
+    l1 = lunar.solar_to_lunar(den.day, thang_, nam, CALENDAR_MERIDIAN_TZ)
+    return f"từ {l0[0]}/{l0[1]}{' nhuận' if l0[3] else ''} đến {l1[0]}/{l1[1]}{' nhuận' if l1[3] else ''} âm lịch"
+
+
+def _dmy(iso: str) -> str:
+    return "/".join(reversed(iso.split("-")))
+
+
 def thang(nam: int, thang_: int) -> dict:
     d = dt.date(nam, thang_, 1)
     ra = []
     while d.month == thang_:
         ra.append(tom_tat(d))
         d += dt.timedelta(days=1)
-    return {"nam": nam, "thang": thang_, "ngay": ra}
+    den = d - dt.timedelta(days=1)
+    # SEO-M: tóm tắt tháng + ngày tốt theo 6 việc (đúng chon_ngay như trang việc) + hỏi đáp — chỉ ghép số đã tính.
+    dep = [n for n in ra if n["dep"]]
+    ky: dict[str, list[str]] = {}
+    for n in ra:
+        for k in n["ky_dan_gian"]:
+            ky.setdefault(k, []).append(n["ngay"])
+    theo_viec = []
+    for v in VIEC_SEO:
+        ds = chon_ngay(v["ma"], dt.date(nam, thang_, 1), den)["ngay"]
+        theo_viec.append({"viec": {"ma": v["ma"], "ten": v["ten"]}, "slug": v["slug"], "so_ngay": len(ds),
+                          "dep_nhat": next((x for x in ds if not x["ky_dan_gian"]), None)})
+    thang_am = _thang_am(nam, thang_, den)
+    tra_loi = (f"Tháng {thang_}/{nam} ({thang_am}) có {sum(n['hoang_dao'] for n in ra)} ngày hoàng đạo, trong đó "
+               f"{len(dep)} ngày hoàng đạo có trực tốt và không vướng kiêng dân gian"
+               + (f": {', '.join(_dmy(n['ngay']) for n in dep[:8])}{'…' if len(dep) > 8 else ''}." if dep else ".")
+               + (" Ngày dân gian thường tránh việc lớn: " + "; ".join(
+                   f"{k} {', '.join(str(int(x[8:])) for x in v)}" for k, v in ky.items()) + "." if ky else ""))
+    hd = [
+        {"hoi": f"Tháng {thang_} năm {nam} có những ngày nào đẹp?", "dap": tra_loi},
+        {"hoi": f"Tháng {thang_}/{nam} ứng với tháng mấy âm lịch?",
+         "dap": f"Tháng {thang_}/{nam} dương lịch kéo dài {thang_am}."},
+        {"hoi": f"Tháng {thang_}/{nam} nên chọn ngày nào cho việc lớn?",
+         "dap": " ".join(f"{v['viec']['ten']}: {v['so_ngay']} ngày" + (f", đẹp nhất {_dmy(v['dep_nhat']['ngay'])}."
+                                                                      if v["dep_nhat"] else ".") for v in theo_viec)},
+        {"hoi": "Ngày đẹp trong bảng này đã xét tuổi chưa?",
+         "dap": "Chưa. Bảng chọn theo hoàng đạo, trực và kiêng dân gian chung cho mọi người. Mở một ngày hoặc nhập năm "
+                "sinh ở công cụ Xem ngày tốt để bỏ các ngày xung tuổi bạn."},
+    ]
+    return {"nam": nam, "thang": thang_, "ngay": ra, "thang_am": thang_am, "tra_loi_nhanh": tra_loi,
+            "tom_tat": {"so_hoang_dao": sum(n["hoang_dao"] for n in ra), "so_dep": len(dep),
+                        "ky_dan_gian": [{"ten": k, "ngay": v} for k, v in ky.items()]},
+            "theo_viec": theo_viec, "hoi_dap": hd}
 
 
 def chon_ngay(viec: str, tu: dt.date, den: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = None,
@@ -252,8 +306,7 @@ def viec_thang(viec: str, nam: int, thang_: int) -> dict:
     ds = sorted(kq["ngay"], key=lambda x: x["ngay"])
     dmy = lambda iso: "/".join(reversed(iso.split("-")))  # noqa: E731
     am = lambda x: f"{dmy(x['ngay'])} (âm {x['am']}, {x['can_chi']})"  # noqa: E731
-    l0, l1 = lunar.solar_to_lunar(1, thang_, nam, CALENDAR_MERIDIAN_TZ), lunar.solar_to_lunar(den.day, thang_, nam, CALENDAR_MERIDIAN_TZ)
-    thang_am = f"từ {l0[0]}/{l0[1]}{' nhuận' if l0[3] else ''} đến {l1[0]}/{l1[1]}{' nhuận' if l1[3] else ''} âm lịch"
+    thang_am = _thang_am(nam, thang_, den)
     # "Đẹp nhất" = ngày đầu bảng xếp hạng KHÔNG vướng kiêng dân gian (Tam nương, Nguyệt kỵ…); cả tháng đều vướng thì không nêu.
     dep = next((x for x in kq["ngay"] if not x.get("ky_dan_gian")), None)
     tra_loi = (f"Tháng {thang_}/{nam} ({thang_am}) có {len(ds)} ngày tốt cho {ten} theo hoàng lịch: "

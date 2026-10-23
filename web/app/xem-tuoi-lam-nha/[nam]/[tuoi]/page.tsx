@@ -10,6 +10,7 @@ import { CungTuoi } from "@/components/tuoi/CungTuoi";
 import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNam, docTuoi, duongLamNha, duongLamNhaNam, lamNhaCongKhai, lamNhaIndex, namAmHienTai, NAM_BANG_TU } from "@/lib/tuoi-dan-gian";
 import { KhoiCms } from "@/components/cms/KhoiCms";
+import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_LAM_NHA_CON } from "@/lib/chu/trang-con";
@@ -46,11 +47,12 @@ export default async function Page(p: P) {
       <JsonLd data={goiLd(
         ldTrangWeb({ duong: duongLamNha(x.n, x.ns), ten: tieuDe, tomTat: d.ket_luan.chu, about: ["Kim lâu", "Hoang ốc", "Tam tai", `Tuổi ${d.can_chi}`] }),
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Xem tuổi làm nhà", duong: "/xem-tuoi-lam-nha" }, ...(x.n >= NAM_BANG_TU ? [{ ten: `Năm ${x.n}`, duong: duongLamNhaNam(x.n) }] : []), { ten: tieuDe, duong: duongLamNha(x.n, x.ns) }]),
-        ldHoiDap([{ hoi: tieuDe, dap: d.ket_luan.chu }, { hoi: `Tuổi ${x.ns} cưới năm ${x.n} có phạm Kim lâu không?`, dap: d.cuoi_hoi }]),
+        ldHoiDap([{ hoi: tieuDe, dap: d.tra_loi_nhanh ?? d.ket_luan.chu }, { hoi: `Tuổi ${x.ns} cưới năm ${x.n} có phạm Kim lâu không?`, dap: d.cuoi_hoi }]),
       )} />
       <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/xem-tuoi-lam-nha" className="hover:underline">Xem tuổi làm nhà</Link>{x.n >= NAM_BANG_TU && <> › <Link href={duongLamNhaNam(x.n)} className="hover:underline">Năm {x.n}</Link></>}</nav>
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
+      <div className="mb-6"><TraLoiNhanh chu={d.tra_loi_nhanh} /></div>
       <KetQuaLamNha d={d} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-6 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/xem-tuoi-lam-nha" className="text-gold underline">{c("cuoi.link", bien)}</Link> ·{" "}

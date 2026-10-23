@@ -15,7 +15,7 @@ import { GiamSat } from "@/components/khung/GiamSat";
 import { GtmNoScript } from "@/components/khung/GoogleTagManager";
 import { DoLuongGoogle } from "@/components/khung/DoLuongGoogle";
 import { HoiDongYCookie } from "@/components/khung/HoiDongYCookie";
-import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE, TU_KHOA_SITE } from "@/lib/seo";
+import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE } from "@/lib/seo";
 import { ThongBaoSite } from "@/components/khung/ThongBaoSite";
 import "./globals.css";
 import { DaiXemNhap } from "@/components/cms/DaiXemNhap";
@@ -54,7 +54,6 @@ export const metadata: Metadata = {
   title: { default: "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân", template: "%s · Hiểu Bản Thân" },
   description: MO_TA_SITE,
   applicationName: TEN_SITE,
-  keywords: TU_KHOA_SITE,
   category: "lifestyle",
   // KHÔNG đặt canonical ở layout (con kế thừa sẽ trỏ hết về "/"); mỗi trang tự khai canonical.
   alternates: { types: { "text/plain": [{ url: "/llms.txt", title: "llms.txt" }] } },

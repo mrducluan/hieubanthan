@@ -1,0 +1,1022 @@
+{
+ "source_id": "bo_sung_so_v1",
+ "school_id": "pitago",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Ý nghĩa số trong thần số học Pythagoras — Ban biên tập Hiểu Bản Thân bổ sung",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + cổ thư công cộng (nháp AI, chờ thẩm định)"
+ },
+ "trang": {
+  "so-1": {
+   "muc": [
+    {
+     "tieu_de": "Đường đời số 1 có phổ biến không?",
+     "doan": "Khá phổ biến: khoảng 11,1% số ngày sinh từ 1940 đến 2010 ra Đường đời 1, tức gần một trong chín ngày. Với số 1, cách rút gọn con số và cách cộng hết chữ số luôn cho cùng kết quả, nên không có chuyện trang này ra 1 còn trang khác ra số khác. Đây là đếm trên lịch, không phải thống kê dân số."
+    },
+    {
+     "tieu_de": "Số 1 hợp với số nào?",
+     "doan": "Nhiều sách thần số phổ biến xếp số 1 chung nhóm với 5 và 7, nhóm thích tự quyết và cần khoảng riêng. Người số 1 thường dễ nhịp với ai tôn trọng việc mình tự làm chủ. Với 2 hay 6, số 1 hay được nhắc là cần chậm lại để nghe; với một số 1 khác, dễ thành hai người cùng muốn cầm lái. Hiểu Bản Thân không chấm điểm hợp hay không hợp; trang Hợp đôi chỉ ra chỗ dễ hoà và chỗ dễ va của từng cặp."
+    },
+    {
+     "tieu_de": "Số 1 làm nghề gì?",
+     "danh_sach": [
+      "Việc được tự đặt mục tiêu: mở cửa hàng nhỏ, làm tự do, phụ trách một dự án từ con số không.",
+      "Vai mở đường trong tổ chức: phát triển thị trường mới, dựng nhóm mới, thử sản phẩm đầu tiên.",
+      "Việc cần quyết nhanh dưới áp lực thời gian: điều phối sự kiện, xử lý khủng hoảng truyền thông.",
+      "Ít hợp: vị trí chỉ làm theo lệnh, không có phần nào để tự quyết."
+     ]
+    },
+    {
+     "tieu_de": "Người số 1 khi gặp áp lực",
+     "doan": "Khi bị dồn, người số 1 thường cứng giọng và tự gánh hết thay vì chia việc. Họ hay coi việc xin giúp là thua. Dấu hiệu nên dừng là khi bắt đầu ra lệnh cả với người nhà. Một việc làm được trong tuần này: trước mỗi quyết định lớn, hỏi một người khác đúng một câu “bạn thấy chỗ nào mình bỏ sót?”."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ ngày sinh ra Đường đời 1 theo hai cách tính",
+    "chu_thich": "Ba ngày sinh đã tính bằng máy; với số 1 hai cách cộng luôn trùng kết quả.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "08/09/1982",
+      "ngày 8, tháng 9, năm 1982 → 20 → 2; 8 + 9 + 2 = 19 → 10 → 1",
+      "8+9+1+9+8+2 = 37 → 10 → 1"
+     ],
+     [
+      "03/04/1965",
+      "ngày 3, tháng 4, năm 1965 → 21 → 3; 3 + 4 + 3 = 10 → 1",
+      "3+4+1+9+6+5 = 28 → 10 → 1"
+     ],
+     [
+      "27/10/1989",
+      "ngày 27 → 9, tháng 10 → 1, năm 1989 → 27 → 9; 9 + 1 + 9 = 19 → 10 → 1",
+      "2+7+1+0+1+9+8+9 = 37 → 10 → 1"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 1 và số 19 khác nhau thế nào?",
+     "dap": "19 là một trong các tổng rút về 1 và được đọc thêm bài học nợ nghiệp về tự lập và nhờ giúp; số 1 thì không mang bài học đó."
+    },
+    {
+     "hoi": "Người số 1 có hợp làm sếp không?",
+     "dap": "Thường được mô tả là hợp vai dẫn dắt, với điều kiện học giao việc và nghe người dưới quyền góp ý."
+    },
+    {
+     "hoi": "Người số 1 có khó làm việc nhóm không?",
+     "dap": "Thường được mô tả là thích tự quyết; làm nhóm tốt khi được giao hẳn một phần việc và tự chịu trách nhiệm phần đó."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số 1",
+     "nghia": "Số 1 là số mở đầu dãy, gắn với ý chí, sự tự lập và vai trò đi trước."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số 1",
+     "nghia": "Trong hệ Chaldea, Cheiro gắn số 1 với Mặt Trời, tả người số 1 là người khởi xướng, có chủ kiến."
+    }
+   ],
+   "y_chinh": [
+    "Gần một trong chín ngày sinh ra Đường đời 1",
+    "Hai cách cộng luôn cùng kết quả với số 1",
+    "Nhóm thường xếp chung: 1, 5, 7",
+    "Áp lực: tự gánh hết, coi xin giúp là thua"
+   ]
+  },
+  "so-2": {
+   "muc": [
+    {
+     "tieu_de": "Vì sao Đường đời số 2 hiếm hơn các số khác?",
+     "doan": "Vì nhiều tổng ra 2 bị giữ lại thành 11: chỉ khoảng 4,6% số ngày 1940–2010 ra 2 theo cách rút gọn con số, và chỉ 1,6% theo cách cộng hết chữ số. Phần còn lại dừng ở số cái 11. Cùng một ngày sinh có thể ra 2 ở cách này và 11 ở cách kia, như bảng ví dụ bên dưới."
+    },
+    {
+     "tieu_de": "Số 2 hợp với số nào?",
+     "doan": "Sách phổ biến hay xếp 2 cùng nhóm với 4 và 8, nhóm coi trọng sự ổn định và việc thật. Người số 2 thường dễ chịu với ai giữ lời và nói năng nhẹ. Với số 5, số 2 dễ thấy chênh nhịp vì một bên cần yên, một bên cần đi. Với số 1, số 2 dễ nhường quá mức. Không có cặp nào bị coi là hỏng; điều cần là biết chỗ nào phải nói rõ."
+    },
+    {
+     "tieu_de": "Người số 2 hợp công việc nào?",
+     "danh_sach": [
+      "Việc cần lắng nghe và giữ quan hệ lâu: chăm sóc khách hàng, nhân sự, tư vấn học đường.",
+      "Vai phối hợp giữa nhiều bên: trợ lý dự án, điều phối sản xuất, thư ký toà soạn.",
+      "Việc tỉ mỉ, cần để ý chi tiết người khác bỏ qua: hiệu đính, kiểm thử, kế toán nội bộ.",
+      "Ít hợp: môi trường cạnh tranh gắt, ai to tiếng hơn thì thắng."
+     ]
+    },
+    {
+     "tieu_de": "Người số 2 khi gặp áp lực",
+     "doan": "Dưới áp lực, người số 2 thường im lặng chịu đựng, gật đầu cho êm, rồi mang bực bội về nhà. Họ hay nghĩ ngợi quá lâu về một câu nói của người khác. Dấu hiệu cần để ý là khi bắt đầu xin lỗi cả cho việc không phải lỗi mình. Gợi ý tuần này: viết ra một điều mình không đồng ý, rồi nói nó trong một cuộc họp hoặc một bữa cơm."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ ngày sinh có Đường đời 2 (và khi nào thành 11)",
+    "chu_thich": "Hai dòng đầu ra 2 với cả hai cách; hai dòng sau cho thấy cùng ngày sinh có thể ra 2 hoặc 11 tuỳ cách cộng.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "31/05/2009",
+      "ngày 31 → 4, tháng 5, năm 2009 → 11; 4 + 5 + 11 = 20 → 2",
+      "3+1+5+2+0+0+9 = 20 → 2"
+     ],
+     [
+      "10/11/1952",
+      "ngày 10 → 1, tháng 11, năm 1952 → 17 → 8; 1 + 11 + 8 = 20 → 2",
+      "1+0+1+1+1+9+5+2 = 20 → 2"
+     ],
+     [
+      "13/11/1985",
+      "ngày 13 → 4, tháng 11, năm 1985 → 23 → 5; 4 + 11 + 5 = 20 → 2",
+      "1+3+1+1+1+9+8+5 = 29 → 11"
+     ],
+     [
+      "31/10/1950",
+      "ngày 31 → 4, tháng 10 → 1, năm 1950 → 15 → 6; 4 + 1 + 6 = 11",
+      "3+1+1+0+1+9+5+0 = 20 → 2"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Ra 2 ở cách này, 11 ở cách kia thì đọc số nào?",
+     "dap": "Hiểu Bản Thân dùng cách rút gọn con số làm mặc định và luôn báo khi hai cách lệch; có thể đọc cả hai, vì 11 vẫn mang nền của 2."
+    },
+    {
+     "hoi": "Số 2 có phải số yếu đuối không?",
+     "dap": "Không. Sự mềm mỏng của số 2 thường là sức mạnh trong việc giữ người và giữ nhóm; điều cần tập là nói ra ý mình."
+    },
+    {
+     "hoi": "Số 2 trong tình yêu thế nào?",
+     "dap": "Thường được mô tả là chung thuỷ, chu đáo, nhạy với tâm trạng người kia, nhưng dễ ngại nêu nhu cầu riêng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số 2",
+     "nghia": "Số 2 là số của cặp đôi: hợp tác, cân bằng, nhạy cảm với người khác."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số 2",
+     "nghia": "Cheiro gắn số 2 với Mặt Trăng, tả người số 2 giàu tưởng tượng, mềm mỏng, thiên về cảm xúc."
+    }
+   ],
+   "y_chinh": [
+    "Đường đời 2 hiếm vì nhiều tổng dừng ở 11",
+    "Cùng ngày sinh có thể ra 2 hoặc 11 tuỳ cách cộng",
+    "Nhóm thường xếp chung: 2, 4, 8",
+    "Áp lực: gật cho êm rồi mang bực về nhà"
+   ]
+  },
+  "so-3": {
+   "muc": [
+    {
+     "tieu_de": "Có bao nhiêu người mang Đường đời số 3?",
+     "doan": "Trên lịch 1940–2010, khoảng 11,1% số ngày sinh ra Đường đời 3, xấp xỉ một phần chín. Số 3 không dính số cái nào nên hai cách cộng luôn cho cùng con số. Tỉ lệ này đếm theo ngày trên lịch, không nói gì về số người thật đang sống."
+    },
+    {
+     "tieu_de": "Số 3 hợp với số nào?",
+     "doan": "Theo cách chia nhóm phổ biến, số 3 đứng cùng 6 và 9, nhóm thiên về cảm xúc và sáng tạo. Người số 3 thường vui khi ở cạnh người biết cười và chịu nghe kể chuyện. Với số 4 hay 8, số 3 dễ bị thấy là thiếu nghiêm túc, còn mình lại thấy họ khô. Hai bên thường hợp nhau hơn khi số 3 giữ lời hẹn và bên kia chừa chỗ cho niềm vui."
+    },
+    {
+     "tieu_de": "Số 3 làm nghề gì?",
+     "danh_sach": [
+      "Nghề dùng lời: viết nội dung, dẫn chương trình, giảng dạy, bán hàng tư vấn.",
+      "Nghề dùng hình và âm: thiết kế, nhiếp ảnh, dựng video, âm nhạc.",
+      "Vai làm cầu nối với công chúng: truyền thông, tổ chức sự kiện, chăm sóc cộng đồng.",
+      "Ít hợp: việc một mình với số liệu khô suốt ngày, không ai để trao đổi."
+     ]
+    },
+    {
+     "tieu_de": "Người số 3 khi gặp áp lực",
+     "doan": "Khi căng, người số 3 thường đùa nhiều hơn để che, hoặc nói chuyện liên tục mà không chạm vào điều đang lo. Một số người lại im hẳn, điều rất lạ với tính họ, và đó là dấu hiệu cần để ý. Thử trong tuần này: viết tay mười phút về điều đang làm mình khó chịu, không cần hay, không cho ai đọc."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cách tính Đường đời 3 qua ba ngày sinh mẫu",
+    "chu_thich": "Cột giữa rút gọn ngày, tháng, năm trước rồi cộng; cột phải cộng mọi chữ số một lần; cả hai cùng ra 3.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "21/09/1953",
+      "ngày 21 → 3, tháng 9, năm 1953 → 18 → 9; 3 + 9 + 9 = 21 → 3",
+      "2+1+9+1+9+5+3 = 30 → 3"
+     ],
+     [
+      "26/08/1958",
+      "ngày 26 → 8, tháng 8, năm 1958 → 23 → 5; 8 + 8 + 5 = 21 → 3",
+      "2+6+8+1+9+5+8 = 39 → 12 → 3"
+     ],
+     [
+      "26/09/1993",
+      "ngày 26 → 8, tháng 9, năm 1993 → 22; 8 + 9 + 22 = 39 → 12 → 3",
+      "2+6+9+1+9+9+3 = 39 → 12 → 3"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 3 có hay hứa mà không làm không?",
+     "dap": "Đó là mặt tối thường được nhắc của số 3. Cách gỡ là hứa ít hơn, ghi lại lời hứa và chốt hạn cụ thể."
+    },
+    {
+     "hoi": "Số 3 với số 12, 21, 30 có giống nhau không?",
+     "dap": "Đều rút về 3 nên chung nét chính; truyền thống Pythagoras không đọc riêng các tổng này như số 13 hay 19."
+    },
+    {
+     "hoi": "Người số 3 nên học gì thêm?",
+     "dap": "Một kỹ năng giúp đi tới cùng: quản lý thời gian, lập kế hoạch dự án, hay kỷ luật luyện tập đều."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số 3",
+     "nghia": "Số 3 là số của biểu đạt: lời nói, chữ viết, nghệ thuật và niềm vui gặp gỡ."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số 3",
+     "nghia": "Cheiro gắn số 3 với Sao Mộc, tả người số 3 có chí hướng, thích mở rộng và vươn lên trong nghề."
+    }
+   ],
+   "y_chinh": [
+    "Khoảng một phần chín ngày sinh ra Đường đời 3",
+    "Nhóm thường xếp chung: 3, 6, 9",
+    "Nghề dùng lời, hình, âm và công chúng",
+    "Áp lực: đùa để che, hoặc im hẳn"
+   ]
+  },
+  "so-4": {
+   "muc": [
+    {
+     "tieu_de": "Đường đời số 4 và số 22: vì sao hai cách tính ra khác?",
+     "doan": "Vì 22 là số cái rút về 4, nên có ngày sinh một cách giữ 22, cách kia ra 4. Theo đếm trên lịch 1940–2010, cách rút gọn con số cho Đường đời 4 ở khoảng 8,1% số ngày, cách cộng hết chữ số ở khoảng 8,8%. Người đọc thấy hai con số khác nhau thì có thể đọc cả 4 lẫn 22, vì 22 vẫn đứng trên nền 4."
+    },
+    {
+     "tieu_de": "Số 4 hợp với số nào?",
+     "doan": "Nhóm thường được ghép với số 4 là 2 và 8, những số coi trọng sự vững vàng của kế hoạch và tiền bạc. Người số 4 hay dễ chịu với ai đúng giờ và làm đúng phần mình. Với số 5 hoặc 3, số 4 dễ thấy chênh vì họ đổi ý nhanh. Nếu mỗi bên chịu học của bên kia một chút, số 4 có thêm linh hoạt, bên kia có thêm nền."
+    },
+    {
+     "tieu_de": "Người số 4 hợp nghề gì?",
+     "danh_sach": [
+      "Nghề cần quy trình và độ chính xác: kế toán, kiểm toán nội bộ, kỹ sư xây dựng, kỹ thuật viên.",
+      "Vai giữ hệ thống chạy đều: vận hành, quản lý kho, quản trị dữ liệu.",
+      "Nghề làm bằng tay có tay nghề cao: mộc, cơ khí, nấu ăn chuyên nghiệp.",
+      "Ít hợp: việc đổi hướng liên tục, không ai nói rõ kết quả cần có là gì."
+     ]
+    },
+    {
+     "tieu_de": "Người số 4 khi gặp áp lực",
+     "doan": "Khi việc rối, người số 4 thường siết luật chặt hơn, làm thêm giờ, và khó chịu với bất kỳ ai làm khác cách mình. Họ ít khi kêu, nên người xung quanh dễ không biết họ đang quá tải. Thử trong tuần này: chọn một việc đang làm theo thói quen và hỏi “nếu bỏ bước này thì sao?”, rồi thử bỏ trong một ngày."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ Đường đời 4, và lúc nó thành 22",
+    "chu_thich": "Hai dòng đầu ra 4 với cả hai cách; hai dòng sau một cách ra 4, cách kia giữ số cái 22.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "22/03/1986",
+      "ngày 22, tháng 3, năm 1986 → 24 → 6; 22 + 3 + 6 = 31 → 4",
+      "2+2+3+1+9+8+6 = 31 → 4"
+     ],
+     [
+      "31/07/1973",
+      "ngày 31 → 4, tháng 7, năm 1973 → 20 → 2; 4 + 7 + 2 = 13 → 4",
+      "3+1+7+1+9+7+3 = 31 → 4"
+     ],
+     [
+      "30/12/1951",
+      "ngày 30 → 3, tháng 12 → 3, năm 1951 → 16 → 7; 3 + 3 + 7 = 13 → 4",
+      "3+0+1+2+1+9+5+1 = 22"
+     ],
+     [
+      "18/11/1955",
+      "ngày 18 → 9, tháng 11, năm 1955 → 20 → 2; 9 + 11 + 2 = 22",
+      "1+8+1+1+1+9+5+5 = 31 → 4"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 4 có phải số vất vả không?",
+     "dap": "Truyền thống mô tả số 4 gắn với làm việc bền bỉ, nhưng vất vả hay không còn tuỳ cách mỗi người chia sức."
+    },
+    {
+     "hoi": "Số 4 và số 13 liên quan thế nào?",
+     "dap": "13 là một tổng rút về 4 và được đọc là nợ nghiệp, nhấn bài học kỷ luật; số 4 thường không mang nhãn đó."
+    },
+    {
+     "hoi": "Người số 4 có lãng mạn không?",
+     "dap": "Thường thể hiện tình cảm bằng việc làm: sửa đồ, lo giấy tờ, đưa đón đúng giờ, hơn là lời nói ngọt."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số 4",
+     "nghia": "Số 4 là hình vuông của bốn góc: nền móng, trật tự, làm việc có hệ thống."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số 4",
+     "nghia": "Cheiro gắn số 4 với Sao Thiên Vương, tả người số 4 hay nhìn việc theo cách riêng, dễ đi ngược số đông."
+    }
+   ],
+   "y_chinh": [
+    "Một ngày sinh có thể ra 4 hoặc 22 tuỳ cách cộng",
+    "Nhóm thường xếp chung: 2, 4, 8",
+    "Nghề cần quy trình, độ chính xác, tay nghề",
+    "Áp lực: siết luật, làm thêm, ít kêu"
+   ]
+  },
+  "so-5": {
+   "muc": [
+    {
+     "tieu_de": "Đường đời số 5 chiếm bao nhiêu phần ngày sinh?",
+     "doan": "Khoảng 11,1% số ngày từ 1940 đến 2010, gần bằng các số lẻ 1, 3, 7, 9. Số 5 không bị số cái chen vào, nên rút gọn con số hay cộng hết chữ số đều ra 5. Riêng ai có tổng đi qua 14 thì được đọc thêm bài học nợ nghiệp 14 về chừng mực."
+    },
+    {
+     "tieu_de": "Số 5 hợp với số nào?",
+     "doan": "Cách chia nhóm quen thuộc đặt số 5 cạnh 1 và 7, những người cần tự do và không thích bị giữ chặt. Người số 5 hay vui với ai thích đi, thích thử. Với số 4 hay 6, số 5 dễ thấy bị trói, còn bên kia thấy số 5 không yên. Cặp này vẫn bền khi hai bên thoả thuận rõ phần tự do riêng và phần cam kết chung."
+    },
+    {
+     "tieu_de": "Số 5 làm nghề gì?",
+     "danh_sach": [
+      "Nghề có di chuyển: hướng dẫn du lịch, kinh doanh vùng, phóng viên hiện trường.",
+      "Nghề nhiều người, nhiều tình huống: bán hàng, tổ chức sự kiện, môi giới.",
+      "Việc cần thích nghi nhanh: khởi nghiệp giai đoạn đầu, sản xuất nội dung theo xu hướng.",
+      "Ít hợp: bàn giấy lặp lại y hệt mỗi ngày, ít người, ít đổi."
+     ]
+    },
+    {
+     "tieu_de": "Người số 5 khi gặp áp lực",
+     "doan": "Khi bế tắc, người số 5 thường muốn thoát: đi chơi đột xuất, mua sắm, nhận thêm việc mới để quên việc cũ. Đổi cảnh giúp họ thở được, nhưng nếu thành thói quen thì vấn đề cũ vẫn ở đó. Một việc nhỏ cho tuần này: trước khi đổi gì, ngồi mười lăm phút viết ra điều mình đang muốn tránh."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ba ngày sinh mẫu có Đường đời 5",
+    "chu_thich": "Đã tính bằng máy; số 5 cho cùng kết quả dù cộng theo cách nào.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "02/11/2008",
+      "ngày 2, tháng 11, năm 2008 → 10 → 1; 2 + 11 + 1 = 14 → 5",
+      "2+1+1+2+0+0+8 = 14 → 5"
+     ],
+     [
+      "17/03/1956",
+      "ngày 17 → 8, tháng 3, năm 1956 → 21 → 3; 8 + 3 + 3 = 14 → 5",
+      "1+7+3+1+9+5+6 = 32 → 5"
+     ],
+     [
+      "19/03/2008",
+      "ngày 19 → 10 → 1, tháng 3, năm 2008 → 10 → 1; 1 + 3 + 1 = 5",
+      "1+9+3+2+0+0+8 = 23 → 5"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 5 có khó gắn bó trong tình yêu không?",
+     "dap": "Thường được mô tả là cần nhiều không gian; gắn bó tốt khi người kia không giữ chặt và hai người cùng làm điều mới."
+    },
+    {
+     "hoi": "Số 5 có hợp làm tự do không?",
+     "dap": "Thường được xem là hợp, với điều kiện có lịch làm việc tối thiểu và quỹ dự phòng cho tháng ít việc."
+    },
+    {
+     "hoi": "Số 5 có nên đổi việc nhiều không?",
+     "dap": "Đổi để học thêm là điểm mạnh; đổi chỉ vì chán thì nên chờ ít nhất một chu kỳ dự án rồi mới quyết."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số 5",
+     "nghia": "Số 5 đứng giữa dãy 1–9: tự do, thay đổi, trải nghiệm qua năm giác quan."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số 5",
+     "nghia": "Cheiro gắn số 5 với Sao Thuỷ, tả người số 5 nhanh nhạy, thích giao tiếp, dễ thích nghi."
+    }
+   ],
+   "y_chinh": [
+    "Đường đời 5 ra giống nhau với cả hai cách cộng",
+    "Nhóm thường xếp chung: 1, 5, 7",
+    "Nghề có di chuyển, nhiều người, nhiều tình huống",
+    "Áp lực: muốn thoát bằng đi chơi, mua sắm"
+   ]
+  },
+  "so-6": {
+   "muc": [
+    {
+     "tieu_de": "Vì sao có người lúc ra 6, lúc ra 33?",
+     "doan": "Vì 33 là số cái đứng trên nền 6, và hai cách cộng Đường đời giữ 33 ở những ngày khác nhau. Theo lịch 1940–2010, rút gọn con số cho ra 6 ở khoảng 10,2% số ngày, còn cộng hết chữ số chỉ 5,4% vì nhiều tổng 33 được giữ nguyên. Bảng bên dưới có hai ngày sinh lệch giữa 6 và 33."
+    },
+    {
+     "tieu_de": "Số 6 hợp với số nào?",
+     "doan": "Sách phổ biến hay ghép 6 với 3 và 9, nhóm sống bằng cảm xúc và thích chăm người. Người số 6 thường hợp với ai biết ơn và biết đáp lại sự quan tâm. Với số 1 hay 5, số 6 dễ thấy bị bỏ lại, còn họ thấy số 6 lo quá. Một thoả thuận rõ ai lo việc gì trong nhà thường giúp cặp này nhẹ hơn nhiều."
+    },
+    {
+     "tieu_de": "Số 6 làm nghề gì?",
+     "danh_sach": [
+      "Nghề chăm người: điều dưỡng, giáo viên mầm non, công tác xã hội.",
+      "Nghề làm đẹp không gian sống: thiết kế nội thất, làm vườn, ẩm thực gia đình.",
+      "Vai giữ chất lượng dịch vụ: quản lý khách sạn, chăm sóc khách hàng cao cấp.",
+      "Ít hợp: môi trường lạnh lùng, chỉ đo bằng số, không ai hỏi han ai."
+     ]
+    },
+    {
+     "tieu_de": "Người số 6 khi gặp áp lực",
+     "doan": "Khi căng, người số 6 hay ôm thêm việc của người khác, dặn dò nhiều hơn, rồi mệt mà không ai nhận ra. Họ có thể thấy tủi vì đã lo cho mọi người mà ít ai lo lại. Thử trong tuần này: hỏi người nhà “có việc nào mình làm mà bạn muốn tự làm không?”, rồi trao lại việc đó."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ ngày sinh có Đường đời 6, và lúc nó thành 33",
+    "chu_thich": "Hai dòng đầu ra 6 theo cả hai cách; hai dòng sau một cách ra 6, cách kia giữ 33.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "05/06/2002",
+      "ngày 5, tháng 6, năm 2002 → 4; 5 + 6 + 4 = 15 → 6",
+      "5+6+2+0+0+2 = 15 → 6"
+     ],
+     [
+      "18/08/1978",
+      "ngày 18 → 9, tháng 8, năm 1978 → 25 → 7; 9 + 8 + 7 = 24 → 6",
+      "1+8+8+1+9+7+8 = 42 → 6"
+     ],
+     [
+      "06/06/1956",
+      "ngày 6, tháng 6, năm 1956 → 21 → 3; 6 + 6 + 3 = 15 → 6",
+      "6+6+1+9+5+6 = 33"
+     ],
+     [
+      "22/09/2000",
+      "ngày 22, tháng 9, năm 2000 → 2; 22 + 9 + 2 = 33",
+      "2+2+9+2+0+0+0 = 15 → 6"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 6 có phải luôn hy sinh cho gia đình không?",
+     "dap": "Không luôn luôn. Truyền thống nói số 6 dễ nhận trách nhiệm, còn mức hy sinh là điều mỗi người tự chọn."
+    },
+    {
+     "hoi": "Số 6 và số 33 khác nhau thế nào?",
+     "dap": "Cùng chủ đề chăm sóc và trách nhiệm; 33 được mô tả là bản cường độ cao hơn, kéo theo áp lực lớn hơn."
+    },
+    {
+     "hoi": "Số 6 có hợp kinh doanh không?",
+     "dap": "Hợp những mô hình gần gũi như dịch vụ gia đình, ăn uống, giáo dục, nơi sự tận tâm được khách nhận ra."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số 6",
+     "nghia": "Số 6 gắn với tổ ấm, trách nhiệm, sự hài hoà và chăm sóc."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số 6",
+     "nghia": "Cheiro gắn số 6 với Sao Kim, tả người số 6 yêu cái đẹp, hướng về gia đình và sự êm ấm."
+    }
+   ],
+   "y_chinh": [
+    "Cùng ngày sinh có thể ra 6 hoặc 33 tuỳ cách cộng",
+    "Nhóm thường xếp chung: 3, 6, 9",
+    "Nghề chăm người và làm đẹp không gian sống",
+    "Áp lực: ôm việc người khác rồi tủi"
+   ]
+  },
+  "so-7": {
+   "muc": [
+    {
+     "tieu_de": "Đường đời số 7 có hiếm không?",
+     "doan": "Không hiếm: khoảng 11,1% số ngày trên lịch 1940–2010 ra Đường đời 7, ngang các số 1, 3, 5, 8, 9. Cảm giác số 7 hiếm có lẽ vì người số 7 thường ít ồn ào. Hai cách cộng luôn cùng ra 7; người có tổng đi qua 16 được đọc thêm bài học nợ nghiệp 16."
+    },
+    {
+     "tieu_de": "Số 7 hợp với số nào?",
+     "doan": "Số 7 thường được xếp chung nhóm với 1 và 5, nhóm sống bằng đầu óc và cần khoảng riêng. Người số 7 hay hợp với ai chịu nói chuyện sâu và không đòi có mặt mọi lúc. Với số 2 hay 6, số 7 dễ bị thấy là lạnh, trong khi chỉ đang cần im lặng. Báo trước “mình cần một buổi một mình” giúp cặp này tránh hiểu lầm."
+    },
+    {
+     "tieu_de": "Số 7 làm nghề gì?",
+     "danh_sach": [
+      "Nghề đào sâu: nghiên cứu, phân tích dữ liệu, lập trình hệ thống, pháp lý chuyên sâu.",
+      "Nghề cần soi kỹ: kiểm định chất lượng, biên tập chuyên môn, giám định.",
+      "Vai cố vấn hơn vai đứng đầu: chuyên gia nội bộ, tư vấn chiến lược.",
+      "Ít hợp: việc ồn ào, họp liên tục, không có giờ yên để nghĩ."
+     ]
+    },
+    {
+     "tieu_de": "Người số 7 khi gặp áp lực",
+     "doan": "Khi bị dồn, người số 7 thường rút vào trong, tắt điện thoại, trả lời ngắn và có thể hơi châm biếm. Họ cố tự nghĩ cho ra lời giải trước khi kể với ai. Khoảng lặng giúp họ, nhưng kéo quá dài thì người thân bị đẩy ra xa. Gợi ý tuần này: đặt hạn cho thời gian một mình, ví dụ hai ngày, rồi kể cho một người điều đang nghĩ."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ ngày sinh: Đường đời 7 theo hai cách",
+    "chu_thich": "Ba ngày sinh mẫu, mỗi ngày một thập niên khác nhau, đều ra 7 dù cộng cách nào.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "14/12/1961",
+      "ngày 14 → 5, tháng 12 → 3, năm 1961 → 17 → 8; 5 + 3 + 8 = 16 → 7",
+      "1+4+1+2+1+9+6+1 = 25 → 7"
+     ],
+     [
+      "21/03/1981",
+      "ngày 21 → 3, tháng 3, năm 1981 → 19 → 10 → 1; 3 + 3 + 1 = 7",
+      "2+1+3+1+9+8+1 = 25 → 7"
+     ],
+     [
+      "07/09/2007",
+      "ngày 7, tháng 9, năm 2007 → 9; 7 + 9 + 9 = 25 → 7",
+      "7+9+2+0+0+7 = 25 → 7"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 7 có hợp lấy vợ, lấy chồng muộn không?",
+     "dap": "Con số không quyết tuổi cưới. Truyền thống chỉ nói số 7 thường yêu chậm và cần thời gian tin người."
+    },
+    {
+     "hoi": "Số 7 có phải số tâm linh không?",
+     "dap": "Số 7 hay được gắn với sự chiêm nghiệm và tìm ý nghĩa, có người theo hướng tôn giáo, có người theo khoa học."
+    },
+    {
+     "hoi": "Số 7 có hợp làm kinh doanh không?",
+     "dap": "Hợp mảng cần hiểu sâu sản phẩm hơn là bán đại trà; nên có người cùng làm lo phần giao tiếp."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số 7",
+     "nghia": "Số 7 gắn với chiêm nghiệm, tri thức và việc đi tìm lời giải phía sau bề mặt."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số 7",
+     "nghia": "Cheiro gắn số 7 với Sao Hải Vương, tả người số 7 giàu trực giác, thích suy tưởng và đi xa."
+    }
+   ],
+   "y_chinh": [
+    "Đường đời 7 không hiếm: gần một phần chín ngày sinh",
+    "Nhóm thường xếp chung: 1, 5, 7",
+    "Nghề đào sâu, soi kỹ, vai cố vấn",
+    "Áp lực: rút vào trong, đặt hạn cho thời gian một mình"
+   ]
+  },
+  "so-8": {
+   "muc": [
+    {
+     "tieu_de": "Bao nhiêu ngày sinh ra Đường đời số 8?",
+     "doan": "Khoảng 11,1% số ngày dương lịch từ 1940 đến 2010, theo cả hai cách cộng. Số 8 không có số cái đứng trên, nên trang nào tính đúng cũng ra cùng kết quả. Con số này đếm ngày trên lịch, không phải tỉ lệ dân số."
+    },
+    {
+     "tieu_de": "Số 8 hợp với số nào?",
+     "doan": "Số 8 hay được xếp chung với 2 và 4, nhóm thực tế, coi trọng kết quả và sự ổn định vật chất. Người số 8 thường nể ai làm được việc và giữ chữ tín. Với số 3 hay 9, số 8 dễ thấy họ thiếu tính toán, còn họ thấy số 8 nặng chuyện tiền. Cặp này êm hơn khi chia rõ ai lo tiền, ai lo niềm vui chung."
+    },
+    {
+     "tieu_de": "Số 8 làm nghề gì?",
+     "danh_sach": [
+      "Vai quản lý nguồn lực: điều hành, quản lý tài chính, quản lý dự án lớn.",
+      "Nghề có thước đo rõ: kinh doanh, bất động sản, bán hàng doanh nghiệp.",
+      "Việc cần quyết đoán khi có rủi ro: đàm phán hợp đồng, tái cấu trúc bộ phận.",
+      "Ít hợp: việc không có mục tiêu đo được, không ai chịu trách nhiệm kết quả."
+     ]
+    },
+    {
+     "tieu_de": "Người số 8 khi gặp áp lực",
+     "doan": "Khi áp lực tăng, người số 8 thường làm nhiều hơn nữa, kiểm soát chặt hơn, và đo cả người thân bằng hiệu quả. Họ ít khi cho phép mình nghỉ vì sợ mất đà. Dấu hiệu cần dừng là khi mọi câu chuyện trong nhà đều quay về tiền. Một việc làm được trong tuần: giữ một buổi tối không nói chuyện công việc, không mở thư."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Đường đời 8: ba ngày sinh đã tính",
+    "chu_thich": "Mỗi dòng cho thấy hai cách cộng đi đường khác nhau nhưng cùng dừng ở 8.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "29/07/2006",
+      "ngày 29 → 11, tháng 7, năm 2006 → 8; 11 + 7 + 8 = 26 → 8",
+      "2+9+7+2+0+0+6 = 26 → 8"
+     ],
+     [
+      "07/04/1968",
+      "ngày 7, tháng 4, năm 1968 → 24 → 6; 7 + 4 + 6 = 17 → 8",
+      "7+4+1+9+6+8 = 35 → 8"
+     ],
+     [
+      "13/06/1960",
+      "ngày 13 → 4, tháng 6, năm 1960 → 16 → 7; 4 + 6 + 7 = 17 → 8",
+      "1+3+6+1+9+6+0 = 26 → 8"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 8 có phải số giàu không?",
+     "dap": "Không có con số nào hứa giàu. Số 8 chỉ được mô tả là hay quan tâm tới tiền, quyền và cách quản lý chúng."
+    },
+    {
+     "hoi": "Số 8 có khó tính không?",
+     "dap": "Thường đặt tiêu chuẩn cao cho mình và người khác; điều cần tập là khen trước khi góp ý."
+    },
+    {
+     "hoi": "Số 8 trong tình yêu thế nào?",
+     "dap": "Thường thể hiện bằng việc lo cho người kia đầy đủ; dễ quên rằng người kia cũng cần thời gian và lời hỏi han."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số 8",
+     "nghia": "Số 8 gắn với tổ chức, quyền hạn, vật chất và trách nhiệm dùng nguồn lực."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số 8",
+     "nghia": "Cheiro gắn số 8 với Sao Thổ, tả người số 8 bền chí, nghiêm túc, hay bị hiểu lầm là lạnh lùng."
+    }
+   ],
+   "y_chinh": [
+    "Đường đời 8 ra giống nhau với cả hai cách cộng",
+    "Nhóm thường xếp chung: 2, 4, 8",
+    "Nghề quản lý nguồn lực, có thước đo rõ",
+    "Áp lực: làm nhiều hơn, đo người thân bằng hiệu quả"
+   ]
+  },
+  "so-9": {
+   "muc": [
+    {
+     "tieu_de": "Đường đời số 9 có nhiều không?",
+     "doan": "Có: khoảng 11,1% số ngày sinh 1940–2010 ra Đường đời 9, như các số lẻ khác. Số 9 không dính số cái, nên hai cách cộng đều ra 9. Một mẹo nhỏ: tổng chữ số chia hết cho 9 thì Đường đời luôn là 9."
+    },
+    {
+     "tieu_de": "Số 9 hợp với số nào?",
+     "doan": "Sách thường xếp số 9 cùng 3 và 6, nhóm sống bằng cảm xúc và muốn làm điều có ích cho người khác. Người số 9 hay hợp với ai có lý tưởng nhưng vẫn biết lo việc thật. Với số 8 hay 4, số 9 dễ thấy họ quá thực dụng, còn họ thấy số 9 bay bổng. Cặp này bổ sung tốt khi số 9 lo tầm nhìn, bên kia lo kế hoạch."
+    },
+    {
+     "tieu_de": "Người số 9 hợp công việc nào?",
+     "danh_sach": [
+      "Việc giúp cộng đồng: tổ chức phi lợi nhuận, y tế công cộng, giáo dục cộng đồng.",
+      "Nghề kể chuyện về con người: báo chí, làm phim tài liệu, viết sách.",
+      "Vai kết nối nhiều nền văn hoá: ngoại giao, du lịch, dịch thuật.",
+      "Ít hợp: việc chỉ vì lợi nhuận ngắn hạn, không thấy ai được giúp."
+     ]
+    },
+    {
+     "tieu_de": "Người số 9 khi gặp áp lực",
+     "doan": "Khi căng thẳng, người số 9 thường lo cho người khác nhiều hơn để khỏi nhìn vào chuyện của mình. Họ cũng hay thất vọng khi người khác không sống theo lý tưởng họ đặt ra. Dấu hiệu cần dừng là thấy mình hay nói “mình đã làm bao nhiêu cho họ”. Gợi ý tuần này: làm một việc chỉ cho riêng mình, không vì ai."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ ngày sinh ra Đường đời 9",
+    "chu_thich": "Ba ngày sinh mẫu; tổng chữ số ở cột phải đều chia hết cho 9.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "26/09/2008",
+      "ngày 26 → 8, tháng 9, năm 2008 → 10 → 1; 8 + 9 + 1 = 18 → 9",
+      "2+6+9+2+0+0+8 = 27 → 9"
+     ],
+     [
+      "19/08/2007",
+      "ngày 19 → 10 → 1, tháng 8, năm 2007 → 9; 1 + 8 + 9 = 18 → 9",
+      "1+9+8+2+0+0+7 = 27 → 9"
+     ],
+     [
+      "09/12/1968",
+      "ngày 9, tháng 12 → 3, năm 1968 → 24 → 6; 9 + 3 + 6 = 18 → 9",
+      "9+1+2+1+9+6+8 = 36 → 9"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 9 có phải số cuối nên là số kết thúc không?",
+     "dap": "Số 9 được đọc là số của hoàn tất và cho đi, không có nghĩa đời người số 9 gặp nhiều kết thúc hơn ai."
+    },
+    {
+     "hoi": "Số 9 có hợp làm từ thiện không?",
+     "dap": "Thường được xem là hợp; nên chọn việc trong sức và giữ ranh giới để không cho đi đến kiệt."
+    },
+    {
+     "hoi": "Số 9 và số 18, 27 có khác nhau không?",
+     "dap": "Đều rút về 9 nên chung nét chính; truyền thống Pythagoras không coi các tổng này là nợ nghiệp."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số 9",
+     "nghia": "Số 9 khép dãy 1–9: lòng bao dung, lý tưởng và sự cho đi."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số 9",
+     "nghia": "Cheiro gắn số 9 với Sao Hoả, tả người số 9 hăng hái, dám làm, có chí đấu tranh."
+    }
+   ],
+   "y_chinh": [
+    "Tổng chữ số chia hết cho 9 thì Đường đời là 9",
+    "Nhóm thường xếp chung: 3, 6, 9",
+    "Hợp việc giúp cộng đồng, kể chuyện con người",
+    "Áp lực: lo cho người khác để khỏi nhìn mình"
+   ]
+  },
+  "so-11": {
+   "muc": [
+    {
+     "tieu_de": "Đường đời 11 có hiếm không?",
+     "doan": "Tuỳ cách cộng: rút gọn con số cho ra 11 ở khoảng 6,5% số ngày 1940–2010, cộng hết chữ số ở khoảng 9,5%. Vì vậy cùng một người có thể ra 11 ở trang này và 2 ở trang khác. Hiểu Bản Thân dùng rút gọn con số làm mặc định và báo khi hai cách lệch nhau."
+    },
+    {
+     "tieu_de": "Số 11 hợp với số nào?",
+     "doan": "Số 11 đứng trên nền số 2, nên thường được xếp chung nhóm 2, 4, 8 với nhu cầu được yên và được tin. Người số 11 hay hợp với ai vững, bình tĩnh, giúp họ hạ nhiệt khi lo. Với người cũng nhạy cảm cao như một số 11 khác, hai bên dễ hiểu nhau nhưng cũng dễ cùng lo một lúc. Không cặp nào bị coi là hỏng, chỉ khác chỗ cần nói rõ."
+    },
+    {
+     "tieu_de": "Số 11 làm nghề gì?",
+     "danh_sach": [
+      "Nghề cần đọc người: tư vấn tâm lý, huấn luyện, giáo dục đặc biệt.",
+      "Nghề truyền ý tưởng: diễn thuyết, viết, nghệ thuật biểu diễn.",
+      "Vai phát hiện sớm vấn đề: nghiên cứu người dùng, kiểm tra trải nghiệm sản phẩm.",
+      "Ít hợp: môi trường ồn, va chạm liên tục, không có lúc nghỉ đầu óc."
+     ]
+    },
+    {
+     "tieu_de": "Người số 11 khi gặp áp lực",
+     "doan": "Số 11 là bản cường độ cao của số 2, nên áp lực thường dội vào họ mạnh hơn: nghĩ nhiều, ngủ chập chờn, lo trước những việc chưa xảy ra. Mặt tối là đặt kỳ vọng quá cao cho mình rồi thấy mình chưa đủ. Một thói quen nhỏ trong tuần: tắt thông báo sau chín giờ tối và ghi ra giấy ba điều đang lo trước khi ngủ. Nếu lo âu kéo dài nhiều tuần, nên tìm người làm nghề tư vấn; nội dung này không thay lời bác sĩ."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ ngày sinh có Đường đời 11, và lúc nó thành 2",
+    "chu_thich": "Hai dòng đầu ra 11 với cả hai cách; hai dòng sau cho thấy 11 và 2 đổi chỗ khi đổi cách cộng.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "19/06/1984",
+      "ngày 19 → 10 → 1, tháng 6, năm 1984 → 22; 1 + 6 + 22 = 29 → 11",
+      "1+9+6+1+9+8+4 = 38 → 11"
+     ],
+     [
+      "18/10/1999",
+      "ngày 18 → 9, tháng 10 → 1, năm 1999 → 28 → 10 → 1; 9 + 1 + 1 = 11",
+      "1+8+1+0+1+9+9+9 = 38 → 11"
+     ],
+     [
+      "20/12/1950",
+      "ngày 20 → 2, tháng 12 → 3, năm 1950 → 15 → 6; 2 + 3 + 6 = 11",
+      "2+0+1+2+1+9+5+0 = 20 → 2"
+     ],
+     [
+      "25/04/1989",
+      "ngày 25 → 7, tháng 4, năm 1989 → 27 → 9; 7 + 4 + 9 = 20 → 2",
+      "2+5+4+1+9+8+9 = 38 → 11"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 11 có phải người được chọn không?",
+     "dap": "Không. Số cái được đọc là cường độ cao hơn, kèm áp lực lớn hơn; nó không làm ai hơn ai."
+    },
+    {
+     "hoi": "Ngày sinh 11 hay 29 có phải là số 11 không?",
+     "dap": "Sinh ngày 11 hoặc 29 thì số Ngày sinh là 11; Đường đời còn tuỳ cả tháng, năm và cách cộng."
+    },
+    {
+     "hoi": "Số 11 nên đọc thêm trang số 2 không?",
+     "dap": "Nên. 11 mang nền của 2, nên nhiều nét về hợp tác và nhạy cảm của số 2 vẫn đúng ở mức mạnh hơn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số cái 11",
+     "nghia": "11 là số cái đầu tiên, giữ nguyên khi tính Đường đời, đọc như bản cường độ cao của 2: trực giác và nhạy cảm."
+    }
+   ],
+   "y_chinh": [
+    "Ra 11 hay 2 tuỳ cách cộng Đường đời",
+    "11 là bản cường độ cao của 2, không phải người được chọn",
+    "Hợp nghề đọc người, truyền ý tưởng",
+    "Áp lực: nghĩ nhiều, lo trước; tắt thông báo sau chín giờ"
+   ]
+  },
+  "so-22": {
+   "muc": [
+    {
+     "tieu_de": "Có bao nhiêu người mang Đường đời 22?",
+     "doan": "Không nhiều: khoảng 3,0% số ngày 1940–2010 ra 22 theo cách rút gọn con số, và 2,3% theo cách cộng hết chữ số. Hai cách thường không trùng ngày với nhau, nên người ra 22 ở cách này dễ ra 4 ở cách kia. Bảng ví dụ bên dưới cho thấy cả hai trường hợp."
+    },
+    {
+     "tieu_de": "Số 22 hợp với số nào?",
+     "doan": "Số 22 đứng trên nền số 4, nên hay được xếp chung nhóm 2, 4, 8, những người coi trọng việc thật và kế hoạch dài. Người số 22 thường hợp với ai chịu được nhịp làm lớn và không đòi họ có mặt mọi buổi. Với số 3 hay 5, số 22 dễ thấy họ không đủ nghiêm túc. Sự nhẹ nhàng của bên kia lại thường giúp số 22 bớt căng."
+    },
+    {
+     "tieu_de": "Người số 22 hợp nghề gì?",
+     "danh_sach": [
+      "Việc dựng hệ thống lớn: quy hoạch, kiến trúc, hạ tầng, kỹ thuật hệ thống.",
+      "Vai điều hành tổ chức có nhiều tầng: giám đốc vận hành, quản lý chương trình.",
+      "Dự án dài năm, cần cả tầm nhìn lẫn chi tiết: xây trường, dựng doanh nghiệp xã hội.",
+      "Ít hợp: việc vụn, ngắn hạn, không thấy nó dẫn tới đâu."
+     ]
+    },
+    {
+     "tieu_de": "Người số 22 khi gặp áp lực",
+     "doan": "Số 22 là bản cường độ cao của số 4: khi áp lực tăng, họ nhận thêm trách nhiệm, tự đặt mốc gắt hơn, và khó chịu khi mọi thứ chưa đủ tầm. Có người ngược lại, hoãn mãi vì thấy chưa đủ điều kiện làm việc lớn. Cả hai kiểu đều mệt. Gợi ý tuần này: chọn một phần nhỏ nhất của kế hoạch lớn, làm xong trong bảy ngày, rồi ghi lại."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ ngày sinh có Đường đời 22, và lúc nó thành 4",
+    "chu_thich": "Hai dòng đầu ra 22 với cả hai cách; hai dòng sau đổi giữa 22 và 4 khi đổi cách cộng.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "26/12/2009",
+      "ngày 26 → 8, tháng 12 → 3, năm 2009 → 11; 8 + 3 + 11 = 22",
+      "2+6+1+2+2+0+0+9 = 22"
+     ],
+     [
+      "08/06/2006",
+      "ngày 8, tháng 6, năm 2006 → 8; 8 + 6 + 8 = 22",
+      "8+6+2+0+0+6 = 22"
+     ],
+     [
+      "14/09/1997",
+      "ngày 14 → 5, tháng 9, năm 1997 → 26 → 8; 5 + 9 + 8 = 22",
+      "1+4+9+1+9+9+7 = 40 → 4"
+     ],
+     [
+      "11/10/1963",
+      "ngày 11, tháng 10 → 1, năm 1963 → 19 → 10 → 1; 11 + 1 + 1 = 13 → 4",
+      "1+1+1+0+1+9+6+3 = 22"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 22 có phải số của người làm chuyện lớn không?",
+     "dap": "Truyền thống mô tả 22 là cường độ cao của 4, gắn với việc biến ý tưởng thành hệ thống; quy mô thật tuỳ mỗi người."
+    },
+    {
+     "hoi": "Ngày sinh 22 có phải Đường đời 22 không?",
+     "dap": "Không. Sinh ngày 22 thì số Ngày sinh là 22; Đường đời phải cộng cả tháng, năm và tuỳ cách cộng."
+    },
+    {
+     "hoi": "Số 22 nên đọc trang số 4 không?",
+     "dap": "Nên, vì 22 đứng trên nền 4; nét kỷ luật, làm việc có hệ thống của 4 vẫn đúng, ở mức áp lực cao hơn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số cái 22",
+     "nghia": "22 là số cái giữ nguyên khi tính Đường đời, đọc như bản cường độ cao của 4: biến tầm nhìn thành việc thật."
+    }
+   ],
+   "y_chinh": [
+    "Đường đời 22 ít gặp, ra 22 hay 4 tuỳ cách cộng",
+    "22 là bản cường độ cao của 4, kèm áp lực lớn",
+    "Hợp việc dựng hệ thống, dự án dài năm",
+    "Tuần này: làm xong phần nhỏ nhất của kế hoạch lớn"
+   ]
+  },
+  "so-33": {
+   "muc": [
+    {
+     "tieu_de": "Đường đời 33 hiếm cỡ nào?",
+     "doan": "Rất tuỳ cách cộng: rút gọn con số chỉ ra 33 ở khoảng 0,9% số ngày 1940–2010, còn cộng hết chữ số ra 33 ở khoảng 5,8%. Khác biệt lớn này là lý do nhiều người thấy mình là 33 ở trang này nhưng là 6 ở trang khác. Hiểu Bản Thân hiện cả hai con số khi chúng lệch nhau."
+    },
+    {
+     "tieu_de": "Số 33 hợp với số nào?",
+     "doan": "Số 33 đứng trên nền số 6, nên thường được xếp chung nhóm 3, 6, 9 với nhu cầu được chăm và được cho đi. Người số 33 hay hợp với ai biết nhận và biết đáp lại, không lấy hết sự tận tâm của họ. Với số 1 hay 8, số 33 dễ thấy mình bị xem nhẹ cảm xúc. Nói rõ “mình cũng cần được hỏi han” giúp cặp này cân lại."
+    },
+    {
+     "tieu_de": "Số 33 làm nghề gì?",
+     "danh_sach": [
+      "Nghề nâng đỡ người khác lâu dài: giáo dục, công tác xã hội, chăm sóc người cao tuổi.",
+      "Vai người dẫn dắt bằng làm gương: trưởng nhóm cộng đồng, người hướng dẫn nghề.",
+      "Nghề chữa lành bằng nghệ thuật: âm nhạc trị liệu, mỹ thuật cho trẻ em.",
+      "Ít hợp: việc buộc phải đặt lợi nhuận lên trên con người trong thời gian dài."
+     ]
+    },
+    {
+     "tieu_de": "Người số 33 khi gặp áp lực",
+     "doan": "Số 33 là bản cường độ cao của số 6: khi căng, họ nhận thêm trách nhiệm cho cả nhóm, quên ăn quên nghỉ, và thấy có lỗi nếu nghỉ. Mặt tối là tan vào vai người lo cho mọi người đến mức không còn biết mình muốn gì. Một việc nhỏ cho tuần này: ghi ba điều mình thích làm mà không phục vụ ai, rồi làm một điều. Ăn đúng bữa, ngủ đủ là thói quen nên giữ; nội dung này không thay lời bác sĩ."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ ngày sinh có Đường đời 33, và lúc nó thành 6",
+    "chu_thich": "Hai dòng đầu ra 33 với cả hai cách; hai dòng sau ra 33 ở một cách, 6 ở cách kia.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số"
+    ],
+    "dong": [
+     [
+      "22/04/1969",
+      "ngày 22, tháng 4, năm 1969 → 25 → 7; 22 + 4 + 7 = 33",
+      "2+2+4+1+9+6+9 = 33"
+     ],
+     [
+      "14/06/1993",
+      "ngày 14 → 5, tháng 6, năm 1993 → 22; 5 + 6 + 22 = 33",
+      "1+4+6+1+9+9+3 = 33"
+     ],
+     [
+      "22/03/1970",
+      "ngày 22, tháng 3, năm 1970 → 17 → 8; 22 + 3 + 8 = 33",
+      "2+2+3+1+9+7+0 = 24 → 6"
+     ],
+     [
+      "07/05/1983",
+      "ngày 7, tháng 5, năm 1983 → 21 → 3; 7 + 5 + 3 = 15 → 6",
+      "7+5+1+9+8+3 = 33"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 33 có phải số cao nhất, tốt nhất không?",
+     "dap": "Không. 33 chỉ được đọc là bản cường độ cao của 6, với áp lực trách nhiệm lớn hơn; không số nào hơn số nào."
+    },
+    {
+     "hoi": "Vì sao trang khác không ghi mình là 33?",
+     "dap": "Nhiều trang chỉ dùng một cách cộng. Cách cộng hết chữ số giữ 33 thường hơn cách rút gọn con số."
+    },
+    {
+     "hoi": "Số 33 có nên đọc thêm trang số 6 không?",
+     "dap": "Nên. 33 đứng trên nền 6, nên các nét về gia đình, trách nhiệm và chăm sóc vẫn đúng ở mức mạnh hơn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số cái 33",
+     "nghia": "33 là số cái giữ nguyên khi tính Đường đời, đọc như bản cường độ cao của 6: dẫn dắt bằng sự chăm lo."
+    }
+   ],
+   "y_chinh": [
+    "Ra 33 hay 6 tuỳ cách cộng, chênh nhau rất lớn",
+    "33 là bản cường độ cao của 6, kèm áp lực trách nhiệm",
+    "Hợp nghề nâng đỡ người khác lâu dài",
+    "Tuần này: làm một điều mình thích, không phục vụ ai"
+   ]
+  }
+ }
+}

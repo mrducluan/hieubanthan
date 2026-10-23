@@ -27,7 +27,7 @@ export function CtaCuoiBai({ moDun, maYDinh, goiMo }: { moDun: string; maYDinh?:
   const bam = (kind: string) => ghi("chart_interacted", { mo_dun: moDun, kind: `cta_${kind}` });
   const lgKhac = Object.entries(LUAN_GIAI).filter(([k]) => k !== moDun && !(moDun === "thanso_sau" && k === "thanso")).slice(0, 2);
   return (
-    <div className="space-y-4" data-testid="cta-cuoi-bai">
+    <div className="space-y-4" data-nosnippet="" data-testid="cta-cuoi-bai">
       <GoiMoCheo goiMo={goiMo} moDun={moDun} ma={goiMo ? undefined : (maYDinh ?? MA_MAC_DINH[moDun] ?? "ban_than")} />
       <div className="grid gap-3 sm:grid-cols-3">
         <Link href={lg?.duong ?? lgKhac[0]?.[1].duong ?? "/than-so"} onClick={() => bam("luan_giai")}

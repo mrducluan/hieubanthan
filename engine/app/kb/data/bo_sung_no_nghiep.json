@@ -1,0 +1,380 @@
+{
+ "source_id": "bo_sung_no_nghiep_v1",
+ "school_id": "pitago",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Nợ nghiệp trong thần số học Pythagoras — Ban biên tập Hiểu Bản Thân bổ sung",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + cổ thư công cộng (nháp AI, chờ thẩm định)"
+ },
+ "trang": {
+  "no-nghiep-13": {
+   "muc": [
+    {
+     "tieu_de": "Nợ nghiệp 13 là gì?",
+     "doan": "Nợ nghiệp 13 là cách thần số học Pythagoras gọi tổng 13 xuất hiện ngay trước khi một con số chính rút về 4. Nó có thể nằm ở Đường đời, số Ngày sinh hoặc các số tên. Riêng người sinh ngày 13 thì số Ngày sinh mang 13/4 với cả hai cách cộng."
+    },
+    {
+     "tieu_de": "Nợ nghiệp 13 tính thế nào ở Đường đời và tên?",
+     "doan": "Ở Đường đời, có gặp 13 hay không tùy cách cộng.",
+     "danh_sach": [
+      "Rút gọn con số (cách mặc định trên Hiểu Bản Thân): rút riêng ngày, tháng, năm rồi mới cộng, nên tổng 13 hiện ra khá thường — khoảng 6,3% số ngày từ 1940 đến 2010.",
+      "Cộng hết chữ số: cộng dồn mọi chữ số một lần, nên chỉ khoảng 1,1% số ngày đi qua 13.",
+      "Tên: cũng có thể mang 13, ví dụ tên “Nguyễn Thị Tâm” có số tên đầy đủ cộng ra 58 → 13 → 4."
+     ]
+    },
+    {
+     "tieu_de": "Dấu hiệu nợ nghiệp 13 trong đời thường",
+     "danh_sach": [
+      "Hay mở đầu rất hăng rồi chững lại ở tuần thứ ba, khi việc bắt đầu nhàm.",
+      "Thích tìm mẹo làm nhanh, dù mẹo đó khiến phải làm lại phần sau.",
+      "Thấy khó chịu với việc lặp lại như ôn bài, ghi sổ, tập luyện đều.",
+      "Hay nói “để mai” với việc nhỏ, rồi việc nhỏ dồn thành núi.",
+      "Đây là mô tả của truyền thống, không phải phép thử; người không mang 13 cũng có thể thấy mình trong vài dòng."
+     ]
+    },
+    {
+     "tieu_de": "Cách sống cân bằng với nợ nghiệp 13",
+     "doan": "Cách thường được gợi ý cho 13 là biến việc dài hơi thành chuỗi việc nhỏ có hạn, làm đều hơn là làm nhiều. Người mang 13 thường không thiếu khả năng, chỉ thiếu nhịp. Một lịch cố định, dù chỉ mười lăm phút mỗi ngày, hay giúp hơn những buổi cày cả đêm. Mặt sáng của 13 là khi đã có nếp, người đó thường bền hơn nhiều người khác. Thử trong tuần này: chọn một việc đang dở, chia thành năm phần, mỗi ngày làm một phần và đánh dấu vào lịch."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ ngày sinh: nợ nghiệp 13 theo hai cách tính",
+    "chu_thich": "Bốn ngày sinh đã tính bằng máy, cho thấy cùng một người có thể có hoặc không có 13 ở Đường đời tuỳ cách cộng.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số",
+     "Nợ nghiệp 13 nằm ở"
+    ],
+    "dong": [
+     [
+      "13/05/1990",
+      "ngày 13 → 4, tháng 5, năm 1990 → 19 → 10 → 1; 4 + 5 + 1 = 10 → 1",
+      "1+3+5+1+9+9+0 = 28 → 10 → 1",
+      "Ngày sinh"
+     ],
+     [
+      "25/04/1991",
+      "ngày 25 → 7, tháng 4, năm 1991 → 20 → 2; 7 + 4 + 2 = 13 → 4",
+      "2+5+4+1+9+9+1 = 31 → 4",
+      "Đường đời chỉ khi rút gọn con số"
+     ],
+     [
+      "19/01/2000",
+      "ngày 19 → 10 → 1, tháng 1, năm 2000 → 2; 1 + 1 + 2 = 4",
+      "1+9+1+2+0+0+0 = 13 → 4",
+      "Đường đời chỉ khi cộng hết chữ số"
+     ],
+     [
+      "09/02/2000",
+      "ngày 9, tháng 2, năm 2000 → 2; 9 + 2 + 2 = 13 → 4",
+      "9+2+2+0+0+0 = 13 → 4",
+      "Đường đời theo cả hai cách"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Sinh ngày 13 có phải là có nợ nghiệp 13 không?",
+     "dap": "Theo truyền thống thì số Ngày sinh của người sinh ngày 13 mang 13/4. Đó là một vị trí phụ, cần xem cùng Đường đời và tên."
+    },
+    {
+     "hoi": "Vì sao trang khác báo mình không có nợ nghiệp 13?",
+     "dap": "Thường do khác cách cộng Đường đời. Rút gọn con số dễ gặp tổng 13 hơn cộng hết chữ số; hãy xem trang kia dùng cách nào."
+    },
+    {
+     "hoi": "Nợ nghiệp 13 có liên quan tới số 13 kém may không?",
+     "dap": "Không. Nỗi sợ số 13 là tục lệ phương Tây riêng; trong thần số học, 13 chỉ được đọc như bài học về kỷ luật."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số nợ nghiệp 13, 14, 16, 19",
+     "nghia": "Tổng 13 đứng sau số 4 được đọc là bài học về làm việc bền bỉ, không dựa vào đường tắt."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số kép 13",
+     "nghia": "Trong hệ Chaldea, Cheiro gắn số kép 13 với thay đổi kế hoạch, nơi chốn; ông không dùng khái niệm nợ nghiệp."
+    }
+   ],
+   "y_chinh": [
+    "13 đứng trước số 4: bài học làm đều, không đường tắt",
+    "Rút gọn con số gặp 13 ở Đường đời nhiều hơn cộng hết chữ số",
+    "Dấu hiệu: hăng lúc đầu, chững ở tuần thứ ba",
+    "Tuần này: chia việc dở làm năm phần, mỗi ngày một phần"
+   ]
+  },
+  "no-nghiep-14": {
+   "muc": [
+    {
+     "tieu_de": "Nợ nghiệp 14 là gì, tính thế nào?",
+     "doan": "Nợ nghiệp 14 là khi một con số chính đi qua tổng 14 rồi mới rút về 5, và được đọc là bài học về chừng mực. Có năm con số để dò: số Ngày sinh (sinh ngày 14), Đường đời và ba số tính từ tên. Ở Đường đời, hai cách cộng cho kết quả khác hẳn: rút gọn con số gặp 14 ở khoảng 6,3% số ngày 1940–2010, cộng hết chữ số chỉ khoảng 1,2%. Về tên, tên “Nguyễn Ngọc An” có số tên đầy đủ cộng ra 59 → 14 → 5. Máy tính của Hiểu Bản Thân báo vị trí nào mang 14 và theo cách cộng nào."
+    },
+    {
+     "tieu_de": "Dấu hiệu nợ nghiệp 14 trong đời thường",
+     "danh_sach": [
+      "Mở điện thoại để xem một tin, ngẩng lên đã hết một giờ.",
+      "Giỏ hàng đầy vào cuối tháng dù đầu tháng đã định tiết kiệm.",
+      "Đổi chỗ làm, đổi thói quen, đổi kế hoạch ngay khi vừa thấy chán.",
+      "Ngại cam kết dài vì sợ mất tự do, rồi lại tiếc vì không có gì sâu.",
+      "Thích thử món mới, chỗ mới, người mới: đây là mặt tươi sáng của 14 khi có giới hạn."
+     ]
+    },
+    {
+     "tieu_de": "Cách sống cân bằng với nợ nghiệp 14",
+     "doan": "Cân bằng với 14 thường không phải là cấm mình, mà là đặt giới hạn trước khi bắt đầu. Ví dụ đặt giờ tắt màn hình, đặt mức chi cho mua sắm trong tháng, đặt thời hạn thử một việc mới trước khi bỏ. Người mang 14 hợp với luật đơn giản, viết ra, dán chỗ dễ thấy. Mặt tối là tự trách nặng sau mỗi lần quá đà, rồi bỏ luôn. Việc thử ngay tuần này: chọn một thứ dễ sa đà nhất, đặt một giới hạn bằng con số, và ghi lại mỗi ngày có giữ được không."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Bốn ngày sinh mẫu và nợ nghiệp 14",
+    "chu_thich": "Ngày sinh 14 mang 14/5 ở số Ngày sinh; Đường đời thì tuỳ cách cộng, như ba dòng còn lại cho thấy.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số",
+     "Nợ nghiệp 14 nằm ở"
+    ],
+    "dong": [
+     [
+      "14/08/1987",
+      "ngày 14 → 5, tháng 8, năm 1987 → 25 → 7; 5 + 8 + 7 = 20 → 2",
+      "1+4+8+1+9+8+7 = 38 → 11",
+      "Ngày sinh"
+     ],
+     [
+      "07/02/1985",
+      "ngày 7, tháng 2, năm 1985 → 23 → 5; 7 + 2 + 5 = 14 → 5",
+      "7+2+1+9+8+5 = 32 → 5",
+      "Đường đời chỉ khi rút gọn con số"
+     ],
+     [
+      "11/04/2006",
+      "ngày 11, tháng 4, năm 2006 → 8; 11 + 4 + 8 = 23 → 5",
+      "1+1+4+2+0+0+6 = 14 → 5",
+      "Đường đời chỉ khi cộng hết chữ số"
+     ],
+     [
+      "29/01/2000",
+      "ngày 29 → 11, tháng 1, năm 2000 → 2; 11 + 1 + 2 = 14 → 5",
+      "2+9+1+2+0+0+0 = 14 → 5",
+      "Đường đời theo cả hai cách"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nợ nghiệp 14 có phải là nghiện ngập không?",
+     "dap": "Không. Truyền thống chỉ mô tả 14 là xu hướng dễ quá đà khi thiếu giới hạn, không gán nhãn cho ai."
+    },
+    {
+     "hoi": "Nợ nghiệp 14 khác số 5 thường thế nào?",
+     "dap": "Cả hai cùng rút về 5 và yêu tự do. Riêng 14 được nói là phải học chừng mực rõ hơn, vì dễ để tự do thành buông thả."
+    },
+    {
+     "hoi": "Cộng hết chữ số không ra 14 thì có cần lo không?",
+     "dap": "Không cần lo theo cách nào. Hai cách cộng là hai quy ước; nên đọc 14 như một gợi ý để tự soát thói quen."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số nợ nghiệp 13, 14, 16, 19",
+     "nghia": "Tổng 14 đứng sau số 5: tự do cần đi kèm điều độ và trách nhiệm với lựa chọn của mình."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số kép 14",
+     "nghia": "Cheiro tả số kép 14 là chuyển động, kết hợp người và việc, hợp buôn bán trao đổi, kèm lời nhắc thận trọng."
+    }
+   ],
+   "y_chinh": [
+    "14 đứng trước số 5: bài học chừng mực",
+    "Dò ở Ngày sinh, Đường đời và ba số tên",
+    "Dấu hiệu: màn hình, mua sắm, đổi ý khi vừa chán",
+    "Tuần này: đặt một giới hạn bằng con số và ghi lại"
+   ]
+  },
+  "no-nghiep-16": {
+   "muc": [
+    {
+     "tieu_de": "Nợ nghiệp 16 là gì, tính thế nào?",
+     "doan": "Nợ nghiệp 16 là tổng 16 hiện ra trước khi một con số chính rút về 7; truyền thống đọc nó là bài học về cái tôi và sự khiêm tốn. Với Đường đời, cách rút gọn con số gặp 16 ở khoảng 6,3% số ngày 1940–2010, cách cộng hết chữ số khoảng 1,2%. Ở tên, 16 có thể nằm ở số Linh hồn, ví dụ tên “Nguyễn Thanh Vy” có Linh hồn cộng ra 16 → 7. Ai sinh ngày 16 thì số Ngày sinh mang 16/7."
+    },
+    {
+     "tieu_de": "Dấu hiệu nợ nghiệp 16 trong đời thường",
+     "danh_sach": [
+      "Rất chắc kế hoạch của mình, ít hỏi ý kiến cho tới khi có chuyện.",
+      "Từng phải làm lại một việc lớn từ đầu: đổi nghề, dời nhà, dựng lại nhóm.",
+      "Khó nhận lời chê, hay giải thích lại thay vì hỏi thêm.",
+      "Giữ hình ảnh hoàn hảo trước người ngoài, nhưng kiệt sức khi ở một mình.",
+      "Sau mỗi lần dựng lại, cách làm thường thật hơn và bớt phô trương hơn."
+     ]
+    },
+    {
+     "tieu_de": "Cách sống cân bằng với nợ nghiệp 16",
+     "doan": "Với 16, cách cân bằng hay được nhắc là tự mời phản hồi trước khi đời phải phản hồi giùm. Điều đó có nghĩa là đưa kế hoạch cho người mình tin xem sớm, khi còn dễ sửa, và chấp nhận sửa phần mình không thích nghe. Truyền thống đọc những lần đổ vỡ của 16 như dịp xây lại trên nền thật hơn, không phải hình phạt. Mặt tối là co về một mình, tự phân tích mãi mà không nói với ai. Trong tuần này, thử gửi một bản nháp chưa hoàn hảo cho một người và hỏi đúng một câu: chỗ nào yếu nhất?"
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nợ nghiệp 16 qua bốn ngày sinh đã tính",
+    "chu_thich": "Cột cuối ghi 16 nằm ở đâu; khác biệt giữa hai cách cộng Đường đời là lý do nhiều người nhận kết quả khác nhau.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số",
+     "Nợ nghiệp 16 nằm ở"
+    ],
+    "dong": [
+     [
+      "16/03/1979",
+      "ngày 16 → 7, tháng 3, năm 1979 → 26 → 8; 7 + 3 + 8 = 18 → 9",
+      "1+6+3+1+9+7+9 = 36 → 9",
+      "Ngày sinh"
+     ],
+     [
+      "06/08/1973",
+      "ngày 6, tháng 8, năm 1973 → 20 → 2; 6 + 8 + 2 = 16 → 7",
+      "6+8+1+9+7+3 = 34 → 7",
+      "Đường đời chỉ khi rút gọn con số"
+     ],
+     [
+      "11/05/2007",
+      "ngày 11, tháng 5, năm 2007 → 9; 11 + 5 + 9 = 25 → 7",
+      "1+1+5+2+0+0+7 = 16 → 7",
+      "Đường đời chỉ khi cộng hết chữ số"
+     ],
+     [
+      "25/06/2001",
+      "ngày 25 → 7, tháng 6, năm 2001 → 3; 7 + 6 + 3 = 16 → 7",
+      "2+5+6+2+0+0+1 = 16 → 7",
+      "Đường đời theo cả hai cách"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nợ nghiệp 16 có nghĩa là sẽ đổ vỡ không?",
+     "dap": "Không ai đoán được biến cố bằng con số. Truyền thống chỉ dùng 16 để nhắc giữ khiêm tốn và chịu nghe góp ý."
+    },
+    {
+     "hoi": "Linh hồn 16 khác Đường đời 16 thế nào?",
+     "dap": "Linh hồn 16 nói về điều mình mong bên trong, như mong được công nhận; Đường đời 16 là bài học kéo dài cả đời."
+    },
+    {
+     "hoi": "Nợ nghiệp 16 và số 7 có giống nhau không?",
+     "dap": "16 rút về 7 nên có nét thích suy ngẫm của 7, cộng thêm lời nhắc về cái tôi và sự cô lập."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số nợ nghiệp 13, 14, 16, 19",
+     "nghia": "Tổng 16 đứng sau số 7: bài học buông sự kiêu hãnh, xây lại trên nền khiêm tốn và thật hơn."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số kép 16",
+     "nghia": "Cheiro tả số kép 16 bằng hình toà tháp bị sét đánh, nhắc cẩn trọng với kế hoạch dựng trên nền chưa chắc."
+    }
+   ],
+   "y_chinh": [
+    "16 đứng trước số 7: bài học về cái tôi",
+    "Ở tên, 16 có thể nằm ở số Linh hồn",
+    "Dấu hiệu: chắc ý mình, ngại nghe chê",
+    "Tuần này: gửi bản nháp, hỏi chỗ nào yếu nhất"
+   ]
+  },
+  "no-nghiep-19": {
+   "muc": [
+    {
+     "tieu_de": "Nợ nghiệp 19 là gì, tính thế nào?",
+     "doan": "Nợ nghiệp 19 là khi tổng 19 xuất hiện trên đường rút về 1, qua bước trung gian 10; truyền thống đọc là bài học dùng sức mạnh riêng mà vẫn biết nhờ người. Ở Đường đời, rút gọn con số gặp 19 ở khoảng 5,3% số ngày 1940–2010, cộng hết chữ số khoảng 1,4%. Ở tên, tên “Nguyễn Hải Lan” có Linh hồn cộng ra 19 → 10 → 1. Người sinh ngày 19 mang 19/1 ở số Ngày sinh."
+    },
+    {
+     "tieu_de": "Dấu hiệu nợ nghiệp 19 trong đời thường",
+     "danh_sach": [
+      "Mệt vẫn tự làm, vì thấy nhờ người là phiền.",
+      "Khi nhóm làm chậm, có xu hướng giành lại việc để tự làm cho nhanh.",
+      "Khó nói “mình cần giúp”, dễ nói “để mình lo”.",
+      "Được khen độc lập, nhưng ít ai biết lúc nào người đó đang quá tải.",
+      "Khi chịu chia việc, người mang 19 thường dẫn nhóm rất tốt."
+     ]
+    },
+    {
+     "tieu_de": "Cách sống cân bằng với nợ nghiệp 19",
+     "doan": "Bài tập thường gợi cho 19 là nhận giúp đỡ như một kỹ năng phải tập, giống tập nói trước đám đông. Bắt đầu bằng việc nhỏ, ít rủi ro: nhờ đồng nghiệp xem lại một trang, nhờ người nhà đón con một buổi. Mỗi lần nhận giúp mà không thấy mắc nợ là một lần bài học 19 nhẹ đi. Mặt tối là tự cô lập rồi trách người xung quanh vô tâm. Tuần này thử nói một câu “mình cần bạn giúp việc này” và để người kia làm theo cách của họ."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ đã tính: ai mang nợ nghiệp 19",
+    "chu_thich": "Dòng đầu là người sinh ngày 19; ba dòng sau cho thấy Đường đời đi qua 19 hay không tuỳ cách cộng.",
+    "cot": [
+     "Ngày sinh",
+     "Rút gọn con số (mặc định)",
+     "Cộng hết chữ số",
+     "Nợ nghiệp 19 nằm ở"
+    ],
+    "dong": [
+     [
+      "19/02/1996",
+      "ngày 19 → 10 → 1, tháng 2, năm 1996 → 25 → 7; 1 + 2 + 7 = 10 → 1",
+      "1+9+2+1+9+9+6 = 37 → 10 → 1",
+      "Ngày sinh"
+     ],
+     [
+      "07/07/1994",
+      "ngày 7, tháng 7, năm 1994 → 23 → 5; 7 + 7 + 5 = 19 → 10 → 1",
+      "7+7+1+9+9+4 = 37 → 10 → 1",
+      "Đường đời chỉ khi rút gọn con số"
+     ],
+     [
+      "22/08/2005",
+      "ngày 22, tháng 8, năm 2005 → 7; 22 + 8 + 7 = 37 → 10 → 1",
+      "2+2+8+2+0+0+5 = 19 → 10 → 1",
+      "Đường đời chỉ khi cộng hết chữ số"
+     ],
+     [
+      "16/09/2001",
+      "ngày 16 → 7, tháng 9, năm 2001 → 3; 7 + 9 + 3 = 19 → 10 → 1",
+      "1+6+9+2+0+0+1 = 19 → 10 → 1",
+      "Đường đời theo cả hai cách"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Vì sao 19 vừa là nợ nghiệp vừa được gọi là số may?",
+     "dap": "Hai hệ khác nhau. Thần số Pythagoras đọc 19 là bài học tự lập và nhờ giúp; hệ Chaldea của Cheiro coi số kép 19 là số thuận."
+    },
+    {
+     "hoi": "Nợ nghiệp 19 có làm người ta cô đơn không?",
+     "dap": "Con số không quyết điều đó. Truyền thống chỉ nhắc người mang 19 dễ ôm việc một mình, và có thể tập ngược lại."
+    },
+    {
+     "hoi": "Tổng đi qua 10 có phải là nợ nghiệp 19 không?",
+     "dap": "Không phải luôn luôn. Chỉ khi tổng trước đó đúng là 19 rồi mới qua 10 và 1; tổng 28 hay 37 thì không tính."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Số nợ nghiệp 13, 14, 16, 19",
+     "nghia": "Tổng 19 đứng sau số 1: bài học dùng sức mạnh cá nhân mà không ích kỷ, biết nhận và cho sự giúp đỡ."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Số kép 19",
+     "nghia": "Cheiro gọi số kép 19 là “hoàng tử của trời”, một số thuận về ghi nhận và thành công; đây là cách đọc hệ Chaldea."
+    }
+   ],
+   "y_chinh": [
+    "19 rút về 10 rồi 1: bài học tự lập và nhờ giúp",
+    "Hệ Chaldea lại coi số kép 19 là số thuận",
+    "Dấu hiệu: “để mình lo”, khó nói “mình cần giúp”",
+    "Tuần này: nhờ một người làm một việc theo cách họ"
+   ]
+  }
+ }
+}

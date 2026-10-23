@@ -341,6 +341,8 @@ _TRANG.update(_ttv.TRANG)
 from app.kb import trang_menh as _tm  # noqa: E402 — SEO-J: 76 trang "sinh năm X mệnh gì"
 _TRANG.update(_tm.TRANG)
 _TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN}
+from app.kb import bo_sung as _bs  # noqa: E402 — SEO-M: nội dung bổ sung trang mỏng (KB bo_sung_<loai>.json)
+_TRANG = {k: (ds, _bs.boc(dung)) for k, (ds, dung) in _TRANG.items()}
 
 
 # ---- API công khai của module -------------------------------------------------
@@ -374,7 +376,7 @@ def _hoan_tat(t: dict) -> dict:
 
 def lay(loai: str, slug: str) -> dict | None:
     if loai == "so" and slug.startswith("so-") and slug[3:] in _SO:
-        return _hoan_tat(_trang_so(slug[3:]))
+        return _hoan_tat(_bs.ap(_trang_so(slug[3:])))
     if loai == "que":
         for k, s in _ds_que():
             if s == slug:

@@ -68,6 +68,8 @@ const doTtfb = [];
 }
 
 const tieuDe = new Map();
+const dauH1 = new Map();
+const thongKe = [];
 const moTa = new Map();
 const linkNoiBo = new Set();
 let i = 0;
@@ -107,6 +109,22 @@ for (const url of urls) {
   if (/noindex/.test(robots)) ghi(loi, url, `trang trong sitemap nhưng noindex (${robots})`);
   const soH1 = (html.match(/<h1[\s>]/g) ?? []).length;
   if (soH1 !== 1) ghi(soH1 === 0 ? loi : canh, url, `${soH1} thẻ <h1>`);
+  // SEO-M: cấu trúc heading — có H2, không nhảy cấp (h2 → h4), không heading rỗng, H1 không trùng giữa các trang.
+  const than = html.split("</head>")[1] ?? html;
+  const hds = [...than.matchAll(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/g)].map((m) => ({ cap: Number(m[1]), chu: giaiMa(m[2].replace(/<[^>]+>/g, "")).replace(/\s+/g, " ").trim() }));
+  if (!hds.some((h) => h.cap === 2)) ghi(canh, url, "không có thẻ <h2>");
+  const rong = hds.filter((h) => !h.chu);
+  if (rong.length) ghi(loi, url, `${rong.length} heading rỗng (h${rong[0].cap})`);
+  for (let k = 1; k < hds.length; k++) if (hds[k].cap > hds[k - 1].cap + 1) { ghi(canh, url, `heading nhảy cấp h${hds[k - 1].cap} → h${hds[k].cap} ("${hds[k].chu.slice(0, 40)}")`); break; }
+  const h1 = hds.find((h) => h.cap === 1)?.chu;
+  if (h1) dauH1.set(h1, [...(dauH1.get(h1) ?? []), duong]);
+  // Nội dung mỏng: đếm chữ trong <main> (bỏ script/style/nav/footer). Trang kiến thức nên ≥ 300 chữ.
+  const chinh = (than.match(/<main[\s\S]*?<\/main>/)?.[0] ?? than).replace(/<(script|style|nav|footer)\b[\s\S]*?<\/\1>/g, " ");
+  const soChu = giaiMa(chinh.replace(/<[^>]+>/g, " ")).split(/\s+/).filter((w) => /\p{L}/u.test(w)).length;
+  if (soChu < 300) ghi(canh, url, `nội dung mỏng: ${soChu} chữ trong <main>`);
+  const soLinkTrong = new Set([...chinh.matchAll(/<a [^>]*href="(\/[^"#?]*)/g)].map((m) => m[1])).size;
+  if (soLinkTrong < 3) ghi(canh, url, `chỉ ${soLinkTrong} link nội bộ trong nội dung chính`);
+  thongKe.push({ duong, soChu, soH2: hds.filter((h) => h.cap === 2).length, soLinkTrong });
   for (const k of ["og:title", "og:description", "og:image", "og:url"]) if (!meta(html, "property", k)) ghi(canh, url, `thiếu ${k}`);
   if (!meta(html, "name", "twitter:card")) ghi(canh, url, "thiếu twitter:card");
   const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
@@ -133,6 +151,7 @@ for (const url of urls) {
   if (i % 25 === 0) console.log(`  …${i}/${urls.length}`);
 }
 for (const [t, ds] of tieuDe) if (ds.length > 1) canh.push(`title trùng "${t}": ${ds.join(", ")}`);
+for (const [h, ds] of dauH1) if (ds.length > 1) canh.push(`H1 trùng "${h}": ${ds.slice(0, 4).join(", ")}`);
 for (const [d, ds] of moTa) if (ds.length > 1) canh.push(`description trùng (${ds.length} trang): ${ds.slice(0, 4).join(", ")}`);
 
 const daQuet = new Set(urls.map((u) => u.replace(goc, "") || "/"));
@@ -156,6 +175,10 @@ if (doTtfb.length) {
   console.log("Chậm nhất:"); for (const x of xep.slice(-5).reverse()) console.log(`  ${Math.round(x.ttfb)} ms  ${Math.round(x.gz / 1000)} KB  ${x.duong}`);
 }
 
+if (thongKe.length) {
+  const tb = (k) => Math.round(thongKe.reduce((t, x) => t + x[k], 0) / thongKe.length);
+  console.log(`Nội dung (${thongKe.length} trang): TB ${tb("soChu")} chữ · ${tb("soH2")} H2 · ${tb("soLinkTrong")} link nội bộ trong <main>`);
+}
 console.log(`\nLỖI (${loi.length}):`); for (const x of loi) console.log("  ✗ " + x);
 console.log(`\nCẢNH BÁO (${canh.length}):`); for (const x of canh) console.log("  ! " + x);
 process.exit(loi.length ? 1 : 0);

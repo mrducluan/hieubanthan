@@ -54,7 +54,12 @@ def xem_tuoi_lam_nha(nam_sinh: int, nam_xay: int, thang_sinh: int | None = None,
     ket = ({"ma": "thuan", "chu": f"Năm {nam_xay} tuổi {d['tuoi']} không phạm Kim lâu, Hoang ốc xấu hay Tam tai."}
            if not d["xau"] else
            {"ma": "can_nhac", "chu": f"Năm {nam_xay} tuổi {d['tuoi']} rơi vào {', '.join(d['xau'])} — dân gian thường tránh làm nhà, cưới hỏi năm này."})
+    # SEO-M: trả lời trước — chỉ ghép kết luận + năm thuận đã tính.
+    tra_loi = (f"{ket['chu']} Người sinh năm {nam_sinh} ({can} {chi}) tính tuổi mụ {d['tuoi']} vào năm {nam_xay}."
+               + (f" Năm gần nhất không phạm: {nam_thuan[0]['nam']} ({nam_thuan[0]['can_chi']}, tuổi {nam_thuan[0]['tuoi_mu']})."
+                  if d["xau"] and nam_thuan else ""))
     return {
+        "tra_loi_nhanh": tra_loi,
         "nam_sinh": nam_sinh, "nam_sinh_am": nsa, "can_chi": f"{can} {chi}", "nam_xay": nam_xay,
         "can_chi_nam_xay": " ".join(t.can_chi_nam(nam_xay)), "tuoi_mu": d["tuoi"],
         "uoc_luong_nam_sinh": not (thang_sinh and ngay_sinh),
@@ -84,7 +89,23 @@ def han_nam_luan(nam: int) -> dict:
                                   7: "Thất Xích", 8: "Bát Bạch", 9: "Cửu Tử"}[x["sao"]],
                  "y_nghia": sao[str(x["sao"])].get("y_vuong")} for x in h["phi_tinh"]]
     tet = dt.date(*reversed(lunar.lunar_to_solar(1, 1, nam, 0, CALENDAR_MERIDIAN_TZ)))
+    # SEO-M: trả lời trước + hỏi đáp — chỉ ghép phương đã tính.
+    ten_phuong = "; ".join(f"{x['ten']} ở {x['phuong']}" for x in tranh)
+    tra_loi = (f"Năm {nam} ({h['can_chi']}), các phương truyền thống khuyên tránh động thổ, đục phá lớn: {ten_phuong}. "
+               f"Tính theo năm tiết khí từ Lập xuân (khoảng 4/2/{nam}).")
+    hd = [
+        {"hoi": f"Năm {nam} hướng nào xấu, không nên động thổ?", "dap": tra_loi},
+        {"hoi": f"Năm {nam} Thái Tuế ở đâu?", "dap": next(
+            f"Thái Tuế năm {h['can_chi']} ở phương {x['phuong']} ({', '.join(x.get('chi', []))}); Tuế Phá ở phương đối diện."
+            for x in tranh if x["ma"] == "thai_tue")},
+        {"hoi": f"Năm {nam} Ngũ Hoàng, Nhị Hắc bay tới đâu?", "dap": "; ".join(
+            f"{x['ten']} bay tới phương {x['phuong']}" for x in tranh if x["ma"] in ("ngu_hoang", "nhi_hac")) + "."},
+        {"hoi": "Đang ở sẵn nhà có cần đổi hướng không?",
+         "dap": "Không. Hạn năm chỉ nhắc tránh khởi công, đục phá lớn ở các phương đó trong năm; nhà đang ở giữ nguyên, "
+                "giữ phía ấy gọn gàng, yên tĩnh là đủ."},
+    ]
     return {"nam": nam, "can_chi": h["can_chi"], "huong_tranh": tranh, "phi_tinh": phi_tinh,
+            "tra_loi_nhanh": tra_loi, "hoi_dap": hd,
             "moc": f"Tính từ Lập xuân (khoảng 4/2/{nam}); Tết Việt năm {h['can_chi']} là {tet.day}/{tet.month}/{tet.year}.",
             **_meta()}
 
@@ -116,7 +137,15 @@ def xong_dat_luan(nam: int, nam_sinh_chu: int, thang_sinh: int | None = None, ng
     tam_tai_nam = [c for c in t.CHI if t.pham_tam_tai(c, chi_n)]
     tet = dt.date(*reversed(lunar.lunar_to_solar(1, 1, nam, 0, CALENDAR_MERIDIAN_TZ)))
     m1 = hl.ngay_xem(tet)
+    # SEO-M: trả lời trước — 3 tuổi hợp đầu + tuổi nên tránh + giờ đẹp mùng 1 (đều đã tính).
+    tra_loi = (f"Gia chủ sinh năm {nam_sinh_chu} ({can_c} {chi_c}) đón Tết {can_n} {chi_n} "
+               + ("có thể nhờ người tuổi " + ", ".join(f"{x['nam_sinh']} ({x['can_chi']})" for x in hop[:3]) + " xông đất."
+                  if hop else "chưa thấy tuổi nào hợp đủ điều kiện trong khoảng 1960–2008, nên chọn người thân thuận hoà.")
+               + f" Nên tránh tuổi {xung_nam}, tuổi {xung_chu} và các tuổi {', '.join(tam_tai_nam)} đang Tam tai. "
+               f"Mùng 1 Tết ({tet.day}/{tet.month}/{tet.year}) giờ hoàng đạo đầu tiên là "
+               f"{m1['gio_hoang_dao'][0]['chi']} ({m1['gio_hoang_dao'][0]['khung']}).")
     return {
+        "tra_loi_nhanh": tra_loi,
         "nam": {"nam": nam, "can_chi": f"{can_n} {chi_n}"}, "chu": {"nam_sinh": nam_sinh_chu, "can_chi": f"{can_c} {chi_c}"},
         "uoc_luong_nam_sinh": not (thang_sinh and ngay_sinh),
         "tuoi_hop": hop,
