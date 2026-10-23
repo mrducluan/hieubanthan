@@ -361,6 +361,360 @@
     "Nói ra phần người ấy đã góp"
    ]
   },
+  "hoa-loc-cung-tu-nu": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Lộc ở cung Tử Nữ là gì?",
+     "doan": "Hoá Lộc ở cung Tử Nữ là khi sao trong cung con cái mang Lộc, nên con cái, học trò hay những gì bạn tự tay làm ra thường đem lại niềm vui và sự tự hào. Sách xưa đọc cung này rộng: con ruột, con nuôi, người mình dìu dắt, cả sản phẩm của mình. Lộc ở đây là dòng vui chảy từ thế hệ sau về."
+    },
+    {
+     "tieu_de": "Hoá Lộc Tử Nữ với người chưa có con",
+     "doan": "Với người chưa có con, cung này đọc sang học trò, nhân viên trẻ, cháu trong nhà, hoặc dự án mình gây dựng. Nhiều người Lộc ở Tử Nữ có duyên dạy người mới, làm sản phẩm thủ công, mở lớp nhỏ. Cung này không trả lời chuyện có con hay không, chuyện đó thuộc về bác sĩ và hai người."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Lộc vào cung Tử Nữ?",
+     "doan": "Đó là năm can làm sao trong cung Tử Nữ hoá Lộc. Cung này có Thiên Cơ thì xem năm 2035 (Ất Mão); có Cự Môn thì năm 2031 (Tân Hợi). Năm như vậy hợp để cùng con làm một việc lớn, như chọn trường, hoặc ra mắt một sản phẩm của riêng mình."
+    },
+    {
+     "tieu_de": "Có Hoá Lộc ở Tử Nữ nên làm gì?",
+     "danh_sach": [
+      "Ghi lại những việc con hay học trò làm tốt, kể lại với chúng vào cuối tuần.",
+      "Nếu đang có sản phẩm riêng, thử bán thử một lô nhỏ để xem người dùng nói gì.",
+      "Khi con đang thuận, giữ nhịp chơi cùng con thay vì thêm lớp học."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Lộc — đọc ở cung Tử Nữ",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Lộc trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Lộc lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tử Nữ. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Lộc",
+     "Ở cung Tử Nữ thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Liêm Trinh",
+      "Con nề nếp, giữ lời; dạy con bằng nguyên tắc rõ thì dễ."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Cơ",
+      "Con lanh lợi, hỏi nhiều; hợp những trò chơi động não."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Đồng",
+      "Con vui tính, hay làm cả nhà cười."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thái Âm",
+      "Con tình cảm, biết chăm người khác từ sớm."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Tham Lang",
+      "Con có tài lẻ, nhiều bạn; cần dạy cách chọn bạn."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Vũ Khúc",
+      "Con biết giữ tiền, có khi tự kiếm được khá sớm."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Dương",
+      "Con hào phóng, thích được nhiều người biết đến."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Cự Môn",
+      "Con ăn nói giỏi; hợp thi hùng biện, tranh luận."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Thiên Lương",
+      "Con chín chắn trước tuổi, hay lo cho em."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Phá Quân",
+      "Con thích tự làm theo cách mới; sản phẩm riêng dễ có điểm lạ."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Lộc ở Tử Nữ có phải con giàu?",
+     "dap": "Không nên đọc như vậy. Lộc nói về niềm vui và sự tiếp sức mà con hay việc mình làm ra mang lại. Tiền của con là chuyện của lá số con."
+    },
+    {
+     "hoi": "Lộc ở Tử Nữ gặp Kỵ ở Điền Trạch thì đọc thế nào?",
+     "dap": "Điền Trạch là cung xung chiếu, nên con cái vui mà chuyện nhà cửa hay tốn công. Một gợi ý là để con cùng tham gia việc sắp xếp nhà."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc cung Tử Nữ cho con cái và người dưới. Lộc vào đây được hiểu là được nhờ con, con hiếu thuận; sách cũng dặn xét thêm chính tinh và cung Phúc Đức, không luận một mình Lộc."
+    }
+   ],
+   "y_chinh": [
+    "Lộc ở Tử Nữ: con, học trò, sản phẩm riêng mang lại niềm vui",
+    "Chưa có con: đọc sang người mình dìu dắt",
+    "Năm Lộc vào Tử Nữ hợp làm việc lớn cùng con",
+    "Ghi lại việc con làm tốt và kể lại với con"
+   ]
+  },
+  "hoa-loc-cung-tai-bach": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Lộc ở cung Tài Bạch là gì?",
+     "doan": "Hoá Lộc ở cung Tài Bạch là khi sao trong cung tiền bạc mang Lộc, nên tiền thường đến khá dễ và hay có thêm nguồn thu ngoài khoản chính. Sách xưa coi đây là Lộc \"về đúng nhà\", vì Lộc vốn chủ tài. Tiền vào dễ thì cũng dễ ra, nên cách giữ quan trọng không kém cách kiếm."
+    },
+    {
+     "tieu_de": "Hoá Lộc Tài Bạch hợp kiếm tiền bằng cách nào?",
+     "doan": "Cách kiếm tiền phụ thuộc sao mang Lộc: Vũ Khúc hợp tài chính, kinh doanh; Thái Âm hợp tích luỹ, bất động sản; Cự Môn hợp nghề dùng lời nói; Tham Lang hợp giao thương, ăn uống, giải trí. Đọc thêm cung Quan Lộc để biết nghề, và Điền Trạch để biết tiền có đọng lại thành tài sản không."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Lộc vào cung Tài Bạch?",
+     "doan": "Đó là năm can làm sao trong cung Tài Bạch hoá Lộc. Cung có Thái Âm thì xem năm 2027 (Đinh Mùi); có Thiên Lương thì năm 2032 (Nhâm Tý). Năm như vậy dòng tiền thường dễ thở hơn; hợp để trả nợ, lập quỹ, không phải để đặt cược lớn."
+    },
+    {
+     "tieu_de": "Có Hoá Lộc ở Tài Bạch nên làm gì?",
+     "danh_sach": [
+      "Mỗi khoản thu thêm chia ngay ba phần: tiêu, để dành, học hoặc đầu tư nhỏ.",
+      "Ghi lại nguồn thu nào đến đều nhất trong sáu tháng để dồn sức vào đó.",
+      "Đặt mức tối đa cho các khoản chi vì vui, để tiền dễ vào không thành dễ ra."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Lộc — đọc ở cung Tài Bạch",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Lộc trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Lộc lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tài Bạch. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Lộc",
+     "Ở cung Tài Bạch thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Liêm Trinh",
+      "Tiền đến qua làm đúng quy trình, giữ chữ tín."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Cơ",
+      "Tiền đến từ ý tưởng, kế hoạch, nghề cần suy tính."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Đồng",
+      "Tiền đến nhẹ nhàng, không cần tranh giành; ít khi túng."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thái Âm",
+      "Giỏi tích luỹ từng ít; tiền đọng lại thành tài sản."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Tham Lang",
+      "Tiền đến từ giao thiệp, buôn bán, dịch vụ vui chơi."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Vũ Khúc",
+      "Tiền theo đúng nghề tài chính, kinh doanh; giỏi xoay vốn."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Dương",
+      "Tiền đến từ việc công khai, có tiếng; cũng hay chi cho người."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Cự Môn",
+      "Tiền đến từ lời nói: bán hàng, dạy, tư vấn."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Thiên Lương",
+      "Tiền đến chậm mà chắc, nhờ uy tín và người lớn giúp."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Phá Quân",
+      "Tiền đến từ việc mới, dám thử; vào nhanh ra cũng nhanh."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Lộc ở Tài Bạch có cần đầu tư mạo hiểm?",
+     "dap": "Không cần. Lộc cho thấy tiền dễ đến; đầu tư liều lại là cách nhanh nhất để mất cái thuận ấy. Một quỹ dự phòng thường có lợi hơn."
+    },
+    {
+     "hoi": "Lộc ở Tài Bạch mà Kỵ ở Phúc Đức thì đọc sao?",
+     "dap": "Tiền vào được nhưng đầu óc khó yên, hay lo chuyện họ hàng hoặc chuyện cũ. Dành một khoản riêng cho việc giúp người thân sẽ đỡ bận lòng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tài Bạch cho tiền bạc và cách kiếm tiền. Lộc là sao chủ tài lộc, vào cung này được xem là tiền dễ tụ; sách vẫn xét chính tinh, Lộc Tồn và các sát tinh hội chiếu để nói giữ được hay hao."
+    }
+   ],
+   "y_chinh": [
+    "Lộc ở Tài Bạch: tiền đến khá dễ, có thu nhập phụ",
+    "Sao mang Lộc cho biết kiếm tiền bằng nghề gì",
+    "Năm Lộc vào Tài Bạch hợp lập quỹ, trả nợ",
+    "Chia mỗi khoản thu thêm thành ba phần"
+   ]
+  },
+  "hoa-loc-cung-tat-ach": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Lộc ở cung Tật Ách là gì?",
+     "doan": "Hoá Lộc ở cung Tật Ách là khi sao trong cung thể chất mang Lộc, nên cơ thể thường hồi sức khá nhanh và nhịp sống ít bị đẩy tới giới hạn. Sách xưa coi Lộc ở đây là ít tai ách. Mặt cần để ý là dễ ăn uống, nghỉ ngơi theo kiểu thoải mái quá. Phần này chỉ để tham khảo, không thay lời bác sĩ."
+    },
+    {
+     "tieu_de": "Hoá Lộc Tật Ách: thói quen nào dễ lệch?",
+     "doan": "Người có Lộc ở Tật Ách hay tin mình khoẻ nên bỏ qua giấc ngủ, ăn tiệc liên tục, ít vận động. Sách xưa gắn mỗi chính tinh với một vùng cơ thể, ví dụ Tham Lang với gan thận, Thiên Đồng với thận và tiết niệu. Nên chăm sóc phòng ngừa vùng đó và khám định kỳ."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Lộc vào cung Tật Ách?",
+     "doan": "Đó là năm can làm sao trong cung Tật Ách hoá Lộc. Cung có Tham Lang thì xem năm 2028 (Mậu Thân); có Thiên Đồng thì năm 2026 (Bính Ngọ). Năm như vậy hợp để bắt đầu một thói quen tốt vì dễ giữ; lá số không đoán năm ốm hay khỏi."
+    },
+    {
+     "tieu_de": "Có Hoá Lộc ở Tật Ách nên làm gì?",
+     "danh_sach": [
+      "Giữ bữa ăn chừng mực cả những tuần nhiều tiệc.",
+      "Chọn một môn vận động nhẹ mà mình thấy vui để giữ được lâu.",
+      "Đặt lịch khám định kỳ hằng năm, coi như việc bảo dưỡng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Lộc — đọc ở cung Tật Ách",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Lộc trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Lộc lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tật Ách. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Lộc",
+     "Ở cung Tật Ách thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Liêm Trinh",
+      "Sách gắn sao với máu, tim mạch, da; nên giữ nhịp xả căng thẳng."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Cơ",
+      "Gắn với gan, tay chân; nên đứng dậy giãn cơ khi ngồi lâu."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Đồng",
+      "Gắn với thận, tiết niệu; uống đủ nước, ngại vận động là chỗ lệch."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thái Âm",
+      "Gắn với giấc ngủ, mắt; giữ giờ ngủ, tắt màn hình sớm."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Tham Lang",
+      "Gắn với gan thận; tiệc tùng, thức khuya là thói quen cần bớt."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Vũ Khúc",
+      "Gắn với hô hấp, răng mũi; tránh khói, giữ ấm cổ."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Dương",
+      "Gắn với mắt, vùng đầu; cho mắt nghỉ sau mỗi giờ màn hình."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Cự Môn",
+      "Gắn với miệng họng, tiêu hoá; ăn chậm, nói vừa phải."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Thiên Lương",
+      "Gắn với dạ dày, vùng ngực; ăn đúng giờ cả khi bận lo cho người."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Phá Quân",
+      "Gắn với thận, ruột, xương khớp; khởi động kỹ trước khi vận động mạnh."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Lộc ở Tật Ách có phải không bao giờ ốm?",
+     "dap": "Không. Lộc chỉ cho thấy nhịp hồi sức thường tốt. Lá số không thay lời bác sĩ; khám định kỳ vẫn là cách biết rõ nhất."
+    },
+    {
+     "hoi": "Lộc ở Tật Ách có liên quan tinh thần không?",
+     "dap": "Có phần. Sách xưa xem Tật Ách cả ở nhịp tâm trạng; Lộc ở đây thường cho người ít để buồn kéo dài, nhưng vẫn nên ngủ đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tật Ách cho thân thể và tai ách. Lộc vào đây được coi là thân ít bệnh tật, gặp nạn nhẹ; sách gắn mỗi sao với một vùng thân thể theo ngũ hành. Đây là quan niệm cổ, không thay lời bác sĩ."
+    }
+   ],
+   "y_chinh": [
+    "Lộc ở Tật Ách: hồi sức nhanh, nhịp sống ít bị đẩy quá",
+    "Dễ lệch vì ăn uống, nghỉ ngơi thoải mái quá",
+    "Mỗi sao gắn một vùng thân thể: chăm sóc phòng ngừa",
+    "Khám định kỳ; lá số không thay lời bác sĩ"
+   ]
+  },
   "hoa-quyen-cung-menh": {
    "muc": [
     {
@@ -715,6 +1069,360 @@
     "Vợ chồng làm ăn: mỗi người giữ một mảng"
    ]
   },
+  "hoa-quyen-cung-tu-nu": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Quyền ở cung Tử Nữ là gì?",
+     "doan": "Hoá Quyền ở cung Tử Nữ là khi sao trong cung con cái mang Quyền, nên hoặc con có cá tính mạnh, hoặc bạn là cha mẹ đặt nhiều kỳ vọng và hay sắp đặt. Hai điều ấy thường đi cùng nhau. Sách xưa nói con \"có quyền thế\"; ngày nay hiểu là con sớm muốn tự quyết."
+    },
+    {
+     "tieu_de": "Hoá Quyền Tử Nữ: con tuổi dậy thì và cha mẹ",
+     "doan": "Giai đoạn con mười hai đến mười bảy tuổi là lúc Quyền ở Tử Nữ hiện rõ nhất: con cãi lý, đòi chọn bạn, chọn trường. Cha mẹ có Quyền ở đây hay thấy mình phải thắng. Cách êm hơn là chia ra việc con tự quyết, việc cha mẹ quyết, việc hai bên bàn."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Quyền vào cung Tử Nữ?",
+     "doan": "Khi can năm làm sao trong cung Tử Nữ hoá Quyền. Cung có Thái Âm thì xem năm 2028 (Mậu Thân); có Cự Môn thì năm 2033 (Quý Sửu). Năm như vậy chuyện dạy con dễ cần quyết lớn, như đổi trường; nên nghe con trước khi chốt."
+    },
+    {
+     "tieu_de": "Có Hoá Quyền ở Tử Nữ nên làm gì?",
+     "danh_sach": [
+      "Cho con tự quyết hai việc nhỏ mỗi ngày, rồi tăng dần theo tuổi.",
+      "Khi muốn con làm gì, nói lý do trước, yêu cầu sau.",
+      "Với nhân viên trẻ hay học trò, giao kết quả cần đạt, để họ tự chọn cách."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Quyền — đọc ở cung Tử Nữ",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Quyền trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Quyền lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tử Nữ. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Quyền",
+     "Ở cung Tử Nữ thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Phá Quân",
+      "Con dám thử, thích làm khác; cần được giới hạn an toàn rõ."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Lương",
+      "Con nói như người lớn, thích khuyên bạn bè."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Cơ",
+      "Con giỏi lên kế hoạch, không thích bị đổi lịch đột ngột."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Đồng",
+      "Con dễ thương mà bướng; vui vẻ nhưng làm theo ý mình."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thái Âm",
+      "Con gái hoặc con nhạy cảm nắm việc nhà khá sớm."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Tham Lang",
+      "Con có sức hút, hay làm thủ lĩnh trong nhóm bạn."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Vũ Khúc",
+      "Con quyết đoán chuyện tiền tiêu vặt, rõ ràng sòng phẳng."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Thái Dương",
+      "Con muốn được khen trước mọi người, thích đứng đầu lớp."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tử Vi",
+      "Con tự trọng cao, không chịu bị la trước mặt người khác."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Cự Môn",
+      "Con lý lẽ sắc, cãi lý giỏi; hợp tập tranh biện."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Quyền ở Tử Nữ có phải con khó dạy?",
+     "dap": "Con có chính kiến thì khó áp đặt, nhưng dễ dạy khi được giải thích. Nhiều phụ huynh thấy con kiểu này rất có trách nhiệm khi được giao việc thật."
+    },
+    {
+     "hoi": "Quyền ở Tử Nữ có liên quan việc làm thầy, làm sếp?",
+     "dap": "Có. Cung này cũng nói về người dưới, nên Quyền ở đây hay gặp ở người dẫn dắt học trò, quản lý nhóm trẻ. Giao việc rõ là điểm mạnh cần giữ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tử Nữ cho con cái và người dưới quyền. Quyền đến đây được xem là con cái có tài, có chí; sách vẫn xét chính tinh để biết chí ấy hợp hay dễ trái ý cha mẹ."
+    }
+   ],
+   "y_chinh": [
+    "Quyền ở Tử Nữ: con cá tính mạnh, hoặc cha mẹ kỳ vọng cao",
+    "Hiện rõ ở tuổi dậy thì",
+    "Chia việc con tự quyết, cha mẹ quyết, hai bên bàn",
+    "Nói lý do trước, yêu cầu sau"
+   ]
+  },
+  "hoa-quyen-cung-tai-bach": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Quyền ở cung Tài Bạch là gì?",
+     "doan": "Hoá Quyền ở cung Tài Bạch là khi sao trong cung tiền bạc mang Quyền, nên bạn chủ động kiếm tiền, giỏi thương lượng và muốn tự quyết mọi khoản chi. Sách xưa coi Quyền ở đây là \"nắm tài\": tiền đến qua sức mình chứ ít khi nhờ may. Dễ vướng là giữ chặt quá, người nhà không biết tiền đi đâu."
+    },
+    {
+     "tieu_de": "Hoá Quyền Tài Bạch và chuyện tiền trong gia đình",
+     "doan": "Người có Quyền ở Tài Bạch hay là người giữ sổ, quyết mua gì, gửi gì. Việc đó giúp nhà có kỷ luật tiền bạc, nhưng nếu không nói ra, người kia dễ thấy bị loại khỏi chuyện chung. Một buổi xem lại tiền mỗi tháng thường đủ để mọi người yên tâm."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Quyền vào cung Tài Bạch?",
+     "doan": "Đó là năm can làm sao trong cung Tài Bạch hoá Quyền. Cung có Vũ Khúc thì xem năm 2030 (Canh Tuất); có Thiên Cơ thì năm 2026 (Bính Ngọ). Năm như vậy hợp để đàm phán lương, giá, hợp đồng; nên chuẩn bị số liệu trước khi ngồi bàn."
+    },
+    {
+     "tieu_de": "Có Hoá Quyền ở Tài Bạch nên làm gì?",
+     "danh_sach": [
+      "Đặt một ngưỡng chi lớn, vượt ngưỡng thì chờ một đêm hoặc hỏi người nhà.",
+      "Trước mỗi cuộc thương lượng, viết ra mức thấp nhất mình chấp nhận.",
+      "Chia sẻ bảng thu chi đơn giản cho người cùng nhà."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Quyền — đọc ở cung Tài Bạch",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Quyền trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Quyền lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tài Bạch. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Quyền",
+     "Ở cung Tài Bạch thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Phá Quân",
+      "Dám đổi cách kiếm tiền, sẵn sàng bỏ nghề cũ để làm việc mới."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Lương",
+      "Kiếm tiền bằng uy tín người lớn: tư vấn, quản lý, dạy."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Cơ",
+      "Giỏi tính toán, lập kế hoạch tài chính chi tiết."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Đồng",
+      "Vui vẻ mà chặt tay; ít khi để ai lấy phần của mình."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thái Âm",
+      "Nắm tiền nhà, tích luỹ đều, quyết mua tài sản giỏi."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Tham Lang",
+      "Giỏi bán, giỏi kéo khách; tiền theo khả năng thuyết phục."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Vũ Khúc",
+      "Quyết đoán tiền bạc, thương lượng cứng, hợp nghề tài chính."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Thái Dương",
+      "Kiếm tiền nhờ danh, nhờ chức; muốn được trả xứng."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tử Vi",
+      "Quen làm chủ tiền, khó chịu khi phải xin phép chi."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Cự Môn",
+      "Thương lượng bằng lý lẽ; hợp nghề cần đàm phán, pháp lý."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Quyền ở Tài Bạch có hợp làm chủ kinh doanh?",
+     "dap": "Thường là hợp, vì người này dám quyết chuyện tiền và chịu trách nhiệm kết quả. Nên có người khác soát sổ để tránh quyết theo cảm giác."
+    },
+    {
+     "hoi": "Quyền ở Tài Bạch gặp Kỵ cùng cung thì sao?",
+     "dap": "Vừa muốn nắm tiền vừa hay lo thiếu, dễ siết chi quá tay. Có quỹ dự phòng rõ ràng giúp bớt lo mà vẫn giữ quyền chủ động."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tài Bạch cho tiền bạc; Quyền là sao chủ uy quyền. Quyền vào đây được xem là tự tay làm ra tiền, có tài quản lý; sách vẫn xét chính tinh và cung Phúc Đức xung chiếu."
+    }
+   ],
+   "y_chinh": [
+    "Quyền ở Tài Bạch: chủ động kiếm tiền, giỏi thương lượng",
+    "Dễ giữ chặt quá, người nhà không biết tiền đi đâu",
+    "Năm Quyền vào Tài Bạch hợp đàm phán lương, giá",
+    "Đặt ngưỡng chi lớn phải chờ một đêm"
+   ]
+  },
+  "hoa-quyen-cung-tat-ach": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Quyền ở cung Tật Ách là gì?",
+     "doan": "Hoá Quyền ở cung Tật Ách là khi sao trong cung thể chất mang Quyền, nên bạn chịu áp lực tốt nhưng hay gồng, mệt vẫn cố làm. Sách xưa coi Quyền ở đây là thân có sức chống chịu. Cái cần để ý là bạn thường chỉ dừng khi đã quá mệt. Phần này chỉ để tham khảo, không thay lời bác sĩ."
+    },
+    {
+     "tieu_de": "Hoá Quyền Tật Ách và thói quen làm việc quá sức",
+     "doan": "Một kiểu hay gặp: làm dồn cả tuần, cuối tuần ngủ bù, đầu tuần lại dồn tiếp. Người có Quyền ở Tật Ách thường coi việc nghỉ là yếu đuối. Sách xưa gắn sao mang Quyền với một vùng cơ thể, ví dụ Vũ Khúc với hô hấp, Thái Dương với mắt; nên chăm sóc phòng ngừa vùng đó và khám định kỳ."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Quyền vào cung Tật Ách?",
+     "doan": "Đó là năm can làm sao trong cung Tật Ách hoá Quyền. Cung có Thái Dương thì xem năm 2031 (Tân Hợi); có Thiên Đồng thì năm 2027 (Đinh Mùi). Năm như vậy dễ bị cuốn vào nhịp làm căng; nên đặt lịch nghỉ trước. Lá số không đoán năm ốm."
+    },
+    {
+     "tieu_de": "Có Hoá Quyền ở Tật Ách nên làm gì?",
+     "danh_sach": [
+      "Ghi giờ nghỉ vào lịch như một cuộc hẹn, không được lỡ.",
+      "Mỗi tuần có một ngày không làm việc gì liên quan nghề.",
+      "Khi thấy mệt kéo dài, đi khám thay vì cố thêm."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Quyền — đọc ở cung Tật Ách",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Quyền trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Quyền lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tật Ách. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Quyền",
+     "Ở cung Tật Ách thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Phá Quân",
+      "Gắn với thận, ruột, xương khớp; dồn sức là thói quen cần bớt."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Lương",
+      "Gắn với dạ dày, vùng ngực; ăn đúng bữa khi bận."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Cơ",
+      "Gắn với gan, gân cơ; giãn cơ, ngủ đủ khi làm trí óc nhiều."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Đồng",
+      "Gắn với thận, tiết niệu; uống đủ nước, vận động nhẹ."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thái Âm",
+      "Gắn với giấc ngủ, mắt, nội tiết; tránh thức khuya nghĩ ngợi."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Tham Lang",
+      "Gắn với gan thận; bớt rượu bia, ngủ trước nửa đêm."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Vũ Khúc",
+      "Gắn với hô hấp, răng mũi; đừng bỏ qua những đợt cảm nhẹ."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Thái Dương",
+      "Gắn với mắt, đầu, nhịp tim; cho mắt nghỉ, đừng cố tỏ ra khoẻ."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tử Vi",
+      "Gắn với tiêu hoá, giấc ngủ; giao bớt việc để ăn ngủ đều."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Cự Môn",
+      "Gắn với miệng họng, tiêu hoá; giữ giọng, ăn chậm."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Quyền ở Tật Ách có phải người khoẻ mạnh?",
+     "dap": "Thường là người có sức bền. Nhưng sức bền dễ làm mình chủ quan; lá số không thay lời bác sĩ, khám định kỳ vẫn cần."
+    },
+    {
+     "hoi": "Quyền ở Tật Ách có hợp thể thao cường độ cao?",
+     "dap": "Hợp nếu tập có người hướng dẫn và khởi động kỹ. Người có Quyền ở đây hay muốn vượt giới hạn, nên tăng dần thay vì tăng vọt."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tật Ách cho thân thể; Quyền là sao chủ uy lực. Quyền vào đây được xem là thân có sức chịu đựng, gặp ách thì chống được; sách gắn sao với vùng thân thể theo ngũ hành. Đây là quan niệm cổ, không thay lời bác sĩ."
+    }
+   ],
+   "y_chinh": [
+    "Quyền ở Tật Ách: chịu áp lực tốt nhưng hay gồng",
+    "Thường chỉ dừng khi đã quá mệt",
+    "Ghi giờ nghỉ vào lịch như một cuộc hẹn",
+    "Khám định kỳ; lá số không thay lời bác sĩ"
+   ]
+  },
   "hoa-khoa-cung-menh": {
    "muc": [
     {
@@ -948,7 +1656,7 @@
     "Khoa ở Huynh Đệ: anh em hiểu biết, khuyên đúng lúc",
     "Giúp bằng chỉ đường, giới thiệu hơn là tiền",
     "Hỏi ý anh chị đi trước khi chọn trường, chọn việc",
-    "Giữ hoà khí thật, không chỉ bề ngoài"
+    "Giữ hoà khí thật lòng, cả khi khó nói"
    ]
   },
   "hoa-khoa-cung-phu-the": {
@@ -1067,6 +1775,360 @@
     "Dễ giữ thể diện mà không nói thật",
     "Mỗi tuần một lần nói thật khi chỉ có hai người",
     "Cùng học một thứ mới"
+   ]
+  },
+  "hoa-khoa-cung-tu-nu": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Khoa ở cung Tử Nữ là gì?",
+     "doan": "Hoá Khoa ở cung Tử Nữ là khi sao trong cung con cái mang Khoa, nên con thường có duyên học hành, lễ phép, dễ được thầy cô và người lớn quý. Với người làm thầy, cung này cũng cho thấy học trò hay có tiếng. Sách xưa xem Khoa ở đây là con cái \"có danh\"."
+    },
+    {
+     "tieu_de": "Hoá Khoa Tử Nữ có giúp con học giỏi?",
+     "doan": "Khoa cho con nền tảng ham đọc, ham hỏi, nhưng kết quả học còn tuỳ cách cha mẹ đi cùng. Con kiểu này hợp được khen đúng việc, được giao sách hay, được đưa đi bảo tàng, thư viện. Ép học thêm quá nhiều lại làm mất cái thích tự nhiên."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Khoa vào cung Tử Nữ?",
+     "doan": "Khi can năm làm sao trong cung Tử Nữ hoá Khoa. Ví dụ cung có Văn Khúc thì năm 2031 (Tân Hợi); có Thiên Cơ thì năm 2027 (Đinh Mùi). Năm như vậy hợp để con thi một kỳ năng khiếu, hoặc để bạn viết lại kinh nghiệm dạy người mới."
+    },
+    {
+     "tieu_de": "Có Hoá Khoa ở Tử Nữ nên làm gì?",
+     "danh_sach": [
+      "Đọc cùng con mười lăm phút mỗi tối, để con chọn sách.",
+      "Khen con theo việc: \"con giải bài này theo cách hay\" thay vì \"con giỏi quá\".",
+      "Nếu đang dạy học trò, ghi lại một bài học cũ để học trò mới dùng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Khoa — đọc ở cung Tử Nữ",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Khoa trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Khoa lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tử Nữ. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Khoa",
+     "Ở cung Tử Nữ thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Vũ Khúc",
+      "Con giữ tiền tiêu vặt gọn gàng, đáng tin khi được giao."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Tử Vi",
+      "Con đĩnh đạc, được người lớn nể từ nhỏ."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Văn Xương",
+      "Con thích viết, đọc nhiều; hợp thi văn."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Cơ",
+      "Con tư duy nhanh, hợp toán, khoa học, đố vui."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Hữu Bật",
+      "Con hay giúp bạn, được thầy cô nhờ làm cán sự."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Thiên Lương",
+      "Con hiền, biết nghe; hợp được giao việc chăm em."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Âm",
+      "Con dịu, tinh tế; hợp nhạc, vẽ, những việc cần sự tỉ mỉ."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Khúc",
+      "Con có khiếu nói, diễn; hợp sân khấu, thuyết trình."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tả Phù",
+      "Con là người phụ giỏi trong nhóm, được bạn tin."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Thái Âm",
+      "Con kín đáo, chăm; thành tích hay đến từ việc làm đều."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Khoa ở Tử Nữ có liên quan con cháu có tiếng?",
+     "dap": "Sách xưa nghĩ vậy, nhưng nên hiểu là con có nền nếp, dễ được tin. Tiếng tăm thực sự tuỳ vào chính đời con."
+    },
+    {
+     "hoi": "Khoa ở Tử Nữ gặp Kỵ cùng cung thì sao?",
+     "dap": "Con vừa ham học vừa dễ áp lực vì muốn giữ thành tích. Cha mẹ nên khen nỗ lực nhiều hơn khen điểm số."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tử Nữ cho con cái; Khoa là sao văn danh. Khoa vào đây được hiểu là con cái thông minh, có danh; sách vẫn xem chính tinh và cung Điền Trạch xung chiếu."
+    }
+   ],
+   "y_chinh": [
+    "Khoa ở Tử Nữ: con có duyên học, lễ phép",
+    "Học trò của người làm thầy hay có tiếng",
+    "Khen con theo việc cụ thể",
+    "Đọc cùng con, để con chọn sách"
+   ]
+  },
+  "hoa-khoa-cung-tai-bach": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Khoa ở cung Tài Bạch là gì?",
+     "doan": "Hoá Khoa ở cung Tài Bạch là khi sao trong cung tiền bạc mang Khoa, nên tiền thường đến qua uy tín, chuyên môn, bằng cấp hơn là qua may rủi. Sách xưa nói Khoa \"có danh nhiều hơn lợi\", nên ở Tài Bạch tiền đều mà ít khi bùng. Lúc túng, hay có người tin mà cho mượn."
+    },
+    {
+     "tieu_de": "Hoá Khoa Tài Bạch hợp nghề gì?",
+     "doan": "Hợp những nghề tiền đi theo tên tuổi: giáo viên, tư vấn, kế toán, luật, thiết kế, viết. Giá trị của bạn tăng khi có thêm chứng chỉ, sản phẩm mẫu, khách cũ giới thiệu. Nghề cần đánh liều thường không hợp bằng nghề cần làm kỹ."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Khoa vào cung Tài Bạch?",
+     "doan": "Khi can năm làm sao trong cung Tài Bạch hoá Khoa. Ví dụ cung có Vũ Khúc thì năm 2034 (Giáp Dần); có Hữu Bật thì năm 2028 (Mậu Thân). Năm như vậy hợp để nâng giá dịch vụ nhờ chứng chỉ mới, hoặc dọn sạch giấy tờ thuế, sổ sách."
+    },
+    {
+     "tieu_de": "Có Hoá Khoa ở Tài Bạch nên làm gì?",
+     "danh_sach": [
+      "Ghi thu chi rõ ràng; uy tín tiền bạc là vốn của bạn.",
+      "Dành một khoản mỗi năm cho học thêm, coi như đầu tư.",
+      "Xin khách cũ một lời nhận xét để dùng khi chào giá."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Khoa — đọc ở cung Tài Bạch",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Khoa trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Khoa lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tài Bạch. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Khoa",
+     "Ở cung Tài Bạch thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Vũ Khúc",
+      "Được tin trong chuyện tiền; hợp nghề giữ quỹ, kế toán."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Tử Vi",
+      "Tiền đến nhờ vị trí, tên tuổi; hợp vai trò cố vấn."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Văn Xương",
+      "Tiền đến từ viết, soạn tài liệu, giấy tờ chuyên môn."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Cơ",
+      "Tiền đến từ đầu óc: phân tích, thiết kế, lập kế hoạch."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Hữu Bật",
+      "Có người đỡ lúc túng; tiền đến qua làm trợ lý giỏi."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Thiên Lương",
+      "Tiền đến từ nghề chăm người: y, giáo, bảo hiểm."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Âm",
+      "Tích luỹ êm, chi tiêu chừng mực, ít nợ nần."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Khúc",
+      "Tiền đến từ tài nghệ, ăn nói, biểu diễn."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tả Phù",
+      "Tiền đến từ việc hỗ trợ người khác làm ăn."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Thái Âm",
+      "Tiền đến lặng lẽ, đều đặn; ít khoe mà đủ."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Khoa ở Tài Bạch có giàu không?",
+     "dap": "Thường là đủ đầy và ổn định hơn là giàu nhanh. Muốn đọc mức tài sản, xem thêm Điền Trạch và có Lộc chiếu vào Tài Bạch hay không."
+    },
+    {
+     "hoi": "Khoa ở Tài Bạch gặp Kỵ chiếu từ Phúc Đức thì sao?",
+     "dap": "Tiền ổn nhưng đầu óc hay lo, dễ chi cho người thân vì thương. Đặt hạn mức giúp người nhà giúp giữ cả tình lẫn tiền."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tài Bạch cho tiền bạc; Khoa là sao chủ danh. Sách thường nói Khoa ở đây là được tiếng hơn được lợi, tiền đến nhờ danh; vẫn phải xét chính tinh cùng Lộc, Quyền hội chiếu."
+    }
+   ],
+   "y_chinh": [
+    "Khoa ở Tài Bạch: tiền đến qua uy tín, chuyên môn",
+    "Tiền đều mà ít khi bùng",
+    "Năm Khoa vào Tài Bạch hợp nâng giá nhờ chứng chỉ",
+    "Dành khoản cố định mỗi năm cho học thêm"
+   ]
+  },
+  "hoa-khoa-cung-tat-ach": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Khoa ở cung Tật Ách là gì?",
+     "doan": "Hoá Khoa ở cung Tật Ách là khi sao trong cung thể chất mang Khoa, nên lúc mệt thường có người chăm và dễ tìm được nơi khám đáng tin. Sách xưa coi Khoa là sao giải: gặp chuyện về thân thể thì có lối ra. Người có Khoa ở đây cũng hay chịu nghe lời khuyên. Phần này chỉ để tham khảo, không thay lời bác sĩ."
+    },
+    {
+     "tieu_de": "Hoá Khoa Tật Ách: chăm sóc phòng ngừa thế nào?",
+     "doan": "Khoa hợp kiểu chăm sóc có kiến thức: đọc kỹ hướng dẫn, ghi nhật ký ăn ngủ, đi khám đúng hẹn. Sách xưa gắn sao mang Khoa với một vùng cơ thể, như Thái Âm với giấc ngủ và mắt, Thiên Lương với dạ dày. Nên chăm sóc phòng ngừa vùng đó và giữ lịch khám định kỳ."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Khoa vào cung Tật Ách?",
+     "doan": "Khi can năm làm sao trong cung Tật Ách hoá Khoa. Ví dụ cung có Thiên Lương thì năm 2029 (Kỷ Dậu); có Thiên Cơ thì năm 2027 (Đinh Mùi). Năm như vậy hợp để chọn nơi khám quen, học thêm về dinh dưỡng; lá số không đoán chuyện ốm đau."
+    },
+    {
+     "tieu_de": "Có Hoá Khoa ở Tật Ách nên làm gì?",
+     "danh_sach": [
+      "Chọn một nơi khám quen và giữ hồ sơ khám ở một chỗ.",
+      "Ghi lại giờ ngủ trong hai tuần để thấy nhịp của mình.",
+      "Hỏi lời khuyên từ người có chuyên môn thay vì đọc tin trên mạng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Khoa — đọc ở cung Tật Ách",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Khoa trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Khoa lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tật Ách. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Khoa",
+     "Ở cung Tật Ách thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Vũ Khúc",
+      "Gắn với phổi, hô hấp; giữ ấm, tránh khói thuốc."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Tử Vi",
+      "Gắn với tiêu hoá, giấc ngủ khi lo; ăn đúng bữa, giao bớt việc."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Văn Xương",
+      "Hay căng đầu óc vì chữ nghĩa, giấy tờ; nghỉ mắt, ngủ đủ."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Cơ",
+      "Gắn với gan, tay chân; giãn cơ sau mỗi giờ ngồi."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Hữu Bật",
+      "Có người đỡ lúc mệt; nhận lời giúp thay vì gắng một mình."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Thiên Lương",
+      "Gắn với dạ dày, vùng ngực; ăn đúng giờ, kể bớt nỗi lo."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Âm",
+      "Gắn với giấc ngủ, mắt; tắt màn hình sớm."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Khúc",
+      "Làm việc tỉ mỉ lâu dễ mỏi; đứng dậy đi lại giữa giờ."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tả Phù",
+      "Có người chăm đúng lúc; giữ liên lạc với nơi khám quen."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Thái Âm",
+      "Gắn với thận, nội tiết; giữ ấm, ngủ sớm."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Khoa ở Tật Ách có giúp chữa khỏi bệnh?",
+     "dap": "Lá số không chữa bệnh và không thay lời bác sĩ. Khoa chỉ gợi ý bạn dễ gặp người chăm và chịu nghe lời khuyên đúng."
+    },
+    {
+     "hoi": "Khoa ở Tật Ách gặp Kỵ ở Phụ Mẫu thì sao?",
+     "dap": "Phụ Mẫu là cung xung chiếu của Tật Ách, nên chuyện giấy tờ hay khoảng cách với cha mẹ, sếp dễ làm bạn căng và mất ngủ. Khoa ở Tật Ách cho lối gỡ; giữ nhịp ngủ đều vẫn là việc đầu tiên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tật Ách cho thân thể; Khoa là sao giải ách. Khoa vào đây được xem là gặp ách có người giải, dễ gặp thầy thuốc tốt; đây là quan niệm cổ, không thay lời bác sĩ."
+    }
+   ],
+   "y_chinh": [
+    "Khoa ở Tật Ách: lúc mệt có người chăm, dễ gặp nơi khám tốt",
+    "Hợp kiểu chăm sóc có kiến thức",
+    "Giữ hồ sơ khám ở một chỗ",
+    "Lá số không thay lời bác sĩ"
    ]
   },
   "hoa-ky-cung-menh": {
@@ -1421,6 +2483,360 @@
     "Vướng thường do kỳ vọng chưa nói thành lời",
     "Năm Kỵ vào Phu Thê: dành thời gian, nói chậm lại",
     "Thoả thuận trước việc hai người hay vướng nhất"
+   ]
+  },
+  "hoa-ky-cung-tu-nu": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Kỵ ở cung Tử Nữ là gì?",
+     "doan": "Hoá Kỵ ở cung Tử Nữ là khi sao trong cung con cái mang Kỵ, nên chuyện con cái là chỗ bạn để tâm nhiều, dễ lo quá mức cần. Sách xưa xếp đây là chỗ \"cần chú ý\" trong việc nuôi dạy, không phải lời nói về số con hay việc có con. Cái vướng thường là kỳ vọng và cách nói với con."
+    },
+    {
+     "tieu_de": "Hoá Kỵ Tử Nữ: cha mẹ lo nhiều thì con thấy gì?",
+     "doan": "Con thường thấy bị theo dõi, dù cha mẹ chỉ muốn che chở. Một kiểu hay gặp: cha mẹ hỏi liên tục, con trả lời ngắn dần, cha mẹ càng lo. Chuyển từ hỏi kiểm tra sang hỏi chuyện vui thường mở lại cuộc nói chuyện."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Kỵ bay vào cung Tử Nữ?",
+     "doan": "Đó là năm can làm sao trong cung Tử Nữ hoá Kỵ. Cung có Thiên Đồng thì xem năm 2030 (Canh Tuất); có Tham Lang thì năm 2033 (Quý Sửu). Năm như vậy nên dành thêm thời gian nghe con; đây là nhịp tham khảo, không đoán chuyện con gặp nạn."
+    },
+    {
+     "tieu_de": "Có Hoá Kỵ ở Tử Nữ nên làm gì?",
+     "danh_sach": [
+      "Mỗi ngày hỏi con một câu không liên quan điểm số.",
+      "Đặt ra một vùng con tự lo, cha mẹ không can thiệp trong tuần đó.",
+      "Khi lo, nói với vợ chồng hay bạn thân trước, rồi mới nói với con."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Kỵ — đọc ở cung Tử Nữ",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Kỵ trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Kỵ lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tử Nữ. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Kỵ",
+     "Ở cung Tử Nữ thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Thái Dương",
+      "Con hay làm vì muốn được khen; thiếu lời ghi nhận là nản."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thái Âm",
+      "Con nhạy cảm, dễ để bụng một câu la mắng."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Liêm Trinh",
+      "Hai thế hệ cùng cứng, ai cũng chờ người kia nhường."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Cự Môn",
+      "Lời nói với con dễ thành cãi; nói ngắn và chậm lại."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thiên Cơ",
+      "Con hay đổi ý, bỏ dở; cần giúp con làm trọn việc nhỏ."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Văn Khúc",
+      "Con dễ vướng chuyện bài vở, chữ nghĩa; cần kiểm lại bài cùng con."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thiên Đồng",
+      "Con ham chơi; cha mẹ lo mà con thấy bị kìm."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Xương",
+      "Giấy tờ, hồ sơ học của con cần làm sớm, kiểm kỹ."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Vũ Khúc",
+      "Chuyện tiền cho con dễ thành căng; nên có mức rõ."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Tham Lang",
+      "Con muốn nhiều thứ; dạy con chọn và chờ."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Kỵ ở Tử Nữ có nghĩa là khó có con?",
+     "dap": "Không. Trang này không trả lời chuyện có con hay không; việc đó cần bác sĩ, và lá số không thay lời bác sĩ. Kỵ ở đây nói về nỗi lo và cách nuôi dạy."
+    },
+    {
+     "hoi": "Kỵ ở Tử Nữ có ảnh hưởng nhà cửa không?",
+     "dap": "Cung xung chiếu là Điền Trạch, nên nỗi lo về con dễ kéo theo chuyện chỗ ở, như chuyển nhà vì trường học. Bàn kỹ trước khi đổi chỗ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tử Nữ cho con cái và người dưới; Kỵ là sao chủ trở ngại. Sách cho rằng Kỵ ở đây thì lo nghĩ vì con, và luôn xét chính tinh, cát tinh hội chiếu mới nói nặng nhẹ."
+    }
+   ],
+   "y_chinh": [
+    "Kỵ ở Tử Nữ: chỗ để tâm nhiều trong nuôi dạy",
+    "Không nói về việc có con hay số con",
+    "Đổi câu hỏi kiểm tra thành câu hỏi chuyện vui",
+    "Đặt một vùng con tự lo"
+   ]
+  },
+  "hoa-ky-cung-tai-bach": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Kỵ ở cung Tài Bạch là gì?",
+     "doan": "Hoá Kỵ ở cung Tài Bạch là khi sao trong cung tiền bạc mang Kỵ, nên tiền là chuyện bạn hay lo: khoản chi bất ngờ, tiền về chậm, hay tính đi tính lại. Sách xưa coi đây là chỗ \"cần chú ý\" về tài chính, không phải lời phán nghèo. Nhiều người có Kỵ ở Tài Bạch lại quản tiền rất kỹ vì luôn để ý."
+    },
+    {
+     "tieu_de": "Hoá Kỵ Tài Bạch: người làm công và người buôn bán khác nhau thế nào?",
+     "doan": "Người làm công thường vướng ở khoản chi ngoài dự tính, hoặc lương thưởng về trễ. Người buôn bán hay vướng công nợ, khách chậm trả, vốn kẹt trong hàng. Cả hai cùng có lợi khi giữ quỹ dự phòng và viết rõ hạn thanh toán."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Kỵ bay vào cung Tài Bạch?",
+     "doan": "Đó là năm can làm sao trong cung Tài Bạch hoá Kỵ. Cung có Vũ Khúc thì xem năm 2032 (Nhâm Tý); có Thiên Cơ thì năm 2028 (Mậu Thân). Năm như vậy nên giữ dòng tiền an toàn, hạn chế vay để đầu tư; đây không phải lời đoán mất tiền."
+    },
+    {
+     "tieu_de": "Có Hoá Kỵ ở Tài Bạch nên làm gì?",
+     "danh_sach": [
+      "Để riêng quỹ dự phòng bằng vài tháng chi tiêu trước khi đầu tư thêm.",
+      "Cho vay thì ghi giấy, mua bán lớn thì đọc hợp đồng hai lần.",
+      "Xem lại sổ chi mỗi cuối tháng, gạch một khoản không cần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Kỵ — đọc ở cung Tài Bạch",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Kỵ trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Kỵ lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tài Bạch. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Kỵ",
+     "Ở cung Tài Bạch thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Thái Dương",
+      "Hay chi vì người khác, vì thể diện; cần đặt mức."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thái Âm",
+      "Tiền để dành dễ hao vì chuyện nhà; giữ quỹ riêng."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Liêm Trinh",
+      "Kẹt tiền do thủ tục, quy định; đọc kỹ điều khoản."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Cự Môn",
+      "Tiền dễ vướng vì lời hứa miệng; nên ghi lại."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thiên Cơ",
+      "Đổi kế hoạch tiền nhiều lần; chọn một kế hoạch và giữ."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Văn Khúc",
+      "Sai sót số liệu, hoá đơn; nên kiểm hai lần."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thiên Đồng",
+      "Chi vì vui, vì ngại từ chối; đặt hạn mức chơi."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Xương",
+      "Hợp đồng, chữ ký là chỗ dễ vướng nhất."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Vũ Khúc",
+      "Lo tiền nhiều, đầu tư quá thận trọng hoặc quá vội."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Tham Lang",
+      "Muốn nhiều thứ, mua sắm theo cảm hứng; chờ một đêm."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Kỵ ở Tài Bạch có làm ăn được không?",
+     "dap": "Làm được, và nhiều người làm tốt vì cẩn trọng. Kỵ nhắc giữ dòng tiền và giấy tờ chặt hơn người khác, không cấm kinh doanh."
+    },
+    {
+     "hoi": "Kỵ ở Tài Bạch có liên quan cung Phúc Đức?",
+     "dap": "Phúc Đức là cung xung chiếu, nên nỗi lo tiền dễ làm đầu óc khó nghỉ. Một khoản dự phòng rõ ràng giúp tâm trí yên hơn bất cứ lời đoán nào."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tài Bạch cho tiền bạc; Kỵ là sao chủ trở ngại. Sách cho rằng Kỵ ở đây thì tiền bạc vào ra trắc trở, lo nghĩ vì tiền; luôn xét sao gốc mang Kỵ và Lộc, Khoa hội chiếu."
+    }
+   ],
+   "y_chinh": [
+    "Kỵ ở Tài Bạch: tiền là chỗ hay lo, chi bất ngờ, về chậm",
+    "Không phải lời phán nghèo",
+    "Năm Kỵ vào Tài Bạch: giữ dòng tiền an toàn",
+    "Quỹ dự phòng trước, đầu tư sau"
+   ]
+  },
+  "hoa-ky-cung-tat-ach": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Kỵ ở cung Tật Ách là gì?",
+     "doan": "Hoá Kỵ ở cung Tật Ách là khi sao trong cung thể chất mang Kỵ, nên bạn dễ để căng thẳng tích lại và hay để ý từng dấu hiệu nhỏ của cơ thể. Sách xưa xếp đây là chỗ \"cần chú ý\" về nhịp sinh hoạt, không phải lời đoán bệnh. Phần này chỉ để tham khảo, không thay lời bác sĩ."
+    },
+    {
+     "tieu_de": "Hoá Kỵ Tật Ách: lo nhiều thì nên làm gì?",
+     "doan": "Người có Kỵ ở Tật Ách hay tự tìm hiểu rồi tự lo, càng đọc càng lo. Cách gỡ thường là đi khám định kỳ để có câu trả lời thật, rồi giữ nếp ngủ và ăn đều. Sách xưa gắn sao mang Kỵ với một vùng cơ thể, như Cự Môn với miệng họng và tiêu hoá; nên chăm sóc phòng ngừa vùng đó."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Kỵ bay vào cung Tật Ách?",
+     "doan": "Đó là năm can làm sao trong cung Tật Ách hoá Kỵ. Cung có Thái Dương thì xem năm 2034 (Giáp Dần); có Thiên Đồng thì năm 2030 (Canh Tuất). Năm như vậy nên giữ nhịp nghỉ chặt hơn; lá số không tiên đoán năm ốm."
+    },
+    {
+     "tieu_de": "Có Hoá Kỵ ở Tật Ách nên làm gì?",
+     "danh_sach": [
+      "Ngủ cùng một giờ mỗi tối trong một tháng, ghi lại thấy khác gì.",
+      "Khi lo về một dấu hiệu, đặt lịch khám thay vì tự đọc và đoán.",
+      "Tìm một cách xả căng thẳng hợp mình: đi bộ, bơi, trò chuyện."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Kỵ — đọc ở cung Tật Ách",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Kỵ trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Kỵ lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Tật Ách. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Kỵ",
+     "Ở cung Tật Ách thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Thái Dương",
+      "Gắn với mắt, đầu, nhịp tim; nghỉ mắt, đừng làm quá giờ."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thái Âm",
+      "Gắn với giấc ngủ, mắt, nội tiết; bớt nghĩ ngợi về đêm."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Liêm Trinh",
+      "Gắn với máu, da, thần kinh; tìm cách xả dồn nén."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Cự Môn",
+      "Gắn với miệng họng, tiêu hoá; ăn chậm, đừng để bụng chuyện."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thiên Cơ",
+      "Gắn với gan, gân cơ; vận động xen giữa giờ làm trí óc."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Văn Khúc",
+      "Căng đầu vì giấy tờ, chữ nghĩa; nghỉ mắt và ngủ đủ."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thiên Đồng",
+      "Gắn với thận, tiết niệu; uống đủ nước, đừng để mệt dồn."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Xương",
+      "Lo vì hồ sơ, thủ tục dễ mất ngủ; làm sớm cho nhẹ đầu."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Vũ Khúc",
+      "Gắn với hô hấp, răng mũi; giữ ấm, khám răng định kỳ."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Tham Lang",
+      "Gắn với gan thận; hạn chế rượu bia, ngủ trước nửa đêm."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Kỵ ở Tật Ách có phải hay ốm?",
+     "dap": "Không nên hiểu vậy. Kỵ ở đây nói về thói quen để căng thẳng tích lại và lo nhiều. Lá số không thay lời bác sĩ; khám định kỳ mới cho câu trả lời thật."
+    },
+    {
+     "hoi": "Kỵ ở Tật Ách có liên quan tâm trạng?",
+     "dap": "Có phần. Sách xưa đọc Tật Ách cả ở nhịp tâm trạng; khi căng thẳng kéo dài, nói chuyện với người tin được hoặc người có chuyên môn là cách tốt."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Tật Ách cho thân thể và tai ách; Kỵ là sao chủ trở ngại. Sách gắn sao mang Kỵ với vùng thân thể theo ngũ hành và dặn chú ý vùng ấy. Đây là quan niệm cổ, chỉ để phòng ngừa, không thay lời bác sĩ."
+    }
+   ],
+   "y_chinh": [
+    "Kỵ ở Tật Ách: dễ để căng thẳng tích lại, lo nhiều",
+    "Chỗ cần chú ý về nhịp sinh hoạt, không phải lời đoán bệnh",
+    "Khám định kỳ thay vì tự đọc rồi tự lo",
+    "Lá số không thay lời bác sĩ"
    ]
   }
  }

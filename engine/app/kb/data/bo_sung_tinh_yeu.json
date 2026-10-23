@@ -1,0 +1,1303 @@
+{
+ "source_id": "bo_sung_tinh_yeu_v1",
+ "school_id": "pitago",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Ban biên tập Hiểu Bản Thân — số chủ đạo trong tình yêu (bổ sung)",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + truyền thống thần số học Pythagoras phổ biến (nháp AI, chờ thẩm định). Bảng cặp số dựa trên kho cặp số, viết trung tính, không chấm điểm."
+ },
+ "trang": {
+  "so-1-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 1 yêu như thế nào khi mới quen?",
+     "doan": "Số 1 thường là người nhắn trước, rủ trước và chọn luôn quán. Họ thích cảm giác mình mở lối cho mối quan hệ. Lúc mới quen, sự chủ động này dễ được thấy là đáng tin. Mặt tối là nhịp nhanh: người kia chưa kịp nghĩ đã thấy mọi thứ được sắp sẵn. Nhiều người số 1 hiểu im lặng là đồng ý, trong khi người kia chỉ đang chưa dám nói."
+    },
+    {
+     "tieu_de": "Số 1 khi cãi nhau thường ra sao?",
+     "doan": "Khi cãi nhau, số 1 thường muốn thắng nhanh và chốt hướng xử lý ngay. Họ nói thẳng, ít vòng vo, và khó chịu khi bị ngắt lời. Vấn đề là họ hay đưa giải pháp lúc người kia còn đang cần được nghe. Cuộc cãi vã kết thúc trên giấy, còn nỗi ấm ức thì ở lại. Thử trong tuần này: trước khi nói 'vậy giờ làm thế này', nhắc lại một câu người kia vừa nói để họ biết mình đã được nghe."
+    },
+    {
+     "tieu_de": "Cách thương một người số 1",
+     "danh_sach": [
+      "Hỏi ý họ trong việc họ giỏi, thay vì giành quyết hết.",
+      "Khen kết quả cụ thể: 'chuyến đi anh/em lên kế hoạch rất gọn'.",
+      "Nói 'không' rõ ràng khi không đồng ý — số 1 nể người có lập trường.",
+      "Để họ có một vùng tự quyết riêng mà không bị hỏi han từng bước.",
+      "Khi họ im lặng sau một lần thất bại, đừng an ủi dồn dập; ngồi cạnh là đủ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 1 hợp với số nào trong tình yêu?",
+    "chu_thich": "Không có số nào bị coi là không hợp với số 1; mỗi cặp chỉ khác nhau ở chỗ dễ và chỗ cần nói rõ. Cặp với số 2, 4 hoặc 6 thường dễ chia vai: một người mở đường, một người giữ nhịp. Cặp với số 1 hoặc 8 dễ có hai người cùng cầm lái. Bảng chỉ mô tả, không chấm điểm.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Hai người cùng thích làm, bắt nhịp nhanh khi có mục tiêu chung.",
+      "Ai quyết cuối cùng ở việc nào — chia trước để khỏi giành tay lái."
+     ],
+     [
+      "Số 2",
+      "Số 1 mở đường, số 2 giữ êm nhà — dễ bù cho nhau.",
+      "Số 1 hỏi trước khi quyết; số 2 nói điều mình muốn, đừng chờ được đoán."
+     ],
+     [
+      "Số 3",
+      "Nhiều ý mới, vui khi cùng thử điều chưa làm.",
+      "Số 3 hay rẽ nhánh; chốt một việc chung mỗi quý và giữ tới cùng."
+     ],
+     [
+      "Số 4",
+      "Một người khởi xướng, một người dựng nền.",
+      "Số 1 thấy chậm, số 4 thấy liều — thống nhất thử nhỏ trước, làm lớn sau."
+     ],
+     [
+      "Số 5",
+      "Cùng ưa tự do và dám thử, ít ràng buộc nhau.",
+      "Dễ mỗi người một hướng; cần vài thói quen chung cố định."
+     ],
+     [
+      "Số 6",
+      "Số 1 lo hướng đi, số 6 lo con người trong nhà.",
+      "Số 1 cảm ơn cụ thể; số 6 để số 1 tự quyết phần việc của họ."
+     ],
+     [
+      "Số 7",
+      "Cả hai độc lập, tôn trọng khoảng riêng của nhau.",
+      "Dễ sống song song; hẹn một buổi mỗi tuần kể điều mình đang nghĩ thật."
+     ],
+     [
+      "Số 8",
+      "Cùng chí lớn, mạnh khi chung một mục tiêu.",
+      "Hai cái tôi lớn dễ cạnh tranh ngầm; tách vai rõ, nhắm chung ra bên ngoài."
+     ],
+     [
+      "Số 9",
+      "Số 1 làm, số 9 mang ý nghĩa — hợp những việc có ích.",
+      "Số 1 thấy số 9 mơ hồ, số 9 thấy số 1 vị kỷ; chọn việc vừa đo được vừa có ý nghĩa."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 1 có ghen không?",
+     "dap": "Số 1 thường ghen kiểu sợ mất vị trí hơn là sợ mất người. Họ khó chịu khi thấy mình không còn là người được hỏi ý đầu tiên. Nói rõ điều đó ra thường giúp nhiều hơn là giấu đi."
+    },
+    {
+     "hoi": "Người số 1 có khó cưa không?",
+     "dap": "Khó với người chờ họ dọn sẵn đường, dễ hơn với người có kế hoạch riêng. Số 1 thường để ý người tự tin, đang theo đuổi một việc của mình."
+    },
+    {
+     "hoi": "Hai người cùng số 1 yêu nhau được không?",
+     "dap": "Được. Hai số 1 hợp nhịp làm việc, chỉ cần chia rõ ai quyết việc gì để khỏi tranh tay lái."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Trong truyền thống Pythagoras, số 1 gắn với khởi đầu và cá nhân độc lập. Áp vào tình cảm, các sách phổ biến mô tả người mang số này thường dẫn nhịp và cần được tôn trọng quyết định."
+    }
+   ],
+   "y_chinh": [
+    "Số 1 thường chủ động: nhắn trước, rủ trước, chọn trước",
+    "Cãi nhau dễ đưa giải pháp khi người kia cần được nghe",
+    "Thương số 1: khen kết quả cụ thể, nói 'không' rõ ràng",
+    "Mọi số đều có thể hợp; khác ở chỗ cần nói rõ"
+   ]
+  },
+  "so-2-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 2 yêu như thế nào khi đã nghiêm túc?",
+     "doan": "Khi đã nghiêm túc, số 2 thường xếp lịch của mình quanh người kia. Họ nhớ món người yêu không ăn, ngày người ấy có cuộc họp khó, và nhắn hỏi đúng lúc. Sự chu đáo này làm người kia thấy được nâng niu. Mặt tối là số 2 dần bỏ những buổi gặp bạn, bỏ sở thích, rồi lặng lẽ mong được đáp lại cùng mức."
+    },
+    {
+     "tieu_de": "Số 2 khi giận thường làm gì?",
+     "doan": "Số 2 khi giận thường im lặng và trả lời ngắn hơn mọi ngày. Họ mong người kia tự nhận ra. Nếu không ai hỏi, cơn giận nhỏ được cất đi và cộng dồn với lần sau. Đến lúc nói ra, người kia ngạc nhiên vì nghe một lúc nhiều chuyện cũ. Thử trong tuần này: khi thấy mình bắt đầu nhắn 'ừ', 'sao cũng được', viết thêm một câu nói đúng điều đang làm mình buồn."
+    },
+    {
+     "tieu_de": "Cách thương một người số 2",
+     "danh_sach": [
+      "Hỏi han đều đặn, cả những ngày bình thường.",
+      "Báo trước khi về muộn hay đổi kế hoạch — với số 2, báo trước là tôn trọng.",
+      "Khi họ nói 'không sao', hỏi lại một lần nữa bằng giọng nhẹ.",
+      "Cảm ơn những việc nhỏ họ làm mà không ai giao.",
+      "Rủ họ làm điều họ thích dù mình không mê lắm."
+     ]
+    },
+    {
+     "tieu_de": "Số 2 khi tình cảm nguội đi thì sao?",
+     "doan": "Số 2 thường níu lâu hơn cần thiết, vì sợ làm người kia buồn. Họ tự nhận phần lỗi, cố sửa mình thêm một lần nữa. Khi đã quyết dừng, số 2 thường đi rất nhẹ nhàng nhưng mang theo nhiều câu chưa nói. Viết ra những điều mình đã chịu đựng giúp số 2 nhìn rõ mình cần gì cho lần sau."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 2 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 2 có thể gắn bó với mọi số; khác nhau là kiểu dễ chịu và điều cần nói thẳng. Với số 4, 6 hoặc 8, số 2 thường thấy yên vì nhịp sống rõ ràng. Với số 5 hoặc 7, cần nói rõ chuyện khoảng riêng. Bảng tóm tắt từng cặp, không chấm điểm.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Số 1 mở lối, số 2 giữ không khí êm.",
+      "Đừng nhịn rồi tủi; nói điều mình muốn trước khi số 1 chốt."
+     ],
+     [
+      "Số 2",
+      "Hiểu nhau qua ánh mắt, rất dịu dàng.",
+      "Cả hai né va chạm; hẹn định kỳ nói thẳng một điều chưa vui."
+     ],
+     [
+      "Số 3",
+      "Số 2 nghe, số 3 kể — nhà có tiếng cười.",
+      "Câu đùa của số 3 có thể làm số 2 đau; nói ngay khi thấy chạnh lòng."
+     ],
+     [
+      "Số 4",
+      "Đều đặn, chung thuỷ, hợp xây chuyện dài.",
+      "Dễ nhàm; số 4 tập nói lời quan tâm, cả hai cài vài bất ngờ nhỏ."
+     ],
+     [
+      "Số 5",
+      "Số 5 mang gió mới, số 2 mang hơi ấm.",
+      "Số 5 cần đi, số 2 cần gần — thống nhất bằng con số: mấy tối mỗi tuần ở bên nhau."
+     ],
+     [
+      "Số 6",
+      "Cả hai biết lo cho nhau, rất ấm.",
+      "Cùng cho mà ít đòi; mỗi tuần mỗi người nói một nhu cầu của mình."
+     ],
+     [
+      "Số 7",
+      "Yên tĩnh, sâu, tôn trọng nhau.",
+      "Số 7 cần lặng lúc này lúc khác; xin số 7 báo trước, số 2 có việc riêng lúc đó."
+     ],
+     [
+      "Số 8",
+      "Số 8 lo đường lớn, số 2 giữ sự gắn bó.",
+      "Số 8 dễ át tiếng; việc lớn trong nhà cần cả hai gật đầu."
+     ],
+     [
+      "Số 9",
+      "Cùng thương người, dễ đồng cảm.",
+      "Cả hai dễ hy sinh và mơ hồ chuyện tiền; lập bảng chi tiêu chung rõ ràng."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 2 có hay ghen không?",
+     "dap": "Số 2 ít ghen ầm ĩ nhưng hay để bụng. Họ bất an khi người kia đột nhiên ít nhắn hoặc đổi thói quen mà không giải thích."
+    },
+    {
+     "hoi": "Tại sao số 2 hay nói 'sao cũng được'?",
+     "dap": "Vì số 2 sợ ý mình làm người kia phiền. Câu này thường là dấu hiệu họ đang có ý riêng nhưng chưa dám nói."
+    },
+    {
+     "hoi": "Số 2 yêu xa được không?",
+     "dap": "Được, nếu có nhịp liên lạc đều và hẹn gặp rõ ngày. Số 2 chịu xa được, chỉ khó chịu cảm giác không biết mình đang đứng ở đâu."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras coi số 2 là số của cặp đôi và sự cân bằng giữa hai phía. Các sách phổ biến mô tả người số 2 thường tinh ý trong tình cảm và dễ đặt nhu cầu người khác trước mình."
+    }
+   ],
+   "y_chinh": [
+    "Số 2 yêu bằng sự chú ý tới từng thói quen nhỏ",
+    "Khi giận số 2 thường im lặng và trả lời ngắn",
+    "Thương số 2: báo trước, hỏi lại khi họ nói 'không sao'",
+    "Việc tuần này: nói ra một điều đang làm mình buồn"
+   ]
+  },
+  "so-3-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 3 yêu như thế nào qua tin nhắn?",
+     "doan": "Số 3 thường nhắn nhiều, gửi ảnh vui, kể chuyện vặt trong ngày. Với họ, kể chuyện là một cách thương. Người yêu số 3 hiếm khi thấy buồn chán. Mặt tối là những ngày số 3 mệt, tin nhắn thưa hẳn, và người kia dễ hiểu nhầm là họ hết quan tâm."
+    },
+    {
+     "tieu_de": "Số 3 khi cãi nhau thường thế nào?",
+     "doan": "Khi cãi nhau, số 3 thường pha trò để giảm căng, hoặc nói nhanh rồi quên. Người kia có thể thấy mình không được coi trọng. Số 3 cũng dễ buột ra câu sắc lúc nóng rồi hối hận. Thử trong tuần này: khi chủ đề khó được nêu ra, ngồi yên mười phút không đùa, chỉ hỏi và nghe."
+    },
+    {
+     "tieu_de": "Số 3 khi hết yêu thường làm gì?",
+     "doan": "Số 3 thường rút đi bằng cách vui ở nơi khác: bận đi chơi, bận bạn bè, ít kể chuyện ở nhà. Họ ngại nói lời khó nên để mọi thứ phai dần. Cách tử tế hơn là nói thẳng sớm, dù câu đó không vui."
+    },
+    {
+     "tieu_de": "Cách thương một người số 3",
+     "danh_sach": [
+      "Cười với chuyện họ kể, kể cả lần thứ hai.",
+      "Khen sự sáng tạo của họ trước mặt bạn bè.",
+      "Rủ họ thử một chỗ mới thay vì quán quen.",
+      "Khi cần nói chuyện nghiêm, báo trước và chọn lúc họ không mệt.",
+      "Giúp họ giữ một hai việc thực tế, đừng làm thay hết."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 3 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 3 vui với nhiều kiểu người; cặp nào cũng có chỗ thuận và chỗ cần thoả thuận. Số 1, 5 hoặc 9 hợp nhịp vui và thích cái mới. Số 4 hoặc 8 mang phần thực tế số 3 hay thiếu. Bảng không chấm điểm, chỉ mô tả.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Nhiều năng lượng, thích cùng làm chuyện mới.",
+      "Số 1 muốn đi thẳng, số 3 hay rẽ ngang; chọn một mục tiêu chung cho mỗi quý."
+     ],
+     [
+      "Số 2",
+      "Số 3 kể, số 2 lắng nghe; nhà ấm và vui.",
+      "Số 3 hỏi lại 'câu đó có làm buồn không?' sau những câu đùa."
+     ],
+     [
+      "Số 3",
+      "Hai người luôn có chuyện để nói.",
+      "Không ai lo việc nhà, giấy tờ; lập danh sách việc chung và chia lịch."
+     ],
+     [
+      "Số 4",
+      "Số 3 mang tiếng cười, số 4 mang sự vững.",
+      "Số 3 giữ lời hứa nhỏ; số 4 chừa chỗ cho ngẫu hứng cuối tuần."
+     ],
+     [
+      "Số 5",
+      "Năng động, ít khi buồn tẻ.",
+      "Dễ tiêu tiền và bỏ dở cùng lúc; một người giữ ngân sách chung."
+     ],
+     [
+      "Số 6",
+      "Số 3 làm nhà vui, số 6 làm nhà ấm.",
+      "Số 6 nhắc nhiều thì số 3 thấy bị gò; số 3 tự nhận phần việc trước."
+     ],
+     [
+      "Số 7",
+      "Số 3 kéo số 7 ra ngoài, số 7 giúp số 3 nghĩ sâu.",
+      "Số 3 thấy số 7 lạnh, số 7 thấy số 3 nông; xen buổi đông vui với buổi yên."
+     ],
+     [
+      "Số 8",
+      "Số 3 khéo nói, số 8 khéo tổ chức.",
+      "Số 8 chê thiếu nghiêm túc, số 3 chê thực dụng; chia vai đối ngoại và vận hành."
+     ],
+     [
+      "Số 9",
+      "Giàu cảm xúc, cùng mê cái đẹp.",
+      "Cả hai lơ việc thực tế; mỗi tháng ngồi rà tiền và giấy tờ một lần."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 3 có chung thuỷ không?",
+     "dap": "Chung thuỷ không phụ thuộc con số. Số 3 thường cần mối quan hệ có niềm vui và lời khen; thiếu lâu, họ dễ thấy chán và cần được nói chuyện thẳng."
+    },
+    {
+     "hoi": "Số 3 thích được tặng gì?",
+     "dap": "Số 3 thường thích trải nghiệm hơn đồ vật: một buổi diễn, một chuyến đi ngắn, một lá thư viết tay có chuyện riêng của hai người."
+    },
+    {
+     "hoi": "Vì sao số 3 hay né chuyện nghiêm túc?",
+     "dap": "Vì số 3 quen dùng niềm vui để giữ không khí. Chuyện nặng làm họ thấy mất chỗ dựa quen thuộc đó, nên họ đổi chủ đề."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Trong truyền thống Pythagoras, số 3 gắn với biểu đạt, lời nói và niềm vui sáng tạo. Áp vào tình cảm, người số 3 thường được mô tả là yêu bằng lời và bằng không khí vui."
+    }
+   ],
+   "y_chinh": [
+    "Số 3 thương bằng chuyện kể, tin nhắn và tiếng cười",
+    "Cãi nhau dễ pha trò; cần mười phút nghe mà không đùa",
+    "Khi hết yêu, số 3 thường rút dần thay vì nói thẳng",
+    "Thương số 3: khen sự sáng tạo, rủ thử chỗ mới"
+   ]
+  },
+  "so-4-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 4 yêu như thế nào?",
+     "doan": "Số 4 thường thể hiện tình cảm qua lịch trình: đón đúng giờ, sửa đồ hỏng, lo trước tiền nhà. Họ ít nói 'nhớ', nhưng nhớ hạn đóng tiền điện của người yêu. Mặt tối là họ coi những việc đó đã thay cho lời nói, nên người kia vẫn thấy thiếu."
+    },
+    {
+     "tieu_de": "Số 4 khi cãi nhau thường thế nào?",
+     "doan": "Số 4 khi cãi nhau thường đưa lý lẽ và bằng chứng, nói theo thứ tự. Họ khó chịu khi cảm xúc lấn át sự việc. Người kia dễ thấy mình đang bị chấm bài. Số 4 cũng ít chịu đổi ý tại chỗ; họ cần thời gian nghĩ lại. Thử trong tuần này: khi tranh luận, nói 'mình cần nghĩ thêm, tối mai nói tiếp' thay vì im lặng cứng."
+    },
+    {
+     "tieu_de": "Số 4 sống chung thì thế nào?",
+     "doan": "Sống chung, số 4 thường dựng nề nếp: ngày đi chợ, quỹ chung, chỗ để giấy tờ. Nhà có số 4 thường gọn và ít bất ngờ về tiền. Mặt tối là quy định nhiều, người kia thấy mình sống trong nhà của số 4 chứ không phải nhà chung. Hỏi người kia muốn giữ thói quen nào và bỏ thói quen nào giúp nhà thành của cả hai."
+    },
+    {
+     "tieu_de": "Cách thương một người số 4",
+     "danh_sach": [
+      "Đúng giờ và giữ lời, kể cả lời hứa nhỏ.",
+      "Báo trước khi muốn đổi kế hoạch lớn, cho họ thời gian chuẩn bị.",
+      "Ghi nhận việc họ làm bằng câu cụ thể, thay vì một chữ 'cảm ơn'.",
+      "Rủ họ thử một điều mới nhưng có kế hoạch rõ.",
+      "Đừng chê sự cẩn thận của họ là cứng nhắc trước mặt người khác."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 4 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 4 có thể bền với mọi số nếu hai người nói rõ nhịp sống. Số 2, 6 hoặc 8 thường dễ chung kế hoạch dài. Số 3 hoặc 5 mang sự tươi mới mà số 4 hay thiếu, đổi lại cần thoả thuận về sự linh hoạt.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Số 1 khởi xướng, số 4 dựng nền.",
+      "Số 4 thấy số 1 liều; cùng đồng ý thử nhỏ trước khi đổ sức lớn."
+     ],
+     [
+      "Số 2",
+      "Ổn định, trung thành, hợp xây lâu dài.",
+      "Số 2 cần được quan tâm bằng lời; số 4 tập nói, cả hai lên lịch bất ngờ nhỏ."
+     ],
+     [
+      "Số 3",
+      "Số 4 cho sự vững, số 3 cho tiếng cười.",
+      "Số 4 chừa chỗ cho ngẫu hứng; số 3 giữ đúng những hẹn nhỏ."
+     ],
+     [
+      "Số 4",
+      "Rất có kế hoạch, đáng tin với nhau.",
+      "Dễ đều đều; mỗi năm cùng thử một việc chưa từng làm."
+     ],
+     [
+      "Số 5",
+      "Số 4 là nền, số 5 là gió — học được nhau nhiều.",
+      "Chia rõ phần cố định và phần linh hoạt trong đời sống chung."
+     ],
+     [
+      "Số 6",
+      "Cùng trách nhiệm, cùng lo người thân.",
+      "Nhiều bổn phận ít vui; có buổi chỉ để chơi, không bàn việc."
+     ],
+     [
+      "Số 7",
+      "Cùng cẩn trọng, tôn trọng lý lẽ.",
+      "Khô khan; tập nói cảm xúc thành câu, bên cạnh việc làm cho nhau."
+     ],
+     [
+      "Số 8",
+      "Bộ đôi thực tế, giỏi xây tài sản.",
+      "Dễ cuốn vào việc; tách giờ riêng tư khỏi giờ bàn tiền."
+     ],
+     [
+      "Số 9",
+      "Số 4 biến lý tưởng của số 9 thành việc làm.",
+      "Số 9 nêu mục đích, số 4 lập kế hoạch, cả hai cùng duyệt."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 4 có lãng mạn không?",
+     "dap": "Số 4 lãng mạn theo kiểu thực tế: nhớ ngày, chuẩn bị chu đáo. Họ ít làm điều bốc đồng nhưng giữ hẹn rất đều."
+    },
+    {
+     "hoi": "Số 4 có dễ mở lòng không?",
+     "dap": "Thường không nhanh. Số 4 cần thấy người kia nhất quán qua thời gian rồi mới kể chuyện riêng."
+    },
+    {
+     "hoi": "Làm sao để số 4 bớt cứng nhắc?",
+     "dap": "Đưa thay đổi theo từng bước nhỏ, nói rõ lý do và thời hạn thử. Số 4 dễ đồng ý hơn khi thấy có kế hoạch."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 4 với hình vuông, nền móng và trật tự. Các sách phổ biến mô tả người số 4 trong tình cảm thường chung thuỷ, đều đặn và thể hiện qua việc làm."
+    }
+   ],
+   "y_chinh": [
+    "Số 4 thương qua việc làm: đúng giờ, lo việc nhà, giữ lời",
+    "Cãi nhau số 4 dùng lý lẽ; người kia dễ thấy bị chấm bài",
+    "Sống chung: hỏi người kia muốn giữ hay bỏ thói quen nào",
+    "Thương số 4: báo trước khi đổi kế hoạch lớn"
+   ]
+  },
+  "so-5-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 5 yêu như thế nào lúc mới hẹn hò?",
+     "doan": "Lúc mới hẹn hò, số 5 thường rủ đi những nơi lạ, nói chuyện cuốn và không thích lặp lại buổi hẹn. Người kia thấy mỗi lần gặp là một trải nghiệm. Mặt tối là nhịp này khó giữ mãi; khi mọi thứ thành quen, số 5 dễ tưởng tình cảm đã nhạt."
+    },
+    {
+     "tieu_de": "Số 5 khi cãi nhau thường làm gì?",
+     "doan": "Số 5 khi cãi nhau thường muốn ra ngoài cho thoáng, có khi bỏ đi giữa chừng. Họ không chịu được cảm giác bị dồn vào góc. Người kia hiểu đó là bỏ chạy. Thử trong tuần này: thay vì đi luôn, nói 'mình đi bộ hai mươi phút rồi quay lại nói tiếp' và giữ đúng lời."
+    },
+    {
+     "tieu_de": "Số 5 có sợ kết hôn không?",
+     "doan": "Nhiều số 5 không sợ người yêu mà sợ cảm giác bị khoá chặt vào một nếp sống. Họ cưới khi thấy hôn nhân vẫn có chỗ cho đi lại, học thêm, gặp bạn. Nói chuyện cụ thể về những tự do đó trước khi cưới giúp số 5 yên tâm hơn là hứa chung chung."
+    },
+    {
+     "tieu_de": "Cách thương một người số 5",
+     "danh_sach": [
+      "Có đời sống riêng thú vị của mình, đừng xoay quanh họ.",
+      "Đề xuất trải nghiệm mới thay vì chỉ hỏi 'đi đâu'.",
+      "Tin họ khi họ đi với bạn, không kiểm tra điện thoại.",
+      "Nói nhu cầu gắn bó của mình bằng con số cụ thể.",
+      "Khi họ bồn chồn, hỏi 'muốn đổi gì' thay vì 'có chuyện gì'."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 5 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 5 có thể gắn bó với mọi số nếu khoảng tự do được nói rõ. Số 1, 3 hoặc 9 thường hợp nhịp năng động. Số 2, 4 hoặc 6 mang sự ấm và nề nếp, đổi lại cần thoả thuận về thời gian bên nhau. Bảng chỉ mô tả, không chấm điểm.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Cùng thích tự do, dám thử, không giữ chặt nhau.",
+      "Dễ mỗi người một ngả; giữ vài thói quen chung không bỏ."
+     ],
+     [
+      "Số 2",
+      "Số 5 mang chuyện mới, số 2 mang hơi ấm.",
+      "Số 2 dễ hiểu sự tự do là hết thương; nói rõ bao nhiêu tối ở nhà mỗi tuần."
+     ],
+     [
+      "Số 3",
+      "Vui, sôi nổi, thích trải nghiệm.",
+      "Tiêu tiền và bỏ dở cùng nhau; đặt một mục tiêu dài và một người giữ quỹ."
+     ],
+     [
+      "Số 4",
+      "Số 5 cho gió, số 4 cho nền.",
+      "Số 4 thấy bấp bênh, số 5 thấy gò bó; tách phần cố định và phần linh hoạt."
+     ],
+     [
+      "Số 5",
+      "Nhiều trải nghiệm chung, ít buồn tẻ.",
+      "Khó giữ nề nếp; có vài cam kết cố định dù sống tự do."
+     ],
+     [
+      "Số 6",
+      "Số 5 mang mới mẻ, số 6 mang mái ấm.",
+      "Số 6 muốn giữ, số 5 muốn đi; số 5 báo trước, số 6 tôn trọng phần tự do đã hẹn."
+     ],
+     [
+      "Số 7",
+      "Cùng tò mò: số 5 tìm ở bên ngoài, số 7 tìm ở bên trong.",
+      "Nhịp sống lệch; chọn chuyến đi có chiều sâu như du lịch văn hoá, học chung."
+     ],
+     [
+      "Số 8",
+      "Dám làm, năng động, hợp cùng làm ăn.",
+      "Cả hai dễ quyết nhanh; tiền lớn chờ một ngày và hỏi thêm một người."
+     ],
+     [
+      "Số 9",
+      "Thích đi xa, rộng lượng với đời.",
+      "Ít tích luỹ, thiếu chốn về; đặt mục tiêu để dành chung và một nơi ở ổn định."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 5 có hay thay lòng không?",
+     "dap": "Con số không quyết định sự chung thuỷ. Số 5 thường cần mối quan hệ có thay đổi; khi thấy bế tắc, họ cần nói ra trước khi tìm cảm giác mới ở chỗ khác."
+    },
+    {
+     "hoi": "Yêu số 5 có mệt không?",
+     "dap": "Có thể mệt nếu bạn cần lịch trình cố định. Nhiều người lại thấy số 5 giúp mình trẻ ra vì luôn có chuyện mới để làm cùng nhau."
+    },
+    {
+     "hoi": "Số 5 hợp yêu xa không?",
+     "dap": "Số 5 thường chịu được yêu xa khá tốt vì quen tự lo. Điều cần là những lần gặp có kế hoạch rõ và không bị kiểm tra liên tục."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 5 với sự thay đổi, năm giác quan và tự do. Trong tình cảm, các sách phổ biến mô tả người số 5 cuốn hút nhưng cần không khí mới."
+    }
+   ],
+   "y_chinh": [
+    "Số 5 yêu bằng trải nghiệm, mỗi buổi hẹn một kiểu",
+    "Khi cãi nhau số 5 hay muốn ra ngoài cho thoáng",
+    "Trước khi cưới: nói cụ thể những tự do nào được giữ",
+    "Thương số 5: có đời sống riêng thú vị, đừng kiểm tra"
+   ]
+  },
+  "so-6-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 6 yêu như thế nào khi sống chung?",
+     "doan": "Khi sống chung, số 6 thường thành người giữ nhịp cả nhà: biết tủ lạnh thiếu gì, ai cần gì, ngày giỗ bên nào. Người yêu được chăm rất kỹ. Mặt tối là số 6 hay sửa cách người kia gấp đồ, nấu ăn, tiêu tiền, và gọi đó là quan tâm."
+    },
+    {
+     "tieu_de": "Số 6 khi cãi nhau thường nói gì?",
+     "doan": "Số 6 khi cãi nhau thường kể lại những gì mình đã làm cho người kia. Đó là cách họ nói 'mình cũng cần được lo'. Người nghe lại thấy như bị kể công. Thử trong tuần này: thay câu 'mình lo cho anh/em bao nhiêu' bằng câu 'tuần này mình cần anh/em làm giúp một việc', rồi nêu đúng một việc."
+    },
+    {
+     "tieu_de": "Số 6 sau khi có con thế nào?",
+     "doan": "Khi có con, số 6 thường dồn gần hết sức cho con và nhà. Vợ chồng dễ thành hai người cùng chạy việc, ít khi là đôi bạn. Giữ một buổi hẹn hai người mỗi tháng, không mang con, giúp số 6 nhớ mình còn là người yêu chứ đâu phải lúc nào cũng là cha hay mẹ."
+    },
+    {
+     "tieu_de": "Cách thương một người số 6",
+     "danh_sach": [
+      "Nói cảm ơn cho từng việc cụ thể họ làm.",
+      "Chủ động nhận một việc nhà và làm trọn, không đợi nhắc.",
+      "Mời họ ngồi yên để mình chăm lại một bữa.",
+      "Khi họ góp ý, nghe hết rồi mới giải thích.",
+      "Hỏi họ muốn gì cho riêng mình, không phải cho cả nhà."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 6 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 6 có thể ấm với mọi số; mỗi cặp khác nhau ở phần dễ và phần cần thoả thuận. Số 2, 4 hoặc 8 thường cùng hướng về gia đình và sự ổn định. Số 5 hoặc 7 cần khoảng riêng nhiều hơn mức số 6 quen cho. Bảng không chấm điểm.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Số 6 lo con người, số 1 lo hướng đi.",
+      "Số 6 để số 1 tự quyết phần của họ; số 1 nhớ cảm ơn cụ thể."
+     ],
+     [
+      "Số 2",
+      "Hai người chu đáo, nhà rất ấm.",
+      "Cùng cho mà ít đòi; mỗi tuần mỗi người nói một nhu cầu của mình."
+     ],
+     [
+      "Số 3",
+      "Số 6 làm nhà ấm, số 3 làm nhà vui.",
+      "Số 6 bớt nhắc; để số 3 tự nhận phần việc chung."
+     ],
+     [
+      "Số 4",
+      "Cùng trách nhiệm, xây nền vững cho gia đình.",
+      "Bổn phận nhiều, vui ít; giữ buổi chơi không bàn việc."
+     ],
+     [
+      "Số 5",
+      "Số 6 cho mái ấm, số 5 cho sự mới.",
+      "Số 6 dễ giữ chặt; tôn trọng phần tự do đã thoả thuận với số 5."
+     ],
+     [
+      "Số 6",
+      "Hướng gia đình, ấm cúng.",
+      "Cả hai muốn chăm, dễ quản nhau; luân phiên người chăm, người được chăm."
+     ],
+     [
+      "Số 7",
+      "Số 6 cho hơi ấm, số 7 cho chiều sâu.",
+      "Hỏi han nhiều dễ thành xâm phạm; thoả thuận cách hỏi và giờ riêng."
+     ],
+     [
+      "Số 8",
+      "Số 8 lo vật chất, số 6 lo tinh thần.",
+      "Số 8 vắng, số 6 cô đơn trong việc nhà; ngày quan trọng số 8 coi như cam kết."
+     ],
+     [
+      "Số 9",
+      "Cùng thương người, thích giúp đỡ.",
+      "Lo người ngoài, quên nhau; giữ thời gian cho riêng hai người trước."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 6 có hay kiểm soát người yêu không?",
+     "dap": "Số 6 thường không có ý kiểm soát, họ muốn mọi thứ ổn cho người mình thương. Nhưng nhắc quá nhiều thì người kia thấy bị quản; hỏi ý trước khi giúp là cách giữ cân bằng."
+    },
+    {
+     "hoi": "Số 6 có hợp làm vợ, làm chồng không?",
+     "dap": "Số 6 thường coi trọng gia đình và chịu khó vun vén. Điều cần là hai người chia việc công bằng để số 6 không gánh một mình."
+    },
+    {
+     "hoi": "Vì sao số 6 hay buồn mà không nói?",
+     "dap": "Vì số 6 mong được đáp lại theo đúng cách mình cho. Khi không được, họ buồn nhưng ngại đòi, sợ bị coi là kể công."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras liên hệ số 6 với sự hài hoà, gia đình và trách nhiệm. Các sách phổ biến mô tả người số 6 trong tình yêu thường chăm lo và hướng về mái nhà chung."
+    }
+   ],
+   "y_chinh": [
+    "Số 6 thương bằng sự chăm lo từng việc trong nhà",
+    "Khi cãi nhau dễ kể lại những gì mình đã làm",
+    "Có con rồi: giữ một buổi hẹn hai người mỗi tháng",
+    "Thương số 6: cảm ơn cụ thể, nhận một việc nhà và làm trọn"
+   ]
+  },
+  "so-7-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 7 yêu như thế nào lúc mới quen?",
+     "doan": "Lúc mới quen, số 7 thường quan sát lâu trước khi tiến. Họ hỏi những câu lạ, thích bàn sách, phim, ý tưởng hơn chuyện vặt. Người kia có thể nghĩ số 7 không thích mình, trong khi số 7 đang thử xem hai người có nói chuyện được lâu không."
+    },
+    {
+     "tieu_de": "Số 7 khi cãi nhau thường làm gì?",
+     "doan": "Số 7 khi cãi nhau thường rút vào im lặng hoặc nói vài câu sắc, lạnh. Họ cần nghĩ một mình trước khi nói tiếp. Người kia thấy bị bỏ lại giữa chừng. Thử trong tuần này: hẹn sẵn một câu như 'mình cần hai tiếng, tối nay mình nói tiếp', rồi quay lại đúng giờ."
+    },
+    {
+     "tieu_de": "Số 7 khi hết yêu thì sao?",
+     "doan": "Số 7 thường rút dần về thế giới riêng trước khi nói lời dừng. Họ đã cân nhắc rất lâu, nên lúc nói ra thì gần như đã quyết. Người kia thấy bất ngờ vì không được tham gia. Nói về những nghi ngờ sớm hơn, dù chưa rõ, giúp cả hai có cơ hội sửa."
+    },
+    {
+     "tieu_de": "Cách thương một người số 7",
+     "danh_sach": [
+      "Cho họ khoảng yên mà không hỏi 'giận à'.",
+      "Rủ họ bàn một ý tưởng, một cuốn sách, một câu hỏi lớn.",
+      "Giữ kín chuyện riêng họ kể; số 7 nhớ rất lâu nếu bị lộ.",
+      "Thẳng thắn, không vòng vo; số 7 nhận ra ngay khi bị lái.",
+      "Kiên nhẫn chờ họ kể, nhưng cũng nói rõ mình cần được nghe."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 7 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 7 có thể gắn bó sâu với mọi số; khác nhau ở chỗ hợp nhịp và chỗ cần nói ra. Số 4, 7 hoặc 9 thường hợp nhịp suy nghĩ và tôn trọng khoảng riêng. Số 2, 3 hoặc 6 mang hơi ấm, đổi lại cần thoả thuận giờ riêng. Bảng không chấm điểm.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Hai người độc lập, không đòi hỏi nhau nhiều.",
+      "Dễ mỗi người một góc; mỗi tuần một buổi kể điều đang nghĩ thật."
+     ],
+     [
+      "Số 2",
+      "Yên tĩnh, tôn trọng, hiểu sâu.",
+      "Số 2 dễ thấy bị bỏ rơi; số 7 báo trước khi cần ở một mình."
+     ],
+     [
+      "Số 3",
+      "Số 3 kéo số 7 ra đời sống, số 7 thêm chiều sâu cho số 3.",
+      "Số 7 dễ chê nông, số 3 dễ chê lạnh; xen buổi đông người với buổi yên."
+     ],
+     [
+      "Số 4",
+      "Cùng nghiêm túc, cẩn thận, trọng lý lẽ.",
+      "Khô khan; tập nói thành câu điều mình quý ở nhau."
+     ],
+     [
+      "Số 5",
+      "Cùng tò mò, một người đi xa, một người đi sâu.",
+      "Nhịp sống khác; học chung hoặc đi một chuyến có chiều sâu."
+     ],
+     [
+      "Số 6",
+      "Số 7 cho chiều sâu, số 6 cho hơi ấm.",
+      "Số 7 thấy bị hỏi han nhiều; thoả thuận giờ riêng và cách hỏi."
+     ],
+     [
+      "Số 7",
+      "Hiểu nhau không cần nói nhiều.",
+      "Quá khép kín, xa dần; giữ một sở thích trí tuệ chung."
+     ],
+     [
+      "Số 8",
+      "Số 7 phân tích, số 8 quyết.",
+      "Số 8 thấy chậm, số 7 thấy vội; số 7 đưa ý kiến có hạn chót."
+     ],
+     [
+      "Số 9",
+      "Cùng hướng về ý nghĩa và tri thức.",
+      "Cả hai xa việc thực tế; lập kế hoạch cụ thể cho điều cả hai tin."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 7 có lạnh lùng không?",
+     "dap": "Số 7 trông lạnh vì ít biểu lộ, nhưng thường nghĩ rất nhiều về người mình thương. Họ cần thời gian và sự tin tưởng để nói ra."
+    },
+    {
+     "hoi": "Làm sao biết số 7 thích mình?",
+     "dap": "Số 7 thường dành cho người mình thích những cuộc nói chuyện dài, kể chuyện riêng ít người biết và nhớ chi tiết bạn từng nói."
+    },
+    {
+     "hoi": "Số 7 có cần ở một mình sau khi cưới không?",
+     "dap": "Thường có. Một góc riêng hoặc một buổi riêng mỗi tuần giúp số 7 nạp lại sức và quay về gần hơn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras coi số 7 là số của suy xét và tìm hiểu điều ẩn sau bề mặt. Trong tình yêu, các sách phổ biến mô tả người số 7 kén chọn, chậm mở lòng nhưng gắn bó lâu."
+    }
+   ],
+   "y_chinh": [
+    "Số 7 quan sát lâu, thích bàn ý tưởng hơn chuyện vặt",
+    "Cãi nhau số 7 im lặng; hẹn giờ quay lại nói tiếp",
+    "Khi đã nói lời dừng, số 7 thường đã nghĩ rất lâu",
+    "Thương số 7: giữ kín chuyện riêng, nói thẳng, không lái"
+   ]
+  },
+  "so-8-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 8 yêu như thế nào?",
+     "doan": "Số 8 thường thương bằng cách lo liệu: đặt bàn, trả tiền, tìm người quen giúp việc khó cho người yêu. Họ muốn người kia thấy an toàn khi ở cạnh mình. Mặt tối là số 8 dễ nghĩ mình đã đủ quan tâm vì đã chi, trong khi người kia cần thời gian và lời nói."
+    },
+    {
+     "tieu_de": "Số 8 khi cãi nhau thường thế nào?",
+     "doan": "Số 8 khi cãi nhau thường muốn nắm quyền quyết, giọng dứt khoát và nhanh. Họ ghét bị coi là sai trước người khác. Người kia dễ thấy mình bị lấn. Thử trong tuần này: trong một lần tranh luận, hỏi 'anh/em muốn kết quả thế nào?' trước khi đưa phương án."
+    },
+    {
+     "tieu_de": "Số 8 và chuyện tiền sau khi cưới",
+     "doan": "Sau khi cưới, số 8 thường muốn cầm phần lớn quyết định tài chính. Nhà ít lo thiếu, nhưng người kia dễ thấy mình không có tiếng nói. Một quỹ chung có quy tắc rõ, cộng một khoản riêng mỗi người tự tiêu không phải báo cáo, giúp cả hai thấy được tôn trọng."
+    },
+    {
+     "tieu_de": "Cách thương một người số 8",
+     "danh_sach": [
+      "Ghi nhận nỗ lực của họ, cả khi kết quả chưa tới.",
+      "Có mục tiêu riêng của mình để họ tôn trọng.",
+      "Nói thẳng khi không đồng ý, kèm lý do cụ thể.",
+      "Kéo họ ra khỏi công việc bằng một buổi không điện thoại.",
+      "Cho họ thấy họ được thương cả khi chưa thành công."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 8 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 8 có thể bền với mọi số khi vai trò được chia rõ. Số 2, 4 hoặc 6 thường bổ sung phần gắn kết và ổn định. Số 1 hoặc 8 cùng chí lớn, dễ cạnh tranh ngầm nếu không tách vai. Bảng không chấm điểm.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Cùng hướng kết quả, mạnh khi chung mục tiêu.",
+      "Hai cái tôi lớn; chọn chung một thử thách bên ngoài thay vì đấu nhau."
+     ],
+     [
+      "Số 2",
+      "Số 8 lo đường dài, số 2 giữ sự gắn bó.",
+      "Số 8 dễ át; việc lớn cần cả hai đồng ý."
+     ],
+     [
+      "Số 3",
+      "Số 8 tổ chức, số 3 truyền đạt.",
+      "Số 8 chê thiếu nghiêm túc; chia vai, để số 3 lo phần giao tiếp."
+     ],
+     [
+      "Số 4",
+      "Thực tế, giỏi xây tài sản chung.",
+      "Dễ chỉ còn chuyện việc; tách giờ riêng tư khỏi giờ bàn tiền."
+     ],
+     [
+      "Số 5",
+      "Dám làm, năng động, nhạy cơ hội.",
+      "Cả hai quyết nhanh; khoản tiền lớn chờ một ngày, hỏi thêm người ngoài."
+     ],
+     [
+      "Số 6",
+      "Số 8 lo vật chất, số 6 lo tinh thần.",
+      "Số 8 vắng mặt nhiều; ngày quan trọng của nhà coi như lịch công việc."
+     ],
+     [
+      "Số 7",
+      "Số 8 quyết, số 7 phân tích.",
+      "Số 8 sốt ruột; chờ đủ hạn đã hẹn với số 7."
+     ],
+     [
+      "Số 8",
+      "Cùng tham vọng, xây được nhiều.",
+      "Tranh quyền; tách vai và đặt một mục tiêu chung không dính tiền."
+     ],
+     [
+      "Số 9",
+      "Số 8 có nguồn lực, số 9 có lý tưởng.",
+      "Số 9 thấy thực dụng, số 8 thấy hoang phí; định trước phần thu nhập cho việc ý nghĩa."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 8 có gia trưởng không?",
+     "dap": "Số 8 dễ bị thấy là gia trưởng khi quen quyết thay. Thường họ chỉ muốn mọi việc có kết quả; khi được mời bàn trước, số 8 vẫn lắng nghe."
+    },
+    {
+     "hoi": "Số 8 có hay mải làm mà quên người yêu không?",
+     "dap": "Có xu hướng đó, nhất là giai đoạn sự nghiệp đang lên. Lịch hẹn cố định giúp số 8 giữ phần thời gian cho người thương."
+    },
+    {
+     "hoi": "Số 8 thích người yêu thế nào?",
+     "dap": "Số 8 thường quý người tự lập, có việc riêng và dám nói thẳng. Họ ít nể người chỉ chiều theo ý mình."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 8 với sự cân bằng giữa vật chất và tinh thần, quyền lực và trách nhiệm. Trong tình cảm, các sách phổ biến mô tả người số 8 hay bảo bọc và lo toan."
+    }
+   ],
+   "y_chinh": [
+    "Số 8 thương bằng cách lo liệu và che chắn cho người yêu",
+    "Cãi nhau số 8 muốn nắm quyền quyết; hỏi ý trước giúp hạ nhiệt",
+    "Sau cưới: quỹ chung có quy tắc và khoản riêng tự tiêu",
+    "Thương số 8: ghi nhận nỗ lực, kéo họ khỏi công việc"
+   ]
+  },
+  "so-9-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 9 yêu như thế nào?",
+     "doan": "Số 9 thường yêu với hình dung đẹp về người kia và về điều hai người có thể làm cho đời. Họ cho đi rộng rãi, tha thứ dễ, nhớ lâu những lúc đẹp. Mặt tối là họ dễ thất vọng âm thầm khi người thật khác người trong hình dung."
+    },
+    {
+     "tieu_de": "Số 9 khi cãi nhau thường thế nào?",
+     "doan": "Số 9 khi cãi nhau thường nhường trước, nói 'thôi bỏ qua'. Nhưng chuyện bỏ qua chưa hẳn đã xong trong lòng họ. Có khi số 9 chuyển sang lo cho người khác để khỏi nghĩ. Thử trong tuần này: viết ba điều mình thật sự muốn đổi trong mối quan hệ, rồi chọn một điều để nói."
+    },
+    {
+     "tieu_de": "Số 9 khi hết yêu thì sao?",
+     "doan": "Số 9 thường khó dứt, vì nhìn thấy phần tốt của người kia và nhớ những gì đã cùng qua. Họ có thể ở lại lâu sau khi tình cảm đã đổi. Khi đã đi, số 9 thường đi trọn và giữ lời tử tế về người cũ."
+    },
+    {
+     "tieu_de": "Cách thương một người số 9",
+     "danh_sach": [
+      "Quan tâm tới điều họ tin, không gạt đi là viển vông.",
+      "Nhắc họ ăn, ngủ, nghỉ khi họ lo cho người khác quá nhiều.",
+      "Cùng làm một việc tốt nhỏ, như góp một buổi tình nguyện.",
+      "Giúp họ giữ việc thực tế như tiền, giấy tờ mà không chê.",
+      "Hỏi họ đang buồn điều gì, vì số 9 hay giấu."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 9 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 9 có thể hoà hợp với mọi số; mỗi cặp có điểm gặp nhau và điểm cần nói thẳng. Số 3, 6 hoặc 9 thường chung giá trị và lòng thương người. Số 4 hoặc 8 giúp số 9 đứng vững hơn về thực tế, đổi lại cần thống nhất chuyện tiền. Bảng không chấm điểm.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Số 9 mang ý nghĩa, số 1 biến thành hành động.",
+      "Số 9 thấy số 1 vị kỷ; cùng chọn việc vừa có kết quả vừa có ý nghĩa."
+     ],
+     [
+      "Số 2",
+      "Cùng giàu lòng thương, dễ cảm thông.",
+      "Cả hai hay hy sinh và mơ hồ về tiền; lập kế hoạch tài chính chung rõ."
+     ],
+     [
+      "Số 3",
+      "Cùng yêu cái đẹp, nhiều cảm xúc.",
+      "Việc thực tế dễ trôi; mỗi tháng rà lại tiền và giấy tờ."
+     ],
+     [
+      "Số 4",
+      "Số 4 biến lý tưởng của số 9 thành kế hoạch.",
+      "Số 9 dễ chê thiếu tầm nhìn; số 9 nêu mục đích, số 4 lên từng bước."
+     ],
+     [
+      "Số 5",
+      "Cùng rộng lượng, thích đi xa.",
+      "Ít để dành, thiếu chốn về; có mục tiêu tích luỹ và một nơi ở cố định."
+     ],
+     [
+      "Số 6",
+      "Cùng thương người, hay giúp đỡ.",
+      "Lo cho người ngoài mà quên nhau; giữ giờ riêng cho hai người."
+     ],
+     [
+      "Số 7",
+      "Cùng hướng về tri thức và ý nghĩa.",
+      "Cả hai xa thực tế; cùng biến một điều cả hai tin thành việc cụ thể."
+     ],
+     [
+      "Số 8",
+      "Số 9 có lý tưởng, số 8 có nguồn lực.",
+      "Số 9 thấy số 8 thực dụng; thoả thuận trước phần thu nhập dành cho việc có ích."
+     ],
+     [
+      "Số 9",
+      "Hiểu nhau về giá trị sống, rộng lượng.",
+      "Dễ bỏ bê việc nhà và bản thân; mỗi tháng một người nhận vai lo việc thực tế."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 9 có dễ tha thứ không?",
+     "dap": "Số 9 thường tha thứ nhanh trên lời nói. Phần tổn thương có thể còn lâu hơn; họ cần được hỏi lại sau vài ngày."
+    },
+    {
+     "hoi": "Vì sao số 9 hay yêu người cần được giúp?",
+     "dap": "Số 9 dễ thấy ý nghĩa khi giúp ai đó tốt lên. Điều này đẹp, nhưng cũng dễ biến người yêu thành một dự án."
+    },
+    {
+     "hoi": "Số 9 có hợp kết hôn sớm không?",
+     "dap": "Không có tuổi đúng cho mọi người. Số 9 thường gắn bó tốt hơn khi đã rõ mình muốn sống vì điều gì và người kia cũng tôn trọng điều đó."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras coi số 9 là số khép lại một vòng từ 1 tới 9, gắn với lòng bao dung. Các sách phổ biến mô tả người số 9 trong tình yêu thường lãng mạn và rộng lượng."
+    }
+   ],
+   "y_chinh": [
+    "Số 9 yêu với hình dung đẹp về người kia",
+    "Cãi nhau số 9 hay nhường, nhưng chưa hẳn đã quên",
+    "Khó dứt quan hệ cũ vì nhìn thấy phần tốt của người kia",
+    "Thương số 9: tôn trọng điều họ tin, giúp giữ việc thực tế"
+   ]
+  },
+  "so-11-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 11 yêu như thế nào?",
+     "doan": "Số 11 thường yêu như số 2 nhưng mạnh hơn: cảm được tâm trạng người kia từ một tin nhắn. Họ mong mối quan hệ có ý nghĩa, có chung điều để tin. Mặt tối là họ đọc ý quá mức, thấy một câu trả lời ngắn cũng thành dấu hiệu bị lạnh nhạt."
+    },
+    {
+     "tieu_de": "Số 11 khi cãi nhau thường ra sao?",
+     "doan": "Số 11 khi cãi nhau thường cảm xúc dâng nhanh, nói nhiều rồi đuối sức. Sau đó họ dễ tự trách và rút vào im lặng. Người kia không biết nên lại gần hay để yên. Thử trong tuần này: thoả thuận một tín hiệu như 'mình đang quá tải', nghĩa là tạm dừng, nghỉ một lúc rồi nói tiếp."
+    },
+    {
+     "tieu_de": "Số 11 có khác số 2 trong tình yêu không?",
+     "doan": "Có. Số 11 là bản cường độ cao của số 2. Cả hai cần gắn bó và nhạy với người kia, nhưng số 11 kỳ vọng nhiều hơn vào ý nghĩa của mối quan hệ. Vì vậy số 11 dễ vỡ mộng hơn khi đời thường lấn át, và cần nhịp sinh hoạt đều để giữ cân bằng."
+    },
+    {
+     "tieu_de": "Cách thương một người số 11",
+     "danh_sach": [
+      "Nói rõ cảm xúc của mình, đừng để họ đoán.",
+      "Khi họ chia sẻ cảm nhận, nghe trước rồi mới phân tích.",
+      "Giữ nhịp sinh hoạt chung đều đặn: giờ ăn, giờ ngủ, cuối tuần.",
+      "Cùng theo đuổi một điều, như học, làm việc thiện, nghệ thuật.",
+      "Nhắc họ rằng một ngày bình thường không có nghĩa là tình cảm nhạt."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 11 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 11 thường được xét như số 2 ở cường độ cao, nên bảng dựa trên các cặp của số 2 và thêm điều số 11 cần chú ý. Mọi cặp đều có thể bền; khác nhau ở chỗ dễ và chỗ cần nói rõ, không chấm điểm.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Số 1 cho hướng đi rõ, số 11 cho chiều sâu cảm xúc.",
+      "Số 11 dễ tổn thương vì quyết định nhanh của số 1; xin được hỏi ý trước."
+     ],
+     [
+      "Số 2",
+      "Rất hiểu nhau, nhẹ nhàng.",
+      "Cả hai nhạy và né va chạm; hẹn ngày nói thẳng điều chưa ổn."
+     ],
+     [
+      "Số 3",
+      "Số 3 mang tiếng cười, giúp số 11 nhẹ đi.",
+      "Câu đùa vô tình dễ làm số 11 nghĩ nhiều; nói ra ngay, không ủ."
+     ],
+     [
+      "Số 4",
+      "Số 4 cho nhịp sống đều, giúp số 11 đứng vững.",
+      "Số 4 ít nói lời thương; số 11 nói rõ mình cần được nghe gì."
+     ],
+     [
+      "Số 5",
+      "Số 5 mang không khí mới, số 11 mang chiều sâu.",
+      "Số 11 dễ bất an khi số 5 cần đi; thoả thuận nhịp liên lạc cụ thể."
+     ],
+     [
+      "Số 6",
+      "Cùng chu đáo, ấm áp.",
+      "Cả hai cho nhiều, ít đòi; mỗi tuần nói một nhu cầu của mình."
+     ],
+     [
+      "Số 7",
+      "Cùng thích chuyện sâu, có ý nghĩa.",
+      "Số 7 cần lặng, số 11 dễ thấy bị bỏ; số 7 báo trước khi cần yên."
+     ],
+     [
+      "Số 8",
+      "Số 8 lo phần thực tế, số 11 lo phần gắn kết.",
+      "Số 8 dễ át; số 11 giữ tiếng nói trong việc lớn."
+     ],
+     [
+      "Số 9",
+      "Cùng lý tưởng, giàu lòng thương.",
+      "Cả hai xa thực tế và dễ hy sinh; lập kế hoạch chi tiêu chung."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 11 có quá nhạy cảm trong tình yêu không?",
+     "dap": "Số 11 nhạy hơn mức trung bình; đó vừa là điểm mạnh vừa là áp lực. Nói ra cảm nhận và hỏi lại người kia giúp tránh đoán sai."
+    },
+    {
+     "hoi": "Số 11 có hợp với số 2 không?",
+     "dap": "Thường dễ hiểu nhau vì cùng gốc 2. Điều cần là một trong hai chủ động nói thẳng, vì cả hai đều ngại va chạm."
+    },
+    {
+     "hoi": "Vì sao số 11 dễ vỡ mộng?",
+     "dap": "Vì số 11 hay đặt kỳ vọng cao vào ý nghĩa của mối quan hệ. Khi đời thường nhiều việc vặt, họ dễ thấy mất đi điều đặc biệt."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Trong thần số học Pythagoras, 11 là số cái, thường đọc như bản cường độ cao của số 2. Các sách phổ biến mô tả người số 11 nhạy cảm, giàu trực giác và đặt nhiều kỳ vọng vào tình cảm."
+    }
+   ],
+   "y_chinh": [
+    "Số 11 là bản cường độ cao của số 2 trong tình cảm",
+    "Nhạy với tâm trạng người kia, dễ đọc ý quá mức",
+    "Cãi nhau: thoả thuận tín hiệu 'đang quá tải' để tạm dừng",
+    "Thương số 11: nói rõ cảm xúc, giữ nhịp sống đều"
+   ]
+  },
+  "so-22-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 22 yêu như thế nào?",
+     "doan": "Số 22 thường yêu như người lập kế hoạch dài: nhà ở đâu, con học gì, mười năm nữa hai người làm gì. Họ coi người yêu là một phần của dự án đời mình. Mặt tối là hiện tại dễ bị hoãn cho tương lai, và người kia thấy mình đứng hàng chờ sau công việc."
+    },
+    {
+     "tieu_de": "Số 22 khác số 4 thế nào trong tình yêu?",
+     "doan": "Số 22 là bản cường độ cao của số 4. Cả hai chung thuỷ và thực tế, nhưng số 22 mang mục tiêu lớn hơn và áp lực nặng hơn. Vì vậy số 22 dễ mệt và dễ quên chăm mối quan hệ khi việc lớn đang chạy."
+    },
+    {
+     "tieu_de": "Số 22 khi cãi nhau thường thế nào?",
+     "doan": "Số 22 khi cãi nhau thường nói như đang họp: nêu vấn đề, đưa giải pháp, chốt. Người kia cảm thấy mình là một mục trong danh sách. Khi quá tải, số 22 có thể bùng lên rồi im. Thử trong tuần này: trước khi đưa giải pháp, hỏi 'chuyện này làm anh/em thấy thế nào?' và chờ nghe hết."
+    },
+    {
+     "tieu_de": "Cách thương một người số 22",
+     "danh_sach": [
+      "Hiểu mục tiêu lớn của họ, nhưng nói rõ phần thời gian mình cần.",
+      "Kéo họ về những việc nhỏ: một bữa sáng, một buổi đi dạo.",
+      "Chia bớt gánh khi họ quá tải, đừng chỉ an ủi.",
+      "Có đời sống và kế hoạch riêng để không phụ thuộc lịch của họ.",
+      "Ghi nhận cả khi việc lớn chưa xong."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 22 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 22 thường được xét như số 4 ở cường độ cao, nên bảng dựa trên các cặp của số 4 và thêm phần áp lực riêng của số 22. Cặp nào cũng có thể bền; khác nhau ở chỗ thuận và chỗ cần nói rõ, không chấm điểm.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Số 1 khởi động, số 22 xây thành hệ thống.",
+      "Hai người cùng muốn dẫn; tách rõ ai lo phần nào."
+     ],
+     [
+      "Số 2",
+      "Số 2 giữ sự ấm, số 22 giữ nền lâu dài.",
+      "Số 2 cần lời quan tâm; số 22 đặt lịch cố định cho hai người."
+     ],
+     [
+      "Số 3",
+      "Số 3 làm số 22 nhẹ nhõm, bớt căng.",
+      "Số 22 dễ coi số 3 là thiếu nghiêm túc; chừa chỗ cho niềm vui không kế hoạch."
+     ],
+     [
+      "Số 4",
+      "Cùng thực tế, cùng xây nền.",
+      "Rất dễ chỉ còn việc; mỗi năm cùng thử một điều mới."
+     ],
+     [
+      "Số 5",
+      "Số 5 đem gió mới vào kế hoạch của số 22.",
+      "Số 22 thấy bấp bênh; chia phần cố định và phần linh hoạt."
+     ],
+     [
+      "Số 6",
+      "Cùng lo cho gia đình và người thân.",
+      "Bổn phận chồng chất; giữ buổi vui không bàn việc."
+     ],
+     [
+      "Số 7",
+      "Cùng nghiêm túc, trọng chiều sâu.",
+      "Ít biểu lộ; tập nói thành câu điều mình quý ở nhau."
+     ],
+     [
+      "Số 8",
+      "Cùng tầm nhìn lớn, giỏi xây tài sản.",
+      "Cả hai cuốn vào việc; tách rõ giờ riêng tư khỏi giờ làm ăn."
+     ],
+     [
+      "Số 9",
+      "Số 9 nêu lý tưởng, số 22 biến thành việc.",
+      "Số 9 thấy số 22 khô; cùng duyệt mục đích trước khi lên kế hoạch."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 22 có đặt công việc lên trên người yêu không?",
+     "dap": "Số 22 dễ làm vậy khi việc lớn đang ở giai đoạn căng. Lịch cố định cho hai người, coi như cam kết, giúp cân lại."
+    },
+    {
+     "hoi": "Số 22 có lãng mạn không?",
+     "dap": "Số 22 lãng mạn theo kiểu xây cho tương lai chung. Lời ngọt ít, nhưng thường có kế hoạch rõ cho hai người."
+    },
+    {
+     "hoi": "Làm sao để số 22 bớt áp lực trong tình cảm?",
+     "dap": "Chia việc cụ thể, nhắc họ không cần một mình lo hết. Số 22 thường nhẹ hơn khi thấy có người cùng gánh thật sự."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Trong thần số học Pythagoras, 22 là số cái, thường đọc như bản cường độ cao của số 4, gắn với xây dựng lớn. Các sách phổ biến mô tả người số 22 nghiêm túc và nhìn tình cảm như một công trình lâu dài."
+    }
+   ],
+   "y_chinh": [
+    "Số 22 là bản cường độ cao của số 4 trong tình cảm",
+    "Yêu bằng kế hoạch dài; hiện tại dễ bị hoãn cho tương lai",
+    "Cãi nhau như đang họp; hỏi cảm xúc trước khi đưa giải pháp",
+    "Thương số 22: chia bớt gánh, kéo họ về việc nhỏ"
+   ]
+  },
+  "so-33-trong-tinh-yeu": {
+   "muc": [
+    {
+     "tieu_de": "Số 33 yêu như thế nào?",
+     "doan": "Số 33 thường yêu bằng cách nâng người kia lên: khuyến khích học thêm, đỡ lúc khó, tin khi người khác không tin. Tình thương của họ rộng và bền. Mặt tối là họ dễ chọn người đang khó khăn để giúp, và gánh luôn phần trách nhiệm của người ấy."
+    },
+    {
+     "tieu_de": "Số 33 khác số 6 thế nào trong tình yêu?",
+     "doan": "Số 33 là bản cường độ cao của số 6. Cả hai hướng về gia đình và chăm lo, nhưng số 33 thường lo cho cả vòng người rộng hơn và đòi hỏi mình nhiều hơn. Áp lực vì vậy cũng lớn hơn, dễ dẫn tới mệt mỏi kéo dài nếu không biết nhận lại."
+    },
+    {
+     "tieu_de": "Số 33 khi tình cảm gặp khó thì sao?",
+     "doan": "Khi tình cảm gặp khó, số 33 thường cố chịu thêm và tự hỏi mình đã làm gì chưa đủ. Họ ít khi trách người kia thẳng. Ở lại vì thương khác với ở lại vì thương hại. Thử trong tuần này: viết ra điều mình cần nhận từ người kia và nói một điều trong số đó."
+    },
+    {
+     "tieu_de": "Cách thương một người số 33",
+     "danh_sach": [
+      "Chăm lại họ: nấu một bữa, lo một việc mà họ thường lo.",
+      "Đừng để họ gánh việc của người khác thay mình.",
+      "Khen họ vì chính con người họ, ngoài chuyện họ giúp ai.",
+      "Nhắc họ nghỉ khi đang lo cho quá nhiều người.",
+      "Tự đứng vững trong việc của mình để họ không phải đỡ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Số 33 hợp với số nào trong tình yêu?",
+    "chu_thich": "Số 33 thường được xét như số 6 ở cường độ cao, nên bảng dựa trên các cặp của số 6 và thêm điều số 33 cần để ý. Mọi cặp đều có thể bền; bảng chỉ mô tả, không chấm điểm.",
+    "cot": [
+     "Số đường đời người kia",
+     "Điểm hoà hợp",
+     "Điểm cần nói rõ"
+    ],
+    "dong": [
+     [
+      "Số 1",
+      "Số 1 cho hướng đi, số 33 cho sự nâng đỡ.",
+      "Số 33 dễ làm thay; để số 1 tự quyết phần của họ."
+     ],
+     [
+      "Số 2",
+      "Cùng dịu dàng, biết chăm nhau.",
+      "Cả hai ngại đòi; mỗi tuần nói một điều mình cần."
+     ],
+     [
+      "Số 3",
+      "Số 3 làm số 33 cười, bớt nặng lòng.",
+      "Số 33 dễ nhắc nhiều; để số 3 tự nhận việc."
+     ],
+     [
+      "Số 4",
+      "Cùng trách nhiệm, xây nhà vững.",
+      "Nhiều bổn phận; giữ thời gian chỉ để vui."
+     ],
+     [
+      "Số 5",
+      "Số 5 mang mới mẻ, số 33 mang mái ấm.",
+      "Số 33 dễ lo quá; tôn trọng khoảng tự do số 5 cần."
+     ],
+     [
+      "Số 6",
+      "Hướng gia đình, ấm cúng.",
+      "Cả hai muốn chăm, dễ đuối; luân phiên người được chăm."
+     ],
+     [
+      "Số 7",
+      "Số 33 ấm, số 7 sâu.",
+      "Lo lắng của số 33 dễ thành hỏi han quá; thoả thuận giờ riêng của số 7."
+     ],
+     [
+      "Số 8",
+      "Số 8 lo vật chất, số 33 lo tinh thần.",
+      "Số 33 dễ một mình gánh việc nhà; số 8 giữ lịch có mặt."
+     ],
+     [
+      "Số 9",
+      "Cùng thương người, thích giúp cộng đồng.",
+      "Lo cho người ngoài, quên nhau; giữ một buổi riêng hai người mỗi tuần."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 33 có hay hy sinh trong tình yêu không?",
+     "dap": "Có xu hướng. Số 33 thường đặt người khác trước mình; điều cần là phân biệt cho đi vì thương với cho đi vì sợ người kia rời đi."
+    },
+    {
+     "hoi": "Số 33 hợp người yêu thế nào?",
+     "dap": "Số 33 thường dễ chịu bên người tự lập, biết quan tâm lại và không trông chờ được cứu."
+    },
+    {
+     "hoi": "Vì sao số 33 dễ mệt trong tình cảm?",
+     "dap": "Vì số 33 hay ôm trách nhiệm cho cả hai, cả nhà. Khi không nhận lại, sự mệt tích dần dù tình thương vẫn còn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Trong thần số học Pythagoras, 33 là số cái, thường đọc như bản cường độ cao của số 6, gắn với chăm sóc và dạy dỗ. Các sách phổ biến mô tả người số 33 yêu bao dung nhưng dễ gánh quá sức."
+    }
+   ],
+   "y_chinh": [
+    "Số 33 là bản cường độ cao của số 6 trong tình cảm",
+    "Yêu bằng nâng đỡ; dễ chọn người cần được giúp",
+    "Ở lại vì thương khác với ở lại vì thương hại",
+    "Thương số 33: chăm lại họ, khen họ vì chính họ"
+   ]
+  }
+ }
+}

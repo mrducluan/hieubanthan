@@ -1,0 +1,1373 @@
+{
+ "source_id": "bo_sung_thap_than_v1",
+ "school_id": "tu_binh",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Bổ sung trang thập thần",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + cổ thư công cộng (nháp AI, chờ thẩm định)"
+ },
+ "trang": {
+  "ty-kien": {
+   "muc": [
+    {
+     "tieu_de": "Tỷ Kiên là gì, nhận ra trong lá số thế nào?",
+     "doan": "Tỷ Kiên là can cùng hành, cùng âm dương với can ngày, giống một bản sao của chính mình đứng ở trụ khác. Ví dụ người nhật chủ Bính gặp thêm can Bính ở trụ năm hay trụ giờ. Dưới địa chi, Tỷ Kiên của Bính nằm ở Tỵ. Càng đứng gần trụ ngày, như can tháng hay can giờ, nét này càng dễ thấy trong nếp sống hằng ngày."
+    },
+    {
+     "tieu_de": "Nhiều Tỷ Kiên thì làm ăn chung có ổn không?",
+     "doan": "Thường ổn nếu chia việc rõ từ đầu, vì người nhiều Tỷ Kiên hợp làm ngang hàng hơn làm dưới quyền. Chỗ dễ vướng là hai người cùng muốn cầm lái. Sách Tử Bình xếp nhóm Tỷ Kiếp vào phe hay chia phần với Tài, nên tiền góp chung cần giấy tờ. Việc làm được trong tuần: viết ra ai quyết việc gì trước khi bắt tay."
+    },
+    {
+     "tieu_de": "Tỷ Kiên gặp thân mạnh, thân yếu khác nhau ra sao?",
+     "doan": "Thân yếu thì Tỷ Kiên thường là chỗ dựa; thân đã mạnh mà thêm Tỷ Kiên dễ thành thừa sức, cứng đầu. Đó là lối cân sức (phù ức). Lối xét tháng sinh của Tử Bình Chân Thuyên lại hỏi Tỷ Kiên giúp hay cản cách cục chính. Hai lối có lúc ra kết luận khác nhau; trang này đặt cả hai cạnh nhau, không chọn thay người đọc."
+    },
+    {
+     "tieu_de": "Tỷ Kiên trong chuyện tình cảm nói gì?",
+     "doan": "Tỷ Kiên trong tình cảm thường cho kiểu người muốn ngang hàng, không thích bị sắp đặt. Với nam, sách xưa lấy Tài làm vợ, nên Tỷ Kiên quá dày đôi khi được đọc là sự chú ý bị chia cho bạn bè, anh em. Với nữ, nét này hay hiện ra ở mong muốn tự giữ thu nhập và tự quyết. Đây là xu hướng để tự soi, không phải lời phán."
+    },
+    {
+     "tieu_de": "Ví dụ đọc một lá số có Tỷ Kiên",
+     "doan": "Lấy một lá giả định: nhật chủ Canh, can tháng Canh, chi ngày Thân. Canh ở tháng là Tỷ Kiên lộ ra, Thân giữ Canh làm khí chính, nên phe chính mình khá dày. Người như vậy thường tự làm, ít nhờ ai, gặp việc khó thì gồng một mình. Đọc tiếp, nên tìm Thực Thần để xả sức hoặc Quan Sát để định hướng."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Can nào là Tỷ Kiên với từng nhật chủ",
+    "chu_thich": "Tỷ Kiên luôn là chính can ngày lặp lại ở trụ khác. Cột cuối là chi giấu can ấy ở trung khí hoặc dư khí — gốc phụ, yếu hơn khí chính.",
+    "cot": [
+     "Nhật chủ",
+     "Can là Tỷ Kiên",
+     "Hành của can đó",
+     "Chi giữ can đó làm khí chính",
+     "Chi ẩn can đó ở khí phụ"
+    ],
+    "dong": [
+     [
+      "Giáp (Mộc dương)",
+      "Giáp",
+      "Mộc dương",
+      "Dần",
+      "Hợi"
+     ],
+     [
+      "Ất (Mộc âm)",
+      "Ất",
+      "Mộc âm",
+      "Mão",
+      "Thìn, Mùi"
+     ],
+     [
+      "Bính (Hoả dương)",
+      "Bính",
+      "Hoả dương",
+      "Tỵ",
+      "Dần"
+     ],
+     [
+      "Đinh (Hoả âm)",
+      "Đinh",
+      "Hoả âm",
+      "Ngọ",
+      "Mùi, Tuất"
+     ],
+     [
+      "Mậu (Thổ dương)",
+      "Mậu",
+      "Thổ dương",
+      "Thìn, Tuất",
+      "Dần, Tỵ, Thân"
+     ],
+     [
+      "Kỷ (Thổ âm)",
+      "Kỷ",
+      "Thổ âm",
+      "Sửu, Mùi",
+      "Ngọ"
+     ],
+     [
+      "Canh (Kim dương)",
+      "Canh",
+      "Kim dương",
+      "Thân",
+      "Tỵ"
+     ],
+     [
+      "Tân (Kim âm)",
+      "Tân",
+      "Kim âm",
+      "Dậu",
+      "Sửu, Tuất"
+     ],
+     [
+      "Nhâm (Thuỷ dương)",
+      "Nhâm",
+      "Thuỷ dương",
+      "Hợi",
+      "Thân"
+     ],
+     [
+      "Quý (Thuỷ âm)",
+      "Quý",
+      "Thuỷ âm",
+      "Tý",
+      "Sửu, Thìn"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Tỷ Kiên và Kiếp Tài khác nhau ở điểm nào?",
+     "dap": "Cả hai cùng hành với can ngày. Tỷ Kiên cùng âm dương, Kiếp Tài khác âm dương. Sách thường tả Tỷ Kiên như người cùng chí, còn Kiếp Tài như người dễ tranh phần hơn."
+    },
+    {
+     "hoi": "Lá số không có Tỷ Kiên lộ ra có sao không?",
+     "dap": "Không có nghĩa là cô độc. Cần xem chi có giấu can cùng loại không và thân đang mạnh hay yếu; thân mạnh mà vắng Tỷ Kiên lại thường dễ cân hơn."
+    },
+    {
+     "hoi": "Năm gặp can Tỷ Kiên thường có gì?",
+     "dap": "Năm có can trùng can ngày thường được đọc là năm nhiều người ngang hàng xuất hiện: đối tác, bạn cũ, người cạnh tranh. Nên rõ ràng chuyện tiền góp chung và giữ nhịp riêng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận Kiến Lộc Nguyệt Kiếp",
+     "nghia": "Sách bàn trường hợp tháng sinh rơi đúng Lộc hay Kiếp của can ngày: phe mình đã mạnh ở gốc nên không lấy chính nó làm dụng, mà tìm Tài, Quan, Sát hay Thực Thần lộ ra để dùng."
+    },
+    {
+     "sach": "Uyên Hải Tử Bình",
+     "nghia": "Sách gom phép lấy can ngày làm chủ rồi gọi tên mười thần theo quan hệ với các can khác; Tỷ Kiên là thần đồng loại, cùng âm dương với chủ."
+    }
+   ],
+   "y_chinh": [
+    "Tỷ Kiên: cùng hành, cùng âm dương với can ngày",
+    "Thân yếu: là chỗ dựa; thân mạnh: dễ thừa sức",
+    "Làm chung: chia việc, chia tiền rõ từ đầu",
+    "Năm gặp Tỷ Kiên: nhiều người ngang hàng xuất hiện"
+   ]
+  },
+  "kiep-tai": {
+   "muc": [
+    {
+     "tieu_de": "Kiếp Tài là gì, vì sao gọi là 'kiếp'?",
+     "doan": "Kiếp Tài là can cùng hành nhưng khác âm dương với can ngày, ví dụ nhật chủ Giáp gặp Ất. Chữ 'kiếp' nghĩa là cướp: nhóm này đứng cạnh Tài và hay chia bớt phần của Tài. Tên nghe nặng, nhưng ý chính là sức cạnh tranh. Dưới địa chi, Kiếp Tài của Giáp nằm ở Mão, và ẩn trong Thìn, Mùi."
+    },
+    {
+     "tieu_de": "Kiếp Tài và chuyện tiền bạc",
+     "doan": "Người nhiều Kiếp Tài thường kiếm được nhờ dám làm, nhưng tiền cũng dễ đi qua tay người khác. Kiểu hay gặp: cho vay vì nể, góp vốn theo bạn, chi mạnh lúc vui. Mặt sáng là khả năng gom người, chạy việc nhanh. Việc làm được trong tuần: đặt một mức tối đa có thể cho mượn mà không cần hỏi lại người cùng giữ ví."
+    },
+    {
+     "tieu_de": "Dương Nhận là gì, có liên quan Kiếp Tài không?",
+     "doan": "Có: Dương Nhận là Kiếp Tài của can dương đứng ở chi đế vượng, như Giáp gặp Mão, Bính gặp Ngọ, Canh gặp Dậu, Nhâm gặp Tý. Tử Bình Chân Thuyên dành riêng một chương cho Dương Nhận. Sách tả khí thế mạnh, quyết đoán, cần Quan Sát kiềm lại thì sức ấy mới thành việc."
+    },
+    {
+     "tieu_de": "Kiếp Tài gặp thân mạnh hay thân yếu",
+     "doan": "Thân yếu, Kiếp Tài thường được xem là người giúp sức; thân mạnh, nó dễ thành lực kéo tiền đi. Lối cân sức sẽ tìm hành tiết bớt hoặc chế bớt khi thân mạnh. Lối xét tháng sinh thì, nếu tháng là Kiếp Tài (Nguyệt Kiếp), tìm Tài, Quan hay Thực lộ ra để dùng. Hai lối được để cạnh nhau, không chọn một."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Can nào là Kiếp Tài với từng nhật chủ",
+    "chu_thich": "Kiếp Tài là can cùng hành nhưng ngược âm dương với can ngày. Can dương có Kiếp Tài là can âm cùng hành, và ngược lại.",
+    "cot": [
+     "Nhật chủ",
+     "Can là Kiếp Tài",
+     "Hành của can đó",
+     "Chi giữ can đó làm khí chính",
+     "Chi ẩn can đó ở khí phụ"
+    ],
+    "dong": [
+     [
+      "Giáp (Mộc dương)",
+      "Ất",
+      "Mộc âm",
+      "Mão",
+      "Thìn, Mùi"
+     ],
+     [
+      "Ất (Mộc âm)",
+      "Giáp",
+      "Mộc dương",
+      "Dần",
+      "Hợi"
+     ],
+     [
+      "Bính (Hoả dương)",
+      "Đinh",
+      "Hoả âm",
+      "Ngọ",
+      "Mùi, Tuất"
+     ],
+     [
+      "Đinh (Hoả âm)",
+      "Bính",
+      "Hoả dương",
+      "Tỵ",
+      "Dần"
+     ],
+     [
+      "Mậu (Thổ dương)",
+      "Kỷ",
+      "Thổ âm",
+      "Sửu, Mùi",
+      "Ngọ"
+     ],
+     [
+      "Kỷ (Thổ âm)",
+      "Mậu",
+      "Thổ dương",
+      "Thìn, Tuất",
+      "Dần, Tỵ, Thân"
+     ],
+     [
+      "Canh (Kim dương)",
+      "Tân",
+      "Kim âm",
+      "Dậu",
+      "Sửu, Tuất"
+     ],
+     [
+      "Tân (Kim âm)",
+      "Canh",
+      "Kim dương",
+      "Thân",
+      "Tỵ"
+     ],
+     [
+      "Nhâm (Thuỷ dương)",
+      "Quý",
+      "Thuỷ âm",
+      "Tý",
+      "Sửu, Thìn"
+     ],
+     [
+      "Quý (Thuỷ âm)",
+      "Nhâm",
+      "Thuỷ dương",
+      "Hợi",
+      "Thân"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Kiếp Tài trong lá số nữ nói gì?",
+     "dap": "Với nữ, sách xưa không lấy Kiếp Tài làm sao chồng; nét này thường hiện ra ở chị em, bạn thân và cách cạnh tranh nơi làm việc. Nhiều Kiếp Tài thường cho người tự lập, không thích phải xin."
+    },
+    {
+     "hoi": "Năm gặp Kiếp Tài có nên góp vốn không?",
+     "dap": "Sách tả năm Kiếp Tài là năm nhiều lời rủ làm chung. Không có câu trả lời cho mọi lá; nên xem thân mạnh hay yếu và thoả thuận giấy trắng mực đen trước khi góp."
+    },
+    {
+     "hoi": "Kiếp Tài có phải thần xấu không?",
+     "dap": "Không nên gọi là xấu. Kiếp Tài cho sức bật, dám nghĩ dám làm; điều cần để ý là nhịp chi tiêu và ranh giới với bạn bè."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận Dương Nhận",
+     "nghia": "Sách xếp Dương Nhận vào nhóm thần phải dùng ngược: sức mạnh của nó cần Quan Sát chế ngự mới thành cách, để mặc thì dễ sinh tranh đoạt."
+    },
+    {
+     "sach": "Tam Mệnh Thông Hội",
+     "nghia": "Bộ sách tổng hợp đời Minh gom phép luận mười thần của các sách trước; Kiếp Tài được bàn cùng Tỷ Kiên trong nhóm đồng loại với can ngày."
+    }
+   ],
+   "y_chinh": [
+    "Kiếp Tài: cùng hành, khác âm dương với can ngày",
+    "Mặt sáng: dám làm, gom người, chạy việc nhanh",
+    "Cần để ý: tiền đi vì nể, góp vốn theo bạn",
+    "Dương Nhận: Kiếp Tài của can dương ở chi đế vượng"
+   ]
+  },
+  "thuc-than": {
+   "muc": [
+    {
+     "tieu_de": "Thực Thần là gì, nằm ở đâu trong lá số?",
+     "doan": "Thực Thần là hành do can ngày sinh ra, cùng âm dương với can ngày; ví dụ nhật chủ Mậu gặp Canh. Dưới địa chi, Thực Thần của Mậu nằm ở Thân, và ẩn trong Tỵ. Hình dung đơn giản: đây là cách mình cho đi sức lực một cách dễ chịu, như nấu một bữa ngon hay làm một món đồ khéo."
+    },
+    {
+     "tieu_de": "Thực Thần hợp nghề gì?",
+     "doan": "Thực Thần thường hợp việc tạo ra thứ người khác dùng và thích: ẩm thực, thiết kế, giảng dạy, viết, chăm sóc khách hàng. Điểm chung là có sản phẩm cụ thể và nhịp làm không quá gắt. Khi Thực Thần sinh được Tài, sách xưa coi là thế đẹp: tay nghề đổi ra thu nhập. Mặt tối là dễ làm theo hứng, thiếu hạn chót."
+    },
+    {
+     "tieu_de": "Thực Thần chế Sát nghĩa là gì?",
+     "doan": "Là khi Thực Thần đứng cạnh Thất Sát và kiềm bớt sức ép của nó, giống dùng sự khéo léo để xử lý áp lực. Tử Bình Chân Thuyên coi đây là một thế hay của cách Thất Sát. Trong đời thường, đó là người gặp cấp trên khó tính thì làm sản phẩm tốt hơn thay vì cãi tay đôi."
+    },
+    {
+     "tieu_de": "Kiêu đoạt Thực là gì?",
+     "doan": "Là khi Thiên Ấn (còn gọi Kiêu) đè lên Thực Thần, làm nguồn biểu đạt bị chặn. Thiên Ấn sinh can ngày nhưng chế Thực Thần, nên hai thần này đứng sát nhau thường được sách xưa nhắc. Hay gặp: có ý tưởng nhưng nghĩ quá lâu, sợ sai, cuối cùng không làm. Đặt một hạn nộp nhỏ là cách gỡ đơn giản."
+    },
+    {
+     "tieu_de": "Thực Thần hợp thân mạnh hay thân yếu?",
+     "doan": "Thực Thần thường hợp thân mạnh hơn, vì nó rút bớt sức của can ngày. Thân mạnh có Thực Thần thì sức thừa có chỗ ra; thân yếu mà Thực Thần dày dễ làm nhiều, hụt hơi. Lối xét tháng sinh lại hỏi: tháng có phải Thực Thần không, có Tài nhận sức không, có Kiêu đè không."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Can nào là Thực Thần với từng nhật chủ",
+    "chu_thich": "Thực Thần là hành do can ngày sinh ra, cùng âm dương. Ví dụ Mộc sinh Hoả, nên Thực Thần của Giáp là Bính, của Ất là Đinh.",
+    "cot": [
+     "Nhật chủ",
+     "Can là Thực Thần",
+     "Hành của can đó",
+     "Chi giữ can đó làm khí chính",
+     "Chi ẩn can đó ở khí phụ"
+    ],
+    "dong": [
+     [
+      "Giáp (Mộc dương)",
+      "Bính",
+      "Hoả dương",
+      "Tỵ",
+      "Dần"
+     ],
+     [
+      "Ất (Mộc âm)",
+      "Đinh",
+      "Hoả âm",
+      "Ngọ",
+      "Mùi, Tuất"
+     ],
+     [
+      "Bính (Hoả dương)",
+      "Mậu",
+      "Thổ dương",
+      "Thìn, Tuất",
+      "Dần, Tỵ, Thân"
+     ],
+     [
+      "Đinh (Hoả âm)",
+      "Kỷ",
+      "Thổ âm",
+      "Sửu, Mùi",
+      "Ngọ"
+     ],
+     [
+      "Mậu (Thổ dương)",
+      "Canh",
+      "Kim dương",
+      "Thân",
+      "Tỵ"
+     ],
+     [
+      "Kỷ (Thổ âm)",
+      "Tân",
+      "Kim âm",
+      "Dậu",
+      "Sửu, Tuất"
+     ],
+     [
+      "Canh (Kim dương)",
+      "Nhâm",
+      "Thuỷ dương",
+      "Hợi",
+      "Thân"
+     ],
+     [
+      "Tân (Kim âm)",
+      "Quý",
+      "Thuỷ âm",
+      "Tý",
+      "Sửu, Thìn"
+     ],
+     [
+      "Nhâm (Thuỷ dương)",
+      "Giáp",
+      "Mộc dương",
+      "Dần",
+      "Hợi"
+     ],
+     [
+      "Quý (Thuỷ âm)",
+      "Ất",
+      "Mộc âm",
+      "Mão",
+      "Thìn, Mùi"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thực Thần và Thương Quan khác nhau thế nào?",
+     "dap": "Cả hai là hành do can ngày sinh ra. Thực Thần cùng âm dương nên thường mềm, ôn hoà; Thương Quan khác âm dương nên sắc và phá cách hơn."
+    },
+    {
+     "hoi": "Nhiều Thực Thần có phải là lười không?",
+     "dap": "Không hẳn. Sách tả Thực Thần dày dễ ham dễ chịu; nhưng nếu lá số có Tài nhận sức, đó lại là người làm nghề tỉ mỉ, đều tay."
+    },
+    {
+     "hoi": "Năm gặp Thực Thần thường hợp làm gì?",
+     "dap": "Năm có can Thực Thần thường được đọc là năm hợp ra sản phẩm, học thêm một kỹ năng tay nghề và sắp lại nhịp ăn ngủ cho đều."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận Thực Thần",
+     "nghia": "Sách nói Thực Thần vốn là khí tiết ra từ can ngày, được quý vì sinh ra Tài. Thế đẹp là Thực Thần sinh Tài; thế ngại là Thiên Ấn đoạt Thực."
+    },
+    {
+     "sach": "Uyên Hải Tử Bình",
+     "nghia": "Sách luận mệnh cổ xếp Thực Thần vào nhóm thần lành, tượng cho phúc lộc ăn uống và sự an nhàn khi không bị Kiêu đè."
+    }
+   ],
+   "y_chinh": [
+    "Thực Thần: hành can ngày sinh ra, cùng âm dương",
+    "Hợp nghề có sản phẩm cụ thể, nhịp làm vừa phải",
+    "Thực Thần sinh Tài: tay nghề đổi ra thu nhập",
+    "Kiêu đoạt Thực: nghĩ lâu, sợ sai, không làm"
+   ]
+  },
+  "thuong-quan": {
+   "muc": [
+    {
+     "tieu_de": "Thương Quan là gì, vì sao tên nghe đáng ngại?",
+     "doan": "Thương Quan là hành do can ngày sinh ra nhưng khác âm dương; chữ 'thương quan' nghĩa là làm tổn Chính Quan. Lý do: Thương Quan chế đúng hành Chính Quan của can ngày. Vì Chính Quan tượng cho khuôn phép, sách xưa dè dặt với nó. Ngày nay nhiều người đọc Thương Quan là óc phản biện, giỏi nói, không chịu lối mòn."
+    },
+    {
+     "tieu_de": "Thương Quan gặp Quan thì sao?",
+     "doan": "Sách gọi là Thương Quan kiến Quan, thế cần dè dặt nhất của nhóm này. Đời thường hay thấy: giỏi chuyên môn nhưng va chạm với cấp trên, hoặc nói đúng mà sai lúc. Tử Bình Chân Thuyên gợi hướng dùng Ấn để kiềm Thương Quan, hoặc dùng Tài để đổi sức Thương Quan thành của cải. Việc làm được: góp ý bằng văn bản, sau một đêm."
+    },
+    {
+     "tieu_de": "Thương Quan hợp nghề gì?",
+     "doan": "Thương Quan thường hợp việc cần nói, viết, sáng tạo hoặc phản biện: luật, báo chí, quảng cáo, nghệ thuật, nghiên cứu, khởi nghiệp. Môi trường càng nhiều quy trình cứng, người Thương Quan càng dễ ngột. Họ làm tốt khi được giao mục tiêu và tự chọn cách đi."
+    },
+    {
+     "tieu_de": "Thương Quan trong lá số nữ nói gì?",
+     "doan": "Với nữ, sách xưa lấy Quan làm chồng nên Thương Quan dày thường được nhắc là hay chê, khó chịu khuôn khổ trong hôn nhân. Cách đọc hiện đại nhẹ hơn: đây là người cần một mối quan hệ được nói thẳng, được tôn trọng ý kiến. Điều đáng tự soi là cách nói, không phải việc có ý kiến."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Can nào là Thương Quan với từng nhật chủ",
+    "chu_thich": "Thương Quan là hành do can ngày sinh ra nhưng ngược âm dương. Nó cũng là thần chế đúng Chính Quan của can ngày.",
+    "cot": [
+     "Nhật chủ",
+     "Can là Thương Quan",
+     "Hành của can đó",
+     "Chi giữ can đó làm khí chính",
+     "Chi ẩn can đó ở khí phụ"
+    ],
+    "dong": [
+     [
+      "Giáp (Mộc dương)",
+      "Đinh",
+      "Hoả âm",
+      "Ngọ",
+      "Mùi, Tuất"
+     ],
+     [
+      "Ất (Mộc âm)",
+      "Bính",
+      "Hoả dương",
+      "Tỵ",
+      "Dần"
+     ],
+     [
+      "Bính (Hoả dương)",
+      "Kỷ",
+      "Thổ âm",
+      "Sửu, Mùi",
+      "Ngọ"
+     ],
+     [
+      "Đinh (Hoả âm)",
+      "Mậu",
+      "Thổ dương",
+      "Thìn, Tuất",
+      "Dần, Tỵ, Thân"
+     ],
+     [
+      "Mậu (Thổ dương)",
+      "Tân",
+      "Kim âm",
+      "Dậu",
+      "Sửu, Tuất"
+     ],
+     [
+      "Kỷ (Thổ âm)",
+      "Canh",
+      "Kim dương",
+      "Thân",
+      "Tỵ"
+     ],
+     [
+      "Canh (Kim dương)",
+      "Quý",
+      "Thuỷ âm",
+      "Tý",
+      "Sửu, Thìn"
+     ],
+     [
+      "Tân (Kim âm)",
+      "Nhâm",
+      "Thuỷ dương",
+      "Hợi",
+      "Thân"
+     ],
+     [
+      "Nhâm (Thuỷ dương)",
+      "Ất",
+      "Mộc âm",
+      "Mão",
+      "Thìn, Mùi"
+     ],
+     [
+      "Quý (Thuỷ âm)",
+      "Giáp",
+      "Mộc dương",
+      "Dần",
+      "Hợi"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thương Quan có phải thần xấu không?",
+     "dap": "Không. Sách Tử Bình nói Thương Quan tuy không phải thần lành nhưng là khí thanh tú; nhiều người học rộng, có tài văn chương mang nét này."
+    },
+    {
+     "hoi": "Thương Quan gặp thân yếu thì sao?",
+     "dap": "Thân yếu mà Thương Quan dày thường hao sức vì nghĩ nhiều, nói nhiều. Lối cân sức tìm Ấn để giữ sức; lối xét tháng sinh xem Thương Quan có sinh Tài hay bị Ấn chế. Hai lối nên đọc cạnh nhau."
+    },
+    {
+     "hoi": "Năm gặp Thương Quan nên để ý gì?",
+     "dap": "Năm này thường nhiều ý tưởng và nhiều lời. Nên chọn kênh nói phù hợp, ghi ý kiến ra giấy trước khi phát biểu chỗ đông người."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận Thương Quan",
+     "nguyen_van": "傷官雖非吉神，實為秀氣。",
+     "phien_am": "Thương quan tuy phi cát thần, thực vi tú khí.",
+     "nghia": "Thương Quan tuy không phải thần lành, thật ra là khí thanh tú — vì thế người học rộng, giỏi chữ hay có nét Thương Quan."
+    },
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Lục thân luận",
+     "nghia": "Phần bàn mệnh nữ trong sách xét chồng qua Quan Sát, con qua Thực Thương, và nhắc phải xem cả lá chứ không kết luận từ một thần."
+    }
+   ],
+   "y_chinh": [
+    "Thương Quan: hành can ngày sinh ra, khác âm dương",
+    "Khí thanh tú: giỏi nói, viết, phản biện",
+    "Thương Quan gặp Quan: dễ va chạm cấp trên",
+    "Hướng điều hoà: Ấn kiềm, hoặc Tài nhận sức"
+   ]
+  },
+  "thien-tai": {
+   "muc": [
+    {
+     "tieu_de": "Thiên Tài là gì, nằm ở đâu trong lá số?",
+     "doan": "Thiên Tài là hành can ngày chế ngự, cùng âm dương với can ngày; ví dụ nhật chủ Nhâm gặp Bính. Dưới địa chi, Thiên Tài của Nhâm ở Tỵ, ẩn trong Dần. Sách gọi đây là tài lệch: tiền không đều đặn, đến theo cơ hội, theo vụ việc, theo các mối quan hệ."
+    },
+    {
+     "tieu_de": "Người có Thiên Tài kiếm tiền theo cách nào?",
+     "doan": "Thường hợp thu nhập theo dự án, hoa hồng, buôn bán, đầu tư nhỏ có tính toán. Người nhiều Thiên Tài nhạy với chênh lệch giá, nhớ người, giỏi mở lời. Mặt tối là dễ mở quá nhiều việc cùng lúc. Gợi ý trong tuần: liệt kê các khoản đang chờ về và gạch bớt một khoản không theo nổi."
+    },
+    {
+     "tieu_de": "Thiên Tài nói gì về cha và chuyện tình cảm?",
+     "doan": "Sách Tử Bình lấy Thiên Tài tượng cho cha, với nam còn tượng cho người yêu. Vì thế khi gặp Thiên Tài, người xem thường hỏi thêm về quan hệ với cha, về thói quen chi tiền cho người mình thương. Đây là gợi ý để tự soi, không dùng để kết luận về người thân."
+    },
+    {
+     "tieu_de": "Thiên Tài gặp Tỷ Kiếp, gặp thân yếu",
+     "doan": "Tỷ Kiếp đông là thế sách xưa gọi đoạt Tài: nhiều người chia một phần. Thân yếu mà Thiên Tài lớn thì giống ôm món hàng quá sức mang. Lối cân sức tìm hành giúp thân; lối xét tháng sinh hỏi Thiên Tài có thành cách và có Quan đứng giữ không. Đọc cả hai rồi mới so với đời thật."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Can nào là Thiên Tài với từng nhật chủ",
+    "chu_thich": "Thiên Tài là hành can ngày chế ngự, cùng âm dương. Can Mậu là Thiên Tài của Giáp nên Thìn, Tuất — hai chi có khí chính Mậu — là chỗ Thiên Tài của Giáp có gốc.",
+    "cot": [
+     "Nhật chủ",
+     "Can là Thiên Tài",
+     "Hành của can đó",
+     "Chi giữ can đó làm khí chính",
+     "Chi ẩn can đó ở khí phụ"
+    ],
+    "dong": [
+     [
+      "Giáp (Mộc dương)",
+      "Mậu",
+      "Thổ dương",
+      "Thìn, Tuất",
+      "Dần, Tỵ, Thân"
+     ],
+     [
+      "Ất (Mộc âm)",
+      "Kỷ",
+      "Thổ âm",
+      "Sửu, Mùi",
+      "Ngọ"
+     ],
+     [
+      "Bính (Hoả dương)",
+      "Canh",
+      "Kim dương",
+      "Thân",
+      "Tỵ"
+     ],
+     [
+      "Đinh (Hoả âm)",
+      "Tân",
+      "Kim âm",
+      "Dậu",
+      "Sửu, Tuất"
+     ],
+     [
+      "Mậu (Thổ dương)",
+      "Nhâm",
+      "Thuỷ dương",
+      "Hợi",
+      "Thân"
+     ],
+     [
+      "Kỷ (Thổ âm)",
+      "Quý",
+      "Thuỷ âm",
+      "Tý",
+      "Sửu, Thìn"
+     ],
+     [
+      "Canh (Kim dương)",
+      "Giáp",
+      "Mộc dương",
+      "Dần",
+      "Hợi"
+     ],
+     [
+      "Tân (Kim âm)",
+      "Ất",
+      "Mộc âm",
+      "Mão",
+      "Thìn, Mùi"
+     ],
+     [
+      "Nhâm (Thuỷ dương)",
+      "Bính",
+      "Hoả dương",
+      "Tỵ",
+      "Dần"
+     ],
+     [
+      "Quý (Thuỷ âm)",
+      "Đinh",
+      "Hoả âm",
+      "Ngọ",
+      "Mùi, Tuất"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thiên Tài và Chính Tài khác nhau thế nào?",
+     "dap": "Cả hai là hành can ngày chế ngự. Thiên Tài cùng âm dương: tiền biến động, cơ hội. Chính Tài khác âm dương: tiền đều đặn, công sức tích luỹ."
+    },
+    {
+     "hoi": "Lá số có Thiên Tài có phải giàu không?",
+     "dap": "Không. Thiên Tài cho thấy cách người ta tiếp cận tiền, không cho biết số tiền. Thân có gánh nổi và giữ được hay không mới là phần cần xét tiếp."
+    },
+    {
+     "hoi": "Năm Thiên Tài nên làm gì với tiền?",
+     "dap": "Năm có can Thiên Tài thường nhiều lời mời làm ăn. Nên để riêng trước một phần không đụng tới và chỉ thử những việc mình hiểu rõ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận Tài",
+     "nghia": "Sách xếp Tài vào nhóm thần dùng thuận; Tài quý khi sinh được Quan và thân đủ sức gánh, ngại nhất là Tỷ Kiếp tranh đoạt."
+    },
+    {
+     "sach": "Tam Mệnh Thông Hội",
+     "nghia": "Bộ sách tổng hợp đời Minh phân biệt tài chính với tài lệch: một bên là của theo công sức, một bên là của đến từ bên ngoài, lên xuống thất thường."
+    }
+   ],
+   "y_chinh": [
+    "Thiên Tài: hành can ngày chế ngự, cùng âm dương",
+    "Tiền theo cơ hội, dự án, quan hệ",
+    "Tỷ Kiếp đông: nhiều người chia một phần",
+    "Có Thiên Tài không có nghĩa là giàu"
+   ]
+  },
+  "chinh-tai": {
+   "muc": [
+    {
+     "tieu_de": "Chính Tài là gì, nằm ở đâu trong lá số?",
+     "doan": "Chính Tài là hành can ngày chế ngự nhưng khác âm dương; ví dụ nhật chủ Giáp gặp Kỷ. Dưới địa chi, Chính Tài của Giáp nằm ở Sửu và Mùi (khí chính), ẩn trong Ngọ. Hình ảnh hay dùng: khu vườn mình tự trồng, thu hoạch theo mùa, ít bất ngờ."
+    },
+    {
+     "tieu_de": "Chính Tài trong lá số nam nói gì?",
+     "doan": "Với nam, Tử Bình lấy Chính Tài làm sao vợ, nên Chính Tài rõ ràng, không bị tranh thường được đọc là người coi trọng gia đình, chu toàn. Chính Tài bị Tỷ Kiếp vây thì sách nhắc chuyện tiền chung và sự chú ý bị chia. Với nữ, Chính Tài nghiêng về cách giữ tiền, cách sắp việc nhà."
+    },
+    {
+     "tieu_de": "Chính Tài và công việc, tiền bạc",
+     "doan": "Chính Tài thường hợp lương cố định, kế toán, quản lý kho, vận hành, những nơi trả công theo nỗ lực đều. Người nhiều Chính Tài thích sổ sách rõ, ghét khoản nợ treo. Mặt tối là ngại thử, bỏ lỡ việc đáng làm vì sợ hao. Việc nhỏ trong tuần: dành một khoản nhỏ cho một trải nghiệm mới."
+    },
+    {
+     "tieu_de": "Chính Tài gặp thân mạnh, thân yếu",
+     "doan": "Thân mạnh gặp Chính Tài thường là thế đẹp: sức đủ để giữ của. Thân yếu mà Tài nặng, sách gọi tài đa thân nhược, làm nhiều giữ ít. Theo lối cân sức, cần Ấn hay Tỷ Kiếp trợ thân; theo lối tháng sinh, xét Chính Tài có thành cách, có sinh được Quan không."
+    },
+    {
+     "tieu_de": "Ví dụ đọc một lá số có Chính Tài",
+     "doan": "Giả định nhật chủ Bính, can tháng Tân, chi tháng Dậu. Tân là Chính Tài của Bính, Dậu giữ Tân làm khí chính, nên Tài nằm ngay lệnh tháng và lộ ra can: theo lối Tử Bình, đây là Chính Tài cách. Tháng Dậu là mùa thu, Bính không được lệnh, nên cần xem Mộc, Hoả trợ thân trước khi bàn chuyện giữ tiền."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Can nào là Chính Tài với từng nhật chủ",
+    "chu_thich": "Chính Tài là hành can ngày chế ngự, ngược âm dương. Cặp can dương – can âm này cũng thường là cặp ngũ hợp (Giáp – Kỷ, Bính – Tân, Mậu – Quý, Canh – Ất, Nhâm – Đinh).",
+    "cot": [
+     "Nhật chủ",
+     "Can là Chính Tài",
+     "Hành của can đó",
+     "Chi giữ can đó làm khí chính",
+     "Chi ẩn can đó ở khí phụ"
+    ],
+    "dong": [
+     [
+      "Giáp (Mộc dương)",
+      "Kỷ",
+      "Thổ âm",
+      "Sửu, Mùi",
+      "Ngọ"
+     ],
+     [
+      "Ất (Mộc âm)",
+      "Mậu",
+      "Thổ dương",
+      "Thìn, Tuất",
+      "Dần, Tỵ, Thân"
+     ],
+     [
+      "Bính (Hoả dương)",
+      "Tân",
+      "Kim âm",
+      "Dậu",
+      "Sửu, Tuất"
+     ],
+     [
+      "Đinh (Hoả âm)",
+      "Canh",
+      "Kim dương",
+      "Thân",
+      "Tỵ"
+     ],
+     [
+      "Mậu (Thổ dương)",
+      "Quý",
+      "Thuỷ âm",
+      "Tý",
+      "Sửu, Thìn"
+     ],
+     [
+      "Kỷ (Thổ âm)",
+      "Nhâm",
+      "Thuỷ dương",
+      "Hợi",
+      "Thân"
+     ],
+     [
+      "Canh (Kim dương)",
+      "Ất",
+      "Mộc âm",
+      "Mão",
+      "Thìn, Mùi"
+     ],
+     [
+      "Tân (Kim âm)",
+      "Giáp",
+      "Mộc dương",
+      "Dần",
+      "Hợi"
+     ],
+     [
+      "Nhâm (Thuỷ dương)",
+      "Đinh",
+      "Hoả âm",
+      "Ngọ",
+      "Mùi, Tuất"
+     ],
+     [
+      "Quý (Thuỷ âm)",
+      "Bính",
+      "Hoả dương",
+      "Tỵ",
+      "Dần"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Chính Tài trong lá số nữ có ý nghĩa gì?",
+     "dap": "Với nữ, sách xưa không lấy Chính Tài làm sao chồng mà làm thu nhập và cách quản lý. Nữ có Chính Tài rõ thường giỏi giữ nhịp chi tiêu trong nhà."
+    },
+    {
+     "hoi": "Thiếu Chính Tài có phải nghèo không?",
+     "dap": "Không. Thiếu Chính Tài lộ ra chỉ gợi rằng thu nhập ít đến từ lương đều; nhiều người như vậy kiếm bằng dự án hay tay nghề. Cần xem tàng can và đại vận."
+    },
+    {
+     "hoi": "Năm gặp Chính Tài thường thế nào?",
+     "dap": "Năm có can Chính Tài thường hợp lập kế hoạch tiền, trả nợ, ổn định công việc. Với nam đang tìm hiểu, sách xưa hay nhắc chuyện gia đình trong năm này."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận Tài",
+     "nghia": "Sách nói Tài là thứ can ngày chế ngự để dùng, đẹp vì sinh ra Quan; cho nên xét Tài phải nhìn thân có gánh nổi không."
+    },
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Lục thân luận",
+     "nghia": "Phần bàn vợ chồng xét sao Tài (với nam) cùng trụ ngày, cân xem Tài có được dùng, có bị tranh, rồi mới nói tới hoà hợp."
+    }
+   ],
+   "y_chinh": [
+    "Chính Tài: hành can ngày chế ngự, khác âm dương",
+    "Tiền đều, công sức tích luỹ, sổ sách rõ",
+    "Với nam: sách xưa lấy Chính Tài làm sao vợ",
+    "Tài đa thân nhược: làm nhiều giữ ít"
+   ]
+  },
+  "that-sat": {
+   "muc": [
+    {
+     "tieu_de": "Thất Sát là gì, nằm ở đâu trong lá số?",
+     "doan": "Thất Sát là hành chế ngự can ngày, cùng âm dương; ví dụ nhật chủ Giáp gặp Canh. Gọi thất sát vì Canh đứng thứ bảy tính từ Giáp. Dưới địa chi, Thất Sát của Giáp ở Thân, ẩn trong Tỵ. Sách xưa còn gọi là Thiên Quan: quyền lực không qua khuôn phép, áp lực trực diện."
+    },
+    {
+     "tieu_de": "Thất Sát hợp nghề gì?",
+     "doan": "Thất Sát thường hợp nghề có áp lực và quyết định nhanh: quân đội, cứu hộ, xây dựng, thể thao, điều hành sản xuất, đàm phán, khởi nghiệp. Người Thất Sát mạnh làm tốt khi có mục tiêu rõ và quyền tự quyết. Họ dễ ngộp ở nơi ít việc, nhiều họp."
+    },
+    {
+     "tieu_de": "Thất Sát trong lá số nữ nói gì?",
+     "doan": "Với nữ, sách xưa lấy Thất Sát làm người yêu hoặc chồng, nhất là khi lá số vắng Chính Quan. Thất Sát rõ thường cho kiểu người bị hút về đối phương mạnh mẽ, quyết đoán. Điều đáng tự soi là ranh giới giữa mạnh mẽ và áp đặt trong mối quan hệ."
+    },
+    {
+     "tieu_de": "Thất Sát có chế, có hoá nghĩa là gì?",
+     "doan": "Theo sách Tử Bình, Thất Sát cần được kiềm bằng Thực Thần, hoặc chuyển hoá bằng Ấn. Chế là dùng tay nghề, sản phẩm để đối diện áp lực. Hoá là dùng học hỏi, người nâng đỡ để biến áp lực thành bậc thang. Thân mạnh thường hợp chế, thân yếu thường hợp hoá; người đọc nên so cả hai với đời thật."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Can nào là Thất Sát với từng nhật chủ",
+    "chu_thich": "Thất Sát là hành chế ngự can ngày, cùng âm dương. Đếm từ can ngày, Thất Sát luôn là can thứ bảy (Giáp → Canh, Ất → Tân…).",
+    "cot": [
+     "Nhật chủ",
+     "Can là Thất Sát",
+     "Hành của can đó",
+     "Chi giữ can đó làm khí chính",
+     "Chi ẩn can đó ở khí phụ"
+    ],
+    "dong": [
+     [
+      "Giáp (Mộc dương)",
+      "Canh",
+      "Kim dương",
+      "Thân",
+      "Tỵ"
+     ],
+     [
+      "Ất (Mộc âm)",
+      "Tân",
+      "Kim âm",
+      "Dậu",
+      "Sửu, Tuất"
+     ],
+     [
+      "Bính (Hoả dương)",
+      "Nhâm",
+      "Thuỷ dương",
+      "Hợi",
+      "Thân"
+     ],
+     [
+      "Đinh (Hoả âm)",
+      "Quý",
+      "Thuỷ âm",
+      "Tý",
+      "Sửu, Thìn"
+     ],
+     [
+      "Mậu (Thổ dương)",
+      "Giáp",
+      "Mộc dương",
+      "Dần",
+      "Hợi"
+     ],
+     [
+      "Kỷ (Thổ âm)",
+      "Ất",
+      "Mộc âm",
+      "Mão",
+      "Thìn, Mùi"
+     ],
+     [
+      "Canh (Kim dương)",
+      "Bính",
+      "Hoả dương",
+      "Tỵ",
+      "Dần"
+     ],
+     [
+      "Tân (Kim âm)",
+      "Đinh",
+      "Hoả âm",
+      "Ngọ",
+      "Mùi, Tuất"
+     ],
+     [
+      "Nhâm (Thuỷ dương)",
+      "Mậu",
+      "Thổ dương",
+      "Thìn, Tuất",
+      "Dần, Tỵ, Thân"
+     ],
+     [
+      "Quý (Thuỷ âm)",
+      "Kỷ",
+      "Thổ âm",
+      "Sửu, Mùi",
+      "Ngọ"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thất Sát và Chính Quan khác nhau thế nào?",
+     "dap": "Cả hai là hành chế ngự can ngày. Chính Quan khác âm dương nên giống luật lệ, chức vụ; Thất Sát cùng âm dương nên giống áp lực trực tiếp, thử thách."
+    },
+    {
+     "hoi": "Thân yếu gặp Thất Sát nặng thì sao?",
+     "dap": "Sách tả như gánh nặng đè người nhỏ: dễ căng, dễ mệt vì việc. Lối cân sức tìm Ấn và Tỷ Kiếp trợ thân; lối xét tháng sinh xem có Thực Thần chế hay Ấn hoá không."
+    },
+    {
+     "hoi": "Năm gặp Thất Sát nên làm gì?",
+     "dap": "Năm có can Thất Sát thường nhiều việc gấp, nhiều đòi hỏi. Nên chia việc thành bước nhỏ, giữ giờ ngủ đều và nhờ người có kinh nghiệm góp ý."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận Thiên Quan",
+     "nghia": "Sách bàn Thất Sát là thần mạnh, phải dùng ngược: có Thực Thần chế thì thành uy quyền, có Ấn hoá thì thành người được việc; Sát không chế mà thân yếu thì nặng nề."
+    },
+    {
+     "sach": "Uyên Hải Tử Bình",
+     "nghia": "Sách luận mệnh cổ gọi Thất Sát là Thiên Quan, phân biệt với Chính Quan ở chỗ không có âm dương phối nhau nên sức ép thẳng và mạnh hơn."
+    }
+   ],
+   "y_chinh": [
+    "Thất Sát: hành chế ngự can ngày, cùng âm dương",
+    "Hợp nghề áp lực, quyết định nhanh",
+    "Có chế (Thực Thần) hoặc có hoá (Ấn) mới dễ dùng",
+    "Với nữ: sách xưa xem như người yêu, chồng"
+   ]
+  },
+  "chinh-quan": {
+   "muc": [
+    {
+     "tieu_de": "Chính Quan là gì, nằm ở đâu trong lá số?",
+     "doan": "Chính Quan là hành chế ngự can ngày, khác âm dương; ví dụ nhật chủ Ất gặp Canh. Dưới địa chi, Chính Quan của Ất nằm ở Thân, ẩn trong Tỵ. Vì sự chế ngự có âm dương phối nhau, sách coi Chính Quan là quản lý có lễ: luật, nề nếp, chức danh, tiếng tốt."
+    },
+    {
+     "tieu_de": "Chính Quan trong lá số nữ nói gì?",
+     "doan": "Với nữ, Chính Quan là sao chồng theo sách Tử Bình. Chính Quan rõ, không lẫn Thất Sát, thường được đọc là người coi trọng hôn nhân có nề nếp. Quan Sát cùng lộ nhiều, sách nhắc chuyện tình cảm phức tạp hơn; cách đọc ngày nay coi đó là nhiều lựa chọn, cần rõ ràng với chính mình."
+    },
+    {
+     "tieu_de": "Chính Quan hợp công việc nào?",
+     "doan": "Chính Quan thường hợp tổ chức có cấp bậc: cơ quan nhà nước, ngân hàng, giáo dục, doanh nghiệp lớn, kiểm soát chất lượng. Người Chính Quan giữ lời, làm đúng quy trình, hay được giao chức vụ. Mặt tối là chờ được cho phép mới làm. Gợi ý: mỗi tuần tự quyết một việc nhỏ không cần hỏi ai."
+    },
+    {
+     "tieu_de": "Chính Quan gặp Tài, Ấn, Thương Quan, Thất Sát",
+     "danh_sach": [
+      "Gặp Tài: Tài sinh Quan, sách xưa coi là thế thuận — công sức nuôi danh tiếng.",
+      "Gặp Ấn: Quan sinh Ấn, Ấn sinh thân — chức vụ đi cùng học vấn, người nâng đỡ.",
+      "Gặp Thương Quan: Thương Quan chế Quan — dễ va chạm cấp trên, cần Ấn hoặc Tài điều hoà.",
+      "Gặp Thất Sát cùng lộ: sách gọi Quan Sát hỗn tạp — vai trò lẫn lộn, nên chọn một hướng rõ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Can nào là Chính Quan với từng nhật chủ",
+    "chu_thich": "Chính Quan là hành chế ngự can ngày, ngược âm dương. Với can âm (Ất, Đinh, Kỷ, Tân, Quý), Chính Quan cũng là can ngũ hợp với chính nó.",
+    "cot": [
+     "Nhật chủ",
+     "Can là Chính Quan",
+     "Hành của can đó",
+     "Chi giữ can đó làm khí chính",
+     "Chi ẩn can đó ở khí phụ"
+    ],
+    "dong": [
+     [
+      "Giáp (Mộc dương)",
+      "Tân",
+      "Kim âm",
+      "Dậu",
+      "Sửu, Tuất"
+     ],
+     [
+      "Ất (Mộc âm)",
+      "Canh",
+      "Kim dương",
+      "Thân",
+      "Tỵ"
+     ],
+     [
+      "Bính (Hoả dương)",
+      "Quý",
+      "Thuỷ âm",
+      "Tý",
+      "Sửu, Thìn"
+     ],
+     [
+      "Đinh (Hoả âm)",
+      "Nhâm",
+      "Thuỷ dương",
+      "Hợi",
+      "Thân"
+     ],
+     [
+      "Mậu (Thổ dương)",
+      "Ất",
+      "Mộc âm",
+      "Mão",
+      "Thìn, Mùi"
+     ],
+     [
+      "Kỷ (Thổ âm)",
+      "Giáp",
+      "Mộc dương",
+      "Dần",
+      "Hợi"
+     ],
+     [
+      "Canh (Kim dương)",
+      "Đinh",
+      "Hoả âm",
+      "Ngọ",
+      "Mùi, Tuất"
+     ],
+     [
+      "Tân (Kim âm)",
+      "Bính",
+      "Hoả dương",
+      "Tỵ",
+      "Dần"
+     ],
+     [
+      "Nhâm (Thuỷ dương)",
+      "Kỷ",
+      "Thổ âm",
+      "Sửu, Mùi",
+      "Ngọ"
+     ],
+     [
+      "Quý (Thuỷ âm)",
+      "Mậu",
+      "Thổ dương",
+      "Thìn, Tuất",
+      "Dần, Tỵ, Thân"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thân yếu gặp Chính Quan có tốt không?",
+     "dap": "Thân yếu thì Chính Quan dễ thành sức ép của khuôn phép. Lối cân sức tìm Ấn để chuyển Quan thành chỗ dựa; lối xét tháng sinh xem Quan có Tài sinh, Ấn hộ không. Nên đọc cả hai."
+    },
+    {
+     "hoi": "Lá số nam có Chính Quan nói gì về công việc?",
+     "dap": "Với nam, Chính Quan rõ thường được đọc qua công việc: thích con đường có bậc thang, được ghi nhận bằng chức danh hơn bằng tiền thưởng."
+    },
+    {
+     "hoi": "Năm gặp Chính Quan thường thế nào?",
+     "dap": "Năm có can Chính Quan thường nhiều việc liên quan giấy tờ, xét duyệt, thăng chức hay trách nhiệm mới. Nên chuẩn bị hồ sơ và giữ nề nếp."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận Chính Quan",
+     "nghia": "Sách xếp Quan vào nhóm thần dùng thuận; Quan đẹp khi có Tài sinh, Ấn hộ, và ngại nhất Thương Quan làm tổn."
+    },
+    {
+     "sach": "Uyên Hải Tử Bình",
+     "nghia": "Sách gom các phú quyết luận mệnh đời Tống; Chính Quan được bàn như thần chủ về danh phận, cần giữ cho thanh, không lẫn Thất Sát."
+    }
+   ],
+   "y_chinh": [
+    "Chính Quan: hành chế ngự can ngày, khác âm dương",
+    "Nề nếp, chức danh, tiếng tốt",
+    "Tài sinh Quan, Quan sinh Ấn: thế thuận",
+    "Thương Quan gặp Quan: dễ va chạm cấp trên"
+   ]
+  },
+  "thien-an": {
+   "muc": [
+    {
+     "tieu_de": "Thiên Ấn là gì, nằm ở đâu trong lá số?",
+     "doan": "Thiên Ấn là hành sinh ra can ngày, cùng âm dương; ví dụ nhật chủ Canh gặp Mậu. Thiên Ấn của Canh nằm ở Thìn và Tuất (khí chính), ẩn trong Dần, Tỵ, Thân. Sách xưa còn gọi Thiên Ấn là Kiêu Thần. Hình ảnh gần: kiến thức tự học, nghề tay trái, trực giác, sự giúp đỡ không đi đường chính thức."
+    },
+    {
+     "tieu_de": "Thiên Ấn hợp nghề gì?",
+     "doan": "Thiên Ấn thường hợp việc cần chiều sâu riêng: nghiên cứu, kỹ thuật chuyên sâu, viết, dịch thuật, các môn huyền học, nghệ thuật cá nhân. Họ làm tốt khi được ở một mình với vấn đề khó. Mặt tối là ôm kiến thức mà ít chia ra cho người khác dùng."
+    },
+    {
+     "tieu_de": "Thiên Ấn và chuyện học hành",
+     "doan": "Người có Thiên Ấn rõ thường học theo cách riêng: tự đọc, học qua mạng, học trái ngành. Bằng cấp có khi đến muộn hoặc không theo lối thẳng, nhưng hiểu sâu. Việc làm được trong tuần: chọn một điều đang tìm hiểu và giảng lại cho một người khác trong mười phút."
+    },
+    {
+     "tieu_de": "Thiên Ấn gặp thân mạnh, thân yếu",
+     "doan": "Thân yếu, Thiên Ấn là nguồn sinh, đỡ được sức. Thân mạnh mà Ấn dày thì giống bình đã đầy còn rót: nghĩ nhiều làm ít, khó ra quyết định. Theo lối cân sức, thân mạnh cần Tài tiết chế Ấn; theo lối tháng sinh, Thiên Ấn cách ngại Kiêu chặn Thực Thần, nên xét có Tài đứng cứu không."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Can nào là Thiên Ấn với từng nhật chủ",
+    "chu_thich": "Thiên Ấn là hành sinh ra can ngày, cùng âm dương. Vì cùng âm dương với Thực Thần nên Thiên Ấn chế thẳng Thực Thần — gốc của thế Kiêu đoạt Thực.",
+    "cot": [
+     "Nhật chủ",
+     "Can là Thiên Ấn",
+     "Hành của can đó",
+     "Chi giữ can đó làm khí chính",
+     "Chi ẩn can đó ở khí phụ"
+    ],
+    "dong": [
+     [
+      "Giáp (Mộc dương)",
+      "Nhâm",
+      "Thuỷ dương",
+      "Hợi",
+      "Thân"
+     ],
+     [
+      "Ất (Mộc âm)",
+      "Quý",
+      "Thuỷ âm",
+      "Tý",
+      "Sửu, Thìn"
+     ],
+     [
+      "Bính (Hoả dương)",
+      "Giáp",
+      "Mộc dương",
+      "Dần",
+      "Hợi"
+     ],
+     [
+      "Đinh (Hoả âm)",
+      "Ất",
+      "Mộc âm",
+      "Mão",
+      "Thìn, Mùi"
+     ],
+     [
+      "Mậu (Thổ dương)",
+      "Bính",
+      "Hoả dương",
+      "Tỵ",
+      "Dần"
+     ],
+     [
+      "Kỷ (Thổ âm)",
+      "Đinh",
+      "Hoả âm",
+      "Ngọ",
+      "Mùi, Tuất"
+     ],
+     [
+      "Canh (Kim dương)",
+      "Mậu",
+      "Thổ dương",
+      "Thìn, Tuất",
+      "Dần, Tỵ, Thân"
+     ],
+     [
+      "Tân (Kim âm)",
+      "Kỷ",
+      "Thổ âm",
+      "Sửu, Mùi",
+      "Ngọ"
+     ],
+     [
+      "Nhâm (Thuỷ dương)",
+      "Canh",
+      "Kim dương",
+      "Thân",
+      "Tỵ"
+     ],
+     [
+      "Quý (Thuỷ âm)",
+      "Tân",
+      "Kim âm",
+      "Dậu",
+      "Sửu, Tuất"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thiên Ấn và Chính Ấn khác nhau thế nào?",
+     "dap": "Cả hai là hành sinh ra can ngày. Chính Ấn khác âm dương: học chính quy, mẹ, sự che chở rõ ràng. Thiên Ấn cùng âm dương: hiểu biết khác thường, trực giác, sự nâng đỡ đi đường vòng."
+    },
+    {
+     "hoi": "Vì sao Thiên Ấn còn gọi là Kiêu Thần?",
+     "dap": "Chữ kiêu chỉ chim cú trong văn xưa; sách Tử Bình dùng tên này cho thế Thiên Ấn đè Thực Thần, cắt nguồn biểu đạt. Không phải mọi Thiên Ấn đều mang nghĩa đó."
+    },
+    {
+     "hoi": "Năm gặp Thiên Ấn nên làm gì?",
+     "dap": "Năm có can Thiên Ấn thường hợp học một môn lạ, đổi cách nghĩ, nghỉ ngơi có chủ đích. Nên để ý xu hướng thu mình, giữ liên lạc với vài người thân."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận Ấn thụ",
+     "nghia": "Sách gộp Ấn chính và Ấn lệch vào một nhóm, đều quý ở chỗ sinh thân; khi dùng Thiên Ấn thì phải soi kỹ thế nó đè Thực Thần."
+    },
+    {
+     "sach": "Uyên Hải Tử Bình",
+     "nghia": "Sách gọi Thiên Ấn bằng tên khác là Đảo Thực, ý là làm đổ bát cơm của Thực Thần — cách nói hình ảnh cho thế Thiên Ấn chặn Thực Thần."
+    }
+   ],
+   "y_chinh": [
+    "Thiên Ấn: hành sinh can ngày, cùng âm dương",
+    "Tự học, trực giác, hiểu sâu theo lối riêng",
+    "Kiêu đoạt Thực: Thiên Ấn đè Thực Thần",
+    "Thân mạnh Ấn dày: nghĩ nhiều, làm ít"
+   ]
+  },
+  "chinh-an": {
+   "muc": [
+    {
+     "tieu_de": "Chính Ấn là gì, nằm ở đâu trong lá số?",
+     "doan": "Chính Ấn là hành sinh ra can ngày, khác âm dương; ví dụ nhật chủ Đinh gặp Giáp. Chính Ấn của Đinh nằm ở Dần, ẩn trong Hợi. Chữ ấn gốc là con dấu, gắn với quyền được công nhận; hình ảnh hay dùng là văn bằng, người mẹ, mái nhà."
+    },
+    {
+     "tieu_de": "Chính Ấn và học hành, bằng cấp",
+     "doan": "Chính Ấn thường cho người học theo lộ trình, giỏi thi cử, ưa có chứng chỉ rõ. Nghề hợp là giáo dục, hành chính, nghiên cứu học thuật, tư vấn chuyên môn, việc cần uy tín lâu dài. Mặt tối là ngại bước khỏi chỗ đã quen. Gợi ý trong tuần: nhận một việc nhỏ chưa từng làm, không cần làm giỏi."
+    },
+    {
+     "tieu_de": "Chính Ấn nói gì về quan hệ với mẹ?",
+     "doan": "Sách Tử Bình lấy Chính Ấn tượng cho mẹ, với cả nam lẫn nữ. Ấn rõ, được Quan sinh thường được đọc là có người nâng đỡ, nhà là chỗ dựa. Ấn quá dày lại hay nhắc chuyện được bao bọc lâu, chậm tự lập. Đây là gợi ý tự soi, không phải lời nói về một người mẹ cụ thể."
+    },
+    {
+     "tieu_de": "Tài phá Ấn nghĩa là gì?",
+     "doan": "Là khi Tài đứng sát và chế Ấn, khiến chỗ dựa học vấn hay gia đình bị lấn bởi chuyện tiền. Đời thường: bỏ dở việc học để đi kiếm sớm, hoặc vì lo tiền mà gạt một lời khuyên tốt. Thân mạnh thì thế này nhẹ; thân yếu đang dựa vào Ấn thì sách nhắc kỹ hơn."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Can nào là Chính Ấn với từng nhật chủ",
+    "chu_thich": "Chính Ấn là hành sinh ra can ngày, ngược âm dương. Ví dụ Thuỷ sinh Mộc: Giáp (dương) có Chính Ấn là Quý (âm), Ất (âm) có Chính Ấn là Nhâm (dương).",
+    "cot": [
+     "Nhật chủ",
+     "Can là Chính Ấn",
+     "Hành của can đó",
+     "Chi giữ can đó làm khí chính",
+     "Chi ẩn can đó ở khí phụ"
+    ],
+    "dong": [
+     [
+      "Giáp (Mộc dương)",
+      "Quý",
+      "Thuỷ âm",
+      "Tý",
+      "Sửu, Thìn"
+     ],
+     [
+      "Ất (Mộc âm)",
+      "Nhâm",
+      "Thuỷ dương",
+      "Hợi",
+      "Thân"
+     ],
+     [
+      "Bính (Hoả dương)",
+      "Ất",
+      "Mộc âm",
+      "Mão",
+      "Thìn, Mùi"
+     ],
+     [
+      "Đinh (Hoả âm)",
+      "Giáp",
+      "Mộc dương",
+      "Dần",
+      "Hợi"
+     ],
+     [
+      "Mậu (Thổ dương)",
+      "Đinh",
+      "Hoả âm",
+      "Ngọ",
+      "Mùi, Tuất"
+     ],
+     [
+      "Kỷ (Thổ âm)",
+      "Bính",
+      "Hoả dương",
+      "Tỵ",
+      "Dần"
+     ],
+     [
+      "Canh (Kim dương)",
+      "Kỷ",
+      "Thổ âm",
+      "Sửu, Mùi",
+      "Ngọ"
+     ],
+     [
+      "Tân (Kim âm)",
+      "Mậu",
+      "Thổ dương",
+      "Thìn, Tuất",
+      "Dần, Tỵ, Thân"
+     ],
+     [
+      "Nhâm (Thuỷ dương)",
+      "Tân",
+      "Kim âm",
+      "Dậu",
+      "Sửu, Tuất"
+     ],
+     [
+      "Quý (Thuỷ âm)",
+      "Canh",
+      "Kim dương",
+      "Thân",
+      "Tỵ"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thân yếu có Chính Ấn có tốt không?",
+     "dap": "Thân yếu có Chính Ấn thường được xem là có nguồn sinh. Đó là lối cân sức; lối xét tháng sinh thì xem Ấn có Quan sinh, có bị Tài phá không. Hai lối nên đặt cạnh nhau."
+    },
+    {
+     "hoi": "Chính Ấn nhiều có phải dựa dẫm không?",
+     "dap": "Không hẳn. Ấn dày dễ quen được lo, nhưng nếu lá số có Tài tiết chế hay Thực Thương để làm ra, đó lại là người học sâu và biết chia lại kiến thức."
+    },
+    {
+     "hoi": "Năm gặp Chính Ấn thường hợp làm gì?",
+     "dap": "Năm có can Chính Ấn thường hợp học lấy bằng, làm giấy tờ, nhờ người có uy tín giới thiệu. Cũng là năm hợp sửa sang lại chỗ ở."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Bình Chân Thuyên",
+     "chuong": "Luận Ấn thụ",
+     "nghia": "Sách nói Ấn quý ở chỗ sinh thân; Ấn đẹp nhất khi có Quan Sát sinh cho, ngại Tài đến phá."
+    },
+    {
+     "sach": "Trích Thiên Tuỷ",
+     "chuong": "Lục thân luận",
+     "nghia": "Phần bàn cha mẹ xét qua Tài và Ấn, nhưng nhắc phải đặt trong toàn lá số mới luận được, không đọc riêng một thần."
+    }
+   ],
+   "y_chinh": [
+    "Chính Ấn: hành sinh can ngày, khác âm dương",
+    "Học chính quy, văn bằng, uy tín lâu dài",
+    "Ấn có Quan sinh: có người nâng đỡ",
+    "Tài phá Ấn: chuyện tiền lấn việc học, chỗ dựa"
+   ]
+  }
+ }
+}
