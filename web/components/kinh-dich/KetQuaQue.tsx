@@ -2,7 +2,7 @@
 // UI-KD — khung kết quả một lượt hỏi Kinh Dịch trong KhungChat: với "Máy gieo ngẫu nhiên" thì hiện nghi thức lật đồng xu
 // (GieoDongXu) TRƯỚC, đủ 6 hào mới hiện quẻ + lời đọc; các cách khác hiện ngay. Lời chính (`van`) + giải nghĩa thuật ngữ
 // được vẽ ở đây (thay vì KhungChat) để không lộ tên quẻ trước khi lật xong. Mọi chữ đều của engine.
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 import { ViSao } from "@/components/luan-giai/HopNoiBat";
 import { Info } from "lucide-react";
@@ -19,15 +19,17 @@ export function KetQuaQue({ giaTri, nghiThuc, cach, van, thuatNgu, canCu, ghiChu
 }) {
   const coNghiThuc = nghiThuc && !!giaTri;
   const [xong, setXong] = useState(!coNghiThuc);
+  const daGhiBatDau = useRef(false);               // StrictMode dev chạy effect hai lượt → chỉ ghi một lần
   useEffect(() => {
-    if (coNghiThuc) ghi("chart_interacted", { mo_dun: "kinhdich", kind: "coin_toss_started", nguon: cach });
+    if (coNghiThuc && !daGhiBatDau.current) { daGhiBatDau.current = true; ghi("chart_interacted", { mo_dun: "kinhdich", kind: "coin_toss_started", nguon: cach }); }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- một lần khi dựng
   }, []);
   useEffect(() => { if (xong) onHien?.(); // eslint-disable-next-line react-hooks/exhaustive-deps -- một lần khi hiện
   }, [xong]);
   return (
     <div className="space-y-3" aria-live="polite" data-testid="ket-qua-que" data-xong={xong ? 1 : 0}>
-      {!xong && giaTri && (
+      {/* Bảng đồng xu GIỮ LẠI sau khi đủ 6 hào (lớp "Cách tính" — người xem đối chiếu quẻ với 6 lần gieo), lời đọc hiện bên dưới. */}
+      {coNghiThuc && giaTri && (
         <GieoDongXu giaTri={giaTri} onXong={(boQua) => {
           ghi("chart_interacted", { mo_dun: "kinhdich", kind: "coin_toss_completed", nguon: cach, ket_qua: boQua ? "bo_qua" : "du_6" });
           setXong(true);
