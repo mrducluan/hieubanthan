@@ -19,6 +19,8 @@ def chu_trang(t: dict) -> list[str]:
     p = [t["tieu_de"], t["tra_loi_nhanh"]]
     for m in t["muc"]:
         p += [m["tieu_de"], m.get("doan") or "", *(m.get("danh_sach") or [])]
+        p += [o for d in (m.get("bang") or {}).get("dong", []) for o in d]          # SEO-M: ô bảng
+        p += [x.get("nghia") or "" for x in m.get("trich_dan") or []]
     for h in t["hoi_dap"]:
         p += [h["hoi"], h["dap"]]
     return " ".join(p).lower().split()

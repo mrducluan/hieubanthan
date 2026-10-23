@@ -32,8 +32,20 @@ export function mdTrang(t: TrangKienThuc, cap = 1): string {
       `— ${CHUYEN_GIA[t.goc_nhin.nguoi]?.ten ?? t.goc_nhin.nguoi}, ${t.goc_nhin.ngay}`, ""] : [])];
   for (const m of t.muc) {
     d.push(`${h(1)} ${m.tieu_de}`, "");
+    if (m.bien_tap) d.push("_Ban biên tập bổ sung_", "");
     if (m.doan) d.push(m.doan, "");
     if (m.danh_sach) d.push(...m.danh_sach.map((x) => `- ${x}`), "");
+    // SEO-M: bảng thật + trích dẫn sách (cùng nội dung bản HTML).
+    if (m.bang) {
+      const o = (x: string) => x.replace(/\|/g, "\\|");
+      d.push(`| ${m.bang.cot.map(o).join(" | ")} |`, `|${m.bang.cot.map(() => " --- ").join("|")}|`,
+        ...m.bang.dong.map((r) => `| ${r.map(o).join(" | ")} |`), "");
+    }
+    for (const x of m.trich_dan ?? []) {
+      if (x.nguyen_van) d.push(`> ${x.nguyen_van}`, ...(x.phien_am ? [`> _${x.phien_am}_`] : []), ">");
+      if (x.nghia) d.push(`> ${x.nghia}`);
+      d.push(`> — ${x.sach}${x.chuong ? `, ${x.chuong}` : ""}`, "");
+    }
     if (m.xem_them?.length) d.push(...m.xem_them.map((x) => `- Xem: [${x.tieu_de}](${urlDayDu(duongTrang(x.loai, x.slug))}.md)`), "");
   }
   for (const n of [t.trang_con, t.trang_con_hoa]) {

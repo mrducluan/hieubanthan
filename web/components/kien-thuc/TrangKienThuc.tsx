@@ -31,6 +31,9 @@ function anhKienThuc(t: TrangKienThuc, duongCum: string) {
   });
 }
 
+/** SEO-M: ảnh infographic dọc của trang (route /og/y-chinh vẽ từ `y_chinh`). */
+const anhYChinh = (t: TrangKienThuc) => `/og/y-chinh?loai=${t.loai}&slug=${encodeURIComponent(t.slug)}`;
+
 async function tai({ khoa, slug }: Thamso) {
   const cd = khoa ? CHU_DE[khoa] : undefined;
   if (!cd) return null;
@@ -83,7 +86,9 @@ export async function TrangKienThucView(params: Thamso) {
       datePublished: t.ngay_dang ?? t.cap_nhat,   // SEO-L4: ngày thật theo sổ băm nội dung
       dateModified: t.cap_nhat,
       mainEntityOfPage: { "@id": `${urlDayDu(duong)}#trang` },
-      image: ldAnh(anhKienThuc(t, cd.duong), t.tieu_de),
+      image: t.y_chinh?.length
+        ? [ldAnh(anhKienThuc(t, cd.duong), t.tieu_de), { ...ldAnh(anhYChinh(t), `Tóm tắt: ${t.tieu_de}`), width: 1080, height: 1350 }]
+        : ldAnh(anhKienThuc(t, cd.duong), t.tieu_de),
       // Tác giả là người khi chuyên gia tự viết hoặc đã đọc, sửa, duyệt bài; bài chưa thẩm định ghi tác giả là ban biên tập.
       author: tacGia
         ? { "@id": idChuyenGia(tacGia) }
@@ -165,7 +170,34 @@ export async function TrangKienThucView(params: Thamso) {
           <section key={m.tieu_de}>
             {/* Neo ổn định cho từng mục: người đọc và trợ lý AI dẫn link thẳng tới đoạn (#ten-muc). */}
             <h2 id={idMuc[i]} className="scroll-mt-24 text-2xl">{m.tieu_de}</h2>
+            {m.bien_tap && <p className="mt-1 text-xs text-fg-faint">Ban biên tập bổ sung</p>}
             {m.doan && <p className="mt-2 leading-relaxed text-fg-muted">{m.doan}</p>}
+            {m.bang && (
+              // SEO-M: bảng thật (caption + th) — trợ lý AI và Google đọc được dạng lưới.
+              <div className="mt-3 overflow-x-auto rounded-xl border border-line/70">
+                <table className="w-full min-w-[32rem] border-collapse text-left text-sm">
+                  <caption className="sr-only">{m.tieu_de}</caption>
+                  <thead><tr>{m.bang.cot.map((c) => <th key={c} scope="col" className="border-b border-line/70 bg-white/5 px-3 py-2 font-medium text-fg">{c}</th>)}</tr></thead>
+                  <tbody>{m.bang.dong.map((d, j) => (
+                    <tr key={j} className="border-b border-line/40 last:border-0">{d.map((o, k) => k === 0
+                      ? <th key={k} scope="row" className="px-3 py-2 align-top font-medium text-fg">{o}</th>
+                      : <td key={k} className="px-3 py-2 align-top text-fg-muted">{o}</td>)}</tr>
+                  ))}</tbody>
+                </table>
+              </div>
+            )}
+            {m.trich_dan && (
+              <div className="mt-3 space-y-3">
+                {m.trich_dan.map((x) => (
+                  <blockquote key={`${x.sach}${x.chuong ?? ""}${x.nghia ?? ""}`} className="border-l-2 border-gold/50 pl-4">
+                    {x.nguyen_van && <p className="font-serif text-lg text-fg" lang="zh">{x.nguyen_van}</p>}
+                    {x.phien_am && <p className="text-sm italic text-fg-muted">{x.phien_am}</p>}
+                    {x.nghia && <p className="mt-1 leading-relaxed text-fg-muted">{x.nghia}</p>}
+                    <footer className="mt-1 text-xs text-fg-faint">— <cite>{x.sach}</cite>{x.chuong ? `, ${x.chuong}` : ""}</footer>
+                  </blockquote>
+                ))}
+              </div>
+            )}
             {m.danh_sach && (
               <ul className="mt-3 space-y-2">
                 {m.danh_sach.map((d) => <li key={d} className="flex gap-2 leading-relaxed text-fg-muted"><span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-gold/70" aria-hidden />{d}</li>)}
@@ -196,6 +228,17 @@ export async function TrangKienThucView(params: Thamso) {
           </nav>
         );
       })}
+
+      {t.y_chinh && t.y_chinh.length > 0 && (
+        // SEO-M: ảnh tóm tắt (infographic dọc, có QR + đường dẫn trang + hieuban.com) — vẽ từ ý chính engine trả.
+        <figure className="mt-10">
+          {/* eslint-disable-next-line @next/next/no-img-element -- ảnh do chính site vẽ, đã đúng cỡ */}
+          <img src={anhYChinh(t)} width={1080} height={1350} loading="lazy" decoding="async"
+            alt={`Tóm tắt: ${t.tieu_de} — ${t.y_chinh.join("; ")}`} className="mx-auto h-auto w-full max-w-sm rounded-2xl border border-line/60" />
+          <figcaption className="mt-2 text-center text-xs text-fg-faint">Ảnh tóm tắt có mã QR về trang này ·{" "}
+            <a href={anhYChinh(t)} download className="text-gold underline">Tải ảnh</a></figcaption>
+        </figure>
+      )}
 
       <section className="mt-10" aria-labelledby="hoi-dap">
         <h2 id="hoi-dap" className="text-2xl">Câu hỏi thường gặp</h2>
