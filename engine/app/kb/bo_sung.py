@@ -54,7 +54,8 @@ def ap(t: dict) -> dict:
     i = len(muc) - 1 if muc and muc[-1]["tieu_de"].lower().startswith("câu hỏi tự soi") else len(muc)
     t["muc"] = muc[:i] + them + muc[i:]
     co = {h["hoi"].strip().lower() for h in t["hoi_dap"]}
-    t["hoi_dap"] = t["hoi_dap"] + [h for h in bs.get("hoi_dap", []) if h["hoi"].strip().lower() not in co]
+    t["hoi_dap"] = t["hoi_dap"] + [{**h, **({"bien_tap": True} if bien_tap else {})}
+                                   for h in bs.get("hoi_dap", []) if h["hoi"].strip().lower() not in co]
     t["nguon"] = list(dict.fromkeys([*t["nguon"], *(_nguon(x) for x in bs.get("trich_dan", []))]))
     if bs.get("y_chinh"):
         t["y_chinh"] = bs["y_chinh"]

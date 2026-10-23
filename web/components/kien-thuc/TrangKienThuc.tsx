@@ -32,7 +32,7 @@ function anhKienThuc(t: TrangKienThuc, duongCum: string) {
 }
 
 /** SEO-M: ảnh infographic dọc của trang (route /og/y-chinh vẽ từ `y_chinh`). */
-const anhYChinh = (t: TrangKienThuc) => `/og/y-chinh?loai=${t.loai}&slug=${encodeURIComponent(t.slug)}`;
+const anhYChinh = (t: TrangKienThuc) => `/og/y-chinh?loai=${t.loai}&slug=${encodeURIComponent(t.slug)}&v=${t.cap_nhat}`;
 
 async function tai({ khoa, slug }: Thamso) {
   const cd = khoa ? CHU_DE[khoa] : undefined;
@@ -236,21 +236,27 @@ export async function TrangKienThucView(params: Thamso) {
           {/* eslint-disable-next-line @next/next/no-img-element -- ảnh do chính site vẽ, đã đúng cỡ */}
           <img src={anhYChinh(t)} width={1080} height={1350} loading="lazy" decoding="async"
             alt={`Tóm tắt: ${t.tieu_de} — ${t.y_chinh.join("; ")}`} className="mx-auto h-auto w-full max-w-sm rounded-2xl border border-line/60" />
-          <figcaption className="mt-2 text-center text-xs text-fg-faint">Ảnh tóm tắt có mã QR về trang này ·{" "}
+          <figcaption className="mt-2 text-center text-xs text-fg-faint">{t.tac_gia ? "Ban biên tập tóm tắt · " : ""}Ảnh tóm tắt có mã QR về trang này ·{" "}
             <a href={anhYChinh(t)} download className="text-gold underline">Tải ảnh</a></figcaption>
         </figure>
       )}
 
       <section className="mt-10" aria-labelledby="hoi-dap">
         <h2 id="hoi-dap" className="text-2xl">Câu hỏi thường gặp</h2>
-        <dl className="mt-4 space-y-4">
-          {t.hoi_dap.map((h) => (
-            <div key={h.hoi} className="rounded-xl border border-line/70 p-4">
-              <dt className="font-medium text-fg">{h.hoi}</dt>
-              <dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd>
-            </div>
-          ))}
-        </dl>
+        {/* EEAT-1: trên trang chuyên gia tự viết, câu hỏi do ban biên tập bổ sung tách nhóm riêng có ghi chú. */}
+        {[t.hoi_dap.filter((h) => !h.bien_tap), t.hoi_dap.filter((h) => h.bien_tap)].map((ds, n) => ds.length > 0 && (
+          <div key={n} {...(n ? { "data-testid": "hoi-dap-bien-tap" } : {})}>
+            {n === 1 && <p className="mt-6 text-xs text-fg-faint">Ban biên tập bổ sung</p>}
+            <dl className="mt-4 space-y-4">
+              {ds.map((h) => (
+                <div key={h.hoi} className="rounded-xl border border-line/70 p-4">
+                  <dt className="font-medium text-fg">{h.hoi}</dt>
+                  <dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        ))}
       </section>
 
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-10" />

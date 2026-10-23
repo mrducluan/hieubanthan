@@ -58,10 +58,10 @@ export default async function Page(p: P) {
       <KetQuaXongDat d={d} />
       {/* SEO-M: link chéo tới các trang cùng năm / cùng tuổi (trước đây chỉ 2 link trong nội dung chính). */}
       <nav aria-label="Xem thêm" className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-        <Link href={duongNgay(d.mung_mot.ngay)} className="text-gold underline">Mùng 1 Tết {x.n} tốt xấu thế nào</Link>
-        <Link href={duongHanNam(x.n)} className="text-gold underline">Hướng xấu năm {x.n}</Link>
-        <Link href={duongLamNha(x.n, x.ns)} className="text-gold underline">Tuổi {x.ns} làm nhà năm {x.n}</Link>
-        {x.n >= NAM_BANG_TU && <Link href={duongXongDatNam(x.n)} className="text-gold underline">Bảng xông đất Tết {x.n} mọi tuổi</Link>}
+        <Link href={duongNgay(d.mung_mot.ngay)} className="text-gold underline">{c("xem.mung_mot", bien)}</Link>
+        <Link href={duongHanNam(x.n)} className="text-gold underline">{c("xem.han_nam", bien)}</Link>
+        <Link href={duongLamNha(x.n, x.ns)} className="text-gold underline">{c("xem.lam_nha", bien)}</Link>
+        {x.n >= NAM_BANG_TU && <Link href={duongXongDatNam(x.n)} className="text-gold underline">{c("xem.bang_nam", bien)}</Link>}
       </nav>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-6 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/tuoi-xong-dat" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>

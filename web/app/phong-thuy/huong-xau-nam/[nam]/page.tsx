@@ -54,9 +54,9 @@ export default async function Page(p: P) {
         {n > 1901 && <Link href={duongHanNam(n - 1)} className="text-gold underline">Năm {n - 1}</Link>}
         {n < 2099 && <Link href={duongHanNam(n + 1)} className="text-gold underline">Năm {n + 1}</Link>}
         <Link href="/xem-tuoi-lam-nha" className="text-gold underline">{c("cuoi.lam_nha", bien)}</Link>
-        {n >= NAM_BANG_TU && <Link href={duongLamNhaNam(n)} className="text-gold underline">Tuổi làm nhà năm {n}</Link>}
-        {n >= NAM_BANG_TU && <Link href={duongXongDatNam(n)} className="text-gold underline">Tuổi xông đất Tết {n}</Link>}
-        {n <= 2098 && <Link href={duongLichAm(n)} className="text-gold underline">Lịch âm năm {n}</Link>}
+        {n >= NAM_BANG_TU && <Link href={duongLamNhaNam(n)} className="text-gold underline">{c("cuoi.bang_lam_nha", bien)}</Link>}
+        {n >= NAM_BANG_TU && <Link href={duongXongDatNam(n)} className="text-gold underline">{c("cuoi.bang_xong_dat", bien)}</Link>}
+        {n <= 2098 && <Link href={duongLichAm(n)} className="text-gold underline">{c("cuoi.lich_am", bien)}</Link>}
       </p>
       <p className="text-xs text-fg-muted">{h.luu_y}</p>
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" />

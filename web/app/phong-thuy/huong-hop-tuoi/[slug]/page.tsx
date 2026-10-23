@@ -39,8 +39,6 @@ async function metaGoc({ params: thamSo }: Props): Promise<Metadata> {
   return {
     title: tieuDeSeo(t.tieu_de),
     description: catMoTa(t.mo_ta),
-    keywords: [`tuổi ${t.can_chi.toLowerCase()} hợp hướng nào`, `sinh năm ${t.nam} hợp hướng nào`, `hướng nhà tuổi ${t.nam}`,
-      `nam ${t.nam} hợp hướng nào`, `nữ ${t.nam} hợp hướng nào`, `mệnh ${t.gioi[0]!.menh_quai.quai.toLowerCase()}`],
     alternates: { canonical: duong, types: { "text/markdown": `${duong}.md` } },
     openGraph: { type: "article", title: t.tieu_de, description: catMoTa(t.mo_ta), url: duong, locale: "vi_VN", siteName: TEN_SITE,
       images: [{ url: anh, width: 1200, height: 630, alt: t.tieu_de }] },

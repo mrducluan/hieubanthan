@@ -39,12 +39,21 @@ export const CHU_XONG_DAT_CON = {
   "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam}, {nam_sinh})", mac_dinh: "Tuổi xông đất năm {nam} cho gia chủ sinh năm {nam_sinh}", toi_da: 120 },
   "cuoi.chu": { nhom: C, nhan: "Chữ trước link công cụ", mac_dinh: "Tính theo ngày sinh đầy đủ của gia chủ:", toi_da: 120 },
   "cuoi.link": { nhom: C, nhan: "Chữ link công cụ", mac_dinh: "công cụ xem tuổi xông đất", toi_da: 60 },
+  // SEO-M: link chéo cùng năm / cùng tuổi.
+  "xem.mung_mot": { nhom: C, nhan: "Link ngày mùng 1 Tết ({nam})", mac_dinh: "Mùng 1 Tết {nam} tốt xấu thế nào", toi_da: 60 },
+  "xem.han_nam": { nhom: C, nhan: "Link hướng xấu năm ({nam})", mac_dinh: "Hướng xấu năm {nam}", toi_da: 60 },
+  "xem.lam_nha": { nhom: C, nhan: "Link tuổi làm nhà ({nam_sinh}, {nam})", mac_dinh: "Tuổi {nam_sinh} làm nhà năm {nam}", toi_da: 60 },
+  "xem.bang_nam": { nhom: C, nhan: "Link bảng xông đất cả năm ({nam})", mac_dinh: "Bảng xông đất Tết {nam} mọi tuổi", toi_da: 60 },
 } as const satisfies BangChu;
 
 export const CHU_HAN_NAM_CON = {
   "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi} = can chi năm)", mac_dinh: "Năm {can_chi}", toi_da: 60 },
   "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Hướng xấu năm {nam}", toi_da: 120 },
   "cuoi.lam_nha": { nhom: C, nhan: "Link xem tuổi làm nhà ({nam})", mac_dinh: "Xem tuổi làm nhà năm {nam}", toi_da: 60 },
+  // SEO-M: link chéo cùng năm.
+  "cuoi.bang_lam_nha": { nhom: C, nhan: "Link bảng tuổi làm nhà ({nam})", mac_dinh: "Tuổi làm nhà năm {nam}", toi_da: 60 },
+  "cuoi.bang_xong_dat": { nhom: C, nhan: "Link bảng xông đất ({nam})", mac_dinh: "Tuổi xông đất Tết {nam}", toi_da: 60 },
+  "cuoi.lich_am": { nhom: C, nhan: "Link lịch âm năm ({nam})", mac_dinh: "Lịch âm năm {nam}", toi_da: 60 },
 } as const satisfies BangChu;
 
 // SEO-L1 — trang trụ theo năm (bảng 46 tuổi 1960–2005).

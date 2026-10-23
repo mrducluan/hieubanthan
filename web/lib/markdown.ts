@@ -51,7 +51,7 @@ export function mdTrang(t: TrangKienThuc, cap = 1): string {
   for (const n of [t.trang_con, t.trang_con_hoa]) {
     if (n?.ds.length) d.push(`${h(1)} ${n.tieu_de}`, "", ...n.ds.map((x) => `- [${x.tieu_de}](${urlDayDu(duongTrang(x.loai, x.slug))}.md)`), "");
   }
-  if (t.hoi_dap.length) d.push(`${h(1)} Câu hỏi thường gặp`, "", ...t.hoi_dap.flatMap((x) => [`**${x.hoi}**`, "", x.dap, ""]));
+  if (t.hoi_dap.length) d.push(`${h(1)} Câu hỏi thường gặp`, "", ...t.hoi_dap.flatMap((x) => [`**${x.hoi}**${x.bien_tap ? " _(ban biên tập bổ sung)_" : ""}`, "", x.dap, ""]));
   d.push(`${h(1)} Nguồn`, "", ...t.nguon.map((x) => `- ${x}`), "");
   if (t.lien_quan?.length || t.lien_ket_ngoai?.length) {
     d.push(`${h(1)} Liên quan`, "", ...(t.lien_quan ?? []).map((x) => `- [${x.tieu_de}](${urlDayDu(duongTrang(x.loai, x.slug))}.md)`),

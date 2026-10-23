@@ -19,9 +19,11 @@ test("trang kiến thức có bảng thật, trích dẫn, ảnh tóm tắt; tra
   const h = await (await request.get("/bat-tu/thap-than/chinh-tai")).text();
   expect(h).toMatch(/<table[\s\S]*?<th scope="col"/);
   expect(h).toContain("Sách xưa nói gì");
-  expect(h).toContain('src="/og/y-chinh?loai=thap_than&amp;slug=chinh-tai"');
+  expect(h).toContain('src="/og/y-chinh?loai=thap_than&amp;slug=chinh-tai&amp;v=');
   const so = await (await request.get("/than-so/y-nghia-so/so-7")).text();
   expect(so).toContain("Ban biên tập bổ sung");
+  // EEAT-1: hỏi đáp do ban biên tập thêm trên trang chuyên gia tự viết nằm trong nhóm riêng có ghi chú.
+  expect(so).toContain('data-testid="hoi-dap-bien-tap"');
   const md = await (await request.get("/bat-tu/thap-than/chinh-tai.md")).text();
   expect(md).toMatch(/^\| .+ \|$/m);
   const anh = await request.get("/og/y-chinh?loai=thap_than&slug=chinh-tai");
@@ -32,10 +34,10 @@ test("trang kiến thức có bảng thật, trích dẫn, ảnh tóm tắt; tra
 test("sitemap theo cụm + robots; không còn meta keywords", async ({ request }) => {
   const idx = await (await request.get("/sitemap-cum.xml")).text();
   expect(idx).toContain("<sitemapindex");
-  expect(idx).toContain("/sitemap-cum/tu-hoa.xml");
-  const cum = await (await request.get("/sitemap-cum/tu-hoa.xml")).text();
+  expect(idx).toContain("/sitemap-cum-tu-hoa.xml");
+  const cum = await (await request.get("/sitemap-cum-tu-hoa.xml")).text();
   expect((cum.match(/<loc>/g) ?? []).length).toBeGreaterThan(40);
-  expect((await request.get("/sitemap-cum/khong-co.xml")).status()).toBe(404);
+  expect((await request.get("/sitemap-cum-khong-co.xml")).status()).toBe(404);
   expect(await (await request.get("/robots.txt")).text()).toContain("/sitemap-cum.xml");
   expect(await (await request.get("/")).text()).not.toContain('name="keywords"');
 });

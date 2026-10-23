@@ -113,6 +113,18 @@ def test_ghep_vao_trang_va_phan_rieng(loai):
         assert any(m.get("bang") for m in t["muc"]), f"{loai}/{slug}: chưa ghép bảng"
         assert t.get("y_chinh") and t.get("trich_dan")
         if loai == "so":
-            assert all(m.get("bien_tap") for m in t["muc"] if m.get("bang") or m.get("trich_dan"))
+            # EEAT-1: mọi phần ban biên tập thêm trên trang chuyên gia tự viết đều gắn cờ (mục, bảng, trích dẫn, hỏi đáp).
+            bs = bo_sung.doc(loai)["trang"][slug]
+            ten_moi = {m["tieu_de"] for m in bs.get("muc", [])}
+            assert all(m.get("bien_tap") for m in t["muc"] if m.get("bang") or m.get("trich_dan") or m["tieu_de"] in ten_moi)
+            hoi_moi = {h["hoi"] for h in bs.get("hoi_dap", [])}
+            assert all(h.get("bien_tap") for h in t["hoi_dap"] if h["hoi"] in hoi_moi)
         elif loai in {k for k, _ in tl}:
             assert tl[(loai, slug)] >= 0.30, f"{loai}/{slug}: phần riêng {tl[(loai, slug)]} < 0.30"
+
+
+def test_khong_trang_nhap_nao_duoi_nguong():
+    """SEO-M: hạ trang dưới ngưỡng (→ noindex) phải là quyết định có chủ ý, không phải tác dụng phụ của sửa khuôn chung."""
+    do_rieng.ty_le.cache_clear()
+    duoi = [(k, v) for k, v in do_rieng.ty_le().items() if v < do_rieng.NGUONG]
+    assert not duoi, f"trang dưới ngưỡng phần riêng {do_rieng.NGUONG}: {duoi[:5]}"

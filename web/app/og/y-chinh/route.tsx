@@ -56,6 +56,10 @@ export async function GET(req: Request) {
         </div>
       </div>
     ),
-    { width: W, height: H, ...(fonts.length ? { fonts } : {}) },
+    {
+      width: W, height: H, ...(fonts.length ? { fonts } : {}),
+      // Mặc định ImageResponse cache 1 năm "immutable" — ảnh dự phòng (engine lỗi / lệch deploy) không được giữ lâu.
+      headers: { "cache-control": t ? "public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400" : "no-store" },
+    },
   );
 }

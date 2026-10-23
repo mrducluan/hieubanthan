@@ -109,7 +109,7 @@ export interface MucTrang {
 }
 export interface TrangKienThuc {
   loai: LoaiTrang; slug: string; tieu_de: string; mo_ta: string; tra_loi_nhanh: string;
-  muc: MucTrang[]; hoi_dap: { hoi: string; dap: string }[]; nguon: string[];
+  muc: MucTrang[]; hoi_dap: { hoi: string; dap: string; bien_tap?: boolean }[]; nguon: string[];
   /** SEO-M: 3–5 ý chính cho ảnh infographic (/og/y-chinh). */
   y_chinh?: string[];
   trang_thai: string; index: boolean; cap_nhat: string;
