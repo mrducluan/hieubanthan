@@ -1,0 +1,4303 @@
+{
+ "source_id": "bo_sung_cap_so_v1",
+ "school_id": "pitago",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Ban biên tập Hiểu Bản Thân — cặp số chủ đạo theo từng quan hệ",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức thần số (cặp số, quan hệ, chân dung) theo hệ thống Pythagoras phổ biến (nháp AI, chờ thẩm định). Không chấm điểm hợp – khắc."
+ },
+ "trang": {
+  "so-chu-dao-1-va-1": {
+   "muc": [
+    {
+     "tieu_de": "Hai người cùng số 1 có hợp nhau không?",
+     "doan": "Hai người số 1 thường hiểu nhau rất nhanh, vì cùng thích tự quyết và ghét phải chờ. Chỗ khó nằm ở câu chốt cuối: ai cũng muốn là người nói câu đó. Nhiều cặp 1–1 kể rằng họ ít khi bất đồng về hướng đi, mà hay căng vì chuyện ai được quyết. Khi đã chia xong phần ai lo việc gì, cặp này làm việc nhanh hiếm thấy."
+    },
+    {
+     "tieu_de": "Số 1 và số 1 khi yêu và khi về chung nhà",
+     "doan": "Lúc mới yêu, cặp 1–1 thường sôi nổi: ai cũng muốn lên kế hoạch hẹn, ai cũng muốn trả tiền. Về chung nhà, chuyện nhỏ như sắp đồ trong bếp hay chọn trường cho con dễ thành cuộc so ý chí. Đây là hiệu ứng soi gương: điều số 1 thấy khó chịu ở người kia thường cũng là điều người khác từng góp ý cho chính mình. Nhiều cặp chia 'phần đất' — người này lo tiền nhà, người kia lo lịch nghỉ — và giữ lời không chen vào phần đã giao."
+    },
+    {
+     "tieu_de": "Số 1 và số 1 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Vướng khi cả hai cùng đưa phương án và không ai rút: thử nói 'phương án của anh hơn ở điểm này' trước khi bảo vệ ý mình.",
+      "Vướng khi một người thắng liên tục: người kia lặng lẽ rút khỏi việc chung. Đếm lại xem tháng qua ai chốt nhiều hơn.",
+      "Vướng khi phản bác nhau trước mặt người ngoài: hẹn chỉ tranh luận lúc chỉ có hai người.",
+      "Câu dễ gây căng: 'Để đó tôi lo.' Câu dễ nghe hơn: 'Phần này em lo nhé, cần thì gọi anh.'"
+     ]
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 1–1",
+     "danh_sach": [
+      "Ngày 1–2: mỗi người viết ba việc mình muốn được quyết cuối cùng.",
+      "Ngày 3: so hai danh sách; việc trùng thì chia theo tuần chẵn, tuần lẻ.",
+      "Ngày 4–6: làm theo phần đã chia, không góp ý vào phần người kia trừ khi được hỏi.",
+      "Ngày 7: mỗi người kể một lần mình muốn chen vào mà đã kìm được."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 1–1 theo từng quan hệ",
+    "chu_thich": "Hai số 1 đứng cạnh nhau thì việc gì cũng nhanh; mỗi ô là một gợi ý để tự đối chiếu, không phải điểm số.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Hẹn hò nhiều kế hoạch, ít khi phải chờ nhau.",
+      "Ai lên kế hoạch cho buổi hẹn tuần này.",
+      "Thay phiên làm 'người dẫn' mỗi cuối tuần."
+     ],
+     [
+      "Vợ chồng",
+      "Cùng dám quyết việc lớn như mua nhà, đổi việc.",
+      "Phần việc nhà nào ai có tiếng nói cuối.",
+      "Viết bảng 'ai quyết gì' dán cạnh tủ lạnh."
+     ],
+     [
+      "Bạn bè",
+      "Rủ nhau thử điều mới, ít khi ngồi yên.",
+      "Ai cầm trịch khi đi chơi đông người.",
+      "Chuyến sau để người kia chọn từ đầu đến cuối."
+     ],
+     [
+      "Đồng nghiệp",
+      "Tốc độ cao, ra quyết định gọn.",
+      "Ranh giới phần việc để khỏi giẫm chân.",
+      "Chia dự án theo đầu việc, mỗi việc một tên."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 1 quý nhân viên số 1 vì tự chạy việc.",
+      "Mức nào nhân viên tự chốt, mức nào phải hỏi.",
+      "Thống nhất một ngưỡng tiền hoặc thời gian để tự quyết."
+     ],
+     [
+      "Gia đình",
+      "Cha con hay anh em số 1 cùng gánh khi nhà có việc gấp.",
+      "Ai là người báo cả nhà sau khi đã chốt.",
+      "Họp nhà ngắn: người này nói xong mới tới lượt người kia."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hai người cùng số chủ đạo 1 có hay cãi nhau không?",
+     "dap": "Thường có, nhưng phần lớn là cãi về quyền chốt chứ ít khi về giá trị sống. Khi đã chia rõ ai quyết việc gì, số lần căng thường giảm thấy rõ."
+    },
+    {
+     "hoi": "Cặp 1–1 làm ăn chung được không?",
+     "dap": "Được, nếu tách vai ngay từ đầu, ví dụ một người lo sản phẩm, một người lo khách hàng. Cặp này hay vướng khi cả hai cùng đứng tên một quyết định."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 1 gắn với sự khởi đầu và cái tôi độc lập; hai số 1 cạnh nhau làm nổi rõ cả sức mở đường lẫn nhu cầu tự quyết của mỗi bên."
+    }
+   ],
+   "y_chinh": [
+    "Hai số 1: hiểu nhau nhanh, cùng muốn chốt",
+    "Chia rõ ai quyết việc gì để bớt tranh",
+    "Chỉ phản bác nhau khi chỉ có hai người",
+    "Không chấm điểm, chỉ là gợi ý tự đối chiếu"
+   ]
+  },
+  "so-chu-dao-1-va-2": {
+   "muc": [
+    {
+     "tieu_de": "Số 1 và số 2 có hợp nhau không?",
+     "doan": "Cặp 1–2 thường vận hành như người cầm lái và người đọc bản đồ: một bên muốn đi, một bên để ý cả xe có ổn không. Rủi ro là tiếng nói của số 2 nhỏ dần. Ví dụ quen thuộc: số 1 chọn phim, chọn quán, chọn nơi thuê nhà; số 2 gật đầu, rồi ba tháng sau mới nói mình chưa từng thích khu đó."
+    },
+    {
+     "tieu_de": "Số 1 và số 2 khi yêu, khi cưới",
+     "doan": "Khi yêu, số 2 thấy yên tâm vì có người lo liệu, số 1 thấy dễ chịu vì có người hiểu ý. Sau cưới, cán cân dễ lệch: số 1 quen quyết, số 2 quen chiều. Một dấu hiệu nên để ý là câu 'tuỳ anh' hay 'tuỳ em' xuất hiện nhiều hơn trước. Lúc đó, số 1 nên hỏi lại bằng câu có lựa chọn, còn số 2 tập nói ý mình trước khi nghe ý người kia."
+    },
+    {
+     "tieu_de": "Số 1 và số 2 làm việc chung",
+     "doan": "Ở chỗ làm, số 1 hợp vai mở việc, gặp đối tác; số 2 hợp vai giữ liên lạc, soát chi tiết, giữ không khí nhóm. Chỗ dễ vướng là số 1 giao việc bằng một câu ngắn, số 2 cần thêm bối cảnh mà ngại hỏi. Một bản giao việc ba dòng — làm gì, xong khi nào, vì sao cần — giúp cả hai bớt đoán."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 1–2",
+     "danh_sach": [
+      "Hai ngày đầu: mỗi lần cần quyết việc chung, số 1 đưa ra hai lựa chọn thay vì một.",
+      "Ngày thứ ba: số 2 tự chọn một việc nhỏ cho cả hai và không hỏi ý trước.",
+      "Giữa tuần: mỗi tối số 2 nói một điều mình muốn, dù chỉ là món ăn.",
+      "Cuối tuần: cùng nhìn lại xem ai đã nhường nhiều hơn và có ai thấy tủi không."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 1–2 theo từng quan hệ",
+    "chu_thich": "Mỗi dòng là một kiểu quan hệ; cột cuối là việc nhỏ làm được ngay trong tuần.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Số 1 chủ động, số 2 ấm áp — dễ thấy được chăm.",
+      "Số 2 thật sự muốn gì, ngoài câu 'sao cũng được'.",
+      "Số 1 hỏi 'em thích hai cái này, cái nào hơn?'"
+     ],
+     [
+      "Vợ chồng",
+      "Một người lo đường lớn, một người lo nếp nhà.",
+      "Tiền chung chi thế nào khi số 1 quen quyết nhanh.",
+      "Khoản chi trên một mức đã định thì cả hai cùng gật."
+     ],
+     [
+      "Bạn bè",
+      "Số 1 rủ, số 2 nhận lời và giữ bạn bè gắn kết.",
+      "Số 2 có ngại từ chối kế hoạch của số 1 không.",
+      "Số 2 đề xuất một buổi gặp theo ý mình."
+     ],
+     [
+      "Đồng nghiệp",
+      "Số 1 mở việc, số 2 lo phối hợp và chi tiết.",
+      "Công của số 2 có được ghi tên không.",
+      "Báo cáo chung ghi rõ phần ai làm."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 1 cần người tin cậy, nhân viên số 2 tận tâm.",
+      "Số 2 có dám báo tin xấu sớm không.",
+      "Hẹn mười phút riêng mỗi tuần để số 2 nói vướng mắc."
+     ],
+     [
+      "Gia đình",
+      "Cha mẹ số 1 dẫn dắt, con số 2 hiểu chuyện, hay nhường.",
+      "Con có đang nhường để nhà yên mà không nói ra.",
+      "Hỏi con 'nếu được chọn, con muốn thế nào?' rồi chờ con nói hết."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 2 có bị số 1 lấn át không?",
+     "dap": "Có thể, nếu cả hai để thói quen chạy tự do. Số 1 quyết nhanh nên dễ quyết thay; số 2 ngại va chạm nên dễ im. Đếm thử một tuần xem ai chọn bao nhiêu việc là thấy rõ."
+    },
+    {
+     "hoi": "Người số chủ đạo 11 với số 1 thì xem cặp nào?",
+     "dap": "Số 11 được quy về gốc 2 khi xem cặp số, nên đọc cặp 1–2. Số 11 thường nhạy hơn số 2 thường, nên phần 'nói ra điều mình muốn' càng cần làm sớm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 1 là khởi đầu, số 2 là cặp đôi và sự hợp tác; đứng cạnh nhau, hai số này thường được mô tả như người dẫn và người giữ nhịp chung."
+    }
+   ],
+   "y_chinh": [
+    "Số 1 dẫn đường, số 2 giữ hoà khí",
+    "Để ý khi câu 'tuỳ anh/tuỳ em' xuất hiện nhiều",
+    "Số 1 đưa lựa chọn, số 2 nói ý mình trước",
+    "Giao việc ba dòng: làm gì, khi nào, vì sao"
+   ]
+  },
+  "so-chu-dao-1-va-3": {
+   "muc": [
+    {
+     "tieu_de": "Số 1 và số 3 có hợp nhau không?",
+     "doan": "Số 1 và số 3 thường là cặp nhiều lửa: một người muốn làm ngay, một người có thêm mười ý để làm. Không khí bên nhau hiếm khi chán. Chỗ cần để ý là hướng đi: số 1 muốn đi thẳng một đường, số 3 hay rẽ sang ý mới trước khi việc cũ xong."
+    },
+    {
+     "tieu_de": "Số 1 và số 3 khi yêu",
+     "doan": "Khi yêu, số 3 làm số 1 cười và bớt căng; số 1 làm số 3 thấy có người biến lời nói thành việc. Va chạm hay đến từ chuyện nhỏ: số 3 hứa đi du lịch chỗ này, tuần sau lại hào hứng chỗ khác, số 1 đã đặt vé chỗ cũ. Cặp này đỡ hơn nhiều khi có một 'danh sách chờ' cho ý tưởng mới, thay vì đổi kế hoạch đang chạy."
+    },
+    {
+     "tieu_de": "Số 1 và số 3 làm việc chung",
+     "doan": "Hợp các việc cần ý tưởng và tốc độ: mở cửa hàng, làm nội dung, ra mắt sản phẩm. Ví dụ một quán cà phê hai người mở chung: số 3 nghĩ thực đơn, trang trí, cách kể chuyện quán; số 1 lo mặt bằng, giá, tiến độ. Vướng khi số 3 đổi thực đơn mỗi tuần mà chưa đo món cũ bán ra sao."
+    },
+    {
+     "tieu_de": "Số 1 và số 3 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 1 dễ nói 'tập trung đi' bằng giọng ra lệnh — thử 'ý này hay, mình ghi lại làm sau quý này nhé'.",
+      "Số 3 dễ kể vòng trước khi vào ý — số 1 có thể hỏi 'câu chốt là gì?' bằng giọng tò mò, không sốt ruột.",
+      "Số 3 buồn khi ý tưởng bị gạt ngay — nghe hết rồi mới góp ý."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 1–3 theo từng quan hệ",
+    "chu_thich": "Cặp nhiều năng lượng; các ô dưới đây giúp giữ năng lượng đó đi cùng một hướng.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Vui, nhiều bất ngờ, ít đơn điệu.",
+      "Kế hoạch đã chốt thì có đổi giữa chừng không.",
+      "Một sổ chung ghi ý tưởng hẹn hò, mỗi tháng chọn một."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà có tiếng cười và có người lo việc lớn.",
+      "Ai giữ ngân sách khi số 3 hào hứng mua sắm.",
+      "Mỗi tháng ngồi mười lăm phút xem lại các khoản chi."
+     ],
+     [
+      "Bạn bè",
+      "Số 1 khởi xướng, số 3 làm cả nhóm vui.",
+      "Số 3 có phải lúc nào cũng là người làm vui không.",
+      "Hỏi số 3 một chuyện thật đang làm họ bận lòng."
+     ],
+     [
+      "Đồng nghiệp",
+      "Ý tưởng nhiều, đẩy việc nhanh.",
+      "Bao nhiêu ý mới được thêm vào khi dự án đang chạy.",
+      "Đặt một ngày cố định trong tháng để xét ý mới."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 1 cần kết quả, nhân viên số 3 giỏi trình bày.",
+      "Ý tưởng của số 3 chuyển thành việc khi nào.",
+      "Mỗi ý trình bày kèm một bước làm thử nhỏ."
+     ],
+     [
+      "Gia đình",
+      "Anh em 1 và 3 rủ nhau làm nhiều việc vui.",
+      "Ai theo việc đến cùng khi hứng thú giảm.",
+      "Chọn một việc chung trong nhà và làm xong trước khi thêm việc mới."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 1 và số 3 có hợp làm ăn không?",
+     "dap": "Thường hợp ở giai đoạn khởi đầu, khi cần ý tưởng và sức chạy. Về lâu dài, cặp này cần thêm nhịp kiểm tra số liệu, vì cả hai đều thích đi tiếp hơn là dừng lại xem xét."
+    },
+    {
+     "hoi": "Vì sao số 3 hay thấy số 1 cứng?",
+     "dap": "Vì số 1 thường giữ chặt một hướng đã chọn, còn số 3 thấy niềm vui ở việc thử nhiều hướng. Không ai sai; chỉ là cần thoả thuận khi nào giữ, khi nào thử."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 1 là ý chí khởi đầu, số 3 là biểu đạt và sáng tạo; cặp này thường được mô tả là giàu năng lượng nhưng cần chung một mục tiêu để không tản ra."
+    }
+   ],
+   "y_chinh": [
+    "Số 1 làm ngay, số 3 có thêm nhiều ý",
+    "Ý mới vào 'danh sách chờ', không đổi kế hoạch đang chạy",
+    "Hợp mở việc mới: quán, nội dung, sản phẩm",
+    "Nghe hết ý tưởng rồi mới góp ý"
+   ]
+  },
+  "so-chu-dao-1-va-4": {
+   "muc": [
+    {
+     "tieu_de": "Số 1 và số 4 có hợp nhau không?",
+     "doan": "Số 1 và số 4 thường bổ sung kiểu kiến trúc sư và thợ cả: một người phác ra, một người làm cho đứng được. Khác biệt lớn nhất là tốc độ. Số 1 thấy cơ hội thì muốn nhảy vào; số 4 muốn đủ số liệu và kế hoạch rồi mới bước. Cả hai đều đúng ở những lúc khác nhau."
+    },
+    {
+     "tieu_de": "Số 1 và số 4 khi yêu, khi cưới",
+     "doan": "Khi yêu, số 4 cho số 1 cảm giác có nơi để về; số 1 làm đời sống của số 4 có thêm điều mới. Sau cưới, chuyện sửa nhà là ví dụ điển hình: số 1 muốn đập tường làm ngay, số 4 muốn đo đạc, hỏi giá ba nơi. Nhiều cặp 1–4 thấy êm hơn khi áp luật 'thử nhỏ trước': sơn lại một phòng trước khi sửa cả nhà."
+    },
+    {
+     "tieu_de": "Số 1 và số 4 làm việc chung",
+     "doan": "Đây là bộ đôi làm được việc nếu mỗi người giữ đúng vai. Số 1 đi tìm khách, chốt hướng; số 4 viết quy trình, giữ chất lượng, giữ hạn. Vướng khi số 1 đổi yêu cầu giữa chừng mà không báo, vì số 4 rất khó chịu với việc phải làm lại."
+    },
+    {
+     "tieu_de": "Số 1 và số 4 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 1 nói 'chậm quá' — số 4 nghe thành 'làm kém'. Thử 'mình cần bản nháp trước thứ Sáu, được không?'.",
+      "Số 4 nói 'liều quá' — số 1 nghe thành 'không tin tôi'. Thử 'rủi ro lớn nhất ở đây là gì, mình tính trước nhé'.",
+      "Cả hai ít nói lời cảm ơn; mỗi tuần nêu một việc cụ thể người kia đã làm tốt."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 1–4 theo từng quan hệ",
+    "chu_thich": "Ô giữa thường là chuyện tốc độ: ai muốn nhanh, ai muốn chắc.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Số 1 mang điều mới, số 4 mang sự đáng tin.",
+      "Hẹn hò bất ngờ hay theo lịch đã định.",
+      "Một buổi theo kế hoạch của số 4, một buổi ngẫu hứng của số 1."
+     ],
+     [
+      "Vợ chồng",
+      "Xây được nhà, giữ được nếp.",
+      "Khoản lớn: ai được quyết nhanh, khoản nào phải bàn.",
+      "Áp luật 'thử nhỏ trước' cho mọi khoản chi lớn."
+     ],
+     [
+      "Bạn bè",
+      "Số 1 rủ đi, số 4 lo vé, lo đường.",
+      "Số 1 có huỷ hẹn sát giờ không.",
+      "Số 1 giữ đúng ba cuộc hẹn liền."
+     ],
+     [
+      "Đồng nghiệp",
+      "Một người mở việc, một người giữ chất lượng.",
+      "Yêu cầu đổi thì báo trước bao lâu.",
+      "Mọi thay đổi ghi vào một chỗ chung kèm lý do."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 4 quý nhân viên số 1 vì dám nhận việc khó.",
+      "Nhân viên số 1 có bỏ qua quy trình không.",
+      "Đề xuất cách mới kèm bảng so cách cũ."
+     ],
+     [
+      "Gia đình",
+      "Bố/mẹ số 4 giữ nếp, con số 1 muốn tự làm theo ý mình.",
+      "Phần nào con được tự quyết.",
+      "Giao con trọn một việc nhà, chỉ xem kết quả."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 1 và số 4 ai nên quyết việc lớn?",
+     "dap": "Không cần một người quyết hết. Nhiều cặp chia theo loại việc: số 1 quyết khi cần nhanh và có thể sửa sai, số 4 quyết khi việc khó quay lại như ký hợp đồng dài hạn."
+    },
+    {
+     "hoi": "Số 22 với số 1 thì xem thế nào?",
+     "dap": "Số 22 được quy về gốc 4 khi xem cặp số, nên đọc cặp 1–4. Người số 22 thường muốn xây việc lớn hơn, nên phần lên kế hoạch dài hạn càng quan trọng với họ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 1 là khởi đầu, số 4 là nền móng và trật tự; cặp này thường được mô tả như ý tưởng gặp người biết dựng nó thành việc thật."
+    }
+   ],
+   "y_chinh": [
+    "Số 1 phác ra, số 4 làm cho đứng được",
+    "Khác biệt lớn nhất là tốc độ",
+    "Luật 'thử nhỏ trước, làm lớn sau'",
+    "Đổi yêu cầu thì báo trước, kèm lý do"
+   ]
+  },
+  "so-chu-dao-1-va-5": {
+   "muc": [
+    {
+     "tieu_de": "Số 1 và số 5 có hợp nhau không?",
+     "doan": "Số 1 và số 5 thường hợp nhau ở chỗ cùng thích tự do và dám thử. Hai người ít khi ghen tuông vặt hay giữ nhau quá chặt. Mặt kia là mối quan hệ dễ thiếu chỗ neo: mỗi người bận một hướng, đến khi nhìn lại thì đã lâu không có việc gì chung."
+    },
+    {
+     "tieu_de": "Số 1 và số 5 khi yêu, khi cưới",
+     "doan": "Khi yêu, cặp này thường có những chuyến đi bất ngờ và những quyết định táo bạo cùng nhau. Khi cưới, câu hỏi khó là 'mình cam kết điều gì cố định?'. Không cần nhiều: một bữa tối chung mỗi tuần, một chuyến đi mỗi năm, một quy tắc báo nhau khi đi xa. Những nghi thức nhỏ này giữ cho tự do của mỗi người không biến thành hai cuộc sống riêng."
+    },
+    {
+     "tieu_de": "Số 1 và số 5 làm việc chung",
+     "doan": "Hợp các việc cần phản ứng nhanh: bán hàng, sự kiện, khởi nghiệp giai đoạn đầu. Số 1 giữ hướng, số 5 xoay xở khi tình hình đổi. Vướng ở phần buồn tẻ: báo cáo, sổ sách, theo đuôi khách hàng cũ. Nên có người thứ ba hoặc lịch cố định cho phần này."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 1–5",
+     "danh_sach": [
+      "Chọn một tối trong tuần làm 'tối chung', cả hai không hẹn ai khác.",
+      "Mỗi người báo trước lịch đi xa hoặc về muộn, chỉ một tin nhắn ngắn.",
+      "Cùng thử một việc mới cả hai chưa làm bao giờ, do số 5 chọn.",
+      "Cuối tuần, số 1 hỏi: 'tuần này em có thấy mình bị giữ chặt không?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 1–5 theo từng quan hệ",
+    "chu_thich": "Cặp ít ràng buộc; cột giữa là những điều nên nói ra để tự do không thành xa cách.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Phiêu lưu, ít kiểm soát nhau.",
+      "Hai người đang hướng tới điều gì chung.",
+      "Viết ba điều muốn làm cùng nhau trong năm."
+     ],
+     [
+      "Vợ chồng",
+      "Mỗi người giữ được nhịp riêng.",
+      "Việc nhà, con cái: phần nào là cố định.",
+      "Một bữa tối chung mỗi tuần không đổi lịch."
+     ],
+     [
+      "Bạn bè",
+      "Rủ là đi, không cần lên kế hoạch dài.",
+      "Có ai thấy mình chỉ được gọi khi người kia rảnh.",
+      "Hẹn một lần gặp định kỳ hằng tháng."
+     ],
+     [
+      "Đồng nghiệp",
+      "Nhanh nhạy, giỏi xử lý tình huống.",
+      "Ai lo phần sổ sách, báo cáo.",
+      "Chia việc lặp lại theo lịch xoay vòng."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 1 quý nhân viên số 5 linh hoạt.",
+      "Số 5 tự đổi cách làm đến mức nào thì phải báo.",
+      "Thoả thuận khung kết quả, để số 5 tự chọn cách."
+     ],
+     [
+      "Gia đình",
+      "Người thân 1 và 5 đều thích tự làm theo ý mình.",
+      "Nhà cần ai có mặt vào dịp nào.",
+      "Ghi lịch giỗ, Tết, sinh nhật chung từ đầu năm."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 1 và số 5 có khó giữ quan hệ lâu dài không?",
+     "dap": "Không khó hơn cặp khác, nhưng cần chủ động hơn. Cặp này hiếm khi xa nhau vì cãi lớn; họ dễ xa nhau vì lâu không làm gì chung. Vài thói quen cố định là đủ."
+    },
+    {
+     "hoi": "Số 5 có thấy số 1 áp đặt không?",
+     "dap": "Có lúc, nhất là khi số 1 tự chốt kế hoạch cho cả hai. Số 5 cần thấy mình được chọn; đưa lựa chọn thay vì thông báo thường giúp nhiều."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 1 là độc lập, số 5 là tự do và thay đổi; cặp này thường được mô tả là cởi mở với nhau nhưng cần vài điểm neo chung."
+    }
+   ],
+   "y_chinh": [
+    "Cùng thích tự do, ít giữ nhau quá chặt",
+    "Dễ xa vì thiếu việc chung, ít khi vì cãi lớn",
+    "Một tối chung mỗi tuần làm điểm neo",
+    "Việc sổ sách: chia lịch xoay vòng"
+   ]
+  },
+  "so-chu-dao-1-va-6": {
+   "muc": [
+    {
+     "tieu_de": "Số 1 và số 6 có hợp nhau không?",
+     "doan": "Số 1 và số 6 thường dựng được một gia đình hay một nhóm vững: số 1 lo hướng đi, số 6 lo người trong nhà. Điểm dễ lệch là cảm giác ghi nhận. Số 6 làm nhiều việc thầm lặng và mong được thấy; số 1 bận nhìn phía trước nên dễ coi đó là chuyện tất nhiên."
+    },
+    {
+     "tieu_de": "Số 1 và số 6 khi yêu, khi về chung nhà",
+     "doan": "Khi yêu, số 6 chăm số 1 từng bữa ăn, số 1 che chở và lo liệu cho số 6. Về chung nhà, số 6 hay nhắc: mặc áo ấm, về sớm, gọi điện cho mẹ. Số 1 nghe nhiều dễ thấy bị quản. Một thoả thuận nhỏ giúp nhiều: số 6 chỉ nhắc một lần, số 1 trả lời rõ 'anh nghe rồi' thay vì im."
+    },
+    {
+     "tieu_de": "Số 1 và số 6 làm việc chung",
+     "doan": "Số 1 hợp vai đặt mục tiêu, số 6 hợp vai chăm khách, giữ đội. Trong một nhóm, số 6 hay nhận thêm việc của người khác vì khó từ chối; số 1 nên để ý chia lại cho công bằng. Số 6 cũng cần được hỏi ý khi số 1 thay đổi kế hoạch có ảnh hưởng đến người trong nhóm."
+    },
+    {
+     "tieu_de": "Số 1 và số 6 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Thay 'em lo nhiều quá' bằng 'cảm ơn em đã nhớ lịch khám của mẹ'.",
+      "Thay 'anh làm gì cũng không hỏi' bằng 'việc này có liên quan cả nhà, mình bàn năm phút nhé'.",
+      "Số 6 hỏi mình: lời nhắc này giúp người kia hay giúp mình bớt lo?"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 1–6 theo từng quan hệ",
+    "chu_thich": "Cặp hướng về gia đình; cột giữa thường xoay quanh lời cảm ơn và khoảng tự quyết.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Một người che chở, một người chăm sóc.",
+      "Số 6 có thấy mình được ghi nhận không.",
+      "Số 1 viết một tin nhắn cảm ơn có việc cụ thể."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà có hướng đi và có hơi ấm.",
+      "Phần nào số 1 được tự quyết, không bị nhắc.",
+      "Thoả thuận 'nhắc một lần'."
+     ],
+     [
+      "Bạn bè",
+      "Số 1 rủ, số 6 lo đồ ăn và hỏi han mọi người.",
+      "Số 6 có phải lúc nào cũng là người chuẩn bị.",
+      "Lần này số 1 lo phần hậu cần."
+     ],
+     [
+      "Đồng nghiệp",
+      "Mục tiêu rõ, đội gắn kết.",
+      "Số 6 có ôm việc của người khác.",
+      "Rà danh sách việc của số 6, chuyển bớt hai việc."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 6 lo cho nhân viên số 1 như người nhà.",
+      "Số 1 cần quyền tự làm hơn sự quan tâm.",
+      "Sếp hỏi 'em cần anh hỗ trợ hay để em tự chạy?'"
+     ],
+     [
+      "Gia đình",
+      "Cha mẹ số 6 chăm con số 1 rất kỹ.",
+      "Con số 1 muốn tự quyết sớm.",
+      "Để con tự lo trọn một việc như chuẩn bị đồ đi học."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 6 có hay quản số 1 không?",
+     "dap": "Số 6 thường thể hiện thương bằng cách lo và nhắc, nên số 1 dễ hiểu thành quản. Khi số 1 nói ra mình cần phần nào được tự quyết, số 6 thường điều chỉnh được."
+    },
+    {
+     "hoi": "Số 33 với số 1 thì đọc cặp nào?",
+     "dap": "Số 33 được quy về gốc 6 khi xem cặp số, nên đọc cặp 1–6. Người số 33 thường gánh trách nhiệm nhiều hơn số 6 thường, nên lời cảm ơn cụ thể càng có ý nghĩa."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 1 gắn với cá nhân và hướng đi, số 6 gắn với trách nhiệm, gia đình và sự chăm sóc; cặp này thường được mô tả là vững khi hai vai được ghi nhận ngang nhau."
+    }
+   ],
+   "y_chinh": [
+    "Số 1 lo hướng đi, số 6 lo người trong nhà",
+    "Lời cảm ơn cụ thể quan trọng với số 6",
+    "Thoả thuận 'nhắc một lần' cho số 6",
+    "Số 1 cần một phần được tự quyết"
+   ]
+  },
+  "so-chu-dao-1-va-7": {
+   "muc": [
+    {
+     "tieu_de": "Số 1 và số 7 có hợp nhau không?",
+     "doan": "Số 1 và số 7 thường dễ chịu với nhau vì cả hai đều cần khoảng riêng và không bám víu. Chỗ cần để ý là cảm xúc ít được nói ra. Một buổi tối điển hình của cặp này: mỗi người một góc, một màn hình, êm nhưng ít chạm vào nhau. Êm lâu mà không trò chuyện dễ thành hai người sống song song."
+    },
+    {
+     "tieu_de": "Số 1 và số 7 khi yêu",
+     "doan": "Khi yêu, số 7 thường mở lòng chậm; số 1 quen làm nhanh nên dễ hỏi dồn. Số 7 cần thời gian nghĩ trước khi trả lời câu quan trọng, và đó không phải là lạnh nhạt. Ngược lại, số 1 cần biết số 7 đang nghĩ gì, dù chỉ một câu. Thói quen 'kể nhau nghe một điều thật mỗi tuần' hợp với cả hai."
+    },
+    {
+     "tieu_de": "Số 1 và số 7 làm việc chung",
+     "doan": "Số 7 hợp vai phân tích, kiểm tra giả định; số 1 hợp vai quyết và đi. Một dự án tốt của cặp này thường có số 7 viết bản phân tích, số 1 chốt trong một buổi. Vướng khi số 1 quyết trước khi đọc, hoặc số 7 phân tích mãi không đưa kết luận."
+    },
+    {
+     "tieu_de": "Số 1 và số 7 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 1 muốn câu trả lời ngay — thử 'em nghĩ đến tối rồi nói anh nhé'.",
+      "Số 7 rút vào im lặng — thử báo trước 'mình cần một tiếng yên tĩnh, không phải giận'.",
+      "Nói chuyện sâu hợp hơn khi đi bộ hay ngồi cạnh nhau, ít hợp khi đối diện căng thẳng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 1–7 theo từng quan hệ",
+    "chu_thich": "Cặp tôn trọng khoảng riêng; các ô gợi cách giữ khoảng riêng mà vẫn gần.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Không bám víu, không ghen vặt.",
+      "Mỗi người đang nghĩ gì mà chưa nói.",
+      "Một buổi đi bộ mỗi tuần, chỉ để kể chuyện."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà yên tĩnh, ít va chạm.",
+      "Lâu rồi hai người có làm gì cùng nhau không.",
+      "Chọn một sở thích chung, làm hai lần mỗi tháng."
+     ],
+     [
+      "Bạn bè",
+      "Bạn ít gặp nhưng gặp là nói chuyện thật.",
+      "Số 7 biến mất lâu có làm số 1 tự ái không.",
+      "Hẹn ngày gặp lần sau ngay cuối buổi gặp này."
+     ],
+     [
+      "Đồng nghiệp",
+      "Số 7 phân tích, số 1 chốt.",
+      "Khi nào phân tích là đủ để quyết.",
+      "Đặt hạn cho bản phân tích trước buổi họp."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 7 cần lập luận, nhân viên số 1 cần quyền làm.",
+      "Số 1 có đủ dữ liệu khi đề xuất không.",
+      "Mỗi đề xuất kèm hai con số làm căn cứ."
+     ],
+     [
+      "Gia đình",
+      "Người thân 1 và 7 ít nói chuyện tình cảm.",
+      "Có điều gì cả hai chưa từng nói với nhau.",
+      "Viết cho nhau một tấm thiệp dịp Tết."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 7 có lạnh lùng với số 1 không?",
+     "dap": "Số 7 thường kín đáo hơn là lạnh. Họ thể hiện quan tâm bằng sự chú ý, câu hỏi kỹ, lời khuyên có suy nghĩ. Số 1 hiểu được điều này thì bớt thấy mình bị gạt ra."
+    },
+    {
+     "hoi": "Cặp 1–7 hay quên điều gì?",
+     "dap": "Hay quên nói ra cảm xúc, vì cả hai đều quen tự xử lý. Một câu ngắn kiểu 'hôm nay anh mệt vì chuyện công ty' cũng đủ để người kia không đoán sai."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 1 là ý chí và hành động, số 7 là suy xét và chiều sâu; cặp này thường được mô tả là tôn trọng nhau nhưng cần chủ động trò chuyện."
+    }
+   ],
+   "y_chinh": [
+    "Cả hai cần khoảng riêng, ít bám víu",
+    "Dễ thành hai người sống song song",
+    "Số 7 cần thời gian nghĩ, không phải lạnh",
+    "Kể nhau nghe một điều thật mỗi tuần"
+   ]
+  },
+  "so-chu-dao-1-va-8": {
+   "muc": [
+    {
+     "tieu_de": "Số 1 và số 8 có hợp nhau không?",
+     "doan": "Số 1 và số 8 thường rất mạnh khi chung mục tiêu, vì cả hai đều thích kết quả và không ngại việc khó. Căng thẳng hay đến từ quyền lực: ai đứng tên, ai phát biểu, ai được công nhận. Cặp này ít cãi to mà hay cạnh tranh ngầm, như cùng muốn có thu nhập cao hơn người kia."
+    },
+    {
+     "tieu_de": "Số 1 và số 8 khi yêu, khi cưới",
+     "doan": "Khi yêu, hai người hấp dẫn nhau vì sự tự tin. Sau cưới, tiền và sự nghiệp dễ thành chủ đề nhạy. Ví dụ: một người được thăng chức, người kia vui nhưng thấy lạ trong lòng. Gọi tên cảm giác đó ra thay vì giấu thường làm cả hai nhẹ hơn. Tách rõ tài khoản chung và riêng cũng giúp bớt so đo."
+    },
+    {
+     "tieu_de": "Số 1 và số 8 làm việc chung",
+     "doan": "Hợp vai đồng sáng lập nếu tách quyền ngay từ đầu: một người lo sản phẩm, một người lo tài chính và vận hành. Vướng khi cả hai cùng muốn là gương mặt đại diện. Một văn bản ngắn ghi ai quyết gì, ký trước khi bắt đầu, giúp nhiều hơn mọi lời hứa miệng."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 1–8",
+     "danh_sach": [
+      "Mỗi người nói một điều mình ngưỡng mộ ở người kia, không kèm 'nhưng'.",
+      "Cùng chọn một 'đối thủ' bên ngoài: một mục tiêu tiết kiệm, một giải chạy, một dự án.",
+      "Một buổi không nhắc đến công việc hay tiền.",
+      "Cuối tuần, hỏi nhau: 'Có lúc nào tuần này mình thấy đang thi với nhau không?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 1–8 theo từng quan hệ",
+    "chu_thich": "Cặp tham vọng; các ô gợi cách để hai sức mạnh cùng hướng ra ngoài.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Cùng tự tin, cùng có chí.",
+      "Ai nhường khi lịch hai người vướng nhau.",
+      "Một tối mỗi tuần không bàn công việc."
+     ],
+     [
+      "Vợ chồng",
+      "Xây được tài sản và sự nghiệp.",
+      "Tiền chung, tiền riêng chia thế nào.",
+      "Lập ba tài khoản: của anh, của em, của nhà."
+     ],
+     [
+      "Bạn bè",
+      "Bạn giúp nhau kết nối cơ hội.",
+      "Có lúc nào thành cuộc thi ai giỏi hơn.",
+      "Chúc mừng thành công của người kia trước khi kể chuyện mình."
+     ],
+     [
+      "Đồng nghiệp",
+      "Hai người giỏi, hướng kết quả.",
+      "Ai đứng tên, ai trình bày.",
+      "Viết ra vai và quyền của mỗi người trong dự án."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 8 cần kết quả, nhân viên số 1 tự chạy được việc.",
+      "Số 1 muốn được công nhận ở mức nào.",
+      "Nhân viên số 1 hỏi rõ tiêu chí lên vị trí kế tiếp."
+     ],
+     [
+      "Gia đình",
+      "Cha con 1 và 8 cùng mạnh mẽ, ít nhường.",
+      "Tranh luận tiền bạc trước mặt người ngoài.",
+      "Bàn chuyện tiền nhà chỉ trong phòng kín."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 1 và số 8 có hay tranh giành không?",
+     "dap": "Có thể, vì cả hai đều quen ở vị trí dẫn. Tranh giành giảm rõ khi hai người có chung một mục tiêu bên ngoài để cùng nhắm vào, thay vì đo nhau."
+    },
+    {
+     "hoi": "Cặp 1–8 hợp kinh doanh chung không?",
+     "dap": "Thường hợp vì cả hai đều quyết đoán và hướng kết quả. Điều kiện là tách vai, tách quyền rõ từ đầu và có cơ chế khi hai người bất đồng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 1 là cá nhân và khởi xướng, số 8 là quyền lực, tổ chức và vật chất; cặp này thường được mô tả là xây được nhiều khi không đấu với nhau."
+    }
+   ],
+   "y_chinh": [
+    "Cả hai mạnh, hướng kết quả",
+    "Dễ cạnh tranh ngầm về công và tiền",
+    "Chung một 'đối thủ' bên ngoài",
+    "Ghi rõ vai và quyền trước khi làm chung"
+   ]
+  },
+  "so-chu-dao-1-va-9": {
+   "muc": [
+    {
+     "tieu_de": "Số 1 và số 9 có hợp nhau không?",
+     "doan": "Số 1 và số 9 thường gặp nhau ở những việc có ý nghĩa: số 9 thấy điều cần làm cho nhiều người, số 1 biến nó thành kế hoạch. Khác biệt nằm ở trọng tâm. Số 1 nghĩ 'mình đạt được gì', số 9 nghĩ 'mọi người được gì'. Khi hiểu điều này, hai người bớt trách nhau."
+    },
+    {
+     "tieu_de": "Số 1 và số 9 khi yêu",
+     "doan": "Khi yêu, số 9 lãng mạn, bao dung; số 1 chủ động, che chở. Va chạm hay đến khi số 9 dành nhiều thời gian giúp bạn bè, họ hàng, còn số 1 muốn hai người có kế hoạch riêng. Số 1 dễ nói 'em lo chuyện người ta nhiều quá'; số 9 nghe thành bị chê nhỏ nhen. Thay bằng 'anh muốn có em tối thứ Bảy này' dễ lọt tai hơn."
+    },
+    {
+     "tieu_de": "Số 1 và số 9 làm việc chung",
+     "doan": "Hợp các việc vừa cần kết quả vừa cần lý do: dự án cộng đồng, giáo dục, doanh nghiệp có mục đích xã hội. Một ví dụ: số 9 nghĩ ra chương trình quyên sách cho trường vùng xa, số 1 lo xe, lịch, người nhận. Vướng khi số 9 nói tầm nhìn mà không có số liệu, hoặc số 1 bỏ qua câu chuyện để chỉ nhìn chỉ tiêu."
+    },
+    {
+     "tieu_de": "Số 1 và số 9 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 1 thấy số 9 mơ hồ — hỏi 'bước đầu tiên tuần này là gì?'.",
+      "Số 9 thấy số 1 chỉ lo cho mình — kể cho số 1 nghe kết quả cụ thể của việc tốt, số 1 thường mềm lại.",
+      "Cả hai đều có lúc nóng: hẹn nhau dừng mười phút trước khi nói tiếp."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 1–9 theo từng quan hệ",
+    "chu_thich": "Một người hành động, một người mang lý do; các ô giúp hai thứ đó gặp nhau.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Che chở và bao dung.",
+      "Thời gian cho hai người và cho người ngoài.",
+      "Giữ một tối mỗi tuần chỉ dành cho nhau."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà có chí hướng và có lòng tốt.",
+      "Bao nhiêu tiền nhà dành cho giúp người khác.",
+      "Thống nhất một tỉ lệ thu nhập cho việc thiện nguyện."
+     ],
+     [
+      "Bạn bè",
+      "Cùng làm việc tốt, số 1 tổ chức, số 9 kết nối.",
+      "Số 1 có thấy mình bị cuốn vào việc không muốn.",
+      "Mỗi người chọn một việc chung theo ý mình."
+     ],
+     [
+      "Đồng nghiệp",
+      "Kết quả đo được, có ý nghĩa.",
+      "Mục tiêu số và mục tiêu giá trị, cái nào trước.",
+      "Mỗi dự án ghi hai dòng: con số và lý do."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 9 có tầm nhìn, nhân viên số 1 hiện thực hoá nhanh.",
+      "Tầm nhìn có thành việc cụ thể kịp không.",
+      "Sau mỗi buổi họp, nhân viên số 1 gửi lại ba việc cần làm."
+     ],
+     [
+      "Gia đình",
+      "Người thân số 9 lo cho cả họ, người số 1 lo cho nhà mình.",
+      "Ai gánh phần giúp đỡ họ hàng.",
+      "Ngồi lại cùng quyết giúp ai, đến mức nào."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 9 có thấy số 1 ích kỷ không?",
+     "dap": "Có lúc, khi số 1 tập trung vào mục tiêu riêng. Thường số 1 không ích kỷ mà chỉ nhìn gần; khi thấy việc chung có kết quả rõ, số 1 hay góp sức rất mạnh."
+    },
+    {
+     "hoi": "Cặp 1–9 nên làm gì chung?",
+     "dap": "Một dự án vừa có kết quả đo được vừa có ý nghĩa với người khác, ví dụ dạy kèm miễn phí, trồng cây, gây quỹ nhỏ. Cả hai đều thấy phần mình cần trong việc đó."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 1 mở đầu chu kỳ, số 9 khép lại chu kỳ và gắn với lòng nhân ái; cặp này thường được mô tả là hành động gặp lý tưởng."
+    }
+   ],
+   "y_chinh": [
+    "Số 1 làm, số 9 mang lý do",
+    "Số 1 nghĩ 'mình đạt gì', số 9 nghĩ 'mọi người được gì'",
+    "Giữ thời gian riêng trước việc giúp người",
+    "Mỗi dự án: một con số và một lý do"
+   ]
+  },
+  "so-chu-dao-2-va-2": {
+   "muc": [
+    {
+     "tieu_de": "Hai người cùng số 2 có hợp nhau không?",
+     "doan": "Hai người số 2 thường hiểu nhau qua ánh mắt, ít khi to tiếng, và rất biết chăm nhau. Chỗ yếu của cặp này là sự im lặng có thiện ý. Ai cũng nhường để giữ yên, nên chuyện nhỏ không được nói, và sau vài tháng thành một khoảng cách cả hai đều thấy mà không ai gọi tên."
+    },
+    {
+     "tieu_de": "Số 2 và số 2 khi yêu, khi cưới",
+     "doan": "Khi yêu, cặp 2–2 rất dịu: nhớ ngày kỷ niệm, để ý người kia thích uống gì. Sau cưới, cả hai dễ rơi vào vòng 'em tưởng anh muốn thế' — 'anh tưởng em muốn thế', và kết quả là cả nhà sống theo điều không ai thật sự chọn. Hiệu ứng soi gương ở đây là thấy rõ thói quen nhịn của chính mình qua người kia."
+    },
+    {
+     "tieu_de": "Số 2 và số 2 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Vướng khi cả hai cùng hỏi 'sao cũng được' — luật nhỏ: người được hỏi trước phải chọn.",
+      "Vướng khi giận mà không nói, chỉ trầm lại — câu mở đầu dễ: 'Hôm qua có một chuyện làm em hơi buồn, em kể nhé'.",
+      "Vướng khi cần quyết việc lớn mà không ai muốn chịu trách nhiệm — chia lượt: lần này anh quyết, lần sau em."
+     ]
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 2–2",
+     "danh_sach": [
+      "Mỗi tối, mỗi người nói một điều mình thích và một điều mình chưa thích trong ngày.",
+      "Chọn một việc nhỏ mà mỗi người tự quyết, không hỏi ý người kia.",
+      "Giữa tuần, kể cho nhau một lần mình đã nhịn mà không nói.",
+      "Cuối tuần, mỗi người nói một mong muốn cho tuần sau, bắt đầu bằng 'Em muốn…' hoặc 'Anh muốn…'."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 2–2 theo từng quan hệ",
+    "chu_thich": "Cặp rất ấm; cột giữa gần như luôn là những điều cả hai ngại nói thẳng.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Dịu dàng, nhớ từng chi tiết nhỏ.",
+      "Điều chưa hài lòng đang được giữ trong lòng.",
+      "Hẹn mỗi tuần một lần nói thẳng một điều chưa vui."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà êm, ít to tiếng.",
+      "Ai chịu trách nhiệm quyết việc lớn.",
+      "Chia lượt quyết theo từng việc lớn trong năm."
+     ],
+     [
+      "Bạn bè",
+      "Bạn tri kỷ, giữ bí mật cho nhau.",
+      "Có ai chỉ toàn nghe mà không kể chuyện mình.",
+      "Lần gặp tới, người hay nghe được kể trước."
+     ],
+     [
+      "Đồng nghiệp",
+      "Phối hợp êm, tỉ mỉ.",
+      "Khi cả hai đều ngại đưa ý kiến trong họp.",
+      "Mỗi người chuẩn bị sẵn một ý để nói trong buổi họp."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 2 và nhân viên số 2 tôn trọng nhau.",
+      "Tin xấu có được báo sớm không.",
+      "Thoả thuận báo vấn đề trong ngày, dù chưa có cách giải."
+     ],
+     [
+      "Gia đình",
+      "Hai người thân hay nhường nhau để nhà yên.",
+      "Nhường có thành ấm ức không.",
+      "Hỏi nhau 'có điều gì mình đã chiều mà thật ra không muốn?'"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hai số 2 có nhàm chán không?",
+     "dap": "Không hẳn nhàm, nhưng dễ thiếu va chạm cần thiết. Một chút tranh luận thẳng thắn thường làm cặp 2–2 gần hơn chứ không xa hơn."
+    },
+    {
+     "hoi": "Số 11 và số 2 có phải là cặp cùng số?",
+     "dap": "Khi xem cặp số, 11 được quy về 2 nên đọc như cặp 2–2. Người số 11 thường nhạy cảm và có trực giác mạnh hơn, nên cảm giác bị hiểu lầm có thể đến nhanh hơn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 2 gắn với hợp tác, sự nhạy cảm và nhu cầu hoà hợp; hai số 2 cạnh nhau làm nổi rõ cả sự ân cần lẫn thói quen né va chạm."
+    }
+   ],
+   "y_chinh": [
+    "Hai số 2: hiểu nhau, ít to tiếng",
+    "Im lặng có thiện ý dễ thành khoảng cách",
+    "Người được hỏi trước phải chọn",
+    "Mỗi tuần nói thẳng một điều chưa vui"
+   ]
+  },
+  "so-chu-dao-2-va-3": {
+   "muc": [
+    {
+     "tieu_de": "Số 2 và số 3 có hợp nhau không?",
+     "doan": "Số 2 và số 3 thường tạo không khí vui và ấm: số 3 kể, số 2 lắng nghe và cười đúng chỗ. Rủi ro nằm ở lời nói. Số 3 quen đùa để làm vui, số 2 lại nhớ lâu những câu đùa chạm vào mình. Một câu đùa vô tình trong bữa tiệc có thể làm số 2 buồn cả tuần."
+    },
+    {
+     "tieu_de": "Số 2 và số 3 khi yêu",
+     "doan": "Khi yêu, số 3 làm số 2 thấy đời nhẹ hơn; số 2 cho số 3 cảm giác được nghe thật lòng. Va chạm hay xảy ra ở nơi đông người: số 3 thoải mái kể chuyện riêng của hai người cho bạn bè nghe như một câu chuyện vui, số 2 thấy bị phơi ra. Thoả thuận trước chuyện gì được kể, chuyện gì giữ riêng, giúp bớt rất nhiều."
+    },
+    {
+     "tieu_de": "Số 2 và số 3 làm việc chung",
+     "doan": "Hợp các việc có giao tiếp và chăm khách: tổ chức sự kiện, bán hàng, dạy học, chăm sóc cộng đồng. Số 3 thu hút người đến, số 2 giữ họ ở lại. Vướng khi số 3 hứa với khách nhiều hơn khả năng, rồi số 2 âm thầm lo phần còn lại."
+    },
+    {
+     "tieu_de": "Số 2 và số 3 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 3 hỏi ngay sau câu đùa: 'câu đó có làm em buồn không?'.",
+      "Số 2 nói ra trong ngày, không để qua tuần: 'lúc nãy anh nói thế em hơi chạnh lòng'.",
+      "Chuyện nghiêm túc nên nói lúc số 3 đang thư thả, không nói khi họ đang hứng khởi giữa đám đông."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 2–3 theo từng quan hệ",
+    "chu_thich": "Ấm và vui; cột giữa chủ yếu xoay quanh lời đùa và chuyện riêng tư.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Vui, ấm, nhiều tiếng cười.",
+      "Câu đùa nào chạm vào số 2.",
+      "Lập 'danh sách không đùa' của mỗi người."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà rộn ràng, có người nghe, có người kể.",
+      "Chuyện riêng của hai người kể cho ai.",
+      "Thống nhất ba chuyện chỉ giữ trong nhà."
+     ],
+     [
+      "Bạn bè",
+      "Số 3 kết nối, số 2 giữ tình bạn bền.",
+      "Số 2 có thấy mình chỉ là khán giả.",
+      "Số 3 hỏi chuyện số 2 trước khi kể chuyện mình."
+     ],
+     [
+      "Đồng nghiệp",
+      "Thu hút khách và giữ khách.",
+      "Lời hứa với khách có vượt sức không.",
+      "Trước khi hứa, số 3 hỏi số 2 một câu."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 3 nhiều ý tưởng, nhân viên số 2 tỉ mỉ.",
+      "Ý tưởng đổi nhanh có làm số 2 mệt.",
+      "Nhân viên số 2 tóm lại việc cần làm sau mỗi buổi."
+     ],
+     [
+      "Gia đình",
+      "Con số 3 hay kể, mẹ/bố số 2 hay nghe.",
+      "Lời trêu trong nhà có làm ai tổn thương.",
+      "Cả nhà hẹn trêu nhau thì hỏi lại người bị trêu."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Vì sao số 2 dễ buồn vì số 3?",
+     "dap": "Vì số 3 thường nói nhanh và đùa nhiều để làm vui, còn số 2 nghe kỹ từng chữ. Số 3 ít khi có ý xấu; chỉ cần hỏi lại và nghe phản hồi là đỡ nhiều."
+    },
+    {
+     "hoi": "Cặp 2–3 có hợp làm bạn thân không?",
+     "dap": "Thường rất hợp. Số 3 mang niềm vui, số 2 mang sự tin cậy. Tình bạn bền hơn khi số 3 cũng là người lắng nghe vào lúc số 2 cần."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 2 gắn với sự nhạy cảm và lắng nghe, số 3 gắn với lời nói và sự vui tươi; cặp này thường được mô tả là ấm, cần cẩn thận với lời đùa."
+    }
+   ],
+   "y_chinh": [
+    "Số 3 kể, số 2 lắng nghe",
+    "Câu đùa vô tình dễ làm số 2 buồn lâu",
+    "Thống nhất chuyện gì giữ riêng",
+    "Nói chuyện nghiêm túc lúc thư thả"
+   ]
+  },
+  "so-chu-dao-2-va-4": {
+   "muc": [
+    {
+     "tieu_de": "Số 2 và số 4 có hợp nhau không?",
+     "doan": "Số 2 và số 4 thường là cặp bền: trung thành, đều đặn, ít biến động. Số 4 cho số 2 cảm giác yên ổn; số 2 làm cuộc sống nề nếp của số 4 có hơi ấm. Chỗ cần để ý là nhịp đều quá dễ thành nhàm, và số 2 có thể thấy thiếu lời quan tâm vì số 4 hay thể hiện bằng việc làm."
+    },
+    {
+     "tieu_de": "Số 2 và số 4 khi cưới",
+     "doan": "Sau cưới, số 4 lo hoá đơn, sửa đồ, lên kế hoạch tiết kiệm; số 2 lo bữa cơm, họ hàng, cảm xúc trong nhà. Cả hai đều làm nhiều, nhưng ngôn ngữ khác nhau. Số 4 nghĩ 'tôi sửa vòi nước cho em là thương'; số 2 mong một câu 'hôm nay em thế nào?'. Dịch ngôn ngữ của nhau là việc chính của cặp này."
+    },
+    {
+     "tieu_de": "Số 2 và số 4 làm việc chung",
+     "doan": "Rất hợp các việc cần sự cẩn thận và đều tay: kế toán, hành chính, quản lý kho, chăm sóc khách lâu năm. Số 4 làm quy trình, số 2 giữ mối quan hệ. Vướng khi số 4 góp ý thẳng về lỗi, số 2 nghe thành bị chê cả con người."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 2–4",
+     "danh_sach": [
+      "Số 4 lên lịch một bất ngờ nhỏ: một bó hoa, một quán mới, một lá thư.",
+      "Số 2 nói rõ một việc số 4 đã làm mà mình rất quý.",
+      "Đổi một thói quen cố định trong tuần, như đi chợ ở chỗ khác.",
+      "Cuối tuần, hỏi nhau: 'Tuần này điều gì làm mình thấy được thương nhất?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 2–4 theo từng quan hệ",
+    "chu_thich": "Cặp ổn định; các ô gợi cách giữ ổn định mà không khô.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Chung thuỷ, đáng tin.",
+      "Số 2 cần nghe lời quan tâm, bên cạnh việc làm.",
+      "Số 4 nhắn một câu hỏi thăm mỗi trưa."
+     ],
+     [
+      "Vợ chồng",
+      "Nề nếp vững, tài chính có kế hoạch.",
+      "Cuộc sống có đang lặp lại quá đều.",
+      "Lên lịch một điều mới mỗi tháng."
+     ],
+     [
+      "Bạn bè",
+      "Bạn đúng hẹn, giữ lời.",
+      "Số 2 có ngại nhờ vì sợ phiền.",
+      "Số 2 nhờ số 4 một việc cụ thể."
+     ],
+     [
+      "Đồng nghiệp",
+      "Cẩn thận, đều tay, ít sai.",
+      "Góp ý lỗi theo cách nào để không thành chê.",
+      "Góp ý theo thứ tự: ghi nhận, lỗi, cách sửa."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 4 cần đúng hạn, nhân viên số 2 tận tâm.",
+      "Số 2 có dám hỏi khi yêu cầu chưa rõ.",
+      "Gửi lại tóm tắt yêu cầu trước khi bắt đầu."
+     ],
+     [
+      "Gia đình",
+      "Bố/mẹ số 4 giữ nếp, con số 2 nhạy cảm.",
+      "Lời nhắc nếp nhà có quá cứng.",
+      "Kèm một câu khen trước mỗi lời nhắc."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 4 có khô khan với số 2 không?",
+     "dap": "Số 4 thường không khô mà quen thể hiện bằng hành động. Số 2 cần lời nói; khi số 4 tập nói thêm một câu, khoảng cách thường thu hẹp nhanh."
+    },
+    {
+     "hoi": "Số 22 và số 11 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 22 quy về 4 và 11 quy về 2, nên đọc cặp 2–4. Hai số cái này thường mang áp lực cao hơn, nên nhịp nghỉ chung càng cần."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 2 là hợp tác và cảm xúc, số 4 là nền tảng và trật tự; cặp này thường được mô tả là bền, cần thêm chút bất ngờ và lời nói ấm."
+    }
+   ],
+   "y_chinh": [
+    "Cặp bền: trung thành, đều đặn",
+    "Số 4 thương bằng việc, số 2 cần lời",
+    "Lên lịch bất ngờ nhỏ mỗi tháng",
+    "Góp ý: ghi nhận trước, lỗi sau"
+   ]
+  },
+  "so-chu-dao-2-va-5": {
+   "muc": [
+    {
+     "tieu_de": "Số 2 và số 5 có hợp nhau không?",
+     "doan": "Số 2 và số 5 thường hút nhau vì khác nhau: số 5 kéo theo chuyện lạ, số 2 giữ chỗ ấm để quay về. Điểm hay hiểu lầm là nhu cầu khoảng cách. Số 5 cần đi, cần thay đổi; số 2 cần sự có mặt đều. Khi số 5 vắng vài ngày, số 2 dễ nghĩ là hết thương, dù sự thật không phải vậy."
+    },
+    {
+     "tieu_de": "Số 2 và số 5 khi yêu",
+     "doan": "Lúc mới yêu, số 5 kéo số 2 ra khỏi vùng quen: đi phượt, thử món lạ, gặp người mới. Số 2 làm số 5 thấy có nơi để quay về. Va chạm thường đến với tin nhắn: số 5 bận nên trả lời trễ, số 2 đọc sự im lặng thành tín hiệu xấu. Một thoả thuận cụ thể — mỗi ngày một tin nhắn trước khi ngủ, dù ngắn — giúp cả hai yên."
+    },
+    {
+     "tieu_de": "Số 2 và số 5 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Đưa nhu cầu ra bằng con số: 'em cần mình ở nhà cùng nhau ít nhất ba tối mỗi tuần'.",
+      "Số 5 báo trước: 'cuối tuần này anh đi với nhóm bạn, Chủ nhật về ăn tối với em'.",
+      "Số 2 có hoạt động riêng khi số 5 đi vắng, để thời gian chờ không thành thời gian lo.",
+      "Tránh câu 'anh lúc nào cũng đi' — thay bằng 'tuần này em nhớ anh nhiều'."
+     ]
+    },
+    {
+     "tieu_de": "Số 2 và số 5 làm việc chung",
+     "doan": "Hợp các việc có cả phần ra ngoài và phần ở lại: số 5 đi gặp khách, mở thị trường; số 2 giữ liên lạc, chăm khách cũ, làm hồ sơ. Vướng khi số 5 đổi kế hoạch phút chót mà số 2 đã báo khách theo kế hoạch cũ."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 2–5 theo từng quan hệ",
+    "chu_thich": "Gắn bó và tự do; cột giữa là những con số cụ thể giúp hai nhu cầu này không giẫm lên nhau.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Mới mẻ và ấm áp.",
+      "Bao nhiêu tối mỗi tuần ở cạnh nhau là vừa.",
+      "Viết ra con số mỗi người cần, gặp nhau ở giữa."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà có người giữ nếp, có người mang chuyện mới.",
+      "Đi xa, về muộn thì báo thế nào.",
+      "Một tin nhắn ngắn mỗi khi đổi lịch."
+     ],
+     [
+      "Bạn bè",
+      "Số 5 rủ đi, số 2 giữ liên lạc cả nhóm.",
+      "Số 5 biến mất lâu có làm số 2 hụt hẫng.",
+      "Số 5 gọi lại sau mỗi chuyến đi."
+     ],
+     [
+      "Đồng nghiệp",
+      "Ra ngoài mở việc, ở lại giữ việc.",
+      "Đổi kế hoạch phút chót.",
+      "Đổi kế hoạch thì báo số 2 trước khi báo khách."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 5 năng động, nhân viên số 2 tỉ mỉ.",
+      "Thay đổi liên tục có làm số 2 rối.",
+      "Mỗi lần đổi hướng, gửi một tin tóm tắt ba dòng."
+     ],
+     [
+      "Gia đình",
+      "Người thân số 5 hay đi xa, người số 2 ở nhà chờ.",
+      "Người ở nhà có thấy bị bỏ lại.",
+      "Người đi xa gọi video cho nhà vào một giờ cố định."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 5 đi nhiều có phải là hết thương số 2?",
+     "dap": "Thường không. Số 5 cần đi để thấy mình sống; việc đó không đo được tình cảm. Điều số 2 cần là sự báo trước và một vài điểm hẹn cố định."
+    },
+    {
+     "hoi": "Số 2 có làm số 5 thấy ngột ngạt không?",
+     "dap": "Có thể, nếu số 2 hỏi han dồn dập khi lo. Hỏi một câu rõ ràng và chờ câu trả lời thường hiệu quả hơn nhiều tin nhắn liên tiếp."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 2 gắn với sự gắn bó và hợp tác, số 5 gắn với tự do và trải nghiệm; cặp này thường được mô tả là học được nhiều từ nhau nếu nói rõ nhu cầu."
+    }
+   ],
+   "y_chinh": [
+    "Số 5 mang điều mới, số 2 mang hơi ấm",
+    "Vắng mặt dễ bị đọc thành hết thương",
+    "Nói nhu cầu bằng con số cụ thể",
+    "Đổi kế hoạch thì báo trước một tin"
+   ]
+  },
+  "so-chu-dao-2-va-6": {
+   "muc": [
+    {
+     "tieu_de": "Số 2 và số 6 có hợp nhau không?",
+     "doan": "Số 2 và số 6 thường là cặp rất ấm, vì cả hai đều biết lo cho người khác. Nhà của cặp này hay có cơm nóng, có người hỏi han. Chỗ khó là cả hai cho nhiều và ít đòi. Khi một người mệt mà không nói, người kia cũng không hỏi vì đang bận lo cho người khác."
+    },
+    {
+     "tieu_de": "Số 2 và số 6 khi cưới",
+     "doan": "Sau cưới, số 6 thường nhận phần lo lớn: con cái, họ hàng, lịch giỗ chạp; số 2 lo phần nhỏ nhặt hằng ngày và giữ êm khí trong nhà. Cả hai dễ rơi vào kiểu 'mình chịu được', cho đến khi cái mệt dồn lại thành một lần bùng ra. Việc nên làm là mỗi tuần nói một nhu cầu của chính mình, kể cả nhu cầu được ngồi yên một mình."
+    },
+    {
+     "tieu_de": "Số 2 và số 6 làm việc chung",
+     "doan": "Hợp các nghề chăm người: giáo dục, y tá điều dưỡng, chăm sóc khách hàng, nhân sự. Hai người làm nhóm thường rất được lòng mọi người. Vướng khi cả hai cùng nhận việc của người khác, đến cuối tháng không còn sức cho việc của chính mình."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 2–6",
+     "danh_sach": [
+      "Mỗi người viết một danh sách 'việc mình đang lo cho người khác' — đếm xem bao nhiêu dòng.",
+      "Mỗi người chọn bỏ hoặc nhờ người khác một việc trong danh sách.",
+      "Một buổi tối người này chăm người kia, đổi vai vào buổi khác.",
+      "Cuối tuần, mỗi người nói: 'Tuần sau mình cần…'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 2–6 theo từng quan hệ",
+    "chu_thich": "Cặp cho đi nhiều; các ô nhắc hai người nhận lại một chút.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Chu đáo, biết lo cho nhau.",
+      "Ai đang mệt mà không nói.",
+      "Hỏi nhau mỗi tối 'hôm nay em/anh cần gì?'"
+     ],
+     [
+      "Vợ chồng",
+      "Nhà ấm, có nếp, đông người qua lại.",
+      "Trách nhiệm họ hàng hai bên chia thế nào.",
+      "Lên lịch thăm hai bên công bằng."
+     ],
+     [
+      "Bạn bè",
+      "Hai người bạn lúc nào cũng có mặt khi cần.",
+      "Có ai chỉ cho mà không nhận.",
+      "Người hay giúp lần này để bạn giúp lại."
+     ],
+     [
+      "Đồng nghiệp",
+      "Được lòng đồng nghiệp, làm nhóm êm.",
+      "Nhận việc của người khác đến mức nào.",
+      "Mỗi người tập từ chối một việc không phải của mình."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 6 lo cho nhân viên, nhân viên số 2 tận tụy.",
+      "Số 2 có ngại nói khi quá tải.",
+      "Hẹn báo khối lượng việc mỗi thứ Hai."
+     ],
+     [
+      "Gia đình",
+      "Mẹ/bố số 6 lo cả nhà, con số 2 hiểu chuyện.",
+      "Con có nhường quá sớm.",
+      "Để con nói một điều con muốn mà chưa dám xin."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 2–6 có dễ mệt mỏi không?",
+     "dap": "Dễ hơn các cặp khác ở chỗ cả hai cùng gánh việc chăm lo. Cái mệt không đến từ nhau mà từ việc cho đi quá nhiều; chia bớt việc và nói nhu cầu sớm thường giúp nhiều."
+    },
+    {
+     "hoi": "Số 33 với số 11 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 33 quy về 6 và 11 quy về 2, nên đọc cặp 2–6. Hai số cái này còn nhạy và gánh nhiều hơn, nên nhịp nghỉ riêng của mỗi người cần được giữ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 2 là sự quan tâm qua lại, số 6 là trách nhiệm và chăm sóc; cặp này thường được mô tả là rất ấm nhưng cần học cách nhận lại."
+    }
+   ],
+   "y_chinh": [
+    "Cặp rất ấm, cả hai biết lo cho nhau",
+    "Cho nhiều, ít đòi, dễ mệt ngầm",
+    "Mỗi tuần nói một nhu cầu của mình",
+    "Tập từ chối việc không phải của mình"
+   ]
+  },
+  "so-chu-dao-2-va-7": {
+   "muc": [
+    {
+     "tieu_de": "Số 2 và số 7 có hợp nhau không?",
+     "doan": "Số 2 và số 7 thường có một mối quan hệ yên tĩnh và sâu, ít ồn ào. Khác biệt chính là khoảng cách mỗi người cần. Số 2 thấy gần là được thương; số 7 thấy có không gian là được tôn trọng. Một buổi tối số 7 ngồi đọc sách một mình có thể làm số 2 nghĩ mình bị bỏ rơi."
+    },
+    {
+     "tieu_de": "Số 2 và số 7 khi yêu",
+     "doan": "Khi yêu, số 7 hay mở lòng với số 2 vì số 2 không ép, không phán xét. Số 2 thấy số 7 sâu sắc, đáng tin. Khó khăn đến khi số 7 rút vào trong lúc căng thẳng công việc mà không nói lý do. Chỉ cần một câu báo trước, số 2 đã đỡ đoán rất nhiều."
+    },
+    {
+     "tieu_de": "Số 2 và số 7 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 7 nói 'anh cần một mình tối nay, không phải vì em' — đủ để số 2 yên lòng.",
+      "Số 2 hỏi một câu rồi chờ, thay vì nhiều câu liên tiếp.",
+      "Chuyện sâu hợp nói qua thư, tin nhắn dài hoặc lúc đi dạo; số 7 trả lời tốt hơn khi có thời gian nghĩ.",
+      "Số 2 có một hoạt động riêng khi số 7 cần yên: gặp bạn, tập một môn, nấu món mới."
+     ]
+    },
+    {
+     "tieu_de": "Số 2 và số 7 làm việc chung",
+     "doan": "Hợp các việc cần chiều sâu và sự cẩn thận: nghiên cứu, viết, thư viện, tư vấn. Số 7 phân tích, số 2 giúp kết quả đến được với người khác bằng cách mềm mỏng. Vướng khi số 7 phê bình quá thẳng, số 2 nhận về mình."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 2–7 theo từng quan hệ",
+    "chu_thich": "Yên tĩnh và sâu; các ô giúp cân bằng giữa 'gần' và 'xa'.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Yên tĩnh, chân thành, ít ồn ào.",
+      "Lúc số 7 cần một mình, số 2 hiểu thế nào.",
+      "Thoả thuận một câu báo trước khi cần không gian."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà yên, hai người tôn trọng nhau.",
+      "Bao nhiêu thời gian riêng là vừa cho mỗi người.",
+      "Mỗi người có một góc riêng trong nhà."
+     ],
+     [
+      "Bạn bè",
+      "Bạn tâm sự, ít nhưng sâu.",
+      "Số 7 im lâu có làm số 2 lo.",
+      "Số 7 nhắn một câu hỏi thăm mỗi tuần."
+     ],
+     [
+      "Đồng nghiệp",
+      "Phân tích kỹ và trình bày mềm.",
+      "Góp ý thẳng của số 7.",
+      "Số 7 thêm một câu ghi nhận trước khi chỉ lỗi."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 7 cần căn cứ, nhân viên số 2 cẩn thận.",
+      "Số 2 có ngại hỏi lại khi chưa hiểu.",
+      "Viết câu hỏi ra trước khi gặp sếp."
+     ],
+     [
+      "Gia đình",
+      "Người thân số 7 trầm tính, người số 2 muốn gần.",
+      "Im lặng có bị hiểu là giận.",
+      "Hỏi thẳng 'anh im vì mệt hay vì có chuyện?'"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 7 có bỏ rơi số 2 không?",
+     "dap": "Thường không. Số 7 cần thời gian một mình để lấy lại sức, giống như số 2 cần trò chuyện để thấy yên. Hai nhu cầu đều thật; báo cho nhau biết là đủ."
+    },
+    {
+     "hoi": "Cặp 2–7 có hợp sống chung lâu dài không?",
+     "dap": "Nhiều cặp 2–7 sống chung rất êm nếu nhà có chỗ cho cả hai: góc riêng cho số 7 và thời gian trò chuyện đều cho số 2."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 2 gắn với nhu cầu gần gũi và hợp tác, số 7 gắn với nội tâm và suy ngẫm; cặp này thường được mô tả là sâu sắc, cần nói rõ về khoảng cách."
+    }
+   ],
+   "y_chinh": [
+    "Yên tĩnh, sâu, ít ồn ào",
+    "Số 2 cần gần, số 7 cần không gian",
+    "Một câu báo trước giúp số 2 bớt đoán",
+    "Chuyện sâu nói qua thư hoặc lúc đi dạo"
+   ]
+  },
+  "so-chu-dao-2-va-8": {
+   "muc": [
+    {
+     "tieu_de": "Số 2 và số 8 có hợp nhau không?",
+     "doan": "Số 2 và số 8 thường bổ sung tốt: số 8 lo đường lớn, tiền bạc, quyết định; số 2 lo sự gắn kết và cảm xúc trong nhà hay trong nhóm. Rủi ro là cán cân tiếng nói. Số 8 nói to và nhanh, số 2 nghĩ kỹ rồi mới nói; lâu dần số 2 không còn đưa ý kiến nữa."
+    },
+    {
+     "tieu_de": "Số 2 và số 8 khi cưới",
+     "doan": "Sau cưới, số 8 thường muốn quyết các khoản lớn: mua nhà, đầu tư, chọn trường. Số 2 hay nghĩ 'anh ấy rành hơn' và gật. Vấn đề không nằm ở quyết định đúng hay sai, mà ở cảm giác số 2 không được tính. Luật đơn giản: việc lớn cần cả hai cùng đồng ý, và số 2 được nói trước."
+    },
+    {
+     "tieu_de": "Số 2 và số 8 làm việc chung",
+     "doan": "Số 8 hợp vai điều hành, số 2 hợp vai trợ lý, điều phối, giữ đối tác. Nhiều doanh nghiệp nhỏ thành công nhờ cặp này. Vướng khi số 8 giao việc bằng giọng mệnh lệnh trước mặt người khác, số 2 thấy bị coi nhẹ nhưng không nói."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 2–8",
+     "danh_sach": [
+      "Trong mọi việc cần quyết tuần này, số 2 nói ý mình trước.",
+      "Số 8 nhắc lại ý số 2 bằng lời của mình trước khi trả lời.",
+      "Chọn một việc trong nhà để số 2 quyết toàn bộ.",
+      "Cuối tuần, số 8 hỏi: 'Có lúc nào tuần này em thấy bị át không?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 2–8 theo từng quan hệ",
+    "chu_thich": "Một người mạnh tiếng, một người giữ gắn kết; cột giữa là phần tiếng nói của số 2.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Che chở mạnh mẽ và dịu dàng.",
+      "Số 2 có dám nói không.",
+      "Số 2 nói ý mình trước trong mọi lựa chọn chung."
+     ],
+     [
+      "Vợ chồng",
+      "Kinh tế vững, nhà ấm.",
+      "Việc lớn quyết thế nào.",
+      "Luật: việc lớn cần cả hai cùng gật."
+     ],
+     [
+      "Bạn bè",
+      "Số 8 giúp kết nối cơ hội, số 2 giữ tình thân.",
+      "Tình bạn có thành quan hệ một chiều.",
+      "Số 8 hỏi chuyện số 2 trước khi nhờ việc."
+     ],
+     [
+      "Đồng nghiệp",
+      "Điều hành và điều phối.",
+      "Giọng giao việc trước tập thể.",
+      "Giao việc riêng, khen trước tập thể."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 8 đòi hỏi cao, nhân viên số 2 tận tụy.",
+      "Số 2 có báo khi quá tải.",
+      "Báo tiến độ kèm mức tải mỗi tuần."
+     ],
+     [
+      "Gia đình",
+      "Người số 8 lo kinh tế, người số 2 lo tình cảm cả nhà.",
+      "Tiếng nói của người số 2 trong việc tiền.",
+      "Họp tài chính nhà mỗi tháng, cả hai cùng xem số."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 8 có hay lấn át số 2 không?",
+     "dap": "Có thể, vì số 8 quen dẫn và nói mạnh. Thường số 8 không cố ý; khi được nhắc nhẹ, họ điều chỉnh nhanh, vì số 8 cũng coi trọng người bên cạnh."
+    },
+    {
+     "hoi": "Cặp 2–8 có hợp làm ăn không?",
+     "dap": "Thường hợp, nhất là khi số 8 điều hành và số 2 lo quan hệ đối tác, khách hàng. Cần ghi nhận công khai phần đóng góp của số 2."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 2 gắn với sự hợp tác và nhạy cảm, số 8 gắn với quyền lực và vật chất; cặp này thường được mô tả là bổ sung tốt khi tiếng nói được cân."
+    }
+   ],
+   "y_chinh": [
+    "Số 8 lo đường lớn, số 2 lo gắn kết",
+    "Số 8 dễ át, số 2 dễ im",
+    "Việc lớn: cả hai cùng đồng ý",
+    "Số 2 nói ý mình trước"
+   ]
+  },
+  "so-chu-dao-2-va-9": {
+   "muc": [
+    {
+     "tieu_de": "Số 2 và số 9 có hợp nhau không?",
+     "doan": "Số 2 và số 9 thường rất đồng cảm: cả hai đều giàu lòng thương và dễ xúc động trước chuyện của người khác. Mặt kia là hai người dễ hy sinh và mơ hồ trong việc thực tế, nhất là tiền bạc. Cho người quen vay mà không ghi lại là tình huống hay gặp ở cặp này."
+    },
+    {
+     "tieu_de": "Số 2 và số 9 khi yêu, khi cưới",
+     "doan": "Khi yêu, số 9 lãng mạn, số 2 chu đáo — hai người dễ thấy được hiểu. Sau cưới, số 9 hay mở rộng vòng lo lắng ra họ hàng, bạn bè, cộng đồng; số 2 đi theo vì thương, nhưng trong lòng mong có thêm thời gian riêng. Hai người nên hỏi nhau định kỳ: 'tháng này mình cho người ngoài nhiều hơn cho nhau không?'"
+    },
+    {
+     "tieu_de": "Số 2 và số 9 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Tiền: lập một kế hoạch chung, ghi rõ khoản giúp người khác tối đa bao nhiêu mỗi tháng.",
+      "Trách nhiệm: viết ra ai lo việc gì trong nhà, vì cả hai dễ nghĩ người kia đã lo.",
+      "Cảm xúc: số 2 nói 'em cần anh tối nay' thay vì chờ số 9 tự nhận ra.",
+      "Số 9 tránh câu 'em nghĩ nhỏ quá', số 2 nghe sẽ rất đau."
+     ]
+    },
+    {
+     "tieu_de": "Số 2 và số 9 làm việc chung",
+     "doan": "Hợp các việc thiện nguyện, giáo dục, công tác xã hội, nghệ thuật. Số 9 nhìn bức tranh lớn, số 2 chăm từng người cụ thể. Vướng ở phần giấy tờ, ngân sách: cần một người thứ ba hoặc một lịch rà soát cố định."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 2–9 theo từng quan hệ",
+    "chu_thich": "Cặp giàu lòng thương; cột giữa thường là tiền và trách nhiệm.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Lãng mạn, đồng cảm, dễ hiểu nhau.",
+      "Thời gian cho nhau và cho người ngoài.",
+      "Giữ một buổi mỗi tuần chỉ hai người."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà rộng cửa, hay giúp người.",
+      "Kế hoạch tiền bạc chung.",
+      "Ghi một bảng chi tiêu chung đơn giản."
+     ],
+     [
+      "Bạn bè",
+      "Bạn tốt, giúp không tính toán.",
+      "Có ai đang bị nhờ quá nhiều.",
+      "Mỗi người nói một lần mình muốn được giúp."
+     ],
+     [
+      "Đồng nghiệp",
+      "Hướng về giá trị, chăm người.",
+      "Phần giấy tờ, số liệu ai lo.",
+      "Đặt lịch rà sổ sách ngày đầu tháng."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 9 có tầm nhìn, nhân viên số 2 tận tâm.",
+      "Mục tiêu cụ thể của từng việc.",
+      "Hỏi sếp 'việc này xong thì trông thế nào?'"
+     ],
+     [
+      "Gia đình",
+      "Người thân số 9 lo cả họ, người số 2 lo cả nhà.",
+      "Gánh nặng có được chia đều.",
+      "Liệt kê việc giúp họ hàng, chia người lo."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 2–9 có hay gặp chuyện tiền bạc không?",
+     "dap": "Dễ gặp hơn mức trung bình vì cả hai đều rộng lượng và ngại nói chuyện tiền. Một kế hoạch chi tiêu chung, đơn giản, thường đủ để tránh phần lớn khó khăn."
+    },
+    {
+     "hoi": "Số 11 và số 9 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 11 quy về 2, nên đọc cặp 2–9. Người số 11 có trực giác mạnh, hợp với lý tưởng của số 9, nhưng càng cần một người lo phần thực tế."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 2 gắn với sự đồng cảm và gắn bó, số 9 gắn với lòng nhân ái và lý tưởng; cặp này thường được mô tả là rất tình cảm, cần rõ ràng việc thực tế."
+    }
+   ],
+   "y_chinh": [
+    "Cả hai giàu lòng thương, dễ đồng cảm",
+    "Dễ hy sinh, mơ hồ chuyện tiền",
+    "Kế hoạch tài chính chung, ghi rõ",
+    "Giữ thời gian cho nhau trước người ngoài"
+   ]
+  },
+  "so-chu-dao-3-va-3": {
+   "muc": [
+    {
+     "tieu_de": "Hai người cùng số 3 có hợp nhau không?",
+     "doan": "Hai người số 3 thường rất hợp chuyện: nói không hết, cười không dứt, ý tưởng nối ý tưởng. Chỗ thiếu là người lo việc thực tế. Hoá đơn tiền điện, hạn nộp giấy tờ, lịch tiêm chủng của con — những việc không vui này dễ bị cả hai đẩy cho nhau hoặc quên luôn."
+    },
+    {
+     "tieu_de": "Số 3 và số 3 khi yêu, khi cưới",
+     "doan": "Khi yêu, cặp 3–3 có nhiều kỷ niệm đẹp và nhiều chuyện để kể với bạn bè. Sau cưới, cả hai nhìn nhau như soi gương: thấy rõ cái tản mạn của chính mình qua người kia. Có khi hai người cùng hứng chí đăng ký ba lớp học, mua đồ cho dự án mới, rồi bỏ dở cả ba. Một danh sách việc chung dán ở nơi ai cũng thấy giúp cặp này nhiều hơn mọi lời hứa."
+    },
+    {
+     "tieu_de": "Số 3 và số 3 làm việc chung",
+     "doan": "Hợp các việc sáng tạo: làm nội dung, quảng cáo, biểu diễn, tổ chức sự kiện. Buổi họp của hai số 3 thường ra rất nhiều ý. Vướng ở chỗ không ai chốt, không ai theo đến cùng. Mỗi buổi họp nên kết thúc bằng ba việc, mỗi việc gắn tên một người và một ngày."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 3–3",
+     "danh_sach": [
+      "Ngày đầu: liệt kê mọi việc thực tế đang treo trong nhà.",
+      "Chia danh sách thành hai nửa, mỗi người nhận một nửa.",
+      "Mỗi tối dành mười lăm phút gạch việc, rồi mới được nói chuyện vui.",
+      "Cuối tuần: thưởng cho nhau một buổi đi chơi nếu gạch được quá nửa."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 3–3 theo từng quan hệ",
+    "chu_thich": "Hai số 3 có thừa niềm vui; các ô dưới đây bù phần việc thực tế.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Nhiều chuyện để nói, ít khi buồn.",
+      "Ai nhớ những việc nhàm mà cần.",
+      "Đặt nhắc lịch chung trên điện thoại."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà rộn tiếng cười.",
+      "Hoá đơn, giấy tờ, lịch của con.",
+      "Danh sách việc chung dán cạnh cửa."
+     ],
+     [
+      "Bạn bè",
+      "Đi đâu cũng vui, bạn bè quý cả hai.",
+      "Có ai thấy mình chỉ là 'người làm vui'.",
+      "Một buổi gặp chỉ để kể chuyện thật."
+     ],
+     [
+      "Đồng nghiệp",
+      "Ý tưởng dồi dào.",
+      "Ai chốt và theo đến cùng.",
+      "Kết thúc buổi họp bằng ba việc có tên người."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 3 truyền cảm hứng, nhân viên số 3 hào hứng.",
+      "Ý đổi nhanh, việc cũ còn dở.",
+      "Nhân viên ghi lại việc đang làm trước khi nhận việc mới."
+     ],
+     [
+      "Gia đình",
+      "Anh chị em số 3 vui vẻ, hợp chuyện.",
+      "Việc chung của gia đình ai lo.",
+      "Chia việc Tết theo danh sách từ tháng Chạp."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hai số 3 có quá trẻ con không?",
+     "dap": "Không hẳn; họ vui và cởi mở. Điều cặp này cần không phải nghiêm túc hơn, mà là một hệ thống nhỏ để việc thực tế không bị quên."
+    },
+    {
+     "hoi": "Cặp 3–3 có hợp làm sáng tạo chung không?",
+     "dap": "Rất hợp ở phần nghĩ ý và trình bày. Nên có thêm một người hoặc một công cụ quản lý tiến độ để ý tưởng đi đến sản phẩm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 3 gắn với sáng tạo, lời nói và niềm vui; hai số 3 cạnh nhau làm nổi rõ cả sự hào hứng lẫn xu hướng tản mạn."
+    }
+   ],
+   "y_chinh": [
+    "Hai số 3: hợp chuyện, nhiều ý tưởng",
+    "Thiếu người lo việc thực tế",
+    "Mỗi buổi họp kết thúc bằng ba việc có tên",
+    "Gạch việc trước, nói chuyện vui sau"
+   ]
+  },
+  "so-chu-dao-3-va-4": {
+   "muc": [
+    {
+     "tieu_de": "Số 3 và số 4 có hợp nhau không?",
+     "doan": "Số 3 và số 4 thường bổ sung kiểu niềm vui gặp nền móng: số 3 mang tiếng cười và ý mới, số 4 mang kế hoạch và sự đáng tin. Va chạm hay đến từ cách nhìn trách nhiệm. Số 4 coi trễ hẹn mười phút là chuyện lớn; số 3 coi đó là chuyện nhỏ có thể cười cho qua."
+    },
+    {
+     "tieu_de": "Số 3 và số 4 khi yêu",
+     "doan": "Khi yêu, số 3 làm số 4 thả lỏng, số 4 làm số 3 thấy có chỗ dựa. Rồi chuyện nhỏ bắt đầu: số 3 hứa gọi lại mà quên, số 4 ghi nhớ từng lần. Ngược lại, số 4 lên lịch cả cuối tuần, số 3 thấy ngộp. Cặp này đỡ căng khi số 3 giữ đúng lời hứa nhỏ, còn số 4 chừa một buổi trống cho ngẫu hứng."
+    },
+    {
+     "tieu_de": "Số 3 và số 4 làm việc chung",
+     "doan": "Hợp các dự án cần cả sáng tạo lẫn thực thi: thiết kế và sản xuất, nội dung và vận hành. Số 3 nghĩ ra, số 4 làm cho đúng hạn, đúng chuẩn. Vướng khi số 4 phê bình ý tưởng ngay từ đầu bằng các câu 'không khả thi', số 3 tắt hứng."
+    },
+    {
+     "tieu_de": "Số 3 và số 4 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 4 thay 'không khả thi' bằng 'ý hay, cần thêm gì để làm được?'.",
+      "Số 3 thay lời xin lỗi chung chung bằng việc cụ thể: 'lần sau trễ, em nhắn trước 30 phút'.",
+      "Cả hai thống nhất phần nào phải theo kế hoạch, phần nào được ngẫu hứng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 3–4 theo từng quan hệ",
+    "chu_thich": "Vui và vững; các ô gợi cách để hai nhịp sống này không cọ nhau.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Số 3 làm vui, số 4 làm yên.",
+      "Lời hứa nhỏ có được giữ.",
+      "Số 3 giữ đúng ba lời hứa nhỏ liên tiếp."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà có nếp và có tiếng cười.",
+      "Lịch cuối tuần kín hay trống.",
+      "Để trống một buổi cuối tuần cho ngẫu hứng."
+     ],
+     [
+      "Bạn bè",
+      "Số 3 rủ đi chơi, số 4 lo hậu cần.",
+      "Huỷ hẹn sát giờ.",
+      "Đổi hẹn thì báo trước ít nhất nửa ngày."
+     ],
+     [
+      "Đồng nghiệp",
+      "Nghĩ ra và làm ra.",
+      "Phản hồi ý tưởng thế nào.",
+      "Nghe trọn ý tưởng rồi mới nêu điều kiện."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 4 kỹ tính, nhân viên số 3 sáng tạo.",
+      "Sáng tạo có trong khuôn quy trình không.",
+      "Đề xuất cách mới kèm bản kế hoạch ngắn."
+     ],
+     [
+      "Gia đình",
+      "Bố/mẹ số 4 giữ nếp, con số 3 hay vui đùa.",
+      "Con có thấy bị chê thiếu nghiêm túc.",
+      "Khen con một câu trước khi nhắc việc."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 4 có thấy số 3 thiếu trách nhiệm không?",
+     "dap": "Có lúc, khi số 3 quên hẹn hay bỏ dở việc. Số 3 thường không thiếu trách nhiệm mà thiếu hệ thống nhắc; một lịch chung giúp nhiều."
+    },
+    {
+     "hoi": "Số 22 và số 3 thì xem cặp nào?",
+     "dap": "Khi xem cặp số, 22 quy về 4 nên đọc cặp 3–4. Người số 22 thường có kế hoạch lớn, càng cần số 3 mang niềm vui để không quá nặng nề."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 3 gắn với sáng tạo và biểu đạt, số 4 gắn với nền móng và trật tự; cặp này thường được mô tả là học được sự vui và sự vững từ nhau."
+    }
+   ],
+   "y_chinh": [
+    "Số 3 mang niềm vui, số 4 mang sự vững",
+    "Va chạm thường từ cách nhìn trách nhiệm",
+    "Giữ lời hứa nhỏ, chừa chỗ ngẫu hứng",
+    "Nghe trọn ý tưởng rồi mới nêu điều kiện"
+   ]
+  },
+  "so-chu-dao-3-va-5": {
+   "muc": [
+    {
+     "tieu_de": "Số 3 và số 5 có hợp nhau không?",
+     "doan": "Số 3 và số 5 thường là cặp năng động nhất: thích đi, thích thử, ít khi buồn chán. Bên nhau có nhiều kỷ niệm. Chỗ yếu là ổn định: dễ chi tiêu theo hứng, dễ bắt đầu nhiều việc rồi cùng bỏ dở. Chuyến du lịch đặt vội cuối tháng, khi lương còn chưa về, là chuyện hay gặp."
+    },
+    {
+     "tieu_de": "Số 3 và số 5 khi yêu, khi cưới",
+     "doan": "Khi yêu, cặp này vui như bạn thân: ăn khắp nơi, đi khắp chốn. Sau cưới, thêm hoá đơn, con cái, hai người dễ thấy mất tự do và đổ lỗi cho nhau. Một mục tiêu chung dài hạn — mua nhà sau năm năm, một chuyến đi lớn sau hai năm — cho niềm vui của cả hai một hướng."
+    },
+    {
+     "tieu_de": "Số 3 và số 5 làm việc chung",
+     "doan": "Hợp các nghề có người, có di chuyển: du lịch, sự kiện, truyền thông, bán hàng. Số 3 kể chuyện, số 5 xoay xở. Vướng ở phần tiền và phần theo dõi: cần một người giữ ngân sách và một bảng việc đang dở."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 3–5",
+     "danh_sach": [
+      "Chọn một người giữ ngân sách chung trong tuần, đổi lượt tuần sau.",
+      "Mỗi khoản chi theo hứng trên một mức đã thoả thuận thì chờ đến hôm sau.",
+      "Hoàn thành một việc đang dở trước khi bắt đầu việc mới.",
+      "Cuối tuần, cùng viết một mục tiêu chung cho năm sau."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 3–5 theo từng quan hệ",
+    "chu_thich": "Năng động và vui; cột giữa là những chỗ cần một cái neo.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Vui, ít buồn chán, nhiều trải nghiệm.",
+      "Hai người hướng về điều gì lâu dài.",
+      "Viết một mục tiêu chung cho năm năm tới."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà sôi động, cởi mở.",
+      "Ai giữ ngân sách.",
+      "Đổi lượt giữ ngân sách mỗi tháng."
+     ],
+     [
+      "Bạn bè",
+      "Bạn đi đâu cũng có nhau.",
+      "Kế hoạch đổi liên tục.",
+      "Chốt lịch chuyến đi trước một tuần."
+     ],
+     [
+      "Đồng nghiệp",
+      "Nhanh nhạy, giao tiếp tốt.",
+      "Việc dở dang.",
+      "Bảng việc đang dở xem lại mỗi thứ Sáu."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 5 thay đổi nhanh, nhân viên số 3 nhiều ý.",
+      "Ưu tiên nào giữ, ưu tiên nào bỏ.",
+      "Mỗi tuần chốt ba ưu tiên bằng văn bản."
+     ],
+     [
+      "Gia đình",
+      "Người thân 3 và 5 hay rủ nhau đi chơi.",
+      "Trách nhiệm trong nhà có bị bỏ lại.",
+      "Làm xong việc nhà rồi mới đi."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 3–5 có dễ tiêu xài quá tay không?",
+     "dap": "Dễ hơn mức thường gặp vì cả hai đều thích trải nghiệm. Một người giữ ngân sách và luật 'chờ một ngày' cho khoản chi theo hứng thường đủ để cân lại."
+    },
+    {
+     "hoi": "Số 3 và số 5 có hợp làm bạn đời không?",
+     "dap": "Thần số học không chấm điểm. Cặp này có nhiều niềm vui chung; điều cần thêm là vài cam kết cố định và một mục tiêu dài hạn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 3 gắn với niềm vui và biểu đạt, số 5 gắn với tự do và trải nghiệm; cặp này thường được mô tả là sôi nổi, cần một cái neo chung."
+    }
+   ],
+   "y_chinh": [
+    "Cặp năng động, ít buồn chán",
+    "Dễ chi tiêu theo hứng, dễ bỏ dở",
+    "Một người giữ ngân sách, đổi lượt",
+    "Một mục tiêu chung dài hạn làm neo"
+   ]
+  },
+  "so-chu-dao-3-va-6": {
+   "muc": [
+    {
+     "tieu_de": "Số 3 và số 6 có hợp nhau không?",
+     "doan": "Số 3 và số 6 thường tạo một mái nhà vừa vui vừa ấm: số 3 làm không khí rộn ràng, số 6 lo cơm nước, lịch sinh hoạt, người già trẻ nhỏ. Điểm dễ cọ là lời nhắc. Số 6 thương bằng cách nhắc; số 3 nghe nhắc nhiều thấy bị gò như học trò."
+    },
+    {
+     "tieu_de": "Số 3 và số 6 khi cưới",
+     "doan": "Sau cưới, số 6 thường nhận nhiều việc nhà và kỳ vọng số 3 tự nhận phần mình. Số 3 hay quên vì đầu đang bận với ý khác. Số 6 nhắc lần một, lần hai, lần ba, giọng mỗi lần một nặng hơn. Cách gỡ: số 3 chủ động nhận hai việc cố định trong tuần, số 6 hứa không nhắc những việc đó."
+    },
+    {
+     "tieu_de": "Số 3 và số 6 làm việc chung",
+     "doan": "Hợp các nghề hướng về người: giáo dục mầm non, nhà hàng, chăm sóc khách hàng, dịch vụ cưới. Số 3 làm khách vui, số 6 làm khách thấy được chăm. Vướng khi số 6 ôm việc của số 3 vì sốt ruột, rồi thấy mình bị lợi dụng."
+    },
+    {
+     "tieu_de": "Số 3 và số 6 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 6 thay chuỗi nhắc bằng một lần nói rõ: 'em cần anh đi đón con thứ Ba và thứ Năm'.",
+      "Số 3 trả lời bằng việc làm, không bằng câu đùa cho qua.",
+      "Số 3 khen việc số 6 làm bằng lời cụ thể, số 6 rất cần điều này."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 3–6 theo từng quan hệ",
+    "chu_thich": "Vui và ấm; các ô gợi cách để chăm sóc không thành gò bó.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Vui và ấm áp.",
+      "Lời nhắc có thành áp lực.",
+      "Số 6 chỉ nhắc một lần, số 3 trả lời rõ."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà rộn ràng, có nếp.",
+      "Phần việc nhà của số 3.",
+      "Số 3 nhận hai việc cố định mỗi tuần."
+     ],
+     [
+      "Bạn bè",
+      "Số 3 làm vui, số 6 lo chu đáo.",
+      "Số 6 có thấy mình luôn là người chuẩn bị.",
+      "Lần này số 3 lo đồ ăn cho buổi gặp."
+     ],
+     [
+      "Đồng nghiệp",
+      "Khách thấy vui và được chăm.",
+      "Số 6 có ôm việc của số 3.",
+      "Chia việc rõ trên bảng, không làm thay."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 6 lo cho nhân viên, nhân viên số 3 hoạt bát.",
+      "Hạn chót có được giữ.",
+      "Nhân viên số 3 báo tiến độ trước khi bị hỏi."
+     ],
+     [
+      "Gia đình",
+      "Mẹ/bố số 6 chăm kỹ, con số 3 vui tính.",
+      "Con có thấy bị nhắc quá nhiều.",
+      "Thoả thuận với con ba việc con tự nhớ."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 6 có hay càm ràm số 3 không?",
+     "dap": "Số 6 nhắc vì lo, nhưng số 3 dễ nghe thành càm ràm. Khi số 3 chủ động nhận phần việc, số 6 tự bớt nhắc."
+    },
+    {
+     "hoi": "Số 33 và số 3 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 33 quy về 6 nên đọc cặp 3–6. Người số 33 thường gánh trách nhiệm nặng hơn, càng cần số 3 mang niềm vui và nhận phần việc của mình."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 3 gắn với niềm vui và sáng tạo, số 6 gắn với gia đình và trách nhiệm; cặp này thường được mô tả là vui và ấm, cần cân lời nhắc."
+    }
+   ],
+   "y_chinh": [
+    "Số 3 làm vui, số 6 làm ấm",
+    "Lời nhắc của số 6 dễ thành gò bó",
+    "Số 3 nhận phần việc cố định",
+    "Khen cụ thể việc số 6 đã làm"
+   ]
+  },
+  "so-chu-dao-3-va-7": {
+   "muc": [
+    {
+     "tieu_de": "Số 3 và số 7 có hợp nhau không?",
+     "doan": "Số 3 và số 7 thường bù cho nhau: số 3 kéo số 7 ra ngoài, số 7 giúp số 3 nghĩ sâu hơn. Đây là cặp khác nhịp rõ nhất về giao tiếp. Số 3 nạp năng lượng bằng gặp người, số 7 nạp bằng ở một mình; một bữa tiệc đông có thể làm số 3 phấn chấn và làm số 7 mệt cả hôm sau."
+    },
+    {
+     "tieu_de": "Số 3 và số 7 khi yêu",
+     "doan": "Khi yêu, số 3 thấy số 7 bí ẩn, số 7 thấy số 3 làm đời sống nhiều màu hơn. Rồi số 3 bắt đầu thấy số 7 lạnh vì ít khen, ít nói; số 7 thấy số 3 hời hợt vì nói nhiều mà ít đào sâu. Cả hai đang dùng thước đo của mình để đo người kia."
+    },
+    {
+     "tieu_de": "Số 3 và số 7 làm việc chung",
+     "doan": "Hợp các việc cần nội dung có chiều sâu và cách trình bày hấp dẫn: số 7 nghiên cứu, số 3 kể lại cho đại chúng. Một cuốn sách, một kênh kiến thức, một khoá học là ví dụ hay. Vướng khi số 3 đơn giản hoá quá mức, số 7 thấy sai lệch."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 3–7",
+     "danh_sach": [
+      "Xen kẽ: một buổi ra ngoài gặp bạn, một buổi ở nhà yên tĩnh.",
+      "Số 3 hỏi số 7 một câu sâu và chờ trả lời, không chen vào.",
+      "Số 7 kể cho số 3 một điều mình đang đọc hay đang nghĩ.",
+      "Cuối tuần, mỗi người nói một điều mới học được từ người kia."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 3–7 theo từng quan hệ",
+    "chu_thich": "Khác nhịp giao tiếp; các ô gợi cách để hai nhịp đan xen.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Bí ẩn và nhiều màu sắc.",
+      "Cách mỗi người thể hiện tình cảm.",
+      "Mỗi người viết ra ba cách mình thấy được thương."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà có lúc vui, có lúc yên.",
+      "Bao nhiêu buổi tiếp khách là vừa.",
+      "Thoả thuận số lần mời bạn về nhà mỗi tháng."
+     ],
+     [
+      "Bạn bè",
+      "Số 3 rủ ra ngoài, số 7 cho lời khuyên sắc.",
+      "Số 7 từ chối có bị coi là chảnh.",
+      "Rủ số 7 vào nhóm nhỏ thay vì tiệc đông."
+     ],
+     [
+      "Đồng nghiệp",
+      "Nghiên cứu sâu và trình bày hay.",
+      "Độ chính xác khi đơn giản hoá.",
+      "Số 7 duyệt bản trình bày trước khi đăng."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 7 cần căn cứ, nhân viên số 3 giỏi nói.",
+      "Lời trình bày có đủ số liệu.",
+      "Mỗi bài trình bày kèm một trang dữ liệu."
+     ],
+     [
+      "Gia đình",
+      "Người thân số 3 hay kể, người số 7 hay im.",
+      "Im lặng có bị đọc là lạnh nhạt.",
+      "Hẹn một buổi đi dạo hai người mỗi tháng."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 7 có thấy số 3 hời hợt không?",
+     "dap": "Có lúc, vì số 3 nói nhiều chủ đề và chuyển ý nhanh. Khi số 3 ngồi lại đào sâu một chủ đề cùng số 7, số 7 thường thấy được tôn trọng."
+    },
+    {
+     "hoi": "Số 3 có thấy số 7 lạnh lùng không?",
+     "dap": "Có thể, vì số 7 ít biểu lộ. Số 7 thường quan tâm bằng sự chú ý và lời khuyên kỹ, cần một chút thời gian để số 3 nhận ra."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 3 gắn với lời nói và giao tiếp, số 7 gắn với suy ngẫm và tri thức; cặp này thường được mô tả là kéo nhau ra và đưa nhau vào sâu hơn."
+    }
+   ],
+   "y_chinh": [
+    "Số 3 kéo ra ngoài, số 7 kéo vào sâu",
+    "Khác nhịp: gặp người và ở một mình",
+    "Xen kẽ buổi vui đông và buổi yên tĩnh",
+    "Đừng đo người kia bằng thước của mình"
+   ]
+  },
+  "so-chu-dao-3-va-8": {
+   "muc": [
+    {
+     "tieu_de": "Số 3 và số 8 có hợp nhau không?",
+     "doan": "Số 3 và số 8 thường hợp làm ăn: số 3 giỏi truyền đạt, thu hút; số 8 giỏi tổ chức, tính toán. Hai người hay cọ nhau ở cách nhìn giá trị. Số 8 hỏi 'việc này ra tiền không?', số 3 hỏi 'việc này có vui không?'. Mỗi câu hỏi đều có chỗ đúng của nó."
+    },
+    {
+     "tieu_de": "Số 3 và số 8 khi yêu, khi cưới",
+     "doan": "Khi yêu, số 8 thấy số 3 tươi mới; số 3 thấy số 8 vững vàng, đáng dựa. Sau cưới, số 8 dễ bận việc và coi các ý tưởng vui của số 3 là chuyện phụ. Số 3 mất hứng rồi tìm niềm vui bên ngoài với bạn bè. Một buổi mỗi tuần không bàn tiền, không bàn công việc giúp hai người nhớ vì sao từng chọn nhau."
+    },
+    {
+     "tieu_de": "Số 3 và số 8 làm việc chung",
+     "doan": "Chia vai rõ là cách tốt nhất: số 3 lo thương hiệu, khách hàng, truyền thông; số 8 lo tài chính, vận hành, đàm phán. Một cửa hàng online là ví dụ: số 3 làm nội dung, chụp ảnh, trả lời khách; số 8 lo nguồn hàng, giá, dòng tiền. Vướng khi số 8 cắt ngân sách quảng bá mà không giải thích."
+    },
+    {
+     "tieu_de": "Số 3 và số 8 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 8 tránh câu 'nói vậy thôi chứ ra tiền gì' — thay bằng 'ý này cần bao nhiêu để thử?'.",
+      "Số 3 đưa ý tưởng kèm một con số ước lượng, số 8 sẽ nghe kỹ hơn.",
+      "Khen nhau trước mặt người khác: số 3 làm điều này tự nhiên, số 8 nên tập."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 3–8 theo từng quan hệ",
+    "chu_thich": "Hợp làm ăn; cột giữa thường là chuyện tiền và chuyện niềm vui.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Tươi mới và vững vàng.",
+      "Niềm vui có bị xếp sau công việc.",
+      "Một buổi mỗi tuần không bàn tiền."
+     ],
+     [
+      "Vợ chồng",
+      "Một người lo kinh tế, một người lo không khí nhà.",
+      "Chi tiêu cho niềm vui bao nhiêu là hợp lý.",
+      "Đặt một khoản 'tiền vui' cố định mỗi tháng."
+     ],
+     [
+      "Bạn bè",
+      "Số 8 giúp cơ hội, số 3 giúp kết nối người.",
+      "Tình bạn có thành chuyện làm ăn.",
+      "Gặp nhau một lần không nhắc chuyện việc."
+     ],
+     [
+      "Đồng nghiệp",
+      "Truyền đạt và tổ chức.",
+      "Ngân sách cho phần sáng tạo.",
+      "Ý tưởng mới kèm ước lượng chi phí."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 8 đòi kết quả, nhân viên số 3 giỏi giao tiếp.",
+      "Kết quả được đo bằng gì.",
+      "Hỏi sếp ba chỉ số đánh giá công việc."
+     ],
+     [
+      "Gia đình",
+      "Người số 8 lo kinh tế, người số 3 làm cả nhà vui.",
+      "Vai trò của số 3 có được coi trọng.",
+      "Số 8 cảm ơn số 3 vì giữ không khí nhà."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 3–8 có hợp mở công ty không?",
+     "dap": "Thường hợp nếu chia vai rõ: số 3 đối ngoại, số 8 vận hành. Nên ghi thành văn bản ai quyết phần nào để tránh giẫm chân khi công ty lớn lên."
+    },
+    {
+     "hoi": "Số 8 có coi thường số 3 không?",
+     "dap": "Thường không, nhưng số 8 dễ đánh giá mọi thứ qua kết quả đo được, nên vô tình xem nhẹ phần giao tiếp. Khi số 8 thấy số liệu khách hàng nhờ số 3 mà có, cách nhìn thường đổi."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 3 gắn với giao tiếp và sáng tạo, số 8 gắn với tổ chức và vật chất; cặp này thường được mô tả là hợp làm ăn khi tôn trọng giá trị của nhau."
+    }
+   ],
+   "y_chinh": [
+    "Số 3 truyền đạt, số 8 tổ chức",
+    "Số 8 hỏi 'ra tiền không', số 3 hỏi 'có vui không'",
+    "Chia vai: đối ngoại và vận hành",
+    "Ý tưởng kèm một con số ước lượng"
+   ]
+  },
+  "so-chu-dao-3-va-9": {
+   "muc": [
+    {
+     "tieu_de": "Số 3 và số 9 có hợp nhau không?",
+     "doan": "Số 3 và số 9 thường hợp nhau về cảm xúc: cùng yêu cái đẹp, nghệ thuật, những điều có ý nghĩa. Hai người có thể nói chuyện cả đêm về một bộ phim. Chỗ yếu là việc thực tế: tiền nhà, giấy tờ, hạn chót dễ bị đẩy sang tuần sau, rồi tuần sau nữa."
+    },
+    {
+     "tieu_de": "Số 3 và số 9 khi yêu",
+     "doan": "Khi yêu, cặp này lãng mạn, nhiều cử chỉ đẹp và những chuyến đi có câu chuyện. Số 9 cho số 3 cảm giác được hiểu sâu; số 3 làm số 9 bớt nặng lòng vì thế giới. Khi về chung nhà, hai người cần thêm một nhịp rà soát hằng tháng để những việc không đẹp vẫn được làm."
+    },
+    {
+     "tieu_de": "Số 3 và số 9 làm việc chung",
+     "doan": "Hợp các việc sáng tạo có ý nghĩa: phim tài liệu, sách thiếu nhi, dự án nghệ thuật cộng đồng, giáo dục. Số 9 đưa lý do, số 3 đưa cách kể. Vướng ở ngân sách và tiến độ — cần thuê hoặc mời một người làm quản lý dự án."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 3–9",
+     "danh_sach": [
+      "Chọn một buổi tối làm 'giờ việc thực tế': hoá đơn, giấy tờ, lịch hẹn.",
+      "Mỗi người nhận một việc thực tế đã trì hoãn lâu nhất và làm xong trong tuần.",
+      "Cùng làm một việc đẹp nhỏ: nấu một bữa, xem một vở kịch, viết một lá thư.",
+      "Cuối tuần, xem lại: việc thực tế xong bao nhiêu, việc đẹp làm được gì."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 3–9 theo từng quan hệ",
+    "chu_thich": "Giàu cảm xúc; cột giữa thường là phần việc thực tế cả hai hay quên.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Lãng mạn, cùng yêu cái đẹp.",
+      "Việc thực tế ai lo.",
+      "Một giờ việc thực tế mỗi tuần."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà có sách, có nhạc, có câu chuyện.",
+      "Tiền nhà và giấy tờ.",
+      "Rà soát tiền và giấy tờ ngày đầu tháng."
+     ],
+     [
+      "Bạn bè",
+      "Bạn tâm giao về nghệ thuật, lý tưởng.",
+      "Hứa giúp nhau mà quên.",
+      "Ghi lời hứa vào lịch chung."
+     ],
+     [
+      "Đồng nghiệp",
+      "Sáng tạo có ý nghĩa.",
+      "Ngân sách và tiến độ.",
+      "Mời thêm một người quản lý dự án."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 9 có tầm nhìn, nhân viên số 3 kể chuyện hay.",
+      "Tầm nhìn chuyển thành việc khi nào.",
+      "Sau họp gửi lại danh sách việc có hạn."
+     ],
+     [
+      "Gia đình",
+      "Người thân 3 và 9 cùng mềm lòng.",
+      "Ai lo việc giấy tờ của gia đình.",
+      "Phân công rõ người lo từng loại giấy tờ."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 3–9 có hay mơ mộng quá không?",
+     "dap": "Có xu hướng đó, vì cả hai đều giàu cảm xúc. Điều này không xấu; chỉ cần thêm một nhịp cố định cho việc thực tế là đủ cân lại."
+    },
+    {
+     "hoi": "Số 3 và số 9 có hợp làm nghệ thuật cùng nhau không?",
+     "dap": "Thường rất hợp. Số 9 mang ý nghĩa, số 3 mang cách diễn đạt. Nên có người thứ ba giữ ngân sách và lịch."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 3 gắn với biểu đạt và niềm vui, số 9 gắn với lý tưởng và lòng nhân ái; cặp này thường được mô tả là giàu cảm xúc, cần nhịp thực tế."
+    }
+   ],
+   "y_chinh": [
+    "Cùng yêu cái đẹp và điều có ý nghĩa",
+    "Việc thực tế dễ bị đẩy lùi",
+    "Một giờ việc thực tế mỗi tuần",
+    "Mời người giữ ngân sách cho dự án chung"
+   ]
+  },
+  "so-chu-dao-4-va-4": {
+   "muc": [
+    {
+     "tieu_de": "Hai người cùng số 4 có hợp nhau không?",
+     "doan": "Hai người số 4 thường rất đáng tin với nhau: có kế hoạch, đúng hẹn, giữ lời. Nhà của cặp 4–4 hay ngăn nắp, tài chính rõ ràng. Mặt kia là sự cứng: hai người cùng tin cách của mình là đúng, và cuộc sống dễ lặp lại năm này qua năm khác."
+    },
+    {
+     "tieu_de": "Số 4 và số 4 khi cưới",
+     "doan": "Sau cưới, cặp 4–4 thường có sổ chi tiêu, lịch dọn nhà, kế hoạch năm năm. Hiệu ứng soi gương ở đây là sự cố chấp: khi hai người khác ý về cách gấp quần áo hay cách xếp chén, cả hai đều có lý lẽ và không ai muốn nhường. Một câu hỏi giúp gỡ: 'việc này có thật sự cần chỉ một cách không?'"
+    },
+    {
+     "tieu_de": "Số 4 và số 4 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Vướng khi tranh luận về cách làm: thử làm theo cách người kia một tuần rồi so kết quả.",
+      "Vướng khi quên nói lời tình cảm: viết một tờ giấy nhỏ để trên bàn làm việc của người kia.",
+      "Vướng khi lịch kín đến mức không còn chỗ thở: chừa trống một buổi mỗi tuần."
+     ]
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 4–4",
+     "danh_sach": [
+      "Chọn một điều mới cả hai chưa từng làm: món ăn, môn thể thao, con đường đi làm.",
+      "Đổi một thói quen nhỏ trong nhà, như giờ ăn tối hay chỗ ngồi.",
+      "Mỗi người nói một câu cảm ơn bằng lời, ngoài những việc đã làm.",
+      "Cuối tuần, hỏi nhau: 'Thay đổi nào dễ chịu hơn mình nghĩ?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 4–4 theo từng quan hệ",
+    "chu_thich": "Hai số 4: nền vững; các ô giúp nền vững không thành khuôn cứng.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Chung thuỷ, giữ lời, đáng tin.",
+      "Lời yêu có được nói ra không.",
+      "Mỗi tuần một tờ giấy nhắn nhỏ."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà ngăn nắp, tài chính rõ.",
+      "Khác ý về cách làm việc nhà.",
+      "Thử cách người kia một tuần rồi so."
+     ],
+     [
+      "Bạn bè",
+      "Bạn đúng hẹn, đáng tin.",
+      "Tình bạn có lặp lại một kiểu gặp.",
+      "Thử một kiểu gặp mới: leo núi, học nấu ăn."
+     ],
+     [
+      "Đồng nghiệp",
+      "Quy trình chặt, ít lỗi.",
+      "Hai quy trình khác nhau, theo cái nào.",
+      "Viết hai cách ra giấy, chọn theo số liệu."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 4 và nhân viên số 4 cùng kỹ.",
+      "Thay đổi được đón nhận thế nào.",
+      "Thử thay đổi nhỏ trong một tháng rồi đánh giá."
+     ],
+     [
+      "Gia đình",
+      "Người thân số 4 giữ nếp nhà rất chặt.",
+      "Nếp cũ còn hợp với mọi người không.",
+      "Mỗi năm cả nhà xem lại một nếp."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hai số 4 có nhàm chán không?",
+     "dap": "Dễ thành nhàm nếu không có chủ ý đổi mới. Mỗi năm thử một điều mới cùng nhau là đủ để giữ sức sống cho cặp này."
+    },
+    {
+     "hoi": "Số 22 và số 4 có phải là cặp cùng số?",
+     "dap": "Khi xem cặp số, 22 quy về 4 nên đọc như cặp 4–4. Người số 22 thường nhìn xa hơn, có thể giúp cặp đặt mục tiêu lớn hơn nếp quen."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 4 gắn với nền móng, trật tự và sự bền bỉ; hai số 4 cạnh nhau làm nổi rõ cả sự đáng tin lẫn xu hướng cứng nhắc."
+    }
+   ],
+   "y_chinh": [
+    "Hai số 4: đáng tin, có kế hoạch",
+    "Dễ cứng và lặp lại",
+    "Thử cách của người kia một tuần",
+    "Mỗi năm cùng thử một điều mới"
+   ]
+  },
+  "so-chu-dao-4-va-5": {
+   "muc": [
+    {
+     "tieu_de": "Số 4 và số 5 có hợp nhau không?",
+     "doan": "Số 4 và số 5 thường học được nhiều từ nhau: số 4 cho nền, số 5 cho gió. Đây là cặp đối lập rõ về nhịp sống. Số 4 thích biết trước tuần sau làm gì; số 5 thích tuần sau còn bỏ ngỏ. Một bên muốn kế hoạch, một bên muốn lựa chọn."
+    },
+    {
+     "tieu_de": "Số 4 và số 5 khi yêu, khi cưới",
+     "doan": "Khi yêu, số 4 thấy số 5 hấp dẫn vì mang đến điều mình không có; số 5 thấy yên khi ở cạnh số 4. Sau cưới, chuyện đổi việc là ví dụ điển hình: số 5 muốn thử công việc mới, số 4 lo mất thu nhập ổn định. Hai người dễ đi đến đồng ý hơn khi chia đời sống thành phần cố định (tiền nhà, con cái) và phần linh hoạt (cuối tuần, du lịch)."
+    },
+    {
+     "tieu_de": "Số 4 và số 5 làm việc chung",
+     "doan": "Hợp các dự án có phần vận hành ổn định và phần thử nghiệm: số 4 giữ hệ thống chạy đều, số 5 thử kênh bán mới, thị trường mới. Vướng khi số 5 đổi cách làm mà không báo, số 4 phát hiện lúc kiểm tra cuối tháng."
+    },
+    {
+     "tieu_de": "Số 4 và số 5 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 4 tránh 'em lúc nào cũng thay đổi' — thay bằng 'thay đổi này ảnh hưởng gì đến kế hoạch tháng?'.",
+      "Số 5 tránh 'anh cứng quá' — thay bằng 'mình thử một tháng rồi xem số liệu nhé'.",
+      "Chuyện lớn nên bàn với giấy bút: số 4 yên tâm khi thấy số, số 5 yên tâm khi thấy còn đường lùi."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 4–5 theo từng quan hệ",
+    "chu_thich": "Nền và gió; cột giữa là ranh giới giữa phần cố định và phần linh hoạt.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Một người cho yên, một người cho mới.",
+      "Kế hoạch hẹn hò hay ngẫu hứng.",
+      "Xen kẽ: tuần theo kế hoạch, tuần ngẫu hứng."
+     ],
+     [
+      "Vợ chồng",
+      "Nền ổn định, đời sống có màu.",
+      "Phần cố định và phần linh hoạt.",
+      "Viết ra hai cột 'cố định' và 'linh hoạt'."
+     ],
+     [
+      "Bạn bè",
+      "Số 5 rủ đi, số 4 giữ chỗ.",
+      "Đổi kế hoạch phút chót.",
+      "Đổi thì báo trước một ngày."
+     ],
+     [
+      "Đồng nghiệp",
+      "Hệ thống ổn định và thử nghiệm mới.",
+      "Thay đổi cách làm có được báo.",
+      "Ghi mọi thay đổi vào một chỗ chung."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 4 kỹ, nhân viên số 5 linh hoạt.",
+      "Số 5 tự đổi cách đến đâu.",
+      "Thoả thuận khung quy trình bắt buộc và phần tự do."
+     ],
+     [
+      "Gia đình",
+      "Bố/mẹ số 4 giữ nếp, con số 5 thích thử.",
+      "Con có bị gò quá chặt.",
+      "Cho con chọn một hoạt động mới mỗi quý."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 5 có thấy số 4 gò bó không?",
+     "dap": "Có lúc, khi số 4 lên lịch cho cả hai mà không hỏi. Số 5 cần thấy còn lựa chọn; chừa một phần linh hoạt là đủ."
+    },
+    {
+     "hoi": "Số 22 với số 5 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 22 quy về 4 nên đọc cặp 4–5. Người số 22 thường có kế hoạch dài và lớn, nên phần thoả thuận về thay đổi càng cần rõ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 4 gắn với ổn định và trật tự, số 5 gắn với tự do và thay đổi; cặp này thường được mô tả là đối lập nhưng học được nhiều từ nhau."
+    }
+   ],
+   "y_chinh": [
+    "Số 4 cho nền, số 5 cho gió",
+    "Đối lập về nhịp sống: kế hoạch và lựa chọn",
+    "Chia phần cố định và phần linh hoạt",
+    "Bàn chuyện lớn với giấy bút và số liệu"
+   ]
+  },
+  "so-chu-dao-4-va-6": {
+   "muc": [
+    {
+     "tieu_de": "Số 4 và số 6 có hợp nhau không?",
+     "doan": "Số 4 và số 6 thường xây được một nền nhà vững: cùng trách nhiệm, cùng lo cho người xung quanh. Hai người hiếm khi bỏ việc giữa chừng. Điều dễ thiếu là sự vui chơi. Lịch tuần của cặp này hay kín bổn phận: đưa đón con, thăm ông bà, sửa nhà, đến mức quên mình từng hẹn hò."
+    },
+    {
+     "tieu_de": "Số 4 và số 6 khi cưới",
+     "doan": "Sau cưới, số 4 lo phần vật chất có kế hoạch, số 6 lo phần con người trong nhà. Cả hai đều coi gia đình là ưu tiên. Mệt mỏi thường đến từ cảm giác 'lúc nào cũng phải làm gì đó'. Những buổi chỉ để vui — không dọn dẹp, không bàn việc phải làm — giúp cặp này nhớ ra họ là hai người, đâu phải chỉ là hai người lo việc."
+    },
+    {
+     "tieu_de": "Số 4 và số 6 làm việc chung",
+     "doan": "Hợp các tổ chức cần sự chu đáo và đều đặn: trường học, phòng khám tư, quỹ cộng đồng, nhà hàng gia đình. Số 4 lo quy trình, số 6 lo con người. Vướng khi cả hai cùng gánh thêm việc cho người khác, đến mức quá tải mà không ai nói."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 4–6",
+     "danh_sach": [
+      "Chọn một buổi tối 'không bổn phận': không dọn, không bàn việc nhà.",
+      "Mỗi người bỏ hoặc nhờ người khác một việc trong tuần.",
+      "Cùng làm một việc chỉ để vui: xem phim, chơi cờ, đi ăn quán lạ.",
+      "Cuối tuần, hỏi nhau: 'Lần cuối mình cười to cùng nhau là khi nào?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 4–6 theo từng quan hệ",
+    "chu_thich": "Nhiều trách nhiệm chung; các ô nhắc chỗ cho niềm vui và nghỉ ngơi.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Chung thuỷ, chăm lo, đáng tin.",
+      "Thời gian cho riêng hai người.",
+      "Một buổi hẹn hò mỗi tháng, ghi vào lịch như việc quan trọng."
+     ],
+     [
+      "Vợ chồng",
+      "Nền nhà vững, nếp nhà rõ.",
+      "Bổn phận có đang lấn hết niềm vui.",
+      "Một buổi tối không bổn phận mỗi tuần."
+     ],
+     [
+      "Bạn bè",
+      "Bạn đáng tin, hay giúp nhau việc thực tế.",
+      "Gặp nhau toàn bàn chuyện lo.",
+      "Hẹn một buổi gặp chỉ để chơi."
+     ],
+     [
+      "Đồng nghiệp",
+      "Quy trình tốt và chăm người tốt.",
+      "Ai đang quá tải.",
+      "Rà khối lượng việc của mỗi người mỗi tháng."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 6 quan tâm, nhân viên số 4 cẩn thận.",
+      "Số 4 có ngại nói khi việc quá nhiều.",
+      "Báo cáo tuần kèm một dòng 'mức tải'."
+     ],
+     [
+      "Gia đình",
+      "Người thân 4 và 6 cùng gánh việc nhà.",
+      "Có ai được nghỉ không.",
+      "Luân phiên người được nghỉ vào Chủ nhật."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 4–6 có khô khan không?",
+     "dap": "Không khô mà dễ quá nghiêm túc. Cả hai đều quen đặt bổn phận lên trước. Chủ động lên lịch cho niềm vui là cách cặp này giữ được hơi ấm."
+    },
+    {
+     "hoi": "Số 22 và số 33 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 22 quy về 4 và 33 quy về 6, nên đọc cặp 4–6. Hai số cái này mang nhiều trách nhiệm, nên nghỉ ngơi càng cần được coi như một việc chính."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 4 gắn với nền móng và lao động, số 6 gắn với gia đình và trách nhiệm; cặp này thường được mô tả là vững, cần thêm khoảng vui chơi."
+    }
+   ],
+   "y_chinh": [
+    "Cùng trách nhiệm, xây nền vững",
+    "Nhiều bổn phận, ít vui chơi",
+    "Một buổi tối không bổn phận mỗi tuần",
+    "Hẹn hò ghi vào lịch như việc quan trọng"
+   ]
+  },
+  "so-chu-dao-4-va-7": {
+   "muc": [
+    {
+     "tieu_de": "Số 4 và số 7 có hợp nhau không?",
+     "doan": "Số 4 và số 7 thường nể nhau vì cả hai làm gì cũng kỹ và tin vào lý lẽ hơn cảm hứng. Hai người tranh luận bằng dữ kiện chứ ít khi bằng cảm xúc. Chỗ khó là sự khô khan. Cả hai đều ít nói lời tình cảm, và có thể sống cạnh nhau nhiều năm mà chưa từng nói 'anh thấy biết ơn em'."
+    },
+    {
+     "tieu_de": "Số 4 và số 7 khi yêu",
+     "doan": "Khi yêu, cặp này thường đến với nhau chậm, qua những cuộc trò chuyện về sách, công việc, cách nhìn đời. Họ thể hiện tình cảm bằng việc làm: số 4 sửa xe, số 7 tìm hiểu kỹ điều người kia quan tâm. Thứ thiếu là lời. Tập nói cảm xúc thành câu — 'hôm nay anh vui vì em ở nhà' — giúp cặp này gần hơn rõ rệt."
+    },
+    {
+     "tieu_de": "Số 4 và số 7 làm việc chung",
+     "doan": "Rất hợp các việc chuyên môn sâu: kỹ thuật, kiểm toán, nghiên cứu, phân tích dữ liệu. Số 7 đặt câu hỏi, số 4 dựng quy trình trả lời. Vướng khi số 7 muốn đào thêm, số 4 muốn chốt để đúng hạn."
+    },
+    {
+     "tieu_de": "Số 4 và số 7 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Vướng khi cả hai im lặng lúc buồn — đặt quy tắc: buồn thì nói một câu, chưa cần giải thích.",
+      "Vướng khi tranh luận thành thi xem ai đúng — hỏi 'mình đang tìm cách tốt nhất hay tìm người thắng?'.",
+      "Số 4 nói với số 7 bằng kế hoạch; số 7 nói với số 4 bằng lý do."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 4–7 theo từng quan hệ",
+    "chu_thich": "Cặp nghiêm túc; cột giữa thường là phần cảm xúc chưa được nói thành lời.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Chân thành, chậm mà chắc.",
+      "Cảm xúc có được nói ra.",
+      "Mỗi tuần nói một câu cảm xúc bằng lời."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà yên, có trật tự.",
+      "Lâu rồi có cử chỉ tình cảm nào không.",
+      "Một bữa tối có nến, không bàn việc."
+     ],
+     [
+      "Bạn bè",
+      "Bạn ít nhưng đáng tin.",
+      "Có ai thấy tình bạn chỉ còn thông tin.",
+      "Hỏi nhau một câu về cảm nhận, không về sự kiện."
+     ],
+     [
+      "Đồng nghiệp",
+      "Chuyên môn sâu, ít sai.",
+      "Khi nào dừng nghiên cứu để chốt.",
+      "Đặt mốc chốt trước khi bắt đầu."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 7 cần lập luận, nhân viên số 4 cẩn thận.",
+      "Số 4 có đủ thông tin về lý do việc.",
+      "Hỏi sếp mục đích của việc trước khi làm."
+     ],
+     [
+      "Gia đình",
+      "Người thân 4 và 7 cùng ít nói.",
+      "Điều quan trọng chưa từng được nói ra.",
+      "Viết một lá thư ngắn cho nhau dịp sinh nhật."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 4–7 có lạnh nhạt với nhau không?",
+     "dap": "Không lạnh nhạt mà ít biểu lộ. Tình cảm của cặp này có thật nhưng nằm trong việc làm. Tập nói thành lời giúp người kia nhận ra điều đó."
+    },
+    {
+     "hoi": "Số 4 và số 7 có hợp làm việc chung không?",
+     "dap": "Thường rất hợp ở việc chuyên môn. Chỉ cần thống nhất mốc chốt, vì số 7 dễ muốn tìm hiểu thêm còn số 4 muốn đúng hạn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 4 gắn với trật tự và thực tế, số 7 gắn với phân tích và chiều sâu; cặp này thường được mô tả là tôn trọng lý lẽ, cần học nói lời tình cảm."
+    }
+   ],
+   "y_chinh": [
+    "Cùng nghiêm túc, cẩn trọng, tôn trọng lý lẽ",
+    "Dễ khô khan, ít lời tình cảm",
+    "Nói cảm xúc thành câu mỗi tuần",
+    "Đặt mốc chốt cho việc nghiên cứu chung"
+   ]
+  },
+  "so-chu-dao-4-va-8": {
+   "muc": [
+    {
+     "tieu_de": "Số 4 và số 8 có hợp nhau không?",
+     "doan": "Số 4 và số 8 thường là cặp làm ra của cải: cả hai đều thực tế và chịu khó. Số 8 nhìn cơ hội lớn, số 4 làm chặt từng bước. Rủi ro là cả hai cuốn vào công việc đến quên tình cảm. Bữa tối của cặp này dễ thành buổi họp bàn chuyện tiền, chuyện dự án."
+    },
+    {
+     "tieu_de": "Số 4 và số 8 khi cưới",
+     "doan": "Sau cưới, cặp 4–8 thường có kế hoạch tài chính rõ, mua được nhà, tích luỹ đều. Nhưng sau vài năm, hai người có thể nhìn nhau như đối tác kinh doanh hơn là vợ chồng. Tách thời gian riêng tư khỏi thời gian bàn tiền — ví dụ phòng ngủ là nơi không nói chuyện công việc — là cách nhiều cặp dùng."
+    },
+    {
+     "tieu_de": "Số 4 và số 8 làm việc chung",
+     "doan": "Rất hợp làm ăn: số 8 đàm phán, mở rộng; số 4 quản lý vận hành, kiểm soát chi phí. Một xưởng sản xuất hay chuỗi cửa hàng là ví dụ điển hình. Vướng khi số 8 muốn mở rộng nhanh, số 4 thấy hệ thống chưa sẵn sàng."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 4–8",
+     "danh_sach": [
+      "Đặt một luật: sau chín giờ tối không nói chuyện tiền hay việc.",
+      "Một buổi đi chơi không mang laptop, không trả lời email.",
+      "Mỗi người kể một điều mình thích ở người kia mà không liên quan đến năng lực.",
+      "Cuối tuần, cùng đặt một mục tiêu chung không đo bằng tiền."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 4–8 theo từng quan hệ",
+    "chu_thich": "Bộ đôi thực tế; các ô giữ chỗ cho phần tình cảm bên cạnh phần tài sản.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Vững vàng, cùng chí hướng.",
+      "Hẹn hò có bị công việc chen vào.",
+      "Một buổi hẹn không điện thoại mỗi tuần."
+     ],
+     [
+      "Vợ chồng",
+      "Tài chính vững, nhà cửa ổn.",
+      "Hai người còn là vợ chồng hay chỉ là đối tác.",
+      "Luật không bàn tiền trong phòng ngủ."
+     ],
+     [
+      "Bạn bè",
+      "Bạn giúp nhau cơ hội làm ăn.",
+      "Tình bạn có chỉ còn chuyện làm ăn.",
+      "Gặp nhau một lần chỉ để thư giãn."
+     ],
+     [
+      "Đồng nghiệp",
+      "Đàm phán và vận hành.",
+      "Tốc độ mở rộng.",
+      "Mở rộng theo mốc hệ thống đã sẵn sàng."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 8 đòi kết quả, nhân viên số 4 làm chắc.",
+      "Số 4 bị hối thúc có làm ẩu không.",
+      "Thống nhất hạn kèm mức chất lượng tối thiểu."
+     ],
+     [
+      "Gia đình",
+      "Người số 8 lo kinh tế, người số 4 lo nề nếp.",
+      "Con cái có thấy bố mẹ quá bận.",
+      "Một bữa cơm cả nhà mỗi ngày không điện thoại."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 4–8 có quá thực dụng không?",
+     "dap": "Cặp này giỏi việc thực tế, điều đó tốt. Chỉ cần nhớ dành chỗ cho tình cảm, vì cả hai dễ coi công việc là cách thương mà quên nói ra."
+    },
+    {
+     "hoi": "Số 22 và số 8 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 22 quy về 4 nên đọc cặp 4–8. Người số 22 cùng số 8 có thể xây việc rất lớn, càng cần nhịp nghỉ chung."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 4 gắn với nền móng và lao động bền bỉ, số 8 gắn với quyền lực và vật chất; cặp này thường được mô tả là giỏi xây dựng, cần giữ phần tình cảm."
+    }
+   ],
+   "y_chinh": [
+    "Bộ đôi thực tế, giỏi xây tài sản",
+    "Dễ cuốn vào việc, quên tình cảm",
+    "Sau chín giờ tối không bàn tiền",
+    "Một mục tiêu chung không đo bằng tiền"
+   ]
+  },
+  "so-chu-dao-4-va-9": {
+   "muc": [
+    {
+     "tieu_de": "Số 4 và số 9 có hợp nhau không?",
+     "doan": "Số 4 và số 9 thường bổ sung kiểu lý tưởng gặp người làm: số 9 thấy điều đáng làm, số 4 biết cách làm cho nó thành. Chỗ hay lệch nhau là tầm nhìn. Số 9 thấy số 4 chỉ nhìn trước mũi; số 4 thấy số 9 nói những điều đẹp mà không có kế hoạch."
+    },
+    {
+     "tieu_de": "Số 4 và số 9 khi yêu, khi cưới",
+     "doan": "Khi yêu, số 9 cho số 4 cảm giác cuộc sống rộng hơn; số 4 cho số 9 một chỗ đứng vững. Sau cưới, số 9 hay muốn giúp họ hàng, bạn bè, quyên góp; số 4 lo chuyện tiết kiệm. Một cách làm êm: số 9 nêu mục đích, số 4 lập kế hoạch thực hiện, cả hai cùng duyệt trước khi chi."
+    },
+    {
+     "tieu_de": "Số 4 và số 9 làm việc chung",
+     "doan": "Hợp các dự án có lý tưởng cần người thực thi: quỹ học bổng, trường học, doanh nghiệp xã hội. Số 9 viết lý do và kể câu chuyện, số 4 viết ngân sách và tiến độ. Vướng khi số 9 hứa với cộng đồng trước khi hỏi số 4 có làm được không."
+    },
+    {
+     "tieu_de": "Số 4 và số 9 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 4 tránh 'viển vông quá' — thay bằng 'mình chia ước mơ này thành ba bước nhé'.",
+      "Số 9 tránh 'anh không có tầm nhìn' — thay bằng 'anh giúp em xem cần bao nhiêu để làm thật'.",
+      "Mỗi kế hoạch có hai trang: trang lý do của số 9, trang con số của số 4."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 4–9 theo từng quan hệ",
+    "chu_thich": "Lý tưởng và thực thi; các ô gợi cách cho hai thứ này gặp nhau.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Rộng lòng và đáng tin.",
+      "Ước mơ chung có được lập kế hoạch.",
+      "Chọn một ước mơ chung và viết ba bước đầu."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà có lý tưởng và có nền.",
+      "Khoản giúp người khác bao nhiêu.",
+      "Thống nhất mức giúp đỡ mỗi năm."
+     ],
+     [
+      "Bạn bè",
+      "Số 9 rộng lượng, số 4 đáng tin.",
+      "Số 4 có thấy bị cuốn vào việc của số 9.",
+      "Số 4 chọn việc mình muốn góp sức."
+     ],
+     [
+      "Đồng nghiệp",
+      "Lý do rõ, kế hoạch chặt.",
+      "Lời hứa với bên ngoài.",
+      "Hứa sau khi đã có kế hoạch."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 9 tầm nhìn, nhân viên số 4 thực thi.",
+      "Tầm nhìn có đủ chi tiết.",
+      "Nhân viên số 4 hỏi kết quả cụ thể mong muốn."
+     ],
+     [
+      "Gia đình",
+      "Người số 9 giúp cả họ, người số 4 giữ ngân sách.",
+      "Ai quyết giúp ai.",
+      "Họp nhà mỗi quý xem lại các khoản giúp."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 9 có thấy số 4 thiếu tầm nhìn không?",
+     "dap": "Có lúc, vì số 4 tập trung vào những bước gần. Khi số 9 thấy số 4 biến lý tưởng thành việc thật, cách nhìn thường đổi thành biết ơn."
+    },
+    {
+     "hoi": "Số 22 và số 9 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 22 quy về 4 nên đọc cặp 4–9. Người số 22 vừa thực tế vừa có tầm nhìn lớn, nên thường nói chuyện được với số 9 dễ hơn số 4 thường."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 4 gắn với thực tế và xây dựng, số 9 gắn với lý tưởng và lòng nhân ái; cặp này thường được mô tả là người làm cho ước mơ thành hình."
+    }
+   ],
+   "y_chinh": [
+    "Số 9 thấy điều đáng làm, số 4 làm cho thành",
+    "Va chạm về tầm nhìn: xa và gần",
+    "Số 9 nêu mục đích, số 4 lập kế hoạch",
+    "Hứa với bên ngoài sau khi có kế hoạch"
+   ]
+  },
+  "so-chu-dao-5-va-5": {
+   "muc": [
+    {
+     "tieu_de": "Hai người cùng số 5 có hợp nhau không?",
+     "doan": "Hai người số 5 thường rất sôi nổi bên nhau: tự do, nhiều trải nghiệm, không ai giữ ai. Cặp này dễ có những chuyến đi bất chợt và những quyết định táo bạo. Chỗ thiếu là sự ổn định: khó giữ nề nếp, khó cam kết dài, và tài chính dễ trôi theo hứng."
+    },
+    {
+     "tieu_de": "Số 5 và số 5 khi yêu, khi cưới",
+     "doan": "Khi yêu, cặp 5–5 như hai người bạn đi phiêu lưu. Khi cưới, câu hỏi khó là ai lo phần cố định. Hiệu ứng soi gương ở đây là thấy rõ nỗi sợ bị ràng buộc của chính mình qua người kia: khi người này muốn giữ, người kia giật mình vì đó cũng là điều mình từng né. Vài cam kết cố định — giờ ăn tối chung, quỹ tiết kiệm tự động — giữ cặp này lại mà không làm mất tự do."
+    },
+    {
+     "tieu_de": "Số 5 và số 5 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Vướng khi cả hai cùng đi xa một lúc, việc nhà không ai lo — lập lịch đi xa theo lượt.",
+      "Vướng khi cùng bỏ dở kế hoạch — chọn một việc chung làm đến cùng mỗi năm.",
+      "Vướng khi không ai giữ tiền — cài chuyển khoản tiết kiệm tự động ngay ngày nhận lương.",
+      "Nói chuyện tốt nhất lúc đang đi bộ hay lái xe, ít hợp ngồi đối diện."
+     ]
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 5–5",
+     "danh_sach": [
+      "Chọn ba cam kết cố định cho tuần và giữ đủ cả ba.",
+      "Cùng thử một điều mới, nhưng phải xong trong ngày.",
+      "Mỗi người làm xong một việc đang dở trước khi bắt đầu việc khác.",
+      "Cuối tuần, hỏi nhau: 'Cam kết nào làm mình thấy yên hơn chứ không ngột?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 5–5 theo từng quan hệ",
+    "chu_thich": "Hai số 5 có thừa tự do; cột giữa là những chỗ cần một điểm neo.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Phiêu lưu, không ai giữ ai.",
+      "Hai người đang cam kết điều gì.",
+      "Viết ra một cam kết nhỏ cho ba tháng tới."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà vui, nhiều chuyến đi.",
+      "Ai lo phần cố định: tiền, nhà, con.",
+      "Chuyển khoản tiết kiệm tự động mỗi tháng."
+     ],
+     [
+      "Bạn bè",
+      "Rủ là đi ngay.",
+      "Hứa rồi quên.",
+      "Ghi lịch hẹn chung vào điện thoại."
+     ],
+     [
+      "Đồng nghiệp",
+      "Linh hoạt, xoay xở giỏi.",
+      "Ai theo dõi việc đến cùng.",
+      "Mỗi dự án có một người giữ tiến độ."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 5 và nhân viên số 5 cùng thích đổi mới.",
+      "Việc lặp lại ai làm.",
+      "Xoay vòng việc lặp lại theo tháng."
+     ],
+     [
+      "Gia đình",
+      "Người thân 5 và 5 hay đi xa.",
+      "Dịp quan trọng có ai ở nhà.",
+      "Đánh dấu lịch Tết, giỗ từ đầu năm."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hai số 5 có khó cam kết không?",
+     "dap": "Thường khó hơn các cặp khác vì cả hai đều quý tự do. Cam kết không cần lớn; vài thói quen cố định là đủ làm điểm neo."
+    },
+    {
+     "hoi": "Cặp 5–5 nên chú ý gì về tiền?",
+     "dap": "Nên có một hệ thống tự động như chuyển khoản tiết kiệm ngày lương về, vì cả hai đều dễ chi theo hứng và ngại theo dõi sổ sách."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 5 gắn với tự do, thay đổi và trải nghiệm; hai số 5 cạnh nhau làm nổi rõ cả sự sôi nổi lẫn xu hướng né ràng buộc."
+    }
+   ],
+   "y_chinh": [
+    "Hai số 5: tự do, nhiều trải nghiệm",
+    "Khó giữ nề nếp, khó cam kết",
+    "Vài cam kết cố định làm điểm neo",
+    "Tiết kiệm tự động ngày lương về"
+   ]
+  },
+  "so-chu-dao-5-va-6": {
+   "muc": [
+    {
+     "tieu_de": "Số 5 và số 6 có hợp nhau không?",
+     "doan": "Số 5 và số 6 thường hút nhau vì mỗi người có thứ người kia thiếu: số 5 có gió trời, số 6 có bếp lửa. Căng thẳng chính là giữ và đi. Số 6 muốn mọi người về nhà ăn cơm đủ mặt; số 5 muốn tối thứ Sáu đi với bạn hoặc đi đâu đó chưa biết."
+    },
+    {
+     "tieu_de": "Số 5 và số 6 khi cưới",
+     "doan": "Sau cưới, số 6 dồn sức vào gia đình và mong số 5 cũng vậy. Số 5 thương nhà nhưng cần khoảng thở; nếu bị giữ chặt, họ đi xa hơn. Một thoả thuận rõ — số 5 báo trước kế hoạch, số 6 tôn trọng khoảng tự do đã thống nhất — làm cả hai bớt nghi ngờ nhau."
+    },
+    {
+     "tieu_de": "Số 5 và số 6 làm việc chung",
+     "doan": "Hợp các việc có phần đối ngoại và phần chăm sóc: số 5 tìm khách, số 6 giữ khách. Ví dụ một homestay: số 5 lo quảng bá, đón khách, tổ chức tour; số 6 lo phòng, bữa sáng, hỏi han khách. Vướng khi số 5 nhận đoàn khách phút chót mà số 6 chưa kịp chuẩn bị."
+    },
+    {
+     "tieu_de": "Số 5 và số 6 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 6 tránh 'anh lúc nào cũng đi' — thay bằng 'tối thứ Năm anh ở nhà với mẹ con em được không?'.",
+      "Số 5 tránh im lặng rồi đi — một tin nhắn báo giờ về là đủ.",
+      "Số 6 hỏi mình: mình đang lo cho người kia, hay đang lo mất người kia?"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 5–6 theo từng quan hệ",
+    "chu_thich": "Giữ và đi; các ô gợi những thoả thuận nhỏ để hai nhu cầu cùng tồn tại.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Mới mẻ và ấm áp.",
+      "Tự do bao nhiêu là vừa.",
+      "Thoả thuận số tối mỗi người tự do trong tuần."
+     ],
+     [
+      "Vợ chồng",
+      "Một người giữ nhà, một người mang chuyện mới.",
+      "Đi xa, về muộn có báo.",
+      "Một tin nhắn báo giờ về mỗi khi đi."
+     ],
+     [
+      "Bạn bè",
+      "Số 5 rủ đi, số 6 chăm cả nhóm.",
+      "Số 6 có thấy bị bỏ lại.",
+      "Số 5 rủ số 6 cùng đi một chuyến."
+     ],
+     [
+      "Đồng nghiệp",
+      "Tìm khách và giữ khách.",
+      "Nhận việc phút chót.",
+      "Nhận việc mới thì hỏi số 6 trước."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 6 lo cho người, nhân viên số 5 linh hoạt.",
+      "Số 5 có thấy bị quản quá.",
+      "Thống nhất kết quả, để số 5 tự chọn cách."
+     ],
+     [
+      "Gia đình",
+      "Mẹ/bố số 6 muốn con ở gần, con số 5 muốn đi xa.",
+      "Con đi xa có phải là xa nhà.",
+      "Gọi video cho nhà một giờ cố định mỗi tuần."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 6 có giữ số 5 quá chặt không?",
+     "dap": "Có thể, vì số 6 thương bằng cách muốn ở gần. Số 5 cảm thấy an toàn hơn khi tự do được thoả thuận rõ chứ không phải xin phép từng lần."
+    },
+    {
+     "hoi": "Số 33 và số 5 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 33 quy về 6 nên đọc cặp 5–6. Người số 33 thường gánh nhiều trách nhiệm hơn, nên thoả thuận về tự do càng cần nói rõ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 5 gắn với tự do và thay đổi, số 6 gắn với gia đình và trách nhiệm; cặp này thường được mô tả là học cách vừa giữ vừa buông."
+    }
+   ],
+   "y_chinh": [
+    "Số 5 mang mới mẻ, số 6 mang mái ấm",
+    "Căng thẳng chính: giữ và đi",
+    "Số 5 báo trước, số 6 tôn trọng thoả thuận",
+    "Tự do được thoả thuận, không phải xin phép"
+   ]
+  },
+  "so-chu-dao-5-va-7": {
+   "muc": [
+    {
+     "tieu_de": "Số 5 và số 7 có hợp nhau không?",
+     "doan": "Số 5 và số 7 thường gặp nhau ở sự tò mò: số 5 khám phá thế giới bên ngoài, số 7 khám phá thế giới bên trong. Hai người có nhiều chuyện hay để kể cho nhau. Khó khăn là nhịp sống: số 5 muốn ra ngoài cuối tuần, số 7 muốn ở nhà đọc sách, nên thời gian chung dễ bị co lại."
+    },
+    {
+     "tieu_de": "Số 5 và số 7 khi yêu",
+     "doan": "Khi yêu, số 5 thấy số 7 sâu sắc, số 7 thấy số 5 thú vị. Cả hai đều không thích bị giữ chặt, nên ít ghen tuông. Mặt kia là cặp này dễ mỗi người sống một nhịp. Chọn những trải nghiệm vừa phiêu lưu vừa có chiều sâu — du lịch văn hoá, học một ngôn ngữ chung — giúp hai nhịp gặp nhau."
+    },
+    {
+     "tieu_de": "Số 5 và số 7 làm việc chung",
+     "doan": "Hợp các việc cần cả thu thập lẫn phân tích: báo chí điều tra, nghiên cứu thị trường, làm phim tài liệu. Số 5 đi gặp người, lấy thông tin; số 7 ngồi lọc và viết. Vướng khi số 5 muốn đăng nhanh, số 7 muốn kiểm tra thêm."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 5–7",
+     "danh_sach": [
+      "Chọn một nơi chưa ai từng đến, đọc về nó trước rồi mới đi.",
+      "Số 5 kể một trải nghiệm, số 7 hỏi ba câu sâu về nó.",
+      "Số 7 chia sẻ một điều đang nghiên cứu, số 5 tìm cách thử nó ngoài đời.",
+      "Cuối tuần, hỏi nhau: 'Tuần này mình có đủ thời gian chung chưa?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 5–7 theo từng quan hệ",
+    "chu_thich": "Cùng tò mò nhưng khác hướng; các ô gợi cách để hai hướng gặp nhau.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Thú vị và sâu sắc, ít ghen tuông.",
+      "Thời gian chung có bị co lại.",
+      "Một chuyến đi văn hoá mỗi quý."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà có người đi, có người nghĩ.",
+      "Nhịp cuối tuần của mỗi người.",
+      "Xen kẽ: một cuối tuần ra ngoài, một cuối tuần ở nhà."
+     ],
+     [
+      "Bạn bè",
+      "Bạn có chuyện hay để kể.",
+      "Gặp nhau thưa dần.",
+      "Hẹn lịch gặp cố định mỗi tháng."
+     ],
+     [
+      "Đồng nghiệp",
+      "Thu thập và phân tích.",
+      "Tốc độ ra kết quả.",
+      "Đặt mốc kiểm tra trước khi công bố."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 7 cần căn cứ, nhân viên số 5 nhanh nhạy.",
+      "Số 5 có đủ dữ liệu khi đề xuất.",
+      "Mỗi đề xuất kèm nguồn thông tin."
+     ],
+     [
+      "Gia đình",
+      "Người thân số 5 hay đi, người số 7 hay ở nhà.",
+      "Hai người có còn chuyện chung.",
+      "Kể cho nhau một điều mới học mỗi tuần."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 5 và số 7 có hợp sống chung không?",
+     "dap": "Thường hợp nếu tôn trọng nhịp của nhau. Cả hai đều không thích bị giữ chặt; điều cần là giữ một ít thời gian chung cố định."
+    },
+    {
+     "hoi": "Cặp 5–7 hay vướng chuyện gì?",
+     "dap": "Hay vướng chuyện cuối tuần: số 5 muốn ra ngoài, số 7 muốn ở nhà. Xen kẽ hai kiểu cuối tuần là cách đơn giản nhiều cặp dùng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 5 gắn với trải nghiệm và tự do, số 7 gắn với suy ngẫm và tri thức; cặp này thường được mô tả là cùng tò mò theo hai hướng."
+    }
+   ],
+   "y_chinh": [
+    "Cùng tò mò: số 5 ra ngoài, số 7 vào trong",
+    "Nhịp sống khác, thời gian chung dễ co",
+    "Trải nghiệm vừa phiêu lưu vừa sâu",
+    "Xen kẽ cuối tuần ra ngoài và ở nhà"
+   ]
+  },
+  "so-chu-dao-5-va-8": {
+   "muc": [
+    {
+     "tieu_de": "Số 5 và số 8 có hợp nhau không?",
+     "doan": "Số 5 và số 8 thường là cặp dám làm, nhạy với cơ hội buôn bán. Hai người nhìn thấy cơ hội nhanh và không ngại rủi ro. Chính điều đó là chỗ cần để ý: cả hai cùng liều, dễ quyết nhanh mà sai lớn, nhất là chuyện đầu tư hay vay mượn."
+    },
+    {
+     "tieu_de": "Số 5 và số 8 khi cưới",
+     "doan": "Sau cưới, cặp 5–8 thường có cuộc sống nhiều biến động: đổi nhà, đổi việc, mở dự án mới. Số 8 muốn kiểm soát kết quả, số 5 muốn tự do cách làm, nên dễ va khi bàn tiền. Một luật nhiều cặp dùng: mọi khoản tiền lớn cần chờ một ngày và hỏi ý một người thứ ba trước khi chốt."
+    },
+    {
+     "tieu_de": "Số 5 và số 8 làm việc chung",
+     "doan": "Hợp khởi nghiệp, kinh doanh, bất động sản, thương mại. Số 8 lo tổ chức và tài chính, số 5 lo bán hàng và thích nghi thị trường. Vướng khi cả hai cùng hào hứng với cơ hội mới mà không ai đóng vai người hỏi 'nếu thất bại thì sao?'."
+    },
+    {
+     "tieu_de": "Số 5 và số 8 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Thay 'làm luôn đi' bằng 'mình chờ đến mai rồi chốt nhé'.",
+      "Số 8 tránh giọng ra lệnh với số 5 — số 5 phản ứng mạnh khi bị kiểm soát.",
+      "Số 5 tránh tự quyết khoản lớn rồi báo sau — số 8 rất khó chịu khi mất quyền quyết."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 5–8 theo từng quan hệ",
+    "chu_thich": "Năng động và dám làm; cột giữa là những chỗ cần một nhịp phanh.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Cuốn hút, mạnh mẽ.",
+      "Quyết định lớn có quá nhanh.",
+      "Luật chờ một ngày cho việc lớn."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà nhiều cơ hội, nhiều đổi mới.",
+      "Tiền lớn ai được quyết.",
+      "Khoản lớn cần cả hai và một người thứ ba góp ý."
+     ],
+     [
+      "Bạn bè",
+      "Bạn rủ nhau làm ăn.",
+      "Tình bạn có lẫn chuyện tiền.",
+      "Ghi giấy rõ ràng khi góp vốn với bạn."
+     ],
+     [
+      "Đồng nghiệp",
+      "Dám làm, nhanh nhạy.",
+      "Ai hỏi câu về rủi ro.",
+      "Mỗi dự án có một danh sách rủi ro."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 8 đòi kết quả, nhân viên số 5 linh hoạt.",
+      "Số 5 tự đổi cách đến đâu.",
+      "Thống nhất kết quả, chừa tự do cách làm."
+     ],
+     [
+      "Gia đình",
+      "Người thân 5 và 8 cùng thích làm ăn.",
+      "Tài sản chung của nhà có bị đưa vào rủi ro.",
+      "Tách tài sản gia đình khỏi tiền đầu tư."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 5–8 có hợp kinh doanh không?",
+     "dap": "Thường hợp vì cả hai đều nhanh và dám làm. Điều kiện là có cơ chế phanh: chờ một ngày, hỏi người thứ ba, tách tài sản gia đình khỏi tiền đầu tư."
+    },
+    {
+     "hoi": "Số 8 có kiểm soát số 5 không?",
+     "dap": "Có thể, vì số 8 quen nắm quyền quyết. Số 5 cần tự do cách làm; thoả thuận kết quả thay vì kiểm soát từng bước giúp hai người hợp tác tốt hơn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 5 gắn với thay đổi và tự do, số 8 gắn với quyền lực và vật chất; cặp này thường được mô tả là dám làm, cần nhịp thận trọng."
+    }
+   ],
+   "y_chinh": [
+    "Năng động, dám làm, hợp làm ăn",
+    "Cùng liều, dễ quyết nhanh sai lớn",
+    "Việc tiền lớn: chờ một ngày, hỏi người thứ ba",
+    "Tách tài sản gia đình khỏi tiền đầu tư"
+   ]
+  },
+  "so-chu-dao-5-va-9": {
+   "muc": [
+    {
+     "tieu_de": "Số 5 và số 9 có hợp nhau không?",
+     "doan": "Số 5 và số 9 thường hợp nhau ở sự rộng mở: thích đi xa, thích gặp người, rộng lượng với người khác. Hai người dễ kể cho nhau những chuyến đi và những người họ gặp. Chỗ cần để ý là gốc rễ: ít tích luỹ, ít chỗ 'về', và dễ cùng nhau tiêu hết vào những điều có ý nghĩa nhất thời."
+    },
+    {
+     "tieu_de": "Số 5 và số 9 khi yêu, khi cưới",
+     "doan": "Khi yêu, cặp này có những chuyến đi xa và những cuộc trò chuyện về thế giới. Sau cưới, khi cần mua nhà, nuôi con, hai người dễ thấy mình thiếu chuẩn bị. Một mục tiêu tích luỹ chung và một nơi 'về' cố định — có thể chỉ là căn hộ thuê lâu dài — giúp cặp này yên tâm hơn."
+    },
+    {
+     "tieu_de": "Số 5 và số 9 làm việc chung",
+     "doan": "Hợp các việc có tầm rộng: tổ chức phi lợi nhuận quốc tế, du lịch trải nghiệm, giáo dục ngoài trời. Số 9 mang mục đích, số 5 mang khả năng xoay xở. Vướng ở phần tài chính dài hạn và việc lặp lại."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 5–9",
+     "danh_sach": [
+      "Cùng mở một tài khoản tiết kiệm chung với một con số nhỏ.",
+      "Viết ra 'nơi về' trong mơ của mỗi người và tìm điểm chung.",
+      "Một tối ở nhà nấu ăn thay vì ra ngoài.",
+      "Cuối tuần, hỏi nhau: 'Năm năm nữa mình muốn sống ở đâu?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 5–9 theo từng quan hệ",
+    "chu_thich": "Cặp rộng mở; cột giữa là những chỗ cần gốc rễ.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Rộng lượng, thích đi xa cùng nhau.",
+      "Hai người có nơi để về không.",
+      "Viết ra 'nơi về' của mỗi người."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà mở cửa, đón bạn bè.",
+      "Tích luỹ cho tương lai.",
+      "Tiết kiệm tự động một khoản nhỏ mỗi tháng."
+     ],
+     [
+      "Bạn bè",
+      "Bạn đi đâu cũng hợp.",
+      "Gặp nhau toàn ở xa.",
+      "Một buổi gặp ở gần nhà, đơn giản."
+     ],
+     [
+      "Đồng nghiệp",
+      "Tầm nhìn rộng, xoay xở giỏi.",
+      "Tài chính dài hạn.",
+      "Mời người làm kế hoạch tài chính."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 9 nhân văn, nhân viên số 5 linh hoạt.",
+      "Việc lặp lại có được làm đủ.",
+      "Lịch việc lặp lại theo tuần."
+     ],
+     [
+      "Gia đình",
+      "Người thân 5 và 9 hay đi xa, giúp người.",
+      "Gia đình có thấy thiếu người.",
+      "Hẹn về nhà dịp lễ từ đầu năm."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 5–9 có khó tích luỹ không?",
+     "dap": "Thường khó hơn vì cả hai đều thích trải nghiệm và rộng tay. Tiết kiệm tự động và một mục tiêu chung cụ thể giúp nhiều hơn là cố gắng nhớ."
+    },
+    {
+     "hoi": "Số 5 và số 9 có hợp đi du lịch cùng nhau không?",
+     "dap": "Thường rất hợp. Số 5 lo chuyến đi linh hoạt, số 9 tìm ý nghĩa trong những nơi đến. Chỉ cần thống nhất ngân sách trước khi đi."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 5 gắn với tự do và trải nghiệm, số 9 gắn với lòng nhân ái và cái nhìn rộng; cặp này thường được mô tả là rộng mở, cần gốc rễ chung."
+    }
+   ],
+   "y_chinh": [
+    "Cùng rộng mở, thích đi xa",
+    "Ít tích luỹ, thiếu nơi 'về'",
+    "Tiết kiệm tự động khoản nhỏ mỗi tháng",
+    "Hỏi nhau: năm năm nữa sống ở đâu?"
+   ]
+  },
+  "so-chu-dao-6-va-6": {
+   "muc": [
+    {
+     "tieu_de": "Hai người cùng số 6 có hợp nhau không?",
+     "doan": "Hai người số 6 thường dựng một mái nhà rất chu đáo: cơm nóng, lịch giỗ nhớ đủ, con cái được chăm kỹ. Chỗ khó là cả hai cùng muốn chăm và cùng muốn đúng cách mình. Người này nấu, người kia đứng cạnh chỉnh; tình thương dễ biến thành kiểm soát nhẹ nhàng."
+    },
+    {
+     "tieu_de": "Số 6 và số 6 khi cưới",
+     "doan": "Sau cưới, cặp 6–6 hiếm khi thiếu trách nhiệm, nhưng dễ mệt vì trách nhiệm. Hiệu ứng soi gương rõ ở đây: khi thấy người kia lo quá, số 6 nhận ra chính mình cũng đang lo quá. Luân phiên vai trò — tuần này anh được chăm, tuần sau em được chăm — giúp cả hai có lúc được nghỉ."
+    },
+    {
+     "tieu_de": "Số 6 và số 6 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Vướng khi cả hai cùng nhắc nhau — thay bằng 'việc này em lo, anh khỏi nhắc nhé'.",
+      "Vướng khi cách nuôi con khác nhau — chọn một người quyết từng mảng: ăn uống, học hành, giờ ngủ.",
+      "Vướng khi cả hai cùng mệt mà không ai nói — câu mở: 'tuần này em thấy hơi đuối'."
+     ]
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 6–6",
+     "danh_sach": [
+      "Chia rõ ai lo từng mảng việc nhà, viết ra giấy.",
+      "Không góp ý vào mảng của người kia trong cả tuần.",
+      "Mỗi người có một buổi được chăm hoàn toàn, không phải làm gì.",
+      "Cuối tuần, hỏi nhau: 'Mình có thấy nhẹ hơn khi không phải lo phần kia không?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 6–6 theo từng quan hệ",
+    "chu_thich": "Hai số 6 có thừa sự chăm lo; cột giữa là nơi chăm lo dễ thành kiểm soát.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Chu đáo, ân cần, nhớ mọi dịp.",
+      "Ai được chăm, ai đi chăm.",
+      "Luân phiên người được chăm mỗi tuần."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà ấm, nếp rõ.",
+      "Cách nuôi con khác nhau.",
+      "Chia mảng quyết theo từng việc của con."
+     ],
+     [
+      "Bạn bè",
+      "Bạn lo cho nhau từng chút.",
+      "Có ai bị khuyên quá nhiều.",
+      "Hỏi 'cậu cần lời khuyên hay cần người nghe?'"
+     ],
+     [
+      "Đồng nghiệp",
+      "Đội gắn kết, quan tâm nhau.",
+      "Ai cũng ôm việc của người khác.",
+      "Mỗi người giữ đúng phần việc của mình."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 6 và nhân viên số 6 cùng lo cho tập thể.",
+      "Ai lo cho chính mình.",
+      "Đặt giới hạn giờ làm thêm."
+     ],
+     [
+      "Gia đình",
+      "Hai người thân số 6 cùng lo cả họ.",
+      "Gánh nặng có chia đều.",
+      "Lập danh sách việc họ hàng, chia lượt."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hai số 6 có quá kiểm soát nhau không?",
+     "dap": "Dễ có xu hướng đó vì cả hai đều thương bằng cách lo. Chia mảng rõ ràng và không góp ý vào mảng của người kia giúp giảm nhiều."
+    },
+    {
+     "hoi": "Số 33 và số 6 có phải là cặp cùng số?",
+     "dap": "Khi xem cặp số, 33 quy về 6 nên đọc như cặp 6–6. Người số 33 thường gánh nhiều hơn, nên luân phiên nghỉ ngơi càng cần."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 6 gắn với gia đình, trách nhiệm và sự chăm sóc; hai số 6 cạnh nhau làm nổi rõ cả sự ân cần lẫn xu hướng lo thay người khác."
+    }
+   ],
+   "y_chinh": [
+    "Hai số 6: chu đáo, hướng gia đình",
+    "Cùng muốn chăm, dễ kiểm soát nhẹ nhàng",
+    "Luân phiên người được chăm",
+    "Chia mảng, không góp ý vào mảng người kia"
+   ]
+  },
+  "so-chu-dao-6-va-7": {
+   "muc": [
+    {
+     "tieu_de": "Số 6 và số 7 có hợp nhau không?",
+     "doan": "Số 6 và số 7 thường bù cho nhau: số 6 mang hơi ấm, số 7 mang chiều sâu. Điểm dễ cọ là khoảng riêng. Số 6 hỏi han vì thương; số 7 cần yên để nghĩ. Một câu hỏi 'anh có sao không?' lặp ba lần trong một tối có thể làm số 7 thấy bị xâm phạm, còn số 6 thấy bị đẩy ra."
+    },
+    {
+     "tieu_de": "Số 6 và số 7 khi yêu, khi cưới",
+     "doan": "Khi yêu, số 7 thấy được chăm sóc mà không bị ép; số 6 thấy số 7 đáng tin, sâu sắc. Sau cưới, số 6 muốn cả nhà cùng sinh hoạt, số 7 muốn có giờ riêng. Thoả thuận rõ — số 7 có một tiếng yên mỗi tối, số 6 có một buổi trò chuyện mỗi tuần — làm cả hai bớt hiểu lầm."
+    },
+    {
+     "tieu_de": "Số 6 và số 7 làm việc chung",
+     "doan": "Hợp các việc chăm người cần chuyên môn: tư vấn tâm lý học đường, giáo dục đặc biệt, thư viện cộng đồng. Số 7 có kiến thức, số 6 có sự ân cần. Vướng khi số 6 muốn họp nhóm thường xuyên, số 7 muốn làm một mình."
+    },
+    {
+     "tieu_de": "Số 6 và số 7 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 6 hỏi một lần rồi chờ: 'khi nào muốn kể thì anh kể em nghe nhé'.",
+      "Số 7 trả lời bằng một câu ngắn, không im lặng: 'anh ổn, chỉ cần nghỉ chút'.",
+      "Lời khuyên của số 6 nên chờ được hỏi; số 7 thường tự tìm câu trả lời trước."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 6–7 theo từng quan hệ",
+    "chu_thich": "Ấm và sâu; cột giữa là ranh giới giữa quan tâm và không gian riêng.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Được chăm mà không bị ép.",
+      "Cách hỏi han thế nào là vừa.",
+      "Số 6 hỏi một lần, số 7 trả lời một câu."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà ấm và yên.",
+      "Giờ riêng của số 7.",
+      "Thống nhất một tiếng yên mỗi tối."
+     ],
+     [
+      "Bạn bè",
+      "Số 6 chu đáo, số 7 cho lời khuyên sắc.",
+      "Số 7 biến mất có làm số 6 buồn.",
+      "Số 7 nhắn hỏi thăm số 6 mỗi tuần."
+     ],
+     [
+      "Đồng nghiệp",
+      "Chuyên môn và ân cần.",
+      "Tần suất họp nhóm.",
+      "Họp ngắn, có chương trình gửi trước."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 6 quan tâm, nhân viên số 7 độc lập.",
+      "Quan tâm có thành theo dõi.",
+      "Sếp hỏi số 7 muốn được hỗ trợ kiểu nào."
+     ],
+     [
+      "Gia đình",
+      "Mẹ/bố số 6 lo nhiều, con số 7 trầm tính.",
+      "Con im lặng có bị coi là có chuyện.",
+      "Cho con một góc riêng trong nhà."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 7 có thấy số 6 xâm phạm không?",
+     "dap": "Có lúc, khi số 6 hỏi han dồn dập. Số 6 không có ý đó; chỉ cần thoả thuận cách hỏi và thời điểm hỏi là đỡ nhiều."
+    },
+    {
+     "hoi": "Số 33 và số 7 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 33 quy về 6 nên đọc cặp 6–7. Người số 33 thường quan tâm mạnh hơn, càng cần tôn trọng khoảng riêng của số 7."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 6 gắn với sự chăm sóc và gia đình, số 7 gắn với nội tâm và tri thức; cặp này thường được mô tả là ấm và sâu khi tôn trọng khoảng riêng."
+    }
+   ],
+   "y_chinh": [
+    "Số 6 mang hơi ấm, số 7 mang chiều sâu",
+    "Hỏi han nhiều dễ thành xâm phạm",
+    "Số 6 hỏi một lần, số 7 trả lời một câu",
+    "Một tiếng yên mỗi tối cho số 7"
+   ]
+  },
+  "so-chu-dao-6-va-8": {
+   "muc": [
+    {
+     "tieu_de": "Số 6 và số 8 có hợp nhau không?",
+     "doan": "Số 6 và số 8 thường xây được gia đình vững: số 8 lo vật chất, số 6 lo tinh thần. Nhiều nhà có người kiếm tiền giỏi và người giữ nếp giỏi theo đúng kiểu này. Chỗ dễ lệch là sự vắng mặt. Số 8 bận đến mức lỡ sinh nhật con, số 6 thấy mình cô đơn trong trách nhiệm."
+    },
+    {
+     "tieu_de": "Số 6 và số 8 khi cưới",
+     "doan": "Sau cưới, số 8 nghĩ 'anh đi làm vất vả là vì nhà'; số 6 nghĩ 'em cần anh có mặt hơn cần thêm tiền'. Cả hai đều đúng. Một cách nhiều cặp dùng: số 8 ghi những dịp quan trọng của gia đình vào lịch như một cam kết công việc, không huỷ trừ khi có việc thật sự khẩn."
+    },
+    {
+     "tieu_de": "Số 6 và số 8 làm việc chung",
+     "doan": "Hợp các doanh nghiệp gia đình, dịch vụ chăm sóc, giáo dục tư nhân. Số 8 lo tài chính và mở rộng, số 6 lo nhân viên và khách hàng. Vướng khi số 8 cắt giảm chi phí ảnh hưởng đến con người, số 6 phản đối mạnh."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 6–8",
+     "danh_sach": [
+      "Số 8 về nhà ăn tối ít nhất ba buổi, đúng giờ đã hẹn.",
+      "Số 6 nói rõ một dịp mình cần số 8 có mặt nhất trong tháng.",
+      "Một buổi không nhắc đến công việc của số 8.",
+      "Cuối tuần, số 8 hỏi: 'Tuần này em có thấy anh ở nhà nhiều hơn không?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 6–8 theo từng quan hệ",
+    "chu_thich": "Vật chất và tinh thần; cột giữa thường là sự có mặt của số 8.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Che chở và chăm lo.",
+      "Số 8 có mặt bao nhiêu.",
+      "Ba bữa tối chung mỗi tuần."
+     ],
+     [
+      "Vợ chồng",
+      "Kinh tế vững, nhà ấm.",
+      "Những dịp quan trọng của gia đình.",
+      "Ghi dịp gia đình vào lịch như cam kết công việc."
+     ],
+     [
+      "Bạn bè",
+      "Số 8 giúp cơ hội, số 6 giúp hỏi han.",
+      "Tình bạn có lệch về một phía.",
+      "Số 8 hỏi chuyện số 6 trước khi kể việc mình."
+     ],
+     [
+      "Đồng nghiệp",
+      "Tài chính và con người.",
+      "Cắt chi phí ảnh hưởng ai.",
+      "Bàn với số 6 trước khi cắt giảm liên quan nhân sự."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 8 đòi kết quả, nhân viên số 6 tận tâm.",
+      "Số 6 có bị đẩy thêm việc.",
+      "Số 6 nói rõ giới hạn việc nhận thêm."
+     ],
+     [
+      "Gia đình",
+      "Bố/mẹ số 8 lo kinh tế, con số 6 cần bố mẹ ở gần.",
+      "Con thấy bố mẹ quá bận.",
+      "Một buổi mỗi tuần chỉ dành cho con."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 6 có thấy cô đơn bên số 8 không?",
+     "dap": "Có thể, khi số 8 dồn sức vào công việc. Số 8 thường làm vì gia đình; điều cần là có mặt ở những dịp quan trọng như một cam kết."
+    },
+    {
+     "hoi": "Số 33 và số 8 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 33 quy về 6 nên đọc cặp 6–8. Người số 33 thường gánh việc chăm sóc nhiều hơn, nên càng cần số 8 chia sẻ phần có mặt."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 6 gắn với gia đình và trách nhiệm, số 8 gắn với vật chất và quyền lực; cặp này thường được mô tả là xây được gia đình vững khi cả hai cùng có mặt."
+    }
+   ],
+   "y_chinh": [
+    "Số 8 lo vật chất, số 6 lo tinh thần",
+    "Số 8 vắng mặt, số 6 cô đơn trong trách nhiệm",
+    "Dịp gia đình ghi lịch như cam kết công việc",
+    "Ba bữa tối chung mỗi tuần"
+   ]
+  },
+  "so-chu-dao-6-va-9": {
+   "muc": [
+    {
+     "tieu_de": "Số 6 và số 9 có hợp nhau không?",
+     "doan": "Số 6 và số 9 thường rất hợp về giá trị: cùng giàu lòng thương, cùng thích giúp người. Nhà của cặp này hay có người đến nhờ, đến ở nhờ. Chỗ dễ quên là chính hai người. Số 6 lo cho họ hàng, số 9 lo cho cộng đồng, và đến cuối tháng không còn buổi nào cho riêng nhau."
+    },
+    {
+     "tieu_de": "Số 6 và số 9 khi yêu, khi cưới",
+     "doan": "Khi yêu, hai người hiểu nhau qua những việc tốt cùng làm. Sau cưới, số 6 thiên về gia đình gần, số 9 thiên về cộng đồng rộng, nên đôi khi tranh luận nên giúp ai trước. Giữ trước một buổi cho hai người rồi mới nhận lời giúp ai, cộng thêm một mức giúp đỡ cố định mỗi tháng, giúp cặp này không kiệt sức."
+    },
+    {
+     "tieu_de": "Số 6 và số 9 làm việc chung",
+     "doan": "Rất hợp các tổ chức thiện nguyện, trường học, trung tâm chăm sóc cộng đồng. Số 9 vẽ tầm nhìn, số 6 lo từng người cụ thể. Vướng ở chỗ cả hai khó từ chối người cần giúp, dẫn đến nhận quá sức."
+    },
+    {
+     "tieu_de": "Số 6 và số 9 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 6 tránh 'anh lo người ngoài hơn người nhà' — thay bằng 'tuần này em muốn có anh tối Chủ nhật'.",
+      "Số 9 tránh 'em chỉ nghĩ cho nhà mình' — thay bằng 'mình cùng chọn giúp ai trước nhé'.",
+      "Cả hai tập nói 'lần này mình chưa giúp được' với người ngoài."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 6–9 theo từng quan hệ",
+    "chu_thich": "Cùng giàu lòng thương; cột giữa nhắc hai người dành phần cho nhau.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Đồng cảm, cùng làm việc tốt.",
+      "Thời gian riêng của hai người.",
+      "Một buổi mỗi tuần không giúp ai cả, chỉ hai người."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà rộng cửa, hay giúp người.",
+      "Giúp gia đình gần hay cộng đồng rộng trước.",
+      "Thống nhất thứ tự ưu tiên giúp đỡ."
+     ],
+     [
+      "Bạn bè",
+      "Bạn tốt, có mặt khi cần.",
+      "Có ai đang cạn sức.",
+      "Hỏi nhau 'cậu có đang nhận quá nhiều không?'"
+     ],
+     [
+      "Đồng nghiệp",
+      "Cùng hướng về người cần giúp.",
+      "Nhận việc quá sức.",
+      "Mỗi người đặt giới hạn việc nhận thêm."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 9 tầm nhìn, nhân viên số 6 tận tụy.",
+      "Số 6 có kiệt sức.",
+      "Báo mức tải mỗi tuần."
+     ],
+     [
+      "Gia đình",
+      "Người thân 6 và 9 cùng lo cho cả họ.",
+      "Gia đình nhỏ có bị bỏ quên.",
+      "Đặt lịch riêng cho gia đình nhỏ trước."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 6–9 có dễ kiệt sức không?",
+     "dap": "Dễ hơn các cặp khác vì cả hai đều khó từ chối người cần giúp. Đặt giới hạn rõ và giữ thời gian riêng là cách cặp này giữ sức."
+    },
+    {
+     "hoi": "Số 33 và số 9 thì đọc cặp nào?",
+     "dap": "Khi xem cặp số, 33 quy về 6 nên đọc cặp 6–9. Người số 33 thường càng muốn phục vụ, nên giới hạn giúp đỡ càng cần rõ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 6 gắn với trách nhiệm gia đình, số 9 gắn với lòng nhân ái rộng; cặp này thường được mô tả là cùng giàu lòng thương, cần giữ phần cho nhau."
+    }
+   ],
+   "y_chinh": [
+    "Cùng giàu lòng thương, thích giúp người",
+    "Lo cho người ngoài, quên nhau",
+    "Một buổi mỗi tuần chỉ hai người",
+    "Tập nói 'lần này mình chưa giúp được'"
+   ]
+  },
+  "so-chu-dao-7-va-7": {
+   "muc": [
+    {
+     "tieu_de": "Hai người cùng số 7 có hợp nhau không?",
+     "doan": "Hai người số 7 thường hiểu nhau mà không cần nói nhiều, tôn trọng không gian riêng của nhau. Cặp này có thể ngồi cạnh nhau hàng giờ, mỗi người một cuốn sách, mà vẫn thấy dễ chịu. Rủi ro là khép kín quá mức: ít nói, ít chia sẻ, và xa nhau dần mà không ai nhận ra."
+    },
+    {
+     "tieu_de": "Số 7 và số 7 khi yêu, khi cưới",
+     "doan": "Khi yêu, cặp 7–7 thường gắn với nhau qua những cuộc trò chuyện sâu về triết lý, khoa học, nghệ thuật. Sau cưới, những cuộc trò chuyện đó thưa dần, nhường chỗ cho im lặng dễ chịu. Hiệu ứng soi gương ở đây là thấy rõ thói quen rút vào trong của chính mình qua người kia. Một sở thích trí tuệ chung — một môn học, một dự án nghiên cứu nhỏ — giữ cho hai người có chuyện để nói."
+    },
+    {
+     "tieu_de": "Số 7 và số 7 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Vướng khi cả hai cùng im lúc có chuyện — hẹn mỗi tuần một buổi 'báo cáo trong lòng'.",
+      "Vướng khi tranh luận thành thi lý lẽ — dừng lại hỏi 'mình đang cảm thấy gì?'.",
+      "Vướng khi không ai rủ ra ngoài — mỗi tháng chọn một nơi mới, lần lượt người chọn."
+     ]
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 7–7",
+     "danh_sach": [
+      "Mỗi người viết ba điều đang nghĩ mà chưa kể, trao cho nhau.",
+      "Cùng đọc một bài viết và bàn về nó vào tối thứ Tư.",
+      "Một buổi ra ngoài, ở nơi có người, không mang sách.",
+      "Cuối tuần, hỏi nhau: 'Tuần này mình có gần nhau hơn không?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 7–7 theo từng quan hệ",
+    "chu_thich": "Hai số 7 hiểu nhau trong im lặng; cột giữa nhắc phần cần nói ra.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Hiểu nhau, tôn trọng khoảng riêng.",
+      "Cảm xúc có được chia sẻ.",
+      "Một buổi 'báo cáo trong lòng' mỗi tuần."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà yên tĩnh, đầy sách.",
+      "Hai người có xa nhau dần.",
+      "Một dự án trí tuệ chung mỗi năm."
+     ],
+     [
+      "Bạn bè",
+      "Bạn ít gặp nhưng sâu.",
+      "Lâu không liên lạc.",
+      "Gửi nhau một bài viết hay mỗi tháng."
+     ],
+     [
+      "Đồng nghiệp",
+      "Chuyên môn sâu, làm độc lập.",
+      "Kết quả có được chia sẻ cho nhóm.",
+      "Viết tóm tắt một trang sau mỗi phân tích."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 7 và nhân viên số 7 cùng cần lập luận.",
+      "Phản hồi có quá ít.",
+      "Hẹn mười lăm phút trao đổi mỗi tuần."
+     ],
+     [
+      "Gia đình",
+      "Người thân 7 và 7 cùng trầm tính.",
+      "Điều quan trọng chưa từng nói.",
+      "Viết thư cho nhau dịp đầu năm."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hai số 7 có xa cách nhau không?",
+     "dap": "Dễ có xu hướng đó vì cả hai đều quen tự xử lý trong lòng. Một sở thích trí tuệ chung và buổi chia sẻ định kỳ giúp giữ gần."
+    },
+    {
+     "hoi": "Hai số 7 có hợp làm nghiên cứu chung không?",
+     "dap": "Thường rất hợp. Cả hai đều kỹ và thích chiều sâu. Cần thêm người hoặc thói quen chia sẻ kết quả ra bên ngoài."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 7 gắn với suy ngẫm, tri thức và nội tâm; hai số 7 cạnh nhau làm nổi rõ cả sự thấu hiểu không lời lẫn xu hướng khép kín."
+    }
+   ],
+   "y_chinh": [
+    "Hai số 7: hiểu nhau không cần nói nhiều",
+    "Dễ khép kín, xa dần",
+    "Một sở thích trí tuệ chung",
+    "Một buổi chia sẻ trong lòng mỗi tuần"
+   ]
+  },
+  "so-chu-dao-7-va-8": {
+   "muc": [
+    {
+     "tieu_de": "Số 7 và số 8 có hợp nhau không?",
+     "doan": "Số 7 và số 8 thường hợp làm việc lớn: số 7 phân tích, số 8 quyết và thực hiện. Một bên giỏi thấy rủi ro, một bên giỏi nắm cơ hội. Chỗ hay căng là tốc độ. Số 8 thấy số 7 chậm; số 7 thấy số 8 vội, quyết khi chưa đủ dữ kiện."
+    },
+    {
+     "tieu_de": "Số 7 và số 8 khi yêu, khi cưới",
+     "doan": "Khi yêu, số 8 thấy số 7 sâu sắc, khác người; số 7 thấy số 8 mạnh mẽ, đáng tin. Sau cưới, số 8 bận mở rộng sự nghiệp, số 7 cần thời gian riêng, nên hai người dễ sống song song. Những buổi trò chuyện có chủ đề — một quyết định lớn của gia đình, một cuốn sách — giúp cả hai có tiếng nói ngang nhau."
+    },
+    {
+     "tieu_de": "Số 7 và số 8 làm việc chung",
+     "doan": "Rất hợp đầu tư, tư vấn chiến lược, công nghệ. Số 7 làm phân tích, số 8 ra quyết định. Luật nhiều nhóm dùng: bản phân tích có ngày nộp cố định, và quyết định chỉ chốt sau ngày đó. Vướng khi số 8 chốt trước để kịp cơ hội, số 7 thấy công sức mình bị bỏ qua."
+    },
+    {
+     "tieu_de": "Số 7 và số 8 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 8 tránh 'nhanh lên' — thay bằng 'thứ Năm em cần kết luận, kịp không?'.",
+      "Số 7 tránh 'anh vội quá' — thay bằng 'có ba rủi ro anh nên xem trước'.",
+      "Nói với số 8 bằng kết luận trước, chi tiết sau; nói với số 7 bằng lý do trước, kết luận sau."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 7–8 theo từng quan hệ",
+    "chu_thich": "Phân tích và quyết định; cột giữa thường là chuyện tốc độ.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Sâu sắc và mạnh mẽ.",
+      "Hai người có sống song song.",
+      "Một buổi trò chuyện có chủ đề mỗi tuần."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà có người tính kỹ, có người quyết nhanh.",
+      "Quyết việc lớn theo nhịp nào.",
+      "Số 7 phân tích có hạn, số 8 chờ đủ hạn."
+     ],
+     [
+      "Bạn bè",
+      "Số 8 giúp cơ hội, số 7 giúp lời khuyên.",
+      "Số 7 có thấy bị kéo vào việc làm ăn.",
+      "Gặp nhau một lần không bàn việc."
+     ],
+     [
+      "Đồng nghiệp",
+      "Phân tích và quyết định.",
+      "Thời điểm chốt.",
+      "Đặt hạn phân tích trước khi bắt đầu."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 8 cần nhanh, nhân viên số 7 cần kỹ.",
+      "Mức độ kỹ cần thiết.",
+      "Hỏi sếp mức sai số chấp nhận được."
+     ],
+     [
+      "Gia đình",
+      "Người số 8 lo kinh tế, người số 7 trầm tính.",
+      "Tiếng nói của số 7 trong việc lớn.",
+      "Số 8 hỏi ý số 7 trước mọi quyết định lớn."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 7–8 có hợp đầu tư chung không?",
+     "dap": "Thường hợp nếu tôn trọng vai: số 7 phân tích, số 8 quyết. Có hạn chót rõ cho phần phân tích giúp tránh cả vội lẫn chậm."
+    },
+    {
+     "hoi": "Số 8 có thấy số 7 chậm không?",
+     "dap": "Có lúc, vì số 8 quen nắm cơ hội nhanh. Khi số 8 thấy phân tích của số 7 giúp tránh được sai lầm, cách nhìn thường đổi."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 7 gắn với phân tích và chiều sâu, số 8 gắn với quyền lực và hành động; cặp này thường được mô tả là hợp làm việc lớn khi khớp tốc độ."
+    }
+   ],
+   "y_chinh": [
+    "Số 7 phân tích, số 8 quyết",
+    "Va chạm về tốc độ",
+    "Phân tích có hạn chót, quyết sau hạn",
+    "Nói với số 8 kết luận trước, với số 7 lý do trước"
+   ]
+  },
+  "so-chu-dao-7-va-9": {
+   "muc": [
+    {
+     "tieu_de": "Số 7 và số 9 có hợp nhau không?",
+     "doan": "Số 7 và số 9 thường hợp nhau về tinh thần: cùng hướng về ý nghĩa, tri thức, những câu hỏi lớn của đời sống. Hai người có thể bàn về triết học, tôn giáo, nghệ thuật cả buổi. Chỗ yếu là cả hai xa thực tế: tiền nhà, việc nhà, giấy tờ dễ bị coi là chuyện phụ."
+    },
+    {
+     "tieu_de": "Số 7 và số 9 khi yêu",
+     "doan": "Khi yêu, cặp này gắn với nhau qua những cuộc trò chuyện sâu và những giá trị chung. Số 9 mở lòng rộng, số 7 mở lòng chậm nhưng thật. Va chạm nhẹ khi số 9 muốn chia sẻ với nhiều người, số 7 muốn giữ riêng. Sau cưới, hai người cần một kế hoạch thực tế cho những điều cả hai tin, như dành dụm cho một chuyến học hay một dự án ý nghĩa."
+    },
+    {
+     "tieu_de": "Số 7 và số 9 làm việc chung",
+     "doan": "Hợp các việc giáo dục, nghiên cứu xã hội, xuất bản, tư vấn tâm linh hay triết học. Số 7 đào sâu, số 9 đưa đến với nhiều người. Vướng ở phần quản lý: hạn chót, ngân sách, hợp đồng."
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 7–9",
+     "danh_sach": [
+      "Chọn một điều cả hai tin và viết ba bước thực tế để làm nó.",
+      "Mỗi người lo một việc thực tế đã trì hoãn lâu nhất.",
+      "Một buổi trò chuyện sâu, nhưng kết thúc bằng một việc cụ thể.",
+      "Cuối tuần, xem lại: điều tin tưởng đã tiến được bước nào?"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 7–9 theo từng quan hệ",
+    "chu_thich": "Cùng hướng về ý nghĩa; cột giữa là phần thực tế cần thêm.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Cùng giá trị, cùng chiều sâu.",
+      "Việc thực tế ai lo.",
+      "Một giờ việc thực tế mỗi tuần."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà nhiều sách, nhiều câu hỏi lớn.",
+      "Tiền nhà và giấy tờ.",
+      "Rà soát tài chính ngày đầu tháng."
+     ],
+     [
+      "Bạn bè",
+      "Bạn tâm giao về triết lý sống.",
+      "Gặp nhau toàn chuyện lớn, quên chuyện nhỏ.",
+      "Hỏi nhau một chuyện đời thường."
+     ],
+     [
+      "Đồng nghiệp",
+      "Đào sâu và lan rộng.",
+      "Hạn chót, ngân sách.",
+      "Mời một người lo quản lý dự án."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 9 có tầm nhìn, nhân viên số 7 kỹ lưỡng.",
+      "Tầm nhìn có đủ dữ kiện.",
+      "Số 7 gửi sếp bản phân tích một trang."
+     ],
+     [
+      "Gia đình",
+      "Người thân 7 và 9 cùng ít để ý việc nhỏ.",
+      "Ai lo việc giấy tờ của gia đình.",
+      "Phân công người lo từng loại giấy tờ."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cặp 7–9 có quá xa thực tế không?",
+     "dap": "Có xu hướng đó vì cả hai đều hướng về ý nghĩa. Điều này không xấu; chỉ cần một nhịp cố định cho việc thực tế là cân lại được."
+    },
+    {
+     "hoi": "Số 7 và số 9 có hợp làm giáo dục cùng nhau không?",
+     "dap": "Thường rất hợp. Số 7 lo nội dung chuyên sâu, số 9 lo truyền cảm hứng cho người học. Cần thêm người lo vận hành."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 7 gắn với tri thức và nội tâm, số 9 gắn với lý tưởng và lòng nhân ái; cặp này thường được mô tả là cùng hướng về ý nghĩa, cần neo vào thực tế."
+    }
+   ],
+   "y_chinh": [
+    "Cùng hướng về ý nghĩa và tri thức",
+    "Cả hai xa thực tế",
+    "Kế hoạch thực tế cho điều cả hai tin",
+    "Trò chuyện sâu kết thúc bằng một việc cụ thể"
+   ]
+  },
+  "so-chu-dao-8-va-8": {
+   "muc": [
+    {
+     "tieu_de": "Hai người cùng số 8 có hợp nhau không?",
+     "doan": "Hai người số 8 thường cùng tham vọng và xây được nhiều: tài sản, công ty, vị thế. Hai người hiểu nhau ở chỗ cùng coi trọng kết quả. Chỗ khó là quyền lực: cả hai cùng muốn nắm, cùng khó nhường, và dễ cuốn vào tiền bạc đến quên những thứ không đo được."
+    },
+    {
+     "tieu_de": "Số 8 và số 8 khi cưới",
+     "doan": "Sau cưới, cặp 8–8 có thể trở thành một tập đoàn nhỏ: hai sự nghiệp, nhiều kế hoạch. Hiệu ứng soi gương ở đây là thấy rõ nhu cầu kiểm soát của chính mình qua người kia. Tranh luận về tiền dễ thành tranh luận về ai đúng. Tách vai rõ — người lo đầu tư, người lo chi tiêu gia đình — và đặt một mục tiêu chung không đo bằng tiền giúp cặp này giữ hơi ấm."
+    },
+    {
+     "tieu_de": "Số 8 và số 8 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Vướng khi cùng muốn quyết — chia lĩnh vực, mỗi người một quyền quyết cuối.",
+      "Vướng khi so thu nhập — tránh nhắc 'tháng này anh kiếm nhiều hơn'.",
+      "Vướng khi tranh luận trước mặt người ngoài — hẹn chỉ bàn chuyện tiền khi chỉ có hai người.",
+      "Câu dễ nghe: 'anh nể cách em xử lý việc này'. Số 8 ít nghe được câu đó từ người ngang mình."
+     ]
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 8–8",
+     "danh_sach": [
+      "Mỗi người viết ra ba lĩnh vực mình muốn quyết cuối, so và chia.",
+      "Một buổi không bàn tiền, không bàn công việc.",
+      "Cùng đặt một mục tiêu không đo bằng tiền: học một môn, chạy một giải, làm thiện nguyện.",
+      "Cuối tuần, mỗi người nói một điều mình nể ở người kia."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 8–8 theo từng quan hệ",
+    "chu_thich": "Hai số 8 có thừa sức xây; cột giữa là nơi hai sức mạnh dễ va nhau.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Mạnh mẽ, cùng chí hướng.",
+      "Ai nhường khi bất đồng.",
+      "Chia lĩnh vực quyết cuối cùng."
+     ],
+     [
+      "Vợ chồng",
+      "Tài sản vững, kế hoạch lớn.",
+      "Tranh luận tiền thành tranh luận ai đúng.",
+      "Mục tiêu chung không đo bằng tiền."
+     ],
+     [
+      "Bạn bè",
+      "Bạn có ảnh hưởng, giúp nhau cơ hội.",
+      "Cạnh tranh ngầm.",
+      "Chúc mừng thành công của người kia công khai."
+     ],
+     [
+      "Đồng nghiệp",
+      "Hai người hướng kết quả.",
+      "Ai đứng tên, ai đại diện.",
+      "Viết rõ vai và quyền của mỗi người."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 8 và nhân viên số 8 cùng đòi hỏi cao.",
+      "Nhân viên có thách thức quyền sếp.",
+      "Đề xuất riêng trước, bàn công khai sau."
+     ],
+     [
+      "Gia đình",
+      "Người thân 8 và 8 cùng có tiếng nói lớn.",
+      "Tranh luận tiền trước người ngoài.",
+      "Chỉ bàn tiền nhà trong phòng kín."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hai số 8 có hay tranh quyền không?",
+     "dap": "Dễ có vì cả hai đều quen dẫn. Chia rõ lĩnh vực quyết và có mục tiêu chung ngoài tiền giúp giảm tranh giành rõ rệt."
+    },
+    {
+     "hoi": "Hai số 8 có hợp làm ăn chung không?",
+     "dap": "Thường hợp nếu tách vai rõ ngay từ đầu. Nếu cả hai cùng quản một mảng, va chạm xảy ra rất nhanh."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 8 gắn với quyền lực, tổ chức và vật chất; hai số 8 cạnh nhau làm nổi rõ cả sức xây dựng lẫn xu hướng tranh quyền."
+    }
+   ],
+   "y_chinh": [
+    "Hai số 8: cùng tham vọng, xây được nhiều",
+    "Dễ tranh quyền, cuốn vào tiền",
+    "Chia lĩnh vực quyết cuối cùng",
+    "Mục tiêu chung không đo bằng tiền"
+   ]
+  },
+  "so-chu-dao-8-va-9": {
+   "muc": [
+    {
+     "tieu_de": "Số 8 và số 9 có hợp nhau không?",
+     "doan": "Số 8 và số 9 thường làm được những việc tầm vóc mà có ích cho nhiều người: số 8 có nguồn lực và cách tổ chức, số 9 có lý tưởng và lòng nhân ái. Hai người hay lệch nhau ở cách nhìn tiền. Số 9 thấy số 8 tính toán quá; số 8 thấy số 9 tiêu tiền cho người khác quá rộng tay."
+    },
+    {
+     "tieu_de": "Số 8 và số 9 khi yêu, khi cưới",
+     "doan": "Khi yêu, số 8 thấy số 9 có tấm lòng rộng; số 9 thấy số 8 vững vàng, đáng dựa. Sau cưới, số 9 muốn quyên góp, giúp họ hàng; số 8 muốn tích luỹ, đầu tư. Nhiều cặp chia thu nhập thành hai túi: túi cho việc tốt và túi để dành, tỉ lệ do hai người cùng chốt đầu năm — trong túi của mình, mỗi người tự do."
+    },
+    {
+     "tieu_de": "Số 8 và số 9 làm việc chung",
+     "doan": "Hợp các doanh nghiệp xã hội, quỹ từ thiện, dự án cộng đồng có quy mô. Số 8 lo tài chính, đối tác, vận hành; số 9 lo tầm nhìn và kết nối cộng đồng. Vướng khi số 8 đo mọi thứ bằng lợi nhuận, số 9 thấy giá trị bị bỏ qua."
+    },
+    {
+     "tieu_de": "Số 8 và số 9 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Số 8 tránh 'giúp người ta mãi thì nhà mình được gì' — thay bằng 'mình dành bao nhiêu cho việc này là vừa?'.",
+      "Số 9 tránh 'anh chỉ biết tiền' — thay bằng 'anh giúp em tính để việc tốt này làm được lâu'.",
+      "Mỗi kế hoạch có hai dòng: lợi ích đo bằng tiền và lợi ích cho người khác."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 8–9 theo từng quan hệ",
+    "chu_thich": "Nguồn lực và lý tưởng; cột giữa thường là cách dùng tiền.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Vững vàng và rộng lòng.",
+      "Chi tiêu cho người khác bao nhiêu.",
+      "Thống nhất phần trăm thu nhập cho việc ý nghĩa."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà vững kinh tế, có lòng tốt.",
+      "Tích luỹ hay giúp người.",
+      "Chia rõ phần tích luỹ và phần giúp đỡ."
+     ],
+     [
+      "Bạn bè",
+      "Số 8 giúp cơ hội, số 9 giúp tấm lòng.",
+      "Số 9 có thấy tình bạn thành chuyện làm ăn.",
+      "Cùng làm một việc tốt không liên quan tiền."
+     ],
+     [
+      "Đồng nghiệp",
+      "Nguồn lực và tầm nhìn.",
+      "Lợi nhuận và giá trị.",
+      "Mỗi dự án đo cả hai mặt."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 8 đòi kết quả, nhân viên số 9 cần ý nghĩa.",
+      "Ý nghĩa của công việc có được nói ra.",
+      "Sếp nói rõ việc này giúp ai."
+     ],
+     [
+      "Gia đình",
+      "Người số 8 giữ tài chính, người số 9 lo họ hàng.",
+      "Khoản giúp họ hàng.",
+      "Họp nhà mỗi quý xem lại các khoản giúp."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 9 có thấy số 8 thực dụng không?",
+     "dap": "Có lúc, khi số 8 đánh giá mọi việc bằng con số. Khi số 9 thấy nguồn lực của số 8 giúp việc tốt đi xa hơn, cách nhìn thường đổi."
+    },
+    {
+     "hoi": "Cặp 8–9 có hợp làm từ thiện chung không?",
+     "dap": "Thường rất hợp. Số 8 làm cho việc tốt bền vững về tài chính, số 9 giữ cho nó đúng mục đích."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 8 gắn với vật chất và tổ chức, số 9 gắn với lòng nhân ái và lý tưởng; cặp này thường được mô tả là nguồn lực gặp lý tưởng."
+    }
+   ],
+   "y_chinh": [
+    "Số 8 có nguồn lực, số 9 có lý tưởng",
+    "Va chạm về cách nhìn tiền",
+    "Một phần thu nhập cho việc ý nghĩa",
+    "Đo cả lợi nhuận và giá trị cho người khác"
+   ]
+  },
+  "so-chu-dao-9-va-9": {
+   "muc": [
+    {
+     "tieu_de": "Hai người cùng số 9 có hợp nhau không?",
+     "doan": "Hai người số 9 thường hiểu nhau về giá trị sống: rộng lượng, lý tưởng, quan tâm đến người khác. Hai người dễ cùng xúc động trước một câu chuyện và cùng muốn làm gì đó. Chỗ yếu là bỏ bê việc thực tế và bỏ bê chính mình, vì cả hai đều quen đặt người khác lên trước."
+    },
+    {
+     "tieu_de": "Số 9 và số 9 khi yêu, khi cưới",
+     "doan": "Khi yêu, cặp 9–9 rất lãng mạn, nhiều lý tưởng chung. Sau cưới, nhà của hai người có thể thành nơi đón bạn bè, họ hàng, người cần giúp. Hiệu ứng soi gương ở đây là thấy rõ sự quên mình của chính mình qua người kia. Một người giữ vai lo việc thực tế theo từng tháng — đổi lượt — giúp cặp này không bị cuốn đi."
+    },
+    {
+     "tieu_de": "Số 9 và số 9 hay vướng ở đâu, nói chuyện thế nào?",
+     "danh_sach": [
+      "Vướng khi cả hai cùng giúp người mà quên tiền nhà — lập ngân sách giúp đỡ mỗi tháng.",
+      "Vướng khi cả hai cùng mệt mà không ai nhận ra — hỏi nhau 'tuần này mình đã làm gì cho chính mình?'.",
+      "Vướng khi lý tưởng khác nhau về chi tiết — tập trung vào mục đích chung trước, cách làm sau."
+     ]
+    },
+    {
+     "tieu_de": "Một tuần thử nghiệm cho cặp 9–9",
+     "danh_sach": [
+      "Chọn một người lo việc thực tế trong tuần, đổi lượt tuần sau.",
+      "Mỗi người làm một việc chỉ cho chính mình.",
+      "Một buổi tối chỉ hai người, không đón ai, không giúp ai.",
+      "Cuối tuần, hỏi nhau: 'Mình đã chăm cho nhau bao nhiêu so với chăm người ngoài?'"
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cặp 9–9 theo từng quan hệ",
+    "chu_thich": "Hai số 9 có thừa lòng tốt; cột giữa nhắc phần thực tế và phần cho chính mình.",
+    "cot": [
+     "Quan hệ",
+     "Điểm dễ hợp",
+     "Điểm cần nói rõ",
+     "Một việc nên thử"
+    ],
+    "dong": [
+     [
+      "Người yêu",
+      "Lãng mạn, cùng lý tưởng.",
+      "Thời gian cho riêng hai người.",
+      "Một buổi tối mỗi tuần chỉ hai người."
+     ],
+     [
+      "Vợ chồng",
+      "Nhà rộng cửa, giàu lòng tốt.",
+      "Việc thực tế ai lo.",
+      "Đổi lượt người lo việc thực tế mỗi tháng."
+     ],
+     [
+      "Bạn bè",
+      "Bạn rộng lượng, giúp không tính toán.",
+      "Có ai đang cạn sức.",
+      "Hỏi nhau 'cậu đã nghỉ ngơi chưa?'"
+     ],
+     [
+      "Đồng nghiệp",
+      "Cùng hướng về giá trị.",
+      "Phần số liệu, ngân sách.",
+      "Mời một người giữ ngân sách dự án."
+     ],
+     [
+      "Sếp – nhân viên",
+      "Sếp số 9 và nhân viên số 9 cùng tầm nhìn.",
+      "Việc cụ thể có được giao rõ.",
+      "Kết thúc họp bằng danh sách việc có hạn."
+     ],
+     [
+      "Gia đình",
+      "Người thân 9 và 9 cùng lo cho cả họ.",
+      "Gia đình nhỏ có bị quên.",
+      "Đặt lịch riêng cho gia đình nhỏ trước."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hai số 9 có quá lý tưởng không?",
+     "dap": "Có xu hướng đó vì cả hai đều hướng về điều lớn lao. Lý tưởng không xấu; chỉ cần một người lo việc thực tế theo lượt là cân lại được."
+    },
+    {
+     "hoi": "Hai số 9 có dễ quên chăm cho nhau không?",
+     "dap": "Dễ hơn các cặp khác vì cả hai đều quen đặt người khác lên trước. Giữ một buổi riêng mỗi tuần là cách đơn giản để nhớ đến nhau."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Số 9 gắn với lòng nhân ái, lý tưởng và sự khép lại một chu kỳ; hai số 9 cạnh nhau làm nổi rõ cả sự rộng lượng lẫn xu hướng quên mình."
+    }
+   ],
+   "y_chinh": [
+    "Hai số 9: rộng lượng, cùng lý tưởng",
+    "Dễ bỏ bê việc thực tế và bản thân",
+    "Đổi lượt người lo việc thực tế",
+    "Một buổi tối mỗi tuần chỉ hai người"
+   ]
+  }
+ }
+}

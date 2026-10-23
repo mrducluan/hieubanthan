@@ -167,7 +167,8 @@ export async function TrangKienThucView(params: Thamso) {
 
       <div className="mt-8 space-y-8">
         {t.muc.map((m, i) => (
-          <section key={m.tieu_de}>
+          // SEO-M: mục nói sức khoẻ (luôn kèm "không thay lời bác sĩ") → data-nosnippet, AI Overviews không cắt câu ra ngoài ngữ cảnh.
+          <section key={m.tieu_de} {...(/bác sĩ/.test(`${m.doan ?? ""} ${(m.danh_sach ?? []).join(" ")}`) ? { "data-nosnippet": "" } : {})}>
             {/* Neo ổn định cho từng mục: người đọc và trợ lý AI dẫn link thẳng tới đoạn (#ten-muc). */}
             <h2 id={idMuc[i]} className="scroll-mt-24 text-2xl">{m.tieu_de}</h2>
             {m.bien_tap && <p className="mt-1 text-xs text-fg-faint">Ban biên tập bổ sung</p>}

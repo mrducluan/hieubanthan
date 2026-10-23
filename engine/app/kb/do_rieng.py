@@ -10,7 +10,7 @@ from __future__ import annotations
 from collections import Counter
 from functools import lru_cache
 
-NGUONG = 0.20
+NGUONG = 0.30          # SEO-M (chủ dự án duyệt 2026-10-23): 20 % → 30 % — đợt quét spam 08/2026 nhắm trang lập trình
 _N = 6
 
 

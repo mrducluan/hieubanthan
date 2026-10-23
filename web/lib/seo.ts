@@ -6,7 +6,7 @@ export const MO_TA_SITE =
   "Khám phá bản thân qua thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ) — tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Tham khảo văn hoá, không phải dự báo.";
 
 /** SEO-K (mục 7): cụm từ người Việt hay tìm quanh các công cụ của site — gồm cả kiểu bỏ dấu cũ ("thủy", "hỏa") vì
- *  người dùng gõ cả hai kiểu. Dùng cho meta keywords + WebSite/WebApplication.keywords. Đối chiếu lại bằng số Search
+ *  người dùng gõ cả hai kiểu. Dùng cho WebSite/WebApplication.keywords (JSON-LD; SEO-M bỏ thẻ meta keywords — Google bỏ qua). Đối chiếu lại bằng số Search
  *  Console (VIEC-CUA-ANH mục M7) — thêm cụm mới khi thấy trang có hiển thị mà chưa có ở đây. */
 export const TU_KHOA_SITE = [
   "thần số học", "thần số học Pythagoras", "thần số học online", "số chủ đạo", "con số chủ đạo", "số đường đời", "xem thần số học",

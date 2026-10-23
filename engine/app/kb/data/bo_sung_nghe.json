@@ -1,0 +1,957 @@
+{
+ "source_id": "bo_sung_nghe_v1",
+ "school_id": "pitago",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Ban biên tập Hiểu Bản Thân — số chủ đạo và nghề nghiệp (bổ sung)",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + truyền thống thần số học Pythagoras phổ biến (nháp AI, chờ thẩm định). Gợi ý theo khuynh hướng, không bảo đảm việc làm hay thu nhập."
+ },
+ "trang": {
+  "so-1-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 1 làm sếp hay làm nhân viên thì hợp?",
+     "doan": "Số 1 thường làm tốt khi được tự quyết một phần việc, dù chức danh là gì. Làm nhân viên, họ hợp vai mở mảng mới hoặc phụ trách dự án riêng. Làm sếp, họ quyết nhanh nhưng dễ ôm hết, ít giao lại. Điểm cần tập là để người dưới làm theo cách của họ khi kết quả vẫn ổn."
+    },
+    {
+     "tieu_de": "Số 1 có hợp kinh doanh riêng không?",
+     "doan": "Nhiều số 1 thích kinh doanh riêng vì được tự quyết, nhưng hợp hay không còn do vốn, kỹ năng và thị trường. Họ giỏi khởi động, kém ở phần giữ nhịp sau vài tháng đầu. Có một cộng sự lo vận hành, hoặc thử nhỏ bằng một việc làm thêm trước, thường an toàn hơn lao vào ngay."
+    },
+    {
+     "tieu_de": "Điểm yếu nghề nghiệp của số 1 và cách gỡ",
+     "doan": "Điểm yếu thường gặp của số 1 là nóng vội và khó nhận góp ý từ người mình không phục. Họ có thể rời một nơi tốt chỉ vì bị duyệt chậm. Việc làm được trong tuần này: chọn một đồng nghiệp giỏi hơn mình ở một mảng, nhờ họ góp ý một việc và làm theo thử."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 1: vì sao hợp và điều cần để ý",
+    "chu_thich": "Bảng gợi ý theo khuynh hướng tính cách, để tham khảo khi chọn hướng. Kỹ năng, hoàn cảnh và sở thích thật mới là điều quyết định.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Khởi nghiệp, kinh doanh nhỏ",
+      "Được tự đặt hướng, tự chịu kết quả.",
+      "Thường thiếu người giữ sổ sách và vận hành; tìm cộng sự sớm."
+     ],
+     [
+      "Bán hàng mở thị trường",
+      "Hợp tính chủ động, không ngại bị từ chối.",
+      "Dễ chán khi thị trường đã ổn; xin thêm mảng mới để giữ hứng."
+     ],
+     [
+      "Quản lý dự án, trưởng nhóm",
+      "Quyết nhanh, kéo được nhóm vào việc.",
+      "Hay làm thay cấp dưới; giao việc kèm hạn và để họ tự làm."
+     ],
+     [
+      "Kỹ sư thiết kế giải pháp",
+      "Thích tìm cách làm chưa ai làm.",
+      "Ngại phần bảo trì đều đặn; cần người hoặc quy trình giữ phần này."
+     ],
+     [
+      "Huấn luyện, thể thao",
+      "Thích thử thách, thích dẫn đầu.",
+      "Dễ ép người khác theo nhịp mình; hỏi nhịp của học viên trước."
+     ],
+     [
+      "Làm tự do theo dự án",
+      "Tự chủ giờ giấc, chọn việc mình tin.",
+      "Thu nhập lên xuống; giữ quỹ dự phòng vài tháng."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 1 có hợp làm nhà nước không?",
+     "dap": "Có thể, nếu vị trí có phần tự chủ rõ hoặc là mảng mới. Số 1 thường khó chịu khi mọi việc đều qua nhiều tầng duyệt."
+    },
+    {
+     "hoi": "Số 1 nên học ngành gì?",
+     "dap": "Số 1 thường hợp ngành có chỗ cho sáng kiến: quản trị, kỹ thuật, marketing, luật kinh doanh. Sở thích và năng lực thật vẫn là điều quyết định."
+    },
+    {
+     "hoi": "Vì sao số 1 hay nhảy việc?",
+     "dap": "Số 1 thường đi khi không còn được tự quyết hoặc không phục người quản lý. Trước khi nghỉ, hỏi lại xem có thể xin thêm quyền ở chỗ cũ không."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 1 với ý chí và sự khởi đầu. Các sách phổ biến về nghề nghiệp mô tả người số 1 hợp vai mở đường, tự đứng ra chịu trách nhiệm."
+    }
+   ],
+   "y_chinh": [
+    "Số 1 hợp vai được tự quyết một phần việc",
+    "Giỏi khởi động, cần người giữ nhịp vận hành",
+    "Làm sếp dễ ôm hết; tập giao việc kèm hạn",
+    "Tuần này: xin góp ý từ một người giỏi hơn mình"
+   ]
+  },
+  "so-2-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 2 làm sếp được không?",
+     "doan": "Được, nhất là kiểu quản lý lắng nghe và giữ đội gắn bó. Số 2 làm sếp thường được nhân viên quý vì công bằng và hiểu người. Khó khăn là phải nói lời từ chối, góp ý thẳng hay cho người nghỉ việc. Tập nói những câu đó theo kịch bản ngắn giúp số 2 bớt né."
+    },
+    {
+     "tieu_de": "Số 2 làm nhân viên trong đội thế nào?",
+     "doan": "Số 2 thường là người làm đội trơn tru: nhắc hạn, nối các bên, đỡ việc lúc người khác bận. Họ ít khi là người nói to nhất trong cuộc họp. Mặt tối là công sức không tên, đến kỳ đánh giá thì không ai nhớ rõ. Thử trong tuần này: ghi lại ba việc mình đã làm và gửi tóm tắt cho quản lý."
+    },
+    {
+     "tieu_de": "Điểm yếu nghề nghiệp của số 2 và cách gỡ",
+     "doan": "Điểm yếu của số 2 là khó nói 'không' và nhận việc vượt sức vì nể. Họ cũng ngại đòi tăng lương. Một cách gỡ là chuẩn bị số liệu về việc mình làm trước, rồi mới nói chuyện quyền lợi; có giấy tờ trong tay, số 2 thấy dễ mở lời hơn."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 2: vì sao hợp và điều cần để ý",
+    "chu_thich": "Các nhóm nghề dưới đây hợp với khuynh hướng phối hợp của số 2. Đây là gợi ý tham khảo, không thay cho việc thử và học nghề thật.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Nhân sự, tuyển dụng",
+      "Hiểu người, giữ được không khí đội.",
+      "Dễ ôm chuyện riêng của người khác; đặt giới hạn giờ nghe."
+     ],
+     [
+      "Chăm sóc khách hàng",
+      "Kiên nhẫn, nghe được cả người đang bực.",
+      "Dễ mang cảm xúc của khách về nhà; có thói quen xả sau giờ làm."
+     ],
+     [
+      "Trợ lý, điều phối",
+      "Nhớ chi tiết, nối các bên nhịp nhàng.",
+      "Việc không tên nhiều; xin mô tả công việc rõ ràng."
+     ],
+     [
+      "Đàm phán, ngoại giao",
+      "Tìm được điểm chung giữa hai phía.",
+      "Ngại giữ lập trường cứng; chuẩn bị trước mức tối thiểu không nhượng."
+     ],
+     [
+      "Tư vấn tâm lý, công tác xã hội",
+      "Lắng nghe sâu, khiến người khác thấy an toàn.",
+      "Cần học nghề bài bản và có người giám sát chuyên môn."
+     ],
+     [
+      "Âm nhạc, nghệ thuật tinh tế",
+      "Nhạy với sắc thái, chi tiết nhỏ.",
+      "Ngại tự quảng bá; nhờ người khác giúp phần giới thiệu."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 2 có hợp kinh doanh không?",
+     "dap": "Số 2 thường hợp kinh doanh có cộng sự hoặc dịch vụ cần sự tận tâm. Đứng một mình ở vị trí phải ép giá, đòi nợ thường làm họ mệt."
+    },
+    {
+     "hoi": "Số 2 hợp làm việc ở nhà hay ở văn phòng?",
+     "dap": "Số 2 thường cần người xung quanh để có nhịp. Làm ở nhà vẫn được nếu có liên lạc đều với nhóm."
+    },
+    {
+     "hoi": "Làm sao để số 2 dám xin tăng lương?",
+     "dap": "Chuẩn bị danh sách việc đã làm, con số cụ thể và mức mong muốn, rồi hẹn lịch nói chuyện. Có sẵn tài liệu, số 2 bớt cảm giác đang làm phiền."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 2 với sự hợp tác và cân bằng hai phía. Các sách phổ biến mô tả người số 2 làm tốt ở vị trí nối người với người, hơn là đứng một mình."
+    }
+   ],
+   "y_chinh": [
+    "Số 2 hợp vai nối các bên và giữ đội gắn bó",
+    "Làm sếp được: công bằng, hiểu người, cần tập nói lời khó",
+    "Công sức không tên: ghi lại và gửi tóm tắt cho quản lý",
+    "Xin tăng lương: chuẩn bị số liệu trước khi mở lời"
+   ]
+  },
+  "so-3-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 3 có hợp kinh doanh không?",
+     "doan": "Số 3 thường làm tốt phần bán, kể chuyện thương hiệu và kéo khách. Phần sổ sách, tồn kho, thuế lại dễ bị bỏ quên. Kinh doanh hợp hay không còn nhờ vốn và thị trường; với số 3, có một người lo con số giúp ý tưởng sống lâu hơn."
+    },
+    {
+     "tieu_de": "Số 3 nên chọn nghề gì khi nhiều việc dùng AI?",
+     "doan": "Số 3 thường hợp phần việc máy khó làm thay: hiểu khán giả, kể chuyện có cảm xúc, đứng trước người khác. Viết, thiết kế vẫn cần người có gu và biết chọn. Học dùng công cụ mới để làm nhanh phần thô, rồi dành sức cho phần ý tưởng và giao tiếp."
+    },
+    {
+     "tieu_de": "Điểm yếu nghề nghiệp của số 3 và cách gỡ",
+     "doan": "Điểm yếu thường gặp là mở nhiều, làm xong ít, và mất hứng ở đoạn chỉnh sửa. Người ngoài thấy số 3 có tài nhưng thiếu sản phẩm hoàn chỉnh. Thử trong tuần này: chọn một việc đang dở, chia thành ba bước nhỏ và làm xong bước đầu trước cuối tuần."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 3: vì sao hợp và điều cần để ý",
+    "chu_thich": "Số 3 thường hợp nghề có khán giả, có lời nói hoặc hình ảnh. Bảng là gợi ý tham khảo; năng lực và cơ hội thật vẫn quyết định.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Truyền thông, sáng tạo nội dung",
+      "Có ý mới, biết nói theo cách người nghe thích.",
+      "Dễ chạy theo xu hướng; giữ một chủ đề đủ lâu để có chiều sâu."
+     ],
+     [
+      "Báo chí, viết, biên kịch",
+      "Viết có nhịp, có giọng riêng.",
+      "Hạn chót dễ trễ; chia bài lớn thành phần nhỏ có hạn."
+     ],
+     [
+      "Giảng dạy, đào tạo",
+      "Làm lớp học sôi nổi, dễ nhớ.",
+      "Soạn kỹ phần khô khan; đừng dựa hết vào ứng biến."
+     ],
+     [
+      "Thiết kế, biểu diễn",
+      "Nhạy với cái đẹp và phản ứng của khán giả.",
+      "Thu nhập không đều; giữ một nguồn thu ổn định song song."
+     ],
+     [
+      "Bán hàng tư vấn",
+      "Dễ tạo thiện cảm, kể chuyện sản phẩm cuốn.",
+      "Dễ hứa quá tay; ghi lại điều đã hứa với khách."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 3 có hợp làm văn phòng không?",
+     "dap": "Hợp nếu công việc có phần giao tiếp, trình bày hoặc sáng tạo. Việc chỉ nhập số liệu lặp lại cả ngày thường làm số 3 hụt hứng nhanh."
+    },
+    {
+     "hoi": "Số 3 làm sếp thế nào?",
+     "dap": "Số 3 làm sếp thường truyền được hứng khởi và giữ đội vui. Cần thêm một phó hoặc quy trình theo dõi tiến độ, vì số 3 dễ bỏ sót chi tiết."
+    },
+    {
+     "hoi": "Vì sao số 3 hay bỏ dở việc?",
+     "dap": "Phần mới mẻ hấp dẫn số 3 hơn phần hoàn thiện. Khi việc chuyển sang giai đoạn chỉnh sửa, hứng giảm, nên cần hạn chót và người cùng làm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 3 với biểu đạt và sáng tạo. Các sách phổ biến mô tả người số 3 hợp việc có khán giả, có lời nói, hình ảnh hoặc câu chuyện."
+    }
+   ],
+   "y_chinh": [
+    "Số 3 hợp việc có khán giả: viết, nói, thiết kế, bán hàng",
+    "Kinh doanh: giỏi phần kéo khách, cần người lo con số",
+    "Dùng công cụ mới cho phần thô, giữ sức cho ý tưởng",
+    "Tuần này: chia một việc dở thành ba bước, làm xong bước đầu"
+   ]
+  },
+  "so-4-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 4 làm sếp hay làm nhân viên?",
+     "doan": "Số 4 thường hợp vai quản lý tầng giữa: nhận mục tiêu, dựng quy trình, giữ đội làm đúng. Làm nhân viên, họ là người được tin giao việc quan trọng. Làm sếp, số 4 công bằng nhưng dễ bị thấy khắt khe; giải thích lý do của từng quy định giúp đội dễ theo hơn."
+    },
+    {
+     "tieu_de": "Số 4 khi muốn đổi nghề thì nên làm gì?",
+     "doan": "Số 4 thường đổi nghề chậm và chỉ khi đã tính kỹ. Đó là điểm mạnh, nhưng cũng làm họ ở lại quá lâu ở việc không còn hợp. Thay vì chờ đủ yên tâm, số 4 có thể học một khoá ngắn hoặc nhận một dự án nhỏ ở ngành mới để thử trước."
+    },
+    {
+     "tieu_de": "Điểm yếu nghề nghiệp của số 4 và cách gỡ",
+     "doan": "Điểm yếu của số 4 là bám cách làm cũ và ngại việc chưa có hướng dẫn. Khi ngành đổi nhanh, họ dễ thấy mình tụt lại. Việc làm được trong tuần này: dành một buổi tìm hiểu một công cụ mới trong ngành và ghi ra một chỗ có thể áp dụng."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 4: vì sao hợp và điều cần để ý",
+    "chu_thich": "Số 4 thường hợp nghề cần chính xác và bền bỉ. Bảng là gợi ý tham khảo theo khuynh hướng, không phải danh sách bắt buộc.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Kế toán, kiểm toán",
+      "Cẩn thận với con số, giữ quy trình đều.",
+      "Mùa quyết toán dễ quá tải; lên lịch nghỉ bù trước."
+     ],
+     [
+      "Xây dựng, kỹ thuật công trình",
+      "Thích thấy thành quả hữu hình, làm theo bản vẽ.",
+      "Dễ cứng khi thiết kế đổi; hỏi lý do thay đổi thay vì phản đối."
+     ],
+     [
+      "Vận hành, chuỗi cung ứng",
+      "Giỏi dựng hệ thống chạy đều.",
+      "Ít được để ý khi mọi thứ ổn; báo cáo kết quả định kỳ."
+     ],
+     [
+      "Lập trình, dữ liệu",
+      "Tư duy từng bước, chịu được việc chi tiết.",
+      "Công nghệ đổi nhanh; dành giờ học mỗi tuần."
+     ],
+     [
+      "Hành chính, pháp chế",
+      "Đọc kỹ, giữ đúng quy định.",
+      "Dễ bị giao giấy tờ của cả phòng; nói rõ phạm vi việc của mình."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 4 có hợp kinh doanh riêng không?",
+     "dap": "Số 4 thường hợp mô hình ổn định, có quy trình rõ như dịch vụ, sản xuất nhỏ. Họ cần tập chấp nhận một phần rủi ro không tính trước được."
+    },
+    {
+     "hoi": "Số 4 có thấy nhàm chán trong công việc không?",
+     "dap": "Số 4 chịu được việc lặp lại tốt hơn nhiều số khác. Nhưng làm mãi một việc không học thêm, họ dễ thấy mình đứng yên."
+    },
+    {
+     "hoi": "Số 4 nên học thêm gì?",
+     "dap": "Số 4 thường được lợi khi học thêm kỹ năng trình bày và một công cụ mới của ngành. Hai điều này giúp công sức đều đặn của họ được thấy rõ hơn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 4 với nền móng và trật tự. Các sách phổ biến mô tả người số 4 làm tốt việc cần chính xác, bền bỉ và có quy trình."
+    }
+   ],
+   "y_chinh": [
+    "Số 4 hợp vai dựng quy trình và giữ chất lượng",
+    "Làm sếp công bằng; giải thích lý do để bớt bị thấy khắt khe",
+    "Đổi nghề: thử khoá ngắn hoặc dự án nhỏ trước",
+    "Tuần này: tìm hiểu một công cụ mới trong ngành"
+   ]
+  },
+  "so-5-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 5 có hợp kinh doanh không?",
+     "doan": "Số 5 thường nhạy cơ hội, giỏi bán và thích thử mô hình mới. Họ hợp kinh doanh có nhiều gặp gỡ, đi lại. Mặt tối là dễ bỏ mô hình cũ trước khi nó kịp có lãi. Đặt trước một mốc thời gian thử, ví dụ sáu tháng, rồi mới quyết dừng hay đi tiếp."
+    },
+    {
+     "tieu_de": "Số 5 làm nhân viên văn phòng được không?",
+     "doan": "Được, nếu việc có thay đổi: nhiều dự án, gặp khách, đi công tác. Việc ngồi một chỗ, làm một quy trình cả năm thường làm số 5 bồn chồn. Xin luân chuyển dự án hoặc nhận thêm phần đối ngoại giúp họ giữ hứng mà không phải nhảy việc."
+    },
+    {
+     "tieu_de": "Điểm yếu nghề nghiệp của số 5 và cách gỡ",
+     "doan": "Điểm yếu thường gặp là thiếu chiều sâu vì đổi việc nhanh, và dễ nhận lời quá nhiều. Hồ sơ của số 5 nhiều trải nghiệm nhưng ít thành tích dài. Thử trong tuần này: viết ra một kỹ năng muốn giỏi thật sự trong hai năm tới và chọn một việc nhỏ để luyện nó."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 5: vì sao hợp và điều cần để ý",
+    "chu_thich": "Số 5 thường hợp nghề nhiều chuyển động và gặp gỡ. Bảng là gợi ý tham khảo; không nghề nào bảo đảm thu nhập hay thành công.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Du lịch, khách sạn, hàng không",
+      "Được đi lại, gặp người mới mỗi ngày.",
+      "Lịch làm thất thường; giữ giờ ngủ và giờ riêng đều."
+     ],
+     [
+      "Bán hàng, phát triển kinh doanh",
+      "Nói chuyện cuốn, xoay xở nhanh.",
+      "Dễ hứa nhiều; ghi lại cam kết với từng khách."
+     ],
+     [
+      "Báo chí, truyền thông",
+      "Thích tin mới, chịu được nhịp gấp.",
+      "Dễ dàn trải; chọn một mảng để theo đuổi lâu."
+     ],
+     [
+      "Tổ chức sự kiện, giải trí",
+      "Xử lý tình huống tốt khi mọi thứ đổi phút chót.",
+      "Việc dồn theo mùa; để dành cho tháng ít việc."
+     ],
+     [
+      "Làm tự do, kinh doanh online",
+      "Tự chủ giờ giấc và chọn dự án.",
+      "Thu nhập lên xuống; tách quỹ dự phòng trước khi tiêu."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 5 có nên làm tự do không?",
+     "dap": "Làm tự do hợp với nhu cầu tự chủ của số 5. Điều cần là kỷ luật tài chính và một lịch làm việc tối thiểu tự đặt ra."
+    },
+    {
+     "hoi": "Số 5 làm sếp thế nào?",
+     "dap": "Số 5 làm sếp thường linh hoạt, cởi mở với ý mới. Cần một phó giỏi theo dõi tiến độ để những thay đổi không làm đội rối."
+    },
+    {
+     "hoi": "Số 5 nhảy việc nhiều có sao không?",
+     "dap": "Không xấu nếu mỗi lần đổi đều thêm được kỹ năng rõ ràng. Vấn đề chỉ khi đổi vì chán mà không mang theo được gì."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 5 với tự do, thay đổi và trải nghiệm. Các sách phổ biến mô tả người số 5 hợp việc nhiều chuyển động, nhiều người và nhiều tình huống mới."
+    }
+   ],
+   "y_chinh": [
+    "Số 5 hợp việc có thay đổi, đi lại, gặp người",
+    "Kinh doanh: đặt mốc thời gian thử trước khi bỏ mô hình",
+    "Ở văn phòng: xin luân chuyển dự án thay vì nhảy việc",
+    "Tuần này: chọn một kỹ năng muốn giỏi thật trong hai năm"
+   ]
+  },
+  "so-6-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 6 làm sếp thế nào?",
+     "doan": "Số 6 làm sếp thường như người anh chị cả: lo cho đội, nhớ hoàn cảnh từng người. Nhân viên thấy được chăm. Mặt tối là số 6 khó xử người làm chưa tốt, hay làm thay rồi tự mệt. Tách rõ chuyện thương người với chuyện đánh giá kết quả giúp số 6 công bằng với cả đội."
+    },
+    {
+     "tieu_de": "Số 6 có hợp kinh doanh không?",
+     "doan": "Số 6 thường hợp kinh doanh dịch vụ gắn với con người: quán ăn, lớp học, làm đẹp, chăm sóc nhà cửa. Khách quay lại vì sự tận tâm. Khó nhất với số 6 là định giá: họ hay bán rẻ hoặc cho thêm. Viết bảng giá từ đầu và giữ đúng giúp tránh làm nhiều mà lời ít."
+    },
+    {
+     "tieu_de": "Điểm yếu nghề nghiệp của số 6 và cách gỡ",
+     "doan": "Điểm yếu của số 6 là nhận việc vì không nỡ, cho tới khi quá tải. Họ cũng ngại nói về quyền lợi của mình. Thử trong tuần này: khi có ai nhờ việc ngoài phần mình, trả lời 'để mình xem lịch rồi báo lại' thay vì nhận ngay."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 6: vì sao hợp và điều cần để ý",
+    "chu_thich": "Số 6 thường hợp nghề chăm người và làm đẹp không gian sống. Bảng là gợi ý tham khảo theo khuynh hướng, việc chọn nghề còn do năng lực và hoàn cảnh.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Giáo dục, mầm non",
+      "Kiên nhẫn, biết chăm từng người học.",
+      "Dễ mang việc về nhà; đặt giờ dừng chấm bài, soạn bài."
+     ],
+     [
+      "Điều dưỡng, chăm sóc",
+      "Tận tâm, để ý người khác cần gì.",
+      "Ca làm nặng; nghỉ đúng ca, việc chuyên môn theo quy định của ngành."
+     ],
+     [
+      "Tư vấn, công tác xã hội",
+      "Lắng nghe, muốn người khác tốt lên.",
+      "Dễ ôm chuyện của người khác; cần giới hạn và người hỗ trợ chuyên môn."
+     ],
+     [
+      "Thiết kế nội thất, làm đẹp",
+      "Có mắt thẩm mỹ, thích làm không gian dễ chịu.",
+      "Hay chiều khách quá mức; ghi rõ phạm vi và giá từ đầu."
+     ],
+     [
+      "Ẩm thực, nhà hàng",
+      "Thích nuôi người khác bằng món ngon.",
+      "Giờ giấc dài; cần người lo sổ sách và giá vốn."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 6 có hợp làm việc tự do không?",
+     "dap": "Có thể, nhất là dịch vụ chăm sóc hay dạy kèm. Cần hợp đồng hoặc thoả thuận rõ để không làm thêm không công."
+    },
+    {
+     "hoi": "Vì sao số 6 hay bị giao nhiều việc?",
+     "dap": "Vì số 6 thường nhận lời và làm tốt, nên người khác quen nhờ. Nói rõ phạm vi việc của mình là cách giữ sức lâu dài."
+    },
+    {
+     "hoi": "Số 6 nên chọn ngành gì khi mới ra trường?",
+     "dap": "Số 6 thường thấy có ý nghĩa ở ngành gắn với con người như giáo dục, dịch vụ, thiết kế. Thực tập thử giúp biết mình thích phần chăm người hay phần làm đẹp."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 6 với trách nhiệm, chăm sóc và cái đẹp hài hoà. Các sách phổ biến mô tả người số 6 hợp nghề phục vụ con người và gia đình."
+    }
+   ],
+   "y_chinh": [
+    "Số 6 hợp nghề chăm người: dạy, phục vụ, làm đẹp, ẩm thực",
+    "Làm sếp như anh chị cả; tách thương người với đánh giá",
+    "Kinh doanh: viết bảng giá từ đầu và giữ đúng",
+    "Tuần này: trả lời 'để mình xem lịch' trước khi nhận việc"
+   ]
+  },
+  "so-7-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 7 làm sếp hay làm chuyên gia thì hợp hơn?",
+     "doan": "Số 7 thường hợp con đường chuyên gia hơn là quản lý đông người. Họ giỏi trả lời câu hỏi khó, ít hứng với việc họp, động viên, xử lý mâu thuẫn. Nếu làm sếp, số 7 hợp dẫn nhóm nhỏ toàn người giỏi, có một phó lo phần con người."
+    },
+    {
+     "tieu_de": "Số 7 có làm kinh doanh được không?",
+     "doan": "Được, nhất là kinh doanh dựa trên chuyên môn: tư vấn, phần mềm, sản phẩm cần nghiên cứu kỹ. Điểm khó là bán hàng và tự giới thiệu. Có cộng sự lo phần bán, hoặc viết bài chia sẻ kiến thức đều đặn để khách tự tìm đến, hợp với số 7 hơn đi chào hàng."
+    },
+    {
+     "tieu_de": "Điểm yếu nghề nghiệp của số 7 và cách gỡ",
+     "doan": "Điểm yếu thường gặp của số 7 là nghi ngờ người khác và giữ ý tưởng trong đầu quá lâu. Đồng nghiệp có thể thấy họ xa cách. Thử trong tuần này: trình bày một ý tưởng còn dở cho một người tin được và xin họ một câu phản biện."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 7: vì sao hợp và điều cần để ý",
+    "chu_thich": "Số 7 thường hợp nghề chuyên sâu, được nghĩ lâu và làm kỹ. Bảng là gợi ý tham khảo; con số không quyết định nghề của ai.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Nghiên cứu, học thuật",
+      "Thích đào tới tận gốc một câu hỏi.",
+      "Dễ cầu toàn, chậm công bố; đặt hạn nộp bản nháp."
+     ],
+     [
+      "Phân tích dữ liệu, công nghệ",
+      "Nhìn ra quy luật người khác bỏ sót.",
+      "Ngại giải thích cho người không chuyên; tập tóm tắt một trang."
+     ],
+     [
+      "Luật, kiểm định, đánh giá",
+      "Đọc kỹ, soi chỗ hở, giữ lập luận chặt.",
+      "Dễ bị thấy khó tính; nêu điểm tốt trước điểm cần sửa."
+     ],
+     [
+      "Viết chuyên đề, biên tập",
+      "Có chiều sâu và độ chính xác.",
+      "Dễ viết mãi không xong; giới hạn số lần sửa."
+     ],
+     [
+      "Tư vấn chiến lược",
+      "Phân tích tình huống phức tạp một cách bình tĩnh.",
+      "Cần thuyết phục người ra quyết định; luyện trình bày ngắn."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 7 có hợp làm việc từ xa không?",
+     "dap": "Thường hợp, vì số 7 làm tốt khi yên tĩnh và ít bị ngắt. Cần chủ động cập nhật cho nhóm để công sức không bị chìm."
+    },
+    {
+     "hoi": "Số 7 có hợp nghề giao tiếp không?",
+     "dap": "Số 7 có thể làm tốt nghề cần giao tiếp sâu như phỏng vấn, giảng dạy chuyên môn. Giao tiếp xã giao liên tục mới là điều làm họ cạn sức."
+    },
+    {
+     "hoi": "Vì sao số 7 hay rời chỗ làm khi thấy sếp không giỏi?",
+     "dap": "Số 7 khó làm dưới người họ không phục về chuyên môn. Trước khi đi, thử tìm một người cố vấn giỏi trong hoặc ngoài công ty."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 7 với suy xét, chiêm nghiệm và chân lý. Các sách phổ biến mô tả người số 7 hợp vai chuyên sâu, nơi được nghĩ lâu và làm kỹ."
+    }
+   ],
+   "y_chinh": [
+    "Số 7 hợp con đường chuyên gia hơn quản lý đông người",
+    "Kinh doanh dựa trên chuyên môn; cần người lo phần bán",
+    "Viết chia sẻ kiến thức đều để khách tự tìm đến",
+    "Tuần này: trình bày một ý tưởng dở cho người tin được"
+   ]
+  },
+  "so-8-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 8 làm sếp thế nào?",
+     "doan": "Số 8 làm sếp thường quyết đoán, đặt mục tiêu cao và giỏi phân bổ nguồn lực. Đội làm với số 8 thường đạt số. Mặt tối là nhịp ép kết quả liên tục làm người giỏi rời đi. Hỏi đội một câu mỗi tuần, như 'việc gì đang làm em chậm lại?', giúp số 8 thấy chỗ nghẽn trước khi mất người."
+    },
+    {
+     "tieu_de": "Số 8 làm nhân viên được không?",
+     "doan": "Được, nếu có lộ trình thăng tiến rõ và thưởng theo kết quả. Số 8 làm nhân viên thường nhận chỉ tiêu cao và muốn được giao quyền dần. Ở nơi mọi người được trả như nhau dù làm khác nhau, số 8 dễ mất động lực nhanh."
+    },
+    {
+     "tieu_de": "Số 8 làm kinh doanh có dễ thành công không?",
+     "doan": "Không có con số nào bảo đảm thành công. Số 8 thường có tố chất làm kinh doanh: nhìn ra cơ hội, dám quyết, chịu áp lực. Rủi ro là tự tin quá tay. Trước mỗi quyết định lớn, viết ra kịch bản xấu nhất và mức lỗ chịu được, rồi hỏi ý một người không có lợi ích trong việc đó."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 8: vì sao hợp và điều cần để ý",
+    "chu_thich": "Số 8 thường hợp nghề có quy mô, có chỉ tiêu và quyền quyết định. Bảng là gợi ý tham khảo; không nghề nào bảo đảm thu nhập.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Quản trị doanh nghiệp",
+      "Nhìn được bức tranh lớn và con số.",
+      "Dễ bỏ qua cảm nhận của đội; có người lo văn hoá công ty."
+     ],
+     [
+      "Tài chính, ngân hàng",
+      "Bình tĩnh với tiền lớn, giỏi cân rủi ro.",
+      "Dễ bị cuốn theo lợi nhuận nhanh; giữ quy tắc đã đặt."
+     ],
+     [
+      "Bất động sản",
+      "Đàm phán tốt, kiên nhẫn chờ thời điểm.",
+      "Thị trường lên xuống theo chu kỳ; không dồn hết vốn vào một chỗ."
+     ],
+     [
+      "Luật kinh doanh",
+      "Hiểu luật chơi của tiền và hợp đồng.",
+      "Dễ làm liền nhiều tuần; giữ ngày nghỉ cố định."
+     ],
+     [
+      "Bán hàng doanh nghiệp, đối tác lớn",
+      "Tự tin trước khách hàng tầm cỡ.",
+      "Hay nhận chỉ tiêu quá sức; thống nhất mục tiêu trước khi nhận."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 8 có hay làm việc quá sức không?",
+     "dap": "Có xu hướng, nhất là khi mục tiêu đang gần. Lịch nghỉ cố định, coi như một cuộc hẹn công việc, giúp số 8 giữ nhịp lâu dài."
+    },
+    {
+     "hoi": "Số 8 hợp ngành nào khi mới ra trường?",
+     "dap": "Số 8 thường hợp ngành có lộ trình rõ: tài chính, quản trị, bán hàng doanh nghiệp, luật. Một vị trí có chỉ tiêu đo được giúp họ sớm thấy năng lực."
+    },
+    {
+     "hoi": "Số 8 có phù hợp làm việc nhà nước không?",
+     "dap": "Có thể, ở vị trí quản lý hoặc có thăng tiến rõ. Số 8 thường khó chịu khi đóng góp không được tính vào đánh giá."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 8 với quyền lực, của cải và sự cân bằng giữa được và mất. Các sách phổ biến mô tả người số 8 hợp vai điều hành và ra quyết định."
+    }
+   ],
+   "y_chinh": [
+    "Số 8 hợp vai điều hành, có chỉ tiêu và thưởng theo kết quả",
+    "Làm sếp: hỏi đội chỗ nghẽn mỗi tuần để giữ người giỏi",
+    "Không con số nào bảo đảm thành công kinh doanh",
+    "Trước quyết định lớn: viết kịch bản xấu nhất và mức lỗ chịu được"
+   ]
+  },
+  "so-9-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 9 làm sếp thế nào?",
+     "doan": "Số 9 làm sếp thường dẫn dắt bằng giá trị: nói được vì sao việc này đáng làm. Người theo họ vì tin. Mặt tối là số 9 ngại xử lý chuyện kỷ luật và chi phí, để lâu thành vấn đề. Có một phó lo vận hành và ngân sách giúp tầm nhìn của số 9 không bị đứt giữa chừng."
+    },
+    {
+     "tieu_de": "Số 9 có làm kinh doanh được không?",
+     "doan": "Được, nhất là kinh doanh có mục đích xã hội rõ: sản phẩm tốt cho môi trường, giáo dục, nghệ thuật. Số 9 khó ở phần giữ giá và thu tiền. Đặt mức lợi nhuận tối thiểu từ đầu, coi đó là điều kiện để tiếp tục giúp được người, giúp số 9 bớt ngại."
+    },
+    {
+     "tieu_de": "Số 9 khi muốn đổi nghề thì sao?",
+     "doan": "Số 9 thường đổi nghề khi thấy việc cũ không còn ý nghĩa. Họ dễ rời đi đột ngột, để lại nhiều việc dở. Thử trong tuần này: viết ra ba điều muốn giữ từ nghề cũ và ba điều muốn có ở nghề mới, rồi nói chuyện với một người đang làm nghề mới đó."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 9: vì sao hợp và điều cần để ý",
+    "chu_thich": "Số 9 thường hợp nghề có ích cho nhiều người. Bảng là gợi ý tham khảo; thu nhập và cơ hội còn tuỳ ngành, nơi làm và kỹ năng.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Giáo dục, đào tạo",
+      "Truyền được niềm tin và cái nhìn rộng.",
+      "Thu nhập có thể thấp; tính đường dài trước khi nhận."
+     ],
+     [
+      "Phi lợi nhuận, công tác xã hội",
+      "Hợp mong muốn làm việc có ích.",
+      "Dễ kiệt sức vì cho nhiều; giữ ngày nghỉ và quỹ riêng."
+     ],
+     [
+      "Nghệ thuật, văn chương, điện ảnh",
+      "Nhạy với cảm xúc chung của con người.",
+      "Việc không đều; có một nghề ổn định song song."
+     ],
+     [
+      "Ngoại giao, quan hệ quốc tế",
+      "Hiểu và tôn trọng nhiều nền văn hoá.",
+      "Đi xa nhiều; giữ liên lạc đều với người thân."
+     ],
+     [
+      "Tư vấn, cố vấn",
+      "Nhìn được bức tranh lớn của người khác.",
+      "Dễ cho lời khuyên miễn phí; định rõ phần nào tính phí."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 9 có hợp làm công ty lớn không?",
+     "dap": "Có thể, nếu bộ phận đó làm việc có ích rõ như đào tạo, trách nhiệm xã hội, quan hệ cộng đồng. Số 9 dễ mất hứng ở vị trí chỉ chạy theo doanh số."
+    },
+    {
+     "hoi": "Vì sao số 9 hay làm việc không công?",
+     "dap": "Số 9 thường thấy việc giúp người quan trọng hơn tiền. Định trước số giờ làm thiện nguyện mỗi tháng giúp họ giúp được lâu hơn."
+    },
+    {
+     "hoi": "Số 9 nên học ngành gì?",
+     "dap": "Số 9 thường hợp ngành rộng như xã hội học, ngôn ngữ, giáo dục, nghệ thuật. Nên thêm một kỹ năng thực tế như quản lý dự án để dễ có việc."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Truyền thống Pythagoras gắn số 9 với sự hoàn tất và lòng nhân ái. Các sách phổ biến mô tả người số 9 hợp việc phục vụ cộng đồng và việc có tầm nhìn rộng."
+    }
+   ],
+   "y_chinh": [
+    "Số 9 dẫn dắt bằng giá trị, cần người lo vận hành",
+    "Kinh doanh có mục đích xã hội; đặt lợi nhuận tối thiểu",
+    "Đổi nghề đột ngột dễ để lại việc dở",
+    "Tuần này: nói chuyện với một người đang làm nghề mới"
+   ]
+  },
+  "so-11-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 11 có khác số 2 trong công việc không?",
+     "doan": "Có. Số 11 là bản cường độ cao của số 2: vẫn giỏi phối hợp và hiểu người, nhưng thêm trực giác mạnh và nhu cầu làm việc có ý nghĩa. Vì vậy số 11 hợp vai truyền cảm hứng hơn là trợ lý, và cũng dễ căng thẳng hơn trong môi trường cạnh tranh gắt."
+    },
+    {
+     "tieu_de": "Số 11 làm sếp hay làm nhân viên?",
+     "doan": "Số 11 thường hợp vai dẫn dắt về ý tưởng: trưởng nhóm sáng tạo, người định hướng nội dung, giảng viên chính. Phần giấy tờ, chỉ tiêu, kỷ luật làm họ hao sức. Ghép đôi với một người vận hành giỏi là cách nhiều số 11 làm sếp được lâu."
+    },
+    {
+     "tieu_de": "Điểm yếu nghề nghiệp của số 11 và cách gỡ",
+     "doan": "Điểm yếu của số 11 là cảm xúc lên xuống theo không khí nơi làm, và tầm nhìn nhiều hơn bước làm. Có tuần họ làm rất hăng, có tuần gần như đứng yên. Thử trong tuần này: chọn một ý tưởng, viết ra bước tiếp theo nhỏ nhất và làm nó trước khi nghĩ thêm ý mới."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 11: vì sao hợp và điều cần để ý",
+    "chu_thich": "Số 11 thường được xét như số 2 ở cường độ cao: vẫn hợp việc phối hợp, nhưng nghiêng về việc cần trực giác và ý nghĩa. Bảng là gợi ý tham khảo.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Tư vấn, trị liệu tâm lý",
+      "Cảm được điều người khác chưa nói.",
+      "Cần học nghề bài bản, có giám sát và giới hạn số ca."
+     ],
+     [
+      "Giảng dạy, diễn giả",
+      "Truyền được cảm hứng tới đám đông.",
+      "Hao sức sau mỗi buổi; để trống thời gian nghỉ sau khi nói."
+     ],
+     [
+      "Âm nhạc, thiết kế, nghệ thuật",
+      "Trực giác tốt về cái đẹp và cảm xúc.",
+      "Tự chê mình nhiều; nhờ người tin cậy góp ý."
+     ],
+     [
+      "Truyền thông vì mục đích xã hội",
+      "Kể được câu chuyện làm người khác muốn hành động.",
+      "Dễ ôm quá nhiều chiến dịch; chọn một việc chính mỗi quý."
+     ],
+     [
+      "Nghiên cứu sáng tạo, phát triển sản phẩm",
+      "Nhìn trước xu hướng, nhiều ý mới.",
+      "Thiếu bước triển khai; đi cùng người giỏi lập kế hoạch."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 11 có hợp môi trường cạnh tranh không?",
+     "dap": "Số 11 làm được nhưng dễ hao sức hơn người khác. Họ thường làm tốt nhất ở nơi cạnh tranh bằng chất lượng ý tưởng hơn là bằng sức ép doanh số."
+    },
+    {
+     "hoi": "Số 11 có nên làm tự do không?",
+     "dap": "Có thể, nếu có kỷ luật về lịch và tài chính. Làm một mình lâu, số 11 dễ thiếu người phản hồi nên cần một nhóm trao đổi đều."
+    },
+    {
+     "hoi": "Vì sao số 11 hay thấy mình chưa làm đủ?",
+     "dap": "Vì số 11 nhìn thấy tầm nhìn lớn hơn những gì đã làm được. Ghi lại việc đã xong mỗi tuần giúp họ thấy tiến bộ thật."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Trong thần số học Pythagoras, 11 là số cái, thường đọc như bản cường độ cao của số 2, gắn với trực giác và khả năng truyền cảm hứng. Các sách phổ biến mô tả người số 11 hợp việc định hướng tinh thần, nhưng dễ căng thẳng."
+    }
+   ],
+   "y_chinh": [
+    "Số 11 là bản cường độ cao của số 2 trong công việc",
+    "Hợp vai dẫn dắt ý tưởng, cần người lo vận hành",
+    "Tuần này: viết bước tiếp theo nhỏ nhất của một ý tưởng",
+    "Ghi việc đã xong mỗi tuần để thấy tiến bộ thật"
+   ]
+  },
+  "so-22-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 22 khác số 4 trong công việc thế nào?",
+     "doan": "Số 22 là bản cường độ cao của số 4: vẫn giỏi hệ thống và chi tiết, nhưng nhắm tới công trình lớn hơn nhiều. Số 4 giữ một quy trình chạy tốt; số 22 muốn xây cả tổ chức. Áp lực vì vậy cũng nặng hơn, dễ ôm việc của nhiều người."
+    },
+    {
+     "tieu_de": "Số 22 làm sếp thế nào?",
+     "doan": "Số 22 làm sếp thường có kế hoạch nhiều năm, giỏi biến ý tưởng thành quy trình. Người dưới thấy rõ hướng đi. Mặt tối là khó giao việc vì sợ người khác làm không đạt. Thử trong tuần này: chọn một việc mình vẫn tự làm, viết hướng dẫn một trang và giao cho người khác."
+    },
+    {
+     "tieu_de": "Số 22 có hợp khởi nghiệp không?",
+     "doan": "Số 22 thường hợp khởi nghiệp có tầm dài, cần hệ thống: sản xuất, công nghệ, doanh nghiệp xã hội. Nhưng không có con số nào bảo đảm thành công. Bắt đầu ở quy mô nhỏ hơn kế hoạch trong đầu, và giữ tiền gia đình ngoài vốn dự án, là cách đi bền."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 22: vì sao hợp và điều cần để ý",
+    "chu_thich": "Số 22 thường được xét như số 4 ở cường độ cao: vẫn hợp việc hệ thống, nhưng nghiêng về công trình lớn và dài hơi. Bảng là gợi ý tham khảo.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Kiến trúc, quy hoạch",
+      "Nhìn được tổng thể lẫn chi tiết của công trình.",
+      "Dự án kéo dài nhiều năm; chia mốc nhỏ để thấy tiến độ."
+     ],
+     [
+      "Quản trị tổ chức lớn",
+      "Giỏi dựng bộ máy chạy đều.",
+      "Khó tin giao; xây đội phó đủ quyền."
+     ],
+     [
+      "Kỹ thuật hệ thống",
+      "Hiểu cách các phần nối với nhau.",
+      "Cầu toàn làm chậm; chấp nhận bản chạy được trước, bản đẹp sau."
+     ],
+     [
+      "Chính sách công",
+      "Nghĩ cho số đông, tầm dài.",
+      "Thủ tục nhiều; kiên nhẫn và tìm người cùng chí hướng."
+     ],
+     [
+      "Doanh nghiệp xã hội",
+      "Kết hợp kế hoạch thực tế với mục đích lớn.",
+      "Vốn dễ cạn; tính dòng tiền mỗi quý."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 22 có hay bị quá tải không?",
+     "dap": "Có xu hướng, vì số 22 nhận việc theo tầm nhìn chứ không theo sức. Lịch tuần có giờ trống cố định giúp họ giữ nhịp."
+    },
+    {
+     "hoi": "Số 22 làm nhân viên được không?",
+     "dap": "Được, ở vị trí có trách nhiệm rõ và được tham gia dự án lớn. Số 22 dễ chán khi chỉ làm một mảnh nhỏ mà không thấy toàn cảnh."
+    },
+    {
+     "hoi": "Số 22 nên học thêm gì?",
+     "dap": "Số 22 thường được lợi khi học kỹ năng giao việc và kèm người khác. Đó là điều giúp kế hoạch lớn thành việc thật."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Trong thần số học Pythagoras, 22 là số cái, thường đọc như bản cường độ cao của số 4, gắn với người xây dựng lớn. Các sách phổ biến mô tả người số 22 hợp việc biến tầm nhìn thành hệ thống."
+    }
+   ],
+   "y_chinh": [
+    "Số 22 là bản cường độ cao của số 4 trong công việc",
+    "Hợp xây tổ chức, hệ thống dài hơi",
+    "Tuần này: viết hướng dẫn một trang, giao một việc đi",
+    "Khởi nghiệp: bắt đầu nhỏ hơn kế hoạch trong đầu"
+   ]
+  },
+  "so-33-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Số 33 khác số 6 trong công việc thế nào?",
+     "doan": "Số 33 là bản cường độ cao của số 6: vẫn hợp nghề chăm sóc, dạy dỗ, nhưng muốn giúp cả một cộng đồng thay vì một nhóm nhỏ. Đòi hỏi với bản thân vì vậy cao hơn, và dễ làm vượt giờ, vượt sức hơn số 6."
+    },
+    {
+     "tieu_de": "Số 33 làm sếp hay làm nhân viên?",
+     "doan": "Số 33 thường hợp vai người thầy hoặc người dẫn dắt cộng đồng hơn là quản lý chỉ tiêu. Làm sếp, họ được quý vì tận tâm, nhưng hay gánh việc của cấp dưới. Làm nhân viên, họ là chỗ dựa của cả phòng. Ở vai nào, số 33 cũng cần ghi rõ việc của mình tới đâu."
+    },
+    {
+     "tieu_de": "Số 33 có làm kinh doanh được không?",
+     "doan": "Được, với các mô hình có giá trị chăm sóc: trung tâm học, dịch vụ chăm sóc, lớp nghệ thuật. Khó nhất là thu đúng giá. Thử trong tuần này: viết ra giá trị một buổi làm việc của mình, so với giá thị trường, và sửa bảng giá nếu đang thấp hơn nhiều."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhóm nghề hợp với số 33: vì sao hợp và điều cần để ý",
+    "chu_thich": "Số 33 thường được xét như số 6 ở cường độ cao: vẫn hợp nghề chăm người, nhưng ở quy mô cộng đồng. Bảng là gợi ý tham khảo theo khuynh hướng.",
+    "cot": [
+     "Nhóm nghề",
+     "Vì sao hợp",
+     "Điều cần để ý"
+    ],
+    "dong": [
+     [
+      "Giáo dục, đào tạo",
+      "Kiên nhẫn, nhìn thấy tiến bộ của từng người.",
+      "Dễ dạy thêm không công; định rõ giờ hỗ trợ ngoài lớp."
+     ],
+     [
+      "Điều dưỡng, trị liệu",
+      "Tận tâm với người đang cần giúp.",
+      "Ca dài, hao sức; đổi ca và nghỉ đúng giờ theo quy định nghề."
+     ],
+     [
+      "Phi lợi nhuận, cộng đồng",
+      "Muốn tác động tới nhiều người.",
+      "Dễ kiệt vì nhận hết; chia việc cho tình nguyện viên."
+     ],
+     [
+      "Huấn luyện, tư vấn",
+      "Nâng đỡ người khác lớn lên.",
+      "Dễ ôm chuyện của khách; giữ giới hạn mỗi buổi."
+     ],
+     [
+      "Lớp nghệ thuật, lớp sáng tạo",
+      "Dùng cái đẹp để người khác thấy dễ chịu.",
+      "Ngại nói chuyện tiền; công khai giá trước."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 33 có hay làm không công không?",
+     "dap": "Có xu hướng, vì số 33 thấy khó từ chối người cần giúp. Đặt trước số giờ hỗ trợ miễn phí mỗi tháng giúp họ giúp được lâu."
+    },
+    {
+     "hoi": "Số 33 có hợp công việc áp lực doanh số không?",
+     "dap": "Thường không thoải mái. Số 33 làm tốt nhất ở nơi kết quả được đo bằng sự tiến bộ của người được giúp."
+    },
+    {
+     "hoi": "Số 33 nên chọn nghề gì khi mới ra trường?",
+     "dap": "Số 33 thường thấy có ý nghĩa ở giáo dục, dịch vụ chăm sóc, công tác xã hội. Thử việc ở vài nơi giúp biết mình hợp làm trực tiếp hay tổ chức chương trình."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "nghia": "Trong thần số học Pythagoras, 33 là số cái, thường đọc như bản cường độ cao của số 6, gắn với người thầy và sự chăm sóc. Các sách phổ biến mô tả người số 33 hợp nghề nâng đỡ, nhưng dễ cho quá sức."
+    }
+   ],
+   "y_chinh": [
+    "Số 33 là bản cường độ cao của số 6 trong công việc",
+    "Hợp vai người thầy, dẫn dắt cộng đồng",
+    "Dù làm sếp hay nhân viên, ghi rõ việc của mình tới đâu",
+    "Tuần này: so giá một buổi làm việc với giá thị trường"
+   ]
+  }
+ }
+}

@@ -48,9 +48,10 @@ def ap(t: dict) -> dict:
     if bs.get("trich_dan"):
         them.append({"tieu_de": "Sách xưa nói gì", "trich_dan": bs["trich_dan"],
                      **({"bien_tap": True} if bien_tap else {})})
-    # Chèn trước mục "Câu hỏi tự soi" (nếu có) để mục tự soi vẫn đứng cuối bài.
+    # Thêm sau nội dung gốc; nếu mục cuối là "Câu hỏi tự soi" thì chèn trước nó để tự soi vẫn đứng cuối bài.
+    # (Không chèn giữa các mục gốc — thứ tự mục gốc giữ nguyên.)
     muc = list(t["muc"])
-    i = next((k for k, m in enumerate(muc) if m["tieu_de"].lower().startswith("câu hỏi tự soi")), len(muc))
+    i = len(muc) - 1 if muc and muc[-1]["tieu_de"].lower().startswith("câu hỏi tự soi") else len(muc)
     t["muc"] = muc[:i] + them + muc[i:]
     co = {h["hoi"].strip().lower() for h in t["hoi_dap"]}
     t["hoi_dap"] = t["hoi_dap"] + [h for h in bs.get("hoi_dap", []) if h["hoi"].strip().lower() not in co]

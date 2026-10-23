@@ -3,6 +3,7 @@
 // .github/workflows/indexnow.yml). Khoá đọc từ chính trang /indexnow.txt nên luôn khớp bản đang chạy.
 //   node scripts/indexnow.mjs https://hieuban.com
 //   node scripts/indexnow.mjs https://hieuban.com --ngay   # SEO-L6: hằng ngày — trang ngày tốt 30 ngày tới + trang hôm nay
+//                                                          # + SEO-M: trang kiến thức sửa trong 3 ngày (lastmod)
 const goc = (process.argv[2] ?? "https://hieuban.com").replace(/\/$/, "");
 const chiNgay = process.argv.includes("--ngay");
 const khoa = (await (await fetch(`${goc}/indexnow.txt`)).text()).trim();
@@ -12,7 +13,13 @@ let urlList;
 if (chiNgay) {
   const homNay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
   const den = new Date(Date.parse(`${homNay}T00:00:00Z`) + 30 * 86_400_000).toISOString().slice(0, 10);
-  urlList = [`${goc}/xem-ngay-tot`, `${goc}/hom-nay`, ...(await loc("/sitemap-ngay.xml")).filter((u) => {
+  // SEO-M: thêm trang kiến thức có ngày sửa (lastmod — sổ ngày cập nhật của engine) trong 3 ngày gần đây, để Bing (nguồn
+  // tìm trang của ChatGPT) nhận bản mới nhanh; trang không đổi thì không gửi lại.
+  const moc = new Date(Date.parse(`${homNay}T00:00:00Z`) - 3 * 86_400_000).toISOString().slice(0, 10);
+  const sm = await (await fetch(`${goc}/sitemap.xml`)).text();
+  const vuaSua = [...sm.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)]
+    .filter((m) => m[2].slice(0, 10) >= moc).map((m) => m[1]);
+  urlList = [`${goc}/xem-ngay-tot`, `${goc}/hom-nay`, ...vuaSua, ...(await loc("/sitemap-ngay.xml")).filter((u) => {
     const d = u.match(/(\d{4}-\d{2}-\d{2})$/)?.[1];
     return d && d >= homNay && d <= den;
   })];

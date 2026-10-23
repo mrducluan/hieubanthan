@@ -37,7 +37,7 @@ code cho mọi trang (+ ảnh AI cho vài trang trụ — chờ có dịch vụ 
 }
 ```
 
-Engine ghép (`app/kb/bo_sung.py`): mục mới chèn trước "Câu hỏi tự soi", bảng thành một mục có `<table>`, trích dẫn thành
+Engine ghép (`app/kb/bo_sung.py`): mục mới thêm sau nội dung gốc (trước "Câu hỏi tự soi" nếu mục đó đứng cuối), bảng thành một mục có `<table>`, trích dẫn thành
 mục "Sách xưa nói gì" + `citation` trong schema, hỏi đáp nối thêm (trùng thì bỏ), `y_chinh` cho ảnh.
 
 ## Luật (test `engine/tests/test_kb_bo_sung.py` thực thi)
