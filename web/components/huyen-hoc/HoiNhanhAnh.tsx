@@ -44,7 +44,7 @@ export function HoiNhanhAnh({ dau, onDat, onChonAnh, onYDinh }: {
     if (!f) { anhRef.current = null; setAnh(null); onChonAnh?.(null); return; }
     const u = URL.createObjectURL(f);
     anhRef.current = u; setAnh(u); onChonAnh?.(f);
-    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "hoi_nhanh_anh", co_anh: true });
+    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "hoi_nhanh_anh", co_anh: 1 });
   };
   const dat = (ma: string, v: "co" | "khong" | "bo_qua") => {
     setTraLoi((t) => ({ ...t, [ma]: v }));

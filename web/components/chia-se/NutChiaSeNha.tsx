@@ -13,7 +13,7 @@ import { postJson } from "@/lib/goi-api";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
 
-export function NutChiaSeNha({ yeuCau }: { yeuCau: Record<string, unknown> }) {
+export function NutChiaSeNha({ yeuCau, loaiNha }: { yeuCau: Record<string, unknown>; loaiNha?: string | null }) {
   const [mo, setMo] = useState(false);
   const [ten, setTen] = useState("");
   const [the, setThe] = useState<{ ma: string; tu: string; link: string } | null>(null);
@@ -27,7 +27,7 @@ export function NutChiaSeNha({ yeuCau }: { yeuCau: Record<string, unknown> }) {
   async function tao() {
     setDang(true); setLoi(null);
     try {
-      const { ma, tu } = await postJson<{ ma: string; tu: string }>("/api/chia-se/nha", { ...yeuCau, ten_hien_thi: ten.trim() });
+      const { ma, tu } = await postJson<{ ma: string; tu: string }>("/api/chia-se/nha", { ...yeuCau, ten_hien_thi: ten.trim(), ...(loaiNha ? { loai_nha_the: loaiNha } : {}) });
       const u = new URL(`/the/nha/${ma}`, window.location.origin);
       u.searchParams.set("tu", tu);
       if (maCuaToi) u.searchParams.set("gt", maCuaToi);

@@ -57,7 +57,7 @@ export function LichSuQue({ lamMoi, onXemLai, dang = false, className }: {
             ))}
           </ul>
           <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-fg-faint">
-            <span>“Xem lại” đọc đúng quẻ cũ (6 hào giữ nguyên), không gieo lại; phần ngày tháng Lục Hào lấy theo lúc xem.</span>
+            <span>“Xem lại” đọc đúng quẻ cũ (6 hào giữ nguyên), không gieo lại; ngày tháng Lục Hào lấy theo lúc gieo (đã lưu cùng quẻ).</span>
             <button type="button" onClick={() => { xoaHetQue(); setDs([]); }} className="underline-offset-4 hover:text-fg hover:underline" data-testid="xoa-het-que">Xoá hết</button>
           </div>
         </>

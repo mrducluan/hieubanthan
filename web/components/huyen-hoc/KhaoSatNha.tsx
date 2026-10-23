@@ -127,7 +127,11 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     const b = nhaLuu.bo_cuc;
     if (b?.vi_tri || doiCan) setViTri(b?.vi_tri ?? {});
     if (b?.dau_hieu || doiCan) setDau(new Set(b?.dau_hieu ?? []));
-    if (b?.tu_anh || doiCan) { setTuAnh(new Set((b?.tu_anh ?? []).filter((m) => (b?.dau_hieu ?? []).includes(m)))); setKhongCo(new Set()); setDaTraLoi({}); }
+    if (b?.tu_anh || b?.khai_khong || doiCan) {
+      setTuAnh(new Set((b?.tu_anh ?? []).filter((m) => (b?.dau_hieu ?? []).includes(m))));
+      setKhongCo(new Set((b?.khai_khong ?? []).filter((m) => !(b?.dau_hieu ?? []).includes(m))));
+      setDaTraLoi({});
+    }
     if (b?.huong_do || doiCan) setHuongDo(Object.fromEntries(Object.entries(b?.huong_do ?? {}).map(([k, v]) => [k, String(v)])));
     if (nhaLuu.loai_nha) setLoaiNha(nhaLuu.loai_nha);
     if (doiCan) setKq(null);
@@ -193,7 +197,8 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     const mb = matBang();
     const daXuLy = (nhaLuu?.bo_cuc?.da_xu_ly ?? []).filter((m) => !dau.has(m));   // tích lại = chưa xử lý nữa
     // PT-V2: "Không" cho gợi ý từ ảnh → co:false như đã xử lý (người dùng khai rõ); không trùng mã đã tích.
-    const khaiKhong = [...new Set([...daXuLy, ...[...khongCo].filter((m) => !dau.has(m))])];
+    const khongCoGui = [...khongCo].filter((m) => !dau.has(m));
+    const khaiKhong = [...new Set([...daXuLy, ...khongCoGui])];
     const tuAnhGui = [...tuAnh].filter((m) => dau.has(m));
     if (d == null && !huong && Object.keys(viTri).length === 0 && dau.size === 0 && !mb) {
       setLoi("Hãy khai ít nhất hướng nhà, vị trí một phòng, một dấu hiệu, hoặc vẽ mặt bằng."); return;
@@ -218,6 +223,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
       try {
         luuHoSoNha({ ...(d != null ? { huong_do: d } : {}), ...(loaiNha ? { loai_nha: loaiNha as "can_ho" } : {}),
           bo_cuc: { vi_tri: viTri, huong_do: hd, dau_hieu: [...dau], ...(tuAnhGui.length ? { tu_anh: tuAnhGui } : {}),
+            ...(khongCoGui.length ? { khai_khong: khongCoGui } : {}),
             ...(daXuLy.length ? { da_xu_ly: daXuLy } : {}), ...(mb ? { mat_bang: mb } : {}) } });
       } catch { /* bỏ qua */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "khao_sat_nha", co_mat_bang: Boolean(mb), loai_nha: loaiNha, goc_nhin: gocNhin });
@@ -353,7 +359,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
         </div>
 
         <div className="space-y-3">
-          <HoiNhanhAnh dau={dau} onDat={(ma, co) => { if (co == null) tichO(ma, false); else tichO(ma, co); }}
+          <HoiNhanhAnh dau={dau} onDat={(ma, co) => { if (co == null) return; tichO(ma, co); if (!co) setKhongCo((s) => new Set(s).add(ma)); }}
             onChonAnh={setAnhGoiY} onYDinh={setYDinhNhanh} />
           <DocAnhNha cauHoi={Object.fromEntries((dm?.dau_hieu ?? []).map((x) => [x.ma, x.hoi]))} tenPhong={dm?.phong ?? {}}
             loaiNha={loaiNha} yDinh={yDinhNhanh} anhGoiY={anhGoiY} dau={dau} daTraLoi={daTraLoi} onXacNhan={xacNhanAnh} />

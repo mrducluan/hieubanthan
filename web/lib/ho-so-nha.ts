@@ -40,6 +40,8 @@ export const HoSoNha = z.object({
     /** PT-V2: mã trong `dau_hieu` mà người dùng đã bấm "Đúng" cho gợi ý máy đọc ảnh → gửi engine `nguon: "anh", xac_nhan: true`.
      *  CHỈ mã — ảnh (kể cả base64) không bao giờ vào hồ sơ nhà. */
     tu_anh: z.array(z.string().max(40)).max(40).optional(),
+    /** PT-V2: mã người dùng bấm "Không" cho gợi ý máy đọc ảnh / hỏi nhanh — gửi engine `co: false, nguon: nguoi_dung` (thắng suy luận mặt bằng). */
+    khai_khong: z.array(z.string().max(40)).max(40).optional(),
     /** UI-PT 4: dấu hiệu người dùng bấm "Tôi đã xử lý" — gửi engine `co: false` (thắng suy luận từ mặt bằng), Khảo sát không tích lại. */
     da_xu_ly: z.array(z.string().max(40)).optional(),
     mat_bang: z.object({
@@ -109,7 +111,7 @@ export function tenNha(n: HoSoNha | null | undefined): string {
  *  (co:false — UI-PT 4), mặt bằng, loại nhà. null khi chưa khai gì. Dùng chung Nhà của bạn · So hai căn · thẻ chia sẻ. */
 export function boCucGui(n: HoSoNha | null | undefined, huong?: { huong_do?: number; huong?: string }): Record<string, unknown> | null {
   const b = n?.bo_cuc;
-  const daXuLy = b?.da_xu_ly ?? [];
+  const daXuLy = [...new Set([...(b?.da_xu_ly ?? []), ...(b?.khai_khong ?? [])])].filter((m) => !(b?.dau_hieu ?? []).includes(m));
   if (!b || !((b.vi_tri && Object.keys(b.vi_tri).length) || b.dau_hieu?.length || b.mat_bang || daXuLy.length)) return null;
   const h = huong ?? (n?.huong_do != null ? { huong_do: n.huong_do } : n?.huong ? { huong: n.huong } : {});
   return {

@@ -74,7 +74,7 @@ export function DocAnhNha({ cauHoi, tenPhong, loaiNha, yDinh, anhGoiY, dau, daTr
       });
       const d = (await r.json().catch(() => null)) as KqDocAnh | null;
       if (!r.ok || !d || typeof d.da_bat !== "boolean") { setThongBao(LOI_CHUNG); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "doc_anh", so_anh: anh.length, so_dau_hieu: 0, da_bat: 0 }); return; }
-      const dh = (d.dau_hieu ?? []).filter((x) => x.co && cauHoi[x.ma]);
+      const dh = (d.dau_hieu ?? []).filter((x) => x.co && /^[a-z0-9_]{2,40}$/.test(x.ma));
       if (!d.da_bat) setThongBao(LOI_TAT[d.ly_do_tat ?? "loi_dich_vu"] ?? LOI_CHUNG);
       else setKq({ ...d, dau_hieu: dh, phong_doan: d.phong_doan ?? [], luu_y: d.luu_y ?? [] });
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "doc_anh", so_anh: anh.length, so_dau_hieu: dh.length, da_bat: d.da_bat ? 1 : 0 });
@@ -141,7 +141,7 @@ export function DocAnhNha({ cauHoi, tenPhong, loaiNha, yDinh, anhGoiY, dau, daTr
                   const dt = doTinChu(x.do_tin);
                   return (
                     <li key={x.ma} className="rounded-lg border border-line/60 bg-surface/40 px-3 py-2 text-sm" data-testid={`doc-anh-dong-${x.ma}`}>
-                      <p className="text-fg">{cauHoi[x.ma]}</p>
+                      <p className="text-fg">{cauHoi[x.ma] ?? x.ma.replace(/_/g, " ")}</p>
                       <p className="mt-0.5 text-xs text-fg-faint">
                         <span className={cn("mr-1.5 rounded-full border px-1.5 py-px", dt === "cao" ? "border-gold/60 text-gold" : dt === "vừa" ? "border-line text-fg-muted" : "border-line/60 text-fg-faint")}>Độ tin: {dt}</span>
                         {x.ly_do}

@@ -53,13 +53,11 @@ export function VachHao({ v, className }: { v: GiaTriHao | null; className?: str
   );
 }
 
-export function GieoDongXu({ giaTri, onXong, tuChay = false }: {
+export function GieoDongXu({ giaTri, onXong }: {
   /** 6 giá trị engine đã gieo (hào 1 → 6). */
   giaTri: GiaTriHao[];
   /** Gọi một lần khi đã hiện đủ 6 hào (boQua = người dùng bấm "Bỏ qua, xem luôn"). */
   onXong: (boQua: boolean) => void;
-  /** Tự chạy liên tiếp 6 lần sau cú bấm đầu (mặc định: bấm từng lần). */
-  tuChay?: boolean;
 }) {
   const giam = useReducedMotion();
   const [daLat, setDaLat] = useState(0);          // số hào đã hiện (0..6)
@@ -87,12 +85,6 @@ export function GieoDongXu({ giaTri, onXong, tuChay = false }: {
     setDangLat(true);
     hen.current = setTimeout(() => { setDangLat(false); setDaLat((n) => n + 1); }, 720);
   };
-  useEffect(() => {
-    if (!tuChay || dangLat || daLat === 0 || daLat >= 6) return;
-    hen.current = setTimeout(gieo, giam ? 250 : 350);
-    return () => { if (hen.current) clearTimeout(hen.current); };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- chuỗi tự chạy theo daLat
-  }, [daLat, dangLat, tuChay]);
 
   const hienHet = () => { setBoQua(true); setDaLat(6); ketThuc(true); };
   const hienTat = boQua || daLat >= 6;

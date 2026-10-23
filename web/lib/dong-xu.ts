@@ -40,20 +40,13 @@ export const laDong = (v: GiaTriHao): boolean => v === 6 || v === 9;
 
 /** Gõ nhanh "7 7 8 7 7 9" → 6 giá trị (hoặc null khi chưa đủ / sai). */
 export function docGoNhanh(chuoi: string): GiaTriHao[] | null {
-  const vals = chuoi.split(/[^6-9]+/).filter(Boolean).map(Number);
+  const sach = chuoi.trim();
+  const vals = /^[6-9]{6}$/.test(sach) ? sach.split("").map(Number) : sach.split(/[^6-9]+/).filter(Boolean).map(Number);
   return vals.length === 6 && vals.every(laGiaTriHao) ? (vals as GiaTriHao[]) : null;
 }
 
-/** Quẻ engine trả (hào am_duong + hao_dong) → 6 giá trị — dùng khi engine không kèm `gia_tri_hao_1_den_6`.
- *  Đây là ánh xạ ngược một–một của khoi_que (Dương+động = 9, Dương = 7, Âm+động = 6, Âm = 8), không phải phép tính mới. */
-export function giaTriTuQue(que: { quai_ban: { hao: { vi_tri: number; am_duong: string }[] }; hao_dong: number[]; gia_tri_hao_1_den_6?: number[] }): GiaTriHao[] | null {
+/** 6 giá trị hào engine trả kèm quẻ (`gia_tri_hao_1_den_6`, mọi cách ra quẻ). Web KHÔNG tự suy từ âm dương / hào động — một bộ tính. */
+export function giaTriTuQue(que: { gia_tri_hao_1_den_6?: number[] }): GiaTriHao[] | null {
   const co = que.gia_tri_hao_1_den_6;
-  if (co && co.length === 6 && co.every(laGiaTriHao)) return co as GiaTriHao[];
-  const hao = [...que.quai_ban.hao].sort((a, b) => a.vi_tri - b.vi_tri);
-  if (hao.length !== 6) return null;
-  return hao.map((h) => {
-    const duong = h.am_duong === "Dương";
-    const dong = que.hao_dong.includes(h.vi_tri);
-    return duong ? (dong ? 9 : 7) : (dong ? 6 : 8);
-  });
+  return co && co.length === 6 && co.every(laGiaTriHao) ? (co as GiaTriHao[]) : null;
 }
