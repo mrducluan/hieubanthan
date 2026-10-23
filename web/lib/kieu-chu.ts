@@ -26,4 +26,4 @@ export const CO_TRANG_CHU = {
   },
   chip: { nho: "text-xs", thuong: "text-[0.8rem]", lon: "text-base", rat_lon: "text-lg" },
 } as const;
-export const layCo = <T,>(bang: Record<CoChon, T>, khoa: string): T => (bang as Record<string, T>)[khoa] ?? bang.thuong;
+export const layCo = <B extends Readonly<Record<CoChon, unknown>>>(bang: B, khoa: string): B[CoChon] => (bang as Readonly<Record<string, B[CoChon]>>)[khoa] ?? bang.thuong;
