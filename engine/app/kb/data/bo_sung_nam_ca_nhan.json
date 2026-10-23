@@ -1,0 +1,1154 @@
+{
+ "source_id": "bo_sung_nam_ca_nhan_v1",
+ "school_id": "pitago",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Năm cá nhân trong thần số học Pythagoras — Ban biên tập Hiểu Bản Thân bổ sung",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + cổ thư công cộng (nháp AI, chờ thẩm định)"
+ },
+ "trang": {
+  "nam-ca-nhan-1": {
+   "muc": [
+    {
+     "tieu_de": "Năm cá nhân số 1 là năm thế nào?",
+     "doan": "Năm cá nhân số 1 là năm mở màn một vòng chín năm mới, thường được mô tả là lúc tự đứng ra quyết và gieo việc. Sau năm 9 dọn dẹp, nhịp sống hay chuyển sang muốn làm lại từ đầu. Nhiều người sốt ruột vì gieo rồi mà chưa thấy gì mọc, trong khi kết quả của năm này thường được xem là hiện rõ hơn ở các năm 4 và 8 sau đó. Mặt tối hay gặp là ôm hết một mình, ngại hỏi ai, hoặc mở năm bảy đầu việc rồi bỏ lửng cả năm bảy. Việc làm được ngay tuần này: viết đúng một mục tiêu cho cả năm lên giấy, kèm ngày làm bước đầu tiên."
+    },
+    {
+     "tieu_de": "Năm cá nhân 1 nên làm gì từng quý?",
+     "danh_sach": [
+      "Tháng 1–3 (tháng cá nhân 2, 3, 4): hợp thăm dò, kể ý định với vài người tin cậy rồi chốt kế hoạch thành chữ.",
+      "Tháng 4–6 (tháng cá nhân 5, 6, 7): việc mới bắt đầu chuyển động; tháng 5 kéo chú ý về nhà, tháng 6 hợp dừng lại soát hướng đi.",
+      "Tháng 7–9 (tháng cá nhân 8, 9, 1): tháng 7 hợp bàn tiền và phân việc, tháng 8 dọn thứ cản đường, tháng 9 giống một lần khởi động thứ hai.",
+      "Tháng 10–12 (tháng cá nhân 2, 3, 4): chậm lại để vun quan hệ, kể kết quả đầu tiên, rồi chốt nề nếp cho năm 2 kế tiếp."
+     ]
+    },
+    {
+     "tieu_de": "Năm cá nhân 1 trong tình cảm, công việc, tiền bạc",
+     "danh_sach": [
+      "Tình cảm: người độc thân hay chủ động hơn thường lệ; người có đôi dễ quên hỏi ý nửa kia khi đang hăng làm việc riêng.",
+      "Công việc: hợp nhận vai mở đầu dự án, học nghề mới, xin làm phần việc chưa ai làm.",
+      "Tiền bạc: hợp lập một khoản để riêng cho việc mới, chi theo hạn mức đặt trước thay vì chi theo hứng."
+     ]
+    },
+    {
+     "tieu_de": "Cách tính năm cá nhân năm 2027: ai đang ở năm số 1?",
+     "doan": "Năm 2027 rút gọn còn 2, nên người có ngày và tháng sinh cộng lại ra 8 (hoặc 17, 26) đang ở năm cá nhân 1. Ví dụ: sinh 15/2, xét năm 2027: 1+5 + 2 + 2+0+2+7 = 19 → 10 → 1; sinh 12/5, xét năm 2027: 1+2 + 5 + 2+0+2+7 = 19 → 10 → 1; sinh 21/4, xét năm 2028: 2+1 + 4 + 2+0+2+8 = 19 → 10 → 1. Trang tính của Hiểu Bản Thân lấy mốc 1/1 dương lịch; có trường phái đổi số vào ngày sinh nhật, nên quãng đầu năm hai cách có thể lệch nhau."
+    }
+   ],
+   "bang": {
+    "tieu_de": "12 tháng cá nhân trong năm cá nhân số 1",
+    "chu_thich": "Năm số 1 mở bằng tháng cá nhân 2, nên tháng Giêng dương lịch thường chậm hơn mong đợi. Tháng 9 dương lịch trùng số 1 của năm, hay được xem là lúc nhắc lại mục tiêu.",
+    "cot": [
+     "Tháng dương lịch",
+     "Tháng cá nhân",
+     "Chủ đề tháng"
+    ],
+    "dong": [
+     [
+      "Tháng 1",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 2",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 3",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 4",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 5",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 6",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 7",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 8",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 9",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 10",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 11",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 12",
+      "4",
+      "Tháng xây nền"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Năm cá nhân số 1 có nên đổi việc không?",
+     "dap": "Truyền thống coi năm 1 là năm hợp bắt đầu, nhưng con số không quyết thay ai. Nếu đã cân nhắc kỹ tiền dự phòng và kỹ năng, năm này thường được xem là thời điểm thuận để thử."
+    },
+    {
+     "hoi": "Vì sao năm cá nhân 1 mà vẫn thấy mọi thứ chậm?",
+     "dap": "Năm 1 là năm gieo. Phần nhiều công sức chưa ra kết quả ngay, và quý đầu còn mang tháng cá nhân 2 vốn chậm."
+    },
+    {
+     "hoi": "Năm cá nhân 1 kéo dài bao lâu?",
+     "dap": "Theo mốc 1/1 thì trọn một năm dương lịch; theo mốc sinh nhật thì từ sinh nhật năm đó tới trước sinh nhật năm sau."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Chu kỳ năm cá nhân",
+     "nghia": "Năm 1 được coi là điểm mở của vòng chín năm: gieo ý định, tự quyết, đặt nền cho tám năm tiếp theo."
+    }
+   ],
+   "y_chinh": [
+    "Năm 1 mở vòng chín năm mới: gieo việc, tự quyết",
+    "Quý đầu mang tháng cá nhân 2: chậm là bình thường",
+    "Mặt tối: ôm hết một mình, mở việc rồi bỏ lửng",
+    "Tuần này: viết một mục tiêu năm và ngày làm bước đầu"
+   ]
+  },
+  "nam-ca-nhan-2": {
+   "muc": [
+    {
+     "tieu_de": "Năm cá nhân số 2 là năm thế nào?",
+     "doan": "Năm cá nhân số 2 là năm chờ hạt nảy mầm: việc đi chậm, thường thành qua người khác, và cần nhiều kiên nhẫn. Sau một năm 1 hăng hái, nhiều người thấy hụt hẫng khi nhịp bỗng chùng xuống. Đây là năm của giấy mời hợp tác, của những cuộc nói chuyện hai người, của việc học cách chờ mà không bỏ cuộc. Mặt tối là chiều người khác đến mức nuốt ý mình, rồi tủi thân vì không ai hiểu. Một việc nhỏ cho tuần này: nói thẳng một mong muốn của mình với người cùng làm, bằng một câu ngắn."
+    },
+    {
+     "tieu_de": "Năm cá nhân 2 nên làm gì từng quý?",
+     "danh_sach": [
+      "Quý đầu (tháng cá nhân 3, 4, 5): hợp gặp gỡ và chia sẻ kế hoạch, rồi dồn sức vào giấy tờ, hợp đồng, quy trình.",
+      "Quý hai (tháng cá nhân 6, 7, 8): chăm người nhà, dành một tháng sống chậm để nghĩ, rồi xử lý chuyện thu chi.",
+      "Quý ba (tháng cá nhân 9, 1, 2): tháng 7 khép việc tồn, tháng 8 khởi một việc nhỏ, tháng 9 quay về chế độ phối hợp.",
+      "Quý cuối (tháng cá nhân 3, 4, 5): nhịp vui hơn, rồi ổn định lại; tháng 12 đã thấy hơi hướng thay đổi của năm 3."
+     ]
+    },
+    {
+     "tieu_de": "Năm cá nhân 2 trong tình cảm, công việc, tiền bạc",
+     "danh_sach": [
+      "Tình cảm: hợp vun một mối quan hệ đang có hơn là tìm thêm; cãi nhau nhỏ nên giải trong ngày.",
+      "Công việc: hợp vai phó, vai điều phối, làm cầu nối giữa hai nhóm; ít hợp tranh vị trí dẫn đầu.",
+      "Tiền bạc: hợp góp chung có giấy tờ rõ ràng; trước khi ký, đọc lại điều khoản ít nhất hai lần."
+     ]
+    },
+    {
+     "tieu_de": "Ai đang ở năm cá nhân số 2 trong năm 2026 và 2027?",
+     "doan": "Năm 2026 rút gọn thành 1, nên ai có ngày cộng tháng sinh rút về 1 đang ở năm cá nhân 2; sang 2027, điều kiện đổi thành ngày cộng tháng rút về 9. Ví dụ đã tính: sinh 3/7, xét năm 2026: 3 + 7 + 2+0+2+6 = 20 → 2; sinh 9/9, xét năm 2027: 9 + 9 + 2+0+2+7 = 29 → 11 → 2; sinh 6/12, xét năm 2027: 6 + 1+2 + 2+0+2+7 = 20 → 2. Mỗi năm dương lịch mới, con số của mỗi người tăng thêm 1 và quay về 1 sau số 9."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Lịch tháng cá nhân của năm số 2",
+    "chu_thich": "Tháng Giêng của năm số 2 đã là tháng cá nhân 3, nên đầu năm thường đông việc giao tiếp hơn phần giữa năm.",
+    "cot": [
+     "Tháng dương lịch",
+     "Tháng cá nhân",
+     "Chủ đề tháng"
+    ],
+    "dong": [
+     [
+      "Tháng 1",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 2",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 3",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 4",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 5",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 6",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 7",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 8",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 9",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 10",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 11",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 12",
+      "5",
+      "Tháng thay đổi"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Năm cá nhân số 2 có hợp cưới hỏi không?",
+     "dap": "Năm 2 được mô tả là thuận cho gắn bó và hợp tác, nhưng quyết định cưới nên dựa vào hai người, không dựa vào một con số."
+    },
+    {
+     "hoi": "Năm cá nhân 2 thấy mọi việc dậm chân tại chỗ thì làm gì?",
+     "dap": "Đổi thước đo: thay vì đếm kết quả, đếm số quan hệ đã vun và số việc đã chuẩn bị xong cho năm 3 tới."
+    },
+    {
+     "hoi": "Năm cá nhân 2 khác tháng cá nhân 2 thế nào?",
+     "dap": "Năm cá nhân là nhịp lớn cả năm; tháng cá nhân là nhịp nhỏ trong năm, bằng năm cá nhân cộng số tháng rồi rút gọn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Chu kỳ năm cá nhân",
+     "nghia": "Năm 2 đứng sau năm gieo hạt: kiên nhẫn, hợp tác, chờ đúng lúc, việc thường đến qua người khác."
+    }
+   ],
+   "y_chinh": [
+    "Năm 2: việc chậm, thành qua người khác",
+    "Hợp vai điều phối, làm cầu nối hơn là dẫn đầu",
+    "Mặt tối: nuốt ý mình rồi tủi thân",
+    "Tuần này: nói thẳng một mong muốn bằng một câu ngắn"
+   ]
+  },
+  "nam-ca-nhan-3": {
+   "muc": [
+    {
+     "tieu_de": "Năm cá nhân số 3 là năm thế nào?",
+     "doan": "Năm cá nhân số 3 thường là năm nhẹ và vui hơn hai năm trước, hợp nói ra, viết ra, gặp người và thử tài lẻ. Lịch hẹn dày lên, ý tưởng đến nhiều, đôi khi nhiều hơn sức theo. Người ta hay nhận ra mình được mời phát biểu, dạy lại, hay làm phần trình bày cho nhóm. Mặt tối là tiêu tiền theo cảm hứng, hứa với quá nhiều người, và bỏ dở khi hết hứng. Việc nhỏ cho tuần này: mở một tệp ghi ý tưởng, mỗi ý chỉ một dòng, cuối tuần chọn đúng một ý để làm tiếp."
+    },
+    {
+     "tieu_de": "Lịch năm cá nhân 3 theo quý: nên làm gì?",
+     "danh_sach": [
+      "Tháng 1–3, tháng cá nhân 4, 5, 6: dọn nền trước khi vui; hoàn tất giấy tờ, rồi đón một chuyến đi hay một thay đổi nhỏ.",
+      "Tháng 4–6, tháng cá nhân 7, 8, 9: giữa năm lại cần lắng; hợp xem lại tiền bạc và khép những lời hứa chưa giữ.",
+      "Tháng 7–9, tháng cá nhân 1, 2, 3: ba tháng sáng nhất để ra mắt một sản phẩm, một bài viết, một buổi chia sẻ.",
+      "Tháng 10–12, tháng cá nhân 4, 5, 6: chuyển ý tưởng thành nề nếp, chuẩn bị cho năm 4 cần cày nhiều hơn."
+     ]
+    },
+    {
+     "tieu_de": "Năm cá nhân 3 trong tình cảm, công việc, tiền bạc",
+     "danh_sach": [
+      "Tình cảm: dễ quen người mới qua tiệc, nhóm sở thích; người có đôi hợp đi chơi, làm điều vui cùng nhau.",
+      "Công việc: hợp vị trí cần nói, viết, thuyết phục; dễ bị kéo vào quá nhiều nhóm cùng lúc.",
+      "Tiền bạc: khoản chi cho gặp gỡ và mua sắm thường tăng; đặt mức trần cho mỗi tháng trước khi tiêu."
+     ]
+    },
+    {
+     "tieu_de": "Cách tính năm cá nhân năm 2028 và 2029 cho số 3",
+     "doan": "Năm 2028 rút gọn còn 3, nên người có ngày cộng tháng sinh rút về 9 sẽ rơi vào năm cá nhân 3; năm 2029 rút còn 4, cần ngày cộng tháng rút về 8. Ba ví dụ đã tính bằng máy: sinh 27/9, xét năm 2028: 2+7 + 9 + 2+0+2+8 = 30 → 3; sinh 11/7, xét năm 2028: 1+1 + 7 + 2+0+2+8 = 21 → 3; sinh 23/12, xét năm 2029: 2+3 + 1+2 + 2+0+2+9 = 21 → 3. Cộng hết chữ số hay rút gọn từng phần rồi cộng đều ra cùng con số năm cá nhân."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tháng cá nhân theo từng tháng của năm số 3",
+    "chu_thich": "Ba tháng 7, 8, 9 dương lịch lần lượt là tháng cá nhân 1, 2, 3: một vòng nhỏ khởi động, vun đắp, thể hiện.",
+    "cot": [
+     "Tháng dương lịch",
+     "Tháng cá nhân",
+     "Chủ đề tháng"
+    ],
+    "dong": [
+     [
+      "Tháng 1",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 2",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 3",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 4",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 5",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 6",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 7",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 8",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 9",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 10",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 11",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 12",
+      "6",
+      "Tháng gia đình"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Năm cá nhân số 3 có hợp học thêm kỹ năng không?",
+     "dap": "Thường được xem là hợp, nhất là kỹ năng nói, viết, thiết kế, ngoại ngữ, những thứ dùng để thể hiện ý mình."
+    },
+    {
+     "hoi": "Năm cá nhân 3 tiêu tiền nhiều có sao không?",
+     "dap": "Năm 3 hay kéo theo chi cho vui và gặp gỡ. Đặt mức trần từ đầu tháng giúp vẫn vui mà không hụt quỹ."
+    },
+    {
+     "hoi": "Sau năm cá nhân 3 là năm nào?",
+     "dap": "Là năm cá nhân 4, năm làm việc đều và xây nền, nên cuối năm 3 hợp chọn lọc ý tưởng nào đáng giữ lại."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Chu kỳ năm cá nhân",
+     "nghia": "Năm 3 gắn với biểu đạt, giao tiếp và niềm vui: hạt gieo ở năm 1 bắt đầu được người khác nhìn thấy."
+    }
+   ],
+   "y_chinh": [
+    "Năm 3: nói ra, viết ra, gặp người",
+    "Tháng 7–9 là ba tháng sáng nhất để ra mắt",
+    "Mặt tối: hứa nhiều, tiêu theo hứng, bỏ dở",
+    "Tuần này: ghi ý tưởng một dòng, chọn một ý làm tiếp"
+   ]
+  },
+  "nam-ca-nhan-4": {
+   "muc": [
+    {
+     "tieu_de": "Năm cá nhân số 4 là năm thế nào?",
+     "doan": "Năm cá nhân số 4 là năm cày: làm đều, sửa móng, dựng hệ thống để những gì gieo từ năm 1 đứng được lâu. Ít khi có chuyện hào nhoáng, nhưng nhiều người nhìn lại thấy đây là năm mình lớn nhất về tay nghề. Lịch thường kín, việc nhà và việc cơ quan cùng đòi. Mặt tối là cứng nhắc với chính mình, làm liền mạch không nghỉ, cáu khi người khác làm chậm. Gợi ý tuần này: chọn một việc lặp lại mỗi ngày, ghi ra từng bước, rồi bỏ đi một bước thừa."
+    },
+    {
+     "tieu_de": "Năm cá nhân 4 nên làm gì từng quý?",
+     "danh_sach": [
+      "Quý I — tháng cá nhân 5, 6, 7: đầu năm vẫn còn dư âm thay đổi; hợp chốt nơi ở, lịch gia đình, rồi một tháng lắng để lên kế hoạch.",
+      "Quý II — tháng cá nhân 8, 9, 1: tháng 4 hợp bàn lương và chia việc, tháng 5 bỏ việc thừa, tháng 6 mở phần việc mới.",
+      "Quý III — tháng cá nhân 2, 3, 4: phối hợp, trình bày tiến độ, rồi tháng 9 cày phần khó nhất.",
+      "Quý IV — tháng cá nhân 5, 6, 7: nới nhịp, chăm nhà, cuối năm nghỉ và nhìn lại trước năm 5 nhiều biến động."
+     ]
+    },
+    {
+     "tieu_de": "Năm cá nhân 4 trong tình cảm, công việc, tiền bạc",
+     "danh_sach": [
+      "Tình cảm: tình cảm thể hiện bằng việc làm hơn lời nói; nhớ hẹn một buổi không bàn chuyện nhà chuyện việc.",
+      "Công việc: hợp chuẩn hoá quy trình, học chứng chỉ, nhận việc cần độ chính xác.",
+      "Tiền bạc: hợp lập ngân sách, trả bớt nợ, sửa nhà theo kế hoạch đã tính; ít hợp khoản chi bốc đồng."
+     ]
+    },
+    {
+     "tieu_de": "Năm 2029 và 2030: cách tính năm cá nhân số 4",
+     "doan": "Năm 2029 rút gọn thành 4, nên người có ngày cộng tháng sinh rút về 9 đang ở năm cá nhân 4; sang 2030 cần ngày cộng tháng rút về 8. Đã tính: sinh 6/12, xét năm 2029: 6 + 1+2 + 2+0+2+9 = 22 → 4; sinh 11/7, xét năm 2029: 1+1 + 7 + 2+0+2+9 = 22 → 4; sinh 12/5, xét năm 2030: 1+2 + 5 + 2+0+3+0 = 13 → 4. Nếu muốn theo mốc sinh nhật, quãng trước sinh nhật vẫn mang số của năm trước."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm cá nhân số 4: tháng cá nhân từng tháng",
+    "chu_thich": "Tháng cá nhân 4 rơi vào tháng 9 dương lịch, cũng là lúc nhịp cày của năm lên cao nhất.",
+    "cot": [
+     "Tháng dương lịch",
+     "Tháng cá nhân",
+     "Chủ đề tháng"
+    ],
+    "dong": [
+     [
+      "Tháng 1",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 2",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 3",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 4",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 5",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 6",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 7",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 8",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 9",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 10",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 11",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 12",
+      "7",
+      "Tháng lắng"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Năm cá nhân số 4 có nên mua nhà không?",
+     "dap": "Năm 4 gắn với tài sản và nền móng nên hay được nhắc tới chuyện nhà cửa, nhưng quyết định mua cần dựa vào khả năng tài chính thật, không dựa vào con số."
+    },
+    {
+     "hoi": "Năm cá nhân 4 mệt quá thì làm sao?",
+     "dap": "Xếp lịch nghỉ cố định như một việc phải làm. Ngủ đủ, ăn đúng bữa là thói quen nên giữ; nếu mệt kéo dài, gặp bác sĩ — nội dung này không thay lời bác sĩ."
+    },
+    {
+     "hoi": "Năm cá nhân 4 có phải năm xấu không?",
+     "dap": "Không. Năm 4 nặng việc nhưng thường là năm tay nghề và nền tảng vững lên rõ nhất."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Chu kỳ năm cá nhân",
+     "nghia": "Năm 4 là năm làm việc và kỷ luật: củng cố, xây hệ thống, tích luỹ bền bỉ thay vì tìm cái mới."
+    }
+   ],
+   "y_chinh": [
+    "Năm 4: làm đều, sửa móng, dựng hệ thống",
+    "Nhiều người lớn nhất về tay nghề trong năm này",
+    "Mặt tối: cứng nhắc, làm liền mạch không nghỉ",
+    "Tuần này: bỏ một bước thừa trong việc lặp lại mỗi ngày"
+   ]
+  },
+  "nam-ca-nhan-5": {
+   "muc": [
+    {
+     "tieu_de": "Năm cá nhân số 5 là năm thế nào?",
+     "doan": "Năm cá nhân số 5 nằm giữa vòng chín năm, thường được mô tả là năm đổi gió: nhiều lựa chọn, nhiều chuyến đi, nhiều người mới. Sau năm 4 gò bó, cảm giác muốn thoát ra rất mạnh. Một lời mời bất ngờ hay một ý định chuyển chỗ hay xuất hiện trong năm này. Mặt tối là nhảy từ việc này sang việc khác trước khi việc cũ kịp ra gì, và chi tiêu trôi theo cảm xúc. Việc làm được trong tuần: liệt kê ba thay đổi đang muốn, chọn một, viết ra cái giá phải trả cho nó."
+    },
+    {
+     "tieu_de": "Năm cá nhân 5 nên làm gì từng quý?",
+     "danh_sach": [
+      "Ba tháng đầu (tháng cá nhân 6, 7, 8): còn nặng trách nhiệm nhà, rồi một tháng suy nghĩ, rồi tháng 3 hợp bàn tiền trước khi đổi.",
+      "Ba tháng tiếp (tháng cá nhân 9, 1, 2): tháng 4 khép cái cũ, tháng 5 bắt đầu cái mới, tháng 6 tìm người cùng làm.",
+      "Tháng 7, 8, 9 (tháng cá nhân 3, 4, 5): vui, rồi chốt giấy tờ, rồi tháng 9 là cao điểm thay đổi của cả năm.",
+      "Ba tháng cuối (tháng cá nhân 6, 7, 8): đưa thay đổi về nếp nhà, nhìn lại, rồi cân tài chính trước năm 6."
+     ]
+    },
+    {
+     "tieu_de": "Năm cá nhân 5 trong tình cảm, công việc, tiền bạc",
+     "danh_sach": [
+      "Tình cảm: dễ bị hút bởi người mới lạ; người có đôi hợp đi xa cùng nhau thay vì tìm cảm giác mới ở chỗ khác.",
+      "Công việc: lời mời đổi việc, đổi vai, công tác xa thường nhiều; cân nhắc từng lời mời bằng giấy, không bằng cảm hứng.",
+      "Tiền bạc: dòng tiền vào ra nhanh; giữ một quỹ dự phòng và tránh vay để chạy theo cơ hội vừa nghe."
+     ]
+    },
+    {
+     "tieu_de": "Cách tính năm cá nhân năm 2026: ai đang ở năm số 5?",
+     "doan": "Năm 2026 rút gọn còn 1, nên ai có ngày cộng tháng sinh rút về 4 đang ở năm cá nhân 5 trong năm 2026. Ba ví dụ đã đối chiếu: sinh 30/1, xét năm 2026: 3+0 + 1 + 2+0+2+6 = 14 → 5; sinh 25/6, xét năm 2026: 2+5 + 6 + 2+0+2+6 = 23 → 5; sinh 28/11, xét năm 2027: 2+8 + 1+1 + 2+0+2+7 = 23 → 5. Người sinh 28/11 đến năm 2027 mới vào năm 5, vì 2027 rút gọn còn 2."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tháng cá nhân trong năm cá nhân 5",
+    "chu_thich": "Tháng 9 dương lịch của năm số 5 là tháng cá nhân 5: hai lớp thay đổi chồng nhau, hợp cân nhắc kỹ mọi quyết vội.",
+    "cot": [
+     "Tháng dương lịch",
+     "Tháng cá nhân",
+     "Chủ đề tháng"
+    ],
+    "dong": [
+     [
+      "Tháng 1",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 2",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 3",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 4",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 5",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 6",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 7",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 8",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 9",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 10",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 11",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 12",
+      "8",
+      "Tháng thành quả"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Năm cá nhân số 5 có nên chuyển nhà, chuyển việc không?",
+     "dap": "Năm 5 được mô tả là hợp đổi mới, nhưng nên đổi khi đã có phương án dự phòng; con số chỉ gợi nhịp, không thay cho việc tính toán."
+    },
+    {
+     "hoi": "Năm cá nhân 5 làm sao để không quyết vội?",
+     "dap": "Đặt luật 48 giờ: mọi quyết định lớn chờ hai ngày, hỏi ý một người tin cậy, rồi mới trả lời."
+    },
+    {
+     "hoi": "Năm cá nhân 5 có phải năm biến cố không?",
+     "dap": "Không ai đoán được biến cố bằng con số. Truyền thống chỉ mô tả năm 5 là năm nhịp nhanh, nhiều lựa chọn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Chu kỳ năm cá nhân",
+     "nghia": "Năm 5 là điểm giữa vòng chín năm: tự do, thay đổi, mở rộng trải nghiệm, kèm bài học chừng mực."
+    }
+   ],
+   "y_chinh": [
+    "Năm 5: điểm giữa vòng chín năm, nhịp đổi gió",
+    "Tháng 9 dương lịch là cao điểm thay đổi",
+    "Mặt tối: nhảy việc sớm, chi theo cảm xúc",
+    "Tuần này: chọn một thay đổi, ghi cái giá phải trả"
+   ]
+  },
+  "nam-ca-nhan-6": {
+   "muc": [
+    {
+     "tieu_de": "Năm cá nhân số 6 là năm thế nào?",
+     "doan": "Năm cá nhân số 6 kéo trọng tâm về nhà: cha mẹ, con cái, người thương, và những trách nhiệm ai cũng mong mình gánh. Đây hay là năm nhận thêm vai mới trong gia đình hoặc trong nhóm, như làm trưởng nhóm hay lo việc họ hàng. Nhiều người thấy được cần đến, đồng thời thấy mất dần thời gian riêng. Mặt tối là ôm việc của người khác rồi trách họ không biết ơn. Một việc thử ngay tuần này: trả lại một việc không phải của mình, nói rõ lý do bằng giọng nhẹ."
+    },
+    {
+     "tieu_de": "Năm cá nhân 6 nên làm gì từng quý?",
+     "danh_sach": [
+      "Tháng 1–3 (tháng cá nhân 7, 8, 9): đầu năm hợp nghỉ và nhìn lại, rồi xếp việc tiền nong trong nhà, rồi khép chuyện cũ.",
+      "Tháng 4–6 (tháng cá nhân 1, 2, 3): hợp bắt đầu một nếp mới cho gia đình, rồi bàn bạc, rồi một dịp vui cả nhà.",
+      "Tháng 7–9 (tháng cá nhân 4, 5, 6): sửa sang chỗ ở, đón một thay đổi, rồi tháng 9 là lúc trách nhiệm dồn nhiều nhất.",
+      "Tháng 10–12 (tháng cá nhân 7, 8, 9): lùi lại cho mình chút khoảng riêng, chốt sổ, rồi buông việc không còn hợp."
+     ]
+    },
+    {
+     "tieu_de": "Năm cá nhân 6 trong tình cảm, công việc, tiền bạc",
+     "danh_sach": [
+      "Tình cảm: hợp nói chuyện nghiêm túc về cam kết; người độc thân dễ thấy mình muốn ổn định hơn trước.",
+      "Công việc: hợp vai chăm khách hàng, đào tạo người mới, làm dịch vụ; dễ nhận việc thay đồng nghiệp quá nhiều.",
+      "Tiền bạc: chi cho nhà và người thân tăng; tách rõ khoản giúp đỡ với khoản cho mượn, ghi lại để khỏi khó nói về sau."
+     ]
+    },
+    {
+     "tieu_de": "Ai ở năm cá nhân 6 trong năm 2027 và 2029?",
+     "doan": "Năm 2027 rút về 2, nên người có ngày cộng tháng sinh rút về 4 đang ở năm cá nhân 6; năm 2029 rút về 4, cần ngày cộng tháng rút về 2. Ví dụ tính tay khớp với máy: sinh 2/2, xét năm 2027: 2 + 2 + 2+0+2+7 = 15 → 6; sinh 16/6, xét năm 2027: 1+6 + 6 + 2+0+2+7 = 24 → 6; sinh 19/10, xét năm 2029: 1+9 + 1+0 + 2+0+2+9 = 24 → 6. Hai người khác ngày sinh vẫn có thể cùng năm cá nhân, vì chỉ ngày và tháng sinh tham gia phép cộng cùng năm đang xét."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Mười hai tháng cá nhân của năm số 6",
+    "chu_thich": "Năm số 6 bắt đầu bằng tháng cá nhân 7 nên tháng Giêng thường hợp nghỉ hơn là chạy việc.",
+    "cot": [
+     "Tháng dương lịch",
+     "Tháng cá nhân",
+     "Chủ đề tháng"
+    ],
+    "dong": [
+     [
+      "Tháng 1",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 2",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 3",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 4",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 5",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 6",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 7",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 8",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 9",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 10",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 11",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 12",
+      "9",
+      "Tháng khép lại"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Năm cá nhân số 6 có hợp sinh con không?",
+     "dap": "Năm 6 được mô tả gắn với gia đình, nhưng chuyện sinh con là quyết định của hai người cùng lời khuyên y tế, không nên chờ hay tránh theo con số."
+    },
+    {
+     "hoi": "Năm cá nhân 6 làm sao để không kiệt vì việc nhà?",
+     "dap": "Chia việc thành danh sách có tên người làm, và giữ một buổi mỗi tuần chỉ cho mình."
+    },
+    {
+     "hoi": "Năm cá nhân 6 có liên quan tới số 6 đường đời không?",
+     "dap": "Không. Đường đời 6 là nét cả đời; năm cá nhân 6 chỉ là nhịp của một năm, ai cũng gặp lại sau chín năm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Chu kỳ năm cá nhân",
+     "nghia": "Năm 6 gắn với gia đình, cam kết và bổn phận: trọng tâm dời từ việc riêng sang tổ ấm."
+    }
+   ],
+   "y_chinh": [
+    "Năm 6: trọng tâm dời về nhà và người thân",
+    "Hay nhận thêm vai lo cho gia đình, cho nhóm",
+    "Mặt tối: ôm việc người khác rồi trách",
+    "Tuần này: trả lại một việc không phải của mình"
+   ]
+  },
+  "nam-ca-nhan-7": {
+   "muc": [
+    {
+     "tieu_de": "Năm cá nhân số 7 là năm thế nào?",
+     "doan": "Năm cá nhân số 7 là năm quay vào trong: học sâu, đọc nhiều, ngủ đủ, và hỏi lại vì sao mình làm điều mình đang làm. Bề ngoài có thể chậm, ít sự kiện, nhưng trong đầu thì bận. Nhiều người đổi cách nghĩ về nghề, về niềm tin trong năm này. Mặt tối là thu mình quá lâu, nghi ngờ mọi lời mời, phân tích mãi không làm. Một thói quen nhỏ cho tuần này: mỗi tối viết ba dòng về điều mình hiểu thêm trong ngày, và hẹn một người bạn uống nước để khỏi khép kín."
+    },
+    {
+     "tieu_de": "Năm cá nhân 7 theo từng quý",
+     "danh_sach": [
+      "Quý 1 · tháng cá nhân 8, 9, 1: đầu năm còn việc tiền bạc phải chốt, rồi dọn, rồi tháng 3 khởi một khoá học.",
+      "Quý 2 · tháng cá nhân 2, 3, 4: hợp học cùng người khác, chia sẻ điều đã học, rồi tháng 6 ngồi viết, ngồi làm kỹ.",
+      "Quý 3 · tháng cá nhân 5, 6, 7: một chuyến đi để đổi góc nhìn, việc nhà, rồi tháng 9 là tháng lặng nhất năm.",
+      "Quý 4 · tháng cá nhân 8, 9, 1: gom điều học được thành việc cụ thể, khép năm; tháng 12 mang tháng cá nhân 1, hợp phác kế hoạch cho năm 8."
+     ]
+    },
+    {
+     "tieu_de": "Năm cá nhân 7 trong tình cảm, công việc, tiền bạc",
+     "danh_sach": [
+      "Tình cảm: cần khoảng riêng nhiều hơn; báo trước với nửa kia để sự im lặng không bị hiểu là lạnh nhạt.",
+      "Công việc: hợp nghiên cứu, học chuyên môn, làm việc cần tập trung một mình; ít hợp mở rộng ồn ào.",
+      "Tiền bạc: hợp tìm hiểu trước khi chi khoản lớn; đọc kỹ, hỏi người có nghề, không vội theo lời rủ."
+     ]
+    },
+    {
+     "tieu_de": "Cách tính năm cá nhân năm 2028: ai đang ở năm số 7?",
+     "doan": "Năm 2028 rút gọn còn 3, nên người có ngày cộng tháng sinh rút về 4 đang ở năm cá nhân 7 trong năm đó. Đối chiếu: sinh 25/6, xét năm 2028: 2+5 + 6 + 2+0+2+8 = 25 → 7; sinh 30/1, xét năm 2028: 3+0 + 1 + 2+0+2+8 = 16 → 7; sinh 8/3, xét năm 2030: 8 + 3 + 2+0+3+0 = 16 → 7. Nếu thấy số của mình khác trang khác, hãy xem trang đó lấy mốc 1/1 hay mốc sinh nhật."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tháng cá nhân trong năm cá nhân 7",
+    "chu_thich": "Tháng 9 dương lịch mang tháng cá nhân 7 trùng số của năm: hai lớp lắng đọng, hợp nghỉ phép hay học chuyên sâu.",
+    "cot": [
+     "Tháng dương lịch",
+     "Tháng cá nhân",
+     "Chủ đề tháng"
+    ],
+    "dong": [
+     [
+      "Tháng 1",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 2",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 3",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 4",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 5",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 6",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 7",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 8",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 9",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 10",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 11",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 12",
+      "1",
+      "Tháng khởi động"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Năm cá nhân số 7 có nên khởi nghiệp không?",
+     "dap": "Năm 7 thường hợp tìm hiểu và chuẩn bị hơn là ra mắt rầm rộ. Nhiều người dùng năm này để học và thử nhỏ trước năm 8."
+    },
+    {
+     "hoi": "Năm cá nhân 7 cảm thấy cô đơn có bình thường không?",
+     "dap": "Năm 7 hay đi kèm cảm giác muốn ở một mình. Nếu buồn kéo dài nhiều tuần, nên nói với người thân hoặc người làm nghề tư vấn."
+    },
+    {
+     "hoi": "Năm cá nhân 7 nên học gì?",
+     "dap": "Thứ gì đào sâu chuyên môn đang có, hoặc một môn giúp hiểu mình: viết, thiền, triết, phân tích dữ liệu."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Chu kỳ năm cá nhân",
+     "nghia": "Năm 7 là năm nội tâm: học hỏi, chiêm nghiệm, nghỉ ngơi, coi trọng chất lượng hơn số lượng."
+    }
+   ],
+   "y_chinh": [
+    "Năm 7: quay vào trong, học sâu, hỏi lại vì sao",
+    "Tháng 9 dương lịch là tháng lặng nhất năm",
+    "Mặt tối: thu mình lâu, phân tích mãi không làm",
+    "Tuần này: viết ba dòng mỗi tối, hẹn một người bạn"
+   ]
+  },
+  "nam-ca-nhan-8": {
+   "muc": [
+    {
+     "tieu_de": "Năm cá nhân số 8 là năm thế nào?",
+     "doan": "Năm cá nhân số 8 là năm thu hoạch và đo đếm: việc gieo từ năm 1, xây từ năm 4 thường đến lúc ra kết quả, kèm áp lực về tiền và quyền. Người ta hay được giao trách nhiệm lớn hơn, hay phải ra quyết định về ngân sách, nhân sự. Nếu những năm trước làm qua loa, năm 8 cũng cho thấy điều đó rất rõ. Mặt tối là làm tới quên nghỉ, đo người thân bằng hiệu suất. Gợi ý tuần này: ghi lại mọi khoản thu chi trong bảy ngày, không sửa, chỉ ghi."
+    },
+    {
+     "tieu_de": "Năm cá nhân 8 nên làm gì từng quý?",
+     "danh_sach": [
+      "Từ tháng 1 tới 3 (tháng cá nhân 9, 1, 2): khép sổ năm cũ, khởi kế hoạch lớn, rồi tìm đối tác và người hỗ trợ.",
+      "Từ tháng 4 tới 6 (tháng cá nhân 3, 4, 5): trình bày, chốt quy trình, rồi đón thay đổi về vai trò.",
+      "Từ tháng 7 tới 9 (tháng cá nhân 6, 7, 8): cân bằng nhà và việc, một tháng soát lại, tháng 9 là đỉnh việc tiền bạc.",
+      "Từ tháng 10 tới 12 (tháng cá nhân 9, 1, 2): trả nợ cũ, mở hướng mới nhỏ, và hạ nhịp để vào năm 9."
+     ]
+    },
+    {
+     "tieu_de": "Năm cá nhân 8 trong tình cảm, công việc, tiền bạc",
+     "danh_sach": [
+      "Tình cảm: dễ để công việc chiếm hết thời gian; giữ một tối cố định mỗi tuần cho người thương, tắt điện thoại.",
+      "Công việc: hợp đàm phán lương, nhận vai quản lý, mở rộng quy mô việc đang chạy tốt.",
+      "Tiền bạc: tiền vào lớn thì chi cũng lớn; tách ngay một phần để dự phòng trước khi tiêu, không xem đây là lời khuyên đầu tư."
+     ]
+    },
+    {
+     "tieu_de": "Ai đang ở năm cá nhân số 8 năm 2026?",
+     "doan": "Năm 2026 rút gọn còn 1, nên người có ngày cộng tháng sinh rút về 7 đang ở năm cá nhân 8. Ví dụ đã tính: sinh 17/8, xét năm 2026: 1+7 + 8 + 2+0+2+6 = 26 → 8; sinh 5/11, xét năm 2026: 5 + 1+1 + 2+0+2+6 = 17 → 8; sinh 16/6, xét năm 2029: 1+6 + 6 + 2+0+2+9 = 26 → 8. Người sinh 16/6 vào năm 8 muộn hơn, ở 2029, vì ngày cộng tháng của họ rút về 4."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Bảng tháng cá nhân của năm số 8",
+    "chu_thich": "Năm số 8 mở bằng tháng cá nhân 9, nên tháng Giêng hợp dọn việc cũ hơn là ký hợp đồng mới.",
+    "cot": [
+     "Tháng dương lịch",
+     "Tháng cá nhân",
+     "Chủ đề tháng"
+    ],
+    "dong": [
+     [
+      "Tháng 1",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 2",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 3",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 4",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 5",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 6",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 7",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 8",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 9",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 10",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 11",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 12",
+      "2",
+      "Tháng kiên nhẫn"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Năm cá nhân số 8 có phải năm giàu lên không?",
+     "dap": "Không có con số nào hứa tiền bạc. Năm 8 chỉ được mô tả là năm việc tiền và quyền được đặt lên bàn nhiều hơn."
+    },
+    {
+     "hoi": "Năm cá nhân 8 hay căng thẳng vì sao?",
+     "dap": "Vì trách nhiệm và kỳ vọng tăng cùng lúc. Chia mục tiêu lớn thành mốc tháng giúp áp lực dễ đo hơn."
+    },
+    {
+     "hoi": "Năm cá nhân 8 có hợp xin tăng lương không?",
+     "dap": "Thường được xem là hợp, nhất là khi mang theo số liệu việc mình đã làm được trong mấy năm trước."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Chu kỳ năm cá nhân",
+     "nghia": "Năm 8 là năm gặt hái: sự nghiệp, tài chính, quyền hạn; nếu đã gieo đúng thì thấy thành quả, kèm áp lực."
+    }
+   ],
+   "y_chinh": [
+    "Năm 8: thu hoạch và đo đếm việc đã gieo",
+    "Tháng 9 dương lịch là đỉnh việc tiền bạc trong năm",
+    "Mặt tối: làm tới quên nghỉ, đo người bằng hiệu suất",
+    "Tuần này: ghi mọi khoản thu chi trong bảy ngày"
+   ]
+  },
+  "nam-ca-nhan-9": {
+   "muc": [
+    {
+     "tieu_de": "Năm cá nhân số 9 là năm thế nào?",
+     "doan": "Năm cá nhân số 9 là năm cuối vòng chín năm, thường được mô tả là lúc khép lại cho gọn: dọn đồ, trả nợ việc, nói lời cảm ơn hay lời xin lỗi còn dang dở. Nhiều người thấy vài mối quan hệ hay công việc tự nhạt đi. Đó là nhịp dọn chỗ cho năm 1 sắp tới, không phải mất mát. Mặt tối là níu thứ đã xong, hoặc vội lao vào cam kết lớn chỉ để khỏi thấy trống. Thử ngay tuần này: bỏ hoặc tặng đi mười món đồ không dùng, và gạch một việc đã treo quá lâu."
+    },
+    {
+     "tieu_de": "Năm cá nhân 9 nên làm gì từng quý?",
+     "danh_sach": [
+      "Tháng 1–3 (tháng cá nhân 1, 2, 3): đầu năm lại có cảm giác khởi động; dùng nó để bắt đầu dọn, không để mở việc lớn.",
+      "Tháng 4–6 (tháng cá nhân 4, 5, 6): hoàn tất giấy tờ dở, chấp nhận vài thay đổi, chăm người nhà.",
+      "Tháng 7–9 (tháng cá nhân 7, 8, 9): nhìn lại chín năm qua, chốt chuyện tiền nong, tháng 9 khép trọn những gì cần khép.",
+      "Tháng 10–12 (tháng cá nhân 1, 2, 3): phác ý định cho năm 1 sắp tới, nói chuyện với người sẽ cùng làm, chưa ký cam kết lớn."
+     ]
+    },
+    {
+     "tieu_de": "Năm cá nhân 9 trong tình cảm, công việc, tiền bạc",
+     "danh_sach": [
+      "Tình cảm: hợp nói rõ những điều để lâu; mối quan hệ nào còn giá trị thường được làm mới, mối nào đã hết thì nhạt dần.",
+      "Công việc: hợp bàn giao, hoàn thành dự án, viết lại kinh nghiệm cho người sau.",
+      "Tiền bạc: hợp thanh toán khoản tồn, thanh lý đồ thừa, cho đi trong sức mình; ít hợp vay mới cho việc lớn."
+     ]
+    },
+    {
+     "tieu_de": "Năm 2027 ai ở năm cá nhân 9? Cách tính",
+     "doan": "Năm 2027 rút gọn còn 2, nên người có ngày cộng tháng sinh rút về 7 đang ở năm cá nhân 9 và sẽ sang năm 1 vào 2028. Đã tính: sinh 21/4, xét năm 2027: 2+1 + 4 + 2+0+2+7 = 18 → 9; sinh 5/11, xét năm 2027: 5 + 1+1 + 2+0+2+7 = 18 → 9; sinh 2/2, xét năm 2030: 2 + 2 + 2+0+3+0 = 9. Một mẹo nhỏ: năm cá nhân năm sau luôn bằng năm nay cộng 1, sau 9 quay về 1."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tháng cá nhân từng tháng trong năm cá nhân 9",
+    "chu_thich": "Năm số 9 là năm duy nhất có tháng cá nhân trùng đúng số tháng từ tháng 1 tới tháng 9 dương lịch.",
+    "cot": [
+     "Tháng dương lịch",
+     "Tháng cá nhân",
+     "Chủ đề tháng"
+    ],
+    "dong": [
+     [
+      "Tháng 1",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 2",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 3",
+      "3",
+      "Tháng biểu đạt"
+     ],
+     [
+      "Tháng 4",
+      "4",
+      "Tháng xây nền"
+     ],
+     [
+      "Tháng 5",
+      "5",
+      "Tháng thay đổi"
+     ],
+     [
+      "Tháng 6",
+      "6",
+      "Tháng gia đình"
+     ],
+     [
+      "Tháng 7",
+      "7",
+      "Tháng lắng"
+     ],
+     [
+      "Tháng 8",
+      "8",
+      "Tháng thành quả"
+     ],
+     [
+      "Tháng 9",
+      "9",
+      "Tháng khép lại"
+     ],
+     [
+      "Tháng 10",
+      "1",
+      "Tháng khởi động"
+     ],
+     [
+      "Tháng 11",
+      "2",
+      "Tháng kiên nhẫn"
+     ],
+     [
+      "Tháng 12",
+      "3",
+      "Tháng biểu đạt"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Năm cá nhân số 9 có nên cưới hay mua nhà không?",
+     "dap": "Truyền thống khuyên năm 9 ưu tiên khép việc cũ hơn mở cam kết lớn, nhưng quyết định thật nên dựa vào hoàn cảnh của chính mình."
+    },
+    {
+     "hoi": "Năm cá nhân 9 mất việc có phải do con số không?",
+     "dap": "Không. Con số không gây ra sự kiện; năm 9 chỉ được mô tả là năm hợp kết thúc và dọn chỗ cho điều mới."
+    },
+    {
+     "hoi": "Năm cá nhân 9 nên chuẩn bị gì cho năm 1?",
+     "dap": "Viết ra điều muốn bắt đầu, việc cần học trước, và người muốn cùng làm; để dành ít tiền cho khởi đầu mới."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thần số học Pythagoras — hệ thống phổ biến",
+     "chuong": "Chu kỳ năm cá nhân",
+     "nghia": "Năm 9 khép vòng chín năm: hoàn tất, buông điều đã xong, cho đi, chuẩn bị cho khởi đầu mới."
+    }
+   ],
+   "y_chinh": [
+    "Năm 9: năm cuối vòng chín năm, khép lại cho gọn",
+    "Tháng cá nhân trùng số tháng từ tháng 1 tới 9",
+    "Mặt tối: níu thứ đã xong, vội cam kết lớn",
+    "Tuần này: bỏ mười món đồ thừa, gạch một việc treo lâu"
+   ]
+  }
+ }
+}

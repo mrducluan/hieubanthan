@@ -1,0 +1,1427 @@
+{
+ "source_id": "bo_sung_hoa_cung_v1",
+ "school_id": "nam_phai",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Tứ hoá × 12 cung — Ban biên tập bổ sung",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + cổ thư công cộng (nháp AI, chờ thẩm định)"
+ },
+ "trang": {
+  "hoa-loc-cung-menh": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Lộc ở cung Mệnh là gì?",
+     "doan": "Hoá Lộc ở cung Mệnh là khi sao đóng ở cung Mệnh được can năm sinh cho hoá Lộc, nên nét của sao ấy trở thành cái duyên dễ thấy nhất ở người đó. Sách xưa coi Lộc là phúc khí: người có Lộc thủ Mệnh thường ăn nói mềm, biết nhường một chút để việc trôi. Cái lợi ở đây đến từ cách sống, chưa phải từ tiền."
+    },
+    {
+     "tieu_de": "Hoá Lộc thủ Mệnh có phải người giàu không?",
+     "doan": "Không hẳn; Lộc ở Mệnh nói về cái duyên của con người, còn tiền phải xem thêm cung Tài Bạch và Điền Trạch. Nhiều người Lộc thủ Mệnh sống đủ đầy về quan hệ nhưng tiền chỉ vừa phải. Có người lại dựa vào duyên quá nhiều, đến lúc cần tay nghề thì thấy mình học chưa tới."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Lộc rơi vào cung Mệnh?",
+     "doan": "Hoá Lộc lưu niên vào Mệnh ở năm có can làm chính sao thủ Mệnh của bạn hoá Lộc. Ví dụ người có Tham Lang ở Mệnh thì nhìn năm 2028 (Mậu Thân); người Thái Âm thủ Mệnh nhìn năm 2027 (Đinh Mùi). Năm như vậy thường dễ mở lời, dễ được mời vào việc mới; đây là nhịp tham khảo, không báo trước sự kiện."
+    },
+    {
+     "tieu_de": "Lá số có Hoá Lộc ở Mệnh nên làm gì?",
+     "danh_sach": [
+      "Ghi lại ba lần gần nhất có người chủ động giúp, xem điểm chung là gì để giữ nó.",
+      "Học sâu một nghề trong năm nay, để cái duyên có chỗ dựa thật.",
+      "Tập nói \"để mình xem lại\" thay vì gật ngay khi thấy mọi thứ đang dễ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Lộc — đọc ở cung Mệnh",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Lộc trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Lộc lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Mệnh. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Lộc",
+     "Ở cung Mệnh thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Liêm Trinh",
+      "Người giữ nguyên tắc nhưng không cứng; được nể vì làm đúng điều đã nói."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Cơ",
+      "Đầu óc nhanh, hay nghĩ ra cách gỡ rối cho người quanh mình."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Đồng",
+      "Tính hiền, dễ gần, đi đâu cũng có người muốn ngồi cùng."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thái Âm",
+      "Dịu, chu đáo, giỏi chăm lo; người khác thấy yên khi ở gần."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Tham Lang",
+      "Khéo giao thiệp, nhiều tài vặt, dễ quen người mới."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Vũ Khúc",
+      "Thực tế, biết tính toán, làm ra tiền bằng sức mình."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Dương",
+      "Rộng rãi, hay cho đi, được nhiều người biết tên."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Cự Môn",
+      "Có tài nói, lời nói thuyết phục được người khác."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Thiên Lương",
+      "Điềm đạm như người lớn tuổi, hay được nhờ đứng ra phân xử."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Phá Quân",
+      "Dám đổi mới, thích làm lại từ đầu theo cách của mình."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Lộc ở Mệnh mà sao thủ Mệnh hãm thì sao?",
+     "dap": "Lộc vẫn đem lại cái duyên, nhưng nét yếu của sao hãm cũng hiện rõ hơn. Ví dụ Cự Môn hãm mang Lộc thì ăn nói hay mà dễ nói quá lời. Nên đọc kèm độ sáng trên trang sao."
+    },
+    {
+     "hoi": "Người có Hoá Lộc thủ Mệnh dễ vấp chỗ nào?",
+     "dap": "Chỗ vấp thường là tin vào vận may của mình, ngại việc khó, hoặc nhận lời quá nhiều vì không nỡ từ chối. Giữ một thói quen làm việc đều là cách cân lại."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách xếp Hoá Lộc vào hàng sao phúc, chủ sự hanh thông. Khi luận Mệnh, sách xét Lộc cùng chính tinh mang nó và các cung chiếu về, không coi Lộc một mình là đủ để nói giàu sang."
+    }
+   ],
+   "y_chinh": [
+    "Lộc thủ Mệnh: cái duyên dễ thấy, người khác hay chủ động giúp",
+    "Tiền phải xem thêm Tài Bạch, Điền Trạch",
+    "Năm can làm sao thủ Mệnh hoá Lộc: dễ mở lời, dễ được mời",
+    "Cân lại bằng một nghề học sâu"
+   ]
+  },
+  "hoa-loc-cung-huynh-de": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Lộc ở cung Huynh Đệ là gì?",
+     "doan": "Hoá Lộc ở cung Huynh Đệ là khi sao trong cung anh em mang Lộc, nên anh chị em và bạn thân thường là nguồn giúp đỡ thật. Sách xưa còn đọc Huynh Đệ như kho tiền mặt nhỏ trong nhà: lúc cần xoay vốn, người gần nhất hay có mặt. Cái lợi đi kèm việc phải giữ cho sòng phẳng."
+    },
+    {
+     "tieu_de": "Hoá Lộc Huynh Đệ với người là con một thì sao?",
+     "doan": "Với người không có anh chị em ruột, cung này đọc sang bạn thân, anh em họ, đồng môn hoặc người cùng góp vốn. Nhiều người con một có Lộc ở đây kể rằng bạn bè cấp ba thân như ruột thịt. Điều đáng giữ là hẹn gặp đều, không đợi có việc."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Lộc vào cung Huynh Đệ?",
+     "doan": "Đó là năm có can làm sao trong cung Huynh Đệ hoá Lộc. Nếu cung này có Vũ Khúc thì xem năm 2029 (Kỷ Dậu); có Thiên Đồng thì xem năm 2026 (Bính Ngọ). Năm như vậy hợp để góp việc chung với anh em, mở lời nhờ giúp; vẫn nên viết rõ ai góp gì."
+    },
+    {
+     "tieu_de": "Có Hoá Lộc ở Huynh Đệ nên làm gì?",
+     "danh_sach": [
+      "Khi anh chị em giúp tiền, ghi lại số và hẹn trả, để lần sau vẫn dễ mở lời.",
+      "Rủ anh em làm một việc nhỏ chung, như góp quỹ cho bố mẹ, để thấy cách mỗi người làm.",
+      "Giới thiệu lại cơ hội cho anh em khi mình có, giữ dòng giúp đỡ hai chiều."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Lộc — đọc ở cung Huynh Đệ",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Lộc trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Lộc lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Huynh Đệ. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Lộc",
+     "Ở cung Huynh Đệ thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Liêm Trinh",
+      "Anh em sống nề nếp, giúp nhau có trước có sau."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Cơ",
+      "Anh em hay bày cách, chỉ mối làm ăn hoặc việc làm."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Đồng",
+      "Anh em hoà thuận, gặp nhau là vui, ít so đo."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thái Âm",
+      "Chị em gái hoặc người mẹ trong nhà là chỗ dựa ấm."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Tham Lang",
+      "Anh em nhiều mối quen, hay kéo mình vào cuộc vui và việc mới."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Vũ Khúc",
+      "Anh em giỏi tiền, có thể cho vay hoặc góp vốn."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Dương",
+      "Anh trai hoặc người anh lớn hay đứng ra lo cho cả nhà."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Cự Môn",
+      "Anh em ăn nói khéo, giới thiệu mình với người có ích."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Thiên Lương",
+      "Có người anh chị như người lớn, hay che chở lúc khó."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Phá Quân",
+      "Anh em dám làm, có khi rủ mình làm ăn kiểu mới."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Lộc Huynh Đệ có hợp làm ăn chung với anh em không?",
+     "dap": "Thường là thuận hơn mức trung bình, nhất là khi Lộc đi cùng sao giỏi tiền như Vũ Khúc. Dù vậy vẫn nên có giấy tờ ghi phần góp, phần chia."
+    },
+    {
+     "hoi": "Lộc ở Huynh Đệ mà Kỵ ở Nô Bộc thì đọc thế nào?",
+     "dap": "Thường là người trong nhà giúp được, còn người ngoài dễ có hiểu lầm. Nên dựa vào vòng thân trước khi mở rộng hợp tác."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc cung Huynh Đệ cho anh em và người ngang vai. Hoá Lộc đến đây được xem là anh em có lợi cho nhau; sách vẫn xét số lượng và tính nết anh em qua chính tinh trong cung."
+    }
+   ],
+   "y_chinh": [
+    "Lộc ở Huynh Đệ: anh em, bạn thân là nguồn giúp thật",
+    "Con một: đọc sang bạn thân, đồng môn, người góp vốn",
+    "Góp việc với anh em thì ghi rõ ai góp gì",
+    "Giữ giúp đỡ hai chiều"
+   ]
+  },
+  "hoa-loc-cung-phu-the": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Lộc ở cung Phu Thê là gì?",
+     "doan": "Hoá Lộc ở cung Phu Thê là khi sao trong cung vợ chồng mang Lộc, nên chuyện tình cảm thường có duyên và người bạn đời hay đem lại thuận lợi. Sách xưa coi đây là cách \"được nhờ người phối ngẫu\": thêm quan hệ, thêm cơ hội, có khi thêm thu nhập. Dễ vướng là quen nhận mà quên đáp lại."
+    },
+    {
+     "tieu_de": "Hoá Lộc Phu Thê với người chưa kết hôn và người đã kết hôn",
+     "doan": "Người chưa kết hôn thường dễ được giới thiệu, dễ có người để ý; vấn đề là chọn ai cho hợp. Người đã kết hôn thường thấy nhà có không khí, hai người làm ăn có lúc hỗ trợ nhau. Ở cả hai trường hợp, nói ra phần người kia đã góp giúp cái thuận ấy bền."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Lộc bay vào cung Phu Thê?",
+     "doan": "Đó là năm can làm sao ở cung Phu Thê hoá Lộc. Cung này có Thái Dương thì xem năm 2030 (Canh Tuất); có Phá Quân thì năm 2033 (Quý Sửu). Năm như vậy hợp để gặp gỡ, làm lành, cùng lên kế hoạch; đây không phải lời báo năm cưới."
+    },
+    {
+     "tieu_de": "Có Hoá Lộc ở Phu Thê nên làm gì?",
+     "danh_sach": [
+      "Mỗi tháng cùng ngồi xem lại tiền chung, để cái lợi người ấy đem về không thành chuyện ngầm.",
+      "Người còn độc thân: nhận lời một buổi gặp do bạn thân giới thiệu.",
+      "Ghi nhớ một việc người ấy làm cho mình và cảm ơn đúng việc đó."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Lộc — đọc ở cung Phu Thê",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Lộc trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Lộc lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Phu Thê. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Lộc",
+     "Ở cung Phu Thê thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Liêm Trinh",
+      "Người ấy có nguyên tắc, giữ nhà nề nếp, đáng tin về lời hứa."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Cơ",
+      "Người ấy nhanh nhạy, hay nghĩ cách cho việc chung."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Đồng",
+      "Hai người dễ vui với nhau, nhà ít căng thẳng."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thái Âm",
+      "Người ấy chu đáo, giỏi vun vén chuyện nhà."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Tham Lang",
+      "Người ấy đào hoa, giao thiệp rộng; vui mà cần tin nhau."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Vũ Khúc",
+      "Người ấy giỏi tiền, góp thu nhập rõ cho nhà."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Dương",
+      "Người ấy rộng rãi, có tiếng, kéo theo nhiều mối quen."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Cự Môn",
+      "Người ấy ăn nói khéo, giúp mình trong giao tiếp."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Thiên Lương",
+      "Người ấy chín chắn, hay che chở như người lớn."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Phá Quân",
+      "Người ấy dám đổi mới, có khi rủ mình làm ăn khác đi."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Lộc ở Phu Thê có phải lấy người giàu?",
+     "dap": "Không hẳn. Lộc nói về sự thuận lợi người ấy đem lại, có thể là quan hệ, niềm vui hay tiền. Muốn xem tiền, đọc thêm Tài Bạch của chính bạn."
+    },
+    {
+     "hoi": "Lộc ở Phu Thê mà gặp Tham Lang thì cần lưu ý gì?",
+     "dap": "Tham Lang hoá Lộc ở đây thường cho người ấy có duyên với nhiều người. Hai người nên nói rõ ranh giới với bạn bè khác giới để khỏi hiểu lầm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc cung Phu Thê cho người phối ngẫu và hôn nhân. Hoá Lộc vào đây được coi là được nhờ vợ chồng; sách vẫn xét chính tinh, sao đào hoa và cung Phúc Đức trước khi nói về hôn nhân bền hay không."
+    }
+   ],
+   "y_chinh": [
+    "Lộc ở Phu Thê: tình cảm có duyên, được nhờ người ấy",
+    "Độc thân: dễ được giới thiệu; đã cưới: nhà có không khí",
+    "Năm Lộc vào Phu Thê hợp gặp gỡ, làm lành",
+    "Nói ra phần người ấy đã góp"
+   ]
+  },
+  "hoa-quyen-cung-menh": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Quyền ở cung Mệnh là gì?",
+     "doan": "Hoá Quyền ở cung Mệnh là khi chính tinh thủ Mệnh mang thêm sức mạnh của Quyền, nên người đó có tiếng nói, thích tự quyết và hay đứng ra gánh việc. Cách sách mô tả gần với chữ \"uy\": người ta nghe theo vì thấy bạn dám chịu trách nhiệm. Mặt kia là dễ quen kiểm soát cả những việc không phải của mình."
+    },
+    {
+     "tieu_de": "Hoá Quyền thủ Mệnh ở nữ và ở nam có khác không?",
+     "doan": "Ý nghĩa chính như nhau: cả hai đều có chính kiến và năng lực cầm trịch. Sách xưa từng cho rằng nữ mệnh có Quyền thì \"lấn chồng\"; cách nhìn ngày nay chỉ coi đó là người phụ nữ quen tự quyết. Việc cần học ở cả nam lẫn nữ là để người khác cũng được quyết phần của họ."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Quyền đi vào cung Mệnh?",
+     "doan": "Đó là năm có can làm chính tinh thủ Mệnh hoá Quyền. Ví dụ Thái Dương thủ Mệnh gặp năm 2031 (Tân Hợi), Tử Vi thủ Mệnh gặp năm 2032 (Nhâm Tý). Năm ấy thường bị đẩy vào vai cầm lái, việc nhiều hơn, tiếng nói nặng hơn; nên chuẩn bị sức thay vì đoán chuyện sẽ xảy ra."
+    },
+    {
+     "tieu_de": "Có Hoá Quyền ở Mệnh nên làm gì?",
+     "danh_sach": [
+      "Trước khi quyết thay người khác, hỏi một câu: việc này có phải của mình không?",
+      "Chọn một mảng để làm chủ thật sự, thay vì cầm trịch mọi chỗ.",
+      "Mỗi tuần nhờ một người góp ý thẳng về cách mình ra quyết định."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Quyền — đọc ở cung Mệnh",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Quyền trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Quyền lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Mệnh. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Quyền",
+     "Ở cung Mệnh thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Phá Quân",
+      "Gan dạ, dám làm lại từ đầu; quyết nhanh nhưng dễ vội."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Lương",
+      "Có uy kiểu người thầy, hay khuyên và muốn người khác nghe theo."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Cơ",
+      "Quyết bằng mưu tính; giỏi lên kế hoạch, ghét bị chen ngang."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Đồng",
+      "Ngoài mềm trong cứng; vui vẻ mà vẫn muốn mọi việc theo nếp mình."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thái Âm",
+      "Quyền kiểu êm: nắm việc nhà, việc tiền một cách lặng lẽ."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Tham Lang",
+      "Ham thắng, giỏi vận động người khác theo kế hoạch của mình."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Vũ Khúc",
+      "Quyết đoán chuyện tiền bạc, làm việc dứt khoát, ít do dự."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Thái Dương",
+      "Muốn được công nhận, hay đứng ra nói thay cả nhóm."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tử Vi",
+      "Tự trọng cao, quen làm người đứng đầu, khó chịu khi bị chỉ đạo."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Cự Môn",
+      "Lý lẽ sắc, tranh luận giỏi; dễ thắng lời mà mất lòng."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Quyền ở Mệnh có tốt cho việc làm chủ không?",
+     "dap": "Thường là thuận, vì người có Quyền thủ Mệnh chịu được áp lực và dám quyết. Còn tuỳ cung Quan Lộc, Tài Bạch và việc có biết giao việc hay không."
+    },
+    {
+     "hoi": "Quyền thủ Mệnh gặp Hoá Kỵ cùng cung thì đọc sao?",
+     "dap": "Hai hoá cùng ở Mệnh thường cho người vừa muốn nắm việc vừa hay tự trách khi việc chưa như ý. Nên tách rõ phần mình kiểm soát được với phần không."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách coi Hoá Quyền là sao chủ uy quyền, thích hợp với người gánh trách nhiệm. Khi Quyền đóng Mệnh, sách vẫn đọc theo chính tinh mang Quyền: sao sáng thì uy có gốc, sao kém sáng thì dễ thành cố chấp."
+    }
+   ],
+   "y_chinh": [
+    "Quyền thủ Mệnh: có tiếng nói, quen cầm trịch",
+    "Cùng nghĩa cho nam và nữ: người tự quyết",
+    "Năm sao thủ Mệnh hoá Quyền: việc nhiều, vai nặng hơn",
+    "Học cách để người khác quyết phần của họ"
+   ]
+  },
+  "hoa-quyen-cung-huynh-de": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Quyền ở cung Huynh Đệ là gì?",
+     "doan": "Hoá Quyền ở cung Huynh Đệ là khi sao trong cung anh em mang Quyền, nên trong nhóm anh chị em có người rất có tiếng nói, hay đứng ra quyết chuyện chung. Người đó có khi là bạn, có khi là anh cả hay chị cả. Cái được là việc nhà có người lo; cái dễ vướng là người khác thấy mình bị lấn."
+    },
+    {
+     "tieu_de": "Hoá Quyền Huynh Đệ khi cha mẹ già và chuyện giỗ chạp",
+     "doan": "Đây là lúc nét Quyền hiện rõ nhất: ai lo bố mẹ, ai giữ nhà thờ, ai chia tiền. Người có Quyền ở Huynh Đệ thường thấy một người nắm hết rồi mệt, hoặc mấy người cùng muốn quyết. Một buổi họp gia đình có ghi chép thường gỡ được nhiều."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Quyền vào cung Huynh Đệ?",
+     "doan": "Đó là năm can làm sao ở cung Huynh Đệ hoá Quyền. Cung này có Thiên Lương thì xem năm 2035 (Ất Mão); có Tham Lang thì năm 2029 (Kỷ Dậu). Năm ấy chuyện anh em dễ cần người đứng ra quyết; nên bàn trước, đừng để một người tự gánh."
+    },
+    {
+     "tieu_de": "Có Hoá Quyền ở Huynh Đệ nên làm gì?",
+     "danh_sach": [
+      "Chia việc theo sở trường: người giỏi tiền giữ sổ, người gần nhà chăm bố mẹ.",
+      "Nếu chính mình là người cầm trịch, hỏi ý em út trước khi chốt.",
+      "Viết lại quyết định chung vào nhóm tin nhắn gia đình để khỏi nhớ nhầm."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Quyền — đọc ở cung Huynh Đệ",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Quyền trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Quyền lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Huynh Đệ. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Quyền",
+     "Ở cung Huynh Đệ thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Phá Quân",
+      "Anh em có người dám đổi cách làm của cả nhà."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Lương",
+      "Có người anh chị nói như người lớn, cả nhà hay nghe."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Cơ",
+      "Anh em giỏi tính kế, hay quyết thay bằng phương án sẵn."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Đồng",
+      "Anh em vui vẻ mà vẫn muốn mọi người theo ý mình."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thái Âm",
+      "Chị em gái giữ việc nhà, việc tiền một cách lặng lẽ."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Tham Lang",
+      "Anh em giỏi vận động, kéo cả nhà vào kế hoạch."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Vũ Khúc",
+      "Anh em nắm chuyện tiền chung, quyết nhanh và cứng."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Thái Dương",
+      "Anh trai hoặc người lớn trong nhóm hay nói thay mọi người."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tử Vi",
+      "Có người anh chị rất tự trọng, quen làm đầu đàn."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Cự Môn",
+      "Anh em lý lẽ sắc, bàn chuyện chung dễ thành tranh luận."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Quyền Huynh Đệ có làm anh em bất hoà không?",
+     "dap": "Không nhất thiết. Quyền chỉ cho thấy có người mạnh tiếng; nếu việc được chia rõ, người đó lại là chỗ dựa của cả nhà."
+    },
+    {
+     "hoi": "Quyền ở Huynh Đệ có hợp góp vốn không?",
+     "dap": "Hợp khi một người được giao quyền quyết rõ ràng và những người khác đồng ý từ đầu. Góp vốn mà ai cũng muốn quyết thì dễ vướng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc cung Huynh Đệ cho anh em và người ngang hàng. Quyền đến đây thường được hiểu là anh em có người có thế, có lực; sách vẫn xét chính tinh để biết lực ấy giúp nhau hay giành nhau."
+    }
+   ],
+   "y_chinh": [
+    "Quyền ở Huynh Đệ: trong anh em có người mạnh tiếng",
+    "Hiện rõ khi lo bố mẹ, giỗ chạp, chia tiền",
+    "Chia việc theo sở trường, ghi lại quyết định chung",
+    "Người cầm trịch nên hỏi ý em út trước khi chốt"
+   ]
+  },
+  "hoa-quyen-cung-phu-the": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Quyền ở cung Phu Thê là gì?",
+     "doan": "Hoá Quyền ở cung Phu Thê là khi sao trong cung vợ chồng mang Quyền, nên người bạn đời thường giỏi, có chính kiến và quen nắm việc. Hai người dễ là một cặp làm được việc lớn, nhưng cũng dễ giành câu nói cuối. Sách xưa hay nói người phối ngẫu \"có quyền\" trong nhà."
+    },
+    {
+     "tieu_de": "Hoá Quyền Phu Thê với người đã kết hôn: ai quyết việc gì?",
+     "doan": "Với người đã kết hôn, Quyền ở Phu Thê thường hiện qua tiền nong, nuôi con, chọn nơi ở. Cặp nào chia rõ phần quyết thì ít va chạm; cặp nào để mọi việc chung chung thì dễ cãi vì ai cũng muốn đúng. Người chưa kết hôn hay bị hút về người tự tin, giỏi giang."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Quyền đi vào cung Phu Thê?",
+     "doan": "Đó là năm can làm sao ở cung Phu Thê hoá Quyền. Cung này có Vũ Khúc thì xem năm 2030 (Canh Tuất); có Thiên Đồng thì năm 2027 (Đinh Mùi). Năm như vậy chuyện hai người dễ cần quyết lớn; nên bàn sớm và để mỗi người giữ một phần."
+    },
+    {
+     "tieu_de": "Có Hoá Quyền ở Phu Thê nên làm gì?",
+     "danh_sach": [
+      "Lập danh sách việc nhà, ghi ai quyết, ai làm, ai được hỏi ý.",
+      "Khi tranh luận, đổi câu \"anh/em sai\" thành \"mình thấy khác ở chỗ…\".",
+      "Ghi nhận năng lực của người ấy trước mặt người khác."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Quyền — đọc ở cung Phu Thê",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Quyền trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Quyền lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Phu Thê. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Quyền",
+     "Ở cung Phu Thê thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Phá Quân",
+      "Người ấy dám làm, thích đổi mới, đôi khi quyết trước rồi mới bàn."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thiên Lương",
+      "Người ấy nói như người lớn, hay dạy bảo; nghe được nhiều điều hay."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Thiên Cơ",
+      "Người ấy giỏi tính toán, quen lên kế hoạch cho cả hai."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Đồng",
+      "Người ấy ngoài vui vẻ, trong vẫn muốn mọi thứ theo nếp mình."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thái Âm",
+      "Người ấy nắm việc nhà, việc tiền một cách êm."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Tham Lang",
+      "Người ấy có sức hút, giỏi kéo người khác theo ý mình."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Vũ Khúc",
+      "Người ấy cứng về tiền, quyết chi tiêu nhanh và rõ."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Thái Dương",
+      "Người ấy muốn được công nhận, thích đứng tên việc chung."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tử Vi",
+      "Người ấy tự trọng cao, quen làm chủ; cần được tôn trọng."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Cự Môn",
+      "Người ấy lý lẽ sắc, tranh luận khó thua."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Quyền ở Phu Thê có phải vợ hoặc chồng lấn át?",
+     "dap": "Thường chỉ là người ấy có năng lực và quen tự quyết. Lấn át hay không tuỳ cách hai người chia việc, không do một hoá quyết định."
+    },
+    {
+     "hoi": "Quyền ở Phu Thê có hợp vợ chồng cùng làm ăn?",
+     "dap": "Khá hợp nếu mỗi người giữ một mảng riêng, như một người lo sản xuất, một người lo khách. Cùng quyết một mảng thì dễ va."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Phu Thê cho người phối ngẫu. Quyền đến đây được xem là người phối ngẫu có tài, có thế; sách vẫn dặn xét chính tinh và sao hội chiếu để biết cái thế ấy giúp nhau hay giành phần."
+    }
+   ],
+   "y_chinh": [
+    "Quyền ở Phu Thê: người ấy giỏi, có chính kiến",
+    "Dễ giành câu nói cuối nếu việc không chia rõ",
+    "Ghi ai quyết, ai làm, ai được hỏi ý",
+    "Vợ chồng làm ăn: mỗi người giữ một mảng"
+   ]
+  },
+  "hoa-khoa-cung-menh": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Khoa ở cung Mệnh là gì?",
+     "doan": "Hoá Khoa ở cung Mệnh là khi sao thủ Mệnh được thêm nét thanh nhã, học hành, nên người đó thường được tin vì cách cư xử có chừng mực. Sách xưa gọi Khoa là sao của danh tiếng và văn chương. Ở Mệnh, cái tiếng ấy gắn với con người hơn là với chức vụ."
+    },
+    {
+     "tieu_de": "Hoá Khoa thủ Mệnh có hợp đi học, thi cử không?",
+     "doan": "Thường là hợp: người có Khoa ở Mệnh ham hiểu biết và dễ được thầy cô quý. Còn đỗ hay trượt thì tuỳ công sức và cung Quan Lộc, Phụ Mẫu. Có người Khoa thủ Mệnh học rộng nhưng ngại thi, vì sợ mất hình ảnh mình đang có."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Khoa vào cung Mệnh?",
+     "doan": "Khi can năm làm chính sao thủ Mệnh hoá Khoa. Ví dụ Thiên Cơ ở Mệnh thì năm 2027 (Đinh Mùi), Thái Âm ở Mệnh thì năm 2030 (Canh Tuất) hoặc 2033 (Quý Sửu). Những năm này hợp để học thêm, viết, nhận lời giới thiệu; không phải lời đoán đỗ đạt."
+    },
+    {
+     "tieu_de": "Có Hoá Khoa ở Mệnh nên làm gì?",
+     "danh_sach": [
+      "Biến cái tiếng tốt thành việc cụ thể: dạy lại một kỹ năng cho người mới.",
+      "Đừng giữ hình ảnh đến mức không dám hỏi khi chưa biết.",
+      "Lưu lại bằng cấp, chứng chỉ, thư giới thiệu ở một chỗ dễ tìm."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Khoa — đọc ở cung Mệnh",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Khoa trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Khoa lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Mệnh. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Khoa",
+     "Ở cung Mệnh thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Vũ Khúc",
+      "Uy tín về tiền: nói tới chuyện tiền người ta tin mình."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Tử Vi",
+      "Phong thái đĩnh đạc, ít nói mà có trọng lượng."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Văn Xương",
+      "Viết tốt, nói có sách; hợp nghề cần chữ nghĩa."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Cơ",
+      "Đầu óc tinh, hay được hỏi ý vì nghĩ ra cách hợp lý."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Hữu Bật",
+      "Hay được giúp đúng lúc; tiếng tốt nhờ biết đỡ người khác."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Thiên Lương",
+      "Hiền, chín chắn; được tin như người đáng nhờ cậy."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Âm",
+      "Dịu dàng, tế nhị; tiếng tốt trong nhà và chỗ làm."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Khúc",
+      "Có khiếu ăn nói, nghệ thuật; được nhớ vì có duyên."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tả Phù",
+      "Người hỗ trợ đáng tin; ai cũng muốn có trong nhóm."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Thái Âm",
+      "Thanh nhã, kín đáo; được quý vì không phô trương."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Khoa ở Mệnh có giúp lúc gặp khó không?",
+     "dap": "Sách xưa xem Khoa là sao giải: lúc rối thường có người gỡ giúp hoặc có lời khuyên đúng. Đó là chỗ dựa, không thay cho việc tự chuẩn bị."
+    },
+    {
+     "hoi": "Khoa thủ Mệnh có nhược điểm gì?",
+     "dap": "Dễ ngại va chạm và quá lo giữ tiếng. Có lúc chọn im lặng cho êm, trong khi việc cần nói thẳng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách xếp Hoá Khoa vào nhóm sao chủ khoa danh, văn học. Ở cung Mệnh, sách chú ý Khoa làm người thanh nhã, gặp nạn có người giải; vẫn phải đọc kèm chính tinh và cung chiếu."
+    }
+   ],
+   "y_chinh": [
+    "Khoa thủ Mệnh: được tin vì cư xử có chừng mực",
+    "Hợp học hành, viết, dạy lại người khác",
+    "Năm sao thủ Mệnh hoá Khoa: hợp học thêm, nhận lời giới thiệu",
+    "Đừng giữ hình ảnh đến mức ngại hỏi"
+   ]
+  },
+  "hoa-khoa-cung-huynh-de": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Khoa ở cung Huynh Đệ là gì?",
+     "doan": "Hoá Khoa ở cung Huynh Đệ là khi sao trong cung anh em mang Khoa, nên anh chị em và bạn thân thường là người hiểu biết, có tiếng tốt, hay khuyên đúng lúc. Sự giúp ở đây nghiêng về chỉ đường, giới thiệu, hơn là đưa tiền. Nhiều người kể rằng quyết định học gì, làm gì có dấu tay của một người anh hay chị."
+    },
+    {
+     "tieu_de": "Hoá Khoa Huynh Đệ có nghĩa là anh em học giỏi?",
+     "doan": "Thường anh em có duyên với chữ nghĩa, hoặc làm nghề cần uy tín như dạy học, tư vấn, giấy tờ. Không phải ai cũng học cao; Khoa nói về sự tử tế và cái tiếng, không về bằng cấp. Đôi khi chính bạn là người được anh em nhìn theo."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Khoa vào cung Huynh Đệ?",
+     "doan": "Khi can năm làm sao ở cung này hoá Khoa. Ví dụ cung Huynh Đệ có Văn Xương thì năm 2026 (Bính Ngọ); có Thiên Lương thì năm 2029 (Kỷ Dậu). Năm đó hợp để học cùng anh em, nhờ họ xem giúp hồ sơ, hợp đồng."
+    },
+    {
+     "tieu_de": "Có Hoá Khoa ở Huynh Đệ nên làm gì?",
+     "danh_sach": [
+      "Khi phân vân chọn trường, chọn việc, hỏi ý một người anh chị đã đi trước.",
+      "Cảm ơn bằng việc cụ thể: kể lại kết quả sau khi làm theo lời khuyên.",
+      "Đừng chỉ giữ hoà khí bề ngoài; chuyện chưa vui thì nói nhẹ cho xong."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Khoa — đọc ở cung Huynh Đệ",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Khoa trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Khoa lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Huynh Đệ. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Khoa",
+     "Ở cung Huynh Đệ thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Vũ Khúc",
+      "Anh em có uy tín về tiền, hay được nhờ giữ hộ."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Tử Vi",
+      "Có người anh chị đĩnh đạc, lời nói có trọng lượng trong nhà."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Văn Xương",
+      "Anh em viết giỏi, hay giúp soạn giấy tờ, đơn từ."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Cơ",
+      "Anh em đầu óc tinh, hay chỉ cách làm gọn hơn."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Hữu Bật",
+      "Anh em hay giúp đúng lúc, là người hỗ trợ thầm lặng."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Thiên Lương",
+      "Có người anh chị hiền, như người lớn để hỏi ý."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Âm",
+      "Chị em gái tế nhị, giữ hoà khí cho cả nhà."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Khúc",
+      "Anh em có khiếu nghệ thuật hoặc ăn nói, được nhiều người biết."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tả Phù",
+      "Anh em là cánh tay phải đáng tin khi mình cần người phụ."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Thái Âm",
+      "Chị em gái kín đáo, thanh nhã, ít khi làm ồn chuyện nhà."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Khoa ở Huynh Đệ có giúp được tiền không?",
+     "dap": "Có thể, nhưng ít hơn Lộc. Khoa thường giúp bằng chỉ dẫn, giới thiệu, bảo lãnh tiếng; khi cần tiền, xem thêm cung Tài Bạch."
+    },
+    {
+     "hoi": "Khoa Huynh Đệ gặp Kỵ chiếu từ Nô Bộc thì sao?",
+     "dap": "Anh em vẫn tử tế, nhưng việc ngoài xã hội dễ có hiểu lầm. Lời khuyên của anh em lúc ấy càng có ích."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Huynh Đệ cho anh em, Khoa là sao văn danh và giải ách. Khoa ở đây thường được hiểu là anh em có học, giúp nhau qua lúc rối; sách vẫn xem chính tinh để biết cách giúp."
+    }
+   ],
+   "y_chinh": [
+    "Khoa ở Huynh Đệ: anh em hiểu biết, khuyên đúng lúc",
+    "Giúp bằng chỉ đường, giới thiệu hơn là tiền",
+    "Hỏi ý anh chị đi trước khi chọn trường, chọn việc",
+    "Giữ hoà khí thật, không chỉ bề ngoài"
+   ]
+  },
+  "hoa-khoa-cung-phu-the": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Khoa ở cung Phu Thê là gì?",
+     "doan": "Hoá Khoa ở cung Phu Thê là khi sao trong cung vợ chồng mang Khoa, nên người bạn đời thường có học, lịch sự và hai người giữ được sự tôn trọng. Sách xưa xem Khoa là sao giải: lúc hai người có chuyện, thường có cách nói lại với nhau. Dễ vướng là giữ thể diện mà không nói thật."
+    },
+    {
+     "tieu_de": "Hoá Khoa Phu Thê với người đang tìm hiểu",
+     "doan": "Người đang tìm hiểu thường bị hút bởi người có học thức, có cách nói chuyện, hoặc quen nhau qua môi trường học, làm chuyên môn. Mối quan hệ hay đi chậm mà chắc. Việc cần làm là hỏi nhau những điều thật về tiền, con cái, chỗ ở, đừng chỉ dừng ở chuyện đẹp."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Khoa vào cung Phu Thê?",
+     "doan": "Khi can năm làm sao ở cung Phu Thê hoá Khoa. Cung này có Tử Vi thì năm 2035 (Ất Mão); có Thái Âm thì năm 2030 (Canh Tuất) hoặc 2033 (Quý Sửu). Những năm này hợp để hai người cùng học, cùng làm giấy tờ chung, nói lại chuyện cũ cho nhẹ."
+    },
+    {
+     "tieu_de": "Có Hoá Khoa ở Phu Thê nên làm gì?",
+     "danh_sach": [
+      "Mỗi tuần có một lần nói thật khi chỉ có hai người, không cần lịch sự như trước mặt người khác.",
+      "Cùng học một thứ mới: một khoá nấu ăn, một ngoại ngữ.",
+      "Giữ thói quen khen nhau cụ thể, không khen chung chung."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Khoa — đọc ở cung Phu Thê",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Khoa trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Khoa lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Phu Thê. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Khoa",
+     "Ở cung Phu Thê thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Vũ Khúc",
+      "Người ấy giữ tiền rõ ràng, uy tín trong chuyện chi tiêu chung."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Tử Vi",
+      "Người ấy đĩnh đạc, được họ hàng hai bên nể."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Văn Xương",
+      "Người ấy viết hay, nói có sách; hai người hợp bàn chuyện chữ nghĩa."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Thiên Cơ",
+      "Người ấy khéo nghĩ, hay tìm cách êm khi hai người bất đồng."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Hữu Bật",
+      "Người ấy hay đỡ đần lặng lẽ, ít kể công."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Thiên Lương",
+      "Người ấy chín chắn, như người cố vấn trong nhà."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thái Âm",
+      "Người ấy dịu dàng, tế nhị, giữ hoà khí."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Khúc",
+      "Người ấy có duyên ăn nói hoặc nghệ thuật, được nhiều người quý."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Tả Phù",
+      "Người ấy là người phụ việc tận tâm, đỡ mình nhiều việc."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Thái Âm",
+      "Người ấy kín đáo, thanh nhã, ít phô chuyện nhà."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Khoa ở Phu Thê có phải hôn nhân êm đềm?",
+     "dap": "Thường hai người ít to tiếng, nhưng êm không có nghĩa là không có chuyện. Khoa cho cách gỡ, việc gỡ vẫn cần hai người chịu nói."
+    },
+    {
+     "hoi": "Khoa ở Phu Thê gặp Kỵ chiếu từ Quan Lộc thì sao?",
+     "dap": "Công việc dễ kéo căng sang chuyện nhà, nhưng người ấy thường hiểu và đỡ được. Nên tách giờ làm với giờ của hai người."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Phu Thê cho người phối ngẫu. Khoa ở đây được xem là người phối ngẫu thanh nhã, có học, và hôn nhân gặp trở có người giải; sách vẫn xét chính tinh cùng cung chiếu."
+    }
+   ],
+   "y_chinh": [
+    "Khoa ở Phu Thê: người ấy có học, hai người tôn trọng nhau",
+    "Dễ giữ thể diện mà không nói thật",
+    "Mỗi tuần một lần nói thật khi chỉ có hai người",
+    "Cùng học một thứ mới"
+   ]
+  },
+  "hoa-ky-cung-menh": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Kỵ ở cung Mệnh là gì?",
+     "doan": "Hoá Kỵ ở cung Mệnh là khi sao thủ Mệnh mang Kỵ, nên chính con người mình trở thành chỗ hay để tâm: nghĩ kỹ, cầu toàn, khó buông. Sách xưa gọi Kỵ là sao trở ngại, nhưng cũng là nơi người ta dồn sức nhiều nhất. Nhiều người Kỵ thủ Mệnh làm việc rất sâu vì không chịu bỏ dở."
+    },
+    {
+     "tieu_de": "Hoá Kỵ thủ Mệnh có phải số vất vả không?",
+     "doan": "Không nên hiểu như vậy; Kỵ ở Mệnh nói về cách bạn đối xử với chính mình, hay đòi hỏi mình hơn người khác đòi. Sự vất vả, nếu có, thường đến từ việc ôm hết và ít xin giúp. Đọc kèm cung Phúc Đức để biết bạn hồi sức bằng cách nào."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Kỵ bay vào cung Mệnh?",
+     "doan": "Đó là năm có can làm sao thủ Mệnh của bạn hoá Kỵ. Ví dụ Cự Môn thủ Mệnh nhìn năm 2027 (Đinh Mùi); Vũ Khúc thủ Mệnh nhìn năm 2032 (Nhâm Tý). Năm ấy dễ thấy mình nghĩ nhiều, dễ tự so sánh; giữ nhịp ngủ, nhịp làm đều là đủ, không phải năm để sợ."
+    },
+    {
+     "tieu_de": "Lá số có Hoá Kỵ ở Mệnh nên làm gì?",
+     "danh_sach": [
+      "Mỗi tối ghi một việc đã làm xong, dù nhỏ, để thấy mình không đứng yên.",
+      "Đặt hạn chót cho việc suy nghĩ: quá hạn thì chọn phương án tạm ổn nhất.",
+      "Nói ra điều đang lo với một người tin được, thay vì giữ trong đầu."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Kỵ — đọc ở cung Mệnh",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Kỵ trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Kỵ lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Mệnh. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Kỵ",
+     "Ở cung Mệnh thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Thái Dương",
+      "Muốn được ghi nhận, hay cho đi rồi buồn khi không ai nhắc."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thái Âm",
+      "Nhạy cảm, dễ để tâm chuyện nhà và chuyện tình cảm."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Liêm Trinh",
+      "Tự đặt luật cho mình rất chặt, khó tha thứ lỗi của bản thân."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Cự Môn",
+      "Hay nghi, hay hỏi lại; lời nói dễ bị hiểu khác ý."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thiên Cơ",
+      "Nghĩ quá nhiều phương án, chọn rồi vẫn nghĩ lại."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Văn Khúc",
+      "Dễ vướng chữ nghĩa: nói một đằng người nghe hiểu một nẻo."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thiên Đồng",
+      "Muốn yên mà lòng ít yên; vui đó rồi lại lo."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Xương",
+      "Kỹ giấy tờ, chữ ký; một lỗi nhỏ cũng làm bận lòng lâu."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Vũ Khúc",
+      "Lo chuyện tiền của chính mình nhiều, khó tiêu cho bản thân."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Tham Lang",
+      "Muốn nhiều thứ cùng lúc, rồi trách mình vì chưa đủ."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Kỵ ở Mệnh có đổi được không?",
+     "dap": "Lá số không đổi, nhưng cách bạn đáp lại thì đổi được. Nhiều người Kỵ thủ Mệnh dùng chính sự cầu toàn ấy để làm nghề cần độ kỹ."
+    },
+    {
+     "hoi": "Kỵ thủ Mệnh gặp Lộc chiếu thì sao?",
+     "dap": "Lộc ở cung chiếu về (Thiên Di, Tài Bạch, Quan Lộc) thường làm dịu Kỵ: có lo nhưng có chỗ để dồn sức ra ngoài. Đọc cả bốn cung chính cùng lúc."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách coi Hoá Kỵ là sao chủ trở ngại, nơi người ta hay vướng và bận lòng. Khi Kỵ đóng Mệnh, sách vẫn xét sao gốc và cát tinh hội chiếu; có Lộc, Khoa chiếu thì trở ngại nhẹ đi."
+    }
+   ],
+   "y_chinh": [
+    "Kỵ thủ Mệnh: hay đòi hỏi mình, cầu toàn, khó buông",
+    "Không phải số vất vả, là chỗ dồn sức nhiều",
+    "Năm sao thủ Mệnh hoá Kỵ: giữ nhịp ngủ, nhịp làm đều",
+    "Đặt hạn chót cho việc suy nghĩ"
+   ]
+  },
+  "hoa-ky-cung-huynh-de": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Kỵ ở cung Huynh Đệ là gì?",
+     "doan": "Hoá Kỵ ở cung Huynh Đệ là khi sao trong cung anh em mang Kỵ, nên chuyện anh chị em và bạn thân là chỗ bạn hay bận lòng. Thường không phải vì ai xấu, mà vì thương nhiều nên kỳ vọng nhiều. Chuyện tiền chung, đất đai chung hoặc chăm cha mẹ là nơi hay vướng nhất."
+    },
+    {
+     "tieu_de": "Hoá Kỵ Huynh Đệ và chuyện cho anh em vay tiền",
+     "doan": "Sách xưa hay nhắc Huynh Đệ có Kỵ thì tiền qua tay anh em dễ chậm về. Cách giữ tình là cho mượn trong mức mình chấp nhận mất, nhắn lại số tiền và ngày hẹn. Nếu là góp vốn, nên có giấy tờ như với người ngoài."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Kỵ bay vào cung Huynh Đệ?",
+     "doan": "Đó là năm can làm sao trong cung Huynh Đệ hoá Kỵ. Cung này có Liêm Trinh thì xem năm 2026 (Bính Ngọ); có Thái Dương thì năm 2034 (Giáp Dần). Năm như vậy nên chậm lại khi bàn chuyện tiền với anh em; không phải năm anh em chia lìa."
+    },
+    {
+     "tieu_de": "Có Hoá Kỵ ở Huynh Đệ nên làm gì?",
+     "danh_sach": [
+      "Mọi khoản tiền với anh em, dù nhỏ, ghi lại một tin nhắn.",
+      "Họp gia đình về việc lớn khi mọi người đang vui, không đợi có chuyện.",
+      "Giúp anh em trong sức mình; nói rõ khi không giúp được."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Kỵ — đọc ở cung Huynh Đệ",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Kỵ trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Kỵ lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Huynh Đệ. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Kỵ",
+     "Ở cung Huynh Đệ thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Thái Dương",
+      "Anh trai hoặc người anh hay làm mình lo, dù họ có ý tốt."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thái Âm",
+      "Chị em gái nhạy cảm, dễ tủi khi thấy mình bị quên."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Liêm Trinh",
+      "Anh em cứng nguyên tắc, một lời nặng là để bụng lâu."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Cự Môn",
+      "Anh em dễ lời qua tiếng lại; nói chuyện nên chậm."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thiên Cơ",
+      "Anh em hay đổi kế hoạch, việc chung dễ phải làm lại."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Văn Khúc",
+      "Giấy tờ chung với anh em dễ sai sót, nên đọc kỹ."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thiên Đồng",
+      "Anh em ham vui, hứa giúp rồi quên; nhắc nhẹ là được."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Xương",
+      "Chữ ký, giấy tờ nhà đất chung cần làm cẩn thận."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Vũ Khúc",
+      "Tiền nong với anh em là chỗ dễ vướng nhất."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Tham Lang",
+      "Anh em nhiều mong muốn, dễ nhờ vả quá sức mình."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Kỵ ở Huynh Đệ có phải anh em không hợp?",
+     "dap": "Không. Kỵ cho thấy chỗ bạn để tâm, không phán quan hệ tốt hay xấu. Nhiều người Kỵ ở đây lại là người lo cho anh em nhiều nhất."
+    },
+    {
+     "hoi": "Kỵ ở Huynh Đệ có ảnh hưởng cung nào khác?",
+     "dap": "Cung xung chiếu là Nô Bộc, nên chuyện bạn bè, đồng nghiệp cũng dễ có hiểu lầm tương tự. Cách giữ sòng phẳng dùng được cho cả hai."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Huynh Đệ cho anh em và tiền bạc qua tay người thân. Kỵ vào đây được xem là anh em dễ bất đồng hoặc tiền chung trắc trở; sách vẫn xét chính tinh và cát tinh hội chiếu để nói nặng nhẹ."
+    }
+   ],
+   "y_chinh": [
+    "Kỵ ở Huynh Đệ: thương nhiều, kỳ vọng nhiều, dễ bận lòng",
+    "Tiền với anh em: ghi lại, cho mượn trong mức chấp nhận",
+    "Năm Kỵ vào Huynh Đệ: chậm lại khi bàn tiền chung",
+    "Họp gia đình lúc mọi người đang vui"
+   ]
+  },
+  "hoa-ky-cung-phu-the": {
+   "muc": [
+    {
+     "tieu_de": "Hoá Kỵ ở cung Phu Thê là gì?",
+     "doan": "Hoá Kỵ ở cung Phu Thê là khi sao trong cung vợ chồng mang Kỵ, nên tình cảm trở thành chỗ bạn để tâm nhiều nhất. Sách xưa xếp đây vào chỗ \"cần chú ý\" của hôn nhân, không phải lời phán tan vỡ. Cái vướng thường nằm ở kỳ vọng chưa nói thành lời."
+    },
+    {
+     "tieu_de": "Hoá Kỵ cung Phu Thê với người đã kết hôn và người chưa kết hôn",
+     "doan": "Người đã kết hôn thường vướng vì cách nói: một người im, người kia đoán; chuyện nhỏ thành lớn. Người chưa kết hôn hay chọn người làm mình bận lòng, hoặc tìm hiểu lâu mới quyết. Cả hai đều cải thiện được bằng thói quen nói rõ điều mình cần."
+    },
+    {
+     "tieu_de": "Năm nào Hoá Kỵ bay vào cung Phu Thê?",
+     "doan": "Đó là năm can làm sao ở cung Phu Thê hoá Kỵ. Cung này có Cự Môn thì xem năm 2027 (Đinh Mùi); có Thái Âm thì năm 2035 (Ất Mão). Năm như vậy nên dành thời gian cho nhau và nói chậm lại; đây là nhịp tham khảo, không đoán chuyện hợp tan."
+    },
+    {
+     "tieu_de": "Nên làm gì khi lá số có Hoá Kỵ ở Phu Thê?",
+     "danh_sach": [
+      "Thay \"anh/em lúc nào cũng…\" bằng \"hôm nay mình thấy…\".",
+      "Thoả thuận trước một việc hai người hay vướng nhất, như tiền biếu hai bên.",
+      "Khi đang mệt, hẹn nói vào lúc khác, ghi giờ cụ thể để không thành né tránh."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Năm can nào thì sao nào mang Hoá Kỵ — đọc ở cung Phu Thê",
+    "chu_thich": "Can năm sinh quyết định sao mang Hoá Kỵ trên lá số gốc; năm âm lịch có cùng can (cột thứ hai) là lúc Hoá Kỵ lưu niên lại rơi vào chính sao đó. Ô cuối chỉ áp dụng khi sao ấy đóng ở cung Phu Thê. Riêng can Canh và can Nhâm, vài sách xếp khác.",
+    "cot": [
+     "Can năm",
+     "Năm lưu niên gần nhất",
+     "Sao mang Hoá Kỵ",
+     "Ở cung Phu Thê thường gợi"
+    ],
+    "dong": [
+     [
+      "Giáp",
+      "2034 (Giáp Dần)",
+      "Thái Dương",
+      "Người ấy cho đi nhiều mà mong được ghi nhận; thiếu lời cảm ơn là buồn."
+     ],
+     [
+      "Ất",
+      "2035 (Ất Mão)",
+      "Thái Âm",
+      "Người ấy nhạy cảm, dễ tủi; một câu vô ý cũng nhớ lâu."
+     ],
+     [
+      "Bính",
+      "2026 (Bính Ngọ)",
+      "Liêm Trinh",
+      "Hai người cùng cứng nguyên tắc, khó ai nhường trước."
+     ],
+     [
+      "Đinh",
+      "2027 (Đinh Mùi)",
+      "Cự Môn",
+      "Lời qua tiếng lại; dễ hiểu sai ý nhau khi nói lúc nóng."
+     ],
+     [
+      "Mậu",
+      "2028 (Mậu Thân)",
+      "Thiên Cơ",
+      "Người ấy hay đổi ý, kế hoạch chung dễ phải làm lại."
+     ],
+     [
+      "Kỷ",
+      "2029 (Kỷ Dậu)",
+      "Văn Khúc",
+      "Chữ nghĩa dễ lệch: tin nhắn ngắn bị đọc thành giận dỗi."
+     ],
+     [
+      "Canh",
+      "2030 (Canh Tuất)",
+      "Thiên Đồng",
+      "Người ấy muốn vui mà hay lo; cần được trấn an."
+     ],
+     [
+      "Tân",
+      "2031 (Tân Hợi)",
+      "Văn Xương",
+      "Giấy tờ chung, đăng ký, tài sản đứng tên cần làm kỹ."
+     ],
+     [
+      "Nhâm",
+      "2032 (Nhâm Tý)",
+      "Vũ Khúc",
+      "Tiền chung là chỗ hay vướng; nên có sổ minh bạch."
+     ],
+     [
+      "Quý",
+      "2033 (Quý Sửu)",
+      "Tham Lang",
+      "Hai người muốn nhiều thứ khác nhau, cần ưu tiên chung."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hoá Kỵ ở Phu Thê có nên cưới muộn?",
+     "dap": "Một số sách xưa khuyên vậy, với ý là đủ chín chắn thì bớt hiểu lầm. Ngày nay nên hiểu là chọn lúc hai người đã nói rõ chuyện tiền, con cái, nơi ở."
+    },
+    {
+     "hoi": "Kỵ ở Phu Thê có ảnh hưởng công việc không?",
+     "dap": "Cung xung chiếu là Quan Lộc, nên chuyện nhà dễ kéo theo tâm trạng khi làm việc và ngược lại. Giữ ranh giới giờ làm và giờ nhà giúp cả hai."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách đọc Phu Thê cho người phối ngẫu và hôn nhân; Kỵ là sao chủ trở ngại. Sách cho rằng Kỵ ở đây thì vợ chồng dễ bất đồng, nhưng luôn xét sao gốc mang Kỵ và cát tinh hội chiếu mới nói nặng nhẹ."
+    }
+   ],
+   "y_chinh": [
+    "Kỵ ở Phu Thê: chỗ cần chú ý, không phải lời phán tan vỡ",
+    "Vướng thường do kỳ vọng chưa nói thành lời",
+    "Năm Kỵ vào Phu Thê: dành thời gian, nói chậm lại",
+    "Thoả thuận trước việc hai người hay vướng nhất"
+   ]
+  }
+ }
+}

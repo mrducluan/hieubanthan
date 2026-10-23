@@ -1,0 +1,1727 @@
+{
+ "source_id": "bo_sung_so_kep_v1",
+ "school_id": "chaldean_cheiro",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Bổ sung trang số kép Chaldea",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + cổ thư công cộng (nháp AI, chờ thẩm định); nghĩa số kép theo Cheiro, Book of Numbers (1926), diễn đạt lại bằng lời mới, viết trung tính."
+ },
+ "trang": {
+  "so-kep-10": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 10 nghĩa là gì trong thần số Chaldea?",
+     "doan": "Số kép 10 là con số của vòng quay lên xuống: có lúc được việc, có lúc chững lại, và luôn còn cơ hội làm lại. Cheiro gọi nó là Bánh xe vận hội, gắn với danh dự, niềm tin và lòng tự tin. Ông cũng ghi rằng tên người mang số này dễ được nhiều người biết, nên cách cư xử hằng ngày của họ cũng dễ được nhắc đến."
+    },
+    {
+     "tieu_de": "Tên gọi có tổng 10, như “Nam”, thì đọc thế nào?",
+     "doan": "Tên gọi tổng 10 thường được đọc là cái tên dễ nhớ, nghe một lần là người ta gọi lại được. Chữ “Nam” chỉ có ba chữ cái: N mang 5, A mang 1, M mang 4, cộng vừa đủ 10. Vì phái Chaldea coi trọng tên được gọi hằng ngày, người tên Nam hay được xếp vào nhóm này dù họ tên đầy đủ có thể ra số khác. Khi rút về 1, nét chủ động của Mặt Trời được nhấn thêm."
+    },
+    {
+     "tieu_de": "Số 10 trong công việc và các mối quan hệ",
+     "doan": "Ở chỗ làm, số 10 thường hợp với vị trí phải đứng ra mở đầu hoặc chịu trách nhiệm một mảng mang tên mình. Người mang số này hay dám nhận lại dự án sau một lần chưa thành. Trong quan hệ, họ dễ cuốn người khác bằng sự tự tin, nhưng cũng dễ quên hỏi ý người kia. Lúc mọi việc đang thuận, họ thường hứa nhiều hơn thường lệ."
+    },
+    {
+     "tieu_de": "Cách dùng năng lượng số 10 cho tốt",
+     "danh_sach": [
+      "Ghi lại ba việc đã làm được trong tháng thuận nhất gần đây, để lúc chững lại có cái mà nhìn.",
+      "Để dành một khoản nhỏ hoặc một phương án dự phòng ngay khi việc đang lên, không chờ lúc xuống.",
+      "Trước khi nhận thêm vai trò đứng tên đầu, hỏi một người thân cận xem họ thấy mình đang ôm bao nhiêu việc."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 10",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 10.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Nam”",
+      "N5+A1+M4 = 10",
+      "10 → 1 (gốc 1, Mặt Trời)"
+     ],
+     [
+      "Họ tên “Huỳnh Ngọc Trang”",
+      "H5+U6+Y1+N5+H5 = 22 · N5+G3+O7+C3 = 18 · T4+R2+A1+N5+G3 = 15",
+      "55 → 10 → 1 (gốc 1, Mặt Trời)"
+     ],
+     [
+      "Họ tên “Vũ Phương Quyên”",
+      "V6+U6 = 12 · P8+H5+U6+O7+N5+G3 = 34 · Q1+U6+Y1+E5+N5 = 18",
+      "64 → 10 → 1 (gốc 1, Mặt Trời)"
+     ],
+     [
+      "Ngày sinh 05/12/2000",
+      "0+5+1+2+2+0+0+0 = 10",
+      "10 → 1 (gốc 1, Mặt Trời)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 10 có phải số may mắn không?",
+     "dap": "Cheiro không đọc số 10 theo kiểu may hay rủi. Ông dùng hình bánh xe để nói rằng lên và xuống đều là một phần của vòng quay, còn điểm mạnh của số này là bắt đầu lại nhanh."
+    },
+    {
+     "hoi": "Tên tổng 10 và ngày sinh tổng 10 có giống nhau không?",
+     "dap": "Cùng một nghĩa biểu tượng. Phái Chaldea đọc tên gọi như cách người khác cảm nhận về mình, còn ngày sinh là phần không đổi được; có cả hai thì chủ đề làm lại được nhấn đậm hơn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro mô tả số 10 bằng hình Bánh xe vận hội: gắn với danh dự, niềm tin và sự tự tin; tên người mang số này dễ được biết đến, theo hướng tốt hay không tuỳ cách họ hành xử."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 10: Bánh xe vận hội, rút gọn về 1 (Mặt Trời)",
+    "Chủ đề: lên xuống luân phiên và sức bắt đầu lại",
+    "Tên “Nam” cộng theo Chaldea ra đúng 10",
+    "Việc nên làm: dự phòng ngay khi mọi thứ đang thuận"
+   ]
+  },
+  "so-kep-11": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 11 trong phái Chaldea mang ý nghĩa gì?",
+     "doan": "Theo Cheiro, số kép 11 là sức mạnh đang bị ghìm lại, như bàn tay nắm chặt hay con sư tử bị rọ mõm. Ông đọc nó như lời nhắc cảnh giác với trở ngại kín đáo và với lòng tin đặt sai chỗ. Trong phái Chaldea, 11 không phải số cái như bên Pythagoras; nó chỉ là một số kép rồi rút về 2."
+    },
+    {
+     "tieu_de": "Tên có tổng 11 thì nên hiểu ra sao?",
+     "doan": "Tên tổng 11 thường được đọc là người có nhiều điều muốn nói nhưng hay giữ trong lòng. Tên gọi “Duy” là ví dụ ngắn: D mang 4, U mang 6, Y mang 1, cộng ra 11. Người mang tên như vậy hay được mô tả là nghĩ kỹ, ít bộc lộ, và đôi khi để người khác hiểu sai vì mình không nói rõ. Rút về 2, sắc thái Mặt Trăng làm nét nhạy cảm rõ hơn."
+    },
+    {
+     "tieu_de": "Số kép 11 khi làm việc nhóm và trong chuyện tình cảm",
+     "doan": "Trong nhóm, người mang số 11 hay là người phát hiện sớm chỗ lỏng của một kế hoạch, nhưng ngại nêu ra. Khi làm ăn, họ thường cần giấy trắng mực đen hơn lời hứa miệng. Trong tình cảm, họ dễ chờ người kia đoán ý mình. Thói quen nói rõ điều mong muốn ngay từ đầu giúp họ đỡ thấy bị phụ lòng."
+    },
+    {
+     "tieu_de": "Làm gì để số 11 bớt bị “ghìm”?",
+     "danh_sach": [
+      "Mỗi tuần nói thẳng một mong muốn nhỏ thay vì chờ người khác tự nhận ra.",
+      "Với khoản tiền hay công sức đáng kể, ghi thành tin nhắn hoặc văn bản ngắn để hai bên cùng đọc lại.",
+      "Khi thấy nghi ngờ ai, hỏi một câu cụ thể để kiểm tra, rồi mới quyết có tin hay không."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 11",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 11.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Duy”",
+      "D4+U6+Y1 = 11",
+      "11 → 2 (gốc 2, Mặt Trăng)"
+     ],
+     [
+      "Tên gọi “Gia Hà”",
+      "G3+I1+A1 = 5 · H5+A1 = 6",
+      "11 → 2 (gốc 2, Mặt Trăng)"
+     ],
+     [
+      "Họ tên “Võ Phương Lan”",
+      "V6+O7 = 13 · P8+H5+U6+O7+N5+G3 = 34 · L3+A1+N5 = 9",
+      "56 → 11 → 2 (gốc 2, Mặt Trăng)"
+     ],
+     [
+      "Ngày sinh 24/11/2001",
+      "2+4+1+1+2+0+0+1 = 11",
+      "11 → 2 (gốc 2, Mặt Trăng)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số 11 trong Chaldea có phải số cái không?",
+     "dap": "Không. Phái Chaldea không giữ số cái 11, 22, 33; số 11 được đọc như một số kép có hình ảnh riêng, sau đó rút về số gốc 2."
+    },
+    {
+     "hoi": "Vì sao Cheiro dùng hình bàn tay nắm chặt cho số 11?",
+     "dap": "Hình ảnh đó nói về sức lực có sẵn nhưng chưa được thả ra. Ông đọc nó như lời nhắc thận trọng với những gì chưa thấy rõ, chứ không phải lời báo trước một chuyện cụ thể."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro tả số 11 bằng hình bàn tay nắm chặt và con sư tử bị ghìm; ông coi đây là lời cảnh giác về trở ngại kín đáo và sự thử thách lòng tin, cần thận trọng hơn là sợ hãi."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 11: bàn tay nắm chặt, rút về 2 (Mặt Trăng)",
+    "Chaldea không coi 11 là số cái",
+    "Tên gọi “Duy” cộng ra 11: D4 + U6 + Y1",
+    "Việc nên làm: nói rõ mong muốn, ghi lại thoả thuận"
+   ]
+  },
+  "so-kep-12": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 12 là gì trong thần số Chaldea?",
+     "doan": "Số kép 12 được Cheiro gắn với hình người hi sinh: gác kế hoạch của mình lại để lo cho kế hoạch của người khác. Ông nhìn số này qua nỗi lo âu và sự chịu đựng đi kèm. Cách đọc trung tính ngày nay là học vạch ranh giới: giúp vì mình chọn giúp, không phải vì ngại từ chối."
+    },
+    {
+     "tieu_de": "Tên tổng 12, ví dụ “Huy”, nói lên điều gì?",
+     "doan": "Tên tổng 12 thường được đọc là người hay đứng ra gánh việc chung. Tên gọi “Huy” cộng H5, U6, Y1 thành 12. Người được gọi bằng một cái tên như vậy hay được mô tả là đáng tin, ai nhờ cũng gật. Mặt kia là dễ mệt vì nhận quá phần mình. Rút về 3 (Sao Mộc), số 12 cũng có nét thích dạy và hướng dẫn người khác."
+    },
+    {
+     "tieu_de": "Người mang số 12 ở chỗ làm và trong gia đình",
+     "doan": "Ở công ty, số 12 thường là người ở lại muộn để hoàn thiện phần việc người khác bỏ dở. Sếp quý, nhưng công sức đó dễ không được ghi tên. Trong gia đình, họ hay là người lo giỗ chạp, đưa đón, nhắc lịch. Khi chia việc rõ ràng, sự tận tụy của họ được nhìn thấy và họ cũng bớt thấy thiệt."
+    },
+    {
+     "tieu_de": "Gợi ý để số 12 cho đi mà không cạn sức",
+     "danh_sach": [
+      "Trước khi nhận thêm việc, tự hỏi: việc này có ai khác làm được không?",
+      "Mỗi tuần giữ một buổi tối không nhận lời nhờ vả nào.",
+      "Khi đã làm thay ai, nói ngắn gọn với họ mình đã làm gì, để công sức được ghi nhận."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 12",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 12.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Huy”",
+      "H5+U6+Y1 = 12",
+      "12 → 3 (gốc 3, Sao Mộc)"
+     ],
+     [
+      "Tên gọi “Mai Hà”",
+      "M4+A1+I1 = 6 · H5+A1 = 6",
+      "12 → 3 (gốc 3, Sao Mộc)"
+     ],
+     [
+      "Họ tên “Dương Thu Thảo”",
+      "D4+U6+O7+N5+G3 = 25 · T4+H5+U6 = 15 · T4+H5+A1+O7 = 17",
+      "57 → 12 → 3 (gốc 3, Sao Mộc)"
+     ],
+     [
+      "Ngày sinh 26/01/2001",
+      "2+6+0+1+2+0+0+1 = 12",
+      "12 → 3 (gốc 3, Sao Mộc)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 12 có nghĩa là phải chịu thiệt không?",
+     "dap": "Không nhất thiết. Hình người hi sinh của Cheiro nói về xu hướng gác mình lại cho người khác; nhận ra xu hướng đó thì có thể chọn lúc nào nên giúp, lúc nào nên từ chối."
+    },
+    {
+     "hoi": "Ngày sinh có tổng chữ số 12 thì đọc thế nào?",
+     "dap": "Ví dụ 26/01/2001 cộng 2+6+0+1+2+0+0+1 ra 12. Phái Chaldea đọc đây là số đường đời mang sắc thái người hi sinh, rút về 3."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro gắn số 12 với hình ảnh người tự hi sinh hay nạn nhân của kế hoạch người khác, kèm nỗi lo âu; cách đọc trung tính là nhắc người mang số này giữ phần cho mình khi giúp đời."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 12: người hi sinh, rút về 3 (Sao Mộc)",
+    "Mạnh: tận tụy, đáng tin, hay gánh việc chung",
+    "Để ý: nhận quá phần mình rồi âm thầm mệt",
+    "Việc nên làm: giữ một buổi tối không nhận lời nhờ"
+   ]
+  },
+  "so-kep-13": {
+   "muc": [
+    {
+     "tieu_de": "Số 13 trong thần số Chaldea có phải số xấu không?",
+     "doan": "Không. Cheiro viết rằng số 13 không đáng sợ như nhiều người nghĩ; ông đọc nó là số của thay đổi: đổi kế hoạch, đổi chỗ, đổi cách sống. Hình ảnh ông dùng là bộ xương và lưỡi hái, nhưng ý chính là cái cũ hết vai trò để cái mới có chỗ. Phái Chaldea rút 13 về 4."
+    },
+    {
+     "tieu_de": "Tên “Giang” có tổng 13 thì hiểu thế nào?",
+     "doan": "Tên tổng 13 thường được đọc là người thích làm mới, khó ở yên một cách làm quá lâu. “Giang” cộng G3, I1, A1, N5, G3 thành 13. Người được gọi bằng tên như vậy hay được mô tả là dọn nhà, đổi việc, đổi kiểu tóc dễ hơn người khác. Gắn với số gốc 4 (Sao Thiên Vương), nét đi ngược lối mòn càng rõ."
+    },
+    {
+     "tieu_de": "Số 13 trong công việc và tình cảm",
+     "doan": "Trong công việc, số 13 thường hợp với những dự án cải tổ, chuyển đổi quy trình, dọn kho dữ liệu cũ. Người mang số này hay là người đề xuất bỏ một thứ mà cả nhóm vẫn giữ theo quán tính. Trong tình cảm, họ cần một người chịu được thay đổi. Mặt cần để ý là đổi khi chán, chứ không phải đổi khi cần."
+    },
+    {
+     "tieu_de": "Cách dùng nhịp thay đổi của số 13",
+     "danh_sach": [
+      "Trước khi bỏ một thứ, viết ra nó còn giúp được gì; nếu còn, giữ lại một phần.",
+      "Đổi từng bước: mỗi tháng một thay đổi, không đổi mọi thứ trong một tuần.",
+      "Chọn một món đồ hay thói quen đã không dùng hơn một năm và cho đi trong tuần này."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 13",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 13.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Giang”",
+      "G3+I1+A1+N5+G3 = 13",
+      "13 → 4 (gốc 4, Sao Thiên Vương)"
+     ],
+     [
+      "Tên gọi “Gia Lâm”",
+      "G3+I1+A1 = 5 · L3+A1+M4 = 8",
+      "13 → 4 (gốc 4, Sao Thiên Vương)"
+     ],
+     [
+      "Họ tên “Hồ Thanh Hương”",
+      "H5+O7 = 12 · T4+H5+A1+N5+H5 = 20 · H5+U6+O7+N5+G3 = 26",
+      "58 → 13 → 4 (gốc 4, Sao Thiên Vương)"
+     ],
+     [
+      "Ngày sinh 10/06/2004",
+      "1+0+0+6+2+0+0+4 = 13",
+      "13 → 4 (gốc 4, Sao Thiên Vương)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Vì sao số 13 hay bị coi là số rủi?",
+     "dap": "Đó là quan niệm phương Tây phổ biến. Chính Cheiro lại viết rằng 13 không đáng sợ như người ta nghĩ, mà là số của sự thay đổi."
+    },
+    {
+     "hoi": "Sinh ngày 13 thì có mang số kép 13 không?",
+     "dap": "Có. Theo phái Chaldea, số ngày sinh 13 được đọc là số kép 13 rồi rút về 4, mang chủ đề thay đổi và làm mới."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro tả số 13 bằng hình bộ xương cầm lưỡi hái, nhưng nói rõ nó không phải số đáng sợ; ông đọc đây là số của biến đổi, đổi kế hoạch và đổi chỗ, cần dùng sức mạnh ấy đúng mục đích."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 13: thay đổi và làm mới, rút về 4",
+    "Cheiro: 13 không đáng sợ như quan niệm phổ biến",
+    "Tên “Giang” cộng theo Chaldea ra 13",
+    "Việc nên làm: đổi từng bước, giữ phần còn dùng được"
+   ]
+  },
+  "so-kep-14": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 14 nói gì theo Cheiro?",
+     "doan": "Số kép 14 là số của chuyển động và kết hợp: người với người, việc với việc, hàng hoá với tiền. Cheiro thấy nó thuận cho buôn bán, đổi chác và đi lại. Đi kèm là lời nhắc đừng dựa hết vào lời khuyên của người khác, nhất là khi chuyện liên quan đến tiền."
+    },
+    {
+     "tieu_de": "Tên tổng 14 như “Linh” được đọc ra sao?",
+     "doan": "Tên tổng 14 thường được đọc là người nhanh nhạy, thích gặp gỡ. “Linh” cộng L3, I1, N5, H5 thành 14. Người được gọi bằng tên này hay được mô tả là quen nhiều người, biết chỗ mua chỗ bán, và là cầu nối cho bạn bè. Rút về 5 (Sao Thuỷ), nét linh hoạt và khéo nói càng được nhấn."
+    },
+    {
+     "tieu_de": "Số 14 trong kinh doanh và các mối quan hệ",
+     "doan": "Trong kinh doanh, số 14 thường hợp với bán hàng, môi giới, thương mại, vận chuyển — nơi mọi thứ luân chuyển liên tục. Họ hay chốt nhanh, đôi khi nhanh hơn mức nên. Trong quan hệ, họ là người vui, nhiều chuyện để kể, nhưng dễ hẹn rồi quên. Một danh sách việc đã hứa giúp họ giữ được chữ tín."
+    },
+    {
+     "tieu_de": "Dùng số 14 sao cho chắc tay",
+     "danh_sach": [
+      "Với mọi khoản góp vốn, tự đọc điều kiện ít nhất một lần, đừng dựa vào lời người giới thiệu kể lại.",
+      "Đặt một ngày cố định mỗi tuần để xem lại các lời hẹn đã đưa ra.",
+      "Khi có cơ hội đến quá nhanh, chờ qua một đêm rồi mới trả lời."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 14",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 14.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Linh”",
+      "L3+I1+N5+H5 = 14",
+      "14 → 5 (gốc 5, Sao Thuỷ)"
+     ],
+     [
+      "Tên gọi “Gia Đạt”",
+      "G3+I1+A1 = 5 · D4+A1+T4 = 9",
+      "14 → 5 (gốc 5, Sao Thuỷ)"
+     ],
+     [
+      "Họ tên “Huỳnh Minh Phúc”",
+      "H5+U6+Y1+N5+H5 = 22 · M4+I1+N5+H5 = 15 · P8+H5+U6+C3 = 22",
+      "59 → 14 → 5 (gốc 5, Sao Thuỷ)"
+     ],
+     [
+      "Ngày sinh 23/07/2000",
+      "2+3+0+7+2+0+0+0 = 14",
+      "14 → 5 (gốc 5, Sao Thuỷ)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 14 có hợp làm kinh doanh không?",
+     "dap": "Cheiro mô tả 14 là số thuận cho giao dịch, tiền bạc và đi lại. Ông cũng nhắc người mang số này nên tự kiểm tra trước khi theo lời khuyên của người khác."
+    },
+    {
+     "hoi": "Ngày sinh 23/07/2000 có liên quan gì đến số 14?",
+     "dap": "Cộng các chữ số 2+3+0+7+2+0+0+0 ra 14. Theo phái Chaldea, đường đời của người sinh ngày này đi qua số kép 14 rồi rút về 5."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro gắn số 14 với chuyển động, sự kết hợp giữa người và việc, thuận cho tiền bạc và giao dịch; ông nhắc người mang số này thận trọng khi làm theo lời khuyên của người khác."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 14: chuyển động và kết hợp, rút về 5 (Sao Thuỷ)",
+    "Thuận: buôn bán, trao đổi, đi lại",
+    "Để ý: chốt nhanh, nghe lời người khác mà không tự đọc",
+    "Việc nên làm: chờ qua một đêm trước cơ hội quá nhanh"
+   ]
+  },
+  "so-kep-15": {
+   "muc": [
+    {
+     "tieu_de": "Ý nghĩa số kép 15 trong thần số Chaldea là gì?",
+     "doan": "Số kép 15 được Cheiro gắn với tài ăn nói, sự duyên dáng và một chút bí ẩn, hay đi cùng năng khiếu âm nhạc, hội hoạ, trình diễn. Ông thấy người mang số này dễ nhận được tiền và sự giúp đỡ từ người khác. Điểm cần cân nhắc là dùng sức hút ấy để làm gì."
+    },
+    {
+     "tieu_de": "Tên tổng 15, ví dụ “Trang”, đọc thế nào?",
+     "doan": "Tên tổng 15 thường được đọc là người có sức hút khi giao tiếp. “Trang” cộng T4, R2, A1, N5, G3 thành 15. Người được gọi bằng tên này hay được mô tả là nói chuyện có duyên, dễ được nhờ dẫn chương trình hay đứng ra thuyết phục. Rút về 6 (Sao Kim), nét yêu cái đẹp và chăm chút hình ảnh được nhấn thêm."
+    },
+    {
+     "tieu_de": "Số 15 ở nơi làm việc và trong tình yêu",
+     "doan": "Ở nơi làm việc, số 15 thường hợp với nghề cần lời nói: bán hàng, đào tạo, truyền thông, biểu diễn. Họ có thể làm một buổi họp căng thẳng dịu xuống. Trong tình yêu, họ được nhiều người để ý, và cần thật thà về điều mình muốn. Nếu dùng lời hay để né chuyện khó, người kia sẽ dần thấy thiếu tin."
+    },
+    {
+     "tieu_de": "Cách dùng sức hút số 15 cho tốt",
+     "danh_sach": [
+      "Khi thuyết phục ai, nói luôn mặt chưa ổn của đề xuất, bên cạnh mặt đẹp.",
+      "Dành một buổi trong tuần cho việc sáng tạo thật sự: hát, vẽ, viết, chụp ảnh.",
+      "Sau một cuộc trò chuyện quan trọng, hỏi lại: “Anh/chị có thật sự đồng ý không?”."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 15",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 15.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Trang”",
+      "T4+R2+A1+N5+G3 = 15",
+      "15 → 6 (gốc 6, Sao Kim)"
+     ],
+     [
+      "Tên gọi “Gia Nam”",
+      "G3+I1+A1 = 5 · N5+A1+M4 = 10",
+      "15 → 6 (gốc 6, Sao Kim)"
+     ],
+     [
+      "Họ tên “Dương Ngọc Hương”",
+      "D4+U6+O7+N5+G3 = 25 · N5+G3+O7+C3 = 18 · H5+U6+O7+N5+G3 = 26",
+      "69 → 15 → 6 (gốc 6, Sao Kim)"
+     ],
+     [
+      "Ngày sinh 19/10/2002",
+      "1+9+1+0+2+0+0+2 = 15",
+      "15 → 6 (gốc 6, Sao Kim)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 15 có liên quan đến nghệ thuật không?",
+     "dap": "Có. Cheiro mô tả số 15 gắn với năng khiếu âm nhạc, nghệ thuật và tính cách giàu tính trình diễn, kèm khả năng ăn nói thuyết phục."
+    },
+    {
+     "hoi": "Sức hút của số 15 có mặt tối gì?",
+     "dap": "Dễ dùng sự khéo léo để người khác chiều theo mình. Thói quen nói rõ cả mặt chưa ổn giúp sức hút đi cùng sự tin cậy."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro gắn số 15 với điều huyền bí, tài hùng biện, năng khiếu nghệ thuật và cá tính nổi bật; người mang số này thường được người khác giúp đỡ, và ông nhắc nên dùng sức hút ấy cho mục đích tốt."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 15: sức hút của lời nói, rút về 6 (Sao Kim)",
+    "Mạnh: ăn nói có duyên, năng khiếu nghệ thuật",
+    "Tên “Trang” cộng theo Chaldea ra 15",
+    "Việc nên làm: nói cả mặt chưa ổn khi thuyết phục"
+   ]
+  },
+  "so-kep-16": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 16 nghĩa là gì theo phái Chaldea?",
+     "doan": "Số kép 16 mang hình toà tháp bị sét đánh: một cấu trúc dựng quá cao hoặc quá vội phải dừng lại để xây lại. Cheiro đọc nó như lời nhắc lập kế hoạch kỹ từ trước. Cách hiểu trung tính là: cái gì không còn hợp sẽ cần được sửa, và sửa sớm thì nhẹ hơn sửa muộn."
+    },
+    {
+     "tieu_de": "Tên “Quang” có tổng 16 thì sao?",
+     "doan": "Tên tổng 16 thường được đọc là người đặt mục tiêu cao, thích công trình lớn. “Quang” cộng Q1, U6, A1, N5, G3 thành 16. Người được gọi như vậy hay được mô tả là có tầm nhìn nhưng đôi khi coi nhẹ phần móng. Rút về 7 (Sao Hải Vương), số này thêm nét mơ mộng, dễ thấy viễn cảnh trước khi thấy chi tiết."
+    },
+    {
+     "tieu_de": "Số 16 trong dự án và các mối quan hệ",
+     "doan": "Với dự án, số 16 thường mạnh ở giai đoạn hình dung và thuyết trình, yếu hơn ở khâu kiểm tra từng bước. Người này nên có một đồng nghiệp tỉ mỉ đi kèm. Trong quan hệ, họ dễ xây hình ảnh lý tưởng về người kia rồi hụt hẫng khi thực tế khác. Nói chuyện sớm về điều chưa vừa ý giúp tránh những lần đổ vỡ lớn."
+    },
+    {
+     "tieu_de": "Làm gì để số 16 xây chắc hơn?",
+     "danh_sach": [
+      "Với kế hoạch lớn, viết ra ba dấu hiệu cho thấy cần dừng lại và sửa.",
+      "Mỗi tháng xem lại một việc đang làm chỉ vì đã lỡ bỏ công sức vào đó.",
+      "Mời một người hay soi lỗi đọc kế hoạch trước khi công bố."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 16",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 16.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Quang”",
+      "Q1+U6+A1+N5+G3 = 16",
+      "16 → 7 (gốc 7, Sao Hải Vương)"
+     ],
+     [
+      "Tên gọi “Kim Chi”",
+      "K2+I1+M4 = 7 · C3+H5+I1 = 9",
+      "16 → 7 (gốc 7, Sao Hải Vương)"
+     ],
+     [
+      "Họ tên “Trương Phương Oanh”",
+      "T4+R2+U6+O7+N5+G3 = 27 · P8+H5+U6+O7+N5+G3 = 34 · O7+A1+N5+H5 = 18",
+      "79 → 16 → 7 (gốc 7, Sao Hải Vương)"
+     ],
+     [
+      "Ngày sinh 15/08/2000",
+      "1+5+0+8+2+0+0+0 = 16",
+      "16 → 7 (gốc 7, Sao Hải Vương)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hình toà tháp của số 16 có phải điềm báo không?",
+     "dap": "Không nên đọc như điềm báo. Hình toà tháp nói về cấu trúc cần được xây lại cho thật hơn; Cheiro dùng nó để khuyên lập kế hoạch kỹ từ trước."
+    },
+    {
+     "hoi": "Số kép 16 rút gọn về số mấy và nghĩa ra sao?",
+     "dap": "Về 7, số gắn với Sao Hải Vương trong hệ Cheiro, nhấn vào trí tưởng tượng và đời sống bên trong."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro tả số 16 bằng hình toà tháp bị sét đánh, nói về những kế hoạch đổ vỡ khi dựng trên nền chưa vững; ông khuyên người mang số này tính trước và chuẩn bị kỹ."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 16: toà tháp xây lại, rút về 7",
+    "Mạnh: tầm nhìn, ý tưởng công trình lớn",
+    "Để ý: coi nhẹ phần móng, bám kế hoạch đã lỗi thời",
+    "Việc nên làm: đặt sẵn dấu hiệu để dừng và sửa"
+   ]
+  },
+  "so-kep-17": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 17 mang ý nghĩa gì trong thần số Chaldea?",
+     "doan": "Số kép 17 được Cheiro gọi là Ngôi sao của các nhà thông thái, hình ngôi sao tám cánh. Ông gắn nó với sự bình an, tình thương và khả năng vượt lên sau khó khăn. Theo ông, tên người mang số này thường được nhớ lâu, kể cả sau khi họ thôi làm một việc."
+    },
+    {
+     "tieu_de": "Tên tổng 17 như “Thảo” đọc thế nào?",
+     "doan": "Tên tổng 17 thường được đọc là người bền bỉ và giữ lời. “Thảo” cộng T4, H5, A1, O7 thành 17. Người được gọi bằng tên này hay được mô tả là điềm tĩnh, chịu khó, làm lâu một việc cho tới khi có kết quả. Rút về 8 (Sao Thổ), số 17 mang thêm tính kỷ luật và cảm giác trách nhiệm."
+    },
+    {
+     "tieu_de": "Số 17 trong sự nghiệp và gia đình",
+     "doan": "Trong sự nghiệp, số 17 thường hợp với công việc cần thời gian dài mới thấy trái: nghiên cứu, giảng dạy, xây thương hiệu, chuyên môn sâu. Họ hay được tin giao những việc cần người có uy tín. Trong gia đình, họ là chỗ dựa, nhưng có thể quá bận tâm hình ảnh lâu dài mà bỏ lỡ bữa cơm hôm nay."
+    },
+    {
+     "tieu_de": "Gợi ý dùng năng lượng số 17",
+     "danh_sach": [
+      "Chọn một mục tiêu dài hạn và chia ra việc nhỏ làm được trong tuần.",
+      "Mỗi tuần dành một buổi trọn vẹn cho người nhà, không mở máy làm việc.",
+      "Viết lại điều mình học được sau một lần khó, để người đi sau đọc."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 17",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 17.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Thảo”",
+      "T4+H5+A1+O7 = 17",
+      "17 → 8 (gốc 8, Sao Thổ)"
+     ],
+     [
+      "Tên gọi “Hải Nam”",
+      "H5+A1+I1 = 7 · N5+A1+M4 = 10",
+      "17 → 8 (gốc 8, Sao Thổ)"
+     ],
+     [
+      "Họ tên “Lý Gia Lâm”",
+      "L3+Y1 = 4 · G3+I1+A1 = 5 · L3+A1+M4 = 8",
+      "17 → 8 (gốc 8, Sao Thổ)"
+     ],
+     [
+      "Ngày sinh 17/02/2005",
+      "1+7+0+2+2+0+0+5 = 17",
+      "17 → 8 (gốc 8, Sao Thổ)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Vì sao số 17 được gọi là Ngôi sao của nhà thông thái?",
+     "dap": "Cheiro dùng hình ngôi sao tám cánh để nói về tinh thần bình an và sức vượt lên trên thử thách, tên tuổi được nhớ lâu."
+    },
+    {
+     "hoi": "Ngày sinh 17/02/2005 cho ra số kép mấy?",
+     "dap": "Số ngày sinh là 17. Cộng cả ngày tháng năm 1+7+0+2+2+0+0+5 cũng ra 17, nên người này mang số kép 17 ở cả hai chỗ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro gọi số 17 là Ngôi sao của các nhà thông thái, biểu tượng của bình an và tình thương; người mang số này vượt lên trên khó khăn, và tên họ thường được nhớ lâu."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 17: ngôi sao tám cánh, rút về 8 (Sao Thổ)",
+    "Mạnh: bền bỉ, giữ lời, uy tín lâu dài",
+    "Để ý: lo hình ảnh lâu dài mà quên người bên cạnh",
+    "Ngày 17/02/2005 mang số 17 ở cả ngày sinh lẫn tổng"
+   ]
+  },
+  "so-kep-18": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 18 trong Chaldea nghĩa là gì?",
+     "doan": "Số kép 18 là sự giằng co giữa ham muốn vật chất và đời sống tinh thần. Cheiro dùng hình mặt trăng có tia, con chó và con sói, đọc nó như lời nhắc về hiểu lầm, cãi vã trong nhà và sự lừa dối. Cách đọc trung tính: chủ đề của số này là nhận ra mâu thuẫn trong lòng trước khi nó lộ ra ngoài."
+    },
+    {
+     "tieu_de": "Tên “Tùng” cộng ra 18 thì hiểu ra sao?",
+     "doan": "Tên tổng 18 thường được đọc là người nhiều năng lượng, thích hành động. “Tùng” cộng T4, U6, N5, G3 thành 18. Người được gọi như vậy hay được mô tả là nhanh tay, thẳng tính, có lúc nóng. Rút về 9 (Sao Hoả), số 18 nhấn vào sự quyết liệt, đi kèm nhu cầu học cách giữ bình tĩnh khi tranh luận."
+    },
+    {
+     "tieu_de": "Số 18 trong công việc, tiền bạc và gia đình",
+     "doan": "Trong công việc, số 18 thường mạnh khi có mục tiêu rõ và quyền tự quyết. Với tiền bạc, họ dễ bị kéo về phía muốn có nhiều hơn, rồi thấy trống khi đạt được. Trong gia đình, chuyện nhỏ không nói ra có thể tích lại. Một buổi nói chuyện định kỳ với người thân giúp xả bớt những điều chưa vừa ý."
+    },
+    {
+     "tieu_de": "Cách giữ cân bằng cho số 18",
+     "danh_sach": [
+      "Khi bực ai, đợi mười phút rồi mới nhắn tin trả lời.",
+      "Ghi một điều mình cần về tinh thần (nghỉ, đọc, trò chuyện) bên cạnh mỗi mục tiêu tiền bạc.",
+      "Mỗi tháng có một buổi nói thẳng với người thân về chuyện còn vướng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 18",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 18.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Tùng”",
+      "T4+U6+N5+G3 = 18",
+      "18 → 9 (gốc 9, Sao Hoả)"
+     ],
+     [
+      "Tên gọi “Gia Lộc”",
+      "G3+I1+A1 = 5 · L3+O7+C3 = 13",
+      "18 → 9 (gốc 9, Sao Hoả)"
+     ],
+     [
+      "Tên gọi “Bích Vy”",
+      "B2+I1+C3+H5 = 11 · V6+Y1 = 7",
+      "18 → 9 (gốc 9, Sao Hoả)"
+     ],
+     [
+      "Ngày sinh 13/09/2003",
+      "1+3+0+9+2+0+0+3 = 18",
+      "18 → 9 (gốc 9, Sao Hoả)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 18 có phải là số dễ cãi nhau không?",
+     "dap": "Cheiro mô tả số 18 gắn với tranh chấp và hiểu lầm, nhưng nên đọc như lời nhắc: nói ra sớm điều chưa vừa ý thì ít phải cãi nhau sau này."
+    },
+    {
+     "hoi": "Số 18 rút gọn về số mấy?",
+     "dap": "Về số 9, số Cheiro gắn với Sao Hoả — năng lượng hành động, quyết liệt và muốn đi tới cùng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro tả số 18 bằng hình mặt trăng có tia, nơi chó và sói tranh nhau; ông đọc nó như sự giằng co giữa vật chất và tinh thần, nhắc người mang số này đề phòng hiểu lầm trong gia đình và bạn bè."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 18: giằng co vật chất – tinh thần, rút về 9",
+    "Mạnh: quyết liệt, nhanh tay, dám làm",
+    "Để ý: dồn nén rồi bùng ra trong gia đình",
+    "Việc nên làm: đợi mười phút trước khi trả lời lúc bực"
+   ]
+  },
+  "so-kep-19": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 19 có ý nghĩa gì trong thần số Chaldea?",
+     "doan": "Số kép 19 được Cheiro gọi là Hoàng tử của trời và gắn với Mặt Trời: niềm vui, sự kính trọng và thành công khi công sức được nhìn thấy. Trong các số kép, đây là một trong những số ông mô tả sáng sủa nhất. Rút về 1, nó cũng là số của Mặt Trời."
+    },
+    {
+     "tieu_de": "Tên tổng 19, ví dụ “Hưng”, nói điều gì?",
+     "doan": "Tên tổng 19 thường được đọc là người dễ được quý mến, có không khí vui quanh mình. “Hưng” cộng H5, U6, N5, G3 thành 19. Người được gọi bằng tên này hay được mô tả là lạc quan, thích đặt mục tiêu và theo đến cùng. Vì cả số kép lẫn số gốc đều gắn với Mặt Trời, nét tự tin hiện rõ hơn hầu hết các tên khác."
+    },
+    {
+     "tieu_de": "Số 19 khi đi làm và khi yêu",
+     "doan": "Đi làm, số 19 thường hợp với vai trò cần xuất hiện trước người khác: trưởng nhóm, người thuyết trình, người mở đầu dự án. Họ làm tốt khi có người ghi nhận. Khi yêu, họ ấm áp và rộng rãi, nhưng có thể khó nghe góp ý. Học cách nói “cảm ơn, để mình nghĩ lại” trước lời phê bình là một bước nhỏ có ích."
+    },
+    {
+     "tieu_de": "Dùng ánh sáng số 19 sao cho bền",
+     "danh_sach": [
+      "Sau mỗi lần được khen, hỏi thêm một người: “Chỗ nào mình còn làm chưa tốt?”.",
+      "Chia công lao với người làm cùng, gọi tên họ khi báo cáo.",
+      "Đặt một mục tiêu cụ thể cho quý này và theo dõi mỗi tuần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 19",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 19.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Hưng”",
+      "H5+U6+N5+G3 = 19",
+      "19 → 10 → 1 (gốc 1, Mặt Trời)"
+     ],
+     [
+      "Tên gọi “Mai Giang”",
+      "M4+A1+I1 = 6 · G3+I1+A1+N5+G3 = 13",
+      "19 → 10 → 1 (gốc 1, Mặt Trời)"
+     ],
+     [
+      "Họ tên “Lê Gia An”",
+      "L3+E5 = 8 · G3+I1+A1 = 5 · A1+N5 = 6",
+      "19 → 10 → 1 (gốc 1, Mặt Trời)"
+     ],
+     [
+      "Ngày sinh 17/03/2006",
+      "1+7+0+3+2+0+0+6 = 19",
+      "19 → 10 → 1 (gốc 1, Mặt Trời)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 19 có phải số tốt nhất trong Chaldea không?",
+     "dap": "Cheiro mô tả 19 rất sáng sủa, gắn với niềm vui và sự kính trọng. Tuy vậy, mỗi số kép có điểm mạnh riêng, và 19 cũng có mặt cần để ý là dễ tự mãn."
+    },
+    {
+     "hoi": "Tên “Hưng” và “Hùng” có cùng số kép không?",
+     "dap": "Có. Hai tên đều có H, U, N, G nên cùng tổng 19 theo bảng Chaldea, vì dấu thanh và chữ Ư được viết thành U khi cộng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro gọi số 19 là Hoàng tử của trời, gắn với Mặt Trời; ông xem đây là số của hạnh phúc, thành công, được kính trọng và ghi nhận."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 19: Hoàng tử của trời, rút về 1 (Mặt Trời)",
+    "Mạnh: lạc quan, tự tin, được quý mến",
+    "Tên “Hưng”, “Hùng” đều cộng ra 19",
+    "Việc nên làm: chủ động xin góp ý sau lời khen"
+   ]
+  },
+  "so-kep-20": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 20 trong thần số Chaldea là gì?",
+     "doan": "Số kép 20 là số của sự thức tỉnh: một lời gọi hướng tới mục đích mới, kế hoạch mới. Cheiro tả nó bằng hình thiên thần thổi kèn gọi mọi người dậy, và lưu ý đây không phải số thiên về vật chất. Nó hợp để xem lại mình đang sống vì điều gì."
+    },
+    {
+     "tieu_de": "Tên “Lan Anh” cộng ra 20 thì đọc thế nào?",
+     "doan": "Tên tổng 20 thường được đọc là người nhạy với ý nghĩa của việc mình làm. “Lan” cộng L3, A1, N5 thành 9, “Anh” cộng A1, N5, H5 thành 11, tổng 20. Người được gọi bằng tên này hay được mô tả là hỏi “vì sao” nhiều hơn “bao nhiêu”. Rút về 2 (Mặt Trăng), số 20 thêm nét mềm mỏng và giàu cảm xúc."
+    },
+    {
+     "tieu_de": "Số 20 trong lựa chọn nghề và các mối quan hệ",
+     "doan": "Khi chọn nghề, số 20 thường cần thấy việc mình làm có ích cho ai đó, nếu không sẽ chán dù lương tốt. Họ hợp với giáo dục, chăm sóc, công tác cộng đồng, tư vấn. Trong quan hệ, họ cần người chịu nói chuyện sâu. Mặt cần để ý: nghe thấy lời gọi đổi hướng nhưng cứ chờ đủ điều kiện mới bắt đầu."
+    },
+    {
+     "tieu_de": "Làm gì khi đang mang chủ đề số 20?",
+     "danh_sach": [
+      "Viết một câu: “Một năm nữa, mình muốn đang làm gì?” và dán ở chỗ dễ thấy.",
+      "Chọn một bước nhỏ nhất hướng tới điều đó và làm ngay trong tuần.",
+      "Nói kế hoạch với một người tin cậy để có người hỏi lại tiến độ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 20",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 20.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Lan Anh”",
+      "L3+A1+N5 = 9 · A1+N5+H5 = 11",
+      "20 → 2 (gốc 2, Mặt Trăng)"
+     ],
+     [
+      "Tên gọi “Đức Trí”",
+      "D4+U6+C3 = 13 · T4+R2+I1 = 7",
+      "20 → 2 (gốc 2, Mặt Trăng)"
+     ],
+     [
+      "Họ tên “Lê Gia Trí”",
+      "L3+E5 = 8 · G3+I1+A1 = 5 · T4+R2+I1 = 7",
+      "20 → 2 (gốc 2, Mặt Trăng)"
+     ],
+     [
+      "Ngày sinh 28/10/2007",
+      "2+8+1+0+2+0+0+7 = 20",
+      "20 → 2 (gốc 2, Mặt Trăng)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 20 có hợp làm giàu không?",
+     "dap": "Cheiro viết số 20 không phải số thiên về vật chất. Nó thường hợp với việc có ý nghĩa rõ ràng hơn là việc chỉ nhằm tiền."
+    },
+    {
+     "hoi": "Ngày sinh nào cho ra số kép 20?",
+     "dap": "Ví dụ 28/10/2007: cộng 2+8+1+0+2+0+0+7 ra 20. Người sinh ngày 20 bất kỳ tháng nào cũng có số ngày sinh là số kép 20."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro gọi số 20 là sự Thức tỉnh, hay Phán xét, hình thiên thần thổi kèn; ông đọc nó là lời gọi hành động vì mục đích mới, và ghi chú đây không phải số thiên về vật chất."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 20: lời gọi thức tỉnh, rút về 2 (Mặt Trăng)",
+    "Hợp: việc có ý nghĩa rõ, giáo dục, chăm sóc",
+    "Để ý: chờ hoàn cảnh hoàn hảo rồi mới bắt đầu",
+    "Tên “Lan Anh”: 9 + 11 = 20"
+   ]
+  },
+  "so-kep-21": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 21 nghĩa là gì trong thần số Chaldea?",
+     "doan": "Số kép 21 là số của thành quả đến sau đường dài: thăng tiến, được tôn vinh, thắng sau một cuộc đấu bền bỉ. Cheiro gọi nó là Vương miện của các nhà thông thái, có nơi gọi là Vũ trụ trong bộ bài cổ. Ông đọc số này là thuận, với điều kiện người mang nó chịu đi đủ chặng."
+    },
+    {
+     "tieu_de": "Tên “Thu Hà” có tổng 21 thì đọc thế nào?",
+     "doan": "Tên tổng 21 thường được đọc là người chín dần theo năm tháng, càng về sau càng được nể. “Thu” cộng T4, H5, U6 thành 15, “Hà” cộng H5, A1 thành 6, tổng 21. Người được gọi bằng tên này hay được mô tả là kiên nhẫn, không vội chứng tỏ. Rút về 3 (Sao Mộc), số 21 thêm nét ham học và muốn mở rộng tầm nhìn."
+    },
+    {
+     "tieu_de": "Số 21 trong thăng tiến nghề nghiệp và gắn bó lâu dài",
+     "doan": "Trong nghề, số 21 thường không lên nhanh nhưng lên chắc: qua từng cấp, từng chứng chỉ, từng dự án. Họ hợp với tổ chức có lộ trình rõ. Trong quan hệ lâu năm, họ là người giữ được cam kết qua giai đoạn khó. Chỗ cần để ý là khi đã tới một nấc, họ dễ nghĩ mình đã xong và thôi học thêm."
+    },
+    {
+     "tieu_de": "Gợi ý cho người mang số 21",
+     "danh_sach": [
+      "Sau mỗi lần đạt mục tiêu, đặt ngay một điều mới muốn học trong ba tháng tới.",
+      "Ghi nhật ký tiến độ hằng tháng để thấy mình đã đi được bao xa.",
+      "Tìm một người đi trước để hỏi kinh nghiệm thay vì tự mò một mình."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 21",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 21.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Thu Hà”",
+      "T4+H5+U6 = 15 · H5+A1 = 6",
+      "21 → 3 (gốc 3, Sao Mộc)"
+     ],
+     [
+      "Tên gọi “Minh An”",
+      "M4+I1+N5+H5 = 15 · A1+N5 = 6",
+      "21 → 3 (gốc 3, Sao Mộc)"
+     ],
+     [
+      "Họ tên “Lý Gia Huy”",
+      "L3+Y1 = 4 · G3+I1+A1 = 5 · H5+U6+Y1 = 12",
+      "21 → 3 (gốc 3, Sao Mộc)"
+     ],
+     [
+      "Ngày sinh 10/01/1963",
+      "1+0+0+1+1+9+6+3 = 21",
+      "21 → 3 (gốc 3, Sao Mộc)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 21 có liên quan gì đến lá bài Thế giới?",
+     "dap": "Cheiro có nhắc số 21 tương ứng với lá bài Vũ trụ hay Thế giới trong bộ bài cổ, cùng chủ đề hoàn tất và được nâng lên sau chặng dài."
+    },
+    {
+     "hoi": "Ngày sinh 10/01/1963 cho số kép mấy?",
+     "dap": "Cộng 1+0+0+1+1+9+6+3 ra 21, nên đường đời theo phái Chaldea đi qua số kép 21 rồi rút về 3."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro gọi số 21 là Vương miện của các nhà thông thái, gắn với sự thăng tiến, vinh dự và chiến thắng sau một cuộc đấu dài; ông đọc đây là con số thuận lợi."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 21: vương miện chín muồi, rút về 3",
+    "Mạnh: kiên nhẫn, lên chậm mà chắc",
+    "Để ý: tới đích rồi thôi học thêm",
+    "Tên “Thu Hà”: 15 + 6 = 21"
+   ]
+  },
+  "so-kep-22": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 22 trong Chaldea có giống số cái 22 của Pythagoras không?",
+     "doan": "Không giống. Bên Pythagoras, 22 là số cái “người xây dựng lớn”; bên Chaldea, Cheiro tả 22 bằng hình một người tốt bị che mắt bởi sự dại dột của người khác, đeo túi sau lưng mà không thấy hố trước mặt. Chủ đề của nó là giữ lý tưởng nhưng tự kiểm tra thực tế."
+    },
+    {
+     "tieu_de": "Tên “Phúc” cộng ra 22 thì hiểu ra sao?",
+     "doan": "Tên tổng 22 thường được đọc là người hiền, tin người, ít nghĩ xấu về ai. “Phúc” cộng P8, H5, U6, C3 thành 22. Người được gọi bằng tên này hay được mô tả là dễ gần, sẵn sàng tin lời bạn bè. Rút về 4 (Sao Thiên Vương), số này lại có nét suy nghĩ khác lối, nên khi đã tự kiểm tra, họ hay nhìn ra điều người khác bỏ sót."
+    },
+    {
+     "tieu_de": "Số 22 khi ra quyết định và trong các mối quan hệ",
+     "doan": "Khi ra quyết định, số 22 thường để người khác dẫn dắt vì ngại va chạm. Trong việc chung như góp tiền mua đất, cùng mở quán, họ dễ ký trước đọc sau. Trong quan hệ, họ chân thành, nhưng có thể nhận ra muộn khi bị lợi dụng. Thói quen tự hỏi “mình đã thấy tận mắt chưa?” giúp họ giữ được lòng tốt mà không thiệt."
+    },
+    {
+     "tieu_de": "Làm gì để số 22 bớt bị “che mắt”?",
+     "danh_sach": [
+      "Với giấy tờ quan trọng, đọc hết một lượt và gạch chân điều chưa hiểu trước khi ký.",
+      "Khi bạn bè rủ một kế hoạch, hỏi ít nhất ba câu cụ thể về tiền và thời hạn.",
+      "Giữ một việc quan trọng của mình do chính mình quyết, không giao cho ai quyết thay."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 22",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 22.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Phúc”",
+      "P8+H5+U6+C3 = 22",
+      "22 → 4 (gốc 4, Sao Thiên Vương)"
+     ],
+     [
+      "Tên gọi “Mai Hiền”",
+      "M4+A1+I1 = 6 · H5+I1+E5+N5 = 16",
+      "22 → 4 (gốc 4, Sao Thiên Vương)"
+     ],
+     [
+      "Họ tên “Lê Gia Tâm”",
+      "L3+E5 = 8 · G3+I1+A1 = 5 · T4+A1+M4 = 9",
+      "22 → 4 (gốc 4, Sao Thiên Vương)"
+     ],
+     [
+      "Ngày sinh 06/09/2005",
+      "0+6+0+9+2+0+0+5 = 22",
+      "22 → 4 (gốc 4, Sao Thiên Vương)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Vì sao Cheiro dùng hình người mù mắt cho số 22?",
+     "dap": "Ông muốn nói về người có ý tốt nhưng đi theo phán đoán sai của người khác. Hình ảnh đó là lời nhắc tự nhìn đường, không phải lời chê người mang số này."
+    },
+    {
+     "hoi": "Số kép 22 rút về số mấy?",
+     "dap": "Về 4. Trong phái Chaldea, 22 không giữ làm số cái mà được đọc như số kép, rồi cộng 2 + 2 thành 4."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro tả số 22 bằng hình một người tốt bị che mắt bởi sự dại dột của người khác, như kẻ đeo túi đi mà không thấy hố; ông đọc đây là lời nhắc về ảo tưởng và phán đoán sai."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 22: người lữ hành mải mơ, rút về 4",
+    "Chaldea không coi 22 là số cái",
+    "Để ý: ký trước đọc sau, để người khác quyết thay",
+    "Việc nên làm: đọc hết giấy tờ, hỏi ba câu cụ thể"
+   ]
+  },
+  "so-kep-23": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 23 mang ý nghĩa gì theo Cheiro?",
+     "doan": "Số kép 23 được Cheiro gọi là Ngôi sao hoàng gia của Sư tử: được người có vị trí cao giúp đỡ và che chở, thuận cho kế hoạch riêng. Ông xếp nó vào nhóm số rất thuận. Cách đọc trung tính là: số này mạnh khi biết tìm và giữ quan hệ với người đi trước."
+    },
+    {
+     "tieu_de": "Tên “Đức Nam” có tổng 23 thì sao?",
+     "doan": "Tên tổng 23 thường được đọc là người tự tin khi trình bày và được cấp trên để ý. “Đức” cộng D4, U6, C3 thành 13, “Nam” cộng N5, A1, M4 thành 10, tổng 23. Người được gọi bằng tên này hay được mô tả là nói năng rõ ràng, chủ động xin cơ hội. Rút về 5 (Sao Thuỷ), số 23 thêm nét lanh lợi và biết nắm bắt."
+    },
+    {
+     "tieu_de": "Số 23 ở công sở và trong quan hệ với người lớn tuổi",
+     "doan": "Ở công sở, số 23 thường hợp với dự án cần đề xuất lên lãnh đạo, xin tài trợ, gọi vốn. Họ biết cách trình bày để người có quyền nghe. Với người lớn tuổi trong nhà hay thầy cô, họ dễ được thương. Mặt cần để ý là quen chờ người khác mở đường, ít tự chuẩn bị phần nền của mình."
+    },
+    {
+     "tieu_de": "Cách dùng sự nâng đỡ của số 23",
+     "danh_sach": [
+      "Trước buổi gặp người có thể giúp mình, chuẩn bị sẵn một trang tóm tắt việc mình đã làm.",
+      "Cảm ơn người từng giúp bằng một tin nhắn cụ thể về kết quả nhờ họ mà có.",
+      "Mỗi tháng tự học một kỹ năng để không phụ thuộc hoàn toàn vào người nâng đỡ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 23",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 23.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Ngọc My”",
+      "N5+G3+O7+C3 = 18 · M4+Y1 = 5",
+      "23 → 5 (gốc 5, Sao Thuỷ)"
+     ],
+     [
+      "Tên gọi “Đức Nam”",
+      "D4+U6+C3 = 13 · N5+A1+M4 = 10",
+      "23 → 5 (gốc 5, Sao Thuỷ)"
+     ],
+     [
+      "Họ tên “Hồ Gia An”",
+      "H5+O7 = 12 · G3+I1+A1 = 5 · A1+N5 = 6",
+      "23 → 5 (gốc 5, Sao Thuỷ)"
+     ],
+     [
+      "Ngày sinh 03/10/1981",
+      "0+3+1+0+1+9+8+1 = 23",
+      "23 → 5 (gốc 5, Sao Thuỷ)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 23 có phải số được quý nhân giúp không?",
+     "dap": "Cheiro mô tả số 23 gắn với sự giúp đỡ và che chở từ người có vị trí cao. Tuy vậy, sự giúp đỡ thường đến với người đã chuẩn bị sẵn."
+    },
+    {
+     "hoi": "Ngày sinh 03/10/1981 có liên quan gì đến số 23?",
+     "dap": "Cộng 0+3+1+0+1+9+8+1 ra 23. Đường đời theo phái Chaldea đi qua số kép 23 rồi rút về 5."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro gọi số 23 là Ngôi sao hoàng gia của Sư tử, hứa hẹn thành công cho kế hoạch, kèm sự giúp đỡ của cấp trên và sự che chở từ người có vị trí cao."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 23: Ngôi sao Sư tử, rút về 5 (Sao Thuỷ)",
+    "Mạnh: trình bày tự tin, được người đi trước giúp",
+    "Để ý: chờ người khác mở đường",
+    "Tên “Đức Nam”: 13 + 10 = 23"
+   ]
+  },
+  "so-kep-24": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 24 trong thần số Chaldea là gì?",
+     "doan": "Số kép 24 là số của sự nâng đỡ qua quan hệ: được người có vị trí giúp, được nhiều tình cảm, thường thuận về chuyện yêu đương. Cheiro xếp nó vào nhóm số thuận lợi. Cách đọc trung tính là năng lực vun đắp quan hệ, đi kèm việc giữ năng lực thật của mình."
+    },
+    {
+     "tieu_de": "Tên “Cường” cộng ra 24 thì đọc thế nào?",
+     "doan": "Tên tổng 24 thường được đọc là người ấm áp, dễ được giới thiệu cho người khác. “Cường” cộng C3, U6, O7, N5, G3 thành 24. Người được gọi bằng tên này hay được mô tả là quý bạn bè, giữ liên lạc lâu năm. Rút về 6 (Sao Kim), nét yêu thương, chăm chút gia đình và cái đẹp càng rõ."
+    },
+    {
+     "tieu_de": "Số 24 trong sự nghiệp và tình yêu",
+     "doan": "Trong sự nghiệp, số 24 thường tiến nhờ mạng lưới: một lời giới thiệu, một người cũ nhớ tới. Họ hợp với công việc chăm sóc khách hàng, quan hệ đối tác, nhân sự. Trong tình yêu, họ được mô tả là chung thuỷ và biết chiều. Mặt cần để ý là dựa vào quan hệ mà lơ việc rèn tay nghề."
+    },
+    {
+     "tieu_de": "Gợi ý để số 24 dùng quan hệ cho bền",
+     "danh_sach": [
+      "Mỗi tuần nhắn hỏi thăm một người quen cũ mà không nhờ việc gì.",
+      "Song song với việc mở rộng quan hệ, chọn một kỹ năng chuyên môn và luyện đều.",
+      "Khi được giới thiệu việc, làm tốt phần đầu tiên để người giới thiệu yên tâm."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 24",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 24.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Cường”",
+      "C3+U6+O7+N5+G3 = 24",
+      "24 → 6 (gốc 6, Sao Kim)"
+     ],
+     [
+      "Tên gọi “Khánh An”",
+      "K2+H5+A1+N5+H5 = 18 · A1+N5 = 6",
+      "24 → 6 (gốc 6, Sao Kim)"
+     ],
+     [
+      "Họ tên “Vũ Gia Vy”",
+      "V6+U6 = 12 · G3+I1+A1 = 5 · V6+Y1 = 7",
+      "24 → 6 (gốc 6, Sao Kim)"
+     ],
+     [
+      "Ngày sinh 21/02/1981",
+      "2+1+0+2+1+9+8+1 = 24",
+      "24 → 6 (gốc 6, Sao Kim)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 24 có tốt cho chuyện tình cảm không?",
+     "dap": "Cheiro mô tả số 24 thuận về tình cảm và về sự giúp đỡ từ người khác giới. Điều đó nên hiểu là thiên hướng dễ được quý, không phải lời hứa về một mối tình cụ thể."
+    },
+    {
+     "hoi": "Số 33 và 42 liên quan gì đến số 24?",
+     "dap": "Theo Cheiro, 33 và 42 không có nghĩa riêng mà mang cùng tinh thần với 24. Vì thế ba trang này cùng chủ đề nâng đỡ, nhưng được đọc với sắc thái khác."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro mô tả số 24 là con số thuận lợi, gắn với sự giúp đỡ và quan hệ với người có địa vị, cùng những lợi ích đến từ tình cảm và từ người khác giới."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 24: sự nâng đỡ, rút về 6 (Sao Kim)",
+    "Mạnh: ấm áp, giữ quan hệ lâu năm",
+    "Để ý: dựa vào quan hệ mà quên rèn nghề",
+    "33 và 42 mang cùng tinh thần với 24 theo Cheiro"
+   ]
+  },
+  "so-kep-25": {
+   "muc": [
+    {
+     "tieu_de": "Ý nghĩa số kép 25 trong phái Chaldea",
+     "doan": "Số kép 25 là sức mạnh có được nhờ trải nghiệm: quan sát kỹ, vấp rồi rút ra bài học. Cheiro đọc nó là số thuận, nhưng thành công thường đến sau những lần thử thách chứ không đến sớm. Rút về 7, số này mang thêm nét trầm tư."
+    },
+    {
+     "tieu_de": "Tên tổng 25 như “Hải Long” nói lên điều gì?",
+     "doan": "Tên tổng 25 thường được đọc là người học bằng cách tự làm. “Hải” cộng H5, A1, I1 thành 7, “Long” cộng L3, O7, N5, G3 thành 18, tổng 25. Người được gọi bằng tên này hay được mô tả là ít nói nhưng nhớ lâu, rút kinh nghiệm kỹ sau mỗi lần sai. Gắn với số gốc 7 (Sao Hải Vương), họ thường có đời sống bên trong phong phú."
+    },
+    {
+     "tieu_de": "Số 25 khi làm việc và khi gắn bó",
+     "doan": "Khi làm việc, số 25 thường mạnh ở khâu phân tích nguyên nhân, viết lại quy trình sau sự cố, hướng dẫn người mới tránh lỗi cũ. Họ cần thời gian để tin một hệ thống. Khi gắn bó, họ cẩn trọng lúc đầu nhưng bền về sau. Chỗ cần để ý là kể đi kể lại chuyện cũ không vui, khiến người nghe thấy nặng nề."
+    },
+    {
+     "tieu_de": "Biến trải nghiệm số 25 thành sức mạnh",
+     "danh_sach": [
+      "Sau một việc không như ý, viết ba dòng: chuyện gì xảy ra, mình học được gì, lần sau làm gì khác.",
+      "Chia sẻ một bài học thật với người mới vào nghề trong tháng này.",
+      "Đặt giới hạn: kể chuyện cũ một lần cho người cần nghe, rồi chuyển sang việc tiếp theo."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 25",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 25.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Hải Long”",
+      "H5+A1+I1 = 7 · L3+O7+N5+G3 = 18",
+      "25 → 7 (gốc 7, Sao Hải Vương)"
+     ],
+     [
+      "Tên gọi “Bích Ngân”",
+      "B2+I1+C3+H5 = 11 · N5+G3+A1+N5 = 14",
+      "25 → 7 (gốc 7, Sao Hải Vương)"
+     ],
+     [
+      "Họ tên “Lê Hải Tín”",
+      "L3+E5 = 8 · H5+A1+I1 = 7 · T4+I1+N5 = 10",
+      "25 → 7 (gốc 7, Sao Hải Vương)"
+     ],
+     [
+      "Ngày sinh 14/11/1971",
+      "1+4+1+1+1+9+7+1 = 25",
+      "25 → 7 (gốc 7, Sao Hải Vương)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 25 có phải gặp nhiều khó khăn không?",
+     "dap": "Cheiro mô tả 25 là số thành công nhờ trải nghiệm, nên những lần vấp được xem là chất liệu để vững hơn chứ không phải lời báo trước khó khăn."
+    },
+    {
+     "hoi": "Số 34 có giống số 25 không?",
+     "dap": "Theo Cheiro, số 34 mang cùng nghĩa với 25. Trang này đọc 34 theo hướng chia sẻ bài học cho người đi sau."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro mô tả số 25 là sức mạnh có được qua trải nghiệm và quan sát; người mang số này thường thành công sau những thử thách, và đây được xem là con số thuận."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 25: sức mạnh từ trải nghiệm, rút về 7",
+    "Mạnh: rút kinh nghiệm kỹ, bền sau khi đã tin",
+    "Để ý: kể mãi chuyện cũ không vui",
+    "Tên “Hải Long”: 7 + 18 = 25"
+   ]
+  },
+  "so-kep-26": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 26 nói gì về hợp tác và liên kết?",
+     "doan": "Số kép 26 là lời nhắc cân nhắc kỹ các liên kết: góp vốn, hùn hạp, chọn người làm chung. Cheiro viết về số này bằng giọng cảnh báo khá nặng; cách đọc trung tính ngày nay là học chọn người đồng hành cẩn thận và nói rõ trách nhiệm từ đầu."
+    },
+    {
+     "tieu_de": "Tên “Hương” có tổng 26 thì hiểu thế nào?",
+     "doan": "Tên tổng 26 thường được đọc là người cả nể, dễ nhận lời vì tình. “Hương” cộng H5, U6, O7, N5, G3 thành 26. Người được gọi bằng tên này hay được mô tả là tử tế, ngại từ chối bạn bè, nhất là khi được rủ làm chung. Rút về 8 (Sao Thổ), số 26 lại có nét chịu khó và có trách nhiệm, nên khi đã đặt điều kiện rõ, họ làm việc chung rất bền."
+    },
+    {
+     "tieu_de": "Số 26 trong làm ăn chung và chuyện gia đình",
+     "doan": "Trong làm ăn chung, số 26 thường gặp chuyện vì thoả thuận miệng: ai góp bao nhiêu, ai chịu phần lỗ, khi nào rút. Viết ra từ đầu giúp bạn bè vẫn là bạn bè. Trong gia đình, họ hay đứng ra bảo lãnh, cho vay người thân. Đặt mức mình chịu được trước khi nhận lời giúp họ đỡ khó xử về sau."
+    },
+    {
+     "tieu_de": "Ba thói quen hợp với số 26",
+     "danh_sach": [
+      "Mọi khoản góp chung từ vài triệu trở lên đều có vài dòng ghi chép hai bên cùng giữ.",
+      "Trước khi nhận lời làm chung, hỏi: nếu dừng giữa chừng thì chia thế nào?",
+      "Chọn người làm chung dựa trên việc họ đã làm, không chỉ dựa trên tình thân."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 26",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 26.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Hương”",
+      "H5+U6+O7+N5+G3 = 26",
+      "26 → 8 (gốc 8, Sao Thổ)"
+     ],
+     [
+      "Tên gọi “Minh Anh”",
+      "M4+I1+N5+H5 = 15 · A1+N5+H5 = 11",
+      "26 → 8 (gốc 8, Sao Thổ)"
+     ],
+     [
+      "Họ tên “Trần Gia Nga”",
+      "T4+R2+A1+N5 = 12 · G3+I1+A1 = 5 · N5+G3+A1 = 9",
+      "26 → 8 (gốc 8, Sao Thổ)"
+     ],
+     [
+      "Ngày sinh 10/10/1995",
+      "1+0+1+0+1+9+9+5 = 26",
+      "26 → 8 (gốc 8, Sao Thổ)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 26 có nghĩa là không nên hợp tác?",
+     "dap": "Không. Cheiro dùng số 26 để nhắc cân nhắc kỹ khi liên kết, không phải để cấm. Hợp tác có điều kiện rõ ràng vẫn là cách làm tốt cho người mang số này."
+    },
+    {
+     "hoi": "Ngày sinh 10/10/1995 có số kép 26 không?",
+     "dap": "Có. Cộng 1+0+1+0+1+9+9+5 ra 26, rút về 8. Riêng số ngày sinh 10 lại là số kép 10."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro viết về số 26 như lời cảnh báo cho tương lai, nhất là về những liên kết, hùn hạp với người khác; cách đọc trung tính là nhắc chọn người làm chung cẩn thận."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 26: bài học hợp tác, rút về 8 (Sao Thổ)",
+    "Mạnh: tử tế, có trách nhiệm khi đã cam kết",
+    "Để ý: nhận lời làm chung vì nể",
+    "Việc nên làm: ghi rõ phần góp và cách chia khi dừng"
+   ]
+  },
+  "so-kep-27": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 27 nghĩa là gì trong thần số Chaldea?",
+     "doan": "Số kép 27 được Cheiro tả bằng hình quyền trượng: uy tín, quyền hạn và khả năng chỉ huy đến từ trí tuệ và sức sáng tạo của chính mình. Ông đọc nó là số thuận, nhất là khi người mang nó làm theo kế hoạch riêng đã cân nhắc kỹ."
+    },
+    {
+     "tieu_de": "Tên “Bảo Vinh” cộng ra 27 thì sao?",
+     "doan": "Tên tổng 27 thường được đọc là người có chính kiến và làm việc độc lập. “Bảo” cộng B2, A1, O7 thành 10, “Vinh” cộng V6, I1, N5, H5 thành 17, tổng 27. Người được gọi bằng tên này hay được mô tả là tự nghĩ ra cách làm rồi kiên trì theo. Rút về 9 (Sao Hoả), số 27 thêm sức quyết và muốn tự cầm lái."
+    },
+    {
+     "tieu_de": "Số 27 trong vai trò lãnh đạo và trong quan hệ",
+     "doan": "Trong vai trò lãnh đạo, số 27 thường được tôn trọng vì có ý tưởng riêng và dám chịu trách nhiệm. Họ hợp với khởi nghiệp, sáng tác, nghiên cứu độc lập. Trong quan hệ, họ dễ áp cách nghĩ của mình lên người khác. Thói quen hỏi “còn cách nào khác không?” trước khi chốt giúp họ bớt cứng."
+    },
+    {
+     "tieu_de": "Gợi ý để số 27 cầm “quyền trượng” nhẹ tay",
+     "danh_sach": [
+      "Trong cuộc họp tới, để người khác nói trước rồi mới đưa ý của mình.",
+      "Viết kế hoạch riêng ra giấy và cho một người đọc phản biện.",
+      "Giao trọn một phần việc cho đồng đội, không can thiệp giữa chừng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 27",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 27.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Khánh Lan”",
+      "K2+H5+A1+N5+H5 = 18 · L3+A1+N5 = 9",
+      "27 → 9 (gốc 9, Sao Hoả)"
+     ],
+     [
+      "Tên gọi “Bảo Vinh”",
+      "B2+A1+O7 = 10 · V6+I1+N5+H5 = 17",
+      "27 → 9 (gốc 9, Sao Hoả)"
+     ],
+     [
+      "Họ tên “Trần Hải Lâm”",
+      "T4+R2+A1+N5 = 12 · H5+A1+I1 = 7 · L3+A1+M4 = 8",
+      "27 → 9 (gốc 9, Sao Hoả)"
+     ],
+     [
+      "Ngày sinh 26/02/1961",
+      "2+6+0+2+1+9+6+1 = 27",
+      "27 → 9 (gốc 9, Sao Hoả)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 27 có hợp làm chủ không?",
+     "dap": "Cheiro mô tả 27 gắn với uy quyền và trí tuệ sáng tạo, thuận khi làm theo kế hoạch của riêng mình. Điều này thường hợp với việc tự chủ, miễn là vẫn nghe góp ý."
+    },
+    {
+     "hoi": "Những số kép nào mang cùng nghĩa với 27?",
+     "dap": "Theo Cheiro, số 36 và 45 mang cùng tinh thần quyền trượng với 27."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro tả số 27 bằng hình quyền trượng, hứa hẹn uy quyền và khả năng chỉ huy; thành quả đến từ trí tuệ sáng tạo, và người mang số này nên làm theo kế hoạch riêng của mình."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 27: quyền trượng, rút về 9 (Sao Hoả)",
+    "Mạnh: chính kiến, sáng tạo, dám chịu trách nhiệm",
+    "Để ý: cho rằng cách mình là cách duy nhất",
+    "36 và 45 mang cùng tinh thần với 27"
+   ]
+  },
+  "so-kep-28": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 28 trong Chaldea mang ý nghĩa gì?",
+     "doan": "Số kép 28 là con số nhiều mâu thuẫn: khởi đầu hứa hẹn, nhưng dễ mất phần vì tin người hoặc vì cạnh tranh. Cheiro khuyên người mang số này tính trước cho tương lai. Cách đọc trung tính là tự xây bằng sức mình và giữ một phần dự phòng."
+    },
+    {
+     "tieu_de": "Tên “Phong” có tổng 28 thì đọc ra sao?",
+     "doan": "Tên tổng 28 thường được đọc là người dám mở đầu việc mới. “Phong” cộng P8, H5, O7, N5, G3 thành 28. Người được gọi bằng tên này hay được mô tả là năng động, nhiều ý tưởng, dễ được tin là “sẽ làm được”. Rút về 1 (Mặt Trời), nét chủ động mạnh; điều cần thêm là sự cẩn trọng khi giao phần quan trọng cho người khác."
+    },
+    {
+     "tieu_de": "Số 28 trong kinh doanh, tiền bạc và lòng tin",
+     "doan": "Trong kinh doanh, số 28 thường gặp nhiều đối thủ và cần lợi thế rõ ràng. Với tiền bạc, họ hay khởi đầu tốt rồi để hụt vì chi tiêu theo kỳ vọng. Trong quan hệ, họ dễ đặt cả kế hoạch vào lời hứa của một người. Chia nhỏ rủi ro và giữ quỹ dự phòng giúp họ yên tâm hơn."
+    },
+    {
+     "tieu_de": "Cách giữ vững cho số 28",
+     "danh_sach": [
+      "Không đặt quá một phần ba tiền tiết kiệm vào một kế hoạch duy nhất.",
+      "Ghi rõ ai chịu trách nhiệm phần nào trước khi bắt đầu việc chung.",
+      "Mỗi quý xem lại đối thủ hay người làm cùng nghề đang làm gì khác."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 28",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 28.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Phong”",
+      "P8+H5+O7+N5+G3 = 28",
+      "28 → 10 → 1 (gốc 1, Mặt Trời)"
+     ],
+     [
+      "Tên gọi “Minh Lộc”",
+      "M4+I1+N5+H5 = 15 · L3+O7+C3 = 13",
+      "28 → 10 → 1 (gốc 1, Mặt Trời)"
+     ],
+     [
+      "Họ tên “Lê Hải Bình”",
+      "L3+E5 = 8 · H5+A1+I1 = 7 · B2+I1+N5+H5 = 13",
+      "28 → 10 → 1 (gốc 1, Mặt Trời)"
+     ],
+     [
+      "Ngày sinh 22/02/1975",
+      "2+2+0+2+1+9+7+5 = 28",
+      "28 → 10 → 1 (gốc 1, Mặt Trời)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 28 có phải số mất mát không?",
+     "dap": "Cheiro mô tả 28 nhiều mâu thuẫn và nhắc về những lần mất phần do tin người. Nên đọc là lời khuyên tự chủ và có dự phòng, không phải lời báo trước mất mát."
+    },
+    {
+     "hoi": "Sinh ngày 28 thì sao?",
+     "dap": "Số ngày sinh 28 là số kép 28, rút về 1. Theo phái Chaldea, người sinh ngày này mang thêm chủ đề tự xây dựng bằng sức mình."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro mô tả số 28 đầy mâu thuẫn: hứa hẹn lúc đầu nhưng có thể mất phần vì tin người, gặp đối thủ trong làm ăn; ông khuyên người mang số này chuẩn bị cho tương lai."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 28: mâu thuẫn và lòng tin, rút về 1",
+    "Mạnh: dám mở đầu, nhiều ý tưởng",
+    "Để ý: đặt cả kế hoạch vào lời hứa một người",
+    "Việc nên làm: chia nhỏ rủi ro, giữ quỹ dự phòng"
+   ]
+  },
+  "so-kep-29": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 29 nghĩa là gì theo Cheiro?",
+     "doan": "Số kép 29 là con số của sự không chắc chắn trong quan hệ: khó biết ai thật lòng, dễ thất vọng vì bạn bè hay người yêu. Cheiro viết về nó khá nặng nề. Cách đọc trung tính là chủ đề lắng nghe trực giác, hỏi thẳng thay vì đoán, và chọn bạn chậm rãi."
+    },
+    {
+     "tieu_de": "Tên “Bích Quyên” cộng ra 29 thì hiểu thế nào?",
+     "doan": "Tên tổng 29 thường được đọc là người giàu cảm xúc, nhạy với thay đổi nhỏ trong thái độ người khác. “Bích” cộng B2, I1, C3, H5 thành 11, “Quyên” cộng Q1, U6, Y1, E5, N5 thành 18, tổng 29. Người được gọi bằng tên này hay được mô tả là dễ suy nghĩ về một câu nói. Rút về 2 (Mặt Trăng), nét nhạy cảm càng đậm."
+    },
+    {
+     "tieu_de": "Số 29 trong tình bạn, tình yêu và chỗ làm",
+     "doan": "Trong tình bạn và tình yêu, số 29 thường cần thời gian để tin, và có khi tin nhầm vì muốn tin. Họ hay đoán ý người khác rồi phản ứng với điều mình tưởng tượng. Ở chỗ làm, họ đọc không khí nhanh, hợp với nghề cần thấu hiểu con người. Nói thẳng một câu hỏi thường gỡ được nhiều ngày lăn tăn."
+    },
+    {
+     "tieu_de": "Gợi ý cho người mang số 29",
+     "danh_sach": [
+      "Khi lăn tăn về thái độ của ai, hỏi họ một câu trực tiếp trong vòng hai ngày.",
+      "Tách “điều mình thấy” và “điều mình đoán” khi kể lại một chuyện.",
+      "Chọn hai người bạn đã đáng tin qua nhiều năm và dành thời gian cho họ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 29",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 29.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Hữu Huy”",
+      "H5+U6+U6 = 17 · H5+U6+Y1 = 12",
+      "29 → 11 → 2 (gốc 2, Mặt Trăng)"
+     ],
+     [
+      "Tên gọi “Bích Quyên”",
+      "B2+I1+C3+H5 = 11 · Q1+U6+Y1+E5+N5 = 18",
+      "29 → 11 → 2 (gốc 2, Mặt Trăng)"
+     ],
+     [
+      "Họ tên “Võ Bích My”",
+      "V6+O7 = 13 · B2+I1+C3+H5 = 11 · M4+Y1 = 5",
+      "29 → 11 → 2 (gốc 2, Mặt Trăng)"
+     ],
+     [
+      "Ngày sinh 05/05/1972",
+      "0+5+0+5+1+9+7+2 = 29",
+      "29 → 11 → 2 (gốc 2, Mặt Trăng)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 29 có nghĩa là hay bị phản bội?",
+     "dap": "Không nên hiểu như vậy. Cheiro nhắc tới sự lừa dối khi viết về 29, nhưng cách đọc trung tính là tập kiểm tra và hỏi thẳng, để lòng tin đặt đúng chỗ."
+    },
+    {
+     "hoi": "Những số nào có cùng nghĩa với 29?",
+     "dap": "Theo Cheiro, số 38 và 47 mang cùng tinh thần với 29: chủ đề lòng tin và phân biệt thật giả."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro viết về số 29 như con số của sự không chắc chắn, thử thách và những người bạn khó tin cậy; ông nhắc người mang số này cẩn thận trong chuyện tình cảm và lòng tin."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 29: thử thách lòng tin, rút về 2",
+    "Mạnh: nhạy, đọc người nhanh",
+    "Để ý: đoán ý rồi phản ứng với điều tưởng tượng",
+    "38 và 47 mang cùng tinh thần với 29"
+   ]
+  },
+  "so-kep-30": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 30 trong thần số Chaldea nghĩa là gì?",
+     "doan": "Số kép 30 là số của suy xét và nhìn lại: dùng đầu óc nhiều hơn dùng sức, đặt hiểu biết lên trên của cải. Cheiro ghi người mang số này thường gác chuyện vật chất sang bên. Ông cũng nói nó có thể thuận hay không tuỳ người đó muốn gì."
+    },
+    {
+     "tieu_de": "Tên “Minh Sơn” có tổng 30 thì sao?",
+     "doan": "Tên tổng 30 thường được đọc là người thích suy nghĩ kỹ và đứng ngoài để quan sát. “Minh” cộng M4, I1, N5, H5 thành 15, “Sơn” cộng S3, O7, N5 thành 15, tổng 30. Người được gọi bằng tên này hay được mô tả là đọc nhiều, nói ít, có nhận xét sâu. Rút về 3 (Sao Mộc), số này còn có nét thích chia sẻ điều mình hiểu."
+    },
+    {
+     "tieu_de": "Số 30 trong nghề nghiệp và khi sống cùng người khác",
+     "doan": "Trong nghề, số 30 thường hợp với phân tích, viết, biên tập, nghiên cứu, cố vấn — nơi trí tuệ được trả công hơn tốc độ. Họ không thích tranh giành vị trí. Khi sống cùng người khác, họ có thể khiến người thân thấy xa cách vì ít bày tỏ. Một câu hỏi han mỗi ngày giúp nối lại khoảng cách đó."
+    },
+    {
+     "tieu_de": "Dùng chất suy ngẫm của số 30 cho tốt",
+     "danh_sach": [
+      "Mỗi ngày hỏi một người thân một câu về ngày của họ và nghe hết.",
+      "Viết ra suy nghĩ của mình thành bài ngắn, gửi cho ai đó đọc góp ý.",
+      "Khi đã nghĩ đủ, đặt hạn chót cho quyết định thay vì nghĩ thêm."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 30",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 30.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Minh Sơn”",
+      "M4+I1+N5+H5 = 15 · S3+O7+N5 = 15",
+      "30 → 3 (gốc 3, Sao Mộc)"
+     ],
+     [
+      "Tên gọi “Thảo Giang”",
+      "T4+H5+A1+O7 = 17 · G3+I1+A1+N5+G3 = 13",
+      "30 → 3 (gốc 3, Sao Mộc)"
+     ],
+     [
+      "Họ tên “Lê Diệu Hà”",
+      "L3+E5 = 8 · D4+I1+E5+U6 = 16 · H5+A1 = 6",
+      "30 → 3 (gốc 3, Sao Mộc)"
+     ],
+     [
+      "Ngày sinh 07/01/1993",
+      "0+7+0+1+1+9+9+3 = 30",
+      "30 → 3 (gốc 3, Sao Mộc)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 30 có phải số tốt không?",
+     "dap": "Cheiro viết số 30 là số của suy xét và trí tuệ, thuận hay không còn tuỳ người đó hướng tới điều gì. Nếu cần của cải nhanh, nó ít hợp; nếu cần hiểu sâu, nó rất hợp."
+    },
+    {
+     "hoi": "Số 39 và 48 có liên quan gì đến 30?",
+     "dap": "Theo Cheiro, 39 và 48 mang cùng nghĩa với 30: suy ngẫm, nhìn lại, quan sát trước khi hành động."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro mô tả số 30 là con số của suy luận và nhìn lại, của sự vượt trội về trí tuệ; người mang số này thường gác chuyện vật chất sang bên, và ông nói nó thuận hay không tuỳ ý chí của người đó."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 30: suy ngẫm, rút về 3 (Sao Mộc)",
+    "Mạnh: suy nghĩ kỹ, nhận xét sâu",
+    "Để ý: xa cách với người thân",
+    "39 và 48 mang cùng tinh thần với 30"
+   ]
+  },
+  "so-kep-31": {
+   "muc": [
+    {
+     "tieu_de": "Số kép 31 có ý nghĩa gì trong phái Chaldea?",
+     "doan": "Số kép 31 gần với số 30 nhưng tự khép hơn: người tự đủ, sống theo nguyên tắc riêng, ít cần đám đông. Cheiro thấy nó cô đơn và tách biệt, không thuận về mặt thế tục. Cách đọc trung tính là chủ đề cân bằng giữa độc lập và kết nối."
+    },
+    {
+     "tieu_de": "Tên “Thu Hiền” có tổng 31 thì đọc thế nào?",
+     "doan": "Tên tổng 31 thường được đọc là người làm việc một mình tốt, ít phụ thuộc. “Thu” cộng T4, H5, U6 thành 15, “Hiền” cộng H5, I1, E5, N5 thành 16, tổng 31. Người được gọi bằng tên này hay được mô tả là tự lo được việc của mình và ngại phiền ai. Rút về 4 (Sao Thiên Vương), số này có nét nghĩ khác người, ít theo số đông."
+    },
+    {
+     "tieu_de": "Số 31 ở chỗ làm và trong quan hệ thân thiết",
+     "doan": "Ở chỗ làm, số 31 thường hợp với việc tự quản: làm từ xa, làm tự do, chuyên gia một mảng. Họ ít khi xin giúp, nên có khi gánh việc quá sức mà không ai biết. Trong quan hệ thân thiết, họ cần khoảng riêng và người kia cần hiểu điều đó không phải là lạnh nhạt. Chủ động nhờ một việc nhỏ là cách tập mở lòng."
+    },
+    {
+     "tieu_de": "Gợi ý giúp số 31 bớt khép mình",
+     "danh_sach": [
+      "Tuần này nhờ một đồng nghiệp hay bạn bè một việc nhỏ, rồi cảm ơn cụ thể.",
+      "Tham gia một nhóm nhỏ gặp đều (câu lạc bộ, lớp học) dù chỉ hai lần mỗi tháng.",
+      "Nói với người thân khi nào mình cần ở một mình, để họ không hiểu lầm."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ví dụ tên và ngày sinh cho ra số kép 31",
+    "chu_thich": "Mỗi dòng cộng theo bảng chữ Chaldea (chữ viết không dấu, Đ tính như D) hoặc cộng chữ số ngày sinh; số kép là con số đầu tiên rơi vào khoảng 10–52 trên đường rút gọn, ở đây là 31.",
+    "cot": [
+     "Ví dụ",
+     "Cộng theo bảng Chaldea",
+     "Đường rút gọn"
+    ],
+    "dong": [
+     [
+      "Tên gọi “Thu Hiền”",
+      "T4+H5+U6 = 15 · H5+I1+E5+N5 = 16",
+      "31 → 4 (gốc 4, Sao Thiên Vương)"
+     ],
+     [
+      "Tên gọi “Khánh Bình”",
+      "K2+H5+A1+N5+H5 = 18 · B2+I1+N5+H5 = 13",
+      "31 → 4 (gốc 4, Sao Thiên Vương)"
+     ],
+     [
+      "Họ tên “Lê Xuân Mai”",
+      "L3+E5 = 8 · X5+U6+A1+N5 = 17 · M4+A1+I1 = 6",
+      "31 → 4 (gốc 4, Sao Thiên Vương)"
+     ],
+     [
+      "Ngày sinh 05/04/1984",
+      "0+5+0+4+1+9+8+4 = 31",
+      "31 → 4 (gốc 4, Sao Thiên Vương)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Số kép 31 có phải là số cô đơn?",
+     "dap": "Cheiro mô tả 31 là số tự khép và tách biệt. Nên đọc là thiên hướng thích tự lập; người mang số này vẫn có thể giữ vài mối quan hệ sâu nếu chủ động."
+    },
+    {
+     "hoi": "Sinh ngày 31 thì mang số kép gì?",
+     "dap": "Số ngày sinh 31 là số kép 31, rút về 4. Ngày sinh 05/04/1984 cũng cho tổng chữ số 31 ở đường đời."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Phần số kép (10–52)",
+     "nghia": "Cheiro mô tả số 31 giống số 30 nhưng tự khép hơn, cô đơn và tách biệt khỏi người khác; ông cho rằng đây không phải con số thuận về mặt thế tục."
+    }
+   ],
+   "y_chinh": [
+    "Số kép 31: ẩn sĩ tự đủ, rút về 4",
+    "Mạnh: tự lập, làm việc một mình tốt",
+    "Để ý: ngại nhờ, gánh quá sức không ai biết",
+    "40 và 49 mang cùng tinh thần với 31 theo Cheiro"
+   ]
+  }
+ }
+}
