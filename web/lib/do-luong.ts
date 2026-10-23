@@ -77,6 +77,7 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   khop_2: "number",     // BT-DC: … khớp cách theo tháng sinh
   so_cau: "number",     // BT-DC: số câu đã trả lời (bỏ "không nhớ")
   vi_tri: "string",     // ND-2: tren / duoi / cuoi   // SAO-3: mã nhiệm vụ (luu_ho_so / hoi_3_cau / moi_1_ban)
+  loai_hoi: "string",   // KD-2d: hop / que — phiếu sau 30 ngày hỏi cho hộp hay cho quẻ đã gieo
   so_can: "number",     // UI-PT2 P5: số căn đang lưu trên máy (≤ 3)
   diem: "string",       // UI-PT2 GPS: điểm bản đồ đang định vị (tam / truoc) — không toạ độ
   chinh_xac_m: "number", // UI-PT2 GPS: sai số ±m thiết bị báo (không toạ độ)

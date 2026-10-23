@@ -17,6 +17,8 @@ import { ChonHao } from "@/components/kinh-dich/ChonHao";
 import { CachGieo } from "@/components/kinh-dich/CachGieo";
 import { KetQuaQue } from "@/components/kinh-dich/KetQuaQue";
 import { LichSuQue } from "@/components/kinh-dich/LichSuQue";
+import { HoiSau30Ngay } from "@/components/khung/HoiSau30Ngay";
+import { ghiNhanDung } from "@/lib/kiem-chung-sau";
 import { NutChiaSeQue } from "@/components/kinh-dich/NutChiaSeQue";
 import { type GiaTriHao, giaTriTuQue, laGiaTriHao } from "@/lib/dong-xu";
 import { luuQue, nhanLuc, type QueDaLuu } from "@/lib/lich-su-que";
@@ -55,6 +57,8 @@ function ghiDaHoi(cau: string) {
   } catch { /* trình duyệt chặn lưu */ }
 }
 /** "2026-10-23T14:05" (giờ VN engine trả) → "14:05 ngày 23/10". */
+/** Ngày hôm nay theo giờ Việt Nam (YYYY-MM-DD) — mốc hỏi lại sau 30 ngày. */
+const ngayVN = () => new Date(Date.now() + 7 * 3600_000).toISOString().slice(0, 10);
 /** Mốc UTC (ISO) → chuỗi giờ Việt Nam không múi "YYYY-MM-DDTHH:MM:SS" cho engine (engine đọc `thoi_diem` là giờ VN). */
 function gioVietNam(iso: string): string | null {
   const d = new Date(iso);
@@ -76,7 +80,16 @@ export function KinhDich() {
   const [cheDo, setCheDo] = useState("tu_dong");
   const [cach, setCach] = useState("may_gieo");
   // HN-3: link "Quẻ ngày"/"Gieo Mai Hoa giờ này" từ /hom-nay mở sẵn Mai Hoa theo giờ hiện tại (?cach=mai_hoa).
-  useEffect(() => { if (new URLSearchParams(location.search).get("cach") === "mai_hoa") setCach("mai_hoa"); }, []);
+  // KD-2c: Hôm nay "Quẻ ngày của bạn" → ?cach=mai_hoa_so&so=7,12 điền sẵn hai số để đọc kỹ cùng quẻ cho việc cụ thể.
+  useEffect(() => {
+    const q = new URLSearchParams(location.search);
+    const c = q.get("cach");
+    if (c === "mai_hoa") setCach("mai_hoa");
+    if (c === "mai_hoa_so") {
+      const so = (q.get("so") ?? "").split(",").map((x) => x.replace(/\D/g, "").slice(0, 4));
+      if (so.length === 2 && so.every((x) => x && Number(x) >= 1)) { setCach("mai_hoa_so"); setSoMH([so[0]!, so[1]!]); }
+    }
+  }, []);
   // KC-5: thói quen đọc (đếm trên máy) → chế độ mặc định theo phái hay mở, trừ khi người dùng đã tự chọn tay.
   useEffect(() => {
     const p = phaiUuThich();
@@ -164,6 +177,12 @@ export function KinhDich() {
       if (giaTri) {
         luuQue({ cau, gia_tri_hao: giaTri, cach: cachGui, che_do: cheDo, chu_de: d.chu_de ?? null, ten_que: que.quai_ban.ten, ten_bien: que.quai_bien?.ten ?? null });
         setLamMoiLS((n) => n + 1);
+        // KD-2d (P9): nhớ MÃ hộp lời đọc trên máy → ≥ 30 ngày sau Hôm nay / trang này hỏi "việc đó ra sao?" (phiếu chỉ mã, không câu hỏi).
+        const hopTheoDoi = dq?.hop.find((h) => h.ma_mau && (h.loai === "loi_khuyen" || h.loai === "luu_y")) ?? dq?.hop.find((h) => h.ma_mau);
+        if (dq && hopTheoDoi?.ma_mau) {
+          ghiNhanDung({ loai: "doi_song", mau: hopTheoDoi.ma_mau, phai: dq.goc_nhin.chinh, mo_dun: "kinhdich", loai_hoi: "que",
+            nhan: `Quẻ ${que.quai_ban.ten}${d.chu_de ? ` — ${d.chu_de.ten}` : ""}`.slice(0, 80) });
+        }
       }
     }
     const mh = d.mai_hoa?.dau_vao;
@@ -192,8 +211,8 @@ export function KinhDich() {
               Mai Hoa lấy theo âm lịch {mh.lich === "trung" ? "Trung Quốc" : "Việt Nam"}: ngày {mh.ngay_am} tháng {mh.thang_am} năm {mh.nam_am}{mh.chi_nam ? ` (${mh.chi_nam})` : ""}, giờ {mh.chi_gio}{thoiDiemMH ? ` — lúc ${thoiDiemMH}` : ""}.
             </p>
           )}
-          {mh?.cach === "so" && <p className="mt-1 text-xs text-fg-faint" data-testid="mai-hoa-so">Mai Hoa theo số bạn chọn: {mh.so?.join(" và ")}, giờ {mh.chi_gio}.</p>}
-          {mh?.cach === "phuong_vi" && <p className="mt-1 text-xs text-fg-faint" data-testid="mai-hoa-phuong">Mai Hoa theo phương {mh.huong}, giờ {mh.chi_gio}.</p>}
+          {mh?.cach === "so" && <p className="mt-1 text-xs text-fg-faint" data-testid="mai-hoa-so">Mai Hoa theo số bạn chọn: {mh.so?.join(" và ")}, giờ {mh.chi_gio}{tdg ? ` — lúc ${nhanThoiDiem(tdg.thoi_diem)} (giờ Việt Nam), ngày ${tdg.can_ngay} ${tdg.chi_ngay}` : ""}.</p>}
+          {mh?.cach === "phuong_vi" && <p className="mt-1 text-xs text-fg-faint" data-testid="mai-hoa-phuong">Mai Hoa theo phương {mh.huong}, giờ {mh.chi_gio}{tdg ? ` — lúc ${nhanThoiDiem(tdg.thoi_diem)} (giờ Việt Nam), ngày ${tdg.can_ngay} ${tdg.chi_ngay}` : ""}.</p>}
           {!mh?.ngay_am && !laXemLai && (
             <p className="mt-1 text-xs text-fg-faint" data-testid="gio-gieo">
               {tdg ? `Gieo lúc ${nhanThoiDiem(tdg.thoi_diem)} (giờ Việt Nam) — giờ ${tdg.chi_gio}, ngày ${tdg.can_ngay} ${tdg.chi_ngay}, tháng ${tdg.chi_thang}, tuần không ${tdg.tuan_khong.join("/")}.`
@@ -276,6 +295,7 @@ export function KinhDich() {
           }
           gui={gui}
         />
+        <HoiSau30Ngay homNay={ngayVN()} moDun="kinhdich" />
         <LichSuQue lamMoi={lamMoiLS} onXemLai={xemLaiQue} dang={dang} />
         {coQue && <CuoiBaiDoc moDun="kinhdich" cauHoi="Lời quẻ có giúp bạn nhìn rõ việc đang cân nhắc?" maYDinh={maYDinh} />}
       </div>

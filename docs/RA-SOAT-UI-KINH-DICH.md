@@ -40,11 +40,11 @@ chết / xổ số vẫn ở engine; thẻ chia sẻ = mã HMAC không mang câu
 | P2 Bộ chọn tự gieo bằng đồng xu / kiểu hào | 3 | THU HÚT 2 | 3 | 3 | ✅ làm |
 | P3 Cách gieo thật + hỏi cho đúng | 2 | THU HÚT 2 | 3 | 3 | ✅ làm |
 | P4 Lịch sử quẻ trên máy + Xem lại tất định | 3 | QUAY LẠI 3 | 3 | 3 (chỉ localStorage) | ✅ làm |
-| P5 Giờ gieo hiện rõ | 2 | 1 | 3 | 3 | ✅ làm phần engine đã trả; phần còn lại ghi mục 6 |
+| P5 Giờ gieo hiện rõ | 2 | 1 | 3 | 3 | ✅ làm; KD-2: engine trả `thoi_diem_gieo` {thời điểm giờ VN, can chi ngày, chi tháng, chi giờ, tuần không} cho MỌI cách ra quẻ — web hiện ở máy gieo / tự gieo / Mai Hoa số / phương; Xem lại gửi `thoi_diem` lúc gieo → Lục Hào đọc theo ngày gieo |
 | P6 Thẻ "Quẻ của tôi" | 2 | MỜI 3 | 2 | 3 (mã không câu hỏi) | ✅ làm |
-| P7 Lắc điện thoại để gieo (DeviceMotion → gọi engine) | 2 | 2 | 2 | 2 (quyền cảm biến, chỉ là nút bấm khác) | ⏳ đề xuất — chỉ thay cú bấm "Gieo lần n", không lấy số từ cảm biến |
-| P8 "Quẻ ngày của bạn" ghi vào Hôm nay (đã có quẻ đầu ngày chung) | 1 | QUAY LẠI 2 | 2 | 3 | ⏳ đề xuất — cần chốt: quẻ ngày riêng theo người (Mai Hoa giờ + số từ hồ sơ?) |
-| P9 Nhật ký "quẻ ứng không?" — 30 ngày sau hỏi lại (đã có `kiem_chung_sau` Q7 cho Phong thuỷ) | 3 | HỌC 3 | 2 | 2 (cần nối mã `ds.kinhdich.*` với lịch sử trên máy) | ⏳ đề xuất — khi migration 0022 chạy |
+| P7 Lắc điện thoại để gieo (DeviceMotion → gọi engine) | 2 | 2 | 2 | 2 (quyền cảm biến, chỉ là nút bấm khác) | ✅ làm (KD-2, 2026-10-23): nút "Lắc điện thoại để gieo" trong `GieoDongXu`, iOS xin phép khi bấm, mỗi cú lắc (giật gia tốc > 12 m/s², cách ≥ 0,9 s) = một lần lật; sáu giá trị vẫn của engine, KHÔNG lấy số từ cảm biến; đo `coin_toss_shake` |
+| P8 "Quẻ ngày của bạn" ghi vào Hôm nay (đã có quẻ đầu ngày chung) | 1 | QUAY LẠI 2 | 2 | 3 | ✅ làm (KD-2): **Mai Hoa theo hai số người dùng tự nghĩ tới** + chi giờ lúc khởi (`/v1/kinhdich/que-rieng`, cùng gói nghĩa nôm na với quẻ đầu ngày) — KHÔNG lấy số từ ngày sinh (không có công thức tự chế); nhớ trên máy theo ngày (`hbt.que_rieng.v1`, một ngày một quẻ), link "Đọc kỹ quẻ này" → `/kinh-dich?cach=mai_hoa_so&so=a,b` điền sẵn; đo `que_rieng` |
+| P9 Nhật ký "quẻ ứng không?" — 30 ngày sau hỏi lại (đã có `kiem_chung_sau` Q7 cho Phong thuỷ) | 3 | HỌC 3 | 2 | 2 (cần nối mã `ds.kinhdich.*` với lịch sử trên máy) | ✅ làm (KD-2): gieo xong (không phải Xem lại) máy nhớ MÃ hộp lời đọc (`ds.kinhdich.*`, ưu tiên Lời khuyên / Nên để ý) + phái + nhãn "Quẻ X — chủ đề" vào `hbt.kc_sau.v1` (`loai_hoi: que`, không câu hỏi / sáu hào); ≥ 30 ngày sau Hôm nay **và** trang Kinh Dịch hỏi "Bạn có làm theo hướng quẻ gợi không? · Việc đó giờ ra sao?" → phiếu `/api/kiem-chung/sau` (chỉ mã + hai mức; DB chưa chạy 0022 thì `chua_bat`, không lỗi) |
 | P10 Âm thanh đồng xu rơi | 1 | 1 | 2 | 2 (tự động phát âm thanh gây khó chịu) | ✗ không làm |
 
 ## 4. Đã làm (tệp)
@@ -75,18 +75,11 @@ chết / xổ số vẫn ở engine; thẻ chia sẻ = mã HMAC không mang câu
 động + phái đọc + giờ gieo + "Chia sẻ quẻ" → `DocQue` → 4. "Quẻ đã gieo" (gập, chỉ máy này) → 5. Góp ý + CTA cuối bài.
 Lớp **ĐÃ TÍNH** (quẻ, hào, giờ) · **DIỄN GIẢI** (`DocQue` đời thường) · **TỰ SOI** (câu tự hỏi mình, kiểm chứng) giữ nguyên.
 
-## 6. Cần engine thêm (không sửa trong đợt này — ghi để chủ dự án làm)
+## 6. Engine đã bổ sung (KD-2, 2026-10-23)
 
-1. **Thời điểm gieo có cấu trúc** cho mọi cách ra quẻ: `que.thoi_diem_gieo = {thoi_diem (ISO giờ VN), can_ngay, chi_ngay,
-   chi_thang, chi_gio, tuan_khong}` — hiện chỉ Mai Hoa theo giờ có `mai_hoa.dau_vao.{chi_nam, chi_gio, thoi_diem}`; ngày
-   Lục Hào chỉ nằm trong chuỗi `doc_que.goc_nhin.luc_hao.can_cu[0]` ("Tháng X, ngày Y Z, tuần không …"). Web đang hiện
-   giờ máy người dùng cho máy gieo / tự gieo.
-2. **Xem lại đúng thời điểm cũ**: route web `/api/kinhdich/hoi` (zod `.strict()`) chưa cho qua `thoi_diem` dù engine
-   `HoiKDInput.thoi_diem` đã nhận — thêm một dòng zod `thoi_diem: z.string().datetime().optional()` thì "Xem lại" đọc đúng
-   nhật thần / ứng kỳ của lúc gieo (lịch sử đã lưu `luc`). Đợt này ghi rõ cho người dùng: "phần ngày tháng Lục Hào lấy theo lúc xem".
-3. (Tuỳ) `/v1/kinhdich/khoi-que` nhận `chu_de` và trả tên chủ đề để `/api/chia-se/que` không phải gọi thêm `/chu-de`.
-
-## 7. Kiểm thử
-
-`web/e2e/kinh-dich.spec.ts` (12 test) — chạy bởi chủ dự án. `tsc --noEmit` + `next typegen` xanh. `web/` không có script
-`lint`/eslint (chỉ `typecheck`).
+1. **`thoi_diem_gieo`** trong `/v1/kinhdich/hoi` cho mọi cách ra quẻ: `{thoi_diem (ISO giờ VN), can_ngay, chi_ngay, chi_thang,
+   chi_gio, tuan_khong}` (`hoidap/kinhdich.tra_loi`, một nguồn với căn cứ Lục Hào); route web `/api/kinhdich/hoi` nhận `thoi_diem`
+   (giờ VN không múi) để "Xem lại" đọc theo ngày gieo.
+2. **`POST /v1/kinhdich/que-rieng`** `{so: [a, b], thoi_diem?}` → quẻ Mai Hoa theo số + nghĩa nôm na KB (`luangiai/hom_nay.que_rieng`,
+   dùng chung `_goi_que` với quẻ đầu ngày). Không câu hỏi, không hồ sơ, không nhật ký.
+3. Chưa làm: `/khoi-que` nhận `chu_de` để thẻ quẻ bớt một lượt gọi (giá trị thấp).

@@ -110,3 +110,28 @@ test("Q7: hộp đã bấm 'Đúng với mình' 35 ngày trước → Hôm nay h
   await page.reload();
   await expect(page.getByTestId("hoi-sau-30")).toHaveCount(0);
 });
+
+test("KD-2c (P8) Quẻ ngày của riêng bạn: hai số tự chọn → quẻ Mai Hoa theo số khớp engine, nhớ trên máy theo ngày, link đọc kỹ điền sẵn hai số", async ({ page, request }) => {
+  await napHoSo(page);
+  await page.goto("/hom-nay");
+  const q = page.getByTestId("que-rieng");
+  await expect(q).toContainText("Quẻ ngày của riêng bạn");
+  await q.getByLabel("Số thứ nhất của bạn").fill("7");
+  await q.getByLabel("Số thứ hai của bạn").fill("12");
+  const gioVN = new Date(Date.now() + 7 * 3600_000).toISOString().slice(0, 19);
+  await q.getByTestId("que-rieng-khoi").click();
+  const kq = q.getByTestId("que-rieng-kq");
+  await expect(kq).toBeVisible();
+  const api = await (await request.post("/api/kinhdich/que-rieng", { data: { so: [7, 12], thoi_diem: gioVN } })).json();
+  await expect(q.getByTestId("que-rieng-ten")).toHaveText(api.ten);
+  await expect(kq).toContainText(`số 7 và 12, giờ ${api.dau_vao.chi_gio}`);
+  await expect(q.getByTestId("que-rieng-doc-ky")).toHaveAttribute("href", "/kinh-dich?cach=mai_hoa_so&so=7,12");
+  // nhớ trên máy: tải lại vẫn còn, không khởi lại
+  await page.reload();
+  await expect(page.getByTestId("que-rieng-ten")).toHaveText(api.ten);
+  const luu = await page.evaluate(() => localStorage.getItem("hbt.que_rieng.v1") ?? "");
+  expect(luu).toContain('"so":[7,12]');
+  // API từ chối số 0 / thiếu số
+  expect((await request.post("/api/kinhdich/que-rieng", { data: { so: [0, 12] } })).status()).toBe(422);
+  expect((await request.post("/api/kinhdich/que-rieng", { data: { so: [7] } })).status()).toBe(422);
+});

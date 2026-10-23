@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ghi } from "@/lib/do-luong";
 import { type GiaTriHao, laDong, laDuong, NHAN_HAO, xuTuGiaTri } from "@/lib/dong-xu";
 
 /** Một đồng xu cổ (tròn, lỗ vuông). Mặt ngửa có bốn chấm chữ; mặt sấp trơn. */
@@ -88,6 +89,35 @@ export function GieoDongXu({ giaTri, onXong }: {
 
   const hienHet = () => { setBoQua(true); setDaLat(6); ketThuc(true); };
   const hienTat = boQua || daLat >= 6;
+
+  // KD-2b (P7): LẮC ĐIỆN THOẠI thay cho cú bấm "Gieo lần n" — chỉ là cách kích hoạt lật; sáu giá trị vẫn của engine, KHÔNG lấy
+  // số từ cảm biến. iOS cần người dùng bấm cho phép (DeviceMotionEvent.requestPermission); gỡ lắng nghe khi xong / rời trang.
+  const [coCamBien, setCoCamBien] = useState(false);
+  const [lac, setLac] = useState<"tat" | "bat" | "tu_choi">("tat");
+  const gieoRef = useRef<() => void>(() => {});
+  gieoRef.current = gieo;
+  useEffect(() => { setCoCamBien(typeof window !== "undefined" && "DeviceMotionEvent" in window); }, []);
+  useEffect(() => {
+    if (lac !== "bat" || hienTat) return;
+    let truoc: number | null = null, lanCuoi = 0;
+    const nghe = (e: DeviceMotionEvent) => {
+      const a = e.accelerationIncludingGravity;
+      if (!a) return;
+      const m = Math.hypot(a.x ?? 0, a.y ?? 0, a.z ?? 0);
+      if (truoc != null && Math.abs(m - truoc) > 12 && Date.now() - lanCuoi > 900) { lanCuoi = Date.now(); gieoRef.current(); }
+      truoc = m;
+    };
+    window.addEventListener("devicemotion", nghe);
+    return () => window.removeEventListener("devicemotion", nghe);
+  }, [lac, hienTat]);
+  const batLac = async () => {
+    const DME = (window as unknown as { DeviceMotionEvent?: { requestPermission?: () => Promise<string> } }).DeviceMotionEvent;
+    if (typeof DME?.requestPermission === "function") {
+      try { if ((await DME.requestPermission()) !== "granted") { setLac("tu_choi"); return; } } catch { setLac("tu_choi"); return; }
+    }
+    setLac("bat");
+    ghi("chart_interacted", { mo_dun: "kinhdich", kind: "coin_toss_shake" });
+  };
   const vuaLat = daLat > 0 ? giaTri[daLat - 1] : null;
 
   return (
@@ -134,6 +164,13 @@ export function GieoDongXu({ giaTri, onXong }: {
           <button type="button" onClick={hienHet} className="min-h-9 rounded-full px-3 text-xs text-fg-muted underline-offset-4 hover:text-fg hover:underline" data-testid="bo-qua-gieo">
             Bỏ qua, xem luôn
           </button>
+          {coCamBien && lac === "tat" && (
+            <button type="button" onClick={batLac} className="min-h-9 rounded-full border border-line px-3 text-xs text-fg-muted hover:border-gold/60 hover:text-fg" data-testid="lac-gieo">
+              Lắc điện thoại để gieo
+            </button>
+          )}
+          {lac === "bat" && <span className="text-xs text-jade" data-testid="lac-dang-bat" aria-live="polite">Đang nghe lắc — mỗi cú lắc là một lần gieo.</span>}
+          {lac === "tu_choi" && <span className="text-xs text-fg-faint">Máy chưa cho đọc cảm biến — bạn bấm nút gieo nhé.</span>}
           <span className="text-xs text-fg-faint">{giam ? "Chế độ giảm chuyển động: đồng xu hiện ngay, không lật." : "Ba đồng xu lật theo kết quả đã gieo."}</span>
         </div>
       )}

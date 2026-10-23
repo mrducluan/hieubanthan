@@ -7,6 +7,7 @@ import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
 import { NhacHomNay } from "@/components/khung/NhacHomNay";
 import { HoiHomQua } from "@/components/khung/HoiHomQua";
 import { HoiSau30Ngay } from "@/components/khung/HoiSau30Ngay";
+import { QueRieng } from "@/components/kinh-dich/QueRieng";
 import { MoiCaiApp } from "@/components/khung/MoiCaiApp";
 import { nhoYDinhHomNay } from "@/lib/hom-qua";
 import { useEffect, useRef, useState } from "react";
@@ -391,6 +392,7 @@ export function HomNay() {
               {the.que_ngay.y_chinh && <p className="text-sm">{the.que_ngay.y_chinh}</p>}
               {the.que_ngay.loi_khuyen && <p className="text-sm"><span className="text-jade">Gợi ý:</span> {the.que_ngay.loi_khuyen}</p>}
               {the.que_ngay.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {the.que_ngay.cau_tu_soi}</p>}
+              <QueRieng homNay={the.ngay_xem} />
               <p className="text-xs text-fg-faint">{the.que_ngay.cach_khoi} Mọi người cùng một quẻ trong ngày.{" "}
                 {the.que_ngay.duong && <Link href={duongMoi(the.que_ngay.duong)} className="text-gold hover:underline">Đọc quẻ {the.que_ngay.ten}</Link>}{" "}
                 · <Link href="/kinh-dich?cach=mai_hoa" className="text-gold hover:underline">Gieo quẻ Mai Hoa theo giờ này</Link></p>

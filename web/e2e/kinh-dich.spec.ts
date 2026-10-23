@@ -303,3 +303,73 @@ test("thẻ Quẻ của tôi: mã ký chỉ có 6 hào + tên quẻ + chủ đ�
   expect(await (await request.get(`/the/que/${sua}`)).text()).toContain("Thẻ không còn hiệu lực");
   expect((await request.post("/api/chia-se/que", { data: { gia_tri_hao: [7, 7, 8], ten_hien_thi: "A" } })).status()).toBe(422);
 });
+
+// ---------------------------------------------------------------- KD-2 (P7 · P8 · P9 · giờ gieo)
+test("P7 lắc điện thoại: bật nghe lắc → mỗi cú lắc là một lần lật (giá trị vẫn của engine); đo coin_toss_shake", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await epQue(page, [7, 7, 8, 7, 7, 9]);
+  await page.goto("/kinh-dich");
+  const ans = await hoi(page, "Tôi có nên nhận lời làm quản lý không?");
+  const gx = ans.getByTestId("gieo-dong-xu");
+  await gx.getByTestId("lac-gieo").click();
+  await expect(gx.getByTestId("lac-dang-bat")).toBeVisible();
+  const lac = () => page.evaluate(async () => {
+    const ban = (x: number) => window.dispatchEvent(new DeviceMotionEvent("devicemotion", { accelerationIncludingGravity: { x, y: 0, z: 9.8 } }));
+    ban(0); ban(25);                                            // yên → giật mạnh = một cú lắc
+  });
+  await lac();
+  await expect(gx.getByTestId("hang-hao-1")).toHaveAttribute("data-hien", "1");
+  await lac();                                                   // < 900 ms: bỏ qua (chống rung đôi)
+  await expect(gx.getByTestId("hang-hao-2")).toHaveAttribute("data-hien", "0");
+  await page.waitForTimeout(950);
+  await lac();
+  await expect(gx.getByTestId("hang-hao-2")).toHaveAttribute("data-hien", "1");
+  await expect(gx.getByTestId("xu-1-1")).toHaveAttribute("data-mat", "ngua");  // vẫn là 7 của engine
+  const sk = (await suKien(page)).filter((e) => e.su_kien === "chart_interacted" && e.kind === "coin_toss_shake");
+  expect(sk).toHaveLength(1);
+});
+
+test("P9 hỏi lại sau 30 ngày: gieo xong máy nhớ MÃ hộp (không câu hỏi); 35 ngày sau trang Kinh Dịch hỏi 'việc đó ra sao?' và gửi phiếu chỉ mã", async ({ page }) => {
+  await page.goto("/kinh-dich");
+  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
+  await hoi(page, "Tôi có nên nhận lời làm quản lý ở công ty ABC không?");
+  await expect.poll(() => page.evaluate(() => (JSON.parse(localStorage.getItem("hbt.kc_sau.v1") ?? "[]") as unknown[]).length)).toBe(1);
+  const ghiNho = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.kc_sau.v1") ?? "[]") as Record<string, unknown>[]);
+  expect(ghiNho[0]!.mo_dun).toBe("kinhdich");
+  expect(ghiNho[0]!.loai_hoi).toBe("que");
+  expect(String(ghiNho[0]!.mau)).toMatch(/^ds\.kinhdich\./);
+  expect(JSON.stringify(ghiNho)).not.toContain("ABC");                      // không lưu câu hỏi
+  // Lùi ngày ghi nhận 35 ngày → trang Kinh Dịch hỏi lại với lời riêng cho quẻ
+  const ngay = new Date(Date.now() - 35 * 86_400_000).toISOString().slice(0, 10);
+  await page.evaluate((n) => {
+    const ds = JSON.parse(localStorage.getItem("hbt.kc_sau.v1") ?? "[]") as { ngay: string }[];
+    localStorage.setItem("hbt.kc_sau.v1", JSON.stringify(ds.map((x) => ({ ...x, ngay: n }))));
+  }, ngay);
+  const goi: unknown[] = [];
+  await page.route("**/api/kiem-chung/sau", async (route) => { goi.push(route.request().postDataJSON()); await route.fulfill({ json: { ok: true, da_luu: true } }); });
+  await page.goto("/kinh-dich");
+  const h = page.getByTestId("hoi-sau-30");
+  await expect(h).toContainText("35 ngày trước bạn gieo quẻ này");
+  await expect(h).toContainText("Quẻ Lý");
+  await expect(h).toContainText("Bạn có làm theo hướng quẻ gợi không?");
+  await h.getByRole("radio", { name: "Theo một phần" }).click();
+  await expect(h).toContainText("Việc đó giờ ra sao?");
+  await h.getByRole("button", { name: "Thuận hơn" }).click();
+  await expect(h).toContainText("Cảm ơn bạn");
+  expect(goi).toHaveLength(1);
+  const g = goi[0] as Record<string, unknown>;
+  expect(g.loai).toBe("doi_song"); expect(g.da_lam).toBe("mot_phan"); expect(g.thay_khac).toBe("tot_hon"); expect(g.sau_ngay).toBe(35);
+  expect(String(g.mau)).toMatch(/^ds\.kinhdich\./);
+  expect(Object.keys(g).sort()).toEqual(["da_lam", "loai", "mau", "phai", "sau_ngay", "thay_khac"]);
+});
+
+test("giờ gieo đồng nhất + P8 điền sẵn: ?cach=mai_hoa_so&so=7,12 mở sẵn Mai Hoa theo số; dòng giờ gieo có can chi ngày", async ({ page }) => {
+  await page.goto("/kinh-dich?cach=mai_hoa_so&so=7,12");
+  await expect(page.getByLabel("Cách ra quẻ")).toHaveValue("mai_hoa_so");
+  await expect(page.getByLabel("Số thứ nhất")).toHaveValue("7");
+  await expect(page.getByLabel("Số thứ hai")).toHaveValue("12");
+  const ans = await hoi(page, "Việc hợp tác này có thuận không?");
+  await expect(ans.getByTestId("mai-hoa-so")).toContainText("Mai Hoa theo số bạn chọn: 7 và 12");
+  await expect(ans.getByTestId("mai-hoa-so")).toContainText(/lúc \d{2}:\d{2} ngày \d{2}\/\d{2} \(giờ Việt Nam\), ngày \S+ \S+\./);
+});
