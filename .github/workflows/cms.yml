@@ -99,7 +99,7 @@ jobs:
         env:
           CMS_E2E_DATABASE_URI: postgres://postgres:postgres@localhost:5432/cms_e2e
         run: npm run e2e
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: cms-playwright
