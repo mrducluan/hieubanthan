@@ -726,12 +726,12 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 
 ## WP. Nhắc việc qua thông báo điện thoại — Web Push GĐ1 (2026-10-21, `docs/NHAC-VIEC-VA-WEB-PUSH.md` mục 2b)
 
-- [ ] **WP1. Chạy migration** trên Supabase → SQL Editor, theo thứ tự: `0018_ho_so_nha_nhac_viec.sql` (nếu chưa) rồi
+- [x] **WP1. Chạy migration** trên Supabase → SQL Editor, theo thứ tự: `0018_ho_so_nha_nhac_viec.sql` (nếu chưa) rồi
   `0019_push_dang_ky.sql`. Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0018, 0019 = true). Rollback: `.down.sql` cùng tên.
-- [ ] **WP2. Tạo khoá VAPID (một lần)**: máy có Node → trong thư mục `web` chạy `node scripts/tao-khoa-vapid.mjs` → in ra 3 dòng
+- [x] **WP2. Tạo khoá VAPID (một lần)**: máy có Node → trong thư mục `web` chạy `node scripts/tao-khoa-vapid.mjs` → in ra 3 dòng
   `VAPID_PUBLIC_KEY=…`, `VAPID_PRIVATE_KEY=…`, `VAPID_SUBJECT=mailto:contact@hieuban.com`. **Không dán khoá vào chat/git.**
   (Không có Node: nhờ em chạy rồi anh tự đổi lại sau cũng được, nhưng tốt nhất anh tự chạy để khoá riêng chỉ anh có.)
-- [ ] **WP3. Đặt env trên Vercel** (project web → Settings → Environment Variables → Production + Preview): 3 biến trên. Kiểm
+- [x] **WP3. Đặt env trên Vercel** (project web → Settings → Environment Variables → Production + Preview): 3 biến trên. Kiểm
   `CRON_SECRET` đã có (≥ 16 ký tự, cùng biến cron dọn dữ liệu) và `SUPABASE_SERVICE_ROLE_KEY`. → **Redeploy**. Đổi khoá VAPID về
   sau = mọi thiết bị đã bật phải bật lại.
 - [ ] **WP4. Thử trên Android/máy tính**: đăng nhập → `/kinh-dich` gieo một quẻ → ở "Mốc đáng để ý" bấm **Nhắc tôi hôm đó** →
@@ -768,9 +768,9 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 
 ## WP-GĐ2. Sáng nay của bạn · mốc lịch · hỏi lại hôm qua · mời cài app (2026-10-22)
 
-- [ ] **WP7. Chạy migration `0020_push_tuy_chon.sql`** (sau 0018, 0019; rollback `.down.sql`). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`
+- [x] **WP7. Chạy migration `0020_push_tuy_chon.sql`** (sau 0018, 0019; rollback `.down.sql`). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`
   (dòng 0020 = true). Chưa chạy thì nhắc mốc tự đánh dấu vẫn gửi, chỉ phần tuỳ chọn (sáng nay, mốc lịch) ẩn đi.
-- [ ] **WP8. Deploy engine Render** (route mới `/v1/push/sang-nay`) **trước** khi merge web — web gọi engine trong cron sáng.
+- [x] **WP8. Deploy engine Render** (route mới `/v1/push/sang-nay`) **trước** khi merge web — web gọi engine trong cron sáng.
 - [ ] **WP9. Thử**: điện thoại Android đã bật nhắc → Tài khoản → tích "Sáng nay của bạn" (cần đã lưu hồ sơ vào tài khoản) →
   Vercel → Cron Jobs → `/api/cron/hang-ngay` → Run → nhận một thông báo "Sáng nay của bạn · Ngày cá nhân N". Hôm trước chọn một
   ý định ở "Hôm nay bạn định làm gì?" thì thông báo có thêm hai nút "Đúng với mình / Chưa đúng".
