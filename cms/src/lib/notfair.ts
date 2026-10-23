@@ -50,11 +50,20 @@ const LOAI_ANH: Record<string, string> = { "image/jpeg": "jpg", "image/png": "pn
 const TOI_DA = 5 * 1024 * 1024;
 
 async function taiAnh(src: string): Promise<{ data: Buffer; mimetype: string; name: string; size: number } | null> {
-  if (!anhDuocTai(src)) return null;
-  const r = await fetch(src, { signal: AbortSignal.timeout(20_000), redirect: "follow" }).catch(() => null);
+  // SEC-2: tự đi theo chuyển hướng, mỗi bước kiểm lại miền (redirect "follow" từng cho đi ra địa chỉ tuỳ ý).
+  let url = src, r: Response | null = null;
+  for (let buoc = 0; buoc < 4; buoc++) {
+    if (!anhDuocTai(url)) return null;
+    r = await fetch(url, { signal: AbortSignal.timeout(20_000), redirect: "manual" }).catch(() => null);
+    const toi = r && r.status >= 300 && r.status < 400 ? r.headers.get("location") : null;
+    if (!toi) break;
+    url = new URL(toi, url).toString();
+    r = null;
+  }
   if (!r?.ok) return null;
   const mimetype = (r.headers.get("content-type") ?? "").split(";")[0]!.trim().toLowerCase();
   if (!LOAI_ANH[mimetype]) return null;
+  if (Number(r.headers.get("content-length") ?? 0) > TOI_DA) return null;   // không đọc thân quá lớn vào bộ nhớ
   const buf = Buffer.from(await r.arrayBuffer());
   if (!buf.length || buf.length > TOI_DA) return null;
   const goc = new URL(src).pathname.split("/").filter(Boolean).pop()?.replace(/\.[a-z0-9]+$/i, "") || "anh";

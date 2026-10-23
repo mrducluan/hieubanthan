@@ -21,6 +21,7 @@ import os
 import httpx
 
 from app.narrative import ngan_sach as _ngan_sach
+from app.narrative.ngan_sach import mo_ta_loi
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 DEFAULT_MODEL = "anthropic/claude-3.5-sonnet"
@@ -104,10 +105,10 @@ def tra_loi_cau_hoi(reading: dict, cau_hoi: str) -> dict:
                        json={"model": model, "messages": messages, "temperature": 0.6})
             r.raise_for_status()
             ans = r.json()["choices"][0]["message"]["content"]
-        return {"da_bat_llm": True, "model": model, "cau_tra_loi": ans}
+        return {"da_bat_llm": True, "cau_tra_loi": ans}
     except Exception as e:
         return {"da_bat_llm": True, "cau_tra_loi": None,
-                "loi": "Xin lỗi, chưa trả lời được lúc này. " + str(e)[:120]}
+                "loi": "Xin lỗi, chưa trả lời được lúc này."}
 
 
 def dien_dat(reading: dict) -> dict:
@@ -129,9 +130,9 @@ def dien_dat(reading: dict) -> dict:
             )
             r.raise_for_status()
             van = r.json()["choices"][0]["message"]["content"]
-        return {"che_do": "llm", "model": model,
+        return {"che_do": "llm",
                 "luan_giai": reading, "van_xuoi": van}
     except Exception as e:
         # Lỗi LLM không được làm sập bản luận — rơi về template.
-        return {"che_do": "template_fallback", "loi": str(e)[:200],
+        return {"che_do": "template_fallback", "loi": mo_ta_loi(e, 200),
                 "luan_giai": reading, "van_xuoi": None}

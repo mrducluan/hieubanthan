@@ -24,6 +24,7 @@ from app.luangiai import hoi, noi_dau
 from app.luangiai import thanso_chaldean as _chaldea
 from app.luangiai import tong_hop as _tong_hop
 from app.narrative import llm as _llm
+from app.narrative.ngan_sach import mo_ta_loi
 from app.narrative import ngan_sach as _ngan_sach
 
 KET = ("Đây là góc nhìn tham khảo văn hoá để bạn tự soi, không phải lời tiên đoán "
@@ -260,7 +261,7 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
             loi = kiem_tra_dau_ra(van_llm, goi)
             che_do, van = ("llm", van_llm) if not loi else ("template_fallback", template)
         except Exception as e:  # noqa: BLE001 — LLM lỗi không được làm sập Q&A
-            che_do, loi = "template_fallback", [f"llm lỗi: {str(e)[:120]}"]
+            che_do, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
     dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
     return {
         "phai": phai,

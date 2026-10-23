@@ -27,7 +27,10 @@ export const vaiTro = (req: PayloadRequest): VaiTro | null => {
   if (!u || u.collection !== "bien-tap-vien") return null;
   const cookie = req.headers?.get?.("cookie") ?? null;
   const tuScript = req.payloadAPI === "local" && !cookie && !req.headers?.get?.("authorization");
-  if (!tuScript && u._strategy !== "api-key" && canMfa(u) && !cookieHopLe(docCookie(cookie), u.id ?? "")) return null;
+  // SEC-2: khoá API chỉ miễn MFA cho Máy đọc. Trước đây mọi khoá API đều miễn → ai có mật khẩu Quản trị tự tạo khoá
+  // API cho tài khoản mình rồi dùng khoá đó có đủ quyền Quản trị mà không cần mã 2 bước.
+  const mienMfa = u._strategy === "api-key" && u.vai_tro === "may_doc";
+  if (!tuScript && !mienMfa && canMfa(u) && !cookieHopLe(docCookie(cookie), u.id ?? "")) return null;
   return u.vai_tro ?? null;
 };
 const la = (...ds: VaiTro[]) => (req: PayloadRequest) => {

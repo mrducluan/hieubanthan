@@ -82,6 +82,24 @@
      báo em dịch vụ + đặt khoá vào env thì em làm; hiện mọi trang đã có ảnh tóm tắt vẽ bằng code (có QR).
    - **Quyết định còn chờ** (audit SEO-M): mở bot `Google-Extended` (Gemini app trích được site, đổi lại cho phép dùng
      huấn luyện — lệch BM-2) hay giữ chặn.
+4l. [ ] **Bảo mật SEC-2 (2026-10-23, `docs/BAO-MAT.md` mục SEC-2) — làm theo thứ tự:**
+   1. **TRƯỚC khi merge (1 phút):** Render → dịch vụ engine → Environment → phải có `ENGINE_API_KEY` (cùng chuỗi với
+      Vercel). Từ SEC-2 engine **không khởi động** nếu thiếu khoá trên Render (deploy báo hỏng, bản cũ vẫn chạy) — mở
+      `/health` thấy `"khoa_engine": true` là được.
+   2. **Sau khi merge:** Supabase → SQL Editor → chạy `supabase/migrations/0023_sec2_rls_quyen.sql` (bật RLS 7 bảng KB cũ,
+      siết quyền). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` → dòng 0023 = true. Rồi mở **Security Advisor**
+      (biểu tượng khiên) → tab Errors phải trống "RLS Disabled in Public".
+   3. **CMS (5 phút):** Ban biên tập → mở từng tài khoản **không phải Máy đọc** → nếu "Enable API Key" đang bật thì tắt.
+      Mọi tài khoản Quản trị / Chủ biên **tự bật xác thực 2 bước**, xong mới đặt `CMS_BAT_BUOC_MFA=1` ở dự án CMS.
+   4. **Supabase Auth (khi bật tài khoản):** Authentication → Rate Limits (giới hạn gửi SMS/email OTP), bật CAPTCHA
+      (Turnstile/hCaptcha) cho đăng nhập SMS — chống bị gửi SMS rác tốn tiền; bật "Leaked password protection".
+   5. **GitHub (5 phút):** Settings → Code security → bật **Dependabot alerts**, **Dependabot security updates**,
+      **Secret scanning** + **Push protection**; Settings → Rules → bảo vệ nhánh `main` (cấm force-push, bắt CI xanh).
+   6. **GA4 / GTM (tuỳ chọn):** trong thẻ GA4 của GTM đặt `page_location` bỏ đoạn mã thẻ `/the/...` và `?the=` (PostHog
+      em đã lọc trong code; GA4 cấu hình ở GTM).
+   7. **Vercel (tuỳ chọn, thay cho Cloudflare ở GĐ1):** Settings → Billing → **Spend Management** đặt trần chi tiêu;
+      Firewall → bật Attack Challenge Mode khi thấy lưu lượng lạ. Cloudflare trước Vercel chưa cần (Vercel khuyến
+      nghị không đặt proxy khác phía trước).
 4i. [ ] **sameAs cho Google nhận ra thương hiệu + anh (5 phút, Vercel → web → Environment Variables):** kênh của site
    `MXH_FACEBOOK`, `MXH_YOUTUBE`, `MXH_TIKTOK`, `MXH_ZALO`, `MXH_INSTAGRAM`, `MXH_LINKEDIN`, `MXH_X`, `MXH_THREADS` (link https);
    hồ sơ cá nhân của anh `CHUYEN_GIA_SAME_AS_DUC_LUAN` = các link https cách nhau dấu phẩy (Facebook cá nhân, YouTube,

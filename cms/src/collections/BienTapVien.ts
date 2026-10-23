@@ -1,6 +1,6 @@
 // Tài khoản ban biên tập (đăng nhập /admin). Tách hẳn khỏi tài khoản người dùng web (Supabase).
 import { APIError, type CollectionConfig } from "payload";
-import { VAI_TRO, canMfa, chiQuanTri, daDangNhap, laQuanTri } from "../access";
+import { VAI_TRO, canMfa, chiQuanTri, daDangNhap, laQuanTri, vaiTro } from "../access";
 import { THOI_HAN_GIAY, TEN_COOKIE, cookieHopLe, docCookie, giaiMa, kiemMa, maHoa, taoBiMat, taoCookie, uriOtp, base32 } from "../lib/totp";
 
 type NguoiMfa = { id: number | string; email?: string; vai_tro?: string; mfa_bat?: boolean | null; collection?: string };
@@ -30,7 +30,9 @@ export const BienTapVien: CollectionConfig = {
     // email (env CMS_EMAIL_QUAN_TRI) + vai trò quản trị cho lần đó.
     create: chiQuanTri,
     read: ({ req }) => (laQuanTri(req) ? true : req.user ? { id: { equals: req.user.id } } : false),
-    update: ({ req }) => (laQuanTri(req) ? true : req.user ? { id: { equals: req.user.id } } : false),
+    // SEC-2: tự sửa tài khoản mình (mật khẩu, email, khoá API) cần vai trò CÓ HIỆU LỰC — phiên mới có mật khẩu, chưa qua
+    // mã 2 bước thì không đổi được gì (không khoá được chủ thật ra ngoài).
+    update: ({ req }) => (laQuanTri(req) ? true : vaiTro(req) ? { id: { equals: req.user!.id } } : false),
     delete: chiQuanTri,
     admin: ({ req }) => daDangNhap(req) && (req.user as { vai_tro?: string }).vai_tro !== "may_doc",
     unlock: chiQuanTri,
@@ -103,6 +105,13 @@ export const BienTapVien: CollectionConfig = {
     },
   ],
   hooks: {
+    // SEC-2: khoá API không bao giờ trả ra cho ai ngoài Quản trị (kể cả chính chủ tài khoản).
+    afterRead: [
+      ({ doc, req }) => {
+        if (!laQuanTri(req) && doc && typeof doc === "object") delete (doc as { apiKey?: unknown }).apiKey;
+        return doc;
+      },
+    ],
     beforeOperation: [
       ({ args, operation }) => {
         const mk = (args as { data?: { password?: unknown } }).data?.password;
@@ -114,6 +123,16 @@ export const BienTapVien: CollectionConfig = {
       },
     ],
     beforeChange: [
+      ({ data, originalDoc, req }) => {
+        // SEC-2: bật / đổi khoá API chỉ Quản trị (đã qua MFA) hoặc script máy chủ — khoá API là lối đăng nhập thứ hai.
+        if (req.payloadAPI === "local" && !req.headers?.get?.("cookie") && !req.headers?.get?.("authorization")) return data;
+        const d = data as { enableAPIKey?: unknown; apiKey?: unknown };
+        const cu = (originalDoc ?? {}) as { enableAPIKey?: unknown; apiKey?: unknown };
+        const doi = ("enableAPIKey" in d && Boolean(d.enableAPIKey) !== Boolean(cu.enableAPIKey))
+          || ("apiKey" in d && (d.apiKey ?? null) !== (cu.apiKey ?? null));
+        if (doi && !laQuanTri(req)) throw new APIError("Chỉ Quản trị (đã xác thực 2 bước) được bật hoặc đổi khoá API.", 403, null, true);
+        return data;
+      },
       async ({ data, operation, req }) => {
         // Script máy chủ (Local API) là tin cậy; chặn chỉ áp cho yêu cầu qua mạng khi CHƯA đăng nhập
         // (= màn "tạo tài khoản đầu tiên") — chỉ được là tài khoản đầu tiên.

@@ -311,14 +311,14 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
               ],
             },
             {
-              name: "canonical", label: "URL chuẩn (canonical) khác", type: "text", access: { update: truongBienTap },
+              name: "canonical", label: "URL chuẩn (canonical) khác", type: "text", access: { create: truongBienTap, update: truongBienTap },
               admin: { description: "Để trống = chính bài này. Chỉ điền khi bài đăng lại từ trang khác của hieuban.com." },
               validate: (v: unknown) => !v || (typeof v === "string" && /^(\/|https:\/\/(www\.)?hieuban\.com\/)/.test(v))
                 || "Chỉ nhận đường dẫn trong hieuban.com",
             },
-            { name: "noindex", label: "Không cho Google lập chỉ mục (noindex)", type: "checkbox", defaultValue: false, access: { update: truongBienTap } },
+            { name: "noindex", label: "Không cho Google lập chỉ mục (noindex)", type: "checkbox", defaultValue: false, access: { create: truongBienTap, update: truongBienTap } },
             {
-              name: "dua_vao_llms", label: "Đưa vào llms.txt (gợi ý cho trợ lý AI)", type: "checkbox", defaultValue: true, access: { update: truongBienTap },
+              name: "dua_vao_llms", label: "Đưa vào llms.txt (gợi ý cho trợ lý AI)", type: "checkbox", defaultValue: true, access: { create: truongBienTap, update: truongBienTap },
             },
           ],
         },
@@ -395,7 +395,7 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
       admin: { position: "sidebar", condition: (_, s) => s?.ky_ten === "tham_dinh" },
     },
     {
-      name: "publishedAt", label: "Ngày xuất bản", type: "date", access: { update: truongBienTap },
+      name: "publishedAt", label: "Ngày xuất bản", type: "date", access: { create: truongBienTap, update: truongBienTap },
       admin: { position: "sidebar", date: { pickerAppearance: "dayAndTime", displayFormat: "dd/MM/yyyy HH:mm" } },
     },
     {

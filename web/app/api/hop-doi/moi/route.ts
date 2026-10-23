@@ -2,7 +2,7 @@
 // số người được mời lấy từ bài đọc của chính họ. Engine so cặp từ số (/v1/thanso/cap-so).
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
-import { loiEngine } from "@/lib/proxy";
+import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
 import { z } from "zod";
 import { docMa } from "@/lib/ma-moi";
 
@@ -26,7 +26,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   try {
     const r = await fetch(`${ENGINE_URL}/v1/thanso/cap-so`, {
       method: "POST",
-      headers: { "content-type": "application/json", ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}) },
+      headers: { "content-type": "application/json", ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...dauNguoiGoi(req) },
       body: JSON.stringify({ a, b: p.data.b }),
       cache: "no-store",
     });

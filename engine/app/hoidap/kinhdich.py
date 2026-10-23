@@ -21,6 +21,7 @@ from app.hoidap import chung
 from app.kb import kinhdich_kb as kb
 from app.luangiai import kinhdich_doi_song as kd_ds
 from app.narrative import hoi_van
+from app.narrative.ngan_sach import mo_ta_loi
 
 MAI_HOA_CACH = ("mai_hoa", "mai_hoa_so", "mai_hoa_phuong")
 _VN = dt.timezone(dt.timedelta(hours=7))
@@ -459,7 +460,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
             loi = hoi_van.kiem_tra_dau_ra(v, goi)
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
-            che_do_van, loi = "template_fallback", [f"llm lỗi: {str(e)[:120]}"]
+            che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
     co = []
     if pl["truong_phai"] == "luc_hao":
         co.append({"loai": "vuong_suy_rut_gon", "chi_tiet": kb.luu_y("vuong_suy")})

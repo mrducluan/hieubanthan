@@ -40,8 +40,9 @@ export function DangNhap() {
   }
   const sb = async () => (await supabase())!;
   // ?tiep= (vd /quan-tri): chỉ nhận đường dẫn nội bộ — "//evil.com", "/\\evil.com" bị bỏ (callback cũng kiểm lại).
+  // SEC-2: cấm cả khoảng trắng / tab / xuống dòng — trình duyệt bỏ tab nên "/\t/evil.com" thành "//evil.com".
   const tiepXin = params.get("tiep");
-  const tiep = tiepXin && /^\/(?![/\\])/.test(tiepXin) ? tiepXin : "/tai-khoan";
+  const tiep = tiepXin && /^\/(?![/\\])[^\s\\]*$/.test(tiepXin) ? tiepXin : "/tai-khoan";
   const veLai = () => `${window.location.origin}/auth/callback?tiep=${encodeURIComponent(tiep)}`;
 
   async function gui(e: React.FormEvent) {

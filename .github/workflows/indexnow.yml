@@ -8,6 +8,10 @@ on:
   schedule:
     - cron: "13 23 * * *"
   workflow_dispatch: {}
+# SEC-2: quyền tối thiểu cho GITHUB_TOKEN.
+permissions:
+  contents: read
+
 jobs:
   bao:
     runs-on: ubuntu-latest

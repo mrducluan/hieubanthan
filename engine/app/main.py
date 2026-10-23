@@ -52,7 +52,18 @@ giam_sat.khoi_tao()   # Sentry — chỉ bật khi có SENTRY_DSN, không gửi 
 
 # SEC-1: trang tài liệu API (/docs, /redoc, /openapi.json) chỉ mở khi chạy máy — production (Render) tắt, không phô
 # bản đồ endpoint cho người dò.
-_TAI_LIEU = not os.environ.get("RENDER")
+_TAI_LIEU = not os.environ.get("RENDER") and not os.environ.get("ENGINE_API_KEY")
+
+# SEC-2: chạy trên Render mà thiếu khoá = engine mở cho cả internet (middleware bên dưới bỏ qua kiểm khoá) → không
+# khởi động, để Render báo deploy hỏng thay vì âm thầm phục vụ công khai.
+if os.environ.get("RENDER") and not os.environ.get("ENGINE_API_KEY"):
+    raise RuntimeError("Thiếu ENGINE_API_KEY — engine không chạy công khai khi không có khoá (SEC-2).")
+
+# SEC-2: trần kích thước thân yêu cầu (uvicorn đọc hết thân trước khi pydantic kiểm). Ảnh nhà ≤ 4 MB; kiểm định quản
+# trị ≤ 200 mục × 2 × 20 KB; còn lại (phiếu kiểm chứng ≤ 5000 dòng…) dưới 2 MB.
+_TRAN_THAN = {"/v1/phongthuy/doc-anh": 6_000_000, "/v1/quan-tri/kiem-dinh": 9_000_000}
+_TRAN_THAN_MAC_DINH = 2_000_000
+
 app = FastAPI(
     title="HieuBanThan Engine",
     version=ENGINE_VERSION,
@@ -74,6 +85,12 @@ app = FastAPI(
 @app.middleware("http")
 async def require_engine_key(request: Request, call_next):
     expected = os.environ.get("ENGINE_API_KEY")
+    try:
+        dai = int(request.headers.get("content-length") or 0)
+    except ValueError:
+        dai = -1
+    if dai < 0 or dai > _TRAN_THAN.get(request.url.path, _TRAN_THAN_MAC_DINH):
+        return JSONResponse({"detail": "Dữ liệu gửi lên quá lớn"}, status_code=413)
     if expected and request.url.path != "/health":
         # SEC-1: so sánh hằng thời gian (không lộ khoá qua thời gian phản hồi).
         if not hmac.compare_digest(request.headers.get("x-engine-key", "").encode(), expected.encode()):
@@ -111,7 +128,7 @@ app.include_router(goi_y_cheo_router)
 # Sức khoẻ + cấu hình
 # --------------------------------------------------------------------------- #
 @app.get("/health")
-def health() -> dict:
+async def health() -> dict:
     """Báo sống, kèm trạng thái chính sách. `ty_boundary_set=False` nghĩa là
     engine chưa sẵn sàng phục vụ các phép cần can chi (tử vi, bát tự)."""
     return {

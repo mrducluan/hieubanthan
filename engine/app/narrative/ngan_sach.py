@@ -16,6 +16,7 @@ from __future__ import annotations
 import contextvars
 import hashlib
 import os
+import re
 import secrets
 import threading
 import time
@@ -24,6 +25,11 @@ from collections import deque
 GIO, NGAY = 3600.0, 86400.0
 NGUOI_GOI: contextvars.ContextVar[str | None] = contextvars.ContextVar("nguoi_goi", default=None)
 _MUOI = secrets.token_bytes(16)
+
+
+def mo_ta_loi(e: BaseException, toi_da: int = 120) -> str:
+    """SEC-2: lời lỗi LLM để chẩn đoán — bỏ URL (lỗi httpx mang địa chỉ nhà cung cấp AI, trái BM-1)."""
+    return re.sub(r"https?://\S+", "<url>", str(e))[:toi_da]
 
 
 class HetLuot(Exception):

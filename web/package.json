@@ -22,7 +22,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^1.49.0",
     "motion": "^13.4.6",
-    "next": "16.3.8",
+    "next": "16.4.2",
     "notfair-nextjs-blog": "https://github.com/nowork-studio/notfair-nextjs-blog/releases/download/v0.4.1/notfair-nextjs-blog-0.4.1.tgz",
     "posthog-js": "^1.435.1",
     "react": "^19.3.0",

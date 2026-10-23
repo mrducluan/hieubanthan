@@ -11,6 +11,7 @@ import { en } from "@payloadcms/translations/languages/en";
 import { vi } from "@payloadcms/translations/languages/vi";
 import { buildConfig } from "payload";
 import sharp from "sharp";
+import { laChuBien } from "./access";
 import { BaiViet } from "./collections/BaiViet";
 import { BienTapVien } from "./collections/BienTapVien";
 import { ChuyenMuc } from "./collections/ChuyenMuc";
@@ -100,7 +101,7 @@ export default buildConfig({
     tasks: [DongBoSoTrangTask],
     access: {
       run: ({ req }) => {
-        if (req.user) return true;
+        if (laChuBien(req)) return true;   // SEC-2: phiên chưa qua MFA / khoá Máy đọc không chạy được hàng việc
         const bi = process.env.CRON_SECRET;
         return Boolean(bi) && req.headers.get("authorization") === `Bearer ${bi}`;
       },

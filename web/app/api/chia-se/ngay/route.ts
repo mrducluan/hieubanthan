@@ -3,7 +3,7 @@
 // (TS-V3b: + số nổi bật qua hai phái khi có họ tên). Không mang họ tên, ngày sinh.
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { goiEngineDaKiem } from "@/lib/proxy";
+import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { kyMaNgay } from "@/lib/ma-moi";
 
 const Input = z.object({
@@ -24,14 +24,15 @@ export async function POST(req: Request): Promise<NextResponse> {
   const p = Input.safeParse(await req.json().catch(() => null));
   if (!p.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
   const { ten_hien_thi, ...sinh } = p.data;
-  const r = await goiEngineDaKiem(sinh, "/v1/thanso/the-ngay");
+  const r = await goiEngineDaKiem(sinh, "/v1/thanso/the-ngay", dauNguoiGoi(req));
   if (!r.ok) return r.res;
   const d = r.body as TheNgayEngine;
   const k = (d.ngay_ca_nhan.nghia ?? "").replace(/^Ngày cá nhân \d+:\s*/, "").replace(/\.$/, "").slice(0, 90);
   try {
     return NextResponse.json({ ma: kyMaNgay({ t: ten_hien_thi, n: d.ngay_ca_nhan.so, d: d.ngay_xem, ...(k ? { k } : {}),
       ...(d.so_noi_bat ? { s: d.so_noi_bat.goc } : {}) }), ngay: d.ngay_xem });
-  } catch (e) {
-    return NextResponse.json({ error: e instanceof Error ? e.message : "Chưa tạo được thẻ." }, { status: 502 });
+  } catch {
+    // SEC-2: không trả lời lỗi nội bộ (tên biến môi trường, chi tiết kiểm dữ liệu) ra trình duyệt.
+    return NextResponse.json({ error: "Chưa tạo được thẻ." }, { status: 502 });
   }
 }
