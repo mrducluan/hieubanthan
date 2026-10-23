@@ -130,3 +130,36 @@ def test_api_hoi_nhan_thoi_diem_xem_lai():
                                               "thoi_diem": "2026-09-30T10:15:00"})
     assert r.status_code == 200, r.text
     assert r.json()["thoi_diem_gieo"]["chi_gio"] == "Tỵ"
+
+
+def test_thoi_diem_gieo_moi_cach_ra_que():
+    """KD-2a: mọi cách ra quẻ đều trả thời điểm gieo có cấu trúc (web chỉ hiển thị)."""
+    for kw in ({"gia_tri_hao": QUE_LY}, {"cach_ra_que": "mai_hoa"}, {"cach_ra_que": "mai_hoa_so", "so_mai_hoa": [7, 12]},
+               {"cach_ra_que": "mai_hoa_phuong", "phuong_mai_hoa": "Tây Nam"}):
+        out = kd.tra_loi("Việc hợp tác này có thuận không?", "tu_dong", thoi_diem=THOI, **kw)
+        assert out["que"] is not None, kw
+        assert out["thoi_diem_gieo"]["chi_gio"] == "Tỵ", kw
+
+
+# KD-2c (P8): "Quẻ ngày của bạn" — Mai Hoa theo HAI SỐ người dùng tự chọn + giờ lúc khởi; tất định; cùng KB nôm na như quẻ đầu ngày.
+def test_que_rieng_tat_dinh_va_khac_so_khac_que():
+    from app.luangiai import hom_nay
+    a = hom_nay.que_rieng(7, 12, THOI)
+    b = hom_nay.que_rieng(7, 12, THOI)
+    assert a == b
+    assert a["dau_vao"] == {"so": [7, 12], "chi_gio": "Tỵ", "thoi_diem": "2026-09-30T10:15:00"}
+    # Mai Hoa theo số: 7 → Cấn (7), 12 → 12 mod 8 = 4 → Chấn; hào động = (7 + 12 + 6) mod 6 = 1
+    assert (a["thuong"], a["ha"], a["hao_dong"]) == ("Cấn", "Chấn", 1)
+    assert a["so"] == 27 and a["ten"] == "Di"
+    assert set(a) >= {"so", "ten", "bien", "y_chinh", "loi_khuyen", "cau_tu_soi", "duong", "cach_khoi", "gia_tri_hao_1_den_6"}
+    assert len(a["gia_tri_hao_1_den_6"]) == 6
+    assert hom_nay.que_rieng(8, 12, THOI)["so"] != a["so"]
+
+
+def test_api_que_rieng():
+    r = client.post("/v1/kinhdich/que-rieng", json={"so": [7, 12], "thoi_diem": "2026-09-30T10:15:00"})
+    assert r.status_code == 200, r.text
+    assert r.json()["so"] == 27 and r.json()["dau_vao"]["chi_gio"] == "Tỵ"
+    assert client.post("/v1/kinhdich/que-rieng", json={"so": [0, 12]}).status_code == 422
+    assert client.post("/v1/kinhdich/que-rieng", json={"so": [7]}).status_code == 422
+    assert client.post("/v1/kinhdich/que-rieng", json={"so": [7, 12], "cau_hoi": "x"}).status_code == 422

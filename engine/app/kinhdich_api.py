@@ -16,7 +16,7 @@ import datetime as _dt
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator
 
 from app.calc import kinhdich
 from app.kb import tu_dien
@@ -138,6 +138,30 @@ def api_hoi(inp: HoiKDInput, background: BackgroundTasks) -> dict:
         kh.ap_hoc(kq["doc_que"], {k: v.model_dump() for k, v in (inp.trong_so or {}).items()}, inp.ca_nhan)
     background.add_task(nhat_ky.ghi_huyenhoc, "kinhdich", inp.cau_hoi, kq, False)
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "kinhdich")}
+
+
+class QueRiengInput(BaseModel):
+    """KD-2c (P8): hai số người dùng tự chọn (1–9999) + thời điểm khởi (giờ VN; mặc định bây giờ). Không câu hỏi, không hồ sơ."""
+    model_config = ConfigDict(extra="forbid")
+
+    so: list[int] = Field(min_length=2, max_length=2)
+    thoi_diem: _dt.datetime | None = None
+
+    @field_validator("so")
+    @classmethod
+    def _duong(cls, v: list[int]) -> list[int]:
+        if any(x <= 0 or x > 9999 for x in v):
+            raise ValueError("Hai số khởi quẻ cần là số nguyên dương 1–9999.")
+        return v
+
+
+@router.post("/que-rieng")
+def api_que_rieng(inp: QueRiengInput) -> dict:
+    """"Quẻ ngày của bạn" (Hôm nay): Mai Hoa theo hai số tự chọn + giờ lúc khởi; trả cấu trúc quẻ + nghĩa nôm na KB (như quẻ đầu
+    ngày). Tất định, không lưu, không ghi nhật ký."""
+    from app.luangiai import hom_nay  # noqa: PLC0415
+    luc = inp.thoi_diem.replace(tzinfo=None) if inp.thoi_diem else _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).replace(tzinfo=None)
+    return {"engine_version": ENGINE_VERSION, **hom_nay.que_rieng(inp.so[0], inp.so[1], luc)}
 
 
 @router.get("/chu-de")

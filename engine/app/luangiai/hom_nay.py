@@ -120,10 +120,9 @@ def _hoang_lich(ngay_xem: dt.date, ngay: int, thang: int, nam: int, cac_y_dinh: 
     }
 
 
-def _que_ngay(ngay_xem: dt.date) -> dict:
-    """Quẻ Mai Hoa đầu ngày: khởi theo năm–tháng–ngày âm (lịch Việt) và giờ Tý — mọi người cùng một quẻ trong ngày."""
-    ad, am, ay, _ = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)
-    m = mh.khoi_que_thoi_gian(lunar.can_chi_nam(ay)[1], am, ad, "Tý")
+def _goi_que(m: dict, cach_khoi: str) -> dict:
+    """Gói quẻ Mai Hoa (kết quả `kinhdich_maihoa.*`) + nghĩa nôm na từ KB `kinhdich_kb.que` — dùng chung cho quẻ đầu ngày
+    và quẻ ngày riêng; web chỉ hiển thị."""
     q = kinhdich.khoi_que(m["gia_tri_hao"])
     so = q["quai_ban"]["so_king_wen"]
     kv = _kb_que().get(str(so), {})
@@ -132,7 +131,25 @@ def _que_ngay(ngay_xem: dt.date) -> dict:
             "bien": ({"so": bien["so_king_wen"], "ten": bien["ten"]} if bien else None),
             "y_chinh": kv.get("y_chinh"), "loi_khuyen": kv.get("loi_khuyen"), "cau_tu_soi": kv.get("cau_tu_soi"),
             "duong": f"/kinh-dich/que/que-{so}-{trang._slug(kv['ten'])}" if kv.get("ten") else None,
-            "cach_khoi": "Mai Hoa Dịch Số: năm + tháng + ngày âm lịch → quẻ trên; cộng giờ Tý → quẻ dưới và hào động."}
+            "gia_tri_hao_1_den_6": list(m["gia_tri_hao"]), "cach_khoi": cach_khoi}
+
+
+def _que_ngay(ngay_xem: dt.date) -> dict:
+    """Quẻ Mai Hoa đầu ngày: khởi theo năm–tháng–ngày âm (lịch Việt) và giờ Tý — mọi người cùng một quẻ trong ngày."""
+    ad, am, ay, _ = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)
+    m = mh.khoi_que_thoi_gian(lunar.can_chi_nam(ay)[1], am, ad, "Tý")
+    return _goi_que(m, "Mai Hoa Dịch Số: năm + tháng + ngày âm lịch → quẻ trên; cộng giờ Tý → quẻ dưới và hào động.")
+
+
+def que_rieng(so_tren: int, so_duoi: int, thoi_diem: dt.datetime) -> dict:
+    """KD-2c (P8) — "Quẻ ngày của bạn": Mai Hoa theo HAI SỐ người dùng tự chọn (số đầu hiện lên trong đầu, số nhà, số
+    đếm được…) + chi giờ lúc khởi (giờ Việt Nam). Tất định: cùng hai số, cùng giờ → cùng quẻ. Không dùng ngày sinh —
+    không có công thức "số từ hồ sơ" tự chế; Mai Hoa cổ điển: tâm động thì số động."""
+    cg = mh.chi_gio(thoi_diem.hour)
+    m = mh.khoi_que_tu_so(int(so_tren), int(so_duoi), cg)
+    kq = _goi_que(m, f"Mai Hoa theo số: số {so_tren} → quẻ trên, số {so_duoi} → quẻ dưới; cộng số giờ {cg} → hào động.")
+    kq["dau_vao"] = {"so": [int(so_tren), int(so_duoi)], "chi_gio": cg, "thoi_diem": thoi_diem.isoformat(timespec="seconds")}
+    return kq
 
 
 @lru_cache(maxsize=1)

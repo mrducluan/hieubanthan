@@ -11,6 +11,8 @@ const Ghi = z.object({
   loai: z.enum(["doi_song", "hai_nguoi"]), mau: z.string().regex(/^[a-z0-9_.+-]{3,60}$/), phai: z.string().regex(/^[a-z0-9_]{2,32}$/),
   nhan: z.string().max(80), mo_dun: z.string().max(20), ngay: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   da_hoi: z.boolean().optional(),
+  /** KD-2d (P9): "que" = quẻ đã gieo (hỏi "việc đó ra sao?") thay vì hộp đã bấm Đúng. */
+  loai_hoi: z.enum(["hop", "que"]).optional(),
 });
 export type GhiNhan = z.infer<typeof Ghi>;
 
@@ -34,9 +36,10 @@ export function ghiNhanDung(g: Omit<GhiNhan, "ngay" | "da_hoi">): void {
   if (k.success) ghiXuong([...ds, k.data]);
 }
 /** Hộp đến hạn hỏi lại (≥ 30 ngày, chưa hỏi) — cũ nhất trước; null khi chưa có. */
-export function denHanHoi(homNay: string): (GhiNhan & { sau_ngay: number }) | null {
+export function denHanHoi(homNay: string, moDun?: string): (GhiNhan & { sau_ngay: number }) | null {
   const t0 = Date.parse(`${homNay}T00:00:00Z`);
   for (const x of doc()) {
+    if (moDun && x.mo_dun !== moDun) continue;
     const sau = Math.floor((t0 - Date.parse(`${x.ngay}T00:00:00Z`)) / 86_400_000);
     if (!x.da_hoi && sau >= NGAY_HOI && sau <= 400) return { ...x, sau_ngay: sau };
   }
