@@ -209,11 +209,10 @@ def chan_doan() -> dict:
             "so_dinh_cao": len(data["dinh_cao"]),
             "so_thu_thach": len(data["thu_thach"]),
             "so_nam_ca_nhan": len(data["nam_ca_nhan"]),
-            "supabase_host": url.split("//")[-1].split(".")[0][:12] + "…",
         }
     except Exception as e:
         return {
             "da_cau_hinh_supabase": True, "nguon": "file_fallback",
             "canh_bao": "Có env Supabase nhưng đọc THẤT BẠI → đang rơi về file.",
-            "loi": str(e)[:300], "so_nghia": len(_from_files()["so_meanings"]),
+            "loi": type(e).__name__, "so_nghia": len(_from_files()["so_meanings"]),
         }

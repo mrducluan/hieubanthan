@@ -1,10 +1,12 @@
-import { draftMode } from "next/headers";
+import { cookies, draftMode } from "next/headers";
 import { redirect } from "next/navigation";
+import { COOKIE_PHAM_VI } from "@/lib/cms";
 import { duongHopLe } from "@/lib/noi-dung-trang";
 
 // Thoát chế độ nháp → về bài (?slug=) hoặc về trang đang xem (?duong=, ND-6) — chỉ đường dẫn trong site.
 export async function GET(req: Request) {
   (await draftMode()).disable();
+  (await cookies()).delete(COOKIE_PHAM_VI);
   const u = new URL(req.url);
   const slug = u.searchParams.get("slug") ?? "";
   if (/^[a-z0-9-]{1,120}$/.test(slug)) redirect(`/blog/${slug}`);

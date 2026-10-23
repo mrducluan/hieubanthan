@@ -45,6 +45,12 @@ export async function TongQuan({ payload, user }: { payload: Payload; user?: Typ
         Biên tập viên lưu nháp → Chủ biên bấm <b>Xuất bản</b>. Khung <b>Kiểm định</b> bên phải mỗi bài chấm SEO, GEO, E-E-A-T khi gõ.
       </p>
       )}
+      {!(user as { mfa_bat?: boolean | null }).mfa_bat && (user as { vai_tro?: string }).vai_tro !== "may_doc" && (
+        <p className="hbt-tq-phu" data-testid="tq-bat-mfa" role="note">
+          🔒 Tài khoản chưa bật <b>xác thực 2 bước</b> — lộ mật khẩu là người khác vào được phòng biên tập.{" "}
+          <a href="/admin/xac-thuc-2-buoc"><b>Bật ngay (1 phút)</b></a>
+        </p>
+      )}
       <div className="hbt-tq-luoi">
         {o("đã xuất bản", xb.totalDocs, "/admin/collections/bai-viet?where[_status][equals]=published")}
         {o("bản nháp", nhap.totalDocs, "/admin/collections/bai-viet?where[_status][equals]=draft")}

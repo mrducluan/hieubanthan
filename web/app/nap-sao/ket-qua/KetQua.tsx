@@ -20,7 +20,7 @@ export function KetQua() {
   // SAO-2: nạp từ hộp "nạp nhanh" → quay về đúng trang đang xem (chỉ đường dẫn nội bộ).
   const [quayVe, setQuayVe] = useState<string | null>(null);
   useEffect(() => {
-    try { const v = sessionStorage.getItem(QUAY_VE); if (v && /^\/(?![/\\])/.test(v)) setQuayVe(v); } catch { /* bỏ qua */ }
+    try { const v = sessionStorage.getItem(QUAY_VE); if (v && /^\/(?![/\\])[^\s\\]*$/.test(v)) setQuayVe(v); } catch { /* bỏ qua */ }
   }, []);
   useEffect(() => {
     if (don?.trang_thai !== "da_tra" || !quayVe) return;

@@ -26,6 +26,7 @@ from app.luangiai import hoi as _h, tuvi_luu_nguyet as lnl
 from app.luangiai import tuvi_nhip_3_thang as nhip3, tuvi_phi_hoa as phl
 from app.luangiai import tuvi_the_cung as the_cung
 from app.narrative import hoi_van
+from app.narrative.ngan_sach import mo_ta_loi
 
 CHE_DO = ("tham_khao", "chi_tiet")
 THU_TU_CUNG = ["Mệnh", "Huynh Đệ", "Phu Thê", "Tử Nữ", "Tài Bạch", "Tật Ách", "Thiên Di",
@@ -1232,7 +1233,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
             loi = hoi_van.kiem_tra_dau_ra(v, goi)
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
-            che_do_van, loi = "template_fallback", [f"llm lỗi: {str(e)[:120]}"]
+            che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
     co = []
     if ls is not None:
         co.append({"loai": "nam_phai", "chi_tiet": kb.luu_y("iztro")})

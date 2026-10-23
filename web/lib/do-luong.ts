@@ -107,6 +107,29 @@ export function locThuocTinh(p: Record<string, unknown> = {}): Record<string, st
 export const PHIEN_BAN = "gate_v1";
 const KHOA_MOI = "hbt.ma_moi";
 
+/** SEC-2: mã thẻ / lời mời (base64url JSON mang TÊN hiển thị) nằm trong URL (/the/…/<mã>, /hop-doi/<mã>, ?the=, ?ma=)
+ *  → PostHog tự gắn $current_url / $pathname vào mọi sự kiện. Thay mã bằng ":ma" trước khi gửi; đo lường chỉ mang mã. */
+const MA_TRONG_URL = /^[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}$/;
+export function lamSachUrl(u: string): string {
+  if (!/^(https?:\/\/|\/)/.test(u)) return u;   // "$direct", "" … giữ nguyên
+  try {
+    const x = new URL(u, "https://hieuban.com");
+    x.pathname = x.pathname.split("/").map((d) => (MA_TRONG_URL.test(d) ? ":ma" : d)).join("/");
+    for (const k of ["the", "ma"]) if (x.searchParams.has(k)) x.searchParams.set(k, ":ma");
+    x.hash = "";
+    return /^https?:/.test(u) ? x.toString() : x.pathname + x.search;
+  } catch {
+    return "";
+  }
+}
+function lamSachSuKien<T extends { properties?: Record<string, unknown> } | null>(su: T): T {
+  const p = su?.properties;
+  if (p) for (const k of ["$current_url", "$pathname", "$referrer", "$initial_current_url", "$initial_pathname"]) {
+    if (typeof p[k] === "string") p[k] = lamSachUrl(p[k] as string);
+  }
+  return su;
+}
+
 let ph: PostHog | null = null;
 let dangNap: Promise<PostHog | null> | null = null;
 
@@ -125,6 +148,7 @@ function nap(): Promise<PostHog | null> {
       persistence: "localStorage",
       mask_all_text: true,
       mask_all_element_attributes: true,
+      before_send: lamSachSuKien,
     });
     ph = posthog;
     return posthog;

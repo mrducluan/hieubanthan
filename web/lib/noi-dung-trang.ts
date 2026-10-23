@@ -5,8 +5,8 @@
 // Biến mẫu cụm {tieu_de}…: web thay bằng giá trị engine trả cho đúng trang, biến lạ giữ nguyên chữ. KHÔNG thoát HTML ở đây:
 // mọi khối CMS hiện dạng văn bản thuần (React tự thoát ký tự) — thoát hai lần sẽ lộ "&amp;" trên trang (ND-5).
 import type { Metadata } from "next";
-import { draftMode } from "next/headers";
-import { anhCms, dangHien, duongLienKet, goiCms, chuoiTruyVan, type AnhCms, type LienKetCms } from "@/lib/cms";
+import { cookies, draftMode } from "next/headers";
+import { anhCms, COOKIE_PHAM_VI, dangHien, docPhamVi, duongLienKet, goiCms, chuoiTruyVan, type AnhCms, type LienKetCms } from "@/lib/cms";
 import { catMoTa, metaTrang, tieuDeSeo } from "@/lib/seo";
 import { khopMauCum, mucSoTrang, type MacDinhTrang, type NhomTrang } from "@/lib/so-trang";
 
@@ -134,7 +134,18 @@ const HAN = 1_500;   // chạy trên mọi trang → ngắn hơn hạn đọc b�
 /** ND-6: trình duyệt đang ở chế độ xem nháp (bật qua /api/cms/xem-truoc)? Ngoài một lượt yêu cầu (vd test gọi hàm thuần)
  *  → false. Chế độ nháp: đọc bản NHÁP mới nhất bằng khoá Máy đọc, không cache. */
 export async function dangXemNhap(): Promise<boolean> {
-  try { return (await draftMode()).isEnabled; } catch { return false; }
+  return (await phamViNhap()) !== null;
+}
+/** SEC-2: phạm vi được xem nháp ("bai:<slug>" | "trang:<đường dẫn>"), null nếu không ở chế độ nháp hợp lệ. */
+export async function phamViNhap(): Promise<string | null> {
+  try {
+    if (!(await draftMode()).isEnabled) return null;
+    return docPhamVi((await cookies()).get(COOKIE_PHAM_VI)?.value);
+  } catch { return null; }
+}
+/** Đọc nháp cho đúng mục này? (bài: "bai:<slug>", trang: "trang:<đường dẫn>"). */
+export async function duocXemNhap(muc: string): Promise<boolean> {
+  return (await phamViNhap()) === muc;
 }
 /** Điều kiện + tham số truy vấn theo chế độ: người đọc → chỉ bản đã xuất bản; xem nháp → bản mới nhất (draft=true). */
 const theoCheDo = (nhap: boolean, where: Record<string, unknown>) =>
@@ -146,7 +157,7 @@ export async function layNoiDungTrang(duong: string, bien: Record<string, string
   const muc = mucSoTrang(duong), cum = muc ? null : khopMauCum(duong);
   const macDinh = { ...(muc?.mac_dinh ?? {}), nhom: muc?.nhom ?? cum?.mau.nhom ?? null, ten: muc?.ten ?? null };
   if (!duongHopLe(duong)) return gopNoiDung(duong, macDinh, null, null);
-  const nhap = await dangXemNhap();
+  const nhap = await duocXemNhap(`trang:${duong}`);
   const [r, m] = await Promise.all([
     goiCms<{ docs?: TrangCms[] }>(`/api/noi-dung-trang?${tv({ ...theoCheDo(nhap, { duong: { equals: duong } }), limit: 1, depth: 1 })}`,
       { hanMs: HAN, the: [theTrang(duong)], nhap }),
@@ -161,7 +172,7 @@ export async function layNoiDungTrang(duong: string, bien: Record<string, string
 export async function layDauNhieuTrang(duongs: string[]): Promise<Record<string, { ten: string | null; moTa: string | null }>> {
   const ds = [...new Set(duongs.filter((d) => duongHopLe(d)))];
   if (!ds.length) return {};
-  const nhap = await dangXemNhap();
+  const nhap = false;   // SEC-2: thẻ trỏ sang trang khác luôn đọc bản đã xuất bản (nháp chỉ mở cho đúng trang được ký)
   const r = await goiCms<{ docs?: TrangCms[] }>(`/api/noi-dung-trang?${tv({ ...theoCheDo(nhap, { duong: { in: ds.join(",") } }),
     limit: ds.length, depth: 0, select: { duong: true, h1: true, loi_dan: true } })}`, { hanMs: HAN, nhap });
   return Object.fromEntries((r?.docs ?? []).flatMap((d) => (d.duong ? [[d.duong, { ten: chu(d.h1), moTa: chu(d.loi_dan) }]] : [])));

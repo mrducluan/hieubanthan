@@ -2,7 +2,7 @@
 // Proxy mỏng: zod hai chiều, KHÔNG tự tính gì.
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
-import { loiEngine } from "@/lib/proxy";
+import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
 import { DinhGioInput, DinhGioOutput } from "../schema";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
@@ -24,6 +24,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       headers: {
         "content-type": "application/json",
         ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
+        ...dauNguoiGoi(req),
       },
       body: JSON.stringify(parsed.data),
       cache: "no-store",

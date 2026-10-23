@@ -55,10 +55,15 @@ export function kiemMa(biMat: Buffer, ma: string, sauBuoc = -1, ms = Date.now())
 
 export const taoBiMat = () => randomBytes(20);
 export const uriOtp = (biMat: Buffer, email: string) =>
-  `otpauth://totp/${encodeURIComponent(`Hiểu Bản Thân CMS:${email}`)}?secret=${base32(biMat)}&issuer=${encodeURIComponent("Hiểu Bản Thân CMS")}&digits=6&period=${BUOC}`;
+  // Nhãn không dấu cho link ngắn → vừa mã QR (quét bằng app xác thực).
+  `otpauth://totp/${encodeURIComponent(`HieuBanThan CMS:${email}`)}?secret=${base32(biMat)}&issuer=${encodeURIComponent("HieuBanThan CMS")}&digits=6&period=${BUOC}`;
 
 // ---------------------------------------------------------------- mã hoá bí mật + cookie
-const khoa = (muc: string) => createHash("sha256").update(`${process.env.PAYLOAD_SECRET ?? ""}|${muc}`).digest();
+const khoa = (muc: string) => {
+  const bi = process.env.PAYLOAD_SECRET;
+  if (!bi || bi.length < 16) throw new Error("PAYLOAD_SECRET chưa đặt (≥ 16 ký tự)");   // SEC-2: không suy khoá từ chuỗi rỗng
+  return createHash("sha256").update(`${bi}|${muc}`).digest();
+};
 
 export function maHoa(biMat: Buffer): string {
   const iv = randomBytes(12);
@@ -81,26 +86,29 @@ export function giaiMa(s: string): Buffer | null {
 export const TEN_COOKIE = "cms-mfa";
 export const THOI_HAN_GIAY = 8 * 60 * 60;   // bằng tokenExpiration của phiên CMS
 
-const ky = (uid: string, het: number) => createHmac("sha256", khoa("mfa-cookie")).update(`${uid}|${het}`).digest("base64url");
+// SEC-2: chữ ký gắn cả mã PHIÊN đăng nhập (sid của Payload) → đăng xuất / đăng nhập lại / phiên khác thì cookie cũ vô hiệu,
+// kẻ có mật khẩu + lấy được cookie cms-mfa cũ cũng không ghép vào phiên mới được.
+const ky = (uid: string, het: number, sid: string) =>
+  createHmac("sha256", khoa("mfa-cookie")).update(`${uid}|${het}|${sid}`).digest("base64url");
 
-export function taoCookie(uid: string | number, ms = Date.now()): string {
+export function taoCookie(uid: string | number, sid: string | null | undefined, ms = Date.now()): string {
   const het = Math.floor(ms / 1000) + THOI_HAN_GIAY;
-  return `${uid}.${het}.${ky(String(uid), het)}`;
+  return `${uid}.${het}.${ky(String(uid), het, sid ?? "")}`;
 }
 
-export function cookieHopLe(v: string | undefined | null, uid: string | number, ms = Date.now()): boolean {
+export function cookieHopLe(v: string | undefined | null, uid: string | number, sid: string | null | undefined, ms = Date.now()): boolean {
   if (!v) return false;
   const [u, h, sig] = v.split(".");
   const het = Number(h);
   if (u !== String(uid) || !Number.isFinite(het) || het < ms / 1000 || !sig) return false;
-  const dung = Buffer.from(ky(u, het)), vao = Buffer.from(sig);
+  const dung = Buffer.from(ky(u, het, sid ?? "")), vao = Buffer.from(sig);
   return dung.length === vao.length && timingSafeEqual(dung, vao);
 }
 
 export function docCookie(header: string | null | undefined, ten = TEN_COOKIE): string | null {
   for (const p of (header ?? "").split(";")) {
     const [k, ...v] = p.trim().split("=");
-    if (k === ten) return decodeURIComponent(v.join("="));
+    if (k === ten) { try { return decodeURIComponent(v.join("=")); } catch { return null; } }   // SEC-2: % hỏng không làm 500
   }
   return null;
 }

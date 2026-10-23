@@ -1,7 +1,7 @@
 // POST /api/chia-se/tao — tạo mã chia sẻ/lời mời có KÝ. Server tự gọi engine tính số (client không
 // tự khai số được); link chỉ mang tên hiển thị + các con số, không mang ngày sinh (lib/ma-moi.ts).
 import { NextResponse } from "next/server";
-import { loiEngine } from "@/lib/proxy";
+import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
 import { z } from "zod";
 import { kyMa } from "@/lib/ma-moi";
 import type { LuanGiaiResult } from "@/lib/engine";
@@ -24,7 +24,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   const { ten_hien_thi, ...nguoi } = p.data;
   const goi = (duong: string, than: unknown) => fetch(`${ENGINE_URL}${duong}`, {
     method: "POST",
-    headers: { "content-type": "application/json", ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}) },
+    headers: { "content-type": "application/json", ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...dauNguoiGoi(req) },
     body: JSON.stringify(than),
     cache: "no-store",
   });

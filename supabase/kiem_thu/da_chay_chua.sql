@@ -29,6 +29,8 @@ select * from (values
   ('0020 Web Push (sáng nay, mốc lịch)', to_regclass('public.push_tuy_chon') is not null),
   ('0021 kiểm chứng 2 người',      exists (select 1 from pg_constraint where conname = 'kiem_chung_phieu_loai_check'
                                              and pg_get_constraintdef(oid) like '%hai_nguoi%')),
-  ('0022 phiếu sau 30 ngày + đề xuất luật', to_regclass('public.de_xuat_luat') is not null)
+  ('0022 phiếu sau 30 ngày + đề xuất luật', to_regclass('public.de_xuat_luat') is not null),
+  ('0023 SEC-2 RLS bảng KB + siết quyền', exists (select 1 from pg_constraint where conname = 'ky_uc_chi_ma')),
+  ('0024 SEC-2 hoàn Sao + mốc ghi chú', to_regprocedure('public.hoan_sao_hoi(uuid,text)') is not null)
 ) as t(migration, da_chay)
 order by 1;

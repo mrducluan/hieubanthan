@@ -30,9 +30,10 @@ test("mã hoá bí mật + cookie ký", () => {
   process.env.PAYLOAD_SECRET = "bi-mat-thu-0123456789abcdef";
   assert.deepEqual(giaiMa(maHoa(BI)), BI);
   assert.equal(giaiMa("hong.hong.hong"), null);
-  const c = taoCookie(7, 1_000_000);
-  assert.ok(cookieHopLe(c, 7, 1_000_000));
-  assert.ok(!cookieHopLe(c, 8, 1_000_000));                       // không dùng được cho người khác
-  assert.ok(!cookieHopLe(c, 7, 1_000_000 + 9 * 3600 * 1000));      // hết hạn sau 8 giờ
-  assert.ok(!cookieHopLe(c.replace(/.$/, "x"), 7, 1_000_000));
+  const c = taoCookie(7, "phien-a", 1_000_000);
+  assert.ok(cookieHopLe(c, 7, "phien-a", 1_000_000));
+  assert.ok(!cookieHopLe(c, 8, "phien-a", 1_000_000));                       // không dùng được cho người khác
+  assert.ok(!cookieHopLe(c, 7, "phien-b", 1_000_000));                       // SEC-2: phiên đăng nhập khác → vô hiệu
+  assert.ok(!cookieHopLe(c, 7, "phien-a", 1_000_000 + 9 * 3600 * 1000));      // hết hạn sau 8 giờ
+  assert.ok(!cookieHopLe(c.replace(/.$/, "x"), 7, "phien-a", 1_000_000));
 });

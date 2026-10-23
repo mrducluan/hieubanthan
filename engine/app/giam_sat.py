@@ -24,6 +24,11 @@ def loc_su_kien(su_kien: dict, _goi_y: dict) -> dict:
             r["headers"] = {k: v for k, v in r["headers"].items() if k.lower() in _HEADER_GIU}
     for k in ("user", "extra"):
         su_kien.pop(k, None)
+    # SEC-2: biến cục bộ trong khung lỗi chứa tên, ngày giờ sinh, câu hỏi → bỏ (dự phòng cho include_local_variables).
+    for ex in (su_kien.get("exception") or {}).get("values") or []:
+        for f in ((ex or {}).get("stacktrace") or {}).get("frames") or []:
+            if isinstance(f, dict):
+                f.pop("vars", None)
     return su_kien
 
 
@@ -34,6 +39,7 @@ def cau_hinh(dsn: str) -> dict:
         "environment": os.environ.get("SENTRY_ENVIRONMENT", "production"),
         "send_default_pii": False,
         "max_request_body_size": "never",
+        "include_local_variables": False,   # SEC-2: không gửi biến cục bộ (dữ liệu người dùng) kèm stack trace
         "traces_sample_rate": 0.0,
         "before_send": loc_su_kien,
     }

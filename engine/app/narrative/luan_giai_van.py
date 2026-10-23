@@ -20,6 +20,7 @@ import httpx
 
 from app.kb import tuvi_kb
 from app.narrative import hoi_van
+from app.narrative.ngan_sach import mo_ta_loi
 from app.narrative import llm as _llm
 from app.narrative import ngan_sach as _ngan_sach
 
@@ -58,7 +59,7 @@ def _cum_cam() -> list[str]:
 
 def kiem_tra_chuong(van: str, nguon: str) -> list[str]:
     """Danh sách vi phạm của bản LLM so với văn bản nguồn của chương."""
-    loi: list[str] = []
+    loi: list[str] = hoi_van.lien_ket_la(van, nguon)   # SEC-2
     so_nguon = set(re.findall(r"\d+", nguon))
     for n in re.findall(r"\d+", van):
         if n not in so_nguon:
@@ -105,7 +106,7 @@ def _mot_chuong(c: dict, mo_dun: str) -> dict:
         van = _goi_llm(c["tieu_de"], c["doan"], mo_dun)
         loi = kiem_tra_chuong(van, "\n".join([c["tieu_de"], *c["doan"]]))
     except Exception as e:  # noqa: BLE001 — LLM lỗi không được làm sập báo cáo
-        return {**c, "che_do": "template_fallback", "loi_kiem_tra": [f"llm lỗi: {str(e)[:120]}"]}
+        return {**c, "che_do": "template_fallback", "loi_kiem_tra": [f"llm lỗi: {mo_ta_loi(e)}"]}
     if loi:
         return {**c, "che_do": "template_fallback", "loi_kiem_tra": loi}
     return {**c, "che_do": "llm", "van_ai": van}

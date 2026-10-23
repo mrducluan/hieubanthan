@@ -24,6 +24,7 @@ from app.luangiai import hoi, noi_dau
 from app.luangiai import thanso_chaldean as _chaldea
 from app.luangiai import tong_hop as _tong_hop
 from app.narrative import llm as _llm
+from app.narrative.ngan_sach import mo_ta_loi
 from app.narrative import ngan_sach as _ngan_sach
 
 KET = ("Đây là góc nhìn tham khảo văn hoá để bạn tự soi, không phải lời tiên đoán "
@@ -144,8 +145,20 @@ def van_template(goi: dict) -> str:
 # --------------------------------------------------------------------------- #
 # Kiểm tra đầu ra (dùng cho cả template và LLM)
 # --------------------------------------------------------------------------- #
+# SEC-2: chống prompt injection kiểu "viết tên miền / số liên lạc ra" — đầu ra không được mang link, tên miền (kể cả
+# đánh vần "chấm com"), tài khoản mạng xã hội, số điện thoại nếu nguồn không có.
+_LIEN_KET_RA = re.compile(
+    r"https?://|www\.|\b[a-z0-9-]+\s*(?:\.|chấm|dot)\s*(?:com|vn|net|org|io|me|co|ly)\b|\bzalo\b|\btelegram\b"
+    r"|(?<![\w@])@[a-z0-9_.]{3,}|\b0\d{2}[\d .]{6,}\d\b", re.I)
+
+
+def lien_ket_la(van: str, nguon: str) -> list[str]:
+    goc = nguon.lower()
+    return [f"liên kết lạ: {m.group(0)[:40]}" for m in _LIEN_KET_RA.finditer(van) if m.group(0).lower() not in goc]
+
+
 def kiem_tra_dau_ra(van: str, goi: dict) -> list[str]:
-    loi = []
+    loi = lien_ket_la(van, json.dumps(goi, ensure_ascii=False))
     duoc = set(goi.get("so_trong_goi", []))
     for n in re.findall(r"\d+", van):
         if int(n) not in duoc:
@@ -260,7 +273,7 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
             loi = kiem_tra_dau_ra(van_llm, goi)
             che_do, van = ("llm", van_llm) if not loi else ("template_fallback", template)
         except Exception as e:  # noqa: BLE001 — LLM lỗi không được làm sập Q&A
-            che_do, loi = "template_fallback", [f"llm lỗi: {str(e)[:120]}"]
+            che_do, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
     dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
     return {
         "phai": phai,

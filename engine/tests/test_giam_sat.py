@@ -39,3 +39,12 @@ def test_loc_su_kien_xoa_body_header_cookie_query():
     assert r["url"] == "https://e/v1/tuvi/an-sao"
     assert "x-engine-key" not in r["headers"]
     assert "user" not in ra and "extra" not in ra
+
+
+def test_khong_gui_bien_cuc_bo_trong_stack_trace():
+    """SEC-2: biến cục bộ (inp, cau_hoi…) chứa tên + ngày sinh → không bao giờ rời máy chủ."""
+    assert giam_sat.cau_hinh("https://k@o.ingest.sentry.io/1")["include_local_variables"] is False
+    su_kien = {"exception": {"values": [{"stacktrace": {"frames": [
+        {"function": "api", "vars": {"inp": "{'ho_ten': ['Nguyễn Văn An'], 'nam': 1990}"}}]}}]}}
+    ra = giam_sat.loc_su_kien(su_kien, {})
+    assert "vars" not in ra["exception"]["values"][0]["stacktrace"]["frames"][0]

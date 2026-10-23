@@ -1,7 +1,8 @@
 // POST /api/tuvi/chart — SPEC-004a.
 // Web là proxy mỏng: validate bằng zod hai chiều, gọi engine, KHÔNG tự tính gì.
 import { NextResponse } from "next/server";
-import { loiEngine } from "@/lib/proxy";
+import { baoLoi } from "@/lib/giam-sat";
+import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
 import { ChartInput, ChartOutput } from "../schema";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
@@ -30,6 +31,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       headers: {
         "content-type": "application/json",
         ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
+        ...dauNguoiGoi(req),
       },
       body: JSON.stringify(parsed.data),
       cache: "no-store",
@@ -51,9 +53,9 @@ export async function POST(req: Request): Promise<NextResponse> {
   // tại ranh giới — không để dữ liệu lệch schema lọt xuống UI.
   const out = ChartOutput.safeParse(body);
   if (!out.success) {
+    baoLoi(new Error("engine_lech_schema"), { duong: "/api/tuvi/chart" });   // SEC-2: chi tiết chỉ gửi Sentry
     return NextResponse.json(
-      { error: "Output engine lệch schema — kiểm tra phiên bản hai bên",
-        chi_tiet: out.error.flatten().fieldErrors },
+      { error: "Máy tính toán đang cập nhật, thử lại sau ít phút." },
       { status: 502 },
     );
   }

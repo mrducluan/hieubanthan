@@ -15,6 +15,7 @@ from app.hoidap import chung
 from app.kb import phongthuy_kb as kb
 from app.luangiai import hoi as _h
 from app.narrative import hoi_van
+from app.narrative.ngan_sach import mo_ta_loi
 
 HUONG_KD = {"dong bac": "Đông Bắc", "dong nam": "Đông Nam", "tay bac": "Tây Bắc", "tay nam": "Tây Nam",
             "bac": "Bắc", "nam": "Nam", "dong": "Đông", "tay": "Tây"}
@@ -371,7 +372,7 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
             loi = hoi_van.kiem_tra_dau_ra(v, goi)
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
-            che_do_van, loi = "template_fallback", [f"llm lỗi: {str(e)[:120]}"]
+            che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
     dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
     return {"phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
             "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": goi["co_canh_bao"],

@@ -1,5 +1,7 @@
-fastapi==0.115.*
+# SEC-2: FastAPI 0.161 + Starlette ≥ 1.3.1 (vá các CVE Starlette của dòng 0.4x). Kiểm: 5.351 test xanh trên bản này.
+fastapi==0.161.*
+starlette>=1.3.1,<2
 uvicorn[standard]==0.32.*
-pytest==8.*
+pytest==9.*
 httpx==0.28.*
 sentry-sdk[fastapi]==2.71.*

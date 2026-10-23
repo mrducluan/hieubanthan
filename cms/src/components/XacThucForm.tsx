@@ -1,9 +1,10 @@
 "use client";
 // Ba trạng thái: chưa bật (bắt buộc với Quản trị/Chủ biên) → hiện bí mật + link app xác thực → nhập mã;
 // đã bật → nhập mã 6 số; không có quyền CMS (Máy đọc / vai trò không hợp lệ) → báo + đăng xuất.
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { duongQr, maHoaQr } from "../lib/qr";
 
-type TrangThai = { email?: string; can: boolean; da_bat: boolean; da_xac_thuc: boolean; may_doc: boolean };
+type TrangThai = { email?: string; can: boolean; da_bat: boolean; da_xac_thuc: boolean; may_doc: boolean; co_vai_tro?: boolean };
 const O: React.CSSProperties = { width: "100%", boxSizing: "border-box", borderRadius: 6, border: "1px solid var(--theme-elevation-150)",
   background: "var(--theme-input-bg)", color: "var(--theme-text)", padding: 10, fontSize: 20, letterSpacing: 6, textAlign: "center" };
 
@@ -47,8 +48,14 @@ export function XacThucForm() {
     setLoi((d as { loi?: string }).loi ?? "Mã chưa đúng."); setDang(false); setMa("");
   }
 
+  const qr = useMemo(() => {
+    if (!bat) return null;
+    try { const m = maHoaQr(bat.uri); return { d: duongQr(m), c: m.kichThuoc + 8 }; } catch { return null; }   // link quá dài → chỉ nhập khoá
+  }, [bat]);
+
   if (!tt) return <p>{loi ?? "Đang kiểm tra…"}</p>;
-  if (!tt.can && !tt.da_bat) {
+  // Không quyền = Máy đọc / vai trò lạ. Người có vai trò mà chưa bắt buộc vẫn được tự bật (rồi bấm "Để sau" quay lại).
+  if (!tt.co_vai_tro && !tt.da_bat) {
     return (
       <div data-testid="xac-thuc-khong-quyen">
         <h1 style={{ fontSize: 24 }}>Tài khoản chưa có quyền vào phòng biên tập</h1>
@@ -67,11 +74,19 @@ export function XacThucForm() {
           <p>Tài khoản của bạn cần thêm một lớp bảo vệ: mã 6 số đổi mỗi 30 giây trên điện thoại
             (Google Authenticator, Microsoft Authenticator, Authy, 1Password…).</p>
           <button type="button" className="btn btn--style-primary" disabled={dang} onClick={() => void batDau()} data-testid="mfa-bat-dau">Bật xác thực 2 bước</button>
+          {!tt.can && <p style={{ fontSize: 13 }}><a href="/admin">Để sau</a></p>}
         </>
       )}
       {canBat && bat && (
         <ol style={{ paddingLeft: 18, lineHeight: 1.6 }}>
-          <li>Mở app xác thực → <b>Thêm tài khoản</b> → <b>Nhập khoá</b> (hoặc trên điện thoại bấm <a href={bat.uri}>mở trong app</a>).</li>
+          <li>Mở app xác thực (Google Authenticator, Microsoft Authenticator…) → <b>Thêm tài khoản</b> → <b>Quét mã QR</b>:
+            {qr && (
+              <svg data-testid="mfa-qr" viewBox={`0 0 ${qr.c} ${qr.c}`} width={200} height={200} role="img" aria-label="Mã QR thêm tài khoản"
+                style={{ display: "block", margin: "8px 0", background: "#fff", borderRadius: 6 }}>
+                <path d={qr.d} fill="#000" />
+              </svg>
+            )}
+            Không quét được thì chọn <b>Nhập khoá</b> (hoặc trên điện thoại bấm <a href={bat.uri}>mở trong app</a>).</li>
           <li>Khoá bí mật: <code data-testid="mfa-bi-mat" style={{ fontSize: 15, userSelect: "all" }}>{bat.bi_mat}</code> (loại: theo thời gian).</li>
           <li>Nhập mã 6 số app hiện ra vào ô dưới.</li>
         </ol>

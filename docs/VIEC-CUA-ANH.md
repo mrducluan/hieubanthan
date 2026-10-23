@@ -82,6 +82,45 @@
      báo em dịch vụ + đặt khoá vào env thì em làm; hiện mọi trang đã có ảnh tóm tắt vẽ bằng code (có QR).
    - **Quyết định còn chờ** (audit SEO-M): mở bot `Google-Extended` (Gemini app trích được site, đổi lại cho phép dùng
      huấn luyện — lệch BM-2) hay giữ chặn.
+4l. [ ] **Bảo mật SEC-2 (2026-10-23, `docs/BAO-MAT.md` mục SEC-2) — làm theo thứ tự:**
+   1. [x] Render có `ENGINE_API_KEY` — anh xác nhận 2026-10-23.
+   2. [ ] **Chạy migration** (sau khi merge PR SEC-2): Supabase → **SQL Editor** → New query → dán toàn bộ nội dung
+      `supabase/migrations/0023_sec2_rls_quyen.sql` → **Run**; làm tiếp với `0024_sec2_hoan_sao_hoc.sql`. Kiểm: dán
+      `supabase/kiem_thu/da_chay_chua.sql` → Run → hai dòng 0023, 0024 phải là `true`.
+   3. [ ] **Security Advisor (3 phút)** — "trình quét lỗi cấu hình" có sẵn của Supabase:
+      - Vào https://supabase.com/dashboard → chọn dự án của hieuban.com → menu trái **Advisors** (biểu tượng cái khiên)
+        → **Security Advisor** → bấm **Rerun linter** (góc phải).
+      - Tab **Errors** phải **trống**. Trước 0023 sẽ thấy 7 dòng "RLS Disabled in Public" (bảng `sources`, `schools`,
+        `thanso_*`) — chạy 0023 xong bấm Rerun là hết.
+      - Tab **Warnings / Info** — các dòng sau là **đúng thiết kế, bỏ qua**: "RLS Enabled No Policy" ở `luot_hoi`,
+        `thanso_phan_hoi`, `thanso_cum_bat_thuong`, `cau_hoi_vec`, `de_xuat_luat` (bảng chỉ máy chủ ghi, cố ý không cho ai
+        đọc); hàm `cau_hinh_cong_khai` cho anon (cài đặt công khai của site, không chứa bí mật).
+      - Nếu có "Leaked Password Protection Disabled": Authentication → **Sign In / Providers** → Email → bật
+        **Prevent use of leaked passwords**. "Auth OTP long expiry": Email OTP Expiration ≤ 3600 giây.
+      - Dòng nào khác ngoài danh sách trên → chụp màn hình gửi em, em sửa bằng migration.
+      (Em đã chạy thử toàn bộ migration trên Postgres trong máy: không còn bảng tắt RLS, không hàm nào thiếu
+      `search_path`.)
+   4. [ ] **CMS — bật xác thực 2 bước (đã sửa lỗi "chưa có quyền")**: deploy CMS xong → đăng nhập
+      https://cms.hieuban.com/admin → bảng điều khiển có dòng 🔒 **"Bật ngay (1 phút)"** (hoặc mở thẳng
+      https://cms.hieuban.com/admin/xac-thuc-2-buoc) → **Bật xác thực 2 bước** → mở Google Authenticator / Microsoft
+      Authenticator → **Quét mã QR** → nhập mã 6 số → Xác nhận. Mọi tài khoản Quản trị / Chủ biên làm xong thì đặt
+      `CMS_BAT_BUOC_MFA=1` ở Vercel dự án **CMS** → Redeploy. Tài khoản không phải Máy đọc mà đang bật "Enable API Key" → tắt.
+   5. [ ] **Khoá riêng cho AI quản trị (5 phút, tuỳ chọn nhưng nên làm):** tạo một chuỗi ngẫu nhiên dài (vd
+      `openssl rand -hex 32`), đặt **cùng giá trị** biến `ENGINE_QUAN_TRI_KEY` ở 3 nơi: Render (engine), Vercel dự án web,
+      Vercel dự án CMS → redeploy cả ba (engine trước). Chưa đặt thì vẫn chạy như cũ.
+   6. [ ] **GitHub (5 phút)** — em không có quyền đổi cài đặt repo, anh bấm:
+      - Repo → **Settings** → **Advanced Security** (hoặc "Code security") → bấm **Enable** cho: *Dependency graph*,
+        *Dependabot alerts*, *Dependabot security updates*, *Secret Protection* (secret scanning) + *Push protection*,
+        *Code scanning → CodeQL → Default setup* (repo công khai: miễn phí).
+      - **Settings → Rules → Rulesets** → mở ruleset của `main` (đã có) → tích **Restrict deletions**, **Block force
+        pushes**, **Require status checks to pass** → Add checks: `engine`, `web`, `supabase`, `cms`, `e2e` → Save.
+        (Giữ như mục 10: không bắt "Require approvals" hoặc thêm anh vào Bypass list để em vẫn tự merge khi CI xanh.)
+   7. [ ] **Supabase Auth (khi bật tài khoản):** Authentication → **Rate Limits** (giới hạn gửi SMS/email OTP), bật
+      CAPTCHA (Turnstile/hCaptcha) cho đăng nhập SMS — chống bị gửi SMS rác tốn tiền.
+   8. [ ] **GA4 / GTM (tuỳ chọn):** thẻ GA4 trong GTM đặt `page_location` bỏ đoạn mã thẻ `/the/...` và `?the=` (PostHog
+      em đã lọc trong code).
+   9. [ ] **Vercel (tuỳ chọn, thay cho Cloudflare ở GĐ1):** Settings → Billing → **Spend Management** đặt trần chi tiêu;
+      Firewall → bật Attack Challenge Mode khi thấy lưu lượng lạ.
 4i. [ ] **sameAs cho Google nhận ra thương hiệu + anh (5 phút, Vercel → web → Environment Variables):** kênh của site
    `MXH_FACEBOOK`, `MXH_YOUTUBE`, `MXH_TIKTOK`, `MXH_ZALO`, `MXH_INSTAGRAM`, `MXH_LINKEDIN`, `MXH_X`, `MXH_THREADS` (link https);
    hồ sơ cá nhân của anh `CHUYEN_GIA_SAME_AS_DUC_LUAN` = các link https cách nhau dấu phẩy (Facebook cá nhân, YouTube,

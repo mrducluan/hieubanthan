@@ -23,11 +23,14 @@ export const canMfa = (u: { vai_tro?: string; mfa_bat?: boolean | null }) =>
  *  sang màn xác thực 2 bước). Không áp cho khoá API (Máy đọc của web) và script máy chủ (Local API KHÔNG kèm cookie /
  *  Authorization — lưu ý: trang admin của Payload cũng chạy qua Local API nhưng mang cookie trình duyệt → vẫn bị kiểm). */
 export const vaiTro = (req: PayloadRequest): VaiTro | null => {
-  const u = req.user as { id?: string | number; collection?: string; vai_tro?: VaiTro; mfa_bat?: boolean | null; _strategy?: string } | null;
+  const u = req.user as { id?: string | number; collection?: string; vai_tro?: VaiTro; mfa_bat?: boolean | null; _strategy?: string; _sid?: string } | null;
   if (!u || u.collection !== "bien-tap-vien") return null;
   const cookie = req.headers?.get?.("cookie") ?? null;
   const tuScript = req.payloadAPI === "local" && !cookie && !req.headers?.get?.("authorization");
-  if (!tuScript && u._strategy !== "api-key" && canMfa(u) && !cookieHopLe(docCookie(cookie), u.id ?? "")) return null;
+  // SEC-2: khoá API chỉ miễn MFA cho Máy đọc. Trước đây mọi khoá API đều miễn → ai có mật khẩu Quản trị tự tạo khoá
+  // API cho tài khoản mình rồi dùng khoá đó có đủ quyền Quản trị mà không cần mã 2 bước.
+  const mienMfa = u._strategy === "api-key" && u.vai_tro === "may_doc";
+  if (!tuScript && !mienMfa && canMfa(u) && !cookieHopLe(docCookie(cookie), u.id ?? "", u._sid)) return null;
   return u.vai_tro ?? null;
 };
 const la = (...ds: VaiTro[]) => (req: PayloadRequest) => {

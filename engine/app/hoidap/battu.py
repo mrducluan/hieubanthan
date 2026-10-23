@@ -19,6 +19,7 @@ from app.hoidap import chung
 from app.kb import battu_kb as kb
 from app.luangiai import hoi as _h
 from app.narrative import hoi_van
+from app.narrative.ngan_sach import mo_ta_loi
 
 CAN_KD = {"giap": "Giáp", "at": "Ất", "binh": "Bính", "dinh": "Đinh", "mau": "Mậu", "ky": "Kỷ",
           "canh": "Canh", "tan": "Tân", "nham": "Nhâm", "quy": "Quý"}
@@ -429,7 +430,7 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
             loi = hoi_van.kiem_tra_dau_ra(v, goi)
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
-            che_do_van, loi = "template_fallback", [f"llm lỗi: {str(e)[:120]}"]
+            che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
     co = list(ls["co_canh_bao"]) if ls else []
     if ls:
         co.append({"loai": "thang_diem", "chi_tiet": kb.luu_y("thang_diem")})
