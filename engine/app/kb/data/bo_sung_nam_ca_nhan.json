@@ -31,8 +31,8 @@
      ]
     },
     {
-     "tieu_de": "Cách tính năm cá nhân năm 2027: ai đang ở năm số 1?",
-     "doan": "Năm 2027 rút gọn còn 2, nên người có ngày và tháng sinh cộng lại ra 8 (hoặc 17, 26) đang ở năm cá nhân 1. Ví dụ: sinh 15/2, xét năm 2027: 1+5 + 2 + 2+0+2+7 = 19 → 10 → 1; sinh 12/5, xét năm 2027: 1+2 + 5 + 2+0+2+7 = 19 → 10 → 1; sinh 21/4, xét năm 2028: 2+1 + 4 + 2+0+2+8 = 19 → 10 → 1. Trang tính của Hiểu Bản Thân lấy mốc 1/1 dương lịch; có trường phái đổi số vào ngày sinh nhật, nên quãng đầu năm hai cách có thể lệch nhau."
+     "tieu_de": "Cách tính: ai đang ở năm cá nhân số 1?",
+     "doan": "Cộng chữ số của ngày sinh, tháng sinh và năm đang xét, rút gọn về 1–9; ra 1 là đang ở năm cá nhân 1. Ví dụ năm 2027 rút gọn còn 2, nên ai có ngày cộng tháng sinh rút về 8 đang ở năm số 1: sinh 15/2: 1+5 + 2 + 2+0+2+7 = 19 → 10 → 1; sinh 12/5: 1+2 + 5 + 2+0+2+7 = 19 → 10 → 1. Trang tính của Hiểu Bản Thân lấy mốc 1/1 dương lịch; có trường phái đổi số vào ngày sinh nhật, nên quãng đầu năm hai cách có thể lệch nhau."
     }
    ],
    "bang": {
@@ -158,8 +158,8 @@
      ]
     },
     {
-     "tieu_de": "Ai đang ở năm cá nhân số 2 trong năm 2026 và 2027?",
-     "doan": "Năm 2026 rút gọn thành 1, nên ai có ngày cộng tháng sinh rút về 1 đang ở năm cá nhân 2; sang 2027, điều kiện đổi thành ngày cộng tháng rút về 9. Ví dụ đã tính: sinh 3/7, xét năm 2026: 3 + 7 + 2+0+2+6 = 20 → 2; sinh 9/9, xét năm 2027: 9 + 9 + 2+0+2+7 = 29 → 11 → 2; sinh 6/12, xét năm 2027: 6 + 1+2 + 2+0+2+7 = 20 → 2. Mỗi năm dương lịch mới, con số của mỗi người tăng thêm 1 và quay về 1 sau số 9."
+     "tieu_de": "Tự tính: mình có đang ở năm cá nhân 2 không?",
+     "doan": "Cộng chữ số của ngày sinh, tháng sinh và năm đang xét, rút gọn về 1–9; ra 2 là đang ở năm cá nhân 2. Ví dụ năm 2027 rút gọn còn 2, nên ai có ngày cộng tháng sinh rút về 9 đang ở năm số 2: sinh 9/9: 9 + 9 + 2+0+2+7 = 29 → 11 → 2; sinh 6/12: 6 + 1+2 + 2+0+2+7 = 20 → 2. Mỗi năm dương lịch mới, con số của mỗi người tăng thêm 1 và quay về 1 sau số 9."
     }
    ],
    "bang": {
@@ -285,8 +285,8 @@
      ]
     },
     {
-     "tieu_de": "Cách tính năm cá nhân năm 2028 và 2029 cho số 3",
-     "doan": "Năm 2028 rút gọn còn 3, nên người có ngày cộng tháng sinh rút về 9 sẽ rơi vào năm cá nhân 3; năm 2029 rút còn 4, cần ngày cộng tháng rút về 8. Ba ví dụ đã tính bằng máy: sinh 27/9, xét năm 2028: 2+7 + 9 + 2+0+2+8 = 30 → 3; sinh 11/7, xét năm 2028: 1+1 + 7 + 2+0+2+8 = 21 → 3; sinh 23/12, xét năm 2029: 2+3 + 1+2 + 2+0+2+9 = 21 → 3. Cộng hết chữ số hay rút gọn từng phần rồi cộng đều ra cùng con số năm cá nhân."
+     "tieu_de": "Cách tính: ai đang ở năm cá nhân số 3?",
+     "doan": "Cộng chữ số của ngày sinh, tháng sinh và năm đang xét, rút gọn về 1–9; ra 3 là đang ở năm cá nhân 3. Ví dụ năm 2027 rút gọn còn 2, nên ai có ngày cộng tháng sinh rút về 1 đang ở năm số 3: sinh 25/3: 2+5 + 3 + 2+0+2+7 = 21 → 3; sinh 7/3: 7 + 3 + 2+0+2+7 = 21 → 3. Cộng hết chữ số hay rút gọn từng phần rồi cộng đều ra cùng con số năm cá nhân."
     }
    ],
    "bang": {
@@ -412,8 +412,8 @@
      ]
     },
     {
-     "tieu_de": "Năm 2029 và 2030: cách tính năm cá nhân số 4",
-     "doan": "Năm 2029 rút gọn thành 4, nên người có ngày cộng tháng sinh rút về 9 đang ở năm cá nhân 4; sang 2030 cần ngày cộng tháng rút về 8. Đã tính: sinh 6/12, xét năm 2029: 6 + 1+2 + 2+0+2+9 = 22 → 4; sinh 11/7, xét năm 2029: 1+1 + 7 + 2+0+2+9 = 22 → 4; sinh 12/5, xét năm 2030: 1+2 + 5 + 2+0+3+0 = 13 → 4. Nếu muốn theo mốc sinh nhật, quãng trước sinh nhật vẫn mang số của năm trước."
+     "tieu_de": "Làm sao biết mình đang ở năm cá nhân 4?",
+     "doan": "Cộng chữ số của ngày sinh, tháng sinh và năm đang xét, rút gọn về 1–9; ra 4 là đang ở năm cá nhân 4. Ví dụ năm 2027 rút gọn còn 2, nên ai có ngày cộng tháng sinh rút về 2 đang ở năm số 4: sinh 14/6: 1+4 + 6 + 2+0+2+7 = 22 → 4; sinh 19/1: 1+9 + 1 + 2+0+2+7 = 22 → 4. Nếu muốn theo mốc sinh nhật, quãng trước sinh nhật vẫn mang số của năm trước."
     }
    ],
    "bang": {
@@ -539,8 +539,8 @@
      ]
     },
     {
-     "tieu_de": "Cách tính năm cá nhân năm 2026: ai đang ở năm số 5?",
-     "doan": "Năm 2026 rút gọn còn 1, nên ai có ngày cộng tháng sinh rút về 4 đang ở năm cá nhân 5 trong năm 2026. Ba ví dụ đã đối chiếu: sinh 30/1, xét năm 2026: 3+0 + 1 + 2+0+2+6 = 14 → 5; sinh 25/6, xét năm 2026: 2+5 + 6 + 2+0+2+6 = 23 → 5; sinh 28/11, xét năm 2027: 2+8 + 1+1 + 2+0+2+7 = 23 → 5. Người sinh 28/11 đến năm 2027 mới vào năm 5, vì 2027 rút gọn còn 2."
+     "tieu_de": "Cách tính: ai đang ở năm cá nhân số 5?",
+     "doan": "Cộng chữ số của ngày sinh, tháng sinh và năm đang xét, rút gọn về 1–9; ra 5 là đang ở năm cá nhân 5. Ví dụ năm 2027 rút gọn còn 2, nên ai có ngày cộng tháng sinh rút về 3 đang ở năm số 5: sinh 28/11: 2+8 + 1+1 + 2+0+2+7 = 23 → 5; sinh 22/8: 2+2 + 8 + 2+0+2+7 = 23 → 5. Năm sau, cùng người đó sang năm 6, vì con số chỉ tăng thêm 1 mỗi năm."
     }
    ],
    "bang": {
@@ -666,8 +666,8 @@
      ]
     },
     {
-     "tieu_de": "Ai ở năm cá nhân 6 trong năm 2027 và 2029?",
-     "doan": "Năm 2027 rút về 2, nên người có ngày cộng tháng sinh rút về 4 đang ở năm cá nhân 6; năm 2029 rút về 4, cần ngày cộng tháng rút về 2. Ví dụ tính tay khớp với máy: sinh 2/2, xét năm 2027: 2 + 2 + 2+0+2+7 = 15 → 6; sinh 16/6, xét năm 2027: 1+6 + 6 + 2+0+2+7 = 24 → 6; sinh 19/10, xét năm 2029: 1+9 + 1+0 + 2+0+2+9 = 24 → 6. Hai người khác ngày sinh vẫn có thể cùng năm cá nhân, vì chỉ ngày và tháng sinh tham gia phép cộng cùng năm đang xét."
+     "tieu_de": "Tự tính: ai đang ở năm cá nhân 6?",
+     "doan": "Cộng chữ số của ngày sinh, tháng sinh và năm đang xét, rút gọn về 1–9; ra 6 là đang ở năm cá nhân 6. Ví dụ năm 2027 rút gọn còn 2, nên ai có ngày cộng tháng sinh rút về 4 đang ở năm số 6: sinh 2/2: 2 + 2 + 2+0+2+7 = 15 → 6; sinh 16/6: 1+6 + 6 + 2+0+2+7 = 24 → 6. Hai người khác ngày sinh vẫn có thể cùng năm cá nhân, vì chỉ ngày và tháng sinh tham gia phép cộng cùng năm đang xét."
     }
    ],
    "bang": {
@@ -793,8 +793,8 @@
      ]
     },
     {
-     "tieu_de": "Cách tính năm cá nhân năm 2028: ai đang ở năm số 7?",
-     "doan": "Năm 2028 rút gọn còn 3, nên người có ngày cộng tháng sinh rút về 4 đang ở năm cá nhân 7 trong năm đó. Đối chiếu: sinh 25/6, xét năm 2028: 2+5 + 6 + 2+0+2+8 = 25 → 7; sinh 30/1, xét năm 2028: 3+0 + 1 + 2+0+2+8 = 16 → 7; sinh 8/3, xét năm 2030: 8 + 3 + 2+0+3+0 = 16 → 7. Nếu thấy số của mình khác trang khác, hãy xem trang đó lấy mốc 1/1 hay mốc sinh nhật."
+     "tieu_de": "Cách tính: ai đang ở năm cá nhân số 7?",
+     "doan": "Cộng chữ số của ngày sinh, tháng sinh và năm đang xét, rút gọn về 1–9; ra 7 là đang ở năm cá nhân 7. Ví dụ năm 2027 rút gọn còn 2, nên ai có ngày cộng tháng sinh rút về 5 đang ở năm số 7: sinh 22/1: 2+2 + 1 + 2+0+2+7 = 16 → 7; sinh 22/10: 2+2 + 1+0 + 2+0+2+7 = 16 → 7. Nếu thấy số của mình khác trang khác, hãy xem trang đó lấy mốc 1/1 hay mốc sinh nhật."
     }
    ],
    "bang": {
@@ -920,8 +920,8 @@
      ]
     },
     {
-     "tieu_de": "Ai đang ở năm cá nhân số 8 năm 2026?",
-     "doan": "Năm 2026 rút gọn còn 1, nên người có ngày cộng tháng sinh rút về 7 đang ở năm cá nhân 8. Ví dụ đã tính: sinh 17/8, xét năm 2026: 1+7 + 8 + 2+0+2+6 = 26 → 8; sinh 5/11, xét năm 2026: 5 + 1+1 + 2+0+2+6 = 17 → 8; sinh 16/6, xét năm 2029: 1+6 + 6 + 2+0+2+9 = 26 → 8. Người sinh 16/6 vào năm 8 muộn hơn, ở 2029, vì ngày cộng tháng của họ rút về 4."
+     "tieu_de": "Làm sao biết mình đang ở năm cá nhân 8?",
+     "doan": "Cộng chữ số của ngày sinh, tháng sinh và năm đang xét, rút gọn về 1–9; ra 8 là đang ở năm cá nhân 8. Ví dụ năm 2027 rút gọn còn 2, nên ai có ngày cộng tháng sinh rút về 6 đang ở năm số 8: sinh 23/10: 2+3 + 1+0 + 2+0+2+7 = 17 → 8; sinh 4/2: 4 + 2 + 2+0+2+7 = 17 → 8. Người có ngày cộng tháng rút về số khác sẽ tới năm 8 sớm hay muộn hơn, nhưng ai cũng đi qua đủ chín số."
     }
    ],
    "bang": {
@@ -1047,8 +1047,8 @@
      ]
     },
     {
-     "tieu_de": "Năm 2027 ai ở năm cá nhân 9? Cách tính",
-     "doan": "Năm 2027 rút gọn còn 2, nên người có ngày cộng tháng sinh rút về 7 đang ở năm cá nhân 9 và sẽ sang năm 1 vào 2028. Đã tính: sinh 21/4, xét năm 2027: 2+1 + 4 + 2+0+2+7 = 18 → 9; sinh 5/11, xét năm 2027: 5 + 1+1 + 2+0+2+7 = 18 → 9; sinh 2/2, xét năm 2030: 2 + 2 + 2+0+3+0 = 9. Một mẹo nhỏ: năm cá nhân năm sau luôn bằng năm nay cộng 1, sau 9 quay về 1."
+     "tieu_de": "Cách tính: ai đang ở năm cá nhân số 9?",
+     "doan": "Cộng chữ số của ngày sinh, tháng sinh và năm đang xét, rút gọn về 1–9; ra 9 là đang ở năm cá nhân 9. Ví dụ năm 2027 rút gọn còn 2, nên ai có ngày cộng tháng sinh rút về 7 đang ở năm số 9: sinh 3/4: 3 + 4 + 2+0+2+7 = 18 → 9; sinh 5/11: 5 + 1+1 + 2+0+2+7 = 18 → 9. Một mẹo nhỏ: năm cá nhân năm sau luôn bằng năm nay cộng 1, nên những người này sang năm 1 vào 2028."
     }
    ],
    "bang": {
