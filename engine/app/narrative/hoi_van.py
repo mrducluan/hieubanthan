@@ -145,8 +145,20 @@ def van_template(goi: dict) -> str:
 # --------------------------------------------------------------------------- #
 # Kiểm tra đầu ra (dùng cho cả template và LLM)
 # --------------------------------------------------------------------------- #
+# SEC-2: chống prompt injection kiểu "viết tên miền / số liên lạc ra" — đầu ra không được mang link, tên miền (kể cả
+# đánh vần "chấm com"), tài khoản mạng xã hội, số điện thoại nếu nguồn không có.
+_LIEN_KET_RA = re.compile(
+    r"https?://|www\.|\b[a-z0-9-]+\s*(?:\.|chấm|dot)\s*(?:com|vn|net|org|io|me|co|ly)\b|\bzalo\b|\btelegram\b"
+    r"|(?<![\w@])@[a-z0-9_.]{3,}|\b0\d{2}[\d .]{6,}\d\b", re.I)
+
+
+def lien_ket_la(van: str, nguon: str) -> list[str]:
+    goc = nguon.lower()
+    return [f"liên kết lạ: {m.group(0)[:40]}" for m in _LIEN_KET_RA.finditer(van) if m.group(0).lower() not in goc]
+
+
 def kiem_tra_dau_ra(van: str, goi: dict) -> list[str]:
-    loi = []
+    loi = lien_ket_la(van, json.dumps(goi, ensure_ascii=False))
     duoc = set(goi.get("so_trong_goi", []))
     for n in re.findall(r"\d+", van):
         if int(n) not in duoc:

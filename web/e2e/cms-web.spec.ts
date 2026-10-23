@@ -2,7 +2,7 @@
 // và các route nhận tín hiệu từ CMS từ chối khi sai bí mật. Không cần CMS chạy (luồng đầy đủ: cms/e2e).
 import { test, expect } from "@playwright/test";
 import { duongBlog, gopBaiBlog, slugTuUrl, type BaiBlog } from "../lib/blog-gop";
-import { chuoiTruyVan, maXemTruoc, soKhop } from "../lib/cms";
+import { chuoiTruyVan, docPhamVi, maXemTruoc, soKhop, taoPhamVi } from "../lib/cms";
 import { htmlSangMd, locHtmlCms } from "../lib/cms-html";
 
 test.beforeAll(() => {
@@ -94,12 +94,20 @@ test("slug có dấu (bài NotFair): giải mã params một lần, link mã ho�
 test("truy vấn REST kiểu Payload + mã xem trước so thời gian hằng", () => {
   expect(chuoiTruyVan({ where: { slug: { equals: "a b" } }, limit: 1 }).join("&"))
     .toBe("where%5Bslug%5D%5Bequals%5D=a%20b&limit=1");
-  const ma = maXemTruoc("so-7", "bi-mat")!;
+  const ma = maXemTruoc("so-7", 2_000_000_000, "bi-mat")!;
   expect(ma).toMatch(/^[A-Za-z0-9_-]{43}$/);
-  expect(soKhop(ma, maXemTruoc("so-7", "bi-mat"))).toBe(true);
-  expect(soKhop(ma, maXemTruoc("so-8", "bi-mat"))).toBe(false);
+  expect(soKhop(ma, maXemTruoc("so-7", 2_000_000_000, "bi-mat"))).toBe(true);
+  expect(soKhop(ma, maXemTruoc("so-8", 2_000_000_000, "bi-mat"))).toBe(false);
+  expect(soKhop(ma, maXemTruoc("so-7", 2_000_000_001, "bi-mat"))).toBe(false);   // SEC-2: đổi hạn = sai chữ ký
   expect(soKhop(ma, null)).toBe(false);
-  expect(maXemTruoc("so-7", "")).toBeNull();
+  expect(maXemTruoc("so-7", 2_000_000_000, "")).toBeNull();
+  // SEC-2: cookie phạm vi — đúng mục, sai chữ ký / hết hạn → null
+  const v = taoPhamVi("bai:so-7", 2_000_000_000, "bi-mat")!;
+  expect(docPhamVi(v, "bi-mat", 1_900_000_000_000)).toBe("bai:so-7");
+  expect(docPhamVi(v, "bi-mat", 2_000_000_001_000)).toBeNull();
+  const gia = v.split(".").slice(0, 2).join(".") + "." + Buffer.from("bai:so-8").toString("base64url");
+  expect(docPhamVi(gia, "bi-mat", 1_900_000_000_000)).toBeNull();
+  expect(docPhamVi(v, "khoa-khac", 1_900_000_000_000)).toBeNull();
 });
 
 test("route từ CMS: sai bí mật bị từ chối; /blog vẫn chạy khi chưa có CMS", async ({ request, page }) => {

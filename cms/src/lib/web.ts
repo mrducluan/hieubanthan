@@ -6,26 +6,29 @@ import { createHmac } from "node:crypto";
 
 export const webUrl = () => (process.env.WEB_URL || "http://localhost:3000").replace(/\/+$/, "");
 
-/** Mã ký link xem trước — web kiểm lại bằng cùng công thức (web/lib/cms.ts `maXemTruoc`). */
-export function maXemTruoc(slug: string, bi = process.env.CMS_PREVIEW_SECRET): string | null {
+/** Mã ký link xem trước — web kiểm lại bằng cùng công thức (web/lib/cms.ts `maXemTruoc`). SEC-2: ký kèm hạn `het`
+ *  (giây unix) → link chuyển tiếp / lộ ra ngoài chỉ dùng được trong 1 giờ. */
+export const HAN_XEM_TRUOC_GIAY = 60 * 60;
+export function maXemTruoc(slug: string, het: number, bi = process.env.CMS_PREVIEW_SECRET): string | null {
   if (!bi) return null;
-  return createHmac("sha256", bi).update(`xem-truoc:${slug}`).digest("base64url");
+  return createHmac("sha256", bi).update(`xem-truoc:${slug}:${het}`).digest("base64url");
 }
+const hetMoi = () => Math.floor(Date.now() / 1000) + HAN_XEM_TRUOC_GIAY;
 
 export function linkXemTruoc(slug: string | undefined | null): string | null {
   if (!slug) return null;
-  const ma = maXemTruoc(slug);
+  const het = hetMoi(), ma = maXemTruoc(slug, het);
   if (!ma) return null;
-  return `${webUrl()}/api/cms/xem-truoc?slug=${encodeURIComponent(slug)}&ma=${ma}`;
+  return `${webUrl()}/api/cms/xem-truoc?slug=${encodeURIComponent(slug)}&het=${het}&ma=${ma}`;
 }
 
 /** ND-6: nút "Xem trước" của Trang website / Mẫu cụm → web bật chế độ nháp rồi mở URL (mẫu cụm: web mở một trang ví dụ
  *  của cụm). Mã ký trên "trang:<đường dẫn hoặc mẫu>" — cùng bí mật CMS_PREVIEW_SECRET, khác miền với link bài viết. */
 export function linkXemTrang(duong: string | undefined | null): string | null {
   if (!duong || !duong.startsWith("/")) return null;
-  const ma = maXemTruoc(`trang:${duong}`);
+  const het = hetMoi(), ma = maXemTruoc(`trang:${duong}`, het);
   if (!ma) return null;
-  return `${webUrl()}/api/cms/xem-truoc?duong=${encodeURIComponent(duong)}&ma=${ma}`;
+  return `${webUrl()}/api/cms/xem-truoc?duong=${encodeURIComponent(duong)}&het=${het}&ma=${ma}`;
 }
 
 /** Báo web xoá cache (thẻ "cms"; ND: kèm `duong` → web xoá thêm thẻ "trang:<duong>"). Không chặn lưu bài khi web

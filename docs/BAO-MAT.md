@@ -70,25 +70,23 @@ lên / xuống / lên lại; test engine; build web).
 | PostHog reverse proxy `/ingest` (né trình chặn quảng cáo) | Chưa có | Tuỳ chọn — phải sửa CSP `connect-src` + chính sách riêng tư; không phải lỗi bảo mật |
 | Chuyển về VPS + Coolify | Hoá đơn hiện < 50 USD/tháng, tác vụ < 1 s | **Chưa cần** (đúng ngưỡng tài liệu tự nêu) |
 
-### Còn mở — đề xuất làm tiếp (theo thứ tự)
+### SEC-2 đợt 2 (2026-10-23, cùng ngày) — đã làm các mục "còn mở"
 
-1. **Link xem trước CMS** (Trung bình): một link hợp lệ bật chế độ nháp cho TOÀN site và không hết hạn → người có link
-   (vd cộng tác viên) đọc được nháp của người khác. Sửa: ký kèm hạn (~1 giờ) + cookie ghi đúng bài / trang được xem.
-   Cần đổi cả CMS + web cùng lúc → PR riêng.
-2. **Trả lời có phí khi bấm song song** (Thấp): `cua-sao.ts` kiểm số dư → engine trả lời → mới trừ Sao; N yêu cầu đồng
-   thời với 1 Sao được N câu. Sửa: trừ trước (khoá theo câu) rồi hoàn khi lỗi. Đang bị chặn bởi hạn mức AI 40/giờ.
-3. **TOTP CMS**: bộ đếm sai không nguyên tử (gửi song song được nhiều lần đoán); phiên chỉ có mật khẩu tự bật MFA trước
-   chủ thật (tài khoản Quản trị/Chủ biên chưa bật MFA); cookie `cms-mfa` không gắn phiên (còn 8 giờ sau đăng xuất).
-4. **Soạn nháp AI quản trị** (`/v1/quan-tri/*`) chỉ dựa khoá dịch vụ chung → thêm khoá thứ hai `ENGINE_QUAN_TRI_KEY`.
-5. **Engine một tiến trình, hàm đồng bộ**: ~40 yêu cầu chậm (LLM 40–60 s) cùng lúc làm treo mọi route. Thêm
-   `--limit-concurrency`, giới hạn số lượt LLM đồng thời; yêu cầu không mang người gọi gom một hạn mức chung.
-6. **FastAPI 0.115 → ≥ 0.116 (Starlette ≥ 0.49.1)**: các CVE Starlette hiện không chạm tới (không multipart, không
-   FileResponse) nhưng nên nâng; ghim bản đầy đủ thay `0.115.*`, bỏ `pytest` khỏi ảnh production.
-7. **Bơm phiếu kiểm chứng / ý định** (Thấp, ảnh hưởng xếp hạng): phiếu khách khoá theo IP → nhiều IP đẩy được "x% thấy
-   đúng", tự hạ hộp, tự bật câu ý định (≥ 3 khoá, 1 đăng nhập). Đề xuất: chỉ phiếu đăng nhập được tính cho tự hạ hộp /
-   tự bật ý định.
-8. Ghi chú góp ý thần số (0016) của cụm đang hoạt động sống quá 12 tháng → cần ngày từng ghi chú.
-9. Lọc thêm link / số điện thoại trong đầu ra LLM hỏi đáp (chống prompt injection kiểu "viết chữ ra tên miền").
+| # | Mục | Đã làm |
+|---|---|---|
+| 1 | **Bật 2 bước CMS báo "chưa có quyền"** (chủ dự án gặp): màn 2 bước chỉ mở khi đã bắt buộc (`CMS_BAT_BUOC_MFA=1`) mà hướng dẫn lại bảo tự bật trước → vòng lặp. | Ai có vai trò biên tập đều tự bật được; bảng điều khiển có dòng nhắc "Bật ngay"; hiện **mã QR** (bộ QR tự viết của web, không thêm thư viện; đã giải mã thử đúng khoá). e2e "SEC-2 tự bật 2 bước". |
+| 2 | Link xem trước CMS mở nháp cả site, không hết hạn. | Ký kèm hạn 1 giờ (`het`); bật thêm cookie **phạm vi** HttpOnly ký HMAC — chỉ đúng bài / trang được ký mới đọc nháp; thẻ trỏ trang khác luôn bản đã xuất bản. e2e: link hết hạn → 401; link bài A không lộ nháp bài B. |
+| 3 | Trả lời có phí bấm song song. | Trừ Sao **trước** khi gọi engine, engine lỗi thì hoàn (`hoan_sao_hoi`, migration 0024, chỉ service role, đúng dòng vừa trừ ≤ 15 phút, một lần). |
+| 4 | TOTP CMS: đếm sai không nguyên tử; cookie không gắn phiên; `%` hỏng làm 500; khoá suy từ `PAYLOAD_SECRET` rỗng. | Giữ chỗ lượt thử bằng một câu SQL nguyên tử trước khi kiểm mã (12 yêu cầu song song → ≤ 5 lượt, còn lại 429; e2e); ghi bước dùng mã cũng nguyên tử (chống dùng lại); cookie `cms-mfa` ký kèm `sid` phiên Payload; `docCookie` bắt lỗi; thiếu `PAYLOAD_SECRET` → báo lỗi thay vì dùng chuỗi rỗng. |
+| 5 | AI quản trị chỉ dựa khoá chung. | Khoá thứ hai `ENGINE_QUAN_TRI_KEY` (header `x-quan-tri-key`) — engine đòi khi env đặt; web + CMS gửi kèm. |
+| 6 | Engine treo khi ~40 lượt AI chờ cùng lúc. | Pool luồng 40 → 120 (`ENGINE_SO_LUONG`) qua lifespan; `/health` async. |
+| 7 | FastAPI 0.115 / Starlette 0.46 (CVE). | **FastAPI 0.161 + Starlette ≥ 1.3.1** (đang 1.9), pytest 9; `pip-audit` sạch; 5.351 test engine xanh. |
+| 8 | Bơm phiếu / ý định bằng nhiều IP. | Câu ý định tự bật cần **≥ 2 người đăng nhập** (trước 1) — migration 0024. Phiếu "x% thấy đúng" / tự hạ hộp: **giữ** (tài khoản chưa bật → chỉ tính phiếu đăng nhập sẽ tắt hẳn vòng học; ảnh hưởng chỉ là xếp hạng hộp, không sinh chữ). Xét lại khi bật tài khoản. |
+| 9 | Ghi chú góp ý sống quá 12 tháng. | Mốc thời gian **từng ghi chú** (trigger) + dọn theo từng ghi chú (0024). |
+| 10 | Prompt injection kiểu "viết tên miền / số điện thoại ra". | Đầu ra LLM (hỏi đáp + luận giải) mang link, tên miền (kể cả "chấm com"), Zalo/Telegram, @tài khoản, số điện thoại mà nguồn không có → loại, rơi về mẫu. |
+
+Còn lại (thấp, chờ quyết): phiên chỉ có mật khẩu của tài khoản **chưa** bật 2 bước có thể bật trước chủ thật — cách
+phòng: mọi Quản trị / Chủ biên tự bật ngay (VIEC-CUA-ANH 4l.4) trước khi đặt `CMS_BAT_BUOC_MFA=1`.
 
 ### Việc của anh (cấu hình — em không làm thay được)
 

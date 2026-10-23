@@ -247,13 +247,25 @@ test("sửa nháp: người đọc vẫn thấy bản cũ; link xem trước có
   }, { timeout: 20_000 }).toBe(true);
 
   expect(await (await request.get(`${WEB}/blog/${SLUG}`)).text()).not.toContain("Bản nháp mới");
-  const ma = createHmac("sha256", BI_MAT.preview).update(`xem-truoc:${SLUG}`).digest("base64url");
+  const het = Math.floor(Date.now() / 1000) + 3600;
+  const ky = (s: string, h: number) => createHmac("sha256", BI_MAT.preview).update(`xem-truoc:${s}:${h}`).digest("base64url");
+  // SEC-2: link hết hạn / không mang hạn → 401
+  const cu = Math.floor(Date.now() / 1000) - 10;
+  expect((await request.get(`${WEB}/api/cms/xem-truoc?slug=${SLUG}&het=${cu}&ma=${ky(SLUG, cu)}`, { maxRedirects: 0 })).status()).toBe(401);
+  expect((await request.get(`${WEB}/api/cms/xem-truoc?slug=${SLUG}&ma=${ky(SLUG, het)}`, { maxRedirects: 0 })).status()).toBe(401);
   const ctx = await browser.newContext();
   const xem = await ctx.newPage();
-  await xem.goto(`${WEB}/api/cms/xem-truoc?slug=${SLUG}&ma=${ma}`);
+  await xem.goto(`${WEB}/api/cms/xem-truoc?slug=${SLUG}&het=${het}&ma=${ky(SLUG, het)}`);
   await expect(xem.getByTestId("dang-xem-nhap")).toBeVisible();
   await expect(xem.getByText("Bản nháp mới: sapo đang sửa")).toBeVisible();
   await expect(xem.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  // SEC-2: link xem trước bài A không mở được nháp bài B (chế độ nháp của Next là cookie chung cả site)
+  const KHAC = "sec2-nhap-bai-khac";
+  const token = await tokenQt(request);
+  expect((await request.post(`${CMS}/api/bai-viet?draft=true`, { headers: { Authorization: `JWT ${token}` },
+    data: { tieu_de: "Bài nháp khác SEC-2", slug: KHAC, mo_ta_ngan: "Nháp bí mật chưa xuất bản SEC-2", _status: "draft" } })).ok()).toBeTruthy();
+  await xem.goto(`${WEB}/blog/${KHAC}`);
+  await expect(xem.getByText("Nháp bí mật chưa xuất bản SEC-2")).toHaveCount(0);
   await ctx.close();
 });
 
@@ -484,8 +496,9 @@ test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát),
     data: { chu: { "dau.chip_1": "Chip nháp chưa xuất bản" } } })).ok()).toBeTruthy();
   await page.goto(`${WEB}/`);
   await expect(page.getByTestId("hero-diem")).not.toContainText("Chip nháp chưa xuất bản");
-  const ma = createHmac("sha256", BI_MAT.preview).update("xem-truoc:trang:/").digest("base64url");
-  await page.goto(`${WEB}/api/cms/xem-truoc?duong=%2F&ma=${ma}`);
+  const het = Math.floor(Date.now() / 1000) + 3600;
+  const ma = createHmac("sha256", BI_MAT.preview).update(`xem-truoc:trang:/:${het}`).digest("base64url");
+  await page.goto(`${WEB}/api/cms/xem-truoc?duong=%2F&het=${het}&ma=${ma}`);
   await expect(page).toHaveURL(`${WEB}/`);
   await expect(page.getByTestId("dai-xem-nhap")).toBeVisible();
   await expect(page.getByTestId("hero-diem")).toContainText("Chip nháp chưa xuất bản");
@@ -686,6 +699,45 @@ test("CMS-2 xác thực 2 bước: bật bằng mã → phiên mới thiếu mã
   await page.getByRole("button", { name: "Xác nhận" }).click();
   await page.waitForURL(`${CMS}/admin`);
   await expect(page.getByRole("link", { name: /Bài viết/ }).first()).toBeVisible();
+  await ctx.close();
+});
+
+test("SEC-2 tự bật 2 bước khi CHƯA bắt buộc: bảng điều khiển nhắc → QR + khoá → nhập mã → hết nhắc", async ({ browser, request }) => {
+  // Trước SEC-2: màn 2 bước báo "chưa có quyền" khi CMS_BAT_BUOC_MFA chưa bật → Quản trị không tự bật trước được.
+  const token = await tokenQt(request);
+  const TK = { email: "mfa-tu-bat@vidu.vn", mk: "mat-khau-mfa-tu-bat-0123" };
+  const tao = await request.post(`${CMS}/api/bien-tap-vien`, { headers: { Authorization: `JWT ${token}` },
+    data: { email: TK.email, password: TK.mk, ten_hien_thi: "Người tự bật MFA", vai_tro: "chu_bien" } });
+  expect(tao.ok()).toBeTruthy();
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await dangNhap(page, TK);
+  await page.goto(`${CMS}/admin`);
+  await page.getByTestId("tq-bat-mfa").getByRole("link", { name: /Bật ngay/ }).click();
+  await page.getByTestId("mfa-bat-dau").click();
+  await expect(page.getByTestId("mfa-qr")).toBeVisible();
+  const bi = tuBase32(await page.getByTestId("mfa-bi-mat").innerText());
+  await page.getByLabel("Mã 6 số").fill(maTotp(bi, buocHienTai()));
+  await page.getByRole("button", { name: "Xác nhận" }).click();
+  await page.waitForURL(`${CMS}/admin`);
+  await expect(page.getByTestId("tq-bat-mfa")).toHaveCount(0);
+  await ctx.close();
+});
+
+test("SEC-2 đoán mã 2 bước song song: 12 yêu cầu cùng lúc chỉ được tối đa 5 lượt, sau đó khoá", async ({ browser, request }) => {
+  const token = await tokenQt(request);
+  const TK = { email: "mfa-doan@vidu.vn", mk: "mat-khau-mfa-doan-0123" };
+  expect((await request.post(`${CMS}/api/bien-tap-vien`, { headers: { Authorization: `JWT ${token}` },
+    data: { email: TK.email, password: TK.mk, ten_hien_thi: "Người thử đoán mã", vai_tro: "bien_tap" } })).ok()).toBeTruthy();
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await dangNhap(page, TK);
+  const nguon = { headers: { Origin: CMS } };
+  expect((await page.request.post(`${CMS}/api/bien-tap-vien/mfa/bat-dau`, nguon)).status()).toBe(200);
+  const kq = await Promise.all(Array.from({ length: 12 }, () =>
+    page.request.post(`${CMS}/api/bien-tap-vien/mfa/xac-nhan`, { ...nguon, data: { ma: "000000" } }).then((r) => r.status())));
+  expect(kq.filter((x) => x === 400).length).toBeLessThanOrEqual(5);
+  expect(kq.filter((x) => x === 429).length).toBeGreaterThanOrEqual(7);
   await ctx.close();
 });
 

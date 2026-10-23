@@ -28,7 +28,8 @@ export async function soanNhap(v: Exclude<ReturnType<typeof kiemDauVao>, string>
   try {
     const r = await fetch(`${goc}/v1/quan-tri/soan-nhap`, {
       method: "POST",
-      headers: { "content-type": "application/json", ...(process.env.ENGINE_API_KEY ? { "x-engine-key": process.env.ENGINE_API_KEY } : {}) },
+      headers: { "content-type": "application/json", ...(process.env.ENGINE_API_KEY ? { "x-engine-key": process.env.ENGINE_API_KEY } : {}),
+        ...(process.env.ENGINE_QUAN_TRI_KEY ? { "x-quan-tri-key": process.env.ENGINE_QUAN_TRI_KEY } : {}) },   // SEC-2
       body: JSON.stringify({ tep: "cms_bai_viet.json", duong: ["doan"], hien_tai: v.van, hanh_dong: v.hanh_dong, yeu_cau: v.yeu_cau,
         ngu_canh: { tieu_de_bai: v.tieu_de, mang: v.mang } }),
       signal: AbortSignal.timeout(60_000),

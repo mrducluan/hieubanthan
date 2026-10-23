@@ -677,8 +677,10 @@ await ca("ND-7 đợt 2: hình trên trang chụp ảnh thư viện (khoá lạ 
   const cuBi = process.env.CMS_PREVIEW_SECRET; process.env.CMS_PREVIEW_SECRET = "bi-mat-thu";
   try {
     const link = linkXemTrang("/tu-vi");
-    assert.match(String(link), /\/api\/cms\/xem-truoc\?duong=%2Ftu-vi&ma=/);
-    assert.ok(link!.endsWith(maXemTruoc("trang:/tu-vi")!));
+    assert.match(String(link), /\/api\/cms\/xem-truoc\?duong=%2Ftu-vi&het=\d+&ma=/);
+    const het = Number(new URL(link!).searchParams.get("het"));   // SEC-2: link mang hạn ~1 giờ
+    assert.ok(het > Date.now() / 1000 && het <= Date.now() / 1000 + 3601);
+    assert.ok(link!.endsWith(maXemTruoc("trang:/tu-vi", het)!));
     assert.equal(linkXemTrang("evil.vn"), null);
   } finally { if (cuBi === undefined) delete process.env.CMS_PREVIEW_SECRET; else process.env.CMS_PREVIEW_SECRET = cuBi; }
 });

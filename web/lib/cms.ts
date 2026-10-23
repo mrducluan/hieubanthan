@@ -148,10 +148,28 @@ export async function baiLienQuan(bai: BaiCms, toiDa = 3): Promise<BaiCmsTomTat[
 
 // ---------------------------------------------------------------- xem trước (draft mode)
 
-/** Cùng công thức với cms/src/lib/web.ts `maXemTruoc`. */
-export function maXemTruoc(slug: string, bi = process.env.CMS_PREVIEW_SECRET): string | null {
+/** Cùng công thức với cms/src/lib/web.ts `maXemTruoc` (SEC-2: ký kèm hạn `het`, giây unix). */
+export function maXemTruoc(slug: string, het: number, bi = process.env.CMS_PREVIEW_SECRET): string | null {
   if (!bi) return null;
-  return createHmac("sha256", bi).update(`xem-truoc:${slug}`).digest("base64url");
+  return createHmac("sha256", bi).update(`xem-truoc:${slug}:${het}`).digest("base64url");
+}
+
+// SEC-2: chế độ nháp của Next là MỘT cookie cho cả site → trước đây một link xem trước mở được nháp của mọi bài / trang.
+// Kèm cookie phạm vi (ký HMAC): chỉ đúng bài / đường dẫn được ký mới đọc nháp, hết hạn cùng link (≤ 1 giờ).
+export const COOKIE_PHAM_VI = "hbt-xem-truoc";
+const kyPhamVi = (muc: string, het: number, bi: string) =>
+  createHmac("sha256", bi).update(`pham-vi:${muc}:${het}`).digest("base64url");
+export function taoPhamVi(muc: string, het: number, bi = process.env.CMS_PREVIEW_SECRET): string | null {
+  return bi ? `${het}.${kyPhamVi(muc, het, bi)}.${Buffer.from(muc).toString("base64url")}` : null;
+}
+/** Phạm vi đang được xem nháp ("bai:<slug>" | "trang:<đường dẫn>") hoặc null (sai chữ ký / hết hạn / không có). */
+export function docPhamVi(v: string | undefined | null, bi = process.env.CMS_PREVIEW_SECRET, ms = Date.now()): string | null {
+  if (!v || !bi) return null;
+  const [h, sig, m] = v.split(".");
+  const het = Number(h);
+  if (!sig || !m || !Number.isFinite(het) || het < ms / 1000) return null;
+  const muc = Buffer.from(m, "base64url").toString();
+  return soKhop(sig, kyPhamVi(muc, het, bi)) ? muc : null;
 }
 
 export function soKhop(a: string | null | undefined, b: string | null | undefined): boolean {

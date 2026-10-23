@@ -3,15 +3,28 @@
 Trả JSONResponse thường (KHÔNG qua bộ lọc công khai BM-1): đây là nháp nội bộ, lọc chữ sẽ làm sai nội dung nháp."""
 from __future__ import annotations
 
+import hmac
+import os
 from typing import Literal
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Header, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from app import quan_tri_ai
 
-router = APIRouter(prefix="/v1/quan-tri", tags=["quan-tri"], default_response_class=JSONResponse)
+
+
+def _khoa_quan_tri(x_quan_tri_key: str = Header("")) -> None:
+    """SEC-2: route AI quản trị là proxy LLM tuỳ ý → ngoài khoá dịch vụ chung còn cần khoá riêng `ENGINE_QUAN_TRI_KEY`
+    (chỉ web + CMS máy chủ biết). Chưa đặt env thì không đòi (giữ chạy như cũ cho tới khi chủ dự án đặt)."""
+    k = os.environ.get("ENGINE_QUAN_TRI_KEY", "")
+    if k and not hmac.compare_digest(x_quan_tri_key.encode(), k.encode()):
+        raise HTTPException(403, detail="Thiếu hoặc sai khoá quản trị")
+
+
+router = APIRouter(prefix="/v1/quan-tri", tags=["quan-tri"], default_response_class=JSONResponse,
+                   dependencies=[Depends(_khoa_quan_tri)])
 
 
 class SoanNhapVao(BaseModel):

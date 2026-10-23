@@ -2,7 +2,8 @@
 // Quy tắc (đặt ở /quan-tri/cai-dat, mặc định TẮT → mọi thứ miễn phí như trước):
 //   Hỏi đáp: khách N câu/ngày, có tài khoản M câu/ngày (tính chung mọi mảng, giờ VN). Hết lượt:
 //     khách → mời đăng nhập (nhận Sao chào mừng) · có tài khoản → mỗi câu tốn G Sao, người dùng bấm đồng ý từng câu
-//     (header x-dong-y-sao: 1). Trừ Sao SAU khi engine trả lời được (engine lỗi → không mất Sao).
+//     (header x-dong-y-sao: 1). SEC-2: trừ Sao TRƯỚC khi gọi engine (khoá mỗi câu) rồi HOÀN nếu engine không trả lời
+//     được (migration 0024 `hoan_sao_hoi`) — trước đây trừ sau → N yêu cầu song song với 1 Sao được N câu.
 //   Câu khủng hoảng / ngoài phạm vi (engine /v1/hoi/dac-biet) KHÔNG bao giờ bị chặn hay trừ Sao.
 //   Không đếm được (thiếu Supabase service role / bí mật) → mở (fail-open): thà cho hỏi miễn phí còn hơn chặn nhầm.
 // Không lưu câu hỏi, không lưu IP: khoá khách = HMAC(IP) bằng bí mật máy chủ, chỉ sống trong bảng đếm theo ngày.
@@ -12,6 +13,7 @@ import { after, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { layCauHinh } from "@/lib/cau-hinh";
+import { baoLoi } from "@/lib/giam-sat";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { goiEngineDaKiem } from "@/lib/proxy";
 
@@ -47,7 +49,7 @@ export function khoaKhach(req: Request, bi = biMat()): string | null {
 }
 
 export type LuotHoi = { con_lai: number; tran: number; tai_khoan: boolean } | { sao_da_tru: number; so_du: number | null };
-type Cua = { ok: true; luot?: LuotHoi; xong: () => Promise<LuotHoi | undefined> } | { ok: false; res: NextResponse };
+type Cua = { ok: true; luot?: LuotHoi; xong: () => Promise<LuotHoi | undefined>; hoan?: () => Promise<void> } | { ok: false; res: NextResponse };
 
 const MO: Cua = { ok: true, xong: async () => undefined };
 
@@ -95,11 +97,21 @@ export async function cuaHoi(req: Request, moDun: string): Promise<Cua> {
       error: `Hết ${tran} câu miễn phí hôm nay. Hỏi tiếp: ${gia} Sao mỗi câu.`, can: "xac_nhan_sao", gia, so_du: soDu, tran,
     }, { status: 402 }) };
   }
-  // Trừ SAU khi engine trả lời được — khoá ngẫu nhiên mỗi câu (một câu, một lần trừ).
-  return { ok: true, xong: async () => {
-    const { data: d } = await phien.sb.rpc("dung_sao", { p_so: gia, p_khoa: `hoi:${moDun}:${randomUUID()}`, p_ghi_chu: "Hỏi đáp vượt lượt miễn phí" });
-    const kq = d as { ket_qua?: string; so_du?: number } | null;
-    return { sao_da_tru: kq?.ket_qua === "da_dung" ? gia : 0, so_du: kq?.so_du ?? null };
+  // SEC-2: trừ NGAY (khoá ngẫu nhiên mỗi câu — một câu, một lần trừ; dung_sao khoá theo người dùng nên song song không âm ví).
+  const khoaCau = `hoi:${moDun}:${randomUUID()}`;
+  const { data: d } = await phien.sb.rpc("dung_sao", { p_so: gia, p_khoa: khoaCau, p_ghi_chu: "Hỏi đáp vượt lượt miễn phí" });
+  const kq = d as { ket_qua?: string; so_du?: number } | null;
+  if (kq?.ket_qua !== "da_dung") {
+    const con = typeof kq?.so_du === "number" ? kq.so_du : soDu;
+    return { ok: false, res: NextResponse.json({
+      error: `Hết ${tran} câu miễn phí hôm nay. Câu tiếp theo ${gia} Sao, ví bạn còn ${con} Sao.`, can: "nap", gia, so_du: con, tran,
+      chao_mung: await chaoMungConNhan(phien),
+    }, { status: 402 }) };
+  }
+  const luot = { sao_da_tru: gia, so_du: kq.so_du ?? null };
+  return { ok: true, xong: async () => luot, hoan: async () => {
+    const { error: loi } = await dv.rpc("hoan_sao_hoi", { p_user_id: phien.user.id, p_khoa: `dung:${phien.user.id}:${khoaCau}` });
+    if (loi) baoLoi(new Error("hoan_sao_hoi"), { noi: "cua_sao", ma: loi.code ?? "" });
   } };
 }
 
@@ -108,7 +120,10 @@ export async function voiCuaHoi(req: Request, moDun: string, chay: () => Promise
   const cua = await cuaHoi(req, moDun);
   if (!cua.ok) return cua.res;
   const res = await chay();
-  if (res.status !== 200) return res;
+  if (res.status !== 200) {
+    await cua.hoan?.();   // SEC-2: đã trừ trước mà engine không trả lời được → hoàn
+    return res;
+  }
   demCauHoi();
   const luot = await cua.xong();
   if (!luot) return res;

@@ -31,7 +31,10 @@ export async function POST(req: Request) {
   const vao = DauVao.safeParse(await req.json().catch(() => null));
   if (!vao.success) return NextResponse.json({ error: "Dữ liệu không hợp lệ." }, { status: 422 });
   const { viec, ...du } = vao.data;
-  const kq = await goiEngineDaKiem(du, viec === "soan" ? "/v1/quan-tri/soan-nhap" : "/v1/quan-tri/kiem-dinh", dauNguoiGoi(req));
+  const kq = await goiEngineDaKiem(du, viec === "soan" ? "/v1/quan-tri/soan-nhap" : "/v1/quan-tri/kiem-dinh", {
+    ...dauNguoiGoi(req),
+    ...(process.env.ENGINE_QUAN_TRI_KEY ? { "x-quan-tri-key": process.env.ENGINE_QUAN_TRI_KEY } : {}),   // SEC-2: khoá riêng route AI quản trị
+  });
   if (!kq.ok) return kq.res;
   if (vao.data.viec === "soan") {
     await p.sb.rpc("ghi_nhat_ky_quan_tri", {

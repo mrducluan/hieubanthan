@@ -59,7 +59,7 @@ def _cum_cam() -> list[str]:
 
 def kiem_tra_chuong(van: str, nguon: str) -> list[str]:
     """Danh sách vi phạm của bản LLM so với văn bản nguồn của chương."""
-    loi: list[str] = []
+    loi: list[str] = hoi_van.lien_ket_la(van, nguon)   # SEC-2
     so_nguon = set(re.findall(r"\d+", nguon))
     for n in re.findall(r"\d+", van):
         if n not in so_nguon:

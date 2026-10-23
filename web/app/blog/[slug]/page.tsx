@@ -3,7 +3,6 @@
 // Thân bài là HTML từ xa → luôn lọc (cms-html / sanitizeNotFairArticleHtml), không render HTML thô.
 import type { Metadata } from "next";
 import Link from "next/link";
-import { draftMode } from "next/headers";
 import { notFound, permanentRedirect } from "next/navigation";
 import { ArrowRight, BookOpen, CalendarDays, Clock } from "lucide-react";
 import { NotFairPostHero } from "notfair-nextjs-blog/react";
@@ -13,6 +12,7 @@ import { BaiCms } from "@/components/blog/BaiCms";
 import { baiBlog, duongBlog, slugTuUrl } from "@/lib/blog";
 import { anhCms, baiCms, baiLienQuan, tinhNangCms } from "@/lib/cms";
 import { sanitizeNotFairArticleHtml } from "@/lib/notfair-article";
+import { duocXemNhap } from "@/lib/noi-dung-trang";
 import { catMoTa, goiLd, ldDuongDan, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import styles from "../notfair-article.module.css";
 import { UngHoNho } from "@/components/ung-ho/UngHoNho";
@@ -21,7 +21,7 @@ type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = slugTuUrl((await params).slug);
-  const nhap = (await draftMode()).isEnabled;
+  const nhap = await duocXemNhap(`bai:${slug}`);   // SEC-2: nháp chỉ mở cho đúng bài được ký
   const c = await baiCms(slug, nhap);
   if (c && "bai" in c) {
     const b = c.bai;
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const slug = slugTuUrl((await params).slug);
-  const nhap = (await draftMode()).isEnabled;
+  const nhap = await duocXemNhap(`bai:${slug}`);   // SEC-2: nháp chỉ mở cho đúng bài được ký
   const c = await baiCms(slug, nhap);
   if (c && "chuyen" in c) permanentRedirect(duongBlog(c.chuyen));
   if (c && "bai" in c) {

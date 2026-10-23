@@ -1,9 +1,10 @@
 // Tài khoản ban biên tập (đăng nhập /admin). Tách hẳn khỏi tài khoản người dùng web (Supabase).
+import { sql } from "@payloadcms/db-postgres";
 import { APIError, type CollectionConfig } from "payload";
 import { VAI_TRO, canMfa, chiQuanTri, daDangNhap, laQuanTri, vaiTro } from "../access";
 import { THOI_HAN_GIAY, TEN_COOKIE, cookieHopLe, docCookie, giaiMa, kiemMa, maHoa, taoBiMat, taoCookie, uriOtp, base32 } from "../lib/totp";
 
-type NguoiMfa = { id: number | string; email?: string; vai_tro?: string; mfa_bat?: boolean | null; collection?: string };
+type NguoiMfa = { id: number | string; email?: string; vai_tro?: string; mfa_bat?: boolean | null; collection?: string; _sid?: string };
 const nguoi = (u: unknown) => (u && (u as NguoiMfa).collection === "bien-tap-vien" ? (u as NguoiMfa) : null);
 const SAI_TOI_DA = 5, KHOA_PHUT = 15;
 
@@ -45,8 +46,11 @@ export const BienTapVien: CollectionConfig = {
       handler: async (req) => {
         const u = nguoi(req.user);
         if (!u) return Response.json({ loi: "Cần đăng nhập" }, { status: 401 });
-        return Response.json({ email: u.email, can: canMfa(u), da_bat: Boolean(u.mfa_bat),
-          da_xac_thuc: cookieHopLe(docCookie(req.headers.get("cookie")), u.id), may_doc: u.vai_tro === "may_doc" });
+        // co_vai_tro: tài khoản biên tập hợp lệ (không phải Máy đọc) → được TỰ bật 2 bước kể cả khi chưa bắt buộc
+        // (trước đây màn 2 bước chỉ mở khi `can` → Quản trị không bật trước được để rồi mới đặt CMS_BAT_BUOC_MFA=1).
+        const coVaiTro = Boolean(u.vai_tro && u.vai_tro !== "may_doc" && VAI_TRO.some((v) => v.value === u.vai_tro));
+        return Response.json({ email: u.email, can: canMfa(u), da_bat: Boolean(u.mfa_bat), co_vai_tro: coVaiTro,
+          da_xac_thuc: cookieHopLe(docCookie(req.headers.get("cookie")), u.id, u._sid), may_doc: u.vai_tro === "may_doc" });
       },
     },
     {
@@ -56,6 +60,7 @@ export const BienTapVien: CollectionConfig = {
         const u = nguoi(req.user);
         if (!u) return Response.json({ loi: "Cần đăng nhập" }, { status: 401 });
         if (u.mfa_bat) return Response.json({ loi: "Đã bật xác thực 2 bước." }, { status: 409 });
+        if (u.vai_tro === "may_doc") return Response.json({ loi: "Tài khoản Máy đọc không đăng nhập giao diện." }, { status: 403 });
         const bi = taoBiMat();
         await req.payload.update({ collection: "bien-tap-vien", id: u.id, overrideAccess: true, context: { mfa: true },
           data: { mfa_bi_mat: maHoa(bi), mfa_buoc_cuoi: 0, mfa_sai: 0 } as never });
@@ -69,25 +74,30 @@ export const BienTapVien: CollectionConfig = {
         const u = nguoi(req.user);
         if (!u) return Response.json({ loi: "Cần đăng nhập" }, { status: 401 });
         const body = (typeof req.json === "function" ? await req.json().catch(() => ({})) : {}) as { ma?: unknown };
-        const doc = await req.payload.findByID({ collection: "bien-tap-vien", id: u.id, overrideAccess: true, showHiddenFields: true, depth: 0 }) as unknown as
-          { mfa_bi_mat?: string | null; mfa_buoc_cuoi?: number | null; mfa_sai?: number | null; mfa_khoa_den?: string | null; mfa_bat?: boolean };
-        if (doc.mfa_khoa_den && Date.parse(doc.mfa_khoa_den) > Date.now()) {
-          return Response.json({ loi: `Nhập sai nhiều lần. Thử lại sau ${KHOA_PHUT} phút.` }, { status: 429 });
-        }
+        // SEC-2: GIỮ CHỖ một lượt thử NGUYÊN TỬ trong SQL trước khi kiểm mã — gửi song song N yêu cầu cũng chỉ được 5 lượt
+        // / 15 phút (trước đây đọc mfa_sai rồi ghi +1 ở bước sau → N yêu cầu cùng lúc = N lượt đoán).
+        const db = req.payload.db as unknown as { drizzle: { execute: (q: unknown) => Promise<{ rows: Record<string, unknown>[] }> } };
+        const giu = await db.drizzle.execute(sql`
+          update cms.bien_tap_vien set
+            mfa_sai = case when coalesce(mfa_sai, 0) + 1 >= ${SAI_TOI_DA} then 0 else coalesce(mfa_sai, 0) + 1 end,
+            mfa_khoa_den = case when coalesce(mfa_sai, 0) + 1 >= ${SAI_TOI_DA}
+              then now() + make_interval(mins => ${KHOA_PHUT}) else mfa_khoa_den end
+          where id = ${u.id} and (mfa_khoa_den is null or mfa_khoa_den <= now())
+          returning mfa_bi_mat, mfa_buoc_cuoi`);
+        const doc = giu.rows[0] as { mfa_bi_mat?: string | null; mfa_buoc_cuoi?: number | null } | undefined;
+        if (!doc) return Response.json({ loi: `Nhập sai nhiều lần. Thử lại sau ${KHOA_PHUT} phút.` }, { status: 429 });
         const bi = doc.mfa_bi_mat ? giaiMa(doc.mfa_bi_mat) : null;
         if (!bi) return Response.json({ loi: "Chưa bắt đầu bật xác thực 2 bước." }, { status: 409 });
-        const buoc = kiemMa(bi, String(body.ma ?? "").replace(/\s/g, ""), doc.mfa_buoc_cuoi ?? -1);
-        if (buoc === null) {
-          const sai = (doc.mfa_sai ?? 0) + 1;
-          await req.payload.update({ collection: "bien-tap-vien", id: u.id, overrideAccess: true, context: { mfa: true },
-            data: { mfa_sai: sai >= SAI_TOI_DA ? 0 : sai, mfa_khoa_den: sai >= SAI_TOI_DA ? new Date(Date.now() + KHOA_PHUT * 60_000).toISOString() : null } as never });
-          return Response.json({ loi: "Mã không đúng hoặc đã dùng. Lấy mã mới trong app xác thực." }, { status: 400 });
-        }
-        await req.payload.update({ collection: "bien-tap-vien", id: u.id, overrideAccess: true, context: { mfa: true },
-          data: { mfa_bat: true, mfa_buoc_cuoi: buoc, mfa_sai: 0, mfa_khoa_den: null } as never });
+        const buoc = kiemMa(bi, String(body.ma ?? "").replace(/\s/g, ""), Number(doc.mfa_buoc_cuoi ?? -1));
+        if (buoc === null) return Response.json({ loi: "Mã không đúng hoặc đã dùng. Lấy mã mới trong app xác thực." }, { status: 400 });
+        // Đúng mã: ghi bước (chặn dùng lại — cũng nguyên tử: hai yêu cầu cùng mã chỉ một cái qua), xoá đếm sai.
+        const xong = await db.drizzle.execute(sql`
+          update cms.bien_tap_vien set mfa_bat = true, mfa_buoc_cuoi = ${buoc}, mfa_sai = 0, mfa_khoa_den = null
+          where id = ${u.id} and coalesce(mfa_buoc_cuoi, -1) < ${buoc} returning id`);
+        if (!xong.rows.length) return Response.json({ loi: "Mã không đúng hoặc đã dùng. Lấy mã mới trong app xác thực." }, { status: 400 });
         const bao = process.env.NODE_ENV === "production" ? "; Secure" : "";
         return Response.json({ ok: true }, { headers: {
-          "set-cookie": `${TEN_COOKIE}=${taoCookie(u.id)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${THOI_HAN_GIAY}${bao}`,
+          "set-cookie": `${TEN_COOKIE}=${taoCookie(u.id, u._sid)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${THOI_HAN_GIAY}${bao}`,
         } });
       },
     },

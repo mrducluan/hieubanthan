@@ -8,6 +8,7 @@ Mọi response đều mang `engine_version` — bắt buộc để tái lập k�
 """
 from __future__ import annotations
 
+import contextlib
 import datetime as _dt
 import hmac
 import os
@@ -64,7 +65,17 @@ if os.environ.get("RENDER") and not os.environ.get("ENGINE_API_KEY"):
 _TRAN_THAN = {"/v1/phongthuy/doc-anh": 6_000_000, "/v1/quan-tri/kiem-dinh": 9_000_000}
 _TRAN_THAN_MAC_DINH = 2_000_000
 
+@contextlib.asynccontextmanager
+async def _vong_doi(_app: FastAPI):
+    """SEC-2: route đồng bộ chạy trong pool luồng AnyIO (mặc định 40). Lượt gọi AI chờ 40–60 giây → ~40 lượt cùng lúc
+    làm treo mọi route khác. Nâng lên 120 luồng (chủ yếu chờ mạng, không tốn CPU); hạn mức AI RL-1 vẫn giữ tổng lượt."""
+    import anyio.to_thread
+    anyio.to_thread.current_default_thread_limiter().total_tokens = int(os.environ.get("ENGINE_SO_LUONG", "120"))
+    yield
+
+
 app = FastAPI(
+    lifespan=_vong_doi,
     title="HieuBanThan Engine",
     version=ENGINE_VERSION,
     description="Tầng CALC — tính toán tất định, không LLM.",
