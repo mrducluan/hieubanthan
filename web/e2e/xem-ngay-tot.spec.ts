@@ -24,7 +24,7 @@ test("trang một ngày: HTML máy chủ có H1 + Kim Quỹ, trực Khai, giờ 
   await expect(page.getByTestId("vong-gio").first()).toHaveAttribute("aria-label", /Tý, Sửu, Thìn, Tỵ, Mùi, Tuất/);
   await expect(page.getByTestId("nghi")).toContainText("Cưới hỏi");
   await expect(page.getByTestId("ky")).toContainText("An táng");
-  await expect(page.getByText("Tuổi Giáp Dần")).toBeVisible();
+  await expect(page.getByTestId("the-ngay").getByText("Tuổi Giáp Dần")).toBeVisible();
   await expect(page.getByTestId("hop-nhat")).toContainText("cưới hỏi");
   await page.getByTestId("giai-nghia-nghi-ky").locator("summary").click();
   await expect(page.getByTestId("giai-nghia-nghi-ky")).toContainText("Cưới hỏi:");
