@@ -8,6 +8,7 @@ import { DiemMuLuot } from "@/components/trang-chu/DiemMuLuot";
 import { ChuNhan } from "@/components/cms/ChuNhan";
 import { AnhCmsHoac } from "@/components/cms/AnhCmsHoac";
 import { taoChu } from "@/lib/chu-trang";
+import { CO_TRANG_CHU, layCo } from "@/lib/kieu-chu";
 import { CHU_TRANG_CHU, SO_DIEM_MU } from "@/lib/chu/trang-chu";
 import { SoSanhChatbot } from "@/components/trang-chu/SoSanhChatbot";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
@@ -58,17 +59,17 @@ export default async function TrangChu() {
       <section className="relative grid items-center gap-8 pt-2 md:pt-6 lg:grid-cols-[1.05fr_1fr] lg:gap-10" data-testid="hero">
         <div>
           <p className="eyebrow flex items-center gap-2"><Sparkles className="size-3.5 text-gold" aria-hidden /> {c("dau.nhan_tren")}</p>
-          <h1 className="mt-4 text-[2.6rem] leading-[1.08] sm:text-6xl">
+          <h1 className={`mt-4 leading-[1.08] ${layCo(CO_TRANG_CHU.h1, c("co.h1"))}`}>
             {nd.dau.h1 && nd.dau.h1 !== H1_MAC_DINH
               ? <ChuNhan chu={nd.dau.h1} lopNhan="text-gradient-gold italic" />
               : <>Bạn là <span className="text-gradient-gold italic">số mấy?</span></>}
           </h1>
           {/* TC-HOOK: 3 giây đầu — một điểm mù rất đời thường của từng con số → người xem nhận ra mình/người quen
               → muốn biết số của mình. Lời dẫn nói rõ nhận được gì, mất bao lâu. */}
-          <DiemMuLuot className="mt-5 max-w-xl" nhan={c("diem_mu.nhan")}
+          <DiemMuLuot className="mt-5 max-w-xl" co={layCo(CO_TRANG_CHU.diemMu, c("co.diem_mu"))} nhan={c("diem_mu.nhan")}
             cau={Array.from({ length: SO_DIEM_MU }, (_, i) => c(`diem_mu.cau_${i + 1}`))} />
           <LoiDanCms nd={nd} className="mt-4 max-w-xl text-lg text-fg-muted" lopNhan="text-cinnabar" />
-          <ul className="mt-5 flex flex-wrap gap-2 text-[0.8rem] text-fg-muted" aria-label="Điểm khác biệt" data-testid="hero-diem">
+          <ul className={`mt-5 flex flex-wrap gap-2 text-fg-muted ${layCo(CO_TRANG_CHU.chip, c("co.chip"))}`} aria-label="Điểm khác biệt" data-testid="hero-diem">
             {([[Zap, "text-jade", c("dau.chip_1")], [Eye, "text-gold", c("dau.chip_2")], [ListChecks, "text-moon", c("dau.chip_3")]] as const).map(([Icon, mau, chu]) => (
               <li key={chu} className="inline-flex items-center gap-1.5 rounded-full border border-line/70 bg-surface/50 px-3 py-1 backdrop-blur">
                 <Icon className={`size-3.5 ${mau}`} aria-hidden />{chu}

@@ -9,6 +9,8 @@ export type MucChu = {
   mac_dinh: string;
   /** Giới hạn ký tự (mặc định 300). */ toi_da?: number;
   /** Nhóm hiển thị trong CMS (vd "Đầu trang", "Bảng so sánh"). */ nhom?: string;
+  /** Mục chọn (vd cỡ chữ): CMS hiện danh sách chọn thay ô gõ; web chỉ nhận đúng các giá trị này. `mac_dinh` là một trong số đó. */
+  lua_chon?: readonly { gia_tri: string; nhan: string }[];
 };
 export type BangChu = Readonly<Record<string, MucChu>>;
 /** Chữ CMS đã lưu: khoá → chữ thay. */
@@ -28,6 +30,10 @@ export function locChu(bang: BangChu, cms: unknown): Record<string, string> {
   for (const [k, v] of Object.entries(cms as Record<string, unknown>)) {
     const muc = bang[k];
     if (!muc || !KHOA.test(k) || typeof v !== "string") continue;
+    if (muc.lua_chon) {
+      if (v !== muc.mac_dinh && muc.lua_chon.some((o) => o.gia_tri === v)) ra[k] = v;
+      continue;
+    }
     const s = v.replace(/<[^>]*>/g, "").replace(/[ \t]+/g, " ").replace(/\s*\n\s*/g, " ").trim().slice(0, muc.toi_da ?? TOI_DA_CHU).trim();
     if (s && s !== muc.mac_dinh) ra[k] = s;
   }
@@ -78,4 +84,4 @@ export type BangHinh = Readonly<Record<string, MucHinh>>;
 
 /** Bảng chữ gửi CMS: chỉ nhãn + mặc định + giới hạn + nhóm (đúng dạng CMS đọc). */
 export const bangChoCms = (bang: BangChu) =>
-  Object.fromEntries(Object.entries(bang).map(([k, m]) => [k, { nhan: m.nhan, mac_dinh: m.mac_dinh, toi_da: m.toi_da ?? TOI_DA_CHU, ...(m.nhom ? { nhom: m.nhom } : {}) }]));
+  Object.fromEntries(Object.entries(bang).map(([k, m]) => [k, { nhan: m.nhan, mac_dinh: m.mac_dinh, toi_da: m.toi_da ?? TOI_DA_CHU, ...(m.nhom ? { nhom: m.nhom } : {}), ...(m.lua_chon ? { lua_chon: m.lua_chon } : {}) }]));

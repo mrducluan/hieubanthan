@@ -3,6 +3,11 @@
 // đang chạy (TC-HOOK) — kiểm định CMS không biết điều này, người duyệt phải đọc.
 import type { BangChu, BangHinh } from "@/lib/chu-trang";
 
+const CO = "Cỡ chữ đầu trang";
+const CO_CHON = [
+  { gia_tri: "nho", nhan: "Nhỏ" }, { gia_tri: "thuong", nhan: "Vừa" },
+  { gia_tri: "lon", nhan: "Lớn" }, { gia_tri: "rat_lon", nhan: "Rất lớn" },
+] as const;
 const D = "Đầu trang", DM = "Dòng điểm mù chạy", SS = "Vì sao xem ở đây", B = "Bảng so sánh", M = "Bốn mảng huyền học", R = "Ô riêng tư";
 
 const DIEM_MU: [number, string][] = [
@@ -49,6 +54,10 @@ export const CHU_TRANG_CHU = {
   "dau.chip_1": { nhom: D, nhan: "Chip 1 (biểu tượng tia sét)", mac_dinh: "30 giây · không cần tài khoản", toi_da: 40 },
   "dau.chip_2": { nhom: D, nhan: "Chip 2 (biểu tượng con mắt)", mac_dinh: "Nói thật cả điểm mù", toi_da: 40 },
   "dau.chip_3": { nhom: D, nhan: "Chip 3 (biểu tượng danh sách)", mac_dinh: "Bạn tự chấm đúng – sai", toi_da: 40 },
+  // Cỡ chữ = lựa chọn có sẵn (không px tự do): web đổi bằng lớp Tailwind cố định (lib/kieu-chu.ts CO_TRANG_CHU).
+  "co.h1": { nhom: CO, nhan: "Cỡ tiêu đề lớn (\"Bạn là số mấy?\")", mac_dinh: "thuong", lua_chon: CO_CHON },
+  "co.diem_mu": { nhom: CO, nhan: "Cỡ dòng điểm mù chạy", mac_dinh: "thuong", lua_chon: CO_CHON },
+  "co.chip": { nhom: CO, nhan: "Cỡ ba chip (30 giây · Nói thật · Tự chấm)", mac_dinh: "thuong", lua_chon: CO_CHON },
   "diem_mu.nhan": { nhom: DM, nhan: "Nhãn đỏ bên trái", mac_dinh: "Điểm mù", toi_da: 20 },
   ...Object.fromEntries(DIEM_MU.map(([so, cau], i) => [`diem_mu.cau_${i + 1}`,
     { nhom: DM, nhan: `Câu ${i + 1} (mỗi câu hiện 3 giây; *Số n* = phần vàng)`, mac_dinh: `*Số ${so}* ${cau}`, toi_da: 80 }])),
