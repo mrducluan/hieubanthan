@@ -358,7 +358,7 @@
     "Lộc ở Phu Thê: tình cảm có duyên, được nhờ người ấy",
     "Độc thân: dễ được giới thiệu; đã cưới: nhà có không khí",
     "Năm Lộc vào Phu Thê hợp gặp gỡ, làm lành",
-    "Nói ra phần người ấy đã góp"
+    "Ghi nhận công người ấy bằng lời cụ thể"
    ]
   },
   "hoa-loc-cung-tu-nu": {
@@ -1418,7 +1418,7 @@
    ],
    "y_chinh": [
     "Lộc ở Phụ Mẫu: cha mẹ, thầy, sếp sẵn lòng nâng đỡ",
-    "Giấy tờ, học hành khá thuận",
+    "Hồ sơ, thi cử thường suôn",
     "Năm Lộc vào Phụ Mẫu hợp làm hồ sơ, thi cử",
     "Giữ liên lạc với sếp cũ, thầy cũ"
    ]
@@ -4036,7 +4036,7 @@
     {
      "tieu_de": "Có Hoá Khoa ở Phúc Đức nên làm gì?",
      "danh_sach": [
-      "Giữ một góc đọc sách hoặc một buổi yên lặng mỗi tuần.",
+      "Dành tối Chủ nhật cho một cuốn sách, tắt thông báo điện thoại.",
       "Viết ra một điều mình học được sau mỗi chuyện buồn.",
       "Kể cho con cháu nghe chuyện tử tế của người lớn trong họ."
      ]
@@ -4250,7 +4250,7 @@
    ],
    "y_chinh": [
     "Khoa ở Phụ Mẫu: người trên coi trọng việc học, sẵn lòng chỉ bảo",
-    "Thi cử, giấy tờ khá thuận",
+    "Hồ sơ ít trục trặc, có thầy tận tâm",
     "Năm Khoa vào Phụ Mẫu hợp nộp hồ sơ, gia hạn giấy tờ",
     "Giữ bằng cấp, chứng chỉ trong một bìa riêng"
    ]
@@ -5335,7 +5335,7 @@
      "tieu_de": "Có Hoá Kỵ ở Điền Trạch nên làm gì?",
      "danh_sach": [
       "Kiểm tra giấy tờ nhà đất qua người làm pháp lý độc lập.",
-      "Bàn chuyện nhà vào lúc mọi người đang vui, không lúc đang mệt.",
+      "Chọn buổi cả nhà thong thả để bàn chuyện sửa, mua; tránh lúc ai đó đang mệt.",
       "Để dư một khoản cho sửa chữa phát sinh."
      ]
     }
@@ -5432,7 +5432,7 @@
     "Kỵ ở Điền Trạch: chuyện nhà là chỗ hay lo",
     "Không phải lời phán mất nhà",
     "Kiểm giấy tờ qua người độc lập, để dư tiền sửa",
-    "Bàn chuyện nhà lúc mọi người đang vui"
+    "Chọn lúc cả nhà thong thả để bàn chuyện sửa, mua"
    ]
   },
   "hoa-ky-cung-phuc-duc": {
