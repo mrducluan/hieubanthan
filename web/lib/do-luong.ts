@@ -77,6 +77,10 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   khop_2: "number",     // BT-DC: … khớp cách theo tháng sinh
   so_cau: "number",     // BT-DC: số câu đã trả lời (bỏ "không nhớ")
   vi_tri: "string",     // ND-2: tren / duoi / cuoi   // SAO-3: mã nhiệm vụ (luu_ho_so / hoi_3_cau / moi_1_ban)
+  so_anh: "number",     // PT-V2: số ảnh gửi máy đọc (1–3) — không bao giờ là ảnh hay tên tệp
+  so_dau_hieu: "number", // PT-V2: số dấu hiệu máy gợi ý
+  da_bat: "number",     // PT-V2: 1 = máy đọc ảnh đang bật, 0 = tắt / lỗi
+  ma: "string",         // PT-V2: mã dấu hiệu người dùng xác nhận (xa_ngang…), chỉ mã
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */

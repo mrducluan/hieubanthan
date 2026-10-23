@@ -5,11 +5,13 @@ Chỉ cần ngày sinh (hoặc năm) + giới tính; không cần giờ. Mệnh 
 """
 from __future__ import annotations
 
+import base64
+import binascii
 import datetime as _dt
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator, model_validator
 
 from app.calc import phongthuy as pt
 from app.kb import phongthuy_kb as kbp
@@ -155,6 +157,55 @@ def api_do_thi(y_dinh: str) -> dict:
     g["dau_hieu_hoi"] = {x: bo_cuc.DAU_HIEU[x]["hoi"] for x in g["dau_hieu"] if x in bo_cuc.DAU_HIEU}
     g["ten_phong"] = {p: bo_cuc.TEN_PHONG[p] for p in g["phong"]}
     return {"engine_version": ENGINE_VERSION, **g, **do_thi.meta()}
+
+
+class AnhVao(BaseModel):
+    """Một ảnh nhà — base64 KHÔNG có tiền tố `data:`; chỉ đi qua lượt gọi, không ghi đĩa, không log."""
+    model_config = ConfigDict(extra="forbid")
+
+    du_lieu: str = Field(min_length=16, description="base64 của ảnh (không có tiền tố data:)")
+    loai: Literal["image/jpeg", "image/png", "image/webp"]
+
+    @field_validator("du_lieu")
+    @classmethod
+    def _base64(cls, v: str) -> str:
+        if len(v) > DOC_ANH_MOT_ANH:
+            raise ValueError("Mỗi ảnh tối đa khoảng 1,2 MB — hãy thu nhỏ ảnh trước khi gửi.")
+        try:
+            base64.b64decode(v, validate=True)
+        except (binascii.Error, ValueError):
+            raise ValueError("Dữ liệu ảnh không phải base64 hợp lệ (bỏ tiền tố data: nếu có).")
+        return v
+
+
+DOC_ANH_MOT_ANH, DOC_ANH_TONG = 1_600_000, 4_000_000
+
+
+class DocAnhInput(BaseModel):
+    """PT-V2 — gửi 1..3 ảnh nhà cho lớp đọc ảnh (tầng NARRATIVE, `narrative/doc_anh_nha.py`). Kết quả chỉ là NHÃN cần người
+    dùng xác nhận (`can_xac_nhan`); web ghép vào bố cục với `nguon: anh` sau khi người dùng bấm Đúng."""
+    model_config = ConfigDict(extra="forbid")
+
+    anh: list[AnhVao] = Field(min_length=1, max_length=3)
+    goc: Annotated[str, StringConstraints(strip_whitespace=True, max_length=60)] | None = Field(default=None, description="Gợi ý góc chụp, vd 'phòng khách'")
+    loai_nha: Annotated[str, StringConstraints(strip_whitespace=True, max_length=30)] | None = None
+    y_dinh: Annotated[str, StringConstraints(strip_whitespace=True, max_length=40)] | None = None
+
+    @model_validator(mode="after")
+    def _tong(self) -> "DocAnhInput":
+        if sum(len(a.du_lieu) for a in self.anh) > DOC_ANH_TONG:
+            raise ValueError("Tổng dung lượng ảnh quá lớn — gửi tối đa 3 ảnh, mỗi ảnh đã thu nhỏ.")
+        return self
+
+
+@router.post("/doc-anh")
+def api_doc_anh(inp: DocAnhInput) -> dict:
+    """Máy đọc ảnh nhà (PT-V2): trả dấu hiệu / phòng mô hình thị giác NHÌN THẤY, tất cả `can_xac_nhan`. Không có khoá AI →
+    `da_bat: false, ly_do_tat: chua_dat_khoa` (không lỗi 5xx); hết lượt RL-1 → `het_luot`; lỗi dịch vụ → `loi_dich_vu`."""
+    from app.narrative import doc_anh_nha  # noqa: PLC0415
+    r = doc_anh_nha.doc_anh({"anh": [{"du_lieu": a.du_lieu, "loai": a.loai} for a in inp.anh],
+                             "goc": inp.goc, "loai_nha": inp.loai_nha, "y_dinh": inp.y_dinh})
+    return {"engine_version": ENGINE_VERSION, **r}
 
 
 @router.get("/bo-cuc/danh-muc")

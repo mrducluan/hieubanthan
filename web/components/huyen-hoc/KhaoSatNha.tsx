@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { SoDoNha } from "@/components/huyen-hoc/SoDoNha";
 import { CachLam } from "@/components/huyen-hoc/CachLam";
 import { HoiNhanhAnh } from "@/components/huyen-hoc/HoiNhanhAnh";
+import { DocAnhNha } from "@/components/huyen-hoc/DocAnhNha";
 import { ImagePlus, RotateCw } from "lucide-react";
 
 interface DanhMuc {
@@ -75,6 +76,14 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
   const [viTri, setViTri] = useState<Record<string, string>>({});
   const [phongChon, setPhongChon] = useState("cua_chinh");
   const [dau, setDau] = useState<Set<string>>(new Set());
+  // PT-V2: dấu hiệu người dùng bấm "Đúng" cho gợi ý từ ảnh (gửi nguon:"anh", xac_nhan:true — tập con của `dau`);
+  // "Không" → khongCo (gửi co:false, nguon:"nguoi_dung" — người dùng khai rõ, thắng suy luận mặt bằng, UI-PT 4).
+  // Gợi ý CHƯA bấm không đi vào bố cục. Chỉ mã, không ảnh.
+  const [tuAnh, setTuAnh] = useState<Set<string>>(new Set());
+  const [khongCo, setKhongCo] = useState<Set<string>>(new Set());
+  const [daTraLoi, setDaTraLoi] = useState<Record<string, boolean>>({});
+  const [anhGoiY, setAnhGoiY] = useState<File | null>(null);
+  const [yDinhNhanh, setYDinhNhanh] = useState<string | null>(null);
   const [huongDo, setHuongDo] = useState<Record<string, string>>({});
   const [kq, setKq] = useState<KetQua | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
@@ -118,6 +127,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     const b = nhaLuu.bo_cuc;
     if (b?.vi_tri || doiCan) setViTri(b?.vi_tri ?? {});
     if (b?.dau_hieu || doiCan) setDau(new Set(b?.dau_hieu ?? []));
+    if (b?.tu_anh || doiCan) { setTuAnh(new Set((b?.tu_anh ?? []).filter((m) => (b?.dau_hieu ?? []).includes(m)))); setKhongCo(new Set()); setDaTraLoi({}); }
     if (b?.huong_do || doiCan) setHuongDo(Object.fromEntries(Object.entries(b?.huong_do ?? {}).map(([k, v]) => [k, String(v)])));
     if (nhaLuu.loai_nha) setLoaiNha(nhaLuu.loai_nha);
     if (doiCan) setKq(null);
@@ -147,6 +157,21 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     return { luoi: luoi.map((row) => row.map((v) => (v ? "1" : "0")).join("")), ...(Object.keys(phong).length ? { phong } : {}), ...(ban_cong ? { ban_cong } : {}) };
   };
 
+  // PT-V2: người dùng xác nhận một gợi ý từ ảnh. Đúng → tích ô + đánh dấu "từ ảnh"; Không → bỏ tích + khai rõ không có.
+  const xacNhanAnh = (ma: string, dung: boolean) => {
+    setDaTraLoi((t) => ({ ...t, [ma]: dung }));
+    setDau((s0) => { const n = new Set(s0); if (dung) n.add(ma); else n.delete(ma); return n; });
+    setTuAnh((s0) => { const n = new Set(s0); if (dung) n.add(ma); else n.delete(ma); return n; });
+    setKhongCo((s0) => { const n = new Set(s0); if (dung) n.delete(ma); else n.add(ma); return n; });
+    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "doc_anh_xac_nhan", ma, dung: dung ? 1 : 0 });
+  };
+  // Tích / bỏ tích tay một ô: tích tay = nguồn người dùng (bỏ cờ "từ ảnh", bỏ khai "không có"); bỏ tích = bỏ cờ từ ảnh.
+  const tichO = (ma: string, co: boolean) => {
+    setDau((s) => { const n = new Set(s); if (co) n.add(ma); else n.delete(ma); return n; });
+    setTuAnh((s) => { if (!s.has(ma)) return s; const n = new Set(s); n.delete(ma); return n; });
+    if (co) setKhongCo((s) => { if (!s.has(ma)) return s; const n = new Set(s); n.delete(ma); return n; });
+  };
+
   const dat = (cung: string) => setViTri((v) => {
     const m = { ...v };
     if (m[phongChon] === cung) delete m[phongChon]; else m[phongChon] = cung;
@@ -167,6 +192,9 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     }
     const mb = matBang();
     const daXuLy = (nhaLuu?.bo_cuc?.da_xu_ly ?? []).filter((m) => !dau.has(m));   // tích lại = chưa xử lý nữa
+    // PT-V2: "Không" cho gợi ý từ ảnh → co:false như đã xử lý (người dùng khai rõ); không trùng mã đã tích.
+    const khaiKhong = [...new Set([...daXuLy, ...[...khongCo].filter((m) => !dau.has(m))])];
+    const tuAnhGui = [...tuAnh].filter((m) => dau.has(m));
     if (d == null && !huong && Object.keys(viTri).length === 0 && dau.size === 0 && !mb) {
       setLoi("Hãy khai ít nhất hướng nhà, vị trí một phòng, một dấu hiệu, hoặc vẽ mặt bằng."); return;
     }
@@ -178,8 +206,9 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
           ...(loaiNha ? { loai_nha: loaiNha } : {}),
           vi_tri: viTri, huong_do: hd,
           // UI-PT 4: dấu hiệu đã bấm "Tôi đã xử lý" ở bài đọc (hồ sơ nhà) gửi co:false → engine không luận lại dù mặt bằng suy ra.
-          dau_hieu: Object.fromEntries([...[...dau].map((m) => [m, { co: true, nguon: "nguoi_dung" }]),
-            ...daXuLy.map((m) => [m, { co: false, nguon: "nguoi_dung" }])]),
+          dau_hieu: Object.fromEntries([
+            ...[...dau].map((m) => [m, tuAnh.has(m) ? { co: true, nguon: "anh", xac_nhan: true } : { co: true, nguon: "nguoi_dung" }]),
+            ...khaiKhong.map((m) => [m, { co: false, nguon: "nguoi_dung" }])]),
           ...(mb ? { mat_bang: mb } : {}),
         },
         goc_nhin: gocNhin,
@@ -188,7 +217,8 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
       setKq(r);
       try {
         luuHoSoNha({ ...(d != null ? { huong_do: d } : {}), ...(loaiNha ? { loai_nha: loaiNha as "can_ho" } : {}),
-          bo_cuc: { vi_tri: viTri, huong_do: hd, dau_hieu: [...dau], ...(daXuLy.length ? { da_xu_ly: daXuLy } : {}), ...(mb ? { mat_bang: mb } : {}) } });
+          bo_cuc: { vi_tri: viTri, huong_do: hd, dau_hieu: [...dau], ...(tuAnhGui.length ? { tu_anh: tuAnhGui } : {}),
+            ...(daXuLy.length ? { da_xu_ly: daXuLy } : {}), ...(mb ? { mat_bang: mb } : {}) } });
       } catch { /* bỏ qua */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "khao_sat_nha", co_mat_bang: Boolean(mb), loai_nha: loaiNha, goc_nhin: gocNhin });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa luận được bố cục này."); }
@@ -200,7 +230,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
       <h2 id="khao-sat-nha" className="flex items-center gap-2 text-xl"><Home className="size-5 text-gold" aria-hidden /> Khảo sát nhà</h2>
       <p className="mt-1 text-sm text-fg-muted">
         Khai bố cục nhà như khi thầy phong thuỷ đến xem: phòng nằm ở phương nào (nhìn từ giữa nhà), có những dấu hiệu gì.
-        Sắp tới bạn chỉ cần chụp ảnh — hệ thống điền sẵn, bạn xác nhận. Ảnh sẽ không được lưu.
+        Có thể chọn vài ảnh góc nhà để máy gợi ý dấu hiệu (thử nghiệm) — bạn xác nhận rồi hệ thống mới luận. Ảnh không được lưu.
       </p>
 
       <div className="mt-4 grid gap-5 lg:grid-cols-2">
@@ -323,7 +353,10 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
         </div>
 
         <div className="space-y-3">
-          <HoiNhanhAnh dau={dau} onDat={(ma, co) => setDau((s0) => { const n = new Set(s0); if (co) n.add(ma); else n.delete(ma); return n; })} />
+          <HoiNhanhAnh dau={dau} onDat={(ma, co) => { if (co == null) tichO(ma, false); else tichO(ma, co); }}
+            onChonAnh={setAnhGoiY} onYDinh={setYDinhNhanh} />
+          <DocAnhNha cauHoi={Object.fromEntries((dm?.dau_hieu ?? []).map((x) => [x.ma, x.hoi]))} tenPhong={dm?.phong ?? {}}
+            loaiNha={loaiNha} yDinh={yDinhNhanh} anhGoiY={anhGoiY} dau={dau} daTraLoi={daTraLoi} onXacNhan={xacNhanAnh} />
           <fieldset className="space-y-3">
           <legend className="text-sm font-medium text-fg">4. Dấu hiệu bạn thấy (đánh dấu nếu có)</legend>
           {Object.entries(NHOM_DH).map(([nhom, ten]) => (
@@ -334,8 +367,10 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
                   <li key={x.ma}>
                     <label className="flex items-start gap-2 text-sm text-fg-muted">
                       <input type="checkbox" className="mt-1 size-4 accent-[rgb(var(--gold))]" checked={dau.has(x.ma)}
-                        onChange={(e) => setDau((s) => { const n = new Set(s); if (e.target.checked) n.add(x.ma); else n.delete(x.ma); return n; })} />
-                      {x.hoi}
+                        onChange={(e) => tichO(x.ma, e.target.checked)} />
+                      <span>{x.hoi}
+                        {dau.has(x.ma) && tuAnh.has(x.ma) && <span className="ml-1.5 rounded-full border border-gold/50 px-1.5 py-px text-[0.65rem] text-gold" data-testid={`chip-tu-anh-${x.ma}`}>từ ảnh</span>}
+                      </span>
                     </label>
                   </li>
                 ))}

@@ -37,6 +37,9 @@ export const HoSoNha = z.object({
     vi_tri: z.record(z.string().max(30), z.string().max(12)).optional(),
     huong_do: z.record(z.string().max(30), z.number().min(0).lt(360)).optional(),
     dau_hieu: z.array(z.string().max(40)).optional(),
+    /** PT-V2: mã trong `dau_hieu` mà người dùng đã bấm "Đúng" cho gợi ý máy đọc ảnh → gửi engine `nguon: "anh", xac_nhan: true`.
+     *  CHỈ mã — ảnh (kể cả base64) không bao giờ vào hồ sơ nhà. */
+    tu_anh: z.array(z.string().max(40)).max(40).optional(),
     /** UI-PT 4: dấu hiệu người dùng bấm "Tôi đã xử lý" — gửi engine `co: false` (thắng suy luận từ mặt bằng), Khảo sát không tích lại. */
     da_xu_ly: z.array(z.string().max(40)).optional(),
     mat_bang: z.object({
@@ -113,7 +116,8 @@ export function boCucGui(n: HoSoNha | null | undefined, huong?: { huong_do?: num
     ...(h.huong_do != null ? { huong_nha_do: h.huong_do } : h.huong ? { huong_nha: h.huong } : {}),
     ...(n?.loai_nha ? { loai_nha: n.loai_nha } : {}),
     vi_tri: b.vi_tri ?? {}, huong_do: b.huong_do ?? {},
-    dau_hieu: Object.fromEntries([...(b.dau_hieu ?? []).filter((m) => !daXuLy.includes(m)).map((m) => [m, { co: true, nguon: "nguoi_dung" }]),
+    dau_hieu: Object.fromEntries([...(b.dau_hieu ?? []).filter((m) => !daXuLy.includes(m))
+      .map((m) => [m, b.tu_anh?.includes(m) ? { co: true, nguon: "anh", xac_nhan: true } : { co: true, nguon: "nguoi_dung" }]),
       ...daXuLy.map((m) => [m, { co: false, nguon: "nguoi_dung" }])]),
     ...(b.mat_bang ? { mat_bang: b.mat_bang } : {}),
   };
