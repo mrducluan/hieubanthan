@@ -33,6 +33,24 @@ def _nguon(td: dict) -> str:
     return td["sach"] + (f", {td['chuong']}" if td.get("chuong") else "")
 
 
+# Tên sách chữ Hán trong `source` của KB gốc ↔ tên Việt dùng trong trích dẫn — gộp để mục "Nguồn" không lặp một sách.
+_HAN_VIET = {"子平真詮": "Tử Bình Chân Thuyên", "滴天髓": "Trích Thiên Tuỷ", "淵海子平": "Uyên Hải Tử Bình",
+             "三命通會": "Tam Mệnh Thông Hội", "窮通寶鑑": "Cùng Thông Bảo Giám"}
+
+
+def _goc_sach(s: str) -> str:
+    s = _HAN_VIET.get(s.strip(), s)
+    return s.split(",")[0].split(" (")[0].replace("’", "'").strip().lower()
+
+
+def _gop_nguon(cu: list[str], td: list[dict]) -> list[str]:
+    """Nguồn gốc của trang + sách trích dẫn; sách đã có ở bản trích dẫn (kèm chương) thì bỏ dòng tên trống trùng sách."""
+    moi = [_nguon(x) for x in td]
+    co = {_goc_sach(x) for x in moi}
+    giu = [(f"{_HAN_VIET[x]} ({x})" if x in _HAN_VIET else x) for x in cu if _goc_sach(x) not in co]
+    return list(dict.fromkeys([*giu, *moi]))
+
+
 def ap(t: dict) -> dict:
     """Ghép phần bổ sung (nếu có) vào trang đã dựng; không có thì trả nguyên trang."""
     kb = doc(t["loai"])
@@ -56,7 +74,7 @@ def ap(t: dict) -> dict:
     co = {h["hoi"].strip().lower() for h in t["hoi_dap"]}
     t["hoi_dap"] = t["hoi_dap"] + [{**h, **({"bien_tap": True} if bien_tap else {})}
                                    for h in bs.get("hoi_dap", []) if h["hoi"].strip().lower() not in co]
-    t["nguon"] = list(dict.fromkeys([*t["nguon"], *(_nguon(x) for x in bs.get("trich_dan", []))]))
+    t["nguon"] = _gop_nguon(t["nguon"], bs.get("trich_dan", []))
     if bs.get("y_chinh"):
         t["y_chinh"] = bs["y_chinh"]
     t["trich_dan"] = bs.get("trich_dan", [])

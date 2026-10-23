@@ -151,6 +151,8 @@ export function goiLd(...nut: object[]) {
 
 /** Google cắt tiêu đề ~60 ký tự: tiêu đề dài thì bỏ hậu tố " · Hiểu Bản Thân" (dùng title.absolute). */
 export function tieuDeSeo(t: string): string | { absolute: string } {
+  // SEO-M: tiêu đề nguồn ngoài (bài NotFair, CMS) dài > 70 ký tự → cắt ở ranh giới từ (rà site thật 2026-10-23).
+  if (t.length > 70) return { absolute: catMoTa(t, 68) };
   return t.length > 52 ? { absolute: t } : t;
 }
 
