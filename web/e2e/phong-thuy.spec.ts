@@ -416,3 +416,105 @@ test("UI-PT2 D/E: lưu hai căn → So hai căn hai cột không điểm số; C
   const r = await request.post("/api/chia-se/nha", { data: { sinh: { birth_date: "1990-05-17", gender: "nam" }, nha: {}, ten_hien_thi: "A" } });
   expect(r.status()).toBe(422);
 });
+
+// PT-V2 "Để máy đọc ảnh": route web giả bằng page.route (engine thật không có khoá OpenRouter trong E2E). Kiểm: đồng ý KHÔNG
+// tích sẵn → nút tắt; ảnh thu nhỏ trên máy thành JPEG base64 (không blob:, không data:); Đúng → ô tích + chip "từ ảnh";
+// Không → bỏ tích; bố cục gửi engine mang nguon anh / co:false; không ảnh nào vào localStorage.
+const KQ_DOC_ANH = {
+  da_bat: true, ly_do_tat: null, can_xac_nhan: true,
+  dau_hieu: [
+    { ma: "xa_ngang", co: true, do_tin: 0.8, ly_do: "Thấy dầm ngang chạy trên đầu giường." },
+    { ma: "be_ca", co: true, do_tin: 0.5, ly_do: "Có khối trong suốt giống bể cá cạnh tường." },
+  ],
+  phong_doan: [{ phong: "phong_ngu_chinh", do_tin: 0.7 }],
+  luu_y: ["Ảnh hơi tối, máy có thể bỏ sót chi tiết."],
+};
+
+test("PT-V2: Để máy đọc ảnh — đồng ý không tích sẵn, ảnh thu nhỏ trên máy, Đúng / Không đồng bộ ô tích, bố cục gửi nguon anh", async ({ page }) => {
+  await napHoSo(page);
+  const goiDoc: Record<string, unknown>[] = [];
+  const goiBoCuc: Record<string, unknown>[] = [];
+  await page.route("**/api/phongthuy/doc-anh", async (r) => { goiDoc.push(r.request().postDataJSON()); await r.fulfill({ json: KQ_DOC_ANH }); });
+  await page.route("**/api/phongthuy/bo-cuc", async (r) => { goiBoCuc.push(r.request().postDataJSON()); await r.continue(); });
+  await page.goto("/phong-thuy");
+  const ks = page.getByTestId("khao-sat-nha");
+  const da = ks.getByTestId("doc-anh-nha");
+  const nut = da.getByTestId("doc-anh-nut");
+  const dongY = da.getByTestId("doc-anh-dong-y");
+  await expect(nut).toBeDisabled();                                        // chưa ảnh, chưa đồng ý
+  await expect(dongY).not.toBeChecked();                                   // KHÔNG tích sẵn
+  await da.getByLabel("Chọn 1–3 ảnh để máy đọc (không lưu)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
+  await expect(da.getByRole("img", { name: "Ảnh 1 bạn chọn (chỉ hiện trên máy)" })).toHaveAttribute("src", /^blob:/);
+  await expect(nut).toBeDisabled();                                        // có ảnh nhưng chưa đồng ý → vẫn tắt
+  await dongY.check();
+  await expect(nut).toBeEnabled();
+  await nut.click();
+  await expect(da).toContainText("Máy thấy có thể có");
+  const dong = da.getByTestId("doc-anh-ket-qua").getByRole("listitem");
+  await expect(dong).toHaveCount(2);
+  await expect(da.getByTestId("doc-anh-dong-xa_ngang")).toContainText("Độ tin: cao");
+  await expect(da.getByTestId("doc-anh-dong-be_ca")).toContainText("Độ tin: vừa");
+  await expect(da).toContainText("Có vẻ đây là Phòng ngủ chính");
+  await expect(da).toContainText("Ảnh hơi tối");
+  // thân gửi lên: ảnh đã thành JPEG base64 trần, không blob:, không data:
+  expect(goiDoc).toHaveLength(1);
+  const than = goiDoc[0] as { anh: { du_lieu: string; loai: string }[]; goc: string | null };
+  expect(than.anh).toHaveLength(1);
+  expect(than.anh[0]!.loai).toBe("image/jpeg");
+  expect(than.anh[0]!.du_lieu.length).toBeGreaterThan(50);
+  expect(than.anh[0]!.du_lieu).toMatch(/^[A-Za-z0-9+/]+=*$/);
+  expect(JSON.stringify(than)).not.toContain("blob:");
+  expect(JSON.stringify(than)).not.toContain("data:");
+  // Dùng làm góc chụp → ô góc chụp đổi
+  await da.getByTestId("doc-anh-dung-goc").click();
+  await expect(da.getByLabel("Góc chụp")).toHaveValue("Phòng ngủ chính");
+  // Đúng ở xà ngang → ô tích sáng + chip "từ ảnh"; Không ở bể cá → không tích
+  const oXa = ks.getByRole("checkbox", { name: /Giường hoặc bàn làm việc nằm ngay dưới xà ngang/ });
+  const oBe = ks.getByRole("checkbox", { name: /bể cá/ });
+  await expect(oXa).not.toBeChecked();
+  await da.getByTestId("doc-anh-dung-xa_ngang").click();
+  await expect(oXa).toBeChecked();
+  await expect(ks.getByTestId("chip-tu-anh-xa_ngang")).toBeVisible();
+  await da.getByTestId("doc-anh-khong-be_ca").click();
+  await expect(oBe).not.toBeChecked();
+  await expect(ks.getByTestId("chip-tu-anh-be_ca")).toHaveCount(0);
+  // bỏ tích tay rồi tích lại = nguồn người dùng, chip biến mất
+  await oXa.uncheck();
+  await expect(ks.getByTestId("chip-tu-anh-xa_ngang")).toHaveCount(0);
+  await da.getByTestId("doc-anh-dung-xa_ngang").click();
+  await expect(ks.getByTestId("chip-tu-anh-xa_ngang")).toBeVisible();
+  // Xem luận bố cục → engine nhận xa_ngang nguon anh đã xác nhận, be_ca khai rõ không có; không có ảnh trong thân
+  await ks.getByRole("textbox", { name: "Độ hướng nhà khảo sát" }).fill("180");
+  await ks.getByRole("button", { name: "Xem luận bố cục" }).click();
+  await expect.poll(() => goiBoCuc.length).toBe(1);
+  const bc = goiBoCuc[0] as { bo_cuc: { dau_hieu: Record<string, { co: boolean; nguon: string; xac_nhan?: boolean }> } };
+  expect(bc.bo_cuc.dau_hieu.xa_ngang).toEqual({ co: true, nguon: "anh", xac_nhan: true });
+  expect(bc.bo_cuc.dau_hieu.be_ca).toEqual({ co: false, nguon: "nguoi_dung" });
+  expect(JSON.stringify(bc)).not.toContain("anh\":[");
+  await expect(page.getByTestId("ket-qua-bo-cuc")).toContainText("Khảm trạch");
+  // hồ sơ nhà trên máy: chỉ mã, không ảnh / base64
+  const luu = await page.evaluate(() => localStorage.getItem("hbt.nha.v1") ?? "");
+  expect(luu).toContain("\"tu_anh\":[\"xa_ngang\"]");
+  expect(luu).not.toContain("blob:");
+  expect(luu).not.toContain(than.anh[0]!.du_lieu.slice(0, 40));
+  // đo lường: chỉ mã, không ảnh
+  const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
+  expect(sk.some((e) => e.su_kien === "chart_interacted" && e.kind === "doc_anh" && e.so_anh === 1 && e.so_dau_hieu === 2 && e.da_bat === 1)).toBe(true);
+  expect(sk.some((e) => e.su_kien === "chart_interacted" && e.kind === "doc_anh_xac_nhan" && e.ma === "be_ca" && e.dung === 0)).toBe(true);
+  expect(JSON.stringify(sk)).not.toContain(than.anh[0]!.du_lieu.slice(0, 40));
+});
+
+test("PT-V2: máy đọc ảnh chưa bật (chưa đặt khoá) → câu thường, không lỗi kỹ thuật, vẫn tích tay được", async ({ page }) => {
+  await napHoSo(page);
+  await page.route("**/api/phongthuy/doc-anh", (r) => r.fulfill({ json: { da_bat: false, ly_do_tat: "chua_dat_khoa", dau_hieu: [], phong_doan: [], luu_y: [], can_xac_nhan: true } }));
+  await page.goto("/phong-thuy");
+  const da = page.getByTestId("khao-sat-nha").getByTestId("doc-anh-nha");
+  await da.getByLabel("Chọn 1–3 ảnh để máy đọc (không lưu)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
+  await da.getByTestId("doc-anh-dong-y").check();
+  await da.getByTestId("doc-anh-nut").click();
+  await expect(da.getByTestId("doc-anh-thong-bao")).toHaveText("Máy đọc ảnh chưa bật trên bản này — bạn tích tay các ô bên dưới nhé.");
+  await expect(da.getByTestId("doc-anh-ket-qua")).toHaveCount(0);
+  await expect(da.getByRole("alert")).toHaveCount(0);
+  await expect(da).not.toContainText(/50\d|lỗi|error/i);
+  await page.getByTestId("khao-sat-nha").getByLabel("Có gương đối diện giường ngủ không?").check();
+});

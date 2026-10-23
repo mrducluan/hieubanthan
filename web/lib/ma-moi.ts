@@ -271,3 +271,46 @@ export function docMaNha(ma: string, homNay = new Date()): NoiDungMaNha | null {
 export function tuTuMa(tienTo: string, ma: string): string {
   return `${tienTo}.${createHash("sha256").update(`tu|${ma}`).digest("hex").slice(0, 10)}`;
 }
+
+// ---------------------------------------------------------------- UI-KD 6: thẻ "Quẻ của tôi"
+// Mã riêng miền "que|". Chỉ mang: tên hiển thị (tuỳ chọn), 6 giá trị hào (6/7/8/9 — dữ kiện đã gieo), tên quẻ bản + quẻ biến
+// (engine đọc lại từ 6 giá trị rồi máy chủ ký — client không tự khai tên), tên chủ đề (từ danh mục engine). KHÔNG câu hỏi,
+// KHÔNG giờ gieo, KHÔNG lời đọc / mức.
+export const NoiDungMaQue = z.object({
+  v: z.literal(1),
+  t: z.string().trim().max(24),
+  g: z.array(z.number().int().min(6).max(9)).length(6),
+  q: z.string().trim().min(1).max(24),
+  b: z.string().trim().max(24).nullable(),
+  c: z.string().trim().max(40).nullable(),
+  d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});
+export type NoiDungMaQue = z.infer<typeof NoiDungMaQue>;
+
+const kyQue = (than: string) => b64u(createHmac("sha256", khoa()).update(`que|${than}`).digest()).slice(0, 16);
+
+/** Gói: [1, t, "778779", q, b|"", c|"", số ngày từ 1/1/2026]. */
+export function kyMaQue(nd: Omit<NoiDungMaQue, "v" | "d">, homNay = new Date()): string {
+  const x = NoiDungMaQue.parse({ ...nd, v: 1, d: homNay.toISOString().slice(0, 10) });
+  const goi = [1, x.t, x.g.join(""), x.q, x.b ?? "", x.c ?? "", Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
+  return `${than}.${kyQue(than)}`;
+}
+
+export function docMaQue(ma: string, homNay = new Date()): NoiDungMaQue | null {
+  const [than, chu_ky] = ma.split(".");
+  if (!than || !chu_ky || ma.length > 400) return null;
+  const a = Buffer.from(chu_ky), b = Buffer.from(kyQue(than));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown[];
+    if (!Array.isArray(g) || g.length !== 7 || typeof g[2] !== "string" || !/^[6-9]{6}$/.test(g[2])) return null;
+    const nd = NoiDungMaQue.parse({
+      v: g[0], t: g[1], g: g[2].split("").map(Number), q: g[3], b: g[4] || null, c: g[5] || null,
+      d: new Date(NGAY_GOC + Number(g[6]) * 86_400_000).toISOString().slice(0, 10),
+    });
+    return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
+  } catch {
+    return null;
+  }
+}
