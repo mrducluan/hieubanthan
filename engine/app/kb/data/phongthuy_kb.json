@@ -678,12 +678,27 @@
    "tu_khoa": [
     "cau thang (o |ngay |nam )?(giua|trung tam)",
     "cau thang giua nha"
+   ],
+   "giai_thich_hien_dai": "Cầu thang chiếm đúng giữa nhà thì mọi phòng phải vòng quanh nó: tầng trệt bị chia đôi, ánh sáng từ cửa trước và giếng trời khó đi xuyên, tiếng bước chân và tiếng nói vọng lên mọi tầng. Nhà sẽ tối ở giữa và khó kê một phòng khách liền mạch.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dọn gầm thang cho thoáng, không chất đồ; mở rèm, cửa các phòng quanh thang ban ngày để sáng lan vào giữa nhà."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Thêm đèn hắt dọc thang và giữa nhà; lót thảm hoặc đệm chống ồn ở bậc thang để bớt tiếng bước chân."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa lớn: mở giếng trời ngay trên thang, thay lan can đặc bằng lan can thoáng; xây mới thì đặt thang lệch về một bên tường."
+    }
    ]
   },
   "cay_truoc_cua": {
    "tieu_de": "Cây trước cửa nhà",
    "noi_dung": "Quan niệm dân gian: cây to mọc chắn thẳng giữa cửa chính 'chặn khí' vào nhà; cây xanh vừa phải hai bên cửa thì được xem là tốt. Thực tế: cây lớn sát cửa che sáng, rễ có thể làm nứt nền, lá rụng gây ẩm và ruồi muỗi; cây nhỏ, gọn giúp mát và dễ chịu.",
-   "goi_y": "Không trồng cây lớn thẳng giữa lối vào; chọn cây cao vừa phải, dễ chăm (chậu cây hai bên cửa, cây bụi thấp); cắt tỉa để cửa thông thoáng, đủ sáng. Chọn loại cây theo khí hậu và công chăm sóc, không theo lời hứa 'chiêu tài'.",
+   "goi_y": "Không trồng cây lớn thẳng giữa lối vào; chọn cây cao vừa phải, dễ chăm (chậu cây hai bên cửa, cây bụi thấp); cắt tỉa để cửa thông thoáng, đủ sáng. Chọn loại cây theo khí hậu và công chăm sóc, không theo lời hứa về tiền bạc.",
    "nguon": "dan_gian",
    "tu_khoa": [
     "trong cay",
@@ -691,18 +706,48 @@
     "cay truoc (cua|nha)",
     "cay to truoc",
     "cay chan cua"
+   ],
+   "giai_thich_hien_dai": "Cây lớn ngay trước cửa che bớt sáng và tầm nhìn ra đường, lá rụng làm ẩm hiên, rễ có thể đội nền hay nứt tường rào. Nhưng cây cũng cho bóng mát và chắn bụi, tiếng ồn — vấn đề là cây đứng đúng giữa lối vào và quá sát, không phải có cây là xấu.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Quét lá, giữ hiên khô; để lối từ cổng vào cửa thông thẳng, không để chậu hay đồ chắn thêm."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Tỉa cành thấp cho cửa đủ sáng và nhìn ra được; thêm đèn hiên; dời chậu cây lớn sang hai bên cửa."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Cây đường phố thì xin cơ quan quản lý cây xanh cắt tỉa; cây nhà trồng mà rễ đội nền thì bứng dời hoặc thay bằng cây tán gọn."
+    }
    ]
   },
   "be_ca": {
    "tieu_de": "Bể cá trong nhà",
    "noi_dung": "Quan niệm dân gian: nước tượng trưng cho tài lộc, bể cá sạch đặt phòng khách được coi là tốt; không nên đặt trong phòng ngủ hay đối diện bếp. Thực tế: bể cá cần lọc, thay nước, đèn — bể bẩn gây mùi và ẩm; phòng ngủ có tiếng máy bơm làm khó ngủ.",
-   "goi_y": "Nếu thích nuôi cá: đặt ở phòng khách nơi dễ chăm, xa ổ điện và nắng gắt; giữ nước sạch. Không cần mua bể cá chỉ vì phong thuỷ — hệ thống không giới thiệu vật phẩm.",
+   "goi_y": "Nếu thích nuôi cá: đặt ở phòng khách nơi dễ chăm, xa ổ điện và nắng gắt; giữ nước sạch. Không cần đặt thêm bể cá chỉ vì phong thuỷ — có thì chăm sạch, không thì thôi.",
    "nguon": "dan_gian",
    "tu_khoa": [
     "be ca",
     "ho ca",
     "nuoi ca",
     "ca canh"
+   ],
+   "giai_thich_hien_dai": "Bể cá là một khối nước có điện (máy lọc, đèn, sưởi) nên cần ổ cắm cao ráo và dây gọn; máy lọc chạy đêm có tiếng ù nhỏ, nước bay hơi làm phòng ẩm hơn. Đặt ở phòng khách thoáng, dễ chăm thì dễ chịu; đặt trong phòng ngủ hay sát bếp thì ồn, ẩm và khó vệ sinh.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Thay một phần nước và lau kính đều đặn; không để bể trong phòng ngủ hay ngay cạnh bếp nấu; dây điện gọn, không vắt qua mặt nước."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Ổ cắm có nắp và đặt cao hơn mặt nước, thêm ổ chống giật; máy lọc êm, hẹn giờ đèn; khay hứng dưới bể."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Bể lớn thì làm kệ hoặc bệ chịu lực riêng, chống thấm sàn quanh chỗ đặt; chỗ đặt mới phải thoáng và có lối thoát nước."
+    }
    ]
   },
   "cua_thong_ban_cong": {

@@ -38,7 +38,7 @@ export default async function ChinhSachRiengTu() {
         <ul>
           <li><b>Mặc định, hồ sơ của bạn chỉ nằm trên máy bạn.</b> Máy chủ chỉ dùng ngày giờ sinh để tính rồi bỏ, không lưu lại.</li>
           <li>Chỉ khi bạn <b>chủ động bấm lưu vào tài khoản</b>, hồ sơ mới được lưu trên máy chủ. Chỉ bạn đọc được, và bạn xoá được bất cứ lúc nào.</li>
-          <li>Chúng tôi <b>không lưu nội dung luận giải gắn với tài khoản</b>, không lưu ảnh của bạn, <b>không bán dữ liệu</b>, không dùng dữ liệu để quảng cáo nhắm mục tiêu.</li>
+          <li>Chúng tôi <b>không lưu nội dung luận giải gắn với tài khoản</b>, không lưu ảnh của bạn (ảnh nhà bạn chọn "để máy đọc" chỉ đi qua lượt gọi khi bạn tự tích đồng ý), <b>không bán dữ liệu</b>, không dùng dữ liệu để quảng cáo nhắm mục tiêu.</li>
           <li>Dịch vụ diễn đạt tự động (AI) của bên thứ ba chỉ nhận câu hỏi và các kết quả đã tính, <b>không nhận họ tên hay ngày giờ sinh</b>.</li>
         </ul>
       ),
@@ -72,6 +72,7 @@ export default async function ChinhSachRiengTu() {
             [<b key="f2">Góp ý "đúng / chưa đúng" cho câu trả lời thần số</b>, "Chỉ khi bạn bấm góp ý; ghi chú chỉ lưu khi bạn tự tích đồng ý", "Máy chủ dữ liệu tại Singapore — chỉ các con số rút gọn của trường phái được góp ý, mã câu hỏi, trường phái và ghi chú đã lọc; không họ tên, ngày sinh hay tài khoản", "Tối đa 12 tháng"],
             [<b key="f3">Điều bạn bấm "Ghi nhớ"</b>, "Chỉ khi đã đăng nhập và bạn bấm Ghi nhớ một câu băn khoăn", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được; xoá được ngay", "Tối đa 180 ngày"],
             [<b key="f4">Mốc nhắc, thiết bị và tuỳ chọn nhận thông báo</b>, "Chỉ khi đã đăng nhập và bạn bấm \"cả trên tài khoản\" ở một mốc, \"Bật nhắc trên điện thoại\" hoặc tự tích nhận thêm (sáng nay, mốc lịch)", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được — ngày, nhãn mốc do hệ thống soạn, địa chỉ nhận thông báo của trình duyệt, các ô bạn đã tích; không câu hỏi, không luận giải. Khi bạn bật \"Sáng nay của bạn\", mỗi sáng máy chủ đọc NGÀY và THÁNG sinh trong hồ sơ bạn đã lưu (không năm sinh, không tên) để tính ngày cá nhân, không ghi thêm gì", "Mốc: tối đa 400 ngày; thiết bị và tuỳ chọn: đến khi bạn tắt nhắc, đăng xuất, xoá tài khoản hoặc trình duyệt huỷ đăng ký"],
+            [<b key="f5">Ảnh nhà "để máy đọc" (Phong thuỷ)</b>, "Chỉ khi bạn chọn ảnh góc nhà và tự tích đồng ý gửi (ô không tích sẵn)", "Thu nhỏ ngay trên máy bạn (bỏ thông tin máy ảnh, vị trí), đi qua máy chủ tính toán tới nhóm nhà cung cấp mô hình AI để nhận diện dấu hiệu; không lưu ở máy chủ Hiểu Bản Thân, không dùng huấn luyện. Hồ sơ nhà trên máy chỉ giữ mã dấu hiệu bạn đã bấm \"Đúng\", không giữ ảnh", "Không lưu — bỏ ngay sau khi trả gợi ý"],
             [<b key="g">Số liệu sử dụng ẩn danh</b>, "Khi bạn dùng web (nếu bật đo lường)", "Công cụ đo lường ẩn danh", "Tối đa 12 tháng"],
             [<b key="g2">Số liệu truy cập (Google Analytics)</b>, "Khi bạn mở trang (Google Tag Manager). Tắt được ở \"Tuỳ chọn cookie\" chân trang", "Google (qua Google Tag Manager)", "Tối đa 14 tháng"],
             [<b key="h">Báo lỗi kỹ thuật</b>, "Khi trang hoặc máy chủ gặp lỗi (nếu bật)", "Dịch vụ theo dõi lỗi", "Tối đa 90 ngày"],
@@ -102,6 +103,7 @@ export default async function ChinhSachRiengTu() {
         <ul>
           <li><b>Tính và hiển thị kết quả bạn yêu cầu</b> (bài đọc thần số, lá số, hợp đôi, quẻ, hướng nhà): căn cứ là yêu cầu của bạn khi bấm xem.</li>
           <li><b>Lưu hồ sơ, tài khoản, ví Sao</b>: căn cứ là sự đồng ý của bạn khi đăng nhập hoặc bấm lưu. Bạn rút lại được bằng cách xoá.</li>
+          <li><b>Nhận diện dấu hiệu từ ảnh nhà</b>: căn cứ là ô đồng ý bạn tự tích trước mỗi lần gửi; không tích thì không gửi gì, bạn vẫn tích tay được.</li>
           <li><b>Cải thiện chất lượng</b> (câu hỏi đã lọc, số liệu ẩn danh, báo lỗi): chỉ dùng dữ liệu không nhận diện được bạn.</li>
           <li>Chúng tôi <b>không</b> dùng dữ liệu cho quảng cáo nhắm mục tiêu, <b>không</b> mua bán dữ liệu, <b>không</b> ra quyết định tự động gây ảnh hưởng pháp lý tới bạn.</li>
         </ul>
@@ -115,6 +117,7 @@ export default async function ChinhSachRiengTu() {
             ["Hạ tầng máy chủ (web và tính toán)", "Chạy trang web và hệ thống tính toán", "Yêu cầu bạn gửi để tính, gồm ngày giờ sinh (không lưu)", "Singapore"],
             ["Cơ sở dữ liệu và đăng nhập", "Tài khoản, hồ sơ đã lưu, ví Sao, câu hỏi đã lọc", "Như mục 3", "Singapore"],
             ["Dịch vụ diễn đạt tự động (AI)", "Diễn đạt câu trả lời hỏi đáp cho dễ đọc (khi bật)", "Câu hỏi bạn gõ + kết quả đã tính; không có họ tên, ngày giờ sinh", "Hoa Kỳ"],
+            ["Dịch vụ nhận diện hình ảnh (AI)", "Gợi ý dấu hiệu phong thuỷ nhìn thấy trong ảnh nhà (khi bật, chỉ khi bạn tự tích đồng ý gửi)", "Ảnh góc nhà đã thu nhỏ trên máy bạn + góc chụp, loại nhà bạn chọn; không họ tên, ngày sinh, địa chỉ, toạ độ; không lưu, không dùng huấn luyện", "Hoa Kỳ"],
             ["Đo lường ẩn danh", "Đếm các bước sử dụng (khi bật)", "Sự kiện sử dụng, mã ẩn danh", "Hoa Kỳ hoặc EU"],
             ["Google (Tag Manager, Analytics)", "Đo lượt truy cập — bật mặc định, tắt được ở \"Tuỳ chọn cookie\"", "Trang đã xem, loại thiết bị, mã cookie _ga; không họ tên, ngày giờ sinh", "Hoa Kỳ"],
             ["Dịch vụ thông báo của trình duyệt (Google, Apple, Mozilla, Microsoft)", "Chuyển thông báo nhắc tới thiết bị (chỉ khi bạn bật nhắc)", "Thông báo đã mã hoá đầu-cuối — chỉ thiết bị của bạn đọc được", "Hoa Kỳ hoặc nơi nhà cung cấp đặt máy chủ"],

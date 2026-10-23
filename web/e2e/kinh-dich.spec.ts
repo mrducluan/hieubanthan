@@ -48,9 +48,12 @@ test("HỌC-ĐS: hộp đọc quẻ có nút kiểm chứng — chỉ mã ds.kin
   expect(["nghia_ly", "mai_hoa", "luc_hao"]).toContain(sk[0]!.phai);
 });
 
-test("máy gieo: luôn có quẻ, lời đời thường và câu hỏi tiếp", async ({ page }) => {
+test("máy gieo: nghi thức lật xu hiện trước (chưa lộ quẻ); bỏ qua → quẻ, lời đời thường và câu hỏi tiếp", async ({ page }) => {
   await page.goto("/kinh-dich");
   const ans = await hoi(page, "Hợp đồng này có ký được không?");
+  await expect(ans.getByTestId("gieo-dong-xu")).toBeVisible();
+  await expect(ans.getByTestId("que")).toHaveCount(0);                      // chưa lật xong thì chưa thấy quẻ / lời
+  await ans.getByTestId("bo-qua-gieo").click();
   await expect(ans.getByTestId("que")).toContainText("Phái đọc: Lục Hào");
   await expect(ans).toContainText("Về việc giấy tờ, hợp đồng, visa, chờ tin");
   await expect(ans.getByTestId("cau-lien-quan").getByRole("button").first()).toBeVisible();
@@ -76,6 +79,7 @@ test("câu mơ hồ (mua hay bán) → hỏi lại trước khi gieo; chọn xon
   await expect(ans.getByTestId("que")).toHaveCount(0);
   await ans.getByTestId("lam-ro").getByRole("button", { name: "Tôi đang bán" }).click();
   const ans2 = page.getByTestId("cau-tra-loi").last();
+  await ans2.getByTestId("bo-qua-gieo").click();                            // máy gieo → nghi thức lật xu → xem luôn
   await expect(ans2.getByTestId("que")).toBeVisible();
   await expect(ans2).toContainText("Về việc bán nhà, bán đất");
 });
@@ -126,4 +130,176 @@ test("KC-3/4/5: ứng kỳ có nút nhắc (lưu máy, hiện ở Hôm nay), g�
   await dq.getByTestId("goc-nhin").locator("[data-phai=nghia_ly]").getByRole("button").first().click();
   const tq = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.thoi_quen_kd.v1") ?? "{}"));
   expect(tq.nghia_ly).toBe(1);
+});
+
+// ---------------------------------------------------------------- UI-KD: nghi thức đồng xu · bộ chọn · lịch sử · thẻ
+
+/** Ép engine trả quẻ cố định cho "Máy gieo" (đổi thân yêu cầu sang gieo_tay) — web vẫn tưởng là may_gieo nên hiện nghi thức. */
+async function epQue(page: import("@playwright/test").Page, gia_tri_hao: number[], ghi?: (body: Record<string, unknown>) => void) {
+  await page.route("**/api/kinhdich/hoi", async (route) => {
+    const body = JSON.parse(route.request().postData() ?? "{}") as Record<string, unknown>;
+    ghi?.(body);
+    if (body.cach_ra_que !== "may_gieo") { await route.continue(); return; }
+    const r = await route.fetch({ postData: JSON.stringify({ ...body, cach_ra_que: "gieo_tay", gia_tri_hao }) });
+    await route.fulfill({ response: r });
+  });
+}
+const suKien = (page: import("@playwright/test").Page) => page.evaluate(() =>
+  ((window as unknown as { __hbt_su_kien?: ({ su_kien: string } & Record<string, unknown>)[] }).__hbt_su_kien ?? []));
+
+test("gieo đồng xu có nghi thức: bấm 6 lần, xu lật đúng giá trị engine (9 = ba ngửa, 7 = một ngửa), hào động vàng, rồi mới hiện tên quẻ", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });                    // không chờ chuyển động lật
+  await epQue(page, [7, 7, 8, 7, 7, 9]);
+  await page.goto("/kinh-dich");
+  const ans = await hoi(page, "Tôi có nên nhận lời làm quản lý không?");
+  const gx = ans.getByTestId("gieo-dong-xu");
+  await expect(gx).toBeVisible();
+  await expect(gx.getByTestId("hang-hao-1")).toHaveAttribute("data-hien", "0");
+  for (let i = 1; i <= 6; i++) {
+    await expect(gx.getByTestId("gieo-lan")).toHaveAccessibleName(`Gieo lần ${i}`);
+    await gx.getByTestId("gieo-lan").click();
+    await expect(gx.getByTestId(`hang-hao-${i}`)).toHaveAttribute("data-hien", "1");
+  }
+  // hào 1 = 7 (một ngửa hai sấp), hào 3 = 8 (hai ngửa một sấp), hào 6 = 9 (ba ngửa, động)
+  await expect(gx.getByTestId("xu-1-1")).toHaveAttribute("data-mat", "ngua");
+  await expect(gx.getByTestId("xu-1-2")).toHaveAttribute("data-mat", "sap");
+  await expect(gx.getByTestId("xu-3-3")).toHaveAttribute("data-mat", "sap");
+  for (const i of [1, 2, 3]) await expect(gx.getByTestId(`xu-6-${i}`)).toHaveAttribute("data-mat", "ngua");
+  await expect(gx.getByTestId("hang-hao-6")).toContainText("Dương động");
+  await expect(gx.getByTestId("xu-6-1")).toHaveAccessibleName("Hào 6, đồng xu 1: ngửa");
+  // đủ 6 hào → quẻ + lời đọc hiện; tên quẻ chỉ có sau nghi thức
+  const que = ans.getByTestId("que");
+  await expect(que).toBeVisible();
+  await expect(que).toContainText("Lý");
+  await expect(que.getByTestId("giai-thich-dong")).toContainText("hào 6");
+  await expect(que.getByTestId("gio-gieo")).toContainText("Gieo lúc");
+  await expect(ans.getByTestId("doc-que")).toBeVisible();
+  await expect(ans).toContainText("Về việc thăng tiến, phỏng vấn, đề bạt");
+  const sk = (await suKien(page)).filter((e) => e.su_kien === "chart_interacted" && String(e.kind).startsWith("coin_toss"));
+  expect(sk.map((e) => e.kind)).toEqual(["coin_toss_started", "coin_toss_completed"]);
+  expect(sk[1]!.ket_qua).toBe("du_6");
+  expect(JSON.stringify(sk)).not.toContain("quản lý");                      // không gửi câu hỏi
+});
+
+test("tự gieo bằng đồng xu / kiểu hào: quẻ dựng dần, thân gửi engine đúng gia_tri_hao, không nghi thức lật", async ({ page }) => {
+  const than: Record<string, unknown>[] = [];
+  await epQue(page, [], (b) => than.push(b));
+  await page.goto("/kinh-dich");
+  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  const ch = page.getByTestId("chon-hao");
+  await expect(ch).toBeVisible();
+  // lần 1: bấm một đồng ngửa → 7 (Dương); lần 2: kiểu hào Dương; lần 3: hai đồng ngửa → 8 (Âm)
+  await ch.getByTestId("xu-1-2").click();
+  await expect(ch.getByTestId("chon-hao-1")).toHaveAttribute("data-gia-tri", "7");
+  await ch.getByRole("button", { name: "Chọn lần gieo 2 (hào 2)" }).click();   // chip kiểu hào chỉ hiện ở hàng đang chọn
+  await ch.getByTestId("hao-2-7").click();
+  await expect(ch.getByTestId("chon-hao-3")).toHaveAttribute("data-dang", "1");  // chọn kiểu xong tự sang hàng kế
+  await ch.getByTestId("xu-3-1").click();
+  await ch.getByTestId("xu-3-3").click();
+  await expect(ch.getByTestId("chon-hao-3")).toHaveAttribute("data-gia-tri", "8");
+  await ch.getByRole("button", { name: "Chọn lần gieo 4 (hào 4)" }).click();
+  await ch.getByTestId("hao-4-7").click();
+  await ch.getByTestId("hao-5-7").click();                                      // hàng 5 đã tự được chọn
+  // lần 6: ba đồng ngửa → 9 (Dương động)
+  for (const i of [1, 2, 3]) await ch.getByTestId(`xu-6-${i}`).click();
+  await expect(ch.getByTestId("chon-hao-6")).toHaveAttribute("data-gia-tri", "9");
+  await expect(ch.getByTestId("ve-que-nho").locator("[data-hao='6']")).toHaveAttribute("data-gia-tri", "9");
+  await expect(ch.getByLabel("Sáu hào tự gieo")).toHaveValue("7 7 8 7 7 9");       // gõ nhanh đồng bộ
+  const ans = await hoi(page, "Tôi có nên nhận lời làm quản lý không?");
+  await expect(ans.getByTestId("gieo-dong-xu")).toHaveCount(0);
+  await expect(ans.getByTestId("que")).toContainText("Lý");
+  expect(than.at(-1)!.cach_ra_que).toBe("gieo_tay");
+  expect(than.at(-1)!.gia_tri_hao).toEqual([7, 7, 8, 7, 7, 9]);
+  // chưa đủ 6 → báo lỗi ngay, không gọi engine
+  await ch.getByTestId("xoa-hao").click();
+  await expect(ch.getByTestId("chon-hao-1")).toHaveAttribute("data-dang", "1");
+  await ch.getByTestId("hao-1-6").click();
+  const n = than.length;
+  const ans2 = await hoi(page, "Việc này có thành không?");
+  await expect(ans2.getByRole("alert")).toContainText("chọn đủ 6 lần gieo");
+  expect(than.length).toBe(n);
+  // hướng dẫn gieo thật + hỏi cho đúng
+  await page.getByTestId("cach-gieo-mo").click();
+  await expect(page.getByTestId("cach-gieo")).toContainText("Gieo cả 3 đồng một lúc, 6 lần");
+  await expect(page.getByTestId("hoi-dung")).toContainText("quá rộng");
+  await expect(page.getByTestId("cach-gieo")).toContainText("Một quẻ cho một việc");
+});
+
+test("lịch sử quẻ trên máy: lưu sau khi gieo (≤ 200 ký tự câu hỏi), Xem lại gọi engine gieo_tay đúng 6 hào cũ, xoá được", async ({ page }) => {
+  const than: Record<string, unknown>[] = [];
+  await epQue(page, [8, 8, 7, 7, 8, 6], (b) => than.push(b));
+  await page.goto("/kinh-dich");
+  await expect(page.getByTestId("lich-su-que")).toHaveCount(0);
+  const ans = await hoi(page, "Hợp đồng này có ký được không?");
+  await ans.getByTestId("bo-qua-gieo").click();
+  await expect(ans.getByTestId("que")).toBeVisible();
+  const tenQue = (await ans.getByTestId("que").locator("figure").first().locator("p").last().innerText()).split(" quẻ")[0]!.trim();
+  const ls = page.getByTestId("lich-su-que");
+  await expect(ls).toBeVisible();
+  await expect(ls).toContainText("Chỉ lưu trên máy này");
+  const luu = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.que.v1") ?? "[]"));
+  expect(luu).toHaveLength(1);
+  expect(luu[0].gia_tri_hao).toEqual([8, 8, 7, 7, 8, 6]);
+  expect(luu[0].cach).toBe("may_gieo");
+  expect(luu[0].ten_que).toBe(tenQue);
+  await ls.getByTestId("lich-su-que-mo").click();
+  const muc = ls.getByTestId("lich-su-que-muc");
+  await expect(muc).toHaveCount(1);
+  await expect(muc).toContainText("Hợp đồng này có ký được không?");
+  // Xem lại → engine nhận gieo_tay + đúng 6 hào, không có nghi thức, không lưu thêm
+  await muc.getByTestId("xem-lai").click();
+  const ans2 = page.getByTestId("cau-tra-loi").last();
+  await expect(ans2.getByTestId("xem-lai-ghi-chu")).toContainText("không gieo lại");
+  await expect(ans2.getByTestId("gieo-dong-xu")).toHaveCount(0);
+  await expect(ans2.getByTestId("que")).toContainText(tenQue);
+  expect(than.at(-1)!.cach_ra_que).toBe("gieo_tay");
+  expect(than.at(-1)!.gia_tri_hao).toEqual([8, 8, 7, 7, 8, 6]);
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.que.v1") ?? "[]").length)).toBe(1);
+  expect((await suKien(page)).filter((e) => e.su_kien === "chart_interacted" && e.kind === "que_replayed")).toHaveLength(1);
+  // xoá
+  await muc.getByTestId("xoa-que").click();
+  await expect(page.getByTestId("lich-su-que")).toHaveCount(0);
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.que.v1") ?? "[]").length)).toBe(0);
+});
+
+test("thẻ Quẻ của tôi: mã ký chỉ có 6 hào + tên quẻ + chủ đề (không câu hỏi), trang nhận + ảnh PNG, mã sửa bị chặn", async ({ page, request }) => {
+  await page.goto("/kinh-dich");
+  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
+  const ans = await hoi(page, "Tôi có nên nhận lời làm quản lý không?");
+  await expect(ans.getByTestId("que")).toBeVisible();
+  await ans.getByTestId("mo-chia-se-que").click();
+  await ans.getByLabel("Tên trên thẻ (không bắt buộc)").fill("Lan");
+  await ans.getByTestId("tao-the-que").click();
+  const link = await ans.getByTestId("link-the-que").inputValue();
+  expect(link).toMatch(/\/the\/que\/[A-Za-z0-9_-]+\.[A-Za-z0-9_-]{16}\?tu=qu\.[0-9a-f]{10}/);
+  const ma = decodeURIComponent(link.split("/the/que/")[1]!.split("?")[0]!);
+  const than = Buffer.from(ma.split(".")[0]!, "base64url").toString("utf8");
+  expect(than).not.toContain("quản lý");                                    // không câu hỏi
+  const g = JSON.parse(than) as unknown[];
+  expect(g[1]).toBe("Lan");
+  expect(g[2]).toBe("778779");
+  expect(g[3]).toBe("Lý");
+  expect(g[4]).toBe("Đoài");
+  expect((await suKien(page)).filter((e) => e.su_kien === "share_created" && e.kind === "que")).toHaveLength(1);
+  const html = await (await request.get(`/the/que/${ma}`)).text();
+  expect(html).toContain("Quẻ của Lan");
+  expect(html).toContain("biến");
+  expect(html).toContain(`/og/que?ma=${ma}`);
+  expect(html).not.toContain("quản lý");
+  for (const k of ["", "&khung=doc"]) {
+    const anh = await request.get(`/og/que?ma=${encodeURIComponent(ma)}${k}`);
+    expect(anh.status()).toBe(200);
+    expect(anh.headers()["content-type"]).toContain("image/png");
+  }
+  expect((await request.get("/og/que")).status()).toBe(200);                 // ảnh mặc định khi không mã
+  // trang nhận mời gieo quẻ của mình, mang ?tu=
+  await page.goto(`/the/que/${ma}`);
+  await expect(page.getByTestId("the-que-ten")).toContainText("Lý");
+  expect(await page.getByTestId("the-que-moi").getAttribute("href")).toMatch(/^\/kinh-dich\?tu=qu\./);
+  // mã sửa tên quẻ → chữ ký lệch → hết hiệu lực; API thiếu hào → 422
+  g[3] = "Càn";
+  const sua = `${Buffer.from(JSON.stringify(g)).toString("base64url")}.${ma.split(".")[1]}`;
+  expect(await (await request.get(`/the/que/${sua}`)).text()).toContain("Thẻ không còn hiệu lực");
+  expect((await request.post("/api/chia-se/que", { data: { gia_tri_hao: [7, 7, 8], ten_hien_thi: "A" } })).status()).toBe(422);
 });

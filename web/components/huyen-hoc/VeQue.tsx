@@ -30,3 +30,27 @@ export function VeQue({ q, dong = [], nhan }: { q: Quai; dong?: number[]; nhan: 
     </figure>
   );
 }
+
+/** UI-KD — quẻ nhỏ vẽ từ 6 giá trị hào (6/7/8/9, hào 1 ở dưới), không lục thân / thế ứng. `null` = hào chưa chọn (vẽ mờ).
+ *  Chỉ là hình vẽ của dãy số người dùng / engine đưa vào — tên quẻ luôn do engine trả, không vẽ tên ở đây. */
+export function VeQueNho({ giaTri, nhan, rong = "w-16", className }: { giaTri: readonly (number | null)[]; nhan?: string; rong?: string; className?: string }) {
+  const hang = Array.from({ length: 6 }, (_, i) => giaTri[5 - i] ?? null);   // hào 6 trên cùng
+  return (
+    <figure className={cn("inline-flex flex-col items-center", className)} aria-label={nhan ?? `Quẻ ${giaTri.map((v) => v ?? "?").join(" ")}`} data-testid="ve-que-nho">
+      <div className={cn("space-y-1", rong)}>
+        {hang.map((v, i) => {
+          const dong = v === 6 || v === 9, duong = v === 7 || v === 9;
+          const mau = v == null ? "bg-fg/15" : dong ? "bg-gold shadow-[0_0_8px_rgb(var(--gold)/0.6)]" : "bg-fg/80";
+          return (
+            <span key={6 - i} className="flex gap-1.5" data-hao={6 - i} data-gia-tri={v ?? ""}>
+              {v == null || duong ? <span className={cn("h-2 w-full rounded-sm", mau)} /> : (<>
+                <span className={cn("h-2 w-1/2 rounded-sm", mau)} /><span className={cn("h-2 w-1/2 rounded-sm", mau)} />
+              </>)}
+            </span>
+          );
+        })}
+      </div>
+      {nhan && <figcaption className="mt-1.5 text-xs text-fg-faint">{nhan}</figcaption>}
+    </figure>
+  );
+}

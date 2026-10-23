@@ -21,6 +21,8 @@ const Input = z.object({
   chu_de: z.string().regex(/^[a-z_]{2,40}$/).optional(),
   so_mai_hoa: z.array(z.number().int().min(1).max(9999)).length(2).optional(),
   phuong_mai_hoa: z.enum(["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]).optional(),
+  /** UI-KD "Xem lại": giờ GIEO (giờ Việt Nam, không múi) để Lục Hào đọc theo ngày gieo, không theo ngày xem. */
+  thoi_diem: z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/).optional(),
 }).strict();
 
 // SAO-2: hạn mức câu miễn phí / trừ Sao khi vượt (lib/cua-sao.ts, tắt mặc định).

@@ -8,7 +8,8 @@ import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { LuanGiaiPTZ } from "@/lib/bo-cuc-zod";
 import { CUNG_9, HUONG_8, kyMaNha, LOAI_NHA_THE, MUC_THE, PHONG_THE, tuTuMa } from "@/lib/ma-moi";
 
-const Input = LuanGiaiPTZ.extend({ ten_hien_thi: z.string().trim().max(24).default("") });
+// `loai_nha_the`: loại nhà chọn ở Hành trình khi hồ sơ chưa có bố cục (Khảo sát) — chỉ để ghi nhãn thẻ, không vào lời gọi engine.
+const Input = LuanGiaiPTZ.extend({ ten_hien_thi: z.string().trim().max(24).default(""), loai_nha_the: z.enum(LOAI_NHA_THE).nullable().optional() });
 
 const BaoCao = z.object({
   da_tinh: z.object({ huong_nha: z.string().nullable() }).passthrough(),
@@ -24,7 +25,7 @@ const trong = <T extends readonly string[]>(ds: T, v: string | null | undefined)
 export async function POST(req: Request): Promise<NextResponse> {
   const p = Input.safeParse(await req.json().catch(() => null));
   if (!p.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
-  const { ten_hien_thi, ...yc } = p.data;
+  const { ten_hien_thi, loai_nha_the, ...yc } = p.data;
   const r = await goiEngineDaKiem(yc, "/v1/phongthuy/luan-giai", dauNguoiGoi(req));
   if (!r.ok) return r.res;
   const bc = BaoCao.safeParse(r.body);
@@ -37,7 +38,7 @@ export async function POST(req: Request): Promise<NextResponse> {
     .filter((x): x is [(typeof PHONG_THE)[number], (typeof CUNG_9)[number], (typeof MUC_THE)[number] | null] => x[0] != null && x[1] != null)
     .slice(0, 6);
   try {
-    const ma = kyMaNha({ t: ten_hien_thi, h, l: trong(LOAI_NHA_THE, yc.nha.bo_cuc?.loai_nha ?? null), m: trong(MUC_THE, cNha?.muc ?? null), p: phong });
+    const ma = kyMaNha({ t: ten_hien_thi, h, l: trong(LOAI_NHA_THE, yc.nha.bo_cuc?.loai_nha ?? loai_nha_the ?? null), m: trong(MUC_THE, cNha?.muc ?? null), p: phong });
     return NextResponse.json({ ma, tu: tuTuMa("nh", ma) });
   } catch (e) {
     const msg = e instanceof Error && e.message.includes("LOI_MOI_SECRET") ? e.message : "Chưa tạo được thẻ.";

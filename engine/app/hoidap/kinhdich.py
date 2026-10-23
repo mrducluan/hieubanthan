@@ -447,6 +447,9 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
     tg = None
     if que is not None:
         tg = vs.thoi_gian(luc)
+    # UI-KD: thời điểm gieo có cấu trúc (web chỉ hiển thị; "Xem lại" gửi lại `thoi_diem` → đọc theo ngày gieo).
+    thoi_diem_gieo = ({"thoi_diem": luc.isoformat(timespec="seconds"), "chi_gio": mh.chi_gio(luc.hour), **tg}
+                      if tg is not None else None)
     goi = goi_bang_chung(pl, que, mai_hoa, tg if pl["truong_phai"] == "luc_hao" else None)
     van = van_template(goi)
     che_do_van, loi = "template", []
@@ -476,4 +479,4 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
             "can_them": goi["can_them"], "co_canh_bao": co,
             "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "lich": lich,
             "doc_que": doc_que, "chu_de": ({"ma": ma_cd, "ten": cd.get("ten", "Việc khác")} if can_que else None),
-            "can_lam_ro": None}
+            "thoi_diem_gieo": thoi_diem_gieo, "can_lam_ro": None}

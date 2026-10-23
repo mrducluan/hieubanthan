@@ -13,7 +13,12 @@ const Y_DINH: [string, string][] = [
 ];
 interface DoThi { phong: string[]; dau_hieu: string[]; dau_hieu_hoi: Record<string, string>; ten_phong: Record<string, string> }
 
-export function HoiNhanhAnh({ dau, onDat }: { dau: Set<string>; onDat: (ma: string, co: boolean | null) => void }) {
+export function HoiNhanhAnh({ dau, onDat, onChonAnh, onYDinh }: {
+  dau: Set<string>; onDat: (ma: string, co: boolean | null) => void;
+  /** PT-V2: ảnh vừa chọn ở đây dùng lại được cho "Để máy đọc ảnh" (vẫn chỉ trên máy cho tới khi người dùng tự tích gửi). */
+  onChonAnh?: (f: File | null) => void;
+  onYDinh?: (y: string | null) => void;
+}) {
   const [yDinh, setYDinh] = useState<string | null>(null);
   const [dt, setDt] = useState<DoThi | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
@@ -36,10 +41,10 @@ export function HoiNhanhAnh({ dau, onDat }: { dau: Set<string>; onDat: (ma: stri
 
   const chonAnh = (f: File | undefined) => {
     if (anhRef.current) URL.revokeObjectURL(anhRef.current);
-    if (!f) { anhRef.current = null; setAnh(null); return; }
+    if (!f) { anhRef.current = null; setAnh(null); onChonAnh?.(null); return; }
     const u = URL.createObjectURL(f);
-    anhRef.current = u; setAnh(u);
-    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "hoi_nhanh_anh", co_anh: true });
+    anhRef.current = u; setAnh(u); onChonAnh?.(f);
+    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "hoi_nhanh_anh", co_anh: 1 });
   };
   const dat = (ma: string, v: "co" | "khong" | "bo_qua") => {
     setTraLoi((t) => ({ ...t, [ma]: v }));
@@ -54,7 +59,7 @@ export function HoiNhanhAnh({ dau, onDat }: { dau: Set<string>; onDat: (ma: stri
       <div className="mt-2 flex flex-wrap gap-1.5" role="radiogroup" aria-label="Điều đang băn khoăn (hỏi nhanh)">
         {Y_DINH.map(([ma, ten]) => (
           <button key={ma} type="button" role="radio" aria-checked={yDinh === ma} data-testid={`hoi-nhanh-${ma}`}
-            onClick={() => { setYDinh((v) => (v === ma ? null : ma)); setTraLoi({}); if (yDinh !== ma) ghi("chart_interacted", { mo_dun: "phongthuy", kind: "hoi_nhanh_y_dinh", y_dinh: ma }); }}
+            onClick={() => { const moi = yDinh === ma ? null : ma; setYDinh(moi); onYDinh?.(moi); setTraLoi({}); if (yDinh !== ma) ghi("chart_interacted", { mo_dun: "phongthuy", kind: "hoi_nhanh_y_dinh", y_dinh: ma }); }}
             className={cn("rounded-full border px-3 py-1 text-xs", yDinh === ma ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>{ten}</button>
         ))}
       </div>
