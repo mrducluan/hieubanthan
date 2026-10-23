@@ -136,10 +136,13 @@ export const BienTapVien: CollectionConfig = {
       ({ data, originalDoc, req }) => {
         // SEC-2: bật / đổi khoá API chỉ Quản trị (đã qua MFA) hoặc script máy chủ — khoá API là lối đăng nhập thứ hai.
         if (req.payloadAPI === "local" && !req.headers?.get?.("cookie") && !req.headers?.get?.("authorization")) return data;
+        // Màn "tạo tài khoản đầu tiên" (chưa đăng nhập) gửi kèm ô API Key rỗng — hook bên dưới khoá email + vai trò lần đó.
+        if (!req.user && !originalDoc) return data;
         const d = data as { enableAPIKey?: unknown; apiKey?: unknown };
         const cu = (originalDoc ?? {}) as { enableAPIKey?: unknown; apiKey?: unknown };
-        const doi = ("enableAPIKey" in d && Boolean(d.enableAPIKey) !== Boolean(cu.enableAPIKey))
-          || ("apiKey" in d && (d.apiKey ?? null) !== (cu.apiKey ?? null));
+        // Chỉ tính là đổi khi BẬT khoá hoặc đặt một khoá KHÁC RỖNG mới (form gửi kèm ô trống / tắt khoá là bình thường).
+        const doi = (d.enableAPIKey === true && !cu.enableAPIKey)
+          || (typeof d.apiKey === "string" && d.apiKey !== "" && d.apiKey !== cu.apiKey);
         if (doi && !laQuanTri(req)) throw new APIError("Chỉ Quản trị (đã xác thực 2 bước) được bật hoặc đổi khoá API.", 403, null, true);
         return data;
       },
