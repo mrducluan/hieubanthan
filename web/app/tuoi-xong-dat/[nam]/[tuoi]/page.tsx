@@ -7,8 +7,10 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KetQuaXongDat } from "@/components/tuoi/KetQuaTuoi";
 import { CungTuoi } from "@/components/tuoi/CungTuoi";
 import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
-import { docNam, docTuoi, duongXongDat, duongXongDatNam, namAmHienTai, xongDatCongKhai, xongDatIndex, NAM_BANG_TU } from "@/lib/tuoi-dan-gian";
+import { docNam, docTuoi, duongHanNam, duongLamNha, duongXongDat, duongXongDatNam, namAmHienTai, xongDatCongKhai, xongDatIndex, NAM_BANG_TU } from "@/lib/tuoi-dan-gian";
 import { KhoiCms } from "@/components/cms/KhoiCms";
+import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
+import { duongNgay } from "@/lib/hoang-lich";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_XONG_DAT_CON } from "@/lib/chu/trang-con";
@@ -52,7 +54,15 @@ export default async function Page(p: P) {
       <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/tuoi-xong-dat" className="hover:underline">Tuổi xông đất</Link>{x.n >= NAM_BANG_TU && <> › <Link href={duongXongDatNam(x.n)} className="hover:underline">Tết {x.n}</Link></>}</nav>
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
+      <div className="mb-6"><TraLoiNhanh chu={d.tra_loi_nhanh} /></div>
       <KetQuaXongDat d={d} />
+      {/* SEO-M: link chéo tới các trang cùng năm / cùng tuổi (trước đây chỉ 2 link trong nội dung chính). */}
+      <nav aria-label="Xem thêm" className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <Link href={duongNgay(d.mung_mot.ngay)} className="text-gold underline">Mùng 1 Tết {x.n} tốt xấu thế nào</Link>
+        <Link href={duongHanNam(x.n)} className="text-gold underline">Hướng xấu năm {x.n}</Link>
+        <Link href={duongLamNha(x.n, x.ns)} className="text-gold underline">Tuổi {x.ns} làm nhà năm {x.n}</Link>
+        {x.n >= NAM_BANG_TU && <Link href={duongXongDatNam(x.n)} className="text-gold underline">Bảng xông đất Tết {x.n} mọi tuổi</Link>}
+      </nav>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-6 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/tuoi-xong-dat" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>
       <CungTuoi namSinh={x.ns} canChi={d.chu.can_chi} namAm={namAm} bo="xong_dat" />

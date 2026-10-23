@@ -32,9 +32,15 @@ export interface NgayTot {
   viec: { ma_viec: string; ten: string; danh_gia: "tot" | "binh" | "tranh"; ly_do: string[]; ngay_tot_gan: TomTatNgay | null } | null;
   ngay_mai: TomTatNgay; ngay_tot_gan: TomTatNgay | null;
   danh_sach_viec: { ma: string; ten: string }[];
-  nguon: string; trang_thai: string; luu_y: string;
+  nguon: string; trang_thai: string; luu_y: string; tra_loi_nhanh?: string;
 }
-export interface ThangLich { nam: number; thang: number; ngay: TomTatNgay[] }
+// SEO-M: tóm tắt tháng + ngày tốt theo việc + hỏi đáp (engine cũ không có → tuỳ chọn).
+export interface ThangLich {
+  nam: number; thang: number; ngay: TomTatNgay[]; thang_am?: string; tra_loi_nhanh?: string;
+  tom_tat?: { so_hoang_dao: number; so_dep: number; ky_dan_gian: { ten: string; ngay: string[] }[] };
+  theo_viec?: { viec: { ma: string; ten: string }; slug: string; so_ngay: number; dep_nhat: TomTatNgay | null }[];
+  hoi_dap?: { hoi: string; dap: string }[];
+}
 export interface ChonNgayKq {
   viec: { ma: string; ten: string }; tu: string; den: string; tuoi: { can_chi: string } | null;
   ngay: TomTatNgay[]; luu_y: string; cach_chon: string;

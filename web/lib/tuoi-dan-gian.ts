@@ -5,6 +5,7 @@ export interface MetaKb { nguon: string; trang_thai: string; luu_y: string }
 export interface HuongTranh { ma: string; ten: string; nghia: string; phuong: string; chi?: string[] }
 export interface HanNam extends MetaKb {
   nam: number; can_chi: string; huong_tranh: HuongTranh[]; moc: string;
+  tra_loi_nhanh?: string; hoi_dap?: { hoi: string; dap: string }[];   // SEO-M (engine cũ: không có)
   phi_tinh: { cung: string; phuong: string; sao: number; ten_sao: string; y_nghia: string | null }[];
 }
 export interface LamNha extends MetaKb {
@@ -16,7 +17,7 @@ export interface LamNha extends MetaKb {
   cac_nam_tam_tai: string[];
   ket_luan: { ma: "thuan" | "can_nhac"; chu: string };
   nam_thuan: { nam: number; can_chi: string; tuoi_mu: number }[];
-  cuoi_hoi: string; cach_dan_gian: string | null; cach_tinh: string; han_nam: HanNam;
+  cuoi_hoi: string; cach_dan_gian: string | null; cach_tinh: string; han_nam: HanNam; tra_loi_nhanh?: string;
 }
 export interface XongDat extends MetaKb {
   nam: { nam: number; can_chi: string }; chu: { nam_sinh: number; can_chi: string }; uoc_luong_nam_sinh: boolean;
@@ -24,7 +25,7 @@ export interface XongDat extends MetaKb {
   nen_tranh: string[];
   mung_mot: { ngay: string; can_chi: string; hoang_dao: boolean; than: string;
     gio_hoang_dao: { chi: string; khung: string }[]; huong: { hy_than: string; tai_than: string; phuc_than: string } };
-  cach_chon: string;
+  cach_chon: string; tra_loi_nhanh?: string;
 }
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
