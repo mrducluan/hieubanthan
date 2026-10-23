@@ -94,3 +94,9 @@ test("xem trước: mỗi mẫu cụm có trang ví dụ thật (khớp đúng c
   const r = await request.get("/api/cms/thoat-xem-truoc?duong=%2F%2Fevil.vn", { maxRedirects: 0 });
   expect(r.headers().location ?? "").not.toContain("evil.vn");
 });
+
+test("cỡ chữ trang chủ là mục chọn: chỉ nhận giá trị trong danh sách, trùng mặc định thì bỏ", () => {
+  expect(locChu(CHU_TRANG_CHU, { "co.h1": "lon", "co.diem_mu": "to-tuy-y", "co.chip": "thuong" })).toEqual({ "co.h1": "lon" });
+  expect(taoChu(CHU_TRANG_CHU, { "co.h1": "rat_lon" })("co.h1")).toBe("rat_lon");
+  expect(taoChu(CHU_TRANG_CHU, { "co.h1": "<b>x</b>" })("co.h1")).toBe("thuong");
+});

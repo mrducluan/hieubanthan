@@ -5,7 +5,7 @@
 import { useField, useFormFields } from "@payloadcms/ui";
 import { useMemo, useState } from "react";
 
-type MucChu = { nhan?: string; mac_dinh?: string; toi_da?: number; nhom?: string };
+type MucChu = { nhan?: string; mac_dinh?: string; toi_da?: number; nhom?: string; lua_chon?: { gia_tri: string; nhan: string }[] };
 
 const khung: React.CSSProperties = { border: "1px solid var(--theme-elevation-150)", borderRadius: 8, padding: 12, marginBottom: 12 };
 
@@ -50,6 +50,19 @@ export function ChuTrenTrang({ path }: { path: string }) {
         <details key={ten} open style={khung}>
           <summary style={{ cursor: "pointer", fontWeight: 600 }}>{ten} · {ds.length}</summary>
           {ds.map(([k, m]) => {
+            if (m.lua_chon) {
+              const hien = giaTri[k] ?? m.mac_dinh ?? "";
+              return (
+                <div key={k} style={{ marginTop: 12 }} data-khoa={k}>
+                  <label htmlFor={`chu-${k}`} style={{ display: "block", fontSize: 13, fontWeight: 600 }}>{m.nhan || k}</label>
+                  <select id={`chu-${k}`} value={hien} onChange={(e) => dat(k, e.target.value === m.mac_dinh ? "" : e.target.value)}
+                    style={{ marginTop: 4, padding: "6px 10px", minWidth: 220 }}>
+                    {m.lua_chon.map((o) => <option key={o.gia_tri} value={o.gia_tri}>{o.nhan}{o.gia_tri === m.mac_dinh ? " (mặc định)" : ""}</option>)}
+                  </select>
+                  <div style={{ fontSize: 11, opacity: 0.65, marginTop: 2 }}><code>{k}</code></div>
+                </div>
+              );
+            }
             const v = giaTri[k] ?? "", toiDa = m.toi_da ?? 300, dai = (m.mac_dinh ?? "").length > 70 || toiDa > 120;
             const Nhap = dai ? "textarea" : "input";
             return (

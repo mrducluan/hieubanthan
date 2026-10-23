@@ -45,3 +45,12 @@ test("hình: chỉ khoá trong bảng, nhận số id hoặc bản đã chụp, 
   assert.equal(maAnh("12"), "12"); assert.equal(maAnh({ id: 3 }), 3); assert.equal(maAnh("1; drop"), null);
   assert.deepEqual(bangHinhCua({ hinh: bang }), bang);
 });
+
+test("mục chọn (cỡ chữ): chỉ nhận giá trị trong danh sách, trùng mặc định thì bỏ", () => {
+  const lc = [{ gia_tri: "nho", nhan: "Nhỏ" }, { gia_tri: "thuong", nhan: "Vừa" }, { gia_tri: "lon", nhan: "Lớn" }];
+  const bang = { "co.h1": { mac_dinh: "thuong", lua_chon: lc } };
+  assert.deepEqual(locChuCms(bang, { "co.h1": "lon" }), { "co.h1": "lon" });
+  assert.equal(locChuCms(bang, { "co.h1": "thuong" }), null);
+  assert.equal(locChuCms(bang, { "co.h1": "to-dung-dung" }), null);
+  assert.equal(locChuCms(bang, { "co.h1": "<b>lon</b>" }), null);
+});

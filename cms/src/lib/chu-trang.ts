@@ -2,7 +2,7 @@
 // gửi). Chỉ giữ khoá có trong bảng, chữ thuần (bỏ thẻ HTML), cắt theo giới hạn, bỏ ô trống / trùng chữ gốc. Web lọc lại
 // lần nữa khi đọc (web/lib/chu-trang.ts locChu) — hai lớp, cùng luật.
 
-export type MucChuCms = { nhan?: string; mac_dinh?: string; toi_da?: number; nhom?: string };
+export type MucChuCms = { nhan?: string; mac_dinh?: string; toi_da?: number; nhom?: string; lua_chon?: { gia_tri: string; nhan: string }[] };
 export type BangChuCms = Record<string, MucChuCms>;
 
 const KHOA = /^[a-z0-9_]+(\.[a-z0-9_]+)*$/;
@@ -20,6 +20,10 @@ export function locChuCms(bang: BangChuCms, chu: unknown): Record<string, string
   for (const [k, v] of Object.entries(chu as Record<string, unknown>)) {
     const m = bang[k];
     if (!m || !KHOA.test(k) || typeof v !== "string") continue;
+    if (m.lua_chon) {   // mục chọn (cỡ chữ…): chỉ nhận đúng giá trị trong danh sách
+      if (v !== m.mac_dinh && m.lua_chon.some((o) => o.gia_tri === v)) ra[k] = v;
+      continue;
+    }
     const s = v.replace(/<[^>]*>/g, "").replace(/[ \t]+/g, " ").replace(/\s*\n\s*/g, " ").trim().slice(0, m.toi_da ?? TOI_DA_CHU).trim();
     if (s && s !== m.mac_dinh) ra[k] = s;
   }
