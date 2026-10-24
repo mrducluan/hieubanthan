@@ -27,7 +27,7 @@ với `tu = blog` (den = mảng), `reading_completed` chưa đo ở blog (ý tư
 | "J / K to jump" | Có (J mục sau, K mục trước; bỏ qua khi gõ ô nhập) | Gợi ý chỉ hiện ≥ xl |
 | Thẻ sản phẩm bên lề (skill ZIP 19 000 đ) | Thẻ **CtaBen**: "Xem {mảng} của bạn" theo mảng bài | Luôn trong tầm mắt khi đọc |
 | Chữ thân bài ~18 px, dòng 1,7–1,8, cột ~45 rem | 17 px điện thoại · 18 px ≥ 1024 px, dòng 1,8, cột 48 rem | Serif tiêu đề giữ tông "Đêm sao"; thêm vạch vàng ngắn trên mỗi H2 |
-| Điện thoại: không mục lục dính | Hộp mục lục gập trên thân bài + thanh tiến độ 2 px sát mép trên | Không chiếm chỗ |
+| Điện thoại: thanh mục lục DÍNH dưới thanh đầu trang (tên mục · dải vạch · % · mở) | **BLOG-4b (2026-10-24):** thanh 48 px dính ở `top-16` (dưới thanh đầu trang 64 px), tên mục đang đọc trượt nhẹ khi đổi, dải vạch mỗi mục (> 16 mục → một thanh liền; < 360 px ẩn), % vàng, vạch tiến độ sát mép dưới; chạm → bảng thả xuống (≤ 60vh, số thứ tự mục H2, mục đang đọc nổi bật, "còn ~N phút", "Lên đầu bài"), Esc / chạm ngoài để đóng; URL đổi `#neo` khi cuộn (như máy tính); chọn mục cuộn chừa 124 px, mốc "đang đọc" 150 px; tiêu đề chừa `scroll-margin-top: 8rem` khi mở link #neo | Một thanh thay hộp gập + thanh 2 px cũ; e2e `blog-doc` kiểm dính 64 px, tên + %, #neo, bảng, nhảy mục không bị che, không lỗi hydration |
 
 Không chép: mục lục NotFair chèn sẵn trong thân bài (`nav.nf-toc`) bị bỏ khi lọc — không hiện hai mục lục. Giữ: dòng
 `nf-attribution` (bên trao đổi yêu cầu, BM-1 lệch có chủ ý).

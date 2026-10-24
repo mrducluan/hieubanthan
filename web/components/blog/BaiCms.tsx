@@ -163,7 +163,7 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
         </section>
       )}
 
-      {tn.muc_luc && <MucLucGon mucLuc={mucLuc} tieuDe={bai.tieu_de} />}
+      {tn.muc_luc && <MucLucGon mucLuc={mucLuc} tieuDe={bai.tieu_de} phut={phutDoc(bai.noi_dung_html)} />}
 
       <div id={THAN_BAI_ID} className={`mt-8 ${nf.articleContent} ${st.noiDung}`} dangerouslySetInnerHTML={{ __html: html }} />
       {!nhap && <MocDocXong moDun="blog" them={{ mang }} />}

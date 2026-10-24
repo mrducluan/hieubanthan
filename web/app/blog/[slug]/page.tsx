@@ -120,7 +120,7 @@ export default async function Page({ params }: Props) {
         {p.reading_time_minutes ? <span className="inline-flex items-center gap-1"><Clock className="size-3.5" aria-hidden />{p.reading_time_minutes} phút đọc</span> : null}
       </div>
 
-      <MucLucGon mucLuc={mucLuc} tieuDe={p.title} />
+      <MucLucGon mucLuc={mucLuc} tieuDe={p.title} phut={p.reading_time_minutes} />
 
       <div id={THAN_BAI_ID} className={`mt-8 ${styles.articleContent}`} dangerouslySetInnerHTML={{ __html: html }} />
       {/* GATE-DO: reading_completed{mo_dun: blog} khi cuộn hết thân bài (đã cuộn + ≥ 10 giây) — đo tỉ lệ đọc hết → bấm CTA. */}

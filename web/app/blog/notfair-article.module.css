@@ -22,8 +22,13 @@
   font-family: var(--font-display), Georgia, serif;
   font-weight: 500;
   letter-spacing: -0.01em;
-  scroll-margin-top: 6rem;
+  /* Điện thoại: thanh đầu trang 64px + thanh mục lục dính 48px → chừa 8rem khi mở link #neo; máy lớn chỉ thanh đầu trang. */
+  scroll-margin-top: 8rem;
   text-wrap: balance;
+}
+
+@media (min-width: 1024px) {
+  .articleContent h1, .articleContent h2, .articleContent h3, .articleContent h4 { scroll-margin-top: 6rem; }
 }
 
 .articleContent h1 { margin-top: 3rem; font-size: 1.875rem; line-height: 1.2; }
