@@ -299,7 +299,8 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
               name: "tu_khoa_chinh", label: "Từ khoá chính", type: "text", maxLength: 80,
               admin: { description: "Cụm người đọc tìm nhiều nhất cho bài này (xem Search Console ở /quan-tri/tang-truong)." },
             },
-            { name: "tu_khoa_phu", label: "Từ khoá phụ / biến thể", type: "text", hasMany: true, maxRows: 10 },
+            { name: "tu_khoa_phu", label: "Từ khoá phụ / biến thể", type: "text", hasMany: true, maxRows: 10,
+              admin: { components: { Field: "/components/NhapThe#NhapThe" } } },
             {
               name: "meta", label: "Hiển thị trên Google & mạng xã hội", type: "group",
               fields: [
@@ -363,7 +364,8 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
       admin: { position: "sidebar", description: "Tin tức → schema NewsArticle (Google News/Discover), ghi rõ ngày giờ đăng và cập nhật." },
     },
     { name: "chuyen_muc", label: "Chuyên mục", type: "relationship", relationTo: "chuyen-muc", hasMany: true, admin: { position: "sidebar" } },
-    { name: "the", label: "Thẻ", type: "text", hasMany: true, maxRows: 12, admin: { position: "sidebar" } },
+    { name: "the", label: "Thẻ", type: "text", hasMany: true, maxRows: 12,
+      admin: { position: "sidebar", components: { Field: "/components/NhapThe#NhapThe" } } },
     {
       name: "ky_ten", label: "Chữ ký trên bài", type: "select", required: true, defaultValue: "ban_bien_tap",
       access: { create: truongChuBien, update: truongChuBien },

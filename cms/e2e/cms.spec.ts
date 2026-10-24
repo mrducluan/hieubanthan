@@ -186,6 +186,78 @@ test("web hiện bài: H1, Trả lời nhanh, mục lục, FAQ, JSON-LD, chữ k
   expect(await md.text()).toContain("## Số 7 trong công việc");
 });
 
+test("Thẻ + Từ khoá phụ: thêm bằng Enter, dấu phẩy, bấm ra ngoài, dán nhiều từ, bộ gõ tiếng Việt → lưu → web ghi keywords", async ({ page, request }) => {
+  await dangNhap(page);
+  await page.goto(`${CMS}/admin/collections/bai-viet`);
+  await page.getByRole("link", { name: TIEU_DE }).first().click();
+  await page.waitForLoadState("networkidle");
+  const the = page.getByTestId("nhap-the-the");
+  const o = the.locator("input");
+  const muc = the.getByTestId("the-muc");
+  await expect(o).toBeEditable();
+  await expect(o).toHaveAttribute("placeholder", "Gõ rồi bấm Enter hoặc dấu phẩy");
+
+  await o.click();
+  await page.keyboard.type("thần số học");
+  await page.keyboard.press("Enter");
+  await page.keyboard.type("số 7,");
+  await page.keyboard.type("nội tâm");
+  await page.locator("#field-tieu_de").click();      // bấm ra ngoài: chữ đang gõ không mất
+  await expect(muc).toHaveText(["thần số học×", "số 7×", "nội tâm×"]);
+
+  // Bộ gõ có gạch chân (Telex Windows/macOS) trên Chrome: Enter khi đang gõ dấu → chốt chữ → thêm luôn, không cần Enter lần hai.
+  await o.click();
+  await o.evaluate((el: HTMLInputElement) => {
+    const dat = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")!.set!;
+    el.dispatchEvent(new CompositionEvent("compositionstart", { bubbles: true }));
+    dat.call(el, "chiêm nghiệm");
+    el.dispatchEvent(new InputEvent("input", { bubbles: true, isComposing: true }));
+    el.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", keyCode: 229, isComposing: true, bubbles: true, cancelable: true }));
+    el.dispatchEvent(new CompositionEvent("compositionend", { bubbles: true, data: "chiêm nghiệm" }));
+  });
+  await expect(muc).toHaveCount(4);
+  await expect(muc.last()).toHaveText("chiêm nghiệm×");
+
+  // Trùng (khác hoa thường) không thêm, có báo; Backspace ở ô trống xoá thẻ cuối; nút × xoá đúng thẻ.
+  await page.keyboard.type("THẦN SỐ HỌC");
+  await page.keyboard.press("Enter");
+  await expect(the.getByRole("status")).toContainText("Đã có: THẦN SỐ HỌC");
+  await page.keyboard.press("Backspace");
+  await expect(muc).toHaveCount(3);
+  await the.getByRole("button", { name: 'Xoá "số 7"' }).click();
+  await expect(muc).toHaveText(["thần số học×", "nội tâm×"]);
+
+  // Từ khoá phụ: dán cả dãy cách nhau bằng dấu phẩy, dừng ở 10 mục.
+  await page.locator(".tabs-field__tab-button", { hasText: "SEO · GEO" }).click();
+  const tk = page.getByTestId("nhap-the-tu_khoa_phu");
+  await tk.locator("input").fill("số chủ đạo 7 là gì, đường đời số 7, " + Array.from({ length: 10 }, (_, i) => `biến thể ${i + 1}`).join(", ") + ",");
+  await expect(tk.getByTestId("the-muc")).toHaveCount(10);
+  await expect(tk.getByText("10/10")).toBeVisible();
+  await expect(tk.getByRole("status")).toContainText("Tối đa 10 mục");
+  // Payload nhớ tab đang mở theo tài khoản → trả về tab "Nội dung" (các test sau điền ô ở tab này).
+  await page.locator(".tabs-field__tab-button", { hasText: "Nội dung" }).click();
+
+  await page.locator("#action-save").click();
+  await expect(page.getByText(/Đã xuất bản|thành công|Updated successfully|Published successfully/i).first()).toBeVisible();
+
+  // Lưu thật: tải lại vẫn còn; API trả mảng chuỗi như cũ.
+  await page.reload();
+  await page.waitForLoadState("networkidle");
+  await expect(page.getByTestId("nhap-the-the").getByTestId("the-muc")).toHaveText(["thần số học×", "nội tâm×"]);
+  const r = await request.get(`${CMS}/api/bai-viet?where[slug][equals]=${SLUG}&depth=0`, { headers: { Authorization: `bien-tap-vien API-Key ${BI_MAT.apiKey}` } });
+  const bai = (await r.json()).docs[0];
+  expect(bai.the).toEqual(["thần số học", "nội tâm"]);
+  expect(bai.tu_khoa_phu.slice(0, 2)).toEqual(["số chủ đạo 7 là gì", "đường đời số 7"]);
+
+  // Web: thẻ vào keywords (JSON-LD) + article:tag.
+  await choWeb(request, `/blog/${SLUG}`, (s, b) => s === 200 && b.includes("đường đời số 7"));
+  await page.goto(`${WEB}/blog/${SLUG}`);
+  const ld = (await page.locator('script[type="application/ld+json"]').allTextContents()).join("\n");
+  expect(ld).toMatch(/"keywords":"[^"]*số chủ đạo 7 là gì[^"]*nội tâm/);
+  await expect(page.locator('meta[property="article:tag"][content="chiêm nghiệm"]')).toHaveCount(0);
+  await expect(page.locator('meta[property="article:tag"][content="nội tâm"]')).toHaveCount(1);
+});
+
 test("chuyên mục + loại Tin tức: chip ở /blog, trang chuyên mục có ItemList, bài ghi NewsArticle + giờ đăng", async ({ page, request }) => {
   const token = await tokenQt(request);
   const h = { Authorization: `JWT ${token}` };
