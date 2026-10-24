@@ -67,10 +67,19 @@ Pro dư cho mức này.
 
 ## 4. Khi cần chuyển sang R2 (khoảng 30 phút, không sửa code)
 
+Code đã sẵn cho R2 (cùng plugin `@payloadcms/storage-s3`, không thêm thư viện): "Kiểm tra kho ảnh" tự nhận R2 từ
+endpoint, ký thử với vùng `auto`, báo endpoint dán kèm tên bucket, chỉ đúng chỗ tạo khoá trong bảng Cloudflare.
+
+**Lưu ý tên miền ảnh:** R2 chỉ gắn **Custom domain** khi DNS của `hieuban.com` nằm ở Cloudflare (hiện ở GoDaddy). Hai cách:
+(a) chuyển nameserver `hieuban.com` sang Cloudflare (miễn phí, giữ nguyên bản ghi; làm cẩn thận vì ảnh hưởng cả web +
+email) rồi gắn `anh.hieuban.com`; (b) tạm dùng **r2.dev** (Settings → Public Development URL) — Cloudflare giới hạn tốc
+độ và không khuyên dùng cho bản thật, chỉ để chạy trong lúc chờ (a).
+
 1. Cloudflare → R2 → tạo bucket `cms-media`.
-   - Settings → Public access → gắn **Custom domain** `anh.hieuban.com`. Không dùng `r2.dev` cho bản thật.
+   - Settings → Public access → gắn **Custom domain** `anh.hieuban.com` (cách a) hoặc bật r2.dev (cách b).
 2. R2 → Manage API tokens → tạo token quyền Object Read & Write cho bucket đó.
 3. Chép ảnh cũ sang bằng `rclone copy` (hai đầu đều là S3). Giữ nguyên đường dẫn `cms/...`.
+   (2026-10-24: Thư viện ảnh còn trống vì tải ảnh chưa từng chạy được → bỏ qua bước 3 và 6.)
 4. Vercel project **cms**, đặt lại các biến:
 
    | Biến | Giá trị |
@@ -79,10 +88,11 @@ Pro dư cho mức này.
    | `S3_REGION` | `auto` |
    | `S3_BUCKET` | `cms-media` |
    | `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` | khoá vừa tạo |
-   | `S3_PUBLIC_URL` | `https://anh.hieuban.com` |
+   | `S3_PUBLIC_URL` | `https://anh.hieuban.com` (hoặc `https://pub-….r2.dev` — gốc bucket, KHÔNG thêm `/cms-media`) |
 
    Sau đó Redeploy.
-5. Vercel project **web**: đổi `CMS_ANH_URL` = `https://anh.hieuban.com` → Redeploy.
+   Rồi CMS → Thư viện ảnh → **Kiểm tra kho ảnh** phải ra ✓ (dòng đầu ghi "Cloudflare R2").
+5. Vercel project **web**: đổi `CMS_ANH_URL` = `https://anh.hieuban.com` (hoặc URL r2.dev) → Redeploy.
    - Bộ lọc HTML và CSP `img-src` đọc biến này nên tự nhận tên miền mới.
 6. Ảnh trong bài cũ có URL cũ đã lưu trong HTML.
    - Bấm "Lưu" lại từng bài (hoặc em viết script dựng lại HTML) để đổi sang URL mới.
@@ -101,3 +111,27 @@ Pro dư cho mức này.
   (`src/lib/kho-anh.ts`). Trên Vercel mà thiếu `S3_*` → chặn ngay với lời tiếng Việt (ổ đĩa chỉ đọc).
 - **Trần cỡ ảnh 4,5 MB** (= giới hạn thân yêu cầu của hàm Vercel); CI chạy `npm run test:kho-anh` (S3 giả) + e2e tải ảnh
   bằng giao diện quản trị.
+
+## 6. Sự cố lần 2 (2026-10-24): 403 SignatureDoesNotMatch — và lỗ hổng trong cách kiểm thử (BLOG-5b)
+
+- **Triệu chứng:** sau khi có cột, "Kiểm tra kho ảnh" báo `SignatureDoesNotMatch` (HTTP 403); tạo ảnh báo "Something
+  went wrong."; "Nhập vào CMS" bài NotFair báo "Chưa nhập được: The request signature we calculated does not match…".
+- **Đọc mã Supabase Storage** (`src/storage/protocols/s3/signature-v4.ts`): mã khoá lạ → `AccessDenied "Invalid Access
+  Key"`; còn `SignatureDoesNotMatch` nghĩa là mã khoá ĐÚNG nhưng (1) khoá bí mật sai / dính khoảng trắng, xuống dòng,
+  ngoặc khi dán; hoặc (2) vùng khách ký khác vùng dự án (máy chủ ký lại bằng vùng của nó, trừ `auto` / `us-east-1`);
+  hoặc (3) host endpoint khác host máy chủ dùng để ký.
+- **Lỗ hổng kiểm thử của em:** S3 giả ở BLOG-5 **bỏ qua chữ ký** nên mọi khoá đều "đúng" — không bao giờ bắt được lỗi
+  này. Nay `cms/tests/s3-gia.ts` **kiểm SigV4 như Supabase** (cả luật chọn vùng); `test:kho-anh` có ca khoá bí mật sai,
+  sai vùng, mã khoá sai, biến dán bẩn, nhập bài NotFair khi kho lỗi — đã chạy với code cũ để chắc ca hỏng đúng chỗ.
+- **Sửa:**
+  1. `cauHinhS3()` — MỘT nguồn cấu hình cho plugin + bộ kiểm: bỏ khoảng trắng / xuống dòng / ngoặc thừa, gạch chéo cuối
+     endpoint; checksum CRC32 mặc định của SDK chỉ gửi khi bắt buộc.
+  2. "Kiểm tra kho ảnh" thêm bước **"Khoá + vùng S3 (ký thử, không ghi gì)"** — tự ký SigV4 một lệnh đọc bằng
+     `node:crypto`; hỏng thì dò 17 vùng Supabase (R2: `auto`) và host còn lại của dự án → nói đúng biến cần sửa
+     (`S3_SECRET_ACCESS_KEY` / `S3_REGION = …` / `S3_ENDPOINT` / `S3_ACCESS_KEY_ID` / bucket). Chỉ báo độ dài khoá.
+  3. Lỗi THÔ của AWS SDK (plugin ném nguyên, Payload coi là 500 nên giấu thành "Something went wrong.") → `afterError`
+     của Ảnh dịch sang tiếng Việt (viết liền: ô báo lỗi Payload cắt chữ ở ": " và ",").
+  4. Nhập bài NotFair: ảnh tạo trong **giao dịch riêng** (trước dùng chung `req` → một ảnh lỗi huỷ cả bài); kho hỏng ở
+     ảnh đầu thì dừng tải ảnh, **chữ vẫn nhập** thành nháp, ảnh thành đoạn `[Ảnh chưa nhập — <link>]` đúng chỗ; kiểm
+     định chặn xuất bản khi còn đoạn đó (`anh_chua_nhap`).
+

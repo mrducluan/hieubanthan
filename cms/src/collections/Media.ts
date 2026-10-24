@@ -1,7 +1,7 @@
 // Ảnh minh hoạ bài viết (ảnh biên tập — KHÔNG phải ảnh người dùng). Bắt buộc alt; tự sinh cỡ webp.
 import { APIError, type CollectionConfig } from "payload";
 import { ai, nguoiViet, chiChuBien, laChuBien, taiAnh } from "../access";
-import { cauHinhKho, kiemKhoAnh, LOI_CHUA_NOI_KHO } from "../lib/kho-anh";
+import { cauHinhKho, goiYTuLoi, kiemKhoAnh, locLoi, LOI_CHUA_NOI_KHO, TEN_NHA } from "../lib/kho-anh";
 
 export const Media: CollectionConfig = {
   slug: "media",
@@ -18,11 +18,20 @@ export const Media: CollectionConfig = {
         throw new APIError(LOI_CHUA_NOI_KHO, 400);
       }
     }],
-    // "There was a problem while uploading the file." (FileUploadError) → lời tiếng Việt chỉ đường tới nút Kiểm tra kho ảnh.
+    // Lỗi tải ảnh → lời tiếng Việt thay "Something went wrong." / "There was a problem while uploading the file.":
+    // (a) FileUploadError của Payload (sharp, ghi đĩa); (b) lỗi THÔ của kho S3 — plugin ném nguyên lỗi AWS SDK (có `$metadata`,
+    // vd SignatureDoesNotMatch) → Payload coi là lỗi 500 và giấu nội dung.
     afterError: [({ error, result }) => {
-      if (error?.name !== "FileUploadError") return;
-      return { status: 400, response: { ...(result ?? {}), errors: [{ name: "FileUploadError",
-        message: "Không xử lý được tệp ảnh (đổi WebP / tạo cỡ ảnh hoặc ghi vào kho). Mở Thư viện ảnh → bấm \"Kiểm tra kho ảnh\" để xem nguyên nhân cụ thể; thử ảnh JPG/PNG dưới 4,5 MB." }] } };
+      const e = error as { name?: string; message?: string; Code?: string; $metadata?: { httpStatusCode?: number } } | undefined;
+      const tuKho = Boolean(e && typeof e === "object" && "$metadata" in e);
+      if (e?.name !== "FileUploadError" && !tuKho) return;
+      const message = tuKho
+        ? `Kho ảnh từ chối ghi tệp (${locLoi(`${e?.Code || e?.name || "lỗi kho"}${e?.$metadata?.httpStatusCode ? ` · HTTP ${e.$metadata.httpStatusCode}` : ""}`)}). `
+          + goiYTuLoi(`${e?.Code ?? ""} ${e?.name ?? ""} ${e?.message ?? ""} ${e?.$metadata?.httpStatusCode ?? ""}`, "s3", cauHinhKho().vercel)
+        : "Không xử lý được tệp ảnh (đổi WebP / tạo cỡ ảnh hoặc ghi vào kho). Mở Thư viện ảnh → bấm \"Kiểm tra kho ảnh\" để xem nguyên nhân cụ thể; thử ảnh JPG/PNG dưới 4,5 MB.";
+      // Ô báo lỗi của Payload lấy ":" đầu tiên làm tiêu đề rồi cắt phần sau theo dấu phẩy thành danh sách "(2):" → viết liền.
+      const lien = message.replace(/:\s+/g, " — ").replace(/,\s*/g, "; ");
+      return { status: 400, response: { ...(result ?? {}), errors: [{ name: tuKho ? "LoiKhoAnh" : "FileUploadError", message: lien }] } };
     }],
   },
   endpoints: [
@@ -38,8 +47,8 @@ export const Media: CollectionConfig = {
       path: "/kho", method: "get",
       handler: async (req) => {
         if (!laChuBien(req)) return Response.json({ loi: "Chỉ Quản trị / Chủ biên." }, { status: 403 });
-        const { nguon, vercel, thieu } = cauHinhKho();
-        return Response.json({ nguon, vercel, thieu });
+        const { nguon, nha, vercel, thieu } = cauHinhKho();
+        return Response.json({ nguon, ten: TEN_NHA[nha], vercel, thieu });
       },
     },
   ],

@@ -25,7 +25,8 @@ export function NhapNotFair() {
       .then(setDs);
   }, [mo, ds]);
 
-  type KqNhap = { ok?: boolean; id?: number | string; da_co?: boolean; anh_loi?: string[]; loi?: string };
+  type KqNhap = { ok?: boolean; id?: number | string; da_co?: boolean; anh_loi?: string[]; loi_kho?: string; loi?: string };
+  const KHO_LOI = "Kho ảnh đang lỗi nên ảnh để chỗ đánh dấu \"[Ảnh chưa nhập …]\" trong bài — sửa kho (Thư viện ảnh → Kiểm tra kho ảnh) rồi tải ảnh vào; bài chưa xuất bản được khi còn chỗ đánh dấu.";
   async function goiNhap(slug: string): Promise<KqNhap> {
     const r = await fetch("/api/bai-viet/nhap-notfair", {
       method: "POST", credentials: "include", headers: { "content-type": "application/json" }, body: JSON.stringify({ slug }),
@@ -41,7 +42,8 @@ export function NhapNotFair() {
     if (!d.ok || d.id == null) { setTb(`Chưa nhập được: ${d.loi ?? "lỗi không rõ"}`); return; }
     if (d.anh_loi?.length) {
       // Vẫn mở bài; báo ảnh nào chưa tải được để Chủ biên tự tải lên lại.
-      window.alert(`Đã nhập bài. ${d.anh_loi.length} ảnh chưa tải được — tải lên lại trong bài:\n${d.anh_loi.join("\n")}`);
+      window.alert(`Đã nhập bài (chữ đầy đủ). ${d.anh_loi.length} ảnh chưa tải được — tải lên lại trong bài:\n${d.anh_loi.join("\n")}`
+        + (d.loi_kho ? `\n\n${KHO_LOI}\nLỗi kho: ${d.loi_kho}` : ""));
     }
     router.push(suaUrl(d.id));
   }
@@ -52,14 +54,14 @@ export function NhapNotFair() {
     if (!chua.length) return;
     if (!window.confirm(`Nhập ${chua.length} bài NotFair thành nháp trong CMS? Web vẫn hiện bản NotFair cho tới khi anh/chị xuất bản từng bài.`)) return;
     setTb(null);
-    let xong = 0; const loi: string[] = []; let anhLoi = 0;
+    let xong = 0; const loi: string[] = []; let anhLoi = 0; let loiKho = "";
     for (const d of chua) {
       setDang(d.slug);
       const kq = await goiNhap(d.slug);
-      if (kq.ok && kq.id != null) { xong++; anhLoi += kq.anh_loi?.length ?? 0; } else loi.push(`${d.tieu_de}: ${kq.loi ?? "lỗi không rõ"}`);
+      if (kq.ok && kq.id != null) { xong++; anhLoi += kq.anh_loi?.length ?? 0; loiKho ||= kq.loi_kho ?? ""; } else loi.push(`${d.tieu_de}: ${kq.loi ?? "lỗi không rõ"}`);
     }
     setDang(null);
-    setTb(`Đã nhập ${xong}/${chua.length} bài thành nháp.${anhLoi ? ` ${anhLoi} ảnh chưa tải được (mở từng bài để tải lại).` : ""}${loi.length ? ` Chưa nhập được: ${loi.join(" · ")}` : ""}`);
+    setTb(`Đã nhập ${xong}/${chua.length} bài thành nháp.${anhLoi ? ` ${anhLoi} ảnh chưa tải được (mở từng bài để tải lại).` : ""}${loiKho ? ` ${KHO_LOI}` : ""}${loi.length ? ` Chưa nhập được: ${loi.join(" · ")}` : ""}`);
     setDs(null);   // đọc lại bảng → cột trạng thái + nút "Mở bài"
   }
 

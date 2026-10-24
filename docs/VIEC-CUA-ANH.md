@@ -478,6 +478,15 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
   ảnh"** (nút đầu danh sách): tải thử một ảnh 16×16 rồi tự xoá, báo từng bước ✓/✕ + việc cần làm bằng tiếng Việt (bucket
   chưa tạo, khoá sai, bucket chưa Public…). Lỗi tải ảnh từ nay cũng báo rõ lý do thay vì câu tiếng Anh chung chung.
   Ảnh tối đa **4,5 MB** (trần của Vercel), lớn hơn thì nén trước.
+  **Lần 2 (2026-10-24, ảnh anh gửi: `SignatureDoesNotMatch` / "Something went wrong." / nhập NotFair lỗi):** Supabase đã
+  nhận mã khoá nhưng chữ ký sai → **khoá bí mật** (`S3_SECRET_ACCESS_KEY`) sai/dán thừa ký tự, hoặc **`S3_REGION`** khác
+  vùng dự án. Sau khi PR mới merge + CMS redeploy: Thư viện ảnh → **Kiểm tra kho ảnh** → dòng "Khoá + vùng S3" nói đúng
+  biến cần sửa. Thường gặp nhất = khoá bí mật: Supabase → Project Settings → Storage → S3 Connection → **New access key**
+  (khoá bí mật chỉ hiện một lần) → Vercel dự án **cms** → Settings → Environment Variables → sửa CẢ HAI
+  `S3_ACCESS_KEY_ID` + `S3_SECRET_ACCESS_KEY` (Production) → **Redeploy** → bấm Kiểm tra kho ảnh lại cho tới khi ✓.
+  Bài NotFair giờ **nhập được ngay cả khi kho ảnh lỗi** (chữ đầy đủ, ảnh thành đoạn "[Ảnh chưa nhập …]" — sửa kho xong
+  thì tải ảnh vào và chèn thay; còn đoạn đó thì chưa xuất bản được). Supabase vẫn không được → chuyển **Cloudflare R2**:
+  `docs/LUU-TRU-MEDIA.md` mục 4 (không sửa code; lưu ý tên miền ảnh khi DNS còn ở GoDaddy).
 - [x] CMS2. (anh báo deploy thành công 2026-10-12) Vercel → Add New Project → repo này, **Root Directory `cms`** → nhập biến theo `cms/.env.example`
   (`DATABASE_URI` = Session pooler, `PAYLOAD_SECRET`, `CMS_URL`, `WEB_URL`, `CMS_EMAIL_QUAN_TRI` = email của anh,
   `CMS_WEBHOOK_SECRET`, `CMS_PREVIEW_SECRET`, `CRON_SECRET`, `S3_*`). Không dán khoá vào chat.

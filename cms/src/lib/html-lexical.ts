@@ -246,11 +246,21 @@ export function htmlSangKhoi(html: string): (NutLexical | ChoAnh)[] {
 }
 
 /** Thay chỗ giữ ảnh bằng nút upload (id ảnh trong Thư viện ảnh); ảnh tải lỗi (null) bị bỏ. Trả về state Lexical đủ gốc. */
-export function thayAnh(khoi: (NutLexical | ChoAnh)[], idAnh: (a: ChoAnh) => number | string | null) {
+/** Đoạn đánh dấu chỗ ảnh chưa vào được Thư viện ảnh — kiểm định chặn xuất bản khi còn (ma "anh_chua_nhap"). */
+export const DANH_DAU_ANH = "[Ảnh chưa nhập";
+
+/** `danhDau`: ảnh không tải được → để một đoạn "[Ảnh chưa nhập — <link>]" đúng chỗ (người sửa biết chèn lại ở đâu). */
+export function thayAnh(khoi: (NutLexical | ChoAnh)[], idAnh: (a: ChoAnh) => number | string | null, danhDau = false) {
   const children = khoi.flatMap((k): NutLexical[] => {
     if (k.type !== "__anh") return [k as NutLexical];
-    const id = idAnh(k as ChoAnh);
-    return id == null ? [] : [{ type: "upload", relationTo: "media", value: id, fields: null, format: "", version: 3,
+    const a = k as ChoAnh;
+    const id = idAnh(a);
+    if (id == null) {
+      return danhDau ? [{ type: "paragraph", direction: "ltr", format: "", indent: 0, version: 1, textFormat: 0, children: [
+        { type: "text", text: `${DANH_DAU_ANH} — tải ảnh vào Thư viện ảnh rồi chèn thay đoạn này: ${a.src}${a.alt ? ` (alt: ${a.alt})` : ""}]`,
+          format: 0, detail: 0, mode: "normal", style: "", version: 1 }] }] : [];
+    }
+    return [{ type: "upload", relationTo: "media", value: id, fields: null, format: "", version: 3,
       id: Math.random().toString(16).slice(2, 14).padEnd(12, "0") }];
   });
   return { root: { type: "root", children, direction: "ltr", format: "", indent: 0, version: 1 } };
