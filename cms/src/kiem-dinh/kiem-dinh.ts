@@ -366,6 +366,8 @@ export function kiemDinhBai(bai: BaiKiem): KetQuaKiem {
       : "Giọng tham khảo, không phán.");
   const lienHe = LIEN_HE_CHU.test(toanVan) || d.lienKetNgoai.some((u) => /^(mailto|tel|sms):/i.test(u) || /zalo\.me/i.test(u));
   if (lienHe) them("lien_he", "noi_dung", "loi", "Có số điện thoại, email, Zalo hoặc link liên hệ riêng.", true);
+  if (d.van.includes("[Ảnh chưa nhập")) them("anh_chua_nhap", "noi_dung", "loi",
+    "Còn đoạn \"[Ảnh chưa nhập …]\" (ảnh bài NotFair chưa vào Thư viện ảnh) — tải ảnh lên rồi chèn thay đoạn đó.", true);
   const noiBo = TEN_NOI_BO.flatMap((r) => toanVan.match(new RegExp(r.source, r.flags + "g")) ?? []);
   if (noiBo.length) them("ten_noi_bo", "noi_dung", "loi",
     `Có tên nội bộ không được công khai: ${[...new Set(noiBo)].join(", ")} — ghi nguồn kiểu sách/trường phái.`, true);

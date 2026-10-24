@@ -70,17 +70,32 @@ async function taiAnh(src: string): Promise<{ data: Buffer; mimetype: string; na
   return { data: buf, mimetype, name: `notfair-${goc.replace(/[^a-z0-9-]+/gi, "-").slice(0, 60)}-${Date.now().toString(36)}.${LOAI_ANH[mimetype]}`, size: buf.length };
 }
 
-async function taoAnh(payload: Payload, req: PayloadRequest, src: string, alt: string, chuThich = ""): Promise<number | string | null> {
+/** Một lượt nhập: kho ảnh hỏng ở ảnh đầu (khoá S3 sai, bucket thiếu…) thì các ảnh sau cũng hỏng → bỏ qua, chữ vẫn nhập. */
+type PhienAnh = { loiKho: string | null };
+
+async function taoAnh(payload: Payload, req: PayloadRequest, phien: PhienAnh, src: string, alt: string, chuThich = ""): Promise<number | string | null> {
+  if (phien.loiKho) return null;
   const f = await taiAnh(src);
   if (!f) return null;
-  const m = await payload.create({
-    collection: "media", req, overrideAccess: false, file: f,
-    data: { alt: alt.slice(0, 160), chu_thich: chuThich.slice(0, 200) || undefined, nguon_anh: "Ảnh đi kèm bài trao đổi NotFair" },
-  });
-  return m.id;
+  try {
+    // KHÔNG truyền `req`: ảnh tạo trong giao dịch RIÊNG — lỗi kho làm Payload huỷ giao dịch, nếu dùng chung thì mất cả bài.
+    const m = await payload.create({
+      collection: "media", user: req.user, overrideAccess: false, file: f,
+      data: { alt: alt.slice(0, 160), chu_thich: chuThich.slice(0, 200) || undefined, nguon_anh: "Ảnh đi kèm bài trao đổi NotFair" },
+    });
+    return m.id;
+  } catch (e) {
+    const x = e as { name?: string; Code?: string; message?: string; $metadata?: unknown };
+    // Lỗi kho (S3 / ổ đĩa) → dừng tải ảnh cho cả lượt; lỗi riêng của một ảnh (ảnh hỏng, sai định dạng) → chỉ bỏ ảnh đó.
+    if (x?.$metadata !== undefined || /kho ảnh|FileUploadError|EROFS|ENOENT|EACCES/i.test(`${x?.name} ${x?.message}`)) {
+      phien.loiKho = `${x?.Code || x?.name || "Lỗi kho"}${x?.message ? ` — ${x.message}` : ""}`.slice(0, 300);
+    }
+    return null;
+  }
 }
 
-export type KetQuaNhap = { id: number | string; da_co: boolean; anh_loi: string[] };
+/** `loi_kho`: kho ảnh từ chối ghi (vd SignatureDoesNotMatch) — chữ đã nhập, ảnh để chỗ đánh dấu "[Ảnh chưa nhập …]". */
+export type KetQuaNhap = { id: number | string; da_co: boolean; anh_loi: string[]; loi_kho?: string };
 
 /** Nhập một bài NotFair thành NHÁP trong CMS (cùng slug). Đã có bài CMS cùng slug → trả bài đó, không tạo trùng. */
 export async function nhapBaiNotFair(payload: Payload, req: PayloadRequest, slug: string): Promise<KetQuaNhap> {
@@ -92,8 +107,9 @@ export async function nhapBaiNotFair(payload: Payload, req: PayloadRequest, slug
   if (!p) throw new Error("Không tìm thấy bài này trên NotFair (có thể đã gỡ).");
   const html = p.content_html ?? "";
   const anhLoi: string[] = [];
+  const phien: PhienAnh = { loiKho: null };
 
-  const bia = p.image_url ? await taoAnh(payload, req, p.image_url, p.title) : null;
+  const bia = p.image_url ? await taoAnh(payload, req, phien, p.image_url, p.title) : null;
   if (p.image_url && bia == null) anhLoi.push(p.image_url);
 
   const khoi = htmlSangKhoi(html);
@@ -101,7 +117,7 @@ export async function nhapBaiNotFair(payload: Payload, req: PayloadRequest, slug
   for (const k of khoi) {
     if (k.type !== "__anh") continue;
     const a = k as ChoAnh;
-    const id = await taoAnh(payload, req, a.src, a.alt || p.title, a.chu_thich);
+    const id = await taoAnh(payload, req, phien, a.src, a.alt || p.title, a.chu_thich);
     if (id == null) anhLoi.push(a.src);
     idAnh.set(a, id);
   }
@@ -117,12 +133,12 @@ export async function nhapBaiNotFair(payload: Payload, req: PayloadRequest, slug
       mo_ta_ngan: moTa.slice(0, 300) || undefined,
       meta: { title: p.title.slice(0, 120), description: moTa.slice(0, 300) || undefined, image: bia ?? undefined },
       anh_bia: bia ?? undefined,
-      noi_dung: thayAnh(khoi, (a) => idAnh.get(a) ?? null),
+      noi_dung: thayAnh(khoi, (a) => idAnh.get(a) ?? null, true),
       the: (p.tags ?? []).filter((t) => typeof t === "string" && t.trim()).slice(0, 12),
       publishedAt: p.published_at ?? undefined,
       nguon_goc: "notfair",
       notfair_lien_ket: linkNgoai(html),
     } as never,
   });
-  return { id: bai.id, da_co: false, anh_loi: anhLoi };
+  return { id: bai.id, da_co: false, anh_loi: anhLoi, ...(phien.loiKho ? { loi_kho: phien.loiKho } : {}) };
 }
