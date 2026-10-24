@@ -39,9 +39,11 @@
    (Production + Preview, **không** thêm tiền tố `NEXT_PUBLIC_`) → Redeploy. Rồi mở `https://hieuban.com/blog` và một bài
    `/blog/{slug}`: thấy ảnh bìa, mục lục bấm được, bảng cuộn ngang trên điện thoại. Chưa đặt khoá thì /blog chỉ hiện "Chưa có bài viết".
    Khoá đã lộ trong khung chat → nên tạo khoá mới trong NotFair (Integrations → Next.js) rồi dùng khoá mới.
-4e. [ ] **Sửa bài NotFair trong CMS (BLOG-3):** Vercel → dự án **CMS** (cms.hieuban.com) → Settings → Environment Variables →
-   thêm `NOTFAIR_SEO_API_KEY` (cùng giá trị như dự án web, Production + Preview) → Redeploy CMS. Rồi vào CMS → Bài viết →
-   "Bài trao đổi NotFair — nhập vào CMS để sửa" → Nhập → sửa → Xuất bản. Giữ nguyên link của đối tác + dòng ghi nguồn cuối bài.
+4e. [ ] **Sửa bài NotFair trong CMS (BLOG-3 / BLOG-3b, 2026-10-24):** KHÔNG cần đặt `NOTFAIR_SEO_API_KEY` cho dự án CMS nữa —
+   CMS đọc bài qua hieuban.com bằng `CMS_WEBHOOK_SECRET` + `WEB_URL` (đã có). Sau khi PR merge + **deploy web trước, CMS
+   sau**: vào CMS → Bài viết → "Bài trao đổi NotFair — nhập vào CMS để sửa" → **Nhập tất cả** (hoặc từng bài) → mở bài → sửa
+   chữ, ảnh → Xuất bản. Giữ nguyên link của đối tác + dòng ghi nguồn cuối bài. Nếu bảng vẫn trống: kiểm `CMS_WEBHOOK_SECRET`
+   hai dự án (web + CMS) có giống nhau không.
 4f. [x] **Audit AIO/SEO — anh đã quyết 7 mục (2026-10-21, SEO-K)**. Còn chờ anh: ngày cập nhật thật cho kho (`CAP_NHAT`),
    slug NotFair có dấu, `/ung-ho` có index không (bảng đầu `docs/AUDIT-AIO-SEO-2026-10.md`). `GoogleOther`: em đã chặn
    (2026-10-22, không ảnh hưởng Google Search — lý do ở audit). Đề xuất SEO tiếp theo chờ anh chọn: audit mục "SEO-L".

@@ -18,7 +18,7 @@ import { boChuyenHtml } from "../lib/html";
 import { kiemTrung } from "../lib/trung-lap";
 import { taoSlug } from "../lib/slug";
 import { linkXemTruoc, webUrl } from "../lib/web";
-import { coKhoaNotFair, dsNotFair, nhapBaiNotFair } from "../lib/notfair";
+import { coKhoaNotFair, dsNotFair, nguonNotFair, nhapBaiNotFair } from "../lib/notfair";
 
 export const MANG = [
   { label: "Thần số học", value: "than_so" },
@@ -153,14 +153,14 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
           const da = await req.payload.find({ collection: "bai-viet", where: { slug: { in: ds.map((p) => p.slug) } },
             limit: ds.length || 1, depth: 0, draft: true, overrideAccess: true, select: { slug: true, _status: true } });
           const theoSlug = new Map(da.docs.map((d) => [d.slug, d]));
-          return Response.json({ co_khoa: true, ds: ds.map((p) => {
+          return Response.json({ co_khoa: true, nguon: nguonNotFair(), ds: ds.map((p) => {
             const d = theoSlug.get(p.slug) as { id: number | string; _status?: string } | undefined;
             return { slug: p.slug, tieu_de: p.title, ngay: p.published_at, anh: p.image_url,
               url: `${webUrl()}/blog/${encodeURIComponent(p.slug)}`,
               id_cms: d?.id ?? null, trang_thai_cms: d?._status ?? null };
           }) });
         } catch (e) {
-          return Response.json({ co_khoa: true, ds: [], loi: (e as Error).message }, { status: 502 });
+          return Response.json({ co_khoa: true, nguon: nguonNotFair(), ds: [], loi: (e as Error).message }, { status: 502 });
         }
       },
     },

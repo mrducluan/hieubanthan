@@ -4,27 +4,19 @@
 // Organization); chỉ khi CMS ghi "tác giả"/"thẩm định" (có xác nhận, có ngày) mới đứng tên người.
 import { duongBlog } from "@/lib/blog-gop";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CalendarDays, Clock, Eye, ShieldCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { BookOpen, CalendarDays, Clock, Eye, ShieldCheck } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { CtaBen, CtaBlog } from "@/components/blog/CtaBlog";
+import { KhungBaiDoc, MucLucGon, THAN_BAI_ID } from "@/components/blog/KhungBaiDoc";
+import { mangCuaBai } from "@/lib/blog-mang";
 import { CHUYEN_GIA, duongChuyenGia, idChuyenGia, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
 import { anhCms, cacChuyenMuc, KIEU_LD, NHAN_LOAI, phutDoc, type BaiCms as Bai, type BaiCmsTomTat, type NguoiCms, type TinhNangCms } from "@/lib/cms";
 import { locHtmlCms } from "@/lib/cms-html";
 import { goiLd, ldDuongDan, ldHoiDap, siteUrl, urlDayDu } from "@/lib/seo";
 import nf from "@/app/blog/notfair-article.module.css";
 import st from "@/app/blog/cms-bai.module.css";
-import { UngHoNho } from "@/components/ung-ho/UngHoNho";
 
 const CHU_BIEN = "duc-luan";
-
-export const CONG_CU_THEO_MANG: Record<string, { duong: string; loi: string; nut: string }> = {
-  than_so: { duong: "/than-so", loi: "Xem số chủ đạo và các chỉ số thần số học của chính bạn — miễn phí, có từng bước tính.", nut: "Xem số của tôi" },
-  tu_vi: { duong: "/tu-vi", loi: "Lập lá số Tử vi theo âm lịch Việt Nam, xem từng cung và đại vận của bạn.", nut: "Lập lá số" },
-  bat_tu: { duong: "/bat-tu", loi: "Xem Bát tự (Tứ trụ) của bạn: nhật chủ, ngũ hành, thập thần.", nut: "Xem Bát tự" },
-  kinh_dich: { duong: "/kinh-dich", loi: "Gieo một quẻ Kinh Dịch cho câu hỏi đang trăn trở — có lời nói nôm na từng hào.", nut: "Gieo quẻ" },
-  phong_thuy: { duong: "/phong-thuy", loi: "Tìm hướng nhà, hướng bàn làm việc hợp tuổi bạn theo Bát trạch.", nut: "Xem hướng hợp" },
-  chung: { duong: "/hom-nay", loi: "Mở \"Hôm nay của bạn\": ngày cá nhân, âm lịch, câu tự soi cho riêng bạn.", nut: "Xem hôm nay" },
-};
 
 const TEN_MANG: Record<string, string> = {
   than_so: "Thần số học", tu_vi: "Tử vi", bat_tu: "Bát tự", kinh_dich: "Kinh Dịch", phong_thuy: "Phong thuỷ", chung: "Hiểu bản thân",
@@ -68,7 +60,8 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
   const cg = CHUYEN_GIA[ky?.n.slug ?? CHU_BIEN] ?? CHUYEN_GIA[CHU_BIEN];
   const hd = (bai.hoi_dap ?? []).filter((h) => h.cau_hoi && h.tra_loi);
   const nguon = (bai.nguon ?? []).filter((n) => n.ten);
-  const cc = CONG_CU_THEO_MANG[bai.mang ?? "chung"] ?? CONG_CU_THEO_MANG.chung!;
+  // CTA chân bài + thẻ bên lề đổi theo mảng: ban biên tập chọn `mang` thì theo đó; "chung" → đoán theo tiêu đề/thẻ.
+  const mang = mangCuaBai({ mang: bai.mang, tieuDe: bai.tieu_de, slug: bai.slug, the: bai.the, moTa: bai.mo_ta_ngan });
   const xb = ngayIso(bai.publishedAt), sua = ngayIso(bai.updatedAt);
   const coChuyenGiaNoiBo = ky && ky.n.slug && CHUYEN_GIA[ky.n.slug];
   const cm = cacChuyenMuc(bai)[0];
@@ -78,7 +71,8 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
   const gioVN = (iso: string) => new Date(iso).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Ho_Chi_Minh" });
 
   return (
-    <article className="mx-auto max-w-3xl" data-nguon-bai="cms">
+    <KhungBaiDoc mucLuc={tn.muc_luc ? mucLuc : []} tieuDe={bai.tieu_de} nguon="cms" ben={tn.keu_goi_cong_cu ? <CtaBen mang={mang} /> : undefined}>
+    <article data-mang-bai={mang}>
       {!nhap && <JsonLd data={goiLd(
         {
           "@type": KIEU_LD[bai.loai_bai ?? "bai_viet"] ?? "BlogPosting",
@@ -168,20 +162,9 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
         </section>
       )}
 
-      {tn.muc_luc && mucLuc.filter((m) => m.cap === 2).length >= 3 && (
-        <nav aria-label="Mục lục" className="mt-6 rounded-2xl border border-line/70 p-5 text-sm" data-testid="muc-luc">
-          <p className="eyebrow">Trong bài này</p>
-          <ol className="mt-2 space-y-1.5">
-            {mucLuc.map((m) => (
-              <li key={m.id} className={m.cap === 3 ? "pl-4 text-fg-faint" : ""}>
-                <a href={`#${m.id}`} className="hover:text-gold">{m.text}</a>
-              </li>
-            ))}
-          </ol>
-        </nav>
-      )}
+      {tn.muc_luc && <MucLucGon mucLuc={mucLuc} tieuDe={bai.tieu_de} />}
 
-      <div className={`mt-8 ${nf.articleContent} ${st.noiDung}`} dangerouslySetInnerHTML={{ __html: html }} />
+      <div id={THAN_BAI_ID} className={`mt-8 ${nf.articleContent} ${st.noiDung}`} dangerouslySetInnerHTML={{ __html: html }} />
 
       {hd.length > 0 && (
         <section aria-labelledby="hoi-dap" className="mt-12">
@@ -208,13 +191,7 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
         </section>
       )}
 
-      {tn.keu_goi_cong_cu && (
-        <aside className="glass mt-10 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center" data-testid="keu-goi-cuoi-bai">
-          <BookOpen className="size-6 shrink-0 text-gold" aria-hidden />
-          <p className="flex-1 text-fg-muted">{cc.loi}</p>
-          <Button asChild><Link href={cc.duong}>{cc.nut} <ArrowRight aria-hidden /></Link></Button>
-        </aside>
-      )}
+      {tn.keu_goi_cong_cu && <CtaBlog mang={mang} className="mt-12" />}
 
       {tn.bai_lien_quan && lienQuan.length > 0 && (
         <section aria-labelledby="doc-tiep" className="mt-12">
@@ -232,11 +209,11 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
         </section>
       )}
 
-      <UngHoNho className="mt-10" />
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <p>Nội dung mang tính tham khảo văn hoá, giúp tự soi — không phải lời phán định mệnh, không thay lời khuyên y tế, pháp lý, tài chính.</p>
         <Link href="/blog" className="mt-2 inline-block text-gold hover:underline">← Tất cả bài viết</Link>
       </footer>
     </article>
+    </KhungBaiDoc>
   );
 }

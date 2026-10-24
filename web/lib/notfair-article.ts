@@ -35,6 +35,9 @@ export function sanitizeNotFairArticleHtml(html: string) {
       div: ["nf-tablewrap"], li: ["nf-toc-l2", "nf-toc-l3"],
       nav: ["nf-toc"], p: ["nf-attribution", "nf-toc-title"],
     },
+    // Mục lục NotFair chèn sẵn trong thân bài (nav.nf-toc) bỏ đi: web dựng mục lục riêng (cột phải dính, scroll-spy —
+    // components/blog/MucLucBai.tsx) từ chính các H2/H3, không hiện hai mục lục.
+    exclusiveFilter: (f) => f.tag === "nav" && /\bnf-toc\b/.test(f.attribs.class ?? ""),
     allowedSchemes: ["http", "https", "mailto"],
     allowedSchemesByTag: { img: ["https"] },
     transformTags: {

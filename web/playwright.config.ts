@@ -90,6 +90,8 @@ export default defineConfig({
         ...KHOA_TAT, ENGINE_URL: `http://127.0.0.1:${ENGINE_PORT}`, NEXT_PUBLIC_SITE_URL: `http://localhost:${WEB_PORT}`,
         NEXT_PUBLIC_E2E: "1",
         NOTFAIR_SEO_API_KEY: "e2e", NOTFAIR_SEO_API_URL: "http://127.0.0.1:4555/",
+        // BLOG-3b: route /api/cms/notfair cho CMS đọc bài NotFair qua web — bí mật giả chỉ dùng cho test.
+        CMS_WEBHOOK_SECRET: "e2e-cms-webhook",
         // payOS khoá GIẢ (không gọi payOS thật: chưa bật tài khoản → không tạo đơn) — đủ để thử kiểm chữ ký webhook.
         PAYOS_CLIENT_ID: "e2e", PAYOS_API_KEY: "e2e", PAYOS_CHECKSUM_KEY: "e2e-payos-checksum-0000", SUPABASE_SERVICE_ROLE_KEY: "",
         UNG_HO_VI: "USDT (TRC20)|TE2eTestWalletAddress000000000000",

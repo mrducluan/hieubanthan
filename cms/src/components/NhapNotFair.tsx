@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type Dong = { slug: string; url: string; tieu_de: string; ngay: string | null; anh: string; id_cms: number | string | null; trang_thai_cms: string | null };
-type Ds = { co_khoa?: boolean; ds?: Dong[]; loi?: string };
+type Ds = { co_khoa?: boolean; nguon?: "truc_tiep" | "qua_web" | null; ds?: Dong[]; loi?: string };
 
 const suaUrl = (id: number | string) => `/admin/collections/bai-viet/${id}`;
 
@@ -25,14 +25,18 @@ export function NhapNotFair() {
       .then(setDs);
   }, [mo, ds]);
 
-  async function nhap(slug: string) {
-    setDang(slug);
-    setTb(null);
+  type KqNhap = { ok?: boolean; id?: number | string; da_co?: boolean; anh_loi?: string[]; loi?: string };
+  async function goiNhap(slug: string): Promise<KqNhap> {
     const r = await fetch("/api/bai-viet/nhap-notfair", {
       method: "POST", credentials: "include", headers: { "content-type": "application/json" }, body: JSON.stringify({ slug }),
     }).catch(() => null);
-    const d = ((await r?.json().catch(() => null)) ?? { loi: "Không kết nối được CMS." }) as
-      { ok?: boolean; id?: number | string; da_co?: boolean; anh_loi?: string[]; loi?: string };
+    return ((await r?.json().catch(() => null)) ?? { loi: "Không kết nối được CMS." }) as KqNhap;
+  }
+
+  async function nhap(slug: string) {
+    setDang(slug);
+    setTb(null);
+    const d = await goiNhap(slug);
     setDang(null);
     if (!d.ok || d.id == null) { setTb(`Chưa nhập được: ${d.loi ?? "lỗi không rõ"}`); return; }
     if (d.anh_loi?.length) {
@@ -40,6 +44,23 @@ export function NhapNotFair() {
       window.alert(`Đã nhập bài. ${d.anh_loi.length} ảnh chưa tải được — tải lên lại trong bài:\n${d.anh_loi.join("\n")}`);
     }
     router.push(suaUrl(d.id));
+  }
+
+  /** Nhập lần lượt mọi bài chưa có trong CMS (tuần tự để không tải ảnh dồn dập), rồi đọc lại bảng. */
+  async function nhapTatCa() {
+    const chua = (ds?.ds ?? []).filter((d) => d.id_cms == null);
+    if (!chua.length) return;
+    if (!window.confirm(`Nhập ${chua.length} bài NotFair thành nháp trong CMS? Web vẫn hiện bản NotFair cho tới khi anh/chị xuất bản từng bài.`)) return;
+    setTb(null);
+    let xong = 0; const loi: string[] = []; let anhLoi = 0;
+    for (const d of chua) {
+      setDang(d.slug);
+      const kq = await goiNhap(d.slug);
+      if (kq.ok && kq.id != null) { xong++; anhLoi += kq.anh_loi?.length ?? 0; } else loi.push(`${d.tieu_de}: ${kq.loi ?? "lỗi không rõ"}`);
+    }
+    setDang(null);
+    setTb(`Đã nhập ${xong}/${chua.length} bài thành nháp.${anhLoi ? ` ${anhLoi} ảnh chưa tải được (mở từng bài để tải lại).` : ""}${loi.length ? ` Chưa nhập được: ${loi.join(" · ")}` : ""}`);
+    setDs(null);   // đọc lại bảng → cột trạng thái + nút "Mở bài"
   }
 
   const nhan = (d: Dong) => d.id_cms == null ? "Đang dùng bản NotFair"
@@ -58,10 +79,20 @@ export function NhapNotFair() {
             Giữ nguyên các link của đối tác và dòng ghi nguồn cuối bài (NotFair kiểm tra các link này).
           </p>
           {!ds ? <p>Đang tải…</p>
-            : ds.co_khoa === false ? <p role="alert">CMS chưa có khoá NOTFAIR_SEO_API_KEY (đặt trong biến môi trường của dự án CMS trên Vercel).</p>
+            : ds.co_khoa === false ? <p role="alert">CMS chưa đọc được NotFair: cần <code>NOTFAIR_SEO_API_KEY</code> (khoá riêng của CMS) <i>hoặc</i> cặp <code>CMS_WEBHOOK_SECRET</code> + <code>WEB_URL</code> (CMS sẽ đọc bài qua hieuban.com) trong biến môi trường của dự án CMS trên Vercel.</p>
             : ds.loi ? <p role="alert">Chưa đọc được danh sách: {ds.loi}</p>
             : !ds.ds?.length ? <p>Chưa có bài NotFair nào.</p>
             : (
+              <>
+              {ds.nguon === "qua_web" && <p style={{ margin: "0 0 8px", opacity: 0.65 }}>Đang đọc bài NotFair qua hieuban.com (dự án CMS chưa đặt khoá riêng — không cần đặt).</p>}
+              {ds.ds.some((d) => d.id_cms == null) && (
+                <p style={{ margin: "0 0 10px" }}>
+                  <button type="button" className="btn btn--style-primary btn--size-small" style={{ margin: 0 }} disabled={dang !== null}
+                    onClick={() => void nhapTatCa()} data-testid="nhap-tat-ca">
+                    {dang ? "Đang nhập…" : `Nhập tất cả ${ds.ds.filter((d) => d.id_cms == null).length} bài chưa có`}
+                  </button>
+                </p>
+              )}
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
                 <thead><tr style={{ textAlign: "left" }}><th>Bài</th><th>Trạng thái</th><th /></tr></thead>
                 <tbody>
@@ -84,6 +115,7 @@ export function NhapNotFair() {
                   ))}
                 </tbody>
               </table>
+              </>
             )}
           {tb && <p role="alert" style={{ marginTop: 8 }}>{tb}</p>}
         </div>

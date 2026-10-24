@@ -4,8 +4,9 @@
 // Sau khi lọc: gắn id cho H2/H3 (mục lục + link neo), ảnh lazy, link ngoài rel=noopener.
 import sanitizeHtml from "sanitize-html";
 import { cmsUrl } from "@/lib/cms";
+import { ganIdMucLuc, giaiMaHtml, type MucLuc } from "@/lib/muc-luc";
 
-export type MucLucCms = { id: string; text: string; cap: 2 | 3 };
+export type MucLucCms = MucLuc;
 
 const LOP = ["hbt-ghi-chu", "hbt-ghi-chu-luu_y", "hbt-ghi-chu-meo", "hbt-ghi-chu-tu_soi", "hbt-ghi-chu-tom_tat",
   "hbt-ghi-chu-tieu-de", "hbt-keu-goi", "hbt-trich-dan", "hbt-dich-nghia", "hbt-bang", "hbt-video"];
@@ -17,9 +18,8 @@ function nguonAnhHopLe(): string[] {
   return [cmsUrl(), (process.env.CMS_ANH_URL || "").replace(/\/+$/, "")].filter(Boolean);
 }
 
-const boDau = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[đĐ]/g, "d").toLowerCase();
-export const idTu = (s: string) => boDau(s).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "muc";
-const giaiMa = (s: string) => s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"").replace(/&#39;/g, "'");
+export { idTu } from "@/lib/muc-luc";
+const giaiMa = giaiMaHtml;
 
 export function locHtmlCms(html: string | null | undefined): { html: string; mucLuc: MucLucCms[] } {
   const nguon = nguonAnhHopLe();
@@ -58,18 +58,7 @@ export function locHtmlCms(html: string | null | undefined): { html: string; muc
     },
   });
   // http chỉ chấp nhận khi chính CMS chạy http (máy dev) — bản thật CMS luôn https.
-  const mucLuc: MucLucCms[] = [];
-  const daDung = new Map<string, number>();
-  const ra = sach.replace(/<(h2|h3)>([\s\S]*?)<\/\1>/g, (_m, tag: string, ben: string) => {
-    const text = giaiMa(ben.replace(/<[^>]+>/g, "")).trim();
-    let id = idTu(text);
-    const n = daDung.get(id) ?? 0;
-    daDung.set(id, n + 1);
-    if (n) id = `${id}-${n + 1}`;
-    mucLuc.push({ id, text, cap: tag === "h2" ? 2 : 3 });
-    return `<${tag} id="${id}">${ben}</${tag}>`;
-  });
-  return { html: ra, mucLuc };
+  return ganIdMucLuc(sach);
 }
 
 /** HTML → Markdown đơn giản cho bản .md (bot AI). Chỉ cần đúng ý, không cần giữ mọi định dạng. */
