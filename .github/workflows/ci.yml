@@ -25,7 +25,7 @@ jobs:
       # workflow so-ngay-quan-tri.yml tự chạy lệnh và đẩy commit sổ vào nhánh đó, nên main sau merge vẫn khớp.
       NGAY_CAP_NHAT_KIEM: ${{ startsWith(github.head_ref, 'quan-tri/') && '0' || '1' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12" # khớp engine/Dockerfile
@@ -54,7 +54,7 @@ jobs:
       run:
         working-directory: web
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -82,5 +82,5 @@ jobs:
       PGUSER: postgres
       PGPASSWORD: postgres
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: bash supabase/kiem_thu/chay.sh
