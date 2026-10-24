@@ -81,6 +81,13 @@ test("ảnh: chỉ https, figure lấy chú thích, ảnh nội dòng đưa ra s
   assert.equal(up[0]!.value, 7);
   assert.equal(up[0]!.relationTo, "media");
   assert.equal(st.root.children.filter((c) => c.type === "__anh").length, 0);
+  // Nhập NotFair khi kho ảnh lỗi: ảnh không vào được → đoạn đánh dấu ĐÚNG CHỖ, có link + alt để chèn lại.
+  const dd = thayAnh(k, () => null, true);
+  const doanDD = dd.root.children.filter((c) => c.type === "paragraph"
+    && JSON.stringify(c.children).includes("[Ảnh chưa nhập"));
+  assert.equal(doanDD.length, 2);
+  assert.match(JSON.stringify(doanDD[0]), /notfair\.co\/api\/seo\/img\/1\.png \(alt: Sơ đồ\)\]/);
+  assert.equal(dd.root.children.filter((c) => c.type === "upload").length, 0);
 });
 
 test("link ra ngoài (backlink) để kiểm định giữ lại", () => {

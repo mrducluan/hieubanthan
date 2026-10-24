@@ -218,3 +218,10 @@ test("tiêu đề tạm / trống → lỗi chặn xuất bản", () => {
   }
   assert.ok(!kiemDinhBai(baiTot()).loi_chan.some((m) => m.ma === "tieu_de"));
 });
+
+test("ảnh NotFair chưa nhập (kho ảnh lỗi lúc nhập) → lỗi chặn xuất bản; chèn ảnh xong thì hết", () => {
+  const b = baiTot();
+  const co = { ...b, noi_dung: goc(doan(chu("Mở đầu.")), doan(chu("[Ảnh chưa nhập — tải ảnh vào Thư viện ảnh rồi chèn thay đoạn này: https://notfair.co/x.png]"))) };
+  assert.ok(kiemDinhBai(co).loi_chan.some((m) => m.ma === "anh_chua_nhap"));
+  assert.ok(!kiemDinhBai(b).loi_chan.some((m) => m.ma === "anh_chua_nhap"));
+});

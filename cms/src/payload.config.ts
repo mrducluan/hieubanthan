@@ -28,20 +28,16 @@ import { ChuChung } from "./globals/ChuChung";
 import { TrangChu } from "./globals/TrangChu";
 import { slugViet } from "./kiem-dinh/kiem-dinh";
 import { webUrl } from "./lib/web";
+import { cauHinhKho, cauHinhS3 } from "./lib/kho-anh";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const cmsUrl = (process.env.CMS_URL || "http://localhost:3001").replace(/\/+$/, "");
 
 // Ảnh: Supabase Storage qua giao thức S3 (bucket công khai) khi đủ biến; thiếu → lưu đĩa (chỉ dùng lúc chạy máy).
-const s3 = {
-  bucket: process.env.S3_BUCKET || "",
-  endpoint: process.env.S3_ENDPOINT || "",
-  region: process.env.S3_REGION || "ap-southeast-1",
-  key: process.env.S3_ACCESS_KEY_ID || "",
-  secret: process.env.S3_SECRET_ACCESS_KEY || "",
-  public: (process.env.S3_PUBLIC_URL || "").replace(/\/+$/, ""),
-};
-const coS3 = Boolean(s3.bucket && s3.endpoint && s3.key && s3.secret);
+// Kiểm tra / chẩn đoán kho: src/lib/kho-anh.ts (nút "Kiểm tra kho ảnh" trong Thư viện ảnh).
+// Biến S3_* làm sạch (khoảng trắng, xuống dòng, ngoặc thừa khi dán vào Vercel → chữ ký sai 403 SignatureDoesNotMatch).
+const s3 = cauHinhS3();
+const coS3 = cauHinhKho().nguon === "s3";
 
 const DB_TREN_MAY = (() => {
   try { return ["localhost", "127.0.0.1", "[::1]"].includes(new URL((process.env.DATABASE_URI || "").trim()).hostname); }
@@ -95,7 +91,8 @@ export default buildConfig({
   }),
   sharp,
   graphQL: { disable: true },
-  upload: { limits: { fileSize: 5_000_000 } },
+  // 4,5 MB = trần thân yêu cầu của hàm Vercel; để 5 MB thì ảnh 4,6–5 MB bị Vercel chặn với lỗi khó hiểu.
+  upload: { limits: { fileSize: 4_500_000 } },
   cors: [webUrl()],
   csrf: [cmsUrl, webUrl()],
   // Lịch xuất bản + ND-0 đồng bộ sổ trang: Vercel Cron gọi /api/payload-jobs/run với Authorization: Bearer CRON_SECRET.
@@ -141,6 +138,9 @@ export default buildConfig({
         region: s3.region,
         forcePathStyle: true,
         credentials: { accessKeyId: s3.key, secretAccessKey: s3.secret },
+        // SDK ≥ 3.729 mặc định gửi checksum CRC32 cho mọi lệnh; kho S3 tương thích (Supabase, R2…) không cần → chỉ khi bắt buộc.
+        requestChecksumCalculation: "WHEN_REQUIRED",
+        responseChecksumValidation: "WHEN_REQUIRED",
       },
     }),
   ],

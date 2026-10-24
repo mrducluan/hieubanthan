@@ -65,6 +65,7 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   mau: "string",        // KC-0: mã mẫu tất định (lib/kiem-chung: "mau.quan_loc.ky.menh", "thuan.ln", "ds.su_nghiep…"), ≤ 60
   loai: "string",       // KC-0: phi_hoa / nhip_3_thang / doi_song (LG-ĐS)
   do_gan: "number",     // LG-ĐS: độ gần cosine của gợi ý ý định từ kho vectơ (0–1), không bao giờ là câu hỏi
+  mang: "string",       // BLOG-4: mã mảng của bài blog (than_so, phong_thuy…) kèm reading_completed{mo_dun=blog}
   tu: "string",         // CTA-1: mã trang đặt khối gợi chéo (tu_vi, than_so…) — không phải ?tu= của link mời
   den: "string",        // CTA-1: mã mảng đích của thẻ được bấm
   ca_nhan: "number",    // CTA-1: 1 = thẻ có luận giải nhỏ cá nhân hoá, 0 = câu chung
