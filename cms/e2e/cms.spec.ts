@@ -269,17 +269,22 @@ test("Thẻ + Từ khoá phụ: thêm bằng Enter, dấu phẩy, bấm ra ngoà
   // Payload nhớ tab đang mở theo tài khoản → trả về tab "Nội dung" (các test sau điền ô ở tab này).
   await page.locator(".tabs-field__tab-button", { hasText: "Nội dung" }).click();
 
+  // Bài bật tự lưu nháp 2 giây: chờ lượt tự lưu đang chạy xong rồi mới xuất bản (không chồng hai lượt ghi).
+  await page.waitForLoadState("networkidle");
   await page.locator("#action-save").click();
   await expect(page.getByText(/Đã xuất bản|thành công|Updated successfully|Published successfully/i).first()).toBeVisible();
 
-  // Lưu thật: tải lại vẫn còn; API trả mảng chuỗi như cũ.
+  // Lưu thật: API (bản đã xuất bản + bản nháp mới nhất) trả mảng chuỗi như cũ — chờ máy chủ ghi xong rồi mới tải lại.
+  const docBai = async (nhap: boolean) => (await (await request.get(`${CMS}/api/bai-viet?where[slug][equals]=${SLUG}&depth=0${nhap ? "&draft=true" : ""}`,
+    { headers: { Authorization: `bien-tap-vien API-Key ${BI_MAT.apiKey}` } })).json()).docs[0] as { the?: string[]; tu_khoa_phu?: string[] };
+  for (const nhap of [false, true]) {
+    await expect.poll(async () => (await docBai(nhap)).the, { timeout: 20_000 }).toEqual(["thần số học", "nội tâm"]);
+    expect((await docBai(nhap)).tu_khoa_phu?.slice(0, 2)).toEqual(["số chủ đạo 7 là gì", "đường đời số 7"]);
+  }
+  await page.waitForLoadState("networkidle");
   await page.reload();
   await page.waitForLoadState("networkidle");
   await expect(page.getByTestId("nhap-the-the").getByTestId("the-muc")).toHaveText(["thần số học×", "nội tâm×"]);
-  const r = await request.get(`${CMS}/api/bai-viet?where[slug][equals]=${SLUG}&depth=0`, { headers: { Authorization: `bien-tap-vien API-Key ${BI_MAT.apiKey}` } });
-  const bai = (await r.json()).docs[0];
-  expect(bai.the).toEqual(["thần số học", "nội tâm"]);
-  expect(bai.tu_khoa_phu.slice(0, 2)).toEqual(["số chủ đạo 7 là gì", "đường đời số 7"]);
 
   // Web: thẻ vào keywords (JSON-LD) + article:tag.
   await choWeb(request, `/blog/${SLUG}`, (s, b) => s === 200 && b.includes("đường đời số 7"));
