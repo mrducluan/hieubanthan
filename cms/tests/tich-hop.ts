@@ -807,6 +807,17 @@ await ca("BLOG-3 nhập bài NotFair: nháp cùng slug, ảnh vào Thư viện �
   }
 });
 
+await ca("Kiểm tra kho ảnh (ổ đĩa máy): mọi bước ✓, ảnh thử tự xoá; thiếu S3 trên Vercel → báo rõ", async () => {
+  const { kiemKhoAnh } = await import("../src/lib/kho-anh");
+  const kq = await kiemKhoAnh(payload);
+  assert.equal(kq.ok, true, JSON.stringify(kq));
+  assert.equal(kq.nguon, "dia");
+  assert.ok(kq.buoc.every((b) => b.ok));
+  assert.equal((await payload.count({ collection: "media", where: { alt: { equals: "Ảnh kiểm tra kho (tự xoá)" } }, overrideAccess: true })).totalDocs, 0);
+  const tren = await kiemKhoAnh(payload, { ...process.env, VERCEL: "1" });
+  assert.equal(tren.ok, false); assert.match(tren.goi_y[0] ?? "", /Vercel/);
+});
+
 // dọn
 for (const t of tao.reverse()) {
   await payload.delete({ collection: t.collection, id: t.id, overrideAccess: true }).catch(() => {});

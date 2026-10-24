@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 
 export const THAN_BAI_ID = "than-bai";
 
-export function KhungBaiDoc({ mucLuc, tieuDe, ben, nguon, children }: {
-  mucLuc: MucLuc[]; tieuDe: string; /** thẻ đặt dưới mục lục ở cột phải */ ben?: ReactNode; nguon: "cms" | "notfair"; children: ReactNode;
+export function KhungBaiDoc({ mucLuc, tieuDe, ben, nguon, phut, children }: {
+  mucLuc: MucLuc[]; tieuDe: string; /** thẻ đặt dưới mục lục ở cột phải */ ben?: ReactNode; nguon: "cms" | "notfair"; phut?: number | null; children: ReactNode;
 }) {
   const co = dangHienMucLuc(mucLuc);
   return (
@@ -19,7 +19,7 @@ export function KhungBaiDoc({ mucLuc, tieuDe, ben, nguon, children }: {
       {co && (
         <aside className="hidden lg:block" aria-label="Bên lề bài viết">
           <div className="sticky top-24 space-y-5">
-            <MucLucBai muc={mucLuc} thanId={THAN_BAI_ID} tieuDe={tieuDe} bien="canh" />
+            <MucLucBai muc={mucLuc} thanId={THAN_BAI_ID} tieuDe={tieuDe} bien="canh" phut={phut} />
             {ben}
           </div>
         </aside>

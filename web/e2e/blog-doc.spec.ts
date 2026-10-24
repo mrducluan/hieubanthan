@@ -47,6 +47,7 @@ test("bài NotFair dài: mục lục cột phải dính, mục đang đọc đ�
   await expect(muc).toHaveCount(5);          // 4 H2 + 1 H3
   await expect(muc.first()).toHaveAttribute("aria-current", "location");
   await expect(page.getByTestId("tien-do")).toHaveText("0%");
+  await expect(page.getByTestId("con-phut")).toHaveText("còn ~7 phút");   // reading_time_minutes của bài giả
   // Bấm mục cuối → cuộn tới đúng tiêu đề, URL mang #neo, mục đó thành "đang đọc".
   await muc.last().click();
   await expect(page).toHaveURL(/#ban-lam-viec$/);
@@ -80,8 +81,17 @@ test("CTA chân bài đổi theo mảng: bài phong thuỷ mời xem nhà, bài 
   await expect(page.getByTestId("cta-ben")).toHaveAttribute("data-mang", "phong_thuy");
   await expect(page.getByTestId("cta-blog-kien-thuc").locator("a").first()).toHaveAttribute("href", "/phong-thuy/huong-hop-tuoi");
   await expect(page.getByTestId("cta-cuoi-bai")).toBeVisible();
+  // Bài NotFair cũng có "Đọc tiếp" (bài khác trong blog, bỏ chính nó) + mốc đọc hết bài đo reading_completed{mo_dun: blog}.
+  const docTiep = page.getByTestId("doc-tiep");
+  await expect(docTiep.locator("a")).toHaveCount(1);
+  await expect(docTiep.locator("a").first()).toHaveAttribute("href", /xem-than-so-hoc-numerology/);
+  await expect(page.getByTestId("doc-xong-blog")).toHaveCount(1);
   await cta.scrollIntoViewIfNeeded();
   await expect.poll(async () => (await suKien(page)).some((e) => e.su_kien === "cross_cta_viewed" && e.tu === "blog" && e.den === "phong_thuy")).toBe(true);
+  // Mốc đọc xong nằm ngay dưới thân bài: cuộn tới mốc (đã cuộn + ≥ 10 giây kể từ lúc mở) → reading_completed{mo_dun: blog, mang}.
+  await page.getByTestId("doc-xong-blog").scrollIntoViewIfNeeded();
+  await page.mouse.wheel(0, 40);
+  await expect.poll(async () => (await suKien(page)).some((e) => e.su_kien === "reading_completed" && e.mo_dun === "blog" && e.mang === "phong_thuy"), { timeout: 25_000 }).toBe(true);
 
   await page.goto("/blog/xem-than-so-hoc-numerology-cach-tinh-va-%C4%91oc-ho-so-tinh-tao");
   await expect(page.getByTestId("cta-blog")).toHaveAttribute("data-mang", "than_so");

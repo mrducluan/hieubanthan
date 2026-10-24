@@ -287,7 +287,7 @@ export interface BaiViet {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Ảnh dưới 5 MB, nên rộng ≥ 1600px (ảnh bìa ≥ 1200px). Hệ thống tự nén WebP và sinh cỡ 480/960/1600 + ảnh chia sẻ 1200×630. Ghi alt mô tả đúng nội dung ảnh (người khiếm thị và Google đọc alt).
+ * Ảnh JPG/PNG/WebP dưới 4,5 MB, nên rộng ≥ 1600px (ảnh bìa ≥ 1200px). Hệ thống tự nén WebP và sinh cỡ 480/960/1600 + ảnh chia sẻ 1200×630. Ghi alt mô tả đúng nội dung ảnh (người khiếm thị và Google đọc alt).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".

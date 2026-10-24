@@ -32,6 +32,7 @@ import { GoiYLienKet as GoiYLienKet_f9c18e7e3ccf0c1b2769d570d2a54d2d } from '../
 import { TroLyAI as TroLyAI_50e4553feb35a4b92324293ffe2fb1e9 } from '../../../components/TroLyAI'
 import { SlugField as SlugField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
 import { NhapNotFair as NhapNotFair_fa8ddee3b4e347f6e70af64650e1cd37 } from '../../../components/NhapNotFair'
+import { KiemKhoAnh as KiemKhoAnh_06fcada79a2b862d0a7819038f7acbcf } from '../../../components/KiemKhoAnh'
 import { XemTruocKb as XemTruocKb_8b7869676568a84cf1d2960e5c88576f } from '../../../components/XemTruocKb'
 import { ChuTrenTrang as ChuTrenTrang_3bdc5bcc137fc77e9d0e760c495930e8 } from '../../../components/ChuTrenTrang'
 import { HinhTrenTrang as HinhTrenTrang_05ebcc0bd564c2673fb590c4259d322b } from '../../../components/HinhTrenTrang'
@@ -83,6 +84,7 @@ export const importMap = {
   "/components/TroLyAI#TroLyAI": TroLyAI_50e4553feb35a4b92324293ffe2fb1e9,
   "@payloadcms/next/client#SlugField": SlugField_2b8867833a34864a02ddf429b0728a40,
   "/components/NhapNotFair#NhapNotFair": NhapNotFair_fa8ddee3b4e347f6e70af64650e1cd37,
+  "/components/KiemKhoAnh#KiemKhoAnh": KiemKhoAnh_06fcada79a2b862d0a7819038f7acbcf,
   "/components/XemTruocKb#XemTruocKb": XemTruocKb_8b7869676568a84cf1d2960e5c88576f,
   "/components/ChuTrenTrang#ChuTrenTrang": ChuTrenTrang_3bdc5bcc137fc77e9d0e760c495930e8,
   "/components/HinhTrenTrang#HinhTrenTrang": HinhTrenTrang_05ebcc0bd564c2673fb590c4259d322b,

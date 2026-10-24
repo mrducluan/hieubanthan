@@ -472,6 +472,12 @@ lần trước) → chọn vai trò → **Cấp / đổi vai trò**.
 Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bước này thì web vẫn chạy như cũ.
 
 - [ ] CMS1. Supabase → Storage → tạo bucket `cms-media` (Public) → Settings → Storage → S3 Connection → tạo Access key.
+  **Lỗi tải ảnh "There was a problem while uploading the file." (anh báo 2026-10-24) — em đã tìm ra và sửa:** khi CMS có
+  biến `S3_*`, bảng ảnh cần thêm 2 cột (`prefix`, `_objectKey`) mà migration cũ chưa có → mọi lần tải ảnh đều hỏng. Sau khi
+  PR merge, CMS redeploy sẽ **tự chạy migration** `cot_kho_anh_s3`. Rồi anh vào CMS → Thư viện ảnh → bấm **"Kiểm tra kho
+  ảnh"** (nút đầu danh sách): tải thử một ảnh 16×16 rồi tự xoá, báo từng bước ✓/✕ + việc cần làm bằng tiếng Việt (bucket
+  chưa tạo, khoá sai, bucket chưa Public…). Lỗi tải ảnh từ nay cũng báo rõ lý do thay vì câu tiếng Anh chung chung.
+  Ảnh tối đa **4,5 MB** (trần của Vercel), lớn hơn thì nén trước.
 - [x] CMS2. (anh báo deploy thành công 2026-10-12) Vercel → Add New Project → repo này, **Root Directory `cms`** → nhập biến theo `cms/.env.example`
   (`DATABASE_URI` = Session pooler, `PAYLOAD_SECRET`, `CMS_URL`, `WEB_URL`, `CMS_EMAIL_QUAN_TRI` = email của anh,
   `CMS_WEBHOOK_SECRET`, `CMS_PREVIEW_SECRET`, `CRON_SECRET`, `S3_*`). Không dán khoá vào chat.

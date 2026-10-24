@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { CtaBen, CtaBlog } from "@/components/blog/CtaBlog";
 import { KhungBaiDoc, MucLucGon, THAN_BAI_ID } from "@/components/blog/KhungBaiDoc";
 import { mangCuaBai } from "@/lib/blog-mang";
+import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
 import { CHUYEN_GIA, duongChuyenGia, idChuyenGia, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
 import { anhCms, cacChuyenMuc, KIEU_LD, NHAN_LOAI, phutDoc, type BaiCms as Bai, type BaiCmsTomTat, type NguoiCms, type TinhNangCms } from "@/lib/cms";
 import { locHtmlCms } from "@/lib/cms-html";
@@ -71,7 +72,7 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
   const gioVN = (iso: string) => new Date(iso).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Ho_Chi_Minh" });
 
   return (
-    <KhungBaiDoc mucLuc={tn.muc_luc ? mucLuc : []} tieuDe={bai.tieu_de} nguon="cms" ben={tn.keu_goi_cong_cu ? <CtaBen mang={mang} /> : undefined}>
+    <KhungBaiDoc mucLuc={tn.muc_luc ? mucLuc : []} tieuDe={bai.tieu_de} nguon="cms" phut={phutDoc(bai.noi_dung_html)} ben={tn.keu_goi_cong_cu ? <CtaBen mang={mang} /> : undefined}>
     <article data-mang-bai={mang}>
       {!nhap && <JsonLd data={goiLd(
         {
@@ -165,6 +166,7 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
       {tn.muc_luc && <MucLucGon mucLuc={mucLuc} tieuDe={bai.tieu_de} />}
 
       <div id={THAN_BAI_ID} className={`mt-8 ${nf.articleContent} ${st.noiDung}`} dangerouslySetInnerHTML={{ __html: html }} />
+      {!nhap && <MocDocXong moDun="blog" them={{ mang }} />}
 
       {hd.length > 0 && (
         <section aria-labelledby="hoi-dap" className="mt-12">

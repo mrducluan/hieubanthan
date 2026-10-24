@@ -48,10 +48,23 @@ Tệp: `web/components/blog/MucLucBai.tsx` (client), `KhungBaiDoc.tsx` (bố c�
 - Đo: `cross_cta_viewed{tu: blog, den, ca_nhan}` khi thẻ vào khung nhìn 30 %; `cross_cta_clicked{tu: blog | blog_kien_thuc |
   blog_ben, den, ca_nhan}`. Xem ở `/quan-tri/tang-truong` (khung CTA-1 lọc `tu = blog`).
 
-## 4. Ý tưởng tiếp theo (chờ chủ dự án chọn)
+## 4. Ý tưởng tiếp theo
 
-1. **`reading_completed` cho blog** — gắn `CuoiBaiDoc` (GATE-DO) với `mo_dun = blog` để đo tỉ lệ đọc hết → bấm CTA.
-2. **Bài liên quan cho bài NotFair** (hiện chỉ bài CMS có "Đọc tiếp"): xếp theo mảng + từ khoá (`lib/lien-quan.ts`).
-3. **Nổi bật câu trích** (highlight → "Chia sẻ câu này" thành thẻ ảnh có QR, như TCS-1) — khâu MỜI.
-4. **Ước lượng thời gian còn lại** ("còn ~4 phút") cạnh % — rẻ, dựa `reading_time_minutes`.
-5. Ảnh bìa NotFair hiện là ảnh mẫu giống nhau giữa các bài → khi nhập vào CMS, thay bằng ảnh thư viện riêng từng bài.
+Đã làm (chủ dự án: "em tiếp ý tưởng của em đi", 2026-10-24):
+
+1. **`reading_completed{mo_dun: blog, mang}`** — `MocDocXong` cuối thân bài (cả bài NotFair lẫn bài CMS; bản nháp không đo)
+   → `/quan-tri/tang-truong` so được tỉ lệ đọc hết → bấm CTA theo mảng bài.
+2. **"Đọc tiếp" cho bài NotFair** — `baiCungMang()`: bài cùng mảng trước, rồi bài mới nhất, bỏ chính nó (bài CMS vẫn dùng
+   liên quan theo nghĩa của CMS-4).
+4. **"còn ~N phút"** cạnh % ở thẻ Đang đọc (từ `reading_time_minutes` / `phutDoc`, giảm theo % đã đọc).
+
+Chờ chủ dự án chọn:
+
+3. **Nổi bật câu trích** (bôi đen → "Chia sẻ câu này" thành thẻ ảnh có QR, như TCS-1) — khâu MỜI.
+5. Ảnh bìa NotFair là ảnh mẫu giống nhau giữa các bài → khi nhập vào CMS, thay bằng ảnh thư viện riêng từng bài (giờ đã
+   tải ảnh được sau khi sửa lỗi kho ảnh — mục 5).
+
+## 5. Lỗi tải ảnh trong CMS (cùng ngày) — xem `docs/LUU-TRU-MEDIA.md` mục 5
+
+Bảng ảnh production thiếu hai cột `prefix`, `_objectKey` mà plugin S3 cần → migration `cot_kho_anh_s3`; nút
+"Kiểm tra kho ảnh" trong Thư viện ảnh tự chẩn đoán; trần ảnh 4,5 MB.

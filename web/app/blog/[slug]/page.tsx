@@ -10,8 +10,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BaiCms } from "@/components/blog/BaiCms";
 import { CtaBen, CtaBlog } from "@/components/blog/CtaBlog";
 import { KhungBaiDoc, MucLucGon, THAN_BAI_ID } from "@/components/blog/KhungBaiDoc";
-import { baiBlog, duongBlog, slugTuUrl } from "@/lib/blog";
-import { mangCuaBai } from "@/lib/blog-mang";
+import { baiBlog, dsBaiTongHop, duongBlog, slugTuUrl } from "@/lib/blog";
+import { baiCungMang, mangCuaBai } from "@/lib/blog-mang";
+import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
 import { anhCms, baiCms, baiLienQuan, tinhNangCms } from "@/lib/cms";
 import { ganIdMucLuc } from "@/lib/muc-luc";
 import { sanitizeNotFairArticleHtml } from "@/lib/notfair-article";
@@ -80,9 +81,10 @@ export default async function Page({ params }: Props) {
   // Mục lục dựng từ H2/H3 của chính bài (mục lục NotFair chèn sẵn đã bỏ khi lọc); mảng của bài → CTA chân bài đổi theo.
   const { html, mucLuc } = ganIdMucLuc(sanitizeNotFairArticleHtml(p.content_html));
   const mang = mangCuaBai({ tieuDe: p.title, slug: p.slug, the: p.tags, moTa: p.meta_description });
+  const docTiep = baiCungMang(await dsBaiTongHop(), p.slug, mang);
 
   return (
-    <KhungBaiDoc mucLuc={mucLuc} tieuDe={p.title} nguon="notfair" ben={<CtaBen mang={mang} />}>
+    <KhungBaiDoc mucLuc={mucLuc} tieuDe={p.title} nguon="notfair" phut={p.reading_time_minutes} ben={<CtaBen mang={mang} />}>
     <article data-mang-bai={mang}>
       <JsonLd data={goiLd(
         {
@@ -121,8 +123,26 @@ export default async function Page({ params }: Props) {
       <MucLucGon mucLuc={mucLuc} tieuDe={p.title} />
 
       <div id={THAN_BAI_ID} className={`mt-8 ${styles.articleContent}`} dangerouslySetInnerHTML={{ __html: html }} />
+      {/* GATE-DO: reading_completed{mo_dun: blog} khi cuộn hết thân bài (đã cuộn + ≥ 10 giây) — đo tỉ lệ đọc hết → bấm CTA. */}
+      <MocDocXong moDun="blog" them={{ mang }} />
 
       <CtaBlog mang={mang} className="mt-12" />
+
+      {docTiep.length > 0 && (
+        <section aria-labelledby="doc-tiep" className="mt-12" data-testid="doc-tiep">
+          <h2 id="doc-tiep" className="text-2xl">Đọc tiếp</h2>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+            {docTiep.map((b) => (
+              <li key={b.slug}>
+                <Link href={duongBlog(b.slug)} className="glass block h-full rounded-2xl p-4 text-sm hover:border-gold/50">
+                  <span className="font-medium text-fg">{b.tieuDe}</span>
+                  {b.moTa && <span className="mt-1 line-clamp-2 block text-fg-faint">{b.moTa}</span>}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <p>Nội dung mang tính tham khảo văn hoá, giúp tự soi — không phải lời phán định mệnh, không thay lời khuyên y tế, pháp lý, tài chính.</p>

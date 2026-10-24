@@ -118,3 +118,10 @@ export function lienKetKienThuc(m: MangBlog): { ten: string; duong: string }[] {
   const cum = tt.cum.map((k) => CHU_DE[k]).filter(Boolean).map((c) => ({ ten: c!.ten, duong: c!.duong }));
   return [...cum, ...tt.them].slice(0, 4);
 }
+
+/** Bài cùng mảng để "Đọc tiếp" (bài NotFair không có liên quan từ CMS): cùng mảng trước, rồi bài mới nhất; bỏ chính nó. */
+export function baiCungMang<T extends { slug: string; tieuDe: string; moTa?: string | null; mang?: string | null }>(ds: T[], slug: string, mang: MangBlog, soLuong = 3): T[] {
+  const khac = ds.filter((b) => b.slug !== slug);
+  const cung = khac.filter((b) => mangCuaBai({ mang: b.mang, tieuDe: b.tieuDe, slug: b.slug, moTa: b.moTa }) === mang);
+  return [...cung, ...khac.filter((b) => !cung.includes(b))].slice(0, soLuong);
+}

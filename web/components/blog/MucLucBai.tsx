@@ -91,8 +91,9 @@ function toiMuc(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
   history.replaceState(null, "", `#${id}`);
 }
 
-export function MucLucBai({ muc, thanId, tieuDe, bien = "canh" }: {
+export function MucLucBai({ muc, thanId, tieuDe, bien = "canh", phut }: {
   muc: MucLuc[]; /** id phần tử bọc thân bài — để tính % đã đọc */ thanId: string; tieuDe: string; bien?: "canh" | "gon";
+  /** số phút đọc cả bài → "còn ~N phút" theo % đã đọc */ phut?: number | null;
 }) {
   const { hoatDong, tienDo } = useTheoDoiDoc(muc, thanId);
   useDongBoNeo(hoatDong, bien === "canh");
@@ -148,7 +149,10 @@ export function MucLucBai({ muc, thanId, tieuDe, bien = "canh" }: {
       <div className="rounded-2xl border border-line/70 bg-surface/50 p-4" data-testid="dang-doc">
         <div className="flex items-center justify-between">
           <span className="eyebrow">Đang đọc</span>
-          <span className="font-mono text-xs tabular-nums text-gold" data-testid="tien-do">{tienDo}%</span>
+          <span className="font-mono text-xs tabular-nums text-gold">
+            {phut && tienDo < 100 ? <span className="mr-2 font-sans text-fg-faint" data-testid="con-phut">còn ~{Math.max(1, Math.round(phut * (100 - tienDo) / 100))} phút</span> : null}
+            <span data-testid="tien-do">{tienDo}%</span>
+          </span>
         </div>
         <div className="mt-2 h-1 overflow-hidden rounded-full bg-line/70" role="progressbar" aria-label="Đã đọc" aria-valuemin={0} aria-valuemax={100} aria-valuenow={tienDo}>
           <div className="h-full rounded-full bg-gold transition-[width] duration-150 ease-out motion-reduce:transition-none" style={{ width: `${tienDo}%` }} />
