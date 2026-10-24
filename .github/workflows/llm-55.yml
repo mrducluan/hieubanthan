@@ -51,7 +51,7 @@ jobs:
         run: |
           python scripts/chay_llm_chuyen_gia.py --model "$MODEL" --giam-khao "$GIAM_KHAO" --gioi-han "$GIOI_HAN" --ra bao-cao-llm-55
           sed -n '1,/## Câu cần xem lại/p' bao-cao-llm-55/BAO-CAO.md >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: bao-cao-llm-55
