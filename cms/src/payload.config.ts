@@ -12,6 +12,7 @@ import { vi } from "@payloadcms/translations/languages/vi";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { laChuBien } from "./access";
+import { chuoiDb } from "./lib/chuoi-db";
 import { BaiViet } from "./collections/BaiViet";
 import { BienTapVien } from "./collections/BienTapVien";
 import { ChuyenMuc } from "./collections/ChuyenMuc";
@@ -76,9 +77,10 @@ export default buildConfig({
   editor: lexicalEditor(),
   db: postgresAdapter({
     // Vercel chạy nhiều bản hàm song song, mỗi bản giữ pool riêng. pg mặc định max=10 → vài bản là vượt hạn mức
-    // Session pooler của Supabase ("max clients reached") → trang /admin lúc được lúc lỗi 500. Giữ pool nhỏ + nhả sớm.
+    // Session pooler của Supabase ("max clients reached") → trang /admin lúc được lúc lỗi 500. Giữ pool nhỏ + nhả sớm,
+    // và lúc chạy đi cổng Transaction 6543 (`chuoiDb`) — migrate vẫn cổng Session.
     pool: {
-      connectionString: (process.env.DATABASE_URI || "").trim(),
+      connectionString: chuoiDb(process.env.DATABASE_URI || ""),
       max: Number(process.env.CMS_DB_POOL_MAX) || 3,
       idleTimeoutMillis: 10_000,
       connectionTimeoutMillis: 10_000,

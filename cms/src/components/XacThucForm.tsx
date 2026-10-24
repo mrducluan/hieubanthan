@@ -23,6 +23,8 @@ export function XacThucForm() {
   useEffect(() => {
     fetch("/api/bien-tap-vien/mfa/trang-thai", { credentials: "include" }).then(async (r) => {
       if (r.status === 401) { window.location.href = "/admin/login"; return; }
+      // Lỗi máy chủ (vd DB quá tải) không được hiện thành "chưa có quyền" — báo lỗi để tải lại.
+      if (!r.ok) { setLoi("Máy chủ đang bận, chưa tải được trạng thái. Tải lại trang sau ít phút."); return; }
       const d = (await r.json()) as TrangThai;
       if (d.da_xac_thuc) diTiep();
       setTt(d);

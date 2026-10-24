@@ -196,7 +196,7 @@ mô tả, ảnh.
 
    | Biến | Giá trị |
    |---|---|
-   | `DATABASE_URI` | chuỗi **Session pooler** của Supabase |
+   | `DATABASE_URI` | chuỗi **Session pooler** của Supabase (cổng 5432 — dùng cho `payload migrate`; lúc chạy CMS tự đổi sang cổng Transaction 6543, `src/lib/chuoi-db.ts`) |
    | `PAYLOAD_SECRET` | `openssl rand -base64 48` |
    | `CMS_URL` | `https://cms.hieuban.com` |
    | `WEB_URL` | `https://hieuban.com` |

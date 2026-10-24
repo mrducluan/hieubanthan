@@ -100,6 +100,12 @@
       - Dòng nào khác ngoài danh sách trên → chụp màn hình gửi em, em sửa bằng migration.
       (Em đã chạy thử toàn bộ migration trên Postgres trong máy: không còn bảng tắt RLS, không hàm nào thiếu
       `search_path`.)
+   3b. [ ] **Sự cố CMS 2026-10-24 (build lỗi `EMAXCONNSESSION … pool_size: 15`, /admin "This page couldn't load")** —
+      không do `ENGINE_QUAN_TRI_KEY`: CMS giữ hết 15 kết nối của cổng Session 5432. Bản sửa: CMS lúc chạy tự đi cổng
+      Transaction 6543 (`cms/src/lib/chuoi-db.ts`), chỉ `payload migrate` dùng 5432 — **không cần đổi biến nào**. Nếu
+      build vẫn báo đầy kết nối (kết nối cũ chưa nhả): Supabase → **SQL Editor** → chạy
+      `select pg_terminate_backend(pid) from pg_stat_activity where usename = 'postgres' and state = 'idle' and pid <> pg_backend_pid();`
+      → Vercel CMS → Deployments → bản mới nhất → **Redeploy**.
    4. [ ] **CMS — bật xác thực 2 bước (đã sửa lỗi "chưa có quyền")**: deploy CMS xong → đăng nhập
       https://cms.hieuban.com/admin → bảng điều khiển có dòng 🔒 **"Bật ngay (1 phút)"** (hoặc mở thẳng
       https://cms.hieuban.com/admin/xac-thuc-2-buoc) → **Bật xác thực 2 bước** → mở Google Authenticator / Microsoft

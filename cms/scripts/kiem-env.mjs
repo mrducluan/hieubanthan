@@ -51,6 +51,9 @@ function kiemDb(chuoi) {
     return "chuỗi pooler cần người dùng dạng postgres.<mã project> (lấy nguyên chuỗi Supabase đưa, đừng sửa phần trước dấu :)";
   }
   if (!u.password) return "thiếu mật khẩu";
+  if (/pooler\.supabase\.com$/i.test(u.hostname) && (u.port || "5432") === "5432") {
+    console.log("[kiem-env]   migrate dùng cổng Session 5432; CMS lúc chạy tự dùng cổng Transaction 6543 (src/lib/chuoi-db.ts)");
+  }
   return null;
 }
 if (process.env.DATABASE_URI?.trim()) {
