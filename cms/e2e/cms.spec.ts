@@ -91,6 +91,38 @@ test("chuẩn bị: tài khoản Máy đọc (khoá API cho web) + biên tập v
   expect((await request.post(`${CMS}/api/bien-tap-vien`, { data: { email: "x@vidu.vn", password: "mat-khau-du-dai-1", ten_hien_thi: "x" } })).status()).toBe(403);
 });
 
+test("Thư viện ảnh: tải ảnh bằng giao diện quản trị (ô chọn tệp → alt → Lưu) thành công, có cỡ WebP; Kiểm tra kho ảnh ✓", async ({ page, request }) => {
+  // Sự cố 2026-10-24: tải ảnh báo "There was a problem while uploading the file." — đường đi đúng của Chủ biên, không qua REST.
+  await dangNhap(page);
+  await page.goto(`${CMS}/admin/collections/media/create`);
+  await page.waitForLoadState("networkidle");
+  const png = await sharp({ create: { width: 1400, height: 900, channels: 3, background: "#4a3a7a" } }).png().toBuffer();
+  await page.locator('input[type="file"]').setInputFiles({ name: "anh-bang-chu-so.png", mimeType: "image/png", buffer: png });
+  // Payload hiện tên tệp trong ô sửa tên (giá trị React, không phải thuộc tính value trong HTML).
+  await expect.poll(() => page.locator("input").evaluateAll((ds) => ds.some((e) => (e as HTMLInputElement).value.startsWith("anh-bang-chu-so")))).toBe(true);
+  await dien(page, { "field-alt": "Bảng chữ số Pythagoras minh hoạ" });
+  await page.getByRole("button", { name: /^(Save|Lưu)$/ }).click();
+  await expect(page.getByText(/successfully|thành công/i)).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText(/problem while uploading|An unknown error/i)).toHaveCount(0);
+  await expect(page).toHaveURL(/\/admin\/collections\/media\/\d+/);
+  const id = Number(/media\/(\d+)/.exec(page.url())?.[1]);
+  const h = { Authorization: `JWT ${await tokenQt(request)}` };
+  const d = await (await request.get(`${CMS}/api/media/${id}`, { headers: h })).json() as { filename: string; mimeType: string; url: string; sizes: Record<string, { url?: string }> };
+  expect(d.mimeType).toBe("image/webp");
+  expect(d.filename).toMatch(/^anh-bang-chu-so.*\.webp$/);
+  for (const k of ["nho", "vua", "og"]) expect(d.sizes[k]?.url, k).toBeTruthy();
+  expect((await request.get(d.url.startsWith("http") ? d.url : `${CMS}${d.url}`)).status()).toBe(200);
+  // Nút "Kiểm tra kho ảnh" đầu danh sách: tải thử rồi xoá → mọi bước ✓ (chạy máy: ổ đĩa).
+  await page.goto(`${CMS}/admin/collections/media`);
+  const kho = page.getByTestId("kiem-kho-anh");
+  await expect(kho).toContainText("Kho ảnh:");
+  await kho.getByTestId("nut-kiem-kho").click();
+  await expect(page.getByTestId("kq-kiem-kho")).toHaveAttribute("data-ok", "1", { timeout: 30_000 });
+  await expect(page.getByTestId("kq-kiem-kho")).toContainText("Kho ảnh hoạt động bình thường");
+  // Dọn
+  expect((await request.delete(`${CMS}/api/media/${id}`, { headers: h })).ok()).toBeTruthy();
+});
+
 test("viết bài: Kiểm định chấm khi gõ, lỗi chặn không cho xuất bản, sửa xong thì xuất bản", async ({ page }) => {
   await dangNhap(page);
   await page.getByTestId("tq-viet-moi").click();
@@ -168,7 +200,7 @@ test("web hiện bài: H1, Trả lời nhanh, mục lục, FAQ, JSON-LD, chữ k
   await expect(page.locator("h2#so-7-trong-cong-viec")).toBeVisible();
   await expect(page.locator("[data-dong-tac-gia]")).toContainText("Ban biên tập Hiểu Bản Thân biên soạn");
   await expect(page.getByRole("heading", { name: "Câu hỏi thường gặp" })).toBeVisible();
-  await expect(page.getByTestId("keu-goi-cuoi-bai")).toBeVisible();
+  await expect(page.getByTestId("cta-blog")).toBeVisible();   // BLOG-4: CTA chân bài theo mảng thay khối kêu gọi cũ
   const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
   const tat = ld.join("\n");
   expect(tat).toContain('"@type":"BlogPosting"');

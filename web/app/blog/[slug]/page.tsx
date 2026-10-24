@@ -4,18 +4,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
-import { ArrowRight, BookOpen, CalendarDays, Clock } from "lucide-react";
+import { CalendarDays, Clock } from "lucide-react";
 import { NotFairPostHero } from "notfair-nextjs-blog/react";
-import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BaiCms } from "@/components/blog/BaiCms";
-import { baiBlog, duongBlog, slugTuUrl } from "@/lib/blog";
+import { CtaBen, CtaBlog } from "@/components/blog/CtaBlog";
+import { KhungBaiDoc, MucLucGon, THAN_BAI_ID } from "@/components/blog/KhungBaiDoc";
+import { baiBlog, dsBaiTongHop, duongBlog, slugTuUrl } from "@/lib/blog";
+import { baiCungMang, mangCuaBai } from "@/lib/blog-mang";
+import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
 import { anhCms, baiCms, baiLienQuan, tinhNangCms } from "@/lib/cms";
+import { ganIdMucLuc } from "@/lib/muc-luc";
 import { sanitizeNotFairArticleHtml } from "@/lib/notfair-article";
 import { duocXemNhap } from "@/lib/noi-dung-trang";
 import { catMoTa, goiLd, ldDuongDan, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import styles from "../notfair-article.module.css";
-import { UngHoNho } from "@/components/ung-ho/UngHoNho";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -75,9 +78,14 @@ export default async function Page({ params }: Props) {
   if (!p) notFound();
   const duong = duongBlog(p.slug);
   const ngay = p.published_at ?? p.created_at;
+  // Mục lục dựng từ H2/H3 của chính bài (mục lục NotFair chèn sẵn đã bỏ khi lọc); mảng của bài → CTA chân bài đổi theo.
+  const { html, mucLuc } = ganIdMucLuc(sanitizeNotFairArticleHtml(p.content_html));
+  const mang = mangCuaBai({ tieuDe: p.title, slug: p.slug, the: p.tags, moTa: p.meta_description });
+  const docTiep = baiCungMang(await dsBaiTongHop(), p.slug, mang);
 
   return (
-    <article className="mx-auto max-w-3xl">
+    <KhungBaiDoc mucLuc={mucLuc} tieuDe={p.title} nguon="notfair" phut={p.reading_time_minutes} ben={<CtaBen mang={mang} />}>
+    <article data-mang-bai={mang}>
       <JsonLd data={goiLd(
         {
           "@type": "BlogPosting",
@@ -112,19 +120,35 @@ export default async function Page({ params }: Props) {
         {p.reading_time_minutes ? <span className="inline-flex items-center gap-1"><Clock className="size-3.5" aria-hidden />{p.reading_time_minutes} phút đọc</span> : null}
       </div>
 
-      <div className={`mt-8 ${styles.articleContent}`}
-        dangerouslySetInnerHTML={{ __html: sanitizeNotFairArticleHtml(p.content_html) }} />
+      <MucLucGon mucLuc={mucLuc} tieuDe={p.title} />
 
-      <aside className="glass mt-10 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center">
-        <BookOpen className="size-6 shrink-0 text-gold" aria-hidden />
-        <p className="flex-1 text-fg-muted">Muốn hiểu <b className="text-fg">chính bạn</b>? Xem con số chủ đạo và các chỉ số thần số học từ ngày sinh — miễn phí, có từng bước tính.</p>
-        <Button asChild><Link href="/than-so">Xem của tôi <ArrowRight aria-hidden /></Link></Button>
-      </aside>
+      <div id={THAN_BAI_ID} className={`mt-8 ${styles.articleContent}`} dangerouslySetInnerHTML={{ __html: html }} />
+      {/* GATE-DO: reading_completed{mo_dun: blog} khi cuộn hết thân bài (đã cuộn + ≥ 10 giây) — đo tỉ lệ đọc hết → bấm CTA. */}
+      <MocDocXong moDun="blog" them={{ mang }} />
 
-      <UngHoNho className="mt-10" />
+      <CtaBlog mang={mang} className="mt-12" />
+
+      {docTiep.length > 0 && (
+        <section aria-labelledby="doc-tiep" className="mt-12" data-testid="doc-tiep">
+          <h2 id="doc-tiep" className="text-2xl">Đọc tiếp</h2>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+            {docTiep.map((b) => (
+              <li key={b.slug}>
+                <Link href={duongBlog(b.slug)} className="glass block h-full rounded-2xl p-4 text-sm hover:border-gold/50">
+                  <span className="font-medium text-fg">{b.tieuDe}</span>
+                  {b.moTa && <span className="mt-1 line-clamp-2 block text-fg-faint">{b.moTa}</span>}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
-        <Link href="/blog" className="text-gold hover:underline">← Tất cả bài viết</Link>
+        <p>Nội dung mang tính tham khảo văn hoá, giúp tự soi — không phải lời phán định mệnh, không thay lời khuyên y tế, pháp lý, tài chính.</p>
+        <Link href="/blog" className="mt-2 inline-block text-gold hover:underline">← Tất cả bài viết</Link>
       </footer>
     </article>
+    </KhungBaiDoc>
   );
 }

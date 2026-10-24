@@ -3,31 +3,31 @@
 // máy chủ. Bản nhập là NHÁP cùng slug: khi Chủ biên xuất bản, web lấy bài CMS (bài CMS thắng bài NotFair khi trùng slug).
 import type { Payload, PayloadRequest } from "payload";
 import { htmlSangKhoi, linkNgoai, thayAnh, type ChoAnh } from "./html-lexical";
+import { cauHinhGoi, nguonNotFair } from "./notfair-nguon";
+export { cauHinhGoi, nguonNotFair, type NguonNotFair } from "./notfair-nguon";
 
 export type BaiNotFair = {
   id: number; title: string; slug: string; meta_description: string | null; tags: string[]; image_url: string;
   reading_time_minutes: number | null; published_at: string | null; created_at: string; content_html?: string;
 };
 
-const API = () => process.env.NOTFAIR_SEO_API_URL ?? "https://notfair.co/api/seo/content";
-export const coKhoaNotFair = () => Boolean(process.env.NOTFAIR_SEO_API_KEY);
+export const coKhoaNotFair = () => nguonNotFair() !== null;
 
 async function goi(duong: string): Promise<unknown> {
-  const r = await fetch(`${API()}${duong}`, {
-    headers: { authorization: `Bearer ${process.env.NOTFAIR_SEO_API_KEY}` }, cache: "no-store", signal: AbortSignal.timeout(20_000),
-  });
+  const { url, headers } = cauHinhGoi(duong);
+  const r = await fetch(url, { headers, cache: "no-store", signal: AbortSignal.timeout(20_000) });
+  if (r.status === 503 && nguonNotFair() === "qua_web") throw new Error("Web hieuban.com chưa đặt NOTFAIR_SEO_API_KEY.");
+  if (r.status === 401 && nguonNotFair() === "qua_web") throw new Error("Web từ chối: CMS_WEBHOOK_SECRET hai bên chưa khớp.");
   if (!r.ok) throw new Error(`NotFair trả HTTP ${r.status}`);
   return r.json();
 }
 
 export async function dsNotFair(): Promise<BaiNotFair[]> {
-  if (!coKhoaNotFair()) throw new Error("Chưa đặt NOTFAIR_SEO_API_KEY cho CMS.");
   const d = (await goi("")) as { posts?: BaiNotFair[] } | null;
   return Array.isArray(d?.posts) ? d.posts : [];
 }
 
 export async function baiNotFair(slug: string): Promise<BaiNotFair | null> {
-  if (!coKhoaNotFair()) throw new Error("Chưa đặt NOTFAIR_SEO_API_KEY cho CMS.");
   const d = (await goi(`?slug=${encodeURIComponent(slug)}`).catch((e: Error) => {
     if (/HTTP 404/.test(e.message)) return null;
     throw e;

@@ -87,3 +87,17 @@ Pro dư cho mức này.
 6. Ảnh trong bài cũ có URL cũ đã lưu trong HTML.
    - Bấm "Lưu" lại từng bài (hoặc em viết script dựng lại HTML) để đổi sang URL mới.
    - Giữ bucket Supabase vài tuần cho link cũ.
+
+## 5. Sự cố tải ảnh 2026-10-24 và cách tự kiểm (BLOG-5)
+
+- **Triệu chứng:** tạo ảnh trong CMS production báo "There was a problem while uploading the file." — Payload gom mọi
+  lỗi trong bước xử lý ảnh thành một câu, chi tiết chỉ nằm trong log Vercel.
+- **Nguyên nhân:** `@payloadcms/storage-s3` (bật khi đủ `S3_*`) thêm hai trường ẩn `prefix` + `_objectKey` vào collection
+  Ảnh; migration được sinh lúc máy dev KHÔNG có S3 nên `cms.media` thiếu hai cột → câu select kiểm trùng tên tệp hỏng
+  (`column "prefix" does not exist`). Tái hiện được bằng máy chủ S3 giả (`cms/tests/kho-anh-s3.ts`). Sửa: migration
+  `20261024_045231_cot_kho_anh_s3` (up/down). **Bài học:** sinh migration cho collection Ảnh phải bật `S3_*` (giả cũng được).
+- **Tự kiểm:** Thư viện ảnh → "Kiểm tra kho ảnh" (`GET /api/media/kiem-kho`, Chủ biên): sharp → ghi thử ảnh 16×16 → đọc
+  lại URL công khai → xoá (dọn cả bản ghi mồ côi). Lỗi gốc được bắt từ logger, lọc khoá, dịch thành việc cần làm
+  (`src/lib/kho-anh.ts`). Trên Vercel mà thiếu `S3_*` → chặn ngay với lời tiếng Việt (ổ đĩa chỉ đọc).
+- **Trần cỡ ảnh 4,5 MB** (= giới hạn thân yêu cầu của hàm Vercel); CI chạy `npm run test:kho-anh` (S3 giả) + e2e tải ảnh
+  bằng giao diện quản trị.

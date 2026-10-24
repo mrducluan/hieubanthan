@@ -39,9 +39,11 @@
    (Production + Preview, **không** thêm tiền tố `NEXT_PUBLIC_`) → Redeploy. Rồi mở `https://hieuban.com/blog` và một bài
    `/blog/{slug}`: thấy ảnh bìa, mục lục bấm được, bảng cuộn ngang trên điện thoại. Chưa đặt khoá thì /blog chỉ hiện "Chưa có bài viết".
    Khoá đã lộ trong khung chat → nên tạo khoá mới trong NotFair (Integrations → Next.js) rồi dùng khoá mới.
-4e. [ ] **Sửa bài NotFair trong CMS (BLOG-3):** Vercel → dự án **CMS** (cms.hieuban.com) → Settings → Environment Variables →
-   thêm `NOTFAIR_SEO_API_KEY` (cùng giá trị như dự án web, Production + Preview) → Redeploy CMS. Rồi vào CMS → Bài viết →
-   "Bài trao đổi NotFair — nhập vào CMS để sửa" → Nhập → sửa → Xuất bản. Giữ nguyên link của đối tác + dòng ghi nguồn cuối bài.
+4e. [ ] **Sửa bài NotFair trong CMS (BLOG-3 / BLOG-3b, 2026-10-24):** KHÔNG cần đặt `NOTFAIR_SEO_API_KEY` cho dự án CMS nữa —
+   CMS đọc bài qua hieuban.com bằng `CMS_WEBHOOK_SECRET` + `WEB_URL` (đã có). Sau khi PR merge + **deploy web trước, CMS
+   sau**: vào CMS → Bài viết → "Bài trao đổi NotFair — nhập vào CMS để sửa" → **Nhập tất cả** (hoặc từng bài) → mở bài → sửa
+   chữ, ảnh → Xuất bản. Giữ nguyên link của đối tác + dòng ghi nguồn cuối bài. Nếu bảng vẫn trống: kiểm `CMS_WEBHOOK_SECRET`
+   hai dự án (web + CMS) có giống nhau không.
 4f. [x] **Audit AIO/SEO — anh đã quyết 7 mục (2026-10-21, SEO-K)**. Còn chờ anh: ngày cập nhật thật cho kho (`CAP_NHAT`),
    slug NotFair có dấu, `/ung-ho` có index không (bảng đầu `docs/AUDIT-AIO-SEO-2026-10.md`). `GoogleOther`: em đã chặn
    (2026-10-22, không ảnh hưởng Google Search — lý do ở audit). Đề xuất SEO tiếp theo chờ anh chọn: audit mục "SEO-L".
@@ -470,6 +472,12 @@ lần trước) → chọn vai trò → **Cấp / đổi vai trò**.
 Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bước này thì web vẫn chạy như cũ.
 
 - [ ] CMS1. Supabase → Storage → tạo bucket `cms-media` (Public) → Settings → Storage → S3 Connection → tạo Access key.
+  **Lỗi tải ảnh "There was a problem while uploading the file." (anh báo 2026-10-24) — em đã tìm ra và sửa:** khi CMS có
+  biến `S3_*`, bảng ảnh cần thêm 2 cột (`prefix`, `_objectKey`) mà migration cũ chưa có → mọi lần tải ảnh đều hỏng. Sau khi
+  PR merge, CMS redeploy sẽ **tự chạy migration** `cot_kho_anh_s3`. Rồi anh vào CMS → Thư viện ảnh → bấm **"Kiểm tra kho
+  ảnh"** (nút đầu danh sách): tải thử một ảnh 16×16 rồi tự xoá, báo từng bước ✓/✕ + việc cần làm bằng tiếng Việt (bucket
+  chưa tạo, khoá sai, bucket chưa Public…). Lỗi tải ảnh từ nay cũng báo rõ lý do thay vì câu tiếng Anh chung chung.
+  Ảnh tối đa **4,5 MB** (trần của Vercel), lớn hơn thì nén trước.
 - [x] CMS2. (anh báo deploy thành công 2026-10-12) Vercel → Add New Project → repo này, **Root Directory `cms`** → nhập biến theo `cms/.env.example`
   (`DATABASE_URI` = Session pooler, `PAYLOAD_SECRET`, `CMS_URL`, `WEB_URL`, `CMS_EMAIL_QUAN_TRI` = email của anh,
   `CMS_WEBHOOK_SECRET`, `CMS_PREVIEW_SECRET`, `CRON_SECRET`, `S3_*`). Không dán khoá vào chat.
