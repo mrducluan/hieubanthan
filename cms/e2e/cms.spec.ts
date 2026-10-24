@@ -200,7 +200,7 @@ test("web hiện bài: H1, Trả lời nhanh, mục lục, FAQ, JSON-LD, chữ k
   await expect(page.locator("h2#so-7-trong-cong-viec")).toBeVisible();
   await expect(page.locator("[data-dong-tac-gia]")).toContainText("Ban biên tập Hiểu Bản Thân biên soạn");
   await expect(page.getByRole("heading", { name: "Câu hỏi thường gặp" })).toBeVisible();
-  await expect(page.getByTestId("keu-goi-cuoi-bai")).toBeVisible();
+  await expect(page.getByTestId("cta-blog")).toBeVisible();   // BLOG-4: CTA chân bài theo mảng thay khối kêu gọi cũ
   const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
   const tat = ld.join("\n");
   expect(tat).toContain('"@type":"BlogPosting"');
