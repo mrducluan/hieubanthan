@@ -28,7 +28,7 @@ jobs:
           fetch-depth: 0   # script đọc ngày git khi khởi tạo; chế độ thường không cần nhưng giữ đủ lịch sử cho chắc
           # SEC-2: không để token ghi trong .git/config khi chạy pip install + script của nhánh — chỉ đưa ở bước push.
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip

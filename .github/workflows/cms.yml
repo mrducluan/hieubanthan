@@ -90,7 +90,7 @@ jobs:
         working-directory: web
         run: npm ci
       # Engine cho sitemap / llms.txt của web trong e2e (không LLM, không secret).
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
