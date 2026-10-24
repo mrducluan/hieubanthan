@@ -61,14 +61,40 @@ test("bài NotFair dài: mục lục cột phải dính, mục đang đọc đ�
   await expect.poll(() => page.evaluate(() => location.hash)).toBe("#giuong-ngu");
 });
 
-test("điện thoại: mục lục gập trên thân bài, cột phải ẩn", async ({ page }) => {
+test("điện thoại: thanh mục lục DÍNH dưới thanh đầu trang — tên mục + % đổi khi cuộn, #neo theo, chạm mở bảng, chọn mục nhảy đúng chỗ", async ({ page }) => {
+  const loi: string[] = [];
+  page.on("console", (m) => { if (m.type() === "error" && /hydrat/i.test(m.text())) loi.push(m.text()); });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(BAI_PT);
-  await expect(page.getByTestId("muc-luc-gon")).toBeVisible();
+  const thanh = page.getByTestId("muc-luc-gon");
+  await expect(thanh).toBeVisible();
   await expect(page.getByTestId("muc-luc")).toBeHidden();
-  await page.getByTestId("muc-luc-gon").locator("summary").click();
-  await page.getByTestId("muc-luc-gon").locator("a", { hasText: "Giường ngủ" }).click();
-  await expect(page).toHaveURL(/#giuong-ngu$/);
+  await expect(page.getByTestId("muc-luc-gon-ten")).toHaveText("Mục lục bài viết");
+  await expect(page.getByTestId("muc-luc-gon-pct")).toHaveText("0%");
+
+  // Cuộn tới giữa bài: thanh dính sát dưới thanh đầu trang (64px), tên mục đổi, % tăng, URL mang #neo.
+  await page.locator("#giuong-ngu").evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 90));
+  await expect.poll(() => thanh.evaluate((el) => Math.round(el.getBoundingClientRect().top))).toBe(64);
+  await expect(page.getByTestId("muc-luc-gon-ten")).toHaveText(/Giường ngủ/);
+  await expect.poll(async () => Number((await page.getByTestId("muc-luc-gon-pct").textContent())?.replace("%", ""))).toBeGreaterThan(0);
+  await expect.poll(() => page.evaluate(() => location.hash)).toBe("#giuong-ngu");
+
+  // Chạm thanh → bảng mở, mục đang đọc được đánh dấu; Esc đóng.
+  await thanh.getByRole("button", { name: /Mục lục — đang đọc/ }).click();
+  await expect(thanh).toHaveAttribute("data-mo", "1");
+  await expect(page.locator("#muc-luc-gon-bang [aria-current=location]")).toContainText("Giường ngủ");
+  await page.keyboard.press("Escape");
+  await expect(thanh).toHaveAttribute("data-mo", "0");
+
+  // Chọn mục đầu tiên → nhảy tới, tiêu đề KHÔNG bị thanh che (nằm dưới 64 + 48 px), bảng đóng, URL đổi.
+  await thanh.getByRole("button", { name: /Mục lục — đang đọc/ }).click();
+  const dau = page.locator("#muc-luc-gon-bang a").first();
+  const id = (await dau.getAttribute("href"))!.slice(1);
+  await dau.click();
+  await expect(page).toHaveURL(new RegExp(`#${id}$`));
+  await expect(thanh).toHaveAttribute("data-mo", "0");
+  await expect.poll(() => page.locator(`#${id}`).evaluate((el) => Math.round(el.getBoundingClientRect().top)), { timeout: 5_000 }).toBeGreaterThanOrEqual(112);
+  expect(loi, loi.join("\n")).toEqual([]);
 });
 
 test("CTA chân bài đổi theo mảng: bài phong thuỷ mời xem nhà, bài thần số mời xem số; thẻ bên lề cùng mảng", async ({ page }) => {

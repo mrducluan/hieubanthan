@@ -218,6 +218,9 @@
 @keyframes dong-chay { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes cung-hien { from { opacity: 0; transform: scale(0.82) rotate(-12deg); } to { opacity: 1; transform: none; } }
 @keyframes cung-lap { 0%, 8%, 100% { opacity: 1; } 4% { opacity: 0.55; } }
+/* Thanh mục lục bài blog trên điện thoại: tên mục đổi trượt nhẹ lên; bảng mục lục mở thả xuống. */
+@keyframes muc-hien { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes muc-mo { from { opacity: 0; transform: translateY(-6px) scaleY(0.98); } to { opacity: 1; transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

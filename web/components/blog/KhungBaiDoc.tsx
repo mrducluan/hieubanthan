@@ -28,8 +28,9 @@ export function KhungBaiDoc({ mucLuc, tieuDe, ben, nguon, phut, children }: {
   );
 }
 
-/** Mục lục gập cho điện thoại / máy tính bảng — đặt ngay trên thân bài, ẩn ở màn hình lớn (đã có cột phải). */
-export function MucLucGon({ mucLuc, tieuDe }: { mucLuc: MucLuc[]; tieuDe: string }) {
+/** Thanh mục lục DÍNH cho điện thoại / máy tính bảng — đặt ngay trên thân bài, TRỰC TIẾP trong cột bài (cột dài bằng
+ *  bài → thanh dính suốt lúc đọc, dưới thanh đầu trang); ẩn ở màn hình lớn (đã có cột phải). */
+export function MucLucGon({ mucLuc, tieuDe, phut }: { mucLuc: MucLuc[]; tieuDe: string; phut?: number | null }) {
   if (!dangHienMucLuc(mucLuc)) return null;
-  return <div className="mt-6 lg:hidden"><MucLucBai muc={mucLuc} thanId={THAN_BAI_ID} tieuDe={tieuDe} bien="gon" /></div>;
+  return <MucLucBai muc={mucLuc} thanId={THAN_BAI_ID} tieuDe={tieuDe} bien="gon" phut={phut} />;
 }
