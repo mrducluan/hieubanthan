@@ -13,6 +13,7 @@ import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 import { dangXuat, hoSoTaiKhoan, luuVaoTaiKhoan, useNguoiDung, xoaHoSoTaiKhoan, xoaTaiKhoan } from "@/lib/tai-khoan";
 import { gioHienThi, luuHoSo, useHoSo, xoaHoSo, type HoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
+import { baoNhanThuong, nhanThuongSauLuu } from "@/lib/nhan-thuong";
 
 type HoSoTK = Awaited<ReturnType<typeof hoSoTaiKhoan>>;
 
@@ -56,9 +57,9 @@ export function TaiKhoan() {
     }
   }, [hoSo, tk]);
 
-  async function lam(viec: () => Promise<void>, thanhCong: string) {
+  async function lam(viec: () => Promise<string | void>, thanhCong: string) {
     setDang(true); setBao(null);
-    try { await viec(); setBao({ loai: "ok", noi: thanhCong }); } catch (e) { setBao({ loai: "loi", noi: (e as Error).message }); }
+    try { const them = await viec(); setBao({ loai: "ok", noi: them ? `${thanhCong} ${them}` : thanhCong }); } catch (e) { setBao({ loai: "loi", noi: (e as Error).message }); }
     finally { setDang(false); }
   }
 
@@ -110,7 +111,12 @@ export function TaiKhoan() {
                   <div className="space-y-3 text-sm">
                     <p>Tài khoản đang lưu: <b>{moTa(tk)}</b></p>
                     <div className="flex flex-wrap gap-2">
-                      <Button size="sm" disabled={dang} onClick={() => lam(async () => { await luuVaoTaiKhoan(user.id, hoSo); await tai(); }, "Đã cập nhật tài khoản theo máy này.")}>Cập nhật tài khoản theo máy này</Button>
+                      <Button size="sm" disabled={dang} onClick={() => lam(async () => {
+                        await luuVaoTaiKhoan(user.id, hoSo);
+                        const kq = await nhanThuongSauLuu("tai_khoan");   // SAO-V: nhận thưởng ngay sau khi lưu
+                        await tai();
+                        return baoNhanThuong(kq);
+                      }, "Đã cập nhật tài khoản theo máy này.")}>Cập nhật tài khoản theo máy này</Button>
                       <Button size="sm" variant="secondary" onClick={() => { const { cap_nhat_luc: _bo, ...h } = tk; luuHoSo(h); }}>Dùng bản trong tài khoản</Button>
                     </div>
                   </div>
@@ -123,7 +129,10 @@ export function TaiKhoan() {
                         <Link href="/chinh-sach-rieng-tu#du-lieu" className="text-gold underline">Chính sách quyền riêng tư</Link></span>
                     </label>
                     <Button disabled={!dongY || dang} onClick={() => lam(async () => {
-                      await luuVaoTaiKhoan(user.id, hoSo); ghi("profile_created", { kind: "tai_khoan" }); await tai();
+                      await luuVaoTaiKhoan(user.id, hoSo); ghi("profile_created", { kind: "tai_khoan" });
+                      const kq = await nhanThuongSauLuu("tai_khoan");   // SAO-V: Sao chào mừng + lời mời ngay sau khi lưu
+                      await tai();
+                      return baoNhanThuong(kq);
                     }, "Đã lưu hồ sơ vào tài khoản.")}>
                       <Cloud aria-hidden /> Lưu vào tài khoản
                     </Button>

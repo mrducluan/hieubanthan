@@ -68,7 +68,7 @@ export function NapSao({ goi, cong }: { goi: Goi[]; cong: "payos" | "gia" | null
         <QrCode className="size-8 shrink-0 text-gold" aria-hidden />
         <div className="flex-1 text-sm">
           <p className="font-medium text-fg">Chuyển khoản QR — app ngân hàng hoặc ví bất kỳ</p>
-          <p className="text-fg-muted">Quét mã, xác nhận là xong. Sao vào ví trong vài giây sau khi tiền về.</p>
+          <p className="text-fg-muted">Quét mã, xác nhận là xong. Sao vào ví trong vài giây sau khi tiền về. Sao mua không hết hạn.</p>
         </div>
         {!cong ? (
           <p className="text-sm text-fg-faint" data-testid="nap-chua-mo">Nạp Sao đang chuẩn bị mở.</p>

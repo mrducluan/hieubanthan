@@ -12,6 +12,7 @@ import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
+import { DongThuongMoi } from "@/components/chia-se/DongThuongMoi";
 
 export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
   const [mo, setMo] = useState(false);
@@ -32,7 +33,7 @@ export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
       u.searchParams.set("tu", tu);
       if (maCuaToi) u.searchParams.set("gt", maCuaToi);
       setThe({ ma, tu, link: u.toString() });
-      ghi("share_created", { kind: "hai_nguoi", ma_moi: tu });
+      ghi("share_created", { kind: "hai_nguoi", ma_moi: tu, co_ma: Boolean(maCuaToi) });
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Chưa tạo được thẻ.");
     } finally {
@@ -79,6 +80,7 @@ export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
           <Button onClick={() => void tao()} disabled={dang} data-testid="tao-the-hai">
             <Share2 aria-hidden /> {dang ? c("chia_se.dang_tao") : "Tạo thẻ"}
           </Button>
+          <DongThuongMoi dangNhap={nguoiDung === undefined ? undefined : Boolean(nguoiDung)} />
         </div>
       ) : (
         <div className="mt-3 space-y-3">
@@ -90,11 +92,12 @@ export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
             <Button size="sm" onClick={() => void chiaSe()}><Share2 aria-hidden /> {c("chia_se.gui")}</Button>
             <Button asChild size="sm" variant="outline">
               <a href={`/og/hai?ma=${encodeURIComponent(the.ma)}&khung=doc`} download="diem-hai-nguoi.png" data-testid="tai-anh-the-hai"
-                onClick={() => ghi("share_created", { kind: "hai_nguoi_anh", ma_moi: the.tu })}>
+                onClick={() => ghi("share_created", { kind: "hai_nguoi_anh", ma_moi: the.tu, co_ma: false /* ảnh: mã QR không mang ?gt= */ })}>
                 <Download aria-hidden /> {c("chia_se.tai_story")}
               </a>
             </Button>
           </div>
+          <DongThuongMoi dangNhap={nguoiDung === undefined ? undefined : Boolean(nguoiDung)} />
         </div>
       )}
     </section>
