@@ -252,7 +252,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   { duong: "/dieu-khoan", nhom: "phap_ly", ten: "Điều khoản sử dụng", o: O_PHAP_LY, mac_dinh: {
     tieu_de_seo: "Điều khoản sử dụng", h1: "Điều khoản sử dụng", ngay_hieu_luc: NGAY_HIEU_LUC,
     mo_ta_seo: "Điều khoản sử dụng Hiểu Bản Thân: tính chất dịch vụ tham khảo văn hoá, tài khoản, Sao, nội dung, sở hữu trí tuệ và giới hạn trách nhiệm.",
-    muc: [{ id: "chap-nhan", tieu_de: "Chấp nhận điều khoản" }, { id: "tinh-chat", tieu_de: "Tính chất của dịch vụ" }, { id: "tai-khoan", tieu_de: "Tài khoản" }, { id: "sao", tieu_de: "Sao — điểm dùng trong ứng dụng" }, { id: "hanh-vi", tieu_de: "Những điều không được làm" }, { id: "noi-dung", tieu_de: "Nội dung và sở hữu trí tuệ" }, { id: "trach-nhiem", tieu_de: "Giới hạn trách nhiệm" }, { id: "luat", tieu_de: "Luật áp dụng, thay đổi và liên hệ" }],
+    muc: [{ id: "chap-nhan", tieu_de: "Chấp nhận điều khoản" }, { id: "tinh-chat", tieu_de: "Tính chất của dịch vụ" }, { id: "tai-khoan", tieu_de: "Tài khoản" }, { id: "sao", tieu_de: "Sao — điểm dùng trong ứng dụng" }, { id: "gioi-thieu", tieu_de: "Chương trình giới thiệu (mời bạn)" }, { id: "hanh-vi", tieu_de: "Những điều không được làm" }, { id: "noi-dung", tieu_de: "Nội dung và sở hữu trí tuệ" }, { id: "trach-nhiem", tieu_de: "Giới hạn trách nhiệm" }, { id: "luat", tieu_de: "Luật áp dụng, thay đổi và liên hệ" }],
   } },
   { duong: "/mien-tru-trach-nhiem", nhom: "phap_ly", ten: "Miễn trừ trách nhiệm", o: O_PHAP_LY, mac_dinh: {
     tieu_de_seo: "Miễn trừ trách nhiệm", h1: "Miễn trừ trách nhiệm", ngay_hieu_luc: NGAY_HIEU_LUC,

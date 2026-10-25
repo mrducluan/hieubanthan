@@ -1,87 +1,108 @@
 "use client";
-// Ví Sao (CR-C): số dư, lịch sử, link mời cá nhân. Tự nhận thưởng chào mừng + thưởng được mời MỘT lần
-// sau khi hồ sơ đã lưu vào tài khoản (điều kiện do hàm SQL kiểm, client chỉ gọi).
+// Ví Sao (CR-C · SAO-V 0025): số dư tách Sao đã mua (không hết hạn) / Sao tặng (hạn 365 ngày, dùng trước), lịch sử,
+// link mời cá nhân, hoa hồng từ lời mời (một tầng — chỉ ngày + số Sao + trạng thái, không lộ bạn nào nạp).
+// Tự nhận thưởng chào mừng + thưởng được mời MỘT lần sau khi hồ sơ đã lưu vào tài khoản (lib/nhan-thuong.ts;
+// điều kiện do hàm SQL kiểm, client chỉ gọi).
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Check, Copy, Gift, Sparkles } from "lucide-react";
+import { Check, Copy, Gift, HandCoins, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { KhungTai } from "@/components/khung/TieuDe";
-import { ghi } from "@/lib/do-luong";
-import {
-  lichSu, maGioiThieuDaNho, nhanChaoMung, nhanThuongGioiThieu, quenMaGioiThieu, soDu, TEN_LOAI, useMaCuaToi, type DongSao,
-} from "@/lib/sao";
+import { lichSu, hoaHongCuaToi, soDu, TEN_LOAI, useMaCuaToi, viChiTiet, type DongSao, type HoaHong, type ViChiTiet } from "@/lib/sao";
+import { baoNhanThuong, nhanThuongSauLuu } from "@/lib/nhan-thuong";
+import { loiHoaHong, MUC_MAC_DINH, useMucSao } from "@/lib/muc-sao";
 
-const LOI_THUONG: Record<string, string> = {
-  tu_moi: "Mã mời là của chính bạn nên không tính thưởng.",
-  tai_khoan_cu: "Thưởng lời mời chỉ dành cho tài khoản mới (trong 7 ngày đầu).",
-  khong_hop_le: "Mã mời không còn hợp lệ.",
+const TRANG_THAI_HH: Record<HoaHong["lan"][number]["trang_thai"], string> = {
+  da_cong: "đã cộng",
+  qua_tran: "vượt trần tháng — chưa cộng",
+  thu_hoi: "đã thu hồi vì đơn hoàn tiền",
+};
+const ngayVn = (s: string) => {
+  const [y, m, d] = s.slice(0, 10).split("-");
+  return y && m && d ? `${d}/${m}/${y}` : s;
 };
 
 export function ViSao({ daLuuHoSo }: { daLuuHoSo: boolean }) {
-  const [du, setDu] = useState<number | null>(null);
+  const [vi, setVi] = useState<ViChiTiet | null>(null);
+  const [chiTiet, setChiTiet] = useState(false);   // false = chưa chạy 0025 → chỉ có tổng
   const [ls, setLs] = useState<DongSao[]>([]);
+  const [hh, setHh] = useState<HoaHong | null>(null);
   const [bao, setBao] = useState<string | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
   const ma = useMaCuaToi(true);
   const daNhan = useRef(false);
-  // QT-2: mức thưởng chủ sở hữu đang đặt (chiến dịch mời). Lỗi mạng → giữ mặc định.
-  const [muc, setMuc] = useState({ moi_ban: 20, duoc_moi: 20, tran: 20 });
-  useEffect(() => {
-    fetch("/api/sao/muc").then((r) => (r.ok ? r.json() : null)).then((m) => { if (m) setMuc(m); }).catch(() => {});
-  }, []);
+  const muc = useMucSao() ?? MUC_MAC_DINH;
 
   const tai = useCallback(async () => {
-    try { const [d, l] = await Promise.all([soDu(), lichSu()]); setDu(d); setLs(l); setLoi(null); }
-    catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đọc được Sao."); }
+    try {
+      const [v, l] = await Promise.all([
+        viChiTiet().then((x) => { setChiTiet(true); return x; })
+          .catch(async () => { setChiTiet(false); return { so_du: await soDu(), sao_mua: 0, sao_tang: 0 }; }),
+        lichSu(),
+      ]);
+      setVi(v); setLs(l); setLoi(null);
+    } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đọc được Sao."); }
+    hoaHongCuaToi().then(setHh).catch(() => setHh(null));   // chưa chạy 0025 → không hiện khối hoa hồng
   }, []);
   useEffect(() => { void tai(); }, [tai]);
 
-  // Hồ sơ vừa lưu vào tài khoản → nhận Sao chào mừng + Sao lời mời (nếu đến từ link mời). Idempotent phía SQL.
+  // Hồ sơ đã lưu vào tài khoản → nhận Sao chào mừng + Sao lời mời (nếu đến từ link mời). Idempotent phía SQL;
+  // trang Tài khoản vừa lưu xong cũng gọi cùng hàm — lượt sau chỉ nhận "đã nhận", không báo trùng.
   useEffect(() => {
     if (!daLuuHoSo || daNhan.current) return;
     daNhan.current = true;
-    void (async () => {
-      const bao2: string[] = [];
-      try {
-        const cm = await nhanChaoMung();
-        if (cm.ket_qua === "da_thuong") { bao2.push(`+${cm.sao} Sao chào mừng`); ghi("credit_earned", { kind: "chao_mung", so_sao: cm.sao }); }
-        const gt = maGioiThieuDaNho();
-        if (gt) {
-          const r = await nhanThuongGioiThieu(gt);
-          if (r.ket_qua === "da_thuong") { bao2.push(`+${r.sao} Sao vì nhận lời mời của bạn bè`); ghi("credit_earned", { kind: "duoc_moi", so_sao: r.sao }); }
-          else if (LOI_THUONG[r.ket_qua]) bao2.push(LOI_THUONG[r.ket_qua]!);
-          if (r.ket_qua !== "chua_luu_ho_so") quenMaGioiThieu();
-        }
-      } catch { /* chưa chạy migration 0008: bỏ qua lặng lẽ */ }
-      if (bao2.length) setBao(bao2.join(" · "));
+    void nhanThuongSauLuu("vi_sao").then(async (kq) => {
+      const b = baoNhanThuong(kq);
+      if (b) setBao(b);
       await tai();
-    })();
+    });
   }, [daLuuHoSo, tai]);
 
   const link = ma && typeof window !== "undefined" ? `${window.location.origin}/?gt=${ma}` : null;
 
-  if (loi && du === null) return <p className="text-sm text-fg-faint" data-testid="sao-chua-bat">Sao sẽ có khi hệ thống bật ví (đang chuẩn bị).</p>;
-  if (du === null) return <KhungTai dong={1} />;
+  if (loi && vi === null) return <p className="text-sm text-fg-faint" data-testid="sao-chua-bat">Sao sẽ có khi hệ thống bật ví (đang chuẩn bị).</p>;
+  if (vi === null) return <KhungTai dong={1} />;
 
+  const coHh = hh && (hh.bat || hh.lan.length > 0);
   return (
     <Card className="space-y-5" data-testid="vi-sao">
       <div className="flex items-center gap-4">
         <span className="grid size-12 place-items-center rounded-2xl bg-gold/15 text-gold"><Sparkles className="size-6" aria-hidden /></span>
         <div>
           <p className="text-sm text-fg-muted">Sao của bạn</p>
-          <p className="font-serif text-4xl text-gold" data-testid="so-sao">{du}</p>
+          <p className="font-serif text-4xl text-gold" data-testid="so-sao">{vi.so_du}</p>
         </div>
         <Button asChild size="sm" className="ml-auto"><Link href="/nap-sao">Nạp Sao</Link></Button>
       </div>
-      {bao && <p role="status" className="rounded-xl bg-jade/10 px-4 py-3 text-sm text-jade">{bao}</p>}
+      {chiTiet && (
+        <div className="space-y-2" data-testid="vi-chi-tiet">
+          <div className="grid grid-cols-2 gap-3 text-sm">
+            <div className="rounded-xl border border-line/60 p-3">
+              <p className="font-serif text-2xl text-fg" data-testid="sao-mua">{vi.sao_mua}</p>
+              <p className="text-fg-muted">Sao đã mua</p>
+              <p className="text-xs text-fg-faint">Không bao giờ hết hạn.</p>
+            </div>
+            <div className="rounded-xl border border-line/60 p-3">
+              <p className="font-serif text-2xl text-fg" data-testid="sao-tang">{vi.sao_tang}</p>
+              <p className="text-fg-muted">Sao tặng</p>
+              <p className="text-xs text-fg-faint">Hạn 365 ngày kể từ ngày nhận.</p>
+            </div>
+          </div>
+          <p className="text-xs text-fg-faint">Khi dùng, Sao tặng được trừ trước — Sao bạn đã mua để dành tới sau cùng.</p>
+        </div>
+      )}
+      {bao && <p role="status" className="rounded-xl bg-jade/10 px-4 py-3 text-sm text-jade" data-testid="vi-sao-bao">{bao}</p>}
 
       <div className="space-y-2">
         <p className="flex items-center gap-2 text-sm font-medium text-fg"><Gift className="size-4 text-gold" aria-hidden /> {muc.moi_ban === muc.duoc_moi
           ? `Mời bạn — cả hai cùng nhận ${muc.moi_ban} Sao` : `Mời bạn — bạn nhận ${muc.moi_ban} Sao, bạn bè nhận ${muc.duoc_moi} Sao`}</p>
-        <p className="text-xs text-fg-faint">Bạn bè mở link, tạo tài khoản và lưu hồ sơ trong 7 ngày là cả hai được cộng. Tối đa {muc.tran} lượt thưởng mỗi 30 ngày.</p>
+        <p className="text-xs text-fg-faint" data-testid="dieu-kien-moi">
+          Bạn bè mở link của bạn, đăng nhập và lưu hồ sơ vào tài khoản là cả hai được cộng — tài khoản mới hay cũ đều được,
+          miễn là bạn ấy chưa từng nhận lời mời của ai. Tối đa {muc.tran} lượt thưởng mỗi 30 ngày.
+        </p>
         {link ? (
           <div className="flex gap-2">
             <Input readOnly value={link} aria-label="Link mời cá nhân" onFocus={(e) => e.currentTarget.select()} />
@@ -91,6 +112,28 @@ export function ViSao({ daLuuHoSo }: { daLuuHoSo: boolean }) {
           </div>
         ) : <KhungTai dong={1} />}
       </div>
+
+      {coHh && hh && (
+        <div className="space-y-2 rounded-2xl border border-gold/30 bg-gold/[0.04] p-4" data-testid="hoa-hong">
+          <p className="flex items-center gap-2 text-sm font-medium text-fg"><HandCoins className="size-4 text-gold" aria-hidden /> Hoa hồng từ lời mời</p>
+          {hh.bat
+            ? <p className="text-xs text-fg-faint" data-testid="dieu-kien-hoa-hong">{loiHoaHong(hh)} Trả bằng Sao tặng; đơn bị hoàn tiền thì Sao đó được thu hồi.</p>
+            : <p className="text-xs text-fg-faint">Chương trình hoa hồng đang tạm dừng. Sao đã nhận vẫn giữ nguyên.</p>}
+          <p className="text-sm text-fg-muted">
+            Đã nhận <b className="text-gold" data-testid="hoa-hong-tong">{hh.tong_sao} Sao</b> · {hh.ban_da_moi} bạn đã nhận lời mời của bạn
+          </p>
+          {hh.lan.length > 0 ? (
+            <ul className="divide-y divide-line/60 text-sm" data-testid="hoa-hong-lan">
+              {hh.lan.map((x, i) => (
+                <li key={`${x.ngay}-${i}`} className="flex items-center justify-between gap-3 py-2">
+                  <span className="text-fg-muted">{ngayVn(x.ngay)} · {TRANG_THAI_HH[x.trang_thai] ?? x.trang_thai}</span>
+                  <span className={x.trang_thai === "da_cong" ? "text-jade" : "text-fg-faint"}>{x.trang_thai === "da_cong" ? `+${x.sao}` : x.sao} Sao</span>
+                </li>
+              ))}
+            </ul>
+          ) : <p className="text-xs text-fg-faint">Chưa có lần nào. Bạn chỉ thấy ngày và số Sao — không thấy ai nạp hay nạp bao nhiêu tiền.</p>}
+        </div>
+      )}
 
       {ls.length > 0 && (
         <details className="text-sm">
@@ -105,7 +148,7 @@ export function ViSao({ daLuuHoSo }: { daLuuHoSo: boolean }) {
           </ul>
         </details>
       )}
-      <p className="text-xs text-fg-faint">Sao dùng để mở các luận giải chuyên sâu. Sao không đổi ra tiền và không chuyển cho người khác; Sao tặng có hạn 12 tháng, Sao mua không hết hạn.</p>
+      <p className="text-xs text-fg-faint">Sao dùng để mở các luận giải chuyên sâu. Sao không đổi ra tiền và không chuyển cho người khác. Sao mua không hết hạn; Sao tặng (chào mừng, mời bạn, hoa hồng, nhiệm vụ…) có hạn 365 ngày.</p>
     </Card>
   );
 }

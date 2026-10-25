@@ -34,7 +34,7 @@ export type SuKien =
   | "guess_played";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
-const CHO_PHEP: Record<string, "string" | "number"> = {
+const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   feature_version: "string",
   mo_dun: "string",
   kind: "string",
@@ -87,16 +87,18 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   so_dau_hieu: "number", // PT-V2: số dấu hiệu máy gợi ý
   da_bat: "number",     // PT-V2: 1 = máy đọc ảnh đang bật, 0 = tắt / lỗi
   ma: "string",         // PT-V2: mã dấu hiệu người dùng xác nhận (xa_ngang…), chỉ mã
+  co_ma: "boolean",     // SAO-V: share_created — link có gắn mã mời ?gt= của người đăng nhập (phễu mời ở quản trị)
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */
 const GIOI_HAN_RIENG: Record<string, number> = { mau: 60 };
 
-export function locThuocTinh(p: Record<string, unknown> = {}): Record<string, string | number> {
-  const kq: Record<string, string | number> = {};
+export function locThuocTinh(p: Record<string, unknown> = {}): Record<string, string | number | boolean> {
+  const kq: Record<string, string | number | boolean> = {};
   for (const [k, v] of Object.entries(p)) {
     const kieu = CHO_PHEP[k];
     if (kieu === "number" && typeof v === "number" && Number.isFinite(v)) kq[k] = v;
+    else if (kieu === "boolean" && typeof v === "boolean") kq[k] = v;
     // Chặn chuỗi có 4 chữ số liền (dễ là năm sinh) — trừ ma_moi (chuỗi chữ ký ngẫu nhiên).
     else if (kieu === "string" && typeof v === "string" && v.length <= (GIOI_HAN_RIENG[k] ?? GIOI_HAN_CHUOI)
              && (k === "ma_moi" || !/\d{4}/.test(v))) kq[k] = v;

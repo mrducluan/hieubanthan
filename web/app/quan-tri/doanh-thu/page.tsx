@@ -21,6 +21,12 @@ type TK = {
   sao: { mua: number; tang: number; tieu: number };
   tieu_theo: { muc: string; sao: number; luot: number }[];
 };
+/** SAO-V (0025) thong_ke_hoa_hong — hoa hồng giới thiệu một tầng (đơn tính theo lúc ghi hoa hồng). */
+type HH = {
+  ngay: number;
+  tong: { don: number; sao_da_cong: number; sao_thu_hoi: number; qua_tran: number; doanh_thu_don: number; nguoi_moi: number };
+  top: { email: string | null; don: number; sao: number; doanh_thu: number }[];
+};
 type Don = { ma_don: number; goi: string; so_tien: number; sao: number; cong: string; trang_thai: string; tao_luc: string; ghi_chu: string | null };
 
 const so = (n: number) => Math.round(n).toLocaleString("vi-VN");
@@ -40,10 +46,12 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ k
   if (p.vaiTro !== "chu_so_huu") return <Card><p className="text-sm text-fg-muted">Chỉ chủ sở hữu xem doanh thu.</p></Card>;
   const kyXin = Number((await searchParams).ky);
   const ky = (KY as readonly number[]).includes(kyXin) ? kyXin : 30;
-  const [{ data, error }, don] = await Promise.all([
+  const [{ data, error }, don, hhRpc] = await Promise.all([
     p.sb.rpc("thong_ke_doanh_thu", { p_ngay: ky }),
     p.sb.rpc("ds_don_nap", { p_trang_thai: null, p_gioi_han: 30 }),
+    p.sb.rpc("thong_ke_hoa_hong", { p_ngay: ky }),   // chưa chạy 0025 → lỗi → khối tự ẩn
   ]);
+  const hh = !hhRpc.error && hhRpc.data ? (hhRpc.data as HH) : null;
   if (error || !data) {
     return <Card><h1 className="text-2xl">Doanh thu & Sao</h1><p role="alert" className="mt-3 text-sm text-cinnabar">Chưa đọc được số liệu — cần chạy migration 0012 và 0013 trên Supabase.</p></Card>;
   }
@@ -116,6 +124,24 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ k
             <tbody>{t.top_moi.map((u) => <tr key={u.email} className="border-t border-line/60"><td className="py-1.5 [overflow-wrap:anywhere]">{u.email}</td><td className="text-right">{so(u.so_moi)}</td><td className="text-right">{so(u.ban_da_nap)}</td></tr>)}</tbody></table></div>
         )}
       </Card>
+
+      {hh && (
+        <Card data-testid="qt-hoa-hong">
+          <h2 className="text-lg">Hoa hồng giới thiệu (một tầng)</h2>
+          <p className="mt-1 text-xs text-fg-muted">Người mời nhận % số Sao các đơn nạp đầu của bạn bè mình mời, trả bằng Sao tặng. Công tắc + mức ở <Link href="/quan-tri/cai-dat" className="text-gold underline">Cài đặt</Link>. Đơn hoàn tiền → thu hồi.</p>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <So ten="Đơn có hoa hồng" gt={so(hh.tong.don)} phu={`${so(hh.tong.nguoi_moi)} người mời`} />
+            <So ten="Sao đã cộng" gt={so(hh.tong.sao_da_cong)} phu={`thu hồi ${so(hh.tong.sao_thu_hoi)} Sao`} />
+            <So ten="Đơn vượt trần" gt={so(hh.tong.qua_tran)} phu="ghi nhận, không cộng Sao" />
+            <So ten="Doanh thu các đơn" gt={vnd(hh.tong.doanh_thu_don)} phu="trừ đơn đã hoàn" />
+          </div>
+          {hh.top.length > 0 ? (
+            <div className="mt-4 overflow-x-auto"><table className="w-full text-sm" data-testid="qt-top-hoa-hong"><thead><tr className="text-left text-xs text-fg-muted">
+              <th className="py-1 font-normal">Người mời</th><th className="text-right font-normal">Đơn</th><th className="text-right font-normal">Sao</th><th className="text-right font-normal">Doanh thu đơn</th></tr></thead>
+              <tbody>{hh.top.map((u, i) => <tr key={`${u.email}-${i}`} className="border-t border-line/60"><td className="py-1.5 [overflow-wrap:anywhere]">{u.email ?? "(đăng nhập bằng số điện thoại)"}</td><td className="text-right">{so(u.don)}</td><td className="text-right">{so(u.sao)}</td><td className="text-right">{vnd(u.doanh_thu)}</td></tr>)}</tbody></table></div>
+          ) : <p className="mt-3 text-sm text-fg-faint">Chưa có hoa hồng nào được cộng trong khoảng này.</p>}
+        </Card>
+      )}
 
       <Card>
         <h2 className="text-lg">Đơn gần đây</h2>

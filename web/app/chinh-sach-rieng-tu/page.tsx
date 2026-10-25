@@ -68,6 +68,10 @@ export default async function ChinhSachRiengTu() {
             [<b key="c">Tài khoản</b>, "Bạn đăng nhập bằng email, Google hoặc số điện thoại", "Máy chủ dữ liệu tại Singapore", "Đến khi bạn xoá tài khoản"],
             [<b key="d">Hồ sơ lưu vào tài khoản</b>, "Chỉ khi bạn bấm lưu", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được", "Đến khi bạn xoá hồ sơ hoặc tài khoản"],
             [<b key="e">Ví Sao, mã mời</b>, "Khi bạn có tài khoản, mời bạn bè, dùng Sao", "Máy chủ dữ liệu tại Singapore", "Đến khi bạn xoá tài khoản"],
+            [<b key="e1">Quan hệ mời</b>, "Khi bạn nhận lời mời của bạn bè (lưu hồ sơ qua link mời): ai mời ai, lúc nào", "Máy chủ dữ liệu tại Singapore — dùng để cộng thưởng mời, chặn mời vòng, tính hoa hồng giới thiệu", "Đến khi một trong hai người xoá tài khoản"],
+            [<b key="e2">Đơn nạp Sao và hoa hồng giới thiệu</b>, "Khi bạn nạp Sao: gói, số tiền, số Sao, trạng thái, mã giao dịch của cổng thanh toán. Nếu bạn đến từ lời mời, đơn nạp đầu được dùng để tính hoa hồng cho người mời (ngày, số Sao, trạng thái)", "Máy chủ dữ liệu tại Singapore. Người mời chỉ thấy ngày và số Sao hoa hồng — không thấy bạn là ai, không thấy số tiền", "Đến khi bạn xoá tài khoản (cổng thanh toán có thể giữ chứng từ giao dịch theo luật kế toán)"],
+            [<b key="e3">Chuỗi ngày ghé</b>, "Khi đã đăng nhập và mở trang có tính chuỗi", "Máy chủ dữ liệu tại Singapore — CHỈ ngày ghé cuối, độ dài chuỗi hiện tại và dài nhất; không lưu lịch sử từng ngày", "Đến khi bạn xoá tài khoản"],
+            [<b key="e4">Quà tặng một chương</b>, "Khi bạn gửi hoặc nhận link quà", "Máy chủ dữ liệu tại Singapore — người gửi, người nhận, mảng, ngày gửi/nhận; người gửi không thấy ai nhận", "Link quà hết hạn sau 7 ngày, chương được mở trong 30 ngày kể từ khi nhận; bản ghi giữ đến khi người gửi hoặc người nhận xoá tài khoản"],
             [<b key="f">Câu hỏi đã lọc</b>, "Khi bạn hỏi đáp (nếu bật nhật ký cải thiện chất lượng)", "Máy chủ dữ liệu tại Singapore", "Tối đa 24 tháng"],
             [<b key="f2">Góp ý "đúng / chưa đúng" cho câu trả lời thần số</b>, "Chỉ khi bạn bấm góp ý; ghi chú chỉ lưu khi bạn tự tích đồng ý", "Máy chủ dữ liệu tại Singapore — chỉ các con số rút gọn của trường phái được góp ý, mã câu hỏi, trường phái và ghi chú đã lọc; không họ tên, ngày sinh hay tài khoản", "Tối đa 12 tháng"],
             [<b key="f3">Điều bạn bấm "Ghi nhớ"</b>, "Chỉ khi đã đăng nhập và bạn bấm Ghi nhớ một câu băn khoăn", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được; xoá được ngay", "Tối đa 180 ngày"],
@@ -103,6 +107,7 @@ export default async function ChinhSachRiengTu() {
         <ul>
           <li><b>Tính và hiển thị kết quả bạn yêu cầu</b> (bài đọc thần số, lá số, hợp đôi, quẻ, hướng nhà): căn cứ là yêu cầu của bạn khi bấm xem.</li>
           <li><b>Lưu hồ sơ, tài khoản, ví Sao</b>: căn cứ là sự đồng ý của bạn khi đăng nhập hoặc bấm lưu. Bạn rút lại được bằng cách xoá.</li>
+          <li><b>Chương trình giới thiệu, nạp Sao</b>: căn cứ là việc thực hiện điều khoản bạn đã đồng ý (cộng thưởng mời một tầng, hoa hồng giới thiệu, đối soát và hoàn tiền đơn nạp, chống gian lận).</li>
           <li><b>Nhận diện dấu hiệu từ ảnh nhà</b>: căn cứ là ô đồng ý bạn tự tích trước mỗi lần gửi; không tích thì không gửi gì, bạn vẫn tích tay được.</li>
           <li><b>Cải thiện chất lượng</b> (câu hỏi đã lọc, số liệu ẩn danh, báo lỗi): chỉ dùng dữ liệu không nhận diện được bạn.</li>
           <li>Chúng tôi <b>không</b> dùng dữ liệu cho quảng cáo nhắm mục tiêu, <b>không</b> mua bán dữ liệu, <b>không</b> ra quyết định tự động gây ảnh hưởng pháp lý tới bạn.</li>
@@ -115,7 +120,8 @@ export default async function ChinhSachRiengTu() {
         <>
           <Bang dau={["Nhóm nhà cung cấp", "Việc làm", "Dữ liệu nhận", "Vị trí"]} dong={[
             ["Hạ tầng máy chủ (web và tính toán)", "Chạy trang web và hệ thống tính toán", "Yêu cầu bạn gửi để tính, gồm ngày giờ sinh (không lưu)", "Singapore"],
-            ["Cơ sở dữ liệu và đăng nhập", "Tài khoản, hồ sơ đã lưu, ví Sao, câu hỏi đã lọc", "Như mục 3", "Singapore"],
+            ["Cơ sở dữ liệu và đăng nhập", "Tài khoản, hồ sơ đã lưu, ví Sao, quan hệ mời, đơn nạp, câu hỏi đã lọc", "Như mục 3", "Singapore"],
+            ["Cổng thanh toán (chuyển khoản QR)", "Tạo mã QR và báo kết quả khi bạn nạp Sao", "Mã đơn, số tiền, nội dung chuyển khoản; không họ tên, ngày sinh. Thông tin tài khoản ngân hàng của bạn do ngân hàng và cổng xử lý, chúng tôi không nhận", "Việt Nam"],
             ["Dịch vụ diễn đạt tự động (AI)", "Diễn đạt câu trả lời hỏi đáp cho dễ đọc (khi bật)", "Câu hỏi bạn gõ + kết quả đã tính; không có họ tên, ngày giờ sinh", "Hoa Kỳ"],
             ["Dịch vụ nhận diện hình ảnh (AI)", "Gợi ý dấu hiệu phong thuỷ nhìn thấy trong ảnh nhà (khi bật, chỉ khi bạn tự tích đồng ý gửi)", "Ảnh góc nhà đã thu nhỏ trên máy bạn + góc chụp, loại nhà bạn chọn; không họ tên, ngày sinh, địa chỉ, toạ độ; không lưu, không dùng huấn luyện", "Hoa Kỳ"],
             ["Đo lường ẩn danh", "Đếm các bước sử dụng (khi bật)", "Sự kiện sử dụng, mã ẩn danh", "Hoa Kỳ hoặc EU"],
@@ -141,7 +147,7 @@ export default async function ChinhSachRiengTu() {
             <li><b>Tự làm ngay trên web</b>:
               <ul>
                 <li>sửa hoặc xoá hồ sơ trên máy ở mục Bản thân;</li>
-                <li>xoá hồ sơ đã lưu, hoặc <b>xoá hẳn tài khoản</b> ở mục <Link href="/tai-khoan" className="text-gold underline">Tài khoản</Link>. Xoá tài khoản là xoá luôn hồ sơ, ví Sao và mã mời.</li>
+                <li>xoá hồ sơ đã lưu, hoặc <b>xoá hẳn tài khoản</b> ở mục <Link href="/tai-khoan" className="text-gold underline">Tài khoản</Link>. Xoá tài khoản là xoá luôn hồ sơ, ví Sao, mã mời, quan hệ mời, đơn nạp, chuỗi ngày ghé và quà tặng liên quan tới bạn.</li>
               </ul>
             </li>
             <li><b>Gửi yêu cầu</b> tới {lienHe}. Hãy ghi rõ quyền muốn thực hiện và email hoặc số điện thoại của tài khoản. Chúng tôi xác nhận đã nhận yêu cầu và xử lý trong thời hạn pháp luật quy định.</li>
