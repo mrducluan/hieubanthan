@@ -17,7 +17,7 @@ const COT = BC.cot_loi.map((h) => (h as HopFx).ma_mau);
 
 async function moBaoCao(page: Page, opts: { bc?: object; tuyChon?: object | number; tyLe?: object } = {}) {
   const goi: Record<string, Request[]> = { tyLe: [], kiemChung: [], luu: [], tuyChon: [] };
-  await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
   await page.route("**/api/tuvi/luan-giai", (r) => r.fulfill({ json: opts.bc ?? BC }));
   await page.route("**/api/kiem-chung/ty-le**", (r) => { goi.tyLe!.push(r.request()); return r.fulfill({ json: opts.tyLe ?? FX.ty_le }); });
   await page.route("**/api/kiem-chung", (r) => { goi.kiemChung!.push(r.request()); return r.fulfill({ json: { ok: false, ly_do: "chua_bat" } }); });
@@ -245,7 +245,7 @@ test("SAO-2 với báo cáo đời sống: chương 1 đọc được, chương 
     cot_loi: [{ ...BC.cot_loi[0]!, tu_chuong: dau!.ma }],
     chuong: [dau, ...sau.map((c) => ({ ma: c.ma, tieu_de: c.tieu_de, khoa: true, moi_xem: c.moi_xem }))],
   };
-  await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
   await moBaoCaoKhoa(page, xemTruoc);
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc.getByTestId("lg-cot-loi").getByTestId("hop-noi-bat")).toHaveCount(1);
@@ -266,7 +266,7 @@ test("SAO-2 với báo cáo đời sống: chương 1 đọc được, chương 
 test("SAO-2: cot_loi rỗng (chương 1 không có hộp nổi bật) → không có khối Điều quan trọng nhất, bài vẫn hiện", async ({ page }) => {
   const [dau, ...sau] = BC.chuong;
   const { thoi_gian_bieu: _tg, ...conLai } = BC;
-  await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
   await moBaoCaoKhoa(page, {
     ...conLai, cot_loi: [], so_khoa: sau.length, phi: { sao: 10, ly_do: "xem_truoc", khoa: true, dang_nhap: false, so_du: null, thuong_chao_mung: 10 },
     chuong: [dau, ...sau.map((c) => ({ ma: c.ma, tieu_de: c.tieu_de, khoa: true, moi_xem: c.moi_xem }))],
@@ -288,7 +288,7 @@ async function moBaoCaoKhoa(page: Page, bc: object) {
 }
 
 test("KC-1: Bản đồ con số dùng cùng khuôn đời sống (hộp, tóm tắt, Vì sao nói vậy), không dòng thời gian đại hạn", async ({ page }) => {
-  await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
   await page.route("**/api/kiem-chung/ty-le**", (r) => r.fulfill({ json: {} }));
   await napHoSo(page);
   await page.goto("/than-so");

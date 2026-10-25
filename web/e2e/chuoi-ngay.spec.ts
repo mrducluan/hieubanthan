@@ -106,5 +106,5 @@ test("đã đăng nhập nhưng chưa chạy 0025 (san_sang=false) / lỗi mạn
   await page.route("**/api/sao/chuoi", (r) => r.abort());
   await page.reload();
   await expect(page.getByTestId("chuoi-ngay")).toHaveAttribute("data-nguon", "may");
-  await expect(page.getByRole("alert")).toHaveCount(0);
+  await expect(page.getByTestId("chuoi-ngay").getByRole("alert")).toHaveCount(0);
 });

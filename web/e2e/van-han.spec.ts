@@ -17,7 +17,7 @@ const ANH = process.env.VH_ANH_DIR;
 const CO_NGAN = new Set(["nam_tuoi", "xung_tuoi", "va_tuoi", "tam_tai", "xung_ngay"]);
 
 async function mo(page: Page, mang: "tu-vi" | "bat-tu", bc: object, thu = false) {
-  await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu, gia: 10 } }));
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu, gia: 10 } }));
   await page.route(`**/api/${mang === "tu-vi" ? "tuvi" : "battu"}/luan-giai`, (r) => r.fulfill({ json: bc }));
   await page.route("**/api/kiem-chung/ty-le**", (r) => r.fulfill({ json: {} }));
   await page.route("**/api/kiem-chung", (r) => r.fulfill({ json: { ok: false, ly_do: "chua_bat" } }));
