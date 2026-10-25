@@ -15,6 +15,7 @@ import { tenGoi, type HoSo } from "@/lib/hoso";
 import { docQuyUocDD } from "@/lib/quy-uoc-dd";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
+import { DongThuongMoi } from "@/components/chia-se/DongThuongMoi";
 import { bienThe, dien, manhBanDo } from "@/lib/the-ban-do";
 import type { NoiDungMaBanDo } from "@/lib/ma-moi";
 
@@ -54,7 +55,7 @@ export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
       u.searchParams.set("tu", d.tu);
       if (maCuaToi) u.searchParams.set("gt", maCuaToi);
       setKq({ ...d, link: u.toString() });
-      ghi("share_created", { kind: "ban_do", ma_moi: d.tu, bien_the: d.bien_the, tu });
+      ghi("share_created", { kind: "ban_do", ma_moi: d.tu, bien_the: d.bien_the, tu, co_ma: Boolean(maCuaToi) });
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Chưa tạo được thẻ.");
     } finally {
@@ -92,6 +93,7 @@ export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
           <Button onClick={() => void tao()} disabled={dang} data-testid="tao-the-ban-do">
             <Sparkles aria-hidden /> {dang ? "Đang ghép…" : "Ghép thẻ"}
           </Button>
+          <DongThuongMoi dangNhap={nguoiDung === undefined ? undefined : Boolean(nguoiDung)} />
         </div>
       ) : (
         <div className="space-y-3">
@@ -105,7 +107,7 @@ export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
             <Button size="sm" onClick={() => void chiaSe()}><Share2 aria-hidden /> Gửi bạn bè đoán thử</Button>
             <Button asChild size="sm" variant="outline">
               <a href={`/og/ban-do?ma=${encodeURIComponent(kq.ma)}&khung=doc`} download="ban-do-5-mang.png" data-testid="tai-anh-ban-do"
-                onClick={() => ghi("share_created", { kind: "ban_do_anh", ma_moi: kq.tu, bien_the: kq.bien_the, tu })}>
+                onClick={() => ghi("share_created", { kind: "ban_do_anh", ma_moi: kq.tu, bien_the: kq.bien_the, tu, co_ma: false /* ảnh: mã QR không mang ?gt= */ })}>
                 <Download aria-hidden /> Tải ảnh story
               </a>
             </Button>
@@ -115,6 +117,7 @@ export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
               </a>
             </Button>
           </div>
+          <DongThuongMoi dangNhap={nguoiDung === undefined ? undefined : Boolean(nguoiDung)} />
         </div>
       )}
     </section>

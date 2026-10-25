@@ -84,6 +84,13 @@
      báo em dịch vụ + đặt khoá vào env thì em làm; hiện mọi trang đã có ảnh tóm tắt vẽ bằng code (có QR).
    - **Quyết định còn chờ** (audit SEO-M): mở bot `Google-Extended` (Gemini app trích được site, đổi lại cho phép dùng
      huấn luyện — lệch BM-2) hay giữ chặn.
+4m. [ ] **Sao viral SAO-V (2026-10-25) — chạy migration 0025** (sau 0024): Supabase → SQL Editor → dán toàn bộ
+   `supabase/migrations/0025_sao_viral.sql` → Run (rollback: `0025_sao_viral.down.sql`). Kiểm bằng
+   `supabase/kiem_thu/da_chay_chua.sql` (dòng 0025 = true). Sửa luôn lỗi số dư: Sao mua không bao giờ hết hạn, tiêu Sao
+   luôn trừ Sao tặng trước. Sau đó vào `/quan-tri/cai-dat` bật từng phần khi muốn chạy: **Hoa hồng nạp Sao**
+   (`sao.hoa_hong.bat`, mặc định 20% đơn nạp đầu), **Chuỗi ngày ghé**, **Tặng một chương**, và **Thu Sao riêng:
+   Bản đồ con số** (chạy thử thu Sao một mảng trước). Tất cả mặc định TẮT. Cần tài khoản (Supabase Auth) đã bật trên web
+   thì các phần này mới chạy.
 4l. [ ] **Bảo mật SEC-2 (2026-10-23, `docs/BAO-MAT.md` mục SEC-2) — làm theo thứ tự:**
    1. [x] Render có `ENGINE_API_KEY` — anh xác nhận 2026-10-23.
    2. [ ] **Chạy migration** (sau khi merge PR SEC-2): Supabase → **SQL Editor** → New query → dán toàn bộ nội dung

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { useMaCuaToi } from "@/lib/sao";
+import { DongThuongMoi } from "@/components/chia-se/DongThuongMoi";
 import { Check, Copy, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,7 +46,7 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
       if (maCuaToi) u.searchParams.set("gt", maCuaToi);   // người được mời tạo tài khoản → cả hai nhận Sao
       const url = u.toString();
       setLink(url);
-      ghi("share_created", { kind: loai, ma_moi: maMoiTuToken(ma) });
+      ghi("share_created", { kind: loai, ma_moi: maMoiTuToken(ma), co_ma: Boolean(maCuaToi) });
       onDaTao?.(ma);
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Chưa tạo được link.");
@@ -77,6 +78,7 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
         <p className="text-xs text-fg-faint">Link chỉ hiện tên hiển thị và các con số của bạn — không có ngày sinh. Hết hạn sau 90 ngày.</p>
         {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
         <Button onClick={tao} disabled={dang} className="w-full"><Share2 aria-hidden /> {dang ? c("chia_se.dang_tao") : nutTao}</Button>
+        <DongThuongMoi dangNhap={nguoiDung === undefined ? undefined : Boolean(nguoiDung)} />
       </div>
     );
   }
@@ -87,6 +89,7 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
         <Button variant="secondary" size="icon" onClick={chep} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
       </div>
       <Button onClick={chiaSe} className="w-full"><Share2 aria-hidden /> {c("chia_se.gui")}</Button>
+      <DongThuongMoi dangNhap={nguoiDung === undefined ? undefined : Boolean(nguoiDung)} />
     </div>
   );
 }

@@ -73,7 +73,7 @@ function DangNhapNhan({ y }: { y: YeuCauSao }) {
         {y.thuong ? <li className="flex gap-2"><Gift className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
           Lưu hồ sơ vào tài khoản: <b className="text-fg">tặng {y.thuong} Sao</b>{y.gia && y.thuong >= y.gia ? " — đủ mở ngay báo cáo này." : "."}</li> : null}
         {y.nguon === "hoi" && <li className="flex gap-2"><Sparkles className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />Có tài khoản: thêm câu hỏi miễn phí mỗi ngày.</li>}
-        <li className="flex gap-2"><UserPlus className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />Mời bạn bè: mỗi người bạn đăng ký, cả hai cùng nhận Sao.</li>
+        <li className="flex gap-2"><UserPlus className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />Mời bạn bè: mỗi người bạn lưu hồ sơ vào tài khoản qua link của bạn, cả hai cùng nhận Sao.</li>
       </ul>
       <p className="text-xs text-fg-faint">Đăng nhập bằng email hoặc Google, không cần mật khẩu. Hồ sơ của bạn vẫn có thể chỉ lưu trên máy.</p>
       <Button asChild className="w-full" onClick={() => ghiPhien(QUAY_VE, tiep)}>
@@ -255,7 +255,7 @@ export function NapNhanh({ can = 0 }: { can?: number }) {
       </Button>
       <p className="text-xs text-fg-faint">App ngân hàng / ví bất kỳ có VietQR. Sao vào ví trong vài giây, rồi bạn quay lại đúng trang này. Sao không đổi ra tiền, Sao mua không hết hạn.</p>
       <p className="text-sm text-fg-muted"><UserPlus className="mr-1.5 inline size-4 align-[-3px] text-gold" aria-hidden />
-        Hoặc <Link href="/tai-khoan" className="text-gold underline">mời bạn bè</Link> — mỗi người bạn đăng ký, cả hai cùng nhận Sao.</p>
+        Hoặc <Link href="/tai-khoan" className="text-gold underline">mời bạn bè</Link> — mỗi người bạn lưu hồ sơ vào tài khoản, cả hai cùng nhận Sao.</p>
       {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
     </div>
   );

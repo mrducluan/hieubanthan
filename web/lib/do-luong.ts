@@ -31,10 +31,12 @@ export type SuKien =
   // CTA-1: khối "Đọc tiếp về bạn" cuối phần xem — chỉ mã trang (tu), mã mảng đích (den), cờ cá nhân hoá, số chương khoá
   | "cross_cta_viewed" | "cross_cta_clicked" | "sao_cta_clicked" | "donate_cta_clicked"
   // CTA-1: trò "Đoán số" trên thẻ Bản đồ 5 mảng — đúng/sai + mã biến thể câu mời
-  | "guess_played";
+  | "guess_played"
+  // SAO-V "Tặng một chương": tạo link quà / mở trang nhận quà / bấm nhận — chỉ mã mảng + cờ còn dùng + kết quả, KHÔNG mã quà
+  | "gift_sent" | "gift_opened" | "gift_claimed";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
-const CHO_PHEP: Record<string, "string" | "number"> = {
+const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   feature_version: "string",
   mo_dun: "string",
   kind: "string",
@@ -43,7 +45,8 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   huu_ich: "string",
   ket_qua: "string",
   so_sao: "number",
-  chuoi: "number",      // HN-1: số ngày liên tiếp mở "Hôm nay" (đếm trên máy người dùng)
+  chuoi: "number",      // HN-1: số ngày liên tiếp mở "Hôm nay" (đếm trên máy; SAO-V: số máy chủ khi đã đăng nhập)
+  moi: "number",        // SAO-V: 1 = lần ghé đầu tiên trong ngày của tài khoản (diem_danh), 0 = đã ghé rồi / chuỗi máy
   nguon: "string",
   quan_he: "string",    // hợp đôi: nguoi_yeu / ban_be / dong_nghiep / sep / gia_dinh
   phai: "string",       // TS-PHAI: pitago / chaldea
@@ -87,16 +90,19 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   so_dau_hieu: "number", // PT-V2: số dấu hiệu máy gợi ý
   da_bat: "number",     // PT-V2: 1 = máy đọc ảnh đang bật, 0 = tắt / lỗi
   ma: "string",         // PT-V2: mã dấu hiệu người dùng xác nhận (xa_ngang…), chỉ mã
+  con_dung: "number",   // SAO-V: trang nhận quà — 1 = link quà còn dùng được, 0 = đã nhận / hết hạn / không có
+  co_ma: "boolean",     // SAO-V: share_created — link có gắn mã mời ?gt= của người đăng nhập (phễu mời ở quản trị)
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */
 const GIOI_HAN_RIENG: Record<string, number> = { mau: 60 };
 
-export function locThuocTinh(p: Record<string, unknown> = {}): Record<string, string | number> {
-  const kq: Record<string, string | number> = {};
+export function locThuocTinh(p: Record<string, unknown> = {}): Record<string, string | number | boolean> {
+  const kq: Record<string, string | number | boolean> = {};
   for (const [k, v] of Object.entries(p)) {
     const kieu = CHO_PHEP[k];
     if (kieu === "number" && typeof v === "number" && Number.isFinite(v)) kq[k] = v;
+    else if (kieu === "boolean" && typeof v === "boolean") kq[k] = v;
     // Chặn chuỗi có 4 chữ số liền (dễ là năm sinh) — trừ ma_moi (chuỗi chữ ký ngẫu nhiên).
     else if (kieu === "string" && typeof v === "string" && v.length <= (GIOI_HAN_RIENG[k] ?? GIOI_HAN_CHUOI)
              && (k === "ma_moi" || !/\d{4}/.test(v))) kq[k] = v;
@@ -111,11 +117,13 @@ const KHOA_MOI = "hbt.ma_moi";
 /** SEC-2: mã thẻ / lời mời (base64url JSON mang TÊN hiển thị) nằm trong URL (/the/…/<mã>, /hop-doi/<mã>, ?the=, ?ma=)
  *  → PostHog tự gắn $current_url / $pathname vào mọi sự kiện. Thay mã bằng ":ma" trước khi gửi; đo lường chỉ mang mã. */
 const MA_TRONG_URL = /^[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}$/;
+const MA_QUA_URL = /^[a-z0-9]{10}$/;
 export function lamSachUrl(u: string): string {
   if (!/^(https?:\/\/|\/)/.test(u)) return u;   // "$direct", "" … giữ nguyên
   try {
     const x = new URL(u, "https://hieuban.com");
-    x.pathname = x.pathname.split("/").map((d) => (MA_TRONG_URL.test(d) ? ":ma" : d)).join("/");
+    // SAO-V: mã quà /qua/<10 ký tự> cũng là khoá dùng một lần — không để lọt lên PostHog.
+    x.pathname = x.pathname.split("/").map((d, i, ds) => (MA_TRONG_URL.test(d) || (ds[i - 1] === "qua" && MA_QUA_URL.test(d)) ? ":ma" : d)).join("/");
     for (const k of ["the", "ma"]) if (x.searchParams.has(k)) x.searchParams.set(k, ":ma");
     x.hash = "";
     return /^https?:/.test(u) ? x.toString() : x.pathname + x.search;

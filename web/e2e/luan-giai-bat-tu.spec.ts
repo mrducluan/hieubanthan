@@ -12,7 +12,7 @@ const chuong = (ma: string) => BC.chuong.find((c) => c.ma === ma)!;
 
 async function moBaoCao(page: Page, bc: object = BC) {
   const goi: Record<string, Request[]> = { kiemChung: [], luu: [], tyLe: [] };
-  await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
   await page.route("**/api/battu/luan-giai", (r) => r.fulfill({ json: bc }));
   await page.route("**/api/kiem-chung/ty-le**", (r) => { goi.tyLe!.push(r.request()); return r.fulfill({ json: FX.ty_le }); });
   await page.route("**/api/kiem-chung", (r) => { goi.kiemChung!.push(r.request()); return r.fulfill({ json: { ok: false, ly_do: "chua_bat" } }); });
@@ -109,7 +109,7 @@ test("Bát tự điện thoại 360px: không cuộn ngang, biểu đồ và dò
 test("Bát tự SAO-2: chương 1 đọc được (kèm thanh sức tự thân), 12 chương khoá, biểu đồ chương 2 không lộ", async ({ page }) => {
   const [dau, ...sau] = BC.chuong;
   const { thoi_gian_bieu: _tg, ...conLai } = BC;
-  await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
   await page.route("**/api/battu/luan-giai", (r) => r.fulfill({ json: {
     ...conLai, so_khoa: sau.length, phi: { sao: 10, ly_do: "xem_truoc", khoa: true, dang_nhap: true, so_du: 20 },
     cot_loi: BC.cot_loi.filter((h) => h.tu_chuong === dau!.ma),

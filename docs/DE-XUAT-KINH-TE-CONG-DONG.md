@@ -52,8 +52,11 @@ Muốn một cơ chế "token / cộng đồng" để: (a) tăng người dùng,
 ### Tầng 1 — Sao (credit nội bộ) · làm ngay
 
 - **Kiếm Sao (miễn phí):**
-  - Mời bạn: **cả hai +20 Sao** khi người được mời *tạo tài khoản + hoàn tất bài đọc đầu tiên* (thưởng hai phía — mô
-    hình Dropbox/Uber; tăng tỷ lệ nhận lời mời). Trần **20 lượt thưởng/người mời/tháng**.
+  - Mời bạn: **cả hai +20 Sao** khi người được mời *có tài khoản + lưu hồ sơ vào tài khoản* (thưởng hai phía — mô
+    hình Dropbox/Uber). Đúng theo code (0008/0011, nới ở 0025 — "hướng A": bỏ giới hạn tài khoản mới ≤ 7 ngày, mỗi
+    tài khoản chỉ được tính một lần trong đời, chặn mời vòng). Trần **20 lượt thưởng/người mời/30 ngày** (đổi ở /quan-tri).
+  - Hoa hồng nạp Sao (0025, chủ dự án duyệt 2026-10-25): bạn được mời nạp Sao → người mời nhận **20%** số Sao của đơn
+    nạp đầu (mặc định; % / số đơn / thời hạn / trần đổi ở /quan-tri), trả bằng Sao tặng, một tầng, thu hồi khi hoàn tiền.
   - Chào mừng: +10 Sao khi lưu hồ sơ vào tài khoản.
   - Góp ý được duyệt, câu hỏi hay được đưa vào kho, đóng góp nội dung KB được chuyên gia duyệt: +10…+50 Sao.
 - **Tiêu Sao** (chỉ cho thứ có **chi phí biên thật** — không khoá phần cốt lõi đang miễn phí):

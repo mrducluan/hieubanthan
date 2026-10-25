@@ -1,6 +1,7 @@
 "use client";
 // HN-1 — thẻ "Hôm nay của bạn". Engine tính mọi con số (web chỉ hiển thị). Chuỗi ngày ghé đếm trên máy người dùng
 // (localStorage, không gửi đi) — mất chuỗi không bị phạt gì, chỉ bắt đầu lại. Chia sẻ không kèm ngày sinh.
+// SAO-V (0025): người đã đăng nhập thấy chuỗi máy chủ (mọi máy) + mốc thưởng Sao — components/khung/ChuoiNgay.tsx.
 // HN-2: "Hôm nay bạn định làm gì?" — chọn ý định hoặc gõ một câu; engine nhận diện ý định bằng luật từ khoá, không lưu
 // câu, không trả lại câu. Trên máy chỉ nhớ MÃ ý định của đúng ngày đó (mở lại trong ngày vẫn thấy).
 import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
@@ -9,11 +10,12 @@ import { HoiHomQua } from "@/components/khung/HoiHomQua";
 import { HoiSau30Ngay } from "@/components/khung/HoiSau30Ngay";
 import { QueRieng } from "@/components/kinh-dich/QueRieng";
 import { MoiCaiApp } from "@/components/khung/MoiCaiApp";
+import { ChuoiNgay } from "@/components/khung/ChuoiNgay";
 import { nhoYDinhHomNay } from "@/lib/hom-qua";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  BookOpen, Briefcase, CalendarDays, CalendarHeart, Clock, Hexagon, Coffee, Dumbbell, Flame, Globe2, Handshake, Heart, Home, LifeBuoy, MessageCircleQuestion,
+  BookOpen, Briefcase, CalendarDays, CalendarHeart, Clock, Hexagon, Coffee, Dumbbell, Globe2, Handshake, Heart, Home, LifeBuoy, MessageCircleQuestion,
   MoonStar, Palette, Plane, Rocket, Share2, Sparkles, Sunrise, Wallet, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -122,7 +124,7 @@ export function HomNay() {
   const c = useChu();
   const [the, setThe] = useState<TheHomNay | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
-  const [chuoi, setChuoi] = useState<number | null>(null);
+  const [chuoi, setChuoi] = useState<{ so: number; batDauLai: boolean } | null>(null);
   const [daChep, setDaChep] = useState(false);
   const daGhi = useRef(false);
   const [chon, setChon] = useState<string[]>([]);
@@ -178,9 +180,10 @@ export function HomNay() {
     taiThe(daNho, "").then((t) => {
       if (huy) return;
       setThe(t); setLoi(null);
-      const moi = capNhatChuoi(docChuoi(), t.ngay_xem);
+      const cu = docChuoi();
+      const moi = capNhatChuoi(cu, t.ngay_xem);
       try { localStorage.setItem(KHOA_CHUOI, JSON.stringify(moi)); } catch { /* chế độ riêng tư: bỏ qua chuỗi */ }
-      setChuoi(moi.chuoi);
+      setChuoi({ so: moi.chuoi, batDauLai: Boolean(cu && cu.ngay !== t.ngay_xem && moi.chuoi === 1) });
       if (!daGhi.current) { daGhi.current = true; ghi("daily_viewed", { chuoi: moi.chuoi }); }
     }).catch((e: Error) => { if (!huy) setLoi(e.message); });
     return () => { huy = true; };
@@ -274,11 +277,7 @@ export function HomNay() {
             </div>
             <SoNoiBatNgay hoSo={hoSo} />
             <div className="flex flex-wrap items-center justify-between gap-3">
-              {chuoi !== null && (
-                <p className="inline-flex items-center gap-1.5 text-sm text-fg-muted" data-testid="chuoi-ngay">
-                  <Flame className="size-4 text-gold" aria-hidden />{chuoi > 1 ? `Bạn ghé ${chuoi} ngày liên tiếp` : "Ngày đầu tiên của chuỗi — mai ghé tiếp nhé"}
-                </p>
-              )}
+              {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} />}
               <Button size="sm" variant="secondary" onClick={() => void chiaSe()}><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ"}</Button>
             </div>
           </Card>

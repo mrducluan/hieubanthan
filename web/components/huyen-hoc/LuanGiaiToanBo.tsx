@@ -21,6 +21,9 @@ import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/
 import { BaoCaoDoiSongView } from "@/components/luan-giai/BaoCaoDoiSong";
 import { LuuBaiLuan } from "@/components/luan-giai/LuuBaiLuan";
 import { laBaoCaoDoiSong } from "@/components/luan-giai/kieu";
+import { ChuQua } from "@/components/luan-giai/ChuQua";
+import { TangChuong } from "@/components/luan-giai/TangChuong";
+import { mangLuanGiai } from "@/lib/luan-giai-mang";
 
 
 type ChuongMo = { ma: string; tieu_de: string; doan: string[]; van_ai?: string; che_do?: string; thuat_ngu?: ThuatNgu[]; khoa?: false };
@@ -33,8 +36,12 @@ interface BaoCao {
   dien_dat?: "ai" | "tron" | "mau";
   trang_thai: string;
   so_khoa?: number;
-  phi: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null };
+  phi: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null;
+    /** SAO-V: chương bạn bè tặng (đọc thêm một chương sau các chương miễn phí). */ chuong_tang?: number; chuong_tang_ma?: string };
 }
+
+/** Đã mở toàn bộ bằng Sao (hôm nay) → được tặng bạn bè một chương. */
+const DA_MO_BANG_SAO = new Set(["da_tru_sao", "da_mo_hom_nay"]);
 
 /** `than`: thân lời gọi khác `{ la_so }` (vd bản đồ con số gửi họ tên + ngày sinh); `moDun` cho đo lường; `tuMo`: tự tải
  *  bản xem trước (chương miễn phí + lời mời) ngay khi hiện, không chờ bấm. */
@@ -48,11 +55,13 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
   // đăng nhập / nạp nên lá số quay về có thể khác phái mà vẫn là cùng người.
   const hs = useHoSo();
   const nguoi = hs ? { t: hs.ho_ten, d: hs.ngay, m: hs.thang, y: hs.nam, g: hs.gio ?? null, s: hs.gioi_tinh ?? null, n: hs.noi_sinh ?? null } : null;
+  const maCua = moDun ?? (duongDan.includes("battu") ? "battu" : duongDan.includes("thanso") ? "thanso" : "tuvi");
   useEffect(() => {
     let huy = false;
-    fetch("/api/luan-giai/phi").then((r) => r.json()).then((d) => { if (!huy) setPhi(d); }).catch(() => { /* coi như miễn phí */ });
+    // SAO-V: công tắc thu Sao có thể bật riêng từng mảng → hỏi đúng mảng đang xem.
+    fetch(`/api/luan-giai/phi?mo_dun=${encodeURIComponent(maCua)}`).then((r) => r.json()).then((d) => { if (!huy) setPhi(d); }).catch(() => { /* coi như miễn phí */ });
     return () => { huy = true; };
-  }, []);
+  }, [maCua]);
   // Chỉ nhận phản hồi của lượt gọi mới nhất — đổi đầu vào (vd cách tính Đường đời) khi một lượt cũ còn bay thì lượt cũ
   // về muộn không được ghi đè báo cáo mới.
   const luot = useRef(0);
@@ -77,7 +86,6 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
   // CTA-1: báo trạng thái báo cáo cho nút Sao ở khối "Đọc tiếp" cuối trang — nút đó gọi đúng hàm mở của báo cáo này.
   const taiRef = useRef(tai);
   taiRef.current = tai;
-  const maCua = moDun ?? (duongDan.includes("battu") ? "battu" : duongDan.includes("thanso") ? "thanso" : "tuvi");
   useEffect(() => dangKyCuaLuanGiai({
     moDun: maCua, daTai: Boolean(bc), soKhoa: bc?.so_khoa ?? 0, tongChuong: bc?.chuong.length ?? 0,
     mo: () => void taiRef.current(true), doc: () => void taiRef.current(),
@@ -129,12 +137,15 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
       </div>
     );
   }
+  const mangQua = mangLuanGiai(bc.mo_dun) ?? mangLuanGiai(maCua);
+  const tang = DA_MO_BANG_SAO.has(bc.phi?.ly_do) && mangQua ? <TangChuong moDun={mangQua} /> : null;
+  const chuongQua = bc.phi?.chuong_tang ? bc.phi.chuong_tang_ma : undefined;
   if (laBaoCaoDoiSong(bc)) {
     const coAi = bc.chuong.some((c) => !c.khoa && c.van_ai);
     // KC-1: một khuôn cho mọi mảng — Tử vi, Bát tự, Bản đồ con số cùng component; chỉ Tử vi lưu bài (LG-ĐS).
     const tenLuu = { tuvi: "Luận giải Tử vi", battu: "Luận giải Bát tự", thanso: "Bản đồ con số" }[bc.mo_dun] ?? "Luận giải";
     return (
-      <BaoCaoDoiSongView bc={bc} ten={ten} goc={goc} nhan={bc.mo_dun === "thanso" ? "Bản đồ con số" : "Luận giải toàn bộ"}
+      <BaoCaoDoiSongView bc={bc} ten={ten} goc={goc} nhan={bc.mo_dun === "thanso" ? "Bản đồ con số" : "Luận giải toàn bộ"} chuongQua={chuongQua}
         hanhDong={<>
           {coAi && (
             <Button variant="ghost" size="sm" aria-pressed={goc} onClick={() => setGoc((v) => !v)}>
@@ -148,8 +159,9 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
           <div className="mt-6">
             <LuuBaiLuan moDun={bc.mo_dun} tieuDe={`${tenLuu} — ${hs?.ho_ten ?? "hồ sơ của bạn"}`} noiDung={banLuu}
               dangNhap={bc.phi?.dang_nhap} />
+            {tang}
           </div>
-        ) : null}
+        ) : tang}
       />
     );
   }
@@ -187,6 +199,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
         {bc.chuong.map((c, i) => c.khoa ? null : (
           <section key={c.ma} id={`lg-${c.ma}`} className="scroll-mt-24">
             <h3 className="font-serif text-2xl"><span className="text-gold">{i + 1}.</span> {c.tieu_de}</h3>
+            {c.ma === chuongQua && <ChuQua />}
             <div className="prose-vn mt-3 space-y-3 text-[0.97rem] leading-relaxed text-fg-muted">
               {c.van_ai && !goc
                 ? doanCoThuatNgu(c.van_ai.replace(/\n\s*\n/g, "\n\n"), c.thuat_ngu)
@@ -199,6 +212,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
       </div>
       {bc.so_khoa ? <PhanKhoa bc={bc} dang={dang} loi={loi} moKhoa={() => void tai(true)} /> : null}
       <p className="mt-8 border-t border-line pt-4 text-sm text-fg-faint">{bc.ket}</p>
+      {tang}
     </article>
   );
 }

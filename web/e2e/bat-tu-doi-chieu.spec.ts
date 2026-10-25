@@ -16,7 +16,7 @@ test("kể lại các năm đã qua theo đúng cách 2 → kết luận cách 2
   const cau = dc.cau as Cau[];
   expect(cau.length).toBeGreaterThanOrEqual(3);
 
-  await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
   await page.route("**/api/battu/luan-giai", (r) => r.fulfill({ json: FX.bao_cao }));
   await page.route("**/api/kiem-chung/ty-le**", (r) => r.fulfill({ json: FX.ty_le }));
   await napHoSo(page);

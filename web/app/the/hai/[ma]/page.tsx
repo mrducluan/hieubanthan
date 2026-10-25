@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { ma } = await params;
   const nd = docMaHai(ma);
   if (!nd) return { title: "Thẻ điểm hai người", robots: { index: false } };
-  const [a, b] = tenHai(nd.a, nd.b);
+  const [a, b] = tenHai(nd.a, nd.q);
   const title = `${a} & ${b}: ${nd.p}/100 — ${NHAN_MUC_HAI[nd.m]}`;
   const anh = [`/og/hai?ma=${encodeURIComponent(ma)}`];
   return {
@@ -43,7 +43,7 @@ export default async function Page({ params }: Props) {
     );
   }
   const tu = tuTuMa("hp", ma);
-  const [a, b] = tenHai(nd.a, nd.b);
+  const [a, b] = tenHai(nd.a, nd.q);
   const mau = MAU_MUC_HAI[nd.m];
   return (
     <div className="mx-auto max-w-md py-6 text-center" data-testid="the-hai">

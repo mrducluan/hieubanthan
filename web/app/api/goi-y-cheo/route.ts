@@ -6,6 +6,7 @@ import { z } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { MANG_TRANG } from "@/lib/goi-y-cheo";
 import { dangThuSao, giaLuanGiaiSao } from "@/lib/luan-giai-sao";
+import { mangLuanGiai } from "@/lib/luan-giai-mang";
 import { coUngHo } from "@/lib/ung-ho";
 
 const Input = z.object({
@@ -29,7 +30,8 @@ export async function POST(req: Request): Promise<NextResponse> {
   if (!p.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
   const [kq, thu, gia] = await Promise.all([
     goiEngineDaKiem(p.data, "/v1/goi-y-cheo", dauNguoiGoi(req)),
-    dangThuSao().catch(() => false),
+    // Nút Sao của khối này mời đọc báo cáo của chính trang (Thần số / Tử vi / Bát tự); trang khác dẫn sang /tu-vi.
+    dangThuSao(mangLuanGiai(p.data.mang_hien_tai) ?? "tuvi").catch(() => false),
     giaLuanGiaiSao().catch(() => 10),
   ]);
   if (!kq.ok) return kq.res;

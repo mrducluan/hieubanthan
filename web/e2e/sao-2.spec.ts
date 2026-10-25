@@ -23,7 +23,7 @@ const DAY_DU = { ...XEM_TRUOC, so_khoa: 0, phi: { sao: 10, ly_do: "da_tru_sao", 
 ] };
 
 async function giaLapLuanGiai(page: Page, moKhoa: (route: Parameters<Parameters<Page["route"]>[1]>[0]) => Promise<void>) {
-  await page.route("**/api/luan-giai/phi", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
   await page.route("**/api/tuvi/luan-giai", (r) => r.request().headers()["x-mo-khoa"] === "1" ? moKhoa(r) : r.fulfill({ json: XEM_TRUOC }));
   await napHoSo(page);
   await page.goto("/tu-vi");

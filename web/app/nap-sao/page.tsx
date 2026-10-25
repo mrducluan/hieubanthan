@@ -32,7 +32,9 @@ export default async function Page() {
       <section className="mt-10 space-y-2 text-sm leading-relaxed text-fg-muted" aria-label="Điều cần biết">
         <h2 className="font-serif text-xl text-fg">Điều cần biết</h2>
         <ul className="list-disc space-y-1.5 pl-5">
-          <li>Sao là điểm dùng trong Hiểu Bản Thân: <b className="text-fg">không đổi ra tiền, không chuyển cho người khác</b>. Sao mua không hết hạn.</li>
+          <li>Sao là điểm dùng trong Hiểu Bản Thân: <b className="text-fg">không đổi ra tiền, không chuyển cho người khác</b>.</li>
+          <li data-testid="sao-mua-khong-het-han"><b className="text-fg">Sao mua không hết hạn.</b> Sao được tặng (chào mừng, mời bạn…) có hạn 365 ngày và được trừ trước khi bạn dùng, để Sao bạn mua còn lâu nhất.</li>
+          <li data-testid="minh-bach-loi-moi">Nếu bạn đến từ lời mời, người mời được thưởng Sao tặng — không trừ gì của bạn: bạn vẫn nhận đủ số Sao của gói, giá không đổi.</li>
           <li>Quét mã QR bằng app ngân hàng hoặc ví điện tử (MoMo, ZaloPay…) có hỗ trợ VietQR. Đừng sửa số tiền hay nội dung chuyển khoản.</li>
           <li>Thẻ Visa/Mastercard và thanh toán quốc tế sẽ mở sau.</li>
           <li>Trả tiền rồi mà chưa thấy Sao sau 10 phút: gửi mã đơn qua <Link href="/lien-he" className="text-gold hover:underline">trang Liên hệ</Link>, ban quản trị đối soát và cộng tay hoặc hoàn tiền.</li>

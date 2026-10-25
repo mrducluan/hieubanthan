@@ -13,15 +13,33 @@ import { dauNguoiGoi, goiEngineDaKiem as goiEngine } from "@/lib/proxy";
 import { layCauHinh } from "@/lib/cau-hinh";
 import { biMat, chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
 import { catXemTruoc, type BaoCaoDay } from "@/lib/sao-xem-truoc";
+import { mangLuanGiai } from "@/lib/luan-giai-mang";
 
 /** Giá mặc định; QT-2: chủ sở hữu đổi ở /quan-tri/cai-dat (khoá luan_giai.gia_sao). */
 export const GIA_LUAN_GIAI_SAO = 10;
 export const giaLuanGiaiSao = () => layCauHinh<number>("luan_giai.gia_sao");
 
-/** Công tắc: cài đặt luan_giai.thu_sao (chưa đặt thì theo env LUAN_GIAI_THU_SAO=1) VÀ đã cấu hình Supabase + bí mật
- *  ký khoá giao dịch (SAO_KHOA_SECRET, lùi về LOI_MOI_SECRET). Thiếu bí mật → MỞ (miễn phí), không khoá nhầm. */
-export async function dangThuSao(): Promise<boolean> {
-  return coTaiKhoan() && Boolean(biMat()) && (await layCauHinh<boolean>("luan_giai.thu_sao"));
+/** Công tắc: (cài đặt chung luan_giai.thu_sao — chưa đặt thì theo env LUAN_GIAI_THU_SAO=1 — HOẶC công tắc riêng của
+ *  mảng luan_giai.thu_sao.<tuvi|battu|thanso>, SAO-V: bật Bản đồ con số trước) VÀ đã cấu hình Supabase + bí mật ký khoá
+ *  giao dịch (SAO_KHOA_SECRET, lùi về LOI_MOI_SECRET). Thiếu bí mật → MỞ (miễn phí), không khoá nhầm.
+ *  `moDun`: mã mảng (nhận cả bí danh như thanso_sau, tu_vi); không truyền / không thuộc ba mảng → chỉ xét công tắc chung. */
+export async function dangThuSao(moDun?: string | null): Promise<boolean> {
+  if (!coTaiKhoan() || !biMat()) return false;
+  if (await layCauHinh<boolean>("luan_giai.thu_sao")) return true;
+  const mang = mangLuanGiai(moDun);
+  if (!mang) return false;
+  try { return Boolean(await layCauHinh<boolean>(`luan_giai.thu_sao.${mang}`)); } catch { return false; }
+}
+
+/** SAO-V "Tặng một chương": số chương bạn bè tặng cho người đang xem ở mảng này (0/1, hàm SQL chuong_duoc_tang,
+ *  migration 0025). Chưa chạy migration / lỗi → 0 (không mở nhầm). */
+async function chuongDuocTang(phien: Awaited<ReturnType<typeof phienNguoiDung>>, moDun: string): Promise<number> {
+  const mang = mangLuanGiai(moDun);
+  if (!phien || !mang) return 0;
+  try {
+    const { data, error } = await phien.sb.rpc("chuong_duoc_tang", { p_mo_dun: mang });
+    return !error && Number(data) >= 1 ? 1 : 0;
+  } catch { return 0; }
 }
 
 const MIEN_PHI = { sao: 0, ly_do: "mien_phi_thu_nghiem" } as const;
@@ -44,7 +62,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     return !kq.ok && kq.res.status === 422 ? goiEngine(data, p, dau) : kq;
   };
 
-  if (!(await dangThuSao())) {
+  if (!(await dangThuSao(moDun))) {
     const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
     return kq.ok ? NextResponse.json({ ...(kq.body as object), phi: MIEN_PHI }) : kq.res;
   }
@@ -67,13 +85,18 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   const moKhoa = req.headers.get("x-mo-khoa") === "1";
 
   if (!daMo && !moKhoa) {
-    const kq = await goiEngineDaKiem({ ...parsed.data, dien_dat_toi_da: mienPhi }, path, dauNguoiGoi(req));
+    // Quà của bạn bè: thêm đúng một chương sau các chương miễn phí (chương mienPhi + 1), cùng đường cắt + diễn đạt AI.
+    const tang = await chuongDuocTang(phien, moDun);
+    const kq = await goiEngineDaKiem({ ...parsed.data, dien_dat_toi_da: mienPhi + tang }, path, dauNguoiGoi(req));
     if (!kq.ok) return kq.res;
-    const ban = catXemTruoc(kq.body as BaoCaoDay, mienPhi);
+    const day = kq.body as BaoCaoDay;
+    const ban = catXemTruoc(day, mienPhi + tang);
+    const maTang = tang ? day.chuong[mienPhi]?.ma ?? null : null;
     let soDu: number | null = null;
     if (phien) { const { data } = await phien.sb.rpc("so_du_sao"); soDu = typeof data === "number" ? data : null; }
     return NextResponse.json({ ...ban, phi: { sao: gia, ly_do: "xem_truoc", khoa: ban.so_khoa > 0, dang_nhap: Boolean(phien), so_du: soDu,
-      thuong_chao_mung: phien ? null : await layCauHinh<number>("sao.thuong.chao_mung") } });
+      thuong_chao_mung: phien ? null : await layCauHinh<number>("sao.thuong.chao_mung"),
+      ...(maTang ? { chuong_tang: 1, chuong_tang_ma: maTang } : {}) } });
   }
 
   if (!phien) {

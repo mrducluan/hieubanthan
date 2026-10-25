@@ -34,7 +34,13 @@ export const TEN_TIEU_CHI_HAI: Record<string, string> = {
 export const MAU_MUC_HAI: Record<string, string> = {
   de_hoa_hop: "#6fd3b5", hop_neu_hieu: "#e9c46a", can_dung_hoa_nhieu: "#f5aa50", nhieu_khac_biet: "#e0965a",
 };
-export const tenHai = (a: string, b: string) => [a.trim() || "Bạn", b.trim() || "Người ấy"] as const;
+/** Người kia trên thẻ hai người — không bao giờ là tên thật (NĐ 13/2023: người đó chưa đồng ý), chỉ theo quan hệ. */
+export const NGUOI_KIA_HAI: Record<string, string> = {
+  nguoi_yeu: "Người yêu", vo_chong: "Bạn đời", ban_be: "Người bạn", dong_nghiep: "Đồng nghiệp", doi_tac: "Đối tác",
+};
+/** [tên người gửi, cách gọi người kia]. Tham số thứ hai là QUAN HỆ (mã), không phải tên. */
+export const tenHai = (a: string, quanHe?: string) =>
+  [a.trim() || "Bạn", (quanHe && NGUOI_KIA_HAI[quanHe]) || "Người ấy"] as const;
 
 /** UI-PT2 P7 — thẻ "Nhà của bạn": nhãn + màu mức (cùng tông chip-muc của web, không đỏ). */
 export const TEN_PHONG_THE: Record<string, string> = {

@@ -89,7 +89,7 @@ test("CTA Sao — công tắc BẬT: còn chương khoá → 'Mở N chương c�
     const r = await route.fetch();
     await route.fulfill({ response: r, json: { ...(await r.json()), thu_sao: true, gia_sao: 10 } });
   });
-  await page.route("**/api/luan-giai/phi", (route) => route.fulfill({ json: { thu: true, gia: 10 } }));
+  await page.route("**/api/luan-giai/phi*", (route) => route.fulfill({ json: { thu: true, gia: 10 } }));
   await page.route("**/api/tuvi/luan-giai", async (route) => {
     if (route.request().headers()["x-mo-khoa"] === "1") {
       await route.fulfill({ status: 402, json: { can: "dang_nhap", error: "Đăng nhập để mở toàn bộ báo cáo." } });

@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { BieuDoNguHanh, DaiVanHaiCach, ThanhThan } from "./BieuDoBatTu";
 import { DongMuoiNam } from "./DongMuoiNam";
 import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
+import { ChuQua } from "./ChuQua";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
 import { maMauBaoCao, NHAN_MUC, type BaoCaoDoiSong, type ChuongDoiSongMo, type MocDaiHan, type Muc } from "./kieu";
 
@@ -27,10 +28,11 @@ export function ChipMuc({ muc, nhan, className }: { muc?: Muc; nhan?: string; cl
   );
 }
 
-export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan = "Luận giải toàn bộ" }: {
+export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan = "Luận giải toàn bộ", chuongQua }: {
   bc: BaoCaoDoiSong; ten: string; /** hiện bản dữ liệu gốc thay bản diễn đạt AI */ goc?: boolean;
   hanhDong?: ReactNode; phanKhoa?: ReactNode; chanTrang?: ReactNode; /** tắt dòng kiểm chứng (vd bài đã lưu cũ) */ kiemChung?: boolean;
   /** Nhãn nhỏ trên tiêu đề (KC-1: mỗi mảng một tên gói). */ nhan?: string;
+  /** SAO-V: mã chương bạn bè tặng — ghi "Chương này là quà của một người bạn". */ chuongQua?: string;
 }) {
   const tyLe = useTyLe(kiemChung ? maMauBaoCao(bc) : []);
   const cotLoi = (bc.cot_loi ?? []).filter((h) => !h.dang_xem_lai);
@@ -81,7 +83,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
 
         <div className="mt-8 space-y-12">
           {bc.chuong.map((c, i) => c.khoa ? null : (
-            <Chuong key={c.ma} c={c} so={i + 1} goc={goc} thoiGian={c.ma === "cuoc_doi" ? bc.thoi_gian_bieu : undefined} />
+            <Chuong key={c.ma} c={c} so={i + 1} goc={goc} thoiGian={c.ma === "cuoc_doi" ? bc.thoi_gian_bieu : undefined} qua={c.ma === chuongQua} />
           ))}
         </div>
         {phanKhoa}
@@ -92,7 +94,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
   );
 }
 
-function Chuong({ c, so, goc, thoiGian }: { c: ChuongDoiSongMo; so: number; goc: boolean; thoiGian?: MocDaiHan[] }) {
+function Chuong({ c, so, goc, thoiGian, qua = false }: { c: ChuongDoiSongMo; so: number; goc: boolean; thoiGian?: MocDaiHan[]; qua?: boolean }) {
   const hop = (c.hop ?? []).filter((h) => !h.dang_xem_lai);
   return (
     <section id={`lg-${c.ma}`} aria-labelledby={`lg-tieu-de-${c.ma}`} className="scroll-mt-24" data-testid={`lg-chuong-${c.ma}`}>
@@ -101,6 +103,7 @@ function Chuong({ c, so, goc, thoiGian }: { c: ChuongDoiSongMo; so: number; goc:
         <ChipMuc muc={c.muc} nhan={c.nhan_muc} />
         <MucCachChinh hai={c.hai_cach_muc} />
       </div>
+      {qua && <ChuQua />}
       {c.tom_tat && <p className="mt-3 text-lg leading-relaxed text-fg sm:text-xl" data-testid="tom-tat">{c.tom_tat}</p>}
       {c.than_do && <ThanhThan than={c.than_do} />}
       {c.bieu_do && <BieuDoNguHanh bd={c.bieu_do} haiCach={c.hai_cach} />}
