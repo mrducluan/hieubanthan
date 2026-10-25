@@ -43,7 +43,8 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   huu_ich: "string",
   ket_qua: "string",
   so_sao: "number",
-  chuoi: "number",      // HN-1: số ngày liên tiếp mở "Hôm nay" (đếm trên máy người dùng)
+  chuoi: "number",      // HN-1: số ngày liên tiếp mở "Hôm nay" (đếm trên máy; SAO-V: số máy chủ khi đã đăng nhập)
+  moi: "number",        // SAO-V: 1 = lần ghé đầu tiên trong ngày của tài khoản (diem_danh), 0 = đã ghé rồi / chuỗi máy
   nguon: "string",
   quan_he: "string",    // hợp đôi: nguoi_yeu / ban_be / dong_nghiep / sep / gia_dinh
   phai: "string",       // TS-PHAI: pitago / chaldea
