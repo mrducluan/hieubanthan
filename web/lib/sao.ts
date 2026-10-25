@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 
 export interface DongSao { id: number; so_luong: number; loai: string; ghi_chu: string | null; het_han: string | null; tao_luc: string }
-export type KetQuaThuong = "da_thuong" | "da_nhan" | "tu_moi" | "khong_hop_le" | "tai_khoan_cu" | "chua_luu_ho_so";
+export type KetQuaThuong = "da_thuong" | "da_nhan" | "tu_moi" | "khong_hop_le" | "tai_khoan_cu" | "chua_luu_ho_so" | "moi_vong";
 
 export const TEN_LOAI: Record<string, string> = {
   chao_mung: "Chào mừng", moi_ban: "Mời bạn", duoc_moi: "Nhận lời mời", dung: "Đã dùng", mua: "Mua", dieu_chinh: "Điều chỉnh", nhiem_vu: "Nhiệm vụ",
+  hoa_hong: "Hoa hồng", chuoi: "Chuỗi ngày ghé",
 };
 
 async function sb() {
@@ -61,4 +62,57 @@ export function useMaCuaToi(dangNhap: boolean): string | null {
     return () => { huy = true; };
   }, [dangNhap]);
   return ma;
+}
+
+// ---------------------------------------------------------------- SAO-V (migration 0025)
+/** Ví chi tiết: Sao mua (không hết hạn) và Sao tặng (hạn 365 ngày) trong số dư. Tiêu luôn trừ Sao tặng trước. */
+export interface ViChiTiet { so_du: number; sao_mua: number; sao_tang: number }
+export async function viChiTiet(): Promise<ViChiTiet> {
+  const { data, error } = await (await sb()).rpc("vi_sao_chi_tiet");
+  if (error) throw new Error("Chưa đọc được ví Sao.");
+  return data as ViChiTiet;
+}
+
+/** Hoa hồng của người mời: chỉ ngày + số Sao + trạng thái (không lộ bạn nào nạp, không số tiền). */
+export interface HoaHong {
+  bat: boolean; phan_tram: number; so_don: number; thang: number; ban_da_moi: number; tong_sao: number;
+  lan: { ngay: string; sao: number; trang_thai: "da_cong" | "qua_tran" | "thu_hoi" }[];
+}
+export async function hoaHongCuaToi(): Promise<HoaHong> {
+  const { data, error } = await (await sb()).rpc("hoa_hong_cua_toi");
+  if (error) throw new Error("Chưa đọc được hoa hồng.");
+  return data as HoaHong;
+}
+
+/** Chuỗi ngày ghé (giờ VN). Gọi nhiều lần trong ngày không cộng thêm. */
+export interface DiemDanh { ngay: string; chuoi: number; dai_nhat: number; moi: boolean; bat: boolean; moc: number; sao_moc: number; con_ngay: number; sao: number }
+export async function diemDanh(): Promise<DiemDanh> {
+  const { data, error } = await (await sb()).rpc("diem_danh");
+  if (error) throw new Error("Chưa ghi được ngày ghé.");
+  return data as DiemDanh;
+}
+
+/** Tặng một chương (quà là nội dung, không phải Sao). */
+export type MoDunQua = "tuvi" | "battu" | "thanso";
+export type KetQuaQua = "da_tao" | "chua_mo" | "chua_mo_bao_cao" | "het_luot" | "khong_hop_le";
+export async function taoQuaChuong(moDun: MoDunQua): Promise<{ ket_qua: KetQuaQua; ma?: string; het_han?: string; con_lai?: number; tran?: number }> {
+  const { data, error } = await (await sb()).rpc("tao_qua_chuong", { p_mo_dun: moDun });
+  if (error) throw new Error("Chưa tạo được quà.");
+  return data as { ket_qua: KetQuaQua; ma?: string; het_han?: string; con_lai?: number; tran?: number };
+}
+export type KetQuaNhanQua = "da_nhan" | "tu_tang" | "da_dung" | "het_han" | "chua_luu_ho_so" | "da_co_qua" | "khong_hop_le";
+export async function nhanQuaChuong(ma: string): Promise<{ ket_qua: KetQuaNhanQua; mo_dun?: MoDunQua }> {
+  const { data, error } = await (await sb()).rpc("nhan_qua_chuong", { p_ma: ma });
+  if (error) throw new Error("Chưa nhận được quà.");
+  return data as { ket_qua: KetQuaNhanQua; mo_dun?: MoDunQua };
+}
+export interface QuaCuaToi {
+  bat: boolean; tran: number; da_gui_30_ngay: number; co_the_tang: boolean;
+  gui: { ma: string; mo_dun: MoDunQua; het_han: string; da_nhan: boolean }[];
+  nhan: { mo_dun: MoDunQua; den: string }[];
+}
+export async function quaCuaToi(): Promise<QuaCuaToi> {
+  const { data, error } = await (await sb()).rpc("qua_cua_toi");
+  if (error) throw new Error("Chưa đọc được quà.");
+  return data as QuaCuaToi;
 }
