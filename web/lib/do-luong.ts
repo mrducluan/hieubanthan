@@ -31,7 +31,9 @@ export type SuKien =
   // CTA-1: khối "Đọc tiếp về bạn" cuối phần xem — chỉ mã trang (tu), mã mảng đích (den), cờ cá nhân hoá, số chương khoá
   | "cross_cta_viewed" | "cross_cta_clicked" | "sao_cta_clicked" | "donate_cta_clicked"
   // CTA-1: trò "Đoán số" trên thẻ Bản đồ 5 mảng — đúng/sai + mã biến thể câu mời
-  | "guess_played";
+  | "guess_played"
+  // SAO-V "Tặng một chương": tạo link quà / mở trang nhận quà / bấm nhận — chỉ mã mảng + cờ còn dùng + kết quả, KHÔNG mã quà
+  | "gift_sent" | "gift_opened" | "gift_claimed";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number"> = {
@@ -87,6 +89,7 @@ const CHO_PHEP: Record<string, "string" | "number"> = {
   so_dau_hieu: "number", // PT-V2: số dấu hiệu máy gợi ý
   da_bat: "number",     // PT-V2: 1 = máy đọc ảnh đang bật, 0 = tắt / lỗi
   ma: "string",         // PT-V2: mã dấu hiệu người dùng xác nhận (xa_ngang…), chỉ mã
+  con_dung: "number",   // SAO-V: trang nhận quà — 1 = link quà còn dùng được, 0 = đã nhận / hết hạn / không có
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */
@@ -111,11 +114,13 @@ const KHOA_MOI = "hbt.ma_moi";
 /** SEC-2: mã thẻ / lời mời (base64url JSON mang TÊN hiển thị) nằm trong URL (/the/…/<mã>, /hop-doi/<mã>, ?the=, ?ma=)
  *  → PostHog tự gắn $current_url / $pathname vào mọi sự kiện. Thay mã bằng ":ma" trước khi gửi; đo lường chỉ mang mã. */
 const MA_TRONG_URL = /^[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}$/;
+const MA_QUA_URL = /^[a-z0-9]{10}$/;
 export function lamSachUrl(u: string): string {
   if (!/^(https?:\/\/|\/)/.test(u)) return u;   // "$direct", "" … giữ nguyên
   try {
     const x = new URL(u, "https://hieuban.com");
-    x.pathname = x.pathname.split("/").map((d) => (MA_TRONG_URL.test(d) ? ":ma" : d)).join("/");
+    // SAO-V: mã quà /qua/<10 ký tự> cũng là khoá dùng một lần — không để lọt lên PostHog.
+    x.pathname = x.pathname.split("/").map((d, i, ds) => (MA_TRONG_URL.test(d) || (ds[i - 1] === "qua" && MA_QUA_URL.test(d)) ? ":ma" : d)).join("/");
     for (const k of ["the", "ma"]) if (x.searchParams.has(k)) x.searchParams.set(k, ":ma");
     x.hash = "";
     return /^https?:/.test(u) ? x.toString() : x.pathname + x.search;

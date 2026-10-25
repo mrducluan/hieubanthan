@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Gift, HeartHandshake, Sparkles, UserPlus } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
+import { mangLuanGiai } from "@/lib/luan-giai-mang";
 import { GoiMoCheo, type GoiMo } from "./GoiMoCheo";
 
 const MA_MAC_DINH: Record<string, string> = {
@@ -18,14 +19,16 @@ const LUAN_GIAI: Record<string, { duong: string; ten: string }> = {
 
 export function CtaCuoiBai({ moDun, maYDinh, goiMo }: { moDun: string; maYDinh?: string | null; goiMo?: GoiMo | null }) {
   const [phi, setPhi] = useState<{ thu: boolean; gia: number } | null>(null);
-  useEffect(() => {
-    let huy = false;
-    fetch("/api/luan-giai/phi").then((r) => r.json()).then((d) => { if (!huy && d && typeof d.thu === "boolean") setPhi(d); }).catch(() => { /* coi như miễn phí */ });
-    return () => { huy = true; };
-  }, []);
   const lg = LUAN_GIAI[moDun];
   const bam = (kind: string) => ghi("chart_interacted", { mo_dun: moDun, kind: `cta_${kind}` });
   const lgKhac = Object.entries(LUAN_GIAI).filter(([k]) => k !== moDun && !(moDun === "thanso_sau" && k === "thanso")).slice(0, 2);
+  // SAO-V: công tắc thu Sao có thể bật riêng từng mảng → hỏi đúng mảng của báo cáo mà thẻ này dẫn tới.
+  const mangPhi = mangLuanGiai(lg ? moDun : lgKhac[0]?.[0]) ?? "thanso";
+  useEffect(() => {
+    let huy = false;
+    fetch(`/api/luan-giai/phi?mo_dun=${mangPhi}`).then((r) => r.json()).then((d) => { if (!huy && d && typeof d.thu === "boolean") setPhi(d); }).catch(() => { /* coi như miễn phí */ });
+    return () => { huy = true; };
+  }, [mangPhi]);
   return (
     <div className="space-y-4" data-nosnippet="" data-testid="cta-cuoi-bai">
       <GoiMoCheo goiMo={goiMo} moDun={moDun} ma={goiMo ? undefined : (maYDinh ?? MA_MAC_DINH[moDun] ?? "ban_than")} />
