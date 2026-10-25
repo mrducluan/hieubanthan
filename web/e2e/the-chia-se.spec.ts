@@ -1,4 +1,5 @@
 // TCS-1 — thẻ chia sẻ "Điểm hai người" (ký/giải mã, trang nhận, ảnh OG, không lộ ngày sinh) + mọi ảnh thẻ trả PNG.
+import { createHmac } from "node:crypto";
 import { test, expect, type Page } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 
@@ -8,10 +9,17 @@ const SINH = ["1990", "1995", "05-17", "08-02", "17/05", "02/08", "Canh Ngọ", 
 
 const suKien = (page: Page) => page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
 const giaiThan = (ma: string) => Buffer.from(ma.split(".")[0]!, "base64url").toString("utf8");
+// Khoá ký giống máy chủ e2e (playwright.config.ts: bản build dùng khoá giả, bản dev dùng khoá phát triển của lib/ma-moi.ts)
+// — chỉ để dựng lại "mã cũ" còn tên người kia, như đã phát hành trước khi bỏ tên.
+const KHOA_E2E = process.env.CI || process.env.E2E_PROD === "1" ? "e2e-chi-dung-cho-thu-nghiem-0000" : "chi-dung-khi-phat-trien-local";
+const kyLai = (g: unknown[]) => {
+  const than = Buffer.from(JSON.stringify(g), "utf8").toString("base64url");
+  return `${than}.${createHmac("sha256", KHOA_E2E).update(`hai|${than}`).digest("base64url").slice(0, 16)}`;
+};
 
-test("API ký thẻ: chỉ tên, quan hệ, điểm, mức, ≤ 3 tiêu chí — khớp điểm engine, không ngày sinh / can chi", async ({ request }) => {
+test("API ký thẻ: chỉ tên người gửi, quan hệ, điểm, mức, ≤ 3 tiêu chí — khớp điểm engine, không ngày sinh / can chi / tên người kia", async ({ request }) => {
   const kq = await (await request.post("/api/tuvi/hop-tham", { data: { la_so: LA_SO, nguoi_kia: KIA, quan_he: "nguoi_yeu" } })).json();
-  const r = await request.post("/api/chia-se/hai", { data: { la_so: LA_SO, nguoi_kia: KIA, quan_he: "nguoi_yeu", ten_ban: "Minh", ten_kia: "" } });
+  const r = await request.post("/api/chia-se/hai", { data: { la_so: LA_SO, nguoi_kia: KIA, quan_he: "nguoi_yeu", ten_ban: "Minh", ten_kia: "Hương Giang" } });
   expect(r.status()).toBe(200);
   const { ma, tu } = await r.json();
   expect(tu).toMatch(/^hp\.[0-9a-f]{10}$/);
@@ -28,7 +36,8 @@ test("API ký thẻ: chỉ tên, quan hệ, điểm, mức, ≤ 3 tiêu chí —
   const html = await (await request.get(`/the/hai/${ma}`)).text();
   expect(html).toContain(kq.diem.nhan_muc);
   expect(html).toContain(`/og/hai?ma=${ma}`);
-  expect(html).toContain("Người ấy");
+  expect(html).toContain("Người yêu");
+  expect(html).not.toContain("Hương Giang");
   for (const s of SINH) expect(html).not.toContain(s);
 
   for (const k of ["", "&khung=doc"]) {
@@ -67,6 +76,8 @@ test("Xem lá số 2 người → Chia sẻ thẻ điểm → trang nhận → l
   const diem = await page.getByTestId("diem-tong").getAttribute("data-diem");
 
   await page.getByTestId("mo-chia-se-hai").click();
+  await expect(page.getByTestId("hai-khong-ten-kia")).toHaveText("Thẻ không ghi tên người kia.");
+  await expect(page.getByLabel(/Tên người ấy/)).toHaveCount(0);
   await page.getByLabel("Tên bạn trên thẻ (không bắt buộc)").fill("Luân");
   await page.getByTestId("tao-the-hai").click();
   const link = await page.getByTestId("link-the-hai").inputValue();
@@ -82,7 +93,7 @@ test("Xem lá số 2 người → Chia sẻ thẻ điểm → trang nhận → l
   await khach.goto(`${u.pathname}${u.search}`);
   await expect(khach.getByTestId("the-hai-diem")).toHaveAttribute("data-diem", diem!);
   await expect(khach.getByTestId("the-hai")).toContainText("Luân");
-  await expect(khach.getByTestId("the-hai")).toContainText("Người ấy");
+  await expect(khach.getByTestId("the-hai")).toContainText("Người yêu");
   expect((await suKien(khach)).filter((e) => e.su_kien === "share_clicked" && e.ma_moi === tu)).toHaveLength(1);
   expect(await khach.evaluate(() => localStorage.getItem("hbt.ma_moi"))).toContain(tu);
   expect(await khach.getByTestId("the-hai-moi").getAttribute("href")).toBe(`/tu-vi?tu=${tu}#hop-tham`);
@@ -91,6 +102,21 @@ test("Xem lá số 2 người → Chia sẻ thẻ điểm → trang nhận → l
   // Có hồ sơ → link #hop-tham tự mở khối Xem lá số 2 người.
   await page.goto(`/tu-vi?tu=${tu}#hop-tham`);
   await expect(page.getByTestId("hop-tham-form")).toBeVisible();
+});
+
+test("mã cũ còn tên người kia: trang nhận + tiêu đề không hiện tên đó, ảnh vẫn trả PNG", async ({ request }) => {
+  const { ma } = await (await request.post("/api/chia-se/hai", { data: { la_so: LA_SO, nguoi_kia: KIA, quan_he: "ban_be", ten_ban: "Minh" } })).json();
+  const g = JSON.parse(giaiThan(ma)) as unknown[];
+  g[2] = "Bảo Ngọc"; // mã phát hành trước khi bỏ tên người kia
+  const cu = kyLai(g);
+  const html = await (await request.get(`/the/hai/${cu}`)).text();
+  expect(html).not.toContain("Thẻ không còn hiệu lực");
+  expect(html).toContain("Minh");
+  expect(html).toContain("Người bạn");
+  expect(html).not.toContain("Bảo Ngọc");
+  const anh = await request.get(`/og/hai?ma=${encodeURIComponent(cu)}&khung=doc`);
+  expect(anh.status()).toBe(200);
+  expect(anh.headers()["content-type"]).toContain("image/png");
 });
 
 test("mọi ảnh thẻ trả PNG (ngang + dọc), kể cả không mã", async ({ request }) => {

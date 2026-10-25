@@ -1,6 +1,6 @@
 "use client";
 // TCS-1 — "Chia sẻ thẻ điểm" sau khi xem "Xem lá số 2 người": máy chủ chấm lại qua engine rồi ký mã (lib/ma-moi.ts
-// kyMaHai — chỉ tên hiển thị, quan hệ, điểm, mức, ≤ 3 tiêu chí; không ngày sinh). Link /the/hai/<mã>?tu=hp.<…> đo
+// kyMaHai — chỉ tên người gửi, quan hệ, điểm, mức, ≤ 3 tiêu chí; không ngày sinh). Link /the/hai/<mã>?tu=hp.<…> đo
 // referral_signup như các thẻ khác; ảnh /og/hai (dọc 1080×1350) tải về để đăng story — ảnh có mã QR + hieuban.com.
 import { useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
@@ -16,7 +16,6 @@ import { useNguoiDung } from "@/lib/tai-khoan";
 export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
   const [mo, setMo] = useState(false);
   const [tenBan, setTenBan] = useState("");
-  const [tenKia, setTenKia] = useState("");
   const [the, setThe] = useState<{ ma: string; tu: string; link: string } | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
@@ -28,7 +27,7 @@ export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
   async function tao() {
     setDang(true); setLoi(null);
     try {
-      const { ma, tu } = await postJson<{ ma: string; tu: string }>("/api/chia-se/hai", { ...yeuCau, ten_ban: tenBan.trim(), ten_kia: tenKia.trim() });
+      const { ma, tu } = await postJson<{ ma: string; tu: string }>("/api/chia-se/hai", { ...yeuCau, ten_ban: tenBan.trim() });
       const u = new URL(`/the/hai/${ma}`, window.location.origin);
       u.searchParams.set("tu", tu);
       if (maCuaToi) u.searchParams.set("gt", maCuaToi);
@@ -67,16 +66,11 @@ export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
       <h3 id="chia-se-hai" className="font-sans text-[1.02rem] font-semibold text-fg">Thẻ điểm hai người</h3>
       {!the ? (
         <div className="mt-3 space-y-3">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="space-y-1.5">
-              <Label htmlFor="hai-ten-ban">Tên bạn trên thẻ (không bắt buộc)</Label>
-              <Input id="hai-ten-ban" value={tenBan} maxLength={24} placeholder="Bạn" onChange={(e) => setTenBan(e.target.value)} />
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="hai-ten-kia">Tên người ấy (không bắt buộc)</Label>
-              <Input id="hai-ten-kia" value={tenKia} maxLength={24} placeholder="Người ấy" onChange={(e) => setTenKia(e.target.value)} />
-            </div>
+          <div className="space-y-1.5 sm:max-w-xs">
+            <Label htmlFor="hai-ten-ban">Tên bạn trên thẻ (không bắt buộc)</Label>
+            <Input id="hai-ten-ban" value={tenBan} maxLength={24} placeholder="Bạn" onChange={(e) => setTenBan(e.target.value)} />
           </div>
+          <p className="text-xs text-fg-muted" data-testid="hai-khong-ten-kia">Thẻ không ghi tên người kia.</p>
           <p className="text-xs text-fg-faint">
             Thẻ chỉ có tên bạn gõ, quan hệ, điểm và ba mặt nổi bật — không có ngày sinh, không có con số nào suy ra được tuổi.
             Hết hạn sau 90 ngày.

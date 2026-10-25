@@ -69,7 +69,7 @@ export async function GET(req: Request) {
   const tu = nd ? tuTuMa("hp", ma) : null;
   const qr = nd && tu ? urlQr(`${GOC_QR}/the/hai/${ma}?tu=${tu}`, `${GOC_QR}/tu-vi?tu=${tu}#hop-tham`) : `${GOC_QR}/tu-vi#hop-tham`;
   const mau = nd ? MAU_MUC_HAI[nd.m] ?? MAU.vang : MAU.vang;
-  const [a, b] = nd ? tenHai(nd.a, nd.b) : ["Bạn", "Người ấy"];
+  const [a, b] = nd ? tenHai(nd.a, nd.q) : ["Bạn", "Người ấy"];
   const sao = saoRai(bam(ma || "hai"), doc ? 90 : 70, W, H);
 
   // Bố cục (toạ độ tuyệt đối — satori không hỗ trợ fragment / bottom đáng tin): vòng điểm giữa, hai chòm sao hai bên.

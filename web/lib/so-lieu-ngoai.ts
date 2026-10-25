@@ -9,6 +9,7 @@
 import { createSign } from "node:crypto";
 import { unstable_cache } from "next/cache";
 import type { DongKiemChung } from "@/lib/kiem-chung";
+import type { SoPheuThe } from "@/lib/pheu-the";
 
 export class ChuaKetNoi extends Error {}
 
@@ -187,6 +188,8 @@ export interface BaoCaoPosthog {
     bienThe: { su_kien: string; bien_the: string; luot: number }[];
     doan: { dung: number; sai: number };
   } | null;
+  /** Phễu lời mời theo loại thẻ: số thô theo mã link (lib/pheu-the.ts tinhPheuThe nối các bước). null = truy vấn lỗi. */
+  pheuThe: SoPheuThe | null;
 }
 
 export async function hogql<T>(query: string): Promise<T[]> {
@@ -281,8 +284,34 @@ async function baoCaoPosthogTho(): Promise<BaoCaoPosthog> {
       doan: { dung: Number(dd[0]?.[0] ?? 0), sai: Number(dd[0]?.[1] ?? 0) },
     };
   }).catch(() => null);
+  // Phễu lời mời theo loại thẻ — nối bằng đúng mã link (ma_moi). Chỉ mã + con số đếm.
+  const chuoi = (x: unknown) => (x === null || x === undefined ? "" : String(x));
+  const pheuThe = await Promise.all([
+    hogql<[unknown, unknown, unknown, number, unknown]>(
+      `SELECT toString(properties.ma_moi) AS ma, toString(properties.kind) AS k, toString(properties.co_ma) AS cm, count(), toString(min(timestamp))
+       FROM events WHERE ${CT} AND event = 'share_created' GROUP BY ma, k, cm LIMIT 10000`),
+    hogql<[unknown, number]>(
+      `SELECT toString(properties.ma_moi) AS ma, count(DISTINCT distinct_id) FROM events
+       WHERE ${CT} AND event = 'share_clicked' AND ma != '' GROUP BY ma LIMIT 10000`),
+    hogql<[unknown, number, number]>(
+      `SELECT ma, count(), countIf(sao = 1) FROM (
+         SELECT distinct_id, argMinIf(toString(properties.ma_moi), timestamp, event = 'referral_signup') AS ma,
+           maxIf(1, event = 'credit_earned' AND properties.kind = 'duoc_moi') AS sao
+         FROM events WHERE ${CT} AND event IN ('referral_signup', 'credit_earned') GROUP BY distinct_id)
+       WHERE ma != '' GROUP BY ma LIMIT 10000`),
+    hogql<[unknown, unknown, number]>(
+      `SELECT toString(properties.kind) AS k, toString(properties.co_ma) AS cm, count(DISTINCT distinct_id) FROM events
+       WHERE ${CT} AND event = 'share_created' AND distinct_id IN (
+         SELECT distinct_id FROM events WHERE ${CT} AND event = 'credit_earned' AND properties.kind = 'moi_ban')
+       GROUP BY k, cm LIMIT 500`),
+  ]).then(([cs, mo, dk, mb]): SoPheuThe => ({
+    chiaSe: cs.map(([ma, k, cm, n, dau]) => ({ ma: chuoi(ma), kind: chuoi(k), co_ma: chuoi(cm), luot: Number(n), dau: chuoi(dau) })),
+    mo: mo.map(([ma, n]) => ({ ma: chuoi(ma), nguoi: Number(n) })),
+    dangKy: dk.map(([ma, n, sao]) => ({ ma: chuoi(ma), nguoi: Number(n), nhan_sao: Number(sao) })),
+    moiBan: mb.map(([k, cm, n]) => ({ kind: chuoi(k), co_ma: chuoi(cm), nguoi: Number(n) })),
+  })).catch(() => null);
   return {
-    yDinh, kiemChung, cta,
+    yDinh, kiemChung, cta, pheuThe,
     pheu: PHEU.map(([e, ten]) => ({ su_kien: e, ten, luot: theo.get(e)?.luot ?? 0, nguoi: nguoi(e) })),
     quayLai: ql[0] ? { truoc: Number(ql[0][0]), tro_lai: Number(ql[0][1]) } : null,
     gate: {

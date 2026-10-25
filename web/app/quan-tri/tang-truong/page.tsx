@@ -2,6 +2,7 @@
 // bằng số thật: phễu sự kiện PostHog, Search Console (truy vấn, trang, CƠ HỘI viết nội dung), GA4 (kênh, sự kiện).
 // Mọi khoá chỉ đọc, đặt ở env Vercel. Thiếu khoá → mục đó hiện hướng dẫn kết nối. Cache 1 giờ.
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
@@ -10,6 +11,7 @@ import { MAU_KIEM_CHUNG, TEN_LOAI_KIEM_CHUNG, tinhKiemChung, type DongKiemChung 
 import { TrangCmsQt } from "@/components/quan-tri/TrangCmsQt";
 import { cmsUrl } from "@/lib/cms";
 import { baoCaoTrangCms } from "@/lib/trang-cms-qt";
+import { TEN_CO_MA, tinhPheuThe, type SoPheuThe } from "@/lib/pheu-the";
 import { baoCaoGa4, baoCaoGsc, baoCaoPosthog, MAU_TOI_THIEU, tinhGate, type BaoCaoPosthog, type DongGsc, type KetQua } from "@/lib/so-lieu-ngoai";
 
 export const metadata: Metadata = { title: "Tăng trưởng" };
@@ -127,6 +129,45 @@ function BangGate({ du }: { du: BaoCaoPosthog }) {
   );
 }
 
+/** Phễu lời mời theo loại thẻ: chia sẻ → bạn bè mở link → tạo hồ sơ qua lời mời → nhận Sao được mời (+ người gửi nhận Sao mời). */
+function BangPheuThe({ so: s }: { so: SoPheuThe }) {
+  const kq = tinhPheuThe(s);
+  if (kq.dong.length === 0) return <p className="mt-3 text-sm text-fg-faint">Chưa có lượt chia sẻ nào trong 28 ngày.</p>;
+  const o = (x: number | null) => (x === null ? "—" : pt(x));
+  return (
+    <div className="mt-3 space-y-2">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead><tr className="text-left text-xs text-fg-muted">
+            <th className="py-1 font-normal">Loại thẻ</th><th className="text-right font-normal">Chia sẻ</th>
+            <th className="text-right font-normal">Mở link</th><th className="text-right font-normal">Tạo hồ sơ qua mời</th>
+            <th className="text-right font-normal">Được mời nhận Sao</th><th className="text-right font-normal">Người gửi nhận Sao</th>
+          </tr></thead>
+          <tbody>
+            {kq.dong.map((d) => (
+              <tr key={`${d.kind}|${d.co_ma}`} className="border-t border-line/60">
+                <td className="py-1.5">{d.ten}<span className="block text-xs text-fg-faint"><code>{d.kind}</code> · {TEN_CO_MA[d.co_ma]}</span></td>
+                <td className="text-right">{so(d.chia_se)}</td>
+                <td className="text-right">{so(d.mo)}<span className="block text-xs text-fg-faint">{o(d.ti_le.mo)}</span></td>
+                <td className="text-right">{so(d.dang_ky)}<span className="block text-xs text-fg-faint">{o(d.ti_le.dang_ky)}</span></td>
+                <td className="text-right">{so(d.nhan_sao)}<span className="block text-xs text-fg-faint">{o(d.ti_le.nhan_sao)}</span></td>
+                <td className="text-right">{so(d.moi_ban)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {(kq.ngoaiKhung.mo > 0 || kq.ngoaiKhung.dang_ky > 0) && (
+        <p className="text-xs text-fg-muted">Ngoài khung: {so(kq.ngoaiKhung.mo)} lượt mở link, {so(kq.ngoaiKhung.dang_ky)} người tạo hồ sơ
+          từ link tạo trước 28 ngày hoặc mã bị cắt — không cộng vào bảng.</p>
+      )}
+      <p className="text-xs text-fg-faint">Mỗi bước nối với lần chia sẻ bằng đúng mã link. Tỉ lệ nhỏ dưới mỗi số = so với bước liền trước.
+        “Không rõ” = sự kiện cũ chưa ghi có/không mã giới thiệu. PostHog có thể thiếu do người dùng chặn quảng cáo — chỉ xem xu hướng;
+        doanh thu thật xem <Link className="text-gold underline" href="/quan-tri/doanh-thu">/quan-tri/doanh-thu</Link>.</p>
+    </div>
+  );
+}
+
 /** KC-0: phiếu "Đúng với mình / Chưa đúng" theo mã mẫu Tử vi. Chỉ hiện tỉ lệ khi đủ mẫu. */
 function BangKiemChung({ ds }: { ds: DongKiemChung[] | null }) {
   if (ds === null) return <p className="mt-3 text-sm text-cinnabar" role="alert">Chưa đọc được phiếu kiểm chứng (thử lại sau một giờ).</p>;
@@ -226,6 +267,14 @@ export default async function Page() {
             <div><p className="text-sm text-fg-muted">Trò “Đoán số”</p>
               <p className="mt-1 text-sm">Đoán đúng <b>{so(ph.du.cta.doan.dung)}</b> · sai <b>{so(ph.du.cta.doan.sai)}</b></p></div>
           </div>
+        </Card>
+      )}
+
+      {ph.ok && ph.du.pheuThe && (
+        <Card data-testid="qt-pheu-the">
+          <h2 className="text-lg">Phễu lời mời theo loại thẻ (PostHog, 28 ngày)</h2>
+          <p className="mt-1 text-sm text-fg-muted">Chia sẻ → bạn bè mở link → tạo hồ sơ qua lời mời → nhận Sao. Thẻ nào kéo được người mới, thẻ nào chỉ được xem.</p>
+          <BangPheuThe so={ph.du.pheuThe} />
         </Card>
       )}
 
