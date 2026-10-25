@@ -107,6 +107,7 @@ begin
 end
 $$;
 
+drop function if exists don_qua_tang_chuong();
 drop function if exists qua_cua_toi();
 drop function if exists chuong_duoc_tang(text);
 drop function if exists nhan_qua_chuong(text);

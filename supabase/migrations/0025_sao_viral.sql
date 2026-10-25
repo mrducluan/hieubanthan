@@ -515,7 +515,23 @@ begin
 end
 $$;
 
+-- Dọn (cron ngày, service role): quà hết tác dụng > 30 ngày — đã nhận quá 30 ngày, hoặc link hết hạn quá 30 ngày mà
+-- chưa ai nhận. Đúng thời hạn ghi trong Chính sách quyền riêng tư.
+create or replace function don_qua_tang_chuong() returns integer
+    language plpgsql security definer set search_path = '' as $$
+declare v_n integer;
+begin
+    delete from public.qua_tang_chuong
+    where (nhan_luc is not null and nhan_luc < now() - interval '30 days')
+       or (nhan_luc is null and het_han < now() - interval '30 days');
+    get diagnostics v_n = row_count;
+    return v_n;
+end
+$$;
+
 -- ---------------------------------------------------------------- quyền
+revoke all on function don_qua_tang_chuong() from public, anon, authenticated;
+grant execute on function don_qua_tang_chuong() to service_role;
 revoke all on function sao_so_du_cua(uuid), qt_bat_cau_hinh(text), hh_cho_don(bigint), qua_tran(),
     vi_sao_chi_tiet(), hoa_hong_cua_toi(), thong_ke_hoa_hong(integer), diem_danh(), tao_qua_chuong(text),
     xem_qua_chuong(text), nhan_qua_chuong(text), chuong_duoc_tang(text), qua_cua_toi() from public, anon, authenticated;

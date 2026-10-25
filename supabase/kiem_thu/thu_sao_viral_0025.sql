@@ -214,6 +214,10 @@ set role authenticated; select set_config('request.jwt.claim.sub','a0000000-0000
 select pg_temp.kt('R dùng link hết hạn', nhan_qua_chuong(:'ma_q3')->>'ket_qua', 'het_han');
 reset role;
 
+update qua_tang_chuong set nhan_luc = now() - interval '31 days' where ma = :'ma_q1';
+select pg_temp.kt('dọn quà quá 30 ngày (q1 đã nhận 31 ngày)', don_qua_tang_chuong(), 1);
+select pg_temp.kt('authenticated không gọi hàm dọn', has_function_privilege('authenticated', 'don_qua_tang_chuong()', 'execute'), false);
+
 -- ================================================================ quyền
 select pg_temp.kt('anon không đọc ví', has_function_privilege('anon', 'vi_sao_chi_tiet()', 'execute'), false);
 select pg_temp.kt('authenticated không gọi sao_so_du_cua', has_function_privilege('authenticated', 'sao_so_du_cua(uuid)', 'execute'), false);
