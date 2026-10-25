@@ -69,11 +69,18 @@
 4. **Bật thu Sao theo mảng** (Bản đồ con số) khi hạ tầng thanh toán sẵn sàng.
 5. Sau khi có số 2–4 tuần: quyết định thưởng chuỗi ngày và tặng chương (cần migration).
 
-## 7. Quyết định cần chủ dự án (xem câu hỏi kèm theo)
+## 7. Quyết định của chủ dự án (2026-10-25) và việc đã làm
 
-- Thứ tự bật thu Sao.
-- Có duyệt migration cho thưởng chuỗi ngày và tặng chương không.
-- Điều kiện thưởng mời: giữ "lưu hồ sơ" hay đổi thành "đăng ký + tính một lá" (nới, nhiều gian lận hơn).
+| Câu hỏi | Quyết định | Đã làm (migration 0025 + web) |
+|---|---|---|
+| Thứ tự bật thu Sao | Bản đồ con số trước | Công tắc riêng `luan_giai.thu_sao.{thanso,tuvi,battu}` |
+| Migration chuỗi ngày + tặng chương | Duyệt cả hai | `diem_danh()` (chỉ lưu ngày ghé cuối + độ dài chuỗi), `qua_tang_chuong` |
+| Nới thưởng mời | **Hướng A**: bỏ giới hạn 7 ngày, giữ "lưu hồ sơ" | + mỗi tài khoản được tính một lần trong đời, chặn mời vòng, tự nhận ngay sau khi lưu hồ sơ |
+| Hoa hồng % lần nạp đầu | **Làm** — chủ dự án xác định là affiliate hợp pháp, tự chịu trách nhiệm pháp lý | Một tầng, trả bằng Sao tặng, N đơn đầu / M tháng / trần 30 ngày, thu hồi khi hoàn tiền; mặc định tắt |
+| Sao mua có hết hạn? | **Không hết hạn** | Số dư theo lô: Sao tặng bị trừ trước, Sao mua sau cùng (sửa lỗi 8.1) |
+| Thẻ "Điểm hai người" | (chưa trả lời — em làm bản an toàn) | Thẻ không mang tên người thứ hai; mã cũ có tên cũng không hiện |
+
+Vẫn **không làm** (lý do ở 8.4): "Năm của tôi" / thẻ "hướng xấu năm" có nhãn hung trên thẻ công khai, "Thử thách 7 ngày với bạn" (chuỗi chung tạo áp lực).
 
 ## 8. Phần phản biện độc lập
 
