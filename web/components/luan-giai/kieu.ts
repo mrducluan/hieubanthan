@@ -91,7 +91,8 @@ export interface BaoCaoDoiSong {
   cot_loi?: Hop[];
   thoi_gian_bieu?: MocDaiHan[];
   chuong: (ChuongDoiSongMo | ChuongKhoa)[];
-  phi?: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null };
+  phi?: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null;
+    /** SAO-V: chương bạn bè tặng. */ chuong_tang?: number; chuong_tang_ma?: string };
 }
 
 export const NHAN_MUC: Record<Muc, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần lưu ý" };
