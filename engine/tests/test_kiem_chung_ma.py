@@ -54,13 +54,16 @@ def _sql_moi_nhat() -> tuple[str, str]:
 
 
 def _loai_sql() -> set[str]:
-    """Ràng buộc `loai` mới nhất (inline 0017 hoặc `kiem_chung_phieu_loai_check` ở migration sau)."""
+    """Ràng buộc `loai` mới nhất CỦA BẢNG kiem_chung_phieu (inline lúc tạo bảng ở 0017 hoặc
+    `kiem_chung_phieu_loai_check` ở migration sau). Bảng khác cũng có cột `loai` (vd sổ Sao 0025) — không lấy nhầm."""
     ra = None
+    mau = re.compile(r"create table if not exists kiem_chung_phieu \(.*?check \(loai in \(([^)]*)\)\)"
+                     r"|kiem_chung_phieu_loai_check\s+check \(loai in \(([^)]*)\)\)", re.S)
     for p in sorted(MIG.glob("*.sql")):
         if p.name.endswith(".down.sql"):
             continue
-        for m in re.finditer(r"check \(loai in \(([^)]*)\)\)", p.read_text("utf-8")):
-            ra = set(re.findall(r"'([a-z0-9_]+)'", m.group(1)))
+        for m in mau.finditer(p.read_text("utf-8")):
+            ra = set(re.findall(r"'([a-z0-9_]+)'", m.group(1) or m.group(2)))
     assert ra
     return ra
 
