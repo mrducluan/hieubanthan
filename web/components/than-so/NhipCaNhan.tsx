@@ -25,7 +25,8 @@ function O({ nhan, so, phu, chuDe, nen, noiBat = false }: { nhan: string; so: nu
 const tenThang = (t: NhipThang) => `tháng ${t.thang}/${t.nam}`;
 const tenNam = (n: NhipNam) => `năm ${n.nam}`;
 
-export function NhipCaNhan({ hoSo, className = "" }: { hoSo: HoSo; className?: string }) {
+/** `gon`: trang đã hiện tháng này + năm này kèm "hợp để / để ý" (NhipHienTai) → chỉ hiện tháng tới, năm tới. */
+export function NhipCaNhan({ hoSo, className = "", gon = false }: { hoSo: HoSo; className?: string; gon?: boolean }) {
   const nhip = useNhip(hoSo);
   useEffect(() => { if (nhip) batDauDoc("nhip", { kind: "ban_than" }); }, [nhip]);
   if (!nhip) return null;
@@ -47,10 +48,10 @@ export function NhipCaNhan({ hoSo, className = "" }: { hoSo: HoSo; className?: s
           <div className="h-full rounded-full bg-gradient-to-r from-gold/60 to-gold" style={{ width: `${daQua}%` }} />
         </div>
       </div>
-      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <O nhan="Tháng này" so={nhip.thang_ca_nhan.so} phu={tenThang(nhip.thang_ca_nhan)} chuDe={nhip.thang_ca_nhan.chu_de} />
+      <div className={`mt-4 grid gap-3 sm:grid-cols-2 ${gon ? "" : "lg:grid-cols-4"}`}>
+        {!gon && <O nhan="Tháng này" so={nhip.thang_ca_nhan.so} phu={tenThang(nhip.thang_ca_nhan)} chuDe={nhip.thang_ca_nhan.chu_de} />}
         <O nhan="Tháng tới" so={nhip.thang_toi.so} phu={tenThang(nhip.thang_toi)} chuDe={nhip.thang_toi.chu_de} nen={nhip.thang_toi.nen} noiBat />
-        <O nhan="Năm này" so={n.so} phu={tenNam(n)} chuDe={n.chu_de} />
+        {!gon && <O nhan="Năm này" so={n.so} phu={tenNam(n)} chuDe={n.chu_de} />}
         <O nhan="Năm tới" so={nhip.nam_toi.so} phu={tenNam(nhip.nam_toi)} chuDe={nhip.nam_toi.chu_de} />
       </div>
       <p className="mt-3 text-xs text-fg-faint">{nhip.luu_y}</p>

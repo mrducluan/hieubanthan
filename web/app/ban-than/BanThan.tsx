@@ -5,7 +5,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, BookOpen, Compass, HeartHandshake, History, Pencil, Share2 } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarCheck, Compass, HeartHandshake, History, MessageCircle, Pencil, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { Card } from "@/components/ui/card";
@@ -98,8 +98,9 @@ export function BanThan() {
         <TieuDeMuc id="muc-nhip" nho="Nhịp hiện tại" lon="Giai đoạn này của bạn"
           mo_ta="Chủ đề của ngày, tháng và năm cá nhân — không phải dự báo sự kiện, mà là gợi ý để bạn đặt trọng tâm." />
         {/* NHIP-1: ngày, tháng tới, năm cá nhân còn bao nhiêu ngày, năm tới — lý do quay lại mỗi ngày/tháng. */}
-        <NhipCaNhan hoSo={hoSo} />
-        <div className="mt-4"><NhipHienTai kq={kq} /></div>
+        {/* Tháng này + năm này (kèm hợp để / để ý) một lần ở NhipHienTai; NhipCaNhan gọn chỉ thêm tháng tới, năm tới. */}
+        <NhipHienTai kq={kq} />
+        <NhipCaNhan hoSo={hoSo} gon className="mt-4" />
         <Link href="/hom-nay" className="mt-3 flex items-center justify-between gap-3 rounded-2xl border border-gold/40 bg-gold/5 px-5 py-4 hover:border-gold"
           data-testid="lien-ket-hom-nay">
           <span><span className="block font-medium text-fg">Hôm nay của bạn</span>
@@ -127,8 +128,8 @@ export function BanThan() {
       <section aria-labelledby="muc-tiep" className="grid gap-3 sm:grid-cols-3">
         <h2 id="muc-tiep" className="sr-only">Đi tiếp</h2>
         {[
-          { href: "/hop-doi", Icon: HeartHandshake, ten: "Hợp đôi", mo: "Người yêu, bạn bè, đồng nghiệp — gửi link mời để người kia tự nhập" },
-          { href: "/than-so#hoi", Icon: BookOpen, ten: "Hỏi điều bạn băn khoăn", mo: "Nghề nghiệp, tình cảm, giai đoạn này nên tập trung gì" },
+          { href: "/than-so#hoi", Icon: MessageCircle, ten: "Hỏi điều bạn băn khoăn", mo: "Nghề nghiệp, tình cảm, giai đoạn này nên tập trung gì" },
+          { href: "/xem-ngay-tot", Icon: CalendarCheck, ten: "Xem ngày tốt", mo: "Hoàng đạo, giờ tốt, việc nên làm — tìm ngày đẹp cho việc sắp tới" },
           { href: "/kham-pha", Icon: Compass, ten: "Khám phá huyền học", mo: "Tử vi, Kinh Dịch, Bát tự, Phong thuỷ — dùng luôn hồ sơ này" },
         ].map(({ href, Icon, ten, mo }) => (
           <Link key={href} href={href} className="glass group rounded-2xl p-5 transition-colors hover:border-gold/50">

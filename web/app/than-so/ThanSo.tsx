@@ -298,7 +298,7 @@ export function ThanSo() {
         </Tabs>
       </section>
 
-      <CuoiBaiDoc moDun="thanso_sau" cauHoi="Phần chiều sâu có giúp bạn hiểu mình hơn?" />
+      <CuoiBaiDoc moDun="thanso_sau" khongGopY />
       </>)}
 
       <div id="noi-dau" className="scroll-mt-24"><NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea"} quyUoc={quyUoc} /></div>
