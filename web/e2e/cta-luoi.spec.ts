@@ -96,3 +96,52 @@ test("blog NotFair: 'Đọc tiếp' kín hàng trên máy tính", async ({ page 
   await moTrang(page, "/blog/phong-thuy-nha-o-cho-nguoi-moi");
   await kiemKinHang(page.getByTestId("doc-tiep").locator("ul"), "doc-tiep");
 });
+
+// ---- CTA-2: cấu hình "Lối đi tiếp" từ CMS + đo / tự xếp theo lượt bấm (hàm thuần) ----
+import { readFileSync } from "node:fs";
+import { cauHinhTuCms, CAU_HINH_MAC_DINH, locThe } from "../lib/loi-di-tiep";
+import { xepTheoTiLe } from "../lib/the-lap";
+import { tinhLoiDi } from "../lib/so-lieu-ngoai";
+import { tinhTiLe } from "../lib/the-lap-cms";
+
+test("bộ thẻ mặc định của web trùng HỆT bản mặc định trong CMS (global Lối đi tiếp)", () => {
+  const web = JSON.parse(readFileSync("lib/loi-di-tiep-mac-dinh.json", "utf8"));
+  const cms = JSON.parse(readFileSync("../cms/src/globals/loi-di-tiep-mac-dinh.json", "utf8"));
+  expect(web).toEqual(cms);
+  // Mọi thẻ mặc định qua được bộ lọc (không thẻ nào bị rơi âm thầm).
+  for (const n of web.nhom) for (const t of n.the) expect(locThe(t), t.duong).not.toBeNull();
+});
+
+test("cauHinhTuCms: lọc link ngoài / chữ thừa; CMS trống → mặc định; nhóm có trong CMS thay hẳn nhóm đó", () => {
+  expect(cauHinhTuCms(null)).toBe(CAU_HINH_MAC_DINH);
+  expect(cauHinhTuCms({ nhom: [] }).nhom).toEqual(CAU_HINH_MAC_DINH.nhom);
+  const c = cauHinhTuCms({ bat: false, tu_xep: true, nhom: [{ tru: "/tu-vi", the: [
+    { duong: "//evil.example", ten: "x", mo_ta: "y" }, { duong: "javascript:alert(1)", ten: "x", mo_ta: "y" },
+    { duong: "/hom-nay", ten: "  Hôm   nay ", mo_ta: "m".repeat(400), nhan: "la", hinh: "la" },
+  ] }, { tru: "https://x", the: [] }] });
+  expect(c.bat).toBe(false);
+  expect(c.tu_xep).toBe(true);
+  expect(Object.keys(c.nhom)).toEqual(["/tu-vi"]);
+  expect(c.nhom["/tu-vi"]).toEqual([{ duong: "/hom-nay", ten: "Hôm nay", mo_ta: "m".repeat(180), nhan: "kien_thuc", hinh: "than-so" }]);
+  expect(theLap(3, { cauHinh: c })).toEqual([]);   // tắt thẻ bù
+});
+
+test("tự xếp theo lượt bấm: chỉ thẻ đủ mẫu, làm mượt, giữ thứ tự biên tập khi chưa có số", () => {
+  const tl = tinhTiLe([["/a", 100, 2], ["/b", 100, 20], ["/c", 10, 9], ["khong-phai-duong", 500, 400]]);
+  expect(Object.keys(tl).sort()).toEqual(["/a", "/b"]);           // /c chưa đủ 30 lượt thấy
+  expect(xepTheoTiLe([{ duong: "/c" }, { duong: "/a" }, { duong: "/b" }], tl).map((t) => t.duong)).toEqual(["/c", "/b", "/a"]);
+  const c = cauHinhTuCms({ tu_xep: true, nhom: [{ tru: "chung", the: [
+    { duong: "/a", ten: "A", mo_ta: "a" }, { duong: "/b", ten: "B", mo_ta: "b" }] }] });
+  expect(theLap(2, { cauHinh: c, tiLe: tl }).map((t) => t.duong)).toEqual(["/b", "/a"]);
+  expect(theLap(2, { cauHinh: { ...c, tu_xep: false }, tiLe: tl }).map((t) => t.duong)).toEqual(["/a", "/b"]);
+});
+
+test("tinhLoiDi: gom theo khối (thấy / bấm thật / bấm bù) và theo thẻ bù, thẻ đủ mẫu xếp trước", () => {
+  const r = tinhLoiDi(
+    [["doc_tiep", 0, "end_cta_viewed", 200], ["doc_tiep", 1, "end_cta_viewed", 380], ["doc_tiep", 0, "end_cta_clicked", 20],
+     ["doc_tiep", 1, "end_cta_clicked", 9], ["", 0, "end_cta_viewed", 3]],
+    [["/a", 100, 1], ["/b", 120, 8], ["/moi", 5, 3]]);
+  expect(r.khoi[0]).toEqual({ khoi: "doc_tiep", thay: 200, bam_that: 20, bam_lap: 9 });
+  expect(r.the.map((t) => t.den)).toEqual(["/b", "/a", "/moi"]);
+  expect(r.the[2]).toMatchObject({ du_mau: false, ti_le: 0.6 });
+});

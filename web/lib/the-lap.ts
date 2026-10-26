@@ -1,11 +1,13 @@
 // CTA-2 — "thẻ lấp lưới": khối cuối trang (Kiến thức {mảng}, Bài viết liên quan / mới, Đọc tiếp) là lưới 3 cột nhưng số
 // mục thật thay đổi (silo Hợp đôi / Kinh Dịch chỉ có 1 cụm, blog mới vài bài) → ô trống trên máy tính. Thay vì để trống
 // hay co lưới, bù cho đủ hàng bằng lối đi tiếp CÓ THẬT trong site, theo thứ tự gần chủ đề nhất: cụm kiến thức cùng mảng →
-// công cụ / cụm liên quan chéo mảng → thư viện chung. Danh sách cố định trong code (tất định, không gọi engine / CMS),
-// mọi đường dẫn nằm trong site; bỏ mục trang đã hiện (boQua) để không lặp link ngay trên đó.
+// công cụ / cụm liên quan chéo mảng → thư viện chung. Ban biên tập sửa danh sách ở CMS (global "Lối đi tiếp cuối trang" +
+// thẻ ưu tiên từng URL — lib/loi-di-tiep.ts lọc lại); CMS trống → bộ mặc định lib/loi-di-tiep-mac-dinh.json. Hàm ở đây
+// thuần (nhận cấu hình làm tham số); lib/the-lap-cms.ts đọc CMS + số lượt bấm. Bỏ mục trang đã hiện (boQua).
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 import { THONG_TIN_MANG, type MangBlog } from "@/lib/blog-mang";
-import { CHU_DE, dsCumTru } from "@/lib/kien-thuc";
+import { dsCumTru } from "@/lib/kien-thuc";
+import { CAU_HINH_MAC_DINH, NHAN, type CauHinhLoiDi, type TheTho } from "@/lib/loi-di-tiep";
 import { soCanLap } from "@/lib/luoi";
 
 export { lopCot, lopOCuoi, soCanLap } from "@/lib/luoi";
@@ -15,55 +17,7 @@ export type TheLap = {
   /** chip nhỏ để người đọc biết đây là lối đi tiếp, không phải bài cùng loại */ nhan: "Kiến thức" | "Công cụ" | "Thư viện";
 };
 
-const cum = (k: string, hinh: KieuMang): TheLap => ({ duong: CHU_DE[k]!.duong, ten: CHU_DE[k]!.ten, mo_ta: CHU_DE[k]!.mo_ta, hinh, nhan: "Kiến thức" });
-
-/** Lối đi chéo mảng của từng trang trụ — cái người đọc mảng đó hay muốn xem tiếp. */
-const CHEO: Record<string, TheLap[]> = {
-  "/than-so": [
-    cum("hop-so", "than-so"),
-    { duong: "/hom-nay", ten: "Hôm nay của bạn", hinh: "than-so", nhan: "Công cụ",
-      mo_ta: "Ngày cá nhân, câu tự soi và giờ hoàng đạo — mỗi ngày một trang mới, tính từ ngày sinh của bạn." },
-  ],
-  "/hop-doi": [
-    cum("tinh-yeu", "than-so"),
-    { duong: "/tu-vi#hop-tham", ten: "Xem lá số 2 người", hinh: "tu-vi", nhan: "Công cụ",
-      mo_ta: "Đặt hai lá số Tử vi cạnh nhau: mệnh nạp âm, can chi, cung phi và tứ hoá — có điểm tham khảo, kèm lý do." },
-    cum("than-so", "than-so"),
-  ],
-  "/tu-vi": [
-    cum("menh-tuoi", "bat-tu"),
-    { duong: "/tu-vi#hop-tham", ten: "Xem lá số 2 người", hinh: "tu-vi", nhan: "Công cụ",
-      mo_ta: "Đặt hai lá số Tử vi cạnh nhau: mệnh nạp âm, can chi, cung phi và tứ hoá — có điểm tham khảo, kèm lý do." },
-  ],
-  "/bat-tu": [
-    { duong: "/xem-ngay-tot", ten: "Xem ngày tốt theo tuổi", hinh: "bat-tu", nhan: "Công cụ",
-      mo_ta: "Hoàng lịch từng ngày: việc nên làm, giờ hoàng đạo, ngày xung tuổi — chọn ngày cưới hỏi, khai trương, về nhà mới." },
-  ],
-  "/kinh-dich": [
-    { duong: "/hom-nay#que-ngay", ten: "Quẻ đầu ngày", hinh: "kinh-dich", nhan: "Công cụ",
-      mo_ta: "Mỗi sáng một quẻ Mai Hoa kèm lời nói nôm na, và quẻ riêng theo hai con số bạn tự nghĩ tới." },
-    { duong: "/tu-dien", ten: "Từ điển thuật ngữ", hinh: "kinh-dich", nhan: "Thư viện",
-      mo_ta: "Hào động, quẻ biến, thể – dụng, lục thân… hơn 200 thuật ngữ của năm mảng, giải nghĩa bằng lời đời thường." },
-  ],
-  "/phong-thuy": [
-    { duong: "/xem-tuoi-lam-nha", ten: "Xem tuổi làm nhà", hinh: "phong-thuy", nhan: "Công cụ",
-      mo_ta: "Năm nay tuổi bạn có phạm Kim lâu, Hoang ốc, Tam tai không — và nếu cần mượn tuổi thì chọn tuổi nào." },
-    { duong: "/tuoi-xong-dat", ten: "Tuổi xông đất", hinh: "phong-thuy", nhan: "Công cụ",
-      mo_ta: "Tuổi nào hợp xông đất đầu năm với gia chủ — chỉ liệt kê tuổi hợp và lý do, không chấm điểm." },
-  ],
-};
-
-/** Lối đi chung cho mọi trang (thư viện, từ điển, nhịp mỗi ngày, lịch). */
-const CHUNG: TheLap[] = [
-  { duong: "/kien-thuc", ten: "Thư viện kiến thức", hinh: "tu-vi", nhan: "Thư viện",
-    mo_ta: "Hơn 600 trang tra cứu: ý nghĩa con số, chính tinh ở từng cung, 64 quẻ, thập thần, tuổi hợp hướng." },
-  { duong: "/hom-nay", ten: "Hôm nay của bạn", hinh: "than-so", nhan: "Công cụ",
-    mo_ta: "Ngày cá nhân, câu tự soi và giờ hoàng đạo — mỗi ngày một trang mới, tính từ ngày sinh của bạn." },
-  { duong: "/tu-dien", ten: "Từ điển thuật ngữ", hinh: "kinh-dich", nhan: "Thư viện",
-    mo_ta: "Hơn 200 thuật ngữ của Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ — giải nghĩa bằng lời đời thường." },
-  { duong: "/xem-ngay-tot", ten: "Xem ngày tốt", hinh: "bat-tu", nhan: "Công cụ",
-    mo_ta: "Hoàng lịch từng ngày: việc nên làm, giờ hoàng đạo, tuổi xung — cho cưới hỏi, khai trương, về nhà mới." },
-];
+const sangThe = (t: TheTho): TheLap => ({ duong: t.duong, ten: t.ten, mo_ta: t.mo_ta, hinh: t.hinh, nhan: NHAN[t.nhan] });
 
 const MANG_TRU: Record<string, MangBlog> = {
   "/than-so": "than_so", "/hop-doi": "hop_doi", "/tu-vi": "tu_vi", "/bat-tu": "bat_tu", "/kinh-dich": "kinh_dich", "/phong-thuy": "phong_thuy",
@@ -83,15 +37,33 @@ export function theCongCu(tru: string): TheLap | null {
 const goc = (d: string) => d.split(/[?#]/)[0]!;
 
 /** `can` thẻ bù: cụm cùng silo `tru` → chéo mảng của `tru` → chung. Bỏ đường dẫn trong `boQua` (so phần trước ?/#) và trùng. */
-export function theLap(can: number, { tru, boQua = [], coCongCu = false }: { tru?: string | null; boQua?: string[]; coCongCu?: boolean } = {}): TheLap[] {
-  if (can <= 0) return [];
+export type TuyChonLap = {
+  tru?: string | null; boQua?: string[]; coCongCu?: boolean;
+  /** thẻ ưu tiên của chính URL (Trang website → Lối đi tiếp) */ uuTien?: TheTho[];
+  /** cấu hình CMS (global "Lối đi tiếp cuối trang"); không có = mặc định trong code */ cauHinh?: CauHinhLoiDi;
+  /** tỉ lệ bấm đã làm mượt theo đường dẫn (khi cauHinh.tu_xep) — xếp lại TRONG từng nhóm, giữ thứ tự biên tập khi hoà */
+  tiLe?: Record<string, number>;
+};
+
+/** Xếp lại trong nhóm theo tỉ lệ bấm (cao trước); thẻ chưa có số giữ chỗ theo thứ tự biên tập (sort ổn định). */
+export function xepTheoTiLe<T extends { duong: string }>(ds: T[], tiLe?: Record<string, number>): T[] {
+  if (!tiLe || !Object.keys(tiLe).length) return ds;
+  return ds.map((t, i) => ({ t, i, v: tiLe[t.duong] })).sort((a, b) =>
+    a.v === undefined || b.v === undefined ? a.i - b.i : b.v - a.v || a.i - b.i).map((x) => x.t);
+}
+
+export function theLap(can: number, { tru, boQua = [], coCongCu = false, uuTien = [], cauHinh = CAU_HINH_MAC_DINH, tiLe }: TuyChonLap = {}): TheLap[] {
+  if (can <= 0 || !cauHinh.bat) return [];
   const da = new Set(boQua.map(goc));
   const cc = coCongCu && tru ? theCongCu(tru) : null;
+  const xep = (ds: TheTho[]) => (cauHinh.tu_xep ? xepTheoTiLe(ds, tiLe) : ds).map(sangThe);
+  const cum = tru && cauHinh.cum_truoc ? dsCumTru(tru).map((c) => ({ duong: c.duong, ten: c.ten, mo_ta: c.mo_ta, hinh: c.hinh, nhan: "Kiến thức" as const })) : [];
   const ungVien: TheLap[] = [
+    ...uuTien.map(sangThe),
     ...(cc ? [cc] : []),
-    ...(tru ? dsCumTru(tru).map((c) => ({ duong: c.duong, ten: c.ten, mo_ta: c.mo_ta, hinh: c.hinh, nhan: "Kiến thức" as const })) : []),
-    ...(tru ? CHEO[tru] ?? [] : []),
-    ...CHUNG,
+    ...cum,
+    ...(tru ? xep(cauHinh.nhom[tru] ?? []) : []),
+    ...xep(cauHinh.nhom.chung ?? []),
   ];
   const ra: TheLap[] = [];
   for (const t of ungVien) {
@@ -105,8 +77,8 @@ export function theLap(can: number, { tru, boQua = [], coCongCu = false }: { tru
 }
 
 /** "Đọc tiếp" cuối bài blog: ít bài khác hơn 3 → bù cụm kiến thức cùng mảng mà CtaBlog chưa liệt kê, rồi lối chung. */
-export function theLapBlog(soBai: number, mang: MangBlog, daHien: string[]): TheLap[] {
+export function theLapBlog(soBai: number, mang: MangBlog, daHien: string[], them: Pick<TuyChonLap, "cauHinh" | "tiLe"> = {}): TheLap[] {
   const tt = THONG_TIN_MANG[mang];
-  return theLap(soCanLap(soBai) || (soBai === 0 ? 3 : 0), { tru: tt.duong, boQua: [tt.duong, ...daHien] });
+  return theLap(soCanLap(soBai) || (soBai === 0 ? 3 : 0), { tru: tt.duong, boQua: [tt.duong, ...daHien], ...them });
 }
 

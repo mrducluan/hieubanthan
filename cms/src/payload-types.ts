@@ -105,6 +105,7 @@ export interface Config {
     'trang-chu': TrangChu;
     'menu-dau-trang': MenuDauTrang;
     'dieu-huong': DieuHuong;
+    'loi-di-tiep': LoiDiTiep;
     'tinh-nang': TinhNang;
     'chu-chung': ChuChung;
     'payload-jobs-stats': PayloadJobsStat;
@@ -113,6 +114,7 @@ export interface Config {
     'trang-chu': TrangChuSelect<false> | TrangChuSelect<true>;
     'menu-dau-trang': MenuDauTrangSelect<false> | MenuDauTrangSelect<true>;
     'dieu-huong': DieuHuongSelect<false> | DieuHuongSelect<true>;
+    'loi-di-tiep': LoiDiTiepSelect<false> | LoiDiTiepSelect<true>;
     'tinh-nang': TinhNangSelect<false> | TinhNangSelect<true>;
     'chu-chung': ChuChungSelect<false> | ChuChungSelect<true>;
     'payload-jobs-stats': PayloadJobsStatsSelect<false> | PayloadJobsStatsSelect<true>;
@@ -648,6 +650,16 @@ export interface NoiDungTrang {
     | string
     | number
     | boolean
+    | null;
+  loi_di_tiep?:
+    | {
+        duong: string;
+        ten: string;
+        mo_ta: string;
+        nhan: 'kien_thuc' | 'cong_cu' | 'thu_vien';
+        hinh: 'than-so' | 'tu-vi' | 'bat-tu' | 'kinh-dich' | 'phong-thuy';
+        id?: string | null;
+      }[]
     | null;
   khoi_tren?:
     | (
@@ -1906,6 +1918,16 @@ export interface NoiDungTrangSelect<T extends boolean = true> {
       };
   chu?: T;
   hinh?: T;
+  loi_di_tiep?:
+    | T
+    | {
+        duong?: T;
+        ten?: T;
+        mo_ta?: T;
+        nhan?: T;
+        hinh?: T;
+        id?: T;
+      };
   khoi_tren?:
     | T
     | {
@@ -2825,6 +2847,42 @@ export interface DieuHuong {
   createdAt?: string | null;
 }
 /**
+ * Thẻ bù cho khối cuối trang (Kiến thức {mảng}, Bài viết liên quan, Đọc tiếp…) khi khối thiếu ô — để hàng nào cũng kín, người đọc luôn có lối đi tiếp. Thứ tự lấy: thẻ ưu tiên của URL (Trang website → Lối đi tiếp) → cụm kiến thức cùng mảng → nhóm của mảng → nhóm Chung. Số lượt thấy / bấm từng thẻ: /quan-tri/tang-truong.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "loi-di-tiep".
+ */
+export interface LoiDiTiep {
+  id: number;
+  /**
+   * Tắt = khối co số cột theo số mục thật (không thẻ bù).
+   */
+  bat?: boolean | null;
+  cum_truoc?: boolean | null;
+  /**
+   * Bật = trong mỗi nhóm, thẻ có tỉ lệ bấm cao hơn (28 ngày, đủ mẫu) lên trước. Chưa đủ mẫu thì giữ thứ tự ở đây.
+   */
+  tu_xep?: boolean | null;
+  nhom?:
+    | {
+        tru: '/than-so' | '/hop-doi' | '/tu-vi' | '/bat-tu' | '/kinh-dich' | '/phong-thuy' | 'chung';
+        the?:
+          | {
+              duong: string;
+              ten: string;
+              mo_ta: string;
+              nhan: 'kien_thuc' | 'cong_cu' | 'thu_vien';
+              hinh: 'than-so' | 'tu-vi' | 'bat-tu' | 'kinh-dich' | 'phong-thuy';
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * Bật/tắt các phần nội dung trên hieuban.com. Có hiệu lực trong vòng vài giây.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3003,6 +3061,34 @@ export interface DieuHuongSelect<T extends boolean = true> {
       };
   mien_tru?: T;
   nhan_ung_ho?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "loi-di-tiep_select".
+ */
+export interface LoiDiTiepSelect<T extends boolean = true> {
+  bat?: T;
+  cum_truoc?: T;
+  tu_xep?: T;
+  nhom?:
+    | T
+    | {
+        tru?: T;
+        the?:
+          | T
+          | {
+              duong?: T;
+              ten?: T;
+              mo_ta?: T;
+              nhan?: T;
+              hinh?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

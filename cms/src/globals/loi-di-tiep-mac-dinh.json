@@ -1,0 +1,51 @@
+{
+  "_ghi_chu": "CTA-2 — bộ thẻ 'lối đi tiếp' mặc định. Trùng HỆT web/lib/loi-di-tiep-mac-dinh.json (e2e cta-luoi.spec.ts so hai tệp). CMS trống = web dùng bản này.",
+  "nhom": [
+    { "tru": "/than-so", "the": [
+      { "duong": "/hop-doi/cap-so", "ten": "Số chủ đạo nào hợp nhau", "nhan": "kien_thuc", "hinh": "than-so",
+        "mo_ta": "45 cặp số chủ đạo 1–9: hai người dễ hoà ở đâu, dễ va ở đâu, cùng làm gì để êm. Không chấm điểm hợp – khắc." },
+      { "duong": "/hom-nay", "ten": "Hôm nay của bạn", "nhan": "cong_cu", "hinh": "than-so",
+        "mo_ta": "Ngày cá nhân, câu tự soi và giờ hoàng đạo — mỗi ngày một trang mới, tính từ ngày sinh của bạn." }
+    ] },
+    { "tru": "/hop-doi", "the": [
+      { "duong": "/than-so/tinh-yeu", "ten": "Số chủ đạo trong tình yêu", "nhan": "kien_thuc", "hinh": "than-so",
+        "mo_ta": "12 số chủ đạo trong tình yêu: cách yêu, cần được gì, điểm mù, hợp kiểu người nào, dấu hiệu lệch nhịp." },
+      { "duong": "/tu-vi#hop-tham", "ten": "Xem lá số 2 người", "nhan": "cong_cu", "hinh": "tu-vi",
+        "mo_ta": "Đặt hai lá số Tử vi cạnh nhau: mệnh nạp âm, can chi, cung phi và tứ hoá — có điểm tham khảo, kèm lý do." },
+      { "duong": "/than-so/y-nghia-so", "ten": "Ý nghĩa các con số", "nhan": "kien_thuc", "hinh": "than-so",
+        "mo_ta": "12 con số của thần số học Pythagoras (1–9 và số cái 11, 22, 33): từ khoá, mặt tối, năm cá nhân, đỉnh cao, thử thách." }
+    ] },
+    { "tru": "/tu-vi", "the": [
+      { "duong": "/bat-tu/menh-theo-nam", "ten": "Sinh năm nào mệnh gì", "nhan": "kien_thuc", "hinh": "bat-tu",
+        "mo_ta": "Tra mệnh theo năm sinh 1950–2025: tuổi can chi, mệnh nạp âm và ý nghĩa, màu hợp theo ngũ hành, tuổi hợp – xung, cung phi nam nữ, mốc Tết và Lập xuân." },
+      { "duong": "/tu-vi#hop-tham", "ten": "Xem lá số 2 người", "nhan": "cong_cu", "hinh": "tu-vi",
+        "mo_ta": "Đặt hai lá số Tử vi cạnh nhau: mệnh nạp âm, can chi, cung phi và tứ hoá — có điểm tham khảo, kèm lý do." }
+    ] },
+    { "tru": "/bat-tu", "the": [
+      { "duong": "/xem-ngay-tot", "ten": "Xem ngày tốt theo tuổi", "nhan": "cong_cu", "hinh": "bat-tu",
+        "mo_ta": "Hoàng lịch từng ngày: việc nên làm, giờ hoàng đạo, ngày xung tuổi — chọn ngày cưới hỏi, khai trương, về nhà mới." }
+    ] },
+    { "tru": "/kinh-dich", "the": [
+      { "duong": "/hom-nay#que-ngay", "ten": "Quẻ đầu ngày", "nhan": "cong_cu", "hinh": "kinh-dich",
+        "mo_ta": "Mỗi sáng một quẻ Mai Hoa kèm lời nói nôm na, và quẻ riêng theo hai con số bạn tự nghĩ tới." },
+      { "duong": "/tu-dien", "ten": "Từ điển thuật ngữ", "nhan": "thu_vien", "hinh": "kinh-dich",
+        "mo_ta": "Hào động, quẻ biến, thể – dụng, lục thân… hơn 200 thuật ngữ của năm mảng, giải nghĩa bằng lời đời thường." }
+    ] },
+    { "tru": "/phong-thuy", "the": [
+      { "duong": "/xem-tuoi-lam-nha", "ten": "Xem tuổi làm nhà", "nhan": "cong_cu", "hinh": "phong-thuy",
+        "mo_ta": "Năm nay tuổi bạn có phạm Kim lâu, Hoang ốc, Tam tai không — và nếu cần mượn tuổi thì chọn tuổi nào." },
+      { "duong": "/tuoi-xong-dat", "ten": "Tuổi xông đất", "nhan": "cong_cu", "hinh": "phong-thuy",
+        "mo_ta": "Tuổi nào hợp xông đất đầu năm với gia chủ — chỉ liệt kê tuổi hợp và lý do, không chấm điểm." }
+    ] },
+    { "tru": "chung", "the": [
+      { "duong": "/kien-thuc", "ten": "Thư viện kiến thức", "nhan": "thu_vien", "hinh": "tu-vi",
+        "mo_ta": "Hơn 600 trang tra cứu: ý nghĩa con số, chính tinh ở từng cung, 64 quẻ, thập thần, tuổi hợp hướng." },
+      { "duong": "/hom-nay", "ten": "Hôm nay của bạn", "nhan": "cong_cu", "hinh": "than-so",
+        "mo_ta": "Ngày cá nhân, câu tự soi và giờ hoàng đạo — mỗi ngày một trang mới, tính từ ngày sinh của bạn." },
+      { "duong": "/tu-dien", "ten": "Từ điển thuật ngữ", "nhan": "thu_vien", "hinh": "kinh-dich",
+        "mo_ta": "Hơn 200 thuật ngữ của Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ — giải nghĩa bằng lời đời thường." },
+      { "duong": "/xem-ngay-tot", "ten": "Xem ngày tốt", "nhan": "cong_cu", "hinh": "bat-tu",
+        "mo_ta": "Hoàng lịch từng ngày: việc nên làm, giờ hoàng đạo, tuổi xung — cho cưới hỏi, khai trương, về nhà mới." }
+    ] }
+  ]
+}

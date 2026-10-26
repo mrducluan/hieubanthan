@@ -68,7 +68,7 @@ export default async function KhamPha() {
         <ArrowRight className="size-4" aria-hidden />
       </Link>
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-12" />
-      <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" boQua={["/kham-pha"]} /></Suspense>
+      <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" boQua={["/kham-pha"]} duong="/kham-pha" /></Suspense>
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />
     </div>
   );

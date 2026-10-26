@@ -14,7 +14,9 @@ import { baiBlog, dsBaiTongHop, duongBlog, slugTuUrl } from "@/lib/blog";
 import { baiCungMang, lienKetKienThuc, mangCuaBai } from "@/lib/blog-mang";
 import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
 import { TheLap } from "@/components/khung/TheLap";
+import { DoKhoiCuoi } from "@/components/khung/DoKhoiCuoi";
 import { theLapBlog } from "@/lib/the-lap";
+import { boLap } from "@/lib/the-lap-cms";
 import { anhCms, baiCms, baiLienQuan, tinhNangCms } from "@/lib/cms";
 import { ganIdMucLuc } from "@/lib/muc-luc";
 import { sanitizeNotFairArticleHtml } from "@/lib/notfair-article";
@@ -74,7 +76,7 @@ export default async function Page({ params }: Props) {
   if (c && "chuyen" in c) permanentRedirect(duongBlog(c.chuyen));
   if (c && "bai" in c) {
     const [tn, lienQuan] = await Promise.all([tinhNangCms(), baiLienQuan(c.bai)]);
-    return <BaiCms bai={c.bai} tn={tn} lienQuan={lienQuan} nhap={nhap} />;
+    return <BaiCms bai={c.bai} tn={tn} lienQuan={lienQuan} nhap={nhap} lapCms={await boLap()} />;
   }
   const p = await baiBlog(slug);
   if (!p) notFound();
@@ -83,7 +85,7 @@ export default async function Page({ params }: Props) {
   // Mục lục dựng từ H2/H3 của chính bài (mục lục NotFair chèn sẵn đã bỏ khi lọc); mảng của bài → CTA chân bài đổi theo.
   const { html, mucLuc } = ganIdMucLuc(sanitizeNotFairArticleHtml(p.content_html));
   const mang = mangCuaBai({ tieuDe: p.title, slug: p.slug, the: p.tags, moTa: p.meta_description });
-  const docTiep = baiCungMang(await dsBaiTongHop(), p.slug, mang);
+  const [docTiep, lapCms] = await Promise.all([dsBaiTongHop().then((ds) => baiCungMang(ds, p.slug, mang)), boLap()]);
 
   return (
     <KhungBaiDoc mucLuc={mucLuc} tieuDe={p.title} nguon="notfair" phut={p.reading_time_minutes} ben={<CtaBen mang={mang} />}>
@@ -133,6 +135,7 @@ export default async function Page({ params }: Props) {
       {/* CTA-2: ít bài khác (blog mới) → bù cụm kiến thức cùng mảng / lối chung, không để ô trống. */}
       <section aria-labelledby="doc-tiep" className="mt-12" data-testid="doc-tiep">
         <h2 id="doc-tiep" className="text-2xl">Đọc tiếp</h2>
+        <DoKhoiCuoi khoi="doc_tiep" />
         <ul className="mt-4 grid gap-3 sm:grid-cols-3">
           {docTiep.map((b) => (
             <li key={b.slug}>
@@ -142,7 +145,7 @@ export default async function Page({ params }: Props) {
               </Link>
             </li>
           ))}
-          {theLapBlog(docTiep.length, mang, lienKetKienThuc(mang).map((x) => x.duong)).map((t) => <TheLap key={t.duong} t={t} kieu="chu-nho" />)}
+          {theLapBlog(docTiep.length, mang, lienKetKienThuc(mang).map((x) => x.duong), lapCms).map((t) => <TheLap key={t.duong} t={t} kieu="chu-nho" />)}
         </ul>
       </section>
 

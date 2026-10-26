@@ -270,6 +270,51 @@ export default async function Page() {
         </Card>
       )}
 
+      {ph.ok && ph.du.loiDi && (
+        <Card data-testid="qt-loi-di">
+          <h2 className="text-lg">Khối thẻ cuối trang · lối đi tiếp (PostHog, 28 ngày)</h2>
+          <p className="mt-1 text-sm text-fg-muted">CTA-2: khối Kiến thức {"{mảng}"}, Bài viết liên quan / mới, Đọc tiếp… Thẻ bù lấp ô trống khi khối thiếu
+            mục. So <b>tỉ lệ bấm thẻ bù</b> với thẻ thật: thẻ bù kéo được người đi tiếp thì giữ; thẻ đủ mẫu (≥ 30 lượt thấy) mà gần như
+            không ai bấm thì đổi ở CMS → <i>Lối đi tiếp cuối trang</i>. Bật “Tự xếp theo lượt bấm” để web tự đưa thẻ bấm nhiều lên trước
+            (theo đúng thứ tự bảng dưới).</p>
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead><tr className="text-left text-xs text-fg-muted">
+                <th className="py-1 font-normal">Khối</th><th className="text-right font-normal">Lượt thấy khối</th>
+                <th className="text-right font-normal">Bấm thẻ thật</th><th className="text-right font-normal">Bấm thẻ bù</th>
+                <th className="text-right font-normal">Tỉ lệ đi tiếp</th>
+              </tr></thead>
+              <tbody>
+                {ph.du.loiDi.khoi.map((d) => (
+                  <tr key={d.khoi} className="border-t border-line/60">
+                    <td className="py-1.5"><code>{d.khoi}</code></td><td className="text-right">{so(d.thay)}</td>
+                    <td className="text-right">{so(d.bam_that)}</td><td className="text-right">{so(d.bam_lap)}</td>
+                    <td className="text-right">{d.thay ? pt((d.bam_that + d.bam_lap) / d.thay) : "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full text-sm" data-testid="qt-loi-di-the">
+              <thead><tr className="text-left text-xs text-fg-muted">
+                <th className="py-1 font-normal">Thẻ bù (đường dẫn) — xếp như khi tự xếp</th><th className="text-right font-normal">Lượt thấy</th>
+                <th className="text-right font-normal">Lượt bấm</th><th className="text-right font-normal">Tỉ lệ</th>
+              </tr></thead>
+              <tbody>
+                {ph.du.loiDi.the.map((d) => (
+                  <tr key={d.den} className="border-t border-line/60">
+                    <td className="py-1.5"><code>{d.den}</code>{!d.du_mau && <span className="ml-2 text-xs text-fg-faint">chưa đủ mẫu</span>}</td>
+                    <td className="text-right">{so(d.thay)}</td><td className="text-right">{so(d.bam)}</td>
+                    <td className="text-right">{d.ti_le === null ? "—" : pt(d.ti_le)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+      )}
+
       {ph.ok && ph.du.pheuThe && (
         <Card data-testid="qt-pheu-the">
           <h2 className="text-lg">Phễu lời mời theo loại thẻ (PostHog, 28 ngày)</h2>

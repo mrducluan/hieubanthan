@@ -36,7 +36,10 @@ export type SuKien =
   | "gift_sent" | "gift_opened" | "gift_claimed"
 
   // QH-BT: mở trang của tôi /ban-than — kind lan_dau / quay_lai + so_ngay kể từ lần ghé trước (đếm trên máy)
-  | "hub_viewed";
+  | "hub_viewed"
+  // CTA-2: khối thẻ cuối trang (Kiến thức {mảng}, Bài viết liên quan, Đọc tiếp…) — thấy khối (lap=0) / thấy từng thẻ bù
+  // (lap=1, den = đường dẫn thẻ) / bấm thẻ (lap=1 thẻ bù, 0 = thẻ thật). Chỉ mã khối + đường dẫn trong site.
+  | "end_cta_viewed" | "end_cta_clicked";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
@@ -94,7 +97,11 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   da_bat: "number",     // PT-V2: 1 = máy đọc ảnh đang bật, 0 = tắt / lỗi
   ma: "string",         // PT-V2: mã dấu hiệu người dùng xác nhận (xa_ngang…), chỉ mã
   con_dung: "number",   // SAO-V: trang nhận quà — 1 = link quà còn dùng được, 0 = đã nhận / hết hạn / không có
-  co_ma: "boolean",     // SAO-V: share_created — link có gắn mã mời ?gt= của người đăng nhập (phễu mời ở quản trị)
+  co_ma: "boolean",
+  khoi: "string",       // CTA-2: mã khối cuối trang (kien_thuc_tru, bai_lien_quan, bai_moi, doc_tiep, thu_vien, trang_dich)
+  lap: "number",        // CTA-2: 1 = thẻ bù (lối đi tiếp), 0 = thẻ thật / cả khối
+  thu_tu: "number",     // CTA-2: vị trí thẻ trong khối (1…)
+  so_lap: "number",     // CTA-2: số thẻ bù trong khối lúc người dùng thấy     // SAO-V: share_created — link có gắn mã mời ?gt= của người đăng nhập (phễu mời ở quản trị)
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */
