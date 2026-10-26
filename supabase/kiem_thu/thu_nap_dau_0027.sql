@@ -28,7 +28,7 @@ select pg_temp.kt('anon không gọi nd_tang_cho_don', has_function_privilege('a
 select pg_temp.kt('authenticated không gọi nap_sao_tu_cong', has_function_privilege('authenticated', 'nap_sao_tu_cong(bigint,integer,text,text)', 'execute'), false);
 select pg_temp.kt('anon không tạo đơn', has_function_privilege('anon', 'tao_don_nap(text,text)', 'execute'), false);
 select pg_temp.kt('gói khởi đầu: bat = false trong bảng', (select bat from goi_sao where ma = 'khoi_dau'), false);
-select pg_temp.kt('gói khởi đầu: 12.000 ₫ / 12 Sao', (select gia_vnd || '/' || sao from goi_sao where ma = 'khoi_dau'), '12000/12');
+select pg_temp.kt('gói khởi đầu: 19.000 ₫ / 19 Sao', (select gia_vnd || '/' || sao from goi_sao where ma = 'khoi_dau'), '19000/19');
 
 -- ================================================================ (1) gói khởi đầu theo công tắc
 set role anon;
@@ -47,12 +47,12 @@ reset role;
 -- ================================================================ (2) công tắc nạp đầu TẮT → không tặng
 set role authenticated; select set_config('request.jwt.claim.sub','c0000000-0000-0000-0000-0000000000a1',false);
 select tao_don_nap('khoi_dau', 'gia') as t1 \gset
-select pg_temp.kt('đơn khởi đầu lấy giá từ bảng', (:'t1'::jsonb->>'so_tien')::int || '/' || (:'t1'::jsonb->>'sao'), '12000/12');
+select pg_temp.kt('đơn khởi đầu lấy giá từ bảng', (:'t1'::jsonb->>'so_tien')::int || '/' || (:'t1'::jsonb->>'sao'), '19000/19');
 select (:'t1'::jsonb->>'ma_don')::bigint as d1 \gset
 select pg_temp.kt('P1 trước khi nạp: lan_dau, công tắc tắt',
     (nap_dau_thong_tin()->>'lan_dau')::boolean || '/' || (nap_dau_thong_tin()->>'bat'), 'true/false');
 reset role; set role service_role;
-select pg_temp.kt('tắt: nạp đơn đầu, không tặng', nap_sao_tu_cong(:d1, 12000, 'gia', 'ND1')->>'sao_tang', '0');
+select pg_temp.kt('tắt: nạp đơn đầu, không tặng', nap_sao_tu_cong(:d1, 19000, 'gia', 'ND1')->>'sao_tang', '0');
 reset role;
 select pg_temp.kt('tắt: không có lô nap_dau', (select count(*) from so_cai_sao where khoa = 'nap_dau:c0000000-0000-0000-0000-0000000000a1')::int, 0);
 select pg_temp.kt('tắt: đơn không ghi sao_tang_dau', (select sao_tang_dau from don_nap where ma_don = :d1) is null, true);
@@ -125,7 +125,7 @@ set role authenticated; select set_config('request.jwt.claim.sub','c0000000-0000
 select pg_temp.kt('sau hoàn: không còn lần đầu', (nap_dau_thong_tin()->>'lan_dau')::boolean, false);
 select (tao_don_nap('khoi_dau', 'gia')->>'ma_don')::bigint as d4 \gset
 reset role; set role service_role;
-select pg_temp.kt('nạp lại sau hoàn: không tặng', (nap_sao_tu_cong(:d4, 12000, 'gia', 'ND4')->>'sao_tang')::int, 0);
+select pg_temp.kt('nạp lại sau hoàn: không tặng', (nap_sao_tu_cong(:d4, 19000, 'gia', 'ND4')->>'sao_tang')::int, 0);
 reset role;
 
 -- ================================================================ (5) mức kẹp 0–100
@@ -141,8 +141,8 @@ set role authenticated; select set_config('request.jwt.claim.sub','c0000000-0000
 select pg_temp.kt('0% → coi như tắt', (nap_dau_thong_tin()->>'bat')::boolean, false);
 select (tao_don_nap('khoi_dau', 'gia')->>'ma_don')::bigint as d6 \gset
 reset role; set role service_role;
-select pg_temp.kt('0% → vẫn nạp, không tặng', nap_sao_tu_cong(:d6, 12000, 'gia', 'ND6'),
-    '{"sao": 12, "ket_qua": "da_nap", "sao_tang": 0}'::jsonb);
+select pg_temp.kt('0% → vẫn nạp, không tặng', nap_sao_tu_cong(:d6, 19000, 'gia', 'ND6'),
+    '{"sao": 19, "ket_qua": "da_nap", "sao_tang": 0}'::jsonb);
 reset role;
 select pg_temp.kt('0%: không có lô', (select count(*) from so_cai_sao where khoa = 'nap_dau:c0000000-0000-0000-0000-0000000000a5')::int, 0);
 -- Sai số tiền: không tặng, không đổi trạng thái thành da_tra.

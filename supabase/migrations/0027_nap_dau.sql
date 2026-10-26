@@ -2,7 +2,7 @@
 -- Vấn đề: gói nhỏ nhất 29.000 ₫ / 30 Sao gấp 3 lần nhu cầu mở 1 Luận giải toàn bộ (10 Sao) → người muốn trả bị chặn bởi
 -- "phải nạp dư". Sao vẫn là credit nội bộ: KHÔNG đổi ra tiền, KHÔNG chuyển nhượng.
 --
---   (1) Gói khởi đầu 'khoi_dau' (12.000 ₫ / 12 Sao, "Vừa 1 báo cáo", đứng đầu). Dòng goi_sao để bat = false; gói được BÁN
+--   (1) Gói khởi đầu 'khoi_dau' (19.000 ₫ / 19 Sao — cùng 10 Sao chào mừng vừa đủ 1 báo cáo 29 Sao, đứng đầu). Dòng goi_sao để bat = false; gói được BÁN
 --       khi cột bat = true HOẶC công tắc cau_hinh 'sao.goi_khoi_dau.bat' bật (mặc định TẮT, bật ở /quan-tri/cai-dat).
 --       Một nguồn sự thật "gói đang bán": goi_sao_dang_ban() — web đọc danh sách gói VÀ tao_don_nap kiểm gói đều qua nó,
 --       nên trang nạp không bao giờ hiện gói mà máy chủ từ chối tạo đơn (và ngược lại).
@@ -26,8 +26,12 @@ alter table don_nap add column if not exists sao_tang_dau integer check (sao_tan
 
 -- ---------------------------------------------------------------- (1) gói khởi đầu
 insert into goi_sao (ma, ten, gia_vnd, sao, nhan, mo_ta, bat, thu_tu) values
-    ('khoi_dau', 'Khởi đầu', 12000, 12, 'Vừa 1 báo cáo', 'Đủ mở 1 Luận giải toàn bộ', false, 0)
+    ('khoi_dau', 'Khởi đầu', 19000, 19, 'Khởi đầu', 'Cùng Sao chào mừng vừa đủ 1 Luận giải toàn bộ', false, 0)
 on conflict (ma) do nothing;
+-- Giá báo cáo 10 → 29 Sao (chủ dự án chốt 26/10/2026): mô tả gói không ghi cứng số báo cáo nữa (web tự tính "≈ N báo cáo"
+-- theo luan_giai.gia_sao hiện hành). Cập nhật cả dòng đã có trên production (0012 đã chạy).
+update goi_sao set mo_ta = 'Gói nhỏ để thử' where ma = 'thu' and mo_ta = 'Đủ 3 lần Luận giải toàn bộ';
+
 
 create or replace function goi_sao_dang_ban() returns setof public.goi_sao
     language sql stable security definer set search_path = '' as $$

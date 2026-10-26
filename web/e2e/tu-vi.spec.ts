@@ -138,7 +138,7 @@ test("sinh nửa sau tháng nhuận: chọn cách tính tháng → cung Mệnh �
 
 test("giá luận giải: công tắc thu Sao mặc định tắt → miễn phí, không đòi đăng nhập", async ({ page, request }) => {
   const r = await request.get("/api/luan-giai/phi");
-  expect(await r.json()).toEqual({ thu: false, gia: 10 });
+  expect(await r.json()).toEqual({ thu: false, gia: 29 });
   await napHoSo(page);
   await page.goto("/tu-vi");
   await expect(page.getByTestId("gia-luan-giai")).toContainText("miễn phí");

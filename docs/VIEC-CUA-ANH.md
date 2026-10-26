@@ -99,7 +99,7 @@
    `/quan-tri/cai-dat`. Cần `SAO_KHOA_SECRET` (đã có cho SAO-2) để tính mã băm thiết bị.
 4o. [ ] **Nạp đầu SAO-ND (2026-10-26) — chạy migration 0027** (SAU 0026): Supabase → SQL Editor → dán toàn bộ
    `supabase/migrations/0027_nap_dau.sql` → Run (rollback: `0027_nap_dau.down.sql`). Kiểm bằng `da_chay_chua.sql` (dòng
-   0027 = true). Rồi bật ở `/quan-tri/cai-dat` nhóm "Nạp Sao": gói Khởi đầu 12.000 ₫ / 12 Sao (`sao.goi_khoi_dau.bat`)
+   0027 = true). Rồi bật ở `/quan-tri/cai-dat` nhóm "Nạp Sao": gói Khởi đầu 19.000 ₫ / 19 Sao — cùng 10 Sao chào mừng vừa đủ 1 báo cáo 29 Sao (`sao.goi_khoi_dau.bat`; đổi giá báo cáo thì xem lại cỡ gói này)
    và tặng Sao lần nạp đầu (`sao.nap_dau.bat`, mặc định 20%). **Thứ tự 0025 → 0026 → 0027 bắt buộc, và KHÔNG chạy lại
    0025 sau khi đã chạy 0027** (0025 đặt lại danh sách loại Sao chưa có `nap_dau` → lỗi ràng buộc khi đã có dòng tặng).
 4l. [ ] **Bảo mật SEC-2 (2026-10-23, `docs/BAO-MAT.md` mục SEC-2) — làm theo thứ tự:**

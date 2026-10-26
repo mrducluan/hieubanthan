@@ -225,7 +225,9 @@ function PhanKhoa({ bc, dang, loi, moKhoa }: { bc: BaoCao; dang: boolean; loi: s
   const { sao, so_du, dang_nhap, thuong_chao_mung } = bc.phi;
   const goiY = dang_nhap
     ? (so_du ?? 0) >= sao ? `Ví còn ${so_du} Sao — đủ mở ngay.` : `Ví còn ${so_du ?? 0} Sao — nạp nhanh bằng QR, quay lại đúng chỗ này.`
-    : thuong_chao_mung ? `Đăng nhập và lưu hồ sơ: tặng ${thuong_chao_mung} Sao${thuong_chao_mung >= sao ? " — đủ mở báo cáo này" : ""}.` : "Đăng nhập để dùng Sao.";
+    : thuong_chao_mung
+      ? `Đăng nhập và lưu hồ sơ: tặng ${thuong_chao_mung} Sao${thuong_chao_mung >= sao ? " — đủ mở báo cáo này" : ` — còn thiếu ${sao - thuong_chao_mung} Sao, nạp nhanh bằng QR`}.`
+      : "Đăng nhập để dùng Sao.";
   return (
     <section aria-labelledby="lg-khoa" className="mt-10 print:hidden" data-testid="lg-phan-khoa">
       <div className="flex items-center gap-3 text-sm text-fg-muted">

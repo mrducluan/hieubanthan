@@ -80,7 +80,10 @@ for f in $(ls "$ROOT"/supabase/migrations/*.sql | grep -v '\.down\.sql$' | sort)
 psql -d "$DB" -q -v ON_ERROR_STOP=1 <<'SQL'
 insert into cau_hinh (khoa, gia_tri) values
   ('luan_giai.thu_sao', 'true'), ('sao.hoi.thu', 'true'), ('sao.hoi.mien_phi_khach', '2'), ('sao.hoi.mien_phi_tk', '2'),
-  ('sao.nhiem_vu.bat', 'true')
+  ('sao.nhiem_vu.bat', 'true'),
+  -- Fixture: giá báo cáo 10 để chuỗi "10 Sao chào mừng → tự mở báo cáo" chạy được; mặc định production là 29
+  -- (chủ dự án chốt 26/10/2026) — khi đó chào mừng KHÔNG đủ, người dùng nạp gói Khởi đầu 19 Sao (kiểm ở e2e/nap-dau.spec.ts).
+  ('luan_giai.gia_sao', '10')
 on conflict (khoa) do update set gia_tri = excluded.gia_tri;
 SQL
 

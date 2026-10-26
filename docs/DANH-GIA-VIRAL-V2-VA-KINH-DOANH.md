@@ -134,6 +134,20 @@ Em đề xuất: cập nhật **chú thích code + tài liệu nội bộ** sang
 pháp lý công khai** (Điều khoản, Chính sách riêng tư) chỉ sửa sau khi anh xác nhận, vì đó là khẳng định luật với người
 dùng.
 
+## 8b. Giá 29 Sao/báo cáo — chủ dự án chốt 26/10/2026, cân đối lại (đã làm)
+
+| Mục | Trước | Sau | Vì sao |
+|---|---|---|---|
+| Luận giải toàn bộ (`luan_giai.gia_sao`) | 10 Sao | **29 Sao** (≈ 29.000 ₫, 1 Sao ≈ 1.000 ₫) | Chủ dự án chốt; vẫn rẻ hơn thị trường (50–200k/báo cáo chi tiết) |
+| Câu hỏi vượt lượt (`sao.hoi.gia`) | 1 Sao | **3 Sao** | Chủ dự án nói 29 — em để 3: một câu chat không thể bằng cả báo cáo 12 chương; đã có 10 câu miễn phí/ngày |
+| Sao chào mừng | 10 | 10 (giữ) | Không còn tự mở báo cáo đầu → thành "còn thiếu 19" (copy đã sửa) — đẩy sang **nhận lời mời (10 + 20 = 30 ≥ 29)** hoặc gói Khởi đầu |
+| Gói Khởi đầu (0027) | 12.000 ₫ / 12 Sao | **19.000 ₫ / 19 Sao** "Cùng Sao chào mừng vừa đủ 1 báo cáo" | Lấp đúng khoảng thiếu; hộp nạp nhanh tự gợi gói này khi thiếu 19 |
+| Gói Thử 29k/30 · Phổ biến 99k/110 · Gia đình 199k/240 | "Đủ 3 lần" | ≈ 1 · ≈ 3 · ≈ 8 báo cáo (web tự tính theo giá hiện hành; mô tả gói bỏ số cứng) | Đổi giá sau này không làm mô tả sai |
+| Hội viên năm Sao/tháng | 15 | 15 (giữ) | Hội viên mở chương miễn phí; Sao tháng dùng cho ~5 câu hỏi vượt lượt |
+| Lời mời 20/20, nạp đầu +20%, chuỗi +2, nhiệm vụ 5/5/5 | giữ | giữ | Lời mời thành đường "miễn phí" duy nhất tới báo cáo đầu → tốt cho khâu MỜI |
+
+**Phương án khác (chưa làm, để anh cân nhắc sau khi có số):** giá theo mảng (`luan_giai.gia_sao.<mảng>`: Bản đồ con số 19, Tử vi/Bát tự 29) nếu Bản đồ con số chuyển đổi kém hơn; hoặc nâng chào mừng lên 29 để giữ "lưu hồ sơ = mở ngay 1 báo cáo" (đổi lại phát nhiều Sao miễn phí hơn ~3 lần). Đo trước: tỉ lệ `paywall_viewed → checkout_started` và `referral_signup` trong 2–4 tuần.
+
 ## 9. Ba cách tiếp cận cho 3 ý kinh doanh đã duyệt (2026-10-26) — chấm và chọn
 
 Ba ý chủ dự án duyệt: (1) hội viên năm VND + Sao/tháng · (2) "Hỏi chuyên gia" trả lời văn bản giá VND · (3) thiết kế lần

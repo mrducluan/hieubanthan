@@ -1,4 +1,5 @@
 # Khi nào miễn phí, khi nào cần Sao — quy trình và quy tắc (SAO-2, 2026-10-12)
+> **Cập nhật 26/10/2026 (chủ dự án chốt):** giá Luận giải toàn bộ **29 Sao** (không còn 10), câu hỏi vượt lượt **3 Sao**; Sao chào mừng 10 giữ nguyên → không còn tự mở báo cáo đầu — thay bằng gói Khởi đầu 19 Sao / 19.000 ₫ (cùng chào mừng vừa đủ) hoặc nhận lời mời (10 + 20 = 30). Các con số "10 Sao" bên dưới là kế hoạch gốc.
 
 > **Khâu:** 4 · Nạp Sao, nhưng không được làm hỏng khâu 1–3 (thu hút, quay lại, mời bạn).
 > **Đo bằng:** phễu PostHog ở /quan-tri/tang-truong: `paywall_viewed` → `unlock_clicked` → `checkout_started` →

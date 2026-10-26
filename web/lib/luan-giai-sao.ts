@@ -16,7 +16,7 @@ import { catXemTruoc, type BaoCaoDay } from "@/lib/sao-xem-truoc";
 import { mangLuanGiai } from "@/lib/luan-giai-mang";
 
 /** Giá mặc định; QT-2: chủ sở hữu đổi ở /quan-tri/cai-dat (khoá luan_giai.gia_sao). */
-export const GIA_LUAN_GIAI_SAO = 10;
+export const GIA_LUAN_GIAI_SAO = 29;   // chủ dự án chốt 26/10/2026 (trước 10); câu hỏi vượt lượt 3 Sao
 export const giaLuanGiaiSao = () => layCauHinh<number>("luan_giai.gia_sao");
 
 /** Công tắc: (cài đặt chung luan_giai.thu_sao — chưa đặt thì theo env LUAN_GIAI_THU_SAO=1 — HOẶC công tắc riêng của

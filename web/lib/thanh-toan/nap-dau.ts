@@ -5,7 +5,7 @@
 export type NapDau = { bat: boolean; phan_tram: number; lan_dau: boolean | null };
 export type GoiHienThi = { ma: string; ten: string; gia_vnd: number; sao: number; nhan: string | null; mo_ta: string | null };
 
-/** Mã gói khởi đầu (12.000 ₫ / 12 Sao) — không chọn sẵn ở trang nạp, chỉ gợi ý khi nó là gói nhỏ nhất đủ dùng. */
+/** Mã gói khởi đầu (19.000 ₫ / 19 Sao — cùng 10 Sao chào mừng vừa đủ 1 báo cáo 29 Sao) — không chọn sẵn ở trang nạp, chỉ gợi ý khi nó là gói nhỏ nhất đủ dùng. */
 export const GOI_KHOI_DAU = "khoi_dau";
 
 export const saoTangLanDau = (sao: number, phanTram: number) =>
