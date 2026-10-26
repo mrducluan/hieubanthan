@@ -4,6 +4,8 @@
 // SAO-V (0025): người đã đăng nhập thấy chuỗi máy chủ (mọi máy) + mốc thưởng Sao — components/khung/ChuoiNgay.tsx.
 // HN-2: "Hôm nay bạn định làm gì?" — chọn ý định hoặc gõ một câu; engine nhận diện ý định bằng luật từ khoá, không lưu
 // câu, không trả lại câu. Trên máy chỉ nhớ MÃ ý định của đúng ngày đó (mở lại trong ngày vẫn thấy).
+// SAO-HH: "Lá bài đầu ngày" (một điều của hôm nay, tất định, miễn phí) + "Hẹn với chính mình" (7/30 ngày, lưu máy, không
+// có gì để mất) — docs/CO-CHE-RUI-RO-VA-THAY-THE.md. Hẹn lấy tiến độ từ chuỗi máy chủ (đăng nhập) hoặc chuỗi máy.
 import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
 import { NhacHomNay } from "@/components/khung/NhacHomNay";
 import { HoiHomQua } from "@/components/khung/HoiHomQua";
@@ -11,6 +13,9 @@ import { HoiSau30Ngay } from "@/components/khung/HoiSau30Ngay";
 import { QueRieng } from "@/components/kinh-dich/QueRieng";
 import { MoiCaiApp } from "@/components/khung/MoiCaiApp";
 import { ChuoiNgay } from "@/components/khung/ChuoiNgay";
+import { LaBaiDauNgay } from "@/components/khung/LaBaiDauNgay";
+import { HenChinhMinh } from "@/components/khung/HenChinhMinh";
+import type { TrangThaiChuoi } from "@/lib/chuoi-ngay";
 import { nhoYDinhHomNay } from "@/lib/hom-qua";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -125,6 +130,7 @@ export function HomNay() {
   const [the, setThe] = useState<TheHomNay | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [chuoi, setChuoi] = useState<{ so: number; batDauLai: boolean } | null>(null);
+  const [ttChuoi, setTtChuoi] = useState<TrangThaiChuoi | null>(null);
   const [daChep, setDaChep] = useState(false);
   const daGhi = useRef(false);
   const [chon, setChon] = useState<string[]>([]);
@@ -277,10 +283,18 @@ export function HomNay() {
             </div>
             <SoNoiBatNgay hoSo={hoSo} />
             <div className="flex flex-wrap items-center justify-between gap-3">
-              {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} />}
+              {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} onTrangThai={setTtChuoi} />}
               <Button size="sm" variant="secondary" onClick={() => void chiaSe()}><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ"}</Button>
             </div>
+            {/* SAO-HH: hẹn 7/30 ngày — chờ /api/sao/chuoi trả lời để lấy đúng nguồn chuỗi (tài khoản hay máy). */}
+            {chuoi !== null && ttChuoi !== null && (
+              <HenChinhMinh hoSo={hoSo} ngay={the.ngay_xem} tieuDe={c("hen.tieu_de")}
+                chuoi={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.chuoi : chuoi.so}
+                nguon={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? "tai_khoan" : "may"} />
+            )}
           </Card>
+
+          <LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} />
 
           {the.hoang_lich && (
             <section aria-labelledby="hl-hom-nay" className="glass space-y-3 rounded-2xl p-5" data-testid="hoang-lich-hom-nay">

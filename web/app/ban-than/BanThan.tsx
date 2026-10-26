@@ -23,6 +23,7 @@ import { docXong } from "@/lib/do-luong";
 import { useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { GopY } from "@/components/khung/GopY";
 import { NhiemVuSao } from "@/components/sao/NhiemVuSao";
+import { HuyHieu } from "@/components/khung/HuyHieu";
 
 export function BanThan() {
   const hoSo = useHoSo();
@@ -151,6 +152,9 @@ export function BanThan() {
           </Link>
         </p>
       </section>
+
+      {/* SAO-HH: huy hiệu thành tựu — máy chủ (đăng nhập) + máy này; không mua bán, không đổi ra Sao. */}
+      <HuyHieu />
 
       {/* SAO-3: Lưu hồ sơ · Hỏi 3 câu · Mời 1 bạn → nhận Sao (tự ẩn khi chưa bật tài khoản / công tắc tắt với khách). */}
       <NhiemVuSao />

@@ -19,15 +19,19 @@ export interface LoiChuoi {
   /** Lời chúc khi vừa nhận Sao. */
   chuc_mung: string | null;
   bat_dau_lai: boolean;
+  /** SAO-HH: hôm qua là ngày nghỉ (chuỗi vẫn nối) / tuần này còn ngày nghỉ — chỉ khi máy chủ đã chạy 0030. */
+  nghi: string | null;
 }
 
 export const CAU_BAT_DAU_LAI = "Bắt đầu lại từ hôm nay — không sao cả.";
 export const CAU_NGAY_DAU = "Ngày đầu tiên của chuỗi — mai ghé tiếp nhé";
+export const CAU_DA_NGHI = "Hôm qua bạn nghỉ một ngày — chuỗi vẫn nối tiếp.";
+export const CAU_NGHI_CON = "Mỗi tuần có một ngày nghỉ miễn phí, chuỗi không đứt.";
 
 /** Lời cho chuỗi đếm trên máy (khách, hoặc khi máy chủ chưa sẵn sàng). `batDauLai` = có chuỗi cũ nhưng đã cách quãng. */
 export function loiChuoiMay(chuoi: number, batDauLai: boolean): LoiChuoi {
   const chinh = chuoi > 1 ? `Bạn ghé ${chuoi} ngày liên tiếp` : batDauLai ? CAU_BAT_DAU_LAI : CAU_NGAY_DAU;
-  return { chinh, dai_nhat: null, moc: null, chuc_mung: null, bat_dau_lai: chuoi <= 1 && batDauLai };
+  return { chinh, dai_nhat: null, moc: null, chuc_mung: null, bat_dau_lai: chuoi <= 1 && batDauLai, nghi: null };
 }
 
 /** Lời cho chuỗi máy chủ (diem_danh). Mất chuỗi = chuỗi 1 mà dài nhất > 1: câu trung tính, giữ kỷ lục cũ. */
@@ -40,7 +44,9 @@ export function loiChuoiMayChu(d: DiemDanh): LoiChuoi {
     moc = `Còn ${d.con_ngay} ngày nữa tới mốc ${d.chuoi + d.con_ngay} ngày: +${d.sao_moc} Sao`;
   }
   const chucMung = d.sao > 0 ? `+${d.sao} Sao vào ví — cảm ơn bạn ghé đều ${d.chuoi} ngày.` : null;
-  return { chinh, dai_nhat: daiNhat, moc, chuc_mung: chucMung, bat_dau_lai: batDauLai };
+  // Ngày nghỉ: nói khi vừa dùng; còn lại chỉ nhắc nhẹ là có (khi chuỗi đang chạy) — không đếm ngược, không thúc.
+  const nghi = d.da_nghi ? CAU_DA_NGHI : d.nghi_con && d.chuoi > 1 ? CAU_NGHI_CON : null;
+  return { chinh, dai_nhat: daiNhat, moc, chuc_mung: chucMung, bat_dau_lai: batDauLai, nghi };
 }
 
 /** Dòng mời khách đăng nhập; phần Sao chỉ khi công tắc thưởng bật và mức > 0. */

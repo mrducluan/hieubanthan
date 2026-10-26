@@ -89,7 +89,11 @@ export async function hoaHongCuaToi(): Promise<HoaHong> {
 }
 
 /** Chuỗi ngày ghé (giờ VN). Gọi nhiều lần trong ngày không cộng thêm. */
-export interface DiemDanh { ngay: string; chuoi: number; dai_nhat: number; moi: boolean; bat: boolean; moc: number; sao_moc: number; con_ngay: number; sao: number }
+export interface DiemDanh {
+  ngay: string; chuoi: number; dai_nhat: number; moi: boolean; bat: boolean; moc: number; sao_moc: number; con_ngay: number; sao: number;
+  /** SAO-HH (0030): hôm qua là ngày nghỉ chuỗi (chuỗi vẫn nối tiếp) · tuần này còn ngày nghỉ. Thiếu = DB chưa chạy 0030. */
+  da_nghi?: boolean; nghi_con?: boolean;
+}
 export async function diemDanh(): Promise<DiemDanh> {
   const { data, error } = await (await sb()).rpc("diem_danh");
   if (error) throw new Error("Chưa ghi được ngày ghé.");
