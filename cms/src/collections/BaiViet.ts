@@ -19,7 +19,7 @@ import { kiemTrung } from "../lib/trung-lap";
 import { taoSlug } from "../lib/slug";
 import { linkXemTruoc, webUrl } from "../lib/web";
 import { coKhoaNotFair, dsNotFair, nguonNotFair, nhapBaiNotFair } from "../lib/notfair";
-import { chuanHoaMotBai, chuanHoaTatCaNotFair } from "../lib/chuan-hoa-notfair";
+import { chuanHoaMotBai, chuanHoaTatCaNotFair, dsBaiNotFairCms } from "../lib/chuan-hoa-notfair";
 
 export const MANG = [
   { label: "Thần số học", value: "than_so" },
@@ -134,7 +134,7 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     preview: (doc) => linkXemTruoc((doc as { slug?: string }).slug),
     pagination: { defaultLimit: 25 },
     // BLOG-3: bảng bài NotFair + nút "Nhập vào CMS để sửa" ở đầu danh sách bài.
-    components: { beforeListTable: ["/components/NhapNotFair#NhapNotFair"] },
+    components: { beforeListTable: ["/components/ChuanHoaNotFair#ChuanHoaNotFair", "/components/NhapNotFair#NhapNotFair"] },
   },
   defaultPopulate: { tieu_de: true, slug: true, mo_ta_ngan: true, anh_bia: true, publishedAt: true },
   access: { read: daXuatBanHoacNoiBo, create: taoBai, update: suaBai, delete: chiChuBien, readVersions: docPhienBan },
@@ -185,16 +185,28 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
       },
     },
     {
-      // BLOG-7: chuẩn hoá SEO mọi bài nguồn NotFair → bản NHÁP "Gửi duyệt" (đường dẫn không dấu + 308, trường SEO thiếu,
-      // hỏi đáp, ảnh nền sáng, liên kết nội bộ). Chỉ Quản trị/Chủ biên. Bản đang xuất bản không đổi tới khi bấm Xuất bản.
+      // BLOG-7: danh sách bài nguồn NotFair đang có trong CMS + điểm kiểm định — khung "Chuẩn hoá SEO bài NotFair"
+      // đọc danh sách này (KHÔNG phụ thuộc việc CMS đọc được NotFair). Chỉ Quản trị/Chủ biên.
+      path: "/chuan-hoa-notfair", method: "get",
+      handler: async (req) => {
+        if (!laChuBien(req)) return Response.json({ loi: "Chỉ Quản trị hoặc Chủ biên." }, { status: 403 });
+        return Response.json({ ds: await dsBaiNotFairCms(req.payload, req) });
+      },
+    },
+    {
+      // BLOG-7: audit (`ghi: false` — chỉ báo sẽ đổi gì, điểm dự kiến) hoặc chuẩn hoá SEO bài nguồn NotFair → bản NHÁP
+      // "Gửi duyệt" (đường dẫn không dấu + 308, trường SEO thiếu, hỏi đáp, ảnh nền sáng, liên kết nội bộ). Bản đang xuất
+      // bản không đổi tới khi bấm Xuất bản. Có `id` → một bài (nút gọi lần lượt để không vượt thời gian chạy của hàm).
       path: "/chuan-hoa-notfair", method: "post",
       handler: async (req) => {
         if (!laChuBien(req)) return Response.json({ loi: "Chỉ Quản trị hoặc Chủ biên được chuẩn hoá bài." }, { status: 403 });
+        const body = (typeof req.json === "function" ? await req.json().catch(() => ({})) : {}) as { id?: unknown; ghi?: unknown };
+        const ghi = body.ghi !== false;
         try {
-          // Có `id` → một bài (nút gọi lần lượt từng bài để không vượt thời gian chạy của hàm); không có → mọi bài.
-          const body = (typeof req.json === "function" ? await req.json().catch(() => ({})) : {}) as { id?: unknown };
-          if (typeof body.id === "number" || typeof body.id === "string") return Response.json({ ok: true, ds: [await chuanHoaMotBai(req.payload, req, body.id)] });
-          return Response.json({ ok: true, ds: await chuanHoaTatCaNotFair(req.payload, req) });
+          if (typeof body.id === "number" || typeof body.id === "string") {
+            return Response.json({ ok: true, ds: [await chuanHoaMotBai(req.payload, req, body.id, { ghi })] });
+          }
+          return Response.json({ ok: true, ds: await chuanHoaTatCaNotFair(req.payload, req, { ghi }) });
         } catch (e) {
           return Response.json({ loi: (e as Error).message }, { status: 500 });
         }

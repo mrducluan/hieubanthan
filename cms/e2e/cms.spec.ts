@@ -6,7 +6,8 @@ import { createHmac } from "node:crypto";
 import { readFileSync } from "node:fs";
 import sharp from "sharp";
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
-import { BI_MAT } from "../playwright.config";
+import pg from "pg";
+import { BI_MAT, DB_E2E } from "../playwright.config";
 import { buocHienTai, maTotp, tuBase32 } from "../src/lib/totp";
 
 /** Ngày hiệu lực mặc định của trang pháp lý trong code web — đọc từ nguồn (đổi ngày ở web không làm vỡ test). */
@@ -389,6 +390,77 @@ test("đổi slug bài đã xuất bản → link cũ chuyển hướng 308 sang
   const cu = await request.get(`${WEB}/blog/${SLUG}`, { maxRedirects: 0 });
   expect(cu.headers()["location"]).toMatch(/\/blog\/so-chu-dao-7$/);
   expect((await request.get(`${WEB}/blog/so-chu-dao-7`)).status()).toBe(200);
+});
+
+test("BLOG-7: khung Chuẩn hoá SEO bài NotFair luôn hiện (không cần khoá NotFair) — Audit chưa sửa gì; Chuẩn hoá → nháp không dấu, ảnh sáng; xuất bản → web 308 từ đường dẫn có dấu", async ({ page, request }) => {
+  const token = await tokenQt(request);
+  const h = { Authorization: `JWT ${token}` };
+  const SLUG_DAU = "e2e-notfair-cach-tinh-va-đoc-ho-so-than-so-hoc";
+  const SLUG_MOI = "e2e-notfair-cach-tinh-va-doc-ho-so-than-so-hoc";
+  const doan = (t: string) => ({ type: "paragraph", direction: "ltr", format: "", indent: 0, version: 1, textFormat: 0,
+    children: [{ type: "text", text: t, format: 0, detail: 0, mode: "normal", style: "", version: 1 }] });
+  const muc = (t: string) => ({ type: "heading", tag: "h2", direction: "ltr", format: "", indent: 0, version: 1,
+    children: [{ type: "text", text: t, format: 0, detail: 0, mode: "normal", style: "", version: 1 }] });
+  const tao = await request.post(`${CMS}/api/bai-viet`, { headers: h, data: {
+    _status: "published", tieu_de: "Xem thần số học (Numerology): cách tính và đọc hồ sơ cho người mới bắt đầu",
+    slug: SLUG_DAU, generateSlug: false, nguon_goc: "notfair", the: ["thần số học", "numerology"],
+    publishedAt: "2026-09-01T00:00:00.000Z",
+    noi_dung: { root: { type: "root", direction: "ltr", format: "", indent: 0, version: 1, children: [
+      doan("Thần số học là cách đọc tính cách qua con số rút từ ngày sinh và họ tên. Bài này hướng dẫn cách tính từng bước, có ví dụ để bạn tự kiểm lại kết quả."),
+      muc("Thần số học là gì?"), doan("Thần số học là hệ thống gán ý nghĩa cho các con số từ 1 đến 9 và các số bậc thầy, giúp mỗi người tự soi bản thân."),
+      muc("Cách tính số Đường đời ra sao?"), doan("Cộng mọi chữ số của ngày, tháng, năm sinh rồi rút gọn về một chữ số, giữ lại 11, 22, 33 nếu gặp."),
+      muc("Số bậc thầy có gì khác?"), doan("Số bậc thầy thường được mô tả là mang hai mặt: tiềm năng lớn đi kèm áp lực lớn, nên cần nhịp sống cân bằng."),
+    ] } },
+  } });
+  expect(tao.ok(), await tao.text()).toBeTruthy();
+  const id = (await tao.json()).doc.id;
+  // Bài nhập từ NotFair trước BLOG-7 giữ NGUYÊN slug gốc có dấu (REST tự bỏ dấu) → đặt lại thẳng trong DB như dữ liệu thật.
+  const db = new pg.Client({ connectionString: DB_E2E });
+  await db.connect();
+  await db.query("update cms.bai_viet set slug = $1 where id = $2", [SLUG_DAU, id]);
+  await db.query("update cms._bai_viet_v set version_slug = $1 where parent_id = $2", [SLUG_DAU, id]);
+  await db.end();
+  expect((await (await request.get(`${CMS}/api/bai-viet/${id}?depth=0`, { headers: h })).json()).slug).toBe(SLUG_DAU);
+
+  await dangNhap(page);
+  await page.goto(`${CMS}/admin/collections/bai-viet`);
+  const khung = page.getByTestId("chuan-hoa-notfair-khung");
+  await expect(khung).toBeVisible();
+  await expect(khung.getByText("Chuẩn hoá SEO / GEO bài NotFair")).toBeVisible();
+  const dong = khung.getByTestId("chuan-hoa-dong").filter({ hasText: "Xem thần số học (Numerology)" });
+  await expect(dong).toHaveCount(1);
+
+  // Audit: liệt kê sẽ sửa gì, điểm dự kiến — bài KHÔNG đổi.
+  await dong.getByRole("button", { name: "Audit", exact: true }).click();
+  await expect(dong.getByTestId("chuan-hoa-ket-qua")).toContainText("Sẽ sửa:", { timeout: 60_000 });
+  await expect(dong.getByTestId("chuan-hoa-ket-qua")).toContainText(`/blog/${SLUG_MOI}`);
+  await expect(dong.getByTestId("chuan-hoa-ket-qua")).toContainText("Sẽ vẽ ảnh bìa nền sáng");
+  await expect(dong.getByTestId("chuan-hoa-diem")).toContainText("(dự kiến)");
+  expect((await (await request.get(`${CMS}/api/bai-viet/${id}?depth=0&draft=true`, { headers: h })).json()).slug).toBe(SLUG_DAU);
+
+  // Chuẩn hoá: bản nháp mới, slug không dấu + slug cũ, ảnh bìa nền sáng (vẽ thật bằng next/og), Gửi duyệt.
+  await dong.getByRole("button", { name: "Chuẩn hoá", exact: true }).click();
+  await expect(dong.getByTestId("chuan-hoa-ket-qua")).toContainText("Đã sửa thành bản nháp:", { timeout: 90_000 });
+  const nhap = await (await request.get(`${CMS}/api/bai-viet/${id}?depth=1&draft=true`, { headers: h })).json();
+  expect(nhap.slug).toBe(SLUG_MOI);
+  expect(nhap.slug_cu).toContain(SLUG_DAU);
+  expect(nhap.trang_thai_duyet).toBe("cho_duyet");
+  expect(nhap.anh_bia?.nguon_anh).toMatch(/BLOG-7/);
+  expect(nhap.anh_bia?.width).toBe(1600);
+  expect(nhap.hoi_dap.length).toBeGreaterThanOrEqual(3);
+  expect(nhap.ghi_chu_duyet).toMatch(/BLOG-7 chuẩn hoá SEO/);
+  // Bản đang xuất bản chưa đổi.
+  expect((await (await request.get(`${CMS}/api/bai-viet/${id}?depth=0`)).json()).slug).toBe(SLUG_DAU);
+
+  // Xuất bản → web: đường dẫn có dấu 308 về đường dẫn không dấu, trang mới có H1.
+  const xb = await request.patch(`${CMS}/api/bai-viet/${id}`, { headers: h, data: { _status: "published" } });
+  expect(xb.ok(), await xb.text()).toBeTruthy();
+  await choWeb(request, `/blog/${encodeURIComponent(SLUG_DAU)}`, (st) => st === 308);
+  const cu = await request.get(`${WEB}/blog/${encodeURIComponent(SLUG_DAU)}`, { maxRedirects: 0 });
+  expect(cu.headers()["location"]).toMatch(new RegExp(`/blog/${SLUG_MOI}$`));
+  const moi = await request.get(`${WEB}/blog/${SLUG_MOI}`);
+  expect(moi.status()).toBe(200);
+  expect(await moi.text()).toContain("Xem thần số học (Numerology)");
 });
 
 test("biên tập viên: lưu nháp được, không có nút Xuất bản; API xuất bản bị chặn", async ({ page, request }) => {

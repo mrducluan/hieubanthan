@@ -19,7 +19,14 @@ type DocBai = BaiChuanHoa & {
   trang_thai_duyet?: string | null; notfair_lien_ket?: string[] | null; ky_ten?: string | null; slug_cu?: string[] | null;
 };
 
-export type KetQuaBai = { id: number | string; slug: string; tieu_de: string; thay_doi: string[]; diem_truoc: number; diem_sau: number; loi?: string };
+export type KetQuaBai = {
+  id: number | string; slug: string; tieu_de: string; thay_doi: string[]; diem_truoc: number; diem_sau: number;
+  /** Mục kiểm định CHƯA đạt sau chuẩn hoá — việc máy không tự làm được (nguồn, chuyên gia, độ dài…), người viết tự sửa. */
+  con_lai: string[];
+  /** false = chỉ audit (xem trước), chưa ghi gì vào bài. */
+  da_ghi: boolean;
+  loi?: string;
+};
 
 const idCua = (v: unknown): number | string | null =>
   typeof v === "number" || typeof v === "string" ? v : v && typeof v === "object" && "id" in v ? (v as { id: number | string }).id : null;
@@ -72,8 +79,10 @@ function soAnhThanBai(nd: unknown): { so: number; ids: (number | string)[] } {
   return { so: ids.length, ids };
 }
 
-/** Chuẩn hoá một bài (đọc bản nháp mới nhất). `ve`: false = không vẽ/tải ảnh (chạy thử, test). */
-export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | undefined, id: number | string, { ve = true } = {}): Promise<KetQuaBai> {
+/** Chuẩn hoá một bài (đọc bản nháp mới nhất). `ghi`: false = AUDIT — chỉ báo sẽ đổi gì + điểm dự kiến, không vẽ ảnh,
+ *  không ghi gì. `ve`: false = không vẽ/tải ảnh (test). */
+export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | undefined, id: number | string,
+  { ve = true, ghi = true } = {}): Promise<KetQuaBai> {
   const bai = await payload.findByID({ collection: "bai-viet", id, draft: true, depth: 0, overrideAccess: true, req }) as unknown as DocBai;
   const tieuDe = String(bai.tieu_de ?? "");
   const truoc = kiemDinhBai(bai as never).diem;
@@ -82,13 +91,11 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
   const thu = chuanHoaBai(bai, { slugDaDung: () => false });
   const mang = thu.mang as MangAnh;
   let anhBia: number | string | null = null, anhTomTat: number | string | null = null;
-  if (ve) {
+  const duKien: string[] = [];
+  if (ve || !ghi) {
     const bia = idCua(bai.anh_bia);
     const sang = bia != null ? await doSang(payload, bia) : null;
-    if (bia == null || (sang != null && sang < NGUONG_TOI)) {
-      const png = await veAnhBia({ tieuDe, phu: bai.mo_ta_ngan || String(thu.data.mo_ta_ngan ?? ""), mang });
-      anhBia = await taiAnh(payload, req, `bia-${String(thu.data.slug ?? bai.slug ?? "bai").slice(0, 50)}`, png, tieuDe, kho);
-    }
+    const canBia = bia == null || (sang != null && sang < NGUONG_TOI);
     const than = soAnhThanBai(bai.noi_dung);
     let daCoTomTat = false;
     if (than.ids.length) {
@@ -96,10 +103,22 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
         where: { and: [{ id: { in: than.ids } }, { nguon_anh: { equals: NGUON_ANH_BLOG7 } }] } });
       daCoTomTat = r.totalDocs > 0;
     }
-    if (!daCoTomTat && than.so < 2 && thu.muc.length >= 3) {
-      const png = await veAnhTomTat({ tieuDe, y: thu.muc, mang });
-      anhTomTat = await taiAnh(payload, req, `tom-tat-${String(thu.data.slug ?? bai.slug ?? "bai").slice(0, 44)}`, png,
-        `Tóm tắt nhanh: ${tieuDe}`, kho);
+    const canTomTat = !daCoTomTat && than.so < 2 && thu.muc.length >= 3;
+    if (!ghi) {
+      // Audit: chỗ giữ id để chấm điểm dự kiến; lời báo ghi rõ "sẽ".
+      if (canBia) { anhBia = "du-kien"; duKien.push(bia == null ? "Sẽ vẽ ảnh bìa nền sáng (bài chưa có ảnh bìa)."
+        : `Sẽ thay ảnh bìa tối (độ sáng ${Math.round((sang ?? 0) * 100)}%) bằng ảnh bìa nền sáng.`); }
+      if (canTomTat) { anhTomTat = "du-kien"; duKien.push(`Sẽ vẽ + chèn ảnh "Tóm tắt nhanh" (${Math.min(5, thu.muc.length)} ý).`); }
+    } else {
+      if (canBia) {
+        const png = await veAnhBia({ tieuDe, phu: bai.mo_ta_ngan || String(thu.data.mo_ta_ngan ?? ""), mang });
+        anhBia = await taiAnh(payload, req, `bia-${String(thu.data.slug ?? bai.slug ?? "bai").slice(0, 50)}`, png, tieuDe, kho);
+      }
+      if (canTomTat) {
+        const png = await veAnhTomTat({ tieuDe, y: thu.muc, mang });
+        anhTomTat = await taiAnh(payload, req, `tom-tat-${String(thu.data.slug ?? bai.slug ?? "bai").slice(0, 44)}`, png,
+          `Tóm tắt nhanh: ${tieuDe}`, kho);
+      }
     }
   }
 
@@ -117,11 +136,16 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
     }
   }
   if (kho.loi) kq.thay_doi.push(`Chưa tải được ảnh minh hoạ (kho ảnh: ${kho.loi}) — bấm lại "Chuẩn hoá SEO" sau khi sửa kho.`);
-  if (!kq.thay_doi.length) return { id, slug: String(bai.slug ?? ""), tieu_de: tieuDe, thay_doi: [], diem_truoc: truoc, diem_sau: truoc };
-
+  if (!ghi) kq.thay_doi = [...kq.thay_doi.filter((t) => !/ảnh bìa mới|Chèn ảnh "Tóm tắt nhanh"/.test(t)), ...duKien];
   const sau = kiemDinhBai({ ...bai, ...kq.data } as never);
+  const con_lai = sau.muc.filter((m) => m.muc_do !== "dat").map((m) => m.thong_diep);
+  const ketQua = { id, slug: String(kq.data.slug ?? bai.slug ?? ""), tieu_de: tieuDe, thay_doi: kq.thay_doi, diem_truoc: truoc,
+    diem_sau: kq.thay_doi.length ? sau.diem : truoc, con_lai, da_ghi: false };
+  if (!kq.thay_doi.length || !ghi) return ketQua;
+
   const ghiChu = [`BLOG-7 chuẩn hoá SEO (${new Date().toISOString().slice(0, 10)}) — điểm kiểm định ${truoc} → ${sau.diem}. `
-    + "Bản nháp này CHƯA lên web: đọc lại rồi bấm Xuất bản.", ...kq.thay_doi.map((t) => `• ${t}`), bai.ghi_chu_duyet ?? ""]
+    + "Bản nháp này CHƯA lên web: đọc lại rồi bấm Xuất bản.", ...kq.thay_doi.map((t) => `• ${t}`),
+    ...(con_lai.length ? ["Còn lại cần người viết tự làm:", ...con_lai.map((t) => `◦ ${t}`)] : []), bai.ghi_chu_duyet ?? ""]
     .filter(Boolean).join("\n").slice(0, 2000);
   await payload.update({
     collection: "bai-viet", id, draft: true, overrideAccess: true, req,
@@ -137,17 +161,29 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
       ...(sau.loi_chan.length ? {} : { trang_thai_duyet: "cho_duyet" }),
     } as never,
   });
-  return { id, slug: String(kq.data.slug ?? bai.slug ?? ""), tieu_de: tieuDe, thay_doi: kq.thay_doi, diem_truoc: truoc, diem_sau: sau.diem };
+  return { ...ketQua, da_ghi: true };
+}
+
+/** Danh sách bài nguồn NotFair trong CMS (bản nháp mới nhất) + điểm kiểm định hiện tại — cho khung "Chuẩn hoá SEO". */
+export async function dsBaiNotFairCms(payload: Payload, req?: PayloadRequest) {
+  const ds = await payload.find({ collection: "bai-viet", where: { nguon_goc: { equals: "notfair" } }, draft: true, depth: 0,
+    limit: 500, overrideAccess: true, sort: "-updatedAt", req });
+  return ds.docs.map((d) => {
+    const b = d as unknown as DocBai & { _status?: string; trang_thai_duyet?: string | null };
+    return { id: b.id, tieu_de: String(b.tieu_de ?? ""), slug: String(b.slug ?? ""), trang_thai: b._status ?? "draft",
+      duyet: b.trang_thai_duyet ?? "dang_viet", diem: kiemDinhBai(b as never).diem };
+  });
 }
 
 /** Mọi bài nguồn NotFair (kể cả nháp). */
-export async function chuanHoaTatCaNotFair(payload: Payload, req?: PayloadRequest, opt: { ve?: boolean } = {}): Promise<KetQuaBai[]> {
+export async function chuanHoaTatCaNotFair(payload: Payload, req?: PayloadRequest, opt: { ve?: boolean; ghi?: boolean } = {}): Promise<KetQuaBai[]> {
   const ds = await payload.find({ collection: "bai-viet", where: { nguon_goc: { equals: "notfair" } }, draft: true, depth: 0,
     limit: 500, overrideAccess: true, select: { slug: true }, req });
   const kq: KetQuaBai[] = [];
   for (const d of ds.docs) {
     try { kq.push(await chuanHoaMotBai(payload, req, d.id, opt)); }
-    catch (e) { kq.push({ id: d.id, slug: "", tieu_de: "", thay_doi: [], diem_truoc: 0, diem_sau: 0, loi: (e as Error)?.message?.slice(0, 300) ?? "lỗi" }); }
+    catch (e) { kq.push({ id: d.id, slug: "", tieu_de: "", thay_doi: [], diem_truoc: 0, diem_sau: 0, con_lai: [], da_ghi: false,
+      loi: (e as Error)?.message?.slice(0, 300) ?? "lỗi" }); }
   }
   return kq;
 }
