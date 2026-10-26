@@ -10,23 +10,29 @@ import { Button } from "@/components/ui/button";
 import { EASE } from "@/lib/chuyen-dong";
 import { ghi } from "@/lib/do-luong";
 import type { HoSo } from "@/lib/hoso";
-import { chonLaBai, daLat, nhoDaLat, type NguyenLieuLaBai } from "@/lib/la-bai";
+import { chonLaBai, laDaLat, nhoDaLat, type LaBai, type NguyenLieuLaBai } from "@/lib/la-bai";
 import { maMoiNgay, taoLinkNgay } from "@/components/chia-se/NutChiaSeNgay";
 
 export function LaBaiDauNgay({ the, hoSo, tieuDe }: { the: NguyenLieuLaBai; hoSo: HoSo; tieuDe: string }) {
   const giam = Boolean(useReducedMotion());
   const [lat, setLat] = useState<boolean | null>(null);   // null = chưa đọc máy
+  const [maNho, setMaNho] = useState<LaBai["ma"] | null>(null);   // lá đã lật hôm nay (máy nhớ) — giữ nguyên khi thẻ về muộn
   const [daChep, setDaChep] = useState(false);
   const [dangChiaSe, setDangChiaSe] = useState(false);
-  const la = chonLaBai(the, hoSo);
+  const la = chonLaBai(the, hoSo, maNho);
 
-  useEffect(() => { setLat(daLat(the.ngay_xem)); }, [the.ngay_xem]);
+  useEffect(() => {
+    const d = laDaLat(the.ngay_xem);
+    setLat(d !== null);
+    setMaNho(d && d !== "co" ? d : null);
+  }, [the.ngay_xem]);
   if (!la || lat === null) return null;
 
   const latLa = () => {
     if (lat) return;
     setLat(true);
-    nhoDaLat(the.ngay_xem);
+    setMaNho(la.ma);
+    nhoDaLat(the.ngay_xem, la.ma);
     ghi("daily_card_flipped", { kind: la.ma });
   };
   const chuChiaSe = `${la.nhan}: ${la.chu}`;

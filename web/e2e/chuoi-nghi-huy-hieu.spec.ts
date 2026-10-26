@@ -42,6 +42,15 @@ test("hàm thuần: lời ngày nghỉ, lá bài tất định, tiến độ h�
   const mai = chonLaBai({ ...the, ngay_xem: "2026-10-26" }, HO_SO_MAU);
   expect(mai?.ma).not.toBe(a?.ma);   // ngày sau sang lá khác
   for (const l of cacLaBai(the)) expect(`${l.nhan} ${l.chu} ${l.phu ?? ""}`).not.toMatch(TU_CAM);
+  // Phần thẻ về muộn (quẻ, hoàng lịch) không đổi lá: chỉ số tính trên 5 ô cố định, đã lật thì giữ mã lá máy nhớ.
+  const thieu = { ...the, que_ngay: undefined, hoang_lich: undefined };
+  for (let d = 20; d <= 29; d++) {
+    const ngay = `2026-10-${d}`;
+    const du = chonLaBai({ ...the, ngay_xem: ngay }, HO_SO_MAU)!;
+    const som = chonLaBai({ ...thieu, ngay_xem: ngay }, HO_SO_MAU)!;
+    if (som.ma !== "tu_soi" && du.ma !== "que" && du.ma !== "gio") expect(som.ma).toBe(du.ma);   // ô có dữ liệu ở cả hai → cùng lá
+    expect(chonLaBai({ ...the, ngay_xem: ngay }, HO_SO_MAU, som.ma)!.ma).toBe(som.ma);   // đã lật lá lúc thẻ thiếu → giữ lá đó
+  }
 
   const hen = { muc: 7 as const, ngay_bd: "2026-10-20", chuoi_bd: 3 };
   expect(tienDoHen(hen, 3)).toEqual({ ngay: 1, dat: false, lo: false });
@@ -92,7 +101,8 @@ test("lá bài đầu ngày: úp → lật → một điều của hôm nay, nh�
   const chu = await nd.innerText();
   await page.reload();
   await expect(page.getByTestId("la-bai")).toHaveAttribute("data-lat", "1");
-  await expect(page.getByTestId("la-bai-noi-dung")).toHaveText(chu);
+  await expect(page.getByTestId("la-bai-noi-dung")).toBeVisible();
+  expect(await page.getByTestId("la-bai-noi-dung").innerText()).toBe(chu);   // so innerText với innerText (toHaveText đọc textContent, mất xuống dòng)
   await expect(page.getByTestId("la-bai-chia-se")).toBeVisible();
 });
 

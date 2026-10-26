@@ -2,7 +2,7 @@
 // tháng không cộng dồn; câu hỏi chuyên gia; hoàn tiền theo chính sách. Quy tắc máy chủ (kích hoạt, gia hạn ≤ 30 ngày, hoàn
 // tiền gợi ý, quyền) kiểm ở supabase/kiem_thu/thu_hoi_vien_0028.sql; chuỗi thật ở e2e-that/hoi-vien-that.spec.ts. Ở đây:
 // phần thuần + giao diện với máy chủ giả lập bằng page.route (e2e không có Supabase → công tắc TẮT ở trang máy chủ).
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 import { CAI_DAT, chuanHoa, giaTriHieuLuc } from "../lib/cau-hinh";
 import { locThuocTinh } from "../lib/do-luong";
@@ -127,40 +127,46 @@ test("báo cáo với phi.ly_do = hoi_vien: đầy đủ, không nút mở khoá
   await expect(page.getByTestId("hop-thoai-sao")).toHaveCount(0);
 });
 
-test("hộp nạp nhanh: công tắc hội viên bật + chưa là hội viên → một dòng 'Hoặc hội viên năm' trỏ /hoi-vien; đã là hội viên → không", async ({ page }) => {
-  const hopNap = async (hoi_vien: object | null) => {
-    await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "payos", goi: GOI, gia_bao_cao: 10, nap_dau: null, hoi_vien } }));
-    await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 10 } }));
-    await page.route("**/api/tuvi/luan-giai", (r) => r.request().headers()["x-mo-khoa"] === "1"
-      ? r.fulfill({ status: 402, json: { error: "Cần 10 Sao, ví bạn còn 3 Sao.", can: "nap", gia: 10, so_du: 3 } })
-      : r.fulfill({ json: {
-        mo_dun: "tuvi", ket: "Kết.", trang_thai: "nhap_ai", dien_dat: "mau", so_khoa: 1,
-        chuong: [
-          { ma: "tong_quan", tieu_de: "Tổng quan bản mệnh", doan: ["Đoạn mở miễn phí."] },
-          { ma: "tinh_cam", tieu_de: "Tình cảm, hôn nhân", khoa: true, moi_xem: { diem_nhan: "Điểm nhấn", cau_hoi: "Bạn tìm gì?", so_doan: 3, phut_doc: 2 } },
-        ],
-        phi: { sao: 10, ly_do: "xem_truoc", khoa: true, dang_nhap: true, so_du: 3 },
-      } }));
-    await napHoSo(page);
-    await page.goto("/tu-vi");
-    await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
-    await page.getByTestId("lg-mo-khoa").click();
-    const hop = page.getByTestId("hop-thoai-sao");
-    await expect(hop).toHaveAttribute("data-can", "nap");
-    await expect(hop.getByTestId("nap-nhanh-nut")).toBeVisible();
-    return hop;
-  };
-  const hop = await hopNap(HV_BAT);
+// Mỗi trường hợp một trang mới: dùng lại một trang thì lượt sau tự mở báo cáo (nhớ "quay về sau khi nạp") → nút đầu không còn.
+async function hopNap(page: Page, hoi_vien: object | null) {
+  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "payos", goi: GOI, gia_bao_cao: 29, nap_dau: null, hoi_vien } }));
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 29 } }));
+  await page.route("**/api/tuvi/luan-giai", (r) => r.request().headers()["x-mo-khoa"] === "1"
+    ? r.fulfill({ status: 402, json: { error: "Cần 29 Sao, ví bạn còn 3 Sao.", can: "nap", gia: 29, so_du: 3 } })
+    : r.fulfill({ json: {
+      mo_dun: "tuvi", ket: "Kết.", trang_thai: "nhap_ai", dien_dat: "mau", so_khoa: 1,
+      chuong: [
+        { ma: "tong_quan", tieu_de: "Tổng quan bản mệnh", doan: ["Đoạn mở miễn phí."] },
+        { ma: "tinh_cam", tieu_de: "Tình cảm, hôn nhân", khoa: true, moi_xem: { diem_nhan: "Điểm nhấn", cau_hoi: "Bạn tìm gì?", so_doan: 3, phut_doc: 2 } },
+      ],
+      phi: { sao: 29, ly_do: "xem_truoc", khoa: true, dang_nhap: true, so_du: 3 },
+    } }));
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await page.getByTestId("lg-mo-khoa").click();
+  const hop = page.getByTestId("hop-thoai-sao");
+  await expect(hop).toHaveAttribute("data-can", "nap");
+  await expect(hop.getByTestId("nap-nhanh-nut")).toBeVisible();
+  return hop;
+}
+
+test("hộp nạp nhanh: công tắc hội viên bật + chưa là hội viên → một dòng 'Hoặc hội viên năm' trỏ /hoi-vien", async ({ page }) => {
+  const hop = await hopNap(page, HV_BAT);
   await expect(hop.getByTestId("dong-hoi-vien")).toContainText("Hoặc hội viên năm 3.990.000 ₫");
   await expect(hop.getByTestId("dong-hoi-vien")).toContainText("không tự gia hạn");
   await expect(hop.getByTestId("dong-hoi-vien").getByRole("link")).toHaveAttribute("href", "/hoi-vien");
   await expect(hop.getByTestId("nap-nhanh")).not.toContainText(CAM);
-  await page.unrouteAll({ behavior: "ignoreErrors" });
-  const hop2 = await hopNap({ ...HV_BAT, dang_la: true });
-  await expect(hop2.getByTestId("dong-hoi-vien")).toHaveCount(0);
-  await page.unrouteAll({ behavior: "ignoreErrors" });
-  const hop3 = await hopNap(null);   // chưa chạy 0028 / công tắc tắt
-  await expect(hop3.getByTestId("dong-hoi-vien")).toHaveCount(0);
+});
+
+test("hộp nạp nhanh: đã là hội viên → không có dòng hội viên", async ({ page }) => {
+  const hop = await hopNap(page, { ...HV_BAT, dang_la: true });
+  await expect(hop.getByTestId("dong-hoi-vien")).toHaveCount(0);
+});
+
+test("hộp nạp nhanh: chưa chạy 0028 / công tắc tắt → không có dòng hội viên", async ({ page }) => {
+  const hop = await hopNap(page, null);
+  await expect(hop.getByTestId("dong-hoi-vien")).toHaveCount(0);
 });
 
 test("/nap-sao khi chưa bật tài khoản: không có dòng hội viên (máy chủ không hứa điều chưa làm)", async ({ page }) => {

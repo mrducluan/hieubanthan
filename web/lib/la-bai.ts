@@ -36,21 +36,33 @@ export function cacLaBai(t: NguyenLieuLaBai): LaBai[] {
 /** Số ngày từ mốc 2000-01-01 (ngày xem dạng yyyy-mm-dd). */
 const soNgay = (iso: string) => Math.floor(Date.parse(`${iso}T00:00:00Z`) / 86_400_000);
 
-/** Lá của hôm nay: xoay vòng theo (ngày sinh, ngày xem) — cùng người cùng ngày luôn cùng lá, ngày sau sang lá khác. */
-export function chonLaBai(t: NguyenLieuLaBai, hoSo: { ngay: number; thang: number; nam: number }): LaBai | null {
+const THU_TU: LaBai["ma"][] = ["tu_soi", "que", "gio", "pho_quat", "chaldea"];
+
+/** Lá của hôm nay: xoay vòng theo (ngày sinh, ngày xem) trên 5 ô CỐ ĐỊNH — cùng người cùng ngày luôn cùng lá, ngày sau
+ *  sang lá khác. Ô trúng thiếu dữ liệu → ô kế tiếp có dữ liệu. Đã lật (máy nhớ mã) → luôn trả lá đó nếu còn dữ liệu,
+ *  để phần thẻ về muộn (quẻ, hoàng lịch) không đổi lá người dùng đã thấy. */
+export function chonLaBai(t: NguyenLieuLaBai, hoSo: { ngay: number; thang: number; nam: number }, daNho?: LaBai["ma"] | null): LaBai | null {
   const ds = cacLaBai(t);
   if (!ds.length) return null;
+  if (daNho) { const x = ds.find((l) => l.ma === daNho); if (x) return x; }
   const goc = hoSo.ngay * 31 + hoSo.thang * 12 + hoSo.nam;
-  const i = ((goc + soNgay(t.ngay_xem)) % ds.length + ds.length) % ds.length;
-  return ds[i]!;
+  const i = ((goc + soNgay(t.ngay_xem)) % THU_TU.length + THU_TU.length) % THU_TU.length;
+  for (let k = 0; k < THU_TU.length; k++) {
+    const x = ds.find((l) => l.ma === THU_TU[(i + k) % THU_TU.length]);
+    if (x) return x;
+  }
+  return ds[0]!;
 }
 
 export const KHOA_LA_BAI = "hbt.la_bai.v1";
-/** Đã lật lá của đúng ngày này chưa (chỉ trên máy). */
-export function daLat(ngay: string): boolean {
-  try { const j = JSON.parse(localStorage.getItem(KHOA_LA_BAI) ?? "null") as { ngay?: string; lat?: boolean } | null; return Boolean(j && j.ngay === ngay && j.lat); }
-  catch { return false; }
+/** Đã lật lá của đúng ngày này chưa (chỉ trên máy) — trả mã lá đã lật, chưa lật → null. */
+export function laDaLat(ngay: string): LaBai["ma"] | "co" | null {
+  try {
+    const j = JSON.parse(localStorage.getItem(KHOA_LA_BAI) ?? "null") as { ngay?: string; lat?: boolean; ma?: LaBai["ma"] } | null;
+    return j && j.ngay === ngay && j.lat ? (j.ma ?? "co") : null;
+  } catch { return null; }
 }
-export function nhoDaLat(ngay: string): void {
-  try { localStorage.setItem(KHOA_LA_BAI, JSON.stringify({ ngay, lat: true })); } catch { /* chế độ riêng tư */ }
+export function daLat(ngay: string): boolean { return laDaLat(ngay) !== null; }
+export function nhoDaLat(ngay: string, ma?: LaBai["ma"]): void {
+  try { localStorage.setItem(KHOA_LA_BAI, JSON.stringify({ ngay, lat: true, ...(ma ? { ma } : {}) })); } catch { /* chế độ riêng tư */ }
 }

@@ -50,8 +50,9 @@ test("công tắc bật: giá + câu đầu giảm, đếm ký tự, ô chia s�
   const dongY = page.getByTestId("cg-dong-y");
   await expect(dongY).not.toBeChecked();
   await expect(page.getByTestId("cg-xem-chia-se")).toHaveCount(0);
-  await page.getByLabel("Câu hỏi cho chuyên gia").fill("Tôi có nên đổi việc vào đầu năm sau không?");
-  await expect(page.getByTestId("cg-dem")).toHaveText("41/1.500");
+  const cauMau = "Tôi có nên đổi việc vào đầu năm sau không?";   // 42 ký tự
+  await page.getByLabel("Câu hỏi cho chuyên gia").fill(cauMau);
+  await expect(page.getByTestId("cg-dem")).toHaveText(`${cauMau.length}/1.500`);
   await dongY.check();
   await expect(page.getByTestId("cg-xem-chia-se")).toContainText("Nguyễn Đức Luân · 17/05/1990 · 12:30 · nam · ha-noi");
   // Không đếm ngược thúc ép ở bất kỳ đâu trên trang.
