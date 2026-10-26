@@ -48,6 +48,15 @@ export function khoaKhach(req: Request, bi = biMat()): string | null {
   return bi && ip ? `k:${createHmac("sha256", bi).update(`luot-hoi|${ip}`).digest("hex").slice(0, 32)}` : null;
 }
 
+/** SAO-GL (0026): mã băm thiết bị = HMAC(IP + user-agent) bằng bí mật máy chủ — không lưu IP / user-agent, người dùng
+ *  không tự tính được. Dùng khi nhận thưởng mời để phát hiện một máy tạo nhiều tài khoản. Thiếu bí mật / IP → null
+ *  (không chặn, như trước). */
+export function maThietBi(req: Request, bi = biMat()): string | null {
+  const ip = req.headers.get("x-real-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "";
+  const ua = (req.headers.get("user-agent") ?? "").slice(0, 300);
+  return bi && ip ? createHmac("sha256", bi).update(`thiet-bi|${ip}|${ua}`).digest("hex").slice(0, 32) : null;
+}
+
 export type LuotHoi = { con_lai: number; tran: number; tai_khoan: boolean } | { sao_da_tru: number; so_du: number | null };
 type Cua = { ok: true; luot?: LuotHoi; xong: () => Promise<LuotHoi | undefined>; hoan?: () => Promise<void> } | { ok: false; res: NextResponse };
 

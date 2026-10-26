@@ -46,10 +46,14 @@ export async function nhanChaoMung(): Promise<{ ket_qua: KetQuaThuong; sao?: num
   return data as { ket_qua: KetQuaThuong; sao?: number };
 }
 
+/** SAO-GL (0026): nhận thưởng mời đi qua máy chủ (`/api/sao/nhan-thuong`) để gắn mã băm thiết bị — trình duyệt không
+ *  tự tính được. Máy chủ gọi hàm SQL bằng phiên của chính người dùng. */
 export async function nhanThuongGioiThieu(ma: string): Promise<{ ket_qua: KetQuaThuong; sao?: number }> {
-  const { data, error } = await (await sb()).rpc("nhan_thuong_gioi_thieu", { p_ma: ma });
-  if (error) throw new Error("Chưa nhận được Sao giới thiệu.");
-  return data as { ket_qua: KetQuaThuong; sao?: number };
+  const res = await fetch("/api/sao/nhan-thuong", {
+    method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ma }),
+  });
+  if (!res.ok) throw new Error("Chưa nhận được Sao giới thiệu.");
+  return (await res.json()) as { ket_qua: KetQuaThuong; sao?: number };
 }
 
 /** Mã mời của người đang đăng nhập (null nếu chưa đăng nhập / chưa bật tài khoản / chưa chạy 0008). */

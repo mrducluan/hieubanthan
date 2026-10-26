@@ -91,6 +91,12 @@
    (`sao.hoa_hong.bat`, mặc định 20% đơn nạp đầu), **Chuỗi ngày ghé**, **Tặng một chương**, và **Thu Sao riêng:
    Bản đồ con số** (chạy thử thu Sao một mảng trước). Tất cả mặc định TẮT. Cần tài khoản (Supabase Auth) đã bật trên web
    thì các phần này mới chạy.
+4n. [ ] **Chống gian lận SAO-GL (2026-10-26) — chạy migration 0026** (SAU 0025): Supabase → SQL Editor → dán toàn bộ
+   `supabase/migrations/0026_chong_gian_lan.sql` → Run (rollback: `0026_chong_gian_lan.down.sql`). Kiểm bằng
+   `supabase/kiem_thu/da_chay_chua.sql` (dòng 0026 = true). **Chạy 0026 TRƯỚC khi bật hoa hồng.** Mặc định bật: một máy
+   nhận lời mời cho ≥ 3 tài khoản / 30 ngày, hoặc người mời và người được mời cùng máy → người mời không được thưởng /
+   hoa hồng, ghi cờ ở `/quan-tri/doanh-thu` → "Cờ gian lận lời mời". Gia đình dùng chung một máy → tăng ngưỡng ở
+   `/quan-tri/cai-dat`. Cần `SAO_KHOA_SECRET` (đã có cho SAO-2) để tính mã băm thiết bị.
 4l. [ ] **Bảo mật SEC-2 (2026-10-23, `docs/BAO-MAT.md` mục SEC-2) — làm theo thứ tự:**
    1. [x] Render có `ENGINE_API_KEY` — anh xác nhận 2026-10-23.
    2. [ ] **Chạy migration** (sau khi merge PR SEC-2): Supabase → **SQL Editor** → New query → dán toàn bộ nội dung

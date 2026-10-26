@@ -32,6 +32,7 @@ select * from (values
   ('0022 phiếu sau 30 ngày + đề xuất luật', to_regclass('public.de_xuat_luat') is not null),
   ('0023 SEC-2 RLS bảng KB + siết quyền', exists (select 1 from pg_constraint where conname = 'ky_uc_chi_ma')),
   ('0024 SEC-2 hoàn Sao + mốc ghi chú', to_regprocedure('public.hoan_sao_hoi(uuid,text)') is not null),
-  ('0025 Sao viral: số dư theo lô, hoa hồng, chuỗi ngày, tặng chương', to_regclass('public.hoa_hong') is not null)
+  ('0025 Sao viral: số dư theo lô, hoa hồng, chuỗi ngày, tặng chương', to_regclass('public.hoa_hong') is not null),
+  ('0026 chống gian lận lời mời', to_regclass('public.gian_lan_co') is not null)
 ) as t(migration, da_chay)
 order by 1;

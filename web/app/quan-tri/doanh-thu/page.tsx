@@ -27,6 +27,15 @@ type HH = {
   tong: { don: number; sao_da_cong: number; sao_thu_hoi: number; qua_tran: number; doanh_thu_don: number; nguoi_moi: number };
   top: { email: string | null; don: number; sao: number; doanh_thu: number }[];
 };
+/** SAO-GL (0026) gian_lan_gan_day — cờ do máy ghi khi một thiết bị nhận lời mời cho nhiều tài khoản / trùng thiết bị. */
+type GL = {
+  tong: Record<string, number> | null;
+  ds: { loai: string; nguoi_moi: string | null; duoc_moi: string | null; luc: string; chi_tiet: Record<string, unknown> | null }[];
+};
+const LOAI_GL: Record<string, string> = {
+  nhieu_tai_khoan: "Một máy nhận lời mời cho nhiều tài khoản", cung_thiet_bi: "Người mời và người được mời cùng máy",
+  hoa_hong_nghi: "Hoa hồng bị giữ lại (lời mời có cờ)",
+};
 type Don = { ma_don: number; goi: string; so_tien: number; sao: number; cong: string; trang_thai: string; tao_luc: string; ghi_chu: string | null };
 
 const so = (n: number) => Math.round(n).toLocaleString("vi-VN");
@@ -46,11 +55,13 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ k
   if (p.vaiTro !== "chu_so_huu") return <Card><p className="text-sm text-fg-muted">Chỉ chủ sở hữu xem doanh thu.</p></Card>;
   const kyXin = Number((await searchParams).ky);
   const ky = (KY as readonly number[]).includes(kyXin) ? kyXin : 30;
-  const [{ data, error }, don, hhRpc] = await Promise.all([
+  const [{ data, error }, don, hhRpc, glRpc] = await Promise.all([
     p.sb.rpc("thong_ke_doanh_thu", { p_ngay: ky }),
     p.sb.rpc("ds_don_nap", { p_trang_thai: null, p_gioi_han: 30 }),
     p.sb.rpc("thong_ke_hoa_hong", { p_ngay: ky }),   // chưa chạy 0025 → lỗi → khối tự ẩn
+    p.sb.rpc("gian_lan_gan_day", { p_ngay: ky }),    // chưa chạy 0026 → lỗi → khối tự ẩn
   ]);
+  const gl = !glRpc.error && glRpc.data ? (glRpc.data as GL) : null;
   const hh = !hhRpc.error && hhRpc.data ? (hhRpc.data as HH) : null;
   if (error || !data) {
     return <Card><h1 className="text-2xl">Doanh thu & Sao</h1><p role="alert" className="mt-3 text-sm text-cinnabar">Chưa đọc được số liệu — cần chạy migration 0012 và 0013 trên Supabase.</p></Card>;
@@ -140,6 +151,20 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ k
               <th className="py-1 font-normal">Người mời</th><th className="text-right font-normal">Đơn</th><th className="text-right font-normal">Sao</th><th className="text-right font-normal">Doanh thu đơn</th></tr></thead>
               <tbody>{hh.top.map((u, i) => <tr key={`${u.email}-${i}`} className="border-t border-line/60"><td className="py-1.5 [overflow-wrap:anywhere]">{u.email ?? "(đăng nhập bằng số điện thoại)"}</td><td className="text-right">{so(u.don)}</td><td className="text-right">{so(u.sao)}</td><td className="text-right">{vnd(u.doanh_thu)}</td></tr>)}</tbody></table></div>
           ) : <p className="mt-3 text-sm text-fg-faint">Chưa có hoa hồng nào được cộng trong khoảng này.</p>}
+        </Card>
+      )}
+
+      {gl && (
+        <Card>
+          <h2 className="text-lg">Cờ gian lận lời mời</h2>
+          <p className="mt-1 text-xs text-fg-muted">Máy chỉ <b>không cộng thưởng mới</b> và ghi cờ — không khoá tài khoản, không trừ Sao đã cộng. Anh xem rồi quyết (điều chỉnh Sao ở <Link href="/quan-tri/nguoi-dung" className="text-gold underline">Người dùng & Sao</Link>). Ngưỡng + công tắc ở <Link href="/quan-tri/cai-dat" className="text-gold underline">Cài đặt</Link>.</p>
+          {gl.ds.length ? (
+            <div className="mt-3 overflow-x-auto"><table className="w-full text-sm" data-testid="qt-gian-lan"><thead><tr className="text-left text-xs text-fg-muted">
+              <th className="py-1 font-normal">Loại</th><th className="font-normal">Người mời</th><th className="font-normal">Người được mời</th><th className="text-right font-normal">Lúc</th></tr></thead>
+              <tbody>{gl.ds.map((c, i) => <tr key={i} className="border-t border-line/60"><td className="py-1.5">{LOAI_GL[c.loai] ?? c.loai}</td>
+                <td className="[overflow-wrap:anywhere]">{c.nguoi_moi ?? "—"}</td><td className="[overflow-wrap:anywhere]">{c.duoc_moi ?? "—"}</td>
+                <td className="whitespace-nowrap text-right text-fg-muted">{gio(c.luc)}</td></tr>)}</tbody></table></div>
+          ) : <p className="mt-3 text-sm text-fg-faint">Không có cờ nào trong khoảng này.</p>}
         </Card>
       )}
 

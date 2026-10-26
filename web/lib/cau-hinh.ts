@@ -33,6 +33,11 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Thời hạn tính hoa hồng (tháng)", moTa: "Tính từ lúc bạn bè nhận lời mời." },
   { khoa: "sao.hoa_hong.tran_30_ngay", nhom: "Hoa hồng nạp Sao", loai: "so", min: 0, max: 10000, macDinh: 1000,
     ten: "Trần hoa hồng mỗi người mời / 30 ngày (Sao)", moTa: "Chống lạm dụng. Quá trần: đơn vẫn ghi nhận, không cộng thêm Sao." },
+  // SAO-GL (0026): chống gian lận thưởng mời + hoa hồng theo mã băm thiết bị (HMAC IP + user-agent, không lưu IP).
+  { khoa: "sao.gian_lan.bat", nhom: "Hoa hồng nạp Sao", loai: "bat_tat", macDinh: true,
+    ten: "Chống gian lận lời mời", moTa: "Bật (mặc định) = một máy nhận lời mời cho quá nhiều tài khoản, hoặc người mời và người được mời cùng máy → người mời không được thưởng / hoa hồng, ghi cờ ở Doanh thu. Người được mời vẫn nhận thưởng của mình." },
+  { khoa: "sao.gian_lan.thiet_bi_30_ngay", nhom: "Hoa hồng nạp Sao", loai: "so", min: 2, max: 50, macDinh: 3,
+    ten: "Số tài khoản / một máy / 30 ngày thì gắn cờ", moTa: "Tài khoản thứ N nhận lời mời trên cùng một máy trong 30 ngày → người mời không được thưởng. Gia đình dùng chung máy: tăng số này." },
   // SAO-V (0025): chuỗi ngày ghé — chỉ lưu ngày ghé cuối + độ dài chuỗi, mất chuỗi chỉ đếm lại.
   { khoa: "sao.chuoi.bat", nhom: "Chuỗi ngày ghé", loai: "bat_tat", macDinh: false,
     ten: "Thưởng chuỗi ngày ghé", moTa: "Tắt = vẫn đếm chuỗi cho người đăng nhập, không cộng Sao." },
