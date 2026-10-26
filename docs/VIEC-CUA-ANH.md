@@ -102,6 +102,19 @@
    0027 = true). Rồi bật ở `/quan-tri/cai-dat` nhóm "Nạp Sao": gói Khởi đầu 19.000 ₫ / 19 Sao — cùng 10 Sao chào mừng vừa đủ 1 báo cáo 29 Sao (`sao.goi_khoi_dau.bat`; đổi giá báo cáo thì xem lại cỡ gói này)
    và tặng Sao lần nạp đầu (`sao.nap_dau.bat`, mặc định 20%). **Thứ tự 0025 → 0026 → 0027 bắt buộc, và KHÔNG chạy lại
    0025 sau khi đã chạy 0027** (0025 đặt lại danh sách loại Sao chưa có `nap_dau` → lỗi ràng buộc khi đã có dòng tặng).
+4p. [ ] **Hội viên năm · Hỏi chuyên gia · chuỗi/huy hiệu (2026-10-26) — chạy migration 0028 → 0029 → 0030** (SAU 0027,
+   đúng thứ tự này; rollback ngược lại 0030 → 0029 → 0028). Supabase → SQL Editor → dán từng tệp
+   `supabase/migrations/0028_hoi_vien.sql`, `0029_chuyen_gia.sql`, `0030_chuoi_huy_hieu.sql` → Run. Kiểm bằng
+   `da_chay_chua.sql` (ba dòng 0028, 0029, 0030 = true). Rồi ở `/quan-tri/cai-dat`:
+   1. **Hỏi chuyên gia** (`sao.chuyen_gia.bat`): giá mặc định 199.000 ₫/câu, câu đầu giảm 30 %, hạn trả lời 48 giờ.
+      Anh (chủ sở hữu, đã bật MFA) trả lời ở **Quản trị → Hỏi chuyên gia**; quá hạn thì hoàn 100 % ngoài hệ thống rồi bấm
+      "Hoàn". Bật cái này TRƯỚC hội viên (hội viên kèm 2 câu hỏi/năm).
+   2. **Hội viên năm** (`sao.hoi_vien.bat`): giá mặc định **3.990.000 ₫** (anh chốt — em đã hỏi lại ở tin nhắn), 15 Sao
+      tặng/tháng không cộng dồn, 2 câu hỏi chuyên gia/năm. Chính sách hoàn tiền đã ghi ở Điều khoản mục "Hội viên năm".
+   3. **Chuỗi ngày** (`sao.chuoi.bat`, của 0025): bật xong thì ngày nghỉ chuỗi (1 ngày/7 ngày) + huy hiệu tự chạy, không
+      cần công tắc riêng. Lá bài đầu ngày và "Hẹn với chính mình" chạy trên máy người dùng, không cần migration.
+   **Lưu ý rollback 0028**: tệp down XOÁ đơn `don_nap` loại hội viên/chuyên gia (không khớp ràng buộc cũ) — xuất CSV
+   bảng `hoi_vien`, `cau_hoi_chuyen_gia`, `don_nap` trước khi rollback trên production.
 4l. [ ] **Bảo mật SEC-2 (2026-10-23, `docs/BAO-MAT.md` mục SEC-2) — làm theo thứ tự:**
    1. [x] Render có `ENGINE_API_KEY` — anh xác nhận 2026-10-23.
    2. [ ] **Chạy migration** (sau khi merge PR SEC-2): Supabase → **SQL Editor** → New query → dán toàn bộ nội dung
