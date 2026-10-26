@@ -19,6 +19,7 @@ import { kiemTrung } from "../lib/trung-lap";
 import { taoSlug } from "../lib/slug";
 import { linkXemTruoc, webUrl } from "../lib/web";
 import { coKhoaNotFair, dsNotFair, nguonNotFair, nhapBaiNotFair } from "../lib/notfair";
+import { chuanHoaMotBai, chuanHoaTatCaNotFair } from "../lib/chuan-hoa-notfair";
 
 export const MANG = [
   { label: "Thần số học", value: "than_so" },
@@ -150,9 +151,12 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
         if (!coKhoaNotFair()) return Response.json({ co_khoa: false, ds: [] });
         try {
           const ds = await dsNotFair();
-          const da = await req.payload.find({ collection: "bai-viet", where: { slug: { in: ds.map((p) => p.slug) } },
-            limit: ds.length || 1, depth: 0, draft: true, overrideAccess: true, select: { slug: true, _status: true } });
-          const theoSlug = new Map(da.docs.map((d) => [d.slug, d]));
+          const slugs = ds.map((p) => p.slug);
+          // BLOG-7: bài đã đổi sang đường dẫn không dấu → khớp qua slug_cu (slug gốc NotFair).
+          const da = await req.payload.find({ collection: "bai-viet", where: { or: [{ slug: { in: slugs } }, { slug_cu: { in: slugs } }] },
+            limit: (ds.length || 1) * 2, depth: 0, draft: true, overrideAccess: true, select: { slug: true, slug_cu: true, _status: true } });
+          const theoSlug = new Map<string, (typeof da.docs)[number]>();
+          for (const d of da.docs) for (const s of [d.slug, ...((d as { slug_cu?: string[] | null }).slug_cu ?? [])]) if (s) theoSlug.set(s, d);
           return Response.json({ co_khoa: true, nguon: nguonNotFair(), ds: ds.map((p) => {
             const d = theoSlug.get(p.slug) as { id: number | string; _status?: string } | undefined;
             return { slug: p.slug, tieu_de: p.title, ngay: p.published_at, anh: p.image_url,
@@ -177,6 +181,22 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
           return Response.json({ ok: true, ...(await nhapBaiNotFair(req.payload, req, slug)) });
         } catch (e) {
           return Response.json({ loi: (e as Error).message }, { status: 502 });
+        }
+      },
+    },
+    {
+      // BLOG-7: chuẩn hoá SEO mọi bài nguồn NotFair → bản NHÁP "Gửi duyệt" (đường dẫn không dấu + 308, trường SEO thiếu,
+      // hỏi đáp, ảnh nền sáng, liên kết nội bộ). Chỉ Quản trị/Chủ biên. Bản đang xuất bản không đổi tới khi bấm Xuất bản.
+      path: "/chuan-hoa-notfair", method: "post",
+      handler: async (req) => {
+        if (!laChuBien(req)) return Response.json({ loi: "Chỉ Quản trị hoặc Chủ biên được chuẩn hoá bài." }, { status: 403 });
+        try {
+          // Có `id` → một bài (nút gọi lần lượt từng bài để không vượt thời gian chạy của hàm); không có → mọi bài.
+          const body = (typeof req.json === "function" ? await req.json().catch(() => ({})) : {}) as { id?: unknown };
+          if (typeof body.id === "number" || typeof body.id === "string") return Response.json({ ok: true, ds: [await chuanHoaMotBai(req.payload, req, body.id)] });
+          return Response.json({ ok: true, ds: await chuanHoaTatCaNotFair(req.payload, req) });
+        } catch (e) {
+          return Response.json({ loi: (e as Error).message }, { status: 500 });
         }
       },
     },

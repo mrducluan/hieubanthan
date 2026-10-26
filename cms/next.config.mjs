@@ -16,7 +16,7 @@ const nextConfig = {
   poweredByHeader: false,
   agentRules: false,
   // Vân tay kho tri thức (CG-6) đọc bằng fs lúc chạy → ép đóng gói kèm hàm máy chủ.
-  outputFileTracingIncludes: { "/**/*": ["./src/kiem-dinh/van-tay-kb.json"] },
+  outputFileTracingIncludes: { "/**/*": ["./src/kiem-dinh/van-tay-kb.json", "./assets/fonts/*.ttf"] },
   images: { localPatterns: [{ pathname: "/api/media/file/**" }] },
   // Next 16.4 nén mã máy chủ làm mất tên lớp (APIError.name = "") → Payload trả "An unknown error occurred." thay cho
   // mọi lời báo lỗi tiếng Việt của CMS (chặn xuất bản, sai mật khẩu, email quản trị…). Chỉ tắt nén phía máy chủ.

@@ -16,7 +16,7 @@ export type AnhCms = {
 export type NguoiCms = { id: number; ten: string; slug?: string | null; chuc_danh?: string | null; trang_ho_so?: string | null;
   gioi_thieu?: string | null; lien_ket?: { url: string }[] | null };
 export type BaiCmsTomTat = {
-  id: number; tieu_de: string; slug: string; mo_ta_ngan?: string | null; anh_bia?: AnhCms | null;
+  id: number; tieu_de: string; slug: string; mo_ta_ngan?: string | null; anh_bia?: AnhCms | null; slug_cu?: string[] | null;
   publishedAt?: string | null; updatedAt: string; mang?: string | null; the?: string[] | null;
   noindex?: boolean | null; dua_vao_llms?: boolean | null; tra_loi_nhanh?: string | null;
   meta?: { title?: string | null; description?: string | null; image?: AnhCms | null } | null;
@@ -87,6 +87,7 @@ const tv = (o: Record<string, unknown>) => chuoiTruyVan(o).join("&");
 const CHON_TOM_TAT = {
   tieu_de: true, slug: true, mo_ta_ngan: true, anh_bia: true, publishedAt: true, updatedAt: true, mang: true,
   the: true, noindex: true, dua_vao_llms: true, tra_loi_nhanh: true, meta: true, loai_bai: true, chuyen_muc: true, vecto: true,
+  slug_cu: true,
 };
 
 /** Chuyên mục chỉ hợp lệ khi đã populate (object có ten + slug). */
@@ -122,13 +123,17 @@ export async function dsBaiCms(): Promise<BaiCmsTomTat[]> {
 
 /** Một bài theo slug (bản xuất bản; `nhap` = bản nháp mới nhất, cần CMS_API_KEY). Không có → tra slug cũ để chuyển hướng. */
 export async function baiCms(slug: string, nhap = false): Promise<{ bai: BaiCms } | { chuyen: string } | null> {
-  if (!coCms() || !/^[a-z0-9-]{1,120}$/.test(slug)) return null;
+  if (!coCms() || !slug || slug.length > 200 || /[/?#\s]/.test(slug)) return null;
   if (!nhap && !(await tinhNangCms()).blog_bat) return null;
-  const r = await goiCms<{ docs: BaiCms[] }>(`/api/bai-viet?${tv({
-    where: { slug: { equals: slug } }, limit: 1, depth: 2, ...(nhap ? { draft: "true" } : {}),
-  })}`, { nhap });
-  const bai = r?.docs?.[0];
-  if (bai && (nhap || bai._status !== "draft")) return { bai };
+  // Slug hiện hành luôn không dấu; slug CÓ dấu (bài NotFair nhập vào CMS trước BLOG-7, vd "…-đoc-…") chỉ còn để tra slug_cu.
+  const chuan = /^[a-z0-9-]{1,120}$/.test(slug);
+  if (chuan) {
+    const r = await goiCms<{ docs: BaiCms[] }>(`/api/bai-viet?${tv({
+      where: { slug: { equals: slug } }, limit: 1, depth: 2, ...(nhap ? { draft: "true" } : {}),
+    })}`, { nhap });
+    const bai = r?.docs?.[0];
+    if (bai && (nhap || bai._status !== "draft")) return { bai };
+  }
   if (nhap) return null;
   const cu = await goiCms<{ docs: { slug: string }[] }>(`/api/bai-viet?${tv({
     where: { slug_cu: { in: slug } }, limit: 1, depth: 0, select: { slug: true },

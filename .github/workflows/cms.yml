@@ -80,6 +80,12 @@ jobs:
           DATABASE_URI: postgres://postgres:postgres@localhost:5432/cms_mig
           CMS_DB_PUSH: "0"
         run: npm run test:tich-hop
+      - name: Chuẩn hoá SEO bài NotFair (BLOG-7 — slug không dấu, ảnh nền sáng, bản nháp)
+        working-directory: cms
+        env:
+          DATABASE_URI: postgres://postgres:postgres@localhost:5432/cms_mig
+          CMS_DB_PUSH: "0"
+        run: npm run test:chuan-hoa
       - name: Kho ảnh qua S3 (máy chủ S3 giả, đường đi thật của Payload)
         working-directory: cms
         env:
