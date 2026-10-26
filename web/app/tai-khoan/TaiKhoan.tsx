@@ -8,6 +8,7 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { ViSao } from "@/components/tai-khoan/ViSao";
 import { BatNhacPush } from "@/components/khung/BatNhacPush";
+import { TomTatHuyHieu } from "@/components/khung/HuyHieu";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 import { dangXuat, hoSoTaiKhoan, luuVaoTaiKhoan, useNguoiDung, xoaHoSoTaiKhoan, xoaTaiKhoan } from "@/lib/tai-khoan";
@@ -84,6 +85,8 @@ export function TaiKhoan() {
             </div>
           ) : <Button asChild size="sm"><Link href="/">Tạo hồ sơ</Link></Button>}
         </Card>
+        {/* SAO-HH: dòng tóm tắt huy hiệu (máy chủ khi đăng nhập + máy này). */}
+        <div className="mt-3"><TomTatHuyHieu /></div>
       </section>
 
       <section aria-labelledby="tai-khoan">

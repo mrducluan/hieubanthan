@@ -2,6 +2,7 @@
 //   POST (trang mở): chưa bật tài khoản → {tai_khoan:false} · khách → công tắc + mức (để mời đăng nhập, không ghi gì) ·
 //        đã đăng nhập → diem_danh() bằng phiên người dùng (giờ VN; gọi nhiều lần trong ngày không cộng thêm).
 //   Chưa chạy 0025 / lỗi RPC → san_sang:false: trang giữ chuỗi đếm trên máy như cũ. Không nhận đầu vào nào từ client.
+//   SAO-HH (0030): thêm da_nghi / nghi_con (ngày nghỉ chuỗi miễn phí) — DB chưa chạy 0030 thì không có, trang không hiện.
 import { NextResponse } from "next/server";
 import { layCauHinh } from "@/lib/cau-hinh";
 import { coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
@@ -33,5 +34,6 @@ export async function POST() {
   if (error || !hopLe(data)) return tra({ tai_khoan: true, dang_nhap: true, san_sang: false });
   const d = data;
   return tra({ tai_khoan: true, dang_nhap: true, san_sang: true, ngay: d.ngay, chuoi: d.chuoi, dai_nhat: d.dai_nhat, moi: d.moi,
-    bat: d.bat, moc: d.moc, sao_moc: d.sao_moc, con_ngay: d.con_ngay, sao: d.sao });
+    bat: d.bat, moc: d.moc, sao_moc: d.sao_moc, con_ngay: d.con_ngay, sao: d.sao,
+    ...(typeof d.da_nghi === "boolean" ? { da_nghi: d.da_nghi } : {}), ...(typeof d.nghi_con === "boolean" ? { nghi_con: d.nghi_con } : {}) });
 }

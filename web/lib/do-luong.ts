@@ -3,6 +3,7 @@
 // Tuyệt đối không gửi ngày/giờ sinh, họ tên, nội dung câu hỏi: mọi thuộc tính qua `locThuocTinh`.
 // Tắt autocapture + session recording (ô nhập ngày sinh không bao giờ bị ghi).
 import type { PostHog } from "posthog-js";
+import { ghiMangDaXem } from "@/lib/huy-hieu";
 
 export type SuKien =
   | "landing_viewed" | "reading_started" | "reading_completed" | "profile_created"
@@ -33,7 +34,10 @@ export type SuKien =
   // CTA-1: trò "Đoán số" trên thẻ Bản đồ 5 mảng — đúng/sai + mã biến thể câu mời
   | "guess_played"
   // SAO-V "Tặng một chương": tạo link quà / mở trang nhận quà / bấm nhận — chỉ mã mảng + cờ còn dùng + kết quả, KHÔNG mã quà
-  | "gift_sent" | "gift_opened" | "gift_claimed";
+  | "gift_sent" | "gift_opened" | "gift_claimed"
+  // SAO-HH (0030): ngày nghỉ chuỗi đã dùng · huy hiệu vừa đạt (chỉ mã) · lật lá bài đầu ngày (không nội dung) ·
+  // "Hẹn với chính mình" đặt / đạt (ngay = số ngày mục tiêu 7 / 30, không phải ngày tháng)
+  | "streak_freeze_used" | "badge_earned" | "daily_card_flipped" | "self_goal_set" | "self_goal_reached";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
@@ -94,6 +98,7 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   co_ma: "boolean",     // SAO-V: share_created — link có gắn mã mời ?gt= của người đăng nhập (phễu mời ở quản trị)
   goi: "string",        // SAO-ND: checkout_started — mã gói (khoi_dau / thu / pho_bien / gia_dinh), không số tiền
   lan_dau: "number",    // SAO-ND: checkout_started — 1 = tài khoản chưa từng nạp, 0 = đã nạp (khách: không gửi)
+  ngay: "number",       // SAO-HH: self_goal_set / self_goal_reached — số ngày mục tiêu (7 / 30), KHÔNG phải ngày tháng
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */
@@ -217,6 +222,7 @@ export function lanDauTrongPhien(khoa: string): boolean {
 /** Gate 1 — bài đọc: reading_started khi KẾT QUẢ của một mảng hiện ra (mỗi phiên một lần mỗi mảng);
  *  reading_completed khi cuộn tới cuối bài đọc (mỗi phiên một lần mỗi mảng, luôn sau started → tỉ lệ ≤ 100%). */
 export function batDauDoc(moDun: string, them: Record<string, unknown> = {}): void {
+  ghiMangDaXem(moDun);   // SAO-HH: huy hiệu máy "đi đủ năm mảng" (chỉ mã mảng, trên máy này)
   if (lanDauTrongPhien(`doc-bd.${moDun}`)) ghi("reading_started", { mo_dun: moDun, ...them });
 }
 export function docXong(moDun: string, them: Record<string, unknown> = {}): void {

@@ -4,9 +4,11 @@
 //   Khách khi site đã bật tài khoản: thêm một dòng mời đăng nhập (+ mức Sao chỉ khi công tắc thưởng bật).
 //   Đã đăng nhập: gọi /api/sao/chuoi một lần khi trang mở → chuỗi máy chủ (mọi máy), dài nhất, mốc thưởng, lời chúc.
 //   Mất chuỗi chỉ đếm lại, câu trung tính; không màu đỏ, không đếm ngược "sắp mất chuỗi".
+//   SAO-HH (0030): bỏ đúng 1 ngày + còn ngày nghỉ trong tuần → máy chủ nối chuỗi (da_nghi) — dòng "Hôm qua bạn nghỉ…";
+//   đo streak_freeze_used (chỉ cờ). `onTrangThai` báo kết quả lên trang (Hẹn với chính mình lấy tiến độ từ chuỗi máy chủ).
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Flame, Gift } from "lucide-react";
+import { Flame, Gift, Leaf } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { loiChuoiMay, loiChuoiMayChu, loiMoiKhach, type TrangThaiChuoi } from "@/lib/chuoi-ngay";
 
@@ -21,9 +23,13 @@ function doMotLanMoiNgay(ngay: string, chuoi: number, moi: boolean) {
   ghi("chart_interacted", { kind: "chuoi_ngay", chuoi, moi: moi ? 1 : 0 });
 }
 
-export function ChuoiNgay({ chuoiMay, batDauLaiMay, ngay }: { chuoiMay: number; batDauLaiMay: boolean; ngay: string }) {
+export function ChuoiNgay({ chuoiMay, batDauLaiMay, ngay, onTrangThai }: {
+  chuoiMay: number; batDauLaiMay: boolean; ngay: string; onTrangThai?: (tt: TrangThaiChuoi) => void;
+}) {
   const [tt, setTt] = useState<TrangThaiChuoi | null>(null);
   const daGoi = useRef(false);
+  const bao = useRef(onTrangThai);
+  bao.current = onTrangThai;
 
   useEffect(() => {
     if (daGoi.current) return;
@@ -34,12 +40,14 @@ export function ChuoiNgay({ chuoiMay, batDauLaiMay, ngay }: { chuoiMay: number; 
       .then((v) => {
         const d: TrangThaiChuoi = v && typeof v === "object" ? v : { tai_khoan: false };
         setTt(d);
+        bao.current?.(d);
         if (d.tai_khoan && d.dang_nhap && d.san_sang) {
           doMotLanMoiNgay(d.ngay, d.chuoi, d.moi);
           if (d.sao > 0) ghi("credit_earned", { kind: "chuoi", so_sao: d.sao, chuoi: d.chuoi });
+          if (d.da_nghi && d.moi) ghi("streak_freeze_used", { chuoi: d.chuoi });
         }
       })
-      .catch(() => setTt({ tai_khoan: false })); // im lặng: giữ chuỗi máy
+      .catch(() => { const d: TrangThaiChuoi = { tai_khoan: false }; setTt(d); bao.current?.(d); }); // im lặng: giữ chuỗi máy
   }, []);
 
   const mayChu = tt && tt.tai_khoan && tt.dang_nhap && tt.san_sang ? tt : null;
@@ -58,6 +66,11 @@ export function ChuoiNgay({ chuoiMay, batDauLaiMay, ngay }: { chuoiMay: number; 
         <span data-testid="chuoi-chinh">{loi.chinh}</span>
         {loi.dai_nhat && <span data-testid="chuoi-dai-nhat">· {loi.dai_nhat}</span>}
       </p>
+      {loi.nghi && (
+        <p className="inline-flex items-center gap-1.5 text-xs" data-testid="chuoi-nghi">
+          <Leaf className="size-3.5 text-jade" aria-hidden />{loi.nghi}
+        </p>
+      )}
       {loi.moc && <p className="text-xs" data-testid="chuoi-moc">{loi.moc}</p>}
       {loi.chuc_mung && (
         <p role="status" className="inline-flex items-center gap-1.5 text-jade" data-testid="chuoi-sao">
