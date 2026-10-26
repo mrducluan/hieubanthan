@@ -22,8 +22,8 @@ Giá trị quy đổi theo cách dùng:
 | Vừa: mình + 3 người thân | 12 | ≈ 348.000 + 180.000 + 398.000 ≈ **926.000 ₫** |
 | Nặng: xem cho cả nhà, xem lại theo năm | 30 | ≈ 870.000 + 180.000 + 398.000 ≈ **1.448.000 ₫** |
 
-→ Ở 3.990.000 ₫, ngay người dùng nặng cũng nhận về chưa tới **40 %** số tiền bỏ ra. Ở 399.000 ₫, người dùng vừa đã nhận
-về hơn gấp đôi.
+→ Ở 3.990.000 ₫, ngay người dùng nặng cũng nhận về chưa tới **40 %** số tiền bỏ ra (vừa ≈ 23 %). Ở 399.000 ₫ không kèm
+câu hỏi chuyên gia, người dùng vừa nhận về ≈ 528.000 ₫ (≈ 130 %); kèm 1 câu thì ≈ 727.000 ₫ (≈ 180 %).
 
 ## 2. Thị trường đang lấy giá thế nào
 
@@ -73,7 +73,7 @@ hỏi văn bản, nên đặt cạnh các dịch vụ đó sẽ khó thuyết ph
 | Giá / tháng | ≈ 332.500 ₫ | ≈ 33.250 ₫ | 399.000 ₫ và 1.990.000 ₫ |
 | Quyền lợi | Như mục 1 | Mở mọi chương + 15 Sao/tháng; câu hỏi chuyên gia mua riêng (hoặc kèm 1 câu) | Hạng thường = cột Em; hạng Chuyên gia = mọi chương + 15 Sao/tháng + 6 câu hỏi/năm + trả lời ưu tiên 24 giờ |
 | So thị trường | Ngang thầy 1-1 trọn đời, cao hơn CHANI (app đắt nhất Mỹ) | Ngang 2–3 báo cáo lẻ của đối thủ; dưới Co-Star / Lịch Việt Kim Cương | Hạng thường như cột Em; hạng Chuyên gia ≈ 1 lần thầy luận 1-1 nhưng có cả năm |
-| Người dùng vừa nhận về | ≈ 23 % số tiền | ≈ 230 % | ≈ 230 % / ≈ 85 % (6 câu ≈ 1,19 triệu) |
+| Người dùng vừa nhận về | ≈ 23 % số tiền | ≈ 130 % (không câu hỏi) · ≈ 180 % (kèm 1 câu) | như cột Em / ≈ 87 % (6 câu ≈ 1,19 triệu + báo cáo + Sao) |
 | Ai mua | Rất ít — người cần chuyên gia và tin tên Đức Luân | Người đã đọc ≥ 2 báo cáo và muốn đọc cho cả nhà | Cả hai nhóm, mỗi nhóm một hạng |
 | Rủi ro | Ít người mua → khó có phiếu kiểm chứng, khó học; dễ bị so với thầy và chê đắt; 2 câu chuyên gia là phần duy nhất "đáng tiền" | Doanh thu mỗi người thấp; cần nhiều người mua | Thêm một hạng = thêm việc vận hành; hạng Chuyên gia ràng buộc thời gian Đức Luân (6 câu × số hội viên) |
 | Hoà vốn so với phương án kia | Cần ≥ 1/10 số người mua của 399k | Cần ≥ 10 lần số người mua của 3,99 triệu | Hạng 1,99 triệu tạo "mỏ neo giá" làm 399k trông hợp lý |
