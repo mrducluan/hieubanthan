@@ -83,3 +83,13 @@ test("tải ảnh tứ trụ: ra file PNG", async ({ page }) => {
   expect(statSync(duong!).size).toBeGreaterThan(50_000);
   if (process.env.LUU_ANH) copyFileSync(duong!, process.env.LUU_ANH);
 });
+
+test("đầu trang: một cú bấm 'Đọc luận giải đời thường' vừa cuộn vừa tải chương đầu (không phải bấm lần hai)", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/bat-tu");
+  const nut = page.getByTestId("bat-tu-den-luan-giai");
+  await expect(nut).toBeVisible();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toHaveCount(0);
+  await nut.click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });
+});

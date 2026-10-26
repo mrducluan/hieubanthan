@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CachChinhBatTu, khoaLaSo, useCachChinh } from "@/lib/cach-chinh-battu";
 import { ghi } from "@/lib/do-luong";
+import { cuonToiLuanGiai, useCuaLuanGiai } from "@/lib/cta-sao";
 import type { LaSoBatTu, LuuNienBatTu } from "@/lib/battu-kieu";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
@@ -46,6 +47,8 @@ const KHOA_CHI_TIET = "hbt.battu_chi_tiet";
 const namNayVN = () => Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho_Chi_Minh", year: "numeric" }).format(new Date()));
 
 export function BatTu() {
+  // Nút đầu trang "Đọc luận giải đời thường": một cú bấm vừa cuộn vừa tải chương đầu (miễn phí) nếu chưa tải — không bắt bấm lần hai.
+  const cuaLg = useCuaLuanGiai();
   const hoSo = useHoSo();
   const c = useChu();
   const [gioTy, setGioTy] = useState<"da_ty" | "sang_ngay">("da_ty");
@@ -98,7 +101,14 @@ export function BatTu() {
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1">
               <Button asChild size="lg">
                 <a href="#luan-giai" data-testid="bat-tu-den-luan-giai"
-                  onClick={() => ghi("chart_interacted", { mo_dun: "battu", kind: "den_luan_giai" })}>
+                  onClick={(e) => {
+                    ghi("chart_interacted", { mo_dun: "battu", kind: "den_luan_giai" });
+                    if (cuaLg && cuaLg.moDun === "battu" && !cuaLg.daTai) {
+                      e.preventDefault();
+                      cuaLg.doc();
+                      requestAnimationFrame(() => cuonToiLuanGiai());
+                    }
+                  }}>
                   Đọc luận giải đời thường <ArrowDown aria-hidden />
                 </a>
               </Button>
