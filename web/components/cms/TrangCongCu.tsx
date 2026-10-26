@@ -28,7 +28,8 @@ export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mx-auto mt-12 max-w-5xl" />
       {/* QH-URL: trang công cụ là trang trụ của silo → trỏ xuống các cụm kiến thức của mảng. */}
       <CumKienThucTru tru={duong} className="mt-12" tieuDe={c("kien_thuc.tieu_de", { mang: TEN_MANG_SILO[duong] ?? "" }) || undefined} dau={dauCum} />
-      {mang && <Suspense fallback={null}><BaiLienQuanMang mang={mang} className="mt-12" /></Suspense>}
+      {mang && <Suspense fallback={null}><BaiLienQuanMang mang={mang} className="mt-12"
+        tru={dsCumTru(duong).length ? duong : undefined} boQua={[duong, ...dsCumTru(duong).map((x) => x.duong)]} /></Suspense>}
       {nd.gioiThieu.doan.length > 0 && <GioiThieuCongCu {...gioiThieuTu(nd)}
         nhan={{ tieuDe: c("gioi_thieu.tieu_de", { ten: nd.ten ?? "" }), hoiDap: c("gioi_thieu.hoi_dap"), docThem: c("gioi_thieu.doc_them") }} />}
       {sau}

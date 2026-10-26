@@ -109,8 +109,11 @@ test("CTA chân bài đổi theo mảng: bài phong thuỷ mời xem nhà, bài 
   await expect(page.getByTestId("cta-cuoi-bai")).toBeVisible();
   // Bài NotFair cũng có "Đọc tiếp" (bài khác trong blog, bỏ chính nó) + mốc đọc hết bài đo reading_completed{mo_dun: blog}.
   const docTiep = page.getByTestId("doc-tiep");
-  await expect(docTiep.locator("a")).toHaveCount(1);
+  // CTA-2: blog chỉ có 1 bài khác → bù 2 thẻ lối đi tiếp (không trùng link "Kiến thức phong thuỷ" của CtaBlog) cho kín hàng.
+  await expect(docTiep.locator("a")).toHaveCount(3);
   await expect(docTiep.locator("a").first()).toHaveAttribute("href", /xem-than-so-hoc-numerology/);
+  await expect(docTiep.locator("[data-the-lap]")).toHaveCount(2);
+  await expect(docTiep.locator('[data-the-lap="/tuoi-xong-dat"]')).toHaveCount(1);
   await expect(page.getByTestId("doc-xong-blog")).toHaveCount(1);
   await cta.scrollIntoViewIfNeeded();
   await expect.poll(async () => (await suKien(page)).some((e) => e.su_kien === "cross_cta_viewed" && e.tu === "blog" && e.den === "phong_thuy")).toBe(true);

@@ -11,8 +11,10 @@ import { BaiCms } from "@/components/blog/BaiCms";
 import { CtaBen, CtaBlog } from "@/components/blog/CtaBlog";
 import { KhungBaiDoc, MucLucGon, THAN_BAI_ID } from "@/components/blog/KhungBaiDoc";
 import { baiBlog, dsBaiTongHop, duongBlog, slugTuUrl } from "@/lib/blog";
-import { baiCungMang, mangCuaBai } from "@/lib/blog-mang";
+import { baiCungMang, lienKetKienThuc, mangCuaBai } from "@/lib/blog-mang";
 import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
+import { TheLap } from "@/components/khung/TheLap";
+import { theLapBlog } from "@/lib/the-lap";
 import { anhCms, baiCms, baiLienQuan, tinhNangCms } from "@/lib/cms";
 import { ganIdMucLuc } from "@/lib/muc-luc";
 import { sanitizeNotFairArticleHtml } from "@/lib/notfair-article";
@@ -128,21 +130,21 @@ export default async function Page({ params }: Props) {
 
       <CtaBlog mang={mang} className="mt-12" />
 
-      {docTiep.length > 0 && (
-        <section aria-labelledby="doc-tiep" className="mt-12" data-testid="doc-tiep">
-          <h2 id="doc-tiep" className="text-2xl">Đọc tiếp</h2>
-          <ul className="mt-4 grid gap-3 sm:grid-cols-3">
-            {docTiep.map((b) => (
-              <li key={b.slug}>
-                <Link href={duongBlog(b.slug)} className="glass block h-full rounded-2xl p-4 text-sm hover:border-gold/50">
-                  <span className="font-medium text-fg">{b.tieuDe}</span>
-                  {b.moTa && <span className="mt-1 line-clamp-2 block text-fg-faint">{b.moTa}</span>}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      {/* CTA-2: ít bài khác (blog mới) → bù cụm kiến thức cùng mảng / lối chung, không để ô trống. */}
+      <section aria-labelledby="doc-tiep" className="mt-12" data-testid="doc-tiep">
+        <h2 id="doc-tiep" className="text-2xl">Đọc tiếp</h2>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+          {docTiep.map((b) => (
+            <li key={b.slug}>
+              <Link href={duongBlog(b.slug)} className="glass block h-full rounded-2xl p-4 text-sm hover:border-gold/50">
+                <span className="font-medium text-fg">{b.tieuDe}</span>
+                {b.moTa && <span className="mt-1 line-clamp-2 block text-fg-faint">{b.moTa}</span>}
+              </Link>
+            </li>
+          ))}
+          {theLapBlog(docTiep.length, mang, lienKetKienThuc(mang).map((x) => x.duong)).map((t) => <TheLap key={t.duong} t={t} kieu="chu-nho" />)}
+        </ul>
+      </section>
 
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <p>Nội dung mang tính tham khảo văn hoá, giúp tự soi — không phải lời phán định mệnh, không thay lời khuyên y tế, pháp lý, tài chính.</p>

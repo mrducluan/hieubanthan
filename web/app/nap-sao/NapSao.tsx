@@ -1,5 +1,6 @@
 "use client";
 // Chọn gói → POST /api/thanh-toan/tao-don (kèm access token) → chuyển sang trang thanh toán của cổng.
+import { lopCot } from "@/lib/luoi";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Check, Loader2, QrCode, Sparkles } from "lucide-react";
@@ -48,7 +49,7 @@ export function NapSao({ goi, cong }: { goi: Goi[]; cong: "payos" | "gia" | null
     <div className="mt-8 space-y-6" data-testid="nap-sao">
       <fieldset>
         <legend className="sr-only">Chọn gói Sao</legend>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className={`grid gap-3 ${lopCot(goi.length)}`}>
           {goi.map((x) => (
             <label key={x.ma} data-testid={`goi-${x.ma}`}
               className={`glass relative flex cursor-pointer flex-col gap-1 rounded-2xl border p-5 transition-colors ${chon === x.ma ? "border-gold" : "border-line/70 hover:border-gold/50"}`}>

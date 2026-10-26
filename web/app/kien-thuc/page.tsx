@@ -7,6 +7,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { CHU_DE, TEN_MANG_SILO, THU_TU_TRU, dsCumTru, mucLuc } from "@/lib/kien-thuc";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang } from "@/components/minh-hoa/TrangTri";
+import { TheLap } from "@/components/khung/TheLap";
+import { soCanLap, theLap } from "@/lib/the-lap";
 import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
@@ -64,12 +66,15 @@ export default async function Page() {
                   </Link>
                 );
               })}
+              {/* CTA-2: silo ít cụm → thẻ công cụ của mảng + lối chéo cho kín hàng 3 cột (không để ô trống). */}
+              {theLap(soCanLap(dsCumTru(tru).length), { tru, coCongCu: true, boQua: dsCumTru(tru).map((x) => x.duong) })
+                .map((t) => <TheLap key={t.duong} t={t} kieu="lon" />)}
             </div>
           </section>
         ))}
       </div>
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-12" />
-      <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" /></Suspense>
+      <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" boQua={["/kien-thuc"]} /></Suspense>
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />
     </div>
   );
