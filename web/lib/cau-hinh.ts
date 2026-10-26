@@ -100,16 +100,26 @@ export const CAI_DAT: readonly CaiDat[] = [
   { khoa: "sao.hoi.gia", nhom: "Hỏi đáp", loai: "so", min: 1, max: 10, macDinh: 3,
     ten: "Giá mỗi câu vượt lượt (Sao)", moTa: "Chỉ áp dụng khi bật giới hạn hỏi đáp." },
   // ---- SAO-HV (0028) ----
-  // Hội viên năm: mua MỘT LẦN bằng VND (payOS, không tự gia hạn). SQL đọc cùng khoá (tao_don_hoi_vien, hv_cap_sao_thang_cho,
-  // hoi_vien_cua_toi, hoan_don_nap) — kẹp cùng khoảng. Công tắc mặc định TẮT: trang /hoi-vien vẫn có (noindex) nhưng nút ẩn.
+  // Hội viên năm HAI HẠNG (chủ dự án chốt phương án a, docs/SO-SANH-GIA-HOI-VIEN.md): thường + Chuyên gia. Mua MỘT LẦN bằng
+  // VND (payOS, không tự gia hạn). SQL đọc cùng khoá (hv_goi, tao_don_hoi_vien, hv_cap_sao_thang_cho, hoi_vien_cua_toi,
+  // hoan_don_nap) — kẹp cùng khoảng. Quyền lợi ĐÓNG BĂNG lúc mua: đổi số ở đây chỉ áp cho đơn / gia hạn SAU khi đổi.
+  // Công tắc mặc định TẮT: trang /hoi-vien vẫn có (noindex) nhưng nút ẩn.
   { khoa: "sao.hoi_vien.bat", nhom: "Hội viên năm", loai: "bat_tat", macDinh: false,
-    ten: "Bán hội viên năm", moTa: "Bật = trang /hoi-vien có nút mua, máy chủ nhận tạo đơn. Hội viên đang hiệu lực vẫn giữ quyền khi tắt." },
-  { khoa: "sao.hoi_vien.gia_vnd", nhom: "Hội viên năm", loai: "so", min: 100000, max: 50000000, macDinh: 3990000,
-    ten: "Giá hội viên năm (₫)", moTa: "Trả một lần cho 365 ngày; gia hạn (khi còn ≤ 30 ngày) cùng giá, nối tiếp hạn cũ. Đơn đã tạo giữ giá lúc tạo." },
+    ten: "Bán hội viên năm (hạng thường)", moTa: "Bật = trang /hoi-vien có nút mua hạng thường, máy chủ nhận tạo đơn. Hội viên đang hiệu lực vẫn giữ quyền khi tắt. Hạng Chuyên gia cần bật thêm công tắc riêng bên dưới." },
+  { khoa: "sao.hoi_vien.gia_vnd", nhom: "Hội viên năm", loai: "so", min: 100000, max: 50000000, macDinh: 399000,
+    ten: "Giá hạng thường (₫/năm)", moTa: "Trả một lần cho 365 ngày; gia hạn (khi còn ≤ 30 ngày) theo giá lúc gia hạn, nối tiếp hạn cũ. Đơn đã tạo giữ giá lúc tạo." },
   { khoa: "sao.hoi_vien.sao_thang", nhom: "Hội viên năm", loai: "so", min: 0, max: 100, macDinh: 15,
-    ten: "Sao tặng mỗi tháng", moTa: "Cấp một lần mỗi tháng (lần đầu mở trang trong tháng hoặc cron sáng), hết hạn ngày cuối tháng — KHÔNG cộng dồn. 0 = tạm dừng." },
-  { khoa: "sao.hoi_vien.cau_hoi_nam", nhom: "Hội viên năm", loai: "so", min: 0, max: 12, macDinh: 2,
-    ten: "Câu hỏi chuyên gia mỗi năm", moTa: "Lượt hỏi chuyên gia kèm hội viên (mảng Hỏi chuyên gia trừ qua hoi_vien_dung_cau_hoi). Gia hạn → lượt về 0 cho năm mới." },
+    ten: "Sao tặng mỗi tháng (cả hai hạng)", moTa: "Cấp một lần mỗi tháng (lần đầu mở trang trong tháng hoặc cron sáng), hết hạn ngày cuối tháng — KHÔNG cộng dồn. 0 = tạm dừng." },
+  { khoa: "sao.hoi_vien.cau_hoi_nam", nhom: "Hội viên năm", loai: "so", min: 0, max: 12, macDinh: 1,
+    ten: "Câu hỏi chuyên gia mỗi năm (hạng thường)", moTa: "Lượt hỏi chuyên gia kèm hạng thường. Gia hạn → lượt về 0 cho năm mới." },
+  { khoa: "sao.hoi_vien.cg.bat", nhom: "Hội viên năm", loai: "bat_tat", macDinh: false,
+    ten: "Bán hạng Chuyên gia", moTa: "Bật khi chuyên gia đủ thời gian trả lời trong hạn ưu tiên. Chỉ bán khi cùng bật \"Bán hội viên năm\" và \"Mở Hỏi chuyên gia\". Người đang ở hạng thường thấy nút nâng hạng." },
+  { khoa: "sao.hoi_vien.cg.gia_vnd", nhom: "Hội viên năm", loai: "so", min: 100000, max: 50000000, macDinh: 1990000,
+    ten: "Giá hạng Chuyên gia (₫/năm)", moTa: "Nâng hạng giữa kỳ = giá này − giá kỳ thường × tháng tròn còn lại / 12 (làm tròn nghìn), được kỳ mới 365 ngày." },
+  { khoa: "sao.hoi_vien.cg.cau_hoi_nam", nhom: "Hội viên năm", loai: "so", min: 0, max: 24, macDinh: 6,
+    ten: "Câu hỏi chuyên gia mỗi năm (hạng Chuyên gia)", moTa: "Câu đã dùng ở hạng thường mang sang khi nâng hạng." },
+  { khoa: "sao.hoi_vien.cg.han_gio", nhom: "Hội viên năm", loai: "so", min: 1, max: 168, macDinh: 24,
+    ten: "Hạn trả lời ưu tiên (giờ, hạng Chuyên gia)", moTa: "Áp cho mọi câu hỏi của hội viên Chuyên gia (cả câu trả tiền lẻ). Không dài hơn hạn chung của Hỏi chuyên gia." },
   // (sao.chuyen_gia.gia_vnd khai một lần ở khối SAO-CG phía trên — hội viên hoàn tiền trừ theo giá đó cho câu đã dùng.)
 ];
 

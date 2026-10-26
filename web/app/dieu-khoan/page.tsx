@@ -84,6 +84,11 @@ export default async function DieuKhoan() {
             số Sao tặng mỗi tháng theo mức đang công bố — cấp một lần mỗi tháng, dùng trong tháng đó, <b>không cộng dồn</b>; và
             một số lượt hỏi chuyên gia mỗi năm theo mức đang công bố (dùng khi mục đó mở; lượt chưa dùng không cộng dồn sang năm
             sau). Mức cụ thể ghi trên trang Hội viên lúc mua; thay đổi mức sau đó không làm giảm quyền lợi của thời hạn đã mua.</li>
+          <li><b>Hai hạng.</b> Hạng thường và hạng <b>Chuyên gia</b> có cùng quyền đọc và Sao tặng; hạng Chuyên gia có nhiều lượt
+            hỏi chuyên gia hơn và câu hỏi được trả lời trong thời hạn ưu tiên ghi trên trang Hội viên. <b>Nâng hạng</b> giữa kỳ:
+            bạn trả giá hạng Chuyên gia trừ đi phần còn lại của gói thường (tính theo tháng tròn còn lại trên 12 tháng), và nhận
+            kỳ mới 365 ngày từ ngày nâng; lượt hỏi đã dùng ở hạng thường được tính vào hạng mới. Đang ở hạng Chuyên gia muốn về
+            hạng thường thì mua sau khi hết hạn.</li>
           <li>Hội viên gắn với tài khoản, không chuyển nhượng. Sao vẫn là điểm dùng nội bộ như mục <Link href="#sao" className="text-gold underline">Sao</Link>.</li>
           <li><b>Hoàn tiền hội viên:</b>
             <ul>{HOAN_TIEN_HOI_VIEN.map((t) => <li key={t}>{t}</li>)}</ul>

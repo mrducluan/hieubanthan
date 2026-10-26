@@ -40,6 +40,9 @@ const LOAI_GL: Record<string, string> = {
 type HV = {
   ngay: number; bat: boolean; gia_vnd: number; hieu_luc: number; moi_trong_ky: number; gia_han_trong_ky: number; doanh_thu: number;
   het_han_30_ngay: number; hoan: number; cau_hoi_da_dung: number; sao_thang_da_cap: number;
+  // Hai hạng (0028 bản hai hạng) — bản cũ không có thì khối theo hạng tự ẩn.
+  gia_cg_vnd?: number; cg_bat?: boolean; theo_hang?: { thuong: number; chuyen_gia: number };
+  doanh_thu_theo_hang?: { thuong: number; chuyen_gia: number }; nang_hang_trong_ky?: number;
 };
 type Don = { ma_don: number; goi: string | null; so_tien: number; sao: number; cong: string; trang_thai: string; tao_luc: string; ghi_chu: string | null };
 
@@ -164,13 +167,20 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ k
       {hv && (
         <Card data-testid="qt-hoi-vien">
           <h2 className="text-lg">Hội viên năm</h2>
-          <p className="mt-1 text-xs text-fg-muted">{hv.bat ? `Đang mở bán · ${vnd(hv.gia_vnd)} / 365 ngày` : "Chưa mở bán (công tắc tắt) — hội viên đang hiệu lực vẫn giữ quyền"}. Mua một lần, không tự gia hạn, không hoa hồng. Hoàn tiền: bấm "Hoàn" ở đơn → hệ thống tính số tiền gợi ý theo chính sách, anh chuyển khoản ngoài hệ thống. Công tắc + mức ở <Link href="/quan-tri/cai-dat" className="text-gold underline">Cài đặt</Link>.</p>
+          <p className="mt-1 text-xs text-fg-muted">{hv.bat ? `Đang mở bán · thường ${vnd(hv.gia_vnd)}${hv.gia_cg_vnd ? ` · Chuyên gia ${vnd(hv.gia_cg_vnd)}${hv.cg_bat ? "" : " (chưa bán)"}` : ""} / 365 ngày` : "Chưa mở bán (công tắc tắt) — hội viên đang hiệu lực vẫn giữ quyền"}. Mua một lần, không tự gia hạn, không hoa hồng. Hoàn tiền: bấm "Hoàn" ở đơn → hệ thống tính số tiền gợi ý theo chính sách, anh chuyển khoản ngoài hệ thống. Công tắc + mức ở <Link href="/quan-tri/cai-dat" className="text-gold underline">Cài đặt</Link>.</p>
           <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
             <So ten="Đang hiệu lực" gt={so(hv.hieu_luc)} phu={`${so(hv.het_han_30_ngay)} hết hạn trong 30 ngày tới`} />
             <So ten="Mới trong kỳ" gt={so(hv.moi_trong_ky)} phu={`${so(hv.gia_han_trong_ky)} lượt gia hạn`} />
             <So ten="Doanh thu hội viên" gt={vnd(hv.doanh_thu)} phu={`hoàn ${so(hv.hoan)} đơn`} />
             <So ten="Sao tháng đã cấp" gt={so(hv.sao_thang_da_cap)} phu={`${so(hv.cau_hoi_da_dung)} câu hỏi chuyên gia đã dùng`} />
           </div>
+          {hv.theo_hang && hv.doanh_thu_theo_hang && (
+            <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4" data-testid="qt-hoi-vien-hang">
+              <So ten="Hạng thường" gt={so(hv.theo_hang.thuong)} phu={`doanh thu kỳ ${vnd(hv.doanh_thu_theo_hang.thuong)}`} />
+              <So ten="Hạng Chuyên gia" gt={so(hv.theo_hang.chuyen_gia)} phu={`doanh thu kỳ ${vnd(hv.doanh_thu_theo_hang.chuyen_gia)}`} />
+              <So ten="Nâng hạng trong kỳ" gt={so(hv.nang_hang_trong_ky ?? 0)} phu="thường → Chuyên gia" />
+            </div>
+          )}
         </Card>
       )}
 
