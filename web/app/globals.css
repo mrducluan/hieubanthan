@@ -308,3 +308,8 @@
   filter: brightness(1.12) contrast(1.04) saturate(1.06);
 }
 @media (prefers-contrast: more) { .anh-sang { filter: none; } }
+
+/* BLOG-8: khung chữ ký biên soạn cuối bài — phần xổ ra trượt nhẹ xuống (tắt khi người dùng chọn giảm chuyển động). */
+@keyframes ky-xo { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+details[open] > .khung-ky-noi-dung { animation: ky-xo 0.18s ease-out; }
+@media (prefers-reduced-motion: reduce) { details[open] > .khung-ky-noi-dung { animation: none; } }

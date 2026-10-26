@@ -1,49 +1,31 @@
-// Bài blog từ CMS. Bố cục theo trang kiến thức: H1 → sapo → chữ ký E-E-A-T → Trả lời nhanh → mục lục → thân bài →
-// hỏi đáp (FAQPage) → nguồn → mời dùng công cụ → đọc tiếp. Thân bài là HTML CMS đã lọc lại ở web (lib/cms-html.ts).
-// Chữ ký theo EEAT-1 / BM-1 / DX-1: chưa có chuyên gia đọc → "Ban biên tập … · Chủ biên duyệt xuất bản" (author =
-// Organization); chỉ khi CMS ghi "tác giả"/"thẩm định" (có xác nhận, có ngày) mới đứng tên người.
+// Bài blog từ CMS. Bố cục theo trang kiến thức: H1 → sapo → Trả lời nhanh → mục lục → thân bài →
+// hỏi đáp (FAQPage) → nguồn → chữ ký biên soạn (thu gọn) → mời dùng công cụ → đọc tiếp. Thân bài là HTML CMS đã lọc lại ở web (lib/cms-html.ts).
+// Chữ ký theo EEAT-1 / BM-1 / DX-1 (components/blog/KhungKyBai.tsx, đặt ở CUỐI bài): chưa có chuyên gia đọc → "Ban biên tập …
+// · Chủ biên duyệt xuất bản" (author = Organization); chỉ khi CMS ghi "tác giả"/"thẩm định" (có xác nhận, có ngày) mới đứng tên người.
 import { duongBlog } from "@/lib/blog-gop";
 import Link from "next/link";
-import { BookOpen, CalendarDays, Clock, Eye, ShieldCheck } from "lucide-react";
+import { CalendarDays, Clock, Eye } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CtaBen, CtaBlog } from "@/components/blog/CtaBlog";
 import { KhungBaiDoc, MucLucGon, THAN_BAI_ID } from "@/components/blog/KhungBaiDoc";
+import { KhungKyBai, nguoiKy } from "@/components/blog/KhungKyBai";
 import { lienKetKienThuc, mangCuaBai } from "@/lib/blog-mang";
 import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
 import { TheLap } from "@/components/khung/TheLap";
 import { DoKhoiCuoi } from "@/components/khung/DoKhoiCuoi";
 import { theLapBlog, type TuyChonLap } from "@/lib/the-lap";
-import { CHUYEN_GIA, duongChuyenGia, idChuyenGia, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
+import { CHUYEN_GIA, idChuyenGia, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
 import { anhCms, cacChuyenMuc, KIEU_LD, NHAN_LOAI, phutDoc, type BaiCms as Bai, type BaiCmsTomTat, type NguoiCms, type TinhNangCms } from "@/lib/cms";
 import { locHtmlCms } from "@/lib/cms-html";
 import { goiLd, ldDuongDan, ldHoiDap, siteUrl, urlDayDu } from "@/lib/seo";
 import nf from "@/app/blog/notfair-article.module.css";
 import st from "@/app/blog/cms-bai.module.css";
 
-const CHU_BIEN = "duc-luan";
-
 const TEN_MANG: Record<string, string> = {
   than_so: "Thần số học", tu_vi: "Tử vi", bat_tu: "Bát tự", kinh_dich: "Kinh Dịch", phong_thuy: "Phong thuỷ", chung: "Hiểu bản thân",
 };
 
 const ngayIso = (s?: string | null) => (s ? s.slice(0, 10) : null);
-
-function TenNguoi({ n }: { n: NguoiCms }) {
-  const cg = n.slug ? CHUYEN_GIA[n.slug] : undefined;
-  const href = cg ? duongChuyenGia(cg.slug) : n.trang_ho_so;
-  return href
-    ? <Link href={href} rel="author" className="font-medium text-fg underline decoration-gold/40 underline-offset-2 hover:decoration-gold">{cg?.ten ?? n.ten}</Link>
-    : <span className="font-medium text-fg">{n.ten}</span>;
-}
-
-/** Người đứng tên trên bài (null = Ban biên tập). */
-export function nguoiKy(bai: Bai): { vai: "tac_gia" | "tham_dinh"; n: NguoiCms } | null {
-  if (bai.ky_ten === "tac_gia" && bai.tac_gia && typeof bai.tac_gia === "object") return { vai: "tac_gia", n: bai.tac_gia };
-  if (bai.ky_ten === "tham_dinh" && bai.nguoi_tham_dinh && typeof bai.nguoi_tham_dinh === "object" && bai.ngay_tham_dinh) {
-    return { vai: "tham_dinh", n: bai.nguoi_tham_dinh };
-  }
-  return null;
-}
 
 function ldNguoiCms(n: NguoiCms) {
   const cg = n.slug ? CHUYEN_GIA[n.slug] : undefined;
@@ -64,7 +46,6 @@ export function BaiCms({ bai, tn, lienQuan, nhap, lapCms }: {
   const anh = anhCms(bai.anh_bia, "vua");
   const anhOg = anhCms(bai.meta?.image ?? bai.anh_bia, "og");
   const ky = nguoiKy(bai);
-  const cg = CHUYEN_GIA[ky?.n.slug ?? CHU_BIEN] ?? CHUYEN_GIA[CHU_BIEN];
   const hd = (bai.hoi_dap ?? []).filter((h) => h.cau_hoi && h.tra_loi);
   const nguon = (bai.nguon ?? []).filter((n) => n.ten);
   // CTA chân bài + thẻ bên lề đổi theo mảng: ban biên tập chọn `mang` thì theo đó; "chung" → đoán theo tiêu đề/thẻ.
@@ -135,27 +116,6 @@ export function BaiCms({ bai, tn, lienQuan, nhap, lapCms }: {
         <span className="inline-flex items-center gap-1"><Clock className="size-3.5" aria-hidden />{phutDoc(bai.noi_dung_html)} phút đọc</span>
       </div>
 
-      {/* Chữ ký E-E-A-T */}
-      <div className="mt-5 flex items-start gap-3 rounded-2xl border border-line/70 p-4" data-dong-tac-gia data-ky={ky?.vai ?? "ban_bien_tap"}>
-        <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/50 bg-gold/10 font-serif text-base text-gold">
-          {(ky ? (CHUYEN_GIA[ky.n.slug ?? ""]?.ten ?? ky.n.ten) : cg!.ten).split(" ").map((w) => w[0]).join("").slice(0, 3)}
-        </span>
-        <div className="min-w-0 text-sm leading-relaxed text-fg-muted">
-          {ky?.vai === "tac_gia" ? <p>Tác giả: <TenNguoi n={ky.n} /></p>
-            : ky?.vai === "tham_dinh" ? <p>Biên soạn &amp; thẩm định: <TenNguoi n={ky.n} /></p>
-              : <p>Ban biên tập Hiểu Bản Thân biên soạn · Chủ biên <Link href={duongChuyenGia(CHU_BIEN)} rel="author" className="font-medium text-fg underline decoration-gold/40 underline-offset-2 hover:decoration-gold">{CHUYEN_GIA[CHU_BIEN]!.ten}</Link> duyệt xuất bản</p>}
-          {ky && !CHUYEN_GIA[ky.n.slug ?? ""] ? (ky.n.chuc_danh && <p className="text-xs text-fg-faint">{ky.n.chuc_danh}</p>)
-            : cg && <p className="text-xs text-fg-faint">{cg.vaiTro} · {cg.tomTat}</p>}
-          <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
-            {ky?.vai === "tac_gia" ? <span className="inline-flex items-center gap-1 text-jade"><ShieldCheck className="size-3.5" aria-hidden /> Chuyên gia tự biên soạn</span>
-              : ky?.vai === "tham_dinh" ? <span className="inline-flex items-center gap-1 text-jade"><ShieldCheck className="size-3.5" aria-hidden />
-                Đã thẩm định · <time dateTime={bai.ngay_tham_dinh!}>{ngayVN(ngayIso(bai.ngay_tham_dinh)!)}</time></span>
-                : <span className="inline-flex items-center gap-1 text-fg-faint"><BookOpen className="size-3.5" aria-hidden /> Biên soạn từ sách và tài liệu tham khảo, ghi rõ nguồn</span>}
-            <Link href="/gioi-thieu#quy-trinh" className="text-fg-faint underline underline-offset-2 hover:text-fg">Quy trình biên soạn</Link>
-          </p>
-        </div>
-      </div>
-
       {anh && (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={anh.src} alt={anh.alt} width={anh.w} height={anh.h} fetchPriority="high"
@@ -198,6 +158,9 @@ export function BaiCms({ bai, tn, lienQuan, nhap, lapCms }: {
           </ul>
         </section>
       )}
+
+      {/* BLOG-8: chữ ký biên soạn ở CUỐI bài, thu gọn 2–3 dòng, bấm xổ ra (chủ dự án 2026-10-26). */}
+      <KhungKyBai ky={ky} ngayThamDinh={bai.ngay_tham_dinh} />
 
       {tn.keu_goi_cong_cu && <CtaBlog mang={mang} className="mt-12" />}
 
