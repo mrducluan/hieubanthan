@@ -222,15 +222,23 @@ class HoiPTInput(BaseModel):
     cau_hoi: str = Field(min_length=3, max_length=500)
     sinh: SinhInput | None = None
     ngay_xem: _dt.date | None = None
+    # Y6: hồ sơ nhà trên máy người hỏi (hướng + bố cục) → trả lời theo đúng nhà. Chỉ dùng trong lượt gọi, không lưu.
+    nha: "NhaInput | None" = None
 
 
 @router.post("/hoi")
 def api_hoi(inp: HoiPTInput, background: BackgroundTasks) -> dict:
+    nha = None
+    if inp.nha is not None:
+        nha = inp.nha.model_dump(exclude_none=True)
+        if inp.nha.bo_cuc is not None:
+            nha["bo_cuc"] = inp.nha.bo_cuc.model_dump(exclude_none=True)
     try:
         kq = hoidap_pt.tra_loi(inp.cau_hoi.strip(), sinh=inp.sinh.sinh() if inp.sinh else None,
-                               ngay_xem=inp.ngay_xem)
+                               ngay_xem=inp.ngay_xem, nha=nha)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
+    # Câu trả lời theo nhà (hướng, vị trí phòng) không vào nhật ký như dữ liệu sinh (nhat_ky.KHOI_TU_SINH: nha_rieng).
     background.add_task(nhat_ky.ghi_huyenhoc, "phongthuy", inp.cau_hoi, kq, inp.sinh is not None)
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "phongthuy")}
 
@@ -342,6 +350,9 @@ class NhaInput(BaseModel):
     bo_cuc: _BoCuc | None = None
 
 
+HoiPTInput.model_rebuild()      # Y6: `nha` tham chiếu NhaInput khai báo phía trên
+
+
 class ThanhVienInput(SinhInput):
     vai: Literal["vo", "chong", "con", "cha_me", "khac"] = "khac"
 
@@ -405,6 +416,22 @@ class ThangNayInput(BaseModel):
         if self.huong_do is None and self.huong is None:
             raise ValueError("cần huong_do hoặc huong")
         return self
+
+
+class ViecTuanInput(BaseModel):
+    """Y4 — thẻ "Việc 0 đồng tuần này": chỉ MÃ dấu hiệu đã khai / đã xử lý trong hồ sơ nhà trên máy. Không lưu."""
+    model_config = ConfigDict(extra="forbid")
+
+    dau_hieu: list[Literal[tuple(bo_cuc.DAU_HIEU)]] = Field(default_factory=list, max_length=40)  # type: ignore[valid-type]
+    da_xu_ly: list[Literal[tuple(bo_cuc.DAU_HIEU)]] = Field(default_factory=list, max_length=40)  # type: ignore[valid-type]
+    loai_nha: Literal["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"] | None = None
+    ngay_xem: _dt.date | None = None
+
+
+@router.post("/viec-tuan")
+def api_viec_tuan(inp: ViecTuanInput) -> dict:
+    ngay = inp.ngay_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
+    return {"engine_version": ENGINE_VERSION, **bo_cuc.viec_tuan(inp.dau_hieu, inp.da_xu_ly, inp.loai_nha, ngay)}
 
 
 @router.post("/thang-nay")

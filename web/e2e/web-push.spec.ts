@@ -155,6 +155,12 @@ test("GĐ2: một thông báo/ngày — mốc tự đánh dấu > mốc lịch �
   // mốc tự đánh dấu thắng tất cả
   expect(ghepThongBao({ ...N, nhac: [{ nhan: "Ứng kỳ quẻ Càn", duong: "/kinh-dich" }], moc_lich: ["giao_tiet"], sang_nay: true, ngay_sinh: "12-05" }, SN, "2026-03-05"))
     .toMatchObject({ title: "Ứng kỳ quẻ Càn", url: "/kinh-dich", body: "Mốc bạn đã đánh dấu cho hôm nay · Ngày cá nhân 6: Câu tự soi 6?" });
+  // Y3: ngày giao tiết + có hướng nhà trong tài khoản → lời cụ thể phía cửa nhà mình thay lời mời chung (vẫn một thông báo)
+  const NHA = { noi_dung: "Nhà hướng Nam, tháng Mão phía cửa cân bằng: Sửa nhỏ, dọn gọn được.", duong: "/hom-nay#thang-nay-nha" };
+  expect(ghepThongBao({ ...N, moc_lich: ["giao_tiet"], nha_tiet: NHA }, SN, "2026-03-05"))
+    .toMatchObject({ title: "Hôm nay giao tiết Kinh trập", body: NHA.noi_dung, url: "/hom-nay#thang-nay-nha" });
+  // có nhà nhưng không chọn nhận mốc giao tiết → không gửi
+  expect(ghepThongBao({ ...N, nha_tiet: NHA }, SN, "2026-03-05")).toBeNull();
   // engine lỗi (sn = null) → chỉ còn mốc tự đánh dấu
   expect(ghepThongBao({ ...N, sang_nay: true, ngay_sinh: "12-05", moc_lich: ["giao_tiet"] }, null, "2026-03-05")).toBeNull();
 });

@@ -64,6 +64,11 @@ def lang_gieng(n: str, loai: str | None = None) -> list[tuple[str, str]]:
     return [(l, b) for a, l, b in canh() if a == n and (loai is None or l == loai)]
 
 
+def dau_hieu_o_phong(phong: list[str]) -> set[str]:
+    """Y6: dấu hiệu thường gặp ở các phòng cho (cạnh O_PHONG đảo chiều) — để hỏi đáp nêu đúng dấu hiệu đã khai của phòng đó."""
+    return {ma for ma, ds in (_d().get("dau_hieu_phong") or {}).items() if set(ds) & set(phong)}
+
+
 def theo_y_dinh(ma: str) -> dict | None:
     """Một "truy vấn" cho một ý định: phòng cần nhìn, dấu hiệu nên rà, sao liên quan, và sao kích hoạt từng dấu hiệu
     (2 bước: ý định → dấu hiệu ← sao). None khi ý định không có trong đồ thị."""

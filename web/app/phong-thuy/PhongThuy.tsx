@@ -17,6 +17,7 @@ import { usePost } from "@/lib/goi-api";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { hoiMang } from "@/lib/hoi-mang";
 import { ngaySinhIso, useHoSo } from "@/lib/hoso";
+import { nhaGui, useHoSoNha } from "@/lib/ho-so-nha";
 
 interface MenhQuai {
   quai: string; nhom: string; nam_tinh: number; bang_huong: Record<string, string>; huong_cat: string[];
@@ -46,6 +47,9 @@ export function PhongThuy() {
   const { data: mq, loi, thuLai } = usePost<MenhQuai>("/api/phongthuy/menh-quai", sinh);
   const [doToa, setDoToa] = useState<number | null>(null);
   const [doHuong, setDoHuong] = useState<number | null>(null);
+  // Y6: hỏi đáp đọc hồ sơ nhà trên máy (hướng + bố cục) → "bếp nhà tôi có sao không?" trả lời theo đúng nhà; không lưu.
+  const hoSoNha = useHoSoNha();
+  const nhaHoi = hoSoNha && (hoSoNha.huong_do != null || hoSoNha.huong || hoSoNha.bo_cuc) ? nhaGui(hoSoNha).nha : null;
 
   useBatDauDoc("phongthuy", Boolean(mq));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
@@ -95,10 +99,11 @@ export function PhongThuy() {
         <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp cùng AI"}</h2>
           <KhungChat
             moDun="phongthuy"
-            loiChao="Hỏi về hướng nhà, bếp, bàn làm việc, năm làm nhà — hoặc một tình huống bố trí cụ thể."
+            loiChao={nhaHoi ? "Hỏi về bếp, giường, cửa, nhà vệ sinh… của nhà bạn — câu trả lời đọc theo hồ sơ nhà đang lưu trên máy bạn, hệ thống không lưu lại."
+              : "Hỏi về hướng nhà, bếp, bàn làm việc, năm làm nhà — hoặc một tình huống bố trí cụ thể."}
             goiY={GOI_Y}
             nhanO="Câu hỏi Phong thuỷ"
-            gui={(cau) => hoiMang("/api/phongthuy/hoi", { cau_hoi: cau, ...(sinh ? { sinh } : {}) })}
+            gui={(cau) => hoiMang("/api/phongthuy/hoi", { cau_hoi: cau, ...(sinh ? { sinh } : {}), ...(nhaHoi ? { nha: nhaHoi } : {}) })}
           />
       </section>
     </div>

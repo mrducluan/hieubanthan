@@ -56,6 +56,13 @@ def dau_hieu_veto() -> set[str]:
     return {ma for ma in DAU_HIEU if (kb.bo_tri(ma) or {}).get("veto")}
 
 
+def duong_trang(ma: str) -> str:
+    """Y5: đường dẫn trang kiến thức của dấu hiệu (`kb/trang_phongthuy.py`) — engine dựng, web chỉ hiện link."""
+    from app.kb import trang  # noqa: PLC0415
+    from app.kb.trang_phongthuy import DUONG_CUM  # noqa: PLC0415
+    return f"{DUONG_CUM}/{trang._slug(kb.bo_tri(ma)['tieu_de'])}"
+
+
 # Q5: ba mức chi phí của việc nên làm (KB bo_tri[*].viec[*].chi_phi).
 CHI_PHI = {"khong_ton": "0 đồng — kê lại, đổi thói quen", "it_tien": "Ít tiền — đèn, rèm, cây, quạt hút", "sua_chua": "Sửa chữa — vách, trần, đổi cửa"}
 # Q4: hai lối giải thích dấu hiệu — "sach_xua" (KB noi_dung) / "doi_song" (KB giai_thich_hien_dai).
@@ -213,7 +220,7 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
             dau_hieu.append({"ma": ma, "tot": DAU_HIEU[ma].get("tot", False), "tieu_de": m["tieu_de"],
                              "noi_dung": nay if goc_nhin == "doi_song" else xua, "goi_y": m["goi_y"], "nguon": m["nguon"],
                              "veto": ma in veto_ds, "giai_thich": {"sach_xua": xua, "doi_song": nay},
-                             "viec": _viec_cho(ma, m, b.loai_nha), "tu_mat_bang": ma in dh_mb})
+                             "viec": _viec_cho(ma, m, b.loai_nha), "tu_mat_bang": ma in dh_mb, "trang": duong_trang(ma)})
     can_xn = [{"ma": ma, "hoi": DAU_HIEU[ma]["hoi"], "do_tin": dh.do_tin, "nguon": dh.nguon}
               for ma, dh in b.dau_hieu.items() if dh.co and not _nhan(dh)]
 
@@ -236,3 +243,28 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
         "chi_phi": CHI_PHI,
         **kb.meta(),
     }
+
+
+def viec_tuan(dau_hieu: list[str], da_xu_ly: list[str], loai_nha: str | None, ngay) -> dict:
+    """Y4 — "Việc 0 đồng tuần này" (thẻ Hôm nay): mỗi tuần (ISO, thứ Hai → Chủ nhật) MỘT việc không tốn tiền từ dấu hiệu
+    người dùng đã khai mà chưa đánh dấu đã xử lý. Ưu tiên nhóm nên xử lý trước (veto) — còn veto thì chỉ xoay trong veto;
+    hết thì xoay các dấu hiệu cần để ý; chỉ còn dấu hiệu tốt thì nhắc việc giữ. Tất định theo tuần, không lưu."""
+    import datetime as _dt  # noqa: PLC0415
+    bo = set(da_xu_ly)
+    co = [ma for ma in DAU_HIEU if ma in set(dau_hieu) and ma not in bo]
+    veto = dau_hieu_veto()
+    nhom = ([m for m in co if m in veto] or [m for m in co if not DAU_HIEU[m].get("tot")] or co)
+    nam, tuan, _ = ngay.isocalendar()
+    dau_tuan = ngay - _dt.timedelta(days=ngay.weekday())
+    ra = {"tuan": f"{nam}-W{tuan:02d}", "tu_ngay": dau_tuan.isoformat(), "den_ngay": (dau_tuan + _dt.timedelta(days=6)).isoformat(),
+          "so_dau_hieu": len(co), "viec": None}
+    if not nhom:
+        ra["ly_do"] = "da_xu_ly_het" if dau_hieu else "chua_khai"
+        return ra
+    ma = nhom[(nam * 53 + tuan) % len(nhom)]
+    m = kb.bo_tri(ma)
+    v0 = next((v["lam"] for v in _viec_cho(ma, m, loai_nha) if v["chi_phi"] == "khong_ton"), m["goi_y"])
+    from app.luangiai.doi_song_khuon import ma_mau  # noqa: PLC0415
+    ra["viec"] = {"ma": ma, "tieu_de": m["tieu_de"], "lam": v0, "veto": ma in veto, "tot": bool(DAU_HIEU[ma].get("tot")),
+                  "trang": duong_trang(ma), "ma_mau": ma_mau("phongthuy", "viec_tuan", ma), "phai": "bat_trach_huyen_khong"}
+    return ra

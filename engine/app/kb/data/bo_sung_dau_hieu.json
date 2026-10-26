@@ -1,0 +1,1712 @@
+{
+ "source_id": "bo_sung_dau_hieu_v1",
+ "school_id": "bat_trach",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Dương Trạch Tam Yếu, Bát Trạch Minh Kính, Táng Thư, Hám Long Kinh, Thẩm Thị Huyền Không Học (cổ thư công cộng) + phong thuỷ dân gian Việt Nam",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + cổ thư công cộng (nháp AI, chờ thẩm định). Y5, 2026-10-26."
+ },
+ "trang": {
+  "duong-dam-thang-vao-nha": {
+   "muc": [
+    {
+     "tieu_de": "Nhà cuối đường đâm thẳng có nên mua không?",
+     "doan": "Có thể mua nếu cửa chính lùi được khỏi trục đường hoặc có sân trước làm vùng đệm. Nếu cửa mở thẳng ra mép đường, xe chạy tới rồi mới rẽ, nên cân nhắc kỹ hơn. Ra xem nhà vào giờ tan tầm buổi chiều: đèn pha có rọi thẳng vào phòng khách không, xe máy có phóng tới sát bậc cửa rồi mới quẹo không. Nhà dùng để buôn bán thì lượng người đi qua lại là điểm cộng; nhà chỉ để ở, có trẻ nhỏ chạy ra cửa, thì điểm đó thành nỗi lo hằng ngày."
+    },
+    {
+     "tieu_de": "Hẻm cụt đâm vào nhà khác gì đường lớn đâm vào nhà?",
+     "doan": "Hẻm cụt thường nhẹ hơn nhiều vì xe chạy chậm và ít. Cái cần để ý ở hẻm là gió lùa dọc hẻm mang bụi, rác và mùi vào thẳng phòng khách, nhất là mùa khô. Đường lớn đâm vào thì thêm tiếng còi, đèn pha ban đêm và cảm giác lúc nào cũng có thứ lao về phía mình. Cùng một dấu hiệu nhưng mức độ khác hẳn, nên đi xem tận nơi trước khi kết luận."
+    },
+    {
+     "tieu_de": "Nhà cuối hành lang chung cư có bị coi là đường đâm không?",
+     "doan": "Có, sách xưa gọi chung các lối thẳng dài dẫn vào cửa, kể cả hành lang trong nhà. Ở chung cư, hành lang dài khiến tiếng bước chân, tiếng thang máy và gió điều hoà chung dồn về cửa căn cuối. Cách xử lý gọn nhất nằm trong căn: một tủ giày cao hoặc vách lửng ngay sau cửa để người vào phải rẽ nhẹ, mắt không nhìn xuyên vào phòng ngủ."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Đường đâm theo tình huống: mức cần để ý và việc nên làm",
+    "chu_thich": "Mức để ý tính theo tốc độ và lượng xe đi thẳng về phía cửa, không phải điểm số.",
+    "cot": [
+     "Tình huống",
+     "Mức cần để ý",
+     "Nên làm trước"
+    ],
+    "dong": [
+     [
+      "Hẻm cụt dưới 30 m, chỉ vài nhà đi lại",
+      "Nhẹ",
+      "Rèm cửa, kê ghế lệch trục, giữ hiên sạch bụi"
+     ],
+     [
+      "Hành lang chung cư dài dẫn tới căn cuối",
+      "Vừa",
+      "Tủ giày cao hoặc vách lửng sau cửa, đóng cửa khi không dùng"
+     ],
+     [
+      "Đường nội bộ khu dân cư, xe máy qua lại",
+      "Vừa",
+      "Cổng hoặc bồn cây thấp trước cửa, đèn hiên dịu"
+     ],
+     [
+      "Đường lớn, xe tải, xe khách lao thẳng tới",
+      "Cao",
+      "Lùi cửa, xây tường rào chắc, trẻ nhỏ không chơi ở sân trước"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Đường đâm lệch một góc, không trúng giữa cửa thì có sao không?",
+     "dap": "Lệch góc thì nhẹ hơn rõ rệt, vì đèn xe và gió không còn rọi thẳng vào lòng nhà. Chỉ cần để ý góc nhà hứng xe quẹo."
+    },
+    {
+     "hoi": "Đã ở nhà đường đâm lâu năm, có cần đổi cửa ngay không?",
+     "dap": "Không cần vội. Thử rèm, đổi chỗ ngồi và vách sảnh vài tuần; thấy đỡ ồn, đỡ giật mình thì chưa phải đụng tới kết cấu."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Dương Trạch Tam Yếu",
+     "nghia": "Sách đặt cửa, chủ phòng và bếp làm ba điều cốt yếu của nhà ở; cửa là nơi khí vào nhà, nên những gì dồn thẳng vào cửa được xem xét trước tiên."
+    }
+   ],
+   "y_chinh": [
+    "Hẻm cụt nhẹ hơn đường lớn: đi xem tận nơi vào giờ tan tầm",
+    "Hành lang chung cư dài cũng tính là đường đâm",
+    "Xử lý trong cửa: tủ giày cao, vách lửng, rèm dày",
+    "Nhà có trẻ nhỏ: ưu tiên tường rào, cổng chắc"
+   ]
+  },
+  "nha-o-nga-ba-nga-tu": {
+   "muc": [
+    {
+     "tieu_de": "Nhà ở ngã ba có nên mua để ở không?",
+     "doan": "Nên mua khi phòng ngủ đặt được ở phía trong, xa nút giao. Ngã ba thường có đèn tín hiệu, xe dừng rồi rồ ga, còi xe dồn vào giờ đi làm và giờ tan học. Hãy đứng trong căn nhà vào khoảng 7 giờ sáng và 5 giờ chiều để nghe thật. Nếu nhà sâu, có hai ba tầng, phần ồn chỉ dồn vào tầng trệt mặt tiền, thì vẫn ở dễ chịu được."
+    },
+    {
+     "tieu_de": "Nhà góc ngã tư buôn bán có tốt không?",
+     "doan": "Với buôn bán, nhà góc ngã tư thường là lợi thế vì có hai mặt tiền và nhiều người nhìn thấy. Quán cà phê, tiệm thuốc, cửa hàng tiện lợi hay chọn kiểu nhà này. Mặt cần tính là chỗ để xe cho khách, bụi bám kính cửa và ánh nắng chiếu hai phía. Nhiều gia đình chọn cách tầng dưới bán hàng, tầng trên làm chỗ ở, quay phòng ngủ về phía hẻm."
+    },
+    {
+     "tieu_de": "Ngã ba chữ T và ngã ba chữ Y khác nhau thế nào?",
+     "danh_sach": [
+      "Chữ T: nhà nằm ở đầu nhánh dọc thì kiêm luôn đường đâm thẳng, cần để ý nhiều hơn.",
+      "Chữ T: nhà nằm dọc nhánh ngang thì chủ yếu là ồn và xe dừng chờ.",
+      "Chữ Y: hai dòng xe chụm lại ngay góc nhà, góc đó hay hứng bụi và xe quẹo sát.",
+      "Vòng xoay nhỏ: xe chạy chậm, đều, thường dễ ở hơn ngã tư có đèn."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Vị trí nhà quanh nút giao: ở được thế nào",
+    "chu_thich": "Gợi ý theo ánh sáng, tiếng ồn và lối ra vào; dùng để so khi đi xem nhà.",
+    "cot": [
+     "Vị trí",
+     "Để ở",
+     "Để buôn bán",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Nhà góc, hai mặt tiền",
+      "Ồn hai phía, nắng hai phía",
+      "Rất thuận, dễ thấy",
+      "Kính hai lớp, phòng ngủ tầng trên phía trong"
+     ],
+     [
+      "Đầu nhánh chữ T",
+      "Cần để ý nhiều nhất",
+      "Thuận nếu có chỗ đỗ xe",
+      "Lùi cửa, làm hiên hoặc bồn cây chắn"
+     ],
+     [
+      "Cách nút giao 2–3 căn",
+      "Ồn vừa, đỡ đèn pha",
+      "Vẫn được nhìn thấy",
+      "Rèm dày phòng trước, giữ hiên gọn"
+     ],
+     [
+      "Trong hẻm sát ngã ba",
+      "Yên hơn, ra đường nhanh",
+      "Ít khách vãng lai",
+      "Chú ý lối ra hẻm, đèn hẻm ban đêm"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhà ngã ba có cần tránh hướng cửa nào không?",
+     "dap": "Hướng cửa hợp hay không là chuyện của mệnh quái người ở. Với ngã ba, điều đáng tính trước là cửa có nằm ngay trục xe chạy tới hay không."
+    },
+    {
+     "hoi": "Mua nhà ngã tư có khó bán lại không?",
+     "dap": "Nhà góc mặt tiền thường dễ cho thuê buôn bán. Người mua để ở thì kén hơn, nên giá bán lại phụ thuộc khu vực có sầm uất hay không."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Dương Trạch Tam Yếu",
+     "nghia": "Sách xem cửa là chỗ nhà đón khí từ ngoài vào; nơi nhiều luồng xe và người từ các phía dồn tới thì khí động mạnh, hợp chỗ buôn bán hơn chỗ nghỉ ngơi."
+    }
+   ],
+   "y_chinh": [
+    "Đứng trong nhà giờ cao điểm để nghe tiếng ồn thật",
+    "Nhà góc ngã tư: lợi cho buôn bán, ở thì đặt phòng ngủ phía trong",
+    "Đầu nhánh chữ T là chỗ cần để ý nhất",
+    "Cách nút giao vài căn thường dễ ở hơn"
+   ]
+  },
+  "cot-dien-cay-lon-truoc-cua": {
+   "muc": [
+    {
+     "tieu_de": "Cột điện trước cửa nhà cách bao xa thì ổn?",
+     "doan": "Cột càng xa mép cửa càng tốt, lệch hẳn sang một bên thường dễ chịu hơn đứng ngay giữa. Điều cần kiểm tra trước tiên là dây điện có võng gần ban công, cửa sổ tầng hai hay không. Bóng cột và dây chằng cũng che bớt nắng sáng, làm sảnh tối hơn. Nếu cột nằm đúng lối dắt xe, mỗi ngày ra vào đều phải lách, lâu dần thành bực bội."
+    },
+    {
+     "tieu_de": "Trụ biến áp hay tủ điện trước nhà có đáng ngại không?",
+     "doan": "Đáng để ý hơn cột điện thường, chủ yếu vì tiếng ù và chuyện an toàn khi trẻ con chơi gần. Hãy hỏi điện lực khu vực về khoảng cách an toàn và lịch kiểm tra. Ở nhà phố, nhiều người kê bồn cây thấp quanh chân trụ để trẻ không lại gần, giữ cửa sổ phía đó đóng khi ngủ."
+    },
+    {
+     "tieu_de": "Cột điện đối diện cửa căn hộ chung cư thì sao?",
+     "doan": "Căn hộ tầng cao nhìn ra cột điện ngoài đường thì gần như chỉ còn chuyện tầm nhìn. Nếu thấy vướng mắt, rèm voan hoặc chậu cây trên ban công là đủ. Với căn tầng hai, tầng ba sát dây điện, nên giữ ban công gọn, không phơi đồ vươn ra phía dây."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Vật trước cửa: điều cần kiểm tra và hướng xử lý",
+    "chu_thich": "Ưu tiên chuyện an toàn và lối đi trước, chuyện tầm nhìn sau.",
+    "cot": [
+     "Vật trước cửa",
+     "Kiểm tra điều gì",
+     "Hướng xử lý"
+    ],
+    "dong": [
+     [
+      "Cột điện hạ thế",
+      "Dây võng sát ban công, cửa sổ",
+      "Báo điện lực, giữ lối dắt xe thoáng"
+     ],
+     [
+      "Trụ biến áp, tủ điện",
+      "Tiếng ù, khoảng cách tới chỗ trẻ chơi",
+      "Bồn cây chắn chân trụ, hỏi khoảng cách an toàn"
+     ],
+     [
+      "Cột viễn thông, cột đèn",
+      "Đèn rọi vào phòng ngủ ban đêm",
+      "Rèm cản sáng, đổi phòng ngủ vào trong"
+     ],
+     [
+      "Cây cổ thụ đường phố",
+      "Cành khô, rễ đội vỉa hè",
+      "Xin cơ quan cây xanh cắt tỉa trước mùa mưa bão"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Có được tự ý dời cột điện trước nhà không?",
+     "dap": "Không nên tự làm. Cần gửi đề nghị tới điện lực địa phương, thường kèm chi phí và chờ khảo sát."
+    },
+    {
+     "hoi": "Cột điện lệch hẳn sang nhà hàng xóm có tính không?",
+     "dap": "Lệch hẳn khỏi cửa nhà mình thì nhẹ hơn nhiều. Chỉ cần giữ lối ra vào thoáng và để ý dây điện qua mùa mưa bão."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Dân gian gọi vật cứng, nhọn đứng chắn ngay trước cửa là 'xung sát'; người xưa khuyên dời cửa lệch đi hoặc trồng cây, xây tường thấp làm vùng đệm."
+    }
+   ],
+   "y_chinh": [
+    "Kiểm tra dây điện sát ban công, cửa sổ trước tiên",
+    "Cột lệch sang một bên dễ chịu hơn cột giữa cửa",
+    "Trụ biến áp: hỏi điện lực khoảng cách an toàn",
+    "Không tự dời cột, gửi đề nghị điện lực"
+   ]
+  },
+  "song-ho-truoc-nha": {
+   "muc": [
+    {
+     "tieu_de": "Nhà nhìn ra hồ có tốt không?",
+     "doan": "Thường được xem là tốt khi mặt hồ nằm trước, rộng và yên. Hồ cho không khí mát hơn vào mùa hè, buổi sáng nhìn ra dễ chịu, tầm mắt được thả xa. Mặt cần tính là hơi ẩm vào mùa nồm, muỗi lúc chập tối và nắng chiều phản chiếu từ mặt nước nếu nhà quay về hướng Tây."
+    },
+    {
+     "tieu_de": "Nhà ven sông có nên mua không?",
+     "doan": "Nên xem kỹ mực nước mùa lũ trước khi xem cảnh đẹp. Hỏi hàng xóm năm nào nước dâng cao nhất, nền nhà cao hơn mặt đường bao nhiêu, bờ kè có sạt chỗ nào không. Sông cong ôm về phía nhà được sách xưa xem là tốt; sông chảy thẳng đi hoặc chỗ dòng xói vào bờ thì kém, và thực tế bờ bên đó cũng hay lở hơn."
+    },
+    {
+     "tieu_de": "Kênh, mương thoát nước trước nhà có giống sông hồ không?",
+     "doan": "Không giống, vì nước tù và mùi mới là chuyện chính. Mương nước đọng mang muỗi, mùi khi trời nóng và dễ ngập khi mưa lớn. Nếu mương sạch, có nắp hoặc đã cải tạo, nhà vẫn ở thoải mái; nếu chưa, nên ưu tiên lưới chống muỗi và hỏi lịch nạo vét của phường."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Các kiểu nước trước nhà: nhìn thế nào, nên làm gì",
+    "chu_thich": "Sách xưa xét dáng nước; đời sống xét mùi, ẩm và an toàn. Nên xem cả hai.",
+    "cot": [
+     "Kiểu nước",
+     "Sách xưa đánh giá",
+     "Thực tế cần để ý",
+     "Nên làm"
+    ],
+    "dong": [
+     [
+      "Hồ rộng, nước yên trước mặt",
+      "Tốt, khí tụ",
+      "Ẩm mùa nồm, muỗi chập tối",
+      "Lưới cửa, đóng cửa lúc chiều muộn"
+     ],
+     [
+      "Sông cong ôm về phía nhà",
+      "Tốt",
+      "Mực nước mùa lũ",
+      "Hỏi mức nước cao nhất, nền nhà đủ cao"
+     ],
+     [
+      "Sông chảy thẳng đi hoặc xói vào bờ",
+      "Kém",
+      "Bờ dễ lở, nước xiết",
+      "Xem bờ kè, rào chắn cho trẻ"
+     ],
+     [
+      "Mương, kênh nước tù",
+      "Không bàn tới",
+      "Mùi, muỗi, ngập khi mưa",
+      "Hỏi lịch nạo vét, lưới chống muỗi"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Hồ nằm sau nhà thay vì trước nhà thì sao?",
+     "dap": "Sách xưa thích nước ở phía trước, sau lưng nên có chỗ dựa. Thực tế, hồ sau nhà vẫn mát, chỉ cần giữ phòng ngủ phía đó khô ráo."
+    },
+    {
+     "hoi": "Nhà gần hồ có trẻ nhỏ cần chuẩn bị gì?",
+     "dap": "Làm rào hoặc cửa cổng có chốt cao, dạy trẻ không ra bờ một mình, giữ đèn sân sáng vào buổi tối."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Táng Thư",
+     "nguyen_van": "氣乘風則散，界水則止。",
+     "phien_am": "Khí thừa phong tắc tán, giới thuỷ tắc chỉ.",
+     "nghia": "Khí gặp gió thì tan, gặp nước chắn thì dừng lại. Vì vậy người xưa xem trọng dáng nước trước nhà."
+    }
+   ],
+   "y_chinh": [
+    "Hồ yên trước mặt thường được xem là tốt",
+    "Nhà ven sông: hỏi mực nước lũ trước khi ngắm cảnh",
+    "Mương nước tù khác hẳn sông hồ: lo mùi, muỗi",
+    "Có trẻ nhỏ: rào bờ, cổng chốt cao"
+   ]
+  },
+  "nha-gan-nghia-trang-benh-vien": {
+   "muc": [
+    {
+     "tieu_de": "Nhà gần bệnh viện có nên mua không?",
+     "doan": "Nhiều gia đình vẫn chọn, nhất là nhà có người lớn tuổi cần đi khám thường xuyên. Điều cần thử là tiếng còi xe cấp cứu ban đêm: căn nhà nằm trên tuyến xe vào cổng cấp cứu sẽ ồn hơn hẳn căn ở phía cổng phụ. Khu quanh bệnh viện thường đông người, hàng quán, gửi xe, nên lối ra vào nhà hay bị chiếm. Đi xem vào buổi tối để biết thật."
+    },
+    {
+     "tieu_de": "Nhà đối diện nghĩa trang ở có ổn không?",
+     "doan": "Ổn hay không phụ thuộc nhiều vào cảm nhận của chính người ở. Có người thấy yên tĩnh, ít xe, nhiều cây xanh; có người mỗi lần nhìn ra lại thấy nặng lòng. Vào dịp Thanh minh, rằm tháng Bảy, khu này đông người, khói hương nhiều. Nếu trong nhà có ai thấy bất an, hãy coi đó là điều đáng tôn trọng chứ không cố thuyết phục."
+    },
+    {
+     "tieu_de": "Gần nhà tang lễ, chùa lớn có giống gần nghĩa trang không?",
+     "danh_sach": [
+      "Nhà tang lễ: xe tang, nhạc và người đông theo giờ, nên lo tiếng ồn và chỗ đỗ xe.",
+      "Chùa, nhà thờ lớn: chuông, lễ hội và người đi lễ ngày rằm, mùng một.",
+      "Nghĩa trang: yên phần lớn thời gian, đông vào dịp lễ tảo mộ.",
+      "Cả ba: quyết định theo cảm nhận của cả nhà, không theo lời doạ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nơi gần nhà: điều thực tế cần biết",
+    "chu_thich": "Chuyện tâm lý là có thật và nên được lắng nghe; bảng chỉ nêu những gì nhìn, nghe thấy được.",
+    "cot": [
+     "Nơi gần nhà",
+     "Điều thực tế",
+     "Nên làm"
+    ],
+    "dong": [
+     [
+      "Cổng cấp cứu bệnh viện",
+      "Còi xe đêm, người qua lại nhiều",
+      "Phòng ngủ phía sau, cửa kính cách âm"
+     ],
+     [
+      "Nghĩa trang",
+      "Yên tĩnh, đông dịp lễ tảo mộ",
+      "Rèm, dàn cây che tầm nhìn nếu thấy nặng lòng"
+     ],
+     [
+      "Nhà tang lễ",
+      "Xe tang, nhạc theo giờ, thiếu chỗ đỗ",
+      "Giữ lối ra vào, hỏi giờ hoạt động trước khi mua"
+     ],
+     [
+      "Chùa, nhà thờ lớn",
+      "Chuông, đông người ngày lễ",
+      "Biết lịch lễ để sắp xếp đi lại"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Sống gần bệnh viện có ảnh hưởng sức khoẻ không?",
+     "dap": "Không có căn cứ cho chuyện ở gần là bị ảnh hưởng. Thứ thật sự đáng lo là tiếng ồn làm mất ngủ; giấc ngủ có vấn đề kéo dài thì nên đi khám, nội dung này không thay lời bác sĩ."
+    },
+    {
+     "hoi": "Trẻ nhỏ sợ khi nhìn ra nghĩa trang thì làm sao?",
+     "dap": "Đổi chỗ chơi, chỗ ngủ của trẻ sang phía trong, kéo rèm buổi tối và nói chuyện nhẹ nhàng về nơi đó như một chỗ tưởng nhớ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Dân gian cho rằng nơi chôn cất, chữa bệnh mang 'âm khí'; cách hiểu ngày nay là không khí trầm, tiếng ồn và nỗi buồn của người qua lại ảnh hưởng tâm trạng người ở."
+    }
+   ],
+   "y_chinh": [
+    "Tuyến xe cấp cứu ồn hơn hẳn phía cổng phụ",
+    "Đi xem nhà buổi tối để nghe và nhìn thật",
+    "Cảm nhận của cả nhà quan trọng hơn lời doạ",
+    "Ngủ kém kéo dài thì đi khám, không thay lời bác sĩ"
+   ]
+  },
+  "minh-duong": {
+   "muc": [
+    {
+     "tieu_de": "Minh đường là gì, nhà phố có minh đường không?",
+     "doan": "Minh đường là khoảng trống thoáng, sáng ngay trước cửa chính. Nhà phố thường có minh đường nhỏ: phần vỉa hè, khoảng sân lùi hay hiên để xe. Không cần rộng mới tốt; cái cần là sạch, sáng và không bị chắn. Một khoảng sân hai mét, quét gọn, có đèn, vẫn làm được việc của minh đường."
+    },
+    {
+     "tieu_de": "Căn hộ chung cư thì minh đường nằm ở đâu?",
+     "doan": "Ở căn hộ, người ta thường tính phần sảnh ngay sau cửa và khoảng phòng khách đầu tiên nhìn thấy. Sảnh chất giày dép, thùng carton thì minh đường bị bí. Mỗi tuần dọn một lần, để một kệ giày có cửa đóng, thêm đèn trần sáng là đủ làm khác hẳn cảm giác khi mở cửa về nhà."
+    },
+    {
+     "tieu_de": "Minh đường bị chắn thì làm sao?",
+     "danh_sach": [
+      "Xe máy đỗ sát cửa: dồn xe sang một bên, chừa lối thẳng vào cửa.",
+      "Đồ cũ, bao tải dồn ở sân: dọn trong một buổi cuối tuần.",
+      "Mái tôn che kín sân trước: mở một phần lợp tấm lấy sáng.",
+      "Cây trồng quá dày: tỉa thấp để nhìn ra được."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Minh đường theo loại nhà: giữ thế nào",
+    "chu_thich": "Minh đường là dấu hiệu tốt; việc chính là giữ cho nó thoáng và sáng.",
+    "cot": [
+     "Loại nhà",
+     "Minh đường thường là",
+     "Cách giữ"
+    ],
+    "dong": [
+     [
+      "Nhà phố mặt đường",
+      "Vỉa hè, khoảng lùi trước cửa",
+      "Không để xe, hàng hoá chắn giữa cửa"
+     ],
+     [
+      "Nhà phố trong hẻm",
+      "Khoảng sân nhỏ, hiên",
+      "Quét sạch, đèn hiên, một hai chậu cây thấp"
+     ],
+     [
+      "Nhà cấp 4, nhà vườn",
+      "Sân trước rộng",
+      "Không xây thêm che kín sân, giữ nền khô"
+     ],
+     [
+      "Căn hộ chung cư",
+      "Sảnh sau cửa, phòng khách đầu",
+      "Kệ giày có cửa, đèn sáng, ít đồ"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Minh đường có cần rộng mới tốt không?",
+     "dap": "Không. Sách xưa chuộng rộng, nhưng với nhà ở đô thị, một khoảng nhỏ mà sạch, sáng và thông lối vẫn được tính là tốt."
+    },
+    {
+     "hoi": "Lợp kín sân trước để đỗ ô tô có mất minh đường không?",
+     "dap": "Lợp kín làm sân tối và bí hơn. Nếu cần mái, chọn tấm lấy sáng hoặc chừa một khoảng hở phía trên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Táng Thư",
+     "nghia": "Sách coi trọng khoảng trống trước huyệt nơi khí dừng lại; phong thuỷ nhà ở mượn ý này cho khoảng sân, hiên trước cửa."
+    },
+    {
+     "sach": "Hám Long Kinh",
+     "nghia": "Sách bàn thế đất, trong đó minh đường phía trước rộng mở được xem là nơi tụ khí."
+    }
+   ],
+   "y_chinh": [
+    "Minh đường là khoảng trống sáng, sạch trước cửa",
+    "Nhà phố nhỏ vẫn có minh đường: vỉa hè, hiên",
+    "Căn hộ: tính sảnh sau cửa và phòng khách đầu",
+    "Đừng để xe, đồ cũ chắn giữa cửa"
+   ]
+  },
+  "dat-no-hau-hay-thop-hau": {
+   "muc": [
+    {
+     "tieu_de": "Đất nở hậu là gì, nhận biết thế nào?",
+     "doan": "Đất nở hậu là mảnh đất có chiều ngang phía sau rộng hơn mặt tiền. Cách nhận đơn giản là đo ngang mặt trước và mặt sau trên sổ đỏ hoặc bằng thước dây. Lệch nhau vài chục phân thì gần như đất vuông; lệch từ một mét trở lên mới thấy rõ dáng nở hay thóp."
+    },
+    {
+     "tieu_de": "Có nên mua đất thóp hậu không?",
+     "doan": "Vẫn có thể mua nếu giá hợp lý và phần sau còn đủ chỗ cho bếp, giếng trời. Đất thóp hậu thường rẻ hơn, nhưng phần sau hẹp dễ thành góc tối, khó kê đồ. Khi thiết kế, đưa phòng khách và phòng ngủ lên phần rộng phía trước, phần thóp dùng làm kho, sân phơi hay giếng trời. Nhiều căn nhà phố đất thóp vẫn ở sáng sủa nhờ bố trí như vậy."
+    },
+    {
+     "tieu_de": "Đất nở hậu có phải lúc nào cũng tốt?",
+     "doan": "Không hẳn, vì nở quá mức thì mảnh đất méo, khó xây vuông vức. Mặt tiền quá hẹp so với phần sau khiến cửa chính nhỏ, lối vào chật và ít sáng từ phía trước. Nở hậu nhẹ, mặt tiền từ bốn mét trở lên, thường dễ dùng nhất."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nở hậu, thóp hậu, đất vuông: so nhanh khi đi xem đất",
+    "chu_thich": "Đo ngang mặt trước và mặt sau; chênh dưới khoảng 0,5 m coi như đất vuông.",
+    "cot": [
+     "Dáng đất",
+     "Cách nhận biết",
+     "Lợi thế",
+     "Gợi ý bố trí"
+    ],
+    "dong": [
+     [
+      "Nở hậu nhẹ",
+      "Sau rộng hơn trước khoảng 1–2 m",
+      "Phần sau rộng, dễ có phòng ngủ yên",
+      "Phòng ngủ, sân sau ở phần rộng"
+     ],
+     [
+      "Nở hậu nhiều, mặt tiền hẹp",
+      "Mặt tiền dưới 3,5 m, sau rộng gấp rưỡi",
+      "Diện tích lớn so với giá",
+      "Mở cửa rộng nhất có thể, lấy sáng giếng trời"
+     ],
+     [
+      "Đất vuông",
+      "Trước, sau gần bằng nhau",
+      "Dễ thiết kế, dễ bán lại",
+      "Bố trí theo công năng, không cần bù"
+     ],
+     [
+      "Thóp hậu",
+      "Sau hẹp hơn trước từ 1 m",
+      "Thường rẻ hơn, mặt tiền rộng",
+      "Phần thóp làm kho, sân phơi, giếng trời"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Đất thóp hậu có cắt bớt phần thóp cho vuông được không?",
+     "dap": "Được, nhiều người xây phần vuông làm nhà, phần thóp để làm sân sau hoặc bồn cây. Cách này vừa gọn vừa thông gió."
+    },
+    {
+     "hoi": "Căn hộ chung cư có tính nở hậu không?",
+     "dap": "Thường không tính, vì mặt bằng căn hộ do toà nhà định sẵn. Ở căn hộ nên xem khuyết góc và ánh sáng hơn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Dân gian ví đất nở hậu như túi miệng nhỏ đáy rộng, giữ được của; đất thóp hậu như phễu, dễ thoát. Đây là quan niệm truyền miệng, không có trong sách lý khí."
+    }
+   ],
+   "y_chinh": [
+    "Đo ngang mặt trước và mặt sau, chênh 1 m mới rõ",
+    "Nở hậu nhẹ, mặt tiền từ 4 m thường dễ dùng nhất",
+    "Đất thóp: phần hẹp làm kho, sân phơi, giếng trời",
+    "Đất vuông dễ thiết kế và dễ bán lại"
+   ]
+  },
+  "nha-chu-l-nha-thieu-goc": {
+   "muc": [
+    {
+     "tieu_de": "Mua nhà chữ L có nên không?",
+     "doan": "Nhà chữ L vẫn mua được nếu phần khuyết có việc dùng rõ ràng và phòng ngủ không bị dồn vào góc tối. Điều nên cân là ánh sáng và lối đi, không phải hình chữ L tự nó. Khi đi xem nhà, hãy đứng ở tâm nhà nhìn quanh: góc nào xa cửa sổ nhất, góc nào phải đi vòng mới tới. Nếu chỗ đó chỉ để kho hay máy giặt thì không đáng lo. Nếu chỗ đó là phòng ngủ của trẻ nhỏ hay người già thì nên tính trước đèn, quạt và lối thoát gió."
+    },
+    {
+     "tieu_de": "Nhà ống bị vát góc theo đất có tính là thiếu góc không?",
+     "doan": "Có, nhà ống bị vát một góc vì lô đất xéo cũng được xem là khuyết, nhưng thường nhẹ hơn nhà chữ L. Phần vát hay rơi vào mặt tiền hoặc cuối nhà. Ở mặt tiền, góc vát có thể làm chỗ dắt xe, bồn hoa, bậc thềm. Ở cuối nhà, góc vát hợp làm sân phơi nhỏ hay giếng trời, giúp gian bếp sáng và thoáng hơn."
+    },
+    {
+     "tieu_de": "Căn hộ chung cư hình chữ L thì xử lý ra sao?",
+     "doan": "Căn hộ chữ L không đổi được tường bao, nên chỉ xử lý bằng cách chia lại công năng bên trong. Đặt phòng khách và bàn ăn ở phần nhận nhiều nắng; phần cánh hẹp dùng làm phòng đọc, góc tủ, chỗ giặt. Không đục tường chịu lực hay dầm để làm vuông căn hộ. Vài bóng đèn hắt và một tấm thảm lớn giúp phần gãy khúc liền mạch hơn khi nhìn."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Phần khuyết nằm ở đâu và nên dùng vào việc gì",
+    "chu_thich": "Gợi ý theo vị trí so với cửa chính, áp dụng cho nhà phố, nhà cấp 4 và căn hộ.",
+    "cot": [
+     "Vị trí phần khuyết",
+     "Điều dễ gặp",
+     "Việc 0 đồng",
+     "Việc ít tiền"
+    ],
+    "dong": [
+     [
+      "Mặt tiền, cạnh cửa chính",
+      "Lối vào hẹp, xe khó quay đầu",
+      "Để trống, không chất đồ cũ",
+      "Bồn hoa thấp, đèn hiên"
+     ],
+     [
+      "Cuối nhà, sau bếp",
+      "Bếp tối, mùi khó thoát",
+      "Mở cửa sau khi nấu",
+      "Biến thành sân phơi hoặc giếng trời nhỏ"
+     ],
+     [
+      "Góc bên hông, giữa nhà",
+      "Hành lang gãy khúc, góc bỏ không",
+      "Dùng làm kho, tủ âm tường",
+      "Đèn cảm biến ở chỗ rẽ"
+     ],
+     [
+      "Một cánh của căn hộ chữ L",
+      "Phòng xa cửa sổ, bí gió",
+      "Đặt phòng đọc hay góc tủ ở đó",
+      "Quạt treo tường, đèn hắt trần"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhà thiếu góc có cần xây bù cho đủ vuông không?",
+     "dap": "Không cần. Xây bù chỉ đáng làm khi đất còn chỗ và có giấy phép; phần lớn nhà chỉ cần dùng phần khuyết làm sân, hiên hay kho là đủ gọn."
+    },
+    {
+     "hoi": "Đất hình chữ L có nên chia thành hai khối nhà không?",
+     "dap": "Có thể, nếu mỗi khối vuông vức và có cửa sổ riêng. Hai khối gọn thường dễ ở hơn một khối gãy khúc có nhiều góc tối."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Bát Trạch Minh Kính",
+     "nghia": "Sách xét nhà theo tám cung quanh tâm nhà; góc nào khuyết thì cung ấy của trạch không đủ, nên người xưa coi trọng nhà vuông vức, cân đối."
+    },
+    {
+     "sach": "Dương Trạch Tam Yếu",
+     "nghia": "Triệu Cửu Phong coi hình nhà gọn, chính là nền trước khi xét cửa, phòng và bếp."
+    }
+   ],
+   "y_chinh": [
+    "Nhà chữ L vẫn ở tốt nếu phần khuyết có việc dùng rõ ràng",
+    "Đừng dồn phòng ngủ vào góc xa cửa sổ nhất",
+    "Căn hộ chữ L: chia lại công năng, không đục tường chịu lực",
+    "Phần khuyết hợp làm sân phơi, giếng trời, kho"
+   ]
+  },
+  "bep-doi-dien-cua-chinh": {
+   "muc": [
+    {
+     "tieu_de": "Bếp nhìn ra cửa chính trong căn hộ studio thì sao?",
+     "doan": "Căn studio gần như luôn thấy bếp từ cửa, nên chỉ cần che tầm nhìn và chặn gió lùa là đủ. Một kệ hở cao ngang vai đặt vuông góc với cửa vừa chia lối vào, vừa để giày dép. Nếu bếp là bếp từ, gió không làm tắt lửa, khi đó việc chính là hút mùi tốt để mùi dầu mỡ không bám vào sofa và rèm."
+    },
+    {
+     "tieu_de": "Nhà ống mở cửa thấy bếp cuối nhà có sao không?",
+     "doan": "Bếp ở cuối nhà ống nhìn thẳng ra cửa chính thường ít phiền hơn bếp sát cửa, vì có khoảng cách dài ở giữa. Phiền nhất là gió xuyên từ cửa trước ra cửa sau đi qua đúng chỗ nấu. Đặt tủ lạnh, tủ chén hay vách lửng ở ranh giới phòng khách và bếp là cách gọn, khách vào nhà cũng không nhìn thấy bồn rửa đầy bát."
+    },
+    {
+     "tieu_de": "Có nên đổi hướng bếp gas khi sửa nhà?",
+     "doan": "Nên, nếu bếp gas đứng ngay trên luồng gió từ cửa vào và đằng nào cũng sửa lại tủ bếp. Xoay mặt bếp sang tường bên giúp lửa đứng, nồi chín đều, người nấu không quay lưng ra cửa. Khi xoay, giữ ống gas ngắn, có van khoá dễ với tay và để bếp cách cửa sổ một khoảng an toàn."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Loại bếp và cách che khi đối diện cửa chính",
+    "chu_thich": "Chỉ tính chỗ có mặt bếp sinh nhiệt; bàn đảo khô không tính là bếp.",
+    "cot": [
+     "Tình huống",
+     "Mức cần xử lý",
+     "Việc 0 đồng",
+     "Việc ít tiền"
+    ],
+    "dong": [
+     [
+      "Bếp gas sát cửa, gió lùa thẳng",
+      "Nên xử lý sớm",
+      "Đóng cửa chính khi nấu",
+      "Vách kính mờ hoặc kệ hở chắn gió"
+     ],
+     [
+      "Bếp từ trong căn studio",
+      "Nhẹ",
+      "Bật hút mùi trước khi nấu",
+      "Kệ hở chia lối vào"
+     ],
+     [
+      "Bếp cuối nhà ống, xa cửa",
+      "Nhẹ",
+      "Đóng cửa sau khi nấu để cắt gió xuyên",
+      "Tủ lạnh, tủ chén làm vách lửng"
+     ],
+     [
+      "Có bàn đảo khô ở giữa",
+      "Gần như không cần",
+      "Giữ mặt bàn gọn",
+      "Đèn thả trên bàn đảo"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Bếp từ đối diện cửa chính có cần xử lý như bếp gas không?",
+     "dap": "Nhẹ hơn nhiều. Bếp từ không có lửa nên gió không làm tắt lửa; việc còn lại là che tầm nhìn và hút mùi cho tốt."
+    },
+    {
+     "hoi": "Treo rèm ngăn giữa cửa chính và bếp có ổn không?",
+     "dap": "Ổn, miễn rèm cách bếp đủ xa và dùng loại khó bắt lửa. Rèm hạt gỗ hoặc rèm vải dày treo gần phía cửa an toàn hơn treo sát bếp."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Dương Trạch Tam Yếu",
+     "nghia": "Triệu Cửu Phong đặt cửa (môn), phòng chủ (chủ) và bếp (táo) làm ba yếu tố chính của nhà ở; bếp nên kín đáo, giữ lửa ổn định, không phơi ra trước cửa."
+    }
+   ],
+   "y_chinh": [
+    "Bếp gas sát cửa, gió lùa thẳng: nên xử lý sớm",
+    "Bếp từ đối cửa nhẹ hơn: chủ yếu che tầm nhìn, hút mùi",
+    "Kệ hở, tủ chén, vách kính mờ đều che được",
+    "Bàn đảo khô không tính là bếp"
+   ]
+  },
+  "cau-thang-doi-dien-cua-chinh": {
+   "muc": [
+    {
+     "tieu_de": "Nhà phố cầu thang ngay cửa ra vào thì xử lý thế nào?",
+     "doan": "Với nhà phố mặt tiền hẹp, cách dễ nhất là tạo một khoảng đệm giữa cửa và bậc thang đầu tiên. Khoảng đệm có thể là tủ giày thấp, chậu cây cao, hay một bậc chiếu nghỉ quay ngang. Khách bước vào thấy phòng khách trước, không thấy ngay lối lên phòng ngủ. Người nhà cũng có chỗ thay giày, không phải đứng chắn chân cầu thang."
+    },
+    {
+     "tieu_de": "Cầu thang đi xuống đối diện cửa có khác cầu thang đi lên không?",
+     "doan": "Có khác: cầu thang đi xuống ngay sau cửa đáng để ý hơn vì dễ hụt chân. Hay gặp ở nhà có tầng hầm, nhà lệch tầng hay nhà trên dốc. Mở cửa trong lúc tay xách đồ, mắt chưa quen tối là lúc dễ bước hụt. Đèn bật sẵn ở chân cửa, nẹp chống trơn mép bậc và tay vịn liền mạch là ba việc nên làm trước."
+    },
+    {
+     "tieu_de": "Cầu thang thẳng một vế đối cửa có nên xoay lại không?",
+     "doan": "Chỉ nên xoay khi nhà đang đại tu và đất đủ rộng cho chiếu nghỉ. Nếu chưa sửa lớn, giữ nguyên và che bằng vách lửng hay kệ sách rỗng vẫn được. Cầu thang thẳng một vế còn hút gió nóng từ tầng trệt lên tầng trên; mở cửa sổ mái hay ô thoáng đầu thang giúp nhà mát hơn."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Kiểu cầu thang đối cửa và việc nên làm",
+    "chu_thich": "Áp dụng cho nhà phố, nhà lệch tầng; căn hộ thông tầng xử lý như nhà phố.",
+    "cot": [
+     "Kiểu cầu thang",
+     "Điều cần để ý",
+     "Việc 0 đồng",
+     "Việc ít tiền"
+    ],
+    "dong": [
+     [
+      "Thẳng một vế, đi lên, sát cửa",
+      "Lối vào chật, lộ tầng trên",
+      "Không để xe, đồ ở chân thang",
+      "Tủ giày thấp làm vách đệm"
+     ],
+     [
+      "Đi xuống ngay sau cửa",
+      "Dễ hụt chân khi trời tối",
+      "Bật đèn trước khi mở cửa",
+      "Nẹp chống trơn, đèn cảm biến"
+     ],
+     [
+      "Xoắn hoặc chữ U, cách cửa 2–3 m",
+      "Thường ổn",
+      "Giữ lối đi thông",
+      "Chậu cây cao ở chiếu nghỉ"
+     ],
+     [
+      "Thang thép nhẹ, bậc hở",
+      "Gió lùa, nhìn xuyên qua",
+      "Kê kệ sách ở mặt bên",
+      "Tấm vách lam gỗ hoặc thép"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Làm vách ngăn cầu thang và cửa chính nên cao bao nhiêu?",
+     "dap": "Thường cao ngang vai, khoảng 1,4 đến 1,6 m, hoặc dạng lam hở. Như vậy đủ che tầm nhìn mà phòng khách vẫn sáng và thoáng."
+    },
+    {
+     "hoi": "Nhà có trẻ nhỏ mà cầu thang ngay cửa thì nên làm gì trước?",
+     "dap": "Lắp cửa chặn ở chân và đầu cầu thang, đèn sáng ở lối vào. Tủ giày đặt làm vách đệm cũng giúp trẻ không chạy thẳng từ cửa lên bậc."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Ông bà ta dặn cầu thang không nên đâm thẳng ra cửa, vì cho rằng khí vào nhà theo bậc chạy đi ngay, không lưu lại trong gian chính."
+    },
+    {
+     "sach": "Dương Trạch Tam Yếu",
+     "nghia": "Sách coi cửa là chỗ nhà tiếp khí, nên khoảng ngay sau cửa cần thoáng, có chỗ dừng trước khi đi sâu vào trong."
+    }
+   ],
+   "y_chinh": [
+    "Tạo khoảng đệm giữa cửa và bậc thang đầu tiên",
+    "Thang đi xuống ngay sau cửa: ưu tiên đèn và nẹp chống trơn",
+    "Chỉ xoay cầu thang khi đại tu và đủ đất",
+    "Vách cao ngang vai hoặc lam hở là vừa"
+   ]
+  },
+  "guong-chieu-thang-cua-chinh": {
+   "muc": [
+    {
+     "tieu_de": "Tủ giày có cánh gương đối diện cửa thì sao?",
+     "doan": "Tủ giày cánh gương đối thẳng cửa nên dời sang vách bên, hoặc thay cánh gương bằng cánh gỗ. Nếu chưa đổi được, mở hé cánh tủ cho gương lệch góc là xong. Người vào nhà không thấy bóng mình ngay trước mặt, còn người ra cửa vẫn soi được khi đứng nghiêng."
+    },
+    {
+     "tieu_de": "Gương ở sảnh căn hộ nên treo chỗ nào?",
+     "doan": "Gương ở sảnh căn hộ nên treo trên vách song song với hướng đi vào. Đứng thay giày, quay sang là thấy mình, đủ để chỉnh áo trước khi ra ngoài. Gương treo kiểu này còn làm sảnh hẹp trông rộng hơn theo chiều ngang mà không hắt nắng hành lang vào mặt người đi tới."
+    },
+    {
+     "tieu_de": "Cửa kính phản chiếu như gương có tính không?",
+     "doan": "Cửa kính tối màu hay vách kính bóng ban đêm phản chiếu như gương, nhưng chỉ cần xử lý khi nó chiếu thẳng ra lối vào. Ban đêm trong nhà sáng, ngoài tối, kính thành mặt gương lớn. Kéo rèm mỏng sau giờ tắt nắng hoặc dán phim mờ phần dưới là đủ, không tốn nhiều."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Vị trí gương gần cửa chính: có sao không, nên làm gì",
+    "chu_thich": "Gợi ý theo cách người ta hay đặt gương ở lối vào nhà phố và căn hộ.",
+    "cot": [
+     "Vị trí gương",
+     "Có cần đổi không",
+     "Gợi ý"
+    ],
+    "dong": [
+     [
+      "Treo đối thẳng cửa, ngang tầm mắt",
+      "Nên đổi",
+      "Dời sang vách bên hông cửa"
+     ],
+     [
+      "Cánh tủ giày gương đối cửa",
+      "Nên đổi",
+      "Thay cánh gỗ hoặc mở hé lệch góc"
+     ],
+     [
+      "Vách bên, song song lối đi",
+      "Không cần",
+      "Giữ nguyên, thêm đèn soi nhẹ"
+     ],
+     [
+      "Vách kính tối phản chiếu ban đêm",
+      "Tuỳ",
+      "Rèm mỏng hoặc phim mờ phần dưới"
+     ],
+     [
+      "Gương nhỏ trong tủ, đóng cánh",
+      "Không cần",
+      "Không phải làm gì"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Gương toàn thân ở phòng khách nhìn thấy cửa từ xa có sao không?",
+     "dap": "Thường không đáng lo nếu gương ở xa và lệch góc. Điều nên tránh là gương ngay sau cửa, đối thẳng người bước vào."
+    },
+    {
+     "hoi": "Có cần treo gì ngoài cửa để thay cho gương không?",
+     "dap": "Không cần. Một bóng đèn hiên sáng, thảm chùi chân sạch và số nhà dễ đọc làm lối vào gọn gàng hơn mọi thứ treo thêm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Người xưa tin gương đặt ngay trước cửa đẩy cái tốt vừa vào nhà ra ngoài; đây là tục lệ, sách lý khí kinh điển không bàn về gương."
+    }
+   ],
+   "y_chinh": [
+    "Gương đối thẳng cửa: dời sang vách bên hông",
+    "Tủ giày cánh gương: thay cánh gỗ hoặc mở lệch",
+    "Gương song song lối đi vừa soi được, vừa nới sảnh",
+    "Kính tối ban đêm thành gương: kéo rèm mỏng"
+   ]
+  },
+  "guong-doi-dien-giuong": {
+   "muc": [
+    {
+     "tieu_de": "Gương đối diện giường thì xoay đi đâu?",
+     "doan": "Xoay gương sang vách song song với giường, hoặc vào mặt trong cánh tủ. Cách kiểm nhanh: nằm xuống, nhìn thẳng và nghiêng hai bên; nếu không thấy mình trong gương là được. Gương bàn trang điểm nên đặt cạnh cửa sổ để có ánh sáng ban ngày khi soi, không cần đối diện giường."
+    },
+    {
+     "tieu_de": "Tủ quần áo cánh gương trong phòng ngủ nhỏ có nên giữ?",
+     "doan": "Giữ được nếu kéo rèm hay dán phim mờ khi ngủ, vì phòng nhỏ thường cần gương cho rộng mắt. Ở căn hộ một phòng ngủ, tủ cánh lùa gương hay nằm ngay cạnh giường. Một tấm rèm vải treo ray trần che cả mặt tủ vào ban đêm vừa rẻ vừa dễ tháo. Ban ngày kéo rèm ra, phòng vẫn sáng và rộng như cũ."
+    },
+    {
+     "tieu_de": "Gương trên trần hay đầu giường thì sao?",
+     "doan": "Gương trên trần hay sát đầu giường nên tháo, vì nằm ngửa là thấy ngay và khó lau chùi an toàn. Tấm gương lớn treo cao trên chỗ nằm còn khiến nhiều người không thấy yên khi ngủ. Thay bằng tranh vải nhẹ hay để tường trơn là gọn. Nếu thấy ngủ kém kéo dài, hãy nghĩ tới nhịp sinh hoạt và đi khám định kỳ; bài này không thay lời bác sĩ."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Vị trí gương trong phòng ngủ: có sao không, gợi ý",
+    "chu_thich": "Kiểm bằng cách nằm lên giường và nhìn thẳng, nhìn nghiêng.",
+    "cot": [
+     "Vị trí gương",
+     "Có cần đổi không",
+     "Gợi ý"
+    ],
+    "dong": [
+     [
+      "Cuối giường, đối thẳng chỗ nằm",
+      "Nên đổi",
+      "Xoay sang vách song song với giường"
+     ],
+     [
+      "Cánh tủ lùa gương cạnh giường",
+      "Tuỳ",
+      "Rèm ray trần che khi ngủ"
+     ],
+     [
+      "Trên trần, trên đầu giường",
+      "Nên tháo",
+      "Tranh vải nhẹ hoặc tường trơn"
+     ],
+     [
+      "Bàn trang điểm cạnh cửa sổ",
+      "Không cần",
+      "Giữ nguyên, soi bằng ánh sáng ban ngày"
+     ],
+     [
+      "Gương nhỏ trong tủ, đóng cánh",
+      "Không cần",
+      "Không phải làm gì"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Lấy khăn phủ gương mỗi tối có được không?",
+     "dap": "Được, đó là cách rẻ nhất. Chỉ cần khăn đủ lớn, không che ổ điện, và gấp gọn vào buổi sáng."
+    },
+    {
+     "hoi": "Gương ở nhà vệ sinh trong phòng ngủ chiếu ra giường thì sao?",
+     "dap": "Đóng cửa nhà vệ sinh khi ngủ là đủ. Thói quen này còn giữ phòng ngủ khô và bớt mùi."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Ông bà ta dặn không để gương soi vào chỗ ngủ, cho rằng người nằm dễ giật mình, giấc ngủ không yên."
+    }
+   ],
+   "y_chinh": [
+    "Nằm xuống nhìn thử: không thấy mình trong gương là được",
+    "Tủ cánh gương: rèm ray trần che khi ngủ",
+    "Gương trên trần hay đầu giường nên tháo",
+    "Ngủ kém kéo dài: xem lại nhịp sinh hoạt, khám định kỳ"
+   ]
+  },
+  "cua-phong-doi-nhau": {
+   "muc": [
+    {
+     "tieu_de": "Cửa phòng ngủ đối cửa nhà vệ sinh có sao không?",
+     "doan": "Đây là kiểu đối cửa nên xử lý trước tiên, vì hơi ẩm và mùi đi thẳng vào phòng ngủ. Thói quen đóng nắp bồn cầu và cửa nhà vệ sinh, cộng quạt hút chạy thêm mười phút sau khi tắm, giải quyết gần hết. Nếu cửa nhà vệ sinh mở vào hành lang, đổi chiều mở cánh khi sửa là việc nhỏ."
+    },
+    {
+     "tieu_de": "Hai phòng ngủ của bố mẹ và con đối cửa nhau thì sao?",
+     "doan": "Không sao nếu mỗi phòng có chỗ riêng không bị nhìn thấy từ cửa phòng kia. Đặt giường và bàn học ở góc khuất tầm nhìn qua khung cửa. Khi con lớn, tiếng gọi điện thoại hay tiếng nhạc dễ vọng sang; ron cao su chân cửa và thói quen khép cửa sau 22 giờ làm hai bên dễ chịu hơn."
+    },
+    {
+     "tieu_de": "Cửa phòng đối nhau lệch nửa cánh có tính không?",
+     "doan": "Hai cửa lệch nhau quá nửa bề rộng cánh thì thường không tính là đối nhau. Lúc đó tầm nhìn đã gãy, tiếng động không đi thẳng, gió cũng yếu đi. Nếu chỉ lệch ít, đổi chiều bản lề một cánh để hai cửa mở về hai phía là cách nhẹ nhàng nhất."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Kiểu cửa đối nhau: mức cần xử lý và việc nên làm",
+    "chu_thich": "Ở chung cư, mọi việc làm bên trong cửa nhà mình.",
+    "cot": [
+     "Kiểu đối cửa",
+     "Mức cần xử lý",
+     "Việc 0 đồng",
+     "Việc ít tiền"
+    ],
+    "dong": [
+     [
+      "Phòng ngủ đối nhà vệ sinh",
+      "Nên xử lý trước",
+      "Đóng cửa, đóng nắp bồn cầu",
+      "Quạt hút, đổi chiều mở cánh"
+     ],
+     [
+      "Hai phòng ngủ đối nhau",
+      "Nhẹ",
+      "Kê giường khuất tầm nhìn",
+      "Ron cao su chân cửa"
+     ],
+     [
+      "Phòng ngủ đối bếp",
+      "Vừa",
+      "Đóng cửa phòng khi nấu",
+      "Rèm hạt, hút mùi mạnh hơn"
+     ],
+     [
+      "Cửa căn hộ đối cửa hàng xóm",
+      "Nhẹ",
+      "Giữ cửa khép, không để đồ ở hành lang",
+      "Vách sảnh hoặc rèm bên trong cửa"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Có nên thay cửa phòng bằng cửa lùa để tránh đối nhau không?",
+     "dap": "Cửa lùa không đổi chuyện hai khung cửa đối nhau, nhưng bớt chỗ va cánh. Đáng làm khi hành lang hẹp, hai cánh hay đụng nhau."
+    },
+    {
+     "hoi": "Nhà cấp 4 có cửa trước và cửa sau thẳng hàng thì sao?",
+     "dap": "Gió xuyên mạnh, mát nhưng đồ nhẹ dễ bay và bụi vào nhiều. Đặt tủ thấp hay bình phong ở giữa nhà để gió chậm lại mà vẫn thoáng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Người xưa nói hai cửa đối nhau thì người hai phòng dễ to tiếng; ý thực tế là thiếu riêng tư, tiếng và gió đi thẳng."
+    }
+   ],
+   "y_chinh": [
+    "Phòng ngủ đối nhà vệ sinh: xử lý trước tiên",
+    "Lệch quá nửa cánh thường không tính là đối cửa",
+    "Kê giường khuất tầm nhìn qua khung cửa",
+    "Chung cư: chỉ xử lý bên trong cửa nhà mình"
+   ]
+  },
+  "giuong-ban-duoi-xa-ngang": {
+   "muc": [
+    {
+     "tieu_de": "Xà ngang đè đầu giường ở chung cư có làm trần được không?",
+     "doan": "Được, đóng trần thạch cao phẳng hay giật cấp để giấu dầm là cách phổ biến ở chung cư. Trần chỉ treo vào sàn, không đụng tới dầm, nên không ảnh hưởng kết cấu toà nhà. Trước khi làm, hỏi ban quản lý về giờ thi công và chừa lỗ thăm nếu trong trần có ống kỹ thuật. Không cắt, khoan sâu hay đục bớt dầm."
+    },
+    {
+     "tieu_de": "Phòng nhỏ không dịch giường được khỏi dầm thì làm sao?",
+     "doan": "Nếu phòng hẹp không có chỗ dịch, xoay chiều giường cho dầm chạy dọc theo thân người thay vì cắt ngang ngực. Cách khác là đặt đầu giường lùi khỏi bóng dầm, để dầm rơi phía cuối chân. Tủ đầu giường cao hay kệ sách sát tường cũng giúp mắt không nhìn thẳng vào cạnh dầm khi nằm."
+    },
+    {
+     "tieu_de": "Bàn làm việc dưới dầm có cần dời không?",
+     "doan": "Nên dời nếu ngồi lâu mà thấy dầm ngay trên đỉnh đầu, còn bàn ăn hay bàn phụ thì ít cần. Ngồi làm việc tám tiếng dưới khối bê tông thấp, nhiều người thấy bí và mỏi. Kéo bàn ra sát cửa sổ vừa tránh dầm vừa có ánh sáng tự nhiên. Đây là chuyện cảm giác và thói quen, không thay lời bác sĩ khi thấy mệt kéo dài."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Vị trí dầm so với chỗ nằm, chỗ ngồi",
+    "chu_thich": "Việc nào cũng không đụng kết cấu; ở chung cư không cắt hay đục dầm.",
+    "cot": [
+     "Tình huống",
+     "Mức cần xử lý",
+     "Việc 0 đồng",
+     "Việc ít tiền"
+    ],
+    "dong": [
+     [
+      "Dầm cắt ngang ngay trên ngực, đầu",
+      "Nên xử lý trước",
+      "Dịch giường 40–60 cm",
+      "Trần thạch cao giấu dầm"
+     ],
+     [
+      "Dầm chạy dọc theo thân người",
+      "Nhẹ",
+      "Giữ nguyên, để đầu giường lùi khỏi dầm",
+      "Đèn hắt làm mềm cạnh dầm"
+     ],
+     [
+      "Dầm ở cuối chân giường",
+      "Nhẹ",
+      "Không cần làm gì",
+      "Rèm hoặc tán vải nếu muốn"
+     ],
+     [
+      "Bàn làm việc dưới dầm",
+      "Vừa",
+      "Kéo bàn ra sát cửa sổ",
+      "Đèn bàn đủ sáng, ghế tựa tốt"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nhà mái tôn có xà gồ lộ trên giường thì có tính là xà ngang không?",
+     "dap": "Có tính, nhưng xà gồ nhỏ và cao nên nhẹ hơn dầm bê tông. Đóng trần nhựa hay trần thạch cao còn giúp phòng bớt nóng và bớt ồn khi mưa."
+    },
+    {
+     "hoi": "Màn ngủ có che được xà ngang không?",
+     "dap": "Che được tầm nhìn khi nằm, lại chặn muỗi và gió điều hoà thổi trực tiếp. Đây là cách rẻ cho phòng thuê không được đóng trần."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Dân gian dặn không kê giường, bàn thờ hay bàn làm việc dưới xà, cho rằng xà đè lên người nằm, người ngồi, làm nặng nề và kém yên."
+    }
+   ],
+   "y_chinh": [
+    "Dầm cắt ngang ngực, đầu: nên xử lý trước",
+    "Phòng hẹp: xoay giường cho dầm chạy dọc thân người",
+    "Chung cư làm trần giấu dầm được, không cắt dầm",
+    "Phòng thuê: màn ngủ che dầm, chặn gió điều hoà"
+   ]
+  },
+  "phong-ngu-tren-bep": {
+   "muc": [
+    {
+     "tieu_de": "Nhà phố có phòng ngủ ngay trên bếp thì làm gì trước?",
+     "doan": "Việc đầu tiên là kiểm xem chỗ đầu giường có nằm thẳng trên bếp nấu và ống hút mùi không. Nếu có, dịch giường sang phía còn lại của phòng là xong phần chính. Kế đến, kiểm ống hút mùi có xả ra ngoài trời hay chỉ thổi vào hộp kỹ thuật cạnh phòng ngủ; ống xả hở là nguồn mùi hay gặp nhất."
+    },
+    {
+     "tieu_de": "Lót sàn cách nhiệt phòng ngủ trên bếp có đáng tiền không?",
+     "doan": "Đáng, nhất là với nhà phố hay nấu bữa tối muộn và phòng ngủ có trẻ nhỏ. Lớp xốp cách nhiệt dưới sàn gỗ giúp sàn bớt ấm và bớt tiếng va nồi. Nếu chưa muốn sửa, thảm dày dưới giường và quạt hút bếp chạy mạnh hơn trong lúc nấu là bước rẻ để thử trước."
+    },
+    {
+     "tieu_de": "Căn hộ thông tầng có phòng ngủ trên khu bếp mở thì sao?",
+     "doan": "Căn hộ thông tầng hay có phòng ngủ nhìn xuống bếp mở, nên mùi và tiếng đi thẳng lên rất nhanh. Cửa kính hoặc rèm dày ở mép lan can phòng ngủ chặn được phần lớn. Nấu món nhiều dầu thì bật hút mùi sớm và mở cửa ban công dưới cho gió đi ngang, không bốc thẳng lên."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Phòng ngủ trên bếp: tình huống và cách làm",
+    "chu_thich": "Ưu tiên việc 0 đồng; đụng tới ống gas, ống xả thì nhờ thợ có nghề.",
+    "cot": [
+     "Tình huống",
+     "Mức cần xử lý",
+     "Việc 0 đồng",
+     "Việc ít tiền"
+    ],
+    "dong": [
+     [
+      "Đầu giường thẳng trên bếp nấu",
+      "Nên xử lý trước",
+      "Dịch giường sang phía còn lại",
+      "Thảm dày dưới giường"
+     ],
+     [
+      "Ống hút mùi xả vào hộp kỹ thuật",
+      "Vừa",
+      "Bật hút mùi sớm, tắt muộn",
+      "Nối ống xả ra ngoài trời"
+     ],
+     [
+      "Phòng ngủ trên bếp mở thông tầng",
+      "Vừa",
+      "Đóng cửa phòng khi nấu",
+      "Rèm dày hoặc vách kính mép lan can"
+     ],
+     [
+      "Giường lệch hẳn khỏi khu bếp",
+      "Nhẹ",
+      "Giữ nguyên",
+      "Không cần thêm gì"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Phòng ngủ trên bếp có ảnh hưởng sức khoẻ không?",
+     "dap": "Điều hay gặp là phòng ấm hơn, có mùi và tiếng ồn làm ngủ kém. Giữ phòng thoáng, nấu xong thông gió và khám định kỳ; nội dung này không thay lời bác sĩ."
+    },
+    {
+     "hoi": "Đổi bếp gas sang bếp từ có giúp phòng ngủ phía trên không?",
+     "dap": "Có giúp phần nào, vì bếp từ toả ít hơi nóng ra xung quanh. Mùi dầu mỡ vẫn còn, nên vẫn cần hút mùi xả ra ngoài trời."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Ông bà ta tránh để chỗ ngủ ngay trên chỗ nấu, cho rằng hơi lửa bốc lên làm người nằm bứt rứt, khó ngủ yên."
+    }
+   ],
+   "y_chinh": [
+    "Kiểm đầu giường có thẳng trên bếp nấu không",
+    "Ống hút mùi phải xả ra ngoài trời",
+    "Thảm dày, lót sàn cách nhiệt giảm nóng và ồn",
+    "Căn hộ thông tầng: rèm dày ở mép lan can"
+   ]
+  },
+  "bep-canh-nha-ve-sinh": {
+   "muc": [
+    {
+     "tieu_de": "Bếp chung vách nhà vệ sinh ở nhà phố có cần đập ra làm lại không?",
+     "doan": "Thường là không cần đập. Phần lớn khó chịu đến từ mùi và hơi nước đi qua cửa, khe trần, ô thoáng, chứ ít khi đi xuyên qua bức tường gạch. Nhà phố hẹp ở Hà Nội hay Sài Gòn hay xếp bếp và nhà vệ sinh dọc một trục ống nước để tiết kiệm. Trước khi nghĩ tới thợ, nên để ý ba chỗ: cửa nhà vệ sinh mở về phía nào, quạt hút thổi khí đi đâu, và mặt tường phía bếp có ố vàng hay nấm mốc không."
+    },
+    {
+     "tieu_de": "Cửa nhà vệ sinh mở thẳng vào chỗ nấu thì xoay xở ra sao?",
+     "doan": "Cách rẻ nhất là thói quen: đóng cửa ngay sau khi dùng và lắp bản lề tự đóng. Khi cửa mở vào gian bếp, hơi ẩm lúc tắm nước nóng sẽ gặp đúng chỗ để chén bát, rau sống. Treo một tấm rèm vải dày hoặc dựng tủ cao chắn tầm nhìn giúp người ngồi ăn không thấy thẳng vào trong. Nếu có dịp sửa, đổi chiều cánh cửa là việc nhỏ mà đổi được nhiều."
+    },
+    {
+     "tieu_de": "Căn hộ chung cư có bếp sát nhà vệ sinh thì làm gì trước?",
+     "doan": "Làm trước việc thông gió, vì căn hộ thường không có cửa sổ ở hai khu này. Quạt hút nhà vệ sinh cần chạy thêm mười lăm, hai mươi phút sau khi tắm; máy hút mùi bếp nên bật cả lúc luộc, hấp, ngoài lúc chiên xào. Ống kỹ thuật là phần chung của toà nhà nên không dời được. Việc làm được nằm ở bề mặt: kệ gia vị cách xa vách chung, thớt dựng ở phía tường ngoài."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Dấu hiệu nhận ra và việc nên làm",
+    "chu_thich": "Đi từ việc không tốn tiền; chỉ sửa chữa khi việc nhỏ chưa đủ.",
+    "cot": [
+     "Bạn thấy gì",
+     "Nguyên nhân hay gặp",
+     "Việc làm ngay"
+    ],
+    "dong": [
+     [
+      "Mùi thoảng sang bếp sau khi tắm",
+      "Quạt hút yếu hoặc tắt sớm",
+      "Hẹn giờ quạt chạy thêm 15–20 phút, đóng cửa"
+     ],
+     [
+      "Mặt tường phía bếp ố, bong sơn",
+      "Ẩm ngấm từ khu tắm qua chân tường",
+      "Kéo tủ bếp cách tường vài phân cho khô, gọi thợ chống thấm nếu lan rộng"
+     ],
+     [
+      "Ngồi ăn nhìn thẳng vào bồn cầu",
+      "Cửa mở về phía bàn ăn",
+      "Rèm vải dày hoặc tủ cao chắn; khi sửa thì đổi chiều cửa"
+     ],
+     [
+      "Gián, kiến quanh chậu rửa",
+      "Đường ống chung, khe hở chưa bịt",
+      "Bịt khe ống, đổ nước nóng xuống cống định kỳ"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Bếp cạnh nhà vệ sinh có ảnh hưởng đến sức khoẻ cả nhà không?",
+     "dap": "Điều đáng để ý là vệ sinh thực phẩm: ẩm và mùi dễ làm đồ ăn, thớt, khăn lau nhanh hỏng. Giữ thông gió, để đồ sống xa vách chung là đủ phòng ngừa; đây là gợi ý sinh hoạt, không thay lời bác sĩ."
+    },
+    {
+     "hoi": "Xây nhà mới thì nên xếp bếp và nhà vệ sinh thế nào?",
+     "dap": "Nếu còn chọn được, hãy cách hai khu bằng một phòng kho hoặc hành lang ngắn, và để cửa nhà vệ sinh mở ra lối đi chứ không mở vào gian nấu."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Dân gian nói bếp là chỗ lửa, nhà vệ sinh là chỗ nước và uế khí, nên muốn hai chỗ tách nhau. Hiểu theo đời sống, đó là lời nhắc giữ chỗ nấu sạch, khô và thoáng."
+    }
+   ],
+   "y_chinh": [
+    "Mùi và ẩm đi qua cửa, khe trần nhiều hơn qua tường",
+    "Đóng cửa nhà vệ sinh, quạt hút chạy thêm 15–20 phút",
+    "Để thớt, rau sống, gia vị xa vách chung",
+    "Chung cư: không dời ống kỹ thuật, xử lý ở bề mặt"
+   ]
+  },
+  "ngoi-quay-lung-ra-cua": {
+   "muc": [
+    {
+     "tieu_de": "Bàn làm việc ở nhà nên kê thế nào để không quay lưng ra cửa?",
+     "doan": "Kê bàn chéo góc so với cửa, lưng tựa tường đặc, mắt nhìn thấy người bước vào. Phòng ngủ nhỏ ở chung cư thường chỉ còn một bức tường trống đối diện cửa, nên nhiều người kê bàn úp vào tường ấy. Thử xoay bàn chín mươi độ, kê dọc theo tường bên. Lúc đó cửa nằm ở khoé mắt, không còn sau gáy."
+    },
+    {
+     "tieu_de": "Phòng chật, không xoay được bàn thì làm gì?",
+     "doan": "Vẫn có cách giữ cảm giác yên ở sau lưng mà không tốn nhiều. Đặt một kệ thấp hoặc tủ hồ sơ sau ghế để tạo khoảng đệm, người đi vào phải vòng qua chứ không đứng ngay sau gáy. Cửa phòng khép hờ hoặc treo rèm cửa cũng giảm tiếng động từ hành lang. Người làm việc qua cuộc gọi video còn được thêm một điều: phía sau màn hình không lộ cảnh nhà."
+    },
+    {
+     "tieu_de": "Quầy thu ngân, bàn tiếp khách ở cửa hàng có cần nhìn ra cửa không?",
+     "doan": "Nên nhìn ra cửa, vì người đứng quầy cần thấy khách bước vào để chào kịp. Ở cửa hàng mặt phố, quầy quay lưng ra cửa khiến người bán phải ngoái lại liên tục, khách dễ thấy bị lơ. Đặt quầy lệch sang một bên, mặt hướng về cửa, lưng là vách kho, vừa trông được hàng vừa có chỗ dựa."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Chỗ ngồi nào cần nhìn thấy cửa",
+    "chu_thich": "Áp dụng cho chỗ ngồi lâu, từ một giờ trở lên.",
+    "cot": [
+     "Chỗ ngồi",
+     "Cách kê hợp",
+     "Khi không đổi được"
+    ],
+    "dong": [
+     [
+      "Bàn học của con",
+      "Lưng tựa tường, chéo cửa, gần cửa sổ",
+      "Kệ thấp sau ghế, khép cửa khi học"
+     ],
+     [
+      "Bàn làm việc ở nhà",
+      "Kê dọc tường bên, cửa nằm ở khoé mắt",
+      "Rèm cửa phòng, đèn bàn sáng đủ"
+     ],
+     [
+      "Quầy cửa hàng",
+      "Mặt hướng ra cửa, lưng là vách kho",
+      "Chuông báo khách ở cửa"
+     ],
+     [
+      "Ghế sofa chính phòng khách",
+      "Lưng tựa tường hoặc tủ thấp",
+      "Kê bàn trà, kệ thấp sau lưng ghế"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Bàn học của con quay lưng ra cửa có nên đổi không?",
+     "dap": "Nên đổi nếu được, vì trẻ hay bị phân tâm bởi tiếng mở cửa sau lưng. Kê bàn chéo cửa, gần cửa sổ để có ánh sáng tự nhiên là đủ."
+    },
+    {
+     "hoi": "Ngồi lưng ra cửa sổ thì có giống quay lưng ra cửa không?",
+     "dap": "Không hẳn giống. Cửa sổ không có người đi vào, nhưng nắng chiều chiếu sau lưng làm màn hình loá, nên vẫn cần rèm hoặc xoay bàn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Dương Trạch Tam Yếu",
+     "nghia": "Sách bàn về nhà ở người sống, coi cửa là nơi khí ra vào chính. Người đời sau hiểu rộng ra: chỗ ngồi lâu nên có chỗ dựa phía sau và thấy được lối vào, cho người ngồi yên tâm."
+    }
+   ],
+   "y_chinh": [
+    "Chỗ ngồi lâu nên có tường đặc sau lưng, thấy được cửa",
+    "Kê bàn dọc tường bên để cửa nằm ở khoé mắt",
+    "Phòng chật: kệ thấp sau ghế làm khoảng đệm",
+    "Quầy cửa hàng nên nhìn ra cửa để chào khách kịp"
+   ]
+  },
+  "nha-ve-sinh-o-giua-nha": {
+   "muc": [
+    {
+     "tieu_de": "Nhà vệ sinh giữa nhà ở chung cư xử lý thế nào?",
+     "doan": "Xử lý bằng thông gió và giữ khô, không đập dời phòng. Ở căn hộ, vị trí này gắn với ống kỹ thuật chung của toà nhà. Việc trong tầm tay là kiểm tra quạt hút có thật sự kéo gió không: đặt một tờ giấy ăn dưới miệng quạt, giấy không bị hút lên là quạt yếu hoặc ống tắc. Báo ban quản lý nếu ống chung có vấn đề."
+    },
+    {
+     "tieu_de": "Nhà phố có nhà vệ sinh giữa tầng thì nên sửa gì trước?",
+     "doan": "Sửa trước đường thoát khí, vì khu giữa nhà phố ống thường không có cửa sổ. Cách hay dùng là đi ống gió dẫn ra mặt hậu hoặc lên giếng trời, kèm quạt hút đủ mạnh. Sau đó mới tính tới tách khu tắm và khu bồn cầu, lát sàn dốc đúng về phễu thu để nước không đọng. Nếu đang xây mới, đây là lúc dời ra góc nhà."
+    },
+    {
+     "tieu_de": "Phòng ngủ chung vách nhà vệ sinh giữa nhà thì kê giường ra sao?",
+     "doan": "Kê đầu giường ở bức tường khác, không áp vào vách có ống nước. Tiếng xả nước lúc nửa đêm và hơi lạnh ẩm từ vách ống làm giấc ngủ chập chờn. Nếu phòng chỉ có một chỗ kê, chừa khe vài phân giữa đầu giường và tường, thêm tấm ốp gỗ hoặc kệ đầu giường để cách âm. Đây là gợi ý nếp ngủ, không thay lời bác sĩ."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nhà vệ sinh giữa nhà: chung cư và nhà phố khác nhau ở đâu",
+    "chu_thich": "Chung cư không dời được ống kỹ thuật; nhà phố có thể đi lại ống gió khi sửa.",
+    "cot": [
+     "Việc",
+     "Chung cư",
+     "Nhà phố, nhà cấp 4"
+    ],
+    "dong": [
+     [
+      "Thông gió",
+      "Kiểm quạt hút, báo ban quản lý khi ống chung yếu",
+      "Đi ống gió ra mặt hậu hoặc giếng trời"
+     ],
+     [
+      "Giữ khô",
+      "Gạt sàn, phơi khăn ngoài ban công",
+      "Sàn dốc về phễu thu, tách khu tắm"
+     ],
+     [
+      "Che tầm nhìn",
+      "Đổi chiều cửa hoặc cửa giấu cùng màu tường",
+      "Thêm tiền sảnh nhỏ trước cửa"
+     ],
+     [
+      "Khi xây hoặc sửa lớn",
+      "Không đập dời phòng",
+      "Cân nhắc dời ra góc nhà"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Làm sao biết quạt hút nhà vệ sinh có đủ mạnh không?",
+     "dap": "Đặt một tờ giấy ăn dưới miệng quạt khi đang chạy. Giấy được hút áp lên là ổn; giấy rơi xuống thì quạt yếu, lưới bám bụi hoặc ống gió bị tắc."
+    },
+    {
+     "hoi": "Đang tìm mua căn hộ có nhà vệ sinh giữa nhà thì có nên bỏ qua không?",
+     "dap": "Không nhất thiết bỏ qua. Hãy xem quạt hút, mùi lúc vừa mở cửa căn và vách phòng ngủ có ẩm không; mọi chỗ khác ổn thì vẫn ở dễ chịu được."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Dân gian coi giữa nhà là chỗ cần sạch và yên, nên không muốn đặt nhà vệ sinh ở đó. Hiểu theo đời sống, giữa nhà là nơi gió khó lùa qua, nên mùi và ẩm đọng lại lâu hơn các góc."
+    }
+   ],
+   "y_chinh": [
+    "Chung cư: thông gió và giữ khô, không đập dời phòng",
+    "Thử quạt hút bằng một tờ giấy ăn",
+    "Nhà phố: đi ống gió ra mặt hậu hoặc giếng trời",
+    "Đầu giường không áp vào vách có ống nước"
+   ]
+  },
+  "cua-chinh-nhin-thang-ra-ban-cong-cua-so-lon": {
+   "muc": [
+    {
+     "tieu_de": "Căn hộ mở cửa là thấy ban công thì che bằng gì cho đẹp?",
+     "doan": "Hợp nhất là một tủ giày cao kết hợp vách lam gỗ đứng sau cửa, vừa che vừa có chỗ cất đồ. Căn hộ một phòng ngủ ít chỗ thì dùng kệ sách hai mặt để hở, sáng vẫn lọt qua. Không cần che kín cả lối, chỉ cần cắt đường nhìn thẳng từ cửa ra ban công. Người đứng ngoài hành lang không còn thấy hết phòng khách."
+    },
+    {
+     "tieu_de": "Nhà phố có cửa trước thẳng hàng cửa sau thì làm sao?",
+     "doan": "Đặt một vật cản mềm ở giữa nhà, như bàn ăn, kệ hở hoặc chậu cây cao, để gió đi vòng chứ không lao thẳng. Nhà ống dài hai ba chục mét, mở cả hai đầu vào mùa gió thì giấy tờ bay, cửa đập mạnh. Mùa nóng lại cần gió xuyên nhà, nên dùng vật cản di chuyển được, mùa nào kê theo mùa ấy."
+    },
+    {
+     "tieu_de": "Che lối cửa – ban công có làm nhà tối và bí không?",
+     "doan": "Không, nếu chọn vật che có khe hở. Lam gỗ, kệ hở, kính mờ hay rèm voan vẫn cho sáng và gió lọt qua, chỉ chặn tầm nhìn thẳng và làm gió chậm lại. Tránh dựng tủ kín sát trần ngay giữa lối, vì phòng khách nhỏ sẽ tối hẳn. Để ý thêm: lối thoát ra ban công vẫn cần rộng, đi lại thuận khi có việc gấp."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Chọn vật che theo diện tích",
+    "chu_thich": "Mục tiêu là cắt đường nhìn thẳng, không bịt kín.",
+    "cot": [
+     "Diện tích, loại nhà",
+     "Vật che hợp",
+     "Lưu ý"
+    ],
+    "dong": [
+     [
+      "Căn hộ dưới 50 m²",
+      "Kệ sách hai mặt để hở, rèm voan",
+      "Giữ lối đi ≥ 80 cm"
+     ],
+     [
+      "Căn hộ 2–3 phòng ngủ",
+      "Tủ giày cao kèm vách lam gỗ",
+      "Chừa khe trên để không tối"
+     ],
+     [
+      "Nhà ống mặt phố",
+      "Bàn ăn, chậu cây cao giữa nhà",
+      "Kê theo mùa, mùa nóng mở cho gió"
+     ],
+     [
+      "Nhà cấp 4 có sân sau",
+      "Bình phong gỗ hoặc giàn cây ngoài cửa sau",
+      "Không chắn lối ra sân"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Đặt bể cá hoặc bình phong ngay sau cửa chính có được không?",
+     "dap": "Bình phong, tủ giày hay kệ hở đều được. Bể cá ngay sau cửa thì dễ bị va khi bê đồ, nên ưu tiên vật nặng, vững, dễ lau."
+    },
+    {
+     "hoi": "Thuê nhà không được khoan tường thì che bằng cách nào?",
+     "dap": "Dùng kệ đứng tự do, rèm treo thanh căng không khoan, hoặc chậu cây cao có bánh xe để dời đi khi trả nhà."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Dương Trạch Tam Yếu",
+     "nghia": "Sách coi cửa, phòng chính và bếp là ba phần cốt yếu của nhà ở. Theo cách hiểu của phép hình thế, khí vào cửa nên được giữ lại, đi chậm qua các phòng thay vì thoát thẳng ra phía sau."
+    }
+   ],
+   "y_chinh": [
+    "Chỉ cần cắt đường nhìn thẳng cửa – ban công, không bịt kín",
+    "Chọn vật che có khe: lam gỗ, kệ hở, rèm voan",
+    "Nhà ống: vật cản di chuyển được, kê theo mùa",
+    "Giữ lối ra ban công rộng, đi lại thuận"
+   ]
+  },
+  "dieu-hoa-quat-tran-thoi-thang-vao-ban-tho": {
+   "muc": [
+    {
+     "tieu_de": "Bàn thờ dưới điều hoà thì dời đi đâu?",
+     "doan": "Dời sang bức tường không nằm trong luồng gió chính của dàn lạnh, thường là tường cùng phía với dàn lạnh, lệch sang bên. Gió điều hoà thổi ra phía trước rồi chúc xuống, nên chỗ ngay đối diện dàn lạnh là chỗ hứng gió nhiều nhất. Muốn biết chắc, thắp một nén nhang ở chỗ định đặt và nhìn làn khói: khói lên thẳng là chỗ đó lặng gió."
+    },
+    {
+     "tieu_de": "Phòng khách chung cư chỉ có một chỗ đặt bàn thờ thì làm gì?",
+     "doan": "Giữ nguyên chỗ, đổi cách dùng gió. Chỉnh cánh đảo gió của dàn lạnh hướng lên trần hoặc sang phía sofa, tắt chế độ đảo tự động. Gắn tấm chắn gió nhựa trong vào dàn lạnh, loại kẹp không cần khoan. Lúc thắp nhang, tắt quạt trần hoặc để số nhỏ nhất. Thêm tấm lót chống ám khói trên trần để trần không ngả màu."
+    },
+    {
+     "tieu_de": "Bàn thờ treo tường ở nhà phố gần quạt trần có sao không?",
+     "doan": "Cần để ý nhất là chuyện lửa. Quạt trần quay làm tàn nhang rơi xa hơn, lửa đèn dầu, nến chao về phía rèm và giấy tiền. Đặt khay hứng tàn rộng dưới bát hương, dùng đèn điện thay nến khi vắng nhà, giữ rèm cách bàn thờ ít nhất nửa mét. Đây là nếp an toàn, nhà nào cũng nên làm."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Nguồn gió quanh bàn thờ và cách chỉnh",
+    "chu_thich": "Thử bằng khói nhang: khói lên thẳng là chỗ lặng gió.",
+    "cot": [
+     "Nguồn gió",
+     "Dấu hiệu",
+     "Việc 0 đồng",
+     "Việc ít tiền"
+    ],
+    "dong": [
+     [
+      "Dàn lạnh treo tường",
+      "Khói nhang bạt ngang, tàn bay ra sàn",
+      "Chỉnh cánh gió lên trần, tắt đảo",
+      "Tấm chắn gió kẹp dàn lạnh"
+     ],
+     [
+      "Quạt trần",
+      "Lửa nến chao, tàn rơi xa",
+      "Tắt hoặc số nhỏ khi thắp nhang",
+      "Khay hứng tàn rộng, đèn điện thay nến"
+     ],
+     [
+      "Quạt cây, quạt đứng",
+      "Gió lùa từ dưới lên",
+      "Xoay quạt tránh góc bàn thờ",
+      "Chọn chỗ đặt quạt cố định"
+     ],
+     [
+      "Cửa sổ, ban công",
+      "Gió lùa theo mùa",
+      "Khép cửa lúc thắp nhang",
+      "Rèm dày phía cửa sổ"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Có cách nào thử xem bàn thờ có bị gió thổi không?",
+     "dap": "Thắp một nén nhang lúc điều hoà và quạt đang chạy như thường ngày. Khói lên thẳng là ổn; khói bạt ngang hoặc xoáy là chỗ đó đang hứng gió."
+    },
+    {
+     "hoi": "Đặt bàn thờ dưới dàn nóng hay ống đồng điều hoà có được không?",
+     "dap": "Nên tránh. Ống đồng có thể đọng nước nhỏ giọt, dàn nóng gây rung và nóng, không hợp chỗ cần sạch, yên và khô."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Dân gian muốn chỗ thờ yên, sạch, không bị gió tạt làm tán hương. Hiểu theo đời sống, đó là lời nhắc giữ lửa nhang an toàn và bàn thờ khỏi bám tàn, bụi."
+    }
+   ],
+   "y_chinh": [
+    "Thử bằng khói nhang: khói lên thẳng là chỗ lặng gió",
+    "Chỉnh cánh gió lên trần, tắt chế độ đảo tự động",
+    "Tắt quạt trần hoặc để số nhỏ khi thắp nhang",
+    "Rèm cách bàn thờ ít nhất nửa mét, có khay hứng tàn"
+   ]
+  },
+  "cau-thang-o-giua-nha": {
+   "muc": [
+    {
+     "tieu_de": "Nhà ống có cầu thang giữa nhà thì làm sao cho sáng?",
+     "doan": "Đưa sáng từ trên xuống: giếng trời hoặc mái kính lấy sáng ngay trên ô thang là cách hiệu quả nhất. Nhà ống bốn, năm mét ngang ở phố cũ thường chỉ có sáng ở hai đầu. Ô thang giữa nhà lại chính là cái ống dẫn sáng tốt nếu mở được mái. Chưa sửa được thì sơn tường quanh thang màu sáng, thay lan can đặc bằng lan can sắt hoặc kính."
+    },
+    {
+     "tieu_de": "Bậc thang đầu tiên chĩa thẳng ra cửa chính thì xử lý thế nào?",
+     "doan": "Đặt một vật chuyển hướng nhìn ở chân thang, như chậu cây, kệ thấp hoặc tấm thảm khác màu. Khi bước vào nhà, mắt sẽ dừng ở đó thay vì thấy ngay dãy bậc. Cách này còn có lợi thực tế: người đi xuống vội ít va vào khách vừa vào cửa. Khi sửa lớn, có thể đổi chiều bậc cuối hoặc thêm chiếu nghỉ quay ngang."
+    },
+    {
+     "tieu_de": "Cầu thang giữa nhà làm tiếng ồn lan khắp các tầng, giảm bằng cách nào?",
+     "doan": "Bọc bậc gỗ hoặc lót thảm mỏng là giảm được phần lớn tiếng bước chân. Nhà nhiều thế hệ, người lớn tuổi ngủ sớm, con cái đi học về muộn thì tiếng thang vọng lên rất rõ. Thêm cửa ngăn ở đầu thang tầng có phòng ngủ cũng giữ được hơi lạnh điều hoà. Nhớ gắn đèn cảm ứng dọc thang để đi lại ban đêm an toàn."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cầu thang giữa nhà: vấn đề và cách làm",
+    "chu_thich": "Đi từ việc 0 đồng tới khi sửa lớn.",
+    "cot": [
+     "Vấn đề",
+     "Việc 0 đồng",
+     "Việc ít tiền",
+     "Khi sửa lớn"
+    ],
+    "dong": [
+     [
+      "Giữa nhà tối",
+      "Mở cửa các phòng quanh thang ban ngày",
+      "Đèn hắt dọc thang, sơn tường màu sáng",
+      "Giếng trời hoặc mái kính trên ô thang"
+     ],
+     [
+      "Bậc đầu chĩa ra cửa",
+      "Kê chậu cây hoặc kệ thấp ở chân thang",
+      "Thảm khác màu đánh dấu chân thang",
+      "Đổi chiều bậc cuối, thêm chiếu nghỉ"
+     ],
+     [
+      "Tiếng bước chân vọng",
+      "Đi dép mềm trong nhà",
+      "Lót thảm, đệm cao su ở bậc",
+      "Bọc bậc gỗ, cửa ngăn đầu thang"
+     ],
+     [
+      "Gầm thang bừa bộn",
+      "Dọn bớt, chừa lối thoáng",
+      "Tủ âm gầm thang có cánh",
+      "Làm góc đọc sách hoặc kho gọn"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Gầm cầu thang giữa nhà có nên làm nhà vệ sinh không?",
+     "dap": "Không nên nếu tránh được: gầm thang thấp, khó thông gió nên mùi và ẩm đọng ngay giữa nhà. Dùng làm tủ kho có cánh hoặc góc đọc sách thì gọn hơn."
+    },
+    {
+     "hoi": "Cầu thang xoắn ốc giữa nhà có khác cầu thang thẳng không?",
+     "dap": "Thang xoắn chiếm ít chỗ và ít chia cắt hơn, nhưng bậc hẹp nên khó đi với người lớn tuổi và trẻ nhỏ. Cần tay vịn chắc và đèn đủ sáng."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Dân gian muốn giữa nhà được yên và sáng, nên ngại cầu thang chiếm đúng tâm nhà. Hiểu theo đời sống, đó là lời nhắc giữ ánh sáng, lối đi và sự yên tĩnh cho phần giữa nhà."
+    }
+   ],
+   "y_chinh": [
+    "Ô thang giữa nhà có thể thành ống dẫn sáng nếu mở mái",
+    "Chân thang chĩa ra cửa: kê chậu cây hoặc kệ thấp",
+    "Lót thảm, bọc bậc để bớt tiếng bước chân",
+    "Đèn cảm ứng dọc thang cho đi lại ban đêm"
+   ]
+  },
+  "cay-truoc-cua-nha": {
+   "muc": [
+    {
+     "tieu_de": "Trước cửa nhà nên trồng cây gì?",
+     "doan": "Nên chọn cây tán gọn, cao vừa phải, rễ không lan mạnh. Nhà phố hẹp hợp với chậu cây đặt hai bên cửa như cau tiểu trâm, lưỡi hổ, trầu bà leo giàn; nhà có sân thì cây bụi thấp, hoa giấy tỉa gọn. Chọn theo nắng gió của nhà và thời gian mình có để tưới, không chọn theo lời hứa về tiền bạc."
+    },
+    {
+     "tieu_de": "Cây trước cửa nên cách cửa bao xa?",
+     "doan": "Cây lớn nên cách mép cửa ít nhất bằng nửa chiều cao tán, và không đứng giữa lối vào. Ví dụ cây cao sáu mét thì cách tối thiểu khoảng ba mét, lệch sang một bên. Khoảng cách này giữ rễ xa móng nhà, cành không quệt vào mái và cửa vẫn đón đủ sáng."
+    },
+    {
+     "tieu_de": "Những cây nào không hợp trồng sát cửa?",
+     "danh_sach": [
+      "Cây rễ khoẻ, lan rộng như bàng, đa, si: dễ đội nền, nứt tường rào.",
+      "Cây nhiều gai trồng sát lối đi: vướng người, trẻ nhỏ dễ trầy.",
+      "Cây rụng lá, rụng quả nhiều ngay hiên: trơn, ẩm, hút ruồi muỗi.",
+      "Cây có nhựa độc khi bẻ cành: không đặt ở chỗ trẻ con với tới."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Loại cây trước cửa: hợp hay không, vì sao",
+    "chu_thich": "Đánh giá theo kích thước, rễ, lá rụng và an toàn ở lối ra vào.",
+    "cot": [
+     "Loại cây",
+     "Trước cửa",
+     "Lý do"
+    ],
+    "dong": [
+     [
+      "Chậu cây thấp hai bên cửa",
+      "Hợp",
+      "Xanh, mát, không chắn lối, dễ dời"
+     ],
+     [
+      "Giàn leo trên cổng",
+      "Hợp nếu tỉa gọn",
+      "Che nắng mà vẫn để cửa sáng"
+     ],
+     [
+      "Cây tán gọn cao 3–4 m, lệch một bên",
+      "Hợp",
+      "Bóng mát, rễ vừa phải"
+     ],
+     [
+      "Cây cổ thụ rễ lan, đứng giữa lối",
+      "Không hợp",
+      "Che sáng, rễ đội nền, cành khô mùa bão"
+     ],
+     [
+      "Cây gai, cây nhựa độc sát lối đi",
+      "Không hợp",
+      "Vướng người, không an toàn cho trẻ"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cây đã trồng to trước cửa có nên chặt không?",
+     "dap": "Chưa cần chặt. Tỉa cành thấp, nâng tán cho cửa sáng và kiểm tra rễ trước; chỉ dời cây khi rễ đã làm nứt nền."
+    },
+    {
+     "hoi": "Căn hộ chung cư đặt cây cạnh cửa ra vào được không?",
+     "dap": "Được, một chậu cây ưa bóng bên trong cửa là hợp. Không đặt chậu ngoài hành lang chung vì chắn lối thoát hiểm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Dân gian tránh cây to mọc đúng giữa cửa vì cho rằng chặn khí vào nhà; cây vừa phải hai bên cửa được xem là tốt, như hai người đứng đón."
+    }
+   ],
+   "y_chinh": [
+    "Chọn cây tán gọn, rễ hiền, đặt hai bên cửa",
+    "Cây lớn cách cửa ít nhất nửa chiều cao tán",
+    "Tránh cây rễ lan, cây gai sát lối đi",
+    "Cây to sẵn: tỉa nâng tán trước khi tính chặt"
+   ]
+  },
+  "be-ca-trong-nha": {
+   "muc": [
+    {
+     "tieu_de": "Đặt bể cá ở đâu trong nhà là hợp?",
+     "doan": "Hợp nhất là phòng khách hoặc sảnh, chỗ thoáng, có người qua lại để ngắm và dễ chăm. Bể cá tự nó không tốt cũng không xấu; hợp hay không tuỳ vị trí. Chọn chỗ có ổ điện riêng cao hơn mặt nước, không nắng chiếu thẳng để tránh rêu, và sàn chịu được nước tràn khi thay nước."
+    },
+    {
+     "tieu_de": "Có nên đặt bể cá trong phòng ngủ không?",
+     "doan": "Thường không nên, vì phòng ngủ cần yên và khô. Máy lọc chạy suốt đêm có tiếng ù và tiếng nước chảy, đèn bể làm phòng không tối hẳn. Phòng ngủ chung cư nhỏ, đóng kín để chạy điều hoà, thêm một bể nước bay hơi sẽ ẩm hơn. Nếu thích, chọn bình nhỏ không cần máy lọc, đặt xa đầu giường."
+    },
+    {
+     "tieu_de": "Phong thuỷ vận 9 có nói gì về chỗ đặt bể cá?",
+     "doan": "Theo cách xem Huyền Không, nước chỉ nên đặt ở phía có sao hướng thuận vận, phía cần yên thì không đặt. Vận 9 tính từ 2024 đến 2043. Mỗi nhà có lá số khác nhau theo hướng và năm vào ở, nên không có một góc chung cho mọi nhà. Muốn biết phía nào nên giữ yên, xem bài đọc Nhà của bạn sau khi nhập hướng nhà."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Vị trí bể cá: hợp hay chưa hợp",
+    "chu_thich": "Nhìn theo đời sống: tiếng ồn, độ ẩm, điện, ánh nắng, chỗ chăm sóc.",
+    "cot": [
+     "Vị trí",
+     "Đánh giá",
+     "Lý do đời sống"
+    ],
+    "dong": [
+     [
+      "Phòng khách, kệ tường thoáng",
+      "Hợp",
+      "Dễ ngắm, dễ chăm, ổ điện bố trí gọn"
+     ],
+     [
+      "Sảnh vào nhà, cạnh tủ giày",
+      "Hợp nếu lối đi rộng",
+      "Đi lại không va, có chỗ thay nước"
+     ],
+     [
+      "Phòng ngủ",
+      "Chưa hợp",
+      "Máy lọc ồn đêm, phòng kín dễ ẩm"
+     ],
+     [
+      "Sát bếp nấu",
+      "Chưa hợp",
+      "Hơi dầu mỡ bám nước, nóng làm nước đổi nhiệt"
+     ],
+     [
+      "Cạnh cửa sổ nắng chiều",
+      "Chưa hợp",
+      "Rêu mọc nhanh, nước nóng lên"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nuôi bao nhiêu con cá, cá màu gì thì tốt?",
+     "dap": "Hệ thống không chọn số cá hay màu cá theo phong thuỷ. Nên nuôi vừa sức bể và sức chăm, cá khoẻ, nước trong là đủ."
+    },
+    {
+     "hoi": "Bể cá để trên tủ hay kệ gỗ thường có an toàn không?",
+     "dap": "Bể trên năm mươi lít khá nặng khi đầy nước. Nên dùng kệ chịu lực riêng, mặt phẳng, có tấm lót, và đặt sát tường để trẻ nhỏ không kéo đổ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Thẩm Thị Huyền Không Học",
+     "nghia": "Sách trình bày phép phi tinh theo vận, phân biệt phía hợp có nước động và phía cần yên tĩnh. Ý chung: chỗ đặt nước tuỳ hướng nhà và vận, không có một góc đúng cho mọi nhà."
+    },
+    {
+     "sach": "Phong thuỷ dân gian Việt Nam (truyền khẩu)",
+     "nghia": "Dân gian xem nước sạch trong nhà là điều lành, nhưng nước bẩn, tù đọng thì nên tránh. Ý gần với đời sống: bể có chăm mới nên giữ."
+    }
+   ],
+   "y_chinh": [
+    "Bể cá không tốt không xấu, hợp hay không tuỳ vị trí",
+    "Phòng khách, sảnh thoáng là chỗ dễ chăm nhất",
+    "Tránh phòng ngủ, sát bếp, cạnh nắng chiều",
+    "Vận 9: chỗ đặt nước tuỳ lá số từng nhà",
+    "Ổ điện cao hơn mặt nước, kệ chịu lực riêng"
+   ]
+  }
+ }
+}

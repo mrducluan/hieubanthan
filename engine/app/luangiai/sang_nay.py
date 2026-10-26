@@ -84,11 +84,37 @@ def _theo_ngay_sinh(d: int, m: int, ngay: dt.date) -> dict:
             "thang_moi": thang_moi}
 
 
-def goi_sang_nay(ngay: dt.date, ngay_sinh: list[str]) -> dict:
+def nha_theo_tiet(ngay: dt.date, nha: list[dict]) -> list[dict | None]:
+    """Y3 — "nhắc theo mùa của nhà": ngày giao tiết, mỗi nhà (chỉ hướng: {huong_do} hoặc {huong}) một dòng tháng tiết MỚI
+    tại phía cửa (giữ yên / sửa nhỏ / thuận sửa), lấy từ `phongthuy_doi_song.thang_nay` của ngày hôm sau (giờ giao tiết có thể
+    sau 8 giờ sáng). Ngày không giao tiết → toàn None. Cùng hướng tính một lần; không lưu."""
+    if not any(m["ma"].startswith("tiet.") for m in moc_lich(ngay)):
+        return [None] * len(nha)
+    from app.calc import phongthuy as pt  # noqa: PLC0415
+    from app.luangiai import phongthuy_doi_song as pt_ds  # noqa: PLC0415
+    mau, nho, ra = _kb()["mau"], {}, []
+    for n in nha:
+        huong = pt.huong_tu_do(n["huong_do"]) if n.get("huong_do") is not None else n.get("huong")
+        if huong not in pt.HUONG:
+            ra.append(None)
+            continue
+        if huong not in nho:
+            t = pt_ds.thang_nay({"huong": huong}, ngay + dt.timedelta(days=1))
+            th = t["thang"]
+            nho[huong] = {"huong": huong, "chi_thang": th["chi_thang"], "muc": th["muc"],
+                          "noi_dung": mau["nha_tiet"].format(huong=huong, chi=th["chi_thang"], nhan=th["nhan_muc"].lower(),
+                                                             viec=t["viec"][0].rstrip(".")),
+                          "duong": mau["giao_tiet_duong"]}
+        ra.append(nho[huong])
+    return ra
+
+
+def goi_sang_nay(ngay: dt.date, ngay_sinh: list[str], nha: list[dict] | None = None) -> dict:
     theo: dict[str, dict] = {}
     for s in dict.fromkeys(ngay_sinh):
         dm = _ngay_thang(s)
         if dm:
             theo[s] = _theo_ngay_sinh(*dm, ngay)
     return {"ngay_xem": ngay.isoformat(), "moc_lich": moc_lich(ngay), "theo_ngay_sinh": theo,
+            "nha_tiet": nha_theo_tiet(ngay, nha or []),
             "hoi_hom_qua": _kb()["hoi_hom_qua"], "luu_y": "Nhịp gợi ý để tự soi, không phải dự báo."}

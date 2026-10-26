@@ -285,6 +285,108 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int) -> dict:
     return chung.ket(goi)
 
 
+# ------------------------------------------------------------------ Y6: đọc hồ sơ nhà người hỏi
+# Hồ sơ nhà nằm trên máy người dùng (KC-2); web gửi kèm theo lượt hỏi, engine KHÔNG lưu. Câu hỏi nhắc phòng nào / "nhà tôi"
+# → trả lời theo đúng nhà đó (vị trí phòng, du niên, dấu hiệu đã khai / đã xử lý, luật thực hành) thay vì chung chung.
+PHONG_KW = {"bep": [r"bep", r"phong bep", r"mieng bep"],
+            "phong_ngu_chinh": [r"giuong", r"phong ngu", r"dau giuong"],
+            "cua_chinh": [r"cua chinh", r"cua nha", r"cua ra vao", r"cua truoc"],
+            "ve_sinh": [r"nha ve sinh", r"toilet", r"\bwc\b", r"phong tam", r"nha tam"],
+            "ban_tho": [r"ban tho"],
+            "phong_lam_viec": [r"ban lam viec", r"phong lam viec", r"ban hoc", r"goc hoc"]}
+NHA_TOI = [r"nha (cua )?(toi|minh|em|chung toi)", r"can ho (cua )?(toi|minh|em)", r"nha nay", r"can nha nay"]
+
+
+def _bo_cuc_tu_nha(nha: dict) -> dict:
+    """Đầu vào `nha` (như /luan-giai: huong_do|huong, bo_cuc?) → BoCuc cho `phongthuy_bo_cuc.luan`."""
+    bc = dict(nha.get("bo_cuc") or {})
+    if "huong_nha_do" not in bc and "huong_nha" not in bc:
+        if nha.get("huong_do") is not None:
+            bc["huong_nha_do"] = nha["huong_do"]
+        elif nha.get("huong"):
+            bc["huong_nha"] = nha["huong"]
+    return bc
+
+
+def muc_nha(pl: dict, sinh: dict | None, nha: dict) -> dict | None:
+    """Mục `nha_rieng` khi câu hỏi nhắc phòng / "nhà tôi" / một dấu hiệu bố trí. None khi câu hỏi không liên quan nhà."""
+    from app.kb import phongthuy_do_thi as do_thi  # noqa: PLC0415
+    from app.luangiai import phongthuy_bo_cuc as bc  # noqa: PLC0415
+    t = pl["cau_chuan_hoa"]
+    phong = [p for p, kw in PHONG_KW.items() if chung.co(t, kw)]
+    nhac_nha = chung.co(t, NHA_TOI)
+    hoi_dh = [m for m in pl["bo_tri"] if m in bc.DAU_HIEU]
+    if not (phong or nhac_nha or hoi_dh):
+        return None
+    vao = _bo_cuc_tu_nha(nha)
+    try:
+        r = bc.luan(vao, sinh)
+    except (ValueError, TypeError):
+        return None
+    d = r["da_tinh"]
+    khai = (vao.get("dau_hieu") or {})
+    da_xu_ly = {ma for ma, x in khai.items() if isinstance(x, dict) and x.get("co") is False}
+    co = {x["ma"]: x for x in r["dien_giai"]["dau_hieu"]}
+    vi_tri = {x["phong"]: x for x in d["vi_tri"]}
+    kv = kb.bo_cuc()["vi_tri_phong"]
+    phong_ra = []
+    for p in phong:
+        x = vi_tri.get(p)
+        phong_ra.append({"phong": p, "ten": bc.TEN_PHONG[p], "cung": x["cung"] if x else None,
+                         "du_nien": (x["du_nien_menh"] or x["du_nien_trach"]) if x else None,
+                         "theo": ("menh" if x["du_nien_menh"] else "trach") if x else None,
+                         "hop": x["hop"] if x else None, "nen": kv[p]["noi_dung"]})
+    # Dấu hiệu nêu ra: đúng dấu hiệu câu hỏi nhắc + dấu hiệu đã khai ở phòng câu hỏi nhắc; chỉ hỏi "nhà tôi" → dấu hiệu
+    # nên xử lý trước (veto) đã khai.
+    dh_phong = do_thi.dau_hieu_o_phong(phong) if phong else set()
+    lien = [m for m in co if m in hoi_dh or m in dh_phong or (nhac_nha and not phong and co[m]["veto"])]
+    dau_hieu = [{"ma": m, "tieu_de": co[m]["tieu_de"], "veto": co[m]["veto"], "tot": co[m]["tot"],
+                 "viec_0": next((v["lam"] for v in co[m]["viec"] if v["chi_phi"] == "khong_ton"), None),
+                 "trang": co[m].get("trang")} for m in lien]
+    hoi_ra = [{"ma": m, "tieu_de": kb.bo_tri(m)["tieu_de"],
+               "trang_thai": "da_xu_ly" if m in da_xu_ly else "co" if m in co else "chua_khai"} for m in hoi_dh]
+    ma_lien = set(lien) | set(hoi_dh)
+    quy_tac = [q for q in r["quy_tac"] if set((kb.quy_tac_thuc_hanh().get(q["ma"]) or {}).get("ap_dung", {}).get("dau_hieu") or []) & ma_lien]
+    return {"loai": "nha_rieng", "huong": d["huong_nha"], "trach": (d["trach"] or {}).get("quai"),
+            "cung_nhom": d["cung_nhom"], "menh_quai": (d["menh_quai"] or {}).get("quai"),
+            "loai_nha": vao.get("loai_nha"), "noi_ve_nha": nhac_nha or not phong,
+            "phong": phong_ra, "dau_hieu": dau_hieu, "dau_hieu_hoi": hoi_ra, "quy_tac": quy_tac,
+            "source_id": kb.SOURCE_ID, "school_id": kb.SCHOOL_ID}
+
+
+def _doan_nha(m: dict) -> str:
+    cau = []
+    if m["huong"] and m["noi_ve_nha"]:
+        s = f"Theo hồ sơ nhà bạn lưu: nhà hướng {m['huong']}" + (f", {m['trach']} trạch" if m["trach"] else "") + "."
+        if m["cung_nhom"] is not None:
+            s += (" Cùng nhóm Đông/Tây với mệnh quái của bạn." if m["cung_nhom"]
+                  else " Khác nhóm Đông/Tây với mệnh quái của bạn — bù bằng hướng cửa, bếp, giường theo hướng tốt của bạn.")
+        cau.append(s)
+    for p in m["phong"]:
+        if not p["cung"]:
+            cau.append(f"{p['ten']}: hồ sơ nhà chưa ghi vị trí — đặt phòng ở Khảo sát nhà (hoặc vẽ mặt bằng) để xem theo đúng nhà bạn.")
+            continue
+        theo = "với mệnh quái của bạn" if p["theo"] == "menh" else "theo trạch của nhà (chưa có năm sinh)"
+        if p["cung"] == "Trung cung":
+            cau.append(f"{p['ten']} nhà bạn nằm ở giữa nhà (trung cung). {p['nen']}")
+        else:
+            danh_gia = "" if p["hop"] is None else (" — đúng cách sách dặn." if p["hop"] else " — chưa đúng cách sách dặn.")
+            cau.append(f"{p['ten']} nhà bạn ở phía {p['cung']}: {theo} là {p['du_nien']}{danh_gia} {p['nen']}")
+    for d in m["dau_hieu"]:
+        s = f"Bạn đã ghi nhà có “{d['tieu_de'].lower()}”" + (" — nhóm nên xử lý trước." if d["veto"] else ".")
+        if d["viec_0"]:
+            s += f" Việc không tốn tiền: {d['viec_0']}"
+        cau.append(s)
+    for d in m["dau_hieu_hoi"]:
+        if d["trang_thai"] == "da_xu_ly":
+            cau.append(f"Hồ sơ nhà ghi bạn đã xử lý “{d['tieu_de'].lower()}” — bài đọc Nhà của bạn đã gỡ trần mức cho phần này.")
+        elif d["trang_thai"] == "chua_khai":
+            cau.append(f"Hồ sơ nhà chưa ghi “{d['tieu_de'].lower()}” — nếu nhà bạn có, tích ở Khảo sát nhà để bài đọc xếp việc cho đúng.")
+    for q in m["quy_tac"]:
+        cau.append(f"{q['tieu_de']}: {q['noi_dung']}")
+    return " ".join(cau)
+
+
 # ------------------------------------------------------------------ NARRATIVE (template)
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
@@ -341,6 +443,8 @@ def _doan(m: dict) -> tuple[str, str | None]:
                 + " Muốn biết đúng sơn và đủ 9 cung, đo độ la bàn rồi lập trạch bàn ở mục Phong thuỷ.", None)
     if l == "giai_thich":
         return f"{m['tieu_de']}: {m['noi_dung']}", None
+    if l == "nha_rieng":
+        return _doan_nha(m), None
     return "", None
 
 
@@ -358,12 +462,18 @@ def van_template(goi: dict) -> str:
 
 
 def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = None,
-            dung_llm: bool = False) -> dict:
-    """`sinh` = {"nam": int, "gioi_tinh": "nam"|"nu", "ngay": date|None}."""
+            dung_llm: bool = False, nha: dict | None = None) -> dict:
+    """`sinh` = {"nam": int, "gioi_tinh": "nam"|"nu", "ngay": date|None}. `nha` (Y6) = hồ sơ nhà trên máy người hỏi
+    ({huong_do|huong, bo_cuc?}) — chỉ dùng trong lượt gọi, không lưu."""
     pl = phan_loai(cau_hoi)
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     nam_xem = pl["nam_xem"] or (ngay_xem.year + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0))
     goi = goi_bang_chung(pl, sinh, nam_xem)
+    if nha and pl["xu_ly"] not in ("an_toan", "tu_choi_nhe"):
+        mn = muc_nha(pl, sinh, nha)
+        if mn:
+            goi["muc"].insert(0, mn)                 # trả lời theo đúng nhà trước, kiến thức chung sau
+            goi["phan_loai"]["theo_nha"] = True
     van = van_template(goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:

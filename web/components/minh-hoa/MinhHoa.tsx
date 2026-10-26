@@ -13,7 +13,8 @@ export type MinhHoaDuLieu =
   | { kieu: "hoa_cung"; hoa: string; chi_so: number; vong: string[] }
   | { kieu: "menh"; hanh: string; nap_am: string; han: string; can_chi: string }
   | { kieu: "thap_than"; ten: string; quan_he: "dong_hanh" | "ta_sinh" | "ta_khac" | "khac_ta" | "sinh_ta"; cung_am_duong: boolean }
-  | { kieu: "nhat_chu"; can: string; hanh: string; duong: boolean };
+  | { kieu: "nhat_chu"; can: string; hanh: string; duong: boolean }
+  | { kieu: "dau_hieu"; nhom: "ngoai_canh" | "hinh_nha" | "trong_nha"; phong: string[]; veto: boolean; tot: boolean; ten: string };
 
 // Màu ngũ hành theo token giao diện (KB ghi cả "Hoả/Hỏa", "Thuỷ/Thủy").
 // Lớp Tailwind viết đủ (không ghép chuỗi) để trình biên dịch CSS thấy được.
@@ -25,16 +26,18 @@ const MAU_HANH: Record<string, { nen: string; vien: string }> = {
 };
 const mauHanh = (h: string) => MAU_HANH[h.split("/")[0]!.trim()] ?? { nen: "fill-gold/20", vien: "stroke-gold" };
 
-function Khung({ nhan, children, rong = 320, cao = 240 }: { nhan: string; children: ReactNode; rong?: number; cao?: number }) {
+function Khung({ nhan, children, rong = 320, cao = 240, sang = false }: { nhan: string; children: ReactNode; rong?: number; cao?: number; sang?: boolean }) {
+  // `sang` (Y5, chủ dự án 2026-10-26: "hình minh hoạ nền sáng lên"): nền giấy sáng như ảnh blog (.anh-sang), không sao lấp lánh.
   return (
-    <figure className="glass relative mt-6 overflow-hidden rounded-2xl p-4" data-testid="minh-hoa">
+    <figure className={sang ? "relative mt-6 overflow-hidden rounded-2xl border border-gold/50 bg-[#f6f0e2] p-4 shadow-[0_18px_40px_-18px_rgb(0_0_0/0.65)]"
+      : "glass relative mt-6 overflow-hidden rounded-2xl p-4"} data-testid="minh-hoa">
       <svg viewBox={`0 0 ${rong} ${cao}`} role="img" aria-label={nhan} className="mx-auto block h-auto w-full max-w-md">
         <title>{nhan}</title>
-        <Sao x={24} y={22} r={1.6} /><Sao x={rong - 30} y={30} r={1.2} /><Sao x={rong - 52} y={cao - 26} r={1.4} />
-        <Sao x={40} y={cao - 40} r={1} /><Sao x={rong / 2 + 96} y={18} r={0.9} />
+        {!sang && <><Sao x={24} y={22} r={1.6} /><Sao x={rong - 30} y={30} r={1.2} /><Sao x={rong - 52} y={cao - 26} r={1.4} />
+          <Sao x={40} y={cao - 40} r={1} /><Sao x={rong / 2 + 96} y={18} r={0.9} /></>}
         {children}
       </svg>
-      <figcaption className="mt-2 text-center text-xs text-fg-faint">{nhan}</figcaption>
+      <figcaption className={sang ? "mt-2 text-center text-xs text-[#5b5470]" : "mt-2 text-center text-xs text-fg-faint"}>{nhan}</figcaption>
     </figure>
   );
 }
@@ -239,6 +242,45 @@ function HinhMenh({ hanh, nap_am, han, can_chi }: { hanh: string; nap_am: string
   );
 }
 
+// ---------------------------------------------------------------- Y5 dấu hiệu nhà ở: mặt bằng nhà + phòng hay gặp
+// Engine trả nhóm dấu hiệu (ngoại cảnh / hình nhà / trong nhà), tên phòng hay gặp, cờ "xử lý trước" / "dấu hiệu tốt".
+// Nền giấy sáng (Khung `sang`) → màu viết thẳng mã hex tối, không dùng token giao diện tối.
+const GIAY = { muc: "#2a2540", mo: "#7a7290", vang: "#b8892b", ngoc: "#2f8f74", son: "#c0533a", nen: "#f6f0e2", phong: "#fbe9c0" };
+function HinhDauHieu({ nhom, phong, veto, tot, ten }: { nhom: string; phong: string[]; veto: boolean; tot: boolean; ten: string }) {
+  const vien = tot ? GIAY.ngoc : veto ? GIAY.vang : GIAY.muc;
+  // Nhà chữ L: khuyết góc trên phải; còn lại hình chữ nhật. Cửa luôn ở cạnh dưới (mặt trước).
+  const nha = nhom === "hinh_nha" ? "M70,50 H190 V110 H250 V190 H70 Z" : "M70,50 H250 V190 H70 Z";
+  const yPhong = nhom === "hinh_nha" ? 128 : 100;
+  return (
+    <Khung sang nhan={`${ten} — ${tot ? "dấu hiệu tốt" : veto ? "nên xử lý trước" : "dấu hiệu cần để ý"}${phong.length ? `, hay gặp ở ${phong.join(", ").toLowerCase()}` : ""}`}>
+      {nhom === "hinh_nha" && <path d="M190,50 H250 V110 H190 Z" fill="none" stroke={GIAY.son} strokeOpacity={0.6} strokeWidth={1.2} strokeDasharray="3 4" />}
+      <path d={nha} fill="#ffffff" fillOpacity={0.7} stroke={vien} strokeWidth={2} />
+      <line x1={140} y1={190} x2={180} y2={190} stroke={GIAY.nen} strokeWidth={5} />
+      <text x={160} y={204} textAnchor="middle" fill={GIAY.mo} fontSize={8}>cửa chính</text>
+      {nhom === "ngoai_canh" && <>
+        <path d="M160,236 V214" stroke={GIAY.son} strokeOpacity={0.7} strokeWidth={10} strokeLinecap="round" />
+        <path d="M60,40 Q40,120 60,200 M260,40 Q280,120 260,200" fill="none" stroke={GIAY.ngoc} strokeOpacity={0.5} strokeWidth={1.2} strokeDasharray="2 5" />
+      </>}
+      {phong.map((p, i) => {
+        // Ô phòng chia đều bề ngang nhà, căn giữa; tên phòng ngắt hai dòng để không tràn ô.
+        const w = Math.min(64, (160 - (phong.length - 1) * 8) / phong.length);
+        const x = 160 - (phong.length * w + (phong.length - 1) * 8) / 2 + i * (w + 8);
+        const tu = p.split(" ");
+        const dong = tu.length > 2 ? [tu.slice(0, Math.ceil(tu.length / 2)).join(" "), tu.slice(Math.ceil(tu.length / 2)).join(" ")] : [p];
+        return (
+          <g key={p}>
+            <rect x={x} y={yPhong} width={w} height={36} rx={6} fill={GIAY.phong} stroke={GIAY.vang} strokeWidth={1} />
+            <text x={x + w / 2} y={yPhong + (dong.length > 1 ? 15 : 21)} textAnchor="middle" fill={GIAY.muc} fontSize={7.5}>
+              {dong.map((d, j) => <tspan key={d} x={x + w / 2} dy={j ? 9 : 0}>{d}</tspan>)}
+            </text>
+          </g>
+        );
+      })}
+      {(veto || tot) && <text x={160} y={38} textAnchor="middle" fill={tot ? GIAY.ngoc : GIAY.vang} fontSize={10} fontWeight={600}>{tot ? "✓ dấu hiệu tốt" : "! nên xử lý trước"}</text>}
+    </Khung>
+  );
+}
+
 export function MinhHoa({ mh }: { mh?: MinhHoaDuLieu | null }) {
   if (!mh) return null;
   switch (mh.kieu) {
@@ -252,6 +294,7 @@ export function MinhHoa({ mh }: { mh?: MinhHoaDuLieu | null }) {
     case "menh": return <HinhMenh {...mh} />;
     case "thap_than": return <HinhThapThan {...mh} />;
     case "nhat_chu": return <HinhNhatChu {...mh} />;
+    case "dau_hieu": return <HinhDauHieu {...mh} />;
     default: return null;
   }
 }

@@ -104,9 +104,12 @@ export interface SangNayNgay {
 }
 export interface HoiHomQua { cau: string; nhip: Record<string, string>; dung: string; chua_dung: string }
 export interface GoiSangNay { moc_lich: MocLich[]; theo_ngay_sinh: Record<string, SangNayNgay>; hoi_hom_qua?: HoiHomQua }
+/** Y3: dòng "tháng tiết mới phía cửa nhà bạn" (engine soạn từ hướng nhà) — chỉ ngày giao tiết, người đã lưu nhà vào tài khoản. */
+export interface NhaTiet { noi_dung: string; duong: string }
 export interface NguoiNhan {
   nhac: { nhan: string; duong: string | null }[];
   sang_nay: boolean; moc_lich: string[]; ngay_sinh: string | null;
+  nha_tiet?: NhaTiet | null;
 }
 
 /** MỘT thông báo / ngày cho một người: mốc tự đánh dấu > mốc lịch đã chọn > sáng nay. Không có gì → null (không gửi).
@@ -121,15 +124,17 @@ export function ghepThongBao(n: NguoiNhan, sn: GoiSangNay | null, ngay: string) 
     return { ...g, body: sang ? `Mốc bạn đã đánh dấu cho hôm nay · Ngày cá nhân ${sang.so_ngay}: ${sang.noi_dung}` : g.body, ...hoi };
   }
   const chon = new Set(n.moc_lich);
-  const moc: { tieu_de: string; noi_dung: string; duong: string }[] = (sn?.moc_lich ?? [])
+  const moc: { tieu_de: string; noi_dung: string; duong: string; nhom?: string[] }[] = (sn?.moc_lich ?? [])
     .filter((m) => m.nhom.some((x) => chon.has(x)));
   if (chon.has("thang_ca_nhan") && rieng?.thang_moi) {
     moc.push({ tieu_de: rieng.thang_moi.tieu_de, noi_dung: rieng.thang_moi.noi_dung, duong: "/hom-nay" });
   }
   if (moc.length) {
     const m = moc[0]!;
-    return { title: moc.length > 1 ? `${m.tieu_de} · +${moc.length - 1} mốc` : m.tieu_de, body: kem(m.noi_dung),
-      url: duongTrongSite(m.duong) ?? "/hom-nay", tag: `nhac-${ngay}`, ...hoi };
+    // Y3: ngày giao tiết + có hướng nhà → thay lời mời chung bằng việc cụ thể phía cửa nhà mình trong tháng tiết mới.
+    const nha = m.nhom?.includes("giao_tiet") && n.nha_tiet ? n.nha_tiet : null;
+    return { title: moc.length > 1 ? `${m.tieu_de} · +${moc.length - 1} mốc` : m.tieu_de, body: kem(nha ? nha.noi_dung : m.noi_dung),
+      url: duongTrongSite(nha?.duong ?? m.duong) ?? "/hom-nay", tag: `nhac-${ngay}`, ...hoi };
   }
   if (sang) return { title: sang.tieu_de, body: sang.noi_dung, url: "/hom-nay", tag: `nhac-${ngay}`, ...hoi };
   return null;
