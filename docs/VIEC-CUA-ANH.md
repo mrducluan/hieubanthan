@@ -109,8 +109,7 @@
    1. **Hỏi chuyên gia** (`sao.chuyen_gia.bat`): giá mặc định 199.000 ₫/câu, câu đầu giảm 30 %, hạn trả lời 48 giờ.
       Anh (chủ sở hữu, đã bật MFA) trả lời ở **Quản trị → Hỏi chuyên gia**; quá hạn thì hoàn 100 % ngoài hệ thống rồi bấm
       "Hoàn". Bật cái này TRƯỚC hội viên (hội viên kèm 2 câu hỏi/năm).
-   2. **Hội viên năm** (`sao.hoi_vien.bat`): giá mặc định **3.990.000 ₫** (anh chốt — em đã hỏi lại ở tin nhắn), 15 Sao
-      tặng/tháng không cộng dồn, 2 câu hỏi chuyên gia/năm. Chính sách hoàn tiền đã ghi ở Điều khoản mục "Hội viên năm".
+   2. **Hội viên năm — hai hạng** (anh chốt phương án a): bật `sao.hoi_vien.bat` = bán **hạng thường 399.000 ₫/năm** (1 câu hỏi chuyên gia/năm). Khi anh sẵn thời gian trả lời trong 24 giờ, bật thêm `sao.hoi_vien.cg.bat` = bán **hạng Chuyên gia 1.990.000 ₫/năm** (6 câu/năm, hạn 24 giờ; người hạng thường thấy nút nâng hạng, giá tự trừ phần còn lại). 15 Sao tặng/tháng cả hai hạng, không cộng dồn. Đổi số ở cài đặt chỉ áp cho người mua SAU khi đổi. Chính sách hoàn tiền ở Điều khoản mục "Hội viên năm".
    3. **Chuỗi ngày** (`sao.chuoi.bat`, của 0025): bật xong thì ngày nghỉ chuỗi (1 ngày/7 ngày) + huy hiệu tự chạy, không
       cần công tắc riêng. Lá bài đầu ngày và "Hẹn với chính mình" chạy trên máy người dùng, không cần migration.
    **Lưu ý rollback 0028**: tệp down XOÁ đơn `don_nap` loại hội viên/chuyên gia (không khớp ràng buộc cũ) — xuất CSV

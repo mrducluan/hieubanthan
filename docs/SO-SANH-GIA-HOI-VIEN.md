@@ -1,5 +1,8 @@
 # So sánh giá Hội viên năm: 3.990.000 ₫ hay 399.000 ₫ (2026-10-26)
 
+> **Đã chốt (26/10/2026): phương án (a)** — hạng thường 399.000 ₫ + hạng Chuyên gia 1.990.000 ₫. Bổ sung khi làm: quyền
+> lợi đóng băng lúc mua, nâng hạng giữa kỳ trừ phần còn lại, công tắc riêng cho hạng Chuyên gia. Đã làm trong migration 0028.
+
 > Mục đích: cho chủ dự án đủ thông tin để chốt giá. Giá thị trường lấy từ kết quả tìm kiếm ngày 26/10/2026 (trang của
 > chính các đơn vị); môi trường làm việc không mở trực tiếp được các trang này nên **chưa kiểm chứng tận nơi** — giá
 > khuyến mãi các trang Việt đổi thường xuyên. USD quy đổi khoảng 26.000 ₫. Khâu tăng trưởng: NẠP (giá quyết định có bao
