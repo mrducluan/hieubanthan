@@ -34,7 +34,10 @@ export function KiemChung({ kc, so, viTri }: { kc: KC; so: number; viTri: string
           <b className="text-moon">Khớp {n}/{kc.net.length}.</b> {ketQua}
         </p>
       ) : (
-        <p className="mt-3 text-xs text-fg-faint">Khi số {so} căng thẳng, người ta thường: {kc.khi_cang_thang.charAt(0).toLowerCase() + kc.khi_cang_thang.slice(1)} Lựa chọn chỉ đếm trên máy của bạn.</p>
+<>
+          <p className="mt-3 text-xs text-fg-faint">Lúc áp lực, người mang số {so} hay {kc.khi_cang_thang.charAt(0).toLowerCase() + kc.khi_cang_thang.slice(1)}</p>
+          <p className="mt-1 text-xs text-fg-faint">Chỉ máy bạn biết bạn tích gì.</p>
+        </>
       )}
     </KhoiLop>
   );

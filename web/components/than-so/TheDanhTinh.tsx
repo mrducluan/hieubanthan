@@ -5,7 +5,8 @@ import { VongLacThu } from "./VongLacThu";
 
 // Metaphysics ID — thẻ "danh tính", KHÔNG hiện ngày sinh (để chia sẻ an toàn, docs §4.5 suy luận 5).
 export function TheDanhTinh({ kq, tenHienThi }: { kq: LuanGiaiResult; tenHienThi: string }) {
-  const tuKhoa = kq.cac_vi_tri.map((v) => v.nghia?.tu_khoa).filter(Boolean).slice(0, 3) as string[];
+  // Hai vị trí cùng số (vd Đường đời 6 + Linh hồn 6) → một từ khoá, không lặp.
+  const tuKhoa = [...new Set(kq.cac_vi_tri.map((v) => v.nghia?.tu_khoa).filter(Boolean) as string[])].slice(0, 3);
   return (
     <div className="relative overflow-hidden rounded-2xl p-[1px]" data-testid="the-danh-tinh"
       style={{ background: "linear-gradient(140deg, rgb(var(--gold) / 0.7), rgb(var(--moon) / 0.35) 45%, rgb(var(--jade) / 0.5))" }}>

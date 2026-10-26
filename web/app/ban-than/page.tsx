@@ -7,9 +7,11 @@ import { BanThan } from "./BanThan";
 
 const META: Metadata = {
   title: "Hồ sơ bản thân",
-  description: "Hồ sơ bản thân theo thần số học: số đường đời, sứ mệnh, linh hồn, nhân cách — mỗi số ba lớp: đã tính, diễn giải, tự soi.",
+  description: "Trang của bạn: bốn con số chủ đạo, nhịp ngày – tháng – năm cá nhân, bản đồ con số và lối tắt sang hợp đôi, huyền học.",
   alternates: { canonical: "/ban-than" },
-  openGraph: { title: "Hồ sơ bản thân", description: "Hồ sơ bản thân theo thần số học: số đường đời, sứ mệnh, linh hồn, nhân cách — mỗi số ba lớp: đã tính, diễn giải, tự soi.", url: "/ban-than" },
+  // Trang cá nhân (nội dung theo hồ sơ trên máy) — bài đọc công khai để index là /than-so.
+  robots: { index: false, follow: true },
+  openGraph: { title: "Hồ sơ bản thân", description: "Trang của bạn: bốn con số chủ đạo, nhịp ngày – tháng – năm cá nhân, bản đồ con số và lối tắt sang hợp đôi, huyền học.", url: "/ban-than" },
 };
 
 const DUONG = "/ban-than";
