@@ -125,7 +125,7 @@ export default async function ChinhSachRiengTu() {
             không hộp che cả trang, và im lặng không được coi là đồng ý. Mỗi đồng ý rút lại được ngay, không ảnh hưởng việc
             đã xử lý trước đó.</p>
           <Bang dau={["Đồng ý cho việc gì", "Bạn đồng ý bằng cách", "Rút lại bằng cách"]} dong={[
-            [<b key="a">Gửi họ tên, ngày giờ sinh đi tính</b>, "Lần đầu bấm xem ở form hồ sơ, nút ghi rõ \"Đồng ý và xem kết quả\" kèm 2–3 dòng nói dữ liệu đi đâu, không lưu. Trình duyệt chỉ nhớ bạn đã đồng ý bản nào, ngày nào; không gửi gì trước khi bạn bấm. Khi chính sách đổi cách xử lý, form hỏi lại", "Bấm \"Thu hồi\" ngay dưới form hồ sơ hoặc ở mục \"Dữ liệu của tôi\" trong Tài khoản — xoá luôn hồ sơ trên máy"],
+            [<b key="a">Gửi họ tên, ngày giờ sinh đi tính</b>, "Lần đầu bấm xem ở form hồ sơ, nút ghi rõ \"Đồng ý và xem kết quả\" kèm một dòng nói dữ liệu đi đâu, không lưu — bấm \"Chi tiết\" để đọc đủ. Trình duyệt chỉ nhớ bạn đã đồng ý bản nào, ngày nào; không gửi gì trước khi bạn bấm. Khi chính sách đổi cách xử lý, form hỏi lại", "Bấm \"Thu hồi\" ngay dưới form hồ sơ hoặc ở mục \"Dữ liệu của tôi\" trong Tài khoản — xoá luôn hồ sơ trên máy"],
             [<b key="b">Lưu hồ sơ vào tài khoản</b>, "Tích ô đồng ý rồi bấm \"Lưu vào tài khoản\" (ô không tích sẵn)", "\"Xoá hồ sơ khỏi tài khoản\" hoặc xoá tài khoản — hiệu lực ngay"],
             [<b key="c">Gửi ảnh nhà cho dịch vụ nhận diện</b>, "Tích ô đồng ý trước mỗi lần bấm \"Đọc ảnh\"", "Bỏ tích; ảnh không lưu nên không có gì để xoá thêm"],
             [<b key="d">Lưu ghi chú góp ý</b>, "Tích ô đồng ý khi gửi góp ý \"chưa đúng\"", "Ghi chú không gắn với bạn nên không gỡ riêng được; tự xoá sau 12 tháng"],

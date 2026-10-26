@@ -101,7 +101,7 @@ export function BanThan() {
             <Button variant="ghost" onClick={() => setSuaMo(true)}><Pencil aria-hidden /> Sửa hồ sơ</Button>
           </div>
           {/* Trục 2 UX: một dòng huy hiệu gần đầu trang (mục đầy đủ ở cuối trang). */}
-          <TomTatHuyHieu taiBanThan className="pt-1" />
+          <TomTatHuyHieu taiBanThan className="mt-1" />
         </div>
       </section>
 

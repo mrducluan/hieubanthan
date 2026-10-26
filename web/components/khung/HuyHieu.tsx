@@ -6,7 +6,7 @@
 //   Không doạ, không thúc, không đếm ngược.
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Award, BadgeCheck, CalendarCheck, Cloud, Compass, Flame, HeartHandshake, MessageCircle, Trophy, UserPlus, Users, type LucideIcon } from "lucide-react";
+import { ArrowRight, Award, BadgeCheck, ChevronDown, CalendarCheck, Cloud, Compass, Flame, HeartHandshake, MessageCircle, Trophy, UserPlus, Users, type LucideIcon } from "lucide-react";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import {
   CAU_BAN_CHAT, DANH_MUC, dangDiGanNhat, demDat, gopHuyHieu, huyHieuMay, nguyenLieuTienDo, tienDoHuyHieu,
@@ -41,10 +41,16 @@ function useHuyHieu(): KetQua | null {
 
 export function HuyHieu() {
   const kq = useHuyHieu();
+  // Đến từ link "/ban-than#huy-hieu" (Tài khoản): khối vẽ sau khi đọc trạng thái → trình duyệt chưa thấy neo lúc tải trang,
+  // nên cuộn tới khi khối đã có.
+  const coKq = Boolean(kq);
+  useEffect(() => {
+    if (coKq && location.hash === "#huy-hieu") document.getElementById("huy-hieu")?.scrollIntoView({ block: "start" });
+  }, [coKq]);
   if (!kq) return null;
   const dat = demDat(kq.ds);
   return (
-    <section aria-labelledby="muc-huy-hieu" className="scroll-mt-24" data-testid="huy-hieu">
+    <section id="huy-hieu" aria-labelledby="muc-huy-hieu" className="scroll-mt-24" data-testid="huy-hieu">
       <TieuDeMuc id="muc-huy-hieu" nho="Huy hiệu" lon={dat > 0 ? `Bạn đã có ${dat} dấu mốc` : "Những dấu mốc của riêng bạn"}
         mo_ta={kq.dangNhap ? "Dấu mốc theo tài khoản, kèm vài dấu mốc ghi trên máy này." : "Ghi trên máy này (chưa đăng nhập) — đổi máy hay xoá dữ liệu trình duyệt thì đếm lại."} />
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="huy-hieu-ds" data-dat={dat}>
@@ -88,14 +94,32 @@ export function TomTatHuyHieu({ taiBanThan = false, className }: { taiBanThan?: 
   if (!kq) return null;
   const dat = demDat(kq.ds);
   const di = dangDiGanNhat(kq.ds, kq.nl);
-  return (
-    <p className={`inline-flex flex-wrap items-center gap-x-1.5 text-sm text-fg-muted ${className ?? ""}`} data-testid="huy-hieu-tom-tat">
-      <Award className="size-4 text-gold" aria-hidden />
+  // Vòng thử v3 #14: CẢ dòng là một link dạng viên (thấy rõ bấm được, mũi tên xuống) — không dời khối huy hiệu lên đầu:
+  // người mới thường 0/4, đặt khối đầy đủ lên trên sẽ đẩy bốn con số (phần chính của trang) xuống thấp.
+  const chu = (
+    <>
+      <Award className="size-4 shrink-0 text-gold" aria-hidden />
       <span>Huy hiệu: {dat}/{kq.ds.length} dấu mốc</span>
       {di && <span data-testid="huy-hieu-dang-di">· đang đi “{DANH_MUC[di.ma].ten}” {di.co}/{di.can}</span>}
-      <Link href={taiBanThan ? "#muc-huy-hieu" : "/ban-than#muc-huy-hieu"} className="text-gold hover:underline">
-        {taiBanThan ? "Xem huy hiệu" : "Xem ở Bản thân"}
-      </Link>
-    </p>
+      <span className="inline-flex items-center gap-0.5 text-gold">
+        {taiBanThan ? "Xem chi tiết" : "Xem ở Bản thân"}
+        {taiBanThan ? <ChevronDown className="size-4" aria-hidden /> : <ArrowRight className="size-4" aria-hidden />}
+      </span>
+    </>
+  );
+  const lop = `inline-flex flex-wrap items-center gap-x-1.5 gap-y-0.5 rounded-2xl border border-gold/35 bg-gold/5 px-3 py-1.5 text-sm text-fg-muted transition-colors hover:border-gold hover:text-fg ${className ?? ""}`;
+  if (!taiBanThan) return <Link href="/ban-than#huy-hieu" className={lop} data-testid="huy-hieu-tom-tat">{chu}</Link>;
+  return (
+    <a href="#huy-hieu" className={lop} data-testid="huy-hieu-tom-tat"
+      onClick={(e) => {
+        const dich = document.getElementById("huy-hieu");
+        if (!dich) return;
+        e.preventDefault();
+        const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+        dich.scrollIntoView({ behavior: giam ? "auto" : "smooth", block: "start" });
+        history.replaceState(null, "", "#huy-hieu");
+      }}>
+      {chu}
+    </a>
   );
 }

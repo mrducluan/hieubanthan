@@ -56,20 +56,22 @@ export default async function TrangChu() {
       {/* UI-HERO: cột trái = lời giới thiệu + ô vào (form/chào lại), cột phải = vòng số lớn có chuyển động → hai cột
           cao gần bằng nhau, không còn khoảng trống trên/dưới thẻ. Dưới lg (điện thoại, máy tính bảng dọc): một cột chữ → ô vào
           → hình (768px chia hai cột thì cột chữ quá hẹp, hình nhỏ giữa khoảng trống lớn). */}
-      <section className="relative grid items-center gap-8 md:pt-6 lg:grid-cols-[1.05fr_1fr] lg:gap-10" data-testid="hero">
+      {/* v3 M10: máy tính (≥ lg) bớt khoảng đệm trên + khoảng cách giữa các dòng để nút "Đồng ý và xem kết quả" lọt trọn
+          màn hình đầu 1440×900; điện thoại giữ nguyên (các lớp lg: không chạm cỡ nhỏ). */}
+      <section className="relative grid items-center gap-8 md:pt-6 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:pt-0" data-testid="hero">
         <div>
           <p className="eyebrow flex items-center gap-2 !text-xs !tracking-[0.1em] !text-fg-muted sm:!tracking-[0.18em]"><Sparkles className="size-3.5 shrink-0 text-gold" aria-hidden /> {c("dau.nhan_tren")}</p>
-          <h1 className={`mt-3 leading-[1.08] sm:mt-4 ${layCo(CO_TRANG_CHU.h1, c("co.h1"))}`}>
+          <h1 className={`mt-3 leading-[1.08] sm:mt-4 lg:mt-3 ${layCo(CO_TRANG_CHU.h1, c("co.h1"))}`}>
             {nd.dau.h1 && nd.dau.h1 !== H1_MAC_DINH
               ? <ChuNhan chu={nd.dau.h1} lopNhan="text-gradient-gold italic" />
               : <>Bạn là <span className="text-gradient-gold italic">số mấy?</span></>}
           </h1>
           {/* TC-HOOK: 3 giây đầu — một điểm mù rất đời thường của từng con số → người xem nhận ra mình/người quen
               → muốn biết số của mình. Lời dẫn nói rõ nhận được gì, mất bao lâu. */}
-          <DiemMuLuot className="mt-4 max-w-xl sm:mt-5" co={layCo(CO_TRANG_CHU.diemMu, c("co.diem_mu"))} nhan={c("diem_mu.nhan")}
+          <DiemMuLuot className="mt-4 max-w-xl sm:mt-5 lg:mt-4" co={layCo(CO_TRANG_CHU.diemMu, c("co.diem_mu"))} nhan={c("diem_mu.nhan")}
             cau={Array.from({ length: SO_DIEM_MU }, (_, i) => c(`diem_mu.cau_${i + 1}`))} />
-          <LoiDanCms nd={nd} className="mt-3 max-w-xl text-base leading-snug text-fg-muted sm:mt-4 sm:text-lg sm:leading-normal" lopNhan="text-cinnabar" />
-          <ul className={`mt-4 hidden flex-wrap gap-2 text-fg-muted sm:mt-5 sm:flex ${layCo(CO_TRANG_CHU.chip, c("co.chip"))}`} aria-label="Điểm khác biệt" data-testid="hero-diem">
+          <LoiDanCms nd={nd} className="mt-3 max-w-xl text-base leading-snug text-fg-muted sm:mt-4 sm:text-lg sm:leading-normal lg:mt-3" lopNhan="text-cinnabar" />
+          <ul className={`mt-4 hidden flex-wrap gap-2 text-fg-muted sm:mt-5 sm:flex lg:mt-4 ${layCo(CO_TRANG_CHU.chip, c("co.chip"))}`} aria-label="Điểm khác biệt" data-testid="hero-diem">
             {/* Trục 2 UX: điện thoại ẩn ba chip (nhắc lại lời dẫn; "không cần tài khoản" đã ở ngay dưới nút) → nút
                 "Đồng ý và xem kết quả" lọt màn đầu 390×844, trên thanh tab dưới. */}
             {([[Zap, "text-jade", c("dau.chip_1")], [Eye, "text-gold", c("dau.chip_2")], [ListChecks, "text-moon", c("dau.chip_3")]] as const).map(([Icon, mau, chu]) => (
@@ -78,7 +80,7 @@ export default async function TrangChu() {
               </li>
             ))}
           </ul>
-          <div className="mt-5 max-w-xl sm:mt-7"><CuaVao /></div>
+          <div className="mt-5 max-w-xl sm:mt-7 lg:mt-5"><CuaVao /></div>
         </div>
         <div className="relative">
           <div className="pointer-events-none absolute inset-[8%] rounded-full bg-gold/10 blur-3xl" aria-hidden />
