@@ -9,7 +9,7 @@
 --       còn ngày nghỉ không).
 --   (2) Huy hiệu thành tựu: huy_hieu_cua_toi() tính từ dữ liệu SẴN CÓ, KHÔNG bảng mới, KHÔNG ghi gì: chuoi_7 / chuoi_30
 --       (chuoi_ngay.dai_nhat), da_luu_ho_so (ho_so), hoi_3 (dem_hoi_tai_khoan ≥ 3, nếu bảng có), moi_1 / moi_5
---       (gioi_thieu mình là người mời), hoi_vien (chỉ khi hàm hoi_vien_hieu_luc() tồn tại — to_regprocedure, nhánh khác
+--       (gioi_thieu mình là người mời), hoi_vien (chỉ khi hàm hoi_vien_hieu_luc(uuid) của 0028 tồn tại — to_regprocedure, nhánh khác
 --       đang làm). Trả [{ma, dat, luc}] — luc = ngày đạt khi suy được, không thì null. Tên / mô tả / biểu tượng ở web
 --       (web/lib/huy-hieu.ts): huy hiệu không mua bán, không giá trị tiền, không đổi ra Sao.
 -- Chạy SAU 0027. Không đụng bảng nào của 0028 / 0029. Rollback: 0030_chuoi_huy_hieu.down.sql
@@ -99,9 +99,10 @@ begin
     if to_regclass('public.dem_hoi_tai_khoan') is not null then
         execute 'select so, cap_nhat_luc from public.dem_hoi_tai_khoan where user_id = $1' into v_hoi, v_hoi_luc using v_uid;
     end if;
-    if to_regprocedure('public.hoi_vien_hieu_luc()') is not null then
+    -- 0028: hoi_vien_hieu_luc(p_uid uuid default null) — dò đúng chữ ký (uuid); hỏi về chính mình.
+    if to_regprocedure('public.hoi_vien_hieu_luc(uuid)') is not null then
         begin
-            execute 'select public.hoi_vien_hieu_luc()::text' into v_hv_txt;
+            execute 'select public.hoi_vien_hieu_luc($1)::text' into v_hv_txt using v_uid;
             -- boolean → 'true'/'t'; jsonb → đọc cờ hieu_luc / dat / con_hieu_luc nếu có.
             if v_hv_txt in ('t', 'true') then v_hv := true;
             elsif v_hv_txt like '{%' then

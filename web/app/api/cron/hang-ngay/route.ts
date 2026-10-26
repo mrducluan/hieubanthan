@@ -3,7 +3,7 @@
 // /api/cron/don-du-lieu-hoc.
 import { NextResponse } from "next/server";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
-import { donDuLieuHoc, dungKhoaCron, guiNhacNgay } from "@/lib/cron";
+import { capSaoHoiVien, donDuLieuHoc, dungKhoaCron, guiNhacNgay } from "@/lib/cron";
 
 export const maxDuration = 60;
 
@@ -13,5 +13,6 @@ export async function GET(req: Request) {
   if (!dv) return NextResponse.json({ error: "Chưa cấu hình" }, { status: 503 });
   const don = await donDuLieuHoc(dv);   // dọn trước: cam kết xoá đúng hạn không phụ thuộc gửi nhắc chậm
   const nhac = await guiNhacNgay(dv);
-  return NextResponse.json({ nhac, don: don.ket_qua }, { status: don.ok ? 200 : 502 });
+  const hoi_vien = await capSaoHoiVien(dv);   // SAO-HV: Sao tháng cho hội viên chưa mở trang trong tháng
+  return NextResponse.json({ nhac, don: don.ket_qua, hoi_vien }, { status: don.ok ? 200 : 502 });
 }

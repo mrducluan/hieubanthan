@@ -6,6 +6,7 @@ import { apDungSeo, layNoiDungTrang, ngayHienThi } from "@/lib/noi-dung-trang";
 import Link from "next/link";
 import { TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 import { DANG_CAP_NHAT, vanHanh } from "@/lib/van-hanh";
+import { HOAN_TIEN_HOI_VIEN } from "@/lib/thanh-toan/hoi-vien";
 
 const META: Metadata = {
   title: "Điều khoản sử dụng",
@@ -69,6 +70,24 @@ export default async function DieuKhoan() {
           <li><b>Tặng lần nạp đầu</b> (khi chương trình đang bật): Sao cộng thêm cho lần nạp đầu tiên là <b>Sao tặng</b> (hạn 365 ngày), chỉ một lần mỗi tài khoản, và bị thu hồi nếu đơn nạp đầu đó được hoàn tiền.</li>
           <li><b>Hoàn tiền:</b> nạp nhầm gói hoặc nạp trùng mà chưa dùng số Sao đó, gửi mã đơn qua trang Liên hệ trong 7 ngày → hoàn qua chuyển khoản, Sao của đơn bị trừ lại. Lỗi hệ thống (đã trả tiền mà không nhận Sao) được cộng bù hoặc hoàn tiền.</li>
           <li>Chúng tôi không lưu số thẻ hay thông tin tài khoản ngân hàng của bạn; cổng thanh toán xử lý việc đó.</li>
+        </ul>
+      ),
+    },
+    {
+      id: "hoi-vien", tieuDe: "Hội viên năm",
+      noiDung: (
+        <ul>
+          <li><b>Hội viên năm</b> (khi đang mở bán) là gói trả <b>một lần</b> bằng đồng, có hiệu lực 365 ngày kể từ ngày thanh
+            toán thành công. <b>Không tự gia hạn</b>, không trừ tiền định kỳ; hết hạn bạn tự quyết có gia hạn hay không (gia hạn
+            mở khi còn 30 ngày trở xuống và nối tiếp hạn hiện tại).</li>
+          <li><b>Quyền lợi</b> trong thời hạn: mở mọi chương Luận giải toàn bộ (Tử vi, Bát tự, Bản đồ con số) không trừ Sao; một
+            số Sao tặng mỗi tháng theo mức đang công bố — cấp một lần mỗi tháng, dùng trong tháng đó, <b>không cộng dồn</b>; và
+            một số lượt hỏi chuyên gia mỗi năm theo mức đang công bố (dùng khi mục đó mở; lượt chưa dùng không cộng dồn sang năm
+            sau). Mức cụ thể ghi trên trang Hội viên lúc mua; thay đổi mức sau đó không làm giảm quyền lợi của thời hạn đã mua.</li>
+          <li>Hội viên gắn với tài khoản, không chuyển nhượng. Sao vẫn là điểm dùng nội bộ như mục <Link href="#sao" className="text-gold underline">Sao</Link>.</li>
+          <li><b>Hoàn tiền hội viên:</b>
+            <ul>{HOAN_TIEN_HOI_VIEN.map((t) => <li key={t}>{t}</li>)}</ul>
+            Sau khi hoàn, quyền hội viên chấm dứt ngay; Sao bạn đã mua riêng vẫn giữ nguyên.</li>
         </ul>
       ),
     },

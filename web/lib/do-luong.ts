@@ -39,7 +39,9 @@ export type SuKien =
   // "Hẹn với chính mình" đặt / đạt (ngay = số ngày mục tiêu 7 / 30, không phải ngày tháng)
   | "streak_freeze_used" | "badge_earned" | "daily_card_flipped" | "self_goal_set" | "self_goal_reached"
   // ĐY-1: đồng ý / thu hồi đồng ý xử lý dữ liệu trên form hồ sơ — chỉ mã bản đồng ý (phien_ban), không gì khác
-  | "consent_given" | "consent_withdrawn";
+  | "consent_given" | "consent_withdrawn"
+  // SAO-HV: hội viên năm kích hoạt (trang kết quả, mỗi đơn một lần) — chỉ kind, không số tiền; checkout_started{kind: hoi_vien}
+  | "membership_activated";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {

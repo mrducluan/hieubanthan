@@ -8,7 +8,9 @@ import { ghi } from "@/lib/do-luong";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { QUAY_VE } from "@/lib/sao-client";
 
-type Don = { ma_don: number; sao: number; so_tien: number; trang_thai: string };
+type Don = { ma_don: number; sao: number; so_tien: number; trang_thai: string; loai?: string };
+/** SAO-HV (0028): đơn hội viên năm trả xong → về thẻ hội viên ở Tài khoản (không có Sao để "nhận"). */
+const laHoiVien = (d: Don | null) => d?.loai === "hoi_vien";
 const HOI_TOI_DA = 100; // ~5 phút, 3 giây/lần
 
 export function KetQua() {
@@ -44,7 +46,10 @@ export function KetQua() {
         const k = `nap:da-ghi:${d.ma_don}`;
         let daGhi = false;
         try { daGhi = localStorage.getItem(k) === "1"; localStorage.setItem(k, "1"); } catch { /* bỏ qua */ }
-        if (!daGhi) ghi("payment_succeeded", { so_sao: d.sao });
+        if (!daGhi) {
+          ghi("payment_succeeded", { so_sao: d.sao, kind: d.loai ?? "sao" });
+          if (d.loai === "hoi_vien") ghi("membership_activated", { kind: "hoi_vien" });
+        }
         return;
       }
       if (d.trang_thai !== "cho" || dung) return;
@@ -60,7 +65,11 @@ export function KetQua() {
   const huy = p.get("huy") === "1";
   return (
     <div className="glass mt-8 space-y-4 rounded-2xl p-6" data-testid="ket-qua-nap" data-trang-thai={don.trang_thai}>
-      {don.trang_thai === "da_tra" ? (
+      {don.trang_thai === "da_tra" && laHoiVien(don) ? (
+        <><CheckCircle2 className="mx-auto size-10 text-jade" aria-hidden />
+          <p className="text-lg text-fg" data-testid="hoi-vien-kich-hoat">Hội viên năm đã kích hoạt. Cảm ơn bạn!</p>
+          <p className="text-sm text-fg-muted">Mọi chương Luận giải toàn bộ đã mở cho bạn; Sao tặng hằng tháng và lượt hỏi chuyên gia xem ở thẻ hội viên trong Tài khoản. Mua một lần, không tự gia hạn.</p></>
+      ) : don.trang_thai === "da_tra" ? (
         <><CheckCircle2 className="mx-auto size-10 text-jade" aria-hidden />
           <p className="text-lg text-fg">Đã nhận {don.sao} Sao. Cảm ơn bạn!</p></>
       ) : don.trang_thai === "cho" && !huy ? (
@@ -75,8 +84,12 @@ export function KetQua() {
         {quayVe && don.trang_thai === "da_tra" && (
           <Button asChild data-testid="quay-ve"><Link href={quayVe}>Quay lại xem tiếp</Link></Button>
         )}
-        <Button asChild variant={quayVe && don.trang_thai === "da_tra" ? "secondary" : undefined}><Link href="/tai-khoan#sao">Xem ví Sao</Link></Button>
-        <Button asChild variant="secondary"><Link href="/nap-sao">Nạp thêm</Link></Button>
+        {laHoiVien(don) ? (
+          <Button asChild variant={quayVe && don.trang_thai === "da_tra" ? "secondary" : undefined}><Link href="/tai-khoan#hoi-vien">Xem thẻ hội viên</Link></Button>
+        ) : (<>
+          <Button asChild variant={quayVe && don.trang_thai === "da_tra" ? "secondary" : undefined}><Link href="/tai-khoan#sao">Xem ví Sao</Link></Button>
+          <Button asChild variant="secondary"><Link href="/nap-sao">Nạp thêm</Link></Button>
+        </>)}
       </div>
     </div>
   );
