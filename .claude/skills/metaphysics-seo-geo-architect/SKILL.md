@@ -1,142 +1,66 @@
 ---
 name: metaphysics-seo-geo-architect
-description: Build Cross-System Hybrid (Eastern and Western Metaphysics) SEO, AEO, and GEO content clusters, Question-Intense and Pain-Point intent matrices, semantic briefs, human-voice articles, and Wikidata JSON-LD schemas. Use when the user asks to plan, research, map keywords, write, or audit articles in Tu Vi, BaZi, I Ching, Feng Shui, Natal Chart, Astrology, Tarot, or Numerology for Google Search, AI Overviews, ChatGPT, and Perplexity citations.
+description: Plans, writes, audits and refreshes SEO, AEO and GEO content for Eastern and Western metaphysics sites (Tử vi, Bát tự, Kinh Dịch, phong thuỷ, thần số học, chiêm tinh, tarot) - keyword and question-intent matrices, anti-cannibalization topic clusters, content briefs, Vietnamese articles with direct-answer blocks and comparison tables, Article/FAQ JSON-LD, and an automated QC pass. Use whenever the user asks to plan a topic cluster, map keywords or search intent, write or rewrite a horoscope, fortune or feng shui article for Google, AI Overviews, ChatGPT or Perplexity, check content for AI cliches or fear-mongering, or generate schema markup, including Vietnamese requests such as "lập cụm chủ đề", "ma trận từ khoá", "viết bài SEO tử vi", "audit bài thần số học", "trùng ý định tìm kiếm", even when SEO is not mentioned explicitly.
 ---
 
-# Metaphysics SEO & GEO Architect
+# Metaphysics SEO, AEO & GEO Architect
 
-Design and execute end-to-end SEO, AEO (Answer Engine Optimization), and GEO (Generative Engine Optimization) workflows for Eastern and Western Metaphysics (Huyền học Đông - Tây). This skill combines academic E-E-A-T verification with a **Pain-Point & Question-Intense Matrix** and a **Cross-System Hybrid Matrix** to capture long-tail organic traffic and AI citations while maintaining natural human rhythm (high burstiness and perplexity).
+Build content that search engines and AI answer engines can rank and cite, for sites about Eastern and Western metaphysics. Output language follows the site (Vietnamese by default); these instructions are in English so any agent can follow them.
 
-## When to Use
+## Principles (read once, they explain every rule below)
 
-- Planning topical authority clusters, keyword mappings, or internal linking matrices for Eastern metaphysics (Tử Vi Đẩu Số, Bát Tự / Tứ Trụ, Kinh Dịch, Phong Thủy, Nhân Tướng) or Western metaphysics (Natal Chart, Transit Astrology, Tarot, Numerology / Thần số học).
+- **Helpful and verifiable beats clever.** Ranking and AI citation are consequences of an answer that is correct, specific and easy to lift out. Google does not penalise AI-assisted text as such; it penalises scaled, unhelpful, unoriginal text. So never optimise to "beat AI detectors" - detectors are unreliable. Vary rhythm because it reads better.
+- **One URL owns one search intent.** Two pages for the same intent compete with each other. Decide the intent first, the keyword second.
+- **No invented facts.** Chart facts (Can Chi, Ngũ hành, star brightness, planetary cycles) are checkable; SERP gaps, search volumes and Wikidata IDs are only real if you looked them up. Anything not verified is labelled `unverified`, never stated as fact.
+- **Metaphysics is a symbolic reading, not a forecast.** No fear-mongering, no guarantees, no diagnoses. Frame hard configurations as energy that needs the right channel. This is also a YMYL-safety rule.
 
-- Generating **Pain-Point & Question-Intense** long-tail keyword matrices covering multi-layered user questions (Who, What, Why, When, How, What-if comparisons, Verification).
+## Step 0 - Intake (ask only for what is missing)
 
-- Writing or auditing deep, academic, yet empathetic metaphysics articles optimized for Google AI Overviews, ChatGPT Search, and Perplexity RAG citations without triggering AI-detection patterns.
+Collect: site/domain and language; target audience; existing URLs (sitemap or list) so new pages do not cannibalise old ones; real author and reviewer identities (if none, publish as the editorial team - never invent a credentialed expert); available data (Search Console queries, analytics); whether live web search is available. If the user gives none of this, state your assumptions in one short list and continue.
 
-- Building JSON-LD Knowledge Graph schemas (Article, FAQPage, about, mentions with Wikidata URIs) and running automated QA/fact-checking gates.
+## Pick one mode
 
-## Core Methodology: Cross-System Hybrid & Question-Intense Matrix
+| User wants | Mode | Read |
+|---|---|---|
+| New topic cluster / keyword plan | **A. Plan** | `references/matrix.md` |
+| One page written or rewritten | **B. Write** | `references/article.md`, `references/onpage-schema.md` |
+| Check existing page(s) | **C. Audit** | `references/qc.md` |
+| Update an aging page | **D. Refresh** | `references/maintenance.md` |
 
-### 1. The Dual-Core Keyword Formula (Pain-Point + Question-Intense)
+Do one mode at a time and show the result before the next. A 5-page cluster is a plan first; write pages one by one after the user confirms the matrix. Writing all five articles in a single reply produces thin, repetitive pages.
 
-Never target generic head terms alone (e.g., "Sao Thái Tuế là gì"). Extract high-intent queries using two complementary engines:
+## A. Plan a cluster
 
-- **Formula A (Pain-Point Driven):** \[Metaphysics Entity\] + \[Timing / Life Stage / Transit\] + \[Specific Life Crisis (Career, Marriage, Finance, Turning Point)\]
+1. Build the 7-column intent matrix for 1 hybrid hub + 2 Eastern spokes + 2 Western spokes (columns and formulas in `references/matrix.md`).
+2. Run `scripts/check_cannibalization.py` on the matrix (and on the existing-URL list). Merge or re-scope every pair it flags.
+3. For each URL write a short brief: intent, H1/H2/H3 outline where each heading answers one real question, the table to build, entities and sources to cite, internal links in and out.
+4. SERP gaps: if you can search the web, look at the current top results and name 3 concrete gaps. If you cannot, write them as hypotheses marked `unverified - check SERP`.
 
-- **Formula B (Question-Intense Matrix - 6 Question Layers):** Users ask relentless, multi-dimensional questions about metaphysics. Every cluster must map across 6 question archetypes:
+## B. Write one page
 
-  1.  **Mechanistic / Academic (Why & How it works):** Why does this star/aspect create this effect according to classical texts (*Tử Vi Đẩu Số Toàn Thư*, *Uyên Hải Tử Bình*, *Ptolemy/Jungian Astrology*)?
+Follow `references/article.md`. Required shape: a vivid opening scenario, the first H2 followed by a bold 40-60 word direct answer, at least one multi-variable comparison table, a dedicated cross-system bridge (analogy, not equivalence), concrete actions, 3-5 edge-case FAQs, sources, and internal links. Then package on-page elements and JSON-LD (`references/onpage-schema.md`).
 
-  2.  **Conditional / Combinatorial (What-if):** What happens when Entity A meets Modifier B (e.g., Đắc địa vs Hãm địa, Tuần vs Triệt, Retrograde vs Direct, Upright vs Reversed)?
+## Quality gate (every mode that produces or reviews a page)
 
-  3.  **Timing & Forecasting (When):** Which specific age milestone, Đại vận, Lưu niên, or Planetary Transit triggers the event?
+1. Run `python scripts/seo_geo_qc_validator.py page.md --keyword "<primary keyword>"` (front matter may carry `title`, `meta_title`, `meta_description`, `slug`).
+2. Fix every FAIL, read every WARN, re-run until no FAIL. Exit code 0 means no FAIL.
+3. Do the manual fact-check list in `references/qc.md`; the script cannot check astrology or Tử vi facts.
+4. Generate schema only after the text is final: `python scripts/schema_generator.py --spec spec.json`.
 
-  4.  **Comparative / Cross-Verification (Vs):** How does this Eastern configuration compare to a similar Western aspect or another star group?
+## Scripts (Python 3.9+, standard library only)
 
-  5.  **Symptom & Diagnostic (Sign recognition):** What real-life events or psychological states prove this configuration is active?
+| Script | Purpose |
+|---|---|
+| `scripts/seo_geo_qc_validator.py` | Structure, direct answer, clichés, fear-mongering, FAQ, links, meta/slug, rhythm |
+| `scripts/check_cannibalization.py` | Flags page pairs that share one search intent, diacritics-insensitive |
+| `scripts/schema_generator.py` | WebPage + Article + FAQPage + BreadcrumbList JSON-LD; only verified Wikidata links |
 
-  6.  **Remedial & Behavioral (Actionable How-to):** How to transform the energy through career choice, mindset, or timing without superstitious fear-mongering?
+Run `python scripts/<name> --help` for options. `python -m unittest discover tests` runs the self-tests.
 
-### 2. Cross-System Entity Bridge (Information Gain for GEO)
+## Gotchas
 
-LLM retrieval engines prioritize sources that connect distinct knowledge graphs. Every cluster pairs **1 Hybrid Pillar Hub** with **Eastern Spokes** and **Western Spokes**, weaving a dedicated **Cross-System Entity Bridge** section inside each article (e.g., correlating *Đại vận thứ 3 / Triệt lộ tháo gỡ tuổi 30* in Tử Vi with *Saturn Return at age 29.5* in Western Astrology).
-
-### 3. Human Voice Architecture (Empathy - Breakdown - Transformation)
-
-- **Tone of Voice:** Blend an erudite scholar (exacting Five Elements, Yin-Yang, planetary degrees, classical citations) with a grounded psychological advisor (empathetic, constructive, anti-superstition).
-
-- **Rhythm (Burstiness & Perplexity):** Alternate short, punchy 6-to-10-word sentences or rhetorical questions with rigorous 30-to-45-word analytical sentences.
-
-- **Forbidden LLM Clichés:** Strictly ban robotic transitions and filler phrases (*"Trong bức tranh toàn cảnh"*, *"Trong thời đại ngày nay"*, *"Hãy cùng khám phá"*, *"Tóm lại"*, *"Không chỉ... mà còn"*).
-
-## Autonomous 6-Step Execution Workflow
-
-Execute all 6 steps sequentially unless the user requests a specific milestone. Refer to examples/sample_cluster_execution.md for expected depth and formatting.
-
-### Step 1: Question-Intense & Pain-Point Intent Matrix (Anti-Cannibalization)
-
-Build a 7-column Markdown table for a 5-article Micro-Cluster (1 Hybrid Hub + 2 Eastern Spokes + 2 Western Spokes):
-
-1.  **Silo / System:** Eastern, Western, or Cross-System Hybrid.
-
-2.  **Tier:** Pillar (Hub) or Spoke.
-
-3.  **Primary Intent Signature:** The single unique user intent owned by the URL. If two queries share the same signature, merge them into one URL.
-
-4.  **Evergreen Target URL & Primary KW:** Static URL slug without year numbers + Primary Keyword built from Formula A/B.
-
-5.  **Question-Intense Pool (6 Layers):** Map concrete user questions across Conditional, Timing, Comparative, and Remedial layers.
-
-6.  **Semantic Entities:** Mandatory domain entities and classical texts to cite.
-
-7.  **Contextual Internal Link Flow:** Exact In/Out links and natural contextual anchor texts bridging Eastern and Western spokes.
-
-### Step 2: SERP/AIO Gap Analysis & Semantic/GEO Content Brief
-
-- Identify 3 specific gaps in current Top 10 results (e.g., superficial copy-pasting of ancient verses, missing modern career/relationship context, lack of conditional modifiers).
-
-- Outline H1/H2/H3 structure integrating the **Question-Intense Matrix** so every H2/H3 directly answers a high-intent user question.
-
-- Reserve a **40-to-60-word Direct Answer Block** immediately beneath the primary H2 for Google AI Overviews and Perplexity extraction.
-
-- Design at least one **Multi-Variable Comparison Table** (e.g., *Đắc địa vs Hãm địa x Tuần vs Triệt*, or *Natal House vs Transit Impact*) to maximize RAG citation probability.
-
-### Step 3: Deep Human-Voice Article Production
-
-Write the complete article (1,800 to 2,500+ words) following the brief:
-
-- **Opening Hook:** Start with a vivid, relatable real-life scenario or question-intense dilemma rather than a generic definition.
-
-- **Academic Breakdown:** Explain the underlying metaphysics mechanism accurately (Yin-Yang, Five Elements, Ten Gods, Planetary Aspects, Jungian archetypes).
-
-- **Cross-System Entity Bridge:** Include a dedicated H2/H3 comparing the Eastern mechanism with its Western counterpart and placing a contextual internal link.
-
-- **Actionable Transformation:** Provide concrete behavioral, psychological, and career/relationship strategies.
-
-- **Question-Intense FAQ Section:** Answer 3 to 5 hyper-specific edge-case questions at the end of the article.
-
-### Step 4: On-Page Packaging & Semantic Knowledge Graph Schema
-
-- Deliver optimized **URL Slug**, **Meta Title (less than 60 chars)**, **Meta Description (less than 155 chars)**, and **Infographic Alt Text** rich in semantic entities.
-
-- Generate valid **JSON-LD Schema** combining Article, FAQPage, ReviewedBy, and about/mentions linked to **Wikidata URIs** (run or reference scripts/schema_generator.py).
-
-### Step 5: Automated 4-Gate Self-QC & Fact-Checking
-
-Before presenting the output, verify the draft against 4 strict gates (can be automated via scripts/seo_geo_qc_validator.py):
-
-1.  **Academic Fact-Check Gate:** Verify Five Elements (Ngũ hành), Star states (Đắc/Hãm), Stem-Branch (Can Chi) accuracy, and planetary orbital cycles. Zero hallucination allowed.
-
-2.  **Human Voice & Anti-AI Gate:** Confirm zero banned LLM clichés, strong sentence length variation (burstiness), and constructive tone.
-
-3.  **AEO/GEO Structural Gate:** Verify the 40-to-60-word bold Direct Answer block under the first H2, structured Markdown comparison table, and Cross-System Bridge.
-
-4.  **Anti-Cannibalization & Question Coverage Gate:** Confirm strict adherence to the URL's Intent Signature and full coverage of the Question-Intense pool.
-
-### Step 6: Evergreen AI Refresh Protocol (Anti-Content Decay)
-
-Document the maintenance rule for the URL: keep the URL slug timeless (no year numbers) and schedule a quarterly/annual 5% refresh targeting the **Timing/Transit FAQ** and adding new user query edge cases from Google Search Console while preserving 95% of the core academic authority.
-
-## Gotchas & Pitfalls to Avoid
-
-- **Never mix systems haphazardly:** Keep the core 80% of an Eastern Spoke strictly faithful to Eastern classical theory; confine the Western comparison to the dedicated 20% **Cross-System Entity Bridge** section so keyword relevance remains laser-focused.
-
-- **Avoid fatalistic fear-mongering:** Never tell users their chart means "divorce is guaranteed" or "bankruptcy is unavoidable." Frame challenging stars/cards as high-voltage energy requiring the right channel.
-
-- **Do not write bloated Direct Answer blocks:** Keep the AEO definition block strictly between 40 and 60 words so AI Overviews can extract it verbatim without truncation.
-
-## Lưu ý khi dùng cho HieuBanThan (hieuban.com)
-
-Phần này chỉ áp dụng khi viết hoặc audit nội dung cho dự án HieuBanThan. Khi xung đột với các mục phía trên, quy tắc dự án (CLAUDE.md) thắng.
-
-- **Không khai người thẩm định cho bài chưa đọc duyệt.** `scripts/schema_generator.py` gắn sẵn `reviewedBy` ("Hội Đồng Thẩm Định…") và `jobTitle` cho mọi bài. Trên hieuban.com phải bỏ hai trường này, trừ bài đã có trong `engine/app/kb/data/tham_dinh.json`. Bài chưa thẩm định ghi "Ban biên tập Hiểu Bản Thân · Chủ biên Đức Luân" (EEAT-1, DX-1). Tuyệt đối không ghi chuyên gia là tác giả bài họ chưa đọc.
-- **Chỉ 5 mảng có engine và KB:** Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ. Chiêm tinh phương Tây và Tarot chưa có phép tính nào. Phần "Cross-System Entity Bridge" với hai mảng này chỉ được nêu khái niệm chung, không đưa số liệu, vị trí sao hay lá bài như thể hệ thống đã tính.
-- **Số liệu tính toán lấy từ engine, không tự suy.** Can chi, nạp âm, độ sáng sao, đại vận, đường đời… phải khớp kết quả engine (một bộ tính duy nhất). Không bịa năm hay tuổi ứng nghiệm.
-- **Giọng văn:** đời thường, câu ngắn, thuật ngữ đặt ở phần giải thích. Không dọa, không phán hung, không "chắc chắn ly hôn / phá sản". Không bệnh tật, chẩn đoán, sống chết; nói sức khoẻ thì kèm câu "không thay lời bác sĩ". Danh sách cụm cấm "giọng AI" nằm ở `cum_cam` trong KB; validator của skill chỉ bắt một phần.
-- **Không lộ bí mật kinh doanh (BM-1):** không nêu tên thư viện, bộ đối chiếu, nhà cung cấp hạ tầng hay phiên bản engine trong bài. Nguồn ghi kiểu sách / trường phái.
-- **Không so sánh trực tiếp tên sản phẩm của hãng khác.** Muốn so thì nói "nhóm chatbot AI đa năng", không nêu tên.
-- **Giới hạn SEO của dự án:** title ≤ 70 ký tự kể cả hậu tố, description ≤ 170, đúng 1 H1. Skill này đặt ngưỡng chặt hơn (title < 60, description < 155) nên cứ theo skill là đủ. Bản đã viết xong phải qua `web/scripts/kiem-tra-seo.mjs` (0 lỗi) và chạy `scripts/seo_geo_qc_validator.py` trước khi đưa người duyệt.
-- **URL theo silo mảng (QH-URL):** slug gợi ý trong ma trận phải đặt dưới trang công cụ của mảng (vd `/tu-vi/…`, `/bat-tu/…`, `/than-so/…`), không dùng `/kien-thuc/{cụm}` kiểu cũ. Bài blog đi qua CMS, kiểm định chặn xuất bản khi vướng vùng cấm.
-- **Mục tiêu tăng trưởng:** mỗi cụm bài nên ghi rõ đẩy khâu nào của vòng (thu hút → quay lại → mời bạn → nạp Sao) và đo bằng chỉ số nào (`docs/MUC-TIEU-TANG-TRUONG.md`).
+- Do not let the Western half take over an Eastern page: keep about 80% inside the Eastern system and confine the Western comparison to the bridge section.
+- Do not copy classical verses at length; quote at most a line with the source named, and explain it in plain words.
+- Keep the direct answer self-contained and between 40 and 60 words; longer gets truncated, shorter lacks substance.
+- Evergreen slugs carry no year; put time-bound material (lưu niên, transits) in a clearly dated section.
+- If the project has its own rules (banned phrases, reviewer records, URL structure), they override this file. HieuBanThan's are in `references/hieubanthan.md`.

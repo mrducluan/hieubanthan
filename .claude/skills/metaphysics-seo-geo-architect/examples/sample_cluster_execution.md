@@ -1,5 +1,7 @@
 # Example: Cross-System Hybrid & Question-Intense Matrix Execution
 
+> Illustrative sample of a Plan-mode result. URLs, anchors and entities are fictional; the question pools show the *shape* of a good matrix. Real plans must record the source of each question (`gsc`, `paa`, `forum`, `serp`, `inferred`) as described in `references/matrix.md`.
+
 ## 1. Question-Intense & Pain-Point Formula (6 Question Layers)
 
 When building a topic cluster or article brief in Eastern/Western Metaphysics, map user search behavior across both **Life Pain-Points** and the **6 Question-Intense Layers**:
