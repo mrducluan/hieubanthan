@@ -133,3 +133,26 @@ Theo nghiên cứu (khớp hiểu biết của em, nhưng **cần anh/luật sư
 Em đề xuất: cập nhật **chú thích code + tài liệu nội bộ** sang luật mới (rủi ro thấp, làm được ngay), còn **văn bản
 pháp lý công khai** (Điều khoản, Chính sách riêng tư) chỉ sửa sau khi anh xác nhận, vì đó là khẳng định luật với người
 dùng.
+
+## 9. Ba cách tiếp cận cho 3 ý kinh doanh đã duyệt (2026-10-26) — chấm và chọn
+
+Ba ý chủ dự án duyệt: (1) hội viên năm VND + Sao/tháng · (2) "Hỏi chuyên gia" trả lời văn bản giá VND · (3) thiết kế lần
+nạp đầu. Ba cách tiếp cận = ba thứ tự triển khai khác nhau:
+
+| | **A. Nạp đầu trước** | **B. Hội viên trước** | **C. Chuyên gia trước** |
+|---|---|---|---|
+| Làm gì trước | Gói khởi đầu vừa 1 báo cáo + tặng Sao lần nạp đầu + ghi VND cạnh Sao | Bảng hội viên năm, quyền mở mọi chương, Sao/tháng không cộng dồn | Form đặt câu hỏi + payOS + 1–3 chuyên gia trả lời tay trong 48h |
+| Thời gian tới đồng tiền đầu | Ngay khi bật nạp (vài ngày) | Sau khi chốt giá + điều khoản hoàn tiền (1–2 tuần) | Sau khi tuyển chuyên gia + quy tắc hành nghề (2–4 tuần) |
+| Công làm | Thấp (1 migration nhẹ + trang nạp) | Vừa (migration bảng mới + quyền + gia hạn tay) | Thấp về code, **cao về vận hành** (người trả lời, thuế TNCN chuyên gia) |
+| Rủi ro pháp lý | Thấp (minh bạch giá, không đếm ngược) | Vừa (hợp đồng mẫu, hoàn tiền theo thời gian còn lại) | Cao nhất (nội dung tư vấn, mê tín dị đoan, trả cho bên thứ ba) |
+| Phụ thuộc | Tài khoản + payOS (đã có code) | Như A + chốt giá | Như A + người thật |
+| Đo được | `paywall_viewed → checkout_started → nạp thành công`, tỉ lệ nạp lần 2 trong 60 ngày | tỉ lệ hội viên/MAU, mua lại năm sau | tỉ lệ đặt câu hỏi, đánh giá, hoàn tiền |
+| Trần doanh thu | Thấp–vừa | Vừa (giữ chân tốt nhất theo số liệu ngành) | Cao nhất (Astrotalk) |
+| Có lợi cho 2 cách còn lại? | **Có** — mọi người mua hội viên / hỏi chuyên gia đều đi qua cùng trang nạp | Một phần | Không |
+
+**Chọn: A trước (em làm ngay), B tiếp (cần anh chốt giá), C chạy thử bằng tay (không cần build lớn).**
+
+Lý do: A là nút thắt chung — mọi đồng tiền đều đi qua trang nạp, và hiện gói nhỏ nhất (29k/30 Sao) gấp 3 lần nhu cầu
+mở 1 báo cáo (10 Sao), nên người muốn trả lại bị chặn bởi "phải nạp dư". A rủi ro thấp, làm nhanh, đo được bằng sự kiện
+đã có, và làm cho B, C hiệu quả hơn khi tới lượt. B có giữ chân tốt nhất nhưng cần anh chốt giá + chính sách hoàn tiền
+trước. C có trần cao nhất nhưng là việc vận hành người thật — nên chạy thử tay với 1 chuyên gia trước khi viết code.
