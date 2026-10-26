@@ -637,15 +637,16 @@ test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát),
   await page.goto(`${WEB}/`);
   await expect(page.getByText("Nhập 2 thông tin là xong")).toBeVisible();
   await expect(page.getByRole("button", { name: /Xem ngay số của tôi/ })).toBeVisible();
-  // nút góp ý cuối bài (đo Gate 1: mã "co" không đổi, chỉ đổi chữ) — cần hồ sơ trên máy để /ban-than có bài đọc
+  // nút góp ý cuối bài (đo Gate 1: mã "co" không đổi, chỉ đổi chữ) — cần hồ sơ trên máy để /than-so có bài đọc
+  // (QH-BT: bài đọc + ô góp ý ở /than-so; /ban-than là trang của tôi, không còn ô góp ý)
   // (trình duyệt riêng: hồ sơ nạp sẵn làm trang chủ hiện "Chào lại" — bước dọn bên dưới cần trang chủ chưa có hồ sơ)
   const ctx = await browser.newContext();
   try {
     const bt = await ctx.newPage();
     await bt.addInitScript(() => localStorage.setItem("hbt.hoso.v1", JSON.stringify({ v: 1, ho_ten: "Nguyễn Văn An", ngay: 24, thang: 10,
       nam: 1988, tao_luc: "2026-10-01T00:00:00Z" })));
-    await bt.goto(`${WEB}/ban-than`);
-    await expect(bt.getByTestId("gop-y").getByRole("button", { name: "Trúng lắm" })).toBeVisible({ timeout: 60_000 });
+    await bt.goto(`${WEB}/than-so`);
+    await expect(bt.getByTestId("gop-y").first().getByRole("button", { name: "Trúng lắm" })).toBeVisible({ timeout: 60_000 });
   } finally { await ctx.close(); }
 
   // dọn: về chữ + hình gốc
