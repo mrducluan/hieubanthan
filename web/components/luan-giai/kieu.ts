@@ -19,6 +19,9 @@ export interface Hop {
   so_phieu?: number;
   /** Engine đã chuyển hộp này xuống "Vì sao nói vậy" — web không hiện hộp. */
   dang_xem_lai?: boolean;
+  /** Trục 1: hộp này đã hiện đầy đủ ở "Điều quan trọng nhất" ("cot_loi") hoặc ở một chương trước (mã chương) → trong
+   *  chương chỉ hiện một dòng tham chiếu (giữ mã kiểm chứng, không hỏi lại). */
+  tham_chieu?: string;
   /** Hộp cot_loi: chương gốc + loại hộp gốc (dùng chung ma_mau với hộp gốc). */
   tu_chuong?: string; loai_goc?: LoaiHop;
   /** Hộp luu_y: hướng xử lý (thường đã nằm trong noi_dung). */

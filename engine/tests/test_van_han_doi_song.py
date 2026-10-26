@@ -398,8 +398,9 @@ def _kiem_phan_bo(dem: dict[str, collections.Counter], ngoai_le: dict[str, str])
 
 def test_phan_bo_nhan_bat_tu(bt300):
     dem = _phan_bo([b for _, b in bt300])
-    assert set(dem) >= {"tong_quan", "ngu_hanh", "hoc_tap", "gia_dinh", "su_nghiep", "~nam_van_han"}
-    assert "loi_khuyen" not in dem and "van_han" not in dem
+    assert set(dem) >= {"ngu_hanh", "hoc_tap", "gia_dinh", "su_nghiep", "~nam_van_han"}
+    # Lời khuyên, Vận hạn (VH-1) và "Con người bạn" (Trục 1) không mang chip mức → không vào phân bố nhãn.
+    assert "loi_khuyen" not in dem and "van_han" not in dem and "tong_quan" not in dem
     _kiem_phan_bo(dem, {})
     n = sum(dem["~nam_van_han"].values())
     assert all(0.10 <= dem["~nam_van_han"][m] / n <= 0.60 for m in MUC), dem["~nam_van_han"]
@@ -407,7 +408,7 @@ def test_phan_bo_nhan_bat_tu(bt300):
 
 def test_phan_bo_nhan_tu_vi(tv60):
     dem = _phan_bo(tv60)
-    assert "loi_khuyen" not in dem and "van_han" not in dem
+    assert "loi_khuyen" not in dem and "van_han" not in dem and "tong_quan" not in dem
     _kiem_phan_bo(dem, {})
     n = sum(dem["~nam_van_han"].values())
     assert all(0.10 <= dem["~nam_van_han"][m] / n <= 0.60 for m in MUC), dem["~nam_van_han"]

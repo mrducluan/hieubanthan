@@ -68,7 +68,8 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
         {hop.tieu_de}
         {hop.veto && <span className="ml-2 align-middle rounded-full border border-moon/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-moon" data-testid="hop-veto">Xử lý trước</span>}
       </h4>
-      <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg-muted">{hop.noi_dung}</p>
+      {/* Trục 1: thân chỉ là ý thêm + việc nên làm (engine bỏ phần đã có ở tiêu đề) — có thể rỗng. */}
+      {hop.noi_dung && <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg-muted">{hop.noi_dung}</p>}
       {hop.huong_xu_ly && !hop.noi_dung.includes(hop.huong_xu_ly) && (
         <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg"><b className="hop-nhan font-semibold">Nên:</b> {hop.huong_xu_ly}</p>
       )}

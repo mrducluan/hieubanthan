@@ -58,7 +58,8 @@ export const CHU_CHUNG = {
   "kiem_chung.hoi": { nhom: KC, nhan: "Câu hỏi mặc định dưới hộp luận giải", mac_dinh: "Điều này có đúng với bạn?", toi_da: 80 },
   "kiem_chung.dung": { nhom: KC, nhan: "Nút đúng", mac_dinh: "Đúng với mình", toi_da: 30 },
   "kiem_chung.chua_dung": { nhom: KC, nhan: "Nút chưa đúng", mac_dinh: "Chưa đúng", toi_da: 30 },
-  "kiem_chung.cam_on": { nhom: KC, nhan: "Lời cảm ơn", mac_dinh: "Cảm ơn bạn — đã ghi nhận để ban biên tập xem lại.", toi_da: 120 },
+  "kiem_chung.cam_on": { nhom: KC, nhan: "Lời cảm ơn (đọc cho trình đọc màn hình)", mac_dinh: "Cảm ơn bạn — đã ghi nhận để ban biên tập xem lại.", toi_da: 120 },
+  "kiem_chung.da_ghi": { nhom: KC, nhan: "Chữ cạnh dấu ✓ sau khi bấm", mac_dinh: "Đã ghi", toi_da: 20 },
 
   "chia_se.ten_link": { nhom: CS, nhan: "Nhãn ô tên hiển thị trên link mời", mac_dinh: "Tên hiển thị trên link (có thể dùng biệt danh)", toi_da: 80 },
   "chia_se.dang_tao": { nhom: CS, nhan: "Nút lúc đang tạo link", mac_dinh: "Đang tạo…", toi_da: 30 },

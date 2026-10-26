@@ -24,7 +24,8 @@ SINH = {"ngay": dt.date(1990, 5, 15), "ti": 4, "gioi_tinh": "nam"}     # giờ T
 XEM = dt.date(2026, 10, 21)
 THU_TU = ["tong_quan", "cuoc_doi", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "suc_khoe", "quan_he", "nha_cua",
           "duong_bay", "nam_nay", "van_han", "loi_khuyen"]
-KHONG_MUC = {"van_han", "loi_khuyen"}      # VH-1: chương tổng hợp / dòng 10 năm không mang chip mức riêng
+# VH-1: chương tổng hợp / dòng 10 năm không mang chip mức riêng; Trục 1 (2026-10-26): "Con người bạn" cũng không.
+KHONG_MUC = {"tong_quan", "van_han", "loi_khuyen"}
 LOAI_HOP = {"cot_loi", "diem_manh", "luu_y", "loi_khuyen", "thoi_diem"}
 MUC = {"thuan", "can_bang", "can_chu_dong"}
 # thuật ngữ: độ sáng, tên tứ hoá ("tiêu hoá", "văn hoá" là chữ thường, không tính), tam phương

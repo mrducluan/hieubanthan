@@ -305,7 +305,9 @@ def bao_cao(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.dat
         chuong.append(kh.chuong(ma, TIEU_DE[ma], doan, hop=x.get("hop"), tom_tat=x.get("tom_tat"), can_cu=x.get("can_cu"),
                                 cau_tu_soi=x.get("cau_tu_soi"), moi_xem=_moi_xem_rieng(ma, doan, dn, ch)))
     meta = kb.meta_ban_do()
-    return {"mo_dun": "thanso", "phien_ban": kh.PHIEN_BAN, "phai": "pitago", "cot_loi": kh.chon_cot_loi(chuong[:1]),
+    # Trục 1: thân hộp không lặp tiêu đề, một mã một hộp đầy đủ (thân chương là bài viết riêng → không cắt đoạn).
+    cot_loi = kh.gon_bao_cao({"cot_loi": kh.chon_cot_loi(chuong[:1]), "chuong": chuong}, gon_doan=False)["cot_loi"]
+    return {"mo_dun": "thanso", "phien_ban": kh.PHIEN_BAN, "phai": "pitago", "cot_loi": cot_loi,
             "chuong": chuong, "ket": hoi_van.KET, "dien_dat": "mau", "quy_uoc_duong_doi": quy_uoc,
             "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
             "trang_thai": meta["trang_thai"]}

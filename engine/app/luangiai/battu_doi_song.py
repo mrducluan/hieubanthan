@@ -62,6 +62,7 @@ from app.calc.lunar import CAN, CHI
 from app.kb import battu_doi_song_kb as kb
 from app.kb import battu_kb
 from app.luangiai import doi_song_chung as dsc
+from app.luangiai import doi_song_khuon as kh
 from app.luangiai.doi_song_chung import (  # noqa: F401 — dùng chung với Tử vi (LG-ĐS)
     MA_MAU_RE, TOI_DA_HOP, _ap_hoc, _cac_cau, _cau_dau, _hoa_dau, _ma, _sach, _sap, _tieu_de, slug, trong_so_xem_lai)
 
@@ -665,22 +666,8 @@ def _thuong(s: str) -> str:
     return s[:1].lower() + s[1:]
 
 
-_NOI_DUOI = ("mỗi điều có cách gỡ ngay trong hộp.", "cách gỡ nằm ngay trong từng hộp.",
-             "mỗi hộp đã kèm việc nên làm.")
-
-
-def _doan_noi(hop: list[dict], k: int, dau_manh: str = "Chỗ mạnh của bạn ở mảng này",
-              dau_vap: str = "chỗ cần để ý") -> str:
-    manh = [_thuong(h["tieu_de"]) for h in hop if h["loai"] == "diem_manh"][:2]
-    vap = [_thuong(h["tieu_de"]) for h in hop if h["loai"] == "luu_y"][:2]
-    duoi = _NOI_DUOI[k % len(_NOI_DUOI)]
-    if manh and vap:
-        return f"{dau_manh}: {'; '.join(manh)}. Còn {dau_vap}: {'; '.join(vap)} — {duoi}"
-    if manh:
-        return f"{dau_manh}: {'; '.join(manh)}."
-    if vap:
-        return f"{_hoa_dau(dau_vap)}: {'; '.join(vap)} — {duoi}"
-    return ""
+# Trục 1 (2026-10-26): bỏ "đoạn nối" liệt kê lại tiêu đề hộp + câu "mỗi điều có cách gỡ ngay trong hộp" — web đã hiện
+# hộp ngay trên, đoạn ấy chỉ chép lại.
 
 
 def _cau_muc_mang(x: dict) -> str:
@@ -754,12 +741,11 @@ def _chuong_mang(ma: str, cm: dict, pt: dict, hoc: tuple, da_dung: set[str], the
         if h:
             cand.append(h)
     hop, xem_lai = _chon(ma, cand, hoc, da_dung, x["muc"], x["can_cu"])
-    k = [c[0] for c in CHUONG].index(ma)
     tom = _tom(ma, x["muc"])
     can_cu = [c for h in hop for c in h["can_cu"]] + x["can_cu"] + xem_lai
     nho = ("Với người còn nhỏ tuổi, chương này nói về xu hướng khi lớn lên, để cha mẹ hiểu con hơn."
            if ma in ("su_nghiep", "tien_bac", "tinh_cam") and pt.get("tuoi") is not None and pt["tuoi"] < TUOI_NHO else "")
-    return _chuong(ma, x["muc"], tom, hop, [tom, _cau_muc_mang(x), nho, _doan_noi(hop, k)], can_cu, kb.cau_tu_soi(ma),
+    return _chuong(ma, x["muc"], tom, hop, [tom, _cau_muc_mang(x), nho], can_cu, kb.cau_tu_soi(ma),
                    **_hai_cach_muc(x))
 
 
@@ -830,8 +816,6 @@ def _chuong_tong_quan(pt: dict, cm: dict, hoc: tuple, da_dung: set[str]) -> dict
             cand.append(h)
     x = cm["tong_quan"]
     hop, xem_lai = _chon("tong_quan", bo_vap_trung_chu_de(cand), hoc, da_dung, x["muc"], x["can_cu"])
-    tom = n.get("chan_dung") or _tom("tong_quan", x["muc"])
-    noi_cau = _doan_noi(hop, 0, "Nét nổi bật của bạn", "điều nên để ý ở chính mình")
     can_cu = [cu_nc, cu_cach, *[c for h in hop for c in h["can_cu"]], *x["can_cu"],
               *[c["chi_tiet"] for c in ls.get("co_canh_bao", []) if c["loai"] in ("da_ty", "gio_ty", "tiet_edge")],
               *xem_lai]
@@ -839,9 +823,11 @@ def _chuong_tong_quan(pt: dict, cm: dict, hoc: tuple, da_dung: set[str]) -> dict
     td = THANG_DIEM
     than_do = {"ti_le": ls["than"]["ti_le"], "vuong_tu": td["vuong_tu"], "nhuoc_duoi": td["nhuoc_duoi"],
                "muc": pt["than"], "nhan": kb.nhan_than(pt["than"])}
-    return _chuong("tong_quan", x["muc"], tom, hop, [tom, _tom("tong_quan", x["muc"]), _cau_muc_mang(x), noi_cau],
-                   can_cu, soi or "Bạn đang dùng điểm mạnh nào nhiều nhất, và điểm nào còn để quên?", than_do=than_do,
-                   **_hai_cach_muc(x))
+    # Trục 1 (2026-10-26): "Con người bạn" không mang chip mức (như Lời khuyên, Vận hạn — VH-1): không câu "mức", không
+    # "hai cách khác nhau ở mảng này"; câu thứ hai là lời tóm tắt trung tính của KB (bậc cân bằng). Mức vẫn chấm (cột lõi).
+    tom = n.get("chan_dung") or kb.tom_tat("tong_quan", "can_bang") or _tom("tong_quan", "can_bang")
+    return _chuong("tong_quan", None, tom, hop, [tom, kb.tom_tat("tong_quan", "can_bang") or ""],
+                   can_cu, soi or "Bạn đang dùng điểm mạnh nào nhiều nhất, và điểm nào còn để quên?", than_do=than_do)
 
 
 # ---- chương 2: năng lượng — thừa gì, thiếu gì, hai cách bù
@@ -1529,6 +1515,8 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
             h["_ch"] = ma
         ds.append(c)
     cot_loi = dsc.them_cot_loi_van_han(chon_cot_loi(ds), ds, nam0)
+    # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).
+    kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
     tgb_ra = [{k: v for k, v in g.items() if k != "thap_than"} for g in tgb]
     return _sach({"phien_ban": PHIEN_BAN, "phai": "tu_binh", "cot_loi": cot_loi, "thoi_gian_bieu": tgb_ra, "chuong": ds,
                   "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

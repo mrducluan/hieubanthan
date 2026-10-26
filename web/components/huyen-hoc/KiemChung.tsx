@@ -3,7 +3,11 @@
 // Không ô nhập chữ. Chỉ gửi MÃ (lib/kiem-chung) lên PostHog; mỗi thẻ ghi một lần mỗi phiên trình duyệt.
 // LG-ĐS (docs/LUAN-GIAI-DOI-SONG.md mục 3, 5): thêm loại "doi_song"; phiếu còn gửi về máy chủ (POST /api/kiem-chung,
 // chỉ mã — lỗi thì im lặng) và hiện công khai "x% trong N người… thấy đúng" khi đủ ≥ 30 phiếu.
+// Trục 1 (2026-10-26): một hàng hai nút chia đôi (không rơi dòng ở 360px), cao ≥ 44px; bấm xong đổi thành dấu ✓ màu +
+// "Đã ghi" có chuyển động ngắn (tôn trọng giảm chuyển động). Cùng mã hiện hai nơi → bấm một nơi, nơi kia cũng xong.
 import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { Check } from "lucide-react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { ghi, lanDauTrongPhien } from "@/lib/do-luong";
 import type { KetQuaKiemChung, LoaiKiemChung } from "@/lib/kiem-chung";
@@ -52,6 +56,7 @@ export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, the
       }
     }
   };
+  const giam = useReducedMotion();
   const dongTyLe = tl && (
     <p className="text-fg-muted" data-testid="ty-le-dung">
       <b className="text-sm text-fg">{tl.phanTram}%</b> trong {tl.tong} người có cùng điểm này thấy đúng
@@ -59,23 +64,33 @@ export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, the
     </p>
   );
   return (
-    <div className="flex flex-wrap items-center gap-2 border-t border-line/50 pt-2 text-xs" data-testid="kiem-chung">
+    <div className="space-y-2 border-t border-line/50 pt-2.5 text-xs" data-testid="kiem-chung" data-da={da ? "1" : undefined}>
+      {dongTyLe}
       {da ? (
-        <>
-          <p className="text-fg-faint" role="status">{c("kiem_chung.cam_on")}</p>
-          {dongTyLe && <div className="w-full">{dongTyLe}</div>}
-        </>
+        <p className="flex min-h-11 items-center gap-2 text-sm" role="status">
+          <motion.span aria-hidden className="grid size-7 shrink-0 place-items-center rounded-full bg-jade/15 text-jade"
+            initial={giam ? false : { scale: 0.3, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+            transition={giam ? { duration: 0 } : { type: "spring", stiffness: 520, damping: 22 }}>
+            <Check className="size-4" strokeWidth={3} />
+          </motion.span>
+          <motion.span className="font-semibold text-jade" initial={giam ? false : { opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: giam ? 0 : 0.22, delay: giam ? 0 : 0.08 }}>
+            {c("kiem_chung.da_ghi")}
+          </motion.span>
+          <span className="sr-only"> — {c("kiem_chung.cam_on")}</span>
+        </p>
       ) : (
-        <>
-          {dongTyLe && <div className="w-full">{dongTyLe}</div>}
-          <span className="text-fg-muted">{cauHoi ?? c("kiem_chung.hoi")}</span>
-          {([["dung", c("kiem_chung.dung")], ["chua_dung", c("kiem_chung.chua_dung")]] as const).map(([gt, nhan]) => (
-            <button key={gt} type="button" onClick={() => bam(gt)}
-              className="rounded-full border border-line px-3 py-1 text-fg-muted transition-colors hover:border-gold/60 hover:text-fg print:hidden">
-              {nhan}
-            </button>
-          ))}
-        </>
+        <div className="print:hidden">
+          <p className="text-fg-muted">{cauHoi ?? c("kiem_chung.hoi")}</p>
+          <div className="mt-1.5 grid grid-cols-2 gap-2">
+            {([["dung", c("kiem_chung.dung")], ["chua_dung", c("kiem_chung.chua_dung")]] as const).map(([gt, nhan]) => (
+              <button key={gt} type="button" onClick={() => bam(gt)}
+                className="min-h-11 min-w-0 rounded-full border border-line px-2 text-[0.8125rem] leading-tight text-fg-muted transition-colors hover:border-gold/60 hover:text-fg active:bg-surface">
+                {nhan}
+              </button>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

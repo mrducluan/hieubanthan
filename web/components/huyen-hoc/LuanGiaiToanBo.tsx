@@ -123,6 +123,15 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
             Báo cáo theo chương, ghép từ kho tri thức có nguồn ·{" "}
             {phi?.thu ? <>chương đầu miễn phí, toàn bộ <b className="text-gold">{phi.gia} Sao</b>, xem lại trong ngày không mất thêm</> : "miễn phí giai đoạn ra mắt"} · không lưu trên máy chủ.
           </p>
+          {/* Trục 1 (báo cáo UX mục 9): đang miễn phí thì nói trước, trung tính, Sao là gì + giá dự kiến (lấy từ API phí,
+              không ghi cứng). Không đếm ngược, không doạ. */}
+          {phi && !phi.thu && phi.gia > 0 && (
+            <p className="mt-1.5 text-xs leading-relaxed text-fg-faint" data-testid="gia-du-kien">
+              Sao là điểm dùng trong ứng dụng để mở các bài đọc sâu, không đổi ra tiền. Sau giai đoạn ra mắt, chương đầu vẫn
+              miễn phí, mở cả bài dự kiến {phi.gia} Sao.{" "}
+              <Link href="/dieu-khoan#sao" className="whitespace-nowrap text-fg-muted underline underline-offset-4 hover:text-fg">Sao là gì?</Link>
+            </p>
+          )}
         </div>
         <Button onClick={() => void tai()} disabled={dang}><Sparkles aria-hidden /> {dang ? "Đang soạn…" : phi?.thu ? "Đọc miễn phí chương đầu" : "Xem luận giải"}</Button>
         {dang && <div className="w-full"><KhungTai dong={3} /></div>}

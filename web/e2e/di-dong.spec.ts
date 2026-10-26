@@ -14,16 +14,31 @@ for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/phong-thuy", "/kinh
   });
 }
 
-test("Tử vi: chạm cung → chi tiết cuộn vào tầm mắt; Toàn cảnh thu lá số vừa màn hình", async ({ page }) => {
+test("Tử vi: lá số mặc định vừa màn hình (gợi ý đặt TRÊN lá số), Phóng to để vuốt; chạm cung → chi tiết vào tầm mắt", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/tu-vi");
   const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
   await expect(laSo).toBeVisible();
+  // Trục 1 (báo cáo UX mục 1): mặc định toàn cảnh — SVG nằm gọn trong 375px, không cắt chữ khung giữa.
+  const svg = page.getByTestId("la-so-tu-vi").locator("svg").first();
+  expect(await svg.evaluate((e) => e.getBoundingClientRect().right)).toBeLessThanOrEqual(375);
+  const dk = page.getByTestId("la-so-dieu-khien");
+  await expect(dk).toBeVisible();
+  expect((await dk.boundingBox())!.y).toBeLessThan((await svg.boundingBox())!.y);     // gợi ý + nút nằm trên lá số
+  const nut = dk.getByRole("button", { name: "Phóng to" });
+  await expect(nut).toHaveAttribute("aria-pressed", "false");
+
   await laSo.getByRole("button", { name: /^Cung Quan Lộc/ }).tap();
   await expect(page.getByRole("heading", { name: /Cung Quan Lộc/ })).toBeInViewport();
 
-  await page.getByRole("button", { name: "Toàn cảnh" }).tap();
-  const rong = await page.getByTestId("la-so-tu-vi").locator("svg").first().evaluate((e) => e.getBoundingClientRect().right);
-  expect(rong).toBeLessThanOrEqual(375);
-  await expect(page.getByRole("button", { name: "Phóng to" })).toHaveAttribute("aria-pressed", "true");
+  await dk.scrollIntoViewIfNeeded();
+  await nut.tap();
+  await expect(dk.getByRole("button", { name: "Thu vừa màn hình" })).toHaveAttribute("aria-pressed", "true");
+  expect(await svg.evaluate((e) => e.getBoundingClientRect().width)).toBeGreaterThanOrEqual(700);
+  await expect(dk).toContainText("Vuốt ngang");
+  // Trang không tràn ngang: chỉ khung lá số cuộn.
+  const tran = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(tran).toBeLessThanOrEqual(0);
+  await dk.getByRole("button", { name: "Thu vừa màn hình" }).tap();
+  expect(await svg.evaluate((e) => e.getBoundingClientRect().right)).toBeLessThanOrEqual(375);
 });
