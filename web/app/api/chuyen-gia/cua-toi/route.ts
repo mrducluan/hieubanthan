@@ -21,7 +21,10 @@ export async function GET(req: Request) {
     if (data?.trang_thai === "cho" && data.cong === "payos" && dv) await doiSoatMotDon(dv, Number(don));
   }
   const { data, error } = await nm.sb.rpc("cau_hoi_cua_toi");
-  if (error) return NextResponse.json({ error: "Chưa đọc được (chạy migration 0029?)." }, { status: 503 });
+  if (error) {
+    console.error("[chuyen-gia/cua-toi] cau_hoi_cua_toi lỗi (đã chạy migration 0029?)", error.message);
+    return NextResponse.json({ error: "Chưa đọc được câu hỏi lúc này, bạn thử lại sau nhé." }, { status: 503 });
+  }
   return NextResponse.json({ ds: Array.isArray(data) ? data : [] }, { headers: { "cache-control": "private, no-store" } });
 }
 

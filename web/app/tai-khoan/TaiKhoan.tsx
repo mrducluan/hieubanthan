@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { CheckCircle2, Cloud, LogOut, Pencil, ShieldCheck, Smartphone, Trash2 } from "lucide-react";
+import { BadgeCheck, CheckCircle2, Cloud, LogOut, MessageCircleQuestion, Pencil, ShieldCheck, Smartphone, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -13,6 +13,8 @@ import { BatNhacPush } from "@/components/khung/BatNhacPush";
 import { TomTatHuyHieu } from "@/components/khung/HuyHieu";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
+import { coGoogle } from "@/lib/dong-y";
+import type { DichVuMo } from "@/lib/thanh-toan/dich-vu";
 import { dangXuat, hoSoTaiKhoan, luuVaoTaiKhoan, useNguoiDung, xoaHoSoTaiKhoan, xoaTaiKhoan } from "@/lib/tai-khoan";
 import { gioHienThi, luuHoSo, useHoSo, xoaHoSo, type HoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
@@ -31,7 +33,11 @@ function giongNhau(a: HoSo, b: NonNullable<HoSoTK>): boolean {
     (a.noi_sinh ?? null) === (b.noi_sinh ?? null) && Boolean(a.gio_mua_he) === Boolean(b.gio_mua_he);
 }
 
-export function TaiKhoan({ emailDuLieu = null }: { emailDuLieu?: string | null }) {
+export function TaiKhoan({ emailDuLieu = null, dichVu = { hoiVien: false, chuyenGia: false } }: {
+  emailDuLieu?: string | null;
+  /** Rà UX mục 17: dịch vụ trả tiền đang MỞ thật (máy chủ đọc công tắc + cổng). Tắt → không có lối vào nào. */
+  dichVu?: DichVuMo;
+}) {
   const hoSo = useHoSo();
   const user = useNguoiDung();
   const [tk, setTk] = useState<HoSoTK | undefined>(undefined);
@@ -170,6 +176,30 @@ export function TaiKhoan({ emailDuLieu = null }: { emailDuLieu?: string | null }
         </section>
       )}
 
+      {/* Rà UX mục 17: lối vào Hội viên năm / Hỏi chuyên gia chỉ khi đang mở (không quảng cáo thứ chưa mua được). Đã đăng
+          nhập thì Hội viên đã có thẻ riêng ở mục "Hội viên" phía trên → không lặp. */}
+      {((dichVu.hoiVien && !user) || dichVu.chuyenGia) && (
+        <section aria-labelledby="dich-vu" data-testid="tk-dich-vu">
+          <TieuDeMuc id="dich-vu" nho="Dịch vụ thêm" lon="Đọc sâu hơn, hỏi người thật" />
+          <div className="grid gap-3 sm:grid-cols-2">
+            {dichVu.hoiVien && !user && (
+              <Card className="flex flex-col gap-3" data-testid="tk-hoi-vien">
+                <p className="flex items-center gap-2 font-medium text-fg"><BadgeCheck className="size-5 text-gold" aria-hidden /> Hội viên năm</p>
+                <p className="flex-1 text-sm text-fg-muted">Mở mọi chương Luận giải toàn bộ trong một năm. Mua một lần, không tự gia hạn.</p>
+                <Button asChild size="sm" variant="secondary" className="min-h-11 self-start"><Link href="/hoi-vien">Xem hội viên năm</Link></Button>
+              </Card>
+            )}
+            {dichVu.chuyenGia && (
+              <Card className="flex flex-col gap-3" data-testid="tk-hoi-chuyen-gia">
+                <p className="flex items-center gap-2 font-medium text-fg"><MessageCircleQuestion className="size-5 text-gold" aria-hidden /> Hỏi chuyên gia</p>
+                <p className="flex-1 text-sm text-fg-muted">Một câu hỏi cụ thể, chuyên gia trả lời bằng văn bản.</p>
+                <Button asChild size="sm" variant="secondary" className="min-h-11 self-start"><Link href="/hoi-chuyen-gia">Đặt câu hỏi</Link></Button>
+              </Card>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* ĐY-1: mọi đồng ý đã cho (trên máy + tài khoản), mỗi dòng rút / xoá được ngay; bản sao dữ liệu qua email. */}
       <section aria-labelledby="du-lieu-cua-toi">
         <TieuDeMuc id="du-lieu-cua-toi" nho="Dữ liệu của tôi" lon="Những gì bạn đã đồng ý — rút lại bất cứ lúc nào" />
@@ -189,7 +219,7 @@ export function TaiKhoan({ emailDuLieu = null }: { emailDuLieu?: string | null }
         <TieuDeMuc id="rieng-tu" nho="Quyền riêng tư" lon="Chúng tôi giữ gì, không giữ gì" />
         <ul className="space-y-2 text-sm text-fg-muted">
           {[
-            "Mặc định mọi thứ nằm trên máy của bạn. Ngày sinh chỉ gửi đi lúc tính toán (sau khi bạn bấm đồng ý ở form hồ sơ), không lưu lại.",
+            `Mặc định mọi thứ nằm trên máy của bạn${coGoogle() ? " (trừ cookie thống kê)" : ""}. Ngày sinh chỉ gửi đi lúc tính toán (sau khi bạn bấm đồng ý ở form hồ sơ), không lưu lại.`,
             "Chỉ khi bạn bấm “Lưu vào tài khoản” và đồng ý, hồ sơ mới được lưu — chỉ bạn đọc được.",
             "Không lưu nội dung bài đọc hay câu hỏi gắn với bạn. Nhật ký cải thiện hệ thống là ẩn danh, đã lọc năm/ngày/số điện thoại.",
             "Link chia sẻ chỉ mang tên hiển thị và các con số — không có ngày sinh. Link mời có thêm mã mời ngẫu nhiên (không lộ tài khoản) để cộng Sao.",

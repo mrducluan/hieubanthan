@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { Check, Copy, Download, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ghi } from "@/lib/do-luong";
@@ -20,6 +21,7 @@ export function NutChiaSeNha({ yeuCau, loaiNha }: { yeuCau: Record<string, unkno
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const [khongChep, setKhongChep] = useState(false);   // máy không cho chép tự động → nhắc chép tay
   const c = useChuChung();
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
@@ -41,14 +43,15 @@ export function NutChiaSeNha({ yeuCau, loaiNha }: { yeuCau: Record<string, unkno
   }
   async function chep() {
     if (!the) return;
-    try { await navigator.clipboard.writeText(the.link); setDaChep(true); setTimeout(() => setDaChep(false), 2000); } catch { /* bỏ qua */ }
+    const kq = await chepLink(the.link);
+    setKhongChep(kq === "khong_duoc");
+    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
   }
   async function chiaSe() {
     if (!the) return;
-    if (typeof navigator.share === "function") {
-      try { await navigator.share({ title: "Nhà của bạn", text: "Sơ đồ nhà mình đọc theo phong thuỷ — xem thử nhà bạn:", url: the.link }); return; } catch { /* huỷ → chép */ }
-    }
-    await chep();
+    const kq = await guiHoacChep({ title: "Nhà của bạn", text: "Sơ đồ nhà mình đọc theo phong thuỷ — xem thử nhà bạn:", url: the.link });
+    setKhongChep(kq === "khong_duoc");
+    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
   }
 
   if (!mo) {
@@ -79,6 +82,7 @@ export function NutChiaSeNha({ yeuCau, loaiNha }: { yeuCau: Record<string, unkno
             <Input readOnly value={the.link} aria-label="Link thẻ nhà" onFocus={(e) => e.currentTarget.select()} className="text-sm" data-testid="link-the-nha" />
             <Button variant="secondary" size="icon" onClick={() => void chep()} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
           </div>
+          {khongChep && <ChepTay />}
           <div className="flex flex-wrap gap-2">
             <Button size="sm" onClick={() => void chiaSe()}><Share2 aria-hidden /> {c("chia_se.gui")}</Button>
             <Button asChild size="sm" variant="outline">

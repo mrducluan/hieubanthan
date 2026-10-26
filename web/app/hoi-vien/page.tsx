@@ -1,11 +1,12 @@
 // /hoi-vien — Hội viên năm (SAO-HV, migration 0028; docs/DANH-GIA-VIRAL-V2-VA-KINH-DOANH.md §3, §9 cách tiếp cận B).
 // Mua MỘT LẦN bằng VND qua QR payOS → không tự gia hạn, không trừ tiền định kỳ. Quyền lợi + giá + chính sách hoàn tiền ghi
-// rõ; công tắc sao.hoi_vien.bat tắt → trang vẫn có (noindex) nhưng nút ẩn, dòng "sắp mở". Không đếm ngược, không "ưu đãi",
-// không gạch giá. Giá hiển thị đọc từ cùng cài đặt mà máy chủ dùng khi tạo đơn.
+// rõ; công tắc sao.hoi_vien.bat tắt (hoặc chưa có cổng) → trang vẫn có (noindex) nhưng chỉ một khung "Sắp có" gọn, không giá
+// (rà UX mục 17). Không đếm ngược, không "ưu đãi", không gạch giá. Giá hiển thị đọc từ cùng cài đặt mà máy chủ dùng khi tạo đơn.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BookOpenText, CalendarCheck, MessageCircleQuestion, Sparkles } from "lucide-react";
 import { KhoiCms } from "@/components/cms/KhoiCms";
+import { SapCo } from "@/components/khung/SapCo";
 import { lopKieuChu } from "@/lib/kieu-chu";
 import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
 import { layCauHinh } from "@/lib/cau-hinh";
@@ -30,6 +31,18 @@ export default async function Page() {
     layNoiDungTrang(DUONG),
   ]);
   const cong = congDangBat();
+  // Rà UX mục 17: chưa mua được (công tắc tắt HOẶC chưa có cổng thanh toán) → không bày giá to; một khung "Sắp có" gọn.
+  if (!bat || !cong) {
+    return (
+      <div className="mx-auto max-w-3xl">
+        <p className="eyebrow">Hội viên</p>
+        <h1 className="mt-2 font-serif text-4xl leading-tight sm:text-5xl">{nd.dau.h1 ?? "Hội viên năm"}</h1>
+        <SapCo testId="hoi-vien-chua-mo"
+          moTa="Hội viên năm sẽ mở mọi chương Luận giải toàn bộ trong một năm. Mục này chưa mở nên chưa mua được."
+          trongLucCho="Trong lúc chờ, phần lớn công cụ vẫn miễn phí cho mọi người." />
+      </div>
+    );
+  }
   const quyenLoi = [
     { Icon: BookOpenText, tieuDe: "Mở mọi chương Luận giải toàn bộ", mo_ta: "Tử vi · Bát tự · Bản đồ con số: đọc trọn báo cáo của bạn và của hồ sơ bạn nhập, không trừ Sao, trong suốt thời hạn hội viên." },
     { Icon: Sparkles, tieuDe: `${saoThang} Sao tặng mỗi tháng`, mo_ta: "Cấp vào đầu mỗi tháng (hoặc lần đầu bạn mở trang trong tháng) để hỏi đáp vượt lượt miễn phí. Sao tháng dùng trong tháng đó, không cộng dồn sang tháng sau. Sao bạn đã mua vẫn giữ, không hết hạn." },

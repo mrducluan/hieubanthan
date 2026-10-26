@@ -30,6 +30,7 @@ import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 import { maMoiNgay, taoLinkNgay } from "@/components/chia-se/NutChiaSeNgay";
+import { ChepTay, guiHoacChep } from "@/components/chia-se/GuiLink";
 import { SoNoiBatNgay } from "@/components/than-so/SoNoiBatNgay";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { VongGio } from "@/components/hoang-lich/VongGio";
@@ -132,6 +133,7 @@ export function HomNay() {
   const [chuoi, setChuoi] = useState<{ so: number; batDauLai: boolean } | null>(null);
   const [ttChuoi, setTtChuoi] = useState<TrangThaiChuoi | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const [chepTay, setChepTay] = useState<string | null>(null);   // máy không cho chép tự động → hiện link chép tay
   const daGhi = useRef(false);
   const [chon, setChon] = useState<string[]>([]);
   const [duDinh, setDuDinh] = useState("");
@@ -204,11 +206,10 @@ export function HomNay() {
     ghi("share_created", { kind: "hom_nay", ma_moi: tu });
     const { url } = await taoLinkNgay(hoSo, tu);
     const chu = `Hôm nay là Ngày cá nhân ${the.ngay_ca_nhan.so} của mình — ${boTienTo(the.ngay_ca_nhan.nghia)} Xem ngày của bạn:`;
-    try {
-      if (navigator.share) { await navigator.share({ title: "Hôm nay của bạn", text: chu, url }); return; }
-      await navigator.clipboard.writeText(`${chu} ${url}`);
-      setDaChep(true); setTimeout(() => setDaChep(false), 2500);
-    } catch { /* người dùng huỷ chia sẻ */ }
+    setChepTay(null);
+    const kq = await guiHoacChep({ title: "Hôm nay của bạn", text: chu, url }, `${chu} ${url}`);
+    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2500); }
+    else if (kq === "khong_duoc") setChepTay(url);
   }
 
   useBatDauDoc("hom_nay", Boolean(the));
@@ -286,6 +287,7 @@ export function HomNay() {
               {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} onTrangThai={setTtChuoi} />}
               <Button size="sm" variant="secondary" onClick={() => void chiaSe()}><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ"}</Button>
             </div>
+            {chepTay && <ChepTay url={chepTay} />}
             {/* SAO-HH: hẹn 7/30 ngày — chờ /api/sao/chuoi trả lời để lấy đúng nguồn chuỗi (tài khoản hay máy). */}
             {chuoi !== null && ttChuoi !== null && (
               <HenChinhMinh hoSo={hoSo} ngay={the.ngay_xem} tieuDe={c("hen.tieu_de")}

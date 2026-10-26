@@ -16,6 +16,7 @@ import { docQuyUocDD } from "@/lib/quy-uoc-dd";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { DongThuongMoi } from "@/components/chia-se/DongThuongMoi";
+import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
 import { bienThe, dien, manhBanDo } from "@/lib/the-ban-do";
 import type { NoiDungMaBanDo } from "@/lib/ma-moi";
 
@@ -38,6 +39,7 @@ export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const [khongChep, setKhongChep] = useState(false);   // máy không cho chép tự động → nhắc chép tay
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
 
@@ -65,15 +67,16 @@ export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
 
   async function chep() {
     if (!kq) return;
-    try { await navigator.clipboard.writeText(kq.link); setDaChep(true); setTimeout(() => setDaChep(false), 2000); } catch { /* bỏ qua */ }
+    const ket = await chepLink(kq.link);
+    setKhongChep(ket === "khong_duoc");
+    if (ket === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
   }
   async function chiaSe() {
     if (!kq) return;
     const bt = bienThe(kq.the.b);
-    if (typeof navigator.share === "function") {
-      try { await navigator.share({ title: dien(bt.tieuDe, kq.the.t), text: bt.loiMoi, url: kq.link }); return; } catch { /* huỷ → chép */ }
-    }
-    await chep();
+    const ket = await guiHoacChep({ title: dien(bt.tieuDe, kq.the.t), text: bt.loiMoi, url: kq.link });
+    setKhongChep(ket === "khong_duoc");
+    if (ket === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
   }
 
   return (
@@ -103,6 +106,7 @@ export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
             <Input readOnly value={kq.link} aria-label="Link thẻ bản đồ" onFocus={(e) => e.currentTarget.select()} className="text-sm" data-testid="link-the-ban-do" />
             <Button variant="secondary" size="icon" onClick={() => void chep()} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
           </div>
+          {khongChep && <ChepTay />}
           <div className="flex flex-wrap gap-2">
             <Button size="sm" onClick={() => void chiaSe()}><Share2 aria-hidden /> Gửi bạn bè đoán thử</Button>
             <Button asChild size="sm" variant="outline">

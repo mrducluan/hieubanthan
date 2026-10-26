@@ -1,6 +1,6 @@
 // SAO-CG (migration 0029) — "Hỏi chuyên gia": phần THUẦN dùng chung trình duyệt + máy chủ (không gọi mạng, không React).
 // Người dùng đặt một câu hỏi (≤ 1.500 ký tự) về một mảng, trả VND cố định (không bằng Sao), chuyên gia trả lời bằng văn bản
-// trong N giờ hoặc hoàn 100 %. Giọng: trung tính — không đếm ngược kiểu thúc, không "chỉ còn", không doạ.
+// trong N giờ hoặc hoàn 100%. Giọng: trung tính — không đếm ngược kiểu thúc, không "chỉ còn", không doạ.
 
 export const MANG_CG = ["than_so", "tu_vi", "bat_tu", "kinh_dich", "phong_thuy"] as const;
 export type MangCg = (typeof MANG_CG)[number];
@@ -17,7 +17,7 @@ export const TRA_LOI_TOI_DA = 6000;
 export type TrangThaiCg = "cho_tra" | "het_han_don" | "cho_tra_loi" | "da_tra_loi" | "qua_han" | "hoan" | "huy";
 export const TEN_TRANG_THAI: Record<TrangThaiCg, string> = {
   cho_tra: "Chờ thanh toán", het_han_don: "Chưa thanh toán (đơn đã hết hạn)", cho_tra_loi: "Đang chờ chuyên gia trả lời",
-  da_tra_loi: "Đã trả lời", qua_han: "Quá hạn trả lời — được hoàn 100 %", hoan: "Đã hoàn tiền", huy: "Đã huỷ",
+  da_tra_loi: "Đã trả lời", qua_han: "Quá hạn trả lời — được hoàn 100%", hoan: "Đã hoàn tiền", huy: "Đã huỷ",
 };
 
 export interface ThongTinCg {
@@ -53,7 +53,7 @@ export function dongHan(han: string | null, bayGio = Date.now()): string {
   if (!han) return "";
   const ms = new Date(han).getTime() - bayGio;
   if (Number.isNaN(ms)) return "";
-  if (ms <= 0) return "Đã quá hạn trả lời — bạn được hoàn 100 % tiền.";
+  if (ms <= 0) return "Đã quá hạn trả lời — bạn được hoàn 100% tiền.";
   const gio = Math.round(ms / 3_600_000);
   const phan = gio >= 1 ? `còn khoảng ${gio} giờ` : "còn dưới một giờ";
   return `Hạn trả lời: ${phan} (đến ${gioPhutVn(han)}).`;

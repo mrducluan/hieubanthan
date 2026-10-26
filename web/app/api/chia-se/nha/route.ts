@@ -7,6 +7,7 @@ import { z } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { LuanGiaiPTZ } from "@/lib/bo-cuc-zod";
 import { CUNG_9, HUONG_8, kyMaNha, LOAI_NHA_THE, MUC_THE, PHONG_THE, tuTuMa } from "@/lib/ma-moi";
+import { traLoiChiaSe } from "@/lib/loi-chia-se";
 
 // `loai_nha_the`: loại nhà chọn ở Hành trình khi hồ sơ chưa có bố cục (Khảo sát) — chỉ để ghi nhãn thẻ, không vào lời gọi engine.
 const Input = LuanGiaiPTZ.extend({ ten_hien_thi: z.string().trim().max(24).default(""), loai_nha_the: z.enum(LOAI_NHA_THE).nullable().optional() });
@@ -41,7 +42,6 @@ export async function POST(req: Request): Promise<NextResponse> {
     const ma = kyMaNha({ t: ten_hien_thi, h, l: trong(LOAI_NHA_THE, yc.nha.bo_cuc?.loai_nha ?? loai_nha_the ?? null), m: trong(MUC_THE, cNha?.muc ?? null), p: phong });
     return NextResponse.json({ ma, tu: tuTuMa("nh", ma) });
   } catch (e) {
-    const msg = e instanceof Error && e.message.includes("LOI_MOI_SECRET") ? e.message : "Chưa tạo được thẻ.";
-    return NextResponse.json({ error: msg }, { status: 502 });
+    return traLoiChiaSe(e, "nha");
   }
 }

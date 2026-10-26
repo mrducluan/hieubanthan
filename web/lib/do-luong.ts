@@ -107,7 +107,7 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   lan_dau: "number",    // SAO-ND: checkout_started — 1 = tài khoản chưa từng nạp, 0 = đã nạp (khách: không gửi)
   ngay: "number",       // SAO-HH: self_goal_set / self_goal_reached — số ngày mục tiêu (7 / 30), KHÔNG phải ngày tháng
   phien_ban: "string",  // ĐY-1: mã bản đồng ý xử lý dữ liệu (lib/dong-y-du-lieu PHIEN_BAN_DONG_Y, vd "dl1") — không ngày giờ
-  mien_phi: "number",   // SAO-CG: expert_question_started — 1 = dùng lượt hội viên, 0 = trả VND
+  mien_phi: "number",   // SAO-CG: expert_question_started — 1 = dùng lượt hội viên, 0 = trả VND · /nap-sao checkout_viewed — 1 = chưa chỗ nào thu Sao
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */

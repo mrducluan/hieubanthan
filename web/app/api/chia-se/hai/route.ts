@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { kyMaHai, tuTuMa, TIEU_CHI_HAI } from "@/lib/ma-moi";
+import { traLoiChiaSe } from "@/lib/loi-chia-se";
 import { HopThamInput, HopThamOutput } from "../../tuvi/schema";
 
 const Input = HopThamInput.extend({
@@ -33,7 +34,6 @@ export async function POST(req: Request): Promise<NextResponse> {
     const ma = kyMaHai({ a: ten_ban, q: hopTham.quan_he, p: d.tong, m: d.muc, c });
     return NextResponse.json({ ma, tu: tuTuMa("hp", ma) });
   } catch (e) {
-    const msg = e instanceof Error && e.message.includes("LOI_MOI_SECRET") ? e.message : "Chưa tạo được thẻ.";
-    return NextResponse.json({ error: msg }, { status: 502 });
+    return traLoiChiaSe(e, "hai");
   }
 }

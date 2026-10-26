@@ -2,12 +2,14 @@
 // sang trang payOS quét QR bằng app ngân hàng / ví bất kỳ → quay về /nap-sao/ket-qua, Sao vào ngay khi tiền về.
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CheckCircle2 } from "lucide-react";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { lopKieuChu } from "@/lib/kieu-chu";
 import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
 import { layCauHinh } from "@/lib/cau-hinh";
 import { congDangBat, dsGoiSao, hoiVienThongTin, napDauThongTin } from "@/lib/thanh-toan/cong";
 import { dongHoiVien, hienDongHoiVien } from "@/lib/thanh-toan/hoi-vien";
+import { chuaCanNapSao } from "@/lib/thanh-toan/dich-vu";
 import { NapSao } from "./NapSao";
 
 const DUONG = "/nap-sao";
@@ -17,15 +19,22 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [goi, napDau, giaBaoCao, nd, hoiVien] = await Promise.all([
+  const [goi, napDau, giaBaoCao, nd, hoiVien, mienPhi] = await Promise.all([
     dsGoiSao(), napDauThongTin(), layCauHinh<number>("luan_giai.gia_sao").catch(() => 10), layNoiDungTrang(DUONG),
-    hoiVienThongTin(),
+    hoiVienThongTin(), chuaCanNapSao(),
   ]);
   const cong = congDangBat();
   return (
     <div className="mx-auto max-w-3xl">
       <p className="eyebrow">Ví Sao</p>
       <h1 className="mt-2 font-serif text-4xl leading-tight sm:text-5xl">{nd.dau.h1 ?? "Nạp Sao"}</h1>
+      {/* Rà UX mục 8: không chỗ nào đang trừ Sao (đọc đúng công tắc thu Sao đang dùng) → nói thẳng, trước mọi bảng giá. */}
+      {mienPhi && (
+        <p className="mt-4 flex items-start gap-2 rounded-2xl border border-jade/40 bg-jade/10 px-4 py-3 text-fg" data-testid="nap-mien-phi">
+          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-jade" aria-hidden />
+          <span>Hiện mọi luận giải đang miễn phí — bạn chưa cần nạp.</span>
+        </p>
+      )}
       <p className="mt-3 max-w-2xl text-fg-muted">
         {nd.dau.loiDan ? <span className={lopKieuChu(nd.dau.kieuChu) || undefined}>{nd.dau.loiDan}</span> : <>
         Phần lớn công cụ vẫn miễn phí. Sao dùng cho những phần tốn chi phí thật như Luận giải toàn bộ. Giá ghi bằng đồng,
@@ -33,7 +42,7 @@ export default async function Page() {
         </>}
       </p>
       <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
-      <NapSao goi={goi} cong={cong} giaBaoCao={giaBaoCao} napDau={napDau} />
+      <NapSao goi={goi} cong={cong} giaBaoCao={giaBaoCao} napDau={napDau} mienPhi={mienPhi} />
       {cong && hienDongHoiVien(hoiVien) && (
         <p className="mt-4 text-sm text-fg-muted" data-testid="dong-hoi-vien">
           {dongHoiVien(hoiVien)} <Link href="/hoi-vien" className="text-gold hover:underline">Xem hội viên năm</Link>

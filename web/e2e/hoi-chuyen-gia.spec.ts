@@ -25,18 +25,23 @@ test("thuần: bộ lọc câu trả lời chặn tên bệnh / phán hung / lin
   const con = dongHan(new Date(Date.now() + 31 * 3_600_000).toISOString());
   expect(con).toMatch(/còn khoảng 31 giờ/);
   expect(con).not.toMatch(CUM_THUC_EP);
-  expect(dongHan(new Date(Date.now() - 60_000).toISOString())).toMatch(/hoàn 100 %/);
+  expect(dongHan(new Date(Date.now() - 60_000).toISOString())).toMatch(/hoàn 100%/);
   expect(dongHan(null)).toBe("");
 });
 
-test("công tắc tắt: trang có, noindex, nút 'sắp mở', không hiện biểu mẫu", async ({ page }) => {
+test("công tắc tắt: trang có, noindex, chỉ khung 'Sắp có' + lối quay về — không giá, không biểu mẫu", async ({ page }) => {
   await giaLap(page, { ...BAT, bat: false });
   await page.goto("/hoi-chuyen-gia");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Một câu hỏi");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
-  await expect(page.getByTestId("cg-chua-mo")).toContainText("sắp mở");
+  // Rà UX mục 17: không quảng cáo giá (199.000 / 139.300 ₫) khi chưa có nút nào dùng được.
+  const sapCo = page.getByTestId("cg-chua-mo");
+  await expect(sapCo).toContainText("Sắp có");
+  await expect(sapCo.getByRole("link", { name: /Về Tài khoản/ })).toHaveAttribute("href", "/tai-khoan");
   await expect(page.getByTestId("cg-form")).toHaveCount(0);
-  await expect(page.getByTestId("cg-cam-ket")).toContainText("hoàn 100 %");
+  await expect(page.getByTestId("cg-cam-ket")).toHaveCount(0);
+  await expect(page.locator("main")).not.toContainText("₫");
+  await expect(page.locator("main")).not.toContainText("%");
 });
 
 test("công tắc bật: giá + câu đầu giảm, đếm ký tự, ô chia sẻ hồ sơ KHÔNG tích sẵn và nói rõ gửi gì", async ({ page }) => {
@@ -46,7 +51,10 @@ test("công tắc bật: giá + câu đầu giảm, đếm ký tự, ô chia s�
   const form = page.getByTestId("cg-form");
   await expect(form).toBeVisible();
   await expect(page.getByTestId("cg-gia")).toContainText("139.300 ₫");
-  await expect(page.getByTestId("cg-gia")).toContainText("câu đầu giảm 30 %");
+  // Mục 23: phần trăm viết liền "30%" (không dấu cách → "%" không rơi xuống dòng riêng), như trang Nạp Sao.
+  await expect(page.getByTestId("cg-gia")).toContainText("câu đầu giảm 30%");
+  await expect(page.getByTestId("cg-cam-ket")).toContainText("hoàn 100%");
+  expect(await page.locator("main").innerText()).not.toMatch(/\d %/);
   const dongY = page.getByTestId("cg-dong-y");
   await expect(dongY).not.toBeChecked();
   await expect(page.getByTestId("cg-xem-chia-se")).toHaveCount(0);

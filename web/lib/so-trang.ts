@@ -195,7 +195,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   // SAO-CG (0029): trang bán câu hỏi chuyên gia — chữ trong app/hoi-chuyen-gia/page.tsx; chỉ có trong sitemap khi công tắc bật.
   { duong: "/hoi-chuyen-gia", nhom: "cong_cu", ten: "Hỏi chuyên gia", o: ["seo"], mac_dinh: {
     tieu_de_seo: "Hỏi chuyên gia — một câu hỏi, trả lời trong 48 giờ", h1: "Một câu hỏi, một câu trả lời của người thật",
-    mo_ta_seo: "Đặt một câu hỏi về thần số học, Tử vi, Bát tự, Kinh Dịch hoặc phong thuỷ cho chuyên gia Đức Luân. Trả lời bằng văn bản trong 48 giờ, quá hạn hoàn 100 %. Giá cố định, thanh toán QR.",
+    mo_ta_seo: "Đặt một câu hỏi về thần số học, Tử vi, Bát tự, Kinh Dịch hoặc phong thuỷ cho chuyên gia Đức Luân. Trả lời bằng văn bản trong 48 giờ, quá hạn hoàn 100%. Giá cố định, thanh toán QR.",
   } },
   { duong: "/ung-ho", nhom: "cong_cu", ten: "Ủng hộ đội ngũ phát triển", o: O_TRANG_PHU, mac_dinh: {
     tieu_de_seo: "Ủng hộ đội ngũ phát triển Hiểu Bản Thân", h1: "Ủng hộ đội ngũ phát triển",
