@@ -66,6 +66,7 @@ export default async function DieuKhoan() {
           <li>Thưởng mời bạn bè chỉ có <b>một tầng</b> — chi tiết ở mục <Link href="#gioi-thieu" className="text-gold underline">Chương trình giới thiệu</Link>. Không có hoa hồng nhiều tầng.</li>
           <li>Sao bị huỷ khi xoá tài khoản.</li>
           <li><b>Mua Sao</b> (trang Nạp Sao): giá ghi bằng đồng, trả một lần qua chuyển khoản QR, không tự gia hạn. Sao mua không hết hạn.</li>
+          <li><b>Tặng lần nạp đầu</b> (khi chương trình đang bật): Sao cộng thêm cho lần nạp đầu tiên là <b>Sao tặng</b> (hạn 365 ngày), chỉ một lần mỗi tài khoản, và bị thu hồi nếu đơn nạp đầu đó được hoàn tiền.</li>
           <li><b>Hoàn tiền:</b> nạp nhầm gói hoặc nạp trùng mà chưa dùng số Sao đó, gửi mã đơn qua trang Liên hệ trong 7 ngày → hoàn qua chuyển khoản, Sao của đơn bị trừ lại. Lỗi hệ thống (đã trả tiền mà không nhận Sao) được cộng bù hoặc hoàn tiền.</li>
           <li>Chúng tôi không lưu số thẻ hay thông tin tài khoản ngân hàng của bạn; cổng thanh toán xử lý việc đó.</li>
         </ul>
