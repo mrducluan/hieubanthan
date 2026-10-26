@@ -26,6 +26,7 @@ import { MenuDauTrang } from "./globals/MenuDauTrang";
 import { TinhNang } from "./globals/TinhNang";
 import { ChuChung } from "./globals/ChuChung";
 import { TrangChu } from "./globals/TrangChu";
+import { LoiDiTiep } from "./globals/LoiDiTiep";
 import { slugViet } from "./kiem-dinh/kiem-dinh";
 import { webUrl } from "./lib/web";
 import { cauHinhKho, cauHinhS3 } from "./lib/kho-anh";
@@ -69,7 +70,7 @@ export default buildConfig({
   },
   i18n: { supportedLanguages: { vi, en }, fallbackLanguage: "vi" },
   collections: [BaiViet, ChuyenMuc, TacGia, Media, TrangDich, NoiDungTrang, MauCum, BienTapVien],
-  globals: [TrangChu, MenuDauTrang, DieuHuong, TinhNang, ChuChung],
+  globals: [TrangChu, MenuDauTrang, DieuHuong, LoiDiTiep, TinhNang, ChuChung],
   editor: lexicalEditor(),
   db: postgresAdapter({
     // Vercel chạy nhiều bản hàm song song, mỗi bản giữ pool riêng. pg mặc định max=10 → vài bản là vượt hạn mức

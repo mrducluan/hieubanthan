@@ -12,7 +12,7 @@
     "generate:importmap": "payload generate:importmap",
     "migrate": "payload migrate",
     "migrate:create": "payload migrate:create",
-    "test": "node --test src/kiem-dinh/*.test.ts src/lib/*.test.ts",
+    "test": "node --test src/kiem-dinh/*.test.ts src/lib/*.test.ts src/bai-khoi-tao/*.test.ts",
     "test:tich-hop": "payload run tests/tich-hop.ts",
     "test:kho-anh": "payload run tests/kho-anh-s3.ts",
     "e2e": "playwright test",

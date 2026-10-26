@@ -6,7 +6,9 @@ import { tinhGate, MAU_TOI_THIEU } from "../lib/so-lieu-ngoai";
 
 type SK = { su_kien: string } & Record<string, unknown>;
 const suKien = (p: Page) => p.evaluate(() => ((window as unknown as { __hbt_su_kien?: SK[] }).__hbt_su_kien ?? []));
-const KHOA_CHO_PHEP = new Set(["su_kien", "feature_version", "mo_dun", "kind", "ma_moi", "so_duong_doi", "huu_ich", "ket_qua", "nguon", "quan_he", "loai"]);
+// CTA-2: end_cta_* (khối thẻ cuối trang) chỉ mang mã khối + đường dẫn trong site + vị trí — không dữ liệu cá nhân.
+const KHOA_CHO_PHEP = new Set(["su_kien", "feature_version", "mo_dun", "kind", "ma_moi", "so_duong_doi", "huu_ich", "ket_qua", "nguon", "quan_he", "loai",
+  "khoi", "trang", "lap", "den", "thu_tu", "so_lap"]);
 const dem = (ds: SK[], ten: string, mo_dun?: string) => ds.filter((e) => e.su_kien === ten && (!mo_dun || e.mo_dun === mo_dun)).length;
 
 test("funnel Phase 1: landing → bắt đầu → hồ sơ → đọc xong → góp ý → hỏi; không lộ dữ liệu cá nhân", async ({ page }) => {

@@ -8,8 +8,11 @@ import { BookOpen, CalendarDays, Clock, Eye, ShieldCheck } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CtaBen, CtaBlog } from "@/components/blog/CtaBlog";
 import { KhungBaiDoc, MucLucGon, THAN_BAI_ID } from "@/components/blog/KhungBaiDoc";
-import { mangCuaBai } from "@/lib/blog-mang";
+import { lienKetKienThuc, mangCuaBai } from "@/lib/blog-mang";
 import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
+import { TheLap } from "@/components/khung/TheLap";
+import { DoKhoiCuoi } from "@/components/khung/DoKhoiCuoi";
+import { theLapBlog, type TuyChonLap } from "@/lib/the-lap";
 import { CHUYEN_GIA, duongChuyenGia, idChuyenGia, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
 import { anhCms, cacChuyenMuc, KIEU_LD, NHAN_LOAI, phutDoc, type BaiCms as Bai, type BaiCmsTomTat, type NguoiCms, type TinhNangCms } from "@/lib/cms";
 import { locHtmlCms } from "@/lib/cms-html";
@@ -52,7 +55,10 @@ function ldNguoiCms(n: NguoiCms) {
   };
 }
 
-export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms; lienQuan: BaiCmsTomTat[]; nhap: boolean }) {
+export function BaiCms({ bai, tn, lienQuan, nhap, lapCms }: {
+  bai: Bai; tn: TinhNangCms; lienQuan: BaiCmsTomTat[]; nhap: boolean;
+  /** CTA-2: cấu hình "Lối đi tiếp" CMS + tỉ lệ bấm cho thẻ bù ở "Đọc tiếp" */ lapCms?: Pick<TuyChonLap, "cauHinh" | "tiLe">;
+}) {
   const duong = duongBlog(bai.slug);       // cùng dạng với canonical (audit P2)
   const { html, mucLuc } = locHtmlCms(bai.noi_dung_html);
   const anh = anhCms(bai.anh_bia, "vua");
@@ -195,9 +201,10 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
 
       {tn.keu_goi_cong_cu && <CtaBlog mang={mang} className="mt-12" />}
 
-      {tn.bai_lien_quan && lienQuan.length > 0 && (
+      {tn.bai_lien_quan && (
         <section aria-labelledby="doc-tiep" className="mt-12">
           <h2 id="doc-tiep" className="text-2xl">Đọc tiếp</h2>
+        <DoKhoiCuoi khoi="doc_tiep" />
           <ul className="mt-4 grid gap-3 sm:grid-cols-3">
             {lienQuan.map((b) => (
               <li key={b.slug}>
@@ -207,6 +214,7 @@ export function BaiCms({ bai, tn, lienQuan, nhap }: { bai: Bai; tn: TinhNangCms;
                 </Link>
               </li>
             ))}
+            {theLapBlog(lienQuan.length, mang, lienKetKienThuc(mang).map((x) => x.duong), lapCms).map((t) => <TheLap key={t.duong} t={t} kieu="chu-nho" />)}
           </ul>
         </section>
       )}

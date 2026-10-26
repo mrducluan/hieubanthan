@@ -190,6 +190,30 @@ export interface BaoCaoPosthog {
   } | null;
   /** Phễu lời mời theo loại thẻ: số thô theo mã link (lib/pheu-the.ts tinhPheuThe nối các bước). null = truy vấn lỗi. */
   pheuThe: SoPheuThe | null;
+  /** CTA-2: khối thẻ cuối trang — theo khối (thấy / bấm thẻ thật / bấm thẻ bù) + theo thẻ bù (đường dẫn). null = lỗi. */
+  loiDi: BaoCaoLoiDi | null;
+}
+
+export type DongKhoiCuoi = { khoi: string; thay: number; bam_that: number; bam_lap: number };
+export type DongTheBu = { den: string; thay: number; bam: number; ti_le: number | null; du_mau: boolean };
+export type BaoCaoLoiDi = { khoi: DongKhoiCuoi[]; the: DongTheBu[] };
+
+/** Gom số thô PostHog (CTA-2). `khoi` = [khoi, lap, sự kiện, số]; `the` = [den, thấy, bấm] (chỉ lap = 1).
+ *  Thẻ xếp theo tỉ lệ làm mượt (đủ mẫu trước) — đúng thứ tự web dùng khi bật "Tự xếp theo lượt bấm". */
+export function tinhLoiDi(khoi: [unknown, unknown, unknown, unknown][], the: [unknown, unknown, unknown][], mau = 30): BaoCaoLoiDi {
+  const m = new Map<string, DongKhoiCuoi>();
+  for (const [k, lap, e, n] of khoi) {
+    const ma = typeof k === "string" && k ? k : "khac";
+    const d = m.get(ma) ?? { khoi: ma, thay: 0, bam_that: 0, bam_lap: 0 };
+    if (e === "end_cta_viewed" && Number(lap) === 0) d.thay += Number(n);
+    else if (e === "end_cta_clicked") Number(lap) === 1 ? (d.bam_lap += Number(n)) : (d.bam_that += Number(n));
+    m.set(ma, d);
+  }
+  const ds = the.filter(([d]) => typeof d === "string" && d.startsWith("/")).map(([d, t, b]) => {
+    const thay = Number(t), bam = Number(b);
+    return { den: d as string, thay, bam, ti_le: thay ? bam / thay : null, du_mau: thay >= mau, muot: (bam + 1) / (thay + 20) };
+  }).sort((a, b) => Number(b.du_mau) - Number(a.du_mau) || b.muot - a.muot || b.thay - a.thay);
+  return { khoi: [...m.values()].sort((a, b) => b.thay - a.thay), the: ds.map(({ muot: _m, ...x }) => x) };
 }
 
 export async function hogql<T>(query: string): Promise<T[]> {
@@ -286,6 +310,14 @@ async function baoCaoPosthogTho(): Promise<BaoCaoPosthog> {
   }).catch(() => null);
   // Phễu lời mời theo loại thẻ — nối bằng đúng mã link (ma_moi). Chỉ mã + con số đếm.
   const chuoi = (x: unknown) => (x === null || x === undefined ? "" : String(x));
+  const loiDi = await Promise.all([
+    hogql<[unknown, unknown, unknown, unknown]>(
+      `SELECT toString(properties.khoi), properties.lap, event, count() FROM events
+       WHERE ${CT} AND event IN ('end_cta_viewed', 'end_cta_clicked') GROUP BY 1, 2, 3 LIMIT 500`),
+    hogql<[unknown, unknown, unknown]>(
+      `SELECT toString(properties.den) AS den, countIf(event = 'end_cta_viewed'), countIf(event = 'end_cta_clicked') FROM events
+       WHERE ${CT} AND event IN ('end_cta_viewed', 'end_cta_clicked') AND properties.lap = 1 GROUP BY den LIMIT 500`),
+  ]).then(([k, t]) => tinhLoiDi(k, t)).catch(() => null);
   const pheuThe = await Promise.all([
     hogql<[unknown, unknown, unknown, number, unknown]>(
       `SELECT toString(properties.ma_moi) AS ma, toString(properties.kind) AS k, toString(properties.co_ma) AS cm, count(), toString(min(timestamp))
@@ -311,7 +343,7 @@ async function baoCaoPosthogTho(): Promise<BaoCaoPosthog> {
     moiBan: mb.map(([k, cm, n]) => ({ kind: chuoi(k), co_ma: chuoi(cm), nguoi: Number(n) })),
   })).catch(() => null);
   return {
-    yDinh, kiemChung, cta, pheuThe,
+    yDinh, kiemChung, cta, pheuThe, loiDi,
     pheu: PHEU.map(([e, ten]) => ({ su_kien: e, ten, luot: theo.get(e)?.luot ?? 0, nguoi: nguoi(e) })),
     quayLai: ql[0] ? { truoc: Number(ql[0][0]), tro_lai: Number(ql[0][1]) } : null,
     gate: {

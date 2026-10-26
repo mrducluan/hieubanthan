@@ -59,7 +59,7 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
         ))}
       </ul>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-12" />
-      <Suspense fallback={null}><BaiLienQuanMang mang={MANG_CONG_CU[cd.mang] ?? null} className="mt-12" /></Suspense>
+      <Suspense fallback={null}><BaiLienQuanMang mang={MANG_CONG_CU[cd.mang] ?? null} className="mt-12" tru={tru} boQua={[duong]} duong={duong} /></Suspense>
     </div>
   );
 }

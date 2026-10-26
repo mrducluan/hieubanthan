@@ -20,7 +20,7 @@ permissions:
 jobs:
   e2e:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -50,6 +50,11 @@ jobs:
         working-directory: web
         run: npm run e2e
 
+      # CTA-2: khối thẻ cuối trang với CMS GIẢ (bài viết CMS, cấu hình "Lối đi tiếp", đo end_cta_*) — dùng lại bản build ở trên.
+      - name: Chạy E2E có CMS giả
+        working-directory: web
+        run: npm run e2e:cms
+
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
@@ -57,6 +62,8 @@ jobs:
           path: |
             web/playwright-report/
             web/test-results/
+            web/playwright-report-cms/
+            web/test-results-cms/
           retention-days: 7
 
   # SAO-2 chuỗi THẬT: Supabase thu nhỏ (GoTrue + PostgREST tải bản phát hành ghim, Postgres service, migration thật của

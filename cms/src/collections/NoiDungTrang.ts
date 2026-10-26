@@ -6,6 +6,7 @@
 // + /gioi-thieu, /lien-he (ND-3), pháp lý (ND-4), trang KB qua mẫu cụm + ghi đè (ND-5).
 // Quyền: nhóm pháp lý + mục "quy-trinh" của /gioi-thieu chỉ Quản trị/Chủ biên sửa (điều kiện ở access + hook, không chỉ
 // ẩn nút); biên tập viên soạn nháp nhóm khác, Chủ biên xuất bản; cộng tác viên không thấy collection.
+import { kiemTheLoiDi, truongTheLoiDi } from "../globals/LoiDiTiep";
 import { FixedToolbarFeature, HeadingFeature, LinkFeature, lexicalEditor, lexicalHTMLField } from "@payloadcms/richtext-lexical";
 import {
   APIError, type CollectionAfterChangeHook, type CollectionAfterDeleteHook, type CollectionBeforeChangeHook,
@@ -160,6 +161,9 @@ export const locHinh: CollectionBeforeChangeHook = async ({ data, originalDoc, r
 const kiemDinh: CollectionBeforeChangeHook = ({ data, originalDoc, req }) => {
   if (req.context?.boQuaKiemDinh) return data;
   const d = { ...(originalDoc ?? {}), ...data } as Doc;
+  // CTA-2: chữ thẻ "Lối đi tiếp" qua luật ranh giới chung — chặn cả khi lưu nháp (thẻ không có bản nháp riêng ngoài trang).
+  const loiThe = kiemTheLoiDi(((d as { loi_di_tiep?: { ten?: unknown; mo_ta?: unknown }[] }).loi_di_tiep) ?? []);
+  if (loiThe.length) throw new APIError("Chưa lưu được — thẻ Lối đi tiếp: " + loiThe.join(" · "), 400, null, true);
   const kq = kiemTrang(d, { mucNoiQuyTrinh: d.duong === "/gioi-thieu" || d.nhom === "phap_ly" });
   if (xuatBan(data) && kq.chan.length) {
     throw new APIError("Chưa xuất bản được — sửa các lỗi sau: " + kq.chan.map((m) => m.thong_diep).join(" · "), 400, null, true);
@@ -226,6 +230,18 @@ export const tabHinh = {
     description: "Thay hình vẽ trong code (hình lớn trang chủ, biểu tượng mảng, ảnh chia sẻ của cụm…) bằng ảnh Thư viện ảnh. Bỏ chọn = hình gốc.",
   },
   fields: [{ name: "hinh", label: "Hình trên trang", type: "json", admin: { components: { Field: "/components/HinhTrenTrang#HinhTrenTrang" } } } as Field],
+};
+
+/** CTA-2 — tab "Lối đi tiếp": thẻ ưu tiên của riêng URL này cho khối cuối trang thiếu ô (đứng trước nhóm mảng của
+ *  global "Lối đi tiếp cuối trang"). Trang pháp lý không có khối cuối → ẩn. */
+export const tabLoiDi = {
+  label: "Lối đi tiếp",
+  admin: {
+    condition: (d: Partial<Doc>) => d?.nhom !== "phap_ly",
+    description: "Thẻ ưu tiên ở khối cuối trang của URL này (khi khối thiếu ô). Để trống = theo global \"Lối đi tiếp cuối trang\".",
+  },
+  fields: [{ name: "loi_di_tiep", label: "Thẻ ưu tiên", type: "array", maxRows: 6, labels: { singular: "Thẻ", plural: "Thẻ" },
+    admin: { initCollapsed: true }, fields: truongTheLoiDi } as Field],
 };
 
 export const NoiDungTrang: CollectionConfig = {
@@ -364,6 +380,7 @@ export const NoiDungTrang: CollectionConfig = {
         },
         tabChu,
         tabHinh,
+        tabLoiDi,
         tabKhoi(choKhoi, true),
         {
           label: "Mặc định trong code",

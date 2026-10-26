@@ -14,6 +14,8 @@ import * as migration_20261021_090000_seo_k_tuoi_gop from './20261021_090000_seo
 import * as migration_20261021_235710_nd_7_chu_tren_trang from './20261021_235710_nd_7_chu_tren_trang';
 import * as migration_20261022_012038_nd_7_dot_2_hinh_chu_chung from './20261022_012038_nd_7_dot_2_hinh_chu_chung';
 import * as migration_20261024_045231_cot_kho_anh_s3 from './20261024_045231_cot_kho_anh_s3';
+import * as migration_20261026_060345_cta_2_loi_di_tiep from './20261026_060345_cta_2_loi_di_tiep';
+import * as migration_20261026_070000_bai_khoi_tao from './20261026_070000_bai_khoi_tao';
 
 export const migrations = [
   {
@@ -94,6 +96,16 @@ export const migrations = [
   {
     up: migration_20261024_045231_cot_kho_anh_s3.up,
     down: migration_20261024_045231_cot_kho_anh_s3.down,
-    name: '20261024_045231_cot_kho_anh_s3'
+    name: '20261024_045231_cot_kho_anh_s3',
+  },
+  {
+    up: migration_20261026_060345_cta_2_loi_di_tiep.up,
+    down: migration_20261026_060345_cta_2_loi_di_tiep.down,
+    name: '20261026_060345_cta_2_loi_di_tiep',
+  },
+  {
+    up: migration_20261026_070000_bai_khoi_tao.up,
+    down: migration_20261026_070000_bai_khoi_tao.down,
+    name: '20261026_070000_bai_khoi_tao',
   },
 ];
