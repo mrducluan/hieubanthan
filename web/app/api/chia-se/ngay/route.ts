@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { kyMaNgay } from "@/lib/ma-moi";
+import { traLoiChiaSe } from "@/lib/loi-chia-se";
 
 const Input = z.object({
   ten_hien_thi: z.string().trim().min(1).max(40),
@@ -31,8 +32,8 @@ export async function POST(req: Request): Promise<NextResponse> {
   try {
     return NextResponse.json({ ma: kyMaNgay({ t: ten_hien_thi, n: d.ngay_ca_nhan.so, d: d.ngay_xem, ...(k ? { k } : {}),
       ...(d.so_noi_bat ? { s: d.so_noi_bat.goc } : {}) }), ngay: d.ngay_xem });
-  } catch {
-    // SEC-2: không trả lời lỗi nội bộ (tên biến môi trường, chi tiết kiểm dữ liệu) ra trình duyệt.
-    return NextResponse.json({ error: "Chưa tạo được thẻ." }, { status: 502 });
+  } catch (e) {
+    // SEC-2: không trả lời lỗi nội bộ (tên biến môi trường, chi tiết kiểm dữ liệu) ra trình duyệt — chỉ ghi log.
+    return traLoiChiaSe(e, "ngay");
   }
 }

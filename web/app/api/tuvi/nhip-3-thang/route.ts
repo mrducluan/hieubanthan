@@ -42,11 +42,10 @@ export async function POST(req: Request): Promise<NextResponse> {
 
   const out = Nhip3ThangOutput.safeParse(body);
   if (!out.success) {
-    return NextResponse.json(
-      { error: "Output engine lệch schema — kiểm tra phiên bản hai bên",
-        chi_tiet: out.error.flatten().fieldErrors },
-      { status: 502 },
-    );
+    // SEC-2 / mục 18: chi tiết lệch schema chỉ vào log + Sentry; người dùng thấy câu thường.
+    console.error("[api/tuvi/nhip-3-thang] engine lệch schema", out.error.flatten().fieldErrors);
+    baoLoi(new Error("engine_lech_schema"), { duong: "/api/tuvi/nhip-3-thang" });
+    return NextResponse.json({ error: "Máy tính toán đang cập nhật, thử lại sau ít phút." }, { status: 502 });
   }
   return NextResponse.json(out.data);
 }

@@ -68,12 +68,14 @@ test("cài đặt: gói Khởi đầu + tặng lần nạp đầu mặc định 
   expect(giaTriHieuLuc(pt, { "sao.nap_dau.phan_tram": 150 })).toBe(20);
 });
 
-test("/nap-sao chưa bật tài khoản: ghi VND + ≈ N báo cáo, chọn sẵn Phổ biến, không có dòng tặng; Điều khoản nêu Sao tặng lần đầu", async ({ page }) => {
+test("/nap-sao chưa bật tài khoản: ghi VND + ≈ N báo cáo, KHÔNG chọn sẵn gói (cổng chưa mở), không có dòng tặng; Điều khoản nêu Sao tặng lần đầu", async ({ page }) => {
   await page.goto("/nap-sao");
   await expect(page.getByTestId("goi-thu")).toContainText("29.000 ₫");
   await expect(page.getByTestId("goi-thu")).toContainText("≈ 1 báo cáo Luận giải toàn bộ");
   await expect(page.getByTestId("goi-gia_dinh")).toContainText("≈ 8 báo cáo");
-  await expect(page.locator('input[value="pho_bien"]')).toBeChecked();
+  // Rà UX mục 8: cổng chưa mở → không chọn sẵn gói nào (chọn sẵn "Phổ biến" chỉ khi cổng mở — hộp nạp nhanh kiểm ở dưới).
+  await expect(page.locator('input[value="pho_bien"]')).not.toBeChecked();
+  await expect(page.locator('input[value="pho_bien"]')).toBeDisabled();
   await expect(page.getByTestId("nap-dau")).toHaveCount(0);
   await expect(page.getByTestId("sao-tang-dau")).toHaveCount(0);
   await expect(page.getByTestId("nap-sao")).not.toContainText(CAM);

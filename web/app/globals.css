@@ -179,6 +179,19 @@
   .noi-dung-phap-ly ul ul { @apply mt-1.5 list-[circle]; }
   .noi-dung-phap-ly b { @apply font-semibold text-fg; }
   .noi-dung-phap-ly code { @apply rounded bg-surface-2 px-1.5 py-0.5 text-[0.8em] text-fg; }
+  /* Rà UX mục 16 — bảng pháp lý dưới 640px: mỗi dòng một thẻ dọc, nhãn cột lấy từ data-nhan (chỉ đổi trình bày). */
+  @media (max-width: 639.98px) {
+    .bang-the thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .bang-the, .bang-the tbody, .bang-the tr, .bang-the td { display: block; width: 100%; }
+    .bang-the tr + tr { margin-top: 0.75rem; }
+    .bang-the tr { @apply rounded-2xl border border-line/70 bg-surface/40 px-4 py-3; }
+    .bang-the td { @apply py-1.5 pr-0; }
+    .bang-the td:first-child { @apply pb-2 font-semibold text-fg; }
+    .bang-the td + td { @apply border-t border-line/40; }
+    .bang-the td:not(:first-child)::before {
+      content: attr(data-nhan); @apply mb-0.5 block text-[0.75rem] font-semibold uppercase tracking-wider text-fg-faint;
+    }
+  }
 }
 
 /* Lá số (VZ-2): hai giao diện. "dem" theo tông web; "giay" = giấy cổ sáng như lá số in.

@@ -2,10 +2,11 @@
 // SAO-CG — biểu mẫu đặt câu hỏi chuyên gia. Thứ tự: chọn mảng → viết câu (đếm ký tự) → (tuỳ chọn, KHÔNG tích sẵn) chia sẻ hồ sơ
 // → kiểm câu đặc biệt ở engine (khủng hoảng → lời hỗ trợ, không bán) → đăng nhập nếu cần → hội viên dùng lượt HOẶC thanh toán QR.
 // Hồ sơ gửi đi = ảnh chụp CHỈ các trường cần (lib/chuyen-gia-hoi HoSoCg), lấy từ hồ sơ trên máy, chỉ khi ô đồng ý được tích.
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { SapCo } from "@/components/khung/SapCo";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { HeartHandshake, Loader2, LockKeyhole, QrCode, Sparkles } from "lucide-react";
+import { HeartHandshake, Loader2, QrCode, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Select, Textarea } from "@/components/ui/input";
 import { ghi } from "@/lib/do-luong";
@@ -29,7 +30,10 @@ function anhChupHoSo(h: HoSo): HoSoCg {
   };
 }
 
-export function HoiChuyenGia({ banDau }: { banDau: ThongTinCg }) {
+/** Phần trăm viết liền ("30%") — một cách viết trên mọi trang, "%" không rơi xuống dòng riêng. */
+const pt = (n: number) => `${n}%`;
+
+export function HoiChuyenGia({ banDau, nguoi }: { banDau: ThongTinCg; nguoi?: ReactNode }) {
   const router = useRouter();
   const hoSo = useHoSo();
   const [tt, setTt] = useState<ThongTinCg>(banDau);
@@ -105,16 +109,44 @@ export function HoiChuyenGia({ banDau }: { banDau: ThongTinCg }) {
     }
   }
 
+  // Rà UX mục 17: chưa mở → không bày giá, cách thanh toán, cam kết; chỉ "Sắp có" + lối quay về.
   if (!tt.bat) {
     return (
-      <section className="glass mt-8 rounded-2xl p-5" data-testid="cg-chua-mo">
-        <p className="flex items-center gap-2 text-fg"><LockKeyhole className="size-4 text-gold" aria-hidden /> Hỏi chuyên gia sắp mở.</p>
-        <p className="mt-1 text-sm text-fg-muted">Trong lúc chờ, bạn vẫn hỏi đáp miễn phí ở từng mảng — <Link href="/kham-pha" className="text-gold hover:underline">Khám phá</Link>.</p>
-      </section>
+      <SapCo testId="cg-chua-mo"
+        moTa="Bạn sẽ đặt được một câu hỏi cụ thể để chuyên gia trả lời bằng văn bản. Mục này chưa mở nên chưa gửi được câu hỏi."
+        trongLucCho="Trong lúc chờ, mỗi mảng đều có khung hỏi đáp để bạn hỏi ngay." />
     );
   }
 
+  const han = tt.han_gio;
   return (
+    <>
+    <p className="mt-3 max-w-2xl text-fg-muted">
+      Bạn đang vướng một việc cụ thể — đổi việc, chọn thời điểm, một mối quan hệ, cách bố trí nhà? Đặt một câu hỏi, chuyên gia đọc
+      hồ sơ của bạn (nếu bạn cho phép) và trả lời bằng văn bản trong <b className="text-fg">{han} giờ</b>. Quá hạn, bạn được hoàn {pt(100)}.
+    </p>
+
+    {nguoi}
+
+    <section className="mt-8" aria-labelledby="cg-cach">
+      <h2 id="cg-cach" className="font-serif text-2xl">Cách hoạt động</h2>
+      <ol className="mt-3 grid gap-3 sm:grid-cols-3">
+        {[
+          ["1. Bạn hỏi", "Chọn mảng, viết một câu hỏi cụ thể (tối đa 1.500 ký tự). Tự quyết có chia sẻ ngày giờ sinh hay không."],
+          ["2. Thanh toán", `Giá cố định ${dinhDangVnd(tt.gia_vnd)}${tt.giam_lan_dau_pt > 0 ? `, câu đầu giảm ${pt(tt.giam_lan_dau_pt)} còn ${dinhDangVnd(tt.gia_lan_dau)}` : ""}. Quét QR bằng app ngân hàng.`],
+          [`3. Trả lời trong ${han} giờ`, `Chuyên gia viết riêng cho bạn, đọc ở mục Tài khoản → Câu hỏi của tôi. Quá hạn → hoàn ${pt(100)}.`],
+        ].map(([t, m]) => (
+          <li key={t} className="glass rounded-2xl p-4"><p className="font-semibold text-fg">{t}</p><p className="mt-1 text-sm text-fg-muted">{m}</p></li>
+        ))}
+      </ol>
+      <p className="mt-3 text-sm text-fg-muted" data-testid="cg-cam-ket">
+        <b className="text-fg">Cam kết:</b> trả lời trong {han} giờ kể từ lúc thanh toán, hoặc hoàn {pt(100)} tiền. Thanh toán bằng đồng, không dùng Sao.
+        Đây là góc nhìn tham khảo — không thay bác sĩ, luật sư hay chuyên gia tài chính; không chẩn đoán bệnh, không đoán xổ số, không nói ngày chết.
+        Chi tiết ở <Link href="/dieu-khoan#chuyen-gia" className="text-gold underline">Điều khoản</Link> và{" "}
+        <Link href="/chinh-sach-rieng-tu#du-lieu" className="text-gold underline">Chính sách quyền riêng tư</Link>.
+      </p>
+    </section>
+
     <section className="mt-8 space-y-5" aria-labelledby="cg-form" data-testid="cg-form">
       <h2 id="cg-form" className="font-serif text-2xl">Câu hỏi của bạn</h2>
       <label className="block text-sm">
@@ -170,9 +202,9 @@ export function HoiChuyenGia({ banDau }: { banDau: ThongTinCg }) {
         <div className="flex-1 text-sm">
           <p className="font-medium text-fg" data-testid="cg-gia">
             {dinhDangVnd(gia)} · một câu hỏi
-            {tt.lan_dau !== false && tt.giam_lan_dau_pt > 0 && <span className="ml-2 rounded-full bg-gold/15 px-2 py-0.5 text-xs text-gold">câu đầu giảm {tt.giam_lan_dau_pt} %</span>}
+            {tt.lan_dau !== false && tt.giam_lan_dau_pt > 0 && <span className="ml-2 whitespace-nowrap rounded-full bg-gold/15 px-2 py-0.5 text-xs text-gold">câu đầu giảm {pt(tt.giam_lan_dau_pt)}</span>}
           </p>
-          <p className="text-fg-muted">Thanh toán QR một lần bằng đồng, không dùng Sao. Trả lời trong {tt.han_gio} giờ hoặc hoàn 100 %.</p>
+          <p className="text-fg-muted">Thanh toán QR một lần bằng đồng, không dùng Sao. Trả lời trong {tt.han_gio} giờ hoặc hoàn {pt(100)}.</p>
           {typeof tt.dang_cho === "number" && tt.dang_cho > 0 && <p className="mt-1 text-xs text-fg-faint">Bạn đang có {tt.dang_cho} câu chờ trả lời — xem ở <Link href="/tai-khoan/cau-hoi" className="text-gold underline">Câu hỏi của tôi</Link>.</p>}
         </div>
         <div className="flex flex-col gap-2 sm:items-end">
@@ -189,5 +221,6 @@ export function HoiChuyenGia({ banDau }: { banDau: ThongTinCg }) {
         </div>
       </div>
     </section>
+    </>
   );
 }

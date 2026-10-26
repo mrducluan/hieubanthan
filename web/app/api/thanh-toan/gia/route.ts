@@ -15,7 +15,11 @@ export async function POST(req: Request) {
   const { data: don } = await nm.sb.from("don_nap").select("ma_don,so_tien,cong").eq("ma_don", vao.data.ma_don).maybeSingle();
   if (!don || don.cong !== "gia") return NextResponse.json({ error: "Không thấy đơn." }, { status: 404 });
   const dv = khachDichVu();
-  if (!dv) return NextResponse.json({ error: "Thiếu SUPABASE_SERVICE_ROLE_KEY" }, { status: 503 });
+  if (!dv) {
+    // Tên khoá chỉ vào log máy chủ; người thử chỉ thấy câu thường.
+    console.error("[thanh-toan/gia] thiếu SUPABASE_SERVICE_ROLE_KEY");
+    return NextResponse.json({ error: "Cổng thử chưa sẵn sàng, bạn thử lại sau nhé." }, { status: 503 });
+  }
   const { data, error } = await dv.rpc("nap_sao_tu_cong", {
     p_ma_don: don.ma_don, p_so_tien: don.so_tien, p_cong: "gia", p_ma_giao_dich: `gia-${don.ma_don}`,
   });

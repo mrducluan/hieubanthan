@@ -74,25 +74,30 @@ test("cài đặt: hội viên mặc định TẮT, giá 3.990.000 (100.000–50
   expect(giaTriHieuLuc(gia, { "sao.hoi_vien.gia_vnd": 5 })).toBe(3990000);   // ngoài khoảng → mặc định
 });
 
-test("/hoi-vien khi TẮT: vẫn có trang (noindex), H1 máy chủ, quyền lợi + giá + hoàn tiền, không nút mua, dòng sắp mở, không đếm ngược / gạch giá", async ({ page, request }) => {
+test("/hoi-vien khi TẮT: vẫn có trang (noindex), H1 máy chủ, chỉ khung 'Sắp có' + lối quay về — không giá, không nút mua, không đếm ngược", async ({ page, request }) => {
   const html = await (await request.get("/hoi-vien")).text();
   expect(html).toMatch(/<h1[^>]*>Hội viên năm<\/h1>/);
   expect(html).toMatch(/<meta name="robots" content="noindex/);
   await page.goto("/hoi-vien");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Hội viên năm");
-  await expect(page.getByTestId("gia-hoi-vien")).toHaveText("3.990.000 ₫");
-  await expect(page.getByTestId("hoi-vien-quyen-loi")).toContainText("Mở mọi chương Luận giải toàn bộ");
-  await expect(page.getByTestId("hoi-vien-quyen-loi")).toContainText("15 Sao tặng mỗi tháng");
-  await expect(page.getByTestId("hoi-vien-quyen-loi")).toContainText("2 câu hỏi chuyên gia mỗi năm");
-  await expect(page.getByTestId("hoi-vien-quyen-loi")).toContainText("Mua một lần, không tự gia hạn");
-  await expect(page.getByTestId("hoi-vien-hoan-tien")).toContainText("14 ngày");
-  await expect(page.getByTestId("hoi-vien-hoan-tien")).toContainText("tháng tròn còn lại");
-  await expect(page.getByTestId("hoi-vien-chua-mo")).toContainText("sắp mở");
+  // Rà UX mục 17: chưa mua được thì không bày giá to / quyền lợi / chính sách hoàn tiền như một trang bán hàng.
+  const sapCo = page.getByTestId("hoi-vien-chua-mo");
+  await expect(sapCo).toContainText("Sắp có");
+  await expect(sapCo).toContainText("chưa mua được");
+  await expect(sapCo.getByRole("link", { name: /Về Tài khoản/ })).toHaveAttribute("href", "/tai-khoan");
+  await expect(sapCo.getByRole("link", { name: /Khám phá/ })).toHaveAttribute("href", "/kham-pha");
+  await expect(page.getByTestId("gia-hoi-vien")).toHaveCount(0);
+  await expect(page.getByTestId("hoi-vien-quyen-loi")).toHaveCount(0);
   await expect(page.getByTestId("nut-mua-hoi-vien")).toHaveCount(0);
   await expect(page.getByTestId("mua-hoi-vien")).toHaveCount(0);
+  await expect(page.locator("main")).not.toContainText("₫");
   await expect(page.locator("main")).not.toContainText(CAM);
   expect(html).not.toMatch(/line-through|<s>|<del>/);
-  await expect(page.getByRole("link", { name: /Điều khoản sử dụng, mục Hội viên năm/ })).toHaveAttribute("href", "/dieu-khoan#hoi-vien");
+  // Không có lối vào nào từ Tài khoản khi chưa mở (cũng không vào menu đầu trang).
+  await page.goto("/tai-khoan");
+  await expect(page.getByTestId("du-lieu-cua-toi")).toBeVisible();
+  await expect(page.getByTestId("tk-dich-vu")).toHaveCount(0);
+  await expect(page.locator('header a[href="/hoi-vien"], nav a[href="/hoi-vien"]')).toHaveCount(0);
 
   // Điều khoản: mục Hội viên năm nêu không tự gia hạn, hoàn tiền đúng chính sách, Sao tháng không cộng dồn.
   await page.goto("/dieu-khoan");

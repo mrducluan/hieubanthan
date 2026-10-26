@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
 import { z } from "zod";
 import { kyMa } from "@/lib/ma-moi";
+import { LOI_TAO_LINK, traLoiChiaSe } from "@/lib/loi-chia-se";
 import type { LuanGiaiResult } from "@/lib/engine";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
@@ -36,7 +37,7 @@ export async function POST(req: Request): Promise<NextResponse> {
     const k = kq.cac_vi_tri.find((v) => v.vi_tri === "duong_doi")?.nghia?.tu_khoa;
     return NextResponse.json({ ma: kyMa({ t: ten_hien_thi, so, ...(k ? { k } : {}) }) });
   } catch (e) {
-    const msg = e instanceof Error && e.message.includes("LOI_MOI_SECRET") ? e.message : "Không kết nối được máy tính toán.";
-    return NextResponse.json({ error: msg }, { status: 502 });
+    // fetch hỏng (engine không trả lời) là TypeError; còn lại (ký mã, thiếu khoá…) → câu chung. Chi tiết chỉ vào log.
+    return traLoiChiaSe(e, "tao", e instanceof TypeError ? "Không kết nối được máy tính toán. Thử lại sau." : LOI_TAO_LINK);
   }
 }

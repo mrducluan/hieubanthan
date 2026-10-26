@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { kyMaBanDo, tuTuMa } from "@/lib/ma-moi";
+import { traLoiChiaSe } from "@/lib/loi-chia-se";
 
 const Input = z.object({
   ten_hien_thi: z.string().trim().min(1).max(24),
@@ -52,7 +53,6 @@ export async function POST(req: Request): Promise<NextResponse> {
     // `the`: đúng phần đã ký (để người gửi xem trước thẻ) — dữ liệu của chính họ, không có ngày sinh.
     return NextResponse.json({ ma, tu: tuTuMa("bd", ma), bien_the: `b${b}`, the });
   } catch (e) {
-    const msg = e instanceof Error && e.message.includes("LOI_MOI_SECRET") ? e.message : "Chưa tạo được thẻ.";
-    return NextResponse.json({ error: msg }, { status: 502 });
+    return traLoiChiaSe(e, "ban-do");
   }
 }

@@ -30,6 +30,14 @@ export function ghiLuaChon(v: LuaChon) {
   bao(v);
 }
 
+/** Cookie thống kê đang bật hay tắt — nói thật cả khi người dùng chưa chọn: chưa chọn theo mặc định của site (HOI_DONG_Y
+ *  tắt → đang bật; bật hỏi đồng ý → đang tắt tới khi bấm Đồng ý), đúng quy tắc DoLuongGoogle áp cho analytics_storage. */
+export function trangThaiCookie(luaChon: LuaChon | null, hoiDongY: boolean = HOI_DONG_Y): { bat: boolean; chu: string } {
+  if (luaChon === "dong_y") return { bat: true, chu: "Đang bật (bạn đã đồng ý)" };
+  if (luaChon === "tu_choi") return { bat: false, chu: "Đang tắt (bạn đã tắt)" };
+  return hoiDongY ? { bat: false, chu: "Đang tắt (bạn chưa chọn)" } : { bat: true, chu: "Đang bật (bạn chưa chọn)" };
+}
+
 /** Mở lại hộp hỏi (link "Tuỳ chọn cookie" ở chân trang). */
 export function hoiLai() {
   try { window.localStorage.removeItem(KHOA); } catch { /* bỏ qua */ }

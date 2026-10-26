@@ -57,15 +57,25 @@ test("route webhook: sai chữ ký 401; đúng chữ ký nhưng máy chủ chưa
   expect((await request.post("/api/thanh-toan/gia", { data: { ma_don: 1 } })).status()).toBe(404);
 });
 
-test("/nap-sao: 3 gói, chưa bật tài khoản thì báo sắp mở; /ung-ho + chân trang hiện ví", async ({ page }) => {
+test("/nap-sao: 3 gói, chưa bật tài khoản thì nói rõ chưa cần nạp + khối gói làm mờ, không chọn được; /ung-ho + chân trang hiện ví", async ({ page }) => {
   await page.goto("/nap-sao");
   await expect(page.locator("h1")).toHaveText("Nạp Sao");
+  // Rà UX mục 8: không chỗ nào thu Sao (e2e không Supabase → công tắc tắt) → câu rõ ở đầu trang, trước bảng giá.
+  await expect(page.getByTestId("nap-mien-phi")).toHaveText("Hiện mọi luận giải đang miễn phí — bạn chưa cần nạp.");
   await expect(page.locator('[data-testid^="goi-"]')).toHaveCount(3);
   await expect(page.getByTestId("goi-pho_bien")).toContainText("110 Sao");
   await expect(page.getByTestId("goi-pho_bien")).toContainText("99.000 ₫");
-  await expect(page.getByTestId("nap-chua-mo")).toBeVisible();
-  await page.getByTestId("goi-gia_dinh").click();
-  await expect(page.locator('input[value="gia_dinh"]')).toBeChecked();
+  await expect(page.getByTestId("nap-chua-mo")).toContainText("Nạp Sao chưa mở");
+  // Cổng chưa mở → khối gói bị khoá: không chọn sẵn, bấm không chọn được, không nút nạp (không ngõ cụt có dấu ✓).
+  await expect(page.getByTestId("khoi-goi")).toHaveAttribute("disabled", "");
+  await expect(page.locator('input[value="gia_dinh"]')).toBeDisabled();
+  for (const ma of ["thu", "pho_bien", "gia_dinh"]) await expect(page.locator(`input[value="${ma}"]`)).not.toBeChecked();
+  await page.getByTestId("goi-gia_dinh").click({ force: true });
+  await expect(page.locator('input[value="gia_dinh"]')).not.toBeChecked();
+  await expect(page.getByTestId("nut-nap")).toHaveCount(0);
+  // Đo tỉ lệ rời /nap-sao theo trạng thái: checkout_viewed mang mien_phi (1 = chưa chỗ nào thu Sao).
+  await expect.poll(async () => (await page.evaluate(() => (window as unknown as { __hbt_su_kien?: { su_kien: string }[] }).__hbt_su_kien ?? []))
+    .find((e) => e.su_kien === "checkout_viewed")).toMatchObject({ kind: "chua_mo", mien_phi: 1 });
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
 
   await page.goto("/ung-ho");

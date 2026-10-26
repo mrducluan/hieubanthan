@@ -9,6 +9,7 @@ import { postJson } from "@/lib/goi-api";
 import { hoTenList, tenGoi, type HoSo } from "@/lib/hoso";
 import { ghi, maNgauNhien } from "@/lib/do-luong";
 import { docQuyUocDD } from "@/lib/quy-uoc-dd";
+import { ChepTay, guiHoacChep } from "@/components/chia-se/GuiLink";
 
 /** Mã ?tu= của link (ngẫu nhiên, không định danh) — tạo trước để ghi share_created ngay lúc bấm. */
 export const maMoiNgay = () => `hn.${maNgauNhien(10)}`;
@@ -33,10 +34,11 @@ export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false
   const [ma, setMa] = useState<string | null>(null);
   const [tuDaTao, setTuDaTao] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const [chepTay, setChepTay] = useState<string | null>(null);   // máy không cho chép → hiện link để chép tay
   const c = useChuChung();
 
   async function chiaSe() {
-    setDang(true);
+    setDang(true); setChepTay(null);
     try {
       const tu = maMoiNgay();
       ghi("share_created", { kind: "the_ngay", ma_moi: tu });
@@ -44,10 +46,9 @@ export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false
       setMa(m);
       setTuDaTao(tu);
       const chu = `Hôm nay là Ngày cá nhân ${soNgay} của mình${chuDe ? ` — ${chuDe}` : ""}. Còn bạn hôm nay là ngày mấy?`;
-      if (typeof navigator.share === "function") {
-        try { await navigator.share({ title: "Hôm nay của bạn", text: chu, url }); return; } catch { /* huỷ → chép */ }
-      }
-      try { await navigator.clipboard.writeText(`${chu} ${url}`); setDaChep(true); setTimeout(() => setDaChep(false), 2500); } catch { /* bỏ qua */ }
+      const kq = await guiHoacChep({ title: "Hôm nay của bạn", text: chu, url }, `${chu} ${url}`);
+      if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2500); }
+      else if (kq === "khong_duoc") setChepTay(url);
     } finally {
       setDang(false);
     }
@@ -65,6 +66,7 @@ export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false
           <Download className="size-4" aria-hidden /> {c("chia_se.tai_story")}
         </a>
       )}
+      {chepTay && <ChepTay url={chepTay} className="w-full" />}
     </div>
   );
 }

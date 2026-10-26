@@ -8,6 +8,7 @@ import { useChuChung } from "@/components/cms/ChuChung";
 import { Button } from "@/components/ui/button";
 import { ghi, maNgauNhien } from "@/lib/do-luong";
 import { duongXongDatNam } from "@/lib/tuoi-dan-gian";
+import { ChepTay, guiHoacChep } from "@/components/chia-se/GuiLink";
 
 export const maMoiXongDat = () => `xd.${maNgauNhien(10)}`;
 
@@ -17,10 +18,11 @@ export function NutChiaSeXongDat({ nam, canChi, className = "", nho = false }: {
   const [dang, setDang] = useState(false);
   const [tu, setTu] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const [chepTay, setChepTay] = useState<string | null>(null);
   const c = useChuChung();
 
   async function chiaSe() {
-    setDang(true);
+    setDang(true); setChepTay(null);
     try {
       const ma = maMoiXongDat();
       ghi("share_created", { kind: "xong_dat", ma_moi: ma });
@@ -29,10 +31,9 @@ export function NutChiaSeXongDat({ nam, canChi, className = "", nho = false }: {
       u.searchParams.set("tu", ma);
       const url = u.toString();
       const chu = `Tết ${canChi ? `${canChi} ` : ""}${nam} nhà mình nên mời tuổi nào xông đất? Gõ năm sinh gia chủ là biết 3 tuổi hợp.`;
-      if (typeof navigator.share === "function") {
-        try { await navigator.share({ title: `Tuổi xông đất Tết ${nam}`, text: chu, url }); return; } catch { /* huỷ → chép */ }
-      }
-      try { await navigator.clipboard.writeText(`${chu} ${url}`); setDaChep(true); setTimeout(() => setDaChep(false), 2500); } catch { /* bỏ qua */ }
+      const kq = await guiHoacChep({ title: `Tuổi xông đất Tết ${nam}`, text: chu, url }, `${chu} ${url}`);
+      if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2500); }
+      else if (kq === "khong_duoc") setChepTay(url);
     } finally {
       setDang(false);
     }
@@ -50,6 +51,7 @@ export function NutChiaSeXongDat({ nam, canChi, className = "", nho = false }: {
           <Download className="size-4" aria-hidden /> {c("chia_se.tai_story")}
         </a>
       )}
+      {chepTay && <ChepTay url={chepTay} className="w-full" />}
     </div>
   );
 }

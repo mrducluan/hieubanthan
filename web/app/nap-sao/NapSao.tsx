@@ -4,7 +4,7 @@
 // dòng trung tính + số Sao tặng của từng gói (không đếm ngược, không giới hạn suất, không gạch giá).
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Check, Gift, Loader2, QrCode, Sparkles } from "lucide-react";
+import { Check, Gift, Loader2, LockKeyhole, QrCode, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import { supabase } from "@/lib/supabase/trinh-duyet";
@@ -14,10 +14,13 @@ import {
 
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
 
-export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau }: {
+export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau, mienPhi = false }: {
   goi: GoiHienThi[]; cong: "payos" | "gia" | null; giaBaoCao: number; napDau: NapDau | null;
+  /** Không chỗ nào đang trừ Sao (máy chủ đọc công tắc) — chỉ để đo tỉ lệ rời trang theo trạng thái này. */
+  mienPhi?: boolean;
 }) {
-  const [chon, setChon] = useState(goiMacDinh(goi)?.ma ?? "");
+  // Rà UX mục 8: cổng chưa mở → không chọn sẵn gói nào (không có dấu ✓ dẫn tới ngõ cụt).
+  const [chon, setChon] = useState(cong ? goiMacDinh(goi)?.ma ?? "" : "");
   const [token, setToken] = useState<string | null | undefined>(undefined);
   const [napDau, setNapDau] = useState<NapDau | null>(napDauBanDau);
   const [daHoi, setDaHoi] = useState(false);   // đã hỏi "lần đầu" của tài khoản đang đăng nhập (tránh hiện rồi tắt)
@@ -25,7 +28,7 @@ export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau }: {
   const [loi, setLoi] = useState<string | null>(null);
 
   useEffect(() => {
-    ghi("checkout_viewed", { kind: cong ?? "chua_mo" });
+    ghi("checkout_viewed", { kind: cong ?? "chua_mo", mien_phi: mienPhi ? 1 : 0 });
     if (!cong) return;
     void supabase().then(async (sb) => {
       const { data } = (await sb?.auth.getSession()) ?? { data: { session: null } };
@@ -39,7 +42,7 @@ export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau }: {
           .finally(() => setDaHoi(true));
       }
     });
-  }, [cong]);
+  }, [cong, mienPhi]);
 
   async function nap() {
     if (!token) return;
@@ -69,7 +72,13 @@ export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau }: {
           <Gift className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />{dongNapDau(nd)}
         </p>
       )}
-      <fieldset>
+      {!cong && (
+        <p id="ly-do-chua-mo" className="flex items-start gap-2 rounded-2xl border border-line/70 bg-surface/40 px-4 py-3 text-sm text-fg-muted" data-testid="nap-chua-mo">
+          <LockKeyhole className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
+          <span><b className="text-fg">Nạp Sao chưa mở</b> nên chưa chọn gói được. Bảng giá dưới đây để bạn xem trước.</span>
+        </p>
+      )}
+      <fieldset disabled={!cong} aria-describedby={cong ? undefined : "ly-do-chua-mo"} className={cong ? undefined : "opacity-60"} data-testid="khoi-goi">
         <legend className="sr-only">Chọn gói Sao</legend>
         <div className={`grid gap-3 ${goi.length % 3 === 0 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
           {goi.map((x) => {
@@ -77,7 +86,7 @@ export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau }: {
             const tang = nd ? saoTangLanDau(x.sao, nd.phan_tram) : 0;
             return (
               <label key={x.ma} data-testid={`goi-${x.ma}`}
-                className={`glass relative flex cursor-pointer flex-col gap-1 rounded-2xl border p-5 transition-colors ${chon === x.ma ? "border-gold" : "border-line/70 hover:border-gold/50"}`}>
+                className={`glass relative flex flex-col gap-1 rounded-2xl border p-5 transition-colors ${!cong ? "cursor-not-allowed border-line/70" : chon === x.ma ? "cursor-pointer border-gold" : "cursor-pointer border-line/70 hover:border-gold/50"}`}>
                 <input type="radio" name="goi" value={x.ma} checked={chon === x.ma} onChange={() => setChon(x.ma)} className="sr-only" />
                 {x.nhan && <span className="absolute -top-2.5 right-4 rounded-full bg-gold px-2.5 py-0.5 text-[11px] font-semibold text-bg">{x.nhan}</span>}
                 <span className="text-sm text-fg-muted">{x.ten}</span>
@@ -93,15 +102,13 @@ export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau }: {
         </div>
       </fieldset>
 
-      <div className="glass flex flex-col gap-4 rounded-2xl p-5 sm:flex-row sm:items-center">
+      <div className={`glass flex flex-col gap-4 rounded-2xl p-5 sm:flex-row sm:items-center ${cong ? "" : "opacity-60"}`}>
         <QrCode className="size-8 shrink-0 text-gold" aria-hidden />
         <div className="flex-1 text-sm">
           <p className="font-medium text-fg">Chuyển khoản QR — app ngân hàng hoặc ví bất kỳ</p>
           <p className="text-fg-muted">Quét mã, xác nhận là xong. Sao vào ví trong vài giây sau khi tiền về. Sao mua không hết hạn.</p>
         </div>
-        {!cong ? (
-          <p className="text-sm text-fg-faint" data-testid="nap-chua-mo">Nạp Sao đang chuẩn bị mở.</p>
-        ) : token === undefined ? (
+        {!cong ? null : token === undefined ? (
           <Button disabled><Loader2 className="animate-spin" aria-hidden /> Đang kiểm tra</Button>
         ) : token === null ? (
           <Button asChild><Link href="/dang-nhap?tiep=/nap-sao">Đăng nhập để nạp</Link></Button>

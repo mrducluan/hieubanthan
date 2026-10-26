@@ -100,7 +100,7 @@ export function CauHoiCuaToi() {
             <p className="flex items-center gap-2 text-sm text-fg-muted" data-testid="cg-han"><Clock className="size-4 text-gold" aria-hidden />{dongHan(c.han_tra_loi)}</p>
           )}
           {c.trang_thai === "qua_han" && (
-            <p className="text-sm text-fg-muted">Chuyên gia chưa kịp trả lời trong hạn. Chúng tôi sẽ liên hệ qua email tài khoản để hoàn 100 % tiền — bạn không cần làm gì thêm.</p>
+            <p className="text-sm text-fg-muted">Chuyên gia chưa kịp trả lời trong hạn. Chúng tôi sẽ liên hệ qua email tài khoản để hoàn 100% tiền — bạn không cần làm gì thêm.</p>
           )}
           {c.trang_thai === "hoan" && <p className="text-sm text-fg-muted">Đã hoàn tiền{c.hoan_luc ? ` ngày ${ngayGio(c.hoan_luc)}` : ""}.</p>}
           {c.trang_thai === "cho_tra" && (

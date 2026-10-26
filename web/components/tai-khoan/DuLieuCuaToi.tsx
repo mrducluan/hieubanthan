@@ -8,7 +8,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { coGoogle, docLuaChon, hoiLai } from "@/lib/dong-y";
+import { coGoogle, docLuaChon, ghiLuaChon, hoiLai, SU_KIEN, trangThaiCookie, type LuaChon } from "@/lib/dong-y";
 import { ngayDongY, thuHoiDongY, useDongYDuLieu } from "@/lib/dong-y-du-lieu";
 import { useDanhSachNha, useHoSoNha, xoaMoiNhaTrenMay } from "@/lib/ho-so-nha";
 import { useHoSo } from "@/lib/hoso";
@@ -17,6 +17,9 @@ import { useNhacViec, xoaNhac } from "@/lib/nhac-viec";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { nhaTaiKhoan, xoaNhaTaiKhoan } from "@/lib/tai-khoan-nha";
 import { nhacTaiKhoan, xoaNhacTaiKhoan } from "@/lib/tai-khoan-nhac";
+
+/** Nút hành động trong danh sách: có viền rõ, cao ≥ 44px để chạm trên điện thoại (rà UX mục 15). */
+const NUT = "min-h-11 px-4";
 
 function Dong({ ten, trangThai, nut, testId }: { ten: string; trangThai: ReactNode; nut?: ReactNode; testId?: string }) {
   return (
@@ -45,7 +48,13 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
   const [hoiThuHoi, setHoiThuHoi] = useState(false);
   const [bao, setBao] = useState<string | null>(null);
 
-  useEffect(() => { setCoGa(coGoogle()); setCookie(docLuaChon()); }, []);
+  useEffect(() => {
+    setCoGa(coGoogle()); setCookie(docLuaChon());
+    // Đổi ở chân trang / hộp hỏi cookie → cập nhật dòng này ngay.
+    const nghe = (e: Event) => setCookie((e as CustomEvent<LuaChon | null>).detail);
+    window.addEventListener(SU_KIEN, nghe);
+    return () => window.removeEventListener(SU_KIEN, nghe);
+  }, []);
   useEffect(() => {
     if (!user) { setNhaTk(null); setNhacTk(null); return; }
     let huy = false;
@@ -68,20 +77,27 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
         <ul className="divide-y divide-line/60">
           <Dong ten="Đồng ý gửi ngày giờ sinh đi tính (không lưu khi chưa đăng nhập)" testId="dl-dong-y"
             trangThai={dongY ? `Đã đồng ý ngày ${ngayDongY(dongY) ?? "—"}` : dongY === null ? "Chưa đồng ý — form hồ sơ sẽ hỏi khi bạn bấm xem." : "…"}
-            nut={dongY ? <Button size="sm" variant="ghost" onClick={() => setHoiThuHoi(true)}>Thu hồi</Button> : undefined} />
+            nut={dongY ? <Button size="sm" variant="outline" className={NUT} onClick={() => setHoiThuHoi(true)}>Thu hồi</Button> : undefined} />
           <Dong ten="Hồ sơ (họ tên, ngày giờ sinh)"
             trangThai={hoSo ? <>Đang lưu trên máy — sửa / xoá ở mục <a href="#tren-may" className="text-gold underline">Trên máy này</a>.</> : "Không có."} />
           <Dong ten="Hồ sơ nhà (hướng, năm xây, người cùng ở, bố cục)" testId="dl-nha-may"
             trangThai={soNha ? `${soNha} căn trên máy này.` : "Không có."}
-            nut={soNha ? <Button size="sm" variant="ghost" onClick={() => { xoaMoiNhaTrenMay(); setBao("Đã xoá hồ sơ nhà trên máy này."); }}>Xoá hồ sơ nhà trên máy</Button> : undefined} />
+            nut={soNha ? <Button size="sm" variant="outline" className={NUT} onClick={() => { xoaMoiNhaTrenMay(); setBao("Đã xoá hồ sơ nhà trên máy này."); }}>Xoá hồ sơ nhà trên máy</Button> : undefined} />
           <Dong ten="Mốc nhắc (hiện ở Hôm nay)" testId="dl-nhac-may"
             trangThai={nhac.length ? `${nhac.length} mốc trên máy này.` : "Không có."}
-            nut={nhac.length ? <Button size="sm" variant="ghost" onClick={() => { for (const n of nhac) xoaNhac(n.id); setBao("Đã xoá mốc nhắc trên máy này."); }}>Xoá mốc nhắc trên máy</Button> : undefined} />
-          {coGa && (
-            <Dong ten="Cookie thống kê truy cập (Google Analytics)"
-              trangThai={cookie === "tu_choi" ? "Đã từ chối." : cookie === "dong_y" ? "Đã đồng ý." : "Chưa chọn — đang bật theo mặc định."}
-              nut={<Button size="sm" variant="ghost" onClick={hoiLai}>Tuỳ chọn cookie</Button>} />
-          )}
+            nut={nhac.length ? <Button size="sm" variant="outline" className={NUT} onClick={() => { for (const n of nhac) xoaNhac(n.id); setBao("Đã xoá mốc nhắc trên máy này."); }}>Xoá mốc nhắc trên máy</Button> : undefined} />
+          {coGa && cookie !== undefined && (() => {
+            const tt = trangThaiCookie(cookie);
+            return (
+              <Dong ten="Cookie thống kê truy cập (Google Analytics)" testId="dl-cookie" trangThai={tt.chu}
+                nut={<div className="flex flex-wrap gap-2">
+                  {tt.bat
+                    ? <Button size="sm" variant="outline" className={NUT} onClick={() => ghiLuaChon("tu_choi")} data-testid="dl-cookie-tat">Tắt</Button>
+                    : <Button size="sm" variant="outline" className={NUT} onClick={() => ghiLuaChon("dong_y")} data-testid="dl-cookie-bat">Bật</Button>}
+                  <Button size="sm" variant="outline" className={NUT} onClick={hoiLai}>Tuỳ chọn cookie</Button>
+                </div>} />
+            );
+          })()}
         </ul>
       </div>
 
@@ -93,10 +109,10 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
               trangThai={<>Xem / xoá ở mục <a href="#tai-khoan" className="text-gold underline">Tài khoản</a> phía trên (có hiệu lực ngay).</>} />
             <Dong ten="Nhà đã lưu vào tài khoản" testId="dl-nha-tk"
               trangThai={nhaTk === null ? "…" : nhaTk ? "Đang lưu." : "Không có."}
-              nut={nhaTk ? <Button size="sm" variant="ghost" onClick={() => xoaNhaTaiKhoan(user.id).then(() => { setNhaTk(false); setBao("Đã xoá nhà trong tài khoản."); }).catch((e) => setBao((e as Error).message))}>Xoá nhà trong tài khoản</Button> : undefined} />
+              nut={nhaTk ? <Button size="sm" variant="outline" className={NUT} onClick={() => xoaNhaTaiKhoan(user.id).then(() => { setNhaTk(false); setBao("Đã xoá nhà trong tài khoản."); }).catch((e) => setBao((e as Error).message))}>Xoá nhà trong tài khoản</Button> : undefined} />
             <Dong ten="Mốc nhắc trong tài khoản (để gửi thông báo đúng ngày)" testId="dl-nhac-tk"
               trangThai={nhacTk === null ? "…" : nhacTk.length ? `${nhacTk.length} mốc.` : "Không có."}
-              nut={nhacTk?.length ? <Button size="sm" variant="ghost" onClick={async () => {
+              nut={nhacTk?.length ? <Button size="sm" variant="outline" className={NUT} onClick={async () => {
                 try { for (const n of nhacTk) await xoaNhacTaiKhoan(user.id, n.ngay, n.ma); setNhacTk([]); setBao("Đã xoá mốc nhắc trong tài khoản."); }
                 catch (e) { setBao((e as Error).message); }
               }}>Xoá mốc nhắc trong tài khoản</Button> : undefined} />
@@ -104,7 +120,7 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
               trangThai={<>Bật / tắt ở mục <a href="#tai-khoan" className="text-gold underline">Tài khoản</a> phía trên; tắt là máy chủ xoá đăng ký thiết bị này.</>} />
             <Dong ten="Điều bạn bấm “Ghi nhớ” (câu băn khoăn)" testId="dl-ky-uc"
               trangThai={kyUc.ds.length ? `${kyUc.ds.length} mục gần nhất.` : "Không có."}
-              nut={kyUc.ds.length ? <Button size="sm" variant="ghost" onClick={async () => { for (const k of kyUc.ds) await kyUc.xoa(k.id); setBao("Đã xoá các điều đã ghi nhớ."); }}>Xoá ký ức</Button> : undefined} />
+              nut={kyUc.ds.length ? <Button size="sm" variant="outline" className={NUT} onClick={async () => { for (const k of kyUc.ds) await kyUc.xoa(k.id); setBao("Đã xoá các điều đã ghi nhớ."); }}>Xoá ký ức</Button> : undefined} />
             <Dong ten="Bài luận đã lưu và tuỳ chọn “Tự lưu”"
               trangThai={<>Xem, xoá từng bài hoặc tắt tự lưu ở <Link href="/ban-than/bai-da-luu" className="text-gold underline">Bài đã lưu</Link>.</>} />
           </ul>
@@ -113,7 +129,7 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
 
       <div className="flex flex-wrap items-center gap-3 border-t border-line/70 pt-4 text-sm">
         {chuDe ? (
-          <Button asChild size="sm" variant="secondary"><a href={chuDe}>Yêu cầu bản sao dữ liệu qua email</a></Button>
+          <Button asChild size="sm" variant="secondary" className={NUT}><a href={chuDe}>Yêu cầu bản sao dữ liệu qua email</a></Button>
         ) : <span className="text-fg-muted">Yêu cầu bản sao dữ liệu: liên hệ qua email ở chân trang.</span>}
         <Link href="/chinh-sach-rieng-tu#dong-y" className="text-xs text-fg-muted underline underline-offset-2 hover:text-fg">Cách bạn đồng ý và rút lại</Link>
       </div>
