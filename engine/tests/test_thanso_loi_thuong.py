@@ -14,7 +14,7 @@ from app.narrative import hoi_van
 MA = re.compile(r"\b[a-z]+(?:_[a-z0-9]+)+\b")
 # Trường chứa MÃ (web không in thẳng ra) — không quét.
 TRUONG_MA = {"ma", "vi_tri", "loai", "phai", "quan_he", "nhom", "school_id", "source_id", "quy_uoc_duong_doi", "trang_thai",
-             "muc", "ma_mau", "che_do", "y_dinh", "linh_vuc", "xu_ly", "tru", "doi_tuong", "id", "khoa", "engine_version",
+             "muc", "ma_mau", "tham_chieu", "che_do", "y_dinh", "linh_vuc", "xu_ly", "tru", "doi_tuong", "id", "khoa", "engine_version",
              "loai_goc", "tu_chuong", "phien_ban", "mat", "vai", "do_phu", "kieu", "nguon_id"}
 NGAY_XEM = dt.date(2026, 10, 26)
 NGUOI = [("Trần Thị Mai", 14, 3, 1998), ("Nguyễn Đức Luân", 24, 10, 1988), ("Lê Văn Bình", 19, 7, 1985), ("Phạm Thu Hà", 13, 4, 1993)]
