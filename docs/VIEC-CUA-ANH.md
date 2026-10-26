@@ -97,6 +97,11 @@
    nhận lời mời cho ≥ 3 tài khoản / 30 ngày, hoặc người mời và người được mời cùng máy → người mời không được thưởng /
    hoa hồng, ghi cờ ở `/quan-tri/doanh-thu` → "Cờ gian lận lời mời". Gia đình dùng chung một máy → tăng ngưỡng ở
    `/quan-tri/cai-dat`. Cần `SAO_KHOA_SECRET` (đã có cho SAO-2) để tính mã băm thiết bị.
+4o. [ ] **Nạp đầu SAO-ND (2026-10-26) — chạy migration 0027** (SAU 0026): Supabase → SQL Editor → dán toàn bộ
+   `supabase/migrations/0027_nap_dau.sql` → Run (rollback: `0027_nap_dau.down.sql`). Kiểm bằng `da_chay_chua.sql` (dòng
+   0027 = true). Rồi bật ở `/quan-tri/cai-dat` nhóm "Nạp Sao": gói Khởi đầu 12.000 ₫ / 12 Sao (`sao.goi_khoi_dau.bat`)
+   và tặng Sao lần nạp đầu (`sao.nap_dau.bat`, mặc định 20%). **Thứ tự 0025 → 0026 → 0027 bắt buộc, và KHÔNG chạy lại
+   0025 sau khi đã chạy 0027** (0025 đặt lại danh sách loại Sao chưa có `nap_dau` → lỗi ràng buộc khi đã có dòng tặng).
 4l. [ ] **Bảo mật SEC-2 (2026-10-23, `docs/BAO-MAT.md` mục SEC-2) — làm theo thứ tự:**
    1. [x] Render có `ENGINE_API_KEY` — anh xác nhận 2026-10-23.
    2. [ ] **Chạy migration** (sau khi merge PR SEC-2): Supabase → **SQL Editor** → New query → dán toàn bộ nội dung
