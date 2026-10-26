@@ -6,7 +6,7 @@ import { getPayload } from "payload";
 import sharp from "sharp";
 import config from "../src/payload.config";
 import { htmlSangKhoi } from "../src/lib/html-lexical";
-import { chuanHoaMotBai, NGUON_ANH_BLOG7 } from "../src/lib/chuan-hoa-notfair";
+import { chuanHoaMotBai, dsBaiNotFairCms, NGUON_ANH_BLOG7 } from "../src/lib/chuan-hoa-notfair";
 
 const payload = await getPayload({ config });
 const dau = `bl7${Date.now().toString(36)}`;
@@ -35,7 +35,24 @@ try {
   });
   xoa.push({ collection: "bai-viet", id: bai.id });
 
+  // Danh sách cho khung CMS (không phụ thuộc NotFair) có bài này.
+  assert.ok((await dsBaiNotFairCms(payload)).some((b) => b.id === bai.id), "khung Chuẩn hoá thấy bài nguồn NotFair");
+
+  // AUDIT: báo sẽ sửa gì + điểm dự kiến, KHÔNG ghi gì, không tạo ảnh.
+  const soAnh = (await payload.count({ collection: "media", overrideAccess: true })).totalDocs;
+  const au = await chuanHoaMotBai(payload, undefined, bai.id, { ghi: false });
+  assert.equal(au.da_ghi, false);
+  assert.ok(au.thay_doi.some((t) => /Sẽ thay ảnh bìa tối/.test(t)), au.thay_doi.join(" | "));
+  assert.ok(au.thay_doi.some((t) => /Sẽ vẽ \+ chèn ảnh "Tóm tắt nhanh"/.test(t)));
+  assert.ok(au.diem_sau > au.diem_truoc + 15, `${au.diem_truoc} → ${au.diem_sau}`);
+  assert.ok(au.con_lai.length > 0, "liệt kê việc máy không tự làm");
+  const sauAudit = await payload.findByID({ collection: "bai-viet", id: bai.id, draft: true, depth: 0, overrideAccess: true }) as any;
+  assert.equal(sauAudit.slug, SLUG_CU, "audit không đổi bài");
+  assert.equal((await payload.count({ collection: "media", overrideAccess: true })).totalDocs, soAnh, "audit không tạo ảnh");
+
   const kq = await chuanHoaMotBai(payload, undefined, bai.id);
+  assert.equal(kq.da_ghi, true);
+  assert.equal(kq.diem_sau, au.diem_sau, "điểm sau chuẩn hoá đúng như audit dự kiến");
   console.log(`  điểm kiểm định ${kq.diem_truoc} → ${kq.diem_sau}\n${kq.thay_doi.map((t) => `    • ${t}`).join("\n")}`);
   assert.ok(kq.diem_sau > kq.diem_truoc + 15);
 

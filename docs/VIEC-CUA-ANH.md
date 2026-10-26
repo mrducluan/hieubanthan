@@ -872,7 +872,8 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
   (hiệu lực 22/10/2026). Nếu đã sửa trang này trong CMS thì thêm ở CMS (CMS thắng code).
 - [ ] **WP12. Quyết Vercel Pro** trước khi bật thu Sao / muốn chọn giờ nhận thông báo (Hobby: 2 cron, cấm thương mại).
 - [ ] BLOG7. (2026-10-26) Sau khi PR "BLOG-7 chuẩn hoá bài NotFair" merge + CMS deploy (migration tự chạy): vào CMS → Bài viết → mở khung
-  "Bài trao đổi NotFair" → nếu còn bài chưa nhập bấm "Nhập tất cả", rồi bấm **"Chuẩn hoá SEO các bài đã nhập"** (chạy lại an toàn).
+  "Bài trao đổi NotFair" → nếu còn bài chưa nhập bấm "Nhập tất cả". Khung **"Chuẩn hoá SEO / GEO bài NotFair"** (đầu danh sách
+  Bài viết, luôn hiện) → bấm **Audit** để xem trước sẽ sửa gì (chưa ghi), rồi **"Chuẩn hoá SEO tất cả"** (chạy lại an toàn).
   Mỗi bài thành bản nháp "Gửi duyệt": đọc "Ghi chú của Chủ biên" (danh sách thay đổi + điểm trước → sau), xem ảnh bìa nền sáng,
   sửa chữ nếu cần, bấm **Xuất bản**. Đường dẫn có dấu cũ tự chuyển 308 sang đường dẫn không dấu. Sau khi xuất bản hết: Search Console →
   gửi lại `sitemap.xml`. Nếu NotFair (đối tác) phản hồi link kiểm tra bị chuyển hướng → báo em, em đặt lại slug gốc cho bài đó.
