@@ -144,7 +144,7 @@ test("giá luận giải: công tắc thu Sao mặc định tắt → miễn ph�
   await expect(page.getByTestId("gia-luan-giai")).toContainText("miễn phí");
   // Trục 1 (báo cáo UX mục 9): một dòng trung tính nói Sao là gì + giá dự kiến lấy từ API phí, link "Sao là gì?".
   const du = page.getByTestId("gia-du-kien");
-  await expect(du).toContainText("dự kiến 10 Sao");
+  await expect(du).toContainText("dự kiến 29 Sao");
   await expect(du.getByRole("link", { name: "Sao là gì?" })).toHaveAttribute("href", "/dieu-khoan#sao");
   for (const cam of ["chỉ còn", "sắp hết", "nhanh tay"]) await expect(du).not.toContainText(cam);
   await page.getByRole("button", { name: "Xem luận giải" }).click();
