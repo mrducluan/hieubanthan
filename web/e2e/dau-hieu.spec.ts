@@ -3,6 +3,9 @@
 import { test, expect } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 
+/** Thoát mọi ký tự đặc biệt của RegExp (kể cả dấu gạch ngược) trước khi ghép chữ vào mẫu. */
+const thoatRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 for (const [duong, h1] of [
   ["/phong-thuy/dau-hieu/guong-doi-dien-giuong", "Gương đối diện giường có sao không?"],
   ["/phong-thuy/dau-hieu/nha-ve-sinh-o-giua-nha", "Nhà vệ sinh ở giữa nhà có sao không?"],
@@ -12,7 +15,7 @@ for (const [duong, h1] of [
     const r = await request.get(duong);
     expect(r.status()).toBe(200);
     const html = await r.text();
-    expect(html).toMatch(new RegExp(`<h1[^>]*>${h1.replace(/[?]/g, "\\?")}`));
+    expect(html).toMatch(new RegExp(`<h1[^>]*>${thoatRegex(h1)}`));
     expect(html).toContain("Trả lời nhanh");
     expect(html).toContain("Việc nên làm theo chi phí");
     expect(html).toContain("<table");
