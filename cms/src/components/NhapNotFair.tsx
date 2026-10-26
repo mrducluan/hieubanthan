@@ -65,6 +65,32 @@ export function NhapNotFair() {
     setDs(null);   // đọc lại bảng → cột trạng thái + nút "Mở bài"
   }
 
+  /** BLOG-7: chuẩn hoá SEO mọi bài NotFair đã nhập → bản nháp "Gửi duyệt" (bản đang hiện trên web chưa đổi). */
+  async function chuanHoa() {
+    if (!window.confirm("Chuẩn hoá SEO mọi bài NotFair đã nhập? Hệ thống điền trường còn thiếu, đổi đường dẫn sang không dấu "
+      + "(đường dẫn cũ tự chuyển 308), vẽ ảnh nền sáng, thêm hỏi đáp + liên kết nội bộ. Kết quả là BẢN NHÁP — đọc lại rồi bấm Xuất bản từng bài.")) return;
+    setDang("__chuan_hoa");
+    setTb(null);
+    type KqBai = { tieu_de: string; thay_doi: string[]; diem_truoc: number; diem_sau: number; loi?: string };
+    const kq: KqBai[] = [];
+    const can = (ds?.ds ?? []).filter((x) => x.id_cms != null);
+    for (const [i, x] of can.entries()) {
+      setTb(`Đang chuẩn hoá ${i + 1}/${can.length}: ${x.tieu_de}`);
+      const r = await fetch("/api/bai-viet/chuan-hoa-notfair", { method: "POST", credentials: "include",
+        headers: { "content-type": "application/json" }, body: JSON.stringify({ id: x.id_cms }) }).catch(() => null);
+      const d = ((await r?.json().catch(() => null)) ?? { loi: "Không kết nối được CMS." }) as { ok?: boolean; loi?: string; ds?: KqBai[] };
+      if (d.ok && d.ds) kq.push(...d.ds); else kq.push({ tieu_de: x.tieu_de, thay_doi: [], diem_truoc: 0, diem_sau: 0, loi: `${x.tieu_de}: ${d.loi ?? "lỗi"}` });
+    }
+    setDang(null);
+    const doi = kq.filter((b) => b.thay_doi.length);
+    const loi = kq.filter((b) => b.loi);
+    setTb(`Đã xem ${kq.length} bài: ${doi.length} bài có bản nháp chuẩn hoá (trạng thái "Gửi duyệt", điểm kiểm định `
+      + `${doi.map((b) => `${b.diem_truoc}→${b.diem_sau}`).join(", ") || "—"}); ${kq.length - doi.length - loi.length} bài đã chuẩn từ trước.`
+      + `${loi.length ? ` Lỗi: ${loi.map((b) => b.loi).join(" · ")}` : ""} Mở từng bài, đọc "Ghi chú của Chủ biên" rồi bấm Xuất bản.`);
+    setDs(null);
+    router.refresh();
+  }
+
   const nhan = (d: Dong) => d.id_cms == null ? "Đang dùng bản NotFair"
     : d.trang_thai_cms === "published" ? "Đã sửa trong CMS (đang hiện bản CMS)" : "Đã nhập, đang sửa nháp (web vẫn hiện bản NotFair)";
 
@@ -87,6 +113,14 @@ export function NhapNotFair() {
             : (
               <>
               {ds.nguon === "qua_web" && <p style={{ margin: "0 0 8px", opacity: 0.65 }}>Đang đọc bài NotFair qua hieuban.com (dự án CMS chưa đặt khoá riêng — không cần đặt).</p>}
+              {ds.ds.some((d) => d.id_cms != null) && (
+                <p style={{ margin: "0 0 10px" }}>
+                  <button type="button" className="btn btn--style-secondary btn--size-small" style={{ margin: 0 }} disabled={dang !== null}
+                    onClick={() => void chuanHoa()} data-testid="chuan-hoa-notfair">
+                    {dang === "__chuan_hoa" ? "Đang chuẩn hoá… (vẽ ảnh, có thể mất 1–2 phút)" : "Chuẩn hoá SEO các bài đã nhập"}
+                  </button>
+                </p>
+              )}
               {ds.ds.some((d) => d.id_cms == null) && (
                 <p style={{ margin: "0 0 10px" }}>
                   <button type="button" className="btn btn--style-primary btn--size-small" style={{ margin: 0 }} disabled={dang !== null}

@@ -71,7 +71,7 @@ async function taiAnh(src: string): Promise<{ data: Buffer; mimetype: string; na
 }
 
 /** Một lượt nhập: kho ảnh hỏng ở ảnh đầu (khoá S3 sai, bucket thiếu…) thì các ảnh sau cũng hỏng → bỏ qua, chữ vẫn nhập. */
-type PhienAnh = { loiKho: string | null };
+type PhienAnh = { loiKho: string | null; heThong?: boolean };
 
 async function taoAnh(payload: Payload, req: PayloadRequest, phien: PhienAnh, src: string, alt: string, chuThich = ""): Promise<number | string | null> {
   if (phien.loiKho) return null;
@@ -80,7 +80,7 @@ async function taoAnh(payload: Payload, req: PayloadRequest, phien: PhienAnh, sr
   try {
     // KHÔNG truyền `req`: ảnh tạo trong giao dịch RIÊNG — lỗi kho làm Payload huỷ giao dịch, nếu dùng chung thì mất cả bài.
     const m = await payload.create({
-      collection: "media", user: req.user, overrideAccess: false, file: f,
+      collection: "media", user: req.user, overrideAccess: Boolean(phien.heThong), file: f,
       data: { alt: alt.slice(0, 160), chu_thich: chuThich.slice(0, 200) || undefined, nguon_anh: "Ảnh đi kèm bài trao đổi NotFair" },
     });
     return m.id;
@@ -98,16 +98,18 @@ async function taoAnh(payload: Payload, req: PayloadRequest, phien: PhienAnh, sr
 export type KetQuaNhap = { id: number | string; da_co: boolean; anh_loi: string[]; loi_kho?: string };
 
 /** Nhập một bài NotFair thành NHÁP trong CMS (cùng slug). Đã có bài CMS cùng slug → trả bài đó, không tạo trùng. */
-export async function nhapBaiNotFair(payload: Payload, req: PayloadRequest, slug: string): Promise<KetQuaNhap> {
-  const co = await payload.find({ collection: "bai-viet", where: { slug: { equals: slug } }, limit: 1, depth: 0, draft: true,
-    overrideAccess: true, select: { slug: true } });
+/** `heThong`: chạy từ migration (không có người đăng nhập) → bỏ qua phân quyền; nút trong CMS vẫn theo quyền người bấm. */
+export async function nhapBaiNotFair(payload: Payload, req: PayloadRequest, slug: string, { heThong = false } = {}): Promise<KetQuaNhap> {
+  // BLOG-7: bài đã nhập rồi đổi sang đường dẫn không dấu → slug gốc nằm ở slug_cu; vẫn coi là "đã có", không nhập trùng.
+  const co = await payload.find({ collection: "bai-viet", where: { or: [{ slug: { equals: slug } }, { slug_cu: { in: [slug] } }] },
+    limit: 1, depth: 0, draft: true, overrideAccess: true, select: { slug: true } });
   if (co.docs[0]) return { id: co.docs[0].id, da_co: true, anh_loi: [] };
 
   const p = await baiNotFair(slug);
   if (!p) throw new Error("Không tìm thấy bài này trên NotFair (có thể đã gỡ).");
   const html = p.content_html ?? "";
   const anhLoi: string[] = [];
-  const phien: PhienAnh = { loiKho: null };
+  const phien: PhienAnh = { loiKho: null, heThong };
 
   const bia = p.image_url ? await taoAnh(payload, req, phien, p.image_url, p.title) : null;
   if (p.image_url && bia == null) anhLoi.push(p.image_url);
@@ -124,7 +126,7 @@ export async function nhapBaiNotFair(payload: Payload, req: PayloadRequest, slug
 
   const moTa = (p.meta_description ?? "").trim();
   const bai = await payload.create({
-    collection: "bai-viet", req, overrideAccess: false, draft: true, context: { giuSlugGoc: true },
+    collection: "bai-viet", req, overrideAccess: heThong, draft: true, context: { giuSlugGoc: true },
     data: {
       _status: "draft",
       tieu_de: p.title.slice(0, 120),

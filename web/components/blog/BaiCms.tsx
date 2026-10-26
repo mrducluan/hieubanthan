@@ -159,7 +159,7 @@ export function BaiCms({ bai, tn, lienQuan, nhap, lapCms }: {
       {anh && (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={anh.src} alt={anh.alt} width={anh.w} height={anh.h} fetchPriority="high"
-          className="mt-6 aspect-video w-full rounded-2xl border border-line/80 object-cover" />
+          className="anh-sang mt-6 aspect-video w-full rounded-2xl object-cover" />
       )}
 
       {bai.tra_loi_nhanh && (
