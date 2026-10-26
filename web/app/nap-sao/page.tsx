@@ -5,7 +5,8 @@ import Link from "next/link";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { lopKieuChu } from "@/lib/kieu-chu";
 import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
-import { congDangBat, dsGoiSao } from "@/lib/thanh-toan/cong";
+import { layCauHinh } from "@/lib/cau-hinh";
+import { congDangBat, dsGoiSao, napDauThongTin } from "@/lib/thanh-toan/cong";
 import { NapSao } from "./NapSao";
 
 const DUONG = "/nap-sao";
@@ -15,7 +16,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [goi, cong, nd] = [await dsGoiSao(), congDangBat(), await layNoiDungTrang(DUONG)];
+  const [goi, napDau, giaBaoCao, nd] = await Promise.all([
+    dsGoiSao(), napDauThongTin(), layCauHinh<number>("luan_giai.gia_sao").catch(() => 10), layNoiDungTrang(DUONG),
+  ]);
+  const cong = congDangBat();
   return (
     <div className="mx-auto max-w-3xl">
       <p className="eyebrow">Ví Sao</p>
@@ -27,7 +31,7 @@ export default async function Page() {
         </>}
       </p>
       <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
-      <NapSao goi={goi} cong={cong} />
+      <NapSao goi={goi} cong={cong} giaBaoCao={giaBaoCao} napDau={napDau} />
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-10" />
       <section className="mt-10 space-y-2 text-sm leading-relaxed text-fg-muted" aria-label="Điều cần biết">
         <h2 className="font-serif text-xl text-fg">Điều cần biết</h2>
@@ -38,6 +42,9 @@ export default async function Page() {
           <li>Quét mã QR bằng app ngân hàng hoặc ví điện tử (MoMo, ZaloPay…) có hỗ trợ VietQR. Đừng sửa số tiền hay nội dung chuyển khoản.</li>
           <li>Thẻ Visa/Mastercard và thanh toán quốc tế sẽ mở sau.</li>
           <li>Trả tiền rồi mà chưa thấy Sao sau 10 phút: gửi mã đơn qua <Link href="/lien-he" className="text-gold hover:underline">trang Liên hệ</Link>, ban quản trị đối soát và cộng tay hoặc hoàn tiền.</li>
+          {napDau?.bat && napDau.phan_tram > 0 && (
+            <li data-testid="dieu-nap-dau">Tặng lần nạp đầu: lần nạp đầu tiên của mỗi tài khoản được cộng thêm {napDau.phan_tram}% số Sao của gói, dưới dạng <b className="text-fg">Sao tặng</b> (hạn 365 ngày, trừ trước Sao mua). Một lần mỗi tài khoản; đơn đó được hoàn tiền thì phần Sao tặng cũng được thu hồi.</li>
+          )}
           <li>Hoàn tiền: nạp nhầm và chưa dùng Sao, liên hệ trong 7 ngày. Chi tiết ở <Link href="/dieu-khoan#sao" className="text-gold hover:underline">Điều khoản</Link>.</li>
         </ul>
       </section>

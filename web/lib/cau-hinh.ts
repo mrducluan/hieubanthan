@@ -38,6 +38,13 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Chống gian lận lời mời", moTa: "Bật (mặc định) = một máy nhận lời mời cho quá nhiều tài khoản, hoặc người mời và người được mời cùng máy → người mời không được thưởng / hoa hồng, ghi cờ ở Doanh thu. Người được mời vẫn nhận thưởng của mình." },
   { khoa: "sao.gian_lan.thiet_bi_30_ngay", nhom: "Hoa hồng nạp Sao", loai: "so", min: 2, max: 50, macDinh: 3,
     ten: "Số tài khoản / một máy / 30 ngày thì gắn cờ", moTa: "Tài khoản thứ N nhận lời mời trên cùng một máy trong 30 ngày → người mời không được thưởng. Gia đình dùng chung máy: tăng số này." },
+  // SAO-ND (migration 0027): thiết kế lần nạp đầu — SQL đọc cùng khoá (tao_don_nap / goi_sao_dang_ban / nd_tang_cho_don).
+  { khoa: "sao.goi_khoi_dau.bat", nhom: "Nạp Sao", loai: "bat_tat", macDinh: false,
+    ten: "Bán gói Khởi đầu (12.000 ₫ / 12 Sao)", moTa: "Gói vừa đủ mở 1 Luận giải toàn bộ, đứng đầu trang nạp và được gợi ý trong hộp nạp nhanh khi là gói nhỏ nhất đủ dùng. Tắt = ẩn và máy chủ từ chối tạo đơn gói này." },
+  { khoa: "sao.nap_dau.bat", nhom: "Nạp Sao", loai: "bat_tat", macDinh: false,
+    ten: "Tặng Sao lần nạp đầu", moTa: "Bật = đơn nạp thành công ĐẦU TIÊN của mỗi tài khoản được cộng thêm % số Sao của gói, dưới dạng Sao tặng (hạn 365 ngày). Một lần mỗi tài khoản; hoàn tiền đơn đó → tự thu hồi. Hoa hồng người mời vẫn tính trên Sao của gói." },
+  { khoa: "sao.nap_dau.phan_tram", nhom: "Nạp Sao", loai: "so", min: 0, max: 100, macDinh: 20,
+    ten: "Tỉ lệ tặng lần nạp đầu (%)", moTa: "Tính trên số Sao của gói, làm tròn xuống. 0 = tạm dừng." },
   // SAO-V (0025): chuỗi ngày ghé — chỉ lưu ngày ghé cuối + độ dài chuỗi, mất chuỗi chỉ đếm lại.
   { khoa: "sao.chuoi.bat", nhom: "Chuỗi ngày ghé", loai: "bat_tat", macDinh: false,
     ten: "Thưởng chuỗi ngày ghé", moTa: "Tắt = vẫn đếm chuỗi cho người đăng nhập, không cộng Sao." },

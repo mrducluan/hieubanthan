@@ -3,6 +3,7 @@
 // production — để anh thử trọn luồng trên bản preview. Không cổng nào → trang /nap-sao báo "sắp mở".
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { cauHinhPayos } from "@/lib/thanh-toan/payos";
+import type { NapDau } from "@/lib/thanh-toan/nap-dau";
 
 export type Cong = "payos" | "gia";
 
@@ -40,15 +41,43 @@ export const GOI_MAC_DINH = [
 ] as const;
 export type GoiSao = { ma: string; ten: string; gia_vnd: number; sao: number; nhan: string | null; mo_ta: string | null };
 
+const COT_GOI = (g: GoiSao): GoiSao => ({ ma: g.ma, ten: g.ten, gia_vnd: g.gia_vnd, sao: g.sao, nhan: g.nhan, mo_ta: g.mo_ta });
+
+/** Gói đang bán. SAO-ND (0027): đọc qua goi_sao_dang_ban() — cùng nguồn với tao_don_nap, nên gói "Khởi đầu" chỉ hiện khi
+ *  công tắc sao.goi_khoi_dau.bat bật và máy chủ cũng nhận tạo đơn cho nó. Chưa chạy 0027 → đọc bảng như cũ (cột bat). */
 export async function dsGoiSao(): Promise<GoiSao[]> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL, anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !anon) return [...GOI_MAC_DINH];
   try {
-    const { data, error } = await createClient(url, anon, KHONG_LUU).from("goi_sao")
+    const sb = createClient(url, anon, KHONG_LUU);
+    const rpc = await sb.rpc("goi_sao_dang_ban");
+    if (!rpc.error && Array.isArray(rpc.data) && rpc.data.length) return (rpc.data as GoiSao[]).map(COT_GOI);
+    const { data, error } = await sb.from("goi_sao")
       .select("ma,ten,gia_vnd,sao,nhan,mo_ta").eq("bat", true).order("thu_tu");
     return !error && data?.length ? (data as GoiSao[]) : [...GOI_MAC_DINH];
   } catch {
     return [...GOI_MAC_DINH];
+  }
+}
+
+/** SAO-ND (0027): công tắc + tỉ lệ tặng lần nạp đầu, và người gọi (nếu gửi access token) đã từng nạp chưa. Đọc từ SQL
+ *  (nap_dau_thong_tin) — cùng nguồn với hàm cộng Sao, nên chưa chạy 0027 thì null (không hứa điều máy chủ chưa làm). */
+export async function napDauThongTin(req?: Request): Promise<NapDau | null> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL, anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !anon) return null;
+  try {
+    const nm = req?.headers.get("authorization") ? await khachNguoiMua(req) : null;
+    const sb = nm?.sb ?? createClient(url, anon, KHONG_LUU);
+    const { data, error } = await sb.rpc("nap_dau_thong_tin");
+    if (error || !data || typeof data !== "object") return null;
+    const d = data as { bat?: unknown; phan_tram?: unknown; lan_dau?: unknown };
+    return {
+      bat: d.bat === true,
+      phan_tram: typeof d.phan_tram === "number" ? d.phan_tram : 0,
+      lan_dau: typeof d.lan_dau === "boolean" ? d.lan_dau : null,
+    };
+  } catch {
+    return null;
   }
 }
 
