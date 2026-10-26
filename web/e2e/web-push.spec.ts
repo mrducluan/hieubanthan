@@ -159,6 +159,11 @@ test("GĐ2: một thông báo/ngày — mốc tự đánh dấu > mốc lịch �
   const NHA = { noi_dung: "Nhà hướng Nam, tháng Mão phía cửa cân bằng: Sửa nhỏ, dọn gọn được.", duong: "/hom-nay#thang-nay-nha" };
   expect(ghepThongBao({ ...N, moc_lich: ["giao_tiet"], nha_tiet: NHA }, SN, "2026-03-05"))
     .toMatchObject({ title: "Hôm nay giao tiết Kinh trập", body: NHA.noi_dung, url: "/hom-nay#thang-nay-nha" });
+  // Lập xuân: giữ lời + đường dẫn Lập xuân, nối thêm dòng nhà
+  const LX: GoiSangNay = { ...SN, moc_lich: [{ ma: "tiet.315", nhom: ["giao_tiet", "lap_xuan_tet"], tieu_de: "Hôm nay Lập xuân",
+    noi_dung: "Năm mới theo tiết khí bắt đầu từ hôm nay.", duong: "/phong-thuy/huong-xau-nam" }] };
+  expect(ghepThongBao({ ...N, moc_lich: ["giao_tiet", "lap_xuan_tet"], nha_tiet: NHA }, LX, "2027-02-04"))
+    .toMatchObject({ title: "Hôm nay Lập xuân", body: `Năm mới theo tiết khí bắt đầu từ hôm nay. ${NHA.noi_dung}`, url: "/phong-thuy/huong-xau-nam" });
   // có nhà nhưng không chọn nhận mốc giao tiết → không gửi
   expect(ghepThongBao({ ...N, nha_tiet: NHA }, SN, "2026-03-05")).toBeNull();
   // engine lỗi (sn = null) → chỉ còn mốc tự đánh dấu

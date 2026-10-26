@@ -325,7 +325,8 @@ def muc_nha(pl: dict, sinh: dict | None, nha: dict) -> dict | None:
         return None
     d = r["da_tinh"]
     khai = (vao.get("dau_hieu") or {})
-    da_xu_ly = {ma for ma, x in khai.items() if isinstance(x, dict) and x.get("co") is False}
+    # co:false = người dùng khai "đã xử lý" HOẶC bấm "không có" (web gộp hai loại) → trạng thái trung tính "khong_con".
+    khong_con = {ma for ma, x in khai.items() if isinstance(x, dict) and x.get("co") is False}
     co = {x["ma"]: x for x in r["dien_giai"]["dau_hieu"]}
     vi_tri = {x["phong"]: x for x in d["vi_tri"]}
     kv = kb.bo_cuc()["vi_tri_phong"]
@@ -334,7 +335,7 @@ def muc_nha(pl: dict, sinh: dict | None, nha: dict) -> dict | None:
         x = vi_tri.get(p)
         phong_ra.append({"phong": p, "ten": bc.TEN_PHONG[p], "cung": x["cung"] if x else None,
                          "du_nien": (x["du_nien_menh"] or x["du_nien_trach"]) if x else None,
-                         "theo": ("menh" if x["du_nien_menh"] else "trach") if x else None,
+                         "theo": ("menh" if x["du_nien_menh"] else "trach" if x["du_nien_trach"] else None) if x else None,
                          "hop": x["hop"] if x else None, "nen": kv[p]["noi_dung"]})
     # Dấu hiệu nêu ra: đúng dấu hiệu câu hỏi nhắc + dấu hiệu đã khai ở phòng câu hỏi nhắc; chỉ hỏi "nhà tôi" → dấu hiệu
     # nên xử lý trước (veto) đã khai.
@@ -344,7 +345,7 @@ def muc_nha(pl: dict, sinh: dict | None, nha: dict) -> dict | None:
                  "viec_0": next((v["lam"] for v in co[m]["viec"] if v["chi_phi"] == "khong_ton"), None),
                  "trang": co[m].get("trang")} for m in lien]
     hoi_ra = [{"ma": m, "tieu_de": kb.bo_tri(m)["tieu_de"],
-               "trang_thai": "da_xu_ly" if m in da_xu_ly else "co" if m in co else "chua_khai"} for m in hoi_dh]
+               "trang_thai": "khong_con" if m in khong_con else "co" if m in co else "chua_khai"} for m in hoi_dh]
     ma_lien = set(lien) | set(hoi_dh)
     quy_tac = [q for q in r["quy_tac"] if set((kb.quy_tac_thuc_hanh().get(q["ma"]) or {}).get("ap_dung", {}).get("dau_hieu") or []) & ma_lien]
     return {"loai": "nha_rieng", "huong": d["huong_nha"], "trach": (d["trach"] or {}).get("quai"),
@@ -367,6 +368,10 @@ def _doan_nha(m: dict) -> str:
             cau.append(f"{p['ten']}: hồ sơ nhà chưa ghi vị trí — đặt phòng ở Khảo sát nhà (hoặc vẽ mặt bằng) để xem theo đúng nhà bạn.")
             continue
         theo = "với mệnh quái của bạn" if p["theo"] == "menh" else "theo trạch của nhà (chưa có năm sinh)"
+        if p["cung"] != "Trung cung" and not p["du_nien"]:
+            cau.append(f"{p['ten']} nhà bạn ở phía {p['cung']}. Hồ sơ nhà chưa có hướng nhà và bạn chưa nhập năm sinh nên chưa xét "
+                       f"được phương này hợp hay không. {p['nen']}")
+            continue
         if p["cung"] == "Trung cung":
             cau.append(f"{p['ten']} nhà bạn nằm ở giữa nhà (trung cung). {p['nen']}")
         else:
@@ -378,8 +383,8 @@ def _doan_nha(m: dict) -> str:
             s += f" Việc không tốn tiền: {d['viec_0']}"
         cau.append(s)
     for d in m["dau_hieu_hoi"]:
-        if d["trang_thai"] == "da_xu_ly":
-            cau.append(f"Hồ sơ nhà ghi bạn đã xử lý “{d['tieu_de'].lower()}” — bài đọc Nhà của bạn đã gỡ trần mức cho phần này.")
+        if d["trang_thai"] == "khong_con":
+            cau.append(f"Hồ sơ nhà ghi nhà bạn không còn “{d['tieu_de'].lower()}” (đã xử lý hoặc không có) — bài đọc Nhà của bạn không xét dấu hiệu này.")
         elif d["trang_thai"] == "chua_khai":
             cau.append(f"Hồ sơ nhà chưa ghi “{d['tieu_de'].lower()}” — nếu nhà bạn có, tích ở Khảo sát nhà để bài đọc xếp việc cho đúng.")
     for q in m["quy_tac"]:

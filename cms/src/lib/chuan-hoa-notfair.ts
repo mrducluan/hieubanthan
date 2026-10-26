@@ -89,6 +89,9 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
   const kho = { loi: null as string | null };
 
   const thu = chuanHoaBai(bai, { slugDaDung: () => false });
+  // Link + QR in trong ảnh vẽ (bìa, tóm tắt) trỏ về đúng bài trên web — theo slug chuẩn không dấu.
+  const slugAnh = String(thu.data.slug ?? bai.slug ?? "");
+  const duongBai = /^[a-z0-9-]{1,80}$/.test(slugAnh) ? `/blog/${slugAnh}` : null;
   const mang = thu.mang as MangAnh;
   let anhBia: number | string | null = null, anhTomTat: number | string | null = null;
   const duKien: string[] = [];
@@ -111,11 +114,11 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
       if (canTomTat) { anhTomTat = "du-kien"; duKien.push(`Sẽ vẽ + chèn ảnh "Tóm tắt nhanh" (${Math.min(5, thu.muc.length)} ý).`); }
     } else {
       if (canBia) {
-        const png = await veAnhBia({ tieuDe, phu: bai.mo_ta_ngan || String(thu.data.mo_ta_ngan ?? ""), mang });
+        const png = await veAnhBia({ tieuDe, phu: bai.mo_ta_ngan || String(thu.data.mo_ta_ngan ?? ""), mang, duong: duongBai });
         anhBia = await taiAnh(payload, req, `bia-${String(thu.data.slug ?? bai.slug ?? "bai").slice(0, 50)}`, png, tieuDe, kho);
       }
       if (canTomTat) {
-        const png = await veAnhTomTat({ tieuDe, y: thu.muc, mang });
+        const png = await veAnhTomTat({ tieuDe, y: thu.muc, mang, duong: duongBai });
         anhTomTat = await taiAnh(payload, req, `tom-tat-${String(thu.data.slug ?? bai.slug ?? "bai").slice(0, 44)}`, png,
           `Tóm tắt nhanh: ${tieuDe}`, kho);
       }

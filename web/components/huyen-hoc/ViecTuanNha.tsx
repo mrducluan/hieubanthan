@@ -8,7 +8,7 @@ import { Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
-import { useHoSoNha } from "@/lib/ho-so-nha";
+import { boCucGui, useHoSoNha } from "@/lib/ho-so-nha";
 import { ghiNhanDung } from "@/lib/kiem-chung-sau";
 
 interface ViecTuan {
@@ -26,10 +26,10 @@ export function ViecTuanNha() {
   const nha = useHoSoNha();
   const [kq, setKq] = useState<ViecTuan | null>(null);
   const [xong, setXong] = useState(false);
-  const b = nha?.bo_cuc;
-  const dauHieu = b?.dau_hieu ?? [];
-  const daXuLy = [...new Set([...(b?.da_xu_ly ?? []), ...(b?.khai_khong ?? [])])];
-  const khoa = dauHieu.length ? JSON.stringify({ dau_hieu: dauHieu, da_xu_ly: daXuLy, ...(nha?.loai_nha ? { loai_nha: nha.loai_nha } : {}) }) : "";
+  // Gửi cả bố cục (vị trí phòng, mặt bằng, dấu hiệu đã khai / không còn) → engine chọn việc trên ĐÚNG tập dấu hiệu bài đọc
+  // "Nhà của bạn" dùng (gồm dấu hiệu suy ra như WC giữa nhà), không chỉ ô tích tay.
+  const bo_cuc = boCucGui(nha);
+  const khoa = bo_cuc ? JSON.stringify({ bo_cuc }) : "";
   useEffect(() => {
     if (!khoa) { setKq(null); return; }
     let huy = false;

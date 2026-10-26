@@ -35,7 +35,10 @@ def test_khong_nam_sinh_thi_theo_trach_va_van_xin_nam_sinh():
 
 def test_dau_hieu_da_xu_ly_va_chua_khai():
     m = _nha(h.tra_loi("Gương đối diện giường có sao không?", nha=NHA))
-    assert {d["ma"]: d["trang_thai"] for d in m["dau_hieu_hoi"]} == {"guong_giuong": "da_xu_ly"}
+    assert {d["ma"]: d["trang_thai"] for d in m["dau_hieu_hoi"]} == {"guong_giuong": "khong_con"}
+    # co:false gộp "đã xử lý" + "nhà không có" → lời trung tính, không khẳng định "đã xử lý"
+    van = h.tra_loi("Gương đối diện giường có sao không?", nha=NHA)["cau_tra_loi"]
+    assert "không còn “gương đối diện giường” (đã xử lý hoặc không có)" in van and "đã gỡ trần" not in van
     m = _nha(h.tra_loi("Nhà vệ sinh ở giữa nhà có sao không?", nha=NHA))
     assert {d["ma"]: d["trang_thai"] for d in m["dau_hieu_hoi"]}.get("wc_giua_nha") == "chua_khai"
 
@@ -62,7 +65,9 @@ def test_api_nhan_nha_va_khong_luu_cau_tra_loi():
     assert r.status_code == 200 and "Phòng ngủ chính nhà bạn ở phía Bắc" in r.json()["cau_tra_loi"]
     kq = h.tra_loi("Giường nhà tôi kê thế nào?", nha=NHA)
     assert nhat_ky.ban_ghi_huyenhoc("phongthuy", "Giường nhà tôi kê thế nào?", kq, False)["cau_tra_loi"] is None
-    assert client.post("/v1/phongthuy/hoi", json={"cau_hoi": "Giường nhà tôi?", "nha": {"huong": "Giữa"}}).status_code == 422
+    # hồ sơ nhà sai khuôn → bỏ qua nhà, câu hỏi vẫn được trả lời (không 422 cả câu)
+    r = client.post("/v1/phongthuy/hoi", json={"cau_hoi": "Giường nhà tôi?", "nha": {"huong": "Giữa"}})
+    assert r.status_code == 200 and not r.json()["phan_loai"].get("theo_nha")
 
 
 # ---------------------------------------------------------------- Y4: việc 0 đồng tuần này
@@ -118,3 +123,34 @@ def test_api_sang_nay_nhan_nha():
     r = client.post("/v1/push/sang-nay", json={"ngay_xem": "2026-11-08"})
     assert r.status_code == 200 and r.json()["nha_tiet"] == []
     assert client.post("/v1/push/sang-nay", json={"ngay_xem": "2026-11-07", "nha": [{"huong": "Giữa"}]}).status_code == 422
+
+
+# ---------------------------------------------------------------- sửa sau review độc lập (2026-10-26)
+def test_nha_khong_huong_khong_nam_sinh_khong_in_none():
+    kq = h.tra_loi("bếp nhà tôi có sao không", nha={"bo_cuc": {"vi_tri": {"bep": "Đông"}}})
+    assert "None" not in kq["cau_tra_loi"]
+    assert "chưa xét được phương này hợp hay không" in kq["cau_tra_loi"]
+
+
+def test_ho_so_nha_lech_khuon_van_tra_loi():
+    r = client.post("/v1/phongthuy/hoi", json={"cau_hoi": "Bếp nhà tôi có sao không?",
+                                                "nha": {"huong": "Nam", "bo_cuc": {"dau_hieu": {"ma_cu_khong_con": {"co": True}}}}})
+    assert r.status_code == 200 and r.json()["cau_tra_loi"]
+    assert not r.json()["phan_loai"].get("theo_nha")
+
+
+def test_viec_tuan_tinh_ca_dau_hieu_suy_tu_vi_tri():
+    # WC ở trung cung (suy ra wc_giua_nha, veto) + gương giường tích tay → còn veto nên chỉ xoay trong veto
+    bc_ = {"vi_tri": {"ve_sinh": "Trung cung"}, "dau_hieu": {"guong_giuong": {"co": True}}}
+    for i in range(3):
+        assert bc.viec_tuan([], [], None, _dt.date(2026, 10, 26) + _dt.timedelta(weeks=i), bc_)["viec"]["ma"] == "wc_giua_nha"
+    r = client.post("/v1/phongthuy/viec-tuan", json={"bo_cuc": bc_, "ngay_xem": "2026-10-28"})
+    assert r.status_code == 200 and r.json()["viec"]["ma"] == "wc_giua_nha"
+
+
+def test_viec_tuan_xoay_deu_qua_ranh_nam():
+    ds = ["guong_giuong", "bep_wc"]
+    ma = [bc.viec_tuan(ds, [], None, _dt.date(2026, 12, 21) + _dt.timedelta(weeks=i))["viec"]["ma"] for i in range(4)]
+    assert all(ma[i] != ma[i + 1] for i in range(3))      # 2026 có 53 tuần ISO, 2027 có 52 — vẫn luân phiên đều
+    ma = [bc.viec_tuan(ds, [], None, _dt.date(2027, 12, 20) + _dt.timedelta(weeks=i))["viec"]["ma"] for i in range(4)]
+    assert all(ma[i] != ma[i + 1] for i in range(3))

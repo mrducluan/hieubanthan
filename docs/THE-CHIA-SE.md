@@ -46,9 +46,15 @@ Khâu vòng tăng trưởng: **MỜI** (chính) — mọi ảnh rời khỏi sit
 | Ảnh mặc định (không mã / mã hỏng) | `/og`, `/og/ngay`, `/og/hai` | lời mời chung | như concept từng loại | trang chủ / `/hom-nay` / `/tu-vi#hop-tham` | — | THU HÚT |
 | Ảnh lá số Tử vi tải về | `taiAnhSvg` ở `app/tu-vi/TuVi.tsx` (client) | lá số đang xem | Khung Đêm sao / Giấy cổ theo giao diện đang chọn + dải chân | `/tu-vi?tu=ta.<ngẫu nhiên>` | `share_created{tai_anh}`, `share_clicked{ta}` | MỜI |
 | Ảnh tứ trụ Bát tự tải về | `taiAnhHtml` ở `app/bat-tu/BatTu.tsx` (client — **không sửa file này**, tự có qua helper) | tứ trụ đang xem | như trên | `/bat-tu?tu=ta.<ngẫu nhiên>` | như trên | MỜI |
+| **Hình minh hoạ trang kiến thức (2026-10-26, MỚI)** | SVG nội dòng `components/minh-hoa/MinhHoa.tsx` trên ~600 trang KB (`TrangKienThuc`) — dải chân `ChanHinh` | chỉ đường dẫn trang (công khai) | hình của từng loại trang (nền Đêm sao; cụm dấu hiệu nhà ở nền giấy sáng) + dải "hieuban.com · đường dẫn · Quét để mở bài này" | `https://hieuban.com<đường dẫn trang>` (QR cạnh = số ô × 2 px) | — | THU HÚT |
+| **Ảnh vẽ cho bài blog (BLOG-7, 2026-10-26 thêm QR)** | `veAnhBia` / `veAnhTomTat` ở `cms/src/lib/anh-minh-hoa.ts` (chuẩn hoá bài NotFair) | tiêu đề, sapo, tiêu đề mục (chữ công khai) | nền giấy sáng + hoạ tiết mảng; chân: hieuban.com + link bài + QR (ô 3 px) | `https://hieuban.com/blog/<slug chuẩn>` | — | THU HÚT |
+| **12 ảnh bài khởi tạo BLOG-6 (2026-10-26 thêm QR)** | tệp PNG `cms/src/bai-khoi-tao/anh/` (gắn một lần bằng sharp; ảnh thân bài nối dải chân 128 px, ảnh bìa QR góc dưới phải để giữ 1600×900) · migration dữ liệu `anh_qr_bai_khoi_tao` thay tệp ảnh đã nhập (giữ id) | như ảnh gốc | như ảnh gốc + link bài + QR | `https://hieuban.com/blog/<slug bài>` | — | THU HÚT |
 | `app/apple-icon.tsx` | biểu tượng site | — | — | không áp dụng (không phải ảnh chia sẻ) | — | — |
 
 Ảnh mẫu đã kiểm (OpenCV giải mã QR ra đúng URL trên mọi ảnh, kể cả ảnh tải về Giấy cổ, Đêm sao và bản điện thoại).
+2026-10-26: 12 ảnh BLOG-6, ảnh bìa + tóm tắt CMS, hình minh hoạ trang kiến thức (màn hình thường 1×, điện thoại 3×, nền sáng + nền tối)
+đều giải mã ra đúng URL trên ảnh nguyên. **Quy tắc**: cạnh QR = (số ô + 8 ô lề) × px NGUYÊN — cạnh lẻ (vd 2,67 px/ô) làm mờ cạnh ô,
+máy quét khó đọc mã phiên bản lớn (link dài).
 
 ## Khi thêm thẻ mới
 

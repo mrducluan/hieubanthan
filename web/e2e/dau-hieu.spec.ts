@@ -52,3 +52,26 @@ test("Hôm nay: Việc 0 đồng tuần này từ hồ sơ nhà, bấm Đã làm
   const kc = await page.evaluate(() => localStorage.getItem("hbt.kc_sau.v1") ?? "");
   expect(kc).toContain("ds.phongthuy.viec_tuan.xa_ngang");
 });
+
+// 2026-10-26: hình minh hoạ trang kiến thức có dải link + mã QR về đúng trang (cả nền sáng lẫn nền Đêm sao).
+for (const duong of ["/phong-thuy/dau-hieu/guong-doi-dien-giuong", "/than-so/y-nghia-so/so-7"]) {
+  test(`hình minh hoạ có link + QR: ${duong}`, async ({ request }) => {
+    const html = await (await request.get(duong)).text();
+    const hinh = html.slice(html.indexOf('data-testid="minh-hoa"'), html.indexOf("</figure>", html.indexOf('data-testid="minh-hoa"')));
+    expect(hinh).toContain('data-testid="minh-hoa-qr"');
+    expect(hinh).toContain(`hieuban.com${duong}`);
+    expect(hinh).toContain(`aria-label="Mã QR mở hieuban.com${duong}"`);
+    expect(hinh).toContain(`href="${duong}"`);
+  });
+}
+
+// Sau review: thẻ Việc tuần dùng đúng tập dấu hiệu của bài đọc — WC giữa nhà suy từ vị trí phòng (veto) được ưu tiên.
+test("Hôm nay: Việc tuần tính cả dấu hiệu suy từ vị trí phòng (WC giữa nhà)", async ({ page }) => {
+  await napHoSo(page);
+  await page.addInitScript(() => {
+    localStorage.setItem("hbt.nha.v1", JSON.stringify({ v: 1, huong: "Nam", theo: "cua", thanh_vien: [],
+      bo_cuc: { vi_tri: { ve_sinh: "Trung cung" }, dau_hieu: ["guong_giuong"] }, cap_nhat_luc: new Date().toISOString() }));
+  });
+  await page.goto("/hom-nay");
+  await expect(page.getByTestId("viec-tuan")).toContainText("Nhà vệ sinh ở giữa nhà");
+});

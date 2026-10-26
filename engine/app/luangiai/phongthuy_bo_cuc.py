@@ -245,11 +245,16 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
     }
 
 
-def viec_tuan(dau_hieu: list[str], da_xu_ly: list[str], loai_nha: str | None, ngay) -> dict:
+def viec_tuan(dau_hieu: list[str], da_xu_ly: list[str], loai_nha: str | None, ngay, bo_cuc: dict | None = None) -> dict:
     """Y4 — "Việc 0 đồng tuần này" (thẻ Hôm nay): mỗi tuần (ISO, thứ Hai → Chủ nhật) MỘT việc không tốn tiền từ dấu hiệu
     người dùng đã khai mà chưa đánh dấu đã xử lý. Ưu tiên nhóm nên xử lý trước (veto) — còn veto thì chỉ xoay trong veto;
-    hết thì xoay các dấu hiệu cần để ý; chỉ còn dấu hiệu tốt thì nhắc việc giữ. Tất định theo tuần, không lưu."""
+    hết thì xoay các dấu hiệu cần để ý; chỉ còn dấu hiệu tốt thì nhắc việc giữ. Tất định theo tuần, không lưu.
+    Có `bo_cuc` (hồ sơ nhà) → lấy đúng tập dấu hiệu bài đọc Nhà của bạn dùng (`luan`: gồm dấu hiệu suy từ mặt bằng / vị trí
+    phòng như WC giữa nhà, bỏ dấu hiệu người dùng khai không còn) thay cho hai danh sách mã."""
     import datetime as _dt  # noqa: PLC0415
+    if bo_cuc is not None:
+        dau_hieu, da_xu_ly = [d["ma"] for d in luan(bo_cuc, None)["dien_giai"]["dau_hieu"]], []
+        loai_nha = loai_nha or bo_cuc.get("loai_nha")
     bo = set(da_xu_ly)
     co = [ma for ma in DAU_HIEU if ma in set(dau_hieu) and ma not in bo]
     veto = dau_hieu_veto()
@@ -261,7 +266,7 @@ def viec_tuan(dau_hieu: list[str], da_xu_ly: list[str], loai_nha: str | None, ng
     if not nhom:
         ra["ly_do"] = "da_xu_ly_het" if dau_hieu else "chua_khai"
         return ra
-    ma = nhom[(nam * 53 + tuan) % len(nhom)]
+    ma = nhom[(dau_tuan.toordinal() // 7) % len(nhom)]      # số tuần liên tục từ thứ Hai — không nhảy ở năm 52/53 tuần
     m = kb.bo_tri(ma)
     v0 = next((v["lam"] for v in _viec_cho(ma, m, loai_nha) if v["chi_phi"] == "khong_ton"), m["goi_y"])
     from app.luangiai.doi_song_khuon import ma_mau  # noqa: PLC0415

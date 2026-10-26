@@ -5,6 +5,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { createElement as h, type ReactElement } from "react";
+import { duongQr, maHoaQr } from "./qr.ts";
 
 export const CO_ANH = { width: 1600, height: 900 } as const;
 
@@ -129,9 +130,30 @@ function khung(con: ReactElement[]): ReactElement {
   }, ...con));
 }
 
-const chanTrang = () => h("div", { key: "chan",
-  style: { display: "flex", position: "absolute", left: 72, bottom: 44, fontSize: 28, color: MAU_SANG.vang, letterSpacing: 1 },
-}, "hieuban.com");
+export const TEN_MIEN = "hieuban.com";
+
+/** Chân ảnh: link đầy đủ tới bài + mã QR về đúng bài (chủ dự án 2026-10-26: "bổ sung link web, QR code web cho hình ảnh bài
+ *  viết") — ảnh bị lưu / đăng lại nơi khác vẫn quét về được bài. Không có `duong` (vd ảnh vẽ thử) → chỉ tên miền như cũ. */
+function chanTrang(duong?: string | null): ReactElement {
+  if (!duong?.startsWith("/")) {
+    return h("div", { key: "chan",
+      style: { display: "flex", position: "absolute", left: 72, bottom: 44, fontSize: 28, color: MAU_SANG.vang, letterSpacing: 1 },
+    }, TEN_MIEN);
+  }
+  const qr = maHoaQr(`https://${TEN_MIEN}${duong}`);
+  const n = qr.kichThuoc + 8;
+  return h("div", { key: "chan",
+    style: { display: "flex", position: "absolute", left: 72, right: 52, bottom: 40, alignItems: "flex-end", justifyContent: "space-between" },
+  },
+  h("div", { style: { display: "flex", flexDirection: "column", maxWidth: 1100 } },
+    h("div", { style: { display: "flex", fontSize: 28, color: MAU_SANG.vang, letterSpacing: 1 } }, TEN_MIEN),
+    h("div", { style: { display: "flex", fontSize: 22, color: MAU_SANG.mo, marginTop: 4 } }, catChu(`${TEN_MIEN}${duong}`, 90))),
+  h("div", { style: { display: "flex", flexDirection: "column", alignItems: "center" } },
+    h("div", { style: { display: "flex", background: "#ffffff", borderRadius: 10, border: `1px solid ${MAU_SANG.khung}` } },
+      h("svg", { width: n * 3, height: n * 3, viewBox: `0 0 ${n} ${n}`, shapeRendering: "crispEdges" },   // cạnh ô 3px nguyên
+        h("path", { d: duongQr(qr, 4), fill: MAU_SANG.muc }))),
+    h("div", { style: { display: "flex", fontSize: 18, color: MAU_SANG.mo, marginTop: 6 } }, "Quét để đọc bài")));
+}
 
 async function veAnh(goc: ReactElement): Promise<Buffer> {
   const { ImageResponse } = await import("next/og.js");
@@ -141,7 +163,7 @@ async function veAnh(goc: ReactElement): Promise<Buffer> {
 }
 
 /** Ảnh bìa: nhãn mảng + tiêu đề lớn + sapo ngắn bên trái, hoạ tiết mảng bên phải. PNG 1600×900. */
-export function veAnhBia({ tieuDe, phu, mang }: { tieuDe: string; phu?: string | null; mang: MangAnh }): Promise<Buffer> {
+export function veAnhBia({ tieuDe, phu, mang, duong }: { tieuDe: string; phu?: string | null; mang: MangAnh; duong?: string | null }): Promise<Buffer> {
   const td = catChu(tieuDe, 110);
   const coChu = td.length > 70 ? 66 : td.length > 44 ? 80 : 96;
   return veAnh(khung([
@@ -152,12 +174,12 @@ export function veAnhBia({ tieuDe, phu, mang }: { tieuDe: string; phu?: string |
       ...(phu ? [h("div", { key: "phu", style: { display: "flex", fontSize: 34, lineHeight: 1.4, marginTop: 30, color: MAU_SANG.mo } }, catChu(phu, 120))] : []),
     ),
     h("div", { key: "phai", style: { display: "flex", flex: 1, alignItems: "center", justifyContent: "center" } }, hoaTiet(mang, 520)),
-    chanTrang(),
+    chanTrang(duong),
   ]));
 }
 
 /** Ảnh "Tóm tắt nhanh": tiêu đề bài + tối đa 5 ý (tiêu đề các mục H2), đánh số. PNG 1600×900. */
-export function veAnhTomTat({ tieuDe, y, mang }: { tieuDe: string; y: string[]; mang: MangAnh }): Promise<Buffer> {
+export function veAnhTomTat({ tieuDe, y, mang, duong }: { tieuDe: string; y: string[]; mang: MangAnh; duong?: string | null }): Promise<Buffer> {
   const ds = y.slice(0, 5).map((s) => catChu(s, 70));
   const coY = ds.length > 4 ? 36 : 40;
   return veAnh(khung([
@@ -172,6 +194,6 @@ export function veAnhTomTat({ tieuDe, y, mang }: { tieuDe: string; y: string[]; 
           h("div", { style: { display: "flex", flex: 1, color: MAU_SANG.muc } }, s)))),
     ),
     h("div", { key: "phai", style: { display: "flex", flex: 1, alignItems: "center", justifyContent: "center", opacity: 0.9 } }, hoaTiet(mang, 340)),
-    chanTrang(),
+    chanTrang(duong),
   ]));
 }

@@ -2,6 +2,8 @@
 // thứ mấy, thập thần quan hệ gì với nhật chủ…); ở đây CHỈ VẼ — không tự suy ra kiến thức. SVG nội dòng: nhẹ, nét
 // ở mọi kích thước, không tải ảnh ngoài (hợp CSP), có <title> + aria-label cho trình đọc màn hình và máy tìm kiếm.
 import type { ReactNode } from "react";
+import { duongQr, maHoaQr, type MaQr } from "@/lib/qr";
+import { GOC_QR, TEN_MIEN } from "@/lib/the-chia-se";
 
 export type MinhHoaDuLieu =
   | { kieu: "so"; so: number; so_cai: boolean; so_goc: number }
@@ -28,9 +30,9 @@ const mauHanh = (h: string) => MAU_HANH[h.split("/")[0]!.trim()] ?? { nen: "fill
 
 function Khung({ nhan, children, rong = 320, cao = 240, sang = false }: { nhan: string; children: ReactNode; rong?: number; cao?: number; sang?: boolean }) {
   // `sang` (Y5, chủ dự án 2026-10-26: "hình minh hoạ nền sáng lên"): nền giấy sáng như ảnh blog (.anh-sang), không sao lấp lánh.
+  // Khung chỉ vẽ hình + chú thích; <figure> và dải link + QR do MinhHoa bọc ngoài (theo `kieu`).
   return (
-    <figure className={sang ? "relative mt-6 overflow-hidden rounded-2xl border border-gold/50 bg-[#f6f0e2] p-4 shadow-[0_18px_40px_-18px_rgb(0_0_0/0.65)]"
-      : "glass relative mt-6 overflow-hidden rounded-2xl p-4"} data-testid="minh-hoa">
+    <>
       <svg viewBox={`0 0 ${rong} ${cao}`} role="img" aria-label={nhan} className="mx-auto block h-auto w-full max-w-md">
         <title>{nhan}</title>
         {!sang && <><Sao x={24} y={22} r={1.6} /><Sao x={rong - 30} y={30} r={1.2} /><Sao x={rong - 52} y={cao - 26} r={1.4} />
@@ -38,7 +40,30 @@ function Khung({ nhan, children, rong = 320, cao = 240, sang = false }: { nhan: 
         {children}
       </svg>
       <figcaption className={sang ? "mt-2 text-center text-xs text-[#5b5470]" : "mt-2 text-center text-xs text-fg-faint"}>{nhan}</figcaption>
-    </figure>
+    </>
+  );
+}
+
+/** Dải chân hình: link + mã QR về đúng trang (chủ dự án 2026-10-26: "bổ sung link web, QR code web cho hình ảnh bài viết") —
+ *  ai chụp màn hình / lưu hình vẫn quét về được bài. QR tự vẽ (lib/qr.ts), nền sáng ở cả hai giao diện để máy quét đọc được. */
+function ChanHinh({ duong, sang }: { duong: string; sang: boolean }) {
+  const url = `${GOC_QR}${duong}`;
+  let qr: MaQr;
+  try { qr = maHoaQr(url); } catch { return null; }
+  const n = qr.kichThuoc + 8;                    // cạnh = số ô × 2px → mỗi ô sắc nét kể cả màn hình thường, chụp màn hình vẫn quét được
+  return (
+    <div className={`mt-3 flex items-center justify-center gap-3 border-t pt-3 ${sang ? "border-[#b8892b]/30" : "border-line/50"}`} data-testid="minh-hoa-qr">
+      <svg viewBox={`0 0 ${n} ${n}`} width={n * 2} height={n * 2} shapeRendering="crispEdges" role="img" aria-label={`Mã QR mở ${TEN_MIEN}${duong}`}
+        className={`shrink-0 rounded-md ${sang ? "ring-1 ring-[#b8892b]/40" : ""}`}>
+        <rect width={n} height={n} fill="#f4efe2" />
+        <path d={duongQr(qr, 4)} fill="#0a0a17" />
+      </svg>
+      <div className="min-w-0 text-left leading-tight">
+        <a href={duong} className={`block text-sm font-semibold ${sang ? "text-[#2a2540]" : "text-fg"}`}>{TEN_MIEN}</a>
+        <span className={`block break-all text-[0.7rem] ${sang ? "text-[#5b5470]" : "text-fg-faint"}`}>{TEN_MIEN}{duong}</span>
+        <span className={`block text-[0.7rem] ${sang ? "text-[#9a6f1c]" : "text-gold"}`}>Quét để mở bài này</span>
+      </div>
+    </div>
   );
 }
 
@@ -281,20 +306,31 @@ function HinhDauHieu({ nhom, phong, veto, tot, ten }: { nhom: string; phong: str
   );
 }
 
-export function MinhHoa({ mh }: { mh?: MinhHoaDuLieu | null }) {
+export function MinhHoa({ mh, duong }: { mh?: MinhHoaDuLieu | null; duong?: string }) {
   if (!mh) return null;
-  switch (mh.kieu) {
-    case "so": return <HinhSo {...mh} />;
-    case "que": return <HinhQue {...mh} />;
-    case "cap_so": return <HinhCapSo {...mh} />;
-    case "sao": return <HinhSaoTuVi {...mh} />;
-    case "cung": return <HinhCung {...mh} />;
-    case "sao_cung": return <HinhSaoCung {...mh} />;
-    case "hoa_cung": return <HinhHoaCung {...mh} />;
-    case "menh": return <HinhMenh {...mh} />;
-    case "thap_than": return <HinhThapThan {...mh} />;
-    case "nhat_chu": return <HinhNhatChu {...mh} />;
-    case "dau_hieu": return <HinhDauHieu {...mh} />;
-    default: return null;
-  }
+  const hinh = (() => {
+    switch (mh.kieu) {
+      case "so": return <HinhSo {...mh} />;
+      case "que": return <HinhQue {...mh} />;
+      case "cap_so": return <HinhCapSo {...mh} />;
+      case "sao": return <HinhSaoTuVi {...mh} />;
+      case "cung": return <HinhCung {...mh} />;
+      case "sao_cung": return <HinhSaoCung {...mh} />;
+      case "hoa_cung": return <HinhHoaCung {...mh} />;
+      case "menh": return <HinhMenh {...mh} />;
+      case "thap_than": return <HinhThapThan {...mh} />;
+      case "nhat_chu": return <HinhNhatChu {...mh} />;
+      case "dau_hieu": return <HinhDauHieu {...mh} />;
+      default: return null;
+    }
+  })();
+  if (!hinh) return null;
+  const sang = mh.kieu === "dau_hieu";
+  return (
+    <figure className={sang ? "relative mt-6 overflow-hidden rounded-2xl border border-gold/50 bg-[#f6f0e2] p-4 shadow-[0_18px_40px_-18px_rgb(0_0_0/0.65)]"
+      : "glass relative mt-6 overflow-hidden rounded-2xl p-4"} data-testid="minh-hoa">
+      {hinh}
+      {duong?.startsWith("/") && <ChanHinh duong={duong} sang={sang} />}
+    </figure>
+  );
 }

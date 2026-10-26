@@ -132,9 +132,12 @@ export function ghepThongBao(n: NguoiNhan, sn: GoiSangNay | null, ngay: string) 
   if (moc.length) {
     const m = moc[0]!;
     // Y3: ngày giao tiết + có hướng nhà → thay lời mời chung bằng việc cụ thể phía cửa nhà mình trong tháng tiết mới.
+    // Lập xuân (cũng là mốc giao tiết) giữ lời + đường dẫn Lập xuân, chỉ nối thêm dòng nhà.
     const nha = m.nhom?.includes("giao_tiet") && n.nha_tiet ? n.nha_tiet : null;
-    return { title: moc.length > 1 ? `${m.tieu_de} · +${moc.length - 1} mốc` : m.tieu_de, body: kem(nha ? nha.noi_dung : m.noi_dung),
-      url: duongTrongSite(nha?.duong ?? m.duong) ?? "/hom-nay", tag: `nhac-${ngay}`, ...hoi };
+    const lapXuan = Boolean(m.nhom?.includes("lap_xuan_tet"));
+    const than = nha ? (lapXuan ? `${m.noi_dung} ${nha.noi_dung}` : nha.noi_dung) : m.noi_dung;
+    return { title: moc.length > 1 ? `${m.tieu_de} · +${moc.length - 1} mốc` : m.tieu_de, body: kem(than),
+      url: duongTrongSite(nha && !lapXuan ? nha.duong : m.duong) ?? "/hom-nay", tag: `nhac-${ngay}`, ...hoi };
   }
   if (sang) return { title: sang.tieu_de, body: sang.noi_dung, url: "/hom-nay", tag: `nhac-${ngay}`, ...hoi };
   return null;

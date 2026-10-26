@@ -11,7 +11,7 @@ import datetime as _dt
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, ValidationError, field_validator, model_validator
 
 from app.calc import phongthuy as pt
 from app.kb import phongthuy_kb as kbp
@@ -223,16 +223,22 @@ class HoiPTInput(BaseModel):
     sinh: SinhInput | None = None
     ngay_xem: _dt.date | None = None
     # Y6: hồ sơ nhà trên máy người hỏi (hướng + bố cục) → trả lời theo đúng nhà. Chỉ dùng trong lượt gọi, không lưu.
-    nha: "NhaInput | None" = None
+    # Nhận thô rồi tự kiểm khuôn ở route: hồ sơ lệch khuôn (vd mã dấu hiệu cũ) thì bỏ qua nhà, câu hỏi vẫn được trả lời.
+    nha: dict | None = None
 
 
 @router.post("/hoi")
 def api_hoi(inp: HoiPTInput, background: BackgroundTasks) -> dict:
     nha = None
-    if inp.nha is not None:
-        nha = inp.nha.model_dump(exclude_none=True)
-        if inp.nha.bo_cuc is not None:
-            nha["bo_cuc"] = inp.nha.bo_cuc.model_dump(exclude_none=True)
+    if inp.nha is not None and len(str(inp.nha)) <= 20_000:
+        try:
+            n = NhaInput.model_validate(inp.nha)
+        except ValidationError:
+            n = None
+        if n is not None:
+            nha = n.model_dump(exclude_none=True)
+            if n.bo_cuc is not None:
+                nha["bo_cuc"] = n.bo_cuc.model_dump(exclude_none=True)
     try:
         kq = hoidap_pt.tra_loi(inp.cau_hoi.strip(), sinh=inp.sinh.sinh() if inp.sinh else None,
                                ngay_xem=inp.ngay_xem, nha=nha)
@@ -350,9 +356,6 @@ class NhaInput(BaseModel):
     bo_cuc: _BoCuc | None = None
 
 
-HoiPTInput.model_rebuild()      # Y6: `nha` tham chiếu NhaInput khai báo phía trên
-
-
 class ThanhVienInput(SinhInput):
     vai: Literal["vo", "chong", "con", "cha_me", "khac"] = "khac"
 
@@ -418,20 +421,29 @@ class ThangNayInput(BaseModel):
         return self
 
 
+_MaDauHieu = Literal[tuple(bo_cuc.DAU_HIEU)]  # type: ignore[valid-type]  — ngoài lớp: trường `bo_cuc` che tên module
+
+
 class ViecTuanInput(BaseModel):
     """Y4 — thẻ "Việc 0 đồng tuần này": chỉ MÃ dấu hiệu đã khai / đã xử lý trong hồ sơ nhà trên máy. Không lưu."""
     model_config = ConfigDict(extra="forbid")
 
-    dau_hieu: list[Literal[tuple(bo_cuc.DAU_HIEU)]] = Field(default_factory=list, max_length=40)  # type: ignore[valid-type]
-    da_xu_ly: list[Literal[tuple(bo_cuc.DAU_HIEU)]] = Field(default_factory=list, max_length=40)  # type: ignore[valid-type]
+    dau_hieu: list[_MaDauHieu] = Field(default_factory=list, max_length=40)
+    da_xu_ly: list[_MaDauHieu] = Field(default_factory=list, max_length=40)
     loai_nha: Literal["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"] | None = None
     ngay_xem: _dt.date | None = None
+    # Hồ sơ nhà đầy đủ (BoCuc) → tính cả dấu hiệu suy từ mặt bằng / vị trí phòng như bài đọc Nhà của bạn.
+    bo_cuc: _BoCuc | None = None
 
 
 @router.post("/viec-tuan")
 def api_viec_tuan(inp: ViecTuanInput) -> dict:
     ngay = inp.ngay_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
-    return {"engine_version": ENGINE_VERSION, **bo_cuc.viec_tuan(inp.dau_hieu, inp.da_xu_ly, inp.loai_nha, ngay)}
+    bc = inp.bo_cuc.model_dump(exclude_none=True) if inp.bo_cuc is not None else None
+    try:
+        return {"engine_version": ENGINE_VERSION, **bo_cuc.viec_tuan(inp.dau_hieu, inp.da_xu_ly, inp.loai_nha, ngay, bc)}
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)[:300])
 
 
 @router.post("/thang-nay")

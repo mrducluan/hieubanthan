@@ -155,7 +155,7 @@ export async function TrangKienThucView(params: Thamso) {
         <DongTacGia chu_bien={t.chu_bien} tac_gia={t.tac_gia} tham_dinh={t.tham_dinh} duyet_xuat_ban={t.duyet_xuat_ban} />
       </header>
 
-      <MinhHoa mh={t.minh_hoa} />
+      <MinhHoa mh={t.minh_hoa} duong={duong} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-6" />
 
       <section aria-label="Trả lời nhanh" className="mt-6 rounded-2xl border border-gold/30 bg-gold/5 p-5">
