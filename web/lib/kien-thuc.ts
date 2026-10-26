@@ -7,7 +7,7 @@ import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 import CHUYEN from "@/lib/chuyen-huong.json";
 
 export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu"
-  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep";
+  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu";
 
 type ChuDe = { loai: LoaiTrang; ten: string; mo_ta: string; mang: string };
 /** Khoá = mã chủ đề (giữ nguyên làm mã nội bộ: CMS, hình, llms); `duong` = URL cụm theo silo mảng (lib/chuyen-huong.json). */
@@ -46,6 +46,9 @@ const CHU_DE_GOC: Record<string, ChuDe> = {
     mo_ta: "10 thập thần trong Bát tự (Tỷ Kiên đến Chính Ấn): ý nghĩa, tính cách, khi quá nhiều, khi thiếu, với nam và nữ." },
   "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", mang: "/bat-tu",
     mo_ta: "10 nhật chủ (can ngày sinh) trong Bát tự: hình tượng, tính chất, điểm mạnh, mặt tối và ảnh hưởng của mùa sinh." },
+  // Y5: dấu hiệu nhà ở — một trang cho mỗi dấu hiệu của form Khảo sát nhà (engine kb/trang_phongthuy.py)
+  "dau-hieu": { loai: "dau_hieu", ten: "Dấu hiệu nhà ở", mang: "/phong-thuy",
+    mo_ta: "23 dấu hiệu nhà ở hay gặp (gương đối giường, xà ngang, nhà vệ sinh giữa nhà…): sách xưa nói gì, nhìn theo đời sống hiện đại, việc nên làm từ 0 đồng." },
 };
 // QH-URL (phương án B): cụm kiến thức nằm dưới trang công cụ của mảng — /{mảng}/{cụm}/{trang}. URL cũ /kien-thuc/{khoá}/…
 // chuyển 308 (next.config.mjs đọc cùng lib/chuyen-huong.json).
@@ -91,12 +94,12 @@ export function dsCumTru(tru: string): CumHienThi[] {
 export const HINH_CHU_DE: Record<string, KieuMang> = {
   "than-so": "than-so", "kinh-dich": "kinh-dich", "tu-vi": "tu-vi", "cung-tu-vi": "tu-vi", "thap-than": "bat-tu", "nhat-chu": "bat-tu",
   "hop-so": "than-so", "nghe-nghiep": "than-so", "tinh-yeu": "than-so", "nam-ca-nhan": "than-so", "no-nghiep": "than-so", "so-kep": "than-so",
-  "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu",
+  "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu", "dau-hieu": "phong-thuy",
 };
 export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = {
   so: "than-so", que: "kinh-dich", sao: "tu-vi", cung: "cung-tu-vi", thap_than: "thap-than", nhat_chu: "nhat-chu",
   cap_so: "hop-so", nghe: "nghe-nghiep", tinh_yeu: "tinh-yeu", nam_ca_nhan: "nam-ca-nhan", no_nghiep: "no-nghiep", so_kep: "so-kep",
-  sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi",
+  sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi", dau_hieu: "dau-hieu",
 };
 
 /** SEO-K: `xem_them` = link sang trang gốc thay cho chép lại khối dùng chung (engine dựng, tiêu đề điền sẵn). */

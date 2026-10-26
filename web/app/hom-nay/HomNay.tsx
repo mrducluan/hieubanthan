@@ -5,6 +5,7 @@
 // HN-2: "Hôm nay bạn định làm gì?" — chọn ý định hoặc gõ một câu; engine nhận diện ý định bằng luật từ khoá, không lưu
 // câu, không trả lại câu. Trên máy chỉ nhớ MÃ ý định của đúng ngày đó (mở lại trong ngày vẫn thấy).
 import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
+import { ViecTuanNha } from "@/components/huyen-hoc/ViecTuanNha";
 import { NhacHomNay } from "@/components/khung/NhacHomNay";
 import { HoiHomQua } from "@/components/khung/HoiHomQua";
 import { HoiSau30Ngay } from "@/components/khung/HoiSau30Ngay";
@@ -304,6 +305,7 @@ export function HomNay() {
           <NhacHomNay homNay={the.ngay_xem} />
           <MoiCaiApp noi="hom_nay" />
           <ThangNayNha />
+          <ViecTuanNha />
 
           <section aria-labelledby="y-dinh" className="glass space-y-4 rounded-2xl p-5" data-testid="y-dinh">
             <div>

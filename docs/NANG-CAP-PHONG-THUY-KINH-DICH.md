@@ -36,7 +36,7 @@ Nguyên tắc: **chuyển phần tất định vào engine Python (một bộ t�
   `/v1/kinhdich/hoi` thêm `chu_de`, `so_mai_hoa`, `phuong_mai_hoa`, `cach_ra_que` = `mai_hoa_so` / `mai_hoa_phuong`; `GET /v1/kinhdich/chu-de`.
   `cau_tra_loi` cũ giữ nguyên (LLM, nhật ký, test cũ).
 - `calc/huyen_khong.py` thêm `luu_nguyet`, `luu_nguyet_tai`, `to_hop_cung` (81 cặp từ 45 nghĩa), `thong_quan`, `huong_chung` (test tay).
-  KB `phongthuy_huyen_khong.json` thêm `cap_sao` 45, `sao_doi_thuong` 9, `luu_nguyet`.
+  KB `phongthuy_huyen_khong.json` thêm `cap_sao` 45, `sao_doi_thuong` 9, `luu_nguyet`. (Y8, 2026-10-26: `cap_sao` đã gỡ — `to_hop_81` là nguồn duy nhất.)
 - `luangiai/phongthuy_doi_song.py` + KB `phongthuy_doi_song.json`: báo cáo **"Nhà của bạn"** 5 chương (khuôn `doi_song_1` dùng chung
   với Luận giải Tử vi): Bạn hợp hướng nào · Ngôi nhà này với bạn (hình thế trước lý khí, Huyền Không cung cửa, người cùng ở khác nhóm →
   chia hướng, hành thông quan) · Từng phòng (du niên người ở quyết định, cặp sao chỉ hạ bậc; chưa khai bố cục → gợi ý đặt phòng) · Năm nay

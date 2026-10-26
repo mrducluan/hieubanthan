@@ -25,23 +25,28 @@ export async function GET(req: Request) {
   const y = (t?.y_chinh ?? []).slice(0, 5);
   const tieuDe = (t?.tieu_de ?? "Thư viện kiến thức Hiểu Bản Thân").split(" — ")[0] ?? "";
   const sao = saoRai(bam(`yc${duong}`), 70, W, 420);
+  // Y5 (chủ dự án 2026-10-26): ảnh tóm tắt trang "dấu hiệu nhà ở" dùng nền giấy SÁNG (như ảnh minh hoạ blog BLOG-7) —
+  // nhà cửa đọc dễ hơn trên nền sáng; các cụm khác giữ nền Đêm sao.
+  const sang = t?.loai === "dau_hieu";
+  const m = sang ? { nen: "linear-gradient(180deg, #fbf7ee 0%, #f4ecda 60%, #ece0c6 100%)", chu: "#241f38", mo2: "#5f5878", vang: "#9a6f1c", so: MAU.giay }
+    : { nen: "linear-gradient(180deg, #0a0a17 0%, #15132e 60%, #1f1838 100%)", chu: MAU.chu, mo2: MAU.mo2, vang: MAU.vang, so: MAU.nen };
 
   return new ImageResponse(
     (
       <div style={{
         width: "100%", height: "100%", display: "flex", flexDirection: "column", position: "relative",
-        background: "linear-gradient(180deg, #0a0a17 0%, #15132e 60%, #1f1838 100%)", color: MAU.chu, fontFamily: "Sans",
+        background: m.nen, color: m.chu, fontFamily: "Sans",
         padding: "72px 72px 56px",
       }}>
         <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ position: "absolute", top: 0, left: 0 }}>
-          {sao.map(([x, yy, r, o], i) => <circle key={i} cx={x} cy={yy} r={r} fill={MAU.chu} fillOpacity={o * 0.7} />)}
+          {sao.map(([x, yy, r, o], i) => <circle key={i} cx={x} cy={yy} r={r} fill={sang ? m.vang : MAU.chu} fillOpacity={o * (sang ? 0.35 : 0.7)} />)}
         </svg>
-        <div style={{ display: "flex", fontSize: 30, letterSpacing: 6, color: MAU.vang, textTransform: "uppercase" }}>{mang}</div>
+        <div style={{ display: "flex", fontSize: 30, letterSpacing: 6, color: m.vang, textTransform: "uppercase" }}>{mang}</div>
         <div style={{ display: "flex", fontSize: tieuDe.length > 48 ? 58 : 68, marginTop: 18, fontFamily: "Serif", lineHeight: 1.12 }}>{tieuDe}</div>
         <div style={{ display: "flex", flexDirection: "column", marginTop: 44, gap: 26 }}>
           {(y.length ? y : ["Ý nghĩa, cách tính và ví dụ đọc", "Bảng tra nhanh", "Câu hỏi thường gặp"]).map((s, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "flex-start", fontSize: 36, lineHeight: 1.3, color: MAU.chu }}>
-              <div style={{ display: "flex", width: 46, height: 46, borderRadius: 23, background: MAU.vang, color: MAU.nen, fontSize: 26,
+            <div key={i} style={{ display: "flex", alignItems: "flex-start", fontSize: 36, lineHeight: 1.3, color: m.chu }}>
+              <div style={{ display: "flex", width: 46, height: 46, borderRadius: 23, background: m.vang, color: m.so, fontSize: 26,
                 alignItems: "center", justifyContent: "center", marginRight: 22, flexShrink: 0, marginTop: 2 }}>{i + 1}</div>
               <div style={{ display: "flex", flex: 1 }}>{s}</div>
             </div>
@@ -49,10 +54,10 @@ export async function GET(req: Request) {
         </div>
         <div style={{ display: "flex", position: "absolute", left: 72, right: 72, bottom: 56, justifyContent: "space-between", alignItems: "flex-end" }}>
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 640 }}>
-            <div style={{ display: "flex", fontSize: 24, color: MAU.mo2 }}>Đọc đầy đủ tại</div>
-            <div style={{ display: "flex", fontSize: 26, color: MAU.chu, marginTop: 6 }}>{`${TEN_MIEN}${duong}`.slice(0, 70)}</div>
+            <div style={{ display: "flex", fontSize: 24, color: m.mo2 }}>Đọc đầy đủ tại</div>
+            <div style={{ display: "flex", fontSize: 26, color: m.chu, marginTop: 6 }}>{`${TEN_MIEN}${duong}`.slice(0, 70)}</div>
           </div>
-          <ChanQr url={qr} canh={190} loiMoi="Quét để đọc bài" doc />
+          <ChanQr url={qr} canh={190} loiMoi="Quét để đọc bài" doc mauChu={m.chu} mauMo={m.mo2} />
         </div>
       </div>
     ),

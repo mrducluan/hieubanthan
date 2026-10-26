@@ -5,7 +5,7 @@ import { timingSafeEqual } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { baoLoi } from "@/lib/giam-sat";
 import { goiEngineDaKiem } from "@/lib/proxy";
-import { ghepThongBao, guiPush, homNayVn, khoaVapid, type DangKyPush, type GoiSangNay, type KetQuaGui, type NguoiNhan } from "@/lib/web-push";
+import { ghepThongBao, guiPush, homNayVn, khoaVapid, type DangKyPush, type GoiSangNay, type KetQuaGui, type NguoiNhan, type NhaTiet } from "@/lib/web-push";
 
 export function dungKhoaCron(req: Request): boolean {
   const bi = process.env.CRON_SECRET;
@@ -40,6 +40,10 @@ export async function guiNhacNgay(dv: SupabaseClient): Promise<Record<string, un
     const r = await goiEngineDaKiem({ ngay_xem: ngay, ngay_sinh: ngaySinh }, "/v1/push/sang-nay");
     if (r.ok) sn = r.body as GoiSangNay;
   }
+  // Y3 "nhắc theo mùa của nhà": chỉ ngày giao tiết (12 lần / năm), người chọn nhận mốc giao tiết VÀ đã tự lưu nhà vào tài
+  // khoản (ho_so_nha, 0018) → đọc đúng HƯỚNG nhà (không năm xây, không bố cục), một lời gọi engine, không lưu thêm gì.
+  let soNha = 0;
+  if (sn?.moc_lich.some((m) => m.nhom.includes("giao_tiet"))) soNha = await ganNhaTiet(dv, hang, ngay);
   const dem: Record<KetQuaGui | "loi_ghi" | "khong_co_gi", number> = { ok: 0, het_han: 0, loi: 0, loi_ghi: 0, khong_co_gi: 0 };
   // Từng lô 10 người — đủ nhanh cho vài nghìn người trong 60 giây, không dồn hàng nghìn kết nối một lúc. Mỗi thiết bị
   // gửi xong ghi ngay kết quả; ghi hỏng (loi_ghi) → thiết bị còn trong hàng đợi, lần chạy lại gửi tiếp (≤ 1 / thiết bị / ngày).
@@ -55,7 +59,33 @@ export async function guiNhacNgay(dv: SupabaseClient): Promise<Record<string, un
       });
     }));
   }
-  return { ngay, nguoi: hang.length, sang_nay: Boolean(sn), ...dem };
+  return { ngay, nguoi: hang.length, sang_nay: Boolean(sn), nha_tiet: soNha, ...dem };
+}
+
+const HUONG8 = new Set(["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]);
+type HuongNha = { huong_do?: number; huong?: string };
+
+/** Y3: gắn `nha_tiet` cho người nhận mốc giao tiết có hồ sơ nhà trong tài khoản. Trả số người được gắn. Lỗi → 0 (vẫn gửi
+ *  lời giao tiết chung). */
+async function ganNhaTiet(dv: SupabaseClient, hang: Hang[], ngay: string): Promise<number> {
+  const can = hang.filter((h) => h.moc_lich?.includes("giao_tiet"));
+  if (!can.length) return 0;
+  const huong = new Map<string, HuongNha>();
+  for (let i = 0; i < can.length; i += 200) {
+    const { data, error } = await dv.from("ho_so_nha").select("user_id, huong_do:du_lieu->huong_do, huong:du_lieu->>huong")
+      .in("user_id", can.slice(i, i + 200).map((h) => h.user_id));
+    if (error) return 0;                                        // 0018 chưa chạy → bỏ qua
+    for (const r of (data ?? []) as { user_id: string; huong_do: unknown; huong: unknown }[]) {
+      if (typeof r.huong_do === "number" && r.huong_do >= 0 && r.huong_do < 360) huong.set(r.user_id, { huong_do: r.huong_do });
+      else if (typeof r.huong === "string" && HUONG8.has(r.huong)) huong.set(r.user_id, { huong: r.huong });
+    }
+  }
+  const ds = can.filter((h) => huong.has(h.user_id));
+  if (!ds.length) return 0;
+  const r = await goiEngineDaKiem({ ngay_xem: ngay, nha: ds.map((h) => huong.get(h.user_id)!) }, "/v1/push/sang-nay");
+  const kq = r.ok ? (r.body as { nha_tiet?: (NhaTiet | null)[] }).nha_tiet ?? [] : [];
+  ds.forEach((h, i) => { h.nha_tiet = kq[i] ?? null; });
+  return kq.filter(Boolean).length;
 }
 
 /** TS-V3 / LG-ĐS / KC-4: xoá thật dữ liệu hết hạn đúng thời hạn ghi trong Chính sách quyền riêng tư — góp ý > 12 tháng,

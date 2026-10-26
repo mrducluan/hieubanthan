@@ -100,3 +100,33 @@ export async function xoaBaiKhoiTao(payload: Payload, req?: PayloadRequest): Pro
   const conBai = await payload.count({ collection: "bai-viet", where: { slug: { in: docBaiKhoiTao().map((b) => b.slug) } }, req });
   if (conBai.totalDocs === 0) await payload.delete({ collection: "media", where: { nguon_anh: { equals: NGUON_ANH } }, req });
 }
+
+/** 2026-10-26 (chủ dự án: "bổ sung link web, QR code web cho hình ảnh bài viết"): 12 ảnh trong repo đã gắn link + QR về đúng
+ *  bài. Bài khởi tạo đã nhập trước đó → thay TỆP của ảnh cũ trong Thư viện ảnh (giữ nguyên id, bài không phải sửa). Tìm theo
+ *  nguồn ảnh BLOG-6 + tên tệp (Payload đổi đuôi sang .webp, có thể thêm hậu tố "-1" khi trùng tên).
+ *  KHÔNG truyền `req` vào lệnh thay (như notfair.ts / chuan-hoa-notfair.ts): mỗi ảnh một giao dịch riêng — plugin kho ảnh tải
+ *  tệp mới rồi XOÁ tệp cũ ngay, nên nếu dùng chung giao dịch migration, một ảnh sau lỗi kho sẽ rollback DB của các ảnh đã thay
+ *  trước trong khi tệp cũ đã bị xoá → ảnh hỏng. Ảnh lỗi chỉ ghi log, ảnh khác vẫn thay. Trả {thay, loi}. */
+export async function capNhatAnhKhoiTao(payload: Payload, req?: PayloadRequest): Promise<{ thay: number; loi: number }> {
+  const kq = { thay: 0, loi: 0 };
+  for (const b of docBaiKhoiTao()) {
+    for (const a of b.anh ?? []) {
+      const tep = path.join(THU_MUC, "anh", a.ten_tep);
+      if (!existsSync(tep)) continue;
+      const goc = a.ten_tep.replace(/\.png$/, "");
+      const r = await payload.find({ collection: "media", req, depth: 0, limit: 5, overrideAccess: true,
+        where: { and: [{ nguon_anh: { equals: NGUON_ANH } }, { filename: { like: goc } }] } });
+      for (const m of r.docs) {
+        if (!new RegExp(`^${goc}(-\\d+)?\\.[a-z]+$`).test(String(m.filename ?? ""))) continue;   // Media đổi sang .webp
+        try {
+          await payload.update({ collection: "media", id: m.id, overrideAccess: true, filePath: tep, data: {} });
+          kq.thay++;
+        } catch (e) {
+          kq.loi++;
+          payload.logger.warn(`Ảnh QR bài khởi tạo: chưa thay ${a.ten_tep} — ${(e as Error)?.message ?? e} (ảnh cũ giữ nguyên)`);
+        }
+      }
+    }
+  }
+  return kq;
+}

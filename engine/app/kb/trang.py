@@ -28,7 +28,7 @@ CAP_NHAT = "2026-10-07"
 INDEX_NHAP_AI = True
 
 LOAI = ("so", "que", "sao", "cung", "thap_than", "nhat_chu", "cap_so", "nghe", "tinh_yeu", "nam_ca_nhan", "no_nghiep",
-        "sao_cung", "hoa_cung", "menh_nam", "so_kep")
+        "sao_cung", "hoa_cung", "menh_nam", "so_kep", "dau_hieu")
 _SO = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33")
 _SO_GOC = {"11": "2", "22": "4", "33": "6"}
 _LINH_VUC_QUE = {"cong_viec": "Công việc", "tinh_cam": "Tình cảm", "gia_dinh": "Gia đình",
@@ -340,7 +340,9 @@ from app.kb import trang_tuvi as _ttv  # noqa: E402 — SEO-H: 168 trang sao × 
 _TRANG.update(_ttv.TRANG)
 from app.kb import trang_menh as _tm  # noqa: E402 — SEO-J: 76 trang "sinh năm X mệnh gì"
 _TRANG.update(_tm.TRANG)
-_TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN}
+from app.kb import trang_phongthuy as _tpt  # noqa: E402 — Y5: dấu hiệu nhà ở (bo_tri) /phong-thuy/dau-hieu
+_TRANG.update(_tpt.TRANG)
+_TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN, **_tpt.TEN_NGAN}
 from app.kb import bo_sung as _bs  # noqa: E402 — SEO-M: nội dung bổ sung trang mỏng (KB bo_sung_<loai>.json)
 _TRANG = {k: (ds, _bs.boc(dung)) for k, (ds, dung) in _TRANG.items()}
 

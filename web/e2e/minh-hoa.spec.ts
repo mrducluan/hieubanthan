@@ -27,7 +27,7 @@ for (const [duong, title] of [
 
 test("quẻ Thái vẽ đúng: 3 hào dương dưới, 3 hào âm trên", async ({ page }) => {
   await page.goto("/kinh-dich/que/que-11-thai");
-  const svg = page.getByTestId("minh-hoa").locator("svg");
+  const svg = page.getByTestId("minh-hoa").locator("svg").first();   // svg thứ hai là mã QR ở dải chân (QR-ANH)
   await expect(svg).toBeVisible();
   // hào dương = 1 rect liền, hào âm = 2 rect → 3 + 6 = 9 rect
   await expect(svg.locator("rect")).toHaveCount(9);

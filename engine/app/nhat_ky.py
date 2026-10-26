@@ -137,7 +137,8 @@ def loc_cau_hoi_huyenhoc(s: str) -> str:
 
 # Khối bằng chứng suy ra từ ngày giờ sinh (kể cả năm sinh nêu trong câu hỏi).
 KHOI_TU_SINH = {"menh_quai", "tuoi_lam_nha", "tu_tru", "khoi_van", "dai_van", "luu_nien", "cac_dai_van",
-                "tuoi", "han", "than_cu", "ngu_hanh", "dung_than", "tru", "tang_can", "vo_chong"}
+                "tuoi", "han", "than_cu", "ngu_hanh", "dung_than", "tru", "tang_can", "vo_chong",
+                "nha_rieng"}          # Y6: câu trả lời theo hồ sơ nhà (hướng, vị trí phòng) — không lưu câu trả lời
 
 
 def ban_ghi_huyenhoc(mo_dun: str, cau_hoi: str, kq: dict, co_du_lieu_sinh: bool) -> dict:

@@ -47,7 +47,7 @@ interface KetQua {
     vi_tri: { phong: string; tieu_de: string; noi_dung: string; thuc_te: string; nguon: string }[];
     huong: { doi_tuong: string; tieu_de: string; noi_dung: string }[];
     dau_hieu: { ma: string; tot: boolean; tieu_de: string; noi_dung: string; goi_y: string; nguon: string; veto: boolean;
-      giai_thich: { sach_xua: string; doi_song: string }; viec: Viec[]; tu_mat_bang: boolean }[];
+      giai_thich: { sach_xua: string; doi_song: string }; viec: Viec[]; tu_mat_bang: boolean; trang?: string }[];
   };
   tu_soi: string[];
   luu_y: string;
@@ -462,6 +462,7 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
                   {x.viec.map((v) => <li key={v.lam} className="flex gap-2"><span className="shrink-0 rounded-full border border-line px-2 text-[0.65rem] font-semibold uppercase tracking-wide text-fg-faint">{TEN_CHI_PHI[v.chi_phi]}</span><span className="text-fg-muted">{v.lam}</span></li>)}
                 </ul>
               ) : <span className="text-fg-muted"> Gợi ý: {x.goi_y}</span>}
+              {x.trang?.startsWith("/phong-thuy/") && <a href={x.trang} className="mt-1 inline-block text-xs text-gold underline decoration-gold/40 underline-offset-2 hover:decoration-gold">Đọc kỹ về dấu hiệu này</a>}
             </li>
           ))}
           {kq.quy_tac?.map((q) => (

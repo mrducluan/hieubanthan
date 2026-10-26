@@ -26,7 +26,7 @@ _TAC_GIA_THEO_LOAI = {"so": "duc-luan"}     # thanso_meanings: chủ dự án t�
 
 # Thứ tự thẩm định gợi ý: trang trụ cột trước (nhiều trang khác trỏ vào), cụm trang dài sau.
 _UU_TIEN = ("sao", "cung", "que", "nhat_chu", "thap_than", "cap_so", "nghe", "tinh_yeu", "nam_ca_nhan",
-            "no_nghiep", "hoa_cung", "menh_nam", "sao_cung", "so")
+            "no_nghiep", "hoa_cung", "menh_nam", "sao_cung", "dau_hieu", "so")
 
 
 @lru_cache(maxsize=1)
