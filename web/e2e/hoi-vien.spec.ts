@@ -1,6 +1,6 @@
 // SAO-HV (migration 0028) — hội viên năm: mua một lần bằng VND, không tự gia hạn; mở mọi chương Luận giải toàn bộ; Sao
 // tháng không cộng dồn; câu hỏi chuyên gia; hoàn tiền theo chính sách. Quy tắc máy chủ (kích hoạt, gia hạn ≤ 30 ngày, hoàn
-// tiền gợi ý, quyền) kiểm ở supabase/kiem_thu/thu_hoi_vien_0028.sql; chuỗi thật ở e2e-that/hoi-vien-that.spec.ts. Ở đây:
+// tiền gợi ý, quyền) kiểm ở supabase/kiem_thu/thu_hoi_vien_0028.sql; chuỗi thật ở e2e-that/sao-hoi-vien-that.spec.ts. Ở đây:
 // phần thuần + giao diện với máy chủ giả lập bằng page.route (e2e không có Supabase → công tắc TẮT ở trang máy chủ).
 import { test, expect, type Page } from "@playwright/test";
 import { napHoSo } from "./_hoso";

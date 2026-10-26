@@ -36,7 +36,7 @@ export function khachDichVu(): SupabaseClient | null {
 
 /** Gói hiển thị khi chưa đọc được bảng goi_sao (chưa bật tài khoản) — khớp dữ liệu mặc định migration 0012. */
 export const GOI_MAC_DINH = [
-  { ma: "thu", ten: "Thử", gia_vnd: 29000, sao: 30, nhan: null, mo_ta: "Đủ 3 lần Luận giải toàn bộ" },
+  { ma: "thu", ten: "Thử", gia_vnd: 29000, sao: 30, nhan: null, mo_ta: "Gói nhỏ để thử" },
   { ma: "pho_bien", ten: "Phổ biến", gia_vnd: 99000, sao: 110, nhan: "Phổ biến", mo_ta: "Tặng thêm 10%" },
   { ma: "gia_dinh", ten: "Gia đình", gia_vnd: 199000, sao: 240, nhan: null, mo_ta: "Tặng thêm 20% — xem cho cả nhà, hợp đôi" },
 ] as const;

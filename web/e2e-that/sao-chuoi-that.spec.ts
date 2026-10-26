@@ -113,7 +113,7 @@ test("báo cáo: khách đọc chương 1 → mở khoá → đăng nhập OTP �
   v = await so(EMAIL);
   expect([v.du, v.dem("mua"), v.dem("dung")]).toEqual([20, 1, 2]);
 
-  // 6. Hỏi đáp có tài khoản: 2 câu miễn phí → câu 3 hỏi đồng ý → trừ 1 Sao SAU khi trả lời.
+  // 6. Hỏi đáp có tài khoản: 2 câu miễn phí → câu 3 hỏi đồng ý → trừ 3 Sao (giá câu vượt lượt, chủ dự án chốt 26/10) SAU khi trả lời.
   await page.goto("/tu-vi");
   for (const c of ["Cung Mệnh của tôi nói gì?", "Cung Quan Lộc thế nào?"]) {
     const n = await hoi(page, c);
@@ -123,13 +123,13 @@ test("báo cáo: khách đọc chương 1 → mở khoá → đăng nhập OTP �
   await expect(hop(page)).toHaveAttribute("data-can", "xac_nhan_sao");
   await page.getByTestId("sao-dong-y").click();
   await expect(page.getByTestId("cau-tra-loi")).toHaveCount(n3 + 1, { timeout: 60_000 });
-  await expect.poll(async () => (await so(EMAIL)).du).toBe(19);
+  await expect.poll(async () => (await so(EMAIL)).du).toBe(17);   // 20 − 3
 
   // 7. Câu khủng hoảng khi đã hết lượt → luôn trả lời, không hỏi Sao, không trừ.
   const n4 = await hoi(page, "Tôi muốn tự tử");
   await expect(page.getByTestId("cau-tra-loi")).toHaveCount(n4 + 1, { timeout: 60_000 });
   await expect(hop(page)).toHaveCount(0);
-  expect((await so(EMAIL)).du).toBe(19);
+  expect((await so(EMAIL)).du).toBe(17);
 });
 
 test("khách: hết lượt hỏi → mời đăng nhập; 'Để sau' ở báo cáo → tải lại không tự bật hộp", async ({ page }) => {
