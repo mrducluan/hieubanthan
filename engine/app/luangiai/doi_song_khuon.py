@@ -179,8 +179,41 @@ def _thuong_khong_dau_cau(s: str) -> str:
     return " ".join((s or "").lower().split()).rstrip(".!?…:; ")
 
 
+def _mo_rong_tieu_de(tieu_de: str, noi_dung: str, toi_da: int = 60) -> str | None:
+    """Tiêu đề trùng hộp khác trong chương → lấy thêm vế kế tiếp của CHÍNH câu thân (vd "Bạn điềm tĩnh" →
+    "Bạn điềm tĩnh, biết tổ chức và giữ của"). Không có vế kế / quá dài → None."""
+    t = (tieu_de or "").strip().rstrip(".!?…:; ")
+    cau = re.split(r"(?<=[.!?…])\s", " ".join((noi_dung or "").split()), maxsplit=1)[0].rstrip(".!?… ")
+    if len(t) < 4 or not cau.lower().startswith(t.lower()):
+        return None
+    m = re.match(r"\s*[,;:—–]\s*[^,;:—–(]+", cau[len(t):])
+    if not m:
+        return None
+    moi = cau[:len(t) + m.end()].rstrip(" ,;:—–")
+    return moi if len(moi) <= toi_da else None
+
+
+def tieu_de_khong_trung(hop: list[dict]) -> dict[tuple[str, str], str]:
+    """UX v3 (2026-10-26): trong một chương không có hai hộp cùng tiêu đề — hộp sau lấy thêm vế kế của câu thân
+    (`_mo_rong_tieu_de`). Gọi TRƯỚC khi bỏ phần thân lặp tiêu đề. Sửa tại chỗ; trả {(mã, tiêu đề cũ): tiêu đề mới}."""
+    da: set[str] = set()
+    doi: dict[tuple[str, str], str] = {}
+    for h in hop:
+        t = _thuong_khong_dau_cau(h.get("tieu_de", ""))
+        if t in da:
+            moi = _mo_rong_tieu_de(h.get("tieu_de", ""), h.get("noi_dung", ""))
+            if moi:
+                doi[(h.get("ma_mau") or "", h["tieu_de"])] = moi
+                h["tieu_de"] = moi
+                t = _thuong_khong_dau_cau(moi)
+        da.add(t)
+    return doi
+
+
 def gon_bao_cao(bc: dict, gon_doan: bool = True) -> dict:
     """Gọn một báo cáo đời sống (sửa tại chỗ, trả về `bc`):
+    0. Trong một chương không có hai hộp cùng tiêu đề (`tieu_de_khong_trung`, UX v3); hộp "Điều quan trọng nhất" cùng mã
+       nhận tiêu đề mới.
     1. Thân hộp không lặp tiêu đề (`than_khong_lap_tieu_de`); thân rỗng thì lấy câu "nên làm" KB của chính hộp
        (`loi_khuyen`) nếu câu ấy chưa có trong hộp khác của chương, không thì để trống.
        Hộp "Điều quan trọng nhất" lấy đúng thân của hộp gốc cùng mã.
@@ -190,8 +223,10 @@ def gon_bao_cao(bc: dict, gon_doan: bool = True) -> dict:
        kê lại tiêu đề hộp, câu "xem trong hộp") — đoạn rỗng thì bỏ."""
     chuong_ds = bc.get("chuong") or []
     da_gon: dict[str, dict] = {}
+    doi_tieu_de: dict[tuple[str, str], str] = {}
     for c in chuong_ds:
         hop = c.get("hop") or []
+        doi_tieu_de.update(tieu_de_khong_trung(hop))
         for h in hop:
             goc = h.get("noi_dung") or ""
             moi = than_khong_lap_tieu_de(h.get("tieu_de", ""), goc)
@@ -204,6 +239,7 @@ def gon_bao_cao(bc: dict, gon_doan: bool = True) -> dict:
                 da_gon[h["ma_mau"]] = h
     for h in bc.get("cot_loi") or []:
         g = da_gon.get(h.get("ma_mau") or "")
+        h["tieu_de"] = doi_tieu_de.get((h.get("ma_mau") or "", h.get("tieu_de", "")), h.get("tieu_de", ""))
         h["noi_dung"] = g["noi_dung"] if g else than_khong_lap_tieu_de(h.get("tieu_de", ""), h.get("noi_dung", "")) \
             or h.get("noi_dung", "")
     da: dict[str, str] = {h["ma_mau"]: "cot_loi" for h in bc.get("cot_loi") or [] if h.get("ma_mau")}

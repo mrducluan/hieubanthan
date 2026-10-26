@@ -2,7 +2,8 @@
 // Trục 1 (2026-10-26, báo cáo UX mục 1) — khung lá số Tử vi trên ĐIỆN THOẠI: mặc định THU VỪA màn hình (toàn cảnh, không
 // cắt chữ khung giữa), nút "Phóng to" để đọc chữ rõ rồi vuốt ngang; gợi ý cách dùng đặt TRÊN lá số. Phóng to thì cuộn tới
 // đúng cột của cung đang chọn. Máy tính (≥ 640px) không đổi: lá số luôn vừa khung. Ảnh tải về (tai-anh-svg + chan-anh)
-// không đổi — chỉ đổi khung bọc, SVG vẫn một.
+// không đổi — chỉ đổi khung bọc, SVG vẫn một. UX v3 M5: vừa khung thì lá số chỉ hiện tên cung + chính tinh (+ mức sáng)
+// chữ đủ lớn; phụ tinh / nhãn nhỏ hiện khi phóng to.
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Maximize2, Minimize2, Move } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,11 +27,13 @@ export function KhungLaSo({ chon, children, testId = "la-so-tu-vi", className }:
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ khi vừa phóng to
   }, [phong]);
   return (
-    <div className={cn("-mx-4 sm:mx-0", className)}>
+    // UX v3 M5: `group/ls` + data-gon → LaSoTuVi ẩn lớp chi tiết, hiện lớp gọn (tên cung + chính tinh + mức sáng) khi
+    // đang vừa khung trên điện thoại (< 640px); phóng to hoặc máy tính như cũ.
+    <div className={cn("group/ls -mx-4 sm:mx-0", className)} data-gon={phong ? "0" : "1"}>
       <div className="mb-2 flex items-center gap-2 px-4 sm:hidden" data-testid="la-so-dieu-khien">
         <p className="flex flex-1 items-start gap-1.5 text-xs leading-snug text-fg-muted">
           <Move className="mt-px size-3.5 shrink-0 text-gold" aria-hidden />
-          {phong ? "Vuốt ngang để xem trọn lá số · chạm một cung để xem chi tiết." : "Đang xem toàn cảnh · bấm Phóng to để đọc chữ rõ, rồi vuốt ngang · chạm một cung để xem chi tiết."}
+          {phong ? "Vuốt ngang để xem trọn lá số · chạm một cung để xem chi tiết." : "Đang xem gọn: tên cung và chính tinh · bấm Phóng to để xem đủ phụ tinh, rồi vuốt ngang · chạm một cung để xem chi tiết."}
         </p>
         <Button variant="secondary" size="sm" aria-pressed={phong} className="min-h-11 shrink-0"
           onClick={() => { setPhong((v) => !v); ghi("chart_interacted", { mo_dun: "tuvi", kind: phong ? "la_so_thu" : "la_so_phong" }); }}>

@@ -21,7 +21,7 @@ import { DongMuoiNam } from "./DongMuoiNam";
 import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
 import { ChuQua } from "./ChuQua";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
-import { CotChuong, giamChuyenDong, ThanhChuongGon, useChuongDangDoc, type MucChuong } from "./MucLucChuong";
+import { ChamMuc, ChuThichMuc, CotChuong, giamChuyenDong, ThanhChuongGon, useChuongDangDoc, type MucChuong } from "./MucLucChuong";
 import { maMauBaoCao, NHAN_MUC, type BaoCaoDoiSong, type ChuongDoiSongMo, type Hop, type MocDaiHan, type Muc } from "./kieu";
 
 export function ChipMuc({ muc, nhan, className }: { muc?: Muc; nhan?: string; className?: string }) {
@@ -42,6 +42,10 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
 }) {
   const tyLe = useTyLe(kiemChung ? maMauBaoCao(bc) : []);
   const cotLoi = (bc.cot_loi ?? []).filter((h) => !h.dang_xem_lai);
+  // Số hộp lẻ → một hộp trải trọn hàng (máy tính): hộp đầu như cũ. UX v3 M7: hộp đầu chỉ còn tiêu đề (thân trùng tiêu đề
+  // đã bỏ, KB không còn việc nên làm riêng) → nằm gọn trong lưới 2 cột, hộp CUỐI (nếu có thân) trải trọn hàng — không hở ô.
+  const coThan = (h: Hop) => Boolean(h.noi_dung || h.huong_xu_ly);
+  const hopTronHang = !(cotLoi.length % 2) ? -1 : coThan(cotLoi[0]!) ? 0 : coThan(cotLoi.at(-1)!) ? cotLoi.length - 1 : -1;
   // KC-1: phái ghi kèm phiếu kiểm chứng do engine trả (`phai`); báo cáo Tử vi cũ không có → Nam phái Việt.
   const phai = bc.phai ?? (bc.mo_dun === "thanso" ? "pitago" : bc.mo_dun === "battu" ? "tu_binh" : "nam_phai_viet");
   const doc = bc.chuong.filter((c): c is ChuongDoiSongMo => !c.khoa);
@@ -131,7 +135,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
           <section id="lg-cot-loi" aria-labelledby="lg-cot-loi-td" className="mt-6 scroll-mt-32 lg:scroll-mt-24" data-testid="lg-cot-loi">
             <h3 id="lg-cot-loi-td" className="font-serif text-2xl">Điều quan trọng nhất</h3>
             <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
-              {cotLoi.map((h, i) => <HopNoiBat key={`${h.ma_mau ?? h.tieu_de}-${i}`} hop={h} className={cotLoi.length % 2 && i === 0 ? "md:col-span-2" : undefined} />)}
+              {cotLoi.map((h, i) => <HopNoiBat key={`${h.ma_mau ?? h.tieu_de}-${i}`} hop={h} className={i === hopTronHang ? "md:col-span-2" : undefined} />)}
             </div>
           </section>
         )}
@@ -144,6 +148,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
                 className="min-h-9 shrink-0 text-sm text-fg-muted underline-offset-4 hover:text-fg hover:underline">Mở hết các chương</button>
             )}
           </div>
+          <ChuThichMuc ds={dsMuc} className="mt-1.5" />
           <ol className="mt-2 grid grid-cols-1 gap-1.5 text-sm sm:grid-cols-2 lg:grid-cols-3">
             {bc.chuong.map((c, i) => (
               <li key={c.ma} className="min-w-0">
@@ -152,7 +157,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
                   className="flex min-h-11 items-center gap-2 rounded-xl border border-line/70 px-3 py-1.5 text-fg-muted hover:border-gold/60 hover:text-fg">
                   {c.khoa && <LockKeyhole className="size-3 shrink-0 text-gold" aria-label="đang khoá" />}
                   <span className="min-w-0 flex-1">{i + 1}. {c.tieu_de}</span>
-                  {!c.khoa && c.muc && <span data-muc={c.muc} className="cham-muc size-2 shrink-0 rounded-full" aria-hidden />}
+                  {!c.khoa && c.muc && <ChamMuc muc={c.muc} />}
                 </a>
               </li>
             ))}
@@ -292,8 +297,11 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
         {tiep && (
           <button type="button" onClick={() => moDich(tiep.ma)} data-testid="lg-chuong-tiep"
             className="mt-5 flex min-h-11 w-full items-center gap-3 rounded-xl border border-line/70 px-4 py-2.5 text-left text-sm transition-colors hover:border-gold/60 print:hidden">
-            <span className="text-fg-faint">Chương tiếp</span>
-            <span className="min-w-0 flex-1 truncate font-medium text-fg">{tiep.so}. {tiep.tieu_de}</span>
+            {/* UX v3 M9: tên chương không cắt — điện thoại nhãn nằm trên, tên xuống dòng khi dài. */}
+            <span className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-3">
+              <span className="shrink-0 text-xs text-fg-faint sm:text-sm">Chương tiếp</span>
+              <span className="min-w-0 text-pretty font-medium leading-snug text-fg">{tiep.so}. {tiep.tieu_de}</span>
+            </span>
             <ArrowDown className="size-4 shrink-0 text-gold" aria-hidden />
           </button>
         )}

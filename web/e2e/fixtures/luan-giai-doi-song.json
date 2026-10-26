@@ -1374,20 +1374,12 @@
      {
       "loai": "loi_khuyen",
       "tieu_de": "Phần cơ thể nên chăm sóc",
-      "noi_dung": "Theo sách xưa, phần cơ thể bạn nên chăm sóc phòng ngừa là thận, đường tiết niệu, ruột và xương khớp. Thay đổi nếp sinh hoạt liên tục, ăn ngủ thất thường mỗi khi có việc mới. Giữ giờ ăn ngủ ổn định dù công việc đổi, uống đủ nước, khám thận và tiêu hoá định kỳ.",
+      "noi_dung": "Theo sách xưa, phần cơ thể bạn nên chăm sóc phòng ngừa là thận, đường tiết niệu, ruột và xương khớp. Với tính cách của bạn, sách xưa nhắc thêm miệng, họng, răng và tiêu hoá. Thay đổi nếp sinh hoạt liên tục, ăn ngủ thất thường mỗi khi có việc mới. Giữ giờ ăn ngủ ổn định dù công việc đổi, uống đủ nước, khám thận và tiêu hoá định kỳ.",
       "can_cu": [
-       "Phá Quân (Miếu) ở cung Tật Ách"
-      ],
-      "ma_mau": "ds.suc_khoe.pha_quan.sao.vap"
-     },
-     {
-      "loai": "loi_khuyen",
-      "tieu_de": "Nhịp sức của chính bạn",
-      "noi_dung": "Với tính cách của bạn, sách xưa nhắc chăm sóc phòng ngừa miệng, họng, răng và tiêu hoá. Nói nhiều, hay để bụng chuyện, ăn uống vội vàng. Uống nước ấm, giữ giọng khi phải nói nhiều, khám răng miệng và tiêu hoá định kỳ.",
-      "can_cu": [
+       "Phá Quân (Miếu) ở cung Tật Ách",
        "Cự Môn (Đắc) ở cung Mệnh"
       ],
-      "ma_mau": "ds.suc_khoe.cu_mon+menh.sao.vap"
+      "ma_mau": "ds.suc_khoe.pha_quan.sao.vap"
      }
     ],
     "doan": [

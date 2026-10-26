@@ -415,6 +415,13 @@ test("Trục 1 điện thoại: thanh 'Chương x/13' dính dưới thanh đầu
   await page.setViewportSize({ width: 390, height: 844 });
   await moBaoCao(page);
   const thanh = page.getByTestId("lg-thanh-chuong");
+  // UX v3 M2: chấm màu mức có chú thích; mục lục đầu báo cáo đang trên màn hình → thanh dính CHƯA hiện (một mục lục).
+  const ml = page.getByTestId("lg-muc-luc");
+  await ml.scrollIntoViewIfNeeded();
+  await expect(ml.getByTestId("lg-chu-thich-muc")).toBeVisible();
+  await expect(ml.getByTestId("lg-chu-thich-muc")).toContainText("mức của chương");
+  await expect(ml.getByRole("link").locator(".cham-muc").first()).toHaveAttribute("title", /Thuận lợi|Cân bằng|Cần lưu ý/);
+  await expect(thanh).toBeHidden();
   await page.getByTestId(`lg-chuong-${BC.chuong[0]!.ma}`).getByTestId("tom-tat").scrollIntoViewIfNeeded();
   await page.mouse.wheel(0, 400);
   await expect(thanh).toBeVisible();
@@ -431,6 +438,33 @@ test("Trục 1 điện thoại: thanh 'Chương x/13' dính dưới thanh đầu
   await expect(thanh.getByTestId("lg-chuong-x")).toContainText("6/13");
   const rong = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
   expect(rong[0]).toBeLessThanOrEqual(rong[1]!);
+  // Cuộn ngược lên mục lục đầu báo cáo → thanh dính ẩn lại.
+  await ml.scrollIntoViewIfNeeded();
+  await expect(thanh).toBeHidden();
+});
+
+test("UX v3 M9: nút 'Chương tiếp' không cắt tên chương ở 360px", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await moBaoCao(page);
+  const nut = page.getByTestId(`lg-chuong-${BC.chuong[0]!.ma}`).getByTestId("lg-chuong-tiep");
+  await nut.scrollIntoViewIfNeeded();
+  await expect(nut).toContainText(`2. ${BC.chuong[1]!.tieu_de}`);
+  const tran = await nut.evaluate((e) => [...e.querySelectorAll("span")].some((s) => s.scrollWidth > s.clientWidth + 1
+    || getComputedStyle(s).textOverflow === "ellipsis"));
+  expect(tran).toBe(false);
+});
+
+test("UX v3 M7: số hộp 'Điều quan trọng nhất' lẻ, hộp đầu chỉ còn tiêu đề → nằm gọn, hộp cuối trải trọn hàng (máy tính)", async ({ page }) => {
+  const bc = structuredClone(BC);
+  bc.cot_loi[0]!.noi_dung = "";
+  delete (bc.cot_loi[0] as { huong_xu_ly?: string }).huong_xu_ly;
+  await moBaoCao(page, { bc });
+  const hop = page.getByTestId("lg-cot-loi").getByTestId("hop-noi-bat");
+  await expect(hop).toHaveCount(BC.cot_loi.length);
+  expect(BC.cot_loi.length % 2).toBe(1);
+  const rong = await hop.evaluateAll((ds) => ds.map((e) => e.getBoundingClientRect().width));
+  expect(rong[0]!).toBeLessThan(rong[1]! * 1.2);                      // hộp đầu (chỉ tiêu đề) cùng cỡ hộp thường
+  expect(rong.at(-1)!).toBeGreaterThan(rong[0]! * 1.6);               // hộp cuối trải trọn hàng — lưới không hở ô
 });
 
 test("Trục 1: reading_completed chỉ tính khi đã mở và đọc tới hết chương cuối của báo cáo", async ({ page }) => {

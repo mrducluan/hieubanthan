@@ -80,7 +80,8 @@ def test_hop_dong(bc):
             assert c["muc"] in MUC and c["nhan_muc"] == kb.nhan_muc(c["muc"])
         assert 1 <= len(c["doan"]) <= 4 and all(isinstance(d, str) and d for d in c["doan"])
         assert len(c["hop"]) <= 6
-        if c["ma"] not in ("nha_cua",):
+        # Sức khoẻ: mọi phần cơ thể gộp một hộp (UX v3 M3) → có thể chỉ một hộp khi cung không có sát tinh.
+        if c["ma"] not in ("nha_cua", "suc_khoe"):
             assert len(c["hop"]) >= 2, c["ma"]
         for h in c["hop"]:
             assert h["loai"] in LOAI_HOP - {"cot_loi"}

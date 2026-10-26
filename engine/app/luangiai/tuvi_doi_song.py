@@ -524,27 +524,36 @@ def _chuong_suc_khoe(cc: dict, hoc: tuple) -> dict:
     x = cc["Tật Ách"]
     cand = []
     nguon = [(s, "Tật Ách") for s in x["chinh"]] + [(s, "Mệnh") for s in cc["Mệnh"]["chinh"][:1]]
-    for s, noi in nguon:
-        sk = kb.suc_khoe(s["ten"])
-        if not sk:
-            continue
-        nd = ((f"Theo sách xưa, phần cơ thể bạn nên chăm sóc phòng ngừa là {sk['bo_phan']}." if noi == "Tật Ách" else
-               f"Với tính cách của bạn, sách xưa nhắc chăm sóc phòng ngừa {sk['bo_phan']}.")
-              if sk.get("bo_phan") else "")
-        nd = f"{nd} {sk.get('thoi_quen') or ''}".strip()
-        cu = f"{s['ten']} ({s['do_sang'] or 'Bình'}) ở cung {noi}" + (" (mượn)" if s["muon"] else "")
-        tieu = "Phần cơ thể nên chăm sóc" if noi == "Tật Ách" else "Nhịp sức của chính bạn"
-        nd = nd or "Bạn nên để ý nhịp nghỉ của mình."
-        lk = sk.get("loi_khuyen") or _SK_MAC_DINH
-        ma = _ma("ds", "suc_khoe", slug(s["ten"]) + ("" if noi == "Tật Ách" else "+menh"),
-                 "muon" if s["muon"] else "sao", "vap")
-        w = 2.0 if noi == "Tật Ách" else 1.0
+    # Vòng thử người dùng mới 2 (UX v3 M3): MỘT hộp cho mọi phần cơ thể sách xưa nhắc (trước: mỗi sao một hộp, hai hộp
+    # cùng tiêu đề "Phần cơ thể nên chăm sóc" → người mới tưởng lỗi lặp, thấy như phải lo đủ mọi bộ phận). Chỉ ghép câu KB
+    # `bo_phan` đã có; thói quen + việc nên làm lấy của nguồn ĐẦU (sao ở Tật Ách trước, rồi sao ở Mệnh); mọi nguồn nằm ở
+    # "Vì sao nói vậy". Mã kiểm chứng = mã của nguồn đầu (đã có trong danh mục SQL, phiếu cũ của sao đó vẫn đếm tiếp).
+    co = [(s, noi, sk) for s, noi in nguon if (sk := kb.suc_khoe(s["ten"]))]
+    if co:
+        s0, noi0, sk0 = co[0]
+        bp_ta = list(dict.fromkeys(sk["bo_phan"] for _, noi, sk in co if noi == "Tật Ách" and sk.get("bo_phan")))
+        bp_menh = [b for b in dict.fromkeys(sk["bo_phan"] for _, noi, sk in co if noi == "Mệnh" and sk.get("bo_phan"))
+                   if b not in bp_ta]
+        cau = []
+        if bp_ta:
+            cau.append(f"Theo sách xưa, phần cơ thể bạn nên chăm sóc phòng ngừa là {'; '.join(bp_ta)}.")
+        if bp_menh:
+            cau.append(f"Với tính cách của bạn, sách xưa nhắc {'thêm' if bp_ta else 'chăm sóc phòng ngừa'} "
+                       f"{'; '.join(bp_menh)}.")
+        nd = " ".join([*cau, sk0.get("thoi_quen") or ""]).strip() or "Bạn nên để ý nhịp nghỉ của mình."
+        cu = [f"{s['ten']} ({s['do_sang'] or 'Bình'}) ở cung {noi}" + (" (mượn)" if s["muon"] else "") for s, noi, _ in co]
+        tieu = "Phần cơ thể nên chăm sóc" if bp_ta or noi0 == "Tật Ách" else "Nhịp sức của chính bạn"
+        lk = sk0.get("loi_khuyen") or _SK_MAC_DINH
+        ma = _ma("ds", "suc_khoe", slug(s0["ten"]) + ("" if noi0 == "Tật Ách" else "+menh"),
+                 "muon" if s0["muon"] else "sao", "vap")
+        w = 2.0 if noi0 == "Tật Ách" else 1.0
         # Sao sáng ở cung không cần lưu ý → đây là lời chăm sóc phòng ngừa, không phải "lưu ý" (tránh chương
-        # "Thuận lợi" mà toàn hộp lưu ý). Mã giữ nguyên để phiếu kiểm chứng không đổi.
-        if s["do_sang"] == "Hãm" or cc[noi]["muc"] == "can_chu_dong":
-            cand.append(_hop("luu_y", tieu, nd, [cu], ma, w, huong=lk))
+        # "Thuận lợi" mà toàn hộp lưu ý). Xét theo nhóm nguồn đầu (Tật Ách; không có thì Mệnh) — như hộp của nguồn đầu
+        # trước khi gộp. Mã giữ nguyên để phiếu kiểm chứng không đổi.
+        if any(s["do_sang"] == "Hãm" or cc[noi]["muc"] == "can_chu_dong" for s, noi, _ in co if noi == noi0):
+            cand.append(_hop("luu_y", tieu, nd, cu, ma, w, huong=lk))
         else:
-            cand.append(_hop("loi_khuyen", tieu, f"{nd} {lk}", [cu], ma, w))
+            cand.append(_hop("loi_khuyen", tieu, f"{nd} {lk}", cu, ma, w))
     if x["sat"]:
         # theo từng sát tinh (sao đầu tiên trong cung); KB thiếu → câu chung của nhóm
         sk = next((k for k in (kb.suc_khoe_sat(t) for t in x["sat"]) if k and k.get("thoi_quen")), None) \
