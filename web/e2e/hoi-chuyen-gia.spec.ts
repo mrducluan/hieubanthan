@@ -5,7 +5,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 import { CUM_THUC_EP, dongHan, kiemTraLoi } from "../lib/chuyen-gia-hoi";
 
-const BAT = { bat: true, gia_vnd: 199000, giam_lan_dau_pt: 30, han_gio: 48, gia_lan_dau: 139300, lan_dau: null, gia_lan_nay: 139300, dang_cho: null, cong: "gia", dang_nhap: false, hoi_vien_con_luot: null };
+const BAT = { bat: true, gia_vnd: 199000, giam_lan_dau_pt: 30, han_gio: 48, gia_lan_dau: 139000, lan_dau: null, gia_lan_nay: 139000, dang_cho: null, cong: "gia", dang_nhap: false, hoi_vien_con_luot: null };
 const giaLap = (page: Page, tt: object) => page.route("**/api/chuyen-gia/thong-tin", (r) => r.fulfill({ json: tt }));
 
 test("thuần: bộ lọc câu trả lời chặn tên bệnh / phán hung / link / số điện thoại, chỉ cảnh báo giọng phán; dòng hạn không thúc", () => {
@@ -34,7 +34,7 @@ test("công tắc tắt: trang có, noindex, chỉ khung 'Sắp có' + lối qua
   await page.goto("/hoi-chuyen-gia");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Một câu hỏi");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
-  // Rà UX mục 17: không quảng cáo giá (199.000 / 139.300 ₫) khi chưa có nút nào dùng được.
+  // Rà UX mục 17: không quảng cáo giá (199.000 / 139.000 ₫) khi chưa có nút nào dùng được.
   const sapCo = page.getByTestId("cg-chua-mo");
   await expect(sapCo).toContainText("Sắp có");
   await expect(sapCo.getByRole("link", { name: /Về Tài khoản/ })).toHaveAttribute("href", "/tai-khoan");
@@ -50,7 +50,7 @@ test("công tắc bật: giá + câu đầu giảm, đếm ký tự, ô chia s�
   await page.goto("/hoi-chuyen-gia");
   const form = page.getByTestId("cg-form");
   await expect(form).toBeVisible();
-  await expect(page.getByTestId("cg-gia")).toContainText("139.300 ₫");
+  await expect(page.getByTestId("cg-gia")).toContainText("139.000 ₫");
   // Mục 23: phần trăm viết liền "30%" (không dấu cách → "%" không rơi xuống dòng riêng), như trang Nạp Sao.
   await expect(page.getByTestId("cg-gia")).toContainText("câu đầu giảm 30%");
   await expect(page.getByTestId("cg-cam-ket")).toContainText("hoàn 100%");
@@ -94,9 +94,9 @@ test("câu ngoài phạm vi (xổ số) bị từ chối trước thanh toán; c
 test("/tai-khoan/cau-hoi: trạng thái, hạn trung tính, câu trả lời + đánh giá, huỷ khi chờ thanh toán (máy chủ giả lập)", async ({ page }) => {
   const han = new Date(Date.now() + 30 * 3_600_000).toISOString();
   const ds = [
-    { id: 3, mang: "tu_vi", cau_hoi: "Câu đang chờ trả lời", gia_vnd: 139300, mien_phi_hoi_vien: false, trang_thai: "cho_tra_loi", ma_don: 100201, het_han_don: null, thanh_toan_luc: new Date().toISOString(), han_tra_loi: han, tra_loi: null, tra_loi_luc: null, danh_gia: null, hoan_luc: null, co_ho_so: true, tao_luc: new Date().toISOString() },
+    { id: 3, mang: "tu_vi", cau_hoi: "Câu đang chờ trả lời", gia_vnd: 139000, mien_phi_hoi_vien: false, trang_thai: "cho_tra_loi", ma_don: 100201, het_han_don: null, thanh_toan_luc: new Date().toISOString(), han_tra_loi: han, tra_loi: null, tra_loi_luc: null, danh_gia: null, hoan_luc: null, co_ho_so: true, tao_luc: new Date().toISOString() },
     { id: 2, mang: "than_so", cau_hoi: "Câu đã có trả lời", gia_vnd: 199000, mien_phi_hoi_vien: false, trang_thai: "da_tra_loi", ma_don: 100200, het_han_don: null, thanh_toan_luc: new Date().toISOString(), han_tra_loi: han, tra_loi: "Đường đời 33 của bạn hợp việc có người cùng làm.", tra_loi_luc: new Date().toISOString(), danh_gia: null, hoan_luc: null, co_ho_so: false, tao_luc: new Date().toISOString() },
-    { id: 1, mang: "bat_tu", cau_hoi: "Câu chưa thanh toán", gia_vnd: 139300, mien_phi_hoi_vien: false, trang_thai: "cho_tra", ma_don: 100199, het_han_don: new Date(Date.now() + 600_000).toISOString(), thanh_toan_luc: null, han_tra_loi: null, tra_loi: null, tra_loi_luc: null, danh_gia: null, hoan_luc: null, co_ho_so: false, tao_luc: new Date().toISOString() },
+    { id: 1, mang: "bat_tu", cau_hoi: "Câu chưa thanh toán", gia_vnd: 139000, mien_phi_hoi_vien: false, trang_thai: "cho_tra", ma_don: 100199, het_han_don: new Date(Date.now() + 600_000).toISOString(), thanh_toan_luc: null, han_tra_loi: null, tra_loi: null, tra_loi_luc: null, danh_gia: null, hoan_luc: null, co_ho_so: false, tao_luc: new Date().toISOString() },
   ];
   const guiLen: unknown[] = [];
   await page.route("**/api/chuyen-gia/cua-toi*", (r) => {

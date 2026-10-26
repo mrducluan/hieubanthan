@@ -90,7 +90,8 @@ $$;
 create or replace function cg_gia_cho(p_uid uuid) returns integer
     language sql stable security definer set search_path = '' as $$
     select case when p_uid is not null and public.cg_da_tung_tra(p_uid) then public.cg_gia_vnd()
-                else floor(public.cg_gia_vnd() * (100 - public.cg_giam_pt()) / 100.0)::integer end
+                -- Làm tròn XUỐNG tới nghìn đồng (199.000 × 70% = 139.300 → 139.000): số hiển thị = số tính tiền, dễ đọc.
+                else (floor(public.cg_gia_vnd() * (100 - public.cg_giam_pt()) / 100.0 / 1000) * 1000)::integer end
 $$;
 
 -- Ảnh chụp hồ sơ: CHỈ các khoá cho phép, đúng định dạng; thiếu ngày sinh → null (không ghi gì).

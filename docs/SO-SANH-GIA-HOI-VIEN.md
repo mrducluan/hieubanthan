@@ -62,7 +62,7 @@ câu hỏi chuyên gia, người dùng vừa nhận về ≈ 528.000 ₫ (≈ 13
 | [Phong thuỷ Trần Khương](https://phongthuytrankhuong.com/bang-gia-dich-vu-phong-thuy-tu-vi) | Luận giải Tử vi (đến trọn đời, 15–20 ngày) | 850.000–2.500.000 ₫ |
 | Phong thuỷ nhà tại chỗ ([Phong Thủy Gia](https://phongthuygia.vn/bao-gia-chi-phi-tu-van-cua-phong-thuy-gia-28.html), [Nam Việt](https://phongthuynamviet.com/bang-bao-gia-tron-goi-dich-vu-phong-thuy-nam-viet.html), [Kim Tú Thập](https://kimtuthap.vn/bang-gia-va-loi-ngo-tu-van-phong-thuy/)) | Một lần khảo sát | 3.000.000–10.000.000 ₫ |
 | Kasamba / Keen (Mỹ) | Gọi trực tiếp, tính theo phút | $1,99–9,99/phút (15 phút ≈ 780.000–3.900.000 ₫) |
-| **Hiểu Bản Thân** | **Một câu hỏi chuyên gia (văn bản, 48 giờ)** | **199.000 ₫ (câu đầu 139.300 ₫)** |
+| **Hiểu Bản Thân** | **Một câu hỏi chuyên gia (văn bản, 48 giờ)** | **199.000 ₫ (câu đầu 139.000 ₫)** |
 
 **Đọc bảng:** giá lẻ của Hiểu Bản Thân đã **rẻ hơn thị trường 3–6 lần** ở báo cáo tự động, và **ngang mức thầy hỏi một
 vụ việc** ở câu hỏi chuyên gia. Mức 3.990.000 ₫ thuộc **hạng "thầy xem 1-1 trọn đời" hoặc "xem phong thuỷ tại nhà"** —

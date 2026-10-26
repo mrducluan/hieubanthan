@@ -11,8 +11,8 @@ const KHONG_LUU = { auth: { persistSession: false, autoRefreshToken: false } } a
 
 /** Thông tin cho trang /hoi-chuyen-gia. Chưa chạy 0029 / thiếu Supabase → bat=false (không hứa điều máy chủ chưa làm). */
 export async function thongTinChuyenGia(req?: Request): Promise<ThongTinCg> {
-  const tat: ThongTinCg = { bat: false, gia_vnd: 199000, giam_lan_dau_pt: 30, han_gio: 48, gia_lan_dau: 139300, lan_dau: null,
-    gia_lan_nay: 139300, dang_cho: null, cong: congDangBat(), dang_nhap: false, hoi_vien_con_luot: null };
+  const tat: ThongTinCg = { bat: false, gia_vnd: 199000, giam_lan_dau_pt: 30, han_gio: 48, gia_lan_dau: 139000, lan_dau: null,
+    gia_lan_nay: 139000, dang_cho: null, cong: congDangBat(), dang_nhap: false, hoi_vien_con_luot: null };
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL, anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !anon) return tat;
   try {

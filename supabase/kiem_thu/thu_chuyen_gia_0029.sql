@@ -56,28 +56,28 @@ reset role;
 insert into cau_hinh (khoa, gia_tri) values ('sao.chuyen_gia.bat', 'true') on conflict (khoa) do update set gia_tri = excluded.gia_tri;
 set role anon; select set_config('request.jwt.claim.sub','',false);
 select pg_temp.kt('khách: giá, giảm, hạn, lan_dau null', (chuyen_gia_thong_tin() - 'dang_cho'),
-    '{"bat": true, "gia_vnd": 199000, "giam_lan_dau_pt": 30, "han_gio": 48, "han_gio_cua_toi": 48, "gia_lan_dau": 139300, "lan_dau": null, "gia_lan_nay": 139300}'::jsonb);
+    '{"bat": true, "gia_vnd": 199000, "giam_lan_dau_pt": 30, "han_gio": 48, "han_gio_cua_toi": 48, "gia_lan_dau": 139000, "lan_dau": null, "gia_lan_nay": 139000}'::jsonb);
 reset role;
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a1',false);
-select pg_temp.kt('A: lần đầu, giá 139.300', (chuyen_gia_thong_tin()->>'lan_dau') || '/' || (chuyen_gia_thong_tin()->>'gia_lan_nay'), 'true/139300');
+select pg_temp.kt('A: lần đầu, giá 139.000', (chuyen_gia_thong_tin()->>'lan_dau') || '/' || (chuyen_gia_thong_tin()->>'gia_lan_nay'), 'true/139000');
 select pg_temp.kt('mảng lạ', tao_cau_hoi_chuyen_gia('boi_bai', 'Năm tới tôi có nên đổi việc không?', null, false, false, 'gia')->>'ket_qua', 'mang_khong_hop_le');
 select pg_temp.kt('câu quá ngắn', tao_cau_hoi_chuyen_gia('tu_vi', 'ngắn', null, false, false, 'gia')->>'ket_qua', 'cau_hoi_khong_hop_le');
 select pg_temp.kt('cổng lạ', tao_cau_hoi_chuyen_gia('tu_vi', 'Năm tới tôi có nên đổi việc không?', null, false, false, 'momo')->>'ket_qua', 'cong_khong_hop_le');
 select tao_cau_hoi_chuyen_gia('tu_vi', 'Năm tới tôi có nên đổi việc không?  Tôi đang   phân vân.',
     '{"ho_ten":"An","ngay_sinh":"1990-05-17","gio_sinh":"12:30","gioi_tinh":"nam","noi_sinh":"ha-noi","email":"a@x"}', true, false, 'gia') as c1 \gset
-select pg_temp.kt('câu 1: tạo, chờ trả, giá giảm', (:'c1'::jsonb->>'ket_qua') || '/' || (:'c1'::jsonb->>'trang_thai') || '/' || (:'c1'::jsonb->>'so_tien') || '/' || (:'c1'::jsonb->>'lan_dau'), 'da_tao/cho_tra/139300/true');
+select pg_temp.kt('câu 1: tạo, chờ trả, giá giảm', (:'c1'::jsonb->>'ket_qua') || '/' || (:'c1'::jsonb->>'trang_thai') || '/' || (:'c1'::jsonb->>'so_tien') || '/' || (:'c1'::jsonb->>'lan_dau'), 'da_tao/cho_tra/139000/true');
 select (:'c1'::jsonb->>'id')::bigint as q1, (:'c1'::jsonb->>'ma_don')::bigint as d1 \gset
 select pg_temp.kt('câu 1: khoảng trắng gọn', (select cau_hoi from cau_hoi_chuyen_gia where id = :q1), 'Năm tới tôi có nên đổi việc không? Tôi đang phân vân.');
 select pg_temp.kt('câu 1: ảnh chụp hồ sơ đã lọc (bỏ email)', (select ho_so from cau_hoi_chuyen_gia where id = :q1),
     '{"ho_ten":"An","ngay_sinh":"1990-05-17","gio_sinh":"12:30","gioi_tinh":"nam","noi_sinh":"ha-noi"}'::jsonb);
-select pg_temp.kt('đơn: loai chuyen_gia, không gói, 0 Sao, 139.300', (select loai || '/' || coalesce(goi, '-') || '/' || sao || '/' || so_tien || '/' || trang_thai from don_nap where ma_don = :d1), 'chuyen_gia/-/0/139300/cho');
+select pg_temp.kt('đơn: loai chuyen_gia, không gói, 0 Sao, 139.000', (select loai || '/' || coalesce(goi, '-') || '/' || sao || '/' || so_tien || '/' || trang_thai from don_nap where ma_don = :d1), 'chuyen_gia/-/0/139000/cho');
 select pg_temp.kt('A: đang chờ trả tiền → chưa tính đã mua', (chuyen_gia_thong_tin()->>'lan_dau')::boolean, true);
 reset role;
 
 -- ================================================================ (3) cổng báo đã trả → trigger → chờ trả lời + hạn 48 giờ
 set role service_role;
 \if :co28
-select pg_temp.kt('0028: nap_sao_tu_cong nhận đơn chuyên gia', nap_sao_tu_cong(:d1, 139300, 'gia', 'CG1') ? 'ket_qua', true);
+select pg_temp.kt('0028: nap_sao_tu_cong nhận đơn chuyên gia', nap_sao_tu_cong(:d1, 139000, 'gia', 'CG1') ? 'ket_qua', true);
 \else
 update don_nap set trang_thai = 'da_tra', tra_luc = now(), ma_giao_dich = 'CG1' where ma_don = :d1;
 \endif
@@ -173,7 +173,7 @@ select pg_temp.kt('hoàn câu 2: 199.000', (:'h2'::jsonb->>'ket_qua') || '/' || 
 select pg_temp.kt('hoàn lại → không hoàn được', hoan_cau_hoi(:q2, 'Quá hạn 48 giờ, đã chuyển khoản trả')->>'ket_qua', 'khong_hoan_duoc');
 select pg_temp.kt('hoàn câu hội viên / chưa trả tiền sau', true, true);
 select thong_ke_chuyen_gia(30) as tk \gset
-select pg_temp.kt('thống kê: 1 trả lời, 1 hoàn, doanh thu 139.300, đánh giá 5', (:'tk'::jsonb->>'da_tra_loi') || '/' || (:'tk'::jsonb->>'hoan') || '/' || (:'tk'::jsonb->>'doanh_thu_vnd') || '/' || (:'tk'::jsonb->>'danh_gia_tb'), '1/1/139300/5.00');
+select pg_temp.kt('thống kê: 1 trả lời, 1 hoàn, doanh thu 139.000, đánh giá 5', (:'tk'::jsonb->>'da_tra_loi') || '/' || (:'tk'::jsonb->>'hoan') || '/' || (:'tk'::jsonb->>'doanh_thu_vnd') || '/' || (:'tk'::jsonb->>'danh_gia_tb'), '1/1/139000/5.00');
 select set_config('request.jwt.claim.aal','aal1',false);
 reset role;
 select pg_temp.kt('đơn 2 → hoan', (select trang_thai from don_nap where ma_don = :d2), 'hoan');
