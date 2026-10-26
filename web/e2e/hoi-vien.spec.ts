@@ -7,7 +7,7 @@ import { napHoSo } from "./_hoso";
 import { CAI_DAT, chuanHoa, giaTriHieuLuc } from "../lib/cau-hinh";
 import { locThuocTinh } from "../lib/do-luong";
 import {
-  HOAN_TIEN_HOI_VIEN, HOI_VIEN_MAC_DINH, docHoiVien, dongHoiVien, giaMoiThang, hienDongHoiVien, loiGiaHan, thuocTinhHoiVien, vnd,
+  HOAN_TIEN_HOI_VIEN, HOI_VIEN_MAC_DINH, docHoiVien, dongHoiVien, giaMoiThang, hienDongHoiVien, loiGiaHan, thuocTinhHoiVien, vnd, giaTu, loiNangHang,
 } from "../lib/thanh-toan/hoi-vien";
 
 const CAM = /chỉ còn|còn \d+ suất|hết hạn sau|đếm ngược|nhanh tay|kẻo lỡ|duy nhất hôm nay|ưu đãi|giảm giá|<s>|<del>|line-through/i;
@@ -20,15 +20,20 @@ const GOI = [
 test("thuần: đọc RPC an toàn, dòng hội viên, nhắc gia hạn chỉ khi ≤ 30 ngày, thuộc tính đo, chính sách hoàn tiền", () => {
   expect(docHoiVien(null)).toBeNull();
   expect(docHoiVien("x")).toBeNull();
-  expect(docHoiVien({})).toEqual(HOI_VIEN_MAC_DINH);
-  const hv = docHoiVien({ bat: true, gia_vnd: 3990000, dang_la: true, tu_ngay: "2026-10-26", den_ngay: "2027-10-26", con_ngay: 365,
+  // Bản 0028 một hạng (không goi[]) → coi như chỉ hạng thường; các trường hai hạng có giá trị trung tính.
+  const rong = docHoiVien({})!;
+  expect({ ...rong, goi: HOI_VIEN_MAC_DINH.goi }).toEqual({ ...HOI_VIEN_MAC_DINH, goi: HOI_VIEN_MAC_DINH.goi });
+  expect(rong.goi.map((g) => g.hang)).toEqual(["thuong"]);
+  const hv = docHoiVien({ bat: true, gia_vnd: 399000, dang_la: true, tu_ngay: "2026-10-26", den_ngay: "2027-10-26", con_ngay: 365,
     cau_hoi_con: 2, sao_thang: 15, cau_hoi_nam: 2, gia_han_duoc: false, sao_thang_da_cap: false })!;
   expect(hv.dang_la).toBe(true);
   expect(hv.con_ngay).toBe(365);
   expect(giaMoiThang(3990000)).toBe(333000);
   expect(vnd(3990000)).toBe("3.990.000 ₫");
   const dong = dongHoiVien(HV_BAT);
-  expect(dong).toBe("Hoặc hội viên năm 3.990.000 ₫: mở mọi chương Luận giải toàn bộ, 15 Sao tặng mỗi tháng — mua một lần, không tự gia hạn.");
+  expect(dong).toBe("Hoặc hội viên năm từ 399.000 ₫: mở mọi chương Luận giải toàn bộ, 15 Sao tặng mỗi tháng — mua một lần, không tự gia hạn."
+    .replace("từ ", ""));   // HV_BAT: hạng Chuyên gia tắt → không chữ "từ"
+  expect(dongHoiVien({ ...HV_BAT, goi: HV_BAT.goi.map((g) => ({ ...g, bat: true })) })).toContain("Hoặc hội viên năm từ 399.000 ₫");
   expect(dong).not.toMatch(CAM);
   expect(hienDongHoiVien(null)).toBe(false);
   expect(hienDongHoiVien(HOI_VIEN_MAC_DINH)).toBe(false);           // công tắc tắt
@@ -43,6 +48,20 @@ test("thuần: đọc RPC an toàn, dòng hội viên, nhắc gia hạn chỉ kh
   expect(loiGiaHan({ ...hv, con_ngay: 0, gia_han_duoc: true })).toContain("hết hạn hôm nay");
   expect(thuocTinhHoiVien(false)).toEqual({ kind: "hoi_vien", goi: "hoi_vien" });
   expect(thuocTinhHoiVien(true)).toEqual({ kind: "hoi_vien", goi: "hoi_vien_gia_han" });
+  expect(thuocTinhHoiVien(false, "chuyen_gia")).toEqual({ kind: "hoi_vien", goi: "hoi_vien_cg" });
+  expect(thuocTinhHoiVien(false, "chuyen_gia", true)).toEqual({ kind: "hoi_vien", goi: "hoi_vien_cg_nang_hang" });
+  // Nâng hạng: chỉ khi đang hạng thường + SQL cho nâng + có giá; câu nói rõ đã trừ phần còn lại, kỳ mới 365 ngày.
+  const thuong = docHoiVien({ ...HV_BAT, dang_la: true, hang: "thuong", nang_hang_duoc: true, gia_nang_hang: 1625000,
+    goi: [{ hang: "thuong", bat: true, gia_vnd: 399000, cau_hoi_nam: 1, han_gio: null }, { hang: "chuyen_gia", bat: true, gia_vnd: 1990000, cau_hoi_nam: 6, han_gio: 24 }] })!;
+  const nang = loiNangHang(thuong)!;
+  expect(nang).toContain("1.625.000 ₫");
+  expect(nang).toContain("đã được trừ");
+  expect(nang).toContain("365 ngày");
+  expect(nang).toContain("6 câu hỏi");
+  expect(nang).toContain("24 giờ");
+  expect(nang).not.toMatch(CAM);
+  expect(loiNangHang({ ...thuong, hang: "chuyen_gia", nang_hang_duoc: false })).toBeNull();
+  expect(giaTu(thuong)).toBe(399000);
   expect(locThuocTinh({ kind: "hoi_vien", goi: "hoi_vien", so_sao: 15 })).toEqual({ kind: "hoi_vien", goi: "hoi_vien", so_sao: 15 });
   // Chính sách hoàn tiền: 14 ngày / 100 %, tháng tròn, trừ câu hỏi chuyên gia, Sao tháng không thu hồi — khớp hoan_don_nap.
   expect(HOAN_TIEN_HOI_VIEN[0]).toMatch(/14 ngày/);
@@ -50,10 +69,11 @@ test("thuần: đọc RPC an toàn, dòng hội viên, nhắc gia hạn chỉ kh
   expect(HOAN_TIEN_HOI_VIEN[1]).toMatch(/tháng tròn còn lại/);
   expect(HOAN_TIEN_HOI_VIEN[1]).toMatch(/câu hỏi chuyên gia đã dùng/);
   expect(HOAN_TIEN_HOI_VIEN[1]).toMatch(/không bị thu hồi/);
+  expect(HOAN_TIEN_HOI_VIEN[2]).toMatch(/hạng Chuyên gia/);
   for (const t of HOAN_TIEN_HOI_VIEN) expect(t).not.toMatch(CAM);
 });
 
-test("cài đặt: hội viên mặc định TẮT, giá 3.990.000 (100.000–50.000.000), 15 Sao/tháng, 2 câu hỏi/năm; giá câu hỏi lẻ 199.000 dùng chung", () => {
+test("cài đặt: hai hạng mặc định TẮT — thường 399.000 / 1 câu, Chuyên gia 1.990.000 / 6 câu / 24 giờ; 15 Sao/tháng; giá câu hỏi lẻ 199.000 dùng chung", () => {
   const bat = CAI_DAT.find((c) => c.khoa === "sao.hoi_vien.bat")!;
   const gia = CAI_DAT.find((c) => c.khoa === "sao.hoi_vien.gia_vnd")!;
   const sao = CAI_DAT.find((c) => c.khoa === "sao.hoi_vien.sao_thang")!;
@@ -62,16 +82,22 @@ test("cài đặt: hội viên mặc định TẮT, giá 3.990.000 (100.000–50
   for (const c of [bat, gia, sao, cau]) expect(c.nhom).toBe("Hội viên năm");
   expect(cg.nhom).toBe("Hỏi chuyên gia");
   expect(giaTriHieuLuc(bat, {})).toBe(false);
-  expect(giaTriHieuLuc(gia, {})).toBe(3990000);
+  expect(giaTriHieuLuc(gia, {})).toBe(399000);
   expect(giaTriHieuLuc(sao, {})).toBe(15);
-  expect(giaTriHieuLuc(cau, {})).toBe(2);
+  expect(giaTriHieuLuc(cau, {})).toBe(1);
+  const cgBat = CAI_DAT.find((c) => c.khoa === "sao.hoi_vien.cg.bat")!;
+  expect(giaTriHieuLuc(cgBat, {})).toBe(false);
+  expect(giaTriHieuLuc(CAI_DAT.find((c) => c.khoa === "sao.hoi_vien.cg.gia_vnd")!, {})).toBe(1990000);
+  expect(giaTriHieuLuc(CAI_DAT.find((c) => c.khoa === "sao.hoi_vien.cg.cau_hoi_nam")!, {})).toBe(6);
+  expect(giaTriHieuLuc(CAI_DAT.find((c) => c.khoa === "sao.hoi_vien.cg.han_gio")!, {})).toBe(24);
+  expect(CAI_DAT.filter((c) => c.khoa === "sao.chuyen_gia.gia_vnd")).toHaveLength(1);   // khai một lần
   expect(giaTriHieuLuc(cg, {})).toBe(199000);
   expect(chuanHoa(gia, 100000).ok).toBe(true);
   expect(chuanHoa(gia, 99999).ok).toBe(false);
   expect(chuanHoa(gia, 50000001).ok).toBe(false);
   expect(chuanHoa(sao, 101).ok).toBe(false);
   expect(chuanHoa(cau, 13).ok).toBe(false);
-  expect(giaTriHieuLuc(gia, { "sao.hoi_vien.gia_vnd": 5 })).toBe(3990000);   // ngoài khoảng → mặc định
+  expect(giaTriHieuLuc(gia, { "sao.hoi_vien.gia_vnd": 5 })).toBe(399000);   // ngoài khoảng → mặc định
 });
 
 test("/hoi-vien khi TẮT: vẫn có trang (noindex), H1 máy chủ, chỉ khung 'Sắp có' + lối quay về — không giá, không nút mua, không đếm ngược", async ({ page, request }) => {
@@ -158,7 +184,7 @@ async function hopNap(page: Page, hoi_vien: object | null) {
 
 test("hộp nạp nhanh: công tắc hội viên bật + chưa là hội viên → một dòng 'Hoặc hội viên năm' trỏ /hoi-vien", async ({ page }) => {
   const hop = await hopNap(page, HV_BAT);
-  await expect(hop.getByTestId("dong-hoi-vien")).toContainText("Hoặc hội viên năm 3.990.000 ₫");
+  await expect(hop.getByTestId("dong-hoi-vien")).toContainText("Hoặc hội viên năm 399.000 ₫");
   await expect(hop.getByTestId("dong-hoi-vien")).toContainText("không tự gia hạn");
   await expect(hop.getByTestId("dong-hoi-vien").getByRole("link")).toHaveAttribute("href", "/hoi-vien");
   await expect(hop.getByTestId("nap-nhanh")).not.toContainText(CAM);

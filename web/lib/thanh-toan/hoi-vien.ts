@@ -85,8 +85,10 @@ export const ngayVn = (s: string | null) => {
 export const giaMoiThang = (giaNam: number) => Math.round(giaNam / 12 / 1000) * 1000;
 
 /** Dòng tóm tắt quyền lợi cho trang nạp / hộp nạp nhanh (một dòng, trung tính). */
-export const dongHoiVien = (hv: Pick<HoiVien, "gia_vnd" | "sao_thang">) =>
-  `Hoặc hội viên năm ${vnd(hv.gia_vnd)}: mở mọi chương Luận giải toàn bộ, ${hv.sao_thang} Sao tặng mỗi tháng — mua một lần, không tự gia hạn.`;
+export const dongHoiVien = (hv: Pick<HoiVien, "gia_vnd" | "sao_thang"> & Partial<Pick<HoiVien, "goi">>) => {
+  const coCg = Boolean(hv.goi?.some((g) => g.hang === "chuyen_gia" && g.bat));
+  return `Hoặc hội viên năm ${coCg ? "từ " : ""}${vnd(hv.gia_vnd)}: mở mọi chương Luận giải toàn bộ, ${hv.sao_thang} Sao tặng mỗi tháng — mua một lần, không tự gia hạn.`;
+};
 
 /** Câu nâng hạng ở thẻ tài khoản (trung tính, nói rõ cách tính). null = không nâng được. */
 export function loiNangHang(hv: HoiVien): string | null {

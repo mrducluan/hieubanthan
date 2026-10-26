@@ -4,12 +4,12 @@
 // mời sang /hoi-vien. Chưa chạy 0028 / công tắc tắt và không là hội viên → ẩn hẳn.
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { BadgeCheck, CalendarClock, MessageCircleQuestion, Sparkles } from "lucide-react";
+import { ArrowUpCircle, BadgeCheck, CalendarClock, MessageCircleQuestion, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { ghi } from "@/lib/do-luong";
-import { docHoiVien, loiGiaHan, ngayVn, vnd, type HoiVien } from "@/lib/thanh-toan/hoi-vien";
+import { docHoiVien, giaTu, goiCua, loiGiaHan, loiNangHang, ngayVn, TEN_HANG, vnd, type HoiVien } from "@/lib/thanh-toan/hoi-vien";
 
 export function TheHoiVien({ onSaoThayDoi }: { onSaoThayDoi?: () => void }) {
   const [hv, setHv] = useState<HoiVien | null | undefined>(undefined);
@@ -45,19 +45,20 @@ export function TheHoiVien({ onSaoThayDoi }: { onSaoThayDoi?: () => void }) {
       <Card className="flex flex-col gap-3 sm:flex-row sm:items-center" data-testid="hoi-vien-moi">
         <BadgeCheck className="size-6 shrink-0 text-gold" aria-hidden />
         <p className="flex-1 text-sm text-fg-muted">
-          Hội viên năm {vnd(hv.gia_vnd)}: mở mọi chương Luận giải toàn bộ, {hv.sao_thang} Sao tặng mỗi tháng, {hv.cau_hoi_nam} câu hỏi chuyên gia. Mua một lần, không tự gia hạn.
+          Hội viên năm {goiCua(hv, "chuyen_gia") ? `từ ${vnd(giaTu(hv))}` : vnd(hv.gia_vnd)}: mở mọi chương Luận giải toàn bộ, {hv.sao_thang} Sao tặng mỗi tháng, kèm câu hỏi chuyên gia{goiCua(hv, "chuyen_gia") ? " (hạng Chuyên gia: nhiều câu hơn, trả lời ưu tiên)" : ""}. Mua một lần, không tự gia hạn.
         </p>
         <Button asChild size="sm" variant="secondary"><Link href="/hoi-vien">Xem hội viên năm</Link></Button>
       </Card>
     );
   }
   const nhac = loiGiaHan(hv);
+  const nang = loiNangHang(hv);
   return (
     <Card className="space-y-4" data-testid="the-hoi-vien">
       <div className="flex items-center gap-3">
         <span className="grid size-12 place-items-center rounded-2xl bg-gold/15 text-gold"><BadgeCheck className="size-6" aria-hidden /></span>
         <div className="flex-1">
-          <p className="font-medium text-fg">Hội viên năm</p>
+          <p className="font-medium text-fg" data-testid="hoi-vien-hang">{TEN_HANG[hv.hang ?? "thuong"]}</p>
           <p className="text-sm text-fg-muted">{ngayVn(hv.tu_ngay)} → {ngayVn(hv.den_ngay)} · còn <b className="text-fg" data-testid="hoi-vien-con-ngay">{hv.con_ngay}</b> ngày</p>
         </div>
       </div>
@@ -70,10 +71,17 @@ export function TheHoiVien({ onSaoThayDoi }: { onSaoThayDoi?: () => void }) {
         <div className="rounded-xl border border-line/60 p-3">
           <p className="flex items-center gap-1.5 font-serif text-2xl text-fg"><MessageCircleQuestion className="size-4 text-gold" aria-hidden /> <span data-testid="hoi-vien-cau-hoi">{hv.cau_hoi_con}</span></p>
           <p className="text-fg-muted">Câu hỏi chuyên gia còn</p>
-          <p className="text-xs text-fg-faint">Trên {hv.cau_hoi_nam} câu mỗi năm hội viên.</p>
+          <p className="text-xs text-fg-faint">Trên {hv.cau_hoi_nam} câu mỗi năm hội viên{hv.han_gio ? ` · trả lời trong ${hv.han_gio} giờ` : ""}.</p>
         </div>
       </div>
       <p className="text-xs text-fg-faint">Mọi chương Luận giải toàn bộ (Tử vi · Bát tự · Bản đồ con số) đang mở cho bạn, không trừ Sao. Mua một lần, không tự gia hạn.</p>
+      {nang && (
+        <div className="flex flex-col gap-3 rounded-xl border border-gold/40 p-3 sm:flex-row sm:items-center" data-testid="hoi-vien-nang-hang">
+          <ArrowUpCircle className="size-5 shrink-0 text-gold" aria-hidden />
+          <p className="flex-1 text-sm text-fg-muted">{nang}</p>
+          <Button asChild size="sm" variant="secondary"><Link href="/hoi-vien">Xem hạng Chuyên gia</Link></Button>
+        </div>
+      )}
       {nhac && (
         <div className="flex flex-col gap-3 rounded-xl border border-line/60 p-3 sm:flex-row sm:items-center" data-testid="hoi-vien-nhac-gia-han">
           <CalendarClock className="size-5 shrink-0 text-gold" aria-hidden />

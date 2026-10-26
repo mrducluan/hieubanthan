@@ -52,7 +52,9 @@ test.beforeEach(async ({ page }) => {
   }, JSON.stringify(HO_SO_MAU));
 });
 test.afterAll(async () => {
-  await fetch(`${SB}/rest/v1/cau_hinh?khoa=eq.sao.hoi_vien.bat`, { method: "DELETE", headers: H });   // về mặc định (tắt)
+  for (const k of ["sao.hoi_vien.bat", "sao.hoi_vien.cg.bat", "sao.chuyen_gia.bat"]) {
+    await fetch(`${SB}/rest/v1/cau_hinh?khoa=eq.${k}`, { method: "DELETE", headers: H });   // về mặc định (tắt)
+  }
 });
 
 test("mua hội viên (cổng giả) → báo cáo mở trọn không trừ Sao → Sao tháng +15 một lần", async ({ page }) => {
@@ -67,7 +69,8 @@ test("mua hội viên (cổng giả) → báo cáo mở trọn không trừ Sao 
     await page.goto("/hoi-vien");
     return page.getByTestId("mua-hoi-vien").waitFor({ timeout: 5_000 }).then(() => true, () => false);
   }, { timeout: 90_000, intervals: [3_000] }).toBe(true);
-  await expect(page.getByTestId("gia-hoi-vien")).toHaveText("3.990.000 ₫");
+  await expect(page.getByTestId("gia-hoi-vien")).toHaveText("399.000 ₫");
+  await expect(page.getByTestId("hang-cg-sap-mo")).toBeVisible();   // hạng Chuyên gia chưa bật → không bày giá
   await page.getByTestId("hoi-vien-dang-nhap").click();
   await dangNhap(page, EMAIL);
   await expect(page).toHaveURL(/\/hoi-vien/);
@@ -85,7 +88,7 @@ test("mua hội viên (cổng giả) → báo cáo mở trọn không trừ Sao 
   expect((Date.parse(hv[0]!.den_ngay) - Date.parse(hv[0]!.tu_ngay)) / 86_400_000).toBe(365);
   const don = (await (await fetch(`${SB}/rest/v1/don_nap?user_id=eq.${id}&select=loai,sao,so_tien,trang_thai,goi`, { headers: H })).json()) as
     { loai: string; sao: number; so_tien: number; trang_thai: string; goi: string | null }[];
-  expect(don).toEqual([{ loai: "hoi_vien", sao: 0, so_tien: 3990000, trang_thai: "da_tra", goi: null }]);
+  expect(don).toEqual([{ loai: "hoi_vien", sao: 0, so_tien: 399000, trang_thai: "da_tra", goi: null }]);
   expect((await soCai(EMAIL)).filter((x) => x.loai === "mua")).toHaveLength(0);   // không cộng Sao mua
 
   // 3. Luận giải toàn bộ đang thu Sao: hội viên nhận trọn báo cáo ngay ở lượt đầu, không trừ Sao, không chương khoá.
@@ -108,7 +111,8 @@ test("mua hội viên (cổng giả) → báo cáo mở trọn không trừ Sao 
   const the = page.getByTestId("the-hoi-vien");
   await expect(the).toBeVisible({ timeout: 30_000 });
   await expect(page.getByTestId("hoi-vien-con-ngay")).toHaveText("365");
-  await expect(page.getByTestId("hoi-vien-cau-hoi")).toHaveText("2");
+  await expect(page.getByTestId("hoi-vien-cau-hoi")).toHaveText("1");
+  await expect(page.getByTestId("hoi-vien-hang")).toHaveText("Hội viên năm");
   // Trang kết quả tự đưa về /tai-khoan sau 2,5 giây → Sao tháng có thể đã được cấp ở lượt đó; hai câu đều đúng, DB kiểm 1 lô.
   await expect(page.getByTestId("hoi-vien-sao-thang")).toContainText(/Vừa cộng 15 Sao\.|Đã cộng vào ví\./);
   await expect(page.getByTestId("hoi-vien-nhac-gia-han")).toHaveCount(0);
@@ -126,4 +130,33 @@ test("mua hội viên (cổng giả) → báo cáo mở trọn không trừ Sao 
   await page.goto("/hoi-vien");
   await expect(page.getByTestId("hoi-vien-dang-la")).toContainText("Bạn đang là hội viên tới", { timeout: 30_000 });
   await expect(page.getByTestId("nut-mua-hoi-vien")).toHaveCount(0);
+
+  // 6. Mở hạng Chuyên gia → người hạng thường thấy "Nâng hạng" với giá đã trừ phần còn lại (SQL tính) → trả (cổng giả) →
+  //    dòng thường cũ 'nang_hang', dòng Chuyên gia mới 365 ngày, 6 câu, 24 giờ; thẻ tài khoản đổi hạng.
+  await datCauHinh("sao.chuyen_gia.bat", true);
+  await datCauHinh("sao.hoi_vien.cg.bat", true);
+  await expect.poll(async () => {
+    await page.goto("/hoi-vien");
+    return page.getByTestId("nut-nang-hang").waitFor({ timeout: 5_000 }).then(() => true, () => false);
+  }, { timeout: 90_000, intervals: [3_000] }).toBe(true);
+  await expect(page.getByTestId("gia-hoi-vien-cg")).toHaveText("1.990.000 ₫");
+  await expect(page.getByTestId("nang-hang-giai-thich")).toContainText("đã trừ vào giá");
+  const nutNang = await page.getByTestId("nut-nang-hang").innerText();
+  const giaNang = Number(nutNang.replace(/[^\d]/g, ""));
+  expect(giaNang).toBeGreaterThan(1000);
+  expect(giaNang).toBeLessThan(1990000);   // đã trừ phần còn lại của gói thường
+  await page.getByTestId("nut-nang-hang").click();
+  await page.getByRole("button", { name: "Giả lập đã trả" }).click();
+  await expect(page.getByTestId("ket-qua-nap")).toHaveAttribute("data-trang-thai", "da_tra", { timeout: 30_000 });
+  const hv2 = (await (await fetch(`${SB}/rest/v1/hoi_vien?user_id=eq.${id}&select=hang,trang_thai,cau_hoi_nam,han_gio,den_ngay,tu_ngay&order=id`, { headers: H })).json()) as
+    { hang: string; trang_thai: string; cau_hoi_nam: number; han_gio: number | null; den_ngay: string; tu_ngay: string }[];
+  expect(hv2.map((x) => `${x.hang}:${x.trang_thai}`)).toEqual(["thuong:nang_hang", "chuyen_gia:hieu_luc"]);
+  expect([hv2[1]!.cau_hoi_nam, hv2[1]!.han_gio]).toEqual([6, 24]);
+  expect((Date.parse(hv2[1]!.den_ngay) - Date.parse(hv2[1]!.tu_ngay)) / 86_400_000).toBe(365);
+  const don2 = (await (await fetch(`${SB}/rest/v1/don_nap?user_id=eq.${id}&loai=eq.hoi_vien&nang_hang=eq.true&select=so_tien,hang,trang_thai`, { headers: H })).json()) as
+    { so_tien: number; hang: string; trang_thai: string }[];
+  expect(don2).toEqual([{ so_tien: giaNang, hang: "chuyen_gia", trang_thai: "da_tra" }]);   // số trên nút = số tính tiền
+  await page.goto("/tai-khoan");
+  await expect(page.getByTestId("hoi-vien-hang")).toHaveText("Hội viên Chuyên gia", { timeout: 30_000 });
+  await expect(page.getByTestId("hoi-vien-nang-hang")).toHaveCount(0);
 });
