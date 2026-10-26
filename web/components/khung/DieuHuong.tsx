@@ -171,7 +171,7 @@ export function TabDuoi({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
                 href={m.href}
                 aria-current={on ? "page" : undefined}
                 className={cn(
-                  "relative flex h-16 flex-col items-center justify-center gap-1 text-[0.7rem] font-medium text-fg-faint transition-[color,transform] active:scale-95",
+                  "relative flex h-16 flex-col items-center justify-center gap-1 text-xs font-medium text-fg-muted transition-[color,transform] active:scale-95",
                   on && "text-gold before:absolute before:inset-x-6 before:top-0 before:h-0.5 before:rounded-full before:bg-gold before:shadow-[0_0_12px_rgb(var(--gold)/0.8)]",
                 )}
               >

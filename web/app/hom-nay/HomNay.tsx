@@ -54,6 +54,9 @@ interface TheHomNay {
   ho_tro: string | null;
   danh_sach_y_dinh: Record<string, { ten: string; bieu_tuong: string; cau_hoi: string }>;
   cau_hoi_noi_bat: string[];
+  /** Trục 2 UX: nguyên liệu Lá bài đầu ngày (engine mới; engine cũ không có → lá dùng giờ hoàng đạo). */
+  cau_hoi_them?: string | null;
+  viec_nho?: { ma: string; ten: string; nhan: string | null; cach_lam: string; tu_soi: string | null } | null;
   ngay_pho_quat: { so: number; nghia: string | null };
   chaldea: {
     so: number; kep: number | null; so_ngay_sinh: number; cong_huong: boolean;
@@ -241,16 +244,16 @@ export function HomNay() {
           {the.hoang_lich && (
             <div className="flex flex-wrap items-center gap-2" data-testid="chip-hom-nay">
               <button type="button" aria-expanded={moGio} aria-controls="gio-hoang-dao" onClick={() => setMoGio((v) => !v)}
-                className={`vung-cham inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition-colors ${moGio ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
-                <Clock className="size-3.5" aria-hidden />Giờ hoàng đạo
+                className={`vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3.5 py-2 text-[0.8125rem] transition-colors ${moGio ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
+                <Clock className="size-4" aria-hidden />Giờ hoàng đạo
               </button>
               {the.que_ngay && (
-                <a href="#que-ngay" className="vung-cham inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
-                  <Hexagon className="size-3.5" aria-hidden />Quẻ ngày: {the.que_ngay.ten}
+                <a href="#que-ngay" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-[0.8125rem] text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
+                  <Hexagon className="size-4" aria-hidden />Quẻ ngày: {the.que_ngay.ten}
                 </a>
               )}
-              <Link href="/xem-ngay-tot" className="vung-cham inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
-                <CalendarHeart className="size-3.5" aria-hidden />{the.hoang_lich.hoang_dao ? "Ngày Hoàng đạo" : "Ngày Hắc đạo"}
+              <Link href="/xem-ngay-tot" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-[0.8125rem] text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
+                <CalendarHeart className="size-4" aria-hidden />{the.hoang_lich.hoang_dao ? "Ngày Hoàng đạo" : "Ngày Hắc đạo"}
               </Link>
             </div>
           )}

@@ -142,6 +142,7 @@ test("4 khối TV-V2 hiện, chỉ gọi engine khi mở, không có giọng do�
   const form = page.getByTestId("hop-tham-form");
   await expect(form).toContainText("điểm tham khảo 0–100");
   await expect(form).not.toContainText("không chấm điểm");
+  await expect(form.getByTestId("hop-tham-vi-sao-diem")).toContainText("Vì sao ở đây có điểm");   // trục 2 UX: nói rõ khác Hợp đôi thần số
   await expect(form).toContainText("đủ giờ, giới tính và nơi sinh thì xem được hai chiều");
   await expect(form).toContainText("không lưu lại");
   await expect(form.locator("[data-testid^=hop-tham-quan-he-]")).toHaveCount(8);

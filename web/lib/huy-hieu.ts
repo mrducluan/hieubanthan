@@ -25,15 +25,15 @@ export type TrangThaiHuyHieu =
 
 /** Danh mục: tên, điều kiện (hiện khi chưa đạt), biểu tượng (tên lucide, web ánh xạ). Giọng mời, không doạ, không thúc. */
 export const DANH_MUC: Record<MaHuyHieu, { ten: string; dieu_kien: string; bieu_tuong: string }> = {
-  chuoi_7:      { ten: "Bảy ngày đều đặn", dieu_kien: "Ghé Hôm nay 7 ngày liên tiếp (tính theo tài khoản).", bieu_tuong: "Flame" },
-  chuoi_30:     { ten: "Một tháng bên mình", dieu_kien: "Ghé Hôm nay 30 ngày liên tiếp (tính theo tài khoản).", bieu_tuong: "CalendarCheck" },
-  da_luu_ho_so: { ten: "Có chỗ của riêng mình", dieu_kien: "Lưu hồ sơ vào tài khoản.", bieu_tuong: "Cloud" },
-  hoi_3:        { ten: "Người hay hỏi", dieu_kien: "Hỏi 3 câu ở bất kỳ mảng nào khi đã đăng nhập.", bieu_tuong: "MessageCircle" },
-  moi_1:        { ten: "Rủ được một người", dieu_kien: "Một người bạn mở link mời của bạn và lưu hồ sơ.", bieu_tuong: "UserPlus" },
-  moi_5:        { ten: "Người kết nối", dieu_kien: "Năm người bạn lưu hồ sơ từ link mời của bạn.", bieu_tuong: "Users" },
+  chuoi_7:      { ten: "Ghé 7 ngày liền", dieu_kien: "Ghé Hôm nay 7 ngày liên tiếp (tính theo tài khoản).", bieu_tuong: "Flame" },
+  chuoi_30:     { ten: "Ghé 30 ngày liền", dieu_kien: "Ghé Hôm nay 30 ngày liên tiếp (tính theo tài khoản).", bieu_tuong: "CalendarCheck" },
+  da_luu_ho_so: { ten: "Lưu hồ sơ vào tài khoản", dieu_kien: "Lưu hồ sơ vào tài khoản.", bieu_tuong: "Cloud" },
+  hoi_3:        { ten: "Hỏi 3 câu", dieu_kien: "Hỏi 3 câu ở bất kỳ mảng nào khi đã đăng nhập.", bieu_tuong: "MessageCircle" },
+  moi_1:        { ten: "Rủ được 1 người bạn", dieu_kien: "Một người bạn mở link mời của bạn và lưu hồ sơ.", bieu_tuong: "UserPlus" },
+  moi_5:        { ten: "Rủ được 5 người bạn", dieu_kien: "Năm người bạn lưu hồ sơ từ link mời của bạn.", bieu_tuong: "Users" },
   hoi_vien:     { ten: "Hội viên", dieu_kien: "Đang là hội viên năm.", bieu_tuong: "BadgeCheck" },
-  chuoi_may_7:  { ten: "Bảy ngày trên máy này", dieu_kien: "Mở Hôm nay 7 ngày liên tiếp trên máy này.", bieu_tuong: "Flame" },
-  doc_5_mang:   { ten: "Đi đủ năm mảng", dieu_kien: "Xem kết quả ở cả Thần số, Tử vi, Bát tự, Kinh Dịch và Phong thuỷ.", bieu_tuong: "Compass" },
+  chuoi_may_7:  { ten: "Ghé 7 ngày liền", dieu_kien: "Mở trang Hôm nay 7 ngày liên tiếp.", bieu_tuong: "Flame" },
+  doc_5_mang:   { ten: "Xem đủ 5 mảng", dieu_kien: "Xem kết quả ở cả Thần số, Tử vi, Bát tự, Kinh Dịch và Phong thuỷ.", bieu_tuong: "Compass" },
   hen_7:        { ten: "Giữ lời hẹn 7 ngày", dieu_kien: "Đặt hẹn với chính mình 7 ngày ghé và đi hết.", bieu_tuong: "HeartHandshake" },
   hen_30:       { ten: "Giữ lời hẹn 30 ngày", dieu_kien: "Đặt hẹn với chính mình 30 ngày ghé và đi hết.", bieu_tuong: "Trophy" },
 };
@@ -66,12 +66,14 @@ export function docMangDaXem(): string[] {
   return Array.isArray(v) ? v.filter((x): x is string => typeof x === "string" && (NAM_MANG as readonly string[]).includes(x)) : [];
 }
 
-/** "Hẹn với chính mình": một lúc một hẹn, lưu trên máy. chuoi_bd = chuỗi lúc đặt hẹn (tiến độ = chuỗi − chuoi_bd + 1). */
-export interface HenChinhMinh { muc: 7 | 30; ngay_bd: string; chuoi_bd: number; dat_luc?: string }
+/** "Hẹn với chính mình": một lúc một hẹn, lưu trên máy. chuoi_bd = chuỗi lúc đặt hẹn (tiến độ = chuỗi − chuoi_bd + 1).
+ *  tien_do / tien_do_luc: tiến độ lần gần nhất trang Hôm nay tính được (đúng nguồn chuỗi tài khoản/máy) — Bản thân chỉ đọc. */
+export interface HenChinhMinh { muc: 7 | 30; ngay_bd: string; chuoi_bd: number; dat_luc?: string; tien_do?: number; tien_do_luc?: string }
 export function docHen(): HenChinhMinh | null {
   const v = docJson<Partial<HenChinhMinh>>(KHOA_HEN);
   return v && (v.muc === 7 || v.muc === 30) && typeof v.ngay_bd === "string" && typeof v.chuoi_bd === "number"
-    ? { muc: v.muc, ngay_bd: v.ngay_bd, chuoi_bd: v.chuoi_bd, ...(typeof v.dat_luc === "string" ? { dat_luc: v.dat_luc } : {}) } : null;
+    ? { muc: v.muc, ngay_bd: v.ngay_bd, chuoi_bd: v.chuoi_bd, ...(typeof v.dat_luc === "string" ? { dat_luc: v.dat_luc } : {}),
+        ...(typeof v.tien_do === "number" && typeof v.tien_do_luc === "string" ? { tien_do: v.tien_do, tien_do_luc: v.tien_do_luc } : {}) } : null;
 }
 export const ghiHen = (h: HenChinhMinh | null) => { if (h) ghiJson(KHOA_HEN, h); else { try { localStorage.removeItem(KHOA_HEN); } catch { /* bỏ qua */ } } };
 
@@ -124,3 +126,36 @@ export function gopHuyHieu(mayChu: HuyHieuMayChu[] | null, may: HuyHieu[]): HuyH
 }
 
 export const demDat = (ds: HuyHieu[]) => ds.filter((h) => h.dat).length;
+
+// ---------------------------------------------------------------- tiến độ (trục 2 UX 2026-10-26)
+/** Ngày hôm qua (yyyy-mm-dd) của một ngày yyyy-mm-dd. */
+const homQua = (iso: string) => new Date(Date.parse(`${iso}T00:00:00Z`) - 86_400_000).toISOString().slice(0, 10);
+
+/** Dữ liệu trên máy để tính tiến độ: chuỗi máy (0 nếu lần ghé cuối trước hôm qua — chuỗi đã đứt), mảng đã xem, hẹn. */
+export interface NguyenLieuTienDo { chuoiMay: number; mang: string[]; hen: HenChinhMinh | null }
+export function nguyenLieuTienDo(homNay: string): NguyenLieuTienDo {
+  const c = docJson<{ ngay?: string; chuoi?: number }>(KHOA_CHUOI_MAY);
+  const chuoi = c && typeof c.ngay === "string" && typeof c.chuoi === "number" && (c.ngay === homNay || c.ngay === homQua(homNay)) ? c.chuoi : 0;
+  return { chuoiMay: chuoi, mang: docMangDaXem(), hen: docHen() };
+}
+
+/** Tiến độ của một huy hiệu chưa đạt: { co, can } — chỉ cho huy hiệu đếm được trên máy (chuỗi máy, 5 mảng, hẹn đang đi).
+ *  Huy hiệu máy chủ (tài khoản) không có số đếm ở web → null (chỉ hiện điều kiện). Đạt rồi → null. */
+export function tienDoHuyHieu(h: HuyHieu, nl: NguyenLieuTienDo): { co: number; can: number } | null {
+  if (h.dat) return null;
+  if (h.ma === "chuoi_may_7") return { co: Math.min(7, nl.chuoiMay), can: 7 };
+  if (h.ma === "doc_5_mang") return { co: Math.min(NAM_MANG.length, nl.mang.length), can: NAM_MANG.length };
+  const muc = h.ma === "hen_7" ? 7 : h.ma === "hen_30" ? 30 : 0;
+  if (muc && nl.hen && !nl.hen.dat_luc && nl.hen.muc === muc) return { co: Math.max(0, Math.min(muc, nl.hen.tien_do ?? 0)), can: muc };
+  return null;
+}
+
+/** Huy hiệu chưa đạt đang gần nhất (tỉ lệ co/can lớn nhất, > 0) — cho dòng tóm tắt "đang đi 1/7". */
+export function dangDiGanNhat(ds: HuyHieu[], nl: NguyenLieuTienDo): { ma: MaHuyHieu; co: number; can: number } | null {
+  let tot: { ma: MaHuyHieu; co: number; can: number } | null = null;
+  for (const h of ds) {
+    const t = tienDoHuyHieu(h, nl);
+    if (t && t.co > 0 && (!tot || t.co / t.can > tot.co / tot.can)) tot = { ma: h.ma, ...t };
+  }
+  return tot;
+}

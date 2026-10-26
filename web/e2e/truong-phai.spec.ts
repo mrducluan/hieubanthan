@@ -8,6 +8,7 @@ test("Bát tự: sinh 23:30 → đổi 'Đổi ngày lúc 23:00' ra trụ ngày 
   const phai = page.getByTestId("truong-phai-bat-tu");
   await expect(phai).toContainText("hai phái ra TRỤ NGÀY khác nhau");
   await expect(phai).toContainText("không làm đổi tứ trụ");          // âm lịch: nói rõ Bát tự theo tiết khí
+  await page.getByTestId("bat-tu-chi-tiet-mo").click();   // bảng kỹ thuật gập (trục 2 UX); khung trường phái vẫn hiện khi sinh 23:xx
   const tt = page.getByTestId("tu-tru");
   await expect(tt).toContainText("Nhật chủ Nhâm");
   await phai.getByRole("tab", { name: "Đổi ngày lúc 23:00" }).click();

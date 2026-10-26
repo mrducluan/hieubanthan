@@ -23,7 +23,8 @@ import { docXong } from "@/lib/do-luong";
 import { useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { GopY } from "@/components/khung/GopY";
 import { NhiemVuSao } from "@/components/sao/NhiemVuSao";
-import { HuyHieu } from "@/components/khung/HuyHieu";
+import { HuyHieu, TomTatHuyHieu } from "@/components/khung/HuyHieu";
+import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 
 export function BanThan() {
   const hoSo = useHoSo();
@@ -99,6 +100,8 @@ export function BanThan() {
             <Button variant="secondary" asChild><Link href="/chia-se"><Share2 aria-hidden /> Chia sẻ thẻ</Link></Button>
             <Button variant="ghost" onClick={() => setSuaMo(true)}><Pencil aria-hidden /> Sửa hồ sơ</Button>
           </div>
+          {/* Trục 2 UX: một dòng huy hiệu gần đầu trang (mục đầy đủ ở cuối trang). */}
+          <TomTatHuyHieu taiBanThan className="pt-1" />
         </div>
       </section>
 
@@ -146,11 +149,14 @@ export function BanThan() {
             <ArrowRight className="mt-3 size-4 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden />
           </Link>
         ))}
-        <p className="text-sm sm:col-span-3">
-          <Link href="/ban-than/bai-da-luu" className="text-fg-muted underline-offset-4 hover:text-gold hover:underline" data-testid="lien-ket-bai-da-luu">
-            Bài luận đã lưu trong tài khoản →
-          </Link>
-        </p>
+        {/* Chưa bật tài khoản thì trang bài đã lưu chỉ báo "chưa mở" → không hiện link (ngõ cụt). */}
+        {coTaiKhoan() && (
+          <p className="text-sm sm:col-span-3">
+            <Link href="/ban-than/bai-da-luu" className="text-fg-muted underline-offset-4 hover:text-gold hover:underline" data-testid="lien-ket-bai-da-luu">
+              Bài luận đã lưu trong tài khoản →
+            </Link>
+          </p>
+        )}
       </section>
 
       {/* SAO-HH: huy hiệu thành tựu — máy chủ (đăng nhập) + máy này; không mua bán, không đổi ra Sao. */}

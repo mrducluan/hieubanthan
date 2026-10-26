@@ -6,7 +6,7 @@ import { napHoSo } from "./_hoso";
 for (const duong of ["/tu-vi", "/bat-tu"]) {
   test(`tương phản Giấy cổ đạt AA: ${duong}`, async ({ page }) => {
     await napHoSo(page);
-    await page.goto(duong);
+    await page.goto(duong === "/bat-tu" ? "/bat-tu#la-so-chi-tiet" : duong);   // Bát tự: bảng kỹ thuật gập, link # mở sẵn
     await page.getByRole("tab", { name: "Giấy cổ" }).first().click();
     await expect(page.locator(".la-so-giay").first()).toBeVisible();
     const loi = await page.evaluate(() => {

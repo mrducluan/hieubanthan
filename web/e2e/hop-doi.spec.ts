@@ -19,6 +19,26 @@ test("A so với người ấy: cặp đường đời + 3 cặp theo tên, khô
   await expect(kq).toContainText("Không có điểm số hợp hay khắc");
 });
 
+test("trục 2 UX: nói rõ thần số không chấm điểm + link điểm Tử vi; ô tên 'Ví dụ: Minh'; trống → 'Nhập ngày sinh người ấy'; cùng số → một thẻ, tên mặc định 'Người ấy'", async ({ page }) => {
+  await napHoSo(page, LUAN);
+  await page.goto("/hop-doi");
+  await expect(page.locator("main")).toContainText("Thần số không chấm điểm");
+  await expect(page.getByTestId("link-diem-tu-vi")).toHaveAttribute("href", "/tu-vi#hop-tham");
+  await expect(page.getByLabel(/Tên người ấy/)).toHaveAttribute("placeholder", "Ví dụ: Minh");
+  await page.getByRole("button", { name: "Xem hai người" }).click();
+  await expect(page.locator("form").getByRole("alert")).toHaveText("Nhập ngày sinh người ấy.");
+  // Cùng ngày sinh → cùng số Đường đời → hai thẻ vai giống hệt → gộp một thẻ "Hai người cùng số N".
+  await page.getByLabel("Ngày sinh người ấy").fill("24");
+  await page.getByLabel("Tháng sinh người ấy").fill("10");
+  await page.getByLabel("Năm sinh người ấy").fill("1988");
+  await page.getByRole("button", { name: "Xem hai người" }).click();
+  const kq = page.getByTestId("ket-qua-hop-doi");
+  await expect(kq.getByTestId("the-vai")).toHaveCount(1);
+  await expect(kq.getByTestId("the-vai")).toContainText(/Hai người cùng số \d+/);
+  await expect(kq).toContainText("Người ấy");
+  await expect(kq).not.toContainText("Điều Người yêu nên biết");
+});
+
 test("TS-SAU: hợp đôi theo loại quan hệ — sếp khác người yêu, có nhịp năm hai người", async ({ page }) => {
   await napHoSo(page, LUAN);
   await page.goto("/hop-doi");

@@ -55,8 +55,25 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
   const cuoi = useRef<HTMLDivElement>(null);
   const soId = useRef(0);
 
+  // Một lần cuộn duy nhất tới cuối khung (khung chờ / câu trả lời mới). Trang ngoài KHÔNG tự cuộn thêm khi đẩy câu vào
+  // (hai lệnh cuộn mượt chồng nhau làm màn hình giật). Giảm chuyển động → nhảy thẳng.
   useEffect(() => {
-    if (tin.length) cuoi.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    if (!tin.length) return;
+    // Tự tính thay scrollIntoView({block:"nearest"}) — Chromium bỏ qua lệnh đó với mốc cao 0px ở xa màn hình.
+    //  · đang chờ: đáy khung chờ "Đang soi câu hỏi…" ngay trên thanh tab dưới (điện thoại);
+    //  · vừa có câu trả lời: ĐẦU câu trả lời ngay dưới thanh đầu trang (đọc từ đầu, không phải cuộn ngược lên).
+    // Chỉ cuộn khi phần đó đang nằm ngoài vùng nhìn.
+    const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const cuon = (top: number) => window.scrollTo({ top: Math.max(0, top), behavior: giam ? "auto" : "smooth" });
+    const cao = window.innerHeight;
+    if (dang) {
+      const r = cuoi.current?.getBoundingClientRect();
+      if (r && (r.top > cao - 96 || r.top < 96)) cuon(window.scrollY + r.top - (cao - 96));
+      return;
+    }
+    const ds = cuoi.current?.parentElement?.querySelectorAll<HTMLElement>("[data-testid='cau-tra-loi']");
+    const r = ds?.length ? ds[ds.length - 1]!.getBoundingClientRect() : null;
+    if (r && (r.top > cao - 160 || r.top < 64)) cuon(window.scrollY + r.top - 88);
   }, [tin.length, dang]);
 
   // Câu từ ngoài tới lúc đang chờ trả lời → giữ lại, hỏi ngay khi xong (không bỏ mất cú bấm).
@@ -131,12 +148,21 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
           )}
         </AnimatePresence>
 
+        {/* Trục 2 UX: khung chờ nằm ĐÚNG chỗ câu trả lời sẽ hiện (bóng một ô trả lời + chữ "Đang soi câu hỏi…"), để
+            người vừa bấm thấy ngay hệ thống đang làm — không phải đoán. */}
         {dang && (
-          <div className="flex items-center gap-3 text-sm text-fg-faint" role="status">
-            <span className="grid size-8 place-items-center rounded-full bg-gold/15 text-gold"><Sparkles className="size-4 animate-pulse" aria-hidden /></span>
-            <span className="flex gap-1" aria-label="Đang soi">
-              {[0, 1, 2].map((i) => <span key={i} className="size-1.5 animate-bounce rounded-full bg-gold/70" style={{ animationDelay: `${i * 120}ms` }} />)}
-            </span>
+          <div className="flex gap-3" role="status" data-testid="dang-soi">
+            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-gold/15 text-gold"><Sparkles className="size-4 animate-pulse" aria-hidden /></span>
+            <div className="min-w-0 flex-1 space-y-2 rounded-2xl rounded-tl-md border border-line/70 bg-bg/40 px-4 py-3">
+              <p className="flex items-center gap-2 text-sm text-fg-muted">
+                Đang soi câu hỏi…
+                <span className="flex gap-1" aria-hidden>
+                  {[0, 1, 2].map((i) => <span key={i} className="size-1.5 animate-bounce rounded-full bg-gold/70" style={{ animationDelay: `${i * 120}ms` }} />)}
+                </span>
+              </p>
+              <span className="block h-2.5 w-11/12 animate-pulse rounded-full bg-surface-2" aria-hidden />
+              <span className="block h-2.5 w-3/4 animate-pulse rounded-full bg-surface-2" aria-hidden />
+            </div>
           </div>
         )}
         <div ref={cuoi} />

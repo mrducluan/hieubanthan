@@ -110,11 +110,11 @@ export function ThanSo() {
   const quyUoc = useQuyUocDD();
   const maTheoCau = useRef(new Map<string, string>());   // câu chuẩn → mã câu (cho góp ý gắn đúng câu nỗi đau)
   useEffect(() => { setPhai(docPhai()); }, []);
-  // TS-NOIDAU: câu bấm từ bảng nỗi đau / "hỏi tiếp" → đẩy vào khung hỏi đáp và cuộn tới đó.
+  // TS-NOIDAU: câu bấm từ bảng nỗi đau / "hỏi tiếp" → đẩy vào khung hỏi đáp; khung hỏi đáp tự cuộn MỘT lần tới khung chờ
+  // "Đang soi câu hỏi…" (trục 2 UX: hai lệnh cuộn mượt chồng nhau làm màn hình giật giữa chừng).
   function hoiCau(cau: string, maCau?: string) {
     if (maCau) maTheoCau.current.set(cau, maCau);
     setCauNgoai((c) => ({ cau, lan: (c?.lan ?? 0) + 1 }));
-    document.getElementById("hoi")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
   function doiPhai(p: PhaiThanSo) {
     setPhai(p);
