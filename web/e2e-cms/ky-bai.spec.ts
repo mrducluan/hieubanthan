@@ -110,5 +110,9 @@ test("Thẩm định / Tác giả: dòng gọn đổi theo kiểu chữ ký, th�
   await page.goto(BAI);
   ld = (await page.locator('script[type="application/ld+json"]').allTextContents()).join("\n");
   expect(ld).not.toContain("reviewedBy");
-  expect(ld).toContain('"@id":"http://localhost:3002/#to-chuc"');
+  // Tên miền trong JSON-LD phụ thuộc bản chạy (dev 3002, build 3000) → chỉ kiểm cấu trúc: author của bài là tổ chức.
+  const bai = ((await page.locator('script[type="application/ld+json"]').allTextContents()).map((t) => JSON.parse(t) as { "@graph"?: Record<string, unknown>[] })
+    .flatMap((g) => g["@graph"] ?? [])).find((n) => n["@type"] === "BlogPosting");
+  expect(bai, "có node BlogPosting").toBeTruthy();
+  expect((bai!.author as { "@id"?: string })["@id"]).toMatch(/\/#to-chuc$/);
 });
