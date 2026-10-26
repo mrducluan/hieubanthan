@@ -125,6 +125,115 @@ def chon_cot_loi(ds_chuong: list[dict], toi_da: int = 3, uu_tien: tuple[str, ...
     return ra
 
 
+# ------------------------------------------------------------------ Trục 1 "Bài đọc dài dễ đi" (2026-10-26): gọn báo cáo
+# Chỉ CẮT / SẮP LẠI câu đã có (KB), không sinh câu mới. Mã kiểm chứng giữ nguyên (ràng buộc SQL 0017/0021).
+_TU_NOI = ("trong khi", "nhất là", "hoặc", "nhưng", "hay", "và", "nên", "vì", "khi", "mà", "để", "rồi")
+_TU_NOI_RE = re.compile(r"^(?:\S+\s+){0,2}?(?=(?:%s)\s)" % "|".join(_TU_NOI), re.IGNORECASE)
+_RANH_GIOI = re.compile(r"^\s*[,;:.!?…—–(]")
+# Từ nối mở đầu thân sau khi bỏ tiêu đề: "và" bỏ hẳn; "nên" (= vì thế) dễ đọc thành lời khuyên → "Vì vậy".
+_DOI_TU_NOI = {"và": "", "nên": "Vì vậy "}
+
+
+def than_khong_lap_tieu_de(tieu_de: str, noi_dung: str) -> str:
+    """Thân hộp bỏ phần đã nói ở tiêu đề (tiêu đề dựng từ vế đầu của chính câu thân — `doi_song_chung._tieu_de`).
+    Chỉ cắt khi tiêu đề là ĐẦU thân và dừng ở ranh giới từ; tiêu đề dừng giữa vế (đã bỏ từ treo) → thân bắt đầu từ từ
+    nối kế tiếp; không cắt gọn được → giữ nguyên. Thân trùng hẳn tiêu đề → "" (hộp chỉ còn tiêu đề)."""
+    t = (tieu_de or "").strip().rstrip(".!?…:; ")
+    n = " ".join((noi_dung or "").split())
+    if len(t) < 4 or not n.lower().startswith(t.lower()):
+        return n
+    con = n[len(t):]
+    if con and con[0].isalnum():                       # tiêu đề dừng giữa một từ ("Bạn lo" ↔ "Bạn lo lắng")
+        return n
+    het_cau = bool(re.match(r"^\s*[.!?…]", con))
+    if _RANH_GIOI.match(con):
+        con = con.lstrip(" ,;:.!?…—–(")
+    elif con.strip():
+        # Tiêu đề dừng giữa vế: bỏ tối đa 4 từ còn treo rồi bắt đầu ở từ nối kế tiếp hoặc sau dấu ngắt vế gần nhất.
+        tu = con.split()
+        for k in range(min(4, len(tu) - 1) + 1):
+            sau = " ".join(tu[k:])
+            if k and tu[k - 1][-1] in ",;:":
+                con = sau
+                break
+            if _TU_NOI_RE.match(sau) and _TU_NOI_RE.match(sau).end() == 0:
+                con = sau
+                break
+        else:
+            return n
+    con = con.strip()
+    for w in () if het_cau else _TU_NOI:            # câu mới (sau dấu chấm) giữ nguyên chữ đầu, vd "Nên khen…"
+        if con.lower().startswith(w + " "):
+            if w in _DOI_TU_NOI:
+                con = _DOI_TU_NOI[w] + con[len(w) + 1:]
+            break
+    con = con.strip()
+    return con[:1].upper() + con[1:]
+
+
+def _cau_cua(s: str) -> list[str]:
+    return [c.strip() for c in re.split(r"(?<=[.!?])\s+", s or "") if c.strip()]
+
+
+def _thuong_khong_dau_cau(s: str) -> str:
+    return " ".join((s or "").lower().split()).rstrip(".!?…:; ")
+
+
+def gon_bao_cao(bc: dict, gon_doan: bool = True) -> dict:
+    """Gọn một báo cáo đời sống (sửa tại chỗ, trả về `bc`):
+    1. Thân hộp không lặp tiêu đề (`than_khong_lap_tieu_de`); thân rỗng thì lấy câu "nên làm" KB của chính hộp
+       (`loi_khuyen`) nếu câu ấy chưa có trong hộp khác của chương, không thì để trống.
+       Hộp "Điều quan trọng nhất" lấy đúng thân của hộp gốc cùng mã.
+    2. Mỗi `ma_mau` chỉ một hộp đầy đủ: trùng với "Điều quan trọng nhất" → `tham_chieu = "cot_loi"`; trùng một chương
+       đứng trước → `tham_chieu = <mã chương ấy>`. Hộp vẫn mang mã (tầng HỌC đếm cùng một phiếu), web hiện một dòng.
+    3. `gon_doan`: đoạn thân (sau câu tóm tắt `doan[0]`) bỏ câu chứa tiêu đề hay câu của hộp trong chương (câu nối liệt
+       kê lại tiêu đề hộp, câu "xem trong hộp") — đoạn rỗng thì bỏ."""
+    chuong_ds = bc.get("chuong") or []
+    da_gon: dict[str, dict] = {}
+    for c in chuong_ds:
+        hop = c.get("hop") or []
+        for h in hop:
+            goc = h.get("noi_dung") or ""
+            moi = than_khong_lap_tieu_de(h.get("tieu_de", ""), goc)
+            if moi != goc and not moi:
+                lk = (h.get("loi_khuyen") or "").strip()
+                khac = " ".join(x.get("noi_dung", "") for x in hop if x is not h)
+                moi = lk if lk and lk not in khac and lk not in goc else ""
+            h["noi_dung"] = moi
+            if h.get("ma_mau") and h["ma_mau"] not in da_gon:
+                da_gon[h["ma_mau"]] = h
+    for h in bc.get("cot_loi") or []:
+        g = da_gon.get(h.get("ma_mau") or "")
+        h["noi_dung"] = g["noi_dung"] if g else than_khong_lap_tieu_de(h.get("tieu_de", ""), h.get("noi_dung", "")) \
+            or h.get("noi_dung", "")
+    da: dict[str, str] = {h["ma_mau"]: "cot_loi" for h in bc.get("cot_loi") or [] if h.get("ma_mau")}
+    for c in chuong_ds:
+        for h in c.get("hop") or []:
+            m = h.get("ma_mau")
+            if not m:
+                continue
+            if m in da:
+                h["tham_chieu"] = da[m]
+            else:
+                h.pop("tham_chieu", None)
+                da[m] = c["ma"]
+    if gon_doan:
+        for c in chuong_ds:
+            hop = c.get("hop") or []
+            doan = c.get("doan") or []
+            if len(doan) < 2 or not hop:
+                continue
+            tieu_de = [_thuong_khong_dau_cau(h["tieu_de"]) for h in hop if len(h.get("tieu_de", "")) >= 12]
+            cau_hop = [_thuong_khong_dau_cau(x) for h in hop for x in _cau_cua(h.get("noi_dung", "")) if len(x) >= 25]
+            moi = [doan[0]]
+            for d in doan[1:]:
+                giu = [x for x in _cau_cua(d) if not any(k in _thuong_khong_dau_cau(x) for k in (*tieu_de, *cau_hop))]
+                if giu:
+                    moi.append(" ".join(giu))
+            c["doan"] = moi
+    return bc
+
+
 def lop_doi_thuong(bc: dict) -> list[str]:
     """Mọi chuỗi thuộc lớp đời thường của một báo cáo (hoặc một `doc_que`): tiêu đề, tóm tắt, hộp, câu tự soi, việc nên làm."""
     ra: list[str] = []

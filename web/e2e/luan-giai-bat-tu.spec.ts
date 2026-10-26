@@ -32,12 +32,14 @@ test("Bát tự đời sống: cốt lõi, 13 chương, sức tự thân, 5 hàn
   await expect(bc.getByRole("heading", { level: 2 })).toHaveText("Luận giải Bát tự");
   await expect(page.getByTestId("lg-cot-loi").getByTestId("hop-noi-bat")).toHaveCount(BC.cot_loi.length);
   await expect(page.getByTestId("lg-muc-luc").getByRole("link")).toHaveCount(13);
+  await page.getByTestId("lg-mo-het").click();        // Trục 1: chương 2+ gập sẵn
   const NHAN: Record<string, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần lưu ý" };
   for (const c of BC.chuong) {
     if (!c.muc) await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc")).toHaveCount(0);
     else await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc").first()).toHaveText(NHAN[c.muc]!);
   }
-  expect(BC.chuong.filter((c) => !c.muc).map((c) => c.ma)).toEqual(["van_han", "loi_khuyen"]);
+  // Trục 1: "Con người bạn" không mang chip mức (như Lời khuyên, Vận hạn).
+  expect(BC.chuong.filter((c) => !c.muc).map((c) => c.ma)).toEqual(["tong_quan", "van_han", "loi_khuyen"]);
   // Chương 1: thanh sức tự thân — kim đứng đúng tỉ lệ (reduced motion: không hiệu ứng, ở ngay vị trí cuối).
   const tq = page.getByTestId("lg-chuong-tong_quan");
   const than = tq.getByTestId("thanh-than");
@@ -95,6 +97,7 @@ test("Bát tự: kiểm chứng gửi phái tu_binh + mã ds.bt.*, tỉ lệ cô
 test("Bát tự điện thoại 360px: không cuộn ngang, biểu đồ và dòng thời gian vừa màn hình", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 780 });
   await moBaoCao(page);
+  await page.getByTestId("lg-mo-het").click();
   for (const id of ["thanh-than", "bieu-do-ngu-hanh", "dai-van-hai-cach", "dong-thoi-gian", "lg-cot-loi"]) {
     const el = page.getByTestId(id).first();
     await el.scrollIntoViewIfNeeded();

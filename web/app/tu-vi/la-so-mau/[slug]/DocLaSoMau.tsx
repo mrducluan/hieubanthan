@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type { LaSoOutputT } from "@/app/api/tuvi/schema";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { LaSoTuVi } from "@/components/huyen-hoc/LaSoTuVi";
+import { KhungLaSo } from "@/components/huyen-hoc/KhungLaSo";
 import { doanCoThuatNgu, KhungGiaiNghia } from "@/components/hoi/ThuatNgu";
 import type { LaSoMau } from "@/lib/kien-thuc";
 
@@ -15,11 +16,9 @@ export function DocLaSoMau({ duLieu }: { duLieu: LaSoMau }) {
   const router = useRouter();
   return (
     <>
-      <div className="mt-8 -mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0" data-testid="la-so-mau">
-        <div className="min-w-[760px] overflow-hidden rounded-[1.25rem] shadow-card">
-          <LaSoTuVi ls={ls} giaoDien="dem" ten={duLieu.ten} gioSinh={duLieu.gio} chon={chon} onChon={setChon} />
-        </div>
-      </div>
+      <KhungLaSo chon={chon} testId="la-so-mau" className="mt-8">
+        <LaSoTuVi ls={ls} giaoDien="dem" ten={duLieu.ten} gioSinh={duLieu.gio} chon={chon} onChon={setChon} />
+      </KhungLaSo>
       <div className="mt-4">
         <ChiTietCung ls={ls} chi={chon} onHoi={() => router.push("/tu-vi")} />
       </div>

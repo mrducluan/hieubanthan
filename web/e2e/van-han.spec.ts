@@ -51,6 +51,7 @@ test("Tử vi: dòng 10 năm — năm nay, cờ dân gian, bấm năm cần lưu
   const ch = page.getByTestId("lg-chuong-van_han");
   await expect(ch.getByRole("heading", { level: 3 })).toContainText("Vận hạn & điều nên tránh");
   await expect(ch.getByTestId("chip-muc")).toHaveCount(0);
+  await ch.getByTestId("lg-mo-chuong").click();          // Trục 1: chương sau gập sẵn
   const dong = ch.getByTestId("dong-muoi-nam");
   await dong.scrollIntoViewIfNeeded();
   const nam = dong.getByTestId("nam-van-han");
@@ -87,6 +88,7 @@ test("Bát tự: dòng 10 năm hai cách + 12 tháng tới theo tiết", async (
   await mo(page, "bat-tu", BC);
   await page.getByRole("button", { name: "Xem luận giải" }).click();
   const ch = page.getByTestId("lg-chuong-van_han");
+  await ch.getByTestId("lg-mo-chuong").click();
   const dong = ch.getByTestId("dong-muoi-nam");
   await dong.scrollIntoViewIfNeeded();
   await expect(dong.getByTestId("nam-van-han")).toHaveCount(10);
@@ -106,6 +108,7 @@ test("điện thoại 360px: dòng 10 năm cuộn trong khung riêng, trang khô
   await page.setViewportSize({ width: 360, height: 780 });
   await mo(page, "bat-tu", FX_BT.bao_cao);
   await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await page.getByTestId("lg-chuong-van_han").getByTestId("lg-mo-chuong").click();
   const dong = page.getByTestId("dong-muoi-nam");
   await dong.scrollIntoViewIfNeeded();
   const b = await dong.boundingBox();

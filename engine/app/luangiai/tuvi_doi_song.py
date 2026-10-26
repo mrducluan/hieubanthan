@@ -30,6 +30,7 @@ from app.kb import tuvi_kb
 from app.luangiai import tuvi_nhip_3_thang as nhip3
 from app.luangiai import tuvi_phi_hoa as phl
 from app.luangiai import doi_song_chung as dsc
+from app.luangiai import doi_song_khuon as kh
 from app.luangiai.doi_song_chung import (  # noqa: F401 — tách dùng chung với Bát tự (BT-ĐS), giữ tên cũ
     MA_MAU_RE, TOI_DA_HOP, _ap_hoc, _cac_cau, _cau_dau, _hoa_dau, _ma, _sach, _sap, _tieu_de, slug, trong_so_xem_lai)
 
@@ -308,28 +309,8 @@ def _thuong(s: str) -> str:
     return s[:1].lower() + s[1:]          # tiêu đề hộp không mở bằng tên riêng (thuật ngữ chỉ ở can_cu)
 
 
-# Câu dẫn của đoạn nối theo từng chương (không dùng một câu dẫn chung cho mọi chương).
-_DAN_NOI = {
-    "su_nghiep": ("Trong công việc, bạn dựa được vào", "chỗ hay vấp"),
-    "tien_bac": ("Với tiền bạc, chỗ dựa của bạn là", "chỗ dễ hao"),
-    "tinh_cam": ("Trong tình cảm, bạn có", "chỗ dễ va"),
-    "gia_dinh": ("Trong nhà, điều tốt là", "chỗ dễ căng"),
-    "quan_he": ("Với người ngoài, bạn có", "chỗ dễ vướng"),
-    "nha_cua": ("Về nhà cửa, bạn có", "chỗ dễ tốn công"),
-}
-
-
-def _doan_noi(hop: list[dict], dau_manh: str = "Chỗ mạnh của bạn ở mảng này", dau_vap: str = "chỗ cần để ý") -> str:
-    """Câu nối tổng thể ghép từ TIÊU ĐỀ hộp (không chép nội dung hộp, không câu "meta" kiểu "xem trong hộp")."""
-    manh = [_thuong(h["tieu_de"]) for h in hop if h["loai"] == "diem_manh"][:2]
-    vap = [_thuong(h["tieu_de"]) for h in hop if h["loai"] == "luu_y"][:2]
-    if manh and vap:
-        return f"{dau_manh}: {'; '.join(manh)}. Còn {dau_vap}: {'; '.join(vap)}."
-    if manh:
-        return f"{dau_manh}: {'; '.join(manh)}."
-    if vap:
-        return f"{_hoa_dau(dau_vap)}: {'; '.join(vap)}."
-    return ""
+# Trục 1 (2026-10-26): bỏ "đoạn nối" liệt kê lại tiêu đề hộp ("Trong công việc, bạn dựa được vào: …. Còn chỗ hay
+# vấp: …") — web đã hiện hộp ngay trên, đoạn ấy chỉ chép lại. Thân chương còn câu tóm tắt + câu riêng của chương.
 
 
 def _ten_lan(cung: str) -> str:
@@ -411,6 +392,22 @@ def _tom_tat_cung(ds: list[tuple[str, dict]]) -> str:
     return _hoa_dau("; ".join(phan)) + "."
 
 
+def _tom_tat_menh(x: dict) -> str:
+    """Câu tóm tắt chương "Con người bạn" KHÔNG nói mức: lý do đời thường xếp như mức cân bằng (một điều đỡ, một điều
+    vướng — "…, nhưng …"), cùng bộ lý do `ly_do` của cung Mệnh."""
+    def sua(s: str) -> str:
+        return (s.replace("không có nét riêng nổi hẳn", "bạn không có một nét nổi hẳn").replace(" ở đây", "")
+                .replace("cho mảng này", "cho bạn").replace("về mảng này", "về chính mình"))
+    ld = ly_do(x)
+    tot = [a for a, d in ld if d > 0]
+    con = [a for a, d in ld if d == 0] + [a for a, d in ld if d < 0]
+    if tot:          # có điều đỡ → nói điều đỡ trước, một điều cần chăm sau
+        return f"Con người bạn: {sua(tot[0])}" + (f", nhưng {sua(con[0])}." if con else ".")
+    if con:          # chỉ có điều cần chăm → nói MỘT điều, gọi đúng tên là "điểm cần chăm" (không phán)
+        return f"Điểm cần chăm ở bạn: {sua(con[0])}."
+    return "Con người bạn có cả chỗ mạnh lẫn chỗ dễ vấp, như ai cũng vậy."
+
+
 def _hop_muc(ma: str, ten: str, cc: dict, ghep: bool) -> dict:
     """Hộp dự phòng khi cung có ít điểm nhấn: nói theo mức của cung + việc nên làm của KB đại hạn."""
     x, t = cc[ten], _ten(ten)
@@ -457,7 +454,7 @@ def _chuong_cung(ma: str, cung: list[str], cc: dict, hoc: tuple, da_dung: set[st
                       f"{x['lan_can'][1]}, {x['lan_can'][2]}")
     ts = (tuvi_kb.cung(cung[0]) or {}).get("cau_tu_soi")
     tom = _tom_tat_cung([(t, cc[t]) for t in cung])
-    return _chuong(ma, muc, tom, hop, [tom, _doan_noi(hop, *_DAN_NOI.get(ma, ()))], can_cu, ts)
+    return _chuong(ma, muc, tom, hop, [tom], can_cu, ts)
 
 
 TRONG_PHA_CACH = 0.9        # cách cục tốt bị phá: bằng nửa cách nguyên vẹn (1,8)
@@ -514,10 +511,11 @@ def _chuong_tong_quan(ls: dict, cc: dict, hoc: tuple, da_dung: set[str]) -> dict
             them.append(_hop("diem_manh", _tieu_de(y, "Nét nổi bật của bạn"), y, [cu],
                              _ma("ds", "tong_quan", "cach", slug(c["ma"]), "manh"), 1.8))
     ch = _chuong_cung("tong_quan", ["Mệnh", "Phúc Đức"], cc, hoc, da_dung, them, chi_phu={"Phúc Đức": 2})
-    ch["tom_tat"] = _tom_tat_cung([("Mệnh", cc["Mệnh"])])
-    noi = _doan_noi(ch["hop"], "Nét nổi bật của bạn", "điều nên để ý ở chính mình")
-    ch["doan"] = [ch["tom_tat"], *([noi] if noi else [])]
-    ch["muc"], ch["nhan_muc"] = cc["Mệnh"]["muc"], kb.nhan_muc(cc["Mệnh"]["muc"])
+    # Trục 1 (2026-10-26): "Con người bạn" không mang chip mức (như Lời khuyên, Vận hạn — VH-1) — người mới đọc chương
+    # đầu thấy "Cần lưu ý" là thấy mình "có vấn đề". Mức cung Mệnh vẫn chấm (dòng thời gian, cột lõi dùng), chỉ không hiện.
+    ch["tom_tat"] = _tom_tat_menh(cc["Mệnh"])
+    ch["doan"] = [ch["tom_tat"]]
+    ch["muc"], ch["nhan_muc"] = None, None
     ch["can_cu"] += [f"Mệnh chủ {ls['menh_chu']}, Thân chủ {ls['than_chu']}, {ls['cuc']}"]
     return ch
 
@@ -1009,8 +1007,7 @@ def _chuong_duong_bay(ls: dict, hoc: tuple) -> dict:
     if phi:
         can_cu += [f"Lai nhân cung: {phi['lai_nhan']['cung']} ({phi['lai_nhan']['can']} {phi['lai_nhan']['chi']})",
                    phi["phai"]["ghi_chu"]]
-    doan = [tom, _doan_noi(hop, "Chỗ các mảng đời đỡ nhau", "chỗ hay vướng"),
-            "Đây là cách các mảng đời tác động lẫn nhau, không phải lời đoán sự kiện."]
+    doan = [tom, "Đây là cách các mảng đời tác động lẫn nhau, không phải lời đoán sự kiện."]
     return _chuong("duong_bay", muc, tom, hop, doan, can_cu,
                    "Mảng đời nào của bạn đang âm thầm kéo theo mảng khác?")
 
@@ -1178,5 +1175,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
             h["_ch"] = ma
         ds.append(c)
     cot_loi = dsc.them_cot_loi_van_han(chon_cot_loi(ds), ds, nam_am_xem)
+    # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).
+    kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
     return _sach({"phien_ban": PHIEN_BAN, "cot_loi": cot_loi, "thoi_gian_bieu": tgb, "chuong": ds,
                   "tuoi_mu": vh["tuoi_mu"], "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

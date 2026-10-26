@@ -10,10 +10,14 @@ import FX from "./fixtures/luan-giai-doi-song.json";
 const ngayDuong = (iso?: string) => { if (!iso) return ""; const [y, m, d] = iso.split("-"); return `${Number(d)}/${Number(m)}/${y}`; };
 
 const BC = FX.bao_cao;
-type HopFx = { ma_mau?: string; dang_xem_lai?: boolean; tu?: string; den?: string; tu_tuoi?: number; den_tuoi?: number; loai: string };
+type HopFx = { ma_mau?: string; dang_xem_lai?: boolean; tu?: string; den?: string; tu_tuoi?: number; den_tuoi?: number; loai: string;
+  tham_chieu?: string; tieu_de: string };
 const chuong = (ma: string) => BC.chuong.find((c) => c.ma === ma)!;
 const hopHien = (ma: string) => (chuong(ma).hop as HopFx[]).filter((h) => !h.dang_xem_lai);
 const COT = BC.cot_loi.map((h) => (h as HopFx).ma_mau);
+// Trục 1: hộp đã ở "Điều quan trọng nhất" (cùng mã, có trên trang) → trong chương chỉ còn dòng tham chiếu.
+const laThamChieu = (h: HopFx) => Boolean(h.ma_mau && COT.includes(h.ma_mau));
+const hopDayDu = (ma: string) => hopHien(ma).filter((h) => !laThamChieu(h));
 
 async function moBaoCao(page: Page, opts: { bc?: object; tuyChon?: object | number; tyLe?: object } = {}) {
   const goi: Record<string, Request[]> = { tyLe: [], kiemChung: [], luu: [], tuyChon: [] };
@@ -47,11 +51,14 @@ test("báo cáo đời sống: cốt lõi, mục lục, chip mức, dòng thời
   const y = async (l: ReturnType<Page["getByTestId"]>) => (await l.boundingBox())!.y;
   expect(await y(cot)).toBeLessThan(await y(page.getByTestId("lg-muc-luc")));
 
-  // Mục lục: đủ 13 chương (VH-1 thêm "Vận hạn & điều nên tránh"), nhảy neo.
+  // Mục lục: đủ 13 chương (VH-1 thêm "Vận hạn & điều nên tránh"), nhảy neo + mở chương (Trục 1: chương sau gập sẵn).
   const ml = page.getByTestId("lg-muc-luc").getByRole("link");
   await expect(ml).toHaveCount(13);
+  await expect(page.getByTestId("lg-chuong-su_nghiep")).toHaveAttribute("data-mo", "0");
   await ml.nth(2).click();
   await expect(page).toHaveURL(/#lg-su_nghiep$/);
+  await expect(page.getByTestId("lg-chuong-su_nghiep")).toHaveAttribute("data-mo", "1");
+  await page.getByTestId("lg-mo-het").click();
 
   // Chip mức đời thường, không có mức "xấu".
   const sn = page.getByTestId("lg-chuong-su_nghiep");
@@ -61,12 +68,14 @@ test("báo cáo đời sống: cốt lõi, mục lục, chip mức, dòng thời
     if (!c.muc) await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc")).toHaveCount(0);
     else await expect(page.getByTestId(`lg-chuong-${c.ma}`).getByTestId("chip-muc").first()).toHaveText(NHAN[c.muc]!);
   }
-  expect(BC.chuong.filter((c) => !c.muc).map((c) => c.ma)).toEqual(["van_han", "loi_khuyen"]);
+  // Trục 1: "Con người bạn" cũng không mang chip mức (người mới đọc chương đầu không thấy "Cần lưu ý").
+  expect(BC.chuong.filter((c) => !c.muc).map((c) => c.ma)).toEqual(["tong_quan", "van_han", "loi_khuyen"]);
   await expect(sn.getByTestId("tom-tat")).toContainText(chuong("su_nghiep").tom_tat);
   await expect(sn.getByTestId("cau-tu-soi")).toContainText(chuong("su_nghiep").cau_tu_soi);
   // Hộp đủ 5 loại nhãn (trong cả bài); hộp `dang_xem_lai` không hiện.
   for (const n of ["Điểm mạnh", "Nên để ý", "Lời khuyên", "Thời điểm"]) await expect(bc).toContainText(n);
-  await expect(sn.getByTestId("hop-noi-bat")).toHaveCount(hopHien("su_nghiep").length);
+  await expect(sn.getByTestId("hop-noi-bat")).toHaveCount(hopDayDu("su_nghiep").length);
+  await expect(sn.getByTestId("hop-tham-chieu")).toHaveCount(hopHien("su_nghiep").length - hopDayDu("su_nghiep").length);
   await expect(bc).not.toContainText("Hộp đang được xem lại");
   const chu = (await bc.innerText()).toLowerCase();
   for (const cam of ["xấu", "hành trình", "năng lượng vũ trụ", "tai hoạ"]) expect(chu).not.toContain(cam);
@@ -140,11 +149,17 @@ test("kiểm chứng: tỉ lệ công khai ≥ 30 phiếu, dưới 30 chỉ hỏ
   await cot.nth(0).getByRole("button", { name: "Chưa đúng" }).click();
   await expect(cot.nth(0).getByRole("status")).toContainText("Cảm ơn");
   await expect(cot.nth(0).getByTestId("ty-le-dung")).toContainText("78%");
-  // Hộp gốc trong chương dùng chung mã với hộp "Điều quan trọng nhất" → cũng đã trả lời, không hỏi lại.
+  // Bấm xong: dấu ✓ + "Đã ghi" (Trục 1), hai nút biến mất.
+  await expect(cot.nth(2).getByRole("status")).toContainText("Đã ghi");
+  await expect(cot.nth(2).getByRole("button", { name: "Đúng với mình" })).toHaveCount(0);
+  // Hộp gốc trong chương dùng chung mã với hộp "Điều quan trọng nhất" → chương chỉ còn dòng tham chiếu, không hỏi lại.
   const goc = BC.cot_loi[0]!.tu_chuong;
-  const viTri = hopHien(goc).findIndex((h) => h.ma_mau === COT[0]);
-  expect(viTri).toBeGreaterThanOrEqual(0);
-  await expect(page.getByTestId(`lg-chuong-${goc}`).getByTestId("hop-noi-bat").nth(viTri).getByRole("status")).toContainText("Cảm ơn");
+  expect(hopHien(goc).some((h) => h.ma_mau === COT[0])).toBe(true);
+  const tc = page.getByTestId(`lg-chuong-${goc}`).locator(`[data-testid=hop-tham-chieu][data-ma-mau="${COT[0]}"]`);
+  await expect(tc).toHaveCount(1);
+  await expect(tc).toContainText("Đã nêu ở Điều quan trọng nhất");
+  await expect(tc).toHaveAttribute("href", "#lg-cot-loi");
+  await expect(tc.getByTestId("kiem-chung")).toHaveCount(0);
   await expect.poll(() => goi.kiemChung!.length).toBe(2);
   // Máy chủ trả {ok:false} → không có thông báo lỗi nào.
   await expect(page.getByTestId("luan-giai-toan-bo").getByRole("alert")).toHaveCount(0);
@@ -220,6 +235,7 @@ test("lưu bài: tự lưu khi đã bật; máy chủ chưa bật → ẩn; khá
 test("điện thoại 360px: không cuộn ngang, dòng thời gian dọc", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 780 });
   await moBaoCao(page);
+  await page.getByTestId("lg-chuong-cuoc_doi").getByTestId("lg-mo-chuong").click();
   const tg = page.getByTestId("dong-thoi-gian");
   await tg.scrollIntoViewIfNeeded();
   const b0 = await tg.getByTestId("moc-dai-han").nth(0).boundingBox();
@@ -229,6 +245,12 @@ test("điện thoại 360px: không cuộn ngang, dòng thời gian dọc", asyn
   await expect(page.getByText("Bạn đang ở đây")).toHaveCount(1);
   const rong = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
   expect(rong[0]).toBeLessThanOrEqual(rong[1]!);
+  // Kiểm chứng: hai nút một hàng chia đôi, cao ≥ 44px (Trục 1, báo cáo UX mục 5).
+  const nut = page.getByTestId("lg-cot-loi").getByTestId("kiem-chung").first().getByRole("button");
+  const [n0, n1] = [await nut.nth(0).boundingBox(), await nut.nth(1).boundingBox()];
+  expect(Math.abs(n0!.y - n1!.y)).toBeLessThan(2);
+  expect(n0!.height).toBeGreaterThanOrEqual(44);
+  expect(Math.abs(n0!.width - n1!.width)).toBeLessThan(2);
   for (const id of ["lg-cot-loi", "lg-muc-luc", "dong-thoi-gian"]) {
     const b = await page.getByTestId(id).boundingBox();
     expect(b!.x + b!.width).toBeLessThanOrEqual(360);
@@ -351,4 +373,77 @@ test("hỏi đáp Tử vi: câu đã nhận ra ý định hoặc câu an toàn �
   await expect(await hoi(page, "có nên nghỉ việc không")).toContainText("Trả lời theo ý định.");
   await expect(await hoi(page, "mình mệt mỏi quá rồi")).toContainText("Lời hỗ trợ.");
   await expect(page.getByTestId("chon-y-dinh")).toHaveCount(0);
+});
+
+// ------------------------------------------------------------------ Trục 1 "Bài đọc dài dễ đi" (2026-10-26)
+test("Trục 1: chương 1 mở, chương sau gập (tiêu đề + chip mức + tóm tắt), bấm mở, 'Chương tiếp' mở chương kế", async ({ page }) => {
+  await moBaoCao(page);
+  const [c1, c2, c3] = [BC.chuong[0]!, BC.chuong[1]!, BC.chuong[2]!];
+  const ch = (ma: string) => page.getByTestId(`lg-chuong-${ma}`);
+  await expect(ch(c1.ma)).toHaveAttribute("data-mo", "1");
+  for (const c of BC.chuong.slice(1)) await expect(ch(c.ma)).toHaveAttribute("data-mo", "0");
+  // Chương gập vẫn thấy tóm tắt + chip mức; thân (hộp, tự soi) ẩn.
+  await expect(ch(c2.ma).getByTestId("tom-tat")).toBeVisible();
+  await expect(ch(c2.ma).getByTestId("tom-tat")).toHaveText(c2.tom_tat);
+  if (c2.muc) await expect(ch(c2.ma).getByTestId("chip-muc").first()).toBeVisible();
+  await expect(ch(c2.ma).getByTestId("cau-tu-soi")).toBeHidden();
+  // Chương 1 "Con người bạn" không có chip mức.
+  await expect(ch(c1.ma).getByTestId("chip-muc")).toHaveCount(0);
+  // "Chương tiếp" cuối chương 1 mở chương 2; bấm tiêu đề mở / gập.
+  await ch(c1.ma).getByTestId("lg-chuong-tiep").click();
+  await expect(ch(c2.ma)).toHaveAttribute("data-mo", "1");
+  await expect(ch(c2.ma).getByTestId("cau-tu-soi")).toBeVisible();
+  await ch(c3.ma).getByTestId("lg-mo-chuong").click();
+  await expect(ch(c3.ma)).toHaveAttribute("data-mo", "1");
+  await ch(c3.ma).getByTestId("lg-mo-chuong").click();
+  await expect(ch(c3.ma)).toHaveAttribute("data-mo", "0");
+  // Đo: mở chương ghi chart_interacted (chỉ số chương, không chữ).
+  const sk = await page.evaluate(() => ((window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? [])
+    .filter((e) => e.su_kien === "chart_interacted" && e.kind === "lg_mo_chuong"));
+  expect(sk.map((e) => e.so_chuong)).toEqual(expect.arrayContaining([2, 3]));
+  // Máy tính: cột chương DÍNH bên phải (vẫn trong tầm mắt khi đã cuộn xuống chương 3), không có thanh của điện thoại.
+  await ch(c3.ma).getByTestId("lg-mo-chuong").click();
+  await ch(c3.ma).getByTestId("cau-tu-soi").scrollIntoViewIfNeeded();
+  await expect(page.getByTestId("lg-cot-chuong")).toBeInViewport();
+  await expect(page.getByTestId("lg-cot-chuong").locator("[aria-current=location]")).toContainText(c3.tieu_de);
+  await expect(page.getByTestId("lg-thanh-chuong")).toBeHidden();
+});
+
+test("Trục 1 điện thoại: thanh 'Chương x/13' dính dưới thanh đầu trang, mở danh sách chương, chạm chương → mở + cuộn tới", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await moBaoCao(page);
+  const thanh = page.getByTestId("lg-thanh-chuong");
+  await page.getByTestId(`lg-chuong-${BC.chuong[0]!.ma}`).getByTestId("tom-tat").scrollIntoViewIfNeeded();
+  await page.mouse.wheel(0, 400);
+  await expect(thanh).toBeVisible();
+  await expect(thanh.getByTestId("lg-chuong-x")).toContainText("/13");
+  await expect.poll(async () => (await thanh.boundingBox())!.y).toBeGreaterThanOrEqual(60);
+  expect((await thanh.boundingBox())!.y).toBeLessThanOrEqual(70);
+  await thanh.getByRole("button").first().click();
+  await expect(thanh).toHaveAttribute("data-mo", "1");
+  const dich = BC.chuong[5]!;
+  await thanh.getByRole("link", { name: new RegExp(dich.tieu_de) }).click();
+  await expect(page.getByTestId(`lg-chuong-${dich.ma}`)).toHaveAttribute("data-mo", "1");
+  await expect(thanh).toHaveAttribute("data-mo", "0");
+  await expect(page.getByTestId(`lg-chuong-${dich.ma}`).getByTestId("tom-tat")).toBeInViewport();
+  await expect(thanh.getByTestId("lg-chuong-x")).toContainText("6/13");
+  const rong = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
+  expect(rong[0]).toBeLessThanOrEqual(rong[1]!);
+});
+
+test("Trục 1: reading_completed chỉ tính khi đã mở và đọc tới hết chương cuối của báo cáo", async ({ page }) => {
+  await moBaoCao(page);
+  const dem = async () => (await page.evaluate(() => ((window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? [])
+    .filter((e) => e.su_kien === "reading_completed" && e.mo_dun === "tuvi").length));
+  await page.getByTestId("doc-xong-tuvi").scrollIntoViewIfNeeded();
+  await page.mouse.wheel(0, 50);
+  await page.waitForTimeout(11_000);
+  expect(await dem()).toBe(0);                       // chương sau còn gập → chưa "đọc xong"
+  const cuoi = BC.chuong.at(-1)!;
+  await page.getByTestId(`lg-chuong-${cuoi.ma}`).getByTestId("lg-mo-chuong").click();
+  await page.getByTestId(`lg-chuong-${cuoi.ma}`).getByTestId("vi-sao").last().scrollIntoViewIfNeeded();
+  await page.mouse.wheel(0, 50);
+  await page.getByTestId("doc-xong-tuvi").scrollIntoViewIfNeeded();
+  await page.mouse.wheel(0, 50);
+  await expect.poll(dem, { timeout: 10_000 }).toBe(1);
 });
