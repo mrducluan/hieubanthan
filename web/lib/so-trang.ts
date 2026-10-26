@@ -181,7 +181,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   tuNd(ND_DOI_LICH, "Đổi lịch âm dương: ngày âm hôm nay, can chi, tháng nhuận", CHU_DOI_LICH),   // SEO-L5
   { duong: "/ban-than", nhom: "cong_cu", ten: "Hồ sơ bản thân", o: ["seo", "khoi_duoi", "khoi_cuoi"], mac_dinh: {
     tieu_de_seo: "Hồ sơ bản thân",
-    mo_ta_seo: "Hồ sơ bản thân theo thần số học: số đường đời, sứ mệnh, linh hồn, nhân cách — mỗi số ba lớp: đã tính, diễn giải, tự soi.",
+    mo_ta_seo: "Trang của bạn: bốn con số chủ đạo, nhịp ngày – tháng – năm cá nhân, bản đồ con số và lối tắt sang hợp đôi, huyền học.",
   } },
   { duong: "/nap-sao", nhom: "cong_cu", ten: "Nạp Sao", o: O_TRANG_PHU, mac_dinh: {
     tieu_de_seo: "Nạp Sao", h1: "Nạp Sao",

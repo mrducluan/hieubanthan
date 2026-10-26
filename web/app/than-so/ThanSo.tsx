@@ -1,7 +1,7 @@
 "use client";
 import { fetchSao } from "@/lib/sao-client";
 import { ghiLuot, type LuotHoi } from "@/lib/hoi-mang";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { HeartHandshake } from "lucide-react";
@@ -27,8 +27,12 @@ import { TongHopDoc } from "@/components/than-so/TongHopDoc";
 import { GopYCauTraLoi } from "@/components/hoi/GopYCauTraLoi";
 import { PhaiNaoDung } from "@/components/than-so/PhaiNaoDung";
 import { BanDoConSo } from "@/components/than-so/BanDoConSo";
+import { ChanDung } from "@/components/than-so/ChanDung";
+import { NghiThuc } from "@/components/than-so/NghiThuc";
+import { SoLon } from "@/components/than-so/SoLon";
+import { GopY } from "@/components/khung/GopY";
 import { ghiQuyUocDD, useQuyUocDD, type QuyUocDD } from "@/lib/quy-uoc-dd";
-import { ghi } from "@/lib/do-luong";
+import { docXong, ghi } from "@/lib/do-luong";
 import { TieuDeTrang, useChu, useDauCms } from "@/components/cms/DauCms";
 
 // TS-PHAI / TS-V3 — ba trường phái thần số + tổng hợp; lựa chọn nhớ trên máy (localStorage), mặc định Pitago như trước.
@@ -136,25 +140,54 @@ export function ThanSo() {
     if (kq && tab === "dong-doi" && location.hash === "#dong-doi") document.getElementById("chieu-sau")?.scrollIntoView({ block: "start" });
   }, [kq, tab]);
 
+  // QH-BT: /than-so là BÀI ĐỌC và cửa vào — người mới nhập hồ sơ (ở đây hoặc trang chủ → /than-so?moi=1) xem nghi thức
+  // "đang tính" + con số lớn ngay tại trang này; /ban-than là trang của tôi để quay lại mỗi ngày.
+  const [nghiThuc, setNghiThuc] = useState<"chua" | "dang" | "xong">("chua");
+  useEffect(() => { if (new URLSearchParams(location.search).get("moi") === "1") setNghiThuc("dang"); }, []);
+  const xongNghiThuc = useCallback(() => {
+    setNghiThuc("xong");
+    router.replace("/than-so", { scroll: false });
+  }, [router]);
+  const cuoiBai = useRef<HTMLElement>(null);
+  const dangNghiThuc = nghiThuc === "dang";
+
   const dauCms = useDauCms(), c = useChu();
-  useBatDauDoc("thanso_sau", Boolean(kq));
+  // Gate 1: bắt đầu = bài đọc hiện ra (sau nghi thức); đọc xong = cuộn tới hết Chân dung (cuối phần cốt lõi).
+  useBatDauDoc("thanso", Boolean(kq && !dangNghiThuc));
+  useBatDauDoc("thanso_sau", Boolean(kq && !dangNghiThuc));
+  useEffect(() => {
+    const el = cuoiBai.current;
+    if (!el || !kq || dangNghiThuc) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e?.isIntersecting) {
+        docXong("thanso", { so_duong_doi: kq.cac_vi_tri[0]?.gia_tri });
+        io.disconnect();
+      }
+    }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [kq, dangNghiThuc, phai]);
   // Lúc chờ hồ sơ vẫn có <h1> trong HTML phía máy chủ (SEO); có hồ sơ thì tiêu đề là tên người dùng.
   if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeTrang nho={c("dau.nhan_tren")} lon={c("dau.dang_tai")} /><KhungTai /></div>;
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
         <TieuDeTrang nho={c("dau.nhan_tren")} lon={c("dau.chua_ho_so")} />
-        <Card><NhapHoSo onXong={() => router.push("/ban-than?moi=1")} /></Card>
+        <Card><NhapHoSo onXong={() => setNghiThuc("dang")} /></Card>
       </div>
     );
   }
   if (loi) return <BaoLoi loi={loi} thuLai={thuLai} />;
+  if (dangNghiThuc) return <NghiThuc daCoKetQua={Boolean(kq)} onXong={xongNghiThuc} />;
   if (!kq) return <KhungTai dong={4} />;
 
   const cs = kq.chieu_sau;
   const tuoi = cs.nam_ca_nhan[0]?.tuoi ?? 0;
+  const ddVt = kq.cac_vi_tri.find((v) => v.vi_tri === "duong_doi") ?? kq.cac_vi_tri[0];
   return (
     <div className="space-y-14">
+      {/* Khoảnh khắc hé lộ chỉ ngay sau lần nhập đầu — lần sau vào thẳng bài đọc. */}
+      {nghiThuc === "xong" && ddVt && <SoLon vt={ddVt} tenGoi={tenGoi(hoSo)} cap="h2" />}
       <header>
         <p className="eyebrow">{c("ket_qua.nhan_tren")}</p>
         <h1 className="mt-2 text-4xl sm:text-5xl" data-testid="ten-chinh">{kq.ten_chinh}</h1>
@@ -187,6 +220,15 @@ export function ThanSo() {
           {kq.cac_vi_tri.map((vt) => <TheBaLop key={vt.vi_tri} vt={vt} />)}
         </div>
       </section>
+
+      {kq.chan_dung && (
+        <section aria-labelledby="muc-chan-dung" ref={cuoiBai}>
+          <TieuDeMuc id="muc-chan-dung" nho="Chân dung" lon="Con người bạn, bốn mặt"
+            mo_ta="Tổng quan, tình cảm, công việc và những bước ngoặt — trục là số Đường đời, thêm lớp riêng từ các con số khác của bạn." />
+          <ChanDung cd={kq.chan_dung} />
+        </section>
+      )}
+      <GopY />
 
       <BanDoConSo hoSo={hoSo} quyUoc={quyUoc} />
 

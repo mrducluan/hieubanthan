@@ -22,7 +22,7 @@ export function CuaVao() {
   return (
     <div className="glass rounded-2xl p-6">
       <p className="mb-5 font-serif text-xl">{c("cua_vao.tieu_de")}</p>
-      <NhapHoSo onXong={() => router.push("/ban-than?moi=1")} />
+      <NhapHoSo onXong={() => router.push("/than-so?moi=1")} />
     </div>
   );
 }

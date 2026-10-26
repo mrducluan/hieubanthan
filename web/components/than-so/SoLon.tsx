@@ -5,7 +5,9 @@ import { VongLacThu } from "./VongLacThu";
 import { EASE } from "@/lib/chuyen-dong";
 
 // Khoảnh khắc "được hiểu": một con số lớn + từ khoá + một câu (docs/THIET-KE-UI.md §4.1).
-export function SoLon({ vt, tenGoi }: { vt: ViTriLuanGiai; tenGoi: string }) {
+/** `cap`: thẻ tiêu đề của từ khoá — "h2" khi trang đã có <h1> riêng (bài đọc /than-so). */
+export function SoLon({ vt, tenGoi, cap = "h1" }: { vt: ViTriLuanGiai; tenGoi: string; cap?: "h1" | "h2" }) {
+  const TieuDe = cap === "h1" ? motion.h1 : motion.h2;
   const giam = useReducedMotion();
   const vao = (tre: number) =>
     giam ? {} : { initial: { opacity: 0, y: 14 }, animate: { opacity: 1, y: 0 }, transition: { delay: tre, duration: 0.6, ease: EASE } };
@@ -26,7 +28,7 @@ export function SoLon({ vt, tenGoi }: { vt: ViTriLuanGiai; tenGoi: string }) {
       </div>
       {vt.nghia && (
         <>
-          <motion.h1 {...vao(0.5)} className="text-3xl sm:text-4xl">{vt.nghia.tu_khoa}</motion.h1>
+          <TieuDe {...vao(0.5)} className="text-3xl sm:text-4xl">{vt.nghia.tu_khoa}</TieuDe>
           {vt.nghia.so_cai && (
             <motion.p {...vao(0.6)} className="mt-2 text-xs font-semibold uppercase tracking-widest text-gold">Số cái — giữ nguyên, không rút gọn</motion.p>
           )}

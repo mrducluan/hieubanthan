@@ -15,8 +15,10 @@ test("landing → nhập 2 trường → hé lộ số đường đời và hồ
   await page.getByLabel("Năm", { exact: true }).fill("1988");
   await page.getByRole("button", { name: "Xem con số của tôi" }).click();
 
-  await expect(page).toHaveURL(/\/ban-than/);
-  await expect(page.getByTestId("so-duong-doi")).toHaveText("6");
+  // QH-BT: nhập ở trang chủ → bài đọc /than-so (nghi thức + con số lớn ngay tại đó), không qua /ban-than.
+  await expect(page.getByTestId("so-duong-doi")).toHaveText("6", { timeout: 60_000 });
+  await expect(page).toHaveURL(/\/than-so$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
 
   for (const [vt, so] of [["duong_doi", "6"], ["su_menh", "9"], ["linh_hon", "6"], ["nhan_cach", "3"]] as const) {
     await expect(page.getByTestId(`the-${vt}`).getByTestId("gia-tri")).toHaveText(so);
@@ -33,7 +35,16 @@ test("landing → nhập 2 trường → hé lộ số đường đời và hồ
   for (const i of [0, 1, 2, 3]) await kc.nth(i).click();
   await expect(dd.getByTestId("ket-qua-kiem-chung-duong_doi")).toContainText("Khớp 4/6. Số 6 khá đúng với bạn.");
 
+  await expect(page.getByTestId("chan-dung")).toBeVisible();
+  // Trang của tôi: danh tính gọn + nhịp + tóm tắt bản đồ, KHÔNG lặp bốn thẻ số của bài đọc.
+  await page.goto("/ban-than");
   await expect(page.getByTestId("the-danh-tinh")).toContainText("Nguyễn Đức Luân");
+  await expect(page.getByTestId("the-duong_doi")).toHaveCount(0);
+  await expect(page.getByTestId("chan-dung")).toHaveCount(0);
+  await expect(page.getByTestId("ban-do-tom-tat")).toContainText("Bên trong & bên ngoài");
+  await page.getByTestId("mo-bai-doc").click();
+  await expect(page).toHaveURL(/\/than-so$/);
+  await expect(page.getByTestId("so-duong-doi")).toHaveCount(0);   // hé lộ chỉ ngay sau lần nhập đầu
   // Hồ sơ giữ lại khi quay về trang chủ.
   await page.goto("/");
   await expect(page.getByText("Chào lại")).toBeVisible();
@@ -77,7 +88,7 @@ test("form hồ sơ chặn ngày sinh tương lai và họ tên không có chữ
   await page.getByLabel("Năm", { exact: true }).fill("2099");
   await page.getByRole("button", { name: "Xem con số của tôi" }).click();
   await expect(page.getByText("Ngày sinh chưa đúng")).toBeVisible();
-  await expect(page).not.toHaveURL(/ban-than/);
+  await expect(page).not.toHaveURL(/than-so/);
 });
 
 test("engine lỗi: báo rõ + thử lại được; trang lạ ra 404 tiếng Việt", async ({ page }) => {
@@ -133,7 +144,7 @@ test("nhập ÂM lịch: ngày 30 của tháng thiếu bị chặn; năm có th�
 
 test("TS-SAU: chân dung 4 mặt có lớp riêng; dòng đời + đối chiếu năm biến cố", async ({ page }) => {
   await napHoSo(page, LUAN);
-  await page.goto("/ban-than");
+  await page.goto("/than-so");
   const cd = page.getByTestId("chan-dung");
   await expect(cd).toContainText("Điểm mạnh");
   await expect(cd.getByTestId("lop-them")).toContainText("Linh hồn 6");

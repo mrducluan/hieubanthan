@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, BriefcaseBusiness, Flame, Heart, Milestone, ShieldAlert, Sprout, Target, UserRound, Wallet } from "lucide-react";
 import type { ChanDung as ChanDungT, LopThem, MatChanDung } from "@/lib/engine";
@@ -106,9 +105,10 @@ function NoiDung({ m }: { m: MatChanDung }) {
             <Muc nhan="Bài học" mau="text-gold">{m.bai_hoc}</Muc>
             <Muc nhan="Cách đi qua" mau="text-jade">{m.cach_di_qua}</Muc>
           </div>
-          <Link href="/than-so#dong-doi" className="inline-flex items-center gap-1 text-sm text-gold hover:underline">
+          {/* Chân dung nằm trong bài đọc /than-so: neo cùng trang (hashchange → mở tab Bước ngoặt). */}
+          <a href="#dong-doi" className="inline-flex items-center gap-1 text-sm text-gold hover:underline">
             Xem các năm bước ngoặt trên dòng đời của bạn <ArrowRight className="size-4" aria-hidden />
-          </Link>
+          </a>
         </div>
       );
   }
