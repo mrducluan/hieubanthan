@@ -54,7 +54,8 @@ test("chiều sâu: dải đời, biểu đồ ngày sinh, hỏi đáp", async (
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
   await expect(page.getByTestId("ten-chinh")).toHaveText("Nguyễn Đức Luân");
-  await expect(page.getByTestId("ngay-sinh")).toContainText("Sinh 24/10/1988");
+  await expect(page.getByTestId("ngay-sinh")).toHaveText("Sinh 24/10/1988");   // không còn dòng kỹ thuật "quy ước / chỉ số nhạy"
+  await expect(page.getByTestId("ten-lech")).toHaveCount(0);
   await expect(page.getByRole("img", { name: "Dải đời đỉnh cao theo tuổi" })).toBeVisible();
 
   await page.getByRole("tab", { name: "Biểu đồ ngày sinh" }).click();
@@ -187,6 +188,7 @@ test("TS-PHAI: đổi sang phái Chaldea → 6 con số engine tính, có số k
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
   const khung = page.getByTestId("truong-phai-than-so");
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await khung.getByRole("tab", { name: "Chaldea" }).click();
   await expect(page.getByTestId("bai-chaldea")).toBeVisible();
   const api = await (await request.post("/api/thanso/chaldea", { data: { ho_ten: ["Nguyễn Đức Luân"], ngay: 24, thang: 10, nam: 1988 } })).json();
@@ -197,6 +199,7 @@ test("TS-PHAI: đổi sang phái Chaldea → 6 con số engine tính, có số k
   await expect(page.getByRole("tab", { name: "Biểu đồ ngày sinh" })).toHaveCount(0);
   await page.reload();
   await expect(page.getByTestId("bai-chaldea")).toBeVisible();
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await page.getByTestId("truong-phai-than-so").getByRole("tab", { name: "Pitago" }).click();
   await expect(page.getByTestId("the-duong_doi")).toBeVisible();
 });
@@ -204,6 +207,7 @@ test("TS-PHAI: đổi sang phái Chaldea → 6 con số engine tính, có số k
 test("TS-PHAI-2: phái Chaldea → hỏi đáp bản thân trả lời bằng số Chaldea; câu năm cá nhân ghi rõ theo Pythagoras", async ({ page }) => {
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await page.getByTestId("truong-phai-than-so").getByRole("tab", { name: "Chaldea" }).click();
   await page.getByRole("button", { name: "Điểm mạnh cốt lõi của tôi là gì?" }).click();
   const ans = page.getByTestId("cau-tra-loi").last();

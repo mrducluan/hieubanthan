@@ -10,8 +10,12 @@ test("hai cách tính con số Đường đời: mặc định rút gọn con s�
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
   await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("6");
+  // Khung cách xem thu gọn mặc định: một dòng "đang xem" + báo cách còn lại ra số khác; bấm "Đổi cách xem" mới mở.
+  await expect(page.getByTestId("dang-xem")).toContainText("Đang xem theo Pitago · số đường đời rút gọn con số · cách còn lại ra số 33");
+  await expect(page.getByRole("tab", { name: "Rút gọn con số" })).toHaveCount(0);
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await expect(page.getByRole("tab", { name: "Rút gọn con số" })).toHaveAttribute("aria-selected", "true");
-  await expect(page.getByTestId("goi-y-duong-doi")).toContainText("6 (rút gọn con số) và 33 (cộng hết chữ số)");
+  await expect(page.getByTestId("goi-y-duong-doi")).toContainText("6 (rút gọn con số) và 33 (cộng hết chữ số). Bài đọc đang dùng số 6.");
   await page.getByRole("tab", { name: "Cộng hết chữ số" }).click();
   await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("33");
   // Hỏi đáp đi theo cách đã chọn.
@@ -19,6 +23,7 @@ test("hai cách tính con số Đường đời: mặc định rút gọn con s�
   await expect(ans).toContainText("số chủ đạo (đường đời) 33");
   await page.reload();
   await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("33");
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await page.getByRole("tab", { name: "Rút gọn con số" }).click();
   await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("6");
   await expect(page.getByRole("tab", { name: "Qabalah" })).toHaveCount(0);
@@ -27,6 +32,7 @@ test("hai cách tính con số Đường đời: mặc định rút gọn con s�
 test("tổng hợp 2 phái: số lặp lại + đồ thị liên phái", async ({ page }) => {
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await page.getByRole("tab", { name: "Tổng hợp 2 phái" }).click();
   const bai = page.getByTestId("bai-tong-hop");
   await expect(bai.getByTestId("noi-bat-6")).toContainText("5 nguồn tính độc lập");

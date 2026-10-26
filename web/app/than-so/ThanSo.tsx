@@ -42,16 +42,17 @@ const CAC_PHAI: PhaiThanSo[] = ["pitago", "chaldea", "tong_hop"];
 function docPhai(): PhaiThanSo {
   try { const v = localStorage.getItem(KHOA_PHAI) as PhaiThanSo | null; return v && CAC_PHAI.includes(v) ? v : "pitago"; } catch { return "pitago"; }
 }
+const TEN_PHAI: Record<PhaiThanSo, string> = { pitago: "Pitago", chaldea: "Chaldea", tong_hop: "tổng hợp hai phái" };
 const MO_TA_HOI: Record<PhaiThanSo, string> = {
   pitago: "Câu trả lời soi câu hỏi của bạn qua chính những con số ở trên — góc nhìn tham khảo để tự ngẫm, không phải lời tiên đoán.",
-  chaldea: "Câu về bản thân, tên, tính cách trả lời theo số Chaldea (số kép + số gốc); chủ đề phái Chaldea không có (năm cá nhân, đỉnh cao, biểu đồ, hợp đôi) trả lời theo Pitago và ghi rõ.",
+  chaldea: "Câu về tính cách trả lời theo Chaldea. Câu về năm, giai đoạn, hợp đôi vẫn theo Pitago.",
   tong_hop: "Câu về bản thân mở đầu bằng điểm chung của hai phái, phần còn lại theo Pitago.",
 };
 
 // Gợi ý ở dạng TỰ SOI, không dự đoán tương lai.
 const GOI_Y = [
   { nhom: "Bản thân", cau: ["Điểm mạnh cốt lõi của tôi là gì?", "Mặt tối nào tôi hay bỏ qua ở chính mình?"] },
-  { nhom: "Nghề nghiệp", cau: ["Con số của tôi hợp với môi trường làm việc thế nào?", "Đâu là điểm nghẽn sự nghiệp theo con số của tôi?"] },
+  { nhom: "Nghề nghiệp", cau: ["Con số của tôi hợp với môi trường làm việc thế nào?", "Điều gì đang làm tôi chững lại trong công việc?"] },
   { nhom: "Tình cảm", cau: ["Tôi cần gì trong một mối quan hệ?", "Điều gì hay cản trở tôi trong tình cảm?"] },
   { nhom: "Cuộc sống", cau: ["Bài học lớn của đời tôi là gì?", "Giai đoạn này tôi nên tập trung điều gì?"] },
 ];
@@ -191,24 +192,32 @@ export function ThanSo() {
       <header>
         <p className="eyebrow">{c("ket_qua.nhan_tren")}</p>
         <h1 className="mt-2 text-4xl sm:text-5xl" data-testid="ten-chinh">{kq.ten_chinh}</h1>
-        <p className="mt-2 text-sm text-fg-muted" data-testid="ngay-sinh">Sinh {kq.ngay_sinh} · {kq.tom_tat_do_tin}</p>
+        <p className="mt-2 text-sm text-fg-muted" data-testid="ngay-sinh">Sinh {kq.ngay_sinh}</p>
+        {kq.tom_tat_do_tin && <p className="mt-1 text-sm text-moon" data-testid="ten-lech">{kq.tom_tat_do_tin}</p>}
       </header>
       {dauCms.khoiTren}
 
-      <KhungPhai testId="truong-phai-than-so" moTa={<>Hai phái tính khác nhau từ cùng họ tên và ngày sinh. Pitago (mặc định) dùng bảng chữ 1–9 theo thứ tự ABC, có biểu đồ ngày sinh, đỉnh cao, năm cá nhân. Chaldea dùng bảng chữ 1–8 theo âm, đọc số kép 10–52 và coi trọng tên thường gọi. Tổng hợp cho thấy điều các phái cùng chỉ ra.</>}>
+      {/* Người mới không cần chọn phái trước khi đọc: khung thu gọn thành một dòng, bấm "Đổi cách xem" mới mở. */}
+      <KhungPhai testId="truong-phai-than-so"
+        tomTat={<span data-testid="dang-xem">Đang xem theo <b className="text-fg">{TEN_PHAI[phai]}</b>
+          {phai !== "chaldea" && <> · số đường đời <b className="text-fg">{quyUoc === "tung_phan" ? "rút gọn con số" : "cộng hết chữ số"}</b></>}
+          {phai !== "chaldea" && kq.duong_doi_hai_cach?.lech && (
+            <span className="text-moon"> · cách còn lại ra số {quyUoc === "tung_phan" ? kq.duong_doi_hai_cach.tong_het : kq.duong_doi_hai_cach.tung_phan}</span>
+          )}</span>}
+        moTa={<>Có hai cách đọc tên và ngày sinh. Pitago phổ biến nhất ở Việt Nam. Chaldea đọc tên theo âm và coi trọng tên thường gọi. “Tổng hợp” cho thấy chỗ hai cách cùng chỉ ra.</>}>
         <DongPhai ten="Trường phái" nhan="Chọn trường phái thần số" giaTri={phai} doi={doiPhai}
           luaChon={[["pitago", "Pitago"], ["chaldea", "Chaldea"], ["tong_hop", "Tổng hợp 2 phái"]]}
           goiY={phai === "chaldea"
-            ? (hoSo.ten_khac ? `Số tên gọi lấy theo tên thường gọi “${hoSo.ten_khac}”.` : "Chưa có tên thường gọi trong hồ sơ — số tên gọi lấy tiếng cuối của họ tên.")
-            : phai === "tong_hop" ? "So con số của hai phái: chỗ trùng là nét đáng đối chiếu trước, chỗ khác là hai góc nhìn."
-            : "Phổ biến nhất ở Việt Nam; mọi phần chiều sâu bên dưới theo phái này."} />
+            ? (hoSo.ten_khac ? `Đang dùng tên gọi “${hoSo.ten_khac}”.` : `Đang dùng tên gọi “${hoSo.ho_ten.trim().split(/\s+/).pop()}”. Muốn đổi thì thêm tên thường gọi vào hồ sơ.`)
+            : phai === "tong_hop" ? "Số nào hai cách cùng ra thì đáng để ý trước. Chỗ khác nhau là hai góc nhìn."
+            : "Cách phổ biến nhất ở Việt Nam."} />
         {(phai === "pitago" || phai === "tong_hop") && (
-          <DongPhai ten="Cách tính con số đường đời" nhan="Chọn cách tính con số đường đời" giaTri={quyUoc} doi={doiQuyUoc}
+          <DongPhai ten="Cách tính số đường đời" nhan="Chọn cách tính số đường đời" giaTri={quyUoc} doi={doiQuyUoc}
             luaChon={[["tung_phan", "Rút gọn con số"], ["tong_het", "Cộng hết chữ số"]]}
             noiBat={Boolean(kq.duong_doi_hai_cach?.lech)}
             goiY={<span data-testid="goi-y-duong-doi">{kq.giai_thich_quy_uoc?.[quyUoc]}{kq.duong_doi_hai_cach?.lech
-              ? ` Với ngày sinh của bạn hai cách ra khác nhau: ${kq.duong_doi_hai_cach.tung_phan} (rút gọn con số) và ${kq.duong_doi_hai_cach.tong_het} (cộng hết chữ số) — luận giải đi theo cách bạn chọn.`
-              : " Với ngày sinh của bạn hai cách ra cùng một số."}</span>} />
+              ? ` Ngày sinh của bạn ra hai số khác nhau: ${kq.duong_doi_hai_cach.tung_phan} (rút gọn con số) và ${kq.duong_doi_hai_cach.tong_het} (cộng hết chữ số). Bài đọc đang dùng số ${quyUoc === "tung_phan" ? kq.duong_doi_hai_cach.tung_phan : kq.duong_doi_hai_cach.tong_het}.`
+              : ""}</span>} />
         )}
       </KhungPhai>
 
@@ -318,7 +327,7 @@ export function ThanSo() {
         />
       </section>
 
-      <p className="text-xs text-fg-faint">{kq.trich_nguon_chung} · Tên đã quét: {kq.ten_bien_the_da_quet.join(", ")}</p>
+      <p className="text-xs text-fg-faint">{kq.trich_nguon_chung} · Tên dùng để tính: {kq.ten_bien_the_da_quet.join(", ")}</p>
     </div>
   );
 }

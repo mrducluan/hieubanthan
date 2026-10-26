@@ -9,6 +9,7 @@ const LUAN = { v: 1, ho_ten: "Nguyễn Đức Luân", ngay: 24, thang: 10, nam: 
 test("Qabalah đã bỏ: không còn tab, Cây của hai người, chữ của ngày; route cũ 404", async ({ page, request }) => {
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await expect(page.getByRole("tab", { name: "Tổng hợp 2 phái" })).toBeVisible();
   await expect(page.getByRole("tab", { name: "Qabalah" })).toHaveCount(0);
   for (const duong of ["/api/thanso/kabbalah", "/api/thanso/cay-hai-nguoi", "/api/thanso/bao-cao-ba-phai"]) {
@@ -58,7 +59,7 @@ test("phái nào nói đúng: 2 phái, phiếu thứ 7 → gợi ý Chaldea, dù
   expect(JSON.stringify(bau)).not.toMatch(/Luân|1988|nghề/);
   await expect(phieu.getByRole("link", { name: "Xem bản đồ con số đầy đủ" })).toHaveAttribute("href", "#ban-do-con-so");
   await phieu.getByRole("button", { name: "Dùng Chaldea làm phái chính" }).click();
-  await expect(page.getByRole("tab", { name: "Chaldea" })).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByTestId("dang-xem")).toContainText("Đang xem theo Chaldea");
 });
 
 test("bản đồ con số: Tổng quan hiện ngay sau 4 số cốt lõi; đủ 4 chương khi miễn phí; đổi cách tính → tải lại", async ({ page }) => {
@@ -82,6 +83,7 @@ test("bản đồ con số: Tổng quan hiện ngay sau 4 số cốt lõi; đủ
     return [y("#bon-so"), y("#ban-do-con-so"), y("#chieu-sau")];
   });
   expect(thuTu[0]! < thuTu[1]! && thuTu[1]! < thuTu[2]!).toBeTruthy();
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await page.getByRole("tab", { name: "Cộng hết chữ số" }).click();
   await expect(bc).toContainText("Đường đời 33");
   expect(gui.at(-1)).toMatchObject({ quy_uoc_duong_doi: "tong_het" });
