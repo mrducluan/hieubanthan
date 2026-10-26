@@ -34,6 +34,7 @@ select * from (values
   ('0024 SEC-2 hoàn Sao + mốc ghi chú', to_regprocedure('public.hoan_sao_hoi(uuid,text)') is not null),
   ('0025 Sao viral: số dư theo lô, hoa hồng, chuỗi ngày, tặng chương', to_regclass('public.hoa_hong') is not null),
   ('0026 chống gian lận lời mời', to_regclass('public.gian_lan_co') is not null),
-  ('0027 gói khởi đầu + tặng lần nạp đầu', to_regprocedure('public.nap_dau_thong_tin()') is not null)
+  ('0027 gói khởi đầu + tặng lần nạp đầu', to_regprocedure('public.nap_dau_thong_tin()') is not null),
+  ('0028 hội viên năm',             to_regclass('public.hoi_vien') is not null)
 ) as t(migration, da_chay)
 order by 1;

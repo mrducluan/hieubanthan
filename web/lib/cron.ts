@@ -58,6 +58,18 @@ export async function guiNhacNgay(dv: SupabaseClient): Promise<Record<string, un
   return { ngay, nguoi: hang.length, sang_nay: Boolean(sn), ...dem };
 }
 
+/** SAO-HV (0028): cấp Sao tháng cho mọi hội viên năm đang hiệu lực chưa nhận trong tháng (hàm SQL khoá theo tháng → chạy
+ *  lặp không cộng hai lần; người dùng mở /tai-khoan trước thì cron bỏ qua họ). Chưa chạy 0028 (PGRST202) → null; lỗi khác
+ *  báo Sentry. Service role — chỉ con số, không nội dung. */
+export async function capSaoHoiVien(dv: SupabaseClient): Promise<number | null> {
+  const { data, error } = await dv.rpc("hoi_vien_cap_sao_thang_tat_ca");
+  if (error) {
+    if (error.code !== "PGRST202") baoLoi(new Error("cron_hoi_vien_cap_sao_thang"), { noi: "cron", duong: "/api/cron/hang-ngay" });
+    return null;
+  }
+  return typeof data === "number" ? data : 0;
+}
+
 /** TS-V3 / LG-ĐS / KC-4: xoá thật dữ liệu hết hạn đúng thời hạn ghi trong Chính sách quyền riêng tư — góp ý > 12 tháng,
  *  ký ức > 180 ngày (0016); phiếu kiểm chứng > 24 tháng, bài luận đã lưu > 365 ngày (0017); mốc nhắc > 400 ngày (0018).
  *  Migration nào chưa chạy → mục đó null. */

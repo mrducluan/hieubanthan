@@ -4,6 +4,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { cauHinhPayos } from "@/lib/thanh-toan/payos";
 import type { NapDau } from "@/lib/thanh-toan/nap-dau";
+import { docHoiVien, type HoiVien } from "@/lib/thanh-toan/hoi-vien";
 
 export type Cong = "payos" | "gia";
 
@@ -76,6 +77,21 @@ export async function napDauThongTin(req?: Request): Promise<NapDau | null> {
       phan_tram: typeof d.phan_tram === "number" ? d.phan_tram : 0,
       lan_dau: typeof d.lan_dau === "boolean" ? d.lan_dau : null,
     };
+  } catch {
+    return null;
+  }
+}
+
+/** SAO-HV (0028): công tắc + giá hội viên năm, và (nếu gửi access token) người gọi đang là hội viên không — qua SQL
+ *  hoi_vien_cua_toi (cùng nguồn với tao_don_hoi_vien). Chưa chạy 0028 / lỗi → null (không hứa điều máy chủ chưa làm). */
+export async function hoiVienThongTin(req?: Request): Promise<HoiVien | null> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL, anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !anon) return null;
+  try {
+    const nm = req?.headers.get("authorization") ? await khachNguoiMua(req) : null;
+    const sb = nm?.sb ?? createClient(url, anon, KHONG_LUU);
+    const { data, error } = await sb.rpc("hoi_vien_cua_toi");
+    return error ? null : docHoiVien(data);
   } catch {
     return null;
   }

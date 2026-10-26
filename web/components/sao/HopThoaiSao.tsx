@@ -21,6 +21,7 @@ import { maGioiThieuDaNho, nhanChaoMung, nhanThuongGioiThieu, quenMaGioiThieu } 
 import {
   dongNapDau, goiGoiY, hienNapDau, saoTangLanDau, soBaoCao, thuocTinhNap, type GoiHienThi, type NapDau,
 } from "@/lib/thanh-toan/nap-dau";
+import { docHoiVien, dongHoiVien, hienDongHoiVien, type HoiVien } from "@/lib/thanh-toan/hoi-vien";
 
 type Goi = GoiHienThi;
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
@@ -210,6 +211,7 @@ export function NapNhanh({ can = 0 }: { can?: number }) {
   const [cong, setCong] = useState<string | null>(null);
   const [giaBaoCao, setGiaBaoCao] = useState(0);
   const [napDau, setNapDau] = useState<NapDau | null>(null);
+  const [hoiVien, setHoiVien] = useState<HoiVien | null>(null);   // SAO-HV: dòng "Hoặc hội viên năm" khi công tắc bật
   const [chon, setChon] = useState("");
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
@@ -221,9 +223,9 @@ export function NapNhanh({ can = 0 }: { can?: number }) {
       // Gửi kèm access token (nếu có) để máy chủ trả "tài khoản này đã từng nạp chưa" — chỉ của chính mình.
       const token = await supabase().then((sb) => sb?.auth.getSession()).then((s) => s?.data.session?.access_token).catch(() => undefined);
       const r = await fetch("/api/thanh-toan/goi", token ? { headers: { authorization: `Bearer ${token}` } } : undefined);
-      const d = (await r.json()) as { goi: Goi[]; cong: string | null; gia_bao_cao?: number; nap_dau?: NapDau | null };
+      const d = (await r.json()) as { goi: Goi[]; cong: string | null; gia_bao_cao?: number; nap_dau?: NapDau | null; hoi_vien?: unknown };
       if (huy) return;
-      setDs(d.goi); setCong(d.cong); setGiaBaoCao(d.gia_bao_cao ?? 0); setNapDau(d.nap_dau ?? null);
+      setDs(d.goi); setCong(d.cong); setGiaBaoCao(d.gia_bao_cao ?? 0); setNapDau(d.nap_dau ?? null); setHoiVien(docHoiVien(d.hoi_vien));
       setChon(goiGoiY(d.goi, can)?.ma ?? "");
     })().catch(() => { if (!huy) setDs([]); });
     return () => { huy = true; };
@@ -281,6 +283,10 @@ export function NapNhanh({ can = 0 }: { can?: number }) {
         {g ? `Quét QR nạp ${g.sao} Sao · ${vnd(g.gia_vnd)}` : "Chọn gói"}
       </Button>
       <p className="text-xs text-fg-faint">App ngân hàng / ví bất kỳ có VietQR. Sao vào ví trong vài giây, rồi bạn quay lại đúng trang này. Sao không đổi ra tiền, Sao mua không hết hạn.</p>
+      {hienDongHoiVien(hoiVien) && (
+        <p className="text-sm text-fg-muted" data-testid="dong-hoi-vien">{dongHoiVien(hoiVien)}{" "}
+          <Link href="/hoi-vien" className="text-gold underline">Xem hội viên năm</Link></p>
+      )}
       <p className="text-sm text-fg-muted"><UserPlus className="mr-1.5 inline size-4 align-[-3px] text-gold" aria-hidden />
         Hoặc <Link href="/tai-khoan" className="text-gold underline">mời bạn bè</Link> — mỗi người bạn lưu hồ sơ vào tài khoản, cả hai cùng nhận Sao.</p>
       {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}

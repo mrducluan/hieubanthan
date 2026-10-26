@@ -89,6 +89,20 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Câu miễn phí/ngày — có tài khoản", moTa: "Tính chung mọi mảng. Hết lượt → mỗi câu tốn Sao (người dùng bấm đồng ý từng câu)." },
   { khoa: "sao.hoi.gia", nhom: "Hỏi đáp", loai: "so", min: 1, max: 10, macDinh: 1,
     ten: "Giá mỗi câu vượt lượt (Sao)", moTa: "Chỉ áp dụng khi bật giới hạn hỏi đáp." },
+  // ---- SAO-HV (0028) ----
+  // Hội viên năm: mua MỘT LẦN bằng VND (payOS, không tự gia hạn). SQL đọc cùng khoá (tao_don_hoi_vien, hv_cap_sao_thang_cho,
+  // hoi_vien_cua_toi, hoan_don_nap) — kẹp cùng khoảng. Công tắc mặc định TẮT: trang /hoi-vien vẫn có (noindex) nhưng nút ẩn.
+  { khoa: "sao.hoi_vien.bat", nhom: "Hội viên năm", loai: "bat_tat", macDinh: false,
+    ten: "Bán hội viên năm", moTa: "Bật = trang /hoi-vien có nút mua, máy chủ nhận tạo đơn. Hội viên đang hiệu lực vẫn giữ quyền khi tắt." },
+  { khoa: "sao.hoi_vien.gia_vnd", nhom: "Hội viên năm", loai: "so", min: 100000, max: 50000000, macDinh: 3990000,
+    ten: "Giá hội viên năm (₫)", moTa: "Trả một lần cho 365 ngày; gia hạn (khi còn ≤ 30 ngày) cùng giá, nối tiếp hạn cũ. Đơn đã tạo giữ giá lúc tạo." },
+  { khoa: "sao.hoi_vien.sao_thang", nhom: "Hội viên năm", loai: "so", min: 0, max: 100, macDinh: 15,
+    ten: "Sao tặng mỗi tháng", moTa: "Cấp một lần mỗi tháng (lần đầu mở trang trong tháng hoặc cron sáng), hết hạn ngày cuối tháng — KHÔNG cộng dồn. 0 = tạm dừng." },
+  { khoa: "sao.hoi_vien.cau_hoi_nam", nhom: "Hội viên năm", loai: "so", min: 0, max: 12, macDinh: 2,
+    ten: "Câu hỏi chuyên gia mỗi năm", moTa: "Lượt hỏi chuyên gia kèm hội viên (mảng Hỏi chuyên gia trừ qua hoi_vien_dung_cau_hoi). Gia hạn → lượt về 0 cho năm mới." },
+  // SAO-HV + SAO-CG dùng chung: giá lẻ một câu hỏi chuyên gia — hoàn tiền hội viên trừ theo giá này cho câu đã dùng.
+  { khoa: "sao.chuyen_gia.gia_vnd", nhom: "Hỏi chuyên gia", loai: "so", min: 20000, max: 5000000, macDinh: 199000,
+    ten: "Giá một câu hỏi chuyên gia (₫)", moTa: "Giá lẻ (mảng Hỏi chuyên gia). Hội viên xin hoàn tiền sau 14 ngày: mỗi câu đã dùng trừ đúng giá này." },
 ];
 
 export const caiDat = (khoa: string) => CAI_DAT.find((c) => c.khoa === khoa);

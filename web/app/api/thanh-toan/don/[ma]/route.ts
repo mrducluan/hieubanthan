@@ -9,7 +9,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ ma: stri
   if (!/^\d{1,15}$/.test(ma)) return NextResponse.json({ error: "Mã đơn không hợp lệ" }, { status: 422 });
   const nm = await khachNguoiMua(req);
   if (!nm) return NextResponse.json({ error: "Hãy đăng nhập.", can: "dang_nhap" }, { status: 401 });
-  const doc = () => nm.sb.from("don_nap").select("ma_don,goi,so_tien,sao,cong,trang_thai,tao_luc,het_han,tra_luc")
+  const doc = () => nm.sb.from("don_nap").select("ma_don,goi,so_tien,sao,cong,trang_thai,tao_luc,het_han,tra_luc,loai")
     .eq("ma_don", Number(ma)).maybeSingle();
   let { data } = await doc();
   if (!data) return NextResponse.json({ error: "Không thấy đơn." }, { status: 404 });

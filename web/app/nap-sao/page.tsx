@@ -6,7 +6,8 @@ import { KhoiCms } from "@/components/cms/KhoiCms";
 import { lopKieuChu } from "@/lib/kieu-chu";
 import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
 import { layCauHinh } from "@/lib/cau-hinh";
-import { congDangBat, dsGoiSao, napDauThongTin } from "@/lib/thanh-toan/cong";
+import { congDangBat, dsGoiSao, hoiVienThongTin, napDauThongTin } from "@/lib/thanh-toan/cong";
+import { dongHoiVien, hienDongHoiVien } from "@/lib/thanh-toan/hoi-vien";
 import { NapSao } from "./NapSao";
 
 const DUONG = "/nap-sao";
@@ -16,8 +17,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [goi, napDau, giaBaoCao, nd] = await Promise.all([
+  const [goi, napDau, giaBaoCao, nd, hoiVien] = await Promise.all([
     dsGoiSao(), napDauThongTin(), layCauHinh<number>("luan_giai.gia_sao").catch(() => 10), layNoiDungTrang(DUONG),
+    hoiVienThongTin(),
   ]);
   const cong = congDangBat();
   return (
@@ -32,6 +34,11 @@ export default async function Page() {
       </p>
       <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
       <NapSao goi={goi} cong={cong} giaBaoCao={giaBaoCao} napDau={napDau} />
+      {cong && hienDongHoiVien(hoiVien) && (
+        <p className="mt-4 text-sm text-fg-muted" data-testid="dong-hoi-vien">
+          {dongHoiVien(hoiVien)} <Link href="/hoi-vien" className="text-gold hover:underline">Xem hội viên năm</Link>
+        </p>
+      )}
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-10" />
       <section className="mt-10 space-y-2 text-sm leading-relaxed text-fg-muted" aria-label="Điều cần biết">
         <h2 className="font-serif text-xl text-fg">Điều cần biết</h2>

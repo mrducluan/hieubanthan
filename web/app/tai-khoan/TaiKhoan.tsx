@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { ViSao } from "@/components/tai-khoan/ViSao";
+import { TheHoiVien } from "@/components/tai-khoan/TheHoiVien";
 import { BatNhacPush } from "@/components/khung/BatNhacPush";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
@@ -150,6 +151,13 @@ export function TaiKhoan() {
         )}
         {bao && <p role="status" className={`mt-3 text-sm ${bao.loai === "ok" ? "text-jade" : "text-cinnabar"}`}>{bao.noi}</p>}
       </section>
+
+      {user && tk !== undefined && (
+        <section aria-labelledby="hoi-vien">
+          <TieuDeMuc id="hoi-vien" nho="Hội viên" lon="Hội viên năm" />
+          <TheHoiVien />
+        </section>
+      )}
 
       {user && tk !== undefined && (
         <section aria-labelledby="sao">

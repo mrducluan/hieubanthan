@@ -33,7 +33,9 @@ export type SuKien =
   // CTA-1: trò "Đoán số" trên thẻ Bản đồ 5 mảng — đúng/sai + mã biến thể câu mời
   | "guess_played"
   // SAO-V "Tặng một chương": tạo link quà / mở trang nhận quà / bấm nhận — chỉ mã mảng + cờ còn dùng + kết quả, KHÔNG mã quà
-  | "gift_sent" | "gift_opened" | "gift_claimed";
+  | "gift_sent" | "gift_opened" | "gift_claimed"
+  // SAO-HV: hội viên năm kích hoạt (trang kết quả, mỗi đơn một lần) — chỉ kind, không số tiền; checkout_started{kind: hoi_vien}
+  | "membership_activated";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
