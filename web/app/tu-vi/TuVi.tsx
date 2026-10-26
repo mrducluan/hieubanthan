@@ -4,7 +4,7 @@
 import { useChu } from "@/components/cms/DauCms";
 import { useChuChung } from "@/components/cms/ChuChung";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { CalendarClock, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, Moon, Orbit, ScrollText, Waypoints } from "lucide-react";
 import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
@@ -233,20 +233,20 @@ export function TuVi() {
               </TabsList>
             </Tabs>
           }
-          gui={(cau) => hoiMang<HoiMangRes & {
+          gui={(cau) => { let sauTraLoi: ReactNode = null; return hoiMang<HoiMangRes & {
             phan_loai?: { cung?: string[]; xu_ly?: string }; goi_y_vec?: GoiYVec | null; co_the_goi_y?: boolean; nhan_ra_y_dinh?: boolean;
           }>(
             "/api/tuvi/hoi",
             { cau_hoi: cau, che_do: cheDo, ...(laSo ? { la_so: laSo } : {}) },
             (d) => {
-              const cung = d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null;
               // LG-ĐS: có câu gần nghĩa trong kho → hỏi lại "đúng ý bạn chứ?"; không có → cho chọn 1 trong 8 chủ đề.
-              const hoc = d.goi_y_vec?.y_dinh ? <XacNhanYDinh cau={cau} goi={d.goi_y_vec} />
+              // v3 M1: phần hỏi lại này đi SAU câu trả lời (đọc trước, xác nhận sau); "Cung xem" vẫn ở trên.
+              sauTraLoi = d.goi_y_vec?.y_dinh ? <XacNhanYDinh cau={cau} goi={d.goi_y_vec} />
                 : d.co_the_goi_y && !d.nhan_ra_y_dinh && !["an_toan", "tu_choi_nhe"].includes(d.phan_loai?.xu_ly ?? "")
                   ? <ChonYDinh cau={cau} /> : null;
-              return cung || hoc ? <>{cung}{hoc}</> : null;
+              return d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null;
             },
-          )}
+          ).then((kq) => (sauTraLoi ? { ...kq, sau: sauTraLoi } : kq)); }}
         />
       </section>
     </div>

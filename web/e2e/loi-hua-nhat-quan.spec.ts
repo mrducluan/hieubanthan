@@ -68,6 +68,12 @@ test("Hôm nay: máy không có Web Share và không cho chép → vẫn có ph�
   const chep = page.getByTestId("chep-tay");
   await expect(chep).toContainText("Máy chưa cho chép tự động");
   await expect(chep.getByRole("textbox", { name: "Link chia sẻ" })).toHaveValue(/\/hom-nay\?tu=hn\.[a-f0-9]{10}/);
+  // Vòng thử v3 M8: ô hiện từ ĐẦU link (thấy tên miền), chọn sẵn cả link; có nút "Chép" cạnh ô.
+  const o = await chep.getByTestId("chep-tay-o").evaluate((e: HTMLInputElement) => ({ trai: e.scrollLeft, dau: e.selectionStart, cuoi: e.selectionEnd, dai: e.value.length }));
+  expect(o).toEqual({ trai: 0, dau: 0, cuoi: o.dai, dai: o.dai });
+  await expect(chep.getByTestId("chep-tay-nut")).toHaveText(/Chép/);
+  await chep.getByTestId("chep-tay-nut").click();
+  await expect(chep).toContainText(/Đã chép|nhấn giữ vào ô/);
 });
 
 test("Tài khoản → Dữ liệu của tôi: cookie 'Đang bật (bạn chưa chọn) · Tắt' → bấm Tắt thành 'Đang tắt'; nút có viền, cao ≥ 44px; câu 'trừ cookie thống kê'", async ({ page }) => {

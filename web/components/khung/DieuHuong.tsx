@@ -120,7 +120,7 @@ export function ThanhTren({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
   const path = usePathname();
   const sang = mucDangO(path, muc);
   return (
-    <header className="vach-sang sticky top-0 z-40 border-b border-line/50 bg-bg/70 backdrop-blur-lg">
+    <header data-thanh-dau className="vach-sang sticky top-0 z-40 border-b border-line/50 bg-bg/70 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="group flex min-h-11 items-center gap-2.5" aria-label="Hiểu Bản Thân — trang chủ">
           <Logo className="size-7 transition-transform duration-700 group-hover:rotate-90" />
@@ -157,6 +157,7 @@ export function TabDuoi({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
   if (!tab.length) return null;
   return (
     <nav
+      data-thanh-duoi
       className="fixed inset-x-0 bottom-0 z-40 border-t border-line/60 bg-bg/85 backdrop-blur-lg md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       aria-label="Điều hướng chính"

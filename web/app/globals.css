@@ -168,7 +168,9 @@
     content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; pointer-events: none;
     background: linear-gradient(90deg, transparent, rgb(var(--gold) / 0.35) 30%, rgb(var(--moon) / 0.35) 70%, transparent);
   }
-  .eyebrow { @apply text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-fg-faint; }
+  /* Vòng thử v3 #24: nhãn đầu mục chữ HOA ≥ 12px và màu fg-muted (~9:1 trên nền tối; fg-faint chỉ ~5:1 trên thẻ kính) —
+     giãn chữ bớt một chút để nhãn dài không xuống dòng thêm trên điện thoại. */
+  .eyebrow { @apply text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-fg-muted; }
   .text-gradient-gold {
     background: linear-gradient(180deg, rgb(255 236 190), rgb(var(--gold)) 55%, rgb(190 140 50));
     -webkit-background-clip: text; background-clip: text; color: transparent;

@@ -80,9 +80,10 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
     loi: d.cau_tra_loi ? undefined : d.error ?? "Chưa trả lời được lúc này, thử lại sau.",
     phu: canNguoiKia ? (
       <Button asChild variant="secondary" size="sm"><Link href="/hop-doi"><HeartHandshake aria-hidden /> Nhập ngày sinh người ấy ở mục Hợp đôi</Link></Button>
-    ) : (tiep.length || gopY) ? (
-      <div className="space-y-3">
-        {gopY}
+    ) : undefined,
+    // v3 M1: đọc xong câu trả lời → "Hỏi tiếp" → góp ý "Đúng / Chưa đúng" → "Phái nào nói đúng về bạn?".
+    sau: (tiep.length || gopY) ? (
+      <>
         {tiep.length > 0 && (
           <div data-testid="hoi-tiep">
             <p className="text-xs text-fg-muted">Hỏi tiếp</p>
@@ -93,7 +94,8 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
             </div>
           </div>
         )}
-      </div>
+        {gopY}
+      </>
     ) : undefined,
     ghiLuot: ghiLuot(d.luot),
     ghiChu: d.cau_tra_loi ? (d.che_do === "llm" ? "Diễn đạt tự động từ kho tri thức có nguồn." : "Ghép trực tiếp từ kho tri thức có nguồn.") : undefined,

@@ -9,7 +9,7 @@ export function DiemMuLuot({ nhan, cau, className, co = CO_THUONG }: { nhan: str
   return (
     <div className={className} data-testid="diem-mu-luot">
       <div className="flex items-start gap-3">
-        <span className="mt-0.5 shrink-0 rounded-full border border-cinnabar/40 bg-cinnabar/10 px-2.5 py-0.5 text-[0.7rem] font-semibold uppercase tracking-wider text-cinnabar">
+        <span className="mt-0.5 shrink-0 rounded-full border border-cinnabar/40 bg-cinnabar/10 px-2.5 py-0.5 text-[0.75rem] font-semibold uppercase tracking-wider text-cinnabar">
           {nhan}
         </span>
         <ul className={`diem-mu-luot relative flex-1 ${co.khung}`} aria-label="Ví dụ điểm mù theo con số">
