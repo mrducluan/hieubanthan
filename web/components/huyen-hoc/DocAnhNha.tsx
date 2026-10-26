@@ -117,7 +117,7 @@ export function DocAnhNha({ cauHoi, tenPhong, loaiNha, yDinh, anhGoiY, dau, daTr
 
       <label className="mt-3 flex items-start gap-2 text-xs text-fg-muted">
         <input type="checkbox" className="mt-0.5 size-4 shrink-0 accent-[rgb(var(--gold))]" checked={dongY} onChange={(e) => setDongY(e.target.checked)} data-testid="doc-anh-dong-y" />
-        <span>Tôi đồng ý gửi ảnh này tới dịch vụ AI bên thứ ba để nhận diện dấu hiệu. Ảnh không được lưu — chỉ đi qua lượt gọi, kết quả bạn tự xác nhận.{" "}
+        <span>Tôi đồng ý gửi ảnh này tới dịch vụ AI bên thứ ba để nhận diện dấu hiệu. Ảnh không được lưu — chỉ đi qua lượt gọi, kết quả bạn tự xác nhận. Bỏ tích là không gửi.{" "}
           <Link href="/chinh-sach-rieng-tu#ben-thu-ba" className="text-gold underline">Chính sách quyền riêng tư</Link></span>
       </label>
       <div className="mt-2 flex flex-wrap items-center gap-3">

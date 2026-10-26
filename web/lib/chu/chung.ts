@@ -21,6 +21,13 @@ export const CHU_CHUNG = {
   "ho_so.gio_sinh": { nhom: HS, nhan: "Nhãn ô giờ sinh", mac_dinh: "Giờ sinh", toi_da: 30 },
   "ho_so.gioi_tinh": { nhom: HS, nhan: "Nhãn ô giới tính", mac_dinh: "Giới tính", toi_da: 30 },
   "ho_so.noi_sinh": { nhom: HS, nhan: "Nhãn ô nơi sinh", mac_dinh: "Nơi sinh", toi_da: 30 },
+  // ĐY-1: khối đồng ý xử lý dữ liệu (lần đầu). Câu mô tả CÁCH xử lý (không lưu, máy chủ Singapore) giữ trong code —
+  // là lời hứa về hệ thống, đổi bằng PR cùng Chính sách quyền riêng tư; ở đây chỉ tiêu đề, nhãn nút và dòng trạng thái.
+  "ho_so.dong_y_tieu_de": { nhom: HS, nhan: "Tiêu đề khối đồng ý (lần đầu)", mac_dinh: "Trước khi xem", toi_da: 40 },
+  "ho_so.nut_dong_y": { nhom: HS, nhan: "Nút gửi khi chưa đồng ý xử lý dữ liệu", mac_dinh: "Đồng ý và xem kết quả", toi_da: 40 },
+  "ho_so.da_dong_y": { nhom: HS, nhan: "Dòng trạng thái khi đã đồng ý", mac_dinh: "Bạn đã đồng ý xử lý dữ liệu", toi_da: 60 },
+  "ho_so.thu_hoi": { nhom: HS, nhan: "Nút thu hồi đồng ý (xoá đồng ý + hồ sơ trên máy)", mac_dinh: "Thu hồi", toi_da: 30 },
+  "ho_so.chinh_sach": { nhom: HS, nhan: "Chữ link tới Chính sách quyền riêng tư", mac_dinh: "Chính sách quyền riêng tư", toi_da: 40 },
 
   "cua_vao.tieu_de": { nhom: CV, nhan: "Tiêu đề ô nhập (chưa có hồ sơ)", mac_dinh: "Bắt đầu — chỉ cần 2 thông tin", toi_da: 80 },
   "cua_vao.chao_lai": { nhom: CV, nhan: "Dòng nhỏ khi đã có hồ sơ", mac_dinh: "Chào lại", toi_da: 30 },

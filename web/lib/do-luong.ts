@@ -37,7 +37,9 @@ export type SuKien =
   | "gift_sent" | "gift_opened" | "gift_claimed"
   // SAO-HH (0030): ngày nghỉ chuỗi đã dùng · huy hiệu vừa đạt (chỉ mã) · lật lá bài đầu ngày (không nội dung) ·
   // "Hẹn với chính mình" đặt / đạt (ngay = số ngày mục tiêu 7 / 30, không phải ngày tháng)
-  | "streak_freeze_used" | "badge_earned" | "daily_card_flipped" | "self_goal_set" | "self_goal_reached";
+  | "streak_freeze_used" | "badge_earned" | "daily_card_flipped" | "self_goal_set" | "self_goal_reached"
+  // ĐY-1: đồng ý / thu hồi đồng ý xử lý dữ liệu trên form hồ sơ — chỉ mã bản đồng ý (phien_ban), không gì khác
+  | "consent_given" | "consent_withdrawn";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
@@ -99,6 +101,7 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   goi: "string",        // SAO-ND: checkout_started — mã gói (khoi_dau / thu / pho_bien / gia_dinh), không số tiền
   lan_dau: "number",    // SAO-ND: checkout_started — 1 = tài khoản chưa từng nạp, 0 = đã nạp (khách: không gửi)
   ngay: "number",       // SAO-HH: self_goal_set / self_goal_reached — số ngày mục tiêu (7 / 30), KHÔNG phải ngày tháng
+  phien_ban: "string",  // ĐY-1: mã bản đồng ý xử lý dữ liệu (lib/dong-y-du-lieu PHIEN_BAN_DONG_Y, vd "dl1") — không ngày giờ
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */

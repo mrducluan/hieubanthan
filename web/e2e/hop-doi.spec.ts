@@ -61,7 +61,7 @@ test("link mời: A tạo → B mở, nhập ngày sinh → thấy kết quả; 
   await b.getByLabel("Ngày", { exact: true }).fill("13");
   await b.getByLabel("Tháng", { exact: true }).fill("5");
   await b.getByLabel("Năm", { exact: true }).fill("1990");
-  await b.getByRole("button", { name: "Xem hai người" }).click();
+  await b.getByRole("button", { name: "Đồng ý và xem kết quả" }).click();   // ĐY-1: B chưa đồng ý → nút đồng ý thay "Xem hai người"
   await expect(b.getByTestId("ket-qua-hop-doi").getByTestId("cap-duong_doi")).toContainText("Điểm hoà.");
   // HN-2: B gửi lại link cho A → A mở là thấy cùng kết quả hai người (vòng khép kín).
   await expect(b.getByTestId("gui-lai-loi-moi")).toContainText("Gửi kết quả lại cho Luân");

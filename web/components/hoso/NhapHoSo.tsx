@@ -1,7 +1,8 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
-import { ArrowRight, ChevronDown, Lock } from "lucide-react";
+import { ArrowRight, ChevronDown, Lock, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,6 +10,7 @@ import { GIO_DAI_DIEN_KHONG_BIET, luuHoSo, moTaAm, ngayHopLe, NUOC_NGOAI, type H
 import { postJson } from "@/lib/goi-api";
 import { useDanhSachTinh } from "@/lib/dia-ly";
 import { ghi, layMaMoi, quenMaMoi } from "@/lib/do-luong";
+import { ghiDongY, thuHoiDongY, useDongYDuLieu } from "@/lib/dong-y-du-lieu";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -37,8 +39,13 @@ interface KetQuaDoi {
 
 // Nhập MỘT LẦN, dùng mọi mảng (docs/THIET-KE-UI.md §4.3). Chỉ tên + ngày sinh bắt buộc; phần còn lại
 // hỏi đúng lúc mảng cần (can). Ngày âm do engine đổi — web không tự đổi lịch.
+// ĐY-1: chưa có đồng ý xử lý dữ liệu (lib/dong-y-du-lieu) → khối đồng ý ngắn ngay trên nút, nút thành "Đồng ý và xem kết
+// quả", và KHÔNG gửi gì lên máy chủ (kể cả xem trước đổi lịch) cho tới khi người dùng bấm. Đã đồng ý → nút như cũ + dòng
+// "Bạn đã đồng ý · Thu hồi" (thu hồi = xoá đồng ý + hồ sơ trên máy). Không modal che trang, không ô tích sẵn.
 export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const c = useChuChung();
+  const dongY = useDongYDuLieu();
+  const coDongY = Boolean(dongY);
   const nhapAm = macDinh?.lich_nhap === "am" && macDinh.am;
   const [ten, setTen] = useState(macDinh?.ho_ten ?? "");
   const [lich, setLich] = useState<"duong" | "am">(nhapAm ? "am" : "duong");
@@ -74,10 +81,10 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
     : null;
   const khoaDoi = yeuCauDoi ? JSON.stringify(yeuCauDoi) : null;
 
-  // Xem trước lịch bên kia để người dùng đối chiếu giấy tờ (âm ↔ dương).
+  // Xem trước lịch bên kia để người dùng đối chiếu giấy tờ (âm ↔ dương) — chỉ sau khi đã đồng ý gửi ngày sinh đi tính.
   useEffect(() => {
     setDoi(null); setLoiDoi(null);
-    if (!khoaDoi) return;
+    if (!khoaDoi || !coDongY) return;
     let huy = false;
     const t = setTimeout(() => {
       postJson<KetQuaDoi>("/api/lich/doi", JSON.parse(khoaDoi))
@@ -85,7 +92,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
         .catch((e: unknown) => { if (!huy) setLoiDoi(e instanceof Error ? e.message : "Chưa đổi được lịch."); });
     }, 300);
     return () => { huy = true; clearTimeout(t); };
-  }, [khoaDoi]);
+  }, [khoaDoi, coDongY]);
 
   const duong = lich === "duong" ? (coTheDoi ? { ngay: d, thang: m, nam: y } : null) : doi?.duong ?? null;
   const isoDuong = duong ? `${duong.nam}-${String(duong.thang).padStart(2, "0")}-${String(duong.ngay).padStart(2, "0")}` : null;
@@ -102,6 +109,8 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
     if (can === "gioi_tinh" && !gioiTinh) return setLoi("Mảng này cần giới tính.");
     if (can === "day_du" && canVung && !vung) return setLoi("Sinh ở Quảng Trị trước 13/6/1975: chọn bờ Bắc hay Nam sông Bến Hải.");
     setLoi(null);
+    // Bấm "Đồng ý và xem kết quả" = đồng ý rõ ràng cho mục đích tính tại chỗ; ghi TRƯỚC lượt gửi đầu tiên.
+    if (!coDongY) ghiDongY();
     setDang(true);
     let kq = doi;
     try {
@@ -136,6 +145,14 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
       if (ma) { ghi("referral_signup", { ma_moi: ma }); quenMaMoi(); }
     }
     onXong(h);
+  }
+
+  // Thu hồi đồng ý: xoá đồng ý + hồ sơ trên máy, form về trạng thái đầu (ô trống, chưa hỏi phần thêm).
+  function thuHoi() {
+    thuHoiDongY();
+    setTen(""); setNgay(""); setThang(""); setNam(""); setNhuan(false); setLich("duong"); setLichAm("viet");
+    setTenKhac(""); setGio(""); setDoTin("exact"); setGioiTinh(""); setNoiSinh(""); setGioMuaHe(false); setVung("");
+    setMoThem(Boolean(can)); setDoi(null); setLoiDoi(null); setLoi(null);
   }
 
   const chiSo = (v: string, max: number) => v.replace(/\D/g, "").slice(0, max);
@@ -297,11 +314,29 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
 
       {loi && <p role="alert" className="rounded-xl bg-cinnabar/10 px-4 py-3 text-sm text-cinnabar">{loi}</p>}
 
+      {!coDongY && (
+        <div className="flex gap-2.5 rounded-xl border border-gold/30 bg-gold/[0.05] p-3 text-xs leading-relaxed text-fg-muted" data-testid="dong-y-du-lieu">
+          <ShieldCheck className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
+          <p>
+            <b className="text-fg">{c("ho_so.dong_y_tieu_de")}:</b> ngày giờ sinh chỉ dùng để tính tại chỗ cho bạn, <b className="text-fg">không lưu</b> khi
+            bạn chưa đăng nhập; được gửi tới máy chủ tính toán của chúng tôi (Singapore) rồi bỏ ngay sau khi trả kết quả. Bấm nút
+            bên dưới là bạn đồng ý — rút lại được bất cứ lúc nào tại đây hoặc ở mục Tài khoản.{" "}
+            <Link href="/chinh-sach-rieng-tu#dong-y" className="text-gold underline">{c("ho_so.chinh_sach")}</Link>
+          </p>
+        </div>
+      )}
+
       <Button type="submit" size="lg" className="w-full" disabled={dang}>
-        {nutGui ?? c("ho_so.nut_xem")} <ArrowRight aria-hidden />
+        {coDongY ? (nutGui ?? c("ho_so.nut_xem")) : c("ho_so.nut_dong_y")} <ArrowRight aria-hidden />
       </Button>
-      <p className="flex items-center justify-center gap-1.5 text-xs text-fg-faint">
+      <p className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-xs text-fg-faint">
         <Lock className="size-3.5" aria-hidden /> Lưu trên máy của bạn · không cần tài khoản
+        {coDongY && (
+          <span data-testid="da-dong-y">
+            · {c("ho_so.da_dong_y")} ·{" "}
+            <button type="button" onClick={thuHoi} className="vung-cham underline underline-offset-2 hover:text-fg">{c("ho_so.thu_hoi")}</button>
+          </span>
+        )}
       </p>
     </form>
   );

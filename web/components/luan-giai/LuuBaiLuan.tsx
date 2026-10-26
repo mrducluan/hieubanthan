@@ -98,7 +98,8 @@ export function LuuBaiLuan({ moDun, tieuDe, noiDung, dangNhap }: {
           Tự lưu các bài luận sau
         </label>
       </div>
-      <p className="mt-1.5 text-xs text-fg-faint">Bài lưu 12 tháng, chỉ bạn xem được, xoá được bất cứ lúc nào.</p>
+      <p className="mt-1.5 text-xs text-fg-faint">Bài lưu 12 tháng, chỉ bạn xem được, xoá được bất cứ lúc nào; “Tự lưu” không tích sẵn, bỏ tích là thôi.{" "}
+        <Link href="/chinh-sach-rieng-tu#dong-y" className="text-gold hover:underline">Chính sách quyền riêng tư</Link></p>
       {loi && <p role="alert" className="mt-1 text-xs text-fg">{loi}</p>}
     </div>
   );

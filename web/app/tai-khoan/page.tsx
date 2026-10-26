@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { vanHanh } from "@/lib/van-hanh";
 import { TaiKhoan } from "./TaiKhoan";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -7,5 +8,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Page() {
-  return <TaiKhoan />;
+  // ĐY-1: hộp thư nhận yêu cầu bản sao dữ liệu đọc từ env ở máy chủ (lib/van-hanh), truyền xuống khối "Dữ liệu của tôi".
+  return <TaiKhoan emailDuLieu={vanHanh().emailDuLieu} />;
 }

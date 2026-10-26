@@ -101,7 +101,8 @@ export function BatNhacPush({ className }: { className?: string }) {
             className="inline-flex items-center gap-1.5 rounded-full border border-gold/60 px-3 py-1 text-gold hover:bg-gold/10 disabled:opacity-60">
             <BellRing className="size-4" aria-hidden /> {ban ? "Đang bật…" : "Bật nhắc trên điện thoại"}</button>
           <p className="text-xs text-fg-faint">8 giờ sáng ngày có mốc bạn đã đánh dấu, tối đa một thông báo mỗi ngày. Mốc sắp tới được lưu
-            vào tài khoản để máy chủ biết ngày gửi; tắt hoặc xoá lúc nào cũng được. Không gửi quảng cáo.</p>
+            vào tài khoản để máy chủ biết ngày gửi; tắt hoặc xoá lúc nào cũng được (rút lại = bấm Tắt). Không gửi quảng cáo.{" "}
+            <Link href="/chinh-sach-rieng-tu#dong-y" className="text-gold hover:underline">Chính sách quyền riêng tư</Link></p>
         </>
       )}
       {bao && <p className="text-xs text-fg-muted" role="status">{bao}</p>}
@@ -136,7 +137,8 @@ function TuyChonNhan({ userId }: { userId: string }) {
   };
   return (
     <fieldset className="space-y-1.5 border-t border-line/60 pt-2" data-testid="push-tuy-chon">
-      <legend className="text-xs text-fg-faint">Nhận thêm vào thông báo buổi sáng (tự chọn, vẫn tối đa một thông báo mỗi ngày)</legend>
+      <legend className="text-xs text-fg-faint">Nhận thêm vào thông báo buổi sáng (tự chọn, không tích sẵn, bỏ tích là thôi; vẫn tối đa một thông báo mỗi ngày).{" "}
+        <Link href="/chinh-sach-rieng-tu#dong-y" className="text-gold hover:underline">Chính sách quyền riêng tư</Link></legend>
       <label className="flex items-start gap-2">
         <input type="checkbox" className="mt-1" checked={tc.sang_nay} onChange={(e) => doi({ ...tc, sang_nay: e.target.checked })} />
         <span><b>Sáng nay của bạn</b> — Ngày cá nhân và một câu tự soi cho hôm nay.

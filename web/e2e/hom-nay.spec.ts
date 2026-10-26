@@ -14,7 +14,9 @@ test("chưa có hồ sơ: H1 trong HTML máy chủ + mời nhập hồ sơ", asy
   const html = await (await request.get("/hom-nay")).text();
   expect(html).toMatch(/<h1[^>]*>Hôm nay của bạn<\/h1>/);
   await page.goto("/hom-nay");
-  await expect(page.getByRole("button", { name: "Xem hôm nay của tôi" })).toBeVisible();
+  // ĐY-1: máy chưa đồng ý xử lý dữ liệu → nút form là "Đồng ý và xem kết quả" (nhãn riêng "Xem hôm nay của tôi" hiện sau khi đã đồng ý).
+  await expect(page.getByRole("button", { name: "Đồng ý và xem kết quả" })).toBeVisible();
+  await expect(page.getByTestId("dong-y-du-lieu")).toBeVisible();
 });
 
 test("có hồ sơ: thẻ khớp số engine, có câu tự soi, ngày mai, chuỗi ngày", async ({ page, request }) => {
