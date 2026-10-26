@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
+import { DuLieuCuaToi } from "@/components/tai-khoan/DuLieuCuaToi";
 import { ViSao } from "@/components/tai-khoan/ViSao";
 import { BatNhacPush } from "@/components/khung/BatNhacPush";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
@@ -28,7 +29,7 @@ function giongNhau(a: HoSo, b: NonNullable<HoSoTK>): boolean {
     (a.noi_sinh ?? null) === (b.noi_sinh ?? null) && Boolean(a.gio_mua_he) === Boolean(b.gio_mua_he);
 }
 
-export function TaiKhoan() {
+export function TaiKhoan({ emailDuLieu = null }: { emailDuLieu?: string | null }) {
   const hoSo = useHoSo();
   const user = useNguoiDung();
   const [tk, setTk] = useState<HoSoTK | undefined>(undefined);
@@ -158,11 +159,17 @@ export function TaiKhoan() {
         </section>
       )}
 
+      {/* ĐY-1: mọi đồng ý đã cho (trên máy + tài khoản), mỗi dòng rút / xoá được ngay; bản sao dữ liệu qua email. */}
+      <section aria-labelledby="du-lieu-cua-toi">
+        <TieuDeMuc id="du-lieu-cua-toi" nho="Dữ liệu của tôi" lon="Những gì bạn đã đồng ý — rút lại bất cứ lúc nào" />
+        <DuLieuCuaToi emailDuLieu={emailDuLieu} />
+      </section>
+
       <section aria-labelledby="rieng-tu">
         <TieuDeMuc id="rieng-tu" nho="Quyền riêng tư" lon="Chúng tôi giữ gì, không giữ gì" />
         <ul className="space-y-2 text-sm text-fg-muted">
           {[
-            "Mặc định mọi thứ nằm trên máy của bạn. Ngày sinh chỉ gửi đi lúc tính toán, không lưu lại.",
+            "Mặc định mọi thứ nằm trên máy của bạn. Ngày sinh chỉ gửi đi lúc tính toán (sau khi bạn bấm đồng ý ở form hồ sơ), không lưu lại.",
             "Chỉ khi bạn bấm “Lưu vào tài khoản” và đồng ý, hồ sơ mới được lưu — chỉ bạn đọc được.",
             "Không lưu nội dung bài đọc hay câu hỏi gắn với bạn. Nhật ký cải thiện hệ thống là ẩn danh, đã lọc năm/ngày/số điện thoại.",
             "Link chia sẻ chỉ mang tên hiển thị và các con số — không có ngày sinh. Link mời có thêm mã mời ngẫu nhiên (không lộ tài khoản) để cộng Sao.",

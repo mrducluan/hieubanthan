@@ -1,6 +1,7 @@
 "use client";
 // KC-2 — nút "Lưu nhà vào tài khoản" (chỉ người đã đăng nhập; đồng ý rõ ràng mỗi lần bấm) + "Tải nhà từ tài khoản".
 // Dữ liệu: hướng, năm xây, người cùng ở (năm sinh + giới tính), bố cục — không tên, không luận giải.
+import Link from "next/link";
 import { useState } from "react";
 import { CloudDownload, CloudUpload } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,7 +26,8 @@ export function LuuNhaTaiKhoan() {
     <div className="rounded-xl border border-line/70 p-4 text-sm" data-testid="luu-nha-tai-khoan">
       <label className="flex cursor-pointer items-start gap-2 text-fg-muted">
         <input type="checkbox" className="mt-1 size-4 accent-[rgb(var(--gold))]" checked={dongY} onChange={(e) => setDongY(e.target.checked)} />
-        <span>Tôi đồng ý lưu <b>hướng nhà, năm xây, năm sinh và giới tính người cùng ở, bố cục đã khai</b> vào tài khoản để dùng trên máy khác. Không lưu tên, không lưu bài đọc. Xoá được bất cứ lúc nào.</span>
+        <span>Tôi đồng ý lưu <b>hướng nhà, năm xây, năm sinh và giới tính người cùng ở, bố cục đã khai</b> vào tài khoản để dùng trên máy khác. Không lưu tên, không lưu bài đọc. Rút lại được bất cứ lúc nào: xoá ở Tài khoản → Dữ liệu của tôi.{" "}
+          <Link href="/chinh-sach-rieng-tu#dong-y" className="text-gold underline">Chính sách quyền riêng tư</Link></span>
       </label>
       <div className="mt-3 flex flex-wrap gap-2">
         <Button size="sm" disabled={!dongY || dang} onClick={() => lam(async () => { await luuNhaVaoTaiKhoan(nguoi.id, nha); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "luu_nha_tai_khoan" }); return "Đã lưu nhà vào tài khoản."; })}>

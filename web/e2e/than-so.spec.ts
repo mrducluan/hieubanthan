@@ -2,7 +2,7 @@
 // Ca đã chốt (docs/NHAT-KY-DU-AN.md): Nguyễn Đức Luân 24/10/1988 → DD 6 (rút gọn con số — mặc định từ 2026-10-20;
 // cộng hết chữ số ra 33) / SM9 / LH6 / NC3.
 import { test, expect } from "@playwright/test";
-import { hoi, napHoSo } from "./_hoso";
+import { hoi, napDongY, napHoSo } from "./_hoso";
 
 const LUAN = { v: 1, ho_ten: "Nguyễn Đức Luân", ngay: 24, thang: 10, nam: 1988, tao_luc: "2026-09-30T00:00:00Z" };
 
@@ -13,7 +13,9 @@ test("landing → nhập 2 trường → hé lộ số đường đời và hồ
   await page.getByLabel("Ngày", { exact: true }).fill("24");
   await page.getByLabel("Tháng", { exact: true }).fill("10");
   await page.getByLabel("Năm", { exact: true }).fill("1988");
-  await page.getByRole("button", { name: "Xem con số của tôi" }).click();
+  // ĐY-1: lần đầu chưa đồng ý → khối đồng ý + nút "Đồng ý và xem kết quả" (không ô tích sẵn, không modal).
+  await expect(page.getByTestId("dong-y-du-lieu")).toContainText("không lưu");
+  await page.getByRole("button", { name: "Đồng ý và xem kết quả" }).click();
 
   await expect(page).toHaveURL(/\/ban-than/);
   await expect(page.getByTestId("so-duong-doi")).toHaveText("6");
@@ -71,11 +73,12 @@ test("form hồ sơ chặn ngày sinh tương lai và họ tên không có chữ
   await page.getByLabel("Ngày", { exact: true }).fill("1");
   await page.getByLabel("Tháng", { exact: true }).fill("1");
   await page.getByLabel("Năm", { exact: true }).fill("1990");
-  await page.getByRole("button", { name: "Xem con số của tôi" }).click();
+  await page.getByRole("button", { name: "Đồng ý và xem kết quả" }).click();
   await expect(page.getByText("Nhập họ tên đầy đủ")).toBeVisible();
+  // Form chặn TRƯỚC khi ghi đồng ý → vẫn là lần đầu.
   await page.getByLabel("Họ và tên đầy đủ").fill("Trần An");
   await page.getByLabel("Năm", { exact: true }).fill("2099");
-  await page.getByRole("button", { name: "Xem con số của tôi" }).click();
+  await page.getByRole("button", { name: "Đồng ý và xem kết quả" }).click();
   await expect(page.getByText("Ngày sinh chưa đúng")).toBeVisible();
   await expect(page).not.toHaveURL(/ban-than/);
 });
@@ -94,6 +97,7 @@ test("engine lỗi: báo rõ + thử lại được; trang lạ ra 404 tiếng V
 });
 
 test("nhập ngày ÂM lịch: xem trước dương lịch, bài đọc tính theo ngày dương", async ({ page }) => {
+  await napDongY(page);   // xem trước đổi lịch chỉ chạy sau khi đã đồng ý gửi ngày sinh đi tính
   await page.goto("/");
   await page.getByLabel("Họ và tên đầy đủ").fill("Nguyễn Đức Luân");
   await page.getByRole("radio", { name: "Âm lịch" }).click();
@@ -108,6 +112,7 @@ test("nhập ngày ÂM lịch: xem trước dương lịch, bài đọc tính th
 });
 
 test("nhập dương lịch: hiện ngày âm để đối chiếu giấy tờ", async ({ page }) => {
+  await napDongY(page);
   await page.goto("/");
   await page.getByLabel("Ngày", { exact: true }).fill("24");
   await page.getByLabel("Tháng", { exact: true }).fill("10");
@@ -116,6 +121,7 @@ test("nhập dương lịch: hiện ngày âm để đối chiếu giấy tờ",
 });
 
 test("nhập ÂM lịch: ngày 30 của tháng thiếu bị chặn; năm có tháng nhuận được nhắc", async ({ page }) => {
+  await napDongY(page);
   await page.goto("/");
   await page.getByRole("radio", { name: "Âm lịch" }).click();
   await page.getByLabel("Ngày", { exact: true }).fill("30");
@@ -159,6 +165,7 @@ test("TS-SAU: chân dung 4 mặt có lớp riêng; dòng đời + đối chiếu
 });
 
 test("TV-LICH: ngày lịch Việt ≠ lịch Trung Quốc → hồ sơ nhắc lá số tử vi có thể khác", async ({ page }) => {
+  await napDongY(page);
   await page.goto("/");
   await page.getByLabel("Ngày", { exact: true }).fill("30");
   await page.getByLabel("Tháng", { exact: true }).fill("1");

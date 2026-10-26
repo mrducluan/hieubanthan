@@ -6,7 +6,7 @@ import { tinhGate, MAU_TOI_THIEU } from "../lib/so-lieu-ngoai";
 
 type SK = { su_kien: string } & Record<string, unknown>;
 const suKien = (p: Page) => p.evaluate(() => ((window as unknown as { __hbt_su_kien?: SK[] }).__hbt_su_kien ?? []));
-const KHOA_CHO_PHEP = new Set(["su_kien", "feature_version", "mo_dun", "kind", "ma_moi", "so_duong_doi", "huu_ich", "ket_qua", "nguon", "quan_he", "loai"]);
+const KHOA_CHO_PHEP = new Set(["su_kien", "feature_version", "mo_dun", "kind", "ma_moi", "so_duong_doi", "huu_ich", "ket_qua", "nguon", "quan_he", "loai", "phien_ban"]);
 const dem = (ds: SK[], ten: string, mo_dun?: string) => ds.filter((e) => e.su_kien === ten && (!mo_dun || e.mo_dun === mo_dun)).length;
 
 test("funnel Phase 1: landing → bắt đầu → hồ sơ → đọc xong → góp ý → hỏi; không lộ dữ liệu cá nhân", async ({ page }) => {
@@ -15,7 +15,7 @@ test("funnel Phase 1: landing → bắt đầu → hồ sơ → đọc xong → 
   await page.getByLabel("Ngày", { exact: true }).fill("24");
   await page.getByLabel("Tháng", { exact: true }).fill("10");
   await page.getByLabel("Năm", { exact: true }).fill("1988");
-  await page.getByRole("button", { name: "Xem con số của tôi" }).click();
+  await page.getByRole("button", { name: "Đồng ý và xem kết quả" }).click();   // ĐY-1: lần đầu = đồng ý xử lý dữ liệu
   // Lần đầu mở /ban-than, máy chủ dev phải biên dịch trang (có lúc > 15 giây khi vừa khởi động) → chờ lâu hơn ở bước này.
   await expect(page.getByTestId("so-duong-doi")).toHaveText("6", { timeout: 60_000 });
   await page.getByRole("heading", { name: "Giai đoạn này của bạn" }).scrollIntoViewIfNeeded();
@@ -25,9 +25,12 @@ test("funnel Phase 1: landing → bắt đầu → hồ sơ → đọc xong → 
   const ds = await suKien(page);
   const ten = ds.map((e) => e.su_kien);
   // landing_viewed ở trang trước khi điều hướng client-side vẫn nằm trong cùng window.
-  for (const k of ["landing_viewed", "reading_started", "profile_created", "reading_completed", "feedback_submitted"]) {
+  for (const k of ["landing_viewed", "consent_given", "reading_started", "profile_created", "reading_completed", "feedback_submitted"]) {
     expect(ten).toContain(k);
   }
+  // ĐY-1: đồng ý ghi TRƯỚC khi tạo hồ sơ, chỉ mang mã bản đồng ý.
+  expect(ten.indexOf("consent_given")).toBeLessThan(ten.indexOf("profile_created"));
+  expect(ds.find((e) => e.su_kien === "consent_given")).toMatchObject({ phien_ban: "dl1" });
   expect(ds.find((e) => e.su_kien === "reading_completed")?.so_duong_doi).toBe(6);
   // Gate 1: bắt đầu/xong gắn mảng, mỗi phiên một lần; landing ghi nhóm trang đầu tiên.
   expect(dem(ds, "reading_started", "thanso")).toBe(1);
@@ -90,7 +93,7 @@ test("Gate 2 — link Hôm nay mang mã: người gửi share_created, bạn bè
   await ban.getByLabel("Ngày", { exact: true }).fill("2");
   await ban.getByLabel("Tháng", { exact: true }).fill("3");
   await ban.getByLabel("Năm", { exact: true }).fill("1995");
-  await ban.getByRole("button", { name: "Xem hôm nay của tôi" }).click();
+  await ban.getByRole("button", { name: "Đồng ý và xem kết quả" }).click();   // ĐY-1: máy bạn bè chưa đồng ý → nút đồng ý thay nhãn riêng
   await expect(ban.getByTestId("the-hom-nay")).toBeVisible();
   const ds = await suKien(ban);
   expect(ds.find((e) => e.su_kien === "share_clicked")).toMatchObject({ kind: "hn", ma_moi: ma });
