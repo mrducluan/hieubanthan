@@ -75,6 +75,12 @@ create or replace function cg_han_gio() returns integer
     language sql stable security definer set search_path = '' as $$
     select public.qt_so_cau_hinh('sao.chuyen_gia.han_gio', 48, 12, 168)
 $$;
+-- Hạn trả lời của MỘT người: hội viên Chuyên gia (0028 hv_han_gio_cho, quyền lợi đóng băng lúc mua) được hạn ngắn hơn;
+-- không bao giờ dài hơn hạn chung. 0028 phải chạy trước 0029 (thứ tự bắt buộc).
+create or replace function cg_han_gio_cho(p_uid uuid) returns integer
+    language sql stable security definer set search_path = '' as $$
+    select least(public.cg_han_gio(), coalesce(public.hv_han_gio_cho(p_uid), public.cg_han_gio()))
+$$;
 -- Đã từng mua câu hỏi (đã thanh toán) chưa — câu hội viên miễn phí không tính.
 create or replace function cg_da_tung_tra(p_uid uuid) returns boolean
     language sql stable security definer set search_path = '' as $$
@@ -117,7 +123,7 @@ begin
     if new.loai = 'chuyen_gia' and new.trang_thai = 'da_tra' and old.trang_thai is distinct from 'da_tra' then
         update public.cau_hoi_chuyen_gia
         set trang_thai = 'cho_tra_loi', thanh_toan_luc = now(),
-            han_tra_loi = now() + make_interval(hours => public.cg_han_gio())
+            han_tra_loi = now() + make_interval(hours => public.cg_han_gio_cho(new.user_id))
         where ma_don = new.ma_don and trang_thai in ('cho_tra', 'huy');
     end if;
     return new;
@@ -135,6 +141,8 @@ create or replace function chuyen_gia_thong_tin() returns jsonb
         'gia_vnd', public.cg_gia_vnd(),
         'giam_lan_dau_pt', public.cg_giam_pt(),
         'han_gio', public.cg_han_gio(),
+        -- Hạn của chính người đang xem (hội viên Chuyên gia ngắn hơn); khách = hạn chung.
+        'han_gio_cua_toi', case when (select auth.uid()) is null then public.cg_han_gio() else public.cg_han_gio_cho((select auth.uid())) end,
         'gia_lan_dau', public.cg_gia_cho(null),
         'lan_dau', case when (select auth.uid()) is null then null else not public.cg_da_tung_tra((select auth.uid())) end,
         'gia_lan_nay', public.cg_gia_cho((select auth.uid())),
@@ -143,7 +151,7 @@ create or replace function chuyen_gia_thong_tin() returns jsonb
                                where c.user_id = (select auth.uid()) and c.trang_thai = 'cho_tra_loi') end)
 $$;
 
--- Tạo câu hỏi. p_mien_phi_hoi_vien = true: web ĐÃ trừ lượt hội viên (RPC hoi_vien_dung_cau_hoi của 0028) → vào thẳng
+-- Tạo câu hỏi. p_mien_phi_hoi_vien = true: hàm TỰ trừ lượt hội viên (hoi_vien_dung_cau_hoi của 0028) → vào thẳng
 -- 'cho_tra_loi', giá 0, không tạo đơn. Ngược lại tạo đơn don_nap loai 'chuyen_gia' (giá theo cấu hình, câu đầu giảm) và trả
 -- ma_don để web tạo link thanh toán. Tối đa 3 câu đang chờ thanh toán (đơn còn hạn) cùng lúc (câu hội viên không tính).
 create or replace function tao_cau_hoi_chuyen_gia(p_mang text, p_cau_hoi text, p_ho_so jsonb, p_dong_y boolean,
@@ -171,10 +179,15 @@ begin
     v_hs := case when coalesce(p_dong_y, false) then public.cg_loc_ho_so(p_ho_so) end;
     perform pg_advisory_xact_lock(hashtext('chuyen_gia:' || v_uid));
     if coalesce(p_mien_phi_hoi_vien, false) then
+        -- Trừ lượt hội viên NGAY TRONG giao dịch này (0028, nguyên tử, khoá dòng) — không tin cờ từ phía người gọi:
+        -- gọi thẳng RPC với p_mien_phi_hoi_vien = true mà không là hội viên / hết lượt → từ chối, không tạo câu.
+        if not coalesce((public.hoi_vien_dung_cau_hoi()->>'ok')::boolean, false) then
+            return jsonb_build_object('ket_qua', 'het_luot_hoi_vien');
+        end if;
         insert into public.cau_hoi_chuyen_gia (user_id, mang, cau_hoi, ho_so, dong_y_chia_se, gia_vnd, mien_phi_hoi_vien,
                                                trang_thai, thanh_toan_luc, han_tra_loi)
         values (v_uid, p_mang, v_cau, v_hs, v_hs is not null, 0, true, 'cho_tra_loi', now(),
-                now() + make_interval(hours => public.cg_han_gio()))
+                now() + make_interval(hours => public.cg_han_gio_cho(v_uid)))
         returning * into v_ch;
         return jsonb_build_object('ket_qua', 'da_tao', 'id', v_ch.id, 'trang_thai', v_ch.trang_thai, 'han_tra_loi', v_ch.han_tra_loi,
                                   'gia_vnd', 0, 'mien_phi_hoi_vien', true);
@@ -384,7 +397,7 @@ end
 $$;
 
 -- ---------------------------------------------------------------- quyền
-revoke all on function cg_gia_vnd(), cg_giam_pt(), cg_han_gio(), cg_da_tung_tra(uuid), cg_gia_cho(uuid), cg_loc_ho_so(jsonb),
+revoke all on function cg_gia_vnd(), cg_giam_pt(), cg_han_gio(), cg_han_gio_cho(uuid), cg_da_tung_tra(uuid), cg_gia_cho(uuid), cg_loc_ho_so(jsonb),
     cg_co_lien_he(text), cg_don_da_tra(), cg_dong_quan_tri(public.cau_hoi_chuyen_gia, boolean),
     chuyen_gia_thong_tin(), tao_cau_hoi_chuyen_gia(text, text, jsonb, boolean, boolean, text), cau_hoi_cua_toi(),
     danh_gia_cau_hoi(bigint, integer), huy_cau_hoi(bigint), ds_cau_hoi_chuyen_gia(text, integer), doc_cau_hoi_chuyen_gia(bigint),

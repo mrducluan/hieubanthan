@@ -20,6 +20,7 @@ drop function if exists cg_co_lien_he(text);
 drop function if exists cg_loc_ho_so(jsonb);
 drop function if exists cg_gia_cho(uuid);
 drop function if exists cg_da_tung_tra(uuid);
+drop function if exists cg_han_gio_cho(uuid);
 drop function if exists cg_han_gio();
 drop function if exists cg_giam_pt();
 drop function if exists cg_gia_vnd();

@@ -1,6 +1,7 @@
 // POST /api/chuyen-gia/tao {mang, cau_hoi, ho_so?, dong_y, dung_hoi_vien} — tạo câu hỏi chuyên gia (SAO-CG, 0029).
 //   1. Kiểm câu đặc biệt ở engine: khủng hoảng → 403 kèm lời hỗ trợ (không bán); ngoài phạm vi → 422.
-//   2. dung_hoi_vien: gọi RPC hoi_vien_dung_cau_hoi (0028) — không có hàm / không còn lượt → 409 (web mời trả VND).
+//   2. dung_hoi_vien: SQL tự trừ lượt hội viên trong cùng giao dịch tạo câu (0029 → hoi_vien_dung_cau_hoi của 0028) —
+//      không phải hội viên / hết lượt → 409 (web mời trả VND). Web KHÔNG tự trừ lượt (tránh trừ hai lần / trừ mà không tạo câu).
 //   3. Tạo câu hỏi + đơn don_nap loai 'chuyen_gia' (giá + giảm lần đầu do SQL tính, KHÔNG tin trình duyệt) → link thanh toán
 //      payOS (quay về /tai-khoan/cau-hoi) hoặc cổng giả. Hồ sơ chỉ gửi khi dong_y = true (SQL lọc lại khoá).
 import { NextResponse } from "next/server";
@@ -51,15 +52,7 @@ export async function POST(req: Request) {
   const nm = await khachNguoiMua(req);
   if (!nm) return NextResponse.json({ error: "Hãy đăng nhập để hỏi chuyên gia.", can: "dang_nhap" }, { status: 401 });
 
-  let mienPhi = false;
-  if (dung_hoi_vien) {
-    // 0028: trừ một lượt hội viên trước; hàm chưa có / lỗi / hết lượt → không phải hội viên → mời trả VND.
-    const { data, error } = await nm.sb.rpc("hoi_vien_dung_cau_hoi");
-    // 0028 trả {ok, con}; chấp nhận thêm dạng {duoc} / {ket_qua: 'da_dung'} cho bản cũ.
-    const kq = (data as { ok?: boolean; con?: number; ket_qua?: string; duoc?: boolean } | null) ?? null;
-    mienPhi = !error && Boolean(kq && (kq.ok === true || kq.duoc === true || kq.ket_qua === "da_dung"));
-    if (!mienPhi) return NextResponse.json({ error: "Bạn không còn lượt hội viên cho câu hỏi này.", can: "tra_vnd" }, { status: 409 });
-  }
+  const mienPhi = Boolean(dung_hoi_vien);
   const cong = congDangBat();
   if (!mienPhi && !cong) return NextResponse.json({ error: "Cổng thanh toán chưa mở." }, { status: 503 });
 
@@ -68,6 +61,9 @@ export async function POST(req: Request) {
   });
   if (error) return NextResponse.json({ error: "Chưa tạo được câu hỏi, thử lại sau ít phút." }, { status: 502 });
   const d = data as { ket_qua: string; id: number; trang_thai: string; ma_don?: number; so_tien?: number; het_han?: string; lan_dau?: boolean; han_tra_loi?: string };
+  if (d.ket_qua === "het_luot_hoi_vien") {
+    return NextResponse.json({ error: "Bạn không còn lượt hội viên cho câu hỏi này.", can: "tra_vnd" }, { status: 409 });
+  }
   if (d.ket_qua !== "da_tao") {
     const [msg, st] = LOI[d.ket_qua] ?? ["Chưa tạo được câu hỏi.", 400];
     return NextResponse.json({ error: msg }, { status: st });

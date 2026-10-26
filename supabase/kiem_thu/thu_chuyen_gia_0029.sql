@@ -56,7 +56,7 @@ reset role;
 insert into cau_hinh (khoa, gia_tri) values ('sao.chuyen_gia.bat', 'true') on conflict (khoa) do update set gia_tri = excluded.gia_tri;
 set role anon; select set_config('request.jwt.claim.sub','',false);
 select pg_temp.kt('khách: giá, giảm, hạn, lan_dau null', (chuyen_gia_thong_tin() - 'dang_cho'),
-    '{"bat": true, "gia_vnd": 199000, "giam_lan_dau_pt": 30, "han_gio": 48, "gia_lan_dau": 139300, "lan_dau": null, "gia_lan_nay": 139300}'::jsonb);
+    '{"bat": true, "gia_vnd": 199000, "giam_lan_dau_pt": 30, "han_gio": 48, "han_gio_cua_toi": 48, "gia_lan_dau": 139300, "lan_dau": null, "gia_lan_nay": 139300}'::jsonb);
 reset role;
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a1',false);
 select pg_temp.kt('A: lần đầu, giá 139.300', (chuyen_gia_thong_tin()->>'lan_dau') || '/' || (chuyen_gia_thong_tin()->>'gia_lan_nay'), 'true/139300');
@@ -192,13 +192,33 @@ select tao_cau_hoi_chuyen_gia('phong_thuy', 'Bếp nhà tôi đối diện cửa
 select tao_cau_hoi_chuyen_gia('than_so', 'Số đường đời 33 của tôi hợp làm nghề gì?', null, false, false, 'gia')->>'ket_qua' as k6 \gset
 select pg_temp.kt('3 câu chờ trả tiền được tạo', :'k4' || '/' || :'k5' || '/' || :'k6', 'da_tao/da_tao/da_tao');
 select pg_temp.kt('câu thứ 4 đang chờ → từ chối', tao_cau_hoi_chuyen_gia('than_so', 'Năm cá nhân 9 nên bắt đầu gì mới không?', null, false, false, 'gia')->>'ket_qua', 'qua_nhieu_cau');
--- hội viên: web đã trừ lượt → vào thẳng chờ trả lời, giá 0, không đơn, không tính "đã mua"
+-- Không là hội viên mà gọi thẳng RPC với cờ miễn phí → từ chối (SQL tự trừ lượt, không tin người gọi).
+reset role;
+delete from hoi_vien where user_id in ('d0000000-0000-0000-0000-0000000000a1', 'd0000000-0000-0000-0000-0000000000a2');   -- mã dùng chung với tệp 0028
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a1',false);
+select pg_temp.kt('không là hội viên: cờ miễn phí bị từ chối', tao_cau_hoi_chuyen_gia('than_so', 'Tôi gọi thẳng API để hỏi miễn phí được không?', null, false, true, null)->>'ket_qua', 'het_luot_hoi_vien');
+reset role;
+-- A, B thành hội viên thường (2 câu/năm) — chèn thẳng dòng hoi_vien (0028 kiểm đường mua ở tệp riêng).
+insert into hoi_vien (user_id, tu_ngay, den_ngay, gia_vnd, hang, cau_hoi_nam) values
+    ('d0000000-0000-0000-0000-0000000000a1', current_date, current_date + 365, 399000, 'thuong', 2),
+    ('d0000000-0000-0000-0000-0000000000a2', current_date, current_date + 365, 399000, 'thuong', 2);
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a1',false);
+-- hội viên: SQL trừ lượt → vào thẳng chờ trả lời, giá 0, không đơn, không tính "đã mua"
 select tao_cau_hoi_chuyen_gia('than_so', 'Tháng cá nhân 5 này tôi nên lưu ý gì?', null, false, true, null) as c7 \gset
+select pg_temp.kt('hội viên: lượt đã trừ trong SQL (còn 1)', (hoi_vien_cua_toi()->>'cau_hoi_con')::int, 1);
 select pg_temp.kt('hội viên: chờ trả lời, giá 0, không đơn', (:'c7'::jsonb->>'ket_qua') || '/' || (:'c7'::jsonb->>'trang_thai') || '/' || (:'c7'::jsonb->>'gia_vnd') || '/' || ((:'c7'::jsonb ? 'ma_don')::text), 'da_tao/cho_tra_loi/0/false');
 select pg_temp.kt('hội viên: hạn 48 giờ', (select han_tra_loi > now() + interval '47 hours' from cau_hoi_chuyen_gia where id = (:'c7'::jsonb->>'id')::bigint), true);
 select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a2',false);
 select tao_cau_hoi_chuyen_gia('tu_vi', 'Tôi là hội viên, hỏi thử một câu về cung Mệnh.', null, false, true, null) as c8 \gset
 select pg_temp.kt('B hội viên hỏi miễn phí xong vẫn còn "lần đầu" mua', (chuyen_gia_thong_tin()->>'lan_dau')::boolean, true);
+reset role;
+-- B lên hạng Chuyên gia (quyền đóng băng: 24 giờ) → câu hỏi của B có hạn 24 giờ, thông tin "của tôi" báo 24.
+update hoi_vien set hang = 'chuyen_gia', han_gio = 24, cau_hoi_nam = 6 where user_id = 'd0000000-0000-0000-0000-0000000000a2' and trang_thai = 'hieu_luc';
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a2',false);
+select pg_temp.kt('B Chuyên gia: hạn của tôi 24 giờ', (chuyen_gia_thong_tin()->>'han_gio_cua_toi')::int, 24);
+select tao_cau_hoi_chuyen_gia('tu_vi', 'Cung Quan Lộc năm nay của tôi thế nào?', null, false, true, null) as c9 \gset
+select pg_temp.kt('B Chuyên gia: hạn trả lời ≈ 24 giờ', (select han_tra_loi between now() + interval '23 hours' and now() + interval '25 hours'
+    from cau_hoi_chuyen_gia where id = (:'c9'::jsonb->>'id')::bigint), true);
 reset role;
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-00000000000f',false);
 select set_config('request.jwt.claim.aal','aal2',false);

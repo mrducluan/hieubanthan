@@ -1,13 +1,20 @@
 -- SAO-HV (2026-10-26, chủ dự án chốt cách tiếp cận B "Hội viên năm" — docs/DANH-GIA-VIRAL-V2-VA-KINH-DOANH.md §3, §9;
--- giá 3.990.000 ₫/năm do chủ dự án chốt, chính sách hoàn tiền do em chốt — ghi ở (4)).
--- Hội viên năm = mua MỘT LẦN bằng VND qua payOS (QR chuyển khoản không trừ tiền định kỳ → KHÔNG tự gia hạn). Quyền lợi:
+-- HAI HẠNG do chủ dự án chốt sau so sánh giá thị trường — docs/SO-SANH-GIA-HOI-VIEN.md phương án (a):
+--   • hạng THƯỜNG 399.000 ₫/năm (sao.hoi_vien.gia_vnd), 1 câu hỏi chuyên gia/năm (sao.hoi_vien.cau_hoi_nam);
+--   • hạng CHUYÊN GIA 1.990.000 ₫/năm (sao.hoi_vien.cg.gia_vnd), 6 câu/năm (sao.hoi_vien.cg.cau_hoi_nam), câu hỏi được trả
+--     lời trong 24 giờ (sao.hoi_vien.cg.han_gio) thay vì hạn chung; công tắc riêng sao.hoi_vien.cg.bat (ràng buộc thời gian
+--     chuyên gia) — chỉ bán khi sao.hoi_vien.bat + sao.hoi_vien.cg.bat + sao.chuyen_gia.bat cùng bật.
+-- Quyền lợi ĐÓNG BĂNG lúc mua: hang / cau_hoi_nam / han_gio lưu trên dòng hoi_vien → đổi cài đặt không đổi quyền của người
+-- đã trả. Nâng hạng giữa kỳ: trả 1.990.000 − phần còn lại của kỳ thường (tháng tròn / 12, làm tròn nghìn), được kỳ MỚI
+-- 365 ngày từ hôm nay; dòng thường cũ → 'nang_hang' (hoàn đơn nâng hạng → khôi phục). Gia hạn giữ nguyên hạng.
+-- Hội viên năm = mua MỘT LẦN bằng VND qua payOS (QR chuyển khoản không trừ tiền định kỳ → KHÔNG tự gia hạn). Quyền lợi chung:
 --   • mở MỌI chương Luận giải toàn bộ (Tử vi / Bát tự / Bản đồ con số) không trừ Sao trong thời hạn — web kiểm bằng
 --     hoi_vien_hieu_luc() rồi ghi hoi_vien_ghi_mo(khoá báo cáo) (chỉ đếm, không lưu nội dung / lá số);
 --   • Sao tặng mỗi tháng (sao.hoi_vien.sao_thang, mặc định 15) — KHÔNG cộng dồn: lô cấp một lần mỗi tháng, hết hạn ngày
 --     cuối tháng đó, khoá 'hoi_vien:<uid>:<yyyy-mm>' duy nhất → gọi lặp (mở trang, cron) không cộng hai lần;
---   • câu hỏi chuyên gia mỗi năm (sao.hoi_vien.cau_hoi_nam, mặc định 2) — hợp đồng giao diện cho mảng "Hỏi chuyên gia":
---     hoi_vien_cua_toi() → {bat, dang_la, tu_ngay, den_ngay, cau_hoi_con, sao_thang, con_ngay}; hoi_vien_dung_cau_hoi()
---     → {ok, con} (trừ 1 lượt, nguyên tử, chỉ khi đang là hội viên). Mảng chuyên gia không được gọi gì khác ở đây.
+--   • câu hỏi chuyên gia theo hạng — hợp đồng giao diện cho mảng "Hỏi chuyên gia":
+--     hoi_vien_cua_toi() → {bat, dang_la, hang, tu_ngay, den_ngay, cau_hoi_con, sao_thang, con_ngay, goi[], ...};
+--     hoi_vien_dung_cau_hoi() → {ok, con} (trừ 1 lượt, nguyên tử); hv_han_gio_cho(uid) → giờ trả lời ưu tiên hoặc null.
 -- Sao vẫn là credit nội bộ: KHÔNG đổi ra tiền, KHÔNG chuyển nhượng. Không đếm ngược, không giới hạn suất, không gạch giá.
 --
 --   (1) don_nap thêm cột loai ('sao' | 'hoi_vien' | 'chuyen_gia' — 'chuyen_gia' chỉ thêm giá trị cho mảng khác dùng, không
@@ -18,12 +25,14 @@
 --       lần nạp đầu trên đơn hội viên** (em chốt): hoa hồng là % SỐ SAO của đơn, đơn hội viên không có Sao; tránh trả hoa
 --       hồng lớn trên 3,99 triệu khi chưa có hợp đồng affiliate riêng; giữ hoa hồng cho gói Sao như 0025.
 --   (3) Gia hạn: chỉ khi còn ≤ 30 ngày (tao_don_hoi_vien từ chối 'da_la_hoi_vien' khi còn dài hơn) → cộng 365 ngày vào
---       den_ngay, lượt câu hỏi chuyên gia về 0 cho năm mới.
+--       den_ngay, lượt câu hỏi chuyên gia về 0 cho năm mới, quyền lợi lấy theo cài đặt lúc gia hạn. Gia hạn giữ hạng đang
+--       có; hạ từ Chuyên gia xuống thường = mua mới sau khi hết hạn ('ha_hang_khi_het_han').
 --   (4) Hoàn tiền (chính sách chốt): hoàn 100 % trong 14 ngày nếu chưa mở chương nào bằng quyền hội viên và chưa dùng câu
 --       hỏi chuyên gia; sau đó hoàn theo tỉ lệ THÁNG TRÒN còn lại / 12, trừ giá trị câu hỏi chuyên gia đã dùng (giá lẻ
 --       sao.chuyen_gia.gia_vnd, mặc định 199.000 ₫); Sao tháng đã cấp KHÔNG thu hồi. Tiền hoàn chuyển ngoài hệ thống bởi
 --       chủ sở hữu: hoan_don_nap (thay bản 0027, giữ logic đơn Sao) với đơn hội viên chỉ TÍNH số tiền gợi ý, chuyển hội
---       viên sang 'hoan' (đơn gia hạn: lùi 365 ngày), ghi nhật ký, trả {so_tien_hoan_goi_y, ly_do}.
+--       viên sang 'hoan' (đơn gia hạn: lùi 365 ngày; đơn nâng hạng: khôi phục dòng thường cũ), ghi nhật ký, trả
+--       {so_tien_hoan_goi_y, ly_do}. Câu hỏi tính trừ chỉ là câu dùng TRONG kỳ của đơn đó (không tính câu mang sang).
 -- Mọi công tắc / mức đọc từ cau_hinh (web/lib/cau-hinh.ts nhóm "Hội viên năm"), sao.hoi_vien.bat mặc định TẮT.
 -- Chạy SAU 0027. Rollback: 0028_hoi_vien.down.sql
 
@@ -41,6 +50,11 @@ alter table don_nap alter column goi drop not null;
 -- Đơn Sao: phải có gói + Sao > 0. Đơn khác: không gói, Sao = 0 (sổ cái không nhận bút toán 0 nên không bao giờ cộng Sao).
 alter table don_nap drop constraint if exists don_nap_sao_check;
 alter table don_nap add constraint don_nap_sao_check check ((loai = 'sao' and sao > 0) or (loai <> 'sao' and sao = 0));
+alter table don_nap add column if not exists hang text;
+alter table don_nap add column if not exists nang_hang boolean not null default false;
+alter table don_nap drop constraint if exists don_nap_hang_check;
+alter table don_nap add constraint don_nap_hang_check check (
+    (loai = 'hoi_vien' and hang in ('thuong', 'chuyen_gia')) or (loai <> 'hoi_vien' and hang is null and not nang_hang));
 alter table don_nap drop constraint if exists don_nap_goi_theo_loai;
 alter table don_nap add constraint don_nap_goi_theo_loai check ((loai = 'sao') = (goi is not null));
 
@@ -50,15 +64,28 @@ create table if not exists hoi_vien (
     user_id          uuid not null references auth.users (id) on delete cascade,
     tu_ngay          date not null,
     den_ngay         date not null,
-    gia_vnd          integer not null check (gia_vnd > 0),          -- tổng tiền đã trả (gồm các lần gia hạn)
-    ma_don           bigint references don_nap (ma_don) on delete set null,   -- đơn mua đầu
+    gia_vnd          integer not null check (gia_vnd > 0),          -- tổng tiền đã trả cho dòng này (gồm các lần gia hạn)
+    ma_don           bigint references don_nap (ma_don) on delete set null,   -- đơn mua đầu (hoặc đơn nâng hạng)
     don_gia_han      bigint[] not null default '{}',                -- đơn gia hạn đã nối thêm (idempotent + hoàn tiền)
     cau_hoi_da_dung  integer not null default 0 check (cau_hoi_da_dung >= 0),
-    trang_thai       text not null default 'hieu_luc' check (trang_thai in ('hieu_luc', 'hoan', 'het_han')),
+    trang_thai       text not null default 'hieu_luc',
     tao_luc          timestamptz not null default now(),
     cap_nhat_luc     timestamptz not null default now(),
     check (den_ngay > tu_ngay)
 );
+-- Hai hạng: quyền lợi đóng băng trên dòng (add column if not exists: chạy lại an toàn cả khi bảng đã có từ bản trước).
+alter table hoi_vien add column if not exists hang text not null default 'thuong';
+alter table hoi_vien add column if not exists cau_hoi_nam integer not null default 1;
+alter table hoi_vien add column if not exists han_gio integer;                 -- giờ trả lời ưu tiên (null = hạn chung)
+alter table hoi_vien add column if not exists nang_tu bigint references hoi_vien (id) on delete set null;
+alter table hoi_vien add column if not exists cau_hoi_mang_sang integer not null default 0;   -- câu đã dùng ở dòng cũ
+alter table hoi_vien drop constraint if exists hoi_vien_hang_check;
+alter table hoi_vien add constraint hoi_vien_hang_check check (hang in ('thuong', 'chuyen_gia'));
+alter table hoi_vien drop constraint if exists hoi_vien_quyen_check;
+alter table hoi_vien add constraint hoi_vien_quyen_check check (cau_hoi_nam between 0 and 24 and (han_gio is null or han_gio between 1 and 168)
+    and cau_hoi_mang_sang >= 0);
+alter table hoi_vien drop constraint if exists hoi_vien_trang_thai_check;
+alter table hoi_vien add constraint hoi_vien_trang_thai_check check (trang_thai in ('hieu_luc', 'hoan', 'het_han', 'nang_hang'));
 -- Một dòng hiệu lực / người (dòng cũ 'hoan' / 'het_han' giữ làm lịch sử).
 create unique index if not exists hoi_vien_mot_hieu_luc on hoi_vien (user_id) where trang_thai = 'hieu_luc';
 create index if not exists hoi_vien_den_ngay_idx on hoi_vien (den_ngay) where trang_thai = 'hieu_luc';
@@ -99,39 +126,102 @@ create or replace function hv_thang_tron(p_tu date, p_den date) returns integer
                 else (extract(year from age(p_den, p_tu)) * 12 + extract(month from age(p_den, p_tu)))::integer end
 $$;
 
+-- Quyền lợi của một hạng theo cài đặt HIỆN HÀNH (dùng khi bán / gia hạn — sau đó đóng băng trên dòng hoi_vien).
+create or replace function hv_goi(p_hang text) returns jsonb
+    language sql stable security definer set search_path = '' as $$
+    select case p_hang
+        when 'thuong' then jsonb_build_object(
+            'hang', 'thuong',
+            'bat', public.qt_bat_cau_hinh('sao.hoi_vien.bat'),
+            'gia_vnd', public.qt_so_cau_hinh('sao.hoi_vien.gia_vnd', 399000, 100000, 50000000),
+            'cau_hoi_nam', public.qt_so_cau_hinh('sao.hoi_vien.cau_hoi_nam', 1, 0, 12),
+            'han_gio', null)
+        when 'chuyen_gia' then jsonb_build_object(
+            'hang', 'chuyen_gia',
+            'bat', public.qt_bat_cau_hinh('sao.hoi_vien.bat') and public.qt_bat_cau_hinh('sao.hoi_vien.cg.bat')
+                   and public.qt_bat_cau_hinh('sao.chuyen_gia.bat'),
+            'gia_vnd', public.qt_so_cau_hinh('sao.hoi_vien.cg.gia_vnd', 1990000, 100000, 50000000),
+            'cau_hoi_nam', public.qt_so_cau_hinh('sao.hoi_vien.cg.cau_hoi_nam', 6, 0, 24),
+            'han_gio', public.qt_so_cau_hinh('sao.hoi_vien.cg.han_gio', 24, 1, 168))
+    end
+$$;
+
+-- Giá nâng từ dòng THƯỜNG đang hiệu lực lên Chuyên gia: giá Chuyên gia − giá kỳ hiện tại × tháng tròn còn lại / 12
+-- (tối đa 12), làm tròn tới nghìn đồng, tối thiểu 1.000 ₫. Kỳ hiện tại = đơn gần nhất (gia hạn nếu có, không thì đơn đầu).
+create or replace function hv_gia_nang_hang(p_hv public.hoi_vien) returns integer
+    language plpgsql stable security definer set search_path = '' as $$
+declare
+    v_cg integer := ((public.hv_goi('chuyen_gia'))->>'gia_vnd')::integer;
+    v_don bigint := coalesce(p_hv.don_gia_han[array_length(p_hv.don_gia_han, 1)], p_hv.ma_don);
+    v_gia_ky integer;
+    v_thang integer := least(12, public.hv_thang_tron(public.hv_hom_nay(), p_hv.den_ngay));
+begin
+    select so_tien into v_gia_ky from public.don_nap where ma_don = v_don;
+    v_gia_ky := coalesce(v_gia_ky, ((public.hv_goi('thuong'))->>'gia_vnd')::integer);
+    return greatest(1000, (round((v_cg - v_gia_ky * v_thang / 12.0) / 1000.0) * 1000)::integer);
+end
+$$;
+
+-- Giờ trả lời ưu tiên cho câu hỏi chuyên gia của một người (hội viên Chuyên gia đang hiệu lực), không có → null.
+create or replace function hv_han_gio_cho(p_uid uuid) returns integer
+    language sql stable security definer set search_path = '' as $$
+    select h.han_gio from public.hoi_vien h
+    where h.user_id = p_uid and h.trang_thai = 'hieu_luc' and h.den_ngay >= public.hv_hom_nay() and h.hang = 'chuyen_gia'
+    limit 1
+$$;
+
 -- ---------------------------------------------------------------- (1) tạo đơn hội viên (người dùng)
--- Giá LUÔN đọc ở máy chủ từ cau_hinh (kẹp 100.000–50.000.000). Công tắc tắt → 'chua_mo'. Đang là hội viên còn > 30 ngày →
--- 'da_la_hoi_vien' (không bán chồng); còn ≤ 30 ngày → tạo đơn gia hạn (gia_han = true). Trần 5 đơn chờ như tao_don_nap.
-create or replace function tao_don_hoi_vien(p_cong text) returns jsonb
+-- Giá LUÔN tính ở máy chủ (cài đặt + kỳ hiện tại). Hạng tắt → 'chua_mo'. Đang là hội viên:
+--   • cùng hạng, còn > 30 ngày → 'da_la_hoi_vien'; ≤ 30 ngày → đơn gia hạn (gia_han = true);
+--   • đang thường, chọn Chuyên gia → đơn NÂNG HẠNG (giá hv_gia_nang_hang, kỳ mới 365 ngày);
+--   • đang Chuyên gia, chọn thường → 'ha_hang_khi_het_han'.
+-- Trần 5 đơn chờ như tao_don_nap.
+drop function if exists tao_don_hoi_vien(text);
+create or replace function tao_don_hoi_vien(p_cong text, p_hang text default 'thuong') returns jsonb
     language plpgsql security definer set search_path = '' as $$
 declare
     v_uid uuid := (select auth.uid());
-    v_gia integer := public.qt_so_cau_hinh('sao.hoi_vien.gia_vnd', 3990000, 100000, 50000000);
+    v_goi jsonb;
+    v_gia integer;
     v_hv public.hoi_vien;
     v_don public.don_nap;
     v_gia_han boolean := false;
+    v_nang boolean := false;
 begin
     if v_uid is null then raise exception 'chua_dang_nhap'; end if;
     if p_cong is null or p_cong not in ('payos', 'gia') then return jsonb_build_object('ket_qua', 'cong_khong_hop_le'); end if;
-    if not public.qt_bat_cau_hinh('sao.hoi_vien.bat') then return jsonb_build_object('ket_qua', 'chua_mo'); end if;
+    if p_hang is null or p_hang not in ('thuong', 'chuyen_gia') then return jsonb_build_object('ket_qua', 'hang_khong_hop_le'); end if;
+    v_goi := public.hv_goi(p_hang);
+    if not (v_goi->>'bat')::boolean then return jsonb_build_object('ket_qua', 'chua_mo', 'hang', p_hang); end if;
+    v_gia := (v_goi->>'gia_vnd')::integer;
     perform pg_advisory_xact_lock(hashtext('don_nap:' || v_uid));
     v_hv := public.hv_dong_hieu_luc(v_uid);
     if v_hv.id is not null then
-        if v_hv.den_ngay - public.hv_hom_nay() > 30 then
-            return jsonb_build_object('ket_qua', 'da_la_hoi_vien', 'den_ngay', v_hv.den_ngay);
+        if v_hv.hang = p_hang then
+            if v_hv.den_ngay - public.hv_hom_nay() > 30 then
+                return jsonb_build_object('ket_qua', 'da_la_hoi_vien', 'hang', v_hv.hang, 'den_ngay', v_hv.den_ngay);
+            end if;
+            v_gia_han := true;
+        elsif v_hv.hang = 'thuong' and p_hang = 'chuyen_gia' then
+            v_nang := true;
+            v_gia := public.hv_gia_nang_hang(v_hv);
+        else
+            return jsonb_build_object('ket_qua', 'ha_hang_khi_het_han', 'hang', v_hv.hang, 'den_ngay', v_hv.den_ngay);
         end if;
-        v_gia_han := true;
     end if;
     if (select count(*) from public.don_nap
         where user_id = v_uid and trang_thai = 'cho' and het_han > now()) >= 5 then
         return jsonb_build_object('ket_qua', 'qua_nhieu_don');
     end if;
-    insert into public.don_nap (user_id, goi, so_tien, sao, cong, loai)
-    values (v_uid, null, v_gia, 0, p_cong, 'hoi_vien')
+    insert into public.don_nap (user_id, goi, so_tien, sao, cong, loai, hang, nang_hang)
+    values (v_uid, null, v_gia, 0, p_cong, 'hoi_vien', p_hang, v_nang)
     returning * into v_don;
     return jsonb_build_object('ket_qua', 'da_tao', 'ma_don', v_don.ma_don, 'so_tien', v_don.so_tien, 'sao', 0,
-                              'ten_goi', case when v_gia_han then 'Gia hạn hội viên năm' else 'Hội viên năm' end,
-                              'loai', 'hoi_vien', 'gia_han', v_gia_han, 'het_han', v_don.het_han);
+                              'ten_goi', case when v_nang then 'Nâng lên Hội viên Chuyên gia'
+                                              when v_gia_han then 'Gia hạn ' || case p_hang when 'chuyen_gia' then 'Hội viên Chuyên gia' else 'Hội viên năm' end
+                                              else case p_hang when 'chuyen_gia' then 'Hội viên Chuyên gia' else 'Hội viên năm' end end,
+                              'loai', 'hoi_vien', 'hang', p_hang, 'gia_han', v_gia_han, 'nang_hang', v_nang,
+                              'het_han', v_don.het_han);
 end
 $$;
 
@@ -143,7 +233,9 @@ create or replace function hv_kich_hoat(p_ma_don bigint) returns jsonb
 declare
     v_don public.don_nap;
     v_hv public.hoi_vien;
+    v_cu public.hoi_vien;
     v_hom date := public.hv_hom_nay();
+    v_goi jsonb;
 begin
     select * into v_don from public.don_nap where ma_don = p_ma_don;
     if v_don.ma_don is null or v_don.loai <> 'hoi_vien' or v_don.trang_thai <> 'da_tra' then
@@ -153,22 +245,51 @@ begin
     if exists (select 1 from public.hoi_vien where ma_don = p_ma_don or p_ma_don = any (don_gia_han)) then
         return jsonb_build_object('ket_qua', 'da_xu_ly');
     end if;
+    v_goi := public.hv_goi(v_don.hang);   -- quyền lợi theo cài đặt lúc kích hoạt → đóng băng trên dòng
     -- Dòng hiệu lực đã quá hạn → đóng lại trước (chỉ mục duy nhất một dòng hiệu lực / người).
     update public.hoi_vien set trang_thai = 'het_han', cap_nhat_luc = now()
     where user_id = v_don.user_id and trang_thai = 'hieu_luc' and den_ngay < v_hom;
-    select * into v_hv from public.hoi_vien where user_id = v_don.user_id and trang_thai = 'hieu_luc' for update;
-    if v_hv.id is not null then
+    select * into v_cu from public.hoi_vien where user_id = v_don.user_id and trang_thai = 'hieu_luc' for update;
+
+    -- Gia hạn (cùng hạng, đơn không phải nâng hạng): nối 365 ngày, lượt câu hỏi về 0, quyền lợi theo cài đặt hiện hành.
+    if v_cu.id is not null and not v_don.nang_hang and v_cu.hang = v_don.hang then
         update public.hoi_vien
         set den_ngay = den_ngay + 365, gia_vnd = gia_vnd + v_don.so_tien, don_gia_han = don_gia_han || p_ma_don,
-            cau_hoi_da_dung = 0, cap_nhat_luc = now()
-        where id = v_hv.id
+            cau_hoi_da_dung = 0, cau_hoi_mang_sang = 0, cau_hoi_nam = (v_goi->>'cau_hoi_nam')::integer,
+            han_gio = (v_goi->>'han_gio')::integer, cap_nhat_luc = now()
+        where id = v_cu.id
         returning * into v_hv;
-        return jsonb_build_object('ket_qua', 'gia_han', 'tu_ngay', v_hv.tu_ngay, 'den_ngay', v_hv.den_ngay);
+        return jsonb_build_object('ket_qua', 'gia_han', 'hang', v_hv.hang, 'tu_ngay', v_hv.tu_ngay, 'den_ngay', v_hv.den_ngay);
     end if;
-    insert into public.hoi_vien (user_id, tu_ngay, den_ngay, gia_vnd, ma_don)
-    values (v_don.user_id, v_hom, v_hom + 365, v_don.so_tien, p_ma_don)
+
+    -- Nâng hạng: dòng thường cũ → 'nang_hang' (giữ để hoàn đơn nâng hạng thì khôi phục), câu đã dùng mang sang.
+    -- Dòng cũ không còn (đã hết hạn / hoàn trong lúc đơn chờ) → vẫn kích hoạt Chuyên gia (người dùng đã trả), ghi cờ.
+    if v_cu.id is not null then
+        if not v_don.nang_hang then
+            -- Không thể xảy ra qua tao_don_hoi_vien (khác hạng mà không nâng = hạ hạng bị từ chối); để an toàn: nối như gia hạn
+            -- KHÔNG đổi hạng, ghi nhật ký cho người duyệt.
+            perform public.qt_ghi('hoi_vien.kich_hoat_la', p_ma_don::text, jsonb_build_object('hang_don', v_don.hang, 'hang_dong', v_cu.hang));
+            update public.hoi_vien
+            set den_ngay = den_ngay + 365, gia_vnd = gia_vnd + v_don.so_tien, don_gia_han = don_gia_han || p_ma_don,
+                cap_nhat_luc = now()
+            where id = v_cu.id
+            returning * into v_hv;
+            return jsonb_build_object('ket_qua', 'gia_han', 'hang', v_hv.hang, 'tu_ngay', v_hv.tu_ngay, 'den_ngay', v_hv.den_ngay);
+        end if;
+        update public.hoi_vien set trang_thai = 'nang_hang', cap_nhat_luc = now() where id = v_cu.id;
+    end if;
+    insert into public.hoi_vien (user_id, tu_ngay, den_ngay, gia_vnd, ma_don, hang, cau_hoi_nam, han_gio, nang_tu,
+                                 cau_hoi_da_dung, cau_hoi_mang_sang)
+    values (v_don.user_id, v_hom, v_hom + 365, v_don.so_tien, p_ma_don, v_don.hang, (v_goi->>'cau_hoi_nam')::integer,
+            (v_goi->>'han_gio')::integer, case when v_don.nang_hang then v_cu.id end,
+            case when v_don.nang_hang then coalesce(v_cu.cau_hoi_da_dung, 0) else 0 end,
+            case when v_don.nang_hang then coalesce(v_cu.cau_hoi_da_dung, 0) else 0 end)
     returning * into v_hv;
-    return jsonb_build_object('ket_qua', 'kich_hoat', 'tu_ngay', v_hv.tu_ngay, 'den_ngay', v_hv.den_ngay);
+    if v_don.nang_hang and v_cu.id is null then
+        perform public.qt_ghi('hoi_vien.nang_hang_khong_con_goc', p_ma_don::text, jsonb_build_object('so_tien', v_don.so_tien));
+    end if;
+    return jsonb_build_object('ket_qua', case when v_don.nang_hang then 'nang_hang' else 'kich_hoat' end, 'hang', v_hv.hang,
+                              'tu_ngay', v_hv.tu_ngay, 'den_ngay', v_hv.den_ngay);
 end
 $$;
 
@@ -399,23 +520,31 @@ create or replace function hoi_vien_cua_toi() returns jsonb
 declare
     v_uid uuid := (select auth.uid());
     v_hv public.hoi_vien;
-    v_nam integer := public.qt_so_cau_hinh('sao.hoi_vien.cau_hoi_nam', 2, 0, 12);
     v_sao integer := public.qt_so_cau_hinh('sao.hoi_vien.sao_thang', 15, 0, 100);
     v_hom date := public.hv_hom_nay();
+    v_thuong jsonb := public.hv_goi('thuong');
+    v_cg jsonb := public.hv_goi('chuyen_gia');
+    -- gia_vnd / cau_hoi_nam ở cấp gốc = hạng thường (tương thích bản một hạng); goi[] = cả hai hạng.
     v_chung jsonb := jsonb_build_object(
-        'bat', public.qt_bat_cau_hinh('sao.hoi_vien.bat'),
-        'gia_vnd', public.qt_so_cau_hinh('sao.hoi_vien.gia_vnd', 3990000, 100000, 50000000),
-        'sao_thang', v_sao, 'cau_hoi_nam', v_nam);
+        'bat', (v_thuong->>'bat')::boolean,
+        'gia_vnd', (v_thuong->>'gia_vnd')::integer,
+        'sao_thang', v_sao, 'cau_hoi_nam', (v_thuong->>'cau_hoi_nam')::integer,
+        'goi', jsonb_build_array(v_thuong, v_cg));
 begin
     if v_uid is not null then v_hv := public.hv_dong_hieu_luc(v_uid); end if;
     if v_hv.id is null then
-        return v_chung || jsonb_build_object('dang_la', false, 'tu_ngay', null, 'den_ngay', null, 'cau_hoi_con', 0, 'con_ngay', 0,
-                                             'gia_han_duoc', false, 'sao_thang_da_cap', false);
+        return v_chung || jsonb_build_object('dang_la', false, 'hang', null, 'tu_ngay', null, 'den_ngay', null, 'cau_hoi_con', 0,
+                                             'con_ngay', 0, 'gia_han_duoc', false, 'sao_thang_da_cap', false,
+                                             'nang_hang_duoc', false, 'gia_nang_hang', null, 'han_gio', null);
     end if;
     return v_chung || jsonb_build_object(
-        'dang_la', true, 'tu_ngay', v_hv.tu_ngay, 'den_ngay', v_hv.den_ngay,
-        'cau_hoi_con', greatest(0, v_nam - v_hv.cau_hoi_da_dung), 'cau_hoi_da_dung', v_hv.cau_hoi_da_dung,
+        'dang_la', true, 'hang', v_hv.hang, 'tu_ngay', v_hv.tu_ngay, 'den_ngay', v_hv.den_ngay,
+        'cau_hoi_nam', v_hv.cau_hoi_nam,
+        'cau_hoi_con', greatest(0, v_hv.cau_hoi_nam - v_hv.cau_hoi_da_dung), 'cau_hoi_da_dung', v_hv.cau_hoi_da_dung,
+        'han_gio', v_hv.han_gio,
         'con_ngay', v_hv.den_ngay - v_hom, 'gia_han_duoc', v_hv.den_ngay - v_hom <= 30,
+        'nang_hang_duoc', v_hv.hang = 'thuong' and (v_cg->>'bat')::boolean,
+        'gia_nang_hang', case when v_hv.hang = 'thuong' then public.hv_gia_nang_hang(v_hv) end,
         'sao_thang_da_cap', exists (select 1 from public.so_cai_sao
                                     where khoa = 'hoi_vien:' || v_uid || ':' || to_char(v_hom, 'YYYY-MM')));
 end
@@ -427,15 +556,14 @@ create or replace function hoi_vien_dung_cau_hoi() returns jsonb
 declare
     v_uid uuid := (select auth.uid());
     v_hv public.hoi_vien;
-    v_nam integer := public.qt_so_cau_hinh('sao.hoi_vien.cau_hoi_nam', 2, 0, 12);
 begin
     if v_uid is null then raise exception 'chua_dang_nhap'; end if;
     select * into v_hv from public.hoi_vien
     where user_id = v_uid and trang_thai = 'hieu_luc' and den_ngay >= public.hv_hom_nay() for update;
     if v_hv.id is null then return jsonb_build_object('ok', false, 'con', 0); end if;
-    if v_hv.cau_hoi_da_dung >= v_nam then return jsonb_build_object('ok', false, 'con', 0); end if;
+    if v_hv.cau_hoi_da_dung >= v_hv.cau_hoi_nam then return jsonb_build_object('ok', false, 'con', 0); end if;
     update public.hoi_vien set cau_hoi_da_dung = cau_hoi_da_dung + 1, cap_nhat_luc = now() where id = v_hv.id;
-    return jsonb_build_object('ok', true, 'con', v_nam - v_hv.cau_hoi_da_dung - 1);
+    return jsonb_strip_nulls(jsonb_build_object('ok', true, 'con', v_hv.cau_hoi_nam - v_hv.cau_hoi_da_dung - 1, 'han_gio', v_hv.han_gio));
 end
 $$;
 
@@ -472,9 +600,10 @@ begin
         where (ma_don = p_ma_don or p_ma_don = any (don_gia_han)) and trang_thai = 'hieu_luc' for update;
         if v_hv.id is null then return jsonb_build_object('ket_qua', 'khong_hoan_duoc', 'trang_thai', 'hoi_vien_khong_hieu_luc'); end if;
         v_gia_han := p_ma_don = any (v_hv.don_gia_han);
-        -- Đã dùng gì kể từ khi trả đơn này: chương mở bằng quyền hội viên + câu hỏi chuyên gia (gia hạn: lượt về 0 lúc gia hạn).
+        -- Đã dùng gì kể từ khi trả đơn này: chương mở bằng quyền hội viên + câu hỏi chuyên gia dùng TRONG kỳ của đơn
+        -- (gia hạn: lượt về 0 lúc gia hạn; nâng hạng: trừ phần câu mang sang từ dòng thường).
         select count(*) into v_da_mo from public.hoi_vien_mo where user_id = v_don.user_id and luc >= v_don.tra_luc;
-        v_cau := v_hv.cau_hoi_da_dung;
+        v_cau := greatest(0, v_hv.cau_hoi_da_dung - v_hv.cau_hoi_mang_sang);
         if v_hom - v_don.tra_luc::date <= 14 and v_da_mo = 0 and v_cau = 0 then
             v_goi_y := v_don.so_tien; v_thang := null; v_ly_do := 'trong_14_ngay_chua_dung';
         else
@@ -492,12 +621,22 @@ begin
             where id = v_hv.id;
         else
             update public.hoi_vien set trang_thai = 'hoan', cap_nhat_luc = now() where id = v_hv.id;
+            -- Hoàn đơn NÂNG HẠNG: dòng thường cũ trở lại (còn hạn → hiệu lực, hết hạn → het_han); câu đã dùng ở kỳ
+            -- Chuyên gia tính vào dòng cũ (không cho dùng lại lượt đã tiêu).
+            if v_don.nang_hang and v_hv.nang_tu is not null then
+                update public.hoi_vien
+                set trang_thai = case when den_ngay >= v_hom then 'hieu_luc' else 'het_han' end,
+                    cau_hoi_da_dung = least(cau_hoi_nam, greatest(cau_hoi_da_dung, v_hv.cau_hoi_da_dung)), cap_nhat_luc = now()
+                where id = v_hv.nang_tu and trang_thai = 'nang_hang';
+            end if;
         end if;
         update public.don_nap set trang_thai = 'hoan', ghi_chu = left(trim(p_ly_do), 200) where ma_don = p_ma_don;
-        perform public.qt_ghi('don_nap.hoan', p_ma_don::text, jsonb_build_object('loai', 'hoi_vien', 'so_tien', v_don.so_tien,
+        perform public.qt_ghi('don_nap.hoan', p_ma_don::text, jsonb_build_object('loai', 'hoi_vien', 'hang', v_don.hang,
+            'nang_hang', v_don.nang_hang, 'so_tien', v_don.so_tien,
             'ly_do', left(trim(p_ly_do), 120), 'so_tien_hoan_goi_y', v_goi_y, 'ly_do_goi_y', v_ly_do, 'thang_con', v_thang,
             'da_mo', v_da_mo, 'cau_hoi_da_dung', v_cau, 'gia_han', v_gia_han));
-        return jsonb_build_object('ket_qua', 'da_hoan', 'loai', 'hoi_vien', 'sao', 0, 'so_tien_hoan_goi_y', v_goi_y,
+        return jsonb_build_object('ket_qua', 'da_hoan', 'loai', 'hoi_vien', 'hang', v_don.hang, 'nang_hang', v_don.nang_hang,
+                                  'sao', 0, 'so_tien_hoan_goi_y', v_goi_y,
                                   'ly_do', v_ly_do, 'thang_con', v_thang, 'da_mo', v_da_mo, 'cau_hoi_da_dung', v_cau);
     end if;
 
@@ -544,8 +683,20 @@ begin
     return jsonb_build_object(
         'ngay', p_ngay,
         'bat', public.qt_bat_cau_hinh('sao.hoi_vien.bat'),
-        'gia_vnd', public.qt_so_cau_hinh('sao.hoi_vien.gia_vnd', 3990000, 100000, 50000000),
+        'gia_vnd', public.qt_so_cau_hinh('sao.hoi_vien.gia_vnd', 399000, 100000, 50000000),
+        'gia_cg_vnd', public.qt_so_cau_hinh('sao.hoi_vien.cg.gia_vnd', 1990000, 100000, 50000000),
+        'cg_bat', (public.hv_goi('chuyen_gia')->>'bat')::boolean,
         'hieu_luc', (select count(*) from public.hoi_vien where trang_thai = 'hieu_luc' and den_ngay >= v_hom),
+        'theo_hang', jsonb_build_object(
+            'thuong', (select count(*) from public.hoi_vien where trang_thai = 'hieu_luc' and den_ngay >= v_hom and hang = 'thuong'),
+            'chuyen_gia', (select count(*) from public.hoi_vien where trang_thai = 'hieu_luc' and den_ngay >= v_hom and hang = 'chuyen_gia')),
+        'nang_hang_trong_ky', (select count(*) from public.don_nap
+                               where loai = 'hoi_vien' and nang_hang and trang_thai = 'da_tra' and tra_luc >= v_tu),
+        'doanh_thu_theo_hang', jsonb_build_object(
+            'thuong', (select coalesce(sum(so_tien), 0) from public.don_nap
+                       where loai = 'hoi_vien' and hang = 'thuong' and trang_thai = 'da_tra' and tra_luc >= v_tu),
+            'chuyen_gia', (select coalesce(sum(so_tien), 0) from public.don_nap
+                           where loai = 'hoi_vien' and hang = 'chuyen_gia' and trang_thai = 'da_tra' and tra_luc >= v_tu)),
         'moi_trong_ky', (select count(*) from public.hoi_vien where tao_luc >= v_tu),
         'gia_han_trong_ky', (select count(*) from public.don_nap
                              where loai = 'hoi_vien' and trang_thai in ('da_tra', 'hoan') and tra_luc >= v_tu
@@ -562,15 +713,17 @@ end
 $$;
 
 -- ---------------------------------------------------------------- quyền
-revoke all on function hv_hom_nay(), hv_dong_hieu_luc(uuid), hv_thang_tron(date, date), tao_don_hoi_vien(text),
+revoke all on function hv_hom_nay(), hv_dong_hieu_luc(uuid), hv_thang_tron(date, date), tao_don_hoi_vien(text, text),
+    hv_goi(text), hv_gia_nang_hang(public.hoi_vien), hv_han_gio_cho(uuid),
     hv_kich_hoat(bigint), hoi_vien_hieu_luc(uuid), hoi_vien_ghi_mo(text), hv_cap_sao_thang_cho(uuid),
     hoi_vien_cap_sao_thang(), hoi_vien_cap_sao_thang_tat_ca(), hoi_vien_cua_toi(), hoi_vien_dung_cau_hoi(),
     thong_ke_hoi_vien(integer)
     from public, anon, authenticated;
-grant execute on function tao_don_hoi_vien(text), hoi_vien_hieu_luc(uuid), hoi_vien_ghi_mo(text), hoi_vien_cap_sao_thang(),
+grant execute on function tao_don_hoi_vien(text, text), hoi_vien_hieu_luc(uuid), hoi_vien_ghi_mo(text), hoi_vien_cap_sao_thang(),
     hoi_vien_cua_toi(), hoi_vien_dung_cau_hoi(), thong_ke_hoi_vien(integer) to authenticated;
 grant execute on function hoi_vien_cua_toi() to anon;   -- khách thấy công tắc + giá (không có dữ liệu riêng)
-grant execute on function hoi_vien_hieu_luc(uuid), hoi_vien_cap_sao_thang_tat_ca(), hv_kich_hoat(bigint) to service_role;
+grant execute on function hoi_vien_hieu_luc(uuid), hoi_vien_cap_sao_thang_tat_ca(), hv_kich_hoat(bigint), hv_han_gio_cho(uuid)
+    to service_role;
 -- Hàm thay thế giữ nguyên quyền cũ (create or replace không đổi quyền); ghi lại cho chắc.
 revoke all on function nap_sao_tu_cong(bigint, integer, text, text), hoan_don_nap(bigint, text) from public, anon, authenticated;
 grant execute on function hoan_don_nap(bigint, text) to authenticated;

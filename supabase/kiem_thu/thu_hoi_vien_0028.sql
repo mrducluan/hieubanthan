@@ -15,12 +15,14 @@ insert into auth.users (id, email) values
     ('d0000000-0000-0000-0000-0000000000a2', 'hv-h2@x'),
     ('d0000000-0000-0000-0000-0000000000a3', 'hv-h3@x'),
     ('d0000000-0000-0000-0000-0000000000a4', 'hv-h4@x'),
-    ('d0000000-0000-0000-0000-0000000000a5', 'hv-k@x')
+    ('d0000000-0000-0000-0000-0000000000a5', 'hv-k@x'),
+    ('d0000000-0000-0000-0000-0000000000a6', 'hv-cg@x'),
+    ('d0000000-0000-0000-0000-0000000000a7', 'hv-nang@x')
 on conflict do nothing;
 
 -- ================================================================ (0) quyền + ràng buộc
-select pg_temp.kt('anon không tạo đơn hội viên', has_function_privilege('anon', 'tao_don_hoi_vien(text)', 'execute'), false);
-select pg_temp.kt('authenticated tạo đơn hội viên', has_function_privilege('authenticated', 'tao_don_hoi_vien(text)', 'execute'), true);
+select pg_temp.kt('anon không tạo đơn hội viên', has_function_privilege('anon', 'tao_don_hoi_vien(text,text)', 'execute'), false);
+select pg_temp.kt('authenticated tạo đơn hội viên', has_function_privilege('authenticated', 'tao_don_hoi_vien(text,text)', 'execute'), true);
 select pg_temp.kt('authenticated không gọi hv_kich_hoat', has_function_privilege('authenticated', 'hv_kich_hoat(bigint)', 'execute'), false);
 select pg_temp.kt('authenticated không cấp Sao tất cả', has_function_privilege('authenticated', 'hoi_vien_cap_sao_thang_tat_ca()', 'execute'), false);
 select pg_temp.kt('authenticated không gọi hv_cap_sao_thang_cho', has_function_privilege('authenticated', 'hv_cap_sao_thang_cho(uuid)', 'execute'), false);
@@ -39,7 +41,7 @@ insert into don_nap (user_id, goi, so_tien, sao, cong, loai) values ('d0000000-0
 -- ================================================================ (1) công tắc tắt → không tạo đơn; khách thấy công tắc
 set role anon; select set_config('request.jwt.claim.sub','',false);
 select pg_temp.kt('khách: tắt, giá mặc định, không là hội viên',
-    (hoi_vien_cua_toi()->>'bat') || '/' || (hoi_vien_cua_toi()->>'gia_vnd') || '/' || (hoi_vien_cua_toi()->>'dang_la'), 'false/3990000/false');
+    (hoi_vien_cua_toi()->>'bat') || '/' || (hoi_vien_cua_toi()->>'gia_vnd') || '/' || (hoi_vien_cua_toi()->>'dang_la'), 'false/399000/false');
 reset role;
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a1',false);
 select pg_temp.kt('tắt: tạo đơn bị từ chối', tao_don_hoi_vien('gia')->>'ket_qua', 'chua_mo');
@@ -52,11 +54,13 @@ reset role;
 
 -- ================================================================ (2) bật → đơn hội viên trả xong → hiệu lực 365 ngày
 insert into cau_hinh (khoa, gia_tri) values ('sao.hoi_vien.bat', 'true') on conflict (khoa) do update set gia_tri = excluded.gia_tri;
+-- Các ca (2)–(7) dùng hạng thường với 2 câu/năm (mặc định 1) — quyền lợi đóng băng lúc kích hoạt.
+insert into cau_hinh (khoa, gia_tri) values ('sao.hoi_vien.cau_hoi_nam', '2') on conflict (khoa) do update set gia_tri = excluded.gia_tri;
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a1',false);
 select tao_don_hoi_vien('gia') as t1 \gset
 select pg_temp.kt('đơn hội viên: giá từ cài đặt, 0 Sao, không gói',
     (:'t1'::jsonb->>'ket_qua') || '/' || (:'t1'::jsonb->>'so_tien') || '/' || (:'t1'::jsonb->>'sao') || '/' || (:'t1'::jsonb->>'gia_han'),
-    'da_tao/3990000/0/false');
+    'da_tao/399000/0/false');
 select (:'t1'::jsonb->>'ma_don')::bigint as d1 \gset
 select pg_temp.kt('đơn ghi loai hoi_vien, goi null', (select loai || '/' || coalesce(goi, 'null') from don_nap where ma_don = :d1), 'hoi_vien/null');
 select pg_temp.kt('H1 thấy đơn của mình', (select count(*) from don_nap where ma_don = :d1)::int, 1);
@@ -66,11 +70,11 @@ reset role;
 select pg_temp.kt('sai tiền: không có hội viên', (select count(*) from hoi_vien)::int, 0);
 update don_nap set trang_thai = 'cho' where ma_don = :d1;   -- quản trị sửa tay rồi cổng báo lại đúng tiền
 set role service_role; select set_config('request.jwt.claim.sub','',false);
-select nap_sao_tu_cong(:d1, 3990000, 'gia', 'HV1') as n1 \gset
+select nap_sao_tu_cong(:d1, 399000, 'gia', 'HV1') as n1 \gset
 select pg_temp.kt('trả đúng: da_nap, loai hoi_vien, kích hoạt',
     (:'n1'::jsonb->>'ket_qua') || '/' || (:'n1'::jsonb->>'sao') || '/' || (:'n1'::jsonb->>'loai') || '/' || (:'n1'::jsonb->'hoi_vien'->>'ket_qua'),
     'da_nap/0/hoi_vien/kich_hoat');
-select pg_temp.kt('webhook lặp: đã xử lý', nap_sao_tu_cong(:d1, 3990000, 'gia', 'HV1')->>'ket_qua', 'da_xu_ly');
+select pg_temp.kt('webhook lặp: đã xử lý', nap_sao_tu_cong(:d1, 399000, 'gia', 'HV1')->>'ket_qua', 'da_xu_ly');
 -- Đơn loai khác 'sao' (vd chuyên gia 0029) qua cùng hàm: chỉ ghi đã trả, 0 Sao, không nạp đầu / hoa hồng.
 reset role;
 insert into don_nap (user_id, goi, so_tien, sao, cong, loai) values ('d0000000-0000-0000-0000-0000000000a1', null, 199000, 0, 'gia', 'chuyen_gia')
@@ -97,7 +101,7 @@ insert into cau_hinh (khoa, gia_tri) values ('sao.hoi_vien.gia_vnd', '2990000') 
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a5',false);
 select pg_temp.kt('K thấy giá mới', (hoi_vien_cua_toi()->>'gia_vnd')::int, 2990000);
 reset role;
-insert into cau_hinh (khoa, gia_tri) values ('sao.hoi_vien.gia_vnd', '3990000') on conflict (khoa) do update set gia_tri = excluded.gia_tri;
+insert into cau_hinh (khoa, gia_tri) values ('sao.hoi_vien.gia_vnd', '399000') on conflict (khoa) do update set gia_tri = excluded.gia_tri;
 
 -- ================================================================ (3) H1: quyền lợi — hiệu lực, ghi mở, Sao tháng, câu hỏi
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a1',false);
@@ -141,10 +145,11 @@ select pg_temp.kt('hết lượt', hoi_vien_dung_cau_hoi(), '{"ok": false, "con"
 select pg_temp.kt('hoi_vien_cua_toi: 0 câu còn', (hoi_vien_cua_toi()->>'cau_hoi_con')::int, 0);
 reset role;
 select pg_temp.kt('hoi_vien_mo chỉ có khoá + lúc', (select count(*) from hoi_vien_mo where user_id = 'd0000000-0000-0000-0000-0000000000a1')::int, 1);
--- Nâng số câu hỏi / năm ở cài đặt → còn thêm ngay.
+-- Đổi số câu hỏi / năm ở cài đặt → KHÔNG đổi quyền của người đã mua (đóng băng trên dòng); chỉ áp cho lần mua / gia hạn sau.
 insert into cau_hinh (khoa, gia_tri) values ('sao.hoi_vien.cau_hoi_nam', '3') on conflict (khoa) do update set gia_tri = excluded.gia_tri;
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a1',false);
-select pg_temp.kt('nâng lên 3 câu: còn 1', (hoi_vien_cua_toi()->>'cau_hoi_con')::int, 1);
+select pg_temp.kt('cài đặt lên 3 câu: người đã mua vẫn 0 còn (đóng băng)', (hoi_vien_cua_toi()->>'cau_hoi_con')::int, 0);
+select pg_temp.kt('cài đặt lên 3 câu: người đã mua vẫn 2 câu/năm', (hoi_vien_cua_toi()->>'cau_hoi_nam')::int, 2);
 reset role;
 insert into cau_hinh (khoa, gia_tri) values ('sao.hoi_vien.cau_hoi_nam', '2') on conflict (khoa) do update set gia_tri = excluded.gia_tri;
 
@@ -152,7 +157,7 @@ insert into cau_hinh (khoa, gia_tri) values ('sao.hoi_vien.cau_hoi_nam', '2') on
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a2',false);
 select (tao_don_hoi_vien('gia')->>'ma_don')::bigint as d2 \gset
 reset role; set role service_role; select set_config('request.jwt.claim.sub','',false);
-select pg_temp.kt('H2 trả', nap_sao_tu_cong(:d2, 3990000, 'gia', 'HV2')->>'ket_qua', 'da_nap');
+select pg_temp.kt('H2 trả', nap_sao_tu_cong(:d2, 399000, 'gia', 'HV2')->>'ket_qua', 'da_nap');
 reset role;
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a2',false);
 \set ON_ERROR_STOP 0
@@ -163,7 +168,7 @@ select set_config('request.jwt.claim.aal','aal2',false);
 select hoan_don_nap(:d2, 'Khách đổi ý trong 14 ngày') as h2 \gset
 select pg_temp.kt('hoàn H2: gợi ý 100 %',
     (:'h2'::jsonb->>'ket_qua') || '/' || (:'h2'::jsonb->>'loai') || '/' || (:'h2'::jsonb->>'so_tien_hoan_goi_y') || '/' || (:'h2'::jsonb->>'ly_do'),
-    'da_hoan/hoi_vien/3990000/trong_14_ngay_chua_dung');
+    'da_hoan/hoi_vien/399000/trong_14_ngay_chua_dung');
 select pg_temp.kt('hoàn lại lần hai bị từ chối', hoan_don_nap(:d2, 'Khách đổi ý trong 14 ngày')->>'ket_qua', 'khong_hoan_duoc');
 select set_config('request.jwt.claim.aal','aal1',false);
 select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a2',false);
@@ -173,12 +178,12 @@ select pg_temp.kt('hội viên H2 → hoan; đơn → hoan',
     (select trang_thai from hoi_vien where ma_don = :d2) || '/' || (select trang_thai from don_nap where ma_don = :d2), 'hoan/hoan');
 select pg_temp.kt('không bút toán Sao khi hoàn đơn hội viên', (select count(*) from so_cai_sao where user_id = 'd0000000-0000-0000-0000-0000000000a2')::int, 0);
 select pg_temp.kt('nhật ký hoàn ghi loai + gợi ý', (select (chi_tiet->>'loai') || '/' || (chi_tiet->>'so_tien_hoan_goi_y') from nhat_ky_quan_tri
-    where hanh_dong = 'don_nap.hoan' and doi_tuong = :d2::text order by id desc limit 1), 'hoi_vien/3990000');
+    where hanh_dong = 'don_nap.hoan' and doi_tuong = :d2::text order by id desc limit 1), 'hoi_vien/399000');
 -- H2 mua lại sau khi hoàn: dòng cũ 'hoan' không cản dòng mới.
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a2',false);
 select (tao_don_hoi_vien('gia')->>'ma_don')::bigint as d2b \gset
 reset role; set role service_role; select set_config('request.jwt.claim.sub','',false);
-select pg_temp.kt('H2 mua lại: kích hoạt mới', nap_sao_tu_cong(:d2b, 3990000, 'gia', 'HV2B')->'hoi_vien'->>'ket_qua', 'kich_hoat');
+select pg_temp.kt('H2 mua lại: kích hoạt mới', nap_sao_tu_cong(:d2b, 399000, 'gia', 'HV2B')->'hoi_vien'->>'ket_qua', 'kich_hoat');
 reset role;
 select pg_temp.kt('H2: 2 dòng (hoan + hieu_luc)', (select string_agg(trang_thai, ',' order by id) from hoi_vien where user_id = 'd0000000-0000-0000-0000-0000000000a2'), 'hoan,hieu_luc');
 
@@ -186,7 +191,7 @@ select pg_temp.kt('H2: 2 dòng (hoan + hieu_luc)', (select string_agg(trang_thai
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a3',false);
 select (tao_don_hoi_vien('gia')->>'ma_don')::bigint as d3 \gset
 reset role; set role service_role; select set_config('request.jwt.claim.sub','',false);
-select pg_temp.kt('H3 trả', nap_sao_tu_cong(:d3, 3990000, 'gia', 'HV3')->>'ket_qua', 'da_nap');
+select pg_temp.kt('H3 trả', nap_sao_tu_cong(:d3, 399000, 'gia', 'HV3')->>'ket_qua', 'da_nap');
 reset role;
 -- Giả lập: trả cách đây 45 ngày (đang ở tháng thứ 2), còn 320 ngày.
 update don_nap set tra_luc = now() - interval '45 days' where ma_don = :d3;
@@ -201,8 +206,8 @@ select hoan_don_nap(:d3, 'Khách xin hoàn sau khi dùng') as h3 \gset
 select pg_temp.kt('hoàn H3: theo tháng tròn còn lại', :'h3'::jsonb->>'ly_do', 'theo_thang_tron_con_lai');
 select pg_temp.kt('hoàn H3: tháng còn = tháng tròn tới hạn (10)', (:'h3'::jsonb->>'thang_con')::int, :thang3);
 select pg_temp.kt('hoàn H3: 10 tháng', :thang3, 10);
-select pg_temp.kt('hoàn H3: gợi ý = 3.990.000 × tháng/12 − 199.000 (1 câu hỏi)',
-    (:'h3'::jsonb->>'so_tien_hoan_goi_y')::int, round(3990000 * :thang3 / 12.0)::int - 199000);
+select pg_temp.kt('hoàn H3: gợi ý = 399.000 × tháng/12 − 199.000 (1 câu hỏi), kẹp ≥ 0',
+    (:'h3'::jsonb->>'so_tien_hoan_goi_y')::int, greatest(0, round(399000 * :thang3 / 12.0)::int - 199000));
 select pg_temp.kt('hoàn H3: ghi đã mở 1, câu hỏi 1', (:'h3'::jsonb->>'da_mo') || '/' || (:'h3'::jsonb->>'cau_hoi_da_dung'), '1/1');
 select set_config('request.jwt.claim.aal','aal1',false);
 reset role;
@@ -210,7 +215,7 @@ reset role;
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a3',false);
 select (tao_don_hoi_vien('gia')->>'ma_don')::bigint as d3b \gset
 reset role; set role service_role; select set_config('request.jwt.claim.sub','',false);
-select nap_sao_tu_cong(:d3b, 3990000, 'gia', 'HV3B');
+select nap_sao_tu_cong(:d3b, 399000, 'gia', 'HV3B');
 reset role;
 update don_nap set tra_luc = now() - interval '360 days' where ma_don = :d3b;
 update hoi_vien set tu_ngay = hv_hom_nay() - 360, den_ngay = hv_hom_nay() + 5 where ma_don = :d3b;
@@ -230,7 +235,7 @@ delete from cau_hinh where khoa = 'sao.chuyen_gia.gia_vnd';
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a4',false);
 select (tao_don_hoi_vien('gia')->>'ma_don')::bigint as d4 \gset
 reset role; set role service_role; select set_config('request.jwt.claim.sub','',false);
-select nap_sao_tu_cong(:d4, 3990000, 'gia', 'HV4');
+select nap_sao_tu_cong(:d4, 399000, 'gia', 'HV4');
 reset role;
 update hoi_vien set tu_ngay = hv_hom_nay() - 334, den_ngay = hv_hom_nay() + 31 where ma_don = :d4;
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a4',false);
@@ -241,22 +246,22 @@ reset role;
 update hoi_vien set den_ngay = hv_hom_nay() + 30 where ma_don = :d4;
 set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a4',false);
 select tao_don_hoi_vien('gia') as t4 \gset
-select pg_temp.kt('còn 30 ngày: đơn gia hạn', (:'t4'::jsonb->>'ket_qua') || '/' || (:'t4'::jsonb->>'gia_han') || '/' || (:'t4'::jsonb->>'ten_goi'), 'da_tao/true/Gia hạn hội viên năm');
+select pg_temp.kt('còn 30 ngày: đơn gia hạn', (:'t4'::jsonb->>'ket_qua') || '/' || (:'t4'::jsonb->>'gia_han') || '/' || (:'t4'::jsonb->>'ten_goi'), 'da_tao/true/Gia hạn Hội viên năm');
 select (:'t4'::jsonb->>'ma_don')::bigint as d4b \gset
 reset role; set role service_role; select set_config('request.jwt.claim.sub','',false);
-select nap_sao_tu_cong(:d4b, 3990000, 'gia', 'HV4B') as n4b \gset
+select nap_sao_tu_cong(:d4b, 399000, 'gia', 'HV4B') as n4b \gset
 select pg_temp.kt('gia hạn: nối tiếp hạn cũ', :'n4b'::jsonb->'hoi_vien'->>'ket_qua', 'gia_han');
-select pg_temp.kt('webhook lặp đơn gia hạn: không nối thêm', nap_sao_tu_cong(:d4b, 3990000, 'gia', 'HV4B')->>'ket_qua', 'da_xu_ly');
+select pg_temp.kt('webhook lặp đơn gia hạn: không nối thêm', nap_sao_tu_cong(:d4b, 399000, 'gia', 'HV4B')->>'ket_qua', 'da_xu_ly');
 reset role;
 select pg_temp.kt('gia hạn: den_ngay = hạn cũ + 365, vẫn một dòng, tiền cộng dồn, câu hỏi về 0',
     (select (den_ngay = hv_hom_nay() + 30 + 365) || '/' || gia_vnd || '/' || cau_hoi_da_dung || '/' || array_length(don_gia_han, 1)
-     from hoi_vien where ma_don = :d4), 'true/7980000/0/1');
+     from hoi_vien where ma_don = :d4), 'true/798000/0/1');
 select pg_temp.kt('H4 vẫn một dòng hiệu lực', (select count(*) from hoi_vien where user_id = 'd0000000-0000-0000-0000-0000000000a4')::int, 1);
 -- Hoàn đơn gia hạn trong 14 ngày chưa dùng → gợi ý 100 %, lùi 365 ngày, hội viên vẫn hiệu lực.
 set role authenticated; select set_config('request.jwt.claim.sub','11111111-1111-1111-1111-111111111111',false);
 select set_config('request.jwt.claim.aal','aal2',false);
 select hoan_don_nap(:d4b, 'Khách gia hạn nhầm') as h4b \gset
-select pg_temp.kt('hoàn đơn gia hạn: 100 %', (:'h4b'::jsonb->>'so_tien_hoan_goi_y')::int || '/' || (:'h4b'::jsonb->>'ly_do'), '3990000/trong_14_ngay_chua_dung');
+select pg_temp.kt('hoàn đơn gia hạn: 100 %', (:'h4b'::jsonb->>'so_tien_hoan_goi_y')::int || '/' || (:'h4b'::jsonb->>'ly_do'), '399000/trong_14_ngay_chua_dung');
 select set_config('request.jwt.claim.aal','aal1',false);
 reset role;
 select pg_temp.kt('hoàn gia hạn: lùi 365, vẫn hiệu lực, bỏ mã đơn gia hạn',
@@ -283,13 +288,103 @@ select set_config('request.jwt.claim.aal','aal2',false);
 select thong_ke_hoi_vien(30) as tk \gset
 select pg_temp.kt('thống kê: hiệu lực 2 (H1, H2 mới; H3 đã hoàn, H4 quá hạn), hoàn trong kỳ 2 (d2, d4b — d3/d3b trả ngoài kỳ), bật',
     (:'tk'::jsonb->>'hieu_luc') || '/' || (:'tk'::jsonb->>'hoan') || '/' || (:'tk'::jsonb->>'bat'), '2/2/true');
-select pg_temp.kt('thống kê: doanh thu = 3 đơn hội viên còn da_tra (d1, d2b, d4) × 3.990.000', (:'tk'::jsonb->>'doanh_thu')::bigint, 11970000::bigint);
+select pg_temp.kt('thống kê: doanh thu = 3 đơn hội viên còn da_tra (d1, d2b, d4) × 399.000', (:'tk'::jsonb->>'doanh_thu')::bigint, 1197000::bigint);
 select pg_temp.kt('thống kê: Sao tháng đã cấp 15 + 20 + 20', (:'tk'::jsonb->>'sao_thang_da_cap')::int, 55);
 select set_config('request.jwt.claim.aal','aal1',false);
 \set ON_ERROR_STOP 0
 select 'chưa MFA xem thống kê (phải lỗi khong_co_quyen)' t, thong_ke_hoi_vien(30);
 \set ON_ERROR_STOP 1
 reset role;
+-- ================================================================ (8) HAI HẠNG: Chuyên gia, nâng hạng, hoàn nâng hạng
+-- Hạng Chuyên gia chỉ bán khi bật đủ 3 công tắc.
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a6',false);
+select pg_temp.kt('CG: chưa bật cg → chua_mo', tao_don_hoi_vien('gia', 'chuyen_gia')->>'ket_qua', 'chua_mo');
+select pg_temp.kt('hạng lạ', tao_don_hoi_vien('gia', 'vang')->>'ket_qua', 'hang_khong_hop_le');
+reset role;
+insert into cau_hinh (khoa, gia_tri) values ('sao.hoi_vien.cg.bat', 'true') on conflict (khoa) do update set gia_tri = excluded.gia_tri;
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a6',false);
+select pg_temp.kt('CG: thiếu công tắc Hỏi chuyên gia → chua_mo', tao_don_hoi_vien('gia', 'chuyen_gia')->>'ket_qua', 'chua_mo');
+reset role;
+insert into cau_hinh (khoa, gia_tri) values ('sao.chuyen_gia.bat', 'true') on conflict (khoa) do update set gia_tri = excluded.gia_tri;
+set role anon; select set_config('request.jwt.claim.sub','',false);
+select pg_temp.kt('khách thấy hai hạng + giá',
+    (select string_agg((g->>'hang') || ':' || (g->>'gia_vnd') || ':' || (g->>'cau_hoi_nam') || ':' || (g->>'bat'), ',')
+     from jsonb_array_elements(hoi_vien_cua_toi()->'goi') g),
+    'thuong:399000:2:true,chuyen_gia:1990000:6:true');
+reset role;
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a6',false);
+select tao_don_hoi_vien('gia', 'chuyen_gia') as tcg \gset
+select pg_temp.kt('đơn CG: 1.990.000, hạng, không nâng', (:'tcg'::jsonb->>'so_tien') || '/' || (:'tcg'::jsonb->>'hang') || '/' || (:'tcg'::jsonb->>'nang_hang') || '/' || (:'tcg'::jsonb->>'ten_goi'),
+    '1990000/chuyen_gia/false/Hội viên Chuyên gia');
+reset role; set role service_role; select set_config('request.jwt.claim.sub','',false);
+select pg_temp.kt('CG trả: kích hoạt', nap_sao_tu_cong((:'tcg'::jsonb->>'ma_don')::bigint, 1990000, 'gia', 'CGV1')->'hoi_vien'->>'hang', 'chuyen_gia');
+select pg_temp.kt('hạn ưu tiên CG = 24 giờ', hv_han_gio_cho('d0000000-0000-0000-0000-0000000000a6'), 24);
+select pg_temp.kt('hạng thường không có hạn ưu tiên', hv_han_gio_cho('d0000000-0000-0000-0000-0000000000a1') is null, true);
+reset role;
+-- Quyền lợi đóng băng: đổi cài đặt CG sau khi mua không đổi số câu / giờ của người đã mua.
+insert into cau_hinh (khoa, gia_tri) values ('sao.hoi_vien.cg.cau_hoi_nam', '2'), ('sao.hoi_vien.cg.han_gio', '48')
+    on conflict (khoa) do update set gia_tri = excluded.gia_tri;
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a6',false);
+select hoi_vien_cua_toi() as ccg \gset
+select pg_temp.kt('CG đóng băng: 6 câu, còn 6, 24 giờ, không nâng được nữa',
+    (:'ccg'::jsonb->>'hang') || '/' || (:'ccg'::jsonb->>'cau_hoi_nam') || '/' || (:'ccg'::jsonb->>'cau_hoi_con') || '/' || (:'ccg'::jsonb->>'han_gio') || '/' || (:'ccg'::jsonb->>'nang_hang_duoc'),
+    'chuyen_gia/6/6/24/false');
+select pg_temp.kt('CG chọn hạng thường khi còn hạn → hạ hạng khi hết hạn', tao_don_hoi_vien('gia', 'thuong')->>'ket_qua', 'ha_hang_khi_het_han');
+select pg_temp.kt('CG mua lại CG khi còn > 30 ngày → da_la_hoi_vien', tao_don_hoi_vien('gia', 'chuyen_gia')->>'ket_qua', 'da_la_hoi_vien');
+select pg_temp.kt('CG dùng câu: còn 5, kèm giờ', hoi_vien_dung_cau_hoi(), '{"ok": true, "con": 5, "han_gio": 24}'::jsonb);
+reset role;
+delete from cau_hinh where khoa in ('sao.hoi_vien.cg.cau_hoi_nam', 'sao.hoi_vien.cg.han_gio');
+
+-- Nâng hạng: N mua thường (2 câu theo cài đặt hiện hành), dùng 1 câu, sau 2 tháng nâng lên CG.
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a7',false);
+select (tao_don_hoi_vien('gia')->>'ma_don')::bigint as dn \gset
+reset role; set role service_role; select set_config('request.jwt.claim.sub','',false);
+select nap_sao_tu_cong(:dn, 399000, 'gia', 'NANG1');
+reset role;
+update hoi_vien set tu_ngay = tu_ngay - 61, den_ngay = den_ngay - 61 where ma_don = :dn;   -- đã đi 2 tháng
+select (round((1990000 - 399000 * least(12, hv_thang_tron(hv_hom_nay(), (select den_ngay from hoi_vien where ma_don = :dn))) / 12.0) / 1000.0) * 1000)::int
+    as gia_nang_mong \gset
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a7',false);
+select pg_temp.kt('N dùng 1 câu', (hoi_vien_dung_cau_hoi()->>'ok')::boolean, true);
+select hoi_vien_cua_toi() as cn \gset
+select pg_temp.kt('N: nâng được, giá = 1.990.000 − 399.000 × tháng tròn còn / 12 (làm tròn nghìn)',
+    (:'cn'::jsonb->>'gia_nang_hang')::int, :gia_nang_mong);
+select tao_don_hoi_vien('gia', 'chuyen_gia') as tn \gset
+select pg_temp.kt('đơn nâng hạng: giá khớp, cờ nâng', (:'tn'::jsonb->>'so_tien') || '/' || (:'tn'::jsonb->>'nang_hang') || '/' || (:'tn'::jsonb->>'ten_goi'),
+    (:'cn'::jsonb->>'gia_nang_hang') || '/true/Nâng lên Hội viên Chuyên gia');
+reset role; set role service_role; select set_config('request.jwt.claim.sub','',false);
+select nap_sao_tu_cong((:'tn'::jsonb->>'ma_don')::bigint, (:'tn'::jsonb->>'so_tien')::int, 'gia', 'NANG2') as nn \gset
+select pg_temp.kt('nâng hạng kích hoạt', :'nn'::jsonb->'hoi_vien'->>'ket_qua', 'nang_hang');
+reset role;
+select pg_temp.kt('dòng thường cũ → nang_hang, dòng CG mới 365 ngày từ hôm nay, mang 1 câu sang',
+    (select trang_thai from hoi_vien where ma_don = :dn) || '/' ||
+    (select (den_ngay - tu_ngay) || ':' || (tu_ngay = hv_hom_nay()) || ':' || cau_hoi_da_dung || ':' || cau_hoi_mang_sang || ':' || hang
+     from hoi_vien where ma_don = (:'tn'::jsonb->>'ma_don')::bigint),
+    'nang_hang/365:true:1:1:chuyen_gia');
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a7',false);
+select pg_temp.kt('N sau nâng: CG, còn 5 câu', (hoi_vien_cua_toi()->>'hang') || '/' || (hoi_vien_cua_toi()->>'cau_hoi_con'), 'chuyen_gia/5');
+reset role;
+-- Hoàn đơn nâng hạng trong 14 ngày, chưa dùng gì TRONG kỳ CG (câu mang sang không tính) → 100 %, khôi phục dòng thường.
+set role authenticated; select set_config('request.jwt.claim.sub','11111111-1111-1111-1111-111111111111',false);
+select set_config('request.jwt.claim.aal','aal2',false);
+select hoan_don_nap((:'tn'::jsonb->>'ma_don')::bigint, 'Khách đổi ý về hạng thường') as hn \gset
+select pg_temp.kt('hoàn nâng hạng: 100 %, không tính câu mang sang', (:'hn'::jsonb->>'so_tien_hoan_goi_y') || '/' || (:'hn'::jsonb->>'ly_do') || '/' || (:'hn'::jsonb->>'cau_hoi_da_dung'),
+    (:'tn'::jsonb->>'so_tien') || '/trong_14_ngay_chua_dung/0');
+select set_config('request.jwt.claim.aal','aal1',false);
+reset role;
+select pg_temp.kt('dòng thường khôi phục hiệu lực, giữ 1 câu đã dùng', (select trang_thai || '/' || cau_hoi_da_dung from hoi_vien where ma_don = :dn), 'hieu_luc/1');
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a7',false);
+select pg_temp.kt('N trở lại hạng thường, còn 1 câu (2 − 1 đã dùng)', (hoi_vien_cua_toi()->>'hang') || '/' || (hoi_vien_cua_toi()->>'cau_hoi_con'), 'thuong/1');
+reset role;
+select pg_temp.kt('chỉ một dòng hiệu lực / người', (select count(*) from hoi_vien where user_id = 'd0000000-0000-0000-0000-0000000000a7' and trang_thai = 'hieu_luc')::int, 1);
+-- Thống kê theo hạng.
+set role authenticated; select set_config('request.jwt.claim.sub','11111111-1111-1111-1111-111111111111',false);
+select set_config('request.jwt.claim.aal','aal2',false);
+select pg_temp.kt('thống kê theo hạng: CG 1, có doanh thu CG', ((thong_ke_hoi_vien(30)->'theo_hang'->>'chuyen_gia')::int = 1)
+    and ((thong_ke_hoi_vien(30)->'doanh_thu_theo_hang'->>'chuyen_gia')::int = 1990000), true);
+select set_config('request.jwt.claim.aal','aal1',false);
+reset role;
+
 select pg_temp.kt('đơn Sao vẫn chạy như cũ (hồi quy)', (select count(*) from don_nap where loai = 'sao' and trang_thai = 'da_tra') > 0, true);
 
 delete from cau_hinh where khoa like 'sao.%';

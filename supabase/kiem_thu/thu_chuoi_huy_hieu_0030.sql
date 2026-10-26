@@ -142,7 +142,7 @@ select pg_temp.kt('Y1 không có huy hiệu nào', (select count(*) from jsonb_a
 reset role;
 -- Hội viên năm (0028) hiệu lực → huy hiệu hoi_vien đạt (dò đúng chữ ký hoi_vien_hieu_luc(uuid)).
 reset role;
-insert into hoi_vien (user_id, tu_ngay, den_ngay, gia_vnd) values (:X, current_date - 10, current_date + 355, 3990000);
+insert into hoi_vien (user_id, tu_ngay, den_ngay, gia_vnd) values (:X, current_date - 10, current_date + 355, 399000);
 set role authenticated; select set_config('request.jwt.claim.sub', :X, false);
 select pg_temp.kt('hội viên hiệu lực → huy hiệu hoi_vien đạt',
     (select (x->>'dat')::boolean from jsonb_array_elements(huy_hieu_cua_toi()) x where x->>'ma' = 'hoi_vien'), true);
