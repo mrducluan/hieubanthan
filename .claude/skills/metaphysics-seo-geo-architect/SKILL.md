@@ -126,3 +126,17 @@ Document the maintenance rule for the URL: keep the URL slug timeless (no year n
 - **Avoid fatalistic fear-mongering:** Never tell users their chart means "divorce is guaranteed" or "bankruptcy is unavoidable." Frame challenging stars/cards as high-voltage energy requiring the right channel.
 
 - **Do not write bloated Direct Answer blocks:** Keep the AEO definition block strictly between 40 and 60 words so AI Overviews can extract it verbatim without truncation.
+
+## Lưu ý khi dùng cho HieuBanThan (hieuban.com)
+
+Phần này chỉ áp dụng khi viết hoặc audit nội dung cho dự án HieuBanThan. Khi xung đột với các mục phía trên, quy tắc dự án (CLAUDE.md) thắng.
+
+- **Không khai người thẩm định cho bài chưa đọc duyệt.** `scripts/schema_generator.py` gắn sẵn `reviewedBy` ("Hội Đồng Thẩm Định…") và `jobTitle` cho mọi bài. Trên hieuban.com phải bỏ hai trường này, trừ bài đã có trong `engine/app/kb/data/tham_dinh.json`. Bài chưa thẩm định ghi "Ban biên tập Hiểu Bản Thân · Chủ biên Đức Luân" (EEAT-1, DX-1). Tuyệt đối không ghi chuyên gia là tác giả bài họ chưa đọc.
+- **Chỉ 5 mảng có engine và KB:** Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ. Chiêm tinh phương Tây và Tarot chưa có phép tính nào. Phần "Cross-System Entity Bridge" với hai mảng này chỉ được nêu khái niệm chung, không đưa số liệu, vị trí sao hay lá bài như thể hệ thống đã tính.
+- **Số liệu tính toán lấy từ engine, không tự suy.** Can chi, nạp âm, độ sáng sao, đại vận, đường đời… phải khớp kết quả engine (một bộ tính duy nhất). Không bịa năm hay tuổi ứng nghiệm.
+- **Giọng văn:** đời thường, câu ngắn, thuật ngữ đặt ở phần giải thích. Không dọa, không phán hung, không "chắc chắn ly hôn / phá sản". Không bệnh tật, chẩn đoán, sống chết; nói sức khoẻ thì kèm câu "không thay lời bác sĩ". Danh sách cụm cấm "giọng AI" nằm ở `cum_cam` trong KB; validator của skill chỉ bắt một phần.
+- **Không lộ bí mật kinh doanh (BM-1):** không nêu tên thư viện, bộ đối chiếu, nhà cung cấp hạ tầng hay phiên bản engine trong bài. Nguồn ghi kiểu sách / trường phái.
+- **Không so sánh trực tiếp tên sản phẩm của hãng khác.** Muốn so thì nói "nhóm chatbot AI đa năng", không nêu tên.
+- **Giới hạn SEO của dự án:** title ≤ 70 ký tự kể cả hậu tố, description ≤ 170, đúng 1 H1. Skill này đặt ngưỡng chặt hơn (title < 60, description < 155) nên cứ theo skill là đủ. Bản đã viết xong phải qua `web/scripts/kiem-tra-seo.mjs` (0 lỗi) và chạy `scripts/seo_geo_qc_validator.py` trước khi đưa người duyệt.
+- **URL theo silo mảng (QH-URL):** slug gợi ý trong ma trận phải đặt dưới trang công cụ của mảng (vd `/tu-vi/…`, `/bat-tu/…`, `/than-so/…`), không dùng `/kien-thuc/{cụm}` kiểu cũ. Bài blog đi qua CMS, kiểm định chặn xuất bản khi vướng vùng cấm.
+- **Mục tiêu tăng trưởng:** mỗi cụm bài nên ghi rõ đẩy khâu nào của vòng (thu hút → quay lại → mời bạn → nạp Sao) và đo bằng chỉ số nào (`docs/MUC-TIEU-TANG-TRUONG.md`).
