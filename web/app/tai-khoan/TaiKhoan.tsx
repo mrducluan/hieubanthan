@@ -175,6 +175,15 @@ export function TaiKhoan({ emailDuLieu = null }: { emailDuLieu?: string | null }
         <TieuDeMuc id="du-lieu-cua-toi" nho="Dữ liệu của tôi" lon="Những gì bạn đã đồng ý — rút lại bất cứ lúc nào" />
         <DuLieuCuaToi emailDuLieu={emailDuLieu} />
       </section>
+      {user && (
+        <section aria-labelledby="chuyen-gia">
+          <TieuDeMuc id="chuyen-gia" nho="Hỏi chuyên gia" lon="Câu hỏi của tôi" />
+          <Card className="flex flex-col gap-3 text-sm sm:flex-row sm:items-center">
+            <p className="flex-1 text-fg-muted">Câu hỏi đã gửi chuyên gia, câu trả lời và hạn trả lời — chỉ bạn đọc được.</p>
+            <Button asChild variant="secondary" size="sm"><Link href="/tai-khoan/cau-hoi" data-testid="tk-cau-hoi">Xem câu hỏi</Link></Button>
+          </Card>
+        </section>
+      )}
 
       <section aria-labelledby="rieng-tu">
         <TieuDeMuc id="rieng-tu" nho="Quyền riêng tư" lon="Chúng tôi giữ gì, không giữ gì" />

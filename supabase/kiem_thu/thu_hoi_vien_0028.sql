@@ -71,6 +71,19 @@ select pg_temp.kt('trả đúng: da_nap, loai hoi_vien, kích hoạt',
     (:'n1'::jsonb->>'ket_qua') || '/' || (:'n1'::jsonb->>'sao') || '/' || (:'n1'::jsonb->>'loai') || '/' || (:'n1'::jsonb->'hoi_vien'->>'ket_qua'),
     'da_nap/0/hoi_vien/kich_hoat');
 select pg_temp.kt('webhook lặp: đã xử lý', nap_sao_tu_cong(:d1, 3990000, 'gia', 'HV1')->>'ket_qua', 'da_xu_ly');
+-- Đơn loai khác 'sao' (vd chuyên gia 0029) qua cùng hàm: chỉ ghi đã trả, 0 Sao, không nạp đầu / hoa hồng.
+reset role;
+insert into don_nap (user_id, goi, so_tien, sao, cong, loai) values ('d0000000-0000-0000-0000-0000000000a1', null, 199000, 0, 'gia', 'chuyen_gia')
+    returning ma_don as dcg \gset
+set role service_role; select set_config('request.jwt.claim.sub','',false);
+select nap_sao_tu_cong(:dcg, 199000, 'gia', 'CG1') as ncg \gset
+select pg_temp.kt('đơn chuyên gia: da_nap, 0 Sao, loai chuyen_gia', (:'ncg'::jsonb->>'ket_qua') || '/' || (:'ncg'::jsonb->>'sao') || '/' || (:'ncg'::jsonb->>'loai'), 'da_nap/0/chuyen_gia');
+reset role;
+select pg_temp.kt('đơn chuyên gia đã trả, không bút toán Sao', (select trang_thai from don_nap where ma_don = :dcg) || '/' || (select count(*) from so_cai_sao where khoa = 'mua:' || :dcg), 'da_tra/0');
+-- Đơn hội viên + chuyên gia đã trả KHÔNG làm mất "lần nạp đầu" của lần nạp Sao thật.
+set role authenticated; select set_config('request.jwt.claim.sub','d0000000-0000-0000-0000-0000000000a1',false);
+select pg_temp.kt('H1 vẫn còn lần nạp đầu sau đơn hội viên + chuyên gia', nap_dau_thong_tin()->>'lan_dau', 'true');
+reset role; set role service_role; select set_config('request.jwt.claim.sub','',false);
 select pg_temp.kt('service_role hỏi hiệu lực của H1', hoi_vien_hieu_luc('d0000000-0000-0000-0000-0000000000a1'), true);
 select pg_temp.kt('service_role hỏi hiệu lực của K', hoi_vien_hieu_luc('d0000000-0000-0000-0000-0000000000a5'), false);
 reset role;

@@ -41,7 +41,10 @@ export type SuKien =
   // ĐY-1: đồng ý / thu hồi đồng ý xử lý dữ liệu trên form hồ sơ — chỉ mã bản đồng ý (phien_ban), không gì khác
   | "consent_given" | "consent_withdrawn"
   // SAO-HV: hội viên năm kích hoạt (trang kết quả, mỗi đơn một lần) — chỉ kind, không số tiền; checkout_started{kind: hoi_vien}
-  | "membership_activated";
+  | "membership_activated"
+  // SAO-CG "Hỏi chuyên gia": bắt đầu đặt câu (mảng, miễn phí hội viên?), đã thanh toán, chuyên gia trả lời, người dùng chấm điểm —
+  // chỉ mã mảng + cờ + điểm, KHÔNG BAO GIỜ nội dung câu hỏi / câu trả lời
+  | "expert_question_started" | "expert_question_paid" | "expert_answered" | "expert_rated";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
@@ -104,6 +107,7 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   lan_dau: "number",    // SAO-ND: checkout_started — 1 = tài khoản chưa từng nạp, 0 = đã nạp (khách: không gửi)
   ngay: "number",       // SAO-HH: self_goal_set / self_goal_reached — số ngày mục tiêu (7 / 30), KHÔNG phải ngày tháng
   phien_ban: "string",  // ĐY-1: mã bản đồng ý xử lý dữ liệu (lib/dong-y-du-lieu PHIEN_BAN_DONG_Y, vd "dl1") — không ngày giờ
+  mien_phi: "number",   // SAO-CG: expert_question_started — 1 = dùng lượt hội viên, 0 = trả VND
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */

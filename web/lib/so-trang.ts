@@ -192,6 +192,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Hội viên năm Hiểu Bản Thân: mở mọi chương Luận giải toàn bộ Tử vi, Bát tự, Bản đồ con số, Sao tặng mỗi tháng. Trả một lần bằng QR chuyển khoản, không tự gia hạn.",
   } },
   { duong: "/tai-khoan", nhom: "cong_cu", ten: "Tài khoản", o: ["seo"], mac_dinh: { tieu_de_seo: "Tài khoản" } },
+  // SAO-CG (0029): trang bán câu hỏi chuyên gia — chữ trong app/hoi-chuyen-gia/page.tsx; chỉ có trong sitemap khi công tắc bật.
+  { duong: "/hoi-chuyen-gia", nhom: "cong_cu", ten: "Hỏi chuyên gia", o: ["seo"], mac_dinh: {
+    tieu_de_seo: "Hỏi chuyên gia — một câu hỏi, trả lời trong 48 giờ", h1: "Một câu hỏi, một câu trả lời của người thật",
+    mo_ta_seo: "Đặt một câu hỏi về thần số học, Tử vi, Bát tự, Kinh Dịch hoặc phong thuỷ cho chuyên gia Đức Luân. Trả lời bằng văn bản trong 48 giờ, quá hạn hoàn 100 %. Giá cố định, thanh toán QR.",
+  } },
   { duong: "/ung-ho", nhom: "cong_cu", ten: "Ủng hộ đội ngũ phát triển", o: O_TRANG_PHU, mac_dinh: {
     tieu_de_seo: "Ủng hộ đội ngũ phát triển Hiểu Bản Thân", h1: "Ủng hộ đội ngũ phát triển",
     mo_ta_seo: "Hiểu Bản Thân miễn phí phần lớn công cụ. Nếu thấy hữu ích, bạn có thể ủng hộ đội ngũ phát triển bằng chuyển khoản hoặc ví tiền mã hoá.",
@@ -256,7 +261,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   { duong: "/dieu-khoan", nhom: "phap_ly", ten: "Điều khoản sử dụng", o: O_PHAP_LY, mac_dinh: {
     tieu_de_seo: "Điều khoản sử dụng", h1: "Điều khoản sử dụng", ngay_hieu_luc: NGAY_HIEU_LUC,
     mo_ta_seo: "Điều khoản sử dụng Hiểu Bản Thân: tính chất dịch vụ tham khảo văn hoá, tài khoản, Sao, nội dung, sở hữu trí tuệ và giới hạn trách nhiệm.",
-    muc: [{ id: "chap-nhan", tieu_de: "Chấp nhận điều khoản" }, { id: "tinh-chat", tieu_de: "Tính chất của dịch vụ" }, { id: "tai-khoan", tieu_de: "Tài khoản" }, { id: "sao", tieu_de: "Sao — điểm dùng trong ứng dụng" }, { id: "hoi-vien", tieu_de: "Hội viên năm" }, { id: "gioi-thieu", tieu_de: "Chương trình giới thiệu (mời bạn)" }, { id: "hanh-vi", tieu_de: "Những điều không được làm" }, { id: "noi-dung", tieu_de: "Nội dung và sở hữu trí tuệ" }, { id: "trach-nhiem", tieu_de: "Giới hạn trách nhiệm" }, { id: "luat", tieu_de: "Luật áp dụng, thay đổi và liên hệ" }],
+    muc: [{ id: "chap-nhan", tieu_de: "Chấp nhận điều khoản" }, { id: "tinh-chat", tieu_de: "Tính chất của dịch vụ" }, { id: "tai-khoan", tieu_de: "Tài khoản" }, { id: "sao", tieu_de: "Sao — điểm dùng trong ứng dụng" }, { id: "hoi-vien", tieu_de: "Hội viên năm" }, { id: "gioi-thieu", tieu_de: "Chương trình giới thiệu (mời bạn)" }, { id: "chuyen-gia", tieu_de: "Hỏi chuyên gia" }, { id: "hanh-vi", tieu_de: "Những điều không được làm" }, { id: "noi-dung", tieu_de: "Nội dung và sở hữu trí tuệ" }, { id: "trach-nhiem", tieu_de: "Giới hạn trách nhiệm" }, { id: "luat", tieu_de: "Luật áp dụng, thay đổi và liên hệ" }],
   } },
   { duong: "/mien-tru-trach-nhiem", nhom: "phap_ly", ten: "Miễn trừ trách nhiệm", o: O_PHAP_LY, mac_dinh: {
     tieu_de_seo: "Miễn trừ trách nhiệm", h1: "Miễn trừ trách nhiệm", ngay_hieu_luc: NGAY_HIEU_LUC,

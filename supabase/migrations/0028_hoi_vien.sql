@@ -199,6 +199,13 @@ begin
         v_hv := public.hv_kich_hoat(p_ma_don);
         return jsonb_build_object('ket_qua', 'da_nap', 'sao', 0, 'sao_tang', 0, 'loai', 'hoi_vien', 'hoi_vien', v_hv);
     end if;
+    if v_don.loai <> 'sao' then
+        -- Đơn 'chuyen_gia' (0029) hay loại khác sau này: chỉ ghi đã trả — quyền lợi do mảng đó xử lý (0029: trigger trên
+        -- don_nap). Không cộng Sao (đơn 0 Sao), không tặng lần nạp đầu, không hoa hồng.
+        update public.don_nap set trang_thai = 'da_tra', tra_luc = now(), ma_giao_dich = left(p_ma_giao_dich, 100)
+        where ma_don = p_ma_don;
+        return jsonb_build_object('ket_qua', 'da_nap', 'sao', 0, 'sao_tang', 0, 'loai', v_don.loai);
+    end if;
     insert into public.so_cai_sao (user_id, so_luong, loai, ghi_chu, khoa, het_han)
     values (v_don.user_id, v_don.sao, 'mua', left('Nạp gói ' || v_don.goi || ' · đơn ' || v_don.ma_don, 120),
             'mua:' || v_don.ma_don, null)
@@ -217,6 +224,105 @@ begin
         raise warning 'hoa_hong don % loi: %', p_ma_don, sqlerrm;
     end;
     return jsonb_build_object('ket_qua', 'da_nap', 'sao', v_don.sao, 'sao_tang', v_tang);
+end
+$$;
+
+
+-- ---------------------------------------------------------------- lần nạp đầu / hoa hồng chỉ xét đơn Sao
+-- Đơn hội viên / chuyên gia (loai <> 'sao') KHÔNG làm mất "lần nạp đầu" và KHÔNG chiếm suất hoa hồng của lần nạp Sao thật.
+-- Ba hàm chép từ 0027 (nd_tang_cho_don, nap_dau_thong_tin) và 0026 (hh_cho_don), chỉ thêm điều kiện loai = 'sao'.
+create or replace function nd_tang_cho_don(p_ma_don bigint) returns integer
+    language plpgsql security definer set search_path = '' as $$
+declare
+    v_don public.don_nap;
+    v_pt integer := public.qt_so_cau_hinh('sao.nap_dau.phan_tram', 20, 0, 100);
+    v_tang integer;
+begin
+    if not public.qt_bat_cau_hinh('sao.nap_dau.bat') or v_pt <= 0 then return 0; end if;
+    select * into v_don from public.don_nap where ma_don = p_ma_don;
+    if v_don.ma_don is null or v_don.trang_thai <> 'da_tra' or v_don.loai <> 'sao' then return 0; end if;
+    -- Khoá theo người mua: hai đơn đầu trả cùng lúc → đơn sau đợi đơn trước ghi xong rồi mới xét "đã từng nạp".
+    perform pg_advisory_xact_lock(hashtext('nap_dau:' || v_don.user_id));
+    if exists (select 1 from public.don_nap d where d.user_id = v_don.user_id and d.ma_don <> v_don.ma_don
+               and d.trang_thai in ('da_tra', 'hoan') and d.loai = 'sao') then
+        return 0;
+    end if;
+    v_tang := floor(v_don.sao * v_pt / 100.0)::integer;
+    if v_tang <= 0 then return 0; end if;
+    insert into public.so_cai_sao (user_id, so_luong, loai, ghi_chu, khoa, het_han)
+    values (v_don.user_id, v_tang, 'nap_dau', left('Tặng lần nạp đầu · đơn ' || v_don.ma_don, 120),
+            'nap_dau:' || v_don.user_id, current_date + 365)
+    on conflict (khoa) do nothing;
+    if not found then return 0; end if;
+    update public.don_nap set sao_tang_dau = v_tang where ma_don = p_ma_don;
+    return v_tang;
+end
+$$;
+
+create or replace function nap_dau_thong_tin() returns jsonb
+    language sql stable security definer set search_path = '' as $$
+    select jsonb_build_object(
+        'bat', public.qt_bat_cau_hinh('sao.nap_dau.bat') and public.qt_so_cau_hinh('sao.nap_dau.phan_tram', 20, 0, 100) > 0,
+        'phan_tram', public.qt_so_cau_hinh('sao.nap_dau.phan_tram', 20, 0, 100),
+        'lan_dau', case when (select auth.uid()) is null then null
+                        else not exists (select 1 from public.don_nap
+                                         where user_id = (select auth.uid()) and trang_thai in ('da_tra', 'hoan') and loai = 'sao')
+                             and not exists (select 1 from public.so_cai_sao
+                                             where khoa = 'nap_dau:' || (select auth.uid())) end)
+$$;
+
+create or replace function hh_cho_don(p_ma_don bigint) returns jsonb
+    language plpgsql security definer set search_path = '' as $$
+declare
+    v_don public.don_nap;
+    v_g public.gioi_thieu;
+    v_thu_tu integer;
+    v_pt integer := public.qt_so_cau_hinh('sao.hoa_hong.phan_tram', 20, 0, 50);
+    v_so_don integer := public.qt_so_cau_hinh('sao.hoa_hong.so_don', 1, 1, 12);
+    v_thang integer := public.qt_so_cau_hinh('sao.hoa_hong.thang', 12, 1, 36);
+    v_tran integer := public.qt_so_cau_hinh('sao.hoa_hong.tran_30_ngay', 1000, 0, 10000);
+    v_tinh integer;
+    v_da integer;
+    v_cho integer;
+begin
+    if not public.qt_bat_cau_hinh('sao.hoa_hong.bat') or v_pt <= 0 then return jsonb_build_object('ket_qua', 'tat'); end if;
+    select * into v_don from public.don_nap where ma_don = p_ma_don;
+    if v_don.ma_don is null or v_don.trang_thai <> 'da_tra' or v_don.loai <> 'sao' then return jsonb_build_object('ket_qua', 'khong_ap_dung'); end if;
+    select * into v_g from public.gioi_thieu where duoc_moi_id = v_don.user_id;
+    if v_g.duoc_moi_id is null then return jsonb_build_object('ket_qua', 'khong_duoc_moi'); end if;
+    if v_g.tao_luc < now() - make_interval(months => v_thang) then return jsonb_build_object('ket_qua', 'het_thoi_han'); end if;
+    select count(*) + 1 into v_thu_tu from public.don_nap d
+        where d.user_id = v_don.user_id and d.trang_thai in ('da_tra', 'hoan') and d.loai = 'sao' and d.ma_don <> v_don.ma_don
+          and (d.tra_luc < v_don.tra_luc or (d.tra_luc = v_don.tra_luc and d.ma_don < v_don.ma_don));
+    if v_thu_tu > v_so_don then return jsonb_build_object('ket_qua', 'ngoai_so_don'); end if;
+    v_tinh := floor(v_don.sao * v_pt / 100.0)::integer;
+    if v_tinh <= 0 then return jsonb_build_object('ket_qua', 'qua_nho'); end if;
+
+    perform pg_advisory_xact_lock(hashtext('hoa_hong:' || v_g.nguoi_moi_id));
+    if exists (select 1 from public.hoa_hong where ma_don = p_ma_don) then return jsonb_build_object('ket_qua', 'da_xu_ly'); end if;
+
+    if v_g.co_gian_lan is not null and public.gl_bat() then
+        insert into public.hoa_hong (ma_don, nguoi_moi_id, duoc_moi_id, sao_don, phan_tram, sao_tinh, sao, trang_thai)
+        values (p_ma_don, v_g.nguoi_moi_id, v_don.user_id, v_don.sao, v_pt, v_tinh, 0, 'nghi_gian_lan');
+        insert into public.gian_lan_co (loai, user_id, lien_quan, thiet_bi, chi_tiet)
+        values ('hoa_hong_nghi', v_g.nguoi_moi_id, v_don.user_id, v_g.thiet_bi,
+                jsonb_build_object('ma_don', p_ma_don, 'co_moi', v_g.co_gian_lan));
+        return jsonb_build_object('ket_qua', 'nghi_gian_lan', 'sao', 0);
+    end if;
+
+    select coalesce(sum(sao), 0) into v_da from public.hoa_hong
+        where nguoi_moi_id = v_g.nguoi_moi_id and trang_thai = 'da_cong' and tao_luc > now() - interval '30 days';
+    v_cho := least(v_tinh, greatest(0, v_tran - v_da));
+    insert into public.hoa_hong (ma_don, nguoi_moi_id, duoc_moi_id, sao_don, phan_tram, sao_tinh, sao, trang_thai)
+    values (p_ma_don, v_g.nguoi_moi_id, v_don.user_id, v_don.sao, v_pt, v_tinh, v_cho,
+            case when v_cho > 0 then 'da_cong' else 'qua_tran' end);
+    if v_cho > 0 then
+        insert into public.so_cai_sao (user_id, so_luong, loai, ghi_chu, khoa, het_han)
+        values (v_g.nguoi_moi_id, v_cho, 'hoa_hong', 'Hoa hồng: bạn bè bạn mời đã nạp Sao', 'hoa_hong:' || p_ma_don,
+                current_date + 365)
+        on conflict (khoa) do nothing;
+    end if;
+    return jsonb_build_object('ket_qua', case when v_cho > 0 then 'da_cong' else 'qua_tran' end, 'sao', v_cho);
 end
 $$;
 

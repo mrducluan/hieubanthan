@@ -116,6 +116,29 @@ export default async function DieuKhoan() {
       ),
     },
     {
+      id: "chuyen-gia", tieuDe: "Hỏi chuyên gia",
+      noiDung: (
+        <ul>
+          <li><b>Dịch vụ:</b> bạn đặt một câu hỏi (tối đa 1.500 ký tự) về thần số học, Tử vi, Bát tự, Kinh Dịch hoặc phong thuỷ; chuyên gia của
+            Hiểu Bản Thân trả lời bằng văn bản, riêng cho bạn, trong mục Tài khoản → Câu hỏi của tôi. Đây là <b>tư vấn tham khảo</b>:
+            không thay bác sĩ, luật sư, chuyên gia tài chính hay tâm lý; không chẩn đoán bệnh, không đoán xổ số, không nói ngày chết,
+            không quyết định thay bạn chuyện tuyển dụng, cho vay, hôn nhân. Quyết định là của bạn.</li>
+          <li><b>Giá và thanh toán:</b> giá cố định ghi bằng đồng trên trang Hỏi chuyên gia (câu hỏi đầu tiên có thể được giảm giá khi chương
+            trình đang bật), trả một lần qua chuyển khoản QR, <b>không trả bằng Sao</b> và không quy đổi sang Sao. Hội viên (khi có) có thể
+            dùng lượt hỏi trong gói thay cho thanh toán.</li>
+          <li><b>Hạn trả lời:</b> tính từ lúc thanh toán, theo số giờ ghi trên trang (hiện là 48 giờ). Quá hạn mà chưa có trả lời, bạn
+            được <b>hoàn 100 %</b> tiền qua chuyển khoản trong vòng 7 ngày làm việc; chúng tôi liên hệ qua email tài khoản để nhận
+            thông tin chuyển trả. Câu hỏi đã được trả lời trong hạn thì không hoàn.</li>
+          <li><b>Huỷ:</b> bạn huỷ được bất cứ lúc nào khi chưa thanh toán. Câu đã thanh toán không huỷ được, trừ trường hợp quá hạn nói trên.</li>
+          <li><b>Dữ liệu chuyên gia thấy:</b> câu hỏi của bạn và email tài khoản (để liên hệ hoàn tiền). Ngày giờ sinh, giới tính, nơi sinh
+            chỉ được gửi kèm khi bạn <b>tự tích</b> ô "Chia sẻ hồ sơ của tôi với chuyên gia"; bản chụp đó tự xoá 30 ngày sau khi trả lời.
+            Câu hỏi và câu trả lời được giữ trong tài khoản của bạn tới khi bạn xoá tài khoản.</li>
+          <li><b>Phạm vi:</b> câu hỏi có dấu hiệu khủng hoảng không được bán — hệ thống hiện lời hỗ trợ. Câu ngoài phạm vi (bệnh tật, sống chết,
+            xổ số, tuyển dụng) bị từ chối trước khi thanh toán. Chuyên gia không gửi link, số điện thoại hay mời chào dịch vụ ngoài.</li>
+        </ul>
+      ),
+    },
+    {
       id: "hanh-vi", tieuDe: "Những điều không được làm",
       noiDung: (
         <ul>

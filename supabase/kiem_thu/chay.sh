@@ -35,4 +35,5 @@ psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_sao_viral_0025.
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_chong_gian_lan_0026.sql
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_nap_dau_0027.sql
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_hoi_vien_0028.sql
+psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_chuyen_gia_0029.sql
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_chuoi_huy_hieu_0030.sql
