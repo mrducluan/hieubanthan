@@ -45,6 +45,16 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Tặng Sao lần nạp đầu", moTa: "Bật = đơn nạp thành công ĐẦU TIÊN của mỗi tài khoản được cộng thêm % số Sao của gói, dưới dạng Sao tặng (hạn 365 ngày). Một lần mỗi tài khoản; hoàn tiền đơn đó → tự thu hồi. Hoa hồng người mời vẫn tính trên Sao của gói." },
   { khoa: "sao.nap_dau.phan_tram", nhom: "Nạp Sao", loai: "so", min: 0, max: 100, macDinh: 20,
     ten: "Tỉ lệ tặng lần nạp đầu (%)", moTa: "Tính trên số Sao của gói, làm tròn xuống. 0 = tạm dừng." },
+  // ---- SAO-CG (0029) ---- "Hỏi chuyên gia": trả VND cố định qua cổng thanh toán (KHÔNG bằng Sao), chuyên gia trả lời trong
+  // N giờ hoặc hoàn 100 %. SQL đọc cùng khoá (cg_gia_vnd / cg_giam_pt / cg_han_gio, kẹp). Khoá gia_vnd dùng chung với 0028 (hội viên).
+  { khoa: "sao.chuyen_gia.bat", nhom: "Hỏi chuyên gia", loai: "bat_tat", macDinh: false,
+    ten: "Mở \"Hỏi chuyên gia\"", moTa: "Bật = trang /hoi-chuyen-gia nhận câu hỏi trả phí; chuyên gia (chủ sở hữu / thẩm định, đã MFA) trả lời ở Quản trị → Hỏi chuyên gia. Tắt = trang hiện \"sắp mở\", máy chủ từ chối tạo câu hỏi." },
+  { khoa: "sao.chuyen_gia.gia_vnd", nhom: "Hỏi chuyên gia", loai: "so", min: 20000, max: 5000000, macDinh: 199000,
+    ten: "Giá một câu hỏi (₫)", moTa: "Trả một lần qua chuyển khoản QR. Số tiền đơn luôn lấy từ đây ở máy chủ." },
+  { khoa: "sao.chuyen_gia.giam_lan_dau_pt", nhom: "Hỏi chuyên gia", loai: "so", min: 0, max: 90, macDinh: 30,
+    ten: "Giảm giá câu hỏi đầu tiên (%)", moTa: "Áp dụng cho tài khoản chưa từng thanh toán câu hỏi nào. 0 = không giảm." },
+  { khoa: "sao.chuyen_gia.han_gio", nhom: "Hỏi chuyên gia", loai: "so", min: 12, max: 168, macDinh: 48,
+    ten: "Hạn trả lời (giờ)", moTa: "Tính từ lúc thanh toán. Quá hạn → chủ sở hữu hoàn 100 % ngoài hệ thống rồi bấm Hoàn." },
   // SAO-V (0025): chuỗi ngày ghé — chỉ lưu ngày ghé cuối + độ dài chuỗi, mất chuỗi chỉ đếm lại.
   { khoa: "sao.chuoi.bat", nhom: "Chuỗi ngày ghé", loai: "bat_tat", macDinh: false,
     ten: "Thưởng chuỗi ngày ghé", moTa: "Tắt = vẫn đếm chuỗi cho người đăng nhập, không cộng Sao." },

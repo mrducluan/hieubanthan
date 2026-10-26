@@ -33,7 +33,10 @@ export type SuKien =
   // CTA-1: trò "Đoán số" trên thẻ Bản đồ 5 mảng — đúng/sai + mã biến thể câu mời
   | "guess_played"
   // SAO-V "Tặng một chương": tạo link quà / mở trang nhận quà / bấm nhận — chỉ mã mảng + cờ còn dùng + kết quả, KHÔNG mã quà
-  | "gift_sent" | "gift_opened" | "gift_claimed";
+  | "gift_sent" | "gift_opened" | "gift_claimed"
+  // SAO-CG "Hỏi chuyên gia": bắt đầu đặt câu (mảng, miễn phí hội viên?), đã thanh toán, chuyên gia trả lời, người dùng chấm điểm —
+  // chỉ mã mảng + cờ + điểm, KHÔNG BAO GIỜ nội dung câu hỏi / câu trả lời
+  | "expert_question_started" | "expert_question_paid" | "expert_answered" | "expert_rated";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
@@ -94,6 +97,7 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   co_ma: "boolean",     // SAO-V: share_created — link có gắn mã mời ?gt= của người đăng nhập (phễu mời ở quản trị)
   goi: "string",        // SAO-ND: checkout_started — mã gói (khoi_dau / thu / pho_bien / gia_dinh), không số tiền
   lan_dau: "number",    // SAO-ND: checkout_started — 1 = tài khoản chưa từng nạp, 0 = đã nạp (khách: không gửi)
+  mien_phi: "number",   // SAO-CG: expert_question_started — 1 = dùng lượt hội viên, 0 = trả VND
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */

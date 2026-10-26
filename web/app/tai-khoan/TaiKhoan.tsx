@@ -158,6 +158,16 @@ export function TaiKhoan() {
         </section>
       )}
 
+      {user && (
+        <section aria-labelledby="chuyen-gia">
+          <TieuDeMuc id="chuyen-gia" nho="Hỏi chuyên gia" lon="Câu hỏi của tôi" />
+          <Card className="flex flex-col gap-3 text-sm sm:flex-row sm:items-center">
+            <p className="flex-1 text-fg-muted">Câu hỏi đã gửi chuyên gia, câu trả lời và hạn trả lời — chỉ bạn đọc được.</p>
+            <Button asChild variant="secondary" size="sm"><Link href="/tai-khoan/cau-hoi" data-testid="tk-cau-hoi">Xem câu hỏi</Link></Button>
+          </Card>
+        </section>
+      )}
+
       <section aria-labelledby="rieng-tu">
         <TieuDeMuc id="rieng-tu" nho="Quyền riêng tư" lon="Chúng tôi giữ gì, không giữ gì" />
         <ul className="space-y-2 text-sm text-fg-muted">
