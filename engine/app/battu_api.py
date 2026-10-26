@@ -18,6 +18,7 @@ from app import nhat_ky
 from app.config import ENGINE_VERSION
 from app.hoidap import battu as hoidap_bt
 from app.kb import battu_kb
+from app.kb import battu_doi_song_kb
 from app.tuvi_api import TuanTrietInput, _DauVao, _MaMau, _Phieu
 
 router = APIRouter(prefix="/v1/battu", tags=["battu"])
@@ -35,7 +36,14 @@ def api_la_so(inp: TuanTrietInput) -> dict:
     ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"], sinh["gio_ty"])
     ls["co_canh_bao"] = flags + ls["co_canh_bao"]
     return {"engine_version": ENGINE_VERSION, "pham_vi": "bat_tu", "gio_lich": sinh["lich"].isoformat(), **ls,
-            "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls), "cach_cuc_tbct": cach_tbct(ls)}}
+            "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls), "cach_cuc_tbct": cach_tbct(ls)},
+            "loi_thuong": loi_thuong(ls)}
+
+
+def loi_thuong(ls: dict) -> dict | None:
+    """Trục 2 UX: một câu lời thường về nhật chủ cho đầu trang /bat-tu (KB đời sống — cùng câu mở chương "Con người bạn")."""
+    n = battu_doi_song_kb.nhat_chu(ls["nhat_chu"]["can"])
+    return {k: n.get(k) for k in ("hinh_tuong", "chan_dung", "cau_tu_soi")} if n and n.get("chan_dung") else None
 
 
 def cach_tbct(ls: dict) -> dict:

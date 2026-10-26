@@ -213,8 +213,10 @@ test("lưu bài: tự lưu khi đã bật; máy chủ chưa bật → ẩn; khá
   await expect(page.getByTestId("lg-cot-loi")).toBeVisible();
   await expect(page.getByTestId("luu-bai-luan")).toHaveCount(0);
 
+  // Trục 2 UX: chưa bật tài khoản (e2e không có Supabase) → link "Bài luận đã lưu" ẩn ở Bản thân (tránh ngõ cụt).
   await page.goto("/ban-than");
-  await expect(page.getByTestId("lien-ket-bai-da-luu")).toHaveAttribute("href", "/ban-than/bai-da-luu");
+  await expect(page.getByTestId("huy-hieu")).toBeVisible({ timeout: 45_000 });
+  await expect(page.getByTestId("lien-ket-bai-da-luu")).toHaveCount(0);
 });
 
 test("điện thoại 360px: không cuộn ngang, dòng thời gian dọc", async ({ page }) => {

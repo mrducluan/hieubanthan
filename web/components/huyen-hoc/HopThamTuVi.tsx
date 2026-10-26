@@ -94,6 +94,11 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
         Chấm <b className="text-fg">điểm tham khảo 0–100</b> theo năm mặt: bản mệnh năm sinh, cách nghĩ, con giáp, chỗ ở (cung phi) và
         lá số Tử vi chạm nhau — kèm cách dung hoà theo đúng quan hệ bạn chọn. Điểm theo luật dân gian và sách cổ; mối quan hệ do cách
         hai người cư xử.
+        {/* Trục 2 UX: trang Hợp đôi (thần số) nói "không chấm điểm" → giải thích ngắn vì sao riêng mảng này có điểm. */}
+        <span className="mt-1.5 block text-xs" data-testid="hop-tham-vi-sao-diem">
+          Vì sao ở đây có điểm: sách Tử vi và lịch cổ có sẵn luật xét hợp – khắc theo năm sinh, nên hệ thống cộng các luật đó thành
+          một con số để bạn tham khảo. Thần số học không có luật như vậy, nên trang <Link href="/hop-doi" className="text-gold underline">Hợp đôi</Link> chỉ nêu chỗ hoà, chỗ va của hai người.
+        </span>
       </p>
       <fieldset>
         <legend className="text-sm font-medium text-fg-muted">Người ấy là</legend>

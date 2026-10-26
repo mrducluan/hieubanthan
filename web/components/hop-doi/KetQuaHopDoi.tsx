@@ -45,7 +45,11 @@ function Cau({ so, ten, tuKhoa, tre }: { so: number; ten: string; tuKhoa: string
   );
 }
 
-function TheVai({ v, tieuDe, tre }: { v: VaiT; tieuDe: string; tre: number }) {
+/** Hai thẻ vai giống hệt nhau (cùng số Đường đời → engine trả cùng một lời) thì gộp thành một thẻ "Hai người cùng số N". */
+export const vaiTrung = (a: VaiT, b: VaiT) =>
+  a.so === b.so && a.vai === b.vai && a.can === b.can && a.tranh === b.tranh && a.cach_noi === b.cach_noi;
+
+function TheVai({ v, tieuDe, tre, phu }: { v: VaiT; tieuDe: string; tre: number; phu?: string }) {
   const giam = useReducedMotion();
   const dong = [
     { Icon: Sparkles, nhan: "Thường thể hiện", noi: v.vai, mau: "text-gold" },
@@ -60,7 +64,7 @@ function TheVai({ v, tieuDe, tre }: { v: VaiT; tieuDe: string; tre: number }) {
         <span className="grid size-10 place-items-center rounded-full border border-gold/50 font-serif text-xl text-gold">{v.so}</span>
         <div>
           <h3 className="text-lg leading-tight">{tieuDe}</h3>
-          <p className="text-xs text-fg-faint">trong vai {TEN_VAI[v.vai_cua_ban] ?? v.vai_cua_ban} · số Đường đời {v.so}</p>
+          <p className="text-xs text-fg-faint">{phu ?? `trong vai ${TEN_VAI[v.vai_cua_ban] ?? v.vai_cua_ban} · số Đường đời ${v.so}`}</p>
         </div>
       </header>
       <dl className="mt-4 space-y-3 text-[0.95rem]">
@@ -117,7 +121,13 @@ export function KetQuaHopDoi({ kq, tenA, tenB }: { kq: KetQuaHopDoiT; tenA: stri
       </div>
       <p className="mx-auto max-w-xl text-center text-sm text-fg-muted">{kq.cach_doc}</p>
 
-      {kq.trong_vai && (
+      {kq.trong_vai && vaiTrung(kq.trong_vai.a, kq.trong_vai.b) && (
+        <section aria-label="Hai người cùng số" className="mx-auto max-w-2xl">
+          <TheVai v={kq.trong_vai.a} tieuDe={`Hai người cùng số ${kq.trong_vai.a.so}`} tre={0.1}
+            phu={`Cả ${tenA} và ${tenB} cùng số Đường đời ${kq.trong_vai.a.so} — điều dưới đây đúng với cả hai.`} />
+        </section>
+      )}
+      {kq.trong_vai && !vaiTrung(kq.trong_vai.a, kq.trong_vai.b) && (
         <section aria-label="Mỗi người trong vai của mình" className="grid gap-4 md:grid-cols-2">
           <TheVai v={kq.trong_vai.b} tieuDe={`Điều nên biết về ${tenB}`} tre={0.1} />
           <TheVai v={kq.trong_vai.a} tieuDe={`Điều ${tenB} nên biết về ${tenA}`} tre={0.2} />

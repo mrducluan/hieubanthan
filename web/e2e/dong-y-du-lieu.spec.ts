@@ -22,8 +22,13 @@ test("lần đầu: khối đồng ý + nút 'Đồng ý và xem kết quả'; c
   await page.goto("/");
   await goForm(page);
   const khoi = page.getByTestId("dong-y-du-lieu");
-  await expect(khoi).toContainText("không lưu");
-  await expect(khoi).toContainText("Singapore");
+  // Trục 2 UX: một dòng ngắn; câu cam kết đầy đủ + link chính sách gập/mở tại chỗ (không modal, không rời trang).
+  await expect(khoi).toContainText("Ngày giờ sinh chỉ dùng để tính, không lưu trên máy");
+  await expect(khoi.getByTestId("dong-y-chi-tiet")).toHaveCount(0);
+  await khoi.getByRole("button", { name: "Chi tiết" }).click();
+  await expect(khoi.getByRole("button", { name: "Chi tiết" })).toHaveAttribute("aria-expanded", "true");
+  await expect(khoi.getByTestId("dong-y-chi-tiet")).toContainText("Singapore");
+  await expect(khoi.getByTestId("dong-y-chi-tiet")).toContainText("rút lại được bất cứ lúc nào");
   await expect(khoi.getByRole("link", { name: "Chính sách quyền riêng tư" })).toHaveAttribute("href", "/chinh-sach-rieng-tu#dong-y");
   await expect(page.getByRole("button", { name: "Đồng ý và xem kết quả" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Xem con số của tôi" })).toHaveCount(0);
@@ -43,6 +48,25 @@ test("lần đầu: khối đồng ý + nút 'Đồng ý và xem kết quả'; c
   const ds = await suKien(page);
   expect(ds.find((e) => e.su_kien === "consent_given")).toMatchObject({ phien_ban: PHIEN_BAN_DONG_Y });
   for (const e of ds) expect(JSON.stringify(e)).not.toMatch(/1988|Luân|24\/10/);
+});
+
+test("trục 2 UX — điện thoại 390×844: nút 'Đồng ý và xem kết quả' nằm trong màn đầu, trên thanh tab dưới (không cuộn)", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  const nut = page.getByRole("button", { name: "Đồng ý và xem kết quả" });
+  await expect(nut).toBeVisible();
+  await page.waitForTimeout(300);   // phông chữ / ảnh hero ổn định
+  expect(await page.evaluate(() => scrollY)).toBe(0);
+  const b = (await nut.boundingBox())!;
+  expect(b.y + b.height).toBeLessThanOrEqual(844);
+  // Thanh tab dưới (điện thoại) cố định ở đáy: nút phải nằm trọn phía trên nó, không bị che.
+  const tab = await page.locator("nav").evaluateAll((ds) => ds.map((d) => d.getBoundingClientRect())
+    .filter((r) => r.bottom >= innerHeight - 1 && r.height < 120).map((r) => r.top));
+  if (tab.length) expect(b.y + b.height).toBeLessThanOrEqual(Math.min(...tab));
+  // Khối đồng ý vẫn ở ngay trên nút, không ô tích sẵn.
+  const k = (await page.getByTestId("dong-y-du-lieu").boundingBox())!;
+  expect(k.y + k.height).toBeLessThanOrEqual(b.y);
+  expect(await page.locator("form input[type=checkbox]:checked").count()).toBe(0);
 });
 
 test("đã đồng ý: lần sau không hỏi lại, xem trước đổi lịch chạy; Thu hồi xoá đồng ý + hồ sơ, form về đầu", async ({ page }) => {

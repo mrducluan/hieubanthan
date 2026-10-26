@@ -182,6 +182,30 @@ def _cau_hoi_noi_bat(so_ngay: int, ngay_xem: dt.date) -> list[str]:
     return [kho[(lech + i) % len(kho)] for i in range(min(3, len(kho)))]
 
 
+def _cau_hoi_them(so_ngay: int, ngay_xem: dt.date) -> str | None:
+    """Câu thứ tư của kho câu hỏi nổi bật (trang chỉ hiện ba) — cho "Lá bài đầu ngày", không trùng ba câu đang hiện."""
+    kho = thanso_v2.cau_hoi_noi_bat(so_ngay)
+    if len(kho) <= 3:
+        return None
+    return kho[(ngay_xem.toordinal() % len(kho) + 3) % len(kho)]
+
+
+def _viec_nho(so_ngay: int, ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict | None:
+    """Một "việc nhỏ nên thử" cho Lá bài đầu ngày: cách làm của MỘT ý định trong KB theo số ngày cá nhân, chọn tất định
+    theo (ngày sinh, ngày xem) — không phụ thuộc ý định người dùng chọn, để lá đã lật không đổi trong ngày."""
+    ds = thanso_v2.y_dinh_hom_nay()
+    ma = list(ds)
+    if not ma:
+        return None
+    i = (ngay_xem.toordinal() + ngay * 31 + thang * 12 + nam) % len(ma)
+    for k in range(len(ma)):
+        m = ma[(i + k) % len(ma)]
+        nd = thanso_v2.y_dinh_theo_ngay(so_ngay, m)
+        if nd and nd.get("cach_lam"):
+            return {"ma": m, "ten": ds[m]["ten"], "nhan": nd.get("nhan"), "cach_lam": nd["cach_lam"], "tu_soi": nd.get("tu_soi")}
+    return None
+
+
 def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
                 y_dinh: list[str] | None = None, du_dinh: str | None = None) -> dict:
     y, m, d = ngay_xem.year, ngay_xem.month, ngay_xem.day
@@ -230,6 +254,9 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
         "ho_tro": ho_tro,
         "danh_sach_y_dinh": thanso_v2.y_dinh_hom_nay(),
         "cau_hoi_noi_bat": _cau_hoi_noi_bat(so_ngay, ngay_xem),
+        # Trục 2 UX: nguyên liệu Lá bài đầu ngày — chuỗi KB có sẵn mà trang chưa in (không lặp thẻ phía trên).
+        "cau_hoi_them": _cau_hoi_them(so_ngay, ngay_xem),
+        "viec_nho": _viec_nho(so_ngay, ngay, thang, nam, ngay_xem),
         "ngay_pho_quat": {"so": so_pq, "nghia": thanso_v2.ngay_pho_quat(so_pq)},
         "chaldea": thanso_chaldean.ngay_chaldea(ngay, d),
         "hoang_lich": _hoang_lich(ngay_xem, ngay, thang, nam, [x["ma"] for x in cac_y_dinh] or list(y_dinh or [])),

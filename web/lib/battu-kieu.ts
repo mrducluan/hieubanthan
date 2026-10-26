@@ -23,6 +23,8 @@ export interface LaSoBatTu {
     ds: { can: string; chi: string; tu_nam: number; den_nam: number; tu_tuoi_thuc: number }[];
   };
   co_canh_bao: { loai: string; chi_tiet: string }[];
+  /** Trục 2 UX — câu lời thường về nhật chủ (KB đời sống) cho đầu trang; engine cũ không có → đầu trang chỉ còn nút. */
+  loi_thuong?: { hinh_tuong: string | null; chan_dung: string | null; cau_tu_soi: string | null } | null;
   /** VZ-3 — có khi engine ≥ bản này. */
   mo_rong?: {
     nap_am: NapAm[];

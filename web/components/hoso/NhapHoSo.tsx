@@ -67,6 +67,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const [loiDoi, setLoiDoi] = useState<string | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
+  const [moDongY, setMoDongY] = useState(false);
   const thangRef = useRef<HTMLInputElement>(null);
   const namRef = useRef<HTMLInputElement>(null);
   const { tinh, loi: loiTinh, thuLai: taiLaiTinh } = useDanhSachTinh();
@@ -160,7 +161,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
     : can === "gioi_tinh" ? c("ho_so.them_gioi_tinh") : c("ho_so.them_khong_bat_buoc");
 
   return (
-    <form onSubmit={gui} className={cn("space-y-5", className)} noValidate>
+    <form onSubmit={gui} className={cn("space-y-3 sm:space-y-5", className)} noValidate>
       <div className="space-y-2">
         <Label htmlFor="ho-ten">{c("ho_so.ho_ten")}</Label>
         <Input id="ho-ten" name="ho-ten" autoComplete="name" value={ten} maxLength={80}
@@ -232,7 +233,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
 
       <div className="rounded-xl border border-line/70">
         <button type="button" onClick={() => setMoThem(!moThem)} aria-expanded={moThem}
-          className="flex min-h-11 w-full items-center justify-between rounded-xl px-4 py-3 text-left text-sm text-fg-muted transition-colors hover:text-fg">
+          className="flex min-h-11 w-full items-center justify-between rounded-xl px-4 py-2.5 text-left text-[0.8125rem] text-fg-muted sm:text-sm transition-colors hover:text-fg">
           <span>{tieuDeThem}</span>
           <ChevronDown className={cn("size-4 shrink-0 transition-transform", moThem && "rotate-180")} aria-hidden />
         </button>
@@ -314,15 +315,28 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
 
       {loi && <p role="alert" className="rounded-xl bg-cinnabar/10 px-4 py-3 text-sm text-cinnabar">{loi}</p>}
 
+      {/* Trục 2 UX: khối đồng ý rút còn MỘT dòng (nút chính nằm trong màn đầu điện thoại); câu cam kết đầy đủ + link chính
+          sách vẫn ở ngay đây, gập/mở tại chỗ. Câu cam kết giữ trong code (lời hứa về hệ thống, ND-7). Không ô tích. */}
       {!coDongY && (
-        <div className="flex gap-2.5 rounded-xl border border-gold/30 bg-gold/[0.05] p-3 text-xs leading-relaxed text-fg-muted" data-testid="dong-y-du-lieu">
-          <ShieldCheck className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
-          <p>
-            <b className="text-fg">{c("ho_so.dong_y_tieu_de")}:</b> ngày giờ sinh chỉ dùng để tính tại chỗ cho bạn, <b className="text-fg">không lưu</b> khi
-            bạn chưa đăng nhập; được gửi tới máy chủ tính toán của chúng tôi (Singapore) rồi bỏ ngay sau khi trả kết quả. Bấm nút
-            bên dưới là bạn đồng ý — rút lại được bất cứ lúc nào tại đây hoặc ở mục Tài khoản.{" "}
-            <Link href="/chinh-sach-rieng-tu#dong-y" className="text-gold underline">{c("ho_so.chinh_sach")}</Link>
+        <div className="text-xs leading-relaxed text-fg-muted" data-testid="dong-y-du-lieu">
+          <p className="flex items-start gap-2">
+            <ShieldCheck className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
+            <span>
+              Ngày giờ sinh chỉ dùng để tính, <b className="text-fg">không lưu</b> trên máy{" "}chủ ·{" "}
+              <button type="button" onClick={() => setMoDongY((v) => !v)} aria-expanded={moDongY} aria-controls="dong-y-chi-tiet"
+                className="vung-cham inline-flex items-center gap-0.5 text-gold underline underline-offset-2" data-testid="dong-y-chi-tiet-mo">
+                Chi tiết<ChevronDown className={cn("size-3.5 transition-transform", moDongY && "rotate-180")} aria-hidden />
+              </button>
+            </span>
           </p>
+          {moDongY && (
+            <p id="dong-y-chi-tiet" className="mt-2 rounded-xl border border-gold/30 bg-gold/[0.05] p-3" data-testid="dong-y-chi-tiet">
+              <b className="text-fg">{c("ho_so.dong_y_tieu_de")}:</b> ngày giờ sinh chỉ dùng để tính tại chỗ cho bạn, <b className="text-fg">không lưu</b> khi
+              bạn chưa đăng nhập; được gửi tới máy chủ tính toán của chúng tôi (Singapore) rồi bỏ ngay sau khi trả kết quả. Bấm nút
+              bên dưới là bạn đồng ý — rút lại được bất cứ lúc nào tại đây hoặc ở mục Tài khoản.{" "}
+              <Link href="/chinh-sach-rieng-tu#dong-y" className="text-gold underline">{c("ho_so.chinh_sach")}</Link>
+            </p>
+          )}
         </div>
       )}
 

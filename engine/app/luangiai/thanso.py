@@ -236,6 +236,9 @@ def _kiem_chung(vi_tri: str, so: int, chinh: dict) -> dict | None:
     }
 
 
+# Tên hiển thị của hai cách tính Đường đời (khớp nhãn lựa chọn trên web, lib/quy-uoc-dd.ts) — chữ hiện ra giao diện
+# không bao giờ mang mã "tong_het" / "tung_phan".
+TEN_QUY_UOC_DD = {"tong_het": "Cộng hết chữ số", "tung_phan": "Rút gọn con số"}
 QUY_UOC_DD = {
     "tong_het": "Cộng mọi chữ số của ngày, tháng, năm sinh rồi rút gọn — cách nhiều sách và trang thần số ở Việt Nam dùng.",
     "tung_phan": "Rút gọn riêng ngày, tháng, năm (giữ số cái 11/22/33) rồi cộng lại — cách hay gặp ở sách phương Tây "
@@ -284,9 +287,9 @@ def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: str =
         "mo_rong": luan_mo_rong(ten_chinh, ngay, thang, nam, quy_uoc=quy_uoc),
         "chan_dung": luan_chan_dung(chinh, ngay, thang, nam),
         "tom_tat_do_tin": (
-            f"Kết quả theo quy ước chính thức (quy tắc Y khoá). "
-            f"{so_on_dinh}/4 chỉ số ổn định qua mọi cách viết tên; "
-            f"{4 - so_on_dinh} chỉ số nhạy với cách viết (xem ghi chú)."
+            # Lời thường (trục 2 UX 2026-10-26): không nêu tên quy tắc nội bộ ("Y khoá") ở dòng đầu trang.
+            f"{so_on_dinh}/4 chỉ số giữ nguyên dù viết tên kiểu nào; "
+            f"{4 - so_on_dinh} chỉ số đổi theo cách viết tên (xem ghi chú)."
         ),
         "cach_doc": (
             "Mỗi con số đi kèm MẶT TỐI và một CÂU PHẢN CHỨNG — câu hỏi để bạn "

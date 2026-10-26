@@ -342,7 +342,7 @@ def _khuon(so: dict, ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy_uoc
                       + (f" kéo dài tới năm {hien['den_nam']}." if hien.get("den_nam") else " là giai đoạn cuối."),
                       ma=kh.ma_mau("thanso", "tong_quan", "nhip", str(hien["dinh"]))))
     ra["tong_quan"] = {"hop": hop, "tom_tat": f"Đường đời {d['so']}" + (f", số {lap[0][0]} lặp {len(lap[0][1])} lần" if lap else "") + f"; {so_then_chot} tháng then chốt sắp tới.",
-                       "can_cu": [f"Tỉ lệ tính trên mẫu mọi ngày trong lịch {t['mau']} (không phải thống kê dân số); cách cộng Đường đời: {quy_uoc}.",
+                       "can_cu": [f"Tỉ lệ tính trên mẫu mọi ngày trong lịch {t['mau']} (không phải thống kê dân số); cách tính con số Đường đời: {lg.TEN_QUY_UOC_DD.get(quy_uoc, quy_uoc)}.",
                                   "Bộ số: " + ", ".join(f"{TEN_VT[v]} {bo[v]}" for v in bo if bo[v]) + "."],
                        "cau_tu_soi": "Con số nào trong bộ số bạn thấy giống mình nhất ngay lần đọc đầu?"}
 

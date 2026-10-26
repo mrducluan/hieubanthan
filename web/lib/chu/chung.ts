@@ -14,7 +14,7 @@ export const CHU_CHUNG = {
   "ho_so.ho_ten_vi_du": { nhom: HS, nhan: "Chữ mờ trong ô họ tên", mac_dinh: "Nguyễn Văn An", toi_da: 40 },
   "ho_so.ngay_sinh": { nhom: HS, nhan: "Nhãn nhóm ngày sinh", mac_dinh: "Ngày sinh", toi_da: 30 },
   "ho_so.nut_xem": { nhom: HS, nhan: "Nút gửi mặc định", mac_dinh: "Xem con số của tôi", toi_da: 40 },
-  "ho_so.them_khong_bat_buoc": { nhom: HS, nhan: "Dòng mở phần thêm (không bắt buộc)", mac_dinh: "Thêm tên thường gọi, giờ sinh, nơi sinh (không bắt buộc)", toi_da: 100 },
+  "ho_so.them_khong_bat_buoc": { nhom: HS, nhan: "Dòng mở phần thêm (không bắt buộc)", mac_dinh: "Thêm giờ, nơi sinh, tên gọi khác (tuỳ chọn)", toi_da: 100 },
   "ho_so.them_day_du": { nhom: HS, nhan: "Dòng mở phần thêm (mảng cần giờ sinh)", mac_dinh: "Giờ sinh, giới tính & nơi sinh (cần cho mảng này)", toi_da: 100 },
   "ho_so.them_gioi_tinh": { nhom: HS, nhan: "Dòng mở phần thêm (mảng cần giới tính)", mac_dinh: "Giới tính (cần cho mảng này)", toi_da: 100 },
   "ho_so.ten_khac": { nhom: HS, nhan: "Nhãn ô tên thường gọi", mac_dinh: "Tên thường gọi / cách viết khác", toi_da: 60 },

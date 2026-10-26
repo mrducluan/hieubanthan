@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { HeartHandshake, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -39,7 +40,6 @@ export function HopDoi() {
   const [thang, setThang] = useState("");
   const [nam, setNam] = useState("");
   const [quanHe, setQuanHe] = useState<MaQuanHe>("nguoi_yeu");
-  const tenQuanHe = QUAN_HE.find((q) => q.ma === quanHe)?.ten ?? "Người ấy";
   const [kq, setKq] = useState<KetQuaHopDoiT | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
@@ -64,7 +64,8 @@ export function HopDoi() {
     e.preventDefault();
     if (!hoSo) return;
     const d = Number(ngay), m = Number(thang), y = Number(nam);
-    if (!(nam.length === 4 && ngayHopLe(d, m, y)) || y < 1900 || Date.UTC(y, m - 1, d) > Date.now()) { setLoi("Ngày sinh người ấy chưa đúng."); return; }
+    if (!ngay && !thang && !nam) { setLoi("Nhập ngày sinh người ấy."); return; }
+    if (!(nam.length === 4 && ngayHopLe(d, m, y)) || y < 1900 || Date.UTC(y, m - 1, d) > Date.now()) { setLoi("Ngày sinh người ấy chưa đúng — kiểm tra lại ngày, tháng, năm."); return; }
     setLoi(null); setDang(true);
     try {
       setKq(await postJson<KetQuaHopDoiT>("/api/thanso/hop-doi", {
@@ -87,9 +88,15 @@ export function HopDoi() {
         <p className="eyebrow">Hợp đôi</p>
         <h1 className="mt-2 text-4xl sm:text-5xl">{dauCms.h1 ?? "Hai người, hai con số"}</h1>
         <LoiDan macDinh={<>
-          Không có điểm “hợp” hay “khắc”. Chọn người ấy là ai với bạn — người yêu, bạn bè, đồng nghiệp, sếp hay người thân —
+          Thần số không chấm điểm “hợp” hay “khắc”. Chọn người ấy là ai với bạn — người yêu, bạn bè, đồng nghiệp, sếp hay người thân —
           để xem mỗi người hiện ra thế nào trong vai đó, chỗ dễ hoà, chỗ dễ va, và một việc nên cùng làm.
         </>} />
+        {/* Trục 2 UX: Tử vi "Xem lá số 2 người" có điểm tham khảo (HN-2N) — nói rõ hai mảng khác nhau, trỏ sang. */}
+        <p className="mt-2 text-sm">
+          <Link href="/tu-vi#hop-tham" className="text-gold underline-offset-4 hover:underline" data-testid="link-diem-tu-vi">
+            Muốn xem điểm tham khảo theo Tử vi →
+          </Link>
+        </p>
       </header>
       {dauCms.khoiTren}
 
@@ -112,7 +119,7 @@ export function HopDoi() {
               </fieldset>
               <div className="space-y-2">
                 <Label htmlFor="ten-kia">Tên người ấy (không bắt buộc — có tên thì so thêm 3 cặp số)</Label>
-                <Input id="ten-kia" value={ten} maxLength={80} onChange={(e) => setTen(e.target.value)} placeholder="Trần Thị Mai" />
+                <Input id="ten-kia" value={ten} maxLength={80} onChange={(e) => setTen(e.target.value)} placeholder="Ví dụ: Minh" />
               </div>
               <fieldset className="space-y-2">
                 <legend className="text-sm font-medium text-fg-muted">Ngày sinh người ấy (dương lịch)</legend>
@@ -146,7 +153,7 @@ export function HopDoi() {
 
       {kq && (
         <>
-          <KetQuaHopDoi kq={kq} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : tenQuanHe} />
+          <KetQuaHopDoi kq={kq} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : "Người ấy"} />
           <div className="mx-auto max-w-3xl"><MocDocXong moDun="hopdoi" /><GopY moDun="hopdoi" cauHoi="Phần so hai người có giúp bạn hiểu mối quan hệ này hơn?" /></div>
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             <Card>

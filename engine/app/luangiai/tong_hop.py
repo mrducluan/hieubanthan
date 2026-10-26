@@ -81,6 +81,11 @@ def so_noi_bat(hs: dict) -> list[dict]:
     return sorted(kq, key=lambda x: (-x["lan"], -len(x["phai"]), x["goc"]))
 
 
+def _vi_tri_thuong(ten: str) -> str:
+    """"Số ngày sinh" → "ngày sinh" — tên vị trí viết thường để ghép sau "nợ nghiệp ở" (không lộ mã `ngay_sinh`)."""
+    return ten.removeprefix("Số ").lower()
+
+
 def _dien(mau: str, **kw) -> str:
     return mau.format(**kw)
 
@@ -113,7 +118,7 @@ def tuong_tac(hs: dict, ho_ten: list[str], ngay: int, thang: int, nam: int, ngay
         if gd["cung_so"] and gd["cach_dung"]:
             kq.append({"quan_he": "bo_sung", "ten_quan_he": qh["bo_sung"]["ten"],
                        "nhom": gd["ma"], "ten_nhom": gd["ten"],
-                       "cac_so": [{"phai": "pitago", "ten": f"Pitago · nợ nghiệp {gd['ma']}", "so": gd["pitago_no_nghiep"],
+                       "cac_so": [{"phai": "pitago", "ten": f"Pitago · nợ nghiệp ở {_vi_tri_thuong(gd['ten'])}", "so": gd["pitago_no_nghiep"],
                                    "goc": goc(gd["pitago_no_nghiep"])},
                                   {"phai": "chaldea", "ten": "Chaldea · số kép", "so": gd["chaldea_kep"],
                                    "goc": goc(gd["chaldea_kep"])}],
