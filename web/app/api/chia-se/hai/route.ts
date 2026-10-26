@@ -1,7 +1,7 @@
 // POST /api/chia-se/hai — TCS-1: mã có KÝ cho thẻ "Điểm hai người" (Xem lá số 2 người).
 // Máy chủ tự gọi engine chấm lại (client không tự khai điểm được) rồi ký: mã CHỈ mang tên hiển thị người gửi (người dùng
 // tự gõ, có thể trống), quan hệ, điểm tổng, mức, ≤ 3 tiêu chí (phần trăm). Ngày giờ sinh hai người chỉ đi qua lượt gọi
-// để engine tính — không ghi vào mã, không lưu. Tên người kia KHÔNG nhận (NĐ 13/2023): client cũ còn gửi `ten_kia` thì
+// để engine tính — không ghi vào mã, không lưu. Tên người kia KHÔNG nhận (Luật BVDLCN 91/2025, thay NĐ 13/2023): client cũ còn gửi `ten_kia` thì
 // zod bỏ trường lạ, mã không bao giờ mang tên người kia.
 import { NextResponse } from "next/server";
 import { z } from "zod";

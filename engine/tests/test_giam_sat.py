@@ -2,7 +2,7 @@
 """Hạ tầng GĐ1 — giám sát lỗi (Sentry) cho engine.
 
 Bắt buộc: TẮT hẳn khi không có SENTRY_DSN (dev, test, CI) và KHÔNG BAO GIỜ gửi dữ liệu cá nhân
-(ngày giờ sinh, tên, câu hỏi nằm trong body; header khoá engine) — NĐ 13/2023.
+(ngày giờ sinh, tên, câu hỏi nằm trong body; header khoá engine) — Luật BVDLCN 91/2025 (thay NĐ 13/2023).
 """
 from __future__ import annotations
 
