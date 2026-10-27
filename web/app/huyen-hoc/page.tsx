@@ -23,7 +23,7 @@ import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { ChuNhan } from "@/components/cms/ChuNhan";
 import { apDungSeo, layDauNhieuTrang, layNoiDungTrang } from "@/lib/noi-dung-trang";
-import { taoChu } from "@/lib/chu-trang";
+import { boNhan, taoChu } from "@/lib/chu-trang";
 import { CHU_HUYEN_HOC, SO_HOI_DAP_HUYEN_HOC } from "@/lib/chu/trang-tinh";
 import { mucSoTrang } from "@/lib/so-trang";
 import { CHU_DE, dsCumTru, mucLuc } from "@/lib/kien-thuc";
@@ -52,7 +52,7 @@ export default async function HuyenHoc() {
   const dau = await layDauNhieuTrang(Object.values(cum).flat().map((x) => x.duong));
   const soBai = (khoa: string | null) => (khoa ? ds.filter((t) => t.loai === CHU_DE[khoa]!.loai).length : 0);
   const hoiDap = Array.from({ length: SO_HOI_DAP_HUYEN_HOC }, (_, i) => ({ hoi: c(`hoi_dap.hoi_${i + 1}`), dap: c(`hoi_dap.dap_${i + 1}`) }));
-  const h1 = nd.dau.h1 ?? MD.h1!;
+  const h1 = boNhan(nd.dau.h1 ?? MD.h1!);   // JSON-LD: chữ thuần, bỏ dấu nhấn *…* của CMS
   const lich = lichHH(nam);
 
   return (

@@ -9,7 +9,7 @@ import { boNhan, taoChu } from "@/lib/chu-trang";
 import { taoLlmsTxt } from "@/lib/llms";
 import { baiCms, tinhNangCms } from "@/lib/cms";
 import { htmlSangMd, locHtmlCms } from "@/lib/cms-html";
-import { layNoiDungTrang, mdKhoi } from "@/lib/noi-dung-trang";
+import { layDauNhieuTrang, layNoiDungTrang, mdKhoi } from "@/lib/noi-dung-trang";
 
 /** ND-5: chữ khối CMS (mẫu cụm + ghi đè) nối vào cuối bản Markdown — cùng nội dung với trang HTML. */
 async function voiKhoi(md: string, duong: string, bien: Record<string, string>) {
@@ -53,7 +53,9 @@ export async function GET(_req: Request, { params: thamSo }: { params: Promise<{
     // HH-1: hub Huyền học — chữ CMS (bảng chữ, H1, lời dẫn) như trang HTML; số trang mỗi cụm tra cứu từ mục lục engine.
     const [nd, ds] = await Promise.all([layNoiDungTrang("/huyen-hoc"), mucLuc()]);
     const md = mucSoTrang("/huyen-hoc")!.mac_dinh, nam = namNayVn();
-    const cum = Object.fromEntries(MANG_HH.map((m) => [m.khoa, [...dsCumTru(m.href), ...(TRA_CUU_THEM[m.khoa] ?? [])].slice(0, 4).map((x) => ({ duong: x.duong, ten: x.ten,
+    const cumGoc = Object.fromEntries(MANG_HH.map((m) => [m.khoa, [...dsCumTru(m.href), ...(TRA_CUU_THEM[m.khoa] ?? [])].slice(0, 4)]));
+    const dau = await layDauNhieuTrang(Object.values(cumGoc).flat().map((x) => x.duong));   // tên cụm = H1 CMS như trang HTML
+    const cum = Object.fromEntries(MANG_HH.map((m) => [m.khoa, cumGoc[m.khoa]!.map((x) => ({ duong: x.duong, ten: dau[x.duong]?.ten ?? x.ten,
       n: x.khoa ? ds.filter((t) => t.loai === CHU_DE[x.khoa!]!.loai).length : 0,
       md: Boolean(x.khoa) || x.duong === duongTuoi("huong-hop-tuoi") }))]));   // chỉ cụm có route .md ở trên
     const noi = mdHuyenHoc({ c: taoChu(CHU_HUYEN_HOC, nd.chu), h1: boNhan(nd.dau.h1 ?? md.h1!), loiDan: boNhan(nd.dau.loiDan ?? md.loi_dan!),

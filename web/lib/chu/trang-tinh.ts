@@ -52,8 +52,8 @@ const HOI_DAP: [string, string][] = [
   ["Huyền học có phải mê tín không?", "Tuỳ cách dùng. Hiểu Bản Thân không dùng huyền học để phán hay doạ: phép tính hiện từng bước, nghĩa có ghi nguồn, mọi lời đọc kèm mặt tối và câu hỏi tự soi. Trang không trả lời chuyện bệnh tật, sống chết, xổ số và không bán vật phẩm hoá giải."],
   ["Nên bắt đầu từ mảng nào?", "Mới làm quen thì bắt đầu từ thần số học: chỉ cần tên và ngày sinh, nửa phút có kết quả. Biết giờ sinh thì đi tiếp Tử vi hoặc Bát tự. Đang phân vân một việc cụ thể thì gieo một quẻ Kinh Dịch; lo chuyện nhà cửa thì xem Phong thuỷ."],
   ["Thần số học có thuộc huyền học không?", "Thần số học có gốc phương Tây (Pythagoras, Chaldea); Tử vi, Bát tự, Kinh Dịch, Phong thuỷ là huyền học phương Đông. Ở Việt Nam người ta hay gọi chung là huyền học. Trang để thần số làm cửa vào vì cần nhập ít nhất."],
-  ["Thông tin của tôi có bị lưu không?", "Hồ sơ lưu trên máy bạn và dùng chung cho mọi mảng; máy chủ tính xong là bỏ. Ngày sinh chỉ nằm trên máy chủ khi bạn tự bấm lưu hồ sơ vào tài khoản, hoặc bật nhắc việc (chỉ ngày và tháng sinh); bài luận chỉ lưu khi bạn bấm Lưu. Bạn xoá được bất cứ lúc nào."],
-  ["Có mất phí không?", "Mọi phép tính, lá số và thư viện kiến thức đều miễn phí. Riêng bản luận giải đầy đủ nhiều chương và câu hỏi vượt lượt mỗi ngày có thể dùng Sao (điểm dùng trong trang) khi tính năng này bật — trang luôn hỏi trước khi trừ."],
+  ["Thông tin của tôi có bị lưu không?", "Hồ sơ lưu trên máy bạn; máy chủ tính xong là bỏ. Ngày sinh chỉ lưu trên máy chủ khi bạn tự chọn: lưu hồ sơ vào tài khoản, bật nhắc việc (chỉ ngày, tháng sinh) hoặc gửi kèm hồ sơ khi hỏi chuyên gia (xoá 30 ngày sau khi trả lời). Bài luận chỉ lưu khi bạn bấm Lưu hoặc bật Tự lưu."],
+  ["Có mất phí không?", "Mọi phép tính, lá số và thư viện kiến thức đều miễn phí. Phần có phí chỉ áp dụng khi được bật: bản luận giải đầy đủ nhiều chương và câu hỏi vượt lượt (dùng Sao — điểm trong trang), Hội viên năm và Hỏi chuyên gia (trả bằng tiền). Trang luôn nói rõ trước khi trừ."],
 ];
 
 // Bảng chữ trang hub /huyen-hoc (trước 2026-10-27 là /kham-pha — khoá cũ giữ nguyên tên để chữ đã sửa ở CMS không mất).
