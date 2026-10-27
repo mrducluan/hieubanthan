@@ -85,6 +85,15 @@ test("luận giải toàn bộ theo chương (miễn phí thử nghiệm)", asyn
   await expect(bc.getByRole("navigation", { name: "Mục lục" })).toBeVisible();
 });
 
+test("lá số trên màn hình có dải chân hieuban.com + mã QR (chụp màn hình vẫn mang link về web)", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  const chan = page.getByTestId("chan-la-so");
+  await expect(chan).toBeVisible();
+  await expect(chan).toContainText("hieuban.com");
+  await expect(chan.getByRole("img", { name: /Mã QR mở hieuban\.com\/tu-vi/ })).toBeVisible();
+});
+
 test("tải ảnh lá số: ra file PNG", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/tu-vi");

@@ -9,6 +9,7 @@
 // 360px: mọi khối co theo bề ngang, không cuộn ngang.
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { ChanQr } from "@/components/khung/ChanQr";
 import { NHAN_MUC, type BieuDoNguHanh as BieuDoT, type HaiCach, type MocDaiHan, type Muc, type ThanDo } from "./kieu";
 
 const SLUG: Record<string, string> = { "Kim": "kim", "Mộc": "moc", "Thủy": "thuy", "Hỏa": "hoa", "Thổ": "tho" };
@@ -38,6 +39,7 @@ export function ThanhThan({ than }: { than: ThanDo }) {
       <div className="mt-2 grid grid-cols-3 text-[0.7rem] text-fg-faint">
         <span>Cần điểm tựa</span><span className="text-center">Cân bằng</span><span className="text-right">Mạnh</span>
       </div>
+      <ChanQr nhan="Quét để xem sức tự thân của bạn" />
     </figure>
   );
 }
@@ -77,6 +79,7 @@ export function BieuDoNguHanh({ bd, haiCach }: { bd: BieuDoT; haiCach?: HaiCach 
           {haiCach.cach_2.ten.toLowerCase()}: {haiCach.cach_2.hanh.join(", ") || "chưa rõ"}. Hai trường phái, hệ thống không chọn thay bạn.
         </p>
       )}
+      <ChanQr nhan="Quét để xem ngũ hành của bạn" />
     </figure>
   );
 }
@@ -119,6 +122,7 @@ export function DaiVanHaiCach({ ds }: { ds: MocDaiHan[] }) {
         <span className="inline-flex items-center gap-1"><span className="inline-block size-2.5 rounded-full border-2 border-moon" aria-hidden /> cách 2 — theo tháng sinh</span>
         <span>chấm cao = thuận, giữa = cân bằng, thấp = cần lưu ý · ≠ hai cách khác nhau</span>
       </figcaption>
+      <ChanQr nhan="Quét để xem đại vận của bạn" />
     </figure>
   );
 }

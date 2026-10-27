@@ -19,6 +19,7 @@ import { usePost } from "@/lib/goi-api";
 import { maNhip } from "@/lib/kiem-chung";
 import { useTyLe, type BangTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
+import { ChanQr } from "@/components/khung/ChanQr";
 
 type Thang = Nhip3ThangOutputT["thang"][number];
 type Muc = Thang["muc"];
@@ -130,6 +131,7 @@ function BieuDoNhip({ thang, chon, onChon }: { thang: Thang[]; chon: number | nu
         })}
       </svg>
       <figcaption className="sr-only">{moTa}</figcaption>
+      <ChanQr className="mx-2 pb-2" nhan="Quét để xem nhịp của bạn" />
     </figure>
   );
 }

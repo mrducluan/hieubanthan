@@ -17,6 +17,7 @@ import { CachLam } from "@/components/huyen-hoc/CachLam";
 import { HoiNhanhAnh } from "@/components/huyen-hoc/HoiNhanhAnh";
 import { DocAnhNha } from "@/components/huyen-hoc/DocAnhNha";
 import { ImagePlus, RotateCw } from "lucide-react";
+import { ChanQr } from "@/components/khung/ChanQr";
 
 interface DanhMuc {
   phong: Record<string, string>;
@@ -413,6 +414,9 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
           <SoDoNha className="mt-3" tieuDe="Sơ đồ phòng theo phương" huongNha={d.huong_nha}
             duNien={Object.fromEntries(d.vi_tri.map((x) => [x.cung, x.du_nien_menh ?? x.du_nien_trach]))}
             phong={d.vi_tri.map((x) => ({ cung: x.cung, ten: x.ten, muc: x.hop == null ? null : x.hop ? "thuan" : "can_chu_dong" }))} />
+        )}
+        {d.vi_tri.length > 0 && (
+          <ChanQr className="max-w-sm" nhan="Quét để khảo sát nhà của bạn" />
         )}
         {d.vi_tri.length > 0 && (
           <div className="-mx-1 mt-2 overflow-x-auto">

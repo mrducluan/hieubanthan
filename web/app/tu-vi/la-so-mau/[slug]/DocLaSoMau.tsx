@@ -6,6 +6,7 @@ import type { LaSoOutputT } from "@/app/api/tuvi/schema";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { LaSoTuVi } from "@/components/huyen-hoc/LaSoTuVi";
 import { KhungLaSo } from "@/components/huyen-hoc/KhungLaSo";
+import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
 import { doanCoThuatNgu, KhungGiaiNghia } from "@/components/hoi/ThuatNgu";
 import type { LaSoMau } from "@/lib/kien-thuc";
 
@@ -16,7 +17,7 @@ export function DocLaSoMau({ duLieu }: { duLieu: LaSoMau }) {
   const router = useRouter();
   return (
     <>
-      <KhungLaSo chon={chon} testId="la-so-mau" className="mt-8">
+      <KhungLaSo chon={chon} testId="la-so-mau" className="mt-8" chan={<ChanLaSo giaoDien="dem" tieuDe="Lá số Tử vi mẫu" />}>
         <LaSoTuVi ls={ls} giaoDien="dem" ten={duLieu.ten} gioSinh={duLieu.gio} chon={chon} onChon={setChon} />
       </KhungLaSo>
       <div className="mt-4">
