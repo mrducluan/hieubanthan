@@ -76,6 +76,19 @@ def test_moi_xem_battu():
     _kiem_moi_xem(toan_bo.battu({"lich": dt.datetime(1990, 5, 17, 12, 30), "gioi_tinh": "nam"}, ngay_xem=dt.date(2026, 10, 1)))
 
 
+# Cửa Sao v2: "~N phút đọc" trên thẻ chương khoá = mọi chữ người dùng sẽ đọc trong chương (đoạn, tóm tắt, hộp, căn cứ),
+# không chỉ `doan` — báo cáo đời sống để phần lớn nội dung trong hộp, trước đây chương nào cũng ghi "~1 phút".
+def test_phut_doc_dem_ca_hop():
+    for bc in (toan_bo.tuvi({"ngay": dt.date(1997, 3, 19), "ti": 0, "gioi_tinh": "nam"}, ngay_xem=dt.date(2026, 10, 1)),
+               toan_bo.battu({"lich": dt.datetime(1990, 5, 17, 12, 30), "gioi_tinh": "nam"}, ngay_xem=dt.date(2026, 10, 1))):
+        for c in bc["chuong"]:
+            assert c["moi_xem"]["phut_doc"] == max(1, round(toan_bo.so_chu_chuong(c) / 200))
+        assert sum(c["moi_xem"]["phut_doc"] for c in bc["chuong"][1:]) >= 2 * (len(bc["chuong"]) - 1), \
+            [c["moi_xem"]["phut_doc"] for c in bc["chuong"]]
+    assert toan_bo.so_chu_chuong({"ma": "x y z", "doan": ["một hai"], "hop": [{"tieu_de": "ba", "noi_dung": "bốn năm"}],
+                                  "moi_xem": {"cau_hoi": "bỏ qua"}}) == 5
+
+
 def test_diem_nhan_cat_dung_cho():
     assert toan_bo.diem_nhan(["Cung Phu Thê: định nghĩa dài.", "Trong lá số của bạn, Thiên Đồng ở cung Phu Thê (Đắc — Sao ở vị trí khá: phát huy được.): Kỳ vọng êm đềm."]) \
         == "Trong lá số của bạn, Thiên Đồng ở cung Phu Thê (Đắc — Sao ở vị trí khá: phát huy được.)"

@@ -87,9 +87,11 @@ export async function cuaHoi(req: Request, moDun: string): Promise<Cua> {
   }
   if (await laCauDacBiet(req)) return MO;
   if (!phien) {
-    const thuong = await layCauHinh<number>("sao.thuong.chao_mung");
+    // Cửa Sao v2: kèm số câu miễn phí của tài khoản + giá mỗi câu để hộp thoại nói rõ "đăng nhập được thêm mấy câu".
+    const [thuong, tranTk, gia] = await Promise.all([layCauHinh<number>("sao.thuong.chao_mung"),
+      layCauHinh<number>("sao.hoi.mien_phi_tk"), layCauHinh<number>("sao.hoi.gia")]);
     return { ok: false, res: NextResponse.json({
-      error: `Bạn đã dùng hết ${tran} câu hỏi miễn phí hôm nay.`, can: "dang_nhap", tran, thuong, mo_dun: moDun,
+      error: `Bạn đã dùng hết ${tran} câu hỏi miễn phí hôm nay.`, can: "dang_nhap", tran, tran_tk: tranTk, gia, thuong, mo_dun: moDun,
     }, { status: 402 }) };
   }
   const gia = await layCauHinh<number>("sao.hoi.gia");

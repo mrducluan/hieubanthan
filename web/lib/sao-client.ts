@@ -5,6 +5,8 @@
 export type CanSao = "dang_nhap" | "xac_nhan_sao" | "nap";
 export type YeuCauSao = {
   can: CanSao; error: string; gia?: number; so_du?: number; tran?: number; thuong?: number | null;
+  /** Khách hết lượt hỏi: số câu miễn phí mỗi ngày khi có tài khoản (gia = giá mỗi câu vượt lượt). */
+  tran_tk?: number;
   /** can = nap: tài khoản chưa nhận Sao chào mừng → số Sao nhận được khi lưu hồ sơ vào tài khoản (null = đã nhận). */
   chao_mung?: number | null;
   /** "hoi" = hỏi đáp vượt lượt · "luan_giai" = mở khoá báo cáo · "nhiem_vu" = khách bấm nhận Sao nhiệm vụ (SAO-3) */

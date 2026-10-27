@@ -299,7 +299,7 @@ test("SAO-2: cot_loi rỗng (chương 1 không có hộp nổi bật) → không
   await expect(bc.getByTestId("lg-chuong-tong_quan")).toBeVisible();
   await expect(bc.getByTestId("lg-cot-loi")).toHaveCount(0);
   await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(12);
-  await expect(page.getByTestId("lg-phan-khoa")).toContainText("tặng 10 Sao — đủ mở báo cáo này");
+  await expect(page.getByTestId("lg-goi-y")).toHaveText("Đăng nhập nhận 10 Sao — đủ mở ngay báo cáo này.");
 });
 
 async function moBaoCaoKhoa(page: Page, bc: object) {

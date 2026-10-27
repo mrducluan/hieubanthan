@@ -72,8 +72,22 @@ def diem_nhan(doan: list[str]) -> str:
     return cau if len(cau) <= 200 else cau[:199].rstrip() + "…"
 
 
-def _moi_xem(mo_dun: str, ma: str, doan: list[str]) -> dict:
-    chu = sum(len(d.split()) for d in doan)
+_BO_KHOA_DEM = frozenset({"ma", "moi_xem", "ma_mau", "muc", "loai", "phai", "school_id", "source_id"})
+
+
+def so_chu_chuong(c) -> int:
+    """Số chữ người dùng sẽ đọc trong chương: mọi chuỗi (đoạn, tóm tắt, hộp, căn cứ…), bỏ các trường mã."""
+    if isinstance(c, str):
+        return len(c.split())
+    if isinstance(c, dict):
+        return sum(so_chu_chuong(v) for k, v in c.items() if k not in _BO_KHOA_DEM)
+    if isinstance(c, (list, tuple)):
+        return sum(so_chu_chuong(v) for v in c)
+    return 0
+
+
+def _moi_xem(mo_dun: str, ma: str, doan: list[str], chuong: dict | None = None) -> dict:
+    chu = so_chu_chuong(chuong) if chuong is not None else sum(len(d.split()) for d in doan)
     return {"diem_nhan": diem_nhan(doan), "cau_hoi": CAU_HOI_MO.get((mo_dun, ma), "Chương này nói gì về chính bạn?"),
             "so_doan": len(doan), "phut_doc": max(1, round(chu / 200))}
 
@@ -83,7 +97,7 @@ def tuvi(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = No
     """LG-ĐS: báo cáo `doi_song_1` (cot_loi, thoi_gian_bieu, 13 chương có hop/doan/can_cu) + các trường cũ
     (mo_dun, chuong[].ma/tieu_de/cau_hoi/doan/moi_xem, ket, trang_thai, phi) cho SAO-2 và tầng diễn đạt."""
     bc = ds_tuvi.lap(sinh, ngay_xem, trong_so=trong_so, ca_nhan=ca_nhan)
-    chuong = [{**c, "moi_xem": _moi_xem("tuvi", c["ma"], c["doan"])} for c in bc["chuong"]]
+    chuong = [{**c, "moi_xem": _moi_xem("tuvi", c["ma"], c["doan"], c)} for c in bc["chuong"]]
     return {"mo_dun": "tuvi", **bc, "chuong": chuong, "ket": hoi_van.KET, "trang_thai": bc.get("trang_thai", "nhap_ai"),
             "phi": PHI}
 
@@ -93,6 +107,6 @@ def battu(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = N
     """BT-ĐS: báo cáo `doi_song_1` cùng khung Tử vi (cot_loi, thoi_gian_bieu đại vận, 13 chương có hop/doan/can_cu) +
     các trường cũ (mo_dun, chuong[].ma/tieu_de/cau_hoi/doan/moi_xem, ket, trang_thai, phi) cho SAO-2 và diễn đạt."""
     bc = ds_battu.lap(sinh, ngay_xem, trong_so=trong_so, ca_nhan=ca_nhan)
-    chuong = [{**c, "moi_xem": _moi_xem("battu", c["ma"], c["doan"])} for c in bc["chuong"]]
+    chuong = [{**c, "moi_xem": _moi_xem("battu", c["ma"], c["doan"], c)} for c in bc["chuong"]]
     return {"mo_dun": "battu", **bc, "chuong": chuong, "ket": hoi_van.KET,
             "trang_thai": bc.get("trang_thai", "nhap_ai"), "phi": PHI}
