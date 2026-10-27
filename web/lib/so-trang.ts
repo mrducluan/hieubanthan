@@ -214,7 +214,8 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     tieu_de_seo: "Huyền học online: Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, thần số",
     mo_ta_seo: "Huyền học phương Đông và thần số học trong một hồ sơ: lá số Tử vi, Bát tự, gieo quẻ Kinh Dịch, phong thuỷ nhà ở. Tính minh bạch, có nguồn, miễn phí.",
     h1: "Huyền học — năm cách nhìn lại mình",
-    loi_dan: "Thần số học là cửa vào nhanh nhất. Tử vi, Bát tự, Kinh Dịch, Phong thuỷ là bốn môn phương Đông đi sâu hơn. Cả năm dùng chung một hồ sơ, tính từng bước, diễn giải có nguồn sách — để tự soi chứ không để phán.",
+    // AIO: câu đầu định nghĩa thẳng "huyền học là gì" (≤ 45 chữ) để máy tìm kiếm / AI trích nguyên câu.
+    loi_dan: "Huyền học là những hệ thống người xưa dùng để đọc nhịp của con người và thời gian — qua con số, ngày giờ sinh, quẻ dịch và nơi ở. Thần số học là cửa vào nhanh nhất; Tử vi, Bát tự, Kinh Dịch, Phong thuỷ đi sâu hơn. Cả năm dùng chung một hồ sơ, tính từng bước, có nguồn sách.",
   } },
   { duong: "/kien-thuc", nhom: "tinh", ten: "Thư viện kiến thức", o: O_TINH, mac_dinh: { chu: CHU_KIEN_THUC,
     tieu_de_seo: "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi, Bát tự",

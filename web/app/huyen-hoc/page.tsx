@@ -13,11 +13,12 @@ import {
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { HinhNguMang } from "@/components/trang-huyen-hoc/HinhNguMang";
-import { ChipCan, DongHoSo, type KhoaMang } from "@/components/trang-huyen-hoc/HoSoHub";
+import { ChipCan, DongHoSo } from "@/components/trang-huyen-hoc/HoSoHub";
+import { HOI_HH, MANG_HH, lichHH, namNayVn } from "@/lib/huyen-hoc";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
-import { goiLd, ldDuongDan, ldHoiDap, ldThucThe, metaTrang, urlDayDu, siteUrl } from "@/lib/seo";
+import { anhBai, goiLd, ldAnh, ldDuongDan, ldHoiDap, ldThucThe, metaTrang, urlDayDu, siteUrl } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { ChuNhan } from "@/components/cms/ChuNhan";
@@ -34,63 +35,40 @@ const macDinh = () => mucSoTrang(DUONG)!.mac_dinh;
 
 export async function generateMetadata(): Promise<Metadata> {
   const md = macDinh();
-  return apDungSeo(metaTrang({ tieuDe: md.tieu_de_seo!, moTa: md.mo_ta_seo!, duong: DUONG }), await layNoiDungTrang(DUONG));
+  return apDungSeo(metaTrang({ tieuDe: md.tieu_de_seo!, moTa: md.mo_ta_seo!, duong: DUONG, md: `${DUONG}.md` }), await layNoiDungTrang(DUONG));
 }
 
-type Mang = { khoa: KhoaMang; href: string; kieu: KieuMang; han: string; lop: string };
-// Thứ tự = thứ tự đọc: thần số (cửa vào) → hai lá số → nhà → một việc. Bố cục lưới 6 cột: hai thẻ lớn rồi ba thẻ.
-const MANG: Mang[] = [
-  { khoa: "than_so", href: "/than-so", kieu: "than-so", han: "數", lop: "lg:col-span-3" },
-  { khoa: "tu_vi", href: "/tu-vi", kieu: "tu-vi", han: "紫微", lop: "lg:col-span-3" },
-  { khoa: "bat_tu", href: "/bat-tu", kieu: "bat-tu", han: "八字", lop: "lg:col-span-2" },
-  { khoa: "phong_thuy", href: "/phong-thuy", kieu: "phong-thuy", han: "風水", lop: "lg:col-span-2" },
-  { khoa: "kinh_dich", href: "/kinh-dich", kieu: "kinh-dich", han: "易經", lop: "md:col-span-2 lg:col-span-2" },
-];
-
-const HOI: { href: string; Icon: LucideIcon }[] = [
-  { href: "/than-so", Icon: UserRound },
-  { href: "/hop-doi", Icon: HeartHandshake },
-  { href: "/tu-vi", Icon: Sparkles },
-  { href: "/kinh-dich", Icon: MessageCircleQuestion },
-  { href: "/phong-thuy", Icon: Home },
-  { href: "/xem-ngay-tot", Icon: CalendarCheck },
-];
-
-const namNay = () => Number(new Intl.DateTimeFormat("en", { year: "numeric", timeZone: "Asia/Ho_Chi_Minh" }).format(new Date()));
-const LICH = (nam: number): { href: string; Icon: LucideIcon }[] => [
-  { href: "/hom-nay", Icon: Sun },
-  { href: "/xem-ngay-tot", Icon: CalendarCheck },
-  { href: "/xem-tuoi-lam-nha", Icon: Home },
-  { href: "/tuoi-xong-dat", Icon: DoorOpen },
-  { href: "/phong-thuy/huong-xau-nam", Icon: Compass },
-  { href: "/phong-thuy/huong-hop-tuoi", Icon: Navigation },
-  { href: `/lich-am/${nam}`, Icon: CalendarDays },
-  { href: "/doi-lich-am-duong", Icon: Repeat },
-];
-
-const CACH: LucideIcon[] = [ListOrdered, BookOpen, MoonStar];
+// Biểu tượng theo vị trí: câu băn khoăn (HOI_HH) và công cụ lịch & tuổi (lichHH) — đích + chữ ở lib/huyen-hoc.ts / bảng chữ.
+const ICON_HOI: LucideIcon[] = [UserRound, HeartHandshake, Sparkles, MessageCircleQuestion, Home, CalendarCheck];
+const ICON_LICH: LucideIcon[] = [Sun, CalendarCheck, Home, DoorOpen, Compass, Navigation, CalendarDays, Repeat];
+const CACH: LucideIcon[] = [ListOrdered, BookOpen, MoonStar];   // SO_CACH_HH lớp
 
 export default async function HuyenHoc() {
   const [nd, ds] = await Promise.all([layNoiDungTrang(DUONG), mucLuc()]);
   const c = taoChu(CHU_HUYEN_HOC, nd.chu);
   const MD = macDinh();
-  const nam = namNay();
-  const cum = Object.fromEntries(MANG.map((m) => [m.khoa, dsCumTru(m.href).slice(0, 4)]));
+  const nam = namNayVn();
+  const cum = Object.fromEntries(MANG_HH.map((m) => [m.khoa, dsCumTru(m.href).slice(0, 4)]));
   const dau = await layDauNhieuTrang(Object.values(cum).flat().map((x) => x.duong));
   const soBai = (khoa: string | null) => (khoa ? ds.filter((t) => t.loai === CHU_DE[khoa]!.loai).length : 0);
   const hoiDap = Array.from({ length: SO_HOI_DAP_HUYEN_HOC }, (_, i) => ({ hoi: c(`hoi_dap.hoi_${i + 1}`), dap: c(`hoi_dap.dap_${i + 1}`) }));
   const h1 = nd.dau.h1 ?? MD.h1!;
-  const lich = LICH(nam);
+  const lich = lichHH(nam);
 
   return (
     <div className="space-y-16 md:space-y-24">
       <JsonLd data={goiLd(
-        { "@type": "CollectionPage", "@id": `${urlDayDu(DUONG)}#trang`, url: urlDayDu(DUONG), name: h1, description: MD.mo_ta_seo,
-          inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl()}/#website` },
-          about: [{ "@type": "Thing", name: "Huyền học" }, ...(["than-so", "tu-vi", "bat-tu", "phong-thuy", "kinh-dich"] as const).map((m) => ldThucThe(m))],
-          mainEntity: { "@type": "ItemList", itemListElement: [...MANG.map((m) => ({ href: m.href, ten: c(`the.${m.khoa}_ten`) })),
-            ...lich.map((l, i) => ({ href: l.href, ten: c(`lich.ten_${i + 1}`, { nam: String(nam) }) }))]
-            .map((x, i) => ({ "@type": "ListItem", position: i + 1, name: x.ten, url: urlDayDu(x.href) })) } },
+        // AIO/GEO: CollectionPage nối tổ chức (publisher), ảnh đại diện, bản Markdown; ItemList = mọi công cụ con của hub.
+        { "@type": "CollectionPage", "@id": `${urlDayDu(DUONG)}#trang`, url: urlDayDu(DUONG), name: h1, headline: h1,
+          description: MD.mo_ta_seo, inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl()}/#website` },
+          publisher: { "@id": `${siteUrl()}/#to-chuc` }, isAccessibleForFree: true,
+          primaryImageOfPage: ldAnh(anhBai({ tieuDe: MD.tieu_de_seo! }), h1),
+          encoding: { "@type": "MediaObject", encodingFormat: "text/markdown", contentUrl: urlDayDu(`${DUONG}.md`) },
+          about: [{ "@type": "Thing", name: "Huyền học", description: c("hoi_dap.dap_1") }, ...MANG_HH.map((m) => ldThucThe(m.mang))],
+          mainEntity: { "@type": "ItemList", name: c("mang.lon"), numberOfItems: MANG_HH.length + lich.length,
+            itemListElement: [...MANG_HH.map((m) => ({ href: m.href, ten: c(`the.${m.khoa}_ten`) })),
+              ...lich.map((href, i) => ({ href, ten: c(`lich.ten_${i + 1}`, { nam: String(nam) }) }))]
+              .map((x, i) => ({ "@type": "ListItem", position: i + 1, name: x.ten, url: urlDayDu(x.href) })) } },
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Huyền học", duong: DUONG }]),
         ldHoiDap(hoiDap),
       )} />
@@ -130,7 +108,7 @@ export default async function HuyenHoc() {
       <section aria-labelledby="ban-can-gi" className="scroll-mt-24">
         <TieuDeMuc id="ban-can-gi" nho={c("hoi.nho")} lon={c("hoi.lon")} />
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="chon-theo-cau-hoi">
-          {HOI.map(({ href, Icon }, i) => (
+          {HOI_HH.map((href, i) => { const Icon = ICON_HOI[i]!; return (
             <li key={i}>
               <Link href={href} className="glass group flex h-full items-center gap-4 rounded-2xl p-4 hover:border-gold/50 sm:p-5">
                 <span className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/40 bg-gold/10 text-gold"><Icon className="size-5" aria-hidden /></span>
@@ -141,7 +119,7 @@ export default async function HuyenHoc() {
                 <ArrowRight className="size-4 shrink-0 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden />
               </Link>
             </li>
-          ))}
+          ); })}
         </ul>
       </section>
 
@@ -150,7 +128,7 @@ export default async function HuyenHoc() {
       <section aria-labelledby="nam-mang">
         <TieuDeMuc id="nam-mang" nho={c("mang.nho")} lon={c("mang.lon")} />
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
-          {MANG.map(({ khoa, href, kieu, han, lop }) => (
+          {MANG_HH.map(({ khoa, href, kieu, han, lop }) => (
             <article key={khoa} data-testid={`the-mang-${khoa}`}
               className={`glass group relative flex flex-col overflow-hidden rounded-2xl p-5 transition-colors hover:border-gold/50 sm:p-6 ${lop}`}>
               <span aria-hidden className="pointer-events-none absolute -bottom-4 right-3 select-none text-[6.5rem] leading-none text-gold/[0.07] sm:text-[7.5rem]"
@@ -203,7 +181,7 @@ export default async function HuyenHoc() {
       <section aria-labelledby="lich-tuoi">
         <TieuDeMuc id="lich-tuoi" nho={c("lich.nho")} lon={c("lich.lon")} />
         <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4" data-testid="cong-cu-lich">
-          {lich.map(({ href, Icon }, i) => (
+          {lich.map((href, i) => { const Icon = ICON_LICH[i]!; return (
             <li key={href}>
               <Link href={href} className="glass group flex h-full flex-col rounded-2xl p-4 hover:border-gold/50">
                 <span className="flex items-center justify-between">
@@ -214,7 +192,7 @@ export default async function HuyenHoc() {
                 <span className="mt-1 text-xs leading-snug text-fg-muted sm:text-sm">{c(`lich.mo_${i + 1}`)}</span>
               </Link>
             </li>
-          ))}
+          ); })}
         </ul>
       </section>
 
@@ -227,7 +205,7 @@ export default async function HuyenHoc() {
               <tr>{[1, 2, 3, 4].map((i) => <th key={i} scope="col" className="px-5 py-3 font-semibold">{c(`so_sanh.cot_${i}`)}</th>)}</tr>
             </thead>
             <tbody>
-              {MANG.map(({ khoa, href, kieu }) => (
+              {MANG_HH.map(({ khoa, href, kieu }) => (
                 <tr key={khoa} className="block border-b border-line/40 px-5 py-4 last:border-0 md:table-row md:p-0">
                   <th scope="row" className="block pb-2 font-normal md:table-cell md:whitespace-nowrap md:px-5 md:py-4 md:align-top">
                     <Link href={href} className="inline-flex items-center gap-2 font-serif text-lg text-fg hover:text-gold">

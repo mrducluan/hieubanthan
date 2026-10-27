@@ -64,3 +64,23 @@ test("điện thoại 390px: không tràn ngang, nút chính trong màn đầu",
   const hop = await nut.boundingBox();
   expect(hop && hop.y + hop.height).toBeLessThan(844);
 });
+
+test("AIO: /huyen-hoc.md cùng nội dung trang (canonical về HTML), /kham-pha.md → 308; HTML khai bản Markdown + schema đủ", async ({ request }) => {
+  const cu = await request.get("/kham-pha.md", { maxRedirects: 0 });
+  expect(cu.status()).toBe(308);
+  expect(cu.headers().location).toBe("/huyen-hoc.md");
+  const md = await request.get("/huyen-hoc.md");
+  expect(md.status()).toBe(200);
+  expect(md.headers()["content-type"]).toContain("text/markdown");
+  expect(md.headers().link).toMatch(/\/huyen-hoc>; rel="canonical"/);
+  const t = await md.text();
+  for (const x of ["# Huyền học", "> Huyền học là", "## Bạn đang băn khoăn điều gì?", "### [Kinh Dịch]", "| Kinh Dịch |", "### Huyền học là gì?"]) expect(t, x).toContain(x);
+  const html = await (await request.get("/huyen-hoc")).text();
+  expect(html).toMatch(/<link rel="alternate" type="text\/markdown" href="[^"]*\/huyen-hoc\.md"/);
+  const ld = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)].flatMap((m) => JSON.parse(m[1]!)["@graph"] ?? []);
+  const trang = ld.find((n: { "@type": string }) => n["@type"] === "CollectionPage");
+  expect(trang.publisher["@id"]).toMatch(/#to-chuc$/);
+  expect(trang.encoding.contentUrl).toMatch(/\/huyen-hoc\.md$/);
+  expect(trang.mainEntity.itemListElement.length).toBe(13);
+  expect(ld.find((n: { "@type": string }) => n["@type"] === "FAQPage").mainEntity.length).toBe(6);
+});

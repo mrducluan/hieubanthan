@@ -4,6 +4,7 @@ import { CHU_DE, duongTrang, duongTuoi, type MucLuc, type MucTuDien, type MucTuo
 import { CHUYEN_GIA, duongChuyenGia } from "@/lib/chuyen-gia";
 import { MO_TA_SITE, TEN_SITE, urlDayDu } from "@/lib/seo";
 import { duongMoi } from "@/lib/duong-silo";
+import { HOI_HH, MANG_HH, SO_CACH_HH } from "@/lib/huyen-hoc";
 
 
 /** EEAT-1: dòng tác giả / chủ biên / thẩm định cho bản .md (cùng dữ liệu engine như trang HTML). */
@@ -129,4 +130,30 @@ export function mdTuoi(t: TuoiHuong): string {
 export function mdDsTuoi(ds: MucTuoiHuong[]): string {
   return ["# Hướng hợp tuổi (1960–2005, nam và nữ)", "", `URL: ${urlDayDu("/phong-thuy/huong-hop-tuoi")}`, "",
     ...ds.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTuoi(t.slug))}.md): nam ${t.quai_nam} (${t.nhom_nam}), nữ ${t.quai_nu} (${t.nhom_nu})`), ""].join("\n");
+}
+
+// HH-1 — hub /huyen-hoc: cùng chữ + cùng thứ tự với trang HTML (lib/huyen-hoc.ts + bảng chữ CHU_HUYEN_HOC qua `c`).
+type ChuHH = (k: string, bien?: Record<string, string>) => string;
+export function mdHuyenHoc(o: { c: ChuHH; h1: string; loiDan: string; nam: number; lich: string[]; soDap: number;
+  cum: Record<string, { duong: string; ten: string; n: number; md: boolean }[]> }): string {
+  const { c } = o, l = (d: string) => urlDayDu(d);
+  const d = [`# ${o.h1}`, "", `> ${o.loiDan}`, "", `URL: ${l("/huyen-hoc")}`, `Biên soạn: Ban biên tập ${TEN_SITE} · Chủ biên Đức Luân`, "",
+    `## ${c("hoi.lon")}`, "",
+    ...HOI_HH.map((href, i) => `- ${c(`hoi.cau_${i + 1}`)} → [${c(`hoi.den_${i + 1}`)}](${l(href)})`), "",
+    `## ${c("mang.lon")}`, ""];
+  for (const m of MANG_HH) {
+    d.push(`### [${c(`the.${m.khoa}_ten`)}](${l(m.href)})`, "", `*${c(`the.${m.khoa}_hoi`)}*`, "", c(`the.${m.khoa}_mo`), "",
+      ...[1, 2, 3].map((i) => `- ${c(`the.${m.khoa}_nhan_${i}`)}`), `- Cần: ${c(`the.${m.khoa}_can`)}`, "");
+    const cum = o.cum[m.khoa] ?? [];
+    if (cum.length) d.push(`${c("the.kien_thuc")}: ${cum.map((x) => `[${x.ten}](${l(x.duong)}${x.md ? ".md" : ""})${x.n ? ` (${x.n} trang)` : ""}`).join(" · ")}`, "");
+  }
+  d.push(`## ${c("lich.lon")}`, "", ...o.lich.map((href, i) => `- [${c(`lich.ten_${i + 1}`, { nam: String(o.nam) })}](${l(href)}): ${c(`lich.mo_${i + 1}`)}`), "",
+    `## ${c("so_sanh.lon")}`, "", `| ${[1, 2, 3, 4].map((i) => c(`so_sanh.cot_${i}`)).join(" | ")} |`, "| --- | --- | --- | --- |",
+    ...MANG_HH.map((m) => `| ${c(`the.${m.khoa}_ten`)} | ${c(`so_sanh.dua_${m.khoa}`)} | ${c(`so_sanh.tra_${m.khoa}`)} | ${c(`so_sanh.goc_${m.khoa}`)} |`), "",
+    c("so_sanh.ket"), "", `## ${c("cach.lon")}`, "",
+    ...Array.from({ length: SO_CACH_HH }, (_, i) => `- **${c(`cach.ten_${i + 1}`)}**: ${c(`cach.mo_${i + 1}`)}`), "",
+    `## ${c("hoi_dap.lon")}`, "",
+    ...Array.from({ length: o.soDap }, (_, i) => [`### ${c(`hoi_dap.hoi_${i + 1}`)}`, "", c(`hoi_dap.dap_${i + 1}`), ""]).flat(),
+    "## Nguyên tắc nội dung", "", ...NGUYEN_TAC, "");
+  return d.join("\n");
 }
