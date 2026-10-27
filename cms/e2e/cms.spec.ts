@@ -515,7 +515,7 @@ test("Giao diện website: menu chân trang, dải thông báo, banner, bài m�
   await expect(chan.getByRole("link", { name: "Bài số 7 nổi bật" })).toHaveAttribute("href", "/blog/so-chu-dao-7");
   await expect(chan.getByText("Về chúng tôi", { exact: true })).toHaveCount(0);   // menu theo CMS, không trộn mặc định
 
-  await page.goto(`${WEB}/kham-pha`);
+  await page.goto(`${WEB}/huyen-hoc`);
   await expect(page.getByTestId("bai-lien-quan-mang").locator('a[href="/blog/so-chu-dao-7"]')).toBeVisible();
 
   // tắt hết → web quay về mặc định trong code, không còn dải/banner
@@ -523,7 +523,7 @@ test("Giao diện website: menu chân trang, dải thông báo, banner, bài m�
     thong_bao: { bat: false }, banner: { bat: false }, bai_viet: { bat: false }, bai_theo_mang: { bat: false } } })).ok()).toBeTruthy();
   expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: { cot: [] } })).ok()).toBeTruthy();
   await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Mùa thu tự soi") && b.includes("Về chúng tôi"));
-  await page.goto(`${WEB}/kham-pha`);
+  await page.goto(`${WEB}/huyen-hoc`);
   await expect(page.getByTestId("bai-lien-quan-mang")).toHaveCount(0);
   await expect(page.getByTestId("thong-bao-site")).toHaveCount(0);
 });

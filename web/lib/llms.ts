@@ -38,6 +38,7 @@ export async function taoLlmsTxt(): Promise<string> {
     "",
     "## Công cụ miễn phí — kết quả cá nhân",
     "",
+    `- [Huyền học — tổng quan năm mảng](${urlDayDu("/huyen-hoc")}): huyền học là gì, mỗi mảng (thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ) trả lời kiểu câu hỏi nào, cần nhập gì, gốc sách nào; chọn công cụ theo điều đang băn khoăn.`,
     `- [Thần số học của bạn](${urlDayDu("/")}): nhập họ tên + ngày sinh (dương hoặc âm lịch) → số chủ đạo, linh hồn, nhân cách, sứ mệnh, năm cá nhân, biểu đồ ngày sinh; có cách tính từng bước.`,
     `- [Hợp đôi](${urlDayDu("/hop-doi")}): hai người theo loại quan hệ (người yêu, bạn bè, đồng nghiệp, sếp, gia đình) — chỗ dễ hoà, chỗ dễ va, việc nên cùng làm; không chấm điểm hợp/khắc.`,
     `- [Lá số Tử vi](${urlDayDu("/tu-vi")}): lá số 12 cung theo giờ, ngày, nơi sinh; đại hạn, lưu niên, lưu nguyệt; luận giải theo chương; hỏi đáp ngay dưới lá số.`,

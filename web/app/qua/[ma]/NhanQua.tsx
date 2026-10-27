@@ -83,7 +83,7 @@ export function NhanQua({ ma, banDau }: { ma: string; banDau: TrangQua | null })
   const congCu = (mang?: MangLuanGiai) => (
     <div className="mt-6 flex flex-col gap-2">
       <Button asChild><Link href={mang ? DUONG_BAO_CAO[mang] : "/than-so"}><Sparkles aria-hidden /> {mang ? `Xem ${TEN_BAO_CAO[mang]} của bạn` : "Xem con số của bạn — miễn phí"}</Link></Button>
-      <Button asChild variant="ghost"><Link href="/kham-pha">Các công cụ miễn phí khác</Link></Button>
+      <Button asChild variant="ghost"><Link href="/huyen-hoc">Các công cụ miễn phí khác</Link></Button>
     </div>
   );
 

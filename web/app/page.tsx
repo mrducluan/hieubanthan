@@ -117,6 +117,9 @@ export default async function TrangChu() {
             </Link>
           ))}
         </div>
+        <Link href="/huyen-hoc" className="mt-4 inline-flex items-center gap-1.5 text-sm text-gold underline-offset-4 hover:underline">
+          {c("mang.xem_tat_ca")} <ArrowRight className="size-4" aria-hidden />
+        </Link>
       </section>
 
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" />

@@ -1,4 +1,4 @@
-// Điều hướng chân trang hieuban.com (4 cột: Khám phá · Kiến thức · Về chúng tôi · Pháp lý — hoặc cột anh tự đặt).
+// Điều hướng chân trang hieuban.com (4 cột: Huyền học · Kiến thức · Về chúng tôi · Pháp lý — hoặc cột anh tự đặt).
 // Mỗi liên kết trỏ tới: một trang trong site (đường dẫn), một bài viết CMS, hoặc một chuyên mục CMS.
 // Để trống toàn bộ = web dùng menu mặc định trong code (MENU_MAC_DINH — giống hệt menu đang chạy).
 // Thanh menu trên cùng: global riêng "Menu đầu trang" (globals/MenuDauTrang.ts).
@@ -14,9 +14,9 @@ import { chuanHoaDuLieu, kiemRanhGioi } from "../kiem-dinh/kiem-dinh";
 export const DUONG_TRONG_SITE = /^\/(?![/\\])[^\s\\]*$/;   // chặn //x và /\x (trình duyệt hiểu là link ngoài)
 
 export const MENU_MAC_DINH: { ten: string; lien_ket: { nhan: string; duong_dan: string }[] }[] = [
-  { ten: "Khám phá", lien_ket: [
+  { ten: "Huyền học", lien_ket: [
     ["/than-so", "Thần số học"], ["/tu-vi", "Tử vi"], ["/bat-tu", "Bát tự"], ["/kinh-dich", "Kinh Dịch"],
-    ["/phong-thuy", "Phong thuỷ"], ["/hop-doi", "Hợp đôi"],
+    ["/phong-thuy", "Phong thuỷ"], ["/hop-doi", "Hợp đôi"], ["/huyen-hoc", "Tất cả các mảng"],
   ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
   { ten: "Kiến thức", lien_ket: [
     ["/kien-thuc", "Thư viện kiến thức"], ["/than-so/y-nghia-so", "Ý nghĩa các con số"], ["/kinh-dich/que", "64 quẻ Kinh Dịch"],

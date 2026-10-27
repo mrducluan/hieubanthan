@@ -90,6 +90,7 @@ export const CHU_TRANG_CHU = {
   "mang.lon": { nhom: M, nhan: "Tiêu đề mục", mac_dinh: "Bốn mảng huyền học, một hồ sơ", toi_da: 120 },
   "mang.mo_ta": { nhom: M, nhan: "Mô tả dưới tiêu đề", toi_da: 300,
     mac_dinh: "Sau thần số, bạn có thể đi tiếp vào các hệ thống phương Đông — dùng luôn hồ sơ đã nhập, chỉ hỏi thêm giờ sinh khi cần." },
+  "mang.xem_tat_ca": { nhom: M, nhan: "Link dưới bốn thẻ (mở /huyen-hoc)", mac_dinh: "Xem cả năm mảng và công cụ lịch, tuổi", toi_da: 60 },
   ...Object.fromEntries(MANG.flatMap(([k, ten, mo]) => [
     [`mang.${k}_ten`, { nhom: M, nhan: `Thẻ ${ten} — tên`, mac_dinh: ten, toi_da: 30 }],
     [`mang.${k}_mo`, { nhom: M, nhan: `Thẻ ${ten} — mô tả`, mac_dinh: mo, toi_da: 80 }],

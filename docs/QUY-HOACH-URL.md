@@ -54,7 +54,7 @@
    `thap-than`, `nhat-chu`, `menh-theo-nam`, `y-nghia-so`…
 4. **Công cụ dân gian theo lịch giữ gốc** (từ khoá gõ trực tiếp, URL ngắn ăn điểm), trang con giữ quy luật năm/ngày.
 5. **Một URL – một nội dung:** canonical tự trỏ, URL cũ **308** về URL mới (giữ thứ hạng), không để hai bản.
-6. Hub giữ vai rõ: `/kham-pha` = mọi **công cụ**; `/kien-thuc` = **thư viện** (mục lục mọi cụm, trỏ về silo);
+6. Hub giữ vai rõ: `/huyen-hoc` (trước 2026-10-27 là `/kham-pha`, 308 — HH-1) = mọi **công cụ**; `/kien-thuc` = **thư viện** (mục lục mọi cụm, trỏ về silo);
    `/ban-than` = hồ sơ cá nhân (không index nội dung riêng).
 
 ## 4. Cây URL đề xuất
@@ -90,7 +90,7 @@
 ├─ /xem-ngay-tot[/{ngày}|/thang-{m}-{năm}] (giữ)
 ├─ /xem-tuoi-lam-nha[/{năm}/tuoi-{ns}]     (giữ)
 ├─ /tuoi-xong-dat[/{năm}/tuoi-{ns}]        (giữ)
-├─ /kham-pha                        Hub công cụ
+├─ /huyen-hoc                       Hub công cụ "Huyền học" (HH-1, 2026-10-27; /kham-pha → 308)
 ├─ /kien-thuc                       Hub thư viện: mục lục cụm của mọi mảng (link vào silo)
 │  └─ /kien-thuc/{chủ đề cũ}               → 308 về trang cụm mới (vd /kien-thuc/sao-cung → /tu-vi/sao-o-cung)
 ├─ /tu-dien[#{thuật ngữ}]           (giữ)

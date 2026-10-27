@@ -3,7 +3,7 @@
 // → MENU_DAU_TRANG trong code. Máy tính: thanh trên, mục có menu con mở bảng thả xuống (rê chuột, bấm mũi tên, hoặc
 // Tab + Enter; Esc / bấm ra ngoài để đóng). Điện thoại: tab dưới (mục chọn "Hiện ở tab dưới", tối đa 5) + nút "Menu"
 // ở góc phải mở toàn bộ menu (kể cả menu con và mục không có ở tab dưới, vd Blog).
-// Bốn trung tâm Bản thân · Hợp đôi · Khám phá · Tài khoản là "nhà" dễ nhận ra (docs/THIET-KE-UI.md §5) — mặc định giữ.
+// Bốn trung tâm Bản thân · Hợp đôi · Huyền học · Tài khoản là "nhà" dễ nhận ra (docs/THIET-KE-UI.md §5) — mặc định giữ.
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
