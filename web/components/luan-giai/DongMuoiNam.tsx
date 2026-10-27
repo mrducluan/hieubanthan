@@ -9,6 +9,7 @@ import { useId, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ngayDuong, ViSao } from "./HopNoiBat";
 import { NHAN_MUC, type NamVanHan, type ThangToi } from "./kieu";
+import { ChanQr } from "@/components/khung/ChanQr";
 
 /** Cờ nhỏ dưới chấm (chữ ngắn); tên đầy đủ nằm trong khung chi tiết. */
 const CO_NGAN: Record<string, string> = {
@@ -119,6 +120,7 @@ export function DongMuoiNam({ ds, thang }: { ds: NamVanHan[]; thang?: ThangToi[]
           </div>
         </div>
       )}
+      <ChanQr nhan="Quét để xem mười năm của bạn" />
     </figure>
   );
 }

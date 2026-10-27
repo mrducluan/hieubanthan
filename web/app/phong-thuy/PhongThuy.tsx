@@ -18,6 +18,7 @@ import { BaoLoi } from "@/components/khung/BaoLoi";
 import { hoiMang } from "@/lib/hoi-mang";
 import { ngaySinhIso, useHoSo } from "@/lib/hoso";
 import { nhaGui, useHoSoNha } from "@/lib/ho-so-nha";
+import { ChanQr } from "@/components/khung/ChanQr";
 
 interface MenhQuai {
   quai: string; nhom: string; nam_tinh: number; bang_huong: Record<string, string>; huong_cat: string[];
@@ -79,6 +80,7 @@ export function PhongThuy() {
             <div className="glass rounded-2xl p-5" data-testid="menh-quai">
               <p className="text-center text-sm text-fg-muted">Mệnh quái của bạn: <b className="text-gold">{mq.quai}</b> · {mq.nhom} · tính theo năm {mq.nam_tinh} ({TEN_MOC[mocNam]})</p>
               <LaBan quai={mq.quai} nhom={mq.nhom} bang={mq.bang_huong} huongCat={mq.huong_cat} />
+              <ChanQr nhan="Quét để tìm hướng hợp mệnh của bạn" />
               {mq.co_canh_bao.map((c) => <p key={c.loai} className="mt-3 text-xs text-moon">{c.chi_tiet}</p>)}
             </div>
           )}
