@@ -32,7 +32,7 @@ export const TEN_KIND_THE: Record<string, string> = {
   card: "Thẻ hồ sơ", invite: "Lời mời hợp đôi", the_ngay: "Thẻ ngày", hom_nay: "Link Hôm nay",
   hai_nguoi: "Điểm hai người", hai_nguoi_anh: "Điểm hai người (ảnh)", ban_do: "Bản đồ 5 mảng", ban_do_anh: "Bản đồ 5 mảng (ảnh)",
   nha: "Nhà của bạn", nha_anh: "Nhà của bạn (ảnh)", que: "Quẻ của tôi", que_anh: "Quẻ của tôi (ảnh)",
-  xong_dat: "Xông đất theo năm", tai_anh: "Ảnh lá số tải về",
+  xong_dat: "Xông đất theo năm", tai_anh: "Ảnh lá số tải về", ms: "Chụp màn hình (QR ở dải chân)",
   huy_hieu: "Huy hiệu", huy_hieu_anh: "Huy hiệu (ảnh)",
 };
 export const TEN_CO_MA: Record<CoMa, string> = { co: "có mã giới thiệu", khong: "không mã giới thiệu", khong_ro: "không rõ" };
@@ -46,6 +46,11 @@ export function chuanCoMa(v: string | null | undefined): CoMa {
 }
 
 const tiLe = (tu: number, mau: number) => (mau > 0 ? Math.min(1, tu / mau) : null);
+
+/** Mã cố định của QR chụp màn hình (lib/ma-man-hinh.ts) không có sự kiện share_created → gom theo tiền tố "ms.". */
+function nguonMa(goc: Map<string, { kind: string; co_ma: CoMa; dau: string }>, ma: string) {
+  return goc.get(ma) ?? (ma.startsWith("ms.") ? { kind: "ms", co_ma: "khong_ro" as CoMa, dau: "" } : undefined);
+}
 
 export function tinhPheuThe(s: SoPheuThe): KetQuaPheuThe {
   // Loại gốc của mỗi mã = dòng chia sẻ sớm nhất (vd "hai_nguoi" trước "hai_nguoi_anh" cùng một link).
@@ -69,11 +74,11 @@ export function tinhPheuThe(s: SoPheuThe): KetQuaPheuThe {
   }
   const ngoaiKhung = { mo: 0, dang_ky: 0 };
   for (const r of s.mo) {
-    const g = goc.get(r.ma);
+    const g = nguonMa(goc, r.ma);
     if (g) lay(g.kind, g.co_ma).mo += r.nguoi; else ngoaiKhung.mo += r.nguoi;
   }
   for (const r of s.dangKy) {
-    const g = goc.get(r.ma);
+    const g = nguonMa(goc, r.ma);
     if (!g) { ngoaiKhung.dang_ky += r.nguoi; continue; }
     const d = lay(g.kind, g.co_ma);
     d.dang_ky += r.nguoi;

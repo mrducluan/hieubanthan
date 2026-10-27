@@ -7,11 +7,12 @@ import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { duongQr, maHoaQr, type MaQr } from "@/lib/qr";
 import { GOC_QR, TEN_MIEN } from "@/lib/the-chia-se";
+import { linkQrManHinh } from "@/lib/ma-man-hinh";
 
 export function ChanLaSo({ giaoDien, tieuDe, duong }: { giaoDien: "dem" | "giay"; tieuDe: string; duong?: string }) {
   const hienTai = usePathname();
   const d = duong ?? hienTai ?? "/";
-  const qr = useMemo<MaQr | null>(() => { try { return maHoaQr(`${GOC_QR}${d}`); } catch { return null; } }, [d]);
+  const qr = useMemo<MaQr | null>(() => { try { return maHoaQr(linkQrManHinh(GOC_QR, d)); } catch { return null; } }, [d]);
   if (!qr) return null;
   const n = qr.kichThuoc + 8;
   return (
