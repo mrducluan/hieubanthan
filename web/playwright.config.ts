@@ -90,6 +90,8 @@ export default defineConfig({
       env: {
         ...KHOA_TAT, ENGINE_URL: `http://127.0.0.1:${ENGINE_PORT}`, NEXT_PUBLIC_SITE_URL: `http://localhost:${WEB_PORT}`,
         NEXT_PUBLIC_E2E: "1",
+        // DH-PC2: khoá giả — e2e chặn mọi request tới maps.googleapis.com và trả bản Google Maps giả (e2e/phong-thuy.spec.ts).
+        NEXT_PUBLIC_GOOGLE_MAPS_KEY: "e2e-gmaps",
         NOTFAIR_SEO_API_KEY: "e2e", NOTFAIR_SEO_API_URL: "http://127.0.0.1:4555/",
         // BLOG-3b: route /api/cms/notfair cho CMS đọc bài NotFair qua web — bí mật giả chỉ dùng cho test.
         CMS_WEBHOOK_SECRET: "e2e-cms-webhook",

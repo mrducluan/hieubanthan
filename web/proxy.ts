@@ -41,6 +41,8 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   const { pathname } = req.nextUrl;
   const quanTri = pathname === "/quan-tri" || pathname.startsWith("/quan-tri/") || pathname.startsWith("/api/quan-tri/");
   const cookieMoi = quanTri ? await lamMoiPhien(req) : [];
+  // DH-PC2: khung bản đồ vệ tinh tự gắn CSP riêng (Google Maps cần 'unsafe-eval') — không chồng CSP chung lên (hai CSP = giao nhau).
+  if (pathname === "/khung/ve-tinh") return NextResponse.next();
   const nonce = taoNonce();
   const csp = taoCsp(nonce);
   const dau = new Headers(req.headers);   // chép SAU khi làm mới phiên → cookie mới đi kèm request

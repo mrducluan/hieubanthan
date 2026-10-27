@@ -151,6 +151,7 @@ export default async function ChinhSachRiengTu() {
             ["Dịch vụ diễn đạt tự động (AI)", "Diễn đạt câu trả lời hỏi đáp cho dễ đọc (khi bật)", "Câu hỏi bạn gõ + kết quả đã tính; không có họ tên, ngày giờ sinh", "Hoa Kỳ"],
             ["Dịch vụ nhận diện hình ảnh (AI)", "Gợi ý dấu hiệu phong thuỷ nhìn thấy trong ảnh nhà (khi bật, chỉ khi bạn tự tích đồng ý gửi)", "Ảnh góc nhà đã thu nhỏ trên máy bạn + góc chụp, loại nhà bạn chọn; không họ tên, ngày sinh, địa chỉ, toạ độ; không lưu, không dùng huấn luyện", "Hoa Kỳ"],
             ["Đo lường ẩn danh", "Đếm các bước sử dụng (khi bật)", "Sự kiện sử dụng, mã ẩn danh", "Hoa Kỳ hoặc EU"],
+            ["Google Maps (bản đồ vệ tinh)", "Hiện ảnh vệ tinh để bạn chấm tâm nhà và điểm trước mặt nhà khi đo hướng (chỉ khi bạn bấm mở bản đồ)", "Vùng bản đồ bạn xem, địa chỉ bạn gõ vào ô tìm, vị trí gần đúng của máy nếu bạn cho phép; chúng tôi không lưu toạ độ, chỉ dùng để tính góc hướng nhà", "Hoa Kỳ"],
             ["Google (Tag Manager, Analytics)", "Đo lượt truy cập — bật mặc định, tắt được ở \"Tuỳ chọn cookie\"", "Trang đã xem, loại thiết bị, mã cookie _ga; không họ tên, ngày giờ sinh", "Hoa Kỳ"],
             ["Dịch vụ thông báo của trình duyệt (Google, Apple, Mozilla, Microsoft)", "Chuyển thông báo nhắc tới thiết bị (chỉ khi bạn bật nhắc)", "Thông báo đã mã hoá đầu-cuối — chỉ thiết bị của bạn đọc được", "Hoa Kỳ hoặc nơi nhà cung cấp đặt máy chủ"],
             ["Theo dõi lỗi kỹ thuật", "Báo lỗi (khi bật)", "Thông tin lỗi kỹ thuật", "Hoa Kỳ hoặc EU"],
