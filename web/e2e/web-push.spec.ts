@@ -74,23 +74,27 @@ test("chỉ gửi tới máy chủ push của trình duyệt", () => {
     "https://fcm.googleapis.com.evil.com/x", "https://localhost/x"]) expect(MAY_CHU_PUSH.test(u), u).toBe(false);
 });
 
-test("gói thông báo: một mốc mở đúng trang, nhiều mốc mở Hôm nay, đường dẫn lạ bị thay", () => {
+test("gói thông báo: một mốc mở đúng trang, nhiều mốc mở khối Mốc trên Hôm nay, đường dẫn lạ bị thay", () => {
   expect(goiThongBao([{ nhan: "Tháng hợp sửa nhà", duong: "/phong-thuy" }], "2026-11-02"))
     .toMatchObject({ title: "Tháng hợp sửa nhà", url: "/phong-thuy", tag: "nhac-2026-11-02" });
-  expect(goiThongBao([{ nhan: "B", duong: "/a" }, { nhan: "A", duong: "/b" }], "2026-11-02")).toMatchObject({ title: "A · +1 mốc", url: "/hom-nay" });
-  expect(goiThongBao([{ nhan: "X", duong: "//evil.com" }], "2026-11-02").url).toBe("/hom-nay");
+  expect(goiThongBao([{ nhan: "B", duong: "/a" }, { nhan: "A", duong: "/b" }], "2026-11-02")).toMatchObject({ title: "A · +1 mốc", url: "/hom-nay#nhac-hom-nay" });
+  expect(goiThongBao([{ nhan: "X", duong: "//evil.com" }], "2026-11-02").url).toBe("/hom-nay#nhac-hom-nay");
   expect(goiThongBao([{ nhan: "X", duong: null }], "2026-11-02").body).toContain("không phải dự báo");
   expect(homNayVn(Date.parse("2026-10-20T17:30:00Z"))).toBe("2026-10-21");   // 0:30 sáng giờ VN
 });
 
-test("service worker: phục vụ ở gốc, không chặn fetch, mở đường dẫn trong site", async ({ request }) => {
+test("service worker: phục vụ ở gốc, chỉ đón lượt mở trang (không cache), mở đường dẫn trong site", async ({ request }) => {
   const r = await request.get("/sw.js");
   expect(r.status()).toBe(200);
   expect(r.headers()["content-type"]).toContain("javascript");
   const js = await r.text();
   expect(js).toContain('addEventListener("push"');
   expect(js).toContain('addEventListener("notificationclick"');
-  expect(js).not.toContain('addEventListener("fetch"');
+  // Fetch chỉ cho lượt mở trang (trang ngoại tuyến khi mất mạng); không cache gì, tài nguyên khác đi thẳng mạng.
+  expect(js).toContain('if (e.request.mode !== "navigate" || e.request.method !== "GET") return;');
+  expect(js).not.toMatch(/caches\.|cache\.put|cache\.add/);
+  // Thông báo hỏi lại hôm qua → mở thẳng khối "Hôm qua của bạn".
+  expect(js).toContain('"/hom-nay#hom-qua"');
   expect((await request.get("/apple-icon")).headers()["content-type"]).toContain("image/png");   // biểu tượng thông báo
 });
 
@@ -142,7 +146,7 @@ test("GĐ2: một thông báo/ngày — mốc tự đánh dấu > mốc lịch �
   expect(ghepThongBao(N, SN, "2026-03-05")).toBeNull();
   // chỉ sáng nay
   expect(ghepThongBao({ ...N, sang_nay: true, ngay_sinh: "12-05" }, SN, "2026-03-05"))
-    .toMatchObject({ title: "Sáng nay của bạn · Ngày cá nhân 6", body: "Câu tự soi 6?", url: "/hom-nay", hoi: SN.hoi_hom_qua });
+    .toMatchObject({ title: "Sáng nay của bạn · Ngày cá nhân 6", body: "Câu tự soi 6?", url: "/hom-nay#the-hom-nay", hoi: SN.hoi_hom_qua });
   // sáng nay nhưng chưa có hồ sơ (ngày sinh null) → không gửi
   expect(ghepThongBao({ ...N, sang_nay: true }, SN, "2026-03-05")).toBeNull();
   // mốc lịch người đó không chọn → không gửi; chọn → mốc lịch, kèm sáng nay nếu bật
@@ -202,7 +206,11 @@ test("GĐ2: sw.js hỏi lại hôm qua bằng hai nút, trả lời không mở 
   expect(js).toContain('action: "chua_dung"');
   expect(js).toContain('indexedDB.open("hbt", 1)');
   expect(js).toContain("/api/kiem-chung");
-  expect(js).not.toContain('addEventListener("fetch"');
+  // Fetch chỉ cho lượt mở trang (trang ngoại tuyến khi mất mạng); không cache gì, tài nguyên khác đi thẳng mạng.
+  expect(js).toContain('if (e.request.mode !== "navigate" || e.request.method !== "GET") return;');
+  expect(js).not.toMatch(/caches\.|cache\.put|cache\.add/);
+  // Thông báo hỏi lại hôm qua → mở thẳng khối "Hôm qua của bạn".
+  expect(js).toContain('"/hom-nay#hom-qua"');
 });
 
 test("GĐ2: Hôm nay — ý định hôm qua (trên máy) được hỏi lại một chạm, gửi đúng mã phiếu ẩn danh", async ({ page }) => {

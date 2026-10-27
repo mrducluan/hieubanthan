@@ -89,3 +89,32 @@ def test_nhung_dung_chung_bo_loc():
     from app import nhung  # noqa: PLC0415
     s = "Tôi tên Lan, xem fb.com/abc"
     assert nhung.loc_them(s) == nhat_ky.loc_ten_lien_ket(s) == "Tôi tên [tên], xem [liên kết]"
+
+
+# 0031: nhật ký chỉ ghi qua hàm ghi_nhat_ky_hoi bằng khoá riêng NHAT_KY_KHOA — thiếu khoá thì tắt hẳn, không ghi thẳng bảng.
+def test_can_khoa_rieng_moi_bat(monkeypatch):
+    monkeypatch.setenv("NHAT_KY_HOI", "1")
+    monkeypatch.setenv("SUPABASE_URL", "https://x.supabase.co")
+    monkeypatch.setenv("SUPABASE_ANON_KEY", "anon")
+    monkeypatch.delenv("NHAT_KY_KHOA", raising=False)
+    assert nhat_ky.bat() is False
+    monkeypatch.setenv("NHAT_KY_KHOA", "ngan")
+    assert nhat_ky.bat() is False                      # khoá < 32 ký tự: DB cũng từ chối → khỏi gọi
+    monkeypatch.setenv("NHAT_KY_KHOA", "k" * 40)
+    assert nhat_ky.bat() is True
+
+
+def test_gui_qua_ham_rpc_kem_khoa(monkeypatch):
+    goi = {}
+
+    def gia_post(url, **kw):
+        goi["url"], goi["json"], goi["headers"] = url, kw["json"], kw["headers"]
+
+    monkeypatch.setenv("SUPABASE_URL", "https://x.supabase.co/")
+    monkeypatch.setenv("SUPABASE_ANON_KEY", "anon")
+    monkeypatch.setenv("NHAT_KY_KHOA", "k" * 40)
+    monkeypatch.setattr(nhat_ky.httpx, "post", gia_post)
+    nhat_ky._gui("thanso_hoi_nhat_ky", {"cau_hoi_da_loc": "x"})
+    assert goi["url"] == "https://x.supabase.co/rest/v1/rpc/ghi_nhat_ky_hoi"
+    assert goi["json"] == {"p_bang": "thanso_hoi_nhat_ky", "p_du_lieu": {"cau_hoi_da_loc": "x"}, "p_khoa": "k" * 40}
+    assert goi["headers"]["apikey"] == "anon"

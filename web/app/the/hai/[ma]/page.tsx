@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, Lock } from "lucide-react";
 import { docMaHai, tuTuMa } from "@/lib/ma-moi";
 import { MAU_MUC_HAI, NHAN_MUC_HAI, TEN_QUAN_HE_HAI, TEN_TIEU_CHI_HAI, tenHai } from "@/lib/the-chia-se";
+import { QuaNguoiNhan } from "@/components/sao/QuaNguoiNhan";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/khung/Logo";
 import { GhiTu } from "@/components/khung/GhiMoThe";
@@ -82,6 +83,7 @@ export default async function Page({ params }: Props) {
       <Button asChild size="lg" className="mt-4">
         <Link href={`/tu-vi?tu=${tu}#hop-tham`} data-testid="the-hai-moi">Xem điểm của bạn với người ấy <ArrowRight aria-hidden /></Link>
       </Button>
+      <QuaNguoiNhan className="mt-3" />
       <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-fg-faint">
         <Lock className="size-3.5" aria-hidden /> Ngày sinh người ấy chỉ dùng để tính, không lưu lại.
       </p>

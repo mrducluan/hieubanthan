@@ -9,6 +9,7 @@
 import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
 import { ViecTuanNha } from "@/components/huyen-hoc/ViecTuanNha";
 import { NhacHomNay } from "@/components/khung/NhacHomNay";
+import { CuonToiNeo } from "@/components/khung/CuonToiNeo";
 import { HoiHomQua } from "@/components/khung/HoiHomQua";
 import { HoiSau30Ngay } from "@/components/khung/HoiSau30Ngay";
 import { QueRieng } from "@/components/kinh-dich/QueRieng";
@@ -192,6 +193,8 @@ export function HomNay() {
     taiThe(daNho, "").then((t) => {
       if (huy) return;
       setThe(t); setLoi(null);
+      // App đã cài mở khi mất mạng: trang ngoại tuyến (sw.js) đọc lại thẻ hôm nay từ máy này — chỉ số + hai câu đã hiện.
+      try { localStorage.setItem("hbt.ngoai_tuyen.v1", JSON.stringify({ ngay: t.ngay_xem, so: t.ngay_ca_nhan.so, nghia: boTienTo(t.ngay_ca_nhan.nghia), tu_soi: t.ngay_ca_nhan.tu_soi })); } catch { /* riêng tư */ }
       const cu = docChuoi();
       const moi = capNhatChuoi(cu, t.ngay_xem);
       try { localStorage.setItem(KHOA_CHUOI, JSON.stringify(moi)); } catch { /* chế độ riêng tư: bỏ qua chuỗi */ }
@@ -232,6 +235,7 @@ export function HomNay() {
   return (
     <div className="mx-auto max-w-xl" data-testid="hom-nay">
       {tieuDe}
+      <CuonToiNeo />
       {loi && <Card><p role="alert" className="text-sm text-cinnabar">{loi}</p></Card>}
       {!the && !loi && <KhungTai />}
       {the && (
@@ -273,7 +277,7 @@ export function HomNay() {
             </div>
           )}
 
-          <Card className="space-y-4" data-testid="the-hom-nay">
+          <Card id="the-hom-nay" data-neo className="scroll-mt-24 space-y-4" data-testid="the-hom-nay">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-sm text-fg-muted">{tenGoi(hoSo)}, hôm nay là</p>

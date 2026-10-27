@@ -84,3 +84,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: bash supabase/kiem_thu/chay.sh
+      # Sao lưu DB (workflow sao-luu-db): trọn vòng sao lưu mã hoá → khôi phục vào DB trống → số dòng từng bảng phải khớp.
+      - run: bash supabase/sao-luu/thu-vong.sh

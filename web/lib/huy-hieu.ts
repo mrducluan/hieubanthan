@@ -159,3 +159,29 @@ export function dangDiGanNhat(ds: HuyHieu[], nl: NguyenLieuTienDo): { ma: MaHuyH
   }
   return tot;
 }
+
+// ---------------------------------------------------------------- thẻ chia sẻ huy hiệu (khâu MỜI)
+// Thẻ CHỈ mang mã huy hiệu (công khai, cùng một danh mục cho mọi người) — không tên, không ngày đạt, không số liệu riêng
+// → không cần ký mã (docs/THE-CHIA-SE.md: chỉ dữ liệu riêng mới phải ký). Người nhận thấy dấu mốc + một lối thử ngay.
+export const laMaHuyHieu = (s: string): s is MaHuyHieu => Object.prototype.hasOwnProperty.call(DANH_MUC, s);
+
+/** Câu trên thẻ + lối người nhận thử ngay (đường dẫn trong site). Giọng kể, không khoe hơn ai, không thúc. */
+export const THE_HUY_HIEU: Record<MaHuyHieu, { cau: string; moi: string; nut: string; den: string }> = {
+  chuoi_7:      { cau: "Bảy buổi sáng liền ghé xem hôm nay của mình.", moi: "Mỗi ngày một câu tự soi, một con số của riêng bạn.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
+  chuoi_30:     { cau: "Ba mươi ngày liền giữ một thói quen nhỏ cho mình.", moi: "Mỗi ngày một câu tự soi, một con số của riêng bạn.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
+  chuoi_may_7:  { cau: "Bảy buổi sáng liền ghé xem hôm nay của mình.", moi: "Mỗi ngày một câu tự soi, một con số của riêng bạn.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
+  da_luu_ho_so: { cau: "Đã có bản đồ con số của riêng mình.", moi: "Bốn con số từ tên và ngày sinh — 30 giây là có.", nut: "Xem con số của bạn", den: "/than-so" },
+  hoi_3:        { cau: "Đã hỏi ba câu về chính mình.", moi: "Hỏi điều bạn đang băn khoăn — trả lời theo đúng con số của bạn.", nut: "Đặt câu hỏi đầu tiên", den: "/than-so" },
+  moi_1:        { cau: "Đã rủ được một người bạn cùng tìm hiểu bản thân.", moi: "Xem hai người hợp nhau ở đâu, cần dung hoà chỗ nào.", nut: "Xem hợp với ai", den: "/hop-doi" },
+  moi_5:        { cau: "Đã rủ được năm người bạn cùng tìm hiểu bản thân.", moi: "Xem hai người hợp nhau ở đâu, cần dung hoà chỗ nào.", nut: "Xem hợp với ai", den: "/hop-doi" },
+  hoi_vien:     { cau: "Dành một năm để hiểu mình kỹ hơn.", moi: "Bắt đầu từ bốn con số của bạn — miễn phí.", nut: "Xem con số của bạn", den: "/than-so" },
+  doc_5_mang:   { cau: "Đã xem mình qua cả năm góc: Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ.", moi: "Mỗi mảng một góc nhìn — bắt đầu từ mảng bạn tò mò nhất.", nut: "Khám phá năm mảng", den: "/kham-pha" },
+  hen_7:        { cau: "Hẹn với chính mình bảy ngày — và đã giữ lời.", moi: "Đặt một lời hẹn nhỏ với chính bạn, không ai chấm điểm.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
+  hen_30:       { cau: "Hẹn với chính mình ba mươi ngày — và đã giữ lời.", moi: "Đặt một lời hẹn nhỏ với chính bạn, không ai chấm điểm.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
+};
+export const duongTheHuyHieu = (ma: MaHuyHieu) => `/the/huy-hieu/${ma.replace(/_/g, "-")}`;
+/** Đoạn URL (gạch ngang) → mã huy hiệu; null khi không có trong danh mục. */
+export function maTuDuongHuyHieu(s: string): MaHuyHieu | null {
+  const ma = s.replace(/-/g, "_");
+  return laMaHuyHieu(ma) ? ma : null;
+}

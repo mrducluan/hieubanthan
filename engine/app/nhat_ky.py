@@ -5,9 +5,9 @@ Quyết định chủ dự án 2026-09-30: lưu câu hỏi ĐÃ LỌC + phân lo
 trả lời. KHÔNG lưu user_id, họ tên, ngày sinh của ai. Câu hỏi được lọc ngày
 tháng, số điện thoại, email, cụm giống họ tên riêng trước khi ghi.
 
-Bật bằng env NHAT_KY_HOI=1 + SUPABASE_URL + SUPABASE_ANON_KEY (bảng
-thanso_hoi_nhat_ky, migration 0004, RLS chỉ cho INSERT). Lỗi ghi không bao giờ
-làm hỏng câu trả lời.
+Bật bằng env NHAT_KY_HOI=1 + SUPABASE_URL + SUPABASE_ANON_KEY + NHAT_KY_KHOA (≥ 32 ký tự). Ghi qua hàm
+ghi_nhat_ky_hoi (migration 0031) — DB chỉ nhận khi khoá khớp mã băm chủ dự án đặt bằng dat_khoa_nhat_ky(); khoá
+anon công khai không còn ghi thẳng được bảng 0004/0005. Lỗi ghi không bao giờ làm hỏng câu trả lời.
 """
 from __future__ import annotations
 
@@ -86,7 +86,8 @@ def loc_cau_hoi(s: str) -> str:
 
 def bat() -> bool:
     return (os.environ.get("NHAT_KY_HOI", "").lower() in ("1", "true")
-            and bool(os.environ.get("SUPABASE_URL")) and bool(os.environ.get("SUPABASE_ANON_KEY")))
+            and bool(os.environ.get("SUPABASE_URL")) and bool(os.environ.get("SUPABASE_ANON_KEY"))
+            and len(os.environ.get("NHAT_KY_KHOA", "").strip()) >= 32)
 
 
 def ban_ghi(cau_hoi: str, kq: dict) -> dict:
@@ -110,10 +111,9 @@ def ban_ghi(cau_hoi: str, kq: dict) -> dict:
 def _gui(bang: str, du_lieu: dict) -> None:
     url, key = os.environ["SUPABASE_URL"].rstrip("/"), os.environ["SUPABASE_ANON_KEY"]
     try:
-        httpx.post(f"{url}/rest/v1/{bang}", timeout=5,
-                   headers={"apikey": key, "Authorization": f"Bearer {key}",
-                            "Content-Type": "application/json", "Prefer": "return=minimal"},
-                   json=du_lieu)
+        httpx.post(f"{url}/rest/v1/rpc/ghi_nhat_ky_hoi", timeout=5,
+                   headers={"apikey": key, "Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+                   json={"p_bang": bang, "p_du_lieu": du_lieu, "p_khoa": os.environ.get("NHAT_KY_KHOA", "").strip()})
     except Exception:  # noqa: BLE001 — nhật ký không được làm hỏng Q&A
         pass
 

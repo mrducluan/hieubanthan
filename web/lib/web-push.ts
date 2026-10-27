@@ -79,6 +79,10 @@ export async function guiPush(dk: DangKyPush, goi: object, k: KhoaVapid): Promis
 /** Ngày hôm nay theo giờ Việt Nam (UTC+7), yyyy-mm-dd. */
 export const homNayVn = (ms = Date.now()) => new Date(ms + 7 * 3_600_000).toISOString().slice(0, 10);
 
+/** Neo khối trên Hôm nay (CuonToiNeo cuộn tới khi khối đã vẽ): nhiều mốc → khối "Mốc bạn đã đánh dấu"; sáng nay / tháng
+ *  cá nhân mới → thẻ hôm nay. "Hôm qua của bạn" do sw.js tự gắn #hom-qua khi thông báo có câu hỏi lại. */
+export const NEO_NHAC = "/hom-nay#nhac-hom-nay", NEO_THE = "/hom-nay#the-hom-nay";
+
 const duongTrongSite = (d: string | null | undefined) =>
   (d && /^\/[a-z0-9/_?=&.#-]{0,120}$/.test(d) && !d.startsWith("//") ? d : null);
 
@@ -89,7 +93,7 @@ export function goiThongBao(nhac: { nhan: string; duong: string | null }[], ngay
   return {
     title: ds.length > 1 ? `${dau.nhan} · +${ds.length - 1} mốc` : dau.nhan,
     body: "Mốc bạn đã đánh dấu cho hôm nay — nhịp gợi ý, không phải dự báo.",
-    url: (ds.length === 1 && duongTrongSite(dau.duong)) || "/hom-nay",
+    url: (ds.length === 1 && duongTrongSite(dau.duong)) || NEO_NHAC,
     tag: `nhac-${ngay}`,
   };
 }
@@ -127,7 +131,7 @@ export function ghepThongBao(n: NguoiNhan, sn: GoiSangNay | null, ngay: string) 
   const moc: { tieu_de: string; noi_dung: string; duong: string; nhom?: string[] }[] = (sn?.moc_lich ?? [])
     .filter((m) => m.nhom.some((x) => chon.has(x)));
   if (chon.has("thang_ca_nhan") && rieng?.thang_moi) {
-    moc.push({ tieu_de: rieng.thang_moi.tieu_de, noi_dung: rieng.thang_moi.noi_dung, duong: "/hom-nay" });
+    moc.push({ tieu_de: rieng.thang_moi.tieu_de, noi_dung: rieng.thang_moi.noi_dung, duong: NEO_THE });
   }
   if (moc.length) {
     const m = moc[0]!;
@@ -137,8 +141,8 @@ export function ghepThongBao(n: NguoiNhan, sn: GoiSangNay | null, ngay: string) 
     const lapXuan = Boolean(m.nhom?.includes("lap_xuan_tet"));
     const than = nha ? (lapXuan ? `${m.noi_dung} ${nha.noi_dung}` : nha.noi_dung) : m.noi_dung;
     return { title: moc.length > 1 ? `${m.tieu_de} · +${moc.length - 1} mốc` : m.tieu_de, body: kem(than),
-      url: duongTrongSite(nha && !lapXuan ? nha.duong : m.duong) ?? "/hom-nay", tag: `nhac-${ngay}`, ...hoi };
+      url: duongTrongSite(nha && !lapXuan ? nha.duong : m.duong) ?? NEO_THE, tag: `nhac-${ngay}`, ...hoi };
   }
-  if (sang) return { title: sang.tieu_de, body: sang.noi_dung, url: "/hom-nay", tag: `nhac-${ngay}`, ...hoi };
+  if (sang) return { title: sang.tieu_de, body: sang.noi_dung, url: NEO_THE, tag: `nhac-${ngay}`, ...hoi };
   return null;
 }

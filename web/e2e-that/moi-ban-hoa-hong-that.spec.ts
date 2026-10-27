@@ -80,8 +80,14 @@ test("A mời B → B lưu hồ sơ → thưởng hai phía ngay · bật hoa h�
   await expect(a.getByTestId("dieu-kien-moi")).not.toContainText("7 ngày");
 
   // 2. B: mở link mời (mã nhớ trên máy) → đăng nhập → lưu hồ sơ → nhận chào mừng + thưởng lời mời trong cùng lượt.
+  // B vào từ THẺ HUY HIỆU A chia sẻ (link mang ?gt=): trang nhận nói rõ B nhận gì nếu lưu hồ sơ (chào mừng + lời mời).
   const b = await trangMoi(browser);
-  await b.goto(`/?gt=${ma}`);
+  await b.goto(`/the/huy-hieu/moi-1?tu=hh.0123456789&gt=${ma}`);
+  await expect(b.getByRole("heading", { level: 1 })).toHaveText("Rủ được 1 người bạn");
+  const qua = b.getByTestId("qua-nguoi-nhan");
+  await expect(qua).toHaveAttribute("data-co-ma", "1", { timeout: 30_000 });
+  await expect(qua).toContainText("Bạn được mời: lưu hồ sơ vào tài khoản là nhận 30 Sao (10 chào mừng + 20 lời mời)");
+  await expect(b.getByTestId("the-huy-hieu-moi")).toHaveAttribute("href", "/hop-doi?tu=hh.0123456789");
   await expect.poll(() => b.evaluate(() => JSON.parse(localStorage.getItem("hbt.gt") ?? "null")?.ma)).toBe(ma);
   await b.goto("/dang-nhap?tiep=/tai-khoan");
   await dangNhap(b, EMAIL_B);
@@ -93,6 +99,22 @@ test("A mời B → B lưu hồ sơ → thưởng hai phía ngay · bật hoa h�
   const loaiB = (await soCai(EMAIL_B)).map((x) => x.loai).sort();
   expect(loaiB).toEqual(["chao_mung", "duoc_moi"]);
   expect((await soCai(EMAIL_A)).filter((x) => x.loai === "moi_ban")).toHaveLength(1);
+  // A quay lại (phiên mới): "Sao vừa về" báo +20 Sao, ghi credit_earned{moi_ban} cho phễu thẻ; lần sau không báo lại.
+  await a.evaluate(() => sessionStorage.clear());
+  await a.goto("/ban-than");
+  const ve = a.getByTestId("thuong-ve");
+  await expect(ve).toContainText("+20 Sao — một người bạn vừa nhận lời mời của bạn.", { timeout: 30_000 });
+  await expect(ve).not.toContainText(EMAIL_B);
+  expect(await a.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []))
+    .toContainEqual(expect.objectContaining({ su_kien: "credit_earned", kind: "moi_ban", so_sao: 20 }));
+  await expect(ve.getByTestId("thuong-ve-moi")).toHaveAttribute("href", "/hop-doi");
+  await ve.getByRole("button", { name: "Đóng" }).click();
+  await expect(ve).toHaveCount(0);
+  await a.evaluate(() => sessionStorage.clear());
+  await a.reload();
+  await expect(a.getByTestId("huy-hieu")).toBeVisible({ timeout: 30_000 });
+  await a.waitForTimeout(2_000);
+  await expect(a.getByTestId("thuong-ve")).toHaveCount(0);
   // Vào lại ví không nhận lần hai.
   await b.reload();
   await expect(b.getByTestId("vi-sao")).toBeVisible({ timeout: 30_000 });

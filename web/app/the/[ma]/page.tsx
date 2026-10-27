@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { docMa } from "@/lib/ma-moi";
+import { QuaNguoiNhan } from "@/components/sao/QuaNguoiNhan";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/khung/Logo";
 import { GhiMoThe } from "@/components/khung/GhiMoThe";
@@ -56,6 +57,7 @@ export default async function Page({ params: thamSo }: Props) {
       </div>
       <p className="mt-8 font-serif text-2xl">Còn bạn — con số nào?</p>
       <Button asChild size="lg" className="mt-4"><Link href="/">Xem con số của tôi <ArrowRight aria-hidden /></Link></Button>
+      <QuaNguoiNhan className="mt-3" />
       <p className="mt-3 text-xs text-fg-faint">Chưa đầy 30 giây · không cần tài khoản</p>
     </div>
   );

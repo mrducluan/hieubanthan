@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Lock } from "lucide-react";
+import { QuaNguoiNhan } from "@/components/sao/QuaNguoiNhan";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
@@ -46,6 +47,7 @@ export function NhanLoiMoi({ ma, tenMoi, soMoi, tuKhoa }: Props) {
           <span className="text-gradient-gold font-serif text-6xl" data-testid="so-nguoi-moi">{soMoi}</span>
         </div>
         <p className="mt-3 text-sm text-fg-muted">Số đường đời của {tenMoi}{tuKhoa ? ` — ${tuKhoa}` : ""}</p>
+        <QuaNguoiNhan className="mt-4" />
       </header>
 
       {hoSo === undefined && <KhungTai />}

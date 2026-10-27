@@ -12,7 +12,7 @@ từng việc ở mục ghi trong ngoặc.
 
 **P0 — làm ngay (đang thu tiền thật):**
 1. **Vercel Pro** cho dự án web — gói Hobby cấm dùng thương mại (WP12, mục WP-GĐ2).
-2. **Sao lưu Supabase**: lên Supabase Pro (sao lưu tự động hằng ngày) — ví Sao / đơn nạp / hội viên không có bản nào khác (mục D2).
+2. **Sao lưu Supabase**: lên Supabase Pro (sao lưu tự động hằng ngày) — ví Sao / đơn nạp / hội viên không có bản nào khác (mục D2). Trong lúc chờ: đặt 2 secret cho workflow sao lưu mã hoá hằng tuần (mục 4q, 5 phút).
 3. **Danh nghĩa vận hành + MST + địa chỉ** (hộ kinh doanh / công ty) → đặt `THONG_TIN_MA_SO`, `THONG_TIN_DIA_CHI` (mục E, TT-a).
 4. **Hộp thư `contact@hieuban.com`** — đang in trên chân trang và trang pháp lý (mục E).
 5. **Luật sư rà**: 3 trang pháp lý, điều khoản Sao + hoàn tiền + hội viên, chuyển dữ liệu ra nước ngoài, `docs/ho-so-dlcn/`
@@ -735,8 +735,29 @@ Ví Sao, link mời có thưởng chỉ chạy khi đã bật tài khoản.
 |---|---|---|
 | `OPENROUTER_API_KEY` | Khoá openrouter.ai | **Sau** khi chạy bộ 55 câu (mục D). Giới hạn lượt đã có (RL-1) |
 | `LLM_LUOT_NGUOI_GIO`, `LLM_LUOT_TONG_GIO`, `LLM_LUOT_TONG_NGAY` | Mặc định 40 / 400 / 3000 | Hạn mức lượt AI: mỗi người mỗi giờ / tổng mỗi giờ / tổng mỗi ngày. Hết lượt thì người dùng vẫn nhận câu trả lời bản mẫu. Chỉ đặt khi muốn đổi |
-| `NHAT_KY_HOI` + `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `1` + khoá Supabase | Muốn ghi câu hỏi đã lọc (không user_id/tên/ngày sinh) cho vòng tự cải thiện |
+| `NHAT_KY_HOI` + `SUPABASE_URL`, `SUPABASE_ANON_KEY` + **`NHAT_KY_KHOA`** | `1` + khoá Supabase + chuỗi ≥ 32 ký tự (mục 4q) | Muốn ghi câu hỏi đã lọc (không user_id/tên/ngày sinh) cho vòng tự cải thiện. Từ 0031 thiếu `NHAT_KY_KHOA` thì engine không ghi |
 | `SENTRY_DSN` | Tuỳ chọn | Báo lỗi engine |
+
+### 4q. Nhật ký hỏi đáp bằng khoá riêng (migration 0031) + sao lưu DB hằng tuần (2026-10-27)
+
+- [ ] **Chạy migration 0031** (`supabase/migrations/0031_nhat_ky_khoa_rieng.sql`) trong SQL Editor — bỏ quyền ghi nhật ký
+  của khoá anon công khai (người ngoài không ghi rác được nữa). Rollback: tệp `.down.sql` cùng tên.
+- [ ] Tạo một chuỗi ngẫu nhiên: `openssl rand -hex 32` (hoặc trình tạo mật khẩu, ≥ 32 ký tự). Trong SQL Editor chạy
+  `select dat_khoa_nhat_ky('<chuỗi đó>');` → trả `da_dat` (DB chỉ giữ mã băm).
+- [ ] Render (engine) → Environment: thêm **`NHAT_KY_KHOA`** = đúng chuỗi đó → Save (engine tự khởi động lại). Chỉ cần
+  khi bật `NHAT_KY_HOI=1`. Kiểm: hỏi một câu trên site → Table Editor `thanso_hoi_nhat_ky` có dòng mới.
+- [ ] **Sao lưu DB hằng tuần** (workflow `sao-luu-db`, Chủ nhật 03:17): GitHub → repo → Settings → Secrets and variables →
+  Actions → New repository secret:
+  - `SUPABASE_DB_URL` = Supabase → Connect → **Session pooler** (cổng 5432, dạng
+    `postgresql://postgres.<ref>:<mật khẩu DB>@aws-0-<vùng>.pooler.supabase.com:5432/postgres`) — không dùng "Direct
+    connection" (máy GitHub không có IPv6).
+  - `BACKUP_PASSPHRASE` = mật khẩu ≥ 20 ký tự, **cất thêm ở nơi khác** (trình quản lý mật khẩu) — mất là không mở được
+    bản sao lưu.
+  - Actions → `sao-luu-db` → **Run workflow** để thử ngay → bản `hbt-db-<ngày>.tar.gpg` ở mục Artifacts (giữ 35 ngày).
+    Repo công khai nên tệp luôn được mã hoá AES-256 trước khi rời máy chạy.
+- Khôi phục (khi cần, vào dự án Supabase MỚI hoặc DB thử, không bao giờ vào DB đang chạy): tải tệp → máy có `psql` +
+  `gpg` → `BACKUP_PASSPHRASE='…' DICH_DB_URL='postgresql://…' supabase/sao-luu/khoi-phuc.sh hbt-db-<ngày>.tar.gpg` →
+  script tự đếm dòng từng bảng so với lúc sao lưu. Đây là bản THỨ HAI, không thay mục bật sao lưu / PITR của Supabase.
 
 ## D. Các việc còn lại — em làm gì, anh cần làm gì
 
