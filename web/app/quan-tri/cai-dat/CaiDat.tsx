@@ -8,7 +8,8 @@ import { Input } from "@/components/ui/input";
 import type { CaiDat as KieuCaiDat } from "@/lib/cau-hinh";
 import { goiQT } from "@/lib/goi-quan-tri";
 
-export interface DongCaiDat { c: KieuCaiDat; daLuu: boolean; hieuLuc: unknown; luc: string | null }
+/** thieu = migration chưa chạy mà khoá này cần (lib/migration-qt) — còn thiếu thì không cho bật. */
+export interface DongCaiDat { c: KieuCaiDat; daLuu: boolean; hieuLuc: unknown; luc: string | null; thieu: string[] }
 
 const ngayGio = (s: string) =>
   new Intl.DateTimeFormat("vi-VN", { dateStyle: "short", timeStyle: "short", timeZone: "Asia/Ho_Chi_Minh" }).format(new Date(s));
@@ -37,12 +38,14 @@ function Muc({ d, duocSua }: { d: DongCaiDat; duocSua: boolean }) {
         <label htmlFor={id} className="font-medium text-fg">{c.ten}</label>
         <span className="font-mono text-xs text-fg-faint">{c.khoa}</span>
         {d.daLuu ? <Badge tone="gold">Đã chỉnh</Badge> : <Badge>Mặc định</Badge>}
+        {d.thieu.length > 0 && <Badge tone="cinnabar" data-testid="can-migration">Cần migration {d.thieu.join(", ")}</Badge>}
       </div>
       <p className="text-xs text-fg-muted">{c.moTa}</p>
       <div className="flex flex-wrap items-center gap-2">
         {c.loai === "bat_tat" ? (
           <label className="inline-flex items-center gap-2 text-sm">
-            <input id={id} type="checkbox" checked={v === true} disabled={!duocSua} onChange={(e) => setV(e.target.checked)}
+            <input id={id} type="checkbox" checked={v === true} disabled={!duocSua || (d.thieu.length > 0 && v !== true)}
+              onChange={(e) => setV(e.target.checked)}
               className="size-4 accent-gold" />
             {v === true ? "Bật" : "Tắt"}
           </label>

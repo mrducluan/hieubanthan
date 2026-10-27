@@ -206,8 +206,10 @@ test("đã đăng nhập: huy hiệu máy chủ sáng / mờ theo dat, kèm ngà
   await expect(hh.getByTestId("hh-hoi_vien")).toHaveCount(0);
   await expect(hh.getByTestId("hh-chuoi_may_7")).toHaveCount(0);   // tài khoản đã đạt chuỗi 7 → ẩn bản máy
   await expect(hh.getByTestId("huy-hieu-ds")).toHaveAttribute("data-dat", "2");
-  // reading_started của thần số (trang này) đã ghi mảng vào máy
-  expect(await page.evaluate(() => localStorage.getItem("hbt.mang_da_xem.v1"))).toContain("thanso");
+  // reading_started của bài đọc thần số (/than-so — QH-BT tách khỏi trang /ban-than) ghi mảng vào máy
+  await page.goto("/than-so");
+  await expect(page.getByRole("heading", { name: "Bốn con số nói gì về bạn" })).toBeVisible({ timeout: 45_000 });
+  await expect.poll(() => page.evaluate(() => localStorage.getItem("hbt.mang_da_xem.v1"))).toContain("thanso");
 });
 
 test("trục 2 UX — Hôm nay trên điện thoại: chip đầu trang ≥ 40px, chữ ≥ 13px; hẹn: Đổi sang 30 ngày rồi Huỷ hẹn", async ({ page }) => {

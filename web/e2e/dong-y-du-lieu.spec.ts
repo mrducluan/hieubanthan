@@ -41,7 +41,7 @@ test("lần đầu: khối đồng ý + nút 'Đồng ý và xem kết quả'; c
   expect(await docDongY(page)).toBeNull();
 
   await page.getByRole("button", { name: "Đồng ý và xem kết quả" }).click();
-  await expect(page).toHaveURL(/\/ban-than/);
+  await expect(page).toHaveURL(/\/than-so/);   // QH-BT: cửa vào trang chủ dẫn tới bài đọc /than-so
   await expect(page.getByTestId("so-duong-doi")).toHaveText("6", { timeout: 60_000 });
   expect(await docDongY(page)).toMatchObject({ phien_ban: PHIEN_BAN_DONG_Y });
   expect(goiApi.some((d) => d.startsWith("/api/thanso"))).toBe(true);
