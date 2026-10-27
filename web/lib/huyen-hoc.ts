@@ -26,3 +26,8 @@ export const lichHH = (nam: number) => ["/hom-nay", "/xem-ngay-tot", "/xem-tuoi-
   "/phong-thuy/huong-hop-tuoi", `/lich-am/${nam}`, "/doi-lich-am-duong"];
 
 export const SO_CACH_HH = 3;
+
+/** Lối tra cứu thêm cho mảng ít cụm kiến thức (chân thẻ không trơ một chip). Chỉ trang có thật trong site. */
+export const TRA_CUU_THEM: Partial<Record<KhoaMangHH, { duong: string; ten: string; khoa: null }[]>> = {
+  kinh_dich: [{ duong: "/hom-nay", ten: "Quẻ đầu ngày", khoa: null }, { duong: "/tu-dien", ten: "Từ điển thuật ngữ", khoa: null }],
+};

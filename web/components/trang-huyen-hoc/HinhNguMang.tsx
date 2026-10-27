@@ -1,17 +1,18 @@
 // Trang /huyen-hoc — hình đầu trang: năm mảng (thần số, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch) xếp quanh Thái cực, nối
-// thành ngôi sao năm cánh. Hình trang trí, không mang dữ liệu. Chỉ dùng lớp chuyển động có sẵn (globals.css) — tự tắt khi
+// thành ngôi sao năm cánh. Hình trang trí, không mang dữ liệu; mỗi mảng là một link tới công cụ (trông như nút → bấm được). Chỉ dùng lớp chuyển động có sẵn (globals.css) — tự tắt khi
 // người dùng chọn giảm chuyển động, lúc đó hình tĩnh vẫn đủ năm mảng.
 import { HoaTietMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { cn } from "@/lib/utils";
 
 const tron = (cx: number, cy: number, r: number, g: number) => [cx + r * Math.cos(g), cy + r * Math.sin(g)] as const;
 
-const NUT: { kieu: KieuMang; ten: string }[] = [
-  { kieu: "than-so", ten: "Thần số" },
-  { kieu: "tu-vi", ten: "Tử vi" },
-  { kieu: "phong-thuy", ten: "Phong thuỷ" },
-  { kieu: "kinh-dich", ten: "Kinh Dịch" },
-  { kieu: "bat-tu", ten: "Bát tự" },
+// Cùng thứ tự với năm thẻ bên dưới (lib/huyen-hoc.ts MANG_HH), xếp theo chiều kim đồng hồ từ đỉnh.
+const NUT: { kieu: KieuMang; ten: string; href: string }[] = [
+  { kieu: "than-so", ten: "Thần số", href: "/than-so" },
+  { kieu: "tu-vi", ten: "Tử vi", href: "/tu-vi" },
+  { kieu: "bat-tu", ten: "Bát tự", href: "/bat-tu" },
+  { kieu: "phong-thuy", ten: "Phong thuỷ", href: "/phong-thuy" },
+  { kieu: "kinh-dich", ten: "Kinh Dịch", href: "/kinh-dich" },
 ];
 
 // Sao rải cố định (server và client vẽ giống nhau).
@@ -27,10 +28,9 @@ export function HinhNguMang({ className }: { className?: string }) {
   const sao = [0, 2, 4, 1, 3, 0].map((k, i) => `${i ? "L" : "M"}${nut[k]!.p[0].toFixed(1)},${nut[k]!.p[1].toFixed(1)}`).join(" ");
   const vach = Array.from({ length: 40 }, (_, k) => tron(cx, cy, r + 40, (k * Math.PI) / 20));
   return (
-    <svg viewBox="0 0 400 400" role="img" data-testid="hinh-ngu-mang"
-      aria-label="Minh hoạ: năm mảng huyền học — thần số, Tử vi, Phong thuỷ, Kinh Dịch, Bát tự — xếp quanh Thái cực"
+    <svg viewBox="0 0 400 400" data-testid="hinh-ngu-mang" aria-labelledby="nm-tieu-de"
       className={cn("h-auto w-full overflow-visible", className)}>
-      <title>Năm mảng huyền học xếp quanh Thái cực</title>
+      <title id="nm-tieu-de">Năm mảng huyền học xếp quanh Thái cực: thần số, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch</title>
       <defs>
         <radialGradient id="nm-tinh-van" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="rgb(var(--moon))" stopOpacity="0.22" />
@@ -69,14 +69,18 @@ export function HinhNguMang({ className }: { className?: string }) {
         <circle cx={cx} cy={cy - 17} r={5} className="fill-gold/90" />
         <circle cx={cx} cy={cy + 17} r={5} className="fill-bg" />
       </g>
-      {nut.map(({ kieu, ten, p: [x, y] }, i) => (
-        <g key={kieu} className="svg-tam so-hien" style={{ animationDelay: `${0.2 + i * 0.14}s` }}>
-          <g className="svg-tam nut-so">
-            <circle cx={x} cy={y} r={38} fill="url(#nm-nut)" className="stroke-gold/60" strokeWidth={1.4} />
-            <svg x={x - 27} y={y - 20} width={54} height={36} viewBox="0 0 120 80" aria-hidden><HoaTietMang kieu={kieu} /></svg>
-            <text x={x} y={y + 56} textAnchor="middle" className="fill-fg font-serif" fontSize={15}>{ten}</text>
+      {nut.map(({ kieu, ten, href, p: [x, y] }, i) => (
+        <a key={kieu} href={href} aria-label={`Mở ${ten}`} className="group/nut outline-none">
+          <g className="svg-tam so-hien" style={{ animationDelay: `${0.2 + i * 0.14}s` }}>
+            <g className="svg-tam nut-so">
+              <circle cx={x} cy={y} r={38} fill="url(#nm-nut)" strokeWidth={1.4}
+                className="stroke-gold/60 group-hover/nut:stroke-gold group-focus-visible/nut:stroke-gold" />
+              <circle cx={x} cy={y} r={44} fill="none" strokeWidth={2} className="stroke-transparent group-focus-visible/nut:stroke-gold" aria-hidden />
+              <svg x={x - 27} y={y - 20} width={54} height={36} viewBox="0 0 120 80" aria-hidden><HoaTietMang kieu={kieu} /></svg>
+              <text x={x} y={y + 58} textAnchor="middle" className="fill-fg font-serif" fontSize={18} aria-hidden>{ten}</text>
+            </g>
           </g>
-        </g>
+        </a>
       ))}
     </svg>
   );

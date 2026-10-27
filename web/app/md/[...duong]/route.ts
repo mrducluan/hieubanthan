@@ -2,7 +2,7 @@
 // /index.md · /huyen-hoc.md · /kien-thuc.md · /<mảng>/<cụm>.md · /<mảng>/<cụm>/<trang>.md · /phong-thuy/huong-hop-tuoi[/<tuổi>].md · /tu-dien.md
 import { CHU_DE, dsCumTru, dsTuoiHuong, duongTuoi, khoaTheoDuong, mucLuc, trang, tuDien, tuoiHuong } from "@/lib/kien-thuc";
 import { mdChuDe, mdDsTuoi, mdHuyenHoc, mdThuVien, mdTrang, mdTuDien, mdTuoi, TEN_MANG, traMd } from "@/lib/markdown";
-import { MANG_HH, lichHH, namNayVn } from "@/lib/huyen-hoc";
+import { MANG_HH, TRA_CUU_THEM, lichHH, namNayVn } from "@/lib/huyen-hoc";
 import { CHU_HUYEN_HOC, SO_HOI_DAP_HUYEN_HOC } from "@/lib/chu/trang-tinh";
 import { mucSoTrang } from "@/lib/so-trang";
 import { boNhan, taoChu } from "@/lib/chu-trang";
@@ -53,7 +53,7 @@ export async function GET(_req: Request, { params: thamSo }: { params: Promise<{
     // HH-1: hub Huyền học — chữ CMS (bảng chữ, H1, lời dẫn) như trang HTML; số trang mỗi cụm tra cứu từ mục lục engine.
     const [nd, ds] = await Promise.all([layNoiDungTrang("/huyen-hoc"), mucLuc()]);
     const md = mucSoTrang("/huyen-hoc")!.mac_dinh, nam = namNayVn();
-    const cum = Object.fromEntries(MANG_HH.map((m) => [m.khoa, dsCumTru(m.href).slice(0, 4).map((x) => ({ duong: x.duong, ten: x.ten,
+    const cum = Object.fromEntries(MANG_HH.map((m) => [m.khoa, [...dsCumTru(m.href), ...(TRA_CUU_THEM[m.khoa] ?? [])].slice(0, 4).map((x) => ({ duong: x.duong, ten: x.ten,
       n: x.khoa ? ds.filter((t) => t.loai === CHU_DE[x.khoa!]!.loai).length : 0,
       md: Boolean(x.khoa) || x.duong === duongTuoi("huong-hop-tuoi") }))]));   // chỉ cụm có route .md ở trên
     const noi = mdHuyenHoc({ c: taoChu(CHU_HUYEN_HOC, nd.chu), h1: boNhan(nd.dau.h1 ?? md.h1!), loiDan: boNhan(nd.dau.loiDan ?? md.loi_dan!),

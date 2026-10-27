@@ -7,14 +7,14 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  ArrowRight, ArrowUpRight, BookOpen, CalendarCheck, CalendarDays, Check, Compass, DoorOpen, HeartHandshake, Home, ListOrdered,
+  ArrowRight, BookOpen, CalendarCheck, CalendarDays, Check, Compass, DoorOpen, HeartHandshake, Home, ListOrdered,
   MessageCircleQuestion, MoonStar, Navigation, Repeat, Sparkles, Sun, UserRound, type LucideIcon,
 } from "lucide-react";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { HinhNguMang } from "@/components/trang-huyen-hoc/HinhNguMang";
 import { ChipCan, DongHoSo } from "@/components/trang-huyen-hoc/HoSoHub";
-import { HOI_HH, MANG_HH, lichHH, namNayVn } from "@/lib/huyen-hoc";
+import { HOI_HH, MANG_HH, TRA_CUU_THEM, lichHH, namNayVn } from "@/lib/huyen-hoc";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
@@ -48,7 +48,7 @@ export default async function HuyenHoc() {
   const c = taoChu(CHU_HUYEN_HOC, nd.chu);
   const MD = macDinh();
   const nam = namNayVn();
-  const cum = Object.fromEntries(MANG_HH.map((m) => [m.khoa, dsCumTru(m.href).slice(0, 4)]));
+  const cum = Object.fromEntries(MANG_HH.map((m) => [m.khoa, [...dsCumTru(m.href), ...(TRA_CUU_THEM[m.khoa] ?? [])].slice(0, 4)]));
   const dau = await layDauNhieuTrang(Object.values(cum).flat().map((x) => x.duong));
   const soBai = (khoa: string | null) => (khoa ? ds.filter((t) => t.loai === CHU_DE[khoa]!.loai).length : 0);
   const hoiDap = Array.from({ length: SO_HOI_DAP_HUYEN_HOC }, (_, i) => ({ hoi: c(`hoi_dap.hoi_${i + 1}`), dap: c(`hoi_dap.dap_${i + 1}`) }));
@@ -56,7 +56,7 @@ export default async function HuyenHoc() {
   const lich = lichHH(nam);
 
   return (
-    <div className="space-y-16 md:space-y-24">
+    <>
       <JsonLd data={goiLd(
         // AIO/GEO: CollectionPage nối tổ chức (publisher), ảnh đại diện, bản Markdown; ItemList = mọi công cụ con của hub.
         { "@type": "CollectionPage", "@id": `${urlDayDu(DUONG)}#trang`, url: urlDayDu(DUONG), name: h1, headline: h1,
@@ -72,9 +72,10 @@ export default async function HuyenHoc() {
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Huyền học", duong: DUONG }]),
         ldHoiDap(hoiDap),
       )} />
-
+    {/* JSON-LD đứng NGOÀI lưới space-y (thẻ <script> là phần tử con → đẩy đầu trang xuống thêm một khoảng). */}
+    <div className="space-y-16 md:space-y-24">
       {/* Đầu trang: chữ + hai nút bên trái, hình năm mảng bên phải (≥ lg). Điện thoại: chữ → nút → hình nhỏ. */}
-      <section className="relative grid items-center gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-10" data-testid="hero-huyen-hoc">
+      <section className="relative grid items-center gap-8 lg:grid-cols-[1.25fr_1fr] lg:gap-10" data-testid="hero-huyen-hoc">
         <div>
           <p className="eyebrow flex items-center gap-2"><Sparkles className="size-3.5 shrink-0 text-gold" aria-hidden /> {c("dau.nhan_tren")}</p>
           <h1 className="mt-3 text-4xl leading-[1.1] sm:text-5xl lg:text-[3.4rem]">
@@ -98,7 +99,7 @@ export default async function HuyenHoc() {
         </div>
         <div className="relative">
           <div className="pointer-events-none absolute inset-[10%] rounded-full bg-gold/10 blur-3xl" aria-hidden />
-          <HinhNguMang className="relative mx-auto max-w-[19rem] sm:max-w-[24rem] lg:max-w-[27rem]" />
+          <HinhNguMang className="relative mx-auto max-w-[15rem] sm:max-w-[22rem] lg:max-w-[27rem]" />
         </div>
       </section>
 
@@ -113,7 +114,7 @@ export default async function HuyenHoc() {
               <Link href={href} className="glass group flex h-full items-center gap-4 rounded-2xl p-4 hover:border-gold/50 sm:p-5">
                 <span className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/40 bg-gold/10 text-gold"><Icon className="size-5" aria-hidden /></span>
                 <span className="min-w-0 flex-1">
-                  <span className="block font-serif text-lg leading-snug text-fg">{c(`hoi.cau_${i + 1}`)}</span>
+                  <span className="block text-balance font-serif text-lg leading-snug text-fg">{c(`hoi.cau_${i + 1}`)}</span>
                   <span className="mt-0.5 block text-sm text-gold">{c(`hoi.den_${i + 1}`)}</span>
                 </span>
                 <ArrowRight className="size-4 shrink-0 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden />
@@ -131,7 +132,7 @@ export default async function HuyenHoc() {
           {MANG_HH.map(({ khoa, href, kieu, han, lop }) => (
             <article key={khoa} data-testid={`the-mang-${khoa}`}
               className={`glass group relative flex flex-col overflow-hidden rounded-2xl p-5 transition-colors hover:border-gold/50 sm:p-6 ${lop}`}>
-              <span aria-hidden className="pointer-events-none absolute -bottom-4 right-3 select-none text-[6.5rem] leading-none text-gold/[0.07] sm:text-[7.5rem]"
+              <span aria-hidden className="pointer-events-none absolute right-4 top-16 select-none text-[5.5rem] leading-none text-gold/[0.05] sm:text-[6.5rem]"
                 style={{ fontFamily: "var(--font-han), serif" }}>{han}</span>
               <div className="flex items-start justify-between gap-3">
                 <span className="grid h-20 w-28 shrink-0 place-items-center rounded-2xl border border-gold/25 bg-gradient-to-br from-gold/15 via-surface/40 to-transparent">
@@ -149,14 +150,14 @@ export default async function HuyenHoc() {
                   <li key={i} className="flex items-start gap-2"><Check className="mt-0.5 size-4 shrink-0 text-jade" aria-hidden />{c(`the.${khoa}_nhan_${i}`)}</li>
                 ))}
               </ul>
-              <Link href={href} className="mt-5 inline-flex w-fit items-center gap-1.5 font-medium text-gold after:absolute after:inset-0 after:rounded-2xl after:content-['']
-                focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-gold">
-                {c(`the.${khoa}_nut`)} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
-              </Link>
-              {/* Chân thẻ: cụm tra cứu dính đáy (mt-auto) — các thẻ cùng hàng có chân thẳng hàng. */}
+              {/* Nút + cụm tra cứu cùng dính đáy (mt-auto) → nút các thẻ cùng hàng thẳng hàng. */}
               <div className="mt-auto pt-5">
+                <Link href={href} className="inline-flex min-h-11 w-fit items-center gap-1.5 font-medium text-gold after:absolute after:inset-0 after:rounded-2xl after:content-['']
+                  focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-gold">
+                  {c(`the.${khoa}_nut`)} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                </Link>
                 {cum[khoa]!.length > 0 && (
-                  <div className="relative z-10 flex flex-wrap items-center gap-x-2 gap-y-2 border-t border-line/50 pt-4 text-xs">
+                  <div className="relative z-10 mt-3 flex flex-wrap items-center gap-x-2 gap-y-3.5 border-t border-line/50 pt-4 text-xs">
                     <span className="text-fg-faint">{c("the.kien_thuc")}</span>
                     {cum[khoa]!.map((x) => {
                       const n = soBai(x.khoa);
@@ -180,16 +181,16 @@ export default async function HuyenHoc() {
       {/* Công cụ theo lịch & tuổi dân gian — đều là con của hub này ở breadcrumb. */}
       <section aria-labelledby="lich-tuoi">
         <TieuDeMuc id="lich-tuoi" nho={c("lich.nho")} lon={c("lich.lon")} />
-        <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4" data-testid="cong-cu-lich">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4" data-testid="cong-cu-lich">
           {lich.map((href, i) => { const Icon = ICON_LICH[i]!; return (
             <li key={href}>
-              <Link href={href} className="glass group flex h-full flex-col rounded-2xl p-4 hover:border-gold/50">
-                <span className="flex items-center justify-between">
-                  <Icon className="size-5 text-gold" aria-hidden />
-                  <ArrowUpRight className="size-4 text-fg-faint transition-colors group-hover:text-gold" aria-hidden />
+              <Link href={href} className="glass group flex h-full items-start gap-3 rounded-2xl p-4 hover:border-gold/50">
+                <Icon className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
+                <span className="min-w-0 flex-1">
+                  <span className="block font-serif text-base leading-snug text-fg sm:text-lg">{c(`lich.ten_${i + 1}`, { nam: String(nam) })}</span>
+                  <span className="mt-1 block text-sm leading-snug text-fg-muted">{c(`lich.mo_${i + 1}`)}</span>
                 </span>
-                <span className="mt-3 font-serif text-base leading-snug text-fg sm:text-lg">{c(`lich.ten_${i + 1}`, { nam: String(nam) })}</span>
-                <span className="mt-1 text-xs leading-snug text-fg-muted sm:text-sm">{c(`lich.mo_${i + 1}`)}</span>
+                <ArrowRight className="mt-1 size-4 shrink-0 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden />
               </Link>
             </li>
           ); })}
@@ -208,7 +209,7 @@ export default async function HuyenHoc() {
               {MANG_HH.map(({ khoa, href, kieu }) => (
                 <tr key={khoa} className="block border-b border-line/40 px-5 py-4 last:border-0 md:table-row md:p-0">
                   <th scope="row" className="block pb-2 font-normal md:table-cell md:whitespace-nowrap md:px-5 md:py-4 md:align-top">
-                    <Link href={href} className="inline-flex items-center gap-2 font-serif text-lg text-fg hover:text-gold">
+                    <Link href={href} className="inline-flex min-h-11 items-center gap-2 font-serif text-lg text-fg hover:text-gold">
                       <HinhMang kieu={kieu} className="h-7" />{c(`the.${khoa}_ten`)}
                     </Link>
                   </th>
@@ -246,12 +247,12 @@ export default async function HuyenHoc() {
         <h2 id="hoi-dap" className="text-2xl sm:text-3xl">{c("hoi_dap.lon")}</h2>
         <div className="mt-5 divide-y divide-line/50 rounded-2xl border border-line/60">
           {hoiDap.map((h, i) => (
-            <details key={i} className="group px-5 py-4 [&_summary::-webkit-details-marker]:hidden" open={i === 0}>
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-fg">
+            <details key={i} className="group px-5 [&_summary::-webkit-details-marker]:hidden" open={i === 0}>
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 py-4 font-medium text-fg">
                 <h3 className="text-base sm:text-lg">{h.hoi}</h3>
                 <ArrowRight className="size-4 shrink-0 rotate-90 text-gold transition-transform group-open:-rotate-90" aria-hidden />
               </summary>
-              <p className="mt-2 leading-relaxed text-fg-muted">{h.dap}</p>
+              <p className="pb-4 leading-relaxed text-fg-muted">{h.dap}</p>
             </details>
           ))}
         </div>
@@ -264,13 +265,14 @@ export default async function HuyenHoc() {
             <ArrowRight className="ml-1 inline size-4 transition-transform group-hover:translate-x-1" aria-hidden /></span>
         </Link>
         <span className="flex shrink-0 gap-4 text-sm">
-          <Link href="/tu-dien" className="text-gold underline-offset-4 hover:underline">{c("thu_vien.tu_dien")}</Link>
-          <Link href="/tu-vi/la-so-mau" className="text-gold underline-offset-4 hover:underline">{c("thu_vien.la_so_mau")}</Link>
+          <Link href="/tu-dien" className="inline-flex min-h-11 items-center text-gold underline-offset-4 hover:underline">{c("thu_vien.tu_dien")}</Link>
+          <Link href="/tu-vi/la-so-mau" className="inline-flex min-h-11 items-center text-gold underline-offset-4 hover:underline">{c("thu_vien.la_so_mau")}</Link>
         </span>
       </section>
 
       <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" boQua={[DUONG]} duong={DUONG} /></Suspense>
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" />
     </div>
+    </>
   );
 }

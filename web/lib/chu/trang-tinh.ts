@@ -7,19 +7,19 @@ const THE = "Thẻ năm hệ thống";
 const MANG: [string, string, string, string, [string, string, string], string, string][] = [
   ["than_so", "Thần số học", "Mình là người thế nào, đang ở nhịp năm nào?",
     "Bốn con số cốt lõi từ họ tên và ngày sinh. Mỗi số kèm 3 điểm mạnh, 3 điểm mù — bạn tự tích xem nó nói trúng mấy điều.",
-    ["Cách tính từng bước, tự kiểm lại được", "Hai phái Pythagoras và Chaldea", "Năm, tháng, ngày cá nhân"], "Tên + ngày sinh", "Xem con số của bạn"],
+    ["Cách tính từng bước, tự kiểm lại được", "Hai phái Pythagoras và Chaldea", "Năm, tháng, ngày cá nhân"], "Cần tên, ngày sinh", "Xem con số của bạn"],
   ["tu_vi", "Tử vi", "Mười hai mặt đời mình, mặt nào thuận, mặt nào cần lưu ý?",
     "Lá số 12 cung an theo âm lịch Việt Nam, tính cả múi giờ cũ trước 1975. Lời thường đọc trước, thuật ngữ để sau.",
-    ["Đại hạn, lưu niên, nhịp 3 tháng tới", "Độ sáng sao theo Nam phái", "Xem lá số 2 người"], "+ giờ, giới tính, nơi sinh", "Lập lá số Tử vi"],
+    ["Từng chặng 10 năm và năm nay", "Nhịp 3 tháng tới", "Xem lá số 2 người"], "Cần giờ sinh, giới tính, nơi sinh", "Lập lá số Tử vi"],
   ["bat_tu", "Bát tự", "Mình mạnh hành gì, thiếu hành gì?",
-    "Tứ trụ năm – tháng – ngày – giờ lập theo tiết khí. Ngũ hành chấm theo thang điểm công bố; dụng thần luôn trình bày hai cách để bạn tự cân nhắc.",
-    ["Đại vận từng 10 năm", "Cách cục theo tháng sinh", "So với những năm đã qua"], "+ giờ, giới tính, nơi sinh", "Lập tứ trụ"],
+    "Bốn cột năm – tháng – ngày – giờ sinh cho biết bạn mạnh hành nào, thiếu hành nào. Chỗ sách xưa hiểu hai cách thì trình bày cả hai để bạn tự cân nhắc.",
+    ["Từng chặng 10 năm của bạn", "Kiểu lá số theo tháng sinh", "So với những năm đã qua"], "Cần giờ sinh, giới tính, nơi sinh", "Xem Bát tự của bạn"],
   ["phong_thuy", "Phong thuỷ", "Nhà này có hợp mình không?",
     "Đo hướng cửa bằng điện thoại: bạn hợp phía nào, từng phòng nên đặt gì, tháng nào nên sửa. Không bán vật phẩm hoá giải.",
-    ["La bàn ngay trên điện thoại", "Nhà phố và chung cư", "Việc làm từ 0 đồng"], "Năm sinh + giới tính", "Xem nhà của bạn"],
+    ["La bàn ngay trên điện thoại", "Nhà phố và chung cư", "Việc làm từ 0 đồng"], "Cần năm sinh, giới tính", "Xem nhà của bạn"],
   ["kinh_dich", "Kinh Dịch", "Đang phân vân một việc?",
     "Gieo một quẻ cho đúng một câu hỏi: việc đang thuận hay cần đổi cách, tuần này nên làm gì. Có nguyên văn Chu Dịch và lời nói nôm na.",
-    ["Gieo 3 đồng xu hoặc Mai Hoa", "64 quẻ, 384 hào có nguồn", "Ba cách đọc một quẻ"], "Chỉ cần câu hỏi", "Gieo một quẻ"],
+    ["Gieo 3 đồng xu hoặc Mai Hoa", "64 quẻ, 384 hào có nguồn", "Ba cách đọc một quẻ"], "Chỉ cần một câu hỏi", "Gieo một quẻ"],
 ];
 const HOI: [string, string][] = [
   ["Mình là người thế nào?", "Thần số học"],
@@ -42,7 +42,7 @@ const LICH: [string, string][] = [
 // Khoá theo mã mảng (the.<khoa>_…) — trang đọc theo mã, không theo vị trí.
 const SO_SANH: [string, string, string, string, string][] = [
   ["than_so", "Thần số học", "Họ tên, ngày sinh", "Tính cách, điểm mạnh – điểm mù, nhịp năm – tháng – ngày", "Pythagoras; Chaldea (Cheiro, 1926)"],
-  ["tu_vi", "Tử vi", "Ngày giờ sinh âm lịch, giới tính, nơi sinh", "12 mặt đời sống, từng giai đoạn 10 năm, năm nay", "Tử vi Đẩu Số, Nam phái lối Việt"],
+  ["tu_vi", "Tử vi", "Ngày giờ sinh (dương hoặc âm lịch), giới tính, nơi sinh", "12 mặt đời sống, từng giai đoạn 10 năm, năm nay", "Tử vi Đẩu Số, Nam phái lối Việt"],
   ["bat_tu", "Bát tự", "Ngày giờ sinh theo tiết khí", "Ngũ hành mạnh – yếu, đại vận 10 năm", "Tử Bình Chân Thuyên"],
   ["phong_thuy", "Phong thuỷ", "Năm sinh, giới tính, hướng nhà", "Hướng hợp, đặt phòng, tháng nên sửa", "Bát trạch, Huyền Không phi tinh"],
   ["kinh_dich", "Kinh Dịch", "Một câu hỏi và lúc gieo", "Một việc cụ thể đang phân vân", "Chu Dịch: quái từ, hào từ, Thoán truyện"],
@@ -52,21 +52,21 @@ const HOI_DAP: [string, string][] = [
   ["Huyền học có phải mê tín không?", "Tuỳ cách dùng. Hiểu Bản Thân không dùng huyền học để phán hay doạ: phép tính hiện từng bước, nghĩa có ghi nguồn, mọi lời đọc kèm mặt tối và câu hỏi tự soi. Trang không trả lời chuyện bệnh tật, sống chết, xổ số và không bán vật phẩm hoá giải."],
   ["Nên bắt đầu từ mảng nào?", "Mới làm quen thì bắt đầu từ thần số học: chỉ cần tên và ngày sinh, nửa phút có kết quả. Biết giờ sinh thì đi tiếp Tử vi hoặc Bát tự. Đang phân vân một việc cụ thể thì gieo một quẻ Kinh Dịch; lo chuyện nhà cửa thì xem Phong thuỷ."],
   ["Thần số học có thuộc huyền học không?", "Thần số học có gốc phương Tây (Pythagoras, Chaldea); Tử vi, Bát tự, Kinh Dịch, Phong thuỷ là huyền học phương Đông. Ở Việt Nam người ta hay gọi chung là huyền học. Trang để thần số làm cửa vào vì cần nhập ít nhất."],
-  ["Thông tin của tôi có bị lưu không?", "Hồ sơ lưu trên máy bạn và dùng chung cho mọi mảng. Máy chủ tính xong là bỏ, không gửi ngày giờ sinh cho bên thứ ba. Chỉ khi bạn bấm lưu vào tài khoản thì hồ sơ mới nằm trên máy chủ, và bạn xoá được bất cứ lúc nào."],
+  ["Thông tin của tôi có bị lưu không?", "Hồ sơ lưu trên máy bạn và dùng chung cho mọi mảng; máy chủ tính xong là bỏ. Ngày sinh chỉ nằm trên máy chủ khi bạn tự bấm lưu hồ sơ vào tài khoản, hoặc bật nhắc việc (chỉ ngày và tháng sinh); bài luận chỉ lưu khi bạn bấm Lưu. Bạn xoá được bất cứ lúc nào."],
   ["Có mất phí không?", "Mọi phép tính, lá số và thư viện kiến thức đều miễn phí. Riêng bản luận giải đầy đủ nhiều chương và câu hỏi vượt lượt mỗi ngày có thể dùng Sao (điểm dùng trong trang) khi tính năng này bật — trang luôn hỏi trước khi trừ."],
 ];
 
 // Bảng chữ trang hub /huyen-hoc (trước 2026-10-27 là /kham-pha — khoá cũ giữ nguyên tên để chữ đã sửa ở CMS không mất).
 export const CHU_HUYEN_HOC = {
   "dau.nhan_tren": { nhom: "Đầu trang", nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Huyền học phương Đông · thần số học", toi_da: 60 },
-  ...Object.fromEntries((["Miễn phí mọi phép tính", "Một hồ sơ cho cả năm mảng", "Có nguồn sách, có mặt tối"]).map((m, i) =>
+  ...Object.fromEntries((["Miễn phí mọi phép tính", "Một hồ sơ cho cả năm mảng", "Nói cả điểm mạnh lẫn điểm yếu"]).map((m, i) =>
     [`dau.chip_${i + 1}`, { nhom: "Đầu trang", nhan: `Chip ${i + 1} dưới lời dẫn`, mac_dinh: m, toi_da: 40 }])),
   "dau.nut_chinh": { nhom: "Đầu trang", nhan: "Nút chính (mở /than-so)", mac_dinh: "Bắt đầu với con số của bạn", toi_da: 40 },
-  "dau.nut_phu": { nhom: "Đầu trang", nhan: "Nút phụ (cuộn tới mục chọn theo câu hỏi)", mac_dinh: "Chưa biết chọn mảng nào?", toi_da: 40 },
-  "ho_so.chao": { nhom: "Đầu trang", nhan: "Dòng hồ sơ ({ten} = tên gọi, {n} = số mảng xem ngay được)", mac_dinh: "Hồ sơ của {ten} xem ngay được {n}/5 mảng", toi_da: 80 },
-  "ho_so.thieu": { nhom: "Đầu trang", nhan: "Dòng nhắc khi thiếu giờ sinh / giới tính / nơi sinh", mac_dinh: "Thêm giờ sinh, giới tính, nơi sinh để mở Tử vi và Bát tự", toi_da: 100 },
+  "dau.nut_phu": { nhom: "Đầu trang", nhan: "Nút phụ (cuộn tới mục chọn theo câu hỏi)", mac_dinh: "Chọn theo câu hỏi", toi_da: 40 },
+  "ho_so.chao": { nhom: "Đầu trang", nhan: "Dòng hồ sơ ({ten} = tên gọi, {n} = số mảng xem ngay được)", mac_dinh: "Với hồ sơ hiện có, {ten} xem ngay được {n}/5 mảng", toi_da: 80 },
+  "ho_so.thieu": { nhom: "Đầu trang", nhan: "Dòng nhắc khi hồ sơ còn thiếu ({thieu} = trường còn thiếu, {mang} = mảng chưa mở)", mac_dinh: "Thêm {thieu} để mở {mang}", toi_da: 100 },
   "ho_so.san_sang": { nhom: THE, nhan: "Chip khi hồ sơ đã đủ cho mảng", mac_dinh: "Sẵn sàng", toi_da: 30 },
-  "ho_so.can_them": { nhom: THE, nhan: "Chip khi hồ sơ còn thiếu cho mảng", mac_dinh: "Cần thêm thông tin", toi_da: 30 },
+  "ho_so.can_them": { nhom: THE, nhan: "Chip khi hồ sơ còn thiếu cho mảng ({thieu} = trường còn thiếu)", mac_dinh: "Thiếu {thieu}", toi_da: 40 },
 
   "hoi.nho": { nhom: "Chọn theo câu hỏi", nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Bắt đầu từ điều bạn đang nghĩ", toi_da: 60 },
   "hoi.lon": { nhom: "Chọn theo câu hỏi", nhan: "Tiêu đề mục", mac_dinh: "Bạn đang băn khoăn điều gì?", toi_da: 80 },
