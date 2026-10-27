@@ -1,0 +1,51 @@
+# Sao lưu DB Supabase hằng tuần (Chủ nhật 03:17 giờ VN) — bản sao THỨ HAI ngoài sao lưu của Supabase (gói Free không có
+# PITR, chỉ giữ 1 bản ngày). Tệp ra mã hoá AES-256 (gpg) bằng BACKUP_PASSPHRASE ngay trên máy chạy; repo công khai nên
+# artifact chỉ có bản mã hoá. Giữ 35 ngày (5 bản). Chưa đặt secret → bỏ qua, không đỏ.
+# Secrets: SUPABASE_DB_URL (chuỗi Session pooler, cổng 5432 — máy chạy GitHub không có IPv6 cho kết nối trực tiếp),
+#          BACKUP_PASSPHRASE (≥ 20 ký tự, cất ở nơi khác ngoài GitHub — mất là không mở được bản sao lưu).
+# Khôi phục: supabase/sao-luu/khoi-phuc.sh (docs/VIEC-CUA-ANH.md mục "Sao lưu DB").
+name: sao-luu-db
+on:
+  schedule:
+    - cron: "17 20 * * 6"
+  workflow_dispatch: {}
+permissions:
+  contents: read
+concurrency:
+  group: sao-luu-db
+  cancel-in-progress: false
+
+jobs:
+  sao-luu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+      BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+    steps:
+      - name: Kiểm secret
+        id: co
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ] || [ -z "$BACKUP_PASSPHRASE" ]; then
+            echo "::notice::Chưa đặt SUPABASE_DB_URL / BACKUP_PASSPHRASE — bỏ qua sao lưu."; echo "chay=0" >> "$GITHUB_OUTPUT"
+          else echo "chay=1" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v4
+        if: steps.co.outputs.chay == '1'
+      # pg_dump phải cùng hoặc mới hơn bản Postgres của Supabase (15/17) → cài client 17 từ kho PGDG.
+      - name: Cài pg_dump 17
+        if: steps.co.outputs.chay == '1'
+        run: |
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y >/dev/null
+          sudo apt-get install -y -qq postgresql-client-17 >/dev/null
+          echo "/usr/lib/postgresql/17/bin" >> "$GITHUB_PATH"
+      - name: Sao lưu + mã hoá
+        if: steps.co.outputs.chay == '1'
+        run: bash supabase/sao-luu/sao-luu.sh "$RUNNER_TEMP/sao-luu"
+      - uses: actions/upload-artifact@v4
+        if: steps.co.outputs.chay == '1'
+        with:
+          name: db-${{ github.run_id }}
+          path: ${{ runner.temp }}/sao-luu/*.tar.gpg
+          retention-days: 35
+          if-no-files-found: error
+          compression-level: 0

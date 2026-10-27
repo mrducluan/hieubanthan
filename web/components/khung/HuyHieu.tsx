@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Award, BadgeCheck, ChevronDown, CalendarCheck, Cloud, Compass, Flame, HeartHandshake, MessageCircle, Trophy, UserPlus, Users, type LucideIcon } from "lucide-react";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
+import { NutChiaSeHuyHieu } from "@/components/chia-se/NutChiaSeHuyHieu";
 import {
   CAU_BAN_CHAT, DANH_MUC, dangDiGanNhat, demDat, gopHuyHieu, huyHieuMay, nguyenLieuTienDo, tienDoHuyHieu,
   type HuyHieu as HuyHieuKieu, type NguyenLieuTienDo, type TrangThaiHuyHieu,
@@ -77,6 +78,7 @@ export function HuyHieu() {
                     <div className="h-full rounded-full bg-moon" style={{ width: `${Math.round((td.co / td.can) * 100)}%` }} />
                   </div>
                 )}
+                {h.dat && <NutChiaSeHuyHieu ma={h.ma} />}
               </div>
             </li>
           );

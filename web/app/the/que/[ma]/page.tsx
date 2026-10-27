@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Lock } from "lucide-react";
 import { docMaQue, tuTuMa } from "@/lib/ma-moi";
+import { QuaNguoiNhan } from "@/components/sao/QuaNguoiNhan";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/khung/Logo";
 import { GhiTu } from "@/components/khung/GhiMoThe";
@@ -65,6 +66,7 @@ export default async function Page({ params }: Props) {
       <Button asChild size="lg" className="mt-4">
         <Link href={`/kinh-dich?tu=${tu}`} data-testid="the-que-moi">Gieo quẻ của bạn <ArrowRight aria-hidden /></Link>
       </Button>
+      <QuaNguoiNhan className="mt-3" />
       <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-fg-faint">
         <Lock className="size-3.5" aria-hidden /> Thẻ không mang câu hỏi, giờ gieo hay lời đọc của người gửi.
       </p>

@@ -30,6 +30,7 @@ export const MIGRATION: readonly Migration[] = [
   { so: "0028", ten: "Hội viên năm (hai hạng)", dau: { bang: "hoi_vien", cot: "hang" } },
   { so: "0029", ten: "Hỏi chuyên gia", dau: { ham: "cg_han_gio_cho" } },
   { so: "0030", ten: "Ngày nghỉ chuỗi + huy hiệu", dau: { ham: "huy_hieu_cua_toi" } },
+  { so: "0031", ten: "Nhật ký hỏi đáp dùng khoá riêng", dau: { ham: "ghi_nhat_ky_hoi" } },
 ];
 
 /** Công tắc / số ở /quan-tri/cai-dat chỉ có tác dụng khi các migration này đã chạy (tiền tố khoá → số migration). */

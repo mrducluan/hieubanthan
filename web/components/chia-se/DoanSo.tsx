@@ -6,6 +6,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Eye } from "lucide-react";
+import { QuaNguoiNhan } from "@/components/sao/QuaNguoiNhan";
 import { Button } from "@/components/ui/button";
 import { TheBanDo } from "@/components/chia-se/TheBanDo";
 import { ghi } from "@/lib/do-luong";
@@ -99,6 +100,7 @@ export function DoanSo({ nd, tu }: { nd: Omit<NoiDungMaBanDo, "v">; tu: string }
               {bt.nutXem} <ArrowRight aria-hidden />
             </Link>
           </Button>
+          <QuaNguoiNhan className="mt-3" />
           <p className="mt-2 text-xs text-fg-faint">Không cần tài khoản · ngày sinh của bạn chỉ dùng để tính</p>
         </motion.section>
       )}

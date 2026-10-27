@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 import { headers } from "next/headers";
 import { Newsreader, Be_Vietnam_Pro, Noto_Serif_TC } from "next/font/google";
 import { HopThoaiSao } from "@/components/sao/HopThoaiSao";
+import { ThuongVe } from "@/components/sao/ThuongVe";
+import { DangKyApp } from "@/components/khung/DangKyApp";
 import { GhiVaoTrang } from "@/components/khung/GhiVaoTrang";
 import { ChanTrang, KhungChanTrang } from "@/components/khung/ChanTrang";
 import { COT_CHAN_TRANG } from "@/lib/menu-chan-trang";
@@ -103,6 +105,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <GiamSat />
         <HoiDongYCookie />
         <ChuChung chu={chuChung}><HopThoaiSao /></ChuChung>
+        <ThuongVe />
+        <DangKyApp />
         <GhiVaoTrang />
         <DoLuongGoogle nonce={nonce} />
       </body>

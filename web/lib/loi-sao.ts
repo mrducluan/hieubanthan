@@ -58,3 +58,26 @@ export function loiKhachHetLuot(d: { tranTk?: number; tranKhach?: number; thuong
   return cau > 0 ? `Có tài khoản: ${moiNgay}, cộng ${d.thuong} Sao chào mừng — hỏi thêm được ${cau} câu ngay hôm nay.`
     : `Có tài khoản: ${moiNgay}${d.thuong ? `, cộng ${d.thuong} Sao chào mừng` : ""}.`;
 }
+
+/** "Sao vừa về" (ThuongVe): câu báo khi người mời có Sao mới từ lời mời / hoa hồng. Không nói bạn nào — chỉ số Sao. */
+export function loiThuongVe(ds: { loai: string; so: number }[]): string {
+  const moi = ds.filter((x) => x.loai === "moi_ban"), hh = ds.filter((x) => x.loai === "hoa_hong");
+  const tong = (a: { so: number }[]) => a.reduce((t, x) => t + x.so, 0);
+  const cau: string[] = [];
+  if (moi.length) cau.push(moi.length === 1 ? `+${tong(moi)} Sao — một người bạn vừa nhận lời mời của bạn.`
+    : `+${tong(moi)} Sao — ${moi.length} người bạn vừa nhận lời mời của bạn.`);
+  if (hh.length) cau.push(`+${tong(hh)} Sao hoa hồng — bạn bè bạn mời vừa nạp Sao.`);
+  return cau.join(" ");
+}
+
+/** Trang nhận thẻ / lời mời: người nhận được gì nếu lưu hồ sơ vào tài khoản. "" khi không có thưởng nào.
+ *  `coMa` = link mang mã giới thiệu (?gt=) → cộng thêm thưởng "được mời". `thu` = đang thu Sao báo cáo (mới nói "đủ mở"). */
+export function loiNguoiNhan(d: { chaoMung: number; duocMoi: number; coMa: boolean; gia: number; thu: boolean }): string {
+  const moi = d.coMa ? Math.max(0, d.duocMoi) : 0;
+  const tong = Math.max(0, d.chaoMung) + moi;
+  if (tong <= 0) return "";
+  const chiTiet = moi > 0 && d.chaoMung > 0 ? ` (${d.chaoMung} chào mừng + ${moi} lời mời)` : "";
+  const dau = moi > 0 ? "Bạn được mời: lưu hồ sơ vào tài khoản là nhận" : "Lưu hồ sơ vào tài khoản: nhận";
+  const sau = d.thu && d.gia > 0 && tong >= d.gia ? " — đủ mở một Luận giải toàn bộ." : d.thu && d.gia > 0 ? " — để mở luận giải, hỏi thêm câu." : ".";
+  return `${dau} ${tong} Sao${chiTiet}${sau}`;
+}

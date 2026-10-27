@@ -136,9 +136,11 @@ kho mã (bí mật, thư viện). Cách làm: đọc toàn bộ route API, lớp
 2. ~~**Nâng Next.js 15/16:**~~ → **ĐÃ LÀM (NX15):** Next 15.5.27 + React 19, `npm audit` hết lỗi của next. Ghi chú cũ: `npm audit` vẫn báo các lỗi chỉ vá ở 15+/16 (phần lớn thuộc tính năng dự án không dùng:
    Image Optimizer remotePatterns, Server Actions, i18n Pages Router, chạy trên Windows; Vercel còn chặn bớt ở hạ tầng).
    Đổi bản lớn = đổi stack trong CLAUDE.md → cần anh duyệt; em đề xuất làm thành một việc riêng có kiểm thử đầy đủ.
-3. **Nhật ký hỏi đáp (khi bật `NHAT_KY_HOI=1`):** bảng 0004/0005 cho `anon` INSERT — khoá anon là công khai (nằm trong
-   web khi bật tài khoản) → người ngoài có thể ghi rác vào nhật ký. Đề xuất trước khi bật: migration đổi sang khoá
-   riêng cho engine (chưa làm vì đổi chính sách DB cần anh duyệt; nhật ký hiện đang tắt nên chưa có rủi ro).
+3. ~~**Nhật ký hỏi đáp:** bảng 0004/0005 cho `anon` INSERT~~ → **đã làm (2026-10-27, migration 0031)**: bỏ chính sách +
+   quyền ghi của anon/authenticated; engine ghi qua hàm `ghi_nhat_ky_hoi(bảng, bản ghi, khoá)` (security definer, chỉ
+   đúng cột của hai bảng) với khoá riêng `NHAT_KY_KHOA` ≥ 32 ký tự; DB chỉ giữ sha256 của khoá (`khoa_nhat_ky`, RLS không
+   chính sách), đặt / đổi khoá bằng `dat_khoa_nhat_ky` chỉ chạy trong SQL Editor. Test: `supabase/kiem_thu/thu_nhat_ky_0031.sql`.
+   Việc của anh: `docs/VIEC-CUA-ANH.md` mục 4q.
 4. ~~**CSP đầy đủ**~~ → **ĐÃ LÀM (CSP-2):** nonce mỗi lượt + `'strict-dynamic'`, `connect-src` giới hạn máy chủ được gửi dữ liệu,
    kiểm bằng `e2e/csp.spec.ts` (không vi phạm trên 9 trang chính, GTM chạy sau Đồng ý, `<img onerror>` chèn vào bị chặn).
 5. **Khi bật tài khoản:** bật Supabase "Leaked password protection", giới hạn gửi email/SMS OTP, tắt đăng ký ẩn danh.

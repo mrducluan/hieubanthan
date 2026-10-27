@@ -25,7 +25,7 @@ export function HoiHomQua({ homNay, tieuDe, cau, camOn }: { homNay: string; tieu
     ghi("feedback_submitted", { kind: "hom_qua", ket_qua: kq, y_dinh: dau.ma, nhip: dau.nhip, nguon: "trang" });
   };
   return (
-    <section aria-labelledby="hom-qua" className="glass space-y-2 rounded-2xl p-5" data-testid="hoi-hom-qua">
+    <section aria-labelledby="hom-qua" className="scroll-mt-24 glass space-y-2 rounded-2xl p-5" data-testid="hoi-hom-qua">
       <h2 id="hom-qua" className="text-xl">{tieuDe}</h2>
       {xong ? (
         <p className="flex items-center gap-2 text-sm text-jade" role="status"><CheckCircle2 className="size-4" aria-hidden /> {camOn}</p>

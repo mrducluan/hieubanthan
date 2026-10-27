@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, Lock } from "lucide-react";
 import { docMaNha, tuTuMa } from "@/lib/ma-moi";
 import { MAU_MUC_THE, NHAN_MUC_THE, TEN_LOAI_NHA_THE, TEN_PHONG_THE, tenNhaThe } from "@/lib/the-chia-se";
+import { QuaNguoiNhan } from "@/components/sao/QuaNguoiNhan";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/khung/Logo";
 import { GhiTu } from "@/components/khung/GhiMoThe";
@@ -61,6 +62,7 @@ export default async function Page({ params }: Props) {
       <Button asChild size="lg" className="mt-4">
         <Link href={`/phong-thuy?tu=${tu}#nha-cua-ban`} data-testid="the-nha-moi">Đọc nhà của bạn <ArrowRight aria-hidden /></Link>
       </Button>
+      <QuaNguoiNhan className="mt-3" />
       <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-fg-faint">
         <Lock className="size-3.5" aria-hidden /> Thẻ không có địa chỉ, toạ độ hay ngày sinh của người gửi.
       </p>

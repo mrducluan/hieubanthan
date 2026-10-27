@@ -12,7 +12,7 @@ export function NhacHomNay({ homNay }: { homNay: string }) {
   const ds = nhacSapToi(useNhacViec(), homNay);
   if (!ds.length) return null;
   return (
-    <section aria-labelledby="nhac-hom-nay" className="glass space-y-2 rounded-2xl p-5" data-testid="nhac-hom-nay">
+    <section aria-labelledby="nhac-hom-nay" className="scroll-mt-24 glass space-y-2 rounded-2xl p-5" data-testid="nhac-hom-nay">
       <h2 id="nhac-hom-nay" className="flex items-center gap-2 text-xl"><Bell className="size-5 text-gold" aria-hidden /> Mốc bạn đã đánh dấu</h2>
       <ul className="space-y-1.5 text-sm">
         {ds.map((n) => (

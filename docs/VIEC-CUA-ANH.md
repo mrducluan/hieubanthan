@@ -3,7 +3,43 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-10-27.
+> Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
+
+## Bảng tổng việc còn lại (rà 27/10/2026)
+
+Đã bật tài khoản + thu tiền (hội viên, nạp Sao, hỏi chuyên gia) → mấy việc trước đây "để sau" giờ thành **gấp**. Chi tiết
+từng việc ở mục ghi trong ngoặc.
+
+**P0 — làm ngay (đang thu tiền thật):**
+1. **Vercel Pro** cho dự án web — gói Hobby cấm dùng thương mại (WP12, mục WP-GĐ2).
+2. **Sao lưu Supabase**: lên Supabase Pro (sao lưu tự động hằng ngày) — ví Sao / đơn nạp / hội viên không có bản nào khác (mục D2). Trong lúc chờ: đặt 2 secret cho workflow sao lưu mã hoá hằng tuần (mục 4q, 5 phút).
+3. **Danh nghĩa vận hành + MST + địa chỉ** (hộ kinh doanh / công ty) → đặt `THONG_TIN_MA_SO`, `THONG_TIN_DIA_CHI` (mục E, TT-a).
+4. **Hộp thư `contact@hieuban.com`** — đang in trên chân trang và trang pháp lý (mục E).
+5. **Luật sư rà**: 3 trang pháp lý, điều khoản Sao + hoàn tiền + hội viên, chuyển dữ liệu ra nước ngoài, `docs/ho-so-dlcn/`
+   (mục E, TT-d, WP6, WP11, `docs/PHAP-LY-2026.md`).
+6. **Bảo mật đăng nhập**: Supabase Auth → Rate Limits + CAPTCHA (SEC-2 bước 7) · Security Advisor (SEC-2 bước 3) ·
+   xác thực 2 bước CMS rồi `CMS_BAT_BUOC_MFA=1` (SEC-2 bước 4) · GitHub bật Dependabot/secret scanning (SEC-2 bước 6).
+
+**P1 — vận hành và đo (trong tuần):**
+7. UptimeRobot 2 monitor + kiểm Render Singapore Starter, `/health` có `"khoa_engine": true` (mục D2, 4b, 5b).
+8. Sentry DSN cho web + engine (mục D2) — đang thu tiền thì cần thấy lỗi ngay.
+9. `/quan-tri/hoc` → bấm **"Dựng kho vectơ"** một lần (mục LG-ĐS).
+10. Search Console: gửi `sitemap-ngay.xml`, `sitemap-cum.xml`; yêu cầu lập chỉ mục trang Tết 2027; Bing Webmaster (mục 4h–4k).
+11. Số liệu cho quản trị: Search Console + GA4 (Q7) · khoá OpenRouter cho bộ 55 câu (D1).
+12. Vercel → Spend Management đặt trần chi tiêu (SEC-2 bước 9).
+
+**P2 — nội dung và chuyên môn (anh là chủ biên):**
+13. CMS: đọc + xuất bản 3 bài khởi tạo (4n) · nhập + chuẩn hoá bài NotFair rồi xuất bản (4e, BLOG7).
+14. Hồ sơ chuyên gia M1–M3 (tiểu sử, ảnh, link mạng xã hội → `MXH_*`, `CHUYEN_GIA_SAME_AS_DUC_LUAN`) · duyệt kho theo cụm M4, góc nhìn M6.
+15. Người rành Tử Bình duyệt bảng hỷ/kỵ Bát tự (`docs/DUYET-HY-KY-BAT-TU.md`).
+16. Thử chiến dịch mời đầu tiên ở `/quan-tri/cai-dat` (Q10).
+
+**P3 — quyết định chờ anh:** mở `Google-Extended` hay giữ chặn · dịch vụ tạo ảnh AI cho trang trụ · Mệnh vô chính diệu
+gặp Tuần/Triệt (mục LG-ĐS) · ý tưởng mục 7 `docs/DANH-GIA-KIEN-TRUC-PHONG-THUY-DRIVE.md` · VNPay/OnePay nhận thẻ quốc tế (TT-c) ·
+ủng hộ crypto (TT-f) · tuyển 3–5 chuyên gia mảng (M5).
+
+**P4 — thử trên máy thật (mỗi việc 5 phút):** la bàn đo hướng (D3) · thông báo đẩy Android / iPhone + cài app (WP4, WP5,
+WP9, WP10) · lật lá bài đầu ngày trên iPhone (Hôm nay) · luồng mua hội viên + nâng hạng bằng thẻ thật số tiền nhỏ rồi hoàn.
 
 ## Anh đã chốt (2026-10-08)
 
@@ -25,12 +61,12 @@
    Báo cáo đầy đủ + việc còn mở: `docs/BAO-MAT.md`.
 4c. [ ] **Khi web vượt ~100.000 người dùng/tháng** (xem GA4): Vercel → Environment Variables → thêm
    `NEXT_PUBLIC_HOI_DONG_Y_COOKIE=1` → Redeploy — hộp hỏi đồng ý cookie hiện lại khi mở trang (quyết định 2026-10-09).
-4g. [ ] **Tầng HỌC thần số (TS-V3, 2026-10-20):** sau khi merge PR, Supabase → SQL Editor → chạy
+4g. [x] **Tầng HỌC thần số (TS-V3, 2026-10-20):** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* sau khi merge PR, Supabase → SQL Editor → chạy
    `supabase/migrations/0016_thanso_hoc.sql` (rollback: `0016_thanso_hoc.down.sql`). Chưa chạy thì góp ý "đúng / chưa
    đúng" vẫn hiện nhưng không lưu; xem kết quả ở `/quan-tri/hoc`. Cron xoá dữ liệu hết hạn (`/api/cron/don-du-lieu-hoc`,
    3:41 sáng UTC) dùng chung `CRON_SECRET` với cron đối soát — đã có thì không cần làm gì. Đọc kỹ quy tắc riêng tư mới ở CLAUDE.md (mục Quy tắc
    code) — nhờ luật sư rà cùng chính sách quyền riêng tư (mục E).
-4h. [ ] **Kiểm chứng "Xem lá số 2 người" (HN-2N, 2026-10-22):** sau khi merge PR, Supabase → SQL Editor → chạy
+4h. [x] **Kiểm chứng "Xem lá số 2 người" (HN-2N, 2026-10-22):** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* sau khi merge PR, Supabase → SQL Editor → chạy
    `supabase/migrations/0021_kiem_chung_hai_nguoi.sql` (SAU 0017; rollback: `0021_kiem_chung_hai_nguoi.down.sql` — xoá
    phiếu loại hai người). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0021 = true). Chưa chạy thì nút "Đúng với
    mình / Chưa đúng" dưới hộp điểm 2 người vẫn hiện, PostHog vẫn đếm, nhưng máy chủ không lưu phiếu (Sentry báo một lần
@@ -89,25 +125,25 @@
    của anh, bấm thử các link nguồn ngoài, rồi **Xuất bản**. Nếu bài có đoạn "[Ảnh chưa nhập…" (kho ảnh lỗi) → tải ảnh trong
    `cms/src/bai-khoi-tao/anh/` hoặc dùng phiếu nhập em gửi. **Giao diện website → Lối đi tiếp cuối trang**: xem/sửa thẻ bù
    theo mảng; để "Tự xếp theo lượt bấm" TẮT tới khi `/quan-tri/tang-truong` có ≥ 3 thẻ đủ mẫu trong cùng nhóm.
-4m. [ ] **Sao viral SAO-V (2026-10-25) — chạy migration 0025** (sau 0024): Supabase → SQL Editor → dán toàn bộ
+4m. [x] **Sao viral SAO-V (2026-10-25) — chạy migration 0025** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (sau 0024): Supabase → SQL Editor → dán toàn bộ
    `supabase/migrations/0025_sao_viral.sql` → Run (rollback: `0025_sao_viral.down.sql`). Kiểm bằng
    `supabase/kiem_thu/da_chay_chua.sql` (dòng 0025 = true). Sửa luôn lỗi số dư: Sao mua không bao giờ hết hạn, tiêu Sao
    luôn trừ Sao tặng trước. Sau đó vào `/quan-tri/cai-dat` bật từng phần khi muốn chạy: **Hoa hồng nạp Sao**
    (`sao.hoa_hong.bat`, mặc định 20% đơn nạp đầu), **Chuỗi ngày ghé**, **Tặng một chương**, và **Thu Sao riêng:
    Bản đồ con số** (chạy thử thu Sao một mảng trước). Tất cả mặc định TẮT. Cần tài khoản (Supabase Auth) đã bật trên web
    thì các phần này mới chạy.
-4n. [ ] **Chống gian lận SAO-GL (2026-10-26) — chạy migration 0026** (SAU 0025): Supabase → SQL Editor → dán toàn bộ
+4n. [x] **Chống gian lận SAO-GL (2026-10-26) — chạy migration 0026** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (SAU 0025): Supabase → SQL Editor → dán toàn bộ
    `supabase/migrations/0026_chong_gian_lan.sql` → Run (rollback: `0026_chong_gian_lan.down.sql`). Kiểm bằng
    `supabase/kiem_thu/da_chay_chua.sql` (dòng 0026 = true). **Chạy 0026 TRƯỚC khi bật hoa hồng.** Mặc định bật: một máy
    nhận lời mời cho ≥ 3 tài khoản / 30 ngày, hoặc người mời và người được mời cùng máy → người mời không được thưởng /
    hoa hồng, ghi cờ ở `/quan-tri/doanh-thu` → "Cờ gian lận lời mời". Gia đình dùng chung một máy → tăng ngưỡng ở
    `/quan-tri/cai-dat`. Cần `SAO_KHOA_SECRET` (đã có cho SAO-2) để tính mã băm thiết bị.
-4o. [ ] **Nạp đầu SAO-ND (2026-10-26) — chạy migration 0027** (SAU 0026): Supabase → SQL Editor → dán toàn bộ
+4o. [x] **Nạp đầu SAO-ND (2026-10-26) — chạy migration 0027** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (SAU 0026): Supabase → SQL Editor → dán toàn bộ
    `supabase/migrations/0027_nap_dau.sql` → Run (rollback: `0027_nap_dau.down.sql`). Kiểm bằng `da_chay_chua.sql` (dòng
    0027 = true). Rồi bật ở `/quan-tri/cai-dat` nhóm "Nạp Sao": gói Khởi đầu 19.000 ₫ / 19 Sao — cùng 10 Sao chào mừng vừa đủ 1 báo cáo 29 Sao (`sao.goi_khoi_dau.bat`; đổi giá báo cáo thì xem lại cỡ gói này)
    và tặng Sao lần nạp đầu (`sao.nap_dau.bat`, mặc định 20%). **Thứ tự 0025 → 0026 → 0027 bắt buộc, và KHÔNG chạy lại
    0025 sau khi đã chạy 0027** (0025 đặt lại danh sách loại Sao chưa có `nap_dau` → lỗi ràng buộc khi đã có dòng tặng).
-4p. [ ] **Hội viên năm · Hỏi chuyên gia · chuỗi/huy hiệu (2026-10-26) — chạy migration 0028 → 0029 → 0030** (SAU 0027,
+4p. [x] **Hội viên năm · Hỏi chuyên gia · chuỗi/huy hiệu (2026-10-26) — chạy migration 0028 → 0029 → 0030** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (SAU 0027,
    đúng thứ tự này; rollback ngược lại 0030 → 0029 → 0028). Supabase → SQL Editor → dán từng tệp
    `supabase/migrations/0028_hoi_vien.sql`, `0029_chuyen_gia.sql`, `0030_chuoi_huy_hieu.sql` → Run. Kiểm bằng
    `da_chay_chua.sql` (ba dòng 0028, 0029, 0030 = true) — hoặc nhìn thẻ **"Migration Supabase"** ở `/quan-tri` (báo "Đủ"
@@ -123,7 +159,7 @@
    bảng `hoi_vien`, `cau_hoi_chuyen_gia`, `don_nap` trước khi rollback trên production.
 4l. [ ] **Bảo mật SEC-2 (2026-10-23, `docs/BAO-MAT.md` mục SEC-2) — làm theo thứ tự:**
    1. [x] Render có `ENGINE_API_KEY` — anh xác nhận 2026-10-23.
-   2. [ ] **Chạy migration** (sau khi merge PR SEC-2): Supabase → **SQL Editor** → New query → dán toàn bộ nội dung
+   2. [x] **Chạy migration** (sau khi merge PR SEC-2) *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)*: Supabase → **SQL Editor** → New query → dán toàn bộ nội dung
       `supabase/migrations/0023_sec2_rls_quyen.sql` → **Run**; làm tiếp với `0024_sec2_hoan_sao_hoc.sql`. Kiểm: dán
       `supabase/kiem_thu/da_chay_chua.sql` → Run → hai dòng 0023, 0024 phải là `true`.
    3. [ ] **Security Advisor (3 phút)** — "trình quét lỗi cấu hình" có sẵn của Supabase:
@@ -177,13 +213,13 @@
 6. [ ] **Pháp lý còn lại** → mục E (tên đơn vị + email đã có trong code; còn MST, địa chỉ, luật sư)
 7. [ ] Các việc còn lại → mục D (em đã ghi rõ việc nào em làm, việc nào cần anh)
 8. [ ] **Lộ trình đến Gate 2** → mục L (đọc số funnel, chạy 55 câu, bật AI, pháp lý trước khi thu tiền)
-9. [ ] **Trang quản trị `/quan-tri`** → mục Q (Q1–Q4 xong 2026-10-09; còn **Q5 token GitHub** cho Kho tri thức)
+9. [x] **Trang quản trị `/quan-tri`** → mục Q *(Q5 đã xong 2026-10-10; còn Q7, Q10 ở mục Q)* (Q1–Q4 xong 2026-10-09; còn **Q5 token GitHub** cho Kho tri thức)
 10. [ ] **GitHub ruleset** (để em tự merge PR khi CI xanh): GitHub → repo → Settings → Rules → Rulesets → ruleset của
    `main` → bỏ "Require approvals" hoặc thêm anh/ứng dụng Claude vào **Bypass list** → Save.
 11. [ ] **Render engine báo "Deploy failed — invalid local: … Dockerfile: not a directory"** → làm theo
    `docs/TRIEN-KHAI.md` mục **1b**: Docker Build Context Directory = `engine` (thư mục), Dockerfile Path =
    `engine/Dockerfile`, Instance Type **Starter**, Region **Singapore** (sai vùng thì tạo lại bằng Blueprint).
-12. [ ] **NotFair:** bài slug có chữ "đ" bị 404 — **em đã sửa** (PR #78). Sau khi merge + deploy, mở lại bài
+12. [x] **NotFair:** bài slug có chữ "đ" bị 404 *(đóng 27/10: BLOG-7 đổi mọi slug sang không dấu, đường dẫn cũ có dấu 308 về bài mới)* — **em đã sửa** (PR #78). Sau khi merge + deploy, mở lại bài
    `/blog/xem-than-so-hoc-numerology-cach-tinh-va-đoc-ho-so-tinh-tao` và bấm "Verify/Publish" lại trong NotFair.
 
 ---
@@ -488,7 +524,7 @@ lần trước) → chọn vai trò → **Cấp / đổi vai trò**.
 
 ### QT-2 → QT-4 (2026-10-10)
 
-- [ ] **Q6. Chạy migration `0011_quan_tri_2.sql`** (bắt buộc cho Cài đặt, Người dùng & Sao, Hỏi đáp, chuỗi tuần ở
+- [x] **Q6. Chạy migration `0011_quan_tri_2.sql`** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (bắt buộc cho Cài đặt, Người dùng & Sao, Hỏi đáp, chuỗi tuần ở
   Tổng quan): Supabase → SQL Editor → New query → dán toàn bộ file → Run → phải báo *Success*. Chỉ thêm hàm, không
   thêm/xoá bảng, không đụng dữ liệu. Gỡ: chạy `0011_quan_tri_2.down.sql`.
 - [ ] **Q7. Search Console + GA4 trong `/quan-tri/tang-truong`** (tuỳ chọn, 10 phút):
@@ -657,7 +693,7 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
 
 Code đã làm (2026-10-12, hình thức cá nhân): `/nap-sao`, payOS, webhook, đối soát, migration 0012, trang `/ung-ho`.
 
-- [ ] TT-0. Chạy migration **`0012_thanh_toan.sql`** (sau khi bật tài khoản — mục F).
+- [x] TT-0. Chạy migration **`0012_thanh_toan.sql`** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (sau khi bật tài khoản — mục F).
 - [ ] TT-b. Đăng ký **payOS** bằng tài khoản ngân hàng của anh → Vercel đặt `PAYOS_CLIENT_ID`, `PAYOS_API_KEY`,
   `PAYOS_CHECKSUM_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `CRON_SECRET` → Redeploy → payOS khai Webhook URL
   `https://hieuban.com/api/thanh-toan/webhook/payos`. Không dán khoá vào chat.
@@ -699,8 +735,29 @@ Ví Sao, link mời có thưởng chỉ chạy khi đã bật tài khoản.
 |---|---|---|
 | `OPENROUTER_API_KEY` | Khoá openrouter.ai | **Sau** khi chạy bộ 55 câu (mục D). Giới hạn lượt đã có (RL-1) |
 | `LLM_LUOT_NGUOI_GIO`, `LLM_LUOT_TONG_GIO`, `LLM_LUOT_TONG_NGAY` | Mặc định 40 / 400 / 3000 | Hạn mức lượt AI: mỗi người mỗi giờ / tổng mỗi giờ / tổng mỗi ngày. Hết lượt thì người dùng vẫn nhận câu trả lời bản mẫu. Chỉ đặt khi muốn đổi |
-| `NHAT_KY_HOI` + `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `1` + khoá Supabase | Muốn ghi câu hỏi đã lọc (không user_id/tên/ngày sinh) cho vòng tự cải thiện |
+| `NHAT_KY_HOI` + `SUPABASE_URL`, `SUPABASE_ANON_KEY` + **`NHAT_KY_KHOA`** | `1` + khoá Supabase + chuỗi ≥ 32 ký tự (mục 4q) | Muốn ghi câu hỏi đã lọc (không user_id/tên/ngày sinh) cho vòng tự cải thiện. Từ 0031 thiếu `NHAT_KY_KHOA` thì engine không ghi |
 | `SENTRY_DSN` | Tuỳ chọn | Báo lỗi engine |
+
+### 4q. Nhật ký hỏi đáp bằng khoá riêng (migration 0031) + sao lưu DB hằng tuần (2026-10-27)
+
+- [ ] **Chạy migration 0031** (`supabase/migrations/0031_nhat_ky_khoa_rieng.sql`) trong SQL Editor — bỏ quyền ghi nhật ký
+  của khoá anon công khai (người ngoài không ghi rác được nữa). Rollback: tệp `.down.sql` cùng tên.
+- [ ] Tạo một chuỗi ngẫu nhiên: `openssl rand -hex 32` (hoặc trình tạo mật khẩu, ≥ 32 ký tự). Trong SQL Editor chạy
+  `select dat_khoa_nhat_ky('<chuỗi đó>');` → trả `da_dat` (DB chỉ giữ mã băm).
+- [ ] Render (engine) → Environment: thêm **`NHAT_KY_KHOA`** = đúng chuỗi đó → Save (engine tự khởi động lại). Chỉ cần
+  khi bật `NHAT_KY_HOI=1`. Kiểm: hỏi một câu trên site → Table Editor `thanso_hoi_nhat_ky` có dòng mới.
+- [ ] **Sao lưu DB hằng tuần** (workflow `sao-luu-db`, Chủ nhật 03:17): GitHub → repo → Settings → Secrets and variables →
+  Actions → New repository secret:
+  - `SUPABASE_DB_URL` = Supabase → Connect → **Session pooler** (cổng 5432, dạng
+    `postgresql://postgres.<ref>:<mật khẩu DB>@aws-0-<vùng>.pooler.supabase.com:5432/postgres`) — không dùng "Direct
+    connection" (máy GitHub không có IPv6).
+  - `BACKUP_PASSPHRASE` = mật khẩu ≥ 20 ký tự, **cất thêm ở nơi khác** (trình quản lý mật khẩu) — mất là không mở được
+    bản sao lưu.
+  - Actions → `sao-luu-db` → **Run workflow** để thử ngay → bản `hbt-db-<ngày>.tar.gpg` ở mục Artifacts (giữ 35 ngày).
+    Repo công khai nên tệp luôn được mã hoá AES-256 trước khi rời máy chạy.
+- Khôi phục (khi cần, vào dự án Supabase MỚI hoặc DB thử, không bao giờ vào DB đang chạy): tải tệp → máy có `psql` +
+  `gpg` → `BACKUP_PASSPHRASE='…' DICH_DB_URL='postgresql://…' supabase/sao-luu/khoi-phuc.sh hbt-db-<ngày>.tar.gpg` →
+  script tự đếm dòng từng bảng so với lúc sao lưu. Đây là bản THỨ HAI, không thay mục bật sao lưu / PITR của Supabase.
 
 ## D. Các việc còn lại — em làm gì, anh cần làm gì
 
@@ -729,8 +786,9 @@ Ví Sao, link mời có thưởng chỉ chạy khi đã bật tài khoản.
   `docs/TRIEN-KHAI.md`.
 - [ ] **Sentry (miễn phí, tuỳ chọn):** sentry.io → tạo 2 project (Next.js, FastAPI) → chép DSN → Vercel
   `NEXT_PUBLIC_SENTRY_DSN`, Render `SENTRY_DSN`. Code đã tắt gửi body/cookie/IP.
-- [ ] ~~Sao lưu Supabase hằng tuần~~ → **chưa cần** vì chưa bật tài khoản (Supabase hiện chỉ giữ kho tri thức, có bản
-  gốc trong git). Bật tài khoản thì lên Supabase Pro (có sao lưu tự động).
+- [ ] **Sao lưu Supabase — CẦN NGAY (mở lại 27/10/2026):** tài khoản, ví Sao, đơn nạp, hội viên giờ chỉ nằm trong
+  Supabase (không có bản gốc trong git). Gói Free không có bản sao lưu tải về được → lên **Supabase Pro** (sao lưu tự động
+  hằng ngày, giữ 7 ngày). Trước khi lên Pro: Database → Backups (nếu có) hoặc chạy `pg_dump` hằng tuần.
 
 ### D3. Việc cần người thật
 - [ ] **Thử la bàn đo hướng nhà trên điện thoại thật** (trang Phong thuỷ → "Đo hướng nhà"): một iPhone + một Android,
@@ -803,10 +861,10 @@ luật sư rà 3 trang pháp lý, hồ sơ chuyển dữ liệu ra nước ngoà
 - [ ] Sau khi PR TV-V2 merge + Render deploy engine: mở `/tu-vi`, thử 4 khối mới (Đường bay tứ hoá, 3 tháng tới, Định giờ sinh, Xem lá số 2 người — nay có điểm tham khảo hợp – khắc) với lá số của anh.
 - [x] Quyết: lưu "Không biết giờ" vào tài khoản — **đã chốt: lưu** (migration 0015 nới `do_tin_gio` nhận `unknown`).
 - [x] Quyết: định giờ hiện khoảng giờ theo **giờ đồng hồ** nơi sinh (kèm dòng "theo giờ lịch" khi lệch) — **đã chốt**; chế độ 12 canh: Tý = 00:00–00:59 ngày đã nhập, nhập 23:xx thì thêm ứng viên "Giờ Tý muộn" — **đã chốt**.
-- [ ] Chạy migration `supabase/migrations/0015_do_tin_gio_unknown.sql` trên Supabase → SQL Editor (sau 0007). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0015). Chưa chạy thì web vẫn lưu được, chỉ là "Không biết giờ" lưu như chưa có giờ.
+- [x] Chạy migration `supabase/migrations/0015_do_tin_gio_unknown.sql` *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* trên Supabase → SQL Editor (sau 0007). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql` (dòng 0015). Chưa chạy thì web vẫn lưu được, chỉ là "Không biết giờ" lưu như chưa có giờ.
 
 ## LG-ĐS. Luận giải Tử vi đời sống + tầng HỌC Tử vi (2026-10-21, `docs/LUAN-GIAI-DOI-SONG.md`)
-- [ ] Supabase → Database → Extensions → bật **vector** (schema `extensions`), rồi chạy `supabase/migrations/0017_tuvi_hoc.sql` (sau 0015, 0016). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`.
+- [x] Supabase → Database → Extensions → bật **vector** (schema `extensions`), rồi chạy `supabase/migrations/0017_tuvi_hoc.sql` *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (sau 0015, 0016). Kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`.
 - [ ] Vercel (web): đã có `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SUPABASE_*`, `SAO_KHOA_SECRET` (hoặc `LOI_MOI_SECRET`, ≥ 16 ký tự) — thiếu thì kiểm chứng / lưu bài / kho vectơ tự tắt, trang không lỗi. Tuỳ chọn `Y_DINH_NGUONG` (mặc định 0,82).
 - [ ] Sau khi chạy 0017: `/quan-tri/hoc` → bấm **"Dựng kho vectơ"** một lần (làm lại khi kho câu hỏi đổi).
 - [ ] Cập nhật Chính sách quyền riêng tư: bài luận lưu (12 tháng, chỉ khi bấm Lưu/bật Tự lưu), phiếu "Đúng với mình" (24 tháng, khoá ẩn danh), câu hỏi đã lọc lưu khi người dùng chọn chủ đề / xác nhận "đúng ý tôi hỏi".
@@ -819,10 +877,10 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] Sau khi merge + Render deploy engine (ENGINE_VERSION 0.1.5): mở `/tu-vi` và `/bat-tu` với lá số của anh — đọc
   "Xem lá số 2 người" (điểm tham khảo), "3 tháng tới", luận giải toàn bộ (chương mới "Vận hạn & điều nên tránh"),
   khối "Điều ngày sinh còn kể về bạn" cuối trang; thử tạo thẻ "5 mảnh ghép làm nên tôi" + trò đoán số trên điện thoại.
-- [ ] Quyết: thêm loại kiểm chứng `hai_nguoi` (migration nhỏ sau 0017) để bật nút "Đúng với mình" cho phần 2 người.
+- [x] Quyết: thêm loại kiểm chứng `hai_nguoi` *(đã làm: HN-2N-KC, migration 0021)* (migration nhỏ sau 0017) để bật nút "Đúng với mình" cho phần 2 người.
 - [x] Quyết: Tử vi "3 tháng tới" — Kỵ tháng rơi THẲNG vào Mệnh / Tài Bạch / Quan Lộc → **có gắn "Cần thận trọng"**
   (anh chốt 2026-10-22, đã làm: luật `ky_nhap_cung_chinh`).
-- [ ] Quyết 4 ý tưởng nạp Sao cần migration (`docs/MUC-TIEU-TANG-TRUONG.md`): tặng bạn một chương đã mở · thưởng Sao
+- [x] Quyết 4 ý tưởng nạp Sao cần migration *(đã làm: SAO-V, migration 0025 — tặng chương, hoa hồng, chuỗi ngày, thu Sao theo mảng)* (`docs/MUC-TIEU-TANG-TRUONG.md`): tặng bạn một chương đã mở · thưởng Sao
   chuỗi ngày ghé · thưởng mời gắn lần nạp đầu · gói Sao theo dịp.
 - [x] Quyết (khi rảnh): Bát tự — "cách nào đúng với mình" → đã làm theo đề xuất của em (2026-10-22): khối "Cách nào đúng
   với bạn?" trên `/bat-tu` hỏi lại những năm đã qua mà hai cách đọc khác nhau (`docs/LUAN-GIAI-DOI-SONG.md` mục 9).
@@ -835,7 +893,7 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 
 ## PT-KD-ĐS. Nâng cấp Phong thuỷ + Kinh Dịch (2026-10-21, `docs/NANG-CAP-PHONG-THUY-KINH-DICH.md`)
 
-- [ ] **Đọc mục 3 (đề xuất kiến trúc) và duyệt từng ý**: khuôn bài đọc chung mọi mảng · "hồ sơ nhà" lưu trên máy · chip ý định dùng
+- [x] **Đọc mục 3 (đề xuất kiến trúc) và duyệt từng ý** *(đã duyệt + làm: KC-1…KC-5)*: khuôn bài đọc chung mọi mảng · "hồ sơ nhà" lưu trên máy · chip ý định dùng
   chung · nhắc ứng kỳ opt-in · tín hiệu ngầm thay bình chọn. Em chưa làm mục nào trong 5 mục này.
 - [ ] **Bảng lưu nguyệt trong tài liệu Drive lệch quy tắc chuẩn** (2024 Thìn ghi tháng Dần nhập trung 8; sách Thẩm thị: 5). Em dùng quy
   tắc chuẩn; nếu anh có nguồn khác cho bảng đó, báo em để thêm công tắc phái.
@@ -844,11 +902,11 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 
 ## KC. Hồ sơ nhà · nhắc việc · CTA (2026-10-21, đợt 2 của PT-KD-ĐS)
 
-- [ ] **Chạy migration 0018** `supabase/migrations/0018_ho_so_nha_nhac_viec.sql` (rollback `.down.sql`): bảng `ho_so_nha` (lưu nhà
+- [x] **Chạy migration 0018** `supabase/migrations/0018_ho_so_nha_nhac_viec.sql` *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (rollback `.down.sql`): bảng `ho_so_nha` (lưu nhà
   vào tài khoản) + `nhac_viec` (mốc nhắc trong tài khoản). Chưa chạy thì hai nút "Lưu nhà vào tài khoản" / "cả trên tài khoản" báo
   "máy chủ chưa bật" — mọi thứ khác vẫn chạy trên máy người dùng.
 - [x] **Web Push**: anh duyệt GĐ1 (2026-10-21) — em đã làm (PR #112), việc của anh ở mục **WP** cuối file.
-- [ ] **Bật thu Sao theo mảng**: đọc `docs/Y-TUONG-VIRAL-VA-NAP-SAO.md` mục C.1 — hiện công tắc `luan_giai.thu_sao` là chung; anh
+- [x] **Bật thu Sao theo mảng** *(đã làm: SAO-V — công tắc `luan_giai.thu_sao.{thanso,tuvi,battu}` ở /quan-tri/cai-dat)*: đọc `docs/Y-TUONG-VIRAL-VA-NAP-SAO.md` mục C.1 — hiện công tắc `luan_giai.thu_sao` là chung; anh
   chốt có tách theo mảng (Bản đồ con số + Tử vi trước) không, em làm công tắc ở /quan-tri/cai-dat.
 - [ ] Sau khi merge: mở `/hom-nay` sau khi đã đo hướng nhà ở `/phong-thuy` → thấy thẻ "Tháng này nhà bạn"; cuối mỗi bài đọc có khối
   gợi mở + luận giải + rủ bạn + ủng hộ.
@@ -880,7 +938,7 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
   "năm nên chủ động hơn"; dưới mỗi hộp có nút "Đúng với mình / Chưa đúng" (Phong thuỷ, Kinh Dịch nay cũng có). Số "x%" chỉ
   hiện khi migration 0017 đã chạy và mã đủ 30 phiếu.
 ## Q1–Q7 · đồ thị theo ý định · lưu ý lửa điện (2026-10-22, `docs/DANH-GIA-KIEN-TRUC-PHONG-THUY-DRIVE.md` mục 6)
-- [ ] **Chạy migration `0022_kiem_chung_sau_de_xuat_luat.sql`** (sau 0017 và 0021; rollback `.down.sql`). Kiểm bằng
+- [x] **Chạy migration `0022_kiem_chung_sau_de_xuat_luat.sql`** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (sau 0017 và 0021; rollback `.down.sql`). Kiểm bằng
   `supabase/kiem_thu/da_chay_chua.sql` (dòng 0022 = true). Chưa chạy: Hôm nay vẫn hỏi lại sau 30 ngày, phiếu chỉ lên PostHog;
   `/quan-tri/hoc` khối "Đề xuất luật" báo chưa đọc được.
 - [ ] **Deploy engine Render trước web** (route mới `/v1/phongthuy/huong-ban-do`, `/v1/phongthuy/do-thi/{ý định}`, BoCuc 0.2 `mat_bang`,
