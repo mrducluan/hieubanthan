@@ -84,6 +84,11 @@
      báo em dịch vụ + đặt khoá vào env thì em làm; hiện mọi trang đã có ảnh tóm tắt vẽ bằng code (có QR).
    - **Quyết định còn chờ** (audit SEO-M): mở bot `Google-Extended` (Gemini app trích được site, đổi lại cho phép dùng
      huấn luyện — lệch BM-2) hay giữ chặn.
+4n. [ ] **Bài khởi tạo + Lối đi tiếp (BLOG-6 / CTA-2b, 2026-10-26):** sau khi merge, CMS deploy tự chạy migration → vào CMS
+   → **Bài viết**: 3 bài nháp "Gửi duyệt" (gieo quẻ 3 đồng xu, Bát tự là gì, hướng nhà hợp tuổi). Đọc kỹ, thêm trải nghiệm thật
+   của anh, bấm thử các link nguồn ngoài, rồi **Xuất bản**. Nếu bài có đoạn "[Ảnh chưa nhập…" (kho ảnh lỗi) → tải ảnh trong
+   `cms/src/bai-khoi-tao/anh/` hoặc dùng phiếu nhập em gửi. **Giao diện website → Lối đi tiếp cuối trang**: xem/sửa thẻ bù
+   theo mảng; để "Tự xếp theo lượt bấm" TẮT tới khi `/quan-tri/tang-truong` có ≥ 3 thẻ đủ mẫu trong cùng nhóm.
 4m. [ ] **Sao viral SAO-V (2026-10-25) — chạy migration 0025** (sau 0024): Supabase → SQL Editor → dán toàn bộ
    `supabase/migrations/0025_sao_viral.sql` → Run (rollback: `0025_sao_viral.down.sql`). Kiểm bằng
    `supabase/kiem_thu/da_chay_chua.sql` (dòng 0025 = true). Sửa luôn lỗi số dư: Sao mua không bao giờ hết hạn, tiêu Sao
@@ -889,4 +894,9 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] **WP11. Luật sư rà** dòng "Mốc nhắc, thiết bị và tuỳ chọn nhận thông báo" + dòng Tiện ích trong Chính sách quyền riêng tư
   (hiệu lực 22/10/2026). Nếu đã sửa trang này trong CMS thì thêm ở CMS (CMS thắng code).
 - [ ] **WP12. Quyết Vercel Pro** trước khi bật thu Sao / muốn chọn giờ nhận thông báo (Hobby: 2 cron, cấm thương mại).
-
+- [ ] BLOG7. (2026-10-26) Sau khi PR "BLOG-7 chuẩn hoá bài NotFair" merge + CMS deploy (migration tự chạy): vào CMS → Bài viết → mở khung
+  "Bài trao đổi NotFair" → nếu còn bài chưa nhập bấm "Nhập tất cả". Khung **"Chuẩn hoá SEO / GEO bài NotFair"** (đầu danh sách
+  Bài viết, luôn hiện) → bấm **Audit** để xem trước sẽ sửa gì (chưa ghi), rồi **"Chuẩn hoá SEO tất cả"** (chạy lại an toàn).
+  Mỗi bài thành bản nháp "Gửi duyệt": đọc "Ghi chú của Chủ biên" (danh sách thay đổi + điểm trước → sau), xem ảnh bìa nền sáng,
+  sửa chữ nếu cần, bấm **Xuất bản**. Đường dẫn có dấu cũ tự chuyển 308 sang đường dẫn không dấu. Sau khi xuất bản hết: Search Console →
+  gửi lại `sitemap.xml`. Nếu NotFair (đối tác) phản hồi link kiểm tra bị chuyển hướng → báo em, em đặt lại slug gốc cho bài đó.

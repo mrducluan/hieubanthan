@@ -1,5 +1,6 @@
 // EEAT-1 — hồ sơ chuyên gia: ai đứng sau nội dung, làm vai trò gì, đã viết / thẩm định những bài nào, quy trình ra sao.
 // Schema ProfilePage + Person (Google: trang hồ sơ tác giả là tín hiệu "Who" của E-E-A-T). Chỉ ghi điều đã công bố.
+import { lopCot } from "@/lib/luoi";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -94,7 +95,7 @@ export default async function Page({ params }: Props) {
       {the.length > 0 && (
         <section className="mt-10" aria-labelledby="dong-gop">
           <h2 id="dong-gop" className="text-2xl">Đóng góp trên Hiểu Bản Thân</h2>
-          <dl className="mt-4 grid gap-3 sm:grid-cols-3">
+          <dl className={`mt-4 grid gap-3 ${lopCot(the.length)}`}>
             {the.map((x) => (
               <div key={x.nhan} className="glass rounded-2xl p-4">
                 <dt className="text-xs text-fg-faint">{x.nhan}</dt>

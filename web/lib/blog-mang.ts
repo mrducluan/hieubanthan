@@ -83,7 +83,7 @@ export const THONG_TIN_MANG: Record<MangBlog, ThongTinMang> = {
     loi: "Đo hướng bằng điện thoại, xem 4 hướng tốt theo tuổi, khảo sát bố cục từng phòng — hình thế trước, lý khí sau.",
     nut: "Xem nhà của tôi", ngan: "Đo hướng, 4 hướng tốt theo tuổi, khảo sát từng phòng.",
     diem: ["La bàn sống: tô 8 cung hợp tuổi bạn", "Sơ đồ nhà 3×3, việc nên xử lý trước", "Tháng này nhà bạn, theo tiết khí"],
-    cum: [], them: [{ ten: "Tuổi nào hợp hướng nào", duong: "/phong-thuy/huong-hop-tuoi" }, { ten: "Hướng cần tránh năm nay", duong: "/phong-thuy/huong-xau-nam" },
+    cum: ["dau-hieu"], them: [{ ten: "Tuổi nào hợp hướng nào", duong: "/phong-thuy/huong-hop-tuoi" }, { ten: "Hướng cần tránh năm nay", duong: "/phong-thuy/huong-xau-nam" },
       { ten: "Xem tuổi làm nhà", duong: "/xem-tuoi-lam-nha" }],
   },
   hop_doi: {

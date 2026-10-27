@@ -48,15 +48,17 @@ export function MocDocXong({ moDun, them, giayToiThieu = 10 }: { moDun: string; 
   return <div ref={ref} aria-hidden className="h-px w-full" data-testid={`doc-xong-${moDun}`} />;
 }
 
-export function CuoiBaiDoc({ moDun, cauHoi, chiaSe, maYDinh, goiMo, khongCta = false }: {
+export function CuoiBaiDoc({ moDun, cauHoi, chiaSe, maYDinh, goiMo, khongCta = false, khongGopY = false }: {
   moDun: string; cauHoi?: string; chiaSe?: ReactNode;
+  /** Trang đã có ô góp ý riêng phía trên (vd /than-so góp ý sau Chân dung) → không hiện ô thứ hai. */
+  khongGopY?: boolean;
   /** KC-3/KC-5: mã ý định (chung hoặc riêng của mảng) / gợi mở sẵn từ bài đọc → khối CTA cuối bài. */
   maYDinh?: string | null; goiMo?: GoiMo | null; khongCta?: boolean;
 }) {
   return (
     <section aria-label="Góp ý bài đọc" className="mt-10 space-y-6">
       <MocDocXong moDun={moDun} />
-      <GopY moDun={moDun} cauHoi={cauHoi} />
+      {!khongGopY && <GopY moDun={moDun} cauHoi={cauHoi} />}
       {chiaSe}
       {/* Hợp nhất CTA-1 + KC-5: (1) KC-3 gợi mở theo ĐÚNG nỗi băn khoăn người dùng vừa hỏi (chỉ khi bài đọc có ý định);
           (2) CTA-1 "Đọc tiếp về bạn" — luận giải nhỏ cá nhân sang mảng khác + Sao + Bản đồ 5 mảng + mời + ủng hộ.

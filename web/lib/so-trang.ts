@@ -72,11 +72,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Thần số học Pythagoras theo họ tên và ngày sinh: 4 con số cốt lõi có cách tính từng bước, dải đời, năm và tháng cá nhân, biểu đồ ngày sinh, hỏi đáp có nguồn.",
     doan: [
       "Nhập họ tên khai sinh và ngày sinh (dương lịch, hoặc âm lịch để hệ thống đổi giúp). Máy tính ra số đường đời, số sứ mệnh, số linh hồn, số nhân cách — mỗi con số hiện rõ từng bước cộng rút gọn, giữ số cái 11, 22, 33.",
-      "Mỗi con số có ba lớp: phần đã tính (kiểm lại được), phần diễn giải từ kho tri thức có ghi nguồn (kèm mặt tối, không chỉ lời hay), và câu hỏi để bạn tự soi. Ngoài bốn số cốt lõi còn có dải đời (đỉnh cao, thử thách), năm và tháng cá nhân, biểu đồ ngày sinh và mũi tên, nợ nghiệp.",
+      "Mỗi con số có ba phần: diễn giải từ kho tri thức có ghi nguồn (kèm mặt tối, không chỉ lời hay), phần kiểm chứng để bạn tích những nét đúng với mình, và cách tính từng bước để tự kiểm lại. Ngoài bốn số cốt lõi còn có dải đời (đỉnh cao, thử thách), năm và tháng cá nhân, biểu đồ ngày sinh và mũi tên, nợ nghiệp.",
       "Hồ sơ lưu trên máy bạn; máy chủ chỉ tính rồi bỏ, không lưu ngày sinh. Đây là nội dung văn hoá để tham khảo, không phải lời tiên đoán.",
     ],
     hoi_dap: [
-      { hoi: "Số đường đời tính thế nào?", dap: "Cộng tất cả chữ số của ngày, tháng, năm sinh rồi rút gọn về một chữ số; nếu gặp 11, 22 hoặc 33 thì giữ nguyên (số cái). Trang kết quả hiện từng bước cộng để bạn tự kiểm." },
+      { hoi: "Số đường đời tính thế nào?", dap: "Có hai cách. Mặc định là rút gọn con số: cộng riêng ngày, tháng, năm cho gọn rồi mới cộng lại. Cách thứ hai là cộng một lượt mọi chữ số của ngày sinh. Cả hai đều giữ nguyên 11, 22, 33 (số cái). Hai cách có khi ra hai số khác nhau; trang kết quả báo rõ và cho bạn chọn, kèm từng bước cộng để tự kiểm." },
       { hoi: "Có cần họ tên đầy đủ không?", dap: "Có, để tính số sứ mệnh, linh hồn và nhân cách theo bảng chữ cái Pythagoras. Nên dùng họ tên khai sinh, có dấu hay không dấu đều được." },
       { hoi: "Ngày sinh âm lịch thì sao?", dap: "Bạn nhập âm lịch, hệ thống đổi sang dương lịch theo âm lịch Việt Nam rồi mới tính." },
       { hoi: "Thần số học có dự đoán tương lai không?", dap: "Không. Con số chỉ gợi một khung để nhìn lại bản thân; mọi diễn giải đều kèm mặt tối và câu hỏi tự soi, không phán số phận." },
@@ -181,7 +181,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   tuNd(ND_DOI_LICH, "Đổi lịch âm dương: ngày âm hôm nay, can chi, tháng nhuận", CHU_DOI_LICH),   // SEO-L5
   { duong: "/ban-than", nhom: "cong_cu", ten: "Hồ sơ bản thân", o: ["seo", "khoi_duoi", "khoi_cuoi"], mac_dinh: {
     tieu_de_seo: "Hồ sơ bản thân",
-    mo_ta_seo: "Hồ sơ bản thân theo thần số học: số đường đời, sứ mệnh, linh hồn, nhân cách — mỗi số ba lớp: đã tính, diễn giải, tự soi.",
+    mo_ta_seo: "Trang của bạn: bốn con số chủ đạo, nhịp ngày – tháng – năm cá nhân, bản đồ con số và lối tắt sang hợp đôi, huyền học.",
   } },
   { duong: "/nap-sao", nhom: "cong_cu", ten: "Nạp Sao", o: O_TRANG_PHU, mac_dinh: {
     tieu_de_seo: "Nạp Sao", h1: "Nạp Sao",
@@ -282,14 +282,14 @@ export const TEP_KB_THEO_LOAI: Record<LoaiTrang, string[]> = {
   thap_than: ["battu_kb.json"], nhat_chu: ["battu_kb.json"], menh_nam: ["battu_kb.json"],
   cap_so: ["thanso_cap_so.json", "thanso_quan_he.json"], nghe: ["thanso_chan_dung.json", "thanso_linh_vuc.json"],
   tinh_yeu: ["thanso_chan_dung.json", "thanso_linh_vuc.json"], nam_ca_nhan: ["thanso_depth.json"], no_nghiep: ["thanso_chi_so_phu.json"],
-  so_kep: ["thanso_chaldean.json"],
+  so_kep: ["thanso_chaldean.json"], dau_hieu: ["phongthuy_kb.json", "phongthuy_do_thi.json"],
 };
 /** Trang mẫu của từng loại (để CMS xem trước chữ KB của cụm). */
 const VI_DU: Record<LoaiTrang, string> = {
   so: "so-1", que: "que-1-can", sao: "sao-tu-vi", cung: "cung-menh", thap_than: "ty-kien", nhat_chu: "nhat-chu-giap",
   cap_so: "so-chu-dao-1-va-1", nghe: "so-1-hop-nghe-gi", tinh_yeu: "so-1-trong-tinh-yeu", nam_ca_nhan: "nam-ca-nhan-1",
   no_nghiep: "no-nghiep-13", sao_cung: "tu-vi-cung-menh", hoa_cung: "hoa-loc-cung-menh", menh_nam: "sinh-nam-1950-menh-gi",
-  so_kep: "so-kep-10",
+  so_kep: "so-kep-10", dau_hieu: "duong-dam-thang-vao-nha",
 };
 
 /** ND-7 đợt 2: mọi cụm (trừ hồ sơ chuyên gia) cho đặt MỘT ảnh chia sẻ dùng chung — thay ảnh /og tự vẽ theo tiêu đề. */

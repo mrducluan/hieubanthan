@@ -7,6 +7,10 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { CHU_DE, TEN_MANG_SILO, THU_TU_TRU, dsCumTru, mucLuc } from "@/lib/kien-thuc";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang } from "@/components/minh-hoa/TrangTri";
+import { TheLap } from "@/components/khung/TheLap";
+import { soCanLap, theLap } from "@/lib/the-lap";
+import { boLapTrang } from "@/lib/the-lap-cms";
+import { DoKhoiCuoi } from "@/components/khung/DoKhoiCuoi";
 import { goiLd, ldDuongDan, urlDayDu } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
@@ -32,7 +36,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [ds, nd, dau] = await Promise.all([mucLuc(), layNoiDungTrang(DUONG), layDauNhieuTrang(THU_TU_TRU.flatMap((t) => dsCumTru(t).map((x) => x.duong)))]);
+  const [ds, nd, dau, lapTuyChon] = await Promise.all([mucLuc(), layNoiDungTrang(DUONG),
+    layDauNhieuTrang(THU_TU_TRU.flatMap((t) => dsCumTru(t).map((x) => x.duong))), boLapTrang(DUONG)]);
   const c = taoChu(CHU_KIEN_THUC, nd.chu);
   return (
     <div className="mx-auto max-w-4xl">
@@ -46,6 +51,7 @@ export default async function Page() {
       <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
       {/* QH-URL: thư viện = mục lục theo silo — mỗi mảng (trang công cụ là trang trụ) và các cụm kiến thức của nó. */}
       <div className="mt-10 space-y-12">
+        <DoKhoiCuoi khoi="thu_vien" />
         {THU_TU_TRU.map((tru) => (
           <section key={tru} aria-labelledby={`silo${tru.replace("/", "-")}`}>
             <h2 id={`silo${tru.replace("/", "-")}`} className="flex items-baseline justify-between gap-3 text-2xl">
@@ -64,12 +70,15 @@ export default async function Page() {
                   </Link>
                 );
               })}
+              {/* CTA-2: silo ít cụm → thẻ công cụ của mảng + lối chéo cho kín hàng 3 cột (không để ô trống). */}
+              {theLap(soCanLap(dsCumTru(tru).length), { ...lapTuyChon, tru, coCongCu: true, boQua: dsCumTru(tru).map((x) => x.duong) })
+                .map((t) => <TheLap key={t.duong} t={t} kieu="lon" />)}
             </div>
           </section>
         ))}
       </div>
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-12" />
-      <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" /></Suspense>
+      <Suspense fallback={null}><BaiLienQuanMang mang={null} tieuDe="Bài viết mới" className="mt-12" boQua={["/kien-thuc"]} duong="/kien-thuc" /></Suspense>
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />
     </div>
   );

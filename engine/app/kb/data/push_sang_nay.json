@@ -27,6 +27,7 @@
     "giao_tiet_tieu_de": "Hôm nay giao tiết {ten}",
     "giao_tiet_noi_dung": "Sang tháng {chi} theo tiết khí — xem tháng này nhà bạn hợp làm gì.",
     "giao_tiet_duong": "/hom-nay#thang-nay-nha",
+    "nha_tiet": "Nhà hướng {huong}, tháng {chi} phía cửa {nhan}: {viec}.",
     "lap_xuan_tieu_de": "Hôm nay Lập xuân",
     "lap_xuan_noi_dung": "Năm mới theo tiết khí bắt đầu từ hôm nay — xem hướng nên giữ yên của năm và tháng Dần nhà bạn.",
     "lap_xuan_duong": "/phong-thuy/huong-xau-nam",

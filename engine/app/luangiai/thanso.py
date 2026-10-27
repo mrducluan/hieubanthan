@@ -200,9 +200,8 @@ def _luan_mot_vi_tri(vi_tri: str, gia_tri_chinh: int,
     }
     if not on_dinh:
         ket["ghi_chu_do_nhay"] = (
-            f"Theo quy ước chính thức, chỉ số này là {gia_tri_chinh}. Nhưng dưới "
-            f"quy ước phiên âm khác, nó có thể là {', '.join(map(str, gia_tri_khac))}. "
-            "Nêu ra để bạn biết con số này nhạy với cách viết tên — không phải để lung lay."
+            f"Nếu tính theo tên thường gọi, số này là {', '.join(map(str, gia_tri_khac))}. "
+            "Hai tên cho hai con số là chuyện bình thường; bài đọc dùng tên khai sinh."
         )
     if ket["nghia"] is None:
         ket["ghi_chu_do_nhay"] = "Kho quy tắc chưa có nghĩa cho giá trị này."
@@ -228,8 +227,8 @@ def _kiem_chung(vi_tri: str, so: int, chinh: dict) -> dict | None:
             "khop": f"Số {so} khá đúng với bạn. Hướng lớn của số này: {cd['huong_lon']}",
             "mot_phan": (f"Đúng một phần. Có thể một con số khác của bạn đang trội hơn ở mặt này — đọc thêm {khac}."
                          if khac else "Đúng một phần — nét của số này có mặt nhưng chưa phải nét chính của bạn."),
-            "chua_khop": ("Chưa giống bạn. Đừng ép mình vào con số; nếu tên bạn có nhiều cách viết, thử nhập tên thường gọi để "
-                          "xem lại."),
+            "chua_khop": ("Chưa giống bạn. Không sao, con số không phải khuôn. Nếu bạn hay được gọi bằng tên khác, thử thêm "
+                          "tên đó vào hồ sơ."),
         },
         "huong_lon": cd["huong_lon"],
         "khi_cang_thang": cd["khi_cang_thang"],
@@ -239,10 +238,22 @@ def _kiem_chung(vi_tri: str, so: int, chinh: dict) -> dict | None:
 # Tên hiển thị của hai cách tính Đường đời (khớp nhãn lựa chọn trên web, lib/quy-uoc-dd.ts) — chữ hiện ra giao diện
 # không bao giờ mang mã "tong_het" / "tung_phan".
 TEN_QUY_UOC_DD = {"tong_het": "Cộng hết chữ số", "tung_phan": "Rút gọn con số"}
+
+
+def _tom_tat_ten(ho_ten: list[str], chinh: dict, theo_bien_the: list[dict]) -> str:
+    """Một câu đời thường khi tên thường gọi ra số khác tên khai sinh, vd "Theo tên thường gọi “Lan”, số Sứ mệnh là 5
+    (tên khai sinh ra 7). Bài đọc dùng tên khai sinh." Không lệch → ""."""
+    cau = []
+    for ten, c in zip(ho_ten[1:], theo_bien_the[1:]):
+        lech = [f"số {TEN_NGAN_VI_TRI[v]} là {c[v]} (tên khai sinh ra {chinh[v]})" for v in VI_TRI_THU_TU if c[v] != chinh[v]]
+        if lech:
+            cau.append(f"Theo tên thường gọi “{ten}”, " + ", ".join(lech) + ".")
+    return " ".join(cau) + " Bài đọc dùng tên khai sinh." if cau else ""
+
+
 QUY_UOC_DD = {
-    "tong_het": "Cộng mọi chữ số của ngày, tháng, năm sinh rồi rút gọn — cách nhiều sách và trang thần số ở Việt Nam dùng.",
-    "tung_phan": "Rút gọn riêng ngày, tháng, năm (giữ số cái 11/22/33) rồi cộng lại — cách hay gặp ở sách phương Tây "
-                 "(như Hans Decoz).",
+    "tong_het": "Cộng một lượt mọi chữ số của ngày sinh. Nhiều trang thần số ở Việt Nam dùng cách này.",
+    "tung_phan": "Cộng riêng ngày, tháng, năm cho gọn rồi mới cộng lại. Đây là cách của sách thần số phương Tây.",
 }
 
 
@@ -271,7 +282,6 @@ def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: str =
         cac_vi_tri.append({**_luan_mot_vi_tri(vt, gia_tri_chinh, gia_tri_khac),
                            "cach_tinh": vet[vt], "kiem_chung": _kiem_chung(vt, gia_tri_chinh, chinh)})
 
-    so_on_dinh = sum(1 for v in cac_vi_tri if v["on_dinh"])
     th, tp = thanso.duong_doi(ngay, thang, nam, "tong_het"), thanso.duong_doi(ngay, thang, nam, "tung_phan")
     return {
         "engine_version": ENGINE_VERSION,
@@ -286,11 +296,8 @@ def luan_giai(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: str =
         "chieu_sau": luan_chieu_sau(ngay, thang, nam, quy_uoc=quy_uoc),
         "mo_rong": luan_mo_rong(ten_chinh, ngay, thang, nam, quy_uoc=quy_uoc),
         "chan_dung": luan_chan_dung(chinh, ngay, thang, nam),
-        "tom_tat_do_tin": (
-            # Lời thường (trục 2 UX 2026-10-26): không nêu tên quy tắc nội bộ ("Y khoá") ở dòng đầu trang.
-            f"{so_on_dinh}/4 chỉ số giữ nguyên dù viết tên kiểu nào; "
-            f"{4 - so_on_dinh} chỉ số đổi theo cách viết tên (xem ghi chú)."
-        ),
+        # Chỉ lên tiếng khi tên thường gọi cho số khác tên khai sinh (không có gì lệch → chuỗi rỗng, giao diện không hiện).
+        "tom_tat_do_tin": _tom_tat_ten(ho_ten, chinh, theo_bien_the),
         "cach_doc": (
             "Mỗi con số đi kèm MẶT TỐI và một CÂU PHẢN CHỨNG — câu hỏi để bạn "
             "tự kiểm: nếu không trả lời được 'điều gì chứng tỏ tôi KHÔNG phải "

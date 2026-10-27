@@ -1,7 +1,7 @@
 // CMS → web: bộ lọc HTML (chống XSS kể cả khi tài khoản CMS bị lộ), mục lục, gộp nguồn blog, ký link xem trước,
 // và các route nhận tín hiệu từ CMS từ chối khi sai bí mật. Không cần CMS chạy (luồng đầy đủ: cms/e2e).
 import { test, expect } from "@playwright/test";
-import { duongBlog, gopBaiBlog, slugTuUrl, type BaiBlog } from "../lib/blog-gop";
+import { duongBlog, gopBaiBlog, slugChuan, slugTuUrl, type BaiBlog } from "../lib/blog-gop";
 import { chuoiTruyVan, docPhamVi, maXemTruoc, soKhop, taoPhamVi } from "../lib/cms";
 import { htmlSangMd, locHtmlCms } from "../lib/cms-html";
 
@@ -81,6 +81,19 @@ test("gộp blog: bài CMS thắng khi trùng slug, sắp mới nhất trước"
   expect(ds.map((b) => `${b.slug}:${b.nguon}`)).toEqual(["rieng:notfair", "trung:cms"]);
 });
 
+test("BLOG-7: bài NotFair hiện ở đường dẫn không dấu; bài CMS đã đổi slug (slug_cu) không hiện trùng", () => {
+  expect(slugChuan("xem-than-so-hoc-numerology-cach-tinh-va-đoc-ho-so-tinh-tao")).toBe("xem-than-so-hoc-numerology-cach-tinh-va-doc-ho-so-tinh-tao");
+  expect(slugChuan("Số-7-Là-Gì")).toBe("so-7-la-gi");
+  const dai = slugChuan(`${"a".repeat(40)}-${"b".repeat(40)}`);
+  expect(dai).toBe("a".repeat(40));
+  const cms: BaiBlog[] = [{ slug: "da-doi", slugCu: ["da-đoi"], tieuDe: "CMS", moTa: null, ngay: "2026-10-01", capNhat: null, anh: null, phut: null, nguon: "cms" }];
+  const nf = [
+    { slug: "da-đoi", title: "Bản NotFair cũ", published_at: "2026-10-05" },
+    { slug: "chua-đoi", title: "Chưa nhập", published_at: "2026-10-09" },
+  ] as never;
+  expect(gopBaiBlog(cms, nf).map((b) => `${b.slug}:${b.nguon}`)).toEqual(["chua-doi:notfair", "da-doi:cms"]);
+});
+
 test("slug có dấu (bài NotFair): giải mã params một lần, link mã hoá phần trăm", () => {
   const goc = "xem-than-so-hoc-numerology-cach-tinh-va-đoc-ho-so-tinh-tao";
   expect(duongBlog(goc)).toBe("/blog/xem-than-so-hoc-numerology-cach-tinh-va-%C4%91oc-ho-so-tinh-tao");
@@ -120,12 +133,15 @@ test("route từ CMS: sai bí mật bị từ chối; /blog vẫn chạy khi ch�
   expect((await request.get("/blog/khong-co-bai-nay")).status()).toBe(404);
 });
 
-test("bài NotFair slug có dấu mở được (từng 404 trên production), link trên /blog mã hoá đúng", async ({ page }) => {
+test("BLOG-7: bài NotFair slug có dấu → link /blog không dấu, đường dẫn cũ 308 về bản không dấu, canonical không dấu", async ({ page, request }) => {
   await page.goto("/blog");
-  const link = page.locator('a[href="/blog/xem-than-so-hoc-numerology-cach-tinh-va-%C4%91oc-ho-so-tinh-tao"]');
-  await expect(link).toHaveCount(1);
-  const res = await page.goto("/blog/xem-than-so-hoc-numerology-cach-tinh-va-%C4%91oc-ho-so-tinh-tao");
+  await expect(page.locator('a[href="/blog/xem-than-so-hoc-numerology-cach-tinh-va-doc-ho-so-tinh-tao"]')).toHaveCount(1);
+  await expect(page.locator('a[href*="%C4%91oc"]')).toHaveCount(0);
+  const cu = await request.get("/blog/xem-than-so-hoc-numerology-cach-tinh-va-%C4%91oc-ho-so-tinh-tao", { maxRedirects: 0 });
+  expect(cu.status()).toBe(308);
+  expect(cu.headers().location).toMatch(/\/blog\/xem-than-so-hoc-numerology-cach-tinh-va-doc-ho-so-tinh-tao$/);
+  const res = await page.goto("/blog/xem-than-so-hoc-numerology-cach-tinh-va-doc-ho-so-tinh-tao");
   expect(res?.status()).toBe(200);
   await expect(page.locator("h1")).toContainText("Thần số học");
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/blog\/xem-than-so-hoc-numerology-cach-tinh-va-%C4%91oc-ho-so-tinh-tao$/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/blog\/xem-than-so-hoc-numerology-cach-tinh-va-doc-ho-so-tinh-tao$/);
 });

@@ -44,7 +44,8 @@ export function ChipChuyenMuc({ ds, dangChon }: { ds: (ChuyenMucCms & { so?: num
 
 function AnhBai({ p, uuTien, lon }: { p: BaiBlog; uuTien: boolean; lon?: boolean }) {
   if (!p.anh) return null;
-  const cls = `aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${lon ? "sm:aspect-auto sm:h-full" : ""}`;
+  // BLOG-7: ảnh thẻ bài sáng nhẹ để không chìm vào nền tối của trang.
+  const cls = `aspect-video w-full object-cover brightness-[1.12] contrast-[1.04] transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${lon ? "sm:aspect-auto sm:h-full" : ""}`;
   return p.nguon === "notfair" ? (
     <Image src={p.anh.src} alt={p.anh.alt} width={p.anh.w} height={p.anh.h} priority={uuTien}
       sizes={lon ? "(max-width: 640px) 100vw, 640px" : "(max-width: 640px) 100vw, 480px"} className={cls} />

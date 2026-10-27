@@ -18,6 +18,8 @@ const Sinh = z.object({
 const Input = z.object({
   cau_hoi: z.string().min(3).max(500),
   sinh: Sinh.optional(),
+  // Y6: hồ sơ nhà trên máy (hướng + bố cục, như /api/phongthuy/luan-giai) — engine kiểm khuôn chặt, chỉ dùng trong lượt hỏi.
+  nha: z.record(z.string(), z.unknown()).refine((x) => JSON.stringify(x).length <= 20_000).optional(),
 }).strict();
 
 // SAO-2: hạn mức câu miễn phí / trừ Sao khi vượt (lib/cua-sao.ts, tắt mặc định).

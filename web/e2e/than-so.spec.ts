@@ -17,8 +17,10 @@ test("landing → nhập 2 trường → hé lộ số đường đời và hồ
   await expect(page.getByTestId("dong-y-du-lieu")).toContainText("không lưu");
   await page.getByRole("button", { name: "Đồng ý và xem kết quả" }).click();
 
-  await expect(page).toHaveURL(/\/ban-than/);
-  await expect(page.getByTestId("so-duong-doi")).toHaveText("6");
+  // QH-BT: nhập ở trang chủ → bài đọc /than-so (nghi thức + con số lớn ngay tại đó), không qua /ban-than.
+  await expect(page.getByTestId("so-duong-doi")).toHaveText("6", { timeout: 60_000 });
+  await expect(page).toHaveURL(/\/than-so$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
 
   for (const [vt, so] of [["duong_doi", "6"], ["su_menh", "9"], ["linh_hon", "6"], ["nhan_cach", "3"]] as const) {
     await expect(page.getByTestId(`the-${vt}`).getByTestId("gia-tri")).toHaveText(so);
@@ -35,7 +37,16 @@ test("landing → nhập 2 trường → hé lộ số đường đời và hồ
   for (const i of [0, 1, 2, 3]) await kc.nth(i).click();
   await expect(dd.getByTestId("ket-qua-kiem-chung-duong_doi")).toContainText("Khớp 4/6. Số 6 khá đúng với bạn.");
 
+  await expect(page.getByTestId("chan-dung")).toBeVisible();
+  // Trang của tôi: danh tính gọn + nhịp + tóm tắt bản đồ, KHÔNG lặp bốn thẻ số của bài đọc.
+  await page.goto("/ban-than");
   await expect(page.getByTestId("the-danh-tinh")).toContainText("Nguyễn Đức Luân");
+  await expect(page.getByTestId("the-duong_doi")).toHaveCount(0);
+  await expect(page.getByTestId("chan-dung")).toHaveCount(0);
+  await expect(page.getByTestId("ban-do-tom-tat")).toContainText("Bên trong & bên ngoài");
+  await page.getByTestId("mo-bai-doc").click();
+  await expect(page).toHaveURL(/\/than-so$/);
+  await expect(page.getByTestId("so-duong-doi")).toHaveCount(0);   // hé lộ chỉ ngay sau lần nhập đầu
   // Hồ sơ giữ lại khi quay về trang chủ.
   await page.goto("/");
   await expect(page.getByText("Chào lại")).toBeVisible();
@@ -45,7 +56,8 @@ test("chiều sâu: dải đời, biểu đồ ngày sinh, hỏi đáp", async (
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
   await expect(page.getByTestId("ten-chinh")).toHaveText("Nguyễn Đức Luân");
-  await expect(page.getByTestId("ngay-sinh")).toContainText("Sinh 24/10/1988");
+  await expect(page.getByTestId("ngay-sinh")).toHaveText("Sinh 24/10/1988");   // không còn dòng kỹ thuật "quy ước / chỉ số nhạy"
+  await expect(page.getByTestId("ten-lech")).toHaveCount(0);
   await expect(page.getByRole("img", { name: "Dải đời đỉnh cao theo tuổi" })).toBeVisible();
 
   await page.getByRole("tab", { name: "Biểu đồ ngày sinh" }).click();
@@ -80,7 +92,7 @@ test("form hồ sơ chặn ngày sinh tương lai và họ tên không có chữ
   await page.getByLabel("Năm", { exact: true }).fill("2099");
   await page.getByRole("button", { name: "Đồng ý và xem kết quả" }).click();
   await expect(page.getByText("Ngày sinh chưa đúng")).toBeVisible();
-  await expect(page).not.toHaveURL(/ban-than/);
+  await expect(page).not.toHaveURL(/than-so/);
 });
 
 test("engine lỗi: báo rõ + thử lại được; trang lạ ra 404 tiếng Việt", async ({ page }) => {
@@ -139,7 +151,7 @@ test("nhập ÂM lịch: ngày 30 của tháng thiếu bị chặn; năm có th�
 
 test("TS-SAU: chân dung 4 mặt có lớp riêng; dòng đời + đối chiếu năm biến cố", async ({ page }) => {
   await napHoSo(page, LUAN);
-  await page.goto("/ban-than");
+  await page.goto("/than-so");
   const cd = page.getByTestId("chan-dung");
   await expect(cd).toContainText("Điểm mạnh");
   await expect(cd.getByTestId("lop-them")).toContainText("Linh hồn 6");
@@ -183,6 +195,7 @@ test("TS-PHAI: đổi sang phái Chaldea → 6 con số engine tính, có số k
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
   const khung = page.getByTestId("truong-phai-than-so");
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await khung.getByRole("tab", { name: "Chaldea" }).click();
   await expect(page.getByTestId("bai-chaldea")).toBeVisible();
   const api = await (await request.post("/api/thanso/chaldea", { data: { ho_ten: ["Nguyễn Đức Luân"], ngay: 24, thang: 10, nam: 1988 } })).json();
@@ -193,6 +206,7 @@ test("TS-PHAI: đổi sang phái Chaldea → 6 con số engine tính, có số k
   await expect(page.getByRole("tab", { name: "Biểu đồ ngày sinh" })).toHaveCount(0);
   await page.reload();
   await expect(page.getByTestId("bai-chaldea")).toBeVisible();
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await page.getByTestId("truong-phai-than-so").getByRole("tab", { name: "Pitago" }).click();
   await expect(page.getByTestId("the-duong_doi")).toBeVisible();
 });
@@ -200,6 +214,7 @@ test("TS-PHAI: đổi sang phái Chaldea → 6 con số engine tính, có số k
 test("TS-PHAI-2: phái Chaldea → hỏi đáp bản thân trả lời bằng số Chaldea; câu năm cá nhân ghi rõ theo Pythagoras", async ({ page }) => {
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
+  await page.getByTestId("truong-phai-than-so-mo").click();
   await page.getByTestId("truong-phai-than-so").getByRole("tab", { name: "Chaldea" }).click();
   await page.getByRole("button", { name: "Điểm mạnh cốt lõi của tôi là gì?" }).click();
   const ans = page.getByTestId("cau-tra-loi").last();

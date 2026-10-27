@@ -3,6 +3,10 @@
 import Link from "next/link";
 import { ArrowRight, Gift } from "lucide-react";
 import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
+import { TheLap } from "@/components/khung/TheLap";
+import { lopCot, soCanLap, theLap } from "@/lib/the-lap";
+import { boLap } from "@/lib/the-lap-cms";
+import { DoKhoiCuoi } from "@/components/khung/DoKhoiCuoi";
 import { duongBlog } from "@/lib/blog-gop";
 import { anhCms, baiMoiCms, duongLienKet, type BaiCmsTomTat, type KhoiTrangDich } from "@/lib/cms";
 
@@ -45,7 +49,7 @@ export async function KhoiTrangDichView({ k, h1 }: { k: KhoiTrangDich; h1: boole
       return (
         <section data-khoi="cong_cu">
           {k.tieu_de && <h2 className="text-2xl">{k.tieu_de}</h2>}
-          <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <div className={`mt-5 grid gap-3 ${lopCot(k.ds.filter((ma) => CONG_CU[ma]).length, 4)}`}>
             {k.ds.map((ma) => CONG_CU[ma]).filter(Boolean).map((c) => (
               <Link key={c!.href} href={c!.href} className="glass group flex flex-col rounded-2xl p-4 hover:border-gold/50 sm:p-5">
                 <HinhMang kieu={c!.kieu} className="h-12 self-start" />
@@ -63,6 +67,7 @@ export async function KhoiTrangDichView({ k, h1 }: { k: KhoiTrangDich; h1: boole
       return (
         <section data-khoi="bai_viet">
           <h2 className="text-2xl">{k.tieu_de || "Bài viết"}</h2>
+          <DoKhoiCuoi khoi="trang_dich" />
           <ul className="mt-5 grid gap-4 sm:grid-cols-3">
             {ds.map((b) => {
               const a = anhCms(b.anh_bia, "nho") ?? anhCms(b.anh_bia, "vua");
@@ -76,6 +81,8 @@ export async function KhoiTrangDichView({ k, h1 }: { k: KhoiTrangDich; h1: boole
                 </li>
               );
             })}
+            {/* CTA-2: biên tập chọn 1–2 bài / mảng ít bài → bù lối đi tiếp cho kín hàng 3 cột. */}
+            {theLap(soCanLap(ds.length), await boLap()).map((t) => <TheLap key={t.duong} t={t} kieu="anh" />)}
           </ul>
         </section>
       );

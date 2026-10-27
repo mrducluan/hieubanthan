@@ -136,3 +136,16 @@ Mỗi việc "Làm" sẽ có dòng quyết định riêng trong CLAUDE.md khi b�
 | Y8 | **Rà lại 45 cặp cũ `cap_sao`**: KB còn giữ 45 cặp không thứ tự làm dự phòng; sau khi `to_hop_81` ổn định một tháng (phiếu kiểm chứng), bỏ dự phòng để KB một nguồn | nền móng | Hai bảng nghĩa song song dễ lệch khi sửa | 0,2 ngày + phiếu |
 
 Em đề xuất làm trước: **Y5** (SEO, KB đã sẵn), **Y3** (ghép hai thứ đã có), ~~**Y7**~~ (đã làm ở UI-PT 2026-10-22 — nút "Tôi đã xử lý" + so trước–sau, `docs/RA-SOAT-UI-PHONG-THUY.md`). Y1, Y2 ghi lại thành P6, P7 và **đã làm ở UI-PT2** (2026-10-22) cùng P5 so hai căn.
+
+### Trạng thái Y1–Y8 (2026-10-26, Y-PT — chủ dự án giao "chưa làm thì làm, có cách tốt hơn thì tự đề xuất")
+
+| # | Trạng thái | Đã làm thế nào (khác đề xuất ban đầu ở đâu) |
+|---|---|---|
+| Y1 | Đã làm (UI-PT2, P6) | Hỏi nhanh theo ảnh: ảnh `blob:` trên máy, 3–5 câu có/không theo đồ thị ý định |
+| Y2 | Đã làm (UI-PT2, P7) | Thẻ "Nhà của bạn" mã `nha\|`, `/og/nha`, `/the/nha/[ma]` |
+| Y3 | **Đã làm** | Không thêm loại mốc mới (khỏi migration): người đã chọn nhận **mốc giao tiết** + đã lưu nhà vào tài khoản → đúng ngày giao tiết (12 lần/năm) cron đọc **chỉ hướng** từ `ho_so_nha`, engine `nha_theo_tiet` (`/v1/push/sang-nay` thêm `nha`) soạn "Nhà hướng X, tháng Y phía cửa <mức>: <việc>" từ `thang_nay` của **ngày hôm sau** (giờ giao tiết có thể sau 8 giờ sáng); thay lời mời chung của thông báo giao tiết, vẫn ≤ 1 thông báo/ngày. Chính sách riêng tư thêm câu, hiệu lực 26/10/2026 |
+| Y4 | **Đã làm** | `/v1/phongthuy/viec-tuan` + thẻ `ViecTuanNha` ở Hôm nay: một việc 0 đồng / tuần ISO, **còn dấu hiệu nên xử lý trước thì chỉ xoay trong nhóm đó**, bỏ dấu hiệu đã xử lý; "Tôi đã làm việc này" → hàng đợi phiếu sau 30 ngày (Q7) mã `ds.phongthuy.viec_tuan.<mã>` — phiếu "đã làm" có nghĩa thật; không migration |
+| Y5 | **Đã làm** | 23 trang `/phong-thuy/dau-hieu/{slug}` (`kb/trang_phongthuy.py`, một trang mỗi dấu hiệu của form Khảo sát) + **bài chuẩn SEO theo khuôn SEO-M** (`bo_sung_dau_hieu.json`: 3 mục H2 là câu người ta gõ tìm, trả lời trước; một bảng thật; "Sách xưa nói gì"; hỏi đáp; 3–5 ý chính → ảnh tóm tắt). Hình minh hoạ + ảnh tóm tắt **nền giấy sáng** (chủ dự án dặn). Thêm: Khảo sát nhà có link "Đọc kỹ về dấu hiệu này" (engine trả `trang`), hỏi đáp / Việc tuần trỏ về trang — liên kết nội bộ hai chiều |
+| Y6 | **Đã làm** | `/v1/phongthuy/hoi` nhận `nha` (như `/luan-giai`), mục `nha_rieng` dùng lại `phongthuy_bo_cuc.luan` (một bộ luật): phòng câu hỏi nhắc → phương, du niên (theo mệnh, chưa có năm sinh thì theo trạch), đúng/chưa đúng cách sách dặn; dấu hiệu đã khai ở phòng đó (đồ thị O_PHONG), dấu hiệu đã xử lý / chưa khai; luật căn hộ. Câu trả lời theo nhà **không vào nhật ký hỏi** |
+| Y7 | Đã làm (UI-PT) | "Tôi đã xử lý" + so trước–sau |
+| Y8 | **Đã làm sớm** | Không chờ đủ một tháng: `to_hop_81` đã phủ đủ 81 tổ hợp nên bảng 45 cặp là mã chết (không bao giờ được đọc) — gỡ `cap_sao` + `mau_cap`, test khoá đủ 81 khoá, cặp đảo cùng tên/nhóm; mã kiểm chứng không đổi nên phiếu cũ không ảnh hưởng |

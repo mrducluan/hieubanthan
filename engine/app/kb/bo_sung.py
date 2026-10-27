@@ -18,7 +18,8 @@ from functools import lru_cache
 from pathlib import Path
 
 THU_MUC = Path(__file__).resolve().parent / "data"
-LOAI = ("thap_than", "nhat_chu", "nam_ca_nhan", "no_nghiep", "tinh_yeu", "nghe", "so", "so_kep", "cap_so", "hoa_cung")
+LOAI = ("thap_than", "nhat_chu", "nam_ca_nhan", "no_nghiep", "tinh_yeu", "nghe", "so", "so_kep", "cap_so", "hoa_cung",
+        "dau_hieu")
 # Họ trang do chuyên gia tự viết (EEAT-1) — phần bổ sung ghi rõ do ban biên tập soạn.
 LOAI_TAC_GIA = ("so",)
 

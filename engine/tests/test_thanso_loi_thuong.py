@@ -59,7 +59,6 @@ def test_khong_lo_ma_trong_hoi_dap():
 def test_tom_tat_do_tin_khong_thuat_ngu_noi_bo():
     kq = thanso.luan_giai(["Trần Thị Mai"], 14, 3, 1998)
     assert "Y khoá" not in kq["tom_tat_do_tin"] and "quy tắc" not in kq["tom_tat_do_tin"]
-    assert "/4" in kq["tom_tat_do_tin"]          # vẫn nói bao nhiêu chỉ số giữ nguyên khi đổi cách viết tên
 
 
 def test_no_nghiep_tong_hop_noi_vi_tri_bang_loi_thuong():

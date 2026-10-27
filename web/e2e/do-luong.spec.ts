@@ -6,7 +6,10 @@ import { tinhGate, MAU_TOI_THIEU } from "../lib/so-lieu-ngoai";
 
 type SK = { su_kien: string } & Record<string, unknown>;
 const suKien = (p: Page) => p.evaluate(() => ((window as unknown as { __hbt_su_kien?: SK[] }).__hbt_su_kien ?? []));
-const KHOA_CHO_PHEP = new Set(["su_kien", "feature_version", "mo_dun", "kind", "ma_moi", "so_duong_doi", "huu_ich", "ket_qua", "nguon", "quan_he", "loai", "phien_ban"]);
+// CTA-2: end_cta_* (khối thẻ cuối trang) chỉ mang mã khối + đường dẫn trong site + vị trí — không dữ liệu cá nhân.
+// ĐY-1: consent_given chỉ mang mã bản đồng ý (phien_ban).
+const KHOA_CHO_PHEP = new Set(["su_kien", "feature_version", "mo_dun", "kind", "ma_moi", "so_duong_doi", "huu_ich", "ket_qua", "nguon", "quan_he", "loai",
+  "phien_ban", "khoi", "trang", "lap", "den", "thu_tu", "so_lap"]);
 const dem = (ds: SK[], ten: string, mo_dun?: string) => ds.filter((e) => e.su_kien === ten && (!mo_dun || e.mo_dun === mo_dun)).length;
 
 test("funnel Phase 1: landing → bắt đầu → hồ sơ → đọc xong → góp ý → hỏi; không lộ dữ liệu cá nhân", async ({ page }) => {
@@ -16,10 +19,10 @@ test("funnel Phase 1: landing → bắt đầu → hồ sơ → đọc xong → 
   await page.getByLabel("Tháng", { exact: true }).fill("10");
   await page.getByLabel("Năm", { exact: true }).fill("1988");
   await page.getByRole("button", { name: "Đồng ý và xem kết quả" }).click();   // ĐY-1: lần đầu = đồng ý xử lý dữ liệu
-  // Lần đầu mở /ban-than, máy chủ dev phải biên dịch trang (có lúc > 15 giây khi vừa khởi động) → chờ lâu hơn ở bước này.
+  // Lần đầu mở /than-so, máy chủ dev phải biên dịch trang (có lúc > 15 giây khi vừa khởi động) → chờ lâu hơn ở bước này.
   await expect(page.getByTestId("so-duong-doi")).toHaveText("6", { timeout: 60_000 });
-  await page.getByRole("heading", { name: "Giai đoạn này của bạn" }).scrollIntoViewIfNeeded();
-  await page.getByTestId("gop-y").getByRole("button", { name: "Có, khá trúng" }).click();
+  await page.getByRole("heading", { name: "Con người bạn, bốn mặt" }).scrollIntoViewIfNeeded();
+  await page.getByTestId("gop-y").first().getByRole("button", { name: "Có, khá trúng" }).click();
   await expect(page.getByText("Cảm ơn bạn")).toBeVisible();
 
   const ds = await suKien(page);

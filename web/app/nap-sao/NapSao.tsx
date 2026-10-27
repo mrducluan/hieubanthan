@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Check, Gift, Loader2, LockKeyhole, QrCode, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
+import { lopCot } from "@/lib/luoi";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import {
   dongNapDau, goiMacDinh, hienNapDau, saoTangLanDau, soBaoCao, thuocTinhNap, type GoiHienThi, type NapDau,
@@ -80,7 +81,7 @@ export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau, mienPhi = f
       )}
       <fieldset disabled={!cong} aria-describedby={cong ? undefined : "ly-do-chua-mo"} className={cong ? undefined : "opacity-60"} data-testid="khoi-goi">
         <legend className="sr-only">Chọn gói Sao</legend>
-        <div className={`grid gap-3 ${goi.length % 3 === 0 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
+        <div className={`grid gap-3 ${lopCot(goi.length)}`}>
           {goi.map((x) => {
             const bc = soBaoCao(x.sao, giaBaoCao);
             const tang = nd ? saoTangLanDau(x.sao, nd.phan_tram) : 0;

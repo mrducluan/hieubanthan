@@ -61,17 +61,20 @@ def test_to_hop_cung_quan_he_va_muc():
     assert a["ten"] == b["ten"] and a["y"] != b["y"]
 
 
-def test_kb_du_45_cap_va_9_sao_doi_thuong():
+def test_kb_mot_nguon_81_to_hop_va_9_sao_doi_thuong():
+    """Y8 (2026-10-26): KB một nguồn — `to_hop_81` đủ 81 tổ hợp có thứ tự, bảng 45 cặp cũ đã gỡ (không còn dự phòng)."""
     k = phongthuy_kb.huyen_khong()
-    cap = k["cap_sao"]
-    assert len(cap) == 45
+    assert "cap_sao" not in k and "mau_cap" not in k
+    t = k["to_hop_81"]
+    assert set(t) == {f"{s}-{h}" for s in range(1, 10) for h in range(1, 10)}
     for s in range(1, 10):
-        for h in range(s, 10):
-            m = cap[f"{s}-{h}"]
-            assert m["ten"] and m["y"] and m["nhom"] in ("thuan", "can_bang", "can_chu_dong") and m["hop_cho"]
+        for h in range(1, 10):
+            m = t[f"{s}-{h}"]
+            assert m["ten"] and m["y"] and m["nhom"] in ("thuan", "can_bang", "can_chu_dong") and m["hop_cho"] and m["luu_y"]
+            assert m["ten"] == t[f"{h}-{s}"]["ten"] and m["nhom"] == t[f"{h}-{s}"]["nhom"]   # cặp đảo: cùng tên, cùng nhóm
     assert len(k["sao_doi_thuong"]) == 9 and all(k["sao_doi_thuong"][str(i)]["ten"] for i in range(1, 10))
     # không vật phẩm hoá giải, không tên bệnh
-    van = str(cap) + str(k["sao_doi_thuong"])
+    van = str(t) + str(k["sao_doi_thuong"])
     for cam in ("vật phẩm", "tỳ hưu", "thạch anh", "ung thư", "đột quỵ", "tiểu đường", "chết", "tang"):
         assert cam not in van.lower(), cam
 

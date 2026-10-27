@@ -4,6 +4,7 @@
 // ND-2 nối trang công cụ, ND-3 trang tĩnh + chủ đề; pháp lý (ND-4) và trang KB (ND-5) chưa đọc.
 // Biến mẫu cụm {tieu_de}…: web thay bằng giá trị engine trả cho đúng trang, biến lạ giữ nguyên chữ. KHÔNG thoát HTML ở đây:
 // mọi khối CMS hiện dạng văn bản thuần (React tự thoát ký tự) — thoát hai lần sẽ lộ "&amp;" trên trang (ND-5).
+import { locDsThe, type TheTho } from "@/lib/loi-di-tiep";
 import type { Metadata } from "next";
 import { cookies, draftMode } from "next/headers";
 import { anhCms, COOKIE_PHAM_VI, dangHien, docPhamVi, duongLienKet, goiCms, chuoiTruyVan, type AnhCms, type LienKetCms } from "@/lib/cms";
@@ -26,6 +27,8 @@ export type NoiDungTrang = {
   chu: Record<string, string>;
   /** ND-7 đợt 2 "Hình trên trang": khoá → ảnh thư viện CMS (trang URL thắng mẫu cụm); khoá không có = hình gốc trong code. */
   hinh: Record<string, AnhCms>;
+  /** CTA-2: thẻ ưu tiên của URL cho khối cuối trang thiếu ô (tab "Lối đi tiếp" của Trang website), đã lọc. */
+  loiDiTiep: TheTho[];
   /** Có lấy được gì từ CMS không (để đo / gỡ lỗi). */
   nguon: { trang: boolean; mau: boolean };
 };
@@ -43,6 +46,7 @@ export type TrangCms = {
   che_do_mau?: Partial<Record<ViTri, "thay" | "them_sau" | "an_mau">> | null;
   chu?: Record<string, unknown> | null;
   hinh?: Record<string, unknown> | null;
+  loi_di_tiep?: unknown;
 };
 export type MauCms = Pick<TrangCms, "khoi_tren" | "khoi_duoi" | "khoi_cuoi" | "chu" | "hinh"> & { mau_duong?: string };
 
@@ -125,6 +129,7 @@ export function gopNoiDung(duong: string, macDinh: MacDinhTrang & { nhom?: NhomT
     khoi,
     chu: chuCms,
     hinh: hinhCms,
+    loiDiTiep: locDsThe(trang?.loi_di_tiep, 6),
     nguon: { trang: Boolean(trang), mau: Boolean(mau) },
   };
 }

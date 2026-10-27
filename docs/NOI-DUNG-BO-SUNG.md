@@ -16,6 +16,7 @@ code cho mọi trang (+ ảnh AI cho vài trang trụ — chờ có dịch vụ 
 | `so_kep` | `/than-so/so-kep/*` | 43 | `bo_sung_so_kep.json` |
 | `cap_so` | `/hop-doi/cap-so/*` | 45 | `bo_sung_cap_so.json` |
 | `hoa_cung` | `/tu-vi/tu-hoa/*` | 48 | `bo_sung_hoa_cung.json` |
+| `dau_hieu` | `/phong-thuy/dau-hieu/*` | 23 | `bo_sung_dau_hieu.json` (Y5, 2026-10-26; ảnh tóm tắt nền giấy sáng) |
 
 ## Khuôn một tệp
 

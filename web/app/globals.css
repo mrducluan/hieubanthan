@@ -312,3 +312,19 @@
   11.5%, 100% { opacity: 0; transform: translateY(-8px); }
 }
 @keyframes quet-sang { 55%, 100% { transform: translateX(110%); } }
+
+/* BLOG-7 (chủ dự án 2026-10-26): ảnh minh hoạ bài blog nền tối chìm vào nền Đêm sao → làm sáng nhẹ + viền giấy sáng
+   + bóng đổ để ảnh nổi khỏi nền (áp cho ảnh bìa và ảnh trong thân bài, cả bài CMS lẫn bài NotFair). */
+.anh-sang {
+  background: #f4efe2;
+  padding: 5px;
+  border: 1px solid rgb(233 196 106 / 0.55);
+  box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.65), 0 0 0 4px rgb(244 239 226 / 0.06);
+  filter: brightness(1.12) contrast(1.04) saturate(1.06);
+}
+@media (prefers-contrast: more) { .anh-sang { filter: none; } }
+
+/* BLOG-8: khung chữ ký biên soạn cuối bài — phần xổ ra trượt nhẹ xuống (tắt khi người dùng chọn giảm chuyển động). */
+@keyframes ky-xo { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+details[open] > .khung-ky-noi-dung { animation: ky-xo 0.18s ease-out; }
+@media (prefers-reduced-motion: reduce) { details[open] > .khung-ky-noi-dung { animation: none; } }

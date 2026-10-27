@@ -27,8 +27,9 @@ export function TheBaLop({ vt }: { vt: ViTriLuanGiai }) {
 
       {vt.nghia && (
         <KhoiLop loai="giai" className="mt-4">
-          <p>{vt.nghia.tu_khoa} — {vt.khung}.</p>
-          <p className="mt-2"><span className="font-semibold text-cinnabar">Mặt tối:</span> {vt.nghia.mat_toi}.</p>
+          {/* Hướng lớn của số (kho chân dung) thay câu lặp lại tiêu đề. */}
+          {vt.kiem_chung?.huong_lon && <p>{vt.kiem_chung.huong_lon}</p>}
+          <p className={vt.kiem_chung?.huong_lon ? "mt-2" : undefined}><span className="font-semibold text-cinnabar">Mặt tối:</span> {vt.nghia.mat_toi}.</p>
           <p className="mt-2 text-xs text-fg-faint">Nguồn: {vt.nghia.trich_nguon}</p>
           <Link href={`/than-so/y-nghia-so/so-${vt.gia_tri}`} className="mt-2 inline-block text-xs text-gold hover:underline">Đọc thêm về số {vt.gia_tri} →</Link>
         </KhoiLop>
@@ -64,7 +65,7 @@ export function TheBaLop({ vt }: { vt: ViTriLuanGiai }) {
                 <p>Số {vt.gia_tri}.</p>
               )}
               <p className="mt-2 text-xs text-fg-faint">
-                {vt.on_dinh ? "Ổn định qua mọi cách viết tên bạn đã nhập." : vt.ghi_chu_do_nhay}
+                {vt.on_dinh ? null : vt.ghi_chu_do_nhay}
               </p>
             </KhoiLop>
           </motion.div>

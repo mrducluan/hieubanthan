@@ -109,3 +109,19 @@ def test_mo_rong_co_bieu_do_va_chi_so_phu():
     assert mr_["so_thai_do"]["so"] == 7 and mr_["so_thai_do"]["nghia"]
     assert mr_["thang_ca_nhan"]["so"] == 8
     assert [b["so"] for b in mr_["bai_hoc_nghiep"]] == [2, 6, 8, 9]
+
+
+def test_tom_tat_ten_chi_len_tieng_khi_ten_goi_lech():
+    """QH-BT: dòng dưới tên không còn chữ kỹ thuật "quy ước / chỉ số nhạy". Một tên → rỗng (giao diện không hiện);
+    tên thường gọi ra số khác → một câu đời thường nêu đúng số lệch, bài đọc dùng tên khai sinh."""
+    from app.luangiai.thanso import luan_giai
+    mot = luan_giai(["Nguyễn Đức Luân"], 24, 10, 1988)
+    assert mot["tom_tat_do_tin"] == ""
+    hai = luan_giai(["Nguyễn Đức Luân", "Lu"], 24, 10, 1988)
+    lech = [v for v in hai["cac_vi_tri"] if not v["on_dinh"]]
+    assert lech
+    tt = hai["tom_tat_do_tin"]
+    assert tt.startswith("Theo tên thường gọi “Lu”, số ") and tt.endswith("Bài đọc dùng tên khai sinh.")
+    for kw in ("quy ước", "chỉ số", "nhạy", "Y khoá"):
+        assert kw not in tt
+    assert all("tên thường gọi" in v["ghi_chu_do_nhay"] and "lung lay" not in v["ghi_chu_do_nhay"] for v in lech)
