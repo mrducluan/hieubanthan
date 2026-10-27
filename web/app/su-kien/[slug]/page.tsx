@@ -40,7 +40,7 @@ export default async function Page({ params }: Props) {
       )} />
       {daHetHan(t) && (
         <p role="status" className="rounded-2xl border border-line p-4 text-fg-muted" data-testid="da-ket-thuc">
-          Chương trình này đã kết thúc. Các công cụ vẫn dùng miễn phí — <Link href="/kham-pha" className="text-gold underline">khám phá ngay</Link>.
+          Chương trình này đã kết thúc. Các công cụ vẫn dùng miễn phí — <Link href="/huyen-hoc" className="text-gold underline">khám phá ngay</Link>.
         </p>
       )}
       {!coH1 && <h1 className="text-4xl sm:text-5xl">{t.tieu_de}</h1>}

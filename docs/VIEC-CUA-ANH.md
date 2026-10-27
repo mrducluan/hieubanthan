@@ -136,6 +136,10 @@ WP9, WP10) · lật lá bài đầu ngày trên iPhone (Hôm nay) · luồng mua
      báo em dịch vụ + đặt khoá vào env thì em làm; hiện mọi trang đã có ảnh tóm tắt vẽ bằng code (có QR).
    - **Quyết định còn chờ** (audit SEO-M): mở bot `Google-Extended` (Gemini app trích được site, đổi lại cho phép dùng
      huấn luyện — lệch BM-2) hay giữ chặn.
+4r. [ ] **Sau khi merge HH-1 "Huyền học" (5 phút, 2026-10-27):** CMS deploy tự chạy migration đổi `/kham-pha` → `/huyen-hoc`
+   (Trang website, menu, chân trang). Rồi: (1) mở https://hieuban.com/kham-pha → phải tự chuyển sang `/huyen-hoc`;
+   (2) CMS → **Trang website** → `/huyen-hoc`: nếu trước đây anh có ghi đè tiêu đề SEO / H1 kiểu "Khám phá…" thì xoá ô đó
+   để dùng chữ mới; (3) Search Console → **Kiểm tra URL** → `https://hieuban.com/huyen-hoc` → **Yêu cầu lập chỉ mục**.
 4n. [ ] **Bài khởi tạo + Lối đi tiếp (BLOG-6 / CTA-2b, 2026-10-26):** sau khi merge, CMS deploy tự chạy migration → vào CMS
    → **Bài viết**: 3 bài nháp "Gửi duyệt" (gieo quẻ 3 đồng xu, Bát tự là gì, hướng nhà hợp tuổi). Đọc kỹ, thêm trải nghiệm thật
    của anh, bấm thử các link nguồn ngoài, rồi **Xuất bản**. Nếu bài có đoạn "[Ảnh chưa nhập…" (kho ảnh lỗi) → tải ảnh trong

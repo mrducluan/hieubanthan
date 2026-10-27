@@ -111,7 +111,7 @@ test("/hoi-vien khi TẮT: vẫn có trang (noindex), H1 máy chủ, chỉ khung
   await expect(sapCo).toContainText("Sắp có");
   await expect(sapCo).toContainText("chưa mua được");
   await expect(sapCo.getByRole("link", { name: /Về Tài khoản/ })).toHaveAttribute("href", "/tai-khoan");
-  await expect(sapCo.getByRole("link", { name: /Khám phá/ })).toHaveAttribute("href", "/kham-pha");
+  await expect(sapCo.getByRole("link", { name: /Các mảng huyền học/ })).toHaveAttribute("href", "/huyen-hoc");
   await expect(page.getByTestId("gia-hoi-vien")).toHaveCount(0);
   await expect(page.getByTestId("hoi-vien-quyen-loi")).toHaveCount(0);
   await expect(page.getByTestId("nut-mua-hoi-vien")).toHaveCount(0);

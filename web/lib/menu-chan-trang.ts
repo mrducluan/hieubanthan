@@ -3,9 +3,9 @@
 export type CotChanTrang = { ten: string; ds: readonly (readonly [string, string])[] };
 
 export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
-  { ten: "Khám phá", ds: [
+  { ten: "Huyền học", ds: [
     ["/than-so", "Thần số học"], ["/tu-vi", "Tử vi"], ["/bat-tu", "Bát tự"], ["/kinh-dich", "Kinh Dịch"],
-    ["/phong-thuy", "Phong thuỷ"], ["/hop-doi", "Hợp đôi"],
+    ["/phong-thuy", "Phong thuỷ"], ["/hop-doi", "Hợp đôi"], ["/huyen-hoc", "Tất cả các mảng"],
   ] },
   { ten: "Kiến thức", ds: [
     ["/kien-thuc", "Thư viện kiến thức"], ["/than-so/y-nghia-so", "Ý nghĩa các con số"], ["/kinh-dich/que", "64 quẻ Kinh Dịch"],

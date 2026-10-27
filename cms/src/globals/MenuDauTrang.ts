@@ -3,7 +3,7 @@
 // Để trống = web dùng menu mặc định trong code (MENU_DAU_MAC_DINH — giống hệt menu đang chạy). Bản mặc định phải trùng
 // web/lib/menu-dau-trang.ts (e2e so-lieu-ngoai.spec.ts kiểm hai bản khớp nhau).
 // Mục cha đang sáng theo trang người dùng đang xem: trùng đường dẫn mục cha HOẶC bất kỳ menu con nào (vd đang ở /tu-vi
-// → "Khám phá" sáng vì /tu-vi là menu con của Khám phá).
+// → "Huyền học" sáng vì /tu-vi là menu con của Huyền học).
 import type { GlobalConfig } from "payload";
 import { ai, chiChuBien } from "../access";
 import { lamMoiGlobal } from "../hooks/lamMoiWeb";
@@ -12,7 +12,7 @@ import { truongLienKet } from "./DieuHuong";
 export const BIEU_TUONG = [
   { label: "Lấp lánh (Bản thân)", value: "lap_lanh" },
   { label: "Trái tim (Hợp đôi)", value: "trai_tim" },
-  { label: "La bàn (Khám phá)", value: "la_ban" },
+  { label: "La bàn (Huyền học)", value: "la_ban" },
   { label: "Sách (Kiến thức)", value: "sach" },
   { label: "Tờ báo (Blog)", value: "bao" },
   { label: "Ngôi sao (Sao)", value: "sao" },
@@ -30,7 +30,7 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/xem-ngay-tot", "Xem ngày tốt"), mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
   ] },
   { ...lk("/hop-doi", "Hợp đôi"), bieu_tuong: "trai_tim", di_dong: true, con: [] },
-  { ...lk("/kham-pha", "Khám phá"), bieu_tuong: "la_ban", di_dong: true, con: [
+  { ...lk("/huyen-hoc", "Huyền học"), bieu_tuong: "la_ban", di_dong: true, con: [
     { ...lk("/tu-vi", "Tử vi"), mo_ta: "Lá số 12 cung, đại hạn, lưu niên" },
     { ...lk("/bat-tu", "Bát tự"), mo_ta: "Tứ trụ, ngũ hành, thập thần" },
     { ...lk("/kinh-dich", "Kinh Dịch"), mo_ta: "Gieo quẻ, đọc lời hào" },

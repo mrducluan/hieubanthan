@@ -68,7 +68,7 @@ export const TrangChu: GlobalConfig = {
       ],
     },
     {
-      name: "bai_theo_mang", label: "Khối \"Bài viết liên quan\" ở trang công cụ & Khám phá/Kiến thức", type: "group",
+      name: "bai_theo_mang", label: "Khối \"Bài viết liên quan\" ở trang công cụ & Huyền học/Kiến thức", type: "group",
       admin: { description: "Mỗi trang công cụ (Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Hợp đôi, Hôm nay) tự hiện bài CMS cùng MẢNG." },
       fields: [
         { name: "bat", label: "Bật", type: "checkbox", defaultValue: true },

@@ -19,5 +19,5 @@ export const ND_XEM_NGAY: NoiDungCongCu = {
   ],
   lienKet: [{ href: "/doi-lich-am-duong", ten: "Đổi lịch âm dương" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi" }, { href: "/tuoi-xong-dat", ten: "Tuổi xông đất" },
     { href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/hom-nay", ten: "Hôm nay của bạn" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào" },
-    { href: "/tu-dien", ten: "Từ điển thuật ngữ" }, { href: "/kham-pha", ten: "Khám phá huyền học" }],
+    { href: "/tu-dien", ten: "Từ điển thuật ngữ" }, { href: "/huyen-hoc", ten: "Huyền học: năm hệ thống" }],
 };

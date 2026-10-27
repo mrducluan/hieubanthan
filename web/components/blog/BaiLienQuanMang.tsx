@@ -1,4 +1,4 @@
-// "Bài viết liên quan" theo mảng — đặt ở trang công cụ, Khám phá, Kiến thức; "Bài viết mới" ở trang chủ. Bài lấy từ CMS,
+// "Bài viết liên quan" theo mảng — đặt ở trang công cụ, Huyền học, Kiến thức; "Bài viết mới" ở trang chủ. Bài lấy từ CMS,
 // ban biên tập bật/tắt + đổi số bài + ghim bài ở CMS → Trang chủ & banner. Chưa có bài / CMS tắt → không hiện gì.
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
