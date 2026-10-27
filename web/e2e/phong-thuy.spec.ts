@@ -289,6 +289,52 @@ test("Q3: hướng nhà từ hai điểm bản đồ (dán toạ độ) → đ�
 });
 
 
+test("DH-PC: máy tính — kéo / phím mũi tên trên mặt la bàn rồi Chốt; Dán toạ độ; định vị wifi sai số lớn thì không chốt", async ({ page, context }) => {
+  await context.grantPermissions(["geolocation", "clipboard-read", "clipboard-write"]);
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  const o = page.getByTestId("do-huong");
+  const mat = o.getByTestId("la-ban-keo");
+  await expect(mat).toHaveAttribute("role", "slider");
+  // bấm vào chữ "Đ" (bên phải mặt la bàn) → Đông lên dưới kim = 90°
+  await mat.scrollIntoViewIfNeeded();
+  const hop = (await mat.boundingBox())!;
+  await expect(async () => {   // bấm lại tới khi trang đã hydrate
+    await page.mouse.click(hop.x + hop.width * 0.82, hop.y + hop.height / 2);
+    await expect(mat).toHaveAttribute("aria-valuenow", "90", { timeout: 1_000 });
+  }).toPass();
+  // phím: Shift+→ thêm 15°, → thêm 1°
+  await mat.focus();
+  await page.keyboard.press("Shift+ArrowRight");
+  await page.keyboard.press("ArrowRight");
+  await expect(mat).toHaveAttribute("aria-valuenow", "106");
+  // kéo: tay đi từ đỉnh sang phải 90° → mặt la bàn quay theo, hướng dưới kim lùi 90°
+  const cx = hop.x + hop.width / 2, cy = hop.y + hop.height / 2;
+  await page.mouse.move(cx, hop.y + 10);
+  await page.mouse.down();
+  await page.mouse.move(cx + 40, hop.y + 30, { steps: 4 });
+  await page.mouse.move(hop.x + hop.width - 10, cy, { steps: 4 });
+  await page.mouse.up();
+  await expect(mat).toHaveAttribute("aria-valuenow", /^(1[5-9]|2[0-9])$/);   // ≈ 16°
+  const d = Number(await mat.getAttribute("aria-valuenow"));
+  await o.getByTestId("chot-la-ban-keo").click();
+  await expect(page.getByTestId("ket-qua-do-huong")).toContainText(`${d}°`);
+
+  // bản đồ trên máy tính: hướng dẫn chuột phải + nút mở Google Maps vệ tinh + Dán
+  await o.getByRole("button", { name: /Lấy hướng từ bản đồ/ }).click();
+  await expect(o.getByTestId("huong-ban-do")).toContainText("chuột phải");
+  await expect(o.getByTestId("mo-ban-do-ve-tinh")).toBeVisible();
+  await page.evaluate(() => navigator.clipboard.writeText("10.7769, 106.7009"));
+  await o.getByRole("button", { name: "Dán vào ô tâm nhà" }).click();
+  await expect(o.getByLabel("Toạ độ tâm nhà")).toHaveValue("10.7769, 106.7009");
+  // định vị wifi ±40 m, hai điểm cách ~4 m → không chốt, báo lỗi
+  await context.setGeolocation({ latitude: 10.77693, longitude: 106.70092, accuracy: 40 });
+  await o.getByRole("button", { name: "Lấy vị trí hiện tại làm điểm trước mặt nhà" }).click();
+  await expect(o.getByLabel("Toạ độ điểm trước mặt nhà")).toHaveValue("10.776930, 106.700920");
+  await o.getByRole("button", { name: "Tính hướng từ hai điểm" }).click();
+  await expect(o.getByRole("alert")).toContainText("chưa tin được");
+});
+
 // PNG 1×1 (nền ảnh mặt bằng / ảnh góc nhà) — chỉ để thử chọn tệp; ảnh không rời máy.
 const PNG_1 = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==", "base64");
 
