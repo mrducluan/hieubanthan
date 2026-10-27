@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { postJson } from "@/lib/goi-api";
 import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
 import { CachLam } from "@/components/huyen-hoc/CachLam";
+import { ChonTrenVeTinh } from "@/components/huyen-hoc/ChonTrenVeTinh";
 import { LocateFixed } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
@@ -206,6 +207,12 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
     navigator.geolocation.getCurrentPosition((pos) => di([pos.coords.latitude, pos.coords.longitude]), () => di(null),
       { enableHighAccuracy: false, timeout: 6_000, maximumAge: 600_000 });
   };
+  /** Kết quả engine từ hai điểm (dán toạ độ hoặc chấm trên ảnh vệ tinh) → hiện, báo khung Khảo sát, lưu hồ sơ nhà trên máy. */
+  const apDungBanDo = (r: KetQuaDoHuong & { khoang_cach_m: number }) => {
+    setKq(r); setKcBanDo(r.khoang_cach_m); setDoSong(r.do_huong); setLoi(null);
+    onChot?.(r);
+    try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined, ...(canHo ? { theo: "ban_cong" } : {}) }); } catch { /* bỏ qua */ }
+  };
   const chotBanDo = async () => {
     const a = docToaDo(tam), b = docToaDo(truoc);
     if (!a || !b) { setLoi("Dán toạ độ dạng \"10.776, 106.700\" hoặc link bản đồ có toạ độ cho cả hai điểm."); return; }
@@ -221,9 +228,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
         ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huong_ban_do_sai_so", sai_so_m: ss });
         return;
       }
-      setKq(r); setKcBanDo(r.khoang_cach_m); setDoSong(r.do_huong);
-      onChot?.(r);
-      try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined, ...(canHo ? { theo: "ban_cong" } : {}) }); } catch { /* bỏ qua */ }
+      apDungBanDo(r);
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huong_ban_do" });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa tính được từ hai điểm này."); }
     finally { setDang(false); }
@@ -339,6 +344,12 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
             </Button>
           ) : (
             <p className="text-xs text-fg-faint">Dừng ở hướng ghi đúng việc bạn cần (Sinh Khí · Diên Niên · Thiên Y · Phục Vị) rồi kê theo đó. Muốn lưu hướng NHÀ, chuyển lại “Đo hướng nhà”.</p>
+          )}
+          {cheDo === "nha" && (
+            <ChonTrenVeTinh sinh={sinh} onDung={(r, a, b) => {
+              apDungBanDo(r);
+              setTam(`${a[0]}, ${a[1]}`); setTruoc(`${b[0]}, ${b[1]}`); setSaiSo({ tam: null, truoc: null });
+            }} />
           )}
           <form className="flex flex-wrap items-center gap-2" onSubmit={(e) => { e.preventDefault(); chotNhap(); }}>
             <Input aria-label={cheDo === "nha" ? "Độ hướng nhà" : "Độ đo được"} inputMode="decimal" placeholder="hoặc nhập độ, vd 135" value={nhap} className="w-44"

@@ -335,6 +335,72 @@ test("DH-PC: máy tính — kéo / phím mũi tên trên mặt la bàn rồi Ch�
   await expect(o.getByRole("alert")).toContainText("chưa tin được");
 });
 
+// Google Maps GIẢ cho e2e (môi trường thử không ra mạng Google): Map nhận cú bấm trên khung → toạ độ theo vị trí bấm
+// (giữa khung = 10.7769, 106.7009; mỗi px ≈ 1 m), Marker / Polyline / Geocoder tối thiểu.
+const GMAPS_GIA = `(function () {
+  function LL(a, b) { return { lat: function () { return a; }, lng: function () { return b; } }; }
+  function Map(el) { var me = this; me.el = el; me.ds = {};
+    el.style.cursor = "crosshair";
+    el.addEventListener("click", function (e) { var r = el.getBoundingClientRect();
+      var lat = 10.7769 - (e.clientY - r.top - r.height / 2) * 9e-6, lng = 106.7009 + (e.clientX - r.left - r.width / 2) * 9.2e-6;
+      (me.ds.click || []).forEach(function (f) { f({ latLng: LL(lat, lng) }); }); });
+    window.__ban_do = me; }
+  Map.prototype.addListener = function (t, f) { (this.ds[t] = this.ds[t] || []).push(f); };
+  Map.prototype.setCenter = function (c) { window.__tam_ban_do = c; };
+  Map.prototype.setZoom = function () {};
+  function Marker(o) { this.p = o.position; }
+  Marker.prototype.getPosition = function () { return this.p; };
+  Marker.prototype.setPosition = function (p) { this.p = p; };
+  Marker.prototype.setMap = function () {}; Marker.prototype.addListener = function () {};
+  function Polyline() {} Polyline.prototype.setPath = function () {}; Polyline.prototype.setMap = function () {};
+  function Geocoder() {}
+  Geocoder.prototype.geocode = function (r) { return Promise.resolve({ results: /khong-co/.test(r.address) ? [] : [{ geometry: { location: { lat: 21.0285, lng: 105.8542 } } }] }); };
+  window.google = { maps: { Map: Map, Marker: Marker, Polyline: Polyline, Geocoder: Geocoder, SymbolPath: { FORWARD_CLOSED_ARROW: 1 } } };
+  window.__hbtSan();
+})();`;
+
+test("DH-PC2: chọn trên ảnh vệ tinh (khung riêng, CSP riêng) — bấm mái nhà + mặt đường → engine tính hướng → Dùng hướng này", async ({ page, context }) => {
+  await context.route(/maps\.googleapis\.com/, (r) => r.fulfill({ status: 200, contentType: "text/javascript", body: GMAPS_GIA }));
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  const o = page.getByTestId("do-huong");
+  // CSP chung của trang KHÔNG có 'unsafe-eval'; khung có CSP riêng
+  const cspTrang = (await page.request.get("/phong-thuy")).headers()["content-security-policy"] ?? "";
+  if (!/ws: /.test(cspTrang)) expect(cspTrang).not.toContain("unsafe-eval");   // next dev tự thêm 'unsafe-eval' cho trang
+  const k = await page.request.get("/khung/ve-tinh");
+  expect(k.status()).toBe(200);
+  expect(k.headers()["content-security-policy"]).toContain("'unsafe-eval'");
+  expect(k.headers()["content-security-policy"]).toContain("frame-ancestors 'self'");
+  expect(k.headers()["x-robots-tag"]).toContain("noindex");
+
+  await o.getByTestId("ve-tinh-mo").click();
+  const hd = o.getByTestId("ve-tinh-huong-dan");
+  await expect(hd).toContainText("bấm vào giữa mái nhà");
+  // tìm địa chỉ → khung nhận lệnh; không thấy → báo
+  await o.getByLabel("Tìm địa chỉ trên bản đồ").fill("khong-co dia chi nay");
+  await o.getByRole("button", { name: "Tìm", exact: true }).click();
+  await expect(o.getByRole("alert")).toContainText("Không tìm thấy địa chỉ");
+  const khung = o.getByTestId("ve-tinh-khung");
+  await khung.scrollIntoViewIfNeeded();
+  const ban = page.frameLocator('[data-testid="ve-tinh-khung"]').locator("#ban-do");
+  const h = (await ban.boundingBox())!;
+  await ban.click({ position: { x: h.width / 2, y: h.height / 2 } });          // điểm 1: tâm
+  await expect(hd).toContainText("mặt đường ngay trước cửa");
+  await ban.click({ position: { x: h.width / 2 + 40, y: h.height / 2 + 40 } }); // điểm 2: lệch phải + xuống ≈ Đông Nam
+  const kq = o.getByTestId("ve-tinh-ket-qua");
+  await expect(kq).toContainText("Đông Nam");
+  await o.getByTestId("ve-tinh-dung").click();
+  await expect(page.getByTestId("ket-qua-do-huong")).toContainText("Đông Nam");
+  await expect(page.getByTestId("ket-qua-do-huong")).toContainText("bắc thật");
+  const hs = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"));
+  expect(hs.huong_do).toBeGreaterThan(120);
+  expect(hs.huong_do).toBeLessThan(150);
+  // Chấm lại → về bước 1
+  await o.getByRole("button", { name: "Chấm lại" }).click();
+  await expect(hd).toContainText("bấm vào giữa mái nhà");
+  await expect(kq).toHaveCount(0);
+});
+
 // PNG 1×1 (nền ảnh mặt bằng / ảnh góc nhà) — chỉ để thử chọn tệp; ảnh không rời máy.
 const PNG_1 = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==", "base64");
 

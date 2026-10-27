@@ -28,17 +28,30 @@ dùng **chỉ hai điểm trên ảnh vệ tinh**: mái nhà và mặt đường
 
 Đo: `chart_interacted{kind: mo_ban_do_ve_tinh | ban_do_dan | huong_ban_do_sai_so | huong_ban_do | nhap_do_huong}`.
 
-## 3. Đề xuất bước sau — CHỜ CHỦ DỰ ÁN DUYỆT: chọn trên ảnh vệ tinh ngay trong trang
+## 3. DH-PC2 — chọn trên ảnh vệ tinh ngay trong trang (chủ dự án duyệt phương án A, 2026-10-27, đã làm)
 
-Trải nghiệm đích (một màn, ~20 giây): ô tìm địa chỉ / tự căn theo vị trí máy → ảnh vệ tinh → **bấm lên mái nhà** (ghim) →
-**kéo mũi tên** từ ghim ra mặt đường trước cửa → số độ + hướng hiện sống → Chốt. Không phải chép / dán gì. Toạ độ vẫn chỉ đi
-qua lượt gọi engine, không lưu.
+Một màn: ô tìm địa chỉ + nút "Về vị trí của tôi" → ảnh vệ tinh (Google Maps, lớp "hybrid" có tên đường) → **bấm mái nhà**
+(điểm 1) → **bấm mặt đường trước cửa** (điểm 2, mũi tên vàng) → trang gọi engine → "Mặt nhà nhìn về X · N° · hai điểm cách
+M m" → **Dùng hướng này** (như đo la bàn: hiện kết quả, báo Khảo sát nhà, lưu hồ sơ nhà trên máy). Kéo ghim để chỉnh; bấm
+tiếp = dời điểm 2; "Chấm lại".
 
-| Phương án | Ảnh vệ tinh VN | Chi phí | Việc phải duyệt |
+- **Khung riêng `/khung/ve-tinh`** (route trả HTML): Maps JS API cần `'unsafe-eval'` trong CSP → chỉ khung này có CSP riêng
+  (Google Maps + `'unsafe-eval'`, `frame-ancestors 'self'`, noindex, không cache); `proxy.ts` bỏ qua đường dẫn này, cả site
+  giữ CSP-2 chặt (client navigation không đổi CSP tài liệu nên không thể nới theo từng trang). Robots chặn `/khung/`.
+- **postMessage** chỉ cùng origin và đúng `source`: khung gửi `san` / `loi` / `diem{buoc, tam, truoc}` / `tim` / `vi_tri`;
+  trang gửi lệnh `tim`, `vi_tri`, `lam_lai`. Web KHÔNG tự tính góc — mỗi lần đủ hai điểm gọi `/api/phongthuy/huong-ban-do`.
+- Bản đồ chỉ tải khi bấm "Chọn trên ảnh vệ tinh" → không tốn lượt với người chỉ đọc. Thiếu `NEXT_PUBLIC_GOOGLE_MAPS_KEY`
+  → nút ẩn; khoá sai / bị chặn (`gm_authFailure`) → báo và chỉ sang cách dán toạ độ.
+- Không thêm gói npm (không `@types/google.maps`, không thư viện React cho Maps).
+- Chính sách riêng tư thêm dòng "Google Maps (bản đồ vệ tinh)", hiệu lực 27/10/2026.
+- Đo: `chart_interacted{kind: ve_tinh_mo | ve_tinh_tim | ve_tinh_dung}`.
+- E2E: bản Google Maps GIẢ (`e2e/phong-thuy.spec.ts` "DH-PC2") — chấm hai điểm trong khung → engine → Đông Nam; kiểm CSP
+  trang không có `'unsafe-eval'`, khung có. Bản thật cần kiểm tay sau khi đặt khoá (`docs/VIEC-CUA-ANH.md` mục 4r).
+
+### Lựa chọn đã cân nhắc
+
+| Phương án | Ảnh vệ tinh VN | Chi phí | Ghi chú |
 |---|---|---|---|
-| **A. Google Maps JavaScript API** (khuyến nghị) | Tốt nhất, người dùng quen | Miễn phí ~10.000 lượt mở bản đồ / tháng, sau đó tính tiền | Tài khoản Google Cloud có thanh toán, khoá API giới hạn theo tên miền (env `NEXT_PUBLIC_GOOGLE_MAPS_KEY`), thêm miền Google Maps vào `lib/csp.ts`, cập nhật Chính sách riêng tư (bản đồ do Google cung cấp) |
-| B. Tự viết khung xem ô ảnh (không thư viện) + Google Map Tiles API | Như A | Miễn phí 100.000 ô ảnh / tháng (~3.000 lượt xem) | Như A, thêm ~1–2 ngày viết khung kéo / phóng to |
-| C. Leaflet / MapLibre + nguồn ảnh khác | Esri World Imagery **không cho dùng thương mại** nếu không có giấy phép ArcGIS; nhà cung cấp VN (Goong, VietMap) cần kiểm tra có lớp vệ tinh | Tuỳ nhà cung cấp | Dependency mới + nhà cung cấp mới |
-
-Khuyến nghị **A**, chỉ tải bản đồ khi người dùng bấm "Chọn trên ảnh vệ tinh" (không tốn lượt với người chỉ đọc trang),
-giữ nguyên cách dán toạ độ làm đường dự phòng khi thiếu khoá / hết hạn mức.
+| **A. Google Maps JavaScript API** (đã chọn) | Tốt nhất, người dùng quen | Miễn phí ~10.000 lượt mở bản đồ / tháng, sau đó tính tiền | Khoá giới hạn tên miền, đặt hạn mức ngày |
+| B. Tự viết khung xem ô ảnh + Google Map Tiles API | Như A | Miễn phí 100.000 ô ảnh / tháng (~3.000 lượt xem) | Thêm 1–2 ngày viết khung kéo / phóng to |
+| C. Leaflet / MapLibre + nguồn ảnh khác | Esri World Imagery **không cho dùng thương mại** nếu không có giấy phép ArcGIS | Tuỳ nhà cung cấp | Dependency mới |
