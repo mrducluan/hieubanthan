@@ -16,7 +16,7 @@ const RONG_PHONG = 760;
 
 export function KhungLaSo({ chon, children, chan, testId = "la-so-tu-vi", className }: {
   /** chi của cung đang chọn — phóng to thì cuộn tới cột của cung ấy */ chon?: string; children: ReactNode;
-  /** dải chân (hieuban.com + QR) nằm trong khung nhưng ngoài SVG → ảnh tải về không bị in hai lần */ chan?: ReactNode;
+  /** dải chân (hieuban.com + QR) nằm dưới lá số, ngoài SVG và ngoài vùng cuộn ngang → ảnh tải về không bị in hai lần */ chan?: ReactNode;
   testId?: string; className?: string;
 }) {
   const [phong, setPhong] = useState(false);
@@ -45,9 +45,10 @@ export function KhungLaSo({ chon, children, chan, testId = "la-so-tu-vi", classN
       <div ref={cuon} className={cn("px-4 pb-2 sm:px-0", phong && "overflow-x-auto overscroll-x-contain")} data-testid={testId} data-phong={phong ? "1" : "0"}>
         <div className={cn("overflow-hidden rounded-[1.25rem] shadow-card", phong && "min-w-[760px] sm:min-w-0")}>
           {children}
-          {chan}
         </div>
       </div>
+      {/* Dải chân nằm NGOÀI vùng cuộn ngang: phóng to trên điện thoại thì QR + hieuban.com vẫn nằm trong màn hình. */}
+      {chan && <div className="px-4 pb-2 sm:px-0"><div className="overflow-hidden rounded-[1.25rem] shadow-card">{chan}</div></div>}
     </div>
   );
 }

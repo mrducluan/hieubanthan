@@ -88,7 +88,7 @@ test("luận giải toàn bộ theo chương (miễn phí thử nghiệm)", asyn
 test("lá số trên màn hình có dải chân hieuban.com + mã QR (chụp màn hình vẫn mang link về web)", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/tu-vi");
-  const chan = page.getByTestId("la-so-tu-vi").getByTestId("chan-la-so");
+  const chan = page.getByTestId("chan-la-so");
   await expect(chan).toBeVisible();
   await expect(chan).toContainText("hieuban.com");
   await expect(chan.getByRole("img", { name: /Mã QR mở hieuban\.com\/tu-vi/ })).toBeVisible();

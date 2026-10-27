@@ -3,6 +3,7 @@
 // hình lá số (cách chia sẻ phổ biến nhất, nhất là trên điện thoại) vẫn mang link + QR về web. Nút "Tải ảnh" đã có dải chân
 // riêng (lib/chan-anh.ts) và chỉ chụp phần lá số, nên dải này đặt NGOÀI vùng được chụp → không bị in hai lần.
 // QR tự vẽ (lib/qr.ts), nền sáng ở cả hai giao diện để máy quét đọc được; cạnh QR = số ô × 2px để chụp màn hình vẫn quét được.
+import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { duongQr, maHoaQr, type MaQr } from "@/lib/qr";
 import { GOC_QR, TEN_MIEN } from "@/lib/the-chia-se";
@@ -10,8 +11,8 @@ import { GOC_QR, TEN_MIEN } from "@/lib/the-chia-se";
 export function ChanLaSo({ giaoDien, tieuDe, duong }: { giaoDien: "dem" | "giay"; tieuDe: string; duong?: string }) {
   const hienTai = usePathname();
   const d = duong ?? hienTai ?? "/";
-  let qr: MaQr;
-  try { qr = maHoaQr(`${GOC_QR}${d}`); } catch { return null; }
+  const qr = useMemo<MaQr | null>(() => { try { return maHoaQr(`${GOC_QR}${d}`); } catch { return null; } }, [d]);
+  if (!qr) return null;
   const n = qr.kichThuoc + 8;
   return (
     <div className={`la-so-${giaoDien} flex items-center justify-between gap-3 border-t border-[var(--ls-vien)] px-4 py-3 sm:px-6`}
