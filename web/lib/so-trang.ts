@@ -103,10 +103,10 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "So hợp đôi theo thần số học cho người yêu, bạn bè, đồng nghiệp, sếp, người thân: con số hai người hoà ở đâu, va ở đâu, việc nên cùng làm. Không chấm điểm hợp hay khắc.",
     doan: [
       "Chọn người ấy là ai với bạn — người yêu, bạn bè, đồng nghiệp, sếp hay người thân — rồi nhập ngày sinh (tên không bắt buộc). Hệ thống so cặp số đường đời và các cặp số theo tên, đọc theo đúng loại quan hệ đó, kèm nhịp năm cá nhân của hai người.",
-      "Không có điểm “hợp” hay “khắc”: hai con số nào cũng có chỗ dễ hoà và chỗ dễ va. Bạn có thể gửi link mời để người ấy tự nhập ngày sinh của họ — link chỉ chứa tên hiển thị và con số, không chứa ngày sinh.",
+      "Thần số không chấm điểm “hợp” hay “khắc”: hai con số nào cũng có chỗ dễ hoà và chỗ dễ va. Bạn có thể gửi link mời để người ấy tự nhập ngày sinh của họ — link chỉ chứa tên hiển thị và con số, không chứa ngày sinh.",
     ],
     hoi_dap: [
-      { hoi: "Hợp đôi có chấm điểm phần trăm không?", dap: "Không. Điểm số hợp/khắc dễ gây hiểu lầm; trang chỉ nêu chỗ hoà, chỗ va và việc nên cùng làm." },
+      { hoi: "Hợp đôi có chấm điểm phần trăm không?", dap: "Không. Điểm số hợp/khắc dễ gây hiểu lầm; trang chỉ nêu chỗ hoà, chỗ va và việc nên cùng làm. Muốn có điểm tham khảo thì dùng khối “Xem lá số 2 người” ở trang Tử vi — điểm ở đó cộng từ các luật hợp – khắc có sẵn trong sách Tử vi và lịch cổ." },
       { hoi: "Ngày sinh người kia có bị lưu lại không?", dap: "Không. Ngày sinh chỉ dùng để tính rồi bỏ. Vui lòng chỉ nhập khi người đó biết và đồng ý." },
       { hoi: "Xem hợp đôi đồng nghiệp hay sếp khác gì người yêu?", dap: "Cùng một cặp số nhưng cách đọc khác: mỗi loại quan hệ có phần diễn giải riêng về cách phối hợp, giao tiếp, ranh giới." },
     ],
@@ -187,7 +187,16 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     tieu_de_seo: "Nạp Sao", h1: "Nạp Sao",
     mo_ta_seo: "Nạp Sao để mở Luận giải toàn bộ và các tính năng chuyên sâu. Thanh toán bằng QR chuyển khoản qua app ngân hàng hoặc ví điện tử.",
   } },
+  { duong: "/hoi-vien", nhom: "cong_cu", ten: "Hội viên năm", o: O_TRANG_PHU, mac_dinh: {
+    tieu_de_seo: "Hội viên năm — mở mọi luận giải, mua một lần", h1: "Hội viên năm",
+    mo_ta_seo: "Hội viên năm Hiểu Bản Thân: mở mọi chương Luận giải toàn bộ Tử vi, Bát tự, Bản đồ con số, Sao tặng mỗi tháng. Trả một lần bằng QR chuyển khoản, không tự gia hạn.",
+  } },
   { duong: "/tai-khoan", nhom: "cong_cu", ten: "Tài khoản", o: ["seo"], mac_dinh: { tieu_de_seo: "Tài khoản" } },
+  // SAO-CG (0029): trang bán câu hỏi chuyên gia — chữ trong app/hoi-chuyen-gia/page.tsx; chỉ có trong sitemap khi công tắc bật.
+  { duong: "/hoi-chuyen-gia", nhom: "cong_cu", ten: "Hỏi chuyên gia", o: ["seo"], mac_dinh: {
+    tieu_de_seo: "Hỏi chuyên gia — một câu hỏi, trả lời trong 48 giờ", h1: "Một câu hỏi, một câu trả lời của người thật",
+    mo_ta_seo: "Đặt một câu hỏi về thần số học, Tử vi, Bát tự, Kinh Dịch hoặc phong thuỷ cho chuyên gia Đức Luân. Trả lời bằng văn bản trong 48 giờ, quá hạn hoàn 100%. Giá cố định, thanh toán QR.",
+  } },
   { duong: "/ung-ho", nhom: "cong_cu", ten: "Ủng hộ đội ngũ phát triển", o: O_TRANG_PHU, mac_dinh: {
     tieu_de_seo: "Ủng hộ đội ngũ phát triển Hiểu Bản Thân", h1: "Ủng hộ đội ngũ phát triển",
     mo_ta_seo: "Hiểu Bản Thân miễn phí phần lớn công cụ. Nếu thấy hữu ích, bạn có thể ủng hộ đội ngũ phát triển bằng chuyển khoản hoặc ví tiền mã hoá.",
@@ -247,12 +256,12 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   { duong: "/chinh-sach-rieng-tu", nhom: "phap_ly", ten: "Chính sách quyền riêng tư", o: O_PHAP_LY, mac_dinh: {
     tieu_de_seo: "Chính sách quyền riêng tư", h1: "Chính sách quyền riêng tư", ngay_hieu_luc: NGAY_HIEU_LUC,
     mo_ta_seo: "Hiểu Bản Thân thu gì, lưu ở đâu, bao lâu, gửi cho ai và bạn có quyền gì với dữ liệu cá nhân của mình — theo Luật Bảo vệ dữ liệu cá nhân 2025.",
-    muc: [{ id: "tom-tat", tieu_de: "Tóm tắt trong 30 giây" }, { id: "ben-kiem-soat", tieu_de: "Ai chịu trách nhiệm về dữ liệu" }, { id: "du-lieu", tieu_de: "Dữ liệu nào, lưu ở đâu, bao lâu" }, { id: "muc-dich", tieu_de: "Mục đích và căn cứ xử lý" }, { id: "ben-thu-ba", tieu_de: "Bên xử lý thay chúng tôi và chuyển dữ liệu ra nước ngoài" }, { id: "quyen", tieu_de: "Quyền của bạn và cách thực hiện" }, { id: "tre-em", tieu_de: "Trẻ em" }, { id: "trinh-duyet", tieu_de: "Cookie và lưu trữ trên trình duyệt" }, { id: "bao-mat", tieu_de: "Bảo mật và sự cố" }, { id: "thay-doi", tieu_de: "Thay đổi chính sách" }],
+    muc: [{ id: "tom-tat", tieu_de: "Tóm tắt trong 30 giây" }, { id: "ben-kiem-soat", tieu_de: "Ai chịu trách nhiệm về dữ liệu" }, { id: "du-lieu", tieu_de: "Dữ liệu nào, lưu ở đâu, bao lâu" }, { id: "muc-dich", tieu_de: "Mục đích và căn cứ xử lý" }, { id: "dong-y", tieu_de: "Cách bạn đồng ý và rút lại" }, { id: "ben-thu-ba", tieu_de: "Bên xử lý thay chúng tôi và chuyển dữ liệu ra nước ngoài" }, { id: "quyen", tieu_de: "Quyền của bạn và cách thực hiện" }, { id: "tre-em", tieu_de: "Trẻ em" }, { id: "trinh-duyet", tieu_de: "Cookie và lưu trữ trên trình duyệt" }, { id: "bao-mat", tieu_de: "Bảo mật và sự cố" }, { id: "thay-doi", tieu_de: "Thay đổi chính sách" }],
   } },
   { duong: "/dieu-khoan", nhom: "phap_ly", ten: "Điều khoản sử dụng", o: O_PHAP_LY, mac_dinh: {
     tieu_de_seo: "Điều khoản sử dụng", h1: "Điều khoản sử dụng", ngay_hieu_luc: NGAY_HIEU_LUC,
     mo_ta_seo: "Điều khoản sử dụng Hiểu Bản Thân: tính chất dịch vụ tham khảo văn hoá, tài khoản, Sao, nội dung, sở hữu trí tuệ và giới hạn trách nhiệm.",
-    muc: [{ id: "chap-nhan", tieu_de: "Chấp nhận điều khoản" }, { id: "tinh-chat", tieu_de: "Tính chất của dịch vụ" }, { id: "tai-khoan", tieu_de: "Tài khoản" }, { id: "sao", tieu_de: "Sao — điểm dùng trong ứng dụng" }, { id: "gioi-thieu", tieu_de: "Chương trình giới thiệu (mời bạn)" }, { id: "hanh-vi", tieu_de: "Những điều không được làm" }, { id: "noi-dung", tieu_de: "Nội dung và sở hữu trí tuệ" }, { id: "trach-nhiem", tieu_de: "Giới hạn trách nhiệm" }, { id: "luat", tieu_de: "Luật áp dụng, thay đổi và liên hệ" }],
+    muc: [{ id: "chap-nhan", tieu_de: "Chấp nhận điều khoản" }, { id: "tinh-chat", tieu_de: "Tính chất của dịch vụ" }, { id: "tai-khoan", tieu_de: "Tài khoản" }, { id: "sao", tieu_de: "Sao — điểm dùng trong ứng dụng" }, { id: "hoi-vien", tieu_de: "Hội viên năm" }, { id: "gioi-thieu", tieu_de: "Chương trình giới thiệu (mời bạn)" }, { id: "chuyen-gia", tieu_de: "Hỏi chuyên gia" }, { id: "hanh-vi", tieu_de: "Những điều không được làm" }, { id: "noi-dung", tieu_de: "Nội dung và sở hữu trí tuệ" }, { id: "trach-nhiem", tieu_de: "Giới hạn trách nhiệm" }, { id: "luat", tieu_de: "Luật áp dụng, thay đổi và liên hệ" }],
   } },
   { duong: "/mien-tru-trach-nhiem", nhom: "phap_ly", ten: "Miễn trừ trách nhiệm", o: O_PHAP_LY, mac_dinh: {
     tieu_de_seo: "Miễn trừ trách nhiệm", h1: "Miễn trừ trách nhiệm", ngay_hieu_luc: NGAY_HIEU_LUC,

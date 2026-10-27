@@ -3,7 +3,7 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-10-13.
+> Cập nhật lần cuối: 2026-10-27.
 
 ## Anh đã chốt (2026-10-08)
 
@@ -96,6 +96,31 @@
    (`sao.hoa_hong.bat`, mặc định 20% đơn nạp đầu), **Chuỗi ngày ghé**, **Tặng một chương**, và **Thu Sao riêng:
    Bản đồ con số** (chạy thử thu Sao một mảng trước). Tất cả mặc định TẮT. Cần tài khoản (Supabase Auth) đã bật trên web
    thì các phần này mới chạy.
+4n. [ ] **Chống gian lận SAO-GL (2026-10-26) — chạy migration 0026** (SAU 0025): Supabase → SQL Editor → dán toàn bộ
+   `supabase/migrations/0026_chong_gian_lan.sql` → Run (rollback: `0026_chong_gian_lan.down.sql`). Kiểm bằng
+   `supabase/kiem_thu/da_chay_chua.sql` (dòng 0026 = true). **Chạy 0026 TRƯỚC khi bật hoa hồng.** Mặc định bật: một máy
+   nhận lời mời cho ≥ 3 tài khoản / 30 ngày, hoặc người mời và người được mời cùng máy → người mời không được thưởng /
+   hoa hồng, ghi cờ ở `/quan-tri/doanh-thu` → "Cờ gian lận lời mời". Gia đình dùng chung một máy → tăng ngưỡng ở
+   `/quan-tri/cai-dat`. Cần `SAO_KHOA_SECRET` (đã có cho SAO-2) để tính mã băm thiết bị.
+4o. [ ] **Nạp đầu SAO-ND (2026-10-26) — chạy migration 0027** (SAU 0026): Supabase → SQL Editor → dán toàn bộ
+   `supabase/migrations/0027_nap_dau.sql` → Run (rollback: `0027_nap_dau.down.sql`). Kiểm bằng `da_chay_chua.sql` (dòng
+   0027 = true). Rồi bật ở `/quan-tri/cai-dat` nhóm "Nạp Sao": gói Khởi đầu 19.000 ₫ / 19 Sao — cùng 10 Sao chào mừng vừa đủ 1 báo cáo 29 Sao (`sao.goi_khoi_dau.bat`; đổi giá báo cáo thì xem lại cỡ gói này)
+   và tặng Sao lần nạp đầu (`sao.nap_dau.bat`, mặc định 20%). **Thứ tự 0025 → 0026 → 0027 bắt buộc, và KHÔNG chạy lại
+   0025 sau khi đã chạy 0027** (0025 đặt lại danh sách loại Sao chưa có `nap_dau` → lỗi ràng buộc khi đã có dòng tặng).
+4p. [ ] **Hội viên năm · Hỏi chuyên gia · chuỗi/huy hiệu (2026-10-26) — chạy migration 0028 → 0029 → 0030** (SAU 0027,
+   đúng thứ tự này; rollback ngược lại 0030 → 0029 → 0028). Supabase → SQL Editor → dán từng tệp
+   `supabase/migrations/0028_hoi_vien.sql`, `0029_chuyen_gia.sql`, `0030_chuoi_huy_hieu.sql` → Run. Kiểm bằng
+   `da_chay_chua.sql` (ba dòng 0028, 0029, 0030 = true) — hoặc nhìn thẻ **"Migration Supabase"** ở `/quan-tri` (báo "Đủ"
+   khi xong; trước đó công tắc hội viên / chuyên gia / hoa hồng… ở Cài đặt bị khoá kèm nhãn "Cần migration 00xx"). Rồi ở
+   `/quan-tri/cai-dat`:
+   1. **Hỏi chuyên gia** (`sao.chuyen_gia.bat`): giá mặc định 199.000 ₫/câu, câu đầu giảm 30 %, hạn trả lời 48 giờ.
+      Anh (chủ sở hữu, đã bật MFA) trả lời ở **Quản trị → Hỏi chuyên gia**; quá hạn thì hoàn 100 % ngoài hệ thống rồi bấm
+      "Hoàn". Bật cái này TRƯỚC hội viên (hội viên thường kèm 1 câu hỏi/năm, hạng Chuyên gia 6 câu).
+   2. **Hội viên năm — hai hạng** (anh chốt phương án a): bật `sao.hoi_vien.bat` = bán **hạng thường 399.000 ₫/năm** (1 câu hỏi chuyên gia/năm). Khi anh sẵn thời gian trả lời trong 24 giờ, bật thêm `sao.hoi_vien.cg.bat` = bán **hạng Chuyên gia 1.990.000 ₫/năm** (6 câu/năm, hạn 24 giờ; người hạng thường thấy nút nâng hạng, giá tự trừ phần còn lại). 15 Sao tặng/tháng cả hai hạng, không cộng dồn. Đổi số ở cài đặt chỉ áp cho người mua SAU khi đổi. Chính sách hoàn tiền ở Điều khoản mục "Hội viên năm".
+   3. **Chuỗi ngày** (`sao.chuoi.bat`, của 0025): bật xong thì ngày nghỉ chuỗi (1 ngày/7 ngày) + huy hiệu tự chạy, không
+      cần công tắc riêng. Lá bài đầu ngày và "Hẹn với chính mình" chạy trên máy người dùng, không cần migration.
+   **Lưu ý rollback 0028**: tệp down XOÁ đơn `don_nap` loại hội viên/chuyên gia (không khớp ràng buộc cũ) — xuất CSV
+   bảng `hoi_vien`, `cau_hoi_chuyen_gia`, `don_nap` trước khi rollback trên production.
 4l. [ ] **Bảo mật SEC-2 (2026-10-23, `docs/BAO-MAT.md` mục SEC-2) — làm theo thứ tự:**
    1. [x] Render có `ENGINE_API_KEY` — anh xác nhận 2026-10-23.
    2. [ ] **Chạy migration** (sau khi merge PR SEC-2): Supabase → **SQL Editor** → New query → dán toàn bộ nội dung
@@ -430,6 +455,18 @@ Thiết kế: `docs/KIEN-TRUC-QUAN-TRI.md`. Cần **bật tài khoản trước*
   bấm **Tạo mã QR** → quét → nhập mã 6 số. Lần sau chỉ cần nhập mã 6 số.
   ⚠️ Mất điện thoại = không vào được `/quan-tri`. Khi đó vào Supabase → Authentication → Users → chọn tài khoản →
   xoá factor MFA, rồi đăng ký lại.
+
+**Không vào được `/quan-tri`? Xem màn hình đang báo gì (2026-10-27, kiểm bằng chuỗi thật `e2e-that/quan-tri-that.spec.ts`):**
+
+| Màn hình báo | Nguyên nhân | Cách sửa |
+|---|---|---|
+| "Tài khoản chưa được bật" | Vercel thiếu `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Đặt ở Vercel (Production) → **Redeploy** |
+| Đăng nhập xong lại quay về trang đăng nhập | Supabase chưa cho phép quay về hieuban.com | Supabase → Authentication → **URL Configuration**: Site URL `https://hieuban.com`, Redirect URLs thêm `https://hieuban.com/**` |
+| "Chưa chạy migration quản trị" | Chưa chạy 0010 | Mục Q1 |
+| "Tài khoản này chưa có quyền quản trị" (có dòng "Đang đăng nhập: email…") | Chưa cấp vai trò, hoặc cấp cho email khác | Chạy câu SQL mục Q3 với **đúng email đang hiện trên màn hình** (đăng nhập Google và đăng nhập bằng mã email là cùng tài khoản chỉ khi cùng email) |
+| "Chưa tạo được mã QR" | TOTP đang tắt | Mục Q2 |
+| "Mã chưa đúng hoặc đã hết hạn" | Giờ điện thoại lệch / mã cũ | Bật giờ tự động trên điện thoại, nhập mã mới (đổi mỗi 30 giây) |
+| Vào được nhưng **bật công tắc báo "Chưa chạy migration 00xx"** | Supabase chưa có bảng của tính năng đó | Bảng điều khiển có thẻ **"Migration Supabase"** liệt kê migration còn thiếu → chạy theo thứ tự số (mục 4m → 4p) → tải lại |
 
 - [x] **Q5. Kết nối GitHub cho "Kho tri thức" (QT-1)** (anh báo xong 2026-10-10; còn bước 5 sửa thử một chữ) — để sửa nội dung ngay trong `/quan-tri/tri-thuc`:
   1. GitHub → ảnh đại diện → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens**

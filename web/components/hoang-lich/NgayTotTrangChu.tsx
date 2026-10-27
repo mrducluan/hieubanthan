@@ -14,7 +14,7 @@ export async function NgayTotTrangChu({ className = "" }: { className?: string }
     <section aria-labelledby="ngay-tot-hom-nay" className={`bau-troi p-5 sm:p-7 ${className}`} data-testid="ngay-tot-trang-chu">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="eyebrow flex items-center gap-2"><CalendarDays className="size-3.5 text-gold" aria-hidden /> Hoàng lịch hôm nay</p>
+          <p className="eyebrow flex items-center gap-2 !text-xs !text-fg-muted"><CalendarDays className="size-3.5 text-gold" aria-hidden /> Hoàng lịch hôm nay</p>
           <h2 id="ngay-tot-hom-nay" className="mt-2 text-2xl sm:text-3xl">Hôm nay {d.ngay.split("-").reverse().slice(0, 2).join("/")} có phải ngày tốt?</h2>
           <p className="mt-1 text-sm text-fg-muted">{d.thu} · âm lịch {d.am.chu} · ngày {d.can_chi.ngay}</p>
         </div>

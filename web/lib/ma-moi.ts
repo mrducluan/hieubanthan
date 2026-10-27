@@ -100,7 +100,7 @@ export function docMaNgay(ma: string, homNay = new Date()): NoiDungMaNgay | null
 // ---------------------------------------------------------------- TCS-1: thẻ "Điểm hai người" (Xem lá số 2 người)
 // Mã riêng miền "hai|". Chỉ mang: tên hiển thị NGƯỜI GỬI (người dùng tự gõ, có thể trống), quan hệ, điểm tổng, mức và
 // ≤ 3 điểm tiêu chí (phần trăm) — engine chấm, máy chủ ký. KHÔNG ngày sinh, không can chi / con giáp / mệnh (đủ để suy
-// năm sinh). KHÔNG tên người kia (NĐ 13/2023 — người đó không đồng ý đưa tên lên link công khai): ô thứ 3 của gói luôn
+// năm sinh). KHÔNG tên người kia (Luật BVDLCN 91/2025, thay NĐ 13/2023 — người đó không đồng ý đưa tên lên link công khai): ô thứ 3 của gói luôn
 // ký là chuỗi rỗng; mã cũ còn tên người kia thì khi đọc bỏ đi (hiện theo quan hệ — lib/the-chia-se.ts tenHai).
 // Gói gọn thành mảng JSON + chữ ký 16 ký tự (96 bit) để link ngắn → mã QR trên ảnh nhỏ, dễ quét.
 export const QUAN_HE_HAI = ["nguoi_yeu", "vo_chong", "ban_be", "dong_nghiep", "doi_tac", "sep", "cha_me_con", "gia_dinh"] as const;

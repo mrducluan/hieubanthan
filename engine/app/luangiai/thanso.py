@@ -235,6 +235,11 @@ def _kiem_chung(vi_tri: str, so: int, chinh: dict) -> dict | None:
     }
 
 
+# Tên hiển thị của hai cách tính Đường đời (khớp nhãn lựa chọn trên web, lib/quy-uoc-dd.ts) — chữ hiện ra giao diện
+# không bao giờ mang mã "tong_het" / "tung_phan".
+TEN_QUY_UOC_DD = {"tong_het": "Cộng hết chữ số", "tung_phan": "Rút gọn con số"}
+
+
 def _tom_tat_ten(ho_ten: list[str], chinh: dict, theo_bien_the: list[dict]) -> str:
     """Một câu đời thường khi tên thường gọi ra số khác tên khai sinh, vd "Theo tên thường gọi “Lan”, số Sứ mệnh là 5
     (tên khai sinh ra 7). Bài đọc dùng tên khai sinh." Không lệch → ""."""

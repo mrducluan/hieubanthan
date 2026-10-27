@@ -33,6 +33,28 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Thời hạn tính hoa hồng (tháng)", moTa: "Tính từ lúc bạn bè nhận lời mời." },
   { khoa: "sao.hoa_hong.tran_30_ngay", nhom: "Hoa hồng nạp Sao", loai: "so", min: 0, max: 10000, macDinh: 1000,
     ten: "Trần hoa hồng mỗi người mời / 30 ngày (Sao)", moTa: "Chống lạm dụng. Quá trần: đơn vẫn ghi nhận, không cộng thêm Sao." },
+  // SAO-GL (0026): chống gian lận thưởng mời + hoa hồng theo mã băm thiết bị (HMAC IP + user-agent, không lưu IP).
+  { khoa: "sao.gian_lan.bat", nhom: "Hoa hồng nạp Sao", loai: "bat_tat", macDinh: true,
+    ten: "Chống gian lận lời mời", moTa: "Bật (mặc định) = một máy nhận lời mời cho quá nhiều tài khoản, hoặc người mời và người được mời cùng máy → người mời không được thưởng / hoa hồng, ghi cờ ở Doanh thu. Người được mời vẫn nhận thưởng của mình." },
+  { khoa: "sao.gian_lan.thiet_bi_30_ngay", nhom: "Hoa hồng nạp Sao", loai: "so", min: 2, max: 50, macDinh: 3,
+    ten: "Số tài khoản / một máy / 30 ngày thì gắn cờ", moTa: "Tài khoản thứ N nhận lời mời trên cùng một máy trong 30 ngày → người mời không được thưởng. Gia đình dùng chung máy: tăng số này." },
+  // SAO-ND (migration 0027): thiết kế lần nạp đầu — SQL đọc cùng khoá (tao_don_nap / goi_sao_dang_ban / nd_tang_cho_don).
+  { khoa: "sao.goi_khoi_dau.bat", nhom: "Nạp Sao", loai: "bat_tat", macDinh: false,
+    ten: "Bán gói Khởi đầu (12.000 ₫ / 12 Sao)", moTa: "Gói vừa đủ mở 1 Luận giải toàn bộ, đứng đầu trang nạp và được gợi ý trong hộp nạp nhanh khi là gói nhỏ nhất đủ dùng. Tắt = ẩn và máy chủ từ chối tạo đơn gói này." },
+  { khoa: "sao.nap_dau.bat", nhom: "Nạp Sao", loai: "bat_tat", macDinh: false,
+    ten: "Tặng Sao lần nạp đầu", moTa: "Bật = đơn nạp thành công ĐẦU TIÊN của mỗi tài khoản được cộng thêm % số Sao của gói, dưới dạng Sao tặng (hạn 365 ngày). Một lần mỗi tài khoản; hoàn tiền đơn đó → tự thu hồi. Hoa hồng người mời vẫn tính trên Sao của gói." },
+  { khoa: "sao.nap_dau.phan_tram", nhom: "Nạp Sao", loai: "so", min: 0, max: 100, macDinh: 20,
+    ten: "Tỉ lệ tặng lần nạp đầu (%)", moTa: "Tính trên số Sao của gói, làm tròn xuống. 0 = tạm dừng." },
+  // ---- SAO-CG (0029) ---- "Hỏi chuyên gia": trả VND cố định qua cổng thanh toán (KHÔNG bằng Sao), chuyên gia trả lời trong
+  // N giờ hoặc hoàn 100%. SQL đọc cùng khoá (cg_gia_vnd / cg_giam_pt / cg_han_gio, kẹp). Khoá gia_vnd dùng chung với 0028 (hội viên).
+  { khoa: "sao.chuyen_gia.bat", nhom: "Hỏi chuyên gia", loai: "bat_tat", macDinh: false,
+    ten: "Mở \"Hỏi chuyên gia\"", moTa: "Bật = trang /hoi-chuyen-gia nhận câu hỏi trả phí; chuyên gia (chủ sở hữu / thẩm định, đã MFA) trả lời ở Quản trị → Hỏi chuyên gia. Tắt = trang hiện \"sắp mở\", máy chủ từ chối tạo câu hỏi." },
+  { khoa: "sao.chuyen_gia.gia_vnd", nhom: "Hỏi chuyên gia", loai: "so", min: 20000, max: 5000000, macDinh: 199000,
+    ten: "Giá một câu hỏi (₫)", moTa: "Trả một lần qua chuyển khoản QR. Số tiền đơn luôn lấy từ đây ở máy chủ. Dùng chung với Hội viên năm: hoàn tiền hội viên sau 14 ngày trừ đúng giá này cho mỗi câu đã dùng." },
+  { khoa: "sao.chuyen_gia.giam_lan_dau_pt", nhom: "Hỏi chuyên gia", loai: "so", min: 0, max: 90, macDinh: 30,
+    ten: "Giảm giá câu hỏi đầu tiên (%)", moTa: "Áp dụng cho tài khoản chưa từng thanh toán câu hỏi nào. 0 = không giảm." },
+  { khoa: "sao.chuyen_gia.han_gio", nhom: "Hỏi chuyên gia", loai: "so", min: 12, max: 168, macDinh: 48,
+    ten: "Hạn trả lời (giờ)", moTa: "Tính từ lúc thanh toán. Quá hạn → chủ sở hữu hoàn 100% ngoài hệ thống rồi bấm Hoàn." },
   // SAO-V (0025): chuỗi ngày ghé — chỉ lưu ngày ghé cuối + độ dài chuỗi, mất chuỗi chỉ đếm lại.
   { khoa: "sao.chuoi.bat", nhom: "Chuỗi ngày ghé", loai: "bat_tat", macDinh: false,
     ten: "Thưởng chuỗi ngày ghé", moTa: "Tắt = vẫn đếm chuỗi cho người đăng nhập, không cộng Sao." },
@@ -65,7 +87,7 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Thu Sao riêng: Luận giải Tử vi", moTa: "Bật = mảng này thu Sao, kể cả khi công tắc chung đang tắt." },
   { khoa: "luan_giai.thu_sao.battu", nhom: "Luận giải toàn bộ", loai: "bat_tat", macDinh: false,
     ten: "Thu Sao riêng: Luận giải Bát tự", moTa: "Bật = mảng này thu Sao, kể cả khi công tắc chung đang tắt." },
-  { khoa: "luan_giai.gia_sao", nhom: "Luận giải toàn bộ", loai: "so", min: 1, max: 100, macDinh: 10,
+  { khoa: "luan_giai.gia_sao", nhom: "Luận giải toàn bộ", loai: "so", min: 1, max: 100, macDinh: 29,
     ten: "Giá Luận giải toàn bộ (Sao/báo cáo)", moTa: "Chỉ áp dụng khi đang thu Sao." },
   { khoa: "luan_giai.chuong_mien_phi", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 3, macDinh: 1,
     ten: "Số chương xem miễn phí", moTa: "Khi đang thu Sao: ai cũng đọc trọn N chương đầu; chương sau hiện tiêu đề + điểm nhấn + câu hỏi, mở bằng Sao." },
@@ -75,8 +97,30 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Câu miễn phí/ngày — khách chưa đăng nhập", moTa: "Hết lượt → mời đăng nhập (nhận Sao chào mừng) để hỏi tiếp." },
   { khoa: "sao.hoi.mien_phi_tk", nhom: "Hỏi đáp", loai: "so", min: 0, max: 100, macDinh: 10,
     ten: "Câu miễn phí/ngày — có tài khoản", moTa: "Tính chung mọi mảng. Hết lượt → mỗi câu tốn Sao (người dùng bấm đồng ý từng câu)." },
-  { khoa: "sao.hoi.gia", nhom: "Hỏi đáp", loai: "so", min: 1, max: 10, macDinh: 1,
+  { khoa: "sao.hoi.gia", nhom: "Hỏi đáp", loai: "so", min: 1, max: 10, macDinh: 3,
     ten: "Giá mỗi câu vượt lượt (Sao)", moTa: "Chỉ áp dụng khi bật giới hạn hỏi đáp." },
+  // ---- SAO-HV (0028) ----
+  // Hội viên năm HAI HẠNG (chủ dự án chốt phương án a, docs/SO-SANH-GIA-HOI-VIEN.md): thường + Chuyên gia. Mua MỘT LẦN bằng
+  // VND (payOS, không tự gia hạn). SQL đọc cùng khoá (hv_goi, tao_don_hoi_vien, hv_cap_sao_thang_cho, hoi_vien_cua_toi,
+  // hoan_don_nap) — kẹp cùng khoảng. Quyền lợi ĐÓNG BĂNG lúc mua: đổi số ở đây chỉ áp cho đơn / gia hạn SAU khi đổi.
+  // Công tắc mặc định TẮT: trang /hoi-vien vẫn có (noindex) nhưng nút ẩn.
+  { khoa: "sao.hoi_vien.bat", nhom: "Hội viên năm", loai: "bat_tat", macDinh: false,
+    ten: "Bán hội viên năm (hạng thường)", moTa: "Bật = trang /hoi-vien có nút mua hạng thường, máy chủ nhận tạo đơn. Hội viên đang hiệu lực vẫn giữ quyền khi tắt. Hạng Chuyên gia cần bật thêm công tắc riêng bên dưới." },
+  { khoa: "sao.hoi_vien.gia_vnd", nhom: "Hội viên năm", loai: "so", min: 100000, max: 50000000, macDinh: 399000,
+    ten: "Giá hạng thường (₫/năm)", moTa: "Trả một lần cho 365 ngày; gia hạn (khi còn ≤ 30 ngày) theo giá lúc gia hạn, nối tiếp hạn cũ. Đơn đã tạo giữ giá lúc tạo." },
+  { khoa: "sao.hoi_vien.sao_thang", nhom: "Hội viên năm", loai: "so", min: 0, max: 100, macDinh: 15,
+    ten: "Sao tặng mỗi tháng (cả hai hạng)", moTa: "Cấp một lần mỗi tháng (lần đầu mở trang trong tháng hoặc cron sáng), hết hạn ngày cuối tháng — KHÔNG cộng dồn. 0 = tạm dừng." },
+  { khoa: "sao.hoi_vien.cau_hoi_nam", nhom: "Hội viên năm", loai: "so", min: 0, max: 12, macDinh: 1,
+    ten: "Câu hỏi chuyên gia mỗi năm (hạng thường)", moTa: "Lượt hỏi chuyên gia kèm hạng thường. Gia hạn → lượt về 0 cho năm mới." },
+  { khoa: "sao.hoi_vien.cg.bat", nhom: "Hội viên năm", loai: "bat_tat", macDinh: false,
+    ten: "Bán hạng Chuyên gia", moTa: "Bật khi chuyên gia đủ thời gian trả lời trong hạn ưu tiên. Chỉ bán khi cùng bật \"Bán hội viên năm\" và \"Mở Hỏi chuyên gia\". Người đang ở hạng thường thấy nút nâng hạng." },
+  { khoa: "sao.hoi_vien.cg.gia_vnd", nhom: "Hội viên năm", loai: "so", min: 100000, max: 50000000, macDinh: 1990000,
+    ten: "Giá hạng Chuyên gia (₫/năm)", moTa: "Nâng hạng giữa kỳ = giá này − giá kỳ thường × tháng tròn còn lại / 12 (làm tròn nghìn), được kỳ mới 365 ngày." },
+  { khoa: "sao.hoi_vien.cg.cau_hoi_nam", nhom: "Hội viên năm", loai: "so", min: 0, max: 24, macDinh: 6,
+    ten: "Câu hỏi chuyên gia mỗi năm (hạng Chuyên gia)", moTa: "Câu đã dùng ở hạng thường mang sang khi nâng hạng." },
+  { khoa: "sao.hoi_vien.cg.han_gio", nhom: "Hội viên năm", loai: "so", min: 1, max: 168, macDinh: 24,
+    ten: "Hạn trả lời ưu tiên (giờ, hạng Chuyên gia)", moTa: "Áp cho mọi câu hỏi của hội viên Chuyên gia (cả câu trả tiền lẻ). Không dài hơn hạn chung của Hỏi chuyên gia." },
+  // (sao.chuyen_gia.gia_vnd khai một lần ở khối SAO-CG phía trên — hội viên hoàn tiền trừ theo giá đó cho câu đã dùng.)
 ];
 
 export const caiDat = (khoa: string) => CAI_DAT.find((c) => c.khoa === khoa);

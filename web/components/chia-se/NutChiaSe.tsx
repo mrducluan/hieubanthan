@@ -4,6 +4,7 @@ import { useChuChung } from "@/components/cms/ChuChung";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { useMaCuaToi } from "@/lib/sao";
 import { DongThuongMoi } from "@/components/chia-se/DongThuongMoi";
+import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
 import { Check, Copy, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,6 +32,7 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const [khongChep, setKhongChep] = useState(false);   // máy không cho chép tự động → nhắc chép tay
   const c = useChuChung();
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
@@ -57,15 +59,16 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
 
   async function chiaSe() {
     if (!link) return;
-    if (typeof navigator.share === "function") {
-      try { await navigator.share({ title: "Hiểu Bản Thân", text: loiNhan, url: link }); return; } catch { /* người dùng huỷ */ }
-    }
-    await chep();
+    const kq = await guiHoacChep({ title: "Hiểu Bản Thân", text: loiNhan, url: link });
+    setKhongChep(kq === "khong_duoc");
+    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
   }
 
   async function chep() {
     if (!link) return;
-    try { await navigator.clipboard.writeText(link); setDaChep(true); setTimeout(() => setDaChep(false), 2000); } catch { /* bỏ qua */ }
+    const kq = await chepLink(link);
+    setKhongChep(kq === "khong_duoc");
+    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
   }
 
   if (!link) {
@@ -88,6 +91,7 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
         <Input readOnly value={link} aria-label="Link chia sẻ" onFocus={(e) => e.currentTarget.select()} className="text-sm" />
         <Button variant="secondary" size="icon" onClick={chep} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
       </div>
+      {khongChep && <ChepTay />}
       <Button onClick={chiaSe} className="w-full"><Share2 aria-hidden /> {c("chia_se.gui")}</Button>
       <DongThuongMoi dangNhap={nguoiDung === undefined ? undefined : Boolean(nguoiDung)} />
     </div>

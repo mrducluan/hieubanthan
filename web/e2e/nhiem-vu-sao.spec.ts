@@ -36,7 +36,7 @@ test("khách, thưởng đang bật: ba nhiệm vụ + mời đăng nhập qua h
   const thoai = page.getByTestId("hop-thoai-sao");
   await expect(thoai).toHaveAttribute("data-can", "dang_nhap");
   await expect(thoai).toContainText("Đăng nhập để nhận Sao");
-  await expect(thoai).toContainText("tặng 10 Sao");
+  await expect(thoai.getByTestId("qua-dang-nhap")).toContainText("nhận ngay 10 Sao");
   await expect(page.getByTestId("sao-dang-nhap")).toHaveAttribute("href", /\/dang-nhap\?tiep=%2Fban-than/);
 });
 

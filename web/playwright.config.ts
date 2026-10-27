@@ -3,8 +3,9 @@
 // các biến khoá bị ép rỗng để engine chạy template + KB file, tất định.
 import { defineConfig, devices } from "@playwright/test";
 
-const ENGINE_PORT = 8000;
-const WEB_PORT = 3000;
+// Cổng đổi được qua env (E2E_ENGINE_PORT / E2E_WEB_PORT) để nhiều bản sao repo chạy e2e song song không đụng nhau.
+const ENGINE_PORT = Number(process.env.E2E_ENGINE_PORT) || 8000;
+const WEB_PORT = Number(process.env.E2E_WEB_PORT) || 3000;
 const BAN_BUILD = Boolean(process.env.CI) || process.env.E2E_PROD === "1";
 
 // Rỗng = tắt (engine/web đều coi chuỗi rỗng là "không set").

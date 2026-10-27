@@ -48,7 +48,7 @@ export function SoSanhChatbot({ c }: { c: DocChu<typeof CHU_TRANG_CHU> }) {
     <HienKhiThay className="space-y-5" data-testid="so-sanh-chatbot">
       {/* Bằng chứng nhỏ trước bảng: cùng một ngày sinh, hai cách cộng đều đang được dùng, ra hai số khác hẳn. */}
       <div className="bau-troi hien-tung p-5 sm:p-6" data-testid="so-sanh-vi-du">
-        <p className="eyebrow flex items-center gap-2 !text-gold"><Sparkles className="size-3.5" aria-hidden /> {c("so_sanh.vi_du_tieu_de")}</p>
+        <p className="eyebrow flex items-center gap-2 !text-xs !text-gold"><Sparkles className="size-3.5" aria-hidden /> {c("so_sanh.vi_du_tieu_de")}</p>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
           <div className="rounded-2xl border border-line/60 bg-bg/40 p-4">
             <p className="text-xs text-fg-faint">{c("so_sanh.vi_du_cach_1")}</p>
@@ -77,9 +77,9 @@ export function SoSanhChatbot({ c }: { c: DocChu<typeof CHU_TRANG_CHU> }) {
           <caption className="sr-only">So sánh Hiểu Bản Thân với chatbot AI đa năng khi xem thần số học và huyền học</caption>
           <thead className="hidden md:table-header-group">
             <tr>
-              <th scope="col" className="w-[20%] px-5 pb-4 pt-6 align-bottom"><span className="eyebrow">{c("so_sanh.cot_tieu_chi")}</span></th>
+              <th scope="col" className="w-[20%] px-5 pb-4 pt-6 align-bottom"><span className="eyebrow !text-xs !text-fg-muted">{c("so_sanh.cot_tieu_chi")}</span></th>
               <th scope="col" className="quet-sang w-[42%] border-x border-t border-gold/40 bg-gold/[0.09] px-5 pb-4 pt-5 align-bottom">
-                <span className="nhan-sang inline-flex items-center gap-1 rounded-full bg-gold/15 px-2.5 py-0.5 text-[0.68rem] font-semibold uppercase tracking-wider text-gold">
+                <span className="nhan-sang inline-flex items-center gap-1 rounded-full bg-gold/15 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-gold">
                   <Sparkles className="size-3" aria-hidden /> {c("so_sanh.huy_hieu")}
                 </span>
                 <span className="mt-2 block font-serif text-xl text-fg">{c("so_sanh.cot_hbt")}</span>
@@ -100,11 +100,11 @@ export function SoSanhChatbot({ c }: { c: DocChu<typeof CHU_TRANG_CHU> }) {
                   </span>
                 </th>
                 <td className="block rounded-xl border border-gold/35 bg-gold/[0.07] p-3 md:table-cell md:rounded-none md:border-x md:border-b-0 md:border-t md:border-t-line/50 md:bg-gold/[0.09] md:px-5 md:py-4 md:align-top md:transition-colors md:group-hover:bg-gold/[0.14] md:group-last:border-b md:group-last:border-b-gold/40">
-                  <span className="mb-1.5 block text-[0.68rem] font-semibold uppercase tracking-wider text-gold md:hidden">{c("so_sanh.cot_hbt")}</span>
+                  <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-gold md:hidden">{c("so_sanh.cot_hbt")}</span>
                   <span className="flex gap-2.5 text-fg"><DauCo i={i} />{c(`so_sanh.hang_${i + 1}_hbt`)}</span>
                 </td>
                 <td className="mt-2 block rounded-xl border border-line/50 p-3 md:mt-0 md:table-cell md:rounded-none md:border-0 md:border-t md:border-line/50 md:px-5 md:py-4 md:align-top">
-                  <span className="mb-1.5 block text-[0.68rem] font-semibold uppercase tracking-wider text-fg-faint md:hidden">{c("so_sanh.cot_ai")}</span>
+                  <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-fg-muted md:hidden">{c("so_sanh.cot_ai")}</span>
                   <span className="flex gap-2.5 text-fg-muted"><DauAi muc={muc} />{c(`so_sanh.hang_${i + 1}_ai`)}</span>
                 </td>
               </tr>

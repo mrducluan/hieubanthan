@@ -3,6 +3,7 @@
 // kyMaQue — chỉ tên hiển thị, 6 giá trị, tên quẻ bản / biến, tên chủ đề; KHÔNG câu hỏi, KHÔNG giờ gieo, KHÔNG lời đọc).
 // Link /the/que/<mã>?tu=qu.<…> đo referral_signup như các thẻ khác; ảnh /og/que (dọc) có mã QR + hieuban.com.
 import { useState } from "react";
+import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
 import { Check, Copy, Download, Share2 } from "lucide-react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ export function NutChiaSeQue({ giaTri, chuDe, idSuffix = "" }: { giaTri: GiaTriH
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const [chepLoi, setChepLoi] = useState(false);   // máy không cho chép tự động → nhắc chép tay từ ô link (không im lặng)
   const c = useChuChung();
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
@@ -44,14 +46,14 @@ export function NutChiaSeQue({ giaTri, chuDe, idSuffix = "" }: { giaTri: GiaTriH
   }
   async function chep() {
     if (!the) return;
-    try { await navigator.clipboard.writeText(the.link); setDaChep(true); setTimeout(() => setDaChep(false), 2000); } catch { /* bỏ qua */ }
+    if ((await chepLink(the.link)) === "da_chep") { setChepLoi(false); setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
+    else setChepLoi(true);
   }
   async function chiaSe() {
     if (!the) return;
-    if (typeof navigator.share === "function") {
-      try { await navigator.share({ title: "Quẻ của tôi", text: "Mình vừa gieo một quẻ Kinh Dịch — bạn thử gieo cho việc đang phân vân:", url: the.link }); return; } catch { /* huỷ → chép */ }
-    }
-    await chep();
+    const kq = await guiHoacChep({ title: "Quẻ của tôi", text: "Mình vừa gieo một quẻ Kinh Dịch — bạn thử gieo cho việc đang phân vân:", url: the.link });
+    if (kq === "da_chep") { setChepLoi(false); setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
+    else setChepLoi(kq === "khong_duoc");
   }
 
   if (!mo) {
@@ -80,6 +82,7 @@ export function NutChiaSeQue({ giaTri, chuDe, idSuffix = "" }: { giaTri: GiaTriH
             <Input readOnly value={the.link} aria-label="Link thẻ quẻ" onFocus={(e) => e.currentTarget.select()} className="text-sm" data-testid="link-the-que" />
             <Button variant="secondary" size="icon" onClick={() => void chep()} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
           </div>
+          {chepLoi && <ChepTay />}
           <div className="flex flex-wrap gap-2">
             <Button size="sm" onClick={() => void chiaSe()}><Share2 aria-hidden /> {c("chia_se.gui")}</Button>
             <Button asChild size="sm" variant="outline">

@@ -65,7 +65,7 @@ test("Nạp Sao: Sao mua không hết hạn + minh bạch lời mời (không tr
 });
 
 test("Điều khoản: mục Chương trình giới thiệu (một tầng, Sao không đổi tiền, thu hồi khi hoàn tiền, trần, gian lận) + ngày hiệu lực mới", async ({ page }) => {
-  expect(NGAY_HIEU_LUC).toBe("26/10/2026");
+  expect(NGAY_HIEU_LUC).toMatch(/^\d{2}\/\d{2}\/\d{4}$/);   // ngày lấy từ code, không ghi cứng — đổi chính sách thì chỉ sửa lib/van-hanh.ts
   await page.goto("/dieu-khoan");
   const main = page.locator("main");
   await expect(main).toContainText(`Hiệu lực từ ${NGAY_HIEU_LUC}`);

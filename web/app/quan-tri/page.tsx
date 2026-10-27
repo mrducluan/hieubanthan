@@ -2,7 +2,7 @@
 // thong_ke_quan_tri, migration 0010) — trang này không đọc được hồ sơ, ngày giờ sinh của ai. Env chỉ báo đã đặt
 // hay chưa, không bao giờ hiện giá trị khoá.
 import type { Metadata } from "next";
-import { Activity, BookOpen, ExternalLink, KeyRound, ScrollText, ShieldCheck, TrendingUp, Users } from "lucide-react";
+import { Activity, BookOpen, Database, ExternalLink, KeyRound, ScrollText, ShieldCheck, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -10,6 +10,7 @@ import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri, TEN_VAI_TRO } from "@/lib/quan-tri";
 import { mucLuc } from "@/lib/kien-thuc";
 import { layCauHinh } from "@/lib/cau-hinh";
+import { MIGRATION, tinhTrangMigration } from "@/lib/migration-qt";
 import { TangTruongTuan, type TuanTT } from "@/components/quan-tri/TangTruongTuan";
 
 export const metadata: Metadata = { title: "Bảng điều khiển" };
@@ -81,7 +82,7 @@ export default async function Page() {
   const p = await congQuanTri();
   if (p.trang !== "ok") return <BaoCong trang={p.trang} email={"email" in p ? p.email : null} />;
 
-  const [sk, ds, tk, nk, tt, thuSao] = await Promise.all([
+  const [sk, ds, tk, nk, tt, thuSao, mig] = await Promise.all([
     sucKhoeEngine(),
     mucLuc(),
     p.sb.rpc("thong_ke_quan_tri"),
@@ -90,7 +91,9 @@ export default async function Page() {
       : Promise.resolve(null),
     p.sb.rpc("thong_ke_tang_truong", { p_tuan: 12 }),
     layCauHinh<boolean>("luan_giai.thu_sao"),
+    tinhTrangMigration(),
   ]);
+  const migThieu = mig ? MIGRATION.filter((m) => mig.get(m.so) === false) : [];
   const tuan = (tt.error ? null : tt.data) as TuanTT[] | null;
   const thongKe = (tk.error ? null : tk.data) as Record<string, number> | null;
   const nhatKy = (nk && !nk.error ? nk.data : null) as DongNhatKy[] | null;
@@ -150,6 +153,26 @@ export default async function Page() {
             <Dong key={k} ten={ten}><Badge tone={process.env[k] === "1" ? "gold" : "muted"}>{process.env[k] === "1" ? "Bật" : "Tắt"}</Badge></Dong>
           ))}
           <p className="mt-3 text-xs text-fg-faint">Chỉ báo đã đặt hay chưa — giá trị khoá không bao giờ hiện ở đây.</p>
+        </Muc>
+
+        <Muc icon={Database} tieuDe="Migration Supabase" className="md:col-span-2 lg:col-span-3">
+          <div data-testid="qt-migration" data-thieu={mig ? migThieu.map((m) => m.so).join(",") : "?"}>
+            {!mig ? (
+              <p className="text-sm text-fg-muted">Chưa đọc được (cần NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY). Kiểm bằng tay: dán
+                {" "}<span className="font-mono text-xs">supabase/kiem_thu/da_chay_chua.sql</span> vào Supabase → SQL Editor → Run.</p>
+            ) : migThieu.length === 0 ? (
+              <p className="text-sm"><Badge tone="jade">Đủ</Badge> Đã chạy cả {MIGRATION.length} migration em kiểm được (tới {MIGRATION.at(-1)!.so}).</p>
+            ) : (
+              <>
+                <p className="text-sm">Còn <b>{migThieu.length}</b> migration chưa chạy — công tắc của chúng ở Cài đặt bị khoá cho tới khi chạy.
+                  Chạy <b>theo thứ tự số</b> trong Supabase → SQL Editor (từng bước: docs/VIEC-CUA-ANH.md).</p>
+                <div className="mt-3 grid gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {migThieu.map((m) => <Dong key={m.so} ten={<><span className="font-mono text-xs">{m.so}</span> {m.ten}</>}><Badge tone="cinnabar">Chưa chạy</Badge></Dong>)}
+                </div>
+              </>
+            )}
+            <p className="mt-3 text-xs text-fg-faint">Đọc mô tả API của Supabase (không đọc dữ liệu). 0015, 0021, 0023 chỉ đổi ràng buộc → kiểm bằng file SQL trên.</p>
+          </div>
         </Muc>
 
         <Muc icon={BookOpen} tieuDe="Kho tri thức" className="md:col-span-2">

@@ -704,11 +704,12 @@ test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát),
   // 3) chữ dùng chung: tiêu đề ô vào trang chủ + nút gửi của form hồ sơ
   expect((await request.post(`${CMS}/api/globals/chu-chung`, { headers: h,
     data: { chu: { "cua_vao.tieu_de": "Nhập 2 thông tin là xong", "ho_so.nut_xem": "Xem ngay số của tôi",
-      "gop_y_bai.co": "Trúng lắm" } } })).ok()).toBeTruthy();
+      "ho_so.nut_dong_y": "Đồng ý và xem ngay", "gop_y_bai.co": "Trúng lắm" } } })).ok()).toBeTruthy();
   await choWeb(request, "/", (s, b) => s === 200 && b.includes("Nhập 2 thông tin là xong"));
   await page.goto(`${WEB}/`);
   await expect(page.getByText("Nhập 2 thông tin là xong")).toBeVisible();
-  await expect(page.getByRole("button", { name: /Xem ngay số của tôi/ })).toBeVisible();
+  // ĐY-1: người mở lần đầu chưa đồng ý xử lý dữ liệu → nút gửi là "ho_so.nut_dong_y" (đồng ý rồi mới là "ho_so.nut_xem")
+  await expect(page.getByRole("button", { name: /Đồng ý và xem ngay/ })).toBeVisible();
   // nút góp ý cuối bài (đo Gate 1: mã "co" không đổi, chỉ đổi chữ) — cần hồ sơ trên máy để /than-so có bài đọc
   // (QH-BT: bài đọc + ô góp ý ở /than-so; /ban-than là trang của tôi, không còn ô góp ý)
   // (trình duyệt riêng: hồ sơ nạp sẵn làm trang chủ hiện "Chào lại" — bước dọn bên dưới cần trang chủ chưa có hồ sơ)

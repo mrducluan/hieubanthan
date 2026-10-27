@@ -13,6 +13,7 @@ import { postJson } from "@/lib/goi-api";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { DongThuongMoi } from "@/components/chia-se/DongThuongMoi";
+import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
 
 export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
   const [mo, setMo] = useState(false);
@@ -21,6 +22,7 @@ export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const [khongChep, setKhongChep] = useState(false);   // máy không cho chép tự động → nhắc chép tay
   const c = useChuChung();
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
@@ -43,15 +45,16 @@ export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
 
   async function chep() {
     if (!the) return;
-    try { await navigator.clipboard.writeText(the.link); setDaChep(true); setTimeout(() => setDaChep(false), 2000); } catch { /* bỏ qua */ }
+    const kq = await chepLink(the.link);
+    setKhongChep(kq === "khong_duoc");
+    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
   }
 
   async function chiaSe() {
     if (!the) return;
-    if (typeof navigator.share === "function") {
-      try { await navigator.share({ title: "Xem lá số 2 người", text: "Điểm tham khảo của hai đứa mình — xem của bạn với người ấy:", url: the.link }); return; } catch { /* huỷ → chép */ }
-    }
-    await chep();
+    const kq = await guiHoacChep({ title: "Xem lá số 2 người", text: "Điểm tham khảo của hai đứa mình — xem của bạn với người ấy:", url: the.link });
+    setKhongChep(kq === "khong_duoc");
+    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
   }
 
   if (!mo) {
@@ -88,6 +91,7 @@ export function NutChiaSeHai({ yeuCau }: { yeuCau: Record<string, unknown> }) {
             <Input readOnly value={the.link} aria-label="Link thẻ điểm" onFocus={(e) => e.currentTarget.select()} className="text-sm" data-testid="link-the-hai" />
             <Button variant="secondary" size="icon" onClick={() => void chep()} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
           </div>
+          {khongChep && <ChepTay />}
           <div className="flex flex-wrap gap-2">
             <Button size="sm" onClick={() => void chiaSe()}><Share2 aria-hidden /> {c("chia_se.gui")}</Button>
             <Button asChild size="sm" variant="outline">

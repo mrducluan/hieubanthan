@@ -87,6 +87,12 @@ export function xoaHoSoNha(): void {
   try { window.localStorage.removeItem(KHOA_HO_SO_NHA); } catch { /* bỏ qua */ }
   bao();
 }
+/** ĐY-1 "Dữ liệu của tôi": xoá cả căn đang xem lẫn danh sách căn đã lưu trên máy. */
+export function xoaMoiNhaTrenMay(): void {
+  hienTai = null; daDoc = true; dsHienTai = []; dsDaDoc = true;
+  try { window.localStorage.removeItem(KHOA_HO_SO_NHA); window.localStorage.removeItem(KHOA_DS_NHA); } catch { /* bỏ qua */ }
+  bao();
+}
 function dangKy(f: () => void) {
   nghe.add(f);
   const onStorage = (e: StorageEvent) => { if (e.key === KHOA_HO_SO_NHA) { daDoc = false; f(); } if (e.key === KHOA_DS_NHA) { dsDaDoc = false; f(); } };

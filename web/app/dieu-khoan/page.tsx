@@ -6,6 +6,7 @@ import { apDungSeo, layNoiDungTrang, ngayHienThi } from "@/lib/noi-dung-trang";
 import Link from "next/link";
 import { TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 import { DANG_CAP_NHAT, vanHanh } from "@/lib/van-hanh";
+import { HOAN_TIEN_HOI_VIEN } from "@/lib/thanh-toan/hoi-vien";
 
 const META: Metadata = {
   title: "Điều khoản sử dụng",
@@ -66,8 +67,32 @@ export default async function DieuKhoan() {
           <li>Thưởng mời bạn bè chỉ có <b>một tầng</b> — chi tiết ở mục <Link href="#gioi-thieu" className="text-gold underline">Chương trình giới thiệu</Link>. Không có hoa hồng nhiều tầng.</li>
           <li>Sao bị huỷ khi xoá tài khoản.</li>
           <li><b>Mua Sao</b> (trang Nạp Sao): giá ghi bằng đồng, trả một lần qua chuyển khoản QR, không tự gia hạn. Sao mua không hết hạn.</li>
+          <li><b>Tặng lần nạp đầu</b> (khi chương trình đang bật): Sao cộng thêm cho lần nạp đầu tiên là <b>Sao tặng</b> (hạn 365 ngày), chỉ một lần mỗi tài khoản, và bị thu hồi nếu đơn nạp đầu đó được hoàn tiền.</li>
           <li><b>Hoàn tiền:</b> nạp nhầm gói hoặc nạp trùng mà chưa dùng số Sao đó, gửi mã đơn qua trang Liên hệ trong 7 ngày → hoàn qua chuyển khoản, Sao của đơn bị trừ lại. Lỗi hệ thống (đã trả tiền mà không nhận Sao) được cộng bù hoặc hoàn tiền.</li>
           <li>Chúng tôi không lưu số thẻ hay thông tin tài khoản ngân hàng của bạn; cổng thanh toán xử lý việc đó.</li>
+        </ul>
+      ),
+    },
+    {
+      id: "hoi-vien", tieuDe: "Hội viên năm",
+      noiDung: (
+        <ul>
+          <li><b>Hội viên năm</b> (khi đang mở bán) là gói trả <b>một lần</b> bằng đồng, có hiệu lực 365 ngày kể từ ngày thanh
+            toán thành công. <b>Không tự gia hạn</b>, không trừ tiền định kỳ; hết hạn bạn tự quyết có gia hạn hay không (gia hạn
+            mở khi còn 30 ngày trở xuống và nối tiếp hạn hiện tại).</li>
+          <li><b>Quyền lợi</b> trong thời hạn: mở mọi chương Luận giải toàn bộ (Tử vi, Bát tự, Bản đồ con số) không trừ Sao; một
+            số Sao tặng mỗi tháng theo mức đang công bố — cấp một lần mỗi tháng, dùng trong tháng đó, <b>không cộng dồn</b>; và
+            một số lượt hỏi chuyên gia mỗi năm theo mức đang công bố (dùng khi mục đó mở; lượt chưa dùng không cộng dồn sang năm
+            sau). Mức cụ thể ghi trên trang Hội viên lúc mua; thay đổi mức sau đó không làm giảm quyền lợi của thời hạn đã mua.</li>
+          <li><b>Hai hạng.</b> Hạng thường và hạng <b>Chuyên gia</b> có cùng quyền đọc và Sao tặng; hạng Chuyên gia có nhiều lượt
+            hỏi chuyên gia hơn và câu hỏi được trả lời trong thời hạn ưu tiên ghi trên trang Hội viên. <b>Nâng hạng</b> giữa kỳ:
+            bạn trả giá hạng Chuyên gia trừ đi phần còn lại của gói thường (tính theo tháng tròn còn lại trên 12 tháng), và nhận
+            kỳ mới 365 ngày từ ngày nâng; lượt hỏi đã dùng ở hạng thường được tính vào hạng mới. Đang ở hạng Chuyên gia muốn về
+            hạng thường thì mua sau khi hết hạn.</li>
+          <li>Hội viên gắn với tài khoản, không chuyển nhượng. Sao vẫn là điểm dùng nội bộ như mục <Link href="#sao" className="text-gold underline">Sao</Link>.</li>
+          <li><b>Hoàn tiền hội viên:</b>
+            <ul>{HOAN_TIEN_HOI_VIEN.map((t) => <li key={t}>{t}</li>)}</ul>
+            Sau khi hoàn, quyền hội viên chấm dứt ngay; Sao bạn đã mua riêng vẫn giữ nguyên.</li>
         </ul>
       ),
     },
@@ -92,6 +117,29 @@ export default async function DieuKhoan() {
             Sao đã cộng trước khi thay đổi vẫn giữ nguyên.</li>
           <li><b>Gian lận</b> (tài khoản ảo, tự mời mình, mua rồi hoàn tiền để lấy hoa hồng, dùng công cụ tự động…) → Sao thưởng
             liên quan bị thu hồi và tài khoản có thể bị tạm khoá.</li>
+        </ul>
+      ),
+    },
+    {
+      id: "chuyen-gia", tieuDe: "Hỏi chuyên gia",
+      noiDung: (
+        <ul>
+          <li><b>Dịch vụ:</b> bạn đặt một câu hỏi (tối đa 1.500 ký tự) về thần số học, Tử vi, Bát tự, Kinh Dịch hoặc phong thuỷ; chuyên gia của
+            Hiểu Bản Thân trả lời bằng văn bản, riêng cho bạn, trong mục Tài khoản → Câu hỏi của tôi. Đây là <b>tư vấn tham khảo</b>:
+            không thay bác sĩ, luật sư, chuyên gia tài chính hay tâm lý; không chẩn đoán bệnh, không đoán xổ số, không nói ngày chết,
+            không quyết định thay bạn chuyện tuyển dụng, cho vay, hôn nhân. Quyết định là của bạn.</li>
+          <li><b>Giá và thanh toán:</b> giá cố định ghi bằng đồng trên trang Hỏi chuyên gia (câu hỏi đầu tiên có thể được giảm giá khi chương
+            trình đang bật), trả một lần qua chuyển khoản QR, <b>không trả bằng Sao</b> và không quy đổi sang Sao. Hội viên (khi có) có thể
+            dùng lượt hỏi trong gói thay cho thanh toán.</li>
+          <li><b>Hạn trả lời:</b> tính từ lúc thanh toán, theo số giờ ghi trên trang (hiện là 48 giờ). Quá hạn mà chưa có trả lời, bạn
+            được <b>hoàn 100 %</b> tiền qua chuyển khoản trong vòng 7 ngày làm việc; chúng tôi liên hệ qua email tài khoản để nhận
+            thông tin chuyển trả. Câu hỏi đã được trả lời trong hạn thì không hoàn.</li>
+          <li><b>Huỷ:</b> bạn huỷ được bất cứ lúc nào khi chưa thanh toán. Câu đã thanh toán không huỷ được, trừ trường hợp quá hạn nói trên.</li>
+          <li><b>Dữ liệu chuyên gia thấy:</b> câu hỏi của bạn và email tài khoản (để liên hệ hoàn tiền). Ngày giờ sinh, giới tính, nơi sinh
+            chỉ được gửi kèm khi bạn <b>tự tích</b> ô "Chia sẻ hồ sơ của tôi với chuyên gia"; bản chụp đó tự xoá 30 ngày sau khi trả lời.
+            Câu hỏi và câu trả lời được giữ trong tài khoản của bạn tới khi bạn xoá tài khoản.</li>
+          <li><b>Phạm vi:</b> câu hỏi có dấu hiệu khủng hoảng không được bán — hệ thống hiện lời hỗ trợ. Câu ngoài phạm vi (bệnh tật, sống chết,
+            xổ số, tuyển dụng) bị từ chối trước khi thanh toán. Chuyên gia không gửi link, số điện thoại hay mời chào dịch vụ ngoài.</li>
         </ul>
       ),
     },

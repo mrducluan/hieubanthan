@@ -1,6 +1,6 @@
 // Giám sát lỗi (Sentry) — hạ tầng GĐ1, docs/KIEN-TRUC-VAN-HANH.md. Chỉ bật khi có DSN; nạp động nên
 // không có DSN thì không tải thêm byte nào. KHÔNG gửi dữ liệu cá nhân: bỏ body, query, cookie, user, IP;
-// không replay, không tracing (NĐ 13/2023 — ngày giờ sinh, tên nằm trong body/URL).
+// không replay, không tracing (Luật BVDLCN 91/2025, thay NĐ 13/2023 — ngày giờ sinh, tên nằm trong body/URL).
 import type { ErrorEvent, EventHint } from "@sentry/nextjs";
 
 type SentryMod = typeof import("@sentry/nextjs");

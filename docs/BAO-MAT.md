@@ -142,3 +142,34 @@ kho mã (bí mật, thư viện). Cách làm: đọc toàn bộ route API, lớp
 4. ~~**CSP đầy đủ**~~ → **ĐÃ LÀM (CSP-2):** nonce mỗi lượt + `'strict-dynamic'`, `connect-src` giới hạn máy chủ được gửi dữ liệu,
    kiểm bằng `e2e/csp.spec.ts` (không vi phạm trên 9 trang chính, GTM chạy sau Đồng ý, `<img onerror>` chèn vào bị chặn).
 5. **Khi bật tài khoản:** bật Supabase "Leaked password protection", giới hạn gửi email/SMS OTP, tắt đăng ký ẩn danh.
+
+## SEC-3 — Pentest khai thác (2026-10-26, cục bộ, không chạm production)
+
+Dựng stack thử đầy đủ (Postgres 16 + GoTrue + PostgREST theo `web/e2e-that/stack/len.sh`, áp mọi migration 0001–0025
+với quyền mặc định Supabase = cấp cho anon/authenticated trên object mới), tạo 2 người dùng thật có JWT thật, tấn công
+như kẻ cầm **khoá anon công khai + tài khoản thường**.
+
+**Kết luận: không tìm thấy lỗ hổng Nghiêm trọng/Cao.** Không lấy được Sao/tiền, không đọc dữ liệu người khác, không leo
+thang quản trị. Bằng chứng mạnh nhất: 20 lệnh `dung_sao(10)` **song song** trên số dư 30 → đúng 3 thành công, 17
+`khong_du`, số dư cuối 0, không bao giờ âm (advisory lock + kiểm số dư trong giao dịch). Đã xác nhận còn hiệu lực bằng
+lời gọi thật: tự cấp vai trò / điều chỉnh Sao → `khong_co_quyen` (đòi aal2 từ JWT ký, không giả được); INSERT thẳng mọi
+bảng kinh tế (`so_cai_sao`, `gioi_thieu`, `hoa_hong`, `qua_tang_chuong`, `cau_hinh`, `don_nap`, `vai_tro_quan_tri`…) →
+403 RLS; hàm service-only (`nap_sao_tu_cong`, `hh_cho_don`, `ghi_cau_hoi_tai_khoan`, `push_hang_doi`…) gọi bằng
+authenticated → 42501; đọc chéo số dư/hồ sơ người khác → `[]`; `auth.users` qua REST → 404; webhook payOS chỉ tin chữ
+ký + so tiền với `goi_sao`; mã HMAC chia sẻ không có sink XSS ở `/the/*` và `/og/*`; open redirect `?tiep=`/`/auth/callback`
+bị loại; SSRF/chiếm đăng ký push bị chặn; chương khoá cắt phía máy chủ (`catXemTruoc`), `x-mo-khoa` không mở được nếu
+`dung_sao` chưa thành công.
+
+**Quan sát mức Thấp/Thông tin (không phải lỗ hổng cần vá code):**
+1. **Sybil farming thưởng mời** (Thấp, thiết kế): tạo nhiều tài khoản phụ gom Sao. Thiệt hại hữu hạn (một tầng, trần
+   20/30 ngày, Sao không đổi ra tiền/không chuyển nhượng). Phòng thật = **chống gian lận** (băm thiết bị, đồ thị mời,
+   trần theo tuổi tài khoản) — là **điều kiện bắt buộc trước khi bật hoa hồng SAO-V**; thiết kế ở
+   `docs/DANH-GIA-VIRAL-V2-VA-KINH-DOANH.md` §4.
+2. **Lách lượt hỏi miễn phí qua giả `x-forwarded-for`** (Thấp): chỉ khi chạy ngoài Vercel (Vercel đặt `x-real-ip` không
+   giả được) và chỉ khi `sao.hoi.thu` bật; là "câu miễn phí", không phải tiền; cửa hỏi fail-open có chủ ý.
+3. **Nhồi phiếu "x% thấy đúng"** (Thấp): chỉ đổi xếp hạng hộp luận, không sinh chữ mới/không sửa KB.
+4. `khacNguon()` bỏ qua khi thiếu header `Origin` (Thông tin): defense-in-depth; bảo vệ thật là SameSite + bearer token
+   → không khai thác được.
+
+Không sửa mã nguồn (không có lỗ hổng cần vá). Việc theo sau: chống gian lận trước khi bật hoa hồng; chạy migration
+0016–0025 để các chốt mới có hiệu lực; giữ các mục "Còn mở" ở trên.

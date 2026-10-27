@@ -88,6 +88,18 @@ async function ganNhaTiet(dv: SupabaseClient, hang: Hang[], ngay: string): Promi
   return kq.filter(Boolean).length;
 }
 
+/** SAO-HV (0028): cấp Sao tháng cho mọi hội viên năm đang hiệu lực chưa nhận trong tháng (hàm SQL khoá theo tháng → chạy
+ *  lặp không cộng hai lần; người dùng mở /tai-khoan trước thì cron bỏ qua họ). Chưa chạy 0028 (PGRST202) → null; lỗi khác
+ *  báo Sentry. Service role — chỉ con số, không nội dung. */
+export async function capSaoHoiVien(dv: SupabaseClient): Promise<number | null> {
+  const { data, error } = await dv.rpc("hoi_vien_cap_sao_thang_tat_ca");
+  if (error) {
+    if (error.code !== "PGRST202") baoLoi(new Error("cron_hoi_vien_cap_sao_thang"), { noi: "cron", duong: "/api/cron/hang-ngay" });
+    return null;
+  }
+  return typeof data === "number" ? data : 0;
+}
+
 /** TS-V3 / LG-ĐS / KC-4: xoá thật dữ liệu hết hạn đúng thời hạn ghi trong Chính sách quyền riêng tư — góp ý > 12 tháng,
  *  ký ức > 180 ngày (0016); phiếu kiểm chứng > 24 tháng, bài luận đã lưu > 365 ngày (0017); mốc nhắc > 400 ngày (0018).
  *  Migration nào chưa chạy → mục đó null. */
@@ -97,7 +109,9 @@ export async function donDuLieuHoc(dv: SupabaseClient): Promise<{ ok: boolean; k
   // (chỉ tên hàm).
   // Q7 (0022): dọn phiếu sau 30 ngày hết hạn + máy GOM hàng đợi "đề xuất luật" cho người duyệt (chỉ số, không tự bật gì).
   // SAO-V (0025): quà tặng chương > 30 ngày (kể từ khi nhận, hoặc từ khi link hết hạn mà chưa ai nhận).
-  const [ts, tv, nv, ks, gx, qt] = await Promise.all(["don_du_lieu_hoc", "don_du_lieu_hoc_tuvi", "don_nhac_viec", "don_kiem_chung_sau", "gom_de_xuat_luat", "don_qua_tang_chuong"].map(async (ham) => {
+  // SAO-CG (0029): đánh dấu câu hỏi chuyên gia quá hạn trả lời + bỏ ảnh chụp hồ sơ 30 ngày sau khi trả lời / hoàn (câu hỏi + trả lời giữ).
+  const [ts, tv, nv, ks, gx, qt, cgQh, cgDon] = await Promise.all(["don_du_lieu_hoc", "don_du_lieu_hoc_tuvi", "don_nhac_viec", "don_kiem_chung_sau", "gom_de_xuat_luat", "don_qua_tang_chuong",
+    "danh_dau_qua_han_chuyen_gia", "don_chuyen_gia"].map(async (ham) => {
     const { data, error } = await dv.rpc(ham);
     if (error && error.code !== "PGRST202") baoLoi(new Error(`cron_don_${ham}`), { noi: "cron", duong: "/api/cron/don-du-lieu-hoc" });
     return error ? null : data;
@@ -105,5 +119,5 @@ export async function donDuLieuHoc(dv: SupabaseClient): Promise<{ ok: boolean; k
   if (ts === null && tv === null && nv === null) {
     return { ok: false, ket_qua: { loi: "Chưa dọn được (chạy migration 0016–0018?)" } };
   }
-  return { ok: true, ket_qua: { ...(ts as object | null ?? {}), tuvi: tv, nhac_viec: nv, kiem_chung_sau: ks, de_xuat_luat: gx, qua_tang: qt } };
+  return { ok: true, ket_qua: { ...(ts as object | null ?? {}), tuvi: tv, nhac_viec: nv, kiem_chung_sau: ks, de_xuat_luat: gx, qua_tang: qt, chuyen_gia: { qua_han: cgQh, don: cgDon } } };
 }

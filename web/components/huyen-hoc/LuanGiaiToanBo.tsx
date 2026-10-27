@@ -11,6 +11,8 @@ import { BookOpenText, Clock, Gift, LockKeyhole, Printer, Sparkles } from "lucid
 import { Button } from "@/components/ui/button";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
+import { goiYThanhKhoa } from "@/lib/loi-sao";
+import { useMucSao } from "@/lib/muc-sao";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { dangChoMo, ghiChoMo, xoaChoMo } from "@/lib/sao-client";
@@ -123,6 +125,15 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
             Báo cáo theo chương, ghép từ kho tri thức có nguồn ·{" "}
             {phi?.thu ? <>chương đầu miễn phí, toàn bộ <b className="text-gold">{phi.gia} Sao</b>, xem lại trong ngày không mất thêm</> : "miễn phí giai đoạn ra mắt"} · không lưu trên máy chủ.
           </p>
+          {/* Trục 1 (báo cáo UX mục 9): đang miễn phí thì nói trước, trung tính, Sao là gì + giá dự kiến (lấy từ API phí,
+              không ghi cứng). Không đếm ngược, không doạ. */}
+          {phi && !phi.thu && phi.gia > 0 && (
+            <p className="mt-1.5 text-xs leading-relaxed text-fg-faint" data-testid="gia-du-kien">
+              Sao là điểm dùng trong ứng dụng để mở các bài đọc sâu, không đổi ra tiền. Sau giai đoạn ra mắt, chương đầu vẫn
+              miễn phí, mở cả bài dự kiến {phi.gia} Sao.{" "}
+              <Link href="/dieu-khoan#sao" className="whitespace-nowrap text-fg-muted underline underline-offset-4 hover:text-fg">Sao là gì?</Link>
+            </p>
+          )}
         </div>
         <Button onClick={() => void tai()} disabled={dang}><Sparkles aria-hidden /> {dang ? "Đang soạn…" : phi?.thu ? "Đọc miễn phí chương đầu" : "Xem luận giải"}</Button>
         {dang && <div className="w-full"><KhungTai dong={3} /></div>}
@@ -223,9 +234,9 @@ function PhanKhoa({ bc, dang, loi, moKhoa }: { bc: BaoCao; dang: boolean; loi: s
   const daDoc = bc.chuong.length - khoa.length;
   const phut = khoa.reduce((t, c) => t + c.moi_xem.phut_doc, 0);
   const { sao, so_du, dang_nhap, thuong_chao_mung } = bc.phi;
-  const goiY = dang_nhap
-    ? (so_du ?? 0) >= sao ? `Ví còn ${so_du} Sao — đủ mở ngay.` : `Ví còn ${so_du ?? 0} Sao — nạp nhanh bằng QR, quay lại đúng chỗ này.`
-    : thuong_chao_mung ? `Đăng nhập và lưu hồ sơ: tặng ${thuong_chao_mung} Sao${thuong_chao_mung >= sao ? " — đủ mở báo cáo này" : ""}.` : "Đăng nhập để dùng Sao.";
+  const muc = useMucSao();
+  // Cửa Sao v2: giá trị trước ("Đọc tiếp N chương"), rồi lối rẻ nhất — gồm lối miễn phí (quà + mời bạn) khi đủ.
+  const goiY = goiYThanhKhoa({ sao, dangNhap: Boolean(dang_nhap), soDu: so_du, thuongChaoMung: thuong_chao_mung, moiBan: muc?.moi_ban ?? 0 });
   return (
     <section aria-labelledby="lg-khoa" className="mt-10 print:hidden" data-testid="lg-phan-khoa">
       <div className="flex items-center gap-3 text-sm text-fg-muted">
@@ -253,10 +264,10 @@ function PhanKhoa({ bc, dang, loi, moKhoa }: { bc: BaoCao; dang: boolean; loi: s
         ))}
       </ol>
       <div className="sticky bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-10 mt-6 md:bottom-4">
-        <div className="glass flex flex-col gap-3 rounded-2xl border border-gold/40 p-4 shadow-card sm:flex-row sm:items-center">
+        <div className="glass flex flex-col gap-3 rounded-2xl border border-gold/40 bg-surface/95 p-4 shadow-card backdrop-blur-md sm:flex-row sm:items-center">
           <div className="flex-1 text-sm">
-            <p className="text-fg"><b className="text-gold">{sao} Sao</b> mở {khoa.length} chương còn lại · xem lại cả ngày không mất thêm</p>
-            <p className="mt-0.5 flex items-center gap-1.5 text-fg-muted">{!dang_nhap && <Gift className="size-3.5 text-gold" aria-hidden />}{goiY}</p>
+            <p className="font-medium text-fg">Đọc tiếp {khoa.length} chương còn lại <span className="font-normal text-fg-muted">· {sao} Sao</span></p>
+            <p className="mt-0.5 flex items-start gap-1.5 text-fg-muted" data-testid="lg-goi-y">{!dang_nhap && <Gift className="mt-0.5 size-3.5 shrink-0 text-gold" aria-hidden />}{goiY}</p>
           </div>
           <Button onClick={moKhoa} disabled={dang} data-testid="lg-mo-khoa">
             <Sparkles aria-hidden /> {dang ? "Đang mở…" : `Mở toàn bộ · ${sao} Sao`}

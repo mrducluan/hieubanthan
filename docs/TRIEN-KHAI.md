@@ -114,13 +114,13 @@ Engine và web đều chạy được khi migration mới chưa chạy (tính n�
 
 ## Bật thu Sao cho "Luận giải toàn bộ" (SAO-LG — mặc định TẮT)
 
-Giá chốt: **10 Sao/báo cáo**, chủ dự án quyết định ngày bật.
+Giá chốt: **29 Sao/báo cáo** (chủ dự án đổi 26/10/2026, trước 10; câu hỏi vượt lượt 3 Sao), đổi ở `/quan-tri/cai-dat`.
 
 1. **Chuẩn bị Supabase:** đã chạy migration 0006, 0007, 0008. Kiểm thử bằng `supabase/kiem_thu/chay.sh`.
 2. **Bật công tắc:** trên Vercel (Production), đặt `LUAN_GIAI_THU_SAO=1`, rồi Redeploy.
 3. **Kiểm tra:**
    - `GET /api/luan-giai/phi` phải trả `{"thu": true, "gia": 10}`.
-   - Nút trên trang Tử vi / Bát tự đổi thành "Xem luận giải · 10 Sao".
+   - Nút trên trang Tử vi / Bát tự đổi thành "Xem luận giải · 29 Sao".
 4. **Cách hoạt động** (trừ Sao ở máy chủ, `web/lib/luan-giai-sao.ts`):
    - Bắt buộc đăng nhập.
    - Engine tính báo cáo xong mới trừ Sao, nên engine lỗi thì không mất Sao.

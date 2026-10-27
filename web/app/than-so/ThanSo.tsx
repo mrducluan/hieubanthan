@@ -85,9 +85,10 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
     loi: d.cau_tra_loi ? undefined : d.error ?? "Chưa trả lời được lúc này, thử lại sau.",
     phu: canNguoiKia ? (
       <Button asChild variant="secondary" size="sm"><Link href="/hop-doi"><HeartHandshake aria-hidden /> Nhập ngày sinh người ấy ở mục Hợp đôi</Link></Button>
-    ) : (tiep.length || gopY) ? (
-      <div className="space-y-3">
-        {gopY}
+    ) : undefined,
+    // v3 M1: đọc xong câu trả lời → "Hỏi tiếp" → góp ý "Đúng / Chưa đúng" → "Phái nào nói đúng về bạn?".
+    sau: (tiep.length || gopY) ? (
+      <>
         {tiep.length > 0 && (
           <div data-testid="hoi-tiep">
             <p className="text-xs text-fg-muted">Hỏi tiếp</p>
@@ -98,7 +99,8 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
             </div>
           </div>
         )}
-      </div>
+        {gopY}
+      </>
     ) : undefined,
     ghiLuot: ghiLuot(d.luot),
     ghiChu: d.cau_tra_loi ? (d.che_do === "llm" ? "Diễn đạt tự động từ kho tri thức có nguồn." : "Ghép trực tiếp từ kho tri thức có nguồn.") : undefined,
@@ -115,11 +117,11 @@ export function ThanSo() {
   const quyUoc = useQuyUocDD();
   const maTheoCau = useRef(new Map<string, string>());   // câu chuẩn → mã câu (cho góp ý gắn đúng câu nỗi đau)
   useEffect(() => { setPhai(docPhai()); }, []);
-  // TS-NOIDAU: câu bấm từ bảng nỗi đau / "hỏi tiếp" → đẩy vào khung hỏi đáp và cuộn tới đó.
+  // TS-NOIDAU: câu bấm từ bảng nỗi đau / "hỏi tiếp" → đẩy vào khung hỏi đáp; khung hỏi đáp tự cuộn MỘT lần tới khung chờ
+  // "Đang soi câu hỏi…" (trục 2 UX: hai lệnh cuộn mượt chồng nhau làm màn hình giật giữa chừng).
   function hoiCau(cau: string, maCau?: string) {
     if (maCau) maTheoCau.current.set(cau, maCau);
     setCauNgoai((c) => ({ cau, lan: (c?.lan ?? 0) + 1 }));
-    document.getElementById("hoi")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
   function doiPhai(p: PhaiThanSo) {
     setPhai(p);

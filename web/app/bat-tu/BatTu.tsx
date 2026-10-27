@@ -3,8 +3,8 @@
 // → hỏi đáp AI ở DƯỚI (chủ dự án chốt 2026-10-01). Hai giao diện dùng chung với lá số Tử vi.
 import { useChu } from "@/components/cms/DauCms";
 import { useChuChung } from "@/components/cms/ChuChung";
-import { useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Download, Layers, Moon, ScrollText } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowDown, ChevronDown, ChevronLeft, ChevronRight, Download, Layers, Moon, ScrollText } from "lucide-react";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
@@ -18,11 +18,12 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CachChinhBatTu, khoaLaSo, useCachChinh } from "@/lib/cach-chinh-battu";
 import { ghi } from "@/lib/do-luong";
+import { cuonToiLuanGiai, useCuaLuanGiai } from "@/lib/cta-sao";
 import type { LaSoBatTu, LuuNienBatTu } from "@/lib/battu-kieu";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang } from "@/lib/hoi-mang";
-import { laSoTuHoSo, useHoSo } from "@/lib/hoso";
+import { laSoTuHoSo, tenGoi, useHoSo } from "@/lib/hoso";
 import { taiAnhHtml } from "@/lib/tai-anh-html";
 import { cn } from "@/lib/utils";
 
@@ -39,9 +40,15 @@ const GOI_Y = [
   { nhom: "Kiến thức", cau: ["Nhật chủ Giáp là người thế nào?", "Thập thần là gì?"] },
 ];
 
+// Trục 2 UX: bảng kỹ thuật (tàng can, nạp âm, tinh vận, thần sát, dụng thần, hợp – xung…) gom vào mục gập "Lá số chi
+// tiết"; người đã mở thì máy nhớ (hbt.battu_chi_tiet) — lần sau mở sẵn. Link #la-so-chi-tiet cũng mở sẵn.
+const KHOA_CHI_TIET = "hbt.battu_chi_tiet";
+
 const namNayVN = () => Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho_Chi_Minh", year: "numeric" }).format(new Date()));
 
 export function BatTu() {
+  // Nút đầu trang "Đọc luận giải đời thường": một cú bấm vừa cuộn vừa tải chương đầu (miễn phí) nếu chưa tải — không bắt bấm lần hai.
+  const cuaLg = useCuaLuanGiai();
   const hoSo = useHoSo();
   const c = useChu();
   const [gioTy, setGioTy] = useState<"da_ty" | "sang_ngay">("da_ty");
@@ -58,12 +65,22 @@ export function BatTu() {
   const cachChinh = useCachChinh(khoaLaSo(laSo));
   const cc = useChuChung();
   const [loiAnh, setLoiAnh] = useState<string | null>(null);
+  const [moChiTiet, setMoChiTiet] = useState(false);
+  useEffect(() => {
+    try { if (localStorage.getItem(KHOA_CHI_TIET) === "1" || location.hash === "#la-so-chi-tiet") setMoChiTiet(true); } catch { /* bỏ qua */ }
+  }, []);
+  const doiChiTiet = () => setMoChiTiet((v) => {
+    try { localStorage.setItem(KHOA_CHI_TIET, v ? "0" : "1"); } catch { /* chế độ riêng tư */ }
+    if (!v) ghi("chart_interacted", { mo_dun: "battu", kind: "chi_tiet_mo" });
+    return !v;
+  });
 
   useBatDauDoc("battu", Boolean(ls));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
   const dau = <DauMang Icon={Layers} ten="Bát tự" mo_ta="Tứ trụ năm – tháng – ngày – giờ theo tiết khí, ngũ hành chấm theo thang điểm công bố, dụng thần luôn trình bày hai cách để bạn tự cân nhắc." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   const lnDung = ln && ln.nam === namXem ? ln : null;
+  const sinhGioTy = (goc?.birth_time ?? "") >= "23:00";
   return (
     <div>
       {dau}
@@ -71,7 +88,48 @@ export function BatTu() {
       <section aria-label="Tứ trụ" className="space-y-4">
         {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Tứ trụ cần giờ sinh, giới tính và nơi sinh. Giờ sinh càng chính xác càng tốt nếu bạn sinh gần ngày chuyển tiết." />}
         {laSo && !ls && !loi && <KhungTai dong={6} />}
-        {laSo && (
+        {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
+        {/* Trục 2 UX: lời thường lên đầu (câu về nhật chủ từ KB đời sống + nút xuống luận giải), bảng kỹ thuật gập bên dưới. */}
+        {ls && (
+          <div className="glass space-y-3 rounded-2xl p-5 sm:p-6" data-testid="bat-tu-loi-thuong">
+            <p className="text-sm text-fg-muted">
+              {hoSo ? `${tenGoi(hoSo)}, t` : "T"}heo ngày sinh, bạn thuộc hành <b className="text-gold">{ls.nhat_chu.ngu_hanh}</b>
+              {ls.loi_thuong?.hinh_tuong ? <> — hình ảnh của bạn là <b className="text-fg">{ls.loi_thuong.hinh_tuong}</b>.</> : "."}
+            </p>
+            {ls.loi_thuong?.chan_dung && <p className="font-serif text-xl leading-snug sm:text-2xl">{ls.loi_thuong.chan_dung}</p>}
+            {ls.loi_thuong?.cau_tu_soi && <p className="text-sm italic text-moon">“{ls.loi_thuong.cau_tu_soi}”</p>}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1">
+              <Button asChild size="lg">
+                <a href="#luan-giai" data-testid="bat-tu-den-luan-giai"
+                  onClick={(e) => {
+                    ghi("chart_interacted", { mo_dun: "battu", kind: "den_luan_giai" });
+                    if (cuaLg && cuaLg.moDun === "battu" && !cuaLg.daTai) {
+                      e.preventDefault();
+                      cuaLg.doc();
+                      requestAnimationFrame(() => cuonToiLuanGiai());
+                    }
+                  }}>
+                  Đọc luận giải đời thường <ArrowDown aria-hidden />
+                </a>
+              </Button>
+              <span className="text-xs text-fg-faint">Chương đầu đọc ngay, lời thường — không cần biết thuật ngữ.</span>
+            </div>
+          </div>
+        )}
+        {ls && (
+          <button type="button" onClick={doiChiTiet} aria-expanded={moChiTiet} aria-controls="la-so-chi-tiet"
+            className="flex w-full items-center justify-between gap-3 rounded-2xl border border-line/70 px-4 py-3 text-left transition-colors hover:border-gold/50"
+            data-testid="bat-tu-chi-tiet-mo">
+            <span className="min-w-0">
+              <span className="block font-medium text-fg">Lá số chi tiết (cho người đã biết Bát tự)</span>
+              <span className="block truncate text-xs text-fg-muted">
+                Tứ trụ {ls.tru.map((t) => `${t.can} ${t.chi}`).join(" · ")} — tàng can, nạp âm, thần sát, dụng thần, đại vận
+              </span>
+            </span>
+            <ChevronDown className={cn("size-5 shrink-0 text-fg-muted transition-transform", moChiTiet && "rotate-180")} aria-hidden />
+          </button>
+        )}
+        {laSo && (sinhGioTy || !ls || moChiTiet) && (
           <KhungPhai testId="truong-phai-bat-tu" moTa={<>Mặc định theo tiết khí và giữ trụ ngày hôm đó khi sinh 23:00–23:59 (dạ Tý). Đổi lựa chọn, engine lập lại tứ trụ; hỏi đáp và luận giải bên dưới đi theo đúng lựa chọn.</>}>
             <DongPhai ten="Giờ Tý (23:00–23:59)" nhan="Cách tính giờ Tý" giaTri={gioTy} doi={setGioTy}
               luaChon={[["da_ty", "Dạ Tý (giữ ngày)"], ["sang_ngay", "Đổi ngày lúc 23:00"]]}
@@ -85,9 +143,8 @@ export function BatTu() {
             </DongGhiChu>
           </KhungPhai>
         )}
-        {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
-        {ls && (
-          <>
+        {ls && moChiTiet && (
+          <div id="la-so-chi-tiet" className="space-y-4" data-testid="la-so-chi-tiet">
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <Tabs value={giaoDien} onValueChange={(v) => doiGiaoDien(v as GiaoDien)}>
                 <TabsList aria-label="Giao diện lá số">
@@ -155,9 +212,9 @@ export function BatTu() {
                 </details>
               )}
             </div>
-            {ls.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{LOI_NHAN_CO[c.loai] ?? c.chi_tiet}</p>)}
-          </>
+          </div>
         )}
+        {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{LOI_NHAN_CO[c.loai] ?? c.chi_tiet}</p>)}
       </section>
 
       {laSo && ls && (
@@ -165,7 +222,7 @@ export function BatTu() {
       )}
 
       {laSo && ls && (
-        <section aria-label="Luận giải toàn bộ" className="mt-10">
+        <section id="luan-giai" aria-label="Luận giải toàn bộ" className="mt-10 scroll-mt-24">
           <CachChinhBatTu.Provider value={{ cach: cachChinh }}>
             <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={laSo} ten="Bát tự" />
           </CachChinhBatTu.Provider>

@@ -3,6 +3,7 @@
 // Tuyệt đối không gửi ngày/giờ sinh, họ tên, nội dung câu hỏi: mọi thuộc tính qua `locThuocTinh`.
 // Tắt autocapture + session recording (ô nhập ngày sinh không bao giờ bị ghi).
 import type { PostHog } from "posthog-js";
+import { ghiMangDaXem } from "@/lib/huy-hieu";
 
 export type SuKien =
   | "landing_viewed" | "reading_started" | "reading_completed" | "profile_created"
@@ -34,7 +35,16 @@ export type SuKien =
   | "guess_played"
   // SAO-V "Tặng một chương": tạo link quà / mở trang nhận quà / bấm nhận — chỉ mã mảng + cờ còn dùng + kết quả, KHÔNG mã quà
   | "gift_sent" | "gift_opened" | "gift_claimed"
-
+  // SAO-HH (0030): ngày nghỉ chuỗi đã dùng · huy hiệu vừa đạt (chỉ mã) · lật lá bài đầu ngày (không nội dung) ·
+  // "Hẹn với chính mình" đặt / đạt (ngay = số ngày mục tiêu 7 / 30, không phải ngày tháng)
+  | "streak_freeze_used" | "badge_earned" | "daily_card_flipped" | "self_goal_set" | "self_goal_reached"
+  // ĐY-1: đồng ý / thu hồi đồng ý xử lý dữ liệu trên form hồ sơ — chỉ mã bản đồng ý (phien_ban), không gì khác
+  | "consent_given" | "consent_withdrawn"
+  // SAO-HV: hội viên năm kích hoạt (trang kết quả, mỗi đơn một lần) — chỉ kind, không số tiền; checkout_started{kind: hoi_vien}
+  | "membership_activated"
+  // SAO-CG "Hỏi chuyên gia": bắt đầu đặt câu (mảng, miễn phí hội viên?), đã thanh toán, chuyên gia trả lời, người dùng chấm điểm —
+  // chỉ mã mảng + cờ + điểm, KHÔNG BAO GIỜ nội dung câu hỏi / câu trả lời
+  | "expert_question_started" | "expert_question_paid" | "expert_answered" | "expert_rated"
   // QH-BT: mở trang của tôi /ban-than — kind lan_dau / quay_lai + so_ngay kể từ lần ghé trước (đếm trên máy)
   | "hub_viewed"
   // CTA-2: khối thẻ cuối trang (Kiến thức {mảng}, Bài viết liên quan, Đọc tiếp…) — thấy khối (lap=0) / thấy từng thẻ bù
@@ -97,11 +107,16 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   da_bat: "number",     // PT-V2: 1 = máy đọc ảnh đang bật, 0 = tắt / lỗi
   ma: "string",         // PT-V2: mã dấu hiệu người dùng xác nhận (xa_ngang…), chỉ mã
   con_dung: "number",   // SAO-V: trang nhận quà — 1 = link quà còn dùng được, 0 = đã nhận / hết hạn / không có
-  co_ma: "boolean",
+  co_ma: "boolean",     // SAO-V: share_created — link có gắn mã mời ?gt= của người đăng nhập (phễu mời ở quản trị)
+  goi: "string",        // SAO-ND: checkout_started — mã gói (khoi_dau / thu / pho_bien / gia_dinh), không số tiền
+  lan_dau: "number",    // SAO-ND: checkout_started — 1 = tài khoản chưa từng nạp, 0 = đã nạp (khách: không gửi)
+  ngay: "number",       // SAO-HH: self_goal_set / self_goal_reached — số ngày mục tiêu (7 / 30), KHÔNG phải ngày tháng
+  phien_ban: "string",  // ĐY-1: mã bản đồng ý xử lý dữ liệu (lib/dong-y-du-lieu PHIEN_BAN_DONG_Y, vd "dl1") — không ngày giờ
+  mien_phi: "number",   // SAO-CG: expert_question_started — 1 = dùng lượt hội viên, 0 = trả VND · /nap-sao checkout_viewed — 1 = chưa chỗ nào thu Sao
   khoi: "string",       // CTA-2: mã khối cuối trang (kien_thuc_tru, bai_lien_quan, bai_moi, doc_tiep, thu_vien, trang_dich)
   lap: "number",        // CTA-2: 1 = thẻ bù (lối đi tiếp), 0 = thẻ thật / cả khối
   thu_tu: "number",     // CTA-2: vị trí thẻ trong khối (1…)
-  so_lap: "number",     // CTA-2: số thẻ bù trong khối lúc người dùng thấy     // SAO-V: share_created — link có gắn mã mời ?gt= của người đăng nhập (phễu mời ở quản trị)
+  so_lap: "number",     // CTA-2: số thẻ bù trong khối lúc người dùng thấy
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */
@@ -225,6 +240,7 @@ export function lanDauTrongPhien(khoa: string): boolean {
 /** Gate 1 — bài đọc: reading_started khi KẾT QUẢ của một mảng hiện ra (mỗi phiên một lần mỗi mảng);
  *  reading_completed khi cuộn tới cuối bài đọc (mỗi phiên một lần mỗi mảng, luôn sau started → tỉ lệ ≤ 100%). */
 export function batDauDoc(moDun: string, them: Record<string, unknown> = {}): void {
+  ghiMangDaXem(moDun);   // SAO-HH: huy hiệu máy "đi đủ năm mảng" (chỉ mã mảng, trên máy này)
   if (lanDauTrongPhien(`doc-bd.${moDun}`)) ghi("reading_started", { mo_dun: moDun, ...them });
 }
 export function docXong(moDun: string, them: Record<string, unknown> = {}): void {

@@ -4,6 +4,8 @@
 // SAO-V (0025): người đã đăng nhập thấy chuỗi máy chủ (mọi máy) + mốc thưởng Sao — components/khung/ChuoiNgay.tsx.
 // HN-2: "Hôm nay bạn định làm gì?" — chọn ý định hoặc gõ một câu; engine nhận diện ý định bằng luật từ khoá, không lưu
 // câu, không trả lại câu. Trên máy chỉ nhớ MÃ ý định của đúng ngày đó (mở lại trong ngày vẫn thấy).
+// SAO-HH: "Lá bài đầu ngày" (một điều của hôm nay, tất định, miễn phí) + "Hẹn với chính mình" (7/30 ngày, lưu máy, không
+// có gì để mất) — docs/CO-CHE-RUI-RO-VA-THAY-THE.md. Hẹn lấy tiến độ từ chuỗi máy chủ (đăng nhập) hoặc chuỗi máy.
 import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
 import { ViecTuanNha } from "@/components/huyen-hoc/ViecTuanNha";
 import { NhacHomNay } from "@/components/khung/NhacHomNay";
@@ -12,6 +14,9 @@ import { HoiSau30Ngay } from "@/components/khung/HoiSau30Ngay";
 import { QueRieng } from "@/components/kinh-dich/QueRieng";
 import { MoiCaiApp } from "@/components/khung/MoiCaiApp";
 import { ChuoiNgay } from "@/components/khung/ChuoiNgay";
+import { LaBaiDauNgay } from "@/components/khung/LaBaiDauNgay";
+import { HenChinhMinh } from "@/components/khung/HenChinhMinh";
+import type { TrangThaiChuoi } from "@/lib/chuoi-ngay";
 import { nhoYDinhHomNay } from "@/lib/hom-qua";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -26,6 +31,7 @@ import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 import { maMoiNgay, taoLinkNgay } from "@/components/chia-se/NutChiaSeNgay";
+import { ChepTay, guiHoacChep } from "@/components/chia-se/GuiLink";
 import { SoNoiBatNgay } from "@/components/than-so/SoNoiBatNgay";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { VongGio } from "@/components/hoang-lich/VongGio";
@@ -49,6 +55,9 @@ interface TheHomNay {
   ho_tro: string | null;
   danh_sach_y_dinh: Record<string, { ten: string; bieu_tuong: string; cau_hoi: string }>;
   cau_hoi_noi_bat: string[];
+  /** Trục 2 UX: nguyên liệu Lá bài đầu ngày (engine mới; engine cũ không có → lá dùng giờ hoàng đạo). */
+  cau_hoi_them?: string | null;
+  viec_nho?: { ma: string; ten: string; nhan: string | null; cach_lam: string; tu_soi: string | null } | null;
   ngay_pho_quat: { so: number; nghia: string | null };
   chaldea: {
     so: number; kep: number | null; so_ngay_sinh: number; cong_huong: boolean;
@@ -126,7 +135,9 @@ export function HomNay() {
   const [the, setThe] = useState<TheHomNay | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [chuoi, setChuoi] = useState<{ so: number; batDauLai: boolean } | null>(null);
+  const [ttChuoi, setTtChuoi] = useState<TrangThaiChuoi | null>(null);
   const [daChep, setDaChep] = useState(false);
+  const [chepTay, setChepTay] = useState<string | null>(null);   // máy không cho chép tự động → hiện link chép tay
   const daGhi = useRef(false);
   const [chon, setChon] = useState<string[]>([]);
   const [duDinh, setDuDinh] = useState("");
@@ -199,11 +210,10 @@ export function HomNay() {
     ghi("share_created", { kind: "hom_nay", ma_moi: tu });
     const { url } = await taoLinkNgay(hoSo, tu);
     const chu = `Hôm nay là Ngày cá nhân ${the.ngay_ca_nhan.so} của mình — ${boTienTo(the.ngay_ca_nhan.nghia)} Xem ngày của bạn:`;
-    try {
-      if (navigator.share) { await navigator.share({ title: "Hôm nay của bạn", text: chu, url }); return; }
-      await navigator.clipboard.writeText(`${chu} ${url}`);
-      setDaChep(true); setTimeout(() => setDaChep(false), 2500);
-    } catch { /* người dùng huỷ chia sẻ */ }
+    setChepTay(null);
+    const kq = await guiHoacChep({ title: "Hôm nay của bạn", text: chu, url }, `${chu} ${url}`);
+    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2500); }
+    else if (kq === "khong_duoc") setChepTay(url);
   }
 
   useBatDauDoc("hom_nay", Boolean(the));
@@ -235,16 +245,16 @@ export function HomNay() {
           {the.hoang_lich && (
             <div className="flex flex-wrap items-center gap-2" data-testid="chip-hom-nay">
               <button type="button" aria-expanded={moGio} aria-controls="gio-hoang-dao" onClick={() => setMoGio((v) => !v)}
-                className={`vung-cham inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition-colors ${moGio ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
-                <Clock className="size-3.5" aria-hidden />Giờ hoàng đạo
+                className={`vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3.5 py-2 text-[0.8125rem] transition-colors ${moGio ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
+                <Clock className="size-4" aria-hidden />Giờ hoàng đạo
               </button>
               {the.que_ngay && (
-                <a href="#que-ngay" className="vung-cham inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
-                  <Hexagon className="size-3.5" aria-hidden />Quẻ ngày: {the.que_ngay.ten}
+                <a href="#que-ngay" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-[0.8125rem] text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
+                  <Hexagon className="size-4" aria-hidden />Quẻ ngày: {the.que_ngay.ten}
                 </a>
               )}
-              <Link href="/xem-ngay-tot" className="vung-cham inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
-                <CalendarHeart className="size-3.5" aria-hidden />{the.hoang_lich.hoang_dao ? "Ngày Hoàng đạo" : "Ngày Hắc đạo"}
+              <Link href="/xem-ngay-tot" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-[0.8125rem] text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
+                <CalendarHeart className="size-4" aria-hidden />{the.hoang_lich.hoang_dao ? "Ngày Hoàng đạo" : "Ngày Hắc đạo"}
               </Link>
             </div>
           )}
@@ -278,10 +288,19 @@ export function HomNay() {
             </div>
             <SoNoiBatNgay hoSo={hoSo} />
             <div className="flex flex-wrap items-center justify-between gap-3">
-              {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} />}
+              {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} onTrangThai={setTtChuoi} />}
               <Button size="sm" variant="secondary" onClick={() => void chiaSe()}><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ"}</Button>
             </div>
+            {chepTay && <ChepTay url={chepTay} />}
+            {/* SAO-HH: hẹn 7/30 ngày — chờ /api/sao/chuoi trả lời để lấy đúng nguồn chuỗi (tài khoản hay máy). */}
+            {chuoi !== null && ttChuoi !== null && (
+              <HenChinhMinh hoSo={hoSo} ngay={the.ngay_xem} tieuDe={c("hen.tieu_de")}
+                chuoi={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.chuoi : chuoi.so}
+                nguon={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? "tai_khoan" : "may"} />
+            )}
           </Card>
+
+          <LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} />
 
           {the.hoang_lich && (
             <section aria-labelledby="hl-hom-nay" className="glass space-y-3 rounded-2xl p-5" data-testid="hoang-lich-hom-nay">

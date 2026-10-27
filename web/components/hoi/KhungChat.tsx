@@ -12,8 +12,11 @@ import { ViSao } from "@/components/luan-giai/HopNoiBat";
 
 export interface KetQuaHoi {
   van?: string;
-  /** Phần trực quan kèm câu trả lời (quẻ, cung, tứ trụ…). */
+  /** Phần trực quan kèm câu trả lời (quẻ, cung, tứ trụ…) — hiện TRƯỚC lời trả lời. */
   phu?: ReactNode;
+  /** Phần đi SAU lời trả lời (hỏi tiếp, góp ý "Đúng / Chưa đúng", bình chọn phái…): người dùng đọc xong mới được hỏi
+   *  "có đúng không" (vòng thử v3 M1). */
+  sau?: ReactNode;
   /** Căn cứ kỹ thuật (tên sao, cung, độ sáng…) — hiện thu gọn "Vì sao nói vậy" ngay dưới câu trả lời. */
   canCu?: string[];
   ghiChu?: string;
@@ -55,8 +58,42 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
   const cuoi = useRef<HTMLDivElement>(null);
   const soId = useRef(0);
 
+  // Một lần cuộn duy nhất tới khung (khung chờ / câu trả lời mới). Trang ngoài KHÔNG tự cuộn thêm khi đẩy câu vào
+  // (hai lệnh cuộn mượt chồng nhau làm màn hình giật). Giảm chuyển động → nhảy thẳng.
   useEffect(() => {
-    if (tin.length) cuoi.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    if (!tin.length) return;
+    // Tự tính thay scrollIntoView({block:"nearest"}) — Chromium bỏ qua lệnh đó với mốc cao 0px ở xa màn hình.
+    // Chiều cao thanh đầu trang (dính) và thanh tab dưới (điện thoại) ĐO THẬT mỗi lần, không ghi cứng.
+    //  · đang chờ: đáy khung chờ "Đang soi câu hỏi…" ngay trên thanh tab dưới;
+    //  · vừa có câu trả lời: mốc là BONG BÓNG CÂU HỎI, đặt ngay dưới thanh đầu trang → câu hỏi rồi câu trả lời
+    //    nằm trong màn hình đầu (v3 M1). Chỉ cuộn khi câu hỏi bị che hoặc đầu câu trả lời chưa lộ đủ.
+    const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const cuon = (top: number) => window.scrollTo({ top: Math.max(0, top), behavior: giam ? "auto" : "smooth" });
+    const cao = window.innerHeight;
+    const dau = document.querySelector<HTMLElement>("[data-thanh-dau]")?.getBoundingClientRect().height ?? 0;
+    const duoiEl = document.querySelector<HTMLElement>("[data-thanh-duoi]");
+    const duoi = duoiEl && duoiEl.offsetParent !== null ? duoiEl.getBoundingClientRect().height : 0;
+    const dayNhin = cao - duoi;
+    if (dang) {
+      const r = cuoi.current?.getBoundingClientRect();
+      if (r && (r.top > dayNhin - 16 || r.top < dau + 16)) cuon(window.scrollY + r.top - (dayNhin - 16));
+      return;
+    }
+    const khung = cuoi.current?.parentElement;
+    const dsHoi = khung?.querySelectorAll<HTMLElement>("[data-testid='cau-hoi-ban']");
+    const dsTra = khung?.querySelectorAll<HTMLElement>("[data-testid='cau-tra-loi']");
+    // Vị trí khi đã đứng yên: trừ phần trượt lên của hiệu ứng hiện (y: 8 → 0) nếu bong bóng còn đang chạy.
+    const dinh = (el?: HTMLElement) => {
+      if (!el) return null;
+      const t = getComputedStyle(el).transform;
+      return el.getBoundingClientRect().top - (t && t !== "none" ? new DOMMatrix(t).m42 : 0);
+    };
+    const q = dinh(dsHoi?.[dsHoi.length - 1]);
+    const a = dinh(dsTra?.[dsTra.length - 1]);
+    if (q === null || a === null) return;
+    const moc = dau + 12;
+    // Đầu câu trả lời cần lộ ít nhất ~160px (vài dòng) trên thanh tab dưới; câu hỏi không bị thanh đầu che.
+    if (q < moc || a + 160 > dayNhin) cuon(window.scrollY + q - moc);
   }, [tin.length, dang]);
 
   // Câu từ ngoài tới lúc đang chờ trả lời → giữ lại, hỏi ngay khi xong (không bỏ mất cú bấm).
@@ -104,7 +141,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
         <AnimatePresence initial={false}>
           {tin.map((t) =>
             t.ai === "ban" ? (
-              <motion.div key={t.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex justify-end">
+              <motion.div key={t.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex justify-end" data-testid="cau-hoi-ban">
                 <p className="max-w-[85%] rounded-2xl rounded-br-md bg-gold/15 px-4 py-2.5 text-[0.95rem] text-fg">{t.van}</p>
               </motion.div>
             ) : (
@@ -125,18 +162,28 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
                   ))}
                   {t.ghiChu && <p className="text-xs text-fg-faint">{t.ghiChu}</p>}
                   {t.ghiLuot && <p className="text-xs text-gold" data-testid="ghi-luot">{t.ghiLuot}</p>}
+                  {t.sau && <div className="space-y-3" data-testid="sau-tra-loi">{t.sau}</div>}
                 </div>
               </motion.div>
             ),
           )}
         </AnimatePresence>
 
+        {/* Trục 2 UX: khung chờ nằm ĐÚNG chỗ câu trả lời sẽ hiện (bóng một ô trả lời + chữ "Đang soi câu hỏi…"), để
+            người vừa bấm thấy ngay hệ thống đang làm — không phải đoán. */}
         {dang && (
-          <div className="flex items-center gap-3 text-sm text-fg-faint" role="status">
-            <span className="grid size-8 place-items-center rounded-full bg-gold/15 text-gold"><Sparkles className="size-4 animate-pulse" aria-hidden /></span>
-            <span className="flex gap-1" aria-label="Đang soi">
-              {[0, 1, 2].map((i) => <span key={i} className="size-1.5 animate-bounce rounded-full bg-gold/70" style={{ animationDelay: `${i * 120}ms` }} />)}
-            </span>
+          <div className="flex gap-3" role="status" data-testid="dang-soi">
+            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-gold/15 text-gold"><Sparkles className="size-4 animate-pulse" aria-hidden /></span>
+            <div className="min-w-0 flex-1 space-y-2 rounded-2xl rounded-tl-md border border-line/70 bg-bg/40 px-4 py-3">
+              <p className="flex items-center gap-2 text-sm text-fg-muted">
+                Đang soi câu hỏi…
+                <span className="flex gap-1" aria-hidden>
+                  {[0, 1, 2].map((i) => <span key={i} className="size-1.5 animate-bounce rounded-full bg-gold/70" style={{ animationDelay: `${i * 120}ms` }} />)}
+                </span>
+              </p>
+              <span className="block h-2.5 w-11/12 animate-pulse rounded-full bg-surface-2" aria-hidden />
+              <span className="block h-2.5 w-3/4 animate-pulse rounded-full bg-surface-2" aria-hidden />
+            </div>
           </div>
         )}
         <div ref={cuoi} />

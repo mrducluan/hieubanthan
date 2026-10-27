@@ -7,6 +7,7 @@
 // Đặt SAU phần bài đọc.
 import { useEffect, useRef, type ReactNode } from "react";
 import { batDauDoc, docXong } from "@/lib/do-luong";
+import { dangChanDocXong, ngheChanDocXong } from "@/lib/doc-xong-cho";
 import { CuoiPhanXem } from "@/components/cta/CuoiPhanXem";
 import { MANG_TU_MO_DUN } from "@/lib/goi-y-cheo";
 import { GopY } from "./GopY";
@@ -19,7 +20,9 @@ export function useBatDauDoc(moDun: string, sanSang: boolean): void {
 }
 
 /** Mốc vô hình cuối bài: reading_completed khi (1) mốc lọt vào màn hình, (2) người dùng ĐÃ CUỘN trang từ lúc bài hiện,
- *  (3) đã ở với bài ít nhất `giayToiThieu` giây — tránh đếm "đọc xong" khi trang ngắn vừa mở đã thấy cuối bài. */
+ *  (3) đã ở với bài ít nhất `giayToiThieu` giây — tránh đếm "đọc xong" khi trang ngắn vừa mở đã thấy cuối bài,
+ *  (4) Trục 1: báo cáo chương gập phía trên (Luận giải toàn bộ) không còn "chặn" — tức đã mở và cuộn hết chương cuối
+ *  được đọc (lib/doc-xong-cho). Chặn được mở khi mốc đang trong màn hình → tính ngay (vẫn cần đã cuộn + đủ giây). */
 export function MocDocXong({ moDun, them, giayToiThieu = 10 }: { moDun: string; them?: Record<string, unknown>; giayToiThieu?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const thamSo = useRef(them);
@@ -30,7 +33,7 @@ export function MocDocXong({ moDun, them, giayToiThieu = 10 }: { moDun: string; 
     const t0 = Date.now();
     let thay = false, daCuon = false, xong = false, hen: ReturnType<typeof setTimeout> | undefined;
     const thu = () => {
-      if (xong || !thay || !daCuon) return;
+      if (xong || !thay || !daCuon || dangChanDocXong(moDun)) return;
       const conLai = giayToiThieu * 1000 - (Date.now() - t0);
       if (conLai > 0) { clearTimeout(hen); hen = setTimeout(thu, conLai); return; }
       xong = true; docXong(moDun, thamSo.current); io.disconnect(); window.removeEventListener("scroll", cuon);
@@ -39,7 +42,8 @@ export function MocDocXong({ moDun, them, giayToiThieu = 10 }: { moDun: string; 
     const io = new IntersectionObserver(([e]) => { thay = Boolean(e?.isIntersecting); thu(); }, { threshold: 0.1 });
     io.observe(el);
     window.addEventListener("scroll", cuon, { passive: true });
-    return () => { io.disconnect(); window.removeEventListener("scroll", cuon); clearTimeout(hen); };
+    const boNghe = ngheChanDocXong(thu);
+    return () => { io.disconnect(); window.removeEventListener("scroll", cuon); clearTimeout(hen); boNghe(); };
   }, [moDun, giayToiThieu]);
   return <div ref={ref} aria-hidden className="h-px w-full" data-testid={`doc-xong-${moDun}`} />;
 }

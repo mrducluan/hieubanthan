@@ -59,7 +59,7 @@ test("QT-2…QT-4: trang mới + API mới khi chưa bật tài khoản — báo
 
 test("QT-2: cài đặt công khai khi chưa có Supabase → mặc định, không có dải thông báo", async ({ page, request }) => {
   expect(await (await request.get("/api/sao/muc")).json()).toMatchObject({ moi_ban: 20, duoc_moi: 20, chao_mung: 10, tran: 20, hoa_hong: { bat: false, phan_tram: 20, so_don: 1 } });
-  expect(await (await request.get("/api/luan-giai/phi")).json()).toEqual({ thu: false, gia: 10 });
+  expect(await (await request.get("/api/luan-giai/phi")).json()).toEqual({ thu: false, gia: 29 });
   await page.goto("/");
   await expect(page.getByTestId("thong-bao-site")).toHaveCount(0);
 });

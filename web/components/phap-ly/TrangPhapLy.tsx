@@ -61,17 +61,20 @@ export function TrangPhapLy({ nhan, tieuDe, moDau, muc, duongDan, hieuLuc = true
   );
 }
 
-/** Bảng gọn cho trang pháp lý (cuộn ngang trên điện thoại). */
+/** Bảng gọn cho trang pháp lý. Dưới 640px mỗi dòng thành một thẻ dọc, mỗi ô mang nhãn cột (CSS `.bang-the` trong
+ *  globals.css, đọc `data-nhan`) — một bản nội dung duy nhất, không tràn ngang, chữ không đổi. Từ 640px là bảng thường. */
 export function Bang({ dau, dong }: { dau: string[]; dong: ReactNode[][] }) {
   return (
-    <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-      <table className="w-full min-w-[36rem] text-left text-sm">
+    <div className="sm:overflow-x-auto">
+      <table className="bang-the w-full text-left text-sm sm:min-w-[36rem]">
         <thead>
           <tr className="border-b border-line text-fg">{dau.map((d) => <th key={d} scope="col" className="py-2 pr-3 font-semibold">{d}</th>)}</tr>
         </thead>
         <tbody>
           {dong.map((r, i) => (
-            <tr key={i} className="border-b border-line/50 align-top">{r.map((c, k) => <td key={k} className="py-2 pr-3">{c}</td>)}</tr>
+            <tr key={i} className="border-b border-line/50 align-top">
+              {r.map((c, k) => <td key={k} data-nhan={dau[k]} className="py-2 pr-3">{c}</td>)}
+            </tr>
           ))}
         </tbody>
       </table>

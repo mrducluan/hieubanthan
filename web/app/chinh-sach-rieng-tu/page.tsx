@@ -69,9 +69,11 @@ export default async function ChinhSachRiengTu() {
             [<b key="d">Hồ sơ lưu vào tài khoản</b>, "Chỉ khi bạn bấm lưu", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được", "Đến khi bạn xoá hồ sơ hoặc tài khoản"],
             [<b key="e">Ví Sao, mã mời</b>, "Khi bạn có tài khoản, mời bạn bè, dùng Sao", "Máy chủ dữ liệu tại Singapore", "Đến khi bạn xoá tài khoản"],
             [<b key="e1">Quan hệ mời</b>, "Khi bạn nhận lời mời của bạn bè (lưu hồ sơ qua link mời): ai mời ai, lúc nào", "Máy chủ dữ liệu tại Singapore — dùng để cộng thưởng mời, chặn mời vòng, tính hoa hồng giới thiệu", "Đến khi một trong hai người xoá tài khoản"],
+            [<b key="e1b">Mã băm thiết bị (chống gian lận lời mời)</b>, "Khi bạn nhận lời mời của bạn bè", "Máy chủ dữ liệu tại Singapore — một chuỗi băm một chiều tạo từ địa chỉ IP + loại trình duyệt bằng khoá bí mật của chúng tôi; KHÔNG lưu địa chỉ IP hay thông tin trình duyệt, không dùng để quảng cáo hay nhận diện bạn ở nơi khác. Chỉ dùng để phát hiện một máy tạo nhiều tài khoản nhận thưởng", "Cùng dòng quan hệ mời (đến khi một trong hai người xoá tài khoản)"],
             [<b key="e2">Đơn nạp Sao và hoa hồng giới thiệu</b>, "Khi bạn nạp Sao: gói, số tiền, số Sao, trạng thái, mã giao dịch của cổng thanh toán. Nếu bạn đến từ lời mời, đơn nạp đầu được dùng để tính hoa hồng cho người mời (ngày, số Sao, trạng thái)", "Máy chủ dữ liệu tại Singapore. Người mời chỉ thấy ngày và số Sao hoa hồng — không thấy bạn là ai, không thấy số tiền", "Đến khi bạn xoá tài khoản (cổng thanh toán có thể giữ chứng từ giao dịch theo luật kế toán)"],
             [<b key="e3">Chuỗi ngày ghé</b>, "Khi đã đăng nhập và mở trang có tính chuỗi", "Máy chủ dữ liệu tại Singapore — CHỈ ngày ghé cuối, độ dài chuỗi hiện tại và dài nhất; không lưu lịch sử từng ngày", "Đến khi bạn xoá tài khoản"],
             [<b key="e4">Quà tặng một chương</b>, "Khi bạn gửi hoặc nhận link quà", "Máy chủ dữ liệu tại Singapore — người gửi, người nhận, mảng, ngày gửi/nhận; người gửi không thấy ai nhận", "Link quà hết hạn sau 7 ngày, chương được mở trong 30 ngày kể từ khi nhận; bản ghi tự xoá sau 30 ngày (kể từ khi nhận, hoặc từ khi link hết hạn mà chưa ai nhận), hoặc ngay khi người gửi / người nhận xoá tài khoản"],
+            [<b key="e5">Câu hỏi chuyên gia</b>, "Khi bạn đặt câu hỏi trả phí cho chuyên gia (Hỏi chuyên gia): câu hỏi, mảng, đơn thanh toán, câu trả lời, đánh giá của bạn. Ngày giờ sinh, giới tính, nơi sinh CHỈ gửi kèm khi bạn tự tích ô chia sẻ hồ sơ (không tích sẵn)", "Máy chủ dữ liệu tại Singapore, gắn với tài khoản của bạn (đây là dịch vụ bạn mua) — chỉ bạn và chuyên gia trả lời (vai trò quản trị đã xác thực 2 bước) đọc được; mỗi lần chuyên gia mở đều ghi nhật ký. Chủ sở hữu thấy thêm email tài khoản để hoàn tiền", "Bản chụp hồ sơ tự xoá 30 ngày sau khi trả lời (hoặc sau khi hoàn / huỷ); câu hỏi + câu trả lời giữ tới khi bạn xoá tài khoản; câu chưa thanh toán xoá sau 30 ngày"],
             [<b key="f">Câu hỏi đã lọc</b>, "Khi bạn hỏi đáp (nếu bật nhật ký cải thiện chất lượng)", "Máy chủ dữ liệu tại Singapore", "Tối đa 24 tháng"],
             [<b key="f2">Góp ý "đúng / chưa đúng" cho câu trả lời thần số</b>, "Chỉ khi bạn bấm góp ý; ghi chú chỉ lưu khi bạn tự tích đồng ý", "Máy chủ dữ liệu tại Singapore — chỉ các con số rút gọn của trường phái được góp ý, mã câu hỏi, trường phái và ghi chú đã lọc; không họ tên, ngày sinh hay tài khoản", "Tối đa 12 tháng"],
             [<b key="f3">Điều bạn bấm "Ghi nhớ"</b>, "Chỉ khi đã đăng nhập và bạn bấm Ghi nhớ một câu băn khoăn", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được; xoá được ngay", "Tối đa 180 ngày"],
@@ -105,13 +107,37 @@ export default async function ChinhSachRiengTu() {
       id: "muc-dich", tieuDe: "Mục đích và căn cứ xử lý",
       noiDung: (
         <ul>
-          <li><b>Tính và hiển thị kết quả bạn yêu cầu</b> (bài đọc thần số, lá số, hợp đôi, quẻ, hướng nhà): căn cứ là yêu cầu của bạn khi bấm xem.</li>
+          <li><b>Tính và hiển thị kết quả bạn yêu cầu</b> (bài đọc thần số, lá số, hợp đôi, quẻ, hướng nhà): căn cứ là sự đồng ý rõ ràng của bạn ở form hồ sơ (nút "Đồng ý và xem kết quả" lần đầu) và yêu cầu của bạn mỗi lần bấm xem.</li>
           <li><b>Lưu hồ sơ, tài khoản, ví Sao</b>: căn cứ là sự đồng ý của bạn khi đăng nhập hoặc bấm lưu. Bạn rút lại được bằng cách xoá.</li>
           <li><b>Chương trình giới thiệu, nạp Sao</b>: căn cứ là việc thực hiện điều khoản bạn đã đồng ý (cộng thưởng mời một tầng, hoa hồng giới thiệu, đối soát và hoàn tiền đơn nạp, chống gian lận).</li>
+          <li><b>Hỏi chuyên gia</b>: căn cứ là hợp đồng dịch vụ bạn mua (câu hỏi, câu trả lời, thanh toán, hoàn tiền); việc gửi kèm hồ sơ sinh cho chuyên gia căn cứ ô đồng ý bạn tự tích cho từng câu.</li>
           <li><b>Nhận diện dấu hiệu từ ảnh nhà</b>: căn cứ là ô đồng ý bạn tự tích trước mỗi lần gửi; không tích thì không gửi gì, bạn vẫn tích tay được.</li>
           <li><b>Cải thiện chất lượng</b> (câu hỏi đã lọc, số liệu ẩn danh, báo lỗi): chỉ dùng dữ liệu không nhận diện được bạn.</li>
           <li>Chúng tôi <b>không</b> dùng dữ liệu cho quảng cáo nhắm mục tiêu, <b>không</b> mua bán dữ liệu, <b>không</b> ra quyết định tự động gây ảnh hưởng pháp lý tới bạn.</li>
         </ul>
+      ),
+    },
+    {
+      id: "dong-y", tieuDe: "Cách bạn đồng ý và rút lại",
+      noiDung: (
+        <>
+          <p>Chúng tôi hỏi đồng ý <b>đúng chỗ, theo từng mục đích</b>, bằng nút hoặc ô bạn tự bấm — không ô nào tích sẵn,
+            không hộp che cả trang, và im lặng không được coi là đồng ý. Mỗi đồng ý rút lại được ngay, không ảnh hưởng việc
+            đã xử lý trước đó.</p>
+          <Bang dau={["Đồng ý cho việc gì", "Bạn đồng ý bằng cách", "Rút lại bằng cách"]} dong={[
+            [<b key="a">Gửi họ tên, ngày giờ sinh đi tính</b>, "Lần đầu bấm xem ở form hồ sơ, nút ghi rõ \"Đồng ý và xem kết quả\" kèm một dòng nói dữ liệu đi đâu, không lưu — bấm \"Chi tiết\" để đọc đủ. Trình duyệt chỉ nhớ bạn đã đồng ý bản nào, ngày nào; không gửi gì trước khi bạn bấm. Khi chính sách đổi cách xử lý, form hỏi lại", "Bấm \"Thu hồi\" ngay dưới form hồ sơ hoặc ở mục \"Dữ liệu của tôi\" trong Tài khoản — xoá luôn hồ sơ trên máy"],
+            [<b key="b">Lưu hồ sơ vào tài khoản</b>, "Tích ô đồng ý rồi bấm \"Lưu vào tài khoản\" (ô không tích sẵn)", "\"Xoá hồ sơ khỏi tài khoản\" hoặc xoá tài khoản — hiệu lực ngay"],
+            [<b key="c">Gửi ảnh nhà cho dịch vụ nhận diện</b>, "Tích ô đồng ý trước mỗi lần bấm \"Đọc ảnh\"", "Bỏ tích; ảnh không lưu nên không có gì để xoá thêm"],
+            [<b key="d">Lưu ghi chú góp ý</b>, "Tích ô đồng ý khi gửi góp ý \"chưa đúng\"", "Ghi chú không gắn với bạn nên không gỡ riêng được; tự xoá sau 12 tháng"],
+            [<b key="e">Lưu bài luận, tự lưu bài</b>, "Bấm \"Lưu vào tài khoản\" hoặc tự bật \"Tự lưu\"", "Xoá từng bài, tắt \"Tự lưu\" ở Bài đã lưu"],
+            [<b key="f">Nhắc việc trong tài khoản, thông báo đẩy, các ô nhận thêm</b>, "Bấm \"cả trên tài khoản\", \"Bật nhắc\", tự tích ô nhận thêm", "Tắt nhắc, bỏ tích, xoá mốc ở Tài khoản → Dữ liệu của tôi"],
+            [<b key="g">Lưu nhà vào tài khoản, điều bạn bấm \"Ghi nhớ\"</b>, "Tích ô đồng ý rồi bấm lưu; bấm \"Ghi nhớ\"", "Xoá ở Tài khoản → Dữ liệu của tôi"],
+            [<b key="h">Cookie thống kê truy cập</b>, "Đang bật theo mặc định khi lượng truy cập còn thấp (xem mục Cookie)", "\"Tuỳ chọn cookie\" ở chân trang → Từ chối"],
+          ]} />
+          <p>Mục <Link href="/tai-khoan#du-lieu-cua-toi" className="text-gold underline">Dữ liệu của tôi</Link> trong trang Tài khoản liệt kê
+            các đồng ý bạn đã cho trên máy này và trong tài khoản, mỗi dòng có nút rút hoặc xoá. Bản sao dữ liệu: bấm "Yêu cầu bản
+            sao dữ liệu qua email" ở đó, hoặc gửi thư tới {lienHe}.</p>
+        </>
       ),
     },
     {

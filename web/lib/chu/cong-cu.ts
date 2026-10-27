@@ -53,6 +53,9 @@ export const CHU_HOM_NAY = gopBang(KHUNG, {
   "hom_qua.cau": { nhom: "Các mục", nhan: "Câu hỏi lại hôm qua ({ten} = việc, {nhip} = nhịp đã gợi ý)",
     mac_dinh: "Hôm qua gợi ý cho việc {ten}: {nhip}. Với bạn có đúng vậy không?", toi_da: 160 },
   "hom_qua.cam_on": { nhom: "Các mục", nhan: "Lời cảm ơn sau khi trả lời", mac_dinh: "Cảm ơn bạn — câu trả lời giúp gợi ý những ngày sau sát hơn với bạn.", toi_da: 160 },
+  // SAO-HH
+  "la_bai.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề khối lá bài đầu ngày", mac_dinh: "Lá bài đầu ngày", toi_da: 80 },
+  "hen.tieu_de": { nhom: "Các mục", nhan: "Nhãn “Hẹn với chính mình” (cạnh chuỗi ngày)", mac_dinh: "Hẹn với chính mình", toi_da: 60 },
 });
 
 export const CHU_XEM_NGAY = gopBang(KHUNG, {

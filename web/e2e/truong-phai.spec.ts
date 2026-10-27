@@ -1,6 +1,6 @@
 // TP-LICH — chọn âm lịch (Việt/Trung) và trường phái ở mọi mảng: người dùng bấm, engine tính lại, trang hiện rõ.
 import { test, expect } from "@playwright/test";
-import { HO_SO_MAU, hoi, napHoSo } from "./_hoso";
+import { HO_SO_MAU, hoi, napDongY, napHoSo } from "./_hoso";
 
 test("Bát tự: sinh 23:30 → đổi 'Đổi ngày lúc 23:00' ra trụ ngày hôm sau (nhật chủ Nhâm → Quý)", async ({ page }) => {
   await napHoSo(page, { ...HO_SO_MAU, gio: "23:30" });
@@ -8,6 +8,7 @@ test("Bát tự: sinh 23:30 → đổi 'Đổi ngày lúc 23:00' ra trụ ngày 
   const phai = page.getByTestId("truong-phai-bat-tu");
   await expect(phai).toContainText("hai phái ra TRỤ NGÀY khác nhau");
   await expect(phai).toContainText("không làm đổi tứ trụ");          // âm lịch: nói rõ Bát tự theo tiết khí
+  await page.getByTestId("bat-tu-chi-tiet-mo").click();   // bảng kỹ thuật gập (trục 2 UX); khung trường phái vẫn hiện khi sinh 23:xx
   const tt = page.getByTestId("tu-tru");
   await expect(tt).toContainText("Nhật chủ Nhâm");
   await phai.getByRole("tab", { name: "Đổi ngày lúc 23:00" }).click();
@@ -44,6 +45,7 @@ test("Kinh Dịch Mai Hoa: chọn âm lịch, quẻ ghi rõ lấy theo lịch n�
 });
 
 test("Hồ sơ: ngày âm 1/8 nhuận 1995 — lịch Việt ra 24/9, lịch Trung Quốc ra 25/9", async ({ page }) => {
+  await napDongY(page);   // ĐY-1: xem trước đổi lịch chỉ chạy sau khi đã đồng ý
   await page.goto("/");
   await page.getByRole("radio", { name: "Âm lịch", exact: true }).click();
   await page.getByLabel("Ngày", { exact: true }).fill("1");

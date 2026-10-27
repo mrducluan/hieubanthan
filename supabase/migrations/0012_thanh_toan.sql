@@ -24,7 +24,7 @@ create table if not exists goi_sao (
 );
 
 insert into goi_sao (ma, ten, gia_vnd, sao, nhan, mo_ta, thu_tu) values
-    ('thu',       'Thử',       29000,  30,  null,       'Đủ 3 lần Luận giải toàn bộ', 1),
+    ('thu',       'Thử',       29000,  30,  null,       'Gói nhỏ để thử', 1),
     ('pho_bien',  'Phổ biến',  99000,  110, 'Phổ biến', 'Tặng thêm 10%', 2),
     ('gia_dinh',  'Gia đình',  199000, 240, null,       'Tặng thêm 20% — xem cho cả nhà, hợp đôi', 3)
 on conflict (ma) do nothing;

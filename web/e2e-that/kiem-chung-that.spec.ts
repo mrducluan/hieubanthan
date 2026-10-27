@@ -109,7 +109,8 @@ test("ghi phiếu → tỉ lệ ≥ 30 phiếu → đổi ý không cộng dồn
   expect(await tu.json()).toEqual({ ok: true, da_luu: false, ly_do: "tu_choi" });
   expect((await gui({ ...hn, phai: "nam_phai_viet", ket_qua: "dung" }, "10.9.1.1")).status()).toBe(422);
 
-  // Đọc tỉ lệ qua route công khai (lần đọc đầu của tiến trình web → bảng mới).
+  // Đọc tỉ lệ qua route công khai (lần đọc đầu của tiến trình web → bảng mới). Bảng cache 1 giờ: tệp này phải chạy TRƯỚC
+  // mọi tệp mở luận giải (Playwright chạy theo tên — sao-*-that sau kiem-chung-that), config xoá fetch-cache lúc khởi động.
   const r = await request.get(`/api/kiem-chung/ty-le?mau=${MA_HN_DONG},${MA_DS},${MA_HN_HA},hn.can.ngu_hop.sep`);
   expect(r.status()).toBe(200);
   expect((await r.json()).ty_le).toEqual({

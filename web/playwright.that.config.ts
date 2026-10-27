@@ -41,7 +41,9 @@ export default defineConfig({
       url: `http://localhost:${ENGINE_PORT}/health`, env: TAT, reuseExistingServer: !process.env.CI, timeout: 60_000,
     },
     {
-      command: BAN_BUILD ? `npm run build && npm run start -- --port ${WEB_PORT}` : `npm run dev -- --port ${WEB_PORT}`,
+      // Xoá bộ nhớ đệm dữ liệu (unstable_cache: bảng tỉ lệ kiểm chứng 1 giờ, cài đặt 60 giây) — tồn tại qua các lần chạy
+      // trong .next/cache/fetch-cache → lượt trước (hoặc e2e thường không Supabase) để lại bảng rỗng / cài đặt cũ.
+      command: BAN_BUILD ? `rm -rf .next/cache/fetch-cache && npm run build && npm run start -- --port ${WEB_PORT}` : `rm -rf .next/cache/fetch-cache && npm run dev -- --port ${WEB_PORT}`,
       url: `http://localhost:${WEB_PORT}`,
       env: {
         ...TAT, ENGINE_URL: `http://127.0.0.1:${ENGINE_PORT}`, NEXT_PUBLIC_SITE_URL: `http://localhost:${WEB_PORT}`, NEXT_PUBLIC_E2E: "1",

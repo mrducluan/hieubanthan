@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { caiDat, chuanHoa, TAG_CAU_HINH } from "@/lib/cau-hinh";
 import { congApi, loiSql } from "@/lib/quan-tri-api";
+import { thieuCho, tinhTrangMigration } from "@/lib/migration-qt";
 
 const DauVao = z.object({ khoa: z.string().max(60), gia_tri: z.unknown().optional(), xoa: z.boolean().optional() });
 
@@ -21,6 +22,14 @@ export async function POST(req: Request) {
   } else {
     const r = chuanHoa(c, vao.data.gia_tri);
     if (!r.ok) return NextResponse.json({ error: r.loi }, { status: 422 });
+    // Bật một tính năng mà bảng / hàm SQL của nó chưa có = bật ra trang hỏng → chặn, nói rõ cần chạy migration nào.
+    // Không kiểm được (đọc mô tả API lỗi) thì không chặn. Tắt, đổi số: luôn được.
+    if (r.giaTri === true) {
+      const thieu = thieuCho(c.khoa, await tinhTrangMigration());
+      if (thieu.length) {
+        return NextResponse.json({ error: `Chưa chạy migration ${thieu.join(", ")} trên Supabase — chạy xong (docs/VIEC-CUA-ANH.md) rồi bật lại.` }, { status: 409 });
+      }
+    }
     const { error } = await p.sb.rpc("dat_cau_hinh", { p_khoa: c.khoa, p_gia_tri: r.giaTri, p_mo_ta: c.ten });
     if (error) return loiSql(error);
   }

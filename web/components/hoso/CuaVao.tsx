@@ -20,8 +20,8 @@ export function CuaVao() {
   if (hoSo === undefined) return <div className="h-[15rem] animate-pulse rounded-2xl bg-surface/50" />;
   if (hoSo) return <ChaoLai hoSo={hoSo} />;
   return (
-    <div className="glass rounded-2xl p-6">
-      <p className="mb-5 font-serif text-xl">{c("cua_vao.tieu_de")}</p>
+    <div className="glass rounded-2xl p-4 sm:p-6">
+      <p className="mb-3 font-serif text-lg sm:mb-5 sm:text-xl">{c("cua_vao.tieu_de")}</p>
       <NhapHoSo onXong={() => router.push("/than-so?moi=1")} />
     </div>
   );

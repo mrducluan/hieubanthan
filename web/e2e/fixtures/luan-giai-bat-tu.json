@@ -9,7 +9,7 @@
    {
     "loai": "cot_loi",
     "tieu_de": "Bạn linh hoạt",
-    "noi_dung": "Bạn linh hoạt, hiểu người nhanh và dễ hoà vào môi trường mới.",
+    "noi_dung": "Hiểu người nhanh và dễ hoà vào môi trường mới.",
     "can_cu": [
      "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)"
     ],
@@ -24,7 +24,7 @@
    {
     "loai": "cot_loi",
     "tieu_de": "Bạn dễ bị cuốn theo việc của người khác",
-    "noi_dung": "Bạn dễ bị cuốn theo việc của người khác, mất sức vào chỗ không phải của mình. Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
+    "noi_dung": "Mất sức vào chỗ không phải của mình. Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
     "can_cu": [
      "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)"
     ],
@@ -224,14 +224,14 @@
     "ma": "tong_quan",
     "tieu_de": "Con người bạn",
     "cau_hoi": "Rốt cuộc tôi là người thế nào?",
-    "muc": "thuan",
-    "nhan_muc": "Thuận lợi",
+    "muc": null,
+    "nhan_muc": null,
     "tom_tat": "Bạn giống dòng sông lớn: chảy mãi, nhiều ý, thích đi xa và đổi mới. Bạn nắm bắt nhanh và chịu được thay đổi.",
     "hop": [
      {
       "loai": "diem_manh",
       "tieu_de": "Bạn linh hoạt",
-      "noi_dung": "Bạn linh hoạt, hiểu người nhanh và dễ hoà vào môi trường mới.",
+      "noi_dung": "Hiểu người nhanh và dễ hoà vào môi trường mới.",
       "can_cu": [
        "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)"
       ],
@@ -239,17 +239,19 @@
       "loi_khuyen": "Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
       "ty_le_dung": 0.78,
       "so_phieu": 120,
-      "dang_xem_lai": false
+      "dang_xem_lai": false,
+      "tham_chieu": "cot_loi"
      },
      {
       "loai": "luu_y",
       "tieu_de": "Bạn dễ bị cuốn theo việc của người khác",
-      "noi_dung": "Bạn dễ bị cuốn theo việc của người khác, mất sức vào chỗ không phải của mình. Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
+      "noi_dung": "Mất sức vào chỗ không phải của mình. Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
       "can_cu": [
        "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)"
       ],
       "ma_mau": "ds.bt.tong_quan.nc.nham.yeu.vap",
-      "huong_xu_ly": "Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn."
+      "huong_xu_ly": "Nên giữ vài thói quen cố định trong ngày làm bờ cho dòng nước của bạn.",
+      "tham_chieu": "cot_loi"
      },
      {
       "loai": "diem_manh",
@@ -263,7 +265,7 @@
      {
       "loai": "diem_manh",
       "tieu_de": "Bạn thực tế",
-      "noi_dung": "Bạn thực tế, cần cù, coi trọng chữ tín và sự ổn định.",
+      "noi_dung": "Cần cù, coi trọng chữ tín và sự ổn định.",
       "can_cu": [
        "Thập thần nổi nhất: Chính Tài (3 lần ở thiên can và bản khí)"
       ],
@@ -273,7 +275,7 @@
      {
       "loai": "luu_y",
       "tieu_de": "Bạn dễ quá chặt với tiền",
-      "noi_dung": "Bạn dễ quá chặt với tiền, bỏ lỡ việc đáng bỏ vốn. Nên dành một phần nhỏ cố định cho việc học hoặc trải nghiệm mới.",
+      "noi_dung": "Bỏ lỡ việc đáng bỏ vốn. Nên dành một phần nhỏ cố định cho việc học hoặc trải nghiệm mới.",
       "can_cu": [
        "Thập thần nổi nhất: Chính Tài (3 lần ở thiên can và bản khí)"
       ],
@@ -293,8 +295,7 @@
     ],
     "doan": [
      "Bạn giống dòng sông lớn: chảy mãi, nhiều ý, thích đi xa và đổi mới. Bạn nắm bắt nhanh và chịu được thay đổi.",
-     "Bạn có nhiều điểm tựa sẵn trong người; biết mình mạnh ở đâu thì đi nhanh.",
-     "Nét nổi bật của bạn: bạn linh hoạt; bạn là người nhạy cơ hội. Còn điều nên để ý ở chính mình: bạn dễ bị cuốn theo việc của người khác; bạn dễ quá chặt với tiền — mỗi điều có cách gỡ ngay trong hộp."
+     "Bạn có điểm mạnh rõ và vài chỗ dễ vấp; hiểu cả hai thì dễ chọn đường."
     ],
     "can_cu": [
      "Nhật chủ Nhâm (Dương Thủy), thân nhược: tỉ lệ trợ lực 0.4 (thang điểm hệ thống)",
@@ -313,14 +314,10 @@
      "muc": "yeu",
      "nhan": "Sức tự thân: cần thêm điểm tựa"
     },
-    "hai_cach_muc": {
-     "cach_1": "thuan",
-     "cach_2": "thuan"
-    },
     "moi_xem": {
      "diem_nhan": "Bạn giống dòng sông lớn: chảy mãi, nhiều ý, thích đi xa và đổi mới.",
      "cau_hoi": "Bạn phản ứng thế nào khi bị áp lực, và điểm mạnh nào bạn hay bỏ quên?",
-     "so_doan": 3,
+     "so_doan": 2,
      "phut_doc": 1
     },
     "thuat_ngu": [
@@ -707,9 +704,9 @@
      {
       "loai": "thoi_diem",
       "tieu_de": "Giai đoạn bạn đang đi",
-      "noi_dung": "Từ 26 đến 35 tuổi (2016–2025): làm ra sản phẩm, tận hưởng, con cái, tay nghề. Giai đoạn thuận: hợp để trau tay nghề, làm sản phẩm, lo cho con cái và sống thong thả hơn.",
+      "noi_dung": "Từ 26 đến 35 tuổi (12/2016–12/2026): làm ra sản phẩm, tận hưởng, con cái, tay nghề. Giai đoạn thuận: hợp để trau tay nghề, làm sản phẩm, lo cho con cái và sống thong thả hơn.",
       "can_cu": [
-       "Đại vận Giáp Thân (Thực Thần), 2016–2025; cách 1: thuận lợi, cách 2: thuận lợi"
+       "Đại vận Giáp Thân (Thực Thần), từ 13/12/2016 đến 12/12/2026; cách 1: thuận lợi, cách 2: thuận lợi"
       ],
       "ma_mau": "ds.bt.cuoc_doi.thuc_than.thuan.hien_tai",
       "muc": "thuan",
@@ -719,9 +716,9 @@
      {
       "loai": "thoi_diem",
       "tieu_de": "Giai đoạn kế tiếp",
-      "noi_dung": "Từ 36 đến 45 tuổi (2026–2035): sáng tạo, thể hiện, đổi khuôn khổ cũ. Giai đoạn thuận: hợp để làm điều mới, ra mắt sản phẩm, xây tiếng nói riêng.",
+      "noi_dung": "Từ 36 đến 45 tuổi (12/2026–12/2036): sáng tạo, thể hiện, đổi khuôn khổ cũ. Giai đoạn thuận: hợp để làm điều mới, ra mắt sản phẩm, xây tiếng nói riêng.",
       "can_cu": [
-       "Đại vận Ất Dậu (Thương Quan), 2026–2035; cách 1: thuận lợi, cách 2: thuận lợi"
+       "Đại vận Ất Dậu (Thương Quan), từ 13/12/2026 đến 12/12/2036; cách 1: thuận lợi, cách 2: thuận lợi"
       ],
       "ma_mau": "ds.bt.cuoc_doi.thuong_quan.thuan.tiep",
       "muc": "thuan",
@@ -731,9 +728,9 @@
      {
       "loai": "luu_y",
       "tieu_de": "Giai đoạn nên chuẩn bị trước",
-      "noi_dung": "Từ 46 đến 55 tuổi (2036–2045): cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn. Dễ tiêu rộng tay, bỏ vốn theo cảm hứng. Nên giữ khoản dự phòng trước khi mở việc mới.",
+      "noi_dung": "Từ 46 đến 55 tuổi (12/2036–12/2046): cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn. Dễ tiêu rộng tay, bỏ vốn theo cảm hứng. Nên giữ khoản dự phòng trước khi mở việc mới.",
       "can_cu": [
-       "Đại vận Bính Tuất (Thiên Tài), 2036–2045; cách 1: cần lưu ý, cách 2: cân bằng"
+       "Đại vận Bính Tuất (Thiên Tài), từ 13/12/2036 đến 12/12/2046; cách 1: cần lưu ý, cách 2: cân bằng"
       ],
       "ma_mau": "ds.bt.cuoc_doi.thien_tai.can_chu_dong.vap",
       "huong_xu_ly": "Nên giữ khoản dự phòng trước khi mở việc mới.",
@@ -889,7 +886,8 @@
        "Quan gặp Ấn (quan ấn tương sinh)"
       ],
       "ma_mau": "ds.bt.su_nghiep.quan_an.manh",
-      "loi_khuyen": "Nên chọn nơi có lộ trình thăng tiến rõ và đầu tư vào một chứng chỉ có giá trị trong nghề."
+      "loi_khuyen": "Nên chọn nơi có lộ trình thăng tiến rõ và đầu tư vào một chứng chỉ có giá trị trong nghề.",
+      "tham_chieu": "cot_loi"
      },
      {
       "loai": "diem_manh",
@@ -912,8 +910,7 @@
      }
     ],
     "doan": [
-     "Công việc là mảng bạn dễ ra kết quả nếu chọn đúng môi trường.",
-     "Chỗ mạnh của bạn ở mảng này: đi lên nhờ được tin và chịu học; kết quả cụ thể mở đường cho vị trí."
+     "Công việc là mảng bạn dễ ra kết quả nếu chọn đúng môi trường."
     ],
     "can_cu": [
      "Quan gặp Ấn (quan ấn tương sinh)",
@@ -931,7 +928,7 @@
     "moi_xem": {
      "diem_nhan": "Công việc là mảng bạn dễ ra kết quả nếu chọn đúng môi trường.",
      "cau_hoi": "Bạn hợp làm việc trong môi trường nào, và kiểu việc nào khiến bạn mau cạn sức?",
-     "so_doan": 2,
+     "so_doan": 1,
      "phut_doc": 1
     },
     "thuat_ngu": [
@@ -1019,7 +1016,8 @@
        "Tài (hành Hỏa) chiếm 48% điểm ngũ hành; Tài đậm mà thân nhược (tài đa thân nhược)"
       ],
       "ma_mau": "ds.bt.tien_bac.tai_nang_than_yeu.vap",
-      "huong_xu_ly": "Nên chọn ít nguồn thu mà vững, và nhờ người giỏi số liệu giúp quản phần còn lại."
+      "huong_xu_ly": "Nên chọn ít nguồn thu mà vững, và nhờ người giỏi số liệu giúp quản phần còn lại.",
+      "tham_chieu": "cot_loi"
      },
      {
       "loai": "diem_manh",
@@ -1033,8 +1031,7 @@
      }
     ],
     "doan": [
-     "Tiền bạc của bạn vào ra khá đều; giữ được bao nhiêu tuỳ thói quen chi tiêu.",
-     "Chỗ mạnh của bạn ở mảng này: tiền đến từ nhiều nguồn. Còn chỗ cần để ý: tiền đến nhiều nhưng dễ mệt vì gánh — cách gỡ nằm ngay trong từng hộp."
+     "Tiền bạc của bạn vào ra khá đều; giữ được bao nhiêu tuỳ thói quen chi tiêu."
     ],
     "can_cu": [
      "Tài (hành Hỏa) chiếm 48% điểm ngũ hành; Tài đậm mà thân nhược (tài đa thân nhược)",
@@ -1050,7 +1047,7 @@
     "moi_xem": {
      "diem_nhan": "Tiền bạc của bạn vào ra khá đều; giữ được bao nhiêu tuỳ thói quen chi tiêu.",
      "cau_hoi": "Tiền đến với bạn theo đường nào, và thói quen nào làm tiền ra nhanh hơn bạn nghĩ?",
-     "so_doan": 2,
+     "so_doan": 1,
      "phut_doc": 1
     },
     "thuat_ngu": [
@@ -1163,8 +1160,7 @@
     ],
     "doan": [
      "Tình cảm của bạn có ngọt có va; hiểu nhịp của nhau thì êm hơn nhiều.",
-     "Hai cách đọc khác nhau ở mảng này: theo cách cân sức thì cần lưu ý, theo tháng sinh thì cân bằng; phần dưới viết theo mức chung là cân bằng.",
-     "Chỗ mạnh của bạn ở mảng này: chung thuỷ, coi trọng ổn định. Còn chỗ cần để ý: dễ gánh nhiều trong tình cảm; dễ làm khó nhau bằng lời nói — mỗi hộp đã kèm việc nên làm."
+     "Hai cách đọc khác nhau ở mảng này: theo cách cân sức thì cần lưu ý, theo tháng sinh thì cân bằng; phần dưới viết theo mức chung là cân bằng."
     ],
     "can_cu": [
      "Sao phối ngẫu (nam: Tài): Tài (hành Hỏa) chiếm 48% điểm ngũ hành",
@@ -1182,7 +1178,7 @@
     "moi_xem": {
      "diem_nhan": "Tình cảm của bạn có ngọt có va; hiểu nhịp của nhau thì êm hơn nhiều.",
      "cau_hoi": "Bạn gắn bó theo kiểu nào, và va chạm trong tình cảm hay bắt đầu từ đâu?",
-     "so_doan": 3,
+     "so_doan": 2,
      "phut_doc": 1
     },
     "thuat_ngu": [
@@ -1304,8 +1300,7 @@
      }
     ],
     "doan": [
-     "Chuyện gia đình đòi bạn tự lo sớm và giữ ranh giới rõ.",
-     "Chỗ mạnh của bạn ở mảng này: có chỗ dựa từ mẹ, người lớn; con cái là động lực lớn. Còn chỗ cần để ý: việc kiếm tiền lấn thời gian gia đình; con cái dễ khác tính bạn — mỗi điều có cách gỡ ngay trong hộp."
+     "Chuyện gia đình đòi bạn tự lo sớm và giữ ranh giới rõ."
     ],
     "can_cu": [
      "Tài đậm (48%) phá Ấn",
@@ -1323,7 +1318,7 @@
     "moi_xem": {
      "diem_nhan": "Chuyện gia đình đòi bạn tự lo sớm và giữ ranh giới rõ.",
      "cau_hoi": "Bạn nhận được gì từ gia đình, và nếp nào bạn muốn làm khác cho thế hệ sau?",
-     "so_doan": 2,
+     "so_doan": 1,
      "phut_doc": 1
     },
     "thuat_ngu": [
@@ -1413,8 +1408,7 @@
      }
     ],
     "doan": [
-     "Bạn học tốt khi đúng cách học của mình; sai cách thì dễ nản.",
-     "Chỗ mạnh của bạn ở mảng này: học sâu, cần hiểu gốc; hiểu bằng trực giác trước."
+     "Bạn học tốt khi đúng cách học của mình; sai cách thì dễ nản."
     ],
     "can_cu": [
      "Ấn (hành Kim) chiếm 29% điểm ngũ hành (học sâu)",
@@ -1426,7 +1420,7 @@
     "moi_xem": {
      "diem_nhan": "Bạn học tốt khi đúng cách học của mình; sai cách thì dễ nản.",
      "cau_hoi": "Bạn học nhanh nhất theo cách nào, và vì sao có lúc ý hay bị bỏ dở?",
-     "so_doan": 2,
+     "so_doan": 1,
      "phut_doc": 1
     },
     "thuat_ngu": [
@@ -1598,8 +1592,7 @@
      }
     ],
     "doan": [
-     "Bên ngoài có người giúp, có người làm phiền; chọn người là việc đáng để tâm.",
-     "Chỗ mạnh của bạn ở mảng này: hay gặp người giúp đúng lúc; có uy khi dẫn nhóm. Còn chỗ cần để ý: dễ vướng chuyện thị phi — mỗi điều có cách gỡ ngay trong hộp."
+     "Bên ngoài có người giúp, có người làm phiền; chọn người là việc đáng để tâm."
     ],
     "can_cu": [
      "Tỷ Kiếp (hành Thủy) chiếm 11% điểm ngũ hành (người ngang hàng); thân nhược",
@@ -1611,7 +1604,7 @@
     "moi_xem": {
      "diem_nhan": "Bên ngoài có người giúp, có người làm phiền; chọn người là việc đáng để tâm.",
      "cau_hoi": "Người ngang hàng giúp bạn hay làm bạn mệt, và ai là người giúp đúng lúc?",
-     "so_doan": 2,
+     "so_doan": 1,
      "phut_doc": 1
     },
     "thuat_ngu": [
@@ -1674,7 +1667,7 @@
       "tieu_de": "Mười năm này: làm ra sản phẩm, tận hưởng, con cái, tay nghề",
       "noi_dung": "Mười năm này xoay quanh làm ra sản phẩm, tận hưởng, con cái, tay nghề; năm nay là năm thứ 10 của giai đoạn. Cả giai đoạn ở mức thuận lợi với bạn. Từ ngày 13/12/2026, bạn sang giai đoạn mười năm mới, xoay quanh sáng tạo, thể hiện, đổi khuôn khổ cũ.",
       "can_cu": [
-       "Đại vận Giáp Thân (Thực Thần), 2016–2025 — dang_di"
+       "Đại vận Giáp Thân (Thực Thần), từ 13/12/2016 đến 12/12/2026 — dang_di"
       ],
       "ma_mau": "ds.bt.nam_nay.van.thuc_than.thuan",
       "muc": "thuan"
@@ -1682,7 +1675,7 @@
      {
       "loai": "thoi_diem",
       "tieu_de": "Năm nay",
-      "noi_dung": "Năm nay việc hay xoay quanh cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn; với bạn, năm ở mức cần lưu ý. Cả năm hợp gặp đối tác, thử nguồn thu mới. Hai cách đọc khác nhau ở năm nay: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
+      "noi_dung": "Hay xoay quanh cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn; với bạn, năm ở mức cần lưu ý. Cả năm hợp gặp đối tác, thử nguồn thu mới. Hai cách đọc khác nhau ở năm nay: một cách thấy cần lưu ý, cách kia thấy cân bằng.",
       "can_cu": [
        "Lưu niên 2026 Bính Ngọ (Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng"
       ],
@@ -1738,11 +1731,10 @@
     ],
     "doan": [
      "Mười năm này xoay quanh làm ra sản phẩm, tận hưởng, con cái, tay nghề; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
-     "Ba tháng tới (tính theo tiết): từ 8/10 đến 6/11 cân bằng; từ 7/11 đến 6/12 cân bằng; từ 7/12 đến 4/1 cân bằng.",
      "Khi các lớp nói khác nhau, ưu tiên mười năm trước, rồi đến năm, rồi mới đến tháng."
     ],
     "can_cu": [
-     "Đại vận Giáp Thân (Thực Thần), 2016–2025 — dang_di",
+     "Đại vận Giáp Thân (Thực Thần), từ 13/12/2016 đến 12/12/2026 — dang_di",
      "Lưu niên 2026 Bính Ngọ (Thiên Tài); cách 1: cần lưu ý, cách 2: cân bằng",
      "năm – lưu niên: Ngọ–Ngọ tự hình",
      "tháng – lưu niên: Tân–Bính ngũ hợp (hoá Thủy)",
@@ -1764,7 +1756,7 @@
     "moi_xem": {
      "diem_nhan": "Mười năm này xoay quanh làm ra sản phẩm, tận hưởng, con cái, tay nghề; năm nay thêm chuyện cơ hội làm ăn, giao thiệp, tiền từ nhiều nguồn.",
      "cau_hoi": "Năm nay nên dồn sức vào đâu, và tháng nào sắp tới hợp để bắt đầu việc mới?",
-     "so_doan": 3,
+     "so_doan": 2,
      "phut_doc": 1
     },
     "thuat_ngu": [
@@ -1878,7 +1870,8 @@
       "ma_mau": "ds.bt.van_han.thien_tai.can.lon",
       "huong_xu_ly": "Nên làm: làm kế hoạch dòng tiền theo quý, khoản lớn nào cũng hỏi ý một người ngoài cuộc.",
       "nam": 2026,
-      "muc": "can_chu_dong"
+      "muc": "can_chu_dong",
+      "tham_chieu": "cot_loi"
      },
      {
       "loai": "luu_y",

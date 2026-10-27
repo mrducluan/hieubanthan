@@ -29,7 +29,8 @@ SINH = {"lich": dt.datetime(1990, 5, 17, 12, 30), "gioi_tinh": "nam"}
 XEM = dt.date(2026, 10, 21)
 THU_TU = ["tong_quan", "ngu_hanh", "cuoc_doi", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "hoc_tap", "suc_khoe",
           "quan_he", "nam_nay", "van_han", "loi_khuyen"]
-KHONG_MUC = {"van_han", "loi_khuyen"}      # VH-1: chương tổng hợp / dòng 10 năm không mang chip mức riêng
+# VH-1: chương tổng hợp / dòng 10 năm không mang chip mức riêng; Trục 1 (2026-10-26): "Con người bạn" cũng không.
+KHONG_MUC = {"tong_quan", "van_han", "loi_khuyen"}
 LOAI_HOP = {"cot_loi", "diem_manh", "luu_y", "loi_khuyen", "thoi_diem"}
 MUC = {"thuan", "can_bang", "can_chu_dong"}
 _CAN = r"Giáp|Ất|Bính|Đinh|Mậu|Kỷ|Canh|Tân|Nhâm|Quý"
@@ -455,7 +456,8 @@ def test_golden(ca):
     assert [c["ma"] for c in b["chuong"]] == THU_TU
     tq = next(c for c in b["chuong"] if c["ma"] == "tong_quan")
     assert tq["than_do"]["muc"] == ca["than"]
-    assert {c["ma"]: c["muc"] for c in b["chuong"]} == ca["muc"]
+    # golden giữ mức chấm của mảng "con người" (dùng chọn hộp); chương "Con người bạn" không hiện mức (Trục 1).
+    assert {c["ma"]: c["muc"] for c in b["chuong"]} == {**ca["muc"], "tong_quan": None}
     vh = next(c for c in b["chuong"] if c["ma"] == "van_han")
     assert [g["muc"] for g in vh["dong_nam"]] == ca["van_han_nam"]
     assert [g["muc"] for g in b["thoi_gian_bieu"]] == ca["dai_van"]
@@ -541,7 +543,7 @@ def test_van_tham_chieu_dang_di_giu_loi_cu(bc):
     assert "năm thứ 10 của giai đoạn" in nn["hop"][0]["noi_dung"]
 
 
-_MANG_HAI_CACH = ("tong_quan", "ngu_hanh", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh")
+_MANG_HAI_CACH = ("ngu_hanh", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh")
 
 
 def _gop(m1: str, m2: str) -> str:

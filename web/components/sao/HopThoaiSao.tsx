@@ -5,11 +5,13 @@
 //   nap          ví không đủ → chưa nhận quà chào mừng thì mời LƯU HỒ SƠ (người dùng bấm) nhận Sao ngay tại chỗ;
 //                nạp nhanh (chọn gói đủ dùng, QR ngân hàng) rồi QUAY VỀ đúng trang; luôn có lối mời bạn bè nhận Sao
 // Giọng: nói rõ giá trị người dùng nhận được và cái giá, không doạ, không đếm ngược giả, luôn có lối "để sau".
+// Cửa Sao v2 "Ba lối mở" (docs/CUA-SAO-V2.md): thanh ví + ba thẻ ngang hàng — Đọc ngay (QR, một gói vừa đủ) · Miễn phí,
+// mời bạn (gửi ngay trong hộp, con số thật từ cài đặt) · Hội viên năm (khi bật). Câu chữ: lib/loi-sao.ts.
 import { useEffect, useRef, useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Gift, Loader2, QrCode, Sparkles, UserPlus } from "lucide-react";
+import { ChevronDown, Gift, Loader2, QrCode, Sparkles, UserPlus, Zap } from "lucide-react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
@@ -18,8 +20,15 @@ import { supabase } from "@/lib/supabase/trinh-duyet";
 import { useHoSo } from "@/lib/hoso";
 import { hoSoTaiKhoan, luuVaoTaiKhoan } from "@/lib/tai-khoan";
 import { maGioiThieuDaNho, nhanChaoMung, nhanThuongGioiThieu, quenMaGioiThieu } from "@/lib/sao";
+import {
+  dongNapDau, goiGoiY, hienNapDau, saoTangLanDau, soBaoCao, thuocTinhNap, type GoiHienThi, type NapDau,
+} from "@/lib/thanh-toan/nap-dau";
+import { docHoiVien, hienDongHoiVien, type HoiVien } from "@/lib/thanh-toan/hoi-vien";
+import { useMucSao } from "@/lib/muc-sao";
+import { loiKhachHetLuot, soBanCanMoi, soCau } from "@/lib/loi-sao";
+import { ThanhVi, TheHoiVien, TheMoiBan } from "@/components/sao/LoiMoSao";
 
-type Goi = { ma: string; ten: string; gia_vnd: number; sao: number; nhan: string | null; mo_ta: string | null };
+type Goi = GoiHienThi;
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
 const ghiPhien = (k: string, v: string) => { try { sessionStorage.setItem(k, v); } catch { /* chế độ riêng tư */ } };
 const duongHienTai = () => `${window.location.pathname}${window.location.search}`;
@@ -52,11 +61,12 @@ export function HopThoaiSao() {
 
   if (!y) return null;
   const tieuDe = y.can === "dang_nhap"
-    ? (y.nguon === "hoi" ? "Hết câu hỏi miễn phí hôm nay" : y.nguon === "nhiem_vu" ? "Đăng nhập để nhận Sao" : "Mở toàn bộ báo cáo của bạn")
-    : y.can === "xac_nhan_sao" ? "Hỏi tiếp câu này?" : "Nạp thêm Sao để xem tiếp";
+    ? (y.nguon === "hoi" ? "Hết câu hỏi miễn phí hôm nay" : y.nguon === "nhiem_vu" ? "Đăng nhập để nhận Sao" : "Đọc tiếp báo cáo của bạn")
+    : y.can === "xac_nhan_sao" ? "Hỏi tiếp câu này?" : y.nguon === "hoi" ? "Hỏi tiếp bằng Sao" : "Chọn cách đọc tiếp";
   return (
     <Sheet open onOpenChange={(o) => { if (!o) dong(false); }}>
-      <SheetContent title={tieuDe} description={y.error} data-testid="hop-thoai-sao" data-can={y.can}>
+      {/* Hộp nạp: thanh ví thay câu "ví còn N Sao" của máy chủ (câu đó cũ đi ngay khi nhận quà trong hộp). */}
+      <SheetContent title={tieuDe} description={y.can === "nap" ? undefined : y.error} data-testid="hop-thoai-sao" data-can={y.can}>
         {y.can === "dang_nhap" && <DangNhapNhan y={y} />}
         {y.can === "xac_nhan_sao" && <XacNhan y={y} dong={dong} />}
         {y.can === "nap" && <HopNap y={y} xong={() => dong(true)} />}
@@ -67,18 +77,44 @@ export function HopThoaiSao() {
 
 function DangNhapNhan({ y }: { y: YeuCauSao }) {
   const tiep = typeof window === "undefined" ? "/" : duongHienTai();
+  const muc = useMucSao();
+  const moi = muc?.moi_ban ?? 0;
+  const qua = y.thuong ?? 0;
+  const hoi = y.nguon === "hoi";
+  // Báo cáo: quà chào mừng + thưởng mời bạn đủ giá → nói thẳng "đủ mở mà không tốn đồng nào" (phép cộng hiện ra).
+  const kMoi = !hoi && y.gia ? soBanCanMoi(y.gia - qua, moi) : null;
+  const nut = y.nguon === "nhiem_vu" ? "Đăng nhập để nhận Sao" : hoi ? "Đăng nhập để hỏi tiếp" : qua ? `Đăng nhập · nhận ${qua} Sao` : "Đăng nhập để đọc tiếp";
   return (
     <div className="space-y-4">
-      <ul className="space-y-2 text-sm text-fg-muted">
-        {y.thuong ? <li className="flex gap-2"><Gift className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
-          Lưu hồ sơ vào tài khoản: <b className="text-fg">tặng {y.thuong} Sao</b>{y.gia && y.thuong >= y.gia ? " — đủ mở ngay báo cáo này." : "."}</li> : null}
-        {y.nguon === "hoi" && <li className="flex gap-2"><Sparkles className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />Có tài khoản: thêm câu hỏi miễn phí mỗi ngày.</li>}
-        <li className="flex gap-2"><UserPlus className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />Mời bạn bè: mỗi người bạn lưu hồ sơ vào tài khoản qua link của bạn, cả hai cùng nhận Sao.</li>
-      </ul>
-      <p className="text-xs text-fg-faint">Đăng nhập bằng email hoặc Google, không cần mật khẩu. Hồ sơ của bạn vẫn có thể chỉ lưu trên máy.</p>
+      {qua > 0 && (
+        <div className="flex items-start gap-3 rounded-2xl border border-gold/40 bg-gold/5 p-4" data-testid="qua-dang-nhap">
+          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-gold/15 text-gold"><Gift className="size-5" aria-hidden /></span>
+          <div className="text-sm">
+            <p className="text-fg">Đăng nhập 30 giây — nhận ngay <b className="text-gold">{qua} Sao</b> khi lưu hồ sơ vào tài khoản.</p>
+            {!hoi && y.gia ? (
+              <p className="mt-1 text-fg-muted">{qua >= y.gia ? "Đủ mở ngay báo cáo này." : `Báo cáo này ${y.gia} Sao — còn thiếu ${y.gia - qua} Sao.`}</p>
+            ) : null}
+            {hoi && <p className="mt-1 text-fg-muted" data-testid="khach-het-luot">{loiKhachHetLuot({ tranTk: y.tran_tk, tranKhach: y.tran, thuong: qua, gia: y.gia })}</p>}
+          </div>
+        </div>
+      )}
+      {moi > 0 && (
+        <div className="flex items-start gap-3 rounded-2xl border border-line/70 p-4 text-sm" data-testid="duong-mien-phi">
+          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-jade/15 text-jade"><UserPlus className="size-5" aria-hidden /></span>
+          <p className="text-fg-muted">
+            {hoi
+              ? <>Mời bạn bè: mỗi bạn nhận lời mời, bạn thêm <b className="text-fg">{moi} Sao</b>{soCau(moi, y.gia ?? 0) > 0 ? ` (${soCau(moi, y.gia ?? 0)} câu hỏi)` : ""}.</>
+              : kMoi === 0 ? <>Mời bạn bè: mỗi bạn nhận lời mời, bạn thêm <b className="text-fg">{moi} Sao</b> cho lần sau.</>
+              : kMoi === 1 ? <><b className="text-fg">Đọc miễn phí:</b> {qua} Sao quà + mời 1 bạn ({moi} Sao) là đủ {y.gia} Sao — không tốn đồng nào.</>
+              : <>Mời bạn bè: mỗi bạn nhận lời mời, bạn thêm <b className="text-fg">{moi} Sao</b>.</>}
+          </p>
+        </div>
+      )}
       <Button asChild className="w-full" onClick={() => ghiPhien(QUAY_VE, tiep)}>
-        <Link href={`/dang-nhap?tiep=${encodeURIComponent(tiep)}`} data-testid="sao-dang-nhap">{y.nguon === "nhiem_vu" ? "Đăng nhập để nhận Sao" : "Đăng nhập để xem tiếp"}</Link>
+        <Link href={`/dang-nhap?tiep=${encodeURIComponent(tiep)}`} data-testid="sao-dang-nhap">{nut}</Link>
       </Button>
+      <p className="text-xs text-fg-faint">Email hoặc Google, không cần mật khẩu. Hồ sơ của bạn vẫn có thể chỉ lưu trên máy.
+        {hoi && y.tran ? ` Không vội thì ngày mai bạn lại có ${y.tran} câu miễn phí.` : ""}</p>
     </div>
   );
 }
@@ -88,10 +124,23 @@ function DangNhapNhan({ y }: { y: YeuCauSao }) {
  *  yêu cầu (lib/sao-client fetchSao), chưa đủ thì ở lại hộp để nạp phần còn thiếu. */
 function HopNap({ y, xong }: { y: YeuCauSao; xong: () => void }) {
   const [them, setThem] = useState(0);   // Sao vừa nhận trong hộp (quà) → gói gợi ý chỉ bù phần còn thiếu
+  const [quaXong, setQuaXong] = useState(false);
+  const gia = y.gia ?? 0;
+  const co = (y.so_du ?? 0) + them;
+  // Quà chào mừng chỉ cách một cú bấm → gói gợi ý + số bạn cần mời tính phần thiếu SAU quà (không gợi nạp dư).
+  const quaCho = quaXong ? 0 : y.chao_mung ?? 0;
+  const thieu = Math.max(0, gia - co - quaCho);
+  const hoi = y.nguon === "hoi";
   return (
-    <div className="space-y-5">
-      {y.chao_mung ? <NhanChaoMung y={y} xong={xong} daNhan={setThem} /> : null}
-      <NapNhanh can={Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0) - them)} />
+    <div className="space-y-4">
+      <ThanhVi co={co} can={gia} />
+      {y.chao_mung ? <NhanChaoMung y={y} xong={xong} daNhan={(n) => { setThem(n); setQuaXong(true); }} /> : null}
+      {/* Quà một chạm đã đủ giá → chỉ một nút, không bày thêm lối trả tiền / mời bạn. */}
+      {quaCho > 0 && gia - co - quaCho <= 0 ? null : <>
+      <p className="text-sm font-medium text-fg">{hoi ? `Mỗi câu ${gia} Sao — chọn một cách:` : "Chọn một cách để đọc tiếp:"}</p>
+      <NapNhanh can={thieu} kind={y.can} nguon={y.nguon} giaCau={hoi ? gia : undefined}
+        moiBan={<TheMoiBan nguon={y.nguon} gia={gia} thieu={thieu} kind={y.can} />} />
+      </>}
     </div>
   );
 }
@@ -147,7 +196,7 @@ function NhanChaoMung({ y, xong, daNhan: baoDaNhan }: { y: YeuCauSao; xong: () =
   }
   if (daNhan !== null) {
     return <p className="rounded-2xl border border-jade/40 bg-jade/5 p-4 text-sm text-fg" data-testid="da-nhan-chao-mung">
-      {daNhan ? `Đã nhận ${daNhan} Sao.` : "Quà chào mừng đã nhận trước đó."} Ví còn thiếu {Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0) - daNhan)} Sao — nạp thêm bên dưới hoặc mời bạn bè.</p>;
+      {daNhan ? `Đã nhận ${daNhan} Sao.` : "Quà chào mừng đã nhận trước đó."} Còn thiếu {Math.max(0, (y.gia ?? 0) - (y.so_du ?? 0) - daNhan)} Sao — chọn một cách bên dưới.</p>;
   }
   return (
     <div className="rounded-2xl border border-gold/40 bg-gold/5 p-4" data-testid="nhan-chao-mung">
@@ -182,8 +231,9 @@ function XacNhan({ y, dong }: { y: YeuCauSao; dong: (v: boolean) => void }) {
   return (
     <div className="space-y-4">
       <p className="text-sm text-fg-muted">
-        Câu này dùng <b className="text-gold">{y.gia} Sao</b> · ví còn <b className="text-fg">{y.so_du} Sao</b>.
-        Chỉ trừ khi đã trả lời được. Ngày mai bạn lại có {y.tran} câu miễn phí.
+        Câu này dùng <b className="text-gold">{y.gia} Sao</b> · ví còn <b className="text-fg">{y.so_du} Sao</b>
+        {y.gia && y.so_du ? ` (đủ ${soCau(y.so_du, y.gia)} câu)` : ""}.
+        Máy lỗi không trả lời được thì Sao tự hoàn. Ngày mai bạn lại có {y.tran} câu miễn phí.
       </p>
       <label className="flex items-center gap-2 text-sm text-fg-muted">
         <input type="checkbox" checked={nho} onChange={(e) => setNho(e.target.checked)} className="size-4 accent-[rgb(var(--gold))]" />
@@ -199,26 +249,41 @@ function XacNhan({ y, dong }: { y: YeuCauSao; dong: (v: boolean) => void }) {
   );
 }
 
-/** Nạp ngay trong hộp thoại: gói gợi ý = gói nhỏ nhất đủ phần còn thiếu. Sau khi trả tiền, /nap-sao/ket-qua đưa về đây. */
-export function NapNhanh({ can = 0 }: { can?: number }) {
+/** Ba lối mở (đã đăng nhập, ví thiếu): thẻ "Đọc ngay" = gói nhỏ nhất đủ phần còn thiếu (SAO-ND: gói "Khởi đầu" khi đang
+ *  bán) + nút QR, các gói khác gập trong "Chọn gói khác"; thẻ "Miễn phí — mời bạn" (`moiBan`, nơi gọi đưa vào); thẻ hội
+ *  viên năm khi công tắc bật. Chưa từng nạp + công tắc bật → một dòng "Lần nạp đầu tặng thêm X% Sao". Sau khi trả tiền,
+ *  /nap-sao/ket-qua đưa về đây. */
+export function NapNhanh({ can = 0, kind = "nap", nguon = "luan_giai", giaCau, moiBan }: {
+  can?: number; kind?: string; nguon?: YeuCauSao["nguon"]; /** nguon = hoi: giá mỗi câu → "N câu hỏi" */ giaCau?: number; moiBan?: React.ReactNode;
+}) {
   const [ds, setDs] = useState<Goi[] | null>(null);
   const [cong, setCong] = useState<string | null>(null);
+  const [giaBaoCao, setGiaBaoCao] = useState(0);
+  const [napDau, setNapDau] = useState<NapDau | null>(null);
+  const [hoiVien, setHoiVien] = useState<HoiVien | null>(null);   // SAO-HV: thẻ hội viên năm khi công tắc bật
   const [chon, setChon] = useState("");
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
 
   useEffect(() => {
     ghi("checkout_viewed", { kind: "nap_nhanh" });
-    fetch("/api/thanh-toan/goi").then((r) => r.json()).then((d: { goi: Goi[]; cong: string | null }) => {
-      setDs(d.goi); setCong(d.cong);
-      const du = d.goi.filter((g) => g.sao >= can).sort((a, b) => a.gia_vnd - b.gia_vnd)[0];
-      setChon((du ?? d.goi.find((g) => g.nhan) ?? d.goi[0])?.ma ?? "");
-    }).catch(() => setDs([]));
+    let huy = false;
+    void (async () => {
+      // Gửi kèm access token (nếu có) để máy chủ trả "tài khoản này đã từng nạp chưa" — chỉ của chính mình.
+      const token = await supabase().then((sb) => sb?.auth.getSession()).then((s) => s?.data.session?.access_token).catch(() => undefined);
+      const r = await fetch("/api/thanh-toan/goi", token ? { headers: { authorization: `Bearer ${token}` } } : undefined);
+      const d = (await r.json()) as { goi: Goi[]; cong: string | null; gia_bao_cao?: number; nap_dau?: NapDau | null; hoi_vien?: unknown };
+      if (huy) return;
+      setDs(d.goi); setCong(d.cong); setGiaBaoCao(d.gia_bao_cao ?? 0); setNapDau(d.nap_dau ?? null); setHoiVien(docHoiVien(d.hoi_vien));
+      setChon(goiGoiY(d.goi, can)?.ma ?? "");
+    })().catch(() => { if (!huy) setDs([]); });
+    return () => { huy = true; };
   }, [can]);
 
   async function nap() {
     setDang(true); setLoi(null);
-    ghi("checkout_started", { kind: chon, nguon: "nap_nhanh" });
+    ghi("sao_prompt_answered", { kind, ket_qua: "nap", nguon });
+    ghi("checkout_started", { ...thuocTinhNap(chon, napDau), nguon: "nap_nhanh" });
     try {
       const sb = await supabase();
       const token = (await sb?.auth.getSession())?.data.session?.access_token;
@@ -234,29 +299,72 @@ export function NapNhanh({ can = 0 }: { can?: number }) {
   }
 
   if (!ds) return <p className="inline-flex items-center gap-2 text-sm text-fg-muted"><Loader2 className="size-4 animate-spin" aria-hidden /> Đang tải gói…</p>;
-  if (!cong) return <p className="text-sm text-fg-muted">Nạp Sao đang chuẩn bị mở. Trong lúc chờ, mời bạn bè ở trang <Link href="/tai-khoan" className="text-gold underline">Tài khoản</Link> để nhận Sao.</p>;
-  const g = ds.find((x) => x.ma === chon);
-  return (
-    <div className="space-y-4" data-testid="nap-nhanh">
-      <div className="grid gap-2">
-        {ds.map((x) => (
-          <label key={x.ma} className={`flex cursor-pointer items-center gap-3 rounded-xl border p-3 transition-colors ${chon === x.ma ? "border-gold bg-gold/5" : "border-line/70 hover:border-gold/50"}`}>
-            <input type="radio" name="goi-nhanh" value={x.ma} checked={chon === x.ma} onChange={() => setChon(x.ma)} className="sr-only" />
-            <Sparkles className="size-4 text-gold" aria-hidden />
-            <span className="flex-1"><b className="text-fg">{x.sao} Sao</b> <span className="text-xs text-fg-faint">{x.mo_ta}</span></span>
-            {x.nhan && <span className="rounded-full bg-gold px-2 py-0.5 text-[11px] font-semibold text-bg">{x.nhan}</span>}
-            <span className="text-sm text-fg">{vnd(x.gia_vnd)}</span>
-          </label>
-        ))}
+  if (!cong) {
+    return (
+      <div className="space-y-3">
+        <p className="text-sm text-fg-muted" data-testid="nap-chua-mo">Nạp Sao đang chuẩn bị mở — trong lúc chờ, mời bạn bè để nhận Sao.</p>
+        {moiBan}
       </div>
-      <Button className="w-full" onClick={() => void nap()} disabled={dang || !g} data-testid="nap-nhanh-nut">
-        {dang ? <Loader2 className="animate-spin" aria-hidden /> : <QrCode aria-hidden />}
-        {g ? `Quét QR nạp ${g.sao} Sao · ${vnd(g.gia_vnd)}` : "Chọn gói"}
-      </Button>
-      <p className="text-xs text-fg-faint">App ngân hàng / ví bất kỳ có VietQR. Sao vào ví trong vài giây, rồi bạn quay lại đúng trang này. Sao không đổi ra tiền, Sao mua không hết hạn.</p>
-      <p className="text-sm text-fg-muted"><UserPlus className="mr-1.5 inline size-4 align-[-3px] text-gold" aria-hidden />
-        Hoặc <Link href="/tai-khoan" className="text-gold underline">mời bạn bè</Link> — mỗi người bạn lưu hồ sơ vào tài khoản, cả hai cùng nhận Sao.</p>
-      {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
+    );
+  }
+  const g = ds.find((x) => x.ma === chon);
+  const nd = hienNapDau(napDau) ? napDau : null;
+  const bcG = g ? soBaoCao(g.sao, giaBaoCao) : 0;
+  const tangG = g && nd ? saoTangLanDau(g.sao, nd.phan_tram) : 0;
+  return (
+    <div className="grid gap-3">
+      <div className="space-y-3 rounded-2xl border border-gold/50 bg-gold/[0.06] p-4" data-testid="nap-nhanh">
+        <p className="flex items-center gap-2 font-medium text-fg">
+          <Zap className="size-4 text-gold" aria-hidden /> {nguon === "hoi" ? "Hỏi ngay" : "Đọc ngay"}
+          <span className="ml-auto text-xs font-normal text-fg-muted">QR ngân hàng · vài giây</span>
+        </p>
+        {nd && (
+          <p className="flex items-start gap-2 text-xs text-fg-muted" data-testid="nap-dau">
+            <Gift className="mt-px size-3.5 shrink-0 text-gold" aria-hidden />{dongNapDau(nd)}
+          </p>
+        )}
+        {g && (
+          <p className="text-sm text-fg-muted" data-testid="goi-chon">
+            Gói <b className="text-fg">{g.sao} Sao</b>{tangG > 0 && <span className="text-gold"> +{tangG} tặng</span>}
+            {nguon === "hoi" ? (giaCau && soCau(g.sao, giaCau) > 0 ? ` · ${soCau(g.sao, giaCau)} câu hỏi` : "") : bcG > 0 ? ` · ≈ ${bcG} báo cáo` : ""}
+            {g.mo_ta ? <span className="block text-xs text-fg-faint">{g.mo_ta}</span> : null}
+          </p>
+        )}
+        <Button className="w-full" onClick={() => void nap()} disabled={dang || !g} data-testid="nap-nhanh-nut">
+          {dang ? <Loader2 className="animate-spin" aria-hidden /> : <QrCode aria-hidden />}
+          {g ? `Quét QR nạp ${g.sao} Sao · ${vnd(g.gia_vnd)}` : "Chọn gói"}
+        </Button>
+        {ds.length > 1 && (
+          <details className="group" data-testid="goi-khac">
+            <summary className="flex cursor-pointer list-none items-center justify-center gap-1 text-xs text-fg-muted hover:text-fg">
+              Chọn gói khác ({ds.length} gói) <ChevronDown className="size-3.5 transition-transform group-open:rotate-180" aria-hidden />
+            </summary>
+            <div className="mt-2 grid gap-2">
+              {ds.map((x) => {
+                const bc = soBaoCao(x.sao, giaBaoCao);
+                const tang = nd ? saoTangLanDau(x.sao, nd.phan_tram) : 0;
+                return (
+                  <label key={x.ma} data-testid={`goi-nhanh-${x.ma}`} className={`flex cursor-pointer items-center gap-3 rounded-xl border p-3 transition-colors ${chon === x.ma ? "border-gold bg-gold/5" : "border-line/70 hover:border-gold/50"}`}>
+                    <input type="radio" name="goi-nhanh" value={x.ma} checked={chon === x.ma} onChange={() => setChon(x.ma)} className="sr-only" />
+                    <Sparkles className="size-4 text-gold" aria-hidden />
+                    <span className="flex-1"><b className="text-fg">{x.sao} Sao</b>
+                      {tang > 0 && <span className="text-xs text-gold"> +{tang} tặng</span>}
+                      {bc > 0 && <span className="block text-xs text-fg-muted">≈ {bc} báo cáo</span>}
+                      {x.mo_ta && <span className="block text-xs text-fg-faint">{x.mo_ta}</span>}
+                    </span>
+                    {x.nhan && <span className="rounded-full bg-gold px-2 py-0.5 text-[11px] font-semibold text-bg">{x.nhan}</span>}
+                    <span className="text-sm text-fg">{vnd(x.gia_vnd)}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </details>
+        )}
+        {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
+      </div>
+      {moiBan}
+      {hienDongHoiVien(hoiVien) && <TheHoiVien hv={hoiVien} kind={kind} nguon={nguon} />}
+      <p className="text-xs text-fg-faint">Sao không đổi ra tiền · Sao mua không hết hạn · nạp xong bạn quay lại đúng trang này.</p>
     </div>
   );
 }

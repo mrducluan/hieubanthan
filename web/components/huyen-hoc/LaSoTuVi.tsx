@@ -72,6 +72,19 @@ function dongSaoCot(c: CungT, phai: PhaiDoSang): { trai: DongSao[]; phai: DongSa
   return { trai, phai: phaiCot };
 }
 
+// UX v3 M5 — lớp "vừa khung" trên điện thoại: KhungLaSo (`group/ls`, data-gon="1" khi chưa phóng to, < 640px) ẩn lớp
+// chi tiết (`.ls-chi-tiet`: phụ tinh, can chi, tuổi, vòng Trường sinh, nhãn hạn, Tuần/Triệt, dòng nhỏ khung giữa) và hiện
+// lớp gọn (`.ls-gon`: tên cung + chính tinh + mức sáng, chữ ≥ 25 đơn vị ≈ 9px ở 390px). Lớp gọn mặc định `display="none"`
+// → ảnh tải về (tai-anh-svg chép SVG, không mang stylesheet trang) vẫn là bản đầy đủ như cũ; máy tính / phóng to không đổi.
+const CHI_TIET = "ls-chi-tiet max-sm:group-data-[gon=1]/ls:hidden";
+const GON = "ls-gon max-sm:group-data-[gon=1]/ls:inline";
+const CO_GON = 27;          // cỡ chữ lớp gọn (đơn vị viewBox) — 1000 đơn vị ≈ 343px ở màn 375px → ~9.3px (390px: 9.7px)
+const RONG_GON = 226;       // bề rộng tối đa một dòng trong ô (W − lề)
+/** Ép dòng gọn không tràn ô: ước bề rộng theo số ký tự; dài quá thì textLength co lại vừa RONG_GON. */
+function vuaO(chu: string, co: number, rong = RONG_GON): { textLength?: number; lengthAdjust?: "spacingAndGlyphs" } {
+  return chu.length * co * 0.56 > rong ? { textLength: rong, lengthAdjust: "spacingAndGlyphs" } : {};
+}
+
 function catDong(ds: DongSao[], toiDa: number): DongSao[] {
   if (ds.length <= toiDa) return ds;
   return [...ds.slice(0, toiDa - 1), { ten: `+${ds.length - toiDa + 1} sao`, mau: "var(--ls-mo)", nghieng: true }];
@@ -175,6 +188,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
               stroke={laChon ? "var(--ls-nhan)" : laXung ? "var(--ls-sat)" : laTamPhuong ? "var(--ls-nhan-mo)" : "var(--ls-vien)"}
               strokeWidth={laChon ? 2.6 : laTamPhuong || laXung ? 1.6 : 1}
               strokeDasharray={laXung && !laChon ? "6 5" : undefined} />
+            <g className={CHI_TIET}>
             {(laDh || laLn || laTh) && (
               <g>
                 {[laDh && "Đại hạn", laLn && "Lưu niên", laTh && "Tiểu hạn"].filter(Boolean).map((t, k, ds) => (
@@ -222,15 +236,43 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
                 {tenLn && <text x={W - 16} y={H - 20} textAnchor="end" fontSize={11.5} fontWeight={600} fill="var(--ls-nhan)">L.{tenLn}</text>}
               </>
             )}
+            </g>
+            <OGon c={c} phai={phaiDoSang} han={[laDh && "Đại hạn", laLn && "Lưu niên", laTh && "Tiểu hạn"].filter((t): t is string => Boolean(t))} />
           </g>
         );
       })}
 
       {/* Tuần / Triệt đóng giữa hai cung (lối Việt) */}
-      {ls.tuan_triet && <TuanTriet tt={ls.tuan_triet} chiSo={chiSo} />}
+      {ls.tuan_triet && <g className={CHI_TIET}><TuanTriet tt={ls.tuan_triet} chiSo={chiSo} /></g>}
     </svg>
   );
 });
+
+/** Lớp gọn của một ô (chỉ hiện ở điện thoại khi lá số đang vừa khung — xem CHI_TIET / GON). */
+function OGon({ c, phai, han }: { c: CungT; phai: PhaiDoSang; han: string[] }) {
+  const ten = `${c.ten}${c.la_than ? " · Thân" : ""}`;
+  return (
+    <g className={GON} display="none" aria-hidden>
+      <text x={W / 2} y={40} textAnchor="middle" fontSize={CO_GON} fontWeight={700}
+        fill={c.la_menh ? "var(--ls-nhan)" : "var(--ls-chu)"} {...vuaO(ten, CO_GON)}>{ten}</text>
+      {c.chinh_tinh.length ? c.chinh_tinh.map((s, k) => {
+        const d = doSang(s, phai, true);
+        const tat = d ? DO_SANG_TAT[d] : undefined;
+        const chu = `${s.ten}${tat ? ` (${tat})` : ""}`;
+        return (
+          <text key={s.ten} x={W / 2} y={96 + k * 36} textAnchor="middle" fontSize={CO_GON + 1} fontWeight={650}
+            fill={MAU_HANH[HANH_SAO[s.ten] ?? "Thổ"]} {...vuaO(chu, CO_GON + 1)}>
+            {s.ten}{tat && <tspan fontWeight={500} fill="var(--ls-mo)"> ({tat})</tspan>}
+          </text>
+        );
+      }) : <text x={W / 2} y={96} textAnchor="middle" fontSize={CO_GON} fontStyle="italic" fill="var(--ls-mo)">vô chính diệu</text>}
+      {han.map((t, k) => (
+        <text key={t} x={W / 2} y={H - 22 - (han.length - 1 - k) * 32} textAnchor="middle" fontSize={CO_GON} fontWeight={700}
+          fill={t === "Đại hạn" ? "var(--ls-thuy)" : t === "Lưu niên" ? "var(--ls-nhan)" : "var(--ls-mo)"}>{t}</text>
+      ))}
+    </g>
+  );
+}
 
 function TuanTriet({ tt, chiSo }: { tt: { tuan: string[]; triet: string[] }; chiSo: (c: string) => number }) {
   const giua = (cap: string[]): [number, number] | null => {
@@ -275,9 +317,20 @@ function ThongTinGiua({ ls, vanHan, ten, gioSinh, tru, cungThan }: {
   const x0 = W + 40;
   return (
     <g aria-hidden>
-      <text x={2 * W} y={H + 58} textAnchor="middle" fontSize={13} letterSpacing="0.3em" fill="var(--ls-mo)">LÁ SỐ TỬ VI</text>
+      <text x={2 * W} y={H + 58} textAnchor="middle" fontSize={13} letterSpacing="0.3em" fill="var(--ls-mo)" className={CHI_TIET}>LÁ SỐ TỬ VI</text>
       <text x={2 * W} y={H + 96} textAnchor="middle" fontSize={ten && ten.length > 22 ? 24 : 30} fill="var(--ls-nhan)"
         style={{ fontFamily: "var(--font-display), Georgia, serif" }}>{ten || `${ls.can_chi_nam.can} ${ls.can_chi_nam.chi}`}</text>
+      {/* Lớp gọn (điện thoại, vừa khung): tứ trụ 2×2 chữ lớn, bỏ các dòng nhỏ */}
+      {tru.length === 4 && (
+        <g className={GON} display="none">
+          {tru.map((t, k) => {
+            const chu = `${nhanTru[k]} ${t}`;
+            return <text key={k} x={W + 125 + (k % 2) * 250} y={H + 170 + Math.floor(k / 2) * 46} textAnchor="middle"
+              fontSize={CO_GON} fontWeight={600} fill="var(--ls-chu)" {...vuaO(chu, CO_GON)}>{chu}</text>;
+          })}
+        </g>
+      )}
+      <g className={CHI_TIET}>
       {/* Tứ trụ năm-tháng-ngày-giờ */}
       {tru.length === 4 && tru.map((t, k) => (
         <g key={k} transform={`translate(${W + 68 + k * 112},${H + 136})`}>
@@ -292,6 +345,7 @@ function ThongTinGiua({ ls, vanHan, ten, gioSinh, tru, cungThan }: {
           <text x={118} fontSize={15.5} fontWeight={k === "Bản mệnh" || k === "Cục" ? 600 : 500} fill="var(--ls-chu)">{v}</text>
         </g>
       ))}
+      </g>
     </g>
   );
 }

@@ -120,7 +120,7 @@ export function ThanhTren({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
   const path = usePathname();
   const sang = mucDangO(path, muc);
   return (
-    <header className="vach-sang sticky top-0 z-40 border-b border-line/50 bg-bg/70 backdrop-blur-lg">
+    <header data-thanh-dau className="vach-sang sticky top-0 z-40 border-b border-line/50 bg-bg/70 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="group flex min-h-11 items-center gap-2.5" aria-label="Hiểu Bản Thân — trang chủ">
           <Logo className="size-7 transition-transform duration-700 group-hover:rotate-90" />
@@ -157,6 +157,7 @@ export function TabDuoi({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
   if (!tab.length) return null;
   return (
     <nav
+      data-thanh-duoi
       className="fixed inset-x-0 bottom-0 z-40 border-t border-line/60 bg-bg/85 backdrop-blur-lg md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       aria-label="Điều hướng chính"
@@ -171,7 +172,7 @@ export function TabDuoi({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
                 href={m.href}
                 aria-current={on ? "page" : undefined}
                 className={cn(
-                  "relative flex h-16 flex-col items-center justify-center gap-1 text-[0.7rem] font-medium text-fg-faint transition-[color,transform] active:scale-95",
+                  "relative flex h-16 flex-col items-center justify-center gap-1 text-xs font-medium text-fg-muted transition-[color,transform] active:scale-95",
                   on && "text-gold before:absolute before:inset-x-6 before:top-0 before:h-0.5 before:rounded-full before:bg-gold before:shadow-[0_0_12px_rgb(var(--gold)/0.8)]",
                 )}
               >

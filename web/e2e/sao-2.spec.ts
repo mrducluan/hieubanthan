@@ -73,7 +73,8 @@ test("xem trước: chương đầu đọc được, chương sau khoá kèm đi
   await expect(khoa).toContainText("Đã đọc 1/3 chương");
   await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(2);
   await expect(khoa).toContainText("Bạn thật sự tìm gì ở người bạn đời?");
-  await expect(khoa).toContainText("tặng 10 Sao — đủ mở báo cáo này");
+  await expect(khoa).toContainText("Đọc tiếp 2 chương còn lại");
+  await expect(page.getByTestId("lg-goi-y")).toHaveText("Đăng nhập nhận 10 Sao — đủ mở ngay báo cáo này.");
   await page.getByTestId("lg-mo-khoa").click();
   const hop = page.getByTestId("hop-thoai-sao");
   await expect(hop).toHaveAttribute("data-can", "dang_nhap");

@@ -138,7 +138,7 @@ test("nút tặng: hết lượt 30 ngày → câu trung tính, không có nút"
 
 test("API: công tắc thu Sao từng mảng — chưa bật tài khoản thì luôn miễn phí", async ({ request }) => {
   for (const m of ["", "thanso", "tuvi", "battu", "khac"]) {
-    expect(await (await request.get(`/api/luan-giai/phi${m ? `?mo_dun=${m}` : ""}`)).json()).toEqual({ thu: false, gia: 10 });
+    expect(await (await request.get(`/api/luan-giai/phi${m ? `?mo_dun=${m}` : ""}`)).json()).toEqual({ thu: false, gia: 29 });
   }
   expect(await (await request.get("/api/qua")).json()).toMatchObject({ bat: false, co_the_tang: false });
   expect((await request.post("/api/qua", { data: { mo_dun: "tuvi" } })).status()).toBe(401);

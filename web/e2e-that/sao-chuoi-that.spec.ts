@@ -103,7 +103,21 @@ test("báo cáo: khách đọc chương 1 → mở khoá → đăng nhập OTP �
   await page.getByTestId("lg-mo-khoa").click();
   await expect(page.getByTestId("nap-nhanh")).toBeVisible();
   await expect(page.getByTestId("nhan-chao-mung")).toHaveCount(0);
-  await expect(hop(page).getByRole("link", { name: "mời bạn bè" })).toBeVisible();
+  // Cửa Sao v2 — lối miễn phí ngay trong hộp: thẻ mời bạn (mã mời thật của tài khoản) + phép tính đủ giá 10 Sao.
+  const moi = hop(page).getByTestId("the-moi-ban");
+  await expect(moi).toContainText("+20 Sao / bạn");
+  await expect(moi.getByTestId("moi-ban-ket-qua")).toHaveText("Mời 1 bạn là đủ mở báo cáo này.");
+  await expect(moi.getByTestId("moi-ban-dieu-kien")).toContainText("đăng nhập và lưu hồ sơ");
+  await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
+  await expect(moi.getByTestId("moi-ban-nut")).toBeEnabled({ timeout: 30_000 });
+  await moi.getByTestId("moi-ban-nut").click();
+  await expect(moi.getByTestId("moi-ban-nut")).toContainText("Đã chép lời mời");
+  const chep = await page.evaluate(() => navigator.clipboard.readText());
+  const maMoi = (await (await fetch(`${SB}/rest/v1/ma_gioi_thieu?user_id=eq.${await uid(EMAIL)}&select=ma`, { headers: H })).json()) as { ma: string }[];
+  expect(chep).toMatch(/\/hop-doi\/[^?\s]+\?gt=/);              // link mời xem hợp đôi (mã HMAC, không ngày sinh)
+  expect(maMoi).toHaveLength(1);
+  expect(chep).toContain(`gt=${maMoi[0]!.ma}`);
+  expect(chep).not.toMatch(/1990|17\/0?5/);                       // không lộ ngày sinh người mời
   await page.getByTestId("nap-nhanh-nut").click();
   await page.getByRole("button", { name: "Giả lập đã trả" }).click();
   await expect(page.getByTestId("ket-qua-nap")).toHaveAttribute("data-trang-thai", "da_tra");
@@ -113,7 +127,7 @@ test("báo cáo: khách đọc chương 1 → mở khoá → đăng nhập OTP �
   v = await so(EMAIL);
   expect([v.du, v.dem("mua"), v.dem("dung")]).toEqual([20, 1, 2]);
 
-  // 6. Hỏi đáp có tài khoản: 2 câu miễn phí → câu 3 hỏi đồng ý → trừ 1 Sao SAU khi trả lời.
+  // 6. Hỏi đáp có tài khoản: 2 câu miễn phí → câu 3 hỏi đồng ý → trừ 3 Sao (giá câu vượt lượt, chủ dự án chốt 26/10) SAU khi trả lời.
   await page.goto("/tu-vi");
   for (const c of ["Cung Mệnh của tôi nói gì?", "Cung Quan Lộc thế nào?"]) {
     const n = await hoi(page, c);
@@ -123,13 +137,13 @@ test("báo cáo: khách đọc chương 1 → mở khoá → đăng nhập OTP �
   await expect(hop(page)).toHaveAttribute("data-can", "xac_nhan_sao");
   await page.getByTestId("sao-dong-y").click();
   await expect(page.getByTestId("cau-tra-loi")).toHaveCount(n3 + 1, { timeout: 60_000 });
-  await expect.poll(async () => (await so(EMAIL)).du).toBe(19);
+  await expect.poll(async () => (await so(EMAIL)).du).toBe(17);   // 20 − 3
 
   // 7. Câu khủng hoảng khi đã hết lượt → luôn trả lời, không hỏi Sao, không trừ.
   const n4 = await hoi(page, "Tôi muốn tự tử");
   await expect(page.getByTestId("cau-tra-loi")).toHaveCount(n4 + 1, { timeout: 60_000 });
   await expect(hop(page)).toHaveCount(0);
-  expect((await so(EMAIL)).du).toBe(19);
+  expect((await so(EMAIL)).du).toBe(17);
 });
 
 test("khách: hết lượt hỏi → mời đăng nhập; 'Để sau' ở báo cáo → tải lại không tự bật hộp", async ({ page }) => {

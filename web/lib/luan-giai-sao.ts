@@ -16,7 +16,7 @@ import { catXemTruoc, type BaoCaoDay } from "@/lib/sao-xem-truoc";
 import { mangLuanGiai } from "@/lib/luan-giai-mang";
 
 /** Giá mặc định; QT-2: chủ sở hữu đổi ở /quan-tri/cai-dat (khoá luan_giai.gia_sao). */
-export const GIA_LUAN_GIAI_SAO = 10;
+export const GIA_LUAN_GIAI_SAO = 29;   // chủ dự án chốt 26/10/2026 (trước 10); câu hỏi vượt lượt 3 Sao
 export const giaLuanGiaiSao = () => layCauHinh<number>("luan_giai.gia_sao");
 
 /** Công tắc: (cài đặt chung luan_giai.thu_sao — chưa đặt thì theo env LUAN_GIAI_THU_SAO=1 — HOẶC công tắc riêng của
@@ -40,6 +40,15 @@ async function chuongDuocTang(phien: Awaited<ReturnType<typeof phienNguoiDung>>,
     const { data, error } = await phien.sb.rpc("chuong_duoc_tang", { p_mo_dun: mang });
     return !error && Number(data) >= 1 ? 1 : 0;
   } catch { return 0; }
+}
+
+/** SAO-HV (0028): người đang đăng nhập là hội viên năm còn hiệu lực? Hàm SQL hoi_vien_hieu_luc() (không tham số = chính
+ *  mình). Chưa chạy 0028 / lỗi → false (không mở nhầm). */
+async function laHoiVien(phien: NonNullable<Awaited<ReturnType<typeof phienNguoiDung>>>): Promise<boolean> {
+  try {
+    const { data, error } = await phien.sb.rpc("hoi_vien_hieu_luc");
+    return !error && data === true;
+  } catch { return false; }
 }
 
 const MIEN_PHI = { sao: 0, ly_do: "mien_phi_thu_nghiem" } as const;
@@ -75,6 +84,15 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   const khoa = bi_mat
     ? `lg:${createHmac("sha256", bi_mat).update(`${moDun}|${JSON.stringify(khoaTu(parsed.data as Record<string, unknown>))}|${ngay}`).digest("hex").slice(0, 40)}`
     : null;
+
+  // SAO-HV (0028): hội viên năm đang hiệu lực → báo cáo đầy đủ, KHÔNG trừ Sao (kể cả lượt xem trước), ghi "đã mở" bằng
+  // khoá báo cáo (chỉ đếm, cho chính sách hoàn tiền 14 ngày). Lỗi / chưa chạy 0028 → coi như không phải hội viên.
+  if (phien && khoa && (await laHoiVien(phien))) {
+    const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
+    if (!kq.ok) return kq.res;
+    await phien.sb.rpc("hoi_vien_ghi_mo", { p_khoa: khoa }).then(() => undefined, () => undefined);
+    return NextResponse.json({ ...(kq.body as object), phi: { sao: 0, ly_do: "hoi_vien" } });
+  }
 
   // Đã mở hôm nay? (RLS: người dùng đọc được sổ Sao của chính mình.)
   let daMo = false;

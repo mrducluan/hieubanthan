@@ -2,6 +2,7 @@
 // TS-V3 tầng HỌC — "Câu trả lời này có đúng với bạn không?" dưới mỗi câu trả lời thần số.
 // Gửi /api/thanso/phan-hoi: máy chủ chỉ lưu các con số đã tính + mã câu + phái (không tên, không ngày sinh); ghi chú chỉ
 // được lưu khi người dùng TỰ tích đồng ý, và đã lọc email / số điện thoại / ngày tháng. PostHog chỉ nhận mã.
+import Link from "next/link";
 import { useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { Button } from "@/components/ui/button";
@@ -46,8 +47,10 @@ export function GopYCauTraLoi({ hoSo, nc }: { hoSo: HoSo; nc: NguCanhGopY }) {
           aria-label="Chưa đúng ở đâu?" placeholder="Chưa đúng ở đâu? Đừng ghi tên, số điện thoại, ngày sinh, sức khoẻ hay tôn giáo." />
         <label className="flex items-start gap-2 text-xs text-fg-muted">
           <input type="checkbox" checked={dongY} onChange={(e) => setDongY(e.target.checked)} className="mt-0.5" />
-          Đồng ý dùng ghi chú này để cải thiện câu trả lời (lưu kèm các con số rút gọn, không kèm tên, ngày sinh hay tài
-          khoản; email, số điện thoại, ngày tháng tự bị xoá; tự xoá sau 12 tháng).
+          <span>Đồng ý dùng ghi chú này để cải thiện câu trả lời (lưu kèm các con số rút gọn, không kèm tên, ngày sinh hay tài
+            khoản; email, số điện thoại, ngày tháng tự bị xoá; tự xoá sau 12 tháng). Không tích thì chỉ gửi "chưa đúng", không gửi
+            ghi chú; ghi chú không gắn với bạn nên không gỡ riêng được sau khi gửi.{" "}
+            <Link href="/chinh-sach-rieng-tu#dong-y" className="text-gold underline">Chính sách quyền riêng tư</Link></span>
         </label>
         <div className="flex gap-2">
           <Button size="sm" variant="secondary" onClick={() => gui(false, true)}>{c("gop_y_cau.gui")}</Button>

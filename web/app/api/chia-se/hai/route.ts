@@ -1,12 +1,13 @@
 // POST /api/chia-se/hai — TCS-1: mã có KÝ cho thẻ "Điểm hai người" (Xem lá số 2 người).
 // Máy chủ tự gọi engine chấm lại (client không tự khai điểm được) rồi ký: mã CHỈ mang tên hiển thị người gửi (người dùng
 // tự gõ, có thể trống), quan hệ, điểm tổng, mức, ≤ 3 tiêu chí (phần trăm). Ngày giờ sinh hai người chỉ đi qua lượt gọi
-// để engine tính — không ghi vào mã, không lưu. Tên người kia KHÔNG nhận (NĐ 13/2023): client cũ còn gửi `ten_kia` thì
+// để engine tính — không ghi vào mã, không lưu. Tên người kia KHÔNG nhận (Luật BVDLCN 91/2025, thay NĐ 13/2023): client cũ còn gửi `ten_kia` thì
 // zod bỏ trường lạ, mã không bao giờ mang tên người kia.
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { kyMaHai, tuTuMa, TIEU_CHI_HAI } from "@/lib/ma-moi";
+import { traLoiChiaSe } from "@/lib/loi-chia-se";
 import { HopThamInput, HopThamOutput } from "../../tuvi/schema";
 
 const Input = HopThamInput.extend({
@@ -33,7 +34,6 @@ export async function POST(req: Request): Promise<NextResponse> {
     const ma = kyMaHai({ a: ten_ban, q: hopTham.quan_he, p: d.tong, m: d.muc, c });
     return NextResponse.json({ ma, tu: tuTuMa("hp", ma) });
   } catch (e) {
-    const msg = e instanceof Error && e.message.includes("LOI_MOI_SECRET") ? e.message : "Chưa tạo được thẻ.";
-    return NextResponse.json({ error: msg }, { status: 502 });
+    return traLoiChiaSe(e, "hai");
   }
 }
