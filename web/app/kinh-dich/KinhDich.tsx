@@ -22,6 +22,7 @@ import { ghiNhanDung } from "@/lib/kiem-chung-sau";
 import { NutChiaSeQue } from "@/components/kinh-dich/NutChiaSeQue";
 import { type GiaTriHao, giaTriTuQue, laGiaTriHao } from "@/lib/dong-xu";
 import { luuQue, nhanLuc, type QueDaLuu } from "@/lib/lich-su-que";
+import { ChanQr } from "@/components/khung/ChanQr";
 
 interface Res extends HoiMangRes {
   que?: { quai_ban: Quai; quai_bien: Quai | null; hao_dong: number[]; nguon_ngau_nhien?: string; gia_tri_hao_1_den_6?: number[] } | null;
@@ -197,6 +198,7 @@ export function KinhDich() {
             <VeQue q={que.quai_ban} dong={que.hao_dong} nhan="Quẻ bản" />
             {que.quai_bien && <VeQue q={que.quai_bien} nhan="Quẻ biến" />}
           </div>
+          <ChanQr className="max-w-sm" nhan="Quét để gieo quẻ của bạn" />
           {que.hao_dong.length > 0 && (
             <p className="mt-2 text-xs text-fg-muted" data-testid="giai-thich-dong">
               Vạch vàng là <b>hào động</b> ({que.hao_dong.map((h) => `hào ${h}`).join(", ")}) — chỗ việc đang chuyển; đổi vạch đó thì ra <b>quẻ biến</b>: xu hướng việc chuyển tới.

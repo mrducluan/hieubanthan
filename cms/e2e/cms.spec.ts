@@ -485,7 +485,7 @@ test("Tính năng: tắt blog → bài CMS ẩn khỏi web; bật lại → hi�
   await choWeb(request, "/blog/so-chu-dao-7", (s) => s === 200);
 });
 
-test("Giao diện website: menu chân trang, dải thông báo, banner, bài mới trang chủ, bài liên quan ở Khám phá — sửa ở CMS, web đổi theo", async ({ page, request }) => {
+test("Giao diện website: menu chân trang, dải thông báo, banner, bài mới trang chủ, bài liên quan ở Huyền học — sửa ở CMS, web đổi theo", async ({ page, request }) => {
   const token = await tokenQt(request);
   const h = { Authorization: `JWT ${token}` };
   const bai = (await (await request.get(`${CMS}/api/bai-viet?where[slug][equals]=so-chu-dao-7&depth=0`, { headers: h })).json()).docs[0];
@@ -834,7 +834,7 @@ test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa
   await daLoHet(page);
   const menu = page.getByTestId("menu-dau-trang");
   await expect(menu.getByRole("link", { name: "Góc đọc" })).toHaveAttribute("href", "/blog");
-  await expect(menu.getByText("Khám phá", { exact: true })).toHaveCount(0);   // menu theo CMS, không trộn mặc định
+  await expect(menu.getByText("Huyền học", { exact: true })).toHaveCount(0);   // menu theo CMS, không trộn mặc định
   await page.getByRole("button", { name: "Mở menu Góc đọc" }).click();
   const con = page.locator("[data-testid=menu-con]:visible");
   await expect(con.getByRole("link", { name: /Bài số 7 nổi bật/ })).toHaveAttribute("href", "/blog/so-chu-dao-7");
@@ -853,7 +853,7 @@ test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa
     // để trống → web quay về menu mặc định trong code (luôn chạy, kể cả khi bước trên hỏng — không làm hỏng test sau)
     expect((await request.post(`${CMS}/api/globals/menu-dau-trang`, { headers: h, data: { muc: [] } })).ok()).toBeTruthy();
   }
-  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Góc đọc") && b.includes("Khám phá"));
+  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Góc đọc") && b.includes("Huyền học"));
 });
 
 test("CMS-2 xác thực 2 bước: bật bằng mã → phiên mới thiếu mã bị đưa sang màn 2 bước → nhập mã → vào được", async ({ browser, request }) => {

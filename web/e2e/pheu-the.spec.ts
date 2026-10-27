@@ -46,3 +46,22 @@ test("tinhPheuThe: nối bước bằng mã link, loại gốc = lần chia sẻ
 test("tinhPheuThe: không có số → bảng rỗng", () => {
   expect(tinhPheuThe({ chiaSe: [], mo: [], dangKy: [], moiBan: [] })).toEqual({ dong: [], ngoaiKhung: { mo: 0, dang_ky: 0 } });
 });
+
+test("QR chụp màn hình: mã cố định theo mảng đúng dạng ?tu= và được gom vào dòng 'ms' dù không có share_created", async () => {
+  const { maManHinh, linkQrManHinh } = await import("../lib/ma-man-hinh");
+  for (const d of ["/tu-vi", "/tu-vi/la-so-mau/abc", "/bat-tu", "/kinh-dich", "/phong-thuy", "/khac"]) {
+    expect(maManHinh(d)).toMatch(/^[a-z]{2}\.[a-f0-9]{10}$/);   // đúng dạng GhiVaoTrang chấp nhận
+  }
+  expect(maManHinh("/tu-vi")).not.toBe(maManHinh("/tu-vi/la-so-mau/abc"));
+  expect(linkQrManHinh("https://hieuban.com", "/bat-tu")).toBe(`https://hieuban.com/bat-tu?tu=${maManHinh("/bat-tu")}`);
+  const kq = tinhPheuThe({
+    chiaSe: [],
+    mo: [{ ma: maManHinh("/tu-vi"), nguoi: 5 }],
+    dangKy: [{ ma: maManHinh("/tu-vi"), nguoi: 2, nhan_sao: 1 }],
+    moiBan: [],
+  });
+  expect(kq.ngoaiKhung).toEqual({ mo: 0, dang_ky: 0 });
+  expect(kq.dong).toHaveLength(1);
+  expect(kq.dong[0]).toMatchObject({ kind: "ms", mo: 5, dang_ky: 2, nhan_sao: 1, chia_se: 0 });
+  expect(kq.dong[0]!.ti_le.mo).toBeNull();   // không có lượt "tạo thẻ" → không chia cho 0
+});

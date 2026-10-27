@@ -1,12 +1,13 @@
 "use client";
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Compass, MapPin, Navigation, Smartphone } from "lucide-react";
+import { ClipboardPaste, Compass, ExternalLink, MapPin, Navigation, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { postJson } from "@/lib/goi-api";
 import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
 import { CachLam } from "@/components/huyen-hoc/CachLam";
+import { ChonTrenVeTinh } from "@/components/huyen-hoc/ChonTrenVeTinh";
 import { LocateFixed } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
@@ -66,12 +67,53 @@ function cungLaBan(i: number, r0: number, r1: number) {
   return `M ${p(r0, a0)} L ${p(r1, a0)} A ${r1} ${r1} 0 0 1 ${p(r1, a1)} L ${p(r0, a1)} A ${r0} ${r0} 0 0 0 ${p(r0, a0)} Z`;
 }
 
-function MatLaBan({ doHuong, laBan }: { doHuong: number | null; laBan?: LaBanCaNhan | null }) {
+/** Độ nguyên 0–359 (chỉ để hiển thị / kéo mặt la bàn; engine vẫn đổi độ → hướng, sơn khi Chốt). */
+const doChuan = (d: number) => ((Math.round(d) % 360) + 360) % 360;
+
+/** Mặt la bàn. Có `onXoay` (máy tính, máy không có cảm biến): kéo xoay bằng chuột / ngón tay, bấm một chữ để đưa nó lên
+ *  dưới kim, phím ← → chỉnh 1° (Shift: 15°) — hướng đang ở dưới kim là hướng mặt nhà. */
+function MatLaBan({ doHuong, laBan, onXoay }: { doHuong: number | null; laBan?: LaBanCaNhan | null; onXoay?: (d: number) => void }) {
+  const keo = useRef<{ goc0: number; d0: number; x0: number; y0: number; da: boolean } | null>(null);
+  const [dangKeo, setDangKeo] = useState(false);
+  // Góc màn hình của con trỏ quanh tâm mặt la bàn: 0 = trên, theo chiều kim đồng hồ.
+  const goc = (e: React.PointerEvent<SVGSVGElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    return (Math.atan2(e.clientX - (r.left + r.width / 2), r.top + r.height / 2 - e.clientY) * 180) / Math.PI;
+  };
+  const ten = (doHuong == null ? "La bàn" : `La bàn: ${Math.round(doHuong)} độ`) + (laBan ? ` — tô hướng tốt của mệnh ${laBan.quai}` : "");
+  const tuongTac = onXoay ? {
+    role: "slider" as const, tabIndex: 0, "aria-valuemin": 0, "aria-valuemax": 359, "aria-valuenow": doHuong == null ? undefined : doChuan(doHuong),
+    "aria-label": "Hướng mặt nhà — kéo xoay mặt la bàn hoặc dùng phím mũi tên", "aria-valuetext": doHuong == null ? "chưa chọn" : `${doChuan(doHuong)} độ`,
+    "data-testid": "la-ban-keo",
+    onPointerDown: (e: React.PointerEvent<SVGSVGElement>) => {
+      e.currentTarget.setPointerCapture(e.pointerId);
+      keo.current = { goc0: goc(e), d0: doHuong ?? 0, x0: e.clientX, y0: e.clientY, da: false };
+      setDangKeo(true);
+    },
+    onPointerMove: (e: React.PointerEvent<SVGSVGElement>) => {
+      const k = keo.current;
+      if (!k) return;
+      if (!k.da && Math.hypot(e.clientX - k.x0, e.clientY - k.y0) > 4) k.da = true;
+      if (k.da) onXoay(doChuan(k.d0 - (goc(e) - k.goc0)));   // mặt la bàn đi theo tay
+    },
+    onPointerUp: (e: React.PointerEvent<SVGSVGElement>) => {
+      const k = keo.current;
+      keo.current = null; setDangKeo(false);
+      if (k && !k.da) onXoay(doChuan(k.d0 + goc(e)));        // bấm một điểm → đưa hướng đó lên dưới kim
+    },
+    onPointerCancel: () => { keo.current = null; setDangKeo(false); },
+    onKeyDown: (e: React.KeyboardEvent<SVGSVGElement>) => {
+      const buoc = e.shiftKey ? 15 : 1;
+      const d = doHuong ?? 0;
+      if (e.key === "ArrowRight" || e.key === "ArrowUp") { e.preventDefault(); onXoay(doChuan(d + buoc)); }
+      else if (e.key === "ArrowLeft" || e.key === "ArrowDown") { e.preventDefault(); onXoay(doChuan(d - buoc)); }
+    },
+  } : { role: "img" as const, "aria-label": ten };
   return (
-    <svg viewBox="0 0 200 200" className="mx-auto h-48 w-48" role="img"
-      aria-label={(doHuong == null ? "La bàn" : `La bàn: ${Math.round(doHuong)} độ`) + (laBan ? ` — tô hướng tốt của mệnh ${laBan.quai}` : "")}>
+    <svg viewBox="0 0 200 200" className={cn("mx-auto h-48 w-48", onXoay && "cursor-grab touch-none rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold", dangKeo && "cursor-grabbing")}
+      {...tuongTac}>
       <circle cx="100" cy="100" r="94" fill="rgb(var(--surface))" stroke="rgb(var(--line))" />
-      <g style={{ transform: `rotate(${-(doHuong ?? 0)}deg)`, transformOrigin: "100px 100px", transition: "transform 0.15s linear" }}>
+      <g style={{ transform: `rotate(${-(doHuong ?? 0)}deg)`, transformOrigin: "100px 100px", transition: dangKeo ? "none" : "transform 0.15s linear" }}>
         {laBan && HUONG8.map((h, i) => (
           <path key={h} d={cungLaBan(i, 44, 88)} data-testid="la-ban-cung" data-cat={laBan.huongCat.includes(h)}
             fill={laBan.huongCat.includes(h) ? "rgb(var(--jade) / 0.22)" : "rgb(var(--cinnabar) / 0.08)"} stroke="rgb(var(--line) / 0.6)" strokeWidth="0.5" />
@@ -108,6 +150,12 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
   // UI-PT2 B: định vị bằng GPS điện thoại → điền toạ độ (chỉ dùng tính góc, không lưu, không gửi đi đâu ngoài engine).
   const [dangDinhVi, setDangDinhVi] = useState<"tam" | "truoc" | null>(null);
   const [doChinhXac, setDoChinhXac] = useState<number | null>(null);
+  // Sai số của từng điểm lấy bằng định vị (null = gõ / dán tay). Máy tính không có GPS: trình duyệt đoán theo wifi / IP,
+  // sai số hàng chục – hàng trăm mét → hai điểm trong một căn nhà không tính được hướng.
+  const [saiSo, setSaiSo] = useState<{ tam: number | null; truoc: number | null }>({ tam: null, truoc: null });
+  // Máy tính (chuột) → hướng dẫn "chuột phải" thay cho "nhấn giữ".
+  const [mayTinh, setMayTinh] = useState(false);
+  useEffect(() => { try { setMayTinh(window.matchMedia("(pointer: fine)").matches); } catch { /* bỏ qua */ } }, []);
   const dinhVi = (o: "tam" | "truoc") => {
     if (typeof navigator === "undefined" || !navigator.geolocation) { setLoi("Trình duyệt này không có định vị — nhấn giữ trên bản đồ để chép toạ độ."); return; }
     setDangDinhVi(o); setLoi(null);
@@ -115,6 +163,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
       const v = `${pos.coords.latitude.toFixed(6)}, ${pos.coords.longitude.toFixed(6)}`;
       (o === "tam" ? setTam : setTruoc)(v);
       setDoChinhXac(Math.round(pos.coords.accuracy));
+      setSaiSo((s) => ({ ...s, [o]: Math.round(pos.coords.accuracy) }));
       setDangDinhVi(null);
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "dinh_vi_gps", diem: o, chinh_xac_m: Math.round(pos.coords.accuracy) });
     }, () => { setDangDinhVi(null); setLoi("Chưa lấy được vị trí (chưa cho phép, hoặc đang ở trong nhà kín). Nhấn giữ trên bản đồ để chép toạ độ."); },
@@ -134,15 +183,52 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
   const [tam, setTam] = useState("");
   const [truoc, setTruoc] = useState("");
   const [kcBanDo, setKcBanDo] = useState<number | null>(null);
+  /** Dán toạ độ vừa chép (Google Maps trên máy tính: chuột phải → bấm dòng số đầu tiên là đã chép). */
+  const dan = async (o: "tam" | "truoc") => {
+    try {
+      const t = (await navigator.clipboard.readText()).slice(0, 300);
+      if (!docToaDo(t)) { setLoi("Bộ nhớ tạm chưa có toạ độ. Trên Google Maps: chuột phải lên mái nhà → bấm dòng số đầu tiên rồi bấm Dán lại."); return; }
+      (o === "tam" ? setTam : setTruoc)(t); setSaiSo((s) => ({ ...s, [o]: null })); setLoi(null);
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "ban_do_dan", diem: o });
+    } catch { setLoi("Trình duyệt chưa cho đọc bộ nhớ tạm — bấm vào ô rồi nhấn Ctrl+V (Mac: ⌘+V)."); }
+  };
+  /** Mở Google Maps ảnh vệ tinh ở tab mới, căn giữa vị trí gần đúng của máy (nếu bạn cho phép) để tìm mái nhà nhanh.
+   *  Tab mở ngay trong cú bấm (không bị chặn cửa sổ bật lên), vị trí đến sau thì đổi địa chỉ tab. Không lưu vị trí. */
+  const moBanDoVeTinh = () => {
+    const daCo = docToaDo(tam) ?? docToaDo(truoc);
+    const url = (p: [number, number] | null) => p
+      ? `https://www.google.com/maps/@${p[0].toFixed(6)},${p[1].toFixed(6)},20z/data=!3m1!1e3`
+      : "https://www.google.com/maps/@16.0,106.5,6z/data=!3m1!1e3";
+    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "mo_ban_do_ve_tinh", co_vi_tri: !!daCo });
+    if (daCo || typeof navigator === "undefined" || !navigator.geolocation) { window.open(url(daCo), "_blank", "noopener"); return; }
+    const w = window.open("about:blank", "_blank");
+    if (w) w.opener = null;
+    const di = (p: [number, number] | null) => { if (w && !w.closed) w.location.href = url(p); else window.open(url(p), "_blank", "noopener"); };
+    navigator.geolocation.getCurrentPosition((pos) => di([pos.coords.latitude, pos.coords.longitude]), () => di(null),
+      { enableHighAccuracy: false, timeout: 6_000, maximumAge: 600_000 });
+  };
+  /** Kết quả engine từ hai điểm (dán toạ độ hoặc chấm trên ảnh vệ tinh) → hiện, báo khung Khảo sát, lưu hồ sơ nhà trên máy. */
+  const apDungBanDo = (r: KetQuaDoHuong & { khoang_cach_m: number }) => {
+    setKq(r); setKcBanDo(r.khoang_cach_m); setDoSong(r.do_huong); setLoi(null);
+    onChot?.(r);
+    try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined, ...(canHo ? { theo: "ban_cong" } : {}) }); } catch { /* bỏ qua */ }
+  };
   const chotBanDo = async () => {
     const a = docToaDo(tam), b = docToaDo(truoc);
     if (!a || !b) { setLoi("Dán toạ độ dạng \"10.776, 106.700\" hoặc link bản đồ có toạ độ cho cả hai điểm."); return; }
     setDang(true); setLoi(null);
     try {
       const r = await postJson<KetQuaDoHuong & { khoang_cach_m: number }>("/api/phongthuy/huong-ban-do", { tam: a, truoc: b, ...(sinh ? { sinh } : {}) });
-      setKq(r); setKcBanDo(r.khoang_cach_m); setDoSong(r.do_huong);
-      onChot?.(r);
-      try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined, ...(canHo ? { theo: "ban_cong" } : {}) }); } catch { /* bỏ qua */ }
+      // Điểm lấy bằng định vị có sai số ≥ nửa khoảng cách hai điểm → góc tính ra gần như ngẫu nhiên: không chốt, không lưu.
+      const ss = Math.max(saiSo.tam ?? 0, saiSo.truoc ?? 0);
+      if (ss > 0 && r.khoang_cach_m < 2 * ss) {
+        setKcBanDo(r.khoang_cach_m);
+        setLoi(`Vị trí lấy tự động sai số ±${ss} m, lớn so với khoảng cách hai điểm (${r.khoang_cach_m} m) — hướng tính ra chưa tin được. `
+          + (mayTinh ? "Máy tính chỉ đoán vị trí theo wifi; hãy mở Google Maps ảnh vệ tinh, chuột phải lên mái nhà để chép toạ độ." : "Ra ngoài trời, đi xa tâm nhà hơn rồi lấy lại, hoặc nhấn giữ trên bản đồ."));
+        ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huong_ban_do_sai_so", sai_so_m: ss });
+        return;
+      }
+      apDungBanDo(r);
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huong_ban_do" });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa tính được từ hai điểm này."); }
     finally { setDang(false); }
@@ -220,8 +306,13 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
 
       <div className="mt-4 grid items-center gap-4 sm:grid-cols-[auto_1fr]">
         <div>
-          <MatLaBan doHuong={doSong} laBan={laBan} />
+          <MatLaBan doHuong={doSong} laBan={laBan} onXoay={dangDo ? undefined : (d) => { setDoSong(d); setNhap(String(d)); setLoi(null); }} />
           <p className="text-center font-serif text-2xl text-gold" aria-live="polite">{doSong == null ? "—" : `${Math.round(doSong)}°`}</p>
+          {!dangDo && (
+            <p className="mx-auto max-w-[14rem] text-center text-[11px] text-fg-faint" data-testid="la-ban-keo-goi-y">
+              {doSong == null ? "Biết nhà quay về phía nào? " : ""}Kéo xoay mặt la bàn (hoặc bấm vào một chữ, phím ← →) cho hướng mặt nhà nằm dưới kim.
+            </p>
+          )}
           {laBan && (
             <p className="mt-1 text-center text-[11px] text-fg-faint">
               <span className="mr-1 inline-block size-2 rounded-sm bg-jade/40 align-middle" /> hướng tốt với mệnh {laBan.quai}
@@ -239,13 +330,26 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
             </p>
           )}
           {!dangDo ? (
-            <Button onClick={batDau} variant="secondary"><Smartphone aria-hidden /> Đo bằng la bàn điện thoại</Button>
+            <div className="flex flex-wrap gap-2">
+              <Button onClick={batDau} variant="secondary"><Smartphone aria-hidden /> Đo bằng la bàn điện thoại</Button>
+              {cheDo === "nha" && doSong != null && (
+                <Button onClick={() => chot(doSong)} disabled={dang} data-testid="chot-la-ban-keo">
+                  <Compass aria-hidden /> {dang ? "Đang đổi…" : `Chốt hướng ${Math.round(doSong)}°`}
+                </Button>
+              )}
+            </div>
           ) : cheDo === "nha" ? (
             <Button onClick={() => doSong != null && chot(doSong)} disabled={doSong == null || dang}>
               <Compass aria-hidden /> {dang ? "Đang đổi…" : "Chốt hướng này"}
             </Button>
           ) : (
             <p className="text-xs text-fg-faint">Dừng ở hướng ghi đúng việc bạn cần (Sinh Khí · Diên Niên · Thiên Y · Phục Vị) rồi kê theo đó. Muốn lưu hướng NHÀ, chuyển lại “Đo hướng nhà”.</p>
+          )}
+          {cheDo === "nha" && (
+            <ChonTrenVeTinh sinh={sinh} onDung={(r, a, b) => {
+              apDungBanDo(r);
+              setTam(`${a[0]}, ${a[1]}`); setTruoc(`${b[0]}, ${b[1]}`); setSaiSo({ tam: null, truoc: null });
+            }} />
           )}
           <form className="flex flex-wrap items-center gap-2" onSubmit={(e) => { e.preventDefault(); chotNhap(); }}>
             <Input aria-label={cheDo === "nha" ? "Độ hướng nhà" : "Độ đo được"} inputMode="decimal" placeholder="hoặc nhập độ, vd 135" value={nhap} className="w-44"
@@ -254,18 +358,26 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
           </form>
           <div data-testid="huong-ban-do">
             <button type="button" aria-expanded={moBanDo} onClick={() => setMoBanDo((v) => !v)} className="inline-flex items-center gap-1 text-xs text-fg-muted underline-offset-4 hover:underline">
-              <MapPin className="size-3.5" aria-hidden /> {canHo ? "Lấy hướng từ bản đồ (căn hộ)" : "Không đo được ở cửa (căn hộ)? Lấy hướng từ bản đồ"}
+              <MapPin className="size-3.5" aria-hidden /> {canHo ? "Lấy hướng từ bản đồ (căn hộ)" : mayTinh ? "Dùng máy tính? Lấy hướng từ bản đồ vệ tinh" : "Không đo được ở cửa (căn hộ)? Lấy hướng từ bản đồ"}
             </button>
             {moBanDo && (
               <form className="mt-2 space-y-2 rounded-xl border border-line/70 bg-bg/30 p-3" onSubmit={(e) => { e.preventDefault(); void chotBanDo(); }}>
-                <p className="text-xs text-fg-muted">Mở bản đồ, nhấn giữ vào <b className="text-fg">tâm nhà</b> rồi vào <b className="text-fg">điểm ngay trước mặt nhà</b> (ngoài đường / dưới ban công), chép toạ độ hoặc link vào hai ô. Toạ độ chỉ dùng để tính góc, không lưu.</p>
-                <CachLam viec="ban_do" />
+                <p className="text-xs text-fg-muted">{mayTinh
+                  ? <>Mở Google Maps ảnh vệ tinh, <b className="text-fg">chuột phải lên giữa mái nhà</b> → bấm dòng số đầu tiên (đã chép) → bấm Dán ở ô Tâm nhà. Làm lại với <b className="text-fg">điểm ngoài đường ngay trước mặt nhà</b>.</>
+                  : <>Mở bản đồ, nhấn giữ vào <b className="text-fg">tâm nhà</b> rồi vào <b className="text-fg">điểm ngay trước mặt nhà</b> (ngoài đường / dưới ban công), chép toạ độ hoặc link vào hai ô.</>}
+                  {" "}Toạ độ chỉ dùng để tính góc, không lưu.</p>
+                <Button type="button" size="sm" variant="secondary" onClick={moBanDoVeTinh} data-testid="mo-ban-do-ve-tinh">
+                  <ExternalLink aria-hidden /> Mở Google Maps ảnh vệ tinh
+                </Button>
+                <CachLam viec={mayTinh ? "ban_do_may_tinh" : "ban_do"} />
                 <div className="flex gap-1.5">
-                  <Input aria-label="Toạ độ tâm nhà" placeholder="Tâm nhà: 10.7769, 106.7009 hoặc link bản đồ" value={tam} onChange={(e) => setTam(e.target.value.slice(0, 300))} />
+                  <Input aria-label="Toạ độ tâm nhà" placeholder="Tâm nhà: 10.7769, 106.7009 hoặc link bản đồ" value={tam} onChange={(e) => { setTam(e.target.value.slice(0, 300)); setSaiSo((s) => ({ ...s, tam: null })); }} />
+                  <Button type="button" size="sm" variant="ghost" onClick={() => void dan("tam")} aria-label="Dán vào ô tâm nhà" title="Dán toạ độ vừa chép"><ClipboardPaste aria-hidden /></Button>
                   <Button type="button" size="sm" variant="ghost" onClick={() => dinhVi("tam")} disabled={dangDinhVi != null} aria-label="Lấy vị trí hiện tại làm tâm nhà" title="Đứng giữa nhà rồi bấm"><LocateFixed aria-hidden className={cn(dangDinhVi === "tam" && "animate-pulse")} /></Button>
                 </div>
                 <div className="flex gap-1.5">
-                  <Input aria-label="Toạ độ điểm trước mặt nhà" placeholder="Điểm trước mặt nhà" value={truoc} onChange={(e) => setTruoc(e.target.value.slice(0, 300))} />
+                  <Input aria-label="Toạ độ điểm trước mặt nhà" placeholder="Điểm trước mặt nhà" value={truoc} onChange={(e) => { setTruoc(e.target.value.slice(0, 300)); setSaiSo((s) => ({ ...s, truoc: null })); }} />
+                  <Button type="button" size="sm" variant="ghost" onClick={() => void dan("truoc")} aria-label="Dán vào ô điểm trước mặt nhà" title="Dán toạ độ vừa chép"><ClipboardPaste aria-hidden /></Button>
                   <Button type="button" size="sm" variant="ghost" onClick={() => dinhVi("truoc")} disabled={dangDinhVi != null} aria-label="Lấy vị trí hiện tại làm điểm trước mặt nhà" title="Ra trước nhà 15–20 m rồi bấm"><LocateFixed aria-hidden className={cn(dangDinhVi === "truoc" && "animate-pulse")} /></Button>
                 </div>
                 {doChinhXac != null && <p className="text-xs text-fg-faint" data-testid="gps-chinh-xac">Vị trí vừa lấy chính xác ±{doChinhXac} m{doChinhXac > 15 ? " — khá lệch (trong nhà GPS yếu); điểm trước nhà nên cách tâm ≥ 15 m, hoặc nhấn giữ trên bản đồ." : "."}</p>}

@@ -11,6 +11,7 @@ import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { DongGhiChu, DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
 import { DoiChieuCach } from "@/components/huyen-hoc/DoiChieuCach";
+import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -212,6 +213,9 @@ export function BatTu() {
                 </details>
               )}
             </div>
+            {/* Dải chân hieuban.com + QR: ngoài khối được chụp (tuTruRef) để ảnh tải về không in hai lần, nhưng nằm sát dưới
+                khối để chụp màn hình cả hai vẫn mang link về web. */}
+            <div className="-mt-2 overflow-hidden rounded-[1.25rem] shadow-card"><ChanLaSo giaoDien={giaoDien} tieuDe="Lá số Bát tự" duong="/bat-tu" /></div>
           </div>
         )}
         {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{LOI_NHAN_CO[c.loai] ?? c.chi_tiet}</p>)}

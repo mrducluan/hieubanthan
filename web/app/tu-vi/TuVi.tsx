@@ -23,6 +23,7 @@ import { HopThamTuVi } from "@/components/huyen-hoc/HopThamTuVi";
 import { ChonYDinh, XacNhanYDinh, type GoiYVec } from "@/components/huyen-hoc/XacNhanYDinh";
 import { LaSoTuVi, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import { KhungLaSo } from "@/components/huyen-hoc/KhungLaSo";
+import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { Button } from "@/components/ui/button";
@@ -159,7 +160,7 @@ export function TuVi() {
               coNhuan={!!ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh"}
               luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }} />
             {/* Lá số: điện thoại mặc định thu vừa màn hình, "Phóng to" để đọc chữ rõ rồi vuốt (Trục 1 — KhungLaSo) */}
-            <KhungLaSo chon={chiChon}>
+            <KhungLaSo chon={chiChon} chan={<ChanLaSo giaoDien={giaoDien} tieuDe="Lá số Tử vi" duong="/tu-vi" />}>
               <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={hoSo?.ho_ten} gioSinh={gioHienThi(hoSo)}
                 chon={chiChon} phaiDoSang={phaiDoSang} onChon={(c) => {
                   setChon(c); ghi("chart_interacted", { mo_dun: "tuvi", kind: "chon_cung" });
