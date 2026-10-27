@@ -14,8 +14,10 @@ import { cn } from "@/lib/utils";
 /** Bề rộng lá số khi phóng to — giữ chữ phụ tinh ~11px như bản cuộn ngang cũ. */
 const RONG_PHONG = 760;
 
-export function KhungLaSo({ chon, children, testId = "la-so-tu-vi", className }: {
-  /** chi của cung đang chọn — phóng to thì cuộn tới cột của cung ấy */ chon?: string; children: ReactNode; testId?: string; className?: string;
+export function KhungLaSo({ chon, children, chan, testId = "la-so-tu-vi", className }: {
+  /** chi của cung đang chọn — phóng to thì cuộn tới cột của cung ấy */ chon?: string; children: ReactNode;
+  /** dải chân (hieuban.com + QR) nằm trong khung nhưng ngoài SVG → ảnh tải về không bị in hai lần */ chan?: ReactNode;
+  testId?: string; className?: string;
 }) {
   const [phong, setPhong] = useState(false);
   const cuon = useRef<HTMLDivElement>(null);
@@ -43,6 +45,7 @@ export function KhungLaSo({ chon, children, testId = "la-so-tu-vi", className }:
       <div ref={cuon} className={cn("px-4 pb-2 sm:px-0", phong && "overflow-x-auto overscroll-x-contain")} data-testid={testId} data-phong={phong ? "1" : "0"}>
         <div className={cn("overflow-hidden rounded-[1.25rem] shadow-card", phong && "min-w-[760px] sm:min-w-0")}>
           {children}
+          {chan}
         </div>
       </div>
     </div>
