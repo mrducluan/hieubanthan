@@ -72,16 +72,20 @@ test("M4 lá bài: lật 3D thấy pha giữa (~550 ms), giảm chuyển động
   await page.goto("/hom-nay");
   const la = page.getByTestId("la-bai");
   await la.scrollIntoViewIfNeeded();
-  const goc = await page.evaluate(() => new Promise<number[]>((ok) => {
+  // Mẫu [thời điểm, góc] mỗi khung hình. Đo THỜI GIAN lá đang nghiêng (không đếm khung: trình duyệt không giao diện có lúc
+  // chạy < 60 khung/giây khi máy bận → số khung dao động, thời gian thì không).
+  const mau = await page.evaluate(() => new Promise<[number, number][]>((ok) => {
     const el = document.querySelector<HTMLElement>("[data-testid='la-bai'] .relative.size-full")!;
     const doc = () => { const t = getComputedStyle(el).transform; const m = new DOMMatrix(t === "none" ? undefined : t); return Math.abs(Math.round(Math.atan2(-m.m13, m.m11) * 180 / Math.PI)); };
-    const ds: number[] = []; let t0: number | undefined;
-    const vong = (t: number) => { t0 ??= t; ds.push(doc()); if (t - t0 < 900) requestAnimationFrame(vong); else ok(ds); };
+    const ds: [number, number][] = []; let t0: number | undefined;
+    const vong = (t: number) => { t0 ??= t; ds.push([t - t0, doc()]); if (t - t0 < 900) requestAnimationFrame(vong); else ok(ds); };
     document.querySelector<HTMLButtonElement>("[data-testid='la-bai-up']")!.click();
     requestAnimationFrame(vong);
   }));
-  expect(goc.filter((g) => g > 20 && g < 160).length).toBeGreaterThanOrEqual(5);   // nhiều khung hình đang nghiêng
-  expect(goc[goc.length - 1]).toBe(180);
+  const nghieng = mau.filter(([, g]) => g > 20 && g < 160).map(([t]) => t);
+  expect(nghieng.length).toBeGreaterThanOrEqual(2);                                   // có pha giữa (không lật tức thì)
+  expect(nghieng[nghieng.length - 1]! - nghieng[0]!).toBeGreaterThanOrEqual(150);     // pha nghiêng kéo dài (lật ~550 ms)
+  expect(mau[mau.length - 1]![1]).toBe(180);
   const mat = page.getByTestId("la-bai-mat");
   await expect(mat).toHaveAttribute("data-loai", /^(viec|cau_hoi|gio)$/);
   await expect(mat).toContainText(/Việc nhỏ|Câu hỏi|Giờ tốt/);
