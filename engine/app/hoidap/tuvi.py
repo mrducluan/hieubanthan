@@ -76,7 +76,7 @@ CHU_DE_CUNG = [   # (cung, mẫu) — câu hỏi cá nhân không nêu tên cung
                     r"mua dat", r"ban dat", r"ban nha", r"xay nha", r"lam nha", r"sua nha", r"chung cu"]),
     ("Quan Lộc", [r"su nghiep", r"cong viec", r"nghe", r"lam viec", r"thang chuc", r"kinh doanh",
                   r"nha nuoc", r"tu nhan", r"lam chu", r"khoi nghiep", r"cong danh", r"hoc hanh",
-                  r"thi cu", r"lam quan", r"chuc vu", r"hop nghe", r"(?<!bat )tu toi", r"(di|bi|ngoi|vao|dinh) tu(?!\w)", r"phap luat", r"phap ly", r"di tu",
+                  r"thi cu", r"lam quan", r"chuc vu", r"hop nghe", r"(?<!bat )tu toi", r"(bi|ngoi|vao|dinh) tu(?!\w)", r"di tu (khong|ko|toi|day|ra)", r"phap luat", r"phap ly",
                   r"thi (do|dau|lai|dai hoc|cong chuc|khoi|vao|lop)", r"hoc (thac si|them|muon|gioi|dot|khoi)",
                   r"khoi (a|b|c|d)(?!\w)", r"nhan chuc", r"mat viec", r"doi viec", r"cong chuc", r"van xuong", r"hoa khoa",
                   r"thi cong chuc", r"thi dau", r"dau cong chuc"]),
@@ -813,17 +813,35 @@ def _soi_cung_han(ls: dict, ten: str, vh: dict) -> list[dict]:
     return ra
 
 
-def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -> None:
+_LAP_CACHE: dict[tuple, dict] = {}
+_LAP_CACHE_MAX = 64
+
+
+def _lap_doi_song(sinh: dict, ngay_xem: dt.date, ls: dict, vh: dict | None) -> dict:
+    """Báo cáo đời sống cho hỏi đáp: nhớ 64 lượt gần nhất theo (hồ sơ, ngày xem) — người dùng hỏi nhiều câu liên tiếp
+    không dựng lại 12 chương; `vh` đã tính ở tra_loi (câu hạn, cùng ngày xem) thì không gọi lại iztro."""
+    from app.luangiai import tuvi_doi_song as tds  # noqa: PLC0415 — tránh vòng import
+    k = (sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], sinh.get("tz_lich"), sinh.get("hoa_linh"), sinh.get("thang_nhuan"),
+         sinh.get("lich"), sinh.get("luu_nguyet"), ngay_xem)
+    if k in _LAP_CACHE:
+        return _LAP_CACHE[k]
+    bc = tds.lap(sinh, ngay_xem, ls=ls, vh=vh if vh and vh.get("ngay_xem") == ngay_xem.isoformat() else None)
+    if len(_LAP_CACHE) >= _LAP_CACHE_MAX:
+        _LAP_CACHE.pop(next(iter(_LAP_CACHE)))
+    _LAP_CACHE[k] = bc
+    return bc
+
+
+def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict, vh: dict | None = None) -> None:
     """MT-ĐS B2: mượn chương báo cáo đời sống cho mảng của câu hỏi (cung hỏi → chương; hạn không cung → "Năm nay").
     Kiểu "có bị … không" đặt mục này LÊN ĐẦU (mở bằng mức của mảng sống hằng ngày). Lỗi dựng báo cáo → bỏ qua, câu trả
     lời vẫn như cũ."""
-    from app.luangiai import tuvi_doi_song as tds  # noqa: PLC0415 — tránh vòng import
     cung = pl["cung"][0] if pl["cung"] else None
     chuong = dsm.CUNG_CHUONG.get(cung) if cung else ("nam_nay" if pl["loai"] == "han" else None)
     if not chuong:
         return
     try:
-        bc = tds.lap(sinh, ngay_xem, ls=ls)
+        bc = _lap_doi_song(sinh, ngay_xem, ls, vh)
     except Exception:  # noqa: BLE001 — báo cáo đời sống là lớp thêm, không được làm hỏng hỏi đáp
         return
     m = dsm.muc_doi_song(bc, chuong, lo_so=bool(pl.get("lo_so")))
@@ -1368,7 +1386,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
             them["phi"] = phl.lap(ls, ls["can_nam"], nam_am if (ch.get("han") or yd == "tong_quan_nam") else None)
     goi = goi_bang_chung(pl, ls, vh, vh_toi, lnm, them)
     if ls is not None and pl["loai"] in ("la_so", "han") and not goi["can_them"]:
-        _them_doi_song(goi, pl, sinh, ngay_xem, ls)
+        _them_doi_song(goi, pl, sinh, ngay_xem, ls, vh)
     if pl.get("sao_han") and sinh and not goi["can_them"]:
         nam_xem = pl["nam_xem"] or lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, config.CALENDAR_MERIDIAN_TZ)[2] \
             + (1 if pl["han_sau"] else 0)

@@ -1136,7 +1136,7 @@ def chon_cot_loi(ds_chuong: list[dict], toi_da: int = 5) -> list[dict]:
 
 # ------------------------------------------------------------------ điểm vào
 def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
-        ca_nhan: dict | None = None, ls: dict | None = None) -> dict:
+        ca_nhan: dict | None = None, ls: dict | None = None, vh: dict | None = None) -> dict:
     """`sinh` như `hoidap.tuvi.tra_loi` (+ `luu_nguyet` tuỳ chọn). → báo cáo `doi_song_1` (chưa có moi_xem / phí —
     `toan_bo.tuvi` gắn)."""
     from app.hoidap.tuvi import tom_tat          # tránh vòng import
@@ -1146,7 +1146,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     if ls is None:
         ls = tom_tat(az.an_sao_tho(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], "vi-VN",
                                    hoa_linh=sinh.get("hoa_linh", "viet"), **kw))
-    vh = az.van_han(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], ngay_xem, **kw)
+    vh = vh or az.van_han(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], ngay_xem, **kw)   # MT-ĐS B2: hỏi đáp đưa vh đã tính
     tz_xem = az.TZ_TRUNG if kw["lich"] == "trung" else config.CALENDAR_MERIDIAN_TZ
     nam_am_xem = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, tz_xem)[2]
     nam_am_sinh = nam_am_xem - vh["tuoi_mu"] + 1

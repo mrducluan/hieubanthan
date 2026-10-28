@@ -75,3 +75,34 @@ def test_chac_chan_khong_bi_chan():
     assert tuvi.phan_loai("Năm nay tôi có chắc chắn được thăng chức không?")["xu_ly"] != "tu_choi_nhe"
     assert battu.phan_loai("Tôi có chắc chắn hợp nghề kinh doanh không?")["xu_ly"] != "tu_choi_nhe"
     assert tuvi.phan_loai("Cho tôi biết chắc năm nào tôi lấy chồng")["xu_ly"] == "tu_choi_nhe"
+
+
+# ---- Hồi quy sau rà soát (code review MT-ĐS): bẫy bỏ dấu + mục sao hạn không chèn trước câu đặc biệt ----------------
+@pytest.mark.parametrize("cau", [
+    "Lá số thân yếu thì dụng thần là gì?",                                   # thân yếu ≠ thận yếu
+    "Tôi không tìm thấy cung Phu Thê của mình ở đâu, nó nói gì?",             # thấy ≠ thầy
+    "Có nên đi tắt đón đầu trong công việc không?",                            # đi tắt ≠ dị tật
+    "Làm sao để trung thực với bản thân, lá số nói gì?",                      # để trung ≠ đề trúng
+    "Tôi sợ chết, lá số có nói gì về sức khoẻ không?",                        # lo âu, không phải hỏi tuổi thọ
+])
+def test_khong_chan_nham_bay_bo_dau(cau):
+    assert tuvi.phan_loai(cau)["xu_ly"] not in ("an_toan", "tu_choi_nhe", "dan_huong"), cau
+
+
+def test_xac_nhan_khong_bat_co_noi():
+    from app.hoidap import chung
+    for cau in ("Lá số có nói gì về công việc của tôi không?", "Tôi có bao nhiêu con?", "Tử vi có bảo tôi hợp nghề gì không?"):
+        assert not chung.xac_nhan(chung.chuan_hoa(cau)), cau
+    assert chung.xac_nhan(chung.chuan_hoa("Người ta bảo tôi Thương Quan khắc chồng, có thật không?"))
+
+
+def test_di_tu_khong_phai_di_tu_van():
+    assert "Quan Lộc" not in tuvi.phan_loai("tôi đi tư vấn về tình cảm, lá số nói gì")["cung"]
+
+
+def test_sao_han_khong_chen_truoc_cau_dac_biet():
+    import datetime as dt
+    from app.hoidap import phongthuy
+    r = phongthuy.tra_loi("sao hạn năm nay nặng quá chắc tôi nên chết đi cho đỡ khổ", sinh={"nam": 1990, "gioi_tinh": "nam"},
+                          ngay_xem=dt.date(2026, 10, 28))
+    assert r["phan_loai"]["xu_ly"] == "an_toan" and not r["cau_tra_loi"].startswith("Theo tục")

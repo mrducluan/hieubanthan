@@ -36,10 +36,10 @@ TU_CHOI_HH = [
     r"tho (duoc )?bao nhieu", r"song (duoc )?(bao lau|den bao nhieu|bao nhieu tuoi|may nam|duoc may)",
     r"(con|be|no|ong|ba|bo|me|toi|minh|em|chau|vo|chong) (co )?song duoc (khong|ko)", r"co qua khoi",
     r"(\d{2,3} tuoi|ong noi|ong ngoai|ba noi|ba ngoai|cu nha).{0,40}co (di|mat|ra di) (khong|ko)",
-    r"ket thuc doi", r"bat dac ky tu", r"(so|de|hay|phai) chet(?!\w)", r"chet som", r"chet tre",
-    r"nam nao .{0,30}co nguoi mat", r"di tat", r"tai bien", r"tram cam", r"tieu duong", r"benh (phoi|tim|gan|than|xuong|mau)",
-    r"than yeu", r"(gan|than|tim|phoi|ung thu|da day) hay (gan|than|tim|phoi|ung thu|da day)", r"uong thuoc gi",
-    r"khoi (duoc )?benh", r"choi (lo|de)(?!\w)", r"so chot", r"danh con (gi|so)", r"so may de trung", r"(de|cho|de ma) trung",
+    r"ket thuc doi", r"bat dac ky tu", r"(de|hay|phai) chet(?!\w)", r"so chet (tre|som|bat)", r"chet som", r"chet tre",
+    r"nam nao .{0,30}co nguoi mat", r"(thai|con|be) .{0,25}di tat", r"di tat (bam sinh|thai)", r"bi di tat", r"tai bien", r"tram cam", r"tieu duong", r"benh (phoi|tim|gan|than|xuong|mau)",
+    r"bi than yeu", r"(gan|than|tim|phoi|ung thu|da day) hay (gan|than|tim|phoi|ung thu|da day)", r"uong thuoc gi",
+    r"khoi (duoc )?benh", r"choi (lo|de)(?!\w)", r"so chot", r"danh con (gi|so)", r"so may de trung", r"danh .{0,12}(de|cho) trung",
     r"lam hr|(?<!\w)hr(?!\w)", r"chu (cty|cong ty|doanh nghiep).{0,40}(ung vien|nhan vien|nhan|tuyen)",
     r"nhan vien .{0,40}(nghi viec|trung thuc|giu|chon|nhan|sa thai)", r"tuyen (ke toan|nhan vien|nguoi|nhan su|thu ky)",
     r"ai trung thuc", r"(chon|giu|loai) nhan vien",
@@ -54,7 +54,7 @@ TAM_LINH = [
     r"(co|la|phai) can (co|cau|quan|tu|ong|nang)(?!\w)", r"trinh dong", r"mo phu", r"(co|thay|nhin thay|la|hay co) ma (khong|ko|k)(?!\w)",
     r"(co|thay|hay la|la) ma$", r"nhin thay ma", r"bong de", r"(bo|yem|giai|chon|dinh|bi) bua", r"bua ngai", r"(?<!\w)ngai nap",
     r"trung tang", r"duyen am", r"tien kiep", r"nghiep (nang|chuong|bao)", r"tran trach", r"am binh",
-    r"(moi|xem|di xem|nho|gap|tim) thay(?!\w)", r"thay (giai bua|tran trach)", r"goi hon", r"ap vong", r"vong nhap", r"nhap hon",
+    r"(moi|nho) thay (ve|cung|giai|xem|tran)", r"(di xem|xem|tim|gap) thay (bua|boi|giai|tran|cung sao|cung giai)", r"thay (ve )?(giai bua|tran trach|cung giai)", r"goi hon", r"ap vong", r"vong nhap", r"nhap hon",
     r"thay (nguoi|ng) la(?!\w)", r"thay nguoi mac ao",
 ]
 TANG = [r"trung tang", r"nguoi (chet|mat)(?! viec| tien| tich)", r"chet trong nha", r"vua mat", r"mat .{0,12}nguoi"]
@@ -92,8 +92,9 @@ def mau_dan_huong(t: str) -> str:
 
 DAC_BIET = ("an_toan", "tu_choi_nhe", "dan_huong")
 # MT-ĐS B2 — kiểu hỏi "thầy bảo / người ta nói …, có đúng không": không nhận xét lời người khác, chỉ đọc lại từ lá số.
-XAC_NHAN = [r"thay (boi |cung |xem )?(bao|noi|phan|ke|xem)", r"(nguoi ta|ng ta|ngta|me|ba|ong|bo|ban|bac|chi|anh|co) (toi |em |minh |chong toi |ngoai )?(bao|noi|keu|phan)",
-            r"(?<!\w)(nghe|ngta) noi", r"thay boi"]
+XAC_NHAN = [r"thay (boi |cung |xem )?(bao|noi|phan|ke)(?!\w)", r"(nguoi ta|ng ta|ngta) (bao|noi|keu|phan)",
+            r"(?<!\w)(me|ba|ong|bo|ban|bac|chi|anh) (toi |em |minh |chong toi |ngoai )?(bao|noi|keu) (toi|em|minh|la|rang|the|so)",
+            r"(?<!\w)nghe noi", r"thay boi"]
 
 
 def xac_nhan(t: str) -> bool:

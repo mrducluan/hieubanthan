@@ -55,6 +55,7 @@ import datetime as dt
 
 from app import config
 from app.calc import battu as bt_calc
+from app.calc import lunar as lunar_calc
 from app.calc import battu_mo_rong as mr_calc
 from app.calc import tietkhi as tk
 from app.calc.battu import CAN_NH, CHI_NH, THANG_DIEM
@@ -1213,7 +1214,8 @@ def _loi_bt(tt: str, loai: str, gd: str) -> dict:
     return ra
 
 
-def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int, vt: dict | None = None) -> list[dict]:
+def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int, vt: dict | None = None,
+                  nam_sinh_am: int | None = None) -> list[dict]:
     """Mười năm tới (năm Lập xuân `nam0` …), luật ở chú thích trên. Khoá `_…` là nội bộ (hộp ứng viên)."""
     ls = pt["ls"]
     chi_sinh, chi_ngay = ls["tru"][0]["chi"], ls["tru"][2]["chi"]
@@ -1266,7 +1268,8 @@ def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int, vt: dict 
         ra.append({"nam": nam, "tuoi": tuoi, "muc": muc, "nhan_muc": kb.nhan_muc(muc), "muc_cach_1": m1, "muc_cach_2": m2,
                    "hai_cach_khac": m1 != m2, "hien_tai": k == 0,
                    "co": [dsc.co_ra(x, kb.van_han_loi("co", x)) for x in co],
-                   "sao_han": dsc.sao_han_nam(tuoi + 1, ls.get("_gioi_tinh")),      # tuổi mụ = tuổi + 1
+                   # MT-ĐS B3: tuổi mụ theo NĂM ÂM LỊCH VIỆT (như /xem-sao-han và Tử vi), không theo năm dương
+                   "sao_han": dsc.sao_han_nam(nam - (nam_sinh_am or nam_sinh) + 1, ls.get("_gioi_tinh")),
                    "mang": mang, "y": y, "nen_tranh": nen_tranh, "nen_lam": nen_lam, "can_cu": cu,
                    "_tt": tt, "_gd": gd, "_k": k, "_diem": _SO_MUC[m1] + _SO_MUC[m2], "_nhan": nhan})
     for g in ra:
@@ -1489,7 +1492,9 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     vt = van_tham_chieu(tgb, ngay_xem)
     tz = dt.timedelta(hours=config.CALENDAR_MERIDIAN_TZ)
     nam0 = _nam_bat_tu(dt.datetime(ngay_xem.year, ngay_xem.month, ngay_xem.day, 12) - tz)
-    dong = dong_muoi_nam(pt, tgb, nam0, sinh["lich"].year, vt)
+    d_sinh = sinh["lich"]
+    nam_sinh_am = lunar_calc.solar_to_lunar(d_sinh.day, d_sinh.month, d_sinh.year, config.CALENDAR_MERIDIAN_TZ)[2]
+    dong = dong_muoi_nam(pt, tgb, nam0, sinh["lich"].year, vt, nam_sinh_am)
     ds: list[dict] = []
     for ma, _, _ in CHUONG:
         if ma == "tong_quan":

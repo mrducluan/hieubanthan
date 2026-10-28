@@ -488,7 +488,8 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     nam_xem = pl["nam_xem"] or (ngay_xem.year + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0))
     goi = goi_bang_chung(pl, sinh, nam_xem)
-    if chung.sao_han_hoi(pl["cau_chuan_hoa"]) and sinh and sinh.get("gioi_tinh") and not goi["can_them"]:   # MT-ĐS B3
+    if chung.sao_han_hoi(pl["cau_chuan_hoa"]) and sinh and sinh.get("gioi_tinh") and not goi["can_them"] \
+            and pl["xu_ly"] not in chung.DAC_BIET:   # MT-ĐS B3 — không chèn trước lời hỗ trợ / từ chối / dẫn hướng
         from app.calc import lunar  # noqa: PLC0415
         from app.config import CALENDAR_MERIDIAN_TZ  # noqa: PLC0415
         nam_am = pl["nam_xem"] or lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)[2] \

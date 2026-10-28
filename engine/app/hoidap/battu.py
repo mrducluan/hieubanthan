@@ -54,7 +54,7 @@ CHU_DE = [
     ("con_cai", [r"con cai", r"may con", r"co con", r"tin vui", r"hiem muon", r"con (toi|minh|em)", r"con sau nay",
                  r"kho co con", r"cho con", r"(?<!\w)no (hoa|thuy|kim|moc|tho)"]),
     ("phap_ly", [r"(bi|di|dang|chuyen|vu|dinh|thang|thua|hay) kien(?!\w)", r"kien (tung|cao|doi|nhau|ai)", r"phap luat", r"pham phap", r"tieu nhan", r"giay to",
-                 r"dieu tra", r"dung ten", r"(?<!bat )tu toi", r"(di|bi|ngoi|vao) tu(?!\w)", r"tranh chap", r"tai bay", r"dam sau lung", r"hop dong"]),
+                 r"dieu tra", r"dung ten", r"(?<!bat )tu toi", r"(bi|ngoi|vao|dinh) tu(?!\w)", r"di tu (khong|ko|toi|day|ra)", r"tranh chap", r"tai bay", r"dam sau lung", r"hop dong"]),
     ("di_xa", [r"di xa", r"xuat khau", r"dinh cu", r"nuoc ngoai", r"nuoc lanh", r"sang (uc|nhat|han|my|duc|canada)",
                r"dich ma", r"roi que", r"doi cho o", r"noi xa", r"lac long", r"tha huong", r"di nuoc ngoai", r"du lich"]),
     ("an_toan", [r"an toan", r"tai nan", r"do mau", r"cuop giat", r"di bien", r"lai xe", r"kiep sat", r"duong nhan",
