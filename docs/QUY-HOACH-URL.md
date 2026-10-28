@@ -12,7 +12,7 @@
 |---|---|---|---|
 | Trang chủ, hub | `/`, `/kham-pha`, `/kien-thuc`, `/ban-than`, `/tu-dien`, `/blog` | 6 | — |
 | Công cụ 5 mảng | `/than-so`, `/hop-doi`, `/hom-nay`, `/tu-vi`, `/bat-tu`, `/kinh-dich`, `/phong-thuy` | 7 | Khám phá |
-| Công cụ lịch & tuổi | `/xem-ngay-tot`, `/xem-tuoi-lam-nha`, `/tuoi-xong-dat`, `/huong-xau-nam` | 4 | Khám phá |
+| Công cụ lịch & tuổi | `/xem-ngay-tot`, `/xem-tuoi-lam-nha`, `/tuoi-xong-dat`, `/xem-sao-han` (MT-ĐS B3), `/huong-xau-nam` | 5 | Khám phá |
 | Trang con công cụ lịch | `/xem-ngay-tot/{yyyy-mm-dd}`, `/xem-ngay-tot/thang-{m}-{yyyy}` | ~420 | Xem ngày tốt |
 | Trang con tuổi | `/xem-tuoi-lam-nha/{năm}/tuoi-{ns}`, `/tuoi-xong-dat/{năm}/tuoi-{ns}`, `/huong-xau-nam/{năm}` | ~190 | công cụ tương ứng |
 | Kiến thức thần số | `/kien-thuc/{than-so, nghe-nghiep, tinh-yeu, nam-ca-nhan, no-nghiep, so-kep, hop-so}/{trang}` | 137 | Kiến thức › chủ đề |
@@ -90,6 +90,7 @@
 ├─ /xem-ngay-tot[/{ngày}|/thang-{m}-{năm}] (giữ)
 ├─ /xem-tuoi-lam-nha[/{năm}/tuoi-{ns}]     (giữ)
 ├─ /tuoi-xong-dat[/{năm}/tuoi-{ns}]        (giữ)
+├─ /xem-sao-han[/{năm}]                     (MT-ĐS B3, 2026-10-28 — một bảng theo năm, không trang theo tuổi)
 ├─ /huyen-hoc                       Hub công cụ "Huyền học" (HH-1, 2026-10-27; /kham-pha → 308)
 ├─ /kien-thuc                       Hub thư viện: mục lục cụm của mọi mảng (link vào silo)
 │  └─ /kien-thuc/{chủ đề cũ}               → 308 về trang cụm mới (vd /kien-thuc/sao-cung → /tu-vi/sao-o-cung)

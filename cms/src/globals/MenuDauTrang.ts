@@ -38,6 +38,7 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"), mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     { ...lk("/phong-thuy/huong-xau-nam", "Hướng xấu theo năm"), mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
     { ...lk("/tuoi-xong-dat", "Tuổi xông đất"), mo_ta: "Tuổi hợp gia chủ, giờ đẹp mùng 1" },
+    { ...lk("/xem-sao-han", "Sao hạn theo tuổi"), mo_ta: "La Hầu, Kế Đô, Thái Bạch… đọc bằng lời thường" },
     { ...lk("/kien-thuc", "Thư viện kiến thức"), mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
   ] },
   { ...lk("/blog", "Blog"), bieu_tuong: "bao", di_dong: false, con: [] },

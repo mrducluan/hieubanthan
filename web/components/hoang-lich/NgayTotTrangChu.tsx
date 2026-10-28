@@ -44,7 +44,7 @@ export async function NgayTotTrangChu({ className = "" }: { className?: string }
             Xem đầy đủ & tìm ngày đẹp cho việc của bạn <ArrowRight className="size-4" aria-hidden />
           </Link>
           <p className="flex flex-wrap gap-2" data-testid="lien-ket-tuoi">
-            {([["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"], ["/phong-thuy/huong-xau-nam", "Hướng xấu năm nay"], ["/tuoi-xong-dat", "Tuổi xông đất Tết"]] as const).map(([h, t]) => (
+            {([["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"], ["/phong-thuy/huong-xau-nam", "Hướng xấu năm nay"], ["/tuoi-xong-dat", "Tuổi xông đất Tết"], ["/xem-sao-han", "Sao hạn theo tuổi"]] as const).map(([h, t]) => (
               <Link key={h} href={h} className="vung-cham rounded-full border border-line/70 px-3 py-1 text-fg-muted hover:border-gold/50 hover:text-fg">{t}</Link>
             ))}
           </p>
