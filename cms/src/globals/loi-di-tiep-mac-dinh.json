@@ -35,7 +35,9 @@
       { "duong": "/xem-tuoi-lam-nha", "ten": "Xem tuổi làm nhà", "nhan": "cong_cu", "hinh": "phong-thuy",
         "mo_ta": "Năm nay tuổi bạn có phạm Kim lâu, Hoang ốc, Tam tai không — và nếu cần mượn tuổi thì chọn tuổi nào." },
       { "duong": "/tuoi-xong-dat", "ten": "Tuổi xông đất", "nhan": "cong_cu", "hinh": "phong-thuy",
-        "mo_ta": "Tuổi nào hợp xông đất đầu năm với gia chủ — chỉ liệt kê tuổi hợp và lý do, không chấm điểm." }
+        "mo_ta": "Tuổi nào hợp xông đất đầu năm với gia chủ — chỉ liệt kê tuổi hợp và lý do, không chấm điểm." },
+      { "duong": "/xem-sao-han", "ten": "Sao hạn theo tuổi", "nhan": "cong_cu", "hinh": "phong-thuy",
+        "mo_ta": "Năm nay bạn gặp sao nào theo tục xếp theo tuổi — đọc bằng lời thường và việc nên làm, không cúng sao." }
     ] },
     { "tru": "chung", "the": [
       { "duong": "/kien-thuc", "ten": "Thư viện kiến thức", "nhan": "thu_vien", "hinh": "tu-vi",

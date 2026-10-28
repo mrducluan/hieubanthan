@@ -27,7 +27,7 @@ test("trang /huyen-hoc: H1, canonical, schema, liên kết xuống công cụ + 
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Huyền học");
   const main = page.locator("main");
   for (const d of ["/than-so", "/tu-vi", "/bat-tu", "/phong-thuy", "/kinh-dich", "/hop-doi", "/hom-nay", "/xem-ngay-tot",
-    "/xem-tuoi-lam-nha", "/tuoi-xong-dat", "/phong-thuy/huong-xau-nam", "/phong-thuy/huong-hop-tuoi", "/doi-lich-am-duong",
+    "/xem-tuoi-lam-nha", "/tuoi-xong-dat", "/xem-sao-han", "/phong-thuy/huong-xau-nam", "/phong-thuy/huong-hop-tuoi", "/doi-lich-am-duong",
     "/than-so/y-nghia-so", "/tu-vi/chinh-tinh", "/bat-tu/thap-than", "/kinh-dich/que", "/phong-thuy/dau-hieu", "/kien-thuc", "/tu-dien"]) {
     expect(await main.locator(`a[href="${d}"]`).count(), d).toBeGreaterThan(0);
   }

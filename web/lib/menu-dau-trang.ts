@@ -19,6 +19,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi", mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     { href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm", mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
     { href: "/tuoi-xong-dat", ten: "Tuổi xông đất", mo_ta: "Tuổi hợp gia chủ, giờ đẹp mùng 1" },
+    { href: "/xem-sao-han", ten: "Sao hạn theo tuổi", mo_ta: "La Hầu, Kế Đô, Thái Bạch… đọc bằng lời thường" },
     { href: "/kien-thuc", ten: "Thư viện kiến thức", mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
   ] },
   { href: "/blog", ten: "Blog", bieu_tuong: "bao", di_dong: false, con: [] },
