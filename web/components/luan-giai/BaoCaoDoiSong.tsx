@@ -22,7 +22,7 @@ import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
 import { ChuQua } from "./ChuQua";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
 import { ChamMuc, ChuThichMuc, CotChuong, giamChuyenDong, ThanhChuongGon, useChuongDangDoc, type MucChuong } from "./MucLucChuong";
-import { maMauBaoCao, NHAN_MUC, type BaoCaoDoiSong, type ChuongDoiSongMo, type Hop, type MocDaiHan, type Muc } from "./kieu";
+import { maMauBaoCao, NHAN_MUC, type BaoCaoDoiSong, type ChuongDoiSongMo, type Hop, type LuuYMang, type MocDaiHan, type Muc } from "./kieu";
 
 export function ChipMuc({ muc, nhan, className }: { muc?: Muc; nhan?: string; className?: string }) {
   if (!muc) return null;
@@ -138,6 +138,10 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
               {cotLoi.map((h, i) => <HopNoiBat key={`${h.ma_mau ?? h.tieu_de}-${i}`} hop={h} className={i === hopTronHang ? "md:col-span-2" : undefined} />)}
             </div>
           </section>
+        )}
+
+        {bc.luu_y_mang && bc.luu_y_mang.length > 0 && (
+          <KhungLuuYMang ds={bc.luu_y_mang} soChuong={soChuong} tenChuong={tenChuong} onMo={(ma) => moChuong(ma, true)} />
         )}
 
         <nav aria-label="Mục lục" className="mt-6 print:hidden" data-testid="lg-muc-luc">
@@ -374,5 +378,41 @@ function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
         </li>
       ))}
     </ol>
+  );
+}
+
+
+/** MT-ĐS B6 — khung "Cần lưu ý ở từng mảng hay hỏi": 7 mảng người dùng hỏi nhiều nhất, mỗi mảng mức (chip) + điều nên
+ *  để ý + việc nên làm + ranh giới (bác sĩ / luật sư / không phải lời khuyên đầu tư). Dòng của chương khoá SAO-2 chỉ
+ *  còn tên + mức + nút mở chương. Mọi chữ do engine gom từ chương đã chấm; web chỉ vẽ. */
+function KhungLuuYMang({ ds, soChuong, tenChuong, onMo }: {
+  ds: LuuYMang[]; soChuong: (ma: string) => number; tenChuong: (ma: string) => string; onMo: (ma: string) => void;
+}) {
+  return (
+    <section id="lg-luu-y-mang" aria-labelledby="lg-luu-y-mang-td" className="mt-6 scroll-mt-32 lg:scroll-mt-24" data-testid="lg-luu-y-mang">
+      <h3 id="lg-luu-y-mang-td" className="font-serif text-2xl">Cần lưu ý ở từng mảng hay hỏi</h3>
+      <p className="mt-1 text-sm text-fg-muted">Tiền bạc, công việc, tình cảm, con cái, đi lại, giấy tờ, sức khoẻ — gom từ các chương bên dưới: mức của mảng, điều nên để ý và một việc nên làm. Không phải dự báo chuyện gì sẽ xảy ra.</p>
+      <ul className="mt-3 grid grid-cols-1 gap-2 md:grid-cols-2">
+        {ds.map((r) => (
+          <li key={r.ma} className="rounded-xl border border-line/70 bg-bg/40 p-3" data-testid="luu-y-mang" data-ma={r.ma} data-muc={r.muc} data-khoa={r.khoa ? "1" : undefined}>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <p className="font-medium text-fg">{r.ten}</p>
+              <span data-muc={r.muc} className="chip-muc rounded-full px-2 py-0 text-xs">{r.nhan_muc ?? NHAN_MUC[r.muc]}</span>
+            </div>
+            {r.khoa ? (
+              <button type="button" onClick={() => onMo(r.tu_chuong)} className="mt-1.5 inline-flex items-center gap-1 text-sm text-gold underline">
+                <LockKeyhole className="size-3.5" aria-hidden />Mở chương {soChuong(r.tu_chuong)} · {tenChuong(r.tu_chuong)} để đọc
+              </button>
+            ) : (
+              <>
+                <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg-muted">{r.luu_y}</p>
+                {r.viec && <p className="mt-1 text-[0.95rem] leading-relaxed text-fg"><b className="font-semibold">Nên làm:</b> {r.viec}</p>}
+                {r.ranh_gioi && <p className="mt-1 text-xs text-fg-faint" data-nosnippet="">{r.ranh_gioi}</p>}
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }

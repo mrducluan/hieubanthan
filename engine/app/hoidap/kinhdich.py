@@ -215,6 +215,9 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | 
     if pl["xu_ly"] == "tu_choi_nhe":
         goi["mau"] = kb.mau("tu_choi")
         return chung.ket(goi)
+    if pl["xu_ly"] == "dan_huong":
+        goi["mau"] = chung.mau_dan_huong(pl["cau_chuan_hoa"])
+        return chung.ket(goi)
     muc = goi["muc"]
     for ma in pl["giai_thich"][:2]:
         g = kb.giai_thich(ma)
@@ -466,7 +469,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
         co.append({"loai": "vuong_suy_rut_gon", "chi_tiet": kb.luu_y("vuong_suy")})
     if pl["truong_phai"] and pl["loai"] != "doc_que_da_co":
         co.append({"loai": "khong_gieo_lai", "chi_tiet": kb.mau("gieo_lai")})
-    dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
+    dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
     doc_que = None
     if que is not None and can_que:
         pt = None

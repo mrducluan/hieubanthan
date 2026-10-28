@@ -70,6 +70,12 @@ export const CHU_XONG_DAT = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề ({tet} = năm Tết)", mac_dinh: "Tết {tet}", toi_da: 60 },
   "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục tra theo năm sinh ({tet} = năm Tết)", mac_dinh: "Tuổi xông đất Tết {tet} theo năm sinh gia chủ", toi_da: 100 },
 });
+// MT-ĐS B3 — sao hạn theo tuổi.
+export const CHU_SAO_HAN = gopBang(KHUNG, {
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tục lệ theo tuổi", toi_da: 60 },
+  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục bảng theo năm", mac_dinh: "Bảng sao hạn theo năm sinh", toi_da: 100 },
+  "theo_nam.dong": { nhom: "Tra nhanh", nhan: "Chữ trước link bảng ({nam} = năm)", mac_dinh: "Năm {nam}:", toi_da: 60 },
+});
 // SEO-L5 — công cụ đổi lịch âm dương.
 export const CHU_DOI_LICH = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Âm lịch Việt Nam", toi_da: 60 },

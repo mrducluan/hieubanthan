@@ -34,7 +34,7 @@ TUVI = [
     ("Thái Âm của tôi ở cung nào, sáng không?", ["Thái Âm nằm ở cung Phu Thê, độ sáng Miếu"], []),
     ("Lá số của tôi có cách cục gì đặc biệt không?", ["Cách cục"], ["Cự Môn (巨門"]),
     ("Tôi có bị sát tinh chiếu mệnh không?", ["tam phương tứ chính của Mệnh", "Địa Không", "Thiên Đồng hoá Kỵ"], []),
-    ("Năm sau có nên mua đất không?", ["Việc bạn hỏi thuộc cung Điền Trạch"], []),
+    ("Năm sau có nên mua đất không?", ["(cung Điền Trạch)", "Soi vào ba lớp hạn"], []),
     ("Tháng 3 âm năm sau thế nào?", ["Lưu nguyệt tháng 3 âm năm Đinh Mùi", "tháng Giáp Thìn",
                                       "Theo phái Đẩu Quân từ Thái Tuế, Mệnh của tháng rơi vào cung Phụ Mẫu (Tý)",
                                       "Hoá Lộc của tháng (Liêm Trinh) ở cung Phụ Mẫu — đúng cung tháng",

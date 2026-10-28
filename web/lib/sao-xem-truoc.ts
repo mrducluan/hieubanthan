@@ -23,6 +23,12 @@ export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T
       o.cot_loi = (bc.cot_loi as { tu_chuong?: unknown }[]).filter((h) => typeof h.tu_chuong === "string" && mo.has(h.tu_chuong));
     }
     if ("thoi_gian_bieu" in bc && !mo.has("cuoc_doi")) delete o.thoi_gian_bieu;
+    // MT-ĐS B6: khung "Cần lưu ý ở từng mảng" — dòng của chương khoá chỉ giữ tên + mức (lời và việc nên làm bỏ hẳn).
+    if (Array.isArray(bc.luu_y_mang)) {
+      o.luu_y_mang = (bc.luu_y_mang as Record<string, unknown>[]).map((r) =>
+        typeof r.tu_chuong === "string" && mo.has(r.tu_chuong) ? r
+          : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true });
+    }
   }
   return out;
 }

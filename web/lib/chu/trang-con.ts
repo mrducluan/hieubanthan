@@ -77,6 +77,17 @@ export const CHU_XONG_DAT_NAM = {
   "cuoi.link": { nhom: C, nhan: "Chữ link công cụ", mac_dinh: "công cụ xem tuổi xông đất", toi_da: 60 },
 } as const satisfies BangChu;
 
+// MT-ĐS B3 — bảng sao hạn theo năm (một trang cho mọi tuổi, hai giới).
+export const CHU_SAO_HAN_NAM = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi} = can chi năm)", mac_dinh: "Năm {can_chi} · tục lệ theo tuổi", toi_da: 60 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Sao hạn năm {nam} theo tuổi — nam và nữ", toi_da: 120 },
+  "bang.tieu_de": { nhom: "Bảng", nhan: "Tiêu đề bảng", mac_dinh: "Sao hạn từng tuổi sinh 1960–2005", toi_da: 120 },
+  "bang.mo_ta": { nhom: "Bảng", nhan: "Giải thích dưới bảng", toi_da: 300,
+    mac_dinh: "Tuổi mụ tính theo năm âm lịch. Bấm tên sao để đọc lời đời thường và việc nên làm. Không có hạn nào định sẵn chuyện gì." },
+  "cuoi.chu": { nhom: C, nhan: "Chữ trước link công cụ", mac_dinh: "Tính theo ngày sinh đầy đủ (sinh trước Tết tuổi thuộc năm trước):", toi_da: 160 },
+  "cuoi.link": { nhom: C, nhan: "Chữ link công cụ", mac_dinh: "công cụ xem sao hạn", toi_da: 60 },
+} as const satisfies BangChu;
+
 // SEO-L2 — ngày tốt theo việc trong tháng.
 export const CHU_VIEC_THANG = {
   "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({thang_am} = khoảng âm lịch)", mac_dinh: "Hoàng lịch · {thang_am}", toi_da: 120 },

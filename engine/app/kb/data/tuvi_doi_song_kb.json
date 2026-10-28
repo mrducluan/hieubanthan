@@ -3290,5 +3290,115 @@
    "hoa_linh": "Khi đang bực người lớn, đừng trả lời ngay; hẹn nói lại vào hôm sau.",
    "khong_kiep": "Giấy tờ, hợp đồng quan trọng đọc kỹ hai lần và giữ bản sao."
   }
+ },
+ "luu_y_mang": {
+  "_nguon": "MT-ĐS B6 (2026-10-28) — khung 'Cần lưu ý ở từng mảng hay hỏi' (tiền bạc, công việc & công danh, tình cảm, con cái, đi lại & an toàn, giấy tờ & pháp lý, sức khoẻ). Dùng khi chương không có hộp 'nên để ý' hợp mảng; mức do chương / cung đã chấm. Nháp ban biên tập, lời bằng hành vi; không biến cố, không tên bệnh, không 'khắc'.",
+  "_ranh_gioi": {
+   "tien_bac": "Đây không phải lời khuyên đầu tư; vay, góp vốn hay mua bán gì hãy tính bằng con số thật.",
+   "cong_viec": "Thăng tiến hay không còn do chỗ làm; lá số chỉ nói lúc nào bạn dễ được thấy.",
+   "tinh_cam": "Lá số không đếm số đời chồng vợ, không nói ai bỏ ai — chỉ nói chỗ hai người dễ va chạm.",
+   "con_cai": "Có con, mấy con, trai hay gái là chuyện cơ thể và bác sĩ — lá số không nói được.",
+   "di_lai": "Lá số không nói có chuyện gì xảy ra trên đường hay không — không ai nói được điều đó từ ngày sinh; chỉ nói lúc nào nên đi chậm.",
+   "giay_to": "Thắng hay thua, đúng hay sai là ở hồ sơ và luật sư — hỏi người có chuyên môn trước khi ký hay kiện.",
+   "suc_khoe": "Phần này nói về nhịp sống, không thay lời bác sĩ; khám định kỳ vẫn là việc nên làm."
+  },
+  "tien_bac": {
+   "thuan": {
+    "luu_y": "Tiền vào khá đều, chỗ dễ vấp là tiêu theo đà khi đang thuận.",
+    "viec": "Để riêng một khoản không đụng tới trước khi tiêu phần còn lại."
+   },
+   "can_bang": {
+    "luu_y": "Tiền vào ra đều nhưng chưa dư; giữ được bao nhiêu tuỳ thói quen chi tiêu.",
+    "viec": "Ghi lại mọi khoản chi trong một tháng để thấy chỗ hao."
+   },
+   "can_chu_dong": {
+    "luu_y": "Tiền dễ hao vì vội hoặc vì nể; khoản chi bất ngờ hay đến đúng lúc vừa tiêu nhiều.",
+    "viec": "Chuyện tiền với người khác luôn có giấy, kể cả với người quen; khoản lớn chờ ba ngày rồi mới quyết."
+   }
+  },
+  "cong_viec": {
+   "thuan": {
+    "luu_y": "Việc đang thuận, dễ được giao thêm; chỗ cần để ý là nhận nhiều rồi hụt sức.",
+    "viec": "Chọn một việc có người thấy kết quả và làm cho trọn trước khi nhận thêm."
+   },
+   "can_bang": {
+    "luu_y": "Công việc đi đều, được ghi nhận chậm hơn bạn mong.",
+    "viec": "Nhắn tóm tắt mỗi việc giao miệng và nói rõ phần mình đã làm."
+   },
+   "can_chu_dong": {
+    "luu_y": "Công việc dễ vướng vì người, vì thủ tục hơn là vì năng lực.",
+    "viec": "Giữ mọi thoả thuận bằng chữ, không nhận lời ngoài hành lang."
+   }
+  },
+  "tinh_cam": {
+   "thuan": {
+    "luu_y": "Tình cảm êm, chỗ dễ vấp là coi sự êm ấy là đương nhiên.",
+    "viec": "Mỗi tuần một buổi nói chuyện không cầm điện thoại."
+   },
+   "can_bang": {
+    "luu_y": "Tình cảm có ngọt có va; hiểu nhịp của nhau thì êm hơn nhiều.",
+    "viec": "Khi căng, mỗi người nói một điều mình cần, không nhắc chuyện cũ."
+   },
+   "can_chu_dong": {
+    "luu_y": "Hai người dễ hiểu lầm vì điều không nói ra, hoặc vì ai quyết việc lớn.",
+    "viec": "Nói rõ một mong muốn cụ thể thay vì chờ người kia tự hiểu."
+   }
+  },
+  "con_cai": {
+   "thuan": {
+    "luu_y": "Với con bạn gần gũi và có nếp; chỗ dễ vấp là kỳ vọng cao hơn sức con.",
+    "viec": "Mỗi ngày hỏi con một câu về điều con thích, không phải về điểm."
+   },
+   "can_bang": {
+    "luu_y": "Với con, bạn lo chu đáo nhưng dễ nghiêm hơn mình nghĩ.",
+    "viec": "Khen con về một việc cụ thể mỗi tuần."
+   },
+   "can_chu_dong": {
+    "luu_y": "Chuyện con cái dễ làm bạn bận lòng: học hành, chỗ ở, hay khoảng cách giữa hai thế hệ.",
+    "viec": "Dành một buổi trong tuần chỉ để nghe con nói, không chữa."
+   }
+  },
+  "di_lai": {
+   "thuan": {
+    "luu_y": "Ra ngoài, đi xa đang thuận; chỗ cần để ý là chủ quan khi mọi việc trôi.",
+    "viec": "Đi xa thì đi sớm, mang bản chụp giấy tờ quan trọng."
+   },
+   "can_bang": {
+    "luu_y": "Đi lại bình thường, hay bị đổi lịch hoặc trục trặc nhỏ dọc đường.",
+    "viec": "Lên lịch đi lại sớm, không chạy xe khi đã mệt."
+   },
+   "can_chu_dong": {
+    "luu_y": "Phần đi lại và việc tay chân là chỗ nên để ý nhất: hay vội, hay nhận lời đi xa sát ngày.",
+    "viec": "Đi sớm mười lăm phút, không lái xe sau khi mệt, kiểm tra đồ bảo hộ trước khi dùng."
+   }
+  },
+  "giay_to": {
+   "thuan": {
+    "luu_y": "Giấy tờ, hợp đồng thường suôn; chỗ dễ vấp là ký theo quen biết.",
+    "viec": "Đọc hết rồi mới ký, kể cả với người thân."
+   },
+   "can_bang": {
+    "luu_y": "Giấy tờ, hợp đồng đi đều nhưng cần bạn tự rà, không nên giao hẳn cho ai.",
+    "viec": "Giữ bản chụp mọi giấy tờ đã ký ở một chỗ."
+   },
+   "can_chu_dong": {
+    "luu_y": "Giấy tờ, hợp đồng, chuyện với người bên ngoài dễ vướng hơn thường lệ.",
+    "viec": "Mọi khoản cho mượn, mọi thoả thuận đều có giấy; không đứng tên hộ, không ký thay."
+   }
+  },
+  "suc_khoe": {
+   "thuan": {
+    "luu_y": "Sức đang đều; chỗ dễ vấp là làm nhiều quên nghỉ khi thấy khoẻ.",
+    "viec": "Giữ một ngày nghỉ hẳn mỗi tuần và khám định kỳ đầu năm."
+   },
+   "can_bang": {
+    "luu_y": "Sức lên xuống theo nhịp làm việc; thiếu ngủ là chỗ hao nhanh nhất.",
+    "viec": "Ngủ trước 23 giờ ít nhất năm tối mỗi tuần."
+   },
+   "can_chu_dong": {
+    "luu_y": "Bạn dễ mệt hơn mình nghĩ và hay giữ chuyện lo trong lòng.",
+    "viec": "Đi khám sức khoẻ định kỳ, mỗi tháng nói ra một điều đang lo với người thân."
+   }
+  }
  }
 }

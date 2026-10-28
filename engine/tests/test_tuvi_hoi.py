@@ -60,7 +60,7 @@ def test_holdout_phan_loai(cau, loai, cung):
     ("Tôi có bị ung thư không theo cung Tật Ách?", "tu_choi_nhe"),
     ("Lá số tôi năm nào chết?", "tu_choi_nhe"),
     ("Xem tử vi để chọn số lô.", "tu_choi_nhe"),
-    ("Năm nay tôi có bị tai nạn không?", "tu_choi_nhe"),   # tham_khao: từ chối
+    ("Năm nay tôi có bị tai nạn không?", "tra_loi_kem_luu_y"),   # MT-ĐS B1: trả lời bằng mảng đi lại + lưu ý, cả hai chế độ
 ])
 def test_dac_biet(cau, xu_ly):
     assert tv.phan_loai(cau, "tham_khao")["xu_ly"] == xu_ly
@@ -70,7 +70,7 @@ def test_chi_tiet_su_kien_tra_loi_kem_luu_y_khong_phan_bien_co():
     out = tv.tra_loi("Năm nay tôi có bị tai nạn không?", "chi_tiet", SINH, XEM)
     assert out["phan_loai"]["loai"] == "han"
     van = out["cau_tra_loi"]
-    assert "không đoán được biến cố" in van and "Xu hướng" in van
+    assert "không ai nói được điều đó từ ngày sinh" in van and "Xu hướng" in van
     assert hoi_van.kiem_tra_dau_ra(van, out["bang_chung"]) == []
 
 

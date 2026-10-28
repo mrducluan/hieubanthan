@@ -102,3 +102,19 @@ export async function namAmHienTai(): Promise<number> {
 export const lamNhaIndex = (nam: number, namAm: number, ns: number) => (nam === namAm || nam === namAm + 1) && NAM_SINH_SEO.includes(ns);
 export const xongDatIndex = (nam: number, namAm: number, ns: number) => (nam === namAm || nam === namAm + 1) && NAM_SINH_SEO.includes(ns);
 export const hanNamIndex = (nam: number, namAm: number) => nam >= namAm - 1 && nam <= namAm + 2;
+
+// ---- MT-ĐS B3 — sao hạn Cửu Diệu + Bát hạn (tập quán theo tuổi, miễn phí; bảng một trang theo năm, không trang theo tuổi)
+export interface SaoHanO { ten: string; nghia: string; viec: string[]; tu_soi: string }
+export interface SaoHan extends MetaKb {
+  tra_loi_nhanh: string; nam: { nam: number; can_chi: string }; nguoi: { nam_sinh: number; can_chi: string; gioi_tinh: "nam" | "nu" };
+  tuoi_mu: number; uoc_luong_nam_sinh: boolean; sao: SaoHanO | null; han: SaoHanO | null; kim_lau: string | null;
+  tam_tai: number | null; hoi_dap: HoiDap[]; cau_co_dinh: string; cach_tinh: string;
+}
+export interface SaoHanNam extends MetaKb {
+  nam: number; can_chi: string; tra_loi_nhanh: string; cau_co_dinh: string; cach_tinh: string; hoi_dap: HoiDap[];
+  ds: { nam_sinh: number; can_chi: string; tuoi_mu: number; nam: string | null; nu: string | null; han_nam: string | null; han_nu: string | null }[];
+  sao: SaoHanO[]; han: SaoHanO[];
+}
+export const saoHanNamCongKhai = (nam: number) => layHoacLoi<SaoHanNam>(`/v1/tuoi/sao-han/${nam}`);
+export const duongSaoHanNam = (nam: number) => `/xem-sao-han/${nam}`;
+export const saoHanIndex = (nam: number, namAm: number) => nam === namAm || nam === namAm + 1;

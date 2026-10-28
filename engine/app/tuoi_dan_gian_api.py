@@ -82,3 +82,20 @@ def api_lam_nha_nam(nam: NamBang) -> dict:
 @router.get("/v1/tuoi/xong-dat-nam/{nam}")
 def api_xong_dat_nam(nam: NamBang) -> dict:
     return L.xong_dat_nam(nam)
+
+
+# ---- MT-ĐS B3 — sao hạn Cửu Diệu + Bát hạn (miễn phí, tập quán) ----------------------------------------------------
+class SaoHanInput(_Sinh):
+    nam: int = Field(ge=1901, le=2099)
+    gioi_tinh: str = Field(pattern="^(nam|nu)$")
+
+
+@router.post("/v1/tuoi/sao-han")
+def api_sao_han(inp: SaoHanInput) -> dict:
+    _kiem(inp, inp.nam)
+    return L.sao_han_luan(inp.nam, inp.nam_sinh, inp.gioi_tinh, inp.thang_sinh, inp.ngay_sinh)
+
+
+@router.get("/v1/tuoi/sao-han/{nam}")
+def api_sao_han_nam(nam: NamBang) -> dict:
+    return L.sao_han_nam(nam)

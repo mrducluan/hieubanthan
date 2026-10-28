@@ -912,15 +912,22 @@
   "can_la_so": "Để trả lời câu này cần lá số của bạn: nhập ngày sinh, giờ sinh và giới tính (sinh trước 13/06/1975 cần thêm nơi sinh miền Bắc/Nam). Hệ thống an sao cục bộ, không gửi ngày sinh ra ngoài.",
   "nguoi_khac": "Câu này hỏi về lá số của người khác. Cần ngày giờ sinh của họ — và nên có sự đồng ý của họ trước khi xem. Nếu bạn muốn, hãy hỏi về cách chính bạn ứng xử trong quan hệ đó dựa trên lá số của bạn.",
   "hop_hon": "So hai lá số cần đủ ngày giờ sinh của cả hai người (và người kia đồng ý). Hệ thống chỉ mô tả động lực quan hệ — không phán 'hợp' hay 'khắc', không chấm điểm, và không dựa vào mỗi tuổi con giáp.",
-  "con": "Xem lá số của con cần ngày giờ sinh của bé. Hệ thống chỉ mô tả khí chất để cha mẹ hiểu con — không chọn giờ sinh, không phán số con hay sức khoẻ của con."
+  "con": "Xem lá số của con cần ngày giờ sinh của bé. Hệ thống chỉ mô tả khí chất để cha mẹ hiểu con — không chọn giờ sinh, không phán số con hay sức khoẻ của con.",
+  "hop_lam_an": "Hợp tuổi làm ăn không có bảng 'tuổi này hợp tuổi kia' đáng tin — dân gian so tam hợp / lục xung theo con giáp, nhưng làm ăn trôi hay không là ở cách hai người chia việc, chia tiền và nói chuyện khi lệch ý. Hệ thống không chấm điểm hợp – khắc; nếu bạn có đủ ngày giờ sinh hai người (và người kia đồng ý), 'Xem lá số 2 người' với quan hệ đối tác sẽ nêu chỗ hai người dễ va chạm và việc nên thoả thuận trước bằng giấy.",
+  "sinh_con_tuoi": "Chuyện có con, sinh năm nào, trai hay gái là chuyện cơ thể và bác sĩ — lá số không quyết được. Dân gian có lệ so tuổi con với tuổi cha mẹ theo tam hợp / lục xung (tục lệ, không phải phép tính lá số); bạn xem được ở công cụ Xem tuổi, nhưng xin đừng để tục lệ ấy quyết thay kế hoạch của hai vợ chồng. Hệ thống không chọn giờ sinh, không chọn năm sinh cho bé."
  },
  "luu_y": {
   "tham_khao": "Chế độ tham khảo: hạn được đọc như chủ đề của giai đoạn, không phải biến cố định sẵn.",
   "chi_tiet": "Chế độ chi tiết: có nêu xu hướng thuận/nghịch của năm theo sao tốt xấu, nhưng không phán tai nạn, bệnh tật, kiện tụng hay con số tiền — ba lớp hạn đọc theo thứ tự đại hạn > lưu niên > tiểu hạn.",
   "iztro": "Lá số an bằng iztro (khung Tử Vi Đẩu Số); chính tinh và tứ hoá trùng các nguồn đối chiếu, bộ phụ tinh Nam phái chưa đối chiếu đủ.",
   "tat_ach": "Phần này chỉ nói về nhịp sống và cách bạn chịu áp lực, không thay lời bác sĩ; mọi vấn đề sức khoẻ cần hỏi bác sĩ.",
-  "han_su_kien": "Tử vi không đoán được biến cố cụ thể (tai nạn, kiện tụng, mất tiền, năm cưới, năm có con). Phần dưới chỉ nêu chủ đề và xu hướng của năm để bạn chuẩn bị.",
-  "luu_nguyet": "Lưu nguyệt đọc như chủ đề nổi lên trong tháng, xếp sau đại hạn, lưu niên và tiểu hạn. Đổi phái có thể đổi cung tháng — xem bảng so sánh các phái trước khi dựa vào một tháng cụ thể."
+  "han_su_kien": "Lá số không nói năm nào có tai nạn, kiện tụng, mất tiền, cưới hay sinh con — không ai nói được điều đó từ ngày sinh. Phần trên chỉ nêu mảng nào của năm nên để ý và việc nên làm.",
+  "luu_nguyet": "Lưu nguyệt đọc như chủ đề nổi lên trong tháng, xếp sau đại hạn, lưu niên và tiểu hạn. Đổi phái có thể đổi cung tháng — xem bảng so sánh các phái trước khi dựa vào một tháng cụ thể.",
+  "lo_so": "Lá số không trả lời 'có bị hay không' — không ai nói được điều đó từ ngày sinh. Điều nó nói được là mảng nào đang cần bạn để ý hơn và việc nên làm; bạn vẫn là người quyết định.",
+  "phap_ly": "Giấy tờ, hợp đồng, tranh chấp: lá số chỉ nói năm nào mảng này cần bạn rà kỹ hơn. Thắng hay thua, đúng hay sai là ở hồ sơ và luật sư — hãy hỏi người có chuyên môn trước khi ký hay kiện.",
+  "tien_bac": "Đây không phải lời khuyên đầu tư. Lá số chỉ nói nhịp tiền vào – ra theo giai đoạn và việc nên làm để giữ tiền; vay, góp vốn hay mua bán gì hãy tính bằng con số thật và hỏi người có chuyên môn.",
+  "hon_nhan": "Lá số không đếm số đời chồng hay vợ, không nói ai bỏ ai, và hệ thống không dùng chữ 'khắc' với người thân. Điều đọc được là chỗ hai người dễ va chạm và giai đoạn tình cảm dễ mở hay dễ hiểu lầm — để bạn chọn cách nói chuyện, không phải để gán nhãn cho ai.",
+  "xac_nhan": "Hệ thống không nhận xét lời người khác đã nói với bạn — phần trên chỉ đọc lại từ lá số của chính bạn. Nếu hai bên nói khác nhau, hãy tin điều nào khớp với trải nghiệm thật của bạn."
  },
  "doc_tung_buoc": {
   "menh_than": {

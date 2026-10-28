@@ -246,7 +246,7 @@ export function TuVi() {
               // LG-ĐS: có câu gần nghĩa trong kho → hỏi lại "đúng ý bạn chứ?"; không có → cho chọn 1 trong 8 chủ đề.
               // v3 M1: phần hỏi lại này đi SAU câu trả lời (đọc trước, xác nhận sau); "Cung xem" vẫn ở trên.
               sauTraLoi = d.goi_y_vec?.y_dinh ? <XacNhanYDinh cau={cau} goi={d.goi_y_vec} />
-                : d.co_the_goi_y && !d.nhan_ra_y_dinh && !["an_toan", "tu_choi_nhe"].includes(d.phan_loai?.xu_ly ?? "")
+                : d.co_the_goi_y && !d.nhan_ra_y_dinh && !["an_toan", "tu_choi_nhe", "dan_huong"].includes(d.phan_loai?.xu_ly ?? "")
                   ? <ChonYDinh cau={cau} /> : null;
               return d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null;
             },

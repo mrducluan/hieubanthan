@@ -95,7 +95,7 @@ def test_nhip_3_thang_va_uu_tien():
     assert "Đại hạn > lưu niên > tiểu hạn > lưu nguyệt" in kq["cau_tra_loi"]
     # đại hạn đứng trước lưu niên, trước tiểu hạn, trước nhịp tháng trong câu trả lời
     van = kq["cau_tra_loi"]
-    assert van.index("Đại hạn:") < van.index("Lưu niên:") < van.index("Tiểu hạn:") < van.index("Nhịp 3 tháng")
+    assert van.index("(đại hạn)") < van.index("(lưu niên)") < van.index("(tiểu hạn)") < van.index("Nhịp 3 tháng")
     # ba tháng: không chen thêm lưu nguyệt một tháng lẻ ("tháng tới") dễ gây hiểu lầm
     assert not any(x["loai"] == "luu_nguyet" for x in kq["bang_chung"]["muc"])
 
