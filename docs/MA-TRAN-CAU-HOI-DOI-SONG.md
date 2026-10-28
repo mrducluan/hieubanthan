@@ -229,7 +229,13 @@ không đếm vào ngưỡng tự bật ≥ 2 người đăng nhập (0024) → 
 
 Không đổi phép tính cũ → không tăng `ENGINE_VERSION`. Không dependency. Migration: không (0017 anh chạy để đo B5).
 
-## 8. Chờ chủ dự án
+## 8. Nhật ký thực hiện
 
-1. **Bát hạn**: bỏ (đề xuất của phản biện) hay giữ ở mức "chỉ trả lời khi hỏi đích danh, không trang"?
-2. Thứ tự B0 → B1 → B2 → B3 → B4 → B5 và nội dung mục 2–4 — duyệt để em bắt đầu B0.
+| Ngày | Bước | Kết quả |
+|---|---|---|
+| 2026-10-28 | **B0** lưới an toàn | Holdout: khủng hoảng 2/16 → 16/16, từ chối 20/36 → 36/36, chặn nhầm 0; kho 2.328 câu không lùi. `hoidap/chung.py`: `AN_TOAN_HH`, `TU_CHOI_HH` (tách khỏi bộ Thần số, bỏ "chắc chắn"). |
+| 2026-10-28 | **B1** định tuyến + lời dẫn hướng | Holdout: xử lý đúng 86/82/83 % → **100 %** cả ba; đúng lĩnh vực Tử vi 73 → 87 %, Bát tự 57 → 90 %. Mới: `xu_ly = dan_huong` (tâm linh, `mau.dan_huong` + `chia_buon`, không nối lá số); Tử vi 11 cung có từ khoá đời sống + `HOP_LAM_AN`, `SINH_CON_TUOI`, `LO_SO`, `HON_NHAN_NHAN`; Bát tự 8 chủ đề mới (hôn nhân, con cái, pháp lý, đi xa, an toàn, học hành, quan hệ, hậu vận) đọc thập thần / thần sát / trụ / đại vận theo lĩnh vực; Phong thuỷ `vat_treo`, Kim lâu không cần "năm nay"; "tai nạn", "thắng kiện" trả lời bằng mảng đi lại / giấy tờ + lưu ý cuối; lời ba lớp hạn viết lại theo bảng 2.1 (thuật ngữ trong ngoặc) + **"Soi vào ba lớp hạn"** (Lộc/Kỵ rơi đúng cung hỏi hay chiếu vào); lưu ý ranh giới mới: `lo_so`, `phap_ly`, `tien_bac`, `hon_nhan`, `di_xa`, `an_toan`, `hau_van`, `hoc_hanh`, `quan_he`. Web: `dan_huong` vào danh sách câu đặc biệt (không gợi ý ý định, không góp ý). |
+
+## 9. Chờ chủ dự án
+
+1. **Bát hạn** (chủ dự án chưa nói rõ sau phản biện): em làm mức giữa ở B3 — tính được, chỉ trả lời khi hỏi đích danh, không trang riêng, không SEO.

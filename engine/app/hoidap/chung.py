@@ -26,8 +26,8 @@ AN_TOAN_HH = [
     r"khong muon song",
 ]
 # Từ chối nhẹ: bộ Thần số dùng chung TRỪ các cụm Huyền học trả lời được theo kiểu "định hướng" (MT-ĐS mục 4):
-# "chắc chắn" (B0) — "tai nạn", "thắng kiện" chuyển ở B1 khi có lời định hướng.
-_BO_CHAN_HH = {r"chac chan"}
+# "chắc chắn" (B0); "tai nạn", "thắng kiện" (B1: trả lời bằng mảng đi lại / giấy tờ + lưu ý, không có/không).
+_BO_CHAN_HH = {r"chac chan", r"tai nan", r"thang kien"}
 TU_CHOI_THEM = [r"so de", r"song duoc bao lau", r"nao chet", r"tho bao nhieu", r"doan benh",
                 r"benh gan", r"yem bua", r"chua duoc benh", r"nen tuyen", r"tuyen nhan vien",
                 r"de quyet dinh tuyen", r"chon so lo", r"so lo"]
@@ -45,6 +45,27 @@ TU_CHOI_HH = [
     r"ai trung thuc", r"(chon|giu|loai) nhan vien",
 ]
 TU_CHOI_HH_TAT_CA = [m for ds in _h.TU_CHOI.values() for m in ds if m not in _BO_CHAN_HH] + TU_CHOI_THEM + TU_CHOI_HH
+# MT-ĐS B1 — câu tâm linh (vong, căn, ma, bùa, trùng tang, nghiệp…): KHÔNG luận, KHÔNG nối sang lá số (nối = ngầm xác
+# nhận có vong), trả lời bằng lời dẫn hướng `mau.dan_huong` (+ `chia_buon` khi có người mất). Căn đồng là tín ngưỡng
+# được công nhận — không nói "không có", chỉ nói hệ thống không xem.
+TAM_LINH = [
+    # "căn" và "cần" cùng bỏ dấu thành "can" → chỉ bắt "nặng căn", "nhiều căn", "căn đồng/cô/cậu/quan/tu".
+    r"(?<!\w)vong (theo|nhap|vao|goi|am|linh|hon)", r"co vong", r"can dong", r"(?<!\w)(nang|nhieu) can(?!\w)",
+    r"(co|la|phai) can (co|cau|quan|tu|ong|nang)(?!\w)", r"trinh dong", r"mo phu", r"(co|thay|nhin thay|la|hay co) ma (khong|ko|k)(?!\w)",
+    r"(co|thay|hay la|la) ma$", r"nhin thay ma", r"bong de", r"(bo|yem|giai|chon|dinh|bi) bua", r"bua ngai", r"(?<!\w)ngai nap",
+    r"trung tang", r"duyen am", r"tien kiep", r"nghiep (nang|chuong|bao)", r"tran trach", r"am binh",
+    r"(moi|xem|di xem|nho|gap|tim) thay(?!\w)", r"thay (giai bua|tran trach)", r"goi hon", r"ap vong", r"vong nhap", r"nhap hon",
+    r"thay (nguoi|ng) la(?!\w)", r"thay nguoi mac ao",
+]
+TANG = [r"trung tang", r"nguoi (chet|mat)(?! viec| tien| tich)", r"chet trong nha", r"vua mat", r"mat .{0,12}nguoi"]
+
+
+def tam_linh(t: str) -> bool:
+    return co(t, TAM_LINH)
+
+
+def co_tang(t: str) -> bool:
+    return co(t, TANG)
 
 # Lĩnh vực thần số → khoá lĩnh vực đời sống dùng chung cho Huyền học.
 LV_DOI_SONG = {"su_nghiep": "cong_viec", "tinh_yeu": "tinh_cam", "gia_dinh": "gia_dinh",
@@ -52,12 +73,24 @@ LV_DOI_SONG = {"su_nghiep": "cong_viec", "tinh_yeu": "tinh_cam", "gia_dinh": "gi
 
 
 def dac_biet(t: str) -> str | None:
-    """'an_toan' | 'tu_choi_nhe' | None — ưu tiên cao nhất, mọi chế độ."""
+    """'an_toan' | 'tu_choi_nhe' | 'dan_huong' | None — ưu tiên cao nhất, mọi chế độ."""
     if co(t, _h.AN_TOAN) or co(t, AN_TOAN_THEM) or co(t, AN_TOAN_HH):
         return "an_toan"
     if co(t, TU_CHOI_HH_TAT_CA):
         return "tu_choi_nhe"
+    if tam_linh(t):
+        return "dan_huong"
     return None
+
+
+def mau_dan_huong(t: str) -> str:
+    """Lời dẫn hướng cho câu tâm linh; có người mất → thêm lời chia buồn đứng trước."""
+    from app.kb import kinhdich_kb  # noqa: PLC0415 — mẫu dùng chung Huyền học
+    m = kinhdich_kb.mau("dan_huong") or ""
+    return (kinhdich_kb.mau("chia_buon") + " " + m) if co_tang(t) else m
+
+
+DAC_BIET = ("an_toan", "tu_choi_nhe", "dan_huong")
 
 
 def linh_vuc_doi_song(t: str) -> str | None:

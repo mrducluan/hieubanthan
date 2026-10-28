@@ -9,15 +9,16 @@ rows=[json.loads(l) for l in open(Path(__file__).resolve().parents[1] / "fixture
 CUNG={"tai_chinh":{"Tài Bạch"},"su_nghiep":{"Quan Lộc"},"tinh_yeu":{"Phu Thê"},"con_cai":{"Tử Nữ"},"gia_dinh":{"Phụ Mẫu","Huynh Đệ"},
  "suc_khoe":{"Tật Ách"},"an_toan":{"Thiên Di","Tật Ách"},"phap_ly":{"Quan Lộc","Nô Bộc"},"hoc_tap":{"Quan Lộc"},"nha_o":{"Điền Trạch"},
  "quan_he":{"Nô Bộc"},"di_xa":{"Thiên Di"},"hau_van":{"Phúc Đức"},"ban_than":{"Mệnh"}}
-CD={"tai_chinh":{"nghe_tien"},"su_nghiep":{"nghe_tien"},"tinh_yeu":{"hon_nhan"},"con_cai":{"gia_dinh","tru"},"gia_dinh":{"gia_dinh","tru"},
- "suc_khoe":{"loi_song"},"ban_than":{"tinh_cach","ngu_hanh","thap_than","cach_cuc"}}
+CD={"tai_chinh":{"nghe_tien"},"su_nghiep":{"nghe_tien"},"tinh_yeu":{"hon_nhan"},"con_cai":{"gia_dinh","tru","con_cai"},"gia_dinh":{"gia_dinh","tru"},
+ "suc_khoe":{"loi_song"},"ban_than":{"tinh_cach","ngu_hanh","thap_than","cach_cuc"},"phap_ly":{"phap_ly"},"di_xa":{"di_xa"},"an_toan":{"an_toan","loi_song"},
+ "hoc_tap":{"hoc_hanh"},"quan_he":{"quan_he","than_sat"},"hau_van":{"hau_van"},"nha_o":{"nghe_tien"}}
 st=collections.Counter(); miss=collections.defaultdict(list)
 for r in rows:
     md=r["mo_dun"]; pl={"tuvi":lambda q:tuvi.phan_loai(q),"battu":battu.phan_loai,"phongthuy":phongthuy.phan_loai}[md](r["cau_hoi"])
     exp=r["xu_ly"]; got=pl["xu_ly"]
     if exp=="an_toan": ok = got=="an_toan"
     elif exp=="tu_choi_nhe": ok = got=="tu_choi_nhe"
-    elif exp=="dan_huong": ok = got=="tu_choi_nhe"   # tạm: chưa có chế độ dẫn hướng, từ chối nhẹ coi là tạm chấp nhận
+    elif exp=="dan_huong": ok = got=="dan_huong"
     else: ok = got in ("tra_loi","tra_loi_kem_luu_y")
     lv_ok=None
     if ok and exp in("tra_loi","tra_loi_kem_luu_y"):
