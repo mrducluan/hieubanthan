@@ -241,7 +241,7 @@ export function KinhDich() {
 
   return (
     <div>
-      <DauMang Icon={Hexagon} ten="Kinh Dịch" mo_ta="Đang phân vân một việc? Gieo một quẻ, nhận câu trả lời ngắn bằng lời thường: việc đang thuận hay cần đổi cách, và nên làm gì trong tuần này. Quẻ do máy gieo (bạn tự lật từng hào), theo giờ, theo số hay phương vị, hoặc bạn gieo đồng xu thật rồi nhập — AI không chọn quẻ. Lời kinh gốc và ba cách đọc theo phái gập bên dưới cho ai muốn đào sâu." />
+      <DauMang Icon={Hexagon} ten="Kinh Dịch" mo_ta="Đang phân vân một việc? Gieo một quẻ, nhận câu trả lời ngắn bằng lời thường: việc đang thuận hay cần đổi cách, và nên làm gì trong tuần này. Quẻ do máy gieo (bạn tự lật từng hào), theo giờ, theo số hay phương vị, hoặc bạn gieo đồng xu thật rồi nhập — không bước nào tự chọn quẻ thay bạn. Lời kinh gốc và ba cách đọc theo phái gập bên dưới cho ai muốn đào sâu." />
       <div className="mx-auto max-w-3xl space-y-4">
         <KhungChat
             moDun="kinhdich"

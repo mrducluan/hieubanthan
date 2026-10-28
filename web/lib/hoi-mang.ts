@@ -42,6 +42,6 @@ export async function hoiMang<T extends HoiMangRes>(
     canCu: d.can_cu?.length ? d.can_cu : undefined,
     phu: phu?.(d),
     canhBao: d.co_canh_bao?.filter((c) => !boQuaCanhBao.includes(c.loai)).map((c) => c.chi_tiet),
-    ghiChu: d.che_do === "llm" ? "Diễn đạt bởi AI từ kho tri thức có nguồn." : "Ghép từ kho tri thức có nguồn.",
+    ghiChu: d.che_do === "llm" ? "Diễn đạt tự động từ kho tri thức có nguồn." : "Ghép từ kho tri thức có nguồn.",
   };
 }
