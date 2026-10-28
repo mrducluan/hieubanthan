@@ -13,6 +13,7 @@ export interface HoiMangRes {
   can_cu?: string[];
   /** HD-CS — khối hình engine dựng kèm câu trả lời. */
   truc_quan?: KhoiTrucQuan[];
+  hoi_tiep?: string[];
   error?: string;
   luot?: LuotHoi;
 }
@@ -43,6 +44,7 @@ export async function hoiMang<T extends HoiMangRes>(
     van: d.cau_tra_loi,
     thuatNgu: d.thuat_ngu,
     trucQuan: d.truc_quan,
+    hoiTiep: d.hoi_tiep,
     canCu: d.can_cu?.length ? d.can_cu : undefined,
     phu: phu?.(d),
     canhBao: d.co_canh_bao?.filter((c) => !boQuaCanhBao.includes(c.loai)).map((c) => c.chi_tiet),

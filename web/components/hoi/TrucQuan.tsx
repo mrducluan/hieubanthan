@@ -2,7 +2,7 @@
 // HD-CS — vẽ khối trực quan kèm câu trả lời hỏi đáp. Dữ liệu do engine dựng sẵn (`truc_quan`, engine/app/luangiai/
 // truc_quan.py) từ chính gói bằng chứng của câu trả lời; ở đây CHỈ vẽ theo `kieu`, không tính gì. Kiểu lạ → bỏ qua
 // (engine mới hơn web không làm vỡ trang). Bấm một cột / ô / hướng → hiện câu giải thích ngay dưới hình.
-import { useId, useRef, useState, type ReactNode } from "react";
+import { createContext, useContext, useId, useRef, useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
@@ -15,7 +15,11 @@ export type KhoiTrucQuan =
   | { kieu: "nhip" | "o" | "so" | "la_ban"; tieu_de: string; muc: Muc[]; ghi_chu?: string }
   | { kieu: "cot"; tieu_de: string; muc: Muc[]; don_vi?: string; ghi_chu?: string }
   | { kieu: "chu_ky"; tieu_de: string; so_nac: number; hien_tai: number; nhan_hien_tai?: string; giai_thich?: string }
-  | { kieu: "hai_cot"; tieu_de: string; trai: { tieu_de: string; ds: string[] }; phai: { tieu_de: string; ds: string[] } };
+  | { kieu: "hai_cot"; tieu_de: string; trai: { tieu_de: string; ds: string[] }; phai: { tieu_de: string; ds: string[] } }
+  | { kieu: "cung"; tieu_de: string; chi_hoi: string; muc: (Muc & { chi: string; vai: string; sao?: string[] })[]; ghi_chu?: string };
+
+/** Hành động trang cung cấp cho hình (hướng C): Tử vi truyền `xemCung` để "Xem trên lá số" chọn đúng cung phía trên. */
+export const HanhDongTrucQuan = createContext<{ xemCung?: (chi: string) => void }>({});
 
 const NEN: Record<Sac, string> = { chinh: "bg-gold", hop: "bg-jade", trung: "bg-moon/70", nhat: "bg-fg-faint/40" };
 const CHU: Record<Sac, string> = { chinh: "text-gold", hop: "text-jade", trung: "text-moon", nhat: "text-fg-faint" };
@@ -42,6 +46,7 @@ function Khoi({ k }: { k: KhoiTrucQuan }) {
       case "chu_ky": return <ChuKy k={k} />;
       case "hai_cot": return <HaiCot k={k} />;
       case "la_ban": return <LaBan muc={k.muc} />;
+      case "cung": return <BanCung k={k} />;
       default: return null;
     }
   })();
@@ -279,5 +284,51 @@ function LaBan({ muc }: { muc: Muc[] }) {
       </div>
       <GiaiThich chu={m?.giai_thich} nhan={m?.huong} />
     </>
+  );
+}
+
+// Bàn 12 cung theo lối lá số Việt: Tỵ Ngọ Mùi Thân trên cùng, Dần Sửu Tý Hợi dưới cùng, giữa là ô tên cung được hỏi.
+const VI_TRI_CHI: Record<string, [number, number]> = {
+  "Tỵ": [1, 1], "Ngọ": [1, 2], "Mùi": [1, 3], "Thân": [1, 4], "Thìn": [2, 1], "Dậu": [2, 4],
+  "Mão": [3, 1], "Tuất": [3, 4], "Dần": [4, 1], "Sửu": [4, 2], "Tý": [4, 3], "Hợi": [4, 4],
+};
+
+function BanCung({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cung" }> }) {
+  const { xemCung } = useContext(HanhDongTrucQuan);
+  const giam = useReducedMotion();
+  const hoi = k.muc.find((m) => m.vai === "hoi");
+  return (
+    <div className="grid aspect-square w-full max-w-[22rem] grid-cols-4 grid-rows-4 gap-1 mx-auto">
+      {k.muc.map((m) => {
+        const vt = VI_TRI_CHI[m.chi];
+        if (!vt) return null;
+        const s = m.sac ?? "nhat";
+        return (
+          <div key={m.chi} style={{ gridRow: vt[0], gridColumn: vt[1] }}
+            data-vai={m.vai || undefined}
+            className={cn("relative flex min-w-0 flex-col justify-between overflow-hidden rounded-lg border p-1 text-[0.62rem] leading-tight sm:p-1.5 sm:text-[0.7rem]",
+              m.vai === "hoi" ? "border-gold bg-gold/20" : m.vai === "tam_hop" ? "border-jade/50 bg-jade/10"
+                : m.vai === "xung" ? "border-dashed border-moon/70 bg-bg/40" : "border-line/60 bg-bg/30")}>
+            {m.vai === "hoi" && !giam && <motion.span aria-hidden className="absolute inset-0 rounded-lg ring-2 ring-gold/70"
+              initial={{ opacity: 0.9 }} animate={{ opacity: 0 }} transition={{ duration: 1.6, repeat: 2 }} />}
+            <span className={cn("font-semibold", m.vai ? CHU[s] : "text-fg-muted")}>{m.nhan}</span>
+            <span className="truncate text-fg-faint">{m.sao?.join(", ") || " "}</span>
+          </div>
+        );
+      })}
+      <div style={{ gridRow: "2 / span 2", gridColumn: "2 / span 2" }} className="flex flex-col items-center justify-center gap-1.5 rounded-lg p-2 text-center">
+        <span className="font-serif text-lg leading-tight text-gold sm:text-xl">{hoi?.nhan}</span>
+        <span className="flex flex-wrap justify-center gap-x-2 gap-y-0.5 text-[0.65rem] text-fg-faint">
+          <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm bg-jade/60" aria-hidden />tam hợp</span>
+          <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm border border-dashed border-moon" aria-hidden />đối diện</span>
+        </span>
+        {xemCung && (
+          <button type="button" onClick={() => xemCung(k.chi_hoi)}
+            className="mt-1 min-h-9 rounded-full border border-gold/60 px-3 text-xs font-medium text-gold hover:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60">
+            Xem trên lá số
+          </button>
+        )}
+      </div>
+    </div>
   );
 }

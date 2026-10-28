@@ -21,7 +21,7 @@ SINH_BT = {"lich": dt.datetime(1990, 5, 12, 13, 0), "gioi_tinh": "nam"}
 SINH_PT = {"nam": 1990, "gioi_tinh": "nam", "ngay": dt.date(1990, 5, 12)}
 NGUOI = {"ho_ten": ["Nguyễn Văn An"], "ngay": 12, "thang": 5, "nam": 1990, "quy_uoc": "tung_phan"}
 
-KIEU = {"thang", "nhip", "cot", "o", "so", "chu_ky", "hai_cot", "la_ban"}
+KIEU = {"thang", "nhip", "cot", "o", "so", "chu_ky", "hai_cot", "la_ban", "cung"}
 SAC = {"chinh", "hop", "trung", "nhat"}
 CAM = re.compile(r"\b(Miếu|Vượng|Hãm|hung|xấu|đại kỵ|tai hoạ|điểm số|chấm điểm)\b", re.I)
 
@@ -144,3 +144,42 @@ def test_thanso_so_goc_dung_truoc_nhip_thoi_gian():
 def test_battu_hanh_gan_nhu_khong_co_thi_mo():
     kq = battu.tra_loi("Tôi thiếu hành gì?", sinh=SINH_BT, ngay_xem=NGAY)
     assert {m["nhan"]: m["sac"] for m in _khoi(kq, "cot")["muc"]}["Mộc"] == "nhat"
+
+
+# ---- HD-CS đợt 2 (hướng C): bàn 12 cung + hỏi tiếp theo tam phương
+
+def test_tuvi_ban_cung_tam_phuong():
+    kq = tuvi.tra_loi("Công việc của tôi có tốt không?", "tham_khao", sinh=SINH_TV, ngay_xem=NGAY)
+    _hop_le(kq)
+    assert kq["truc_quan"][0]["kieu"] == "cung"           # hình của câu hỏi về cung đứng đầu
+    k = kq["truc_quan"][0]
+    assert len(k["muc"]) == 12 and len({m["chi"] for m in k["muc"]}) == 12
+    vai = {m["nhan"]: m["vai"] for m in k["muc"]}
+    assert vai["Quan Lộc"] == "hoi"
+    assert sorted(n for n, v in vai.items() if v == "tam_hop") == ["Mệnh", "Tài Bạch"]
+    assert [n for n, v in vai.items() if v == "xung"] == ["Phu Thê"]
+    assert k["chi_hoi"] == next(m["chi"] for m in k["muc"] if m["vai"] == "hoi")
+
+
+def test_tuvi_hoi_tiep_theo_tam_phuong():
+    kq = tuvi.tra_loi("Công việc của tôi có tốt không?", "tham_khao", sinh=SINH_TV, ngay_xem=NGAY)
+    ht = kq["hoi_tiep"]
+    assert 1 <= len(ht) <= 3 and len(set(ht)) == len(ht)
+    assert tq.HOI_CUNG["Quan Lộc"] not in ht                 # không gợi lại đúng câu vừa hỏi
+    assert tq.HOI_CUNG["Tài Bạch"] in ht and tq.HOI_CUNG["Phu Thê"] in ht
+
+
+def test_tuvi_khong_la_so_khong_ban_cung():
+    kq = tuvi.tra_loi("Cung Quan Lộc nghĩa là gì?", "tham_khao", ngay_xem=NGAY)
+    assert not [k for k in kq["truc_quan"] if k["kieu"] == "cung"]
+
+
+def test_hoi_tiep_rong_khi_dac_biet():
+    kq = tuvi.tra_loi("Lá số của tôi xấu quá, tôi muốn biến mất.", "tham_khao", sinh=SINH_TV, ngay_xem=NGAY)
+    assert kq["hoi_tiep"] == []
+
+
+@pytest.mark.parametrize("cung", list(tq.HOI_CUNG))
+def test_hoi_cung_dinh_tuyen_dung(cung):
+    pl = tuvi.phan_loai(tq.HOI_CUNG[cung], "tham_khao")
+    assert pl["cung"][:1] == [cung] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y")

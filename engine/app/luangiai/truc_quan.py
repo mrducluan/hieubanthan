@@ -13,12 +13,14 @@ Kiểu khối (web/components/hoi/TrucQuan.tsx):
   chu_ky  — vòng `so_nac` nấc, sáng nấc hiện tại (năm cá nhân)
   hai_cot — hai danh sách đối nhau (điểm mạnh / dễ vấp, nên / nên tránh)
   la_ban  — 8 hướng, hướng hợp sáng (Phong thuỷ)
+  cung    — bàn 12 cung theo chi: cung được hỏi sáng, tam hợp tô nhạt, xung chiếu viền (Tử vi, đợt 2 — hướng C)
 Sắc thái: chinh (nổi bật) · hop (hợp) · trung (bình thường) · nhat (mờ) — không có màu đỏ. Thuật ngữ (miếu, hãm…) không
 nằm trong nhãn: chúng ở "Vì sao nói vậy"."""
 from __future__ import annotations
 
 import re
 
+from app.calc.lunar import CHI
 from app.kb import battu_kb, phongthuy_kb
 
 TOI_DA = 3
@@ -50,11 +52,61 @@ def _bo_dau_de(s: str | None) -> str:
 
 # ---------------------------------------------------------------- Tử vi
 
-def tuvi(goi: dict) -> list[dict]:
+# Câu hỏi chuẩn cho từng cung (đã kiểm định tuyến đúng cung — tests/test_truc_quan.py) — dùng cho "Hỏi tiếp".
+HOI_CUNG = {
+    "Mệnh": "Cung Mệnh nói gì về tính cách của tôi?", "Huynh Đệ": "Anh chị em của tôi thế nào?",
+    "Phu Thê": "Tình duyên của tôi thế nào?", "Tử Nữ": "Chuyện con cái của tôi thế nào?",
+    "Tài Bạch": "Tiền bạc của tôi thế nào?", "Tật Ách": "Sức khoẻ của tôi nên chăm sóc gì?",
+    "Thiên Di": "Ra ngoài, đi xa thì tôi thế nào?", "Nô Bộc": "Bạn bè, đồng nghiệp của tôi thế nào?",
+    "Quan Lộc": "Công việc của tôi có tốt không?", "Điền Trạch": "Nhà cửa của tôi thế nào?",
+    "Phúc Đức": "Phúc đức, đời sống tinh thần của tôi ra sao?", "Phụ Mẫu": "Quan hệ với cha mẹ của tôi thế nào?",
+}
+
+
+def _tam_phuong(ls: dict, ten: str) -> tuple[dict | None, list[str], str | None]:
+    """(cung được hỏi, tên hai cung tam hợp, tên cung xung chiếu) — đọc theo chi trên chính lá số."""
+    theo_chi = {c["chi"]: c for c in ls.get("cung", [])}
+    goc = next((c for c in ls.get("cung", []) if c["ten"] == ten), None)
+    if not goc or goc["chi"] not in CHI:
+        return None, [], None
+    i = CHI.index(goc["chi"])
+    hop = [theo_chi[CHI[(i + d) % 12]]["ten"] for d in (4, 8) if CHI[(i + d) % 12] in theo_chi]
+    xung = theo_chi.get(CHI[(i + 6) % 12])
+    return goc, hop, xung["ten"] if xung else None
+
+
+def _ban_cung(goi: dict, ls: dict | None) -> dict | None:
+    cung_hoi = (goi["phan_loai"].get("cung") or [None])[0]
+    if not ls or not cung_hoi:
+        return None
+    goc, hop, xung = _tam_phuong(ls, cung_hoi)
+    if not goc or len(ls["cung"]) != 12:
+        return None
+    muc = []
+    for c in ls["cung"]:
+        vai = "hoi" if c["ten"] == cung_hoi else "tam_hop" if c["ten"] in hop else "xung" if c["ten"] == xung else ""
+        muc.append({"chi": c["chi"], "nhan": c["ten"], "vai": vai,
+                    "sao": [s["ten"] for s in c.get("chinh_tinh", [])][:2],
+                    "sac": {"hoi": "chinh", "tam_hop": "hop", "xung": "trung"}.get(vai, "nhat")})
+    return {"kieu": "cung", "tieu_de": f"Cung {cung_hoi} trên lá số của bạn", "chi_hoi": goc["chi"], "muc": muc,
+            "ghi_chu": f"Cung sáng là cung câu hỏi nhắc tới. {' và '.join(hop)} cùng một tam giác đỡ cho nó; "
+                       f"{xung} nằm đối diện, chiếu sang." if hop and xung else None}
+
+
+def hoi_tiep_tuvi(goi: dict, ls: dict | None) -> list[str]:
+    """≤ 3 câu hỏi tiếp: hai cung tam hợp rồi cung xung chiếu của cung vừa hỏi (đúng lá số người hỏi)."""
+    cung_hoi = (goi["phan_loai"].get("cung") or [None])[0]
+    if _dac_biet(goi) or not ls or not cung_hoi:
+        return []
+    _, hop, xung = _tam_phuong(ls, cung_hoi)
+    return [HOI_CUNG[c] for c in [*hop, xung] if c in HOI_CUNG and c != cung_hoi][:3]
+
+
+def tuvi(goi: dict, ls: dict | None = None) -> list[dict]:
     if _dac_biet(goi):
         return []
     muc = goi["muc"]
-    ds: list[dict] = []
+    ds: list[dict] = [b] if (b := _ban_cung(goi, ls)) else []
     sao = [m for m in muc if m["loai"] == "sao_cung" and m.get("vai") == "la_so" and m.get("do_sang") in _VI_TRI_SANG]
     if sao:
         ds.append({"kieu": "thang", "tieu_de": f"Sao chính ở cung {sao[0]['cung']} sáng tới đâu", "nac": list(NAC_DO_SANG),
