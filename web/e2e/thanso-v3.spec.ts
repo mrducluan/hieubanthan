@@ -10,7 +10,7 @@ test("hai cách tính con số Đường đời: mặc định rút gọn con s�
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
   await expect(page.getByTestId("the-duong_doi").getByTestId("gia-tri")).toHaveText("6");
-  // Khung cách xem thu gọn mặc định: một dòng "đang xem" + báo cách còn lại ra số khác; bấm "Đổi cách xem" mới mở.
+  // Khung cách xem thu gọn mặc định: một dòng "đang xem" + báo cách còn lại ra số khác; bấm cả hàng "Cách xem" (nút "Đổi") mới mở.
   await expect(page.getByTestId("dang-xem")).toContainText("Đang xem theo Pitago · số đường đời rút gọn con số · cách còn lại ra số 33");
   await expect(page.getByRole("tab", { name: "Rút gọn con số" })).toHaveCount(0);
   await page.getByTestId("truong-phai-than-so-mo").click();
