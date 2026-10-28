@@ -11,6 +11,8 @@ test("Bát tự: sinh 23:30 → đổi 'Đổi ngày lúc 23:00' ra trụ ngày 
   await page.getByTestId("bat-tu-chi-tiet-mo").click();   // bảng kỹ thuật gập (trục 2 UX); khung trường phái vẫn hiện khi sinh 23:xx
   const tt = page.getByTestId("tu-tru");
   await expect(tt).toContainText("Nhật chủ Nhâm");
+  await expect(page.getByTestId("truong-phai-bat-tu-nhac")).toContainText("trụ ngày khác nhau");   // TP-GON: nhắc hiện cả khi khung đóng
+  await page.getByTestId("truong-phai-bat-tu-mo").click();             // TP-GON: khung trường phái thu gọn mặc định
   await phai.getByRole("tab", { name: "Đổi ngày lúc 23:00" }).click();
   await expect(tt).toContainText("Nhật chủ Quý");
   await expect(tt).toContainText("Lục hợp · năm – ngày (Ngọ–Mùi)");     // chi ngày giờ là Mùi (ngày hôm sau)
@@ -27,6 +29,8 @@ test("Phong thuỷ: sinh 01/02/1985 → ba mốc đầu năm cho mệnh quái kh
   const mq = page.getByTestId("menh-quai");
   await expect(mq).toContainText("Đoài");
   await expect(mq).toContainText("tính theo năm 1984 (Lập xuân)");
+  await expect(page.getByTestId("truong-phai-phong-thuy-nhac")).toContainText("đổi mốc");   // TP-GON: nhắc hiện cả khi khung đóng
+  await page.getByTestId("truong-phai-phong-thuy-mo").click();         // TP-GON: khung trường phái thu gọn mặc định
   await phai.getByRole("tab", { name: "Tết lịch Việt" }).click();
   await expect(mq).toContainText("Càn");
   await expect(mq).toContainText("tính theo năm 1985 (Tết (lịch Việt))");
