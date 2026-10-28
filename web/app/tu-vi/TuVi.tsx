@@ -8,6 +8,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { CalendarClock, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, Moon, Orbit, ScrollText, Waypoints } from "lucide-react";
 import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
+import { HanhDongTrucQuan } from "@/components/hoi/TrucQuan";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { TruongPhai } from "@/components/huyen-hoc/TruongPhai";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
@@ -92,6 +93,19 @@ export function TuVi() {
   const xemCung = (c: string) => {
     setChon(c);
     requestAnimationFrame(() => chiTietRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
+  // HD-CS đợt 2: từ câu trả lời → chọn cung trên lá số và đưa lá số vào giữa màn hình (thấy cung sáng + tam phương).
+  const xemTrenLaSo = (c: string) => {
+    setChon(c);
+    ghi("chart_interacted", { mo_dun: "tuvi", kind: "xem_tren_la_so" });
+    // Đầu lá số ngay dưới thanh đầu trang (đo thật, không ghi cứng) — lá số cao hơn màn hình điện thoại nên "center" lệch.
+    requestAnimationFrame(() => {
+      const el = svgRef.current;
+      if (!el) return;
+      const dau = document.querySelector<HTMLElement>("[data-thanh-dau]")?.getBoundingClientRect().height ?? 0;
+      const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: window.scrollY + el.getBoundingClientRect().top - dau - 8, behavior: giam ? "auto" : "smooth" });
+    });
   };
   const hoi = (cau: string) => {
     setCauNgoai({ cau, lan: Date.now() });
@@ -223,6 +237,8 @@ export function TuVi() {
 
       <section ref={chatRef} aria-label="Hỏi Tử vi" className="mt-10 scroll-mt-24">
         <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp chuyên sâu"}</h2>
+        {/* HD-CS đợt 2 (hướng C): "Xem trên lá số" trong câu trả lời chọn đúng cung trên lá số phía trên. */}
+        <HanhDongTrucQuan.Provider value={laSo && ls ? { xemCung: xemTrenLaSo } : {}}>
         <KhungChat
           moDun="tuvi"
           loiChao={laSo ? "Hỏi về một cung, một sao, hoặc hạn hiện tại của bạn." : "Hỏi kiến thức chung về cung, sao, tứ hoá — hoặc bổ sung giờ sinh để hỏi về lá số của bạn."}
@@ -252,6 +268,7 @@ export function TuVi() {
             },
           ).then((kq) => (sauTraLoi ? { ...kq, sau: sauTraLoi } : kq)); }}
         />
+        </HanhDongTrucQuan.Provider>
       </section>
     </div>
   );

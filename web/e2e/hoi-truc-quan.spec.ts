@@ -40,4 +40,28 @@ test.describe("điện thoại 375px", () => {
     await lb.getByRole("button", { name: /^Đông Nam:/ }).click();
     await expect(lb.locator("[aria-live] p")).toContainText("Hợp dùng cho");
   });
+
+  test("Tử vi hướng C: bàn 12 cung, Xem trên lá số, Hỏi tiếp, Các câu đã hỏi", async ({ page }) => {
+    await napHoSo(page);
+    await page.goto("/tu-vi");
+    const ans = await hoi(page, "Công việc của tôi có tốt không?");
+    const ban = ans.locator('figure[data-kieu="cung"]');
+    await expect(ban).toBeVisible();
+    await expect(ban.locator('[data-vai="hoi"]')).toHaveCount(1);
+    await expect(ban.locator('[data-vai="tam_hop"]')).toHaveCount(2);
+    await expect(ban.locator('[data-vai="hoi"]')).toContainText("Quan Lộc");
+    await ban.getByRole("button", { name: "Xem trên lá số" }).click();
+    await expect(page.getByRole("heading", { name: /Cung Quan Lộc/ })).toBeVisible();
+    const tiep = ans.getByTestId("hoi-tiep-chung");
+    await expect(tiep.getByRole("button")).toHaveCount(3);
+    await tiep.getByRole("button", { name: "Tiền bạc của tôi thế nào?" }).click();
+    await expect(page.getByTestId("cau-tra-loi")).toHaveCount(2);
+    const da = page.getByTestId("cau-da-hoi");
+    await expect(da.getByRole("link")).toHaveCount(2);
+    await expect(da).toContainText("Công việc của tôi có tốt không?");
+    // Hỏi tiếp của câu thứ hai không gợi lại câu đã hỏi.
+    const tiep2 = page.getByTestId("cau-tra-loi").nth(1).getByTestId("hoi-tiep-chung");
+    await expect(tiep2.getByRole("button")).toHaveCount(2);
+    await expect(tiep2).not.toContainText("Công việc của tôi có tốt không?");
+  });
 });
