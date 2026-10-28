@@ -9,11 +9,32 @@ import { Button } from "@/components/ui/button";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { BaoCaoDoiSongView } from "@/components/luan-giai/BaoCaoDoiSong";
 import { laBaoCaoDoiSong } from "@/components/luan-giai/kieu";
+import { TrucQuan, type KhoiTrucQuan } from "@/components/hoi/TrucQuan";
+import { ViSao } from "@/components/luan-giai/HopNoiBat";
+
+/** HD-CS đợt 3 (ý 6) — câu trả lời hỏi đáp người dùng bấm "Lưu" (CauTraLoi). */
+type HoiDap = { loai: "hoi_dap"; cau_hoi: string; cau_tra_loi: string; truc_quan?: KhoiTrucQuan[]; can_cu?: string[]; ghi_chu?: string };
+const laHoiDap = (x: unknown): x is HoiDap => (x as { loai?: unknown } | null)?.loai === "hoi_dap" && typeof (x as HoiDap).cau_tra_loi === "string";
+
+function HoiDapDaLuu({ nd }: { nd: HoiDap }) {
+  return (
+    <article className="glass space-y-5 rounded-2xl p-5 sm:p-8" data-testid="hoi-dap-da-luu">
+      {nd.cau_hoi && (<div>
+        <p className="text-[0.7rem] font-semibold uppercase tracking-wider text-gold/90">Bạn hỏi</p>
+        <h2 className="mt-1 font-serif text-2xl leading-snug">{nd.cau_hoi}</h2>
+      </div>)}
+      <TrucQuan ds={nd.truc_quan} tinh />
+      <div className="prose-vn space-y-3 text-[1.05rem] leading-[1.75]">{nd.cau_tra_loi.split("\n\n").map((d, i) => <p key={i} className="whitespace-pre-line">{d}</p>)}</div>
+      <ViSao canCu={nd.can_cu} />
+      {nd.ghi_chu && <p className="text-xs text-fg-faint">{nd.ghi_chu}</p>}
+    </article>
+  );
+}
 
 interface DongBai { id: string; mo_dun: string; tieu_de: string; tao_luc: string }
 type TrangThai = { kieu: "tai" } | { kieu: "can_dang_nhap" } | { kieu: "chua_bat" } | { kieu: "loi" } | { kieu: "xong"; ds: DongBai[] };
 
-const TEN_MO_DUN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", thanso: "Thần số" };
+const TEN_MO_DUN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", thanso: "Thần số", phongthuy: "Phong thuỷ", kinhdich: "Kinh Dịch" };
 const ngay = (s: string) => {
   const d = new Date(s);
   return Number.isNaN(d.getTime()) ? "" : d.toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric" });
@@ -87,7 +108,7 @@ export function BaiDaLuu() {
         {loiBai && <p role="alert" className="text-sm text-fg-muted">{loiBai}</p>}
         {bai && (laBaoCaoDoiSong(bai.noi_dung)
           ? <BaoCaoDoiSongView bc={bai.noi_dung} ten={dong?.tieu_de.replace(/^Luận giải\s*/i, "") ?? "đã lưu"} />
-          : <BaiCu noiDung={bai.noi_dung} />)}
+          : laHoiDap(bai.noi_dung) ? <HoiDapDaLuu nd={bai.noi_dung} /> : <BaiCu noiDung={bai.noi_dung} />)}
       </div>
     );
   }

@@ -2,21 +2,29 @@
 // HD-CS — vẽ khối trực quan kèm câu trả lời hỏi đáp. Dữ liệu do engine dựng sẵn (`truc_quan`, engine/app/luangiai/
 // truc_quan.py) từ chính gói bằng chứng của câu trả lời; ở đây CHỈ vẽ theo `kieu`, không tính gì. Kiểu lạ → bỏ qua
 // (engine mới hơn web không làm vỡ trang). Bấm một cột / ô / hướng → hiện câu giải thích ngay dưới hình.
-import { createContext, useContext, useId, useRef, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useChieuSang } from "@/components/hoi/ChieuSang";
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
 
 export type Sac = "chinh" | "hop" | "trung" | "nhat";
 type Muc = { nhan: string; gia_tri?: string | number; chu_thich?: string; giai_thich?: string; sac?: Sac; vi_tri?: number;
-  phu?: string; huong?: string; muc_ma?: string };
+  phu?: string; huong?: string; muc_ma?: string; /** cụm chữ trong lời trả lời trỏ về mục này (ChieuSang) */ khop?: string[] };
 export type KhoiTrucQuan =
   | { kieu: "thang"; tieu_de: string; nac: string[]; muc: Muc[]; ghi_chu?: string }
   | { kieu: "nhip" | "o" | "so" | "la_ban"; tieu_de: string; muc: Muc[]; ghi_chu?: string }
   | { kieu: "cot"; tieu_de: string; muc: Muc[]; don_vi?: string; ghi_chu?: string }
   | { kieu: "chu_ky"; tieu_de: string; so_nac: number; hien_tai: number; nhan_hien_tai?: string; giai_thich?: string }
   | { kieu: "hai_cot"; tieu_de: string; trai: { tieu_de: string; ds: string[] }; phai: { tieu_de: string; ds: string[] } }
-  | { kieu: "cung"; tieu_de: string; chi_hoi: string; muc: (Muc & { chi: string; vai: string; sao?: string[] })[]; ghi_chu?: string };
+  | { kieu: "cung"; tieu_de: string; chi_hoi: string; muc: (Muc & { chi: string; vai: string; sao?: string[] })[]; ghi_chu?: string }
+  | { kieu: "hao"; tieu_de: string; muc: (Muc & { vi_tri: number; duong: boolean; dong: boolean; chu: boolean })[]; ghi_chu?: string };
+
+/** Các kiểu web biết vẽ — kiểu khác (engine mới hơn web) bị bỏ qua, không chiếm chỗ cột hình. */
+export const KIEU_BIET = new Set(["thang", "nhip", "o", "so", "cot", "chu_ky", "hai_cot", "la_ban", "cung", "hao"]);
+
+/** Thẻ chia sẻ / câu hỏi chuẩn engine gắn kèm khối (HD-CS đợt 3). */
+export type CoCauChuan = { cau_chuan?: string };
 
 /** Hành động trang cung cấp cho hình (hướng C): Tử vi truyền `xemCung` để "Xem trên lá số" chọn đúng cung phía trên. */
 export const HanhDongTrucQuan = createContext<{ xemCung?: (chi: string) => void }>({});
@@ -25,17 +33,51 @@ const NEN: Record<Sac, string> = { chinh: "bg-gold", hop: "bg-jade", trung: "bg-
 const CHU: Record<Sac, string> = { chinh: "text-gold", hop: "text-jade", trung: "text-moon", nhat: "text-fg-faint" };
 const VIEN: Record<Sac, string> = { chinh: "border-gold/60", hop: "border-jade/60", trung: "border-moon/40", nhat: "border-line" };
 
-export function TrucQuan({ ds }: { ds?: KhoiTrucQuan[] }) {
+// Trang dựng sẵn trên máy chủ (thẻ chia sẻ, bài đã lưu) truyền `tinh`: không hiệu ứng mọc cột — máy chủ không biết người xem
+// có tắt chuyển động không, vẽ trạng thái đầu khác máy khách sẽ lệch hydrate (cột kẹt ở 0 với người tắt chuyển động).
+const TinhCtx = createContext(false);
+function useGiamChuyenDong(): boolean {
+  const giam = useReducedMotion();
+  return useContext(TinhCtx) || !!giam;
+}
+
+export function TrucQuan({ ds, tinh = false }: { ds?: KhoiTrucQuan[]; tinh?: boolean }) {
   if (!ds?.length) return null;
   return (
+    <TinhCtx.Provider value={tinh}>
     <div className="space-y-3" data-testid="truc-quan">
-      {ds.map((k, i) => <Khoi key={`${k.kieu}-${i}`} k={k} />)}
+      {ds.map((k, i) => <SoKhoi.Provider key={`${k.kieu}-${i}`} value={i}><Khoi k={k} ki={i} /></SoKhoi.Provider>)}
     </div>
+    </TinhCtx.Provider>
   );
 }
 
-function Khoi({ k }: { k: KhoiTrucQuan }) {
+// Chỉ số khối trong câu trả lời — để chữ trong lời trả lời (ChieuSang, id "khối:mục") sáng đúng mục.
+const SoKhoi = createContext(-1);
+
+/** Mục đang chọn của một khối; chữ trong lời trả lời bấm vào trỏ tới khối này thì chọn đúng mục đó. */
+function useChon(): [number | null, (v: number | null) => void] {
+  const ki = useContext(SoKhoi);
+  const { sang } = useChieuSang();
+  const [chon, setChon] = useState<number | null>(null);
+  useEffect(() => {
+    if (sang && sang.id.startsWith(`${ki}:`)) setChon(Number(sang.id.slice(sang.id.indexOf(":") + 1)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ khi có lần bấm chữ mới
+  }, [sang?.lan]);
+  return [chon, setChon];
+}
+
+function Khoi({ k, ki }: { k: KhoiTrucQuan; ki: number }) {
   const daDem = useRef(false);
+  const khung = useRef<HTMLElement>(null);
+  const { sang } = useChieuSang();
+  // Chữ trỏ về khối này → đưa hình vào màn hình (đang đọc lời ở dưới thì hình có thể đã trôi khỏi màn hình).
+  useEffect(() => {
+    if (!sang || !sang.id.startsWith(`${ki}:`) || !khung.current) return;
+    const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    khung.current.scrollIntoView({ block: "nearest", behavior: giam ? "auto" : "smooth" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ khi có lần bấm chữ mới
+  }, [sang?.lan]);
   const noi = (() => {
     switch (k.kieu) {
       case "thang": return <Thang k={k} />;
@@ -47,6 +89,7 @@ function Khoi({ k }: { k: KhoiTrucQuan }) {
       case "hai_cot": return <HaiCot k={k} />;
       case "la_ban": return <LaBan muc={k.muc} />;
       case "cung": return <BanCung k={k} />;
+      case "hao": return <Hao k={k} />;
       default: return null;
     }
   })();
@@ -54,7 +97,7 @@ function Khoi({ k }: { k: KhoiTrucQuan }) {
   const ghiChu = "ghi_chu" in k ? k.ghi_chu : undefined;
   return (
     // Đo (khâu QUAY LẠI): người đọc có bấm vào hình không — chỉ mã kiểu khối, một lần mỗi khối.
-    <figure className="rounded-2xl border border-line/70 bg-surface-2/40 p-3.5 sm:p-4" data-kieu={k.kieu}
+    <figure ref={khung} className="scroll-mt-24 rounded-2xl border border-line/70 bg-surface-2/40 p-3.5 sm:p-4" data-kieu={k.kieu}
       onClickCapture={(e) => {
         if (daDem.current || !(e.target as HTMLElement).closest("button,[role=button]")) return;
         daDem.current = true;
@@ -69,7 +112,7 @@ function Khoi({ k }: { k: KhoiTrucQuan }) {
 
 /** Danh sách mục bấm được + một ô giải thích dùng chung bên dưới. */
 function Chon({ muc, ve, luoi }: { muc: Muc[]; ve: (m: Muc, chon: boolean, bam: () => void) => ReactNode; luoi: string }) {
-  const [chon, setChon] = useState<number | null>(null);
+  const [chon, setChon] = useChon();
   const m = chon === null ? null : muc[chon];
   return (
     <>
@@ -130,8 +173,8 @@ function OSo({ m, chon, bam }: { m: Muc; chon: boolean; bam: () => void }) {
 }
 
 function Thang({ k }: { k: Extract<KhoiTrucQuan, { kieu: "thang" }> }) {
-  const giam = useReducedMotion();
-  const [chon, setChon] = useState<number | null>(null);
+  const giam = useGiamChuyenDong();
+  const [chon, setChon] = useChon();
   const n = k.nac.length;
   const m = chon === null ? null : k.muc[chon];
   return (
@@ -167,8 +210,8 @@ function Thang({ k }: { k: Extract<KhoiTrucQuan, { kieu: "thang" }> }) {
 }
 
 function Cot({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cot" }> }) {
-  const giam = useReducedMotion();
-  const [chon, setChon] = useState<number | null>(null);
+  const giam = useGiamChuyenDong();
+  const [chon, setChon] = useChon();
   const lon = Math.max(1, ...k.muc.map((m) => Number(m.gia_tri) || 0));
   const m = chon === null ? null : k.muc[chon];
   return (
@@ -198,7 +241,7 @@ function Cot({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cot" }> }) {
 }
 
 function ChuKy({ k }: { k: Extract<KhoiTrucQuan, { kieu: "chu_ky" }> }) {
-  const giam = useReducedMotion();
+  const giam = useGiamChuyenDong();
   return (
     <>
       <ol className="grid gap-1" style={{ gridTemplateColumns: `repeat(${k.so_nac}, minmax(0, 1fr))` }} aria-label={`Đang ở năm số ${k.hien_tai} của vòng ${k.so_nac} năm`}>
@@ -237,7 +280,7 @@ const GOC: Record<string, number> = { "Bắc": 0, "Đông Bắc": 45, "Đông": 
 const VIET_TAT: Record<string, string> = { "Bắc": "B", "Đông Bắc": "ĐB", "Đông": "Đ", "Đông Nam": "ĐN", "Nam": "N", "Tây Nam": "TN", "Tây": "T", "Tây Bắc": "TB" };
 
 function LaBan({ muc }: { muc: Muc[] }) {
-  const [chon, setChon] = useState<number | null>(null);
+  const [chon, setChon] = useChon();
   const id = useId();
   const m = chon === null ? null : muc[chon];
   const R = 92, r = 34, C = 110;
@@ -295,40 +338,82 @@ const VI_TRI_CHI: Record<string, [number, number]> = {
 
 function BanCung({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cung" }> }) {
   const { xemCung } = useContext(HanhDongTrucQuan);
-  const giam = useReducedMotion();
+  const giam = useGiamChuyenDong();
+  const [chon, setChon] = useChon();
   const hoi = k.muc.find((m) => m.vai === "hoi");
+  const m = chon === null ? null : k.muc[chon];
   return (
-    <div className="grid aspect-square w-full max-w-[22rem] grid-cols-4 grid-rows-4 gap-1 mx-auto">
-      {k.muc.map((m) => {
-        const vt = VI_TRI_CHI[m.chi];
-        if (!vt) return null;
-        const s = m.sac ?? "nhat";
-        return (
-          <div key={m.chi} style={{ gridRow: vt[0], gridColumn: vt[1] }}
-            data-vai={m.vai || undefined}
-            className={cn("relative flex min-w-0 flex-col justify-between overflow-hidden rounded-lg border p-1 text-[0.62rem] leading-tight sm:p-1.5 sm:text-[0.7rem]",
-              m.vai === "hoi" ? "border-gold bg-gold/20" : m.vai === "tam_hop" ? "border-jade/50 bg-jade/10"
-                : m.vai === "xung" ? "border-dashed border-moon/70 bg-bg/40" : "border-line/60 bg-bg/30")}>
-            {m.vai === "hoi" && !giam && <motion.span aria-hidden className="absolute inset-0 rounded-lg ring-2 ring-gold/70"
-              initial={{ opacity: 0.9 }} animate={{ opacity: 0 }} transition={{ duration: 1.6, repeat: 2 }} />}
-            <span className={cn("font-semibold", m.vai ? CHU[s] : "text-fg-muted")}>{m.nhan}</span>
-            <span className="truncate text-fg-faint">{m.sao?.join(", ") || " "}</span>
-          </div>
-        );
-      })}
-      <div style={{ gridRow: "2 / span 2", gridColumn: "2 / span 2" }} className="flex flex-col items-center justify-center gap-1.5 rounded-lg p-2 text-center">
-        <span className="font-serif text-lg leading-tight text-gold sm:text-xl">{hoi?.nhan}</span>
-        <span className="flex flex-wrap justify-center gap-x-2 gap-y-0.5 text-[0.65rem] text-fg-faint">
-          <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm bg-jade/60" aria-hidden />tam hợp</span>
-          <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm border border-dashed border-moon" aria-hidden />đối diện</span>
-        </span>
-        {xemCung && (
-          <button type="button" onClick={() => xemCung(k.chi_hoi)}
-            className="mt-1 min-h-9 rounded-full border border-gold/60 px-3 text-xs font-medium text-gold hover:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60">
-            Xem trên lá số
-          </button>
-        )}
+    <>
+      <div className="mx-auto grid aspect-square w-full max-w-[22rem] grid-cols-4 grid-rows-4 gap-1">
+        {k.muc.map((x, i) => {
+          const vt = VI_TRI_CHI[x.chi];
+          if (!vt) return null;
+          const s = x.sac ?? "nhat";
+          return (
+            // Ô cung bấm được (đợt 3): hiện "cung này nói về gì" bên dưới bàn.
+            <button key={x.chi} type="button" style={{ gridRow: vt[0], gridColumn: vt[1] }} data-vai={x.vai || undefined}
+              aria-pressed={chon === i} aria-label={`Cung ${x.nhan}${x.sao?.length ? `: ${x.sao.join(", ")}` : ""}`}
+              onClick={() => setChon(chon === i ? null : i)}
+              className={cn("relative flex min-w-0 flex-col justify-between overflow-hidden rounded-lg border p-1 text-left text-[0.62rem] leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 sm:p-1.5 sm:text-[0.7rem]",
+                x.vai === "hoi" ? "border-gold bg-gold/20" : x.vai === "tam_hop" ? "border-jade/50 bg-jade/10"
+                  : x.vai === "xung" ? "border-dashed border-moon/70 bg-bg/40" : "border-line/60 bg-bg/30",
+                chon === i && "ring-2 ring-gold")}>
+              {x.vai === "hoi" && !giam && <motion.span aria-hidden className="absolute inset-0 rounded-lg ring-2 ring-gold/70"
+                initial={{ opacity: 0.9 }} animate={{ opacity: 0 }} transition={{ duration: 1.6, repeat: 2 }} />}
+              <span className={cn("font-semibold", x.vai ? CHU[s] : "text-fg-muted")}>{x.nhan}</span>
+              <span className="truncate text-fg-faint">{x.sao?.join(", ") || "\u00a0"}</span>
+            </button>
+          );
+        })}
+        <div style={{ gridRow: "2 / span 2", gridColumn: "2 / span 2" }} className="flex flex-col items-center justify-center gap-1.5 rounded-lg p-2 text-center">
+          <span className="font-serif text-lg leading-tight text-gold sm:text-xl">{hoi?.nhan}</span>
+          <span className="flex flex-wrap justify-center gap-x-2 gap-y-0.5 text-[0.65rem] text-fg-faint">
+            <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm bg-jade/60" aria-hidden />tam hợp</span>
+            <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm border border-dashed border-moon" aria-hidden />đối diện</span>
+          </span>
+          {xemCung && (
+            <button type="button" onClick={() => xemCung(k.chi_hoi)}
+              className="mt-1 min-h-9 rounded-full border border-gold/60 px-3 text-xs font-medium text-gold hover:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60">
+              Xem trên lá số
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+      <GiaiThich chu={m?.giai_thich} />
+    </>
+  );
+}
+
+/** HD-CS đợt 3 (ý 4) — quẻ Kinh Dịch bấm từng hào (hào 6 trên cùng). Hào động sáng ngọc, hào chủ vàng; bấm hào → "nói nôm
+ *  na" của chính lời hào đó (engine lấy từ KB trong gói bằng chứng), hào tĩnh → một câu ngắn. */
+function Hao({ k }: { k: Extract<KhoiTrucQuan, { kieu: "hao" }> }) {
+  const [chon, setChon] = useChon();
+  const m = chon === null ? null : k.muc[chon];
+  return (
+    <>
+      <ol className="mx-auto max-w-xs space-y-1.5" aria-label="Sáu hào, hào 6 trên cùng">
+        {[...k.muc].map((x, i) => ({ x, i })).reverse().map(({ x, i }) => {
+          const s = x.sac ?? "nhat";
+          const mau = x.dong ? NEN[s] : "bg-fg/70";
+          return (
+            <li key={x.vi_tri}>
+              <button type="button" aria-pressed={chon === i} onClick={() => setChon(chon === i ? null : i)}
+                aria-label={`${x.nhan}${x.dong ? ", hào động" : ""}${x.chu ? ", hào chủ" : ""}`}
+                className={cn("flex min-h-10 w-full items-center gap-3 rounded-lg px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60",
+                  chon === i ? "bg-surface/80" : "hover:bg-surface/50")}>
+                <span className="flex w-28 shrink-0 gap-2" aria-hidden>
+                  {x.duong ? <span className={cn("h-3 w-full rounded-sm", mau)} />
+                    : (<><span className={cn("h-3 w-1/2 rounded-sm", mau)} /><span className={cn("h-3 w-1/2 rounded-sm", mau)} /></>)}
+                </span>
+                <span className={cn("text-left text-xs", x.dong ? CHU[s] : "text-fg-faint")}>
+                  {x.nhan}{x.chu ? " · hào chủ" : x.dong ? " · động" : ""}
+                </span>
+              </button>
+            </li>
+          );
+        })}
+      </ol>
+      <GiaiThich chu={m?.giai_thich} nhan={m?.nhan} />
+    </>
   );
 }

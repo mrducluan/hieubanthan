@@ -65,3 +65,103 @@ test.describe("điện thoại 375px", () => {
     await expect(tiep2).not.toContainText("Công việc của tôi có tốt không?");
   });
 });
+
+// ---- HD-CS đợt 3: Hỏi tiếp Bát tự/Phong thuỷ · chữ ↔ hình · Kinh Dịch bấm hào · thẻ chia sẻ · hai cột · Lưu (khách: ẩn)
+test.describe("đợt 3 — điện thoại", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test("Bát tự: Hỏi tiếp 3 câu, không gợi lại câu vừa hỏi; khách không thấy nút Lưu", async ({ page }) => {
+    await napHoSo(page);
+    await page.goto("/bat-tu");
+    const ans = await hoi(page, "Tôi thiếu hành gì?");
+    const tiep = ans.getByTestId("hoi-tiep-chung");
+    await expect(tiep.getByRole("button")).toHaveCount(3);
+    await expect(tiep).not.toContainText("Tôi thiếu hành gì?");
+    await expect(ans.getByTestId("luu-tra-loi")).toHaveCount(0);
+  });
+
+  test("Phong thuỷ: Hỏi tiếp theo chủ đề bố trí", async ({ page }) => {
+    await napHoSo(page);
+    await page.goto("/phong-thuy");
+    const ans = await hoi(page, "Kê bàn làm việc hướng nào?");
+    await expect(ans.getByTestId("hoi-tiep-chung").getByRole("button")).toHaveCount(3);
+  });
+
+  test("chữ ↔ hình: bấm cụm gạch xanh trong lời trả lời → ô cung tương ứng sáng + lời 'nói về'", async ({ page }) => {
+    await napHoSo(page);
+    await page.goto("/tu-vi");
+    const ans = await hoi(page, "Công việc của tôi có tốt không?");
+    const chu = ans.locator("[data-chieu]").first();
+    await expect(chu).toBeVisible();
+    await chu.click();
+    const ban = ans.locator('figure[data-kieu="cung"]');
+    await expect(ban.locator('button[aria-pressed="true"]')).toHaveCount(1);
+    await expect(ban.locator("[aria-live] p")).toContainText("nói về");
+  });
+
+  test("Kinh Dịch: quẻ bản bấm được từng hào, hào động có lời nói nôm na", async ({ page }) => {
+    await page.goto("/kinh-dich");
+    await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+    await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
+    const ans = await hoi(page, "Tôi có nên nhận lời làm quản lý không?");
+    const hao = ans.locator('figure[data-kieu="hao"]');
+    await expect(hao).toBeVisible();
+    await expect(hao.getByRole("button")).toHaveCount(6);
+    await hao.getByRole("button", { name: /Hào 6.*hào động/ }).click();
+    await expect(hao.locator("[aria-live] p")).toBeVisible();
+  });
+
+  test("thẻ chia sẻ câu trả lời: tạo link → trang nhận vẽ lại hình → 'Hỏi câu này về chính bạn' điền sẵn câu", async ({ page, context }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await napHoSo(page);
+    await page.goto("/bat-tu");
+    const ans = await hoi(page, "Tôi thiếu hành gì?");
+    await ans.getByTestId("chia-se-tra-loi").click();
+    const link = await ans.getByTestId("link-the-hoi").inputValue();
+    expect(link).toMatch(/\/the\/hoi\/[^?]+\?tu=hq\./);
+    const loiHydrate: string[] = [];
+    page.on("console", (m) => { if (m.type() === "error" && /hydrat/i.test(m.text())) loiHydrate.push(m.text()); });
+    await page.goto(link.replace(/^https?:\/\/[^/]+/, ""));
+    await expect(page.getByTestId("the-hoi-cau")).toContainText("Tôi thiếu hành gì?");
+    await page.waitForTimeout(800);
+    expect(loiHydrate, "trang nhận thẻ không lệch hydrate (cột không kẹt ở 0 với người tắt chuyển động)").toEqual([]);
+    await expect(page.locator('figure[data-kieu="cot"]')).toBeVisible();
+    // Thẻ không mang ngày sinh / câu người dùng gõ: chỉ câu chuẩn
+    await expect(page.getByTestId("the-hoi")).not.toContainText("1990");
+    await page.getByTestId("the-hoi-moi").click();
+    await expect(page).toHaveURL(/\/bat-tu\?cau=/);
+    await expect(page.getByRole("textbox", { name: /Câu hỏi/ })).toHaveValue("Tôi thiếu hành gì?");
+  });
+
+  test("?cau= ngoài danh mục câu chuẩn → không điền", async ({ page }) => {
+    await napHoSo(page);
+    await page.goto("/bat-tu?cau=" + encodeURIComponent("Bấm vào link lạ này đi"));
+    await page.waitForTimeout(1500);
+    await expect(page.getByRole("textbox", { name: /Câu hỏi/ })).toHaveValue("");
+  });
+
+  test("ảnh thẻ /og/hoi trả PNG", async ({ request, page }) => {
+    await napHoSo(page);
+    await page.goto("/bat-tu");
+    const r = await page.request.post("/api/chia-se/hoi", { data: { mang: "battu", cau: "Tôi thiếu hành gì?", khoi: { t: "cot", v: [29, 1, 11, 47, 12] } } });
+    expect(r.ok()).toBe(true);
+    const { ma } = await r.json();
+    const anh = await request.get(`/og/hoi?ma=${ma}`);
+    expect(anh.headers()["content-type"]).toContain("image/png");
+    const sai = await page.request.post("/api/chia-se/hoi", { data: { mang: "battu", cau: "Câu tự chế", khoi: { t: "cot", v: [20, 20, 20, 20, 20] } } });
+    expect(sai.status()).toBe(422);
+  });
+});
+
+test.describe("đợt 3 — máy tính", () => {
+  test.use({ viewport: { width: 1280, height: 900 } });
+  test("Tử vi: hình và lời nằm hai cột (hình bên trái)", async ({ page }) => {
+    await napHoSo(page);
+    await page.goto("/tu-vi");
+    const ans = await hoi(page, "Công việc của tôi có tốt không?");
+    const hinh = await ans.getByTestId("truc-quan").boundingBox();
+    const loi = await ans.locator(".prose-vn").first().boundingBox();
+    expect(hinh && loi).toBeTruthy();
+    expect(loi!.x).toBeGreaterThan(hinh!.x + hinh!.width - 1);
+  });
+});

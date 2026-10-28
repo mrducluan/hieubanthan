@@ -233,7 +233,8 @@ test("lịch sử quẻ trên máy: lưu sau khi gieo (≤ 200 ký tự câu h�
   const ans = await hoi(page, "Hợp đồng này có ký được không?");
   await ans.getByTestId("bo-qua-gieo").click();
   await expect(ans.getByTestId("que")).toBeVisible();
-  const tenQue = (await ans.getByTestId("que").locator("figure").first().locator("p").last().innerText()).split(" quẻ")[0]!.trim();
+  // HD-CS đợt 3: quẻ bản là khối bấm từng hào; tên quẻ ngay dưới khối.
+  const tenQue = (await ans.getByTestId("ten-que-ban").innerText()).split(" quẻ")[0]!.trim();
   const ls = page.getByTestId("lich-su-que");
   await expect(ls).toBeVisible();
   await expect(ls).toContainText("Chỉ lưu trên máy này");
