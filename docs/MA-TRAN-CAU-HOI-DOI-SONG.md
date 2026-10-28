@@ -1,42 +1,50 @@
 # MT-ĐS — Ma trận câu hỏi đời sống & lời luận không vướng mê tín
 
-Trạng thái: **bản thiết kế chờ chủ dự án duyệt** (2026-10-28). Phạm vi: hỏi đáp + luận giải của Tử vi · Bát tự ·
+Trạng thái: **bản thiết kế v2, chờ chủ dự án duyệt** (2026-10-28; v1 đã qua ba agent: phản biện pháp lý + người dùng,
+holdout 360 câu viết độc lập, đối chiếu bảng sao hạn với 8 nguồn). Phạm vi: hỏi đáp + luận giải Tử vi · Bát tự ·
 Phong thuỷ (Kinh Dịch chỉ dùng chung bộ chặn). Thần số có vòng riêng, không đụng.
 
 **Khâu của vòng tăng trưởng:** QUAY LẠI (câu người dùng hỏi nhiều nhất được trả lời thẳng, không né) + NẠP Sao
-(chương Vận hạn, sao hạn → mở chương sâu). Đo: tỉ lệ `do_phu = khong` trong nhật ký hỏi đáp, `feedback_submitted`
-"Đúng với mình" theo mã `ds.*`, lượt mở `/xem-sao-han`, `reading_completed{mo_dun}`.
+(chương Vận hạn → mở chương sâu). Đo: tỉ lệ `do_phu = khong` trong nhật ký hỏi đáp, "Đúng với mình" theo mã `ds.*`,
+`reading_completed{mo_dun}`, lượt `/xem-sao-han`.
 
-## 0. Hiện trạng (rà 90 câu hay gặp, 2026-10-28)
+## 0. Hiện trạng — hai thước đo
 
-| Nhóm | Tử vi | Bát tự | Phong thuỷ |
-|---|---|---|---|
-| Tai nạn | từ chối (chi_tiet: trả lời kèm lưu ý) | từ chối | từ chối |
-| Bệnh gì / thọ bao nhiêu | từ chối (đúng) | từ chối (đúng) | từ chối (đúng) |
-| Con cái (mấy con, con trai, hiếm muộn) | rơi về Mệnh | rơi về "tính cách" | — |
-| Hôn nhân (mấy đời chồng, ly hôn, muộn chồng, phản bội) | Phu Thê / Mệnh lẫn lộn | "tính cách" | — |
-| Kiện tụng, tù, tiểu nhân | Mệnh | "tính cách" | — |
-| Công danh, sự nghiệp, làm quan | Quan Lộc (đúng) | "tính cách" (thiếu từ khoá) | — |
-| Bao giờ / khi nào (thời điểm) | hạn (đúng) | không nhận là "vận" | — |
-| Thi cử, nhà cửa, thừa kế, đi xa | Mệnh / Điền Trạch / Thiên Di | "tính cách" | — |
-| Kim lâu / Tam tai | — | — | chỉ nhận khi kèm "năm nay" |
-| Vong theo, căn đồng, nhà có ma, bùa, trùng tang | **luận cung Mệnh** (sai) | **"tính cách"** (sai) | từ chối bùa / vật phẩm |
-| Sao hạn Cửu Diệu, 8 hạn | kho không có | kho không có | kho không có |
-| "chắc chắn" (vd "có chắc chắn thăng chức") | **chặn nhầm** (nằm trong TU_CHOI) | chặn nhầm | chặn nhầm |
+**Kho 2.328 câu (đo 2026-10-28, engine 0.1.5):** 4 module 100% có căn cứ, khủng hoảng 100%, chặn nhầm 0 — kho đã bão
+hoà (kho và router cùng người viết).
 
-Điểm quan trọng: kho đã có sẵn lời không mê tín cho hầu hết nhóm trên (chương Vận hạn "Nên tránh / Nên làm", 40 câu
-an toàn trong nhà, sức khoẻ phòng ngừa) — việc chính là **định tuyến đúng + mẫu lời dẫn hướng**, không phải viết lại.
+**Holdout 360 câu viết độc lập** (`engine/fixtures/cau_hoi/holdout_mt_ds.jsonl`, agent đóng vai 30 người dùng, viết
+TRƯỚC khi nhìn router; 14 lĩnh vực × 5 kiểu hỏi × 3 mảng + tập quán + tâm linh + phải chặn), **lần chạy đầu**:
+
+| Module | Xử lý đúng | Đúng lĩnh vực (câu trả lời được) | Khủng hoảng bắt được | Bệnh/thọ/chết/xổ số/tuyển dụng chặn được |
+|---|---|---|---|---|
+| Tử vi | 120/139 (86%) | 59/81 (73%) | **1/6** | 7/14 |
+| Bát tự | 103/126 (82%) | 25/44 (57%) | **1/6** | 6/18 |
+| Phong thuỷ | 79/95 (83%) | — | **0/4** | 7/13 |
+
+Phát hiện quan trọng nhất không phải "né câu" mà là **lưới an toàn hở**: 13/16 câu khủng hoảng nói bằng ngôn ngữ huyền
+học ("mệnh có Địa Kiếp, chắc tôi nên chết đi cho mọi người đỡ khổ", "tầng 20 phòng tôi hướng nào thì nhảy xuống đỡ đau",
+"tôi biến mất thì cả nhà mới yên", "năm tuổi là nên buông tay", "uống hết thuốc ngủ") đi thẳng vào luận cung Mệnh / hướng
+nhà. Câu thọ/chết cũng lọt ("thọ được bao nhiêu tuổi theo lá số", "số chết bất đắc kỳ tử", "ông nội 90 tuổi năm nay có đi
+không", "thai có bị dị tật", "con sinh non có sống được không"). Đây là **B0, làm trước mọi thứ**.
+
+Các lỗi định tuyến (rà 90 câu + holdout): con cái / hôn nhân / pháp lý / thi cử / hậu vận / an toàn rơi về cung Mệnh;
+Bát tự thiếu chủ đề công danh, hôn nhân theo "bao giờ", con cái, pháp lý, đi xa; Kim lâu Phong thuỷ chỉ nhận khi kèm
+"năm nay"; vong / căn / ma / bùa / trùng tang được **luận như lá số** (Tử vi rơi vào Phúc Đức vì từ khoá `tam linh`,
+`to tien`); "chắc chắn" + "tai nạn" + "thắng kiện" nằm trong `TU_CHOI` dùng chung với Thần số → chặn nhầm "có chắc chắn
+thăng chức không"; "xem tuổi làm ăn" bị bắt thành hợp hôn; "sinh con năm nào hợp tuổi bố mẹ" bị bắt thành lá số con.
 
 ## 1. Quyết định chủ dự án đã chốt (2026-10-28)
 
-1. **Thuật ngữ chuẩn hoá** (bảng mục 2) áp vào **lời đời thường + tiêu đề hộp + lời khuyên**; từ gốc giữ ở "Vì sao nói
-   vậy", URL, tiêu đề SEO, từ điển. Không đổi SEO.
-2. **pgvector**: giữ vectơ băm trong engine (`bam512_v1`), **nạp sẵn** toàn bộ kho câu hỏi có nhãn vào `cau_hoi_vec`;
-   không gửi câu ra ngoài. Anh chạy migration 0017.
-3. **Câu tâm linh** (vong, căn, ma, bùa, trùng tang) + bệnh/thọ: **không luận nhưng dẫn hướng** — nói rõ hệ thống
-   không xem, rồi chuyển sang điều lá số nói được về giai đoạn/cung liên quan. Bệnh/thọ vẫn chặn + câu đi khám.
-4. **Sao hạn Cửu Diệu + 8 hạn**: công cụ `/xem-sao-han/{năm}` (+ trang tuổi) + hỏi đáp + chương Vận hạn, lời "dân
-   gian xem…", không cúng giải, không vật phẩm.
+1. **Thuật ngữ chuẩn hoá** (mục 2.1) áp vào lời đời thường + tiêu đề hộp + lời khuyên; từ gốc giữ ở "Vì sao nói vậy",
+   URL, tiêu đề SEO, từ điển.
+2. **pgvector**: giữ vectơ băm trong engine, nạp sẵn kho câu hỏi có nhãn; không gửi câu ra ngoài; anh chạy 0017.
+3. **Câu tâm linh** + bệnh/thọ: không luận nhưng dẫn hướng; bệnh/thọ vẫn chặn + câu đi khám.
+4. **Sao hạn Cửu Diệu + 8 hạn**: công cụ + hỏi đáp + chương Vận hạn, lời "dân gian xem…", không cúng giải.
+
+Điều chỉnh sau phản biện (mục 4–5): sao hạn **miễn phí tuyệt đối, không nằm sau Sao**, không trang theo từng tuổi
+(46 trang lặp một bảng chu kỳ 9 = nội dung mỏng + lộ tên "Huỳnh Tuyền" ra SEO), không "tháng kỵ" (đó là dự báo tháng
+xảy ra chuyện); dẫn hướng tâm linh **không nối sang lá số** (nối = ngầm xác nhận có vong).
 
 ## 2. Nguyên tắc lời
 
@@ -45,153 +53,183 @@ an toàn trong nhà, sức khoẻ phòng ngừa) — việc chính là **định
 | Từ gốc (chỉ còn ở "Vì sao nói vậy" / SEO / từ điển) | Cách nói trong lời đời thường, tiêu đề hộp |
 |---|---|
 | xem bói, đoán vận mệnh | đọc bản đồ năng lực / nhịp phát triển của bạn |
-| cải vận, chiêu tài, trấn trạch | sắp xếp lại không gian cho dễ sống, việc nên làm trong tháng này |
-| đại hạn, tiểu hạn, lưu niên | giai đoạn 10 năm, nhịp của năm, chủ đề năm nay |
-| tam tai, thái tuế, kim lâu | năm dân gian hay tránh làm việc lớn / năm nên đi chậm |
-| hạn, hạn nặng, hạn xấu | năm cần lưu ý, chỗ nên cẩn thận |
-| khắc khẩu, xung khắc tuổi | hai nhóm tính cách khác nhau · cách dung hoà |
-| sát, hung tinh, sao xấu | sao gây áp lực, chỗ dễ vấp |
-| phá tài, hao tài | tiền ra bất ngờ, năm nên giữ chặt tiền |
-| tai nạn, tai hoạ | năm cẩn thận đi lại / việc tay chân, chuyện an toàn |
-| kiện tụng, quan phù | vướng giấy tờ, hợp đồng, tranh chấp |
-| sát chồng, khắc vợ, mấy đời chồng | chỗ hai người dễ va chạm; nhịp tình cảm theo giai đoạn |
-| cúng giải hạn, dâng sao | (không dùng) — "nếu gia đình có lệ, giữ như một dịp sum họp" |
+| cải vận, chiêu tài, trấn trạch | sắp xếp lại chỗ ở cho dễ sống; việc nên làm tháng này |
+| đại hạn, tiểu hạn, lưu niên | giai đoạn 10 năm; nhịp của năm; chủ đề năm nay |
+| tam tai, thái tuế, kim lâu, sao hạn | năm dân gian hay tránh làm việc lớn / năm nên đi chậm (tục lệ) |
+| hạn, hạn nặng, hạn xấu | năm cần lưu ý; chỗ nên để ý |
+| khắc khẩu, xung khắc tuổi | hai kiểu tính cách khác nhau · cách dung hoà |
+| sát, hung tinh, sao xấu | sao gây áp lực; chỗ dễ vấp |
+| phá tài, hao tài | năm nên giữ quỹ dự phòng (không "tiền ra bất ngờ" — vẫn là dự báo) |
+| tai nạn, tai hoạ | phần đi lại là chỗ nên để ý nhất năm nay (không "năm cẩn thận tay chân") |
+| kiện tụng, quan phù | năm giấy tờ, hợp đồng dễ vướng |
+| sát chồng, khắc vợ, mấy đời chồng | chỗ hai người dễ va chạm; giai đoạn tình cảm dễ mở / dễ hiểu lầm |
+| cúng giải hạn, dâng sao, trấn trạch | (không dùng) → "hệ thống không hướng dẫn nghi lễ, không bán vật gì" |
 
-Cụm cấm giữ nguyên `cum_cam` (giọng AI, "bạn sẽ", "định mệnh", "số phận", "xui", "chết", "tai nạn", "ly hôn",
-"phá sản"…); thêm vào test: "cúng", "giải hạn", "vật phẩm", "bùa", "trấn", "khắc chết", "đại kỵ".
+`cum_cam` giữ nguyên. **Không** thêm "cúng/giải hạn/tang" vào bộ chặn lời (mâu thuẫn với chính câu ranh giới và lời chia
+buồn — test `kiem_giong_van` sẽ đỏ); thay bằng test riêng: lời engine **không chứa hướng dẫn nghi lễ** (số đèn, hướng
+lễ, ngày cúng, bài khấn, vật phẩm, "đại kỵ").
 
-### 2.2 Khuôn một câu trả lời cho nhóm nhạy cảm ("dẫn hướng")
+### 2.2 Khuôn trả lời
+
+**Câu phủ định phạm vi chỉ dùng cho bệnh / thọ / tâm linh / may rủi.** Nhóm khác mở bằng điều đọc được, câu ranh giới
+(bác sĩ / luật sư / không phải lời khuyên đầu tư) để **cuối** — tránh mọi câu đều nghe như bị giảng.
 
 ```
-[1 câu nói thật phạm vi]   Lá số không đoán được <X>; không ai đoán được <X> từ ngày sinh.
-[1 câu chuyển]             Điều lá số nói được là <mảng> của bạn trong <giai đoạn> đang <mức>.
-[Hộp]                      Nên để ý: … · Nên làm (0 đồng): … · Thời điểm: …
-[Vì sao nói vậy]           <thuật ngữ, cung, sao, tứ hoá, trụ, du niên>
-[Câu khép]                 Bạn vẫn là người quyết định; <câu không thay bác sĩ / luật sư / chuyên gia tài chính khi
-                           chạm sức khoẻ / pháp lý / tiền>.
+[Điều đọc được]      <mảng> của bạn <giai đoạn> là chỗ nên để ý nhất / đang thuận — nói bằng hành vi, không bằng biến cố.
+[Hộp]                Nên để ý: … · Nên làm (0 đồng): … · Thời điểm thuận: …
+[Vì sao nói vậy]     thuật ngữ, cung, sao, tứ hoá, trụ, du niên (gập)
+[Câu khép ranh giới] một câu, đúng nhóm.
 ```
 
-Khuôn này tái dùng hộp `doi_song_1` (KC-1) nên web không cần khối mới.
+Luật cho kiểu `lo_so` ("có bị … không"): **mức hiển thị là của mảng người ta sống hằng ngày** (đi lại, giấy tờ, tiền),
+**không bao giờ là mức của nỗi sợ**; hộp chỉ chứa hành vi ("đi sớm 15 phút, không chạy xe khi mệt sau 22 giờ"); câu khép
+"lá số không nói có X hay không — không ai nói được điều đó từ ngày sinh".
+
+Mẫu người dùng hài lòng (từ phản biện; giả định dữ kiện):
+
+- *Tai nạn:* "Năm nay phần đi lại của bạn là chỗ nên để ý nhất trong lá số, không phải tiền hay việc. Cụ thể: hay vội và
+  hay nhận lời đi xa sát ngày. Việc 0 đồng: đi sớm 15 phút, không lái xe khi đã mệt. Lá số không nói có tai nạn hay
+  không — không ai nói được điều đó từ ngày sinh."
+- *Tiền:* "Tiền của bạn vào chủ yếu từ tay nghề, không từ buôn bán. Giai đoạn 2024–2033 giữ tiền quan trọng hơn kiếm
+  thêm; 2028 là năm thuận để tăng thu. Năm nay nên để riêng quỹ 3 tháng trước khi góp vốn. Đây không phải lời khuyên đầu tư."
+- *Mấy đời chồng:* "Lá số không đếm số đời chồng và hệ thống cũng không đếm. Điều đọc được: hai người dễ va ở chuyện ai
+  quyết việc lớn; 2026–2027 dễ hiểu lầm vì điều không nói ra; 2029 dễ mở lòng hơn. Mỗi tuần một buổi nói chuyện không
+  cầm điện thoại."
+- *Con cái:* "Có con, mấy con, trai hay gái là chuyện cơ thể và bác sĩ — lá số không nói được. Điều đọc được là quan hệ
+  với con: bạn dễ nghiêm hơn mình nghĩ; 2027–2029 nhiều việc liên quan con. Nếu mong con lâu chưa có, đi khám cả hai —
+  không phải lỗi ai."
+- *Pháp lý:* "2026 là năm giấy tờ, hợp đồng dễ vướng — nổi hơn mọi mảng khác. Đọc hết hợp đồng trước khi ký, khoản cho
+  mượn có giấy. Kiện hay không, thắng hay thua do hồ sơ và luật sư."
+- *Tâm linh:* "Hệ thống không xem vong hay bùa, và không ai xem được điều đó từ ngày sinh. Nếu bạn đang ngủ kém và bất
+  an: ngủ đủ, kể với một người thân. Nếu gia đình có lệ, giữ như một dịp sum họp." (trùng tang: thêm lời chia buồn;
+  **không** nối sang cung/giai đoạn; "căn đồng" là tín ngưỡng thờ Mẫu được công nhận — không nói "không có").
+- *Sao hạn:* "Theo tục xếp theo tuổi, nam 37 tuổi mụ gặp sao Thái Bạch — dân gian xem là năm giữ chặt tiền, nói ít. Đó
+  là tập quán, không tính từ lá số bạn. Lá số bạn năm nay nói: tiền Cân bằng, công việc Thuận lợi."
+- *"Thầy bảo tôi Thương Quan khắc chồng, có thật không":* không xác nhận / bác bỏ thầy khác; "Thương Quan trong lá số
+  bạn là … ; hệ thống không dùng chữ khắc với người thân; điều đọc được về hai người là …".
 
 ## 3. Ma trận ý định
 
 ### 3.1 Trục
 
-- **Lĩnh vực** (14): bản thân · tiền bạc · công việc/công danh · tình cảm/hôn nhân · con cái · cha mẹ/anh em · sức
-  khoẻ/năng lượng · an toàn/đi lại · pháp lý/giấy tờ · học hành/thi cử · nhà cửa/đất đai · quan hệ (quý nhân/tiểu
-  nhân) · đi xa/định cư · tuổi già/hậu vận. Thêm trục **tập quán** (sao hạn, kim lâu, tam tai, xông đất, tuổi hợp).
-- **Kiểu hỏi** (5): `mo_ta` ("tôi có số … không") · `thoi_diem` ("bao giờ", "năm nào") · `quyet_dinh` ("có nên") ·
-  `lo_so` ("có bị … không") · `tap_quan` ("có phạm … không").
+- **Lĩnh vực** (14 + 2): bản thân · tiền bạc · công việc/công danh · tình cảm/hôn nhân · con cái · cha mẹ/anh em · sức
+  khoẻ/năng lượng · an toàn/đi lại · pháp lý/giấy tờ · học hành/thi cử · nhà cửa/đất đai · quan hệ (quý nhân/tiểu nhân/
+  đối tác làm ăn) · đi xa/định cư/xuất khẩu lao động · tuổi già/hậu vận · **tập quán** · **tâm linh**.
+- **Kiểu hỏi** (7): `mo_ta` · `thoi_diem` · `quyet_dinh` · `lo_so` · `tap_quan` · **`xac_nhan`** ("thầy bảo…, có đúng
+  không") · **`nguyen_nhan`** ("vì sao tôi mãi không…"). Trục chéo: hỏi **cho người khác** (bố mẹ, con) — cần lá số người
+  đó + đồng ý, trừ phần "bạn ứng xử thế nào".
 
 ### 3.2 Ánh xạ dữ kiện tính được (một nguồn — CALC đã có)
 
 | Lĩnh vực | Tử vi | Bát tự | Phong thuỷ |
 |---|---|---|---|
 | Bản thân | Mệnh, Thân, cách cục | nhật chủ, thân vượng/nhược | cung phi, nhóm Đông/Tây |
-| Tiền bạc | Tài Bạch, Hoá Lộc/Kỵ, Lộc Tồn, hạn vào Tài | Chính/Thiên Tài, dụng thần hai cách, lưu niên | hướng Sinh Khí/Diên Niên, cửa, bếp, lưu niên Bát Bạch |
-| Công việc / công danh | Quan Lộc, Thiên Di, Hoá Quyền/Khoa, Thái Tuế | Chính Quan/Thất Sát, Ấn, đại vận | bàn làm việc, hướng Diên Niên |
-| Tình cảm / hôn nhân | Phu Thê, Đào Hoa/Hồng Loan/Thiên Hỷ, Hoá Kỵ Phu Thê | trụ ngày (chi = phối ngẫu), Tài/Quan tinh, Đào Hoa | phòng ngủ, giường, du niên hai người |
-| Con cái | **Tử Nữ**, Thiên Hỷ, Hoá Kỵ Tử Nữ | trụ giờ, Thực Thương (nữ) / Quan Sát (nam) | phòng trẻ, Thiên Y |
+| Tiền bạc | Tài Bạch, Hoá Lộc/Kỵ, Lộc Tồn, hạn vào Tài | Chính/Thiên Tài, dụng thần hai cách, lưu niên | chỗ ngồi/bàn làm việc dễ tập trung (không "hướng tiền") |
+| Công việc / công danh | Quan Lộc, Thiên Di, Hoá Quyền/Khoa | Chính Quan/Thất Sát, Ấn, đại vận | bàn làm việc, Diên Niên |
+| Tình cảm / hôn nhân | Phu Thê, Đào Hoa/Hồng Loan/Thiên Hỷ, Hoá Kỵ Phu Thê | trụ ngày, Tài/Quan tinh, Đào Hoa | phòng ngủ, du niên hai người; **Kim lâu cưới** |
+| Con cái | **Tử Nữ**, Thiên Hỷ | trụ giờ, Thực Thương / Quan Sát | phòng trẻ, Thiên Y; **sinh con hợp tuổi bố mẹ** (tam hợp/lục xung, tục lệ + ranh giới y tế) |
 | Cha mẹ / anh em | Phụ Mẫu, Huynh Đệ | trụ năm – tháng, Ấn | — |
-| Sức khoẻ / năng lượng | Tật Ách (+ câu không thay bác sĩ) | hành thừa/thiếu, điều hậu | giường, Thiên Y, dấu hiệu an toàn |
-| An toàn / đi lại | Thiên Di, Tật Ách, Kình/Đà/Hoả/Linh, Hoá Kỵ năm, **cờ dân gian** | năm xung chi ngày, Kiếp Sát/Vong Thần | 40 câu an toàn trong nhà, Ngũ Hoàng/Nhị Hắc năm |
-| Pháp lý / giấy tờ | **Quan Phù** (vòng Thái Tuế), Quan Lộc, Nô Bộc, Hoá Kỵ | Thất Sát/Thương Quan lộ, năm hình | — |
-| Học hành / thi cử | Quan Lộc, Hoá Khoa, Văn Xương/Khúc | Ấn tinh, Văn Xương | bàn học, Văn Xương vị |
-| Nhà cửa / đất đai | **Điền Trạch**, Hoá Lộc Điền | Ấn (nhà), Tài | hướng, Kim lâu/Hoang ốc/Tam tai, năm sao |
-| Quan hệ (quý nhân / tiểu nhân) | **Nô Bộc**, Thiên Khôi/Việt, Hoá Kỵ Nô Bộc | Thiên Ất Quý Nhân, Tỷ Kiếp | — |
-| Đi xa / định cư | Thiên Di, Thiên Mã | Dịch Mã | — |
+| Sức khoẻ / năng lượng | Tật Ách + `luu_y.tat_ach` luôn kèm | hành thừa/thiếu, điều hậu + câu bác sĩ | giường, Thiên Y, dấu hiệu an toàn |
+| An toàn / đi lại | Thiên Di, Tật Ách, Kình/Đà/Hoả/Linh, Hoá Kỵ năm, cờ dân gian | năm xung chi ngày, Kiếp Sát | 40 câu an toàn trong nhà, Ngũ Hoàng/Nhị Hắc |
+| Pháp lý / giấy tờ | **Quan Phù** (vòng Thái Tuế), Quan Lộc, Nô Bộc | Thất Sát/Thương Quan lộ, năm hình | — |
+| Học hành / thi cử | Quan Lộc, Hoá Khoa, Văn Xương/Khúc | Ấn tinh, Văn Xương | bàn học |
+| Nhà cửa / đất đai | **Điền Trạch** | Ấn, Tài | hướng, Kim lâu/Hoang ốc/Tam tai, năm sao |
+| Quan hệ / đối tác làm ăn | **Nô Bộc**, Khôi/Việt; **hợp tuổi làm ăn** = can chi hai người, không chấm điểm | Thiên Ất Quý Nhân, Tỷ Kiếp | — |
+| Đi xa / định cư | Thiên Di, Thiên Mã | **Dịch Mã** (chủ đề mới) | — |
 | Tuổi già / hậu vận | **Phúc Đức**, đại hạn sau 55 | đại vận cuối | — |
-| Tập quán | cờ `co` (năm tuổi, xung, tam tai) + **sao hạn** mới | — | Kim lâu, Hoang ốc, Tam tai, sao hạn, xông đất |
+| Tập quán | cờ `co` + **sao hạn** mới | — | Kim lâu, Hoang ốc, Tam tai, sao hạn, xông đất, màu/hướng ngũ hành (được); đá/bùa/vật phẩm/biển số/số điện thoại (không) |
+| Tâm linh | **không nối** — lời hỗ trợ + lệ gia đình | như Tử vi | như Tử vi; "mời thầy trấn trạch" → không hướng dẫn nghi lễ |
 
-Ô in đậm = dữ kiện **đã tính nhưng hỏi đáp chưa trỏ tới** (lỗi định tuyến hiện nay).
+In đậm = dữ kiện đã tính nhưng hỏi đáp chưa trỏ tới, hoặc ô mới thêm sau phản biện.
 
-### 3.3 Kiểu hỏi → cách trả lời (áp mọi lĩnh vực)
+### 3.3 Kiểu hỏi → cách trả lời
 
 | Kiểu | Trả lời | Không làm |
 |---|---|---|
-| `mo_ta` | nét của cung/trụ + điểm mạnh / dễ vấp + câu tự soi | gán nhãn số phận ("số giàu", "số khổ") |
-| `thoi_diem` | giai đoạn/năm/tháng **thuận cho việc đó** theo đại hạn > lưu niên > tiểu hạn > lưu nguyệt (Bát tự: đại vận/lưu niên hai cách) | hứa năm X xảy ra |
-| `quyet_dinh` | hai nhánh "nếu đi / nếu ở" + việc chuẩn bị, người hỏi tự quyết | khuyên mua/bán/đầu tư cụ thể |
-| `lo_so` | khuôn dẫn hướng (2.2): năm/mảng cần lưu ý + việc 0 đồng | trả lời có/không biến cố |
-| `tap_quan` | "dân gian xem…", mốc, cách người xưa làm (mượn tuổi, đi chậm) | cúng giải, vật phẩm, "đại kỵ" |
+| `mo_ta` | nét của cung/trụ + điểm mạnh / dễ vấp + câu tự soi | gán nhãn số phận ("số giàu", "số khổ", "số làm thuê") |
+| `thoi_diem` | giai đoạn/năm/tháng **thuận cho việc đó** (đại hạn > lưu niên > tiểu hạn > lưu nguyệt; Bát tự hai cách) | hứa năm X xảy ra |
+| `quyet_dinh` | hai nhánh + việc chuẩn bị, người hỏi tự quyết | khuyên mua/bán/đầu tư/vay cụ thể |
+| `lo_so` | mức của mảng sống hằng ngày + hộp hành vi (2.2) | trả lời có/không biến cố; mức của nỗi sợ |
+| `tap_quan` | "dân gian xem…", mốc, cách người xưa làm (mượn tuổi, đi chậm) | cúng giải, vật phẩm, "đại kỵ", tháng kỵ |
+| `xac_nhan` | đọc lại từ lá số của chính họ, không nhận xét thầy khác | "thầy nói sai/đúng" |
+| `nguyen_nhan` | nét lặp lại trong lá số liên quan tới việc đó + một việc đổi được | "tại số" |
 
-## 4. Nhóm nhạy cảm — phương án và lựa chọn
+## 4. Nhóm nhạy cảm — phương án và lựa chọn (in đậm = chọn)
 
-Mỗi nhóm 2–3 phương án; **in đậm = chọn**.
-
-| Nhóm | A | B | C | Lý do chọn |
+| Nhóm | A | B | C | Lý do |
 |---|---|---|---|---|
-| Tai nạn, an toàn | từ chối (hiện nay) | **"năm/mảng nên cẩn thận ở đâu" + việc 0 đồng (khuôn 2.2), cả hai chế độ** | luận có/không như thị trường | B dùng dữ kiện có sẵn (Thiên Di, Tật Ách, sát tinh, cờ dân gian, an toàn trong nhà); C là phán |
-| Tiền bạc: giàu không, bao giờ, mất tiền, đầu tư | kể cung Tài Bạch | **nhịp tiền theo giai đoạn + "tiền vào từ đâu" + việc giữ tiền; câu khép "không phải lời khuyên đầu tư"** | chấm "số giàu/nghèo" | B đúng Luật Quảng cáo / tư vấn tài chính; không gán nhãn |
-| Công danh, thăng chức, làm quan | Quan Lộc như nay | **Quan Lộc + Thiên Di + năm Hoá Quyền/Khoa → "năm được ghi nhận", "việc nên làm để được thấy"** | — | thêm thời điểm, bỏ chữ "làm quan" |
-| Hôn nhân: mấy đời chồng, ly hôn, phản bội, muộn chồng | Phu Thê | **Phu Thê + giai đoạn Hoá Kỵ/Lộc Phu Thê → "chỗ hai người dễ va chạm" + "giai đoạn tình cảm dễ mở"; không đếm số đời, không "khắc"** | từ chối | dân gian hỏi nhiều nhất; B trả lời được mà không nhãn |
-| Con cái: bao giờ, mấy con, con trai, hiếm muộn | từ chối (sinh nở = y tế) | **Tử Nữ: quan hệ với con + giai đoạn nhiều việc liên quan con; nói rõ không đoán giới tính/số con; "hiếm muộn" → chuyển bác sĩ + lời hỗ trợ** | luận số con | B giữ ranh giới y tế, vẫn có nội dung |
-| Pháp lý: kiện, tù, tiểu nhân | Mệnh (sai) | **Quan Phù/Nô Bộc/Hoá Kỵ → "năm dễ vướng giấy tờ, hợp đồng" + rà kỹ, hỏi luật sư** | — | B dùng vòng Thái Tuế đã an |
-| Sức khoẻ: ốm nặng, bố mẹ khoẻ không | Tật Ách không câu bác sĩ (lỗi nay) | **Tật Ách/Phụ Mẫu + luôn `luu_y.tat_ach`; bệnh/thọ chặn + câu đi khám** | — | đúng quy tắc code |
-| Tâm linh: vong, căn, ma, bùa, trùng tang | từ chối khô | **dẫn hướng: "hệ thống không xem vong/bùa" → giai đoạn đang bất an + việc nên làm; trùng tang thêm lời chia buồn** | luận | chủ dự án chốt B |
-| Sao hạn Cửu Diệu, 8 hạn | không có | **tính + lời tập quán (mục 5)** | cúng giải | — |
-| "chắc chắn" | chặn | **bỏ khỏi TU_CHOI, chỉ chặn "cho tôi biết chắc" + trả lời có câu "không ai chắc được"** | — | sửa chặn nhầm |
+| Khủng hoảng nói bằng ngôn ngữ huyền học | bộ từ khoá hiện có | **thêm mẫu "ý tự hại + từ huyền học" (chết đi cho đỡ khổ, biến mất, buông tay, làm luôn cho xong, uống hết thuốc, nhảy xuống, tự thiêu, cắt tay, đi theo) + luật: ý tự hại thắng mọi từ khoá chuyên môn; nửa sau câu cũng xét** | LLM phân loại | B tất định, test holdout; C trái kiến trúc |
+| Thọ / chết / sống được không (kể cả của người thân, thai nhi) | như nay | **mẫu rộng: "thọ bao nhiêu", "sống (được) bao lâu/đến bao nhiêu/được không", "có đi không", "qua khỏi", "kết thúc đời", "dị tật", "bất đắc kỳ tử", "năm tuổi/tam tai có hay chết" → từ chối nhẹ + câu đi khám / lời quan tâm** | — | hở 50% holdout |
+| Tai nạn, an toàn | từ chối | **mức mảng đi lại + hộp hành vi, cả hai chế độ** | luận có/không | B dùng dữ kiện có sẵn |
+| Tiền bạc | kể Tài Bạch | **nhịp tiền + nguồn tiền + việc giữ tiền; khép "không phải lời khuyên đầu tư"** | nhãn số giàu | — |
+| Công danh | Quan Lộc | **Quan Lộc + năm Hoá Quyền/Khoa → "năm được ghi nhận"; bỏ "làm quan"** | — | — |
+| Hôn nhân | Phu Thê | **Phu Thê + giai đoạn Kỵ/Lộc → va chạm ở đâu, giai đoạn dễ mở; không đếm số đời, không "khắc"** | từ chối | — |
+| Con cái | từ chối | **Tử Nữ: quan hệ với con + giai đoạn nhiều việc liên quan con; không giới tính/số con; hiếm muộn → bác sĩ + hỗ trợ; chọn giờ sinh mổ → nhường bác sĩ** | luận số con | — |
+| Pháp lý, tù, tiểu nhân | Mệnh | **Quan Phù / Nô Bộc / Hoá Kỵ → "năm giấy tờ dễ vướng"** | — | — |
+| Sức khoẻ, bố mẹ khoẻ không | Tật Ách không câu bác sĩ | **Tật Ách / Phụ Mẫu + luôn câu bác sĩ; tên bộ phận ("gan hay thận") = chặn như tên bệnh** | — | — |
+| Tâm linh | từ chối khô | **hỗ trợ + lệ gia đình, không nối lá số; gỡ `tam linh`, `to tien` khỏi Phúc Đức; thêm nghiệp/duyên âm/tiền kiếp/bóng đè/căn cô** | luận | chủ dự án chốt |
+| Sao hạn | — | **Cửu Diệu: tính + lời tập quán, miễn phí** (mục 5) | cúng giải | — |
+| Bát hạn | **bỏ hẳn** (phản biện: tên "Huỳnh Tuyền / Toán Tận / Diêm Vương" tự nó là điềm chết, không cứu được bằng chữ; ít người hỏi) | tính nhưng chỉ trả lời khi hỏi đích danh, không trang, không SEO | như Cửu Diệu | **chờ anh quyết** — anh có yêu cầu 8 hạn |
+| Tuyển dụng / nhân sự trá hình ("chủ cty xem ứng viên", "HR xem ai sắp nghỉ") | như nay | **thêm mẫu: ứng viên, nhân viên, kế toán…, "ai trung thực", "ai sắp nghỉ" + người hỏi tự xưng chủ/HR** | — | hở holdout |
+| "chắc chắn" | chặn | **tách `TU_CHOI_HH` riêng cho Huyền học trong `hoidap/chung.py` (không sửa bộ Thần số): bỏ "chắc chắn", "tai nạn", "thắng kiện"; giữ "cho tôi biết chắc"** | — | sửa chặn nhầm, không đụng Thần số |
 
-## 5. Sao hạn Cửu Diệu + Bát hạn (CALC mới, cần test + golden trước)
+## 5. Sao hạn Cửu Diệu (CALC mới, test + golden trước)
 
-### 5.1 Phép tính (bảng lịch vạn niên Việt phổ biến — **chờ chủ dự án đối chiếu sách**)
+### 5.1 Phép tính — **đã đối chiếu 8 nguồn, khớp 18/18 ô**
 
-Tuổi = tuổi mụ theo năm âm lịch Việt (`tuoi_dan_gian.tuoi_mu`). Chu kỳ 9 sao, bắt đầu từ tuổi 10:
+Tuổi = tuổi mụ theo năm âm lịch Việt (`tuoi_dan_gian.tuoi_mu`, mốc Tết — vài lịch dùng Lập xuân, ghi rõ ở "Vì sao
+nói vậy"). Chu kỳ 9 từ tuổi 10:
 
-| Tuổi mụ (và +9, +18…) | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 |
+| Tuổi mụ (và +9k) | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 |
 |---|---|---|---|---|---|---|---|---|---|
 | Nam | La Hầu | Thổ Tú | Thuỷ Diệu | Thái Bạch | Thái Dương | Vân Hán | Kế Đô | Thái Âm | Mộc Đức |
 | Nữ | Kế Đô | Vân Hán | Mộc Đức | Thái Âm | Thổ Tú | La Hầu | Thái Dương | Thái Bạch | Thuỷ Diệu |
 
-Bát hạn, chu kỳ 8, từ tuổi 10:
+Dưới 10 tuổi: `None`. Golden: 6 ô mẫu từ nguồn (nam 25 Kế Đô, nam 40 Thái Bạch, nữ 33 La Hầu, nữ 48 Mộc Đức, nam 60 Vân
+Hán, nữ 71 Thái Bạch) + bảng 10–99.
 
-| Tuổi mụ (và +8, +16…) | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 |
-|---|---|---|---|---|---|---|---|---|
-| Nam | Huỳnh Tuyền | Tam Kheo | Ngũ Mộ | Thiên Tinh | Toán Tận | Thiên La | Địa Võng | Diêm Vương |
-| Nữ | Toán Tận | Thiên Tinh | Ngũ Mộ | Tam Kheo | Huỳnh Tuyền | Diêm Vương | Địa Võng | Thiên La |
-
-Dưới 10 tuổi: dân gian không tính → engine trả `None` + ghi chú. Golden: bảng tay 2 giới × tuổi 10–99 chép từ
-lịch vạn niên; gắn `chua_doi_chieu_oracle` cho tới khi chủ dự án xác nhận.
+Bát hạn (nếu anh giữ): thứ tự 10–17 nam Huỳnh Tuyền · Tam Kheo · Ngũ Mộ · Thiên Tinh · Toán Tận · Thiên La · Địa Võng ·
+Diêm Vương; nữ Toán Tận · Thiên Tinh · Ngũ Mộ · Tam Kheo · Huỳnh Tuyền · Diêm Vương · Địa Võng · Thiên La — **không lặp
+mỗi 8**: tục Việt lặp chu kỳ 9, tuổi tròn chục mang cùng hạn với tuổi x9 trước (19–20, 29–30…); công thức
+`i = (tuổi − 9 − ⌊tuổi/10⌋) mod 8` (bảng v1 sai từ tuổi 20).
 
 ### 5.2 Lời (KB `sao_han_kb.json`, school `dan_gian_viet`, nháp ban biên tập)
 
-Mỗi sao / hạn: tên Hán Việt, **nghĩa dân gian viết trung tính** (La Hầu: "dân gian xem là năm nên nói ít, giữ giấy
-tờ, tránh tranh cãi" — không "tai nạn, tù tội"), tháng dân gian coi là rõ nhất, **3 việc 0 đồng**, câu tự soi, dòng
-cố định: *"Sao hạn là tập quán xếp theo tuổi, không phải phép tính từ lá số của bạn; hệ thống không cúng giải, không
-vật phẩm."* Tên bệnh, "chết", "tang" bị test chặn.
+Mỗi sao: tên, nghĩa dân gian viết trung tính bằng hành vi ("dân gian xem là năm nên nói ít, giữ giấy tờ"), 3 việc 0
+đồng, câu tự soi, dòng cố định *"Sao hạn là tập quán xếp theo tuổi, không tính từ lá số của bạn; hệ thống không hướng
+dẫn nghi lễ, không bán vật gì."* **Không** tháng kỵ, số đèn, hướng lễ, ngày cúng, bài khấn (test chặn).
 
-### 5.3 Hiện ở đâu
+### 5.3 Hiện ở đâu — miễn phí tuyệt đối
 
-- Trang `/xem-sao-han/{năm}` (bảng 46 tuổi 1960–2005 như xông đất; SEO mùa Tết) + `/xem-sao-han/{năm}/tuoi-{năm sinh}`
-  (sao + hạn + Kim lâu/Tam tai của tuổi, việc nên làm, link xem lá số). Engine `/v1/tuoi/sao-han/{năm}[/{năm sinh}]`.
-- Hỏi đáp Tử vi / Bát tự: "sao La Hầu", "sao hạn năm nay", "Thái Bạch chiếu mệnh" → mục `sao_han` (tập quán) **đứng
-  trước**, rồi phần lá số của năm. Phong thuỷ: `NAM_VIEC` thêm sao hạn, Kim lâu không cần kèm "năm nay".
-- Chương Vận hạn (Tử vi + Bát tự): cờ `co` thêm `sao_han` (nhãn "sao La Hầu — tục lệ"), **không đổi mức**.
-- Hôm nay: không (không doạ mỗi ngày).
+- Một trang `/xem-sao-han/{năm}`: cách xếp theo tuổi + bảng 46 tuổi 1960–2005 + lời từng sao + hỏi đáp (gồm "có cần
+  cúng không" → GHPGVN 2019: không phải nghi lễ Phật giáo; chùa chỉ cầu an). **Không** trang theo tuổi. Engine
+  `/v1/tuoi/sao-han/{năm}`.
+- Hỏi đáp Tử vi / Bát tự / Phong thuỷ: "sao La Hầu", "sao hạn năm nay", "Thái Bạch chiếu mệnh" → mục tập quán đứng
+  trước, rồi phần lá số của năm (miễn phí như mọi câu).
+- Chương Vận hạn: cờ `co` thêm `sao_han` — cờ **không đổi mức**, dòng cờ nằm ngoài phần khoá Sao (như cờ dân gian hiện
+  nay), không là hộp.
+- Hôm nay: không.
 
-## 6. pgvector — nạp sẵn kho câu
+## 6. pgvector — nạp sẵn kho câu (B4, chỉ nếu đo có lợi)
 
-- Script `engine/scripts/nap_cau_hoi_vec.py`: đọc `fixtures/cau_hoi/huyenhoc_cau_hoi.jsonl` (+ kho mới), tạo vectơ
-  `bam512_v1` (`app/nhung.py`), xuất JSONL `{cau_loc, vec, mo_dun, y_dinh}`; web route quản trị `/api/quan-tri/hoc/nap-kho`
-  (chủ sở hữu, MFA) gọi `xac_nhan_y_dinh` với cờ `nguon = kho` để không đếm là người xác nhận.
-- Ngưỡng `Y_DINH_NGUONG` giữ 0,82; đo tỉ lệ câu holdout được gợi ý đúng trước / sau nạp.
-- Vẫn không gửi câu ra ngoài; không thêm nhà cung cấp.
+`bam512_v1` là băm từ vựng → láng giềng gần ≈ khớp từ khoá; **đo trên holdout trước** (câu không nhận ra bằng luật → nạp
+kho → tỉ lệ gợi ý đúng). Nếu < +5 điểm so với luật từ khoá sau B1 thì không viết route. Nếu làm: `nguon = kho` phải
+không đếm vào ngưỡng tự bật ≥ 2 người đăng nhập (0024) → cần migration nhỏ (0032) — chờ anh duyệt riêng.
 
-## 7. Lộ trình từng bước (mỗi bước một PR, đo trước/sau)
+## 7. Lộ trình (mỗi bước một PR, đo holdout trước/sau; thứ tự theo rủi ro)
 
 | Bước | Việc | Đo |
 |---|---|---|
-| **B1** | Kho câu hỏi mới ≥ 300 câu (14 lĩnh vực × 5 kiểu × 3 mảng, viết TRƯỚC khi sửa router) + holdout 60 câu; đo mốc. Sửa định tuyến (chủ đề mới Bát tự, cung mới Tử vi, Kim lâu PT), bỏ chặn nhầm, mẫu dẫn hướng 2.2 cho tai nạn / tâm linh / sức khoẻ / pháp lý / con cái; thuật ngữ 2.1 vào lời template | `do_phu`, holdout lần đầu, test giọng văn |
-| **B2** | Sao hạn Cửu Diệu + Bát hạn: CALC + golden + KB + route + trang + hỏi đáp + cờ Vận hạn | golden 180 ô, SEO 0 lỗi |
-| **B3** | Lời luận bổ sung theo ma trận 3.2 (gói bằng chứng trỏ đúng cung/trụ; hộp cho `lo_so`/`quyet_dinh`; KB thêm câu đời thường chỗ mỏng: Tử Nữ, Nô Bộc, Phúc Đức, Quan Phù; Bát tự theo lĩnh vực) | `day_du_pct`, phần riêng |
-| **B4** | pgvector nạp sẵn (mục 6) + web xác nhận | tỉ lệ gợi ý đúng holdout |
-| **B5** | Luận giải toàn bộ: thuật ngữ 2.1 vào tiêu đề hộp/chương; chương Vận hạn thêm an toàn + pháp lý + sao hạn | `reading_completed`, "Đúng với mình" |
+| **B0** | Lưới an toàn: khủng hoảng ngôn ngữ huyền học, thọ/chết/thai/sống được không, tên bộ phận, tuyển dụng trá hình; tách `TU_CHOI_HH` (bỏ chặn nhầm). Test holdout `tests/test_mt_ds_holdout.py` (khủng hoảng + từ chối phải 100%) | 13/16 → 16/16 khủng hoảng; chặn 20/45 → 45/45 |
+| **B1** | Định tuyến + mẫu lời: Tử vi (Tử Nữ, Nô Bộc, Phúc Đức, Quan Phù, Thiên Di, hợp tuổi làm ăn, sinh con hợp tuổi), Bát tự (chủ đề công danh / hôn nhân theo thời điểm / con cái / pháp lý / đi xa / hậu vận), Phong thuỷ (Kim lâu, cưới); tâm linh dẫn hướng; `lo_so` theo 2.2; thuật ngữ 2.1 vào template | đúng lĩnh vực 73%/57% → ≥ 90% |
+| **B2** | Lời luận bổ sung KB chỗ mỏng (Tử Nữ, Nô Bộc, Phúc Đức, Quan Phù, Bát tự theo lĩnh vực) + hộp cho `lo_so`/`quyet_dinh`/`xac_nhan` | `day_du_pct`, phần riêng |
+| **B3** | Sao hạn Cửu Diệu (mục 5), gác công tắc sitemap tới khi anh xác nhận trang | golden 180 ô, SEO 0 lỗi |
+| **B4** | Luận giải toàn bộ: thuật ngữ 2.1 vào tiêu đề hộp/chương (đổi golden có chủ đích, kiểm `catXemTruoc`, `moi_xem`) | `reading_completed` |
+| **B5** | pgvector (mục 6) — chỉ khi đo có lợi | gợi ý đúng holdout |
 
-Không đổi phép tính cũ → không tăng `ENGINE_VERSION`; sao hạn là CALC mới (kết quả cũ không đổi). Không dependency.
-Migration: không (0017 anh chạy để bật B4).
+Không đổi phép tính cũ → không tăng `ENGINE_VERSION`. Không dependency. Migration: không (0017 anh chạy để đo B5).
 
-## 8. Còn chờ chủ dự án
+## 8. Chờ chủ dự án
 
-1. Đối chiếu hai bảng mục 5.1 với sách anh dùng (mỗi lịch in một kiểu; sai một ô là sai cả trang SEO).
-2. Hỏi đáp Phong thuỷ với câu "tiền tài / sự nghiệp / tình duyên" (không có hướng/phòng trong câu): trả lời bằng
-   hướng + phòng hợp mệnh + lưu niên sao của năm — đúng ý anh không?
+1. **Bát hạn**: bỏ (đề xuất của phản biện) hay giữ ở mức "chỉ trả lời khi hỏi đích danh, không trang"?
+2. Thứ tự B0 → B1 → B2 → B3 → B4 → B5 và nội dung mục 2–4 — duyệt để em bắt đầu B0.
