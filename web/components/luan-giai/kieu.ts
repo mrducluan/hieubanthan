@@ -42,6 +42,8 @@ export interface NamVanHan {
   nam: number; tuoi: number; muc: Muc; nhan_muc: string; hien_tai: boolean; co: CoNam[]; mang: string | null;
   y: string; nen_tranh: string | null; nen_lam: string | null; can_cu: string[];
   muc_cach_1?: Muc; muc_cach_2?: Muc; hai_cach_khac?: boolean;
+  /** MT-ĐS B3: sao hạn + hạn theo tục xếp theo tuổi (chỉ hiện, không đổi mức). */
+  sao_han?: { sao: string; han: string | null } | null;
 }
 /** VH-1 Bát tự — 12 tháng tới theo tiết. */
 export interface ThangToi { tu: string; den: string; muc: Muc; nhan_muc: string; hai_cach_khac: boolean; mang: string }
@@ -93,9 +95,17 @@ export interface BaoCaoDoiSong {
   so_khoa?: number;
   cot_loi?: Hop[];
   thoi_gian_bieu?: MocDaiHan[];
+  /** MT-ĐS B6: khung "Cần lưu ý ở từng mảng hay hỏi" (7 mảng; dòng của chương khoá SAO-2 chỉ còn tên + mức). */
+  luu_y_mang?: LuuYMang[];
   chuong: (ChuongDoiSongMo | ChuongKhoa)[];
   phi?: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null;
     /** SAO-V: chương bạn bè tặng. */ chuong_tang?: number; chuong_tang_ma?: string };
+}
+
+export interface LuuYMang {
+  ma: string; ten: string; muc: Muc; nhan_muc: string; tu_chuong: string;
+  luu_y?: string | null; viec?: string | null; ranh_gioi?: string | null; ma_mau?: string | null; can_cu?: string[];
+  /** Chương gốc chưa mở (SAO-2): chỉ hiện tên + mức. */ khoa?: boolean;
 }
 
 export const NHAN_MUC: Record<Muc, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần lưu ý" };

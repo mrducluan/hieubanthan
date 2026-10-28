@@ -9,14 +9,14 @@ import { CHU_DE, type LoaiTrang } from "@/lib/kien-thuc";
 import { NGAY_HIEU_LUC } from "@/lib/van-hanh";
 import type { NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
 import { ND_XEM_NGAY } from "@/app/xem-ngay-tot/noi-dung";
-import { ND_HAN_NAM, ND_LAM_NHA, ND_XONG_DAT } from "@/app/xem-tuoi-lam-nha/noi-dung";
+import { ND_HAN_NAM, ND_LAM_NHA, ND_SAO_HAN, ND_XONG_DAT } from "@/app/xem-tuoi-lam-nha/noi-dung";
 import { ND_DOI_LICH } from "@/app/doi-lich-am-duong/noi-dung";
 import type { BangChu, BangHinh } from "@/lib/chu-trang";
 import { CHU_TRANG_CHU, HINH_TRANG_CHU } from "@/lib/chu/trang-chu";
 import { CHU_HUYEN_HOC, CHU_KIEN_THUC, HINH_HUYEN_HOC } from "@/lib/chu/trang-tinh";
-import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM } from "@/lib/chu/trang-con";
+import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM } from "@/lib/chu/trang-con";
 import {
-  CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
+  CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_SAO_HAN, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
   CHU_XEM_NGAY, CHU_XONG_DAT,
 } from "@/lib/chu/cong-cu";
 
@@ -178,6 +178,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   tuNd(ND_LAM_NHA, "Xem tuổi làm nhà, cưới hỏi: Kim lâu, Hoang ốc, Tam tai", CHU_LAM_NHA),
   tuNd(ND_XONG_DAT, "Xem tuổi xông đất đầu năm hợp gia chủ, giờ đẹp mùng 1", CHU_XONG_DAT),
   tuNd(ND_HAN_NAM, "Hướng xấu theo năm: Thái Tuế, Tam Sát, Ngũ Hoàng", CHU_HAN_NAM),
+  tuNd(ND_SAO_HAN, "Xem sao hạn năm nay theo tuổi: La Hầu, Kế Đô, Thái Bạch…", CHU_SAO_HAN),   // MT-ĐS B3
   tuNd(ND_DOI_LICH, "Đổi lịch âm dương: ngày âm hôm nay, can chi, tháng nhuận", CHU_DOI_LICH),   // SEO-L5
   { duong: "/ban-than", nhom: "cong_cu", ten: "Hồ sơ bản thân", o: ["seo", "khoi_duoi", "khoi_cuoi"], mac_dinh: {
     tieu_de_seo: "Hồ sơ bản thân",
@@ -331,6 +332,8 @@ const MAU_CUM_GOC: readonly MauCumTrang[] = [
     bien: ["nam", "can_chi"], chu: CHU_LAM_NHA_NAM },
   { mau_duong: "/tuoi-xong-dat/{nam}", nhom: "cong_cu_con", ten: "Tuổi xông đất · bảng theo năm", o: O_CUM, nguon_kb: null,
     bien: ["nam", "can_chi"], chu: CHU_XONG_DAT_NAM },
+  { mau_duong: "/xem-sao-han/{nam}", nhom: "cong_cu_con", ten: "Sao hạn · bảng theo năm", o: O_CUM, nguon_kb: null,
+    bien: ["nam", "can_chi"], chu: CHU_SAO_HAN_NAM },                                                   // MT-ĐS B3
   { mau_duong: "/lich-am/{nam}", nhom: "cong_cu_con", ten: "Lịch âm · từng năm", o: O_CUM, nguon_kb: null,
     bien: ["nam", "can_chi"], chu: CHU_LICH_AM_NAM },
   { mau_duong: "/phong-thuy/huong-xau-nam/{nam}", nhom: "cong_cu_con", ten: "Hướng xấu theo năm · từng năm", o: O_CUM, nguon_kb: null,

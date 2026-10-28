@@ -147,3 +147,24 @@ def danh_gia_xong_dat(nam_am: int, nam_sinh_chu: int, nam_sinh_khach: int) -> di
 def xong_dat(nam_am: int, nam_sinh_chu: int, cac_nam_sinh) -> list[dict]:
     ds = [danh_gia_xong_dat(nam_am, nam_sinh_chu, n) for n in cac_nam_sinh if n != nam_sinh_chu]
     return sorted(ds, key=lambda x: (-x["diem"], abs(x["nam_sinh"] - nam_sinh_chu)))
+
+
+# ---- MT-ĐS B3 — sao hạn Cửu Diệu + Bát hạn theo tuổi mụ (tập quán Việt, đối chiếu 8 nguồn, xem test_sao_han.py) ----
+# Cửu Diệu: chu kỳ 9 từ tuổi 10. Bát hạn: thứ tự 8 hạn nhưng lặp theo CHU KỲ 9 — tuổi tròn chục mang cùng hạn với
+# tuổi x9 ngay trước (19–20, 29–30…): chỉ số = (tuổi − 9 − ⌊tuổi/10⌋) mod 8. Dưới 10 tuổi dân gian không tính → None.
+CUU_DIEU = {"nam": ["La Hầu", "Thổ Tú", "Thuỷ Diệu", "Thái Bạch", "Thái Dương", "Vân Hán", "Kế Đô", "Thái Âm", "Mộc Đức"],
+            "nu": ["Kế Đô", "Vân Hán", "Mộc Đức", "Thái Âm", "Thổ Tú", "La Hầu", "Thái Dương", "Thái Bạch", "Thuỷ Diệu"]}
+BAT_HAN = {"nam": ["Huỳnh Tuyền", "Tam Kheo", "Ngũ Mộ", "Thiên Tinh", "Toán Tận", "Thiên La", "Địa Võng", "Diêm Vương"],
+           "nu": ["Toán Tận", "Thiên Tinh", "Ngũ Mộ", "Tam Kheo", "Huỳnh Tuyền", "Diêm Vương", "Địa Võng", "Thiên La"]}
+
+
+def sao_han(tuoi_mu: int, gioi_tinh: str) -> str | None:
+    if tuoi_mu < 10:
+        return None
+    return CUU_DIEU[gioi_tinh][(tuoi_mu - 10) % 9]
+
+
+def bat_han(tuoi_mu: int, gioi_tinh: str) -> str | None:
+    if tuoi_mu < 10:
+        return None
+    return BAT_HAN[gioi_tinh][(tuoi_mu - 9 - tuoi_mu // 10) % 8]
