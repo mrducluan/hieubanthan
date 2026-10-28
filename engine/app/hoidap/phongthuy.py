@@ -13,7 +13,7 @@ import re
 from app.calc import phongthuy as pt
 from app.hoidap import chung
 from app.kb import phongthuy_kb as kb
-from app.luangiai import hoi as _h
+from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
 from app.narrative.ngan_sach import mo_ta_loi
 
@@ -491,4 +491,4 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
     return {"phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
             "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": goi["co_canh_bao"],
-            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong"}
+            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.phongthuy(goi)}
