@@ -1,4 +1,4 @@
-// VH-1 (docs/LUAN-GIAI-DOI-SONG.md mục 8) — chương "Vận hạn & điều nên tránh" của Luận giải Tử vi + Bát tự đời sống:
+// VH-1 (docs/LUAN-GIAI-DOI-SONG.md mục 8) — chương "Mười năm tới & điều nên tránh (vận hạn)" của Luận giải Tử vi + Bát tự đời sống:
 // dòng 10 năm (chấm màu theo mức, năm nay, cờ dân gian, bấm năm → Nên tránh / Nên làm), 12 tháng tới (Bát tự), nhãn
 // "Cần lưu ý", chương không mang chip mức, điện thoại 360px, chương khoá SAO-2 KHÔNG lộ dòng 10 năm / lời năm.
 // Báo cáo là fixture SINH TỪ ENGINE THẬT (e2e/fixtures/luan-giai-*.json). Đặt VH_ANH_DIR để lưu ảnh chụp.
@@ -36,7 +36,7 @@ test("thuần: khoá SAO-2 bỏ hẳn dòng 10 năm, lời năm và hộp cốt 
     for (const g of c.dong_nam) expect(s).not.toContain(g.y);
     for (const h of c.hop) expect(s).not.toContain(h.noi_dung);
     expect(s).not.toContain("dong_nam");
-    expect(x.chuong.find((k) => k.ma === "van_han")).toEqual({ ma: "van_han", tieu_de: "Vận hạn & điều nên tránh", khoa: true, moi_xem: c.moi_xem });
+    expect(x.chuong.find((k) => k.ma === "van_han")).toEqual({ ma: "van_han", tieu_de: "Mười năm tới & điều nên tránh (vận hạn)", khoa: true, moi_xem: c.moi_xem });
     // Lời mời trung tính: điểm nhấn là năm thuận / năm đáng dồn sức, không đếm năm phải tránh.
     expect(c.moi_xem.diem_nhan).not.toMatch(/đi chậm|lưu ý|tránh/);
     expect(c.moi_xem.cau_hoi).not.toMatch(/\d/);
@@ -49,7 +49,7 @@ test("Tử vi: dòng 10 năm — năm nay, cờ dân gian, bấm năm cần lưu
   await mo(page, "tu-vi", BC);
   await page.getByRole("button", { name: "Xem luận giải" }).click();
   const ch = page.getByTestId("lg-chuong-van_han");
-  await expect(ch.getByRole("heading", { level: 3 })).toContainText("Vận hạn & điều nên tránh");
+  await expect(ch.getByRole("heading", { level: 3 })).toContainText("Mười năm tới & điều nên tránh (vận hạn)");
   await expect(ch.getByTestId("chip-muc")).toHaveCount(0);
   await ch.getByTestId("lg-mo-chuong").click();          // Trục 1: chương sau gập sẵn
   const dong = ch.getByTestId("dong-muoi-nam");
@@ -130,7 +130,7 @@ test("SAO-2: chương Vận hạn khoá chỉ hiện tiêu đề + lời mời, 
   await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
   await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(12);
   await expect(page.getByTestId("dong-muoi-nam")).toHaveCount(0);
-  const khoa = page.getByTestId("lg-chuong-khoa").filter({ hasText: "Vận hạn & điều nên tránh" });
+  const khoa = page.getByTestId("lg-chuong-khoa").filter({ hasText: "Mười năm tới & điều nên tránh (vận hạn)" });
   await expect(khoa).toContainText(vh(FX_TV.bao_cao).moi_xem.cau_hoi);
   const chu = await page.getByTestId("luan-giai-toan-bo").innerText();
   for (const g of vh(FX_TV.bao_cao).dong_nam) expect(chu).not.toContain(g.y);

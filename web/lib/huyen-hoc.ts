@@ -21,9 +21,9 @@ export const HOI_HH = ["/than-so", "/hop-doi", "/tu-vi", "/kinh-dich", "/phong-t
 /** Năm dương lịch hiện tại theo giờ Việt Nam (chỉ để dựng link /lich-am/{năm}). */
 export const namNayVn = () => Number(new Intl.DateTimeFormat("en", { year: "numeric", timeZone: "Asia/Ho_Chi_Minh" }).format(new Date()));
 
-/** Đích của 8 công cụ lịch & tuổi (chữ: lich.ten_n / lich.mo_n). */
-export const lichHH = (nam: number) => ["/hom-nay", "/xem-ngay-tot", "/xem-tuoi-lam-nha", "/tuoi-xong-dat", "/phong-thuy/huong-xau-nam",
-  "/phong-thuy/huong-hop-tuoi", `/lich-am/${nam}`, "/doi-lich-am-duong"];
+/** Đích của 9 công cụ lịch & tuổi (chữ: lich.ten_n / lich.mo_n). */
+export const lichHH = (nam: number) => ["/hom-nay", "/xem-ngay-tot", "/xem-tuoi-lam-nha", "/tuoi-xong-dat", "/xem-sao-han",
+  "/phong-thuy/huong-xau-nam", "/phong-thuy/huong-hop-tuoi", `/lich-am/${nam}`, "/doi-lich-am-duong"];
 
 export const SO_CACH_HH = 3;
 

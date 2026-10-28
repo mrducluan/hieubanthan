@@ -286,6 +286,8 @@ def lop_doi_thuong(bc: dict) -> list[str]:
         _hop(h)
     for n in bc.get("hanh_dong") or []:
         ra.extend(n.get("viec", []) if isinstance(n, dict) else [])
+    for r in bc.get("luu_y_mang") or []:          # MT-ĐS B6: khung "Cần lưu ý ở từng mảng" cũng là lớp đời thường
+        ra.extend([r.get("ten", ""), r.get("luu_y") or "", r.get("viec") or "", r.get("ranh_gioi") or ""])
     for c in bc.get("chuong") or []:
         ra.extend([c.get("tieu_de", ""), c.get("tom_tat") or "", c.get("cau_tu_soi") or ""])
         for h in c.get("hop", []):

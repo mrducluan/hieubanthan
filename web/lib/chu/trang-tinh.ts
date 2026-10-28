@@ -34,6 +34,7 @@ const LICH: [string, string][] = [
   ["Xem ngày tốt", "Hoàng đạo, giờ tốt, việc nên làm"],
   ["Tuổi làm nhà, cưới hỏi", "Kim lâu, Hoang ốc, Tam tai"],
   ["Tuổi xông đất", "Tuổi hợp gia chủ, giờ đẹp mùng 1"],
+  ["Sao hạn theo tuổi", "La Hầu, Kế Đô… đọc bằng lời thường"],
   ["Hướng xấu theo năm", "Thái Tuế, Tam Sát, Ngũ Hoàng"],
   ["Tuổi nào hợp hướng nào", "Nam, nữ sinh 1960–2005"],
   ["Lịch âm {nam}", "Tết, tháng nhuận, mùng 1 và rằm"],
@@ -90,7 +91,7 @@ export const CHU_HUYEN_HOC = {
   "lich.nho": { nhom: "Lịch & tuổi", nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Theo lịch và tuổi dân gian", toi_da: 60 },
   "lich.lon": { nhom: "Lịch & tuổi", nhan: "Tiêu đề mục", mac_dinh: "Chọn ngày, xem tuổi, tra lịch", toi_da: 80 },
   ...Object.fromEntries(LICH.flatMap(([ten, mo], i) => [
-    [`lich.ten_${i + 1}`, { nhom: "Lịch & tuổi", nhan: `Ô ${i + 1} — tên` + (i === 6 ? " ({nam} = năm hiện tại)" : ""), mac_dinh: ten, toi_da: 40 }],
+    [`lich.ten_${i + 1}`, { nhom: "Lịch & tuổi", nhan: `Ô ${i + 1} — tên` + (i === 7 ? " ({nam} = năm hiện tại)" : ""), mac_dinh: ten, toi_da: 40 }],
     [`lich.mo_${i + 1}`, { nhom: "Lịch & tuổi", nhan: `Ô ${i + 1} — mô tả`, mac_dinh: mo, toi_da: 60 }],
   ])),
 

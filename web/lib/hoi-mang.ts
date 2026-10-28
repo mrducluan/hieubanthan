@@ -2,6 +2,7 @@
 import { fetchSao } from "@/lib/sao-client";
 import type { KetQuaHoi } from "@/components/hoi/KhungChat";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
+import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 
 export interface HoiMangRes {
   cau_tra_loi?: string;
@@ -10,6 +11,9 @@ export interface HoiMangRes {
   thuat_ngu?: ThuatNgu[];
   /** Căn cứ kỹ thuật cho "Vì sao nói vậy" (Tử vi: câu trả lời về lá của chính người hỏi). */
   can_cu?: string[];
+  /** HD-CS — khối hình engine dựng kèm câu trả lời. */
+  truc_quan?: KhoiTrucQuan[];
+  hoi_tiep?: string[];
   error?: string;
   luot?: LuotHoi;
 }
@@ -39,9 +43,11 @@ export async function hoiMang<T extends HoiMangRes>(
     ghiLuot: ghiLuot(d.luot),
     van: d.cau_tra_loi,
     thuatNgu: d.thuat_ngu,
+    trucQuan: d.truc_quan,
+    hoiTiep: d.hoi_tiep,
     canCu: d.can_cu?.length ? d.can_cu : undefined,
     phu: phu?.(d),
     canhBao: d.co_canh_bao?.filter((c) => !boQuaCanhBao.includes(c.loai)).map((c) => c.chi_tiet),
-    ghiChu: d.che_do === "llm" ? "Diễn đạt bởi AI từ kho tri thức có nguồn." : "Ghép từ kho tri thức có nguồn.",
+    ghiChu: d.che_do === "llm" ? "Diễn đạt tự động từ kho tri thức có nguồn." : "Ghép từ kho tri thức có nguồn.",
   };
 }

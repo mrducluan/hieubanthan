@@ -13,7 +13,7 @@ import re
 from app.calc import phongthuy as pt
 from app.hoidap import chung
 from app.kb import phongthuy_kb as kb
-from app.luangiai import hoi as _h
+from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
 from app.narrative.ngan_sach import mo_ta_loi
 
@@ -76,11 +76,16 @@ def phan_loai(cau_hoi: str) -> dict:
           "giai_thich": _khop(kb.giai_thich_tat_ca(), t), "ca_nhan": chung.co(t_chinh, CA_NHAN),
           "nam_sinh_cau": nam, "gioi_tinh_cau": gioi,
           "nam_xem": int(re.search(r"nam (20\d\d)", t).group(1)) if re.search(r"nam (20\d\d)", t) else None}
-    db = chung.dac_biet(t)
+    # MT-ĐS B1: gương / chuông gió / hình bát quái treo cửa = vật trang trí → trả lời kèm lưu ý, không từ chối, không tâm linh.
+    vat_treo = chung.co(t, [r"bat quai", r"chuong gio", r"treo guong", r"guong .{0,15}(chong|phan tac dung|tru)"])
+    db = None if vat_treo else chung.dac_biet(t)
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq
-    if chung.co(t, [r"vat pham", r"chieu tai", r"trung so", r"yem bua", r"bua"]):
+    if vat_treo:
+        kq.update(loai="vat_treo", xu_ly="tra_loi_kem_luu_y")
+        return kq
+    if chung.co(t, [r"vat pham", r"chieu tai", r"trung so", r"yem bua", r"(?<!\w)bua(?!\w)"]):
         kq.update(xu_ly="tu_choi_nhe", loai="dac_biet")
         return kq
     m_van = re.search(r"van ([1-9])(?!\d)", t)
@@ -103,7 +108,8 @@ def phan_loai(cau_hoi: str) -> dict:
         kq["loai"] = "cua_bep"
     elif chung.co(t, AM_TRACH) or kq["am_trach"]:
         kq.update(loai="am_trach", xu_ly="tra_loi_kem_luu_y")
-    elif chung.co(t, NAM_VIEC) and (chung.co(t, NAM_KW) or chung.co(t, [r"tuoi toi", r"xem tuoi"])):
+    elif chung.co(t, NAM_VIEC) and (chung.co(t, NAM_KW) or chung.co(t, [r"tuoi toi", r"xem tuoi"])) \
+            or chung.co(t, [r"kim lau", r"hoang oc", r"tam tai", r"nam tuoi", r"sao han", r"muon tuoi"]):   # MT-ĐS B1
         kq.update(loai="nam", xu_ly="tra_loi_kem_luu_y")
     elif chung.co(t, [r"(?<!vo )(vo|chong) (toi|minh) (sinh|tuoi|nam)"]) and nam and not chung.co(t, [r"vo chong"]):
         kq["loai"], kq["kia_ro"] = "hop", True   # nêu rõ năm sinh vợ/chồng → tính luôn mệnh quái hai người
@@ -158,6 +164,12 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int) -> dict:
         goi["mau"] = kinhdich_kb.mau("an_toan" if pl["xu_ly"] == "an_toan" else "tu_choi")
         if pl["xu_ly"] == "tu_choi_nhe":
             goi["mau"] += " " + kb.mau("tu_choi_vat_pham")
+        return chung.ket(goi)
+    if pl["xu_ly"] == "dan_huong":
+        goi["mau"] = chung.mau_dan_huong(pl["cau_chuan_hoa"])
+        return chung.ket(goi)
+    if pl["loai"] == "vat_treo":
+        goi["mau"] = kb.luu_y("vat_treo")
         return chung.ket(goi)
     for ma in pl["giai_thich"][:2]:
         g = kb.giai_thich(ma)
@@ -395,6 +407,8 @@ def _doan_nha(m: dict) -> str:
 # ------------------------------------------------------------------ NARRATIVE (template)
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
+    if l == "sao_han":
+        return chung.doan_sao_han(m), None
     if l == "menh_quai":
         ai = m.get("vai") or "bạn"
         return (f"Mệnh quái (cung phi) của {ai}: {m['quai']} ({m['nhom']}, tính theo năm {m['nam_tinh']}; "
@@ -474,7 +488,16 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     nam_xem = pl["nam_xem"] or (ngay_xem.year + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0))
     goi = goi_bang_chung(pl, sinh, nam_xem)
-    if nha and pl["xu_ly"] not in ("an_toan", "tu_choi_nhe"):
+    if chung.sao_han_hoi(pl["cau_chuan_hoa"]) and sinh and sinh.get("gioi_tinh") and not goi["can_them"] \
+            and pl["xu_ly"] not in chung.DAC_BIET:   # MT-ĐS B3 — không chèn trước lời hỗ trợ / từ chối / dẫn hướng
+        from app.calc import lunar  # noqa: PLC0415
+        from app.config import CALENDAR_MERIDIAN_TZ  # noqa: PLC0415
+        nam_am = pl["nam_xem"] or lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)[2] \
+            + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0)
+        ng = sinh.get("ngay")
+        goi["muc"].insert(0, chung.muc_sao_han(nam_am, sinh["nam"], sinh["gioi_tinh"], ng.month if ng else None, ng.day if ng else None))
+        chung.ket(goi)
+    if nha and pl["xu_ly"] not in chung.DAC_BIET:
         mn = muc_nha(pl, sinh, nha)
         if mn:
             goi["muc"].insert(0, mn)                 # trả lời theo đúng nhà trước, kiến thức chung sau
@@ -488,7 +511,7 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
             che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
-    dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
+    dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
     return {"phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
             "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": goi["co_canh_bao"],
-            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong"}
+            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.phongthuy(goi)}

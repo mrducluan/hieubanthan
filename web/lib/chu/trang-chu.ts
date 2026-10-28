@@ -34,7 +34,7 @@ const HANG: [string, string, string][] = [
   ["Cách nói", "Nói cả điểm mạnh lẫn điểm mù. Không doạ, không bán vật phẩm giải hạn.", "Dễ chiều theo cách bạn hỏi, nói điều bạn muốn nghe."],
   ["Đúng tới đâu", "Bạn tự tích nét nào đúng, nét nào chưa. Có bài còn hiện bao nhiêu phần trăm người đọc thấy đúng.",
     "Không có cách nào biết nó nói trúng tới đâu."],
-  ["Ngày sinh của bạn", "Hồ sơ lưu trên máy bạn. Phần AI diễn đạt không nhận họ tên hay ngày sinh.",
+  ["Ngày sinh của bạn", "Hồ sơ lưu trên máy bạn. Phần diễn đạt tự động không nhận họ tên hay ngày sinh.",
     "Nằm trong lịch sử trò chuyện trên máy chủ của bên thứ ba."],
 ];
 

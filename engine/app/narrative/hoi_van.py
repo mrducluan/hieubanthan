@@ -20,7 +20,7 @@ import re
 
 import httpx
 
-from app.luangiai import hoi, noi_dau
+from app.luangiai import hoi, noi_dau, truc_quan
 from app.luangiai import thanso_chaldean as _chaldea
 from app.luangiai import tong_hop as _tong_hop
 from app.narrative import llm as _llm
@@ -285,4 +285,5 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
         "loi_kiem_tra": loi,
         "can_them": goi["can_them"],
         "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong",
+        "truc_quan": truc_quan.thanso(goi),
     }

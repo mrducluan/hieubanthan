@@ -1,0 +1,188 @@
+{
+ "_nguon": "MT-ĐS B3 (2026-10-28) — sao hạn Cửu Diệu + Bát hạn theo tuổi mụ, tập quán dân gian Việt. Bảng tuổi đối chiếu 8 nguồn công khai (lịch vạn niên, trang xem sao hạn); phép tính ở engine/app/calc/tuoi_dan_gian.py. Lời viết trung tính bằng hành vi (nháp ban biên tập): không tháng kỵ, không số đèn / hướng lễ / ngày cúng / bài khấn, không vật phẩm, không tên bệnh.",
+ "source": {
+  "id": "dan_gian_viet",
+  "ten": "Tập quán xem sao hạn theo tuổi của người Việt (lịch vạn niên)"
+ },
+ "source_id": "nhap_ai_2026",
+ "school_id": "dan_gian_viet",
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": false,
+ "cau_co_dinh": "Sao hạn là tập quán xếp theo tuổi mụ và giới tính, giống nhau cho mọi người cùng tuổi — không tính từ ngày giờ sinh hay lá số của riêng bạn. Hệ thống không hướng dẫn nghi lễ, không giới thiệu thầy hay vật gì; nếu gia đình có lệ đầu năm, hãy giữ như một dịp sum họp.",
+ "cach_tinh": "Tuổi mụ = năm xem (âm lịch Việt) − năm sinh âm lịch + 1. Chín sao Cửu Diệu xoay vòng từ tuổi 10, nam và nữ khởi khác nhau; tám hạn đi kèm theo bảng riêng, tuổi tròn chục mang cùng hạn với tuổi liền trước. Dưới 10 tuổi dân gian không tính.",
+ "sao": {
+  "La Hầu": {
+   "nghia": "Dân gian xem là năm nên nói ít, nghe nhiều, giữ giấy tờ gọn gàng; chuyện miệng tiếng dễ to hơn thực tế.",
+   "viec": [
+    "Mỗi lần định nói chuyện người vắng mặt, đổi sang hỏi thẳng người đó.",
+    "Sắp lại một ngăn giấy tờ quan trọng, chụp lại bản sao.",
+    "Trước khi trả lời tin nhắn lúc bực, chờ qua một đêm."
+   ],
+   "tu_soi": "Chuyện nào gần đây bạn nói ra rồi ước gì chưa nói?"
+  },
+  "Thổ Tú": {
+   "nghia": "Dân gian xem là năm dễ nặng lòng, hay nghĩ ngợi, việc nhà việc cửa tốn công hơn bình thường.",
+   "viec": [
+    "Mỗi tuần một buổi đi bộ không điện thoại.",
+    "Chia việc nhà thành việc nhỏ, làm xong cái nào gạch cái đó.",
+    "Kể với một người thân điều đang khiến mình nặng lòng."
+   ],
+   "tu_soi": "Điều gì bạn đang gánh một mình mà có thể chia bớt?"
+  },
+  "Thuỷ Diệu": {
+   "nghia": "Dân gian xem là năm lời ăn tiếng nói và chuyện đi lại gần sông nước nên cẩn thận; tình cảm dễ nhiều cảm xúc.",
+   "viec": [
+    "Đi biển, đi thuyền thì mặc áo phao, không đi một mình lúc tối.",
+    "Chuyện quan trọng nói trực tiếp thay vì nhắn.",
+    "Giữ một cuốn sổ ghi điều đã hứa với người khác."
+   ],
+   "tu_soi": "Lời nào bạn hứa gần đây mà chưa làm?"
+  },
+  "Thái Bạch": {
+   "nghia": "Dân gian xem là năm giữ chặt tiền, bớt mua sắm theo cảm hứng, kiểm kỹ trước khi đưa tiền cho ai.",
+   "viec": [
+    "Để riêng một khoản dự phòng không đụng tới.",
+    "Khoản chi lớn chờ ba ngày rồi mới quyết.",
+    "Cho mượn tiền thì có giấy, kể cả với người quen."
+   ],
+   "tu_soi": "Khoản chi nào năm vừa rồi bạn thấy tiếc nhất, và vì sao lúc đó bạn quyết nhanh?"
+  },
+  "Thái Dương": {
+   "nghia": "Dân gian xem là năm sáng sủa cho công việc, dễ được để ý; nên tận dụng để làm việc đã định từ lâu.",
+   "viec": [
+    "Chọn một việc đã định từ lâu và bắt đầu trong tháng này.",
+    "Nhận một việc có người thấy kết quả.",
+    "Giữ sức: làm nhiều thì ngủ đủ."
+   ],
+   "tu_soi": "Việc nào bạn đã định từ lâu mà vẫn chưa bắt đầu?"
+  },
+  "Vân Hán": {
+   "nghia": "Dân gian xem là năm dễ nóng vội, dễ va chạm lời qua tiếng lại; làm gì cũng nên chậm một nhịp.",
+   "viec": [
+    "Khi thấy nóng, đi ra khỏi phòng năm phút rồi quay lại.",
+    "Giấy tờ, hợp đồng đọc hết rồi mới ký.",
+    "Mỗi tuần một buổi vận động cho hạ nhiệt."
+   ],
+   "tu_soi": "Lần gần nhất bạn nổi nóng, điều gì thật sự làm bạn bực?"
+  },
+  "Kế Đô": {
+   "nghia": "Dân gian xem là năm hay lo nghĩ, dễ buồn vu vơ, chuyện gia đình cần quan tâm hơn.",
+   "viec": [
+    "Gọi điện cho người nhà đều đặn, không chờ có việc mới gọi.",
+    "Ngủ đủ, bớt đọc tin đêm.",
+    "Khi lo, viết ra ba việc nhỏ làm được ngay."
+   ],
+   "tu_soi": "Nỗi lo nào của bạn dạo này là chuyện thật, nỗi lo nào chỉ là tưởng tượng?"
+  },
+  "Thái Âm": {
+   "nghia": "Dân gian xem là năm êm, hợp chuyện nhà cửa, chăm sóc gia đình và sức khoẻ; nữ giới hay được nhắc giữ sức.",
+   "viec": [
+    "Đi khám sức khoẻ định kỳ đầu năm.",
+    "Sửa một chỗ trong nhà đã lâu không đụng tới.",
+    "Dành một tối mỗi tuần cho gia đình, không màn hình."
+   ],
+   "tu_soi": "Trong nhà bạn, ai đang cần được hỏi han mà chưa ai hỏi?"
+  },
+  "Mộc Đức": {
+   "nghia": "Dân gian xem là năm hanh thông, dễ gặp người giúp; nên mở rộng quan hệ và học thêm điều mới.",
+   "viec": [
+    "Nhắn cảm ơn một người đã giúp mình trong năm qua.",
+    "Đăng ký học một kỹ năng đã muốn học từ lâu.",
+    "Gặp một người mới mỗi tháng."
+   ],
+   "tu_soi": "Ai là người bạn muốn giữ liên lạc nhưng đã lâu không gặp?"
+  }
+ },
+ "han": {
+  "Huỳnh Tuyền": {
+   "nghia": "Tục xưa gọi là hạn nặng, nhắc giữ sức và giữ nếp sinh hoạt; hiểu đời thường: năm nên đi chậm, không ôm thêm việc lớn.",
+   "viec": [
+    "Khám sức khoẻ định kỳ, không hoãn.",
+    "Không nhận thêm việc chỉ vì ngại từ chối.",
+    "Giữ một ngày nghỉ hẳn mỗi tuần."
+   ],
+   "tu_soi": "Bạn đang hoãn việc chăm sóc nào cho chính mình?"
+  },
+  "Tam Kheo": {
+   "nghia": "Tục xưa gắn với chân tay, đi lại; hiểu đời thường: năm nên cẩn thận khi vận động, leo trèo, đi xa.",
+   "viec": [
+    "Khởi động kỹ trước khi chơi thể thao.",
+    "Đi xa thì đi sớm, không chạy xe khi đã mệt.",
+    "Kiểm tra đồ bảo hộ, thang, giày dép trước khi dùng."
+   ],
+   "tu_soi": "Thói quen nào khi đi lại của bạn mà người thân hay nhắc?"
+  },
+  "Ngũ Mộ": {
+   "nghia": "Tục xưa gắn với hao tốn; hiểu đời thường: năm nên giữ quỹ dự phòng, bớt chi cho việc không cần.",
+   "viec": [
+    "Ghi lại mọi khoản chi trong một tháng.",
+    "Hoãn mua món lớn ba ngày rồi mới quyết.",
+    "Để riêng một khoản không đụng tới."
+   ],
+   "tu_soi": "Khoản nào bạn chi đều đặn mà không còn thấy cần?"
+  },
+  "Thiên Tinh": {
+   "nghia": "Tục xưa gắn với miệng tiếng, giấy tờ; hiểu đời thường: năm nên rõ ràng trong lời nói và hợp đồng.",
+   "viec": [
+    "Mọi thoả thuận quan trọng đều có chữ viết.",
+    "Không bàn chuyện người vắng mặt.",
+    "Đọc hết giấy tờ rồi mới ký."
+   ],
+   "tu_soi": "Thoả thuận nào của bạn hiện chỉ có lời nói miệng?"
+  },
+  "Toán Tận": {
+   "nghia": "Tục xưa gọi là hạn nặng về tiền của và sức; hiểu đời thường: năm nên giữ chặt tiền và giữ sức, không mạo hiểm.",
+   "viec": [
+    "Không góp vốn vào việc mình chưa hiểu.",
+    "Khám sức khoẻ định kỳ.",
+    "Chia việc lớn thành việc nhỏ, làm từng bước."
+   ],
+   "tu_soi": "Việc nào bạn đang muốn làm nhanh mà thật ra có thể làm chậm?"
+  },
+  "Thiên La": {
+   "nghia": "Tục xưa gắn với mệt mỏi, vướng víu; hiểu đời thường: năm dễ căng thẳng, dễ hiểu lầm với người gần.",
+   "viec": [
+    "Ngủ đủ, bớt việc đêm.",
+    "Khi căng với người nhà, nói một điều mình cần thay vì nhắc chuyện cũ.",
+    "Mỗi tuần một buổi làm việc mình thích."
+   ],
+   "tu_soi": "Bạn đang căng với ai mà chưa nói ra?"
+  },
+  "Địa Võng": {
+   "nghia": "Tục xưa gắn với vướng mắc, tiếng xấu; hiểu đời thường: năm nên giữ uy tín, làm gì cũng rõ ràng từ đầu.",
+   "viec": [
+    "Hứa ít, làm đủ.",
+    "Không ký tên hộ, không đứng tên hộ.",
+    "Nói rõ phần việc của mình trước khi bắt đầu."
+   ],
+   "tu_soi": "Lời hứa nào gần đây bạn chưa giữ được?"
+  },
+  "Diêm Vương": {
+   "nghia": "Tục xưa gắn với tin từ xa, người thân; hiểu đời thường: năm nên quan tâm gia đình, về thăm nhà nhiều hơn.",
+   "viec": [
+    "Về thăm hoặc gọi cho cha mẹ đều đặn.",
+    "Hỏi thăm người thân ở xa.",
+    "Giữ sức, không thức khuya liền nhiều ngày."
+   ],
+   "tu_soi": "Người thân nào bạn đã lâu không hỏi thăm?"
+  }
+ },
+ "hoi_dap": [
+  {
+   "hoi": "Sao hạn tính thế nào?",
+   "dap": "Theo tuổi mụ (năm xem − năm sinh âm lịch + 1) và giới tính; chín sao xoay vòng từ tuổi 10, mọi người cùng tuổi cùng giới đều chung một sao. Đây là tập quán, không phải phép tính từ lá số."
+  },
+  {
+   "hoi": "Có cần cúng sao không?",
+   "dap": "Giáo hội Phật giáo Việt Nam (công văn năm 2019) nói rõ dâng sao không phải nghi lễ Phật giáo; chùa chỉ làm lễ cầu an, không gọi là giải hạn. Hệ thống không hướng dẫn nghi lễ; nếu gia đình có lệ đầu năm, hãy giữ như một dịp sum họp và không để ai thu tiền của mình vì sợ."
+  },
+  {
+   "hoi": "Sao hạn và lá số Tử vi khác nhau thế nào?",
+   "dap": "Sao hạn xếp theo tuổi, ai cùng tuổi cùng giới đều giống nhau. Lá số Tử vi, Bát tự tính từ ngày giờ sinh của riêng bạn. Khi hai bên nói khác nhau, phần đọc từ lá số của bạn sát với bạn hơn."
+  },
+  {
+   "hoi": "Nam La Hầu, nữ Kế Đô là gì?",
+   "dap": "Câu dân gian chỉ hai sao hay được nhắc nhiều nhất cho nam và nữ. Hiểu đời thường: năm nên nói ít nghe nhiều (La Hầu) và năm nên bớt lo nghĩ, quan tâm gia đình (Kế Đô). Không có sao nào định sẵn chuyện gì sẽ xảy ra."
+  }
+ ]
+}
