@@ -91,6 +91,53 @@ def mau_dan_huong(t: str) -> str:
 
 
 DAC_BIET = ("an_toan", "tu_choi_nhe", "dan_huong")
+# MT-ĐS B2 — kiểu hỏi "thầy bảo / người ta nói …, có đúng không": không nhận xét lời người khác, chỉ đọc lại từ lá số.
+XAC_NHAN = [r"thay (boi |cung |xem )?(bao|noi|phan|ke|xem)", r"(nguoi ta|ng ta|ngta|me|ba|ong|bo|ban|bac|chi|anh|co) (toi |em |minh |chong toi |ngoai )?(bao|noi|keu|phan)",
+            r"(?<!\w)(nghe|ngta) noi", r"thay boi"]
+
+
+def xac_nhan(t: str) -> bool:
+    return co(t, XAC_NHAN)
+
+
+# MT-ĐS B3 — câu hỏi sao hạn Cửu Diệu / Bát hạn (tập quán theo tuổi). "Thái Dương / Thái Âm" trùng tên chính tinh Tử vi
+# → chỉ nhận khi đi kèm "sao hạn / chiếu mệnh / cúng sao"; các tên khác đủ riêng.
+SAO_HAN_KW = [r"sao han", r"sao (gi|nao) chieu (menh|mang)", r"(sao )?(la hau|ke do|thai bach|tho tu|thuy dieu|van han|van hon|moc duc)(?!\w)",
+              r"(thai duong|thai am) .{0,20}(chieu menh|sao han)", r"(chieu menh|cung sao|sao han|nam nay) .{0,20}(thai duong|thai am)",
+              r"(huynh tuyen|tam kheo|ngu mo|thien tinh|toan tan|thien la|dia vong|diem vuong)(?!\w)", r"han (gi|nao) nam nay",
+              r"cung sao", r"dang sao", r"han hang nam", r"nam nay .{0,15}sao (gi|nao)"]
+
+
+def sao_han_hoi(t: str) -> bool:
+    return co(t, SAO_HAN_KW)
+
+
+def muc_sao_han(nam_xem: int, nam_sinh: int, gioi_tinh: str, thang_sinh: int | None = None,
+                ngay_sinh: int | None = None) -> dict:
+    """Mục `sao_han` cho hỏi đáp: đọc `luangiai.tuoi_dan_gian.sao_han_luan` (tập quán, miễn phí), đứng TRƯỚC phần lá số
+    của năm; lời cố định nói rõ sao hạn không tính từ lá số."""
+    from app.luangiai import tuoi_dan_gian as L  # noqa: PLC0415
+    kq = L.sao_han_luan(nam_xem, nam_sinh, gioi_tinh, thang_sinh, ngay_sinh)
+    return {"loai": "sao_han", "nam": kq["nam"], "tuoi_mu": kq["tuoi_mu"], "gioi_tinh": gioi_tinh, "sao": kq["sao"],
+            "han": kq["han"], "kim_lau": kq["kim_lau"], "tam_tai": kq["tam_tai"], "cau_co_dinh": kq["cau_co_dinh"],
+            "source_id": kq["source_id"], "school_id": kq["school_id"]}
+
+
+def doan_sao_han(m: dict) -> str:
+    if not m.get("sao"):
+        return f"Dưới 10 tuổi dân gian không xếp sao hạn (tuổi mụ năm {m['nam']['nam']} là {m['tuoi_mu']}). {m['cau_co_dinh']}"
+    s, h = m["sao"], m.get("han")
+    gioi = "nam" if m["gioi_tinh"] == "nam" else "nữ"
+    ra = (f"Theo tục xếp theo tuổi, {gioi} {m['tuoi_mu']} tuổi mụ năm {m['nam']['can_chi']} ({m['nam']['nam']}) gặp sao "
+          f"{s['ten']}" + (f", hạn {h['ten']}" if h else "") + f". {s['nghia']}")
+    if h:
+        ra += f" {h['nghia']}"
+    ra += " Việc nên làm: " + "; ".join(v.rstrip(".") for v in s["viec"][:2]) + "."
+    co = [x for x in (f"Kim lâu {m['kim_lau']}" if m.get("kim_lau") else None,
+                      f"Tam tai năm thứ {m['tam_tai']}" if m.get("tam_tai") else None) if x]
+    if co:
+        ra += " Cùng năm theo tục: " + ", ".join(co) + "."
+    return ra + " " + m["cau_co_dinh"] + " Phần dưới là điều lá số của riêng bạn nói về năm này."
 
 
 def linh_vuc_doi_song(t: str) -> str | None:

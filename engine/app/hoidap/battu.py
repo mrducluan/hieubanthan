@@ -15,7 +15,7 @@ import datetime as dt
 import re
 
 from app.calc import battu_mo_rong, battu as bt
-from app.hoidap import chung
+from app.hoidap import chung, doi_song_muc as dsm
 from app.kb import battu_kb as kb
 from app.luangiai import hoi as _h
 from app.narrative import hoi_van
@@ -60,7 +60,7 @@ CHU_DE = [
     ("an_toan", [r"an toan", r"tai nan", r"do mau", r"cuop giat", r"di bien", r"lai xe", r"kiep sat", r"duong nhan",
                  r"xe tai", r"can than gi"]),
     ("hoc_hanh", [r"hoc hanh", r"thi (lai|dai hoc|dau|do|vao)", r"khoi (tu nhien|xa hoi|a|b|c|d)(?!\w)", r"nghien cuu",
-                  r"hoc them", r"bang luat", r"hoc (gi|khoi|nganh)", r"lam thay", r"thay giao", r"long bong", r"thi .{0,15}dau (khong|ko)",
+                  r"hoc them", r"bang luat", r"thac si", r"tien si", r"hoc (gi|khoi|nganh|len|cao)", r"bang (cap|dai hoc)", r"lam thay", r"thay giao", r"long bong", r"thi .{0,15}dau (khong|ko)",
                   r"thi gi", r"(?<!\w)rot (roi|dai hoc)"]),
     ("quan_he", [r"quy nhan", r"thien at", r"hop tac", r"nguoi lon tuoi", r"canh tranh", r"(?<!\w)ghet(?!\w)", r"ban be",
                  r"ty kien nhieu", r"tam hop voi minh"]),
@@ -122,6 +122,7 @@ def phan_loai(cau_hoi: str) -> dict:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq
     kq["lo_so"] = chung.co(t_chinh, LO_SO)
+    kq["sao_han"] = chung.sao_han_hoi(t)
     if chung.co(t, HOP):
         kq["loai"] = "hop"
     elif chung.co(t, CON):
@@ -138,6 +139,7 @@ def phan_loai(cau_hoi: str) -> dict:
         kq["loai"] = "ky_thuat"
     elif chung.co(t_chinh, VAN):
         kq.update(loai="van", xu_ly="tra_loi_kem_luu_y")
+        kq["chu_de"] = next((cd for cd, mau in CHU_DE if chung.co(t_chinh, mau)), None)   # MT-ĐS B2: mảng của câu vận
     else:
         kq["loai"] = "la_so"
         kq["chu_de"] = next((cd for cd, mau in CHU_DE if chung.co(t_chinh, mau)), None)
@@ -375,9 +377,41 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
     return chung.ket(goi)
 
 
+def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -> None:
+    """MT-ĐS B2: mượn chương báo cáo đời sống Bát tự cho chủ đề của câu hỏi (câu vận → "Năm nay")."""
+    from app.luangiai import battu_doi_song as bds  # noqa: PLC0415
+    t = pl["cau_chuan_hoa"]
+    if pl["loai"] == "van":
+        chuong = ("cuoc_doi" if chung.co(t, [r"hau van", r"ve gia", r"tuoi gia", r"nghi huu"])
+                  else dsm.CHU_DE_CHUONG.get(pl["chu_de"] or "") or "nam_nay")
+    else:
+        chuong = dsm.CHU_DE_CHUONG.get(pl["chu_de"] or "")
+        if pl["chu_de"] == "nghe_tien" and chung.co(t, [r"tien", r"giau", r"ngheo", r"tai van", r"tich luy", r"dau tu", r"(?<!\w)no(?!\w)",
+                                                        r"mua dat", r"ban (dat|nha)", r"tai loc", r"hao"]):
+            chuong = "tien_bac"
+    if not chuong:
+        return
+    try:
+        bc = bds.lap(sinh, ngay_xem, ls=ls)
+    except Exception:  # noqa: BLE001
+        return
+    m = dsm.muc_doi_song(bc, chuong, lo_so=bool(pl.get("lo_so")))
+    if not m:
+        return
+    if pl.get("lo_so"):
+        goi["muc"].insert(1 if goi["muc"] and goi["muc"][0]["loai"] == "tu_tru" else 0, m)
+    else:
+        goi["muc"].append(m)
+    chung.ket(goi)
+
+
 # ------------------------------------------------------------------ NARRATIVE (template)
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
+    if l == "doi_song":
+        return dsm.doan_doi_song(m), None
+    if l == "sao_han":
+        return chung.doan_sao_han(m), None
     if l == "than_sat":
         tt = m["tru_ten"]
         co = {x["ten"] for x in m["ds"]}
@@ -507,6 +541,20 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         ls = bt.la_so(sinh["lich"], sinh["gioi_tinh"], sinh.get("gio_ty", "da_ty"))
     hien_tai = ngay_xem if not pl["nam_xem"] and nam_xem == ngay_xem.year else None
     goi = goi_bang_chung(pl, ls, sinh["gioi_tinh"] if sinh else None, nam_xem, hien_tai)
+    if ls is not None and pl["loai"] in ("la_so", "van") and not goi["can_them"]:
+        _them_doi_song(goi, pl, sinh, ngay_xem, ls)
+    if pl.get("sao_han") and sinh and not goi["can_them"]:
+        from app.calc import lunar  # noqa: PLC0415
+        from app.config import CALENDAR_MERIDIAN_TZ  # noqa: PLC0415
+        nam_am = pl["nam_xem"] or lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)[2] \
+            + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0)
+        d = sinh["lich"]
+        goi["muc"].insert(1 if goi["muc"] and goi["muc"][0]["loai"] == "tu_tru" else 0,
+                          chung.muc_sao_han(nam_am, d.year, sinh["gioi_tinh"], d.month, d.day))
+        chung.ket(goi)
+    if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
+        goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
+        chung.ket(goi)
     van = van_template(goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:

@@ -407,6 +407,8 @@ def _doan_nha(m: dict) -> str:
 # ------------------------------------------------------------------ NARRATIVE (template)
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
+    if l == "sao_han":
+        return chung.doan_sao_han(m), None
     if l == "menh_quai":
         ai = m.get("vai") or "bạn"
         return (f"Mệnh quái (cung phi) của {ai}: {m['quai']} ({m['nhom']}, tính theo năm {m['nam_tinh']}; "
@@ -486,6 +488,14 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     nam_xem = pl["nam_xem"] or (ngay_xem.year + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0))
     goi = goi_bang_chung(pl, sinh, nam_xem)
+    if chung.sao_han_hoi(pl["cau_chuan_hoa"]) and sinh and sinh.get("gioi_tinh") and not goi["can_them"]:   # MT-ĐS B3
+        from app.calc import lunar  # noqa: PLC0415
+        from app.config import CALENDAR_MERIDIAN_TZ  # noqa: PLC0415
+        nam_am = pl["nam_xem"] or lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)[2] \
+            + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0)
+        ng = sinh.get("ngay")
+        goi["muc"].insert(0, chung.muc_sao_han(nam_am, sinh["nam"], sinh["gioi_tinh"], ng.month if ng else None, ng.day if ng else None))
+        chung.ket(goi)
     if nha and pl["xu_ly"] not in chung.DAC_BIET:
         mn = muc_nha(pl, sinh, nha)
         if mn:

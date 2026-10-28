@@ -47,6 +47,7 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Phong thuỷ nhà](${urlDayDu("/phong-thuy")}): mệnh quái Bát trạch, hướng tốt/xấu, khảo sát bố cục nhà, đo hướng bằng la bàn điện thoại.`,
     `- [Xem tuổi làm nhà, cưới hỏi](${urlDayDu("/xem-tuoi-lam-nha")}): tuổi mụ có phạm Kim lâu, Hoang ốc, Tam tai không, năm thuận gần nhất; trang theo năm sinh dạng ${urlDayDu("/xem-tuoi-lam-nha/2027/tuoi-1990")}, bảng mọi tuổi một năm dạng ${urlDayDu("/xem-tuoi-lam-nha/2027")}.`,
     `- [Hướng xấu theo năm](${urlDayDu("/phong-thuy/huong-xau-nam")}): Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc + bàn phi tinh 9 cung (dạng ${urlDayDu("/phong-thuy/huong-xau-nam/2027")}).`,
+    `- [Sao hạn theo tuổi](${urlDayDu("/xem-sao-han")}): sao Cửu Diệu của năm theo tuổi mụ và giới tính, lời đời thường + việc nên làm, không hướng dẫn cúng sao (bảng mọi tuổi dạng ${urlDayDu("/xem-sao-han/2027")}).`,
     `- [Tuổi xông đất](${urlDayDu("/tuoi-xong-dat")}): tuổi hợp gia chủ cho Tết, tuổi nên tránh, giờ hoàng đạo mùng 1 (dạng ${urlDayDu("/tuoi-xong-dat/2027/tuoi-1990")}; bảng mọi tuổi gia chủ dạng ${urlDayDu("/tuoi-xong-dat/2027")}).`,
     `- [Xem ngày tốt](${urlDayDu("/xem-ngay-tot")}): hoàng lịch theo giờ Việt Nam — hoàng đạo/hắc đạo, trực, giờ hoàng đạo, việc nên làm/kiêng, tuổi xung; tìm ngày đẹp cưới hỏi, khai trương, về nhà mới cho tuổi người dùng.`,
     `- [Đổi lịch âm dương](${urlDayDu("/doi-lich-am-duong")}): đổi ngày dương ↔ âm theo âm lịch Việt Nam (giờ Hà Nội), can chi, tháng nhuận; lịch âm cả năm dạng ${urlDayDu("/lich-am/2027")}.`,

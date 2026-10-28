@@ -42,6 +42,8 @@ export interface NamVanHan {
   nam: number; tuoi: number; muc: Muc; nhan_muc: string; hien_tai: boolean; co: CoNam[]; mang: string | null;
   y: string; nen_tranh: string | null; nen_lam: string | null; can_cu: string[];
   muc_cach_1?: Muc; muc_cach_2?: Muc; hai_cach_khac?: boolean;
+  /** MT-ĐS B3: sao hạn + hạn theo tục xếp theo tuổi (chỉ hiện, không đổi mức). */
+  sao_han?: { sao: string; han: string | null } | null;
 }
 /** VH-1 Bát tự — 12 tháng tới theo tiết. */
 export interface ThangToi { tu: string; den: string; muc: Muc; nhan_muc: string; hai_cach_khac: boolean; mang: string }

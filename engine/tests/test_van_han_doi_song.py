@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""VH-1 — chương "Vận hạn & điều nên tránh" (Tử vi + Bát tự đời sống) và cân lại nhãn mức
+"""VH-1 — chương "Mười năm tới & điều nên tránh (vận hạn)" (Tử vi + Bát tự đời sống) và cân lại nhãn mức
 (`docs/LUAN-GIAI-DOI-SONG.md` mục 8).
 
 Viết trước khi nối chương vào báo cáo: luật điểm năm Tử vi trên lá dựng tay (tứ hoá theo can năm, cung chính, cờ dân
@@ -120,7 +120,7 @@ def test_chuong_van_han_hop_dong(mo_dun, bc_tv, bc_bt):
     ma = [c["ma"] for c in b["chuong"]]
     assert ma[ma.index("nam_nay") + 1] == "van_han" and ma[-1] == "loi_khuyen"
     c = _vh(b)
-    assert c["tieu_de"] == "Vận hạn & điều nên tránh" and c["muc"] is None and c["nhan_muc"] is None
+    assert c["tieu_de"] == "Mười năm tới & điều nên tránh (vận hạn)" and c["muc"] is None and c["nhan_muc"] is None
     assert (mo_dun, "van_han") in toan_bo.CAU_HOI_MO
     dn = c["dong_nam"]
     assert len(dn) == dsc.SO_NAM_VAN_HAN and [g["hien_tai"] for g in dn] == [True] + [False] * 9

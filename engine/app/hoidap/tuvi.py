@@ -18,7 +18,7 @@ import unicodedata
 from app import config
 from app.calc import lunar, tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
 from app.calc import tuvi_luu_nguyet as ln
-from app.hoidap import chung
+from app.hoidap import chung, doi_song_muc as dsm
 from app.kb import tuvi_doi_song_kb as kds
 from app.kb import tuvi_kb as kb
 from app.kb import tuvi_phi_hoa_kb as pkb
@@ -323,6 +323,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
         kq.update(xu_ly=db, loai="dac_biet")
         return kq
     kq["lo_so"] = chung.co(t_chinh, LO_SO)
+    kq["sao_han"] = chung.sao_han_hoi(t)
     if chung.co(t, SINH_CON_TUOI):
         kq["loai"] = "sinh_con_tuoi"
     elif chung.co(t, HOP_LAM_AN):
@@ -812,6 +813,29 @@ def _soi_cung_han(ls: dict, ten: str, vh: dict) -> list[dict]:
     return ra
 
 
+def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -> None:
+    """MT-ĐS B2: mượn chương báo cáo đời sống cho mảng của câu hỏi (cung hỏi → chương; hạn không cung → "Năm nay").
+    Kiểu "có bị … không" đặt mục này LÊN ĐẦU (mở bằng mức của mảng sống hằng ngày). Lỗi dựng báo cáo → bỏ qua, câu trả
+    lời vẫn như cũ."""
+    from app.luangiai import tuvi_doi_song as tds  # noqa: PLC0415 — tránh vòng import
+    cung = pl["cung"][0] if pl["cung"] else None
+    chuong = dsm.CUNG_CHUONG.get(cung) if cung else ("nam_nay" if pl["loai"] == "han" else None)
+    if not chuong:
+        return
+    try:
+        bc = tds.lap(sinh, ngay_xem, ls=ls)
+    except Exception:  # noqa: BLE001 — báo cáo đời sống là lớp thêm, không được làm hỏng hỏi đáp
+        return
+    m = dsm.muc_doi_song(bc, chuong, lo_so=bool(pl.get("lo_so")))
+    if not m:
+        return
+    if pl.get("lo_so"):
+        goi["muc"].insert(0, m)
+    else:
+        goi["muc"].append(m)
+    chung.ket(goi)
+
+
 def _cac_dai_han(ls: dict) -> list[dict]:
     return [{"cung_goc": c["ten"], "tu_tuoi": c["dai_han"][0], "den_tuoi": c["dai_han"][1]}
             for c in sorted(ls["cung"], key=lambda c: c["dai_han"][0])]
@@ -1225,6 +1249,10 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         return f"{m['tieu_de']}: {m['noi_dung']}", None
     if l == "ghi_chu":
         return m["noi_dung"], None
+    if l == "doi_song":
+        return dsm.doan_doi_song(m), None
+    if l == "sao_han":
+        return chung.doan_sao_han(m), None
     return "", None
 
 
@@ -1239,6 +1267,8 @@ def _ghep(goi: dict) -> tuple[list[str], list[str], list[str]]:
             if d:
                 cu.append(d)
             d = m["doi_thuong"]
+        if m["loai"] == "doi_song":
+            cu.extend(m.get("can_cu_ds", []))
         if d:
             doan.append(d)
         if s and not soi:
@@ -1252,7 +1282,9 @@ def goi_cho_llm(goi: dict) -> dict:
     Mục không có `doi_thuong` (câu hỏi kiến thức chung) giữ nguyên."""
     muc = []
     for m in goi["muc"]:
-        if "doi_thuong" not in m:
+        if m.get("loai") in ("doi_song", "sao_han"):      # MT-ĐS B2/B3: căn cứ kỹ thuật ở lại "Vì sao nói vậy"
+            muc.append({"loai": m["loai"], "noi_dung": dsm.doan_doi_song(m) if m["loai"] == "doi_song" else chung.doan_sao_han(m)})
+        elif "doi_thuong" not in m:
             muc.append(m)
         elif m["doi_thuong"]:
             muc.append({"loai": m.get("loai"), "noi_dung": m["doi_thuong"],
@@ -1335,6 +1367,16 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
             nam_am = lunar.solar_to_lunar(xem_phi.day, xem_phi.month, xem_phi.year, config.CALENDAR_MERIDIAN_TZ)[2]
             them["phi"] = phl.lap(ls, ls["can_nam"], nam_am if (ch.get("han") or yd == "tong_quan_nam") else None)
     goi = goi_bang_chung(pl, ls, vh, vh_toi, lnm, them)
+    if ls is not None and pl["loai"] in ("la_so", "han") and not goi["can_them"]:
+        _them_doi_song(goi, pl, sinh, ngay_xem, ls)
+    if pl.get("sao_han") and sinh and not goi["can_them"]:
+        nam_xem = pl["nam_xem"] or lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, config.CALENDAR_MERIDIAN_TZ)[2] \
+            + (1 if pl["han_sau"] else 0)
+        goi["muc"].insert(0, chung.muc_sao_han(nam_xem, sinh["ngay"].year, sinh["gioi_tinh"], sinh["ngay"].month, sinh["ngay"].day))
+        chung.ket(goi)
+    if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
+        goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
+        chung.ket(goi)
     van = van_template(goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:

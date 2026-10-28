@@ -101,7 +101,7 @@ CHUONG = [
     ("suc_khoe", "Sức khoẻ & năng lượng", "Tôi nên giữ sức thế nào?"),
     ("quan_he", "Bạn bè, đồng nghiệp, người bên ngoài", "Tôi làm việc với người khác thế nào?"),
     ("nam_nay", "Năm nay & tháng tới", "Năm nay và mấy tháng tới của tôi thế nào?"),
-    ("van_han", "Vận hạn & điều nên tránh", "Mười năm tới năm nào nên đi chậm, và chậm ở chuyện gì?"),
+    ("van_han", "Mười năm tới & điều nên tránh (vận hạn)", "Mười năm tới năm nào nên đi chậm, và chậm ở chuyện gì?"),
     ("loi_khuyen", "Lời khuyên dành cho bạn", "Tôi nên làm gì từ đây?"),
 ]
 CHUONG_COT_LOI = ("tong_quan", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "hoc_tap", "quan_he")
@@ -1266,6 +1266,7 @@ def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int, vt: dict 
         ra.append({"nam": nam, "tuoi": tuoi, "muc": muc, "nhan_muc": kb.nhan_muc(muc), "muc_cach_1": m1, "muc_cach_2": m2,
                    "hai_cach_khac": m1 != m2, "hien_tai": k == 0,
                    "co": [dsc.co_ra(x, kb.van_han_loi("co", x)) for x in co],
+                   "sao_han": dsc.sao_han_nam(tuoi + 1, ls.get("_gioi_tinh")),      # tuổi mụ = tuổi + 1
                    "mang": mang, "y": y, "nen_tranh": nen_tranh, "nen_lam": nen_lam, "can_cu": cu,
                    "_tt": tt, "_gd": gd, "_k": k, "_diem": _SO_MUC[m1] + _SO_MUC[m2], "_nhan": nhan})
     for g in ra:

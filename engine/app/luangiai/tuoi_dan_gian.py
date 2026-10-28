@@ -230,3 +230,60 @@ def xong_dat_nam(nam: int) -> dict:
                          "gio_hoang_dao": [{"chi": g["chi"], "khung": g["khung"]} for g in m1["gio_hoang_dao"]],
                          "huong": m1["huong"]},
             **_meta()}
+
+
+# ---- MT-ĐS B3 — sao hạn Cửu Diệu + Bát hạn (tập quán, miễn phí; KB sao_han_kb.json) ------------------------------
+SH = json.loads((Path(__file__).parents[1] / "kb" / "data" / "sao_han_kb.json").read_text(encoding="utf-8"))
+
+
+def _meta_sh() -> dict:
+    return {"nguon": SH["source"]["ten"], "source_id": SH["source_id"], "school_id": SH["school_id"],
+            "trang_thai": SH["trang_thai"], "cau_co_dinh": SH["cau_co_dinh"], "cach_tinh": SH["cach_tinh"]}
+
+
+def _o_sao(ten: str | None, bang: str) -> dict | None:
+    if not ten:
+        return None
+    o = SH[bang][ten]
+    return {"ten": ten, "nghia": o["nghia"], "viec": list(o["viec"]), "tu_soi": o["tu_soi"]}
+
+
+def sao_han_luan(nam: int, nam_sinh: int, gioi_tinh: str, thang_sinh: int | None = None,
+                 ngay_sinh: int | None = None) -> dict:
+    """Sao hạn + hạn của một người trong năm âm `nam` (tuổi mụ theo năm âm lịch Việt), kèm cờ dân gian cùng năm
+    (Kim lâu, Tam tai — đọc lại calc). Không dự báo; lời ở KB."""
+    nsa = nam_am_sinh(nam_sinh, thang_sinh, ngay_sinh)
+    tuoi = t.tuoi_mu(nsa, nam)
+    can_n, chi_n = t.can_chi_nam(nam)
+    can_s, chi_s = t.can_chi_nam(nsa)
+    sao, han = _o_sao(t.sao_han(tuoi, gioi_tinh), "sao"), _o_sao(t.bat_han(tuoi, gioi_tinh), "han")
+    kl = t.kim_lau(tuoi)
+    tt = t.pham_tam_tai(chi_s, chi_n)
+    if sao:
+        tra_loi = (f"Theo tục xếp theo tuổi, {'nam' if gioi_tinh == 'nam' else 'nữ'} {tuoi} tuổi mụ (sinh {nam_sinh}, "
+                   f"{can_s} {chi_s}) năm {nam} ({can_n} {chi_n}) gặp sao {sao['ten']}"
+                   + (f", hạn {han['ten']}" if han else "") + f". {sao['nghia']} Đó là tập quán, không tính từ lá số bạn.")
+    else:
+        tra_loi = f"Dưới 10 tuổi dân gian không xếp sao hạn; tuổi mụ năm {nam} là {tuoi}."
+    return {"tra_loi_nhanh": tra_loi, "nam": {"nam": nam, "can_chi": f"{can_n} {chi_n}"},
+            "nguoi": {"nam_sinh": nam_sinh, "can_chi": f"{can_s} {chi_s}", "gioi_tinh": gioi_tinh},
+            "tuoi_mu": tuoi, "uoc_luong_nam_sinh": not (thang_sinh and ngay_sinh), "sao": sao, "han": han,
+            "kim_lau": KB["kim_lau"][kl]["ten"] if kl else None, "tam_tai": tt,
+            "hoi_dap": SH["hoi_dap"], **_meta_sh(), "luu_y": LUU_Y}
+
+
+def sao_han_nam(nam: int) -> dict:
+    """Bảng sao hạn năm `nam` cho tuổi sinh 1960–2005, hai giới (một trang, không trang theo tuổi) + lời từng sao."""
+    can_n, chi_n = t.can_chi_nam(nam)
+    ds = []
+    for ns in NAM_SINH_SEO:
+        tuoi = t.tuoi_mu(ns, nam)
+        ds.append({"nam_sinh": ns, "can_chi": " ".join(t.can_chi_nam(ns)), "tuoi_mu": tuoi,
+                   "nam": t.sao_han(tuoi, "nam"), "nu": t.sao_han(tuoi, "nu"),
+                   "han_nam": t.bat_han(tuoi, "nam"), "han_nu": t.bat_han(tuoi, "nu")})
+    sao = [{"ten": k, **v} for k, v in SH["sao"].items()]
+    han = [{"ten": k, **v} for k, v in SH["han"].items()]
+    tra_loi = (f"Năm {nam} ({can_n} {chi_n}) sao hạn xếp theo tuổi mụ và giới tính: bảng dưới ghi sao của từng tuổi sinh "
+               f"1960–2005 cho nam và nữ. Đây là tập quán giống nhau cho mọi người cùng tuổi, không tính từ lá số riêng.")
+    return {"nam": nam, "can_chi": f"{can_n} {chi_n}", "ds": ds, "sao": sao, "han": han, "tra_loi_nhanh": tra_loi,
+            "hoi_dap": SH["hoi_dap"], **_meta_sh(), "luu_y": LUU_Y}
