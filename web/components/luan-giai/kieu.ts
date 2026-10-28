@@ -95,9 +95,17 @@ export interface BaoCaoDoiSong {
   so_khoa?: number;
   cot_loi?: Hop[];
   thoi_gian_bieu?: MocDaiHan[];
+  /** MT-ĐS B6: khung "Cần lưu ý ở từng mảng hay hỏi" (7 mảng; dòng của chương khoá SAO-2 chỉ còn tên + mức). */
+  luu_y_mang?: LuuYMang[];
   chuong: (ChuongDoiSongMo | ChuongKhoa)[];
   phi?: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null;
     /** SAO-V: chương bạn bè tặng. */ chuong_tang?: number; chuong_tang_ma?: string };
+}
+
+export interface LuuYMang {
+  ma: string; ten: string; muc: Muc; nhan_muc: string; tu_chuong: string;
+  luu_y?: string | null; viec?: string | null; ranh_gioi?: string | null; ma_mau?: string | null; can_cu?: string[];
+  /** Chương gốc chưa mở (SAO-2): chỉ hiện tên + mức. */ khoa?: boolean;
 }
 
 export const NHAN_MUC: Record<Muc, string> = { thuan: "Thuận lợi", can_bang: "Cân bằng", can_chu_dong: "Cần lưu ý" };

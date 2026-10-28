@@ -1187,5 +1187,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     cot_loi = dsc.them_cot_loi_van_han(chon_cot_loi(ds), ds, nam_am_xem)
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).
     kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
-    return _sach({"phien_ban": PHIEN_BAN, "cot_loi": cot_loi, "thoi_gian_bieu": tgb, "chuong": ds,
+    from app.luangiai import luu_y_mang as lym  # noqa: PLC0415
+    luu_y_mang = lym.dung(ds, "tuvi", muc_cung={k: v["muc"] for k, v in cc.items()})
+    return _sach({"phien_ban": PHIEN_BAN, "cot_loi": cot_loi, "thoi_gian_bieu": tgb, "chuong": ds, "luu_y_mang": luu_y_mang,
                   "tuoi_mu": vh["tuoi_mu"], "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

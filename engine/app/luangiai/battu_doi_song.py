@@ -1524,5 +1524,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).
     kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
     tgb_ra = [{k: v for k, v in g.items() if k != "thap_than"} for g in tgb]
+    from app.luangiai import luu_y_mang as lym  # noqa: PLC0415
+    luu_y_mang = lym.dung(ds, "battu", muc_mang={k: v.get("muc") for k, v in cm.items() if isinstance(v, dict)})
     return _sach({"phien_ban": PHIEN_BAN, "phai": "tu_binh", "cot_loi": cot_loi, "thoi_gian_bieu": tgb_ra, "chuong": ds,
-                  "ngay_xem": ngay_xem.isoformat(), **kb.meta()})
+                  "luu_y_mang": luu_y_mang, "ngay_xem": ngay_xem.isoformat(), **kb.meta()})
