@@ -58,6 +58,8 @@ export function TuVi() {
   const [thangNhuan, setThangNhuan] = useState<"thang_sau" | "thang_chinh">("thang_sau");
   // TV-LICH (chủ dự án yêu cầu 2026-10-02): âm lịch Việt Nam (mặc định) ↔ lịch Trung Quốc.
   const [lich, setLich] = useState<"viet" | "trung">("viet");
+  // TP-GON: khung Trường phái thu gọn — giữ trạng thái mở ở đây vì lá số tạm gỡ mỗi lần engine an lại.
+  const [moPhai, setMoPhai] = useState(false);
   // TP-LICH: hồ sơ nhập ngày âm theo lịch Trung Quốc → mở lá số theo lịch đó (người dùng vẫn đổi được).
   const lichHoSo = hoSo?.lich_am;
   useEffect(() => { if (lichHoSo === "trung") setLich("trung"); }, [lichHoSo]);
@@ -158,7 +160,8 @@ export function TuVi() {
               hoaLinh={hoaLinh} setHoaLinh={setHoaLinh}
               thangNhuan={thangNhuan} setThangNhuan={setThangNhuan}
               coNhuan={!!ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh"}
-              luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }} />
+              luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }}
+              mo={moPhai} doiMo={(v) => { setMoPhai(v); if (v) ghi("chart_interacted", { mo_dun: "tuvi", kind: "mo_truong_phai" }); }} />
             {/* Lá số: điện thoại mặc định thu vừa màn hình, "Phóng to" để đọc chữ rõ rồi vuốt (Trục 1 — KhungLaSo) */}
             <KhungLaSo chon={chiChon} chan={<ChanLaSo giaoDien={giaoDien} tieuDe="Lá số Tử vi" duong="/tu-vi" />}>
               <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={hoSo?.ho_ten} gioSinh={gioHienThi(hoSo)}
