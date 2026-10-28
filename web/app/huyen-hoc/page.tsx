@@ -40,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 // Biểu tượng theo vị trí: câu băn khoăn (HOI_HH) và công cụ lịch & tuổi (lichHH) — đích + chữ ở lib/huyen-hoc.ts / bảng chữ.
 const ICON_HOI: LucideIcon[] = [UserRound, HeartHandshake, Sparkles, MessageCircleQuestion, Home, CalendarCheck];
-const ICON_LICH: LucideIcon[] = [Sun, CalendarCheck, Home, DoorOpen, Compass, Navigation, CalendarDays, Repeat];
+const ICON_LICH: LucideIcon[] = [Sun, CalendarCheck, Home, DoorOpen, Sparkles, Compass, Navigation, CalendarDays, Repeat];
 const CACH: LucideIcon[] = [ListOrdered, BookOpen, MoonStar];   // SO_CACH_HH lớp
 
 export default async function HuyenHoc() {
