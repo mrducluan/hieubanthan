@@ -17,7 +17,7 @@ import re
 from app.calc import battu_mo_rong, battu as bt
 from app.hoidap import chung, doi_song_muc as dsm
 from app.kb import battu_kb as kb
-from app.luangiai import hoi as _h
+from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
 from app.narrative.ngan_sach import mo_ta_loi
 
@@ -572,4 +572,4 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
     return {"phan_loai": goi["phan_loai"], "la_so": ls, "bang_chung": goi, "cau_tra_loi": van,
             "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": co,
-            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong"}
+            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.battu(goi)}

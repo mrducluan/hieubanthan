@@ -108,7 +108,7 @@ export function PhongThuy() {
       {mq && <div className="mx-auto max-w-3xl"><CuoiBaiDoc moDun="phongthuy" cauHoi="Phần hướng nhà và bố trí có giúp ích cho bạn?" maYDinh="nha_cua" /></div>}
 
       <section aria-label="Hỏi Phong thuỷ" className="mt-10">
-        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp cùng AI"}</h2>
+        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp chuyên sâu"}</h2>
           <KhungChat
             moDun="phongthuy"
             loiChao={nhaHoi ? "Hỏi về bếp, giường, cửa, nhà vệ sinh… của nhà bạn — câu trả lời đọc theo hồ sơ nhà đang lưu trên máy bạn, hệ thống không lưu lại."
