@@ -6,6 +6,7 @@ import { CuoiBaiDoc } from "@/components/khung/CuoiBaiDoc";
 import { batDauDoc } from "@/lib/do-luong";
 import { DauMang } from "@/components/huyen-hoc/KhungMang";
 import { VeQue, type Quai } from "@/components/huyen-hoc/VeQue";
+import { TrucQuan } from "@/components/hoi/TrucQuan";
 import { Input, Select } from "@/components/ui/input";
 import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
 import { cn } from "@/lib/utils";
@@ -190,12 +191,20 @@ export function KinhDich() {
     const thoiDiemMH = nhanThoiDiem(mh?.thoi_diem);
     const tdg = d.thoi_diem_gieo ?? null;
     const idDq = `dq-${Date.now()}`;
+    const hao = kq.trucQuan?.some((k) => k.kieu === "hao") ? kq.trucQuan.filter((k) => k.kieu === "hao") : undefined;
     const phu = (
       <KetQuaQue giaTri={giaTri} nghiThuc={nghiThuc} cach={cachGui} van={van} thuatNgu={kq.thuatNgu} canCu={kq.canCu} ghiChu={kq.ghiChu} canhBao={kq.canhBao}
+        trucQuan={hao}
         onHien={() => { batDauDoc("kinhdich"); setCoQue(true); }}>
         <div className="glass rounded-2xl p-4" data-testid="que">
           <div className="flex flex-wrap gap-8">
-            <VeQue q={que.quai_ban} dong={que.hao_dong} nhan="Quẻ bản" />
+            {/* HD-CS đợt 3 (ý 4): có khối hào engine dựng → quẻ bản bấm được từng hào; không có (engine cũ) → hình tĩnh như trước. */}
+            {hao ? (
+              <div className="min-w-[15rem] flex-1">
+                <TrucQuan ds={hao} />
+                <p className="mt-2 font-serif text-xl" data-testid="ten-que-ban">{que.quai_ban.ten} <span className="text-xs text-fg-faint">quẻ {que.quai_ban.so_king_wen}</span></p>
+              </div>
+            ) : <VeQue q={que.quai_ban} dong={que.hao_dong} nhan="Quẻ bản" />}
             {que.quai_bien && <VeQue q={que.quai_bien} nhan="Quẻ biến" />}
           </div>
           <ChanQr className="max-w-sm" nhan="Quét để gieo quẻ của bạn" />
@@ -236,7 +245,7 @@ export function KinhDich() {
       </KetQuaQue>
     );
     // Lời chính, giải nghĩa, cảnh báo, ghi chú được vẽ TRONG KetQuaQue (sau khi lật xong) — không trả cho KhungChat.
-    return { ...kq, van: undefined, thuatNgu: undefined, canCu: undefined, ghiChu: undefined, canhBao: undefined, phu };
+    return { ...kq, van: undefined, thuatNgu: undefined, canCu: undefined, ghiChu: undefined, canhBao: undefined, trucQuan: undefined, phu };
   }
 
   return (

@@ -425,6 +425,13 @@ def api_tu_dien(mo_dun: str | None = None) -> dict:
             "muc": tu_dien.tat_ca(mo_dun)}
 
 
+@app.get("/v1/hoi/cau-chuan")
+def api_cau_chuan() -> dict:
+    """HD-CS — danh mục câu hỏi chuẩn theo mảng (thẻ chia sẻ câu trả lời chỉ mang câu trong danh mục này)."""
+    from app.luangiai import truc_quan
+    return {"engine_version": ENGINE_VERSION, "cau": truc_quan.cau_chuan_tat_ca()}
+
+
 @app.post("/v1/thanso/hoi")
 def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
     """Q&A v2 — phân loại câu hỏi (RULES) → gói bằng chứng từ KB → diễn đạt.

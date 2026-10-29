@@ -21,7 +21,7 @@ SINH_BT = {"lich": dt.datetime(1990, 5, 12, 13, 0), "gioi_tinh": "nam"}
 SINH_PT = {"nam": 1990, "gioi_tinh": "nam", "ngay": dt.date(1990, 5, 12)}
 NGUOI = {"ho_ten": ["Nguyễn Văn An"], "ngay": 12, "thang": 5, "nam": 1990, "quy_uoc": "tung_phan"}
 
-KIEU = {"thang", "nhip", "cot", "o", "so", "chu_ky", "hai_cot", "la_ban", "cung"}
+KIEU = {"thang", "nhip", "cot", "o", "so", "chu_ky", "hai_cot", "la_ban", "cung", "hao"}
 SAC = {"chinh", "hop", "trung", "nhat"}
 CAM = re.compile(r"\b(Miếu|Vượng|Hãm|hung|xấu|đại kỵ|tai hoạ|điểm số|chấm điểm)\b", re.I)
 
@@ -183,3 +183,149 @@ def test_hoi_tiep_rong_khi_dac_biet():
 def test_hoi_cung_dinh_tuyen_dung(cung):
     pl = tuvi.phan_loai(tq.HOI_CUNG[cung], "tham_khao")
     assert pl["cung"][:1] == [cung] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y")
+
+
+# ---- HD-CS đợt 3 (ý 1): Hỏi tiếp cho Bát tự + Phong thuỷ
+
+@pytest.mark.parametrize("ma", list(tq.HOI_BT))
+def test_hoi_bt_dinh_tuyen_dung(ma):
+    pl = battu.phan_loai(tq.HOI_BT[ma])
+    assert tq._khoa_bt(pl) == ma and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y")
+
+
+@pytest.mark.parametrize("ma", list(tq.HOI_PT))
+def test_hoi_pt_dinh_tuyen_dung(ma):
+    pl = phongthuy.phan_loai(tq.HOI_PT[ma])
+    assert tq._khoa_pt(pl) == ma and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y")
+
+
+def test_battu_hoi_tiep():
+    kq = battu.tra_loi("Tôi thiếu hành gì?", sinh=SINH_BT, ngay_xem=NGAY)
+    ht = kq["hoi_tiep"]
+    assert len(ht) == 3 and tq.HOI_BT["ngu_hanh"] not in ht and len(set(ht)) == 3
+
+
+def test_phongthuy_hoi_tiep():
+    kq = phongthuy.tra_loi("Kê bàn làm việc hướng nào?", sinh=SINH_PT, ngay_xem=NGAY)
+    ht = kq["hoi_tiep"]
+    assert len(ht) == 3 and tq.HOI_PT["phong_lam_viec"] not in ht
+
+
+def test_hoi_tiep_bt_pt_rong_khi_dac_biet():
+    assert battu.tra_loi("Bát tự tôi khắc chồng khắc con, tôi muốn biến mất.", sinh=SINH_BT, ngay_xem=NGAY)["hoi_tiep"] == []
+
+
+# ---- HD-CS đợt 3 (ý 3): khop — chữ trong lời trả lời trỏ về mục hình
+
+def _co_khop_trong_van(kq: dict) -> set[str]:
+    van = kq["cau_tra_loi"]
+    return {c for k in kq["truc_quan"] for m in k.get("muc", []) for c in m.get("khop", []) if c in van}
+
+
+def test_khop_tuvi_cong_viec_tro_ve_ban_cung():
+    kq = tuvi.tra_loi("Công việc của tôi có tốt không?", "tham_khao", sinh=SINH_TV, ngay_xem=NGAY)
+    ban = _khoi(kq, "cung")
+    ql = next(m for m in ban["muc"] if m["nhan"] == "Quan Lộc")
+    assert "Công việc" in ql["khop"] and "Quan Lộc" in ql["khop"]
+    assert all("khop" not in m for m in ban["muc"] if not m["vai"])        # chỉ 4 cung được tô
+    assert all(m["giai_thich"].startswith(f"Cung {m['nhan']} nói về") for m in ban["muc"])
+    assert "Công việc" in _co_khop_trong_van(kq)
+
+
+@pytest.mark.parametrize("ham", [
+    lambda: battu.tra_loi("Tôi thiếu hành gì?", sinh=SINH_BT, ngay_xem=NGAY),
+    lambda: hoi_van.tra_loi("Tôi là người thế nào?", NGUOI, None, NGAY),
+    lambda: phongthuy.tra_loi("Hướng nhà hợp tuổi tôi?", sinh=SINH_PT, ngay_xem=NGAY),
+])
+def test_khop_cac_mang_co_it_nhat_mot_cum_trong_loi(ham):
+    kq = ham()
+    assert _co_khop_trong_van(kq), [m.get("khop") for k in kq["truc_quan"] for m in k.get("muc", [])]
+
+
+def test_khop_khong_cum_chung_chung():
+    for ham in (lambda: phongthuy.tra_loi("Hướng nhà hợp tuổi tôi?", sinh=SINH_PT, ngay_xem=NGAY),):
+        for k in ham()["truc_quan"]:
+            for m in k.get("muc", []):
+                assert not ({"Nam", "Bắc", "Đông", "Tây", "tiền"} & set(m.get("khop", [])))
+
+
+# ---- HD-CS đợt 3 (ý 4): quẻ Kinh Dịch bấm từng hào
+
+def test_kinhdich_khoi_hao():
+    from app.hoidap import kinhdich
+    kq = kinhdich.tra_loi("Tôi có nên đổi việc không?", "tu_dong", gia_tri_hao=[7, 9, 8, 8, 6, 7])
+    _hop_le(kq)
+    k = _khoi(kq, "hao")
+    assert [m["vi_tri"] for m in k["muc"]] == [1, 2, 3, 4, 5, 6]
+    assert [m["duong"] for m in k["muc"]] == [True, True, False, False, False, True]
+    dong = {m["vi_tri"]: m for m in k["muc"] if m["dong"]}
+    assert set(dong) == {2, 5} and dong[5]["chu"] and not dong[2]["chu"]
+    assert dong[2]["khop"] == ["Hào Cửu Nhị"] and dong[2]["giai_thich"].startswith("Như")
+    assert dong[2]["khop"][0] in kq["cau_tra_loi"]
+    assert all("khop" not in m for m in k["muc"] if not m["dong"])
+
+
+def test_kinhdich_khong_que_khong_hinh():
+    from app.hoidap import kinhdich
+    kq = kinhdich.tra_loi("Quẻ Càn nghĩa là gì?", "tu_dong")
+    assert not [k for k in kq.get("truc_quan", []) if k["kieu"] == "hao"]
+
+
+# ---- HD-CS đợt 3 (ý 2): câu chuẩn cho thẻ chia sẻ — chỉ chữ từ danh mục cố định, đi kèm khối có thể chia sẻ
+
+def test_cau_chuan_trong_danh_muc():
+    ds = tq.cau_chuan_tat_ca()
+    tat_ca = {c for v in ds.values() for c in v}
+    for kq in (tuvi.tra_loi("Công việc của tôi có tốt không?", "tham_khao", sinh=SINH_TV, ngay_xem=NGAY),
+               battu.tra_loi("Tôi thiếu hành gì?", sinh=SINH_BT, ngay_xem=NGAY),
+               hoi_van.tra_loi("Năm nay của tôi thế nào?", NGUOI, None, NGAY)):
+        co = [k["cau_chuan"] for k in kq["truc_quan"] if k.get("cau_chuan")]
+        assert co and set(co) <= tat_ca
+
+
+@pytest.mark.parametrize("cau", tq.cau_chuan_tat_ca()["thanso"])
+def test_cau_chuan_thanso_tra_loi_duoc(cau):
+    assert hoi_van.tra_loi(cau, NGUOI, None, NGAY)["phan_loai"]["xu_ly"] == "tra_loi"
+
+
+def test_api_cau_chuan():
+    from fastapi.testclient import TestClient
+    from app.main import app
+    r = TestClient(app).get("/v1/hoi/cau-chuan")
+    assert r.status_code == 200 and set(r.json()["cau"]) == {"tuvi", "battu", "phongthuy", "thanso"}
+
+
+
+# ---- review đợt 3: thẻ chỉ mang câu chuẩn ĐÚNG tuyến câu vừa hỏi; Phong thuỷ không chia sẻ; khớp chữ chặt
+
+@pytest.mark.parametrize("cau,mong", [
+    ("Tôi là người thế nào?", "Tôi là người thế nào?"),
+    ("Năm nay của tôi thế nào?", "Năm nay của tôi thế nào?"),
+    ("Tôi hợp nghề gì?", "Tôi hợp nghề gì?"),
+    ("Tình yêu của tôi thế nào?", None),
+])
+def test_thanso_cau_chuan_dung_tuyen(cau, mong):
+    kq = hoi_van.tra_loi(cau, NGUOI, None, NGAY)
+    co = [k.get("cau_chuan") for k in kq["truc_quan"] if k.get("cau_chuan")]
+    assert (co[0] if co else None) == mong
+
+
+def test_battu_cau_chuan_dung_tuyen():
+    kq = battu.tra_loi("Tính cách của tôi thế nào?", sinh=SINH_BT, ngay_xem=NGAY)
+    assert not [k for k in kq["truc_quan"] if k.get("cau_chuan")]
+
+
+def test_phongthuy_khong_chia_se_va_khop_mot_chu_chi_dang_ngoac():
+    kq = phongthuy.tra_loi("Hướng nhà hợp tuổi tôi?", sinh=SINH_PT, ngay_xem=NGAY)
+    k = _khoi(kq, "la_ban")
+    assert not k.get("cau_chuan")
+    dong = next(m for m in k["muc"] if m["huong"] == "Đông")
+    assert dong["khop"] == ["(Đông)"]
+    dn = next(m for m in k["muc"] if m["huong"] == "Đông Nam")
+    assert "hướng Đông Nam" in dn["khop"]
+
+
+def test_cot_khop_chi_dang_hanh_x():
+    kq = battu.tra_loi("Tôi thiếu hành gì?", sinh=SINH_BT, ngay_xem=NGAY)
+    for m in _khoi(kq, "cot")["muc"]:
+        assert all(c.lower().startswith("hành ") for c in m["khop"])

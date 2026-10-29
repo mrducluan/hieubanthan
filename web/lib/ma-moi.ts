@@ -4,6 +4,7 @@
 // Xem docs/THIET-KE-UI.md §8 (quyết định: thay bảng loi_moi bằng mã có ký).
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { z } from "zod";
+import { MANG_THE, TheGon } from "@/lib/the-hoi";
 
 export const NoiDungMa = z.object({
   v: z.literal(1),
@@ -311,6 +312,45 @@ export function docMaQue(ma: string, homNay = new Date()): NoiDungMaQue | null {
     const nd = NoiDungMaQue.parse({
       v: g[0], t: g[1], g: g[2].split("").map(Number), q: g[3], b: g[4] || null, c: g[5] || null,
       d: new Date(NGAY_GOC + Number(g[6]) * 86_400_000).toISOString().slice(0, 10),
+    });
+    return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
+  } catch {
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------- HD-CS đợt 3: thẻ một câu trả lời hỏi đáp
+// Mã riêng miền "hoi|". Chỉ mang: mảng, MỘT câu hỏi chuẩn (route đối chiếu danh mục engine trước khi ký) và khối hình dạng
+// gọn (lib/the-hoi.ts — chỉ số trong danh mục cố định + con số). KHÔNG câu người dùng gõ, KHÔNG lời trả lời, KHÔNG ngày sinh.
+export const NoiDungMaHoi = z.object({
+  v: z.literal(1),
+  m: z.enum(MANG_THE),
+  c: z.string().trim().min(3).max(80),
+  g: TheGon,
+  d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});
+export type NoiDungMaHoi = z.infer<typeof NoiDungMaHoi>;
+
+const kyHoi = (than: string) => b64u(createHmac("sha256", khoa()).update(`hoi|${than}`).digest()).slice(0, 16);
+
+export function kyMaHoi(nd: Omit<NoiDungMaHoi, "v" | "d">, homNay = new Date()): string {
+  const x = NoiDungMaHoi.parse({ ...nd, v: 1, d: homNay.toISOString().slice(0, 10) });
+  const goi = [1, MANG_THE.indexOf(x.m), x.c, x.g, Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
+  return `${than}.${kyHoi(than)}`;
+}
+
+export function docMaHoi(ma: string, homNay = new Date()): NoiDungMaHoi | null {
+  const [than, chu_ky] = ma.split(".");
+  if (!than || !chu_ky || ma.length > 600) return null;
+  const a = Buffer.from(chu_ky), b = Buffer.from(kyHoi(than));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown[];
+    if (!Array.isArray(g) || g.length !== 5) return null;
+    const nd = NoiDungMaHoi.parse({
+      v: g[0], m: MANG_THE[Number(g[1])], c: g[2], g: g[3],
+      d: new Date(NGAY_GOC + Number(g[4]) * 86_400_000).toISOString().slice(0, 10),
     });
     return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
   } catch {

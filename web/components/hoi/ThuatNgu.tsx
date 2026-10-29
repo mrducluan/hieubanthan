@@ -47,19 +47,35 @@ function The({ t, children }: { t: ThuatNgu; children: ReactNode }) {
   );
 }
 
-/** Các đoạn văn (tách bởi dòng trống) với thuật ngữ gạch chân — mỗi thuật ngữ chỉ gạch ở lần xuất hiện đầu tiên. */
-export function doanCoThuatNgu(van: string, ds: ThuatNgu[] | undefined, lopDoan?: (doan: string) => string): ReactNode[] {
+/** Các đoạn văn (tách bởi dòng trống) với thuật ngữ gạch chân — mỗi thuật ngữ chỉ gạch ở lần xuất hiện đầu tiên.
+ *  `chieu` (HD-CS ý 3): cụm chữ trỏ về một mục của hình — gạch liền màu ngọc, bấm thì mục hình sáng lên; cụm vừa là thuật ngữ
+ *  vừa trỏ về hình thì ưu tiên hình (lời giải nghĩa vẫn ở khung "Giải nghĩa thuật ngữ"). */
+export function doanCoThuatNgu(van: string, ds: ThuatNgu[] | undefined, lopDoan?: (doan: string) => string,
+                               chieu?: { theo: Map<string, string>; bam: (id: string) => void }): ReactNode[] {
   const doan = van.split("\n\n");
   const theoChu = new Map<string, ThuatNgu>();
   for (const t of ds ?? []) for (const k of t.khop) theoChu.set(k, t);
-  if (!theoChu.size) return doan.map((p, i) => <p key={i} className={cn("whitespace-pre-line", lopDoan?.(p))}>{p}</p>);
-  const mau = new RegExp(`(?<![\\p{L}\\p{N}])(${[...theoChu.keys()].sort((a, b) => b.length - a.length)
+  const theoHinh = chieu?.theo ?? new Map<string, string>();
+  const khoa = [...new Set([...theoChu.keys(), ...theoHinh.keys()])];
+  if (!khoa.length) return doan.map((p, i) => <p key={i} className={cn("whitespace-pre-line", lopDoan?.(p))}>{p}</p>);
+  const mau = new RegExp(`(?<![\\p{L}\\p{N}])(${khoa.sort((a, b) => b.length - a.length)
     .map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})(?![\\p{L}\\p{N}])`, "gu");
   const daGach = new Set<string>();
   return doan.map((p, i) => (
     <p key={i} className={cn("whitespace-pre-line", lopDoan?.(p))}>
       {p.split(mau).map((manh, j) => {
-        const t = j % 2 === 1 ? theoChu.get(manh) : undefined;
+        if (j % 2 === 0) return manh;
+        const id = theoHinh.get(manh);
+        if (id && chieu && !daGach.has(`h:${id}`)) {
+          daGach.add(`h:${id}`);
+          return (
+            <button key={j} type="button" onClick={() => chieu.bam(id)} data-chieu={id} aria-label={`${manh} — xem trên hình`}
+              className="rounded-sm text-fg underline decoration-jade/70 decoration-2 underline-offset-[3px] hover:bg-jade/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-jade">
+              {manh}
+            </button>
+          );
+        }
+        const t = theoChu.get(manh);
         if (!t || daGach.has(t.ma)) return manh;
         daGach.add(t.ma);
         return <The key={j} t={t}>{manh}</The>;

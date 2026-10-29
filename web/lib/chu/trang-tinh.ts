@@ -18,7 +18,7 @@ const MANG: [string, string, string, string, [string, string, string], string, s
     "Đo hướng cửa bằng điện thoại: bạn hợp phía nào, từng phòng nên đặt gì, tháng nào nên sửa. Không bán vật phẩm hoá giải.",
     ["La bàn ngay trên điện thoại", "Nhà phố và chung cư", "Việc làm từ 0 đồng"], "Cần năm sinh, giới tính", "Xem nhà của bạn"],
   ["kinh_dich", "Kinh Dịch", "Đang phân vân một việc?",
-    "Gieo một quẻ cho đúng một câu hỏi: việc đang thuận hay cần đổi cách, tuần này nên làm gì. Có nguyên văn Chu Dịch và lời nói nôm na.",
+    "Gieo một quẻ cho đúng một câu hỏi: việc đang thuận hay cần đổi cách, tuần này nên làm gì. Có nguyên văn Chu Dịch và lời giải thích dễ hiểu.",
     ["Gieo 3 đồng xu hoặc Mai Hoa", "64 quẻ, 384 hào có nguồn", "Ba cách đọc một quẻ"], "Chỉ cần một câu hỏi", "Gieo một quẻ"],
 ];
 const HOI: [string, string][] = [

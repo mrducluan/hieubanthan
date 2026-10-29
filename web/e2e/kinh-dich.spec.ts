@@ -28,7 +28,7 @@ test("gieo tay: quẻ Lý biến Đoài — lời đời thường trước, b�
   await dq.getByRole("button", { name: /Bản đọc đầy đủ theo sách/ }).click();
   await expect(dq.getByTestId("ban-day-du")).toContainText("Quẻ bản: Lý");
   await expect(dq.getByTestId("ban-day-du")).toContainText("Quẻ biến (xu hướng chuyển tới): Đoài");
-  await expect(dq.getByTestId("ban-day-du")).toContainText("Nói nôm na: như làm việc với sếp khó tính");
+  await expect(dq.getByTestId("ban-day-du")).toContainText("Hiểu đơn giản: như làm việc với sếp khó tính");
 });
 
 test("HỌC-ĐS: hộp đọc quẻ có nút kiểm chứng — chỉ mã ds.kinhdich.* + cách đọc chính đi lên", async ({ page }) => {
@@ -233,7 +233,8 @@ test("lịch sử quẻ trên máy: lưu sau khi gieo (≤ 200 ký tự câu h�
   const ans = await hoi(page, "Hợp đồng này có ký được không?");
   await ans.getByTestId("bo-qua-gieo").click();
   await expect(ans.getByTestId("que")).toBeVisible();
-  const tenQue = (await ans.getByTestId("que").locator("figure").first().locator("p").last().innerText()).split(" quẻ")[0]!.trim();
+  // HD-CS đợt 3: quẻ bản là khối bấm từng hào; tên quẻ ngay dưới khối.
+  const tenQue = (await ans.getByTestId("ten-que-ban").innerText()).split(" quẻ")[0]!.trim();
   const ls = page.getByTestId("lich-su-que");
   await expect(ls).toBeVisible();
   await expect(ls).toContainText("Chỉ lưu trên máy này");
