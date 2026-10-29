@@ -5,8 +5,11 @@
 import { createContext, useContext, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { useChieuSang } from "@/components/hoi/ChieuSang";
 import { motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
+import { duongTrangKb } from "@/lib/duong-silo";
+import { MinhHoa, type MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
 
 export type Sac = "chinh" | "hop" | "trung" | "nhat";
 type Muc = { nhan: string; gia_tri?: string | number; chu_thich?: string; giai_thich?: string; sac?: Sac; vi_tri?: number;
@@ -17,11 +20,13 @@ export type KhoiTrucQuan =
   | { kieu: "cot"; tieu_de: string; muc: Muc[]; don_vi?: string; ghi_chu?: string }
   | { kieu: "chu_ky"; tieu_de: string; so_nac: number; hien_tai: number; nhan_hien_tai?: string; giai_thich?: string }
   | { kieu: "hai_cot"; tieu_de: string; trai: { tieu_de: string; ds: string[] }; phai: { tieu_de: string; ds: string[] } }
-  | { kieu: "cung"; tieu_de: string; chi_hoi: string; muc: (Muc & { chi: string; vai: string; sao?: string[] })[]; ghi_chu?: string }
+  | { kieu: "cung"; tieu_de: string; chi_hoi: string; muc: (Muc & { chi: string; vai: string; sao?: string[] })[]; ghi_chu?: string;
+      /** đợt 4: đường bay tứ hoá — từ chi → tới chi (trùng = tự hoá) */ bay?: { tu: string; den: string; hoa: string[] }[] }
+  | { kieu: "minh_hoa"; tieu_de: string; hinh: MinhHoaDuLieu; trang?: { loai: string; slug: string; nhan: string } }
   | { kieu: "hao"; tieu_de: string; muc: (Muc & { vi_tri: number; duong: boolean; dong: boolean; chu: boolean })[]; ghi_chu?: string };
 
 /** Các kiểu web biết vẽ — kiểu khác (engine mới hơn web) bị bỏ qua, không chiếm chỗ cột hình. */
-export const KIEU_BIET = new Set(["thang", "nhip", "o", "so", "cot", "chu_ky", "hai_cot", "la_ban", "cung", "hao"]);
+export const KIEU_BIET = new Set(["thang", "nhip", "o", "so", "cot", "chu_ky", "hai_cot", "la_ban", "cung", "hao", "minh_hoa"]);
 
 /** Thẻ chia sẻ / câu hỏi chuẩn engine gắn kèm khối (HD-CS đợt 3). */
 export type CoCauChuan = { cau_chuan?: string };
@@ -82,7 +87,7 @@ function Khoi({ k, ki }: { k: KhoiTrucQuan; ki: number }) {
     switch (k.kieu) {
       case "thang": return <Thang k={k} />;
       case "nhip": return <Chon muc={k.muc} ve={(m, chon, bam) => <ONhip m={m} chon={chon} bam={bam} />} luoi="grid-cols-3" />;
-      case "o": return <Chon muc={k.muc} ve={(m, chon, bam) => <OThe m={m} chon={chon} bam={bam} />} luoi="grid-cols-1 min-[420px]:grid-cols-2" />;
+      case "o": return <Chon muc={k.muc} ve={(m, chon, bam) => <OThe m={m} chon={chon} bam={bam} />} luoi="grid-cols-2" />;
       case "so": return <Chon muc={k.muc} ve={(m, chon, bam) => <OSo m={m} chon={chon} bam={bam} />} luoi="grid-cols-2 min-[420px]:grid-cols-4" />;
       case "cot": return <Cot k={k} />;
       case "chu_ky": return <ChuKy k={k} />;
@@ -90,6 +95,7 @@ function Khoi({ k, ki }: { k: KhoiTrucQuan; ki: number }) {
       case "la_ban": return <LaBan muc={k.muc} />;
       case "cung": return <BanCung k={k} />;
       case "hao": return <Hao k={k} />;
+      case "minh_hoa": return <KhoiMinhHoa k={k} />;
       default: return null;
     }
   })();
@@ -342,9 +348,10 @@ function BanCung({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cung" }> }) {
   const [chon, setChon] = useChon();
   const hoi = k.muc.find((m) => m.vai === "hoi");
   const m = chon === null ? null : k.muc[chon];
+  const tuHoa = new Map((k.bay ?? []).filter((b) => b.tu === b.den).map((b) => [b.tu, b.hoa.join(", ")]));
   return (
     <>
-      <div className="mx-auto grid aspect-square w-full max-w-[22rem] grid-cols-4 grid-rows-4 gap-1">
+      <div className="relative mx-auto grid aspect-square w-full max-w-[22rem] grid-cols-4 grid-rows-4 gap-1">
         {k.muc.map((x, i) => {
           const vt = VI_TRI_CHI[x.chi];
           if (!vt) return null;
@@ -355,22 +362,33 @@ function BanCung({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cung" }> }) {
               aria-pressed={chon === i} aria-label={`Cung ${x.nhan}${x.sao?.length ? `: ${x.sao.join(", ")}` : ""}`}
               onClick={() => setChon(chon === i ? null : i)}
               className={cn("relative flex min-w-0 flex-col justify-between overflow-hidden rounded-lg border p-1 text-left text-[0.62rem] leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 sm:p-1.5 sm:text-[0.7rem]",
-                x.vai === "hoi" ? "border-gold bg-gold/20" : x.vai === "tam_hop" ? "border-jade/50 bg-jade/10"
+                x.vai === "hoi" ? "border-gold bg-gold/20" : x.vai === "tam_hop" || x.vai === "nguon" ? "border-jade/50 bg-jade/10"
                   : x.vai === "xung" ? "border-dashed border-moon/70 bg-bg/40" : "border-line/60 bg-bg/30",
                 chon === i && "ring-2 ring-gold")}>
               {x.vai === "hoi" && !giam && <motion.span aria-hidden className="absolute inset-0 rounded-lg ring-2 ring-gold/70"
                 initial={{ opacity: 0.9 }} animate={{ opacity: 0 }} transition={{ duration: 1.6, repeat: 2 }} />}
               <span className={cn("font-semibold", x.vai ? CHU[s] : "text-fg-muted")}>{x.nhan}</span>
+              {tuHoa.get(x.chi) && <span className="text-[0.58rem] font-medium text-jade">↻ tự hoá {tuHoa.get(x.chi)}</span>}
               <span className="truncate text-fg-faint">{x.sao?.join(", ") || "\u00a0"}</span>
             </button>
           );
         })}
-        <div style={{ gridRow: "2 / span 2", gridColumn: "2 / span 2" }} className="flex flex-col items-center justify-center gap-1.5 rounded-lg p-2 text-center">
+        {k.bay?.length ? <MuiTenBay bay={k.bay} /> : null}
+        <div style={{ gridRow: "2 / span 2", gridColumn: "2 / span 2" }} className={cn("relative z-10 flex flex-col items-center justify-center gap-1.5 rounded-lg p-2 text-center",
+          k.bay?.length && "m-3 bg-surface-2/90 shadow-[0_0_0_1px_rgb(var(--line)/0.5)]")}>
           <span className="font-serif text-lg leading-tight text-gold sm:text-xl">{hoi?.nhan}</span>
-          <span className="flex flex-wrap justify-center gap-x-2 gap-y-0.5 text-[0.65rem] text-fg-faint">
-            <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm bg-jade/60" aria-hidden />tam hợp</span>
-            <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm border border-dashed border-moon" aria-hidden />đối diện</span>
-          </span>
+          {k.bay?.length ? (
+            <span className="flex flex-wrap justify-center gap-x-2 gap-y-0.5 text-[0.65rem] text-fg-faint">
+              {HOA_BAY.map(([h, mau]) => (
+                <span key={h} className="inline-flex items-center gap-1"><span className="h-0.5 w-3 rounded" style={{ background: mau }} aria-hidden />{h}</span>
+              ))}
+            </span>
+          ) : (
+            <span className="flex flex-wrap justify-center gap-x-2 gap-y-0.5 text-[0.65rem] text-fg-faint">
+              <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm bg-jade/60" aria-hidden />tam hợp</span>
+              <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm border border-dashed border-moon" aria-hidden />đối diện</span>
+            </span>
+          )}
           {xemCung && (
             <button type="button" onClick={() => xemCung(k.chi_hoi)}
               className="mt-1 min-h-9 rounded-full border border-gold/60 px-3 text-xs font-medium text-gold hover:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60">
@@ -380,6 +398,59 @@ function BanCung({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cung" }> }) {
         </div>
       </div>
       <GiaiThich chu={m?.giai_thich} />
+    </>
+  );
+}
+
+// Màu theo loại hoá — không có đỏ (Kỵ là hổ phách, như mọi chỗ "cần lưu ý" của site).
+const HOA_BAY: [string, string][] = [["Lộc", "rgb(var(--jade))"], ["Quyền", "rgb(var(--gold))"], ["Khoa", "rgb(var(--moon))"], ["Kỵ", "#d9973a"]];
+const MAU_HOA = Object.fromEntries(HOA_BAY);
+
+/** Mũi tên đường bay tứ hoá vẽ đè lên bàn 12 cung (toạ độ = tâm ô trong lưới 4×4); không bắt sự kiện bấm. */
+function MuiTenBay({ bay }: { bay: { tu: string; den: string; hoa: string[] }[] }) {
+  const id = useId().replace(/:/g, "");
+  const tam = (chi: string) => { const v = VI_TRI_CHI[chi]; return v ? [(v[1] - 0.5) * 100, (v[0] - 0.5) * 100] as const : null; };
+  const duong = bay.filter((b) => b.tu !== b.den);
+  return (
+    <svg viewBox="0 0 400 400" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
+      <defs>
+        {HOA_BAY.map(([h, mau]) => (
+          <marker key={h} id={`${id}-${h}`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M0 0 10 5 0 10z" fill={mau} />
+          </marker>
+        ))}
+      </defs>
+      {duong.map((b, i) => {
+        const a = tam(b.tu), c = tam(b.den);
+        if (!a || !c) return null;
+        const h = b.hoa[0] ?? "Lộc";
+        const dx = c[0] - a[0], dy = c[1] - a[1], dai = Math.hypot(dx, dy) || 1;
+        const lui = 34;                      // dừng trước mép ô đích để đầu mũi tên không bị chữ che
+        const x2 = c[0] - (dx / dai) * lui, y2 = c[1] - (dy / dai) * lui;
+        const x1 = a[0] + (dx / dai) * 26, y1 = a[1] + (dy / dai) * 26;
+        // cong nhẹ, lệch theo thứ tự để các đường cùng đích không chồng khít lên nhau
+        const cx = (x1 + x2) / 2 - (dy / dai) * (18 + (i % 3) * 10), cy = (y1 + y2) / 2 + (dx / dai) * (18 + (i % 3) * 10);
+        return (
+          <path key={`${b.tu}-${b.den}`} d={`M${x1} ${y1} Q${cx} ${cy} ${x2} ${y2}`} fill="none" stroke={MAU_HOA[h]}
+            strokeWidth={2.5} strokeOpacity={0.8} strokeDasharray={h === "Kỵ" ? "6 4" : undefined} markerEnd={`url(#${id}-${h})`} />
+        );
+      })}
+    </svg>
+  );
+}
+
+/** Đợt 4 — câu hỏi kiến thức chung: hình minh hoạ của chính trang kiến thức + link sang trang đọc kỹ. */
+function KhoiMinhHoa({ k }: { k: Extract<KhoiTrucQuan, { kieu: "minh_hoa" }> }) {
+  const duong = k.trang ? duongTrangKb(k.trang.loai, k.trang.slug) : null;
+  return (
+    <>
+      <div className="mx-auto max-w-sm"><MinhHoa mh={k.hinh} gon /></div>
+      {duong && k.trang && (
+        <Link href={duong} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-medium text-gold underline-offset-4 hover:underline"
+          onClick={() => ghi("chart_interacted", { kind: "hoi_minh_hoa_trang", loai: k.trang!.loai })}>
+          Đọc kỹ: {k.trang.nhan} →
+        </Link>
+      )}
     </>
   );
 }

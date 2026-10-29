@@ -32,3 +32,17 @@ export function laTrangKienThuc(duong: string): boolean {
   return duong === "/kien-thuc" || duong.startsWith("/kien-thuc/") || duong === "/tu-dien" ||
     GOC_KIEN_THUC.some((g) => duong === g || duong.startsWith(`${g}/`));
 }
+
+/** Loại trang kiến thức (engine) → khoá cụm trong chuyen-huong.json. Một nguồn: lib/kien-thuc.ts dùng lại bảng này. */
+export const CHU_DE_THEO_LOAI = {
+  so: "than-so", que: "kinh-dich", sao: "tu-vi", cung: "cung-tu-vi", thap_than: "thap-than", nhat_chu: "nhat-chu",
+  cap_so: "hop-so", nghe: "nghe-nghiep", tinh_yeu: "tinh-yeu", nam_ca_nhan: "nam-ca-nhan", no_nghiep: "no-nghiep", so_kep: "so-kep",
+  sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi", dau_hieu: "dau-hieu",
+} as const;
+
+/** Đường dẫn trang kiến thức theo (loại, slug) — dùng được ở trình duyệt (khối hình trong hỏi đáp trỏ sang trang). */
+export function duongTrangKb(loai: string, slug: string): string | null {
+  const k = (CHU_DE_THEO_LOAI as Record<string, string>)[loai];
+  const goc = k ? (CHUYEN.chu_de as Record<string, string>)[k] : undefined;
+  return goc && /^[a-z0-9-]+$/.test(slug) ? `${goc}/${slug}` : null;
+}

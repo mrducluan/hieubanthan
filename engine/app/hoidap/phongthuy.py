@@ -155,6 +155,15 @@ def _mq(pl: dict, sinh: dict | None) -> dict | None:
     return None
 
 
+def _menh_rieng(pl: dict, sinh: dict | None) -> dict | None:
+    """HD-CS đợt 4: câu kiến thức "vợ chồng khác mệnh chọn hướng theo ai" — vẽ la bàn của chính người hỏi (đã có năm sinh)
+    để họ thấy phía mình; lời trả lời vẫn là kiến thức chung."""
+    if pl["loai"] != "ky_thuat" or "vo_chong_khac_menh" not in pl["giai_thich"] or not sinh:
+        return None
+    mq = _mq(pl, sinh)
+    return _m_menh(mq) if mq else None
+
+
 def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int) -> dict:
     goi = {"phan_loai": {k: pl[k] for k in ("loai", "xu_ly", "huong")},
            "muc": [], "can_them": [], "mau": None, "luu_y": None, "co_canh_bao": []}
@@ -514,4 +523,4 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
     return {"phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
             "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": goi["co_canh_bao"],
-            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.phongthuy(goi), "hoi_tiep": truc_quan.hoi_tiep_phongthuy(pl)}
+            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.phongthuy(goi, pl.get("quai"), _menh_rieng(pl, sinh)), "hoi_tiep": truc_quan.hoi_tiep_phongthuy(pl)}

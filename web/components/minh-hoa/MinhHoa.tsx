@@ -306,7 +306,8 @@ function HinhDauHieu({ nhom, phong, veto, tot, ten }: { nhom: string; phong: str
   );
 }
 
-export function MinhHoa({ mh, duong }: { mh?: MinhHoaDuLieu | null; duong?: string }) {
+/** `gon`: chỉ hình, không khung figure / dải QR — khi hình nằm trong một khung khác (khối hình của câu trả lời hỏi đáp). */
+export function MinhHoa({ mh, duong, gon = false }: { mh?: MinhHoaDuLieu | null; duong?: string; gon?: boolean }) {
   if (!mh) return null;
   const hinh = (() => {
     switch (mh.kieu) {
@@ -325,6 +326,7 @@ export function MinhHoa({ mh, duong }: { mh?: MinhHoaDuLieu | null; duong?: stri
     }
   })();
   if (!hinh) return null;
+  if (gon) return hinh;
   const sang = mh.kieu === "dau_hieu";
   return (
     <figure className={sang ? "relative mt-6 overflow-hidden rounded-2xl border border-gold/50 bg-[#f6f0e2] p-4 shadow-[0_18px_40px_-18px_rgb(0_0_0/0.65)]"

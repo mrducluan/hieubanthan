@@ -1287,6 +1287,7 @@ def _ghep(goi: dict) -> tuple[list[str], list[str], list[str]]:
             d = m["doi_thuong"]
         if m["loai"] == "doi_song":
             cu.extend(m.get("can_cu_ds", []))
+            d = dsm.doan_doi_song(m, "\n".join(doan))
         if d:
             doan.append(d)
         if s and not soi:

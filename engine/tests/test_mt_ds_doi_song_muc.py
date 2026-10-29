@@ -79,3 +79,37 @@ def test_xac_nhan_khong_nhan_xet_thay_khac():
     assert "không nhận xét lời người khác" in r["cau_tra_loi"]
     r = bh.tra_loi("Người ta bảo tôi Thương Quan khắc chồng, có thật không?", sinh=SINH_BT, ngay_xem=NGAY)
     assert "không nhận xét lời người khác" in r["cau_tra_loi"]
+
+
+# HD-CS rà lại 2026-10-29: hộp "Điểm sáng / Nên để ý" mượn từ chương đời sống từng lặp nguyên câu đã có ở đoạn trên
+# (lời KB của cung/sao và lời hộp cùng một nguồn) → mỗi câu (≥ 8 chữ) của hộp chỉ được xuất hiện tối đa một lần.
+def _cau_lap(r: dict) -> list[str]:
+    import re
+
+    def chuan(c):
+        return " ".join(re.sub(r"[^\wÀ-ỹ ]", " ", c).lower().split())
+    van = chuan(r["cau_tra_loi"])
+    hop = [h for m in r["bang_chung"]["muc"] if m["loai"] == "doi_song" for h in m["hop"]]
+    cau = {chuan(c) for h in hop for k in ("tieu_de", "noi_dung", "huong_xu_ly", "loi_khuyen")
+           for c in re.split(r"(?<=[.!?])\s+", h.get(k) or "")}
+    return sorted(c for c in cau if len(c.split()) >= 8 and van.count(c) > 1)
+
+
+SINH_KHAC = [SINH_TV, {"ngay": dt.date(1990, 5, 12), "ti": 6, "gioi_tinh": "nam", "tz_lich": 7},
+             {"ngay": dt.date(1985, 11, 3), "ti": 2, "gioi_tinh": "nu"}, {"ngay": dt.date(1998, 2, 20), "ti": 9, "gioi_tinh": "nam"}]
+
+
+@pytest.mark.parametrize("sinh", SINH_KHAC)
+@pytest.mark.parametrize("cau", ["Công việc của tôi có tốt không?", "Tình duyên của tôi thế nào?", "Tiền bạc của tôi thế nào?",
+                                 "Sức khoẻ của tôi cần lưu ý gì?", "Gia đình tôi thế nào?", "Năm nay tôi có bị mất tiền không?"])
+def test_tuvi_khong_lap_cau(sinh, cau):
+    r = tv.tra_loi(cau, sinh=sinh, ngay_xem=NGAY)
+    assert _cau_lap(r) == [], cau
+
+
+@pytest.mark.parametrize("gio", [dt.datetime(1990, 5, 17, 11, 30), dt.datetime(1985, 11, 3, 3, 0), dt.datetime(1998, 2, 20, 19, 0)])
+@pytest.mark.parametrize("cau", ["Công việc nào hợp với tôi?", "Bát tự nói gì về hôn nhân của tôi?", "Tiền bạc của tôi thế nào?",
+                                 "Năm nay của tôi theo bát tự thế nào?"])
+def test_battu_khong_lap_cau(gio, cau):
+    r = bh.tra_loi(cau, sinh={"lich": gio, "gioi_tinh": "nam"}, ngay_xem=NGAY)
+    assert _cau_lap(r) == [], cau
