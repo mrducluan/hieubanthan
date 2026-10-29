@@ -327,14 +327,14 @@ def _doan(m: dict) -> tuple[str, str | None]:
         if m.get("y_linh_vuc"):
             s += f" Riêng về {m['linh_vuc'].lower()}: {m['y_linh_vuc']}"
         if m.get("nom_na"):
-            s += f"\n{m['nom_na'].replace('Nôm na: ', 'Nói nôm na: ')}"
+            s += f"\n{m['nom_na']}"
         return s, m["cau_tu_soi"]
     if l == "quy_tac_doc":
         return f"Cách đọc (quy tắc Chu Hy): {m['noi_dung']}", None
     if l == "loi_kinh":
         return (f"{'【Lời chủ】 ' if m['chu'] else ''}{m['tieu_de']}: 「{m['han']}」 — {m['dich']} "
                 f"Ý: {m['y']}" + (f"\nThoán truyện giảng: {m['thoan']}" if m.get("thoan") else "")
-                + (f"\nNói nôm na: {m['nom_na']}" if m.get("nom_na") else "")), None
+                + (f"\nHiểu đơn giản: {m['nom_na']}" if m.get("nom_na") else "")), None
     if l == "the_dung":
         return (f"Mai Hoa — Thể là {m['the']} ({m['the_ngu_hanh']}), Dụng là {m['dung']} "
                 f"({m['dung_ngu_hanh']}): {m['ten']}. {m['y_nghia']} {m['luu_y']}", None)

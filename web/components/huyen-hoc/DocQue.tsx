@@ -196,7 +196,7 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
                   <p className="text-fg-muted" style={{ fontFamily: "var(--font-han), serif" }}>「{l.han}」</p>
                   <p className="text-fg-muted">{l.dich}{l.y ? ` — ${l.y}` : ""}</p>
                   {l.thoan && <p className="text-fg-faint">Thoán truyện: {l.thoan}</p>}
-                  {l.nom_na && <p className="text-fg-faint">Nói nôm na: {l.nom_na}</p>}
+                  {l.nom_na && <p className="text-fg-faint">Hiểu đơn giản: {l.nom_na}</p>}
                 </div>
               ))}
             </div>

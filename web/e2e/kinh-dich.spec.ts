@@ -28,7 +28,7 @@ test("gieo tay: quẻ Lý biến Đoài — lời đời thường trước, b�
   await dq.getByRole("button", { name: /Bản đọc đầy đủ theo sách/ }).click();
   await expect(dq.getByTestId("ban-day-du")).toContainText("Quẻ bản: Lý");
   await expect(dq.getByTestId("ban-day-du")).toContainText("Quẻ biến (xu hướng chuyển tới): Đoài");
-  await expect(dq.getByTestId("ban-day-du")).toContainText("Nói nôm na: như làm việc với sếp khó tính");
+  await expect(dq.getByTestId("ban-day-du")).toContainText("Hiểu đơn giản: như làm việc với sếp khó tính");
 });
 
 test("HỌC-ĐS: hộp đọc quẻ có nút kiểm chứng — chỉ mã ds.kinhdich.* + cách đọc chính đi lên", async ({ page }) => {

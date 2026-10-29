@@ -99,7 +99,7 @@ test.describe("đợt 3 — điện thoại", () => {
     await expect(ban.locator("[aria-live] p")).toContainText("nói về");
   });
 
-  test("Kinh Dịch: quẻ bản bấm được từng hào, hào động có lời nói nôm na", async ({ page }) => {
+  test("Kinh Dịch: quẻ bản bấm được từng hào, hào động có lời giải thích dễ hiểu", async ({ page }) => {
     await page.goto("/kinh-dich");
     await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
     await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
