@@ -206,7 +206,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   // ---------------- B · trang tĩnh / giới thiệu
   { duong: "/", nhom: "tinh", ten: "Trang chủ", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân", h1: "Bạn là số mấy?",
-    loi_dan: "Gõ tên và ngày sinh. Nửa phút sau bạn có 4 con số của riêng mình, mỗi số kèm 3 điểm mạnh, 3 *điểm mù* — và bạn tự tích xem nó nói trúng mấy điều.",
+    loi_dan: "Nhập tên và ngày sinh. 30 giây sau bạn biết mình mạnh ở đâu, hay vấp ở đâu, và *năm nay nên dồn sức vào việc gì*.",
     chu: CHU_TRANG_CHU, hinh: HINH_TRANG_CHU,
     mo_ta_seo: "Thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ): tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.",
   } },

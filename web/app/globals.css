@@ -292,7 +292,8 @@
 /* TC-HOOK — trang chủ. (1) Dòng "điểm mù" ở hero: 9 câu xếp chồng, mỗi câu hiện 3 giây (27 giây một vòng). Không
    chuyển động → chỉ câu đầu hiện (luật reduced-motion phía trên tắt animation, opacity nền giữ nguyên).
    (2) Bảng so sánh: hàng hiện lần lượt khi cuộn tới (HienKhiThay gắn data-cho/data-hien; không JS → hiện sẵn). */
-.diem-mu-luot > li { position: absolute; inset: 0; opacity: 0; }
+.diem-mu-luot { display: grid; }
+.diem-mu-luot > li { grid-area: 1 / 1; opacity: 0; }
 .diem-mu-luot > li:first-child { opacity: 1; }
 .quet-sang { position: relative; overflow: hidden; }
 .quet-sang::after {
