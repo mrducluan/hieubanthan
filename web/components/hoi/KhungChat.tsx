@@ -2,14 +2,16 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { AnimatePresence, motion } from "motion/react";
-import { Info, Send, Sparkles } from "lucide-react";
+import { Send, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
-import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
-import { ViSao } from "@/components/luan-giai/HopNoiBat";
-import { TrucQuan, type KhoiTrucQuan } from "@/components/hoi/TrucQuan";
+import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
+import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
+import { CauTraLoi } from "@/components/hoi/CauTraLoi";
+import { useMaCuaToi } from "@/lib/sao";
+import { useNguoiDung } from "@/lib/tai-khoan";
 
 export interface KetQuaHoi {
   van?: string;
@@ -63,6 +65,30 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
   const cuoi = useRef<HTMLDivElement>(null);
   const soId = useRef(0);
   const daHoi = tin.filter((t) => t.ai === "ban");
+  // Mã mời cho thẻ chia sẻ câu trả lời — một lượt gọi cho cả khung, chỉ khi đã đăng nhập (không mỗi câu trả lời một lượt).
+  const nguoi = useNguoiDung();
+  const maMoi = useMaCuaToi(Boolean(nguoi) && tin.length > 0);
+  /** Câu hỏi đứng ngay trước câu trả lời `id`. */
+  const cauTruoc = (id: number) => [...tin].reverse().find((x) => x.ai === "ban" && x.id < id)?.van;
+  const vung = useRef<HTMLDivElement>(null);
+  const oNhap = useRef<HTMLTextAreaElement>(null);
+
+  // HD-CS đợt 3 (ý 2): người nhận thẻ mở trang với ?cau=… → CHỈ khi câu thuộc danh mục câu chuẩn engine công bố cho mảng
+  // này thì điền sẵn vào ô (không tự gửi — hồ sơ là của người nhận, họ tự bấm).
+  useEffect(() => {
+    const c = new URLSearchParams(window.location.search).get("cau");
+    if (!c || c.length > 120) return;
+    let huy = false;
+    fetch(`/api/hoi/cau-chuan?mang=${encodeURIComponent(moDun)}&cau=${encodeURIComponent(c)}`)
+      .then((r) => r.json()).then((d: { co?: boolean }) => {
+        if (huy || !d?.co) return;
+        setCau(c);
+        ghi("chart_interacted", { mo_dun: moDun, kind: "the_hoi_dien_san" });
+        requestAnimationFrame(() => { vung.current?.scrollIntoView({ block: "center" }); oNhap.current?.focus({ preventScroll: true }); });
+      }).catch(() => { /* không điền */ });
+    return () => { huy = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- một lần khi mở trang
+  }, []);
 
   // Một lần cuộn duy nhất tới khung (khung chờ / câu trả lời mới). Trang ngoài KHÔNG tự cuộn thêm khi đẩy câu vào
   // (hai lệnh cuộn mượt chồng nhau làm màn hình giật). Giảm chuyển động → nhảy thẳng.
@@ -153,41 +179,8 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
                 <p className="mt-1 font-serif text-xl leading-snug text-fg [text-wrap:balance]">{t.van}</p>
               </motion.div>
             ) : (
-              <motion.div key={t.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="-mt-2 space-y-4" data-testid="cau-tra-loi">
-                {t.loi && <p role="alert" className="rounded-xl bg-cinnabar/10 px-4 py-3 text-sm text-cinnabar">{t.loi}</p>}
-                {t.phu}
-                {/* Hình trước, lời sau: liếc một giây là thấy ý chính, đọc tiếp để hiểu vì sao. */}
-                <TrucQuan ds={t.trucQuan} />
-                {t.van && (
-                  <div className="prose-vn text-[1.05rem] leading-[1.75] text-fg">
-                    {doanCoThuatNgu(t.van, t.thuatNgu)}
-                  </div>
-                )}
-                {t.van && <ViSao canCu={t.canCu} thuatNgu={t.thuatNgu} />}
-                <KhungGiaiNghia ds={t.thuatNgu} />
-                {t.canhBao?.map((c) => (
-                  <p key={c} className="flex gap-2 rounded-xl bg-moon/10 px-3 py-2 text-xs text-moon"><Info className="mt-0.5 size-3.5 shrink-0" aria-hidden /> {c}</p>
-                ))}
-                {t.ghiChu && <p className="text-xs text-fg-faint">{t.ghiChu}</p>}
-                {t.ghiLuot && <p className="text-xs text-gold" data-testid="ghi-luot">{t.ghiLuot}</p>}
-                {(() => {
-                  // Bỏ câu đã hỏi trong phiên (gợi lại câu vừa đọc là lãng phí một chỗ bấm).
-                  const tiep = (t.hoiTiep ?? []).filter((c) => !daHoi.some((h) => h.van === c));
-                  return tiep.length > 0 && (
-                  <div data-testid="hoi-tiep-chung">
-                    <p className="text-xs text-fg-muted">Hỏi tiếp</p>
-                    <div className="mt-1.5 flex flex-wrap gap-2">
-                      {tiep.map((c) => (
-                        <button key={c} type="button" disabled={dang} onClick={() => { ghi("chart_interacted", { mo_dun: moDun, kind: "hoi_tiep" }); void hoi(c); }}
-                          className="min-h-10 rounded-full border border-gold/40 bg-gold/5 px-3.5 py-2 text-left text-sm text-fg transition-colors hover:border-gold disabled:opacity-50">
-                          {c}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  );
-                })()}
-                {t.sau && <div className="space-y-3" data-testid="sau-tra-loi">{t.sau}</div>}
+              <motion.div key={t.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="-mt-2" data-testid="cau-tra-loi">
+                <CauTraLoi t={t} cauHoi={cauTruoc(t.id)} moDun={moDun} dang={dang} daHoi={daHoi.map((h) => h.van ?? "")} hoi={(c) => void hoi(c)} maMoi={maMoi} />
               </motion.div>
             ),
           )}
@@ -213,7 +206,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
         <div ref={cuoi} />
       </div>
 
-      <div className="mt-4 border-t border-line/70 pt-4 sm:mt-0 sm:p-5">
+      <div ref={vung} className="mt-4 border-t border-line/70 pt-4 sm:mt-0 sm:p-5">
         {/* HD-CS đợt 2 (hướng C): đã hỏi từ 2 câu → dải câu đã hỏi, bấm để quay lại đúng câu (không phải cuộn dò). */}
         {daHoi.length > 1 && (
           <nav aria-label="Các câu đã hỏi" className="mb-3" data-testid="cau-da-hoi">
@@ -240,7 +233,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
         </div>
         {dieuKhien && <div className="mb-3">{dieuKhien}</div>}
         <form className="flex items-end gap-2" onSubmit={(e) => { e.preventDefault(); void hoi(cau); }}>
-          <Textarea rows={1} value={cau} maxLength={400} aria-label={nhanO} placeholder={goiYO ?? cc("hoi.o_nhap")}
+          <Textarea ref={oNhap} rows={1} value={cau} maxLength={400} aria-label={nhanO} placeholder={goiYO ?? cc("hoi.o_nhap")}
             onChange={(e) => setCau(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void hoi(cau); } }}
             className="max-h-40 min-h-[4.5rem] [field-sizing:content] sm:min-h-12" />

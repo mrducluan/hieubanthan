@@ -136,7 +136,7 @@ def muc_luc_hao(pt: dict) -> tuple[str, list[str]]:
 def _nom_na(s: str | None) -> str | None:
     if not s:
         return None
-    s = s.split("Nôm na:", 1)[1] if "Nôm na:" in s else s
+    s = s.split("Hiểu đơn giản:", 1)[1] if "Hiểu đơn giản:" in s else s
     s = s.strip()
     return s[0].upper() + s[1:] if s else None
 

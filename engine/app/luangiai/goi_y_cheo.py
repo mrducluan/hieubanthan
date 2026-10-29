@@ -160,8 +160,8 @@ def _que_ngay(ngay_xem: dt.date) -> dict:
     from app.luangiai.hom_nay import _que_ngay as que
     q = que(ngay_xem)
     nn = (_que_hao().get(str(q["so"])) or {}).get("nom_na") or ""
-    if "Nôm na:" in nn:
-        nn = nn.split("Nôm na:", 1)[1]
+    if "Hiểu đơn giản:" in nn:
+        nn = nn.split("Hiểu đơn giản:", 1)[1]
     nn = nn.strip()
     if not _sach(nn):
         nn = q.get("loi_khuyen") or ""

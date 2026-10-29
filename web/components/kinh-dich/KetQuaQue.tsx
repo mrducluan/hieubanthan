@@ -4,19 +4,31 @@
 // được vẽ ở đây (thay vì KhungChat) để không lộ tên quẻ trước khi lật xong. Mọi chữ đều của engine.
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { doanCoThuatNgu, KhungGiaiNghia, type ThuatNgu } from "@/components/hoi/ThuatNgu";
+import { banDoKhop, useChieuSang, VungChieuSang } from "@/components/hoi/ChieuSang";
+import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 import { ViSao } from "@/components/luan-giai/HopNoiBat";
 import { Info } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import type { GiaTriHao } from "@/lib/dong-xu";
 import { GieoDongXu } from "./DongXu";
 
-export function KetQuaQue({ giaTri, nghiThuc, cach, van, thuatNgu, canCu, ghiChu, canhBao, children, onHien }: {
+type Props = {
   giaTri: GiaTriHao[] | null; nghiThuc: boolean; cach: string;
   van?: string; thuatNgu?: ThuatNgu[]; canCu?: string[]; ghiChu?: string; canhBao?: string[];
   children: ReactNode;
   /** Gọi một lần khi quẻ + lời đọc hiện ra (sau nghi thức, hoặc ngay). */
   onHien?: () => void;
-}) {
+  /** HD-CS đợt 3 (ý 4): khối "hao" engine dựng — chữ "Hào Cửu Nhị…" trong lời đọc trỏ về đúng hào trên hình. */
+  trucQuan?: KhoiTrucQuan[];
+};
+
+export function KetQuaQue(p: Props) {
+  return <VungChieuSang><Than {...p} /></VungChieuSang>;
+}
+
+function Than({ giaTri, nghiThuc, cach, van, thuatNgu, canCu, ghiChu, canhBao, children, onHien, trucQuan }: Props) {
+  const { chieu } = useChieuSang();
+  const theo = banDoKhop(trucQuan);
   const coNghiThuc = nghiThuc && !!giaTri;
   const [xong, setXong] = useState(!coNghiThuc);
   const daGhiBatDau = useRef(false);               // StrictMode dev chạy effect hai lượt → chỉ ghi một lần
@@ -39,9 +51,9 @@ export function KetQuaQue({ giaTri, nghiThuc, cach, van, thuatNgu, canCu, ghiChu
         <>
           {children}
           {van && (
-            <div className="prose-vn rounded-2xl rounded-tl-md border border-line/70 bg-bg/40 px-4 py-3 text-[0.95rem] leading-relaxed">
-              {doanCoThuatNgu(van, thuatNgu)}
-              <ViSao canCu={canCu} thuatNgu={thuatNgu} nho />
+            <div className="prose-vn text-[1.05rem] leading-[1.75] text-fg">
+              {doanCoThuatNgu(van, thuatNgu, undefined, theo.size ? { theo, bam: (id) => { chieu(id); ghi("chart_interacted", { mo_dun: "kinhdich", kind: "chu_sang_hinh" }); } } : undefined)}
+              <ViSao canCu={canCu} thuatNgu={thuatNgu} />
             </div>
           )}
           <KhungGiaiNghia ds={thuatNgu} />

@@ -72,9 +72,9 @@ export const THONG_TIN_MANG: Record<MangBlog, ThongTinMang> = {
   kinh_dich: {
     ten: "Kinh Dịch", duong: "/kinh-dich", moDun: "kinhdich", mangGoiY: "kinh_dich",
     tieuDe: "Bài này nói về Kinh Dịch. Bạn đang có câu hỏi nào?",
-    loi: "Gieo một quẻ cho đúng việc đang băn khoăn: ba đồng xu, Mai Hoa theo số hoặc theo giờ — mỗi hào có lời nói nôm na.",
-    nut: "Gieo một quẻ", ngan: "Gieo quẻ cho việc đang băn khoăn, mỗi hào có lời nói nôm na.",
-    diem: ["3 cách gieo, quẻ do máy gieo tất định", "Lời kinh gốc + nói nôm na từng hào", "Lịch sử quẻ lưu trên máy bạn"],
+    loi: "Gieo một quẻ cho đúng việc đang băn khoăn: ba đồng xu, Mai Hoa theo số hoặc theo giờ — mỗi hào có lời giải thích dễ hiểu.",
+    nut: "Gieo một quẻ", ngan: "Gieo quẻ cho việc đang băn khoăn, mỗi hào có lời giải thích dễ hiểu.",
+    diem: ["3 cách gieo, quẻ do máy gieo tất định", "Lời kinh gốc + giải thích dễ hiểu từng hào", "Lịch sử quẻ lưu trên máy bạn"],
     cum: ["kinh-dich"], them: [{ ten: "Quẻ ngày hôm nay", duong: "/hom-nay" }],
   },
   phong_thuy: {

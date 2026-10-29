@@ -129,7 +129,7 @@ export default async function ChinhSachRiengTu() {
             [<b key="b">Lưu hồ sơ vào tài khoản</b>, "Tích ô đồng ý rồi bấm \"Lưu vào tài khoản\" (ô không tích sẵn)", "\"Xoá hồ sơ khỏi tài khoản\" hoặc xoá tài khoản — hiệu lực ngay"],
             [<b key="c">Gửi ảnh nhà cho dịch vụ nhận diện</b>, "Tích ô đồng ý trước mỗi lần bấm \"Đọc ảnh\"", "Bỏ tích; ảnh không lưu nên không có gì để xoá thêm"],
             [<b key="d">Lưu ghi chú góp ý</b>, "Tích ô đồng ý khi gửi góp ý \"chưa đúng\"", "Ghi chú không gắn với bạn nên không gỡ riêng được; tự xoá sau 12 tháng"],
-            [<b key="e">Lưu bài luận, tự lưu bài</b>, "Bấm \"Lưu vào tài khoản\" hoặc tự bật \"Tự lưu\"", "Xoá từng bài, tắt \"Tự lưu\" ở Bài đã lưu"],
+            [<b key="e">Lưu bài luận, tự lưu bài, lưu câu trả lời hỏi đáp (kèm câu bạn hỏi)</b>, "Bấm \"Lưu vào tài khoản\", bấm \"Lưu\" dưới một câu trả lời, hoặc tự bật \"Tự lưu\"", "Xoá từng bài, tắt \"Tự lưu\" ở Bài đã lưu"],
             [<b key="f">Nhắc việc trong tài khoản, thông báo đẩy, các ô nhận thêm</b>, "Bấm \"cả trên tài khoản\", \"Bật nhắc\", tự tích ô nhận thêm", "Tắt nhắc, bỏ tích, xoá mốc ở Tài khoản → Dữ liệu của tôi"],
             [<b key="g">Lưu nhà vào tài khoản, điều bạn bấm \"Ghi nhớ\"</b>, "Tích ô đồng ý rồi bấm lưu; bấm \"Ghi nhớ\"", "Xoá ở Tài khoản → Dữ liệu của tôi"],
             [<b key="h">Cookie thống kê truy cập</b>, "Đang bật theo mặc định khi lượng truy cập còn thấp (xem mục Cookie)", "\"Tuỳ chọn cookie\" ở chân trang → Từ chối"],

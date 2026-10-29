@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""KD-NN — "Nói nôm na": mỗi quẻ một hình ảnh đời thường, mỗi hào một tình huống cụ thể.
+"""KD-NN — "Hiểu đơn giản" (trước gọi "Nói nôm na"): mỗi quẻ một hình ảnh đời thường, mỗi hào một tình huống cụ thể.
 Lời giải nghĩa cho người không học Dịch; đi kèm (không thay) nguyên văn + dịch nghĩa. Test viết TRƯỚC.
 """
 from __future__ import annotations
@@ -34,7 +34,7 @@ def test_du_64_que_384_hao_2_dung():
 def test_que_co_hinh_anh_va_nom_na():
     for so in range(1, 65):
         v = kb.que_van(so)["nom_na"]
-        assert v.startswith("Hình ảnh:") and "Nôm na:" in v, so
+        assert v.startswith("Hình ảnh:") and "Hiểu đơn giản:" in v, so
 
 
 @pytest.mark.parametrize("ten,v", list(_tat_ca()))
@@ -52,13 +52,13 @@ def test_hao_khong_trung_nhau():
 def test_tra_loi_co_noi_nom_na_cho_hao_dong():
     # 1 hào động (Càn sơ cửu) → lời chủ là hào đó, kèm nôm na
     kq = hd.tra_loi("Tôi có nên đổi việc lúc này không?", gia_tri_hao=[9, 7, 7, 7, 7, 7])
-    assert "Nói nôm na: " + kb.hao(1, 1)["nom_na"] in kq["cau_tra_loi"]
-    assert "Nói nôm na: " + kb.que_van(1)["nom_na"].split("Nôm na: ")[1] in kq["cau_tra_loi"]
+    assert "Hiểu đơn giản: " + kb.hao(1, 1)["nom_na"] in kq["cau_tra_loi"]
+    assert "Hiểu đơn giản: " + kb.que_van(1)["nom_na"].split("Hiểu đơn giản: ")[1] in kq["cau_tra_loi"]
 
 
 def test_trang_que_co_muc_nom_na():
     t = trang.lay("que", "que-1-can")
     tieu_de = [m["tieu_de"] for m in t["muc"]]
-    assert "Nói nôm na" in tieu_de
+    assert "Hiểu đơn giản" in tieu_de
     m = next(m for m in t["muc"] if m["tieu_de"] == "Sáu hào (hào từ)")
-    assert any("Nôm na:" in d for d in m["danh_sach"])
+    assert any("Hiểu đơn giản:" in d for d in m["danh_sach"])
