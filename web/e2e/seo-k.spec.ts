@@ -41,7 +41,7 @@ test("robots khai 2 sitemap; sitemap ngày đúng cửa sổ; /blog/trang/1 → 
 test("trang chủ + blog có tiêu đề chứa từ khoá; WebSite có keywords", async ({ request }) => {
   const html = await (await request.get("/")).text();
   expect(html).toContain("<title>Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân</title>");
-  expect(html).toContain('"alternateName":["hieuban.com","Hieu Ban Than"]');
+  expect(html).toContain('"alternateName":["Hiểu Bản Thân (hieuban.com)","hieuban.com","HieuBan"]');   // KH-BL P0
   const blog = await (await request.get("/blog")).text();
   expect(blog).toMatch(/<title>Blog thần số học, Tử vi, phong thuỷ, Kinh Dịch/);
 });

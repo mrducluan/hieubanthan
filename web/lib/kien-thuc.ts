@@ -43,6 +43,10 @@ const CHU_DE_GOC: Record<string, ChuDe> = {
   // SEO-J: "sinh năm X mệnh gì" — 1950–2025
   "menh-tuoi": { loai: "menh_nam", ten: "Sinh năm nào mệnh gì", mang: "/bat-tu",
     mo_ta: "Tra mệnh theo năm sinh 1950–2025: tuổi can chi, mệnh nạp âm và ý nghĩa, màu hợp theo ngũ hành, tuổi hợp – xung, cung phi nam nữ, mốc Tết và Lập xuân." },
+  "thap-than": { loai: "thap_than", ten: "10 thập thần Bát tự", mang: "/bat-tu",
+    mo_ta: "10 thập thần trong Bát tự (Tỷ Kiên đến Chính Ấn): ý nghĩa, tính cách, khi quá nhiều, khi thiếu, với nam và nữ." },
+  "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", mang: "/bat-tu",
+    mo_ta: "10 nhật chủ (can ngày sinh) trong Bát tự: hình tượng, tính chất, điểm mạnh, mặt tối và ảnh hưởng của mùa sinh." },
   // KH-BL đợt 1 (2026-10-29): nạp âm, tiết khí, con giáp theo năm (engine kb/trang_lich.py)
   "nap-am": { loai: "nap_am", ten: "30 mệnh nạp âm", mang: "/bat-tu",
     mo_ta: "30 mệnh nạp âm của 60 hoa giáp (Hải Trung Kim đến Đại Hải Thủy): nghĩa từng chữ, sinh năm nào, tính chất, sinh khắc ngũ hành." },
@@ -50,10 +54,6 @@ const CHU_DE_GOC: Record<string, ChuDe> = {
     mo_ta: "24 tiết khí từ Lập xuân đến Đại hàn: nghĩa tên, ngày giờ giao tiết theo giờ Việt Nam, tháng Bát tự, ba hậu theo Nguyệt lệnh." },
   "con-giap-nam": { loai: "con_giap_nam", ten: "12 con giáp theo năm", mang: "/bat-tu",
     mo_ta: "Tuổi Tý đến tuổi Hợi trong năm 2027 Đinh Mùi: hợp – xung với năm, Tam tai, tuổi mụ, mệnh, Kim lâu, Hoang ốc theo từng năm sinh." },
-  "thap-than": { loai: "thap_than", ten: "10 thập thần Bát tự", mang: "/bat-tu",
-    mo_ta: "10 thập thần trong Bát tự (Tỷ Kiên đến Chính Ấn): ý nghĩa, tính cách, khi quá nhiều, khi thiếu, với nam và nữ." },
-  "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", mang: "/bat-tu",
-    mo_ta: "10 nhật chủ (can ngày sinh) trong Bát tự: hình tượng, tính chất, điểm mạnh, mặt tối và ảnh hưởng của mùa sinh." },
   // Y5: dấu hiệu nhà ở — một trang cho mỗi dấu hiệu của form Khảo sát nhà (engine kb/trang_phongthuy.py)
   "dau-hieu": { loai: "dau_hieu", ten: "Dấu hiệu nhà ở", mang: "/phong-thuy",
     mo_ta: "23 dấu hiệu nhà ở hay gặp (gương đối giường, xà ngang, nhà vệ sinh giữa nhà…): sách xưa nói gì, nhìn theo đời sống hiện đại, việc nên làm từ 0 đồng." },

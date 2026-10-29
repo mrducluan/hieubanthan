@@ -14,6 +14,8 @@ import { dsBaiCms, tinhNangCms } from "@/lib/cms";
 const CUM_LON: Record<string, { mau: string; viDu: string[] }> = {
   "sao-cung": { mau: "/tu-vi/sao-o-cung/{sao}-cung-{cung}", viDu: ["tu-vi-cung-menh", "thai-duong-cung-quan-loc", "tham-lang-cung-phu-the"] },
   "tu-hoa": { mau: "/tu-vi/tu-hoa/hoa-{loc|quyen|khoa|ky}-cung-{cung}", viDu: ["hoa-loc-cung-menh", "hoa-ky-cung-tai-bach", "hoa-khoa-cung-quan-loc"] },
+  "nap-am": { mau: "/bat-tu/nap-am/{ten-nap-am}", viDu: ["hai-trung-kim", "thien-ha-thuy", "dai-hai-thuy"] },
+  "tiet-khi": { mau: "/bat-tu/tiet-khi/{ten-tiet-khi}", viDu: ["lap-xuan", "thanh-minh", "dong-chi"] },
   "con-giap-nam": { mau: "/bat-tu/con-giap-nam/tuoi-{ty…hoi}-nam-{năm}", viDu: ["tuoi-ty-nam-2027", "tuoi-mui-nam-2027", "tuoi-suu-nam-2027"] },
   "menh-tuoi": { mau: "/bat-tu/menh-theo-nam/sinh-nam-{1950…2025}-menh-gi", viDu: ["sinh-nam-1990-menh-gi", "sinh-nam-1995-menh-gi", "sinh-nam-2000-menh-gi"] },
 };
