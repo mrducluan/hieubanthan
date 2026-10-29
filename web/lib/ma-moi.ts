@@ -319,6 +319,54 @@ export function docMaQue(ma: string, homNay = new Date()): NoiDungMaQue | null {
   }
 }
 
+// ---------------------------------------------------------------- KV-THANG: thẻ "Tháng của tôi"
+// Mã riêng miền "thang|". Chỉ mang: tên hiển thị (người dùng tự gõ / tên gọi), tháng + năm xem, tháng cá nhân 1–9 của
+// tháng đó (engine tính, máy chủ ký — client không tự khai), danh sách NGÀY đã ghé (1–31, con số đếm, không phải huyền học).
+// KHÔNG ngày sinh, KHÔNG chuỗi dài nhất, KHÔNG huy hiệu, KHÔNG hạng hội viên (tình trạng mua hàng). Tháng cá nhân + tháng
+// xem lộ (ngày sinh + tháng sinh) mod 9 — cùng lớp rò rỉ 1/9 đã chấp nhận ở thẻ ngày (NHIP-1), không thêm trường nào khác
+// cùng hàm ngày sinh. Gói mảng + chữ ký 16 ký tự để link ngắn.
+export const NoiDungMaThang = z.object({
+  v: z.literal(1),
+  t: z.string().trim().min(1).max(40),
+  /** Năm + tháng được tổng kết (dương lịch). */
+  y: z.number().int().min(2026).max(2100),
+  m: z.number().int().min(1).max(12),
+  /** Tháng cá nhân 1–9 của tháng đó (engine). */
+  k: z.number().int().min(1).max(9),
+  /** Ngày trong tháng đã ghé Hôm nay (1–31, tăng dần, không trùng). */
+  g: z.array(z.number().int().min(1).max(31)).min(1).max(31),
+  /** Ngày tạo (YYYY-MM-DD) — để hết hạn. */
+  d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});
+export type NoiDungMaThang = z.infer<typeof NoiDungMaThang>;
+
+const kyThang = (than: string) => b64u(createHmac("sha256", khoa()).update(`thang|${than}`).digest()).slice(0, 16);
+
+export function kyMaThang(nd: Omit<NoiDungMaThang, "v" | "d">, homNay = new Date()): string {
+  const x = NoiDungMaThang.parse({ ...nd, v: 1, d: homNay.toISOString().slice(0, 10), g: [...new Set(nd.g)].sort((a, b) => a - b) });
+  const goi = [1, x.t, x.y * 12 + x.m - 1, x.k, x.g, Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
+  return `${than}.${kyThang(than)}`;
+}
+
+export function docMaThang(ma: string, homNay = new Date()): NoiDungMaThang | null {
+  const [than, chu_ky] = ma.split(".");
+  if (!than || !chu_ky || ma.length > 300) return null;
+  const a = Buffer.from(chu_ky), b = Buffer.from(kyThang(than));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown;
+    if (!Array.isArray(g) || g.length !== 6 || typeof g[2] !== "number") return null;
+    const nd = NoiDungMaThang.parse({
+      v: g[0], t: g[1], y: Math.floor(g[2] / 12), m: (g[2] % 12) + 1, k: g[3], g: g[4],
+      d: new Date(NGAY_GOC + Number(g[5]) * 86_400_000).toISOString().slice(0, 10),
+    });
+    return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
+  } catch {
+    return null;
+  }
+}
+
 // ---------------------------------------------------------------- HD-CS đợt 3: thẻ một câu trả lời hỏi đáp
 // Mã riêng miền "hoi|". Chỉ mang: mảng, MỘT câu hỏi chuẩn (route đối chiếu danh mục engine trước khi ký) và khối hình dạng
 // gọn (lib/the-hoi.ts — chỉ số trong danh mục cố định + con số). KHÔNG câu người dùng gõ, KHÔNG lời trả lời, KHÔNG ngày sinh.

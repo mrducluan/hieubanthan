@@ -181,14 +181,14 @@ test("khách: khối huy hiệu trên Bản thân chỉ dấu mốc máy (mờ +
   await expect(hh.getByTestId("hh-doc_5_mang")).toContainText(DANH_MUC.doc_5_mang.dieu_kien);
   await expect(hh.getByTestId("hh-doc_5_mang").getByTestId("hh-tien-do")).toHaveText("2/5");
   // Dòng tóm tắt gần đầu Bản thân; link "Bài luận đã lưu" ẩn khi chưa bật tài khoản (ngõ cụt).
-  await expect(page.getByTestId("huy-hieu-tom-tat")).toContainText("Huy hiệu: 1/4 dấu mốc");
+  await expect(page.getByTestId("huy-hieu-tom-tat")).toContainText("Huy hiệu: 1/5 dấu mốc");   // KV-THANG: +1 huy hiệu máy "Đủ 9 nhịp"
   await expect(page.getByTestId("huy-hieu-dang-di")).toContainText("Xem đủ 5 mảng” 2/5");
   await expect(page.getByTestId("lien-ket-bai-da-luu")).toHaveCount(0);
   await expect(hh.getByTestId("hh-chuoi_7")).toHaveCount(0);   // máy chủ không có khi chưa đăng nhập
   await expect(hh).toContainText("không mua bán, không chuyển cho ai, không đổi ra Sao hay tiền");
   expect(await hh.innerText()).not.toMatch(TU_CAM);
   await page.goto("/tai-khoan");
-  await expect(page.getByTestId("huy-hieu-tom-tat")).toContainText("Huy hiệu: 1/4 dấu mốc");
+  await expect(page.getByTestId("huy-hieu-tom-tat")).toContainText("Huy hiệu: 1/5 dấu mốc");   // KV-THANG: +1 huy hiệu máy "Đủ 9 nhịp"
 });
 
 test("đã đăng nhập: huy hiệu máy chủ sáng / mờ theo dat, kèm ngày đạt; mảng đã xem ghi từ reading_started", async ({ page }) => {

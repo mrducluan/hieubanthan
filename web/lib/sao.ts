@@ -93,6 +93,9 @@ export interface DiemDanh {
   ngay: string; chuoi: number; dai_nhat: number; moi: boolean; bat: boolean; moc: number; sao_moc: number; con_ngay: number; sao: number;
   /** SAO-HH (0030): hôm qua là ngày nghỉ chuỗi (chuỗi vẫn nối tiếp) · tuần này còn ngày nghỉ. Thiếu = DB chưa chạy 0030. */
   da_nghi?: boolean; nghi_con?: boolean;
+  /** KV-THANG (0032): ngày 1–31 đã ghé tháng này · thống kê tháng trước (tổng kết). Thiếu = DB chưa chạy 0032. */
+  ngay_ghe_thang?: number[];
+  thang_truoc?: { nam: number; thang: number; so_ngay: number; so_la: number; so_khac: number; du_9: boolean; ngay: number[] };
 }
 export async function diemDanh(): Promise<DiemDanh> {
   const { data, error } = await (await sb()).rpc("diem_danh");

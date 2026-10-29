@@ -40,6 +40,8 @@ export type SuKien =
   | "streak_freeze_used" | "badge_earned" | "daily_card_flipped" | "self_goal_set" | "self_goal_reached"
   // ĐY-1: đồng ý / thu hồi đồng ý xử lý dữ liệu trên form hồ sơ — chỉ mã bản đồng ý (phien_ban), không gì khác
   | "consent_given" | "consent_withdrawn"
+  // KV-THANG: tổng kết tháng trước hiện ra / bị đóng — chỉ số tháng + số ngày ghé + nguồn (may / tai_khoan), không nội dung
+  | "recap_viewed" | "recap_closed"
   // SAO-HV: hội viên năm kích hoạt (trang kết quả, mỗi đơn một lần) — chỉ kind, không số tiền; checkout_started{kind: hoi_vien}
   | "membership_activated"
   // SAO-CG "Hỏi chuyên gia": bắt đầu đặt câu (mảng, miễn phí hội viên?), đã thanh toán, chuyên gia trả lời, người dùng chấm điểm —

@@ -5,9 +5,11 @@
 //   · máy này (localStorage, khách hay đã đăng nhập đều có): chuỗi đếm trên máy, các mảng đã xem, "Hẹn với chính mình".
 // Hàm thuần (không React) để trang, route và e2e dùng chung.
 
-export const MA_HUY_HIEU_MAY_CHU = ["chuoi_7", "chuoi_30", "da_luu_ho_so", "hoi_3", "moi_1", "moi_5", "hoi_vien"] as const;
+import { docNhatKy, maHoSo, thangDu9 } from "@/lib/nhat-ky-ngay";
+
+export const MA_HUY_HIEU_MAY_CHU = ["chuoi_7", "chuoi_30", "da_luu_ho_so", "hoi_3", "moi_1", "moi_5", "hoi_vien", "du_9_nhip"] as const;
 export type MaHuyHieuMayChu = (typeof MA_HUY_HIEU_MAY_CHU)[number];
-export const MA_HUY_HIEU_MAY = ["chuoi_may_7", "doc_5_mang", "hen_7", "hen_30"] as const;
+export const MA_HUY_HIEU_MAY = ["chuoi_may_7", "doc_5_mang", "hen_7", "hen_30", "du_9_nhip_may"] as const;
 export type MaHuyHieuMay = (typeof MA_HUY_HIEU_MAY)[number];
 export type MaHuyHieu = MaHuyHieuMayChu | MaHuyHieuMay;
 
@@ -36,6 +38,9 @@ export const DANH_MUC: Record<MaHuyHieu, { ten: string; dieu_kien: string; bieu_
   doc_5_mang:   { ten: "Xem đủ 5 mảng", dieu_kien: "Xem kết quả ở cả Thần số, Tử vi, Bát tự, Kinh Dịch và Phong thuỷ.", bieu_tuong: "Compass" },
   hen_7:        { ten: "Giữ lời hẹn 7 ngày", dieu_kien: "Đặt hẹn với chính mình 7 ngày ghé và đi hết.", bieu_tuong: "HeartHandshake" },
   hen_30:       { ten: "Giữ lời hẹn 30 ngày", dieu_kien: "Đặt hẹn với chính mình 30 ngày ghé và đi hết.", bieu_tuong: "Trophy" },
+  // KV-THANG: đi qua đủ 9 số ngày cá nhân (1–9) trong một tháng — không cần liên tiếp, không đếm ngược; tài khoản (0032) / máy.
+  du_9_nhip:     { ten: "Đủ 9 nhịp một tháng", dieu_kien: "Ghé Hôm nay ở đủ 9 số ngày cá nhân trong một tháng (tính theo tài khoản).", bieu_tuong: "Orbit" },
+  du_9_nhip_may: { ten: "Đủ 9 nhịp một tháng", dieu_kien: "Ghé Hôm nay ở đủ 9 số ngày cá nhân trong một tháng.", bieu_tuong: "Orbit" },
 };
 /** Dòng ghi rõ bản chất — hiện cạnh khối huy hiệu. */
 export const CAU_BAN_CHAT = "Huy hiệu chỉ là dấu mốc của riêng bạn — không mua bán, không chuyển cho ai, không đổi ra Sao hay tiền.";
@@ -100,8 +105,9 @@ export function capHuyHieuMay(ma: MaHuyHieuMay, ngay: string): boolean {
   return true;
 }
 
-/** Gom huy hiệu máy từ localStorage: chuỗi máy ≥ 7, đủ 5 mảng, hẹn đã đạt. */
-export function huyHieuMay(): HuyHieu[] {
+/** Gom huy hiệu máy từ localStorage: chuỗi máy ≥ 7, đủ 5 mảng, hẹn đã đạt, đủ 9 nhịp (nhật ký ghé của hồ sơ này). */
+export function huyHieuMay(hoSo?: Parameters<typeof maHoSo>[0] | null): HuyHieu[] {
+  const du9 = hoSo ? thangDu9(docNhatKy(hoSo)) : null;
   const chuoi = docJson<{ ngay?: string; chuoi?: number }>(KHOA_CHUOI_MAY);
   const soChuoi = chuoi && typeof chuoi.chuoi === "number" ? chuoi.chuoi : 0;
   const mang = docMangDaXem();
@@ -112,6 +118,7 @@ export function huyHieuMay(): HuyHieu[] {
     { ma: "doc_5_mang", dat: mang.length >= NAM_MANG.length, luc: null, nguon: "may" },
     { ma: "hen_7", dat: Boolean(da.hen_7), luc: da.hen_7 ?? null, nguon: "may" },
     { ma: "hen_30", dat: Boolean(da.hen_30), luc: da.hen_30 ?? null, nguon: "may" },
+    { ma: "du_9_nhip_may", dat: Boolean(du9), luc: du9?.ngay_cuoi ?? null, nguon: "may" },
   ];
 }
 
@@ -120,12 +127,28 @@ export function gopHuyHieu(mayChu: HuyHieuMayChu[] | null, may: HuyHieu[]): HuyH
   const mc: HuyHieu[] = (mayChu ?? [])
     .filter((h) => (MA_HUY_HIEU_MAY_CHU as readonly string[]).includes(h.ma) && (h.ma !== "hoi_vien" || h.dat))
     .map((h) => ({ ma: h.ma, dat: Boolean(h.dat), luc: typeof h.luc === "string" ? h.luc : null, nguon: "tai_khoan" }));
-  // Đã có chuỗi tài khoản thì chuỗi máy chỉ là bản phụ: ẩn khi tài khoản đã đạt chuoi_7.
+  // Đã có bản tài khoản thì bản máy chỉ là bản phụ: ẩn khi tài khoản đã đạt (chuoi_7 ↔ chuoi_may_7, du_9_nhip ↔ du_9_nhip_may).
   const anChuoiMay = mc.some((h) => h.ma === "chuoi_7" && h.dat);
-  return [...mc, ...may.filter((h) => !(anChuoiMay && h.ma === "chuoi_may_7"))];
+  const anDu9May = mc.some((h) => h.ma === "du_9_nhip" && h.dat);
+  return [...mc, ...may.filter((h) => !(anChuoiMay && h.ma === "chuoi_may_7") && !(anDu9May && h.ma === "du_9_nhip_may"))];
 }
 
 export const demDat = (ds: HuyHieu[]) => ds.filter((h) => h.dat).length;
+
+/** KV-THANG: mã huy hiệu đã báo `badge_earned` trên máy này — để mỗi huy hiệu chỉ đo một lần khi vừa đạt.
+ *  Trả danh sách huy hiệu ĐÃ ĐẠT mà máy chưa ghi nhận (lần đầu mở khối sau khi đạt). Lần xem đầu tiên trên máy: chỉ ghi
+ *  nhận, không báo (huy hiệu cũ không phải "vừa đạt"). */
+export const KHOA_HUY_HIEU_DA_BAO = "hbt.huy_hieu_da_bao.v1";
+export function ghiHuyHieuVuaDat(ds: HuyHieu[]): HuyHieu[] {
+  const v = docJson<unknown>(KHOA_HUY_HIEU_DA_BAO);
+  const cu = Array.isArray(v) ? new Set(v.filter((x): x is string => typeof x === "string")) : null;
+  const dat = ds.filter((h) => h.dat);
+  ghiJson(KHOA_HUY_HIEU_DA_BAO, [...new Set([...(cu ?? []), ...dat.map((h) => h.ma)])]);
+  // Cặp máy ↔ tài khoản (chuoi_may_7 ↔ chuoi_7, du_9_nhip_may ↔ du_9_nhip): đã báo bản máy thì đăng nhập không báo lại.
+  const goc = (ma: string) => ma.replace(/_may(_|$)/, "$1");
+  const daBao = cu ? new Set([...cu].map(goc)) : null;
+  return daBao ? dat.filter((h) => !daBao.has(goc(h.ma))) : [];
+}
 
 // ---------------------------------------------------------------- tiến độ (trục 2 UX 2026-10-26)
 /** Ngày hôm qua (yyyy-mm-dd) của một ngày yyyy-mm-dd. */
@@ -178,6 +201,8 @@ export const THE_HUY_HIEU: Record<MaHuyHieu, { cau: string; moi: string; nut: st
   doc_5_mang:   { cau: "Đã xem mình qua cả năm góc: Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ.", moi: "Mỗi mảng một góc nhìn — bắt đầu từ mảng bạn tò mò nhất.", nut: "Khám phá năm mảng", den: "/huyen-hoc" },
   hen_7:        { cau: "Hẹn với chính mình bảy ngày — và đã giữ lời.", moi: "Đặt một lời hẹn nhỏ với chính bạn, không ai chấm điểm.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
   hen_30:       { cau: "Hẹn với chính mình ba mươi ngày — và đã giữ lời.", moi: "Đặt một lời hẹn nhỏ với chính bạn, không ai chấm điểm.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
+  du_9_nhip:     { cau: "Một tháng đi qua đủ chín nhịp ngày cá nhân, từ 1 tới 9.", moi: "Mỗi ngày một con số, một câu tự soi của riêng bạn.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
+  du_9_nhip_may: { cau: "Một tháng đi qua đủ chín nhịp ngày cá nhân, từ 1 tới 9.", moi: "Mỗi ngày một con số, một câu tự soi của riêng bạn.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
 };
 export const duongTheHuyHieu = (ma: MaHuyHieu) => `/the/huy-hieu/${ma.replace(/_/g, "-")}`;
 /** Đoạn URL (gạch ngang) → mã huy hiệu; null khi không có trong danh mục. */

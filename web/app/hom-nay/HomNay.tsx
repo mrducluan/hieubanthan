@@ -10,6 +10,8 @@ import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
 import { ViecTuanNha } from "@/components/huyen-hoc/ViecTuanNha";
 import { NhacHomNay } from "@/components/khung/NhacHomNay";
 import { CuonToiNeo } from "@/components/khung/CuonToiNeo";
+import { TongKetThang } from "@/components/khung/TongKetThang";
+import { docNhatKy, ghiGhe, thongKeThang } from "@/lib/nhat-ky-ngay";
 import { HoiHomQua } from "@/components/khung/HoiHomQua";
 import { HoiSau30Ngay } from "@/components/khung/HoiSau30Ngay";
 import { QueRieng } from "@/components/kinh-dich/QueRieng";
@@ -195,6 +197,8 @@ export function HomNay() {
       setThe(t); setLoi(null);
       // App đã cài mở khi mất mạng: trang ngoại tuyến (sw.js) đọc lại thẻ hôm nay từ máy này — chỉ số + hai câu đã hiện.
       try { localStorage.setItem("hbt.ngoai_tuyen.v1", JSON.stringify({ ngay: t.ngay_xem, so: t.ngay_ca_nhan.so, nghia: boTienTo(t.ngay_ca_nhan.nghia), tu_soi: t.ngay_ca_nhan.tu_soi })); } catch { /* riêng tư */ }
+      // KV-THANG: nhật ký ngày ghé trên máy (ngày xem engine, số ngày cá nhân, tháng cá nhân) — nền cho lịch + tổng kết tháng.
+      ghiGhe(hoSo, t.ngay_xem, t.ngay_ca_nhan.so, t.thang_ca_nhan?.so);
       const cu = docChuoi();
       const moi = capNhatChuoi(cu, t.ngay_xem);
       try { localStorage.setItem(KHOA_CHUOI, JSON.stringify(moi)); } catch { /* chế độ riêng tư: bỏ qua chuỗi */ }
@@ -292,7 +296,9 @@ export function HomNay() {
             </div>
             <SoNoiBatNgay hoSo={hoSo} />
             <div className="flex flex-wrap items-center justify-between gap-3">
-              {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} onTrangThai={setTtChuoi} />}
+              {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} onTrangThai={setTtChuoi}
+                so={the.ngay_ca_nhan.so} hoSo={hoSo}
+                ngayGheMay={thongKeThang(docNhatKy(hoSo), Number(the.ngay_xem.slice(0, 4)), Number(the.ngay_xem.slice(5, 7))).ngay} />}
               <Button size="sm" variant="secondary" onClick={() => void chiaSe()}><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ"}</Button>
             </div>
             {chepTay && <ChepTay url={chepTay} />}
@@ -303,6 +309,10 @@ export function HomNay() {
                 nguon={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? "tai_khoan" : "may"} />
             )}
           </Card>
+
+          {/* KV-THANG: tổng kết tháng trước (≥ 3 ngày ghé, đóng được) + lối sang "12 tháng tới"; số máy chủ khi đã đăng nhập (0032). */}
+          <TongKetThang hoSo={hoSo} homNay={the.ngay_xem} noi="hom_nay" thangNay={the.thang_ca_nhan}
+            mayChu={ttChuoi === null ? undefined : ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.thang_truoc ?? null : null} />
 
           <LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} />
 

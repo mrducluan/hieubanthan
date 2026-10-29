@@ -40,6 +40,7 @@ select * from (values
                                              and column_name = 'hang')),
   ('0029 hỏi chuyên gia (trả VND)',  to_regprocedure('public.cg_han_gio_cho(uuid)') is not null),
   ('0030 ngày nghỉ chuỗi + huy hiệu',  to_regprocedure('public.huy_hieu_cua_toi()') is not null),
-  ('0031 nhật ký hỏi đáp dùng khoá riêng', to_regprocedure('public.ghi_nhat_ky_hoi(text,jsonb,text)') is not null)
+  ('0031 nhật ký hỏi đáp dùng khoá riêng', to_regprocedure('public.ghi_nhat_ky_hoi(text,jsonb,text)') is not null),
+  ('0032 nhật ký ngày ghé (Tháng của tôi)', to_regclass('public.nhat_ky_ghe') is not null)
 ) as t(migration, da_chay)
 order by 1;

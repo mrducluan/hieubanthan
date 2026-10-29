@@ -6,15 +6,17 @@
 //   Không doạ, không thúc, không đếm ngược.
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Award, BadgeCheck, ChevronDown, CalendarCheck, Cloud, Compass, Flame, HeartHandshake, MessageCircle, Trophy, UserPlus, Users, type LucideIcon } from "lucide-react";
+import { ArrowRight, Award, BadgeCheck, ChevronDown, CalendarCheck, Cloud, Compass, Flame, HeartHandshake, MessageCircle, Orbit, Trophy, UserPlus, Users, type LucideIcon } from "lucide-react";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
+import { ghi } from "@/lib/do-luong";
 import { NutChiaSeHuyHieu } from "@/components/chia-se/NutChiaSeHuyHieu";
 import {
-  CAU_BAN_CHAT, DANH_MUC, dangDiGanNhat, demDat, gopHuyHieu, huyHieuMay, nguyenLieuTienDo, tienDoHuyHieu,
+  CAU_BAN_CHAT, DANH_MUC, dangDiGanNhat, demDat, ghiHuyHieuVuaDat, gopHuyHieu, huyHieuMay, nguyenLieuTienDo, tienDoHuyHieu,
   type HuyHieu as HuyHieuKieu, type NguyenLieuTienDo, type TrangThaiHuyHieu,
 } from "@/lib/huy-hieu";
+import { useHoSo } from "@/lib/hoso";
 
-const ICON: Record<string, LucideIcon> = { Flame, CalendarCheck, Cloud, MessageCircle, UserPlus, Users, BadgeCheck, Compass, HeartHandshake, Trophy };
+const ICON: Record<string, LucideIcon> = { Flame, CalendarCheck, Cloud, MessageCircle, UserPlus, Users, BadgeCheck, Compass, HeartHandshake, Trophy, Orbit };
 const ngayVn = (iso: string) => iso.split("-").reverse().join("/");
 const homNayVn = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
 
@@ -23,20 +25,29 @@ interface KetQua { ds: HuyHieuKieu[]; dangNhap: boolean; nl: NguyenLieuTienDo }
 /** Gom huy hiệu máy chủ (khi đăng nhập) + máy + nguyên liệu tiến độ trên máy. `null` = đang tải. */
 function useHuyHieu(): KetQua | null {
   const [kq, setKq] = useState<KetQua | null>(null);
+  const hoSo = useHoSo();
+  const daDocHoSo = hoSo !== undefined;
   useEffect(() => {
+    if (!daDocHoSo) return;
     let huy = false;
-    const may = huyHieuMay();
+    const may = huyHieuMay(hoSo);
     const nl = nguyenLieuTienDo(homNayVn());
+    // KV-THANG: huy hiệu nào vừa đạt so với lần xem trước (máy nhớ danh sách đã đạt) → badge_earned{ma, nguon}, một lần.
+    const xong = (ds: HuyHieuKieu[], dangNhap: boolean) => {
+      for (const h of ghiHuyHieuVuaDat(ds)) ghi("badge_earned", { ma: h.ma, nguon: h.nguon });
+      setKq({ ds, dangNhap, nl });
+    };
     fetch("/api/sao/huy-hieu", { cache: "no-store" })
       .then((r) => (r.ok ? (r.json() as Promise<TrangThaiHuyHieu>) : null))
       .then((t) => {
         if (huy) return;
         const mc = t && t.tai_khoan && t.dang_nhap && t.san_sang ? t.huy_hieu : null;
-        setKq({ ds: gopHuyHieu(mc, may), dangNhap: Boolean(t && t.tai_khoan && t.dang_nhap), nl });
+        xong(gopHuyHieu(mc, may), Boolean(t && t.tai_khoan && t.dang_nhap));
       })
-      .catch(() => { if (!huy) setKq({ ds: gopHuyHieu(null, may), dangNhap: false, nl }); });
+      .catch(() => { if (!huy) xong(gopHuyHieu(null, may), false); });
     return () => { huy = true; };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [daDocHoSo]);
   return kq;
 }
 

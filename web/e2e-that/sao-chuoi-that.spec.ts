@@ -212,3 +212,48 @@ test("SAO-3 nhiệm vụ: tiến độ thật (hồ sơ, câu hỏi đã đếm,
   await page.waitForTimeout(1_500);
   await expect(hopNv).toHaveCount(0);
 });
+
+// KV-THANG (migration 0032) — chuỗi thật: đã đăng nhập mở Hôm nay → diem_danh(p_so) ghi nhat_ky_ghe (ngày + số ngày cá nhân);
+// lật lá → cùng dòng có `la`; tháng trước gieo bằng service role (12 ngày, đủ 9 số) → tổng kết nguồn tai_khoan + huy hiệu
+// du_9_nhip (tài khoản) ở Bản thân; lịch tháng này lấy từ máy chủ. Dùng lại tài khoản EMAIL của test đầu.
+test("KV-THANG: nhật ký ghé theo tài khoản, tổng kết tháng trước từ máy chủ, huy hiệu Đủ 9 nhịp", async ({ page }) => {
+  const id = await uid(EMAIL);
+  const homNay = new Date(Date.now() + 7 * 3600_000).toISOString().slice(0, 10);
+  const [y, m] = homNay.split("-").map(Number) as [number, number];
+  const truoc = m === 1 ? { y: y - 1, m: 12 } : { y, m: m - 1 };
+  const ymd = (d: number) => `${truoc.y}-${String(truoc.m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+  await fetch(`${SB}/rest/v1/nhat_ky_ghe?user_id=eq.${id}`, { method: "DELETE", headers: H });
+  const gieo = await fetch(`${SB}/rest/v1/nhat_ky_ghe`, { method: "POST", headers: { ...H, "content-type": "application/json" },
+    body: JSON.stringify(Array.from({ length: 12 }, (_, i) => ({ user_id: id, ngay: ymd(i + 1), so: (i % 9) + 1, la: i < 3 ? "gio" : null }))) });
+  expect(gieo.status).toBe(201);
+
+  await page.goto("/dang-nhap?tiep=/hom-nay");
+  await dangNhap(page, EMAIL);
+  await expect(page).toHaveURL(/\/hom-nay/);
+  await expect(page.getByTestId("the-hom-nay")).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByTestId("chuoi-ngay")).toHaveAttribute("data-nguon", "tai_khoan", { timeout: 60_000 });
+  const so = Number(await page.getByTestId("so-ngay-ca-nhan").innerText());
+  const dong = async () => (await (await fetch(`${SB}/rest/v1/nhat_ky_ghe?user_id=eq.${id}&ngay=eq.${homNay}&select=so,la`, { headers: H })).json()) as { so: number; la: string | null }[];
+  await expect.poll(dong).toEqual([{ so, la: null }]);
+  // Lịch tháng này: hôm nay (máy chủ); tổng kết tháng trước từ máy chủ: 12 ngày, 3 lá, đủ 9 nhịp.
+  await expect(page.getByTestId("chuoi-lich").locator("[data-ghe]")).toHaveCount(1);
+  const tk = page.getByTestId("tong-ket-thang");
+  await expect(tk).toHaveAttribute("data-nguon", "tai_khoan", { timeout: 30_000 });
+  await expect(tk).toHaveAttribute("data-so-ngay", "12");
+  await expect(tk.getByTestId("tong-ket-cau")).toContainText("Bạn đã lật 3 lá bài đầu ngày.");
+  await expect(tk.getByTestId("tong-ket-cau")).toContainText("đủ 9 nhịp");
+  await expect(tk).not.toContainText("Đếm trên máy này");
+  // Lật lá → cùng dòng có la (diem_danh gọi lại trong ngày không cộng chuỗi).
+  await page.getByTestId("la-bai-up").click();
+  await expect(page.getByTestId("la-bai-noi-dung")).toBeVisible();
+  await expect.poll(async () => (await dong())[0]?.la, { timeout: 15_000 }).toMatch(/^(viec|cau_hoi|gio)$/);
+  // Bản thân: huy hiệu tài khoản du_9_nhip đạt (bản máy ẩn), tổng kết đọc bảng (không ghi lượt ghé mới).
+  await page.goto("/ban-than");
+  const hh = page.getByTestId("huy-hieu");
+  await expect(hh).toBeVisible({ timeout: 60_000 });
+  await expect(hh.getByTestId("hh-du_9_nhip")).toHaveAttribute("data-dat", "1");
+  await expect(hh.getByTestId("hh-du_9_nhip_may")).toHaveCount(0);
+  await expect(page.getByTestId("tong-ket-thang")).toHaveAttribute("data-nguon", "tai_khoan", { timeout: 30_000 });
+  const soDong = (await (await fetch(`${SB}/rest/v1/nhat_ky_ghe?user_id=eq.${id}&select=ngay`, { headers: H })).json()) as unknown[];
+  expect(soDong).toHaveLength(13);
+});
