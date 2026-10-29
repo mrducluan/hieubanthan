@@ -23,13 +23,13 @@ test("bảng chữ: khoá đúng dạng, có nhãn, chữ mặc định không r
 });
 
 test("lọc chữ CMS: khoá lạ, không phải chuỗi, HTML, quá dài, trùng mặc định đều bị bỏ / cắt", () => {
-  const ra = locChu(CHU_TRANG_CHU, { "dau.chip_1": "<script>x</script>Nhanh   gọn", "dau.chip_2": "Nói thật cả điểm mù", "khoa.la": "x",
+  const ra = locChu(CHU_TRANG_CHU, { "dau.chip_1": "<script>x</script>Nhanh   gọn", "dau.chip_2": "Đúng hay sai, bạn tự chấm", "khoa.la": "x",
     "dau.chip_3": 5, "so_sanh.nut": "x".repeat(100) });
   expect(ra).toEqual({ "dau.chip_1": "xNhanh gọn", "so_sanh.nut": "x".repeat(40) });
   expect(locChu(CHU_TRANG_CHU, ["a"])).toEqual({});
   const c = taoChu(CHU_TRANG_CHU, { "dau.chip_1": "Một phút", "khoa.la": "x" });
   expect(c("dau.chip_1")).toBe("Một phút");
-  expect(c("dau.chip_2")).toBe("Nói thật cả điểm mù");
+  expect(c("dau.chip_2")).toBe("Đúng hay sai, bạn tự chấm");
 });
 
 test("dấu nhấn *…* và biến {x}", () => {
@@ -49,7 +49,7 @@ test("gộp: chữ của URL thắng chữ của mẫu cụm; chuỗi rỗng / k
 test("trang chủ hiện đúng chữ mặc định của bảng (CMS chưa nối)", async ({ page }) => {
   await page.goto("/");
   const html = await page.content();
-  for (const k of ["dau.nhan_tren", "dau.chip_1", "dau.chip_2", "dau.chip_3", "so_sanh.lon", "so_sanh.cot_ai", "so_sanh.hang_3_hbt", "mang.lon", "mang.tu_vi_mo", "rieng_tu.dam"]) {
+  for (const k of ["dau.nhan_tren", "dau.chip_1", "dau.chip_2", "so_sanh.lon", "so_sanh.cot_ai", "so_sanh.hang_3_hbt", "mang.lon", "mang.tu_vi_mo", "rieng_tu.dam"]) {
     expect(html, k).toContain(boNhan((CHU_TRANG_CHU as BangChu)[k]!.mac_dinh));
   }
   await expect(page.getByTestId("diem-mu-luot")).toContainText("Nói “có” khi trong lòng muốn nói “không”.");

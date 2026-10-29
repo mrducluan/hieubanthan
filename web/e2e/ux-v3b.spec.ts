@@ -110,6 +110,41 @@ for (const [ten, vp, tran] of [["máy tính 1440×900", MAY_TINH, 900], ["điệ
   });
 }
 
+// TC-HOOK2: khung giữ chỗ của ô nhập cao bằng form thật → form hiện ra không xô trang (trước: CLS 0,07–0,21); câu
+// điểm mù không tràn khung; máy tính: hai chip nằm dưới hình, hình không lệch quá xa giữa cột chữ.
+for (const vp of [MAY_TINH, { width: 1024, height: 768 }, DIEN_THOAI]) {
+  test(`TC-HOOK2 đầu trang ${vp.width}px: không xô bố cục, câu điểm mù không tràn, không cuộn ngang`, async ({ page }) => {
+    await page.addInitScript(() => {
+      (window as unknown as { __cls: number }).__cls = 0;
+      new PerformanceObserver((l) => {
+        for (const e of l.getEntries() as (PerformanceEntry & { value: number; hadRecentInput: boolean })[])
+          if (!e.hadRecentInput) (window as unknown as { __cls: number }).__cls += e.value;
+      }).observe({ type: "layout-shift", buffered: true });
+    });
+    await page.setViewportSize(vp);
+    await page.goto("/");
+    await expect(page.getByRole("button", { name: /Đồng ý và xem kết quả/ })).toBeVisible();
+    await page.waitForTimeout(500);
+    const r = await page.evaluate(() => {
+      const ul = document.querySelector(".diem-mu-luot")!;
+      const [trai, phai] = [...document.querySelector("[data-testid=hero]")!.children].map((e) => e.getBoundingClientRect());
+      const chip = document.querySelector("[data-testid=hero-diem]")!.getBoundingClientRect();
+      return {
+        cls: (window as unknown as { __cls: number }).__cls,
+        tran: [...ul.children].some((li) => li.scrollHeight > ul.clientHeight + 1),
+        ngang: document.documentElement.scrollWidth - innerWidth,
+        lech: Math.abs((trai!.top + trai!.bottom) / 2 - (phai!.top + phai!.bottom) / 2), haiCot: phai!.left > trai!.right,
+        chipDuoiHinh: chip.top >= phai!.top + phai!.height / 2,
+      };
+    });
+    expect(r.cls).toBeLessThan(0.05);
+    expect(r.tran).toBe(false);
+    expect(r.ngang).toBe(0);
+    expect(r.chipDuoiHinh).toBe(true);
+    if (r.haiCot) expect(r.lech).toBeLessThan(40);
+  });
+}
+
 test.describe("điện thoại", () => {
   test.use({ viewport: DIEN_THOAI });
 

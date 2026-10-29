@@ -29,7 +29,7 @@ export const CHU_CHUNG = {
   "ho_so.thu_hoi": { nhom: HS, nhan: "Nút thu hồi đồng ý (xoá đồng ý + hồ sơ trên máy)", mac_dinh: "Thu hồi", toi_da: 30 },
   "ho_so.chinh_sach": { nhom: HS, nhan: "Chữ link tới Chính sách quyền riêng tư", mac_dinh: "Chính sách quyền riêng tư", toi_da: 40 },
 
-  "cua_vao.tieu_de": { nhom: CV, nhan: "Tiêu đề ô nhập (chưa có hồ sơ)", mac_dinh: "Bắt đầu — chỉ cần 2 thông tin", toi_da: 80 },
+  "cua_vao.tieu_de": { nhom: CV, nhan: "Tiêu đề ô nhập (chưa có hồ sơ)", mac_dinh: "Chỉ cần tên và ngày sinh", toi_da: 80 },
   "cua_vao.chao_lai": { nhom: CV, nhan: "Dòng nhỏ khi đã có hồ sơ", mac_dinh: "Chào lại", toi_da: 30 },
   "cua_vao.san_sang": { nhom: CV, nhan: "Câu dưới tên người dùng", mac_dinh: "Hồ sơ đã sẵn sàng trên máy này.", toi_da: 100 },
   "cua_vao.nut_hom_nay": { nhom: CV, nhan: "Nút chính", mac_dinh: "Xem cả ngày hôm nay", toi_da: 40 },

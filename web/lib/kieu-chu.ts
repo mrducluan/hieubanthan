@@ -17,12 +17,13 @@ export const CO_TRANG_CHU = {
     nho: "text-[2.1rem] sm:text-5xl", thuong: "text-[2.6rem] sm:text-6xl",
     lon: "text-[3rem] sm:text-7xl", rat_lon: "text-[3.4rem] sm:text-8xl",
   },
-  // Dòng điểm mù xếp chồng tuyệt đối trong khung cao cố định → mỗi cỡ đi kèm chiều cao khung (đủ 2 dòng trên điện thoại).
+  // Dòng điểm mù: các câu xếp chồng trong cùng một ô lưới (globals.css) → khung tự cao bằng câu dài nhất, không tràn,
+  // không xô bố cục. Máy tính (lg) bớt một nấc cho cột chữ hẹp (TC-HOOK2).
   diemMu: {
-    nho: { chu: "text-sm sm:text-base", khung: "h-[2.75rem] sm:h-6" },
-    thuong: { chu: "text-base sm:text-lg", khung: "h-[3.25rem] sm:h-7" },
-    lon: { chu: "text-lg sm:text-xl", khung: "h-[3.75rem] sm:h-8" },
-    rat_lon: { chu: "text-xl sm:text-2xl", khung: "h-[4.25rem] sm:h-10" },
+    nho: "text-sm sm:text-base lg:text-sm xl:text-base",
+    thuong: "text-base sm:text-lg lg:text-base xl:text-[1.0625rem]",
+    lon: "text-lg sm:text-xl lg:text-lg",
+    rat_lon: "text-xl sm:text-2xl lg:text-xl",
   },
   chip: { nho: "text-xs", thuong: "text-[0.8rem]", lon: "text-base", rat_lon: "text-lg" },
 } as const;
