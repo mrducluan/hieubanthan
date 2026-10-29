@@ -15,6 +15,8 @@ import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
 import type { HoSo } from "@/lib/hoso";
 import { chonLaBai, laDaLat, nhoDaLat, type MaLaBai, type NguyenLieuLaBai } from "@/lib/la-bai";
+import { docNhatKy, ghiLa, thongKeThang } from "@/lib/nhat-ky-ngay";
+import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 import { maMoiNgay, taoLinkNgay } from "@/components/chia-se/NutChiaSeNgay";
 
 // Mặt sau theo loại lá: biểu tượng + màu nhấn + nền riêng (v3 M4). Chữ loại lấy từ `la.ngan` (lib/la-bai.ts).
@@ -26,6 +28,7 @@ const MAT_SAU: Record<MaLaBai, { icon: LucideIcon; nhan: string; vien: string; n
 // Nhịp lật: vào–ra đều (không "ra êm" như EASE — kiểu đó qua 90° ngay khung hình đầu nên mắt không thấy lá xoay).
 const NHIP_LAT: [number, number, number, number] = [0.45, 0, 0.25, 1];
 const ddmm = (iso: string) => { const [, m, d] = iso.split("-"); return d && m ? `${d}/${m}` : ""; };
+const thangCua = (iso: string): [number, number] => [Number(iso.slice(0, 4)), Number(iso.slice(5, 7))];
 
 export function LaBaiDauNgay({ the, hoSo, tieuDe }: { the: NguyenLieuLaBai; hoSo: HoSo; tieuDe: string }) {
   const giam = Boolean(useReducedMotion());
@@ -34,12 +37,15 @@ export function LaBaiDauNgay({ the, hoSo, tieuDe }: { the: NguyenLieuLaBai; hoSo
   const [daChep, setDaChep] = useState(false);
   const [dangChiaSe, setDangChiaSe] = useState(false);
   const noiDung = useRef<HTMLDivElement>(null);
+  const [soLaThang, setSoLaThang] = useState(0);   // số lá đã lật tháng này (nhật ký máy của hồ sơ này)
   const la = chonLaBai(the, hoSo, maNho);
 
   useEffect(() => {
     const d = laDaLat(the.ngay_xem);
     setLat(d !== null);
     setMaNho(d && d !== "co" ? d : null);
+    setSoLaThang(thongKeThang(docNhatKy(hoSo), ...thangCua(the.ngay_xem)).so_la);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- hoSo đổi thì trang dựng lại
   }, [the.ngay_xem]);
   if (!la || lat === null) return null;
 
@@ -49,6 +55,9 @@ export function LaBaiDauNgay({ the, hoSo, tieuDe }: { the: NguyenLieuLaBai; hoSo
     setMaNho(la.ma);
     nhoDaLat(the.ngay_xem, la.ma);
     ghi("daily_card_flipped", { kind: la.ma });
+    // KV-THANG: lá vào nhật ký tháng (máy; tài khoản qua diem_danh 0032 — gọi lại trong ngày không cộng chuỗi).
+    setSoLaThang(thongKeThang(ghiLa(hoSo, the.ngay_xem, la.ma), ...thangCua(the.ngay_xem)).so_la);
+    if (coTaiKhoan()) void fetch("/api/sao/chuoi", { method: "POST", cache: "no-store", headers: { "content-type": "application/json" }, body: JSON.stringify({ la: la.ma }) }).catch(() => null);
     // Điện thoại: nội dung nằm dưới lá → lật xong cuộn nhẹ tới nội dung (chỉ khi phần đó chưa nằm trọn trong màn hình).
     window.setTimeout(() => {
       const el = noiDung.current;
@@ -134,6 +143,7 @@ export function LaBaiDauNgay({ the, hoSo, tieuDe }: { the: NguyenLieuLaBai; hoSo
               <p className="text-xs font-medium text-moon">{la.nhan}</p>
               <p className="text-lg leading-snug" data-testid="la-bai-chu">{la.chu}</p>
               {la.phu && <p className="text-fg-muted">{la.phu}</p>}
+              {soLaThang > 0 && <p className="text-xs text-fg-faint" data-testid="la-bai-thang">{soLaThang === 1 ? "Lá đầu tiên của tháng này." : `Lá thứ ${soLaThang} của tháng này.`}</p>}
               <div className="flex flex-wrap gap-2 pt-1">
                 <Button size="sm" variant="secondary" onClick={() => void chiaSe()} disabled={dangChiaSe} data-testid="la-bai-chia-se">
                   {daChep ? <Check aria-hidden /> : <Share2 aria-hidden />}{daChep ? "Đã chép" : "Chia sẻ lá bài"}

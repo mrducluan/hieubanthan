@@ -759,6 +759,14 @@ Ví Sao, link mời có thưởng chỉ chạy khi đã bật tài khoản.
   `gpg` → `BACKUP_PASSPHRASE='…' DICH_DB_URL='postgresql://…' supabase/sao-luu/khoi-phuc.sh hbt-db-<ngày>.tar.gpg` →
   script tự đếm dòng từng bảng so với lúc sao lưu. Đây là bản THỨ HAI, không thay mục bật sao lưu / PITR của Supabase.
 
+### 4r. "Tháng của tôi" — migration 0032 (2026-10-29)
+
+- [ ] **Chạy migration 0032** (`supabase/migrations/0032_nhat_ky_ghe.sql`, sau 0030) trong SQL Editor: bảng nhật ký ngày ghé
+  theo tài khoản (ngày + số ngày cá nhân + lá đã lật — không ngày sinh), `diem_danh()` thêm hai tham số tuỳ chọn, huy hiệu
+  "Đủ 9 nhịp". Chưa chạy thì web vẫn chạy bằng nhật ký trên máy (tổng kết tháng ghi "Đếm trên máy này"). Rollback: tệp
+  `.down.sql` cùng tên. Kiểm: `/quan-tri` thẻ Migration báo 0032 đã chạy; mở `/hom-nay` khi đăng nhập → Table Editor
+  `nhat_ky_ghe` có dòng hôm nay.
+
 ## D. Các việc còn lại — em làm gì, anh cần làm gì
 
 - [x] ~~Gate 0 – 20–50 người thử~~ → anh chốt bỏ, mở công khai luôn. Thay bằng: sau 1–2 tuần có PostHog + GA4, gửi em

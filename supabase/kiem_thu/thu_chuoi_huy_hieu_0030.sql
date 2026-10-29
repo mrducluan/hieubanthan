@@ -21,7 +21,9 @@ on conflict do nothing;
 select (now() at time zone 'Asia/Ho_Chi_Minh')::date as hom_nay \gset
 
 -- ================================================================ (0) quyền
-select pg_temp.kt('anon không gọi diem_danh', has_function_privilege('anon', 'diem_danh()', 'execute'), false);
+-- 0032 đổi chữ ký thành diem_danh(integer, text) — kiểm đúng bản đang có.
+select pg_temp.kt('anon không gọi diem_danh', has_function_privilege('anon',
+    coalesce(to_regprocedure('public.diem_danh(integer,text)'), to_regprocedure('public.diem_danh()')), 'execute'), false);
 select pg_temp.kt('anon không gọi huy_hieu_cua_toi', has_function_privilege('anon', 'huy_hieu_cua_toi()', 'execute'), false);
 select pg_temp.kt('authenticated gọi huy_hieu_cua_toi', has_function_privilege('authenticated', 'huy_hieu_cua_toi()', 'execute'), true);
 select pg_temp.kt('cột nghi_cuoi có', exists (select 1 from information_schema.columns
@@ -104,7 +106,8 @@ reset role;
 -- ================================================================ (2) huy hiệu
 set role authenticated; select set_config('request.jwt.claim.sub', :X, false);
 select huy_hieu_cua_toi() as h1 \gset
-select pg_temp.kt('7 huy hiệu, đúng thứ tự', (select string_agg(x->>'ma', ',') from jsonb_array_elements(:'h1'::jsonb) x),
+-- 0032 nối thêm du_9_nhip ở cuối — 7 mã của 0030 vẫn đứng đầu, đúng thứ tự.
+select pg_temp.kt('7 huy hiệu, đúng thứ tự', (select string_agg(x->>'ma', ',') from (select x from jsonb_array_elements(:'h1'::jsonb) with ordinality as t(x, i) order by i limit 7) s),
     'chuoi_7,chuoi_30,da_luu_ho_so,hoi_3,moi_1,moi_5,hoi_vien');
 select pg_temp.kt('chuoi_7 đạt', (select (x->>'dat')::boolean from jsonb_array_elements(:'h1'::jsonb) x where x->>'ma' = 'chuoi_7'), true);
 select pg_temp.kt('chuoi_30 đạt', (select (x->>'dat')::boolean from jsonb_array_elements(:'h1'::jsonb) x where x->>'ma' = 'chuoi_30'), true);

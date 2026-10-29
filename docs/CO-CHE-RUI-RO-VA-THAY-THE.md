@@ -90,3 +90,8 @@ là mất" trái nguyên tắc **không phạt khi mất chuỗi** của trang (
 
 Gợi ý thứ tự: 1 → 4 → 2 → 3 (em làm được ngay, rủi ro thấp, đánh đúng khâu QUAY LẠI); 6 sau hội viên năm; 5, 7, 8 cần
 anh làm phần đối tác / thủ tục trước.
+
+**Cập nhật 2026-10-29 (KV-THANG):** việc 1 · 2 · 3 · 4 · 6 đã làm (SAO-HH, SAO-HV). Đợt nâng cấp "làm hoàn hảo hơn" theo
+`docs/DE-XUAT-CO-CHE-V2.md`: nối 4 cơ chế thành một nhịp tháng — nhật ký ngày ghé (máy + migration 0032), lịch ghé, tổng
+kết tháng trước + thẻ "Tháng N của tôi", huy hiệu "Đủ 9 nhịp một tháng", lối sang chương "12 tháng tới". Vẫn không: album
+sưu tập x/9 (chuỗi đổi vỏ, áp lực), bán "sửa chuỗi", hạng hội viên / huy hiệu lên thẻ công khai.

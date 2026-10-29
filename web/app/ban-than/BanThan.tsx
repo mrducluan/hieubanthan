@@ -23,6 +23,8 @@ import { useQuyUocDD } from "@/lib/quy-uoc-dd";
 import { ghi } from "@/lib/do-luong";
 import { NhiemVuSao } from "@/components/sao/NhiemVuSao";
 import { HuyHieu, TomTatHuyHieu } from "@/components/khung/HuyHieu";
+import { TongKetThang } from "@/components/khung/TongKetThang";
+import { DongHoiVien } from "@/components/sao/DongHoiVien";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 
 const KHOA_LAN_GHE = "hbt.ban_than_lan_ghe";
@@ -93,8 +95,9 @@ export function BanThan() {
             <Button variant="secondary" asChild><Link href="/chia-se"><Share2 aria-hidden /> Chia sẻ thẻ</Link></Button>
             <Button variant="ghost" onClick={() => setSuaMo(true)}><Pencil aria-hidden /> Sửa hồ sơ</Button>
           </div>
-          {/* Trục 2 UX: một dòng huy hiệu gần đầu trang (mục đầy đủ ở cuối trang). */}
+          {/* Trục 2 UX: một dòng huy hiệu gần đầu trang (mục đầy đủ ở cuối trang). KV-THANG: hạng hội viên (riêng tư) cạnh đó. */}
           <TomTatHuyHieu taiBanThan className="mt-1" />
+          <DongHoiVien />
         </div>
       </section>
 
@@ -112,6 +115,9 @@ export function BanThan() {
           <ArrowRight className="size-5 shrink-0 text-gold" aria-hidden />
         </Link>
       </section>
+
+      {/* KV-THANG: tháng trước của tôi (đọc nhật ký tài khoản / máy, không ghi lượt ghé) — Bản thân đã có nhịp tháng này ở trên. */}
+      <TongKetThang hoSo={hoSo} homNay={new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date())} noi="ban_than" />
 
       <BanDoTomTat hoSo={hoSo} quyUoc={quyUoc} />
 
