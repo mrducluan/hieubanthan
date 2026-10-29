@@ -18,7 +18,7 @@ export function SapCo({ moTa, trongLucCho, testId }: { moTa: ReactNode; trongLuc
       {trongLucCho && <p className="mt-2 text-sm text-fg-muted">{trongLucCho}</p>}
       <div className="mt-5 flex flex-wrap gap-2">
         <Button asChild variant="secondary" className="min-h-11"><Link href="/tai-khoan"><ArrowLeft aria-hidden /> Về Tài khoản</Link></Button>
-        <Button asChild variant="outline" className="min-h-11"><Link href="/kham-pha"><Compass aria-hidden /> Khám phá các mảng</Link></Button>
+        <Button asChild variant="outline" className="min-h-11"><Link href="/huyen-hoc"><Compass aria-hidden /> Các mảng huyền học</Link></Button>
       </div>
     </section>
   );

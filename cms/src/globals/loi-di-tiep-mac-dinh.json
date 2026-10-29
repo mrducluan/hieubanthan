@@ -27,7 +27,7 @@
     ] },
     { "tru": "/kinh-dich", "the": [
       { "duong": "/hom-nay#que-ngay", "ten": "Quẻ đầu ngày", "nhan": "cong_cu", "hinh": "kinh-dich",
-        "mo_ta": "Mỗi sáng một quẻ Mai Hoa kèm lời nói nôm na, và quẻ riêng theo hai con số bạn tự nghĩ tới." },
+        "mo_ta": "Mỗi sáng một quẻ Mai Hoa kèm lời giải thích dễ hiểu, và quẻ riêng theo hai con số bạn tự nghĩ tới." },
       { "duong": "/tu-dien", "ten": "Từ điển thuật ngữ", "nhan": "thu_vien", "hinh": "kinh-dich",
         "mo_ta": "Hào động, quẻ biến, thể – dụng, lục thân… hơn 200 thuật ngữ của năm mảng, giải nghĩa bằng lời đời thường." }
     ] },
@@ -35,7 +35,9 @@
       { "duong": "/xem-tuoi-lam-nha", "ten": "Xem tuổi làm nhà", "nhan": "cong_cu", "hinh": "phong-thuy",
         "mo_ta": "Năm nay tuổi bạn có phạm Kim lâu, Hoang ốc, Tam tai không — và nếu cần mượn tuổi thì chọn tuổi nào." },
       { "duong": "/tuoi-xong-dat", "ten": "Tuổi xông đất", "nhan": "cong_cu", "hinh": "phong-thuy",
-        "mo_ta": "Tuổi nào hợp xông đất đầu năm với gia chủ — chỉ liệt kê tuổi hợp và lý do, không chấm điểm." }
+        "mo_ta": "Tuổi nào hợp xông đất đầu năm với gia chủ — chỉ liệt kê tuổi hợp và lý do, không chấm điểm." },
+      { "duong": "/xem-sao-han", "ten": "Sao hạn theo tuổi", "nhan": "cong_cu", "hinh": "phong-thuy",
+        "mo_ta": "Năm nay bạn gặp sao nào theo tục xếp theo tuổi — đọc bằng lời thường và việc nên làm, không cúng sao." }
     ] },
     { "tru": "chung", "the": [
       { "duong": "/kien-thuc", "ten": "Thư viện kiến thức", "nhan": "thu_vien", "hinh": "tu-vi",

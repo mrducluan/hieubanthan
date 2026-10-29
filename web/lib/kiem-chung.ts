@@ -75,13 +75,13 @@ export const TEN_MANG: Record<string, string> = { tuvi: "Tử vi", battu: "Bát 
 export const TEN_CHUONG_BT: Record<string, string> = {
   tong_quan: "Con người bạn", ngu_hanh: "Năng lượng (ngũ hành)", cuoc_doi: "Các giai đoạn cuộc đời", su_nghiep: "Công việc",
   tien_bac: "Tiền bạc", tinh_cam: "Tình yêu & hôn nhân", gia_dinh: "Gia đình", hoc_tap: "Học & nghĩ",
-  suc_khoe: "Sức khoẻ", quan_he: "Bạn bè & bên ngoài", nam_nay: "Năm nay & tháng tới", van_han: "Vận hạn & điều nên tránh",
+  suc_khoe: "Sức khoẻ", quan_he: "Bạn bè & bên ngoài", nam_nay: "Năm nay & tháng tới", van_han: "Mười năm tới & điều nên tránh (vận hạn)",
   loi_khuyen: "Lời khuyên",
 };
 export const TEN_CHUONG_DS: Record<string, string> = {
   tong_quan: "Con người bạn", cuoc_doi: "Các giai đoạn cuộc đời", su_nghiep: "Công việc", tien_bac: "Tiền bạc",
   tinh_cam: "Tình yêu & hôn nhân", gia_dinh: "Gia đình", suc_khoe: "Sức khoẻ", quan_he: "Bạn bè & bên ngoài",
-  nha_cua: "Nhà cửa", duong_bay: "Đường bay tứ hoá", nam_nay: "Năm nay & 3 tháng tới", van_han: "Vận hạn & điều nên tránh",
+  nha_cua: "Nhà cửa", duong_bay: "Đường bay tứ hoá", nam_nay: "Năm nay & 3 tháng tới", van_han: "Mười năm tới & điều nên tránh (vận hạn)",
   loi_khuyen: "Lời khuyên",
   cot_loi: "Điều quan trọng nhất",
 };

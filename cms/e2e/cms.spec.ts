@@ -485,7 +485,7 @@ test("Tính năng: tắt blog → bài CMS ẩn khỏi web; bật lại → hi�
   await choWeb(request, "/blog/so-chu-dao-7", (s) => s === 200);
 });
 
-test("Giao diện website: menu chân trang, dải thông báo, banner, bài mới trang chủ, bài liên quan ở Khám phá — sửa ở CMS, web đổi theo", async ({ page, request }) => {
+test("Giao diện website: menu chân trang, dải thông báo, banner, bài mới trang chủ, bài liên quan ở Huyền học — sửa ở CMS, web đổi theo", async ({ page, request }) => {
   const token = await tokenQt(request);
   const h = { Authorization: `JWT ${token}` };
   const bai = (await (await request.get(`${CMS}/api/bai-viet?where[slug][equals]=so-chu-dao-7&depth=0`, { headers: h })).json()).docs[0];
@@ -515,7 +515,7 @@ test("Giao diện website: menu chân trang, dải thông báo, banner, bài m�
   await expect(chan.getByRole("link", { name: "Bài số 7 nổi bật" })).toHaveAttribute("href", "/blog/so-chu-dao-7");
   await expect(chan.getByText("Về chúng tôi", { exact: true })).toHaveCount(0);   // menu theo CMS, không trộn mặc định
 
-  await page.goto(`${WEB}/kham-pha`);
+  await page.goto(`${WEB}/huyen-hoc`);
   await expect(page.getByTestId("bai-lien-quan-mang").locator('a[href="/blog/so-chu-dao-7"]')).toBeVisible();
 
   // tắt hết → web quay về mặc định trong code, không còn dải/banner
@@ -523,7 +523,7 @@ test("Giao diện website: menu chân trang, dải thông báo, banner, bài m�
     thong_bao: { bat: false }, banner: { bat: false }, bai_viet: { bat: false }, bai_theo_mang: { bat: false } } })).ok()).toBeTruthy();
   expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: { cot: [] } })).ok()).toBeTruthy();
   await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Mùa thu tự soi") && b.includes("Về chúng tôi"));
-  await page.goto(`${WEB}/kham-pha`);
+  await page.goto(`${WEB}/huyen-hoc`);
   await expect(page.getByTestId("bai-lien-quan-mang")).toHaveCount(0);
   await expect(page.getByTestId("thong-bao-site")).toHaveCount(0);
 });
@@ -638,7 +638,7 @@ test("ND-7: chữ trên trang — tab trong CMS, sửa chip + hàng bảng trang
   await dangNhap(page);
   await page.goto(`${CMS}/admin/collections/noi-dung-trang/${chu.id}`);
   await page.locator(".tabs-field__tab-button", { hasText: "Chữ trên trang" }).click();
-  await expect(page.getByTestId("chu-tren-trang")).toContainText("Gốc: 30 giây · không cần tài khoản");
+  await expect(page.getByTestId("chu-tren-trang")).toContainText("Gốc: Không cần tài khoản");
 
   const r = await request.patch(`${CMS}/api/noi-dung-trang/${chu.id}`, { headers: h, data: {
     _status: "published", chu: { "dau.chip_1": "Một phút là xong", "so_sanh.hang_1_ai": "Hàng chatbot sửa từ CMS", "khoa.la": "bỏ" } } });
@@ -663,7 +663,7 @@ test("ND-7: chữ trên trang — tab trong CMS, sửa chip + hàng bảng trang
   for (const [c, id] of [["noi-dung-trang", chu.id], ["mau-cum", mau.id]] as const) {
     expect((await request.patch(`${CMS}/api/${c}/${id}`, { headers: h, data: { _status: "draft" } })).ok()).toBeTruthy();
   }
-  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Một phút là xong") && b.includes("30 giây · không cần tài khoản"));
+  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Một phút là xong") && b.includes("Không cần tài khoản"));
   await choWeb(request, `/xem-ngay-tot/${iso}`, (s, b) => s === 200 && b.includes(`Ngày ${dmy} tốt hay xấu?`));
 });
 
@@ -728,7 +728,7 @@ test("ND-7 đợt 2: xem trước bản nháp trang chủ (dải báo + thoát),
   // ô vào trang chủ chỉ dựng ở trình duyệt (sau khi đọc hồ sơ trên máy) → HTML máy chủ chỉ mang chữ thay qua context
   await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Hình trang chủ ND-7") && !b.includes("Nhập 2 thông tin là xong"));
   await page.goto(`${WEB}/`);
-  await expect(page.getByText("Bắt đầu — chỉ cần 2 thông tin")).toBeVisible();
+  await expect(page.getByText("Chỉ cần tên và ngày sinh")).toBeVisible();
 });
 
 test("ND-4/ND-5: mẫu cụm đặt khối + ảnh cho mọi trang kiến thức, ghi đè một URL ẩn khối mẫu; pháp lý sửa mục + ngày hiệu lực, bắt buộc tích đối chiếu", async ({ page, request }) => {
@@ -834,7 +834,7 @@ test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa
   await daLoHet(page);
   const menu = page.getByTestId("menu-dau-trang");
   await expect(menu.getByRole("link", { name: "Góc đọc" })).toHaveAttribute("href", "/blog");
-  await expect(menu.getByText("Khám phá", { exact: true })).toHaveCount(0);   // menu theo CMS, không trộn mặc định
+  await expect(menu.getByText("Huyền học", { exact: true })).toHaveCount(0);   // menu theo CMS, không trộn mặc định
   await page.getByRole("button", { name: "Mở menu Góc đọc" }).click();
   const con = page.locator("[data-testid=menu-con]:visible");
   await expect(con.getByRole("link", { name: /Bài số 7 nổi bật/ })).toHaveAttribute("href", "/blog/so-chu-dao-7");
@@ -853,7 +853,7 @@ test("Menu đầu trang: mục cha + menu con (trang, bài, chuyên mục) sửa
     // để trống → web quay về menu mặc định trong code (luôn chạy, kể cả khi bước trên hỏng — không làm hỏng test sau)
     expect((await request.post(`${CMS}/api/globals/menu-dau-trang`, { headers: h, data: { muc: [] } })).ok()).toBeTruthy();
   }
-  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Góc đọc") && b.includes("Khám phá"));
+  await choWeb(request, "/", (s, b) => s === 200 && !b.includes("Góc đọc") && b.includes("Huyền học"));
 });
 
 test("CMS-2 xác thực 2 bước: bật bằng mã → phiên mới thiếu mã bị đưa sang màn 2 bước → nhập mã → vào được", async ({ browser, request }) => {

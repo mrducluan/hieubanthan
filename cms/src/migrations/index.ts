@@ -18,6 +18,7 @@ import * as migration_20261026_060345_cta_2_loi_di_tiep from './20261026_060345_
 import * as migration_20261026_070000_bai_khoi_tao from './20261026_070000_bai_khoi_tao';
 import * as migration_20261026_120000_chuan_hoa_notfair from './20261026_120000_chuan_hoa_notfair';
 import * as migration_20261026_150000_anh_qr_bai_khoi_tao from './20261026_150000_anh_qr_bai_khoi_tao';
+import * as migration_20261027_090000_hh_huyen_hoc from './20261027_090000_hh_huyen_hoc';
 
 export const migrations = [
   {
@@ -119,5 +120,10 @@ export const migrations = [
     up: migration_20261026_150000_anh_qr_bai_khoi_tao.up,
     down: migration_20261026_150000_anh_qr_bai_khoi_tao.down,
     name: '20261026_150000_anh_qr_bai_khoi_tao',
+  },
+  {
+    up: migration_20261027_090000_hh_huyen_hoc.up,
+    down: migration_20261027_090000_hh_huyen_hoc.down,
+    name: '20261027_090000_hh_huyen_hoc',
   },
 ];

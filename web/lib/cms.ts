@@ -322,7 +322,7 @@ export async function baiMoiCms(mang: string | null, n: number): Promise<BaiCmsT
   return tn.blog_bat ? (r?.docs ?? []).filter((b) => b.slug && b.tieu_de) : [];
 }
 
-/** Bài CMS cùng mảng (trang công cụ / Khám phá / Kiến thức). mang = null → mới nhất mọi mảng. Tắt ở CMS → []. */
+/** Bài CMS cùng mảng (trang công cụ / Huyền học / Kiến thức). mang = null → mới nhất mọi mảng. Tắt ở CMS → []. */
 export async function baiTheoMang(mang: string | null, soBai?: number): Promise<BaiCmsTomTat[]> {
   const tc = await trangChuCms();
   if (tc?.bai_theo_mang?.bat === false) return [];

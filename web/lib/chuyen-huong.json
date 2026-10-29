@@ -20,7 +20,8 @@
   },
   "trang": [
     ["/la-so-mau", "/tu-vi/la-so-mau"],
-    ["/huong-xau-nam", "/phong-thuy/huong-xau-nam"]
+    ["/huong-xau-nam", "/phong-thuy/huong-xau-nam"],
+    ["/kham-pha", "/huyen-hoc"]
   ],
   "tuoi_huong": "/phong-thuy/huong-hop-tuoi"
 }

@@ -12,7 +12,7 @@ const goc = process.argv.find((a) => a.startsWith("http")) ?? "http://127.0.0.1:
 const mobile = process.argv.includes("--mobile");
 // --ho-so: nạp sẵn hồ sơ mẫu trên máy để rà cả phần kết quả (lá số, bài đọc, khung hỏi đáp)
 const coHoSo = process.argv.includes("--ho-so");
-const TRANG = ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/hop-doi", "/kham-pha", "/ban-than",
+const TRANG = ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/hop-doi", "/huyen-hoc", "/ban-than",
   "/kien-thuc", "/tu-vi/chinh-tinh/sao-tu-vi", "/tu-vi/sao-o-cung/thai-am-cung-phu-the", "/tu-dien",
   "/phong-thuy/huong-hop-tuoi/tuoi-1990-nam", "/tu-vi/la-so-mau", "/tac-gia/duc-luan", "/than-so/y-nghia-so/so-7", "/kinh-dich/que/que-1-can", "/chinh-sach-rieng-tu", "/lien-he", "/dang-nhap", "/tai-khoan"];
 

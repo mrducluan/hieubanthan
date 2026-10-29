@@ -9,8 +9,9 @@ import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
-import { DongGhiChu, DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
+import { ChipPhai, DongGhiChu, DongPhai, KhungPhai, type PhaiDangDung } from "@/components/huyen-hoc/KhungPhai";
 import { DoiChieuCach } from "@/components/huyen-hoc/DoiChieuCach";
+import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -81,6 +82,11 @@ export function BatTu() {
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   const lnDung = ln && ln.nam === namXem ? ln : null;
   const sinhGioTy = (goc?.birth_time ?? "") >= "23:00";
+  // TP-GON: khung trường phái đóng chỉ còn chip lựa chọn đang dùng; nhắc riêng khi sinh 23:00–23:59 (hai phái ra trụ ngày khác).
+  const phaiDangDung: PhaiDangDung[] = [
+    { nhan: gioTy === "da_ty" ? "Giờ Tý: giữ ngày" : "Giờ Tý: đổi ngày lúc 23:00", khac: gioTy !== "da_ty" },
+    { nhan: "Năm, tháng theo tiết khí" },
+  ];
   return (
     <div>
       {dau}
@@ -130,11 +136,14 @@ export function BatTu() {
           </button>
         )}
         {laSo && (sinhGioTy || !ls || moChiTiet) && (
-          <KhungPhai testId="truong-phai-bat-tu" moTa={<>Mặc định theo tiết khí và giữ trụ ngày hôm đó khi sinh 23:00–23:59 (dạ Tý). Đổi lựa chọn, engine lập lại tứ trụ; hỏi đáp và luận giải bên dưới đi theo đúng lựa chọn.</>}>
+          <KhungPhai testId="truong-phai-bat-tu"
+            tomTat={<ChipPhai ds={phaiDangDung} />}
+            nhac={sinhGioTy ? "Bạn sinh 23:00–23:59: hai phái ra trụ ngày khác nhau, nhật chủ cũng đổi." : undefined}
+            moTa={<>Mặc định giữ trụ ngày hôm đó khi sinh 23:00–23:59 (dạ Tý). Đổi lựa chọn là tứ trụ được lập lại; hỏi đáp và luận giải bên dưới đi theo lựa chọn đang xem.</>}>
             <DongPhai ten="Giờ Tý (23:00–23:59)" nhan="Cách tính giờ Tý" giaTri={gioTy} doi={setGioTy}
               luaChon={[["da_ty", "Dạ Tý (giữ ngày)"], ["sang_ngay", "Đổi ngày lúc 23:00"]]}
-              noiBat={(goc?.birth_time ?? "") >= "23:00"}
-              goiY={(goc?.birth_time ?? "") >= "23:00"
+              noiBat={sinhGioTy} nhanNoiBat="Áp dụng với bạn"
+              goiY={sinhGioTy
                 ? "Bạn sinh trong giờ Tý đầu: hai phái ra TRỤ NGÀY khác nhau (nhật chủ đổi), trụ giờ như nhau."
                 : "Bạn không sinh 23:00–23:59 nên hai phái cho cùng một tứ trụ."} />
             <DongGhiChu ten="Âm lịch">
@@ -212,6 +221,9 @@ export function BatTu() {
                 </details>
               )}
             </div>
+            {/* Dải chân hieuban.com + QR: ngoài khối được chụp (tuTruRef) để ảnh tải về không in hai lần, nhưng nằm sát dưới
+                khối để chụp màn hình cả hai vẫn mang link về web. */}
+            <div className="-mt-2 overflow-hidden rounded-[1.25rem] shadow-card"><ChanLaSo giaoDien={giaoDien} tieuDe="Lá số Bát tự" duong="/bat-tu" /></div>
           </div>
         )}
         {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{LOI_NHAN_CO[c.loai] ?? c.chi_tiet}</p>)}
@@ -231,7 +243,7 @@ export function BatTu() {
       )}
 
       <section ref={chatRef} aria-label="Hỏi Bát tự" className="mt-10 scroll-mt-24">
-        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp cùng AI"}</h2>
+        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp chuyên sâu"}</h2>
         <KhungChat
           moDun="battu"
           loiChao={laSo ? "Hỏi về dụng thần, ngũ hành, đại vận hay một năm cụ thể." : "Hỏi kiến thức chung về nhật chủ, thập thần — hoặc bổ sung giờ sinh để hỏi về tứ trụ của bạn."}

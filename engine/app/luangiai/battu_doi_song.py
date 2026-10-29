@@ -55,6 +55,7 @@ import datetime as dt
 
 from app import config
 from app.calc import battu as bt_calc
+from app.calc import lunar as lunar_calc
 from app.calc import battu_mo_rong as mr_calc
 from app.calc import tietkhi as tk
 from app.calc.battu import CAN_NH, CHI_NH, THANG_DIEM
@@ -101,7 +102,7 @@ CHUONG = [
     ("suc_khoe", "Sức khoẻ & năng lượng", "Tôi nên giữ sức thế nào?"),
     ("quan_he", "Bạn bè, đồng nghiệp, người bên ngoài", "Tôi làm việc với người khác thế nào?"),
     ("nam_nay", "Năm nay & tháng tới", "Năm nay và mấy tháng tới của tôi thế nào?"),
-    ("van_han", "Vận hạn & điều nên tránh", "Mười năm tới năm nào nên đi chậm, và chậm ở chuyện gì?"),
+    ("van_han", "Mười năm tới & điều nên tránh (vận hạn)", "Mười năm tới năm nào nên đi chậm, và chậm ở chuyện gì?"),
     ("loi_khuyen", "Lời khuyên dành cho bạn", "Tôi nên làm gì từ đây?"),
 ]
 CHUONG_COT_LOI = ("tong_quan", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "hoc_tap", "quan_he")
@@ -1213,7 +1214,8 @@ def _loi_bt(tt: str, loai: str, gd: str) -> dict:
     return ra
 
 
-def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int, vt: dict | None = None) -> list[dict]:
+def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int, vt: dict | None = None,
+                  nam_sinh_am: int | None = None) -> list[dict]:
     """Mười năm tới (năm Lập xuân `nam0` …), luật ở chú thích trên. Khoá `_…` là nội bộ (hộp ứng viên)."""
     ls = pt["ls"]
     chi_sinh, chi_ngay = ls["tru"][0]["chi"], ls["tru"][2]["chi"]
@@ -1266,6 +1268,8 @@ def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int, vt: dict 
         ra.append({"nam": nam, "tuoi": tuoi, "muc": muc, "nhan_muc": kb.nhan_muc(muc), "muc_cach_1": m1, "muc_cach_2": m2,
                    "hai_cach_khac": m1 != m2, "hien_tai": k == 0,
                    "co": [dsc.co_ra(x, kb.van_han_loi("co", x)) for x in co],
+                   # MT-ĐS B3: tuổi mụ theo NĂM ÂM LỊCH VIỆT (như /xem-sao-han và Tử vi), không theo năm dương
+                   "sao_han": dsc.sao_han_nam(nam - (nam_sinh_am or nam_sinh) + 1, ls.get("_gioi_tinh")),
                    "mang": mang, "y": y, "nen_tranh": nen_tranh, "nen_lam": nen_lam, "can_cu": cu,
                    "_tt": tt, "_gd": gd, "_k": k, "_diem": _SO_MUC[m1] + _SO_MUC[m2], "_nhan": nhan})
     for g in ra:
@@ -1488,7 +1492,9 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     vt = van_tham_chieu(tgb, ngay_xem)
     tz = dt.timedelta(hours=config.CALENDAR_MERIDIAN_TZ)
     nam0 = _nam_bat_tu(dt.datetime(ngay_xem.year, ngay_xem.month, ngay_xem.day, 12) - tz)
-    dong = dong_muoi_nam(pt, tgb, nam0, sinh["lich"].year, vt)
+    d_sinh = sinh["lich"]
+    nam_sinh_am = lunar_calc.solar_to_lunar(d_sinh.day, d_sinh.month, d_sinh.year, config.CALENDAR_MERIDIAN_TZ)[2]
+    dong = dong_muoi_nam(pt, tgb, nam0, sinh["lich"].year, vt, nam_sinh_am)
     ds: list[dict] = []
     for ma, _, _ in CHUONG:
         if ma == "tong_quan":
@@ -1518,5 +1524,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).
     kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
     tgb_ra = [{k: v for k, v in g.items() if k != "thap_than"} for g in tgb]
+    from app.luangiai import luu_y_mang as lym  # noqa: PLC0415
+    luu_y_mang = lym.dung(ds, "battu", muc_mang={k: v.get("muc") for k, v in cm.items() if isinstance(v, dict)})
     return _sach({"phien_ban": PHIEN_BAN, "phai": "tu_binh", "cot_loi": cot_loi, "thoi_gian_bieu": tgb_ra, "chuong": ds,
-                  "ngay_xem": ngay_xem.isoformat(), **kb.meta()})
+                  "luu_y_mang": luu_y_mang, "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

@@ -6,7 +6,7 @@ import { ChevronDown, CircleHelp } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 
-export type ViecHuongDan = "do_huong" | "do_huong_can_ho" | "ve_mat_bang" | "dat_phong" | "ban_do";
+export type ViecHuongDan = "do_huong" | "do_huong_can_ho" | "ve_mat_bang" | "dat_phong" | "ban_do" | "ban_do_may_tinh";
 
 const NET = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 
@@ -71,6 +71,15 @@ const BUOC: Record<ViecHuongDan, { tieu_de: string; buoc: { hinh: string; chu: s
       { hinh: "mat", chu: "Bấm Tính: góc từ tâm tới điểm trước là hướng nhà theo bắc thật. Toạ độ không lưu." },
     ],
     luu_y: "GPS trong nhà thường lệch 10–30 m; với nhà nhỏ nên dùng cách nhấn giữ trên bản đồ, chọn điểm trước nhà cách tâm ≥ 15 m.",
+  },
+  ban_do_may_tinh: {
+    tieu_de: "Lấy hướng trên máy tính (Google Maps)",
+    buoc: [
+      { hinh: "ban_do", chu: "Bấm “Mở Google Maps ảnh vệ tinh” (cho phép vị trí để bản đồ mở sẵn gần nhà bạn), phóng to tới khi thấy rõ mái nhà." },
+      { hinh: "tam", chu: "Chuột phải lên giữa mái nhà → bấm dòng số đầu tiên (Google tự chép) → quay lại đây bấm nút Dán ở ô “Tâm nhà”." },
+      { hinh: "mat", chu: "Chuột phải lên mặt đường ngay trước cửa nhà → chép → Dán ở ô “Điểm trước mặt nhà” → Tính." },
+    ],
+    luu_y: "Máy tính không có GPS: nút “Lấy vị trí hiện tại” chỉ đoán theo wifi (lệch hàng chục mét), không dùng để chấm hai điểm. Điểm trước nhà nên cách tâm ≥ 10 m.",
   },
 };
 

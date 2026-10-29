@@ -71,7 +71,7 @@ test("sitemap + trang hub + llms.txt không còn URL cũ; thư viện /kien-thuc
   const cu = sm.match(/<loc>[^<]*(\/kien-thuc\/[^<]+|\/la-so-mau[^<]*|\/huong-xau-nam[^<]*|\/phong-thuy\/tuoi-[^<]+)<\/loc>/g) ?? [];
   expect(cu.filter((l) => !/\/phong-thuy\/huong-xau-nam|\/tu-vi\/la-so-mau/.test(l))).toEqual([]);
   for (const moi of ["/tu-vi/sao-o-cung", "/bat-tu/menh-theo-nam", "/phong-thuy/huong-xau-nam", "/tu-vi/la-so-mau"]) expect(sm).toContain(moi);
-  for (const u of ["/", "/kien-thuc", "/kham-pha", "/tu-vi", "/llms.txt"]) {
+  for (const u of ["/", "/kien-thuc", "/huyen-hoc", "/tu-vi", "/llms.txt"]) {
     const t = await (await request.get(u)).text();
     expect(t, u).not.toMatch(/\/kien-thuc\/[a-z]|["( ]\/la-so-mau|["( ]\/huong-xau-nam|\/phong-thuy\/tuoi-\d/);
   }

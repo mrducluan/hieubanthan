@@ -387,7 +387,7 @@ await ca("nút Kiểm trùng (POST /api/bai-viet/kiem-trung): cộng tác viên 
 
 await ca("Điều hướng chân trang: mặc định 4 cột; link ngoài/thiếu bài bị chặn; chỉ Chủ biên sửa; bài → slug khi đọc", async () => {
   const g = await payload.findGlobal({ slug: "dieu-huong" }) as unknown as { cot: { ten: string; lien_ket: { duong_dan: string }[] }[] };
-  assert.deepEqual(g.cot.map((c) => c.ten), ["Khám phá", "Kiến thức", "Về chúng tôi", "Pháp lý"]);
+  assert.deepEqual(g.cot.map((c) => c.ten), ["Huyền học", "Kiến thức", "Về chúng tôi", "Pháp lý"]);
   assert.ok(g.cot[1]!.lien_ket.some((l) => l.duong_dan === "/blog"));
   const cot = (lien_ket: unknown[]) => ({ cot: [{ ten: "Thử", lien_ket }] }) as never;
   for (const xau of ["//evil.vn", "/\\evil.vn", "https://evil.vn", "javascript:alert(1)", "tu-vi"]) {

@@ -1,4 +1,4 @@
-// PL-1 — chân trang: thương hiệu + cam kết dữ liệu, 4 cột liên kết (Khám phá · Kiến thức · Về chúng tôi · Pháp lý) — sửa ở CMS
+// PL-1 — chân trang: thương hiệu + cam kết dữ liệu, 4 cột liên kết (Huyền học · Kiến thức · Về chúng tôi · Pháp lý) — sửa ở CMS
 // "Điều hướng chân trang" (CMS chưa nối / lỗi → dùng COT dưới đây),
 // thông tin đơn vị vận hành (env, thiếu thì ẩn), mạng xã hội, dấu Bộ Công Thương (khi có), lời miễn trừ.
 // Server component: đọc env ở máy chủ (lib/van-hanh.ts), không gửi gì thêm xuống trình duyệt.

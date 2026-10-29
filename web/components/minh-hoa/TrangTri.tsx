@@ -87,13 +87,20 @@ export type KieuMang = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thu
 export function HinhMang({ kieu, className }: { kieu: KieuMang; className?: string }) {
   return (
     <svg viewBox="0 0 120 80" aria-hidden className={cn("h-16 w-auto", className)}>
-      {kieu === "tu-vi" && <LaSoNho />}
-      {kieu === "kinh-dich" && <QueNho />}
-      {kieu === "bat-tu" && <TruNho />}
-      {kieu === "phong-thuy" && <BatQuaiNho />}
-      {kieu === "than-so" && <SoNho />}
+      <HoaTietMang kieu={kieu} />
     </svg>
   );
+}
+
+/** Nét vẽ của hình mảng (hệ toạ độ 120×80) — để lồng vào hình lớn hơn (vd hình năm mảng ở /huyen-hoc). */
+export function HoaTietMang({ kieu }: { kieu: KieuMang }) {
+  return <>
+    {kieu === "tu-vi" && <LaSoNho />}
+    {kieu === "kinh-dich" && <QueNho />}
+    {kieu === "bat-tu" && <TruNho />}
+    {kieu === "phong-thuy" && <BatQuaiNho />}
+    {kieu === "than-so" && <SoNho />}
+  </>;
 }
 
 function LaSoNho() {   // khung 12 cung (4×4, bỏ ô giữa) + ngôi sao ở giữa

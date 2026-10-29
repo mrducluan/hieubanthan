@@ -11,7 +11,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/xem-ngay-tot", ten: "Xem ngày tốt", mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
   ] },
   { href: "/hop-doi", ten: "Hợp đôi", bieu_tuong: "trai_tim", di_dong: true, con: [] },
-  { href: "/kham-pha", ten: "Khám phá", bieu_tuong: "la_ban", di_dong: true, con: [
+  { href: "/huyen-hoc", ten: "Huyền học", bieu_tuong: "la_ban", di_dong: true, con: [
     { href: "/tu-vi", ten: "Tử vi", mo_ta: "Lá số 12 cung, đại hạn, lưu niên" },
     { href: "/bat-tu", ten: "Bát tự", mo_ta: "Tứ trụ, ngũ hành, thập thần" },
     { href: "/kinh-dich", ten: "Kinh Dịch", mo_ta: "Gieo quẻ, đọc lời hào" },
@@ -19,6 +19,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi", mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     { href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm", mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
     { href: "/tuoi-xong-dat", ten: "Tuổi xông đất", mo_ta: "Tuổi hợp gia chủ, giờ đẹp mùng 1" },
+    { href: "/xem-sao-han", ten: "Sao hạn theo tuổi", mo_ta: "La Hầu, Kế Đô, Thái Bạch… đọc bằng lời thường" },
     { href: "/kien-thuc", ten: "Thư viện kiến thức", mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
   ] },
   { href: "/blog", ten: "Blog", bieu_tuong: "bao", di_dong: false, con: [] },
@@ -27,7 +28,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
   ] },
 ];
 
-/** Đang ở mục này: trùng đường dẫn mục cha hoặc một menu con (vd /tu-vi/... → "Khám phá"); /tai-khoan gồm cả /dang-nhap. */
+/** Đang ở mục này: trùng đường dẫn mục cha hoặc một menu con (vd /tu-vi/... → "Huyền học"); /tai-khoan gồm cả /dang-nhap. */
 export function dangOMuc(path: string, m: Pick<MucMenu, "href" | "con">): boolean {
   const ds = [m.href, ...m.con.map((c) => c.href), ...(m.href === "/tai-khoan" ? ["/dang-nhap"] : [])]
     .map((h) => h.split(/[?#]/)[0]!).filter((h) => h && h !== "/");

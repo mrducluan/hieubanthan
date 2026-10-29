@@ -59,7 +59,7 @@ test("trang nhận thẻ huy hiệu: noindex, ảnh chia sẻ mang ?tu, lối th
 
   await page.goto("/the/huy-hieu/doc-5-mang?tu=hh.0123456789");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(DANH_MUC.doc_5_mang.ten);
-  await expect(page.getByTestId("the-huy-hieu-moi")).toHaveAttribute("href", "/kham-pha?tu=hh.0123456789");
+  await expect(page.getByTestId("the-huy-hieu-moi")).toHaveAttribute("href", "/huyen-hoc?tu=hh.0123456789");
   await expect(page.getByTestId("the-huy-hieu")).toContainText("không mua bán");
   await expect(page.getByTestId("qua-nguoi-nhan")).toHaveCount(0);   // e2e thường: chưa bật tài khoản → không hứa Sao
   expect(await page.getByTestId("the-huy-hieu").innerText()).not.toMatch(TU_CAM);
@@ -126,7 +126,7 @@ test("app đã cài: đăng ký service worker; mất mạng → trang ngoại t
   expect((await page.evaluate(async () => (await fetch("/api/sao/muc")).status))).toBeLessThan(500);
 
   await context.setOffline(true);
-  await page.goto("/kham-pha").catch(() => null);
+  await page.goto("/huyen-hoc").catch(() => null);
   const nt = page.getByTestId("ngoai-tuyen");
   await expect(nt).toBeVisible();
   await expect(nt).toContainText("Bạn đang ngoại tuyến");
@@ -136,7 +136,7 @@ test("app đã cài: đăng ký service worker; mất mạng → trang ngoại t
   await context.setOffline(false);
   await page.getByRole("button", { name: "Thử lại" }).click();
   await expect(page.getByRole("heading", { level: 1 })).not.toHaveText("Bạn đang ngoại tuyến", { timeout: 30_000 });
-  await expect(page).toHaveURL(/\/kham-pha$/);
+  await expect(page).toHaveURL(/\/huyen-hoc$/);
 });
 
 test("trình duyệt thường (không cài app): không đăng ký service worker", async ({ page }) => {

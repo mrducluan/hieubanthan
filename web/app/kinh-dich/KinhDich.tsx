@@ -6,6 +6,7 @@ import { CuoiBaiDoc } from "@/components/khung/CuoiBaiDoc";
 import { batDauDoc } from "@/lib/do-luong";
 import { DauMang } from "@/components/huyen-hoc/KhungMang";
 import { VeQue, type Quai } from "@/components/huyen-hoc/VeQue";
+import { TrucQuan } from "@/components/hoi/TrucQuan";
 import { Input, Select } from "@/components/ui/input";
 import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ import { ghiNhanDung } from "@/lib/kiem-chung-sau";
 import { NutChiaSeQue } from "@/components/kinh-dich/NutChiaSeQue";
 import { type GiaTriHao, giaTriTuQue, laGiaTriHao } from "@/lib/dong-xu";
 import { luuQue, nhanLuc, type QueDaLuu } from "@/lib/lich-su-que";
+import { ChanQr } from "@/components/khung/ChanQr";
 
 interface Res extends HoiMangRes {
   que?: { quai_ban: Quai; quai_bien: Quai | null; hao_dong: number[]; nguon_ngau_nhien?: string; gia_tri_hao_1_den_6?: number[] } | null;
@@ -189,14 +191,23 @@ export function KinhDich() {
     const thoiDiemMH = nhanThoiDiem(mh?.thoi_diem);
     const tdg = d.thoi_diem_gieo ?? null;
     const idDq = `dq-${Date.now()}`;
+    const hao = kq.trucQuan?.some((k) => k.kieu === "hao") ? kq.trucQuan.filter((k) => k.kieu === "hao") : undefined;
     const phu = (
       <KetQuaQue giaTri={giaTri} nghiThuc={nghiThuc} cach={cachGui} van={van} thuatNgu={kq.thuatNgu} canCu={kq.canCu} ghiChu={kq.ghiChu} canhBao={kq.canhBao}
+        trucQuan={hao}
         onHien={() => { batDauDoc("kinhdich"); setCoQue(true); }}>
         <div className="glass rounded-2xl p-4" data-testid="que">
           <div className="flex flex-wrap gap-8">
-            <VeQue q={que.quai_ban} dong={que.hao_dong} nhan="Quẻ bản" />
+            {/* HD-CS đợt 3 (ý 4): có khối hào engine dựng → quẻ bản bấm được từng hào; không có (engine cũ) → hình tĩnh như trước. */}
+            {hao ? (
+              <div className="min-w-[15rem] flex-1">
+                <TrucQuan ds={hao} />
+                <p className="mt-2 font-serif text-xl" data-testid="ten-que-ban">{que.quai_ban.ten} <span className="text-xs text-fg-faint">quẻ {que.quai_ban.so_king_wen}</span></p>
+              </div>
+            ) : <VeQue q={que.quai_ban} dong={que.hao_dong} nhan="Quẻ bản" />}
             {que.quai_bien && <VeQue q={que.quai_bien} nhan="Quẻ biến" />}
           </div>
+          <ChanQr className="max-w-sm" nhan="Quét để gieo quẻ của bạn" />
           {que.hao_dong.length > 0 && (
             <p className="mt-2 text-xs text-fg-muted" data-testid="giai-thich-dong">
               Vạch vàng là <b>hào động</b> ({que.hao_dong.map((h) => `hào ${h}`).join(", ")}) — chỗ việc đang chuyển; đổi vạch đó thì ra <b>quẻ biến</b>: xu hướng việc chuyển tới.
@@ -234,12 +245,12 @@ export function KinhDich() {
       </KetQuaQue>
     );
     // Lời chính, giải nghĩa, cảnh báo, ghi chú được vẽ TRONG KetQuaQue (sau khi lật xong) — không trả cho KhungChat.
-    return { ...kq, van: undefined, thuatNgu: undefined, canCu: undefined, ghiChu: undefined, canhBao: undefined, phu };
+    return { ...kq, van: undefined, thuatNgu: undefined, canCu: undefined, ghiChu: undefined, canhBao: undefined, trucQuan: undefined, phu };
   }
 
   return (
     <div>
-      <DauMang Icon={Hexagon} ten="Kinh Dịch" mo_ta="Đang phân vân một việc? Gieo một quẻ, nhận câu trả lời ngắn bằng lời thường: việc đang thuận hay cần đổi cách, và nên làm gì trong tuần này. Quẻ do máy gieo (bạn tự lật từng hào), theo giờ, theo số hay phương vị, hoặc bạn gieo đồng xu thật rồi nhập — AI không chọn quẻ. Lời kinh gốc và ba cách đọc theo phái gập bên dưới cho ai muốn đào sâu." />
+      <DauMang Icon={Hexagon} ten="Kinh Dịch" mo_ta="Đang phân vân một việc? Gieo một quẻ, nhận câu trả lời ngắn bằng lời thường: việc đang thuận hay cần đổi cách, và nên làm gì trong tuần này. Quẻ do máy gieo (bạn tự lật từng hào), theo giờ, theo số hay phương vị, hoặc bạn gieo đồng xu thật rồi nhập — không bước nào tự chọn quẻ thay bạn. Lời kinh gốc và ba cách đọc theo phái gập bên dưới cho ai muốn đào sâu." />
       <div className="mx-auto max-w-3xl space-y-4">
         <KhungChat
             moDun="kinhdich"

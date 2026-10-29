@@ -17,7 +17,7 @@ export const ND_LAM_NHA: NoiDungCongCu = {
     { hoi: "Năm không hợp tuổi thì làm sao?", dap: "Nhiều gia đình chọn năm khác, hoặc nhờ người thân hợp tuổi đứng ra làm lễ động thổ (mượn tuổi). Quyết định nên dựa trên điều kiện thực tế." },
   ],
   lienKet: [{ href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/xem-ngay-tot", ten: "Xem ngày tốt" },
-    { href: "/tuoi-xong-dat", ten: "Tuổi xông đất" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi hợp hướng nhà" }],
+    { href: "/tuoi-xong-dat", ten: "Tuổi xông đất" }, { href: "/xem-sao-han", ten: "Sao hạn theo tuổi" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi hợp hướng nhà" }],
 };
 
 export const ND_XONG_DAT: NoiDungCongCu = {
@@ -36,7 +36,7 @@ export const ND_XONG_DAT: NoiDungCongCu = {
     { hoi: "Xông đất giờ nào?", dap: "Thường chọn giờ hoàng đạo ngày mùng 1 theo hoàng lịch; trang liệt kê sẵn sáu giờ hoàng đạo và hướng xuất hành của ngày đó." },
   ],
   lienKet: [{ href: "/xem-ngay-tot", ten: "Xem ngày tốt" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi" },
-    { href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }],
+    { href: "/xem-sao-han", ten: "Sao hạn theo tuổi" }, { href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }],
 };
 
 export const ND_HAN_NAM: NoiDungCongCu = {
@@ -54,4 +54,24 @@ export const ND_HAN_NAM: NoiDungCongCu = {
     { hoi: "Làm nhà có cần tránh hướng Thái Tuế không?", dap: "Truyền thống khuyên không động thổ, đào móng lớn ở phương Thái Tuế và Tuế Phá trong năm; xây nhà hướng khác vẫn bình thường." },
   ],
   lienKet: [{ href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà" }, { href: "/phong-thuy", ten: "Phong thuỷ nhà" }, { href: "/xem-ngay-tot", ten: "Xem ngày tốt" }],
+};
+
+// MT-ĐS B3 — sao hạn Cửu Diệu + Bát hạn: tập quán theo tuổi, miễn phí, không nghi lễ, không vật phẩm.
+export const ND_SAO_HAN: NoiDungCongCu = {
+  duong: "/xem-sao-han",
+  ten: "Xem sao hạn theo tuổi",
+  moTa: "Xem sao hạn năm nay theo tuổi mụ và giới tính (La Hầu, Thổ Tú, Thuỷ Diệu, Thái Bạch, Thái Dương, Vân Hán, Kế Đô, Thái Âm, Mộc Đức) — lời đời thường, việc nên làm, không hướng dẫn cúng sao, không bán vật phẩm.",
+  doan: [
+    "Sao hạn là tập quán xếp theo tuổi mụ và giới tính của người Việt: chín sao Cửu Diệu xoay vòng từ tuổi 10, mọi người cùng tuổi cùng giới đều chung một sao. Trang tính đúng theo bảng lịch vạn niên, rồi đọc mỗi sao bằng lời đời thường: năm nên để ý điều gì, việc nhỏ nên làm.",
+    "Đây là tục lệ, không phải phép tính từ ngày giờ sinh của riêng bạn. Lá số Tử vi, Bát tự tính từ ngày giờ sinh sát với bạn hơn — khi hai bên nói khác nhau, hãy tin phần đọc từ lá số của bạn.",
+    "Trang không hướng dẫn nghi lễ, không giới thiệu thầy hay vật phẩm. Giáo hội Phật giáo Việt Nam đã nói rõ dâng sao không phải nghi lễ Phật giáo; nếu gia đình có lệ đầu năm, hãy giữ như một dịp sum họp và đừng để ai thu tiền của mình vì sợ.",
+  ],
+  hoiDap: [
+    { hoi: "Sao hạn tính thế nào?", dap: "Tuổi mụ = năm xem (âm lịch) − năm sinh âm lịch + 1. Nam từ tuổi 10 đi La Hầu, Thổ Tú, Thuỷ Diệu, Thái Bạch, Thái Dương, Vân Hán, Kế Đô, Thái Âm, Mộc Đức rồi lặp lại; nữ khởi Kế Đô, Vân Hán, Mộc Đức, Thái Âm, Thổ Tú, La Hầu, Thái Dương, Thái Bạch, Thuỷ Diệu. Dưới 10 tuổi không tính." },
+    { hoi: "Nam La Hầu, nữ Kế Đô có đáng lo không?", dap: "Đó là hai sao dân gian hay nhắc nhất. Hiểu đời thường: La Hầu là năm nên nói ít nghe nhiều, giữ giấy tờ gọn; Kế Đô là năm nên bớt lo nghĩ, quan tâm gia đình. Không sao nào định sẵn chuyện gì sẽ xảy ra." },
+    { hoi: "Có cần cúng sao giải hạn không?", dap: "Hệ thống không hướng dẫn nghi lễ. Giáo hội Phật giáo Việt Nam (2019) nói rõ dâng sao không phải nghi lễ Phật giáo, chùa chỉ cầu an. Việc nên làm là việc thật trong năm: giữ sức, giữ tiền, giữ lời." },
+    { hoi: "Sao hạn và lá số Tử vi, cái nào đúng hơn?", dap: "Sao hạn giống nhau cho mọi người cùng tuổi cùng giới; lá số tính từ ngày giờ sinh của riêng bạn nên sát hơn. Trang đặt sao hạn trước như một tục lệ, rồi đọc tiếp bằng lá số của bạn." },
+  ],
+  lienKet: [{ href: "/tu-vi", ten: "Lá số Tử vi của bạn" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi" },
+    { href: "/tuoi-xong-dat", ten: "Tuổi xông đất" }, { href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }],
 };

@@ -33,9 +33,9 @@ export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [], 
           offers: { "@type": "Offer", price: "0", priceCurrency: "VND" }, publisher: { "@id": `${siteUrl()}/#to-chuc` },
           isPartOf: { "@id": `${siteUrl()}/#ung-dung` },
           potentialAction: { "@type": "UseAction", target: { "@type": "EntryPoint", urlTemplate: urlDayDu(duong), actionPlatform: ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"] } } },
-        // QH-URL: công cụ nằm trong silo (vd /phong-thuy/huong-xau-nam) → cha là trang trụ; công cụ gốc → cha là Khám phá.
+        // QH-URL: công cụ nằm trong silo (vd /phong-thuy/huong-xau-nam) → cha là trang trụ; công cụ gốc → cha là hub Huyền học.
         ldDuongDan([{ ten: "Trang chủ", duong: "/" },
-          duong.split("/").length > 2 && TEN_MANG_SILO[truCua(duong)] ? { ten: TEN_MANG_SILO[truCua(duong)]!, duong: truCua(duong) } : { ten: "Khám phá", duong: "/kham-pha" },
+          duong.split("/").length > 2 && TEN_MANG_SILO[truCua(duong)] ? { ten: TEN_MANG_SILO[truCua(duong)]!, duong: truCua(duong) } : { ten: "Huyền học", duong: "/huyen-hoc" },
           { ten, duong }]),
         ldHoiDap(hoiDap),
       )} />

@@ -52,7 +52,7 @@ test("đổi năm xem → lưu niên đổi theo, giao diện giấy cổ", asyn
   await page.getByTestId("bat-tu-chi-tiet-mo").click();
   await expect(page.getByTestId("luu-nien-bat-tu")).toBeVisible();
   await page.getByRole("tab", { name: "Giấy cổ" }).click();
-  await expect(page.locator(".la-so-giay")).toBeVisible();
+  await expect(page.getByTestId("tu-tru")).toHaveClass(/la-so-giay/);   // dải chân (chan-la-so) cũng mang class giao diện nên không dùng .la-so-giay trần
   await page.getByRole("group", { name: "Năm xem" }).getByRole("button", { name: "Năm sau" }).click();
   const nam = await page.getByRole("group", { name: "Năm xem" }).locator("b").innerText();
   await expect(page.getByTestId("luu-nien-bat-tu")).toContainText(`Lưu niên ${nam}`);

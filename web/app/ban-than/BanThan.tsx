@@ -143,7 +143,7 @@ export function BanThan() {
         {[
           { href: "/than-so#hoi", Icon: MessageCircle, ten: "Hỏi điều bạn băn khoăn", mo: "Nghề nghiệp, tình cảm, giai đoạn này nên tập trung gì" },
           { href: "/xem-ngay-tot", Icon: CalendarCheck, ten: "Xem ngày tốt", mo: "Hoàng đạo, giờ tốt, việc nên làm — tìm ngày đẹp cho việc sắp tới" },
-          { href: "/kham-pha", Icon: Compass, ten: "Khám phá huyền học", mo: "Tử vi, Kinh Dịch, Bát tự, Phong thuỷ — dùng luôn hồ sơ này" },
+          { href: "/huyen-hoc", Icon: Compass, ten: "Huyền học", mo: "Tử vi, Kinh Dịch, Bát tự, Phong thuỷ — dùng luôn hồ sơ này" },
         ].map(({ href, Icon, ten, mo }) => (
           <Link key={href} href={href} className="glass group rounded-2xl p-5 transition-colors hover:border-gold/50">
             <Icon className="size-5 text-gold" aria-hidden />

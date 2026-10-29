@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 // VH-1 — dòng 10 năm của chương "Vận hạn & điều nên tránh" (Tử vi + Bát tự đời sống, docs/LUAN-GIAI-DOI-SONG.md mục 8).
 // Chỉ VẼ số engine đã chấm: mỗi năm một chấm màu theo mức (lục = thuận lợi · vàng = cân bằng · hổ phách = cần lưu ý —
 // KHÔNG đỏ), năm nay có vòng vàng + nhãn "Năm nay", cờ nhỏ tập quán dân gian (năm tuổi, xung tuổi, tam tai…). Bấm một năm
@@ -9,6 +10,7 @@ import { useId, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ngayDuong, ViSao } from "./HopNoiBat";
 import { NHAN_MUC, type NamVanHan, type ThangToi } from "./kieu";
+import { ChanQr } from "@/components/khung/ChanQr";
 
 /** Cờ nhỏ dưới chấm (chữ ngắn); tên đầy đủ nằm trong khung chi tiết. */
 const CO_NGAN: Record<string, string> = {
@@ -98,6 +100,12 @@ export function DongMuoiNam({ ds, thang }: { ds: NamVanHan[]; thang?: ThangToi[]
             {c.lam && <> Nên làm: {c.lam}.</>}
           </p>
         ))}
+        {g.sao_han && (
+          <p className="mt-2 text-xs leading-relaxed text-fg-muted" data-testid="sao-han-nam">
+            <b>Theo tục xếp theo tuổi:</b> sao {g.sao_han.sao}{g.sao_han.han ? `, hạn ${g.sao_han.han}` : ""} — tục lệ chung cho mọi người cùng tuổi, không đổi mức của năm.{" "}
+            <Link href="/xem-sao-han" className="text-gold underline">Đọc lời đời thường</Link>
+          </p>
+        )}
         <ViSao canCu={g.can_cu} nho />
       </div>
 
@@ -119,6 +127,7 @@ export function DongMuoiNam({ ds, thang }: { ds: NamVanHan[]; thang?: ThangToi[]
           </div>
         </div>
       )}
+      <ChanQr nhan="Quét để xem mười năm của bạn" />
     </figure>
   );
 }

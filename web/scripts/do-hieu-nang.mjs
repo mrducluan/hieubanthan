@@ -4,7 +4,7 @@
 // In FCP/LCP/TBT/CLS + số byte (chưa nén) JS/CSS/font từng trang. Số dao động ±30% giữa các lần — so cùng máy.
 import { chromium } from "@playwright/test";
 const goc = process.argv[2] ?? "http://127.0.0.1:3001";
-const ds = ["/", "/kham-pha", "/kien-thuc", "/tu-vi/chinh-tinh/sao-tu-vi", "/hop-doi/cap-so/so-chu-dao-3-va-6",
+const ds = ["/", "/huyen-hoc", "/kien-thuc", "/tu-vi/chinh-tinh/sao-tu-vi", "/hop-doi/cap-so/so-chu-dao-3-va-6",
   "/phong-thuy/huong-hop-tuoi/tuoi-1985-nam", "/tu-dien", "/than-so", "/tu-vi", "/bat-tu", "/phong-thuy", "/tu-vi/la-so-mau"];
 const b = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_PATH });
 for (const d of ds) {

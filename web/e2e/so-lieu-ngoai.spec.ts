@@ -84,9 +84,9 @@ test("menu đầu trang mặc định của web trùng MENU_DAU_MAC_DINH trong C
   }));
   expect(muc.length).toBe(MENU_DAU_TRANG.length);
   expect(muc).toEqual(MENU_DAU_TRANG);
-  const khamPha = MENU_DAU_TRANG.find((m) => m.href === "/kham-pha")!;
-  expect(dangOMuc("/tu-vi", khamPha)).toBe(true);
-  expect(dangOMuc("/tu-vi-xyz", khamPha)).toBe(false);
+  const huyenHoc = MENU_DAU_TRANG.find((m) => m.href === "/huyen-hoc")!;
+  expect(dangOMuc("/tu-vi", huyenHoc)).toBe(true);
+  expect(dangOMuc("/tu-vi-xyz", huyenHoc)).toBe(false);
   expect(dangOMuc("/dang-nhap", MENU_DAU_TRANG.find((m) => m.href === "/tai-khoan")!)).toBe(true);
   expect(MENU_DAU_TRANG.filter((m) => m.di_dong).length).toBeLessThanOrEqual(5);
 });

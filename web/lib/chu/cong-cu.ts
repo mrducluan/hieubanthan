@@ -14,9 +14,9 @@ const KHUNG: BangChu = {
 
 /** Bốn mảng huyền học dùng khung DauMang (biểu tượng + dòng nhỏ + nhãn "Diễn giải từ kho tri thức…"). */
 const mangHuyenHoc = (coHoiAi: boolean): BangChu => gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ cạnh biểu tượng", mac_dinh: "Khám phá · huyền học", toi_da: 60 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ cạnh biểu tượng", mac_dinh: "Huyền học", toi_da: 60 },
   "dau.nhan_duoi": { nhom: DAU, nhan: "Nhãn viền dưới lời dẫn", mac_dinh: "Diễn giải từ kho tri thức Hiểu Bản Thân · tham khảo văn hoá", toi_da: 100 },
-  ...(coHoiAi ? { "hoi.tieu_de": { nhom: "Hỏi đáp", nhan: "Tiêu đề khung hỏi đáp", mac_dinh: "Hỏi đáp cùng AI", toi_da: 60 } } : {}),
+  ...(coHoiAi ? { "hoi.tieu_de": { nhom: "Hỏi đáp", nhan: "Tiêu đề khung hỏi đáp", mac_dinh: "Hỏi đáp chuyên sâu", toi_da: 60 } } : {}),
 });
 
 export const CHU_TU_VI = mangHuyenHoc(true);
@@ -33,7 +33,7 @@ export const CHU_THAN_SO = gopBang(KHUNG, {
   "bon_so.lon": { nhom: "Kết quả", nhan: "Mục bốn số — tiêu đề", mac_dinh: "Bốn con số nói gì về bạn", toi_da: 120 },
   "chieu_sau.nho": { nhom: "Kết quả", nhan: "Mục chiều sâu — dòng nhỏ", mac_dinh: "Chiều sâu", toi_da: 60 },
   "chieu_sau.lon": { nhom: "Kết quả", nhan: "Mục chiều sâu — tiêu đề", mac_dinh: "Các giai đoạn trong đời bạn", toi_da: 120 },
-  "hoi.nho": { nhom: "Hỏi đáp", nhan: "Mục hỏi — dòng nhỏ", mac_dinh: "Hỏi sâu hơn", toi_da: 60 },
+  "hoi.nho": { nhom: "Hỏi đáp", nhan: "Mục hỏi — dòng nhỏ", mac_dinh: "Hỏi đáp chuyên sâu", toi_da: 60 },
   "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề ({ten} = tên người dùng)", mac_dinh: "{ten}, bạn đang băn khoăn điều gì?", toi_da: 120 },
 });
 
@@ -69,6 +69,12 @@ export const CHU_LAM_NHA = gopBang(KHUNG, {
 export const CHU_XONG_DAT = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề ({tet} = năm Tết)", mac_dinh: "Tết {tet}", toi_da: 60 },
   "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục tra theo năm sinh ({tet} = năm Tết)", mac_dinh: "Tuổi xông đất Tết {tet} theo năm sinh gia chủ", toi_da: 100 },
+});
+// MT-ĐS B3 — sao hạn theo tuổi.
+export const CHU_SAO_HAN = gopBang(KHUNG, {
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tục lệ theo tuổi", toi_da: 60 },
+  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục bảng theo năm", mac_dinh: "Bảng sao hạn theo năm sinh", toi_da: 100 },
+  "theo_nam.dong": { nhom: "Tra nhanh", nhan: "Chữ trước link bảng ({nam} = năm)", mac_dinh: "Năm {nam}:", toi_da: 60 },
 });
 // SEO-L5 — công cụ đổi lịch âm dương.
 export const CHU_DOI_LICH = gopBang(KHUNG, {

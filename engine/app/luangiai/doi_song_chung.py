@@ -187,6 +187,16 @@ def hop_cot_loi_van_han(chuong_vh: dict | None, nam_xem: int) -> dict | None:
     return None
 
 
+def sao_han_nam(tuoi_mu: int, gioi_tinh: str | None) -> dict | None:
+    """MT-ĐS B3: sao hạn Cửu Diệu + Bát hạn của năm theo tục xếp theo tuổi (chỉ đọc `calc.tuoi_dan_gian`), để dòng mười
+    năm HIỆN thêm — không thành hộp, không đổi mức. Không giới tính → None."""
+    if gioi_tinh not in ("nam", "nu"):
+        return None
+    from app.calc import tuoi_dan_gian as tdg
+    sao, han = tdg.sao_han(tuoi_mu, gioi_tinh), tdg.bat_han(tuoi_mu, gioi_tinh)
+    return {"sao": sao, "han": han} if sao else None
+
+
 def co_ra(ma: str, o: dict | None) -> dict:
     """Một cờ của năm cho dòng 10 năm (web mở khi bấm năm): mã, nhãn, lời nhắc tập quán + nên tránh / nên làm (KB
     `van_han.co`). Lời cố định theo tục lệ nên KHÔNG thành hộp (hộp chỉ nói điều riêng của lá số)."""

@@ -1,6 +1,6 @@
 "use client";
 import { useChu } from "@/components/cms/DauCms";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Compass } from "lucide-react";
 import { DoHuongDienThoai } from "@/components/huyen-hoc/DoHuongDienThoai";
 import { HanhTrinhNha } from "@/components/huyen-hoc/HanhTrinhNha";
@@ -10,7 +10,7 @@ import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { HuyenKhong } from "@/components/huyen-hoc/HuyenKhong";
 import { NhaCuaBan } from "@/components/huyen-hoc/NhaCuaBan";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
-import { DongPhai, KhungPhai, type MocNam } from "@/components/huyen-hoc/KhungPhai";
+import { ChipPhai, DongPhai, KhungPhai, type MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { usePost } from "@/lib/goi-api";
@@ -18,6 +18,7 @@ import { BaoLoi } from "@/components/khung/BaoLoi";
 import { hoiMang } from "@/lib/hoi-mang";
 import { ngaySinhIso, useHoSo } from "@/lib/hoso";
 import { nhaGui, useHoSoNha } from "@/lib/ho-so-nha";
+import { ChanQr } from "@/components/khung/ChanQr";
 
 interface MenhQuai {
   quai: string; nhom: string; nam_tinh: number; bang_huong: Record<string, string>; huong_cat: string[];
@@ -45,6 +46,12 @@ export function PhongThuy() {
     ? { birth_date: ngaySinhIso(hoSo), gender: hoSo.gioi_tinh, ...(mocNam !== "lap_xuan" ? { moc_nam: mocNam } : {}) }
     : null;
   const { data: mq, loi, thuLai } = usePost<MenhQuai>("/api/phongthuy/menh-quai", sinh);
+  // TP-GON: giữ bảng so ba mốc của lần tính trước trong lúc engine tính lại (đổi mốc) — dòng nhắc trong khung trường phái
+  // không chớp tắt, các nút chọn không nhảy chỗ ngay lúc vừa bấm. So sánh ba mốc chỉ phụ thuộc ngày sinh, không phụ thuộc mốc đang chọn.
+  const khoaSinh = sinh ? `${sinh.birth_date}|${sinh.gender}` : null;
+  const [mqTruoc, setMqTruoc] = useState<{ khoa: string; mq: MenhQuai } | null>(null);
+  useEffect(() => { if (mq && khoaSinh) setMqTruoc({ khoa: khoaSinh, mq }); }, [mq, khoaSinh]);
+  const ss = mq ?? (mqTruoc && mqTruoc.khoa === khoaSinh ? mqTruoc.mq : null);
   const [doToa, setDoToa] = useState<number | null>(null);
   const [doHuong, setDoHuong] = useState<number | null>(null);
   // Y6: hỏi đáp đọc hồ sơ nhà trên máy (hướng + bố cục) → "bếp nhà tôi có sao không?" trả lời theo đúng nhà; không lưu.
@@ -63,22 +70,27 @@ export function PhongThuy() {
           {!sinh && <XinThemDuLieu hoSo={hoSo} can="gioi_tinh" nut="Thêm giới tính" ly_do="Mệnh quái tính theo năm sinh và giới tính. Câu hỏi bố trí chung thì không cần." />}
           {sinh && !mq && !loi && <KhungTai dong={2} />}
           {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
+          {/* TP-GON: đóng chỉ còn chip mốc đang dùng; nhắc riêng khi ngày sinh nằm giữa các mốc (mệnh quái đổi theo mốc). */}
           {sinh && (
-            <KhungPhai testId="truong-phai-phong-thuy" moTa={<>Bát trạch tính mệnh quái theo năm sinh; sách khác nhau lấy mốc đầu năm khác nhau. Mặc định <b className="text-fg">Lập xuân</b> (tiết khí, khoảng 4/2 dương lịch); dân gian Việt hay lấy <b className="text-fg">Tết âm lịch</b>. Đổi mốc, engine tính lại cả trang (hướng, đo hướng, khảo sát nhà, hỏi đáp).</>}>
+            <KhungPhai testId="truong-phai-phong-thuy"
+              tomTat={<ChipPhai ds={[{ nhan: `Đầu năm: ${TEN_MOC[mocNam]}`, khac: mocNam !== "lap_xuan" }]} />}
+              nhac={ss?.moc_khac ? "Bạn sinh giữa các mốc đầu năm — đổi mốc là mệnh quái và hướng hợp có thể khác." : undefined}
+              moTa={<>Sách khác nhau lấy mốc đầu năm khác nhau để tính mệnh quái. Mặc định <b className="text-fg">Lập xuân</b> (khoảng 4/2 dương lịch); dân gian Việt hay lấy <b className="text-fg">Tết âm lịch</b>. Đổi mốc là cả trang tính lại theo mốc mới.</>}>
               <DongPhai ten="Mốc đầu năm" nhan="Mốc đầu năm tính mệnh quái" giaTri={mocNam} doi={setMocNam}
                 luaChon={[["lap_xuan", "Lập xuân"], ["tet_viet", "Tết lịch Việt"], ["tet_trung", "Tết lịch Trung Quốc"]]}
-                noiBat={!!mq?.moc_khac}
-                goiY={mq?.so_sanh_moc
-                  ? (mq.moc_khac
-                    ? <>Ngày sinh của bạn nằm giữa các mốc nên mệnh quái KHÁC nhau: {(Object.keys(TEN_MOC) as MocNam[]).map((k, i) => <span key={k}>{i > 0 && " · "}{TEN_MOC[k]}: <b>{mq.so_sanh_moc![k].quai}</b></span>)}.</>
-                    : <>Ba mốc cho cùng mệnh quái <b>{mq.quai}</b> với ngày sinh của bạn — đổi mốc không làm khác kết quả.</>)
-                  : "Engine sẽ cho biết đổi mốc có làm khác mệnh quái của bạn không."} />
+                noiBat={!!ss?.moc_khac} nhanNoiBat="Áp dụng với bạn"
+                goiY={ss?.so_sanh_moc
+                  ? (ss.moc_khac
+                    ? <>Ngày sinh của bạn nằm giữa các mốc nên mệnh quái KHÁC nhau: {(Object.keys(TEN_MOC) as MocNam[]).map((k, i) => <span key={k}>{i > 0 && " · "}{TEN_MOC[k]}: <b>{ss.so_sanh_moc![k].quai}</b></span>)}.</>
+                    : <>Ba mốc cho cùng mệnh quái <b>{ss.quai}</b> với ngày sinh của bạn — đổi mốc không làm khác kết quả.</>)
+                  : "Đang tính xem đổi mốc có làm khác mệnh quái của bạn không…"} />
             </KhungPhai>
           )}
           {mq && (
             <div className="glass rounded-2xl p-5" data-testid="menh-quai">
               <p className="text-center text-sm text-fg-muted">Mệnh quái của bạn: <b className="text-gold">{mq.quai}</b> · {mq.nhom} · tính theo năm {mq.nam_tinh} ({TEN_MOC[mocNam]})</p>
               <LaBan quai={mq.quai} nhom={mq.nhom} bang={mq.bang_huong} huongCat={mq.huong_cat} />
+              <ChanQr nhan="Quét để tìm hướng hợp mệnh của bạn" />
               {mq.co_canh_bao.map((c) => <p key={c.loai} className="mt-3 text-xs text-moon">{c.chi_tiet}</p>)}
             </div>
           )}
@@ -96,7 +108,7 @@ export function PhongThuy() {
       {mq && <div className="mx-auto max-w-3xl"><CuoiBaiDoc moDun="phongthuy" cauHoi="Phần hướng nhà và bố trí có giúp ích cho bạn?" maYDinh="nha_cua" /></div>}
 
       <section aria-label="Hỏi Phong thuỷ" className="mt-10">
-        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp cùng AI"}</h2>
+        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp chuyên sâu"}</h2>
           <KhungChat
             moDun="phongthuy"
             loiChao={nhaHoi ? "Hỏi về bếp, giường, cửa, nhà vệ sinh… của nhà bạn — câu trả lời đọc theo hồ sơ nhà đang lưu trên máy bạn, hệ thống không lưu lại."

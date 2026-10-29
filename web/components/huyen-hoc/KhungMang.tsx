@@ -18,7 +18,7 @@ export function DauMang({ Icon, ten, mo_ta, children }: { Icon: LucideIcon; ten:
     <header className="mb-8">
       <div className="flex items-center gap-3">
         <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-gold/15 text-gold shadow-[0_0_24px_-8px_rgb(var(--gold)/0.6)]"><Icon className="size-5" aria-hidden /></span>
-        <p className="eyebrow">{c("dau.nhan_tren") || "Khám phá · huyền học"}</p>
+        <p className="eyebrow">{c("dau.nhan_tren") || "Huyền học"}</p>
       </div>
       <h1 className="mt-4 text-4xl sm:text-5xl">{d.h1 ? <ChuNhan chu={d.h1} /> : ten}</h1>
       <LoiDan macDinh={mo_ta} />

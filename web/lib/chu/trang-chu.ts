@@ -34,7 +34,7 @@ const HANG: [string, string, string][] = [
   ["Cách nói", "Nói cả điểm mạnh lẫn điểm mù. Không doạ, không bán vật phẩm giải hạn.", "Dễ chiều theo cách bạn hỏi, nói điều bạn muốn nghe."],
   ["Đúng tới đâu", "Bạn tự tích nét nào đúng, nét nào chưa. Có bài còn hiện bao nhiêu phần trăm người đọc thấy đúng.",
     "Không có cách nào biết nó nói trúng tới đâu."],
-  ["Ngày sinh của bạn", "Hồ sơ lưu trên máy bạn. Phần AI diễn đạt không nhận họ tên hay ngày sinh.",
+  ["Ngày sinh của bạn", "Hồ sơ lưu trên máy bạn. Phần diễn đạt tự động không nhận họ tên hay ngày sinh.",
     "Nằm trong lịch sử trò chuyện trên máy chủ của bên thứ ba."],
 ];
 
@@ -50,15 +50,16 @@ export const SO_HANG_SO_SANH = HANG.length;
 export const KHOA_MANG = MANG.map(([k]) => k);
 
 export const CHU_TRANG_CHU = {
-  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Thần số học · Huyền học phương Đông", toi_da: 60 },
-  "dau.chip_1": { nhom: D, nhan: "Chip 1 (biểu tượng tia sét)", mac_dinh: "30 giây · không cần tài khoản", toi_da: 40 },
-  "dau.chip_2": { nhom: D, nhan: "Chip 2 (biểu tượng con mắt)", mac_dinh: "Nói thật cả điểm mù", toi_da: 40 },
-  "dau.chip_3": { nhom: D, nhan: "Chip 3 (biểu tượng danh sách)", mac_dinh: "Bạn tự chấm đúng – sai", toi_da: 40 },
+  // TC-HOOK2 (2026-10-29): 3 người đọc thử chọn phương án "Năm nay của bạn" — lời ngắn, nói rõ nhận gì + năm nay.
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Thần số học · Miễn phí", toi_da: 60 },
+  // Hai chip đặt dưới hình vòng số (cân hai cột trên máy tính).
+  "dau.chip_1": { nhom: D, nhan: "Chip 1 dưới hình (biểu tượng tia sét)", mac_dinh: "Không cần tài khoản", toi_da: 40 },
+  "dau.chip_2": { nhom: D, nhan: "Chip 2 dưới hình (biểu tượng danh sách)", mac_dinh: "Đúng hay sai, bạn tự chấm", toi_da: 40 },
   // Cỡ chữ = lựa chọn có sẵn (không px tự do): web đổi bằng lớp Tailwind cố định (lib/kieu-chu.ts CO_TRANG_CHU).
   "co.h1": { nhom: CO, nhan: "Cỡ tiêu đề lớn (\"Bạn là số mấy?\")", mac_dinh: "thuong", lua_chon: CO_CHON },
   "co.diem_mu": { nhom: CO, nhan: "Cỡ dòng điểm mù chạy", mac_dinh: "thuong", lua_chon: CO_CHON },
-  "co.chip": { nhom: CO, nhan: "Cỡ ba chip (30 giây · Nói thật · Tự chấm)", mac_dinh: "thuong", lua_chon: CO_CHON },
-  "diem_mu.nhan": { nhom: DM, nhan: "Nhãn đỏ bên trái", mac_dinh: "Điểm mù", toi_da: 20 },
+  "co.chip": { nhom: CO, nhan: "Cỡ hai chip dưới hình", mac_dinh: "thuong", lua_chon: CO_CHON },
+  "diem_mu.nhan": { nhom: DM, nhan: "Nhãn đỏ bên trái", mac_dinh: "Có quen không?", toi_da: 20 },
   ...Object.fromEntries(DIEM_MU.map(([so, cau], i) => [`diem_mu.cau_${i + 1}`,
     { nhom: DM, nhan: `Câu ${i + 1} (mỗi câu hiện 3 giây; *Số n* = phần vàng)`, mac_dinh: `*Số ${so}* ${cau}`, toi_da: 80 }])),
 
@@ -90,6 +91,7 @@ export const CHU_TRANG_CHU = {
   "mang.lon": { nhom: M, nhan: "Tiêu đề mục", mac_dinh: "Bốn mảng huyền học, một hồ sơ", toi_da: 120 },
   "mang.mo_ta": { nhom: M, nhan: "Mô tả dưới tiêu đề", toi_da: 300,
     mac_dinh: "Sau thần số, bạn có thể đi tiếp vào các hệ thống phương Đông — dùng luôn hồ sơ đã nhập, chỉ hỏi thêm giờ sinh khi cần." },
+  "mang.xem_tat_ca": { nhom: M, nhan: "Link dưới bốn thẻ (mở /huyen-hoc)", mac_dinh: "Xem cả năm mảng và công cụ lịch, tuổi", toi_da: 60 },
   ...Object.fromEntries(MANG.flatMap(([k, ten, mo]) => [
     [`mang.${k}_ten`, { nhom: M, nhan: `Thẻ ${ten} — tên`, mac_dinh: ten, toi_da: 30 }],
     [`mang.${k}_mo`, { nhom: M, nhan: `Thẻ ${ten} — mô tả`, mac_dinh: mo, toi_da: 80 }],

@@ -5,6 +5,21 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4r. Bản đồ vệ tinh để đo hướng nhà trên máy tính (DH-PC2, 2026-10-27, `docs/DO-HUONG-MAY-TINH.md`)
+
+- [ ] console.cloud.google.com → tạo dự án (vd `hieuban-maps`) → **Billing**: gắn thẻ (Google bắt buộc, có hạn mức miễn phí
+  hằng tháng — xem docs).
+- [ ] APIs & Services → **Enable APIs**: bật **Maps JavaScript API** và **Geocoding API** (ô tìm địa chỉ).
+- [ ] APIs & Services → Credentials → **Create credentials → API key** → Edit:
+  - Application restrictions: **Websites** → thêm `https://hieuban.com/*` và `https://www.hieuban.com/*`.
+  - API restrictions: chỉ chọn Maps JavaScript API + Geocoding API → Save.
+- [ ] (Khuyên) Quotas: Maps JavaScript API → "Map loads per day" đặt ~300; Billing → **Budgets & alerts** ngân sách
+  100.000 ₫/tháng có cảnh báo email — tránh hoá đơn bất ngờ.
+- [ ] Vercel (dự án **web**) → Environment Variables → Production: **`NEXT_PUBLIC_GOOGLE_MAPS_KEY`** = khoá vừa tạo →
+  **Redeploy** (biến `NEXT_PUBLIC_` chỉ vào trang khi build lại). Kiểm: `/phong-thuy` → khung Đo hướng nhà có nút
+  "Chọn trên ảnh vệ tinh" → bấm → thấy ảnh vệ tinh, bấm mái nhà + mặt đường → hiện hướng.
+- Khoá này lộ ra trình duyệt là bình thường (Google thiết kế vậy) — an toàn nhờ giới hạn tên miền ở bước 3.
+
 ## Bảng tổng việc còn lại (rà 27/10/2026)
 
 Đã bật tài khoản + thu tiền (hội viên, nạp Sao, hỏi chuyên gia) → mấy việc trước đây "để sau" giờ thành **gấp**. Chi tiết
@@ -27,6 +42,7 @@ từng việc ở mục ghi trong ngoặc.
 10. Search Console: gửi `sitemap-ngay.xml`, `sitemap-cum.xml`; yêu cầu lập chỉ mục trang Tết 2027; Bing Webmaster (mục 4h–4k).
 11. Số liệu cho quản trị: Search Console + GA4 (Q7) · khoá OpenRouter cho bộ 55 câu (D1).
 12. Vercel → Spend Management đặt trần chi tiêu (SEC-2 bước 9).
+13. **Khoá Google Maps** cho "Chọn trên ảnh vệ tinh" ở Đo hướng nhà (mục 4r, 10 phút) — chưa đặt thì nút tự ẩn.
 
 **P2 — nội dung và chuyên môn (anh là chủ biên):**
 13. CMS: đọc + xuất bản 3 bài khởi tạo (4n) · nhập + chuẩn hoá bài NotFair rồi xuất bản (4e, BLOG7).
@@ -120,6 +136,10 @@ WP9, WP10) · lật lá bài đầu ngày trên iPhone (Hôm nay) · luồng mua
      báo em dịch vụ + đặt khoá vào env thì em làm; hiện mọi trang đã có ảnh tóm tắt vẽ bằng code (có QR).
    - **Quyết định còn chờ** (audit SEO-M): mở bot `Google-Extended` (Gemini app trích được site, đổi lại cho phép dùng
      huấn luyện — lệch BM-2) hay giữ chặn.
+4r. [ ] **Sau khi merge HH-1 "Huyền học" (5 phút, 2026-10-27):** CMS deploy tự chạy migration đổi `/kham-pha` → `/huyen-hoc`
+   (Trang website, menu, chân trang). Rồi: (1) mở https://hieuban.com/kham-pha → phải tự chuyển sang `/huyen-hoc`;
+   (2) CMS → **Trang website** → `/huyen-hoc`: nếu trước đây anh có ghi đè tiêu đề SEO / H1 kiểu "Khám phá…" thì xoá ô đó
+   để dùng chữ mới; (3) Search Console → **Kiểm tra URL** → `https://hieuban.com/huyen-hoc` → **Yêu cầu lập chỉ mục**.
 4n. [ ] **Bài khởi tạo + Lối đi tiếp (BLOG-6 / CTA-2b, 2026-10-26):** sau khi merge, CMS deploy tự chạy migration → vào CMS
    → **Bài viết**: 3 bài nháp "Gửi duyệt" (gieo quẻ 3 đồng xu, Bát tự là gì, hướng nhà hợp tuổi). Đọc kỹ, thêm trải nghiệm thật
    của anh, bấm thử các link nguồn ngoài, rồi **Xuất bản**. Nếu bài có đoạn "[Ảnh chưa nhập…" (kho ảnh lỗi) → tải ảnh trong

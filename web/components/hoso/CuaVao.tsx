@@ -17,7 +17,9 @@ export function CuaVao() {
   const hoSo = useHoSo();
   const router = useRouter();
   const c = useChuChung();
-  if (hoSo === undefined) return <div className="h-[15rem] animate-pulse rounded-2xl bg-surface/50" />;
+  // Khung giữ chỗ (lúc máy chủ dựng trang, chưa đọc được hồ sơ trên máy) cao bằng form lần đầu (có khối đồng ý) →
+  // form hiện ra không đẩy phần dưới / không kéo hình cột phải (CLS, TC-HOOK2). Đổi form → đo lại.
+  if (hoSo === undefined) return <div className="h-[29rem] animate-pulse rounded-2xl bg-surface/50 sm:h-[31.75rem]" />;
   if (hoSo) return <ChaoLai hoSo={hoSo} />;
   return (
     <div className="glass rounded-2xl p-4 sm:p-6">

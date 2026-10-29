@@ -12,11 +12,13 @@ async function datCms(page: Page, trangThai: Record<string, unknown>, duong?: st
   expect(r.ok()).toBe(true);
 }
 
-/** Mọi hàng của lưới kín (mép phải hàng nào cũng bằng hàng đầu). */
+/** Mọi hàng của lưới kín (mép phải hàng nào cũng bằng hàng đầu). Khối nằm trong <Suspense>: React gửi nó trước trong một
+ *  vùng ẩn rồi mới chuyển vào chỗ → đếm `li` đã đủ nhưng chưa hiển thị; CHỜ cho tới khi ô hiển thị rồi mới đo (CI chậm lộ ra). */
 async function kinHang(luoi: Locator, ten: string) {
-  const o = await luoi.evaluate((el) => [...el.children].filter((c) => (c as HTMLElement).offsetParent !== null)
+  const do_ = () => luoi.evaluate((el) => [...el.children].filter((c) => (c as HTMLElement).offsetParent !== null)
     .map((c) => { const r = c.getBoundingClientRect(); return { top: Math.round(r.top), right: Math.round(r.right) }; }));
-  expect(o.length, ten).toBeGreaterThan(0);
+  await expect.poll(async () => (await do_()).length, { message: ten }).toBeGreaterThan(0);
+  const o = await do_();
   const hang = new Map<number, number[]>();
   for (const x of o) hang.set(x.top, [...(hang.get(x.top) ?? []), x.right]);
   const ds = [...hang.values()], mep = Math.max(...ds[0]!);

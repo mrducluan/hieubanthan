@@ -19,7 +19,7 @@ from app.calc import kinhdich, kinhdich_maihoa as mh, luc_hao as lh, vuong_suy a
 from app.calc.kinhdich_vendor import CHI_NH, KHAC, SINH
 from app.hoidap import chung
 from app.kb import kinhdich_kb as kb
-from app.luangiai import kinhdich_doi_song as kd_ds
+from app.luangiai import kinhdich_doi_song as kd_ds, truc_quan
 from app.narrative import hoi_van
 from app.narrative.ngan_sach import mo_ta_loi
 
@@ -215,6 +215,9 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | 
     if pl["xu_ly"] == "tu_choi_nhe":
         goi["mau"] = kb.mau("tu_choi")
         return chung.ket(goi)
+    if pl["xu_ly"] == "dan_huong":
+        goi["mau"] = chung.mau_dan_huong(pl["cau_chuan_hoa"])
+        return chung.ket(goi)
     muc = goi["muc"]
     for ma in pl["giai_thich"][:2]:
         g = kb.giai_thich(ma)
@@ -324,14 +327,14 @@ def _doan(m: dict) -> tuple[str, str | None]:
         if m.get("y_linh_vuc"):
             s += f" Riêng về {m['linh_vuc'].lower()}: {m['y_linh_vuc']}"
         if m.get("nom_na"):
-            s += f"\n{m['nom_na'].replace('Nôm na: ', 'Nói nôm na: ')}"
+            s += f"\n{m['nom_na']}"
         return s, m["cau_tu_soi"]
     if l == "quy_tac_doc":
         return f"Cách đọc (quy tắc Chu Hy): {m['noi_dung']}", None
     if l == "loi_kinh":
         return (f"{'【Lời chủ】 ' if m['chu'] else ''}{m['tieu_de']}: 「{m['han']}」 — {m['dich']} "
                 f"Ý: {m['y']}" + (f"\nThoán truyện giảng: {m['thoan']}" if m.get("thoan") else "")
-                + (f"\nNói nôm na: {m['nom_na']}" if m.get("nom_na") else "")), None
+                + (f"\nHiểu đơn giản: {m['nom_na']}" if m.get("nom_na") else "")), None
     if l == "the_dung":
         return (f"Mai Hoa — Thể là {m['the']} ({m['the_ngu_hanh']}), Dụng là {m['dung']} "
                 f"({m['dung_ngu_hanh']}): {m['ten']}. {m['y_nghia']} {m['luu_y']}", None)
@@ -466,7 +469,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
         co.append({"loai": "vuong_suy_rut_gon", "chi_tiet": kb.luu_y("vuong_suy")})
     if pl["truong_phai"] and pl["loai"] != "doc_que_da_co":
         co.append({"loai": "khong_gieo_lai", "chi_tiet": kb.mau("gieo_lai")})
-    dac_biet = pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or bool(goi["can_them"])
+    dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
     doc_que = None
     if que is not None and can_que:
         pt = None
@@ -480,4 +483,5 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
             "can_them": goi["can_them"], "co_canh_bao": co,
             "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "lich": lich,
             "doc_que": doc_que, "chu_de": ({"ma": ma_cd, "ten": cd.get("ten", "Việc khác")} if can_que else None),
-            "thoi_diem_gieo": thoi_diem_gieo, "can_lam_ro": None}
+            "thoi_diem_gieo": thoi_diem_gieo, "can_lam_ro": None,
+            "truc_quan": truc_quan.kinhdich(goi, que if can_que else None)}

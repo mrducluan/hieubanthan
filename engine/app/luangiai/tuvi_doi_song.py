@@ -10,7 +10,7 @@ trong cung (Lộc +2, Quyền +1, Khoa +1, Kỵ −2) + lục cát (Tả, Hữu,
 Tuần/Triệt → cờ `cham`, không cộng trừ. Cung vô chính diệu mượn chính tinh cung xung chiếu (khi đó phần chính tinh
 của cung xung không tính lại vào nửa điểm, tránh đếm hai lần). Mức: ≥ 4 `thuan` (VH-1: trước là 3 — 55% cung "Thuận
 lợi" trên 60 lá golden), ≤ −2 `can_chu_dong` (nhãn "Cần lưu ý"), còn lại `can_bang`. Đường bay theo thang riêng
-(`NGUONG_BAY`); Lời khuyên và Vận hạn không mang mức. Điểm không trả ra cho người dùng. Chương "Vận hạn & điều nên tránh"
+(`NGUONG_BAY`); Lời khuyên và Vận hạn không mang mức. Điểm không trả ra cho người dùng. Chương "Mười năm tới & điều nên tránh (vận hạn)"
 (VH-1): luật điểm năm ở chú thích trên `dong_muoi_nam`.
 
 Tự học (mục 3 — ranh giới): `trong_so` (tỉ lệ công khai theo `ma_mau`) chỉ gắn số / hạ hộp có tỉ lệ đúng thấp,
@@ -63,7 +63,7 @@ CHUONG = [
     ("nha_cua", "Nhà cửa, nơi ở", "Chuyện nhà cửa của tôi thế nào?", ["Điền Trạch"]),
     ("duong_bay", "Mảng đời nào kéo mảng đời nào", "Mảng đời nào đang tác động lên mảng nào?", []),
     ("nam_nay", "Năm nay & 3 tháng tới", "Năm nay và 3 tháng tới của tôi thế nào?", []),
-    ("van_han", "Vận hạn & điều nên tránh", "Mười năm tới năm nào nên đi chậm, và chậm ở chuyện gì?", []),
+    ("van_han", "Mười năm tới & điều nên tránh (vận hạn)", "Mười năm tới năm nào nên đi chậm, và chậm ở chuyện gì?", []),
     ("loi_khuyen", "Lời khuyên dành cho bạn", "Tôi nên làm gì từ đây?", []),
 ]
 CHUONG_COT_LOI = ("tong_quan", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "quan_he", "nha_cua", "duong_bay")
@@ -787,8 +787,9 @@ def _thuong_dau(s: str) -> str:
     return s[:1].lower() + s[1:] if s else s
 
 
-def dong_muoi_nam(ls: dict, cc: dict, nam_am_xem: int, nam_am_sinh: int) -> list[dict]:
-    """Mười năm tới (năm âm lịch Việt), luật ở chú thích trên. Khoá `_…` là nội bộ (hộp ứng viên, mẫu)."""
+def dong_muoi_nam(ls: dict, cc: dict, nam_am_xem: int, nam_am_sinh: int, gioi_tinh: str | None = None) -> list[dict]:
+    """Mười năm tới (năm âm lịch Việt), luật ở chú thích trên. Khoá `_…` là nội bộ (hộp ứng viên, mẫu).
+    `gioi_tinh` (MT-ĐS B3) → mỗi năm kèm `sao_han` {sao, han} theo tục xếp theo tuổi — chỉ để hiện, KHÔNG đổi mức."""
     _, chi_sinh = lunar.can_chi_nam(nam_am_sinh)
     goc = {x["hoa"]: x["cung"] for x in ls["tu_hoa"]}
     loc_ton = next((c["ten"] for c in ls["cung"] if "Lộc Tồn" in c["phu_tinh"]), None)
@@ -858,7 +859,7 @@ def dong_muoi_nam(ls: dict, cc: dict, nam_am_xem: int, nam_am_sinh: int) -> list
             cu.append(f"Chi năm sinh {chi_sinh}, chi năm {chi}: " + ", ".join(dsc.NHAN_CO[x] for x in co)
                       + " (tập quán dân gian, không đổi mức)")
         ra.append({"nam": nam, "tuoi": tuoi, "muc": muc, "nhan_muc": kb.nhan_muc(muc), "hien_tai": k == 0,
-                   "co": [dsc.co_ra(x, kb.van_han_loi("co", x)) for x in co],
+                   "co": [dsc.co_ra(x, kb.van_han_loi("co", x)) for x in co], "sao_han": dsc.sao_han_nam(tuoi, gioi_tinh),
                    "mang": mang, "y": f"Năm {nam}, {_thuong_dau(_sua_menh(y))}", "nen_tranh": _sua_menh(nen_tranh),
                    "nen_lam": _sua_menh(nen_lam), "can_cu": cu, "_tac": tac, "_tot": tot, "_gd": gd, "_diem": diem, "_k": k,
                    "_cln": c_ln})
@@ -1135,7 +1136,7 @@ def chon_cot_loi(ds_chuong: list[dict], toi_da: int = 5) -> list[dict]:
 
 # ------------------------------------------------------------------ điểm vào
 def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
-        ca_nhan: dict | None = None, ls: dict | None = None) -> dict:
+        ca_nhan: dict | None = None, ls: dict | None = None, vh: dict | None = None) -> dict:
     """`sinh` như `hoidap.tuvi.tra_loi` (+ `luu_nguyet` tuỳ chọn). → báo cáo `doi_song_1` (chưa có moi_xem / phí —
     `toan_bo.tuvi` gắn)."""
     from app.hoidap.tuvi import tom_tat          # tránh vòng import
@@ -1145,7 +1146,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     if ls is None:
         ls = tom_tat(az.an_sao_tho(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], "vi-VN",
                                    hoa_linh=sinh.get("hoa_linh", "viet"), **kw))
-    vh = az.van_han(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], ngay_xem, **kw)
+    vh = vh or az.van_han(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], ngay_xem, **kw)   # MT-ĐS B2: hỏi đáp đưa vh đã tính
     tz_xem = az.TZ_TRUNG if kw["lich"] == "trung" else config.CALENDAR_MERIDIAN_TZ
     nam_am_xem = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, tz_xem)[2]
     nam_am_sinh = nam_am_xem - vh["tuoi_mu"] + 1
@@ -1153,7 +1154,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     hoc = (trong_so, ca_nhan)
     da_dung: set[str] = set()
     tgb = thoi_gian_bieu(ls, cc, vh["tuoi_mu"], nam_am_sinh)
-    dong = dong_muoi_nam(ls, cc, nam_am_xem, nam_am_sinh)
+    dong = dong_muoi_nam(ls, cc, nam_am_xem, nam_am_sinh, sinh.get("gioi_tinh"))
 
     ds: list[dict] = []
     for ma, _, _, cung in CHUONG:
@@ -1186,5 +1187,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     cot_loi = dsc.them_cot_loi_van_han(chon_cot_loi(ds), ds, nam_am_xem)
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).
     kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
-    return _sach({"phien_ban": PHIEN_BAN, "cot_loi": cot_loi, "thoi_gian_bieu": tgb, "chuong": ds,
+    from app.luangiai import luu_y_mang as lym  # noqa: PLC0415
+    luu_y_mang = lym.dung(ds, "tuvi", muc_cung={k: v["muc"] for k, v in cc.items()})
+    return _sach({"phien_ban": PHIEN_BAN, "cot_loi": cot_loi, "thoi_gian_bieu": tgb, "chuong": ds, "luu_y_mang": luu_y_mang,
                   "tuoi_mu": vh["tuoi_mu"], "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

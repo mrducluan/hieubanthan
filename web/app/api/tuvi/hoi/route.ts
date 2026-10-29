@@ -36,7 +36,7 @@ async function xuLy(req: Request): Promise<NextResponse> {
   const kq = await goiEngineDaKiem(parsed.data, "/v1/tuvi/hoi", dau);
   if (!kq.ok) return kq.res;
   const goc = kq.body as TraLoi;
-  if (goc?.co_the_goi_y && !goc.nhan_ra_y_dinh && !["an_toan", "tu_choi_nhe"].includes(goc.phan_loai?.xu_ly ?? "")) {
+  if (goc?.co_the_goi_y && !goc.nhan_ra_y_dinh && !["an_toan", "tu_choi_nhe", "dan_huong"].includes(goc.phan_loai?.xu_ly ?? "")) {
     const goiY = await thuGoiY(parsed.data, dau).catch((e: unknown) => { baoLoi(e, { noi: "api", duong: "/api/tuvi/hoi#vec" }); return null; });
     if (goiY) return NextResponse.json(goiY);
   }

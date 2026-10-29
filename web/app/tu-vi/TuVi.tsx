@@ -8,6 +8,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { CalendarClock, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, Moon, Orbit, ScrollText, Waypoints } from "lucide-react";
 import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
+import { HanhDongTrucQuan } from "@/components/hoi/TrucQuan";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { TruongPhai } from "@/components/huyen-hoc/TruongPhai";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
@@ -23,6 +24,7 @@ import { HopThamTuVi } from "@/components/huyen-hoc/HopThamTuVi";
 import { ChonYDinh, XacNhanYDinh, type GoiYVec } from "@/components/huyen-hoc/XacNhanYDinh";
 import { LaSoTuVi, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import { KhungLaSo } from "@/components/huyen-hoc/KhungLaSo";
+import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { Button } from "@/components/ui/button";
@@ -57,6 +59,8 @@ export function TuVi() {
   const [thangNhuan, setThangNhuan] = useState<"thang_sau" | "thang_chinh">("thang_sau");
   // TV-LICH (chủ dự án yêu cầu 2026-10-02): âm lịch Việt Nam (mặc định) ↔ lịch Trung Quốc.
   const [lich, setLich] = useState<"viet" | "trung">("viet");
+  // TP-GON: khung Trường phái thu gọn — giữ trạng thái mở ở đây vì lá số tạm gỡ mỗi lần engine an lại.
+  const [moPhai, setMoPhai] = useState(false);
   // TP-LICH: hồ sơ nhập ngày âm theo lịch Trung Quốc → mở lá số theo lịch đó (người dùng vẫn đổi được).
   const lichHoSo = hoSo?.lich_am;
   useEffect(() => { if (lichHoSo === "trung") setLich("trung"); }, [lichHoSo]);
@@ -89,6 +93,19 @@ export function TuVi() {
   const xemCung = (c: string) => {
     setChon(c);
     requestAnimationFrame(() => chiTietRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
+  // HD-CS đợt 2: từ câu trả lời → chọn cung trên lá số và đưa lá số vào giữa màn hình (thấy cung sáng + tam phương).
+  const xemTrenLaSo = (c: string) => {
+    setChon(c);
+    ghi("chart_interacted", { mo_dun: "tuvi", kind: "xem_tren_la_so" });
+    // Đầu lá số ngay dưới thanh đầu trang (đo thật, không ghi cứng) — lá số cao hơn màn hình điện thoại nên "center" lệch.
+    requestAnimationFrame(() => {
+      const el = svgRef.current;
+      if (!el) return;
+      const dau = document.querySelector<HTMLElement>("[data-thanh-dau]")?.getBoundingClientRect().height ?? 0;
+      const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: window.scrollY + el.getBoundingClientRect().top - dau - 8, behavior: giam ? "auto" : "smooth" });
+    });
   };
   const hoi = (cau: string) => {
     setCauNgoai({ cau, lan: Date.now() });
@@ -157,9 +174,10 @@ export function TuVi() {
               hoaLinh={hoaLinh} setHoaLinh={setHoaLinh}
               thangNhuan={thangNhuan} setThangNhuan={setThangNhuan}
               coNhuan={!!ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh"}
-              luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }} />
+              luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }}
+              mo={moPhai} doiMo={(v) => { setMoPhai(v); if (v) ghi("chart_interacted", { mo_dun: "tuvi", kind: "mo_truong_phai" }); }} />
             {/* Lá số: điện thoại mặc định thu vừa màn hình, "Phóng to" để đọc chữ rõ rồi vuốt (Trục 1 — KhungLaSo) */}
-            <KhungLaSo chon={chiChon}>
+            <KhungLaSo chon={chiChon} chan={<ChanLaSo giaoDien={giaoDien} tieuDe="Lá số Tử vi" duong="/tu-vi" />}>
               <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={hoSo?.ho_ten} gioSinh={gioHienThi(hoSo)}
                 chon={chiChon} phaiDoSang={phaiDoSang} onChon={(c) => {
                   setChon(c); ghi("chart_interacted", { mo_dun: "tuvi", kind: "chon_cung" });
@@ -218,7 +236,9 @@ export function TuVi() {
       )}
 
       <section ref={chatRef} aria-label="Hỏi Tử vi" className="mt-10 scroll-mt-24">
-        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp cùng AI"}</h2>
+        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp chuyên sâu"}</h2>
+        {/* HD-CS đợt 2 (hướng C): "Xem trên lá số" trong câu trả lời chọn đúng cung trên lá số phía trên. */}
+        <HanhDongTrucQuan.Provider value={laSo && ls ? { xemCung: xemTrenLaSo } : {}}>
         <KhungChat
           moDun="tuvi"
           loiChao={laSo ? "Hỏi về một cung, một sao, hoặc hạn hiện tại của bạn." : "Hỏi kiến thức chung về cung, sao, tứ hoá — hoặc bổ sung giờ sinh để hỏi về lá số của bạn."}
@@ -242,12 +262,13 @@ export function TuVi() {
               // LG-ĐS: có câu gần nghĩa trong kho → hỏi lại "đúng ý bạn chứ?"; không có → cho chọn 1 trong 8 chủ đề.
               // v3 M1: phần hỏi lại này đi SAU câu trả lời (đọc trước, xác nhận sau); "Cung xem" vẫn ở trên.
               sauTraLoi = d.goi_y_vec?.y_dinh ? <XacNhanYDinh cau={cau} goi={d.goi_y_vec} />
-                : d.co_the_goi_y && !d.nhan_ra_y_dinh && !["an_toan", "tu_choi_nhe"].includes(d.phan_loai?.xu_ly ?? "")
+                : d.co_the_goi_y && !d.nhan_ra_y_dinh && !["an_toan", "tu_choi_nhe", "dan_huong"].includes(d.phan_loai?.xu_ly ?? "")
                   ? <ChonYDinh cau={cau} /> : null;
               return d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null;
             },
           ).then((kq) => (sauTraLoi ? { ...kq, sau: sauTraLoi } : kq)); }}
         />
+        </HanhDongTrucQuan.Provider>
       </section>
     </div>
   );

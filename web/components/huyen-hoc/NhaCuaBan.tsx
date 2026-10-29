@@ -27,6 +27,7 @@ import { NHAN_MUC } from "@/components/luan-giai/kieu";
 import { boCucGui, type HoSoNha } from "@/lib/ho-so-nha";
 import { NutChiaSeNha } from "@/components/chia-se/NutChiaSeNha";
 import { Undo2, Wrench } from "lucide-react";
+import { ChanQr } from "@/components/khung/ChanQr";
 
 type Sinh = { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
 interface ThanhVien { vai: "vo" | "chong" | "con" | "cha_me" | "khac"; nam: string; gioi_tinh: "nam" | "nu" }
@@ -363,6 +364,7 @@ function ChuongNha({ c, so, huongNha }: { c: Chuong; so: number; huongNha?: stri
         <SoDoNha className="mt-3" huongNha={huongNha} duNien={Object.fromEntries(c.phong.map((p) => [p.cung, p.du_nien]))}
           phong={c.phong.map((p) => ({ cung: p.cung, ten: p.ten, muc: p.muc }))} />
       )}
+      {c.phong && c.phong.length > 0 && <ChanQr className="max-w-sm" nhan="Quét để xem nhà của bạn" />}
       {c.phong && c.phong.length > 0 && (
         <ul className="mt-3 grid gap-2 sm:grid-cols-2" data-testid="nha-phong">
           {c.phong.map((p) => (

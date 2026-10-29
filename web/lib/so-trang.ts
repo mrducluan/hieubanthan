@@ -9,14 +9,14 @@ import { CHU_DE, type LoaiTrang } from "@/lib/kien-thuc";
 import { NGAY_HIEU_LUC } from "@/lib/van-hanh";
 import type { NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
 import { ND_XEM_NGAY } from "@/app/xem-ngay-tot/noi-dung";
-import { ND_HAN_NAM, ND_LAM_NHA, ND_XONG_DAT } from "@/app/xem-tuoi-lam-nha/noi-dung";
+import { ND_HAN_NAM, ND_LAM_NHA, ND_SAO_HAN, ND_XONG_DAT } from "@/app/xem-tuoi-lam-nha/noi-dung";
 import { ND_DOI_LICH } from "@/app/doi-lich-am-duong/noi-dung";
 import type { BangChu, BangHinh } from "@/lib/chu-trang";
 import { CHU_TRANG_CHU, HINH_TRANG_CHU } from "@/lib/chu/trang-chu";
-import { CHU_KHAM_PHA, CHU_KIEN_THUC, HINH_KHAM_PHA } from "@/lib/chu/trang-tinh";
-import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM } from "@/lib/chu/trang-con";
+import { CHU_HUYEN_HOC, CHU_KIEN_THUC, HINH_HUYEN_HOC } from "@/lib/chu/trang-tinh";
+import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM } from "@/lib/chu/trang-con";
 import {
-  CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
+  CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_SAO_HAN, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
   CHU_XEM_NGAY, CHU_XONG_DAT,
 } from "@/lib/chu/cong-cu";
 
@@ -145,10 +145,10 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   } },
   { duong: "/kinh-dich", nhom: "cong_cu", ten: "Kinh Dịch", o: O_CONG_CU, mac_dinh: { chu: CHU_KINH_DICH,
     tieu_de_seo: "Gieo quẻ Kinh Dịch online: 64 quẻ, 384 hào, lời quẻ có nguồn",
-    mo_ta_seo: "Gieo quẻ Kinh Dịch cho một câu hỏi cụ thể: máy gieo, Mai Hoa theo giờ hoặc tự gieo đồng xu. Đọc theo Nghĩa Lý, Lục Hào, Mai Hoa, có trích Chu Dịch và lời nói nôm na.",
+    mo_ta_seo: "Gieo quẻ Kinh Dịch cho một câu hỏi cụ thể: máy gieo, Mai Hoa theo giờ hoặc tự gieo đồng xu. Đọc theo Nghĩa Lý, Lục Hào, Mai Hoa, có trích Chu Dịch và lời giải thích dễ hiểu.",
     doan: [
-      "Đang phân vân một việc — nhận lời mời, dọn nhà, mở quán, nói chuyện lại với một người? Gieo một quẻ, nhận câu trả lời ngắn bằng lời thường: việc đang thuận hay cần đổi cách, và nên làm gì trong tuần này. Quẻ do máy gieo ngẫu nhiên, theo giờ, theo số hay phương vị (Mai Hoa), hoặc bạn tự gieo ba đồng xu — AI không chọn quẻ.",
-      "Lời đọc gồm quẻ chủ, hào động, quẻ biến; trích nguyên văn Chu Dịch (quái từ, hào từ, Thoán truyện) kèm dịch nghĩa và lời nói nôm na. Mỗi lời đọc có mặt tối và câu hỏi tự soi.",
+      "Đang phân vân một việc — nhận lời mời, dọn nhà, mở quán, nói chuyện lại với một người? Gieo một quẻ, nhận câu trả lời ngắn bằng lời thường: việc đang thuận hay cần đổi cách, và nên làm gì trong tuần này. Quẻ do máy gieo ngẫu nhiên, theo giờ, theo số hay phương vị (Mai Hoa), hoặc bạn tự gieo ba đồng xu — không bước nào tự chọn quẻ thay bạn.",
+      "Lời đọc gồm quẻ chủ, hào động, quẻ biến; trích nguyên văn Chu Dịch (quái từ, hào từ, Thoán truyện) kèm dịch nghĩa và lời giải thích dễ hiểu. Mỗi lời đọc có mặt tối và câu hỏi tự soi.",
       "Hỏi lại cùng một việc nhiều lần trong thời gian ngắn, trang sẽ nhắc theo tinh thần quẻ Mông.",
     ],
     hoi_dap: [
@@ -171,13 +171,14 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Đo hướng nhà thế nào cho đúng?", dap: "Đứng ở cửa chính nhìn thẳng ra ngoài, để điện thoại nằm ngang, tránh xa kim loại; trang dùng la bàn của máy và cho nhập độ tay nếu cần." },
       { hoi: "Có cần mua vật phẩm phong thuỷ không?", dap: "Không. Trang chỉ nêu cách bố trí và quan niệm, không giới thiệu vật phẩm." },
     ],
-    lien_ket: [{ href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào (1960–2005)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ phong thuỷ" }, { href: "/kham-pha", ten: "Các hệ thống khác" }],
+    lien_ket: [{ href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào (1960–2005)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ phong thuỷ" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
   } },
   // HL-1 / TDG-1: công cụ hoàng lịch + tuổi — giới thiệu + hỏi đáp mặc định ở app/*/noi-dung.ts.
   tuNd(ND_XEM_NGAY, "Xem ngày tốt hôm nay: hoàng đạo, giờ tốt, việc nên làm", CHU_XEM_NGAY),
   tuNd(ND_LAM_NHA, "Xem tuổi làm nhà, cưới hỏi: Kim lâu, Hoang ốc, Tam tai", CHU_LAM_NHA),
   tuNd(ND_XONG_DAT, "Xem tuổi xông đất đầu năm hợp gia chủ, giờ đẹp mùng 1", CHU_XONG_DAT),
   tuNd(ND_HAN_NAM, "Hướng xấu theo năm: Thái Tuế, Tam Sát, Ngũ Hoàng", CHU_HAN_NAM),
+  tuNd(ND_SAO_HAN, "Xem sao hạn năm nay theo tuổi: La Hầu, Kế Đô, Thái Bạch…", CHU_SAO_HAN),   // MT-ĐS B3
   tuNd(ND_DOI_LICH, "Đổi lịch âm dương: ngày âm hôm nay, can chi, tháng nhuận", CHU_DOI_LICH),   // SEO-L5
   { duong: "/ban-than", nhom: "cong_cu", ten: "Hồ sơ bản thân", o: ["seo", "khoi_duoi", "khoi_cuoi"], mac_dinh: {
     tieu_de_seo: "Hồ sơ bản thân",
@@ -205,14 +206,17 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   // ---------------- B · trang tĩnh / giới thiệu
   { duong: "/", nhom: "tinh", ten: "Trang chủ", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân", h1: "Bạn là số mấy?",
-    loi_dan: "Gõ tên và ngày sinh. Nửa phút sau bạn có 4 con số của riêng mình, mỗi số kèm 3 điểm mạnh, 3 *điểm mù* — và bạn tự tích xem nó nói trúng mấy điều.",
+    loi_dan: "Nhập tên và ngày sinh. 30 giây sau bạn biết mình mạnh ở đâu, hay vấp ở đâu, và *năm nay nên dồn sức vào việc gì*.",
     chu: CHU_TRANG_CHU, hinh: HINH_TRANG_CHU,
     mo_ta_seo: "Thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ): tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.",
   } },
-  { duong: "/kham-pha", nhom: "tinh", ten: "Khám phá", o: O_TINH, mac_dinh: { chu: CHU_KHAM_PHA, hinh: HINH_KHAM_PHA,
-    tieu_de_seo: "Khám phá: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch",
-    mo_ta_seo: "Năm lăng kính nhìn lại bản thân: thần số học, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch — dùng chung một hồ sơ, cách tính minh bạch, diễn giải có nguồn.",
-    h1: "Năm hệ thống, một hồ sơ",
+  // Hub Huyền học (trước 2026-10-27 là /kham-pha "Khám phá" — 308 về đây, lib/chuyen-huong.json).
+  { duong: "/huyen-hoc", nhom: "tinh", ten: "Huyền học", o: O_TINH, mac_dinh: { chu: CHU_HUYEN_HOC, hinh: HINH_HUYEN_HOC,
+    tieu_de_seo: "Huyền học online: Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, thần số",
+    mo_ta_seo: "Huyền học phương Đông và thần số học trong một hồ sơ: lá số Tử vi, Bát tự, gieo quẻ Kinh Dịch, phong thuỷ nhà ở. Tính minh bạch, có nguồn, miễn phí.",
+    h1: "Huyền học — năm cách nhìn lại mình",
+    // AIO: câu đầu định nghĩa thẳng "huyền học là gì" (≤ 45 chữ) để máy tìm kiếm / AI trích nguyên câu.
+    loi_dan: "Huyền học là những hệ thống người xưa dùng để đọc nhịp của con người và thời gian — qua con số, ngày giờ sinh, quẻ dịch và nơi ở. Thần số học là cửa vào nhanh nhất; Tử vi, Bát tự, Kinh Dịch, Phong thuỷ đi sâu hơn. Cả năm dùng chung một hồ sơ, tính từng bước, có nguồn sách.",
   } },
   { duong: "/kien-thuc", nhom: "tinh", ten: "Thư viện kiến thức", o: O_TINH, mac_dinh: { chu: CHU_KIEN_THUC,
     tieu_de_seo: "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi, Bát tự",
@@ -328,6 +332,8 @@ const MAU_CUM_GOC: readonly MauCumTrang[] = [
     bien: ["nam", "can_chi"], chu: CHU_LAM_NHA_NAM },
   { mau_duong: "/tuoi-xong-dat/{nam}", nhom: "cong_cu_con", ten: "Tuổi xông đất · bảng theo năm", o: O_CUM, nguon_kb: null,
     bien: ["nam", "can_chi"], chu: CHU_XONG_DAT_NAM },
+  { mau_duong: "/xem-sao-han/{nam}", nhom: "cong_cu_con", ten: "Sao hạn · bảng theo năm", o: O_CUM, nguon_kb: null,
+    bien: ["nam", "can_chi"], chu: CHU_SAO_HAN_NAM },                                                   // MT-ĐS B3
   { mau_duong: "/lich-am/{nam}", nhom: "cong_cu_con", ten: "Lịch âm · từng năm", o: O_CUM, nguon_kb: null,
     bien: ["nam", "can_chi"], chu: CHU_LICH_AM_NAM },
   { mau_duong: "/phong-thuy/huong-xau-nam/{nam}", nhom: "cong_cu_con", ten: "Hướng xấu theo năm · từng năm", o: O_CUM, nguon_kb: null,

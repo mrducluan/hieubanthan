@@ -12,6 +12,7 @@ import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import { KhungChat, type KetQuaHoi } from "@/components/hoi/KhungChat";
+import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { DaiDoi } from "@/components/than-so/DaiDoi";
 import { DongDoi } from "@/components/than-so/DongDoi";
@@ -67,7 +68,8 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
     body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, cau_hoi: cau, phai, quy_uoc_duong_doi: quyUoc }),
   }, "hoi");
   const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string; thuat_ngu?: ThuatNgu[]; luot?: LuotHoi;
-    cau_lien_quan?: CauLienQuan[]; phan_loai?: { linh_vuc?: string; xu_ly?: string } };
+    cau_lien_quan?: CauLienQuan[]; phan_loai?: { linh_vuc?: string; xu_ly?: string };
+    truc_quan?: KhoiTrucQuan[] };
   const canNguoiKia = d.can_them?.includes("nguoi_kia");
   // TS-NOIDAU: engine gợi ≤ 3 câu chuẩn gần với câu vừa hỏi (không gợi gì cho câu khủng hoảng / ngoài phạm vi).
   const tiep = d.cau_tra_loi && !canNguoiKia ? d.cau_lien_quan ?? [] : [];
@@ -82,6 +84,7 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
   return {
     van: d.cau_tra_loi,
     thuatNgu: d.thuat_ngu,
+    trucQuan: d.truc_quan,
     loi: d.cau_tra_loi ? undefined : d.error ?? "Chưa trả lời được lúc này, thử lại sau.",
     phu: canNguoiKia ? (
       <Button asChild variant="secondary" size="sm"><Link href="/hop-doi"><HeartHandshake aria-hidden /> Nhập ngày sinh người ấy ở mục Hợp đôi</Link></Button>
@@ -113,6 +116,9 @@ export function ThanSo() {
   const { kq, loi, thuLai } = useBaiDoc(hoSo);
   const [tab, setTab] = useState("dai-doi");
   const [phai, setPhai] = useState<PhaiThanSo>("pitago");
+  // TP-GON: giữ trạng thái mở khung "Cách xem" ở đây — đổi cách tính đường đời thì bài đọc tải lại (khung tạm gỡ khỏi
+  // trang), nếu để khung tự nhớ thì vừa bấm xong khung đã đóng lại.
+  const [moPhai, setMoPhai] = useState(false);
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
   const quyUoc = useQuyUocDD();
   const maTheoCau = useRef(new Map<string, string>());   // câu chuẩn → mã câu (cho góp ý gắn đúng câu nỗi đau)
@@ -199,8 +205,9 @@ export function ThanSo() {
       </header>
       {dauCms.khoiTren}
 
-      {/* Người mới không cần chọn phái trước khi đọc: khung thu gọn thành một dòng, bấm "Đổi cách xem" mới mở. */}
-      <KhungPhai testId="truong-phai-than-so"
+      {/* Người mới không cần chọn phái trước khi đọc: khung thu gọn thành một dòng "Cách xem", bấm cả hàng mới mở.
+          Câu "cách còn lại ra số …" đã nằm trong dòng đang xem (màu trăng) nên không lặp lại ở `nhac`. */}
+      <KhungPhai testId="truong-phai-than-so" tieuDe="Cách xem" mo={moPhai} doiMo={setMoPhai}
         tomTat={<span data-testid="dang-xem">Đang xem theo <b className="text-fg">{TEN_PHAI[phai]}</b>
           {phai !== "chaldea" && <> · số đường đời <b className="text-fg">{quyUoc === "tung_phan" ? "rút gọn con số" : "cộng hết chữ số"}</b></>}
           {phai !== "chaldea" && kq.duong_doi_hai_cach?.lech && (
@@ -216,7 +223,7 @@ export function ThanSo() {
         {(phai === "pitago" || phai === "tong_hop") && (
           <DongPhai ten="Cách tính số đường đời" nhan="Chọn cách tính số đường đời" giaTri={quyUoc} doi={doiQuyUoc}
             luaChon={[["tung_phan", "Rút gọn con số"], ["tong_het", "Cộng hết chữ số"]]}
-            noiBat={Boolean(kq.duong_doi_hai_cach?.lech)}
+            noiBat={Boolean(kq.duong_doi_hai_cach?.lech)} nhanNoiBat="Đổi là ra số khác"
             goiY={<span data-testid="goi-y-duong-doi">{kq.giai_thich_quy_uoc?.[quyUoc]}{kq.duong_doi_hai_cach?.lech
               ? ` Ngày sinh của bạn ra hai số khác nhau: ${kq.duong_doi_hai_cach.tung_phan} (rút gọn con số) và ${kq.duong_doi_hai_cach.tong_het} (cộng hết chữ số). Bài đọc đang dùng số ${quyUoc === "tung_phan" ? kq.duong_doi_hai_cach.tung_phan : kq.duong_doi_hai_cach.tong_het}.`
               : ""}</span>} />

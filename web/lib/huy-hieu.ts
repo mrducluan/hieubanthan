@@ -198,7 +198,7 @@ export const THE_HUY_HIEU: Record<MaHuyHieu, { cau: string; moi: string; nut: st
   moi_1:        { cau: "Đã rủ được một người bạn cùng tìm hiểu bản thân.", moi: "Xem hai người hợp nhau ở đâu, cần dung hoà chỗ nào.", nut: "Xem hợp với ai", den: "/hop-doi" },
   moi_5:        { cau: "Đã rủ được năm người bạn cùng tìm hiểu bản thân.", moi: "Xem hai người hợp nhau ở đâu, cần dung hoà chỗ nào.", nut: "Xem hợp với ai", den: "/hop-doi" },
   hoi_vien:     { cau: "Dành một năm để hiểu mình kỹ hơn.", moi: "Bắt đầu từ bốn con số của bạn — miễn phí.", nut: "Xem con số của bạn", den: "/than-so" },
-  doc_5_mang:   { cau: "Đã xem mình qua cả năm góc: Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ.", moi: "Mỗi mảng một góc nhìn — bắt đầu từ mảng bạn tò mò nhất.", nut: "Khám phá năm mảng", den: "/kham-pha" },
+  doc_5_mang:   { cau: "Đã xem mình qua cả năm góc: Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ.", moi: "Mỗi mảng một góc nhìn — bắt đầu từ mảng bạn tò mò nhất.", nut: "Khám phá năm mảng", den: "/huyen-hoc" },
   hen_7:        { cau: "Hẹn với chính mình bảy ngày — và đã giữ lời.", moi: "Đặt một lời hẹn nhỏ với chính bạn, không ai chấm điểm.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
   hen_30:       { cau: "Hẹn với chính mình ba mươi ngày — và đã giữ lời.", moi: "Đặt một lời hẹn nhỏ với chính bạn, không ai chấm điểm.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },
   du_9_nhip:     { cau: "Một tháng đi qua đủ chín nhịp ngày cá nhân, từ 1 tới 9.", moi: "Mỗi ngày một con số, một câu tự soi của riêng bạn.", nut: "Xem hôm nay của bạn", den: "/hom-nay" },

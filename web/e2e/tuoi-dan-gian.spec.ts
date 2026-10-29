@@ -59,7 +59,7 @@ test("tuổi xông đất Tết 2027 cho gia chủ 1990: có tuổi hợp + lý 
 
 test("trang chủ có lối vào 3 công cụ; điện thoại 360px không cuộn ngang", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByTestId("lien-ket-tuoi").getByRole("link")).toHaveCount(3);
+  await expect(page.getByTestId("lien-ket-tuoi").getByRole("link")).toHaveCount(4);   // + Xem sao hạn (MT-ĐS)
   await page.setViewportSize({ width: 360, height: 800 });
   for (const d of ["/xem-tuoi-lam-nha/2026/tuoi-1990", "/phong-thuy/huong-xau-nam/2026", "/tuoi-xong-dat/2027/tuoi-1990"]) {
     await page.goto(d);

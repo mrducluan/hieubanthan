@@ -2,7 +2,7 @@
 // Dùng được cả ở máy chủ (trang SEO) lẫn trình duyệt (công cụ). Lời lẽ trung tính, không doạ.
 import Link from "next/link";
 import { CalendarHeart, Compass, Home, Sparkles, Users } from "lucide-react";
-import type { HanNam, LamNha, XongDat } from "@/lib/tuoi-dan-gian";
+import type { HanNam, LamNha, SaoHan, XongDat } from "@/lib/tuoi-dan-gian";
 import { duongHanNam, duongLamNha } from "@/lib/tuoi-dan-gian";
 
 // Bàn 9 cung, phía Nam ở trên (như la bàn phong thuỷ truyền thống).
@@ -134,6 +134,36 @@ export function KetQuaXongDat({ d }: { d: XongDat }) {
         <Link href={`/xem-ngay-tot/${d.mung_mot.ngay}`} className="mt-2 inline-block text-sm text-gold underline">Xem đầy đủ hoàng lịch mùng 1</Link>
       </section>
       <p className="text-xs text-fg-muted">{d.cach_chon} {d.luu_y}</p>
+    </div>
+  );
+}
+
+// ---- MT-ĐS B3 — sao hạn theo tuổi: tục lệ, lời bằng việc nên làm, câu cố định; không đèn / hướng lễ / vật phẩm.
+export function KetQuaSaoHan({ d }: { d: SaoHan }) {
+  const gioi = d.nguoi.gioi_tinh === "nam" ? "Nam" : "Nữ";
+  return (
+    <div className="space-y-4" data-testid="ket-qua-sao-han">
+      <div className="bau-troi p-5 sm:p-7">
+        <p className="inline-flex items-center gap-1.5 text-sm text-fg-muted"><Sparkles className="size-4 text-gold" aria-hidden />
+          {gioi} tuổi {d.nguoi.can_chi} ({d.nguoi.nam_sinh}) · năm {d.nam.can_chi} ({d.nam.nam}) · {d.tuoi_mu} tuổi mụ</p>
+        {d.sao ? (
+          <>
+            <h2 className="mt-2 font-serif text-3xl"><span className="text-gradient-gold">Sao {d.sao.ten}</span>
+              {d.han && <span className="text-xl text-fg-muted"> · hạn {d.han.ten}</span>}</h2>
+            <p className="mt-3 leading-relaxed">{d.sao.nghia}</p>
+            {d.han && <p className="mt-2 text-sm leading-relaxed text-fg-muted">{d.han.nghia}</p>}
+            <p className="mt-4 text-sm font-semibold text-fg">Việc nên làm (0 đồng)</p>
+            <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-fg-muted" data-testid="sao-han-viec">{d.sao.viec.map((v) => <li key={v}>{v}</li>)}</ul>
+            <p className="mt-3 text-sm italic text-fg-muted">Câu hỏi để tự soi: {d.sao.tu_soi}</p>
+            {(d.kim_lau || d.tam_tai) && (
+              <p className="mt-3 text-xs text-fg-muted">Cùng năm theo tục: {[d.kim_lau, d.tam_tai ? `Tam tai năm thứ ${d.tam_tai}` : null].filter(Boolean).join(" · ")}.</p>
+            )}
+          </>
+        ) : <p className="mt-3">Dưới 10 tuổi dân gian không xếp sao hạn.</p>}
+        {d.uoc_luong_nam_sinh && <p className="mt-3 text-xs text-fg-muted">Tính theo năm sinh âm lịch; sinh trước Tết thì tuổi thuộc năm trước.</p>}
+      </div>
+      <p className="glass rounded-2xl p-4 text-sm text-fg-muted" data-nosnippet="">{d.cau_co_dinh}</p>
+      <p className="text-xs text-fg-muted">{d.cach_tinh} {d.luu_y}</p>
     </div>
   );
 }
