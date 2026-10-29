@@ -142,7 +142,9 @@ def trang_menh_nam(nam: int, slug: str) -> dict:
                   "Nạp âm 60 hoa giáp, can chi năm theo âm lịch Hồ Ngọc Đức (Việt Nam); Lập xuân theo tiết khí (giờ Việt Nam).",
                   "Hình tượng nạp âm và ứng dụng ngũ hành: bản nháp tổng hợp quan niệm phổ thông."],
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
-        "lien_quan": [{"loai": "menh_nam", "slug": f"sinh-nam-{n}-menh-gi"} for n in ln],
+        # KH-BL: link sang trang nạp âm của chính mệnh này (/bat-tu/nap-am/{slug}) — liên kết hai chiều trong silo.
+        "lien_quan": ([{"loai": "menh_nam", "slug": f"sinh-nam-{n}-menh-gi"} for n in ln]
+                      + [{"loai": "nap_am", "slug": t._slug(ten)}]),
         "lien_ket_ngoai": lien_ket,
         "minh_hoa": {"kieu": "menh", "hanh": hanh, "nap_am": ten, "han": na["han"], "can_chi": f"{can} {chi}"},
     }

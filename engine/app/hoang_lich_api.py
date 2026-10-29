@@ -94,6 +94,12 @@ def api_thang_cong_khai(nam: Annotated[int, Path(ge=1901, le=2099)], thang: Anno
     return L.thang(nam, thang)
 
 
+# KH-BL đợt 1: bảng giờ hoàng đạo theo địa chi ngày (không phụ thuộc ngày xem → cache dài).
+@router.get("/v1/lich/gio-hoang-dao")
+def api_gio_hoang_dao() -> dict:
+    return L.gio_hoang_dao_bang()
+
+
 # SEO-L2: ngày tốt theo việc trong một tháng (không dữ liệu cá nhân → web cache được).
 @router.get("/v1/lich/viec-thang/{viec}/{nam}/{thang}")
 def api_viec_thang(viec: str, nam: Annotated[int, Path(ge=1901, le=2099)], thang: Annotated[int, Path(ge=1, le=12)]) -> dict:

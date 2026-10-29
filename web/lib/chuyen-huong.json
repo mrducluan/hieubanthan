@@ -16,7 +16,10 @@
     "nhat-chu": "/bat-tu/nhat-chu",
     "menh-tuoi": "/bat-tu/menh-theo-nam",
     "kinh-dich": "/kinh-dich/que",
-    "dau-hieu": "/phong-thuy/dau-hieu"
+    "dau-hieu": "/phong-thuy/dau-hieu",
+    "nap-am": "/bat-tu/nap-am",
+    "tiet-khi": "/bat-tu/tiet-khi",
+    "con-giap-nam": "/bat-tu/con-giap-nam"
   },
   "trang": [
     ["/la-so-mau", "/tu-vi/la-so-mau"],

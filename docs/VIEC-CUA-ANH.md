@@ -20,6 +20,16 @@
   "Chọn trên ảnh vệ tinh" → bấm → thấy ảnh vệ tinh, bấm mái nhà + mặt đường → hiện hướng.
 - Khoá này lộ ra trình duyệt là bình thường (Google thiết kế vậy) — an toàn nhờ giới hạn tên miền ở bước 3.
 
+### 4s. Backlink báo chí + kho tri thức đợt 1 (KH-BL, 2026-10-29, `docs/KE-HOACH-BACKLINK-VA-KHO-TRI-THUC.md`)
+
+- [ ] Sau khi merge: Search Console → **Kiểm tra URL** → yêu cầu lập chỉ mục `https://hieuban.com/bao-chi`,
+  `/bat-tu/nap-am`, `/bat-tu/tiet-khi`, `/bat-tu/con-giap-nam`, `/xem-ngay-tot/gio-hoang-dao` (sitemap tự có các trang con).
+- [ ] Hồ sơ thật của anh (LinkedIn / Facebook công khai / YouTube) → env `CHUYEN_GIA_SAME_AS_DUC_LUAN` + `MXH_*` → Redeploy web.
+- [ ] Ngoài site luôn viết tên **"Hiểu Bản Thân (hieuban.com)"** (bài báo, mạng xã hội, email pitch) — tên trùng site trắc nghiệm khác.
+- [ ] Đo mốc trước 05/11: xuất GSC (Trang × Truy vấn, 3 tháng) gửi em; muốn đo backlink thì cấp quyền Ahrefs qua `/mcp`.
+- [ ] Ngân sách báo chí Q4/2026 mức Tiết kiệm (~30 triệu): luật sư duyệt mẫu nhãn quảng cáo trước khi đặt bài trả tiền.
+- [ ] Đọc nhanh 24 tiết khí (`engine/app/kb/data/lich_kb.json`, 72 hậu chữ Hán) — nháp ban biên tập, chờ đối chiếu.
+
 ## Bảng tổng việc còn lại (rà 27/10/2026)
 
 Đã bật tài khoản + thu tiền (hội viên, nạp Sao, hỏi chuyên gia) → mấy việc trước đây "để sau" giờ thành **gấp**. Chi tiết

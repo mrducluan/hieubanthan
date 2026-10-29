@@ -65,12 +65,20 @@ export function ldTrangWeb(o: { duong: string; ten: string; tomTat?: string; abo
   };
 }
 
+/** Tên phụ + câu phân biệt thực thể (KH-BL P0): dùng ở Organization, WebSite và trang Giới thiệu. */
+export const ALT_TEN = ["Hiểu Bản Thân (hieuban.com)", "hieuban.com", "HieuBan"];
+export const PHAN_BIET = "Website tiếng Việt tại hieuban.com về thần số học, Tử vi, Bát tự, Kinh Dịch, phong thuỷ và lịch âm Việt Nam; "
+  + "không liên quan tới các trang trắc nghiệm tính cách có tên gần giống.";
+
 export function ldToChuc() {
   const vh = vanHanh();
   return {
     "@type": "Organization",
     "@id": `${siteUrl()}/#to-chuc`,
     name: TEN_SITE,
+    // KH-BL P0 (2026-10-29): tên "Hiểu Bản Thân" trùng một site trắc nghiệm tính cách khác → luôn gắn tên miền để phân biệt.
+    alternateName: ALT_TEN,
+    disambiguatingDescription: PHAN_BIET,
     ...(vh.chuSoHuu ? { legalName: vh.chuSoHuu } : {}),
     url: siteUrl(),
     logo: { "@type": "ImageObject", url: urlDayDu("/icon.svg") },
@@ -97,7 +105,7 @@ export function ldWebsite() {
     "@type": "WebSite",
     "@id": `${siteUrl()}/#website`,
     name: TEN_SITE,
-    alternateName: ["hieuban.com", "Hieu Ban Than"],
+    alternateName: ALT_TEN,
     keywords: TU_KHOA_SITE.join(", "),
     url: siteUrl(),
     inLanguage: "vi-VN",

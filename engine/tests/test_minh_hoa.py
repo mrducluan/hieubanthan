@@ -68,4 +68,4 @@ def test_moi_trang_deu_co_minh_hoa():
         kieu = trang.lay(m["loai"], m["slug"])["minh_hoa"]["kieu"]
         # cụm thần số SEO-G dùng lại hình con số (cặp số có hình riêng)
         assert kieu == {"nghe": "so", "tinh_yeu": "so", "nam_ca_nhan": "so", "no_nghiep": "so", "so_kep": "so",
-                        "menh_nam": "menh"}.get(m["loai"], m["loai"])   # SEO-J: hình mệnh nạp âm
+                        "menh_nam": "menh", "nap_am": "menh", "con_giap_nam": "menh"}.get(m["loai"], m["loai"])   # SEO-J: hình mệnh nạp âm

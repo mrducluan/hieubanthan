@@ -13,7 +13,7 @@ export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
     ["/hop-doi/cap-so", "Số chủ đạo hợp nhau"], ["/blog", "Blog"],
   ] },
   { ten: "Về chúng tôi", ds: [
-    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
+    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"], ["/bao-chi", "Báo chí"],
     ["/lien-he#chu-de", "Góp ý, báo lỗi"], ["/tai-khoan", "Tài khoản"], ["/nap-sao", "Nạp Sao"],
   ] },
   { ten: "Pháp lý", ds: [

@@ -322,3 +322,46 @@ def viec_thang(viec: str, nam: int, thang_: int) -> dict:
             "thang_am": thang_am, "ngay": ds, "so_ngay": len(ds), "dep_nhat": dep,
             "tra_loi_nhanh": tra_loi, "hoi_dap": hd, "cach_chon": kq["cach_chon"], "luu_y": LUU_Y,
             "trang_thai": KB["trang_thai"]}
+
+
+# KH-BL đợt 1 (2026-10-29): trang "Giờ hoàng đạo" — giờ hoàng đạo chỉ phụ thuộc địa chi của ngày (6 cặp chi xung nhau
+# dùng chung một bảng). Đọc thẳng CALC `hl.than_truc_nhat`; nghĩa 12 thần ở KB `lich_kb.json` (nháp, để tham khảo).
+_LICH_KB = json.loads((Path(__file__).parents[1] / "kb" / "data" / "lich_kb.json").read_text(encoding="utf-8"))
+_KHUNG_TY = "23:00–00:59"
+
+
+def _khung(i: int) -> str:
+    return _KHUNG_TY if i == 0 else _KHUNG[i]
+
+
+def gio_hoang_dao_bang() -> dict:
+    """Bảng 6 nhóm ngày (Tý–Ngọ, Sửu–Mùi…) × 6 giờ hoàng đạo, kèm 12 thần. Tất định, không phụ thuộc ngày xem."""
+    nhom = []
+    for i in range(6):
+        a, b = hl.ZHI[i], hl.ZHI[i + 6]
+        gio = [{"chi": _CHI[hl.ZHI[h]], "khung": _khung(h), "than": KB["than"][hl.than_truc_nhat(a, hl.ZHI[h])]["ten"]}
+               for h in range(12) if hl.than_truc_nhat(a, hl.ZHI[h]) in hl.HOANG_DAO]
+        assert gio == [{"chi": _CHI[hl.ZHI[h]], "khung": _khung(h), "than": KB["than"][hl.than_truc_nhat(b, hl.ZHI[h])]["ten"]}
+                       for h in range(12) if hl.than_truc_nhat(b, hl.ZHI[h]) in hl.HOANG_DAO]
+        nhom.append({"ngay": [_CHI[a], _CHI[b]], "gio": gio})
+    than = [{"ten": KB["than"][t]["ten"], "loai": KB["than"][t]["loai"], "nghia": _LICH_KB["than_12"][t].split(" — ", 1)[1]}
+            for t in hl.THAN]
+    vd = nhom[0]
+    tra_loi = ("Giờ hoàng đạo là 6 trong 12 canh giờ của một ngày được 6 thần tốt (Thanh Long, Minh Đường, Kim Quỹ, Thiên Đức, "
+               "Ngọc Đường, Tư Mệnh) trực, theo lịch vạn niên. Giờ hoàng đạo chỉ phụ thuộc địa chi của ngày: ví dụ ngày "
+               f"{vd['ngay'][0]} và ngày {vd['ngay'][1]} có giờ hoàng đạo là "
+               + ", ".join(f"{g['chi']} ({g['khung']})" for g in vd["gio"]) + ".")
+    hoi_dap = [
+        {"hoi": "Giờ hoàng đạo là gì?", "dap": tra_loi},
+        {"hoi": "Cách tính giờ hoàng đạo thế nào?",
+         "dap": ("Biết địa chi của ngày (xem trên lịch âm), tra bảng 6 nhóm ngày: mỗi nhóm gồm hai ngày có địa chi xung nhau "
+                 "(Tý–Ngọ, Sửu–Mùi, Dần–Thân, Mão–Dậu, Thìn–Tuất, Tỵ–Hợi) và dùng chung 6 giờ hoàng đạo.")},
+        {"hoi": "Giờ Tý bắt đầu lúc mấy giờ?",
+         "dap": "Giờ Tý kéo dài từ 23:00 đêm hôm trước đến 00:59. " + GHI_CHU_GIO_TY},
+        {"hoi": "Có bắt buộc làm việc vào giờ hoàng đạo không?",
+         "dap": "Không. " + LUU_Y},
+    ]
+    return {"nhom": nhom, "than": than, "tra_loi_nhanh": tra_loi, "hoi_dap": hoi_dap,
+            "cach_tinh": ("Thần trực giờ đếm từ Thanh Long theo vòng 12 thần; giờ khởi Thanh Long tuỳ địa chi ngày "
+                          "(ngày Dần, Thân khởi ở giờ Tý; ngày Mão, Dậu khởi ở giờ Dần…). Khung giờ theo giờ đồng hồ Việt Nam."),
+            "nguon": KB["source"]["ten"], "trang_thai": KB.get("trang_thai", "nhap_ai"), "luu_y": LUU_Y}

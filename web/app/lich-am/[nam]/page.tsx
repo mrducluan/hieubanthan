@@ -75,6 +75,9 @@ export default async function Page(p: P) {
       </section>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-8 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/doi-lich-am-duong" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>
+      <p className="mt-2 text-sm text-fg-muted">Tra thêm: <Link href="/bat-tu/tiet-khi" className="text-gold underline">24 tiết khí giờ Việt Nam</Link> ·{" "}
+        <Link href="/xem-ngay-tot/gio-hoang-dao" className="text-gold underline">giờ hoàng đạo</Link> ·{" "}
+        <Link href="/bat-tu/nap-am" className="text-gold underline">30 mệnh nạp âm</Link></p>
       <p className="mt-3 flex flex-wrap gap-3 text-sm">
         {n > 1901 && <Link href={duongLichAm(n - 1)} className="text-gold underline">Lịch âm {n - 1}</Link>}
         {n < 2098 && <Link href={duongLichAm(n + 1)} className="text-gold underline">Lịch âm {n + 1}</Link>}
