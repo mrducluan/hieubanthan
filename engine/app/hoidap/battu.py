@@ -574,4 +574,4 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
     return {"phan_loai": goi["phan_loai"], "la_so": ls, "bang_chung": goi, "cau_tra_loi": van,
             "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": co,
-            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.battu(goi), "hoi_tiep": truc_quan.hoi_tiep_battu(pl)}
+            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.battu(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_battu(pl)}

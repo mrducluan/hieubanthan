@@ -21,7 +21,7 @@ SINH_BT = {"lich": dt.datetime(1990, 5, 12, 13, 0), "gioi_tinh": "nam"}
 SINH_PT = {"nam": 1990, "gioi_tinh": "nam", "ngay": dt.date(1990, 5, 12)}
 NGUOI = {"ho_ten": ["Nguyễn Văn An"], "ngay": 12, "thang": 5, "nam": 1990, "quy_uoc": "tung_phan"}
 
-KIEU = {"thang", "nhip", "cot", "o", "so", "chu_ky", "hai_cot", "la_ban", "cung", "hao"}
+KIEU = {"thang", "nhip", "cot", "o", "so", "chu_ky", "hai_cot", "la_ban", "cung", "hao", "minh_hoa"}
 SAC = {"chinh", "hop", "trung", "nhat"}
 CAM = re.compile(r"\b(Miếu|Vượng|Hãm|hung|xấu|đại kỵ|tai hoạ|điểm số|chấm điểm)\b", re.I)
 
@@ -329,3 +329,128 @@ def test_cot_khop_chi_dang_hanh_x():
     kq = battu.tra_loi("Tôi thiếu hành gì?", sinh=SINH_BT, ngay_xem=NGAY)
     for m in _khoi(kq, "cot")["muc"]:
         assert all(c.lower().startswith("hành ") for c in m["khop"])
+
+
+# ---- HD-CS đợt 4 (rà lại 2026-10-29): những loại câu còn trả lời không có hình
+
+from app.kb import trang as kb_trang  # noqa: E402
+
+
+@pytest.mark.parametrize("ham,loai,slug", [
+    (lambda: tuvi.tra_loi("Tử Vi ở cung Mệnh có ý nghĩa gì?", "tham_khao", ngay_xem=NGAY), "sao_cung", "tu-vi-cung-menh"),
+    (lambda: tuvi.tra_loi("Hóa Lộc nằm ở cung Mệnh nghĩa là gì?", "tham_khao", ngay_xem=NGAY), "hoa_cung", "hoa-loc-cung-menh"),
+    (lambda: tuvi.tra_loi("Người có Thiên Cơ thủ Mệnh tính cách thế nào?", "tham_khao", ngay_xem=NGAY), "sao_cung",
+     "thien-co-cung-menh"),
+    (lambda: battu.tra_loi("Nhật chủ Giáp là người thế nào?", ngay_xem=NGAY), "nhat_chu", "nhat-chu-giap"),
+    (lambda: battu.tra_loi("Kiếp Tài trong bát tự có ý nghĩa gì?", ngay_xem=NGAY), "thap_than", None),
+])
+def test_cau_kien_thuc_co_hinh_minh_hoa_cua_trang_kb(ham, loai, slug):
+    """Câu kiến thức chung → hình minh hoạ CHÍNH của trang kiến thức tương ứng (cùng dữ liệu engine dựng cho trang)."""
+    kq = ham()
+    _hop_le(kq)
+    k = _khoi(kq, "minh_hoa")
+    assert k["trang"]["loai"] == loai and (slug is None or k["trang"]["slug"] == slug)
+    t = kb_trang.lay(k["trang"]["loai"], k["trang"]["slug"])
+    assert t and k["hinh"] == t["minh_hoa"]
+    assert k["trang"]["nhan"] and not CAM.search(k["trang"]["nhan"])
+
+
+def test_kinhdich_hoi_y_nghia_que_co_hinh_que():
+    from app.hoidap import kinhdich
+    kq = kinhdich.tra_loi("Quẻ Càn có ý nghĩa gì?", "tu_dong")
+    k = _khoi(kq, "minh_hoa")
+    assert k["hinh"]["kieu"] == "que" and k["hinh"]["so"] == 1 and k["trang"]["loai"] == "que"
+    assert not [x for x in kq["truc_quan"] if x["kieu"] == "hao"]       # chưa gieo → không có quẻ bấm hào
+
+
+def test_cau_ca_nhan_khong_chen_hinh_kien_thuc():
+    kq = tuvi.tra_loi("Công việc của tôi có tốt không?", "tham_khao", sinh=SINH_TV, ngay_xem=NGAY)
+    assert not [k for k in kq["truc_quan"] if k["kieu"] == "minh_hoa"]
+
+
+def test_tuvi_duong_bay_tren_ban_cung():
+    kq = tuvi.tra_loi("Đường bay tứ hoá trong lá số của tôi nói gì?", "tham_khao", sinh=SINH_TV, ngay_xem=NGAY)
+    _hop_le(kq)
+    k = _khoi(kq, "cung")
+    from app.calc.lunar import CHI
+    assert 1 <= len(k["bay"]) <= 8
+    chi_menh = next(m["chi"] for m in k["muc"] if m["nhan"] == "Mệnh")
+    assert k["chi_hoi"] == chi_menh
+    for b in k["bay"]:
+        assert b["tu"] in CHI and b["den"] in CHI and b["hoa"] and set(b["hoa"]) <= {"Lộc", "Quyền", "Khoa", "Kỵ"}
+    nguon = {m["chi"] for m in k["muc"] if m["vai"] == "nguon"}
+    assert {b["tu"] for b in k["bay"] if b["tu"] != b["den"]} <= nguon | {chi_menh}
+    assert any(m.get("giai_thich", "").startswith("Cung") for m in k["muc"] if m["vai"])
+
+
+def test_tuvi_cach_cuc_ban_cung_menh_va_ten_cach():
+    kq = tuvi.tra_loi("Tôi có cách cục gì đặc biệt trong lá số không?", "tham_khao", sinh=SINH_TV, ngay_xem=NGAY)
+    _hop_le(kq)
+    b = _khoi(kq, "cung")
+    assert next(m for m in b["muc"] if m["vai"] == "hoi")["nhan"] == "Mệnh"
+    o = _khoi(kq, "o")
+    ten = {m["gia_tri"] for m in o["muc"]}
+    assert ten <= {m["ten"] for m in kq["bang_chung"]["muc"] if m["loai"] == "cach_cuc"} and ten
+
+
+@pytest.mark.parametrize("cau,chuong", [
+    ("Công việc nào hợp với tôi?", "su_nghiep"), ("Bát tự nói gì về hôn nhân của tôi?", "tinh_cam"),
+])
+def test_battu_mang_doi_co_muc_va_nam_hanh(cau, chuong):
+    kq = battu.tra_loi(cau, sinh=SINH_BT, ngay_xem=NGAY)
+    _hop_le(kq)
+    ds = next(m for m in kq["bang_chung"]["muc"] if m["loai"] == "doi_song")
+    assert ds["chuong"] == chuong
+    k = next(x for x in kq["truc_quan"] if x["kieu"] == "thang" and x["nac"] == list(tq.NAC_MUC))
+    assert k["muc"][0]["vi_tri"] == {"can_chu_dong": 0, "can_bang": 1, "thuan": 2}[ds["muc"]]
+    assert _khoi(kq, "cot")
+
+
+def test_tuvi_mang_doi_co_muc_mang():
+    kq = tuvi.tra_loi("Công việc của tôi có tốt không?", "tham_khao", sinh=SINH_TV, ngay_xem=NGAY)
+    assert [x for x in kq["truc_quan"] if x["kieu"] == "thang" and x["nac"] == list(tq.NAC_MUC)]
+
+
+def test_battu_tru_bon_o_sang_tru_duoc_hoi():
+    kq = battu.tra_loi("Trụ năm nói gì về tổ tiên, gia đình gốc của tôi?", sinh=SINH_BT, ngay_xem=NGAY)
+    _hop_le(kq)
+    k = kq["truc_quan"][0]                                   # câu hỏi về một trụ: bốn trụ đứng đầu
+    assert k["kieu"] == "o" and k["tieu_de"].startswith("Bốn trụ")
+    assert [m["nhan"] for m in k["muc"]] == ["Trụ năm", "Trụ tháng", "Trụ ngày", "Trụ giờ"]
+    assert next(m for m in k["muc"] if m["sac"] == "chinh")["nhan"] == "Trụ năm"
+
+
+def test_battu_cach_cuc_co_nam_hanh():
+    kq = battu.tra_loi("Mệnh tôi thuộc cách cục gì?", sinh=SINH_BT, ngay_xem=NGAY)
+    _hop_le(kq)
+    assert _khoi(kq, "cot")
+
+
+def test_phongthuy_menh_quai_chung_la_ban_cua_quai_duoc_hoi():
+    kq = phongthuy.tra_loi("Người mệnh quái Khảm ở nhà hướng Bắc có tốt không?", ngay_xem=NGAY)
+    _hop_le(kq)
+    k = _khoi(kq, "la_ban")
+    hop = {m["huong"] for m in k["muc"] if m["sac"] == "hop"}
+    assert hop == {"Bắc", "Đông", "Đông Nam", "Nam"} and "Khảm" in k["tieu_de"]
+
+
+def test_phongthuy_du_nien_chung_tam_huong():
+    kq = phongthuy.tra_loi("Hướng Sinh Khí trong bát trạch nghĩa là gì?", ngay_xem=NGAY)
+    _hop_le(kq)
+    k = _khoi(kq, "hai_cot")
+    assert len(k["trai"]["ds"]) == 4 and len(k["phai"]["ds"]) == 4
+    assert k["tieu_de"] == "Sinh Khí nằm trong bốn hướng hợp" and k["trai"]["ds"][0].startswith("Sinh Khí")
+
+
+def test_phongthuy_cua_bep_cap():
+    kq = phongthuy.tra_loi("Cửa chính hướng Bắc, bếp hướng Đông Bắc có hợp không?", ngay_xem=NGAY)
+    _hop_le(kq)
+    assert _khoi(kq, "o")["muc"]
+
+
+def test_phongthuy_vo_chong_la_ban_cua_nguoi_hoi():
+    kq = phongthuy.tra_loi("Vợ chồng khác mệnh Đông Tây thì chọn hướng nhà theo ai?", sinh=SINH_PT, ngay_xem=NGAY)
+    _hop_le(kq)
+    assert "người ấy" in _khoi(kq, "la_ban")["ghi_chu"]
+    khong_sinh = phongthuy.tra_loi("Vợ chồng khác mệnh Đông Tây thì chọn hướng nhà theo ai?", ngay_xem=NGAY)
+    assert not [k for k in khong_sinh["truc_quan"] if k["kieu"] == "la_ban"]

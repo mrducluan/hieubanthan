@@ -5,6 +5,7 @@ import { unstable_noStore as noStore } from "next/cache";
 import type { MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 import CHUYEN from "@/lib/chuyen-huong.json";
+import { CHU_DE_THEO_LOAI as CHU_DE_THEO_LOAI_GOC } from "@/lib/duong-silo";
 
 export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu"
   | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu";
@@ -96,11 +97,7 @@ export const HINH_CHU_DE: Record<string, KieuMang> = {
   "hop-so": "than-so", "nghe-nghiep": "than-so", "tinh-yeu": "than-so", "nam-ca-nhan": "than-so", "no-nghiep": "than-so", "so-kep": "than-so",
   "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu", "dau-hieu": "phong-thuy",
 };
-export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = {
-  so: "than-so", que: "kinh-dich", sao: "tu-vi", cung: "cung-tu-vi", thap_than: "thap-than", nhat_chu: "nhat-chu",
-  cap_so: "hop-so", nghe: "nghe-nghiep", tinh_yeu: "tinh-yeu", nam_ca_nhan: "nam-ca-nhan", no_nghiep: "no-nghiep", so_kep: "so-kep",
-  sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi", dau_hieu: "dau-hieu",
-};
+export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = CHU_DE_THEO_LOAI_GOC;
 
 /** SEO-K: `xem_them` = link sang trang gốc thay cho chép lại khối dùng chung (engine dựng, tiêu đề điền sẵn). */
 /** SEO-M: trích dẫn sách (nguyên văn ≤ 2 câu, có phiên âm + nghĩa) — KB bo_sung_<loai>.json. */

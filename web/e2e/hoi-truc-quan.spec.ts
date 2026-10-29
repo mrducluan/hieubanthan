@@ -165,3 +165,52 @@ test.describe("đợt 3 — máy tính", () => {
     expect(loi!.x).toBeGreaterThan(hinh!.x + hinh!.width - 1);
   });
 });
+
+// ---- HD-CS đợt 4: những loại câu trước đây trả lời không có hình
+test.describe("đợt 4 — điện thoại", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test("Tử vi đường bay tứ hoá: mũi tên trên bàn 12 cung, Mệnh sáng, không tràn ngang", async ({ page }) => {
+    await napHoSo(page);
+    await page.goto("/tu-vi");
+    const ans = await hoi(page, "Đường bay tứ hoá trong lá số của tôi nói gì?");
+    const ban = ans.locator('figure[data-kieu="cung"]');
+    await expect(ban).toBeVisible();
+    await expect(ban.locator('[data-vai="hoi"]')).toContainText("Mệnh");
+    expect(await ban.locator("svg path[marker-end]").count() + await ban.getByText(/tự hoá/).count()).toBeGreaterThan(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+  });
+
+  test("câu kiến thức Tử vi: hình minh hoạ của trang kiến thức + link đọc kỹ", async ({ page }) => {
+    await napHoSo(page);
+    await page.goto("/tu-vi");
+    const ans = await hoi(page, "Tử Vi ở cung Mệnh có ý nghĩa gì?");
+    const k = ans.locator('figure[data-kieu="minh_hoa"]');
+    await expect(k).toBeVisible();
+    await expect(k.locator("svg").first()).toBeVisible();
+    await expect(k.getByRole("link", { name: /Đọc kỹ: Tử Vi ở cung Mệnh/ })).toHaveAttribute("href", "/tu-vi/sao-o-cung/tu-vi-cung-menh");
+  });
+
+  test("Bát tự hỏi về công việc: mức của mảng + năm hành", async ({ page }) => {
+    await napHoSo(page);
+    await page.goto("/bat-tu");
+    const ans = await hoi(page, "Công việc nào hợp với tôi?");
+    await expect(ans.locator('figure[data-kieu="thang"]').first()).toContainText("Mảng công việc");
+    await expect(ans.locator('figure[data-kieu="cot"]')).toBeVisible();
+  });
+
+  test("Kinh Dịch hỏi nghĩa quẻ (chưa gieo): hình quẻ + link trang quẻ", async ({ page }) => {
+    await page.goto("/kinh-dich");
+    const ans = await hoi(page, "Quẻ Càn có ý nghĩa gì?");
+    const k = ans.locator('figure[data-kieu="minh_hoa"]');
+    await expect(k).toBeVisible();
+    await expect(k.getByRole("link")).toHaveAttribute("href", /^\/kinh-dich\/que\/que-1-/);
+  });
+
+  test("Phong thuỷ hỏi về một mệnh quái: la bàn của quái đó", async ({ page }) => {
+    await napHoSo(page);
+    await page.goto("/phong-thuy");
+    const ans = await hoi(page, "Người mệnh quái Khảm ở nhà hướng Bắc có tốt không?");
+    await expect(ans.locator('figure[data-kieu="la_ban"]')).toContainText("mệnh Khảm");
+  });
+});
