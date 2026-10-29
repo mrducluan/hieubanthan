@@ -144,7 +144,10 @@ export function ghiHuyHieuVuaDat(ds: HuyHieu[]): HuyHieu[] {
   const cu = Array.isArray(v) ? new Set(v.filter((x): x is string => typeof x === "string")) : null;
   const dat = ds.filter((h) => h.dat);
   ghiJson(KHOA_HUY_HIEU_DA_BAO, [...new Set([...(cu ?? []), ...dat.map((h) => h.ma)])]);
-  return cu ? dat.filter((h) => !cu.has(h.ma)) : [];
+  // Cặp máy ↔ tài khoản (chuoi_may_7 ↔ chuoi_7, du_9_nhip_may ↔ du_9_nhip): đã báo bản máy thì đăng nhập không báo lại.
+  const goc = (ma: string) => ma.replace(/_may(_|$)/, "$1");
+  const daBao = cu ? new Set([...cu].map(goc)) : null;
+  return daBao ? dat.filter((h) => !daBao.has(goc(h.ma))) : [];
 }
 
 // ---------------------------------------------------------------- tiến độ (trục 2 UX 2026-10-26)

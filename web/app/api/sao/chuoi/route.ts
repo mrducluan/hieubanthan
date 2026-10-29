@@ -44,7 +44,7 @@ export async function POST(req: Request) {
     return tra({ tai_khoan: true, dang_nhap: false, bat: Boolean(bat), moc: Number(moc) || 0, sao_moc: Number(sao) || 0 });
   }
   let { data, error } = await phien.sb.rpc("diem_danh", { p_so: p.so ?? null, p_la: p.la ?? null });
-  if (error) ({ data, error } = await phien.sb.rpc("diem_danh"));   // DB chưa chạy 0032: hàm cũ không nhận tham số
+  if (error && (error.code === "PGRST202" || /diem_danh/.test(error.message ?? ""))) ({ data, error } = await phien.sb.rpc("diem_danh"));   // DB chưa chạy 0032: hàm cũ không nhận tham số (không gọi lại khi lỗi khác)
   if (error || !hopLe(data)) return tra({ tai_khoan: true, dang_nhap: true, san_sang: false });
   const d = data;
   return tra({ tai_khoan: true, dang_nhap: true, san_sang: true, ngay: d.ngay, chuoi: d.chuoi, dai_nhat: d.dai_nhat, moi: d.moi,

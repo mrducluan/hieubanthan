@@ -312,7 +312,7 @@ export function HomNay() {
 
           {/* KV-THANG: tổng kết tháng trước (≥ 3 ngày ghé, đóng được) + lối sang "12 tháng tới"; số máy chủ khi đã đăng nhập (0032). */}
           <TongKetThang hoSo={hoSo} homNay={the.ngay_xem} noi="hom_nay" thangNay={the.thang_ca_nhan}
-            mayChu={ttChuoi && ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.thang_truoc ?? null : null} />
+            mayChu={ttChuoi === null ? undefined : ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.thang_truoc ?? null : null} />
 
           <LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} />
 

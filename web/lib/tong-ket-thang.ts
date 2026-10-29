@@ -36,7 +36,7 @@ export function loiTongKet(tk: TongKet, tenHuyHieu: (ma: string) => string): str
   const cau: string[] = [`Tháng ${tk.thang} bạn ghé Hôm nay ${buoi(tk.so_ngay)}.`];
   if (tk.so_la > 0) cau.push(tk.so_la === 1 ? "Bạn đã lật một lá bài đầu ngày." : `Bạn đã lật ${tk.so_la} lá bài đầu ngày.`);
   if (tk.du_9) cau.push("Bạn đã đi qua đủ 9 nhịp ngày cá nhân trong tháng.");
-  else if (tk.so_khac >= 5) cau.push(`Bạn đã đi qua ${tk.so_khac} trong 9 nhịp ngày cá nhân.`);
+  else if (tk.so_khac >= 5) cau.push(`Bạn đã đi qua ${tk.so_khac} nhịp ngày cá nhân khác nhau.`);   // không "x trong 9" — phân số thành áp lực
   const hh = tk.huy_hieu_moi.filter((m) => !HUY_HIEU_KHONG_NEU.has(m)).map(tenHuyHieu);
   if (hh.length) cau.push(`Dấu mốc mới trong tháng: ${hh.join(" · ")}.`);
   if (tk.thang_ca_nhan) cau.push(`Theo thần số, tháng ${tk.thang} là tháng cá nhân ${tk.thang_ca_nhan} của bạn.`);

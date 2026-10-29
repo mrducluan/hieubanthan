@@ -78,7 +78,10 @@ export function capNhatHoSo(them: Partial<Omit<HoSo, "v" | "tao_luc">>): HoSo | 
 /** Khoá localStorage gắn với MỘT hồ sơ (chuỗi máy, lá bài, hẹn, huy hiệu máy, tổng kết đã đóng, mảng đã xem, nhật ký ghé) —
  *  xoá hồ sơ thì xoá theo, để người khác dùng cùng máy không thừa kế dấu mốc của người trước (KV-THANG). */
 export const KHOA_THEO_HO_SO = ["hbt.hom_nay", "hbt.la_bai.v1", "hbt.hen.v1", "hbt.huy_hieu_may.v1", "hbt.huy_hieu_da_bao.v1",
-  "hbt.tong_ket_dong.v1", "hbt.mang_da_xem.v1", "hbt.nhat_ky.v1", "hbt.ngoai_tuyen.v1"] as const;
+  "hbt.tong_ket_dong.v1", "hbt.mang_da_xem.v1", "hbt.nhat_ky.v1", "hbt.ngoai_tuyen.v1",
+  // Dấu vết khác gắn với người dùng hồ sơ này: ý định hôm nay, đối chiếu cách Bát tự, hộp chờ kiểm chứng sau, phiếu phái,
+  // lần ghé Bản thân, nhắc chuỗi đã đóng.
+  "hbt.hom_nay_y_dinh", "hbt.battu.doi_chieu.v1", "hbt.kc_sau.v1", "hbt.thanso_phieu", "hbt.ban_than_lan_ghe", "hbt.chuoi_do"] as const;
 
 export function xoaHoSo(): void {
   hienTai = null;

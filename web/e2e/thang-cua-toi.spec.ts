@@ -10,7 +10,7 @@ import { cotMungMot, oLichThang, soNgayTrongThang } from "../lib/lich-thang";
 import { DANH_MUC, gopHuyHieu } from "../lib/huy-hieu";
 
 // Cụm cấm của khối chuỗi / huy hiệu + riêng cho tổng kết: không so hơn ai, không mục tiêu / kỷ lục / đếm ngược / hứa Sao.
-const TU_CAM = /trúng|thưởng|quay số|vòng quay|đếm ngược|sắp mất|mất chuỗi|đừng để|kẻo|nhanh lên|hết hạn|mua huy hiệu|hơn \d+%|giỏi hơn|kỷ lục|mục tiêu|còn \d+ ngày|thất bại|bỏ lỡ/i;
+const TU_CAM = /trúng|thưởng|quay số|vòng quay|đếm ngược|sắp mất|mất chuỗi|đừng để|kẻo|nhanh lên|hết hạn|mua huy hiệu|hơn \d+%|giỏi hơn|kỷ lục|mục tiêu|\d+ trong 9|còn \d+ ngày|thất bại|bỏ lỡ/i;
 const suKien = (page: Page) => page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
 const homNayVn = () => new Date(Date.now() + 7 * 3600_000).toISOString().slice(0, 10);
 const ymd = (y: number, m: number, d: number) => `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
@@ -59,7 +59,7 @@ test("hàm thuần: nhật ký khoá theo hồ sơ, thống kê tháng, đủ 9 
   expect(cau.join(" ")).not.toMatch(/Hội viên|Lưu hồ sơ/);
   expect(cau.join(" ")).not.toMatch(TU_CAM);
   expect(loiTongKet({ ...thongKeThang(ds.slice(0, 1), 2026, 9), huy_hieu_moi: [] }, ten)).toEqual(["Tháng 9 bạn ghé Hôm nay một buổi sáng.", "Bạn đã lật một lá bài đầu ngày.", "Theo thần số, tháng 9 là tháng cá nhân 7 của bạn."]);
-  expect(loiTongKet({ ...thongKeThang(ds.slice(0, 6), 2026, 9), huy_hieu_moi: [] }, ten)).toContain("Bạn đã đi qua 6 trong 9 nhịp ngày cá nhân.");
+  expect(loiTongKet({ ...thongKeThang(ds.slice(0, 6), 2026, 9), huy_hieu_moi: [] }, ten)).toContain("Bạn đã đi qua 6 nhịp ngày cá nhân khác nhau.");
   expect(loiTheThang({ thang: 9, so_ngay: 12, k: 7 })).toBe("Tháng 9 mình ghé Hôm nay 12 buổi sáng — tháng cá nhân 7 của mình. Còn tháng này của bạn là tháng mấy?");
   expect(loiTheThang({ thang: 9, so_ngay: 1, k: null })).not.toMatch(TU_CAM);
 

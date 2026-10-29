@@ -21,13 +21,15 @@ import { docNhatKy, thangTruoc, thongKeThang, type ThongKeThang } from "@/lib/nh
 import { useMaCuaToi, type DiemDanh } from "@/lib/sao";
 import { coTaiKhoan, supabase } from "@/lib/supabase/trinh-duyet";
 import { useNguoiDung } from "@/lib/tai-khoan";
-import { docDaDong, ghiDaDong, loiTongKet, nenHienTongKet, type TongKet } from "@/lib/tong-ket-thang";
+import { docDaDong, ghiDaDong, loiTongKet, nenHienTongKet, NGUONG_NGAY_TONG_KET, type TongKet } from "@/lib/tong-ket-thang";
 
 export const maMoiThang = () => `tk.${maNgauNhien(10)}`;
 
 type Nguon = "may" | "tai_khoan";
 
 /** Thống kê tháng trước: ưu tiên máy chủ (diem_danh / bảng), rồi máy. `thangNay` của engine chỉ thêm vào khi được truyền. */
+/** Thống kê tháng trước: `mayChu` undefined = còn chờ /api/sao/chuoi (chỉ chờ khi có tài khoản), null = máy chủ không có số.
+ *  Máy chủ có số nhưng dưới ngưỡng hiện (vd. tháng trước còn là khách) mà nhật ký máy đủ → dùng máy. */
 function useTongKet(hoSo: HoSo, homNay: string, mayChu: DiemDanh["thang_truoc"] | null | undefined, docBang: boolean): { tk: TongKet; nguon: Nguon } | null | undefined {
   const [kq, setKq] = useState<{ tk: TongKet; nguon: Nguon } | null | undefined>(undefined);
   useEffect(() => {
@@ -38,7 +40,11 @@ function useTongKet(hoSo: HoSo, homNay: string, mayChu: DiemDanh["thang_truoc"] 
     const tien = `${nam}-${String(thang).padStart(2, "0")}-`;
     // Huy hiệu máy đạt trong tháng đó (ngày đạt nằm trong tháng); huy hiệu tài khoản tính ở máy chủ không kéo về đây (gọn).
     const hhMoi = huyHieuMay(hoSo).filter((h) => h.dat && h.luc?.startsWith(tien)).map((h) => h.ma);
-    const ghep = (t: ThongKeThang, nguon: Nguon) => setKq({ tk: { ...t, thang_ca_nhan: t.thang_ca_nhan ?? may.thang_ca_nhan, huy_hieu_moi: hhMoi }, nguon });
+    const ghep = (t: ThongKeThang, nguon: Nguon) => {
+      if (nguon === "tai_khoan" && t.so_ngay < NGUONG_NGAY_TONG_KET && may.so_ngay >= NGUONG_NGAY_TONG_KET) { t = may; nguon = "may"; }
+      setKq({ tk: { ...t, thang_ca_nhan: t.thang_ca_nhan ?? may.thang_ca_nhan, huy_hieu_moi: hhMoi }, nguon });
+    };
+    if (mayChu === undefined && !docBang && coTaiKhoan()) { setKq(undefined); return; }   // chờ máy chủ, không đo "may" rồi đổi
     if (mayChu && mayChu.nam === nam && mayChu.thang === thang) {
       ghep({ nam, thang, so_ngay: mayChu.so_ngay, ngay: mayChu.ngay, so_la: mayChu.so_la, so_khac: mayChu.so_khac, du_9: mayChu.du_9, thang_ca_nhan: may.thang_ca_nhan }, "tai_khoan");
       return;

@@ -29,7 +29,9 @@ export async function POST(req: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "Chỉ tổng kết tháng đã qua." }, { status: 422 });
   }
   const soNgayThang = new Date(Date.UTC(nam_xem, thang_xem, 0)).getUTCDate();
-  const g = [...new Set(ngay_ghe)].filter((d) => d <= soNgayThang).sort((a, b) => a - b);
+  const thangNay = nam_xem === bay.getUTCFullYear() && thang_xem === bay.getUTCMonth() + 1;
+  const tran = thangNay ? Math.min(soNgayThang, bay.getUTCDate()) : soNgayThang;   // tháng này: không ký ngày chưa tới
+  const g = [...new Set(ngay_ghe)].filter((d) => d <= tran).sort((a, b) => a - b);
   if (!g.length) return NextResponse.json({ error: "Tháng này chưa có ngày ghé nào." }, { status: 422 });
   // Tháng cá nhân của tháng được tổng kết: engine tính theo ngày xem = ngày cuối tháng đó.
   const ngayXem = `${nam_xem}-${String(thang_xem).padStart(2, "0")}-${String(soNgayThang).padStart(2, "0")}`;
