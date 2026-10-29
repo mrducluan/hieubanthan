@@ -7,7 +7,8 @@ import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 import CHUYEN from "@/lib/chuyen-huong.json";
 
 export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu"
-  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu";
+  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu"
+  | "nap_am" | "tiet_khi" | "con_giap_nam";
 
 type ChuDe = { loai: LoaiTrang; ten: string; mo_ta: string; mang: string };
 /** Khoá = mã chủ đề (giữ nguyên làm mã nội bộ: CMS, hình, llms); `duong` = URL cụm theo silo mảng (lib/chuyen-huong.json). */
@@ -42,6 +43,13 @@ const CHU_DE_GOC: Record<string, ChuDe> = {
   // SEO-J: "sinh năm X mệnh gì" — 1950–2025
   "menh-tuoi": { loai: "menh_nam", ten: "Sinh năm nào mệnh gì", mang: "/bat-tu",
     mo_ta: "Tra mệnh theo năm sinh 1950–2025: tuổi can chi, mệnh nạp âm và ý nghĩa, màu hợp theo ngũ hành, tuổi hợp – xung, cung phi nam nữ, mốc Tết và Lập xuân." },
+  // KH-BL đợt 1 (2026-10-29): nạp âm, tiết khí, con giáp theo năm (engine kb/trang_lich.py)
+  "nap-am": { loai: "nap_am", ten: "30 mệnh nạp âm", mang: "/bat-tu",
+    mo_ta: "30 mệnh nạp âm của 60 hoa giáp (Hải Trung Kim đến Đại Hải Thủy): nghĩa từng chữ, sinh năm nào, tính chất, sinh khắc ngũ hành." },
+  "tiet-khi": { loai: "tiet_khi", ten: "24 tiết khí", mang: "/bat-tu",
+    mo_ta: "24 tiết khí từ Lập xuân đến Đại hàn: nghĩa tên, ngày giờ giao tiết theo giờ Việt Nam, tháng Bát tự, ba hậu theo Nguyệt lệnh." },
+  "con-giap-nam": { loai: "con_giap_nam", ten: "12 con giáp theo năm", mang: "/bat-tu",
+    mo_ta: "Tuổi Tý đến tuổi Hợi trong năm 2027 Đinh Mùi: hợp – xung với năm, Tam tai, tuổi mụ, mệnh, Kim lâu, Hoang ốc theo từng năm sinh." },
   "thap-than": { loai: "thap_than", ten: "10 thập thần Bát tự", mang: "/bat-tu",
     mo_ta: "10 thập thần trong Bát tự (Tỷ Kiên đến Chính Ấn): ý nghĩa, tính cách, khi quá nhiều, khi thiếu, với nam và nữ." },
   "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", mang: "/bat-tu",
@@ -95,11 +103,13 @@ export const HINH_CHU_DE: Record<string, KieuMang> = {
   "than-so": "than-so", "kinh-dich": "kinh-dich", "tu-vi": "tu-vi", "cung-tu-vi": "tu-vi", "thap-than": "bat-tu", "nhat-chu": "bat-tu",
   "hop-so": "than-so", "nghe-nghiep": "than-so", "tinh-yeu": "than-so", "nam-ca-nhan": "than-so", "no-nghiep": "than-so", "so-kep": "than-so",
   "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu", "dau-hieu": "phong-thuy",
+  "nap-am": "bat-tu", "tiet-khi": "bat-tu", "con-giap-nam": "bat-tu",
 };
 export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = {
   so: "than-so", que: "kinh-dich", sao: "tu-vi", cung: "cung-tu-vi", thap_than: "thap-than", nhat_chu: "nhat-chu",
   cap_so: "hop-so", nghe: "nghe-nghiep", tinh_yeu: "tinh-yeu", nam_ca_nhan: "nam-ca-nhan", no_nghiep: "no-nghiep", so_kep: "so-kep",
   sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi", dau_hieu: "dau-hieu",
+  nap_am: "nap-am", tiet_khi: "tiet-khi", con_giap_nam: "con-giap-nam",
 };
 
 /** SEO-K: `xem_them` = link sang trang gốc thay cho chép lại khối dùng chung (engine dựng, tiêu đề điền sẵn). */

@@ -28,7 +28,8 @@ def test_danh_sach_du_ba_loai():
                    "hoa_cung": 48,    # SEO-I: 4 tứ hoá × 12 cung
                    "menh_nam": 76,    # SEO-J: sinh năm 1950–2025 mệnh gì
                    "so_kep": 43,      # TS-PHAI: số kép Chaldea 10–52
-                   "dau_hieu": 23}    # Y5: dấu hiệu nhà ở (form Khảo sát nhà)
+                   "dau_hieu": 23,    # Y5: dấu hiệu nhà ở (form Khảo sát nhà)
+                   "nap_am": 30, "tiet_khi": 24, "con_giap_nam": 12}  # KH-BL đợt 1 (silo Bát tự)
     assert len({(t["loai"], t["slug"]) for t in ds}) == len(ds)
 
 
@@ -78,7 +79,7 @@ def test_lien_quan_tro_toi_trang_ton_tai():
 
 def test_api():
     r = client.get("/v1/kb/trang")
-    assert r.status_code == 200 and len(r.json()["trang"]) == 562
+    assert r.status_code == 200 and len(r.json()["trang"]) == 628   # 562 + KH-BL đợt 1 (30 nạp âm + 24 tiết khí + 12 con giáp)
     r = client.get("/v1/kb/trang/so/so-22")
     assert r.status_code == 200 and r.json()["slug"] == "so-22"
     assert client.get("/v1/kb/trang/so/so-10").status_code == 404

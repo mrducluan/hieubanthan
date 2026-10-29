@@ -24,7 +24,8 @@ from app.kb import trang  # noqa: E402
 
 # Mã dựng trang có đổi nội dung riêng của họ trang (dùng khi --khoi-tao; về sau băm nội dung tự bắt mọi thay đổi).
 MA_DUNG = {"sao": ["app/kb/trang_tuvi.py"], "sao_cung": ["app/kb/trang_tuvi.py"], "hoa_cung": ["app/kb/trang_tuvi.py"],
-           "menh_nam": ["app/kb/trang_menh.py"], "dau_hieu": ["app/kb/trang_phongthuy.py"]}
+           "menh_nam": ["app/kb/trang_menh.py"], "dau_hieu": ["app/kb/trang_phongthuy.py"],
+           "nap_am": ["app/kb/trang_lich.py"], "tiet_khi": ["app/kb/trang_lich.py"], "con_giap_nam": ["app/kb/trang_lich.py"]}
 
 
 def _trang_hien_tai(ghi_tep: bool = False) -> tuple[dict[str, str], dict[str, set[str]]]:

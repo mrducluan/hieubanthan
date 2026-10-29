@@ -30,6 +30,9 @@ export default async function GioiThieu() {
       id: "su-menh", tieuDe: "Chúng tôi làm gì",
       noiDung: (
         <>
+          <p data-testid="dinh-nghia-thuc-the"><strong>Hiểu Bản Thân (hieuban.com)</strong> là website tiếng Việt{vh.chuSoHuu ? ` do ${vh.chuSoHuu} vận hành` : ""},
+            tính thần số học, lá số Tử vi, Bát tự, quẻ Kinh Dịch, phong thuỷ và lịch âm theo âm lịch Việt Nam, luôn kèm cách
+            tính để bạn tự kiểm. Chúng tôi không liên quan tới các trang trắc nghiệm tính cách có tên gần giống.</p>
           <p>Hiểu Bản Thân đưa năm hệ thống văn hoá phương Đông và phương Tây (thần số học, Tử vi, Bát tự, Kinh Dịch,
             Phong thuỷ) về một nơi. Cách trình bày dễ hiểu, minh bạch về cách tính, và không phán xét.</p>
           <p>Mục tiêu không phải đoán trước tương lai, mà là cho bạn thêm một tấm gương để nhìn lại tính cách, nhịp

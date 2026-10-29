@@ -26,6 +26,8 @@ export default async function Page() {
           mo_ta="Ngày hoàng đạo hay hắc đạo, giờ tốt, việc sách lịch ghi nên làm và nên kiêng — và ngày này có xung tuổi bạn không." />
         <XemNgayTot banDau={d} thang={t} />
         <p className="mt-4 text-xs text-fg-faint">Đường dẫn cố định của ngày này: <Link href={`/xem-ngay-tot/${iso}`} className="text-gold underline">/xem-ngay-tot/{iso}</Link></p>
+        <p className="mt-2 text-xs text-fg-faint">Tra nhanh: <Link href="/xem-ngay-tot/gio-hoang-dao" className="text-gold underline">bảng giờ hoàng đạo theo ngày</Link> ·{" "}
+          <Link href="/bat-tu/tiet-khi" className="text-gold underline">24 tiết khí</Link> · <Link href="/bat-tu/con-giap-nam" className="text-gold underline">12 con giáp năm 2027</Link></p>
       </div>
     </TrangCongCu>
   );

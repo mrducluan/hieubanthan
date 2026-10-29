@@ -16,6 +16,7 @@ export type MinhHoaDuLieu =
   | { kieu: "menh"; hanh: string; nap_am: string; han: string; can_chi: string }
   | { kieu: "thap_than"; ten: string; quan_he: "dong_hanh" | "ta_sinh" | "ta_khac" | "khac_ta" | "sinh_ta"; cung_am_duong: boolean }
   | { kieu: "nhat_chu"; can: string; hanh: string; duong: boolean }
+  | { kieu: "tiet_khi"; kinh_do: number; ten: string; tiet: boolean }
   | { kieu: "dau_hieu"; nhom: "ngoai_canh" | "hinh_nha" | "trong_nha"; phong: string[]; veto: boolean; tot: boolean; ten: string };
 
 // Màu ngũ hành theo token giao diện (KB ghi cả "Hoả/Hỏa", "Thuỷ/Thủy").
@@ -267,6 +268,33 @@ function HinhMenh({ hanh, nap_am, han, can_chi }: { hanh: string; nap_am: string
   );
 }
 
+// ---------------------------------------------------------------- KH-BL: tiết khí — vị trí Mặt Trời trên vòng hoàng đạo
+// Engine trả kinh độ Mặt Trời (bội 15°); Hạ chí (90°) ở trên, Đông chí (270°) ở dưới, Xuân phân (0°) bên phải.
+function HinhTietKhi({ kinh_do, ten, tiet }: { kinh_do: number; ten: string; tiet: boolean }) {
+  const cx = 160, cy = 120, r = 82;
+  const diem = (kd: number, rr = r) => [cx + rr * Math.cos((kd * Math.PI) / 180), cy - rr * Math.sin((kd * Math.PI) / 180)] as const;
+  const [sx, sy] = diem(kinh_do);
+  const MOC: [number, string][] = [[0, "Xuân phân"], [90, "Hạ chí"], [180, "Thu phân"], [270, "Đông chí"]];
+  return (
+    <Khung nhan={`Tiết ${ten}: Mặt Trời ở kinh độ hoàng đạo ${kinh_do}° (${tiet ? "tiết mở đầu tháng" : "trung khí"})`}>
+      <circle cx={cx} cy={cy} r={r} fill="none" className="stroke-gold/40" strokeWidth={1.2} />
+      {Array.from({ length: 24 }, (_, k) => {
+        const [x1, y1] = diem(k * 15, r - 4), [x2, y2] = diem(k * 15, r + 4);
+        return <line key={k} x1={x1} y1={y1} x2={x2} y2={y2} className={k % 2 ? "stroke-fg-faint" : "stroke-gold/70"} strokeWidth={k % 6 ? 1 : 2} />;
+      })}
+      {MOC.map(([kd, n]) => {
+        const [x, y] = diem(kd, r + 16);
+        return <text key={n} x={x} y={y + 3} textAnchor="middle" className="fill-fg-faint" fontSize={8}>{n}</text>;
+      })}
+      <line x1={cx} y1={cy} x2={sx} y2={sy} className="stroke-gold" strokeWidth={1.4} strokeDasharray="3 3" />
+      <circle cx={sx} cy={sy} r={9} className="fill-gold" />
+      <circle cx={cx} cy={cy} r={3} className="fill-moon" />
+      <text x={cx} y={cy + 22} textAnchor="middle" className="fill-fg" fontSize={12}>{ten}</text>
+      <text x={cx} y={cy + 36} textAnchor="middle" className="fill-fg-faint" fontSize={8.5}>{kinh_do}°</text>
+    </Khung>
+  );
+}
+
 // ---------------------------------------------------------------- Y5 dấu hiệu nhà ở: mặt bằng nhà + phòng hay gặp
 // Engine trả nhóm dấu hiệu (ngoại cảnh / hình nhà / trong nhà), tên phòng hay gặp, cờ "xử lý trước" / "dấu hiệu tốt".
 // Nền giấy sáng (Khung `sang`) → màu viết thẳng mã hex tối, không dùng token giao diện tối.
@@ -321,6 +349,7 @@ export function MinhHoa({ mh, duong }: { mh?: MinhHoaDuLieu | null; duong?: stri
       case "thap_than": return <HinhThapThan {...mh} />;
       case "nhat_chu": return <HinhNhatChu {...mh} />;
       case "dau_hieu": return <HinhDauHieu {...mh} />;
+      case "tiet_khi": return <HinhTietKhi {...mh} />;
       default: return null;
     }
   })();

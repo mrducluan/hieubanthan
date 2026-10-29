@@ -252,6 +252,18 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Hiểu Bản Thân là gì, làm việc ra sao, ai biên soạn và thẩm định, kho tri thức dựa trên những cổ thư nào.",
     muc: [{ id: "su-menh", tieu_de: "Chúng tôi làm gì" }, { id: "phuong-phap", tieu_de: "Cách chúng tôi làm" }, { id: "quy-trinh", tieu_de: "Ai biên soạn, ai thẩm định" }, { id: "nguon", tieu_de: "Nguồn tri thức" }, { id: "cam-ket", tieu_de: "Cam kết" }, { id: "ung-ho", tieu_de: "Ủng hộ đội ngũ" }, { id: "van-hanh", tieu_de: "Đơn vị vận hành" }],
   } },
+  // KH-BL đợt 1: bảng giờ hoàng đạo (engine /v1/lich/gio-hoang-dao) — H1, lời dẫn, khối CMS.
+  { duong: "/xem-ngay-tot/gio-hoang-dao", nhom: "tinh", ten: "Giờ hoàng đạo", o: O_TINH, mac_dinh: {
+    tieu_de_seo: "Giờ hoàng đạo là gì? Bảng giờ hoàng đạo theo ngày", h1: "Giờ hoàng đạo",
+    mo_ta_seo: "Giờ hoàng đạo hôm nay và bảng giờ hoàng đạo cho 12 ngày Tý đến Hợi: khung giờ đồng hồ, thần trực giờ, cách tự tra theo địa chi ngày.",
+    loi_dan: "Sáu canh giờ tốt trong ngày theo lịch vạn niên — tra theo địa chi của ngày, khung giờ đồng hồ Việt Nam.",
+  } },
+  // KH-BL P0: tư liệu cho báo chí (dữ kiện Tết do engine tính; chữ mục theo neo sửa được ở CMS).
+  { duong: "/bao-chi", nhom: "tinh", ten: "Tư liệu báo chí", o: ["seo", "dau_trang", "muc", "khoi_cuoi"], mac_dinh: {
+    tieu_de_seo: "Tư liệu báo chí", h1: "Tư liệu báo chí",
+    mo_ta_seo: "Dành cho nhà báo: Hiểu Bản Thân (hieuban.com) là ai, cách ghi nguồn, dữ kiện lịch âm và phong tục mùa Tết tra được, chuyên gia nhận lời bình luận.",
+    muc: [{ id: "la-ai", tieu_de: "Hiểu Bản Thân là ai" }, { id: "ghi-nguon", tieu_de: "Cách ghi nguồn" }, { id: "du-kien-tet", tieu_de: "Dữ kiện mùa Tết" }, { id: "goc-du-lieu", tieu_de: "Những điều ít bài viết nói rõ" }, { id: "chuyen-gia", tieu_de: "Chuyên gia nhận lời bình luận" }, { id: "lien-he", tieu_de: "Liên hệ" }],
+  } },
   // Hồ sơ chuyên gia giữ trong code (E-E-A-T, đổi bằng PR lib/chuyen-gia.ts) — CMS chỉ thêm khối cuối trang.
   { duong: "/tac-gia", nhom: "tinh", ten: "Đội ngũ chuyên gia", o: ["khoi_cuoi"], mac_dinh: {} },
   { duong: "/tac-gia/duc-luan", nhom: "tinh", ten: "Chủ biên Đức Luân", o: ["khoi_cuoi"], mac_dinh: {} },
@@ -284,6 +296,7 @@ export const TEP_KB_THEO_LOAI: Record<LoaiTrang, string[]> = {
   so: ["thanso_meanings.json", "thanso_depth.json"], que: ["kinhdich_kb.json", "kinhdich_hao.json"],
   sao: ["tuvi_kb.json"], cung: ["tuvi_kb.json"], sao_cung: ["tuvi_kb.json"], hoa_cung: ["tuvi_kb.json"],
   thap_than: ["battu_kb.json"], nhat_chu: ["battu_kb.json"], menh_nam: ["battu_kb.json"],
+  nap_am: ["battu_kb.json", "lich_kb.json"], tiet_khi: ["lich_kb.json"], con_giap_nam: ["lich_kb.json", "tuoi_dan_gian_kb.json"],
   cap_so: ["thanso_cap_so.json", "thanso_quan_he.json"], nghe: ["thanso_chan_dung.json", "thanso_linh_vuc.json"],
   tinh_yeu: ["thanso_chan_dung.json", "thanso_linh_vuc.json"], nam_ca_nhan: ["thanso_depth.json"], no_nghiep: ["thanso_chi_so_phu.json"],
   so_kep: ["thanso_chaldean.json"], dau_hieu: ["phongthuy_kb.json", "phongthuy_do_thi.json"],
@@ -294,6 +307,7 @@ const VI_DU: Record<LoaiTrang, string> = {
   cap_so: "so-chu-dao-1-va-1", nghe: "so-1-hop-nghe-gi", tinh_yeu: "so-1-trong-tinh-yeu", nam_ca_nhan: "nam-ca-nhan-1",
   no_nghiep: "no-nghiep-13", sao_cung: "tu-vi-cung-menh", hoa_cung: "hoa-loc-cung-menh", menh_nam: "sinh-nam-1950-menh-gi",
   so_kep: "so-kep-10", dau_hieu: "duong-dam-thang-vao-nha",
+  nap_am: "hai-trung-kim", tiet_khi: "lap-xuan", con_giap_nam: "tuoi-ty-nam-2027",
 };
 
 /** ND-7 đợt 2: mọi cụm (trừ hồ sơ chuyên gia) cho đặt MỘT ảnh chia sẻ dùng chung — thay ảnh /og tự vẽ theo tiêu đề. */

@@ -67,7 +67,7 @@ export const THONG_TIN_MANG: Record<MangBlog, ThongTinMang> = {
     loi: "Xem nhật chủ, ngũ hành thừa – thiếu, đại vận đang đi. Dụng thần trình bày cả hai cách — không chọn thay bạn.",
     nut: "Xem Bát tự của tôi", ngan: "Tứ trụ, nhật chủ, ngũ hành thừa thiếu, đại vận đang đi.",
     diem: ["Tứ trụ · nhật chủ · thập thần", "Ngũ hành thừa – thiếu theo thang điểm công bố", "Đại vận theo ngày khởi vận"],
-    cum: ["nhat-chu", "thap-than", "menh-tuoi"], them: [],
+    cum: ["nhat-chu", "thap-than", "menh-tuoi", "nap-am", "tiet-khi", "con-giap-nam"], them: [],
   },
   kinh_dich: {
     ten: "Kinh Dịch", duong: "/kinh-dich", moDun: "kinhdich", mangGoiY: "kinh_dich",

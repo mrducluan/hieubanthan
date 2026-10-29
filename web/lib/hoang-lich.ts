@@ -79,6 +79,18 @@ export async function thangCongKhai(nam: number, thang: number): Promise<ThangLi
   return r;
 }
 
+// KH-BL đợt 1 — bảng giờ hoàng đạo theo địa chi ngày (engine; không phụ thuộc ngày xem).
+export interface GioHoangDaoBang {
+  nhom: { ngay: [string, string]; gio: { chi: string; khung: string; than: string }[] }[];
+  than: { ten: string; loai: string; nghia: string }[];
+  tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; cach_tinh: string; nguon: string; trang_thai: string; luu_y: string;
+}
+export async function gioHoangDaoCongKhai(): Promise<GioHoangDaoBang | null> {
+  const r = await lay<GioHoangDaoBang>("/v1/lich/gio-hoang-dao");
+  if (!r) noStore();
+  return r;
+}
+
 // SEO-L2 — "ngày tốt {việc} tháng M/YYYY": 6 việc có trang riêng (engine VIEC_SEO; engine trả 404 cho việc khác).
 export const VIEC_SEO = [
   { ma: "cuoi_hoi", slug: "cuoi-hoi", ten: "Cưới hỏi" }, { ma: "khai_truong", slug: "khai-truong", ten: "Khai trương" },

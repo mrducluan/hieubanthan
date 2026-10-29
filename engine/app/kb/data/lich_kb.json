@@ -1,0 +1,827 @@
+{
+  "_nguon": "KH-BL đợt 1 (2026-10-29): 24 tiết khí (tên, chữ Hán, kinh độ Mặt Trời, nghĩa tên, đặc điểm, 72 hậu theo Nguyệt lệnh thất thập nhị hậu), chữ Hán trong tên 30 nạp âm, 12 con giáp. Thời điểm giao tiết và nạp âm do engine tính (giờ Việt Nam). Bản nháp ban biên tập, chờ đối chiếu nguyên văn.",
+  "source": {
+    "nguyet_lenh": "Lễ ký · Nguyệt lệnh (禮記·月令) — 72 hậu",
+    "thong_hoi": "Tam mệnh thông hội (三命通會) — nạp âm 60 hoa giáp",
+    "dan_gian": "Lịch vạn niên và tập quán nông lịch dân gian Việt Nam"
+  },
+  "source_id": "nguyet_lenh",
+  "school_id": "lich_phap_vn",
+  "trang_thai": "nhap_ai",
+  "can_doi_chieu": true,
+  "tiet_khi_luu_y": "Hệ 24 tiết khí hình thành ở lưu vực sông Hoàng Hà, nên tên gọi (tuyết, sương giáng…) tả khí hậu vùng đó. Ở Việt Nam, nhất là miền Nam, thời tiết không khớp từng tên; tiết khí vẫn là mốc thiên văn chính xác và là cách chia tháng của Bát tự, phong thuỷ, hoàng lịch.",
+  "tiet_khi": {
+    "lap_xuan": {
+      "ten": "Lập xuân",
+      "han": "立春",
+      "kinh_do": 315,
+      "loai": "tiet",
+      "thang": "Dần",
+      "nghia_ten": "Lập là bắt đầu: mùa xuân bắt đầu.",
+      "dac_diem": "Mốc mở đầu năm theo tiết khí. Bát tự và phong thuỷ Bát trạch đổi năm ở thời điểm Lập xuân, không đổi ở Tết.",
+      "doi_song": "Người sinh giữa Lập xuân và Tết (hoặc giữa Tết và Lập xuân) có thể mang con giáp khác nhau tuỳ hệ thống đang xem.",
+      "hau": [
+        [
+          "東風解凍",
+          "gió đông làm tan băng"
+        ],
+        [
+          "蟄蟲始振",
+          "loài sâu bọ ngủ đông bắt đầu cựa mình"
+        ],
+        [
+          "魚陟負冰",
+          "cá ngoi lên sát lớp băng mỏng"
+        ]
+      ]
+    },
+    "vu_thuy": {
+      "ten": "Vũ thuỷ",
+      "han": "雨水",
+      "kinh_do": 330,
+      "loai": "khi",
+      "thang": "Dần",
+      "nghia_ten": "Mưa nước: băng tuyết tan, mưa xuân bắt đầu.",
+      "dac_diem": "Trời ấm dần, độ ẩm tăng. Ở miền Bắc Việt Nam là mùa mưa phùn, nồm ẩm.",
+      "doi_song": "Mùa nồm: dễ ẩm mốc đồ đạc, nên thông gió nhà vào lúc trời hanh.",
+      "hau": [
+        [
+          "獺祭魚",
+          "rái cá bày cá ra bờ như cúng tế"
+        ],
+        [
+          "鴻雁來",
+          "chim hồng chim nhạn bay về"
+        ],
+        [
+          "草木萌動",
+          "cây cỏ nảy mầm"
+        ]
+      ]
+    },
+    "kinh_trap": {
+      "ten": "Kinh trập",
+      "han": "驚蟄",
+      "kinh_do": 345,
+      "loai": "tiet",
+      "thang": "Mão",
+      "nghia_ten": "Sâu bọ giật mình: sấm đầu xuân đánh thức loài ngủ đông.",
+      "dac_diem": "Mở đầu tháng Mão theo tiết. Sấm xuân xuất hiện, côn trùng hoạt động trở lại.",
+      "doi_song": "Nhà nông xưa coi đây là lúc chuẩn bị đất và giống cho vụ xuân.",
+      "hau": [
+        [
+          "桃始華",
+          "hoa đào bắt đầu nở"
+        ],
+        [
+          "倉庚鳴",
+          "chim vàng anh hót"
+        ],
+        [
+          "鷹化為鳩",
+          "chim ưng ẩn đi, chim cu xuất hiện (người xưa tưởng ưng hoá thành cu)"
+        ]
+      ]
+    },
+    "xuan_phan": {
+      "ten": "Xuân phân",
+      "han": "春分",
+      "kinh_do": 0,
+      "loai": "khi",
+      "thang": "Mão",
+      "nghia_ten": "Chia đôi mùa xuân: ngày và đêm dài gần bằng nhau.",
+      "dac_diem": "Mặt Trời đi qua xích đạo lên bán cầu Bắc. Kinh độ Mặt Trời 0° — điểm gốc để đếm 24 tiết khí.",
+      "doi_song": "Từ đây ngày dài hơn đêm cho tới Thu phân.",
+      "hau": [
+        [
+          "玄鳥至",
+          "chim én bay về"
+        ],
+        [
+          "雷乃發聲",
+          "sấm bắt đầu rền"
+        ],
+        [
+          "始電",
+          "bắt đầu có chớp"
+        ]
+      ]
+    },
+    "thanh_minh": {
+      "ten": "Thanh minh",
+      "han": "清明",
+      "kinh_do": 15,
+      "loai": "tiet",
+      "thang": "Thìn",
+      "nghia_ten": "Trong sáng: trời quang, cây cỏ tươi.",
+      "dac_diem": "Mở đầu tháng Thìn theo tiết. Gắn với tục tảo mộ của người Việt.",
+      "doi_song": "Tiết Thanh minh là dịp con cháu đi tảo mộ, sửa sang mộ phần — câu thơ quen \"Thanh minh trong tiết tháng ba\".",
+      "hau": [
+        [
+          "桐始華",
+          "cây ngô đồng ra hoa"
+        ],
+        [
+          "田鼠化為鴽",
+          "chuột đồng ẩn đi, chim cun cút xuất hiện"
+        ],
+        [
+          "虹始見",
+          "cầu vồng bắt đầu hiện"
+        ]
+      ]
+    },
+    "coc_vu": {
+      "ten": "Cốc vũ",
+      "han": "穀雨",
+      "kinh_do": 30,
+      "loai": "khi",
+      "thang": "Thìn",
+      "nghia_ten": "Mưa cho lúa: mưa nuôi hạt giống.",
+      "dac_diem": "Tiết khí cuối mùa xuân, mưa nhiều có lợi cho gieo trồng.",
+      "doi_song": "Thời điểm gieo cấy vụ chiêm xuân muộn và trồng rau màu ở nhiều vùng.",
+      "hau": [
+        [
+          "萍始生",
+          "bèo bắt đầu mọc"
+        ],
+        [
+          "鳴鳩拂其羽",
+          "chim cu vừa gáy vừa rũ lông"
+        ],
+        [
+          "戴勝降於桑",
+          "chim đầu rìu đậu xuống cây dâu"
+        ]
+      ]
+    },
+    "lap_ha": {
+      "ten": "Lập hạ",
+      "han": "立夏",
+      "kinh_do": 45,
+      "loai": "tiet",
+      "thang": "Tỵ",
+      "nghia_ten": "Mùa hạ bắt đầu.",
+      "dac_diem": "Mở đầu tháng Tỵ theo tiết. Nhiệt độ tăng rõ.",
+      "doi_song": "Nên chú ý uống đủ nước, tránh nắng gắt giữa trưa.",
+      "hau": [
+        [
+          "螻蟈鳴",
+          "dế dũi kêu"
+        ],
+        [
+          "蚯蚓出",
+          "giun đất bò lên mặt đất"
+        ],
+        [
+          "王瓜生",
+          "dây qua lâu mọc"
+        ]
+      ]
+    },
+    "tieu_man": {
+      "ten": "Tiểu mãn",
+      "han": "小滿",
+      "kinh_do": 60,
+      "loai": "khi",
+      "thang": "Tỵ",
+      "nghia_ten": "Đầy nhỏ: hạt lúa mạch bắt đầu căng nhưng chưa chín hẳn.",
+      "dac_diem": "Lúa vụ xuân vào chắc hạt; mưa rào mùa hạ bắt đầu.",
+      "doi_song": "Người xưa coi \"chưa đầy hẳn\" là trạng thái tốt: còn chỗ để lớn thêm.",
+      "hau": [
+        [
+          "苦菜秀",
+          "rau đắng ra hoa"
+        ],
+        [
+          "靡草死",
+          "loài cỏ mềm ưa mát úa tàn"
+        ],
+        [
+          "麥秋至",
+          "mùa gặt lúa mạch tới"
+        ]
+      ]
+    },
+    "mang_chung": {
+      "ten": "Mang chủng",
+      "han": "芒種",
+      "kinh_do": 75,
+      "loai": "tiet",
+      "thang": "Ngọ",
+      "nghia_ten": "Hạt có râu: lúa có râu chín, cũng là lúc gieo giống mới.",
+      "dac_diem": "Mở đầu tháng Ngọ theo tiết. Vừa gặt vừa gieo — thời vụ bận rộn nhất.",
+      "doi_song": "Ở miền Bắc Việt Nam trùng khoảng gặt vụ chiêm, chuẩn bị vụ mùa.",
+      "hau": [
+        [
+          "螳螂生",
+          "bọ ngựa nở"
+        ],
+        [
+          "鵙始鳴",
+          "chim bách thanh bắt đầu kêu"
+        ],
+        [
+          "反舌無聲",
+          "chim hoạ mi lặng tiếng"
+        ]
+      ]
+    },
+    "ha_chi": {
+      "ten": "Hạ chí",
+      "han": "夏至",
+      "kinh_do": 90,
+      "loai": "khi",
+      "thang": "Ngọ",
+      "nghia_ten": "Hạ tới cực điểm: ngày dài nhất năm ở bán cầu Bắc.",
+      "dac_diem": "Mặt Trời lên cao nhất. Theo âm dương học, dương cực thịnh và một âm bắt đầu sinh.",
+      "doi_song": "Sau Hạ chí ngày ngắn dần, nhưng cái nóng còn kéo dài tới Đại thử.",
+      "hau": [
+        [
+          "鹿角解",
+          "hươu rụng gạc"
+        ],
+        [
+          "蜩始鳴",
+          "ve sầu bắt đầu kêu"
+        ],
+        [
+          "半夏生",
+          "cây bán hạ mọc"
+        ]
+      ]
+    },
+    "tieu_thu": {
+      "ten": "Tiểu thử",
+      "han": "小暑",
+      "kinh_do": 105,
+      "loai": "tiet",
+      "thang": "Mùi",
+      "nghia_ten": "Nóng nhỏ: bắt đầu vào cao điểm nóng.",
+      "dac_diem": "Mở đầu tháng Mùi theo tiết. Nóng ẩm, mưa dông nhiều.",
+      "doi_song": "Mùa mưa bão bắt đầu tăng ở miền Bắc và miền Trung.",
+      "hau": [
+        [
+          "溫風至",
+          "gió nóng thổi tới"
+        ],
+        [
+          "蟋蟀居壁",
+          "dế mèn trú trong vách"
+        ],
+        [
+          "鷹始摯",
+          "chim ưng tập bay săn mồi"
+        ]
+      ]
+    },
+    "dai_thu": {
+      "ten": "Đại thử",
+      "han": "大暑",
+      "kinh_do": 120,
+      "loai": "khi",
+      "thang": "Mùi",
+      "nghia_ten": "Nóng lớn: nóng nhất năm.",
+      "dac_diem": "Nhiệt và ẩm đều cao nhất; mưa lớn theo mùa.",
+      "doi_song": "Nên giữ nhà thông thoáng, đồ ăn để nơi mát, nghỉ ngơi đủ.",
+      "hau": [
+        [
+          "腐草為螢",
+          "đom đóm sinh ra nơi cỏ mục"
+        ],
+        [
+          "土潤溽暑",
+          "đất ẩm, oi nồng"
+        ],
+        [
+          "大雨時行",
+          "mưa lớn đổ từng trận"
+        ]
+      ]
+    },
+    "lap_thu": {
+      "ten": "Lập thu",
+      "han": "立秋",
+      "kinh_do": 135,
+      "loai": "tiet",
+      "thang": "Thân",
+      "nghia_ten": "Mùa thu bắt đầu.",
+      "dac_diem": "Mở đầu tháng Thân theo tiết. Về thiên văn đã sang thu, nhưng ở Việt Nam trời vẫn còn nóng.",
+      "doi_song": "Dân gian gọi cái nóng sau Lập thu là \"nắng tháng Tám\" — vẫn cần tránh nắng.",
+      "hau": [
+        [
+          "涼風至",
+          "gió mát tới"
+        ],
+        [
+          "白露降",
+          "sương trắng xuống"
+        ],
+        [
+          "寒蟬鳴",
+          "ve sầu mùa lạnh kêu"
+        ]
+      ]
+    },
+    "xu_thu": {
+      "ten": "Xử thử",
+      "han": "處暑",
+      "kinh_do": 150,
+      "loai": "khi",
+      "thang": "Thân",
+      "nghia_ten": "Hết nóng: cái nóng lui dần.",
+      "dac_diem": "Sáng tối dịu hơn, ban trưa vẫn nắng.",
+      "doi_song": "Gần dịp rằm tháng Bảy âm lịch (Vu Lan) ở nhiều năm.",
+      "hau": [
+        [
+          "鷹乃祭鳥",
+          "chim ưng bày mồi như cúng tế"
+        ],
+        [
+          "天地始肅",
+          "trời đất bắt đầu se lại"
+        ],
+        [
+          "禾乃登",
+          "lúa chín, được mùa"
+        ]
+      ]
+    },
+    "bach_lo": {
+      "ten": "Bạch lộ",
+      "han": "白露",
+      "kinh_do": 165,
+      "loai": "tiet",
+      "thang": "Dậu",
+      "nghia_ten": "Sương trắng: sương đêm đọng thành giọt trắng.",
+      "dac_diem": "Mở đầu tháng Dậu theo tiết. Chênh lệch nhiệt độ ngày đêm tăng.",
+      "doi_song": "Sáng sớm se lạnh ở miền Bắc; nên giữ ấm cổ, vai khi ra đường sớm.",
+      "hau": [
+        [
+          "鴻雁來",
+          "chim hồng chim nhạn bay tới"
+        ],
+        [
+          "玄鳥歸",
+          "chim én bay đi"
+        ],
+        [
+          "群鳥養羞",
+          "chim chóc trữ thức ăn"
+        ]
+      ]
+    },
+    "thu_phan": {
+      "ten": "Thu phân",
+      "han": "秋分",
+      "kinh_do": 180,
+      "loai": "khi",
+      "thang": "Dậu",
+      "nghia_ten": "Chia đôi mùa thu: ngày và đêm dài gần bằng nhau.",
+      "dac_diem": "Mặt Trời đi qua xích đạo xuống bán cầu Nam. Từ đây đêm dài hơn ngày.",
+      "doi_song": "Thường gần Tết Trung thu (rằm tháng Tám âm lịch).",
+      "hau": [
+        [
+          "雷始收聲",
+          "sấm bắt đầu tắt tiếng"
+        ],
+        [
+          "蟄蟲坯戶",
+          "sâu bọ đắp đất lấp hang"
+        ],
+        [
+          "水始涸",
+          "nước bắt đầu cạn"
+        ]
+      ]
+    },
+    "han_lo": {
+      "ten": "Hàn lộ",
+      "han": "寒露",
+      "kinh_do": 195,
+      "loai": "tiet",
+      "thang": "Tuất",
+      "nghia_ten": "Sương lạnh: sương đêm đã lạnh.",
+      "dac_diem": "Mở đầu tháng Tuất theo tiết. Không khí khô, hanh.",
+      "doi_song": "Miền Bắc vào mùa hanh khô đẹp nhất năm.",
+      "hau": [
+        [
+          "鴻雁來賓",
+          "chim hồng chim nhạn về đông như khách"
+        ],
+        [
+          "雀入大水為蛤",
+          "chim sẻ vắng đi, sò hến nhiều lên"
+        ],
+        [
+          "菊有黃華",
+          "hoa cúc nở vàng"
+        ]
+      ]
+    },
+    "suong_giang": {
+      "ten": "Sương giáng",
+      "han": "霜降",
+      "kinh_do": 210,
+      "loai": "khi",
+      "thang": "Tuất",
+      "nghia_ten": "Sương muối xuống.",
+      "dac_diem": "Tiết khí cuối mùa thu. Ở vùng núi phía Bắc có thể xuất hiện sương muối về sau.",
+      "doi_song": "Thời điểm thu hoạch vụ mùa ở nhiều nơi.",
+      "hau": [
+        [
+          "豺乃祭獸",
+          "chó sói bày mồi như cúng tế"
+        ],
+        [
+          "草木黃落",
+          "cây cỏ úa vàng, rụng lá"
+        ],
+        [
+          "蟄蟲咸俯",
+          "sâu bọ nằm im trong hang"
+        ]
+      ]
+    },
+    "lap_dong": {
+      "ten": "Lập đông",
+      "han": "立冬",
+      "kinh_do": 225,
+      "loai": "tiet",
+      "thang": "Hợi",
+      "nghia_ten": "Mùa đông bắt đầu.",
+      "dac_diem": "Mở đầu tháng Hợi theo tiết. Gió mùa đông bắc bắt đầu về miền Bắc.",
+      "doi_song": "Nên chuẩn bị chăn ấm, kiểm tra thiết bị sưởi trước khi dùng.",
+      "hau": [
+        [
+          "水始冰",
+          "nước bắt đầu đóng băng"
+        ],
+        [
+          "地始凍",
+          "đất bắt đầu cứng lạnh"
+        ],
+        [
+          "雉入大水為蜃",
+          "chim trĩ vắng đi, trai lớn nhiều lên"
+        ]
+      ]
+    },
+    "tieu_tuyet": {
+      "ten": "Tiểu tuyết",
+      "han": "小雪",
+      "kinh_do": 240,
+      "loai": "khi",
+      "thang": "Hợi",
+      "nghia_ten": "Tuyết nhỏ: vùng gốc của lịch bắt đầu có tuyết nhẹ.",
+      "dac_diem": "Ở Việt Nam không có tuyết (trừ hiếm hoi trên núi cao); trời lạnh dần.",
+      "doi_song": "Mùa làm dưa, muối cà và chuẩn bị đồ khô cho Tết ở nhiều gia đình miền Bắc.",
+      "hau": [
+        [
+          "虹藏不見",
+          "cầu vồng ẩn, không còn thấy"
+        ],
+        [
+          "天氣上升地氣下降",
+          "khí trời bốc lên, khí đất lắng xuống"
+        ],
+        [
+          "閉塞而成冬",
+          "trời đất đóng kín, thành mùa đông"
+        ]
+      ]
+    },
+    "dai_tuyet": {
+      "ten": "Đại tuyết",
+      "han": "大雪",
+      "kinh_do": 255,
+      "loai": "tiet",
+      "thang": "Tý",
+      "nghia_ten": "Tuyết lớn.",
+      "dac_diem": "Mở đầu tháng Tý theo tiết. Lạnh sâu, khô.",
+      "doi_song": "Người cao tuổi và trẻ nhỏ nên giữ ấm, hạn chế ra ngoài khi gió mùa mạnh.",
+      "hau": [
+        [
+          "鶡鴠不鳴",
+          "chim hạt đán ngừng kêu"
+        ],
+        [
+          "虎始交",
+          "hổ bắt đầu kết đôi"
+        ],
+        [
+          "荔挺出",
+          "cỏ lệ đâm chồi"
+        ]
+      ]
+    },
+    "dong_chi": {
+      "ten": "Đông chí",
+      "han": "冬至",
+      "kinh_do": 270,
+      "loai": "khi",
+      "thang": "Tý",
+      "nghia_ten": "Đông tới cực điểm: đêm dài nhất năm ở bán cầu Bắc.",
+      "dac_diem": "Mặt Trời thấp nhất. Theo âm dương học, âm cực thịnh và một dương bắt đầu sinh (\"nhất dương sinh\").",
+      "doi_song": "Từ Đông chí ngày dài dần. Nhiều gia đình người Hoa và một số vùng ở Việt Nam có tục ăn chè trôi nước dịp này.",
+      "hau": [
+        [
+          "蚯蚓結",
+          "giun đất cuộn mình"
+        ],
+        [
+          "麋角解",
+          "nai rụng gạc"
+        ],
+        [
+          "水泉動",
+          "mạch nước ngầm bắt đầu chuyển"
+        ]
+      ]
+    },
+    "tieu_han": {
+      "ten": "Tiểu hàn",
+      "han": "小寒",
+      "kinh_do": 285,
+      "loai": "tiet",
+      "thang": "Sửu",
+      "nghia_ten": "Lạnh nhỏ: bắt đầu vào cao điểm lạnh.",
+      "dac_diem": "Mở đầu tháng Sửu theo tiết. Các đợt rét đậm thường bắt đầu.",
+      "doi_song": "Gần tháng Chạp âm lịch — mùa chuẩn bị Tết.",
+      "hau": [
+        [
+          "雁北鄉",
+          "chim nhạn quay về phương bắc"
+        ],
+        [
+          "鵲始巢",
+          "chim khách bắt đầu làm tổ"
+        ],
+        [
+          "雉始雊",
+          "chim trĩ bắt đầu gáy"
+        ]
+      ]
+    },
+    "dai_han": {
+      "ten": "Đại hàn",
+      "han": "大寒",
+      "kinh_do": 300,
+      "loai": "khi",
+      "thang": "Sửu",
+      "nghia_ten": "Lạnh lớn: lạnh nhất năm.",
+      "dac_diem": "Tiết khí cuối cùng của vòng 24 tiết; sau đó là Lập xuân của năm mới.",
+      "doi_song": "Thường rơi vào tháng Chạp, ngay trước Tết; rét đậm rét hại có thể kéo dài ở miền núi phía Bắc.",
+      "hau": [
+        [
+          "雞始乳",
+          "gà bắt đầu ấp trứng"
+        ],
+        [
+          "征鳥厲疾",
+          "chim săn mồi bay nhanh, dữ"
+        ],
+        [
+          "水澤腹堅",
+          "nước ao đầm đông cứng tận giữa"
+        ]
+      ]
+    }
+  },
+  "chu_nap_am": {
+    "海": [
+      "Hải",
+      "biển"
+    ],
+    "中": [
+      "Trung",
+      "trong, giữa"
+    ],
+    "金": [
+      "Kim",
+      "kim loại, vàng"
+    ],
+    "炉": [
+      "Lô",
+      "lò"
+    ],
+    "火": [
+      "Hỏa",
+      "lửa"
+    ],
+    "大": [
+      "Đại",
+      "lớn"
+    ],
+    "林": [
+      "Lâm",
+      "rừng"
+    ],
+    "木": [
+      "Mộc",
+      "cây, gỗ"
+    ],
+    "路": [
+      "Lộ",
+      "đường"
+    ],
+    "旁": [
+      "Bàng",
+      "bên cạnh"
+    ],
+    "土": [
+      "Thổ",
+      "đất"
+    ],
+    "剑": [
+      "Kiếm",
+      "kiếm"
+    ],
+    "锋": [
+      "Phong",
+      "mũi nhọn"
+    ],
+    "山": [
+      "Sơn",
+      "núi"
+    ],
+    "头": [
+      "Đầu",
+      "đầu, đỉnh"
+    ],
+    "涧": [
+      "Giản",
+      "khe suối"
+    ],
+    "下": [
+      "Hạ",
+      "dưới"
+    ],
+    "水": [
+      "Thủy",
+      "nước"
+    ],
+    "城": [
+      "Thành",
+      "tường thành"
+    ],
+    "白": [
+      "Bạch",
+      "trắng"
+    ],
+    "蜡": [
+      "Lạp",
+      "sáp"
+    ],
+    "杨": [
+      "Dương",
+      "cây dương"
+    ],
+    "柳": [
+      "Liễu",
+      "cây liễu"
+    ],
+    "泉": [
+      "Tuyền",
+      "suối, mạch nước"
+    ],
+    "屋": [
+      "Ốc",
+      "nhà"
+    ],
+    "上": [
+      "Thượng",
+      "trên"
+    ],
+    "霹": [
+      "Tích",
+      "sét"
+    ],
+    "雳": [
+      "Lịch",
+      "sấm sét"
+    ],
+    "松": [
+      "Tùng",
+      "cây tùng"
+    ],
+    "柏": [
+      "Bách",
+      "cây bách"
+    ],
+    "长": [
+      "Trường",
+      "dài"
+    ],
+    "流": [
+      "Lưu",
+      "chảy"
+    ],
+    "沙": [
+      "Sa",
+      "cát"
+    ],
+    "平": [
+      "Bình",
+      "bằng phẳng"
+    ],
+    "地": [
+      "Địa",
+      "đất"
+    ],
+    "壁": [
+      "Bích",
+      "vách tường"
+    ],
+    "箔": [
+      "Bạch",
+      "lá mỏng"
+    ],
+    "覆": [
+      "Phú",
+      "che, úp"
+    ],
+    "灯": [
+      "Đăng",
+      "đèn"
+    ],
+    "天": [
+      "Thiên",
+      "trời"
+    ],
+    "河": [
+      "Hà",
+      "sông"
+    ],
+    "驿": [
+      "Dịch",
+      "trạm ngựa"
+    ],
+    "钗": [
+      "Thoa",
+      "cây trâm cài tóc"
+    ],
+    "钏": [
+      "Xuyến",
+      "vòng tay"
+    ],
+    "桑": [
+      "Tang",
+      "cây dâu"
+    ],
+    "柘": [
+      "Đố",
+      "cây chá (họ dâu)"
+    ],
+    "溪": [
+      "Khê",
+      "suối"
+    ],
+    "石": [
+      "Thạch",
+      "đá"
+    ],
+    "榴": [
+      "Lựu",
+      "cây lựu"
+    ]
+  },
+  "con_giap": {
+    "Tý": "Chuột",
+    "Sửu": "Trâu",
+    "Dần": "Hổ",
+    "Mão": "Mèo",
+    "Thìn": "Rồng",
+    "Tỵ": "Rắn",
+    "Ngọ": "Ngựa",
+    "Mùi": "Dê",
+    "Thân": "Khỉ",
+    "Dậu": "Gà",
+    "Tuất": "Chó",
+    "Hợi": "Lợn"
+  },
+  "quan_he_chi": {
+    "trung": "năm tuổi (cùng địa chi). Dân gian quen gọi là năm \"phạm Thái Tuế\", thường làm việc lớn cẩn trọng hơn, chứ không phải năm xấu.",
+    "xung": "lục xung (dân gian gọi là \"xung Thái Tuế\" hay Tuế Phá). Lời khuyên truyền thống: giữ nhịp ổn định, việc lớn chuẩn bị kỹ.",
+    "tam_hop": "tam hợp — quan niệm dân gian xem là năm thuận, dễ có người cùng chí hướng.",
+    "luc_hop": "lục hợp — quan niệm dân gian xem là năm êm, dễ hoà.",
+    "hai": "lục hại — dân gian nhắc để ý chuyện hiểu lầm trong giao tiếp.",
+    "hinh": "tương hình — dân gian nhắc giữ lời, tránh va chạm không cần thiết.",
+    "none": "không hợp cũng không xung — một năm bình thường theo quan niệm dân gian."
+  },
+  "than_12": {
+    "_ghi_chu": "12 thần trực giờ / trực ngày theo phép hoàng đạo – hắc đạo (lịch vạn niên). Nghĩa theo cách hiểu phổ thông, để tham khảo.",
+    "青龙": "Thanh Long — rồng xanh, tượng cho khởi đầu thuận lợi; lịch xưa ưa dùng để bắt đầu việc mới.",
+    "明堂": "Minh Đường — sảnh sáng, tượng cho được giúp đỡ, việc giấy tờ, gặp người có vị trí.",
+    "天刑": "Thiên Hình — hình phạt của trời; lịch xưa khuyên tránh kiện tụng, tranh chấp.",
+    "朱雀": "Chu Tước — chim đỏ, tượng cho lời nói; lịch xưa nhắc cẩn trọng khi cãi cọ, ký kết vội.",
+    "金匮": "Kim Quỹ — rương vàng, tượng cho cất giữ, tài sản; lịch xưa ưa dùng cho cưới hỏi, cất của.",
+    "天德": "Thiên Đức (còn gọi Bảo Quang) — đức của trời, tượng cho việc thuận, được nâng đỡ.",
+    "白虎": "Bạch Hổ — hổ trắng; lịch xưa nhắc tránh việc mạo hiểm, động thổ lớn.",
+    "玉堂": "Ngọc Đường — nhà ngọc, tượng cho chỗ ở và học hành; lịch xưa ưa dùng cho dọn nhà, thi cử.",
+    "天牢": "Thiên Lao — ngục của trời; lịch xưa khuyên không khởi việc lớn, nên làm việc nhỏ đã định.",
+    "玄武": "Huyền Vũ — rùa đen, tượng cho chuyện mờ ám; lịch xưa nhắc giữ giấy tờ, đồ đạc cẩn thận.",
+    "司命": "Tư Mệnh — thần giữ việc nhà; lịch xưa ưa dùng cho việc ban ngày, việc trong gia đình.",
+    "勾陈": "Câu Trận — tượng cho vướng víu, chậm trễ; lịch xưa nhắc việc dễ kéo dài, nên chuẩn bị kỹ."
+  }
+}
