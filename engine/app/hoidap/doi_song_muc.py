@@ -8,6 +8,8 @@ mọi chữ lấy từ chương đã dựng (cùng KB, cùng mã kiểm chứng 
 """
 from __future__ import annotations
 
+import re
+
 NHAN_MUC = {"thuan": "thuận lợi", "can_bang": "cân bằng", "can_chu_dong": "cần lưu ý"}
 TEN_MANG = {"tong_quan": "con người bạn", "su_nghiep": "công việc", "tien_bac": "tiền bạc", "tinh_cam": "tình cảm",
             "gia_dinh": "gia đình", "suc_khoe": "sức khoẻ và năng lượng", "quan_he": "quan hệ bên ngoài",
@@ -52,9 +54,27 @@ def muc_doi_song(bc: dict | None, chuong: str | None, lo_so: bool = False) -> di
             "source_id": bc.get("source_id"), "school_id": bc.get("school_id")}
 
 
-def doan_doi_song(m: dict) -> str:
-    """Lời đời thường của mục: mức mảng (khi có) → tóm tắt → hộp."""
+def _chuan(c: str) -> str:
+    return " ".join(re.sub(r"[^\wÀ-ỹ ]", " ", c).lower().split())
+
+
+def _cau(van: str) -> list[str]:
+    return [c.strip() for c in re.split(r"(?<=[.!?])\s+", van or "") if c.strip()]
+
+
+def doan_doi_song(m: dict, da_noi: str = "") -> str:
+    """Lời đời thường của mục: mức mảng (khi có) → tóm tắt → hộp.
+
+    `da_noi` = phần câu trả lời đã có phía trên (lời KB của cung/sao/thập thần). Hộp mượn từ chương đời sống cùng nguồn
+    KB nên hay lặp nguyên câu (HD-CS rà lại 2026-10-29): câu nào đã nói thì bỏ; tiêu đề hộp đã nói thì chỉ giữ việc nên làm."""
     phan = []
+    truoc = _chuan(da_noi)
+    da = {_chuan(c) for c in _cau(da_noi)}
+
+    def moi(c: str) -> bool:
+        k = _chuan(c)
+        return not k or (k not in da and (len(k.split()) < 8 or k not in truoc))
+
     # Chương gộp nhiều cung (Tiền bạc = Tài Bạch + Điền Trạch) đã nêu mức từng phần trong tóm tắt → không thêm câu mức chung
     # (tránh "đang ở mức thuận lợi" rồi "tiền bạc ở mức cân bằng").
     if m.get("nhan_muc") and "ở mức" not in (m.get("tom_tat") or ""):
@@ -63,9 +83,22 @@ def doan_doi_song(m: dict) -> str:
         phan.append(m["tom_tat"])
     for h in m.get("hop", []):
         nhan = "Nên để ý" if h["loai"] in ("luu_y", "thoi_diem") else "Điểm sáng"
-        s = f"{nhan} — {h['tieu_de']}: {h['noi_dung']}"
         viec = h.get("huong_xu_ly") or h.get("loi_khuyen")
-        if viec and viec not in h["noi_dung"]:
+        if viec and viec in h["noi_dung"]:
+            viec = None
+        viec = " ".join(c for c in _cau(viec or "") if moi(c)) or None
+        than = " ".join(c for c in _cau(h["noi_dung"]) if moi(c))
+        if not than and not viec:
+            continue
+        td = _chuan(h["tieu_de"])
+        if len(td.split()) >= 5 and td in truoc:       # ý chính đã nói phía trên → chỉ giữ phần chưa nói
+            s = f"{nhan}: {than}" if than else f"{nhan} — việc nên làm: {viec}"
+            if than and viec:
+                s += f" Việc nên làm: {viec}"
+            phan.append(s)
+            continue
+        s = f"{nhan} — {h['tieu_de']}" + (f": {than}" if than else ".")
+        if viec:
             s += f" Việc nên làm: {viec}"
         phan.append(s)
     return " ".join(phan)

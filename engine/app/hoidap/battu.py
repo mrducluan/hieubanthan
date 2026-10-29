@@ -516,6 +516,8 @@ def van_template(goi: dict) -> str:
     doan, soi = [], []
     for m in goi["muc"]:
         d, s = _doan(m)
+        if m.get("loai") == "doi_song":
+            d = dsm.doan_doi_song(m, "\n".join(doan))
         if d:
             doan.append(d)
         if s and not soi:

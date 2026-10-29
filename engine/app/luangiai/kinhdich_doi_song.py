@@ -155,7 +155,7 @@ def _goc_nhin_nghia_ly(que: dict, goi: dict, lv: str | None) -> dict:
     ban = que["quai_ban"]
     q = kbq.que(ban["so_king_wen"]) or {}
     dong = que["hao_dong"]
-    can_cu = [f"Quẻ bản {ban['ten']} {ban.get('ten_han', '')}".strip() + (f", hào động {', '.join(map(str, dong))}" if dong else ", không hào động")
+    can_cu = [f"Quẻ bản {ban['ten']} {q.get('ten_han', '')}".strip() + (f", hào động {', '.join(map(str, dong))}" if dong else ", không hào động")
               + (f", quẻ biến {que['quai_bien']['ten']}" if que.get("quai_bien") else "") + "."]
     if chu:
         can_cu.append(f"Lời làm chủ (quy tắc Chu Hy): {chu['tieu_de']} — 「{chu['han']}」 {chu['dich']}")
@@ -272,7 +272,7 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     # ---- đoạn đời thường
     doan = []
     nn = _nom_na(qv.get("nom_na"))
-    doan.append(f"Quẻ {ban['ten']} ({ban.get('ten_han', '')}). " + (nn or q.get("y_chinh", "")))
+    doan.append(f"Quẻ {ban['ten']}" + (f" ({q['ten_han']})" if q.get("ten_han") else "") + ". " + (nn or q.get("y_chinh", "")))
     if chu and (chu.get("nom_na") or chu.get("y")):
         doan.append("Điểm rơi của quẻ: " + (chu.get("nom_na") or chu.get("y")))
     if que.get("quai_bien"):

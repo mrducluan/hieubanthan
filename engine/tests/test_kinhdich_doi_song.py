@@ -212,3 +212,14 @@ def test_api_chu_de_va_mai_hoa_phuong():
     assert r.status_code == 422
     r = client.get("/v1/kinhdich/chu-de")
     assert r.status_code == 200 and len(r.json()["chu_de"]) >= 20 and r.json()["chu_de"][0]["ma"]
+
+
+@pytest.mark.parametrize("hao", [QUE_LY, [7, 7, 7, 7, 7, 7], [8, 8, 8, 8, 8, 8], [9, 6, 7, 8, 9, 6]])
+def test_doan_dau_co_ten_han_khong_ngoac_rong(hao):
+    """Chữ Hán của quẻ lấy từ KB (kết quả gieo không mang `ten_han`) — trước đây mọi quẻ hiện "Quẻ Lý ()."."""
+    kq = kd.tra_loi("Tôi có nên nhận lời làm quản lý không?", "tu_dong", gia_tri_hao=hao)
+    dau = kq["doc_que"]["doan"][0]
+    assert "()" not in dau and "( )" not in dau
+    ban = kq["que"]["quai_ban"]
+    assert dau.startswith(f"Quẻ {ban['ten']} (")
+    assert all("()" not in c for c in kq["doc_que"].get("can_cu", []))
