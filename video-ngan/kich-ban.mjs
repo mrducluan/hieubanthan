@@ -23,8 +23,8 @@ export const VIDEO = [
         id: "hook", loai: "hai_so", toi_thieu: 5,
         so_trai: "33", so_phai: "6", nhan: "Đường đời", tieu_tren: "Cùng một ngày sinh", tieu_de: "Ai sai?",
         noi: [
-          "[excited] Cùng một ngày sinh. Trang này nói bạn số ba mươi ba. Trang kia nói số sáu.",
-          "[curious] Vậy... ai sai?",
+          "[excited] Cùng một ngày sinh! Trang này nói bạn số ba mươi ba... [playfully] trang kia lại nói số sáu!",
+          "[curious] Vậy... [dramatic pause] ai sai đây?",
         ],
         phu_de: ["Cùng một ngày sinh. Trang này nói bạn số *33*. Trang kia nói số *6*.", "Vậy… ai sai?"],
       },
@@ -34,9 +34,9 @@ export const VIDEO = [
         dong: [{ chu: "2 + 4 + 1 + 0 + 1 + 9 + 8 + 8", ket: "33" }],
         nhan: "Số Bậc thầy",
         noi: [
-          "Mình thử ngày hai mươi tư, tháng mười, năm một nghìn chín trăm tám mươi tám.",
-          "Cộng hết từng chữ số: hai, bốn, một, không, một, chín, tám, tám...",
-          "[excited] ra ba mươi ba — số Bậc thầy!",
+          "[cheerfully] Mình thử ngày hai mươi tư, tháng mười, năm một nghìn chín trăm tám mươi tám nha.",
+          "[playfully] Cộng hết từng chữ số: hai, bốn, một, không, một, chín, tám, tám...",
+          "[excited] ra ba mươi ba — số Bậc thầy luôn!",
         ],
         phu_de: [
           "Mình thử ngày 24 tháng 10 năm 1988.",
@@ -56,7 +56,7 @@ export const VIDEO = [
         noi: [
           "[curious] Nhưng nếu rút gọn từng phần trước thì sao?",
           "Ngày hai mươi tư thành sáu. Tháng mười thành một. Năm một chín tám tám ra hai mươi sáu, rồi thành tám.",
-          "Cộng lại mười lăm... [dramatic pause] ra sáu.",
+          "Cộng lại mười lăm... [dramatic pause] [excited] ra sáu!",
         ],
         phu_de: [
           "Nhưng nếu *rút gọn từng phần* trước thì sao?",
@@ -69,9 +69,9 @@ export const VIDEO = [
         anh: "v1-cach-xem-mo.jpg", truot: [0, 1],
         nhan_noi: [{ chu: "Rút gọn con số → 6", y: 1010, tre: 0.35 }, { chu: "Cộng hết chữ số → 33", y: 1010, tre: 0.6, phai: true }],
         noi: [
-          "[laughs] Không ai sai cả!",
-          "Đó là hai cách tính có thật trong sách thần số.",
-          "Hiểu Bản Thân hiện cả hai, cho bạn chọn, và báo luôn khi hai cách ra số khác nhau.",
+          "[laughs] Hoá ra... không ai sai cả!",
+          "[cheerfully] Đó là hai cách tính có thật trong sách thần số.",
+          "[enthusiastic] Hiểu Bản Thân hiện cả hai, cho bạn chọn, và báo luôn khi hai cách ra số khác nhau!",
         ],
         phu_de: [
           "Không ai sai cả!",
@@ -84,9 +84,9 @@ export const VIDEO = [
         anh: "v1-kiem-chung.jpg", anh_sau: "v1-kiem-chung-tich.jpg", doi_luc: 0.45, truot: [0, 0.08],
         nhan_noi: [{ chu: "3 điểm mạnh · 3 điểm mù", y: 300, tre: 0.15 }],
         noi: [
-          "Mà không bắt bạn tin đâu nhé.",
+          "[playfully] Mà không bắt bạn tin đâu nhé!",
           "Mỗi số có ba điểm mạnh, ba điểm mù — bạn tự tích nét nào đúng.",
-          "[curious] Đúng ít quá? Web gợi ý số khác của chính bạn.",
+          "[curious] Đúng ít quá? [cheerfully] Web gợi ý số khác của chính bạn!",
         ],
         phu_de: [
           "Mà không bắt bạn tin đâu nhé.",
@@ -107,7 +107,7 @@ export const VIDEO = [
         id: "cta", loai: "cta", toi_thieu: 10,
         chip: ["Họ tên + ngày sinh", "30 giây", "Miễn phí"],
         noi: [
-          "Vào hiểu bản thân chấm com, nhập họ tên và ngày sinh.",
+          "[cheerfully] Vào hiểu bản thân chấm com, nhập họ tên và ngày sinh.",
           "[excited] Ba mươi giây có bốn con số cốt lõi. Miễn phí!",
         ],
         phu_de: ["Vào *hieuban.com*, nhập họ tên + ngày sinh.", "30 giây có 4 con số cốt lõi. *Miễn phí!*"],
@@ -124,15 +124,15 @@ export const VIDEO = [
       {
         id: "hook", loai: "pin", toi_thieu: 5,
         dong: ["Ai cũng nói bạn *mạnh mẽ*.", "Chỉ bạn biết bạn mệt cỡ nào."],
-        noi: ["[softly] Ai cũng nói bạn mạnh mẽ.", "[sighs] Chỉ bạn biết... bạn mệt cỡ nào."],
+        noi: ["[playfully] Ai cũng nói bạn mạnh mẽ!", "[chuckles] Mà chỉ bạn biết... bạn mệt cỡ nào."],
         phu_de: ["Ai cũng nói bạn *mạnh mẽ*.", "Chỉ bạn biết… bạn mệt cỡ nào."],
       },
       {
         id: "keo", loai: "keo_hai_huong", toi_thieu: 15,
         trai: "Bên trong", phai: "Bên ngoài",
         noi: [
-          "Có khi... không phải bạn yếu.",
-          "[curious] Mà là hai con số trong bạn đang kéo về hai hướng.",
+          "[warmly] Có khi... không phải bạn yếu đâu.",
+          "[excited] Mà là hai con số trong bạn đang kéo về hai hướng!",
         ],
         phu_de: ["Có khi… không phải bạn yếu.", "Mà là *hai con số* trong bạn đang kéo về hai hướng."],
       },
@@ -142,10 +142,10 @@ export const VIDEO = [
         ngoai: { ten: "Nhân cách", nguon: "phụ âm trong tên", vd: "3", nghia: "vui vẻ, nói chuyện giỏi" },
         ket: "Ngoài hoạt bát, trong cạn pin.",
         noi: [
-          "Thần số có số Linh hồn — điều bạn thật sự cần, tính từ nguyên âm trong tên.",
+          "[cheerfully] Thần số có số Linh hồn — điều bạn thật sự cần, tính từ nguyên âm trong tên.",
           "Và số Nhân cách — cái người khác nhìn thấy, tính từ phụ âm.",
-          "Ví dụ Linh hồn bảy cần khoảng lặng, mà Nhân cách ba lại vui vẻ, nói chuyện giỏi.",
-          "[sighs] Ngoài thì hoạt bát... trong thì cạn pin.",
+          "[playfully] Ví dụ Linh hồn bảy cần khoảng lặng, mà Nhân cách ba lại vui vẻ, nói chuyện giỏi.",
+          "[laughs] Ngoài thì hoạt bát... trong thì cạn pin!",
         ],
         phu_de: [
           "Số *Linh hồn* — điều bạn thật sự cần, tính từ *nguyên âm* trong tên.",
@@ -159,7 +159,7 @@ export const VIDEO = [
         anh: "v2-ban-do.jpg", anh_sau: "v2-ben-trong-mo.jpg", doi_luc: 0.42, truot: [0, 0.1],
         nhan_noi: [{ chu: "Bản đồ con số", y: 300, tre: 0.08 }, { chu: "Bên trong & bên ngoài", y: 300, tre: 0.5, phai: true }],
         noi: [
-          "Hiểu Bản Thân đặt hai số cạnh nhau, chỉ ra chỗ lệch...",
+          "[enthusiastic] Hiểu Bản Thân đặt hai số cạnh nhau, chỉ ra chỗ lệch...",
           "[warmly] và gợi ý cách sống cho cả hai — chứ không phải bỏ một bên.",
         ],
         phu_de: [
@@ -170,15 +170,15 @@ export const VIDEO = [
       {
         id: "lat", loai: "chu", toi_thieu: 12,
         dong: ["Bạn không giả tạo.", "Bạn chỉ chưa cho", "phần bên trong", "*một chỗ đứng*."],
-        noi: ["[softly] Bạn không giả tạo.", "Bạn chỉ chưa cho phần bên trong... một chỗ đứng."],
+        noi: ["[warmly] Bạn không giả tạo đâu.", "[cheerfully] Bạn chỉ chưa cho phần bên trong... một chỗ đứng thôi!"],
         phu_de: ["Bạn không giả tạo.", "Bạn chỉ chưa cho phần bên trong *một chỗ đứng*."],
       },
       {
         id: "cta", loai: "cta", toi_thieu: 13,
         chip: ["Nhập họ tên đầy đủ", "Linh hồn + Nhân cách", "Tổng quan miễn phí"],
         noi: [
-          "Nhập họ tên đầy đủ ở hiểu bản thân chấm com để xem số Linh hồn và Nhân cách của bạn.",
-          "[warmly] Phần tổng quan miễn phí.",
+          "[cheerfully] Nhập họ tên đầy đủ ở hiểu bản thân chấm com để xem số Linh hồn và Nhân cách của bạn.",
+          "[excited] Phần tổng quan miễn phí nha!",
         ],
         phu_de: ["Nhập *họ tên đầy đủ* ở hieuban.com để xem Linh hồn và Nhân cách của bạn.", "Phần tổng quan *miễn phí*."],
       },
@@ -196,7 +196,7 @@ export const VIDEO = [
         id: "hook", loai: "ban_ve", toi_thieu: 5,
         nam: "2027",
         dong: ["Sắp làm nhà?", "Xem tuổi *trước khi đặt cọc*."],
-        noi: ["[excited] Sắp làm nhà mà chưa biết tuổi mình phạm gì?", "Xem trước khi đặt cọc!"],
+        noi: ["[excited] Sắp làm nhà mà chưa biết tuổi mình phạm gì?", "[playfully] Xem ngay trước khi đặt cọc!"],
         phu_de: ["Sắp làm nhà mà chưa biết tuổi mình phạm gì?", "Xem *trước khi đặt cọc*!"],
       },
       {
@@ -207,7 +207,7 @@ export const VIDEO = [
           { ten: "Tam tai", phu: "theo con giáp" },
         ],
         noi: [
-          "Người lớn hay hỏi ba điều: Kim lâu, Hoang ốc, Tam tai.",
+          "[cheerfully] Người lớn hay hỏi ba điều: Kim lâu... Hoang ốc... Tam tai!",
           "[mischievously] Nghe thì sợ, nhưng thật ra... là phép tính đơn giản.",
         ],
         phu_de: ["Người lớn hay hỏi 3 điều: *Kim lâu*, *Hoang ốc*, *Tam tai*.", "Nghe thì sợ, nhưng thật ra là *phép tính đơn giản*."],
@@ -219,7 +219,7 @@ export const VIDEO = [
         vd: { nam: "Sinh 1988 · năm 2027", tuoi: "40", du: "4", ket: "Không phạm" },
         chu_y: "Tuổi mụ tính theo năm âm lịch Việt — sinh trước Tết là khác",
         noi: [
-          "Kim lâu: lấy tuổi mụ chia chín, dư một, ba, sáu, tám là phạm.",
+          "[enthusiastic] Kim lâu: lấy tuổi mụ chia chín — dư một, ba, sáu, tám là phạm.",
           "[curious] Tuổi mụ tính theo năm âm lịch Việt — sinh trước Tết là khác đấy nhé.",
         ],
         phu_de: [
@@ -233,8 +233,8 @@ export const VIDEO = [
         sang: 3,
         tam_tai: { giap: ["Hợi", "Mão", "Mùi"], nam: "Đinh Mùi 2027" },
         noi: [
-          "Hoang ốc: đếm trên đốt tay, sáu cung từ Nhất Cát đến Lục Hoang Ốc.",
-          "Tam tai thì theo con giáp — năm Đinh Mùi hai không hai bảy là năm Tam tai thứ ba của tuổi Hợi, Mão, Mùi.",
+          "[playfully] Hoang ốc: đếm trên đốt tay, sáu cung từ Nhất Cát đến Lục Hoang Ốc.",
+          "[cheerfully] Tam tai thì theo con giáp — năm Đinh Mùi hai không hai bảy là năm Tam tai thứ ba của tuổi Hợi, Mão, Mùi.",
         ],
         phu_de: [
           "*Hoang ốc*: đếm đốt tay, 6 cung từ Nhất Cát đến Lục Hoang Ốc.",
@@ -246,7 +246,7 @@ export const VIDEO = [
         anh: "v3-bang.jpg", anh_sau: "v3-tuoi-1988.jpg", doi_luc: 0.55, truot: [0, 0.05],
         nhan_noi: [{ chu: "Bảng 46 tuổi · 1960–2005", y: 300, tre: 0.1 }, { chu: "Bấm tuổi bạn", y: 300, tre: 0.55, phai: true }],
         noi: [
-          "Hiểu Bản Thân tính sẵn cả bảng bốn mươi sáu tuổi, từ một chín sáu mươi tới hai không không năm.",
+          "[enthusiastic] Hiểu Bản Thân tính sẵn cả bảng bốn mươi sáu tuổi, từ một chín sáu mươi tới hai không không năm!",
           "[excited] Bấm tuổi bạn là thấy ngay — kèm cách dân gian hay làm khi phạm, như mượn tuổi người thân.",
         ],
         phu_de: [
@@ -258,7 +258,7 @@ export const VIDEO = [
         id: "lat", loai: "chu", toi_thieu: 10,
         dong: ["Phạm ≠", "*không được làm*."], phu: "Biết trước để chọn năm, chọn người đứng tên.",
         noi: [
-          "Không phải năm nào phạm cũng là không được làm.",
+          "[playfully] Mà nè, không phải năm nào phạm cũng là không được làm đâu.",
           "[warmly] Biết trước để chọn năm, chọn người đứng tên — cho yên tâm.",
         ],
         phu_de: ["Không phải năm nào phạm cũng là *không được làm*.", "Biết trước để chọn năm, chọn người đứng tên cho *yên tâm*."],
@@ -267,7 +267,7 @@ export const VIDEO = [
         id: "cta", loai: "cta", toi_thieu: 13,
         chip: ["Chọn năm sinh", "Miễn phí", "Không cần đăng nhập"],
         noi: [
-          "Vào hiểu bản thân chấm com, gạch chéo, xem tuổi làm nhà, chọn năm sinh.",
+          "[cheerfully] Vào hiểu bản thân chấm com, gạch chéo, xem tuổi làm nhà, chọn năm sinh.",
           "[excited] Miễn phí, không cần đăng nhập!",
         ],
         phu_de: ["Vào *hieuban.com/xem-tuoi-lam-nha*, chọn năm sinh.", "*Miễn phí*, không cần đăng nhập!"],
@@ -292,7 +292,7 @@ export const VIDEO = [
         id: "khong-phai-so", loai: "vong_diem", che_do: "dung", toi_thieu: 13,
         diem: 70, muc: "Hợp nếu hiểu nhau",
         dong: ["Nhưng con số", "*không phải phần hay nhất*."],
-        noi: ["Điểm tham khảo trên một trăm.", "[mischievously] Nhưng con số... không phải phần hay nhất."],
+        noi: ["[cheerfully] Điểm tham khảo trên một trăm.", "[mischievously] Nhưng con số... không phải phần hay nhất."],
         phu_de: ["Điểm *tham khảo* trên 100.", "Nhưng con số *không phải phần hay nhất*."],
       },
       {
@@ -306,8 +306,8 @@ export const VIDEO = [
           { ten: "Lá số chạm nhau", sach: "tứ hoá vào cung", d: 17, tran: 30 },
         ],
         noi: [
-          "Hiểu Bản Thân chấm theo năm thứ có thật trong sách: mệnh nạp âm, can năm, chi năm, cung phi...",
-          "và tứ hoá năm người kia rơi vào cung nào của mình.",
+          "[enthusiastic] Hiểu Bản Thân chấm theo năm thứ có thật trong sách: mệnh nạp âm, can năm, chi năm, cung phi...",
+          "[playfully] và tứ hoá năm người kia rơi vào cung nào của mình.",
           "[warmly] Mỗi thanh có lời giải thích bằng tiếng người — chỗ dễ hợp, chỗ cần nói rõ với nhau.",
         ],
         phu_de: [
@@ -322,7 +322,7 @@ export const VIDEO = [
         chon: ["Người yêu", "Bạn bè", "Đồng nghiệp", "Sếp"],
         noi: [
           "[curious] Và nó hỏi: hai bạn là người yêu, bạn bè, đồng nghiệp hay sếp?",
-          "Cùng hai lá số, mỗi quan hệ đọc khác nhau.",
+          "[excited] Cùng hai lá số, mỗi quan hệ đọc khác nhau!",
         ],
         phu_de: ["Hai bạn là *người yêu*, *bạn bè*, *đồng nghiệp* hay *sếp*?", "Cùng hai lá số, mỗi quan hệ *đọc khác nhau*."],
       },
@@ -332,7 +332,7 @@ export const VIDEO = [
         nhan_noi: [{ chu: "Chỗ dễ hợp · chỗ cần nói rõ", y: 300, tre: 0.5 }],
         noi: [
           "[warmly] Điểm thấp không có nghĩa là chia tay.",
-          "Nó chỉ chỉ ra chỗ hai người cần hiểu nhau hơn.",
+          "[cheerfully] Nó chỉ chỉ ra chỗ hai người cần hiểu nhau hơn thôi.",
         ],
         phu_de: ["Điểm thấp *không có nghĩa* là chia tay.", "Nó chỉ ra chỗ hai người *cần hiểu nhau hơn*."],
       },
@@ -340,9 +340,9 @@ export const VIDEO = [
         id: "cta", loai: "cta", toi_thieu: 12,
         chip: ["Xem lá số 2 người", "Gửi link người ấy tự nhập", "Thẻ chia sẻ không có ngày sinh"],
         noi: [
-          "Vào hiểu bản thân chấm com, gạch chéo, tử vi — kéo xuống Xem lá số hai người.",
+          "[cheerfully] Vào hiểu bản thân chấm com, gạch chéo, tử vi — kéo xuống Xem lá số hai người.",
           "Có nút gửi link để người ấy tự nhập.",
-          "[mischievously] Tag người ấy vào đây!",
+          "[mischievously] Tag người ấy vào đây! [laughs]",
         ],
         phu_de: ["Vào *hieuban.com/tu-vi*, kéo xuống *Xem lá số 2 người*.", "Có nút gửi link để người ấy tự nhập.", "*Tag người ấy* vào đây!"],
       },
@@ -358,7 +358,7 @@ export const VIDEO = [
       {
         id: "hook", loai: "phong_ngu", toi_thieu: 5,
         dong: ["Ngủ bao nhiêu cũng mệt?", "*Nhìn lên trần nhà* bạn xem."],
-        noi: ["[curious] Ngủ bao nhiêu cũng mệt?", "[whispers] Nhìn lên trần nhà bạn xem..."],
+        noi: ["[curious] Ngủ bao nhiêu cũng mệt?", "[mischievously] Nhìn lên trần nhà bạn xem..."],
         phu_de: ["Ngủ bao nhiêu cũng mệt?", "*Nhìn lên trần nhà* bạn xem…"],
       },
       {
@@ -370,7 +370,7 @@ export const VIDEO = [
           { ma: "ban_cong", ten: "Cửa chính thông thẳng ban công" },
         ],
         noi: [
-          "Phong thuỷ có bốn thứ người xưa xem trước tiên — trước cả hướng nhà.",
+          "[enthusiastic] Phong thuỷ có bốn thứ người xưa xem trước tiên — trước cả hướng nhà!",
           "Đường đâm thẳng vào cửa. Xà ngang đè giường. Nhà vệ sinh giữa nhà. Cửa chính thông thẳng ra ban công.",
         ],
         phu_de: [
@@ -387,7 +387,7 @@ export const VIDEO = [
           ["", "Ngồi đâu cũng như đang ở lối đi"],
         ],
         noi: [
-          "Nói kiểu đời sống: xà ngang trên đầu khiến nhiều người thấy bị đè, khó thả lỏng.",
+          "[playfully] Nói kiểu đời sống nha: xà ngang trên đầu khiến nhiều người thấy bị đè, khó thả lỏng.",
           "Cửa thông thẳng ban công thì gió lùa, nhà không giữ được hơi ấm — ngồi đâu cũng như đang ở lối đi.",
         ],
         phu_de: [
@@ -400,7 +400,7 @@ export const VIDEO = [
         anh: "v5-dau-hieu-tich.jpg", anh_sau: "v5-ket-qua.jpg", doi_luc: 0.5, truot: [0, 0.06],
         nhan_noi: [{ chu: "Tích dấu hiệu nhà mình", y: 300, tre: 0.08 }, { chu: "Bạn xác nhận mới tính", y: 300, tre: 0.55, phai: true }],
         noi: [
-          "Ở Hiểu Bản Thân, bạn tích dấu hiệu nhà mình, vẽ mặt bằng, hoặc chụp ảnh để máy gợi ý...",
+          "[cheerfully] Ở Hiểu Bản Thân, bạn tích dấu hiệu nhà mình, vẽ mặt bằng, hoặc chụp ảnh để máy gợi ý...",
           "[warmly] bạn xác nhận thì mới tính. Ra từng phòng, cái gì cần xử lý trước.",
         ],
         phu_de: [
@@ -414,7 +414,7 @@ export const VIDEO = [
         khong: ["Không đập tường", "Không mua vật phẩm"],
         noi: [
           "[excited] Hay nhất: mỗi việc có cách không đồng trước.",
-          "Dời giường, kéo rèm, đặt kệ chắn. Không đập tường, không mua vật phẩm.",
+          "[playfully] Dời giường, kéo rèm, đặt kệ chắn. [laughs] Không đập tường, không mua vật phẩm!",
         ],
         phu_de: ["Hay nhất: mỗi việc có *cách 0 đồng* trước.", "Dời giường · kéo rèm · đặt kệ chắn. *Không đập tường, không mua vật phẩm.*"],
       },
@@ -422,8 +422,8 @@ export const VIDEO = [
         id: "cta", loai: "cta", toi_thieu: 15,
         chip: ["Khảo sát nhà 2 phút", "Nhà phố", "Chung cư"],
         noi: [
-          "Vào hiểu bản thân chấm com, gạch chéo, phong thuỷ, làm Khảo sát nhà hai phút.",
-          "[warmly] Nhà phố hay chung cư đều được.",
+          "[cheerfully] Vào hiểu bản thân chấm com, gạch chéo, phong thuỷ, làm Khảo sát nhà hai phút.",
+          "[excited] Nhà phố hay chung cư đều được nha!",
         ],
         phu_de: ["Vào *hieuban.com/phong-thuy*, làm *Khảo sát nhà* 2 phút.", "Nhà phố hay chung cư *đều được*."],
       },

@@ -12,7 +12,8 @@ Thư mục này tách riêng: không đụng web / engine / cms, dependency riê
 | `kich-ban.mjs` | Lời đọc (`noi`, có tag `[excited]`, `[curious]`, `[whispers]`…, số đọc bằng chữ), phụ đề (`phu_de`, `*chữ*` = tô vàng), kiểu hình từng cảnh |
 | `dung.mjs` | Sinh dự án HyperFrames vào `ban-dung/<ma>/` (nền sao, phụ đề karaoke, 19 kiểu cảnh, hiệu ứng tiếng) |
 | `tao-giong.mjs` | Gọi ElevenLabs `/with-timestamps` mỗi cảnh một lượt → `giong/<ma>/<canh>.mp3` + mốc từng câu |
-| `render.mjs` | Xuất `xuat/<ma>.mp4` |
+| `tao-nhac.mjs` | Nhạc nền không lời ElevenLabs Music, dài đúng thời lượng bản dựng → `nhac/<ma>.mp3` (mỗi video một màu nhạc sôi động) |
+| `render.mjs` | Xuất `xuat/<ma>.mp4`; có nhạc thì trộn nhạc nền dưới giọng (tự hạ khi có lời), chuẩn −14 LUFS |
 | `anh/` | Ảnh chụp màn hình web THẬT (engine + web chạy cục bộ, hồ sơ mẫu "Nguyễn Minh Anh", 24/10/1988) |
 | `phong/` | Be Vietnam Pro + Newsreader (OFL) |
 | `am-thanh/` | Hiệu ứng tiếng (Pixabay Content License, kèm skill media-use của HyperFrames) |
@@ -29,6 +30,9 @@ Lồng giọng (khoá chỉ đặt trong env, không dán vào mã):
 ELEVENLABS_API_KEY=... ELEVENLABS_VOICE_ID=... node tao-giong.mjs
 ```
 
+Bản xuất 2026-10-28 dùng giọng **Hanh** (nữ, giọng Bắc, trong trẻo — `pGapy9MNHCukzJtjavF0`), `eleven_v3`, độ ổn định 0,5,
+tốc độ 1,05; tag cảm xúc vui tươi (`[cheerfully]`, `[playfully]`, `[excited]`, `[laughs]`…) đặt trong `kich-ban.mjs`.
+
 Dựng + xem trước + xuất:
 
 ```bash
@@ -36,8 +40,14 @@ node dung.mjs && cd ban-dung/v01 && npx --prefix ../.. hyperframes preview
 ```
 
 ```bash
+ELEVENLABS_API_KEY=... node tao-nhac.mjs
+```
+
+```bash
 node render.mjs
 ```
+
+Nhạc to / nhỏ quá: `NHAC_DB=-8 node render.mjs --chi-tron` (chỉ trộn lại, không dựng lại hình).
 
 Chưa có giọng: `dung.mjs` ước thời lượng theo số âm tiết (4,2 âm tiết/giây) để duyệt nội dung + hình; có giọng thì cảnh
 dài đúng theo giọng, phụ đề khớp từng câu. Sửa lời trong `kich-ban.mjs` → chạy lại `tao-giong.mjs` (chỉ gọi lại cảnh đổi lời).
