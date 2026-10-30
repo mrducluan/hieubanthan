@@ -11,13 +11,14 @@ import type { NoiDungCongCu } from "@/components/seo/GioiThieuCongCu";
 import { ND_XEM_NGAY } from "@/app/xem-ngay-tot/noi-dung";
 import { ND_HAN_NAM, ND_LAM_NHA, ND_SAO_HAN, ND_XONG_DAT } from "@/app/xem-tuoi-lam-nha/noi-dung";
 import { ND_DOI_LICH } from "@/app/doi-lich-am-duong/noi-dung";
+import { ND_THOI_GIAN_TOI } from "@/app/thoi-gian-toi/noi-dung";
 import type { BangChu, BangHinh } from "@/lib/chu-trang";
 import { CHU_TRANG_CHU, HINH_TRANG_CHU } from "@/lib/chu/trang-chu";
 import { CHU_HUYEN_HOC, CHU_KIEN_THUC, HINH_HUYEN_HOC } from "@/lib/chu/trang-tinh";
-import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM } from "@/lib/chu/trang-con";
+import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM, CHU_NAM, CHU_NAM_SINH_CON, CHU_NAM_CUOI_HOI } from "@/lib/chu/trang-con";
 import {
   CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_SAO_HAN, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
-  CHU_XEM_NGAY, CHU_XONG_DAT,
+  CHU_XEM_NGAY, CHU_XONG_DAT, CHU_THOI_GIAN_TOI,
 } from "@/lib/chu/cong-cu";
 
 export type NhomTrang = "cong_cu" | "tinh" | "phap_ly" | "chu_de" | "kien_thuc" | "tuoi" | "la_so_mau" | "blog_khung" | "cong_cu_con";
@@ -180,6 +181,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   tuNd(ND_HAN_NAM, "Hướng xấu theo năm: Thái Tuế, Tam Sát, Ngũ Hoàng", CHU_HAN_NAM),
   tuNd(ND_SAO_HAN, "Xem sao hạn năm nay theo tuổi: La Hầu, Kế Đô, Thái Bạch…", CHU_SAO_HAN),   // MT-ĐS B3
   tuNd(ND_DOI_LICH, "Đổi lịch âm dương: ngày âm hôm nay, can chi, tháng nhuận", CHU_DOI_LICH),   // SEO-L5
+  tuNd(ND_THOI_GIAN_TOI, "3 tháng tới, 12 tháng tới và năm tới của bạn", CHU_THOI_GIAN_TOI),   // NAM-2
   { duong: "/ban-than", nhom: "cong_cu", ten: "Hồ sơ bản thân", o: ["seo", "khoi_duoi", "khoi_cuoi"], mac_dinh: {
     tieu_de_seo: "Hồ sơ bản thân",
     mo_ta_seo: "Trang của bạn: bốn con số chủ đạo, nhịp ngày – tháng – năm cá nhân, bản đồ con số và lối tắt sang hợp đôi, huyền học.",
@@ -217,6 +219,17 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     h1: "Huyền học — năm cách nhìn lại mình",
     // AIO: câu đầu định nghĩa thẳng "huyền học là gì" (≤ 45 chữ) để máy tìm kiếm / AI trích nguyên câu.
     loi_dan: "Huyền học là những hệ thống người xưa dùng để đọc nhịp của con người và thời gian — qua con số, ngày giờ sinh, quẻ dịch và nơi ở. Thần số học là cửa vào nhanh nhất; Tử vi, Bát tự, Kinh Dịch, Phong thuỷ đi sâu hơn. Cả năm dùng chung một hồ sơ, tính từng bước, có nguồn sách.",
+  } },
+  // NAM-1 (2026-10-30): mục lục năm + mục lục lịch âm (trước 404).
+  { duong: "/nam", nhom: "tinh", ten: "Xem theo năm", o: O_TINH, mac_dinh: {
+    tieu_de_seo: "Xem theo năm: năm con gì, Tết, Tam tai, tuổi làm nhà, xông đất", h1: "Xem theo năm",
+    mo_ta_seo: "Tra từng năm âm lịch: can chi, mệnh nạp âm, ngày Tết, tuổi Tam tai, năm tuổi, sao hạn, tuổi làm nhà, cưới hỏi, xông đất, sinh con — và xem 3 tháng, 12 tháng tới của riêng bạn.",
+    loi_dan: "Mỗi năm âm lịch một trang: năm con gì, Tết ngày nào, tuổi nào Tam tai, xung năm — kèm mọi bảng tra theo tuổi của năm đó.",
+  } },
+  { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
+    tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm",
+    mo_ta_seo: "Lịch âm Việt Nam từng năm: ngày Tết, năm có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu. Kèm công cụ đổi ngày âm dương.",
+    loi_dan: "Tính theo giờ Hà Nội (thuật toán Hồ Ngọc Đức). Chọn một năm để xem Tết, tháng nhuận, mùng 1 và rằm từng tháng.",
   } },
   { duong: "/kien-thuc", nhom: "tinh", ten: "Thư viện kiến thức", o: O_TINH, mac_dinh: { chu: CHU_KIEN_THUC,
     tieu_de_seo: "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi, Bát tự",
@@ -334,6 +347,12 @@ const MAU_CUM_GOC: readonly MauCumTrang[] = [
     bien: ["nam", "can_chi"], chu: CHU_XONG_DAT_NAM },
   { mau_duong: "/xem-sao-han/{nam}", nhom: "cong_cu_con", ten: "Sao hạn · bảng theo năm", o: O_CUM, nguon_kb: null,
     bien: ["nam", "can_chi"], chu: CHU_SAO_HAN_NAM },                                                   // MT-ĐS B3
+  { mau_duong: "/nam/{nam}", nhom: "cong_cu_con", ten: "Năm · trang trụ theo năm", o: O_CUM, nguon_kb: null,
+    bien: ["nam", "can_chi"], chu: CHU_NAM },                                                            // NAM-1
+  { mau_duong: "/nam/{nam}/sinh-con", nhom: "cong_cu_con", ten: "Năm · sinh con hợp tuổi bố mẹ", o: O_CUM, nguon_kb: null,
+    bien: ["nam", "can_chi"], chu: CHU_NAM_SINH_CON },                                                   // NAM-1
+  { mau_duong: "/nam/{nam}/cuoi-hoi", nhom: "cong_cu_con", ten: "Năm · cưới hỏi (Kim lâu cô dâu)", o: O_CUM, nguon_kb: null,
+    bien: ["nam", "can_chi"], chu: CHU_NAM_CUOI_HOI },                                                   // NAM-1
   { mau_duong: "/lich-am/{nam}", nhom: "cong_cu_con", ten: "Lịch âm · từng năm", o: O_CUM, nguon_kb: null,
     bien: ["nam", "can_chi"], chu: CHU_LICH_AM_NAM },
   { mau_duong: "/phong-thuy/huong-xau-nam/{nam}", nhom: "cong_cu_con", ten: "Hướng xấu theo năm · từng năm", o: O_CUM, nguon_kb: null,

@@ -18,7 +18,7 @@ test("trang sinh năm 1990 mệnh gì: nội dung máy chủ đầy đủ", asyn
 
 test("chủ đề 76 trang, sitemap, 404 ngoài khoảng năm", async ({ request }) => {
   const cd = await (await request.get("/bat-tu/menh-theo-nam")).text();
-  expect((cd.match(/href="\/bat-tu\/menh-theo-nam\/sinh-nam-\d{4}-menh-gi"/g) ?? []).length).toBe(76);
+  expect((cd.match(/href="\/bat-tu\/menh-theo-nam\/sinh-nam-\d{4}-menh-gi"/g) ?? []).length).toBe(78);   // NAM-1: thêm 2026, 2027
   expect(await (await request.get("/sitemap.xml")).text()).toContain("/bat-tu/menh-theo-nam/sinh-nam-2000-menh-gi</loc>");
   expect((await request.get("/bat-tu/menh-theo-nam/sinh-nam-1900-menh-gi")).status()).toBe(404);
 });

@@ -22,6 +22,19 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/xem-sao-han", ten: "Sao hạn theo tuổi", mo_ta: "La Hầu, Kế Đô, Thái Bạch… đọc bằng lời thường" },
     { href: "/kien-thuc", ten: "Thư viện kiến thức", mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
   ] },
+  // NAM-1/NAM-2 (2026-10-30): menu lớn theo năm — {nam} thay bằng năm engine chọn (năm tới khi Tết sau còn ≤ 120 ngày,
+  // không thì năm âm đang đi) lúc dựng trang → không phải sửa tay mỗi năm (`thayNamMenu`).
+  { href: "/nam/{nam}", ten: "Năm {nam}", bieu_tuong: "lich", di_dong: true, con: [
+    { href: "/thoi-gian-toi", ten: "3 tháng, 12 tháng tới của bạn", mo_ta: "Theo thần số, Tử vi, Bát tự của chính bạn" },
+    { href: "/nam/{nam}", ten: "Năm {nam} con gì, mệnh gì", mo_ta: "Tết, Tam tai, năm tuổi, 12 con giáp" },
+    { href: "/xem-sao-han/{nam}", ten: "Sao hạn năm {nam}", mo_ta: "Sao chiếu theo tuổi, nam và nữ" },
+    { href: "/xem-tuoi-lam-nha/{nam}", ten: "Tuổi làm nhà năm {nam}", mo_ta: "Kim lâu, Hoang ốc, Tam tai từng tuổi" },
+    { href: "/nam/{nam}/cuoi-hoi", ten: "Cưới năm {nam} tuổi nào", mo_ta: "Kim lâu theo tuổi cô dâu" },
+    { href: "/nam/{nam}/sinh-con", ten: "Sinh con năm {nam}", mo_ta: "Tuổi bố mẹ hợp, xung với tuổi con" },
+    { href: "/tuoi-xong-dat/{nam}", ten: "Xông đất Tết {nam}", mo_ta: "Tuổi hợp gia chủ, giờ đẹp mùng 1" },
+    { href: "/phong-thuy/huong-xau-nam/{nam}", ten: "Hướng xấu năm {nam}", mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
+    { href: "/lich-am/{nam}", ten: "Lịch âm {nam}", mo_ta: "Tết, tháng nhuận, mùng 1 và rằm" },
+  ] },
   { href: "/blog", ten: "Blog", bieu_tuong: "bao", di_dong: false, con: [] },
   { href: "/tai-khoan", ten: "Tài khoản", bieu_tuong: "nguoi", di_dong: true, con: [
     { href: "/nap-sao", ten: "Nạp Sao", mo_ta: "Ví Sao, gói nạp" },
@@ -46,3 +59,21 @@ export function mucDangO(path: string, ds: Pick<MucMenu, "href" | "con">[]): num
   });
   return tot;
 }
+
+/** NAM-1: thay "{nam}" trong chữ / đường dẫn menu (bản code và bản CMS) bằng năm đang mời xem. */
+export function thayNamMenu(ds: MucMenu[], nam: number): MucMenu[] {
+  const t = (x: string) => x.replaceAll("{nam}", String(nam));
+  return ds.map((m) => ({ ...m, href: t(m.href), ten: t(m.ten),
+    con: m.con.map((c) => ({ ...c, href: t(c.href), ten: t(c.ten), ...(c.mo_ta ? { mo_ta: t(c.mo_ta) } : {}) })) }));
+}
+
+/** Bản dự phòng khi chưa biết năm (khung chờ Suspense): "/{nam}" ở CUỐI đường dẫn bỏ đi (về trang gốc không theo năm:
+ *  /nam, /xem-sao-han…); "{nam}" giữa đường dẫn (/nam/{nam}/cuoi-hoi) không có trang gốc → bỏ menu con đó. Không lộ "{nam}". */
+export function boNamMenu(ds: MucMenu[]): MucMenu[] {
+  const h = (x: string) => x.replace(/\/\{nam\}$/, "") || "/";
+  const t = (x: string) => x.replaceAll(" {nam}", "").replaceAll("{nam}", "");
+  return ds.map((m) => ({ ...m, href: h(m.href), ten: t(m.ten),
+    con: m.con.filter((c) => !h(c.href).includes("{nam}"))
+      .map((c) => ({ ...c, href: h(c.href), ten: t(c.ten), ...(c.mo_ta ? { mo_ta: t(c.mo_ta) } : {}) })) }));
+}
+export const MENU_DAU_DU_PHONG = boNamMenu(MENU_DAU_TRANG);

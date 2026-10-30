@@ -43,6 +43,7 @@ từng việc ở mục ghi trong ngoặc.
 11. Số liệu cho quản trị: Search Console + GA4 (Q7) · khoá OpenRouter cho bộ 55 câu (D1).
 12. Vercel → Spend Management đặt trần chi tiêu (SEC-2 bước 9).
 13. **Khoá Google Maps** cho "Chọn trên ảnh vệ tinh" ở Đo hướng nhà (mục 4r, 10 phút) — chưa đặt thì nút tự ẩn.
+13b. **Menu "Năm 2027" + lập chỉ mục trang năm** trước ~10/11/2026 (mục 4s, 10 phút).
 
 **P2 — nội dung và chuyên môn (anh là chủ biên):**
 13. CMS: đọc + xuất bản 3 bài khởi tạo (4n) · nhập + chuẩn hoá bài NotFair rồi xuất bản (4e, BLOG7).
@@ -136,6 +137,15 @@ WP9, WP10) · lật lá bài đầu ngày trên iPhone (Hôm nay) · luồng mua
      báo em dịch vụ + đặt khoá vào env thì em làm; hiện mọi trang đã có ảnh tóm tắt vẽ bằng code (có QR).
    - **Quyết định còn chờ** (audit SEO-M): mở bot `Google-Extended` (Gemini app trích được site, đổi lại cho phép dùng
      huấn luyện — lệch BM-2) hay giữ chặn.
+4s. [ ] **Menu "Năm 2027" + trang năm + "Thời gian tới" (NAM-1/NAM-2, 2026-10-30, 10 phút, sau khi merge — deploy ENGINE trước web):**
+   (1) Nếu anh đã từng lưu **CMS → Giao diện website → Menu đầu trang**: bản CMS thắng menu mặc định trong code, nên phải tự
+   thêm mục cha **"Năm {nam}"** → đường dẫn `/nam/{nam}`, biểu tượng Lịch, hiện ở tab dưới điện thoại, và các menu con
+   (danh sách đúng như `MENU_DAU_MAC_DINH` trong `cms/src/globals/MenuDauTrang.ts`). Gõ nguyên chữ `{nam}` — web tự thay
+   bằng 2027 (từ khoảng tháng 10/2027 tự thành 2028). Chưa từng lưu menu thì không cần làm gì.
+   (2) Search Console → **Kiểm tra URL** → yêu cầu lập chỉ mục `https://hieuban.com/nam/2027`, `/nam/2027/sinh-con`,
+   `/nam/2027/cuoi-hoi`, `/thoi-gian-toi`; gửi lại `sitemap.xml`. Nên làm trước ~10/11 (người Việt bắt đầu tìm Tết ~3 tháng trước).
+   (3) Mở `/thoi-gian-toi` trên điện thoại với hồ sơ có giờ sinh: đọc 4 chương. Khi bật thu Sao (`luan_giai.thu_sao`), chương
+   1 (3 tháng + tóm tắt năm) vẫn miễn phí, 3 chương sau mở bằng 29 Sao — báo cáo này dùng **công tắc chung**, không có công tắc riêng.
 4r. [ ] **Sau khi merge HH-1 "Huyền học" (5 phút, 2026-10-27):** CMS deploy tự chạy migration đổi `/kham-pha` → `/huyen-hoc`
    (Trang website, menu, chân trang). Rồi: (1) mở https://hieuban.com/kham-pha → phải tự chuyển sang `/huyen-hoc`;
    (2) CMS → **Trang website** → `/huyen-hoc`: nếu trước đây anh có ghi đè tiêu đề SEO / H1 kiểu "Khám phá…" thì xoá ô đó

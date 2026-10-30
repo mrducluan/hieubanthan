@@ -105,3 +105,33 @@ export const CHU_LICH_AM_NAM = {
   "cuoi.chu": { nhom: C, nhan: "Chữ trước link công cụ", mac_dinh: "Đổi một ngày cụ thể giữa âm lịch và dương lịch:", toi_da: 160 },
   "cuoi.link": { nhom: C, nhan: "Chữ link công cụ", mac_dinh: "công cụ đổi lịch âm dương", toi_da: 60 },
 } as const satisfies BangChu;
+
+// NAM-1 (2026-10-30) — trang trụ "Năm {năm}" + hai trang con. Biến: {nam}, {can_chi}.
+export const CHU_NAM = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi})", mac_dinh: "Năm {can_chi} · lịch, tuổi, tập quán", toi_da: 80 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam}, {can_chi})", mac_dinh: "Năm {nam} {can_chi}: năm con gì, mệnh gì, tuổi nào cần lưu ý", toi_da: 120 },
+  "ca_nhan.tieu_de": { nhom: "Của riêng bạn", nhan: "Tiêu đề khối mời xem riêng", mac_dinh: "Năm {nam} của riêng bạn", toi_da: 80 },
+  "ca_nhan.mo_ta": { nhom: "Của riêng bạn", nhan: "Lời mời", toi_da: 240,
+    mac_dinh: "Nhập ngày sinh để xem 3 tháng tới, 12 tháng tới và năm {nam} theo thần số, Tử vi, Bát tự của chính bạn — không phải lời chung theo con giáp." },
+  "ca_nhan.nut": { nhom: "Của riêng bạn", nhan: "Chữ nút", mac_dinh: "Xem năm {nam} của tôi", toi_da: 40 },
+  "con_giap.tieu_de": { nhom: "Bảng", nhan: "Tiêu đề bảng 12 con giáp", mac_dinh: "12 con giáp trong năm {can_chi}", toi_da: 100 },
+  "con_giap.mo_ta": { nhom: "Bảng", nhan: "Giải thích dưới tiêu đề bảng", toi_da: 300,
+    mac_dinh: "Quan hệ địa chi của từng con giáp với năm và năm Tam tai — tập quán dân gian để tham khảo, giống nhau cho mọi người cùng con giáp, không định sẵn chuyện tốt xấu." },
+  "tra.tieu_de": { nhom: "Tra theo tuổi", nhan: "Tiêu đề khối tra cứu", mac_dinh: "Tra năm {nam} theo tuổi", toi_da: 80 },
+  "moc.tieu_de": { nhom: "Mốc", nhan: "Tiêu đề mốc lễ", mac_dinh: "Các mốc trong năm âm lịch {nam}", toi_da: 80 },
+} as const satisfies BangChu;
+
+export const CHU_NAM_SINH_CON = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi})", mac_dinh: "Năm {can_chi} · tập quán theo tuổi", toi_da: 60 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Sinh con năm {nam} hợp tuổi bố mẹ nào?", toi_da: 120 },
+  "bang.tieu_de": { nhom: "Bảng", nhan: "Tiêu đề bảng", mac_dinh: "Tuổi bố mẹ với con sinh năm {nam}", toi_da: 100 },
+  "bang.mo_ta": { nhom: "Bảng", nhan: "Giải thích dưới tiêu đề bảng", toi_da: 300,
+    mac_dinh: "Nhóm theo quan hệ địa chi giữa tuổi bố/mẹ và tuổi con; cột mệnh ghi quan hệ nạp âm để đọc thêm. Không cộng điểm, không xếp hạng." },
+} as const satisfies BangChu;
+
+export const CHU_NAM_CUOI_HOI = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi})", mac_dinh: "Năm {can_chi} · Kim lâu theo tuổi cô dâu", toi_da: 60 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Cưới năm {nam}: tuổi nào không phạm Kim lâu?", toi_da: 120 },
+  "bang.tieu_de": { nhom: "Bảng", nhan: "Tiêu đề bảng", mac_dinh: "Tuổi cô dâu cưới năm {nam}", toi_da: 100 },
+  "ngay.tieu_de": { nhom: "Ngày cưới", nhan: "Tiêu đề khối ngày tốt", mac_dinh: "Chọn ngày cưới trong năm {nam}", toi_da: 80 },
+} as const satisfies BangChu;

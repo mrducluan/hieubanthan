@@ -99,3 +99,22 @@ def api_sao_han(inp: SaoHanInput) -> dict:
 @router.get("/v1/tuoi/sao-han/{nam}")
 def api_sao_han_nam(nam: NamBang) -> dict:
     return L.sao_han_nam(nam)
+
+
+# ---- NAM-1 (2026-10-30): trang trụ "Năm {năm}" + sinh con / cưới năm đó (không dữ liệu cá nhân → web cache được) ----
+from app.luangiai import nam_tong_quan as NTQ  # noqa: E402
+
+
+@router.get("/v1/nam/{nam}")
+def api_nam(nam: NamBang) -> dict:
+    return NTQ.tong_quan(nam)
+
+
+@router.get("/v1/nam/{nam}/sinh-con")
+def api_nam_sinh_con(nam: NamBang) -> dict:
+    return NTQ.sinh_con(nam)
+
+
+@router.get("/v1/nam/{nam}/cuoi-hoi")
+def api_nam_cuoi_hoi(nam: NamBang) -> dict:
+    return NTQ.cuoi_hoi(nam)

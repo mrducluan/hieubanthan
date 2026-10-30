@@ -39,6 +39,10 @@ const LICH: [string, string][] = [
   ["Tuổi nào hợp hướng nào", "Nam, nữ sinh 1960–2005"],
   ["Lịch âm {nam}", "Tết, tháng nhuận, mùng 1 và rằm"],
   ["Đổi lịch âm dương", "Theo âm lịch Việt Nam"],
+  // NAM-1/NAM-2 (2026-10-30) — thêm cuối (khoá theo vị trí: không xáo khoá CMS đã sửa); 12 ô = 3 hàng đủ ở lưới 4 cột.
+  ["Thời gian tới của bạn", "3 tháng, 12 tháng, năm tới theo ngày sinh"],
+  ["Xem theo năm", "Năm con gì, Tết, Tam tai, tuổi xung"],
+  ["Cưới năm {nam} tuổi nào", "Kim lâu theo tuổi cô dâu"],
 ];
 // Khoá theo mã mảng (the.<khoa>_…) — trang đọc theo mã, không theo vị trí.
 const SO_SANH: [string, string, string, string, string][] = [
@@ -91,7 +95,7 @@ export const CHU_HUYEN_HOC = {
   "lich.nho": { nhom: "Lịch & tuổi", nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Theo lịch và tuổi dân gian", toi_da: 60 },
   "lich.lon": { nhom: "Lịch & tuổi", nhan: "Tiêu đề mục", mac_dinh: "Chọn ngày, xem tuổi, tra lịch", toi_da: 80 },
   ...Object.fromEntries(LICH.flatMap(([ten, mo], i) => [
-    [`lich.ten_${i + 1}`, { nhom: "Lịch & tuổi", nhan: `Ô ${i + 1} — tên` + (i === 7 ? " ({nam} = năm hiện tại)" : ""), mac_dinh: ten, toi_da: 40 }],
+    [`lich.ten_${i + 1}`, { nhom: "Lịch & tuổi", nhan: `Ô ${i + 1} — tên` + (i === 7 || i === 11 ? " ({nam} = năm hiện tại)" : ""), mac_dinh: ten, toi_da: 40 }],
     [`lich.mo_${i + 1}`, { nhom: "Lịch & tuổi", nhan: `Ô ${i + 1} — mô tả`, mac_dinh: mo, toi_da: 60 }],
   ])),
 

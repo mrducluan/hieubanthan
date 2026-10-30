@@ -7,6 +7,7 @@ import { daHetHan, dsTrangDichCms } from "@/lib/cms";
 import { duongTrangSo, soTrang } from "@/lib/phan-trang";
 import { THANG_SAU, THANG_TRUOC, VIEC_SEO, duongThang, duongViecThang, homNayVN } from "@/lib/hoang-lich";
 import { duongLichAm } from "@/lib/lich-am";
+import { duongCuoiHoi, duongNam, duongSinhCon } from "@/lib/nam";
 import { NAM_SINH_SEO, duongHanNam, duongLamNha, duongLamNhaNam, duongSaoHanNam, duongXongDat, duongXongDatNam, namAmHienTai } from "@/lib/tuoi-dan-gian";
 
 export const revalidate = 21600;
@@ -14,7 +15,7 @@ export const revalidate = 21600;
 const TINH: [string, number][] = [
   ["/", 1], ["/kien-thuc", 0.9], ["/tu-dien", 0.8], ["/tu-vi/la-so-mau", 0.8], ["/blog", 0.6], ["/huyen-hoc", 0.8], ["/than-so", 0.8], ["/hom-nay", 0.7], ["/xem-ngay-tot", 0.9], ["/xem-tuoi-lam-nha", 0.8], ["/tuoi-xong-dat", 0.8], ["/xem-sao-han", 0.7], ["/phong-thuy/huong-xau-nam", 0.8], ["/hop-doi", 0.8],
   ["/tu-vi", 0.7], ["/bat-tu", 0.7], ["/kinh-dich", 0.7], ["/phong-thuy", 0.7],
-  ["/doi-lich-am-duong", 0.7], ["/gioi-thieu", 0.5], ["/tac-gia", 0.4], ["/tac-gia/duc-luan", 0.6], ["/lien-he", 0.4], ["/chinh-sach-rieng-tu", 0.3], ["/dieu-khoan", 0.3], ["/mien-tru-trach-nhiem", 0.3],
+  ["/doi-lich-am-duong", 0.7], ["/nam", 0.8], ["/lich-am", 0.6], ["/thoi-gian-toi", 0.8], ["/gioi-thieu", 0.5], ["/tac-gia", 0.4], ["/tac-gia/duc-luan", 0.6], ["/lien-he", 0.4], ["/chinh-sach-rieng-tu", 0.3], ["/dieu-khoan", 0.3], ["/mien-tru-trach-nhiem", 0.3],
 ];
 
 function thangSitemap(): string[] {
@@ -47,6 +48,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const [, m, y] = d.match(/thang-(\d+)-(\d{4})$/)!;
       return VIEC_SEO.map((v) => ({ url: urlDayDu(duongViecThang(v.slug, Number(y), Number(m))), changeFrequency: "weekly" as const, priority: 0.6 }));
     }),
+    // NAM-1: trang trụ năm + sinh con + cưới hỏi (năm âm hiện tại + năm sau).
+    ...[namAm, namAm + 1].flatMap((n) => [duongNam(n), duongSinhCon(n), duongCuoiHoi(n)]).map((d) => ({ url: urlDayDu(d), changeFrequency: "monthly" as const, priority: 0.8 })),
     // SEO-L5: lịch âm năm nay −2 … +3.
     ...Array.from({ length: 6 }, (_, i) => namAm - 2 + i).map((n) => ({ url: urlDayDu(duongLichAm(n)), changeFrequency: "yearly" as const, priority: 0.6 })),
     ...tuoi.map((t) => ({ url: urlDayDu(duongTuoi(t.slug)), changeFrequency: "yearly" as const, priority: 0.6 })),

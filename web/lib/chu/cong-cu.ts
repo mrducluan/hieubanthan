@@ -84,3 +84,7 @@ export const CHU_DOI_LICH = gopBang(KHUNG, {
 export const CHU_HAN_NAM = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Phong thuỷ theo năm", toi_da: 60 },
 });
+// NAM-2 — "Thời gian tới của bạn".
+export const CHU_THOI_GIAN_TOI = gopBang(KHUNG, {
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Thần số · Tử vi · Bát tự · tập quán", toi_da: 60 },
+});

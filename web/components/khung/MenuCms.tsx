@@ -3,15 +3,20 @@
 // để thanh trên + tab dưới dùng chung một lượt đọc trong cùng một yêu cầu.
 import { cache } from "react";
 import { menuDauTrangCms as docMenu } from "@/lib/cms";
-import { MENU_DAU_TRANG } from "@/lib/menu-dau-trang";
+import { MENU_DAU_TRANG, thayNamMenu } from "@/lib/menu-dau-trang";
+import { namThoiGianToi } from "@/lib/nam";
 import { TabDuoi, ThanhTren } from "./DieuHuong";
 
-const menuDauTrangCms = cache(docMenu);
+// NAM-1: "{nam}" trong menu (code hoặc CMS) → năm engine đang mời xem; engine lỗi → năm âm hiện tại + 1.
+const menuDauTrangCms = cache(async () => {
+  const [m, n] = await Promise.all([docMenu(), namThoiGianToi()]);
+  return thayNamMenu(m ?? MENU_DAU_TRANG, n.mac_dinh ?? n.cac_nam[1]!);
+});
 
 export async function ThanhTrenCms() {
-  return <ThanhTren muc={(await menuDauTrangCms()) ?? MENU_DAU_TRANG} />;
+  return <ThanhTren muc={await menuDauTrangCms()} />;
 }
 
 export async function TabDuoiCms() {
-  return <TabDuoi muc={(await menuDauTrangCms()) ?? MENU_DAU_TRANG} />;
+  return <TabDuoi muc={await menuDauTrangCms()} />;
 }

@@ -181,7 +181,7 @@ export function anhBai(o: { tieuDe: string; mang?: MangAnh | null; nhan?: string
 export function mangTheoDuong(duong: string): MangAnh | null {
   const d = duong.split("/")[1] ?? "";
   if (d === "hop-doi" || d === "than-so" || d === "hom-nay") return "than-so";
-  if (d === "xem-ngay-tot" || d === "xem-tuoi-lam-nha" || d === "tuoi-xong-dat" || d === "xem-sao-han" || d === "lich-am" || d === "doi-lich-am-duong") return "lich";
+  if (d === "xem-ngay-tot" || d === "xem-tuoi-lam-nha" || d === "tuoi-xong-dat" || d === "xem-sao-han" || d === "lich-am" || d === "doi-lich-am-duong" || d === "nam" || d === "thoi-gian-toi") return "lich";
   return (["tu-vi", "bat-tu", "kinh-dich", "phong-thuy"] as const).find((m) => m === d) ?? null;
 }
 

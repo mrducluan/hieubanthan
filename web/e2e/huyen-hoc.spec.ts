@@ -81,6 +81,6 @@ test("AIO: /huyen-hoc.md cùng nội dung trang (canonical về HTML), /kham-pha
   const trang = ld.find((n: { "@type": string }) => n["@type"] === "CollectionPage");
   expect(trang.publisher["@id"]).toMatch(/#to-chuc$/);
   expect(trang.encoding.contentUrl).toMatch(/\/huyen-hoc\.md$/);
-  expect(trang.mainEntity.itemListElement.length).toBe(14);   // + Xem sao hạn (MT-ĐS)
+  expect(trang.mainEntity.itemListElement.length).toBe(17);   // + Xem sao hạn (MT-ĐS) + Thời gian tới, Xem theo năm, Cưới năm (NAM-1/2)
   expect(ld.find((n: { "@type": string }) => n["@type"] === "FAQPage").mainEntity.length).toBe(6);
 });

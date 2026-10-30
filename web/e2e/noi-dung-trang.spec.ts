@@ -73,8 +73,8 @@ test("sổ trang: không sót URL tĩnh của sitemap + mọi chủ đề; khôn
   const so = new Set(SO_TRANG.map((t) => t.duong));
   for (const d of [...tinh, "/phong-thuy/huong-hop-tuoi", ...Object.values(CHU_DE).map((c) => c.duong)]) expect(so.has(d), d).toBe(true);
   expect(so.size).toBe(SO_TRANG.length);
-  expect(SO_TRANG.length).toBeLessThanOrEqual(49);   // bản gọn (mục 8.1): không tạo sẵn tài liệu cho trang KB; +1 trang cụm dấu hiệu (Y5), +1 SAO-HV (/hoi-vien), +1 SAO-CG (/hoi-chuyen-gia), +1 /xem-sao-han (MT-ĐS)
-  expect(MAU_CUM.length).toBe(Object.keys(CHU_DE).length + 13);  // + tuổi hợp hướng, lá số mẫu, 6 cụm trang con (ND-7), 4 cụm SEO-L, sao hạn theo năm (MT-ĐS)
+  expect(SO_TRANG.length).toBeLessThanOrEqual(52);   // bản gọn (mục 8.1): không tạo sẵn tài liệu cho trang KB; +1 trang cụm dấu hiệu (Y5), +1 SAO-HV (/hoi-vien), +1 SAO-CG (/hoi-chuyen-gia), +1 /xem-sao-han (MT-ĐS), +3 /nam, /lich-am, /thoi-gian-toi (NAM-1/2)
+  expect(MAU_CUM.length).toBe(Object.keys(CHU_DE).length + 16);  // + tuổi hợp hướng, lá số mẫu, 6 cụm trang con (ND-7), 4 cụm SEO-L, sao hạn theo năm (MT-ĐS), 3 cụm năm (NAM-1)
   expect(khopMauCum("/tu-vi/sao-o-cung/tu-vi-cung-menh")?.bien).toEqual({ slug: "tu-vi-cung-menh" });
   expect(khopMauCum("/phong-thuy/huong-hop-tuoi/tuoi-1990")?.bien).toEqual({ nam: "1990" });       // SEO-K: gộp nam + nữ
   expect(khopMauCum("/phong-thuy/huong-hop-tuoi/tuoi-1990-nam")).toBeNull();

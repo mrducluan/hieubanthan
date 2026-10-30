@@ -95,7 +95,7 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
       <ViSao canCu={hop.can_cu} thuatNgu={thuatNgu} nho />
       {hop.ma_mau && !tat && (
         <div className="mt-auto pt-3">
-          <KiemChung loai={loai} mau={hop.ma_mau} phai={phai} tyLe={tyLe[hop.ma_mau]}
+          <KiemChung loai={loai} mau={hop.ma_mau} phai={hop.phai ?? phai} tyLe={tyLe[hop.ma_mau]}
             tyLeEngine={{ ty_le_dung: hop.ty_le_dung, so_phieu: hop.so_phieu }}
             theoDoi={hop.loai === "luu_y" || hop.loai === "loi_khuyen" || hop.loai_goc === "luu_y" ? hop.tieu_de : undefined} />
         </div>

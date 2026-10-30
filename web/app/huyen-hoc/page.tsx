@@ -7,8 +7,8 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  ArrowRight, BookOpen, CalendarCheck, CalendarDays, Check, Compass, DoorOpen, HeartHandshake, Home, ListOrdered,
-  MessageCircleQuestion, MoonStar, Navigation, Repeat, Sparkles, Sun, UserRound, type LucideIcon,
+  ArrowRight, BookOpen, CalendarCheck, CalendarDays, CalendarRange, Check, Compass, DoorOpen, HeartHandshake, Home, Hourglass,
+  ListOrdered, MessageCircleQuestion, MoonStar, Navigation, Repeat, Sparkles, Sun, UserRound, type LucideIcon,
 } from "lucide-react";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
@@ -40,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 // Biểu tượng theo vị trí: câu băn khoăn (HOI_HH) và công cụ lịch & tuổi (lichHH) — đích + chữ ở lib/huyen-hoc.ts / bảng chữ.
 const ICON_HOI: LucideIcon[] = [UserRound, HeartHandshake, Sparkles, MessageCircleQuestion, Home, CalendarCheck];
-const ICON_LICH: LucideIcon[] = [Sun, CalendarCheck, Home, DoorOpen, Sparkles, Compass, Navigation, CalendarDays, Repeat];
+const ICON_LICH: LucideIcon[] = [Sun, CalendarCheck, Home, DoorOpen, Sparkles, Compass, Navigation, CalendarDays, Repeat, Hourglass, CalendarRange, HeartHandshake];
 const CACH: LucideIcon[] = [ListOrdered, BookOpen, MoonStar];   // SO_CACH_HH lớp
 
 export default async function HuyenHoc() {

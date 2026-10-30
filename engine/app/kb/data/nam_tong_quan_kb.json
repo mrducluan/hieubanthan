@@ -1,0 +1,52 @@
+{
+  "_nguon": "NAM-1 (2026-10-30): lời đời thường cho trang trụ \"Năm {năm}\", \"Sinh con năm {năm}\", \"Cưới năm {năm}\". Nháp ban biên tập (AI hỗ trợ), viết trung tính: tập quán dân gian để tham khảo, không phán định, không vật phẩm, không cúng giải.",
+  "source": {"id": "dan_gian_vn", "ten": "Tập quán chọn tuổi dân gian Việt Nam · lịch âm Việt Nam (Hồ Ngọc Đức)"},
+  "source_id": "nam_tong_quan_2026",
+  "school_id": "dan_gian_vn",
+  "trang_thai": "nhap_ai",
+  "quan_he_nam": {
+    "trung": {"nhan": "Năm tuổi", "loi": "Năm cùng con giáp. Dân gian hay nhắc giữ nếp, làm việc lớn có kế hoạch rõ; nhiều người vẫn cưới, làm nhà như thường."},
+    "xung": {"nhan": "Xung năm", "loi": "Con giáp đối diện năm. Dân gian nhắc đi chậm với việc lớn, kiểm tra giấy tờ kỹ, giữ hoà khí trong nhà."},
+    "hinh": {"nhan": "Hình với năm", "loi": "Dân gian xem là dễ va chạm nhỏ. Nói chậm lại một nhịp, việc chung nên ghi rõ phần ai nấy làm."},
+    "hai": {"nhan": "Hại với năm", "loi": "Dân gian xem là dễ hiểu lầm. Hợp làm rõ thoả thuận bằng chữ, hỏi lại trước khi trách."},
+    "tam_hop": {"nhan": "Tam hợp với năm", "loi": "Dân gian xem là năm dễ gặp người cùng chí hướng. Hợp mở rộng quan hệ, làm việc theo nhóm."},
+    "luc_hop": {"nhan": "Lục hợp với năm", "loi": "Dân gian xem là năm dễ có người giúp. Hợp hợp tác, gắn bó, kết nối lại người cũ."},
+    "binh": {"nhan": "Bình thường", "loi": "Không có quan hệ đặc biệt với năm theo địa chi. Việc lớn cứ theo điều kiện thực tế của gia đình."}
+  },
+  "tam_tai_loi": "Năm thứ {nam_thu} trong ba năm Tam tai. Dân gian khuyên cân nhắc thêm với việc lớn như làm nhà, cưới hỏi, mở việc lớn; nhiều nhà vẫn làm và mượn tuổi người thân đứng tên.",
+  "luu_y_chung": "Đây là tập quán dân gian để tham khảo khi lên kế hoạch, không phải lời tiên đoán. Quyết định lớn nên dựa trên điều kiện thực tế của gia đình.",
+  "sinh_con": {
+    "chi": {
+      "tam_hop": "Tam hợp với tuổi con",
+      "luc_hop": "Lục hợp với tuổi con",
+      "trung": "Cùng con giáp với con",
+      "xung": "Xung với tuổi con",
+      "hinh": "Hình với tuổi con",
+      "hai": "Hại với tuổi con",
+      "binh": "Không hợp, không xung"
+    },
+    "nap_am": {
+      "sinh": "Mệnh con sinh mệnh bố/mẹ",
+      "bị sinh": "Mệnh bố/mẹ sinh mệnh con",
+      "bình hoà": "Cùng hành",
+      "khắc": "Mệnh con khắc mệnh bố/mẹ",
+      "bị khắc": "Mệnh bố/mẹ khắc mệnh con"
+    },
+    "nhom": {
+      "hop": "Dân gian xem là hợp",
+      "binh": "Bình thường",
+      "luu_y": "Dân gian hay nhắc cân nhắc"
+    },
+    "loi_nhom": {
+      "hop": "Theo địa chi, tuổi bố/mẹ tam hợp hoặc lục hợp với tuổi con.",
+      "binh": "Không có quan hệ hợp hay xung đáng kể theo địa chi.",
+      "luu_y": "Tuổi bố/mẹ xung với tuổi con theo địa chi. Đây chỉ là quan niệm dân gian: tình thương và cách nuôi dạy quyết định chuyện cha con, mẹ con hoà hợp."
+    },
+    "ranh_gioi": "Con cái là chuyện duyên và sức khoẻ. Hãy để sức khoẻ của mẹ, điều kiện gia đình và lời khuyên của bác sĩ đi trước con giáp; không nên ép ngày sinh hay can thiệp y khoa chỉ để con đúng tuổi."
+  },
+  "cuoi_hoi": {
+    "cach_tinh": "Dân gian xét Kim lâu cưới theo tuổi mụ của cô dâu: tuổi mụ = năm cưới − năm sinh âm lịch + 1, chia 9 dư 1, 3, 6, 8 là phạm Kim lâu. Có nơi xét thêm tuổi chú rể hoặc tính theo cách khác — hệ thống chỉ tính theo cô dâu, cách phổ biến nhất.",
+    "muon_tuoi": "Gia đình nào giữ tập quán mà năm cưới phạm Kim lâu thường chọn cưới sau Lập xuân năm sau, hoặc làm lễ xin dâu trước rồi cưới sau. Nhiều đôi vẫn cưới như dự định.",
+    "ranh_gioi": "Kim lâu là tập quán để tham khảo. Sự hoà hợp của hai người, sự sẵn sàng và điều kiện hai gia đình quan trọng hơn tuổi."
+  }
+}

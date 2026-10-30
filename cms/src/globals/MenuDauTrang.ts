@@ -41,6 +41,18 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/xem-sao-han", "Sao hạn theo tuổi"), mo_ta: "La Hầu, Kế Đô, Thái Bạch… đọc bằng lời thường" },
     { ...lk("/kien-thuc", "Thư viện kiến thức"), mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
   ] },
+  // NAM-1/NAM-2: "{nam}" được web thay bằng năm đang mời xem (gõ {nam} trong chữ / đường dẫn của mục bất kỳ).
+  { ...lk("/nam/{nam}", "Năm {nam}"), bieu_tuong: "lich", di_dong: true, con: [
+    { ...lk("/thoi-gian-toi", "3 tháng, 12 tháng tới của bạn"), mo_ta: "Theo thần số, Tử vi, Bát tự của chính bạn" },
+    { ...lk("/nam/{nam}", "Năm {nam} con gì, mệnh gì"), mo_ta: "Tết, Tam tai, năm tuổi, 12 con giáp" },
+    { ...lk("/xem-sao-han/{nam}", "Sao hạn năm {nam}"), mo_ta: "Sao chiếu theo tuổi, nam và nữ" },
+    { ...lk("/xem-tuoi-lam-nha/{nam}", "Tuổi làm nhà năm {nam}"), mo_ta: "Kim lâu, Hoang ốc, Tam tai từng tuổi" },
+    { ...lk("/nam/{nam}/cuoi-hoi", "Cưới năm {nam} tuổi nào"), mo_ta: "Kim lâu theo tuổi cô dâu" },
+    { ...lk("/nam/{nam}/sinh-con", "Sinh con năm {nam}"), mo_ta: "Tuổi bố mẹ hợp, xung với tuổi con" },
+    { ...lk("/tuoi-xong-dat/{nam}", "Xông đất Tết {nam}"), mo_ta: "Tuổi hợp gia chủ, giờ đẹp mùng 1" },
+    { ...lk("/phong-thuy/huong-xau-nam/{nam}", "Hướng xấu năm {nam}"), mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
+    { ...lk("/lich-am/{nam}", "Lịch âm {nam}"), mo_ta: "Tết, tháng nhuận, mùng 1 và rằm" },
+  ] },
   { ...lk("/blog", "Blog"), bieu_tuong: "bao", di_dong: false, con: [] },
   { ...lk("/tai-khoan", "Tài khoản"), bieu_tuong: "nguoi", di_dong: true, con: [
     { ...lk("/nap-sao", "Nạp Sao"), mo_ta: "Ví Sao, gói nạp" },

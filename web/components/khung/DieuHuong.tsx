@@ -12,7 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { dangOMuc, mucDangO, MENU_DAU_TRANG, type BieuTuong, type MucMenu } from "@/lib/menu-dau-trang";
+import { dangOMuc, mucDangO, MENU_DAU_DU_PHONG, type BieuTuong, type MucMenu } from "@/lib/menu-dau-trang";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Logo } from "./Logo";
 
@@ -116,7 +116,7 @@ function MenuDiDong({ muc }: { muc: MucMenu[] }) {
   );
 }
 
-export function ThanhTren({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
+export function ThanhTren({ muc = MENU_DAU_DU_PHONG }: { muc?: MucMenu[] }) {
   const path = usePathname();
   const sang = mucDangO(path, muc);
   return (
@@ -150,7 +150,7 @@ export function ThanhTren({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
   );
 }
 
-export function TabDuoi({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
+export function TabDuoi({ muc = MENU_DAU_DU_PHONG }: { muc?: MucMenu[] }) {
   const path = usePathname();
   const tab = muc.filter((m) => m.di_dong).slice(0, 5);
   const sang = mucDangO(path, tab);

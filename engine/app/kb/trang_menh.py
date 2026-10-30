@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""SEO-J — 76 trang "Sinh năm X mệnh gì" (1950–2025), dựng từ CALC + KB (chỉ ĐỌC + GHÉP, không sinh nghĩa mới).
+"""SEO-J — 78 trang "Sinh năm X mệnh gì" (1950–2027; NAM-1 thêm 2026–2027), dựng từ CALC + KB (chỉ ĐỌC + GHÉP, không sinh nghĩa mới).
 
 Dữ kiện TÍNH: can chi năm (lunar.can_chi_nam), mệnh nạp âm (can_chi.nap_am), ngũ hành sinh/khắc (can_chi),
 tam hợp / lục hợp / lục xung / tứ hành xung theo địa chi năm, cung phi nam–nữ (calc/phongthuy), mốc đầu năm:
@@ -19,7 +19,7 @@ from app.calc import tietkhi as tk
 from app.calc import tuoi_dan_gian as tdg
 from app.calc.battu import LUC_HOP, LUC_XUNG
 
-NAM_DAU, NAM_CUOI = 1950, 2025
+NAM_DAU, NAM_CUOI = 1950, 2027      # NAM-1 (2026-10-30): thêm 2026, 2027 — "sinh năm 2027 mệnh gì"
 _TAM_HOP = [("Thân", "Tý", "Thìn"), ("Dần", "Ngọ", "Tuất"), ("Tỵ", "Dậu", "Sửu"), ("Hợi", "Mão", "Mùi")]
 _TU_XUNG = [("Tý", "Ngọ", "Mão", "Dậu"), ("Dần", "Thân", "Tỵ", "Hợi"), ("Thìn", "Tuất", "Sửu", "Mùi")]
 _PT_DAU, _PT_CUOI = 1960, 2005            # khoảng năm có trang "tuổi X hợp hướng nào" (SEO-F)
