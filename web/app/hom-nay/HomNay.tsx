@@ -273,7 +273,7 @@ export function HomNay() {
             <div id="gio-hoang-dao" className="bau-troi grid items-center gap-4 p-4 sm:grid-cols-[11rem_1fr]" data-testid="gio-hoang-dao">
               <VongGio gio={the.hoang_lich.gio} laHomNay tieuDe={the.hoang_lich.than} phuDe="12 CANH GIỜ" className="mx-auto w-full max-w-[11rem]" />
               <div>
-                <ul className="grid grid-cols-2 gap-2 text-sm">
+                <ul className="grid grid-cols-2 gap-2 text-sm lg:grid-cols-3">
                   {the.hoang_lich.gio_hoang_dao.map((g) => (
                     <li key={g.chi}><b className="text-gold">{g.chi}</b> <span className="text-fg-muted">{g.khung}</span>
                       <span className="block text-xs text-fg-faint">{g.than}</span></li>
@@ -305,7 +305,7 @@ export function HomNay() {
               {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} onTrangThai={setTtChuoi}
                 so={the.ngay_ca_nhan.so} hoSo={hoSo}
                 ngayGheMay={thongKeThang(docNhatKy(hoSo), Number(the.ngay_xem.slice(0, 4)), Number(the.ngay_xem.slice(5, 7))).ngay} />}
-              <Button size="sm" variant="secondary" onClick={() => void chiaSe()}><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ"}</Button>
+              <Button size="sm" variant="secondary" className="min-h-10" onClick={() => void chiaSe()} data-testid="chia-se-the-hom-nay"><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ thẻ hôm nay"}</Button>
             {chepTay && <ChepTay url={chepTay} />}
             {/* SAO-HH: hẹn 7/30 ngày — chờ /api/sao/chuoi trả lời để lấy đúng nguồn chuỗi (tài khoản hay máy). */}
             {chuoi !== null && ttChuoi !== null && (
@@ -319,12 +319,12 @@ export function HomNay() {
           {/* Cột bên (≥ lg): tổng kết tháng, lá bài, hoàng lịch, hỏi lại, nhắc, nhà. Điện thoại: `contents` → các khối xếp theo order-*. */}
           <div className="contents lg:order-4 lg:col-span-5 lg:flex lg:flex-col lg:gap-5" data-testid="cot-ben">
           {/* KV-THANG: tổng kết tháng trước (≥ 3 ngày ghé, đóng được) + lối sang "12 tháng tới"; số máy chủ khi đã đăng nhập (0032). */}
-          <div className="order-[3] empty:hidden"><TongKetThang hoSo={hoSo} homNay={the.ngay_xem} noi="hom_nay" thangNay={the.thang_ca_nhan}
+          <div className="order-[3] empty:hidden lg:order-[6]"><TongKetThang hoSo={hoSo} homNay={the.ngay_xem} noi="hom_nay" thangNay={the.thang_ca_nhan}
             mayChu={ttChuoi === null ? undefined : ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.thang_truoc ?? null : null} /></div>
 
-          <div className="order-[4] empty:hidden"><LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} /></div>
+          <div className="order-[4] empty:hidden lg:order-[3]"><LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} /></div>
 
-          <div className="order-[5] empty:hidden">{the.hoang_lich && (
+          <div className="order-[5] empty:hidden lg:order-[4]">{the.hoang_lich && (
             <section aria-labelledby="hl-hom-nay" className="glass space-y-3 rounded-2xl p-5" data-testid="hoang-lich-hom-nay">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <h2 id="hl-hom-nay" className="text-xl">{c("hoang_lich.tieu_de")}</h2>
@@ -347,24 +347,6 @@ export function HomNay() {
           <div className="order-[9] empty:hidden"><MoiCaiApp noi="hom_nay" /></div>
           <div className="order-[10] empty:hidden"><ThangNayNha /></div>
           <div className="order-[11] empty:hidden"><ViecTuanNha /></div>
-          <div className="order-[16] empty:hidden"><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-            {the.ngay_pho_quat.nghia && (
-              <article className="glass rounded-2xl p-4" data-testid="ngay-pho-quat">
-                <div className="flex items-center justify-between text-sm text-fg-muted"><span className="inline-flex items-center gap-1.5"><Globe2 className="size-4" aria-hidden />Ngày chung của mọi người</span>
-                  <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {the.ngay_pho_quat.so}</span></div>
-                <p className="mt-2 text-sm">{the.ngay_pho_quat.nghia}</p>
-              </article>
-            )}
-            <article className="glass rounded-2xl p-4" data-testid="ngay-chaldea">
-              <div className="flex items-center justify-between text-sm text-fg-muted"><span>Theo phái Chaldea</span>
-                <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {the.chaldea.so}{the.chaldea.kep ? ` · kép ${the.chaldea.kep}` : ""}</span></div>
-              {the.chaldea.nghia_kep ? <p className="mt-2 text-sm"><b>{the.chaldea.nghia_kep.bieu_tuong}</b> — {the.chaldea.nghia_kep.xu_huong}</p>
-                : the.chaldea.nghia_goc && <p className="mt-2 text-sm"><b>{the.chaldea.nghia_goc.ten}</b> ({the.chaldea.nghia_goc.hanh_tinh})</p>}
-              <p className="mt-1 text-xs text-fg-muted">{the.chaldea.cong_huong
-                ? `Trùng số ngày sinh của bạn (${the.chaldea.so_ngay_sinh}) — phái này gọi là ngày cộng hưởng.`
-                : `Số ngày sinh của bạn theo Chaldea là ${the.chaldea.so_ngay_sinh}.`} <Link href="/than-so" className="text-gold hover:underline">Xem bài đọc Chaldea</Link></p>
-            </article>
-          </div></div>
           </div>
 
           {/* Cột chính (≥ lg): ý định hôm nay, nhịp Bát tự, quẻ, câu hỏi nổi bật, tháng/năm, ngày mai, góp ý. */}
@@ -381,7 +363,7 @@ export function HomNay() {
                 const bat = chon.includes(ma);
                 return (
                   <button key={ma} type="button" aria-pressed={bat} title={y.cau_hoi} onClick={() => batTat(ma)}
-                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors ${bat ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
+                    className={`inline-flex items-center gap-1.5 vung-cham min-h-10 rounded-full border px-3 py-2 text-sm transition-colors ${bat ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
                     <Icon className="size-4" aria-hidden />{y.ten}
                   </button>
                 );
@@ -489,6 +471,24 @@ export function HomNay() {
             <p className="text-sm"><span className="text-fg-muted">Ngày mai — Ngày cá nhân {the.ngay_mai.so}:</span>{" "}
               {boTienTo(the.ngay_mai.nghia)} <span className="text-fg-muted">Mở lại vào ngày mai để xem câu hỏi mới.</span></p>
           </Card></div>
+          <div className="order-[16] empty:hidden"><div className="grid gap-3 sm:grid-cols-2">
+            {the.ngay_pho_quat.nghia && (
+              <article className="glass rounded-2xl p-5" data-testid="ngay-pho-quat">
+                <div className="flex items-center justify-between text-sm text-fg-muted"><span className="inline-flex items-center gap-1.5"><Globe2 className="size-4" aria-hidden />Ngày chung của mọi người</span>
+                  <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {the.ngay_pho_quat.so}</span></div>
+                <p className="mt-2 text-sm">{the.ngay_pho_quat.nghia}</p>
+              </article>
+            )}
+            <article className="glass rounded-2xl p-5" data-testid="ngay-chaldea">
+              <div className="flex items-center justify-between text-sm text-fg-muted"><span>Theo phái Chaldea</span>
+                <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {the.chaldea.so}{the.chaldea.kep ? ` · kép ${the.chaldea.kep}` : ""}</span></div>
+              {the.chaldea.nghia_kep ? <p className="mt-2 text-sm"><b>{the.chaldea.nghia_kep.bieu_tuong}</b> — {the.chaldea.nghia_kep.xu_huong}</p>
+                : the.chaldea.nghia_goc && <p className="mt-2 text-sm"><b>{the.chaldea.nghia_goc.ten}</b> ({the.chaldea.nghia_goc.hanh_tinh})</p>}
+              <p className="mt-1 text-xs text-fg-muted">{the.chaldea.cong_huong
+                ? `Trùng số ngày sinh của bạn (${the.chaldea.so_ngay_sinh}) — phái này gọi là ngày cộng hưởng.`
+                : `Số ngày sinh của bạn theo Chaldea là ${the.chaldea.so_ngay_sinh}.`} <Link href="/than-so" className="text-gold hover:underline">Xem bài đọc Chaldea</Link></p>
+            </article>
+          </div></div>
           </div>
 
           {/* Hàng cuối (≥ lg): góp ý + lối đi tiếp trải hết bề ngang để ba thẻ đủ rộng. */}

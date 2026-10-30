@@ -63,7 +63,7 @@ export function QueRieng({ homNay }: { homNay: string }) {
           <div className="mt-2 flex flex-wrap items-center gap-2">
             <Input inputMode="numeric" value={so[0]} onChange={(e) => setSo([e.target.value.replace(/\D/g, "").slice(0, 4), so[1] ?? ""])} placeholder="Số thứ nhất" aria-label="Số thứ nhất của bạn" className="h-10 w-32 text-sm" />
             <Input inputMode="numeric" value={so[1]} onChange={(e) => setSo([so[0] ?? "", e.target.value.replace(/\D/g, "").slice(0, 4)])} placeholder="Số thứ hai" aria-label="Số thứ hai của bạn" className="h-10 w-32 text-sm" />
-            <Button type="button" size="sm" onClick={khoi} disabled={dang || !so[0] || !so[1]} data-testid="que-rieng-khoi">{dang ? "Đang khởi…" : "Khởi quẻ"}</Button>
+            <Button type="button" size="sm" className="min-h-10" onClick={khoi} disabled={dang || !so[0] || !so[1]} data-testid="que-rieng-khoi">{dang ? "Đang khởi…" : "Khởi quẻ"}</Button>
           </div>
           {loi && <p className="mt-1 text-xs text-cinnabar" role="alert">{loi}</p>}
         </>
