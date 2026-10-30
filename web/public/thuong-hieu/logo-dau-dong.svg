@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 56 184 88" width="552" height="264" role="img" aria-label="Hiểu Bản Thân">
+<title>Hiểu Bản Thân</title>
+<defs>
+<linearGradient id="v" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFEDBE"/><stop offset=".5" stop-color="#E9C46A"/><stop offset="1" stop-color="#B98A2E"/></linearGradient>
+<linearGradient id="l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B9D3FF"/><stop offset="1" stop-color="#3F7FE0"/></linearGradient>
+<style>
+.mat{stroke-dasharray:1}.vong,.sao{transform-box:fill-box;transform-origin:center}
+@media (prefers-reduced-motion:no-preference){
+.mat{animation:ve 1.3s cubic-bezier(.22,1,.36,1) both}
+.vong{animation:hien .7s ease-out .8s both,quay 48s linear 1.5s infinite}
+.sao{animation:saohien .7s cubic-bezier(.34,1.56,.64,1) .9s both,tho 4.5s ease-in-out 1.6s infinite}}
+@keyframes ve{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes hien{from{opacity:0}to{opacity:1}}
+@keyframes quay{to{transform:rotate(360deg)}}
+@keyframes saohien{from{opacity:0;transform:scale(.2) rotate(-45deg)}to{opacity:1;transform:none}}
+@keyframes tho{50%{transform:scale(1.14);opacity:.85}}
+</style>
+</defs>
+<path class="mat" pathLength="1" d="M14 100 Q100 22 186 100 Q100 178 14 100 Z" fill="none" stroke="url(#v)" stroke-width="7" stroke-linejoin="round"/>
+<g class="vong"><circle cx="100" cy="100" r="33" fill="none" stroke="url(#l)" stroke-width="6" stroke-dasharray="18.9 4.14" transform="rotate(-90 100 100)"/></g>
+<path class="sao" d="M100 74 C102 95 105 98 126 100 C105 102 102 105 100 126 C98 105 95 102 74 100 C95 98 98 95 100 74 Z" fill="url(#v)"/>
+</svg>
