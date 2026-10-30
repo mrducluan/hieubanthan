@@ -61,7 +61,8 @@ def test_chi_ngay_sinh():
 
 def test_tap_quan_nam_2027():
     bc = T.lap(SINH, HOM_NAY, gioi_tinh="nam")                   # 1990 Canh Ngọ: tuổi mụ 38 năm 2027
-    tq = bc["tap_quan"]
+    tq = T.tap_quan(SINH, 2027, "nam")
+    assert "tap_quan" not in bc                                    # SAO-2: không lộ ngoài chương
     assert tq["tuoi_mu"] == 38 and tq["sao"] == "Thổ Tú" and tq["quan_he_nam"] == "luc_hop"
     assert tq["tam_tai"] is None and tq["kim_lau"] is None
     assert "gioi_tinh" not in bc["thieu"]
@@ -154,7 +155,7 @@ def test_nhieu_la_so_khong_loi(seed):
 
 def test_tre_nho_khong_sao_han():
     bc = T.lap(dt.date(2022, 3, 1), HOM_NAY, gioi_tinh="nu")
-    assert bc["tap_quan"]["sao"] is None
+    assert T.tap_quan(dt.date(2022, 3, 1), 2027, "nu")["sao"] is None
     _sach(bc)
 
 
@@ -162,3 +163,26 @@ def test_api_nam():
     r = client.get("/v1/thoi-gian-toi/nam")
     j = r.json()
     assert r.status_code == 200 and len(j["cac_nam"]) == 2 and j["mac_dinh"] in j["cac_nam"]
+
+
+def test_bat_tu_doc_dung_nam_khi_tet_truoc_lap_xuan():
+    """2028: Tết 26/01 trước Lập xuân 04/02 — chương Bát tự phải là lưu niên Mậu Thân 2028, không phải Đinh Mùi 2027."""
+    hom = dt.date(2027, 10, 30)
+    assert T.nam_mac_dinh(hom) == 2028
+    bc = T.lap(SINH, hom, gioi_tinh="nam", tv_sinh=TV, bt_sinh=BT)
+    bt = [h for h in bc["chuong"][2]["hop"] if h["nguon"] == "battu"]
+    s = json.dumps(bt, ensure_ascii=False)
+    assert "2028 Mậu Thân" in s and "2027 Đinh Mùi" not in s
+    # năm đang đi, hôm nay giữa Tết và Lập xuân: Bát tự vẫn là năm 2028
+    bc = T.lap(SINH, dt.date(2028, 1, 28), nam=2028, gioi_tinh="nam", tv_sinh=TV, bt_sinh=BT)
+    assert "2028 Mậu Thân" in json.dumps(bc["chuong"][2], ensure_ascii=False)
+    # 05/02/2027 (sau Lập xuân, trước Tết) xem năm 2026: Bát tự là Bính Ngọ 2026
+    bc = T.lap(SINH, dt.date(2027, 2, 5), nam=2026, gioi_tinh="nam", tv_sinh=TV, bt_sinh=BT)
+    assert "2026 Bính Ngọ" in json.dumps(bc["chuong"][2], ensure_ascii=False)
+
+
+def test_ma_tap_quan_tach_tinh_huong():
+    a = T._hop_tap_quan({**T.tap_quan(SINH, 2027, "nam"), "quan_he_nam": "trung", "tam_tai": 3, "kim_lau": "x"}, 2027, False)
+    b = T._hop_tap_quan({**T.tap_quan(SINH, 2027, "nam"), "quan_he_nam": "xung", "tam_tai": None, "kim_lau": None}, 2027, False)
+    assert a[0]["ma_mau"] != b[0]["ma_mau"] and "tam_tai3" in a[0]["ma_mau"]
+    assert "Thê" not in a[0]["noi_dung"]

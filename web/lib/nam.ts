@@ -54,16 +54,19 @@ export const namIndex = (nam: number, namAm: number) => nam === namAm || nam ===
 /** "dd/mm/yyyy" từ ISO. */
 export const dmy = (iso: string) => iso.split("-").reverse().join("/");
 
-/** NAM-2: năm chọn được ở /thoi-gian-toi + năm mặc định (engine quyết: năm tới khi Tết sau còn ≤ 120 ngày). */
-export async function namThoiGianToi(): Promise<{ cac_nam: number[]; mac_dinh: number | null }> {
+/** NAM-2: năm chọn được ở /thoi-gian-toi + năm mặc định (engine quyết: năm tới khi Tết sau còn ≤ 120 ngày).
+ *  `hanMs`: menu đầu trang chỉ chờ ngắn (như khung CMS 1,5 giây). Engine lỗi/chậm → đoán theo lịch dương (năm âm ≈ năm
+ *  dương; tháng 10–12 mời năm sau) — chỉ để chọn nhãn/đường dẫn mặc định, mọi dữ kiện năm vẫn do engine tính. */
+export async function namThoiGianToi(hanMs = 10_000): Promise<{ cac_nam: number[]; mac_dinh: number | null }> {
   try {
     const r = await fetch(`${ENGINE_URL}/v1/thoi-gian-toi/nam`, {
       headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
-      next: { revalidate: 60 * 60 }, signal: AbortSignal.timeout(10_000),
+      next: { revalidate: 60 * 60 }, signal: AbortSignal.timeout(hanMs),
     });
     if (r.ok) return (await r.json()) as { cac_nam: number[]; mac_dinh: number };
-  } catch { /* engine bận → để engine tự chọn năm lúc gọi báo cáo */ }
-  const { namAmHienTai } = await import("@/lib/tuoi-dan-gian");
-  const n = await namAmHienTai();
-  return { cac_nam: [n, n + 1], mac_dinh: null };
+  } catch { /* engine bận → đoán theo lịch dương */ }
+  const vn = new Date(Date.now() + 7 * 3600_000);
+  const y = vn.getUTCFullYear(), m = vn.getUTCMonth() + 1;
+  const namAm = m === 1 ? y - 1 : y;   // tháng 1 thường còn trước Tết
+  return { cac_nam: [namAm, namAm + 1], mac_dinh: m >= 10 || m === 1 ? namAm + 1 : null };
 }

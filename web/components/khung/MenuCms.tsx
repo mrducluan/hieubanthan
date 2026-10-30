@@ -7,10 +7,10 @@ import { MENU_DAU_TRANG, thayNamMenu } from "@/lib/menu-dau-trang";
 import { namThoiGianToi } from "@/lib/nam";
 import { TabDuoi, ThanhTren } from "./DieuHuong";
 
-// NAM-1: "{nam}" trong menu (code hoặc CMS) → năm engine đang mời xem; engine lỗi → năm âm hiện tại + 1.
+// NAM-1: "{nam}" trong menu (code hoặc CMS) → năm engine đang mời xem; engine chậm quá 1,5 giây → đoán theo lịch dương.
 const menuDauTrangCms = cache(async () => {
-  const [m, n] = await Promise.all([docMenu(), namThoiGianToi()]);
-  return thayNamMenu(m ?? MENU_DAU_TRANG, n.mac_dinh ?? n.cac_nam[1]!);
+  const [m, n] = await Promise.all([docMenu(), namThoiGianToi(1_500)]);
+  return thayNamMenu(m ?? MENU_DAU_TRANG, n.mac_dinh ?? n.cac_nam[0]!);
 });
 
 export async function ThanhTrenCms() {

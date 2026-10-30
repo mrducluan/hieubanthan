@@ -34,7 +34,7 @@ from app.luangiai import tuoi_dan_gian as tdg
 TZ = config.CALENDAR_MERIDIAN_TZ
 MO_DUN = "thoi_gian"
 NGAY_SANG_NAM_TOI = 120          # còn ≤ 120 ngày tới Tết sau → mặc định xem năm tới
-PHAI = {"thanso": "pitago", "tuvi": "nam_phai_viet", "battu": "tu_binh", "tap_quan": "dan_gian_vn"}
+PHAI = {"thanso": "pitago", "tuvi": "nam_phai_viet", "battu": "tu_binh", "tap_quan": "dan_gian_vn", "hai_la_so": "tuvi_battu"}
 _MUC_THANG_TV = {"thuan": "thuan", "binh": "can_bang", "can_than": "can_chu_dong"}
 CAU_HOI = {
     "tom_tat": "Ba tháng tới nên dồn sức vào đâu, và năm tới mở ra với bạn thế nào?",
@@ -102,7 +102,7 @@ def _thang_ts(ngay: int, thang: int, tu: dt.date, so: int) -> list[dict]:
         ra.append(_gan(kh.hop("thoi_diem", f"Tháng {m}/{y}: {o['nhan'].lower()}",
                               f"Hợp {', '.join(o['hop_de'])}.",
                               can_cu=[f"Tháng cá nhân {s} (thần số, tháng dương lịch {m}/{y})"],
-                              ma=kh.ma_mau("thanso", "thang", f"so{s}")), "thanso", thang=f"{m}/{y}", so=s))
+                              ma=kh.ma_mau("thanso", "thang", f"so{s}", f"t{m}")), "thanso", thang=f"{m}/{y}", so=s))
         m, y = (1, y + 1) if m == 12 else (m + 1, y)
     return ra
 
@@ -130,13 +130,16 @@ _QH_LOI = {"trung": "năm tuổi", "xung": "tuổi xung với năm", "hinh": "tu
 
 
 def _hop_tap_quan(tq: dict, nam: int, day_du: bool) -> list[dict]:
-    co = []
+    co, ma = [], []
     if tq["quan_he_nam"] in _QH_LOI:
         co.append(_QH_LOI[tq["quan_he_nam"]])
+        ma.append(tq["quan_he_nam"])
     if tq["tam_tai"]:
         co.append(f"năm thứ {tq['tam_tai']} của Tam tai")
+        ma.append(f"tam_tai{tq['tam_tai']}")
     if tq["kim_lau"]:
-        co.append(f"{tq['kim_lau']} (tuổi mụ {tq['tuoi_mu']})")
+        co.append(f"Kim lâu (tuổi mụ {tq['tuoi_mu']})")      # không nêu Thân/Thê/Tử ở bài này — tên dễ gây lo
+        ma.append("kim_lau")
     cu = [f"Tuổi {tq['can_chi']}, tuổi mụ {tq['tuoi_mu']} năm {tq['can_chi_nam']}"]
     ra = []
     if co:
@@ -145,7 +148,7 @@ def _hop_tap_quan(tq: dict, nam: int, day_du: bool) -> list[dict]:
             f"Theo tập quán theo tuổi, năm {nam} bạn gặp {', '.join(co)}. Đây là lời nhắc giữ nếp, không phải điềm báo.",
             huong_xu_ly="Việc lớn như làm nhà, cưới hỏi: gia đình giữ tập quán thường lùi năm hoặc mượn tuổi người "
                         "thân đứng tên; việc thường ngày cứ làm theo kế hoạch.",
-            can_cu=cu, ma=kh.ma_mau("tgt", "tap_quan", *sorted(x.split()[0] for x in co))), "tap_quan"))
+            can_cu=cu, ma=kh.ma_mau("tgt", "tap_quan", *ma)), "tap_quan"))
     if tq["sao"] and (day_du or not co):
         o = tq["sao_nghia"]
         nd = f"Năm {nam} theo tục xếp theo tuổi, bạn gặp sao {tq['sao']}" + (f", hạn {tq['han']}" if tq["han"] else "") \
@@ -223,14 +226,14 @@ def thang_noi_bat(hop: list[dict]) -> list[dict]:
         if muc == "thuan":
             ra.append(_gan(kh.hop("diem_manh", f"Tháng {m}/{y}: hai lá số cùng thuận",
                                   f"Cả Tử vi lẫn Bát tự đều thấy tháng {m}/{y} thuận lợi. {a['noi_dung']}",
-                                  can_cu=cu, ma=kh.ma_mau("tgt", "noi_bat", "thuan"), muc=muc, thang=h["thang"]), "tuvi"))
+                                  can_cu=cu, ma=kh.ma_mau("tgt", "noi_bat", "thuan"), muc=muc, thang=h["thang"]), "hai_la_so"))
         else:
             ra.append(_gan(kh.hop("luu_y", f"Tháng {m}/{y}: hai lá số cùng nhắc đi chậm",
                                   f"Cả Tử vi lẫn Bát tự đều thấy tháng {m}/{y} cần lưu ý. {a['noi_dung']}",
                                   huong_xu_ly="Việc lớn trong tháng này nên chuẩn bị kỹ hơn, hỏi thêm một người có "
                                               "kinh nghiệm, để dư thời gian.",
                                   can_cu=cu, ma=kh.ma_mau("tgt", "noi_bat", "can_chu_dong"), muc=muc,
-                                  thang=h["thang"]), "tuvi"))
+                                  thang=h["thang"]), "hai_la_so"))
     return ra
 
 
@@ -252,7 +255,12 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
     if nam not in cho_phep:
         raise ValueError(f"Chỉ xem được năm {cho_phep[0]} hoặc {cho_phep[1]}")
     nam_toi = nam != cho_phep[0]
-    ngay_nam = _tet(nam) if nam_toi else hom_nay          # ngày xem cho chương cấp năm
+    ngay_nam = _tet(nam) if nam_toi else hom_nay          # ngày xem cho chương cấp năm (Tử vi: năm âm, từ Tết)
+    # Bát tự đổi năm ở Lập xuân, không ở Tết (năm Tết tháng Giêng như 2028: Tết 26/01 trước Lập xuân 04/02) → kẹp ngày xem
+    # vào [ngày sau Lập xuân năm đích, ngày trước Lập xuân năm sau] (Bát tự đọc năm lúc 12:00 trưa ngày xem; giờ giao Lập
+    # xuân có thể sau trưa) để chương Bát tự đọc đúng năm.
+    from app.luangiai.nam_tong_quan import _lap_xuan  # noqa: PLC0415
+    ngay_bt = min(max(ngay_nam, _lap_xuan(nam) + dt.timedelta(days=1)), _lap_xuan(nam + 1) - dt.timedelta(days=1))
     d, m = ngay_sinh.day, ngay_sinh.month
     thieu = ([] if tv_sinh and bt_sinh else ["gio_sinh"]) + ([] if gioi_tinh else ["gioi_tinh"])
 
@@ -271,7 +279,7 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
         tv = tvd.lap(tv_sinh, ngay_nam, ls=ls)
     if bt_sinh:
         from app.luangiai import battu_doi_song as btd  # noqa: PLC0415
-        bt = btd.lap(bt_sinh, ngay_nam)
+        bt = btd.lap(bt_sinh, ngay_bt)
 
     # ---- chương 1: 3 tháng tới + tóm tắt năm (miễn phí)
     tom_nam = [_gan(kh.hop("cot_loi", f"Năm {nam} với bạn: {ng.get('chu_de', '').lower()}",
@@ -364,7 +372,7 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
                         "phut_doc": max(1, round(so_chu_chuong(c) / 200))}
         ds.append(c)
     bc = {"phien_ban": kh.PHIEN_BAN, "mo_dun": MO_DUN, "nam": nam, "cac_nam": cho_phep, "nam_toi": nam_toi,
-          "ngay_xem": hom_nay.isoformat(), "thieu": thieu, "tap_quan": {k: v for k, v in tq.items() if k != "sao_nghia"},
+          "ngay_xem": hom_nay.isoformat(), "thieu": thieu,
           "cot_loi": [], "chuong": ds,
           "nguon": "Thần số Pitago · Tử vi Nam phái · Bát tự Tử Bình · tập quán dân gian Việt Nam",
           "trang_thai": "nhap_ai", "dien_dat": "mau",

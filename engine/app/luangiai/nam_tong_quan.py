@@ -99,7 +99,7 @@ def tong_quan(nam: int) -> dict:
     hoi_dap = [
         {"hoi": f"Năm {nam} là năm con gì?",
          "dap": f"Năm {nam} là năm {can} {chi}, tính từ Tết Nguyên đán {_dmy(tet)} đến {_dmy(tet_sau - dt.timedelta(days=1))}. "
-                f"Người sinh tháng 1 hoặc đầu tháng 2/{nam} trước Tết vẫn thuộc năm {' '.join(t.can_chi_nam(nam - 1))}."},
+                f"Người sinh trước Tết ({_dmy(tet)}) vẫn thuộc năm {' '.join(t.can_chi_nam(nam - 1))}."},
         {"hoi": f"Năm {nam} mệnh gì?",
          "dap": f"Mệnh nạp âm của năm {can} {chi} là {na['ten']} ({na['han']}), hành {na['hanh']}. Mệnh này dùng chung cho mọi người sinh trong năm âm lịch {nam}."},
         {"hoi": f"Tết {nam} là ngày nào?",
