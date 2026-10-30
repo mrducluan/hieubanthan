@@ -48,7 +48,7 @@ export default async function Page({ params }: Props) {
       <GhiTu tu={tu} />
       <div className="rounded-2xl p-[1px]" style={{ background: "linear-gradient(140deg, rgb(var(--gold) / 0.7), rgb(var(--jade) / 0.45) 55%, rgb(var(--moon) / 0.35))" }}>
         <div className="rounded-2xl bg-surface px-5 py-7">
-          <Logo className="mx-auto size-8" />
+          <Logo className="mx-auto h-8 w-auto" />
           <p className="eyebrow mt-4 text-center">{TEN_MANG[nd.m]} · Hỏi đáp chuyên sâu</p>
           <h1 className="mt-2 text-center font-serif text-2xl leading-snug [text-wrap:balance]" data-testid="the-hoi-cau">“{nd.c}”</h1>
           <div className="mt-5"><TrucQuan ds={[veKhoi(nd.g)]} tinh /></div>

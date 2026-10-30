@@ -72,7 +72,7 @@ export function NhanQua({ ma, banDau }: { ma: string; banDau: TrangQua | null })
     <div className="mx-auto max-w-md py-10 text-center" data-testid="nhan-qua">
       <div className="rounded-2xl p-[1px]" style={{ background: "linear-gradient(140deg, rgb(var(--gold) / 0.7), rgb(var(--moon) / 0.35) 45%, rgb(var(--jade) / 0.5))" }}>
         <div className="rounded-2xl bg-surface px-6 py-8">
-          <Logo className="mx-auto size-8" />
+          <Logo className="mx-auto h-8 w-auto" />
           {noiDung}
         </div>
       </div>

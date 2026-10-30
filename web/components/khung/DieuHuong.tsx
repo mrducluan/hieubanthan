@@ -123,7 +123,7 @@ export function ThanhTren({ muc = MENU_DAU_TRANG }: { muc?: MucMenu[] }) {
     <header data-thanh-dau className="vach-sang sticky top-0 z-40 border-b border-line/50 bg-bg/70 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="group flex min-h-11 items-center gap-2.5" aria-label="Hiểu Bản Thân — trang chủ">
-          <Logo className="size-7 transition-transform duration-700 group-hover:rotate-90" />
+          <Logo className="h-7 w-auto transition-transform duration-500 group-hover:scale-105" />
           <span className="font-serif text-xl tracking-tight">Hiểu Bản Thân</span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex" aria-label="Điều hướng chính" data-testid="menu-dau-trang">

@@ -39,7 +39,7 @@ export default async function Page({ params, searchParams }: Props) {
     <div className="mx-auto max-w-md py-6 text-center" data-testid="the-huy-hieu" data-ma={ma}>
       <div className="rounded-2xl p-[1px]" style={{ background: "linear-gradient(140deg, rgb(var(--gold) / 0.7), rgb(var(--jade) / 0.45) 55%, rgb(var(--moon) / 0.35))" }}>
         <div className="rounded-2xl bg-surface px-6 py-8">
-          <Logo className="mx-auto size-8" />
+          <Logo className="mx-auto h-8 w-auto" />
           <p className="eyebrow mt-4">Một dấu mốc mới</p>
           <span className="mx-auto mt-4 grid size-16 place-items-center rounded-full bg-gold/20 text-gold" aria-hidden>
             <Award className="size-8" />
