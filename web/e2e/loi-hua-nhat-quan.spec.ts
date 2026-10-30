@@ -64,7 +64,7 @@ test("Hôm nay: máy không có Web Share và không cho chép → vẫn có ph�
   });
   await page.goto("/hom-nay");
   await expect(page.getByTestId("the-hom-nay")).toBeVisible();
-  await page.getByRole("button", { name: "Chia sẻ", exact: true }).click();
+  await page.getByTestId("chia-se-the-hom-nay").click();
   const chep = page.getByTestId("chep-tay");
   await expect(chep).toContainText("Máy chưa cho chép tự động");
   await expect(chep.getByRole("textbox", { name: "Link chia sẻ" })).toHaveValue(/\/hom-nay\?tu=hn\.[a-f0-9]{10}/);
