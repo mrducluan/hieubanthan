@@ -237,13 +237,16 @@ export function HomNay() {
   }
 
   return (
-    <div className="mx-auto max-w-xl" data-testid="hom-nay">
+    <div className="mx-auto max-w-xl md:max-w-2xl lg:max-w-none" data-testid="hom-nay">
       {tieuDe}
       <CuonToiNeo />
       {loi && <Card><p role="alert" className="text-sm text-cinnabar">{loi}</p></Card>}
       {!the && !loi && <KhungTai />}
       {the && (
-        <div className="space-y-4">
+        /* UI-HN: điện thoại một cột (thứ tự theo order-*); máy tính lưới 12 cột — hàng ngày + thẻ hôm nay trải hết,
+           dưới là cột chính 7/12 (ý định, quẻ, nhịp tháng/năm…) và cột bên 5/12 (tổng kết, lá bài, hoàng lịch, nhắc…). */
+        <div className="flex flex-col gap-4 lg:grid lg:grid-cols-12 lg:items-start lg:gap-5" data-testid="hom-nay-luoi">
+          <div className="order-1 space-y-4 lg:order-1 lg:col-span-12">
           <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-fg-muted">
             <span className="inline-flex items-center gap-1.5 capitalize"><CalendarDays className="size-4" aria-hidden />{thu(the.ngay_xem)}</span>
             <span className="inline-flex items-center gap-1.5"><MoonStar className="size-4" aria-hidden />
@@ -280,8 +283,10 @@ export function HomNay() {
               </div>
             </div>
           )}
+          </div>
 
-          <Card id="the-hom-nay" data-neo className="scroll-mt-24 space-y-4" data-testid="the-hom-nay">
+          <Card id="the-hom-nay" data-neo className="order-2 scroll-mt-24 lg:order-2 lg:col-span-12 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,21rem)] lg:gap-8" data-testid="the-hom-nay">
+            <div className="space-y-4">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-sm text-fg-muted">{tenGoi(hoSo)}, hôm nay là</p>
@@ -295,12 +300,12 @@ export function HomNay() {
               <p className="mt-1">{the.ngay_ca_nhan.tu_soi}</p>
             </div>
             <SoNoiBatNgay hoSo={hoSo} />
-            <div className="flex flex-wrap items-center justify-between gap-3">
+            </div>
+            <aside className="mt-4 space-y-4 border-t border-line/60 pt-4 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0" data-testid="the-hom-nay-ben">
               {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} onTrangThai={setTtChuoi}
                 so={the.ngay_ca_nhan.so} hoSo={hoSo}
                 ngayGheMay={thongKeThang(docNhatKy(hoSo), Number(the.ngay_xem.slice(0, 4)), Number(the.ngay_xem.slice(5, 7))).ngay} />}
               <Button size="sm" variant="secondary" onClick={() => void chiaSe()}><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ"}</Button>
-            </div>
             {chepTay && <ChepTay url={chepTay} />}
             {/* SAO-HH: hẹn 7/30 ngày — chờ /api/sao/chuoi trả lời để lấy đúng nguồn chuỗi (tài khoản hay máy). */}
             {chuoi !== null && ttChuoi !== null && (
@@ -308,15 +313,18 @@ export function HomNay() {
                 chuoi={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.chuoi : chuoi.so}
                 nguon={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? "tai_khoan" : "may"} />
             )}
+            </aside>
           </Card>
 
+          {/* Cột bên (≥ lg): tổng kết tháng, lá bài, hoàng lịch, hỏi lại, nhắc, nhà. Điện thoại: `contents` → các khối xếp theo order-*. */}
+          <div className="contents lg:order-4 lg:col-span-5 lg:flex lg:flex-col lg:gap-5" data-testid="cot-ben">
           {/* KV-THANG: tổng kết tháng trước (≥ 3 ngày ghé, đóng được) + lối sang "12 tháng tới"; số máy chủ khi đã đăng nhập (0032). */}
-          <TongKetThang hoSo={hoSo} homNay={the.ngay_xem} noi="hom_nay" thangNay={the.thang_ca_nhan}
-            mayChu={ttChuoi === null ? undefined : ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.thang_truoc ?? null : null} />
+          <div className="order-[3] empty:hidden"><TongKetThang hoSo={hoSo} homNay={the.ngay_xem} noi="hom_nay" thangNay={the.thang_ca_nhan}
+            mayChu={ttChuoi === null ? undefined : ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.thang_truoc ?? null : null} /></div>
 
-          <LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} />
+          <div className="order-[4] empty:hidden"><LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} /></div>
 
-          {the.hoang_lich && (
+          <div className="order-[5] empty:hidden">{the.hoang_lich && (
             <section aria-labelledby="hl-hom-nay" className="glass space-y-3 rounded-2xl p-5" data-testid="hoang-lich-hom-nay">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <h2 id="hl-hom-nay" className="text-xl">{c("hoang_lich.tieu_de")}</h2>
@@ -331,16 +339,38 @@ export function HomNay() {
               <p className="text-sm"><Link href="/xem-ngay-tot" className="text-gold hover:underline">Xem đủ giờ tốt, hướng xuất hành, tìm ngày đẹp →</Link>
                 {the.hoang_lich.ngay_tot_gan && <span className="text-fg-muted"> · Ngày đẹp gần nhất: {dmy(the.hoang_lich.ngay_tot_gan.ngay)}</span>}</p>
             </section>
-          )}
+          )}</div>
 
-          <HoiHomQua homNay={the.ngay_xem} tieuDe={c("hom_qua.tieu_de")} cau={(b) => c("hom_qua.cau", b)} camOn={c("hom_qua.cam_on")} />
-          <HoiSau30Ngay homNay={the.ngay_xem} />
-          <NhacHomNay homNay={the.ngay_xem} />
-          <MoiCaiApp noi="hom_nay" />
-          <ThangNayNha />
-          <ViecTuanNha />
+          <div className="order-[6] empty:hidden"><HoiHomQua homNay={the.ngay_xem} tieuDe={c("hom_qua.tieu_de")} cau={(b) => c("hom_qua.cau", b)} camOn={c("hom_qua.cam_on")} /></div>
+          <div className="order-[7] empty:hidden"><HoiSau30Ngay homNay={the.ngay_xem} /></div>
+          <div className="order-[8] empty:hidden"><NhacHomNay homNay={the.ngay_xem} /></div>
+          <div className="order-[9] empty:hidden"><MoiCaiApp noi="hom_nay" /></div>
+          <div className="order-[10] empty:hidden"><ThangNayNha /></div>
+          <div className="order-[11] empty:hidden"><ViecTuanNha /></div>
+          <div className="order-[16] empty:hidden"><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            {the.ngay_pho_quat.nghia && (
+              <article className="glass rounded-2xl p-4" data-testid="ngay-pho-quat">
+                <div className="flex items-center justify-between text-sm text-fg-muted"><span className="inline-flex items-center gap-1.5"><Globe2 className="size-4" aria-hidden />Ngày chung của mọi người</span>
+                  <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {the.ngay_pho_quat.so}</span></div>
+                <p className="mt-2 text-sm">{the.ngay_pho_quat.nghia}</p>
+              </article>
+            )}
+            <article className="glass rounded-2xl p-4" data-testid="ngay-chaldea">
+              <div className="flex items-center justify-between text-sm text-fg-muted"><span>Theo phái Chaldea</span>
+                <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {the.chaldea.so}{the.chaldea.kep ? ` · kép ${the.chaldea.kep}` : ""}</span></div>
+              {the.chaldea.nghia_kep ? <p className="mt-2 text-sm"><b>{the.chaldea.nghia_kep.bieu_tuong}</b> — {the.chaldea.nghia_kep.xu_huong}</p>
+                : the.chaldea.nghia_goc && <p className="mt-2 text-sm"><b>{the.chaldea.nghia_goc.ten}</b> ({the.chaldea.nghia_goc.hanh_tinh})</p>}
+              <p className="mt-1 text-xs text-fg-muted">{the.chaldea.cong_huong
+                ? `Trùng số ngày sinh của bạn (${the.chaldea.so_ngay_sinh}) — phái này gọi là ngày cộng hưởng.`
+                : `Số ngày sinh của bạn theo Chaldea là ${the.chaldea.so_ngay_sinh}.`} <Link href="/than-so" className="text-gold hover:underline">Xem bài đọc Chaldea</Link></p>
+            </article>
+          </div></div>
+          </div>
 
-          <section aria-labelledby="y-dinh" className="glass space-y-4 rounded-2xl p-5" data-testid="y-dinh">
+          {/* Cột chính (≥ lg): ý định hôm nay, nhịp Bát tự, quẻ, câu hỏi nổi bật, tháng/năm, ngày mai, góp ý. */}
+          <div className="contents lg:order-3 lg:col-span-7 lg:flex lg:flex-col lg:gap-5" data-testid="cot-chinh">
+
+          <div className="order-[12] empty:hidden"><section aria-labelledby="y-dinh" className="glass space-y-4 rounded-2xl p-5" data-testid="y-dinh">
             <div>
               <h2 id="y-dinh" className="text-xl">{c("y_dinh.tieu_de")}</h2>
               <p className="mt-1 text-sm text-fg-muted">Chọn tối đa {TOI_DA_Y_DINH} việc hoặc gõ ngắn — xem việc đó hợp nhịp ngày {the.ngay_ca_nhan.so} thế nào và nên làm theo cách nào.</p>
@@ -402,9 +432,9 @@ export function HomNay() {
             {!the.ho_tro && duDinh === "" && chon.length > 0 && the.y_dinh_hom_nay.length === 0 && (
               <p className="text-sm text-fg-muted">Bấm “Xem nhịp hôm nay” để xem các việc đã chọn.</p>
             )}
-          </section>
+          </section></div>
 
-          {the.nhip_bat_tu && (
+          <div className="order-[13] empty:hidden">{the.nhip_bat_tu && (
             <section aria-labelledby="nhip-bat-tu" className="glass space-y-2 rounded-2xl p-5" data-testid="nhip-bat-tu">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h2 id="nhip-bat-tu" className="text-xl">Nhịp Bát tự: ngày {the.nhip_bat_tu.thap_than}</h2>
@@ -415,9 +445,9 @@ export function HomNay() {
               {the.nhip_bat_tu.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {the.nhip_bat_tu.cau_tu_soi}</p>}
               <p className="text-xs text-fg-faint">{the.nhip_bat_tu.cach_tinh} <Link href="/bat-tu" className="text-gold hover:underline">Xem lá Bát tự đầy đủ</Link></p>
             </section>
-          )}
+          )}</div>
 
-          {the.que_ngay && (
+          <div className="order-[14] empty:hidden">{the.que_ngay && (
             <section id="que-ngay" aria-labelledby="que-ngay-h" className="glass scroll-mt-24 space-y-2 rounded-2xl p-5" data-testid="que-ngay">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h2 id="que-ngay-h" className="text-xl">Quẻ đầu ngày: {the.que_ngay.ten}</h2>
@@ -431,35 +461,18 @@ export function HomNay() {
                 {the.que_ngay.duong && <Link href={duongMoi(the.que_ngay.duong)} className="text-gold hover:underline">Đọc quẻ {the.que_ngay.ten}</Link>}{" "}
                 · <Link href="/kinh-dich?cach=mai_hoa" className="text-gold hover:underline">Gieo quẻ Mai Hoa theo giờ này</Link></p>
             </section>
-          )}
+          )}</div>
 
-          {the.cau_hoi_noi_bat.length > 0 && (
+          <div className="order-[15] empty:hidden">{the.cau_hoi_noi_bat.length > 0 && (
             <section aria-labelledby="noi-bat" className="rounded-2xl border border-line/70 p-5">
               <h2 id="noi-bat" className="inline-flex items-center gap-2 text-lg"><MessageCircleQuestion className="size-5 text-moon" aria-hidden />{c("noi_bat.tieu_de")}</h2>
               <ul className="mt-3 space-y-2 text-sm">{the.cau_hoi_noi_bat.map((c) => <li key={c} className="border-l-2 border-moon/50 pl-3">{c}</li>)}</ul>
             </section>
-          )}
+          )}</div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            {the.ngay_pho_quat.nghia && (
-              <article className="glass rounded-2xl p-4" data-testid="ngay-pho-quat">
-                <div className="flex items-center justify-between text-sm text-fg-muted"><span className="inline-flex items-center gap-1.5"><Globe2 className="size-4" aria-hidden />Ngày chung của mọi người</span>
-                  <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {the.ngay_pho_quat.so}</span></div>
-                <p className="mt-2 text-sm">{the.ngay_pho_quat.nghia}</p>
-              </article>
-            )}
-            <article className="glass rounded-2xl p-4" data-testid="ngay-chaldea">
-              <div className="flex items-center justify-between text-sm text-fg-muted"><span>Theo phái Chaldea</span>
-                <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {the.chaldea.so}{the.chaldea.kep ? ` · kép ${the.chaldea.kep}` : ""}</span></div>
-              {the.chaldea.nghia_kep ? <p className="mt-2 text-sm"><b>{the.chaldea.nghia_kep.bieu_tuong}</b> — {the.chaldea.nghia_kep.xu_huong}</p>
-                : the.chaldea.nghia_goc && <p className="mt-2 text-sm"><b>{the.chaldea.nghia_goc.ten}</b> ({the.chaldea.nghia_goc.hanh_tinh})</p>}
-              <p className="mt-1 text-xs text-fg-muted">{the.chaldea.cong_huong
-                ? `Trùng số ngày sinh của bạn (${the.chaldea.so_ngay_sinh}) — phái này gọi là ngày cộng hưởng.`
-                : `Số ngày sinh của bạn theo Chaldea là ${the.chaldea.so_ngay_sinh}.`} <Link href="/than-so" className="text-gold hover:underline">Xem bài đọc Chaldea</Link></p>
-            </article>
-          </div>
+          
 
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="order-[17] empty:hidden"><div className="grid gap-3 sm:grid-cols-2">
             {[{ nhan: `Tháng ${the.thang_ca_nhan.thang}`, ...the.thang_ca_nhan }, { nhan: `Năm ${the.nam_ca_nhan.nam}`, ...the.nam_ca_nhan }].map((x) => x.chu_de && (
               <article key={x.nhan} className="glass rounded-2xl p-4">
                 <div className="flex items-center justify-between text-sm text-fg-muted"><span>{x.nhan}</span>
@@ -469,17 +482,19 @@ export function HomNay() {
                 {x.tranh && <p className="mt-1 text-sm"><span className="text-cinnabar">Để ý:</span> {x.tranh}</p>}
               </article>
             ))}
-          </div>
+          </div></div>
 
-          <Card className="flex items-start gap-3">
+          <div className="order-[18] empty:hidden"><Card className="flex items-start gap-3">
             <Sunrise className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
             <p className="text-sm"><span className="text-fg-muted">Ngày mai — Ngày cá nhân {the.ngay_mai.so}:</span>{" "}
               {boTienTo(the.ngay_mai.nghia)} <span className="text-fg-muted">Mở lại vào ngày mai để xem câu hỏi mới.</span></p>
-          </Card>
+          </Card></div>
+          </div>
 
-          <CuoiBaiDoc moDun="hom_nay" cauHoi="Thẻ hôm nay có giúp bạn định hướng ngày của mình?" />
+          {/* Hàng cuối (≥ lg): góp ý + lối đi tiếp trải hết bề ngang để ba thẻ đủ rộng. */}
+          <div className="order-[19] empty:hidden lg:order-5 lg:col-span-12"><CuoiBaiDoc moDun="hom_nay" cauHoi="Thẻ hôm nay có giúp bạn định hướng ngày của mình?" /></div>
 
-          <p className="text-xs text-fg-faint">{the.luu_y}</p>
+          <div className="order-[20] empty:hidden lg:order-6 lg:col-span-12"><p className="text-xs text-fg-faint">{the.luu_y}</p></div>
         </div>
       )}
     </div>
