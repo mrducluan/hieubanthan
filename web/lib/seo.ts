@@ -73,7 +73,7 @@ export function ldToChuc() {
     name: TEN_SITE,
     ...(vh.chuSoHuu ? { legalName: vh.chuSoHuu } : {}),
     url: siteUrl(),
-    logo: { "@type": "ImageObject", url: urlDayDu("/icon.svg") },
+    logo: { "@type": "ImageObject", url: urlDayDu("/thuong-hieu/avatar-512.png"), width: 512, height: 512 },
     description: MO_TA_SITE,
     ...(vh.email ? {
       email: vh.email,

@@ -48,7 +48,7 @@ export default async function Page({ params }: Props) {
       <GhiTu tu={tu} />
       <div className="rounded-2xl p-[1px]" style={{ background: "linear-gradient(140deg, rgb(var(--gold) / 0.7), rgb(var(--jade) / 0.45) 55%, rgb(var(--moon) / 0.35))" }}>
         <div className="rounded-2xl bg-surface px-6 py-8">
-          <Logo className="mx-auto size-8" />
+          <Logo className="mx-auto h-8 w-auto" />
           <p className="eyebrow mt-4">Tháng {nd.m}/{nd.y} của {nd.t}</p>
           <h1 className="mt-2 font-serif text-3xl">{nd.g.length} buổi sáng được thắp</h1>
           <p className="mt-2 text-sm text-fg-muted" data-testid="the-thang-k">Theo thần số, tháng {nd.m} là tháng cá nhân {nd.k} của {nd.t}.</p>

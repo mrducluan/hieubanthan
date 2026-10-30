@@ -40,7 +40,7 @@ export default async function Page({ params: thamSo }: Props) {
       <GhiMoThe ma={params.ma} />
       <div className="rounded-2xl p-[1px]" style={{ background: "linear-gradient(140deg, rgb(var(--gold) / 0.7), rgb(var(--moon) / 0.35) 45%, rgb(var(--jade) / 0.5))" }}>
         <div className="rounded-2xl bg-surface px-6 py-8">
-          <Logo className="mx-auto size-8" />
+          <Logo className="mx-auto h-8 w-auto" />
           <p className="eyebrow mt-4">Hồ sơ bản thân</p>
           <h1 className="mt-2 text-3xl">{nd.t}</h1>
           <p className="text-gradient-gold mt-4 font-serif text-8xl leading-none" data-testid="so-the">{nd.so[0]}</p>

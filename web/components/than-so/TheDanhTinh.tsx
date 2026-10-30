@@ -14,7 +14,7 @@ export function TheDanhTinh({ kq, tenHienThi }: { kq: LuanGiaiResult; tenHienThi
         <VongLacThu className="pointer-events-none absolute -right-16 -top-16 size-64 opacity-60" />
         <div className="flex items-center justify-between">
           <span className="eyebrow">Hồ sơ bản thân</span>
-          <Logo className="size-6" />
+          <Logo className="h-5 w-auto" />
         </div>
         <p className="mt-3 font-serif text-2xl">{tenHienThi}</p>
         <dl className="mt-5 grid grid-cols-4 gap-2">

@@ -51,7 +51,7 @@ export default async function Page({ params }: Props) {
       <GhiTu tu={tu} />
       <div className="rounded-2xl p-[1px]" style={{ background: "linear-gradient(140deg, rgb(var(--gold) / 0.7), rgb(var(--moon) / 0.35) 45%, rgb(var(--jade) / 0.5))" }}>
         <div className="rounded-2xl bg-surface px-6 py-8">
-          <Logo className="mx-auto size-8" />
+          <Logo className="mx-auto h-8 w-auto" />
           <p className="eyebrow mt-4">Xem lá số 2 người · {TEN_QUAN_HE_HAI[nd.q]}</p>
           <h1 className="mt-2 font-serif text-3xl">{a} <span className="text-gold">✦</span> {b}</h1>
           <div className="relative mx-auto mt-5 size-40" data-testid="the-hai-diem" data-diem={nd.p}>
