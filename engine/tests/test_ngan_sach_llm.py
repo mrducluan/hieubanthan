@@ -111,7 +111,7 @@ def test_luan_giai_moi_chuong_mot_luot_va_giu_nguoi_goi_qua_luong_phu(monkeypatc
         def __init__(self, *a, **k):
             raise RuntimeError("mạng giả hỏng")
     monkeypatch.setattr(luan_giai_van.httpx, "Client", Hong)
-    bc = {"mo_dun": "tuvi", "chuong": [{"tieu_de": f"C{i}", "doan": ["đoạn"]} for i in range(3)]}
+    bc = {"mo_dun": "tuvi", "chuong": [{"tieu_de": f"C{i}", "doan": ["đoạn đủ dài để gọi AI " * 12]} for i in range(3)]}
     tok = ngan_sach.NGUOI_GOI.set(ngan_sach.bam("192.0.2.9"))
     try:
         kq = luan_giai_van.dien_dat(bc)

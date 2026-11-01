@@ -12,9 +12,13 @@ from app.narrative import luan_giai_van as lgv
 
 BC = {"mo_dun": "tuvi", "ket": "Kết.", "chuong": [
     {"ma": "tong_quan", "tieu_de": "Tổng quan", "cau_hoi": "?", "doan": [
-        "Cung Mệnh có Tử Vi tại Ngọ, người được mô tả là tự trọng.", "Cách cục: Tử Phủ Vũ Tướng (4 sao)."]},
-    {"ma": "su_nghiep", "tieu_de": "Sự nghiệp", "cau_hoi": "?", "doan": ["Quan Lộc có Thiên Phủ, giữ của tốt."]},
+        "Cung Mệnh có Tử Vi tại Ngọ, người được mô tả là tự trọng, thích dẫn dắt và giữ lời hứa với người thân.",
+        "Cách cục: Tử Phủ Vũ Tướng (4 sao). Bạn hợp vai trò cần sự vững vàng, ít hợp việc phải đổi hướng liên tục."]},
+    {"ma": "su_nghiep", "tieu_de": "Sự nghiệp", "cau_hoi": "?", "doan": [
+        "Quan Lộc có Thiên Phủ, giữ của tốt. Công việc hợp nếp đều tay, có quy trình rõ ràng, được giao trách nhiệm "
+        "quản lý tài sản hoặc giữ sổ sách; việc mới nên thử nhỏ trước rồi mới mở rộng, giữ thói quen ghi chép."]},
 ]}
+# EN-4: chương thân ngắn hơn CHUONG_NGAN ký tự giữ nguyên bản gốc (không gọi AI) — mẫu trên đủ dài để thử đường AI.
 
 
 def test_khong_key_giu_ban_mau(monkeypatch):
@@ -97,7 +101,7 @@ def test_kiem_tra_chuong_cum_cam_kb():
     assert lgv.kiem_tra_chuong("Bạn nhanh trí, nên khắc phục thói quen đổi ý.", nguon) == []
     loi = lgv.kiem_tra_chuong("Trên hành trình khám phá bản thân, bạn nhanh trí và sẽ thăng hoa.", nguon)
     assert {"cụm cấm: hành trình", "cụm cấm: khám phá bản thân", "cụm cấm: thăng hoa"} <= set(loi)
-    assert lgv.kiem_tra_chuong("Hai người tương khắc.", nguon) == ["cụm cấm: khắc"]
+    assert "cụm cấm: khắc" in lgv.kiem_tra_chuong("Hai người tương khắc.", nguon)   # EN-4: + thuật ngữ lạ "Tương khắc"
 
 
 def test_cum_cam_ai_roi_ve_ban_mau(monkeypatch):
@@ -119,4 +123,16 @@ def test_luan_giai_moi_giu_hop_va_can_cu(monkeypatch):
     assert kq["cot_loi"] == bc["cot_loi"]
     for a, b in zip(kq["chuong"], bc["chuong"]):
         assert a["hop"] == b["hop"] and a["can_cu"] == b["can_cu"] and a["doan"] == b["doan"]
-    assert [c["che_do"] for c in kq["chuong"][:2]] == ["llm", "llm"]
+    # EN-4: chương thân ngắn (< CHUONG_NGAN) giữ bản gốc; chương đủ dài trong N chương đầu được AI viết lại
+    for c in kq["chuong"][:2]:
+        assert c["che_do"] == ("llm" if len(" ".join(c["doan"])) >= lgv.CHUONG_NGAN else "template"), c["che_do"]
+
+
+def test_chuong_ngan_giu_ban_goc(monkeypatch):
+    """EN-4: chương quá ngắn không gọi AI (AI dễ thêm ý để "đủ dài")."""
+    monkeypatch.setenv("OPENROUTER_API_KEY", "gia")
+    goi = []
+    monkeypatch.setattr(lgv, "_goi_llm", lambda *a: goi.append(a) or "x")
+    ngan = {"mo_dun": "tuvi", "ket": "", "chuong": [{"ma": "a", "tieu_de": "A", "cau_hoi": "?", "doan": ["Ngắn."]}]}
+    kq = lgv.dien_dat(ngan)
+    assert kq["chuong"][0]["che_do"] == "template" and not goi
