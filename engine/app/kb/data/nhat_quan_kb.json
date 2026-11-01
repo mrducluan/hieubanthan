@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "source_id": "hbt_bien_tap_nhat_quan_v1",
+    "school_id": "lien_mon",
+    "trang_thai": "nhap_ai",
+    "ghi_chu": "EN-2 — lời cho lớp nhất quán liên mảng (luangiai/nhat_quan.py). Chỉ ghép mức các môn đã chấm; không điểm số, không phán môn nào đúng."
+  },
+  "nam": {
+    "cung": {
+      "thuan": {
+        "tieu_de": "Năm {nam}: {noi} cùng thấy thuận",
+        "noi_dung": "Hai cách xem độc lập cùng chỉ một hướng: năm {nam} là năm nên mạnh dạn hơn với việc bạn đã chuẩn bị.",
+        "huong_xu_ly": "Chọn một việc lớn nhất của năm và bắt đầu sớm, trong nửa đầu năm."
+      },
+      "can_bang": {
+        "tieu_de": "Năm {nam}: {noi} cùng thấy nhịp đều",
+        "noi_dung": "Hai cách xem cùng thấy năm {nam} không có cú hích lớn, cũng không có chỗ vấp lớn. Kết quả nằm ở nhịp làm đều tay của bạn.",
+        "huong_xu_ly": "Đặt mốc nhỏ theo quý và giữ đúng; việc mới nên thử nhỏ trước."
+      },
+      "can_chu_dong": {
+        "tieu_de": "Năm {nam}: {noi} cùng nhắc đi chậm",
+        "noi_dung": "Hai cách xem cùng thấy năm {nam} cần chủ động hơn thường lệ. Đây là lời nhắc sắp việc cẩn thận, không phải điềm xấu.",
+        "huong_xu_ly": "Việc lớn chia nhỏ, có phương án dự phòng; giấy tờ, tiền bạc kiểm hai lần trước khi ký."
+      }
+    },
+    "khac": {
+      "tieu_de": "Năm {nam}: hai lá số nhìn hai mặt khác nhau",
+      "noi_dung": "{mat}. Hai cách không cãi nhau — mỗi cách nhìn một mặt của cùng một năm, nên mức có thể khác.",
+      "huong_xu_ly": {
+        "can_chu_dong": "Lấy mặt cần lưu ý làm khung an toàn: việc lớn chia nhỏ, có dự phòng; phần thuận dùng để làm việc đã chuẩn bị kỹ.",
+        "can_bang": "Giữ nhịp đều làm nền; phần thuận dành cho một việc bạn đã chuẩn bị sẵn, không ôm thêm nhiều việc mới.",
+        "thuan": "Cả hai cách đều không thấy chỗ vấp lớn — chọn việc quan trọng nhất và làm sớm."
+      }
+    },
+    "mat": {
+      "tuvi": "nhìn các mảng đời: việc, tiền, nhà, quan hệ",
+      "battu": "nhìn sức của chính bạn so với năm",
+      "thanso": "nhìn nhịp chín năm của con số"
+    }
+  }
+}

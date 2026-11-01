@@ -378,14 +378,24 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
                            can_cu=[f"Năm cá nhân {so_nam} — thần số, tính theo năm dương lịch {nam} (mốc 1/1)"],
                            ma=kh.ma_mau("thanso", "nam", f"so{so_nam}")), "thanso", so=so_nam)]
     tom = f"Năm {nam} là năm cá nhân {so_nam} của bạn: {ng.get('chu_de', '').lower()}."
+    muc_nam: dict[str, str] = {}
     for bc, nguon, ten, dau in ((tv, "tuvi", "Tử vi", "ds.nam_nay.luu_nien."), (bt, "battu", "Bát tự", "ds.bt.nam_nay.nam.")):
         if bc:
             c = _doi_nam(_chuong_cua(bc, "nam_nay"), nam) if nam_toi else _chuong_cua(bc, "nam_nay")
             h = next((x for x in c["hop"] if x.get("ma_mau", "").startswith(dau) and x.get("muc")), None)
             if h:
+                # Thời gian tới không có khung "hai cách đọc" của bài Bát tự → nói rõ đây là hai cách TRONG Bát tự, khỏi lẫn
+                # với hộp "hai lá số" (Tử vi ↔ Bát tự) ngay dưới.
+                nd = h["noi_dung"].replace("Hai cách đọc ngược nhau", "Ngay trong Bát tự, hai cách đọc cũng ngược nhau")
                 tom_nam.append(_gan(kh.hop("cot_loi", f"Năm {nam} theo {ten}: {kh.NHAN_MUC[h['muc']].lower()}",
-                                           h["noi_dung"], can_cu=h.get("can_cu"),
+                                           nd, can_cu=h.get("can_cu"),
                                            ma=kh.ma_mau("tgt", nguon, "nam", h["muc"]), muc=h["muc"]), nguon))
+                muc_nam[nguon] = h["muc"]
+    # EN-2: lớp nhất quán liên mảng — Tử vi và Bát tự cùng mức năm → điểm nhấn; khác mức → vì sao + việc nên làm chung
+    from app.luangiai import nhat_quan  # noqa: PLC0415
+    h_nq = nhat_quan.nam(nam, muc_nam)
+    if h_nq:
+        tom_nam.append(_gan(h_nq, "hai_la_so"))
     # TG-V2: lớp từng tháng (con giáp · phong thuỷ · ngày đẹp) + Tử vi / Bát tự — tính một lần cho 12 tháng
     from app.luangiai import nam_tong_quan as ntq  # noqa: PLC0415
     quai = P.menh_quai(ngay_sinh.year, gioi_tinh, ngay_sinh)["quai"] if gioi_tinh else None

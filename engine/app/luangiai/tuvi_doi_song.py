@@ -101,6 +101,8 @@ _THU_TU_LOP = ("dai_han", "luu_nien", "tieu_han")
 _MUC_THANG = {"thuan": "thuan", "binh": "can_bang", "can_than": "can_chu_dong"}
 _NHAN_LOP = {"thuan": "mảng này đang thuận", "can_bang": "mảng này ở mức cân bằng",
              "can_chu_dong": "mảng này cần lưu ý hơn"}
+_NHAN_NAM = {"thuan": "cả năm nhìn chung thuận", "can_bang": "cả năm nhịp khá đều",
+             "can_chu_dong": "cả năm cần lưu ý hơn"}
 # Hướng xử lý dự phòng trong mã (KB thiếu ô) — `scripts/do_chung_chung_tuvi.py` đếm là "hướng chung".
 HUONG_DU_PHONG = (_HUONG_MAC_DINH, _HUONG_TT, _SK_MAC_DINH, *(v[1] for v in _HOA_MAC_DINH.values()),
                   *(v[1] for v in _NHOM_MAC_DINH.values()))
@@ -727,7 +729,11 @@ def _sinh_kw(sinh: dict) -> dict:
             "thang_nhuan": sinh.get("thang_nhuan", "thang_sau"), "lich": sinh.get("lich", "viet")}
 
 
-def _chuong_nam_nay(sinh: dict, ls: dict, cc: dict, vh: dict, ngay_xem: dt.date, hoc: tuple) -> dict:
+def _chuong_nam_nay(sinh: dict, ls: dict, cc: dict, vh: dict, ngay_xem: dt.date, hoc: tuple,
+                    nam_vh: dict | None = None) -> dict:
+    """`nam_vh` = dòng Vận hạn của năm đang xem (`dong_muoi_nam(...)[0]`). EN-2: mức NĂM của hộp lưu niên lấy từ đây —
+    một báo cáo chỉ có một mức "năm nay" (trước: mức gốc của cung lưu niên, có lá ngược dòng 10 năm). Mức gốc của cung
+    vẫn ghi ở "Vì sao nói vậy"; lớp tiểu hạn chỉ thêm chủ đề, không mang chip mức riêng."""
     cand, da_cung, can_cu = [], set(), []
     ten_lop = {"dai_han": "Mười năm này", "luu_nien": "Năm nay", "tieu_han": "Riêng năm nay"}
     for k, lop in enumerate(_THU_TU_LOP):
@@ -736,14 +742,20 @@ def _chuong_nam_nay(sinh: dict, ls: dict, cc: dict, vh: dict, ngay_xem: dt.date,
         kd = kb.dai_han(cung) or {}
         chu_de = kd.get("chu_de") or _ten(cung)
         muc = cc[cung]["muc"]
+        if lop == "luu_nien" and nam_vh:
+            muc = nam_vh["muc"]
+        elif lop == "tieu_han":
+            muc = None
         cu = {"dai_han": f"Đại hạn cung {cung} ({o['can']} {o['chi']}), {o.get('tu_tuoi')}–{o.get('den_tuoi')} tuổi",
-              "luu_nien": f"Lưu niên cung {cung} ({o['can']} {o['chi']})",
+              "luu_nien": f"Lưu niên cung {cung} ({o['can']} {o['chi']}) — cung này tự nó {kb.nhan_muc(cc[cung]['muc']).lower()}"
+                          + (f"; cả năm chấm theo tứ hoá năm + đại hạn: {kb.nhan_muc(nam_vh['muc']).lower()}" if nam_vh else ""),
               "tieu_han": f"Tiểu hạn cung {cung} ({o['can']} {o['chi']})"}[lop]
         can_cu.append(cu)
         if o.get("tu_hoa"):
             can_cu.append(f"Tứ hoá {ten_lop[lop].lower()}: " + ", ".join(
                 f"{h} {s}" for h, s in zip(("Lộc", "Quyền", "Khoa", "Kỵ"), o["tu_hoa"])))
-        if cung in da_cung:
+        trung = cung in da_cung
+        if trung and not (lop == "luu_nien" and nam_vh):
             continue
         da_cung.add(cung)
         nen = kd.get("nen_lam") or ""
@@ -753,11 +765,18 @@ def _chuong_nam_nay(sinh: dict, ls: dict, cc: dict, vh: dict, ngay_xem: dt.date,
                   else f"Từ {o['tu_tuoi']} đến {o['den_tuoi']} tuổi, trọng tâm của bạn là {chu_de}. {nen}")
             tieu = ("Mười năm đầu tiên sắp tới" if chua else f"Mười năm này: {chu_de}")
         else:
-            dau = "Năm nay" if lop == "luu_nien" else "Thêm một lớp riêng của năm nay"
-            nd = f"{dau}, việc hay xoay quanh {chu_de}; {_NHAN_LOP[muc]}. {nen}"
+            nhac = (f", nhất là chuyện {nam_vh['mang']}" if nam_vh and muc == "can_chu_dong" and nam_vh.get("mang")
+                    else f", thuận nhất ở chuyện {nam_vh['mang']}" if nam_vh and muc == "thuan" and nam_vh.get("mang")
+                    else "")
+            if lop == "luu_nien" and trung:      # năm rơi đúng cung mười năm: chỉ nói mức năm, không chép lời nên làm
+                nd = f"Năm nay rơi đúng chủ đề của mười năm này; {_NHAN_NAM[muc]}{nhac}."
+            elif lop == "luu_nien":
+                nd = f"Năm nay, việc hay xoay quanh {chu_de}; {_NHAN_NAM[muc]}{nhac}. {nen}"
+            else:
+                nd = f"Thêm một lớp riêng của năm nay: việc hay xoay quanh {chu_de}. {nen}"
             tieu = f"{'Năm nay' if lop == 'luu_nien' else 'Lớp riêng của năm'}: {chu_de}"
         cand.append(_hop("thoi_diem", tieu if len(tieu) <= 60 else ten_lop[lop], nd, [cu],
-                         _ma("ds", "nam_nay", lop, slug(cung), muc), 3.0 - 0.1 * k, muc=muc))
+                         _ma("ds", "nam_nay", lop, slug(cung), muc or cc[cung]["muc"]), 3.0 - 0.1 * k, muc=muc))
     nhip = None
     try:
         nhip = nhip3.lap(sinh, ngay_xem, sinh.get("luu_nguyet") or ln.MAC_DINH, ls=ls)
@@ -1221,7 +1240,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
         elif ma == "duong_bay":
             c = _chuong_duong_bay(ls, hoc)
         elif ma == "nam_nay":
-            c = _chuong_nam_nay(sinh, ls, cc, vh, ngay_xem, hoc)
+            c = _chuong_nam_nay(sinh, ls, cc, vh, ngay_xem, hoc, nam_vh=dong[0] if dong else None)
         elif ma == "van_han":
             c = _chuong_van_han(dong, vh, ls, hoc)
         elif ma == "loi_khuyen":
