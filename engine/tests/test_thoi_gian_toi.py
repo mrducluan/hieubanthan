@@ -46,11 +46,15 @@ def test_chi_ngay_sinh():
     assert [c["ma"] for c in bc["chuong"]] == CHUONG
     assert set(bc["thieu"]) == {"gio_sinh", "gioi_tinh"}
     c1 = bc["chuong"][0]
-    thang = [h for h in c1["hop"] if h.get("nguon") == "thanso" and h["loai"] == "thoi_diem"]
+    thang = [h for h in c1["hop"] if h.get("thang") and h["loai"] == "thoi_diem"]
     assert [h["thang"] for h in thang] == ["10/2026", "11/2026", "12/2026"]
+    # TG-V2: không cần giờ sinh, mỗi tháng vẫn có thần số + con giáp + phong thuỷ + ngày đẹp
+    for h in thang:
+        assert [r["ma"] for r in h["lop"]] == ["thanso", "con_giap", "phong_thuy", "ngay_dep"]
+        assert all(r["nhan"] and r["loi"] for r in h["lop"])
     assert any(h["loai"] == "cot_loi" and "2027" in h["tieu_de"] for h in c1["hop"])
     c2 = bc["chuong"][1]
-    assert len([h for h in c2["hop"] if h.get("nguon") == "thanso" and h["loai"] == "thoi_diem"]) == 12
+    assert len([h for h in c2["hop"] if h.get("thang") and h["loai"] == "thoi_diem"]) == 12
     for c in bc["chuong"]:
         assert c["moi_xem"]["cau_hoi"] and c["moi_xem"]["phut_doc"] >= 1
         for h in c["hop"]:
@@ -77,10 +81,16 @@ def test_du_la_so_nam_toi():
     bc = T.lap(SINH, HOM_NAY, gioi_tinh="nam", tv_sinh=TV, bt_sinh=BT)
     assert bc["thieu"] == []
     c1, c2, c3, c4 = bc["chuong"]
-    assert len([h for h in c1["hop"] if h.get("nguon") == "tuvi" and h["loai"] == "thoi_diem"]) == 3
-    gop = [h for h in c2["hop"] if h["loai"] == "thoi_diem"]
-    assert len(gop) == 12 and all(h["nguon"] == "hai_la_so" for h in gop)          # UX: 12 hộp, mỗi hộp ba cách xem
-    assert all("Thần số:" in h["noi_dung"] and "Tử vi (" in h["noi_dung"] and "Bát tự (tháng " in h["noi_dung"] for h in gop)
+    t1 = [h for h in c1["hop"] if h.get("thang") and h["loai"] == "thoi_diem"]
+    assert len(t1) == 3 and all({"tuvi", "battu"} <= {r["ma"] for r in h["lop"]} for h in t1)   # TG-V2: chương miễn phí đủ lớp
+    gop = [h for h in c2["hop"] if h["loai"] == "thoi_diem" and h.get("thang")]
+    assert len(gop) == 12 and all(h["nguon"] == "hai_la_so" for h in gop)          # UX: 12 hộp, mỗi hộp đủ cách xem
+    for h in gop:
+        assert [r["ma"] for r in h["lop"]] == ["thanso", "con_giap", "phong_thuy", "ngay_dep", "tuvi", "battu"]
+        assert "giới tính" not in json.dumps(h["lop"], ensure_ascii=False)       # có giới tính → góc hợp riêng
+    # năm: con giáp + phong thuỷ theo mệnh quái có trong chương 1 và chương 3
+    assert any(h.get("nguon") == "phong_thuy" for h in c1["hop"]) and any(h.get("nguon") == "phong_thuy" for h in c3["hop"])
+    assert any(h.get("nguon") == "con_giap" for h in c3["hop"])
     s3 = json.dumps(c3, ensure_ascii=False)
     assert "năm nay" not in s3.lower() and "Năm 2027" in s3
     assert {h.get("nguon") for h in c3["hop"]} >= {"tuvi", "battu", "thanso"}
@@ -112,8 +122,9 @@ def test_muc_nam_lay_tu_luu_nien_khong_phai_dai_han():
     nam = next(h for h in bc["chuong"][2]["hop"] if h["ma_mau"].startswith("ds.nam_nay.luu_nien."))
     assert tv["muc"] == nam["muc"]
     for h in c1["hop"]:
-        if h.get("nguon") == "tuvi" and h["loai"] == "thoi_diem":
-            assert h["tu"] and h["den"] and "âm lịch" in h["tieu_de"]    # web hiện khoảng ngày dương từ tu/den
+        for r in h.get("lop", []):
+            if r["ma"] == "tuvi":
+                assert "âm lịch" in r["tieu"]
 
 
 def test_thang_noi_bat_chi_khi_hai_cach_cung_muc():
@@ -128,14 +139,14 @@ def test_thang_noi_bat_chi_khi_hai_cach_cung_muc():
         b = next(x for x in bt if x["tu"] <= giua <= x["den"])
         assert a["muc"] == b["muc"] == h["muc"]
     assert T.thang_noi_bat(ts) == []                                   # thiếu lá số → không nêu
-    gop = T.gop_thang(ts, tv, bt)
+    gop = T.gop_thang(ts, tv, bt, {})
     for g in gop:                                                      # mức hộp gộp chỉ khi hai lá số cùng mức
         m, y = (int(x) for x in g["thang"].split("/"))
         giua = dt.date(y, m, 15).isoformat()
         a = next(x for x in tv if x["tu"] <= giua <= x["den"])
         b = next(x for x in bt if x["tu"] <= giua <= x["den"])
         assert g.get("muc") == (a["muc"] if a["muc"] == b["muc"] else None)
-    assert T.gop_thang(ts, [], []) == ts
+    assert all([r["ma"] for r in g["lop"]] == ["thanso"] for g in T.gop_thang(ts, [], [], {}))
 
 
 @pytest.mark.parametrize("seed", range(24))
@@ -192,3 +203,23 @@ def test_ma_tap_quan_tach_tinh_huong():
     b = T._hop_tap_quan({**T.tap_quan(SINH, 2027, "nam"), "quan_he_nam": "xung", "tam_tai": None, "kim_lau": None}, 2027, False)
     assert a[0]["ma_mau"] != b[0]["ma_mau"] and "tam_tai3" in a[0]["ma_mau"]
     assert "Thê" not in a[0]["noi_dung"]
+
+
+def test_thang_noi_bat_tg_v2():
+    """Chương 1 nêu tháng hội nhiều lớp thuận / nhiều lớp nhắc chậm (đếm lớp, không điểm số); tên tháng có trong 12
+    tháng của chương 2."""
+    bc = T.lap(SINH, HOM_NAY, gioi_tinh="nam", tv_sinh=TV, bt_sinh=BT)
+    c1, c2 = bc["chuong"][:2]
+    ds12 = {h["thang"] for h in c2["hop"] if h.get("thang") and h["loai"] == "thoi_diem"}
+    for h in c1["hop"]:
+        if h.get("ma_mau", "").startswith("ds.tgt.xep."):
+            assert h["cac_thang"] and set(h["cac_thang"]) <= ds12
+            assert "điểm" not in h["noi_dung"]
+    _sach(bc)
+
+
+def test_thang_xung_tuoi_vao_nen_tranh():
+    bc = T.lap(SINH, HOM_NAY, gioi_tinh="nam")                   # tuổi Ngọ: tháng Tý xung (12/2026)
+    c4 = bc["chuong"][3]
+    h = next(x for x in c4["hop"] if x["ma_mau"].startswith("ds.tgt.xung_thang"))
+    assert "12/2026" in h["noi_dung"]

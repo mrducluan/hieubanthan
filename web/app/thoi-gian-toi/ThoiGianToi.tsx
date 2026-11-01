@@ -39,7 +39,7 @@ export function ThoiGianToi({ cacNam, namBanDau }: { cacNam: number[]; /** ?nam=
       </div>
       {!laSo && (
         <div className="rounded-2xl border border-line/70 p-4 text-sm" data-testid="tgt-bo-sung">
-          <p className="text-fg-muted">Đang đọc theo ngày sinh (thần số) và tập quán theo tuổi. Thêm <b className="text-fg">giờ sinh, giới tính, nơi sinh</b> để đọc thêm lá số Tử vi và Bát tự — tháng nào hai lá số cùng thuận, cùng nên đi chậm.</p>
+          <p className="text-fg-muted">Đang đọc theo ngày sinh: thần số, con giáp, ngày đẹp{hs.gioi_tinh ? ", góc nhà hợp bạn (phong thuỷ)" : ""} và tập quán theo tuổi. Thêm <b className="text-fg">giờ sinh{hs.gioi_tinh ? "" : ", giới tính"}, nơi sinh</b> để mỗi tháng có thêm lá số Tử vi và Bát tự của riêng bạn{hs.gioi_tinh ? "" : ", cùng góc nhà hợp mệnh"} — tháng nào nhiều cách cùng thuận, tháng nào nên đi chậm.</p>
           {boSung ? <NhapHoSo macDinh={hs} can="day_du" nutGui="Cập nhật hồ sơ" onXong={() => setBoSung(false)} className="mt-3" />
             : <button type="button" onClick={() => setBoSung(true)} className="mt-2 text-gold underline underline-offset-4">Bổ sung hồ sơ</button>}
         </div>

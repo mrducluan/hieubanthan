@@ -9,7 +9,7 @@ import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { doanCoThuatNgu, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 import type { BangTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
-import { NHAN_MUC, TEN_CHI_PHI, type Hop, type LoaiHop } from "./kieu";
+import { NHAN_MUC, TEN_CHI_PHI, type HangLop, type Hop, type LoaiHop } from "./kieu";
 
 export const LOAI_HOP: Record<LoaiHop, { nhan: string; Icon: LucideIcon }> = {
   cot_loi: { nhan: "Điều quan trọng", Icon: Star },
@@ -77,7 +77,9 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
         {hop.veto && <span className="ml-2 align-middle rounded-full border border-moon/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-moon" data-testid="hop-veto">Xử lý trước</span>}
       </h4>
       {/* Trục 1: thân chỉ là ý thêm + việc nên làm (engine bỏ phần đã có ở tiêu đề) — có thể rỗng. */}
-      {hop.noi_dung && <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg-muted">{hop.noi_dung}</p>}
+      {hop.noi_dung && <p className={cn("mt-1.5 text-[0.95rem] leading-relaxed", hop.lop?.length ? "font-medium text-fg" : "text-fg-muted")}
+        data-testid={hop.lop?.length ? "hop-tom-lai" : undefined}>{hop.noi_dung}</p>}
+      {hop.lop && hop.lop.length > 0 && <CacLop lop={hop.lop} />}
       {hop.huong_xu_ly && !hop.noi_dung.includes(hop.huong_xu_ly) && (
         <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg"><b className="hop-nhan font-semibold">Nên:</b> {hop.huong_xu_ly}</p>
       )}
@@ -108,5 +110,28 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
         </div>
       )}
     </section>
+  );
+}
+
+/** TG-V2: các cách xem của một tháng, mỗi cách một hàng — nhãn nhỏ (chấm màu theo nghiêng thuận / nhắc chậm, không
+ *  đỏ) trên, lời dưới. Xếp dọc ở mọi cỡ màn hình để chữ không bị ép hẹp trên điện thoại. */
+function CacLop({ lop }: { lop: HangLop[] }) {
+  return (
+    <dl className="mt-3 divide-y divide-line/60 border-t border-line/60" data-testid="hop-lop">
+      {lop.map((r) => {
+        const nghieng = r.muc ?? (r.loai === "thuan" ? "thuan" : r.loai === "luu_y" ? "can_chu_dong" : null);
+        return (
+          <div key={r.ma} className="py-2.5" data-lop={r.ma}>
+            <dt className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.72rem] font-semibold uppercase tracking-wider text-fg-faint">
+              <span className="cham-muc inline-block size-2 shrink-0 rounded-full" data-muc={nghieng ?? "can_bang"} aria-hidden />
+              <span>{r.nhan}</span>
+              {r.tieu && <span className="font-medium normal-case tracking-normal text-fg-muted">· {r.tieu}</span>}
+              {r.muc && <span data-muc={r.muc} className="chip-muc rounded-full px-1.5 py-0 text-[0.65rem] normal-case tracking-normal">{NHAN_MUC[r.muc]}</span>}
+            </dt>
+            <dd className="mt-1 text-sm leading-relaxed text-fg-muted">{r.loi}</dd>
+          </div>
+        );
+      })}
+    </dl>
   );
 }

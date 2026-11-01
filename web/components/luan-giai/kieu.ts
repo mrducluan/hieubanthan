@@ -6,6 +6,18 @@ import type { MoiXem } from "@/lib/sao-xem-truoc";
 export type LoaiHop = "cot_loi" | "diem_manh" | "luu_y" | "loi_khuyen" | "thoi_diem";
 export type Muc = "thuan" | "can_bang" | "can_chu_dong";
 
+export interface HangLop {
+  ma: "thanso" | "con_giap" | "phong_thuy" | "ngay_dep" | "tuvi" | "battu" | string;
+  nhan: string;
+  /** Dòng ngắn (vd "Tháng Tý xung tuổi Ngọ", "Tháng 11 âm lịch"). */
+  tieu?: string;
+  loi: string;
+  /** Lớp con giáp / phong thuỷ: nghiêng thuận / nhắc chậm / bình (chỉ để tô chấm, không chấm điểm). */
+  loai?: "thuan" | "luu_y" | "trung";
+  /** Lớp Tử vi / Bát tự: mức đã chấm của tháng âm / tháng tiết. */
+  muc?: Muc | null;
+}
+
 export interface Hop {
   loai: LoaiHop;
   /** Nhãn riêng thay nhãn mặc định của loại (vd "Điểm sáng" ở nhịp 3 tháng). */
@@ -26,6 +38,9 @@ export interface Hop {
   tham_chieu?: string;
   /** Hộp cot_loi: chương gốc + loại hộp gốc (dùng chung ma_mau với hộp gốc). */
   tu_chuong?: string; loai_goc?: LoaiHop;
+  /** TG-V2 (Thời gian tới): các cách xem của MỘT tháng thành hàng — thần số · con giáp · phong thuỷ · ngày đẹp · Tử vi ·
+   *  Bát tự. `noi_dung` khi có `lop` là câu "Tóm lại" ghép các lớp. */
+  lop?: HangLop[];
   /** Hộp luu_y: hướng xử lý (thường đã nằm trong noi_dung). */
   huong_xu_ly?: string;
   /** Hộp thoi_diem: mức + khoảng thời gian (chữ) hoặc khoảng tuổi. */
