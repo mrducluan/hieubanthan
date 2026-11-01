@@ -114,7 +114,10 @@ def phan_loai(cau_hoi: str) -> dict:
     elif chung.co(t, NAM_VIEC) and (chung.co(t, NAM_KW) or chung.co(t, [r"tuoi toi", r"xem tuoi"])) \
             or chung.co(t, [r"kim lau", r"hoang oc", r"tam tai", r"nam tuoi", r"sao han", r"muon tuoi"]):   # MT-ĐS B1
         kq.update(loai="nam", xu_ly="tra_loi_kem_luu_y")
-    elif (n2 := hieu_cau.nguoi_thu_hai(t)) and n2["quan_he"] == "vo_chong" and n2.get("nam_sinh"):
+    elif (n2 := hieu_cau.nguoi_thu_hai(t)) and n2["quan_he"] == "vo_chong" and n2.get("nam_sinh") \
+            and re.search(r"(?<!vo )\b(chong|vo)\b(?! chong)(\s+(toi|minh|em))?\s*(sn|sinh)?\s*(nam\s*)?(19\d\d|20[0-4]\d)", t):
+        # năm sinh phải gắn với MỘT vai ("vợ tôi sinh 1994", "ck sn 1985") — "vợ chồng tôi sinh 1990 và 1992" không
+        # biết năm nào của ai → không đoán giới tính, hỏi thêm (nhãn kho can_them_du_lieu)
         # EN-3: nêu rõ năm sinh vợ/chồng (kể cả "ck sn 1985 vk sn 1991") → tính luôn mệnh quái hai người
         kq["loai"], kq["kia_ro"], kq["nam_sinh_kia"] = "hop", True, n2["nam_sinh"]
         kq["cac_nam_sinh"] = n2.get("cac_nam_sinh")

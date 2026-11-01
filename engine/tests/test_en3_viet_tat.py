@@ -39,3 +39,13 @@ def test_chuan_hoa_goc_khong_doi():
 def test_chu_co_dau_khong_mo(cau, ra):
     """"ế", "túi" (có dấu) không bị mở thành "em", "tôi" — chỉ mở khi gõ đúng chữ không dấu."""
     assert hoi.chuan_hoa_cau(cau) == ra
+
+
+@pytest.mark.parametrize("cau", ["toi e lau vay co phai do so khong", "bao gio minh het e", "con gai toi bi e mai"])
+def test_e_khong_dau_la_e(cau):
+    """"e" gõ không dấu sau "tôi / hết / bị…" hoặc trước "lâu / mãi…" là "ế", không mở thành "em"."""
+    assert " em " not in f" {hoi.chuan_hoa_cau(cau)} ", hoi.chuan_hoa_cau(cau)
+
+
+def test_e_dau_cau_van_la_em():
+    assert hoi.chuan_hoa_cau("e sn 1998 hoi ve cv") == "em sn 1998 hoi ve cong viec"

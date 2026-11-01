@@ -85,3 +85,14 @@ def test_mo_phan_trong_vuon_la_am_trach():
 @pytest.mark.parametrize("ma", ["cay_trong_phong_ngu", "gan_chua", "cua_phong_doi_wc"])
 def test_muc_dot_2_du_khuon(ma):
     test_muc_moi_du_khuon(ma)
+
+
+@pytest.mark.parametrize("cau", ["Vợ chồng tôi sinh 1990 và 1992, nhà hướng Nam có hợp không",
+                                 "Hai vợ chồng sinh năm 1988 và 1991 thì chọn hướng nào"])
+def test_vo_chong_khong_ro_ai_sinh_nam_nao_thi_hoi_them(cau):
+    """Kho (skill huyenhoc-tu-cai-thien): không biết năm nào của chồng, năm nào của vợ → không đoán giới tính, hỏi thêm."""
+    from tests.test_en3_hieu_cau_chay import chay
+    pl = pt.phan_loai(cau)
+    assert not pl.get("kia_ro"), pl
+    s = chay("phongthuy", cau)["cau_tra_loi"]
+    assert "người kia (sinh" not in s and "chồng (sinh" not in s and "vợ (sinh" not in s, s[:300]

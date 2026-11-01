@@ -20,3 +20,7 @@ def test_chu_de(cau, cd):
 def test_xung_trong_tu_tru_khong_phai_hop_hai_nguoi():
     p = bt.phan_loai("Trong bát tự của tôi trụ năm và trụ giờ có xung nhau không")
     assert p["loai"] == "la_so", p["loai"]
+
+
+def test_tru_cua_hai_vo_chong_van_la_hop():
+    assert bt.phan_loai("Trụ ngày của hai vợ chồng có xung nhau không?")["loai"] == "hop"

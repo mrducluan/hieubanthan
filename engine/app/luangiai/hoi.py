@@ -46,14 +46,27 @@ VIET_TAT = {
 }
 # Chữ trùng với một từ CÓ DẤU khác nghĩa ("ế", "túi") → chỉ mở khi người dùng gõ đúng chữ không dấu (so trên câu gốc).
 VIET_TAT_GOC = {"e": "em", "tui": "toi"}
+TU_DIEN_PHUONG_PHAP = {"pitago", "chaldea", "so_kep"}
 _VT_GOC_RX = re.compile(r"(?<!\w)(" + "|".join(VIET_TAT_GOC) + r")(?!\w)", re.IGNORECASE)
+# "e" gõ không dấu cũng có thể là "ế" ("toi e lau", "het e", "bi e mai") → không mở khi đứng sau / trước các từ này.
+_E_LA_E = re.compile(r"(?:het|bi|toi|minh|em|van|con|da|cu|dang|sao|tui|tao|anh|chi|co|e)\s+e\s*$|^\s*(lau|mai|qua|dai|hoai|vo|chong|nua|ca doi)\b",
+                     re.IGNORECASE)
 _VT_RX = re.compile(r"(?<!\w)(" + "|".join(sorted(map(re.escape, VIET_TAT), key=len, reverse=True)) + r")(?!\w)")
 
 
 def chuan_hoa_cau(s: str) -> str:
     """Chuẩn hoá CÂU HỎI: `chuan_hoa` + mở viết tắt (`VIET_TAT`) + "27t" → "27 tuoi". Dùng ở chỗ định tuyến câu hỏi; mã
     kiểm chứng / khoá KB vẫn dùng `chuan_hoa`."""
-    s = _VT_GOC_RX.sub(lambda m: VIET_TAT_GOC[m.group(1).lower()], unicodedata.normalize("NFC", s))
+    s = unicodedata.normalize("NFC", s)
+
+    def _mo(m: re.Match) -> str:
+        w = m.group(1).lower()
+        if w == "e":
+            truoc, sau = chuan_hoa(s[:m.start()])[-12:] + " e", chuan_hoa(s[m.end():])[:12]
+            if _E_LA_E.search(truoc) or _E_LA_E.match(sau):
+                return m.group(1)
+        return VIET_TAT_GOC[w]
+    s = _VT_GOC_RX.sub(_mo, s)
     t = chuan_hoa(s)
     t = re.sub(r"(?<!\w)(\d{1,2})t(?!\w)", r"\1 tuoi", t)
     return _VT_RX.sub(lambda m: VIET_TAT[m.group(1)], t)
@@ -92,7 +105,10 @@ TU_CHOI = {
     "suc_khoe_the_chat": [r"benh gi", r"mac benh", r"ung thu", r"dau da day", r"vo sinh",
                           r"sinh con duoc khong", r"co nen mo vao", r"phau thuat", r"song tho", r"an gi cho hop",
                           r"suc khoe cua toi the nao", r"khoi benh"],
-    "du_doan_cu_the": [r"nam nao toi chet", r"bao gio toi chet", r"khi nao toi chet",
+    # "tai nạn": thần số không có cơ sở đoán tai nạn → từ chối nhẹ (vòng đo thanso-tu-cai-thien bắt lùi sau EN-1).
+    # Huyền học bỏ mẫu này qua `chung._BO_CHAN_HH` (MT-ĐS trả lời bằng mức + việc giữ an toàn).
+    "du_doan_cu_the": [r"nam nao toi chet", r"bao gio toi chet", r"khi nao toi chet", r"(bi|gap|co) tai nan",
+                       r"tai nan (khong|nam nay|nam sau)",
                        r"thang kien", r"cho toi biet chac", r"chac chan", r"ngay cu the",
                        r"ten gi sinh nam nao", r"may dua con", r"nam nao toi ly hon",
                        r"gia vang", r"doi nao thang", r"con bao lau"],
@@ -336,7 +352,11 @@ def phan_loai(cau_hoi: str) -> dict:
     if gt and not _co(t, [r"toi co", r"cua toi", r"toi la", r"ten toi", r"em co"]):
         return xong("ky_thuat", "ban_than", "tra_loi", "giai_thich")
     from app.hoidap import hieu_cau  # noqa: PLC0415 — EN-3 (hieu_cau dùng _co của module này)
-    if not gt and (td := hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "thanso")):
+    # Chỉ thuật ngữ về CÁCH TÍNH (Pitago, Chaldea, số kép): các khái niệm nợ nghiệp, năm cá nhân, sứ mệnh… đã có lời
+    # đáp riêng sâu hơn ở nhánh lĩnh vực (vòng đo thanso-tu-cai-thien: 14 câu "Nợ nghiệp X là gì" bị giành nếu mở rộng).
+    if not gt and (td := [m for m in hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "thanso")
+                          if m["ma"] in TU_DIEN_PHUONG_PHAP
+                          or re.search(r"cach tinh|(duoc )?tinh (sao|the nao|nhu the nao|ra sao|bang cach nao)", t)]):
         kq["tu_dien"] = [m["ma"] for m in td]          # câu kiến thức → từ điển thuật ngữ, không đọc số của người hỏi
         return xong("ky_thuat", "ban_than", "tra_loi", "giai_thich")
 

@@ -125,7 +125,9 @@ def phan_loai(cau_hoi: str) -> dict:
         return kq
     kq["lo_so"] = chung.co(t_chinh, LO_SO)
     kq["sao_han"] = chung.sao_han_hoi(t)
-    if chung.co(t, HOP) and not kq["tru"]:     # EN-3: "trụ năm và trụ giờ có xung nhau" là câu về chính lá số
+    # EN-3: "trụ năm và trụ giờ CỦA TÔI có xung nhau" là câu về chính lá số; có người thứ hai thì vẫn là hợp
+    if chung.co(t, HOP) and (not kq["tru"] or chung.co(t, [r"vo chong", r"hai (nguoi|dua|ben)", r"ca hai",
+                                                           r"nguoi (kia|ay)", r"(chong|vo|nguoi yeu) (toi|minh|em)"])):
         kq["loai"] = "hop"
     elif chung.co(t, CON):
         kq["loai"] = "con"
