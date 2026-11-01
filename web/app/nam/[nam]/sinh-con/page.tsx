@@ -65,13 +65,14 @@ export default async function Page(p: P) {
             <h3 className={`text-lg ${MAU[k]}`}>{ds[0]!.nhom_nhan}</h3>
             <p className="mt-0.5 text-sm text-fg-muted">{d.loi_nhom[k]}</p>
             <div className="mt-2 overflow-x-auto">
-              <table className="w-full min-w-[30rem] text-left text-sm" data-testid={`bang-${k}`}>
-                <thead className="text-xs text-fg-faint"><tr><th className="py-2 pr-3">Bố/mẹ sinh</th><th className="pr-3">Địa chi</th><th>Mệnh</th></tr></thead>
+              <table className="w-full text-left text-sm sm:min-w-[30rem]" data-testid={`bang-${k}`}>
+                <thead className="text-xs text-fg-faint"><tr><th className="py-2 pr-3">Bố/mẹ sinh</th><th className="pr-3">Địa chi</th><th className="hidden sm:table-cell">Mệnh</th></tr></thead>
                 <tbody>{ds.map((x) => (
                   <tr key={x.nam_sinh} className="border-t border-line/50">
-                    <td className="py-2 pr-3 text-fg">{x.nam_sinh} <span className="text-fg-faint">{x.can_chi}</span></td>
+                    <td className="py-2 pr-3 text-fg">{x.nam_sinh} <span className="text-fg-faint">{x.can_chi}</span>
+                      <span className="block text-xs text-fg-faint sm:hidden">{x.nap_am} · {x.nap_am_nhan.toLowerCase()}</span></td>
                     <td className="pr-3 text-fg-muted">{x.chi_nhan}</td>
-                    <td className="text-fg-muted">{x.nap_am} · {x.nap_am_nhan.toLowerCase()}</td>
+                    <td className="hidden text-fg-muted sm:table-cell">{x.nap_am} · {x.nap_am_nhan.toLowerCase()}</td>
                   </tr>
                 ))}</tbody>
               </table>
@@ -79,7 +80,6 @@ export default async function Page(p: P) {
           </div>
         ))}
       </section>
-      <p className="mt-6 rounded-xl border border-line/70 p-4 text-sm leading-relaxed text-fg-muted">{d.ranh_gioi}</p>
       <p className="mt-4 text-sm text-fg-muted">Đọc thêm:{" "}
         {n <= 2027 && <><Link href={duongTrang("menh_nam", `sinh-nam-${n}-menh-gi`)} className="text-gold underline">sinh năm {n} mệnh gì</Link> · </>}
         <Link href={duongCuoiHoi(n)} className="text-gold underline">cưới năm {n} tuổi nào</Link> ·{" "}

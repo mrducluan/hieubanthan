@@ -25,7 +25,7 @@ export default async function Page(p: P) {
   const banDau = hoi && n.cac_nam.includes(hoi) ? hoi : n.mac_dinh;
   return (
     <TrangCongCu duong={ND_THOI_GIAN_TOI.duong}>
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-5xl">
         <TieuDeTrang nho={CHU_THOI_GIAN_TOI["dau.nhan_tren"]!.mac_dinh} lon="Thời gian tới của bạn"
           mo_ta="3 tháng tới, 12 tháng tới và cả năm — đọc từ ngày sinh của chính bạn theo thần số, Tử vi, Bát tự và tập quán theo tuổi. Lời đời thường, nói rõ tháng nào nên đẩy mạnh, tháng nào nên đi chậm." />
         <ThoiGianToi cacNam={n.cac_nam} namBanDau={banDau} />

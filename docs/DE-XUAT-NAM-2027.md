@@ -3,8 +3,9 @@
 > **Trạng thái (2026-10-30):** chủ dự án duyệt **A + B** — đã làm (NAM-1, NAM-2, dòng quyết định trong CLAUDE.md). Chốt: URL
 > `/nam/{năm}`, nhãn menu "Năm 2027" (tự đổi năm), Kim lâu cưới theo tuổi mụ cô dâu, B miễn phí 3 tháng + tóm tắt năm.
 > Thêm khi làm: hộp "tháng nổi bật" (Tử vi và Bát tự cùng mức), `/lich-am` hết 404, hub Huyền học +3 ô, menu `{nam}` dùng
-> được cả trong CMS. Còn để sau: sitemap ngày tốt theo việc từ tháng 11/2027 (giữ quyết định SEO-L2 "tháng này → +12"),
-> "Tử vi 2027 theo tuổi" dạng bảng (đợt 3, quyết theo số Search Console sau Tết).
+> được cả trong CMS. **2026-11-01 (NAM-3, chủ dự án duyệt):** đã làm sitemap ngày tốt theo việc tới +24 tháng và "Tử vi
+> năm theo tuổi" (`/nam/{năm}/tuoi-{năm sinh}`, một trang gộp nam + nữ mạng, lưới 12 con giáp ở trang năm), cùng rà menu và
+> soát UI/UX độc lập (CLAUDE.md dòng NAM-3).
 
 Chủ dự án hỏi: rà các URL hợp cho người xem năm 2027, có nên làm một menu lớn gom "3 tháng tới / 12 tháng tới của
 bản thân" (tính bằng engine đang có) cùng xông đất, xem nhà…; tự tìm ý tưởng trong engine + KB mà nhiều người hỏi,

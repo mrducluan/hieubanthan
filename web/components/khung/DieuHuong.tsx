@@ -58,8 +58,9 @@ function MucCoCon({ m, on, i }: { m: MucMenu; on: boolean; i: number }) {
         </button>
       </div>
       {/* pt-2 nối khoảng trống giữa nút và bảng để rê chuột xuống không bị đóng */}
-      <div id={id} hidden={!mo} className="absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-2">
-        <ul className="rounded-2xl border border-line bg-surface/95 p-2 shadow-card backdrop-blur-lg" data-testid="menu-con">
+      {/* > 6 menu con (vd "Năm 2027", "Huyền học") → hai cột, bảng không cao quá màn hình */}
+      <div id={id} hidden={!mo} className={cn("absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2", m.con.length > 6 ? "w-[36rem]" : "w-72")}>
+        <ul className={cn("rounded-2xl border border-line bg-surface/95 p-2 shadow-card backdrop-blur-lg", m.con.length > 6 && "grid grid-cols-2 gap-x-1")} data-testid="menu-con">
           {m.con.map((c) => (
             <li key={c.href + c.ten}>
               <Link href={c.href} onClick={() => setMo(false)} className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-surface-2/70 focus-visible:bg-surface-2/70">
@@ -102,7 +103,7 @@ function MenuDiDong({ muc }: { muc: MucMenu[] }) {
                           <li key={c.href + c.ten}>
                             <Link href={c.href} onClick={() => setMo(false)} className="flex min-h-11 flex-col justify-center py-1 text-sm text-fg-muted hover:text-fg">
                               <span>{c.ten}</span>
-                              {c.mo_ta && <span className="line-clamp-1 text-[11px] leading-snug text-fg-faint">{c.mo_ta}</span>}
+                              {c.mo_ta && <span className="line-clamp-2 text-[11px] leading-snug text-fg-faint">{c.mo_ta}</span>}
                             </Link>
                           </li>
                         ))}

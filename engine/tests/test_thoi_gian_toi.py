@@ -78,9 +78,9 @@ def test_du_la_so_nam_toi():
     assert bc["thieu"] == []
     c1, c2, c3, c4 = bc["chuong"]
     assert len([h for h in c1["hop"] if h.get("nguon") == "tuvi" and h["loai"] == "thoi_diem"]) == 3
-    tv12 = [h for h in c2["hop"] if h.get("nguon") == "tuvi" and h["loai"] == "thoi_diem"]
-    assert 12 <= len(tv12) <= 14                                   # tháng nhuận tách nửa đầu / nửa sau
-    assert len([h for h in c2["hop"] if h.get("nguon") == "battu"]) == 12
+    gop = [h for h in c2["hop"] if h["loai"] == "thoi_diem"]
+    assert len(gop) == 12 and all(h["nguon"] == "hai_la_so" for h in gop)          # UX: 12 hộp, mỗi hộp ba cách xem
+    assert all("Thần số:" in h["noi_dung"] and "Tử vi (" in h["noi_dung"] and "Bát tự (tháng " in h["noi_dung"] for h in gop)
     s3 = json.dumps(c3, ensure_ascii=False)
     assert "năm nay" not in s3.lower() and "Năm 2027" in s3
     assert {h.get("nguon") for h in c3["hop"]} >= {"tuvi", "battu", "thanso"}
@@ -117,19 +117,25 @@ def test_muc_nam_lay_tu_luu_nien_khong_phai_dai_han():
 
 
 def test_thang_noi_bat_chi_khi_hai_cach_cung_muc():
-    bc = T.lap(SINH, HOM_NAY, gioi_tinh="nam", tv_sinh=TV, bt_sinh=BT)
-    hop = bc["chuong"][1]["hop"]
-    nb = [h for h in hop if h["ma_mau"].startswith("ds.tgt.noi_bat")]
-    tv = [h for h in hop if h["nguon"] == "tuvi" and h.get("tu")]
-    bt = [h for h in hop if h["nguon"] == "battu" and h.get("tu")]
+    ts = T._thang_ts(SINH.day, SINH.month, HOM_NAY, 12)
+    tv = T._tv_thang(TV, HOM_NAY, 4, None)
+    bt = T._bt_thang(BT, HOM_NAY, 12)
+    nb = T.thang_noi_bat(ts + tv + bt)
     for h in nb:
         m, y = (int(x) for x in h["thang"].split("/"))
         giua = dt.date(y, m, 15).isoformat()
         a = next(x for x in tv if x["tu"] <= giua <= x["den"])
         b = next(x for x in bt if x["tu"] <= giua <= x["den"])
         assert a["muc"] == b["muc"] == h["muc"]
-    assert hop[: len(nb)] == nb
-    assert T.thang_noi_bat([h for h in hop if h["nguon"] == "thanso"]) == []   # thiếu lá số → không nêu
+    assert T.thang_noi_bat(ts) == []                                   # thiếu lá số → không nêu
+    gop = T.gop_thang(ts, tv, bt)
+    for g in gop:                                                      # mức hộp gộp chỉ khi hai lá số cùng mức
+        m, y = (int(x) for x in g["thang"].split("/"))
+        giua = dt.date(y, m, 15).isoformat()
+        a = next(x for x in tv if x["tu"] <= giua <= x["den"])
+        b = next(x for x in bt if x["tu"] <= giua <= x["den"])
+        assert g.get("muc") == (a["muc"] if a["muc"] == b["muc"] else None)
+    assert T.gop_thang(ts, [], []) == ts
 
 
 @pytest.mark.parametrize("seed", range(24))

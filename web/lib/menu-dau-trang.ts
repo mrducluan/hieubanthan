@@ -27,11 +27,12 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/phong-thuy/huong-hop-tuoi", ten: "Hướng nhà hợp tuổi", mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
     { href: "/phong-thuy/dau-hieu", ten: "Dấu hiệu trong nhà", mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
     { href: "/kien-thuc", ten: "Thư viện kiến thức", mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
+    { href: "/tu-dien", ten: "Từ điển thuật ngữ", mo_ta: "Hơn 200 thuật ngữ giải nghĩa dễ hiểu" },
   ] },
   // NAM-1/NAM-2 (2026-10-30): menu lớn theo năm — {nam} thay bằng năm engine chọn (năm tới khi Tết sau còn ≤ 120 ngày,
   // không thì năm âm đang đi) lúc dựng trang → không phải sửa tay mỗi năm (`thayNamMenu`).
   { href: "/nam/{nam}", ten: "Năm {nam}", bieu_tuong: "lich", di_dong: true, con: [
-    { href: "/thoi-gian-toi", ten: "3 tháng, 12 tháng tới của bạn", mo_ta: "Theo thần số, Tử vi, Bát tự của chính bạn" },
+    { href: "/thoi-gian-toi", ten: "Thời gian tới của bạn", mo_ta: "3 tháng, 12 tháng tới theo ngày sinh của bạn" },
     { href: "/nam/{nam}", ten: "Năm {nam} con gì, mệnh gì", mo_ta: "Tết, Tam tai, năm tuổi, 12 con giáp" },
     { href: "/nam/{nam}#theo-tuoi", ten: "Tử vi năm {nam} theo tuổi", mo_ta: "Từng năm sinh, nam mạng và nữ mạng" },
     { href: "/xem-sao-han/{nam}", ten: "Sao hạn năm {nam}", mo_ta: "Sao chiếu theo tuổi, nam và nữ" },
@@ -42,6 +43,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/phong-thuy/huong-xau-nam/{nam}", ten: "Hướng xấu năm {nam}", mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
     { href: "/lich-am/{nam}", ten: "Lịch âm {nam}", mo_ta: "Tết, tháng nhuận, mùng 1 và rằm" },
     { href: "/doi-lich-am-duong", ten: "Đổi lịch âm dương", mo_ta: "Đổi ngày âm ↔ dương theo lịch Việt Nam" },
+    { href: "/nam", ten: "Các năm khác", mo_ta: "Năm âm lịch đang đi và năm tới" },
   ] },
   { href: "/blog", ten: "Blog", bieu_tuong: "bao", di_dong: false, con: [] },
   { href: "/tai-khoan", ten: "Tài khoản", bieu_tuong: "nguoi", di_dong: true, con: [

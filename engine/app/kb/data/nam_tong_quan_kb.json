@@ -58,12 +58,12 @@
     },
     "nhom": {
       "hop": "Dân gian xem là hợp",
-      "binh": "Bình thường",
+      "binh": "Không hợp, không xung",
       "luu_y": "Dân gian hay nhắc cân nhắc"
     },
     "loi_nhom": {
       "hop": "Theo địa chi, tuổi bố/mẹ tam hợp hoặc lục hợp với tuổi con.",
-      "binh": "Không có quan hệ hợp hay xung đáng kể theo địa chi.",
+      "binh": "Không tam hợp, lục hợp hay xung theo địa chi; vài tuổi có quan hệ hình, hại nhẹ theo dân gian — ghi ở cột địa chi.",
       "luu_y": "Tuổi bố/mẹ xung với tuổi con theo địa chi. Đây chỉ là quan niệm dân gian: tình thương và cách nuôi dạy quyết định chuyện cha con, mẹ con hoà hợp."
     },
     "ranh_gioi": "Con cái là chuyện duyên và sức khoẻ. Hãy để sức khoẻ của mẹ, điều kiện gia đình và lời khuyên của bác sĩ đi trước con giáp; không nên ép ngày sinh hay can thiệp y khoa chỉ để con đúng tuổi."

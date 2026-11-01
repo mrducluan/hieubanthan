@@ -46,10 +46,11 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/phong-thuy/huong-hop-tuoi", "Hướng nhà hợp tuổi"), mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
     { ...lk("/phong-thuy/dau-hieu", "Dấu hiệu trong nhà"), mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
     { ...lk("/kien-thuc", "Thư viện kiến thức"), mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
+    { ...lk("/tu-dien", "Từ điển thuật ngữ"), mo_ta: "Hơn 200 thuật ngữ giải nghĩa dễ hiểu" },
   ] },
   // NAM-1/NAM-2: "{nam}" được web thay bằng năm đang mời xem (gõ {nam} trong chữ / đường dẫn của mục bất kỳ).
   { ...lk("/nam/{nam}", "Năm {nam}"), bieu_tuong: "lich", di_dong: true, con: [
-    { ...lk("/thoi-gian-toi", "3 tháng, 12 tháng tới của bạn"), mo_ta: "Theo thần số, Tử vi, Bát tự của chính bạn" },
+    { ...lk("/thoi-gian-toi", "Thời gian tới của bạn"), mo_ta: "3 tháng, 12 tháng tới theo ngày sinh của bạn" },
     { ...lk("/nam/{nam}", "Năm {nam} con gì, mệnh gì"), mo_ta: "Tết, Tam tai, năm tuổi, 12 con giáp" },
     { ...lk("/nam/{nam}#theo-tuoi", "Tử vi năm {nam} theo tuổi"), mo_ta: "Từng năm sinh, nam mạng và nữ mạng" },
     { ...lk("/xem-sao-han/{nam}", "Sao hạn năm {nam}"), mo_ta: "Sao chiếu theo tuổi, nam và nữ" },
@@ -60,6 +61,7 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/phong-thuy/huong-xau-nam/{nam}", "Hướng xấu năm {nam}"), mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
     { ...lk("/lich-am/{nam}", "Lịch âm {nam}"), mo_ta: "Tết, tháng nhuận, mùng 1 và rằm" },
     { ...lk("/doi-lich-am-duong", "Đổi lịch âm dương"), mo_ta: "Đổi ngày âm ↔ dương theo lịch Việt Nam" },
+    { ...lk("/nam", "Các năm khác"), mo_ta: "Năm âm lịch đang đi và năm tới" },
   ] },
   { ...lk("/blog", "Blog"), bieu_tuong: "bao", di_dong: false, con: [] },
   { ...lk("/tai-khoan", "Tài khoản"), bieu_tuong: "nguoi", di_dong: true, con: [

@@ -40,12 +40,12 @@ export default async function Page(p: P) {
   const [tetY, tetM] = [Number(d.tet.slice(0, 4)), Number(d.tet.slice(5, 7))];
   const o: [string, string][] = [
     ["Can chi", d.can_chi], ["Mệnh nạp âm", `${d.nap_am.ten} · hành ${d.nap_am.hanh}`],
-    ["Tết Nguyên đán", dmy(d.tet)], ["Năm âm lịch kết thúc", dmy(d.het_nam)],
+    ["Tết Nguyên đán", dmy(d.tet)], ["Giao thừa", dmy(d.het_nam)],
     ["Lập xuân", dmy(d.lap_xuan)], ["Tháng nhuận", d.thang_nhuan ? `Tháng ${d.thang_nhuan}` : "Không có"],
     ["Năm tuổi", `Tuổi ${d.nam_tuoi}`], ["Xung năm", `Tuổi ${d.xung}`], ["Hợp năm", `Tuổi ${d.tuoi_hop.join(", ")}`],
     ["Rằm tháng Giêng", dmy(d.moc.find((m) => m.ma === "ram_gieng")?.duong ?? d.tet)],
     ["Tam tai", `Tuổi ${d.tam_tai.tuoi.join(", ")} (năm thứ ${d.tam_tai.nam_thu})`],
-    ["Năm thế giới (thần số)", d.so_nam_the_gioi.so === d.so_nam_the_gioi.rut_gon ? String(d.so_nam_the_gioi.so) : `${d.so_nam_the_gioi.so} / ${d.so_nam_the_gioi.rut_gon}`],
+    ["Số của năm (thần số)", d.so_nam_the_gioi.so === d.so_nam_the_gioi.rut_gon ? String(d.so_nam_the_gioi.so) : `${d.so_nam_the_gioi.so} / ${d.so_nam_the_gioi.rut_gon}`],
   ];   // 12 ô: kín hàng ở lưới 2 và 3 cột
   const tra: { href: string; ten: string; mo_ta: string }[] = [
     { href: "#theo-tuoi", ten: `Tử vi năm ${n} theo tuổi`, mo_ta: "Từng năm sinh 1960–2005, nam và nữ mạng" },
@@ -126,6 +126,7 @@ export default async function Page(p: P) {
       <section className="mt-8" aria-labelledby="con-giap">
         <h2 id="con-giap" className="text-2xl">{c("con_giap.tieu_de", bien)}</h2>
         <p className="mt-1 text-sm text-fg-muted">{c("con_giap.mo_ta", bien)}</p>
+        <p className="mt-1 text-xs text-fg-faint">Dòng “Bình thường”: không có quan hệ đặc biệt với năm theo địa chi.</p>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full min-w-[32rem] text-left text-sm" data-testid="bang-con-giap">
             <thead className="text-xs text-fg-faint"><tr><th className="py-2 pr-3">Tuổi</th><th className="pr-3">Với năm {d.con_giap}</th><th className="pr-3">Tam tai</th><th>Năm sinh</th></tr></thead>
@@ -133,8 +134,9 @@ export default async function Page(p: P) {
               {d.bang_con_giap.map((r) => (
                 <tr key={r.chi} className="border-t border-line/50 align-top">
                   <td className="py-2 pr-3 font-medium text-fg">{r.chi}</td>
-                  <td className="py-2 pr-3"><span className="text-fg">{r.nhan}</span><span className="mt-0.5 block text-xs leading-relaxed text-fg-muted">{r.loi}</span></td>
-                  <td className="py-2 pr-3 text-fg-muted">{r.tam_tai ? `Năm thứ ${r.tam_tai}` : "—"}</td>
+                  <td className="py-2 pr-3"><span className={r.quan_he === "tam_hop" || r.quan_he === "luc_hop" ? "font-medium text-jade" : r.quan_he === "binh" ? "text-fg-muted" : "font-medium text-gold"}>{r.nhan}</span>
+                    {r.quan_he !== "binh" && <span className="mt-0.5 block text-xs leading-relaxed text-fg-muted">{r.loi}</span>}</td>
+                  <td className="py-2 pr-3">{r.tam_tai ? <span className="inline-flex rounded-full border border-gold/50 bg-gold/10 px-2 py-0.5 text-xs text-gold">Năm thứ {r.tam_tai}</span> : <span className="text-fg-faint">—</span>}</td>
                   <td className="py-2 text-xs text-fg-muted tabular-nums">{r.nam_sinh.join(", ")}</td>
                 </tr>
               ))}

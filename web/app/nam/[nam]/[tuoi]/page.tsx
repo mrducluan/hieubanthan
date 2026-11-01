@@ -40,7 +40,8 @@ const KIEU: Record<DiemNhan["loai"], { nhan: string; lop: string; cham: string }
   luu_y: { nhan: "Nên để ý", lop: "border-gold/40 bg-gold/5", cham: "bg-gold" },
   trung: { nhan: "Để biết", lop: "border-line/80 bg-surface/30", cham: "bg-fg-faint" },
 };
-const MAU_HOA: Record<string, string> = { "Lộc": "text-jade border-jade/40", "Quyền": "text-gold border-gold/40", "Khoa": "text-moon border-moon/40", "Kỵ": "text-fg-muted border-line" };
+const MAU_HOA: Record<string, string> = { "Lộc": "text-jade border-jade/40", "Quyền": "text-moon border-moon/40", "Khoa": "text-moon border-moon/40", "Kỵ": "text-gold border-gold/40 bg-gold/5" };
+const NGAN_HOA: Record<string, string> = { "Lộc": "thuận lợi, nguồn lợi", "Quyền": "chủ động, sức mạnh", "Khoa": "tiếng tốt, học hỏi", "Kỵ": "chỗ nên để tâm" };
 
 function TheSao({ gioi, s }: { gioi: string; s: SaoGioi }) {
   return (
@@ -66,8 +67,18 @@ export default async function Page(p: P) {
   const bien = { nam: String(x.n), nam_sinh: String(x.ns), can_chi: d.nguoi.can_chi, can_chi_nam: d.can_chi_nam };
   const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_NAM_TUOI, nd.chu);
   const tieuDe = c("dau.tieu_de", bien);
-  const o: [string, string][] = [["Tuổi mụ năm " + x.n, String(d.tuoi_mu)], ["Mệnh của bạn", d.nguoi.nap_am], ["Mệnh của năm", d.nap_am_nam],
-    ["Tam tai", d.tam_tai ? `Năm thứ ${d.tam_tai}` : "Không"]];
+  // 6 ô (kín lưới 2 và 3 cột): điều người đọc tìm nhất có màu — hợp (xanh) / năm tuổi, xung, Tam tai (vàng).
+  const chi = d.nguoi.can_chi.split(" ")[1];
+  const qh: Record<string, string> = { tam_hop: "Tam hợp", luc_hop: "Lục hợp", trung: "Năm tuổi", xung: "Xung", hinh: "Hình", hai: "Hại", binh: "Bình thường" };
+  const mauQh = d.quan_he.chi === "tam_hop" || d.quan_he.chi === "luc_hop" ? "jade" : d.quan_he.chi === "binh" ? null : "gold";
+  const o: { k: string; v: string; mau?: "jade" | "gold" | null }[] = [
+    { k: `Tuổi ${chi} với năm ${d.can_chi_nam.split(" ")[1]}`, v: qh[d.quan_he.chi] ?? d.quan_he.chi, mau: mauQh },
+    { k: "Tam tai", v: d.tam_tai ? `Năm thứ ${d.tam_tai}` : "Không", mau: d.tam_tai ? "gold" : null },
+    { k: `Tuổi mụ năm ${x.n}`, v: String(d.tuoi_mu) },
+    { k: "Sao (nam / nữ)", v: d.sao.nam && d.sao.nu ? `${d.sao.nam.ten} / ${d.sao.nu.ten}` : "Chưa xếp" },
+    { k: "Mệnh của bạn", v: d.nguoi.nap_am }, { k: "Mệnh của năm", v: d.nap_am_nam },
+  ];
+  const LOP_O = { jade: "border-jade/50 bg-jade/10", gold: "border-gold/50 bg-gold/10" } as const;
   return (
     <div className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(
@@ -78,10 +89,16 @@ export default async function Page(p: P) {
       <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href={duongNam(x.n)} className="hover:underline">Năm {x.n} {d.can_chi_nam}</Link> › Tuổi {d.nguoi.can_chi}</nav>
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
-      <dl className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-4" data-testid="o-tuoi">
-        {o.map(([k, v]) => <div key={k} className="rounded-xl border border-line/70 p-3"><dt className="text-xs text-fg-faint">{k}</dt><dd className="mt-0.5 text-sm text-fg">{v}</dd></div>)}
+      <dl className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-3" data-testid="o-tuoi">
+        {o.map((x) => (
+          <div key={x.k} className={`rounded-xl border p-3 ${x.mau ? LOP_O[x.mau] : "border-line/70"}`}>
+            <dt className="text-xs text-fg-faint">{x.k}</dt>
+            <dd className={`mt-0.5 text-sm ${x.mau === "jade" ? "font-semibold text-jade" : x.mau === "gold" ? "font-semibold text-gold" : "text-fg"}`}>{x.v}</dd>
+          </div>
+        ))}
       </dl>
       <TraLoiNhanh chu={d.tra_loi_nhanh} />
+      <p className="mt-3 text-sm"><Link href={`/thoi-gian-toi?nam=${x.n}`} className="inline-flex items-center gap-1 font-medium text-gold hover:underline">Xem năm {x.n} theo ngày giờ sinh của bạn <ArrowRight className="size-4" aria-hidden /></Link></p>
 
       <section className="mt-8" aria-labelledby="diem-nhan">
         <h2 id="diem-nhan" className="text-2xl">{c("diem_nhan.tieu_de", bien)}</h2>
@@ -106,10 +123,10 @@ export default async function Page(p: P) {
       )}
 
       <section className="mt-10" aria-labelledby="lam-nha">
-        <h2 id="lam-nha" className="text-2xl">Làm nhà, cưới hỏi năm {x.n}</h2>
+        <h2 id="lam-nha" className="text-2xl">Làm nhà năm {x.n}</h2>
         <div className={`mt-3 rounded-2xl border p-4 ${d.lam_nha.thuan ? "border-jade/40 bg-jade/5" : "border-gold/40 bg-gold/5"}`} data-testid="lam-nha">
-          <p className="font-medium text-fg">{d.lam_nha.thuan ? "Thuận theo tập quán — không phạm Kim lâu, Hoang ốc xấu hay Tam tai" : "Dân gian thường cân nhắc năm này"}</p>
-          {!d.lam_nha.thuan && <p className="mt-1 text-sm text-fg-muted">Vì: {d.lam_nha.xau.join(", ")}. Nhiều gia đình lùi năm hoặc mượn tuổi người thân đứng tên; việc khác vẫn làm như thường.</p>}
+          <p className="font-medium text-fg">{d.lam_nha.thuan ? "Thuận theo tập quán — không phạm Kim lâu, Hoang ốc xấu hay Tam tai" : "Dân gian thường cân nhắc làm nhà năm này"}</p>
+          {!d.lam_nha.thuan && <p className="mt-1 text-sm text-fg-muted">Vì: {d.lam_nha.xau.join(", ")}. Nhiều gia đình lùi năm hoặc mượn tuổi người thân đứng tên; việc khác vẫn làm như thường. Cưới hỏi xét Kim lâu theo tuổi cô dâu — xem bảng cưới năm {x.n}.</p>}
           <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
             <Link href={duongLamNha(x.n, x.ns)} className="text-gold underline">Tuổi {x.ns} làm nhà năm {x.n}</Link>
             <Link href={duongCuoiHoi(x.n)} className="text-gold underline">Cưới năm {x.n} tuổi nào</Link>
@@ -124,6 +141,7 @@ export default async function Page(p: P) {
             <li key={h.hoa} className={`rounded-xl border p-3 text-center ${MAU_HOA[h.hoa] ?? ""}`} title={h.y_nghia}>
               <span className="block text-xs uppercase tracking-wide">Hoá {h.hoa}</span>
               <span className="mt-0.5 block font-serif text-lg text-fg">{h.sao}</span>
+              <span className="mt-0.5 block text-[11px] leading-snug text-fg-muted">{NGAN_HOA[h.hoa]}</span>
             </li>
           ))}
         </ul>
@@ -147,7 +165,6 @@ export default async function Page(p: P) {
         ))}</dl>
       </section>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
-      <p className="mt-6 text-sm text-fg-muted" data-nosnippet="">{d.ranh_gioi}</p>
       <CungTuoi namSinh={x.ns} canChi={d.nguoi.can_chi} namAm={namAm} bo="tu_vi" boQuaNam={x.n} />
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </div>
