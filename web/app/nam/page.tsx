@@ -5,7 +5,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";
-import { goiLd, ldDuongDan, ldTrangWeb, metaTrang } from "@/lib/seo";
+import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { duongNam, namCongKhai, dmy } from "@/lib/nam";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
@@ -13,6 +13,12 @@ import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 const DUONG = "/nam";
 const MAC = { tieuDe: "Xem theo năm: năm con gì, Tết, Tam tai, tuổi làm nhà, xông đất",
   moTa: "Tra từng năm âm lịch: can chi, mệnh nạp âm, ngày Tết, tuổi Tam tai, năm tuổi, sao hạn, tuổi làm nhà, cưới hỏi, xông đất, sinh con — và xem 3 tháng, 12 tháng tới của riêng bạn." };
+
+const HOI_DAP = [
+  { hoi: "Năm âm lịch bắt đầu từ khi nào?", dap: "Từ mùng 1 Tết Nguyên đán theo âm lịch Việt Nam (giờ Hà Nội). Người sinh tháng 1 hoặc đầu tháng 2 trước Tết vẫn thuộc năm âm lịch trước, nên con giáp, mệnh và tuổi mụ tính theo năm trước." },
+  { hoi: "Tử vi năm theo tuổi khác gì lá số riêng?", dap: "Phần đọc theo tuổi giống nhau với mọi người cùng năm sinh: quan hệ con giáp với năm, Tam tai, Kim lâu, sao hạn. Lá số Tử vi, Bát tự tính từ ngày giờ sinh của riêng bạn nên sát hơn — xem ở trang Thời gian tới của bạn." },
+  { hoi: "Tam tai, Kim lâu, sao hạn có đáng lo không?", dap: "Đó là tập quán dân gian để tham khảo khi lên kế hoạch việc lớn, không định sẵn chuyện tốt xấu. Trang không hướng dẫn cúng giải, không bán vật phẩm; mỗi điều đi kèm việc nên làm cụ thể." },
+];
 
 export async function generateMetadata(): Promise<Metadata> {
   return apDungSeo(metaTrang({ ...MAC, duong: DUONG }), await layNoiDungTrang(DUONG));
@@ -28,6 +34,7 @@ export default async function Page() {
       <JsonLd data={goiLd(
         ldTrangWeb({ duong: DUONG, ten: h1, tomTat: MAC.moTa }),
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Xem theo năm", duong: DUONG }]),
+        ldHoiDap(HOI_DAP),
       )} />
       <TieuDeMuc cap={1} nho="Lịch · tuổi · tập quán" lon={h1}
         mo_ta={nd.dau.loiDan ?? "Mỗi năm âm lịch một trang: năm con gì, Tết ngày nào, tuổi nào Tam tai, xung năm — kèm mọi bảng tra theo tuổi của năm đó."} />
@@ -56,6 +63,12 @@ export default async function Page() {
         <h2 id="ca-nhan" className="text-xl">Thời gian tới của riêng bạn</h2>
         <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">3 tháng tới, 12 tháng tới và cả năm theo thần số, Tử vi, Bát tự của chính bạn.</p>
         <Link href="/thoi-gian-toi" className="mt-3 inline-flex rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-bg">Xem thời gian tới của tôi</Link>
+      </section>
+      <section className="mt-10" aria-labelledby="hoi-dap">
+        <h2 id="hoi-dap" className="text-2xl">Câu hỏi thường gặp</h2>
+        <dl className="mt-4 space-y-3">{HOI_DAP.map((h) => (
+          <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
+        ))}</dl>
       </section>
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-8" />
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-10" />
