@@ -189,3 +189,23 @@ _HOI_LAI = {
 def hoi_lai(mo_dun: str) -> dict | None:
     ds = _HOI_LAI.get(mo_dun)
     return {"cau": "Bạn muốn hỏi cụ thể về chuyện nào? Chọn một câu để có lời đáp đúng hơn:", "chon": ds} if ds else None
+
+
+# ---- EN-5.4: khung thời gian của một quyết định ("có nên đổi việc trong 6 tháng tới") → số tháng cần xem (≤ 12)
+_SO_THANG = {"mot": 1, "hai": 2, "ba": 3, "bon": 4, "nam": 5, "sau": 6, "bay": 7, "tam": 8, "chin": 9, "muoi": 10,
+             "muoi mot": 11, "muoi hai": 12, "may": 6, "vai": 6, "nua": 6}
+
+
+def khung_thang(t: str, hom_nay: dt.date) -> int | None:
+    """Số tháng (≤ 12) của khung "N tháng tới / mấy tháng tới / nửa năm tới / từ giờ tới cuối năm"; không có → None."""
+    m = re.search(r"(?<!\w)(\d{1,2}|muoi mot|muoi hai|mot|hai|ba|bon|nam|sau|bay|tam|chin|muoi|may|vai) thang "
+                  r"(toi|sap toi|nua|sau)\b", t)
+    if m:
+        n = int(m.group(1)) if m.group(1).isdigit() else _SO_THANG[m.group(1)]
+        return max(1, min(n, 12))
+    if re.search(r"nua nam (toi|sap toi|nua|dau nam sau)", t):
+        return 6
+    if re.search(r"(tu (gio|nay|bay gio) (toi|den)|trong|het) (cuoi nam|nam nay)(?! (khong|ko))", t) and \
+            not re.search(r"\d{4}", t):
+        return max(1, 12 - hom_nay.month + 1)
+    return None

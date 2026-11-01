@@ -433,6 +433,8 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict)
 # ------------------------------------------------------------------ NARRATIVE (template)
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
+    if l == "cua_so":
+        return chung.doan_cua_so(m), None
     if l == "so_nam":
         return chung.doan_so_nam(m["nam"]), None
     if l == "doi_song":
@@ -601,6 +603,8 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         chung.ket(goi)
     if ls is not None and sinh and not goi["can_them"] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"):
         _them_so_nam(goi, pl, sinh, ngay_xem, ls)
+    if ls is not None and sinh:
+        chung.them_cua_so(goi, pl, "battu", sinh, ngay_xem, ls if "battu" == "tuvi" else None, ("tu_tru", "sao_han"))   # EN-5.4
     if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
         goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
         chung.ket(goi)

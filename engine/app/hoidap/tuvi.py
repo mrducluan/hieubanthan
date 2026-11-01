@@ -1300,6 +1300,8 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         return f"{m['ten']}: {m['giai_thich']}", None
     if l == "giai_thich":
         return f"{m['tieu_de']}: {m['noi_dung']}", None
+    if l == "cua_so":
+        return chung.doan_cua_so(m), None
     if l == "so_nam":
         return chung.doan_so_nam(m["nam"]), None
     if l == "ghi_chu":
@@ -1453,6 +1455,8 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
         chung.ket(goi)
     if ls is not None and sinh and not goi["can_them"] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"):
         _them_so_nam(goi, pl, sinh, ngay_xem, ls)
+    if ls is not None and sinh:
+        chung.them_cua_so(goi, pl, "tuvi", sinh, ngay_xem, ls if "tuvi" == "tuvi" else None, ("sao_han",))   # EN-5.4
     if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
         goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
         chung.ket(goi)
