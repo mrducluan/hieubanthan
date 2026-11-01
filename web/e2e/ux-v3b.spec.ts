@@ -72,6 +72,10 @@ test("M4 lá bài: lật 3D thấy pha giữa (~550 ms), giảm chuyển động
   await page.goto("/hom-nay");
   const la = page.getByTestId("la-bai");
   await la.scrollIntoViewIfNeeded();
+  // UI-HN: trên máy tính lá bài nằm đầu cột bên (gần đầu trang) → chờ các khối khác hiện ra xong rồi mới lật,
+  // để phép đo thời gian nghiêng không lẫn khung hình bị rơi do hiệu ứng khác chạy cùng lúc.
+  await page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== "running"), null, { timeout: 5_000 }).catch(() => {});
+  await page.waitForTimeout(400);
   // Mẫu [thời điểm, góc] mỗi khung hình. Đo THỜI GIAN lá đang nghiêng (không đếm khung: trình duyệt không giao diện có lúc
   // chạy < 60 khung/giây khi máy bận → số khung dao động, thời gian thì không).
   const mau = await page.evaluate(() => new Promise<[number, number][]>((ok) => {

@@ -138,15 +138,15 @@ export function TongKetThang({ hoSo, homNay, mayChu, thangNay, noi, className = 
       </button>
       <p className="eyebrow">Tháng của tôi</p>
       <h2 id="tong-ket-thang" className="mt-1 text-xl">Tháng {tk.thang} vừa rồi của bạn</h2>
-      <div className="mt-4 grid gap-5 sm:grid-cols-[auto_1fr] sm:items-start">
-        <div className="mx-auto grid w-full max-w-[17rem] grid-cols-7 gap-1 sm:mx-0 sm:w-56" role="img" aria-label={`Lịch tháng ${tk.thang}: ${tk.so_ngay} ngày đã ghé`} data-testid="tong-ket-lich">
+      <div className={`mt-4 grid gap-5 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-start ${noi === "hom_nay" ? "lg:grid-cols-1" : ""}`}>
+        <div className={`mx-auto grid w-full max-w-[17rem] grid-cols-7 gap-1 sm:mx-0 sm:w-56 ${noi === "hom_nay" ? "lg:mx-auto lg:w-full" : ""}`} role="img" aria-label={`Lịch tháng ${tk.thang}: ${tk.so_ngay} ngày đã ghé`} data-testid="tong-ket-lich">
           {THU_NGAN.map((t) => <span key={t} className="text-center text-[0.6rem] uppercase tracking-wider text-fg-faint">{t}</span>)}
           {oLichThang(tk.nam, tk.thang).map((d, i) => (
             <span key={i} className={`grid aspect-square place-items-center rounded-full text-[0.7rem] tabular-nums ${d === null ? "" : ghe.has(d) ? "bg-gold font-semibold text-bg" : "text-fg-faint"}`}
               data-ghe={d !== null && ghe.has(d) ? 1 : undefined}>{d ?? ""}</span>
           ))}
         </div>
-        <div className="space-y-2 text-sm">
+        <div className="min-w-0 space-y-2 text-sm">
           <ul className="space-y-1" data-testid="tong-ket-cau">
             {cau.map((c) => <li key={c}>{c}</li>)}
           </ul>

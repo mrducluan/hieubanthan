@@ -82,7 +82,7 @@ test("Gate 2 — link Hôm nay mang mã: người gửi share_created, bạn bè
   await expect(page.getByTestId("the-hom-nay")).toBeVisible();
   await page.evaluate(() => { Object.defineProperty(navigator, "share", { value: undefined, configurable: true }); });
   await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
-  await page.getByRole("button", { name: "Chia sẻ" }).click();
+  await page.getByTestId("chia-se-the-hom-nay").click();
   const tao = (await suKien(page)).find((e) => e.su_kien === "share_created");
   expect(tao).toMatchObject({ kind: "hom_nay" });
   const ma = String(tao?.ma_moi);

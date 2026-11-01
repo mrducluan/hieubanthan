@@ -27,7 +27,7 @@ test("thẻ hôm nay: số nổi bật khớp engine, link chia sẻ mang số n
   await page.goto("/hom-nay");
   await expect(page.getByTestId("so-noi-bat-ngay")).toContainText("6");
   await expect(page.getByTestId("so-noi-bat-ngay")).toContainText("hai phái");
-  await page.getByTestId("the-hom-nay").getByRole("button", { name: "Chia sẻ" }).click();
+  await page.getByTestId("chia-se-the-hom-nay").click();
   await expect(page.getByTestId("the-hom-nay").getByRole("button", { name: "Đã chép link" })).toBeVisible();
   const chep = await page.evaluate(() => navigator.clipboard.readText());
   const ma = new URL(chep.slice(chep.indexOf("http"))).searchParams.get("the")!;

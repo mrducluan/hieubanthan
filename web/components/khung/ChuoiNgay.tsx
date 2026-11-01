@@ -98,15 +98,15 @@ export function ChuoiNgay({ chuoiMay, batDauLaiMay, ngay, onTrangThai, so, ngayG
       {loi.moc && <p className="text-xs" data-testid="chuoi-moc">{loi.moc}</p>}
       {chamMoc && hoSo && (
         <p>
-          <button type="button" onClick={() => void chiaSe()} className="vung-cham inline-flex min-h-8 items-center gap-1 text-xs font-medium text-gold hover:underline" data-testid="chuoi-chia-se">
+          <button type="button" onClick={() => void chiaSe()} className="vung-cham inline-flex min-h-10 items-center gap-1 text-xs font-medium text-gold hover:underline" data-testid="chuoi-chia-se">
             {daChep ? <Check className="size-3.5" aria-hidden /> : <Share2 className="size-3.5" aria-hidden />}{daChep ? "Đã chép link" : `Chia sẻ ${chuoiHien} ngày liền`}
           </button>
         </p>
       )}
-      <div className="grid w-full max-w-[16rem] grid-cols-7 gap-0.5 pt-1" role="img" aria-label={`Lịch tháng ${thang}: ${ghe.size} ngày đã ghé`} data-testid="chuoi-lich" data-so-ngay={ghe.size}>
-        {THU_NGAN.map((t) => <span key={t} className="text-center text-[0.55rem] uppercase tracking-wider text-fg-faint">{t}</span>)}
+      <div className="grid w-full max-w-[17rem] grid-cols-7 gap-0.5 pt-1 lg:max-w-none lg:gap-1" role="img" aria-label={`Lịch tháng ${thang}: ${ghe.size} ngày đã ghé`} data-testid="chuoi-lich" data-so-ngay={ghe.size}>
+        {THU_NGAN.map((t) => <span key={t} className="text-center text-[0.65rem] uppercase tracking-wider text-fg-muted">{t}</span>)}
         {oLichThang(nam, thang).map((d, i) => (
-          <span key={i} className={`mx-auto grid size-5 place-items-center rounded-full text-[0.6rem] tabular-nums ${d === null ? "" : ghe.has(d) ? "bg-gold font-semibold text-bg" : d === homNay ? "border border-gold text-gold" : "text-fg-faint"}`}
+          <span key={i} className={`mx-auto grid size-6 place-items-center rounded-full text-[0.7rem] tabular-nums ${d === null ? "" : ghe.has(d) ? "bg-gold font-semibold text-bg" : d === homNay ? "border border-gold text-gold" : "text-fg-faint"}`}
             data-ghe={d !== null && ghe.has(d) ? 1 : undefined}>{d ?? ""}</span>
         ))}
       </div>

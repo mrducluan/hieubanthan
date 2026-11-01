@@ -62,10 +62,11 @@ export function HenChinhMinh({ chuoi, ngay, nguon, hoSo, tieuDe }: { chuoi: numb
   if (!hen) {
     return (
       <div className="flex flex-wrap items-center gap-2 text-sm text-fg-muted" data-testid="hen-chinh-minh" data-trang-thai="chua_hen">
-        <HeartHandshake className="size-4 text-moon" aria-hidden />
-        <span>{tieuDe}:</span>
-        <button type="button" onClick={() => dat(7)} className={NUT} data-testid="hen-7">7 ngày ghé</button>
-        <button type="button" onClick={() => dat(30)} className={NUT} data-testid="hen-30">30 ngày ghé</button>
+        <span className="inline-flex basis-full items-center gap-2"><HeartHandshake className="size-4 text-moon" aria-hidden />{tieuDe}:</span>
+        <span className="flex gap-2">
+          <button type="button" onClick={() => dat(7)} className={NUT} data-testid="hen-7">7 ngày ghé</button>
+          <button type="button" onClick={() => dat(30)} className={NUT} data-testid="hen-30">30 ngày ghé</button>
+        </span>
       </div>
     );
   }
