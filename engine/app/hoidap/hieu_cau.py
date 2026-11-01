@@ -189,3 +189,25 @@ _HOI_LAI = {
 def hoi_lai(mo_dun: str) -> dict | None:
     ds = _HOI_LAI.get(mo_dun)
     return {"cau": "Bạn muốn hỏi cụ thể về chuyện nào? Chọn một câu để có lời đáp đúng hơn:", "chon": ds} if ds else None
+
+
+# ---- EN-5.4: khung thời gian của một quyết định ("có nên đổi việc trong 6 tháng tới") → số tháng cần xem (≤ 12)
+_SO_THANG = {**_SO, "bay": 7, "tam": 8, "chin": 9, "muoi": 10, "muoi mot": 11, "muoi hai": 12, "may": 6, "vai": 6}
+
+
+def khung_thang(t: str, hom_nay: dt.date, raw: str | None = None) -> int | None:
+    """Số tháng (≤ 12) của khung "N tháng tới / mấy tháng tới / nửa năm tới / từ giờ tới cuối năm"; không có → None.
+    Không đọc "ngày 5 tháng sau", "mùng 8 tháng tới" (số ngày), "sau tháng tới" (sau = sau khi) thành khung."""
+    from app.hoidap import chung  # noqa: PLC0415
+    if chung.khop_dau(raw, t, [r"sáu tháng (tới|sắp tới|nữa)"], []):
+        return 6
+    m = re.search(r"(?<!ngay )(?<!mung )(?<!mong )(?<!hom )(?<!\w)(\d{1,2}|muoi mot|muoi hai|mot|hai|ba|bon|nam|bay|tam|"
+                  r"chin|muoi|may|vai) thang (toi|sap toi|nua)\b", t)
+    if m:
+        n = int(m.group(1)) if m.group(1).isdigit() else _SO_THANG[m.group(1)]
+        return max(1, min(n, 12))
+    if re.search(r"nua nam (toi|sap toi|nua|dau nam sau)", t):
+        return 6
+    if re.search(r"(tu (gio|nay|bay gio) (toi|den)|trong|het) (cuoi nam|nam nay)", t) and not re.search(r"\d{4}", t):
+        return max(1, 12 - hom_nay.month + 1)
+    return None

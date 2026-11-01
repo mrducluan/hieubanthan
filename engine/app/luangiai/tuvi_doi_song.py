@@ -29,6 +29,7 @@ from app.kb import tuvi_doi_song_kb as kb
 from app.kb import tuvi_kb
 from app.luangiai import tuvi_nhip_3_thang as nhip3
 from app.luangiai import tuvi_phi_hoa as phl
+from app.luangiai import tuvi_sao_luu as tvsl
 from app.luangiai import doi_song_chung as dsc
 from app.luangiai import doi_song_khuon as kh
 from app.luangiai.doi_song_chung import (  # noqa: F401 — tách dùng chung với Bát tự (BT-ĐS), giữ tên cũ
@@ -980,7 +981,7 @@ def _hop_du_phong(dong: list[dict], hop: list[dict]) -> list[dict]:
     return ra
 
 
-def _chuong_van_han(dong: list[dict], vh: dict, ls: dict, hoc: tuple) -> dict:
+def _chuong_van_han(dong: list[dict], vh: dict, ls: dict, hoc: tuple, sao_luu: dict | None = None) -> dict:
     hop, xem_lai = dsc.chon_hop_van_han(dong, hoc)
     hop += _hop_du_phong(dong, hop)
     thuan = [g for g in dong if g["muc"] == "thuan"]
@@ -1010,9 +1011,16 @@ def _chuong_van_han(dong: list[dict], vh: dict, ls: dict, hoc: tuple) -> dict:
               *(c for g in dong for c in g["can_cu"]), *xem_lai,
               "Năm tuổi, xung tuổi, va tuổi, tam tai: tập quán dân gian theo chi năm sinh, không đổi mức của năm"]
     dong_ra = [{k: v for k, v in g.items() if not k.startswith("_")} for g in dong]
+    them = {}
+    if sao_luu:                                   # EN-5.2: sao lưu năm đang xem — đọc thêm, không đổi mức
+        them["sao_luu"] = {"nam": sao_luu["nam"], "can_chi": f"{sao_luu['can']} {sao_luu['chi']}",
+                           "muc": [{k: m[k] for k in ("ma", "ten", "cac_cung", "loi", "nen_lam")} for m in sao_luu["muc"]],
+                           "kep_loc": sao_luu["kep_loc"], "loi_chu_y": sao_luu["loi_chu_y"]}
+        can_cu.append(sao_luu["can_cu"])
+        can_cu += [f"{m['ten']}: cung {', '.join(m['cac_cung'])}" for m in sao_luu["muc"]]
     return _chuong("van_han", None, tom, hop, [tom, cham, dg], can_cu,
                    "Năm nào trong mười năm tới bạn muốn dành cho việc lớn nhất, và năm nào nên giữ sức?",
-                   dong_nam=dong_ra)
+                   dong_nam=dong_ra, **them)
 
 
 # ---- đường bay (phi hoá) — lời đời thường do RULES phi hoá dựng sẵn (KB phi hoá viết theo cặp mảng phát → mảng
@@ -1251,7 +1259,12 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
         elif ma == "nam_nay":
             c = _chuong_nam_nay(sinh, ls, cc, vh, ngay_xem, hoc, nam_vh=dong[0] if dong else None)
         elif ma == "van_han":
-            c = _chuong_van_han(dong, vh, ls, hoc)
+            try:
+                sl = {**tvsl.doc(ls, az.sao_luu_nam(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], ngay_xem, **kw),
+                                 nam_am_xem), "nam": nam_am_xem}
+            except Exception:  # noqa: BLE001 — sao lưu là phần đọc thêm; lỗi không làm hỏng báo cáo
+                sl = None
+            c = _chuong_van_han(dong, vh, ls, hoc, sl)
         elif ma == "loi_khuyen":
             c = _chuong_loi_khuyen(ds, None, hoc)     # VH-1: chương tổng hợp không mang mức riêng
         else:

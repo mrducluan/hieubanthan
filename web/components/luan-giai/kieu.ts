@@ -98,6 +98,12 @@ export interface ChuongDoiSongMo {
   hai_cach_muc?: { cach_1: Muc; cach_2: Muc };
   /** VH-1 chương "Vận hạn & điều nên tránh": dòng 10 năm (+ 12 tháng tới ở Bát tự). Nằm TRONG chương → khoá SAO-2 là mất. */
   dong_nam?: NamVanHan[]; thang_toi?: ThangToi[];
+  /** EN-5.2 sao lưu năm đang xem (chương Vận hạn Tử vi) — đọc thêm, không đổi mức. */
+  sao_luu?: SaoLuuNam;
+}
+export interface SaoLuuNam {
+  nam: number; can_chi: string; kep_loc: string; loi_chu_y: string;
+  muc: { ma: string; ten: string; cac_cung: string[]; loi: string; nen_lam: string }[];
 }
 export interface ChuongKhoa { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem }
 

@@ -1,0 +1,73 @@
+{
+ "_nguon": "EN-5.2 (2026-11-01) — nghĩa đời thường của sao lưu năm Tử vi. Vị trí do iztro an (horoscope.yearly), KB chỉ diễn đạt. Viết theo hành vi, không phán, không doạ.",
+ "source": {
+  "tvds_toan_thu": "Tử Vi Đẩu Số Toàn Thư (phần lưu niên)",
+  "nam_phai_vn": "Tử vi Nam phái lối Việt (sao lưu, vòng Thái Tuế)"
+ },
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "school_id": "tu_vi_chung",
+ "sao": {
+  "loc": {
+   "ten": "Lộc Tồn lưu",
+   "source_id": "tvds_toan_thu",
+   "loi": "{Chu} năm {nam} có phần được giữ vững, đều đặn — cái lợi đến từ sự bền bỉ, làm chắc tay hơn là làm lớn.",
+   "nen_lam": "Giữ nhịp đều ở mảng này: việc gì đang chạy tốt thì duy trì, đừng vội mở rộng."
+  },
+  "kinh": {
+   "ten": "Kình Dương lưu",
+   "source_id": "tvds_toan_thu",
+   "loi": "{Chu} năm {nam} dễ phải tranh thủ, đi nhanh, có lúc va chạm thẳng mặt.",
+   "nen_lam": "Nói rõ điều kiện từ đầu, để một ngày rồi mới trả lời khi đang nóng."
+  },
+  "da": {
+   "ten": "Đà La lưu",
+   "source_id": "tvds_toan_thu",
+   "loi": "{Chu} năm {nam} dễ chậm, kéo dài, vướng việc nhỏ lặt vặt.",
+   "nen_lam": "Cộng thêm thời gian dự phòng cho mỗi việc, làm từng bước, ghi lại việc đang treo."
+  },
+  "ma": {
+   "ten": "Thiên Mã lưu",
+   "source_id": "tvds_toan_thu",
+   "loi": "{Chu} năm {nam} có chuyển động: đi lại, đổi chỗ, thay cách làm.",
+   "nen_lam": "Nếu định đổi, chuẩn bị trước một phương án quay lại cho chắc."
+  },
+  "khoi_viet": {
+   "ten": "Thiên Khôi, Thiên Việt lưu",
+   "source_id": "tvds_toan_thu",
+   "loi": "{Chu} năm {nam} dễ gặp người đi trước sẵn lòng chỉ đường.",
+   "nen_lam": "Chủ động hỏi người có kinh nghiệm, đừng ngại nhờ."
+  },
+  "xuong_khuc": {
+   "ten": "Văn Xương, Văn Khúc lưu",
+   "source_id": "tvds_toan_thu",
+   "loi": "{Chu} năm {nam} thuận cho những việc cần chữ nghĩa: học thêm, viết, giấy tờ, nói chuyện cho rõ ràng.",
+   "nen_lam": "Việc gì cần thoả thuận thì viết ra giấy; muốn học thêm thì chọn một khoá học trọn trong năm."
+  },
+  "thai_tue": {
+   "ten": "Thái Tuế lưu",
+   "source_id": "nam_phai_vn",
+   "loi": "{Chu} năm {nam} là chuyện hay được để ý, hay nổi lên — việc ở đây khó lờ đi.",
+   "nen_lam": "Đặt mảng này vào danh sách việc chính của năm, xử lý sớm thay vì để dồn."
+  },
+  "tang_mon": {
+   "ten": "Tang Môn lưu",
+   "source_id": "nam_phai_vn",
+   "loi": "{Chu} năm {nam} dễ có chuyện làm bận lòng, tâm trạng chùng xuống.",
+   "nen_lam": "Dành thời gian thăm hỏi người thân, giữ nếp ngủ nghỉ, đừng ôm một mình."
+  },
+  "bach_ho": {
+   "ten": "Bạch Hổ lưu",
+   "source_id": "nam_phai_vn",
+   "loi": "{Chu} năm {nam} dễ có việc gấp, việc phải xử lý ngay, tranh cãi về giấy tờ.",
+   "nen_lam": "Giữ hồ sơ, hợp đồng rõ ràng; đi lại, làm việc nặng thì cẩn thận hơn thường lệ."
+  }
+ },
+ "kep_loc": "Kình Dương và Đà La lưu luôn đứng hai bên Lộc Tồn lưu: cái lợi ở {vat} năm {nam} đến kèm việc phải tranh thủ và việc chậm trễ quanh nó — giữ được thì lợi, vội thì dễ hao.",
+ "chu_y": "Năm {nam}, {ds} rơi đúng mảng chính của bạn — không phải điềm xấu, chỉ là chỗ nên chậm lại, làm kỹ hơn.",
+ "can_cu": "Sao lưu an theo can chi năm xem: Lộc Tồn theo can, Kình Dương = Lộc + 1, Đà La = Lộc − 1, Thiên Mã theo tam hợp chi năm, Khôi Việt và Xương Khúc theo can; Thái Tuế ở chi năm, Tang Môn = Thái Tuế + 2, Bạch Hổ = Thái Tuế + 8. Sao lưu chỉ đọc thêm cho năm, không đổi mức của năm.",
+ "tat_ach": {
+  "loi": "Năm {nam} nên chăm sức khoẻ kỹ hơn thường lệ: giữ nhịp ngủ nghỉ, đi lại và làm việc nặng cẩn thận hơn.",
+  "nen_lam": "Khám sức khoẻ định kỳ trong năm — đây là lời nhắc phòng ngừa, không thay lời bác sĩ."
+ }
+}

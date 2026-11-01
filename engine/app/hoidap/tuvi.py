@@ -24,7 +24,7 @@ from app.kb import tuvi_kb as kb
 from app.kb import tuvi_phi_hoa_kb as pkb
 from app.luangiai import hoi as _h, tuvi_luu_nguyet as lnl
 from app.luangiai import tuvi_nhip_3_thang as nhip3, tuvi_phi_hoa as phl
-from app.luangiai import truc_quan, tuvi_the_cung as the_cung
+from app.luangiai import truc_quan, tuvi_sao_luu as tvsl, tuvi_the_cung as the_cung
 from app.narrative import hoi_van
 from app.narrative.ngan_sach import mo_ta_loi
 
@@ -117,6 +117,18 @@ HAN = [r"dai han", r"tieu han", r"luu nien", r"nam nay", r"nam sau", r"nam toi",
        r"muoi nam", r"10 nam", r"nam nao", r"khi nao", r"bao gio", r"thang nao", r"han gi",
        r"tam tai", r"thai tue", r"nam tuoi", r"van han", r"hao tai", r"hanh han",
        r"thang (\d{1,2}|gieng|chap) am( lich)?"]                                   # HH-CT3
+# EN-5.2: câu hỏi về sao lưu năm ("năm nay có Kình Đà lưu không", "Tang Môn Bạch Hổ năm nay ở đâu"). Sau code-review:
+# "da la" trùng "đã là", "sao lưu" trùng "tại sao lưu ý / vì sao lưu niên" → gõ có dấu thì so trên chữ có dấu.
+_SAO_LUU_TEN_CD = r"(kình dương|đà la|kình đà|lộc tồn|thiên mã|tang môn|bạch hổ|thái tuế|khôi việt|xương khúc)"
+_SAO_LUU_TEN_KD = r"(kinh duong|kinh da|loc ton|thien ma|tang mon|bach ho|thai tue|khoi viet|xuong khuc)"
+_NAM_RX = r"(năm nay|năm sau|năm tới|năm 20\d\d)"
+SAO_LUU_CD = [_SAO_LUU_TEN_CD + r"\W{0,3}lưu", r"(?<!\w)lưu (kình|đà|lộc|mã|tang môn|bạch hổ|thái tuế|khôi|xương)",
+              r"(?<!vì )(?<!tại )(?<!làm )sao lưu(?! ý)", _SAO_LUU_TEN_CD + r".{0,25}" + _NAM_RX,
+              _NAM_RX + r".{0,25}" + _SAO_LUU_TEN_CD]
+SAO_LUU_KW = [_SAO_LUU_TEN_KD + r"\W{0,3}luu", r"da la luu|luu da la",
+              r"(?<!\w)luu (kinh|loc|ma|tang mon|bach ho|thai tue|khoi|xuong)", r"(?<!vi )(?<!tai )(?<!lam )sao luu(?! y)",
+              _SAO_LUU_TEN_KD + r".{0,25}(nam nay|nam sau|nam toi|nam 20\d\d)",
+              r"(nam nay|nam sau|nam toi|nam 20\d\d).{0,25}" + _SAO_LUU_TEN_KD]
 SU_KIEN = [r"tai nan", r"kien tung", r"mat tien", r"hao tai", r"lay chong", r"lay vo", r"co con",
            r"phat tai", r"han nang", r"thang chuc", r"ket hon"]
 NAM_SAU = [r"nam sau", r"nam toi"]
@@ -305,7 +317,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
     if gioi_thieu and (chung.co(gioi_thieu, [r"dai han", r"luu nien", r"tieu han", r"la so", r"cung \w+"])
                        or _co_ten(gioi_thieu, CUNG_KW)):
         t_chinh = t                     # "Tôi đang ở đại hạn…" không phải lời giới thiệu
-    kq = {"cau_chuan_hoa": t, "che_do": che_do, "loai": None, "xu_ly": "tra_loi",
+    kq = {"cau_chuan_hoa": t, "cau_goc": cau_hoi, "che_do": che_do, "loai": None, "xu_ly": "tra_loi",
           "cung": _co_ten(t_chinh, CUNG_KW), "sao": _co_ten(t_chinh, SAO_KW), "hoa": _hoa_nhac(t_chinh),
           "phu": _phu_nhac(t_chinh), "giai_thich": _giai_thich_khop(t_chinh),
           "ca_nhan": chung.co(t_chinh, CA_NHAN), "su_kien": chung.co(t, SU_KIEN),
@@ -340,6 +352,9 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
         kq["loai"] = "phi_hoa_khai_niem"
     elif kq["giai_thich"] and not kq["ca_nhan"]:
         kq["loai"] = "ky_thuat"
+    elif chung.khop_dau(cau_hoi, t_chinh, SAO_LUU_CD, SAO_LUU_KW) \
+            and not chung.co(t_chinh, [r"la gi", r"nghia la", r"y nghia"]):
+        kq["loai"], kq["sao_luu"] = "han", True
     elif not kq["ca_nhan"] and (cc := _cach_nhac(t_chinh)):
         kq["loai"], kq["cach_nhac"] = "cach_cuc_chung", cc
     elif chung.co(t_chinh, HOI_CACH):
@@ -732,6 +747,11 @@ def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | No
         if vh is None:
             goi["can_them"] = ["ngay_xem"]
             return chung.ket(goi)
+        if them.get("sao_luu"):                          # EN-5.2: câu hỏi thẳng về sao lưu → trả lời trước
+            x = them["sao_luu"]
+            muc.append({"loai": "sao_luu", "nam": x["nam"], "can_chi": f"{x['can']} {x['chi']}", "muc": x["muc"],
+                        "hoi": tvsl.ma_hoi(pl["cau_chuan_hoa"], pl.get("cau_goc")),
+                        "kep_loc": x["kep_loc"], "can_cu": x["can_cu"]})
         muc.append({"loai": "tuoi", "tuoi_mu": vh["tuoi_mu"], "ngay_xem": vh.get("ngay_xem")})
         for lop in ("dai_han", "luu_nien", "tieu_han"):
             muc.append(_lop_han(ls, lop, vh, pl["che_do"]))
@@ -1151,6 +1171,22 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         s += (" Các phái khác đặt tháng này ở: " + "; ".join(f"{k} → {v}" for k, v in m["phai_khac"].items()) + "."
               if khac else " Cả năm phái tính tháng hạn đều ra cùng cung này.")
         return s, None
+    if l == "sao_luu":
+        doc_ma = m.get("hoi") or list(tvsl._CHINH)
+        chinh = [x for x in m["muc"] if x["ma"] in doc_ma]
+        khac = [x for x in m["muc"] if x["ma"] not in doc_ma]
+        ds = " ".join(f"{x['loi']} ({x['ten']} ở cung {' và '.join(x['cac_cung'])}.) Nên: {x['nen_lam'][:1].lower()}"
+                      f"{x['nen_lam'][1:]}" for x in chinh)
+        s = f"Sao lưu năm {m['nam']} ({m['can_chi']}) trên lá số của bạn: {ds}"
+        if m["kep_loc"] and {"kinh", "da", "loc"} & set(doc_ma):
+            s += " " + m["kep_loc"]
+        cy = tvsl.cau_chu_y([x for x in m["muc"] if x["ma"] in doc_ma and x["ma"] in tvsl._CHU_Y
+                             and x["cung"] in tvsl.CUNG_CHU_Y], str(m["nam"]))
+        if cy:
+            s += " " + cy
+        if khac:
+            s += " Các sao lưu khác năm này: " + "; ".join(f"{x['ten']} ở cung {' và '.join(x['cac_cung'])}" for x in khac) + "."
+        return s + " Sao lưu chỉ đọc thêm cho năm, không đổi mức của năm (đại hạn và lưu niên vẫn đứng trước).", None
     if l == "luu_nguyet_nam":
         ds = "; ".join(f"tháng {x['thang']}{' nhuận' if x['nhuan'] else ''}"
                        f"{' (nửa sau)' if x['phan'] == 'nua_sau' else ''}: {x['cung_goc']} ({x['ket']})"
@@ -1272,6 +1308,8 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         return f"{m['ten']}: {m['giai_thich']}", None
     if l == "giai_thich":
         return f"{m['tieu_de']}: {m['noi_dung']}", None
+    if l == "cua_so":
+        return chung.doan_cua_so(m), None
     if l == "so_nam":
         return chung.doan_so_nam(m["nam"]), None
     if l == "ghi_chu":
@@ -1403,6 +1441,13 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
         elif yd == "ba_thang_toi" and chung.co(pl["cau_chuan_hoa"], [r"tung thang", r"moi thang"]):
             pl["thang_hoi"] = thang_hoi("", ngay_xem, pl["nam_xem"], pl["han_sau"])
             lnm = lnl.lap_nam(sinh, pl["thang_hoi"]["nam_am"], sinh.get("luu_nguyet", ln.MAC_DINH), ls=ls)
+        if pl.get("sao_luu") and vh is not None:           # EN-5.2: sao lưu của đúng năm được hỏi
+            xem_sl = dt.date.fromisoformat(vh["ngay_xem"])
+            tz_sl = az.TZ_TRUNG if sinh.get("lich") == "trung" else config.CALENDAR_MERIDIAN_TZ   # cùng lịch với báo cáo
+            sl_nam = lunar.solar_to_lunar(xem_sl.day, xem_sl.month, xem_sl.year, tz_sl)[2]
+            them["sao_luu"] = {**tvsl.doc(ls, az.sao_luu_nam(
+                sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], xem_sl, tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
+                thang_nhuan=sinh.get("thang_nhuan", "thang_sau"), lich=sinh.get("lich", "viet")), sl_nam), "nam": sl_nam}
         if ch.get("nhip"):
             them["nhip"] = nhip3.lap(sinh, ngay_xem, sinh.get("luu_nguyet", ln.MAC_DINH), ls=ls)
         if (yd or pl["loai"] == "phi_hoa") and ls.get("can_nam"):
@@ -1419,6 +1464,8 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
         chung.ket(goi)
     if ls is not None and sinh and not goi["can_them"] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"):
         _them_so_nam(goi, pl, sinh, ngay_xem, ls)
+    if ls is not None and sinh:
+        chung.them_cua_so(goi, pl, "tuvi", sinh, ngay_xem, ls, ("sao_han",))   # EN-5.4
     if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
         goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
         chung.ket(goi)

@@ -46,6 +46,20 @@ export interface ChonNgayKq {
   ngay: TomTatNgay[]; luu_y: string; cach_chon: string;
 }
 
+// EN-5.1 — chọn ngày cho nhiều người (engine dựng hết, web chỉ hiển thị).
+export interface NgayNhieu extends TomTatNgay {
+  hop: { vai: string; ten_vai: string; quan_he: string; ten: string }[];
+  luu_y: string[];
+}
+export interface ChonNgayNhieuKq {
+  viec: { ma: string; ten: string }; tu: string; den: string;
+  nguoi: { vai: string; ten_vai: string; chinh: boolean; nam_sinh: number; can_chi: string; con_giap: string;
+    nam: { nam_am: number; tuoi_mu: number; luu_y: string[] }[] }[];
+  ngay: NgayNhieu[]; ngay_noi_bat: NgayNhieu[];
+  thang: { thang: string; so_ngay: number; ngay: NgayNhieu[]; luu_y: string[] }[];
+  tom_tat: string; goi_y: string[]; giai_thich?: { nhan: string; loi: string }[]; cach_chon: string; chua_xet: string; luu_y: string;
+}
+
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 

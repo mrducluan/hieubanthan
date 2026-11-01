@@ -85,7 +85,10 @@ export function anSao(vao) {
                        stars: (o.stars || []).map((ds) => ds.map((x) => ({ name: x.name, type: x.type }))) });
   const van = (ngay) => {
     const h = a.horoscope(ngay);
-    return { decadal: hc(h.decadal), age: { ...hc(h.age), nominalAge: h.age.nominalAge }, yearly: hc(h.yearly) };
+    // EN-5.2: vòng Thái Tuế lưu (suiqian12 theo vị trí 12 cung) — sao lưu năm đọc từ đây, không tự tính lại
+    const vong = (h.yearly.yearlyDecStar && h.yearly.yearlyDecStar.suiqian12) || [];
+    return { decadal: hc(h.decadal), age: { ...hc(h.age), nominalAge: h.age.nominalAge },
+             yearly: { ...hc(h.yearly), suiqian12: vong } };
   };
   if (vao.ds_xem) return { la: ra, xem: vao.ds_xem.map((x) => ({ ngay_xem: x.ngay_xem, horoscope: van(x.ngay_xem) })) };
   if (vao.ngay_xem) ra.horoscope = van(vao.ngay_xem);

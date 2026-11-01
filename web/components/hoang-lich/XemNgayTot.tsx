@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TheNgay } from "@/components/hoang-lich/TheNgay";
+import { ChonNgayNhieu } from "@/components/hoang-lich/ChonNgayNhieu";
 import { useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
@@ -142,6 +143,7 @@ export function XemNgayTot({ banDau, thang }: { banDau: NgayTot; thang: ThangLic
     <div className="space-y-5">
       <TheNgay d={d} />
       <ChonNgay dsViec={banDau.danh_sach_viec} tu={banDau.ngay >= homNay ? banDau.ngay : homNay} tuoi={tuoi} />
+      <ChonNgayNhieu tu={banDau.ngay >= homNay ? banDau.ngay : homNay} />
       {thang && <LichThang t={thang} chon={banDau.ngay} />}
       <CuoiBaiDoc moDun="xem_ngay" cauHoi="Thông tin ngày tốt có giúp bạn sắp xếp việc của mình?" />
     </div>

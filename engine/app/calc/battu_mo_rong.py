@@ -46,7 +46,7 @@ _Y = {
     "Hồng Diễm": ("trung", "duyên dáng, đa tình"),
     "Thiên Đức": ("cát", "phúc đức trời che, giảm hung"),
     "Nguyệt Đức": ("cát", "phúc đức tháng che, giảm hung"),
-    "Đào Hoa": ("trung", "duyên, sức hút, giao tế; quá vượng dễ vướng tình cảm"),
+    "Đào Hoa": ("trung", "duyên, sức hút, giao tế (còn gọi Hàm Trì); quá vượng dễ vướng tình cảm"),
     "Dịch Mã": ("trung", "di chuyển, thay đổi, đi xa"),
     "Hoa Cái": ("trung", "nghệ thuật, tâm linh, thích cô tịch"),
     "Tướng Tinh": ("cát", "khí chất lãnh đạo, có uy"),
@@ -55,6 +55,7 @@ _Y = {
     "Cô Thần": ("hung", "cô độc, thiếu chỗ dựa (xét cho nam)"),
     "Quả Tú": ("hung", "cô quạnh, duyên muộn (xét cho nữ)"),
     "Khôi Cương": ("trung", "cương nghị, quyết đoán, tính mạnh"),
+    "Thiên Y": ("cát", "thiên về chăm sóc, chữa lành — hợp việc chăm người, tư vấn, nghề liên quan sức khoẻ"),
 }
 
 _QUY_NHAN = {"Giáp": ("Sửu", "Mùi"), "Mậu": ("Sửu", "Mùi"), "Canh": ("Sửu", "Mùi"), "Ất": ("Tý", "Thân"),
@@ -117,6 +118,8 @@ def than_sat(tru: list[dict]) -> list[dict]:
     td = _THIEN_DUC[chi[1]]
     them("Thiên Đức", {i for i in range(4) if (can[i] if td in CAN else chi[i]) == td}, "chi tháng")
     them("Nguyệt Đức", {i for i in range(4) if can[i] == _NGUYET_DUC[chi[1]]}, "chi tháng")
+    ty = CHI[(CHI.index(chi[1]) - 1) % 12]          # EN-5.3: Thiên Y = chi đứng trước chi tháng một cung
+    them("Thiên Y", {i for i in range(4) if i != 1 and chi[i] == ty}, "chi tháng")
     for ten, bang in _THEO_NHOM.items():
         for g in (0, 2):
             dich = bang[_nhom(chi[g])]
@@ -233,6 +236,8 @@ def mo_rong(ls: dict) -> dict:
         "khong_vong": {"ngay": tuan_khong(tru[2]["can"], tru[2]["chi"]), "nam": tuan_khong(tru[0]["can"], tru[0]["chi"])},
         "than_sat": than_sat(tru),
         "than_sat_nguon": THAN_SAT_NGUON,
+        "cung_than": cung_than(ls),                                        # EN-5.3
+        "tieu_van": cac_tieu_van(ls),
         "quan_he": quan_he(tru),
         "bang_hanh": bang_hanh(),
         "vai_tro_hanh": vai_tro_hanh(ls["nhat_chu"]["ngu_hanh"]),
@@ -257,3 +262,61 @@ def luu_nien(ls: dict, nam: int) -> dict:
             "nap_am": can_chi.nap_am(can_n, chi_n), "truong_sinh": truong_sinh(nc, chi_n),
             "dai_van": dv and {**dv, "thap_than": thap_than(nc, dv["can"])},
             "quan_he": qh, "luu_nguyet": thang}
+
+
+# --------------------------------------------------------------------------- EN-5.3 cung Thai / Mệnh / Thân, tiểu vận
+# Cách tính theo lunar-typescript (6tail, MIT — golden fixtures/golden/battu_cung.json): Thai nguyên = can tháng + 1,
+# chi tháng + 3; Mệnh cung / Thân cung đếm theo chi tháng (Dần = 1 … Sửu = 12) và chi giờ, can theo Ngũ Hổ Độn của can
+# năm; tiểu vận = trụ giờ tiến (thuận) / lùi (nghịch) theo tuổi mụ, cùng chiều đại vận — dùng cho những năm trước khởi vận.
+def _gz_ra(can: str, chi: str) -> dict:
+    return {"can": can, "chi": chi, "nap_am": can_chi.nap_am(can, chi)["ten"]}
+
+
+def _thang_so(chi: str) -> int:
+    return (CHI.index(chi) - 2) % 12 + 1
+
+
+def cung_than(ls: dict) -> dict:
+    tru = ls["tru"]
+    can_nam, (can_t, chi_t), chi_gio = tru[0]["can"], (tru[1]["can"], tru[1]["chi"]), tru[3]["chi"]
+    thai = _gz_ra(CAN[(CAN.index(can_t) + 1) % 10], CHI[(CHI.index(chi_t) + 3) % 12])
+
+    def can_cung(off: int) -> str:
+        g = (CAN.index(can_nam) + 1) * 2 + off
+        while g > 10:
+            g -= 10
+        return CAN[g - 1]
+
+    off = _thang_so(chi_t) + _thang_so(chi_gio)
+    off = (26 if off >= 14 else 14) - off
+    menh = _gz_ra(can_cung(off), CHI[(off + 1) % 12])
+    off2 = _thang_so(chi_t) + CHI.index(chi_gio) + 1
+    off2 -= 12 if off2 > 12 else 0
+    than = _gz_ra(can_cung(off2), CHI[(off2 + 1) % 12])
+    return {"thai_nguyen": thai, "menh_cung": menh, "than_cung": than,
+            "giai_thich": GIAI_THICH_CUNG, "nguon": "Tam Mệnh Thông Hội — cách lập Thai nguyên, Mệnh cung phổ thông"}
+
+
+GIAI_THICH_CUNG = {
+    "thai_nguyen": "Thai nguyên là trụ của tháng thụ thai, suy ngược từ tháng sinh (can tháng tiến một, chi tháng tiến "
+                   "ba). Sách Tử Bình xem như phần gốc rễ, đọc kèm chứ không thay bốn trụ.",
+    "menh_cung": "Mệnh cung lập từ tháng sinh và giờ sinh, cho biết khí chất nền và môi trường bạn hợp. Là chỉ dấu "
+                 "phụ — luận chính vẫn ở nhật chủ, thập thần, dụng thần.",
+    "than_cung": "Thân cung cũng lập từ tháng và giờ sinh (đếm theo chiều khác Mệnh cung), thường đọc cho nửa sau "
+                 "cuộc đời và cách bạn hành động.",
+    "tieu_van": "Tiểu vận là trụ đi từng năm cho những năm trước khi vào đại vận đầu tiên: bắt đầu từ trụ giờ, mỗi năm "
+                "tiến (hoặc lùi, cùng chiều đại vận) một bậc.",
+}
+
+
+def tieu_van(ls: dict, tuoi_mu: int) -> dict:
+    t = ls["tru"][3]
+    i = can_chi.chi_so_hoa_giap(t["can"], t["chi"])
+    i = (i + tuoi_mu) % 60 if ls["dai_van"]["thuan"] else (i - tuoi_mu) % 60
+    return _gz_ra(CAN[i % 10], CHI[i % 12])
+
+
+def cac_tieu_van(ls: dict) -> list[dict]:
+    """Tiểu vận từng năm từ năm sinh tới trước năm khởi đại vận."""
+    nam0, khoi = ls["nam_duong"], ls["dai_van"]["ds"][0]["tu_nam"]
+    return [{"nam": nam0 + k - 1, "tuoi_mu": k, **tieu_van(ls, k)} for k in range(1, khoi - nam0 + 1)]

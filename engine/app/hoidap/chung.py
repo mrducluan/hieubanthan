@@ -169,7 +169,7 @@ def nam_xem_hh(nam_cau: int | None, ngay_xem, t: str) -> tuple[int, int]:
 
 # ---- EN-3 (mục 3): "trả lời trước" — đoạn khớp câu hỏi nhất lên đầu phần thân (chỉ đổi thứ tự).
 _DAU_CO_DINH = (r"^Tứ trụ \(năm", r"^Tuổi mụ tại thời điểm xem", r"^Mệnh quái \(cung phi\) của bạn",
-                r"^Theo tục xếp theo tuổi")          # MT-ĐS B3: tập quán đứng trước lá số (có chủ ý)
+                r"^Theo tục xếp theo tuổi", r"^Trong \d+ tháng tới")          # MT-ĐS B3: tập quán đứng trước lá số (có chủ ý)
 _CHAN = (r"^Câu hỏi để tự soi", r"^Đây là góc nhìn tham khảo", r"^Bát trạch là một trường phái", r"^Lưu ý:",
          r"^Lời này không thay", r"^Tham khảo văn hoá")
 # Đoạn không bao giờ đưa lên đầu (review EN-3): tự soi / lưu ý / ranh giới giữa bài, đoạn chuyên môn (thang điểm, dụng
@@ -287,3 +287,64 @@ def them_so_nam(goi: dict, dong: list[dict], nam_hoi: list[int], bo_qua_dau: tup
         {"nam": d["nam"], "can_chi": " ".join(lunar.can_chi_nam(d["nam"])), "muc": d["muc"], "nhan_muc": d["nhan_muc"],
          "y": d["y"], "mang": d.get("mang")} for d in ds]})
     ket(goi)
+
+
+# ---- EN-5.4: câu quyết định có khung thời gian → cửa sổ tháng (một bộ tính: hàm tháng của Thời gian tới) ----------
+def them_cua_so(goi: dict, pl: dict, mo_dun: str, sinh: dict, ngay_xem, ls: dict | None = None,
+                bo_qua_dau: tuple[str, ...] = ()) -> None:
+    """Chèn mục `cua_so` khi câu hỏi là "có nên / khi nào" kèm khung "N tháng tới"; không có khung → không làm gì."""
+    from app.hoidap import hieu_cau  # noqa: PLC0415
+    from app.luangiai import cua_so  # noqa: PLC0415
+    t = pl["cau_chuan_hoa"]
+    if pl.get("xu_ly") in DAC_BIET or goi.get("can_them") or not goi["muc"] or hieu_cau.kieu(t) not in ("co_nen", "khi_nao"):
+        return
+    n = hieu_cau.khung_thang(t, ngay_xem, pl.get("cau_goc"))
+    if not n:
+        return
+    try:
+        cs = cua_so.lap(mo_dun, sinh, ngay_xem, n, ls=ls)
+    except Exception:  # noqa: BLE001 — cửa sổ là phần đọc thêm; lỗi không làm hỏng câu trả lời
+        return
+    if not cs["thang"]:
+        return
+    vt = 0
+    while vt < len(goi["muc"]) and vt < 2 and goi["muc"][vt]["loai"] in bo_qua_dau:
+        vt += 1
+    goi["muc"].insert(vt, {"loai": "cua_so", **cs})
+    ket(goi)
+
+
+def _ten_thang_cs(x: dict) -> str:
+    if "(" in x["ten"]:
+        return x["ten"]
+    a, b = x["tu"].split("-"), x["den"].split("-")
+    return f"{x['ten']} ({int(a[2])}/{int(a[1])}–{int(b[2])}/{int(b[1])})"
+
+
+def doan_cua_so(m: dict) -> str:
+    th, ch = m["thuan"], m["cham"]
+    s = (f"Trong {m['so_thang']} tháng tới, lá số không trả lời có hay không cho quyết định của bạn — nó cho biết "
+         "nhịp từng tháng để bạn chọn lúc làm phần chính. ")
+    if th:
+        s += "Tháng thuận hơn: " + "; ".join(_ten_thang_cs(x) for x in th) + ". "
+    if ch:
+        s += "Tháng nên đi chậm: " + "; ".join(_ten_thang_cs(x) for x in ch) + ". "
+    if not th and not ch:
+        s += "Không có tháng nào nổi hẳn — nhịp khá đều, chọn lúc bạn chuẩn bị kịp nhất. "
+    elif len(th) + len(ch) < len(m["thang"]):
+        s += "Các tháng còn lại nhịp khá đều. "
+    noi = "trong tháng thuận" if th else "trong những tháng nhịp đều"
+    s += (f"Nếu đã quyết, làm phần chính (ký, nộp, chuyển, ra mắt) {noi}"
+          + ("; tháng đi chậm dùng để chuẩn bị, rà lại điều kiện, hỏi thêm người có kinh nghiệm." if ch else "."))
+    return s
+
+
+def khop_dau(raw: str | None, t: str, rx_co_dau: list[str], rx_khong_dau: list[str]) -> bool:
+    """EN-5 (code-review): thuật ngữ trùng chữ thường khi bỏ dấu ("mệnh cung"/"mệnh cũng", "Đà La"/"đã là", "Thiên Y"/
+    "thiện ý") — người dùng gõ CÓ dấu thì so trên câu có dấu (`rx_co_dau`), gõ không dấu thì dùng mẫu chặt hơn
+    (`rx_khong_dau`, có ngữ cảnh) trên câu đã chuẩn hoá `t`."""
+    if raw:
+        cd, _, co_dau = _at._hai_ban(raw)
+        if co_dau:
+            return co(cd, rx_co_dau)
+    return co(t, rx_khong_dau)

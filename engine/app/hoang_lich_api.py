@@ -77,6 +77,39 @@ def api_chon_ngay(inp: ChonNgayInput) -> dict:
     return L.chon_ngay(inp.viec, inp.tu, inp.den, inp.nam_sinh, inp.thang_sinh, inp.ngay_sinh)
 
 
+# ---- EN-5.1: chọn ngày theo nhiều người (không lưu; năm sinh chỉ đi qua lượt gọi) -------------------------------
+from app.luangiai import chon_ngay_nhieu as CN  # noqa: E402
+
+MaVai = Literal[tuple(CN.VAI)]  # type: ignore[valid-type]
+
+
+class _NguoiCung(_NguoiXem):
+    vai: MaVai
+    nam_sinh: int = Field(ge=1900, le=2100)
+
+
+class ChonNgayNhieuInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    viec: MaViec
+    tu: _dt.date = Field(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))
+    den: _dt.date = Field(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))
+    nguoi: list[_NguoiCung] = Field(min_length=1, max_length=CN.TOI_DA_NGUOI)
+
+
+@router.post("/v1/lich/chon-ngay-nhieu")
+def api_chon_ngay_nhieu(inp: ChonNgayNhieuInput) -> dict:
+    for x in inp.nguoi:
+        _kiem_sinh(x)
+    _trong_khoang(inp.tu)
+    _trong_khoang(inp.den)
+    if inp.den < inp.tu or (inp.den - inp.tu).days > CN.TOI_DA_NGAY:
+        raise HTTPException(422, detail="Khoảng chọn ngày tối đa 13 tháng")
+    if len({x.vai for x in inp.nguoi if x.vai not in ("doi_tac", "nguoi_khac")}) != \
+            sum(x.vai not in ("doi_tac", "nguoi_khac") for x in inp.nguoi):
+        raise HTTPException(422, detail="Mỗi vai (cô dâu, chú rể, bố mẹ…) chỉ một người")
+    return CN.chon(inp.viec, inp.tu, inp.den, [x.model_dump() for x in inp.nguoi])
+
+
 @router.get("/v1/lich/viec")
 def api_viec() -> dict:
     return {"viec": [{"ma": v["ma"], "ten": v["ten"]} for v in L.KB["viec"]]}

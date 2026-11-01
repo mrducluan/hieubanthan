@@ -123,6 +123,7 @@ def la_so(lich: dt.datetime, gioi_tinh: str, gio_ty: str = "da_ty") -> dict:
                           thap_than(dm, tru[3]["can"])],
         "thap_than_chi": [[thap_than(dm, c) for c in x] for x in tang],
         "nam_bat_tu": nam,
+        "nam_duong": lich.year,          # EN-5.3: năm dương lịch sinh (tiểu vận đếm từ năm này)
         "gio_ty": gio_ty,
     }
     kq["ngu_hanh"] = _ngu_hanh(tru, tang)
