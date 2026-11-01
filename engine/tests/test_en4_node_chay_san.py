@@ -55,3 +55,31 @@ def test_tien_trinh_chet_thi_dung_lai():
 def test_tat_bang_env(monkeypatch):
     monkeypatch.setenv("NODE_CHAY_SAN", "0")
     assert az._dung_chay_san() is False
+
+
+@pytest.mark.parametrize("i", range(0, 60, 7))
+def test_goi_gop_trung_goi_le(i):
+    """EN-4 (mục 1b): một lời gọi "lá số + nhiều ngày xem" cho đúng chuỗi JSON như từng lời gọi lẻ."""
+    ca = _TV[i]
+    d = dt.date.fromisoformat(ca["ngay"])
+    xem = [dt.date(2026, 11, 1), dt.date(2026, 8, 15), dt.date(2027, 3, 3)]
+    az._xoa_nho()
+    az.nap_truoc(d, ca["ti"], ca["gioi_tinh"], xem)
+    gop = [az.van_han(d, ca["ti"], ca["gioi_tinh"], x) for x in xem] + [az.an_sao_tho(d, ca["ti"], ca["gioi_tinh"])]
+    az._xoa_nho()
+    le = [az.van_han(d, ca["ti"], ca["gioi_tinh"], x) for x in xem] + [az.an_sao_tho(d, ca["ti"], ca["gioi_tinh"])]
+    assert gop == le
+
+
+def test_nap_truoc_mot_loi_goi(monkeypatch):
+    ca = _TV[3]
+    d = dt.date.fromisoformat(ca["ngay"])
+    az._xoa_nho()
+    dem = []
+    goc = az._MayChay.goi
+    monkeypatch.setattr(az._MayChay, "goi", lambda self, v: dem.append(1) or goc(self, v))
+    az.nap_truoc(d, ca["ti"], ca["gioi_tinh"], [dt.date(2026, 11, 1), dt.date(2027, 1, 1)])
+    az.van_han(d, ca["ti"], ca["gioi_tinh"], dt.date(2026, 11, 1))
+    az.van_han(d, ca["ti"], ca["gioi_tinh"], dt.date(2027, 1, 1))
+    az.an_sao_tho(d, ca["ti"], ca["gioi_tinh"])
+    assert len(dem) == 1

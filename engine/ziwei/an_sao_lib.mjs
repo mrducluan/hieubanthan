@@ -55,6 +55,8 @@ export function anSao(vao) {
   for (const k of Object.keys(amViet)) delete amViet[k];
   if (vao.am) amViet[khoa(vao.ngay)] = vao.am;
   if (vao.am_xem && vao.ngay_xem) amViet[khoa(vao.ngay_xem)] = vao.am_xem;
+  // EN-4: gọi gộp — một lá số + nhiều ngày xem (âm lịch Việt của từng ngày xem đặt cùng lúc)
+  for (const x of vao.ds_xem || []) if (x.am_xem) amViet[khoa(x.ngay_xem)] = x.am_xem;
   // fix_leap: nửa sau tháng nhuận tính sang tháng sau (mặc định iztro) hay như tháng chính.
   const a = astro.bySolar(vao.ngay, vao.time_index, vao.gioi_tinh === 'nu' ? 'female' : 'male',
                           vao.fix_leap !== false, vao.ngon_ngu || 'vi-VN');
@@ -78,13 +80,14 @@ export function anSao(vao) {
       ages: p.ages,
     })),
   };
-  if (vao.ngay_xem) {
-    const h = a.horoscope(vao.ngay_xem);
-    const hc = (o) => ({ index: o.index, heavenlyStem: o.heavenlyStem, earthlyBranch: o.earthlyBranch,
-                         mutagen: o.mutagen || [], palaceNames: o.palaceNames || [],
-                         stars: (o.stars || []).map((ds) => ds.map((x) => ({ name: x.name, type: x.type }))) });
-    ra.horoscope = { decadal: hc(h.decadal), age: { ...hc(h.age), nominalAge: h.age.nominalAge },
-                     yearly: hc(h.yearly) };
-  }
+  const hc = (o) => ({ index: o.index, heavenlyStem: o.heavenlyStem, earthlyBranch: o.earthlyBranch,
+                       mutagen: o.mutagen || [], palaceNames: o.palaceNames || [],
+                       stars: (o.stars || []).map((ds) => ds.map((x) => ({ name: x.name, type: x.type }))) });
+  const van = (ngay) => {
+    const h = a.horoscope(ngay);
+    return { decadal: hc(h.decadal), age: { ...hc(h.age), nominalAge: h.age.nominalAge }, yearly: hc(h.yearly) };
+  };
+  if (vao.ds_xem) return { la: ra, xem: vao.ds_xem.map((x) => ({ ngay_xem: x.ngay_xem, horoscope: van(x.ngay_xem) })) };
+  if (vao.ngay_xem) ra.horoscope = van(vao.ngay_xem);
   return ra;
 }

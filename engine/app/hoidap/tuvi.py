@@ -1375,6 +1375,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
     ch = Y_DINH_CAU_HINH.get(yd, {})
     them: dict = {}
     if sinh and can_la_so:
+        az.nap_truoc_sinh(sinh, ngay_xem)   # EN-4: một lời gọi iztro cho lá số + ngày xem + mốc lưu nguyệt
         ls = tom_tat(az.an_sao_tho(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], "vi-VN",
                                      tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ),
                                      hoa_linh=sinh.get("hoa_linh", "viet"),

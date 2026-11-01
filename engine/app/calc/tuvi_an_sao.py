@@ -19,6 +19,7 @@ import queue
 import select
 import subprocess
 import threading
+from collections import OrderedDict
 from functools import lru_cache
 from pathlib import Path
 
@@ -79,9 +80,39 @@ def _so_node() -> int:
 _NODE_TOI_DA = threading.BoundedSemaphore(_so_node())
 
 
-@lru_cache(maxsize=512)
+# Bộ nhớ kết quả iztro theo đúng tham số (trước là lru_cache) — dict riêng để lời gọi GỘP (`nap_truoc`) điền sẵn.
+_NHO: "OrderedDict[tuple, str]" = OrderedDict()
+_NHO_KHOA = threading.Lock()
+_NHO_TOI_DA = 512
+
+
+def _xoa_nho() -> None:
+    with _NHO_KHOA:
+        _NHO.clear()
+
+
+def _cat(k: tuple, v: str) -> None:
+    with _NHO_KHOA:
+        _NHO[k] = v
+        _NHO.move_to_end(k)
+        while len(_NHO) > _NHO_TOI_DA:
+            _NHO.popitem(last=False)
+
+
 def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "",
           am: str = "", am_xem: str = "", fix_leap: bool = True) -> str:
+    k = (ngay, ti, gioi_tinh, ngon_ngu, ngay_xem, am, am_xem, fix_leap)
+    with _NHO_KHOA:
+        if k in _NHO:
+            _NHO.move_to_end(k)
+            return _NHO[k]
+    ra = _chay_that(*k)
+    _cat(k, ra)
+    return ra
+
+
+def _chay_that(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "",
+               am: str = "", am_xem: str = "", fix_leap: bool = True) -> str:
     phien_ban_iztro()   # kiểm tra đã cài
     v = dict(ngay=ngay, ti=ti, gioi_tinh=gioi_tinh, ngon_ngu=ngon_ngu, ngay_xem=ngay_xem, am=am, am_xem=am_xem,
              fix_leap=fix_leap)
@@ -166,6 +197,7 @@ class _MayChay:
                                "ngon_ngu": v["ngon_ngu"], **({"ngay_xem": v["ngay_xem"]} if v.get("ngay_xem") else {}),
                                **({"am": json.loads(v["am"])} if v.get("am") else {}),
                                **({"am_xem": json.loads(v["am_xem"])} if v.get("am_xem") else {}),
+                               **({"ds_xem": v["ds_xem"]} if v.get("ds_xem") else {}),
                                "fix_leap": v.get("fix_leap", True)}, ensure_ascii=False)
         w = self._ranh.get(timeout=TIMEOUT_GIAY)
         try:
@@ -314,3 +346,60 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
         "tieu_han": {**_lop(h["age"], False), "cung_goc": cung[h["age"]["index"]]["name"]},
         "luu_nien": {**_lop(h["yearly"]), "cung_goc": cung[h["yearly"]["index"]]["name"]},
     }
+
+
+
+def nap_truoc(ngay_duong: dt.date, ti: int, gioi_tinh: str, ds_xem: list[dt.date],
+              tz_lich: float = config.CALENDAR_MERIDIAN_TZ, thang_nhuan: str = "thang_sau", lich: str = "viet") -> None:
+    """EN-4 (mục 1b): MỘT lời gọi iztro cho lá số + nhiều ngày xem, điền sẵn bộ nhớ cho `an_sao_tho(...)` và từng
+    `van_han(..., ngay_xem)` cùng tham số (kết quả trùng khít gọi lẻ — tests/test_en4_node_chay_san.py). Tắt chạy sẵn /
+    lỗi → không làm gì, các lời gọi lẻ vẫn chạy như cũ."""
+    if not _dung_chay_san() or not 0 <= ti <= 12 or gioi_tinh not in ("nam", "nu"):
+        return
+    viet = lich != "trung"
+    tz_sinh = TZ_TRUNG if lich == "trung" else tz_lich
+    ngay, am = _d(ngay_duong), (_am(ngay_duong, tz_sinh) if viet else "")
+    fix = thang_nhuan == "thang_sau"
+    am_vh = _am(ngay_duong, tz_lich) if viet else ""          # van_han dùng tz_lich (như hàm van_han)
+    con = []
+    for x in dict.fromkeys(ds_xem):
+        k = (ngay, ti, gioi_tinh, "vi-VN", _d(x), am_vh, _am(x, config.CALENDAR_MERIDIAN_TZ) if viet else "", fix)
+        with _NHO_KHOA:
+            if k not in _NHO:
+                con.append((x, k))
+    k_la = (ngay, ti, gioi_tinh, "vi-VN", "", am, "", fix)
+    with _NHO_KHOA:
+        can_la = k_la not in _NHO
+    if not con and not can_la:
+        return
+    try:
+        phien_ban_iztro()
+        ds = [{"ngay_xem": _d(x), **({"am_xem": json.loads(k[6])} if k[6] else {})} for x, k in con] or \
+            [{"ngay_xem": _d(ngay_duong)}]
+        ra = json.loads(_may().goi(dict(ngay=ngay, ti=ti, gioi_tinh=gioi_tinh, ngon_ngu="vi-VN", ngay_xem="",
+                                        am=am_vh or am, am_xem="", fix_leap=fix, ds_xem=ds)))
+    except Exception:  # noqa: BLE001 — chỉ là nạp trước; lỗi thì các lời gọi lẻ tự chạy
+        return
+    la = ra["la"]
+    if can_la and am == (am_vh or am):
+        _cat(k_la, json.dumps(la, ensure_ascii=False))
+    for (x, k), h in zip(con, ra["xem"]):
+        _cat(k, json.dumps({**la, "horoscope": h["horoscope"]}, ensure_ascii=False))
+
+
+def ngay_xem_can(sinh: dict, ngay_xem: dt.date) -> list[dt.date]:
+    """Các ngày xem một báo cáo / câu hỏi Tử vi sẽ cần (ngày xem + giữa năm âm này và năm sau — mốc mà lưu nguyệt và
+    nhịp 3 tháng dùng) để `nap_truoc` gọi iztro một lần."""
+    tz_xem = TZ_TRUNG if sinh.get("lich", "viet") == "trung" else config.CALENDAR_MERIDIAN_TZ
+    nam_am = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, tz_xem)[2]
+    ra = [ngay_xem]
+    for n in (nam_am, nam_am + 1):
+        d, m, y = lunar.lunar_to_solar(1, 7, n, 0, tz_xem)
+        ra.append(dt.date(y, m, d))
+    return ra
+
+
+def nap_truoc_sinh(sinh: dict, ngay_xem: dt.date) -> None:
+    nap_truoc(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], ngay_xem_can(sinh, ngay_xem),
+              tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ), thang_nhuan=sinh.get("thang_nhuan", "thang_sau"),
+              lich=sinh.get("lich", "viet"))

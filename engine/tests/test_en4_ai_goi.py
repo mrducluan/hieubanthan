@@ -88,3 +88,14 @@ def test_het_luot_khong_goi_mang_nhung_nho_van_tra(monkeypatch):
     with pytest.raises(ngan_sach.HetLuot):
         ai_goi.goi_chat([{"role": "user", "content": "câu khác"}], nhiet_do=0.4, max_tokens=500)
     assert len(goi) == 1
+
+
+def test_mot_luat_hoc_dung_chung():
+    """EN-4 (mục 4): ngưỡng HỌC (30 phiếu gắn tỉ lệ; ≥ 100 phiếu & < 40% đúng → đang xem lại) ở MỘT chỗ."""
+    from app.luangiai import doi_song_chung as dsc, doi_song_khuon as kh
+    assert kh.danh_gia_phieu({"dung": 10, "chua_dung": 10}) is None
+    assert kh.danh_gia_phieu({"dung": 20, "chua_dung": 10}) == (0.67, 30, False)
+    assert kh.danh_gia_phieu({"dung": 39, "chua_dung": 61}) == (0.39, 100, True)
+    h = [{"ma_mau": "a", "tieu_de": "A"}, {"ma_mau": "b", "tieu_de": "B"}]
+    chon, xem_lai = dsc._ap_hoc(h, {"a": {"dung": 30, "chua_dung": 70}}, {"b": "chua_dung"})
+    assert [x["ma_mau"] for x in chon] == ["b"] and xem_lai == ["Đang xem lại: A"]
