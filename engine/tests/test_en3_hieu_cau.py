@@ -29,7 +29,7 @@ def test_khong_phai_kien_thuc(cau):
 
 @pytest.mark.parametrize("cau, ra", [
     ("Năm 2027 hay 2028 thì nên cưới", [{"nam": 2027}, {"nam": 2028}]),
-    ("năm sau có nên mua nhà", [{"nam": 2027}]),
+    ("năm sau có nên mua nhà", [{"nam": 2027, "tuong_doi": "nam_sau"}]),
     ("Tháng 3 năm sau ký hợp đồng được không", [{"nam": 2027, "thang": 3}]),
     ("tháng tới có nên đi xa", [{"nam": 2026, "thang": 12}]),
     ("Nên mở cửa hàng tháng 2 hay tháng 3 năm sau", [{"nam": 2027, "thang": 2}, {"nam": 2027, "thang": 3}]),
@@ -79,3 +79,20 @@ def test_tra_loi_kien_thuc_bang_tu_dien(mo_dun, cau, ten):
     lab = pl.get("linh_vuc") if mo_dun == "thanso" else pl.get("loai")
     assert lab == "ky_thuat", (cau, lab)
     assert ten in " ".join(kq["cau_tra_loi"].split("\n\n")[:2]), kq["cau_tra_loi"][:160]   # mục kho riêng hoặc từ điển
+
+
+@pytest.mark.parametrize("cau, ra", [
+    ("Con gái tôi sinh ngày 5/2/2015, bé có năng khiếu gì", []),
+    ("Bố mẹ tôi sinh 1960 và 1963, nhà quay hướng nào", []),
+    ("Căn nhà rao bán ba tháng nay vẫn chưa ai mua", []),
+    ("Ba tháng tới công việc có biến động không", [{"nam": 2026, "thang": 12}, {"nam": 2027, "thang": 1},
+                                                 {"nam": 2027, "thang": 2}]),
+    ("Năm ngoái tôi lỗ nặng, năm nay có gỡ được không", [{"nam": 2026, "tuong_doi": "nam_nay"}]),
+])
+def test_thoi_gian_khong_nham_nam_sinh(cau, ra):
+    assert hc.thoi_gian(ch(cau), XEM) == ra, (cau, hc.thoi_gian(ch(cau), XEM))
+
+
+def test_nam_sinh_roi_nam_hoi():
+    assert hc.thoi_gian(ch("Tôi sinh 1990, năm 2027 có nên cưới không"), XEM) == [{"nam": 2027}]
+    assert hc.thoi_gian(ch("Tôi sinh ngày 3/4/1992, tháng 5 năm 2027 có nên đổi việc"), XEM) == [{"nam": 2027, "thang": 5}]

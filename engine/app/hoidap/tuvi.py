@@ -1269,6 +1269,8 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         return f"{m['ten']}: {m['giai_thich']}", None
     if l == "giai_thich":
         return f"{m['tieu_de']}: {m['noi_dung']}", None
+    if l == "so_nam":
+        return chung.doan_so_nam(m["nam"]), None
     if l == "ghi_chu":
         return m["noi_dung"], None
     if l == "doi_song":
@@ -1342,6 +1344,27 @@ def _cong_nam(d: dt.date, n: int) -> dt.date:
         return d.replace(year=d.year + n, day=28)
 
 
+def _them_so_nam(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -> None:
+    """EN-3: câu nêu năm (một hay hai năm, "năm sau") → đoạn đầu nói mức của ĐÚNG các năm đó, lấy từ dòng 10 năm của
+    báo cáo (`tuvi_doi_song.dong_muoi_nam` — cùng mức chương Vận hạn, một nguồn). Năm ngoài 10 năm tới bỏ qua."""
+    from app.luangiai import tuvi_doi_song as tvd  # noqa: PLC0415
+    nam_hoi = chung.nam_hoi_hh(pl["cau_chuan_hoa"], ngay_xem, "am")
+    if not nam_hoi:
+        return
+    tz = sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ)
+    nam_am_xem = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, config.CALENDAR_MERIDIAN_TZ)[2]
+    nam_am_sinh = lunar.solar_to_lunar(sinh["ngay"].day, sinh["ngay"].month, sinh["ngay"].year, tz)[2]
+    dong = {d["nam"]: d for d in tvd.dong_muoi_nam(ls, tvd.cham_cung(ls), nam_am_xem, nam_am_sinh, sinh.get("gioi_tinh"))}
+    ds = [dong[y] for y in nam_hoi if y in dong]
+    if not ds:
+        return
+    vt = 1 if goi["muc"] and goi["muc"][0]["loai"] == "sao_han" else 0      # tập quán sao hạn giữ đứng đầu
+    goi["muc"].insert(vt, {"loai": "so_nam", "nam": [
+        {"nam": d["nam"], "can_chi": " ".join(lunar.can_chi_nam(d["nam"])), "muc": d["muc"], "nhan_muc": d["nhan_muc"],
+         "y": d["y"], "mang": d.get("mang")} for d in ds]})
+    chung.ket(goi)
+
+
 def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
             ngay_xem: dt.date | None = None, dung_llm: bool = False, y_dinh_goi_y: str | None = None) -> dict:
     """`sinh` = {"ngay": date (dương, kinh tuyến UTC+7), "ti": 0..12, "gioi_tinh": "nam"|"nu"}.
@@ -1397,6 +1420,8 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
             + (1 if pl["han_sau"] else 0)
         goi["muc"].insert(0, chung.muc_sao_han(nam_xem, sinh["ngay"].year, sinh["gioi_tinh"], sinh["ngay"].month, sinh["ngay"].day))
         chung.ket(goi)
+    if ls is not None and sinh and not goi["can_them"] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"):
+        _them_so_nam(goi, pl, sinh, ngay_xem, ls)
     if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
         goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
         chung.ket(goi)

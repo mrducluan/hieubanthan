@@ -14,7 +14,7 @@ import collections
 import datetime as dt
 import re
 
-from app.calc import battu_mo_rong, battu as bt
+from app.calc import battu_mo_rong, battu as bt, lunar
 from app.hoidap import chung, hieu_cau, doi_song_muc as dsm
 from app.kb import battu_kb as kb
 from app.luangiai import hoi as _h, truc_quan
@@ -412,6 +412,8 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict)
 # ------------------------------------------------------------------ NARRATIVE (template)
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
+    if l == "so_nam":
+        return chung.doan_so_nam(m["nam"]), None
     if l == "doi_song":
         return dsm.doan_doi_song(m), None
     if l == "sao_han":
@@ -536,6 +538,25 @@ def van_template(goi: dict) -> str:
     return "\n\n".join(doan)
 
 
+def _them_so_nam(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -> None:
+    """EN-3: câu nêu năm → đoạn đầu nói mức của ĐÚNG các năm đó (dòng 10 năm của báo cáo Bát tự — một nguồn; năm theo
+    Lập xuân, hai cách lấy dụng thần gộp như chương Vận hạn). Năm ngoài 10 năm tới bỏ qua."""
+    from app.hoidap import hieu_cau  # noqa: PLC0415
+    from app.luangiai import battu_doi_song as btd  # noqa: PLC0415
+    nam_hoi = chung.nam_hoi_hh(pl["cau_chuan_hoa"], ngay_xem, "lap_xuan")
+    if not nam_hoi:
+        return
+    dong = {d["nam"]: d for d in btd.dong_nam_cua(sinh, ngay_xem, ls)}
+    ds = [dong[y] for y in nam_hoi if y in dong]
+    if not ds:
+        return
+    vt = sum(1 for m in goi["muc"][:2] if m["loai"] in ("tu_tru", "sao_han"))   # tứ trụ, tập quán sao hạn giữ đầu
+    goi["muc"].insert(vt, {"loai": "so_nam", "nam": [
+        {"nam": d["nam"], "can_chi": " ".join(lunar.can_chi_nam(d["nam"])), "muc": d["muc"], "nhan_muc": d["nhan_muc"],
+         "y": d["y"], "mang": d.get("mang")} for d in ds]})
+    chung.ket(goi)
+
+
 def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = None,
             dung_llm: bool = False) -> dict:
     """`sinh` = {"lich": datetime theo kinh tuyến lịch UTC+7, "gioi_tinh": "nam"|"nu"}."""
@@ -555,6 +576,8 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         goi["muc"].insert(1 if goi["muc"] and goi["muc"][0]["loai"] == "tu_tru" else 0,
                           chung.muc_sao_han(nam_am, d.year, sinh["gioi_tinh"], d.month, d.day))
         chung.ket(goi)
+    if ls is not None and sinh and not goi["can_them"] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"):
+        _them_so_nam(goi, pl, sinh, ngay_xem, ls)
     if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
         goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
         chung.ket(goi)

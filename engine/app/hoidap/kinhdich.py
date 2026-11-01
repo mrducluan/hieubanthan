@@ -125,6 +125,15 @@ def _giai_thich_khop(t: str) -> list[str]:
     return [ma for ma, m in kb.giai_thich_tat_ca().items() if any(k in t for k in m["tu_khoa"])]
 
 
+def _moc_hoi(t: str, hom_nay: dt.date) -> str | None:
+    """"tháng 2/2027 hoặc tháng 3/2027", "năm 2027" — mốc người hỏi nêu (hieu_cau.thoi_gian), để lời nhắc đúng mốc."""
+    ds = hieu_cau.thoi_gian(t, hom_nay)
+    if not ds:
+        return None
+    ten = [f"tháng {x['thang']}/{x['nam']}" if x.get("thang") else f"năm {x['nam']}" for x in ds[:3]]
+    return ten[0] if len(ten) == 1 else ", ".join(ten[:-1]) + " hoặc " + ten[-1]
+
+
 def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
     t = chung.chuan_hoa_cau(cau_hoi)
     kq = {"cau_chuan_hoa": t, "che_do": che_do, "que_nhac": _que_nhac(cau_hoi), "hao_nhac": _hao_nhac(cau_hoi),
@@ -473,6 +482,13 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
     thoi_diem_gieo = ({"thoi_diem": luc.isoformat(timespec="seconds"), "chi_gio": mh.chi_gio(luc.hour), **tg}
                       if tg is not None else None)
     goi = goi_bang_chung(pl, que, mai_hoa, tg if pl["truong_phai"] == "luc_hao" else None)
+    moc = _moc_hoi(pl["cau_chuan_hoa"], (thoi_diem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7)))).date())
+    if moc and goi["muc"] and not goi["can_them"] and pl["loai"] in ("quyet_dinh", "du_doan", "doc_nhanh"):
+        # EN-3: nêu đúng mốc người hỏi nói tới; quẻ xem thế của việc lúc gieo, KHÔNG chấm riêng từng tháng / năm
+        goi["muc"].insert(0, {"loai": "ghi_chu", "noi_dung": f"Quẻ này đọc cho việc bạn định làm vào {moc}. Kinh Dịch "
+                              "xem thế của việc ở lúc gieo, không chấm riêng từng tháng hay từng năm — nếu đang cân "
+                              "hai mốc, xem phần nhịp thời gian bên dưới và chọn mốc bạn chuẩn bị kịp hơn."})
+        chung.ket(goi)
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:

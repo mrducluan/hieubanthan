@@ -230,11 +230,13 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int, nam_am: int | None
             # Một bộ tính: dùng đúng hàm của trang /xem-tuoi-lam-nha (tuổi mụ theo năm âm của NGÀY sinh khi có).
             from app.luangiai import tuoi_dan_gian as tdg  # noqa: PLC0415
             ng = (sinh or {}).get("ngay")
-            x = tdg.xem_tuoi_lam_nha(nam_sinh, nam_am, ng.month if ng else None, ng.day if ng else None)
-            muc.append({"loai": "tuoi_lam_nha", "nam_xem": nam_am, "tuoi_mu": x["tuoi_mu"], "kim_lau": x["kim_lau"],
-                        "hoang_oc": x["hoang_oc"], "tam_tai": x["tam_tai"], "nam_thuan": x["nam_thuan"][:1],
-                        "ket_ma": x["ket_luan"]["ma"],
-                        "source_id": "dan_gian", "school_id": "dan_gian"})
+            # EN-3: "làm nhà năm 2027 hay 2028" → xét từng năm được hỏi (cùng hàm), không chỉ năm đầu
+            for y in (pl.get("cac_nam_hoi") or [nam_am])[:3]:
+                x = tdg.xem_tuoi_lam_nha(nam_sinh, y, ng.month if ng else None, ng.day if ng else None)
+                muc.append({"loai": "tuoi_lam_nha", "nam_xem": y, "tuoi_mu": x["tuoi_mu"], "kim_lau": x["kim_lau"],
+                            "hoang_oc": x["hoang_oc"], "tam_tai": x["tam_tai"], "nam_thuan": x["nam_thuan"][:1],
+                            "ket_ma": x["ket_luan"]["ma"],
+                            "source_id": "dan_gian", "school_id": "dan_gian"})
         elif chung.co(pl["cau_chuan_hoa"], [r"tuoi toi", r"xem tuoi"]):
             goi["can_them"] = ["nam_sinh"]
             goi["mau"] = kb.mau("can_nam_sinh")
@@ -537,6 +539,9 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     pl = phan_loai(cau_hoi)
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     nam_xem, nam_am = chung.nam_xem_hh(pl["nam_xem"], ngay_xem, pl["cau_chuan_hoa"])
+    cac = sorted({x["nam"] for x in hieu_cau.thoi_gian(pl["cau_chuan_hoa"], ngay_xem)})
+    if len(cac) >= 2:
+        pl["cac_nam_hoi"] = cac                 # EN-3: hỏi so hai năm (tuổi làm nhà từng năm)
     goi = goi_bang_chung(pl, sinh, nam_xem, nam_am)
     if chung.sao_han_hoi(pl["cau_chuan_hoa"]) and sinh and sinh.get("gioi_tinh") and not goi["can_them"] \
             and pl["xu_ly"] not in chung.DAC_BIET:   # MT-ĐS B3 — không chèn trước lời hỗ trợ / từ chối / dẫn hướng

@@ -71,7 +71,7 @@ def _doan(m: dict) -> tuple[str, str | None]:
             f"Năm cá nhân {m['so']}"
         return (f"{nam} — {m['chu_de']}: {m['y_nghia']} Nên: {m['nen']} Tránh: {m['tranh']}", None)
     if l == "thang_ca_nhan":
-        th = f"Tháng {m['thang']} là tháng cá nhân {m['so']}" if m.get("thang") else \
+        th = f"Tháng {m['thang']}{'/' + str(m['nam']) if m.get('nam') else ''} là tháng cá nhân {m['so']}" if m.get("thang") else \
             f"Tháng cá nhân {m['so']}"
         return f"{th} ({m['chu_de']}): {m['nen']} Tránh: {m['tranh']}", None
     if l == "thang_mo_dau":   # TS-NOIDAU: tháng cá nhân 1 trong 12 tháng tới (nhịp mở đầu, không phải ngày "tốt")

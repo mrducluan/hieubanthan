@@ -59,26 +59,37 @@ def thoi_gian(t: str, hom_nay: dt.date) -> list[dict]:
     """Các mốc được HỎI (không phải năm sinh): [{"nam"}, {"nam", "thang"}] theo thứ tự xuất hiện, không lặp."""
     ra: list[dict] = []
     nam_tuong_doi = None
+    tuong_doi = None
     if re.search(r"nam (sau|toi)(?! (dinh|sinh|la|muon|tinh|du|\d|duoc|nay))|sang nam|nam toi\b$", t):
-        nam_tuong_doi = hom_nay.year + 1
-    elif re.search(r"nam nay|nam nay\b", t):
-        nam_tuong_doi = hom_nay.year
-    # năm tuyệt đối — bỏ năm đứng sau "sinh / sn / tuổi / sinh năm" (năm sinh)
+        nam_tuong_doi, tuong_doi = hom_nay.year + 1, "nam_sau"
+    elif re.search(r"nam nay\b", t):
+        nam_tuong_doi, tuong_doi = hom_nay.year, "nam_nay"
+    # năm tuyệt đối — bỏ năm sinh: đứng sau "sinh / sn / tuổi" (kể cả "sinh 1960 và 1963"), trong ngày dạng d/m/yyyy
     nam_tuyet = [int(m.group(1)) for m in _NAM.finditer(t)
-                 if not re.search(r"(sinh|sn|sinh nam|tuoi|doi|nam sinh|ns)\s*(nam\s*)?$", t[:m.start()])]
-    thang = [int(x) for x in re.findall(r"thang (1[0-2]|[1-9])(?!\d)", t)]
-    if re.search(r"thang (toi|sau)\b", t):
+                 if not re.search(r"(sinh|sn|sinh nam|tuoi|doi|nam sinh|ns)\s*(nam\s*)?(\d{4}\s*(va|,|hoac|voi)\s*)?$",
+                                  t[:m.start()])
+                 and not re.search(r"\d{1,2}[/-]\d{1,2}[/-]$", t[:m.start()])]
+    thang = [int(x) for x in re.findall(r"thang (1[0-2]|[1-9])(?![\d/-])", t)]
+    k = re.search(r"(ba|3|hai|2) thang (toi|sap toi|nua)\b", t)
+    if k:                                  # "ba tháng tới" → ba tháng kế tiếp
+        for i in range(1, (3 if k.group(1) in ("ba", "3") else 2) + 1):
+            y, mm = _them_thang(hom_nay, i)
+            ra.append({"nam": y, "thang": mm})
+    elif re.search(r"thang (toi|sau)\b", t) and not re.search(r"(ba|hai|\d+) thang (nay|qua)", t):
         y, mm = _them_thang(hom_nay, 1)
         ra.append({"nam": y, "thang": mm})
-    elif re.search(r"thang nay\b", t):
+    elif re.search(r"(?<!ba )(?<!hai )(?<!\d )thang nay\b", t):
         ra.append({"nam": hom_nay.year, "thang": hom_nay.month})
     nam_cho_thang = nam_tuyet[0] if nam_tuyet else nam_tuong_doi
     for th in thang:
         y = nam_cho_thang or (hom_nay.year if th >= hom_nay.month else hom_nay.year + 1)
         ra.append({"nam": y, "thang": th})
     if not thang:
-        for y in nam_tuyet or ([nam_tuong_doi] if nam_tuong_doi and not ra else []):
+        for y in nam_tuyet:
             ra.append({"nam": y})
+        if nam_tuong_doi and not ra:
+            # Mốc tương đối theo năm DƯƠNG lịch — mảng có ranh giới năm khác (Lập xuân, Tết) đổi lại bằng cờ này
+            ra.append({"nam": nam_tuong_doi, "tuong_doi": tuong_doi})
     out: list[dict] = []
     for x in ra:
         if x not in out:

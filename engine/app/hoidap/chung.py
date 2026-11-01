@@ -206,3 +206,45 @@ def tra_loi_truoc(van: str, t: str) -> str:
         return van
     than = [than[tot]] + than[:tot] + than[tot + 1:]
     return "\n\n".join(p[:dau] + than + p[chan:])
+
+
+
+_THU_MUC = {"thuan": 2, "can_bang": 1, "can_chu_dong": 0}
+
+
+def doan_so_nam(ds: list[dict]) -> str:
+    """EN-3: "Năm 2028 (Mậu Thân) với bạn: thuận lợi — … Năm 2029 …" + một câu so khi hai năm khác mức. `ds` = mục năm
+    đã chấm (nam, can_chi, muc, nhan_muc, y). Không điểm số; câu so chỉ nói năm nào thuận hơn theo mức đã có."""
+    cau = []
+    for d in ds:
+        y = re.sub(rf"^Năm {d['nam']},\s*", "", d.get("y") or "").strip()
+        cau.append(f"Năm {d['nam']} ({d['can_chi']}) với bạn: {d['nhan_muc'].lower()}" + (f" — {y}" if y else "."))
+    if len(ds) >= 2:
+        tot = max(ds, key=lambda d: _THU_MUC.get(d["muc"], 1))
+        if len({_THU_MUC.get(d["muc"], 1) for d in ds}) > 1:
+            cau.append(f"So các năm bạn hỏi: năm {tot['nam']} thuận hơn theo lá số; năm còn lại vẫn làm được nếu "
+                       "chuẩn bị kỹ hơn.")
+        else:
+            cau.append("Các năm bạn hỏi cùng một mức theo lá số — chọn năm nào là tuỳ việc bạn chuẩn bị xong lúc nào.")
+    return " ".join(c if c.endswith((".", "!", "?")) else c + "." for c in cau)
+
+
+
+def nam_hoi_hh(t: str, ngay_xem, kieu_nam: str) -> list[int]:
+    """EN-3: các năm câu hỏi nêu, theo ranh giới năm của mảng (`kieu_nam` = "lap_xuan" | "am"). Chỉ trả khi có năm số
+    cụ thể, "năm sau", hoặc ≥ 2 năm — câu "năm nay" đơn thuần đã có lời riêng của từng mảng."""
+    from app.hoidap import hieu_cau  # noqa: PLC0415
+    ds = hieu_cau.thoi_gian(t, ngay_xem)
+    if not ds:
+        return []
+    lx, am = nam_xem_hh(None, ngay_xem, t)
+    ra = []
+    for x in ds:
+        if x.get("tuong_doi"):
+            ra.append(lx if kieu_nam == "lap_xuan" else am)
+        else:
+            ra.append(x["nam"])
+    ra = sorted(set(ra))
+    if len(ra) == 1 and ds[0].get("tuong_doi") == "nam_nay":
+        return []
+    return ra

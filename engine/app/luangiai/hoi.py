@@ -477,6 +477,10 @@ def _them_thoi_diem(muc: list, cs: dict, t: str, ngay_xem: _dt.date, nguoi: dict
         cac_nam.append(ngay_xem.year + 2)
     for y in re.findall(r"nam (20\d\d)", t):
         cac_nam = [int(y)]
+    from app.hoidap import hieu_cau  # noqa: PLC0415 — EN-3: mốc được hỏi (nhiều năm, "năm sau hay 2028", tháng của năm)
+    tg = hieu_cau.thoi_gian(t, ngay_xem)
+    if tg:
+        cac_nam = list(dict.fromkeys(x["nam"] for x in tg))
     so_nhac = re.search(r"nam ca nhan (so )?([1-9])", t)
     for nam in dict.fromkeys(cac_nam):
         so = int(so_nhac.group(2)) if so_nhac else int(thanso.nam_ca_nhan(d, m, nam, "duong_lich"))
@@ -500,7 +504,15 @@ def _them_thoi_diem(muc: list, cs: dict, t: str, ngay_xem: _dt.date, nguoi: dict
             ngay_hoi = None
     if ngay_hoi:
         thang_xem = ngay_hoi
-    if re.search(r"thang|tuan", t):
+    thang_tg = [x for x in tg if x.get("thang")] if not ngay_hoi else []
+    if thang_tg and not re.search(r"thang ca nhan", t):        # EN-3: đúng (các) tháng được hỏi, kể cả tháng năm sau
+        for x in thang_tg[:3]:
+            so = mr.thang_ca_nhan(d, m, x["nam"], x["thang"])
+            n = kb.nghia_phu("thang_ca_nhan", so)
+            if n:
+                muc.append({"loai": "thang_ca_nhan", "thang": x["thang"],
+                            "nam": x["nam"] if x["nam"] != ngay_xem.year else None, "so": so, **n, **kb.meta_phu()})
+    elif re.search(r"thang|tuan", t):
         mm = re.search(r"thang ca nhan (so )?([1-9])", t)
         so = int(mm.group(2)) if mm else mr.thang_ca_nhan(d, m, thang_xem.year, thang_xem.month)
         n = kb.nghia_phu("thang_ca_nhan", so)
@@ -718,11 +730,18 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
                 muc.insert(min(1, len(muc)), m_cd)
 
     if cs and "duong_doi" in cs and "bieu_do" in cs:
-        if pl["y_dinh"] == "thoi_diem" or lv == "thoi_van" or \
+        from app.hoidap import hieu_cau  # noqa: PLC0415
+        hoi_moc = bool(hieu_cau.thoi_gian(t, ngay_xem)) and vai == "ban"
+        if pl["y_dinh"] == "thoi_diem" or lv == "thoi_van" or hoi_moc or \
                 so_nhac.keys() & {"nam_ca_nhan", "thang_ca_nhan", "ngay_ca_nhan"}:
             nguoi_tinh = nguoi if vai == "ban" else (nguoi_kia or {"ngay": pl["ngay_nhac"][0][0],
                                                                  "thang": pl["ngay_nhac"][0][1]})
+            truoc = len(muc)
             _them_thoi_diem(muc, cs, t, ngay_xem, nguoi_tinh)
+            if hoi_moc and lv != "thoi_van":     # EN-3: câu nêu mốc thời gian → năm / tháng cá nhân của mốc đó đứng đầu
+                moc = muc[truoc:]
+                del muc[truoc:]
+                muc[:0] = moc
             if lv == "thoi_van":
                 _them_dinh_cao(muc, cs, t)
         if re.search(r"bieu do|mui ten|so thieu|thieu so|khong co so|nhieu so|so lap|hoc kem|"

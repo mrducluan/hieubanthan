@@ -1487,6 +1487,20 @@ def chon_cot_loi(ds_chuong: list[dict]) -> list[dict]:
 
 
 # ------------------------------------------------------------------ điểm vào
+def dong_nam_cua(sinh: dict, ngay_xem: dt.date, ls: dict | None = None) -> list[dict]:
+    """EN-3: dòng 10 năm (cùng phép chấm chương Vận hạn của `lap`) cho hỏi đáp — không dựng cả báo cáo."""
+    ls = {**ls, "_gioi_tinh": sinh["gioi_tinh"]} if ls else _la_so(sinh)
+    pt = phan_tich(ls)
+    d0 = sinh["lich"]
+    pt["tuoi"] = ngay_xem.year - d0.year - ((ngay_xem.month, ngay_xem.day) < (d0.month, d0.day))
+    tgb = thoi_gian_bieu(pt, ngay_xem)
+    vt = van_tham_chieu(tgb, ngay_xem)
+    tz = dt.timedelta(hours=config.CALENDAR_MERIDIAN_TZ)
+    nam0 = _nam_bat_tu(dt.datetime(ngay_xem.year, ngay_xem.month, ngay_xem.day, 12) - tz)
+    nam_sinh_am = lunar_calc.solar_to_lunar(d0.day, d0.month, d0.year, config.CALENDAR_MERIDIAN_TZ)[2]
+    return dong_muoi_nam(pt, tgb, nam0, d0.year, vt, nam_sinh_am)
+
+
 def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
         ca_nhan: dict | None = None, ls: dict | None = None) -> dict:
     """`sinh` = {"lich": datetime giờ lịch UTC+7, "gioi_tinh": "nam"|"nu", "gio_ty"?}. → báo cáo `doi_song_1` (chưa có
