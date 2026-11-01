@@ -27,3 +27,15 @@ def test_khong_mo_tu_de_nham(cau):
 
 def test_chuan_hoa_goc_khong_doi():
     assert hoi.chuan_hoa("ck ko") == "ck ko"
+
+
+@pytest.mark.parametrize("cau, ra", [
+    ("Bao giờ tôi hết ế", "bao gio toi het e"),
+    ("Mình bị ế lâu rồi", "minh bi e lau roi"),
+    ("Túi xách màu gì hợp mệnh", "tui xach mau gi hop menh"),
+    ("tui sn 1995", "toi sn 1995"),
+    ("e sn 1995", "em sn 1995"),
+])
+def test_chu_co_dau_khong_mo(cau, ra):
+    """"ế", "túi" (có dấu) không bị mở thành "em", "tôi" — chỉ mở khi gõ đúng chữ không dấu."""
+    assert hoi.chuan_hoa_cau(cau) == ra

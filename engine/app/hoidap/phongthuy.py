@@ -92,6 +92,7 @@ def phan_loai(cau_hoi: str) -> dict:
     kq["van"] = int(m_van.group(1)) if m_van else None
     # HH-CT2: "phi tinh năm 2027 sao nào đến hướng Nam" = sao LƯU NIÊN (năm), không phải tinh bàn nhà theo vận
     if not kq["van"] and chung.co(t, NAM_KW) and chung.co(t, [r"phi tinh", r"sao (nao|gi)", r"cuu tinh",
+                                                    r"sao (xau|tot|du|lanh)", r"bay (toi|den|vao)",
                                                     r"nhat bach|nhi hac|tam bich|tu luc|ngu hoang|luc bach|that xich|bat bach|cuu tu"]) \
             and not chung.co(t, [r"huyen khong", r"tinh ban", r"trach van"]):
         kq.update(loai="nam", xu_ly="tra_loi_kem_luu_y")
@@ -111,8 +112,12 @@ def phan_loai(cau_hoi: str) -> dict:
     elif chung.co(t, NAM_VIEC) and (chung.co(t, NAM_KW) or chung.co(t, [r"tuoi toi", r"xem tuoi"])) \
             or chung.co(t, [r"kim lau", r"hoang oc", r"tam tai", r"nam tuoi", r"sao han", r"muon tuoi"]):   # MT-ĐS B1
         kq.update(loai="nam", xu_ly="tra_loi_kem_luu_y")
-    elif chung.co(t, [r"(?<!vo )(vo|chong) (toi|minh) (sinh|tuoi|nam)"]) and nam and not chung.co(t, [r"vo chong"]):
-        kq["loai"], kq["kia_ro"] = "hop", True   # nêu rõ năm sinh vợ/chồng → tính luôn mệnh quái hai người
+    elif (n2 := hieu_cau.nguoi_thu_hai(t)) and n2["quan_he"] == "vo_chong" and n2.get("nam_sinh"):
+        # EN-3: nêu rõ năm sinh vợ/chồng (kể cả "ck sn 1985 vk sn 1991") → tính luôn mệnh quái hai người
+        kq["loai"], kq["kia_ro"], kq["nam_sinh_kia"] = "hop", True, n2["nam_sinh"]
+        kq["cac_nam_sinh"] = n2.get("cac_nam_sinh")
+    elif chung.co(t, [r"\b(vo|chong)\b"]) and len(re.findall(r"menh (kim|moc|thuy|hoa|tho)\b", t)) >= 2:
+        kq["loai"] = "hop"                       # EN-3: vợ chồng khác mệnh, chưa có năm sinh → hỏi năm sinh hai người
     elif chung.co(t, HOP) and (kq["ca_nhan"] or chung.co(t, [r"ca hai", r"hai vo chong"])) \
             and chung.co(t, [r"huong", r"hop", r"menh"]) \
             and ("vo_chong_khac_menh" not in kq["giai_thich"] or chung.co(t, [r"xem huong", r"cua toi", r"tuoi toi"])) \
@@ -254,7 +259,24 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int, nam_am: int | None
         return chung.ket(goi)
     if loai == "hop":
         muc.append({"loai": "giai_thich", "ma": "vo_chong_khac_menh", **kb.giai_thich("vo_chong_khac_menh")})
-        nam_kia = pl["nam_sinh_cau"]
+        # EN-3: câu nêu đủ năm sinh của CẢ HAI vợ chồng mà hồ sơ là năm khác → tính đúng hai người trong câu, không
+        # trộn hồ sơ trên máy vào ("ck sn 1989 vk sn 1993").
+        cap = re.findall(r"\b(chong|vo)\s*(?:sn|sinh)?\s*(?:nam\s*)?(19\d\d|20\d\d)", pl["cau_chuan_hoa"])
+        if len(cap) >= 2 and {v for v, _ in cap[:2]} == {"chong", "vo"} \
+                and not (sinh and sinh.get("nam") in {int(y) for _, y in cap}):
+            muc[:] = [m for m in muc if m.get("ma") != "vo_chong_khac_menh"]
+            hai = []
+            for vai, y in cap[:2]:
+                q = pt.menh_quai(int(y), "nam" if vai == "chong" else "nu")
+                hai.append(q)
+                muc.append({**_m_menh(q), "vai": f"{'chồng' if vai == 'chong' else 'vợ'} (sinh {y})"})
+            muc.append({"loai": "so_nhom", "cung_nhom": hai[0]["nhom"][:6] == hai[1]["nhom"][:6],
+                        "ban": hai[0]["nhom"], "kia": hai[1]["nhom"]})
+            goi["luu_y"] = kb.luu_y("bat_trach")
+            return chung.ket(goi)
+        nam_kia = pl.get("nam_sinh_kia") or pl["nam_sinh_cau"]
+        if sinh and pl.get("cac_nam_sinh") and nam_kia == sinh.get("nam"):      # năm đầu là của chính người hỏi
+            nam_kia = next((y for y in pl["cac_nam_sinh"] if y != sinh["nam"]), nam_kia)
         if sinh and nam_kia and pl.get("kia_ro"):    # "vợ tôi sinh 1992…" → tính luôn mệnh quái người kia
             ban = pt.menh_quai(sinh["nam"], sinh["gioi_tinh"], sinh.get("ngay"), sinh.get("moc_nam", "lap_xuan"))
             gioi_kia = pl["gioi_tinh_cau"] or ("nu" if chung.co(pl["cau_chuan_hoa"], [r"vo toi", r"vo minh"])

@@ -40,16 +40,20 @@ def chuan_hoa(s: str) -> str:
 VIET_TAT = {
     "ck": "chong", "ox": "chong", "vk": "vo", "bx": "vo", "ny": "nguoi yeu", "cv": "cong viec", "sk": "suc khoe",
     "bh": "bao gio", "ko": "khong", "k": "khong", "kh": "khong", "hok": "khong", "khum": "khong", "dc": "duoc",
-    "dk": "duoc", "j": "gi", "mik": "minh", "mk": "minh", "mjk": "minh", "lm": "lam", "ng": "nguoi", "e": "em",
+    "dk": "duoc", "j": "gi", "mik": "minh", "mk": "minh", "mjk": "minh", "lm": "lam", "ng": "nguoi",
     "vs": "voi", "ntn": "nhu the nao", "hnay": "hom nay", "cty": "cong ty", "nhiu": "nhieu", "iu": "yeu",
-    "trc": "truoc", "bit": "biet", "dag": "dang", "zay": "vay", "tui": "toi", "hd": "hop dong", "ms": "moi",
+    "trc": "truoc", "bit": "biet", "dag": "dang", "zay": "vay", "hd": "hop dong", "ms": "moi",
 }
+# Chữ trùng với một từ CÓ DẤU khác nghĩa ("ế", "túi") → chỉ mở khi người dùng gõ đúng chữ không dấu (so trên câu gốc).
+VIET_TAT_GOC = {"e": "em", "tui": "toi"}
+_VT_GOC_RX = re.compile(r"(?<!\w)(" + "|".join(VIET_TAT_GOC) + r")(?!\w)", re.IGNORECASE)
 _VT_RX = re.compile(r"(?<!\w)(" + "|".join(sorted(map(re.escape, VIET_TAT), key=len, reverse=True)) + r")(?!\w)")
 
 
 def chuan_hoa_cau(s: str) -> str:
     """Chuẩn hoá CÂU HỎI: `chuan_hoa` + mở viết tắt (`VIET_TAT`) + "27t" → "27 tuoi". Dùng ở chỗ định tuyến câu hỏi; mã
     kiểm chứng / khoá KB vẫn dùng `chuan_hoa`."""
+    s = _VT_GOC_RX.sub(lambda m: VIET_TAT_GOC[m.group(1).lower()], unicodedata.normalize("NFC", s))
     t = chuan_hoa(s)
     t = re.sub(r"(?<!\w)(\d{1,2})t(?!\w)", r"\1 tuoi", t)
     return _VT_RX.sub(lambda m: VIET_TAT[m.group(1)], t)
@@ -145,7 +149,8 @@ LINH_VUC_KW: dict[str, list[str]] = {
                 r"lo lang cho con", r"kien nhan hon voi con", r"ap dat con", r"voi con(?! so)", r"con so ten o nha",
                 r"ten dem", r"dat ten", r"chon ngay mo de con"],
     "su_nghiep": [r"nghe(?! thuat)", r"lam tai chinh", r"cong viec", r"viec lam", r"nghi viec", r"doi viec", r"chuyen nganh",
-                  r"thang tien", r"sep", r"dong nghiep", r"kinh doanh", r"khoi nghiep", r"mo quan",
+                  r"thang tien", r"sep", r"dong nghiep", r"kinh doanh", r"khoi nghiep", r"mo quan", r"lam chu", r"mo tiem",
+                  r"mo shop", r"lam nhan vien", r"di lam thue",
                   r"mo cong ty", r"lam an", r"su nghiep", r"lam thue", r"freelancer", r"startup",
                   r"cong ty", r"tang luong", r"sa thai", r"ban hang", r"lam giao vien", r"nganh it", r"chuyen nganh", r"nganh gi", r"su nghiep", r"nghe nghiep", r"dong nghiep", r"doi viec",
                   r"sang tao noi dung", r"lam sep", r"lam viec", r"nha nuoc", r"luat su", r"marketing",
@@ -155,7 +160,8 @@ LINH_VUC_KW: dict[str, list[str]] = {
                   r"di lam", r"ghi nhan", r"lam o", r"nghe y", r"tu van", r"chua lanh",
                   r"kinh doanh online", r"lam viec nhom", r"lam viec mot minh", r"moi truong lam viec",
                   r"lam ky su", r"gop von", r"phong van", r"xin viec", r"hop dong", r"that nghiep", r"nop don nghi"],
-    "tai_chinh": [r"(?<!thang )(?<!uu )tien", r"giau", r"tien bac", r"tai chinh", r"dau tu", r"chung khoan", r"mua nha", r"mua dat",
+    "tai_chinh": [r"(?<!thang )(?<!uu )tien", r"giau", r"tien bac", r"tai chinh", r"(?<!bat )dau tu", r"chung khoan", r"giu cua", r"tieu xai",
+                  r"giu tien", r"hoang phi", r"mua nha", r"mua dat",
                   r"tien ao", r"no nan", r"dang no", r"no nhieu", r"tra het", r"vay tien", r"cho vay", r"tiet kiem", r"tieu tien", r"chi tieu", r"mua sam", r"tai loc",
                   r"cho vay", r"thu nhap", r"cho (nguoi khac|nguoi ta|ban be) vay"],
     "hoc_tap": [r"hoc tap", r"hoc hanh", r"viec hoc", r"hoc bai", r"cach hoc", r"hoc mai", r"em hoc", r"nen hoc(?! cach)", r"hoc nhom", r"hoc buoi", r"hoc truoc", r"thi cu", r"em thi", r"thi dai hoc", r"thi co do", r"ky thi", r"khi thi", r"chon nganh", r"nganh gi khi", r"hoc nganh", r"nganh cong nghe", r"hop hoc", r"dai hoc", r"khoi a", r"khoi d", r"du hoc", r"thac si",
@@ -355,6 +361,11 @@ def phan_loai(cau_hoi: str) -> dict:
                                    r"voi vi tri|voi vai tro|voi kieu)", t))
     # "Làm sao để hoà hợp với mẹ chồng" là xin cách sống chung (gia đình), không phải so cặp số.
     if hai_nguoi and cap is None and len(ngay) < 2 and re.search(r"lam sao de hoa hop voi", t):
+        hai_nguoi = False
+    # EN-3: "Kiểu / mẫu người yêu nào hợp với tôi" hỏi về CHÍNH mình (tình yêu), chưa có người thứ hai để so cặp số.
+    if hai_nguoi and cap is None and len(ngay) < 2 and re.search(
+            r"(kieu|mau|loai|tuyp|typ) nguoi( yeu)? (nao|nhu the nao|gi|ra sao)|nguoi( yeu)? (nao|the nao) hop voi "
+            r"(toi|em|minh)", t):
         hai_nguoi = False
     con = _co(t, CON)
     if hai_nguoi and not (con and not re.search(r"toi va con|con toi va|hai dua", t)

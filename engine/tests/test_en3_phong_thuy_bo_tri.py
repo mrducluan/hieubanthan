@@ -32,3 +32,35 @@ def test_muc_moi_du_khuon(ma):
     chu = " ".join([m["noi_dung"], m["goi_y"], m["giai_thich_hien_dai"]] + [v["lam"] for v in m["viec"]]).lower()
     for cam in ("tai hoạ", "chết", "bệnh", "xui xẻo", "mua ", "treo bát quái", "giải hạn"):
         assert cam not in chu, (ma, cam)
+
+
+@pytest.mark.parametrize("cau, kia", [
+    ("ck sn 1985 vk sn 1991, nhà hướng Nam thì theo ai", 1985),
+    ("Vợ tôi sinh 1994, tôi 1990, hai vợ chồng khác cung có ở nhà hướng Tây được không", 1994),
+    ("Chồng mình sinh năm 1987, nhà hướng Đông Nam có hợp cả hai không", 1987),
+])
+def test_vo_chong_co_nam_sinh_tinh_luon(cau, kia):
+    """EN-3 (mục 4): đủ dữ kiện thì tính luôn — năm sinh vợ/chồng trong câu → mệnh quái hai người."""
+    pl = pt.phan_loai(cau)
+    assert pl["loai"] == "hop" and pl.get("kia_ro") and pl["nam_sinh_kia"] == kia, (cau, pl["loai"], pl.get("nam_sinh_kia"))
+
+
+def test_vo_chong_khac_menh_khong_nam():
+    pl = pt.phan_loai("Chồng tôi mệnh Kim, tôi mệnh Mộc, xây nhà nên quay theo ai")
+    assert pl["loai"] == "hop"
+
+
+@pytest.mark.parametrize("cau", ["Năm nay hướng Tây Bắc có sao xấu bay tới không", "Năm sau hướng Nam có sao gì chiếu"])
+def test_sao_nam_toi_huong(cau):
+    assert pt.phan_loai(cau)["loai"] == "nam", cau
+
+
+def test_bep_nha_toi_doi_dien_ve_sinh():
+    pl = pt.phan_loai("Bếp nhà tôi đối diện cửa nhà vệ sinh thì có sao không")
+    assert pl["loai"] == "bo_tri" and "bep_wc" in pl["bo_tri"]
+
+
+def test_du_hai_nam_trong_cau_khong_tron_ho_so():
+    from tests.test_en3_hieu_cau_chay import chay
+    s = chay("phongthuy", "ck sn 1989 vk sn 1993, nhà hướng Tây thì theo ai")["cau_tra_loi"]   # hồ sơ mẫu: 1990
+    assert "chồng (sinh 1989)" in s and "vợ (sinh 1993)" in s and "năm 1990" not in s

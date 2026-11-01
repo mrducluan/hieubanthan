@@ -92,9 +92,9 @@ LO_SO = [r"co bi .{0,30}(khong|ko|k)(?!\w)", r"co (gap|dinh|vuong|hay bi|phai|bi
          r"(so|sợ) qua", r"lo qua", r"co nguy hiem", r"hay gap chuyen", r"xui"]
 # MT-ĐS B1: hợp tuổi làm ăn / góp vốn (không phải hôn nhân) và sinh con hợp tuổi bố mẹ → mẫu riêng (không an lá số).
 _CHI = r"(ty|suu|dan|mao|thin|ngo|mui|than|dau|tuat|hoi)"
-HOP_LAM_AN = [r"xem tuoi lam an", rf"(hop tac|hun hap|gop von|lam an|ky hop dong|dung ten|chung von) .{0,40}tuoi {_CHI}(?!\w)",
-              rf"tuoi {_CHI} .{0,40}(hop tac|hun hap|gop von|lam an|lam ban|chung von)", rf"tuoi {_CHI} .{0,30}(lam ban|choi voi)"]
-SINH_CON_TUOI = [r"sinh con nam (nao|\d{4}|tuoi|\w+ )", r"(co nen|nen) sinh con(?! gio)", rf"con tuoi {_CHI} .{0,25}(bo|me|cha|ba) tuoi",
+HOP_LAM_AN = [r"xem tuoi lam an", rf"(hop tac|hun hap|gop von|lam an|ky hop dong|dung ten|chung von) .{{0,40}}tuoi {_CHI}(?!\w)",
+              rf"tuoi {_CHI} .{{0,40}}(hop tac|hun hap|gop von|lam an|lam ban|chung von)", rf"tuoi {_CHI} .{{0,30}}(lam ban|choi voi)"]
+SINH_CON_TUOI = [r"sinh con nam (nao|\d{4}|tuoi|\w+ )", r"(co nen|nen) sinh con(?! gio)", rf"con tuoi {_CHI} .{{0,25}}(bo|me|cha|ba) tuoi",
                  r"sinh con .{0,25}(hop|xung|khac|kieng)", r"sinh nam \w+ co (khac|xung|hop)", r"(?<!\w)de con nam"]
 SAO_KW = {"Tử Vi": [r"sao tu vi", r"tu vi (thu|o|tai|toa|nam|cu|dong)", r"(co|nguoi co|gap) tu vi", r"tu phu"],
           **{s: [chung.chuan_hoa(s)] for s in

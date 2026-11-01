@@ -566,7 +566,8 @@
     "bep sat",
     "bep doi dien (cua )?(nha )?ve sinh",
     "bep doi dien (wc|toilet)",
-    "(nha )?ve sinh doi dien bep"
+    "(nha )?ve sinh doi dien bep",
+    "bep .{0,12}doi dien (cua )?(nha )?ve sinh"
    ],
    "giai_thich_hien_dai": "Bếp sát nhà vệ sinh là chuyện vệ sinh thực phẩm: ẩm và mùi từ nhà vệ sinh lan sang chỗ nấu; cửa nhà vệ sinh mở ra bếp lại càng khó chịu.",
    "viec": [
