@@ -1,0 +1,111 @@
+{
+  "_nguon": "NAM-1 (2026-10-30): lời đời thường cho trang trụ \"Năm {năm}\", \"Sinh con năm {năm}\", \"Cưới năm {năm}\". Nháp ban biên tập (AI hỗ trợ), viết trung tính: tập quán dân gian để tham khảo, không phán định, không vật phẩm, không cúng giải.",
+  "source": {
+    "id": "dan_gian_vn",
+    "ten": "Tập quán chọn tuổi dân gian Việt Nam · lịch âm Việt Nam (Hồ Ngọc Đức)"
+  },
+  "source_id": "nam_tong_quan_2026",
+  "school_id": "dan_gian_vn",
+  "trang_thai": "nhap_ai",
+  "quan_he_nam": {
+    "trung": {
+      "nhan": "Năm tuổi",
+      "loi": "Năm cùng con giáp. Dân gian hay nhắc giữ nếp, làm việc lớn có kế hoạch rõ; nhiều người vẫn cưới, làm nhà như thường."
+    },
+    "xung": {
+      "nhan": "Xung năm",
+      "loi": "Con giáp đối diện năm. Dân gian nhắc đi chậm với việc lớn, kiểm tra giấy tờ kỹ, giữ hoà khí trong nhà."
+    },
+    "hinh": {
+      "nhan": "Hình với năm",
+      "loi": "Dân gian xem là dễ va chạm nhỏ. Nói chậm lại một nhịp, việc chung nên ghi rõ phần ai nấy làm."
+    },
+    "hai": {
+      "nhan": "Hại với năm",
+      "loi": "Dân gian xem là dễ hiểu lầm. Hợp làm rõ thoả thuận bằng chữ, hỏi lại trước khi trách."
+    },
+    "tam_hop": {
+      "nhan": "Tam hợp với năm",
+      "loi": "Dân gian xem là năm dễ gặp người cùng chí hướng. Hợp mở rộng quan hệ, làm việc theo nhóm."
+    },
+    "luc_hop": {
+      "nhan": "Lục hợp với năm",
+      "loi": "Dân gian xem là năm dễ có người giúp. Hợp hợp tác, gắn bó, kết nối lại người cũ."
+    },
+    "binh": {
+      "nhan": "Bình thường",
+      "loi": "Không có quan hệ đặc biệt với năm theo địa chi. Việc lớn cứ theo điều kiện thực tế của gia đình."
+    }
+  },
+  "tam_tai_loi": "Năm thứ {nam_thu} trong ba năm Tam tai. Dân gian khuyên cân nhắc thêm với việc lớn như làm nhà, cưới hỏi, mở việc lớn; nhiều nhà vẫn làm và mượn tuổi người thân đứng tên.",
+  "luu_y_chung": "Đây là tập quán dân gian để tham khảo khi lên kế hoạch, không phải lời tiên đoán. Quyết định lớn nên dựa trên điều kiện thực tế của gia đình.",
+  "sinh_con": {
+    "chi": {
+      "tam_hop": "Tam hợp với tuổi con",
+      "luc_hop": "Lục hợp với tuổi con",
+      "trung": "Cùng con giáp với con",
+      "xung": "Xung với tuổi con",
+      "hinh": "Hình với tuổi con",
+      "hai": "Hại với tuổi con",
+      "binh": "Không hợp, không xung"
+    },
+    "nap_am": {
+      "sinh": "Mệnh con sinh mệnh bố/mẹ",
+      "bị sinh": "Mệnh bố/mẹ sinh mệnh con",
+      "bình hoà": "Cùng hành",
+      "khắc": "Mệnh con khắc mệnh bố/mẹ",
+      "bị khắc": "Mệnh bố/mẹ khắc mệnh con"
+    },
+    "nhom": {
+      "hop": "Dân gian xem là hợp",
+      "binh": "Không hợp, không xung",
+      "luu_y": "Dân gian hay nhắc cân nhắc"
+    },
+    "loi_nhom": {
+      "hop": "Theo địa chi, tuổi bố/mẹ tam hợp hoặc lục hợp với tuổi con.",
+      "binh": "Không tam hợp, lục hợp hay xung theo địa chi; vài tuổi có quan hệ hình, hại nhẹ theo dân gian — ghi ở cột địa chi.",
+      "luu_y": "Tuổi bố/mẹ xung với tuổi con theo địa chi. Đây chỉ là quan niệm dân gian: tình thương và cách nuôi dạy quyết định chuyện cha con, mẹ con hoà hợp."
+    },
+    "ranh_gioi": "Con cái là chuyện duyên và sức khoẻ. Hãy để sức khoẻ của mẹ, điều kiện gia đình và lời khuyên của bác sĩ đi trước con giáp; không nên ép ngày sinh hay can thiệp y khoa chỉ để con đúng tuổi."
+  },
+  "cuoi_hoi": {
+    "cach_tinh": "Dân gian xét Kim lâu cưới theo tuổi mụ của cô dâu: tuổi mụ = năm cưới − năm sinh âm lịch + 1, chia 9 dư 1, 3, 6, 8 là phạm Kim lâu. Có nơi xét thêm tuổi chú rể hoặc tính theo cách khác — hệ thống chỉ tính theo cô dâu, cách phổ biến nhất.",
+    "muon_tuoi": "Gia đình nào giữ tập quán mà năm cưới phạm Kim lâu thường chọn cưới sang năm âm lịch sau (sau Tết), hoặc làm lễ xin dâu trước rồi cưới sau. Nhiều đôi vẫn cưới như dự định.",
+    "ranh_gioi": "Kim lâu là tập quán để tham khảo. Sự hoà hợp của hai người, sự sẵn sàng và điều kiện hai gia đình quan trọng hơn tuổi."
+  },
+  "theo_tuoi": {
+    "chi": {
+      "tam_hop": "Dân gian xem là năm dễ gặp người cùng chí hướng. Hợp làm việc theo nhóm, mở rộng quan hệ, nhận lời mời hợp tác.",
+      "luc_hop": "Dân gian xem là năm dễ có người giúp đúng lúc. Hợp kết nối lại người cũ, hợp tác, gắn bó lâu dài.",
+      "trung": "Năm tuổi: dân gian hay nhắc giữ nếp, làm việc lớn có kế hoạch rõ. Nhiều người vẫn cưới, làm nhà, đổi việc như thường.",
+      "xung": "Tuổi xung với năm: dân gian nhắc đi chậm với việc lớn, kiểm tra giấy tờ kỹ, giữ hoà khí trong nhà.",
+      "hinh": "Dân gian xem là năm dễ va chạm nhỏ. Nói chậm lại một nhịp, việc chung nên ghi rõ phần ai nấy làm.",
+      "hai": "Dân gian xem là năm dễ hiểu lầm. Thoả thuận nên ghi thành chữ, hỏi lại trước khi trách."
+    },
+    "can": {
+      "ngu_hop": "Can năm ngũ hợp với can tuổi bạn — dân gian xem là năm dễ hoà, dễ nói chuyện, dễ gặp người hợp ý.",
+      "sinh": "Can năm sinh can tuổi bạn — năm có lực đỡ: được góp ý, được hỗ trợ khi chịu hỏi.",
+      "bi_sinh": "Can tuổi bạn sinh can năm — năm bạn cho đi nhiều: hay lo cho người khác, nhớ chừa sức cho mình.",
+      "khac": "Can năm khắc can tuổi bạn — năm có sức ép từ việc, từ người trên. Việc lớn nên chia nhỏ, có kế hoạch dự phòng.",
+      "bi_khac": "Can tuổi bạn khắc can năm — năm bạn phải chủ động nhiều, tự cầm lái. Hợp việc cần quyết, nhưng đừng ôm hết.",
+      "binh_hoa": "Can năm cùng hành với can tuổi bạn — năm đều nhịp, hợp người cùng chí, dễ bàn bạc."
+    },
+    "nap_am": {
+      "sinh": "Mệnh của năm sinh mệnh bạn — dân gian xem là năm có thêm sức, hợp bắt đầu việc vừa sức.",
+      "bị sinh": "Mệnh bạn sinh mệnh của năm — năm bạn bỏ công nhiều cho việc chung; ghi lại công sức của mình.",
+      "khắc": "Mệnh của năm khắc mệnh bạn — dân gian nhắc giữ sức, đừng nhận quá nhiều việc cùng lúc.",
+      "bị khắc": "Mệnh bạn khắc mệnh của năm — năm bạn làm chủ được nhịp, nhưng dễ mệt vì tự gánh; chia việc sớm.",
+      "bình hoà": "Mệnh bạn cùng hành với mệnh của năm — năm quen nhịp, hợp làm đều tay."
+    },
+    "ten_can": {
+      "ngu_hop": "ngũ hợp",
+      "sinh": "sinh",
+      "bi_sinh": "được bạn sinh",
+      "khac": "khắc",
+      "bi_khac": "bị bạn khắc",
+      "binh_hoa": "cùng hành"
+    },
+    "tu_hoa": "Bốn sao hoá của năm {can_chi} là chung cho mọi người; với riêng bạn, điều quan trọng là Lộc, Kỵ rơi vào cung nào trên lá số — cần ngày giờ sinh để xem.",
+    "ranh_gioi": "Đây là phần đọc chung theo năm sinh — mọi người cùng năm sinh đều giống nhau. Lá số Tử vi, Bát tự tính từ ngày giờ sinh của riêng bạn sát hơn; khi hai bên nói khác nhau, hãy tin phần đọc từ lá số."
+  }
+}

@@ -40,9 +40,9 @@ const CHU_DE_GOC: Record<string, ChuDe> = {
   // SEO-I: "Hoá X ở cung Y" — 4 tứ hoá × 12 cung
   "tu-hoa": { loai: "hoa_cung", ten: "Tứ hoá ở 12 cung Tử vi", mang: "/tu-vi",
     mo_ta: "48 trường hợp Hoá Lộc, Quyền, Khoa, Kỵ rơi vào 12 cung: ý nghĩa, năm sinh nào có, sao nào mang hoá, tam phương tứ chính." },
-  // SEO-J: "sinh năm X mệnh gì" — 1950–2025
+  // SEO-J: "sinh năm X mệnh gì" — 1950–2027
   "menh-tuoi": { loai: "menh_nam", ten: "Sinh năm nào mệnh gì", mang: "/bat-tu",
-    mo_ta: "Tra mệnh theo năm sinh 1950–2025: tuổi can chi, mệnh nạp âm và ý nghĩa, màu hợp theo ngũ hành, tuổi hợp – xung, cung phi nam nữ, mốc Tết và Lập xuân." },
+    mo_ta: "Tra mệnh theo năm sinh 1950–2027: tuổi can chi, mệnh nạp âm và ý nghĩa, màu hợp theo ngũ hành, tuổi hợp – xung, cung phi nam nữ, mốc Tết và Lập xuân." },
   "thap-than": { loai: "thap_than", ten: "10 thập thần Bát tự", mang: "/bat-tu",
     mo_ta: "10 thập thần trong Bát tự (Tỷ Kiên đến Chính Ấn): ý nghĩa, tính cách, khi quá nhiều, khi thiếu, với nam và nữ." },
   "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", mang: "/bat-tu",

@@ -15,6 +15,8 @@ export interface Hop {
   can_cu?: string[];
   /** Mã kiểm chứng tất định (^[a-z0-9_.+-]{3,60}$) — có thì hiện dòng "Điều này có đúng với bạn?". */
   ma_mau?: string;
+  /** NAM-2: báo cáo ghép nhiều nguồn (Thời gian tới) — phái của riêng hộp này, thắng phái của cả bài khi ghi phiếu. */
+  phai?: string;
   ty_le_dung?: number;
   so_phieu?: number;
   /** Engine đã chuyển hộp này xuống "Vì sao nói vậy" — web không hiện hộp. */

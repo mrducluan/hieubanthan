@@ -55,7 +55,7 @@ test("Hồ sơ: ngày âm 1/8 nhuận 1995 — lịch Việt ra 24/9, lịch Tru
   await page.getByLabel("Ngày", { exact: true }).fill("1");
   await page.getByLabel("Tháng", { exact: true }).fill("8");
   await page.getByLabel("Năm", { exact: true }).fill("1995");
-  await page.getByText("Tháng nhuận").click();
+  await page.getByText("Tháng nhuận", { exact: true }).click();   // menu có mô tả "Tết, tháng nhuận…" → khớp đúng nhãn ô
   const doi = page.getByTestId("doi-lich");
   await expect(doi).toContainText("24/9/1995");
   await page.getByRole("radio", { name: "Âm lịch Trung Quốc" }).click();

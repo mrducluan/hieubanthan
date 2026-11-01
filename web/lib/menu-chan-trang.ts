@@ -6,6 +6,9 @@ export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
   { ten: "Huyền học", ds: [
     ["/than-so", "Thần số học"], ["/tu-vi", "Tử vi"], ["/bat-tu", "Bát tự"], ["/kinh-dich", "Kinh Dịch"],
     ["/phong-thuy", "Phong thuỷ"], ["/hop-doi", "Hợp đôi"], ["/huyen-hoc", "Tất cả các mảng"],
+    ["/hom-nay", "Hôm nay của bạn"], ["/thoi-gian-toi", "Thời gian tới của bạn"], ["/nam", "Xem theo năm"],
+    ["/xem-ngay-tot", "Xem ngày tốt"], ["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"], ["/tuoi-xong-dat", "Tuổi xông đất"],
+    ["/xem-sao-han", "Sao hạn theo tuổi"], ["/doi-lich-am-duong", "Đổi lịch âm dương"],
   ] },
   { ten: "Kiến thức", ds: [
     ["/kien-thuc", "Thư viện kiến thức"], ["/than-so/y-nghia-so", "Ý nghĩa các con số"], ["/kinh-dich/que", "64 quẻ Kinh Dịch"],
@@ -13,7 +16,7 @@ export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
     ["/hop-doi/cap-so", "Số chủ đạo hợp nhau"], ["/blog", "Blog"],
   ] },
   { ten: "Về chúng tôi", ds: [
-    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
+    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia", "Đội ngũ biên soạn"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
     ["/lien-he#chu-de", "Góp ý, báo lỗi"], ["/tai-khoan", "Tài khoản"], ["/nap-sao", "Nạp Sao"],
   ] },
   { ten: "Pháp lý", ds: [

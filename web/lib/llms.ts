@@ -14,7 +14,7 @@ import { dsBaiCms, tinhNangCms } from "@/lib/cms";
 const CUM_LON: Record<string, { mau: string; viDu: string[] }> = {
   "sao-cung": { mau: "/tu-vi/sao-o-cung/{sao}-cung-{cung}", viDu: ["tu-vi-cung-menh", "thai-duong-cung-quan-loc", "tham-lang-cung-phu-the"] },
   "tu-hoa": { mau: "/tu-vi/tu-hoa/hoa-{loc|quyen|khoa|ky}-cung-{cung}", viDu: ["hoa-loc-cung-menh", "hoa-ky-cung-tai-bach", "hoa-khoa-cung-quan-loc"] },
-  "menh-tuoi": { mau: "/bat-tu/menh-theo-nam/sinh-nam-{1950…2025}-menh-gi", viDu: ["sinh-nam-1990-menh-gi", "sinh-nam-1995-menh-gi", "sinh-nam-2000-menh-gi"] },
+  "menh-tuoi": { mau: "/bat-tu/menh-theo-nam/sinh-nam-{1950…2027}-menh-gi", viDu: ["sinh-nam-1990-menh-gi", "sinh-nam-1995-menh-gi", "sinh-nam-2000-menh-gi"] },
 };
 
 const dongTrang = (t: MucLuc) => `- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}): ${t.mo_ta}`;
@@ -54,7 +54,7 @@ export async function taoLlmsTxt(): Promise<string> {
     "",
     "## Trả lời nhanh theo câu hỏi hay gặp",
     "",
-    `- "Sinh năm X mệnh gì?" → ${urlDayDu("/bat-tu/menh-theo-nam")} (mỗi năm 1950–2025 một trang: can chi, mệnh nạp âm, màu hợp, tuổi hợp – xung).`,
+    `- "Sinh năm X mệnh gì?" → ${urlDayDu("/bat-tu/menh-theo-nam")} (mỗi năm 1950–2027 một trang: can chi, mệnh nạp âm, màu hợp, tuổi hợp – xung).`,
     `- "Tuổi X hợp hướng nhà nào?" → ${urlDayDu("/phong-thuy/huong-hop-tuoi")} (năm 1960–2005, nam và nữ cùng một trang dạng ${urlDayDu("/phong-thuy/huong-hop-tuoi/tuoi-1990")}: 4 hướng tốt, 4 hướng xấu, cách bố trí).`,
     `- "Số chủ đạo X hợp nghề gì / yêu thế nào / hợp số mấy?" → ${urlDayDu("/than-so/nghe-nghiep")} · ${urlDayDu("/than-so/tinh-yeu")} · ${urlDayDu("/hop-doi/cap-so")}`,
     `- "Năm nay tôi là năm cá nhân số mấy?" → cách tự tính ở ${urlDayDu("/than-so/nam-ca-nhan")}, hoặc tính đúng cho từng người tại ${urlDayDu("/")}.`,

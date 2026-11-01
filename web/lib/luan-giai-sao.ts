@@ -52,7 +52,7 @@ async function laHoiVien(phien: NonNullable<Awaited<ReturnType<typeof phienNguoi
 }
 
 const MIEN_PHI = { sao: 0, ly_do: "mien_phi_thu_nghiem" } as const;
-const TEN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", thanso: "bản đồ con số" };
+const TEN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", thanso: "bản đồ con số", thoi_gian: "thời gian tới" };
 
 /** `khoaTu`: phần đầu vào dùng làm khoá "đã mở hôm nay" — bỏ những trường không đổi bản chất báo cáo (vd phiếu bình chọn
  *  của báo cáo ba phái đổi sau mỗi lần bấm) để người dùng không bị trừ Sao lần hai trong ngày. Mặc định: toàn bộ đầu vào. */

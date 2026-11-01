@@ -134,7 +134,8 @@ test("app đã cài: đăng ký service worker; mất mạng → trang ngoại t
   await expect(nt).toContainText("Ứng kỳ quẻ Càn");
   await expect(nt).toContainText("Hôm nay —");
   await context.setOffline(false);
-  await page.getByRole("button", { name: "Thử lại" }).click();
+  // Trang ngoại tuyến tự tải lại khi có sự kiện "online" (sw.js) — có thể đã tải lại trước khi kịp bấm "Thử lại".
+  await page.getByRole("button", { name: "Thử lại" }).click({ timeout: 3_000 }).catch(() => undefined);
   await expect(page.getByRole("heading", { level: 1 })).not.toHaveText("Bạn đang ngoại tuyến", { timeout: 30_000 });
   await expect(page).toHaveURL(/\/huyen-hoc$/);
 });

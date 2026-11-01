@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""SEO-J — 76 trang "Sinh năm X mệnh gì" (1950–2025): can chi, mệnh nạp âm + nghĩa hình tượng (KB nháp AI),
+"""SEO-J — 78 trang "Sinh năm X mệnh gì" (1950–2027, NAM-1): can chi, mệnh nạp âm + nghĩa hình tượng (KB nháp AI),
 ngũ hành sinh/khắc, màu dùng theo ngũ hành (ứng dụng dân gian, KB battu ngu_hanh), tuổi tam hợp / lục hợp /
 lục xung / tứ hành xung (địa chi), cung phi nam và nữ, mốc đầu năm (Tết Việt, Lập xuân).
 
@@ -16,8 +16,8 @@ from app.kb import trang
 
 def test_so_luong_va_slug():
     ds = [t for t in trang.danh_sach() if t["loai"] == "menh_nam"]
-    assert len(ds) == 76
-    assert {"sinh-nam-1950-menh-gi", "sinh-nam-1990-menh-gi", "sinh-nam-2025-menh-gi"} <= {t["slug"] for t in ds}
+    assert len(ds) == 78
+    assert {"sinh-nam-1950-menh-gi", "sinh-nam-1990-menh-gi", "sinh-nam-2025-menh-gi", "sinh-nam-2027-menh-gi"} <= {t["slug"] for t in ds}
     assert trang.lay("menh_nam", "sinh-nam-1949-menh-gi") is None
 
 
@@ -51,7 +51,7 @@ def test_nap_am_kb_du_30():
         assert m["hinh_tuong"] and m["tinh_chat"] and m["mat_toi"] and m["cau_tu_soi"].endswith("?"), ten
 
 
-@pytest.mark.parametrize("nam", [1950, 1975, 2000, 2025])
+@pytest.mark.parametrize("nam", [1950, 1975, 2000, 2025, 2027])
 def test_day_du(nam):
     t = trang.lay("menh_nam", f"sinh-nam-{nam}-menh-gi")
     assert t["tra_loi_nhanh"] and len(t["muc"]) >= 5 and len(t["hoi_dap"]) >= 4 and t["nguon"]

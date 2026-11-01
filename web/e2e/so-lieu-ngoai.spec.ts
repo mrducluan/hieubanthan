@@ -8,7 +8,7 @@ import { CAI_DAT, chuanHoa, giaTriHieuLuc } from "../lib/cau-hinh";
 import { timToanKho } from "../lib/kb-tim";
 import { CAM_KET_CHAN_TRANG, COT_CHAN_TRANG, GIOI_THIEU_CHAN_TRANG, MIEN_TRU_CHAN_TRANG, NHAN_UNG_HO_CHAN_TRANG } from "../lib/menu-chan-trang";
 import { chuChanTrang } from "../lib/cms";
-import { dangOMuc, MENU_DAU_TRANG } from "../lib/menu-dau-trang";
+import { boNamMenu, dangOMuc, MENU_DAU_TRANG, mucDangO, thayNamMenu } from "../lib/menu-dau-trang";
 
 test("JWT RS256 ký đúng, đọc được khoá JSON thô lẫn base64", () => {
   const { privateKey, publicKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
@@ -89,6 +89,20 @@ test("menu đầu trang mặc định của web trùng MENU_DAU_MAC_DINH trong C
   expect(dangOMuc("/tu-vi-xyz", huyenHoc)).toBe(false);
   expect(dangOMuc("/dang-nhap", MENU_DAU_TRANG.find((m) => m.href === "/tai-khoan")!)).toBe(true);
   expect(MENU_DAU_TRANG.filter((m) => m.di_dong).length).toBeLessThanOrEqual(5);
+  // NAM-1: "{nam}" thay bằng năm lúc dựng trang; bản dự phòng (chưa biết năm) không bao giờ lộ "{nam}".
+  const co = thayNamMenu(MENU_DAU_TRANG, 2027);
+  const nam = co.find((m) => m.href === "/nam/2027")!;
+  expect(nam.ten).toBe("Năm 2027");
+  expect(nam.con.map((c) => c.href)).toContain("/xem-sao-han/2027");
+  expect(JSON.stringify(co)).not.toContain("{nam}");
+  const du = boNamMenu(MENU_DAU_TRANG);
+  expect(JSON.stringify(du)).not.toContain("{nam}");
+  expect(du.find((m) => m.href === "/nam")!.ten).toBe("Năm");
+  expect(du.flatMap((m) => m.con.map((c) => c.href))).not.toContain("/nam/cuoi-hoi");   // không có trang gốc → bỏ
+  // Trang năm sáng "Năm 2027" (đường dẫn dài nhất), trang gốc công cụ vẫn sáng "Huyền học".
+  expect(co[mucDangO("/xem-sao-han/2027", co)]!.href).toBe("/nam/2027");
+  expect(co[mucDangO("/xem-sao-han", co)]!.href).toBe("/huyen-hoc");
+  expect(co[mucDangO("/thoi-gian-toi", co)]!.href).toBe("/nam/2027");
 });
 
 test("ND-1: chữ chân trang mặc định của web trùng CHAN_TRANG_MAC_DINH trong CMS; ô CMS trống → về chữ code", () => {
