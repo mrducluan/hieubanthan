@@ -2,11 +2,10 @@
 import Link from "next/link";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { ArrowRight, CalendarHeart, Heart, HeartHandshake, Hash, Orbit, X } from "lucide-react";
+import { useEffect } from "react";
+import { ArrowRight, CalendarHeart, Heart, HeartHandshake, Hash, Orbit } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NhapHoSo } from "./NhapHoSo";
-import { NutChiaSe } from "@/components/chia-se/NutChiaSe";
 import { NutChiaSeNgay } from "@/components/chia-se/NutChiaSeNgay";
 import { tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 import { boTienToNgay, useNhip } from "@/lib/nhip";
@@ -32,10 +31,10 @@ export function CuaVao() {
 const LOI_TAT = [["/hom-nay", "Hôm nay", CalendarHeart], ["/than-so", "Thần số", Hash], ["/hop-doi", "Hợp đôi", Heart], ["/tu-vi", "Tử vi", Orbit]] as const;
 
 // Người quay lại (khâu QUAY LẠI → MỜI): con số của chính họ hôm nay + một câu tự soi (engine tính, NHIP-1), chia sẻ thẻ
-// ngày có ảnh, "Xem hợp với ai" tạo link mời hợp đôi ngay tại chỗ, và lối tắt tới việc hay làm mỗi ngày.
+// ngày có ảnh, "Xem hợp với ai" dẫn thẳng tới /hop-doi để nhập ngày sinh người ấy (không biết ngày sinh thì gửi lời mời
+// ngay cạnh form ở đó), và lối tắt tới việc hay làm mỗi ngày.
 function ChaoLai({ hoSo }: { hoSo: HoSo }) {
   const nhip = useNhip(hoSo);
-  const [moiMo, setMoiMo] = useState(false);
   const c = useChuChung();
   useEffect(() => { if (nhip) batDauDoc("nhip", { kind: "trang_chu" }); }, [nhip]);
   return (
@@ -67,17 +66,10 @@ function ChaoLai({ hoSo }: { hoSo: HoSo }) {
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
         {nhip && <NutChiaSeNgay hoSo={hoSo} soNgay={nhip.ngay_ca_nhan.so} chuDe={boTienToNgay(nhip.ngay_ca_nhan.nghia).replace(/\.$/, "").toLowerCase()} nho />}
-        <Button size="sm" variant="secondary" onClick={() => setMoiMo((v) => !v)} aria-expanded={moiMo} data-testid="xem-hop-voi-ai">
-          {moiMo ? <X aria-hidden /> : <HeartHandshake aria-hidden />} {c("cua_vao.nut_hop")}
+        <Button asChild size="sm" variant="secondary" data-testid="xem-hop-voi-ai">
+          <Link href="/hop-doi"><HeartHandshake aria-hidden /> {c("cua_vao.nut_hop")}</Link>
         </Button>
       </div>
-      {moiMo && (
-        <div className="mt-3 rounded-xl border border-line/70 bg-bg/40 p-4" data-testid="khung-hop-voi-ai">
-          <p className="mb-3 text-sm text-fg-muted">{c("cua_vao.moi_mo_ta")}</p>
-          <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(m) => `/hop-doi/${m}`} nutTao="Tạo link mời xem hợp"
-            loiNhan={`${tenGoi(hoSo)} muốn xem hai người hợp nhau thế nào — mở link, nhập ngày sinh của bạn là thấy.`} />
-        </div>
-      )}
 
       <ul className="mt-4 grid grid-cols-2 gap-2 border-t border-line/60 pt-4 text-sm sm:grid-cols-4">
         {LOI_TAT.map(([href, ten, Icon]) => (

@@ -39,7 +39,7 @@
 | 3 ★ | **Thưởng Sao cho chuỗi ngày ghé** (ngày thứ 7) — chuỗi đã đếm trên máy (HN-1); thưởng thật cần ghi ở máy chủ | Bảng điểm danh (migration), trần Sao/tháng |
 | 3 ★ | **Web Push nhắc mốc** (KC-4 GĐ1): người dùng tự bật, ≤ 1 thông báo/ngày, 8:03 sáng. Đo `chart_interacted{kind=push_bat\|push_tat\|push_mo}` | **Đã làm (PR #112)** — chờ anh chạy 0019 + khoá VAPID. **GĐ2 (2026-10-22)**: sáng nay của bạn, mốc lịch, hỏi lại hôm qua, mời cài app — chờ 0020. Tiếp: `docs/DE-XUAT-WEB-PUSH-VA-DOANH-THU.md` (Sáng nay của bạn, mời cài web app, gói "Nhịp của tôi") |
 | 4 ★ | **Chiến dịch mời** chỉnh trong `/quan-tri/cai-dat`: đổi mức thưởng, dải thông báo toàn site | **Đã làm (QT-2)** |
-| 4 ★ | "Xem hợp với ai": hợp đôi gửi link cho người kia tự nhập → cả hai thấy kết quả → hai tài khoản mới | **Đã làm (NHIP-1)**: nút ở thẻ "Chào lại" trang chủ tạo link mời tại chỗ; người được mời gửi lại kết quả |
+| 4 ★ | "Xem hợp với ai": hợp đôi gửi link cho người kia tự nhập → cả hai thấy kết quả → hai tài khoản mới | **Đã làm (NHIP-1)**; 2026-11-02 chủ dự án chỉnh: nút ở thẻ "Chào lại" trang chủ dẫn thẳng tới `/hop-doi` (nhập ngày sinh người ấy), lời mời là lựa chọn ngay cạnh form khi không biết ngày sinh; người được mời gửi lại kết quả |
 | 4 | Thẻ chia sẻ theo dịp (Tết, sinh nhật, năm mới cá nhân) | Mẫu thẻ OG. **NHIP-1** đã có thẻ "Hôm nay mình là Ngày cá nhân N — còn bạn?" (`/og/ngay`) |
 | 4 | Bảng xếp hạng người mời theo tháng (chỉ tên hiển thị, tự chọn hiện) | Không lộ dữ liệu sinh |
 | 5 ★ | **Cổng nạp Sao** payOS/VietQR: gói 29k/99k/199k | **Đã làm (TT-1/TT-2, cá nhân)** — chờ anh bật tài khoản + khoá payOS |

@@ -1,10 +1,10 @@
-// NHIP-1 — thẻ "Chào lại" có con số hôm nay + chia sẻ thẻ ngày có ảnh + "Xem hợp với ai"; /ban-than có "Nhịp của bạn".
+// NHIP-1 — thẻ "Chào lại" có con số hôm nay + chia sẻ thẻ ngày có ảnh + "Xem hợp với ai" (→ /hop-doi); /ban-than có "Nhịp của bạn".
 import { test, expect } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 
 const SINH = { ngay: 17, thang: 5, nam: 1990 };
 
-test("trang chủ (đã có hồ sơ): con số hôm nay khớp engine, câu tự soi, mở khung xem hợp với ai", async ({ page, request }) => {
+test("trang chủ (đã có hồ sơ): con số hôm nay khớp engine, câu tự soi, \"Xem hợp với ai\" mở form hợp đôi", async ({ page, request }) => {
   await napHoSo(page);
   await page.goto("/");
   const api = await (await request.post("/api/thanso/nhip", { data: SINH })).json();
@@ -12,7 +12,9 @@ test("trang chủ (đã có hồ sơ): con số hôm nay khớp engine, câu t�
   await expect(nhip).toContainText(`Ngày cá nhân ${api.ngay_ca_nhan.so}`);
   await expect(nhip).toContainText(api.ngay_ca_nhan.tu_soi);
   await page.getByTestId("xem-hop-voi-ai").click();
-  await expect(page.getByTestId("khung-hop-voi-ai").getByRole("button", { name: "Tạo link mời xem hợp" })).toBeVisible();
+  await expect(page).toHaveURL(/\/hop-doi$/);
+  await expect(page.getByLabel("Ngày sinh người ấy", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Tạo link mời", exact: true })).toBeVisible(); // không biết ngày sinh → vẫn gửi lời mời được
 });
 
 test("chia sẻ thẻ ngày: link /hom-nay mang tu + the, ảnh tải được, người mở link thấy lời mời + ảnh xem trước", async ({ page, request, context }) => {
