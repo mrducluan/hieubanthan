@@ -35,7 +35,8 @@ NAM_KW = [r"nam nay", r"nam sau", r"nam 20\d\d"]
 NAM_VIEC = [r"sua nha", r"lam nha", r"dong tho", r"xay nha", r"ngu hoang", r"tranh dong", r"kim lau",
             r"hoang oc", r"tam tai", r"thai tue", r"xem tuoi"]
 HOP = [r"vo chong", r"ca hai", r"hai vo chong", r"vo toi", r"chong toi"]
-AM_TRACH = [r"mo phan", r"dat mo", r"tang thu", r"long mach", r"hai cot", r"boc mo", r"xay mo"]
+AM_TRACH = [r"mo phan", r"dat mo", r"tang thu", r"long mach", r"hai cot", r"boc mo", r"xay mo", r"ngoi mo",
+            r"mo (cua )?(ong|ba|bo|me|to tien)", r"mo (cu|ma) trong vuon"]
 
 
 def _huong_nhac(t: str) -> list[str]:

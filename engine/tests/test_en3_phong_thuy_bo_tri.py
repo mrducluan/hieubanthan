@@ -64,3 +64,24 @@ def test_du_hai_nam_trong_cau_khong_tron_ho_so():
     from tests.test_en3_hieu_cau_chay import chay
     s = chay("phongthuy", "ck sn 1989 vk sn 1993, nhà hướng Tây thì theo ai")["cau_tra_loi"]   # hồ sơ mẫu: 1990
     assert "chồng (sinh 1989)" in s and "vợ (sinh 1993)" in s and "năm 1990" not in s
+
+
+@pytest.mark.parametrize("cau, ma", [
+    ("Để chậu cây trong phòng ngủ có ảnh hưởng gì không", "cay_trong_phong_ngu"),
+    ("Nhà mình ở gần đình làng thì có sao không", "gan_chua"),
+    ("Mua nhà đối diện nhà thờ có nên không", "gan_chua"),
+    ("Cửa phòng ngủ nhìn thẳng cửa nhà vệ sinh thì sao", "cua_phong_doi_wc"),
+    ("Cửa sổ to đối diện giường ngủ có sao không", "cua_so_dau_giuong"),
+])
+def test_bo_tri_dot_2(cau, ma):
+    pl = pt.phan_loai(cau)
+    assert pl["loai"] == "bo_tri" and ma in pl["bo_tri"], (cau, pl["loai"], pl["bo_tri"])
+
+
+def test_mo_phan_trong_vuon_la_am_trach():
+    assert pt.phan_loai("Trong vườn có ngôi mộ của ông, giờ muốn xây nhà thì sao")["loai"] == "am_trach"
+
+
+@pytest.mark.parametrize("ma", ["cay_trong_phong_ngu", "gan_chua", "cua_phong_doi_wc"])
+def test_muc_dot_2_du_khuon(ma):
+    test_muc_moi_du_khuon(ma)

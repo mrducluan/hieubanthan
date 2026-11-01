@@ -61,8 +61,9 @@ CHU_DE = [
                  r"xe tai", r"can than gi"]),
     ("hoc_hanh", [r"hoc hanh", r"thi (lai|dai hoc|dau|do|vao)", r"khoi (tu nhien|xa hoi|a|b|c|d)(?!\w)", r"nghien cuu",
                   r"hoc them", r"bang luat", r"thac si", r"tien si", r"hoc (gi|khoi|nganh|len|cao)", r"bang (cap|dai hoc)", r"lam thay", r"thay giao", r"long bong", r"thi .{0,15}dau (khong|ko)",
-                  r"thi gi", r"(?<!\w)rot (roi|dai hoc)"]),
+                  r"thi gi", r"(?<!\w)rot (roi|dai hoc)", r"hoc van", r"duong hoc"]),
     ("quan_he", [r"quy nhan", r"thien at", r"hop tac", r"nguoi lon tuoi", r"canh tranh", r"(?<!\w)ghet(?!\w)", r"ban be",
+                 r"nguoi giup", r"giup do", r"nang do", r"tranh cong", r"dong nghiep",
                  r"ty kien nhieu", r"tam hop voi minh"]),
     ("hau_van", [r"hau van", r"ve gia", r"tuoi gia", r"nghi huu", r"co don", r"giao lai", r"49 chua qua", r"den gia",
                  r"dai van cuoi", r"ve gia"]),
@@ -83,7 +84,8 @@ CHU_DE = [
                    r"tra no", r"(?<!\w)no(?!\w)", r"cua hang", r"nhan loi"]),
     ("ngu_hanh", [r"thieu hanh", r"ngu hanh", r"vuong suy", r"than vuong", r"than nhuoc", r"dung than",
                   r"hy than", r"ky than", r"mau gi", r"huong gi", r"bo sung", r"can bang", r"khi hau",
-                  r"hanh gi", r"lan at", r"nhat chu toi yeu",
+                  r"hanh gi", r"lan at", r"nhat chu toi yeu", r"(manh|vuong) hay (yeu|nhuoc)",
+                  r"nhat chu .{0,20}(manh|yeu|vuong|nhuoc)", r"mau (sac )?(may man|hop)",
                   r"thieu (kim|moc|thuy|hoa|tho)\b", r"(deo|mang|dung) (gi|da gi|vat gi)"]),
     ("loi_song", [r"loi song", r"sinh hoat", r"suc khoe", r"song the nao", r"mat ngu", r"nghi ngoi", r"kieng gi",
                   r"(?<!\w)yeu(?!\w)", r"(?<!\w)met(?!\w)", r"tim mach", r"dau xuong", r"hay lanh", r"an gi", r"co hon", r"nong tinh"]),
@@ -123,7 +125,7 @@ def phan_loai(cau_hoi: str) -> dict:
         return kq
     kq["lo_so"] = chung.co(t_chinh, LO_SO)
     kq["sao_han"] = chung.sao_han_hoi(t)
-    if chung.co(t, HOP):
+    if chung.co(t, HOP) and not kq["tru"]:     # EN-3: "trụ năm và trụ giờ có xung nhau" là câu về chính lá số
         kq["loai"] = "hop"
     elif chung.co(t, CON):
         kq["loai"] = "con"

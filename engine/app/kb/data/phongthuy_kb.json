@@ -904,7 +904,9 @@
    "tu_khoa": [
     "cua so (ngay |o |phia )?(sau |canh |tren )?dau giuong",
     "dau giuong .{0,10}cua so",
-    "giuong .{0,10}sat cua so"
+    "giuong .{0,10}sat cua so",
+    "cua so .{0,10}doi dien giuong",
+    "giuong .{0,10}doi dien cua so"
    ],
    "giai_thich_hien_dai": "Gió lạnh thổi thẳng vào đầu và cổ khi ngủ dễ làm người mỏi; ánh sáng sớm qua cửa sổ đánh thức sớm hơn ý muốn. Đầu giường tựa tường kín giữ nhiệt và yên tĩnh hơn.",
    "viec": [
@@ -970,6 +972,84 @@
     {
      "chi_phi": "sua_chua",
      "lam": "Chống thấm lại sàn nhà vệ sinh tầng trên; khi sửa lớn, đi ống thoát dọc tường thay vì ngang qua trần bếp."
+    }
+   ]
+  },
+  "cay_trong_phong_ngu": {
+   "tieu_de": "Cây xanh trong phòng ngủ",
+   "noi_dung": "Quan niệm dân gian: phòng ngủ cần yên, ít cây lớn vì cây \"tranh khí\" với người ngủ. Thực tế: một vài chậu cây nhỏ dễ chăm thì không sao; cây to, đất ẩm, chậu nước đọng mới đáng lo vì ẩm mốc và muỗi.",
+   "goi_y": "Giữ một hai chậu nhỏ, đặt gần cửa sổ, không để sát đầu giường; tưới vừa đủ, không để đĩa nước đọng. Người dễ dị ứng phấn hoa thì để cây ở phòng khách.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "cay (xanh )?trong phong ngu",
+    "cay .{0,12}phong ngu",
+    "trong cay trong phong"
+   ],
+   "giai_thich_hien_dai": "Cây trong phòng kín ban đêm không làm thiếu khí đáng kể, nhưng đất ẩm và nước đọng dưới chậu sinh nấm mốc, muỗi; cây có hoa thơm nồng có thể làm khó ngủ.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dời chậu cây khỏi sát đầu giường; đổ nước đọng dưới đĩa chậu mỗi ngày."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Đổi sang chậu nhỏ có lỗ thoát nước và giá kê; chọn cây ít cần tưới."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Phòng ngủ ẩm, ít nắng thì làm thêm thông gió hoặc máy hút ẩm trước khi đặt cây."
+    }
+   ]
+  },
+  "gan_chua": {
+   "tieu_de": "Nhà gần chùa, đình, nhà thờ",
+   "noi_dung": "Quan niệm dân gian: nhà ở sát chùa, đình, nhà thờ thì khí \"quá tĩnh\" hoặc \"quá đông\", không hợp làm nhà ở. Thực tế: điều ảnh hưởng hằng ngày là tiếng chuông, loa, người qua lại vào ngày lễ và chỗ đỗ xe.",
+   "goi_y": "Trước khi mua, đến xem vào ngày rằm, mùng một và ngày lễ để biết mức ồn, xe cộ. Cửa chính không nhìn thẳng vào cổng thì sinh hoạt riêng tư hơn; giữ rèm, cây che nhẹ là đủ.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "gan (chua|dinh|den|nha tho|mieu)",
+    "doi dien (chua|dinh|den|nha tho|mieu)",
+    "canh (chua|dinh|den|nha tho)",
+    "sat (chua|dinh|nha tho)"
+   ],
+   "giai_thich_hien_dai": "Nơi thờ tự đông người theo lịch lễ: tiếng ồn, khói hương và xe đỗ trước cửa là chuyện có thật; ngày thường lại yên tĩnh. Hợp hay không tuỳ nếp sinh hoạt của nhà bạn.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Hỏi hàng xóm về lịch lễ, giờ chuông; ghé xem đúng ngày rằm trước khi quyết mua."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Rèm dày, cửa kính kín phía nhìn sang nơi thờ tự; một hàng cây che nhẹ trước cửa."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa nhà, bố trí phòng ngủ ở phía xa nơi thờ tự và làm cửa cách âm."
+    }
+   ]
+  },
+  "cua_phong_doi_wc": {
+   "tieu_de": "Cửa phòng ngủ đối diện cửa nhà vệ sinh",
+   "noi_dung": "Quan niệm dân gian: cửa phòng ngủ nhìn thẳng cửa nhà vệ sinh thì \"uế khí\" đi thẳng vào phòng. Thực tế: mùi, hơi ẩm và tiếng nước từ nhà vệ sinh lọt vào phòng ngủ.",
+   "goi_y": "Luôn đóng cửa nhà vệ sinh, bật quạt hút sau khi dùng; treo rèm hoặc đặt kệ thấp để hai cửa không nhìn thẳng nhau. Không cần đổi phòng.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "cua phong (ngu )?.{0,15}(doi dien|thang|nhin thang) .{0,10}(cua )?(nha )?(ve sinh|wc|toilet)",
+    "(nha ve sinh|wc|toilet) .{0,15}doi dien (cua )?phong ngu"
+   ],
+   "giai_thich_hien_dai": "Hai cửa đối nhau tạo luồng gió thẳng: mùi và ẩm từ nhà vệ sinh đi vào phòng ngủ nhanh hơn, đêm dễ bị đánh thức bởi tiếng xả nước.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đóng cửa nhà vệ sinh khi không dùng; mở cửa sổ phòng ngủ cho thoáng mỗi sáng."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Lắp quạt hút mùi, ron cửa nhà vệ sinh; treo rèm cửa phòng ngủ."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa nhà, dời cửa nhà vệ sinh lệch đi hoặc làm vách ngăn nhỏ ở hành lang."
     }
    ]
   }

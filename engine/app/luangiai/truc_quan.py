@@ -503,7 +503,7 @@ def _pt_chung(goi: dict, quai: str | None) -> list[dict]:
 # Câu chuẩn đã kiểm định tuyến đúng chủ đề (tests/test_truc_quan.py); mỗi chủ đề gợi ba chủ đề gần nó nhất.
 
 HOI_BT = {
-    "ngu_hanh": "Tôi thiếu hành gì?", "loi_song": "Bát tự tôi mạnh hay yếu?",
+    "ngu_hanh": "Tôi thiếu hành gì?", "loi_song": "Nhịp sinh hoạt nào hợp với bát tự của tôi?",
     "tinh_cach": "Tính cách của tôi thế nào?", "nghe_tien": "Tôi hợp nghề gì?",
     "hon_nhan": "Tình duyên của tôi thế nào?", "van": "Năm nay của tôi thế nào?",
 }
