@@ -19,7 +19,7 @@
   },
 
   "thu_thach": {
-    "0": { "mo_ta": "Ô trống — không mang thông tin cụ thể", "y_nghia": "Thử thách 0 KHÔNG có nghĩa 'không có thử thách', mà là 'thử thách của mọi số'. Trong hệ này 0 là ô trống, diễn giải kiểu gì cũng được — nên nói thẳng: mục này không chỉ ra một bài học riêng.", "cach_vuot": "Không ép một ý nghĩa vào đây. Đọc các thử thách khác thay vì cố luận số 0." },
+    "0": { "mo_ta": "Tự chọn bài học của mình", "y_nghia": "Thử thách 0 không chỉ ra một bài học riêng: giai đoạn này không có một khuôn sẵn, bạn tự chọn điều mình muốn rèn — đó vừa là tự do vừa là thử thách.", "cach_vuot": "Đọc các thử thách còn lại để biết nên ưu tiên rèn gì; đặt cho mình một mục tiêu rèn luyện cụ thể thay vì chờ hoàn cảnh chọn hộ." },
     "1": { "mo_ta": "Học tự tin mà không áp đặt", "y_nghia": "Bài học là dám đứng riêng, tự quyết, mà không lấn át người khác — và vượt nỗi sợ bị lu mờ.", "cach_vuot": "Chủ động một việc nhỏ mỗi tuần, và tập nhường quyền quyết khi không cần thiết." },
     "2": { "mo_ta": "Học nhạy cảm mà không mất mình", "y_nghia": "Khó khăn nằm ở việc quá để ý cảm xúc người khác, né xung đột đến mức đánh mất tiếng nói riêng.", "cach_vuot": "Tập nói 'không' thẳng, ngắn, không giải thích dài dòng." },
     "3": { "mo_ta": "Học thể hiện thật lòng", "y_nghia": "Thử thách là tự nghi ngờ khả năng sáng tạo, hoặc tản mạn nói nhiều mà không làm.", "cach_vuot": "Chọn MỘT việc sáng tạo, làm tới xong, kể cả khi đã hết hứng." },

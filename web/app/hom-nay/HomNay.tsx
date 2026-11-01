@@ -44,6 +44,8 @@ import { duongMoi } from "@/lib/duong-silo";
 
 interface NgayCN { so: number; nghia: string; tu_soi: string }
 interface TheHomNay {
+  /** EN-2 (P2-15): một câu ghép ngày cá nhân + tháng + lịch (engine dựng; engine cũ không có thì không hiện). */
+  tom_lai?: string;
   ngay_xem: string;
   am_lich: { ngay: number; thang: number; nam: number; nhuan: boolean; can_chi_ngay: string; can_chi_thang: string; can_chi_nam: string };
   ngay_ca_nhan: NgayCN;
@@ -295,6 +297,11 @@ export function HomNay() {
               <span className="grid size-16 shrink-0 place-items-center rounded-2xl bg-gold/15 font-serif text-4xl text-gold" aria-hidden>{the.ngay_ca_nhan.so}</span>
             </div>
             <p className="text-lg">{boTienTo(the.ngay_ca_nhan.nghia)}</p>
+            {the.tom_lai && (
+              <p className="rounded-xl border-l-2 border-gold/60 bg-gold/5 px-4 py-3 text-[0.95rem] leading-relaxed text-fg" data-testid="hom-nay-tom-lai">
+                {the.tom_lai}
+              </p>
+            )}
             <div className="rounded-xl border border-moon/30 bg-moon/5 p-4">
               <p className="text-xs uppercase tracking-wider text-moon">Câu hỏi tự soi</p>
               <p className="mt-1">{the.ngay_ca_nhan.tu_soi}</p>

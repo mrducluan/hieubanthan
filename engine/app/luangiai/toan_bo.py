@@ -86,6 +86,19 @@ def so_chu_chuong(c) -> int:
     return 0
 
 
+GIO_TAM = ("Bạn chưa nhập giờ sinh nên lá số đang đọc theo giờ tạm (12 giờ trưa) — các mức trong bài chỉ để tham khảo. "
+           "Thêm giờ sinh, hoặc dùng mục Định giờ sinh để tìm giờ khớp với các mốc đời bạn, rồi đọc lại.")
+
+
+def gan_gio_tam(bc: dict) -> dict:
+    """EN-2 (P2-17): không biết giờ sinh → chương đầu nói rõ đang đọc theo giờ tạm (trước: lời tự tin như có giờ thật)."""
+    if bc.get("chuong"):
+        c0 = bc["chuong"][0]
+        c0["doan"] = [c0["doan"][0], GIO_TAM, *c0["doan"][1:]] if c0.get("doan") else [GIO_TAM]
+        bc["gio_tam"] = True
+    return bc
+
+
 def diem_nhan_hop(chuong: dict | None) -> str | None:
     """EN-2 (P2-14): điểm nhấn lời mời = tiêu đề hộp RIÊNG của người đọc trong chương (điểm mạnh trước — mời, không
     doạ), thay câu tóm tắt dạng "ở mức… nét của bạn…" giống nhau giữa nhiều người. Hộp tham chiếu / đang xem lại bỏ qua."""

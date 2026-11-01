@@ -25,6 +25,8 @@ test("có hồ sơ: thẻ khớp số engine, có câu tự soi, ngày mai, chu�
   await expect(page.getByTestId("the-hom-nay")).toBeVisible();
   const api = await (await request.post("/api/thanso/hom-nay", { data: { ngay: 17, thang: 5, nam: 1990 } })).json();
   await expect(page.getByTestId("so-ngay-ca-nhan")).toHaveText(String(api.ngay_ca_nhan.so));
+  // EN-2 (P2-15): một câu ghép các tín hiệu trong ngày, đúng câu engine dựng
+  await expect(page.getByTestId("hom-nay-tom-lai")).toHaveText(api.tom_lai);
   await expect(page.getByText(api.ngay_ca_nhan.tu_soi)).toBeVisible();
   await expect(page.getByText(`Ngày mai — Ngày cá nhân ${api.ngay_mai.so}:`)).toBeVisible();
   await expect(page.getByTestId("chuoi-ngay")).toContainText("Ngày đầu tiên");

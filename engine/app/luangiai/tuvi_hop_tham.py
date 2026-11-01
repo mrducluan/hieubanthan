@@ -105,8 +105,30 @@ def _duong(can: str, cung: list[dict], ai: str, dung_kb: bool) -> list[dict]:
     return ra
 
 
-def _gon(ds: list[dict]) -> str:
-    return ", ".join(f"{x['hoa']} vào {x['den_cung']}" for x in ds)
+def _mang(ds: list[dict], hoa: tuple[str, ...]) -> list[str]:
+    """Mảng đời sống (không tên cung) nơi các sao hoá trong `hoa` rơi vào — giữ thứ tự, không lặp."""
+    ra: list[str] = []
+    for x in ds:
+        m = MANG.get(x["den_cung"] or "", "").split(",")[0]
+        if x["hoa"] in hoa and m and m not in ra:
+            ra.append(m)
+    return ra
+
+
+def _noi(ds: list[str]) -> str:
+    return ds[0] if len(ds) == 1 else ", ".join(ds[:-1]) + " và " + ds[-1]
+
+
+def _gon(ds: list[dict], ai: str, cua: str) -> str:
+    """EN-2 (P2-16): một câu đời thường theo MẢNG — Lộc/Quyền/Khoa là chỗ dễ đỡ nhau, Kỵ là chỗ nên nói rõ. Tên can,
+    sao hoá, cung chỉ ở danh sách đường bay chi tiết (cho người rành Tử vi)."""
+    tot, ky = _mang(ds, ("Lộc", "Quyền", "Khoa")), _mang(ds, ("Kỵ",))
+    ky = [m for m in ky if m not in tot] or ky
+    cau = f"{ai[0].upper() + ai[1:]} dễ đem thuận lợi tới chuyện {_noi(tot)} {cua}" if tot else \
+        f"{ai[0].upper() + ai[1:]} ít tạo thay đổi rõ ở các mảng của {cua.removeprefix('của ')}"
+    if ky:
+        cau += f"; chỗ nên trò chuyện rõ hơn là chuyện {_noi(ky)}"
+    return cau + "."
 
 
 def lap(ls_ban: dict, can_nam_ban: str, can_nam_kia: str, quan_he: str = MAC_DINH,
@@ -121,17 +143,17 @@ def lap(ls_ban: dict, can_nam_ban: str, can_nam_kia: str, quan_he: str = MAC_DIN
     nhan = nhan if isinstance(nhan, str) and nhan.strip() else QUAN_HE[quan_he]
     vao_ban = _duong(can_nam_kia, ls_ban["cung"], "người kia", True)
     ban_vao = menh_vao = can_menh = None
-    tom = [f"Can năm {can_nam_kia} của người kia vào lá số của bạn: {_gon(vao_ban)}."]
+    tom = [_gon(vao_ban, "năm sinh của người ấy", "của bạn")]
     if ls_kia is not None:
         ban_vao = _duong(can_nam_ban, ls_kia["cung"], "bạn", False)
         can_menh = next((c["can"] for c in ls_kia["cung"] if c["ten"] == "Mệnh"), None)
         if can_menh:
             menh_vao = _duong(can_menh, ls_ban["cung"], "người kia", True)
-        tom.append(f"Can năm {can_nam_ban} của bạn vào lá số người kia: {_gon(ban_vao)}.")
+        tom.append(_gon(ban_vao, "năm sinh của bạn", "của người ấy"))
         if menh_vao:
-            tom.append(f"Can cung Mệnh ({can_menh}) của người kia vào lá số của bạn: {_gon(menh_vao)}.")
-    tom.append(f"Quan hệ {nhan.lower()}: Lộc, Khoa thường là chỗ dễ hỗ trợ nhau; Kỵ là chỗ nên trò chuyện rõ ràng "
-               "hơn.")
+            tom.append(_gon(menh_vao, "cách sống của người ấy", "của bạn"))
+    tom.append(f"Với quan hệ {nhan.lower()}, chỗ thuận là nơi dễ đỡ nhau; chỗ nên trò chuyện rõ hơn không phải "
+               "điều xấu — là nơi hai người dễ kỳ vọng khác nhau.")
     diem = None
     if ban is not None and kia is not None:
         diem = tuvi_hai_nguoi.cham_diem(ban, kia, quan_he, vao_ban, ban_vao, trong_so=trong_so, ca_nhan=ca_nhan)
