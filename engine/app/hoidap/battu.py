@@ -44,7 +44,11 @@ VAN = [r"dai van", r"luu nien", r"nam nay", r"nam sau", r"muoi nam", r"10 nam", 
 # QA-RV: tên thần sát (khớp không dấu) — câu "có Đào Hoa không", "quý nhân ở đâu"…
 THAN_SAT_KW = {t: chung.chuan_hoa(t) for t in battu_mo_rong._Y}
 THAN_SAT_KW["Thiên Ất Quý Nhân"] = r"quy nhan|thien at"
+THAN_SAT_KW["Đào Hoa"] = r"dao hoa|ham tri"
+THAN_SAT_KW["Thiên Y"] = r"(sao |co |than sat )thien y|thien y (la|o|co|trong|cua)"
 CHU_DE = [
+    # EN-5.3: Thai nguyên / Mệnh cung / Thân cung / tiểu vận — hỏi thẳng tên thì trả đúng trụ đã tính
+    ("cung_than", [r"menh cung", r"thai nguyen", r"than cung", r"tieu van"]),
     # MT-ĐS B1 — hôn nhân / con cái / pháp lý / đi xa / an toàn / học hành / quan hệ / hậu vận đứng TRƯỚC thần sát
     # để "vận đào hoa, ế mãi" đi vào hôn nhân, "Dịch Mã có phải số đi xa" đi vào đi xa (thần sát vẫn được đọc trong mục).
     ("hon_nhan", [r"hon nhan", r"vo chong", r"phu tinh", r"the tinh", r"nguoi yeu", r"ban doi", r"tinh duyen",
@@ -70,7 +74,8 @@ CHU_DE = [
     ("than_sat", [r"than sat", r"sao (tot|xau) (gi|nao)", r"co sao gi", r"dao hoa", r"quy nhan", r"thien at",
                   r"dich ma", r"hoa cai", r"van xuong", r"dao hoa", r"hong diem", r"co than", r"qua tu",
                   r"khoi cuong", r"duong nhan", r"loc than", r"kim du", r"thien duc", r"nguyet duc",
-                  r"tuong tinh", r"kiep sat", r"vong than"]),
+                  r"tuong tinh", r"kiep sat", r"vong than", r"ham tri",
+                  r"(sao |co |than sat )thien y", r"thien y (la|o|co|trong|cua)"]),
     ("xung_hop", [r"xung hop", r"hop xung", r"hinh xung", r"xung pha", r"luc hop", r"tam hop", r"luc xung",
                   r"tu hinh", r"tuong hinh", r"luc hai", r"ngu hop", r"co xung", r"bi xung", r"tru (nao )?xung"]),
     # HH-CT2: "tính cách gì" không phải hỏi cách cục
@@ -285,6 +290,17 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
         goi["luu_y"] = ("Thần sát là lớp phụ trong Tử Bình — sách Trích Thiên Tuỷ coi nhẹ thần sát so với ngũ hành "
                         "và thập thần; đọc như sắc thái, không như điềm báo.")
         return chung.ket(goi)
+    if cd == "cung_than":                         # EN-5.3
+        ct = battu_mo_rong.cung_than(ls)
+        hoi = [k for k, mau in (("thai_nguyen", r"thai nguyen"), ("menh_cung", r"menh cung"),
+                                ("than_cung", r"than cung"), ("tieu_van", r"tieu van"))
+               if re.search(mau, pl["cau_chuan_hoa"])] or ["menh_cung", "thai_nguyen", "than_cung"]
+        muc.append({"loai": "cung_than", **{k: ct[k] for k in ("thai_nguyen", "menh_cung", "than_cung")},
+                    "giai_thich": ct["giai_thich"], "hoi": hoi, "tieu_van": battu_mo_rong.cac_tieu_van(ls),
+                    "khoi_van": ls["dai_van"]["ds"][0]["tu_nam"], **kb.meta()})
+        goi["luu_y"] = ("Thai nguyên, Mệnh cung, Thân cung là lớp đọc thêm của Tử Bình; luận chính vẫn ở nhật chủ, "
+                        "thập thần, dụng thần.")
+        return chung.ket(goi)
     if cd == "xung_hop":
         muc.append({"loai": "xung_hop", "ds": battu_mo_rong.quan_he(ls["tru"]), **kb.meta()})
         return chung.ket(goi)
@@ -423,12 +439,24 @@ def _doan(m: dict) -> tuple[str, str | None]:
         return dsm.doan_doi_song(m), None
     if l == "sao_han":
         return chung.doan_sao_han(m), None
+    if l == "cung_than":
+        ten = {"thai_nguyen": "Thai nguyên", "menh_cung": "Mệnh cung", "than_cung": "Thân cung"}
+        cau = [f"{ten[k]} của bạn là {m[k]['can']} {m[k]['chi']} (nạp âm {m[k]['nap_am']}). {m['giai_thich'][k]}"
+               for k in m["hoi"] if k in ten]
+        if "tieu_van" in m["hoi"]:
+            if m["tieu_van"]:
+                ds = ", ".join(f"{x['nam']} {x['can']} {x['chi']}" for x in m["tieu_van"])
+                cau.append(f"{m['giai_thich']['tieu_van']} Tiểu vận của bạn (tới trước năm {m['khoi_van']} vào đại vận "
+                           f"đầu): {ds}.")
+            else:
+                cau.append(f"{m['giai_thich']['tieu_van']} Bạn vào đại vận đầu ngay từ năm sinh nên không có năm tiểu vận.")
+        return " ".join(cau), None
     if l == "than_sat":
         tt = m["tru_ten"]
         co = {x["ten"] for x in m["ds"]}
         dau = ""
         if m["hoi"]:
-            khong = [h for h in m["hoi"] if h not in co]
+            khong = [h + (" (còn gọi Hàm Trì)" if h == "Đào Hoa" else "") for h in m["hoi"] if h not in co]
             if khong:
                 dau = f"Tứ trụ của bạn không có {', '.join(khong)}. "
         if not m["ds"]:

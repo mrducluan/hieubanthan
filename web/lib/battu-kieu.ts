@@ -1,5 +1,6 @@
 // Kiểu dữ liệu Bát tự từ engine (/api/battu/la-so, /api/battu/luu-nien) — web chỉ vẽ.
 export interface Tru { can: string; chi: string }
+export interface TruNapAm extends Tru { nap_am: string }
 export interface ThanSat { ten: string; loai: "cát" | "hung" | "trung"; y: string; tru: number[]; goc: string }
 export interface QuanHe { loai: string; tru: number[]; mo_ta: string }
 export interface NapAm { ten: string; hanh: string; han: string }
@@ -33,6 +34,9 @@ export interface LaSoBatTu {
     khong_vong: { ngay: string[]; nam: string[] };
     than_sat: ThanSat[];
     than_sat_nguon: string;
+    /** EN-5.3 — Thai nguyên, Mệnh cung, Thân cung (+ nạp âm) và tiểu vận trước khi vào đại vận. */
+    cung_than?: { thai_nguyen: TruNapAm; menh_cung: TruNapAm; than_cung: TruNapAm; giai_thich: Record<string, string>; nguon: string };
+    tieu_van?: (TruNapAm & { nam: number; tuoi_mu: number })[];
     quan_he: QuanHe[];
     bang_hanh: { can: Record<string, string>; chi: Record<string, string> };
     vai_tro_hanh: Record<string, string>;

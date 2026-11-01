@@ -32,6 +32,13 @@ test("tứ trụ từ hồ sơ + dụng thần hai cách", async ({ page }) => {
   await expect(cc).toContainText("bản khí, đã lộ ra thiên can");
   await expect(cc).toContainText("Kỵ (phá cách do)");   // KB-3: Nhâm sinh tháng Tỵ → Nhâm đứng đầu
   await expect(page.getByTestId("luu-nien-bat-tu")).toContainText("12 lưu nguyệt");
+  // EN-5.3: Thai nguyên · Mệnh cung · Thân cung (khớp oracle lunar-typescript cho 17/05/1990 12:30)
+  const ct = page.getByTestId("cung-than");
+  await ct.locator("summary").click();
+  await expect(ct).toContainText("Nhâm Thân");
+  await expect(ct).toContainText("Nhâm Ngọ");
+  await expect(ct).toContainText("Mậu Tý");
+  await expect(ct).toContainText("1990: Đinh Mùi");            // tiểu vận năm đầu = trụ giờ Bính Ngọ tiến một (oracle)
   const ans = await hoi(page, "Dụng thần của tôi là gì?");
   await expect(ans).toContainText("Canh Ngọ · Tân Tỵ · Nhâm Ngọ · Bính Ngọ");
   await expect(ans).toContainText("không tự chọn");

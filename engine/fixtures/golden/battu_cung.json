@@ -1,0 +1,1622 @@
+{
+ "_nguon": "lunar-typescript 1.8.6 (6tail, MIT) — oracle sinh golden, sect 2",
+ "cases": [
+  {
+   "input": {
+    "ngay": "1941-05-13",
+    "gio": "17:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "辛巳",
+     "癸巳",
+     "辛酉",
+     "丁酉"
+    ],
+    "thai_nguyen": "甲申",
+    "menh_cung": "辛卯",
+    "than_cung": "辛卯",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "戊戌"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "己亥"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "庚子"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "辛丑"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "壬寅"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "癸卯"
+     },
+     {
+      "tuoi_mu": 7,
+      "gz": "甲辰"
+     },
+     {
+      "tuoi_mu": 8,
+      "gz": "乙巳"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1945-05-25",
+    "gio": "17:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "乙酉",
+     "辛巳",
+     "甲午",
+     "癸酉"
+    ],
+    "thai_nguyen": "壬申",
+    "menh_cung": "己卯",
+    "than_cung": "己卯",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "甲戌"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "乙亥"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "丙子"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "丁丑"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1961-01-26",
+    "gio": "18:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "庚子",
+     "己丑",
+     "己未",
+     "癸酉"
+    ],
+    "thai_nguyen": "庚辰",
+    "menh_cung": "癸未",
+    "than_cung": "丁亥",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "壬申"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "辛未"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "庚午"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "己巳"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "戊辰"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "丁卯"
+     },
+     {
+      "tuoi_mu": 7,
+      "gz": "丙寅"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1965-05-25",
+    "gio": "11:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "乙巳",
+     "辛巳",
+     "己卯",
+     "庚午"
+    ],
+    "thai_nguyen": "壬申",
+    "menh_cung": "壬午",
+    "than_cung": "戊子",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "辛未"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "壬申"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "癸酉"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "甲戌"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1929-05-01",
+    "gio": "17:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "己巳",
+     "戊辰",
+     "丙午",
+     "丁酉"
+    ],
+    "thai_nguyen": "己未",
+    "menh_cung": "戊辰",
+    "than_cung": "丙寅",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "戊戌"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1973-09-01",
+    "gio": "10:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "癸丑",
+     "庚申",
+     "庚子",
+     "辛巳"
+    ],
+    "thai_nguyen": "辛亥",
+    "menh_cung": "丙辰",
+    "than_cung": "甲寅",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "壬午"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "癸未"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1925-05-01",
+    "gio": "01:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "乙丑",
+     "庚辰",
+     "乙酉",
+     "丁丑"
+    ],
+    "thai_nguyen": "辛未",
+    "menh_cung": "戊子",
+    "than_cung": "壬午",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "戊寅"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "己卯"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1925-05-17",
+    "gio": "02:50",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "乙丑",
+     "辛巳",
+     "辛丑",
+     "己丑"
+    ],
+    "thai_nguyen": "壬申",
+    "menh_cung": "丁亥",
+    "than_cung": "癸未",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "庚寅"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "辛卯"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "壬辰"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "癸巳"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "甲午"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "乙未"
+     },
+     {
+      "tuoi_mu": 7,
+      "gz": "丙申"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1953-01-01",
+    "gio": "21:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "壬辰",
+     "壬子",
+     "壬子",
+     "辛亥"
+    ],
+    "thai_nguyen": "癸卯",
+    "menh_cung": "丙午",
+    "than_cung": "壬子",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "庚戌"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "己酉"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "戊申"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "丁未"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "丙午"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "乙巳"
+     },
+     {
+      "tuoi_mu": 7,
+      "gz": "甲辰"
+     },
+     {
+      "tuoi_mu": 8,
+      "gz": "癸卯"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1941-01-01",
+    "gio": "19:30",
+    "gioi_tinh": "nam"
+   },
+   "expect": {
+    "tru": [
+     "庚辰",
+     "戊子",
+     "己酉",
+     "甲戌"
+    ],
+    "thai_nguyen": "己卯",
+    "menh_cung": "癸未",
+    "than_cung": "丁亥",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "乙亥"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1953-09-05",
+    "gio": "07:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "癸巳",
+     "庚申",
+     "己未",
+     "戊辰"
+    ],
+    "thai_nguyen": "辛亥",
+    "menh_cung": "丁巳",
+    "than_cung": "乙丑",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "己巳"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "2009-05-01",
+    "gio": "15:50",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "己丑",
+     "戊辰",
+     "丙午",
+     "丙申"
+    ],
+    "thai_nguyen": "己未",
+    "menh_cung": "己巳",
+    "than_cung": "丁丑",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丁酉"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1981-01-25",
+    "gio": "02:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "庚申",
+     "己丑",
+     "癸卯",
+     "癸丑"
+    ],
+    "thai_nguyen": "庚辰",
+    "menh_cung": "己卯",
+    "than_cung": "己卯",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "壬子"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "辛亥"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "庚戌"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "己酉"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "戊申"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "丁未"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1933-01-09",
+    "gio": "08:50",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "壬申",
+     "癸丑",
+     "乙亥",
+     "庚辰"
+    ],
+    "thai_nguyen": "甲辰",
+    "menh_cung": "壬子",
+    "than_cung": "丙午",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "己卯"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1933-05-09",
+    "gio": "19:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "癸酉",
+     "丁巳",
+     "乙亥",
+     "丙戌"
+    ],
+    "thai_nguyen": "戊申",
+    "menh_cung": "甲寅",
+    "than_cung": "丙辰",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丁亥"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "戊子"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "己丑"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "庚寅"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "辛卯"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "壬辰"
+     },
+     {
+      "tuoi_mu": 7,
+      "gz": "癸巳"
+     },
+     {
+      "tuoi_mu": 8,
+      "gz": "甲午"
+     },
+     {
+      "tuoi_mu": 9,
+      "gz": "乙未"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1941-05-13",
+    "gio": "13:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "辛巳",
+     "癸巳",
+     "辛酉",
+     "乙未"
+    ],
+    "thai_nguyen": "甲申",
+    "menh_cung": "癸巳",
+    "than_cung": "辛丑",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丙申"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "丁酉"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "戊戌"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "己亥"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "庚子"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "辛丑"
+     },
+     {
+      "tuoi_mu": 7,
+      "gz": "壬寅"
+     },
+     {
+      "tuoi_mu": 8,
+      "gz": "癸卯"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1945-05-01",
+    "gio": "00:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "乙酉",
+     "庚辰",
+     "庚午",
+     "丙子"
+    ],
+    "thai_nguyen": "辛未",
+    "menh_cung": "己丑",
+    "than_cung": "辛巳",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丁丑"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "戊寅"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1937-01-21",
+    "gio": "16:50",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "丙子",
+     "辛丑",
+     "戊申",
+     "庚申"
+    ],
+    "thai_nguyen": "壬辰",
+    "menh_cung": "丙申",
+    "than_cung": "戊戌",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "己未"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "戊午"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "丁巳"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "丙辰"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "乙卯"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "2017-05-17",
+    "gio": "17:50",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "丁酉",
+     "乙巳",
+     "甲辰",
+     "癸酉"
+    ],
+    "thai_nguyen": "丙申",
+    "menh_cung": "癸卯",
+    "than_cung": "癸卯",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "甲戌"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "乙亥"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "丙子"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "丁丑"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "戊寅"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "己卯"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1945-05-17",
+    "gio": "17:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "乙酉",
+     "辛巳",
+     "丙戌",
+     "丁酉"
+    ],
+    "thai_nguyen": "壬申",
+    "menh_cung": "己卯",
+    "than_cung": "己卯",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "戊戌"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "己亥"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "庚子"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "辛丑"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "壬寅"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "癸卯"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "2005-09-21",
+    "gio": "07:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "乙酉",
+     "乙酉",
+     "戊申",
+     "丙辰"
+    ],
+    "thai_nguyen": "丙子",
+    "menh_cung": "庚辰",
+    "than_cung": "戊寅",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丁巳"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "戊午"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "己未"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "庚申"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "辛酉"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "壬戌"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1933-05-01",
+    "gio": "08:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "癸酉",
+     "丙辰",
+     "丁卯",
+     "甲辰"
+    ],
+    "thai_nguyen": "丁未",
+    "menh_cung": "辛酉",
+    "than_cung": "辛酉",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "乙巳"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1953-01-21",
+    "gio": "21:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "壬辰",
+     "癸丑",
+     "壬申",
+     "辛亥"
+    ],
+    "thai_nguyen": "甲辰",
+    "menh_cung": "乙巳",
+    "than_cung": "癸丑",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "庚戌"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "己酉"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "戊申"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "丁未"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "丙午"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "2005-09-13",
+    "gio": "04:50",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "乙酉",
+     "乙酉",
+     "庚子",
+     "戊寅"
+    ],
+    "thai_nguyen": "丙子",
+    "menh_cung": "壬午",
+    "than_cung": "戊子",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "己卯"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "庚辰"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "辛巳"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "壬午"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "癸未"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "甲申"
+     },
+     {
+      "tuoi_mu": 7,
+      "gz": "乙酉"
+     },
+     {
+      "tuoi_mu": 8,
+      "gz": "丙戌"
+     },
+     {
+      "tuoi_mu": 9,
+      "gz": "丁亥"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "2013-01-17",
+    "gio": "11:50",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "壬辰",
+     "癸丑",
+     "癸未",
+     "戊午"
+    ],
+    "thai_nguyen": "甲辰",
+    "menh_cung": "庚戌",
+    "than_cung": "戊申",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丁巳"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "丙辰"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "乙卯"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "甲寅"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "2021-05-21",
+    "gio": "15:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "辛丑",
+     "癸巳",
+     "己巳",
+     "壬申"
+    ],
+    "thai_nguyen": "甲申",
+    "menh_cung": "壬辰",
+    "than_cung": "庚寅",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "癸酉"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "甲戌"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "乙亥"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "丙子"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "丁丑"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "2001-09-21",
+    "gio": "03:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "辛巳",
+     "丁酉",
+     "丁亥",
+     "壬寅"
+    ],
+    "thai_nguyen": "戊子",
+    "menh_cung": "甲午",
+    "than_cung": "庚子",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "癸卯"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "甲辰"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "乙巳"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "丙午"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "丁未"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "戊申"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1949-01-21",
+    "gio": "07:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "戊子",
+     "乙丑",
+     "辛亥",
+     "壬辰"
+    ],
+    "thai_nguyen": "丙辰",
+    "menh_cung": "甲子",
+    "than_cung": "戊午",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "辛卯"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "庚寅"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "己丑"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "戊子"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "丁亥"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1997-01-17",
+    "gio": "10:50",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "丙子",
+     "辛丑",
+     "己未",
+     "己巳"
+    ],
+    "thai_nguyen": "壬辰",
+    "menh_cung": "己亥",
+    "than_cung": "乙未",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "戊辰"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "丁卯"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "丙寅"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1973-09-17",
+    "gio": "15:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "癸丑",
+     "辛酉",
+     "丙辰",
+     "丙申"
+    ],
+    "thai_nguyen": "壬子",
+    "menh_cung": "甲子",
+    "than_cung": "戊午",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丁酉"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "戊戌"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "己亥"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "庚子"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "辛丑"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "壬寅"
+     },
+     {
+      "tuoi_mu": 7,
+      "gz": "癸卯"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1997-09-17",
+    "gio": "01:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "丁丑",
+     "己酉",
+     "壬戌",
+     "辛丑"
+    ],
+    "thai_nguyen": "庚子",
+    "menh_cung": "丁未",
+    "than_cung": "辛亥",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "壬寅"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "癸卯"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "甲辰"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "乙巳"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "丙午"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "丁未"
+     },
+     {
+      "tuoi_mu": 7,
+      "gz": "戊申"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1985-09-25",
+    "gio": "09:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "乙丑",
+     "乙酉",
+     "丁卯",
+     "乙巳"
+    ],
+    "thai_nguyen": "丙子",
+    "menh_cung": "己卯",
+    "than_cung": "己卯",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丙午"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "丁未"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "戊申"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "己酉"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "庚戌"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1961-01-17",
+    "gio": "22:50",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "庚子",
+     "己丑",
+     "庚戌",
+     "丁亥"
+    ],
+    "thai_nguyen": "庚辰",
+    "menh_cung": "辛巳",
+    "than_cung": "己丑",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丙戌"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "乙酉"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "甲申"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "癸未"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1993-01-09",
+    "gio": "10:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "壬申",
+     "癸丑",
+     "庚寅",
+     "辛巳"
+    ],
+    "thai_nguyen": "甲辰",
+    "menh_cung": "辛亥",
+    "than_cung": "丁未",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "庚辰"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "2009-05-17",
+    "gio": "14:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "己丑",
+     "己巳",
+     "壬戌",
+     "丁未"
+    ],
+    "thai_nguyen": "庚申",
+    "menh_cung": "己巳",
+    "than_cung": "丁丑",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "戊申"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "己酉"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "庚戌"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "辛亥"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "壬子"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "癸丑"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "2021-09-13",
+    "gio": "22:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "辛丑",
+     "丁酉",
+     "甲子",
+     "乙亥"
+    ],
+    "thai_nguyen": "戊子",
+    "menh_cung": "丁酉",
+    "than_cung": "丁酉",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丙子"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "丁丑"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "戊寅"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "己卯"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "庚辰"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "辛巳"
+     },
+     {
+      "tuoi_mu": 7,
+      "gz": "壬午"
+     },
+     {
+      "tuoi_mu": 8,
+      "gz": "癸未"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1933-01-09",
+    "gio": "09:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "壬申",
+     "癸丑",
+     "乙亥",
+     "辛巳"
+    ],
+    "thai_nguyen": "甲辰",
+    "menh_cung": "辛亥",
+    "than_cung": "丁未",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "庚辰"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1929-05-17",
+    "gio": "22:30",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "己巳",
+     "己巳",
+     "壬戌",
+     "辛亥"
+    ],
+    "thai_nguyen": "庚申",
+    "menh_cung": "丁丑",
+    "than_cung": "己巳",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "壬子"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "癸丑"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "甲寅"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "乙卯"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "丙辰"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "丁巳"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1985-09-21",
+    "gio": "06:10",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "乙丑",
+     "乙酉",
+     "癸亥",
+     "乙卯"
+    ],
+    "thai_nguyen": "丙子",
+    "menh_cung": "辛巳",
+    "than_cung": "己丑",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丙辰"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "丁巳"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "戊午"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "己未"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "庚申"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "辛酉"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "2001-05-01",
+    "gio": "08:50",
+    "gioi_tinh": "nu"
+   },
+   "expect": {
+    "tru": [
+     "辛巳",
+     "壬辰",
+     "甲子",
+     "戊辰"
+    ],
+    "thai_nguyen": "癸未",
+    "menh_cung": "丁酉",
+    "than_cung": "丁酉",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "己巳"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1990-05-17",
+    "gio": "12:30",
+    "gioi_tinh": "nam"
+   },
+   "expect": {
+    "tru": [
+     "庚午",
+     "辛巳",
+     "壬午",
+     "丙午"
+    ],
+    "thai_nguyen": "壬申",
+    "menh_cung": "壬午",
+    "than_cung": "戊子",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "丁未"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "戊申"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "己酉"
+     },
+     {
+      "tuoi_mu": 4,
+      "gz": "庚戌"
+     },
+     {
+      "tuoi_mu": 5,
+      "gz": "辛亥"
+     },
+     {
+      "tuoi_mu": 6,
+      "gz": "壬子"
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "ngay": "1995-06-15",
+    "gio": "23:30",
+    "gioi_tinh": "nam",
+    "ghi_chu": "dạ Tý: trụ ngày hôm đó, trụ giờ theo ngày sau (sect 2)"
+   },
+   "expect": {
+    "tru": [
+     "乙亥",
+     "壬午",
+     "丁丑",
+     "壬子"
+    ],
+    "thai_nguyen": "癸酉",
+    "menh_cung": "丁亥",
+    "than_cung": "癸未",
+    "tieu_van": [
+     {
+      "tuoi_mu": 1,
+      "gz": "辛亥"
+     },
+     {
+      "tuoi_mu": 2,
+      "gz": "庚戌"
+     },
+     {
+      "tuoi_mu": 3,
+      "gz": "己酉"
+     }
+    ]
+   }
+  }
+ ]
+}

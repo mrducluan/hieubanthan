@@ -220,6 +220,32 @@ export function BatTu() {
                   <p className="mt-2 text-xs text-[var(--ls-mo)]">Bảng tra: {ls.mo_rong.than_sat_nguon}. Thần sát chỉ là tín hiệu phụ — luận chính dựa vào ngũ hành, thập thần, dụng thần.</p>
                 </details>
               )}
+              {ls.mo_rong?.cung_than && (
+                <details className="border-t border-[var(--ls-vien)] pt-4 text-sm" data-testid="cung-than">
+                  <summary className="cursor-pointer text-[var(--ls-mo)]">Thai nguyên · Mệnh cung · Thân cung{ls.mo_rong.tieu_van?.length ? " · tiểu vận" : ""}</summary>
+                  <dl className="mt-3 grid gap-3 sm:grid-cols-3">
+                    {([["thai_nguyen", "Thai nguyên"], ["menh_cung", "Mệnh cung"], ["than_cung", "Thân cung"]] as const).map(([k, ten]) => (
+                      <div key={k} className="rounded-xl border border-[var(--ls-vien)] p-3">
+                        <dt className="text-xs text-[var(--ls-mo)]">{ten}</dt>
+                        <dd className="font-serif text-lg text-[var(--ls-nhan)]">{ls.mo_rong!.cung_than![k].can} {ls.mo_rong!.cung_than![k].chi}</dd>
+                        <dd className="text-xs text-[var(--ls-mo)]">{ls.mo_rong!.cung_than![k].nap_am}</dd>
+                        <dd className="mt-1 text-xs">{ls.mo_rong!.cung_than!.giai_thich[k]}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  {ls.mo_rong.tieu_van && ls.mo_rong.tieu_van.length > 0 && (
+                    <div className="mt-3">
+                      <p className="text-xs">{ls.mo_rong.cung_than.giai_thich.tieu_van}</p>
+                      <ol className="mt-2 flex flex-wrap gap-1.5 text-xs">
+                        {ls.mo_rong.tieu_van.map((t) => (
+                          <li key={t.nam} className="rounded-lg border border-[var(--ls-vien)] px-2 py-1">{t.nam}: <b>{t.can} {t.chi}</b></li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+                  <p className="mt-2 text-xs text-[var(--ls-mo)]">Cách lập: {ls.mo_rong.cung_than.nguon}.</p>
+                </details>
+              )}
             </div>
             {/* Dải chân hieuban.com + QR: ngoài khối được chụp (tuTruRef) để ảnh tải về không in hai lần, nhưng nằm sát dưới
                 khối để chụp màn hình cả hai vẫn mang link về web. */}
