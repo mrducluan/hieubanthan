@@ -42,8 +42,9 @@ test("có hồ sơ: hiện quan hệ tuổi; tìm ngày cưới hỏi bỏ ngày
   await napHoSo(page);
   await page.goto("/xem-ngay-tot/2026-10-13");
   await expect(page.getByTestId("tuoi-ban")).toContainText("Canh Ngọ");
-  await page.getByRole("button", { name: "Cưới hỏi" }).click();
-  await page.getByRole("button", { name: "Tìm ngày" }).click();
+  const khoi = page.getByTestId("chon-ngay");
+  await khoi.getByRole("button", { name: "Cưới hỏi" }).click();
+  await khoi.getByRole("button", { name: "Tìm ngày" }).click();
   const kq = page.getByTestId("ket-qua-chon-ngay");
   await expect(kq).toContainText("không xung tuổi bạn");
   await expect(kq.locator("li").first()).toBeVisible();
@@ -116,4 +117,28 @@ test("điện thoại 360px: trang xem ngày và trang chủ không cuộn ngang
     const tran = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(tran, duong).toBeLessThanOrEqual(0);
   }
+});
+
+test("EN-5.1 chọn ngày cho cả nhà: cưới hỏi 4 người, Kim lâu cô dâu, 12 tháng, không lưu năm sinh", async ({ page }) => {
+  await page.goto("/xem-ngay-tot/2026-11-01");
+  const khoi = page.getByTestId("chon-ngay-nhieu");
+  await expect(khoi.getByRole("heading", { name: "Chọn ngày cho cả nhà" })).toBeVisible();
+  await khoi.getByLabel("Năm sinh người thứ 1").fill("2000");
+  await khoi.getByLabel("Năm sinh người thứ 2").fill("1997");
+  await khoi.getByRole("button", { name: "Thêm người" }).click();
+  await expect(khoi.getByLabel("Vai người thứ 3")).toHaveValue("bo_co_dau");
+  await khoi.getByLabel("Năm sinh người thứ 3").fill("1970");
+  await khoi.getByRole("button", { name: "Tìm ngày" }).click();
+  const kq = page.getByTestId("ket-qua-nhieu");
+  await expect(kq).toContainText("không xung tuổi ai trong 3 người");
+  await expect(kq).toContainText("Năm âm 2027 cô dâu vướng lưu ý");
+  await kq.getByText("Theo từng tháng").click();
+  await expect(page.getByTestId("thang-nhieu").locator("> li")).toHaveCount(12);
+  await expect(page.getByTestId("thang-nhieu")).toContainText("Kim lâu");
+  const luu = await page.evaluate(() => JSON.stringify(window.localStorage));
+  expect(luu).not.toContain("1997");
+  // trùng vai → báo lỗi tại chỗ, không gọi máy chủ
+  await khoi.getByLabel("Vai người thứ 3").selectOption("co_dau");
+  await khoi.getByRole("button", { name: "Tìm ngày" }).click();
+  await expect(khoi.getByRole("alert")).toContainText("Mỗi vai chỉ một người");
 });
