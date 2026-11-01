@@ -22,6 +22,7 @@ import re
 
 from app import config
 from app.calc import lunar
+from app.calc import phongthuy as P
 from app.calc import thanso as tinh
 from app.calc import thanso_mo_rong as mr
 from app.calc import tuoi_dan_gian as t
@@ -29,12 +30,14 @@ from app.calc import tuvi_luu_nguyet as ln_calc
 from app.kb import store
 from app.kb import thanso_v2 as kbts
 from app.luangiai import doi_song_khuon as kh
+from app.luangiai import thoi_gian_lop as L
 from app.luangiai import tuoi_dan_gian as tdg
 
 TZ = config.CALENDAR_MERIDIAN_TZ
 MO_DUN = "thoi_gian"
 NGAY_SANG_NAM_TOI = 120          # còn ≤ 120 ngày tới Tết sau → mặc định xem năm tới
-PHAI = {"thanso": "pitago", "tuvi": "nam_phai_viet", "battu": "tu_binh", "tap_quan": "dan_gian_vn", "hai_la_so": "tuvi_battu"}
+PHAI = {"thanso": "pitago", "tuvi": "nam_phai_viet", "battu": "tu_binh", "tap_quan": "dan_gian_vn", "hai_la_so": "tuvi_battu",
+        "con_giap": "dan_gian_vn", "phong_thuy": "bat_trach"}
 _MUC_THANG_TV = {"thuan": "thuan", "binh": "can_bang", "can_than": "can_chu_dong"}
 CAU_HOI = {
     "tom_tat": "Ba tháng tới nên dồn sức vào đâu, và năm tới mở ra với bạn thế nào?",
@@ -237,28 +240,85 @@ def thang_noi_bat(hop: list[dict]) -> list[dict]:
     return ra
 
 
-def gop_thang(ts: list[dict], tv: list[dict], bt: list[dict]) -> list[dict]:
-    """UX (2026-11-01): 12 tháng = 12 hộp theo tháng DƯƠNG LỊCH, mỗi hộp gộp ba cách xem (tháng cá nhân · tháng âm Tử vi
-    · tháng tiết Bát tự chứa ngày 15) — thay ~36 hộp rời ba loại lịch. Chỉ ghép câu + mức đã có; mức của hộp chỉ ghi khi
-    hai lá số cùng mức (lệch nhau thì không gắn mức, câu vẫn nêu từng cách)."""
-    if not (tv or bt):
-        return ts
+def _thuong(x: str) -> str:
+    return x[:1].lower() + x[1:]
+
+
+def gop_thang(ts: list[dict], tv: list[dict], bt: list[dict], lop: dict[str, dict]) -> list[dict]:
+    """TG-V2 (2026-11-01): một hộp mỗi tháng DƯƠNG LỊCH, các cách xem thành HÀNG (`lop`): thần số · con giáp · phong
+    thuỷ · ngày đẹp (không cần giờ sinh) · Tử vi (tháng âm chứa ngày 15) · Bát tự (tháng tiết chứa ngày 15). Chỉ ghép câu +
+    mức đã có; mức của hộp chỉ khi hai lá số cùng mức (lớp tập quán / phong thuỷ không đổi mức)."""
     ra = []
     for h in ts:
         mm, yy = (int(x) for x in h["thang"].split("/"))
         giua = dt.date(yy, mm, 15)
         a = next((x for x in tv if _phu(x, giua)), None)
         b = next((x for x in bt if _phu(x, giua)), None)
-        dong = [f"Thần số: {h['noi_dung'][:1].lower()}{h['noi_dung'][1:]}"]
+        o = lop.get(h["thang"])
+        hang = [{"ma": "thanso", "nhan": L.TEN_LOP["thanso"], "tieu": f"Tháng cá nhân {h['so']}", "loi": h["noi_dung"]}]
+        if o:
+            hang += L.hang_lop(o)
         if a:
-            dong.append(f"Tử vi ({a['tieu_de'][:1].lower()}{a['tieu_de'][1:]}): {a['loi'][:1].lower()}{a['loi'][1:]}.")
+            hang.append({"ma": "tuvi", "nhan": L.TEN_LOP["tuvi"], "tieu": a["tieu_de"], "loi": a["loi"].rstrip(".") + ".",
+                         "muc": a.get("muc")})
         if b:
-            dong.append(f"Bát tự ({b['tieu_de'][:1].lower()}{b['tieu_de'][1:]}): {b['loi'][:1].lower()}{b['loi'][1:]}.")
+            hang.append({"ma": "battu", "nhan": L.TEN_LOP["battu"], "tieu": b["tieu_de"], "loi": b["loi"].rstrip(".") + ".",
+                         "muc": b.get("muc")})
         muc = a.get("muc") if a and b and a.get("muc") == b.get("muc") else None
-        cu = list(h.get("can_cu", [])) + (a or {}).get("can_cu", [])[:2] + (b or {}).get("can_cu", [])[:1]
-        ra.append(_gan(kh.hop("thoi_diem", h["tieu_de"], " ".join(dong), can_cu=cu,
-                              ma=kh.ma_mau("tgt", "thang", f"so{h['so']}", muc or "khac"), muc=muc),
-                       "hai_la_so" if a and b else "thanso", thang=h["thang"], so=h["so"]))
+        cu = list(h.get("can_cu", [])) + (L.can_cu_lop(o) if o else []) + (a or {}).get("can_cu", [])[:2] \
+            + (b or {}).get("can_cu", [])[:1]
+        tom = L.tom_lai(L.tin_hieu(o, a and a.get("muc"), b and b.get("muc"))) if o else h["noi_dung"]
+        hop = _gan(kh.hop("thoi_diem", h["tieu_de"], tom, can_cu=cu,
+                          ma=kh.ma_mau("tgt", "thang", f"so{h['so']}", muc or "khac"), muc=muc),
+                   "hai_la_so" if a and b else "thanso", thang=h["thang"], so=h["so"])
+        hop["lop"] = hang
+        ra.append(hop)
+    return ra
+
+
+def _doi_thuong(x: dict) -> tuple[str, str]:
+    """Điểm nhấn theo tuổi (trang "Năm … theo tuổi") → lời đời thường cho báo cáo: thuật ngữ (can khắc, nạp âm…) dời
+    sang "Vì sao nói vậy"; tiêu đề là câu đầu của phần lời, thân là phần còn lại (hộp không lặp tiêu đề)."""
+    nd = x["noi_dung"]
+    if " — " not in nd:
+        return x["tieu_de"], nd
+    con = nd.split(" — ", 1)[1].strip()
+    dau, _, sau = con.partition(". ")
+    return "Theo tuổi: " + dau.rstrip("."), sau.strip()
+
+
+def _lop_12(ngay_sinh: dt.date, tu: dt.date, quai: str | None) -> dict[str, dict]:
+    ra, m, y = {}, tu.month, tu.year
+    for _ in range(12):
+        ra[f"{m}/{y}"] = L.lop_thang(m, y, ngay_sinh, quai, tu_ngay=tu)
+        m, y = (1, y + 1) if m == 12 else (m + 1, y)
+    return ra
+
+
+def _hop_xep(lop: dict[str, dict], tv: list[dict], bt: list[dict]) -> list[dict]:
+    """Tháng hội nhiều lớp thuận / nhiều lớp nhắc chậm trong 12 tháng (đếm lớp, không điểm số)."""
+    ds = []
+    for th, o in lop.items():
+        mm, yy = (int(x) for x in th.split("/"))
+        giua = dt.date(yy, mm, 15)
+        a = next((x for x in tv if _phu(x, giua)), None)
+        b = next((x for x in bt if _phu(x, giua)), None)
+        ds.append(L.tin_hieu(o, a and a.get("muc"), b and b.get("muc")))
+    thuan, cham = L.xep_thang(ds)
+    k, ra = L.KB["noi_bat"], []
+    thu_tu = list(lop)
+    for nhom, loai, td, loi, ma in ((thuan, "diem_manh", "tieu_de", "loi", "thuan"),
+                                    (cham, "luu_y", "di_cham_tieu_de", "di_cham_loi", "cham")):
+        if not nhom:
+            continue
+        nhom = sorted(nhom, key=lambda x: thu_tu.index(x["thang"]))
+        ly = sorted({d for x in nhom for d in (x["dau"] if ma == "thuan" else x["cham"])})
+        h = kh.hop(loai, k[td].format(ds=", ".join(x["thang"] for x in nhom)), k[loi].format(ly_do=", ".join(ly)),
+                   **({"huong_xu_ly": "Đặt mốc quan trọng trước hoặc sau những tháng này; nếu buộc làm trong tháng, "
+                                      "chuẩn bị giấy tờ, người hỗ trợ và thời gian dư."} if ma == "cham" else {}),
+                   can_cu=[k["can_cu"]] + [f"{x['thang']}: {', '.join(x['dau'] if ma == 'thuan' else x['cham'])}" for x in nhom],
+                   ma=kh.ma_mau("tgt", "xep", ma))
+        ra.append(_gan(h, "hai_la_so" if (tv and bt) else "tap_quan", cac_thang=[x["thang"] for x in nhom]))
     return ra
 
 
@@ -320,27 +380,51 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
                 tom_nam.append(_gan(kh.hop("cot_loi", f"Năm {nam} theo {ten}: {kh.NHAN_MUC[h['muc']].lower()}",
                                            h["noi_dung"], can_cu=h.get("can_cu"),
                                            ma=kh.ma_mau("tgt", nguon, "nam", h["muc"]), muc=h["muc"]), nguon))
-    ba_thang = _thang_ts(d, m, hom_nay, 3)
-    if tv_sinh:
-        ba_thang += _tv_thang(tv_sinh, hom_nay, 1, ls)
-    hop1 = tom_nam + _hop_tap_quan(tq, nam, False) + ba_thang
-    doan1 = [tom, "Ba tháng tới đọc theo tháng cá nhân (thần số, tháng dương lịch)"
-             + (" và nhịp tháng âm của lá số Tử vi" if tv_sinh else "") + ". Đây là nhịp gợi ý để sắp việc, không phải dự báo."]
+    # TG-V2: lớp từng tháng (con giáp · phong thuỷ · ngày đẹp) + Tử vi / Bát tự — tính một lần cho 12 tháng
+    from app.luangiai import nam_tong_quan as ntq  # noqa: PLC0415
+    quai = P.menh_quai(ngay_sinh.year, gioi_tinh, ngay_sinh)["quai"] if gioi_tinh else None
+    ts12 = _thang_ts(d, m, hom_nay, 12)
+    tv12 = _tv_thang(tv_sinh, hom_nay, 4, ls)[:14] if tv_sinh else []
+    bt12 = _bt_thang(bt_sinh, hom_nay, 12) if bt_sinh else []
+    lop12 = _lop_12(ngay_sinh, hom_nay, quai)
+    thang12 = gop_thang(ts12, tv12, bt12, lop12)
+    xep = _hop_xep(lop12, tv12, bt12)
+    nsa = tdg.nam_am_sinh(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day)
+    tt = ntq.theo_tuoi(nam, nsa)
+    cg_nam = [_gan(kh.hop("diem_manh" if x["loai"] == "thuan" else "luu_y" if x["loai"] == "luu_y" else "loi_khuyen",
+                          *_doi_thuong(x), can_cu=[x["tieu_de"], x["can_cu"]],
+                          ma=kh.ma_mau("tgt", "con_giap", L.slug(x["can_cu"].split(":")[0]), x["loai"])), "con_giap")
+              for x in tt["diem_nhan"]
+              if not x["can_cu"].startswith("Cửu Diệu") and not x["tieu_de"].startswith("Năm thứ")
+              and not (x["can_cu"].startswith("Địa chi") and x["loai"] == "luu_y")]
+    pt_nam = L.phong_thuy_nam(nam, quai)
+    hop_pt = [_gan(kh.hop("diem_manh" if pt_nam["goc_hop"] else "loi_khuyen",
+                          f"Năm {nam}: góc {(pt_nam['goc_hop'] or pt_nam['goc_tot'])['phuong']} trong nhà"
+                          + (" hợp bạn nhất" if pt_nam["goc_hop"] else " đón sao tốt"),
+                          pt_nam["loi"], can_cu=[pt_nam["can_cu"]],
+                          ma=kh.ma_mau("tgt", "phong_thuy", "nam", "hop" if pt_nam["goc_hop"] else "tot")), "phong_thuy")] \
+        if pt_nam else []
+
+    # ---- chương 1: 3 tháng tới + tóm tắt năm (miễn phí) — đủ lớp như chương 12 tháng, để người đọc thấy giá trị thật
+    cg1 = [h for h in cg_nam if h["loai"] == "diem_manh"][:1]
+    hop1 = tom_nam + xep + cg1 + hop_pt + _hop_tap_quan(tq, nam, False) + thang12[:3]
+    lop_co = ["thần số", "con giáp", "phong thuỷ", "ngày đẹp"] + (["Tử vi"] if tv_sinh else []) + (["Bát tự"] if bt_sinh else [])
+    doan1 = [tom, f"Mỗi tháng đọc theo {', '.join(lop_co[:-1])} và {lop_co[-1]}. Đây là nhịp gợi ý để sắp việc, "
+                  "không phải dự báo."]
     c1 = kh.chuong("tom_tat", f"Ba tháng tới & năm {nam} tóm tắt", doan1, hop=_khong_trung_ma(hop1), tom_tat=tom,
                    cau_tu_soi="Việc nào trong ba tháng tới bạn muốn làm cho xong trước?")
 
     # ---- chương 2: 12 tháng tới
-    ts12 = _thang_ts(d, m, hom_nay, 12)
-    tv12 = _tv_thang(tv_sinh, hom_nay, 4, ls)[:14] if tv_sinh else []
-    bt12 = _bt_thang(bt_sinh, hom_nay, 12) if bt_sinh else []
     noi_bat = thang_noi_bat(ts12 + tv12 + bt12)
-    hop2 = noi_bat + gop_thang(ts12, tv12, bt12)
+    hop2 = noi_bat + thang12
     thuan = [h["thang"] for h in ts12 if h.get("so") in (1, 8)]
-    doan2 = [("Mười hai tháng tới, mỗi tháng dương lịch một hộp ghép ba cách xem: tháng cá nhân (thần số), tháng âm "
-              "(Tử vi) và tháng theo tiết (Bát tự) chứa ngày 15 của tháng." if tv_sinh and bt_sinh
-              else "Mười hai tháng tới theo tháng cá nhân (thần số), mỗi tháng một hộp."),
+    hop_tuoi = [k for k, o in lop12.items() if o["con_giap"]["loai"] == "thuan"]
+    doan2 = [f"Mười hai tháng tới, mỗi tháng dương lịch một hộp ghép {len(lop_co)} cách xem: {', '.join(lop_co)}. "
+             "Tử vi lấy tháng âm, Bát tự và con giáp lấy tháng theo tiết chứa ngày 15 của tháng.",
              (f"Tháng hợp khởi sự hoặc lo chuyện tiền theo tháng cá nhân: {', '.join(thuan)}." if thuan else ""),
+             (f"Tháng hợp tuổi bạn theo con giáp: {', '.join(hop_tuoi)}." if hop_tuoi else ""),
              (f"Có {len(noi_bat)} tháng Tử vi và Bát tự cùng một mức — đọc các hộp đầu chương trước." if noi_bat else ""),
+             ("Thêm giờ sinh để mỗi tháng có thêm nhịp lá số Tử vi và Bát tự của riêng bạn." if not tv_sinh else ""),
              "Khi các cách nói khác nhau, ưu tiên lớp lớn hơn (mười năm, rồi năm) trước khi xét tháng."]
     c2 = kh.chuong("muoi_hai_thang", "12 tháng tới của bạn", [x for x in doan2 if x], hop=_khong_trung_ma(hop2),
                    tom_tat=doan2[0], cau_tu_soi="Tháng nào bạn muốn để dành cho việc quan trọng nhất năm?")
@@ -359,9 +443,11 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
             c = _doi_nam(c, nam) if nam_toi else c
             hop3 += _hop_nam(c, nguon)
             can_cu3 += c["can_cu"][:4]
-    hop3 += _hop_tap_quan(tq, nam, True)
-    doan3 = [f"Năm {nam} ghép ba lớp: năm cá nhân (thần số), lá số Tử vi và Bát tự của bạn chạy cho năm {nam}, cùng "
-             "tập quán theo tuổi." if tv else f"Năm {nam} đọc theo năm cá nhân (thần số) và tập quán theo tuổi.",
+    hop3 += cg_nam + hop_pt + _hop_tap_quan(tq, nam, True)
+    doan3 = [f"Năm {nam} ghép các lớp: năm cá nhân (thần số), lá số Tử vi và Bát tự của bạn chạy cho năm {nam}, con "
+             "giáp và mệnh theo tuổi, góc nhà hợp bạn theo phong thuỷ, cùng tập quán theo tuổi." if tv else
+             f"Năm {nam} đọc theo năm cá nhân (thần số), con giáp và mệnh theo tuổi, góc nhà hợp bạn theo phong thuỷ và "
+             "tập quán theo tuổi.",
              "Thêm giờ sinh để đọc thêm lá số Tử vi và Bát tự cho năm này." if not tv else ""]
     c3 = kh.chuong("nam", f"Năm {nam} của bạn", [x for x in doan3 if x], hop=_khong_trung_ma(hop3),
                    tom_tat=f"Cả năm {nam} nhìn từ {'ba cách xem và tập quán theo tuổi' if tv else 'năm cá nhân và tập quán theo tuổi'}.", can_cu=can_cu3, cau_tu_soi="Nếu năm này chỉ làm tốt một việc, bạn chọn việc gì?")
@@ -378,6 +464,15 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
                                 huong_xu_ly=f"Nên làm: {ng.get('nen', 'giữ nhịp đều, làm từng việc')}",
                                 can_cu=[f"Năm cá nhân {so_nam}"], ma=kh.ma_mau("thanso", "tranh", f"so{so_nam}")),
                          "thanso"))
+    xung = [k for k, o in lop12.items() if o["con_giap"]["quan_he"] == "xung"]
+    if xung:
+        cg = next(iter(lop12.values()))
+        hop4.append(_gan(kh.hop("luu_y", f"Tháng xung tuổi {cg['chi_tuoi']} trong 12 tháng tới: {', '.join(xung)}",
+                                f"Theo con giáp, {', '.join(xung)} là tháng xung tuổi bạn — dân gian nhắc đi chậm với việc lớn.",
+                                huong_xu_ly="Ký kết, chuyển nhà, khởi công nên đặt ngoài những tháng này; nếu buộc làm, chọn "
+                                            "ngày đẹp trong tháng và đọc kỹ giấy tờ.",
+                                can_cu=[f"Tháng theo tiết chứa ngày 15 có chi đối xung với tuổi {cg['chi_tuoi']}"],
+                                ma=kh.ma_mau("tgt", "xung_thang", L.slug(cg["chi_tuoi"]))), "con_giap"))
     hn = tdg.han_nam_luan(nam)
     phuong = "; ".join(f"{x['ten']} ở {x['phuong']}" for x in hn["huong_tranh"])
     hop4.append(_gan(kh.hop("luu_y", f"Năm {nam}: phương nên tránh động thổ lớn",

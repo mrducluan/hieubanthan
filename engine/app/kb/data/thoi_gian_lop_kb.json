@@ -1,0 +1,82 @@
+{
+  "_nguon": "TG-V2 (2026-11-01): lời từng lớp của mỗi tháng trong \"Thời gian tới của bạn\" — con giáp (chi tháng theo tiết ↔ chi tuổi), phong thuỷ (sao bay của tháng × hướng hợp mệnh quái), ngày đẹp trong tháng. Nháp ban biên tập (AI hỗ trợ), viết trung tính: gợi ý sắp việc, không dự báo, không vật phẩm, không cúng giải.",
+  "source": {
+    "id": "dan_gian_vn",
+    "ten": "Tập quán con giáp Việt Nam · Huyền Không phi tinh (Thẩm thị) · Bát trạch · hoàng lịch"
+  },
+  "source_id": "thoi_gian_lop_2026",
+  "school_id": "dan_gian_vn",
+  "trang_thai": "nhap_ai",
+  "con_giap": {
+    "tam_hop": {
+      "loai": "thuan",
+      "nhan": "Tháng {chi_thang} tam hợp với tuổi {chi_tuoi}",
+      "loi": "Dân gian xem là tháng dễ gặp người cùng chí hướng. Hợp rủ thêm người làm chung, nhận lời hợp tác."
+    },
+    "luc_hop": {
+      "loai": "thuan",
+      "nhan": "Tháng {chi_thang} lục hợp với tuổi {chi_tuoi}",
+      "loi": "Dân gian xem là tháng dễ có người giúp đúng lúc. Hợp nhờ việc, hẹn gặp người cũ, nói chuyện khó."
+    },
+    "trung": {
+      "loai": "trung",
+      "nhan": "Tháng {chi_thang} trùng tuổi {chi_tuoi}",
+      "loi": "Tháng cùng con giáp với bạn. Dân gian hay nhắc giữ nếp, việc gì cũng có kế hoạch rõ trước khi làm."
+    },
+    "xung": {
+      "loai": "luu_y",
+      "nhan": "Tháng {chi_thang} xung tuổi {chi_tuoi}",
+      "loi": "Dân gian nhắc đi chậm một nhịp với việc lớn trong tháng: đọc kỹ giấy tờ, chưa vội ký, giữ hoà khí trong nhà."
+    },
+    "hinh": {
+      "loai": "luu_y",
+      "nhan": "Tháng {chi_thang} hình với tuổi {chi_tuoi}",
+      "loi": "Dân gian xem là tháng dễ va chạm nhỏ. Nói chậm lại, việc chung nên ghi rõ phần ai nấy làm."
+    },
+    "hai": {
+      "loai": "luu_y",
+      "nhan": "Tháng {chi_thang} hại với tuổi {chi_tuoi}",
+      "loi": "Dân gian xem là tháng dễ hiểu lầm. Hẹn gì nên nhắn lại bằng chữ, hỏi lại trước khi trách."
+    },
+    "binh": {
+      "loai": "trung",
+      "nhan": "Tháng {chi_thang} với tuổi {chi_tuoi}: bình thường",
+      "loi": "Không hợp, không xung theo con giáp. Việc trong tháng cứ theo kế hoạch của bạn."
+    }
+  },
+  "phong_thuy": {
+    "sao_tot": {
+      "9": "chuyện vui, được người khác biết tới",
+      "1": "tin tốt, gặp người giúp",
+      "8": "tiền bạc, nhà đất giữ được ổn định"
+    },
+    "goc_hop": "Góc {phuong} trong nhà vừa là hướng hợp bạn, vừa đón sao tốt của tháng ({y}). Hợp đặt bàn làm việc, chỗ ngồi đọc hoặc việc cần tập trung ở góc ấy.",
+    "goc_tot": "Sao tốt của tháng ({y}) bay tới góc {phuong}. Góc ấy giữ sáng, thoáng, gọn là đủ.",
+    "goc_yen": "Góc {phuong} tháng này nên giữ yên: không khoan đục, không dồn đồ nặng, giữ gọn.",
+    "goc_yen_hai": "Góc {a} và góc {b} tháng này nên giữ yên: không khoan đục, không dồn đồ nặng, giữ gọn.",
+    "thieu_gioi": "Thêm giới tính trong hồ sơ để biết góc nào trong nhà hợp riêng bạn mỗi tháng.",
+    "nam_goc_hop": "Năm {nam}, góc {phuong} trong nhà vừa là hướng hợp bạn, vừa đón sao tốt của năm ({y}). Đó là chỗ đáng đặt bàn làm việc, giường ngủ hoặc góc học cả năm.",
+    "nam_goc_tot": "Năm {nam}, sao tốt của năm ({y}) bay tới góc {phuong}. Góc ấy giữ sáng, thoáng, gọn quanh năm.",
+    "nam_can_cu": "Sao năm {nam} theo Huyền Không (trung cung {tam}){chi_tiet}; mệnh quái {quai} theo năm sinh và giới tính (Bát trạch)."
+  },
+  "ngay_dep": {
+    "loi": "Ngày đẹp để khởi sự trong tháng, không xung tuổi bạn: {ds}.",
+    "khong_co": "Tháng này không có ngày nào đủ điều kiện khởi sự hợp tuổi bạn — việc lớn nên để sang tháng sau hoặc xem kỹ ở Xem ngày tốt.",
+    "can_cu": "Hoàng lịch: ngày có \"khai trương\" trong mục Nên, không trong mục Kiêng, trực tốt, không xung tuổi, tránh ngày kiêng dân gian."
+  },
+  "noi_bat": {
+    "tieu_de": "Tháng hội nhiều cách thuận nhất: {ds}",
+    "loi": "Trong 12 tháng tới, đây là những tháng có nhiều cách xem cùng nói thuận ({ly_do}). Hợp để dành cho việc bạn muốn bắt đầu hoặc chốt.",
+    "di_cham_tieu_de": "Tháng nên đi chậm một nhịp: {ds}",
+    "di_cham_loi": "Những tháng này nhiều cách xem cùng nhắc thận trọng ({ly_do}). Việc lớn nên chuẩn bị kỹ hơn và để dư thời gian.",
+    "can_cu": "Đếm theo từng lớp đã tính: con giáp hợp tuổi, sao tốt của tháng vào góc hợp mệnh, mức Tử vi / Bát tự của tháng. Không phải điểm số."
+  },
+  "ten_lop": {
+    "thanso": "Thần số",
+    "con_giap": "Con giáp",
+    "phong_thuy": "Phong thuỷ",
+    "ngay_dep": "Ngày đẹp",
+    "tuvi": "Tử vi",
+    "battu": "Bát tự"
+  }
+}
