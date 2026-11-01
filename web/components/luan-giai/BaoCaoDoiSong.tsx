@@ -18,6 +18,7 @@ import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 import { BieuDoNguHanh, DaiVanHaiCach, ThanhThan } from "./BieuDoBatTu";
 import { DongMuoiNam } from "./DongMuoiNam";
+import { SaoLuuNam } from "./SaoLuuNam";
 import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
 import { ChuQua } from "./ChuQua";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
@@ -271,6 +272,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
         {thoiGian && thoiGian.length > 0 && <DaiVanHaiCach ds={thoiGian} />}
         {thoiGian && thoiGian.length > 0 && <DongThoiGian ds={thoiGian} />}
         {c.dong_nam && c.dong_nam.length > 0 && <DongMuoiNam ds={c.dong_nam} thang={c.thang_toi} />}
+        {c.sao_luu && c.sao_luu.muc.length > 0 && <SaoLuuNam sl={c.sao_luu} />}
         {hop.length > 0 && (
           <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
             {hop.map((h, k) => <HopNoiBat key={`${h.ma_mau ?? h.tieu_de}-${k}`} hop={h} thuatNgu={c.thuat_ngu} />)}

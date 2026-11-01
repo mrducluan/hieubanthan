@@ -340,13 +340,33 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
         return m
 
     dh = cung[h["decadal"]["index"]]["decadal"]["range"]
+    if chi_tiet:
+        _ln = h["yearly"]
+        _ln_vong = _ln.get("suiqian12", [])
     return {
         "tuoi_mu": h["age"]["nominalAge"],
         "dai_han": {**_lop(h["decadal"]), "tu_tuoi": dh[0], "den_tuoi": dh[1],
                     "cung_goc": cung[h["decadal"]["index"]]["name"]},
         "tieu_han": {**_lop(h["age"], False), "cung_goc": cung[h["age"]["index"]]["name"]},
-        "luu_nien": {**_lop(h["yearly"]), "cung_goc": cung[h["yearly"]["index"]]["name"]},
+        "luu_nien": {**_lop(h["yearly"]), "cung_goc": cung[h["yearly"]["index"]]["name"],
+                     **({"vong_thai_tue": _ln_vong} if chi_tiet else {})},
     }
+
+
+# EN-5.2 — sao lưu năm: tên iztro (vi-VN) → mã; vị trí đọc từ kết quả iztro (stars + suiqian12), không tự tính lại.
+_SAO_LUU = {"Lưu Lộc": "loc", "Lưu Dương": "kinh", "Lưu Đà": "da", "Lưu Mã": "ma", "Lưu Khôi": "khoi",
+            "Lưu Việt": "viet", "Lưu Xương": "xuong", "Lưu Khúc": "khuc", "Lưu Loan": "loan", "Lưu Hỷ": "hy"}
+_VONG_LUU = {"Tuế Kiện": "thai_tue", "Tang Môn": "tang_mon", "Bạch Hổ": "bach_ho", "Điếu Khách": "dieu_khach"}
+_CHI_CUNG = ["Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu"]   # chỉ số 0 = cung Dần
+
+
+def sao_luu_nam(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date, **kw) -> dict:
+    """Sao lưu của năm (lưu niên) tại `ngay_xem`: {"can", "chi", "sao": {mã: chi cung}, "vong": {mã: chi cung}}.
+    Cùng lời gọi iztro (đã nhớ) với `van_han`."""
+    ln = van_han(ngay_duong, ti, gioi_tinh, ngay_xem, chi_tiet=True, **kw)["luu_nien"]
+    sao = {_SAO_LUU[t]: _CHI_CUNG[i] for i, ds in enumerate(ln.get("sao", [])) for t in ds if t in _SAO_LUU}
+    vong = {_VONG_LUU[t]: _CHI_CUNG[i] for i, t in enumerate(ln.get("vong_thai_tue", [])) if t in _VONG_LUU}
+    return {"can": ln["can"], "chi": ln["chi"], "sao": sao, "vong": vong}
 
 
 

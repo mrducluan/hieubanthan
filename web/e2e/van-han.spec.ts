@@ -135,3 +135,31 @@ test("SAO-2: chương Vận hạn khoá chỉ hiện tiêu đề + lời mời, 
   const chu = await page.getByTestId("luan-giai-toan-bo").innerText();
   for (const g of vh(FX_TV.bao_cao).dong_nam) expect(chu).not.toContain(g.y);
 });
+
+// EN-5.2 — sao lưu năm trong chương Vận hạn (mẫu lấy nguyên văn từ engine: lá 17/05/1990 giờ Ngọ, nam, xem 01/11/2026).
+const SAO_LUU = {
+  nam: 2026, can_chi: "Bính Ngọ", loi_chu_y: "Năm 2026, Bạch Hổ lưu (chuyện nhà cửa) rơi đúng mảng chính của bạn — không phải điềm xấu, chỉ là chỗ nên chậm lại, làm kỹ hơn.",
+  kep_loc: "Kình Dương và Đà La lưu luôn đứng hai bên Lộc Tồn lưu: cái lợi ở chuyện ra ngoài, đi xa năm 2026 đến kèm việc phải tranh thủ và việc chậm trễ quanh nó — giữ được thì lợi, vội thì dễ hao.",
+  muc: [
+    { ma: "loc", ten: "Lộc Tồn lưu", cac_cung: ["Thiên Di"], loi: "Chuyện ra ngoài, đi xa năm 2026 có phần được giữ vững, đều đặn — cái lợi đến từ sự bền bỉ, làm chắc tay hơn là làm lớn.", nen_lam: "Giữ nhịp đều ở mảng này: việc gì đang chạy tốt thì duy trì, đừng vội mở rộng." },
+    { ma: "kinh", ten: "Kình Dương lưu", cac_cung: ["Tật Ách"], loi: "Năm 2026 nên chăm sức khoẻ kỹ hơn thường lệ: giữ nhịp ngủ nghỉ, đi lại và làm việc nặng cẩn thận hơn.", nen_lam: "Khám sức khoẻ định kỳ trong năm — đây là lời nhắc phòng ngừa, không thay lời bác sĩ." },
+  ],
+};
+
+test("EN-5.2 Tử vi: sao lưu năm hiện trong chương Vận hạn, tên sao chỉ trong 'Vì sao nói vậy'; khoá SAO-2 không lộ", async ({ page }) => {
+  const BC = structuredClone(FX_TV.bao_cao) as unknown as { chuong: Record<string, unknown>[] };
+  BC.chuong.find((c) => c.ma === "van_han")!.sao_luu = SAO_LUU;
+  await mo(page, "tu-vi", BC);
+  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  const ch = page.getByTestId("lg-chuong-van_han");
+  await ch.getByTestId("lg-mo-chuong").click();
+  const k = ch.getByTestId("sao-luu-nam");
+  await expect(k.getByRole("heading")).toHaveText("Năm 2026 nhìn theo sao lưu");
+  await expect(k).toContainText("không thay lời bác sĩ");
+  await expect(k.locator("> ul")).not.toContainText("Kình Dương");
+  await expect(k.locator("details")).not.toHaveAttribute("open", "");
+  await k.getByText("Vì sao nói vậy").click();
+  await expect(k.locator("details")).toContainText("Kình Dương lưu: cung Tật Ách");
+  const khoa = catXemTruoc(BC as unknown as BaoCaoDay, 1);
+  expect(JSON.stringify(khoa)).not.toContain("Lộc Tồn lưu");
+});
