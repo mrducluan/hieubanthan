@@ -2756,6 +2756,112 @@
    "de_hieu": "Một hàng 3 ô thẳng trên biểu đồ ngày sinh đều có số (mũi tên sức mạnh) hoặc đều trống (mũi tên trống) — chỉ một nét tính cách nổi bật.",
    "vi_du": null,
    "tu_dong": true
+  },
+  {
+   "ma": "pitago",
+   "ten": "Pitago (Pythagoras)",
+   "bien_the": [
+    "Pythagoras",
+    "Pitago"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": "khai_niem",
+   "de_hieu": "Cách tính thần số phổ biến nhất ở Việt Nam: mỗi chữ cái ứng với một số từ 1 đến 9 theo thứ tự bảng chữ, cộng ngày sinh và họ tên rồi rút gọn. Có số cái 11, 22, 33.",
+   "vi_du": "Chữ A là 1, B là 2 … I là 9, J lại là 1.",
+   "tu_dong": true
+  },
+  {
+   "ma": "chaldea",
+   "ten": "Chaldea",
+   "bien_the": [
+    "Chaldean"
+   ],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": "khai_niem",
+   "de_hieu": "Cách tính thần số cổ hơn, gán số 1 đến 8 cho chữ cái theo âm đọc (không có số 9), coi trọng tên thường gọi và các số kép từ 10 đến 52.",
+   "vi_du": "Cùng một tên, Pitago và Chaldea có thể ra hai con số khác nhau — hai góc nhìn, không phải một đúng một sai.",
+   "tu_dong": true
+  },
+  {
+   "ma": "so_kep",
+   "ten": "Số kép",
+   "bien_the": [],
+   "han": null,
+   "mo_dun": "thanso",
+   "nhom": "khai_niem",
+   "de_hieu": "Con số hai chữ số trước khi rút gọn (ví dụ 23 trước khi cộng thành 5). Phái Chaldea đọc riêng nghĩa của số kép, bổ sung cho số gốc.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "tai_tinh",
+   "ten": "Tài tinh",
+   "bien_the": [],
+   "han": "財星",
+   "mo_dun": "battu",
+   "nhom": "khai_niem",
+   "de_hieu": "Tên chung của Chính Tài và Thiên Tài — hành mà nhật chủ khắc. Trong Bát tự, Tài tinh nói về tiền bạc, của cải và với nam giới còn gắn với người vợ.",
+   "vi_du": "Nhật chủ Mộc thì Tài tinh là Thổ (Mộc khắc Thổ).",
+   "tu_dong": true
+  },
+  {
+   "ma": "quan_tinh",
+   "ten": "Quan tinh",
+   "bien_the": [],
+   "han": "官星",
+   "mo_dun": "battu",
+   "nhom": "khai_niem",
+   "de_hieu": "Tên chung của Chính Quan và Thất Sát — hành khắc nhật chủ. Nói về kỷ luật, cấp trên, công việc có khuôn phép; với nữ giới còn gắn với người chồng.",
+   "vi_du": "Nhật chủ Thủy thì Quan tinh là Thổ (Thổ khắc Thủy).",
+   "tu_dong": true
+  },
+  {
+   "ma": "an_tinh",
+   "ten": "Ấn tinh",
+   "bien_the": [],
+   "han": "印星",
+   "mo_dun": "battu",
+   "nhom": "khai_niem",
+   "de_hieu": "Tên chung của Chính Ấn và Thiên Ấn — hành sinh ra nhật chủ. Nói về học hành, sự che chở, người nâng đỡ và giấy tờ.",
+   "vi_du": "Nhật chủ Hỏa thì Ấn tinh là Mộc (Mộc sinh Hỏa).",
+   "tu_dong": true
+  },
+  {
+   "ma": "khoi_van",
+   "ten": "Khởi vận",
+   "bien_the": [],
+   "han": "起運",
+   "mo_dun": "battu",
+   "nhom": "khai_niem",
+   "de_hieu": "Tuổi bắt đầu bước vào đại vận đầu tiên, tính từ ngày sinh tới tiết khí gần nhất (ba ngày tính là một năm). Trước tuổi này, lá số đọc theo trụ tháng.",
+   "vi_du": null,
+   "tu_dong": true
+  },
+  {
+   "ma": "luu_nien_bt",
+   "ten": "Lưu niên",
+   "bien_the": [],
+   "han": "流年",
+   "mo_dun": "battu",
+   "nhom": "khai_niem",
+   "de_hieu": "Can chi của từng năm (tính từ Lập xuân) đặt cạnh tứ trụ để xem năm đó tác động thế nào tới nhật chủ: hợp sức với hành cần thêm thì thuận, đè lên chỗ yếu thì nên chậm lại.",
+   "vi_du": "Năm 2027 Đinh Mùi: can Đinh (Hỏa), chi Mùi (Thổ).",
+   "tu_dong": true
+  },
+  {
+   "ma": "huyen_khong_pt",
+   "ten": "Huyền Không phi tinh",
+   "bien_the": [
+    "Huyền Không"
+   ],
+   "han": "玄空飛星",
+   "mo_dun": "phongthuy",
+   "nhom": "khai_niem",
+   "de_hieu": "Trường phái xét chín sao bay theo thời gian (vận 20 năm, năm, tháng) chồng lên hướng nhà — dùng chủ yếu để chọn lúc sửa chữa, động thổ và phía nên giữ yên.",
+   "vi_du": null,
+   "tu_dong": true
   }
  ]
 }
