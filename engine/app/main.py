@@ -33,7 +33,7 @@ from app.luangiai import thanso as luangiai_thanso
 from app.luangiai import ban_do_con_so, noi_dau, phai_nao_dung, the_ngay, tong_hop
 from app.luangiai.hop_doi import luan_hop_doi, luan_hop_doi_tu_chi_so
 from app import nhat_ky
-from app.narrative import hoi_van, llm as narrative_llm, ngan_sach
+from app.narrative import hoi_van, ngan_sach
 from app.battu_api import router as battu_router
 from app.y_dinh_api import router as y_dinh_router
 from app.push_api import router as push_router
@@ -400,18 +400,6 @@ def api_ngu_canh(inp: NguCanhInput) -> dict:
     return {"engine_version": ENGINE_VERSION,
             **tong_hop.ngu_canh(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.cau_hoi.strip(),
                                 inp.ngay_xem or _hom_nay_vn(), inp.quy_uoc_duong_doi)}
-
-
-@app.post("/v1/thanso/van")
-def api_luan_giai_van(inp: ThanSoInput) -> dict:
-    """Bản luận CHI TIẾT — văn xuôi qua LLM (nếu có key), ngược lại template.
-
-    Dành cho gói xem sâu. LLM chỉ diễn đạt lại bản luận có cấu trúc, cấm thêm
-    dữ kiện (xem app/narrative/llm.py). Lỗi LLM tự rơi về template, không sập.
-    """
-    inp.kiem_tra_ngay()
-    reading = luangiai_thanso.luan_giai(inp.ho_ten, inp.ngay, inp.thang, inp.nam, quy_uoc=inp.quy_uoc_duong_doi)
-    return narrative_llm.dien_dat(reading)
 
 
 class NguoiKia(BaseModel):

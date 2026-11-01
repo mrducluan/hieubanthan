@@ -16,13 +16,11 @@ import os
 import re
 from concurrent.futures import ThreadPoolExecutor
 
-import httpx
+import httpx  # noqa: F401 — test giả lập httpx.Client qua module này; lời gọi thật ở ai_goi
 
 from app.kb import tuvi_kb
 from app.narrative import hoi_van
 from app.narrative.ngan_sach import mo_ta_loi
-from app.narrative import llm as _llm
-from app.narrative import ngan_sach as _ngan_sach
 
 THAP_THAN = ["Tỷ Kiên", "Kiếp Tài", "Thực Thần", "Thương Quan", "Thiên Tài", "Chính Tài", "Thất Sát",
              "Chính Quan", "Thiên Ấn", "Chính Ấn"]
@@ -85,18 +83,15 @@ def kiem_tra_chuong(van: str, nguon: str) -> list[str]:
 
 
 def _goi_llm(tieu_de: str, doan: list[str], mo_dun: str) -> str:
-    _ngan_sach.kiem_luot()   # RL-1: mỗi chương một lượt
-    key = os.environ.get("OPENROUTER_API_KEY")
-    model = os.environ.get("OPENROUTER_MODEL", _llm.DEFAULT_MODEL)
+    # EN-4: một hàm gọi AI chung; RL-1 mỗi chương một lượt (chương đã diễn đạt cùng gói → nhớ, không tốn lượt).
+    # max_tokens theo độ dài nguồn (bản AI ≤ ~1,5 lần nguồn; tiếng Việt ~2–3 ký tự / token).
+    from app.narrative import ai_goi  # noqa: PLC0415
     ten = {"tuvi": "Tử vi", "battu": "Bát tự"}.get(mo_dun, mo_dun)
-    with httpx.Client(timeout=40) as c:
-        r = c.post(_llm.OPENROUTER_URL,
-                   headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-                   json={"model": model, "temperature": 0.4, "messages": [
-                       {"role": "system", "content": _SYSTEM.format(mo_dun=ten, cum_cam="; ".join(f'"{c}"' for c in _cum_cam()))},
-                       {"role": "user", "content": json.dumps({"chuong": tieu_de, "doan": doan}, ensure_ascii=False)}]})
-        r.raise_for_status()
-        return r.json()["choices"][0]["message"]["content"].strip()
+    nguon = len(tieu_de) + sum(len(d) for d in doan)
+    return ai_goi.goi_chat(
+        [{"role": "system", "content": _SYSTEM.format(mo_dun=ten, cum_cam="; ".join(f'"{c}"' for c in _cum_cam()))},
+         {"role": "user", "content": json.dumps({"chuong": tieu_de, "doan": doan}, ensure_ascii=False)}],
+        nhiet_do=0.4, max_tokens=max(250, min(1200, nguon * 3 // 4)), het_gio=40).strip()
 
 
 def _mot_chuong(c: dict, mo_dun: str) -> dict:

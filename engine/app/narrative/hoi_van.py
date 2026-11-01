@@ -18,15 +18,13 @@ import json
 import os
 import re
 
-import httpx
+import httpx  # noqa: F401 — test giả lập httpx.Client qua module này; lời gọi thật ở ai_goi
 
 from app.config import hom_nay_vn as _hom_nay_vn  # EN-1: ngày mặc định theo giờ VN
 from app.luangiai import hoi, noi_dau, truc_quan
 from app.luangiai import thanso_chaldean as _chaldea
 from app.luangiai import tong_hop as _tong_hop
-from app.narrative import llm as _llm
 from app.narrative.ngan_sach import mo_ta_loi
-from app.narrative import ngan_sach as _ngan_sach
 
 KET = ("Đây là góc nhìn tham khảo văn hoá để bạn tự soi, không phải lời tiên đoán "
        "về đời bạn.")
@@ -189,18 +187,12 @@ RÀNG BUỘC TUYỆT ĐỐI:
 
 
 def _goi_llm(goi: dict, cau_hoi: str) -> str:
-    _ngan_sach.kiem_luot()   # RL-1: hết lượt → HetLuot, nơi gọi rơi về template
-    key = os.environ.get("OPENROUTER_API_KEY")
-    model = os.environ.get("OPENROUTER_MODEL", _llm.DEFAULT_MODEL)
+    # EN-4: một hàm gọi AI chung (max_tokens, thử lại, nhớ theo mã băm); RL-1 hết lượt → HetLuot, nơi gọi rơi về template
+    from app.narrative import ai_goi  # noqa: PLC0415
     gon = {"cau_hoi": cau_hoi, "muc": goi["muc"], "luu_y": goi.get("luu_y")}
-    with httpx.Client(timeout=45) as c:
-        r = c.post(_llm.OPENROUTER_URL,
-                   headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-                   json={"model": model, "temperature": 0.5, "messages": [
-                       {"role": "system", "content": _SYSTEM_GOI},
-                       {"role": "user", "content": json.dumps(gon, ensure_ascii=False)}]})
-        r.raise_for_status()
-        return r.json()["choices"][0]["message"]["content"]
+    return ai_goi.goi_chat([{"role": "system", "content": _SYSTEM_GOI},
+                            {"role": "user", "content": json.dumps(gon, ensure_ascii=False)}],
+                           nhiet_do=0.5, max_tokens=900)
 
 
 # --------------------------------------------------------------------------- #
