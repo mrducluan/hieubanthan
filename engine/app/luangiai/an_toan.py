@@ -26,7 +26,21 @@ KHUNG_HOANG: list[tuple[str, str | None]] = [
     (r"tu sat", r"tự sát"), (r"ket lieu (ban than|doi|minh|cuoc)", None), (r"tu thieu", None),
     (r"tu (ket thuc|ket lieu) (doi|cuoc doi|cuoc song|ban than)", None),
     (r"muon ket thuc(?! (du an|hop dong|moi quan he|quan he|viec|cong viec|khoa hoc))", None),
-    (r"ket thuc (cuoc doi|tat ca|het)( cho xong| di)?", None), (r"cham dut (tat ca|cuoc doi|moi thu|cuoc song)", None),
+    (r"ket thuc (cuoc doi|tat ca|het)( cho xong| di)?", None),
+    # EN-3 (bộ dev): nói tránh — "đi luôn cho rảnh nợ", "kết thúc / buông hết mọi thứ cho xong" (không chặn "làm đi luôn
+    # cho xong việc", "đi luôn cho kịp chuyến bay", "kết thúc mối quan hệ cho xong")
+    (r"(?<!lam )(?<!noi )(?<!viet )di luon cho (ranh no|xong|nhe nguoi|nhe no|thoat)", None),
+    (r"(ket thuc|buong (het|bo)|bo het) moi thu cho (xong|roi|nhe|ranh)(?! voi| (di|de) | dau| dau oc| long)", None),
+    # review EN-3: nói tránh còn lọt — "tôi là gánh nặng", "muốn đi luôn" (hết câu), "không muốn tỉnh dậy", "chẳng
+    # bằng chết", "mệt quá muốn buông hết" (không chặn "gánh nặng tài chính", "đi luôn chuyến bay sáng mai")
+    (r"(toi|minh|em|con|tao|tui) (chi )?la (mot |cai )?ganh nang(?! (tai chinh|tien|cong viec|kinh te|no|gi))", None),
+    # "đi luôn" chỉ là khủng hoảng khi đi cùng lời buồn chán / gánh nặng (code-review: "Mai mình định đi luôn")
+    (r"(met|chan|ganh nang|buon|vo nghia|that vong|het chiu|kho qua|tuyet vong|khong thiet).{0,60}(muon|nen) di luon"
+     r"( khong| nhi| cho xong)?" + _H, None),
+    (r"khong muon (tinh|thuc) day( nua| luon| mai)?" + _H, None),
+    (r"(chang|khong|thua) bang (chet|chet di|chet quach)", None),
+    (r"met (qua|lam|moi|roi).{0,20}muon buong (het|xuoi|tay|bo het)" + _H
+     + r"|muon buong xuoi (tat ca|het|cho xong)", None), (r"cham dut (tat ca|cuoc doi|moi thu|cuoc song)", None),
     (r"(uong|nuot) het (ca )?(vi |lo |hop )?(thuoc|vi thuoc)", None), (r"mua san thuoc ngu", None),
     (r"nhay (xuong|lau|cau|song)|nhay tu tang", r"nhảy (xuống|lầu|cầu|sông)|nhảy từ tầng"),
     (r"cat tay|rach tay|tu hai (ban than|minh)|tu lam dau|(muon|hay|thuong) lam dau (ban than|chinh minh)",
@@ -111,6 +125,12 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
      r"(bỏ|ngưng|ngừng|dừng) (uống )?thuốc (điều trị|huyết áp|tiểu đường|tim|ung thư|tây|bác sĩ|chống trầm cảm)"
      r"|(bỏ|ngưng|ngừng|dừng) (hoá|hóa) trị|(ngưng|ngừng|dừng|bỏ) điều trị|thay (cho )?thuốc (bác sĩ|điều trị)"
      r"|(uống|dùng) thuốc nam (thay|để chữa)", "suc_khoe_the_chat"),
+    # EN-3 (bộ dev): quyết định mổ / phẫu thuật thay lời bác sĩ ("mổ" không dấu trùng "mở" → chữ không dấu cần ngữ cảnh y khoa)
+    (r"(bac si|benh vien).{0,40}(nen|co nen) mo( (mat|ruot|tim|u|khoi u|soi|lay|tuyen|xuong|bung|de)\b|(?= khong| hay)"
+     r"|(?=\s*[,.!?;]|\s*$))|(nen|co nen) (phau thuat|mo) hay (uong|chua|dieu tri|dung) thuoc"
+     r"|phau thuat hay (uong|chua|dieu tri)|(co )?nen phau thuat (khong|hay)",
+     r"(có )?nên mổ (không|hay)|mổ hay (uống|chữa|điều trị|dùng)|(có )?nên phẫu thuật|phẫu thuật hay (uống|chữa|điều trị)",
+     "suc_khoe_the_chat"),
     (r"(chet|qua doi) vi benh gi|benh gi (se )?(chet|qua doi)", r"(chết|qua đời|mất) vì bệnh gì", "suc_khoe_the_chat"),
     # tuổi chết / sống được bao lâu (tương lai — không chặn câu hỏi về người đã mất, ngày giỗ)
     (r"may tuoi (thi |se )?(" + _AI_KD + r" )?(se )?(chet|qua doi)|(?:^|[,.!?;] )" + _AI_KD

@@ -6,9 +6,12 @@ Tái dùng bộ chuẩn hoá và danh sách an toàn/từ chối của thần s�
 """
 from __future__ import annotations
 
+import re
+
 from app.luangiai import hoi as _h
 
 chuan_hoa = _h.chuan_hoa
+chuan_hoa_cau = _h.chuan_hoa_cau          # EN-3: câu hỏi (mở viết tắt) — dùng ở chỗ định tuyến
 co = _h._co
 dem = _h._dem
 
@@ -18,7 +21,7 @@ from app.luangiai import an_toan as _at  # noqa: E402
 
 # Từ chối nhẹ: bộ Thần số dùng chung TRỪ các cụm Huyền học trả lời được theo kiểu "định hướng" (MT-ĐS mục 4):
 # "chắc chắn" (B0); "tai nạn", "thắng kiện" (B1: trả lời bằng mảng đi lại / giấy tờ + lưu ý, không có/không).
-_BO_CHAN_HH = {r"chac chan", r"tai nan", r"thang kien"}
+_BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khong|nam nay|nam sau)", r"thang kien"}
 TU_CHOI_THEM = [r"so de", r"song duoc bao lau", r"nao chet", r"tho bao nhieu", r"doan benh",
                 r"benh gan", r"yem bua", r"chua duoc benh", r"nen tuyen", r"tuyen nhan vien",
                 r"de quyet dinh tuyen", r"chon so lo", r"so lo"]
@@ -161,3 +164,126 @@ def nam_xem_hh(nam_cau: int | None, ngay_xem, t: str) -> tuple[int, int]:
     lx = huyen_khong.nam_theo_lap_xuan(_dt.datetime(ngay_xem.year, ngay_xem.month, ngay_xem.day, 5))   # 12:00 giờ VN
     am = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)[2]
     return lx + them, am + them
+
+
+
+# ---- EN-3 (mục 3): "trả lời trước" — đoạn khớp câu hỏi nhất lên đầu phần thân (chỉ đổi thứ tự).
+_DAU_CO_DINH = (r"^Tứ trụ \(năm", r"^Tuổi mụ tại thời điểm xem", r"^Mệnh quái \(cung phi\) của bạn",
+                r"^Theo tục xếp theo tuổi")          # MT-ĐS B3: tập quán đứng trước lá số (có chủ ý)
+_CHAN = (r"^Câu hỏi để tự soi", r"^Đây là góc nhìn tham khảo", r"^Bát trạch là một trường phái", r"^Lưu ý:",
+         r"^Lời này không thay", r"^Tham khảo văn hoá")
+# Đoạn không bao giờ đưa lên đầu (review EN-3): tự soi / lưu ý / ranh giới giữa bài, đoạn chuyên môn (thang điểm, dụng
+# thần, đại hạn của người hỏi khi câu nói về con…), dòng dữ kiện.
+_KHONG_LEN = (r"^Câu hỏi để tự soi", r"^Lưu ý", r"^Phần này chỉ nói", r"^Ngũ hành", r"^Dụng thần", r"^Giai đoạn mười năm",
+              r"^Năm đang xem", r"^Tứ trụ", r"^Đây là góc nhìn", r"^Tuổi mụ", r"^Đại vận", r"^Lời này không thay")
+_BO_TU = {"toi", "em", "minh", "ban", "co", "khong", "nen", "the", "nao", "gi", "la", "cua", "va", "voi", "cho", "thi",
+          "nay", "do", "nhu", "duoc", "hay", "bi", "se", "da", "dang", "mot", "nhung", "cac", "ve", "o", "tu", "den",
+          "lam", "sao", "xem", "giup", "a", "nhe", "vay", "roi", "con", "so", "nam", "thang", "ngay", "theo", "khi"}
+
+
+def _cum(t: str) -> set[str]:
+    w = [x for x in t.split() if len(x) > 1]
+    hai = {f"{a} {b}" for a, b in zip(w, w[1:]) if not (a in _BO_TU and b in _BO_TU)}
+    return hai | {x for x in w if x not in _BO_TU and len(x) >= 4}
+
+
+def tra_loi_truoc(van: str, t: str) -> str:
+    """Đưa lên đầu phần thân đoạn có nhiều cụm từ của câu hỏi nhất — chỉ khi đoạn đầu thân KHÔNG chung cụm nào với câu
+    hỏi và đoạn kia chung ≥ 2 cụm (thứ tự có chủ ý của từng mảng giữ nguyên khi đoạn đầu đã nói tới điều được hỏi).
+    Dòng đầu cố định (tứ trụ, tuổi mụ, mệnh quái, tập quán) và phần chân giữ chỗ; không thêm, không bớt chữ."""
+    if not van or not t:
+        return van
+    p = van.split("\n\n")
+    dau = 0
+    while dau < len(p) and any(re.match(m, p[dau]) for m in _DAU_CO_DINH):
+        dau += 1
+    chan = len(p)
+    while chan > dau and any(re.match(m, p[chan - 1]) for m in _CHAN):
+        chan -= 1
+    than = p[dau:chan]
+    if len(than) < 2:
+        return van
+    q = _cum(t)
+    diem = [0 if any(re.match(m, x) for m in _KHONG_LEN) else len(q & _cum(chuan_hoa(x))) for x in than]
+    tot = max(range(len(than)), key=lambda i: (diem[i], -i))
+    if tot == 0 or diem[0] > 0 or diem[tot] < 2:
+        return van
+    than = [than[tot]] + than[:tot] + than[tot + 1:]
+    return "\n\n".join(p[:dau] + than + p[chan:])
+
+
+
+_THU_MUC = {"thuan": 2, "can_bang": 1, "can_chu_dong": 0}
+
+
+def doan_so_nam(ds: list[dict]) -> str:
+    """EN-3: "Năm 2028 (Mậu Thân) với bạn: thuận lợi — … Năm 2029 …" + một câu so khi hai năm khác mức. `ds` = mục năm
+    đã chấm (nam, can_chi, muc, nhan_muc, y). Không điểm số; câu so chỉ nói năm nào thuận hơn theo mức đã có."""
+    # Review EN-3: mức của dòng 10 năm là mức CHUNG của năm (mảng nổi bật nhất năm đó), không phải mức riêng của việc
+    # được hỏi → nói rõ "mức chung", và câu so cũng chỉ so mức chung.
+    cau = []
+    for d in ds:
+        y = re.sub(rf"^Năm {d['nam']},\s*", "", d.get("y") or "").strip()
+        cau.append(f"Năm {d['nam']} ({d['can_chi']}) với bạn: {d['nhan_muc'].lower()}" + (f" — {y}" if y else "."))
+    if len(ds) >= 2:
+        tot = max(ds, key=lambda d: _THU_MUC.get(d["muc"], 1))
+        if len({_THU_MUC.get(d["muc"], 1) for d in ds}) > 1:
+            cau.append(f"Xét mức chung của cả năm, năm {tot['nam']} thuận hơn; riêng việc bạn hỏi, đọc thêm phần dưới "
+                       "trước khi chọn.")
+        else:
+            cau.append("Xét mức chung, các năm bạn hỏi ngang nhau — chọn năm nào tuỳ việc bạn chuẩn bị xong lúc nào.")
+    cau.insert(0, "Mức chung của từng năm theo lá số (mảng nổi bật nhất năm đó):")
+    return " ".join(c if c.endswith((".", "!", "?", ":")) else c + "." for c in cau)
+
+
+
+def nam_hoi_hh(t: str, ngay_xem, kieu_nam: str) -> list[int]:
+    """EN-3: các năm câu hỏi nêu, theo ranh giới năm của mảng (`kieu_nam` = "lap_xuan" | "am"). Chỉ trả khi có năm số
+    cụ thể, "năm sau", hoặc ≥ 2 năm — câu "năm nay" đơn thuần đã có lời riêng của từng mảng."""
+    from app.hoidap import hieu_cau  # noqa: PLC0415
+    ds = hieu_cau.thoi_gian(t, ngay_xem)
+    if not ds:
+        return []
+    ds = [x for x in ds if not x.get("thang")]          # câu chỉ hỏi tháng không thành đoạn "mức chung của năm"
+    if not ds:
+        return []
+    lx, am = nam_xem_hh(None, ngay_xem, "")             # năm đang đi theo ranh giới của mảng (không cộng "năm sau")
+    goc = lx if kieu_nam == "lap_xuan" else am
+    ra = []
+    for x in ds:
+        if x.get("tuong_doi"):
+            ra.append(goc + (1 if x["tuong_doi"] == "nam_sau" else 0))
+        elif "lech" in x:                               # "ba năm tới", "2 năm nữa": tính từ năm đang đi của mảng
+            ra.append(goc + x["lech"])
+        else:
+            ra.append(x["nam"])
+    ra = sorted(set(ra))
+    if len(ds) == 1 and ds[0].get("tuong_doi") == "nam_nay":
+        return []
+    return ra
+
+
+
+def hoi_lai_neu(pl: dict, mo_dun: str) -> dict | None:
+    """EN-3: khối "hỏi lại" khi câu rơi về mặc định (cờ `do_tin_thap`) và đang trả lời bình thường."""
+    if not pl.get("do_tin_thap") or pl.get("xu_ly") not in ("tra_loi", "tra_loi_kem_luu_y"):
+        return None
+    from app.hoidap import hieu_cau  # noqa: PLC0415
+    return hieu_cau.hoi_lai(mo_dun)
+
+
+def them_so_nam(goi: dict, dong: list[dict], nam_hoi: list[int], bo_qua_dau: tuple[str, ...]) -> None:
+    """EN-3: chèn mục `so_nam` (mức chung từng năm được hỏi, lấy từ dòng 10 năm của báo cáo — một nguồn) ngay sau các
+    mục đầu cố định `bo_qua_dau` (tứ trụ, tập quán sao hạn). Năm ngoài dòng 10 năm bỏ qua."""
+    from app.calc import lunar  # noqa: PLC0415
+    theo = {d["nam"]: d for d in dong}
+    ds = [theo[y] for y in nam_hoi if y in theo]
+    if not ds:
+        return
+    vt = 0
+    while vt < len(goi["muc"]) and vt < 2 and goi["muc"][vt]["loai"] in bo_qua_dau:
+        vt += 1
+    goi["muc"].insert(vt, {"loai": "so_nam", "nam": [
+        {"nam": d["nam"], "can_chi": " ".join(lunar.can_chi_nam(d["nam"])), "muc": d["muc"], "nhan_muc": d["nhan_muc"],
+         "y": d["y"], "mang": d.get("mang")} for d in ds]})
+    ket(goi)

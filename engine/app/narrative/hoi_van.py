@@ -71,7 +71,7 @@ def _doan(m: dict) -> tuple[str, str | None]:
             f"Năm cá nhân {m['so']}"
         return (f"{nam} — {m['chu_de']}: {m['y_nghia']} Nên: {m['nen']} Tránh: {m['tranh']}", None)
     if l == "thang_ca_nhan":
-        th = f"Tháng {m['thang']} là tháng cá nhân {m['so']}" if m.get("thang") else \
+        th = f"Tháng {m['thang']}{'/' + str(m['nam']) if m.get('nam') else ''} là tháng cá nhân {m['so']}" if m.get("thang") else \
             f"Tháng cá nhân {m['so']}"
         return f"{th} ({m['chu_de']}): {m['nen']} Tránh: {m['tranh']}", None
     if l == "thang_mo_dau":   # TS-NOIDAU: tháng cá nhân 1 trong 12 tháng tới (nhịp mở đầu, không phải ngày "tốt")
@@ -265,7 +265,10 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
         goi = noi_dau.bo_sung_goi(goi, cau_hoi, nguoi, ngay_xem)
         if phai == "tong_hop":
             goi = _goi_tong_hop(goi, pl, nguoi, ngay_xem)
+    from app.hoidap import chung as _chung  # noqa: PLC0415
     template = van_template(goi)
+    if not goi.get("thu_tu_co_dinh"):
+        template = _chung.tra_loi_truoc(template, pl["cau_chuan_hoa"])   # EN-3: đoạn khớp câu hỏi lên đầu
     co_key = bool(os.environ.get("OPENROUTER_API_KEY"))
     che_do, van, loi = "template", template, []
     if dung_llm and co_key and goi["muc"] and not goi["can_them"]:
@@ -280,6 +283,7 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
         "phai": phai,
         "phan_loai": goi["phan_loai"],
         "bang_chung": goi,
+        "hoi_lai": _chung.hoi_lai_neu(pl, "thanso"),   # EN-3
         "cau_tra_loi": van,
         "che_do": che_do,
         "da_bat_llm": che_do == "llm",

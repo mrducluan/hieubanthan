@@ -266,7 +266,7 @@ export function TuVi() {
                   ? <ChonYDinh cau={cau} /> : null;
               return d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null;
             },
-          ).then((kq) => (sauTraLoi ? { ...kq, sau: sauTraLoi } : kq)); }}
+          ).then((kq) => (sauTraLoi ? { ...kq, sau: sauTraLoi, hoiLai: null } : kq)); }}   // EN-3: một khối hỏi lại
         />
         </HanhDongTrucQuan.Provider>
       </section>

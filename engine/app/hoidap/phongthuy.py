@@ -11,7 +11,7 @@ import datetime as dt
 import re
 
 from app.calc import phongthuy as pt
-from app.hoidap import chung
+from app.hoidap import chung, hieu_cau
 from app.kb import phongthuy_kb as kb
 from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
@@ -35,7 +35,8 @@ NAM_KW = [r"nam nay", r"nam sau", r"nam 20\d\d"]
 NAM_VIEC = [r"sua nha", r"lam nha", r"dong tho", r"xay nha", r"ngu hoang", r"tranh dong", r"kim lau",
             r"hoang oc", r"tam tai", r"thai tue", r"xem tuoi"]
 HOP = [r"vo chong", r"ca hai", r"hai vo chong", r"vo toi", r"chong toi"]
-AM_TRACH = [r"mo phan", r"dat mo", r"tang thu", r"long mach", r"hai cot", r"boc mo", r"xay mo"]
+AM_TRACH = [r"mo phan", r"dat mo", r"tang thu", r"long mach", r"hai cot", r"boc mo", r"xay mo", r"ngoi mo",
+            r"mo (cua )?(ong|ba|bo|me|to tien)", r"mo (cu|ma) trong vuon"]
 
 
 def _huong_nhac(t: str) -> list[str]:
@@ -61,12 +62,12 @@ def _khop(bang: dict, t: str) -> list[str]:
 
 def phan_loai(cau_hoi: str) -> dict:
     _, t_chinh = _h._tach_gioi_thieu(cau_hoi)
-    t = chung.chuan_hoa(cau_hoi)
+    t = chung.chuan_hoa_cau(cau_hoi)
     if "," in cau_hoi:                     # "Tôi sắp mua nhà, …" — lời dẫn, không phải câu hỏi cá nhân
         dau, sau = cau_hoi.split(",", 1)
-        if re.match(r"(toi|em|minh|anh|chi|nha toi) (sap|dang|moi|vua|muon|chuan bi)\b", chung.chuan_hoa(dau)) \
-                and chung.chuan_hoa(sau):
-            t_chinh = chung.chuan_hoa(sau)
+        if re.match(r"(toi|em|minh|anh|chi|nha toi) (sap|dang|moi|vua|muon|chuan bi)\b", chung.chuan_hoa_cau(dau)) \
+                and chung.chuan_hoa_cau(sau):
+            t_chinh = chung.chuan_hoa_cau(sau)
     nam, gioi = _nam_gioi(cau_hoi, t)
     kq = {"cau_chuan_hoa": t, "loai": None, "xu_ly": "tra_loi", "huong": _huong_nhac(t),
           "quai": next((QUAI_KD[m] for m in re.findall(r"menh quai (kham|khon|chan|ton|can|doai|ly)\b", t)
@@ -92,6 +93,8 @@ def phan_loai(cau_hoi: str) -> dict:
     kq["van"] = int(m_van.group(1)) if m_van else None
     # HH-CT2: "phi tinh năm 2027 sao nào đến hướng Nam" = sao LƯU NIÊN (năm), không phải tinh bàn nhà theo vận
     if not kq["van"] and chung.co(t, NAM_KW) and chung.co(t, [r"phi tinh", r"sao (nao|gi)", r"cuu tinh",
+                                                    r"sao (xau|tot|du|lanh)", r"bay (toi|den|vao)",
+                                                    r"giu yen", r"(phia|huong) nao .{0,15}(tranh|kieng|xau)",
                                                     r"nhat bach|nhi hac|tam bich|tu luc|ngu hoang|luc bach|that xich|bat bach|cuu tu"]) \
             and not chung.co(t, [r"huyen khong", r"tinh ban", r"trach van"]):
         kq.update(loai="nam", xu_ly="tra_loi_kem_luu_y")
@@ -111,8 +114,15 @@ def phan_loai(cau_hoi: str) -> dict:
     elif chung.co(t, NAM_VIEC) and (chung.co(t, NAM_KW) or chung.co(t, [r"tuoi toi", r"xem tuoi"])) \
             or chung.co(t, [r"kim lau", r"hoang oc", r"tam tai", r"nam tuoi", r"sao han", r"muon tuoi"]):   # MT-ĐS B1
         kq.update(loai="nam", xu_ly="tra_loi_kem_luu_y")
-    elif chung.co(t, [r"(?<!vo )(vo|chong) (toi|minh) (sinh|tuoi|nam)"]) and nam and not chung.co(t, [r"vo chong"]):
-        kq["loai"], kq["kia_ro"] = "hop", True   # nêu rõ năm sinh vợ/chồng → tính luôn mệnh quái hai người
+    elif (n2 := hieu_cau.nguoi_thu_hai(t)) and n2["quan_he"] == "vo_chong" and n2.get("nam_sinh") \
+            and re.search(r"(?<!vo )\b(chong|vo)\b(?! chong)(\s+(toi|minh|em))?\s*(sn|sinh)?\s*(nam\s*)?(19\d\d|20[0-4]\d)", t):
+        # năm sinh phải gắn với MỘT vai ("vợ tôi sinh 1994", "ck sn 1985") — "vợ chồng tôi sinh 1990 và 1992" không
+        # biết năm nào của ai → không đoán giới tính, hỏi thêm (nhãn kho can_them_du_lieu)
+        # EN-3: nêu rõ năm sinh vợ/chồng (kể cả "ck sn 1985 vk sn 1991") → tính luôn mệnh quái hai người
+        kq["loai"], kq["kia_ro"], kq["nam_sinh_kia"] = "hop", True, n2["nam_sinh"]
+        kq["cac_nam_sinh"] = n2.get("cac_nam_sinh")
+    elif chung.co(t, [r"\b(vo|chong)\b"]) and len(re.findall(r"menh (kim|moc|thuy|hoa|tho)\b", t)) >= 2:
+        kq["loai"] = "hop"                       # EN-3: vợ chồng khác mệnh, chưa có năm sinh → hỏi năm sinh hai người
     elif chung.co(t, HOP) and (kq["ca_nhan"] or chung.co(t, [r"ca hai", r"hai vo chong"])) \
             and chung.co(t, [r"huong", r"hop", r"menh"]) \
             and ("vo_chong_khac_menh" not in kq["giai_thich"] or chung.co(t, [r"xem huong", r"cua toi", r"tuoi toi"])) \
@@ -120,14 +130,18 @@ def phan_loai(cau_hoi: str) -> dict:
         kq["loai"] = "hop"
     elif kq["giai_thich"] and not kq["ca_nhan"]:
         kq["loai"] = "ky_thuat"
+    elif not kq["bo_tri"] and (td := hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "phongthuy")):
+        kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển
     elif kq["bo_tri"]:
         kq["loai"] = "bo_tri"
         if any(kb.bo_tri(m)["nguon"] == "dan_gian" for m in kq["bo_tri"]):
             kq["xu_ly"] = "tra_loi_kem_luu_y"
     elif chung.co(t, HUONG_CA_NHAN) or kq["ca_nhan"]:
         kq["loai"] = "huong_ca_nhan"
+        kq["do_tin_thap"] = not chung.co(t, HUONG_CA_NHAN) and not kq["huong"]   # EN-3: chỉ có "của tôi" → mời chọn
     else:
         kq["loai"] = "ky_thuat"
+        kq["do_tin_thap"] = not (kq["huong"] or kq["du_nien"] or kq["quai"])
     return kq
 
 
@@ -187,6 +201,8 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int, nam_am: int | None
         g = kb.giai_thich(ma)
         if g:
             muc.append({"loai": "giai_thich", "ma": ma, **g})
+    if pl.get("tu_dien"):
+        muc += hieu_cau.muc_tu_dien(pl["tu_dien"])
     loai = pl["loai"]
     if loai == "menh_quai_chung":
         for h in pl["huong"][:2]:
@@ -221,11 +237,13 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int, nam_am: int | None
             # Một bộ tính: dùng đúng hàm của trang /xem-tuoi-lam-nha (tuổi mụ theo năm âm của NGÀY sinh khi có).
             from app.luangiai import tuoi_dan_gian as tdg  # noqa: PLC0415
             ng = (sinh or {}).get("ngay")
-            x = tdg.xem_tuoi_lam_nha(nam_sinh, nam_am, ng.month if ng else None, ng.day if ng else None)
-            muc.append({"loai": "tuoi_lam_nha", "nam_xem": nam_am, "tuoi_mu": x["tuoi_mu"], "kim_lau": x["kim_lau"],
-                        "hoang_oc": x["hoang_oc"], "tam_tai": x["tam_tai"], "nam_thuan": x["nam_thuan"][:1],
-                        "ket_ma": x["ket_luan"]["ma"],
-                        "source_id": "dan_gian", "school_id": "dan_gian"})
+            # EN-3: "làm nhà năm 2027 hay 2028" → xét từng năm được hỏi (cùng hàm), không chỉ năm đầu
+            for y in [y for y in (pl.get("cac_nam_hoi") or [nam_am]) if y > nam_sinh][:3]:   # năm trước năm sinh = năm sinh người khác
+                x = tdg.xem_tuoi_lam_nha(nam_sinh, y, ng.month if ng else None, ng.day if ng else None)
+                muc.append({"loai": "tuoi_lam_nha", "nam_xem": y, "tuoi_mu": x["tuoi_mu"], "kim_lau": x["kim_lau"],
+                            "hoang_oc": x["hoang_oc"], "tam_tai": x["tam_tai"], "nam_thuan": x["nam_thuan"][:1],
+                            "ket_ma": x["ket_luan"]["ma"],
+                            "source_id": "dan_gian", "school_id": "dan_gian"})
         elif chung.co(pl["cau_chuan_hoa"], [r"tuoi toi", r"xem tuoi"]):
             goi["can_them"] = ["nam_sinh"]
             goi["mau"] = kb.mau("can_nam_sinh")
@@ -250,7 +268,24 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int, nam_am: int | None
         return chung.ket(goi)
     if loai == "hop":
         muc.append({"loai": "giai_thich", "ma": "vo_chong_khac_menh", **kb.giai_thich("vo_chong_khac_menh")})
-        nam_kia = pl["nam_sinh_cau"]
+        # EN-3: câu nêu đủ năm sinh của CẢ HAI vợ chồng mà hồ sơ là năm khác → tính đúng hai người trong câu, không
+        # trộn hồ sơ trên máy vào ("ck sn 1989 vk sn 1993").
+        cap = re.findall(r"\b(chong|vo)\s*(?:sn|sinh)?\s*(?:nam\s*)?(19\d\d|20\d\d)", pl["cau_chuan_hoa"])
+        if len(cap) >= 2 and {v for v, _ in cap[:2]} == {"chong", "vo"} \
+                and not (sinh and sinh.get("nam") in {int(y) for _, y in cap}):
+            muc[:] = [m for m in muc if m.get("ma") != "vo_chong_khac_menh"]
+            hai = []
+            for vai, y in cap[:2]:
+                q = pt.menh_quai(int(y), "nam" if vai == "chong" else "nu")
+                hai.append(q)
+                muc.append({**_m_menh(q), "vai": f"{'chồng' if vai == 'chong' else 'vợ'} (sinh {y})"})
+            muc.append({"loai": "so_nhom", "cung_nhom": hai[0]["nhom"][:6] == hai[1]["nhom"][:6],
+                        "ban": hai[0]["nhom"], "kia": hai[1]["nhom"]})
+            goi["luu_y"] = kb.luu_y("bat_trach")
+            return chung.ket(goi)
+        nam_kia = pl.get("nam_sinh_kia") or pl["nam_sinh_cau"]
+        if sinh and pl.get("cac_nam_sinh") and nam_kia == sinh.get("nam"):      # năm đầu là của chính người hỏi
+            nam_kia = next((y for y in pl["cac_nam_sinh"] if y != sinh["nam"]), nam_kia)
         if sinh and nam_kia and pl.get("kia_ro"):    # "vợ tôi sinh 1992…" → tính luôn mệnh quái người kia
             ban = pt.menh_quai(sinh["nam"], sinh["gioi_tinh"], sinh.get("ngay"), sinh.get("moc_nam", "lap_xuan"))
             gioi_kia = pl["gioi_tinh_cau"] or ("nu" if chung.co(pl["cau_chuan_hoa"], [r"vo toi", r"vo minh"])
@@ -511,6 +546,9 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     pl = phan_loai(cau_hoi)
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     nam_xem, nam_am = chung.nam_xem_hh(pl["nam_xem"], ngay_xem, pl["cau_chuan_hoa"])
+    cac = chung.nam_hoi_hh(pl["cau_chuan_hoa"], ngay_xem, "am")     # năm âm lịch Việt (tuổi làm nhà theo Tết)
+    if len(cac) >= 2:
+        pl["cac_nam_hoi"] = cac                 # EN-3: hỏi so hai năm (tuổi làm nhà từng năm)
     goi = goi_bang_chung(pl, sinh, nam_xem, nam_am)
     if chung.sao_han_hoi(pl["cau_chuan_hoa"]) and sinh and sinh.get("gioi_tinh") and not goi["can_them"] \
             and pl["xu_ly"] not in chung.DAC_BIET:   # MT-ĐS B3 — không chèn trước lời hỗ trợ / từ chối / dẫn hướng
@@ -522,7 +560,7 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         if mn:
             goi["muc"].insert(0, mn)                 # trả lời theo đúng nhà trước, kiến thức chung sau
             goi["phan_loai"]["theo_nha"] = True
-    van = van_template(goi)
+    van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:
@@ -532,6 +570,6 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         except Exception as e:  # noqa: BLE001
             che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    return {"phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
+    return {"hoi_lai": chung.hoi_lai_neu(pl, "phongthuy"), "phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
             "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": goi["co_canh_bao"],
             "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.phongthuy(goi, pl.get("quai"), _menh_rieng(pl, sinh)), "hoi_tiep": truc_quan.hoi_tiep_phongthuy(pl)}

@@ -46,6 +46,19 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
   const tiep = (t.hoiTiep ?? []).filter((c) => !daHoi.includes(c));
   const loi: ReactNode = (
     <div className="min-w-0 space-y-4">
+      {t.hoiLai && t.hoiLai.chon.length > 0 && (
+        <div className="rounded-xl border border-moon/30 bg-moon/5 px-3 py-2.5" data-testid="hoi-lai">
+          <p className="text-sm text-fg-muted">{t.hoiLai.cau}</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {t.hoiLai.chon.map((c) => (
+              <button key={c} type="button" disabled={dang} onClick={() => { ghi("chart_interacted", { mo_dun: moDun, kind: "hoi_lai" }); hoi(c); }}
+                className="min-h-10 rounded-full border border-moon/40 px-3.5 py-2 text-left text-sm text-fg transition-colors hover:border-moon disabled:opacity-50">
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       {t.van && (
         <div className="prose-vn text-[1.05rem] leading-[1.75] text-fg">
           {doanCoThuatNgu(t.van, t.thuatNgu, undefined, theo.size ? {

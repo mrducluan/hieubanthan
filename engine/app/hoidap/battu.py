@@ -15,7 +15,7 @@ import datetime as dt
 import re
 
 from app.calc import battu_mo_rong, battu as bt
-from app.hoidap import chung, doi_song_muc as dsm
+from app.hoidap import chung, hieu_cau, doi_song_muc as dsm
 from app.kb import battu_kb as kb
 from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
@@ -61,8 +61,9 @@ CHU_DE = [
                  r"xe tai", r"can than gi"]),
     ("hoc_hanh", [r"hoc hanh", r"thi (lai|dai hoc|dau|do|vao)", r"khoi (tu nhien|xa hoi|a|b|c|d)(?!\w)", r"nghien cuu",
                   r"hoc them", r"bang luat", r"thac si", r"tien si", r"hoc (gi|khoi|nganh|len|cao)", r"bang (cap|dai hoc)", r"lam thay", r"thay giao", r"long bong", r"thi .{0,15}dau (khong|ko)",
-                  r"thi gi", r"(?<!\w)rot (roi|dai hoc)"]),
+                  r"thi gi", r"(?<!\w)rot (roi|dai hoc)", r"hoc van", r"duong hoc"]),
     ("quan_he", [r"quy nhan", r"thien at", r"hop tac", r"nguoi lon tuoi", r"canh tranh", r"(?<!\w)ghet(?!\w)", r"ban be",
+                 r"nguoi giup", r"giup do", r"nang do", r"tranh cong", r"dong nghiep",
                  r"ty kien nhieu", r"tam hop voi minh"]),
     ("hau_van", [r"hau van", r"ve gia", r"tuoi gia", r"nghi huu", r"co don", r"giao lai", r"49 chua qua", r"den gia",
                  r"dai van cuoi", r"ve gia"]),
@@ -83,7 +84,8 @@ CHU_DE = [
                    r"tra no", r"(?<!\w)no(?!\w)", r"cua hang", r"nhan loi"]),
     ("ngu_hanh", [r"thieu hanh", r"ngu hanh", r"vuong suy", r"than vuong", r"than nhuoc", r"dung than",
                   r"hy than", r"ky than", r"mau gi", r"huong gi", r"bo sung", r"can bang", r"khi hau",
-                  r"hanh gi", r"lan at", r"nhat chu toi yeu",
+                  r"hanh gi", r"lan at", r"nhat chu toi yeu", r"(manh|vuong) hay (yeu|nhuoc)",
+                  r"nhat chu .{0,20}(manh|yeu|vuong|nhuoc)", r"mau (sac )?(may man|hop)",
                   r"thieu (kim|moc|thuy|hoa|tho)\b", r"(deo|mang|dung) (gi|da gi|vat gi)"]),
     ("loi_song", [r"loi song", r"sinh hoat", r"suc khoe", r"song the nao", r"mat ngu", r"nghi ngoi", r"kieng gi",
                   r"(?<!\w)yeu(?!\w)", r"(?<!\w)met(?!\w)", r"tim mach", r"dau xuong", r"hay lanh", r"an gi", r"co hon", r"nong tinh"]),
@@ -107,7 +109,7 @@ def _giai_thich_khop(t: str) -> list[str]:
 
 def phan_loai(cau_hoi: str) -> dict:
     gioi_thieu, t_chinh = _h._tach_gioi_thieu(cau_hoi)
-    t = chung.chuan_hoa(cau_hoi)
+    t = chung.chuan_hoa_cau(cau_hoi)
     kq = {"cau_chuan_hoa": t, "loai": None, "xu_ly": "tra_loi", "chu_de": None,
           "can": _can_nhac(t_chinh), "mua": next((k for k, m in MUA_KW.items() if re.search(m, t)), None),
           "thap_than": [k for k, m in TT_KW.items() if chung.co(t_chinh, [m])],
@@ -123,7 +125,9 @@ def phan_loai(cau_hoi: str) -> dict:
         return kq
     kq["lo_so"] = chung.co(t_chinh, LO_SO)
     kq["sao_han"] = chung.sao_han_hoi(t)
-    if chung.co(t, HOP):
+    # EN-3: "trụ năm và trụ giờ CỦA TÔI có xung nhau" là câu về chính lá số; có người thứ hai thì vẫn là hợp
+    if chung.co(t, HOP) and (not kq["tru"] or chung.co(t, [r"vo chong", r"hai (nguoi|dua|ben)", r"ca hai",
+                                                           r"nguoi (kia|ay)", r"(chong|vo|nguoi yeu) (toi|minh|em)"])):
         kq["loai"] = "hop"
     elif chung.co(t, CON):
         kq["loai"] = "con"
@@ -137,6 +141,8 @@ def phan_loai(cau_hoi: str) -> dict:
         kq["loai"] = "thap_than_chung"
     elif kq["giai_thich"] and not kq["ca_nhan"]:
         kq["loai"] = "ky_thuat"
+    elif td := hieu_cau.la_kien_thuc_tu_dien(t_chinh, cau_hoi, "battu"):
+        kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển, không tứ trụ
     elif chung.co(t_chinh, VAN):
         kq.update(loai="van", xu_ly="tra_loi_kem_luu_y")
         kq["chu_de"] = next((cd for cd, mau in CHU_DE if chung.co(t_chinh, mau)), None)   # MT-ĐS B2: mảng của câu vận
@@ -146,6 +152,7 @@ def phan_loai(cau_hoi: str) -> dict:
         if kq["thap_than"] or kq["nhom"]:
             kq["chu_de"] = kq["chu_de"] if kq["chu_de"] in ("nghe_tien", "hon_nhan", "con_cai", "phap_ly", "di_xa", "an_toan",
                                                             "hoc_hanh", "quan_he", "hau_van", "gia_dinh") else "thap_than"
+        kq["do_tin_thap"] = not kq["chu_de"] and not (kq["thap_than"] or kq["nhom"] or kq["tru"])   # EN-3
         kq["chu_de"] = kq["chu_de"] or "tinh_cach"
         if kq["chu_de"] in ("loi_song", "nghe_tien", "phap_ly", "di_xa", "an_toan", "hau_van", "hoc_hanh", "quan_he"):
             kq["xu_ly"] = "tra_loi_kem_luu_y"
@@ -219,6 +226,8 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
         g = kb.giai_thich(ma)
         if g:
             muc.append({"loai": "giai_thich", "ma": ma, **g})
+    if pl.get("tu_dien"):
+        muc += hieu_cau.muc_tu_dien(pl["tu_dien"])
     loai = pl["loai"]
     if loai in ("hop", "con", "nguoi_khac"):
         goi["can_them"] = ["la_so_nguoi_kia"]
@@ -408,6 +417,8 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict)
 # ------------------------------------------------------------------ NARRATIVE (template)
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
+    if l == "so_nam":
+        return chung.doan_so_nam(m["nam"]), None
     if l == "doi_song":
         return dsm.doan_doi_song(m), None
     if l == "sao_han":
@@ -532,6 +543,15 @@ def van_template(goi: dict) -> str:
     return "\n\n".join(doan)
 
 
+def _them_so_nam(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -> None:
+    """EN-3: câu nêu năm → đoạn đầu nói mức của ĐÚNG các năm đó (dòng 10 năm của báo cáo Bát tự — một nguồn; năm theo
+    Lập xuân, hai cách lấy dụng thần gộp như chương Vận hạn). Năm ngoài 10 năm tới bỏ qua."""
+    from app.luangiai import battu_doi_song as btd  # noqa: PLC0415
+    nam_hoi = chung.nam_hoi_hh(pl["cau_chuan_hoa"], ngay_xem, "lap_xuan")
+    if nam_hoi:
+        chung.them_so_nam(goi, btd.dong_nam_cua(sinh, ngay_xem, ls), nam_hoi, ("tu_tru", "sao_han"))
+
+
 def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = None,
             dung_llm: bool = False) -> dict:
     """`sinh` = {"lich": datetime theo kinh tuyến lịch UTC+7, "gioi_tinh": "nam"|"nu"}."""
@@ -551,10 +571,12 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         goi["muc"].insert(1 if goi["muc"] and goi["muc"][0]["loai"] == "tu_tru" else 0,
                           chung.muc_sao_han(nam_am, d.year, sinh["gioi_tinh"], d.month, d.day))
         chung.ket(goi)
+    if ls is not None and sinh and not goi["can_them"] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"):
+        _them_so_nam(goi, pl, sinh, ngay_xem, ls)
     if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
         goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
         chung.ket(goi)
-    van = van_template(goi)
+    van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:
@@ -569,6 +591,6 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     if pl.get("lo_so") and not goi["luu_y"] and goi["muc"]:
         goi["luu_y"] = kb.luu_y("lo_so")
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    return {"phan_loai": goi["phan_loai"], "la_so": ls, "bang_chung": goi, "cau_tra_loi": van,
+    return {"hoi_lai": chung.hoi_lai_neu(pl, "battu"), "phan_loai": goi["phan_loai"], "la_so": ls, "bang_chung": goi, "cau_tra_loi": van,
             "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": co,
             "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.battu(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_battu(pl)}

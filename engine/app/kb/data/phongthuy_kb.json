@@ -330,7 +330,9 @@
     "wc o giua",
     "toilet giua",
     "ve sinh (o |nam )?(trung tam|giua)",
-    "(wc|toilet) (o |nam )?trung tam"
+    "(wc|toilet) (o |nam )?trung tam",
+    "ve sinh .{0,12}giua nha",
+    "(wc|toilet) .{0,12}giua nha"
    ],
    "veto": true,
    "giai_thich_hien_dai": "Nhà vệ sinh giữa nhà thường không có cửa sổ, chỉ trông vào ống hút chung; hút yếu là ẩm và mùi đọng ngay giữa nhà rồi lan ra các phòng.",
@@ -460,7 +462,9 @@
     "cua phong doi",
     "cua doi nhau",
     "cua sau doi dien cua truoc",
-    "cua (chinh|truoc) doi dien cua sau"
+    "cua (chinh|truoc) doi dien cua sau",
+    "cua (chinh|truoc) .{0,20}cua sau",
+    "cua sau .{0,20}cua (chinh|truoc)"
    ],
    "giai_thich_hien_dai": "Hai cửa phòng đối thẳng nhau làm hai phòng nhìn thấu nhau, tiếng động truyền thẳng, mất riêng tư; ở chung cư, cửa đối cửa hàng xóm còn dễ va chạm khi cùng mở.",
    "viec": [
@@ -559,7 +563,11 @@
    "tu_khoa": [
     "bep va nha ve sinh",
     "bep canh",
-    "bep sat"
+    "bep sat",
+    "bep doi dien (cua )?(nha )?ve sinh",
+    "bep doi dien (wc|toilet)",
+    "(nha )?ve sinh doi dien bep",
+    "bep .{0,12}doi dien (cua )?(nha )?ve sinh"
    ],
    "giai_thich_hien_dai": "Bếp sát nhà vệ sinh là chuyện vệ sinh thực phẩm: ẩm và mùi từ nhà vệ sinh lan sang chỗ nấu; cửa nhà vệ sinh mở ra bếp lại càng khó chịu.",
    "viec": [
@@ -677,7 +685,8 @@
    "nguon": "dan_gian",
    "tu_khoa": [
     "cau thang (o |ngay |nam )?(giua|trung tam)",
-    "cau thang giua nha"
+    "cau thang giua nha",
+    "cau thang .{0,12}giua nha"
    ],
    "giai_thich_hien_dai": "Cầu thang chiếm đúng giữa nhà thì mọi phòng phải vòng quanh nó: tầng trệt bị chia đôi, ánh sáng từ cửa trước và giếng trời khó đi xuyên, tiếng bước chân và tiếng nói vọng lên mọi tầng. Nhà sẽ tối ở giữa và khó kê một phòng khách liền mạch.",
    "viec": [
@@ -803,6 +812,244 @@
     {
      "chi_phi": "sua_chua",
      "lam": "Dời bàn thờ hoặc dời dàn lạnh khi sửa phòng."
+    }
+   ]
+  },
+  "ket_sat": {
+   "tieu_de": "Két sắt đặt ở đâu",
+   "noi_dung": "Quan niệm dân gian: két sắt là chỗ giữ của nên đặt nơi kín, vững, khuất tầm nhìn từ cửa; không đặt ngay lối vào hay chỗ ai đi qua cũng thấy. Thực tế: đây trước hết là chuyện an toàn — két nặng cần sàn chắc, chỗ khô, khó bê đi.",
+   "goi_y": "Đặt két ở góc phòng ngủ chính hoặc phòng làm việc, sát tường, khuất cửa; bắt vít xuống sàn hoặc tường nếu được. Không cần chọn hướng thật kỹ — chỗ kín và chắc quan trọng hơn.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "ket sat",
+    "ket tien",
+    "ket dung tien"
+   ],
+   "giai_thich_hien_dai": "Két dễ thấy từ cửa thì người lạ biết ngay chỗ để của; két để chỗ ẩm thì giấy tờ bên trong dễ mốc. Góc khuất, sàn chắc, khô ráo vừa an toàn vừa yên tâm hơn.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dời két vào góc khuất trong phòng, không thấy từ cửa ra vào; giấy tờ quan trọng bọc túi chống ẩm."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Bắt vít két xuống sàn hoặc tường; thêm gói hút ẩm trong két, thay định kỳ."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Làm hộc âm tường hoặc tủ gỗ che két khi sửa phòng; kiểm sàn chịu lực trước khi đặt két nặng."
+    }
+   ]
+  },
+  "ngo_cut": {
+   "tieu_de": "Nhà ở cuối ngõ cụt",
+   "noi_dung": "Quan niệm dân gian: cuối ngõ cụt là nơi khí \"tụ mà không thoát\", lại hay bị lối đi đâm thẳng vào cửa. Thực tế: cuối ngõ thường yên tĩnh, ít xe qua lại — điều cần để ý là lối thoát khi có sự cố, chỗ đỗ xe và ánh sáng.",
+   "goi_y": "Giữ khoảng trước cửa thoáng, sạch, có đèn; nếu lối ngõ chiếu thẳng vào cửa thì đặt chậu cây hoặc bình phong thấp để lối đi không nhìn thẳng vào trong nhà. Không cần đổi nhà chỉ vì ở cuối ngõ.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "ngo cut",
+    "cuoi ngo",
+    "hem cut",
+    "cuoi hem"
+   ],
+   "giai_thich_hien_dai": "Nhà cuối ngõ ít bụi và tiếng xe hơn, nhưng xe cứu hoả khó vào, ban đêm dễ tối, nước mưa có thể đọng ở cuối ngõ. Đèn trước cửa, lối thoát rõ và thoát nước tốt giải quyết phần lớn những lo này.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dọn gọn khoảng trước cửa, không để đồ chắn lối; biết sẵn lối thoát khác của ngõ và giữ bình chữa cháy nhỏ trong nhà."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Lắp đèn cảm biến trước cửa; đặt chậu cây hoặc bình phong thấp nếu lối ngõ chiếu thẳng vào trong nhà."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Nâng nền hoặc làm rãnh thoát nước trước cửa nếu cuối ngõ hay đọng nước khi mưa."
+    }
+   ]
+  },
+  "gieng_cu": {
+   "tieu_de": "Giếng cũ trong vườn, trong nhà",
+   "noi_dung": "Quan niệm dân gian: giếng cũ không dùng nữa nên lấp có trình tự, làm lễ báo đất theo tục từng nơi, không lấp vội hay đổ rác xuống. Thực tế: giếng bỏ hoang là chỗ nguy hiểm cho trẻ nhỏ và dễ làm bẩn mạch nước ngầm.",
+   "goi_y": "Nếu không dùng nữa: đậy kín chắc chắn ngay, rồi lấp bằng đất cát sạch theo từng lớp (nhờ thợ có kinh nghiệm); tục báo đất làm hay không là tuỳ gia đình. Không đổ rác, phế thải xuống giếng.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "gieng cu",
+    "gieng bo",
+    "lap gieng",
+    "cai gieng",
+    "gieng nuoc"
+   ],
+   "giai_thich_hien_dai": "Giếng hở có thể khiến người hoặc vật nuôi rơi xuống; nước đọng sinh muỗi; rác thải đổ xuống giếng ngấm vào mạch nước của cả xóm. Lấp đúng cách thì nền đất cũng không lún về sau.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đậy miệng giếng bằng tấm chắc và chặn kín ngay hôm nay; dặn trẻ nhỏ không lại gần."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Làm nắp bê tông hoặc lưới sắt có khoá cho miệng giếng nếu chưa lấp ngay."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Thuê thợ lấp bằng cát, đất sạch theo từng lớp và đầm chặt; nếu định xây lên trên thì hỏi thợ về móng chỗ đó."
+    }
+   ]
+  },
+  "cua_so_dau_giuong": {
+   "tieu_de": "Cửa sổ ngay sau hoặc cạnh đầu giường",
+   "noi_dung": "Quan niệm dân gian: đầu giường nên tựa tường chắc (có \"chỗ dựa\"); cửa sổ sau đầu giường khiến người nằm khó yên. Thực tế: gió lùa, ánh đèn đường và tiếng ồn từ cửa sổ làm giấc ngủ chập chờn.",
+   "goi_y": "Nếu xoay được giường thì kê đầu giường sát mảng tường kín. Không xoay được thì kéo rèm dày, đóng cửa sổ khi ngủ và kê một đầu giường cao, chắc.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "cua so (ngay |o |phia )?(sau |canh |tren )?dau giuong",
+    "dau giuong .{0,10}cua so",
+    "giuong .{0,10}sat cua so",
+    "cua so .{0,10}doi dien giuong",
+    "giuong .{0,10}doi dien cua so"
+   ],
+   "giai_thich_hien_dai": "Gió lạnh thổi thẳng vào đầu và cổ khi ngủ dễ làm người mỏi; ánh sáng sớm qua cửa sổ đánh thức sớm hơn ý muốn. Đầu giường tựa tường kín giữ nhiệt và yên tĩnh hơn.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đóng cửa sổ và kéo rèm khi ngủ; thử xoay giường để đầu giường tựa mảng tường kín."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Treo rèm dày cản sáng; thêm tấm đầu giường cao, chắc nếu không đổi được chỗ kê."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa phòng, bố trí lại để đầu giường không nằm dưới cửa sổ; thay cửa kín gió nếu cửa cũ hở."
+    }
+   ]
+  },
+  "giuong_sat_cua": {
+   "tieu_de": "Giường kê sát hoặc thẳng cửa ra vào",
+   "noi_dung": "Quan niệm dân gian: giường kê thẳng cửa phòng hay sát cửa ra vào thì người nằm dễ giật mình, ngủ không yên. Thực tế: người đi qua, tiếng mở cửa và gió lùa từ cửa làm giấc ngủ bị ngắt.",
+   "goi_y": "Kê giường lệch khỏi đường thẳng của cửa, đầu giường tựa tường, nằm vẫn nhìn thấy cửa. Phòng trọ nhỏ không xoay được thì dùng rèm hoặc kệ thấp ngăn giữa cửa và giường.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "giuong .{0,15}(sat|thang|doi dien) cua (ra vao|phong|chinh|di)",
+    "giuong ke (sat|thang) cua"
+   ],
+   "giai_thich_hien_dai": "Khi nằm, người ta yên tâm hơn nếu thấy được cửa mà không nằm ngay trên lối đi. Cửa mở thẳng vào giường đem theo gió, ánh sáng hành lang và tiếng ồn.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Xoay giường lệch khỏi lối thẳng của cửa nếu phòng cho phép; đóng cửa phòng khi ngủ."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Treo rèm hoặc đặt kệ thấp giữa cửa và giường; dán ron chặn khe cửa cho bớt gió và ồn."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa nhà, đổi chiều mở cửa hoặc vị trí cửa để giường không nằm trên lối đi."
+    }
+   ]
+  },
+  "wc_tren_bep": {
+   "tieu_de": "Nhà vệ sinh tầng trên nằm trên bếp",
+   "noi_dung": "Quan niệm dân gian: nhà vệ sinh không nên nằm ngay trên bếp hay trên bàn thờ, coi là \"ô uế đè lên chỗ nấu\". Thực tế: điều cần lo là ống nước thải đi qua trần bếp — rò rỉ, thấm, mùi.",
+   "goi_y": "Kiểm tra trần bếp có vệt thấm không; ống thoát của nhà vệ sinh phía trên nên được bọc kín, có lối mở để sửa. Không cần đập phá — giữ khô ráo và sạch là chính.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "ve sinh .{0,25}tren bep",
+    "(wc|toilet) .{0,15}tren bep",
+    "bep .{0,15}duoi (nha )?ve sinh"
+   ],
+   "giai_thich_hien_dai": "Ống thoát nước nằm trên trần bếp mà rò sẽ nhỏ nước bẩn xuống chỗ nấu; hơi ẩm làm mốc trần. Chống thấm sàn nhà vệ sinh tầng trên và kiểm tra ống định kỳ là đủ.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Xem trần bếp có vệt ố, thấm không; ngửi mùi lạ quanh trần khi xả nước tầng trên."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Làm trần thạch cao có ô thăm để kiểm tra ống; thay gioăng, keo chống thấm chân bồn cầu tầng trên."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Chống thấm lại sàn nhà vệ sinh tầng trên; khi sửa lớn, đi ống thoát dọc tường thay vì ngang qua trần bếp."
+    }
+   ]
+  },
+  "cay_trong_phong_ngu": {
+   "tieu_de": "Cây xanh trong phòng ngủ",
+   "noi_dung": "Quan niệm dân gian: phòng ngủ cần yên, ít cây lớn vì cây \"tranh khí\" với người ngủ. Thực tế: một vài chậu cây nhỏ dễ chăm thì không sao; cây to, đất ẩm, chậu nước đọng mới đáng lo vì ẩm mốc và muỗi.",
+   "goi_y": "Giữ một hai chậu nhỏ, đặt gần cửa sổ, không để sát đầu giường; tưới vừa đủ, không để đĩa nước đọng. Người dễ dị ứng phấn hoa thì để cây ở phòng khách.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "cay (xanh )?trong phong ngu",
+    "cay .{0,12}phong ngu",
+    "trong cay trong phong"
+   ],
+   "giai_thich_hien_dai": "Cây trong phòng kín ban đêm không làm thiếu khí đáng kể, nhưng đất ẩm và nước đọng dưới chậu sinh nấm mốc, muỗi; cây có hoa thơm nồng có thể làm khó ngủ.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dời chậu cây khỏi sát đầu giường; đổ nước đọng dưới đĩa chậu mỗi ngày."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Đổi sang chậu nhỏ có lỗ thoát nước và giá kê; chọn cây ít cần tưới."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Phòng ngủ ẩm, ít nắng thì làm thêm thông gió hoặc máy hút ẩm trước khi đặt cây."
+    }
+   ]
+  },
+  "gan_chua": {
+   "tieu_de": "Nhà gần chùa, đình, nhà thờ",
+   "noi_dung": "Quan niệm dân gian: nhà ở sát chùa, đình, nhà thờ thì khí \"quá tĩnh\" hoặc \"quá đông\", không hợp làm nhà ở. Thực tế: điều ảnh hưởng hằng ngày là tiếng chuông, loa, người qua lại vào ngày lễ và chỗ đỗ xe.",
+   "goi_y": "Trước khi mua, đến xem vào ngày rằm, mùng một và ngày lễ để biết mức ồn, xe cộ. Cửa chính không nhìn thẳng vào cổng thì sinh hoạt riêng tư hơn; giữ rèm, cây che nhẹ là đủ.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "gan (chua|dinh|den|nha tho|mieu)",
+    "doi dien (chua|dinh|den|nha tho|mieu)",
+    "canh (chua|dinh|den|nha tho)",
+    "sat (chua|dinh|nha tho)"
+   ],
+   "giai_thich_hien_dai": "Nơi thờ tự đông người theo lịch lễ: tiếng ồn, khói hương và xe đỗ trước cửa là chuyện có thật; ngày thường lại yên tĩnh. Hợp hay không tuỳ nếp sinh hoạt của nhà bạn.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Hỏi hàng xóm về lịch lễ, giờ chuông; ghé xem đúng ngày rằm trước khi quyết mua."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Rèm dày, cửa kính kín phía nhìn sang nơi thờ tự; một hàng cây che nhẹ trước cửa."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa nhà, bố trí phòng ngủ ở phía xa nơi thờ tự và làm cửa cách âm."
+    }
+   ]
+  },
+  "cua_phong_doi_wc": {
+   "tieu_de": "Cửa phòng ngủ đối diện cửa nhà vệ sinh",
+   "noi_dung": "Quan niệm dân gian: cửa phòng ngủ nhìn thẳng cửa nhà vệ sinh thì \"uế khí\" đi thẳng vào phòng. Thực tế: mùi, hơi ẩm và tiếng nước từ nhà vệ sinh lọt vào phòng ngủ.",
+   "goi_y": "Luôn đóng cửa nhà vệ sinh, bật quạt hút sau khi dùng; treo rèm hoặc đặt kệ thấp để hai cửa không nhìn thẳng nhau. Không cần đổi phòng.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "cua phong (ngu )?.{0,15}(doi dien|thang|nhin thang) .{0,10}(cua )?(nha )?(ve sinh|wc|toilet)",
+    "(nha ve sinh|wc|toilet) .{0,15}doi dien (cua )?phong ngu"
+   ],
+   "giai_thich_hien_dai": "Hai cửa đối nhau tạo luồng gió thẳng: mùi và ẩm từ nhà vệ sinh đi vào phòng ngủ nhanh hơn, đêm dễ bị đánh thức bởi tiếng xả nước.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đóng cửa nhà vệ sinh khi không dùng; mở cửa sổ phòng ngủ cho thoáng mỗi sáng."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Lắp quạt hút mùi, ron cửa nhà vệ sinh; treo rèm cửa phòng ngủ."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa nhà, dời cửa nhà vệ sinh lệch đi hoặc làm vách ngăn nhỏ ở hành lang."
     }
    ]
   }

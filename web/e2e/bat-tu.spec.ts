@@ -93,3 +93,15 @@ test("đầu trang: một cú bấm 'Đọc luận giải đời thường' vừ
   await nut.click();
   await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });
 });
+
+test("EN-3: câu mơ hồ → khối 'hỏi lại' với câu cụ thể; bấm một câu là hỏi luôn, câu mới không còn hỏi lại", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/bat-tu");
+  const ans = await hoi(page, "Bát tự tôi thế nào ạ");
+  const hl = ans.getByTestId("hoi-lai");
+  await expect(hl).toBeVisible();
+  await hl.getByRole("button", { name: "Bát tự của tôi hợp nghề gì?" }).click();
+  const moi = page.getByTestId("cau-tra-loi").last();
+  await expect(moi).toContainText(/nghề|công việc/);
+  await expect(moi.getByTestId("hoi-lai")).toHaveCount(0);
+});
