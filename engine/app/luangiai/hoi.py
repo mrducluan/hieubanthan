@@ -35,6 +35,26 @@ def chuan_hoa(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
+# EN-3: viết tắt / teencode hay gặp trong câu hỏi (sau khi bỏ dấu). Chỉ từ đứng riêng và KHÔNG mơ hồ — "bn" (bạn / bao
+# nhiêu), "hn" (hôm nay / Hà Nội), "hong" (hồng / không), "a", "t", "s", "v", "r" giữ nguyên.
+VIET_TAT = {
+    "ck": "chong", "ox": "chong", "vk": "vo", "bx": "vo", "ny": "nguoi yeu", "cv": "cong viec", "sk": "suc khoe",
+    "bh": "bao gio", "ko": "khong", "k": "khong", "kh": "khong", "hok": "khong", "khum": "khong", "dc": "duoc",
+    "dk": "duoc", "j": "gi", "mik": "minh", "mk": "minh", "mjk": "minh", "lm": "lam", "ng": "nguoi", "e": "em",
+    "vs": "voi", "ntn": "nhu the nao", "hnay": "hom nay", "cty": "cong ty", "nhiu": "nhieu", "iu": "yeu",
+    "trc": "truoc", "bit": "biet", "dag": "dang", "zay": "vay", "tui": "toi", "hd": "hop dong", "ms": "moi",
+}
+_VT_RX = re.compile(r"(?<!\w)(" + "|".join(sorted(map(re.escape, VIET_TAT), key=len, reverse=True)) + r")(?!\w)")
+
+
+def chuan_hoa_cau(s: str) -> str:
+    """Chuẩn hoá CÂU HỎI: `chuan_hoa` + mở viết tắt (`VIET_TAT`) + "27t" → "27 tuoi". Dùng ở chỗ định tuyến câu hỏi; mã
+    kiểm chứng / khoá KB vẫn dùng `chuan_hoa`."""
+    t = chuan_hoa(s)
+    t = re.sub(r"(?<!\w)(\d{1,2})t(?!\w)", r"\1 tuoi", t)
+    return _VT_RX.sub(lambda m: VIET_TAT[m.group(1)], t)
+
+
 _RX: dict[str, re.Pattern] = {}
 
 
@@ -275,14 +295,14 @@ def _tach_gioi_thieu(cau_hoi: str) -> tuple[str, str]:
     """'Em học lớp 12, tôi hợp nghề gì?' → ('em hoc lop 12', 'toi hop nghe gi')."""
     if "," in cau_hoi:
         dau, sau = cau_hoi.split(",", 1)
-        if re.search(GIOI_THIEU, chuan_hoa(dau)) and chuan_hoa(sau):
-            return chuan_hoa(dau), chuan_hoa(sau)
-    return "", chuan_hoa(cau_hoi)
+        if re.search(GIOI_THIEU, chuan_hoa_cau(dau)) and chuan_hoa_cau(sau):
+            return chuan_hoa_cau(dau), chuan_hoa_cau(sau)
+    return "", chuan_hoa_cau(cau_hoi)
 
 
 def phan_loai(cau_hoi: str) -> dict:
     gioi_thieu, t_chinh = _tach_gioi_thieu(cau_hoi)
-    t = chuan_hoa(cau_hoi)
+    t = chuan_hoa_cau(cau_hoi)
     ngay = _trich_ngay(t)
     so_nhac, cap = _trich_so(t)
     kq = {"cau_chuan_hoa": t, "gioi_thieu": gioi_thieu, "ngay_nhac": ngay, "so_nhac": so_nhac, "cap_nhac": cap,

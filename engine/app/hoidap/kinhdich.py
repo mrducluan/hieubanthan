@@ -118,7 +118,7 @@ def _giai_thich_khop(t: str) -> list[str]:
 
 
 def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
-    t = chung.chuan_hoa(cau_hoi)
+    t = chung.chuan_hoa_cau(cau_hoi)
     kq = {"cau_chuan_hoa": t, "che_do": che_do, "que_nhac": _que_nhac(cau_hoi), "hao_nhac": _hao_nhac(cau_hoi),
           "giai_thich": _giai_thich_khop(t), "linh_vuc": chung.linh_vuc_doi_song(t),
           "truong_phai": None, "dung_than": None, "xu_ly": "tra_loi", "loai": None}
@@ -126,6 +126,10 @@ def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq
+    # EN-3: chủ đề đời sống (KB 20 chủ đề, từ khoá nhiều chữ — cùng bộ chọn dụng thần) cụ thể hơn từ khoá lĩnh vực chung
+    # ("bán nhà" là chuyện tiền, không phải chuyện gia đình) → có chủ đề thì lĩnh vực theo chủ đề; không có thì giữ cũ.
+    from app.luangiai import kinhdich_doi_song as _kd  # noqa: PLC0415
+    kq["linh_vuc"] = (_kd.kb.chu_de(_kd.chu_de_tu_cau(t)) or {}).get("linh_vuc") or kq["linh_vuc"]
     # Đã nêu tên quẻ + hỏi chuyện cần quyết → đọc chính quẻ đó (người hỏi đã có quẻ), không gieo quẻ khác.
     if kq["que_nhac"] and (re.search(r"gieo duoc|duoc que|ra que", t) or chung.co(t, QUYET_DINH + DU_DOAN)):
         kq.update(loai="doc_que_da_co", truong_phai="nghia_ly")

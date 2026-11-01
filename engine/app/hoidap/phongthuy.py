@@ -61,12 +61,12 @@ def _khop(bang: dict, t: str) -> list[str]:
 
 def phan_loai(cau_hoi: str) -> dict:
     _, t_chinh = _h._tach_gioi_thieu(cau_hoi)
-    t = chung.chuan_hoa(cau_hoi)
+    t = chung.chuan_hoa_cau(cau_hoi)
     if "," in cau_hoi:                     # "Tôi sắp mua nhà, …" — lời dẫn, không phải câu hỏi cá nhân
         dau, sau = cau_hoi.split(",", 1)
-        if re.match(r"(toi|em|minh|anh|chi|nha toi) (sap|dang|moi|vua|muon|chuan bi)\b", chung.chuan_hoa(dau)) \
-                and chung.chuan_hoa(sau):
-            t_chinh = chung.chuan_hoa(sau)
+        if re.match(r"(toi|em|minh|anh|chi|nha toi) (sap|dang|moi|vua|muon|chuan bi)\b", chung.chuan_hoa_cau(dau)) \
+                and chung.chuan_hoa_cau(sau):
+            t_chinh = chung.chuan_hoa_cau(sau)
     nam, gioi = _nam_gioi(cau_hoi, t)
     kq = {"cau_chuan_hoa": t, "loai": None, "xu_ly": "tra_loi", "huong": _huong_nhac(t),
           "quai": next((QUAI_KD[m] for m in re.findall(r"menh quai (kham|khon|chan|ton|can|doai|ly)\b", t)

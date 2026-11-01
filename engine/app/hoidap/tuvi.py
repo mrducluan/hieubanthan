@@ -301,7 +301,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
     từ khoá không nhận ra ý định nào, chỉ cho câu bản mệnh / hạn, chỉ mã trong Y_DINH_CAU_HINH, và đi SAU bộ chặn
     khủng hoảng / ngoài phạm vi (câu đặc biệt trả về trước, gợi ý bị bỏ qua)."""
     gioi_thieu, t_chinh = _h._tach_gioi_thieu(cau_hoi)
-    t = chung.chuan_hoa(cau_hoi)
+    t = chung.chuan_hoa_cau(cau_hoi)
     if gioi_thieu and (chung.co(gioi_thieu, [r"dai han", r"luu nien", r"tieu han", r"la so", r"cung \w+"])
                        or _co_ten(gioi_thieu, CUNG_KW)):
         t_chinh = t                     # "Tôi đang ở đại hạn…" không phải lời giới thiệu

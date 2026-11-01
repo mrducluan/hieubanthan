@@ -9,6 +9,7 @@ from __future__ import annotations
 from app.luangiai import hoi as _h
 
 chuan_hoa = _h.chuan_hoa
+chuan_hoa_cau = _h.chuan_hoa_cau          # EN-3: câu hỏi (mở viết tắt) — dùng ở chỗ định tuyến
 co = _h._co
 dem = _h._dem
 

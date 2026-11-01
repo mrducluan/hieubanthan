@@ -107,7 +107,7 @@ def _giai_thich_khop(t: str) -> list[str]:
 
 def phan_loai(cau_hoi: str) -> dict:
     gioi_thieu, t_chinh = _h._tach_gioi_thieu(cau_hoi)
-    t = chung.chuan_hoa(cau_hoi)
+    t = chung.chuan_hoa_cau(cau_hoi)
     kq = {"cau_chuan_hoa": t, "loai": None, "xu_ly": "tra_loi", "chu_de": None,
           "can": _can_nhac(t_chinh), "mua": next((k for k, m in MUA_KW.items() if re.search(m, t)), None),
           "thap_than": [k for k, m in TT_KW.items() if chung.co(t_chinh, [m])],
