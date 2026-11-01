@@ -34,9 +34,7 @@ export const CHU_CHUNG = {
   "cua_vao.san_sang": { nhom: CV, nhan: "Câu dưới tên người dùng", mac_dinh: "Hồ sơ đã sẵn sàng trên máy này.", toi_da: 100 },
   "cua_vao.nut_hom_nay": { nhom: CV, nhan: "Nút chính", mac_dinh: "Xem cả ngày hôm nay", toi_da: 40 },
   "cua_vao.nut_ho_so": { nhom: CV, nhan: "Nút phụ", mac_dinh: "Mở hồ sơ bản thân", toi_da: 40 },
-  "cua_vao.nut_hop": { nhom: CV, nhan: "Nút mở lời mời xem hợp", mac_dinh: "Xem hợp với ai", toi_da: 40 },
-  "cua_vao.moi_mo_ta": { nhom: CV, nhan: "Giải thích lời mời xem hợp", toi_da: 250,
-    mac_dinh: "Gửi link cho người bạn muốn xem cùng — họ tự nhập ngày sinh của họ, rồi cả hai thấy kết quả hai người. Không ai thấy ngày sinh của ai." },
+  "cua_vao.nut_hop": { nhom: CV, nhan: "Nút xem hợp đôi (mở /hop-doi)", mac_dinh: "Xem hợp với ai", toi_da: 40 },
 
   "hoi.o_nhap": { nhom: HD, nhan: "Chữ mờ trong ô hỏi", mac_dinh: "Gõ điều bạn đang băn khoăn…", toi_da: 80 },
   "hoi.loi_ket_noi": { nhom: HD, nhan: "Báo khi mất kết nối", mac_dinh: "Không kết nối được. Thử lại sau.", toi_da: 100 },
