@@ -35,3 +35,21 @@ def test_qua_dai():
 
 def test_muoi_nam_la_10_nam():
     assert kiem_ai._so_chu("mười năm tới") == {10} and kiem_ai._so_chu("hai mươi lăm tuổi") == {25}
+
+
+def test_tu_thuong_khong_phai_thuat_ngu():
+    nguon = "Công việc của bạn thuận, nên giữ nhịp đều."
+    van = "Công việc của bạn thuận. Mỗi tuần giữ nhịp đều đặn, bình tĩnh. Nói chung nên giữ nhịp đều."
+    assert not [x for x in kiem_ai.kiem(van, nguon) if "thuật ngữ" in x]
+
+
+def test_tu_dung_bo_dau():
+    assert kiem_ai._tu(kiem_ai._bo_dau("bạn của và là có những")) == []
+
+
+def test_vat_pham_chi_chan_khi_nguon_khong_co():
+    from app.narrative import kiem_ai
+    assert any(x.startswith("vật phẩm") for x in kiem_ai.kiem("Nên đeo vòng tay thạch anh.", "Nên giữ nhịp ngủ đều."))
+    assert not any(x.startswith("vật phẩm") for x in kiem_ai.kiem("Không cần mua vật phẩm.", "Không cần mua vật phẩm nào."))
+    assert not any(x.startswith("vật phẩm") for x in kiem_ai.kiem("Bùa chú", "Bùa chú"))
+    assert not any(x.startswith("vật phẩm") for x in kiem_ai.kiem("Bản đồ cũ.", "Đồ cũ."))   # "bùa" không dính chữ khác

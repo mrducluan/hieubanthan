@@ -265,7 +265,7 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
     if dung_llm and co_key and goi["muc"] and not goi["can_them"]:
         try:
             van_llm = _goi_llm(goi, cau_hoi)
-            loi = kiem_tra_dau_ra(van_llm, goi)
+            loi = kiem_tra_dau_ra(van_llm, goi, template)
             che_do, van = ("llm", van_llm) if not loi else ("template_fallback", template)
         except Exception as e:  # noqa: BLE001 — LLM lỗi không được làm sập Q&A
             che_do, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]

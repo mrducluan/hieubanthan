@@ -58,10 +58,10 @@ def test_co_max_tokens_va_nho_ket_qua(monkeypatch):
     assert len(goi) == 1
 
 
-def test_thu_lai_mot_lan_khi_429_hoac_het_gio(monkeypatch):
+def test_thu_lai_mot_lan_khi_429_hoac_mat_ket_noi(monkeypatch):
     goi = _gia(monkeypatch, [_Tra(429), _Tra(200, "B")])
     assert ai_goi.goi_chat(MSG, nhiet_do=0.4, max_tokens=500) == "B" and len(goi) == 2
-    goi = _gia(monkeypatch, [httpx.ReadTimeout("t"), _Tra(200, "C")])
+    goi = _gia(monkeypatch, [httpx.ConnectError("c"), _Tra(200, "C")])
     assert ai_goi.goi_chat(MSG, nhiet_do=0.4, max_tokens=500) == "C" and len(goi) == 2
 
 
@@ -99,3 +99,36 @@ def test_mot_luat_hoc_dung_chung():
     h = [{"ma_mau": "a", "tieu_de": "A"}, {"ma_mau": "b", "tieu_de": "B"}]
     chon, xem_lai = dsc._ap_hoc(h, {"a": {"dung": 30, "chua_dung": 70}}, {"b": "chua_dung"})
     assert [x["ma_mau"] for x in chon] == ["b"] and xem_lai == ["Đang xem lại: A"]
+
+
+def test_khong_nho_ban_khong_qua_kiem(monkeypatch):
+    goi = _gia(monkeypatch, [_Tra(200, "xấu"), _Tra(200, "tốt")])
+    kiem = lambda v: ["lỗi"] if v == "xấu" else []   # noqa: E731
+    assert ai_goi.goi_chat(MSG, nhiet_do=0.4, max_tokens=500, kiem=kiem) == "xấu"
+    assert ai_goi.goi_chat(MSG, nhiet_do=0.4, max_tokens=500, kiem=kiem) == "tốt"     # không lấy bản xấu từ bộ nhớ
+    assert len(goi) == 2
+
+
+def test_ban_bi_cat_la_loi(monkeypatch):
+    class Cat(_Tra):
+        def json(self):
+            return {"choices": [{"message": {"content": "dở dang"}, "finish_reason": "length"}]}
+    _gia(monkeypatch, [Cat(200)])
+    with pytest.raises(ai_goi.BiCat):
+        ai_goi.goi_chat(MSG, nhiet_do=0.4, max_tokens=50)
+
+
+def test_het_gio_khong_thu_lai(monkeypatch):
+    goi = _gia(monkeypatch, [httpx.ReadTimeout("t"), _Tra(200, "C")])
+    with pytest.raises(httpx.ReadTimeout):
+        ai_goi.goi_chat(MSG, nhiet_do=0.4, max_tokens=500)
+    assert len(goi) == 1
+
+
+def test_quan_tri_khong_tru_luot_nguoi_dung(monkeypatch):
+    _gia(monkeypatch, [_Tra(200, "G")])
+
+    def het():
+        raise ngan_sach.HetLuot("het")
+    monkeypatch.setattr(ngan_sach, "kiem_luot", het)
+    assert ai_goi.goi_chat(MSG, nhiet_do=0.4, max_tokens=500, tru_luot=False, nho=False) == "G"

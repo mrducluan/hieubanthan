@@ -85,7 +85,8 @@ def _goi_llm(tieu_de: str, doan: list[str], mo_dun: str) -> str:
     return ai_goi.goi_chat(
         [{"role": "system", "content": _SYSTEM.format(mo_dun=ten, cum_cam="; ".join(f'"{c}"' for c in _cum_cam()))},
          {"role": "user", "content": json.dumps({"chuong": tieu_de, "doan": doan}, ensure_ascii=False)}],
-        nhiet_do=0.4, max_tokens=max(250, min(1200, nguon * 3 // 4)), het_gio=40).strip()
+        nhiet_do=0.4, max_tokens=max(250, min(1200, nguon * 3 // 4)), het_gio=40,
+        kiem=lambda v: kiem_tra_chuong(v.strip(), "\n".join([tieu_de, *doan]))).strip()
 
 
 CHUONG_NGAN = 200      # EN-4: thân chương ngắn hơn (ký tự) → giữ nguyên bản gốc, không gọi AI (AI dễ thêm ý để "đủ dài")

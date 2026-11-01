@@ -16,6 +16,7 @@ import os
 import threading
 import time
 from collections import OrderedDict
+from collections.abc import Callable
 
 import httpx
 
@@ -46,9 +47,16 @@ def _khoa(mo_hinh: str, nhiet_do: float, max_tokens: int, messages: list[dict]) 
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
+class BiCat(RuntimeError):
+    """Bản AI bị cắt ở giới hạn max_tokens (finish_reason = length) — coi như lỗi, nơi gọi rơi về bản gốc."""
+
+
 def goi_chat(messages: list[dict], *, nhiet_do: float, max_tokens: int, mo_hinh: str | None = None,
-             het_gio: float = 45, nho: bool = True) -> str:
-    """→ nội dung trả lời (chuỗi). Lỗi mạng / HTTP lần hai, hết lượt (`HetLuot`), thiếu khoá → ném lỗi."""
+             het_gio: float = 45, nho: bool = True, tru_luot: bool = True,
+             kiem: "Callable[[str], list] | None" = None) -> str:
+    """→ nội dung trả lời (chuỗi). Lỗi mạng / HTTP lần hai, hết lượt (`HetLuot`), bị cắt (`BiCat`), thiếu khoá → ném lỗi.
+    `kiem` = bộ kiểm của nơi gọi — chỉ nhớ bản QUA kiểm (bản bị loại không lặp lại từ bộ nhớ). `tru_luot=False`: lời
+    gọi có hạn mức riêng (quản trị), không trừ lượt AI của người dùng. Hết giờ không thử lại (đã chờ đủ lâu)."""
     from app.narrative.llm import DEFAULT_MODEL  # noqa: PLC0415 — tránh vòng import
     key = os.environ.get("OPENROUTER_API_KEY")
     if not key:
@@ -61,7 +69,8 @@ def goi_chat(messages: list[dict], *, nhiet_do: float, max_tokens: int, mo_hinh:
             if o and time.time() - o[0] < _han_nho():
                 _NHO.move_to_end(k)
                 return o[1]
-    _ngan_sach.kiem_luot()
+    if tru_luot:
+        _ngan_sach.kiem_luot()
     for lan in range(2):
         try:
             with httpx.Client(timeout=het_gio) as c:
@@ -72,14 +81,19 @@ def goi_chat(messages: list[dict], *, nhiet_do: float, max_tokens: int, mo_hinh:
                 time.sleep(1.5)
                 continue
             r.raise_for_status()
-            van = r.json()["choices"][0]["message"]["content"]
+            ch = r.json()["choices"][0]
+            if ch.get("finish_reason") == "length":
+                raise BiCat("bản AI bị cắt ở giới hạn độ dài")
+            van = ch["message"]["content"]
             break
-        except (httpx.TimeoutException, httpx.TransportError):
+        except httpx.TimeoutException:
+            raise
+        except httpx.TransportError:
             if lan == 0:
                 time.sleep(1.5)
                 continue
             raise
-    if k:
+    if k and not (kiem and kiem(van)):
         with _NHO_KHOA:
             _NHO[k] = (time.time(), van)
             while len(_NHO) > _NHO_TOI_DA:

@@ -192,6 +192,27 @@ Thước đo trên holdout_v2:
 - teencode 8/16 → ≥ 14/16.
 
 ### EN-4 · Hiệu năng + lớp AI (2–3 tuần) — nền móng GĐ2, giảm chi phí
+> **Trạng thái 2026-11-01: đã làm** (đo trên máy dev, cùng bộ lá golden):
+>
+> | Thước đo | Trước | Sau |
+> |---|---|---|
+> | An sao một lá (iztro) | 110 ms | **30 ms** (tiến trình Node chạy sẵn) |
+> | Luận giải Tử vi đời sống | 355 ms | **72 ms** (lá số + mọi ngày xem trong một lượt gọi) |
+> | Hỏi đáp Tử vi | 357 ms | **67 ms** |
+> | Thời gian tới | 503 ms | **166 ms** |
+> | Toàn bộ pytest | 190 s | 108 s |
+>
+> Đã làm: mục 1 (`ziwei/may_chu.mjs` + pool Python có thời hạn chờ, tự dựng lại, thay tiến trình sau N lượt, quay về
+> đường cũ khi lỗi; trùng khít đường cũ trên golden; Windows dùng đường cũ), mục 2 theo cách khác — gộp lời gọi thay vì
+> dựng ít chương (đã đủ nhanh, không phải tách luồng dựng chương), mục 3 (`narrative/ai_goi.goi_chat`: `max_tokens` theo
+> nguồn, thử lại một lần khi 429/5xx/lỗi mạng — hết giờ thì không thử lại, bản bị cắt (`finish_reason=length`) là lỗi,
+> nhớ theo mã băm chỉ khi bản AI qua bộ kiểm; `narrative/kiem_ai.kiem` một bộ kiểm cho hỏi đáp + luận giải: liên kết, số
+> kể cả số viết bằng chữ, thuật ngữ ≥ 2 âm tiết theo từ điển 5 mảng, cụm cấm, từ y tế, vật phẩm / giải hạn, câu ý mới,
+> độ dài; hỏi đáp kiểm với gói + bản mẫu đã dựng; quản trị không trừ lượt của người dùng; xoá `/v1/thanso/van`), mục 4
+> một phần (làm nóng lúc khởi động `ENGINE_LAM_NONG`, một luật HỌC `doi_song_khuon.danh_gia_phieu`).
+> **Chưa làm / cần anh**: chọn mô hình mặc định mới (mục 4 của tài liệu); chạy lại bộ 55 câu AI thật
+> (`docs/CHAY-55-CAU-AI-THAT.md`) — cần khoá OpenRouter thật, môi trường cloud không có; gộp regex BM-1 và tách `tom_tat`
+> (dọn mã, không đổi hành vi — để EN-6 cùng đợt gom khuôn).
 1. **Node chạy sẵn** (pool 1–2, nhận việc theo từng dòng JSON, có timeout, tự khởi động lại, thay tiến trình sau N
    lượt) + **lời gọi gộp** "lá số + các ngày xem".
    - Tử vi luận giải 400 → khoảng 130 ms; Thời gian tới 490 → khoảng 150 ms (ước tính của agent E).

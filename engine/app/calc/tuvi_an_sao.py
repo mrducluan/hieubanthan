@@ -135,7 +135,8 @@ MAY_CHU = THU_MUC / "may_chu.mjs"
 
 
 def _dung_chay_san() -> bool:
-    return os.environ.get("NODE_CHAY_SAN", "1") != "0"
+    # Windows: select() không đọc được ống tiến trình → tắt chạy sẵn, dùng đường cũ (mỗi lượt một tiến trình)
+    return os.environ.get("NODE_CHAY_SAN", "1") != "0" and os.name != "nt"
 
 
 def _so_env(ten: str, mac_dinh: int) -> int:

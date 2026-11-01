@@ -95,7 +95,11 @@ _ngan_sach = ngan_sach.NganSach(gio_nguoi=10**6, gio_tong=_so_env("LLM_QT_LUOT_G
 def _goi_llm(messages: list[dict], nhiet_do: float) -> str:
     from app.narrative import ai_goi  # noqa: PLC0415 — EN-4: hàm gọi AI chung (không nhớ: người soạn muốn bản mới)
     model = os.environ.get("OPENROUTER_MODEL_QUAN_TRI") or os.environ.get("OPENROUTER_MODEL", _llm.DEFAULT_MODEL)
-    return ai_goi.goi_chat(messages, nhiet_do=nhiet_do, max_tokens=800, mo_hinh=model, het_gio=60, nho=False)
+    # max_tokens theo độ dài đầu vào (soát lỗi / viết lại ô dài không bị cắt); hạn mức AI quản trị riêng → không trừ lượt
+    # AI của người dùng (`_ngan_sach.xin` ở nơi gọi đã kiểm hạn mức quản trị)
+    dai = sum(len(str(m.get("content", ""))) for m in messages)
+    return ai_goi.goi_chat(messages, nhiet_do=nhiet_do, max_tokens=max(800, min(8000, dai // 2)), mo_hinh=model,
+                           het_gio=60, nho=False, tru_luot=False)
 
 
 def _gon(s: str) -> str:

@@ -3,7 +3,7 @@
 (gói bằng chứng / đoạn chương): có vi phạm thì nơi gọi bỏ bản AI, dùng bản gốc (template).
 
 Kiểm: liên kết ra ngoài · số (chữ số và số viết bằng chữ từ "mười" trở lên) không có trong nguồn · thuật ngữ lạ (từ điển 5
-mảng — tên sao, cung, quẻ, thập thần…) · cụm cấm (giọng phán + `cum_cam` KB) · từ y tế không có trong nguồn · câu "ý mới"
+mảng — tên sao, cung, quẻ, thập thần…) · cụm cấm (giọng phán + `cum_cam` KB) · từ y tế · vật phẩm / giải hạn không có trong nguồn · câu "ý mới"
 (câu ≥ 10 từ mà < 25% từ nội dung có trong nguồn) · độ dài > 1,5 lần nguồn."""
 from __future__ import annotations
 
@@ -15,6 +15,10 @@ _LIEN_KET = re.compile(r"(https?://|www\.)\S+|\b[\w-]+\.(com|vn|net|org|io|xyz|i
 CAM = ["chắc chắn sẽ", "bạn sẽ", "định mệnh", "số phận đã", "không thể tránh", "bẩm sinh", "vốn dĩ", "100%", "tiền định"]
 Y_TE = ["ung thư", "tiểu đường", "huyết áp", "tim mạch", "đột quỵ", "trầm cảm", "chẩn đoán", "phẫu thuật", "xạ trị",
         "hoá trị", "hóa trị", "nhập viện", "uống thuốc", "kê đơn", "khối u", "suy thận", "viêm gan"]
+# Ranh giới cứng: không bán / gợi vật phẩm "hoá giải", lễ giải hạn — chỉ chặn khi nguồn không có
+VAT_PHAM = ["vòng tay", "thạch anh", "tỳ hưu", "tì hưu", "linh vật", "vật phẩm", "đá phong thuỷ", "đá phong thủy",
+            "bùa", "giải hạn", "cúng sao", "dâng sao", "trấn yểm", "hoá giải bằng", "hóa giải bằng", "cóc ngậm tiền",
+            "thiềm thừ", "gương bát quái", "chuông gió"]
 _SO_CHU = {"không": 0, "một": 1, "mốt": 1, "hai": 2, "ba": 3, "bốn": 4, "tư": 4, "năm": 5, "lăm": 5, "sáu": 6,
            "bảy": 7, "tám": 8, "chín": 9}
 # "mười năm" = 10 năm (không phải 15 — 15 là "mười lăm"); hàng đơn vị không nhận "năm"
@@ -30,12 +34,15 @@ def _bo_dau(s: str) -> str:
     return "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn").lower()
 
 
+_BO_TU_KD = {_bo_dau(w) for w in _BO_TU}      # so khớp trên chữ đã bỏ dấu
+
+
 @lru_cache(maxsize=1)
 def _thuat_ngu() -> tuple[str, ...]:
+    """Thuật ngữ ≥ 2 âm tiết của từ điển 5 mảng (từ đơn như "Tuần", "Bình", "Cung", "Hướng" trùng chữ thường → bỏ)."""
     from app.kb import tu_dien  # noqa: PLC0415
-    ten = {m["ten"] for m in tu_dien.tat_ca() if len(m["ten"]) >= 4} | \
-          {b for m in tu_dien.tat_ca() for b in m.get("bien_the", []) if len(b) >= 5}
-    return tuple(sorted(ten, key=len, reverse=True))
+    ten = {m["ten"] for m in tu_dien.tat_ca()} | {b for m in tu_dien.tat_ca() for b in m.get("bien_the", [])}
+    return tuple(sorted((t for t in ten if len(t.split()) >= 2), key=len, reverse=True))
 
 
 def _so_chu(s: str) -> set[int]:
@@ -48,7 +55,7 @@ def _so_chu(s: str) -> set[int]:
 
 
 def _tu(s: str) -> list[str]:
-    return [w for w in re.findall(r"\w+", s.lower()) if len(w) >= 2 and w not in _BO_TU and not w.isdigit()]
+    return [w for w in re.findall(r"\w+", s.lower()) if len(w) >= 2 and w not in _BO_TU_KD and not w.isdigit()]
 
 
 def kiem(van: str, nguon: str, so_duoc: set[int] | None = None, cum_them: list[str] | None = None,
@@ -66,16 +73,18 @@ def kiem(van: str, nguon: str, so_duoc: set[int] | None = None, cum_them: list[s
         loi += [f"số lạ (viết bằng chữ): {n}" for n in sorted(_so_chu(van) - so_nguon)]
     con_lai = van.lower() if kiem_thuat_ngu else ""
     for t in _thuat_ngu():                       # dài trước: "Thiên Phủ" không bị đếm thành "Thiên"
-        tl = t.lower()
-        if tl in con_lai:
-            if tl not in goc:
+        rx = re.compile(r"(?<!\w)" + re.escape(t.lower()) + r"(?!\w)")
+        if rx.search(con_lai):
+            if not rx.search(goc):
                 loi.append(f"thuật ngữ lạ: {t}")
-            con_lai = con_lai.replace(tl, " ")
+            con_lai = rx.sub(" ", con_lai)
     thap = van.lower()
     for c in CAM + list(cum_them or []):
         if c.lower() in thap and c.lower() not in goc:
             loi.append(f"cụm cấm: {c}")
     loi += [f"từ y tế: {c}" for c in Y_TE if c in thap and c not in goc]
+    loi += [f"vật phẩm: {c}" for c in VAT_PHAM if re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", thap)
+            and not re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", goc)]
     if kiem_y_moi:
         tu_nguon = set(_tu(_bo_dau(nguon)))
         for cau in re.split(r"(?<=[.!?…])\s+", van):
