@@ -5,7 +5,8 @@ import { unstable_noStore as noStore } from "next/cache";
 import type { HanNam, HoiDap, MetaKb } from "@/lib/tuoi-dan-gian";
 
 export type QuanHeNam = "trung" | "xung" | "hinh" | "hai" | "tam_hop" | "luc_hop" | "binh";
-export interface DongConGiap { chi: string; quan_he: QuanHeNam; nhan: string; loi: string; tam_tai: number | null; loi_tam_tai: string | null; nam_sinh: number[] }
+export interface DongConGiap { chi: string; quan_he: QuanHeNam; nhan: string; loi: string; tam_tai: number | null; loi_tam_tai: string | null; nam_sinh: number[];
+  /** NAM-3: năm sinh có trang "Tử vi năm … tuổi …" (engine cũ: không có). */ nam_sinh_trang?: number[] }
 export interface NamTongQuan extends MetaKb {
   nam: number; can_chi: string; can: string; con_giap: string; nap_am: { ten: string; hanh: string; han: string };
   tet: string; het_nam: string; lap_xuan: string; thang_nhuan: number; nam_truoc_tet: { nam: number; can_chi: string };
@@ -40,6 +41,23 @@ async function lay<T>(duong: string): Promise<T | null> {
   noStore();
   return null;
 }
+
+// NAM-3 — "Tử vi năm {nam} tuổi {can chi}" (một trang mỗi năm sinh, gộp nam + nữ mạng).
+export interface SaoGioi { ten: string; han: string | null; nghia: string; viec: string[]; tu_soi: string }
+export interface DiemNhan { loai: "thuan" | "luu_y" | "trung"; tieu_de: string; noi_dung: string; can_cu: string }
+export interface NamTheoTuoi extends MetaKb {
+  nam: number; can_chi_nam: string; nap_am_nam: string; tuoi_mu: number;
+  nguoi: { nam_sinh: number; can_chi: string; nap_am: string; hanh: string };
+  quan_he: { chi: string; can: string; nap_am: string }; diem_nhan: DiemNhan[];
+  sao: { nam: SaoGioi | null; nu: SaoGioi | null }; tam_tai: number | null; kim_lau: string | null;
+  lam_nha: { thuan: boolean; xau: string[]; hoang_oc: string };
+  tu_hoa: { hoa: "Lộc" | "Quyền" | "Khoa" | "Kỵ"; sao: string; y_nghia: string }[]; tu_hoa_loi: string; ranh_gioi: string;
+  tra_loi_nhanh: string; hoi_dap: HoiDap[];
+}
+export const namTheoTuoiCongKhai = (nam: number, ns: number) => lay<NamTheoTuoi>(`/v1/nam/${nam}/tuoi/${ns}`);
+export const duongNamTuoi = (nam: number, ns: number) => `/nam/${nam}/tuoi-${ns}`;
+/** Có trang index: năm âm hiện tại + năm sau, năm sinh 1960–2005 (như cụm tuổi làm nhà / xông đất). */
+export const namTuoiIndex = (nam: number, namAm: number, ns: number) => namIndex(nam, namAm) && ns >= 1960 && ns <= 2005;
 
 export const namCongKhai = (nam: number) => lay<NamTongQuan>(`/v1/nam/${nam}`);
 export const sinhConCongKhai = (nam: number) => lay<NamSinhCon>(`/v1/nam/${nam}/sinh-con`);

@@ -89,7 +89,9 @@ def tong_quan(nam: int) -> dict:
         o = qh_kb[qh or "binh"]
         con_giap.append({"chi": c, "quan_he": qh or "binh", "nhan": o["nhan"], "loi": o["loi"], "tam_tai": tt,
                          "loi_tam_tai": KB["tam_tai_loi"].format(nam_thu=tt) if tt else None,
-                         "nam_sinh": _vi_du_nam_sinh(c, nam)})
+                         "nam_sinh": _vi_du_nam_sinh(c, nam),
+                         # NAM-3: năm sinh có trang "Tử vi năm {nam} tuổi …" (1960–2005, như các cụm tuổi khác).
+                         "nam_sinh_trang": [n for n in tdg.NAM_SINH_SEO if lunar.can_chi_nam(n)[1] == c]})
     tuoi_hop = [r["chi"] for r in con_giap if r["quan_he"] in ("tam_hop", "luc_hop")]
     lx = _lap_xuan(nam)
     tra_loi = (f"Năm {nam} là năm {can} {chi}, mệnh {na['ten']} — hành {na['hanh']}. "
@@ -192,4 +194,102 @@ def cuoi_hoi(nam: int) -> dict:
     ]
     return {"nam": nam, "can_chi": f"{can} {chi}", "tet": tet.isoformat(), "ds": ds, "so_duoc": len(duoc),
             "cach_tinh": k["cach_tinh"], "muon_tuoi": k["muon_tuoi"], "ranh_gioi": k["ranh_gioi"],
+            "tra_loi_nhanh": tra_loi, "hoi_dap": hoi_dap, **_meta()}
+
+
+# ---- NAM-3 (2026-11-01, chủ dự án duyệt): "Tử vi năm {nam} tuổi {can chi}" — một trang mỗi năm sinh, gộp nam + nữ ----
+# Chỉ ghép dữ kiện CHUNG theo năm sinh (giống nhau với mọi người cùng năm sinh — nói rõ trên trang): quan hệ địa chi /
+# thiên can / nạp âm của tuổi với năm, Tam tai, Kim lâu + Hoang ốc (làm nhà, cưới), sao hạn Cửu Diệu + Bát hạn hai giới,
+# tứ hoá của can năm (`calc.tuvi_luu_nguyet.TU_HOA`, bảng iztro) — rồi mời xem lá số riêng. Không điểm số, không dự báo.
+def _can_quan_he(can_nam: str, can_nguoi: str) -> str:
+    if frozenset((can_nam, can_nguoi)) in t.NGU_HOP_CAN:
+        return "ngu_hop"
+    return {"sinh": "sinh", "bị sinh": "bi_sinh", "khắc": "khac", "bị khắc": "bi_khac"}.get(
+        cc.sinh_khac(t.HANH_CAN[can_nam], t.HANH_CAN[can_nguoi]), "binh_hoa")
+
+
+_TEN_CHI = {"tam_hop": "tam hợp", "luc_hop": "lục hợp", "trung": "năm tuổi", "xung": "xung", "hinh": "hình", "hai": "hại"}
+
+
+def _sao_gioi(tuoi: int, gioi: str) -> dict | None:
+    ten = t.sao_han(tuoi, gioi)
+    if not ten:
+        return None
+    o = tdg.SH["sao"][ten]
+    return {"ten": ten, "han": t.bat_han(tuoi, gioi), "nghia": o["nghia"], "viec": list(o["viec"]), "tu_soi": o["tu_soi"]}
+
+
+def theo_tuoi(nam: int, nam_sinh: int) -> dict:
+    from app.calc.tuvi_luu_nguyet import TU_HOA  # noqa: PLC0415
+    k = KB["theo_tuoi"]
+    can_n, chi_n = t.can_chi_nam(nam)
+    can_s, chi_s = t.can_chi_nam(nam_sinh)
+    na_n, na_s = cc.nap_am(can_n, chi_n), cc.nap_am(can_s, chi_s)
+    tuoi = t.tuoi_mu(nam_sinh, nam)
+    q_chi = t.quan_he_chi(chi_s, chi_n) or "binh"
+    q_can = _can_quan_he(can_n, can_s)
+    q_na = cc.sinh_khac(na_n["hanh"], na_s["hanh"])          # quan hệ của mệnh NĂM đối với mệnh NGƯỜI
+    tt = t.pham_tam_tai(chi_s, chi_n)
+    kl = t.kim_lau(tuoi)
+    d_lam = tdg._danh_gia_nam(nam_sinh, nam)
+    sao = {"nam": _sao_gioi(tuoi, "nam"), "nu": _sao_gioi(tuoi, "nu")}
+
+    dn: list[dict] = []
+    cu_chi = f"Địa chi: tuổi {chi_s} – năm {chi_n}"
+    if q_chi in ("tam_hop", "luc_hop"):
+        dn.append({"loai": "thuan", "tieu_de": f"Tuổi {chi_s} {_TEN_CHI[q_chi]} với năm {chi_n}", "noi_dung": k["chi"][q_chi], "can_cu": cu_chi})
+    elif q_chi in ("trung", "xung", "hinh", "hai"):
+        td = f"Năm {chi_n} là năm tuổi của bạn" if q_chi == "trung" else f"Tuổi {chi_s} {_TEN_CHI[q_chi]} với năm {chi_n}"
+        dn.append({"loai": "luu_y", "tieu_de": td, "noi_dung": k["chi"][q_chi], "can_cu": cu_chi})
+    loai_can = "thuan" if q_can in ("ngu_hop", "sinh") else "luu_y" if q_can == "khac" else "trung"
+    td_can = f"Năm {can_n} trùng can tuổi bạn" if can_n == can_s else f"Can {can_n} {k['ten_can'][q_can]} can {can_s}"
+    dn.append({"loai": loai_can, "tieu_de": td_can, "noi_dung": k["can"][q_can],
+               "can_cu": f"Thiên can: năm {can_n} ({t.HANH_CAN[can_n]}) – tuổi {can_s} ({t.HANH_CAN[can_s]})"})
+    loai_na = "thuan" if q_na == "sinh" else "luu_y" if q_na == "khắc" else "trung"
+    dn.append({"loai": loai_na, "tieu_de": f"Mệnh {na_n['hanh']} của năm gặp mệnh {na_s['hanh']} của bạn",
+               "noi_dung": k["nap_am"][q_na], "can_cu": f"Nạp âm: năm {na_n['ten']} – tuổi {na_s['ten']}"})
+    if tt:
+        dn.append({"loai": "luu_y", "tieu_de": f"Năm thứ {tt} của Tam tai", "noi_dung": KB["tam_tai_loi"].format(nam_thu=tt),
+                   "can_cu": f"Tam tai tuổi {chi_s}: năm {', '.join(t.tam_tai(chi_s))}"})
+    con = [x for x in d_lam["xau"] if not x.startswith("Tam tai")]
+    if con:
+        dn.append({"loai": "luu_y", "tieu_de": "Làm nhà, cưới hỏi năm này: nên cân nhắc",
+                   "noi_dung": f"Tuổi mụ {tuoi} rơi vào {', '.join(con)} — dân gian thường lùi năm hoặc mượn tuổi người thân đứng tên; việc khác vẫn làm như thường.",
+                   "can_cu": f"Tuổi mụ {tuoi}: Kim lâu chia 9 dư 1, 3, 6, 8; Hoang ốc đếm theo hàng chục"})
+    if sao["nam"]:
+        dn.append({"loai": "trung", "tieu_de": f"Sao năm theo tục: nam {sao['nam']['ten']}, nữ {sao['nu']['ten']}",
+                   "noi_dung": "Sao hạn xếp theo tuổi mụ và giới tính, giống nhau cho mọi người cùng tuổi; mỗi sao đọc bằng việc nên làm bên dưới.",
+                   "can_cu": f"Cửu Diệu theo tuổi mụ {tuoi}"})
+    thu_tu = {"thuan": 0, "luu_y": 1, "trung": 2}
+    dn = sorted(dn, key=lambda x: thu_tu[x["loai"]])[:6]
+
+    tu_hoa_kb = json.loads((Path(__file__).parents[1] / "kb" / "data" / "tuvi_kb.json").read_text(encoding="utf-8"))["tu_hoa"]
+    tu_hoa = [{"hoa": h, "sao": s, "y_nghia": tu_hoa_kb[h]["y_nghia"]} for h, s in zip(("Lộc", "Quyền", "Khoa", "Kỵ"), TU_HOA[can_n])]
+    thuan = [x["tieu_de"] for x in dn if x["loai"] == "thuan"]
+    luu_y = [x["tieu_de"] for x in dn if x["loai"] == "luu_y"]
+    tra_loi = (f"Năm {nam} ({can_n} {chi_n}), người tuổi {can_s} {chi_s} sinh {nam_sinh} (mệnh {na_s['ten']}) bước vào tuổi mụ {tuoi}. "
+               + (f"Điểm thuận: {thuan[0][:1].lower()}{thuan[0][1:]}. " if thuan else "")
+               + (f"Điều nên để ý: {'; '.join(x[:1].lower() + x[1:] for x in luu_y[:2])}. " if luu_y else "")
+               + (f"Sao theo tục: nam {sao['nam']['ten']}, nữ {sao['nu']['ten']}." if sao["nam"] else ""))
+    hoi_dap = [
+        {"hoi": f"Tuổi {can_s} {chi_s} {nam_sinh} năm {nam} thế nào?", "dap": tra_loi},
+        {"hoi": f"Tuổi {can_s} {chi_s} năm {nam} sao gì chiếu mệnh?",
+         "dap": (f"Theo tục xếp theo tuổi mụ {tuoi}: nam mạng sao {sao['nam']['ten']} (hạn {sao['nam']['han']}), nữ mạng sao "
+                 f"{sao['nu']['ten']} (hạn {sao['nu']['han']}). Mỗi sao đọc bằng việc nên làm trên trang, không cần nghi lễ gì."
+                 if sao["nam"] else f"Dưới 10 tuổi mụ, dân gian không xếp sao hạn.")},
+        {"hoi": f"Tuổi {can_s} {chi_s} năm {nam} có phạm Tam tai, Kim lâu không?",
+         "dap": (f"{'Có, năm thứ ' + str(tt) + ' của Tam tai' if tt else 'Không phạm Tam tai'}; "
+                 f"{'phạm ' + tdg.KB['kim_lau'][kl]['ten'] if kl else 'không phạm Kim lâu'} (tuổi mụ {tuoi}). "
+                 f"Làm nhà năm {nam}: {'thuận theo tập quán' if not d_lam['xau'] else 'dân gian thường cân nhắc (' + ', '.join(d_lam['xau']) + ')'}.")},
+        {"hoi": f"Tuổi {can_s} {chi_s} hợp, kỵ gì với năm {can_n} {chi_n}?",
+         "dap": f"{cu_chi}: {_TEN_CHI.get(q_chi, 'không hợp không xung')}. Thiên can {can_n}–{can_s}: {k['ten_can'][q_can]}. "
+                f"Nạp âm {na_n['ten']}–{na_s['ten']}: {q_na}. Đây là quan niệm dân gian, không định sẵn chuyện tốt xấu."},
+        {"hoi": "Phần đọc theo tuổi khác gì lá số riêng?", "dap": k["ranh_gioi"]},
+    ]
+    return {"nam": nam, "can_chi_nam": f"{can_n} {chi_n}", "nap_am_nam": na_n["ten"],
+            "nguoi": {"nam_sinh": nam_sinh, "can_chi": f"{can_s} {chi_s}", "nap_am": na_s["ten"], "hanh": na_s["hanh"]},
+            "tuoi_mu": tuoi, "quan_he": {"chi": q_chi, "can": q_can, "nap_am": q_na},
+            "diem_nhan": dn, "sao": sao, "tam_tai": tt, "kim_lau": tdg.KB["kim_lau"][kl]["ten"] if kl else None,
+            "lam_nha": {"thuan": not d_lam["xau"], "xau": d_lam["xau"], "hoang_oc": tdg.KB["hoang_oc"][d_lam["ho"]]["ten"]},
+            "tu_hoa": tu_hoa, "tu_hoa_loi": k["tu_hoa"].format(can_chi=f"{can_n} {chi_n}"), "ranh_gioi": k["ranh_gioi"],
             "tra_loi_nhanh": tra_loi, "hoi_dap": hoi_dap, **_meta()}

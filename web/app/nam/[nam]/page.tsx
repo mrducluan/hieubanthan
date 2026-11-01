@@ -9,7 +9,7 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNamBang, duongHanNam, duongLamNhaNam, duongSaoHanNam, duongXongDatNam, namAmHienTai } from "@/lib/tuoi-dan-gian";
-import { dmy, duongCuoiHoi, duongNam, duongSinhCon, namCongKhai, namIndex } from "@/lib/nam";
+import { dmy, duongCuoiHoi, duongNam, duongNamTuoi, duongSinhCon, namCongKhai, namIndex } from "@/lib/nam";
 import { duongLichAm } from "@/lib/lich-am";
 import { duongThang } from "@/lib/hoang-lich";
 import { duongTrang } from "@/lib/kien-thuc";
@@ -48,6 +48,7 @@ export default async function Page(p: P) {
     ["Năm thế giới (thần số)", d.so_nam_the_gioi.so === d.so_nam_the_gioi.rut_gon ? String(d.so_nam_the_gioi.so) : `${d.so_nam_the_gioi.so} / ${d.so_nam_the_gioi.rut_gon}`],
   ];   // 12 ô: kín hàng ở lưới 2 và 3 cột
   const tra: { href: string; ten: string; mo_ta: string }[] = [
+    { href: "#theo-tuoi", ten: `Tử vi năm ${n} theo tuổi`, mo_ta: "Từng năm sinh 1960–2005, nam và nữ mạng" },
     { href: duongSaoHanNam(n), ten: `Sao hạn năm ${n}`, mo_ta: "Sao Cửu Diệu theo tuổi, nam và nữ" },
     { href: duongLamNhaNam(n), ten: `Tuổi làm nhà năm ${n}`, mo_ta: "Kim lâu, Hoang ốc, Tam tai từng tuổi" },
     { href: duongCuoiHoi(n), ten: `Cưới năm ${n} tuổi nào`, mo_ta: "Kim lâu theo tuổi mụ cô dâu" },
@@ -101,6 +102,26 @@ export default async function Page(p: P) {
           ))}
         </ul>
       </section>
+
+      {d.bang_con_giap.some((r) => r.nam_sinh_trang?.length) && (
+        <section className="mt-8" aria-labelledby="theo-tuoi">
+          <h2 id="theo-tuoi" className="text-2xl">Tử vi năm {n} theo tuổi</h2>
+          <p className="mt-1 text-sm text-fg-muted">Chọn năm sinh để xem điểm thuận, điều nên để ý, sao năm của nam mạng và nữ mạng — đọc bằng lời đời thường.</p>
+          <div className="mt-4 grid gap-2 sm:grid-cols-2" data-testid="luoi-theo-tuoi">
+            {d.bang_con_giap.filter((r) => r.nam_sinh_trang?.length).map((r) => (
+              <div key={r.chi} className="flex items-center gap-3 rounded-xl border border-line/70 px-3 py-2.5">
+                <span className={`w-12 shrink-0 font-serif text-lg ${r.quan_he === "tam_hop" || r.quan_he === "luc_hop" ? "text-jade" : r.quan_he === "binh" ? "text-fg" : "text-gold"}`} title={r.nhan}>{r.chi}</span>
+                <span className="flex flex-wrap gap-1.5">
+                  {r.nam_sinh_trang!.map((ns) => (
+                    <Link key={ns} href={duongNamTuoi(n, ns)} className="inline-flex min-h-9 items-center rounded-full border border-line px-3 text-sm tabular-nums text-fg-muted hover:border-gold/50 hover:text-fg">{ns}</Link>
+                  ))}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-2 text-xs text-fg-faint">Màu tên con giáp: xanh = hợp với năm, vàng = năm tuổi hoặc xung, hình, hại.</p>
+        </section>
+      )}
 
       <section className="mt-8" aria-labelledby="con-giap">
         <h2 id="con-giap" className="text-2xl">{c("con_giap.tieu_de", bien)}</h2>

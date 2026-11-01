@@ -25,26 +25,33 @@ const lk = (duong_dan: string, nhan: string): Lk => ({ nhan, duong_dan });
 
 export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; con: (Lk & { mo_ta: string })[] })[] = [
   { ...lk("/ban-than", "Bản thân"), bieu_tuong: "lap_lanh", di_dong: true, con: [
-    { ...lk("/than-so", "Thần số học"), mo_ta: "Con số chủ đạo, biểu đồ ngày sinh, năm cá nhân" },
+    { ...lk("/than-so", "Thần số học"), mo_ta: "Bốn số cốt lõi, Bản đồ con số, năm cá nhân" },
     { ...lk("/hom-nay", "Hôm nay của bạn"), mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { ...lk("/xem-ngay-tot", "Xem ngày tốt"), mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
   ] },
-  { ...lk("/hop-doi", "Hợp đôi"), bieu_tuong: "trai_tim", di_dong: true, con: [] },
+  { ...lk("/hop-doi", "Hợp đôi"), bieu_tuong: "trai_tim", di_dong: true, con: [
+    { ...lk("/hop-doi", "Hợp đôi thần số"), mo_ta: "Hai con số chủ đạo, không chấm điểm" },
+    { ...lk("/tu-vi#hop-tham", "Xem lá số 2 người"), mo_ta: "Điểm hợp – khắc theo Tử vi, cách dung hoà" },
+    { ...lk("/hop-doi/cap-so", "Số chủ đạo hợp nhau"), mo_ta: "45 cặp số, hợp ở đâu, vấp ở đâu" },
+  ] },
   { ...lk("/huyen-hoc", "Huyền học"), bieu_tuong: "la_ban", di_dong: true, con: [
-    { ...lk("/tu-vi", "Tử vi"), mo_ta: "Lá số 12 cung, đại hạn, lưu niên" },
+    { ...lk("/tu-vi", "Tử vi"), mo_ta: "Lá số 12 cung, 3 tháng tới, định giờ sinh" },
     { ...lk("/bat-tu", "Bát tự"), mo_ta: "Tứ trụ, ngũ hành, thập thần" },
-    { ...lk("/kinh-dich", "Kinh Dịch"), mo_ta: "Gieo quẻ, đọc lời hào" },
-    { ...lk("/phong-thuy", "Phong thuỷ"), mo_ta: "Hướng nhà, mệnh quái, bố trí" },
+    { ...lk("/kinh-dich", "Kinh Dịch"), mo_ta: "Gieo 3 đồng xu, quẻ đầu ngày, lời hào" },
+    { ...lk("/phong-thuy", "Phong thuỷ"), mo_ta: "La bàn đo hướng, khảo sát nhà, bố trí" },
     { ...lk("/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"), mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     { ...lk("/phong-thuy/huong-xau-nam", "Hướng xấu theo năm"), mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
     { ...lk("/tuoi-xong-dat", "Tuổi xông đất"), mo_ta: "Tuổi hợp gia chủ, giờ đẹp mùng 1" },
     { ...lk("/xem-sao-han", "Sao hạn theo tuổi"), mo_ta: "La Hầu, Kế Đô, Thái Bạch… đọc bằng lời thường" },
+    { ...lk("/phong-thuy/huong-hop-tuoi", "Hướng nhà hợp tuổi"), mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
+    { ...lk("/phong-thuy/dau-hieu", "Dấu hiệu trong nhà"), mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
     { ...lk("/kien-thuc", "Thư viện kiến thức"), mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
   ] },
   // NAM-1/NAM-2: "{nam}" được web thay bằng năm đang mời xem (gõ {nam} trong chữ / đường dẫn của mục bất kỳ).
   { ...lk("/nam/{nam}", "Năm {nam}"), bieu_tuong: "lich", di_dong: true, con: [
     { ...lk("/thoi-gian-toi", "3 tháng, 12 tháng tới của bạn"), mo_ta: "Theo thần số, Tử vi, Bát tự của chính bạn" },
     { ...lk("/nam/{nam}", "Năm {nam} con gì, mệnh gì"), mo_ta: "Tết, Tam tai, năm tuổi, 12 con giáp" },
+    { ...lk("/nam/{nam}#theo-tuoi", "Tử vi năm {nam} theo tuổi"), mo_ta: "Từng năm sinh, nam mạng và nữ mạng" },
     { ...lk("/xem-sao-han/{nam}", "Sao hạn năm {nam}"), mo_ta: "Sao chiếu theo tuổi, nam và nữ" },
     { ...lk("/xem-tuoi-lam-nha/{nam}", "Tuổi làm nhà năm {nam}"), mo_ta: "Kim lâu, Hoang ốc, Tam tai từng tuổi" },
     { ...lk("/nam/{nam}/cuoi-hoi", "Cưới năm {nam} tuổi nào"), mo_ta: "Kim lâu theo tuổi cô dâu" },
@@ -52,6 +59,7 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/tuoi-xong-dat/{nam}", "Xông đất Tết {nam}"), mo_ta: "Tuổi hợp gia chủ, giờ đẹp mùng 1" },
     { ...lk("/phong-thuy/huong-xau-nam/{nam}", "Hướng xấu năm {nam}"), mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
     { ...lk("/lich-am/{nam}", "Lịch âm {nam}"), mo_ta: "Tết, tháng nhuận, mùng 1 và rằm" },
+    { ...lk("/doi-lich-am-duong", "Đổi lịch âm dương"), mo_ta: "Đổi ngày âm ↔ dương theo lịch Việt Nam" },
   ] },
   { ...lk("/blog", "Blog"), bieu_tuong: "bao", di_dong: false, con: [] },
   { ...lk("/tai-khoan", "Tài khoản"), bieu_tuong: "nguoi", di_dong: true, con: [

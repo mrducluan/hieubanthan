@@ -7,7 +7,7 @@ import { daHetHan, dsTrangDichCms } from "@/lib/cms";
 import { duongTrangSo, soTrang } from "@/lib/phan-trang";
 import { THANG_SAU, THANG_TRUOC, VIEC_SEO, duongThang, duongViecThang, homNayVN } from "@/lib/hoang-lich";
 import { duongLichAm } from "@/lib/lich-am";
-import { duongCuoiHoi, duongNam, duongSinhCon } from "@/lib/nam";
+import { duongCuoiHoi, duongNam, duongNamTuoi, duongSinhCon } from "@/lib/nam";
 import { NAM_SINH_SEO, duongHanNam, duongLamNha, duongLamNhaNam, duongSaoHanNam, duongXongDat, duongXongDatNam, namAmHienTai } from "@/lib/tuoi-dan-gian";
 
 export const revalidate = 21600;
@@ -43,13 +43,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...[namAm - 1, namAm, namAm + 1, namAm + 2].map((n) => ({ url: urlDayDu(duongHanNam(n)), changeFrequency: "yearly" as const, priority: 0.6 })),
     // SEO-L1: bảng theo năm (cùng cửa sổ trang con).
     ...[namAm, namAm + 1].flatMap((n) => [duongLamNhaNam(n), duongXongDatNam(n), duongSaoHanNam(n)]).map((d) => ({ url: urlDayDu(d), changeFrequency: "monthly" as const, priority: 0.7 })),
-    // SEO-L2: ngày tốt theo việc — tháng này → 12 tháng tới (trang ngoài khoảng vẫn index trong cửa sổ tháng nhưng không đưa sitemap).
-    ...thangSitemap().slice(THANG_TRUOC, THANG_TRUOC + 13).flatMap((d) => {
+    // SEO-L2 → NAM-1 (chủ dự án duyệt 2026-11-01): ngày tốt theo việc — tháng này → hết cửa sổ index (+24 tháng), khớp
+    // `thangIndex` để không còn trang index mà thiếu trong sitemap (vd cưới hỏi, động thổ cả năm 2027–2028).
+    ...thangSitemap().slice(THANG_TRUOC).flatMap((d) => {
       const [, m, y] = d.match(/thang-(\d+)-(\d{4})$/)!;
       return VIEC_SEO.map((v) => ({ url: urlDayDu(duongViecThang(v.slug, Number(y), Number(m))), changeFrequency: "weekly" as const, priority: 0.6 }));
     }),
     // NAM-1: trang trụ năm + sinh con + cưới hỏi (năm âm hiện tại + năm sau).
     ...[namAm, namAm + 1].flatMap((n) => [duongNam(n), duongSinhCon(n), duongCuoiHoi(n)]).map((d) => ({ url: urlDayDu(d), changeFrequency: "monthly" as const, priority: 0.8 })),
+    // NAM-3: Tử vi năm theo tuổi (năm sinh 1960–2005).
+    ...[namAm, namAm + 1].flatMap((n) => NAM_SINH_SEO.map((ns) => ({ url: urlDayDu(duongNamTuoi(n, ns)), changeFrequency: "yearly" as const, priority: 0.6 }))),
     // SEO-L5: lịch âm năm nay −2 … +3.
     ...Array.from({ length: 6 }, (_, i) => namAm - 2 + i).map((n) => ({ url: urlDayDu(duongLichAm(n)), changeFrequency: "yearly" as const, priority: 0.6 })),
     ...tuoi.map((t) => ({ url: urlDayDu(duongTuoi(t.slug)), changeFrequency: "yearly" as const, priority: 0.6 })),

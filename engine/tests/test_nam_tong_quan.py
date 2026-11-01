@@ -5,6 +5,8 @@ cưới năm X tuổi nào (Kim lâu theo tuổi mụ cô dâu). Golden tính ta
 (Tam tai năm Tỵ, Ngọ, Mùi → năm thứ 3); Sửu xung Mùi; Ngọ lục hợp Mùi; năm thế giới 2+0+2+7 = 11."""
 import json
 
+import pytest
+
 from fastapi.testclient import TestClient
 
 from app.luangiai import nam_tong_quan as N
@@ -99,3 +101,65 @@ def test_api_nam():
     assert client.get("/v1/nam/2027/sinh-con").status_code == 200
     assert client.get("/v1/nam/2027/cuoi-hoi").status_code == 200
     assert client.get("/v1/nam/1999").status_code == 422           # bảng tuổi chỉ từ 2006
+
+
+# ---- NAM-3 (2026-11-01): "Tử vi năm {nam} tuổi {can chi}" — một trang mỗi năm sinh, gộp nam + nữ mạng --------------
+# Golden tính tay: 1990 Canh Ngọ, nạp âm Lộ Bàng Thổ; năm 2027 Đinh Mùi (Thiên Hà Thủy). Ngọ–Mùi lục hợp; can Đinh (Hoả)
+# khắc Canh (Kim); Thổ (người) khắc Thủy (năm) → "bị khắc" xét từ năm. Tuổi mụ 38: sao nam Thổ Tú, nữ Vân Hán, hạn Ngũ
+# Mộ (cả hai); Kim lâu không (38 % 9 = 2); Hoang ốc 38 → Ngũ Thọ Tử (xấu) → làm nhà "cân nhắc". Tứ hoá Đinh: Thái Âm Lộc,
+# Thiên Đồng Quyền, Thiên Cơ Khoa, Cự Môn Kỵ.
+def test_theo_tuoi_1990_nam_2027_golden():
+    d = N.theo_tuoi(2027, 1990)
+    assert d["nguoi"]["can_chi"] == "Canh Ngọ" and d["nguoi"]["nap_am"] == "Lộ Bàng Thổ" and d["tuoi_mu"] == 38
+    assert d["quan_he"]["chi"] == "luc_hop" and d["quan_he"]["can"] == "khac" and d["quan_he"]["nap_am"] == "bị khắc"
+    assert d["sao"]["nam"]["ten"] == "Thổ Tú" and d["sao"]["nu"]["ten"] == "Vân Hán"
+    assert d["sao"]["nam"]["han"] == "Ngũ Mộ" and d["sao"]["nu"]["han"] == "Ngũ Mộ"
+    assert d["sao"]["nam"]["viec"] and d["sao"]["nu"]["tu_soi"]
+    assert d["lam_nha"]["thuan"] is False and "Ngũ Thọ Tử" in " ".join(d["lam_nha"]["xau"])
+    assert d["kim_lau"] is None and d["tam_tai"] is None
+    assert [x["sao"] for x in d["tu_hoa"]] == ["Thái Âm", "Thiên Đồng", "Thiên Cơ", "Cự Môn"]
+    assert [x["hoa"] for x in d["tu_hoa"]] == ["Lộc", "Quyền", "Khoa", "Kỵ"]
+
+
+def test_theo_tuoi_diem_nhan_va_loi():
+    d = N.theo_tuoi(2027, 1990)
+    dn = d["diem_nhan"]
+    assert 3 <= len(dn) <= 6 and all(x["loai"] in ("thuan", "luu_y", "trung") for x in dn)
+    assert dn[0]["loai"] == "thuan" and "lục hợp" in dn[0]["tieu_de"].lower()       # điểm thuận đứng đầu
+    assert all(len(x["tieu_de"]) <= 60 for x in dn)
+    assert "Canh Ngọ" in d["tra_loi_nhanh"] and "2027" in d["tra_loi_nhanh"] and len(d["tra_loi_nhanh"].split()) <= 90
+    assert len(d["hoi_dap"]) >= 4
+    _sach(d)
+
+
+@pytest.mark.parametrize("ns", range(1960, 2006))
+def test_theo_tuoi_moi_nam_sinh(ns):
+    d = N.theo_tuoi(2027, ns)
+    _sach(d)
+    m = {"Mùi": "trung", "Sửu": "xung"}.get(d["nguoi"]["can_chi"].split()[1])
+    if m:
+        assert d["quan_he"]["chi"] == m
+    if d["tam_tai"]:
+        assert d["nguoi"]["can_chi"].split()[1] in ("Hợi", "Mão", "Mùi")
+        assert any(x["loai"] == "luu_y" and "Tam tai" in x["tieu_de"] for x in d["diem_nhan"])
+
+
+def test_theo_tuoi_trang_rieng_khac_nhau():
+    """Hai năm sinh cùng con giáp vẫn khác nhau (can, nạp âm, tuổi mụ, sao) — tránh trang mỏng lặp nội dung."""
+    a, b = N.theo_tuoi(2027, 1990), N.theo_tuoi(2027, 2002)
+    assert a["nguoi"]["can_chi"].split()[1] == b["nguoi"]["can_chi"].split()[1] == "Ngọ"
+    assert a["sao"]["nam"]["ten"] != b["sao"]["nam"]["ten"] and a["nguoi"]["nap_am"] != b["nguoi"]["nap_am"]
+
+
+def test_api_theo_tuoi():
+    r = client.get("/v1/nam/2027/tuoi/1990")
+    assert r.status_code == 200 and r.json()["nguoi"]["can_chi"] == "Canh Ngọ"
+    assert client.get("/v1/nam/2027/tuoi/2027").status_code == 422
+    assert client.get("/v1/nam/2027/tuoi/1929").status_code == 422
+
+
+def test_bang_con_giap_co_nam_sinh_trang():
+    g = {r["chi"]: r for r in N.tong_quan(2027)["bang_con_giap"]}
+    assert g["Ngọ"]["nam_sinh_trang"] == [1966, 1978, 1990, 2002]
+    assert sum(len(r["nam_sinh_trang"]) for r in g.values()) == 46
+    assert N.theo_tuoi(2027, 1997)["diem_nhan"][1]["tieu_de"] == "Năm Đinh trùng can tuổi bạn"

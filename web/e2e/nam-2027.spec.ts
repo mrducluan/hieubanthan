@@ -90,3 +90,32 @@ test("điện thoại 390 px: trang năm và thời gian tới không cuộn nga
     expect(w, d).toBeLessThanOrEqual(390);
   }
 });
+
+test("NAM-3 /nam/2027/tuoi-1990: điểm nhấn có màu theo loại, sao hai giới, làm nhà, tứ hoá, mời lá số", async ({ page, request }) => {
+  const html = await (await request.get("/nam/2027/tuoi-1990")).text();
+  expect(html).toMatch(/<h1[^>]*>Tử vi năm 2027 tuổi Canh Ngọ 1990 — nam mạng và nữ mạng<\/h1>/);
+  expect(html).toContain('"@type":"FAQPage"');
+  await page.goto("/nam/2027/tuoi-1990");
+  const dn = page.getByTestId("diem-nhan").locator("li");
+  await expect(dn.first()).toHaveAttribute("data-loai", "thuan");
+  await expect(dn.first()).toContainText("lục hợp");
+  await expect(page.getByTestId("sao-nam")).toContainText("Thổ Tú");
+  await expect(page.getByTestId("sao-nu")).toContainText("Vân Hán");
+  await expect(page.getByTestId("lam-nha")).toContainText("cân nhắc");
+  await expect(page.locator("main")).toContainText("Thái Âm");
+  await expect(page.getByTestId("nut-ca-nhan")).toHaveAttribute("href", "/thoi-gian-toi?nam=2027");
+  expect(await page.locator("main").innerText()).not.toMatch(CAM);
+  expect((await request.get("/nam/2027/tuoi-2030")).status()).toBe(404);
+  // trang năm có lưới 12 con giáp trỏ xuống trang tuổi; sitemap có trang tuổi + ngày tốt theo việc tới +24 tháng
+  await page.goto("/nam/2027");
+  await expect(page.getByTestId("luoi-theo-tuoi").locator('a[href="/nam/2027/tuoi-1990"]')).toBeVisible();
+  const sm = await (await request.get("/sitemap.xml")).text();
+  expect(sm).toContain("/nam/2027/tuoi-1990</loc>");
+  expect(sm).toMatch(/\/xem-ngay-tot\/cuoi-hoi-thang-\d{1,2}-2028<\/loc>/);
+});
+
+test("menu: Hợp đôi có menu con; /tu-vi vẫn sáng Huyền học (lối tắt #hop-tham không giành mục cha)", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/tu-vi");
+  await expect(page.locator('header a[aria-current="page"], header [aria-current="page"]').first()).toContainText("Huyền học");
+});

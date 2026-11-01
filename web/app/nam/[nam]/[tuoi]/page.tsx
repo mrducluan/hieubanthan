@@ -1,0 +1,157 @@
+// NAM-3 (chủ dự án duyệt 2026-11-01) — "Tử vi năm {năm} tuổi {can chi} {năm sinh}" — MỘT trang mỗi năm sinh, gộp nam
+// mạng + nữ mạng (không 2 trang văn mẫu): điểm nhấn của tuổi với năm (địa chi, thiên can, nạp âm, Tam tai, làm nhà),
+// sao hạn hai giới bằng lời đời thường + việc nên làm, tứ hoá của năm, lối sang lá số riêng. Engine dựng hết
+// (`/v1/nam/{nam}/tuoi/{ns}`); web chỉ hiển thị. Index năm âm hiện tại + năm sau, năm sinh 1960–2005.
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowRight, CircleDot, Compass, Sparkles } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { TieuDeMuc } from "@/components/khung/TieuDe";
+import { KhoiCms } from "@/components/cms/KhoiCms";
+import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
+import { CungTuoi } from "@/components/tuoi/CungTuoi";
+import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
+import { docNamBang, docTuoi, duongLamNha, namAmHienTai } from "@/lib/tuoi-dan-gian";
+import { type DiemNhan, type SaoGioi, duongCuoiHoi, duongNam, duongNamTuoi, namTheoTuoiCongKhai, namTuoiIndex } from "@/lib/nam";
+import { taoChu } from "@/lib/chu-trang";
+import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
+import { CHU_NAM_TUOI } from "@/lib/chu/trang-con";
+
+type P = { params: Promise<{ nam: string; tuoi: string }> };
+
+async function doc(p: P) {
+  const { nam, tuoi } = await p.params;
+  const n = docNamBang(nam), ns = docTuoi(tuoi);
+  return n && ns && ns >= 1930 && ns < n ? { n, ns } : null;
+}
+
+async function metaGoc(p: P): Promise<Metadata> {
+  const x = await doc(p);
+  if (!x) return {};
+  const m = metaTrang({ tieuDe: `Tử vi năm ${x.n} tuổi ${x.ns} nam mạng, nữ mạng`,
+    moTa: `Tuổi ${x.ns} năm ${x.n}: hợp hay xung với năm, Tam tai, Kim lâu, làm nhà, sao hạn nam mạng và nữ mạng đọc bằng lời đời thường, việc nên làm trong năm — không phán hung, không cúng giải.`,
+    duong: duongNamTuoi(x.n, x.ns), anh: anhBai({ tieuDe: `Tử vi ${x.n} tuổi ${x.ns}`, mang: "lich" }) });
+  return namTuoiIndex(x.n, await namAmHienTai(), x.ns) ? m : { ...m, robots: { index: false, follow: true } };
+}
+
+const KIEU: Record<DiemNhan["loai"], { nhan: string; lop: string; cham: string }> = {
+  thuan: { nhan: "Điểm thuận", lop: "border-jade/40 bg-jade/5", cham: "bg-jade" },
+  luu_y: { nhan: "Nên để ý", lop: "border-gold/40 bg-gold/5", cham: "bg-gold" },
+  trung: { nhan: "Để biết", lop: "border-line/80 bg-surface/30", cham: "bg-fg-faint" },
+};
+const MAU_HOA: Record<string, string> = { "Lộc": "text-jade border-jade/40", "Quyền": "text-gold border-gold/40", "Khoa": "text-moon border-moon/40", "Kỵ": "text-fg-muted border-line" };
+
+function TheSao({ gioi, s }: { gioi: string; s: SaoGioi }) {
+  return (
+    <article className="glass rounded-2xl p-5" data-testid={`sao-${gioi === "Nam mạng" ? "nam" : "nu"}`}>
+      <p className="eyebrow">{gioi}</p>
+      <h3 className="mt-1 font-serif text-2xl text-gold">{s.ten}</h3>
+      {s.han && <p className="text-xs text-fg-faint">Hạn {s.han}</p>}
+      <p className="mt-3 text-sm leading-relaxed text-fg">{s.nghia}</p>
+      <ul className="mt-3 space-y-1.5 text-sm">
+        {s.viec.map((v) => <li key={v} className="flex gap-2 text-fg-muted"><CircleDot className="mt-1 size-3.5 shrink-0 text-gold" aria-hidden />{v}</li>)}
+      </ul>
+      <p className="mt-3 border-t border-line/60 pt-3 text-sm italic text-fg-muted">Tự soi: {s.tu_soi}</p>
+    </article>
+  );
+}
+
+export default async function Page(p: P) {
+  const x = await doc(p);
+  if (!x) notFound();
+  const [d, namAm] = await Promise.all([namTheoTuoiCongKhai(x.n, x.ns), namAmHienTai()]);
+  if (!d) throw new Error("engine không phản hồi");
+  const duong = duongNamTuoi(x.n, x.ns);
+  const bien = { nam: String(x.n), nam_sinh: String(x.ns), can_chi: d.nguoi.can_chi, can_chi_nam: d.can_chi_nam };
+  const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_NAM_TUOI, nd.chu);
+  const tieuDe = c("dau.tieu_de", bien);
+  const o: [string, string][] = [["Tuổi mụ năm " + x.n, String(d.tuoi_mu)], ["Mệnh của bạn", d.nguoi.nap_am], ["Mệnh của năm", d.nap_am_nam],
+    ["Tam tai", d.tam_tai ? `Năm thứ ${d.tam_tai}` : "Không"]];
+  return (
+    <div className="mx-auto max-w-3xl">
+      <JsonLd data={goiLd(
+        ldTrangWeb({ duong, ten: tieuDe, tomTat: d.tra_loi_nhanh, about: [`Tuổi ${d.nguoi.can_chi}`, `Năm ${d.can_chi_nam}`, "Sao hạn"] }),
+        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Năm", duong: "/nam" }, { ten: `Năm ${x.n}`, duong: duongNam(x.n) }, { ten: `Tuổi ${d.nguoi.can_chi} ${x.ns}`, duong }]),
+        ldHoiDap(d.hoi_dap),
+      )} />
+      <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href={duongNam(x.n)} className="hover:underline">Năm {x.n} {d.can_chi_nam}</Link> › Tuổi {d.nguoi.can_chi}</nav>
+      <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
+      <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
+      <dl className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-4" data-testid="o-tuoi">
+        {o.map(([k, v]) => <div key={k} className="rounded-xl border border-line/70 p-3"><dt className="text-xs text-fg-faint">{k}</dt><dd className="mt-0.5 text-sm text-fg">{v}</dd></div>)}
+      </dl>
+      <TraLoiNhanh chu={d.tra_loi_nhanh} />
+
+      <section className="mt-8" aria-labelledby="diem-nhan">
+        <h2 id="diem-nhan" className="text-2xl">{c("diem_nhan.tieu_de", bien)}</h2>
+        <ul className="mt-4 space-y-3" data-testid="diem-nhan">
+          {d.diem_nhan.map((h) => { const k = KIEU[h.loai]; return (
+            <li key={h.tieu_de} className={`rounded-2xl border p-4 ${k.lop}`} data-loai={h.loai}>
+              <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-fg-muted"><span className={`size-2 rounded-full ${k.cham}`} aria-hidden />{k.nhan}</p>
+              <p className="mt-1.5 font-medium text-fg">{h.tieu_de}</p>
+              <p className="mt-1 text-sm leading-relaxed text-fg-muted">{h.noi_dung}</p>
+              <details className="mt-2 text-xs text-fg-faint"><summary className="cursor-pointer select-none">Vì sao nói vậy</summary><p className="mt-1">{h.can_cu}</p></details>
+            </li>
+          ); })}
+        </ul>
+      </section>
+
+      {d.sao.nam && d.sao.nu && (
+        <section className="mt-10" aria-labelledby="sao-nam">
+          <h2 id="sao-nam" className="text-2xl">{c("sao.tieu_de", bien)}</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2"><TheSao gioi="Nam mạng" s={d.sao.nam} /><TheSao gioi="Nữ mạng" s={d.sao.nu} /></div>
+          <p className="mt-2 text-xs text-fg-faint">Sao hạn là tục lệ xếp theo tuổi mụ và giới tính, giống nhau với mọi người cùng tuổi. <Link href={`/xem-sao-han/${x.n}`} className="underline">Bảng sao hạn năm {x.n}</Link>.</p>
+        </section>
+      )}
+
+      <section className="mt-10" aria-labelledby="lam-nha">
+        <h2 id="lam-nha" className="text-2xl">Làm nhà, cưới hỏi năm {x.n}</h2>
+        <div className={`mt-3 rounded-2xl border p-4 ${d.lam_nha.thuan ? "border-jade/40 bg-jade/5" : "border-gold/40 bg-gold/5"}`} data-testid="lam-nha">
+          <p className="font-medium text-fg">{d.lam_nha.thuan ? "Thuận theo tập quán — không phạm Kim lâu, Hoang ốc xấu hay Tam tai" : "Dân gian thường cân nhắc năm này"}</p>
+          {!d.lam_nha.thuan && <p className="mt-1 text-sm text-fg-muted">Vì: {d.lam_nha.xau.join(", ")}. Nhiều gia đình lùi năm hoặc mượn tuổi người thân đứng tên; việc khác vẫn làm như thường.</p>}
+          <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+            <Link href={duongLamNha(x.n, x.ns)} className="text-gold underline">Tuổi {x.ns} làm nhà năm {x.n}</Link>
+            <Link href={duongCuoiHoi(x.n)} className="text-gold underline">Cưới năm {x.n} tuổi nào</Link>
+          </p>
+        </div>
+      </section>
+
+      <section className="mt-10" aria-labelledby="tu-hoa">
+        <h2 id="tu-hoa" className="text-2xl">Bốn sao hoá của năm {d.can_chi_nam}</h2>
+        <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {d.tu_hoa.map((h) => (
+            <li key={h.hoa} className={`rounded-xl border p-3 text-center ${MAU_HOA[h.hoa] ?? ""}`} title={h.y_nghia}>
+              <span className="block text-xs uppercase tracking-wide">Hoá {h.hoa}</span>
+              <span className="mt-0.5 block font-serif text-lg text-fg">{h.sao}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-sm leading-relaxed text-fg-muted">{d.tu_hoa_loi}</p>
+      </section>
+
+      <section className="mt-10 overflow-hidden rounded-2xl border border-gold/40 bg-gradient-to-br from-gold/10 to-transparent p-5" aria-labelledby="ca-nhan">
+        <p className="flex items-center gap-2 text-gold"><Sparkles className="size-4" aria-hidden /><span className="eyebrow !text-gold">Của riêng bạn</span></p>
+        <h2 id="ca-nhan" className="mt-1 text-xl">{c("ca_nhan.tieu_de", bien)}</h2>
+        <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{c("ca_nhan.mo_ta", bien)}</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link href={`/thoi-gian-toi?nam=${x.n}`} className="inline-flex items-center gap-1.5 rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-bg" data-testid="nut-ca-nhan">{c("ca_nhan.nut", bien)} <ArrowRight className="size-4" aria-hidden /></Link>
+          <Link href="/tu-vi" className="inline-flex items-center gap-1.5 rounded-full border border-line px-5 py-2.5 text-sm text-fg-muted hover:text-fg"><Compass className="size-4" aria-hidden />Lập lá số Tử vi</Link>
+        </div>
+      </section>
+
+      <section className="mt-10" aria-labelledby="hoi-dap">
+        <h2 id="hoi-dap" className="text-2xl">Câu hỏi thường gặp</h2>
+        <dl className="mt-4 space-y-3">{d.hoi_dap.map((h) => (
+          <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
+        ))}</dl>
+      </section>
+      <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
+      <p className="mt-6 text-sm text-fg-muted" data-nosnippet="">{d.ranh_gioi}</p>
+      <CungTuoi namSinh={x.ns} canChi={d.nguoi.can_chi} namAm={namAm} bo="tu_vi" boQuaNam={x.n} />
+      <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
+    </div>
+  );
+}
+
+export const generateMetadata = async (...a: Parameters<typeof metaGoc>) => voiAnhChiaSe(await metaGoc(...a));

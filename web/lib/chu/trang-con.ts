@@ -135,3 +135,15 @@ export const CHU_NAM_CUOI_HOI = {
   "bang.tieu_de": { nhom: "Bảng", nhan: "Tiêu đề bảng", mac_dinh: "Tuổi cô dâu cưới năm {nam}", toi_da: 100 },
   "ngay.tieu_de": { nhom: "Ngày cưới", nhan: "Tiêu đề khối ngày tốt", mac_dinh: "Chọn ngày cưới trong năm {nam}", toi_da: 80 },
 } as const satisfies BangChu;
+
+// NAM-3 — "Tử vi năm {nam} tuổi {can_chi} {nam_sinh}". Biến: {nam}, {can_chi_nam}, {can_chi}, {nam_sinh}.
+export const CHU_NAM_TUOI = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi_nam})", mac_dinh: "Năm {can_chi_nam} · đọc theo năm sinh", toi_da: 80 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam}, {can_chi}, {nam_sinh})", mac_dinh: "Tử vi năm {nam} tuổi {can_chi} {nam_sinh} — nam mạng và nữ mạng", toi_da: 120 },
+  "diem_nhan.tieu_de": { nhom: "Điểm nhấn", nhan: "Tiêu đề khối điểm nhấn", mac_dinh: "Điểm nhấn năm {nam} với tuổi {can_chi}", toi_da: 100 },
+  "sao.tieu_de": { nhom: "Sao năm", nhan: "Tiêu đề khối sao", mac_dinh: "Sao năm {nam} theo tục: nam mạng và nữ mạng", toi_da: 100 },
+  "ca_nhan.tieu_de": { nhom: "Của riêng bạn", nhan: "Tiêu đề khối mời", mac_dinh: "Phần trên giống nhau với mọi người sinh năm {nam_sinh}", toi_da: 100 },
+  "ca_nhan.mo_ta": { nhom: "Của riêng bạn", nhan: "Lời mời", toi_da: 260,
+    mac_dinh: "Nhập ngày giờ sinh để xem năm {nam} của riêng bạn: 3 tháng tới, 12 tháng tới, Lộc – Kỵ của năm rơi vào mảng đời nào trên lá số." },
+  "ca_nhan.nut": { nhom: "Của riêng bạn", nhan: "Chữ nút", mac_dinh: "Xem năm {nam} của tôi", toi_da: 40 },
+} as const satisfies BangChu;

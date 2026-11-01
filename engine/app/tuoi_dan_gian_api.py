@@ -118,3 +118,10 @@ def api_nam_sinh_con(nam: NamBang) -> dict:
 @router.get("/v1/nam/{nam}/cuoi-hoi")
 def api_nam_cuoi_hoi(nam: NamBang) -> dict:
     return NTQ.cuoi_hoi(nam)
+
+
+@router.get("/v1/nam/{nam}/tuoi/{nam_sinh}")
+def api_nam_theo_tuoi(nam: NamBang, nam_sinh: Annotated[int, Path(ge=1930, le=2099)]) -> dict:
+    if nam_sinh >= nam:
+        raise HTTPException(422, detail="Năm sinh phải trước năm xem")
+    return NTQ.theo_tuoi(nam, nam_sinh)

@@ -100,7 +100,10 @@ function MenuDiDong({ muc }: { muc: MucMenu[] }) {
                       <ul className="ml-10 mt-1 grid grid-cols-2 gap-x-3">
                         {m.con.map((c) => (
                           <li key={c.href + c.ten}>
-                            <Link href={c.href} onClick={() => setMo(false)} className="flex min-h-11 items-center text-sm text-fg-muted hover:text-fg">{c.ten}</Link>
+                            <Link href={c.href} onClick={() => setMo(false)} className="flex min-h-11 flex-col justify-center py-1 text-sm text-fg-muted hover:text-fg">
+                              <span>{c.ten}</span>
+                              {c.mo_ta && <span className="line-clamp-1 text-[11px] leading-snug text-fg-faint">{c.mo_ta}</span>}
+                            </Link>
                           </li>
                         ))}
                       </ul>
