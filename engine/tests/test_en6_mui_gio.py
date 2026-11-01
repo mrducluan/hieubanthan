@@ -33,8 +33,12 @@ def test_lich_am_mien_nam_chi_1960_1975(d, off):
 
 
 def test_bang_mien_nam_khop_tzdata():
-    """Giữa mỗi tháng 1912–1990, giờ đồng hồ miền Nam trùng Asia/Ho_Chi_Minh (bỏ ngày giao)."""
-    z = ZoneInfo("Asia/Ho_Chi_Minh")
+    """Giữa mỗi tháng 1912–1990, giờ đồng hồ miền Nam trùng Asia/Ho_Chi_Minh (bỏ ngày giao). Máy không có tzdata
+    (Windows chưa cài gói tzdata) → bỏ qua, không làm đỏ cả bộ."""
+    try:
+        z = ZoneInfo("Asia/Ho_Chi_Minh")
+    except Exception:  # noqa: BLE001
+        pytest.skip("máy này không có tzdata")
     lech = []
     for y in range(1912, 1991):
         for m in range(1, 13):
@@ -120,3 +124,37 @@ def test_trong_nuoc_bo_qua_utc_noi_sinh():
     a = _bt_api(birth_date="1990-05-17", birth_time="12:30", noi_sinh="ha-noi", utc_noi_sinh=-5)
     b = _bt_api(birth_date="1990-05-17", birth_time="12:30", noi_sinh="ha-noi")
     assert a["tru"] == b["tru"]
+
+
+
+def test_moc_1955_doi_luc_01_gio():
+    assert config.clock_offset(dt.date(1955, 7, 1), Region.SOUTH, 0)[0] == 8.0      # 00:30 vẫn UTC+8 (tzdata)
+    assert config.clock_offset(dt.date(1955, 7, 1), Region.SOUTH, 1)[0] == 7.0
+
+
+# ---- review EN-6: giờ Tý muộn nhất quán ở MỌI phép tính quanh lá số --------------------------------------------
+def test_giao_thua_can_chi_nam_khop_la_so():
+    """23:30 đêm 09/02/2024 (30 Tết Quý Mão): lá số, can chi năm, âm dương nam/nữ cùng năm Giáp Thìn."""
+    a = _an(birth_date="2024-02-09", birth_time="23:30", noi_sinh="ha-noi")
+    b = _an(birth_date="2024-02-10", birth_time="00:30", noi_sinh="ha-noi")
+    for k in ("cung", "can_chi_nam", "menh_nap_am", "am_duong", "tuan_triet"):
+        if k in a or k in b:
+            assert a.get(k) == b.get(k), k
+
+
+def test_luu_nguyet_ty_muon_cuoi_thang():
+    from app.luangiai import tuvi_luu_nguyet as lnl
+    s12 = {"ngay": dt.date(1978, 3, 8), "ti": 12, "gioi_tinh": "nam"}
+    s0 = {"ngay": dt.date(1978, 3, 9), "ti": 0, "gioi_tinh": "nam"}
+    a, b = lnl.lap_nam(s12, 2027), lnl.lap_nam(s0, 2027)
+    assert [x["cung_goc"] for x in a["thang"]] == [x["cung_goc"] for x in b["thang"]]
+
+
+def test_ty_muon_qua_moc_lich_mien_nam():
+    """Sài Gòn 31/12/1959 23:30 (đồng hồ UTC+7): lá lập cho 01/01/1960 → lịch âm miền Nam UTC+8 của ngày lập lá.
+    (Sài Gòn 12/06/1975 23:30 đồng hồ UTC+8 chỉ là 22:30 giờ lịch — không phải Tý muộn.)"""
+    from app.tuvi_api import TuanTrietInput, _DauVao
+    dv = _DauVao(TuanTrietInput(birth_date="1959-12-31", birth_time="23:30", gender="nam", noi_sinh="tp-ho-chi-minh"))
+    assert dv.ngay_lap == dt.date(1960, 1, 1) and dv.tz_lich == 8.0
+    dv = _DauVao(TuanTrietInput(birth_date="1975-06-12", birth_time="23:30", gender="nam", noi_sinh="tp-ho-chi-minh"))
+    assert dv.ngay_lap == dt.date(1975, 6, 12) and dv.tb.calendar_dt.hour == 22

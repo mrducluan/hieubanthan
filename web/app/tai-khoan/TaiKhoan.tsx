@@ -128,7 +128,13 @@ export function TaiKhoan({ emailDuLieu = null, dichVu = { hoiVien: false, chuyen
                         await tai();
                         return baoNhanThuong(kq);
                       }, "Đã cập nhật tài khoản theo máy này.")}>Cập nhật tài khoản theo máy này</Button>
-                      <Button size="sm" variant="secondary" onClick={() => { const { cap_nhat_luc: _bo, ...h } = tk; luuHoSo(h); }}>Dùng bản trong tài khoản</Button>
+                      <Button size="sm" variant="secondary" onClick={() => {
+                        const { cap_nhat_luc: _bo, ...h } = tk;
+                        // EN-6 BI-3: tài khoản chưa có cột múi giờ nơi sinh (cần migration) → giữ múi giờ đã khai trên máy
+                        const giu = hoSo && typeof hoSo.utc_noi_sinh === "number" && hoSo.noi_sinh === h.noi_sinh
+                          ? { utc_noi_sinh: hoSo.utc_noi_sinh } : {};
+                        luuHoSo({ ...h, ...giu });
+                      }}>Dùng bản trong tài khoản</Button>
                     </div>
                   </div>
                 )}

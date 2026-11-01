@@ -366,6 +366,7 @@ def _van(nhom: str, ma: str, mac_dinh: dict, **bien) -> str:
 
 def lap(sinh: dict, ngay_xem: dt.date, phai: str = ln.MAC_DINH, ls: dict | None = None) -> dict:
     """`sinh` như `luangiai.tuvi_luu_nguyet.lap_nam`. → tháng âm chứa `ngay_xem` + 2 tháng sau."""
+    sinh = az.chuan_sinh(sinh)                  # EN-6 BI-2
     if phai not in ln.PHAI:
         raise ValueError(f"Phái lưu nguyệt không hợp lệ: {phai}")
     from app.hoidap.tuvi import tom_tat          # tránh vòng import

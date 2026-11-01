@@ -17,9 +17,9 @@ from app import config
 from app.config import Region, TyBoundary, TY_EDGE_WINDOW
 
 
-def clock_offset(d: date, region: Region) -> tuple[float, bool]:
-    """Múi giờ đồng hồ tại nơi sinh vào ngày sinh. Uỷ quyền cho config."""
-    return config.clock_offset(d, region)
+def clock_offset(d: date, region: Region, gio: int | None = None) -> tuple[float, bool]:
+    """Múi giờ đồng hồ tại nơi sinh vào ngày sinh (và giờ, khi mốc đổi giữa ngày). Uỷ quyền cho config."""
+    return config.clock_offset(d, region, gio)
 
 
 @dataclass(frozen=True)
@@ -37,7 +37,7 @@ def to_calendar_time(clock_dt: datetime, region: Region) -> CalendarTime:
     chạy UTC+8, kinh tuyến lịch là UTC+7 → giờ lịch thật là 23:30 ngày 01/12.
     Cả NGÀY sinh lẫn GIỜ sinh đều đổi. Bỏ bước này là sai từ gốc.
     """
-    offset, disputed = clock_offset(clock_dt.date(), region)
+    offset, disputed = clock_offset(clock_dt.date(), region, clock_dt.hour)
     delta_hours = config.CALENDAR_MERIDIAN_TZ - offset
     return CalendarTime(
         calendar_dt=clock_dt + timedelta(hours=delta_hours),

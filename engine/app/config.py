@@ -83,6 +83,7 @@ class TzPeriod:
     offset: float        # lệch so với UTC, đơn vị giờ
     note: str
     disputed: bool = False
+    start_gio: int = 0   # giờ đồng hồ bắt đầu trong ngày `start` (tzdata: 1955-07-01 01:00)
 
 
 class Region(str, Enum):
@@ -105,7 +106,7 @@ TZ_TABLE: dict[Region, tuple[TzPeriod, ...]] = {
         # EN-6 BI-1 (2026-11-01): tzdata IANA Asia/Ho_Chi_Minh — Nam Bộ chạy UTC+8 từ 01/04/1947 tới 01/07/1955.
         # Chỉ GIỜ ĐỒNG HỒ; lịch âm miền Nam vẫn UTC+7 trong đoạn này (xem tz_lich_am).
         TzPeriod(date(1947, 4, 1), 8.0, "Nam Bo doi UTC+8 (tzdata Asia/Ho_Chi_Minh)"),
-        TzPeriod(date(1955, 7, 1), 7.0, "Ve UTC+7"),
+        TzPeriod(date(1955, 7, 1), 7.0, "Ve UTC+7 luc 01:00 dong ho", start_gio=1),
         TzPeriod(date(1960, 1, 1), 8.0,
                  "VNCH doi UTC+8, hieu luc tu 23:00 ngay 31/12/1959"),
         TzPeriod(date(1975, 6, 13), 7.0,
@@ -136,7 +137,7 @@ TZ_TABLE: dict[Region, tuple[TzPeriod, ...]] = {
 DISPUTED_NORTH_WINDOW = (date(1954, 7, 21), date(1968, 1, 1))
 
 
-def clock_offset(d: date, region: Region) -> tuple[float, bool]:
+def clock_offset(d: date, region: Region, gio: int | None = None) -> tuple[float, bool]:
     """Múi giờ đồng hồ tại nơi sinh vào ngày sinh.
 
     Trả về (offset, disputed). `disputed=True` nghĩa là kết quả nằm trong vùng
@@ -148,7 +149,7 @@ def clock_offset(d: date, region: Region) -> tuple[float, bool]:
     periods = TZ_TABLE[region]
     chosen = periods[0]
     for p in periods:
-        if d >= p.start:
+        if d > p.start or (d == p.start and (gio is None or gio >= p.start_gio)):
             chosen = p
         else:
             break

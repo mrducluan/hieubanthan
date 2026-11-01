@@ -139,23 +139,32 @@ class _DauVao:
         # ---- 2. Lịch âm + can chi năm ------------------------------------
         # Âm lịch VIỆT NAM (không phải lịch Trung Quốc của iztro — LS60). Miền Nam 1960–1975 dùng lịch
         # tính theo UTC+8 như giấy tờ thời đó.
-        self.tz_lich = config.CALENDAR_MERIDIAN_TZ
-        if not nuoc_ngoai and vung_khai is Region.SOUTH:
-            self.tz_lich = config.tz_lich_am(ngay_kinh_tuyen, Region.SOUTH)
-        tz_am = tuvi_an_sao.TZ_TRUNG if inp.lich == "trung" else self.tz_lich
-        ld, lm, ly, leap = lunar.solar_to_lunar(
-            ngay_kinh_tuyen.day, ngay_kinh_tuyen.month, ngay_kinh_tuyen.year, tz_am,
-        )
-        self.lich_khac = tuvi_an_sao.lich_khac(ngay_kinh_tuyen, self.tz_lich)
+        # EN-6 BI-2: Tử vi đổi ngày lúc 23:00 — ngày âm, can chi năm, kinh tuyến lịch tính theo NGÀY LẬP LÁ (giờ Tý muộn
+        # = ngày hôm sau), cùng ngày iztro an sao; ngày dương người dùng nhập vẫn giữ ở `ngay_kinh_tuyen`.
+        ngay_lap = ngay_kinh_tuyen + _dt.timedelta(days=1) if tb.calendar_dt.hour == 23 else ngay_kinh_tuyen
+        self.ngay_lap = ngay_lap
+        nam_bo = not nuoc_ngoai and vung_khai is Region.SOUTH
+
+        def _tz(d: _dt.date) -> float:
+            if inp.lich == "trung":
+                return tuvi_an_sao.TZ_TRUNG
+            return config.tz_lich_am(d, Region.SOUTH) if nam_bo else config.CALENDAR_MERIDIAN_TZ
+        self.tz_lich = config.tz_lich_am(ngay_lap, Region.SOUTH) if nam_bo else config.CALENDAR_MERIDIAN_TZ
+        # `am` = ngày âm của NGÀY SINH người dùng nhập (hiển thị, đối chiếu giấy tờ); `am_lap` = ngày âm của ngày lập lá
+        # (can chi năm, nạp âm, Tuần/Triệt, tháng nhuận — cùng ngày iztro an sao).
+        ld, lm, ly, leap = lunar.solar_to_lunar(ngay_kinh_tuyen.day, ngay_kinh_tuyen.month, ngay_kinh_tuyen.year,
+                                                _tz(ngay_kinh_tuyen))
+        self.am_lap = lunar.solar_to_lunar(ngay_lap.day, ngay_lap.month, ngay_lap.year, _tz(ngay_lap))
+        self.lich_khac = tuvi_an_sao.lich_khac(ngay_lap, self.tz_lich)
         self.duong_goc, self.tb, self.ngay_kinh_tuyen = duong_goc, tb, ngay_kinh_tuyen
         self.am = (ld, lm, ly, leap)
         self.phai = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan, "lich": inp.lich,
                      "luu_nguyet": inp.luu_nguyet,
-                     "co_the_doi_thang_nhuan": bool(leap) and ld > 15,
+                     "co_the_doi_thang_nhuan": bool(self.am_lap[3]) and self.am_lap[0] > 15,
                      # ngày sinh này có ngày âm khác nhau giữa lịch Việt và lịch Trung Quốc → lá số có thể khác
                      "lich_khac": self.lich_khac}
         self.tuy_chon = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan, "lich": inp.lich}
-        self.can, self.chi = lunar.can_chi_nam(ly)
+        self.can, self.chi = lunar.can_chi_nam(self.am_lap[2])
         self.flags = self._co(inp)
 
     def _co(self, inp: TuanTrietInput) -> list[dict]:
@@ -169,11 +178,17 @@ class _DauVao:
             if inp.gio_mua_he:
                 flags.append({"loai": "gio_mua_he", "chi_tiet": (
                     f"Đã trừ 1 giờ mùa hè: giờ chuẩn địa phương {tb.calendar_dt.strftime('%H:%M')}.")})
-        if self.am[3] and self.am[0] > 15:
+        al = self.am_lap
+        if al[3] and al[0] > 15:
             flags.append({"loai": "thang_nhuan", "chi_tiet": (
-                f"Sinh nửa sau tháng {self.am[1]} nhuận (ngày {self.am[0]}): lá số theo quy tắc phổ biến "
-                f"\"nửa sau tháng nhuận tính sang tháng sau\" (tức tháng {self.am[1] % 12 + 1}). Có trường phái "
-                f"tính cả tháng nhuận như tháng {self.am[1]} — Mệnh, Cục và các sao có thể khác.")})
+                f"Sinh nửa sau tháng {al[1]} nhuận (ngày {al[0]}): lá số theo quy tắc phổ biến "
+                f"\"nửa sau tháng nhuận tính sang tháng sau\" (tức tháng {al[1] % 12 + 1}). Có trường phái "
+                f"tính cả tháng nhuận như tháng {al[1]} — Mệnh, Cục và các sao có thể khác.")})
+        if self.ngay_lap != self.ngay_kinh_tuyen and al[:3] != self.am[:3]:
+            flags.append({"loai": "ty_muon_ngay_sau", "chi_tiet": (
+                f"Sinh sau 23 giờ: Tử vi đổi ngày lúc 23:00 nên lá số lập như sinh ngày {al[0]}/{al[1]}"
+                f"{' nhuận' if al[3] else ''} năm {lunar.can_chi_nam(al[2])[0]} {lunar.can_chi_nam(al[2])[1]} (âm lịch), "
+                f"giờ Tý. Bát tự và thần số vẫn giữ ngày {self.am[0]}/{self.am[1]}.")})
         if self.lich_khac:
             flags.append({"loai": "lich_viet_trung", "chi_tiet": (
                 "Ngày sinh này rơi vào đợt âm lịch Việt Nam (UTC+7) và lịch Trung Quốc (UTC+8) lệch nhau: "

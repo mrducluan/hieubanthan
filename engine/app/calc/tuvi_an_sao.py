@@ -255,11 +255,11 @@ _TEN_HOA_LINH = {"Hỏa Tinh": "Hỏa Tinh", "火星": "Hỏa Tinh", "Linh Tinh"
 
 
 def _dat_hoa_linh_viet(la: dict, ngay: dt.date, ti: int, gioi_tinh: str, tz_lich: float) -> None:
-    """Chuyển Hoả Tinh, Linh Tinh của iztro sang vị trí lối Việt (tuvi_hoa_linh_vn)."""
-    if ti == 12:                                   # Tý muộn: iztro tính sang ngày hôm sau
-        ngay = ngay + dt.timedelta(days=1)
+    """Chuyển Hoả Tinh, Linh Tinh của iztro sang vị trí lối Việt (tuvi_hoa_linh_vn). Tý muộn đã được `_ty_muon` đổi
+    thành ngày hôm sau, giờ Tý trước khi gọi."""
+    ngay, ti = _ty_muon(ngay, ti)
     can, chi = lunar.can_chi_nam(lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, tz_lich)[2])
-    dich = dict(zip(("Hỏa Tinh", "Linh Tinh"), tuvi_hoa_linh_vn.vi_tri(can, chi, 0 if ti == 12 else ti, gioi_tinh)))
+    dich = dict(zip(("Hỏa Tinh", "Linh Tinh"), tuvi_hoa_linh_vn.vi_tri(can, chi, ti, gioi_tinh)))
     sao = {}
     for p in la["palaces"]:
         for s in [x for x in p["minorStars"] if x["name"] in _TEN_HOA_LINH]:
@@ -319,6 +319,15 @@ def _ty_muon(ngay: dt.date, ti: int) -> tuple[dt.date, int]:
     sinh ngày hôm sau, giờ Tý. Trước đây ngày âm Việt của ngày sinh được đưa vào iztro rồi iztro tự cộng một ngày âm →
     sai ở ngày cuối tháng âm (30 → "31") và nửa sau tháng nhuận; đêm giao thừa lệch cả năm (Hoả / Linh)."""
     return (ngay + dt.timedelta(days=1), 0) if ti == 12 else (ngay, ti)
+
+
+def chuan_sinh(sinh: dict | None) -> dict | None:
+    """EN-6 BI-2 (sau review): chuẩn hoá giờ Tý muộn cho MỌI phép tính Python quanh lá số (lưu nguyệt, năm âm sinh,
+    sao hạn…) — cùng ngày với lá số iztro. `tz_lich` của `sinh` phải đã tính cho ngày sau (`_DauVao` làm)."""
+    if sinh and sinh.get("ti") == 12 and sinh.get("ngay"):
+        ngay, ti = _ty_muon(sinh["ngay"], 12)
+        return {**sinh, "ngay": ngay, "ti": ti}
+    return sinh
 
 
 def _d(x: dt.date) -> str:
@@ -438,6 +447,7 @@ def ngay_xem_can(sinh: dict, ngay_xem: dt.date) -> list[dt.date]:
 
 
 def nap_truoc_sinh(sinh: dict, ngay_xem: dt.date) -> None:
+    sinh = chuan_sinh(sinh)
     nap_truoc(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], ngay_xem_can(sinh, ngay_xem),
               tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ), thang_nhuan=sinh.get("thang_nhuan", "thang_sau"),
               lich=sinh.get("lich", "viet"))

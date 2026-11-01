@@ -136,7 +136,7 @@ def _bat_tu(h: HoSo) -> dict:
     if h.co_gio:
         try:
             dv = _dau_vao_la_so(h)
-            ls = battu.la_so(dv.tb.calendar_dt, h.gioi_tinh or "nam", utc_lich=dv.utc_lich)
+            ls = battu.la_so(dv.tb.calendar_dt, h.gioi_tinh or "nam")
             return {"can": ls["nhat_chu"]["can"], "hanh": ls["nhat_chu"]["ngu_hanh"], "than": ls["than"]["ket_luan"],
                     "thieu": None}
         except HTTPException:

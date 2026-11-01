@@ -1405,6 +1405,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
     `y_dinh_goi_y`: xem phan_loai (mã lạ / câu đặc biệt / từ khoá đã nhận ra → bỏ qua)."""
     if che_do not in CHE_DO:
         raise ValueError(f"che_do phải là một trong {CHE_DO}")
+    sinh = az.chuan_sinh(sinh)                  # EN-6 BI-2: giờ Tý muộn = ngày sau, giờ Tý (cùng ngày lá số)
     pl = phan_loai(cau_hoi, che_do, y_dinh_goi_y=y_dinh_goi_y)
     ls = vh = vh_toi = lnm = None
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()

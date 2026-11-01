@@ -1224,6 +1224,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     from app.hoidap.tuvi import tom_tat          # tránh vòng import
 
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
+    sinh = az.chuan_sinh(sinh)                  # EN-6 BI-2
     kw = _sinh_kw(sinh)
     az.nap_truoc_sinh(sinh, ngay_xem)       # EN-4: một lời gọi iztro cho lá số + các ngày xem báo cáo cần
     if ls is None:
