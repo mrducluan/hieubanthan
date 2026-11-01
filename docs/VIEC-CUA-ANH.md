@@ -5,6 +5,18 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4s. Sau EN-4 … EN-6 nâng cấp engine (2026-11-01)
+
+- [ ] **Chọn mô hình AI diễn đạt mới** (mặc định hiện cũ) rồi **chạy lại bộ 55 câu AI thật** theo
+      `docs/CHAY-55-CAU-AI-THAT.md` — cần khoá OpenRouter thật, môi trường cloud của em không có (EN-4).
+- [ ] **Deploy engine trước web** cho đợt này: `ENGINE_VERSION` 0.1.6 (lá số của người sinh miền Nam 01/04/1947–01/07/1955,
+      người sinh 23:xx ngày cuối tháng âm / nửa sau tháng nhuận / đêm giao thừa có thể đổi so với trước — đúng quy tắc
+      đã chốt, không đổi phái).
+- [ ] (Khi muốn) **Migration thêm cột `utc_noi_sinh` vào bảng `ho_so`** để múi giờ nơi sinh (người sinh ở nước ngoài) đi
+      theo tài khoản sang máy khác; hiện chỉ lưu trên máy (EN-6 BI-3).
+- [ ] (Khi muốn) **Chọn phái** cho thần sát Thiên La Địa Võng / Học Đường / Kim Thần — sách chép nhiều cách khác nhau nên
+      em chưa đưa vào (EN-5.3). Bảng "tháng đại lợi / tiểu lợi" theo tuổi cô dâu cũng chờ một nguồn anh tin dùng (EN-5.1).
+
 ### 4r. Bản đồ vệ tinh để đo hướng nhà trên máy tính (DH-PC2, 2026-10-27, `docs/DO-HUONG-MAY-TINH.md`)
 
 - [ ] console.cloud.google.com → tạo dự án (vd `hieuban-maps`) → **Billing**: gắn thẻ (Google bắt buộc, có hạn mức miễn phí

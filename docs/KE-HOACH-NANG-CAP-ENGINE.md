@@ -275,6 +275,25 @@ Xếp theo bằng chứng thị trường (agent D) × khả thi (agent B):
    (BT-DC) và định giờ sinh thành một luồng "đọc theo cách khớp với đời bạn".
 
 ### EN-6 · Nền móng dài hạn (song song, mỗi đợt một ít)
+> **Trạng thái 2026-11-01 — đợt 1 đã làm:**
+>
+> - **BI-1…3 → `ENGINE_VERSION` 0.1.6.** BI-1: đồng hồ miền Nam UTC+8 01/04/1947 – 01/07/1955 01:00 (tzdata). Lịch âm
+>   miền Nam vẫn UTC+8 chỉ 1960–1975, tách bằng `config.tz_lich_am`. BI-2: giờ Tý muộn Tử vi an đúng như sinh ngày hôm
+>   sau, giờ Tý, chuẩn hoá ở đầu vào. Ngày âm hiển thị giữ ngày sinh, có cờ `ty_muon_ngay_sau`. BI-3: Bát tự sinh ở nước
+>   ngoài so mốc tiết theo múi giờ chuẩn nơi sinh; ô chọn nằm trong form hồ sơ, chưa khai thì gắn cờ nhắc.
+> - **Golden mở rộng trong CI:**
+>   - mọi mùng 1 lịch Trung Quốc 1901–2099 (2.461 tháng; 5 ca sóc sát nửa đêm ghi tên);
+>   - 5.000 tứ trụ + chiều đại vận, gồm hơn 300 ca dạ Tý;
+>   - 1.000 lá Tử vi đối chiếu lasotuvi;
+>   - bảng múi giờ so với tzdata;
+>   - giờ Tý muộn bất biến (an như ngày sau).
+>
+>   Tên có ký tự lạ đã làm ở EN-1.
+> - **Chưa làm (đợt sau):**
+>   - hoàng lịch 1930–2030 dạng băm;
+>   - gom khuôn `doi_song_1` cho Tử vi, Bát tự, Kinh Dịch, Phong thuỷ (refactor lớn, cần golden mã mẫu trước);
+>   - bộ đếm hạn mức ra kho chung (hạ tầng GĐ2);
+>   - khoá bản dependency / Python 3.12.
 - **Golden mở rộng trong CI**:
   - âm lịch toàn dải;
   - ~2.400 ngày mùng 1 lịch Trung Quốc;
