@@ -329,6 +329,10 @@ def phan_loai(cau_hoi: str) -> dict:
     kq["giai_thich"] = gt
     if gt and not _co(t, [r"toi co", r"cua toi", r"toi la", r"ten toi", r"em co"]):
         return xong("ky_thuat", "ban_than", "tra_loi", "giai_thich")
+    from app.hoidap import hieu_cau  # noqa: PLC0415 — EN-3 (hieu_cau dùng _co của module này)
+    if not gt and (td := hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "thanso")):
+        kq["tu_dien"] = [m["ma"] for m in td]          # câu kiến thức → từ điển thuật ngữ, không đọc số của người hỏi
+        return xong("ky_thuat", "ban_than", "tra_loi", "giai_thich")
 
     thoi_diem = _co(t_chinh, THOI_DIEM)
     chon_thoi_diem = _co(t_chinh, CHON_THOI_DIEM)
@@ -601,6 +605,9 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
         g = kb.giai_thich(ma)
         if g:
             muc.append({"loai": "giai_thich", "ma": ma, **g})
+    if pl.get("tu_dien"):
+        from app.hoidap import hieu_cau  # noqa: PLC0415
+        muc += hieu_cau.muc_tu_dien(pl["tu_dien"])
     if lv == "ky_thuat":
         return _ket(goi)
 

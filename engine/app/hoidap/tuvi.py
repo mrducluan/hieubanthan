@@ -18,7 +18,7 @@ import unicodedata
 from app import config
 from app.calc import lunar, tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
 from app.calc import tuvi_luu_nguyet as ln
-from app.hoidap import chung, doi_song_muc as dsm
+from app.hoidap import chung, hieu_cau, doi_song_muc as dsm
 from app.kb import tuvi_doi_song_kb as kds
 from app.kb import tuvi_kb as kb
 from app.kb import tuvi_phi_hoa_kb as pkb
@@ -348,6 +348,8 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
         kq["loai"] = "sat_tinh_la_so"
     elif chung.co(t_chinh, VI_TRI) and _sao_nhac(t_chinh) and not chung.co(t_chinh, HAN):
         kq["loai"], kq["sao_tim"] = "vi_tri_sao", _sao_nhac(t_chinh)[:3]
+    elif not (kq["sao"] or kq["hoa"] or kq["phu"]) and (td := hieu_cau.la_kien_thuc_tu_dien(t_chinh, cau_hoi, "tuvi")):
+        kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển, không lá số
     elif (chung.co(t_chinh, HAN) or kq["hoi_thang"]) and kq["ca_nhan"] \
             or chung.co(t_chinh, [r"dai han", r"luu nien", r"tieu han"]):
         kq["loai"] = "han"
@@ -374,7 +376,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
     if yd in ("tai_van", "di_hay_o", "phan_van") and _co_ten(t_chinh, CUNG_KW):
         yd = None                       # "Cung Tài Bạch của tôi nói gì về tiền bạc?", "chọn người yêu hợp cung Phu
         #                                 Thê" = câu bản mệnh về cung đã nêu, không phải ý định
-    if yd and _kb_y_dinh(yd) and (kq["loai"] in ("la_so", "han", "ky_thuat")
+    if yd and not kq.get("tu_dien") and _kb_y_dinh(yd) and (kq["loai"] in ("la_so", "han", "ky_thuat")
                                   or (kq["loai"] == "la_so_con" and yd == "hoc_hanh_con")):
         _ap_y_dinh(kq, yd, t_chinh)
         kq["nhan_ra_y_dinh"] = not goi_y
@@ -609,6 +611,8 @@ def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | No
         g = kb.giai_thich(ma)
         if g:
             muc.append({"loai": "giai_thich", "ma": ma, **g})
+    if pl.get("tu_dien"):
+        muc += hieu_cau.muc_tu_dien(pl["tu_dien"])
     loai = pl["loai"]
     if loai in ("hop_hon", "la_so_con", "nguoi_khac"):
         goi["can_them"] = ["la_so_nguoi_kia"]

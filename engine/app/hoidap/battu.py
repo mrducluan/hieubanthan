@@ -15,7 +15,7 @@ import datetime as dt
 import re
 
 from app.calc import battu_mo_rong, battu as bt
-from app.hoidap import chung, doi_song_muc as dsm
+from app.hoidap import chung, hieu_cau, doi_song_muc as dsm
 from app.kb import battu_kb as kb
 from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
@@ -137,6 +137,8 @@ def phan_loai(cau_hoi: str) -> dict:
         kq["loai"] = "thap_than_chung"
     elif kq["giai_thich"] and not kq["ca_nhan"]:
         kq["loai"] = "ky_thuat"
+    elif td := hieu_cau.la_kien_thuc_tu_dien(t_chinh, cau_hoi, "battu"):
+        kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển, không tứ trụ
     elif chung.co(t_chinh, VAN):
         kq.update(loai="van", xu_ly="tra_loi_kem_luu_y")
         kq["chu_de"] = next((cd for cd, mau in CHU_DE if chung.co(t_chinh, mau)), None)   # MT-ĐS B2: mảng của câu vận
@@ -219,6 +221,8 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
         g = kb.giai_thich(ma)
         if g:
             muc.append({"loai": "giai_thich", "ma": ma, **g})
+    if pl.get("tu_dien"):
+        muc += hieu_cau.muc_tu_dien(pl["tu_dien"])
     loai = pl["loai"]
     if loai in ("hop", "con", "nguoi_khac"):
         goi["can_them"] = ["la_so_nguoi_kia"]

@@ -17,7 +17,7 @@ import unicodedata
 
 from app.calc import kinhdich, kinhdich_maihoa as mh, luc_hao as lh, vuong_suy as vs
 from app.calc.kinhdich_vendor import CHI_NH, KHAC, SINH
-from app.hoidap import chung
+from app.hoidap import chung, hieu_cau
 from app.kb import kinhdich_kb as kb
 from app.luangiai import kinhdich_doi_song as kd_ds, truc_quan
 from app.narrative import hoi_van
@@ -36,10 +36,18 @@ DU_DOAN = [r"co dau", r"co do", r"dau khong", r"do khong", r"thanh cong khong", 
            r"thang hay thua", r"co thang", r"ky duoc", r"doi duoc", r"xin duoc", r"ban duoc",
            r"co ben", r"quay lai khong", r"co thich", r"di den hon nhan", r"co loi", r"bao gio",
            r"khi nao", r"co gap", r"co len chuc", r"co tro ve",
-           r"co thanh khong", r"thanh hay khong", r"tim lai duoc"]                      # HH-CT2
+           r"co thanh khong", r"thanh hay khong", r"tim lai duoc",                      # HH-CT2
+           r"suon se khong", r"co suon se", r"co ve khong", r"co quay ve", r"co thang duoc", r"on khong"]  # EN-3
 QUYET_DINH = [r"co nen", r"nen .* hay", r"nen lam gi", r"nen ung xu", r"nen xu ly", r"nen phan ung",
               r"xin mot que", r"dinh huong", r"nen the nao", r"nen chon", r"nen tra", r"nen noi",
               r"nen hieu the nao"]
+# EN-3: lĩnh vực dự phòng khi cả từ khoá chung lẫn 20 chủ đề đời sống đều không bắt (thứ tự = ưu tiên).
+LV_DU_PHONG = [("tien_bac", [r"chung khoan", r"co phieu", r"\bcoin\b", r"crypto", r"dau tu", r"\bvay\b", r"rut von",
+                             r"cat lo", r"(mieng|manh|lo) dat", r"mua dat", r"gui tiet kiem", r"\blai suat\b"]),
+               ("cong_viec", [r"du an", r"nghi viec", r"bo viec", r"nghi phep", r"xin viec", r"\bluong\b", r"cong ty",
+                              r"\bsep\b", r"khach hang", r"cua hang", r"mo quan", r"kinh doanh"]),
+               ("tinh_cam", [r"nguoi (phu hop|hop voi|danh cho)", r"gap duoc nguoi", r"hen ho", r"qua mang", r"tinh yeu"]),
+               ("hoc_hanh", [r"\bhoc\b", r"\bthi\b", r"van bang", r"du hoc"])]
 KY_THUAT = [r"la gi", r"nghia la gi", r"co y nghia gi", r"khac .* the nao", r"tai sao", r"vi sao",
             r"doc the nao", r"the nao cho dung", r"khac gi"]
 
@@ -129,7 +137,8 @@ def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
     # EN-3: chủ đề đời sống (KB 20 chủ đề, từ khoá nhiều chữ — cùng bộ chọn dụng thần) cụ thể hơn từ khoá lĩnh vực chung
     # ("bán nhà" là chuyện tiền, không phải chuyện gia đình) → có chủ đề thì lĩnh vực theo chủ đề; không có thì giữ cũ.
     from app.luangiai import kinhdich_doi_song as _kd  # noqa: PLC0415
-    kq["linh_vuc"] = (_kd.kb.chu_de(_kd.chu_de_tu_cau(t)) or {}).get("linh_vuc") or kq["linh_vuc"]
+    kq["linh_vuc"] = (_kd.kb.chu_de(_kd.chu_de_tu_cau(t)) or {}).get("linh_vuc") or kq["linh_vuc"] \
+        or next((lv for lv, mau in LV_DU_PHONG if chung.co(t, mau)), None)
     # Đã nêu tên quẻ + hỏi chuyện cần quyết → đọc chính quẻ đó (người hỏi đã có quẻ), không gieo quẻ khác.
     if kq["que_nhac"] and (re.search(r"gieo duoc|duoc que|ra que", t) or chung.co(t, QUYET_DINH + DU_DOAN)):
         kq.update(loai="doc_que_da_co", truong_phai="nghia_ly")
@@ -140,6 +149,9 @@ def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
                               or re.search(r"noi gi|que gi|y nghia", t))
     if kq["giai_thich"] or tra:
         kq["loai"] = "ky_thuat"
+        return kq
+    if td := hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "kinhdich"):
+        kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển, không gieo quẻ
         return kq
     if chung.co(t, DOC_NHANH):
         loai, phai = "doc_nhanh", "mai_hoa"
@@ -227,6 +239,8 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | 
         g = kb.giai_thich(ma)
         if g:
             muc.append({"loai": "giai_thich", "ma": ma, **g})
+    if pl.get("tu_dien"):
+        muc += hieu_cau.muc_tu_dien(pl["tu_dien"])
     if pl["loai"] in ("ky_thuat", "doc_que_da_co"):
         if pl["que_nhac"]:
             m = _muc_que(pl["que_nhac"], "nhac", pl["linh_vuc"])

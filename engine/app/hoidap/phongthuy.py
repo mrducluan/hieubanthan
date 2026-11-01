@@ -11,7 +11,7 @@ import datetime as dt
 import re
 
 from app.calc import phongthuy as pt
-from app.hoidap import chung
+from app.hoidap import chung, hieu_cau
 from app.kb import phongthuy_kb as kb
 from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
@@ -120,6 +120,8 @@ def phan_loai(cau_hoi: str) -> dict:
         kq["loai"] = "hop"
     elif kq["giai_thich"] and not kq["ca_nhan"]:
         kq["loai"] = "ky_thuat"
+    elif not kq["bo_tri"] and (td := hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "phongthuy")):
+        kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển
     elif kq["bo_tri"]:
         kq["loai"] = "bo_tri"
         if any(kb.bo_tri(m)["nguon"] == "dan_gian" for m in kq["bo_tri"]):
@@ -187,6 +189,8 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int, nam_am: int | None
         g = kb.giai_thich(ma)
         if g:
             muc.append({"loai": "giai_thich", "ma": ma, **g})
+    if pl.get("tu_dien"):
+        muc += hieu_cau.muc_tu_dien(pl["tu_dien"])
     loai = pl["loai"]
     if loai == "menh_quai_chung":
         for h in pl["huong"][:2]:

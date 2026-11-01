@@ -17,3 +17,20 @@ from app.hoidap import kinhdich as kd
 def test_linh_vuc_tu_chu_de(cau, lv):
     pl = kd.phan_loai(cau)
     assert pl["linh_vuc"] == lv, (cau, pl["linh_vuc"])
+
+
+@pytest.mark.parametrize("cau, lv", [
+    ("Có nên rút vốn khỏi chứng khoán lúc này không", "tien_bac"),
+    ("Có nên dừng dự án app đang làm dở không", "cong_viec"),
+    ("Tôi có nên xin nghỉ việc để học tiếp không", "cong_viec"),
+    ("Mua mảnh đất ở quê bây giờ có nên không", "gia_dinh"),   # KB: mua nhà, đất = chủ đề gia đình
+    ("Khi nào tôi gặp được người phù hợp", "tinh_cam"),
+])
+def test_linh_vuc_du_phong(cau, lv):
+    assert kd.phan_loai(cau)["linh_vuc"] == lv, (cau, kd.phan_loai(cau)["linh_vuc"])
+
+
+@pytest.mark.parametrize("cau", ["Chuyến đi Đà Lạt cuối tuần có suôn sẻ không", "Con chó đi lạc có về không",
+                                 "Vụ kiện đòi nợ có thắng được không"])
+def test_du_doan(cau):
+    assert kd.phan_loai(cau)["loai"] == "du_doan", (cau, kd.phan_loai(cau)["loai"])
