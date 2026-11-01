@@ -45,7 +45,7 @@ _CHI = ("Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thâ
 
 
 class TuanTrietInput(BaseModel):
-    birth_date: _dt.date
+    birth_date: _dt.date = Field(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))   # EN-1: ngoài khoảng → 422
     birth_time: str = Field(pattern=r"^\d{2}:\d{2}$", examples=["23:30"])
     gender: Literal["nam", "nu"]
     calendar_type: Literal["duong", "am"] = "duong"

@@ -537,19 +537,16 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     """`sinh` = {"lich": datetime theo kinh tuyến lịch UTC+7, "gioi_tinh": "nam"|"nu"}."""
     pl = phan_loai(cau_hoi)
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
-    nam_xem = pl["nam_xem"] or (ngay_xem.year + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0))
+    # EN-1 DU-2: lưu niên Bát tự đổi năm ở Lập xuân, không ở 1/1 (hỏi 20/01/2027 "năm nay" → Bính Ngọ 2026).
+    nam_xem, nam_am = chung.nam_xem_hh(pl["nam_xem"], ngay_xem, pl["cau_chuan_hoa"])
     ls = None
     if sinh and pl["loai"] in ("la_so", "van", "hop"):
         ls = bt.la_so(sinh["lich"], sinh["gioi_tinh"], sinh.get("gio_ty", "da_ty"))
-    hien_tai = ngay_xem if not pl["nam_xem"] and nam_xem == ngay_xem.year else None
+    hien_tai = ngay_xem if not pl["nam_xem"] and nam_xem == chung.nam_xem_hh(None, ngay_xem, "")[0] else None
     goi = goi_bang_chung(pl, ls, sinh["gioi_tinh"] if sinh else None, nam_xem, hien_tai)
     if ls is not None and pl["loai"] in ("la_so", "van") and not goi["can_them"]:
         _them_doi_song(goi, pl, sinh, ngay_xem, ls)
     if pl.get("sao_han") and sinh and not goi["can_them"]:
-        from app.calc import lunar  # noqa: PLC0415
-        from app.config import CALENDAR_MERIDIAN_TZ  # noqa: PLC0415
-        nam_am = pl["nam_xem"] or lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)[2] \
-            + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0)
         d = sinh["lich"]
         goi["muc"].insert(1 if goi["muc"] and goi["muc"][0]["loai"] == "tu_tru" else 0,
                           chung.muc_sao_han(nam_am, d.year, sinh["gioi_tinh"], d.month, d.day))

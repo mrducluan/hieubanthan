@@ -82,28 +82,33 @@ def test_sao_nam(nam, ngu_hoang, thai_tue, tue_pha, tam_sat):
 
 
 def test_tuoi_lam_nha_mau():
-    t = pt.tuoi_lam_nha(1990, 2026)                 # Canh Ngọ, năm Bính Ngọ: tuổi mụ 37
-    assert t["tuoi_mu"] == 37 and t["kim_lau"]["pham"] is True
-    assert t["hoang_oc"]["cung"] == "Tứ Tấn Tài" and t["tam_tai"]["pham"] is False
+    # EN-1 DU-1: một bộ tính — tuổi làm nhà chỉ còn ở calc.tuoi_dan_gian (bản trùng trong calc.phongthuy đã gỡ).
+    from app.luangiai import tuoi_dan_gian as tdg
+    x = tdg.xem_tuoi_lam_nha(1990, 2026)            # Canh Ngọ, năm Bính Ngọ: tuổi mụ 37
+    assert x["tuoi_mu"] == 37 and x["kim_lau"] and x["hoang_oc"]["ma"] == "tu_tan_tai" and x["tam_tai"] is None
+    assert not hasattr(pt, "tuoi_lam_nha") and not hasattr(pt, "kim_lau")
 
 
 @pytest.mark.parametrize("tuoi,kim_lau", [(37, True), (39, True), (42, True), (44, True), (38, False),
                                           (40, False), (45, False)])
 def test_kim_lau(tuoi, kim_lau):
-    assert pt.kim_lau(tuoi)["pham"] is kim_lau
+    from app.calc import tuoi_dan_gian as t
+    assert bool(t.kim_lau(tuoi)) is kim_lau
 
 
-@pytest.mark.parametrize("tuoi,cung", [(10, "Nhất Cát"), (20, "Nhì Nghi"), (30, "Tam Địa Sát"), (40, "Tứ Tấn Tài"),
-                                       (50, "Ngũ Thọ Tử"), (60, "Lục Hoang Ốc"), (37, "Tứ Tấn Tài"),
-                                       (41, "Ngũ Thọ Tử"), (46, "Tứ Tấn Tài")])
+@pytest.mark.parametrize("tuoi,cung", [(10, "nhat_cat"), (20, "nhi_nghi"), (30, "tam_dia_sat"), (40, "tu_tan_tai"),
+                                       (50, "ngu_tho_tu"), (60, "luc_hoang_oc"), (37, "tu_tan_tai"),
+                                       (41, "ngu_tho_tu"), (46, "tu_tan_tai")])
 def test_hoang_oc(tuoi, cung):
-    assert pt.hoang_oc(tuoi)["cung"] == cung
+    from app.calc import tuoi_dan_gian as t
+    assert t.HOANG_OC[t.hoang_oc(tuoi)] == cung
 
 
 @pytest.mark.parametrize("chi_sinh,nam,co", [("Ngọ", 2028, True), ("Ngọ", 2029, True), ("Ngọ", 2030, True),
                                              ("Ngọ", 2026, False), ("Tý", 2034, True), ("Mão", 2025, True)])
 def test_tam_tai(chi_sinh, nam, co):
-    assert pt.tam_tai(chi_sinh, nam)["pham"] is co
+    from app.calc import tuoi_dan_gian as t
+    assert bool(t.pham_tam_tai(chi_sinh, t.can_chi_nam(nam)[1])) is co
 
 
 def test_api_menh_quai_danh_dau_huong_cat():

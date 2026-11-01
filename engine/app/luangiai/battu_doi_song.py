@@ -1483,7 +1483,8 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     ls = {**ls, "_gioi_tinh": sinh["gioi_tinh"]} if ls else _la_so(sinh)
     pt = phan_tich(ls)
-    tuoi = ngay_xem.year - sinh["lich"].year
+    d0 = sinh["lich"]
+    tuoi = ngay_xem.year - d0.year - ((ngay_xem.month, ngay_xem.day) < (d0.month, d0.day))   # EN-1 B11: tuổi tròn
     pt["tuoi"] = tuoi
     cm = cham_mang(pt, tuoi)
     hoc = (trong_so, ca_nhan)

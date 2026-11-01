@@ -117,8 +117,11 @@ def solar_to_lunar(dd: int, mm: int, yy: int,
     day_number = jd_from_date(dd, mm, yy)
     k = math.floor((day_number - _JD_EPOCH_NM) / _SYNODIC)
     month_start = get_new_moon_day(k + 1, time_zone)
-    if month_start > day_number:
-        month_start = get_new_moon_day(k, time_zone)
+    # EN-1 DU-4: bản gốc chỉ lùi MỘT lần; khi sóc thật sát nửa đêm, ước lượng k cao hơn 1 → sóc của k vẫn rơi sau
+    # day_number và trả "ngày 0" (7 ngày trong 1900–2100, vd 26/03/2009 lịch UTC+8). Lùi tới khi sóc ≤ ngày đang xét.
+    while month_start > day_number:
+        k -= 1
+        month_start = get_new_moon_day(k + 1, time_zone)
     a11 = get_lunar_month_11(yy, time_zone)
     b11 = a11
     if a11 >= month_start:

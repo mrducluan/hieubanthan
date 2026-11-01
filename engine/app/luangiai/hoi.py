@@ -17,12 +17,17 @@ import unicodedata
 
 from app.calc import thanso, thanso_mo_rong as mr
 from app.kb import store, thanso_v2 as kb
+from app.luangiai import an_toan as _at
 
 # --------------------------------------------------------------------------- #
 # Chuẩn hoá
 # --------------------------------------------------------------------------- #
 def chuan_hoa(s: str) -> str:
-    s = s.replace("Đ", "D").replace("đ", "d")
+    # "Ð" (U+00D0, chữ Eth) và "Ɖ" nhìn giống hệt "Đ" nhưng không tách dấu được → quy về D trước khi bỏ dấu.
+    for a in "ĐÐƉ":
+        s = s.replace(a, "D")
+    for a in "đðɖ":
+        s = s.replace(a, "d")
     s = "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
     s = s.lower()
     s = re.sub(r"(?<=[a-z])/(?=[a-z])", " ", s)          # vợ/chồng → vo chong
@@ -58,7 +63,7 @@ AN_TOAN = [
     r"bi lua het tien", r"no nan chong chat", r"giai doan cuoi",
     r"(me|bo|con|chong|vo|ong|ba|anh|chi|em) (toi |minh |em )?vua mat(?! viec| tien| tich)",
     r"con toi vua mat", r"ket lieu", r"khong thiet song",
-]
+] + _at.KHUNG_HOANG                     # EN-1: một bộ chặn chung cho 5 mảng (app/luangiai/an_toan.py)
 
 TU_CHOI = {
     "may_rui": [r"danh de", r"xo so", r"ve so", r"trung so", r"lo de", r"ca cuoc", r"ca do",
@@ -67,11 +72,11 @@ TU_CHOI = {
                    r"nen tuyen", r"sa thai nhan vien nao"],
     "suc_khoe_the_chat": [r"benh gi", r"mac benh", r"ung thu", r"dau da day", r"vo sinh",
                           r"sinh con duoc khong", r"co nen mo vao", r"phau thuat", r"song tho", r"an gi cho hop",
-                          r"suc khoe cua toi the nao", r"khoi benh"],
+                          r"suc khoe cua toi the nao", r"khoi benh"] + _at.SUC_KHOE,
     "du_doan_cu_the": [r"nam nao toi chet", r"bao gio toi chet", r"khi nao toi chet", r"tai nan",
                        r"thang kien", r"cho toi biet chac", r"chac chan", r"ngay cu the",
                        r"ten gi sinh nam nao", r"may dua con", r"nam nao toi ly hon",
-                       r"gia vang", r"doi nao thang", r"con bao lau"],
+                       r"gia vang", r"doi nao thang", r"con bao lau"] + _at.TUOI_CHET,
 }
 
 LIEN_QUAN_NGUOI = (r"(nguoi yeu|ny|crush|anh ay|co ay|ban ay|nguoi ay|ban trai|ban gai|chong|vo|"

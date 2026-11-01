@@ -116,8 +116,8 @@ def _nam_ts(ngay: int, thang: int, nam: int) -> tuple[int, dict]:
 
 
 # ------------------------------------------------------------------ tập quán
-def tap_quan(ngay_sinh: dt.date, nam: int, gioi_tinh: str | None) -> dict:
-    nsa = tdg.nam_am_sinh(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day)
+def tap_quan(ngay_sinh: dt.date, nam: int, gioi_tinh: str | None, tz_lich: float | None = None) -> dict:
+    nsa = tdg.nam_am_sinh(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, tz_lich)
     tuoi = t.tuoi_mu(nsa, nam)
     chi_s, chi_n = t.can_chi_nam(nsa)[1], t.can_chi_nam(nam)[1]
     kl = t.kim_lau(tuoi)
@@ -350,7 +350,8 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
     thieu = ([] if tv_sinh and bt_sinh else ["gio_sinh"]) + ([] if gioi_tinh else ["gioi_tinh"])
 
     so_nam, ng = _nam_ts(d, m, nam)
-    tq = tap_quan(ngay_sinh, nam, gioi_tinh)
+    tz_sinh = (tv_sinh or {}).get("tz_lich")              # EN-1 B9: lịch miền Nam 1960–1975 khi biết nơi sinh
+    tq = tap_quan(ngay_sinh, nam, gioi_tinh, tz_sinh)
 
     tv = bt = None
     ls = None
@@ -389,7 +390,7 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
     lop12 = _lop_12(ngay_sinh, hom_nay, quai)
     thang12 = gop_thang(ts12, tv12, bt12, lop12)
     xep = _hop_xep(lop12, tv12, bt12)
-    nsa = tdg.nam_am_sinh(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day)
+    nsa = tdg.nam_am_sinh(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, tz_sinh)
     tt = ntq.theo_tuoi(nam, nsa)
     cg_nam = [_gan(kh.hop("diem_manh" if x["loai"] == "thuan" else "luu_y" if x["loai"] == "luu_y" else "loi_khuyen",
                           *_doi_thuong(x), can_cu=[x["tieu_de"], x["can_cu"]],

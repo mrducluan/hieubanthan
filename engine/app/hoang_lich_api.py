@@ -63,8 +63,8 @@ def api_thang(inp: ThangInput) -> dict:
 
 class ChonNgayInput(_NguoiXem):
     viec: MaViec
-    tu: _dt.date
-    den: _dt.date
+    tu: _dt.date = Field(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))
+    den: _dt.date = Field(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))
 
 
 @router.post("/v1/lich/chon-ngay")

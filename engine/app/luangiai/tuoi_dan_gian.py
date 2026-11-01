@@ -23,10 +23,11 @@ def _meta() -> dict:
             "trang_thai": KB["trang_thai"], "luu_y": LUU_Y}
 
 
-def nam_am_sinh(nam: int, thang: int | None = None, ngay: int | None = None) -> int:
-    """Năm âm lịch Việt của ngày sinh (đủ ngày/tháng); chỉ có năm → dùng nguyên năm (ghi chú cho người sinh trước Tết)."""
+def nam_am_sinh(nam: int, thang: int | None = None, ngay: int | None = None, tz_lich: float | None = None) -> int:
+    """Năm âm lịch Việt của ngày sinh (đủ ngày/tháng); chỉ có năm → dùng nguyên năm (ghi chú cho người sinh trước Tết).
+    `tz_lich` = kinh tuyến lịch của nơi sinh khi biết (miền Nam 1960–1975 dùng UTC+8 — EN-1 B9); trống = UTC+7."""
     if thang and ngay:
-        return lunar.solar_to_lunar(ngay, thang, nam, CALENDAR_MERIDIAN_TZ)[2]
+        return lunar.solar_to_lunar(ngay, thang, nam, tz_lich or CALENDAR_MERIDIAN_TZ)[2]
     return nam
 
 
@@ -53,7 +54,8 @@ def xem_tuoi_lam_nha(nam_sinh: int, nam_xay: int, thang_sinh: int | None = None,
             break
     ket = ({"ma": "thuan", "chu": f"Năm {nam_xay} tuổi {d['tuoi']} không phạm Kim lâu, Hoang ốc xấu hay Tam tai."}
            if not d["xau"] else
-           {"ma": "can_nhac", "chu": f"Năm {nam_xay} tuổi {d['tuoi']} rơi vào {', '.join(d['xau'])} — dân gian thường tránh làm nhà, cưới hỏi năm này."})
+           {"ma": "can_nhac", "chu": f"Năm {nam_xay} tuổi {d['tuoi']} rơi vào {', '.join(d['xau'])} — dân gian thường tránh làm nhà năm này"
+                                     + ("; với cưới hỏi, Kim lâu chỉ xét tuổi cô dâu." if d["kl"] else ".")})
     # SEO-M: trả lời trước — chỉ ghép kết luận + năm thuận đã tính.
     tra_loi = (f"{ket['chu']} Người sinh năm {nam_sinh} ({can} {chi}) tính tuổi mụ {d['tuoi']} vào năm {nam_xay}."
                + (f" Năm gần nhất không phạm: {nam_thuan[0]['nam']} ({nam_thuan[0]['can_chi']}, tuổi {nam_thuan[0]['tuoi_mu']})."

@@ -175,3 +175,10 @@ class HourConfidence(str, Enum):
 
 # Sinh trong các khoảng này thì lá số nhạy với sai số vài phút → luôn gắn cờ.
 TY_EDGE_WINDOW = (23, 1)       # 23:00–00:59
+
+
+def hom_nay_vn() -> date:
+    """Ngày hiện tại theo giờ Việt Nam (UTC+7). EN-1: máy chủ chạy UTC — `date.today()` lệch một ngày từ 0 giờ tới
+    7 giờ sáng giờ VN (ngày/năm cá nhân, quẻ, nhịp sai một ngày). Mọi ngày mặc định của engine dùng hàm này."""
+    from datetime import datetime, timedelta, timezone  # noqa: PLC0415
+    return datetime.now(timezone(timedelta(hours=7))).date()

@@ -15,6 +15,7 @@ import datetime as dt
 import json
 import os
 import subprocess
+import threading
 from functools import lru_cache
 from pathlib import Path
 
@@ -63,10 +64,21 @@ def _am(x: dt.date, tz_lich: float) -> str:
                        "so_ngay": lunar.so_ngay_thang(th, na, nh, tz_lich)})
 
 
+# EN-1 HT-1: mỗi tiến trình Node (iztro) chiếm tới ~67 MB; pool luồng FastAPI 120 → vài chục lượt Tử vi cùng lúc làm
+# engine (Render Starter 512 MB) hết RAM. Giới hạn số Node chạy đồng thời; lượt thứ N+1 chờ (thêm độ trễ, không sập).
+_NODE_TOI_DA = threading.BoundedSemaphore(max(1, int(os.environ.get("NODE_DONG_THOI", "3"))))
+
+
 @lru_cache(maxsize=512)
 def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "",
           am: str = "", am_xem: str = "", fix_leap: bool = True) -> str:
     phien_ban_iztro()   # kiểm tra đã cài
+    with _NODE_TOI_DA:
+        return _chay_node(ngay, ti, gioi_tinh, ngon_ngu, ngay_xem, am, am_xem, fix_leap)
+
+
+def _chay_node(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str,
+               am: str, am_xem: str, fix_leap: bool) -> str:
     try:
         kq = subprocess.run([_node(), str(SCRIPT)], cwd=THU_MUC, capture_output=True, text=True,
                             timeout=TIMEOUT_GIAY, check=False,

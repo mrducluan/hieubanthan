@@ -22,7 +22,7 @@ _VN = _dt.timezone(_dt.timedelta(hours=7))
 class ThoiGianToiInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    ngay_sinh: _dt.date
+    ngay_sinh: _dt.date = Field(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))   # EN-1: ngoài khoảng → 422
     gioi_tinh: Literal["nam", "nu"] | None = None
     la_so: TuanTrietInput | None = None
     nam: int | None = Field(default=None, ge=1901, le=2099)

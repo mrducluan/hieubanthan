@@ -152,3 +152,18 @@ def linh_vuc_doi_song(t: str) -> str | None:
 def ket(goi: dict) -> dict:
     """Điền so_trong_goi để bộ kiểm tra đầu ra chặn số lạ (như thần số)."""
     return _h._ket(goi)
+
+
+def nam_xem_hh(nam_cau: int | None, ngay_xem, t: str) -> tuple[int, int]:
+    """EN-1 DU-2 — "năm nay" của Huyền học không phải năm dương lịch: (năm theo Lập xuân — Bát tự, phi tinh, Thái Tuế;
+    năm âm lịch Việt — tuổi mụ, tuổi làm nhà, sao hạn). Câu nêu rõ "năm 20xx" → dùng đúng số đó cho cả hai; "năm sau"
+    cộng 1. Hỏi ngày 20/01/2027 "năm nay" → Bính Ngọ 2026 (chưa qua Lập xuân 04/02, chưa qua Tết 06/02)."""
+    import datetime as _dt  # noqa: PLC0415
+    from app.calc import huyen_khong, lunar  # noqa: PLC0415
+    from app.config import CALENDAR_MERIDIAN_TZ  # noqa: PLC0415
+    if nam_cau:
+        return nam_cau, nam_cau
+    them = 1 if co(t, [r"nam sau", r"nam toi", r"sang nam"]) else 0
+    lx = huyen_khong.nam_theo_lap_xuan(_dt.datetime(ngay_xem.year, ngay_xem.month, ngay_xem.day, 5))   # 12:00 giờ VN
+    am = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)[2]
+    return lx + them, am + them

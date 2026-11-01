@@ -93,7 +93,7 @@ class NguoiKiaInput(BaseModel):
     """Người kia: ngày sinh bắt buộc; đủ giờ + giới tính + nơi sinh → an lá đầy đủ để xem hai chiều."""
     model_config = ConfigDict(extra="forbid")
 
-    birth_date: _dt.date
+    birth_date: _dt.date = Field(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))   # EN-1: ngoài khoảng → 422
     calendar_type: Literal["duong", "am"] = "duong"
     am_nhuan: bool = False
     birth_time: str | None = Field(default=None, pattern=r"^\d{2}:\d{2}$")

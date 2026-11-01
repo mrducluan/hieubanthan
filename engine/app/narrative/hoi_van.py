@@ -20,6 +20,7 @@ import re
 
 import httpx
 
+from app.config import hom_nay_vn as _hom_nay_vn  # EN-1: ngày mặc định theo giờ VN
 from app.luangiai import hoi, noi_dau, truc_quan
 from app.luangiai import thanso_chaldean as _chaldea
 from app.luangiai import tong_hop as _tong_hop
@@ -254,7 +255,7 @@ def _goi_tong_hop(goi: dict, pl: dict, nguoi: dict, ngay_xem: dt.date) -> dict:
 
 def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
             ngay_xem: dt.date | None = None, dung_llm: bool = True, phai: str = "pitago") -> dict:
-    ngay_xem = ngay_xem or dt.date.today()
+    ngay_xem = ngay_xem or _hom_nay_vn()
     pl = hoi.phan_loai(cau_hoi)
     goi = hoi.goi_bang_chung(pl, nguoi, nguoi_kia, ngay_xem)
     if phai == "chaldea":
