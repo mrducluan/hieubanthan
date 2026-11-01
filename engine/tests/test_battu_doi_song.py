@@ -315,7 +315,7 @@ def test_moi_xem_va_cau_hoi_mo(bc):
     for c in bc["chuong"]:
         m = c["moi_xem"]
         assert ("battu", c["ma"]) in toan_bo.CAU_HOI_MO
-        assert m["cau_hoi"].endswith("?") and any(d.startswith(m["diem_nhan"].rstrip("…")) for d in c["doan"])
+        assert m["cau_hoi"].endswith("?") and _diem_nhan_tu_chuong(c, m["diem_nhan"])
         assert not kb_tv.tim_cum_cam(m["cau_hoi"], DOA)
 
 
@@ -668,3 +668,10 @@ def test_thang_chi_to_mau_khi_tin_hieu_ro():
     tong = sum(dem.values())
     assert all(0.10 <= dem[m] / tong < 0.65 for m in ("thuan", "can_bang", "can_chu_dong")), dict(dem)
     assert 1 <= sum(cam) / len(cam) <= 3, sum(cam) / len(cam)
+
+
+def _diem_nhan_tu_chuong(c: dict, dn: str) -> bool:
+    """EN-2 (P2-14): điểm nhấn lời mời cắt từ CHÍNH chương — tiêu đề một hộp của chương, hoặc đầu một đoạn."""
+    t = dn.rstrip("…").rstrip(".")
+    return any(h.get("tieu_de", "").rstrip(".") == t for h in c.get("hop") or []) or \
+        any(d.startswith(dn.rstrip("…")) for d in c.get("doan") or [])

@@ -221,7 +221,7 @@ def test_moi_xem_va_cau_hoi_mo(bc):
     for c in bc["chuong"]:
         m = c["moi_xem"]
         assert ("tuvi", c["ma"]) in toan_bo.CAU_HOI_MO
-        assert m["cau_hoi"].endswith("?") and any(d.startswith(m["diem_nhan"].rstrip("…")) for d in c["doan"])
+        assert m["cau_hoi"].endswith("?") and _diem_nhan_tu_chuong(c, m["diem_nhan"])
         assert not kb.tim_cum_cam(m["cau_hoi"], DOA)
 
 
@@ -457,3 +457,10 @@ def test_kb_khong_co_cum_ban_doi_thuong():
     """"người bạn đời thường mang lại…" đọc nhầm thành "bạn đời bình thường" → viết lại."""
     raw = (Path(__file__).parents[1] / "app" / "kb" / "data" / "tuvi_doi_song_kb.json").read_text("utf-8")
     assert "bạn đời thường" not in raw.lower()
+
+
+def _diem_nhan_tu_chuong(c: dict, dn: str) -> bool:
+    """EN-2 (P2-14): điểm nhấn lời mời cắt từ CHÍNH chương — tiêu đề một hộp của chương, hoặc đầu một đoạn."""
+    t = dn.rstrip("…").rstrip(".")
+    return any(h.get("tieu_de", "").rstrip(".") == t for h in c.get("hop") or []) or \
+        any(d.startswith(dn.rstrip("…")) for d in c.get("doan") or [])

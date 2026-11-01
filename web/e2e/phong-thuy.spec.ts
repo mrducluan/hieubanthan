@@ -29,9 +29,9 @@ test("PT-ĐS: Nhà của bạn — đọc bằng lời thường, 5 chương, ng
   await nha.getByRole("button", { name: "Đọc nhà của tôi" }).click();
   const bc = nha.getByTestId("bao-cao-nha");
   await expect(bc).toBeVisible();
-  await expect(bc.getByTestId("nha-chuong-ban_hop_huong")).toContainText("Bạn mệnh Khảm");
+  await expect(bc.getByTestId("nha-chuong-ban_hop_huong")).toContainText("Bạn thuộc nhóm hướng Đông");   // EN-2: lời đời thường
   const c2 = bc.getByTestId("nha-chuong-ngoi_nha_voi_ban");
-  await expect(c2).toContainText("Nhà hướng Nam, Khảm trạch");
+  await expect(c2).toContainText("Nhà hướng Nam. Với bạn");
   await expect(c2.getByTestId("chip-muc").first()).toContainText("Thuận lợi");
   await expect(c2).toContainText("khác nhóm");                              // vợ 1992 → Đoài, Tây tứ
   await expect(bc.getByTestId("nha-goi-y-phong")).toContainText("Cửa chính / lối vào");

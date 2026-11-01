@@ -79,10 +79,10 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
       {/* Trục 1: thân chỉ là ý thêm + việc nên làm (engine bỏ phần đã có ở tiêu đề) — có thể rỗng. */}
       {hop.noi_dung && <p className={cn("mt-1.5 text-[0.95rem] leading-relaxed", hop.lop?.length ? "font-medium text-fg" : "text-fg-muted")}
         data-testid={hop.lop?.length ? "hop-tom-lai" : undefined}>{hop.noi_dung}</p>}
-      {hop.lop && hop.lop.length > 0 && <CacLop lop={hop.lop} />}
       {hop.huong_xu_ly && !hop.noi_dung.includes(hop.huong_xu_ly) && (
         <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg"><b className="hop-nhan font-semibold">Nên:</b> {hop.huong_xu_ly}</p>
       )}
+      {hop.lop && hop.lop.length > 0 && <CacLop lop={hop.lop} />}
       {hop.an_toan && hop.an_toan.length > 1 && (
         <ul className="mt-1.5 list-disc space-y-0.5 pl-5 text-sm text-fg-muted" data-testid="hop-an-toan">{hop.an_toan.slice(1).map((x) => <li key={x}>{x}</li>)}</ul>
       )}
@@ -116,8 +116,25 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
 /** TG-V2: các cách xem của một tháng, mỗi cách một hàng — nhãn nhỏ (chấm màu theo nghiêng thuận / nhắc chậm, không
  *  đỏ) trên, lời dưới. Xếp dọc ở mọi cỡ màn hình để chữ không bị ép hẹp trên điện thoại. */
 function CacLop({ lop }: { lop: HangLop[] }) {
+  // EN-2 (ND-8): mỗi tháng ~6 cách xem → mặc định gập (câu "Tóm lại" + việc nên làm đã đủ để lướt 12 tháng); in thì mở.
+  const [mo, setMo] = useState(false);
+  const id = useId();
   return (
-    <dl className="mt-3 divide-y divide-line/60 border-t border-line/60" data-testid="hop-lop">
+    <div className="mt-2">
+      <button type="button" aria-expanded={mo} aria-controls={id} onClick={() => setMo((v) => !v)} data-testid="hop-lop-mo"
+        className="inline-flex min-h-9 items-center gap-1 rounded-full text-sm text-fg-muted underline-offset-4 hover:text-fg hover:underline print:hidden">
+        {mo ? "Thu gọn" : `Xem từng cách (${lop.length})`} <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
+      </button>
+      <div id={id} hidden={!mo} className="print:block">
+        <CacLopDs lop={lop} />
+      </div>
+    </div>
+  );
+}
+
+function CacLopDs({ lop }: { lop: HangLop[] }) {
+  return (
+    <dl className="mt-1 divide-y divide-line/60 border-t border-line/60" data-testid="hop-lop">
       {lop.map((r) => {
         const nghieng = r.muc ?? (r.loai === "thuan" ? "thuan" : r.loai === "luu_y" ? "can_chu_dong" : null);
         return (

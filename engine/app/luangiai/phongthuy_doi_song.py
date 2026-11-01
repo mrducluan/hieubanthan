@@ -10,6 +10,7 @@ Khuôn `doi_song_1` (như Luận giải Tử vi đời sống) để web dùng c
 from __future__ import annotations
 
 import datetime as dt
+import re
 
 from app.calc import huyen_khong as hk
 from app.calc import phongthuy as pt
@@ -116,15 +117,15 @@ def _doan_cap_sao(ch: dict) -> list[str]:
     lv = ch.get("linh_vuc") or {}
     ra = []
     if lv:
-        ra.append(f"Hướng tinh {ch['huong']} ở phía cửa nói về tiền bạc, công việc: {lv.get('tien_bac', '')} {lv.get('cong_viec', '')}".strip())
-        ra.append(f"Sơn tinh {ch['son']} nói về người ở: {lv.get('gia_dao', '')} {lv.get('suc_khoe', '')}".strip())
+        ra.append(f"Về tiền bạc, công việc (theo phía cửa): {lv.get('tien_bac', '')} {lv.get('cong_viec', '')}".strip())
+        ra.append(f"Về người ở trong nhà: {lv.get('gia_dao', '')} {lv.get('suc_khoe', '')}".strip())
         if lv.get("tam_ly"):
             ra.append(lv["tam_ly"])
     ny = ch.get("nam_chu_y") or {}
     if ny.get("chu_dong") or ny.get("thuan"):
         phan = []
         if ny.get("chu_dong"):
-            phan.append("năm nên chủ động hơn ở phía cửa (sao " + "/".join(str(x) for x in ch["kich_hoat"]["chu_dong"]) + " bay tới): "
+            phan.append("năm nên chủ động hơn ở phía cửa: "
                         + ", ".join(str(n) for n in ny["chu_dong"]))
         if ny.get("thuan"):
             phan.append("năm thuận để sửa sang, mở việc ở phía này: " + ", ".join(str(n) for n in ny["thuan"]))
@@ -177,6 +178,16 @@ def _veto(bc_luan: dict | None) -> list[dict]:
     return [d for d in bc_luan["dien_giai"]["dau_hieu"] if d.get("veto") and not d["tot"]]
 
 
+# EN-2 (P1-8): tên đời thường của tám du niên — thuật ngữ (Sinh Khí, Tuyệt Mệnh…) chỉ ở "Vì sao nói vậy".
+TEN_THUONG = {"Sinh Khí": "phía có đà nhất", "Thiên Y": "phía lành, dưỡng sức", "Diên Niên": "phía hoà thuận",
+              "Phục Vị": "phía yên ổn", "Tuyệt Mệnh": "phía kém nhất", "Ngũ Quỷ": "phía dễ rối chuyện",
+              "Lục Sát": "phía dễ va chạm", "Hoạ Hại": "phía dễ hao", "Họa Hại": "phía dễ hao"}
+
+
+def _ten_thuong(dn: str) -> str:
+    return TEN_THUONG.get(dn, dn)
+
+
 def _muc_thang(sao: int) -> str:
     ts = kb.thang_sao()
     return "thuan" if sao in ts["thuan"] else "can_chu_dong" if sao in ts["can_chu_dong"] else "can_bang"
@@ -192,22 +203,24 @@ def _chuong_ban_hop_huong(mq: dict | None) -> dict:
     tot = [h for h in pt.HUONG if bang[h] in pt.CAT]
     kem = [h for h in pt.HUONG if bang[h] not in pt.CAT]
     q = kbp.quai(mq["quai"]) or {}
-    c["tom_tat"] = (f"Bạn mệnh {mq['quai']}, {mq['nhom'].lower()}. {kb.nhom(mq['nhom'])} "
-                    f"Bốn phía hợp với bạn: {', '.join(tot)}. Bốn phía kém: {', '.join(kem)}.")
     thu_tu = sorted(tot, key=lambda h: _UU_TIEN_DU_NIEN.index(bang[h]))
-    c["hop"].append(_hop("cot_loi", f"Mệnh {mq['quai']} · {mq['nhom']}",
+    nhom_ngan = mq["nhom"].split()[0]                                   # "Đông" / "Tây"
+    c["tom_tat"] = (f"Bạn thuộc nhóm hướng {nhom_ngan}: bốn phía hợp với bạn là {', '.join(thu_tu)} (tốt nhất là "
+                    f"{thu_tu[0]}); bốn phía kém là {', '.join(kem)}.")
+    c["hop"].append(_hop("cot_loi", f"Bạn hợp nhóm hướng {nhom_ngan}",
                          f"Quay mặt hay kê đầu về {', '.join(thu_tu)} là thuận với bạn. Nếu chỉ nhớ một hướng: {thu_tu[0]}."))
     for h in thu_tu[:3]:
         dn = bang[h]
-        c["hop"].append(_hop("loi_khuyen", f"{h} — {dn}", f"{kb.du_nien(dn)['mot_cau'].capitalize()}. Dùng cho: {kb.du_nien(dn)['dung']}."))
+        c["hop"].append(_hop("loi_khuyen", f"{h}: {_ten_thuong(dn)}", f"{kb.du_nien(dn)['mot_cau'].capitalize()}. Dùng cho: {kb.du_nien(dn)['dung']}."))
     xau = sorted(kem, key=lambda h: -_UU_TIEN_DU_NIEN.index(bang[h]))[0]
-    c["hop"].append(_hop("luu_y", f"{xau} — {bang[xau]}", f"{kb.du_nien(bang[xau])['mot_cau'].capitalize()}.",
+    c["hop"].append(_hop("luu_y", f"{xau}: {_ten_thuong(bang[xau])}", f"{kb.du_nien(bang[xau])['mot_cau'].capitalize()}.",
                          "Để kho, nhà vệ sinh hoặc nơi ít ngồi lâu ở phía này; không kê đầu giường quay về đây."))
-    c["doan"] = [f"Mệnh quái tính theo năm sinh (mốc {'Lập xuân' if mq['moc_nam'] == 'lap_xuan' else 'Tết âm lịch'}) và giới tính, "
-                 f"ra tám phía tốt xấu quanh bạn. Tính chất quẻ {mq['quai']}: {q.get('tinh_chat', '')}.",
+    c["doan"] = [f"Tám phía tốt xấu quanh bạn tính theo năm sinh (mốc {'Lập xuân' if mq['moc_nam'] == 'lap_xuan' else 'Tết âm lịch'}) "
+                 "và giới tính — mỗi người một bảng, người trong nhà có thể khác nhau.",
                  "Phía tốt dùng cho cửa, chỗ ngồi, đầu giường; phía kém dùng cho kho, nhà vệ sinh, cầu thang — đồ đạc và nếp dùng phòng "
                  "là thứ bạn đổi được ngay, không cần sửa nhà."]
-    c["can_cu"] = [f"Bát trạch: mệnh quái {mq['quai']} (số {mq['so']}), năm tính {mq['nam_tinh']}. Du niên 8 phương: "
+    c["can_cu"] = [f"Bát trạch: mệnh quái {mq['quai']} (số {mq['so']}, {mq['nhom']}; tính chất quẻ: {q.get('tinh_chat', '')}), "
+                   f"năm tính {mq['nam_tinh']}. Du niên 8 phương: "
                    + "; ".join(f"{h} {bang[h]}" for h in pt.HUONG) + "."]
     for cb in mq.get("co_canh_bao", []):
         c["can_cu"].append(cb["chi_tiet"])
@@ -254,12 +267,12 @@ def _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan) -> dict:
         cung_nhom = mq["nhom"].split()[0] == trach["nhom"].split()[0]
         muc_parts += [_muc_du_nien(dn), "thuan" if cung_nhom else "can_chu_dong"]
         can_cu.append(f"Hướng {huong} với mệnh {mq['quai']} là {dn}; {'cùng' if cung_nhom else 'khác'} nhóm Đông/Tây với trạch.")
-        c["hop"].append(_hop("cot_loi", f"Hướng {huong} với bạn: {dn}",
-                             f"{kb.du_nien(dn)['mot_cau'].capitalize()}. " + (f"Nhà và bạn cùng nhóm {trach['nhom'].split()[0]} — bố trí dễ."
+        c["hop"].append(_hop("cot_loi", f"Hướng {huong} với bạn: {_ten_thuong(dn)}",
+                             f"{kb.du_nien(dn)['mot_cau'].capitalize()}. " + (f"Nhà và bạn cùng nhóm hướng {trach['nhom'].split()[0]} — bố trí dễ."
                                                                              if cung_nhom else
-                                                                             f"Nhà thuộc {trach['nhom']}, bạn {mq['nhom']} — khác nhóm, nên chọn phòng và đầu giường theo mệnh bạn thay vì theo nhà.")))
+                                                                             f"Nhà thuộc nhóm hướng {trach['nhom'].split()[0]}, bạn nhóm {mq['nhom'].split()[0]} — khác nhóm, nên chọn phòng và đầu giường theo bạn thay vì theo nhà.")))
     else:
-        c["hop"].append(_hop("cot_loi", f"Nhà hướng {huong} — {trach['quai']} trạch", f"{trach['nhom']}: các phía hợp với nhà là "
+        c["hop"].append(_hop("cot_loi", f"Nhà hướng {huong}", f"Các phía hợp với nhà là "
                              + ", ".join(h for h in pt.HUONG if pt.bang_huong(trach["quai"])[h] in pt.CAT) + ". Thêm năm sinh để so với mệnh bạn."))
     if b:
         ch = b["cap_huong"]
@@ -268,11 +281,15 @@ def _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan) -> dict:
                       f"cung hướng ({b['huong']['phuong']}) sơn tinh {ch['son']} – hướng tinh {ch['huong']} ({ch['ten']}), "
                       f"sao hướng đang {ch['trang_thai_huong']}.")
         loai = "diem_manh" if ch["muc"] == "thuan" else "luu_y" if ch["muc"] == "can_chu_dong" else "loi_khuyen"
-        c["hop"].append(_hop(loai, f"Phía cửa theo năm xây {b['nam_xay']}: {kb.nhan_muc(ch['muc'])}", ch["y"],
+        lv = ch.get("linh_vuc") or {}
+        than_cua = " ".join(x for x in (lv.get("tien_bac"), lv.get("gia_dao")) if x) or ch["y"]
+        can_cu.append(f"Cặp sao phía cửa: {ch['y']}")
+        c["hop"].append(_hop(loai, f"Phía cửa theo năm xây {b['nam_xay']}: {kb.nhan_muc(ch['muc'])}", than_cua,
                              (ch.get("luu_y") or None) if loai == "luu_y" else None))
         kcuc = (kbp.huyen_khong().get("cuc") or {}).get(b["cuc"], {})
         if kcuc:
-            c["doan"].append(f"Theo năm xây, nhà thuộc cục {b['cuc_ten'].lower()}: {kcuc.get('y', '')} Gợi ý: {kcuc.get('goi_y', '')}")
+            y = re.sub(r"^(Cả )?sao vượng sơn lẫn hướng cùng về phía hướng: ", "", kcuc.get("y", ""))
+            c["doan"].append(f"Theo năm xây: {y[:1].lower() + y[1:]} Gợi ý: {kcuc.get('goi_y', '')}")
         c["doan"].extend(_doan_cap_sao(ch))
         h_at = _hop_an_toan(ch, "Phía cửa")
         if h_at:
@@ -294,7 +311,7 @@ def _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan) -> dict:
     c["muc"] = _gop_muc(*muc_parts)
     c["nhan_muc"] = kb.nhan_muc(c["muc"]) if c["muc"] else None
     _ap_tran_muc(c, _veto(bc_luan))
-    c["tom_tat"] = (f"Nhà hướng {huong}, {trach['quai']} trạch. " + (f"Với bạn: {kb.nhan_muc(c['muc']).lower()}." if c["muc"] else "")
+    c["tom_tat"] = (f"Nhà hướng {huong}. " + (f"Với bạn: {kb.nhan_muc(c['muc']).lower()}." if c["muc"] else "")
                     + (" Có dấu hiệu lớn cần xử lý trước." if c.get("tran_muc") else "")).strip()
     c["doan"].insert(0, kb.mau("hinh_the_truoc"))
     c["can_cu"] = can_cu
@@ -400,7 +417,7 @@ def _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem: dt.date) -> dict:
         muc_nam = "can_chu_dong"
     else:
         c["hop"].append(_hop("diem_manh", f"Năm {nam}: cửa và phòng chính không trùng phía tránh",
-                             f"Các phía năm nay nên giữ yên là {ten_tranh}. Cửa chính và phòng chính của bạn không nằm ở đó."))
+                             f"Các phía năm nay nên giữ yên là {', '.join(dict.fromkeys(x['phuong'] for x in c['han_nam']))}. Cửa chính và phòng chính của bạn không nằm ở đó."))
         muc_nam = "thuan"
     # 3 tháng tới: sao tháng vào cung hướng (cửa) + lưu niên
     ln = hk.luu_nien(nam)
@@ -437,7 +454,8 @@ def _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem: dt.date) -> dict:
         c["can_cu"].append(tl["cach_tinh"])
     c["muc"] = _gop_muc(muc_nam, *mucs)
     c["nhan_muc"] = kb.nhan_muc(c["muc"])
-    c["tom_tat"] = f"Năm {nam} ({hn['can_chi']}): phía giữ yên là {ten_tranh}. Ba tháng tới: " + ", ".join(f"tháng {x['chi_thang']} {x['nhan_muc'].lower()}" for x in c["ba_thang"]) + "."
+    phuong_yen = list(dict.fromkeys(x["phuong"] for x in hn["huong_tranh"]))
+    c["tom_tat"] = f"Năm {nam} ({hn['can_chi']}): nên giữ yên, không động thổ lớn ở phía {', '.join(phuong_yen)}. Ba tháng tới: " + ", ".join(f"tháng {x['chi_thang']} {x['nhan_muc'].lower()}" for x in c["ba_thang"]) + "."
     c["doan"] = ["Sao năm và sao tháng là lớp khí theo thời gian chồng lên nhà — dùng để chọn lúc sửa chữa, động thổ, dọn phòng. "
                  "Việc cần thiết cho an toàn (điện, nước, dột) thì làm ngay, không chờ tháng."]
     c["cau_tu_soi"] = "Trong ba tháng tới bạn định sửa hay kê lại chỗ nào? Có rơi vào phía đang cần giữ yên không?"

@@ -35,7 +35,15 @@ def test_bao_cao_day_du():
     assert [c["ma"] for c in bc["chuong"]] == ["ban_hop_huong", "ngoi_nha_voi_ban", "tung_phong", "nam_nay", "viec_nen_lam"]
     assert len(bc["cot_loi"]) >= 2 and bc["ket"]
     c1, c2, c3, c4, c5 = bc["chuong"]
-    assert "Khảm" in c1["tom_tat"] and any(h["loai"] == "loi_khuyen" for h in c1["hop"])
+    # EN-2 (P1-8): mệnh quái + du niên chỉ ở "Vì sao nói vậy"; lời chính dùng tên đời thường
+    assert "Khảm" not in c1["tom_tat"] and any("Khảm" in x for x in c1["can_cu"])
+    assert any(h["loai"] == "loi_khuyen" for h in c1["hop"])
+    import re
+    tn = re.compile(r"Sinh Khí|Thiên Y|Diên Niên|Phục Vị|Tuyệt Mệnh|Ngũ Quỷ|Lục Sát|Họa Hại|Hoạ Hại|tứ mệnh|trạch\b|"
+                    r"[Ss]ơn tinh|[Hh]ướng tinh|Bát Bạch")
+    for c in bc["chuong"]:
+        for x in [c.get("tom_tat") or ""] + [h["tieu_de"] for h in c["hop"]]:
+            assert not tn.search(x), x
     # nhà hướng Nam: toạ Bắc = Khảm trạch (Đông tứ), Nam là Diên Niên với Khảm → thuận
     assert c2["muc"] == "thuan" and "Diên Niên" in " ".join(c2["can_cu"])
     assert bc["da_tinh"]["trach"]["quai"] == "Khảm" and bc["da_tinh"]["menh_quai"]["quai"] == "Khảm"

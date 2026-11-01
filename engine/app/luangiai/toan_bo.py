@@ -86,9 +86,24 @@ def so_chu_chuong(c) -> int:
     return 0
 
 
+def diem_nhan_hop(chuong: dict | None) -> str | None:
+    """EN-2 (P2-14): điểm nhấn lời mời = tiêu đề hộp RIÊNG của người đọc trong chương (điểm mạnh trước — mời, không
+    doạ), thay câu tóm tắt dạng "ở mức… nét của bạn…" giống nhau giữa nhiều người. Hộp tham chiếu / đang xem lại bỏ qua."""
+    if (chuong or {}).get("ma") == "van_han":         # VH-1: lời mời Vận hạn chỉ nói năm thuận (đoạn đã dựng sẵn)
+        return None
+    hop = [h for h in (chuong or {}).get("hop") or [] if not h.get("tham_chieu") and not h.get("dang_xem_lai")
+           and (h.get("tieu_de") or "").strip()]
+    for loai in ("diem_manh", "loi_khuyen"):            # chỉ điều đang đỡ / việc nên làm — lời mời không doạ
+        h = next((x for x in hop if x["loai"] == loai and len(x["tieu_de"]) >= 15), None)
+        if h:
+            t = h["tieu_de"].strip().rstrip(".")
+            return t + "."
+    return None
+
+
 def _moi_xem(mo_dun: str, ma: str, doan: list[str], chuong: dict | None = None) -> dict:
     chu = so_chu_chuong(chuong) if chuong is not None else sum(len(d.split()) for d in doan)
-    return {"diem_nhan": diem_nhan(doan), "cau_hoi": CAU_HOI_MO.get((mo_dun, ma), "Chương này nói gì về chính bạn?"),
+    return {"diem_nhan": diem_nhan_hop(chuong) or diem_nhan(doan), "cau_hoi": CAU_HOI_MO.get((mo_dun, ma), "Chương này nói gì về chính bạn?"),
             "so_doan": len(doan), "phut_doc": max(1, round(chu / 200))}
 
 

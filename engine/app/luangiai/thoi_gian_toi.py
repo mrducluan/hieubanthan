@@ -105,7 +105,8 @@ def _thang_ts(ngay: int, thang: int, tu: dt.date, so: int) -> list[dict]:
         ra.append(_gan(kh.hop("thoi_diem", f"Tháng {m}/{y}: {o['nhan'].lower()}",
                               f"Hợp {', '.join(o['hop_de'])}.",
                               can_cu=[f"Tháng cá nhân {s} (thần số, tháng dương lịch {m}/{y})"],
-                              ma=kh.ma_mau("thanso", "thang", f"so{s}", f"t{m}")), "thanso", thang=f"{m}/{y}", so=s))
+                              ma=kh.ma_mau("thanso", "thang", f"so{s}", f"t{m}")), "thanso", thang=f"{m}/{y}", so=s,
+                       hop_de=o["hop_de"][0]))
         m, y = (1, y + 1) if m == 12 else (m + 1, y)
     return ra
 
@@ -249,6 +250,7 @@ def gop_thang(ts: list[dict], tv: list[dict], bt: list[dict], lop: dict[str, dic
     thuỷ · ngày đẹp (không cần giờ sinh) · Tử vi (tháng âm chứa ngày 15) · Bát tự (tháng tiết chứa ngày 15). Chỉ ghép câu +
     mức đã có; mức của hộp chỉ khi hai lá số cùng mức (lớp tập quán / phong thuỷ không đổi mức)."""
     ra = []
+    truoc = None
     for h in ts:
         mm, yy = (int(x) for x in h["thang"].split("/"))
         giua = dt.date(yy, mm, 15)
@@ -257,7 +259,8 @@ def gop_thang(ts: list[dict], tv: list[dict], bt: list[dict], lop: dict[str, dic
         o = lop.get(h["thang"])
         hang = [{"ma": "thanso", "nhan": L.TEN_LOP["thanso"], "tieu": f"Tháng cá nhân {h['so']}", "loi": h["noi_dung"]}]
         if o:
-            hang += L.hang_lop(o)
+            hang += L.hang_lop(o, truoc)
+            truoc = o
         if a:
             hang.append({"ma": "tuvi", "nhan": L.TEN_LOP["tuvi"], "tieu": a["tieu_de"], "loi": a["loi"].rstrip(".") + ".",
                          "muc": a.get("muc")})
@@ -268,8 +271,10 @@ def gop_thang(ts: list[dict], tv: list[dict], bt: list[dict], lop: dict[str, dic
         cu = list(h.get("can_cu", [])) + (L.can_cu_lop(o) if o else []) + (a or {}).get("can_cu", [])[:2] \
             + (b or {}).get("can_cu", [])[:1]
         tom = L.tom_lai(L.tin_hieu(o, a and a.get("muc"), b and b.get("muc"))) if o else h["noi_dung"]
+        viec = L.viec_chinh(o, h.get("hop_de")) if o else ""
         hop = _gan(kh.hop("thoi_diem", h["tieu_de"], tom, can_cu=cu,
-                          ma=kh.ma_mau("tgt", "thang", f"so{h['so']}", muc or "khac"), muc=muc),
+                          ma=kh.ma_mau("tgt", "thang", f"so{h['so']}", muc or "khac"), muc=muc,
+                          **({"huong_xu_ly": viec} if viec else {})),
                    "hai_la_so" if a and b else "thanso", thang=h["thang"], so=h["so"])
         hop["lop"] = hang
         ra.append(hop)

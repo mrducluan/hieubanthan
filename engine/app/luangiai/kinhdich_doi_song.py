@@ -85,6 +85,9 @@ def can_lam_ro(t: str, chu_de: str | None, truong_phai: str | None) -> dict | No
 def muc_loi_kinh(han: str) -> str:
     """Mức từ chữ đoán trong lời kinh làm chủ: 吉 亨 无咎 无不利 悔亡 利 → thuận · 凶 吝 厲 悔 不利 → cần chủ động · lẫn / không có → cân bằng."""
     s = (han or "").replace("無", "无").replace("厲", "厉")
+    # EN-2 (ND-6): "无攸利" = không có chỗ lợi, "勿用" = chớ dùng → lời xấu (trước bị đếm là "利" → kết luận ngược lời hào).
+    neg0 = s.count("无攸利") + s.count("勿用")
+    s = s.replace("无攸利", "").replace("勿用", "")
     pos = 0
     for tok in ("无不利", "无咎", "悔亡"):
         pos += s.count(tok)
@@ -92,12 +95,26 @@ def muc_loi_kinh(han: str) -> str:
     neg = s.count("不利")
     s = s.replace("不利", "")
     pos += s.count("吉") + s.count("亨") + s.count("利")
-    neg += s.count("凶") + s.count("吝") + s.count("厉") + s.count("悔")
+    neg += s.count("凶") + s.count("吝") + s.count("厉") + s.count("悔") + neg0
     if pos and not neg:
         return "thuan"
     if neg and not pos:
         return "can_chu_dong"
     return "can_bang"
+
+
+def dung_hoa_bien(muc_ban: str, muc_bien: str | None) -> str:
+    """EN-2 (ND-6): quẻ bản thuận mà lời quẻ biến (nơi việc đi tới) nhắc ngược hẳn → mức chung cân bằng (không nói
+    "đang có đà" khi chính quẻ biến bảo khó). Không nâng mức khi quẻ bản đã nhắc chủ động."""
+    if muc_ban == "thuan" and muc_bien == "can_chu_dong":
+        return "can_bang"
+    return muc_ban
+
+
+def hieu_don_gian(so_king_wen: int) -> str | None:
+    """Phần "Hiểu đơn giản" trong lời nôm na của quẻ (bỏ phần hình ảnh) — dùng cho hộp lời đời thường."""
+    nn = (kbq.que_van(so_king_wen) or {}).get("nom_na") or ""
+    return nn.split("Hiểu đơn giản:", 1)[1].strip() if "Hiểu đơn giản:" in nn else (nn or None)
 
 
 _DIEM = {"vượng": 1, "bình": 0, "suy": -1}
@@ -238,6 +255,14 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
           "luc_hao": _goc_nhin_luc_hao(luc_hao)}
     muc = (gn.get(chinh) or gn["nghia_ly"])["muc"]
     ban = que["quai_ban"]
+    if chinh == "nghia_ly" and que.get("quai_bien"):
+        bien = que["quai_bien"]
+        mb = muc_loi_kinh(((kbq.que_van(bien["so_king_wen"]) or {}).get("que_tu") or {}).get("han", ""))
+        muc_moi = dung_hoa_bien(muc, mb)
+        if muc_moi != muc:
+            gn["nghia_ly"]["can_cu"].append(f"Lời quẻ biến {bien['ten']} nhắc ngược với lời làm chủ → mức chung cân bằng.")
+            gn["nghia_ly"]["muc"], gn["nghia_ly"]["nhan"] = muc_moi, kb.nhan_muc(muc_moi)
+            muc = muc_moi
     q = kbq.que(ban["so_king_wen"]) or {}
     qv = kbq.que_van(ban["so_king_wen"]) or {}
     chu = gn["nghia_ly"]["loi_chu"]
@@ -248,7 +273,8 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     hop = [_hop("cot_loi", f"Quẻ {ban['ten']} — {kb.nhan_muc(muc)}", ket_luan)]
     manh = [g for g in ("mai_hoa", "luc_hao") if gn.get(g) and gn[g]["muc"] == "thuan"]
     if muc == "thuan" or manh:
-        nd = gn["nghia_ly"]["tom_tat"] if muc == "thuan" else gn[manh[0]]["tom_tat"] or gn["nghia_ly"]["tom_tat"]
+        hdg = hieu_don_gian(ban["so_king_wen"])
+        nd = (hdg or gn["nghia_ly"]["tom_tat"]) if muc == "thuan" else gn[manh[0]]["tom_tat"] or hdg or gn["nghia_ly"]["tom_tat"]
         hop.append(_hop("diem_manh", "Điểm đang có lợi", nd))
     tranh = (cd.get("hanh_dong") or {}).get("can_chu_dong") or []
     luu_y = q.get("mat_toi", "")

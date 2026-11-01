@@ -94,7 +94,8 @@ def test_bao_cao_nha_neu_nam_can_chu_dong_va_giu_giong_van():
                                       {"huong_do": 180.0, "nam_xay": 2008, "theo": "cua"}, ngay_xem=dt.date(2026, 5, 20))
     c2 = next(c for c in bc["chuong"] if c["ma"] == "ngoi_nha_voi_ban")
     van = " ".join(c2["doan"])
-    assert "hướng tinh" in van.lower() and "sơn tinh" in van.lower()   # lĩnh vực theo vai
+    # lĩnh vực theo vai (EN-2: lời đời thường, thuật ngữ "hướng tinh / sơn tinh" ở "Vì sao nói vậy")
+    assert "tiền bạc, công việc (theo phía cửa)" in van.lower() and "người ở trong nhà" in van.lower()
     assert "chủ động hơn" in van or "thuận" in van         # năm cần chú ý từ lưu niên
     assert kh.kiem_giong_van(bc) == [], kh.kiem_giong_van(bc)
     hk_ = bc["da_tinh"]["huyen_khong"]
