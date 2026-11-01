@@ -189,9 +189,13 @@ def tach_tieu_de(tieu_de: str, noi_dung: str) -> tuple[str, str]:
         return t, sau
     if len(dau) <= TIEU_DE_TOI_DA:
         return dau, sau
-    con = than_khong_lap_tieu_de(t, n)
-    if not re.match(r"(?i)^(và|nhưng|hay|hoặc|rồi|mà)\b", con):
-        return t, con
+    # Review EN-2: chỉ cắt ngay sau tiêu đề khi đó là ranh giới vế thật (";" ":" "—") và vế sau không mở bằng từ nối;
+    # sau dấu phẩy (liệt kê, vế phụ) thì phần còn lại là mẩu câu → không cắt ở đó.
+    sau_td = dau[len(t):].lstrip()
+    if len(t.split()) >= 3 and sau_td[:1] in (";", ":", "—", "–"):
+        con = than_khong_lap_tieu_de(t, n)
+        if not _TU_NOI_RE.match(con.lower()) or _TU_NOI_RE.match(con.lower()).end() != 0:
+            return t, con
     # Mẩu còn lại mở bằng từ nối (cắt sẽ ra mẩu câu): thử vế đầu tới dấu ";" / ":" làm tiêu đề; không được thì tiêu
     # đề = trọn câu (≤ 130); quá dài thì giữ trọn câu trong thân (lặp vài chữ tiêu đề còn hơn mẩu câu).
     ve = re.match(r"(.+?)\s*[;:]\s+(.+)", dau)

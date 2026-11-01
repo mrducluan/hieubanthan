@@ -255,11 +255,13 @@ def _hop_cung(ch: str, ten: str, cc: dict, ghep: bool) -> list[dict]:
             y = f"{y.rstrip('. ')}; {', '.join(ve)}."
         cu = f"{', '.join(sao)} ở cung {ten} ({'lục cát' if nhom == 'cat' else 'lục sát'})"
         goc = nhom + hau
+        # Có vế chi tiết theo sao (KB `nhom_sao_chi_tiet`) → tiêu đề riêng, thân giữ trọn câu (cắt ở ";" sẽ tách vế chi
+        # tiết thành câu chung đứng một mình, lặp ở nhiều bài).
         if nhom == "cat":
-            ra.append(_hop("diem_manh", _tieu_de(y, f"Người giúp bạn trong chuyện {t}"), y, [cu],
+            ra.append(_hop("diem_manh", f"Người giúp bạn trong chuyện {t}" if ve else _tieu_de(y, f"Người giúp bạn trong chuyện {t}"), y, [cu],
                            _ma("ds", ch, goc, "co", "manh"), 0.6 + 0.3 * len(sao), loi_khuyen=lk))
         else:
-            ra.append(_hop("luu_y", _tieu_de(y, f"Việc bất ngờ trong chuyện {t}"), y, [cu],
+            ra.append(_hop("luu_y", f"Việc bất ngờ trong chuyện {t}" if ve else _tieu_de(y, f"Việc bất ngờ trong chuyện {t}"), y, [cu],
                            _ma("ds", ch, goc, "co", "vap"), 0.6 + 0.3 * len(sao), huong=lk))
     if cc["cham"]:
         cu = f"{' và '.join(cc['tuan_triet'])} ở cung {ten}: việc đến chậm, cần kiên nhẫn"
@@ -320,8 +322,12 @@ def _ten_lan(cung: str) -> str:
 
 
 # Sao ở cung "người khác" nói về chính họ (cha mẹ, anh chị em, con, người bạn đời, bạn bè) — không gán cho "bạn".
-_CHU_THE = {"Phụ Mẫu": "cha mẹ", "Huynh Đệ": "anh chị em", "Tử Tức": "con cái", "Phu Thê": "người ấy",
+_CHU_THE = {"Phụ Mẫu": "cha mẹ", "Huynh Đệ": "anh chị em", "Tử Nữ": "con cái", "Phu Thê": "người ấy",
             "Nô Bộc": "bạn bè quanh bạn"}
+# Review EN-2 (#5): nét tính cách của sao chỉ hợp làm lý do ở cung nói về NGƯỜI (bạn, người thân) hoặc việc bạn làm; cung
+# đồ vật / nếp sống (nhà, sức, phúc) dùng câu chung — "nhà cửa thuận (bạn mạnh ở chỗ lập luận)" vô nghĩa.
+_NGU_CANH = {"Mệnh": "bạn", "Quan Lộc": "trong việc, bạn", "Tài Bạch": "khi lo chuyện tiền, bạn",
+             "Thiên Di": "ra ngoài, bạn"}
 
 
 def _ly_do_sao(sao: str, do_sang: str, cung: str | None = None) -> str | None:
@@ -330,11 +336,13 @@ def _ly_do_sao(sao: str, do_sang: str, cung: str | None = None) -> str | None:
     ct = tuvi_kb.chinh_tinh(sao) or {}
     dm = (ct.get("diem_manh") or "").split(",")[0].strip()
     mt = (ct.get("mat_toi") or "").split(",")[0].strip()
-    ai = _CHU_THE.get(cung or "", "bạn")
+    ai = _CHU_THE.get(cung or "") or _NGU_CANH.get(cung or "Mệnh")
+    if not ai:
+        return None
     if do_sang in ("Miếu", "Vượng") and dm:
         return f"{ai} mạnh ở chỗ {dm}"
     if do_sang == "Đắc" and dm:
-        return f"{ai} dùng được chỗ mạnh là {dm}"
+        return f"{ai} dựa được vào nét {dm}"
     if do_sang == "Bình" and dm:
         return f"{ai} có nét {dm} nhưng chưa nổi hẳn"
     if do_sang == "Hãm" and mt:

@@ -128,4 +128,5 @@ def _diem_nhan_tu_chuong(c: dict, dn: str) -> bool:
     """EN-2 (P2-14): điểm nhấn lời mời cắt từ CHÍNH chương — tiêu đề một hộp của chương, hoặc đầu một đoạn."""
     t = dn.rstrip("…").rstrip(".")
     return any(h.get("tieu_de", "").rstrip(".") == t for h in c.get("hop") or []) or \
-        any(d.startswith(dn.rstrip("…")) for d in c.get("doan") or [])
+        any((h.get("noi_dung") or "").startswith(t) for h in c.get("hop") or []) or \
+        any(d.startswith(dn.rstrip("…")) for d in c.get("doan") or [])   # review EN-2 #8: câu đầu thân hộp nhãn cố định

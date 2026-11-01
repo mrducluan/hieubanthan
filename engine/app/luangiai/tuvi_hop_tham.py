@@ -105,11 +105,14 @@ def _duong(can: str, cung: list[dict], ai: str, dung_kb: bool) -> list[dict]:
     return ra
 
 
+_NGAN = {"Thiên Di": "đi xa"}      # nhãn ngắn đọc được trong câu ("chuyện ra ngoài" → "chuyện đi xa")
+
+
 def _mang(ds: list[dict], hoa: tuple[str, ...]) -> list[str]:
     """Mảng đời sống (không tên cung) nơi các sao hoá trong `hoa` rơi vào — giữ thứ tự, không lặp."""
     ra: list[str] = []
     for x in ds:
-        m = MANG.get(x["den_cung"] or "", "").split(",")[0]
+        m = _NGAN.get(x["den_cung"] or "") or MANG.get(x["den_cung"] or "", "").split(",")[0]
         if x["hoa"] in hoa and m and m not in ra:
             ra.append(m)
     return ra
@@ -121,14 +124,33 @@ def _noi(ds: list[str]) -> str:
 
 def _gon(ds: list[dict], ai: str, cua: str) -> str:
     """EN-2 (P2-16): một câu đời thường theo MẢNG — Lộc/Quyền/Khoa là chỗ dễ đỡ nhau, Kỵ là chỗ nên nói rõ. Tên can,
-    sao hoá, cung chỉ ở danh sách đường bay chi tiết (cho người rành Tử vi)."""
+    sao hoá, cung chỉ ở danh sách đường bay chi tiết (cho người rành Tử vi). Mảng vừa có chỗ đỡ vừa có Kỵ → nói cả hai
+    trong một vế (không liệt kê hai lần); cung Mệnh nói "chính bạn / chính người ấy"."""
     tot, ky = _mang(ds, ("Lộc", "Quyền", "Khoa")), _mang(ds, ("Kỵ",))
-    ky = [m for m in ky if m not in tot] or ky
-    cau = f"{ai[0].upper() + ai[1:]} dễ đem thuận lợi tới chuyện {_noi(tot)} {cua}" if tot else \
-        f"{ai[0].upper() + ai[1:]} ít tạo thay đổi rõ ở các mảng của {cua.removeprefix('của ')}"
+    ca_hai = [m for m in ky if m in tot]
+    tot = [m for m in tot if m not in ca_hai]
+    ky = [m for m in ky if m not in ca_hai]
+    ai_hoa = ai[0].upper() + ai[1:]
+    chu = cua.removeprefix("của ")
+
+    def _ve(ds_m: list[str]) -> str:
+        chinh = "bản thân" in ds_m
+        con = [m for m in ds_m if m != "bản thân"]
+        phan = ([f"chính {chu}"] if chinh else []) + ([f"chuyện {_noi(con)} {cua}"] if con else [])
+        return ", ".join(phan)
+
+    ve = []
+    if tot:
+        ve.append(f"{ai_hoa} dễ đem thuận lợi tới {_ve(tot)}")
+    if ca_hai:
+        ve.append(("riêng " if tot else f"{ai_hoa} chạm vào ") + f"{_ve(ca_hai)} vừa có chỗ đỡ vừa cần nói rõ")
     if ky:
-        cau += f"; chỗ nên trò chuyện rõ hơn là chuyện {_noi(ky)}"
-    return cau + "."
+        ve.append(f"chỗ nên trò chuyện rõ hơn là {_ve(ky)}" if ve else f"{ai_hoa} chạm vào {_ve(ky)} — chỗ nên trò "
+                  "chuyện rõ hơn")
+    if not ve:
+        return f"{ai_hoa} ít tạo thay đổi rõ ở các mảng của {chu}."
+    cau = "; ".join(ve)
+    return cau[0].upper() + cau[1:] + "."
 
 
 def lap(ls_ban: dict, can_nam_ban: str, can_nam_kia: str, quan_he: str = MAC_DINH,

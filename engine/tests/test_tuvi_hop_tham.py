@@ -119,7 +119,7 @@ def test_tom_tat_loi_doi_thuong(ls_a, ls_b):
     cam = ["Can năm", "Hoá ", "Lộc vào", "Kỵ vào", "Can cung"] + [c for c in MANG if c != "Mệnh"]
     for t in r["tom_tat"]:
         assert not any(x in t for x in cam), t
-    mang = {MANG[x["den_cung"]].split(",")[0] for x in r["nguoi_kia_vao_ban"] if x["den_cung"] in MANG and x["den_cung"] != "Mệnh"}
+    mang = {(ht._NGAN.get(x["den_cung"]) or MANG[x["den_cung"]].split(",")[0]) for x in r["nguoi_kia_vao_ban"] if x["den_cung"] in MANG and x["den_cung"] != "Mệnh"}
     assert any(m in r["tom_tat"][0] for m in mang), r["tom_tat"][0]
     # vẫn đủ ba chiều khi có lá người kia
     assert len(r["tom_tat"]) == 4

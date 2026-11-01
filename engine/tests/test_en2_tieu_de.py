@@ -44,3 +44,50 @@ def test_than_hop_khong_mo_dau_bang_manh_cau(d, h, g):
             if TU_NOI_DAU.match(n) or (dau and len(dau.split()) < 3 and dau.endswith(".")):
                 sai.append((x["tieu_de"], n[:80]))
     assert not sai, sai
+
+
+@pytest.mark.parametrize("td, nd", [
+    ("Bạn biết tự làm mình dịu lại bằng những thứ nhỏ như nhạc",
+     "Bạn biết tự làm mình dịu lại bằng những thứ nhỏ như nhạc, cây cỏ, một buổi đi dạo một mình sau giờ làm, "
+     "hay một cuốn sách đọc dở từ lâu."),
+    ("Bạn hợp việc dịch vụ", "Bạn hợp việc dịch vụ, chăm sóc, giáo dục, môi trường ổn định và có người cùng làm lâu "
+                             "dài với mình, không phải đổi chỗ liên tục."),
+    ("Ra ngoài", "Ra ngoài, bạn lúc đầu dè dặt nhưng quen rồi thì rất được việc."),
+    ("Có người giúp", "Có người giúp, nhất là khi mới đến một nơi lạ; nên chủ động hỏi đường."),
+])
+def test_khong_cat_sau_dau_phay(td, nd):
+    """Review EN-2: sau tiêu đề là dấu phẩy → không cắt (thân sẽ là mẩu câu). Trọn câu ≤ 130 làm tiêu đề; dài hơn thì
+    giữ trọn câu trong thân."""
+    from app.luangiai.doi_song_khuon import tach_tieu_de
+    t, n = tach_tieu_de(td, nd)
+    cau = nd.split(". ")[0].rstrip(".")
+    assert t == cau or n.startswith(td), (t, n)
+
+
+def test_cat_tai_ranh_gioi_ve():
+    from app.luangiai.doi_song_khuon import tach_tieu_de
+    nd = ("Tiền vào đều tay: lương ổn, thêm một khoản phụ nếu bạn chịu giữ thói quen ghi chép thu chi hằng tuần và "
+          "không vay nóng.")
+    t, n = tach_tieu_de("Tiền vào đều tay", nd)
+    assert t == "Tiền vào đều tay" and n.startswith("Lương ổn")
+
+
+def test_tren_la_that_khong_cat_sau_dau_phay(monkeypatch):
+    from app.luangiai import doi_song_khuon as kh, toan_bo
+    goc, rec = kh.tach_tieu_de, []
+
+    def spy(t, n):
+        r = goc(t, n)
+        rec.append((t, " ".join((n or "").split()), r))
+        return r
+    monkeypatch.setattr(kh, "tach_tieu_de", spy)
+    for d, ti, g in ((dt.date(1990, 5, 15), 4, "nam"), (dt.date(1998, 3, 14), 5, "nu"), (dt.date(1975, 11, 2), 9, "nam")):
+        toan_bo.tuvi({"ngay": d, "ti": ti, "gioi_tinh": g}, ngay_xem=dt.date(2026, 10, 21))
+        toan_bo.battu({"lich": dt.datetime(d.year, d.month, d.day, ti * 2), "gioi_tinh": g}, ngay_xem=dt.date(2026, 10, 21))
+    loi = []
+    for t, n, (t2, n2) in rec:
+        tt = t.strip().rstrip(".!?…:; ")
+        if len(tt) >= 4 and n.lower().startswith(tt.lower()) and t2.rstrip(".") == tt and n2 != n \
+                and n[len(tt):].lstrip()[:1] == ",":
+            loi.append((t2, n2[:60]))
+    assert rec and not loi, loi[:5]

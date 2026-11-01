@@ -17,7 +17,9 @@ from __future__ import annotations
 import datetime as dt
 
 from app.calc import thanso as tinh, thanso_dong_doi as dd_calc, thanso_mo_rong as mr, thanso_ty_le as tl
-from app.kb import store, thanso_v2 as kb
+from app.kb import store
+from app.kb import thanso_v2 as kb
+from app.kb import thanso_v2 as tsv2
 from app.luangiai import doi_song_chung as dsc
 from app.luangiai import doi_song_khuon as kh
 from app.luangiai import thanso as lg
@@ -94,14 +96,16 @@ def _tong_quan(so: dict, ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy
     t = tl.ty_le(ngay, thang, nam, quy_uoc)
     d, c = t["duong_doi"], t["cap"]
     mot_trong = round(1 / c["ty_le"]) if c["ty_le"] else 0
-    doan = [f"Đường đời {d['so']}: {_pt(d['ty_le'])} số ngày trong lịch {t['mau']} cho ra con số này (tính theo ngày "
-            "trong lịch, không phải theo số người)."]
+    # Review EN-2 (#7): tỉ lệ "x% số ngày" (~1/9 với mọi số) không còn ở đoạn hiển thị — chỉ ở "Vì sao nói vậy".
+    tk = ((store.nghia_so(d["so"]) or {}).get("tu_khoa") or "").lower()
+    doan = [f"Đường đời {d['so']}: {tk} là nét chạy suốt đời bạn." if tk else f"Đường đời {d['so']} là con số gốc của bạn."]
     if c["ty_le"] < IT_GAP:
         doan.append(f"Cặp Đường đời {d['so']} và số Ngày sinh {c['ngay_sinh']} {'thì hiếm' if c['ty_le'] < HIEM else 'khá ít gặp'}: chỉ {_so_vn(c['so_ngay'])} trên "
-                    f"{_so_vn(t['tong_ngay'])} ngày — khoảng 1 trong {mot_trong} ngày sinh.")
+                    f"{_so_vn(t['tong_ngay'])} ngày — khoảng 1 trong {mot_trong} ngày sinh (đếm theo ngày trong lịch, không phải theo số "
+                    "người).")
     else:
-        doan.append(f"Cặp Đường đời {d['so']} và số Ngày sinh {c['ngay_sinh']} gặp ở khoảng 1 trong {mot_trong} ngày — khá "
-                    "phổ biến; nét riêng của bạn nằm ở cách các con số khác kết hợp với nhau.")
+        doan.append(f"Cặp Đường đời {d['so']} và số Ngày sinh {c['ngay_sinh']} gặp ở khoảng 1 trong {mot_trong} ngày (đếm theo ngày "
+                    "trong lịch, không phải theo số người) — khá phổ biến; nét riêng của bạn nằm ở cách các con số khác kết hợp với nhau.")
     if d["so"] in (11, 22, 33):
         doan.append(f"{d['so']} là số cái — nét của nó thường đậm và đòi hỏi nhiều ở chính bạn.")
     bo = {**{v: so.get(v) for v in lg.VI_TRI_THU_TU}, "ngay_sinh": mr.so_ngay_sinh(ngay)}
@@ -128,7 +132,7 @@ def _tong_quan(so: dict, ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy
     tc = _then_chot(_thang_toi(ngay, thang, ngay_xem))
     so_then_chot = len({(x["thang"], x["nam"]) for v in tc.values() for x in v})
     hien, _, _ = _giai_doan(ngay, thang, nam, ngay_xem.year, quy_uoc)
-    doan.append(f"Trong 12 tháng tới có {so_then_chot} tháng nên đánh dấu được đánh dấu riêng cho bạn, và giai đoạn đời hiện tại "
+    doan.append(f"Trong 12 tháng tới có {so_then_chot} tháng đáng chú ý dành riêng cho bạn, và giai đoạn đời hiện tại "
                 f"({hien['dinh']}/4) " + (f"kéo dài tới năm {hien['den_nam']}." if hien.get("den_nam") else "là giai đoạn cuối, kéo dài suốt phần đời sau.")
                 + " Hai chương \"12 tháng tới\" và \"Sự nghiệp & tiền bạc\" đọc chi tiết.")
     return doan
@@ -334,7 +338,10 @@ def _khuon(so: dict, ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy_uoc
     # của chính con số; tỉ lệ chỉ còn ở "Vì sao nói vậy". Cặp Đường đời + Ngày sinh hiếm vẫn nêu ở đoạn thân (aha thật).
     mt = (nghia_dd.get("mat_toi") or "").split(",")[0].strip()
     hop = [kh.hop("cot_loi", f"Đường đời {d['so']} — {nghia_dd.get('tu_khoa', '')}".rstrip(" —"),
-                  (f"Nét mạnh: {nghia_dd.get('tu_khoa', '').lower()}." if nghia_dd.get("tu_khoa") else "")
+                  # Review EN-2 (#7): thân không lặp từ khoá ở tiêu đề — nói động lực (kho chân dung) rồi mặt dễ lệch.
+                  (f"Điều tiếp sức cho bạn: {_dl[:1].lower() + _dl[1:].rstrip('.')}." if (_dl := ((tsv2.chan_dung(d['so']) or {})
+                   .get("tong_quan") or {}).get("dong_luc") or "") else
+                   f"Nét mạnh: {nghia_dd.get('tu_khoa', '').lower()}." if nghia_dd.get("tu_khoa") else "")
                   + (f" Mặt dễ lệch: {mt[:1].lower() + mt[1:]}." if mt else "")
                   + (" Số cái: nét đậm và đòi hỏi nhiều ở chính bạn." if d["so"] in (11, 22, 33) else ""),
                   ma=kh.ma_mau("thanso", "tong_quan", "duong_doi", str(d["so"])))]
@@ -390,7 +397,7 @@ def _khuon(so: dict, ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy_uoc
         for t_ in tc.get(k, [])[:1]:
             hop.append(kh.hop("thoi_diem", f"{van['nhom_viec'][k]}: {_mm(t_)}", f"Tháng cá nhân {t_['so']} ({t_['nhan'].lower()}): {', '.join(t_['hop_de'])}.",
                               muc="thuan", ma=kh.ma_mau("thanso", "muoi_hai_thang", k, str(t_["so"]))))
-    ra["muoi_hai_thang"] = {"hop": hop, "tom_tat": f"Năm cá nhân {ncn}; {so_then_chot} tháng nên đánh dấu được đánh dấu riêng.",
+    ra["muoi_hai_thang"] = {"hop": hop, "tom_tat": f"Năm cá nhân {ncn}; {so_then_chot} tháng đáng chú ý dành riêng cho bạn.",
                             "can_cu": ["Tháng cá nhân = năm cá nhân + tháng dương, rút gọn; năm cá nhân đổi từ 1/1 dương lịch (mốc trang đọc đang dùng)."],
                             "cau_tu_soi": "Trong năm cá nhân này, bạn định dồn sức vào tháng nào?"}
 

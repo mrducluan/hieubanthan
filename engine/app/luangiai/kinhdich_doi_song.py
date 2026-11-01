@@ -117,6 +117,17 @@ def hieu_don_gian(so_king_wen: int) -> str | None:
     return nn.split("Hiểu đơn giản:", 1)[1].strip() if "Hiểu đơn giản:" in nn else (nn or None)
 
 
+def _tach_hdg(hdg: str | None) -> tuple[str | None, str | None]:
+    """"như tập hợp mọi người…: cùng lòng thì làm được việc lớn." → ("như tập hợp mọi người…", "Cùng lòng thì làm được
+    việc lớn."). Không có ":" → (hdg, None)."""
+    if not hdg or ":" not in hdg:
+        return hdg, None
+    canh, bai = (x.strip() for x in hdg.split(":", 1))
+    if len(bai) < 12:
+        return hdg, None
+    return canh.rstrip(" ,;"), bai[0].upper() + bai[1:]
+
+
 _DIEM = {"vượng": 1, "bình": 0, "suy": -1}
 
 
@@ -272,10 +283,16 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     # ---- hộp nổi bật
     hop = [_hop("cot_loi", f"Quẻ {ban['ten']} — {kb.nhan_muc(muc)}", ket_luan)]
     manh = [g for g in ("mai_hoa", "luc_hao") if gn.get(g) and gn[g]["muc"] == "thuan"]
-    if muc == "thuan" or manh:
-        hdg = hieu_don_gian(ban["so_king_wen"])
-        nd = (hdg or gn["nghia_ly"]["tom_tat"]) if muc == "thuan" else gn[manh[0]]["tom_tat"] or hdg or gn["nghia_ly"]["tom_tat"]
+    # Review EN-2: "Hiểu đơn giản" = cảnh ("như …") + bài học (sau dấu ":"). Quẻ đọc thuận → hộp mang BÀI HỌC, đoạn đầu
+    # chỉ giữ hình ảnh + cảnh (không lặp nguyên văn). Quẻ chỉ thuận nhờ thời điểm (Mai Hoa / hào đại diện) → câu "lực
+    # đỡ" chung, không mượn lời quẻ (lời quẻ có thể đang nói trở ngại); thuật ngữ ở các dòng "Nhìn theo…" của đoạn.
+    hdg = hieu_don_gian(ban["so_king_wen"])
+    canh, bai = _tach_hdg(hdg)
+    if muc == "thuan":
+        nd = bai or _nom_na(hdg) or gn["nghia_ly"]["tom_tat"]
         hop.append(_hop("diem_manh", "Điểm đang có lợi", nd))
+    elif manh:
+        hop.append(_hop("diem_manh", "Điểm đang có lợi", kb.mau("luc_do") or ""))
     tranh = (cd.get("hanh_dong") or {}).get("can_chu_dong") or []
     luu_y = q.get("mat_toi", "")
     if ma == "suc_khoe":
@@ -298,6 +315,8 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     # ---- đoạn đời thường
     doan = []
     nn = _nom_na(qv.get("nom_na"))
+    if muc == "thuan" and bai:                   # bài học đã nằm trong hộp "Điểm đang có lợi"
+        nn = _nom_na(canh) + "."
     doan.append(f"Quẻ {ban['ten']}" + (f" ({q['ten_han']})" if q.get("ten_han") else "") + ". " + (nn or q.get("y_chinh", "")))
     if chu and (chu.get("nom_na") or chu.get("y")):
         doan.append("Điểm rơi của quẻ: " + (chu.get("nom_na") or chu.get("y")))

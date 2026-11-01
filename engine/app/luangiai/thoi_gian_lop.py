@@ -182,8 +182,8 @@ def viec_chinh(o: dict, hop_de: str | None = None) -> str:
         return "Việc lớn trong tháng: đọc kỹ giấy tờ, chưa vội ký, hẹn thêm một ngày suy nghĩ."
     if o["ngay_dep"]:
         x = o["ngay_dep"][0]
-        return (f"Việc quan trọng nhất tháng ({hop_de}) nên bắt đầu vào ngày {_dm(x['ngay'])}." if hop_de
-                else f"Việc quan trọng nhất tháng nên bắt đầu vào ngày {_dm(x['ngay'])}.")
+        return (f"Việc quan trọng nhất tháng ({hop_de}) nên đặt vào ngày {_dm(x['ngay'])}." if hop_de
+                else f"Việc quan trọng nhất tháng nên đặt vào ngày {_dm(x['ngay'])}.")
     return f"Dành tháng này cho: {hop_de}." if hop_de else ""
 
 

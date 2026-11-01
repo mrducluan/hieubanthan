@@ -504,7 +504,7 @@ def api_luan_giai(inp: LuanGiaiInput) -> dict:
     try:
         bc = toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem, trong_so=trong_so, ca_nhan=inp.ca_nhan)
         if inp.la_so.do_tin_gio is HourConfidence.UNKNOWN:
-            bc = toan_bo.gan_gio_tam(bc)
+            bc = toan_bo.gan_gio_tam(bc, "tuvi")
         bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(bc, toi_da=inp.dien_dat_toi_da))
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)

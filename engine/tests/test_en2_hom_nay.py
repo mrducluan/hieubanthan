@@ -9,9 +9,12 @@ from app.luangiai import hom_nay as hn
 def test_cau_tong_hop():
     t = hn.the_hom_nay(15, 5, 1990, dt.date(2026, 11, 1))
     s = t["tom_lai"]
-    assert s.startswith("Hôm nay của bạn:")
-    assert str(t["ngay_ca_nhan"]["so"]) in s and t["hoang_lich"]["truc"] in s
-    assert ("hoàng đạo" in s) == bool(t["hoang_lich"]["hoang_dao"])
+    assert s.startswith("Hôm nay là ngày cá nhân")
+    assert str(t["ngay_ca_nhan"]["so"]) in s
+    # Review EN-2 (#11): không thuật ngữ lịch (tên trực, "hoàng đạo") trong câu tóm lại — chỉ nghĩa đời thường
+    assert t["hoang_lich"]["truc"] not in s and "hoàng đạo" not in s
+    assert ("ngày tốt" in s) == bool(t["hoang_lich"]["hoang_dao"])
+    assert s.count(". ") <= 2
     for cam in ("xui", "đại hung", "tai hoạ", "chắc chắn"):
         assert cam not in s.lower()
 

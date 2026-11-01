@@ -38,7 +38,7 @@ def test_tong_quan_ban_hiem_co_nao():
     assert f"Đường đời 6" in dau and f"{t['cap']['so_ngay']:,}".replace(",", ".") in dau
     assert "Số 6 xuất hiện 3 lần" in dau          # Đường đời 6 + Linh hồn 6 + Ngày sinh 24 → 6
     assert "Kết nối" in dau and "Biểu đạt" in dau  # lời mời chương bên trong/bên ngoài (chỉ nêu tên nhóm)
-    assert "thiếu 3, 5, 6, 7" in dau and "không phải theo số người" in dau and "tháng nên đánh dấu" in dau
+    assert "thiếu 3, 5, 6, 7" in dau and "không phải theo số người" in dau and "tháng đáng chú ý" in dau
 
 
 def test_nghich_ly():

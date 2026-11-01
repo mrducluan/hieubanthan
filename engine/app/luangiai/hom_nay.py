@@ -213,18 +213,18 @@ def _tom_lai(so_ngay: int, nghia_thang: dict, hl: dict) -> str:
     nghia = nghia.rstrip(".")
     from app.luangiai.hoang_lich import KB as _HL, TRUC_TOT  # noqa: PLC0415
     tot = any(_HL["truc"].get(m, {}).get("ten") == hl["truc"] for m in TRUC_TOT)
-    truc = f"trực {hl['truc']} ({hl['truc_y']})"
+    # Review EN-2 (#11): hai câu ngắn thay một câu nối dài; tên trực (thuật ngữ lịch) bỏ — chỉ còn nghĩa của nó.
     if hl.get("hoang_dao") and tot:
-        lich = f"ngày hoàng đạo, {truc} — hợp mở việc đã chuẩn bị"
+        lich = "Theo lịch, hôm nay là ngày tốt, hợp mở việc đã chuẩn bị"
     elif hl.get("hoang_dao"):
-        lich = f"ngày hoàng đạo nhưng {truc} — việc lớn nên chọn giờ tốt, việc thường cứ làm"
+        lich = "Theo lịch, hôm nay là ngày tốt nhưng việc lớn nên chọn giờ đẹp; việc thường cứ làm"
     elif tot:
-        lich = f"ngày thường theo lịch, {truc} — hợp việc vừa sức"
+        lich = "Theo lịch, hôm nay là ngày thường, hợp việc vừa sức"
     else:
-        lich = f"ngày thường theo lịch, {truc} — hợp làm việc quen tay hơn mở việc lớn"
+        lich = "Theo lịch, hôm nay là ngày thường, hợp việc quen tay hơn mở việc lớn"
     thang = (nghia_thang.get("chu_de") or "").lower()
-    return (f"Hôm nay của bạn: ngày cá nhân {so_ngay}, {nghia[:1].lower() + nghia[1:]}"
-            + (f", trong một {thang}" if thang else "") + f"; {lich}.")
+    return (f"Hôm nay là ngày cá nhân {so_ngay} của bạn — {nghia[:1].lower() + nghia[1:]}"
+            + (f", trong {thang} của bạn" if thang else "") + f". {lich}.")
 
 
 def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,

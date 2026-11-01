@@ -11,8 +11,9 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import tuvi_an_sao
-from app.config import ENGINE_VERSION
+from app.config import ENGINE_VERSION, HourConfidence
 from app.luangiai import thoi_gian_toi as T
+
 from app.tuvi_api import TuanTrietInput, _DauVao, _loi_an_sao, _MaMau, _Phieu
 
 router = APIRouter(tags=["thoi-gian-toi"])
@@ -40,7 +41,11 @@ def api_thoi_gian_toi(inp: ThoiGianToiInput) -> dict:
     tv_sinh = bt_sinh = None
     gioi_tinh = inp.gioi_tinh
     flags: list = []
-    if inp.la_so:
+    # Review EN-2 (#10): không biết giờ sinh → không đọc Tử vi / Bát tự theo giờ tạm (mức tháng, năm phụ thuộc giờ); vẫn
+    # đọc thần số + tập quán và lấy giới tính, như khi thiếu giờ.
+    if inp.la_so and inp.la_so.do_tin_gio is HourConfidence.UNKNOWN:
+        gioi_tinh = gioi_tinh or inp.la_so.gender
+    elif inp.la_so:
         dv = _DauVao(inp.la_so)
         cal = dv.tb.calendar_dt
         gioi_tinh = gioi_tinh or inp.la_so.gender
