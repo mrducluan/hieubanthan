@@ -11,9 +11,12 @@ Giờ Tý tử vi theo iztro: 23:00–23:59 là giờ Tý của NGÀY HÔM SAU (
 """
 from __future__ import annotations
 
+import atexit
 import datetime as dt
 import json
 import os
+import queue
+import select
 import subprocess
 import threading
 from functools import lru_cache
@@ -80,8 +83,115 @@ _NODE_TOI_DA = threading.BoundedSemaphore(_so_node())
 def _chay(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str = "",
           am: str = "", am_xem: str = "", fix_leap: bool = True) -> str:
     phien_ban_iztro()   # kiểm tra đã cài
+    v = dict(ngay=ngay, ti=ti, gioi_tinh=gioi_tinh, ngon_ngu=ngon_ngu, ngay_xem=ngay_xem, am=am, am_xem=am_xem,
+             fix_leap=fix_leap)
+    if _dung_chay_san():
+        try:
+            return _may().goi(v)
+        except AnSaoLoi:
+            raise                              # lỗi của chính dữ liệu (iztro báo) — đường cũ cũng sẽ lỗi y vậy
+        except Exception:  # noqa: BLE001 — tiến trình chạy sẵn hỏng / treo → quay về đường cũ, người dùng không thấy lỗi
+            pass
     with _NODE_TOI_DA:
-        return _chay_node(ngay, ti, gioi_tinh, ngon_ngu, ngay_xem, am, am_xem, fix_leap)
+        return _chay_node(**v)
+
+
+# ---- EN-4 (mục 1): iztro CHẠY SẴN — 1–2 tiến trình Node nhận việc theo từng dòng JSON (ziwei/may_chu.mjs), bỏ ~110 ms
+# khởi động Node mỗi lượt. Kết quả trùng khít đường cũ (tests/test_en4_node_chay_san.py, 60 lá golden). Tiến trình chết /
+# treo quá TIMEOUT_GIAY → giết, dựng lại ở lượt sau; thay tiến trình sau NODE_CHAY_SAN_LUOT lượt (tránh rò bộ nhớ).
+# Tắt: NODE_CHAY_SAN=0. Số tiến trình: NODE_CHAY_SAN_SO (mặc định 2, ≤ NODE_DONG_THOI).
+MAY_CHU = THU_MUC / "may_chu.mjs"
+
+
+def _dung_chay_san() -> bool:
+    return os.environ.get("NODE_CHAY_SAN", "1") != "0"
+
+
+def _so_env(ten: str, mac_dinh: int) -> int:
+    try:
+        return max(1, int(os.environ.get(ten, str(mac_dinh))))
+    except ValueError:
+        return mac_dinh
+
+
+class _TienTrinh:
+    def __init__(self) -> None:
+        self.p: subprocess.Popen | None = None
+        self.luot = 0
+
+    def _mo(self) -> None:
+        self.p = subprocess.Popen([_node(), str(MAY_CHU)], cwd=THU_MUC, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                  stderr=subprocess.DEVNULL, text=True, bufsize=1, encoding="utf-8")
+        self.luot = 0
+
+    def dong(self) -> None:
+        if self.p is not None:
+            try:
+                self.p.kill()
+                self.p.wait(timeout=2)
+            except Exception:  # noqa: BLE001
+                pass
+        self.p = None
+
+    def goi(self, dong_vao: str) -> dict:
+        if self.p is None or self.p.poll() is not None or self.luot >= _so_env("NODE_CHAY_SAN_LUOT", 500):
+            self.dong()
+            self._mo()
+        assert self.p and self.p.stdin and self.p.stdout
+        self.p.stdin.write(dong_vao + "\n")
+        self.p.stdin.flush()
+        san, _, _ = select.select([self.p.stdout], [], [], TIMEOUT_GIAY)
+        if not san:
+            self.dong()
+            raise TimeoutError("iztro chạy sẵn quá thời gian")
+        ra = self.p.stdout.readline()
+        if not ra:
+            self.dong()
+            raise BrokenPipeError("iztro chạy sẵn đã thoát")
+        self.luot += 1
+        return json.loads(ra)
+
+
+class _MayChay:
+    """Hàng tiến trình chạy sẵn: lấy một tiến trình rảnh (chờ tối đa TIMEOUT_GIAY), gửi một dòng, trả lại hàng."""
+
+    def __init__(self, so: int) -> None:
+        self._ds = [_TienTrinh() for _ in range(so)]
+        self._ranh: queue.Queue[_TienTrinh] = queue.Queue()
+        for w in self._ds:
+            self._ranh.put(w)
+
+    def goi(self, v: dict) -> str:
+        dong_vao = json.dumps({"ngay": v["ngay"], "time_index": v["ti"], "gioi_tinh": v["gioi_tinh"],
+                               "ngon_ngu": v["ngon_ngu"], **({"ngay_xem": v["ngay_xem"]} if v.get("ngay_xem") else {}),
+                               **({"am": json.loads(v["am"])} if v.get("am") else {}),
+                               **({"am_xem": json.loads(v["am_xem"])} if v.get("am_xem") else {}),
+                               "fix_leap": v.get("fix_leap", True)}, ensure_ascii=False)
+        w = self._ranh.get(timeout=TIMEOUT_GIAY)
+        try:
+            ra = w.goi(dong_vao)
+        finally:
+            self._ranh.put(w)
+        if not ra.get("ok"):
+            raise AnSaoLoi("iztro lỗi: " + str(ra.get("loi", ""))[:300])
+        return json.dumps(ra["kq"], ensure_ascii=False)
+
+    def dong_het(self) -> None:
+        for w in self._ds:
+            w.dong()
+
+
+_MAY: _MayChay | None = None
+_MAY_KHOA = threading.Lock()
+
+
+def _may() -> _MayChay:
+    global _MAY
+    with _MAY_KHOA:
+        if _MAY is None:
+            _MAY = _MayChay(min(_so_env("NODE_CHAY_SAN_SO", 2), _so_node()))
+            atexit.register(_MAY.dong_het)
+        return _MAY
 
 
 def _chay_node(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str,
