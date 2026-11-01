@@ -83,8 +83,11 @@ def _cong_thoi_gian(d: dt.datetime, nam: int, thang: int, ngay: int, gio: int) -
 GIO_TY = ("da_ty", "sang_ngay")
 
 
-def la_so(lich: dt.datetime, gioi_tinh: str, gio_ty: str = "da_ty") -> dict:
-    """`lich`: giờ sinh theo kinh tuyến lịch UTC+7 (đã quy đổi múi giờ lịch sử).
+def la_so(lich: dt.datetime, gioi_tinh: str, gio_ty: str = "da_ty",
+          utc_lich: float = config.CALENDAR_MERIDIAN_TZ) -> dict:
+    """`lich`: giờ sinh theo kinh tuyến lịch UTC+7 (đã quy đổi múi giờ lịch sử). EN-6 BI-3: sinh ở nước ngoài thì
+    `lich` là giờ chuẩn địa phương và `utc_lich` = múi giờ chuẩn nơi sinh — chỉ dùng để so mốc tiết khí (năm, tháng,
+    khởi vận); trụ ngày, trụ giờ vẫn theo ngày giờ địa phương (ABROAD_LOCAL_TIME).
 
     TP-LICH — `gio_ty` cho người sinh 23:00–23:59 (người dùng chọn): "da_ty" (mặc định, chính sách đã chốt: giữ trụ
     ngày hôm đó, trụ giờ = Tý của ngày sau) hoặc "sang_ngay" (phái đổi ngày lúc 23:00: trụ ngày = ngày hôm sau).
@@ -93,7 +96,7 @@ def la_so(lich: dt.datetime, gioi_tinh: str, gio_ty: str = "da_ty") -> dict:
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
     if gio_ty not in GIO_TY:
         raise ValueError(f"gio_ty phải là một trong {GIO_TY}")
-    t_utc = lich - dt.timedelta(hours=config.CALENDAR_MERIDIAN_TZ)
+    t_utc = lich - dt.timedelta(hours=utc_lich)
     # --- trụ năm (Lập xuân) + trụ tháng (tiết)
     nam = lich.year if t_utc >= tk.thoi_diem(lich.year, 315) else lich.year - 1
     can_nam, chi_nam = (nam - 4) % 10, (nam - 4) % 12

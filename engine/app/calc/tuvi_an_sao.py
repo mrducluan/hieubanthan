@@ -255,11 +255,11 @@ _TEN_HOA_LINH = {"Hỏa Tinh": "Hỏa Tinh", "火星": "Hỏa Tinh", "Linh Tinh"
 
 
 def _dat_hoa_linh_viet(la: dict, ngay: dt.date, ti: int, gioi_tinh: str, tz_lich: float) -> None:
-    """Chuyển Hoả Tinh, Linh Tinh của iztro sang vị trí lối Việt (tuvi_hoa_linh_vn)."""
-    if ti == 12:                                   # Tý muộn: iztro tính sang ngày hôm sau
-        ngay = ngay + dt.timedelta(days=1)
+    """Chuyển Hoả Tinh, Linh Tinh của iztro sang vị trí lối Việt (tuvi_hoa_linh_vn). Tý muộn đã được `_ty_muon` đổi
+    thành ngày hôm sau, giờ Tý trước khi gọi."""
+    ngay, ti = _ty_muon(ngay, ti)
     can, chi = lunar.can_chi_nam(lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, tz_lich)[2])
-    dich = dict(zip(("Hỏa Tinh", "Linh Tinh"), tuvi_hoa_linh_vn.vi_tri(can, chi, 0 if ti == 12 else ti, gioi_tinh)))
+    dich = dict(zip(("Hỏa Tinh", "Linh Tinh"), tuvi_hoa_linh_vn.vi_tri(can, chi, ti, gioi_tinh)))
     sao = {}
     for p in la["palaces"]:
         for s in [x for x in p["minorStars"] if x["name"] in _TEN_HOA_LINH]:
@@ -298,12 +298,36 @@ def an_sao_tho(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngon_ngu: str = "vi
         raise ValueError("hoa_linh / thang_nhuan / lich không hợp lệ")
     if lich == "trung":
         tz_lich = TZ_TRUNG
+    goc, ti_goc = ngay_duong, ti
+    ngay_duong, ti = _ty_muon(ngay_duong, ti)
     la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, ngon_ngu,
                           am=_am(ngay_duong, tz_lich) if lich == "viet" else "",
                           fix_leap=thang_nhuan == "thang_sau"))
+    if ti_goc == 12:
+        # nhãn hiển thị (ngày dương / âm, "Tý muộn") giữ theo ngày giờ người dùng nhập; sao, cung, tứ trụ theo ngày sau
+        nhan = json.loads(_chay(_d(goc), 12, gioi_tinh, ngon_ngu, am=_am(goc, tz_lich) if lich == "viet" else "",
+                                fix_leap=thang_nhuan == "thang_sau"))
+        la.update({k: nhan[k] for k in ("solarDate", "lunarDate", "time", "timeRange")})
+        la["ty_muon_an_ngay_sau"] = True
     if hoa_linh == "viet":
         _dat_hoa_linh_viet(la, ngay_duong, ti, gioi_tinh, tz_lich)
     return la
+
+
+def _ty_muon(ngay: dt.date, ti: int) -> tuple[dt.date, int]:
+    """EN-6 BI-2: Tử vi đổi ngày lúc 23:00 (quyết định 2026-08-15, theo iztro) — giờ Tý muộn (time_index 12) an ĐÚNG như
+    sinh ngày hôm sau, giờ Tý. Trước đây ngày âm Việt của ngày sinh được đưa vào iztro rồi iztro tự cộng một ngày âm →
+    sai ở ngày cuối tháng âm (30 → "31") và nửa sau tháng nhuận; đêm giao thừa lệch cả năm (Hoả / Linh)."""
+    return (ngay + dt.timedelta(days=1), 0) if ti == 12 else (ngay, ti)
+
+
+def chuan_sinh(sinh: dict | None) -> dict | None:
+    """EN-6 BI-2 (sau review): chuẩn hoá giờ Tý muộn cho MỌI phép tính Python quanh lá số (lưu nguyệt, năm âm sinh,
+    sao hạn…) — cùng ngày với lá số iztro. `tz_lich` của `sinh` phải đã tính cho ngày sau (`_DauVao` làm)."""
+    if sinh and sinh.get("ti") == 12 and sinh.get("ngay"):
+        ngay, ti = _ty_muon(sinh["ngay"], 12)
+        return {**sinh, "ngay": ngay, "ti": ti}
+    return sinh
 
 
 def _d(x: dt.date) -> str:
@@ -323,6 +347,7 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
     viet = lich != "trung"
+    ngay_duong, ti = _ty_muon(ngay_duong, ti)
     la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, "vi-VN", _d(ngay_xem),
                           am=_am(ngay_duong, tz_lich) if viet else "",
                           am_xem=_am(ngay_xem, config.CALENDAR_MERIDIAN_TZ) if viet else "",
@@ -377,6 +402,7 @@ def nap_truoc(ngay_duong: dt.date, ti: int, gioi_tinh: str, ds_xem: list[dt.date
     lỗi → không làm gì, các lời gọi lẻ vẫn chạy như cũ."""
     if not _dung_chay_san() or not 0 <= ti <= 12 or gioi_tinh not in ("nam", "nu"):
         return
+    ngay_duong, ti = _ty_muon(ngay_duong, ti)
     viet = lich != "trung"
     tz_sinh = TZ_TRUNG if lich == "trung" else tz_lich
     ngay, am = _d(ngay_duong), (_am(ngay_duong, tz_sinh) if viet else "")
@@ -421,6 +447,7 @@ def ngay_xem_can(sinh: dict, ngay_xem: dt.date) -> list[dt.date]:
 
 
 def nap_truoc_sinh(sinh: dict, ngay_xem: dt.date) -> None:
+    sinh = chuan_sinh(sinh)
     nap_truoc(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], ngay_xem_can(sinh, ngay_xem),
               tz_lich=sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ), thang_nhuan=sinh.get("thang_nhuan", "thang_sau"),
               lich=sinh.get("lich", "viet"))

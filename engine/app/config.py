@@ -17,7 +17,9 @@ from enum import Enum
 
 # Tăng khi bất kỳ hằng chính sách hoặc hàm tính nào thay đổi.
 # Ghi vào mọi bản ghi readings để tái lập được kết quả cũ.
-ENGINE_VERSION = "0.1.5"
+# 0.1.6 (EN-6, 2026-11-01): BI-1 đồng hồ miền Nam UTC+8 01/04/1947–01/07/1955 · BI-2 giờ Tý muộn Tử vi = ngày sau giờ Tý ·
+# BI-3 Bát tự sinh ở nước ngoài so mốc tiết theo múi giờ nơi sinh (khi khai).
+ENGINE_VERSION = "0.1.6"
 
 
 # ---------------------------------------------------------------------------
@@ -81,6 +83,7 @@ class TzPeriod:
     offset: float        # lệch so với UTC, đơn vị giờ
     note: str
     disputed: bool = False
+    start_gio: int = 0   # giờ đồng hồ bắt đầu trong ngày `start` (tzdata: 1955-07-01 01:00)
 
 
 class Region(str, Enum):
@@ -100,6 +103,10 @@ _SHARED: tuple[TzPeriod, ...] = (
 
 TZ_TABLE: dict[Region, tuple[TzPeriod, ...]] = {
     Region.SOUTH: _SHARED + (
+        # EN-6 BI-1 (2026-11-01): tzdata IANA Asia/Ho_Chi_Minh — Nam Bộ chạy UTC+8 từ 01/04/1947 tới 01/07/1955.
+        # Chỉ GIỜ ĐỒNG HỒ; lịch âm miền Nam vẫn UTC+7 trong đoạn này (xem tz_lich_am).
+        TzPeriod(date(1947, 4, 1), 8.0, "Nam Bo doi UTC+8 (tzdata Asia/Ho_Chi_Minh)"),
+        TzPeriod(date(1955, 7, 1), 7.0, "Ve UTC+7 luc 01:00 dong ho", start_gio=1),
         TzPeriod(date(1960, 1, 1), 8.0,
                  "VNCH doi UTC+8, hieu luc tu 23:00 ngay 31/12/1959"),
         TzPeriod(date(1975, 6, 13), 7.0,
@@ -130,7 +137,7 @@ TZ_TABLE: dict[Region, tuple[TzPeriod, ...]] = {
 DISPUTED_NORTH_WINDOW = (date(1954, 7, 21), date(1968, 1, 1))
 
 
-def clock_offset(d: date, region: Region) -> tuple[float, bool]:
+def clock_offset(d: date, region: Region, gio: int | None = None) -> tuple[float, bool]:
     """Múi giờ đồng hồ tại nơi sinh vào ngày sinh.
 
     Trả về (offset, disputed). `disputed=True` nghĩa là kết quả nằm trong vùng
@@ -142,7 +149,7 @@ def clock_offset(d: date, region: Region) -> tuple[float, bool]:
     periods = TZ_TABLE[region]
     chosen = periods[0]
     for p in periods:
-        if d >= p.start:
+        if d > p.start or (d == p.start and (gio is None or gio >= p.start_gio)):
             chosen = p
         else:
             break
@@ -151,6 +158,18 @@ def clock_offset(d: date, region: Region) -> tuple[float, bool]:
     if region is Region.NORTH and DISPUTED_NORTH_WINDOW[0] <= d < DISPUTED_NORTH_WINDOW[1]:
         disputed = True
     return chosen.offset, disputed
+
+
+# Kinh tuyến LỊCH ÂM đang lưu hành tại nơi sinh — tách khỏi giờ đồng hồ (EN-6 BI-1): miền Nam chỉ dùng lịch âm tính
+# theo UTC+8 từ 01/01/1960 tới 13/06/1975 (quyết định đã chốt, Tết Mậu Thân Nam 30/01/1968); đoạn đồng hồ UTC+8
+# 1947–1955 KHÔNG đổi lịch âm.
+LICH_AM_MIEN_NAM_UTC8 = (date(1960, 1, 1), date(1975, 6, 13))
+
+
+def tz_lich_am(d: date, region: "Region | None") -> float:
+    if region is Region.SOUTH and LICH_AM_MIEN_NAM_UTC8[0] <= d < LICH_AM_MIEN_NAM_UTC8[1]:
+        return 8.0
+    return CALENDAR_MERIDIAN_TZ
 
 
 # Sinh ở NƯỚC NGOÀI (chủ dự án chốt 2026-09-30): lập lá số theo GIỜ ĐỊA PHƯƠNG

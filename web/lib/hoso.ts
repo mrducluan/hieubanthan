@@ -21,6 +21,8 @@ export const HoSo = z.object({
   noi_sinh: z.string().regex(/^[a-z0-9_-]{2,40}$/).optional(),
   /** Chỉ khi sinh ở nước ngoài: đồng hồ nơi sinh lúc đó đang là giờ mùa hè. */
   gio_mua_he: z.boolean().optional(),
+  /** EN-6 BI-3: múi giờ CHUẨN nơi sinh (UTC±, không tính giờ mùa hè) — chỉ khi sinh ở nước ngoài. */
+  utc_noi_sinh: z.number().min(-12).max(14).multipleOf(0.25).optional(),
   /** TV-V2: "unknown" = không biết giờ → `gio` là giờ đại diện 12:00 chỉ để an tạm lá số; Tử vi mở khối định giờ 12 canh. */
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).optional(),
   /** Người dùng nhập theo lịch nào; ngày/tháng/năm ở trên LUÔN là dương lịch (engine đổi). */
@@ -139,7 +141,7 @@ export const NUOC_NGOAI = "nuoc_ngoai";
 /** Đầu vào lá số (Tử vi / Bát tự) từ hồ sơ — null nếu thiếu giờ sinh, giới tính hoặc nơi sinh. */
 export function laSoTuHoSo(h: HoSo | null | undefined): {
   birth_date: string; birth_time: string; gender: "nam" | "nu"; noi_sinh: string;
-  vung?: "north" | "south"; gio_mua_he?: boolean; do_tin_gio?: "exact" | "approx" | "unknown";
+  vung?: "north" | "south"; gio_mua_he?: boolean; utc_noi_sinh?: number; do_tin_gio?: "exact" | "approx" | "unknown";
 } | null {
   if (!h?.gio || !h.gioi_tinh || !h.noi_sinh) return null;
   const nuocNgoai = h.noi_sinh === NUOC_NGOAI;
@@ -148,6 +150,7 @@ export function laSoTuHoSo(h: HoSo | null | undefined): {
     // Vùng chỉ còn cần cho tỉnh vắt ngang vĩ tuyến 17 (Quảng Trị) sinh trước 1975 — engine tự suy từ tỉnh.
     ...(!nuocNgoai && h.vung && ngaySinhIso(h) < "1975-06-13" ? { vung: h.vung } : {}),
     ...(nuocNgoai && h.gio_mua_he ? { gio_mua_he: true } : {}),
+    ...(nuocNgoai && typeof h.utc_noi_sinh === "number" ? { utc_noi_sinh: h.utc_noi_sinh } : {}),
     ...(h.do_tin_gio ? { do_tin_gio: h.do_tin_gio } : {}),
   };
 }

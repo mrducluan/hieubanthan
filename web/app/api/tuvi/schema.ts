@@ -19,6 +19,8 @@ export const ChartInput = z.object({
   vung: z.enum(["north", "south"]).optional(),
   noi_sinh: z.string().regex(/^[a-z0-9_-]{2,40}$/).optional(),
   gio_mua_he: z.boolean().optional(),
+  /** EN-6 BI-3: múi giờ chuẩn nơi sinh (chỉ khi sinh ở nước ngoài) — Bát tự so mốc tiết khí. */
+  utc_noi_sinh: z.number().min(-12).max(14).multipleOf(0.25).optional(),
   truong_phai: z.enum(["npl", "vvt"]).optional(),
   che_do: z.enum(["hep", "tam_hop", "tptc"]).optional(),
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).default("exact"),

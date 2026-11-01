@@ -127,7 +127,7 @@ def api_hop_tham(inp: HopThamInput) -> dict:
                 am_nhuan=k.am_nhuan, noi_sinh=k.noi_sinh, vung=k.vung, hoa_linh=inp.la_so.hoa_linh,
                 thang_nhuan=inp.la_so.thang_nhuan, lich=inp.la_so.lich))
             la_k = _la(_sinh(dv_k, k.gender))
-            ls_kia, can_kia, nam_kia, ngay_kia = tom_tat(la_k), _can_nam(la_k, dv_k.can), dv_k.am[2], dv_k.duong_goc
+            ls_kia, can_kia, nam_kia, ngay_kia = tom_tat(la_k), _can_nam(la_k, dv_k.can), dv_k.am_lap[2], dv_k.duong_goc
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
     if can_kia is None:
@@ -143,7 +143,7 @@ def api_hop_tham(inp: HopThamInput) -> dict:
     # HN-2N: năm âm + giới tính hai người → điểm tham khảo (giới tính người kia tuỳ chọn: thiếu thì bỏ cung phi).
     # Ngày dương → cung phi tính năm theo Lập xuân như /phong-thuy.
     kq = tuvi_hop_tham.lap(tom_tat(la), _can_nam(la, dv.can), can_kia, inp.quan_he, ls_kia=ls_kia,
-                           ban={"nam_am": dv.am[2], "gioi_tinh": inp.la_so.gender, "ngay_duong": dv.duong_goc},
+                           ban={"nam_am": dv.am_lap[2], "gioi_tinh": inp.la_so.gender, "ngay_duong": dv.duong_goc},
                            kia={"nam_am": nam_kia, "gioi_tinh": k.gender, "ngay_duong": ngay_kia},
                            trong_so={m: v.model_dump() for m, v in inp.trong_so.items()} if inp.trong_so else None,
                            ca_nhan=inp.ca_nhan)

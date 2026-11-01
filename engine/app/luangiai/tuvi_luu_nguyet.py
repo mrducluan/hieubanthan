@@ -35,6 +35,7 @@ def lap_nam(sinh: dict, nam_am: int, phai: str = ln.MAC_DINH, ls: dict | None = 
         raise ValueError(f"Phái lưu nguyệt không hợp lệ: {phai}")
     from app.hoidap.tuvi import tom_tat          # tránh vòng import (hoidap.tuvi dùng module này)
 
+    sinh = az.chuan_sinh(sinh)                  # EN-6 BI-2: tháng sinh (Đẩu Quân) theo cùng ngày với lá số iztro
     tn = sinh.get("thang_nhuan", "thang_sau")
     lich = sinh.get("lich", "viet")
     tz_lich = sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ)

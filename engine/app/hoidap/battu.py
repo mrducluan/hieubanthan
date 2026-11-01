@@ -14,6 +14,7 @@ import collections
 import datetime as dt
 import re
 
+from app import config
 from app.calc import battu_mo_rong, battu as bt
 from app.hoidap import chung, hieu_cau, doi_song_muc as dsm
 from app.kb import battu_kb as kb
@@ -601,7 +602,8 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     nam_xem, nam_am = chung.nam_xem_hh(pl["nam_xem"], ngay_xem, pl["cau_chuan_hoa"])
     ls = None
     if sinh and pl["loai"] in ("la_so", "van", "hop"):
-        ls = bt.la_so(sinh["lich"], sinh["gioi_tinh"], sinh.get("gio_ty", "da_ty"))
+        ls = bt.la_so(sinh["lich"], sinh["gioi_tinh"], sinh.get("gio_ty", "da_ty"),
+                      sinh.get("utc_lich", config.CALENDAR_MERIDIAN_TZ))
     hien_tai = ngay_xem if not pl["nam_xem"] and nam_xem == chung.nam_xem_hh(None, ngay_xem, "")[0] else None
     goi = goi_bang_chung(pl, ls, sinh["gioi_tinh"] if sinh else None, nam_xem, hien_tai)
     if ls is not None and pl["loai"] in ("la_so", "van") and not goi["can_them"]:

@@ -48,7 +48,7 @@ def vung_tu_noi_sinh(vung: Region | None, noi_sinh: str | None) -> Region | None
 def _tz_viet(ngay_duong: dt.date, vung: Region | None) -> float:
     """Kinh tuyến âm lịch VIỆT nơi sinh: miền Nam 1960–1975 dùng lịch UTC+8, còn lại UTC+7."""
     if vung is Region.SOUTH:
-        return config.clock_offset(ngay_duong, Region.SOUTH)[0]
+        return config.tz_lich_am(ngay_duong, Region.SOUTH)
     return config.CALENDAR_MERIDIAN_TZ
 
 

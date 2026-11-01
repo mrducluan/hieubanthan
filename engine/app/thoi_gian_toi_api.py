@@ -51,7 +51,7 @@ def api_thoi_gian_toi(inp: ThoiGianToiInput) -> dict:
         gioi_tinh = gioi_tinh or inp.la_so.gender
         tv_sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender,
                    "tz_lich": dv.tz_lich, **dv.tuy_chon, "luu_nguyet": inp.la_so.luu_nguyet}
-        bt_sinh = {"lich": cal, "gioi_tinh": inp.la_so.gender, "gio_ty": inp.la_so.gio_ty}
+        bt_sinh = {"lich": cal, "gioi_tinh": inp.la_so.gender, "gio_ty": inp.la_so.gio_ty, "utc_lich": dv.utc_lich}
         flags = list(dv.flags)
     try:
         bc = T.lap(inp.ngay_sinh, hom_nay, inp.nam, gioi_tinh, tv_sinh, bt_sinh,
