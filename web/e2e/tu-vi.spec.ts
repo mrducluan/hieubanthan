@@ -239,3 +239,18 @@ test("TV-LN: lưu nguyệt theo phái — tháng Giêng 2026 ở Phu Thê (Đẩ
   const ans = page.getByTestId("cau-tra-loi").last();
   await expect(ans).toContainText("Theo phái Tháng Giêng tại cung lưu niên, Mệnh của tháng rơi vào cung Tật Ách (Ngọ)");
 });
+
+test("EN-6 BI-3: chọn sinh ở nước ngoài thì có ô múi giờ nơi sinh, lưu vào hồ sơ trên máy", async ({ page }) => {
+  const { noi_sinh: _bo, ...cu } = HO_SO_MAU;
+  await napHoSo(page, cu);
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: "Thêm giờ sinh, giới tính, nơi sinh" }).click();
+  await page.getByLabel("Nơi sinh").selectOption("nuoc_ngoai");
+  const mg = page.getByLabel("Múi giờ chuẩn nơi sinh");
+  await expect(mg).toHaveValue("");
+  await mg.selectOption("-5");
+  await page.getByRole("button", { name: "Lưu và xem" }).click();
+  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
+  const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1")!));
+  expect(h.utc_noi_sinh).toBe(-5);
+});

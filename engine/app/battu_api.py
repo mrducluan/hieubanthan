@@ -27,13 +27,17 @@ router = APIRouter(prefix="/v1/battu", tags=["battu"])
 def _sinh(inp: TuanTrietInput) -> tuple[dict, list[dict]]:
     dv = _DauVao(inp)
     flags = [f for f in dv.flags if f["loai"] != "tet_edge"]   # bát tự đổi năm tại Lập xuân, không tại Tết
-    return {"lich": dv.tb.calendar_dt, "gioi_tinh": inp.gender, "gio_ty": inp.gio_ty}, flags
+    if dv.nuoc_ngoai and inp.utc_noi_sinh is None:
+        flags.append({"loai": "mui_gio_nuoc_ngoai", "chi_tiet": (
+            "Chưa khai múi giờ nơi sinh: Bát tự đang so mốc giao tiết theo giờ Việt Nam. Người sinh sát ngày giao tiết "
+            "(đầu tháng dương lịch) có thể lệch trụ tháng, trụ năm — khai múi giờ nơi sinh trong hồ sơ để tính đúng.")})
+    return {"lich": dv.tb.calendar_dt, "gioi_tinh": inp.gender, "gio_ty": inp.gio_ty, "utc_lich": dv.utc_lich}, flags
 
 
 @router.post("/la-so")
 def api_la_so(inp: TuanTrietInput) -> dict:
     sinh, flags = _sinh(inp)
-    ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"], sinh["gio_ty"])
+    ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"], sinh["gio_ty"], sinh["utc_lich"])
     ls["co_canh_bao"] = flags + ls["co_canh_bao"]
     return {"engine_version": ENGINE_VERSION, "pham_vi": "bat_tu", "gio_lich": sinh["lich"].isoformat(), **ls,
             "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls), "cach_cuc_tbct": cach_tbct(ls)},
@@ -73,7 +77,7 @@ class LuuNienBTInput(BaseModel):
 @router.post("/luu-nien")
 def api_luu_nien(inp: LuuNienBTInput) -> dict:
     sinh, _ = _sinh(inp.la_so)
-    ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"], sinh["gio_ty"])
+    ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"], sinh["gio_ty"], sinh["utc_lich"])
     return {"engine_version": ENGINE_VERSION, **battu_mo_rong.luu_nien(ls, inp.nam_xem)}
 
 

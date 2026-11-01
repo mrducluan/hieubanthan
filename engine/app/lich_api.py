@@ -43,7 +43,7 @@ def _tz_lich(d: _dt.date, noi_sinh: str | None) -> float:
     """Lịch âm đang lưu hành tại nơi sinh vào ngày đó (miền Nam 1960–1975: UTC+8)."""
     t = dia_ly.tra(noi_sinh) if noi_sinh and noi_sinh != dia_ly.NUOC_NGOAI else None
     if t and t["vung"] == Region.SOUTH.value:
-        return config.clock_offset(d, Region.SOUTH)[0]
+        return config.tz_lich_am(d, Region.SOUTH)
     return config.CALENDAR_MERIDIAN_TZ
 
 

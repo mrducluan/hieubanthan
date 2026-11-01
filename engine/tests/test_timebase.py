@@ -26,7 +26,8 @@ from app.config import Region, TyBoundary
         (date(1975, 6, 13), Region.SOUTH, 7.0),  # đúng ngày thống nhất múi giờ
         (date(1975, 6, 12), Region.SOUTH, 8.0),  # trước đó một ngày vẫn +8
         (date(1980, 1, 1), Region.SOUTH, 7.0),
-        (date(1950, 5, 1), Region.SOUTH, 7.0),   # trước khi VNCH đổi
+        (date(1950, 5, 1), Region.SOUTH, 8.0),   # EN-6 BI-1: Nam Bộ UTC+8 01/04/1947–01/07/1955 (tzdata)
+        (date(1958, 5, 1), Region.SOUTH, 7.0),   # giữa hai đoạn UTC+8 (trước khi VNCH đổi 1960)
         (date(1944, 1, 1), Region.SOUTH, 8.0),   # thời Nhật chiếm đóng
         (date(1988, 12, 2), Region.NORTH, 7.0),
         (date(2000, 1, 1), Region.NORTH, 7.0),

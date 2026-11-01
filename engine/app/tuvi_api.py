@@ -54,6 +54,9 @@ class TuanTrietInput(BaseModel):
     noi_sinh: str | None = Field(default=None, max_length=40,
                                  description="Mã tỉnh (GET /v1/dia-ly/tinh) hoặc 'nuoc_ngoai'")
     gio_mua_he: bool = False                     # chỉ khi sinh ở nước ngoài: giờ đồng hồ đang là giờ mùa hè
+    # EN-6 BI-3: múi giờ CHUẨN nơi sinh (UTC±, không tính giờ mùa hè) — chỉ khi sinh ở nước ngoài; Bát tự dùng để so
+    # mốc tiết khí. Bỏ trống → như cũ (coi giờ địa phương theo UTC+7) và Bát tự gắn cờ nhắc khai.
+    utc_noi_sinh: float | None = Field(default=None, ge=-12, le=14, multiple_of=0.25)
     truong_phai: Literal["npl", "vvt"] | None = None
     che_do: Literal["hep", "tam_hop", "tptc"] | None = None
     do_tin_gio: HourConfidence = HourConfidence.EXACT
@@ -110,7 +113,7 @@ class _DauVao:
                 return _dt.date(y, m, d)
             duong_goc = _doi(config.CALENDAR_MERIDIAN_TZ)
             if vung_khai is Region.SOUTH:
-                tz_nam, _ = config.clock_offset(duong_goc, Region.SOUTH)
+                tz_nam = config.tz_lich_am(duong_goc, Region.SOUTH)
                 if tz_nam != config.CALENDAR_MERIDIAN_TZ:
                     duong_goc, self.lich_mien_nam = _doi(tz_nam), True
 
@@ -131,13 +134,14 @@ class _DauVao:
             tb = timebase.to_calendar_time(clock_dt, vung)
         ngay_kinh_tuyen = tb.calendar_dt.date()
         self.nuoc_ngoai, self.tinh = nuoc_ngoai, tinh
+        self.utc_lich = inp.utc_noi_sinh if nuoc_ngoai and inp.utc_noi_sinh is not None else config.CALENDAR_MERIDIAN_TZ
 
         # ---- 2. Lịch âm + can chi năm ------------------------------------
         # Âm lịch VIỆT NAM (không phải lịch Trung Quốc của iztro — LS60). Miền Nam 1960–1975 dùng lịch
         # tính theo UTC+8 như giấy tờ thời đó.
         self.tz_lich = config.CALENDAR_MERIDIAN_TZ
         if not nuoc_ngoai and vung_khai is Region.SOUTH:
-            self.tz_lich = config.clock_offset(ngay_kinh_tuyen, Region.SOUTH)[0]
+            self.tz_lich = config.tz_lich_am(ngay_kinh_tuyen, Region.SOUTH)
         tz_am = tuvi_an_sao.TZ_TRUNG if inp.lich == "trung" else self.tz_lich
         ld, lm, ly, leap = lunar.solar_to_lunar(
             ngay_kinh_tuyen.day, ngay_kinh_tuyen.month, ngay_kinh_tuyen.year, tz_am,

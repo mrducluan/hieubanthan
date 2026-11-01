@@ -1,6 +1,6 @@
 // Bát tự (HH-3): hồ sơ → tứ trụ + ngũ hành + dụng thần hai cách → hỏi.
 import { test, expect } from "@playwright/test";
-import { hoi, napHoSo } from "./_hoso";
+import { HO_SO_MAU, hoi, napHoSo } from "./_hoso";
 
 test("tứ trụ từ hồ sơ + dụng thần hai cách", async ({ page }) => {
   await napHoSo(page);
@@ -112,3 +112,16 @@ test("EN-3: câu mơ hồ → khối 'hỏi lại' với câu cụ thể; bấm 
   await expect(moi).toContainText(/nghề|công việc/);
   await expect(moi.getByTestId("hoi-lai")).toHaveCount(0);
 });
+
+for (const [utc, can, co] of [[undefined, "Kỷ", true], [-5, "Canh", false]] as const) {
+  test(`EN-6 BI-3: sinh ở New York 03/02/1990 23:00, múi giờ ${utc ?? "chưa khai"} → trụ năm ${can}`, async ({ page }) => {
+    await napHoSo(page, { ...HO_SO_MAU, ngay: 3, thang: 2, nam: 1990, gio: "23:00", noi_sinh: "nuoc_ngoai",
+                          ...(utc !== undefined ? { utc_noi_sinh: utc } : {}) });
+    await page.goto("/bat-tu");
+    await page.getByTestId("bat-tu-chi-tiet-mo").click();
+    const bang = page.getByRole("table", { name: "Bảng tứ trụ" });
+    // trụ năm: chưa khai → coi giờ địa phương như giờ Việt Nam, trước Lập xuân (Kỷ Tỵ); khai UTC−5 → sau Lập xuân (Canh Ngọ)
+    await expect(bang.getByRole("cell").filter({ hasText: can }).first()).toBeVisible();
+    await expect(page.getByText(/Chưa khai múi giờ nơi sinh/)).toHaveCount(co ? 1 : 0);
+  });
+}

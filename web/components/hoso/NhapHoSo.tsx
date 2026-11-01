@@ -37,6 +37,17 @@ interface KetQuaDoi {
   am_viet?: { ngay: number; thang: number; nam: number; nhuan: boolean };
 }
 
+// EN-6 BI-3: múi giờ chuẩn hay gặp (giờ mùa hè đã có ô riêng) — giá trị là số giờ lệch UTC.
+const MUI_GIO: [string, string][] = [
+  ["-10", "UTC−10 · Hawaii"], ["-8", "UTC−8 · Mỹ miền Tây (California, Washington)"], ["-7", "UTC−7 · Mỹ (Arizona, Colorado)"],
+  ["-6", "UTC−6 · Mỹ miền Trung (Texas, Illinois)"], ["-5", "UTC−5 · Mỹ miền Đông (New York, Florida), Canada (Ontario)"],
+  ["-4", "UTC−4 · Canada (Nova Scotia)"], ["-3", "UTC−3 · Brazil, Argentina"], ["0", "UTC+0 · Anh, Bồ Đào Nha"],
+  ["1", "UTC+1 · Pháp, Đức, Ý, Ba Lan, Séc"], ["2", "UTC+2 · Phần Lan, Hy Lạp, Ukraina"], ["3", "UTC+3 · Nga (Moskva), Thổ Nhĩ Kỳ"],
+  ["4", "UTC+4 · UAE"], ["5.5", "UTC+5:30 · Ấn Độ"], ["7", "UTC+7 · Thái Lan, Lào, Campuchia, Indonesia (Jakarta)"],
+  ["8", "UTC+8 · Trung Quốc, Đài Loan, Singapore, Malaysia, Philippines, Úc (Perth)"], ["9", "UTC+9 · Nhật Bản, Hàn Quốc"],
+  ["9.5", "UTC+9:30 · Úc (Adelaide)"], ["10", "UTC+10 · Úc (Sydney, Melbourne)"], ["12", "UTC+12 · New Zealand"],
+];
+
 // Nhập MỘT LẦN, dùng mọi mảng (docs/THIET-KE-UI.md §4.3). Chỉ tên + ngày sinh bắt buộc; phần còn lại
 // hỏi đúng lúc mảng cần (can). Ngày âm do engine đổi — web không tự đổi lịch.
 // ĐY-1: chưa có đồng ý xử lý dữ liệu (lib/dong-y-du-lieu) → khối đồng ý ngắn ngay trên nút, nút thành "Đồng ý và xem kết
@@ -62,6 +73,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const [gioiTinh, setGioiTinh] = useState<string>(macDinh?.gioi_tinh ?? "");
   const [noiSinh, setNoiSinh] = useState<string>(macDinh?.noi_sinh ?? "");
   const [gioMuaHe, setGioMuaHe] = useState(Boolean(macDinh?.gio_mua_he));
+  const [utcNoiSinh, setUtcNoiSinh] = useState(typeof macDinh?.utc_noi_sinh === "number" ? String(macDinh.utc_noi_sinh) : "");
   const [vung, setVung] = useState<string>(macDinh?.vung ?? "");
   const [doi, setDoi] = useState<KetQuaDoi | null>(null);
   const [loiDoi, setLoiDoi] = useState<string | null>(null);
@@ -136,6 +148,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
       ...(gioiTinh === "nam" || gioiTinh === "nu" ? { gioi_tinh: gioiTinh } : {}),
       ...(noiSinh ? { noi_sinh: noiSinh } : {}),
       ...(nuocNgoai && gioMuaHe ? { gio_mua_he: true } : {}),
+      ...(nuocNgoai && utcNoiSinh !== "" ? { utc_noi_sinh: Number(utcNoiSinh) } : {}),
       ...(canVung && (vung === "north" || vung === "south") ? { vung } : {}),
       ...(macDinh?.tao_luc ? { tao_luc: macDinh.tao_luc } : {}),
     });
@@ -293,6 +306,16 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                 <input type="checkbox" checked={gioMuaHe} onChange={(e) => setGioMuaHe(e.target.checked)} className="mt-0.5 size-4 accent-[rgb(var(--gold))]" />
                 <span>Lúc sinh, nơi đó đang dùng <b className="text-fg">giờ mùa hè</b> (vd Mỹ, châu Âu, Úc thường từ tháng 3–4 đến 10–11). Không chắc thì để trống.</span>
               </label>
+            )}
+            {noiSinh === NUOC_NGOAI && (
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="utc-noi-sinh">Múi giờ chuẩn nơi sinh</Label>
+                <Select id="utc-noi-sinh" value={utcNoiSinh} onChange={(e) => setUtcNoiSinh(e.target.value)}>
+                  <option value="">Không rõ</option>
+                  {MUI_GIO.map(([v, ten]) => <option key={v} value={v}>{ten}</option>)}
+                </Select>
+                <p className="text-xs text-fg-faint">Chọn múi giờ chuẩn, giờ mùa hè đã có ô riêng ở trên. Bát tự đổi tháng, đổi năm đúng lúc giao tiết — người sinh sát đầu tháng dương lịch cần múi giờ nơi sinh để tính đúng.</p>
+              </div>
             )}
             {canVung && (
               <div className="space-y-2 sm:col-span-2">
