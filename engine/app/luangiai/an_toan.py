@@ -33,11 +33,14 @@ KHUNG_HOANG: list[tuple[str, str | None]] = [
     (r"(ket thuc|buong (het|bo)|bo het) moi thu cho (xong|roi|nhe|ranh)(?! voi| (di|de) | dau| dau oc| long)", None),
     # review EN-3: nói tránh còn lọt — "tôi là gánh nặng", "muốn đi luôn" (hết câu), "không muốn tỉnh dậy", "chẳng
     # bằng chết", "mệt quá muốn buông hết" (không chặn "gánh nặng tài chính", "đi luôn chuyến bay sáng mai")
-    (r"(toi|minh|em|con|tao|tui) (chi )?la (mot |cai )?ganh nang(?! (tai chinh|tien|cong viec|kinh te|no))", None),
-    (r"(muon|nen|dinh|thoi) di luon( khong| nhi| luon| cho xong)?" + _H, None),
-    (r"khong (muon|can) (tinh|thuc) day( nua)?", None),
+    (r"(toi|minh|em|con|tao|tui) (chi )?la (mot |cai )?ganh nang(?! (tai chinh|tien|cong viec|kinh te|no|gi))", None),
+    # "đi luôn" chỉ là khủng hoảng khi đi cùng lời buồn chán / gánh nặng (code-review: "Mai mình định đi luôn")
+    (r"(met|chan|ganh nang|buon|vo nghia|that vong|het chiu|kho qua|tuyet vong|khong thiet).{0,60}(muon|nen) di luon"
+     r"( khong| nhi| cho xong)?" + _H, None),
+    (r"khong muon (tinh|thuc) day( nua| luon| mai)?" + _H, None),
     (r"(chang|khong|thua) bang (chet|chet di|chet quach)", None),
-    (r"met (qua|lam|moi|roi).{0,20}muon buong (het|xuoi|tay|bo het)|muon buong xuoi (tat ca|het|cho xong)", None), (r"cham dut (tat ca|cuoc doi|moi thu|cuoc song)", None),
+    (r"met (qua|lam|moi|roi).{0,20}muon buong (het|xuoi|tay|bo het)" + _H
+     + r"|muon buong xuoi (tat ca|het|cho xong)", None), (r"cham dut (tat ca|cuoc doi|moi thu|cuoc song)", None),
     (r"(uong|nuot) het (ca )?(vi |lo |hop )?(thuoc|vi thuoc)", None), (r"mua san thuoc ngu", None),
     (r"nhay (xuong|lau|cau|song)|nhay tu tang", r"nhảy (xuống|lầu|cầu|sông)|nhảy từ tầng"),
     (r"cat tay|rach tay|tu hai (ban than|minh)|tu lam dau|(muon|hay|thuong) lam dau (ban than|chinh minh)",

@@ -69,3 +69,21 @@ def test_kinhdich_neu_moc_khong_bia_muc_thang():
     s = chay("kinhdich", "Nên mở cửa hàng vào tháng 2 hay tháng 3 năm sau")["cau_tra_loi"]
     dau = _dau(s, 1)
     assert "tháng 2/2027" in dau and "tháng 3/2027" in dau and "không chấm riêng từng tháng" in dau, dau
+
+
+def test_nam_hoi_hh_nam_nay_hay_nam_sau_va_ranh_gioi():
+    import datetime as dt
+    from app.hoidap import chung
+    from app.luangiai.hoi import chuan_hoa_cau as ch
+    assert chung.nam_hoi_hh(ch("năm nay hay năm sau tôi nên đổi việc"), dt.date(2026, 11, 1), "am") == [2026, 2027]
+    # 20/01/2027 chưa qua Tết / Lập xuân: "năm nay" vẫn là 2026
+    assert chung.nam_hoi_hh(ch("năm nay hay năm sau làm nhà"), dt.date(2027, 1, 20), "am") == [2026, 2027]
+    assert chung.nam_hoi_hh(ch("ba năm tới công việc thế nào"), dt.date(2027, 1, 20), "lap_xuan") == [2026, 2027, 2028]
+    assert chung.nam_hoi_hh(ch("tháng 3 hay tháng 5 tôi nên đổi việc"), dt.date(2026, 11, 1), "lap_xuan") == []
+    assert chung.nam_hoi_hh(ch("sinh con 2027 hay 2028 thì hợp"), dt.date(2026, 11, 1), "am") == [2027, 2028]
+
+
+def test_voi_toi_la_cau_ca_nhan():
+    from app.hoidap import hieu_cau as hc
+    from app.luangiai.hoi import chuan_hoa_cau as ch
+    assert hc.kieu(ch("Lưu niên năm nay với tôi nghĩa là gì?")) != "kien_thuc"

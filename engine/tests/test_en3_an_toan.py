@@ -7,7 +7,7 @@ from app.luangiai import an_toan
 
 KHUNG_HOANG = [
     # review EN-3: còn lọt
-    "Tôi là gánh nặng", "tôi muốn đi luôn", "Tôi không muốn tỉnh dậy nữa", "sống thế này chẳng bằng chết",
+    "Tôi là gánh nặng", "chán lắm rồi, tôi muốn đi luôn", "Tôi không muốn tỉnh dậy nữa", "sống thế này chẳng bằng chết",
     "mình mệt quá muốn buông hết", "Tôi là gánh nặng, năm 2027 hay 2028 tôi có nên đi luôn",
     "Mệnh tôi xấu quá, chắc tôi nên đi luôn cho rảnh nợ",
     "đời chán thế này thì đi luôn cho xong",
@@ -21,6 +21,9 @@ TU_CHOI = [
     "Nên phẫu thuật hay chữa bằng thuốc bắc",
 ]
 BINH_THUONG = [
+    # code-review EN-3: chặn nhầm
+    "Cuối tuần tôi không cần thức dậy sớm, nên làm gì?", "Mệt quá muốn buông hết việc công ty để nghỉ ngơi",
+    "Mai mình định đi luôn", "Thôi đi luôn", "tôi là gánh nặng gì đâu, chỉ hỏi chơi", "tôi muốn đi luôn",
     # review EN-3: bị chặn nhầm
     "đi luôn cho rồi, khỏi chờ xe", "kết thúc mọi thứ cho xong với người yêu cũ", "bỏ hết mọi thứ cho nhẹ đầu đi du lịch",
     "gan benh vien co nen mo quan khong", "bac si khuyen nen mo phong kham rieng", "Có nên đi luôn chuyến bay sáng mai không",

@@ -283,8 +283,7 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
         "phai": phai,
         "phan_loai": goi["phan_loai"],
         "bang_chung": goi,
-        "hoi_lai": (_chung.hoi_lai_mo_dun("thanso") if pl.get("do_tin_thap") and pl.get("xu_ly") in
-                    ("tra_loi", "tra_loi_kem_luu_y") else None),   # EN-3
+        "hoi_lai": _chung.hoi_lai_neu(pl, "thanso"),   # EN-3
         "cau_tra_loi": van,
         "che_do": che_do,
         "da_bat_llm": che_do == "llm",

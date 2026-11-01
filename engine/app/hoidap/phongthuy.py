@@ -546,7 +546,7 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     pl = phan_loai(cau_hoi)
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     nam_xem, nam_am = chung.nam_xem_hh(pl["nam_xem"], ngay_xem, pl["cau_chuan_hoa"])
-    cac = sorted({x["nam"] for x in hieu_cau.thoi_gian(pl["cau_chuan_hoa"], ngay_xem)})
+    cac = chung.nam_hoi_hh(pl["cau_chuan_hoa"], ngay_xem, "am")     # năm âm lịch Việt (tuổi làm nhà theo Tết)
     if len(cac) >= 2:
         pl["cac_nam_hoi"] = cac                 # EN-3: hỏi so hai năm (tuổi làm nhà từng năm)
     goi = goi_bang_chung(pl, sinh, nam_xem, nam_am)
@@ -570,6 +570,6 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         except Exception as e:  # noqa: BLE001
             che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    return {"hoi_lai": hieu_cau.hoi_lai("phongthuy") if pl.get("do_tin_thap") and pl.get("xu_ly") in ("tra_loi", "tra_loi_kem_luu_y") else None, "phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
+    return {"hoi_lai": chung.hoi_lai_neu(pl, "phongthuy"), "phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
             "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": goi["co_canh_bao"],
             "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.phongthuy(goi, pl.get("quai"), _menh_rieng(pl, sinh)), "hoi_tiep": truc_quan.hoi_tiep_phongthuy(pl)}

@@ -59,3 +59,15 @@ def test_khong_mo_tu_nham_review(cau):
     for x in ("khong-pop", "khong/em", "em-commerce", "15 khong", "chong tien", "moi lan", "hop dong", "biet coin",
               "khong cua"):
         assert x not in t, (cau, t)
+
+
+@pytest.mark.parametrize("cau, ra", [("ck 1985 vk 1991 nen chon huong nao", "chong 1985 vo 1991 nen chon huong nao"),
+                                     ("ny 1995", "nguoi yeu 1995")])
+def test_mo_truoc_con_so(cau, ra):
+    assert hoi.chuan_hoa_cau(cau) == ra
+
+
+@pytest.mark.parametrize("cau", ["vitamin K", "Uống vitamin E mỗi ngày"])
+def test_vitamin(cau):
+    t = hoi.chuan_hoa_cau(cau)
+    assert "vitamin khong" not in t and "vitamin em" not in t, t

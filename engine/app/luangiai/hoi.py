@@ -50,12 +50,13 @@ VIET_TAT = {
 # Chữ trùng với một từ CÓ DẤU khác nghĩa ("ế", "túi") → chỉ mở khi người dùng gõ đúng chữ không dấu (so trên câu gốc).
 VIET_TAT_GOC = {"e": "em", "tui": "toi"}
 TU_DIEN_PHUONG_PHAP = {"pitago", "chaldea", "so_kep"}
-_VT_GOC_RX = re.compile(r"(?<![\w/-])(" + "|".join(VIET_TAT_GOC) + r")(?![\w/-])", re.IGNORECASE)
+_VT_GOC_RX = re.compile(r"(?<![\w/-])(?<!vitamin )(?<!Vitamin )(" + "|".join(VIET_TAT_GOC) + r")(?![\w/-])",
+                        re.IGNORECASE)
 # "e" gõ không dấu cũng có thể là "ế" ("toi e lau", "het e", "bi e mai") → không mở khi đứng sau / trước các từ này.
 _E_LA_E = re.compile(r"(?:het|bi|toi|minh|em|van|con|da|cu|dang|sao|tui|tao|anh|chi|co|e)\s+e\s*$|^\s*(lau|mai|qua|dai|hoai|vo|chong|nua|ca doi)\b",
                      re.IGNORECASE)
-_VT_RX = re.compile(r"(?<![\w/-])(" + "|".join(sorted(map(re.escape, VIET_TAT), key=len, reverse=True))
-                    + r")(?![\w/-])(?! (tien|khoan|so tien|\d))")
+_VT_RX = re.compile(r"(?<![\w/-])(?<!vitamin )(" + "|".join(sorted(map(re.escape, VIET_TAT), key=len, reverse=True))
+                    + r")(?![\w/-])")
 
 
 def chuan_hoa_cau(s: str) -> str:
@@ -73,8 +74,14 @@ def chuan_hoa_cau(s: str) -> str:
     s = _VT_GOC_RX.sub(_mo, s)
     t = chuan_hoa(s)
     t = re.sub(r"(?<!\w)(\d{1,2})t(?!\w)", r"\1 tuoi", t)
-    return _VT_RX.sub(lambda m: m.group(1) if m.group(1) == "k" and re.search(r"\d\s?$", t[:m.start()])
-                      else VIET_TAT[m.group(1)], t)
+    def _mo_vt(m: re.Match) -> str:
+        w = m.group(1)
+        if w == "k" and re.search(r"\d\s?$", t[:m.start()]):                  # "15 k" = 15 nghìn
+            return w
+        if w == "ck" and re.match(r" (tien|khoan|so tien)\b", t[m.end():]):    # "ck tiền" = chuyển khoản
+            return w
+        return VIET_TAT[w]
+    return _VT_RX.sub(_mo_vt, t)
 
 
 _RX: dict[str, re.Pattern] = {}

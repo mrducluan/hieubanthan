@@ -244,20 +244,46 @@ def nam_hoi_hh(t: str, ngay_xem, kieu_nam: str) -> list[int]:
     ds = hieu_cau.thoi_gian(t, ngay_xem)
     if not ds:
         return []
-    lx, am = nam_xem_hh(None, ngay_xem, t)
+    ds = [x for x in ds if not x.get("thang")]          # câu chỉ hỏi tháng không thành đoạn "mức chung của năm"
+    if not ds:
+        return []
+    lx, am = nam_xem_hh(None, ngay_xem, "")             # năm đang đi theo ranh giới của mảng (không cộng "năm sau")
+    goc = lx if kieu_nam == "lap_xuan" else am
     ra = []
     for x in ds:
         if x.get("tuong_doi"):
-            ra.append(lx if kieu_nam == "lap_xuan" else am)
+            ra.append(goc + (1 if x["tuong_doi"] == "nam_sau" else 0))
+        elif "lech" in x:                               # "ba năm tới", "2 năm nữa": tính từ năm đang đi của mảng
+            ra.append(goc + x["lech"])
         else:
             ra.append(x["nam"])
     ra = sorted(set(ra))
-    if len(ra) == 1 and ds[0].get("tuong_doi") == "nam_nay":
+    if len(ds) == 1 and ds[0].get("tuong_doi") == "nam_nay":
         return []
     return ra
 
 
 
-def hoi_lai_mo_dun(mo_dun: str) -> dict | None:
+def hoi_lai_neu(pl: dict, mo_dun: str) -> dict | None:
+    """EN-3: khối "hỏi lại" khi câu rơi về mặc định (cờ `do_tin_thap`) và đang trả lời bình thường."""
+    if not pl.get("do_tin_thap") or pl.get("xu_ly") not in ("tra_loi", "tra_loi_kem_luu_y"):
+        return None
     from app.hoidap import hieu_cau  # noqa: PLC0415
     return hieu_cau.hoi_lai(mo_dun)
+
+
+def them_so_nam(goi: dict, dong: list[dict], nam_hoi: list[int], bo_qua_dau: tuple[str, ...]) -> None:
+    """EN-3: chèn mục `so_nam` (mức chung từng năm được hỏi, lấy từ dòng 10 năm của báo cáo — một nguồn) ngay sau các
+    mục đầu cố định `bo_qua_dau` (tứ trụ, tập quán sao hạn). Năm ngoài dòng 10 năm bỏ qua."""
+    from app.calc import lunar  # noqa: PLC0415
+    theo = {d["nam"]: d for d in dong}
+    ds = [theo[y] for y in nam_hoi if y in theo]
+    if not ds:
+        return
+    vt = 0
+    while vt < len(goi["muc"]) and vt < 2 and goi["muc"][vt]["loai"] in bo_qua_dau:
+        vt += 1
+    goi["muc"].insert(vt, {"loai": "so_nam", "nam": [
+        {"nam": d["nam"], "can_chi": " ".join(lunar.can_chi_nam(d["nam"])), "muc": d["muc"], "nhan_muc": d["nhan_muc"],
+         "y": d["y"], "mang": d.get("mang")} for d in ds]})
+    ket(goi)

@@ -14,7 +14,7 @@ import collections
 import datetime as dt
 import re
 
-from app.calc import battu_mo_rong, battu as bt, lunar
+from app.calc import battu_mo_rong, battu as bt
 from app.hoidap import chung, hieu_cau, doi_song_muc as dsm
 from app.kb import battu_kb as kb
 from app.luangiai import hoi as _h, truc_quan
@@ -546,20 +546,10 @@ def van_template(goi: dict) -> str:
 def _them_so_nam(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -> None:
     """EN-3: câu nêu năm → đoạn đầu nói mức của ĐÚNG các năm đó (dòng 10 năm của báo cáo Bát tự — một nguồn; năm theo
     Lập xuân, hai cách lấy dụng thần gộp như chương Vận hạn). Năm ngoài 10 năm tới bỏ qua."""
-    from app.hoidap import hieu_cau  # noqa: PLC0415
     from app.luangiai import battu_doi_song as btd  # noqa: PLC0415
     nam_hoi = chung.nam_hoi_hh(pl["cau_chuan_hoa"], ngay_xem, "lap_xuan")
-    if not nam_hoi:
-        return
-    dong = {d["nam"]: d for d in btd.dong_nam_cua(sinh, ngay_xem, ls)}
-    ds = [dong[y] for y in nam_hoi if y in dong]
-    if not ds:
-        return
-    vt = sum(1 for m in goi["muc"][:2] if m["loai"] in ("tu_tru", "sao_han"))   # tứ trụ, tập quán sao hạn giữ đầu
-    goi["muc"].insert(vt, {"loai": "so_nam", "nam": [
-        {"nam": d["nam"], "can_chi": " ".join(lunar.can_chi_nam(d["nam"])), "muc": d["muc"], "nhan_muc": d["nhan_muc"],
-         "y": d["y"], "mang": d.get("mang")} for d in ds]})
-    chung.ket(goi)
+    if nam_hoi:
+        chung.them_so_nam(goi, btd.dong_nam_cua(sinh, ngay_xem, ls), nam_hoi, ("tu_tru", "sao_han"))
 
 
 def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = None,
@@ -601,6 +591,6 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     if pl.get("lo_so") and not goi["luu_y"] and goi["muc"]:
         goi["luu_y"] = kb.luu_y("lo_so")
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    return {"hoi_lai": hieu_cau.hoi_lai("battu") if pl.get("do_tin_thap") and pl.get("xu_ly") in ("tra_loi", "tra_loi_kem_luu_y") else None, "phan_loai": goi["phan_loai"], "la_so": ls, "bang_chung": goi, "cau_tra_loi": van,
+    return {"hoi_lai": chung.hoi_lai_neu(pl, "battu"), "phan_loai": goi["phan_loai"], "la_so": ls, "bang_chung": goi, "cau_tra_loi": van,
             "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": co,
             "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.battu(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_battu(pl)}

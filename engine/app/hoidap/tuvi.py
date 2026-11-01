@@ -1357,15 +1357,8 @@ def _them_so_nam(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -
     tz = sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ)
     nam_am_xem = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, config.CALENDAR_MERIDIAN_TZ)[2]
     nam_am_sinh = lunar.solar_to_lunar(sinh["ngay"].day, sinh["ngay"].month, sinh["ngay"].year, tz)[2]
-    dong = {d["nam"]: d for d in tvd.dong_muoi_nam(ls, tvd.cham_cung(ls), nam_am_xem, nam_am_sinh, sinh.get("gioi_tinh"))}
-    ds = [dong[y] for y in nam_hoi if y in dong]
-    if not ds:
-        return
-    vt = 1 if goi["muc"] and goi["muc"][0]["loai"] == "sao_han" else 0      # tập quán sao hạn giữ đứng đầu
-    goi["muc"].insert(vt, {"loai": "so_nam", "nam": [
-        {"nam": d["nam"], "can_chi": " ".join(lunar.can_chi_nam(d["nam"])), "muc": d["muc"], "nhan_muc": d["nhan_muc"],
-         "y": d["y"], "mang": d.get("mang")} for d in ds]})
-    chung.ket(goi)
+    dong = tvd.dong_muoi_nam(ls, tvd.cham_cung(ls), nam_am_xem, nam_am_sinh, sinh.get("gioi_tinh"))
+    chung.them_so_nam(goi, dong, nam_hoi, ("sao_han",))      # tập quán sao hạn giữ đứng đầu
 
 
 def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
@@ -1441,7 +1434,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
     if ls is not None:
         co.append({"loai": "nam_phai", "chi_tiet": kb.luu_y("iztro")})
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    return {"hoi_lai": hieu_cau.hoi_lai("tuvi") if pl.get("do_tin_thap") and pl.get("xu_ly") in ("tra_loi", "tra_loi_kem_luu_y") else None, "phan_loai": goi["phan_loai"], "van_han": vh, "bang_chung": goi, "cau_tra_loi": van,
+    return {"hoi_lai": chung.hoi_lai_neu(pl, "tuvi"), "phan_loai": goi["phan_loai"], "van_han": vh, "bang_chung": goi, "cau_tra_loi": van,
             "can_cu": can_cu_template(goi), "truc_quan": truc_quan.tuvi(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_tuvi(goi, ls),
             "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"],
             "co_canh_bao": co, "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong",
