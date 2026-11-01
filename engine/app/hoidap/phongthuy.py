@@ -78,7 +78,7 @@ def phan_loai(cau_hoi: str) -> dict:
           "nam_xem": int(re.search(r"nam (20\d\d)", t).group(1)) if re.search(r"nam (20\d\d)", t) else None}
     # MT-ĐS B1: gương / chuông gió / hình bát quái treo cửa = vật trang trí → trả lời kèm lưu ý, không từ chối, không tâm linh.
     vat_treo = chung.co(t, [r"bat quai", r"chuong gio", r"treo guong", r"guong .{0,15}(chong|phan tac dung|tru)"])
-    db = None if vat_treo else chung.dac_biet(t)
+    db = None if vat_treo else chung.dac_biet(t, cau_hoi)
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq
@@ -164,7 +164,10 @@ def _menh_rieng(pl: dict, sinh: dict | None) -> dict | None:
     return _m_menh(mq) if mq else None
 
 
-def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int) -> dict:
+def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int, nam_am: int | None = None) -> dict:
+    """`nam_xem` = năm theo Lập xuân (phi tinh, Thái Tuế); `nam_am` = năm âm lịch Việt (tuổi làm nhà, theo Tết) —
+    EN-1 DU-1/DU-2: trước đây cả hai lấy năm dương lịch của ngày xem → sai từ 1/1 tới Tết / Lập xuân."""
+    nam_am = nam_am or nam_xem
     goi = {"phan_loai": {k: pl[k] for k in ("loai", "xu_ly", "huong")},
            "muc": [], "can_them": [], "mau": None, "luu_y": None, "co_canh_bao": []}
     muc = goi["muc"]
@@ -215,7 +218,13 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int) -> dict:
         muc.append({"loai": "giai_thich", "ma": "ngu_hoang", **kb.giai_thich("ngu_hoang")})
         nam_sinh = (sinh or {}).get("nam") or pl["nam_sinh_cau"]
         if nam_sinh:
-            muc.append({"loai": "tuoi_lam_nha", **pt.tuoi_lam_nha(nam_sinh, nam_xem), "nam_xem": nam_xem,
+            # Một bộ tính: dùng đúng hàm của trang /xem-tuoi-lam-nha (tuổi mụ theo năm âm của NGÀY sinh khi có).
+            from app.luangiai import tuoi_dan_gian as tdg  # noqa: PLC0415
+            ng = (sinh or {}).get("ngay")
+            x = tdg.xem_tuoi_lam_nha(nam_sinh, nam_am, ng.month if ng else None, ng.day if ng else None)
+            muc.append({"loai": "tuoi_lam_nha", "nam_xem": nam_am, "tuoi_mu": x["tuoi_mu"], "kim_lau": x["kim_lau"],
+                        "hoang_oc": x["hoang_oc"], "tam_tai": x["tam_tai"], "nam_thuan": x["nam_thuan"][:1],
+                        "ket_ma": x["ket_luan"]["ma"],
                         "source_id": "dan_gian", "school_id": "dan_gian"})
         elif chung.co(pl["cau_chuan_hoa"], [r"tuoi toi", r"xem tuoi"]):
             goi["can_them"] = ["nam_sinh"]
@@ -452,9 +461,15 @@ def _doan(m: dict) -> tuple[str, str | None]:
                 None)
     if l == "tuoi_lam_nha":
         kl, ho, tt = m["kim_lau"], m["hoang_oc"], m["tam_tai"]
+        # Một câu liệt kê + MỘT câu kết (không nhắc lại phần liệt kê — review EN-1).
+        nt = m.get("nam_thuan") or []
+        ket = ("Theo tập quán, năm này làm nhà thuận." if m.get("ket_ma") == "thuan" else
+               "Dân gian thường tránh làm nhà năm này" + (f"; năm gần nhất không phạm là {nt[0]['nam']} "
+                                                            f"({nt[0]['can_chi']})." if nt else ".")
+               + (" Với cưới hỏi, Kim lâu chỉ xét tuổi cô dâu." if kl else ""))
         return (f"Tuổi làm nhà năm {m['nam_xem']} (quan niệm dân gian, tuổi mụ {m['tuoi_mu']}): "
-                f"{'phạm ' + kl['loai'] if kl['pham'] else 'không phạm Kim Lâu'}; Hoang Ốc: {ho['cung']} "
-                f"({'tốt' if ho['tot'] else 'xấu'}); {'phạm Tam Tai' if tt['pham'] else 'không phạm Tam Tai'}.", None)
+                f"{'phạm ' + kl['ten'] if kl else 'không phạm Kim lâu'}; Hoang ốc {ho['ten']}; "
+                f"{'năm thứ ' + str(tt['nam_thu']) + ' của Tam tai' if tt else 'không phạm Tam tai'}. {ket}", None)
     if l == "goi_y_vi_tri":
         return f"Vị trí {m['doi_tuong']}: {m['noi_dung']}", None
     if l == "so_nhom":
@@ -495,14 +510,10 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     ({huong_do|huong, bo_cuc?}) — chỉ dùng trong lượt gọi, không lưu."""
     pl = phan_loai(cau_hoi)
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
-    nam_xem = pl["nam_xem"] or (ngay_xem.year + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0))
-    goi = goi_bang_chung(pl, sinh, nam_xem)
+    nam_xem, nam_am = chung.nam_xem_hh(pl["nam_xem"], ngay_xem, pl["cau_chuan_hoa"])
+    goi = goi_bang_chung(pl, sinh, nam_xem, nam_am)
     if chung.sao_han_hoi(pl["cau_chuan_hoa"]) and sinh and sinh.get("gioi_tinh") and not goi["can_them"] \
             and pl["xu_ly"] not in chung.DAC_BIET:   # MT-ĐS B3 — không chèn trước lời hỗ trợ / từ chối / dẫn hướng
-        from app.calc import lunar  # noqa: PLC0415
-        from app.config import CALENDAR_MERIDIAN_TZ  # noqa: PLC0415
-        nam_am = pl["nam_xem"] or lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)[2] \
-            + (1 if chung.co(pl["cau_chuan_hoa"], [r"nam sau"]) else 0)
         ng = sinh.get("ngay")
         goi["muc"].insert(0, chung.muc_sao_han(nam_am, sinh["nam"], sinh["gioi_tinh"], ng.month if ng else None, ng.day if ng else None))
         chung.ket(goi)

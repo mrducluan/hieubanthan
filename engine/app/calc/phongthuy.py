@@ -159,27 +159,5 @@ def sao_nam(nam: int) -> dict:
             "thai_tue": _CHI_HUONG[c], "tue_pha": _CHI_HUONG[CHI[(CHI.index(c) + 6) % 12]], "tam_sat": ts}
 
 
-def kim_lau(tuoi_mu: int) -> dict:
-    du = tuoi_mu % 9
-    ten = {1: "Kim Lâu Thân", 3: "Kim Lâu Thê", 6: "Kim Lâu Tử", 8: "Kim Lâu Súc"}.get(du)
-    return {"pham": ten is not None, "loai": ten, "du": du}
+# EN-1 DU-1: kim_lau / hoang_oc / tam_tai / tuoi_lam_nha đã gỡ — một bộ tính duy nhất ở calc.tuoi_dan_gian.
 
-
-HOANG_OC = ["Nhất Cát", "Nhì Nghi", "Tam Địa Sát", "Tứ Tấn Tài", "Ngũ Thọ Tử", "Lục Hoang Ốc"]
-
-
-def hoang_oc(tuoi_mu: int) -> dict:
-    c = HOANG_OC[(tuoi_mu // 10 - 1 + tuoi_mu % 10) % 6]
-    return {"cung": c, "tot": c in ("Nhất Cát", "Nhì Nghi", "Tứ Tấn Tài")}
-
-
-def tam_tai(chi_sinh: str, nam: int) -> dict:
-    nam_tt = next(n for g, _, n in _TAM_HOP if chi_sinh in g)
-    c = chi_nam(nam)
-    return {"pham": c in nam_tt, "cac_nam_chi": list(nam_tt), "chi_nam": c}
-
-
-def tuoi_lam_nha(nam_sinh: int, nam_xem: int) -> dict:
-    t = nam_xem - nam_sinh + 1
-    return {"tuoi_mu": t, "kim_lau": kim_lau(t), "hoang_oc": hoang_oc(t),
-            "tam_tai": tam_tai(chi_nam(nam_sinh), nam_xem)}

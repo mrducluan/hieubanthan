@@ -101,7 +101,8 @@ async def require_engine_key(request: Request, call_next):
         dai = int(request.headers.get("content-length") or 0)
     except ValueError:
         dai = -1
-    if dai < 0 or dai > _TRAN_THAN.get(request.url.path, _TRAN_THAN_MAC_DINH):
+    tran = _TRAN_THAN.get(request.url.path, _TRAN_THAN_MAC_DINH)
+    if dai < 0 or dai > tran:
         return JSONResponse({"detail": "Dữ liệu gửi lên quá lớn"}, status_code=413)
     if expected and request.url.path != "/health":
         # SEC-1: so sánh hằng thời gian (không lộ khoá qua thời gian phản hồi).
@@ -114,6 +115,16 @@ async def require_engine_key(request: Request, call_next):
     if request.url.path.startswith("/v1/") and not gioi_han.xin(ai):
         return JSONResponse({"detail": "Bạn thao tác quá nhanh — vui lòng chờ một phút rồi thử lại."},
                             status_code=429, headers={"Retry-After": "60"})
+    if not request.headers.get("content-length") and request.method in ("POST", "PUT", "PATCH"):
+        # EN-1 (sau kiểm khoá + hạn mức — review): gửi "chunked" (không có content-length) lách được trần ở trên → đếm byte thật khi đọc; Starlette giữ lại
+        # thân đã đọc cho route phía sau.
+        da, phan = 0, []
+        async for khuc in request.stream():
+            da += len(khuc)
+            if da > tran:
+                return JSONResponse({"detail": "Dữ liệu gửi lên quá lớn"}, status_code=413)
+            phan.append(khuc)
+        request._body = b"".join(phan)          # Starlette phát lại thân đã đọc cho route phía sau
     tok = ngan_sach.NGUOI_GOI.set(ai)
     try:
         return await call_next(request)
@@ -243,7 +254,7 @@ def api_hoi_dac_biet(inp: DacBietInput) -> dict:
     """SAO-2: 'an_toan' (khủng hoảng) | 'tu_choi_nhe' | None — web gọi trước khi chặn vì hết lượt hỏi miễn phí, để câu
     khủng hoảng / ngoài phạm vi luôn được trả lời miễn phí. RULES thuần (cùng danh sách với hỏi đáp), không LLM."""
     from app.hoidap import chung
-    return {"loai": chung.dac_biet(chung.chuan_hoa(inp.cau_hoi))}
+    return {"loai": chung.dac_biet(chung.chuan_hoa(inp.cau_hoi), inp.cau_hoi)}
 
 
 @app.post("/v1/thanso/luan-giai")

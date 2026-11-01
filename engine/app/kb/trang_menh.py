@@ -57,7 +57,7 @@ def _nam_dang_chu_y(nam: int, chi: str) -> list[str]:
         f"Năm âm lịch {nam} kéo dài tới {_dmy(tet_sau - dt.timedelta(days=1))}"
         + (f", có tháng {nhuan} nhuận (13 tháng)." if nhuan else ", không có tháng nhuận (12 tháng)."),
         "Năm tuổi (năm cùng con giáp): " + ", ".join(f"{n} ({n - nam + 1} tuổi mụ)" for n in nam_tuoi) + ".",
-        "Năm chạm Kim lâu theo tuổi mụ (dân gian thường tránh làm nhà, cưới hỏi): "
+        "Năm chạm Kim lâu theo tuổi mụ (dân gian thường tránh làm nhà; cưới hỏi thì Kim lâu chỉ xét tuổi cô dâu): "
         + ", ".join(f"{n} ({t} tuổi, {_TEN_KIM_LAU[k]})" for n, t, k in kl) + ".",
         f"Năm Tam tai (tuổi {chi} gặp năm {', '.join(tt)}): " + ", ".join(str(n) for n in tam_tai) + ".",
     ]

@@ -35,7 +35,9 @@ _LINH_VUC_QUE = {"cong_viec": "Công việc", "tinh_cam": "Tình cảm", "gia_di
                  "tien_bac": "Tiền bạc", "hoc_hanh": "Học hành"}
 
 
+@lru_cache(maxsize=8192)
 def _slug(s: str) -> str:
+    """EN-1 HT-2: hàm thuần, được gọi ~80.000 lần cho một mục lục → nhớ kết quả."""
     s = unicodedata.normalize("NFD", s.replace("Đ", "D").replace("đ", "d"))
     s = "".join(c for c in s if unicodedata.category(c) != "Mn").lower()
     return "-".join("".join(c if c.isalnum() else " " for c in s).split())
@@ -348,7 +350,10 @@ _TRANG = {k: (ds, _bs.boc(dung)) for k, (ds, dung) in _TRANG.items()}
 
 
 # ---- API công khai của module -------------------------------------------------
+@lru_cache(maxsize=None)
 def _ten_ngan(loai: str, slug: str) -> str:
+    """Tên ngắn của một trang (cho link liên quan). EN-1 HT-2: nhớ kết quả — mỗi link trước đây dựng lại cả danh sách
+    slug của loại trang (O(n²), mục lục 564 trang mất ~1,35 s). Dữ liệu KB tĩnh trong một bản deploy."""
     if loai == "so":
         return f"Số {slug[3:]}"
     if loai == "que":

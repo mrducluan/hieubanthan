@@ -1013,3 +1013,12 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
   Mỗi bài thành bản nháp "Gửi duyệt": đọc "Ghi chú của Chủ biên" (danh sách thay đổi + điểm trước → sau), xem ảnh bìa nền sáng,
   sửa chữ nếu cần, bấm **Xuất bản**. Đường dẫn có dấu cũ tự chuyển 308 sang đường dẫn không dấu. Sau khi xuất bản hết: Search Console →
   gửi lại `sitemap.xml`. Nếu NotFair (đối tác) phản hồi link kiểm tra bị chuyển hướng → báo em, em đặt lại slug gốc cho bài đó.
+
+## EN-V3. Kế hoạch nâng cấp engine (2026-11-01, `docs/KE-HOACH-NANG-CAP-ENGINE.md` mục 4)
+
+- [ ] Chốt 3 sửa đổi biên làm đổi kết quả cũ (lên `ENGINE_VERSION` 0.1.6): giờ miền Nam 1947–1955 · giờ Tý muộn ngày cuối
+  tháng âm · múi giờ nơi sinh ở nước ngoài cho Bát tự. Em khuyên làm cả ba.
+- [ ] Chọn mô hình AI diễn đạt mới qua OpenRouter (mặc định hiện `anthropic/claude-3.5-sonnet` đã cũ) — đặt env `OPENROUTER_MODEL`.
+- [ ] Hỏi luật sư: Luật Trí tuệ nhân tạo 134/2025 (hiệu lực 01/3/2026) về nhãn "nội dung AI" cho "Hỏi đáp chuyên sâu".
+- [ ] Quyết từng sản phẩm mới ngoài 4 mảng: báo cáo chủ đề giá thấp · đặt tên con · sổ người thân · bản đồ nhóm · xem số SIM/biển số · Tarot · đọc thành tiếng.
+- [ ] Duyệt thứ tự EN-1 → EN-6 (em đề xuất làm EN-1 an toàn + đúng ngay).

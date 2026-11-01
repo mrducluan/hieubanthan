@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import datetime
 
+from app.config import hom_nay_vn as _hom_nay_vn  # EN-1: ngày mặc định theo giờ VN
 from app.calc import thanso, thanso_dong_doi, thanso_mo_rong as mr
 from app.config import ENGINE_VERSION
 from app.kb import store, thanso_v2 as kb2
@@ -32,7 +33,7 @@ def luan_chieu_sau(ngay: int, thang: int, nam_sinh: int,
     Phép tính từ engine (tất định); nghĩa từ KB chiều sâu (có nguồn). Nếu KB
     chưa có nghĩa cho một giá trị → để None, tầng hiển thị im lặng, không bịa.
     """
-    nam_moc = nam_moc or datetime.date.today().year
+    nam_moc = nam_moc or _hom_nay_vn().year
     dd = thanso.duong_doi(ngay, thang, nam_sinh, quy_uoc)
 
     dinh_cao = [
@@ -95,7 +96,7 @@ def luan_mo_rong(ten: str, ngay: int, thang: int, nam: int,
                  ngay_xem: datetime.date | None = None, quy_uoc: str = "tong_het") -> dict:
     """Chỉ số v2 kèm nghĩa từ KB v2: biểu đồ ngày sinh, mũi tên, chỉ số phụ, nghiệp,
     tháng cá nhân. Thiếu nghĩa trong KB → None (tầng hiển thị im lặng)."""
-    hn = ngay_xem or datetime.date.today()
+    hn = ngay_xem or _hom_nay_vn()
     cs = mr.chi_so_mo_rong(ten, ngay, thang, nam, hn.year, hn.month, hn.day, quy_uoc)
     bd = cs["bieu_do"]
     return {

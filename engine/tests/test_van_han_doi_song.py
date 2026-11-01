@@ -240,8 +240,7 @@ def test_bat_tu_nam_cham_hai_cach(bc_bt):
         m1, m2, m = bt.muc_hai_cach(pt, ln["can"], ln["chi"])
         assert (g["muc_cach_1"], g["muc_cach_2"], g["muc"]) == (m1, m2, m)
         assert g["hai_cach_khac"] == (m1 != m2)
-        if m1 != m2:
-            assert "Hai cách đọc" in g["y"]
+        assert ("Hai cách đọc ngược nhau" in g["y"]) is ({m1, m2} == {"thuan", "can_chu_dong"})   # EN-2 ND-4
         xung = any(2 in q["tru"] and q["loai"] == "lục xung" for q in ln["quan_he"])
         assert xung == any(x["ma"] == "xung_ngay" for x in g["co"])
     # Canh Ngọ: 2026 Bính Ngọ năm tuổi, 2032 Nhâm Tý xung tuổi, tam tai Thân–Dậu–Tuất

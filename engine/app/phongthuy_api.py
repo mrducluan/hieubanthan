@@ -28,7 +28,7 @@ router = APIRouter(prefix="/v1/phongthuy", tags=["phongthuy"])
 class SinhInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    birth_date: _dt.date | None = None
+    birth_date: _dt.date | None = Field(default=None, ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))
     birth_year: int | None = Field(default=None, ge=1860, le=2150)
     gender: Literal["nam", "nu"]
     # TP-LICH: mốc đầu năm tính mệnh quái — Lập xuân (mặc định) / Tết theo âm lịch Việt Nam / Trung Quốc.

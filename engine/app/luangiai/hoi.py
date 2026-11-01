@@ -17,12 +17,17 @@ import unicodedata
 
 from app.calc import thanso, thanso_mo_rong as mr
 from app.kb import store, thanso_v2 as kb
+from app.luangiai import an_toan as _at
 
 # --------------------------------------------------------------------------- #
 # Chuẩn hoá
 # --------------------------------------------------------------------------- #
 def chuan_hoa(s: str) -> str:
-    s = s.replace("Đ", "D").replace("đ", "d")
+    # "Ð" (U+00D0, chữ Eth) và "Ɖ" nhìn giống hệt "Đ" nhưng không tách dấu được → quy về D trước khi bỏ dấu.
+    for a in "ĐÐƉ":
+        s = s.replace(a, "D")
+    for a in "đðɖ":
+        s = s.replace(a, "d")
     s = "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
     s = s.lower()
     s = re.sub(r"(?<=[a-z])/(?=[a-z])", " ", s)          # vợ/chồng → vo chong
@@ -51,24 +56,19 @@ def _dem(t: str, mau: list[str]) -> int:
 # --------------------------------------------------------------------------- #
 # Từ khoá
 # --------------------------------------------------------------------------- #
-AN_TOAN = [
-    r"khong muon song", r"muon chet", r"tu tu", r"tu sat", r"bien mat khoi",
-    r"ngu mot giac khong", r"khong con ly do", r"song cung chang de lam gi",
-    r"song cung chang", r"thay minh vo dung", r"bao hanh", r"danh toi",
-    r"bi lua het tien", r"no nan chong chat", r"giai doan cuoi",
-    r"(me|bo|con|chong|vo|ong|ba|anh|chi|em) (toi |minh |em )?vua mat(?! viec| tien| tich)",
-    r"con toi vua mat", r"ket lieu", r"khong thiet song",
-]
+# EN-1: phần lớn mẫu khủng hoảng chuyển sang `luangiai/an_toan.py` (so khớp cả chữ CÓ dấu — bỏ dấu làm trùng nghĩa
+# "từ từ/tự tử", "bảo hành/bạo hành", "đánh giá/đánh tôi"…). Ở đây chỉ giữ mẫu không dấu KHÔNG mơ hồ.
+AN_TOAN = [r"giai doan cuoi", r"ket lieu", r"song cung chang", r"ket thuc som"]
 
 TU_CHOI = {
-    "may_rui": [r"danh de", r"xo so", r"ve so", r"trung so", r"lo de", r"ca cuoc", r"ca do",
+    "may_rui": [r"danh de(?! an| xuat| nghi| tai| cu)", r"xo so", r"ve so", r"trung so", r"lo de", r"ca cuoc", r"ca do",
                 r"so may man de", r"danh lo"],
     "tuyen_dung": [r"tuyen ung vien", r"ung vien", r"sa thai nhan vien", r"nhan vien so chu dao",
                    r"nen tuyen", r"sa thai nhan vien nao"],
     "suc_khoe_the_chat": [r"benh gi", r"mac benh", r"ung thu", r"dau da day", r"vo sinh",
                           r"sinh con duoc khong", r"co nen mo vao", r"phau thuat", r"song tho", r"an gi cho hop",
                           r"suc khoe cua toi the nao", r"khoi benh"],
-    "du_doan_cu_the": [r"nam nao toi chet", r"bao gio toi chet", r"khi nao toi chet", r"tai nan",
+    "du_doan_cu_the": [r"nam nao toi chet", r"bao gio toi chet", r"khi nao toi chet",
                        r"thang kien", r"cho toi biet chac", r"chac chan", r"ngay cu the",
                        r"ten gi sinh nam nao", r"may dua con", r"nam nao toi ly hon",
                        r"gia vang", r"doi nao thang", r"con bao lau"],
@@ -292,8 +292,12 @@ def phan_loai(cau_hoi: str) -> dict:
         kq.update(linh_vuc=lv, doi_tuong=dt, xu_ly=xl, y_dinh=yd)
         return kq
 
-    if _co(t, AN_TOAN):
+    if _at.khung_hoang(cau_hoi) or _co(t, AN_TOAN):
         return xong("khung_hoang", "ban_than", "an_toan", "loi_khuyen")
+    if (loai_tc := _at.tu_choi(cau_hoi)):                      # EN-1: cùng bộ từ chối với Huyền học
+        kq["tu_choi"] = loai_tc
+        return xong("suc_khoe" if loai_tc == "suc_khoe_the_chat" else "ngoai_pham_vi", "ban_than", "tu_choi_nhe",
+                    "du_doan")
     for loai, mau in TU_CHOI.items():
         if _co(t, mau):
             kq["tu_choi"] = loai

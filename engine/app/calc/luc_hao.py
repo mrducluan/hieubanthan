@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import datetime as dt
 
+from app.config import hom_nay_vn as _hom_nay_vn  # EN-1: ngày mặc định theo giờ VN
 from app.calc import vuong_suy as vs
 from app.calc.battu import CHI_NH as _CHI_NH_LIST, LUC_HOP, LUC_XUNG
 from app.calc.kinhdich_vendor import KHAC, SINH, TRI_BITS, info
@@ -179,7 +180,7 @@ def phan_tich(que: dict, tg: dict, dung_than: str | None, thoi_diem: dt.datetime
     """`que` = kết quả `kinhdich.khoi_que`; `tg` = `vuong_suy.thoi_gian(...)`; `dung_than` = một trong 5 lục thân hoặc
     "Ứng" (hào Ứng) hoặc None. → {luc_thu, hao: [...], dung_than: {...} | None, ung_ky: [...]}"""
     ban, bien = que["quai_ban"], que.get("quai_bien")
-    tu_ngay = (thoi_diem.date() if isinstance(thoi_diem, dt.datetime) else thoi_diem) or dt.date.today()
+    tu_ngay = (thoi_diem.date() if isinstance(thoi_diem, dt.datetime) else thoi_diem) or _hom_nay_vn()
     thu = luc_thu(tg["can_ngay"])
     hao = []
     for h in ban["hao"]:

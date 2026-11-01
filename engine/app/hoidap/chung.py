@@ -12,19 +12,10 @@ chuan_hoa = _h.chuan_hoa
 co = _h._co
 dem = _h._dem
 
-AN_TOAN_THEM = [r"chang con ly do", r"con ly do de song", r"ket thuc som", r"muon bien mat",
-                r"danh dap", r"khong thiet song"]
-# MT-ĐS B0 — ý tự hại nói bằng ngôn ngữ huyền học ("mệnh có Địa Kiếp, chắc tôi nên chết đi cho đỡ khổ", "năm tuổi là nên
-# buông tay", "phòng hướng nào nhảy xuống đỡ đau"). Luật: ý tự hại ở BẤT KỲ đâu trong câu thắng mọi từ khoá chuyên môn.
-AN_TOAN_HH = [
-    r"(nen|muon|de|thoi|thi) chet (di|cho|quach|luon|phut)", r"chet di cho", r"chet cho (xong|roi|do)",
-    r"muon ket thuc", r"ket thuc (cuoc doi|tat ca|di|cho xong|het)", r"song lam gi nua", r"chan song",
-    r"(toi|em|minh|con) bien mat", r"bien mat (thi|cho|di)", r"la nen buong tay", r"het chiu noi",
-    r"lam luon cho xong", r"(uong|nuot) het (thuoc|vi)", r"nhay (xuong|lau|cau)", r"tu thieu", r"cat tay",
-    r"tu hai (ban than|minh)", r"tu lam dau", r"khong cho nua dau", r"bo di mai mai", r"luc toi ra di",
-    r"(toi|em|minh) (cu )?muon di theo", r"het muon chet", r"muon chet", r"nghi den (chuyen )?(tu tu|chet)",
-    r"khong muon song",
-]
+# EN-1: mẫu khủng hoảng (kể cả lời nói bằng ngôn ngữ huyền học — "mệnh có Địa Kiếp, chắc tôi nên chết đi") đã gom về
+# MỘT nguồn `luangiai/an_toan.py`, dùng chung với Thần số; so khớp cả chữ có dấu để không chặn nhầm câu bình thường.
+from app.luangiai import an_toan as _at  # noqa: E402
+
 # Từ chối nhẹ: bộ Thần số dùng chung TRỪ các cụm Huyền học trả lời được theo kiểu "định hướng" (MT-ĐS mục 4):
 # "chắc chắn" (B0); "tai nạn", "thắng kiện" (B1: trả lời bằng mảng đi lại / giấy tờ + lưu ý, không có/không).
 _BO_CHAN_HH = {r"chac chan", r"tai nan", r"thang kien"}
@@ -37,8 +28,8 @@ TU_CHOI_HH = [
     r"(con|be|no|ong|ba|bo|me|toi|minh|em|chau|vo|chong) (co )?song duoc (khong|ko)", r"co qua khoi",
     r"(\d{2,3} tuoi|ong noi|ong ngoai|ba noi|ba ngoai|cu nha).{0,40}co (di|mat|ra di) (khong|ko)",
     r"ket thuc doi", r"bat dac ky tu", r"(de|hay|phai) chet(?!\w)", r"so chet (tre|som|bat)", r"chet som", r"chet tre",
-    r"nam nao .{0,30}co nguoi mat", r"(thai|con|be) .{0,25}di tat", r"di tat (bam sinh|thai)", r"bi di tat", r"tai bien", r"tram cam", r"tieu duong", r"benh (phoi|tim|gan|than|xuong|mau)",
-    r"bi than yeu", r"(gan|than|tim|phoi|ung thu|da day) hay (gan|than|tim|phoi|ung thu|da day)", r"uong thuoc gi",
+    r"nam nao .{0,30}co nguoi mat", r"benh (phoi|tim|gan|than|xuong|mau)",
+    r"(gan|than|tim|phoi|ung thu|da day) hay (gan|than|tim|phoi|ung thu|da day)", r"uong thuoc gi",
     r"khoi (duoc )?benh", r"choi (lo|de)(?!\w)", r"so chot", r"danh con (gi|so)", r"so may de trung", r"danh .{0,12}(de|cho) trung",
     r"lam hr|(?<!\w)hr(?!\w)", r"chu (cty|cong ty|doanh nghiep).{0,40}(ung vien|nhan vien|nhan|tuyen)",
     r"nhan vien .{0,40}(nghi viec|trung thuc|giu|chon|nhan|sa thai)", r"tuyen (ke toan|nhan vien|nguoi|nhan su|thu ky)",
@@ -72,11 +63,13 @@ LV_DOI_SONG = {"su_nghiep": "cong_viec", "tinh_yeu": "tinh_cam", "gia_dinh": "gi
                "con_cai": "gia_dinh", "tai_chinh": "tien_bac", "hoc_tap": "hoc_hanh"}
 
 
-def dac_biet(t: str) -> str | None:
-    """'an_toan' | 'tu_choi_nhe' | 'dan_huong' | None — ưu tiên cao nhất, mọi chế độ."""
-    if co(t, _h.AN_TOAN) or co(t, AN_TOAN_THEM) or co(t, AN_TOAN_HH):
+def dac_biet(t: str, raw: str | None = None) -> str | None:
+    """'an_toan' | 'tu_choi_nhe' | 'dan_huong' | None — ưu tiên cao nhất, mọi chế độ. `raw` = câu gốc CÓ dấu (EN-1:
+    phân biệt "dạy/dậy", "mát/mất"…); thiếu thì so trên câu đã bỏ dấu `t`."""
+    goc = raw or t
+    if _at.khung_hoang(goc) or co(t, _h.AN_TOAN):
         return "an_toan"
-    if co(t, TU_CHOI_HH_TAT_CA):
+    if _at.tu_choi(goc) or co(t, TU_CHOI_HH_TAT_CA):
         return "tu_choi_nhe"
     if tam_linh(t):
         return "dan_huong"
@@ -152,3 +145,19 @@ def linh_vuc_doi_song(t: str) -> str | None:
 def ket(goi: dict) -> dict:
     """Điền so_trong_goi để bộ kiểm tra đầu ra chặn số lạ (như thần số)."""
     return _h._ket(goi)
+
+
+def nam_xem_hh(nam_cau: int | None, ngay_xem, t: str) -> tuple[int, int]:
+    """EN-1 DU-2 — "năm nay" của Huyền học không phải năm dương lịch: (năm theo Lập xuân — Bát tự, phi tinh, Thái Tuế;
+    năm âm lịch Việt — tuổi mụ, tuổi làm nhà, sao hạn). Câu nêu rõ "năm 20xx" → dùng đúng số đó cho cả hai; "năm sau"
+    cộng 1. Hỏi ngày 20/01/2027 "năm nay" → Bính Ngọ 2026 (chưa qua Lập xuân 04/02, chưa qua Tết 06/02)."""
+    import datetime as _dt  # noqa: PLC0415
+    from app.calc import huyen_khong, lunar  # noqa: PLC0415
+    from app.config import CALENDAR_MERIDIAN_TZ  # noqa: PLC0415
+    if nam_cau:
+        return nam_cau, nam_cau
+    # "năm tới" và "năm tôi" cùng bỏ dấu thành "nam toi" → loại "năm tôi định / sinh / là / 36 tuổi…" (review EN-1).
+    them = 1 if co(t, [r"nam sau", r"nam toi(?! (dinh|sinh|la|muon|tinh|du|\d|duoc|nay))", r"sang nam"]) else 0
+    lx = huyen_khong.nam_theo_lap_xuan(_dt.datetime(ngay_xem.year, ngay_xem.month, ngay_xem.day, 5))   # 12:00 giờ VN
+    am = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)[2]
+    return lx + them, am + them

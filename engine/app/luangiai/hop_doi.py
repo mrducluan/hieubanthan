@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import datetime
 
+from app.config import hom_nay_vn as _hom_nay_vn  # EN-1: ngày mặc định theo giờ VN
 from app.calc import thanso, thanso_mo_rong as mr
 from app.config import ENGINE_VERSION
 from app.kb import store, thanso_v2 as kb
@@ -43,7 +44,7 @@ def luan_hop_doi(a: dict, b: dict, quan_he: str = QUAN_HE_MAC_DINH, nam_xem: int
                  quy_uoc: str = "tong_het") -> dict:
     """Từ ngày sinh (+ tên nếu có) của hai người. `quy_uoc`: cách cộng Đường đời (TS-V3), cùng một cách cho cả hai."""
     kq = luan_hop_doi_tu_chi_so(_chi_so(a, quy_uoc), _chi_so(b, quy_uoc), quan_he)
-    nam = nam_xem or datetime.date.today().year
+    nam = nam_xem or _hom_nay_vn().year
     kq["nhip_nam"] = {
         "nam": nam, "a": _nhip(a, nam), "b": _nhip(b, nam),
         "cach_doc": ("Năm cá nhân của mỗi người năm nay — hai nhịp khác nhau thì một người muốn tiến, người kia "

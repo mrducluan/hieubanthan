@@ -27,7 +27,11 @@ MocNamCaNhan = str    # "sinh_nhat" | "duong_lich"
 
 def bo_dau(s: str, d_thanh_d: bool = True) -> str:
     """Bỏ dấu tiếng Việt. Đ/đ không phải là D + dấu nên phải xử lý riêng."""
-    s = s.replace("Đ", "D" if d_thanh_d else "").replace("đ", "d" if d_thanh_d else "")
+    # EN-1 BI-4: "Ð" (U+00D0, chữ Eth) và "Ɖ" nhìn giống hệt "Đ" khi gõ/chép tên — trước đây bị bỏ qua âm thầm (Sứ mệnh lệch).
+    for a in "ĐÐƉ":
+        s = s.replace(a, "D" if d_thanh_d else "")
+    for a in "đðɖ":
+        s = s.replace(a, "d" if d_thanh_d else "")
     return "".join(
         c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn"
     )

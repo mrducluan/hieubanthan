@@ -225,7 +225,7 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
     nhan_ra: bool | None = None          # None = không gõ câu (hoặc câu khủng hoảng — không đo)
     nhom_moi: list[str] = []
     if du_dinh and du_dinh.strip():
-        loai = chung.dac_biet(chung.chuan_hoa(du_dinh))
+        loai = chung.dac_biet(chung.chuan_hoa(du_dinh), du_dinh)
         if loai == "an_toan":
             ho_tro = thanso_v2.mau("an_toan")
         elif loai is None:

@@ -1,0 +1,176 @@
+# -*- coding: utf-8 -*-
+"""EN-1 (AT-1) — MỘT bộ chặn an toàn cho cả 5 mảng hỏi đáp (Thần số `luangiai.hoi`, Huyền học `hoidap.chung`),
+`/v1/hoi/dac-biet` và ô "Hôm nay bạn định làm gì".
+
+Vì sao so khớp CẢ chữ có dấu: bỏ dấu làm trùng nghĩa ("dạy/dậy", "mát/mất", "dùng/dừng", "thầy thuốc/thay thuốc",
+"tự kỷ luật/tự kỷ", "thân suy/suy thận", "bảo hành/bạo hành") → bản đầu của EN-1 chặn nhầm 27 câu bình thường (review
+độc lập). Mỗi luật là (mẫu không dấu, mẫu có dấu | None):
+- câu người dùng gõ CÓ dấu → dùng mẫu có dấu nếu luật có (chính xác); không có → mẫu không dấu;
+- câu gõ KHÔNG dấu → mẫu không dấu (chặt hơn ở chỗ mơ hồ, chấp nhận bỏ sót nhẹ hơn chặn nhầm).
+Dấu câu , . ! ? ; được giữ để biết hết vế (`_H`). Không import module nào của app (tránh vòng import)."""
+from __future__ import annotations
+
+import re
+import unicodedata
+
+_H = r"(?=\s*[,.!?;]|\s*$)"          # hết vế câu
+_AI = r"(tôi|em|mình|con|tớ|tao|t|mk)"
+_AI_KD = r"(toi|em|minh|con|to|tao|t|mk)"
+
+# ------------------------------------------------------------------ khủng hoảng (ý tự hại, bạo lực đang xảy ra)
+KHUNG_HOANG: list[tuple[str, str | None]] = [
+    # tự hại nói thẳng
+    (r"(muon|nen|dinh|se|thi|de|thoi|toan) chet (di|cho|quach|luon|phut)", None), (r"chet di cho", None),
+    (r"chet cho (xong|roi|do)", None), (r"(muon|het muon) chet", None), (r"nghi den (chuyen )?(tu tu|chet)", None),
+    (r"(muon|nghi den|dinh|toan|se|nen|da|tinh) tu tu(?! (tim|tinh|lam|roi|hieu|xem|noi|thoi|ma))", r"tự tử|tự sát"),
+    (r"tu sat", r"tự sát"), (r"ket lieu (ban than|doi|minh|cuoc)", None), (r"tu thieu", None),
+    (r"tu (ket thuc|ket lieu) (doi|cuoc doi|cuoc song|ban than)", None),
+    (r"muon ket thuc(?! (du an|hop dong|moi quan he|quan he|viec|cong viec|khoa hoc))", None),
+    (r"ket thuc (cuoc doi|tat ca|het)( cho xong| di)?", None), (r"cham dut (tat ca|cuoc doi|moi thu|cuoc song)", None),
+    (r"(uong|nuot) het (ca )?(vi |lo |hop )?(thuoc|vi thuoc)", None), (r"mua san thuoc ngu", None),
+    (r"nhay (xuong|lau|cau|song)|nhay tu tang", r"nhảy (xuống|lầu|cầu|sông)|nhảy từ tầng"),
+    (r"cat tay|rach tay|tu hai (ban than|minh)|tu lam dau|(muon|hay|thuong) lam dau (ban than|chinh minh)",
+     r"cắt tay|rạch tay|tự hại (bản thân|mình)|tự làm đau|(muốn|hay|thường) làm đau (bản thân|chính mình)"),
+    (r"thu tu biet|(viet|de lai) (san )?di thu|(tinh|muon|se|dinh) ra di (de|cho) (moi nguoi|ca nha|gia dinh|bo me) "
+     r"(khoi|do|bot|nhe|thanh than|duoc thanh than)",
+     r"thư từ biệt|(viết|để lại) (sẵn )?di thư|(tính|muốn|sẽ|định) ra đi (để|cho) (mọi người|cả nhà|gia đình|bố mẹ) "
+     r"(khỏi|đỡ|bớt|nhẹ|thanh thản|được thanh thản)"),
+    (r"(khong|chang) (con )?dang (song|duoc song)", r"(không|chẳng) (còn )?đáng (sống|được sống)"),
+    (r"ra di cho (xong|nhe no|nhe nhang|nhe nguoi)", r"ra đi cho (xong|nhẹ nợ|nhẹ nhàng|nhẹ người)"),
+    (r"bo di mai mai|luc toi ra di|nghi ngoi mai mai|ngu mai mai", r"bỏ đi mãi mãi|lúc tôi ra đi|nghỉ ngơi mãi mãi|ngủ mãi mãi"),
+    (r"la nen buong tay|het chiu noi|lam luon cho xong|khong cho nua dau", None),
+    (_AI_KD + r" (cu )?muon di theo", None),
+    # không muốn sống / không muốn tồn tại (trừ "không muốn sống chung / ở …")
+    (r"(chang|khong|ko|k|het) (con )?muon song( nua)?(?! (chung|o|voi|cung|gan|tai|trong|nhu|kieu|cuoc))",
+     r"(chẳng|không|ko|k|hết) (còn )?muốn sống( nữa)?(?! (chung|ở|với|cùng|gần|tại|trong|như|kiểu|cuộc))"),
+    (r"(chang|khong|ko|k) (con )?(thiet|muon) ton tai|gia nhu " + _AI_KD + r" (khong|chua) (ton tai|duoc sinh ra|co mat)",
+     r"(chẳng|không|ko|k) (còn )?(thiết|muốn) tồn tại|giá như " + _AI + r" (không|chưa) (tồn tại|được sinh ra|có mặt)"),
+    (r"(chang|khong|ko|k|het) (con )?thiet (song|tha (gi )?nua" + _H + r"|tha (gi )?(voi )?(cuoc song|cuoc doi|song))",
+     r"(chẳng|không|ko|k|hết) (còn )?thiết (sống|tha (gì )?nữa" + _H + r"|tha (gì )?(với )?(cuộc sống|cuộc đời|sống))"),
+    (r"chang con ly do|(khong|chang) con ly do (gi )?(de )?(song|tiep tuc)|con ly do de song", None),
+    (r"bien mat (thi|cho|di)(?! (khoi|o|tren))", r"biến mất (thì|cho|đi)(?! (khỏi|ở|trên))"),
+    (r"song (de )?lam gi( nua| ca)?" + _H + r"|song cung chang de lam gi|chan song", None),
+    (r"(cuoc song|cuoc doi|song|moi thu) (that |qua |deu |thay |chang con |khong con )*(vo nghia|y nghia gi)(?! neu)",
+     r"(cuộc sống|cuộc đời|sống|mọi thứ) (thật |quá |đều |thấy |chẳng còn |không còn )*(vô nghĩa|ý nghĩa gì)(?! nếu)"),
+    (r"(chang|khong|ko|k) (con )?gi (de )?(luu luyen|tiec nuoi)", None),
+    # không muốn tỉnh dậy (chỉ dạng "thức dậy" khi gõ không dấu — "dạy/dậy" trùng nhau)
+    (r"(chang|khong|ko|k) muon thuc day( nua| vao sang mai)?",
+     r"(chẳng|không|ko|k) muốn (thức )?dậy (nữa|vào sáng mai)"),
+    (r"ngu (mot giac |luon |mai )?(khong|chang) (bao gio |con )?(tinh |thuc )?(day|tinh)( nua| lai)?",
+     r"ngủ (một giấc |luôn |mãi )?(không|chẳng) (bao giờ |còn )?(tỉnh |thức )?(dậy|tỉnh)( nữa| lại)?"),
+    # gánh nặng / mọi người tốt hơn nếu không có mình
+    (r"(la|chi la|thanh|cai) ganh nang (cho|cua) (moi nguoi|gia dinh|bo me|ca nha|nguoi khac|tat ca)|chi la (cai )?ganh nang"
+     r"|(sinh ra|ton tai) (la|chi la) ganh nang",
+     r"(là|chỉ là|thành|cái) gánh nặng (cho|của) (mọi người|gia đình|bố mẹ|cả nhà|người khác|tất cả)|chỉ là (cái )?gánh nặng"
+     r"|(sinh ra|tồn tại) (là|chỉ là) gánh nặng"),
+    (r"moi nguoi (se )?(vui|nhe nhom|song tot|thanh than|hanh phuc) hon (neu|khi) (khong co|thieu) " + _AI_KD, None),
+    (r"khong ai can " + _AI_KD + r"( ca| nua)?" + _H, r"không ai cần " + _AI + r"( cả| nữa)?" + _H),
+    (r"di (dau do )?(that )?xa cho xong", r"đi (đâu đó )?(thật )?xa cho xong"),
+    (r"(uong het|nhay|chet|ra di|bien mat|ket lieu).{0,25}cho xong", None),
+    (r"(muon |dinh )?bien mat (khoi (cuoc doi|the gioi|tran gian|doi|coi doi)|mai mai|vinh vien)", None),
+    (_AI_KD + r" (muon |chi muon )?bien mat" + _H, _AI + r" (muốn |chỉ muốn )?biến mất" + _H),
+    (r"thay minh vo dung|ngu mot giac khong", None),
+    # bạo lực, xâm hại đang xảy ra (lời hỗ trợ có số 113 / 111)
+    (r"(bi|gia dinh|chong|vo|bo|me) bao hanh|bao hanh (gia dinh|tinh than|tinh duc)|bao luc (gia dinh|tinh duc)",
+     r"bạo hành|bạo lực (gia đình|tình dục)"),
+    (r"bi (danh dap|hanh ha|xam hai|cuong hiep|hiep dam)|cuong hiep|hiep dam|xam hai (tinh duc|than the)|so soang|bop co"
+     r"|doa giet|de doa giet", r"bị (đánh đập|hành hạ|xâm hại|cưỡng hiếp|hiếp dâm)|cưỡng hiếp|hiếp dâm|xâm hại|sờ soạng"
+     r"|bóp cổ|dọa giết|đe dọa giết|doạ giết|đe doạ giết"),
+    (r"bi (chong|vo|bo|me|ba|nguoi yeu|ny|ban trai|ban gai|bo duong|me ke|cha duong) (toi |em |minh )?(danh|tat|dap|hanh ha)"
+     r"(?! (gia|tieng|dau|tien|bai|co|dan|golf|cau))",
+     r"bị (chồng|vợ|bố|mẹ|ba|người yêu|ny|bạn trai|bạn gái|bố dượng|mẹ kế|cha dượng) (tôi |em |mình )?(đánh|tát|đập|hành hạ)"
+     r"(?! (giá|tiếng|dấu|tiền|bài|cờ|đàn|golf|cầu))"),
+    (r"(chong|vo|bo|me|nguoi yeu|ny|ban trai|bo duong|cha duong) (toi |em |minh )?(hay |thuong |cu |suot ngay |da )?"
+     r"(danh|tat|dap|hanh ha) (toi|em|minh)(?! (gia|tieng))",
+     r"(chồng|vợ|bố|mẹ|người yêu|ny|bạn trai|bố dượng|cha dượng) (tôi |em |mình )?(hay |thường |cứ |suốt ngày |đã )?"
+     r"(đánh|tát|đập|hành hạ) (tôi|em|mình)(?! (giá|tiếng))"),
+    (r"danh (toi|em) (gay|chay mau|tim|bam)", r"đánh (tôi|em) (gãy|chảy máu|tím|bầm)"),
+    # biến cố dồn dập (giữ từ bản cũ)
+    (r"bi lua het tien|no nan chong chat", r"bị lừa hết tiền|nợ nần chồng chất"),
+    (r"(me|bo|con|chong|vo|ong|ba|anh|chi|em) (toi |minh |em )?vua mat(?! viec| tien| tich| ngu| dien| nuoc)",
+     r"(mẹ|bố|con|chồng|vợ|ông|bà|anh|chị|em) (tôi |mình |em )?vừa mất(?! việc| tiền| tích| ngủ| điện| nước)"),
+]
+
+# ------------------------------------------------------------------ từ chối nhẹ (chẩn đoán, tuổi chết, may rủi…)
+TU_CHOI: list[tuple[str, str | None, str]] = [
+    # bệnh nặng / chẩn đoán / bỏ thuốc
+    (r"(bi|co|mac|chan doan|khoi) u (gan|phoi|nao|vu|xo|tuyen giap|da day|buong trung|tu cung)",
+     r"(bị|có|mắc|chẩn đoán|khối) u (gan|phổi|não|vú|xơ|tuyến giáp|dạ dày|buồng trứng|tử cung)", "suc_khoe_the_chat"),
+    (r"chan doan (u|ung thu|benh)|lanh hay ac|ung thu|xo gan|dot tu|dot quy|tai bien|vo sinh|tim bam sinh|tieu duong",
+     r"chẩn đoán (u|ung thư|bệnh)|lành hay ác|ung thư|xơ gan|đột tử|đột quỵ|tai biến|vô sinh|tim bẩm sinh|tiểu đường",
+     "suc_khoe_the_chat"),
+    (r"(be|con|chau|bi) .{0,15}(sot cao|co giat)|co giat", r"(bé|con|cháu|bị|đang) .{0,15}sốt cao|sốt cao (co giật|liên tục|mấy ngày|không hạ|không dứt)|co giật", "suc_khoe_the_chat"),
+    (r"(bi|benh|con|be|chau) .{0,12}dong kinh", r"động kinh", "suc_khoe_the_chat"),
+    (r"tu ky(?! luat)", r"tự kỷ(?! luật)", "suc_khoe_the_chat"),
+    (r"(bi|benh|chay) .{0,6}suy than|suy than (giai doan|man|cap)", r"suy thận(?! khí)|thận yếu", "suc_khoe_the_chat"),
+    (r"(bi|mac|chua) tram cam|tram cam nang|thuoc (chong )?tram cam", r"trầm cảm|chống trầm cảm", "suc_khoe_the_chat"),
+    (r"(hoi chung|bi) down", r"(hội chứng|bị) down", "suc_khoe_the_chat"),
+    (r"(thai|be|con) .{0,25}di tat|di tat (bam sinh|thai)|bi di tat", r"dị tật", "suc_khoe_the_chat"),
+    (r"(bo|ngung) (uong )?thuoc (dieu tri|huyet ap|tieu duong|ung thu|bac si|chong tram cam)|(bo|ngung) hoa tri"
+     r"|ngung dieu tri|thuoc nam thay (cho )?thuoc|(uong|dung) thuoc nam (thay|de chua)",
+     r"(bỏ|ngưng|ngừng|dừng) (uống )?thuốc (điều trị|huyết áp|tiểu đường|tim|ung thư|tây|bác sĩ|chống trầm cảm)"
+     r"|(bỏ|ngưng|ngừng|dừng) (hoá|hóa) trị|(ngưng|ngừng|dừng|bỏ) điều trị|thay (cho )?thuốc (bác sĩ|điều trị)"
+     r"|(uống|dùng) thuốc nam (thay|để chữa)", "suc_khoe_the_chat"),
+    (r"(chet|qua doi) vi benh gi|benh gi (se )?(chet|qua doi)", r"(chết|qua đời|mất) vì bệnh gì", "suc_khoe_the_chat"),
+    # tuổi chết / sống được bao lâu (tương lai — không chặn câu hỏi về người đã mất, ngày giỗ)
+    (r"may tuoi (thi |se )?(" + _AI_KD + r" )?(se )?(chet|qua doi)|(?:^|[,.!?;] )" + _AI_KD
+     + r" (se )?(chet|qua doi) (nam|luc|khi) (may tuoi|nao)"
+     r"|(nam|luc) (bao nhieu tuoi|may tuoi) (thi )?(" + _AI_KD + r" )?(se )?(chet|qua doi)",
+     r"mấy tuổi (thì |sẽ )?(" + _AI + r" )?(sẽ )?(chết|qua đời|mất|ra đi)|(?:^|[,.!?;] )" + _AI
+     + r" (sẽ )?(chết|qua đời|mất) (năm|lúc|khi) (mấy tuổi|nào)"
+     r"|(năm|lúc) (bao nhiêu tuổi|mấy tuổi) (thì )?(" + _AI + r" )?(sẽ )?(chết|qua đời|mất)", "du_doan_cu_the"),
+    (r"bao gio (thi )?(toi|em|bo toi|me toi|ong toi|ba toi|chong toi|vo toi|bo|me)? ?(chet|qua doi)",
+     r"bao giờ (thì )?(tôi|em|bố tôi|mẹ tôi|ông tôi|bà tôi|chồng tôi|vợ tôi|bố|mẹ|ba tôi)? ?(chết|qua đời|mất)"
+     r"(?! (việc|tiền|ngủ|điện|nước|lòng|giá|mạng|sóng|hút))", "du_doan_cu_the"),
+    (r"(co|con) qua khoi (khong|ko|duoc)|song (duoc )?(qua|den het) nam nay|con bao lau|song (duoc )?(den )?bao nhieu tuoi",
+     r"(có|còn) qua khỏi (không|ko|được)|sống (được )?(qua|đến hết) năm nay|còn bao lâu|sống (được )?(đến )?bao nhiêu tuổi",
+     "du_doan_cu_the"),
+    (r"(so|con so|xin so) (de|lo)(?! an| xuat)|lo de|danh de(?! an| xuat| nghi| tai| cu)|xo so|ve so|trung so|ca do|ca cuoc"
+     r"|danh lo|so chot|danh con (gi|so)", r"(số|con số|xin số) (đề|lô)(?! án| xuất)|lô đề|đánh đề(?! án| xuất| nghị| tài| cử)|xổ số|vé số|trúng số|cá độ|cá cược"
+     r"|đánh lô|số chốt|đánh con (gì|số)", "may_rui"),
+    (r"(gap|bi) tai nan (chet|nang|mat mang)|tai nan chet nguoi", r"(gặp|bị) tai nạn (chết|nặng|mất mạng)|tai nạn chết người",
+     "du_doan_cu_the"),
+]
+
+_RX: dict[str, re.Pattern] = {}
+
+
+def _rx(m: str) -> re.Pattern:
+    if m not in _RX:
+        _RX[m] = re.compile(r"(?<!\w)(?:" + m + r")(?!\w)")
+    return _RX[m]
+
+
+def _co_dau_thuong(raw: str) -> str:
+    """Chữ thường, NFC, giữ dấu tiếng Việt và dấu ngắt vế , . ! ? ; — các ký tự khác thành khoảng trắng."""
+    s = unicodedata.normalize("NFC", raw or "").lower()
+    for a in "ðɖ":
+        s = s.replace(a, "đ")
+    s = re.sub(r"[^\w\s,.!?;]", " ", s)
+    s = re.sub(r"([,.!?;])", r" \1 ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _bo_dau(s: str) -> str:
+    s = s.replace("đ", "d")
+    return "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
+
+
+def _hai_ban(raw: str) -> tuple[str, str, bool]:
+    cd = _co_dau_thuong(raw)
+    kd = _bo_dau(cd)
+    return cd, kd, cd != kd
+
+
+def khung_hoang(raw: str) -> bool:
+    cd, kd, co_dau = _hai_ban(raw)
+    return any((_rx(c).search(cd) if co_dau and c else _rx(k).search(kd)) for k, c in KHUNG_HOANG)
+
+
+def tu_choi(raw: str) -> str | None:
+    """Loại từ chối ('suc_khoe_the_chat' | 'du_doan_cu_the') hoặc None."""
+    cd, kd, co_dau = _hai_ban(raw)
+    for k, c, loai in TU_CHOI:
+        if _rx(c).search(cd) if co_dau and c else _rx(k).search(kd):
+            return loai
+    return None
