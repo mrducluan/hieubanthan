@@ -128,7 +128,9 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
             )}
             <h2 className="mt-1 text-3xl">Luận giải {ten}</h2>
           </div>
-          {hanhDong && <div className="flex flex-wrap gap-2 print:hidden">{hanhDong}</div>}
+          {/* Điện thoại: hàng nút xuống dưới tiêu đề, kéo trái bằng phần đệm của nút ghost để chữ nút thẳng mép chữ tiêu đề
+              (trước bị lệch vào ~12px và nằm lơ lửng). Từ sm: về góc phải như cũ. */}
+          {hanhDong && <div className="-ml-3 flex w-full flex-wrap gap-1 sm:ml-0 sm:w-auto sm:justify-end sm:gap-2 print:hidden" data-testid="lg-hanh-dong">{hanhDong}</div>}
         </header>
 
         {cotLoi.length > 0 && (

@@ -61,9 +61,17 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
   return (
     <section role="note" aria-labelledby={idTieuDe} data-loai={hop.loai} data-testid="hop-noi-bat"
       className={cn("hop-nb flex flex-col rounded-2xl p-4", className)}>
-      <p className="hop-nhan flex items-center gap-1.5 text-[0.72rem] font-semibold uppercase tracking-wider">
-        <Icon className="hop-icon size-3.5" aria-hidden /> {nhan}
-      </p>
+      {/* Mức của hộp thời điểm đứng cùng hàng nhãn, góc phải — lướt qua lưới 12 tháng / dòng giai đoạn là thấy ngay
+          tháng nào thuận, tháng nào cần lưu ý, không phải đọc hết hộp. Hàng dưới chỉ còn khoảng ngày / tuổi. */}
+      <div className="flex items-start justify-between gap-2">
+        <p className="hop-nhan flex items-center gap-1.5 text-[0.72rem] font-semibold uppercase tracking-wider">
+          <Icon className="hop-icon size-3.5" aria-hidden /> {nhan}
+        </p>
+        {hop.loai === "thoi_diem" && hop.muc && (
+          <span data-muc={hop.muc} data-testid="hop-muc"
+            className="chip-muc -mt-0.5 shrink-0 whitespace-nowrap rounded-full px-2 py-0.5 text-[0.7rem] font-semibold">{NHAN_MUC[hop.muc]}</span>
+        )}
+      </div>
       <h4 id={idTieuDe} className="mt-1 font-sans text-[1.02rem] font-semibold leading-snug text-fg">
         {hop.tieu_de}
         {hop.veto && <span className="ml-2 align-middle rounded-full border border-moon/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-moon" data-testid="hop-veto">Xử lý trước</span>}
@@ -86,10 +94,9 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
           ))}
         </ul>
       )}
-      {hop.loai === "thoi_diem" && (khoang || hop.muc) && (
-        <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-fg-faint" data-testid="hop-thoi-gian">
-          {khoang && <span>{khoang}</span>}
-          {hop.muc && <span data-muc={hop.muc} className="chip-muc rounded-full px-2 py-0">{NHAN_MUC[hop.muc]}</span>}
+      {hop.loai === "thoi_diem" && khoang && (
+        <p className="mt-2 flex items-center gap-1.5 text-xs text-fg-faint" data-testid="hop-thoi-gian">
+          <CalendarClock className="size-3.5 shrink-0" aria-hidden /> {khoang}
         </p>
       )}
       <ViSao canCu={hop.can_cu} thuatNgu={thuatNgu} nho />

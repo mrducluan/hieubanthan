@@ -59,6 +59,20 @@ export function dangOMuc(path: string, m: Pick<MucMenu, "href" | "con">): boolea
   return ds.some((k) => path === k || path.startsWith(k + "/"));
 }
 
+/** Blog để trống menu con (mặc định, hoặc CMS không đặt) → menu con = chuyên mục có bài, nhiều bài trước.
+ *  Biên tập đã tự đặt menu con cho Blog ở CMS thì giữ nguyên. Mô tả: mô tả chuyên mục (cắt ~60 ký tự) hoặc số bài. */
+export function ganChuyenMucBlog(menu: MucMenu[], ds: { slug: string; ten: string; mo_ta?: string | null; so: number }[]): MucMenu[] {
+  if (!ds.length) return menu;
+  const moTa = (c: (typeof ds)[number]) => {
+    const t = (c.mo_ta ?? "").replace(/\s+/g, " ").trim();
+    const dem = `${c.so} bài viết`;
+    return t ? `${t.length > 60 ? `${t.slice(0, 59).replace(/\s+\S*$/, "")}…` : t} · ${dem}` : dem;
+  };
+  return menu.map((m) => m.href === "/blog" && !m.con.length
+    ? { ...m, con: ds.slice(0, 12).map((c) => ({ href: `/blog/chuyen-muc/${encodeURIComponent(c.slug)}`, ten: c.ten, mo_ta: moTa(c) })) }
+    : m);
+}
+
 /** Chỉ MỘT mục sáng: mục khớp đường dẫn dài nhất (vd /blog là mục cha, /blog/chuyen-muc/x là con của mục khác → mục kia). */
 export function mucDangO(path: string, ds: Pick<MucMenu, "href" | "con">[]): number {
   let tot = -1, dai = -1;

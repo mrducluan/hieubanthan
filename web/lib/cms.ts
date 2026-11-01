@@ -101,6 +101,24 @@ export async function dsChuyenMucCms(): Promise<ChuyenMucCms[]> {
   return (r?.docs ?? []).filter((c) => c.slug && c.ten);
 }
 
+/** Menu con của Blog: chuyên mục có ≥ 1 bài đã xuất bản (không noindex), nhiều bài trước — tối đa `toiDa`.
+ *  Chỉ đọc trường chuyen_muc, chờ tối đa 1,5 giây như các khối khung trang; blog tắt / CMS lỗi → []. */
+export async function chuyenMucMenuCms(toiDa = 12): Promise<(ChuyenMucCms & { so: number })[]> {
+  if (!coCms()) return [];
+  const [tn, r] = await Promise.all([
+    tinhNangCms(),
+    goiCms<{ docs: Pick<BaiCmsTomTat, "chuyen_muc">[] }>(`/api/bai-viet?${tv({
+      where: { _status: { equals: "published" }, noindex: { not_equals: true } }, limit: 500, depth: 1, select: { chuyen_muc: true },
+    })}`, { hanMs: HAN_KHUNG }),
+  ]);
+  if (!tn.blog_bat || !r?.docs) return [];
+  const m = new Map<string, ChuyenMucCms & { so: number }>();
+  for (const b of r.docs) for (const c of new Map(cacChuyenMuc(b).map((x) => [x.slug, x])).values()) {
+    m.set(c.slug, { ...c, so: (m.get(c.slug)?.so ?? 0) + 1 });
+  }
+  return [...m.values()].sort((a, b) => b.so - a.so || a.ten.localeCompare(b.ten, "vi")).slice(0, toiDa);
+}
+
 export async function tinhNangCms(): Promise<TinhNangCms> {
   const g = await goiCms<Partial<TinhNangCms>>("/api/globals/tinh-nang?depth=0");
   const ra = { ...TINH_NANG_MAC_DINH };
