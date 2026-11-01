@@ -233,6 +233,26 @@ Thước đo trên holdout_v2:
    (xoá vòng import).
 
 ### EN-5 · Phép tính mới có giá trị cao (3–4 tuần) — khâu NẠP + THU HÚT
+> **Trạng thái 2026-11-01: đã làm mục 1–4, mục 3 một phần, mục 5 để sau.**
+>
+> - **Mục 1 chọn ngày cho cả nhà** — `luangiai/chon_ngay_nhieu.py` + `/v1/lich/chon-ngay-nhieu`, khối "Chọn ngày cho cả
+>   nhà" trên `/xem-ngay-tot`: ngày hợp việc theo sách lịch, không xung tuổi ai (≤ 8 người); người chính (cô dâu, chú rể,
+>   người đứng tên) có lưu ý tháng xung tuổi, Kim lâu cô dâu, tuổi làm nhà, Tam tai (không loại ngày, xếp sau); 12 tháng có
+>   nhãn ngắn + một khối giải thích; gợi ý năm âm không vướng. Chỉ nhập năm sinh, không lưu. **Bảng tháng đại lợi /
+>   tiểu lợi theo tuổi cô dâu chưa đưa vào** — chưa tìm được nguồn đối chiếu (không bịa công thức).
+> - **Mục 2 sao lưu năm Tử vi** — vị trí đọc từ iztro (Lộc Tồn, Kình Dương, Đà La, Thiên Mã, Khôi Việt, Xương Khúc lưu +
+>   Thái Tuế, Tang Môn, Bạch Hổ lưu), đối chứng khẩu quyết 12 năm; lời đời thường KB `tuvi_sao_luu_kb.json` (nháp); khối
+>   trong chương Vận hạn (tên sao chỉ ở "Vì sao nói vậy", khoá SAO-2 không lộ); hỏi đáp "năm nay có Kình Đà lưu không".
+>   Sao lưu không đổi mức của năm.
+> - **Mục 3 Bát tự** — Thai nguyên, Mệnh cung, Thân cung (+ nạp âm), tiểu vận trước khởi đại vận: golden 42 ca oracle
+>   lunar-typescript; thần sát thêm Thiên Y, Hàm Trì (= Đào Hoa). **Chưa làm**: Thiên La Địa Võng, Học Đường, Kim Thần
+>   (sách chép nhiều cách khác nhau, cần chủ dự án chọn phái); chọn ngày theo Bát tự cá nhân (cần cả ngày giờ sinh từng
+>   người — để đợt sau, dùng lại khung mục 1).
+> - **Mục 4 cửa sổ quyết định** — "có nên / khi nào … trong N tháng tới" → `luangiai/cua_so.py` dùng đúng hàm tháng của
+>   Thời gian tới (Tử vi tháng âm, Bát tự tháng tiết), đoạn đầu câu trả lời nêu tháng thuận / tháng nên đi chậm, không
+>   trả lời có/không.
+> - **Mục 5 dòng mốc đời → hiệu chỉnh**: để sau — đối chiếu cách Bát tự (BT-DC) và định giờ sinh đã chạy riêng; gộp thành
+>   một luồng chủ yếu là việc giao diện, giá trị engine thấp hơn các mục trên.
 Xếp theo bằng chứng thị trường (agent D) × khả thi (agent B):
 1. **Chọn ngày theo nhiều người** — cưới hỏi (cô dâu, chú rể, bố mẹ hai bên), khai trương (chủ + đối tác):
    - ghép Kim lâu cô dâu, tháng đại lợi / tiểu lợi, xung từng tuổi;
