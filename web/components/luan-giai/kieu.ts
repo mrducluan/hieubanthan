@@ -114,6 +114,8 @@ export interface BaoCaoDoiSong {
   thoi_gian_bieu?: MocDaiHan[];
   /** MT-ĐS B6: khung "Cần lưu ý ở từng mảng hay hỏi" (7 mảng; dòng của chương khoá SAO-2 chỉ còn tên + mức). */
   luu_y_mang?: LuuYMang[];
+  /** EN-2: không biết giờ sinh — một câu engine soạn, web hiện thành dải riêng đầu bài (không phụ thuộc bản AI). */
+  gio_tam?: string;
   chuong: (ChuongDoiSongMo | ChuongKhoa)[];
   phi?: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null;
     /** SAO-V: chương bạn bè tặng. */ chuong_tang?: number; chuong_tang_ma?: string };

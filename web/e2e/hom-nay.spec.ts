@@ -25,6 +25,8 @@ test("có hồ sơ: thẻ khớp số engine, có câu tự soi, ngày mai, chu�
   await expect(page.getByTestId("the-hom-nay")).toBeVisible();
   const api = await (await request.post("/api/thanso/hom-nay", { data: { ngay: 17, thang: 5, nam: 1990 } })).json();
   await expect(page.getByTestId("so-ngay-ca-nhan")).toHaveText(String(api.ngay_ca_nhan.so));
+  // EN-2 (P2-15): một câu ghép các tín hiệu trong ngày, đúng câu engine dựng
+  await expect(page.getByTestId("hom-nay-tom-lai")).toHaveText(api.tom_lai);
   await expect(page.getByText(api.ngay_ca_nhan.tu_soi)).toBeVisible();
   await expect(page.getByText(`Ngày mai — Ngày cá nhân ${api.ngay_mai.so}:`)).toBeVisible();
   await expect(page.getByTestId("chuoi-ngay")).toContainText("Ngày đầu tiên");
@@ -95,7 +97,8 @@ test("HN-4: câu gõ không nhận ra → chỉ đo mã nhóm cố định, khô
 
 test("Q7: hộp đã bấm 'Đúng với mình' 35 ngày trước → Hôm nay hỏi lại hai câu ba mức, gửi phiếu sau (chỉ mã), không hỏi lại lần hai", async ({ page }) => {
   await napHoSo(page);
-  const ngay = new Date(Date.now() - 35 * 86_400_000).toISOString().slice(0, 10);
+  // Ngày theo giờ VN (trang đếm ngày theo giờ VN) — tính theo UTC thì sau nửa đêm VN lệch 1 ngày.
+  const ngay = new Date(Date.now() + 7 * 3_600_000 - 35 * 86_400_000).toISOString().slice(0, 10);
   await page.addInitScript((g) => localStorage.setItem("hbt.kc_sau.v1", g), JSON.stringify([
     { loai: "doi_song", mau: "ds.phongthuy.tung_phong.luu_y.xa_ngang", phai: "bat_trach_huyen_khong", nhan: "Giường, bàn dưới xà ngang", mo_dun: "phongthuy", ngay, da_hoi: false },
   ]));

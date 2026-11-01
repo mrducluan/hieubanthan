@@ -342,7 +342,8 @@ test("P9 hỏi lại sau 30 ngày: gieo xong máy nhớ MÃ hộp (không câu h
   expect(String(ghiNho[0]!.mau)).toMatch(/^ds\.kinhdich\./);
   expect(JSON.stringify(ghiNho)).not.toContain("ABC");                      // không lưu câu hỏi
   // Lùi ngày ghi nhận 35 ngày → trang Kinh Dịch hỏi lại với lời riêng cho quẻ
-  const ngay = new Date(Date.now() - 35 * 86_400_000).toISOString().slice(0, 10);
+  // Ngày theo giờ VN (trang đếm ngày theo giờ VN) — tính theo UTC thì sau nửa đêm VN lệch 1 ngày.
+  const ngay = new Date(Date.now() + 7 * 3_600_000 - 35 * 86_400_000).toISOString().slice(0, 10);
   await page.evaluate((n) => {
     const ds = JSON.parse(localStorage.getItem("hbt.kc_sau.v1") ?? "[]") as { ngay: string }[];
     localStorage.setItem("hbt.kc_sau.v1", JSON.stringify(ds.map((x) => ({ ...x, ngay: n }))));

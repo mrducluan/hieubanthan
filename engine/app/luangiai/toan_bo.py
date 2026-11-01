@@ -86,9 +86,47 @@ def so_chu_chuong(c) -> int:
     return 0
 
 
+GIO_TAM = {
+    "tuvi": ("Bạn chưa nhập giờ sinh nên lá số đang đọc theo giờ tạm (12 giờ trưa) — các mức trong bài chỉ để tham khảo. "
+             "Thêm giờ sinh, hoặc dùng mục Định giờ sinh để tìm giờ khớp với các mốc đời bạn, rồi đọc lại."),
+    "battu": ("Bạn chưa nhập giờ sinh nên trụ giờ đang lấy theo giờ tạm (12 giờ trưa) — phần con cái, tuổi về sau và vài "
+              "mức trong bài có thể khác khi có giờ thật. Thêm giờ sinh rồi đọc lại."),
+}
+
+
+def gan_gio_tam(bc: dict, mo_dun: str = "tuvi") -> dict:
+    """EN-2 (P2-17): không biết giờ sinh → báo cáo mang `gio_tam` (một câu) — web hiện thành dải riêng đầu bài, không
+    phụ thuộc bản diễn đạt AI (trước: một câu trong đoạn, bản AI có thể lược mất)."""
+    if bc.get("chuong"):
+        bc["gio_tam"] = GIO_TAM.get(mo_dun, GIO_TAM["tuvi"])
+    return bc
+
+
+def diem_nhan_hop(chuong: dict | None) -> str | None:
+    """EN-2 (P2-14): điểm nhấn lời mời = tiêu đề hộp RIÊNG của người đọc trong chương (điểm mạnh trước — mời, không
+    doạ), thay câu tóm tắt dạng "ở mức… nét của bạn…" giống nhau giữa nhiều người. Hộp tham chiếu / đang xem lại bỏ qua."""
+    if (chuong or {}).get("ma") == "van_han":         # VH-1: lời mời Vận hạn chỉ nói năm thuận (đoạn đã dựng sẵn)
+        return None
+    hop = [h for h in (chuong or {}).get("hop") or [] if not h.get("tham_chieu") and not h.get("dang_xem_lai")
+           and (h.get("tieu_de") or "").strip()]
+    for loai in ("diem_manh", "loi_khuyen"):            # chỉ điều đang đỡ / việc nên làm — lời mời không doạ
+        for h in (x for x in hop if x["loai"] == loai):
+            t = h["tieu_de"].strip().rstrip(".")
+            nd = " ".join((h.get("noi_dung") or "").split())
+            cau = re.split(r"(?<=[.!?])\s", nd, maxsplit=1)[0].strip() if nd else ""
+            # Review EN-2 (#8): tiêu đề là NHÃN CỐ ĐỊNH ("Ba điểm mạnh nên dùng", "Giai đoạn nên tận dụng" — có thân
+            # riêng, tiêu đề không phải mở đầu của thân) → lấy câu đầu của thân, là chữ riêng của người đọc.
+            nhan_co_dinh = bool(nd) and not nd.lower().startswith(t.lower()[:12]) and len(t) < 45
+            if nhan_co_dinh and 20 <= len(cau) <= 160 and not re.search(r"\d+\s*[–-]\s*\d+|:\s*\w+,\s*\w+\.$", cau):
+                return cau.rstrip(".") + "."
+            if not nhan_co_dinh and len(t) >= 15:
+                return t + "."
+    return None
+
+
 def _moi_xem(mo_dun: str, ma: str, doan: list[str], chuong: dict | None = None) -> dict:
     chu = so_chu_chuong(chuong) if chuong is not None else sum(len(d.split()) for d in doan)
-    return {"diem_nhan": diem_nhan(doan), "cau_hoi": CAU_HOI_MO.get((mo_dun, ma), "Chương này nói gì về chính bạn?"),
+    return {"diem_nhan": diem_nhan_hop(chuong) or diem_nhan(doan), "cau_hoi": CAU_HOI_MO.get((mo_dun, ma), "Chương này nói gì về chính bạn?"),
             "so_doan": len(doan), "phut_doc": max(1, round(chu / 200))}
 
 

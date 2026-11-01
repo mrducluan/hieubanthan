@@ -106,7 +106,32 @@ def test_ngay_dep_bo_ngay_da_qua():
 
 
 def test_tom_lai_chi_neu_lop_da_tinh():
-    assert L.tom_lai({"dau": ["Tử vi thuận"], "cham": []}).startswith("Tóm lại: tháng thuận")
-    assert "đi chậm" in L.tom_lai({"dau": [], "cham": ["tháng xung tuổi"]})
+    # EN-2 (ND-8): "tháng thuận" chỉ khi ≥ 2 lớp cùng thuận và không lớp nào nhắc chậm; một lớp thì nói rõ là một điểm
+    assert L.tom_lai({"dau": ["Tử vi thuận", "con giáp hợp tuổi"], "cham": []}).startswith("Tóm lại: tháng thuận")
+    mot = L.tom_lai({"dau": ["Tử vi thuận"], "cham": []})
+    assert "tháng thuận" not in mot and "Tử vi thuận" in mot
+    assert "đi chậm" in L.tom_lai({"dau": [], "cham": ["tháng xung tuổi", "Tử vi cần lưu ý"]})
+    assert "đi chậm" not in L.tom_lai({"dau": [], "cham": ["tháng xung tuổi"]})
     assert "lẫn" in L.tom_lai({"dau": ["a"], "cham": ["b"]})
     assert "đều nhịp" in L.tom_lai({"dau": [], "cham": []})
+
+
+def test_viec_chinh_mot_viec_moi_thang():
+    o = L.lop_thang(12, 2026, SINH, "Khảm")                 # tháng Tý xung tuổi Ngọ
+    v = L.viec_chinh(o, "chăm gia đình")
+    assert v and "giấy tờ" in v
+    o2 = L.lop_thang(3, 2027, SINH, "Khảm")
+    v2 = L.viec_chinh(o2, "học sâu")
+    assert v2 and v2.count(".") <= 2
+
+
+def test_giu_yen_chi_nhac_khi_doi():
+    a = L.lop_thang(1, 2027, SINH, "Khảm")
+    b = dict(a, phong_thuy=dict(a["phong_thuy"]))
+    r1 = {r["ma"]: r for r in L.hang_lop(a)}
+    r2 = {r["ma"]: r for r in L.hang_lop(b, truoc=a)}            # cùng góc giữ yên với tháng trước
+    assert "khoan đục" in r1["phong_thuy"]["loi"]
+    assert "khoan đục" not in r2["phong_thuy"]["loi"] and "như tháng trước" in r2["phong_thuy"]["loi"]
+    c = L.lop_thang(2, 2027, SINH, "Khảm")                       # góc khác tháng trước → chỉ nêu góc, không giải thích lại
+    r3 = {r["ma"]: r for r in L.hang_lop(c, truoc=a)}
+    assert "khoan đục" not in r3["phong_thuy"]["loi"] and "Góc nên giữ yên:" in r3["phong_thuy"]["loi"]

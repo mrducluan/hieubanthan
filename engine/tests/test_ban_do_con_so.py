@@ -38,7 +38,7 @@ def test_tong_quan_ban_hiem_co_nao():
     assert f"Đường đời 6" in dau and f"{t['cap']['so_ngay']:,}".replace(",", ".") in dau
     assert "Số 6 xuất hiện 3 lần" in dau          # Đường đời 6 + Linh hồn 6 + Ngày sinh 24 → 6
     assert "Kết nối" in dau and "Biểu đạt" in dau  # lời mời chương bên trong/bên ngoài (chỉ nêu tên nhóm)
-    assert "thiếu 3, 5, 6, 7" in dau and "không phải theo số người" in dau and "tháng then chốt" in dau
+    assert "thiếu 3, 5, 6, 7" in dau and "không phải theo số người" in dau and "tháng đáng chú ý" in dau
 
 
 def test_nghich_ly():
@@ -54,7 +54,7 @@ def test_muoi_hai_thang():
     assert "Năm cá nhân 8" in chu and "10/2026" in chu and "9/2027" in chu and "10/2027" not in chu
     assert "giai đoạn 2/4" in chu and "2027" in chu
     assert "khởi sự việc mới: 11/2026" in chu and "tiền bạc, thăng tiến: 8/2027" in chu
-    assert chu.count("Tháng then chốt — quan hệ, hợp tác") <= 2   # mỗi loại việc tối đa 2 tháng
+    assert chu.count("Tháng nên đánh dấu — quan hệ, hợp tác") <= 2   # mỗi loại việc tối đa 2 tháng
     assert "Từ tháng 1/2027: năm cá nhân 9" in chu and "đầu năm dương lịch" in chu
 
 

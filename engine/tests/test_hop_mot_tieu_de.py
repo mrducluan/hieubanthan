@@ -83,12 +83,15 @@ def test_suc_khoe_mot_hop_than_the_du_bo_phan(bai_tv):
         if not hop:
             continue
         h = hop[0]
-        # mọi nguồn trong "Vì sao nói vậy" đều có bộ phận của mình trong thân hộp (không bỏ sót nguồn nào)
-        for cu in h["can_cu"]:
-            sao = cu.split(" (")[0]
-            bp = (kb.suc_khoe(sao) or {}).get("bo_phan")
-            if bp:
-                assert bp in h["noi_dung"], (bp, h["noi_dung"])
+        # EN-2 (P1-10): thân nêu TỐI ĐA hai phần cơ thể, lấy từ bộ phận sách xưa gắn với các sao nguồn (không liệt kê
+        # 3–10 phần như trước — gây lo, vô nghĩa); nguồn vẫn đủ ở "Vì sao nói vậy".
+        import re
+        tat_ca = {p.strip() for cu in h["can_cu"] for p in re.split(r",|;| và ",
+                  (kb.suc_khoe(cu.split(" (")[0]) or {}).get("bo_phan") or "") if p.strip()}
+        m = re.search(r"(?:phòng ngừa là|sách xưa nhắc chăm sóc phòng ngừa) (.+?)\.", h["noi_dung"])
+        if m:
+            neu = [p.strip() for p in m.group(1).split(" và ")]
+            assert 1 <= len(neu) <= 2 and set(neu) <= tat_ca, (neu, h["noi_dung"])
         assert ds.MA_MAU_RE.match(h["ma_mau"])
 
 
@@ -119,5 +122,7 @@ def test_tieu_de_trung_noi_ve_ke_cua_cau_than():
     assert doi == {("b", "Bạn điềm tĩnh"): "Bạn điềm tĩnh, biết tổ chức và giữ của"}
     bc = {"cot_loi": [dict(_hop()[1])], "chuong": [{"ma": "x", "hop": _hop(), "doan": ["x"]}]}
     kh.gon_bao_cao(bc)
-    assert bc["cot_loi"][0]["tieu_de"] == "Bạn điềm tĩnh, biết tổ chức và giữ của"
-    assert bc["cot_loi"][0]["noi_dung"] == bc["chuong"][0]["hop"][1]["noi_dung"] == "Dễ được giao việc lớn."
+    # EN-2 (ND-3): câu thân ngắn (≤ 90) → tiêu đề là TRỌN câu, thân trống; hộp "Điều quan trọng nhất" cùng mã theo y hệt
+    td = "Bạn điềm tĩnh, biết tổ chức và giữ của, dễ được giao việc lớn"
+    assert bc["cot_loi"][0]["tieu_de"] == bc["chuong"][0]["hop"][1]["tieu_de"] == td
+    assert bc["cot_loi"][0]["noi_dung"] == bc["chuong"][0]["hop"][1]["noi_dung"] == ""

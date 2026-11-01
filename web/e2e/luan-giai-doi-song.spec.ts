@@ -483,3 +483,12 @@ test("Trục 1: reading_completed chỉ tính khi đã mở và đọc tới h�
   await page.mouse.wheel(0, 50);
   await expect.poll(dem, { timeout: 10_000 }).toBe(1);
 });
+
+test("EN-2: báo cáo có gio_tam (không biết giờ sinh) → dải riêng đầu bài; không có thì không hiện", async ({ page }) => {
+  const cau = "Bạn chưa nhập giờ sinh nên lá số đang đọc theo giờ tạm (12 giờ trưa) — các mức trong bài chỉ để tham khảo.";
+  await moBaoCao(page, { bc: { ...BC, gio_tam: cau } });
+  await expect(page.getByTestId("lg-gio-tam")).toHaveText(cau);
+  await page.unrouteAll({ behavior: "ignoreErrors" });
+  await moBaoCao(page);
+  await expect(page.getByTestId("lg-gio-tam")).toHaveCount(0);
+});

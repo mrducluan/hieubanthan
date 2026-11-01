@@ -206,6 +206,27 @@ def _viec_nho(so_ngay: int, ngay: int, thang: int, nam: int, ngay_xem: dt.date) 
     return None
 
 
+def _tom_lai(so_ngay: int, nghia_thang: dict, hl: dict) -> str:
+    """EN-2 (P2-15): MỘT câu ghép ngày cá nhân + chủ đề tháng + lịch (hoàng/hắc đạo, trực) — chỉ dữ kiện đã tính."""
+    nghia = (thanso_v2.nghia_phu("ngay_ca_nhan", so_ngay) or "")
+    nghia = nghia.split(": ", 1)[1] if ": " in nghia else nghia
+    nghia = nghia.rstrip(".")
+    from app.luangiai.hoang_lich import KB as _HL, TRUC_TOT  # noqa: PLC0415
+    tot = any(_HL["truc"].get(m, {}).get("ten") == hl["truc"] for m in TRUC_TOT)
+    # Review EN-2 (#11): hai câu ngắn thay một câu nối dài; tên trực (thuật ngữ lịch) bỏ — chỉ còn nghĩa của nó.
+    if hl.get("hoang_dao") and tot:
+        lich = "Theo lịch, hôm nay là ngày tốt, hợp mở việc đã chuẩn bị"
+    elif hl.get("hoang_dao"):
+        lich = "Theo lịch, hôm nay là ngày tốt nhưng việc lớn nên chọn giờ đẹp; việc thường cứ làm"
+    elif tot:
+        lich = "Theo lịch, hôm nay là ngày thường, hợp việc vừa sức"
+    else:
+        lich = "Theo lịch, hôm nay là ngày thường, hợp việc quen tay hơn mở việc lớn"
+    thang = (nghia_thang.get("chu_de") or "").lower()
+    return (f"Hôm nay là ngày cá nhân {so_ngay} của bạn — {nghia[:1].lower() + nghia[1:]}"
+            + (f", trong {thang} của bạn" if thang else "") + f". {lich}.")
+
+
 def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
                 y_dinh: list[str] | None = None, du_dinh: str | None = None) -> dict:
     y, m, d = ngay_xem.year, ngay_xem.month, ngay_xem.day
@@ -234,7 +255,9 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
             nhom_moi = [] if nhan_ra else nhom_chua_ho_tro(du_dinh)
     cac_y_dinh = [] if ho_tro else _y_dinh(so_ngay, list(y_dinh or []) + nhan_dien)
     so_pq = mr.ngay_pho_quat(y, m, d)
+    hl = _hoang_lich(ngay_xem, ngay, thang, nam, [x["ma"] for x in cac_y_dinh] or list(y_dinh or []))
     return {
+        "tom_lai": _tom_lai(so_ngay, nghia_thang, hl),
         "ngay_xem": ngay_xem.isoformat(),
         "am_lich": {
             "ngay": ad, "thang": am, "nam": ay, "nhuan": bool(nhuan),
@@ -259,7 +282,7 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
         "viec_nho": _viec_nho(so_ngay, ngay, thang, nam, ngay_xem),
         "ngay_pho_quat": {"so": so_pq, "nghia": thanso_v2.ngay_pho_quat(so_pq)},
         "chaldea": thanso_chaldean.ngay_chaldea(ngay, d),
-        "hoang_lich": _hoang_lich(ngay_xem, ngay, thang, nam, [x["ma"] for x in cac_y_dinh] or list(y_dinh or [])),
+        "hoang_lich": hl,
         "que_ngay": _que_ngay(ngay_xem),
         "nhip_bat_tu": _nhip_bat_tu(ngay, thang, nam, ngay_xem),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],

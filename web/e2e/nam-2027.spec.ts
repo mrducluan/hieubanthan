@@ -71,6 +71,9 @@ test("/thoi-gian-toi: chưa có hồ sơ → form; có hồ sơ → 4 chương, 
   // TG-V2: mỗi tháng của chương miễn phí có đủ lớp (thần số · con giáp · phong thuỷ · ngày đẹp · Tử vi · Bát tự)
   const thang = vung.locator('[data-loai="thoi_diem"]').filter({ has: page.getByTestId("hop-lop") }).first();
   await expect(thang.getByTestId("hop-tom-lai")).toContainText("Tóm lại");
+  await expect(thang.getByTestId("hop-lop")).toBeHidden();                 // EN-2: các cách xem gập mặc định
+  await thang.getByTestId("hop-lop-mo").click();
+  await expect(thang.getByTestId("hop-lop")).toBeVisible();
   for (const ma of ["thanso", "con_giap", "phong_thuy", "ngay_dep", "tuvi", "battu"]) await expect(thang.locator(`[data-lop="${ma}"]`)).toHaveCount(1);
   const nut = vung.getByRole("button", { name: /Năm âm lịch đang đi/ });
   await nut.click();
@@ -84,6 +87,7 @@ test("/thoi-gian-toi chỉ có ngày sinh: mời bổ sung giờ sinh, vẫn đ�
   await expect(page.getByTestId("thoi-gian-toi")).toContainText("năm cá nhân", { timeout: 30_000 });
   // TG-V2: không giờ sinh vẫn có con giáp + ngày đẹp từng tháng; thiếu giới tính → phong thuỷ mời bổ sung
   const thang = page.locator('[data-loai="thoi_diem"]').filter({ has: page.getByTestId("hop-lop") }).first();
+  await thang.getByTestId("hop-lop-mo").click();
   await expect(thang.locator('[data-lop="con_giap"]')).toHaveCount(1);
   await expect(thang.locator('[data-lop="ngay_dep"]')).toHaveCount(1);
   await expect(thang.locator('[data-lop="phong_thuy"]')).toContainText("giới tính");

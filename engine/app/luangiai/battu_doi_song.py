@@ -52,6 +52,7 @@ from __future__ import annotations
 
 import collections
 import datetime as dt
+import re
 
 from app import config
 from app.calc import battu as bt_calc
@@ -594,6 +595,12 @@ KHUNG_HAI_CACH = ("Bát tự có hai cách đọc phần cần thêm, cần bớ
                   "thì bài ghi \"hai cách đọc ngược nhau\" — lúc ấy nên thử nhỏ trước và đối chiếu với điều bạn đã trải qua.")
 
 
+
+def _hai_phan(co_the: str) -> str:
+    """EN-2 (P1-10, review #13): nêu TỐI ĐA hai phần cơ thể (như Tử vi) — liệt kê dài gây lo, không thêm giá trị."""
+    phan = [p.strip() for p in re.split(r",| và ", co_the or "") if p.strip()]
+    return " và ".join(phan[:2]) if phan else co_the
+
 def _van_kb(tt: str) -> dict:
     return kb.van(tt) or {"chu_de": tt.lower(), "nen_thuan": "Hợp để dồn sức cho việc chính.", "de_vap": "",
                           "nen_chu_dong": "Nên chuẩn bị sớm cho việc lớn."}
@@ -1089,13 +1096,13 @@ def _chuong_suc_khoe(pt: dict, cm: dict, hoc: tuple) -> dict:
     lon = max(THU_TU_HANH, key=lambda h: (tl[h], -THU_TU_HANH.index(h)))
     if tl[lon] >= NGUONG_DAM:
         k = kb.hanh(lon)
-        nd = (f"Sách xưa gắn {lon} với {k['co_the']} — nên chăm sóc phòng ngừa." if k.get("co_the") else "")
+        nd = (f"Sách xưa gắn {lon} với {_hai_phan(k['co_the'])} — nên chăm sóc phòng ngừa." if k.get("co_the") else "")
         nd = f"{nd} {k.get('nhip_thua') or ''}".strip() or "Bạn nên để ý nhịp nghỉ của mình."
         cand.append(_hop("luu_y", "Phần cơ thể nên chăm sóc", nd, [f"{lon} chiếm {_pct(tl[lon])} điểm ngũ hành (thừa)"],
                          _mm("suc_khoe", "thua", slug(lon), "vap"), 2.0, huong=k.get("loi_khuyen_sk") or _SK_MAC_DINH))
     for i, h in enumerate([h for h in THU_TU_HANH if pt["diem"][h] == 0][:2]):
         k = kb.hanh(h)
-        nd = (f"Phần sách xưa gắn với {h} là {k['co_the']} — nên chăm sóc phòng ngừa." if k.get("co_the") else "")
+        nd = (f"Phần sách xưa gắn với {h} là {_hai_phan(k['co_the'])} — nên chăm sóc phòng ngừa." if k.get("co_the") else "")
         nd = f"{nd} {k.get('nhip_thieu') or ''} {k.get('loi_khuyen_sk') or _SK_MAC_DINH}".strip()
         cand.append(_hop("loi_khuyen", f"Phần nên bù thêm: {h}", nd, [f"{h}: 0 điểm (thiếu)"],
                          _mm("suc_khoe", "thieu", slug(h), "khuyen"), 1.8 - 0.01 * i))

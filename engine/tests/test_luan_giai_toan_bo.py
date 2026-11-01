@@ -62,7 +62,7 @@ def _kiem_moi_xem(bc: dict):
         assert m["cau_hoi"].endswith("?") and len(m["cau_hoi"]) <= 160
         assert 1 <= len(m["diem_nhan"]) <= 200
         # điểm nhấn là dữ kiện đã có trong chính chương đó (không thêm dữ kiện ngoài input)
-        assert any(d.startswith(m["diem_nhan"].rstrip("…")) for d in c["doan"]), (c["ma"], m["diem_nhan"])
+        assert _diem_nhan_tu_chuong(c, m["diem_nhan"]), (c["ma"], m["diem_nhan"])
         assert m["so_doan"] == len(c["doan"]) and m["phut_doc"] >= 1
         assert not any(t in (m["cau_hoi"] + m["diem_nhan"]).lower() for t in _CAM_DOA)
 
@@ -121,4 +121,12 @@ def test_tv_v2_noi_dung_hai_chuong(sinh):
     assert "Ưu tiên: đại hạn > lưu niên > tiểu hạn > lưu nguyệt" in nn["can_cu"]
     assert nn["hop"][0]["ma_mau"].startswith("ds.nam_nay.dai_han.")
     # điểm nhấn của chương khoá là câu tóm tắt đã tính của chính chương
-    assert db["moi_xem"]["diem_nhan"] and nn["doan"][0].startswith(nn["moi_xem"]["diem_nhan"].rstrip("…"))
+    assert db["moi_xem"]["diem_nhan"] and _diem_nhan_tu_chuong(nn, nn["moi_xem"]["diem_nhan"])
+
+
+def _diem_nhan_tu_chuong(c: dict, dn: str) -> bool:
+    """EN-2 (P2-14): điểm nhấn lời mời cắt từ CHÍNH chương — tiêu đề một hộp của chương, hoặc đầu một đoạn."""
+    t = dn.rstrip("…").rstrip(".")
+    return any(h.get("tieu_de", "").rstrip(".") == t for h in c.get("hop") or []) or \
+        any((h.get("noi_dung") or "").startswith(t) for h in c.get("hop") or []) or \
+        any(d.startswith(dn.rstrip("…")) for d in c.get("doan") or [])   # review EN-2 #8: câu đầu thân hộp nhãn cố định

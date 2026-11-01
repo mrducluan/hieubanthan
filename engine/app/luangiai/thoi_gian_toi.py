@@ -105,7 +105,8 @@ def _thang_ts(ngay: int, thang: int, tu: dt.date, so: int) -> list[dict]:
         ra.append(_gan(kh.hop("thoi_diem", f"Tháng {m}/{y}: {o['nhan'].lower()}",
                               f"Hợp {', '.join(o['hop_de'])}.",
                               can_cu=[f"Tháng cá nhân {s} (thần số, tháng dương lịch {m}/{y})"],
-                              ma=kh.ma_mau("thanso", "thang", f"so{s}", f"t{m}")), "thanso", thang=f"{m}/{y}", so=s))
+                              ma=kh.ma_mau("thanso", "thang", f"so{s}", f"t{m}")), "thanso", thang=f"{m}/{y}", so=s,
+                       hop_de=o["hop_de"][0]))
         m, y = (1, y + 1) if m == 12 else (m + 1, y)
     return ra
 
@@ -249,6 +250,7 @@ def gop_thang(ts: list[dict], tv: list[dict], bt: list[dict], lop: dict[str, dic
     thuỷ · ngày đẹp (không cần giờ sinh) · Tử vi (tháng âm chứa ngày 15) · Bát tự (tháng tiết chứa ngày 15). Chỉ ghép câu +
     mức đã có; mức của hộp chỉ khi hai lá số cùng mức (lớp tập quán / phong thuỷ không đổi mức)."""
     ra = []
+    truoc = None
     for h in ts:
         mm, yy = (int(x) for x in h["thang"].split("/"))
         giua = dt.date(yy, mm, 15)
@@ -257,7 +259,8 @@ def gop_thang(ts: list[dict], tv: list[dict], bt: list[dict], lop: dict[str, dic
         o = lop.get(h["thang"])
         hang = [{"ma": "thanso", "nhan": L.TEN_LOP["thanso"], "tieu": f"Tháng cá nhân {h['so']}", "loi": h["noi_dung"]}]
         if o:
-            hang += L.hang_lop(o)
+            hang += L.hang_lop(o, truoc)
+            truoc = o
         if a:
             hang.append({"ma": "tuvi", "nhan": L.TEN_LOP["tuvi"], "tieu": a["tieu_de"], "loi": a["loi"].rstrip(".") + ".",
                          "muc": a.get("muc")})
@@ -268,8 +271,10 @@ def gop_thang(ts: list[dict], tv: list[dict], bt: list[dict], lop: dict[str, dic
         cu = list(h.get("can_cu", [])) + (L.can_cu_lop(o) if o else []) + (a or {}).get("can_cu", [])[:2] \
             + (b or {}).get("can_cu", [])[:1]
         tom = L.tom_lai(L.tin_hieu(o, a and a.get("muc"), b and b.get("muc"))) if o else h["noi_dung"]
+        viec = L.viec_chinh(o, h.get("hop_de")) if o else ""
         hop = _gan(kh.hop("thoi_diem", h["tieu_de"], tom, can_cu=cu,
-                          ma=kh.ma_mau("tgt", "thang", f"so{h['so']}", muc or "khac"), muc=muc),
+                          ma=kh.ma_mau("tgt", "thang", f"so{h['so']}", muc or "khac"), muc=muc,
+                          **({"huong_xu_ly": viec} if viec else {})),
                    "hai_la_so" if a and b else "thanso", thang=h["thang"], so=h["so"])
         hop["lop"] = hang
         ra.append(hop)
@@ -373,14 +378,24 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
                            can_cu=[f"Năm cá nhân {so_nam} — thần số, tính theo năm dương lịch {nam} (mốc 1/1)"],
                            ma=kh.ma_mau("thanso", "nam", f"so{so_nam}")), "thanso", so=so_nam)]
     tom = f"Năm {nam} là năm cá nhân {so_nam} của bạn: {ng.get('chu_de', '').lower()}."
+    muc_nam: dict[str, str] = {}
     for bc, nguon, ten, dau in ((tv, "tuvi", "Tử vi", "ds.nam_nay.luu_nien."), (bt, "battu", "Bát tự", "ds.bt.nam_nay.nam.")):
         if bc:
             c = _doi_nam(_chuong_cua(bc, "nam_nay"), nam) if nam_toi else _chuong_cua(bc, "nam_nay")
             h = next((x for x in c["hop"] if x.get("ma_mau", "").startswith(dau) and x.get("muc")), None)
             if h:
+                # Thời gian tới không có khung "hai cách đọc" của bài Bát tự → nói rõ đây là hai cách TRONG Bát tự, khỏi lẫn
+                # với hộp "hai lá số" (Tử vi ↔ Bát tự) ngay dưới.
+                nd = h["noi_dung"].replace("Hai cách đọc ngược nhau", "Ngay trong Bát tự, hai cách đọc cũng ngược nhau")
                 tom_nam.append(_gan(kh.hop("cot_loi", f"Năm {nam} theo {ten}: {kh.NHAN_MUC[h['muc']].lower()}",
-                                           h["noi_dung"], can_cu=h.get("can_cu"),
+                                           nd, can_cu=h.get("can_cu"),
                                            ma=kh.ma_mau("tgt", nguon, "nam", h["muc"]), muc=h["muc"]), nguon))
+                muc_nam[nguon] = h["muc"]
+    # EN-2: lớp nhất quán liên mảng — Tử vi và Bát tự cùng mức năm → điểm nhấn; khác mức → vì sao + việc nên làm chung
+    from app.luangiai import nhat_quan  # noqa: PLC0415
+    h_nq = nhat_quan.nam(nam, muc_nam)
+    if h_nq:
+        tom_nam.append(_gan(h_nq, "hai_la_so"))
     # TG-V2: lớp từng tháng (con giáp · phong thuỷ · ngày đẹp) + Tử vi / Bát tự — tính một lần cho 12 tháng
     from app.luangiai import nam_tong_quan as ntq  # noqa: PLC0415
     quai = P.menh_quai(ngay_sinh.year, gioi_tinh, ngay_sinh)["quai"] if gioi_tinh else None

@@ -98,7 +98,7 @@ def test_hop_dong(bc):
         assert 2 <= len(c["hop"]) <= 6, c["ma"]
         for h in c["hop"]:
             assert h["loai"] in LOAI_HOP - {"cot_loi"}
-            assert 0 < len(h["tieu_de"]) <= 90 and h["noi_dung"]  # EN-2 ND-3: tiêu đề = trọn câu đầu ≤ 90 and isinstance(h["can_cu"], list)
+            assert 0 < len(h["tieu_de"]) <= 130 and (h["noi_dung"] or len(h["tieu_de"]) > 40)  # EN-2 ND-3: tiêu đề = trọn câu; hộp một câu thì thân trống and isinstance(h["can_cu"], list)
             assert bt.MA_MAU_RE.match(h["ma_mau"]) and h["ma_mau"].startswith(f"ds.bt.{c['ma']}."), h["ma_mau"]
             assert not any(k.startswith("_") for k in h)
             if h["loai"] == "luu_y":                       # mỗi lưu ý kèm hướng xử lý, nằm ngay trong hộp
@@ -306,7 +306,7 @@ def test_khong_cau_barnum_tren_golden():
     dem: collections.Counter = collections.Counter()
     for ca in _G:
         b = toan_bo.battu(_sinh(ca), ngay_xem=dt.date.fromisoformat(ca["ngay_xem"]))
-        dem.update({h["noi_dung"] for h in _hop_chuong(b) if h["loai"] in ("diem_manh", "luu_y")})
+        dem.update({h["noi_dung"] or h["tieu_de"] for h in _hop_chuong(b) if h["loai"] in ("diem_manh", "luu_y")})
     tran = 0.7 * len(_G)
     assert not [(n, s) for s, n in dem.items() if n > tran]
 
@@ -315,7 +315,7 @@ def test_moi_xem_va_cau_hoi_mo(bc):
     for c in bc["chuong"]:
         m = c["moi_xem"]
         assert ("battu", c["ma"]) in toan_bo.CAU_HOI_MO
-        assert m["cau_hoi"].endswith("?") and any(d.startswith(m["diem_nhan"].rstrip("…")) for d in c["doan"])
+        assert m["cau_hoi"].endswith("?") and _diem_nhan_tu_chuong(c, m["diem_nhan"])
         assert not kb_tv.tim_cum_cam(m["cau_hoi"], DOA)
 
 
@@ -668,3 +668,11 @@ def test_thang_chi_to_mau_khi_tin_hieu_ro():
     tong = sum(dem.values())
     assert all(0.10 <= dem[m] / tong < 0.65 for m in ("thuan", "can_bang", "can_chu_dong")), dict(dem)
     assert 1 <= sum(cam) / len(cam) <= 3, sum(cam) / len(cam)
+
+
+def _diem_nhan_tu_chuong(c: dict, dn: str) -> bool:
+    """EN-2 (P2-14): điểm nhấn lời mời cắt từ CHÍNH chương — tiêu đề một hộp của chương, hoặc đầu một đoạn."""
+    t = dn.rstrip("…").rstrip(".")
+    return any(h.get("tieu_de", "").rstrip(".") == t for h in c.get("hop") or []) or \
+        any((h.get("noi_dung") or "").startswith(t) for h in c.get("hop") or []) or \
+        any(d.startswith(dn.rstrip("…")) for d in c.get("doan") or [])   # review EN-2 #8: câu đầu thân hộp nhãn cố định

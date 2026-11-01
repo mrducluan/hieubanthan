@@ -15,7 +15,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from app.calc import battu, battu_mo_rong
 from app.kb import tu_dien
 from app import nhat_ky
-from app.config import ENGINE_VERSION
+from app.config import ENGINE_VERSION, HourConfidence
 from app.hoidap import battu as hoidap_bt
 from app.kb import battu_kb
 from app.kb import battu_doi_song_kb
@@ -135,7 +135,8 @@ def api_luan_giai(inp: LuanGiaiBTInput) -> dict:
     from app.narrative import luan_giai_van
     sinh, flags = _sinh(inp.la_so)
     trong_so = {k: v.model_dump() for k, v in inp.trong_so.items()} if inp.trong_so else None
-    bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(
-        toan_bo.battu(sinh, ngay_xem=inp.ngay_xem, trong_so=trong_so, ca_nhan=inp.ca_nhan),
-        toi_da=inp.dien_dat_toi_da))
+    bc = toan_bo.battu(sinh, ngay_xem=inp.ngay_xem, trong_so=trong_so, ca_nhan=inp.ca_nhan)
+    if inp.la_so.do_tin_gio is HourConfidence.UNKNOWN:
+        bc = toan_bo.gan_gio_tam(bc, "battu")
+    bc = luan_giai_van.gan_thuat_ngu(luan_giai_van.dien_dat(bc, toi_da=inp.dien_dat_toi_da))
     return {"engine_version": ENGINE_VERSION, **bc, "co_canh_bao": flags}
