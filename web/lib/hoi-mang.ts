@@ -14,6 +14,8 @@ export interface HoiMangRes {
   /** HD-CS — khối hình engine dựng kèm câu trả lời. */
   truc_quan?: KhoiTrucQuan[];
   hoi_tiep?: string[];
+  /** EN-3: độ tin thấp → mời chọn câu cụ thể hơn. */
+  hoi_lai?: { cau: string; chon: string[] } | null;
   error?: string;
   luot?: LuotHoi;
 }
@@ -45,6 +47,7 @@ export async function hoiMang<T extends HoiMangRes>(
     thuatNgu: d.thuat_ngu,
     trucQuan: d.truc_quan,
     hoiTiep: d.hoi_tiep,
+    hoiLai: d.hoi_lai,
     canCu: d.can_cu?.length ? d.can_cu : undefined,
     phu: phu?.(d),
     canhBao: d.co_canh_bao?.filter((c) => !boQuaCanhBao.includes(c.loai)).map((c) => c.chi_tiet),

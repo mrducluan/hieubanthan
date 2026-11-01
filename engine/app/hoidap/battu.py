@@ -148,6 +148,7 @@ def phan_loai(cau_hoi: str) -> dict:
         if kq["thap_than"] or kq["nhom"]:
             kq["chu_de"] = kq["chu_de"] if kq["chu_de"] in ("nghe_tien", "hon_nhan", "con_cai", "phap_ly", "di_xa", "an_toan",
                                                             "hoc_hanh", "quan_he", "hau_van", "gia_dinh") else "thap_than"
+        kq["do_tin_thap"] = not kq["chu_de"] and not (kq["thap_than"] or kq["nhom"] or kq["tru"])   # EN-3
         kq["chu_de"] = kq["chu_de"] or "tinh_cach"
         if kq["chu_de"] in ("loi_song", "nghe_tien", "phap_ly", "di_xa", "an_toan", "hau_van", "hoc_hanh", "quan_he"):
             kq["xu_ly"] = "tra_loi_kem_luu_y"
@@ -596,6 +597,6 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     if pl.get("lo_so") and not goi["luu_y"] and goi["muc"]:
         goi["luu_y"] = kb.luu_y("lo_so")
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    return {"phan_loai": goi["phan_loai"], "la_so": ls, "bang_chung": goi, "cau_tra_loi": van,
+    return {"hoi_lai": hieu_cau.hoi_lai("battu") if pl.get("do_tin_thap") and pl.get("xu_ly") in ("tra_loi", "tra_loi_kem_luu_y") else None, "phan_loai": goi["phan_loai"], "la_so": ls, "bang_chung": goi, "cau_tra_loi": van,
             "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": co,
             "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.battu(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_battu(pl)}

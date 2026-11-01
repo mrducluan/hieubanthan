@@ -362,7 +362,9 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
     else:
         kq["loai"] = "la_so"
     if kq["loai"] == "la_so" and not kq["cung"]:
-        kq["cung"] = [c for c, m in CHU_DE_CUNG if chung.co(t_chinh, m)][:2] or ["Mệnh"]
+        kq["cung"] = [c for c, m in CHU_DE_CUNG if chung.co(t_chinh, m)][:2]
+        kq["do_tin_thap"] = not kq["cung"] and not (kq["sao"] or kq["hoa"] or kq["phu"])   # EN-3: mời chọn cụ thể
+        kq["cung"] = kq["cung"] or ["Mệnh"]
     if kq["loai"] == "la_so" and "Tật Ách" in kq["cung"]:
         kq["xu_ly"] = "tra_loi_kem_luu_y"
     if kq["loai"] == "han":
@@ -379,6 +381,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
     if yd and not kq.get("tu_dien") and _kb_y_dinh(yd) and (kq["loai"] in ("la_so", "han", "ky_thuat")
                                   or (kq["loai"] == "la_so_con" and yd == "hoc_hanh_con")):
         _ap_y_dinh(kq, yd, t_chinh)
+        kq["do_tin_thap"] = False
         kq["nhan_ra_y_dinh"] = not goi_y
         kq["y_dinh_tu_goi_y"] = goi_y
     return kq
@@ -1438,7 +1441,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
     if ls is not None:
         co.append({"loai": "nam_phai", "chi_tiet": kb.luu_y("iztro")})
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    return {"phan_loai": goi["phan_loai"], "van_han": vh, "bang_chung": goi, "cau_tra_loi": van,
+    return {"hoi_lai": hieu_cau.hoi_lai("tuvi") if pl.get("do_tin_thap") and pl.get("xu_ly") in ("tra_loi", "tra_loi_kem_luu_y") else None, "phan_loai": goi["phan_loai"], "van_han": vh, "bang_chung": goi, "cau_tra_loi": van,
             "can_cu": can_cu_template(goi), "truc_quan": truc_quan.tuvi(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_tuvi(goi, ls),
             "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"],
             "co_canh_bao": co, "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong",

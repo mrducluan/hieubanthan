@@ -248,3 +248,9 @@ def nam_hoi_hh(t: str, ngay_xem, kieu_nam: str) -> list[int]:
     if len(ra) == 1 and ds[0].get("tuong_doi") == "nam_nay":
         return []
     return ra
+
+
+
+def hoi_lai_mo_dun(mo_dun: str) -> dict | None:
+    from app.hoidap import hieu_cau  # noqa: PLC0415
+    return hieu_cau.hoi_lai(mo_dun)

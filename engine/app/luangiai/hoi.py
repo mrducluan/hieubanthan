@@ -401,6 +401,8 @@ def phan_loai(cau_hoi: str) -> dict:
     tot = max(diem.values())
     if tot == 0:
         lv = "thoi_van" if thoi_diem else "ban_than"
+        # EN-3: không khớp lĩnh vực, không hỏi thời điểm, không nêu chỉ số / ngày → độ tin thấp, mời chọn cụ thể
+        kq["do_tin_thap"] = not thoi_diem and not so_nhac and not ngay and len(t_chinh.split()) <= 12
     else:
         lv = next(l for l in thu_tu if diem[l] == tot)
         if lv == "ban_than" and thoi_diem and diem["ban_than"] <= 1 and not so_nhac.get("duong_doi"):

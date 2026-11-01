@@ -139,3 +139,22 @@ def muc_tu_dien(ma: list[str]) -> list[dict]:
 def la_kien_thuc_tu_dien(t: str, cau_hoi: str, mo_dun: str) -> list[dict]:
     """Câu kiến thức thuần (không "của tôi") có thuật ngữ trong từ điển → các thuật ngữ đó; không thì []."""
     return tu_dien_khop(cau_hoi, mo_dun) if kieu(t) == "kien_thuc" else []
+
+
+
+# EN-3 (mục 2): câu rơi về mặc định (không khớp tín hiệu nào) → mời chọn cụ thể; lời đáp mặc định vẫn hiện bên dưới.
+_HOI_LAI = {
+    "thanso": ["Con số của tôi nói gì về công việc?", "Con số của tôi nói gì về chuyện tiền bạc?",
+               "Con số của tôi nói gì về tình yêu?", "Năm nay là năm cá nhân mấy của tôi?"],
+    "tuvi": ["Công việc của tôi theo lá số thế nào?", "Tiền bạc của tôi theo lá số thế nào?",
+             "Tình duyên của tôi theo lá số thế nào?", "Năm nay lá số của tôi có gì nổi bật?"],
+    "battu": ["Bát tự của tôi hợp nghề gì?", "Bát tự của tôi nói gì về tiền bạc?",
+              "Bát tự của tôi nói gì về hôn nhân?", "Đại vận hiện tại của tôi thế nào?"],
+    "phongthuy": ["Hướng nào hợp với tôi để kê bàn làm việc?", "Bếp nên quay hướng nào cho hợp tôi?",
+                  "Đầu giường nên quay hướng nào?", "Năm nay trong nhà nên giữ yên phía nào?"],
+}
+
+
+def hoi_lai(mo_dun: str) -> dict | None:
+    ds = _HOI_LAI.get(mo_dun)
+    return {"cau": "Bạn muốn hỏi cụ thể về chuyện nào? Chọn một câu để có lời đáp đúng hơn:", "chon": ds} if ds else None

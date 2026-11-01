@@ -33,6 +33,8 @@ export interface KetQuaHoi {
   trucQuan?: KhoiTrucQuan[];
   /** HD-CS đợt 2 — câu hỏi tiếp engine chọn (Tử vi: cung tam hợp / xung chiếu); bấm là hỏi luôn. */
   hoiTiep?: string[];
+  /** EN-3 — câu không khớp tín hiệu nào: engine mời chọn câu cụ thể hơn (lời đáp mặc định vẫn hiện bên dưới). */
+  hoiLai?: { cau: string; chon: string[] } | null;
 }
 
 interface Tin extends KetQuaHoi {

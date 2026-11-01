@@ -93,6 +93,7 @@ def phan_loai(cau_hoi: str) -> dict:
     # HH-CT2: "phi tinh năm 2027 sao nào đến hướng Nam" = sao LƯU NIÊN (năm), không phải tinh bàn nhà theo vận
     if not kq["van"] and chung.co(t, NAM_KW) and chung.co(t, [r"phi tinh", r"sao (nao|gi)", r"cuu tinh",
                                                     r"sao (xau|tot|du|lanh)", r"bay (toi|den|vao)",
+                                                    r"giu yen", r"(phia|huong) nao .{0,15}(tranh|kieng|xau)",
                                                     r"nhat bach|nhi hac|tam bich|tu luc|ngu hoang|luc bach|that xich|bat bach|cuu tu"]) \
             and not chung.co(t, [r"huyen khong", r"tinh ban", r"trach van"]):
         kq.update(loai="nam", xu_ly="tra_loi_kem_luu_y")
@@ -133,8 +134,10 @@ def phan_loai(cau_hoi: str) -> dict:
             kq["xu_ly"] = "tra_loi_kem_luu_y"
     elif chung.co(t, HUONG_CA_NHAN) or kq["ca_nhan"]:
         kq["loai"] = "huong_ca_nhan"
+        kq["do_tin_thap"] = not chung.co(t, HUONG_CA_NHAN) and not kq["huong"]   # EN-3: chỉ có "của tôi" → mời chọn
     else:
         kq["loai"] = "ky_thuat"
+        kq["do_tin_thap"] = not (kq["huong"] or kq["du_nien"] or kq["quai"])
     return kq
 
 
@@ -563,6 +566,6 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         except Exception as e:  # noqa: BLE001
             che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    return {"phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
+    return {"hoi_lai": hieu_cau.hoi_lai("phongthuy") if pl.get("do_tin_thap") and pl.get("xu_ly") in ("tra_loi", "tra_loi_kem_luu_y") else None, "phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
             "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": goi["co_canh_bao"],
             "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.phongthuy(goi, pl.get("quai"), _menh_rieng(pl, sinh)), "hoi_tiep": truc_quan.hoi_tiep_phongthuy(pl)}
