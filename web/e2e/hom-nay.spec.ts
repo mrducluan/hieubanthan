@@ -97,7 +97,8 @@ test("HN-4: câu gõ không nhận ra → chỉ đo mã nhóm cố định, khô
 
 test("Q7: hộp đã bấm 'Đúng với mình' 35 ngày trước → Hôm nay hỏi lại hai câu ba mức, gửi phiếu sau (chỉ mã), không hỏi lại lần hai", async ({ page }) => {
   await napHoSo(page);
-  const ngay = new Date(Date.now() - 35 * 86_400_000).toISOString().slice(0, 10);
+  // Ngày theo giờ VN (trang đếm ngày theo giờ VN) — tính theo UTC thì sau nửa đêm VN lệch 1 ngày.
+  const ngay = new Date(Date.now() + 7 * 3_600_000 - 35 * 86_400_000).toISOString().slice(0, 10);
   await page.addInitScript((g) => localStorage.setItem("hbt.kc_sau.v1", g), JSON.stringify([
     { loai: "doi_song", mau: "ds.phongthuy.tung_phong.luu_y.xa_ngang", phai: "bat_trach_huyen_khong", nhan: "Giường, bàn dưới xà ngang", mo_dun: "phongthuy", ngay, da_hoi: false },
   ]));

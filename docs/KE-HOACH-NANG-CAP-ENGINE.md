@@ -106,6 +106,11 @@ Mỗi đợt một PR, có test viết trước và thước đo trước/sau. T
 Thước đo: an toàn holdout 68% → **100%**; p95 kb/trang 1.354 → < 100 ms; không còn lỗi 500 với ngày sinh lạ.
 
 ### EN-2 · Nhất quán + lời luận (2–3 tuần) — khâu NẠP Sao (bán được chương thứ hai)
+> **Trạng thái 2026-11-01: đã làm** mục 1, 2, 3 (lý do theo sao, lời mời theo hộp riêng), 4, 6, 7, 8 — chi tiết ở dòng EN-2
+> của `CLAUDE.md`. **Chưa làm mục 5** (lời theo nhóm tuổi / tình trạng độc thân – có đôi): cần ô chọn tình trạng trên hồ sơ
+> (người dùng tự chọn) → để chung đợt với EN-3 (hỏi đáp đã có trích ô người thứ hai / quan hệ). Thước đo câu trùng giữa hồ
+> sơ chưa đo lại bằng số — `scripts/do_chung_chung_tuvi.py` + test `test_tuvi_doi_song_chung_chung` vẫn xanh.
+
 1. **Lớp nhất quán liên mảng** (RULES `luangiai/nhat_quan.py`):
    - cùng mảng mà Tử vi, Bát tự, Thần số **cùng mức** → thành điểm nhấn "nhiều cách cùng thấy";
    - **khác mức** → một câu giải thích vì sao (mỗi môn nhìn một mặt, kèm việc nên làm chung).
