@@ -13,7 +13,7 @@ from app.luangiai import hoi
     ("Em 27t lm văn phòng", "em 27 tuoi lam van phong"),
     ("năm nay sk của t thế nào", "nam nay suc khoe cua t the nao"),
     ("ny e ntn", "nguoi yeu em nhu the nao"),
-    ("hnay có nên ký hđ k", "hom nay co nen ky hop dong khong"),
+    ("hnay có nên ký hđ k", "hom nay co nen ky hd khong"),      # "hd" mơ hồ (hợp đồng / hướng dẫn) — giữ nguyên
     ("mua xe j hợp", "mua xe gi hop"),
 ])
 def test_mo_viet_tat(vao, ra):
@@ -49,3 +49,13 @@ def test_e_khong_dau_la_e(cau):
 
 def test_e_dau_cau_van_la_em():
     assert hoi.chuan_hoa_cau("e sn 1998 hoi ve cv") == "em sn 1998 hoi ve cong viec"
+
+
+@pytest.mark.parametrize("cau", ["Nghe K-pop có hợp mệnh không", "Uống vitamin K/E", "Làm E-commerce có hợp không",
+                                 "Mua cái áo 15 k", "ck tiền cho bạn có nên không", "Ms Lan hỏi", "hd cách tính",
+                                 "Bit Coin có nên mua", "kh của tôi"])
+def test_khong_mo_tu_nham_review(cau):
+    t = hoi.chuan_hoa_cau(cau)
+    for x in ("khong-pop", "khong/em", "em-commerce", "15 khong", "chong tien", "moi lan", "hop dong", "biet coin",
+              "khong cua"):
+        assert x not in t, (cau, t)

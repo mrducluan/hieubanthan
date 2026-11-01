@@ -487,7 +487,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
         # EN-3: nêu đúng mốc người hỏi nói tới; quẻ xem thế của việc lúc gieo, KHÔNG chấm riêng từng tháng / năm
         goi["muc"].insert(0, {"loai": "ghi_chu", "noi_dung": f"Quẻ này đọc cho việc bạn định làm vào {moc}. Kinh Dịch "
                               "xem thế của việc ở lúc gieo, không chấm riêng từng tháng hay từng năm — nếu đang cân "
-                              "hai mốc, xem phần nhịp thời gian bên dưới và chọn mốc bạn chuẩn bị kịp hơn."})
+                              "hai mốc, chọn mốc bạn chuẩn bị kịp hơn."})
         chung.ket(goi)
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     che_do_van, loi = "template", []

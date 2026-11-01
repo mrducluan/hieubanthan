@@ -172,6 +172,10 @@ _DAU_CO_DINH = (r"^Tứ trụ \(năm", r"^Tuổi mụ tại thời điểm xem",
                 r"^Theo tục xếp theo tuổi")          # MT-ĐS B3: tập quán đứng trước lá số (có chủ ý)
 _CHAN = (r"^Câu hỏi để tự soi", r"^Đây là góc nhìn tham khảo", r"^Bát trạch là một trường phái", r"^Lưu ý:",
          r"^Lời này không thay", r"^Tham khảo văn hoá")
+# Đoạn không bao giờ đưa lên đầu (review EN-3): tự soi / lưu ý / ranh giới giữa bài, đoạn chuyên môn (thang điểm, dụng
+# thần, đại hạn của người hỏi khi câu nói về con…), dòng dữ kiện.
+_KHONG_LEN = (r"^Câu hỏi để tự soi", r"^Lưu ý", r"^Phần này chỉ nói", r"^Ngũ hành", r"^Dụng thần", r"^Giai đoạn mười năm",
+              r"^Năm đang xem", r"^Tứ trụ", r"^Đây là góc nhìn", r"^Tuổi mụ", r"^Đại vận", r"^Lời này không thay")
 _BO_TU = {"toi", "em", "minh", "ban", "co", "khong", "nen", "the", "nao", "gi", "la", "cua", "va", "voi", "cho", "thi",
           "nay", "do", "nhu", "duoc", "hay", "bi", "se", "da", "dang", "mot", "nhung", "cac", "ve", "o", "tu", "den",
           "lam", "sao", "xem", "giup", "a", "nhe", "vay", "roi", "con", "so", "nam", "thang", "ngay", "theo", "khi"}
@@ -200,7 +204,7 @@ def tra_loi_truoc(van: str, t: str) -> str:
     if len(than) < 2:
         return van
     q = _cum(t)
-    diem = [len(q & _cum(chuan_hoa(x))) for x in than]
+    diem = [0 if any(re.match(m, x) for m in _KHONG_LEN) else len(q & _cum(chuan_hoa(x))) for x in than]
     tot = max(range(len(than)), key=lambda i: (diem[i], -i))
     if tot == 0 or diem[0] > 0 or diem[tot] < 2:
         return van
@@ -215,6 +219,8 @@ _THU_MUC = {"thuan": 2, "can_bang": 1, "can_chu_dong": 0}
 def doan_so_nam(ds: list[dict]) -> str:
     """EN-3: "Năm 2028 (Mậu Thân) với bạn: thuận lợi — … Năm 2029 …" + một câu so khi hai năm khác mức. `ds` = mục năm
     đã chấm (nam, can_chi, muc, nhan_muc, y). Không điểm số; câu so chỉ nói năm nào thuận hơn theo mức đã có."""
+    # Review EN-3: mức của dòng 10 năm là mức CHUNG của năm (mảng nổi bật nhất năm đó), không phải mức riêng của việc
+    # được hỏi → nói rõ "mức chung", và câu so cũng chỉ so mức chung.
     cau = []
     for d in ds:
         y = re.sub(rf"^Năm {d['nam']},\s*", "", d.get("y") or "").strip()
@@ -222,11 +228,12 @@ def doan_so_nam(ds: list[dict]) -> str:
     if len(ds) >= 2:
         tot = max(ds, key=lambda d: _THU_MUC.get(d["muc"], 1))
         if len({_THU_MUC.get(d["muc"], 1) for d in ds}) > 1:
-            cau.append(f"So các năm bạn hỏi: năm {tot['nam']} thuận hơn theo lá số; năm còn lại vẫn làm được nếu "
-                       "chuẩn bị kỹ hơn.")
+            cau.append(f"Xét mức chung của cả năm, năm {tot['nam']} thuận hơn; riêng việc bạn hỏi, đọc thêm phần dưới "
+                       "trước khi chọn.")
         else:
-            cau.append("Các năm bạn hỏi cùng một mức theo lá số — chọn năm nào là tuỳ việc bạn chuẩn bị xong lúc nào.")
-    return " ".join(c if c.endswith((".", "!", "?")) else c + "." for c in cau)
+            cau.append("Xét mức chung, các năm bạn hỏi ngang nhau — chọn năm nào tuỳ việc bạn chuẩn bị xong lúc nào.")
+    cau.insert(0, "Mức chung của từng năm theo lá số (mảng nổi bật nhất năm đó):")
+    return " ".join(c if c.endswith((".", "!", "?", ":")) else c + "." for c in cau)
 
 
 

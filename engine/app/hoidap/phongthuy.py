@@ -238,7 +238,7 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int, nam_am: int | None
             from app.luangiai import tuoi_dan_gian as tdg  # noqa: PLC0415
             ng = (sinh or {}).get("ngay")
             # EN-3: "làm nhà năm 2027 hay 2028" → xét từng năm được hỏi (cùng hàm), không chỉ năm đầu
-            for y in (pl.get("cac_nam_hoi") or [nam_am])[:3]:
+            for y in [y for y in (pl.get("cac_nam_hoi") or [nam_am]) if y > nam_sinh][:3]:   # năm trước năm sinh = năm sinh người khác
                 x = tdg.xem_tuoi_lam_nha(nam_sinh, y, ng.month if ng else None, ng.day if ng else None)
                 muc.append({"loai": "tuoi_lam_nha", "nam_xem": y, "tuoi_mu": x["tuoi_mu"], "kim_lau": x["kim_lau"],
                             "hoang_oc": x["hoang_oc"], "tam_tai": x["tam_tai"], "nam_thuan": x["nam_thuan"][:1],

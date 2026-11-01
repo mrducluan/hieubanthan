@@ -96,3 +96,25 @@ def test_thoi_gian_khong_nham_nam_sinh(cau, ra):
 def test_nam_sinh_roi_nam_hoi():
     assert hc.thoi_gian(ch("Tôi sinh 1990, năm 2027 có nên cưới không"), XEM) == [{"nam": 2027}]
     assert hc.thoi_gian(ch("Tôi sinh ngày 3/4/1992, tháng 5 năm 2027 có nên đổi việc"), XEM) == [{"nam": 2027, "thang": 5}]
+
+
+@pytest.mark.parametrize("cau, ra", [
+    ("năm 1975 sinh, năm nay tôi ra sao", [{"nam": 2026, "tuong_doi": "nam_nay"}]),
+    ("vợ tôi 1993 năm 2028 làm nhà được không", [{"nam": 2028}]),
+    ("tháng 3 năm 2027 hay tháng 5 năm 2028", [{"nam": 2027, "thang": 3}, {"nam": 2028, "thang": 5}]),
+    ("năm nay hay năm sau nên cưới", [{"nam": 2026, "tuong_doi": "nam_nay"}, {"nam": 2027, "tuong_doi": "nam_sau"}]),
+    ("ba năm tới công việc của tôi thế nào", [{"nam": 2026}, {"nam": 2027}, {"nam": 2028}]),
+    ("2 năm nữa tôi có nên mua nhà", [{"nam": 2028}]),
+    ("năm sau sinh con có hợp không", [{"nam": 2027, "tuong_doi": "nam_sau"}]),
+    ("năm sau dự định mua nhà", [{"nam": 2027, "tuong_doi": "nam_sau"}]),
+    ("Tháng 10 vừa rồi tôi mất việc, tháng tới có khá hơn", [{"nam": 2026, "thang": 12}]),
+    ("tháng Giêng âm lịch nên làm gì", []),
+    ("tháng 2 âm có nên khai trương", []),
+])
+def test_thoi_gian_review(cau, ra):
+    assert hc.thoi_gian(ch(cau), XEM) == ra, (cau, hc.thoi_gian(ch(cau), XEM))
+
+
+def test_nguoi_thu_hai_khong_nham_nam_du_dinh():
+    n = hc.nguoi_thu_hai(ch("Chồng tôi định chuyển nhà năm 2027"))
+    assert n and n["quan_he"] == "vo_chong" and "nam_sinh" not in n

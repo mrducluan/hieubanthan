@@ -55,44 +55,72 @@ def _them_thang(d: dt.date, n: int) -> tuple[int, int]:
     return d.year + m // 12, m % 12 + 1
 
 
+_SO = {"mot": 1, "hai": 2, "ba": 3, "bon": 4, "nam": 5, "sau": 6}
+_VAI = r"(vo|chong|con|bo|me|ba|anh|chi|em|ong|ny|nguoi yeu|toi|minh|tui)"
+
+
+def _la_nam_sinh(t: str, a: int, b: int) -> bool:
+    truoc, sau = t[:a], t[b:]
+    return bool(re.search(r"(sinh|sn|tuoi|doi|nam sinh|ns)\s*(nam\s*)?(\d{4}\s*(va|,|hoac|voi)\s*)?$", truoc)
+                or re.search(r"\d{1,2}[/-]\d{1,2}[/-]$", truoc)
+                or re.search(r"^\s*(sinh|sn)\b", sau)                               # "năm 1975 sinh"
+                or re.search(r"(?<!\w)" + _VAI + r"( (toi|minh|em|tui))?\s*$", truoc))  # "vợ tôi 1993", "tôi 1990"
+
+
 def thoi_gian(t: str, hom_nay: dt.date) -> list[dict]:
-    """Các mốc được HỎI (không phải năm sinh): [{"nam"}, {"nam", "thang"}] theo thứ tự xuất hiện, không lặp."""
-    ra: list[dict] = []
-    nam_tuong_doi = None
-    tuong_doi = None
-    if re.search(r"nam (sau|toi)(?! (dinh|sinh|la|muon|tinh|du|\d|duoc|nay))|sang nam|nam toi\b$", t):
-        nam_tuong_doi, tuong_doi = hom_nay.year + 1, "nam_sau"
-    elif re.search(r"nam nay\b", t):
-        nam_tuong_doi, tuong_doi = hom_nay.year, "nam_nay"
-    # năm tuyệt đối — bỏ năm sinh: đứng sau "sinh / sn / tuổi" (kể cả "sinh 1960 và 1963"), trong ngày dạng d/m/yyyy
-    nam_tuyet = [int(m.group(1)) for m in _NAM.finditer(t)
-                 if not re.search(r"(sinh|sn|sinh nam|tuoi|doi|nam sinh|ns)\s*(nam\s*)?(\d{4}\s*(va|,|hoac|voi)\s*)?$",
-                                  t[:m.start()])
-                 and not re.search(r"\d{1,2}[/-]\d{1,2}[/-]$", t[:m.start()])]
-    thang = [int(x) for x in re.findall(r"thang (1[0-2]|[1-9])(?![\d/-])", t)]
-    k = re.search(r"(ba|3|hai|2) thang (toi|sap toi|nua)\b", t)
-    if k:                                  # "ba tháng tới" → ba tháng kế tiếp
-        for i in range(1, (3 if k.group(1) in ("ba", "3") else 2) + 1):
-            y, mm = _them_thang(hom_nay, i)
-            ra.append({"nam": y, "thang": mm})
-    elif re.search(r"thang (toi|sau)\b", t) and not re.search(r"(ba|hai|\d+) thang (nay|qua)", t):
-        y, mm = _them_thang(hom_nay, 1)
-        ra.append({"nam": y, "thang": mm})
-    elif re.search(r"(?<!ba )(?<!hai )(?<!\d )thang nay\b", t):
-        ra.append({"nam": hom_nay.year, "thang": hom_nay.month})
-    nam_cho_thang = nam_tuyet[0] if nam_tuyet else nam_tuong_doi
-    for th in thang:
-        y = nam_cho_thang or (hom_nay.year if th >= hom_nay.month else hom_nay.year + 1)
-        ra.append({"nam": y, "thang": th})
-    if not thang:
-        for y in nam_tuyet:
-            ra.append({"nam": y})
-        if nam_tuong_doi and not ra:
-            # Mốc tương đối theo năm DƯƠNG lịch — mảng có ranh giới năm khác (Lập xuân, Tết) đổi lại bằng cờ này
-            ra.append({"nam": nam_tuong_doi, "tuong_doi": tuong_doi})
+    """Các mốc được HỎI (không phải năm sinh) theo thứ tự xuất hiện, không lặp: {"nam"} · {"nam", "thang"} · mốc tương
+    đối mang cờ `tuong_doi` ("nam_nay" / "nam_sau") để mảng có ranh giới năm khác (Lập xuân, Tết) tự đổi. Tháng âm
+    ("tháng Giêng", "tháng 2 âm") và mốc đã qua ("tháng 10 vừa rồi", "năm ngoái") không tính."""
+    y0 = hom_nay.year
+    nam_ev: list[tuple[int, dict]] = []                   # (vị trí, mốc năm)
+    for m in _NAM.finditer(t):
+        if not _la_nam_sinh(t, m.start(), m.end()):
+            nam_ev.append((m.start(), {"nam": int(m.group(1))}))
+    for m in re.finditer(r"(ba|hai|bon|nam|\d) nam (toi|sap toi)\b", t):          # "ba năm tới" → năm nay … +N-1
+        n = _SO.get(m.group(1)) or int(m.group(1))
+        nam_ev += [(m.start() + i, {"nam": y0 + i}) for i in range(min(n, 5))]
+    for m in re.finditer(r"(mot|hai|ba|bon|nam|\d) nam nua\b", t):
+        nam_ev.append((m.start(), {"nam": y0 + (_SO.get(m.group(1)) or int(m.group(1)))}))
+    if (m := re.search(r"nam sau nua", t)):
+        nam_ev.append((m.start(), {"nam": y0 + 2}))
+    else:
+        for m in re.finditer(r"nam sau|sang nam|nam toi(?! (dinh|sinh|la|muon|tinh|du|duoc|nay|co|bi|thi|da|\d))", t):
+            if not re.match(r"(ba|hai|bon|nam|\d) $", t[max(0, m.start() - 4):m.start()]):
+                nam_ev.append((m.start(), {"nam": y0 + 1, "tuong_doi": "nam_sau"}))
+    for m in re.finditer(r"nam nay\b", t):
+        nam_ev.append((m.start(), {"nam": y0, "tuong_doi": "nam_nay"}))
+    nam_ev.sort(key=lambda x: x[0])
+
+    thang_ev: list[tuple[int, dict]] = []
+    for m in re.finditer(r"thang (1[0-2]|[1-9])(?![\d/-])", t):
+        if re.match(r"\s*(am|vua roi|vua qua|truoc|roi)\b", t[m.end():]):          # tháng âm / đã qua
+            continue
+        th = int(m.group(1))
+        sau = [e for p, e in nam_ev if 0 < p - m.end() <= 14]                       # "tháng 3 năm 2027 / năm sau"
+        y = sau[0]["nam"] if sau else (y0 if th >= hom_nay.month else y0 + 1)
+        if not sau and len([e for _, e in nam_ev if "tuong_doi" not in e]) == 1:
+            y = next(e for _, e in nam_ev if "tuong_doi" not in e)["nam"]
+        thang_ev.append((m.start(), {"nam": y, "thang": th}))
+    k = re.search(r"(ba|3|hai|2|may|vai|sau|6) thang (toi|sap toi|nua)\b", t)
+    if k:
+        n = {"ba": 3, "3": 3, "hai": 2, "2": 2}.get(k.group(1), 3)                  # "mấy / 6 tháng tới" → 3 tháng đầu
+        for i in range(1, n + 1):
+            yy, mm = _them_thang(hom_nay, i)
+            thang_ev.append((k.start() + i, {"nam": yy, "thang": mm}))
+    else:
+        if (m := re.search(r"(?<!ba )(?<!hai )(?<!\d )thang nay\b", t)):
+            thang_ev.append((m.start(), {"nam": y0, "thang": hom_nay.month}))
+        if (m := re.search(r"thang (toi|sau)\b", t)) and not re.search(r"(ba|hai|\d+) thang (nay|qua)", t):
+            yy, mm = _them_thang(hom_nay, 1)
+            thang_ev.append((m.start(), {"nam": yy, "thang": mm}))
+    if thang_ev:
+        # năm đã dùng để ghép tháng không thành mốc riêng
+        dung = {e["nam"] for _, e in thang_ev}
+        nam_ev = [(p, e) for p, e in nam_ev if e["nam"] not in dung]
+    ev = sorted(thang_ev + nam_ev, key=lambda x: x[0])
     out: list[dict] = []
-    for x in ra:
-        if x not in out:
+    for _, x in ev:
+        if x not in out and not any(o["nam"] == x["nam"] and o.get("thang") == x.get("thang") for o in out):
             out.append(x)
     return out
 
@@ -105,8 +133,9 @@ def nguoi_thu_hai(t: str) -> dict | None:
             k = re.search(r"(?<!\w)" + m_ + r"(?!\w)", t)
             if not k:
                 continue
-            sau = t[k.start():k.start() + 40]
-            ns = re.search(r"(?:sinh|sn)?\s*(?:nam\s*)?(19[3-9]\d|20[0-4]\d)", sau)
+            sau = t[k.end():k.end() + 30]
+            ns = re.match(r"\s*(?:(?:toi|minh|em)\s+)?(?:(?:sinh|sn|tuoi)\s*(?:nam\s*)?)?(19[3-9]\d|20[0-4]\d)", sau) \
+                or re.search(r"(?:sinh|sn)\s*(?:nam\s*)?(19[3-9]\d|20[0-4]\d)", sau)
             ra = {"quan_he": qh, **({"nam_sinh": int(ns.group(1))} if ns else {})}
             cac = [int(x) for x in re.findall(r"(?:sinh|sn)\s*(?:nam\s*)?(19[3-9]\d|20[0-4]\d)", t)]
             if len(cac) >= 2:

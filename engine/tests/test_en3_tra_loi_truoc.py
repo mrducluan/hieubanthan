@@ -26,3 +26,14 @@ def test_khong_doi_khi_doan_dau_da_khop_hoac_khong_ro():
     assert chung.tra_loi_truoc(VAN, ch("Tính cách của tôi thế nào")) == VAN
     assert chung.tra_loi_truoc(VAN, ch("Xem giúp tôi với")) == VAN
     assert chung.tra_loi_truoc("", ch("abc")) == ""
+
+
+def test_doan_tu_soi_va_chuyen_mon_khong_len_dau():
+    van = "\n\n".join(["Về hướng: phía Bắc hợp bạn.", "Câu hỏi để tự soi: ngôi nhà có đủ ánh sáng, hướng nào hợp?",
+                       "Ngũ hành (thang điểm hệ thống): hướng nào hợp nhà, hướng nào hợp người.", "Đây là góc nhìn tham khảo."])
+    assert chung.tra_loi_truoc(van, ch("Hướng nào hợp nhà, ánh sáng thế nào")) == van
+
+
+def test_cau_neu_chi_so_khong_hoi_lai():
+    from tests.test_en3_hieu_cau_chay import chay
+    assert not chay("thanso", "Số đường đời của tôi là gì").get("hoi_lai")

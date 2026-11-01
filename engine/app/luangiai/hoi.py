@@ -39,19 +39,23 @@ def chuan_hoa(s: str) -> str:
 # nhiêu), "hn" (hôm nay / Hà Nội), "hong" (hồng / không), "a", "t", "s", "v", "r" giữ nguyên.
 VIET_TAT = {
     "ck": "chong", "ox": "chong", "vk": "vo", "bx": "vo", "ny": "nguoi yeu", "cv": "cong viec", "sk": "suc khoe",
-    "bh": "bao gio", "ko": "khong", "k": "khong", "kh": "khong", "hok": "khong", "khum": "khong", "dc": "duoc",
+    "bh": "bao gio", "ko": "khong", "k": "khong", "hok": "khong", "khum": "khong", "dc": "duoc",
     "dk": "duoc", "j": "gi", "mik": "minh", "mk": "minh", "mjk": "minh", "lm": "lam", "ng": "nguoi",
     "vs": "voi", "ntn": "nhu the nao", "hnay": "hom nay", "cty": "cong ty", "nhiu": "nhieu", "iu": "yeu",
-    "trc": "truoc", "bit": "biet", "dag": "dang", "zay": "vay", "hd": "hop dong", "ms": "moi",
+    "trc": "truoc", "dag": "dang", "zay": "vay",
 }
+# review EN-3: bỏ "kh" (khách hàng), "hd" (hướng dẫn / hợp đồng), "ms" (Ms Lan / mới), "bit" (Bit Coin); không mở chữ
+# nằm trong cụm có gạch ("K-pop", "E-commerce", "vitamin K/E"), "k" sau con số ("15 k" = 15 nghìn), "ck" trước "tiền /
+# khoản / số tiền" (chuyển khoản).
 # Chữ trùng với một từ CÓ DẤU khác nghĩa ("ế", "túi") → chỉ mở khi người dùng gõ đúng chữ không dấu (so trên câu gốc).
 VIET_TAT_GOC = {"e": "em", "tui": "toi"}
 TU_DIEN_PHUONG_PHAP = {"pitago", "chaldea", "so_kep"}
-_VT_GOC_RX = re.compile(r"(?<!\w)(" + "|".join(VIET_TAT_GOC) + r")(?!\w)", re.IGNORECASE)
+_VT_GOC_RX = re.compile(r"(?<![\w/-])(" + "|".join(VIET_TAT_GOC) + r")(?![\w/-])", re.IGNORECASE)
 # "e" gõ không dấu cũng có thể là "ế" ("toi e lau", "het e", "bi e mai") → không mở khi đứng sau / trước các từ này.
 _E_LA_E = re.compile(r"(?:het|bi|toi|minh|em|van|con|da|cu|dang|sao|tui|tao|anh|chi|co|e)\s+e\s*$|^\s*(lau|mai|qua|dai|hoai|vo|chong|nua|ca doi)\b",
                      re.IGNORECASE)
-_VT_RX = re.compile(r"(?<!\w)(" + "|".join(sorted(map(re.escape, VIET_TAT), key=len, reverse=True)) + r")(?!\w)")
+_VT_RX = re.compile(r"(?<![\w/-])(" + "|".join(sorted(map(re.escape, VIET_TAT), key=len, reverse=True))
+                    + r")(?![\w/-])(?! (tien|khoan|so tien|\d))")
 
 
 def chuan_hoa_cau(s: str) -> str:
@@ -69,7 +73,8 @@ def chuan_hoa_cau(s: str) -> str:
     s = _VT_GOC_RX.sub(_mo, s)
     t = chuan_hoa(s)
     t = re.sub(r"(?<!\w)(\d{1,2})t(?!\w)", r"\1 tuoi", t)
-    return _VT_RX.sub(lambda m: VIET_TAT[m.group(1)], t)
+    return _VT_RX.sub(lambda m: m.group(1) if m.group(1) == "k" and re.search(r"\d\s?$", t[:m.start()])
+                      else VIET_TAT[m.group(1)], t)
 
 
 _RX: dict[str, re.Pattern] = {}
@@ -422,7 +427,9 @@ def phan_loai(cau_hoi: str) -> dict:
     if tot == 0:
         lv = "thoi_van" if thoi_diem else "ban_than"
         # EN-3: không khớp lĩnh vực, không hỏi thời điểm, không nêu chỉ số / ngày → độ tin thấp, mời chọn cụ thể
-        kq["do_tin_thap"] = not thoi_diem and not so_nhac and not ngay and len(t_chinh.split()) <= 12
+        kq["do_tin_thap"] = not thoi_diem and not so_nhac and not ngay and len(t_chinh.split()) <= 12 \
+            and not _co(t, [r"duong doi", r"linh hon", r"su menh", r"nhan cach", r"so chu dao", r"(nam|thang|ngay) ca nhan",
+                            r"bieu do", r"no nghiep", r"dinh cao", r"thu thach", r"truong thanh", r"so ngay sinh"])
     else:
         lv = next(l for l in thu_tu if diem[l] == tot)
         if lv == "ban_than" and thoi_diem and diem["ban_than"] <= 1 and not so_nhac.get("duong_doi"):
