@@ -75,3 +75,24 @@ def test_lich_am_ngay_loi_cu_khu_hoi(ngay, tz):
 def test_ten_co_chu_eth():
     assert thanso.bo_dau("Ðặng") == thanso.bo_dau("Đặng") == "Dang"
     assert thanso.bo_dau("ɖ") == "d"
+
+
+@pytest.mark.parametrize("cau,them", [("Năm tôi định làm nhà là năm nay", 0), ("Năm tôi 36 tuổi này vận thế nào", 0),
+                                      ("nam toi sinh la 1990, nam nay the nao", 0), ("Năm tới tôi có nên làm nhà", 1),
+                                      ("nam toi co nen lam nha", 1), ("Năm sau thế nào", 1)])
+def test_nam_toi_khong_nham_nam_toi(cau, them):
+    assert chung.nam_xem_hh(None, dt.date(2026, 11, 1), chung.chuan_hoa(cau)) == (2026 + them, 2026 + them)
+
+
+def test_tuoi_lam_nha_hoi_dap_khong_lap_y():
+    sinh = {"nam": 1950, "gioi_tinh": "nam", "ngay": dt.date(1950, 6, 1), "moc_nam": "lap_xuan"}
+    r = hd_pt.tra_loi("Năm 2026 tôi làm nhà được không?", sinh=sinh, ngay_xem=dt.date(2026, 11, 1))
+    van = r["cau_tra_loi"]
+    assert van.count("Kim lâu") <= 2 and "Hoang ốc xấu hay Tam tai" not in van
+
+
+def test_tre_duoi_mot_tuoi_nhan_loi_cho_cha_me():
+    from app.luangiai import toan_bo
+    bc = toan_bo.battu({"lich": dt.datetime(2026, 3, 1, 8), "gioi_tinh": "nu"}, ngay_xem=dt.date(2027, 1, 15))
+    s = str(next(c for c in bc["chuong"] if c["ma"] == "van_han")) if any(c["ma"] == "van_han" for c in bc["chuong"]) else ""
+    assert "khuôn phép" not in s

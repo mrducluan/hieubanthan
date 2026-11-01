@@ -98,7 +98,7 @@ def test_hop_dong(bc):
         assert 2 <= len(c["hop"]) <= 6, c["ma"]
         for h in c["hop"]:
             assert h["loai"] in LOAI_HOP - {"cot_loi"}
-            assert 0 < len(h["tieu_de"]) <= 60 and h["noi_dung"] and isinstance(h["can_cu"], list)
+            assert 0 < len(h["tieu_de"]) <= 90 and h["noi_dung"]  # EN-2 ND-3: tiêu đề = trọn câu đầu ≤ 90 and isinstance(h["can_cu"], list)
             assert bt.MA_MAU_RE.match(h["ma_mau"]) and h["ma_mau"].startswith(f"ds.bt.{c['ma']}."), h["ma_mau"]
             assert not any(k.startswith("_") for k in h)
             if h["loai"] == "luu_y":                       # mỗi lưu ý kèm hướng xử lý, nằm ngay trong hộp
@@ -169,8 +169,9 @@ def test_dai_van_hai_cach(bc):
                                        "can_bang", "can_chu_dong"]
     assert [g["hai_cach_khac"] for g in tgb] == [False, False, False, False, True, True, True, True]
     for g in tgb:
-        if g["hai_cach_khac"]:
-            assert "Hai cách đọc" in g["mot_cau"], g["mot_cau"]
+        # EN-2 (ND-4): chỉ nhắc khi hai cách NGƯỢC hẳn nhau; lệch một bậc thì không lặp câu (khung nói một lần ở chương 1)
+        nguoc = {g["muc_cach_1"], g["muc_cach_2"]} == {"thuan", "can_chu_dong"}
+        assert ("Hai cách đọc ngược nhau" in g["mot_cau"]) is nguoc, g["mot_cau"]
         assert g["den_tuoi"] == g["tu_tuoi"] + 9 and g["nam_den"] == g["nam_tu"] + 9 and g["nhan"]
     ht = [g for g in tgb if g["hien_tai"]]
     # Đang đi theo NGÀY khởi vận: Ất Dậu bắt đầu 13/12/2026 → ngày 21/10/2026 vẫn ở Giáp Thân (2016-12-13 → 2026-12-12)

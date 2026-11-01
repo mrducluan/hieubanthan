@@ -117,7 +117,7 @@ def phan_loai(cau_hoi: str) -> dict:
           "nam_xem": None}
     m = re.search(r"nam (20\d\d)", t)
     kq["nam_xem"] = int(m.group(1)) if m else None
-    db = chung.dac_biet(t)
+    db = chung.dac_biet(t, cau_hoi)
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq

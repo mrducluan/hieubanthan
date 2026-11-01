@@ -66,7 +66,14 @@ def _am(x: dt.date, tz_lich: float) -> str:
 
 # EN-1 HT-1: mỗi tiến trình Node (iztro) chiếm tới ~67 MB; pool luồng FastAPI 120 → vài chục lượt Tử vi cùng lúc làm
 # engine (Render Starter 512 MB) hết RAM. Giới hạn số Node chạy đồng thời; lượt thứ N+1 chờ (thêm độ trễ, không sập).
-_NODE_TOI_DA = threading.BoundedSemaphore(max(1, int(os.environ.get("NODE_DONG_THOI", "3"))))
+def _so_node() -> int:
+    try:
+        return max(1, int(os.environ.get("NODE_DONG_THOI", "3")))
+    except ValueError:                       # đặt sai kiểu → mặc định, không làm engine sập lúc khởi động
+        return 3
+
+
+_NODE_TOI_DA = threading.BoundedSemaphore(_so_node())
 
 
 @lru_cache(maxsize=512)

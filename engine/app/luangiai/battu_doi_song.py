@@ -582,12 +582,16 @@ def muc_thang(pt: dict, can: str, chi: str) -> tuple[str, str, str]:
 
 def _cau_hai_cach(m1: str, m2: str, cho: str = "giai đoạn này") -> str:
     """Câu NÓI RÕ khi hai cách đọc khác nhau (không chọn thay người dùng). `cho` gọi tên lớp thời gian."""
-    if m1 == m2:
+    # EN-2 (ND-4): câu này từng lặp 11–25 lần/bài. Khung giải thích "hai cách" nói MỘT lần ở chương đầu (`KHUNG_HAI_CACH`);
+    # ở từng giai đoạn chỉ nhắc khi hai cách NGƯỢC hẳn nhau (lệch một bậc thì mức gộp đã theo cách rõ hơn, biểu đồ hiện cả hai).
+    if {m1, m2} != {"thuan", "can_chu_dong"}:
         return ""
-    if {m1, m2} == {"thuan", "can_chu_dong"}:
-        return f" Hai cách đọc cho kết quả ngược nhau ở {cho}: nên thử nhỏ trước khi làm lớn."
-    khac = m1 if m2 == "can_bang" else m2
-    return f" Hai cách đọc khác nhau ở {cho}: một cách thấy {kb.nhan_muc(khac).lower()}, cách kia thấy cân bằng."
+    return f" Hai cách đọc ngược nhau ở {cho}, nên thử nhỏ trước khi làm lớn."
+
+
+KHUNG_HAI_CACH = ("Bát tự có hai cách đọc phần cần thêm, cần bớt: một cách cân sức mạnh yếu, một cách theo tháng sinh. "
+                  "Bài giữ cả hai, không chọn thay bạn: chỗ hai cách cùng thấy thì mức nói rõ; chỗ hai cách ngược nhau "
+                  "thì bài ghi \"hai cách đọc ngược nhau\" — lúc ấy nên thử nhỏ trước và đối chiếu với điều bạn đã trải qua.")
 
 
 def _van_kb(tt: str) -> dict:
@@ -827,7 +831,7 @@ def _chuong_tong_quan(pt: dict, cm: dict, hoc: tuple, da_dung: set[str]) -> dict
     # Trục 1 (2026-10-26): "Con người bạn" không mang chip mức (như Lời khuyên, Vận hạn — VH-1): không câu "mức", không
     # "hai cách khác nhau ở mảng này"; câu thứ hai là lời tóm tắt trung tính của KB (bậc cân bằng). Mức vẫn chấm (cột lõi).
     tom = n.get("chan_dung") or kb.tom_tat("tong_quan", "can_bang") or _tom("tong_quan", "can_bang")
-    return _chuong("tong_quan", None, tom, hop, [tom, kb.tom_tat("tong_quan", "can_bang") or ""],
+    return _chuong("tong_quan", None, tom, hop, [tom, kb.tom_tat("tong_quan", "can_bang") or "", KHUNG_HAI_CACH],
                    can_cu, soi or "Bạn đang dùng điểm mạnh nào nhiều nhất, và điểm nào còn để quên?", than_do=than_do)
 
 
@@ -1307,7 +1311,7 @@ def muoi_hai_thang(pt: dict, ngay_xem: dt.date) -> list[dict]:
     ra = []
     for t in ba_thang_tiet(pt, ngay_xem, 12):
         a, b, m = muc_thang(pt, t["can"], t["chi"])
-        o = (kb.van_han_loi("nho", "can", TT_NHOM[t["thap_than"]]) if (pt.get("tuoi") or 99) < dsc.TUOI_VH_NHO
+        o = (kb.van_han_loi("nho", "can", TT_NHOM[t["thap_than"]]) if (99 if pt.get("tuoi") is None else pt["tuoi"]) < dsc.TUOI_VH_NHO
              else kb.van_han_loi("thap_than", t["thap_than"])) or {}
         ra.append({"tu": t["tu"].isoformat(), "den": t["den"].isoformat(), "muc": m, "nhan_muc": kb.nhan_muc(m),
                    "hai_cach_khac": a != b, "mang": o.get("mang") or _van_kb(t["thap_than"])["chu_de"],

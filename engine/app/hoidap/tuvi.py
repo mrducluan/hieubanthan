@@ -317,7 +317,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
         for m in SU_KIEN_CHAN_MEM:
             t_loc = re.sub(m, " ", t_loc)
     t_dau = unicodedata.normalize("NFC", cau_hoi).lower()
-    db = chung.dac_biet(t_loc) or ("tu_choi_nhe" if chung.co(t_loc, TU_CHOI_TV)
+    db = chung.dac_biet(t_loc, cau_hoi) or ("tu_choi_nhe" if chung.co(t_loc, TU_CHOI_TV)
                                    or any(re.search(m, t_dau) for m in TU_CHOI_TV_DAU) else None)
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
