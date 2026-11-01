@@ -85,7 +85,7 @@ def test_hop_dong(bc):
             assert len(c["hop"]) >= 2, c["ma"]
         for h in c["hop"]:
             assert h["loai"] in LOAI_HOP - {"cot_loi"}
-            assert 0 < len(h["tieu_de"]) <= 60 and h["noi_dung"] and isinstance(h["can_cu"], list)
+            assert 0 < len(h["tieu_de"]) <= 130 and (h["noi_dung"] or len(h["tieu_de"]) > 40)  # EN-2 ND-3: tiêu đề = trọn câu; hộp một câu thì thân trống and isinstance(h["can_cu"], list)
             assert ds.MA_MAU_RE.match(h["ma_mau"]), h["ma_mau"]
             assert not any(k.startswith("_") for k in h)
             if h["loai"] == "luu_y":                       # mỗi lưu ý kèm hướng xử lý, nằm ngay trong hộp
@@ -235,7 +235,9 @@ def test_trong_so_gan_ty_le_va_ha_hop(bc):
     b = toan_bo.tuvi(SINH, ngay_xem=XEM, trong_so=ts)
     c2 = {c["ma"]: c for c in b["chuong"]}
     ma = [h["ma_mau"] for h in c2["su_nghiep"]["hop"]]
-    assert h0["ma_mau"] not in ma and f"Đang xem lại: {h0['tieu_de']}" in c2["su_nghiep"]["can_cu"]
+    # "Vì sao nói vậy" ghi tiêu đề gốc của hộp (trước khi gọn bài); EN-2 tiêu đề hiển thị có thể là trọn câu dài hơn
+    assert h0["ma_mau"] not in ma and any(x.startswith("Đang xem lại: ") and h0["tieu_de"].startswith(x[14:])
+                                          for x in c2["su_nghiep"]["can_cu"])
     assert h0["ma_mau"] not in [h["ma_mau"] for h in b["cot_loi"]]
     g = next(h for h in c2["su_nghiep"]["hop"] if h["ma_mau"] == h1["ma_mau"])
     assert g["ty_le_dung"] == 0.75 and g["so_phieu"] == 40 and g["dang_xem_lai"] is False
@@ -325,7 +327,7 @@ def test_kb_thieu_o_van_chay(monkeypatch):
     assert kb.CHUNG_SUC_KHOE in sk["doan"]
     for c in b["chuong"]:
         for h in c["hop"]:
-            assert h["noi_dung"] and ds.MA_MAU_RE.match(h["ma_mau"])
+            assert (h["noi_dung"] or len(h["tieu_de"]) >= 20) and ds.MA_MAU_RE.match(h["ma_mau"])   # EN-2: hộp một câu
             assert not THUAT_NGU.search(h["noi_dung"]), h["noi_dung"]
 
 
@@ -386,7 +388,8 @@ def test_tieu_de_hop_khong_cut_khong_thuat_ngu():
                 t = h["tieu_de"]
                 assert not t.endswith("…") and not tn.search(t), t
                 assert not re.fullmatch(r"(Trong|Với|Ở|Về|Khi|Lúc) [^,]{0,22}", t), t
-                assert not re.search(r"trong (cha mẹ|con cái|anh chị em|tiền bạc|công việc)$", t), t
+                if h["noi_dung"]:            # tiêu đề là vế cắt của câu thân (EN-2: tiêu đề trọn câu thì kết thúc tự nhiên)
+                    assert not re.search(r"trong (cha mẹ|con cái|anh chị em|tiền bạc|công việc)$", t), t
                 assert "con người bạn" not in t and "chuyện con người bạn" not in h["noi_dung"], h["noi_dung"]
         # tóm tắt chương không lặp cùng một câu mô tả mức ở ≥ 3 chương
         cau = [x for c in b["chuong"] for x in c["tom_tat"].split(". ")[1:]]

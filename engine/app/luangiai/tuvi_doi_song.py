@@ -317,6 +317,29 @@ def _ten_lan(cung: str) -> str:
     return "sức của chính bạn" if cung == "Mệnh" else f"chuyện {_ten(cung)}"
 
 
+# Sao ở cung "người khác" nói về chính họ (cha mẹ, anh chị em, con, người bạn đời, bạn bè) — không gán cho "bạn".
+_CHU_THE = {"Phụ Mẫu": "cha mẹ", "Huynh Đệ": "anh chị em", "Tử Tức": "con cái", "Phu Thê": "người ấy",
+            "Nô Bộc": "bạn bè quanh bạn"}
+
+
+def _ly_do_sao(sao: str, do_sang: str, cung: str | None = None) -> str | None:
+    """EN-2 (ND-2): lý do theo CHÍNH sao đó (điểm mạnh / mặt tối trong KB chính tinh) thay câu chung "nét mạnh của bạn ở
+    đây phát huy rõ" (lặp 42 lần trên 10 hồ sơ). Không tên sao trong lời — tên sao nằm ở "Vì sao nói vậy"."""
+    ct = tuvi_kb.chinh_tinh(sao) or {}
+    dm = (ct.get("diem_manh") or "").split(",")[0].strip()
+    mt = (ct.get("mat_toi") or "").split(",")[0].strip()
+    ai = _CHU_THE.get(cung or "", "bạn")
+    if do_sang in ("Miếu", "Vượng") and dm:
+        return f"{ai} mạnh ở chỗ {dm}"
+    if do_sang == "Đắc" and dm:
+        return f"{ai} dùng được chỗ mạnh là {dm}"
+    if do_sang == "Bình" and dm:
+        return f"{ai} có nét {dm} nhưng chưa nổi hẳn"
+    if do_sang == "Hãm" and mt:
+        return f"khi gặp áp lực, {ai} {mt}" if mt.startswith(("dễ ", "hay ")) else f"khi gặp áp lực, {ai} dễ {mt}"
+    return None
+
+
 def ly_do(x: dict) -> list[tuple[str, int]]:
     """Lý do (đời thường) làm nên mức của cung `x` (một mục của `cham_cung`), xếp theo sức nặng — tất định."""
     ra: list[tuple[str, int, float]] = []
@@ -325,8 +348,8 @@ def ly_do(x: dict) -> list[tuple[str, int]]:
         if s["muon"]:
             ra.append(("không có nét riêng nổi hẳn, bạn hay làm theo nếp của người bên cạnh", 0, 1.0))
         else:
-            bang = _LY_DO_SANG_SK if x.get("ten") == "Tật Ách" else _LY_DO_SANG
-            ra.append((bang[ds], 1 if DIEM_SANG.get(ds, 0) > 0 else -1 if ds == "Hãm" else 0,
+            ld = _LY_DO_SANG_SK[ds] if x.get("ten") == "Tật Ách" else (_ly_do_sao(s["ten"], ds, x.get("ten")) or _LY_DO_SANG[ds])
+            ra.append((ld, 1 if DIEM_SANG.get(ds, 0) > 0 else -1 if ds == "Hãm" else 0,
                        abs(DIEM_SANG.get(ds, 0)) or 0.5))
     for h in x["hoa"]:
         ra.append((_LY_DO_HOA[h["hoa"]], -1 if h["hoa"] == "Kỵ" else 1, abs(DIEM_HOA[h["hoa"]]) + 0.1))
@@ -372,8 +395,10 @@ def ly_do_cau(x: dict, toi_da: int = 2) -> str:
     return "; ".join(_ly_do_hop_muc(x)[:toi_da])
 
 
-def _tom_tat_cung(ds: list[tuple[str, dict]]) -> str:
-    """ds = [(tên cung, mục chấm cung)] → một câu: mức + VÌ SAO (lý do từ chính lá số)."""
+def _tom_tat_cung(ds: list[tuple[str, dict]], muc_chung: str | None = None) -> str:
+    """ds = [(tên cung, mục chấm cung)] → một câu: mức + VÌ SAO (lý do từ chính lá số). Chương ghép nhiều mảng:
+    EN-2 (P0-2) câu mở bằng mức CHUNG của chương (đúng chip) rồi mới tới từng mảng — trước đây chip "Cân bằng" mà câu
+    ngay dưới mở bằng "Tiền bạc ở mức thuận lợi", người đọc tưởng hai chỗ nói ngược nhau."""
     if len(ds) == 1:
         ten, x = ds[0]
         dau = "Con người bạn" if ten == "Mệnh" else f"Chuyện {_ten(ten)}"
@@ -388,7 +413,9 @@ def _tom_tat_cung(ds: list[tuple[str, dict]]) -> str:
         ld = next((a for a in _ly_do_hop_muc(x) if a not in da), "")
         da.add(ld)
         ld = ld.replace(" ở đây", "")
-        phan.append(f"{_ten(t)} ở mức {kb.nhan_muc(x['muc']).lower()}" + (f" ({ld})" if ld else ""))
+        phan.append(f"{_ten(t)} {kb.nhan_muc(x['muc']).lower()}" + (f" ({ld})" if ld else ""))
+    if muc_chung:
+        return f"Nhìn chung ở mức {kb.nhan_muc(muc_chung).lower()}: " + "; ".join(phan) + "."
     return _hoa_dau("; ".join(phan)) + "."
 
 
@@ -453,7 +480,7 @@ def _chuong_cung(ma: str, cung: list[str], cc: dict, hoc: tuple, da_dung: set[st
         can_cu.append(f"Cung {t} đọc kèm nửa phần cung xung chiếu {x['lan_can'][0]} và hai cung tam hợp "
                       f"{x['lan_can'][1]}, {x['lan_can'][2]}")
     ts = (tuvi_kb.cung(cung[0]) or {}).get("cau_tu_soi")
-    tom = _tom_tat_cung([(t, cc[t]) for t in cung])
+    tom = _tom_tat_cung([(t, cc[t]) for t in cung], muc if ghep else None)
     return _chuong(ma, muc, tom, hop, [tom], can_cu, ts)
 
 
@@ -520,6 +547,12 @@ def _chuong_tong_quan(ls: dict, cc: dict, hoc: tuple, da_dung: set[str]) -> dict
     return ch
 
 
+def _hai_phan(ds: list[str]) -> str:
+    """Tối đa hai phần cơ thể (tách "a, b và c"), giữ thứ tự, bỏ trùng."""
+    phan = list(dict.fromkeys(p.strip() for x in ds for p in re.split(r",|;| và ", x) if p.strip()))[:2]
+    return " và ".join(phan)
+
+
 def _chuong_suc_khoe(cc: dict, hoc: tuple) -> dict:
     x = cc["Tật Ách"]
     cand = []
@@ -534,13 +567,18 @@ def _chuong_suc_khoe(cc: dict, hoc: tuple) -> dict:
         bp_ta = list(dict.fromkeys(sk["bo_phan"] for _, noi, sk in co if noi == "Tật Ách" and sk.get("bo_phan")))
         bp_menh = [b for b in dict.fromkeys(sk["bo_phan"] for _, noi, sk in co if noi == "Mệnh" and sk.get("bo_phan"))
                    if b not in bp_ta]
+        # EN-2 (P1-10): liệt kê 3–10 bộ phận gây lo và vô nghĩa → tối đa HAI phần, lấy từ nguồn mạnh nhất (Tật Ách
+        # trước, không có mới tới Mệnh). Câu thói quen là cụm danh từ trong KB → có dẫn "Thói quen dễ hao sức:".
+        hai = _hai_phan(bp_ta or bp_menh)
         cau = []
-        if bp_ta:
-            cau.append(f"Theo sách xưa, phần cơ thể bạn nên chăm sóc phòng ngừa là {'; '.join(bp_ta)}.")
-        if bp_menh:
-            cau.append(f"Với tính cách của bạn, sách xưa nhắc {'thêm' if bp_ta else 'chăm sóc phòng ngừa'} "
-                       f"{'; '.join(bp_menh)}.")
-        nd = " ".join([*cau, sk0.get("thoi_quen") or ""]).strip() or "Bạn nên để ý nhịp nghỉ của mình."
+        if hai and bp_ta:
+            cau.append(f"Theo sách xưa, phần cơ thể bạn nên chăm sóc phòng ngừa là {hai}.")
+        elif hai:
+            cau.append(f"Với tính cách của bạn, sách xưa nhắc chăm sóc phòng ngừa {hai}.")
+        tq = (sk0.get("thoi_quen") or "").strip()
+        if tq and not re.match(r"(?i)(bạn|người|khi|nên|hay|dễ)\b", tq):
+            tq = "Thói quen dễ hao sức: " + tq[:1].lower() + tq[1:]
+        nd = " ".join([*cau, tq]).strip() or "Bạn nên để ý nhịp nghỉ của mình."
         cu = [f"{s['ten']} ({s['do_sang'] or 'Bình'}) ở cung {noi}" + (" (mượn)" if s["muon"] else "") for s, noi, _ in co]
         tieu = "Phần cơ thể nên chăm sóc" if bp_ta or noi0 == "Tật Ách" else "Nhịp sức của chính bạn"
         lk = sk0.get("loi_khuyen") or _SK_MAC_DINH
@@ -1033,21 +1071,29 @@ def _linh_vuc(h: dict) -> str:
 def _chuong_loi_khuyen(ds_chuong: list[dict], muc: str, hoc: tuple) -> dict:
     nguon = [h for c in ds_chuong if c["ma"] in CHUONG_COT_LOI for h in c["hop"] if not h.get("_chua_dung")]
     nguon = _sap(nguon)
+    # EN-2 (P0-2): "chỗ nên gỡ trước" từng rơi vào đúng mảng vừa chấm Thuận lợi. Điều nên để ý lấy từ chương mức thấp
+    # trước (Cần lưu ý → Cân bằng → Thuận lợi); điểm mạnh lấy từ chương mức cao trước. Sắp ổn định → vẫn tất định.
+    muc_ch = {c["ma"]: c.get("muc") for c in ds_chuong}
+    _hang = {"can_chu_dong": 0, "can_bang": 1, None: 1, "thuan": 2}
+
+    def _muc_cua(h: dict) -> str | None:
+        return muc_ch.get(_linh_vuc(h))
 
     def ba(loai: str) -> list[dict]:
         ra, mang, huong = [], set(), set()
+        thu_tu = sorted(nguon, key=lambda h: _hang.get(_muc_cua(h), 1) * (1 if loai == "luu_y" else -1))
 
         def duoc(h: dict) -> bool:          # không lặp cùng một việc nên làm (vd câu Tuần/Triệt ở hai chương)
             return (h["loai"] == loai and h not in ra and h.get("huong_xu_ly") not in huong
                     and not h.get("_pha_cach"))         # cách bị phá không tính là "điểm mạnh nên dùng"
 
-        for h in nguon:                         # mỗi mảng đời một ý trước, đủ 3 thì dừng
+        for h in thu_tu:                         # mỗi mảng đời một ý trước, đủ 3 thì dừng
             if duoc(h) and _linh_vuc(h) not in mang:
                 ra.append(h)
                 mang.add(_linh_vuc(h))
                 if h.get("huong_xu_ly"):
                     huong.add(h["huong_xu_ly"])
-        for h in nguon:
+        for h in thu_tu:
             if len(ra) >= 3:
                 break
             if duoc(h):
@@ -1075,8 +1121,9 @@ def _chuong_loi_khuyen(ds_chuong: list[dict], muc: str, hoc: tuple) -> dict:
     hop, xem_lai = _ap_hoc(cand, *hoc)
     m_manh = [_ten_mang(h) for h in manh]
     m_vap = [_ten_mang(h) for h in vap]
-    tom = (f"Chỗ dựa lớn nhất của bạn nằm ở {m_manh[0]}" + (f"; chỗ nên gỡ trước nằm ở {m_vap[0]}." if m_vap else ".")
-           if m_manh else f"Chỗ nên gỡ trước nằm ở {m_vap[0]}." if m_vap else
+    goi_vap = ("chỗ nên gỡ trước" if vap and _muc_cua(vap[0]) != "thuan" else "chỗ nên để ý thêm")
+    tom = (f"Chỗ dựa lớn nhất của bạn nằm ở {m_manh[0]}" + (f"; {goi_vap} nằm ở {m_vap[0]}." if m_vap else ".")
+           if m_manh else f"{_hoa_dau(goi_vap)} nằm ở {m_vap[0]}." if m_vap else
            "Lá số của bạn ít điểm nhấn mạnh; các chương trên đã nêu việc nên làm cho từng mảng.")
     doan = [tom, (f"Nếu tuần này chỉ làm được một việc, hãy bắt đầu từ {m_vap[0]}: {_thuong(viec[0])}."
                   if m_vap and viec else "")]

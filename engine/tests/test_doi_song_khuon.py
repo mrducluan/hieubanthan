@@ -23,7 +23,7 @@ def _kiem_khuon(bc: dict, mo_dun: str):
         assert set(c) >= {"ma", "tieu_de", "tom_tat", "hop", "doan", "can_cu"}, c["ma"]
         assert c["hop"] and c["tom_tat"], (mo_dun, c["ma"])
         for h in c["hop"]:
-            assert h["loai"] in kh.LOAI_HOP and h["tieu_de"] and h["noi_dung"]
+            assert h["loai"] in kh.LOAI_HOP and h["tieu_de"] and (h["noi_dung"] or len(h["tieu_de"]) >= 20)  # EN-2: hộp một câu
             if h["loai"] == "luu_y":
                 assert h.get("huong_xu_ly")
             if h.get("ma_mau"):

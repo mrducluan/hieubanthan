@@ -171,6 +171,36 @@ def than_khong_lap_tieu_de(tieu_de: str, noi_dung: str) -> str:
     return con[:1].upper() + con[1:]
 
 
+TIEU_DE_TOI_DA = 90
+TIEU_DE_TOI_DA_DAI = 130      # chỉ khi không còn cách cắt gọn nào khác
+
+
+def tach_tieu_de(tieu_de: str, noi_dung: str) -> tuple[str, str]:
+    """EN-2 (ND-3): tiêu đề là vế đầu của câu thân → nếu cắt giữa câu, thân mở bằng mẩu ("Giáo dục, y tế…", "Hoặc người
+    làm phiền…"). Câu đầu của thân ≤ 90 ký tự → tiêu đề = TRỌN câu đầu, thân = các câu sau. Câu đầu dài → luật cũ
+    (`than_khong_lap_tieu_de`) nhưng mảnh còn lại mở bằng từ nối thì giữ cả câu trong thân. Chỉ sắp lại câu đã có."""
+    t = (tieu_de or "").strip().rstrip(".!?…:; ")
+    n = " ".join((noi_dung or "").split())
+    if len(t) < 4 or not n.lower().startswith(t.lower()):
+        return tieu_de, n
+    m = re.match(r"(.+?[.!?…])(?:\s+|$)(.*)", n)
+    dau, sau = (m.group(1).rstrip(".!?… "), m.group(2).strip()) if m else (n.rstrip(".!?… "), "")
+    if dau.lower() == t.lower():
+        return t, sau
+    if len(dau) <= TIEU_DE_TOI_DA:
+        return dau, sau
+    con = than_khong_lap_tieu_de(t, n)
+    if not re.match(r"(?i)^(và|nhưng|hay|hoặc|rồi|mà)\b", con):
+        return t, con
+    # Mẩu còn lại mở bằng từ nối (cắt sẽ ra mẩu câu): thử vế đầu tới dấu ";" / ":" làm tiêu đề; không được thì tiêu
+    # đề = trọn câu (≤ 130); quá dài thì giữ trọn câu trong thân (lặp vài chữ tiêu đề còn hơn mẩu câu).
+    ve = re.match(r"(.+?)\s*[;:]\s+(.+)", dau)
+    if ve and len(ve.group(1)) <= TIEU_DE_TOI_DA and ve.group(1).lower().startswith(t.lower()):
+        con = ve.group(2)
+        return ve.group(1), " ".join(x for x in (con[:1].upper() + con[1:] + ".", sau) if x)
+    return (dau, sau) if len(dau) <= TIEU_DE_TOI_DA_DAI else (t, n)
+
+
 def _cau_cua(s: str) -> list[str]:
     return [c.strip() for c in re.split(r"(?<=[.!?])\s+", s or "") if c.strip()]
 
@@ -229,11 +259,21 @@ def gon_bao_cao(bc: dict, gon_doan: bool = True) -> dict:
         doi_tieu_de.update(tieu_de_khong_trung(hop))
         for h in hop:
             goc = h.get("noi_dung") or ""
-            moi = than_khong_lap_tieu_de(h.get("tieu_de", ""), goc)
+            td_cu = h.get("tieu_de", "")
+            td_moi, moi = tach_tieu_de(td_cu, goc)
             if moi != goc and not moi:
                 lk = (h.get("loi_khuyen") or "").strip()
                 khac = " ".join(x.get("noi_dung", "") for x in hop if x is not h)
                 moi = lk if lk and lk not in khac and lk not in goc else ""
+            # Hộp một câu không có "nên làm" riêng: tiêu đề = trọn câu, thân trống (web chỉ hiện tiêu đề) — không lặp
+            # tiêu đề, không để mẩu câu.
+            if td_moi != td_cu:
+                ma = h.get("ma_mau") or ""
+                for k, v in list(doi_tieu_de.items()):        # tiêu đề đã đổi ở bước 0 → nối tiếp sang tiêu đề mới
+                    if k[0] == ma and v == td_cu:
+                        doi_tieu_de[k] = td_moi
+                doi_tieu_de[(ma, td_cu)] = td_moi
+                h["tieu_de"] = td_moi
             h["noi_dung"] = moi
             if h.get("ma_mau") and h["ma_mau"] not in da_gon:
                 da_gon[h["ma_mau"]] = h

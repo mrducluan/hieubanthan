@@ -98,7 +98,7 @@ def test_hop_dong(bc):
         assert 2 <= len(c["hop"]) <= 6, c["ma"]
         for h in c["hop"]:
             assert h["loai"] in LOAI_HOP - {"cot_loi"}
-            assert 0 < len(h["tieu_de"]) <= 90 and h["noi_dung"]  # EN-2 ND-3: tiêu đề = trọn câu đầu ≤ 90 and isinstance(h["can_cu"], list)
+            assert 0 < len(h["tieu_de"]) <= 130 and (h["noi_dung"] or len(h["tieu_de"]) > 40)  # EN-2 ND-3: tiêu đề = trọn câu; hộp một câu thì thân trống and isinstance(h["can_cu"], list)
             assert bt.MA_MAU_RE.match(h["ma_mau"]) and h["ma_mau"].startswith(f"ds.bt.{c['ma']}."), h["ma_mau"]
             assert not any(k.startswith("_") for k in h)
             if h["loai"] == "luu_y":                       # mỗi lưu ý kèm hướng xử lý, nằm ngay trong hộp
@@ -306,7 +306,7 @@ def test_khong_cau_barnum_tren_golden():
     dem: collections.Counter = collections.Counter()
     for ca in _G:
         b = toan_bo.battu(_sinh(ca), ngay_xem=dt.date.fromisoformat(ca["ngay_xem"]))
-        dem.update({h["noi_dung"] for h in _hop_chuong(b) if h["loai"] in ("diem_manh", "luu_y")})
+        dem.update({h["noi_dung"] or h["tieu_de"] for h in _hop_chuong(b) if h["loai"] in ("diem_manh", "luu_y")})
     tran = 0.7 * len(_G)
     assert not [(n, s) for s, n in dem.items() if n > tran]
 
