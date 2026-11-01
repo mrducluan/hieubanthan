@@ -81,3 +81,20 @@ def test_hoi_dap_ham_tri_la_dao_hoa():
     from app.hoidap import battu as hd
     r = hd.tra_loi("Bát tự tôi có Hàm Trì không?", sinh=SINH, ngay_xem=dt.date(2026, 11, 1), dung_llm=False)
     assert r["phan_loai"]["chu_de"] == "than_sat" and "Hàm Trì" in r["cau_tra_loi"]
+
+
+@pytest.mark.parametrize("cau,khong_phai", [
+    ("Bản thân cũng không biết nên làm nghề gì, tứ trụ tôi hợp nghề nào?", "cung_than"),
+    ("Tôi mệnh Kim, chồng mệnh cũng Kim thì hôn nhân thế nào?", "cung_than"),
+    ("Tôi sinh ở Thái Nguyên, bát tự tôi hợp nghề gì?", "cung_than"),
+    ("Anh ấy có thiện ý với tôi không, tứ trụ tôi duyên thế nào?", "than_sat")])
+def test_khong_bat_nham_chu_thuong(cau, khong_phai):
+    """Code-review EN-5: chữ trùng khi bỏ dấu không được kéo câu sang chủ đề mới."""
+    from app.hoidap import battu as hd
+    assert hd.phan_loai(cau)["chu_de"] != khong_phai
+
+
+@pytest.mark.parametrize("cau", ["menh cung cua toi la gi", "xem thai nguyen cua minh", "tieu van cua toi"])
+def test_go_khong_dau_van_nhan(cau):
+    from app.hoidap import battu as hd
+    assert hd.phan_loai(cau)["chu_de"] == "cung_than"

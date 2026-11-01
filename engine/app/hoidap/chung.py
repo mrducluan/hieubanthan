@@ -298,7 +298,7 @@ def them_cua_so(goi: dict, pl: dict, mo_dun: str, sinh: dict, ngay_xem, ls: dict
     t = pl["cau_chuan_hoa"]
     if pl.get("xu_ly") in DAC_BIET or goi.get("can_them") or not goi["muc"] or hieu_cau.kieu(t) not in ("co_nen", "khi_nao"):
         return
-    n = hieu_cau.khung_thang(t, ngay_xem)
+    n = hieu_cau.khung_thang(t, ngay_xem, pl.get("cau_goc"))
     if not n:
         return
     try:
@@ -337,3 +337,14 @@ def doan_cua_so(m: dict) -> str:
     s += (f"Nếu đã quyết, làm phần chính (ký, nộp, chuyển, ra mắt) {noi}"
           + ("; tháng đi chậm dùng để chuẩn bị, rà lại điều kiện, hỏi thêm người có kinh nghiệm." if ch else "."))
     return s
+
+
+def khop_dau(raw: str | None, t: str, rx_co_dau: list[str], rx_khong_dau: list[str]) -> bool:
+    """EN-5 (code-review): thuật ngữ trùng chữ thường khi bỏ dấu ("mệnh cung"/"mệnh cũng", "Đà La"/"đã là", "Thiên Y"/
+    "thiện ý") — người dùng gõ CÓ dấu thì so trên câu có dấu (`rx_co_dau`), gõ không dấu thì dùng mẫu chặt hơn
+    (`rx_khong_dau`, có ngữ cảnh) trên câu đã chuẩn hoá `t`."""
+    if raw:
+        cd, _, co_dau = _at._hai_ban(raw)
+        if co_dau:
+            return co(cd, rx_co_dau)
+    return co(t, rx_khong_dau)

@@ -19,10 +19,17 @@ HOI_SAO = ((r"kinh da", ("kinh", "da")), (r"kinh duong", ("kinh",)), (r"(?<!\w)d
            (r"xuong khuc|van xuong|van khuc", ("xuong_khuc",)))
 
 
-def ma_hoi(cau_chuan_hoa: str) -> list[str]:
-    """Các sao lưu được nêu trong câu hỏi (theo thứ tự đọc)."""
+def ma_hoi(cau_chuan_hoa: str, cau_goc: str | None = None) -> list[str]:
+    """Các sao lưu được nêu trong câu hỏi (theo thứ tự đọc). Gõ có dấu thì "đã là" không bị nhận là Đà La."""
     import re  # noqa: PLC0415
-    ra = [m for rx, ds in HOI_SAO if re.search(rx, cau_chuan_hoa) for m in ds]
+    from app.hoidap import chung  # noqa: PLC0415
+    ra = []
+    for rx, ds in HOI_SAO:
+        if "da la" in rx:
+            if chung.khop_dau(cau_goc, cau_chuan_hoa, [r"đà la|kình đà"], [r"(?<!\w)da la|kinh da"]):
+                ra += ds
+        elif re.search(rx, cau_chuan_hoa):
+            ra += ds
     return sorted(set(ra), key=_THU_TU.index)
 
 

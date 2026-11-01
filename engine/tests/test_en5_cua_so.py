@@ -17,9 +17,15 @@ H = dt.date(2026, 11, 1)
                                    ("mấy tháng tới tôi có nên mua nhà", 6), ("nửa năm tới có nên khởi nghiệp", 6),
                                    ("từ giờ tới cuối năm có nên nghỉ việc", 2), ("trong 12 tháng tới tháng nào nên cưới", 12),
                                    ("sáu tháng tới", 6), ("có nên đổi việc không", None), ("năm sau có nên cưới", None),
-                                   ("tháng 3 tới có nên ký hợp đồng", None), ("20 tháng tới", 12)])
+                                   ("tháng 3 tới có nên ký hợp đồng", None), ("20 tháng tới", 12),
+                                   # code-review: số ngày / "sau" = sau khi / câu hỏi kết bằng "không"
+                                   ("Có nên ký hợp đồng ngày 5 tháng sau không?", None),
+                                   ("có nên mở quán mùng 8 tháng tới không", None),
+                                   ("Có nên chuyển nhà sau tháng tới không?", None),
+                                   ("Có nên đổi việc từ giờ tới cuối năm không?", 2),
+                                   ("Có nên cưới trong năm nay không?", 2), ("bảy tháng tới có nên học thêm", 7)])
 def test_khung_thang(cau, n):
-    assert hieu_cau.khung_thang(chung.chuan_hoa_cau(cau), H) == n
+    assert hieu_cau.khung_thang(chung.chuan_hoa_cau(cau), H, cau) == n
 
 
 TV = {"ngay": dt.date(1990, 5, 17), "ti": 6, "gioi_tinh": "nam"}
@@ -29,8 +35,9 @@ BT = {"lich": dt.datetime(1990, 5, 17, 12, 30), "gioi_tinh": "nam"}
 @pytest.mark.parametrize("mo_dun,sinh", [("tuvi", TV), ("battu", BT)])
 def test_cua_so_dung_ham_thang_cua_thoi_gian_toi(mo_dun, sinh):
     c = cua_so.lap(mo_dun, sinh, H, 6)
-    assert 5 <= len(c["thang"]) <= 7
-    goc = (tgt._tv_thang(sinh, H, 2, None) if mo_dun == "tuvi" else tgt._bt_thang(sinh, H, 6))
+    assert 6 <= len(c["thang"]) <= 7
+    assert c["thang"][-1]["den"] >= "2027-04-25"                  # phủ hết cửa sổ (review: trước hụt cuối)
+    goc = (tgt._tv_thang(sinh, H, 3, None) if mo_dun == "tuvi" else tgt._bt_thang(sinh, H, 7))
     muc_goc = {x["tu"]: x["muc"] for x in goc}
     for x in c["thang"]:
         assert x["muc"] == muc_goc[x["tu"]]                       # một bộ tính: không chấm lại
@@ -78,3 +85,10 @@ def test_loi_khong_nhac_thang_khong_co():
     m["cham"] = [{**m["thang"][0], "muc": "can_chu_dong"}]
     s = chung.doan_cua_so(m)
     assert "những tháng nhịp đều" in s and "đi chậm dùng" in s
+
+
+
+def test_cua_so_12_thang_phu_du():
+    for mo_dun, sinh in (("tuvi", TV), ("battu", BT)):
+        c = cua_so.lap(mo_dun, sinh, H, 12)
+        assert c["thang"][-1]["den"] >= "2027-10-25", mo_dun

@@ -51,8 +51,8 @@ function DongNgay({ n }: { n: NgayNhieu }) {
         </span>
         {n.hop.length > 0 && (
           <span className="mt-1 flex flex-wrap gap-1">
-            {n.hop.map((h) => (
-              <span key={h.vai} className="rounded-full bg-jade/10 px-2 py-0.5 text-[11px] text-jade">{h.ten} {h.ten_vai}</span>
+            {n.hop.map((h, i) => (
+              <span key={`${h.vai}-${i}`} className="rounded-full bg-jade/10 px-2 py-0.5 text-[11px] text-jade">{h.ten} {h.ten_vai}</span>
             ))}
           </span>
         )}

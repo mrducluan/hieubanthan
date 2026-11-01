@@ -117,3 +117,21 @@ def test_khong_nham_cau_kien_thuc():
     from app.hoidap import tuvi as tv
     r = tv.tra_loi("Kình Dương là gì?", sinh=SINH, ngay_xem=dt.date(2026, 11, 1), dung_llm=False)
     assert not any(m["loai"] == "sao_luu" for m in r["bang_chung"]["muc"])
+
+
+@pytest.mark.parametrize("cau", ["Năm nay tôi đã là trưởng phòng, có nên nhảy việc không?",
+                                 "Vì sao lưu niên năm nay của tôi lại xấu?", "Tại sao lưu ý nhiều về tiền năm nay?"])
+def test_khong_bat_nham_sao_luu(cau):
+    from app.hoidap import tuvi as tv
+    assert not tv.phan_loai(cau).get("sao_luu")
+
+
+@pytest.mark.parametrize("cau", ["nam nay toi co kinh da luu khong", "luu da la nam nay o cung nao cua toi"])
+def test_go_khong_dau_sao_luu(cau):
+    from app.hoidap import tuvi as tv
+    assert tv.phan_loai(cau).get("sao_luu")
+
+
+def test_ma_hoi_co_dau():
+    assert sl.ma_hoi("nam nay toi da la truong phong", "Năm nay tôi đã là trưởng phòng") == []
+    assert sl.ma_hoi("nam nay co da la luu khong", "Năm nay có Đà La lưu không") == ["da"]

@@ -187,10 +187,10 @@ def _tv_thang(tv_sinh: dict, tu: dt.date, so_lan: int, ls: dict | None) -> list[
     return ra
 
 
-def _bt_thang(bt_sinh: dict, tu: dt.date, so: int) -> list[dict]:
+def _bt_thang(bt_sinh: dict, tu: dt.date, so: int, ls: dict | None = None) -> list[dict]:
     from app.luangiai import battu_doi_song as bt  # noqa: PLC0415
 
-    pt = bt.phan_tich(bt._la_so(bt_sinh))
+    pt = bt.phan_tich({**ls, "_gioi_tinh": bt_sinh["gioi_tinh"]} if ls else bt._la_so(bt_sinh))
     ra = []
     for i, th in enumerate(bt.ba_thang_tiet(pt, tu, so=so), 1):
         a, b, m = bt.muc_thang(pt, th["can"], th["chi"])

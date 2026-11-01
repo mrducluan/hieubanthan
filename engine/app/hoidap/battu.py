@@ -45,10 +45,8 @@ VAN = [r"dai van", r"luu nien", r"nam nay", r"nam sau", r"muoi nam", r"10 nam", 
 THAN_SAT_KW = {t: chung.chuan_hoa(t) for t in battu_mo_rong._Y}
 THAN_SAT_KW["Thiên Ất Quý Nhân"] = r"quy nhan|thien at"
 THAN_SAT_KW["Đào Hoa"] = r"dao hoa|ham tri"
-THAN_SAT_KW["Thiên Y"] = r"(sao |co |than sat )thien y|thien y (la|o|co|trong|cua)"
+THAN_SAT_KW["Thiên Y"] = r"(sao |than sat )thien y|thien y (la sao|o tru|trong (tu tru|bat tu|la so))"
 CHU_DE = [
-    # EN-5.3: Thai nguyên / Mệnh cung / Thân cung / tiểu vận — hỏi thẳng tên thì trả đúng trụ đã tính
-    ("cung_than", [r"menh cung", r"thai nguyen", r"than cung", r"tieu van"]),
     # MT-ĐS B1 — hôn nhân / con cái / pháp lý / đi xa / an toàn / học hành / quan hệ / hậu vận đứng TRƯỚC thần sát
     # để "vận đào hoa, ế mãi" đi vào hôn nhân, "Dịch Mã có phải số đi xa" đi vào đi xa (thần sát vẫn được đọc trong mục).
     ("hon_nhan", [r"hon nhan", r"vo chong", r"phu tinh", r"the tinh", r"nguoi yeu", r"ban doi", r"tinh duyen",
@@ -75,7 +73,7 @@ CHU_DE = [
                   r"dich ma", r"hoa cai", r"van xuong", r"dao hoa", r"hong diem", r"co than", r"qua tu",
                   r"khoi cuong", r"duong nhan", r"loc than", r"kim du", r"thien duc", r"nguyet duc",
                   r"tuong tinh", r"kiep sat", r"vong than", r"ham tri",
-                  r"(sao |co |than sat )thien y", r"thien y (la|o|co|trong|cua)"]),
+                  r"(sao |than sat )thien y", r"thien y (la sao|o tru|trong (tu tru|bat tu|la so))"]),
     ("xung_hop", [r"xung hop", r"hop xung", r"hinh xung", r"xung pha", r"luc hop", r"tam hop", r"luc xung",
                   r"tu hinh", r"tuong hinh", r"luc hai", r"ngu hop", r"co xung", r"bi xung", r"tru (nao )?xung"]),
     # HH-CT2: "tính cách gì" không phải hỏi cách cục
@@ -115,7 +113,7 @@ def _giai_thich_khop(t: str) -> list[str]:
 def phan_loai(cau_hoi: str) -> dict:
     gioi_thieu, t_chinh = _h._tach_gioi_thieu(cau_hoi)
     t = chung.chuan_hoa_cau(cau_hoi)
-    kq = {"cau_chuan_hoa": t, "loai": None, "xu_ly": "tra_loi", "chu_de": None,
+    kq = {"cau_chuan_hoa": t, "cau_goc": cau_hoi, "loai": None, "xu_ly": "tra_loi", "chu_de": None,
           "can": _can_nhac(t_chinh), "mua": next((k for k, m in MUA_KW.items() if re.search(m, t)), None),
           "thap_than": [k for k, m in TT_KW.items() if chung.co(t_chinh, [m])],
           "nhom": [k for k, m in NHOM_KW.items() if chung.co(t_chinh, m)],
@@ -153,7 +151,8 @@ def phan_loai(cau_hoi: str) -> dict:
         kq["chu_de"] = next((cd for cd, mau in CHU_DE if chung.co(t_chinh, mau)), None)   # MT-ĐS B2: mảng của câu vận
     else:
         kq["loai"] = "la_so"
-        kq["chu_de"] = next((cd for cd, mau in CHU_DE if chung.co(t_chinh, mau)), None)
+        kq["chu_de"] = "cung_than" if _hoi_cung_than(cau_hoi, t_chinh) else \
+            next((cd for cd, mau in CHU_DE if chung.co(t_chinh, mau)), None)
         if kq["thap_than"] or kq["nhom"]:
             kq["chu_de"] = kq["chu_de"] if kq["chu_de"] in ("nghe_tien", "hon_nhan", "con_cai", "phap_ly", "di_xa", "an_toan",
                                                             "hoc_hanh", "quan_he", "hau_van", "gia_dinh") else "thap_than"
@@ -162,6 +161,17 @@ def phan_loai(cau_hoi: str) -> dict:
         if kq["chu_de"] in ("loi_song", "nghe_tien", "phap_ly", "di_xa", "an_toan", "hau_van", "hoc_hanh", "quan_he"):
             kq["xu_ly"] = "tra_loi_kem_luu_y"
     return kq
+
+
+# EN-5.3 (sau code-review): "mệnh cung" trùng "mệnh cũng", "thân cung" trùng "bản thân cũng", "Thái Nguyên" là tên tỉnh
+# → gõ có dấu thì so trên chữ có dấu; gõ không dấu thì cần ngữ cảnh ("mệnh cung của tôi", "tiểu vận năm …").
+_CT_CO_DAU = [r"mệnh cung", r"thai nguyên", r"thân cung", r"tiểu vận"]
+_CT_KHONG_DAU = [r"(xem|tinh|cua|ve) (menh cung|thai nguyen|than cung)", r"(menh cung|thai nguyen|than cung) "
+                 r"(cua|trong|la gi|o dau|toi|minh|em)", r"tieu van"]
+
+
+def _hoi_cung_than(raw: str, t: str) -> bool:
+    return chung.khop_dau(raw, t, _CT_CO_DAU, _CT_KHONG_DAU)
 
 
 # ------------------------------------------------------------------ gói bằng chứng
@@ -604,7 +614,7 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     if ls is not None and sinh and not goi["can_them"] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"):
         _them_so_nam(goi, pl, sinh, ngay_xem, ls)
     if ls is not None and sinh:
-        chung.them_cua_so(goi, pl, "battu", sinh, ngay_xem, ls if "battu" == "tuvi" else None, ("tu_tru", "sao_han"))   # EN-5.4
+        chung.them_cua_so(goi, pl, "battu", sinh, ngay_xem, ls, ("tu_tru", "sao_han"))   # EN-5.4
     if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
         goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
         chung.ket(goi)
