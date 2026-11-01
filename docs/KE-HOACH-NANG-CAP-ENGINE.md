@@ -146,6 +146,23 @@ Thước đo: an toàn holdout 68% → **100%**; p95 kb/trang 1.354 → < 100 ms
    - Hôm nay thêm **một câu tổng hợp** ghép các tín hiệu trong ngày.
 
 ### EN-3 · Hỏi đáp v2 (3–4 tuần) — khâu QUAY LẠI + NẠP (3 Sao/câu)
+> **Trạng thái 2026-11-01 (đợt 1 đã làm)** — đo bằng `engine/scripts/cham_holdout_v2.py` (holdout đóng băng; luật viết theo
+> bộ phát triển `dev_en3.jsonl` 250 câu do agent viết độc lập, không nhìn holdout):
+>
+> | Thước đo (holdout_v2) | Trước EN-3 | Sau | Mục tiêu |
+> |---|---|---|---|
+> | Định tuyến | 80% (209/261) | **90%** (235/261) | ≥ 90% ✓ |
+> | Trả lời thẳng (đoạn 1–2) | 64% | **74%** | ≥ 85% ✗ |
+> | Đúng mốc thời gian | 26/33 | **29/33** | ≥ 5/6 mỗi mảng ✓ (Kinh Dịch không có câu thời gian trong holdout) |
+> | An toàn | 25/25 | 25/25 (+10/10 dev) | 100% ✓ |
+> | Teencode / viết tắt (dev) | — | 32/36 | ≥ 14/16 ✓ |
+>
+> Đã làm: mục 1 (module `hoidap/hieu_cau.py`: kiểu câu, mốc thời gian, người thứ hai; mở viết tắt `chuan_hoa_cau`), mục 2
+> (`hoi_lai` + khối chọn trên web), một phần mục 3 (`chung.tra_loi_truoc` + đoạn mốc thời gian lên đầu), mục 4 (vợ/chồng có
+> năm sinh tính luôn; câu kiến thức trả bằng từ điển, không cá nhân hoá), mục 5 (9 mục `bo_tri` + 10 thuật ngữ). **Còn lại
+> (EN-3b)**: "trả lời thẳng" 74 → 85% cần đoạn mở đầu soạn theo đúng điều được hỏi ở từng mảng (hiện mới sắp lại đoạn có
+> sẵn); mục 6 (bộ phân xử Naive Bayes) chưa cần — luật hoà điểm hiếm.
+
 1. **Module "Hiểu câu hỏi" dùng chung 5 mảng** (RULES, tất định):
    - chuẩn hoá + từ điển viết tắt (ck, vk, cv, sk, bh…);
    - **trích ô dữ kiện**:
