@@ -16,13 +16,11 @@ import os
 import re
 from concurrent.futures import ThreadPoolExecutor
 
-import httpx
+import httpx  # noqa: F401 — test giả lập httpx.Client qua module này; lời gọi thật ở ai_goi
 
 from app.kb import tuvi_kb
 from app.narrative import hoi_van
 from app.narrative.ngan_sach import mo_ta_loi
-from app.narrative import llm as _llm
-from app.narrative import ngan_sach as _ngan_sach
 
 THAP_THAN = ["Tỷ Kiên", "Kiếp Tài", "Thực Thần", "Thương Quan", "Thiên Tài", "Chính Tài", "Thất Sát",
              "Chính Quan", "Thiên Ấn", "Chính Ấn"]
@@ -37,7 +35,7 @@ def _thuat_ngu() -> list[str]:
 
 _SYSTEM = """Bạn là biên tập viên, KHÔNG phải thầy bói. Bạn nhận MỘT CHƯƠNG của bản luận giải {mo_dun}: \
 tiêu đề và các đoạn thân bài (`doan`) đã được hệ thống chọn từ kho tri thức. Chỉ viết lại PHẦN THÂN BÀI đó thành \
-bài liền mạch, 6–12 câu, chia 2–4 đoạn. Các hộp nổi bật và phần "Vì sao nói vậy" do hệ thống giữ riêng — bạn không \
+bài liền mạch, DÀI GẦN BẰNG đoạn gốc (không quá 1,5 lần; đoạn gốc ngắn thì bài ngắn), chia 1–3 đoạn. Các hộp nổi bật và phần "Vì sao nói vậy" do hệ thống giữ riêng — bạn không \
 viết, không nhắc tới chúng.
 
 GIỌNG VĂN: nói chuyện đời thường như một người bạn hiểu chuyện; câu ngắn; xưng "bạn"; ví dụ đời thường nếu đoạn gốc \
@@ -58,22 +56,16 @@ def _cum_cam() -> list[str]:
 
 
 def kiem_tra_chuong(van: str, nguon: str) -> list[str]:
-    """Danh sách vi phạm của bản LLM so với văn bản nguồn của chương."""
-    loi: list[str] = hoi_van.lien_ket_la(van, nguon)   # SEC-2
-    so_nguon = set(re.findall(r"\d+", nguon))
-    for n in re.findall(r"\d+", van):
-        if n not in so_nguon:
-            loi.append(f"số lạ: {n}")
-    con_lai = van
-    for t in _thuat_ngu():                       # dài trước để "Thiên Phủ" không bị đếm thành "Thiên"
+    """Danh sách vi phạm của bản LLM so với văn bản nguồn của chương — EN-4: bộ kiểm chung `kiem_ai` (liên kết, số kể
+    cả viết bằng chữ, thuật ngữ lạ theo từ điển 5 mảng + bảng Tử vi / Bát tự, cụm cấm, từ y tế, câu ý mới, độ dài)."""
+    from app.narrative import kiem_ai  # noqa: PLC0415
+    loi: list[str] = kiem_ai.kiem(van, nguon)
+    con_lai = van                                # thuật ngữ riêng Tử vi / Bát tự (phụ tinh, thập thần…) ngoài từ điển
+    for t in _thuat_ngu():
         if t in con_lai:
-            if t not in nguon:
+            if t not in nguon and f"thuật ngữ lạ: {t}" not in loi:
                 loi.append(f"thuật ngữ lạ: {t}")
             con_lai = con_lai.replace(t, " ")
-    thap, goc = van.lower(), nguon.lower()
-    for c in hoi_van.CAM:
-        if c in thap and c not in goc:
-            loi.append(f"cụm cấm: {c}")
     # LG-ĐS: cụm "giọng AI" / doạ của KB — so theo ranh giới âm tiết ("khắc" không bắt "khắc phục").
     from app.kb import tuvi_doi_song_kb
     ds = [c for c in _cum_cam() if f"cụm cấm: {c}" not in loi]
@@ -85,22 +77,23 @@ def kiem_tra_chuong(van: str, nguon: str) -> list[str]:
 
 
 def _goi_llm(tieu_de: str, doan: list[str], mo_dun: str) -> str:
-    _ngan_sach.kiem_luot()   # RL-1: mỗi chương một lượt
-    key = os.environ.get("OPENROUTER_API_KEY")
-    model = os.environ.get("OPENROUTER_MODEL", _llm.DEFAULT_MODEL)
+    # EN-4: một hàm gọi AI chung; RL-1 mỗi chương một lượt (chương đã diễn đạt cùng gói → nhớ, không tốn lượt).
+    # max_tokens theo độ dài nguồn (bản AI ≤ ~1,5 lần nguồn; tiếng Việt ~2–3 ký tự / token).
+    from app.narrative import ai_goi  # noqa: PLC0415
     ten = {"tuvi": "Tử vi", "battu": "Bát tự"}.get(mo_dun, mo_dun)
-    with httpx.Client(timeout=40) as c:
-        r = c.post(_llm.OPENROUTER_URL,
-                   headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-                   json={"model": model, "temperature": 0.4, "messages": [
-                       {"role": "system", "content": _SYSTEM.format(mo_dun=ten, cum_cam="; ".join(f'"{c}"' for c in _cum_cam()))},
-                       {"role": "user", "content": json.dumps({"chuong": tieu_de, "doan": doan}, ensure_ascii=False)}]})
-        r.raise_for_status()
-        return r.json()["choices"][0]["message"]["content"].strip()
+    nguon = len(tieu_de) + sum(len(d) for d in doan)
+    return ai_goi.goi_chat(
+        [{"role": "system", "content": _SYSTEM.format(mo_dun=ten, cum_cam="; ".join(f'"{c}"' for c in _cum_cam()))},
+         {"role": "user", "content": json.dumps({"chuong": tieu_de, "doan": doan}, ensure_ascii=False)}],
+        nhiet_do=0.4, max_tokens=max(250, min(1200, nguon * 3 // 4)), het_gio=40,
+        kiem=lambda v: kiem_tra_chuong(v.strip(), "\n".join([tieu_de, *doan]))).strip()
+
+
+CHUONG_NGAN = 200      # EN-4: thân chương ngắn hơn (ký tự) → giữ nguyên bản gốc, không gọi AI (AI dễ thêm ý để "đủ dài")
 
 
 def _mot_chuong(c: dict, mo_dun: str) -> dict:
-    if not c["doan"]:
+    if not c["doan"] or len(" ".join(c["doan"])) < CHUONG_NGAN:
         return {**c, "che_do": "template"}
     try:
         van = _goi_llm(c["tieu_de"], c["doan"], mo_dun)

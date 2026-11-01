@@ -9,6 +9,8 @@ from __future__ import annotations
 import re
 import unicodedata
 
+from app.luangiai import doi_song_khuon as kh
+
 MA_MAU_RE = re.compile(r"^[a-z0-9_.+-]{3,60}$")
 TOI_DA_HOP = 6
 
@@ -71,13 +73,9 @@ def _ap_hoc(cand: list[dict], trong_so: dict | None, ca_nhan: dict | None) -> tu
     trong_so, ca_nhan = trong_so or {}, ca_nhan or {}
     chon, xem_lai = [], []
     for h in cand:
-        p = trong_so.get(h["ma_mau"])
-        if p:
-            dung, chua = int(p.get("dung", 0)), int(p.get("chua_dung", 0))
-            tong = dung + chua
-            if tong >= 30:
-                h["ty_le_dung"], h["so_phieu"] = round(dung / tong, 2), tong
-                h["dang_xem_lai"] = tong >= 100 and dung / tong < 0.40
+        dg = kh.danh_gia_phieu(trong_so.get(h["ma_mau"]))       # EN-4: một luật HỌC (doi_song_khuon)
+        if dg:
+            h["ty_le_dung"], h["so_phieu"], h["dang_xem_lai"] = dg
         if h.get("dang_xem_lai"):
             xem_lai.append(f"Đang xem lại: {h['tieu_de']}")
             continue
@@ -91,11 +89,8 @@ def _ap_hoc(cand: list[dict], trong_so: dict | None, ca_nhan: dict | None) -> tu
 
 def trong_so_xem_lai(h: dict, hoc: tuple) -> bool:
     """Hộp dự phòng cũng tôn trọng ngưỡng "đang xem lại" của bảng tỉ lệ."""
-    p = (hoc[0] or {}).get(h["ma_mau"])
-    if not p:
-        return False
-    tong = int(p.get("dung", 0)) + int(p.get("chua_dung", 0))
-    return tong >= 100 and int(p.get("dung", 0)) / tong < 0.40
+    dg = kh.danh_gia_phieu((hoc[0] or {}).get(h["ma_mau"]))
+    return bool(dg and dg[2])
 
 
 def _sap(cand: list[dict]) -> list[dict]:

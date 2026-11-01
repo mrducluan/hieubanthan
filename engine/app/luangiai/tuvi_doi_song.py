@@ -1217,6 +1217,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
 
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     kw = _sinh_kw(sinh)
+    az.nap_truoc_sinh(sinh, ngay_xem)       # EN-4: một lời gọi iztro cho lá số + các ngày xem báo cáo cần
     if ls is None:
         ls = tom_tat(az.an_sao_tho(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], "vi-VN",
                                    hoa_linh=sinh.get("hoa_linh", "viet"), **kw))

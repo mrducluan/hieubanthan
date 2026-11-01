@@ -18,9 +18,6 @@ from __future__ import annotations
 import json
 import os
 
-import httpx
-
-from app.narrative import ngan_sach as _ngan_sach
 from app.narrative.ngan_sach import mo_ta_loi
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
@@ -97,14 +94,8 @@ def tra_loi_cau_hoi(reading: dict, cau_hoi: str) -> dict:
             + json.dumps(reading, ensure_ascii=False)},
     ]
     try:
-        _ngan_sach.kiem_luot()
-        with httpx.Client(timeout=45) as c:
-            r = c.post(OPENROUTER_URL,
-                       headers={"Authorization": f"Bearer {key}",
-                                "Content-Type": "application/json"},
-                       json={"model": model, "messages": messages, "temperature": 0.6})
-            r.raise_for_status()
-            ans = r.json()["choices"][0]["message"]["content"]
+        from app.narrative import ai_goi  # noqa: PLC0415 — EN-4: hàm gọi AI chung
+        ans = ai_goi.goi_chat(messages, nhiet_do=0.6, max_tokens=900, mo_hinh=model)
         return {"da_bat_llm": True, "cau_tra_loi": ans}
     except Exception as e:
         return {"da_bat_llm": True, "cau_tra_loi": None,
@@ -119,17 +110,8 @@ def dien_dat(reading: dict) -> dict:
 
     model = os.environ.get("OPENROUTER_MODEL", DEFAULT_MODEL)
     try:
-        _ngan_sach.kiem_luot()
-        with httpx.Client(timeout=40) as c:
-            r = c.post(
-                OPENROUTER_URL,
-                headers={"Authorization": f"Bearer {key}",
-                         "Content-Type": "application/json"},
-                json={"model": model, "messages": dung_prompt(reading),
-                      "temperature": 0.7},
-            )
-            r.raise_for_status()
-            van = r.json()["choices"][0]["message"]["content"]
+        from app.narrative import ai_goi  # noqa: PLC0415 — EN-4: hàm gọi AI chung
+        van = ai_goi.goi_chat(dung_prompt(reading), nhiet_do=0.7, max_tokens=1500, mo_hinh=model, het_gio=40)
         return {"che_do": "llm",
                 "luan_giai": reading, "van_xuoi": van}
     except Exception as e:

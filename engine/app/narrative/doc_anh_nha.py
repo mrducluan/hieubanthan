@@ -178,7 +178,8 @@ def doc_anh(yc: dict) -> dict:
         with httpx.Client(timeout=45) as c:
             r = c.post(OPENROUTER_URL,
                        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-                       json={"model": model, "temperature": 0.1, "response_format": {"type": "json_object"},
+                       json={"model": model, "temperature": 0.1, "max_tokens": 700,
+                             "response_format": {"type": "json_object"},
                              "messages": dung_prompt(yc)})
             r.raise_for_status()
             van = r.json()["choices"][0]["message"]["content"]

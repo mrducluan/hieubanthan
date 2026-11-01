@@ -565,7 +565,7 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:
             v = hoi_van._goi_llm(goi, cau_hoi)
-            loi = hoi_van.kiem_tra_dau_ra(v, goi)
+            loi = hoi_van.kiem_tra_dau_ra(v, goi, van)   # EN-4: bản mẫu là nguồn chữ
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
             che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]

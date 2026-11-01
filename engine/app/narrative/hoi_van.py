@@ -18,15 +18,13 @@ import json
 import os
 import re
 
-import httpx
+import httpx  # noqa: F401 — test giả lập httpx.Client qua module này; lời gọi thật ở ai_goi
 
 from app.config import hom_nay_vn as _hom_nay_vn  # EN-1: ngày mặc định theo giờ VN
 from app.luangiai import hoi, noi_dau, truc_quan
 from app.luangiai import thanso_chaldean as _chaldea
 from app.luangiai import tong_hop as _tong_hop
-from app.narrative import llm as _llm
 from app.narrative.ngan_sach import mo_ta_loi
-from app.narrative import ngan_sach as _ngan_sach
 
 KET = ("Đây là góc nhìn tham khảo văn hoá để bạn tự soi, không phải lời tiên đoán "
        "về đời bạn.")
@@ -158,17 +156,16 @@ def lien_ket_la(van: str, nguon: str) -> list[str]:
     return [f"liên kết lạ: {m.group(0)[:40]}" for m in _LIEN_KET_RA.finditer(van) if m.group(0).lower() not in goc]
 
 
-def kiem_tra_dau_ra(van: str, goi: dict) -> list[str]:
-    loi = lien_ket_la(van, json.dumps(goi, ensure_ascii=False))
+def kiem_tra_dau_ra(van: str, goi: dict, nguon_van: str | None = None) -> list[str]:
+    """EN-4: bộ kiểm chung `kiem_ai`, nguồn = gói bằng chứng (+ bản mẫu đã dựng `nguon_van` nếu nơi gọi có — khi có thì
+    kiểm thêm thuật ngữ lạ và câu ý mới); số chỉ được là số đã có trong gói (`so_trong_goi`)."""
+    from app.narrative import kiem_ai  # noqa: PLC0415
     duoc = set(goi.get("so_trong_goi", []))
-    for n in re.findall(r"\d+", van):
-        if int(n) not in duoc:
-            loi.append(f"số lạ: {n}")
-    goc = json.dumps(goi, ensure_ascii=False).lower()
-    thap = van.lower()
-    for c in CAM:
-        if c in thap and c not in goc:
-            loi.append(f"cụm cấm: {c}")
+    goc = json.dumps(goi, ensure_ascii=False) + ("\n" + nguon_van if nguon_van else "")
+    co_van = bool(nguon_van)
+    loi = [x for x in kiem_ai.kiem(van, goc, so_duoc=duoc, ti_le_dai=99, kiem_y_moi=co_van, kiem_thuat_ngu=co_van)
+           if not x.startswith("số lạ: ")]
+    loi += [f"số lạ: {n}" for n in re.findall(r"\d+", van) if int(n) not in duoc]
     return loi
 
 
@@ -189,18 +186,12 @@ RÀNG BUỘC TUYỆT ĐỐI:
 
 
 def _goi_llm(goi: dict, cau_hoi: str) -> str:
-    _ngan_sach.kiem_luot()   # RL-1: hết lượt → HetLuot, nơi gọi rơi về template
-    key = os.environ.get("OPENROUTER_API_KEY")
-    model = os.environ.get("OPENROUTER_MODEL", _llm.DEFAULT_MODEL)
+    # EN-4: một hàm gọi AI chung (max_tokens, thử lại, nhớ theo mã băm); RL-1 hết lượt → HetLuot, nơi gọi rơi về template
+    from app.narrative import ai_goi  # noqa: PLC0415
     gon = {"cau_hoi": cau_hoi, "muc": goi["muc"], "luu_y": goi.get("luu_y")}
-    with httpx.Client(timeout=45) as c:
-        r = c.post(_llm.OPENROUTER_URL,
-                   headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-                   json={"model": model, "temperature": 0.5, "messages": [
-                       {"role": "system", "content": _SYSTEM_GOI},
-                       {"role": "user", "content": json.dumps(gon, ensure_ascii=False)}]})
-        r.raise_for_status()
-        return r.json()["choices"][0]["message"]["content"]
+    return ai_goi.goi_chat([{"role": "system", "content": _SYSTEM_GOI},
+                            {"role": "user", "content": json.dumps(gon, ensure_ascii=False)}],
+                           nhiet_do=0.5, max_tokens=900)
 
 
 # --------------------------------------------------------------------------- #
@@ -274,7 +265,7 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
     if dung_llm and co_key and goi["muc"] and not goi["can_them"]:
         try:
             van_llm = _goi_llm(goi, cau_hoi)
-            loi = kiem_tra_dau_ra(van_llm, goi)
+            loi = kiem_tra_dau_ra(van_llm, goi, template)
             che_do, van = ("llm", van_llm) if not loi else ("template_fallback", template)
         except Exception as e:  # noqa: BLE001 — LLM lỗi không được làm sập Q&A
             che_do, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
