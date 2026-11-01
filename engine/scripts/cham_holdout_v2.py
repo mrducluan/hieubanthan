@@ -111,10 +111,14 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--chi-tiet", action="store_true")
     ap.add_argument("--json")
+    ap.add_argument("--bo", default="holdout_v2", help="holdout_v2 (đóng băng, đo) | dev_en3 (bộ phát triển, viết luật)")
     a = ap.parse_args()
-    td = json.loads((FX / "holdout_v2_tieu_diem.json").read_text("utf-8"))["mau"]
+    f_td = FX / f"{a.bo}_tieu_diem.json"
+    td = json.loads(f_td.read_text("utf-8"))["mau"] if f_td.exists() else {}
+    if not td:
+        print("(bộ này không có mẫu tiêu điểm → cột 'Trả lời thẳng' không có nghĩa)")
     rows, loi = [], []
-    for line in (FX / "holdout_v2.jsonl").read_text("utf-8").splitlines():
+    for line in (FX / f"{a.bo}.jsonl").read_text("utf-8").splitlines():
         r = json.loads(line)
         try:
             k = chay(r)

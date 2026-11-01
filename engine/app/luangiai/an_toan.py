@@ -26,7 +26,11 @@ KHUNG_HOANG: list[tuple[str, str | None]] = [
     (r"tu sat", r"tự sát"), (r"ket lieu (ban than|doi|minh|cuoc)", None), (r"tu thieu", None),
     (r"tu (ket thuc|ket lieu) (doi|cuoc doi|cuoc song|ban than)", None),
     (r"muon ket thuc(?! (du an|hop dong|moi quan he|quan he|viec|cong viec|khoa hoc))", None),
-    (r"ket thuc (cuoc doi|tat ca|het)( cho xong| di)?", None), (r"cham dut (tat ca|cuoc doi|moi thu|cuoc song)", None),
+    (r"ket thuc (cuoc doi|tat ca|het)( cho xong| di)?", None),
+    # EN-3 (bộ dev): nói tránh — "đi luôn cho rảnh nợ", "kết thúc / buông hết mọi thứ cho xong" (không chặn "làm đi luôn
+    # cho xong việc", "đi luôn cho kịp chuyến bay", "kết thúc mối quan hệ cho xong")
+    (r"(?<!lam )(?<!noi )(?<!viet )di luon cho (ranh no|xong|nhe nguoi|nhe no|roi|thoat)", None),
+    (r"(ket thuc|buong (het|bo)|bo het) moi thu cho (xong|roi|nhe|ranh)", None), (r"cham dut (tat ca|cuoc doi|moi thu|cuoc song)", None),
     (r"(uong|nuot) het (ca )?(vi |lo |hop )?(thuoc|vi thuoc)", None), (r"mua san thuoc ngu", None),
     (r"nhay (xuong|lau|cau|song)|nhay tu tang", r"nhảy (xuống|lầu|cầu|sông)|nhảy từ tầng"),
     (r"cat tay|rach tay|tu hai (ban than|minh)|tu lam dau|(muon|hay|thuong) lam dau (ban than|chinh minh)",
@@ -111,6 +115,11 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
      r"(bỏ|ngưng|ngừng|dừng) (uống )?thuốc (điều trị|huyết áp|tiểu đường|tim|ung thư|tây|bác sĩ|chống trầm cảm)"
      r"|(bỏ|ngưng|ngừng|dừng) (hoá|hóa) trị|(ngưng|ngừng|dừng|bỏ) điều trị|thay (cho )?thuốc (bác sĩ|điều trị)"
      r"|(uống|dùng) thuốc nam (thay|để chữa)", "suc_khoe_the_chat"),
+    # EN-3 (bộ dev): quyết định mổ / phẫu thuật thay lời bác sĩ ("mổ" không dấu trùng "mở" → chữ không dấu cần ngữ cảnh y khoa)
+    (r"(bac si|benh vien).{0,40}(nen|co nen) mo\b|(nen|co nen) (phau thuat|mo) hay (uong|chua|dieu tri|dung) thuoc"
+     r"|phau thuat hay (uong|chua|dieu tri)|(co )?nen phau thuat (khong|hay)",
+     r"(có )?nên mổ (không|hay)|mổ hay (uống|chữa|điều trị|dùng)|(có )?nên phẫu thuật|phẫu thuật hay (uống|chữa|điều trị)",
+     "suc_khoe_the_chat"),
     (r"(chet|qua doi) vi benh gi|benh gi (se )?(chet|qua doi)", r"(chết|qua đời|mất) vì bệnh gì", "suc_khoe_the_chat"),
     # tuổi chết / sống được bao lâu (tương lai — không chặn câu hỏi về người đã mất, ngày giỗ)
     (r"may tuoi (thi |se )?(" + _AI_KD + r" )?(se )?(chet|qua doi)|(?:^|[,.!?;] )" + _AI_KD
