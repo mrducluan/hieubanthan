@@ -6,6 +6,8 @@ Tái dùng bộ chuẩn hoá và danh sách an toàn/từ chối của thần s�
 """
 from __future__ import annotations
 
+import re
+
 from app.luangiai import hoi as _h
 
 chuan_hoa = _h.chuan_hoa
@@ -162,3 +164,45 @@ def nam_xem_hh(nam_cau: int | None, ngay_xem, t: str) -> tuple[int, int]:
     lx = huyen_khong.nam_theo_lap_xuan(_dt.datetime(ngay_xem.year, ngay_xem.month, ngay_xem.day, 5))   # 12:00 giờ VN
     am = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)[2]
     return lx + them, am + them
+
+
+
+# ---- EN-3 (mục 3): "trả lời trước" — đoạn khớp câu hỏi nhất lên đầu phần thân (chỉ đổi thứ tự).
+_DAU_CO_DINH = (r"^Tứ trụ \(năm", r"^Tuổi mụ tại thời điểm xem", r"^Mệnh quái \(cung phi\) của bạn",
+                r"^Theo tục xếp theo tuổi")          # MT-ĐS B3: tập quán đứng trước lá số (có chủ ý)
+_CHAN = (r"^Câu hỏi để tự soi", r"^Đây là góc nhìn tham khảo", r"^Bát trạch là một trường phái", r"^Lưu ý:",
+         r"^Lời này không thay", r"^Tham khảo văn hoá")
+_BO_TU = {"toi", "em", "minh", "ban", "co", "khong", "nen", "the", "nao", "gi", "la", "cua", "va", "voi", "cho", "thi",
+          "nay", "do", "nhu", "duoc", "hay", "bi", "se", "da", "dang", "mot", "nhung", "cac", "ve", "o", "tu", "den",
+          "lam", "sao", "xem", "giup", "a", "nhe", "vay", "roi", "con", "so", "nam", "thang", "ngay", "theo", "khi"}
+
+
+def _cum(t: str) -> set[str]:
+    w = [x for x in t.split() if len(x) > 1]
+    hai = {f"{a} {b}" for a, b in zip(w, w[1:]) if not (a in _BO_TU and b in _BO_TU)}
+    return hai | {x for x in w if x not in _BO_TU and len(x) >= 4}
+
+
+def tra_loi_truoc(van: str, t: str) -> str:
+    """Đưa lên đầu phần thân đoạn có nhiều cụm từ của câu hỏi nhất — chỉ khi đoạn đầu thân KHÔNG chung cụm nào với câu
+    hỏi và đoạn kia chung ≥ 2 cụm (thứ tự có chủ ý của từng mảng giữ nguyên khi đoạn đầu đã nói tới điều được hỏi).
+    Dòng đầu cố định (tứ trụ, tuổi mụ, mệnh quái, tập quán) và phần chân giữ chỗ; không thêm, không bớt chữ."""
+    if not van or not t:
+        return van
+    p = van.split("\n\n")
+    dau = 0
+    while dau < len(p) and any(re.match(m, p[dau]) for m in _DAU_CO_DINH):
+        dau += 1
+    chan = len(p)
+    while chan > dau and any(re.match(m, p[chan - 1]) for m in _CHAN):
+        chan -= 1
+    than = p[dau:chan]
+    if len(than) < 2:
+        return van
+    q = _cum(t)
+    diem = [len(q & _cum(chuan_hoa(x))) for x in than]
+    tot = max(range(len(than)), key=lambda i: (diem[i], -i))
+    if tot == 0 or diem[0] > 0 or diem[tot] < 2:
+        return van
+    than = [than[tot]] + than[:tot] + than[tot + 1:]
+    return "\n\n".join(p[:dau] + than + p[chan:])

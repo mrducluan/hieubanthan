@@ -78,4 +78,4 @@ def test_tra_loi_kien_thuc_bang_tu_dien(mo_dun, cau, ten):
     pl = kq["phan_loai"]
     lab = pl.get("linh_vuc") if mo_dun == "thanso" else pl.get("loai")
     assert lab == "ky_thuat", (cau, lab)
-    assert ten in kq["cau_tra_loi"].split("\n\n")[0], kq["cau_tra_loi"][:120]   # mục kho riêng của mảng hoặc từ điển
+    assert ten in " ".join(kq["cau_tra_loi"].split("\n\n")[:2]), kq["cau_tra_loi"][:160]   # mục kho riêng hoặc từ điển

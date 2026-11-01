@@ -177,4 +177,4 @@ def bo_sung_goi(goi: dict, cau_hoi: str, nguoi: dict, ngay_xem: dt.date) -> dict
             if m not in dau:
                 dau.append(m)
     con_lai = [m for m in goi["muc"] if m not in dau]
-    return hoi._ket({**goi, "muc": dau + con_lai})
+    return hoi._ket({**goi, "muc": dau + con_lai, "thu_tu_co_dinh": True})   # EN-3: không sắp lại — câu của thẻ đứng đầu

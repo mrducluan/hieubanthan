@@ -473,7 +473,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
     thoi_diem_gieo = ({"thoi_diem": luc.isoformat(timespec="seconds"), "chi_gio": mh.chi_gio(luc.hour), **tg}
                       if tg is not None else None)
     goi = goi_bang_chung(pl, que, mai_hoa, tg if pl["truong_phai"] == "luc_hao" else None)
-    van = van_template(goi)
+    van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:

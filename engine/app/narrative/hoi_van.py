@@ -265,7 +265,10 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
         goi = noi_dau.bo_sung_goi(goi, cau_hoi, nguoi, ngay_xem)
         if phai == "tong_hop":
             goi = _goi_tong_hop(goi, pl, nguoi, ngay_xem)
+    from app.hoidap import chung as _chung  # noqa: PLC0415
     template = van_template(goi)
+    if not goi.get("thu_tu_co_dinh"):
+        template = _chung.tra_loi_truoc(template, pl["cau_chuan_hoa"])   # EN-3: đoạn khớp câu hỏi lên đầu
     co_key = bool(os.environ.get("OPENROUTER_API_KEY"))
     che_do, van, loi = "template", template, []
     if dung_llm and co_key and goi["muc"] and not goi["can_them"]:
