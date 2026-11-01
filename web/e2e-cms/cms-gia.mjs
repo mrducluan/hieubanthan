@@ -4,11 +4,14 @@
 import http from "node:http";
 
 const anh = (mau) => ({ url: `http://127.0.0.1:4666/anh-${mau}.svg`, alt: "ảnh bìa thử", width: 1200, height: 675 });
+// Menu con Blog = chuyên mục có bài (nhiều bài trước): "Thần số học" 2 bài, "Hướng dẫn" 1 bài.
+const CM_TS = { id: 1, ten: "Thần số học", slug: "than-so-hoc", mo_ta: "Bài về con số đường đời, năm cá nhân và cách đọc bốn số cốt lõi" };
+const CM_HD = { id: 2, ten: "Hướng dẫn", slug: "huong-dan", mo_ta: null };
 const BAI = [
   { tieu_de: "Thần số học là gì? Cách đọc 4 con số", slug: "than-so-hoc-la-gi", mo_ta_ngan: "Bốn con số rút ra từ ngày sinh và họ tên.",
-    anh_bia: anh("a"), mang: "than_so", publishedAt: "2026-10-20T00:00:00Z", updatedAt: "2026-10-20T00:00:00Z" },
+    anh_bia: anh("a"), mang: "than_so", chuyen_muc: [CM_TS, CM_HD], publishedAt: "2026-10-20T00:00:00Z", updatedAt: "2026-10-20T00:00:00Z" },
   { tieu_de: "Self Discovery: tự hiểu mình qua lựa chọn", slug: "self-discovery", mo_ta_ngan: "Giá trị, thói quen và lựa chọn.",
-    anh_bia: anh("b"), mang: "chung", publishedAt: "2026-10-19T00:00:00Z", updatedAt: "2026-10-19T00:00:00Z" },
+    anh_bia: anh("b"), mang: "chung", chuyen_muc: [CM_TS], publishedAt: "2026-10-19T00:00:00Z", updatedAt: "2026-10-19T00:00:00Z" },
 ];
 // BLOG-8 — một bài ĐẦY ĐỦ trả khi web hỏi theo slug (trước đây luôn rỗng): thân bài có 3 mục H2, hỏi đáp, nguồn; chữ ký theo `tt.ky`
 // ("ban_bien_tap" mặc định | "tham_dinh" | "tac_gia") để thử khung biên soạn cuối bài.

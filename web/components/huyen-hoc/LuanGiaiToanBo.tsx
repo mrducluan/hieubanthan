@@ -189,7 +189,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
           )}
           <h2 className="mt-1 text-3xl">Luận giải {ten}</h2>
         </div>
-        <div className="flex gap-2 print:hidden">
+        <div className="-ml-3 flex w-full flex-wrap gap-1 sm:ml-0 sm:w-auto sm:justify-end sm:gap-2 print:hidden">
           {bc.chuong.some((c) => !c.khoa && c.van_ai) && (
             <Button variant="ghost" size="sm" aria-pressed={goc} onClick={() => setGoc((v) => !v)}>
               {goc ? "Xem bản diễn đạt" : "Xem bản dữ liệu gốc"}
